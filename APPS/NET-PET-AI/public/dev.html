@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NET-PET-AI — Dev Dashboard</title>
+  <style>
+    :root { --void: #0f0f1a; --purple: #a855f7; --gold: #f59e0b; --text: #e2e8f0; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', monospace; background: var(--void); color: var(--text); padding: 20px; }
+    h1 { color: var(--purple); margin-bottom: 8px; }
+    h2 { color: var(--gold); margin: 20px 0 8px; font-size: 16px; }
+    .status { padding: 8px 12px; border-radius: 8px; margin-bottom: 16px; font-size: 14px; }
+    .status.ok { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); }
+    .status.warn { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); }
+    label { display: block; font-size: 13px; color: #94a3b8; margin: 6px 0 2px; }
+    input, select, textarea {
+      width: 100%; max-width: 400px; padding: 8px 10px;
+      background: rgba(30,27,75,0.5); border: 1px solid rgba(168,85,247,0.3);
+      border-radius: 8px; color: var(--text); font-size: 14px; margin-bottom: 4px;
+    }
+    button {
+      padding: 8px 16px; border: none; border-radius: 8px;
+      background: var(--purple); color: white; cursor: pointer;
+      font-size: 14px; margin: 4px 4px 4px 0;
+    }
+    button:hover { background: #9333ea; }
+    pre {
+      background: rgba(30,27,75,0.4); border: 1px solid rgba(168,85,247,0.15);
+      border-radius: 8px; padding: 12px; font-size: 13px; overflow-x: auto;
+      max-height: 300px; overflow-y: auto; white-space: pre-wrap; margin-top: 8px;
+    }
+    .pill {
+      display: inline-block; padding: 2px 8px; border-radius: 8px;
+      background: rgba(168,85,247,0.15); font-size: 12px; margin: 2px;
+    }
+    section { border-top: 1px solid rgba(168,85,247,0.1); padding-top: 12px; }
+  </style>
+</head>
+<body>
+  <h1>NET-PET-AI Dev Dashboard</h1>
+  <div id="health" class="status warn">Checking API...</div>
+
+  <section>
+    <h2>\uD83D\uDCDD Onboarding</h2>
+    <label>Student ID</label><input id="studentId" value="student-001">
+    <label>Full Name</label><input id="fullName" placeholder="Nguyen Van A">
+    <label>City</label><input id="currentCity" placeholder="Ho Chi Minh City">
+    <label>Birthplace</label><input id="birthplace" placeholder="Ho Chi Minh City">
+    <label>English Level</label>
+    <select id="englishLevel">
+      <option>A1 Beginner</option><option>A2 Elementary</option>
+      <option selected>B1 Intermediate</option><option>B2 Upper Intermediate</option>
+      <option>C1 Advanced</option>
+    </select>
+    <label>Goals</label><input id="goals" placeholder="talking with friends">
+    <label>Confidence Areas</label><input id="confidenceAreas" value="speaking">
+    <label>Occupation</label><input id="occupation" value="student">
+    <label>Fear Trigger</label><input id="fearTrigger" value="making mistakes">
+    <label>Learning History</label><input id="learningHistory" value="school">
+    <label>Motivation</label><input id="motivationNow" placeholder="I want to be confident">
+    <br><button id="submitOnboarding">Submit Onboarding</button>
+    <pre id="onboardingOut"></pre>
+  </section>
+
+  <section>
+    <h2>\uD83D\uDCDA Lesson / Practice</h2>
+    <label>Level</label><input id="level" value="B1">
+    <label>Topic</label><input id="topic" value="ordering food">
+    <button id="runLesson">Generate Lesson</button>
+    <button id="runPractice">Generate Practice</button>
+    <pre id="modesOut"></pre>
+  </section>
+
+  <section>
+    <h2>\u2705 Feedback</h2>
+    <label>Student Response</label>
+    <textarea id="studentResponse" rows="3" placeholder="I go to school yesterday"></textarea>
+    <button id="runFeedback">Get Feedback</button>
+    <pre id="feedbackOut"></pre>
+  </section>
+
+  <section>
+    <h2>\uD83D\uDC3E NET Pet</h2>
+    <label>Minutes Studied</label><input id="minutes" type="number" value="10">
+    <label>Confidence (1-10)</label><input id="confidence" type="number" value="6">
+    <button id="checkin">Check In</button>
+    <button id="refreshPet">Refresh State</button>
+    <div id="petPills"></div>
+    <pre id="petOut"></pre>
+  </section>
+
+  <section>
+    <h2>\uD83C\uDFEB Classroom</h2>
+    <label>Class ID</label><input id="classId" value="grade12-a">
+    <label>Teacher ID</label><input id="teacherId" value="obi">
+    <label>Total Students</label><input id="totalStudents" type="number" value="40">
+    <button id="startClassSession">Start Session</button>
+    <button id="refreshClassSummary">Refresh Summary</button>
+    <button id="generateClassReport">Generate Report</button>
+    <br>
+    <label>Event Student ID</label><input id="eventStudentId" placeholder="student-001">
+    <label>Event Type</label>
+    <select id="eventType">
+      <option>participation</option><option>answer</option>
+      <option>disruption</option><option>question</option><option>mistake</option>
+    </select>
+    <label>Rule Status</label>
+    <select id="ruleStatus">
+      <option>ok</option><option>warned</option><option>flagged</option>
+    </select>
+    <label>Notes</label><input id="eventNotes" placeholder="Good energy today">
+    <button id="logClassEvent">Log Event</button>
+    <pre id="classroomOut"></pre>
+  </section>
+
+  <script src="/app.js"></script>
+</body>
+</html>
