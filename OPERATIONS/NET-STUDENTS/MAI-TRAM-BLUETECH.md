@@ -46,6 +46,36 @@
 
 **Mouse → Tiger Assessment:** Mouse → Cub transition in progress
 
+### Session 2 — HR Interview Methodology & BlueTech Deep Dive
+
+*Date: Prior to 2026-03-24 (exact date unrecorded)*  
+*Format: Private class via Gemini Live*
+
+**HR Interview Process at BlueTech**
+- Panel interview format: 3 interviewers at once (HR first screen, then manager)
+- Mai conducts the first-round HR screen
+- Key questions she asks:
+  - Salary expectations and career path goals
+  - Past experience and work history
+  - Why did you leave your last job? (nghỉ việc = resign/quit)
+- Good answers: positive reasons (new challenges, career growth, better culture)
+- Bad answers: complaining about previous employer = red flag
+- Candidates tend to give rehearsed "good" answers — Mai aware of this
+- Discussed trick questions (câu hỏi mẹo / câu hỏi gài) as a way to get genuine responses
+- Distance/relocation is a common legitimate reason for leaving
+
+**New Vocabulary:**
+| English | Vietnamese | Context |
+|---------|-----------|----------|
+| Resign / Quit | Nghỉ việc | "Why did you stop working at your last job?" |
+| Trick question | Câu hỏi mẹo / Câu hỏi gài | "Have you ever tried asking a trick question?" |
+| Career path | Lộ trình nghề nghiệp | "What is the career path you want?" |
+| Panel interview | Phỏng vấn nhóm | "Three people interview her at once." |
+| Complain | Phàn nàn | "If they start complaining, that's a bad answer." |
+| Red flag | Dấu hiệu xấu | "Complaining about past employers is a red flag." |
+| Relocate | Chuyển chỗ | "The company moved to another location." |
+| Transferable skills | Kỹ năng chuyển đổi | "Even without experience, she has transferable skills." |
+
 ---
 
 ## Vocabulary Master List — Session 1
@@ -141,6 +171,7 @@
 - She responds well to vulnerability — AI race / Noah's Ark landed
 - Catholic background = Noah's Ark metaphor hits home
 - Challenge on AI usage — thinks 100%, actually 10%
+- Session 2: strong engagement with real HR scenarios — use her actual interview process as classroom material
 - Next: follow up on Notion AI setup, begin automation workflow for HR
 - Potential: case study for NET corporate expansion
 

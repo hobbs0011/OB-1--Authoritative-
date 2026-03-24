@@ -2,12 +2,14 @@
 
 **Level:** Mouse (true beginner)  
 **Company:** BlueTech  
-**Role:** HR (Human Resources)  
+**Role:** Accounting (Intern — still in university, writing intern report for school credit)  
 **Age:** 21  
 **Religion:** Catholic  
 **Hometown:** Phan Thiết, Bình Thuận (near beach)  
 **Current City:** Ho Chi Minh City (3 years)  
-**Family:** Sister Quỳnh (26, married, expecting baby July). Mom (45). Dad (met mom at 24). No brothers.
+**Family:** Sister Quỳnh (26, married, expecting baby July). Mom (45). Dad (met mom at 24). No brothers.  
+**Education:** Currently in university. Worked part-time at restaurant on weekends. BlueTech is first real job (internship).  
+**Company Info:** BlueTech sells ingredients, formulas & solutions to food/beverage companies. Depts: Sales, Accounting, Logistics, Purchasing, Marketing. Products: extracts, powders, certificates. Industries: beer, health drinks, milk, candy, all beverages. B2B only.
 
 ---
 
@@ -16,14 +18,16 @@
 - Shy but willing — responds better to personal conversation topics
 - Needs constant Vietnamese translation support (Gemini Live as bridge)
 - Single-word and short-phrase responses — heavy repetition required
-- Lights up talking about HR work (interviews, hiring, recruiting)
+- Lights up talking about work (interviews, hiring — cross-functional HR support)
 - Catholic background — goes to church Sunday evenings
 - Grew up near the beach in Phan Thiết — can swim
 - Sister Quỳnh also works at BlueTech (Michael didn't know initially)
+- Still in university — has homework and must write intern report for school credit
+- Worked part-time at a restaurant during university (weekends only)
 
 ---
 
-## Session 1 — Personal Life + HR Work
+## Session 1 — Personal Life + Work & University
 
 *Date: Prior to 2026-03-24 (exact date unrecorded)*  
 *Format: Private class via Gemini Live (voice + translation)*
@@ -52,24 +56,31 @@
 - Lived there 18 years, moved to Saigon at 18
 - Likes both countryside (peaceful, family) and Saigon (interesting)
 
-### Part 2 — HR Work
+### Part 2 — Work & University
 
-**Current Tasks**
+**University & Work Background**
+- Still in university — has homework and must write intern report for school credit
+- Worked part-time at a restaurant during university (weekends only — no free time)
+- BlueTech internship is first real job
+- Doing some cross-functional HR support tasks despite being in Accounting
+
+**BlueTech Company Info (explained by Quy in Vietnamese)**
+- BlueTech sells formulas/solutions and ingredients to food & beverage companies
+- Industries: beer, health drinks, milk, candy, all beverages
+- Products: extracts, powders, with safety certificates
+- Departments: Sales, Accounting, Logistics, Purchasing, Marketing
+- NOT a health company — they sell ingredients to OTHER companies (B2B)
+
+**Recruiting Tasks (cross-functional)**
 - 1 interview today, 4 tomorrow
 - Handling contracts and social insurance (bảo hiểm xã hội)
-- Fired someone recently
 - Recruiting via Facebook and LinkedIn (~50 messages/day)
-
-**Hiring Needs**
-- 1 intern (Sales Admin — student needs school credit)
-- 3 sales executive positions
-- Interviewed a 21yo candidate (active, friendly, not yet graduated)
+- Hiring: 1 intern (Sales Admin) + 3 sales executives
 - BlueTech pays interns a salary (unusual in Vietnam)
 
 **Automation Discussion**
 - Michael introduced ManyChat for automating candidate screening
-- Quy does everything manually — no recruitment tools
-- Most time-consuming: messaging candidates and screening
+- Will explore during class (not free work)
 
 ---
 
@@ -89,6 +100,8 @@
 | Lucky | May mắn | "You grew up near the beach — lucky!" |
 | Swim | Bơi | "You know how to swim?" |
 | Relax | Thư giãn | "After class you go home and relax." |
+| Part-time | Bán thời gian | "I work part-time at a restaurant." |
+| Homework | Bài tập | "I need to do my homework." |
 
 ### Religion
 | English | Vietnamese | Context |
@@ -139,6 +152,10 @@
 | Time-consuming | Tốn thời gian | "What is the most time-consuming thing?" |
 | Friendly | Thân thiện | "The candidate was very friendly." |
 | Active | Năng động | "She was very active in school." |
+| Ingredient | Nguyên liệu | "BlueTech sells ingredients to companies." |
+| Extract | Chiết xuất | "They sell extracts and powders." |
+| Department | Bộ phận | "BlueTech has many departments." |
+| Beverage | Đồ uống | "They serve the beverage industry." |
 
 ---
 
@@ -157,31 +174,14 @@
 
 ## Teaching Notes
 
-### What Works
-- Personal conversation topics — family, church, hometown bring out the most language
-- Heavy repetition with slight variation — needs to hear same structure 3-5 times
-- Vietnamese bridges via Gemini translation — essential at this level
-- Surprise/humor — Michael's reactions create memorable moments
-- Real-world HR topics — lights up talking about work
-
-### What Needs Work
-- Basic sentence formation — mostly single words or short phrases
-- Past tense — inconsistent
-- Question formation — struggles to form complete questions
-- Pronunciation — several words come out differently
-- Confidence — shy, needs encouragement for longer sentences
-
-### Gemini Tool Assessment
-- Part 1: Gemini Live worked well for Vietnamese translation
-- Part 2: Gemini repeatedly broke character as "AI" — frustrating for classroom flow
-- Recommendation: set stricter system prompt for Part 2 style conversations
+- Personal conversation topics bring out the most language
+- Heavy repetition with slight variation — needs 3-5 exposures
+- Vietnamese bridges via Gemini — essential at this level
+- Surprise/humor creates memorable moments
+- Real-world work topics — lights up talking about hiring
+- Gemini Part 2 broke character as "AI" — need stricter prompt
+- ManyChat exploration will happen during class (not free work)
 
 ---
 
-## Next Session Plan
-1. Review key vocab from Session 1 (family, church, HR words)
-2. Past tense drill — "What did you do yesterday?" pattern x10
-3. Deeper HR vocabulary — job descriptions, qualifications, team
-4. Stretch: Have Quy describe ideal candidate in 3-4 full sentences
-5. Automation seed: Follow up on ManyChat
-6. Grammar focus: "I have" vs "I had" vs "I will have"
+Dual-published: Notion (Phoenix HQ / NET Students / Quy) + GitHub
