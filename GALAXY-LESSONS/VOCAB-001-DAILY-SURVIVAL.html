@@ -152,18 +152,11 @@ body{background:var(--void);color:var(--light);font-family:'Rajdhani',sans-serif
 #wheelCanvas{border-radius:50%;filter:drop-shadow(0 0 25px #a855f740)}
 .wheel-ptr{position:absolute;top:-12px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:12px solid transparent;border-right:12px solid transparent;border-top:25px solid var(--gold);filter:drop-shadow(0 2px 6px #f59e0b80);z-index:2}
 .wm-result{text-align:center;margin-top:.8rem;min-height:2.5rem}
-.sel-name{font-family:'Orbitron',sans-serif;font-size:1.8rem;color:var(--gold);animation:nameIn .5s ease}
+.sel-name{font-family:'Orbitron',sans-serif;font-size:2.5rem;color:var(--gold);animation:nameIn .5s ease}
 @keyframes nameIn{from{transform:scale(.5);opacity:0}to{transform:scale(1);opacity:1}}
 .wm-actions{display:flex;gap:.6rem;margin-top:.8rem}
 .wm-close{position:absolute;top:.8rem;right:.8rem;background:none;border:1px solid var(--card-border);color:var(--muted);padding:.3rem .7rem;border-radius:6px;cursor:pointer;font-family:'Inter',sans-serif;font-size:.75rem}
 .wm-close:hover{border-color:var(--purple);color:var(--light)}
-.edit-stu{position:absolute;top:.8rem;left:.8rem;background:none;border:1px solid var(--card-border);color:var(--muted);padding:.3rem .7rem;border-radius:6px;cursor:pointer;font-family:'Inter',sans-serif;font-size:.75rem}
-.edit-stu:hover{border-color:var(--gold);color:var(--light)}
-.stu-editor{display:none;position:absolute;top:3rem;left:.8rem;background:var(--card-bg);border:1px solid var(--card-border);border-radius:12px;padding:.8rem;width:220px;z-index:3}
-.stu-editor.open{display:block}
-.stu-editor textarea{width:100%;height:120px;background:var(--void);border:1px solid var(--card-border);border-radius:8px;color:var(--light);font-family:'Rajdhani',sans-serif;font-size:.82rem;padding:.4rem;resize:vertical}
-.stu-editor textarea:focus{outline:none;border-color:var(--purple)}
-.stu-editor label{font-family:'Inter',sans-serif;font-size:.65rem;color:var(--muted);display:block;margin-bottom:.3rem}
 
 .footer{text-align:center;padding:1.2rem;border-top:1px solid var(--card-border);margin-top:1.5rem}
 .footer p{font-family:'Inter',sans-serif;font-size:.62rem;color:var(--muted);letter-spacing:1px}
@@ -184,25 +177,48 @@ body{background:var(--void);color:var(--light);font-family:'Rajdhani',sans-serif
 <div class="header">
   <button class="hdr-btn" id="fsBtn" onclick="toggleFS()">⛶ Fullscreen</button>
   <div class="hdr-btn" id="timerDisplay">00:00</div>
-  <svg class="phoenix-logo" width="72" height="72" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <svg class="phoenix-logo" width="72" height="72" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
     <defs>
-      <linearGradient id="pg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f59e0b"/><stop offset="100%" stop-color="#a855f7"/></linearGradient>
+      <linearGradient id="pg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#fbbf24"/><stop offset="100%" stop-color="#f59e0b"/></linearGradient>
       <linearGradient id="pg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#a855f7"/><stop offset="100%" stop-color="#7c3aed"/></linearGradient>
-      <linearGradient id="pg3" x1=".5" y1="0" x2=".5" y2="1"><stop offset="0%" stop-color="#fbbf24"/><stop offset="100%" stop-color="#f59e0b"/></linearGradient>
+      <linearGradient id="pg3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f59e0b"/><stop offset="60%" stop-color="#ef4444"/></linearGradient>
+      <filter id="glow"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
     </defs>
-    <path d="M100 30 C85 30 70 45 75 65 L90 52 L100 62 L110 52 L125 65 C130 45 115 30 100 30Z" fill="url(#pg1)"/>
-    <path d="M75 65 C45 50 25 60 30 80 L55 60 L75 70Z" fill="url(#pg2)" opacity=".85"/>
-    <path d="M125 65 C155 50 175 60 170 80 L145 60 L125 70Z" fill="url(#pg2)" opacity=".85"/>
-    <ellipse cx="100" cy="90" rx="18" ry="30" fill="url(#pg1)" opacity=".9"/>
-    <path d="M88 110 Q75 145 70 170 Q88 140 95 115Z" fill="#a855f7" opacity=".6"/>
-    <path d="M100 118 Q100 150 100 175 Q103 145 103 118Z" fill="url(#pg3)" opacity=".7"/>
-    <path d="M112 110 Q125 145 130 170 Q112 140 105 115Z" fill="#a855f7" opacity=".6"/>
-    <path d="M30 80 Q25 68 32 58 Q35 70 30 80Z" fill="#f59e0b" opacity=".7"/>
-    <path d="M170 80 Q175 68 168 58 Q165 70 170 80Z" fill="#f59e0b" opacity=".7"/>
-    <circle cx="95" cy="47" r="3" fill="#0f0f1a"/>
-    <circle cx="105" cy="47" r="3" fill="#0f0f1a"/>
-    <circle cx="95" cy="46.5" r="1" fill="#f59e0b"/>
-    <circle cx="105" cy="46.5" r="1" fill="#f59e0b"/>
+    <!-- Left wing spread -->
+    <path d="M48 42 Q30 22 8 12 Q18 28 28 36 Q38 40 48 42Z" fill="url(#pg2)" opacity=".95"/>
+    <path d="M46 46 Q22 30 5 28 Q20 38 32 42 Q40 45 46 46Z" fill="#a855f7" opacity=".55"/>
+    <path d="M44 50 Q18 42 2 44 Q18 48 30 48 Q38 49 44 50Z" fill="#7c3aed" opacity=".35"/>
+    <!-- Right wing spread -->
+    <path d="M52 42 Q70 22 92 12 Q82 28 72 36 Q62 40 52 42Z" fill="url(#pg2)" opacity=".95"/>
+    <path d="M54 46 Q78 30 95 28 Q80 38 68 42 Q60 45 54 46Z" fill="#a855f7" opacity=".55"/>
+    <path d="M56 50 Q82 42 98 44 Q82 48 70 48 Q62 49 56 50Z" fill="#7c3aed" opacity=".35"/>
+    <!-- Body -->
+    <ellipse cx="50" cy="52" rx="11" ry="18" fill="url(#pg1)" filter="url(#glow)"/>
+    <!-- Neck -->
+    <ellipse cx="50" cy="36" rx="6" ry="8" fill="url(#pg1)"/>
+    <!-- Head -->
+    <circle cx="50" cy="27" r="8" fill="url(#pg1)"/>
+    <!-- Crown flames -->
+    <path d="M50 20 Q48 10 50 5 Q52 10 50 20Z" fill="url(#pg3)" opacity=".9" filter="url(#glow)"/>
+    <path d="M45 22 Q42 14 44 8 Q47 15 45 22Z" fill="#f59e0b" opacity=".6"/>
+    <path d="M55 22 Q58 14 56 8 Q53 15 55 22Z" fill="#f59e0b" opacity=".6"/>
+    <!-- Beak -->
+    <path d="M58 26 L64 27 L58 29Z" fill="#d97706"/>
+    <!-- Eye -->
+    <circle cx="54" cy="25" r="2.2" fill="#0f0f1a"/>
+    <circle cx="54.3" cy="24.5" r=".9" fill="#f59e0b"/>
+    <!-- Tail feathers flowing -->
+    <path d="M44 68 Q32 82 24 98" stroke="#a855f7" stroke-width="3.5" fill="none" stroke-linecap="round" opacity=".8"/>
+    <path d="M47 69 Q40 85 36 98" stroke="#7c3aed" stroke-width="2.5" fill="none" stroke-linecap="round" opacity=".6"/>
+    <path d="M50 70 Q50 86 50 98" stroke="#f59e0b" stroke-width="4" fill="none" stroke-linecap="round" opacity=".9" filter="url(#glow)"/>
+    <path d="M53 69 Q60 85 64 98" stroke="#7c3aed" stroke-width="2.5" fill="none" stroke-linecap="round" opacity=".6"/>
+    <path d="M56 68 Q68 82 76 98" stroke="#a855f7" stroke-width="3.5" fill="none" stroke-linecap="round" opacity=".8"/>
+    <!-- Outer tail wisps -->
+    <path d="M42 66 Q24 78 14 96" stroke="#a855f7" stroke-width="1.5" fill="none" stroke-linecap="round" opacity=".4"/>
+    <path d="M58 66 Q76 78 86 96" stroke="#a855f7" stroke-width="1.5" fill="none" stroke-linecap="round" opacity=".4"/>
+    <!-- Wing gold tips -->
+    <circle cx="8" cy="12" r="2" fill="#f59e0b" opacity=".8"/>
+    <circle cx="92" cy="12" r="2" fill="#f59e0b" opacity=".8"/>
   </svg>
   <div class="brand">Natural English Training</div>
   <h1>Daily Survival English</h1>
@@ -324,15 +340,9 @@ body{background:var(--void);color:var(--light);font-family:'Rajdhani',sans-serif
 <!-- STUDENT WHEEL MODAL -->
 <div class="wheel-modal" id="wheelModal">
   <button class="wm-close" onclick="closeWheel()">✕ Close</button>
-  <button class="edit-stu" onclick="toggleEditor()">✏️ Edit Students</button>
-  <div class="stu-editor" id="stuEditor">
-    <label>One name per line:</label>
-    <textarea id="stuList"></textarea>
-    <button class="btn btn-gold" onclick="saveStudents()" style="margin-top:.4rem;width:100%;font-size:.8rem">Save</button>
-  </div>
   <div class="wm-head">
-    <h2>🎰 RANDOM STUDENT SELECTOR</h2>
-    <p>Who's next? Spin the wheel!</p>
+    <h2>🎰 STUDENT SELECTOR</h2>
+    <p>Students 1–50 · Spin to select!</p>
   </div>
   <div class="wheel-wrap">
     <div class="wheel-ptr"></div>
@@ -360,9 +370,9 @@ const V=[
 {w:'Sort of',p:'/s\u0254\u02D0rt \u0252v/',vn:'Ki\u1EC3u nh\u01B0',d:'Kind of, somewhat \u2014 used to soften a statement.',ex:'"I <strong>sort of</strong> understand, but can you explain that last part again?"',use:'Softens what you say \u2014 less direct, more polite.',wrong:['Completely, 100%','Never, not at all','To organize items']}
 ];
 
-// ═══════════ STUDENTS ═══════════
-let students=JSON.parse(localStorage.getItem('net_students')||'null')||['Mai Tram','Quy','Kiet','Nhan','Linh','Hoa','Duc','Trang','Minh','Lan','Thao','Phuc','Hang','Tuan','Vy','Bao','Ngoc','Dat','Ha','Son'];
-const WHEEL_COLORS=['#a855f7','#f59e0b','#7c3aed','#d97706','#c084fc','#fbbf24','#6d28d9','#f97316'];
+// ═══════════ STUDENTS 1-50 (NUMBERS ONLY) ═══════════
+const students=Array.from({length:50},(_,i)=>String(i+1));
+const WHEEL_COLORS=['#a855f7','#f59e0b','#7c3aed','#d97706','#c084fc','#fbbf24','#6d28d9','#f97316','#8b5cf6','#eab308'];
 
 // ═══════════ STATE ═══════════
 let curCard=0,showVN=false;
@@ -625,20 +635,13 @@ document.getElementById('certDate').textContent=new Date().toLocaleDateString('e
 }
 function resetAll(){curCard=0;qOrder=[];srInited=false;writingInited=false;switchTab('learn')}
 
-// ═══════════ STUDENT WHEEL ═══════════
+// ═══════════ STUDENT WHEEL (NUMBERS 1-50) ═══════════
 let wheelAngle=0,spinning=false,wheelAnim=null;
 function openWheel(){
 document.getElementById('wheelModal').classList.add('open');
-document.getElementById('stuList').value=students.join('\n');
 drawWheel();AC.resume();
 }
-function closeWheel(){document.getElementById('wheelModal').classList.remove('open');document.getElementById('stuEditor').classList.remove('open')}
-function toggleEditor(){document.getElementById('stuEditor').classList.toggle('open')}
-function saveStudents(){
-students=document.getElementById('stuList').value.split('\n').map(s=>s.trim()).filter(s=>s);
-localStorage.setItem('net_students',JSON.stringify(students));
-document.getElementById('stuEditor').classList.remove('open');drawWheel();
-}
+function closeWheel(){document.getElementById('wheelModal').classList.remove('open')}
 function drawWheel(){
 const canvas=document.getElementById('wheelCanvas'),ctx=canvas.getContext('2d');
 const W=canvas.width,cx=W/2,cy=W/2,r=W/2-5;
@@ -649,19 +652,19 @@ students.forEach((s,i)=>{
 const a=wheelAngle+i*arc;
 ctx.beginPath();ctx.moveTo(cx,cy);ctx.arc(cx,cy,r,a,a+arc);ctx.closePath();
 ctx.fillStyle=WHEEL_COLORS[i%WHEEL_COLORS.length];ctx.fill();
-ctx.strokeStyle='#0f0f1a';ctx.lineWidth=2;ctx.stroke();
+ctx.strokeStyle='#0f0f1a';ctx.lineWidth=1.5;ctx.stroke();
 ctx.save();ctx.translate(cx,cy);ctx.rotate(a+arc/2);
-ctx.textAlign='right';ctx.fillStyle='#fff';ctx.font='bold '+Math.min(16,200/n)+'px Rajdhani';
-ctx.fillText(s,r-12,5);ctx.restore();
+ctx.textAlign='right';ctx.fillStyle='#fff';ctx.font='bold 11px Orbitron';
+ctx.fillText(s,r-8,4);ctx.restore();
 });
-ctx.beginPath();ctx.arc(cx,cy,22,0,Math.PI*2);ctx.fillStyle='#0f0f1a';ctx.fill();
+ctx.beginPath();ctx.arc(cx,cy,28,0,Math.PI*2);ctx.fillStyle='#0f0f1a';ctx.fill();
 ctx.strokeStyle='#a855f7';ctx.lineWidth=2;ctx.stroke();
-ctx.fillStyle='#f59e0b';ctx.font='bold 14px Orbitron';ctx.textAlign='center';ctx.fillText('NET',cx,cy+5);
+ctx.fillStyle='#f59e0b';ctx.font='bold 11px Orbitron';ctx.textAlign='center';ctx.fillText('NET',cx,cy+4);
 }
 function spinWheel(){
 if(spinning||!students.length)return;spinning=true;AC.resume();
 document.getElementById('wmResult').innerHTML='';
-let speed=.2+Math.random()*.15;
+let speed=.25+Math.random()*.15;
 const decel=.997-.001*Math.random();
 let lastSeg=-1;
 function frame(){
@@ -675,7 +678,7 @@ if(speed>.001){wheelAnim=requestAnimationFrame(frame)}
 else{spinning=false;cancelAnimationFrame(wheelAnim);
 const winner=students[seg];
 sndReveal();spawnConfetti(25);
-document.getElementById('wmResult').innerHTML='<div class="sel-name">'+winner+'</div>';
+document.getElementById('wmResult').innerHTML='<div class="sel-name">Student '+winner+'</div>';
 }
 }
 frame();
