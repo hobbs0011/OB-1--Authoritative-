@@ -6,909 +6,710 @@
 <title>NET — Vocabulary 001: Daily Survival English</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --void: #0f0f1a;
-    --purple: #a855f7;
-    --purple-dim: #a855f740;
-    --purple-glow: #a855f720;
-    --gold: #f59e0b;
-    --gold-dim: #f59e0b40;
-    --gold-glow: #f59e0b15;
-    --light: #e2e8f0;
-    --muted: #94a3b8;
-    --success: #22c55e;
-    --calibrate: #f59e0b;
-    --card-bg: #1a1a2e;
-    --card-border: #2a2a4a;
-  }
+:root{--void:#0f0f1a;--purple:#a855f7;--purple-dim:#a855f740;--purple-glow:#a855f720;--gold:#f59e0b;--gold-dim:#f59e0b40;--gold-glow:#f59e0b15;--light:#e2e8f0;--muted:#94a3b8;--success:#22c55e;--calibrate:#f59e0b;--card-bg:#1a1a2e;--card-border:#2a2a4a;--fire:#ef4444;--deep-purple:#7c3aed;--bright-gold:#fbbf24}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--void);color:var(--light);font-family:'Rajdhani',sans-serif;min-height:100vh;overflow-x:hidden}
+#particleCanvas{position:fixed;inset:0;z-index:0;pointer-events:none}
+.app-wrap{position:relative;z-index:1}
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+.header{text-align:center;padding:1.5rem 1rem 1rem;border-bottom:1px solid var(--card-border);position:relative}
+.phoenix-logo{display:block;margin:0 auto .5rem;filter:drop-shadow(0 0 15px #a855f780) drop-shadow(0 0 30px #f59e0b30);animation:float 4s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.brand{font-family:'Inter',sans-serif;font-size:.7rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:.3rem}
+.header h1{font-family:'Orbitron',sans-serif;font-size:clamp(1.2rem,4vw,2rem);font-weight:900;background:linear-gradient(135deg,var(--purple),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.subtitle{color:var(--muted);font-size:.95rem}
+.tier-badge{display:inline-block;margin-top:.4rem;padding:.2rem .8rem;border:1px solid var(--purple);border-radius:100px;font-family:'Orbitron',sans-serif;font-size:.6rem;letter-spacing:2px;color:var(--purple);text-transform:uppercase}
+.hdr-btn{position:absolute;top:.8rem;background:none;border:1px solid var(--card-border);color:var(--muted);padding:.25rem .5rem;border-radius:6px;cursor:pointer;font-size:.65rem;font-family:'Inter',sans-serif}
+.hdr-btn:hover{border-color:var(--purple);color:var(--purple)}
+#fsBtn{left:.8rem}
+#timerDisplay{right:.8rem;border:none;cursor:default;font-family:'Orbitron',sans-serif;letter-spacing:1px}
+.vn-toggle{display:flex;align-items:center;justify-content:center;gap:.3rem;margin-top:.4rem;font-family:'Inter',sans-serif;font-size:.7rem;color:var(--muted);cursor:pointer}
+.vn-toggle input{accent-color:var(--purple)}
 
-  body {
-    background: var(--void);
-    color: var(--light);
-    font-family: 'Rajdhani', sans-serif;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
+.nav{display:flex;justify-content:center;gap:0;padding:0 .3rem;border-bottom:1px solid var(--card-border);flex-wrap:wrap}
+.nav button{font-family:'Rajdhani',sans-serif;font-weight:600;font-size:.82rem;background:none;border:none;color:var(--muted);padding:.6rem .65rem;cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap}
+.nav button:hover{color:var(--light)}
+.nav button.active{color:var(--gold);border-bottom-color:var(--gold)}
 
-  /* ── BACKGROUND GRID ── */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background:
-      radial-gradient(ellipse at 20% 50%, var(--purple-glow) 0%, transparent 50%),
-      radial-gradient(ellipse at 80% 50%, var(--gold-glow) 0%, transparent 50%),
-      linear-gradient(180deg, transparent 0%, var(--void) 100%);
-    z-index: -1;
-  }
+.section{display:none;padding:1.5rem 1rem 3rem;max-width:720px;margin:0 auto}
+.section.active{display:block}
 
-  /* ── HEADER ── */
-  .header {
-    text-align: center;
-    padding: 2.5rem 1rem 1.5rem;
-    border-bottom: 1px solid var(--card-border);
-  }
-  .header .brand {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.75rem;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 0.5rem;
-  }
-  .header h1 {
-    font-family: 'Orbitron', sans-serif;
-    font-size: clamp(1.4rem, 4vw, 2.2rem);
-    font-weight: 900;
-    background: linear-gradient(135deg, var(--purple), var(--gold));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-bottom: 0.3rem;
-  }
-  .header .subtitle {
-    font-family: 'Rajdhani', sans-serif;
-    color: var(--muted);
-    font-size: 1rem;
-    font-weight: 400;
-  }
-  .tier-badge {
-    display: inline-block;
-    margin-top: 0.75rem;
-    padding: 0.25rem 1rem;
-    border: 1px solid var(--purple);
-    border-radius: 100px;
-    font-family: 'Orbitron', sans-serif;
-    font-size: 0.65rem;
-    letter-spacing: 2px;
-    color: var(--purple);
-    text-transform: uppercase;
-  }
+.progress-wrap{margin-bottom:1.2rem}
+.progress-label{display:flex;justify-content:space-between;font-size:.78rem;color:var(--muted);margin-bottom:.3rem;font-family:'Inter',sans-serif}
+.progress-bar{height:5px;background:var(--card-border);border-radius:100px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--purple),var(--gold));border-radius:100px;transition:width .5s;width:0%}
 
-  /* ── NAV TABS ── */
-  .nav {
-    display: flex;
-    justify-content: center;
-    gap: 0;
-    padding: 0 1rem;
-    margin-top: 1.5rem;
-    border-bottom: 1px solid var(--card-border);
-  }
-  .nav button {
-    font-family: 'Rajdhani', sans-serif;
-    font-weight: 600;
-    font-size: 0.95rem;
-    background: none;
-    border: none;
-    color: var(--muted);
-    padding: 0.75rem 1.25rem;
-    cursor: pointer;
-    border-bottom: 2px solid transparent;
-    transition: all 0.2s;
-  }
-  .nav button:hover { color: var(--light); }
-  .nav button.active {
-    color: var(--gold);
-    border-bottom-color: var(--gold);
-  }
+.streak-bar{text-align:center;margin-bottom:.8rem;min-height:1.8rem}
+.streak-display{font-family:'Orbitron',sans-serif;font-size:1rem;color:var(--gold)}
+.streak-display.fire{animation:fireGlow .4s ease infinite alternate;color:var(--fire)}
+@keyframes fireGlow{from{text-shadow:0 0 8px #ef444480}to{text-shadow:0 0 20px #ef4444cc,0 0 40px #f59e0b60}}
 
-  /* ── SECTIONS ── */
-  .section { display: none; padding: 1.5rem 1rem 3rem; max-width: 720px; margin: 0 auto; }
-  .section.active { display: block; }
+.card-scene{perspective:1000px;margin-bottom:.8rem}
+.flip-card{position:relative;min-height:260px;transition:transform .6s;transform-style:preserve-3d;cursor:pointer;border-radius:16px}
+.flip-card.flipped{transform:rotateY(180deg)}
+.card-face{position:absolute;inset:0;backface-visibility:hidden;background:var(--card-bg);border:1px solid var(--card-border);border-radius:16px;padding:1.5rem;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+.card-back{transform:rotateY(180deg)}
+.word-num{font-family:'Orbitron',sans-serif;font-size:.55rem;letter-spacing:3px;color:var(--muted);text-transform:uppercase;margin-bottom:.6rem}
+.word{font-family:'Orbitron',sans-serif;font-size:clamp(1.5rem,5vw,2.2rem);font-weight:700;color:var(--gold);margin-bottom:.3rem}
+.pron{font-family:'Inter',sans-serif;font-size:.82rem;color:var(--purple);font-style:italic;margin-bottom:.2rem}
+.vn-hint{font-family:'Inter',sans-serif;font-size:.78rem;color:var(--gold);opacity:.7;margin-bottom:.4rem;display:none}
+.vn-hint.show{display:block}
+.def{font-size:1rem;color:var(--light);line-height:1.5;margin-bottom:.5rem}
+.ex{font-family:'Inter',sans-serif;font-size:.8rem;color:var(--muted);font-style:italic;line-height:1.5;padding:.5rem;background:#0f0f1a80;border-radius:8px;border-left:3px solid var(--purple-dim);width:100%}
+.ex strong{color:var(--gold);font-style:normal}
+.usage{font-family:'Inter',sans-serif;font-size:.72rem;color:var(--purple);margin-top:.4rem;opacity:.8}
+.tap-hint{font-size:.6rem;color:var(--muted);margin-top:.6rem;letter-spacing:1px;text-transform:uppercase;font-family:'Inter',sans-serif}
+.mastery-dots{display:flex;gap:3px;justify-content:center;margin-top:.4rem}
+.m-dot{width:7px;height:7px;border-radius:50%;background:var(--card-border)}
+.m-dot.lit{background:var(--success)}
 
-  /* ── PROGRESS BAR ── */
-  .progress-wrap {
-    margin-bottom: 1.5rem;
-  }
-  .progress-label {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.8rem;
-    color: var(--muted);
-    margin-bottom: 0.4rem;
-    font-family: 'Inter', sans-serif;
-  }
-  .progress-bar {
-    height: 6px;
-    background: var(--card-border);
-    border-radius: 100px;
-    overflow: hidden;
-  }
-  .progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--purple), var(--gold));
-    border-radius: 100px;
-    transition: width 0.5s ease;
-    width: 0%;
-  }
+.card-nav{display:flex;justify-content:center;gap:.6rem;margin-top:.6rem;flex-wrap:wrap}
+.btn{font-family:'Rajdhani',sans-serif;font-weight:600;padding:.5rem 1rem;border-radius:8px;border:1px solid var(--card-border);background:var(--card-bg);color:var(--light);cursor:pointer;font-size:.88rem;transition:all .2s}
+.btn:hover{border-color:var(--purple)}
+.btn-gold{background:linear-gradient(135deg,var(--gold),#d97706)!important;color:var(--void)!important;border:none!important;font-weight:700!important}
+.btn-purple{background:linear-gradient(135deg,var(--purple),var(--deep-purple))!important;color:#fff!important;border:none!important}
 
-  /* ── VOCAB CARD ── */
-  .vocab-card {
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: 16px;
-    padding: 2rem;
-    margin-bottom: 1rem;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.3s;
-    position: relative;
-    overflow: hidden;
-    min-height: 220px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  .vocab-card:hover { border-color: var(--purple-dim); }
-  .vocab-card .word-number {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 0.6rem;
-    letter-spacing: 3px;
-    color: var(--muted);
-    text-transform: uppercase;
-    margin-bottom: 1rem;
-  }
-  .vocab-card .word {
-    font-family: 'Orbitron', sans-serif;
-    font-size: clamp(1.8rem, 5vw, 2.5rem);
-    font-weight: 700;
-    color: var(--gold);
-    margin-bottom: 0.5rem;
-  }
-  .vocab-card .pronunciation {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.9rem;
-    color: var(--purple);
-    margin-bottom: 1rem;
-    font-style: italic;
-  }
-  .vocab-card .definition {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 1.1rem;
-    color: var(--light);
-    line-height: 1.5;
-    margin-bottom: 0.75rem;
-  }
-  .vocab-card .example {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.85rem;
-    color: var(--muted);
-    font-style: italic;
-    line-height: 1.6;
-    padding: 0.75rem;
-    background: #0f0f1a80;
-    border-radius: 8px;
-    border-left: 3px solid var(--purple-dim);
-  }
-  .vocab-card .example strong { color: var(--gold); font-style: normal; }
-  .vocab-card .tap-hint {
-    font-size: 0.7rem;
-    color: var(--muted);
-    margin-top: 1rem;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    font-family: 'Inter', sans-serif;
-  }
-  .card-flipped .front-face { display: none; }
-  .card-flipped .back-face { display: block !important; }
-  .back-face { display: none; }
+.vocab-grid{display:grid;gap:.6rem}
+.vrow{background:var(--card-bg);border:1px solid var(--card-border);border-radius:12px;padding:.8rem 1rem;display:grid;grid-template-columns:2rem 1fr auto;gap:.6rem;align-items:start;transition:border-color .2s}
+.vrow:hover{border-color:var(--purple-dim)}
+.vrow .vn{font-family:'Orbitron',sans-serif;font-size:.65rem;color:var(--muted);padding-top:.15rem}
+.vrow .vw{font-family:'Orbitron',sans-serif;font-size:1rem;color:var(--gold)}
+.vrow .vp{font-family:'Inter',sans-serif;font-size:.72rem;color:var(--purple);font-style:italic}
+.vrow .vvn{font-family:'Inter',sans-serif;font-size:.72rem;color:var(--gold);opacity:.6;display:none}
+.vrow .vvn.show{display:inline}
+.vrow .vd{font-size:.85rem;color:var(--light);margin-top:.2rem;line-height:1.4}
+.vrow .ve{font-family:'Inter',sans-serif;font-size:.75rem;color:var(--muted);font-style:italic;margin-top:.15rem}
+.vrow .ve strong{color:var(--gold);font-style:normal}
+.speak-btn{background:none;border:none;color:var(--purple);cursor:pointer;font-size:1.1rem;padding:.2rem}
 
-  /* ── CARD NAV ── */
-  .card-nav {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-top: 1rem;
-  }
-  .card-nav button {
-    font-family: 'Rajdhani', sans-serif;
-    font-weight: 600;
-    padding: 0.6rem 1.5rem;
-    border-radius: 8px;
-    border: 1px solid var(--card-border);
-    background: var(--card-bg);
-    color: var(--light);
-    cursor: pointer;
-    font-size: 0.95rem;
-    transition: all 0.2s;
-  }
-  .card-nav button:hover { border-color: var(--purple); }
-  .card-nav button.btn-gold {
-    background: linear-gradient(135deg, var(--gold), #d97706);
-    color: var(--void);
-    border: none;
-    font-weight: 700;
-  }
+.quiz-q{text-align:center;margin-bottom:1rem}
+.quiz-q .prompt{font-family:'Inter',sans-serif;font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:2px;margin-bottom:.4rem}
+.quiz-q .target{font-family:'Orbitron',sans-serif;font-size:1.5rem;color:var(--gold)}
+.quiz-opts{display:grid;gap:.5rem}
+.q-opt{background:var(--card-bg);border:1px solid var(--card-border);border-radius:12px;padding:.75rem .9rem;font-size:.95rem;color:var(--light);cursor:pointer;transition:all .2s;text-align:left}
+.q-opt:hover{border-color:var(--purple)}
+.q-opt.correct{border-color:var(--success);background:#22c55e15;color:var(--success)}
+.q-opt.wrong{border-color:var(--calibrate);background:#f59e0b10;color:var(--calibrate)}
+.fb{text-align:center;padding:.7rem;border-radius:12px;margin-top:.6rem;font-weight:600;display:none;font-size:.95rem}
+.fb.show{display:block}
+.fb.ok{background:#22c55e15;color:var(--success);border:1px solid #22c55e40}
+.fb.cal{background:#f59e0b10;color:var(--calibrate);border:1px solid #f59e0b40}
 
-  /* ── QUIZ SECTION ── */
-  .quiz-question {
-    text-align: center;
-    margin-bottom: 1.5rem;
-  }
-  .quiz-question .prompt {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.8rem;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 0.75rem;
-  }
-  .quiz-question .target-word {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 1.8rem;
-    color: var(--gold);
-  }
-  .quiz-options {
-    display: grid;
-    gap: 0.75rem;
-  }
-  .quiz-option {
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: 12px;
-    padding: 1rem 1.25rem;
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 1.05rem;
-    color: var(--light);
-    cursor: pointer;
-    transition: all 0.2s;
-    text-align: left;
-  }
-  .quiz-option:hover { border-color: var(--purple); }
-  .quiz-option.correct {
-    border-color: var(--success);
-    background: #22c55e15;
-    color: var(--success);
-  }
-  .quiz-option.wrong {
-    border-color: var(--calibrate);
-    background: #f59e0b10;
-    color: var(--calibrate);
-  }
+.writing-prompt{background:var(--card-bg);border:1px solid var(--card-border);border-radius:12px;padding:1rem;margin-bottom:.8rem}
+.writing-prompt h3{font-family:'Orbitron',sans-serif;font-size:.8rem;color:var(--gold);margin-bottom:.4rem}
+.writing-prompt p{font-size:.9rem;line-height:1.5}
+.p-opts{display:flex;flex-direction:column;gap:.4rem;margin-top:.6rem}
+.p-opt{background:#0f0f1a80;border:1px solid var(--card-border);border-radius:8px;padding:.5rem .7rem;cursor:pointer;font-size:.82rem;color:var(--muted);transition:all .2s}
+.p-opt:hover,.p-opt.sel{border-color:var(--purple);color:var(--light)}
+.w-area{width:100%;min-height:180px;background:var(--card-bg);border:1px solid var(--card-border);border-radius:12px;padding:.8rem;color:var(--light);font-family:'Rajdhani',sans-serif;font-size:1rem;resize:vertical;line-height:1.6;margin-bottom:.8rem}
+.w-area:focus{outline:none;border-color:var(--purple)}
+.w-area::placeholder{color:var(--muted)}
+.word-tracker{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.8rem}
+.wt{padding:.2rem .6rem;border-radius:100px;font-family:'Rajdhani',sans-serif;font-size:.78rem;font-weight:600;border:1px solid var(--card-border);color:var(--muted);transition:all .3s}
+.wt.found{border-color:var(--success);color:var(--success);background:#22c55e10}
+.w-stats{display:flex;gap:1.2rem;font-family:'Inter',sans-serif;font-size:.72rem;color:var(--muted)}
+.w-stats strong{color:var(--gold)}
 
-  /* ── FEEDBACK TOAST ── */
-  .feedback {
-    text-align: center;
-    padding: 1rem;
-    border-radius: 12px;
-    margin-top: 1rem;
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 600;
-    display: none;
-  }
-  .feedback.show { display: block; }
-  .feedback.success { background: #22c55e15; color: var(--success); border: 1px solid #22c55e40; }
-  .feedback.calibrate { background: #f59e0b10; color: var(--calibrate); border: 1px solid #f59e0b40; }
+.sr-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:16px;padding:1.5rem;text-align:center;min-height:170px;display:flex;flex-direction:column;justify-content:center;margin-bottom:.8rem}
+.sr-word{font-family:'Orbitron',sans-serif;font-size:1.7rem;color:var(--purple);margin-bottom:1rem}
+.sr-btns{display:flex;justify-content:center;gap:.5rem;flex-wrap:wrap}
+.sr-b{font-family:'Rajdhani',sans-serif;font-weight:600;font-size:.82rem;padding:.45rem .9rem;border-radius:8px;border:none;cursor:pointer;transition:all .2s}
+.sr-b.again{background:#ef444430;color:#f87171;border:1px solid #ef444440}
+.sr-b.hard{background:#f59e0b15;color:var(--gold);border:1px solid var(--gold-dim)}
+.sr-b.good{background:#22c55e15;color:var(--success);border:1px solid #22c55e40}
+.sr-b.easy{background:#a855f715;color:var(--purple);border:1px solid var(--purple-dim)}
 
-  /* ── SPACED REPETITION SECTION ── */
-  .sr-card {
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: 16px;
-    padding: 2rem;
-    text-align: center;
-    min-height: 180px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-bottom: 1rem;
-  }
-  .sr-card .sr-word {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 2rem;
-    color: var(--purple);
-    margin-bottom: 1.5rem;
-  }
-  .sr-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 0.75rem;
-    flex-wrap: wrap;
-  }
-  .sr-btn {
-    font-family: 'Rajdhani', sans-serif;
-    font-weight: 600;
-    font-size: 0.9rem;
-    padding: 0.5rem 1.25rem;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .sr-btn.again { background: #ef444430; color: #f87171; border: 1px solid #ef444440; }
-  .sr-btn.hard { background: #f59e0b15; color: var(--gold); border: 1px solid var(--gold-dim); }
-  .sr-btn.good { background: #22c55e15; color: var(--success); border: 1px solid #22c55e40; }
-  .sr-btn.easy { background: #a855f715; color: var(--purple); border: 1px solid var(--purple-dim); }
+.score-display{text-align:center;padding:1.5rem}
+.score-num{font-family:'Orbitron',sans-serif;font-size:3.5rem;font-weight:900;background:linear-gradient(135deg,var(--purple),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.score-lbl{font-size:.72rem;color:var(--muted);letter-spacing:2px;text-transform:uppercase;font-family:'Inter',sans-serif}
+.tier-res{display:inline-block;margin-top:.6rem;padding:.35rem 1.2rem;border-radius:100px;font-family:'Orbitron',sans-serif;font-size:.75rem;letter-spacing:2px}
+.t-mouse{background:#ef444420;color:#f87171;border:1px solid #ef444440}
+.t-cub{background:#f59e0b15;color:var(--gold);border:1px solid var(--gold-dim)}
+.t-tiger{background:#22c55e15;color:var(--success);border:1px solid #22c55e40}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:.5rem;margin-top:1rem}
+.s-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:12px;padding:.7rem;text-align:center}
+.s-card .sv{font-family:'Orbitron',sans-serif;font-size:1.2rem;color:var(--gold)}
+.s-card .sn{font-family:'Inter',sans-serif;font-size:.62rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-top:.15rem}
+.tiger-voice{margin-top:1.2rem;padding:.8rem;background:linear-gradient(135deg,#a855f710,#f59e0b08);border:1px solid var(--purple-dim);border-radius:12px;text-align:center}
+.tiger-voice p{font-family:'Inter',sans-serif;font-size:.82rem;color:var(--light);font-style:italic;line-height:1.5}
+.tiger-voice .tva{font-size:.68rem;color:var(--gold);margin-top:.4rem;font-style:normal}
+.certificate{margin-top:1.2rem;background:linear-gradient(135deg,#1a1a2e,var(--void));border:2px solid var(--gold-dim);border-radius:16px;padding:1.2rem;text-align:center;position:relative;overflow:hidden}
+.certificate::before{content:'';position:absolute;inset:-50%;background:conic-gradient(from 0deg,transparent,#a855f708,transparent,#f59e0b08,transparent);animation:cspin 10s linear infinite}
+@keyframes cspin{to{transform:rotate(360deg)}}
+.certificate *{position:relative;z-index:1}
+.certificate h3{font-family:'Orbitron',sans-serif;font-size:.8rem;color:var(--gold)}
+.cert-name{font-family:'Orbitron',sans-serif;font-size:1.2rem;color:var(--light);margin:.4rem 0}
+.cert-detail{font-family:'Inter',sans-serif;font-size:.7rem;color:var(--muted)}
 
-  /* ── SCORE DISPLAY ── */
-  .score-display {
-    text-align: center;
-    padding: 2rem;
-  }
-  .score-display .score-number {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 4rem;
-    font-weight: 900;
-    background: linear-gradient(135deg, var(--purple), var(--gold));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  .score-display .score-label {
-    font-size: 0.8rem;
-    color: var(--muted);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    font-family: 'Inter', sans-serif;
-  }
-  .tier-result {
-    display: inline-block;
-    margin-top: 1rem;
-    padding: 0.5rem 2rem;
-    border-radius: 100px;
-    font-family: 'Orbitron', sans-serif;
-    font-size: 0.85rem;
-    letter-spacing: 2px;
-  }
-  .tier-mouse { background: #ef444420; color: #f87171; border: 1px solid #ef444440; }
-  .tier-cub { background: #f59e0b15; color: var(--gold); border: 1px solid var(--gold-dim); }
-  .tier-tiger { background: #22c55e15; color: var(--success); border: 1px solid #22c55e40; }
+.wheel-fab{position:fixed;bottom:1.2rem;right:1.2rem;width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--deep-purple));color:#fff;border:none;cursor:pointer;font-size:1.3rem;z-index:1000;box-shadow:0 4px 20px #a855f760;transition:all .3s;display:flex;align-items:center;justify-content:center}
+.wheel-fab:hover{transform:scale(1.1);box-shadow:0 6px 30px #a855f7a0}
+.wheel-modal{position:fixed;inset:0;background:rgba(0,0,0,.95);z-index:10000;display:none;flex-direction:column;align-items:center;justify-content:center}
+.wheel-modal.open{display:flex}
+.wm-head{text-align:center;margin-bottom:.8rem}
+.wm-head h2{font-family:'Orbitron',sans-serif;font-size:1.3rem;background:linear-gradient(135deg,var(--purple),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.wm-head p{font-family:'Inter',sans-serif;font-size:.75rem;color:var(--muted)}
+.wheel-wrap{position:relative}
+#wheelCanvas{border-radius:50%;filter:drop-shadow(0 0 25px #a855f740)}
+.wheel-ptr{position:absolute;top:-12px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:12px solid transparent;border-right:12px solid transparent;border-top:25px solid var(--gold);filter:drop-shadow(0 2px 6px #f59e0b80);z-index:2}
+.wm-result{text-align:center;margin-top:.8rem;min-height:2.5rem}
+.sel-name{font-family:'Orbitron',sans-serif;font-size:1.8rem;color:var(--gold);animation:nameIn .5s ease}
+@keyframes nameIn{from{transform:scale(.5);opacity:0}to{transform:scale(1);opacity:1}}
+.wm-actions{display:flex;gap:.6rem;margin-top:.8rem}
+.wm-close{position:absolute;top:.8rem;right:.8rem;background:none;border:1px solid var(--card-border);color:var(--muted);padding:.3rem .7rem;border-radius:6px;cursor:pointer;font-family:'Inter',sans-serif;font-size:.75rem}
+.wm-close:hover{border-color:var(--purple);color:var(--light)}
+.edit-stu{position:absolute;top:.8rem;left:.8rem;background:none;border:1px solid var(--card-border);color:var(--muted);padding:.3rem .7rem;border-radius:6px;cursor:pointer;font-family:'Inter',sans-serif;font-size:.75rem}
+.edit-stu:hover{border-color:var(--gold);color:var(--light)}
+.stu-editor{display:none;position:absolute;top:3rem;left:.8rem;background:var(--card-bg);border:1px solid var(--card-border);border-radius:12px;padding:.8rem;width:220px;z-index:3}
+.stu-editor.open{display:block}
+.stu-editor textarea{width:100%;height:120px;background:var(--void);border:1px solid var(--card-border);border-radius:8px;color:var(--light);font-family:'Rajdhani',sans-serif;font-size:.82rem;padding:.4rem;resize:vertical}
+.stu-editor textarea:focus{outline:none;border-color:var(--purple)}
+.stu-editor label{font-family:'Inter',sans-serif;font-size:.65rem;color:var(--muted);display:block;margin-bottom:.3rem}
 
-  /* ── STATS GRID ── */
-  .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 0.75rem;
-    margin-top: 1.5rem;
-  }
-  .stat-card {
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: 12px;
-    padding: 1rem;
-    text-align: center;
-  }
-  .stat-card .stat-value {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 1.4rem;
-    color: var(--gold);
-  }
-  .stat-card .stat-name {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.7rem;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-top: 0.25rem;
-  }
+.footer{text-align:center;padding:1.2rem;border-top:1px solid var(--card-border);margin-top:1.5rem}
+.footer p{font-family:'Inter',sans-serif;font-size:.62rem;color:var(--muted);letter-spacing:1px}
 
-  /* ── FOOTER ── */
-  .footer {
-    text-align: center;
-    padding: 2rem 1rem;
-    border-top: 1px solid var(--card-border);
-    margin-top: 2rem;
-  }
-  .footer p {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.7rem;
-    color: var(--muted);
-    letter-spacing: 1px;
-  }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 480px) {
-    .nav button { padding: 0.6rem 0.8rem; font-size: 0.8rem; }
-    .vocab-card { padding: 1.5rem; }
-    .sr-buttons { gap: 0.5rem; }
-    .sr-btn { padding: 0.5rem 0.75rem; font-size: 0.8rem; }
-  }
+@media(max-width:600px){
+.nav button{padding:.45rem .4rem;font-size:.72rem}
+.card-face{padding:1rem}
+.hdr-btn{font-size:.55rem;padding:.2rem .3rem}
+.wheel-wrap canvas{width:280px!important;height:280px!important}
+.stats-grid{grid-template-columns:repeat(2,1fr)}
+}
 </style>
 </head>
 <body>
+<canvas id="particleCanvas"></canvas>
+<div class="app-wrap">
 
-<!-- HEADER -->
 <div class="header">
+  <button class="hdr-btn" id="fsBtn" onclick="toggleFS()">⛶ Fullscreen</button>
+  <div class="hdr-btn" id="timerDisplay">00:00</div>
+  <svg class="phoenix-logo" width="72" height="72" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="pg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f59e0b"/><stop offset="100%" stop-color="#a855f7"/></linearGradient>
+      <linearGradient id="pg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#a855f7"/><stop offset="100%" stop-color="#7c3aed"/></linearGradient>
+      <linearGradient id="pg3" x1=".5" y1="0" x2=".5" y2="1"><stop offset="0%" stop-color="#fbbf24"/><stop offset="100%" stop-color="#f59e0b"/></linearGradient>
+    </defs>
+    <path d="M100 30 C85 30 70 45 75 65 L90 52 L100 62 L110 52 L125 65 C130 45 115 30 100 30Z" fill="url(#pg1)"/>
+    <path d="M75 65 C45 50 25 60 30 80 L55 60 L75 70Z" fill="url(#pg2)" opacity=".85"/>
+    <path d="M125 65 C155 50 175 60 170 80 L145 60 L125 70Z" fill="url(#pg2)" opacity=".85"/>
+    <ellipse cx="100" cy="90" rx="18" ry="30" fill="url(#pg1)" opacity=".9"/>
+    <path d="M88 110 Q75 145 70 170 Q88 140 95 115Z" fill="#a855f7" opacity=".6"/>
+    <path d="M100 118 Q100 150 100 175 Q103 145 103 118Z" fill="url(#pg3)" opacity=".7"/>
+    <path d="M112 110 Q125 145 130 170 Q112 140 105 115Z" fill="#a855f7" opacity=".6"/>
+    <path d="M30 80 Q25 68 32 58 Q35 70 30 80Z" fill="#f59e0b" opacity=".7"/>
+    <path d="M170 80 Q175 68 168 58 Q165 70 170 80Z" fill="#f59e0b" opacity=".7"/>
+    <circle cx="95" cy="47" r="3" fill="#0f0f1a"/>
+    <circle cx="105" cy="47" r="3" fill="#0f0f1a"/>
+    <circle cx="95" cy="46.5" r="1" fill="#f59e0b"/>
+    <circle cx="105" cy="46.5" r="1" fill="#f59e0b"/>
+  </svg>
   <div class="brand">Natural English Training</div>
   <h1>Daily Survival English</h1>
   <div class="subtitle">10 Words That Keep You Alive in Conversation</div>
   <div class="tier-badge">Lesson 001 · All Tiers</div>
+  <label class="vn-toggle"><input type="checkbox" id="vnCheck" onchange="toggleVN()"> 🇻🇳 Tiếng Việt Hints</label>
 </div>
 
-<!-- NAV -->
-<div class="nav">
-  <button class="active" onclick="showSection('learn')">Learn</button>
-  <button onclick="showSection('quiz')">Quiz</button>
-  <button onclick="showSection('spaced')">Spaced Rep</button>
-  <button onclick="showSection('score')">Score</button>
+<div class="nav" id="mainNav">
+  <button class="active" data-tab="learn">📖 Learn</button>
+  <button data-tab="vocab">📋 Vocab</button>
+  <button data-tab="quiz">⚡ Quiz</button>
+  <button data-tab="writing">✍️ Writing</button>
+  <button data-tab="spaced">🧠 Spaced Rep</button>
+  <button data-tab="score">🏆 Score</button>
 </div>
 
-<!-- ═══════════ LEARN SECTION ═══════════ -->
-<div class="section active" id="section-learn">
-  <div class="progress-wrap">
-    <div class="progress-label">
-      <span id="learnProgress">Word 1 of 10</span>
-      <span id="learnPercent">0%</span>
-    </div>
-    <div class="progress-bar"><div class="progress-fill" id="learnFill"></div></div>
-  </div>
-
-  <div class="vocab-card" id="vocabCard" onclick="flipCard()">
-    <div class="front-face">
-      <div class="word-number" id="wordNum">WORD 01</div>
-      <div class="word" id="wordText"></div>
-      <div class="pronunciation" id="wordPron"></div>
-      <div class="tap-hint">tap to reveal</div>
-    </div>
-    <div class="back-face">
-      <div class="word-number" id="wordNum2">WORD 01</div>
-      <div class="word" id="wordText2"></div>
-      <div class="definition" id="wordDef"></div>
-      <div class="example" id="wordEx"></div>
-    </div>
-  </div>
-
+<!-- LEARN -->
+<div class="section active" id="sec-learn">
+  <div class="progress-wrap"><div class="progress-label"><span id="lProg">Word 1 of 10</span><span id="lPct">0%</span></div><div class="progress-bar"><div class="progress-fill" id="lFill"></div></div></div>
+  <div class="streak-bar" id="learnStreak"></div>
+  <div class="card-scene"><div class="flip-card" id="flipCard" onclick="flipCard()">
+    <div class="card-face card-front" id="cardFront"></div>
+    <div class="card-face card-back" id="cardBack"></div>
+  </div></div>
   <div class="card-nav">
-    <button onclick="prevCard()">← Back</button>
-    <button onclick="sayItLoud()" style="border-color:var(--purple); color:var(--purple);">🔊 Say It</button>
-    <button class="btn-gold" onclick="nextCard()">Next →</button>
+    <button class="btn" onclick="prevCard()">← Back</button>
+    <button class="btn" onclick="speakWord()" style="border-color:var(--purple);color:var(--purple)">🔊 Say It</button>
+    <button class="btn" onclick="speakWord(true)" style="border-color:var(--purple);color:var(--purple)">🐢 Slow</button>
+    <button class="btn btn-gold" onclick="nextCard()">Next →</button>
   </div>
 </div>
 
-<!-- ═══════════ QUIZ SECTION ═══════════ -->
-<div class="section" id="section-quiz">
-  <div class="progress-wrap">
-    <div class="progress-label">
-      <span id="quizProgress">Question 1 of 10</span>
-      <span id="quizPercent">0%</span>
-    </div>
-    <div class="progress-bar"><div class="progress-fill" id="quizFill"></div></div>
-  </div>
-
-  <div class="quiz-question">
-    <div class="prompt">What does this word mean?</div>
-    <div class="target-word" id="quizWord"></div>
-  </div>
-
-  <div class="quiz-options" id="quizOptions"></div>
-  <div class="feedback" id="quizFeedback"></div>
-
-  <div class="card-nav" id="quizNav" style="display:none; margin-top:1.5rem;">
-    <button class="btn-gold" onclick="nextQuiz()">Next →</button>
-  </div>
+<!-- VOCAB -->
+<div class="section" id="sec-vocab">
+  <h2 style="font-family:'Orbitron',sans-serif;font-size:1rem;color:var(--gold);text-align:center;margin-bottom:1rem">📋 Full Vocabulary Reference</h2>
+  <div class="vocab-grid" id="vocabGrid"></div>
 </div>
 
-<!-- ═══════════ SPACED REPETITION ═══════════ -->
-<div class="section" id="section-spaced">
-  <div class="progress-wrap">
-    <div class="progress-label">
-      <span id="srProgress">Cards remaining: 10</span>
-      <span id="srPercent">0%</span>
-    </div>
-    <div class="progress-bar"><div class="progress-fill" id="srFill"></div></div>
-  </div>
+<!-- QUIZ -->
+<div class="section" id="sec-quiz">
+  <div class="progress-wrap"><div class="progress-label"><span id="qProg">Question 1 of 10</span><span id="qPct">0%</span></div><div class="progress-bar"><div class="progress-fill" id="qFill"></div></div></div>
+  <div class="streak-bar" id="quizStreak"></div>
+  <div class="quiz-q"><div class="prompt">What does this word mean?</div><div class="target" id="qWord"></div></div>
+  <div class="quiz-opts" id="qOpts"></div>
+  <div class="fb" id="qFb"></div>
+  <div class="card-nav" id="qNav" style="display:none;margin-top:1rem"><button class="btn btn-gold" onclick="nextQuiz()">Next →</button></div>
+</div>
 
-  <div class="sr-card">
+<!-- WRITING -->
+<div class="section" id="sec-writing">
+  <div class="writing-prompt">
+    <h3>✍️ Writing Assignment</h3>
+    <p>Use <strong>all 10 vocabulary words</strong> in a single paragraph. Choose a topic below or write freely.</p>
+    <div class="p-opts">
+      <div class="p-opt sel" onclick="selPrompt(this)">Tell a story about getting lost in a new city and meeting unexpected people.</div>
+      <div class="p-opt" onclick="selPrompt(this)">Describe a day at work where nothing went as planned but everything turned out OK.</div>
+      <div class="p-opt" onclick="selPrompt(this)">Write about explaining something complicated to a friend who doesn't understand.</div>
+    </div>
+  </div>
+  <div class="word-tracker" id="wordTracker"></div>
+  <textarea class="w-area" id="wArea" placeholder="Start writing your paragraph here... Use all 10 words!" oninput="checkWords()"></textarea>
+  <div class="w-stats"><span>Words used: <strong id="wUsed">0</strong>/10</span><span>Word count: <strong id="wCount">0</strong></span></div>
+  <div class="fb" id="wFb" style="margin-top:.6rem"></div>
+</div>
+
+<!-- SPACED REP -->
+<div class="section" id="sec-spaced">
+  <div class="progress-wrap"><div class="progress-label"><span id="srProg">Cards remaining: 10</span><span id="srPct">0%</span></div><div class="progress-bar"><div class="progress-fill" id="srFill"></div></div></div>
+  <div class="sr-card" id="srCard">
     <div class="sr-word" id="srWord"></div>
-    <div id="srAnswer" style="display:none; margin-bottom:1.5rem;">
-      <div class="definition" id="srDef" style="margin-bottom:0.5rem;"></div>
-      <div class="example" id="srEx" style="font-family:'Inter',sans-serif; font-size:0.85rem; color:var(--muted); font-style:italic;"></div>
-    </div>
-    <div id="srRevealWrap">
-      <button class="btn-gold" onclick="revealSR()" style="font-family:'Rajdhani',sans-serif; font-weight:600; font-size:1rem; padding:0.75rem 2rem; border-radius:8px; border:none; cursor:pointer;">Show Answer</button>
-    </div>
-    <div class="sr-buttons" id="srButtons" style="display:none;">
-      <button class="sr-btn again" onclick="rateSR(0)">Again</button>
-      <button class="sr-btn hard" onclick="rateSR(1)">Hard</button>
-      <button class="sr-btn good" onclick="rateSR(2)">Good</button>
-      <button class="sr-btn easy" onclick="rateSR(3)">Easy</button>
+    <div id="srAns" style="display:none;margin-bottom:1rem"><div class="def" id="srDef"></div><div class="ex" id="srEx"></div></div>
+    <div id="srRevWrap"><button class="btn btn-gold" onclick="revealSR()">Show Answer</button></div>
+    <div class="sr-btns" id="srBtns" style="display:none">
+      <button class="sr-b again" onclick="rateSR(0)">Again</button>
+      <button class="sr-b hard" onclick="rateSR(1)">Hard</button>
+      <button class="sr-b good" onclick="rateSR(2)">Good</button>
+      <button class="sr-b easy" onclick="rateSR(3)">Easy</button>
     </div>
   </div>
-
-  <div id="srComplete" style="display:none; text-align:center; padding:2rem;">
-    <h2 style="font-family:'Orbitron',sans-serif; color:var(--gold); margin-bottom:1rem;">SESSION COMPLETE</h2>
-    <p style="color:var(--muted);">Every word reviewed. Come back tomorrow — spaced repetition locks it in.</p>
-    <button class="btn-gold" onclick="resetSR()" style="margin-top:1.5rem; font-family:'Rajdhani',sans-serif; font-weight:600; padding:0.75rem 2rem; border-radius:8px; border:none; cursor:pointer;">Run It Again</button>
+  <div id="srDone" style="display:none;text-align:center;padding:1.5rem">
+    <h2 style="font-family:'Orbitron',sans-serif;color:var(--gold);margin-bottom:.8rem">SESSION COMPLETE</h2>
+    <p style="color:var(--muted)">Every word reviewed. Spaced repetition locks it in.</p>
+    <button class="btn btn-gold" onclick="initSR()" style="margin-top:1rem">Run It Again</button>
   </div>
 </div>
 
-<!-- ═══════════ SCORE SECTION ═══════════ -->
-<div class="section" id="section-score">
+<!-- SCORE -->
+<div class="section" id="sec-score">
   <div class="score-display">
-    <div class="score-label">Your Tiger Score</div>
-    <div class="score-number" id="finalScore">—</div>
+    <div class="score-lbl">Your Tiger Score</div>
+    <div class="score-num" id="finalScore">—</div>
     <div id="tierBadge"></div>
   </div>
-
   <div class="stats-grid">
-    <div class="stat-card">
-      <div class="stat-value" id="statCorrect">0</div>
-      <div class="stat-name">Correct</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-value" id="statCalibrate">0</div>
-      <div class="stat-name">Calibrated</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-value" id="statStreak">0</div>
-      <div class="stat-name">Best Streak</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-value" id="statSpeed">—</div>
-      <div class="stat-name">Avg Speed</div>
-    </div>
+    <div class="s-card"><div class="sv" id="stCorrect">0</div><div class="sn">Correct</div></div>
+    <div class="s-card"><div class="sv" id="stCal">0</div><div class="sn">Calibrated</div></div>
+    <div class="s-card"><div class="sv" id="stStreak">0</div><div class="sn">Best Streak</div></div>
+    <div class="s-card"><div class="sv" id="stSpeed">—</div><div class="sn">Avg Speed</div></div>
   </div>
-
-  <div style="text-align:center; margin-top:2rem;">
-    <button class="btn-gold" onclick="resetAll()" style="font-family:'Rajdhani',sans-serif; font-weight:600; font-size:1rem; padding:0.75rem 2.5rem; border-radius:8px; border:none; cursor:pointer;">Run It Again 🔁</button>
+  <div class="tiger-voice" id="tigerVoice"></div>
+  <div class="certificate" id="cert" style="display:none">
+    <h3>🏆 LESSON COMPLETION CERTIFICATE</h3>
+    <div class="cert-name" id="certTier"></div>
+    <div class="cert-detail">Vocabulary 001: Daily Survival English — Natural English Training</div>
+    <div class="cert-detail" id="certDate"></div>
   </div>
+  <div style="text-align:center;margin-top:1.2rem"><button class="btn btn-gold" onclick="resetAll()">Run It Again 🔁</button></div>
 </div>
 
-<!-- FOOTER -->
 <div class="footer">
   <p>NATURAL ENGLISH TRAINING · MOUSE → TIGER · VOLUME + VELOCITY > GRAMMAR</p>
 </div>
+</div>
+
+<!-- STUDENT WHEEL FAB -->
+<button class="wheel-fab" onclick="openWheel()" title="Random Student Selector">🎰</button>
+
+<!-- STUDENT WHEEL MODAL -->
+<div class="wheel-modal" id="wheelModal">
+  <button class="wm-close" onclick="closeWheel()">✕ Close</button>
+  <button class="edit-stu" onclick="toggleEditor()">✏️ Edit Students</button>
+  <div class="stu-editor" id="stuEditor">
+    <label>One name per line:</label>
+    <textarea id="stuList"></textarea>
+    <button class="btn btn-gold" onclick="saveStudents()" style="margin-top:.4rem;width:100%;font-size:.8rem">Save</button>
+  </div>
+  <div class="wm-head">
+    <h2>🎰 RANDOM STUDENT SELECTOR</h2>
+    <p>Who's next? Spin the wheel!</p>
+  </div>
+  <div class="wheel-wrap">
+    <div class="wheel-ptr"></div>
+    <canvas id="wheelCanvas" width="400" height="400"></canvas>
+  </div>
+  <div class="wm-result" id="wmResult"></div>
+  <div class="wm-actions">
+    <button class="btn btn-gold" onclick="spinWheel()">🎰 SPIN!</button>
+    <button class="btn btn-purple" onclick="spinWheel()">🔄 Again</button>
+  </div>
+</div>
 
 <script>
-// ═══════════════════════════════════════════
-// VOCAB DATA — 10 DAILY SURVIVAL WORDS
-// ═══════════════════════════════════════════
-const VOCAB = [
-  {
-    word: "Actually",
-    pron: "/ˈæk.tʃu.ə.li/",
-    def: "Used to emphasize what is real or true, often correcting a misunderstanding.",
-    example: '"<strong>Actually</strong>, I changed my mind — let\'s eat somewhere else."',
-    wrong: ["Maybe, perhaps", "In the future", "Never, not once"]
-  },
-  {
-    word: "Basically",
-    pron: "/ˈbeɪ.sɪ.kəl.i/",
-    def: "Used to simplify or summarize the main point.",
-    example: '"<strong>Basically</strong>, we need to finish this by Friday or we\'re in trouble."',
-    wrong: ["In a complicated way", "Secretly, in private", "Loudly, with force"]
-  },
-  {
-    word: "Apparently",
-    pron: "/əˈpær.ənt.li/",
-    def: "Based on what you heard or read — not confirmed by you personally.",
-    example: '"<strong>Apparently</strong>, the meeting got moved to 3 PM."',
-    wrong: ["Definitely, for certain", "Quietly and carefully", "Angrily and loudly"]
-  },
-  {
-    word: "Honestly",
-    pron: "/ˈɒn.ɪst.li/",
-    def: "Used to show you are giving your real, unfiltered opinion.",
-    example: '"<strong>Honestly</strong>, I don\'t think this plan is going to work."',
-    wrong: ["In a dishonest way", "Without any emotion", "Very quickly"]
-  },
-  {
-    word: "Grab",
-    pron: "/ɡræb/",
-    def: "To quickly get or take something — very casual.",
-    example: '"Let me <strong>grab</strong> my jacket and we can go."',
-    wrong: ["To throw away", "To carefully examine", "To slowly build"]
-  },
-  {
-    word: "Figure out",
-    pron: "/ˈfɪɡ.ər aʊt/",
-    def: "To solve or understand something through thinking.",
-    example: '"I need to <strong>figure out</strong> how to get to the airport from here."',
-    wrong: ["To forget completely", "To give up on", "To hide from others"]
-  },
-  {
-    word: "Deal with",
-    pron: "/diːl wɪð/",
-    def: "To handle or manage a situation or problem.",
-    example: '"I\'ll <strong>deal with</strong> the complaint — don\'t worry about it."',
-    wrong: ["To ignore forever", "To make worse", "To celebrate happily"]
-  },
-  {
-    word: "End up",
-    pron: "/end ʌp/",
-    def: "To finally be in a situation that you didn't plan.",
-    example: '"We got lost and <strong>ended up</strong> in a completely different city."',
-    wrong: ["To start something new", "To plan carefully", "To refuse to go"]
-  },
-  {
-    word: "Run into",
-    pron: "/rʌn ˈɪn.tuː/",
-    def: "To meet someone by accident, or to encounter a problem.",
-    example: '"I <strong>ran into</strong> my old teacher at the coffee shop yesterday."',
-    wrong: ["To avoid someone", "To crash a vehicle", "To schedule a meeting"]
-  },
-  {
-    word: "Sort of",
-    pron: "/sɔːrt ɒv/",
-    def: "Kind of, somewhat — used to soften a statement.",
-    example: '"I <strong>sort of</strong> understand, but can you explain that last part again?"',
-    wrong: ["Completely, 100%", "Never, not at all", "To organize items"]
-  }
+// ═══════════ VOCAB DATA ═══════════
+const V=[
+{w:'Actually',p:'/\u02C8\u00E6k.t\u0283u.\u0259.li/',vn:'Th\u1EF1c ra',d:'Used to emphasize what is real or true, often correcting a misunderstanding.',ex:'"<strong>Actually</strong>, I changed my mind \u2014 let\'s eat somewhere else."',use:'Start a sentence to gently correct or add surprising info.',wrong:['Maybe, perhaps','In the future','Never, not once']},
+{w:'Basically',p:'/\u02C8be\u026A.s\u026A.k\u0259l.i/',vn:'V\u1EC1 c\u01A1 b\u1EA3n',d:'Used to simplify or summarize the main point.',ex:'"<strong>Basically</strong>, we need to finish this by Friday or we\'re in trouble."',use:'Great for explaining complex things simply.',wrong:['In a complicated way','Secretly, in private','Loudly, with force']},
+{w:'Apparently',p:'/\u0259\u02C8p\u00E6r.\u0259nt.li/',vn:'C\u00F3 v\u1EBB nh\u01B0',d:'Based on what you heard or read \u2014 not confirmed personally.',ex:'"<strong>Apparently</strong>, the meeting got moved to 3 PM."',use:'Share secondhand info without taking full responsibility.',wrong:['Definitely, for certain','Quietly and carefully','Angrily and loudly']},
+{w:'Honestly',p:'/\u02C8\u0252n.\u026Ast.li/',vn:'Th\u00E0nh th\u1EADt m\u00E0 n\u00F3i',d:'Used to show you are giving your real, unfiltered opinion.',ex:'"<strong>Honestly</strong>, I don\'t think this plan is going to work."',use:'Signals you\'re about to be very direct.',wrong:['In a dishonest way','Without any emotion','Very quickly']},
+{w:'Grab',p:'/\u0261r\u00E6b/',vn:'L\u1EA5y nhanh',d:'To quickly get or take something \u2014 very casual.',ex:'"Let me <strong>grab</strong> my jacket and we can go."',use:'Super casual \u2014 native speakers use it constantly.',wrong:['To throw away','To carefully examine','To slowly build']},
+{w:'Figure out',p:'/\u02C8f\u026A\u0261.\u0259r a\u028At/',vn:'T\u00ECm ra',d:'To solve or understand something through thinking.',ex:'"I need to <strong>figure out</strong> how to get to the airport from here."',use:'Use for any problem-solving situation.',wrong:['To forget completely','To give up on','To hide from others']},
+{w:'Deal with',p:'/di\u02D0l w\u026A\u00F0/',vn:'Gi\u1EA3i quy\u1EBFt',d:'To handle or manage a situation or problem.',ex:'"I\'ll <strong>deal with</strong> the complaint \u2014 don\'t worry about it."',use:'Shows you\'re taking ownership of a problem.',wrong:['To ignore forever','To make worse','To celebrate happily']},
+{w:'End up',p:'/end \u028Cp/',vn:'K\u1EBFt th\u00FAc \u1EDF',d:'To finally be in a situation that you didn\'t plan.',ex:'"We got lost and <strong>ended up</strong> in a completely different city."',use:'Perfect for storytelling about unexpected outcomes.',wrong:['To start something new','To plan carefully','To refuse to go']},
+{w:'Run into',p:'/r\u028An \u02C8\u026An.tu\u02D0/',vn:'T\u00ECnh c\u1EDD g\u1EB7p',d:'To meet someone by accident, or encounter a problem.',ex:'"I <strong>ran into</strong> my old teacher at the coffee shop yesterday."',use:'Casual way to say you met someone unexpectedly.',wrong:['To avoid someone','To crash a vehicle','To schedule a meeting']},
+{w:'Sort of',p:'/s\u0254\u02D0rt \u0252v/',vn:'Ki\u1EC3u nh\u01B0',d:'Kind of, somewhat \u2014 used to soften a statement.',ex:'"I <strong>sort of</strong> understand, but can you explain that last part again?"',use:'Softens what you say \u2014 less direct, more polite.',wrong:['Completely, 100%','Never, not at all','To organize items']}
 ];
 
-// ═══════════════════════════════════════════
-// STATE
-// ═══════════════════════════════════════════
-let currentCard = 0;
-let quizIndex = 0;
-let quizCorrect = 0;
-let quizCalibrated = 0;
-let streak = 0;
-let bestStreak = 0;
-let quizTimes = [];
-let quizStartTime = null;
+// ═══════════ STUDENTS ═══════════
+let students=JSON.parse(localStorage.getItem('net_students')||'null')||['Mai Tram','Quy','Kiet','Nhan','Linh','Hoa','Duc','Trang','Minh','Lan','Thao','Phuc','Hang','Tuan','Vy','Bao','Ngoc','Dat','Ha','Son'];
+const WHEEL_COLORS=['#a855f7','#f59e0b','#7c3aed','#d97706','#c084fc','#fbbf24','#6d28d9','#f97316'];
 
-// Spaced repetition state
-let srDeck = [];
-let srCurrentIndex = 0;
-let srCompleted = 0;
+// ═══════════ STATE ═══════════
+let curCard=0,showVN=false;
+let qIdx=0,qCorrect=0,qCal=0,streak=0,bestStreak=0,qTimes=[],qStart=null,qOrder=[];
+let srDeck=[],srIdx=0;
+let sessionStart=Date.now();
+let mastery=JSON.parse(localStorage.getItem('net_mastery')||'null')||V.map(()=>({learn:0,quiz:0,sr:0}));
 
-// ═══════════════════════════════════════════
-// NAVIGATION
-// ═══════════════════════════════════════════
-function showSection(id) {
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
-  document.getElementById('section-' + id).classList.add('active');
-  event.target.classList.add('active');
+// ═══════════ SOUND ENGINE ═══════════
+const AC=new(window.AudioContext||window.webkitAudioContext)();
+function playTone(freq,dur,type='sine',vol=.15){const o=AC.createOscillator(),g=AC.createGain();o.type=type;o.frequency.value=freq;g.gain.value=vol;g.gain.exponentialRampToValueAtTime(.001,AC.currentTime+dur);o.connect(g);g.connect(AC.destination);o.start();o.stop(AC.currentTime+dur)}
+function sndCorrect(){playTone(880,.15,'sine',.12);setTimeout(()=>playTone(1100,.15,'sine',.1),80)}
+function sndWrong(){playTone(200,.3,'sawtooth',.08)}
+function sndFlip(){playTone(600,.08,'triangle',.06)}
+function sndTick(){playTone(800,.03,'square',.1)}
+function sndReveal(){playTone(523,.1,'sine',.12);setTimeout(()=>playTone(659,.1,'sine',.1),100);setTimeout(()=>playTone(784,.2,'sine',.12),200)}
+function sndDrumroll(cb){let i=0;const iv=setInterval(()=>{playTone(150+Math.random()*100,.05,'triangle',.08);if(++i>30){clearInterval(iv);cb&&cb()}},60)}
 
-  if (id === 'learn') renderCard();
-  if (id === 'quiz') startQuiz();
-  if (id === 'spaced') initSR();
-  if (id === 'score') renderScore();
+// ═══════════ PARTICLES ═══════════
+(function initParticles(){
+const c=document.getElementById('particleCanvas'),ctx=c.getContext('2d');
+let W,H,pts=[];
+function resize(){W=c.width=innerWidth;H=c.height=innerHeight}
+window.addEventListener('resize',resize);resize();
+for(let i=0;i<40;i++)pts.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*2+.5,dx:(Math.random()-.5)*.3,dy:(Math.random()-.5)*.3,c:Math.random()>.5?'#a855f7':'#f59e0b'});
+function draw(){ctx.clearRect(0,0,W,H);pts.forEach(p=>{p.x+=p.dx;p.y+=p.dy;if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.y<0)p.y=H;if(p.y>H)p.y=0;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=p.c+'30';ctx.fill()});requestAnimationFrame(draw)}
+draw();
+})();
+
+// ═══════════ NAVIGATION ═══════════
+document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',function(){
+document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));
+this.classList.add('active');
+const tab=this.dataset.tab;
+document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+document.getElementById('sec-'+tab).classList.add('active');
+if(tab==='learn')renderCard();
+if(tab==='vocab')renderVocabGrid();
+if(tab==='quiz'&&qOrder.length===0)startQuiz();
+if(tab==='writing')initWriting();
+if(tab==='spaced')initSR();
+if(tab==='score')renderScore();
+}));
+
+function switchTab(name){
+const btn=document.querySelector('.nav button[data-tab="'+name+'"]');
+if(btn)btn.click();
 }
 
-// ═══════════════════════════════════════════
-// LEARN MODE (FLASHCARDS)
-// ═══════════════════════════════════════════
-function renderCard() {
-  const v = VOCAB[currentCard];
-  const num = String(currentCard + 1).padStart(2, '0');
-  document.getElementById('wordNum').textContent = 'WORD ' + num;
-  document.getElementById('wordNum2').textContent = 'WORD ' + num;
-  document.getElementById('wordText').textContent = v.word;
-  document.getElementById('wordText2').textContent = v.word;
-  document.getElementById('wordPron').textContent = v.pron;
-  document.getElementById('wordDef').textContent = v.def;
-  document.getElementById('wordEx').innerHTML = v.example;
+// ═══════════ KEYBOARD ═══════════
+document.addEventListener('keydown',e=>{
+if(e.target.tagName==='TEXTAREA')return;
+const sec=document.querySelector('.section.active');
+if(!sec)return;
+const id=sec.id;
+if(id==='sec-learn'){
+if(e.key==='ArrowRight')nextCard();
+else if(e.key==='ArrowLeft')prevCard();
+else if(e.key===' '||e.key==='Enter'){e.preventDefault();flipCard();}
+}else if(id==='sec-quiz'){
+if(e.key>='1'&&e.key<='4'){const opts=document.querySelectorAll('.q-opt');if(opts[+e.key-1])opts[+e.key-1].click()}
+else if(e.key==='Enter'&&document.getElementById('qNav').style.display!=='none')nextQuiz();
+}else if(id==='sec-spaced'){
+if(e.key===' '||e.key==='Enter'){e.preventDefault();const rv=document.getElementById('srRevWrap');if(rv.style.display!=='none')revealSR();}
+if(e.key>='1'&&e.key<='4')rateSR(+e.key-1);
+}
+if(e.key==='Escape'&&document.getElementById('wheelModal').classList.contains('open'))closeWheel();
+});
 
-  // Reset flip
-  document.getElementById('vocabCard').classList.remove('card-flipped');
-
-  // Progress
-  const pct = Math.round(((currentCard) / VOCAB.length) * 100);
-  document.getElementById('learnProgress').textContent = `Word ${currentCard + 1} of ${VOCAB.length}`;
-  document.getElementById('learnPercent').textContent = pct + '%';
-  document.getElementById('learnFill').style.width = pct + '%';
+// ═══════════ LEARN MODE ═══════════
+function renderCard(){
+const v=V[curCard],n=String(curCard+1).padStart(2,'0');
+const vnH=showVN?'show':'';
+document.getElementById('cardFront').innerHTML=
+'<div class="word-num">WORD '+n+'</div><div class="word">'+v.w+'</div><div class="pron">'+v.p+'</div>'+
+'<div class="vn-hint '+vnH+'">'+v.vn+'</div>'+
+'<div class="mastery-dots">'+masteryDots(curCard)+'</div>'+
+'<div class="tap-hint">tap to reveal · space/enter</div>';
+document.getElementById('cardBack').innerHTML=
+'<div class="word-num">WORD '+n+'</div><div class="word">'+v.w+'</div><div class="def">'+v.d+'</div>'+
+'<div class="ex">'+v.ex+'</div><div class="usage">💡 '+v.use+'</div>';
+document.getElementById('flipCard').classList.remove('flipped');
+const pct=Math.round(curCard/V.length*100);
+document.getElementById('lProg').textContent='Word '+(curCard+1)+' of '+V.length;
+document.getElementById('lPct').textContent=pct+'%';
+document.getElementById('lFill').style.width=pct+'%';
+}
+function flipCard(){document.getElementById('flipCard').classList.toggle('flipped');sndFlip()}
+function nextCard(){
+mastery[curCard].learn=Math.min(mastery[curCard].learn+1,3);saveMastery();
+if(curCard<V.length-1){curCard++;renderCard()}else switchTab('quiz');
+}
+function prevCard(){if(curCard>0){curCard--;renderCard()}}
+function speakWord(slow){
+if(!('speechSynthesis' in window))return;
+const u=new SpeechSynthesisUtterance(V[curCard].w);u.lang='en-US';u.rate=slow?.5:.85;speechSynthesis.speak(u);
+}
+function masteryDots(i){
+const m=mastery[i],total=m.learn+m.quiz+m.sr;
+let dots='';for(let j=0;j<5;j++)dots+='<div class="m-dot'+(j<total?' lit':'')+'"></div>';return dots;
 }
 
-function flipCard() {
-  document.getElementById('vocabCard').classList.toggle('card-flipped');
+// ═══════════ VOCAB GRID ═══════════
+function renderVocabGrid(){
+const g=document.getElementById('vocabGrid');g.innerHTML='';
+V.forEach((v,i)=>{
+const vnH=showVN?'show':'';
+g.innerHTML+='<div class="vrow"><div class="vn">'+(i+1)+'</div><div><div class="vw">'+v.w+' <button class="speak-btn" onclick="speakIdx('+i+')">🔊</button></div><div class="vp">'+v.p+' <span class="vvn '+vnH+'">· '+v.vn+'</span></div><div class="vd">'+v.d+'</div><div class="ve">'+v.ex+'</div><div class="usage" style="margin-top:.2rem">💡 '+v.use+'</div></div><div>'+masteryDots(i)+'</div></div>';
+});
+}
+function speakIdx(i){if('speechSynthesis' in window){const u=new SpeechSynthesisUtterance(V[i].w);u.lang='en-US';u.rate=.85;speechSynthesis.speak(u)}}
+
+// ═══════════ QUIZ ═══════════
+function startQuiz(){
+qOrder=[...Array(V.length).keys()].sort(()=>Math.random()-.5);
+qIdx=0;qCorrect=0;qCal=0;streak=0;bestStreak=0;qTimes=[];
+renderQuiz();
+}
+function renderQuiz(){
+if(qIdx>=V.length){switchTab('score');return}
+const v=V[qOrder[qIdx]];
+document.getElementById('qWord').textContent=v.w;
+const opts=[{t:v.d,c:true}];v.wrong.forEach(w=>opts.push({t:w,c:false}));
+opts.sort(()=>Math.random()-.5);
+const cont=document.getElementById('qOpts');cont.innerHTML='';
+opts.forEach((o,i)=>{
+const d=document.createElement('div');d.className='q-opt';d.textContent=(i+1)+'. '+o.t;
+d.onclick=()=>answerQuiz(d,o.c);cont.appendChild(d);
+});
+document.getElementById('qFb').className='fb';document.getElementById('qFb').style.display='none';
+document.getElementById('qNav').style.display='none';
+const pct=Math.round(qIdx/V.length*100);
+document.getElementById('qProg').textContent='Question '+(qIdx+1)+' of '+V.length;
+document.getElementById('qPct').textContent=pct+'%';
+document.getElementById('qFill').style.width=pct+'%';
+qStart=Date.now();
+updateStreakDisplay('quizStreak');
+}
+function answerQuiz(btn,correct){
+if(document.querySelector('.q-opt.correct,.q-opt.wrong'))return;
+const elapsed=((Date.now()-qStart)/1000).toFixed(1);qTimes.push(+elapsed);
+const fb=document.getElementById('qFb');
+if(correct){
+btn.classList.add('correct');qCorrect++;streak++;if(streak>bestStreak)bestStreak=streak;
+mastery[qOrder[qIdx]].quiz=Math.min(mastery[qOrder[qIdx]].quiz+1,3);saveMastery();
+sndCorrect();
+const msgs=['🔥 Yes! '+elapsed+'s','⚡ Locked in! '+elapsed+'s','💪 Tiger speed! '+elapsed+'s','🎯 Nailed it! '+elapsed+'s'];
+fb.textContent=msgs[Math.floor(Math.random()*msgs.length)];fb.className='fb show ok';
+if(streak>=3)spawnConfetti(8);
+}else{
+btn.classList.add('wrong');streak=0;qCal++;sndWrong();
+document.querySelectorAll('.q-opt').forEach(o=>{if(o.textContent.includes(V[qOrder[qIdx]].d))o.classList.add('correct')});
+fb.textContent='⚡ Calibrating — not wrong, just recalibrating. Lock it in.';fb.className='fb show cal';
+}
+updateStreakDisplay('quizStreak');
+document.getElementById('qNav').style.display='flex';
+}
+function nextQuiz(){qIdx++;renderQuiz()}
+function updateStreakDisplay(id){
+const el=document.getElementById(id);
+if(streak>=2)el.innerHTML='<span class="streak-display'+(streak>=5?' fire':'')+'">🔥 '+streak+' streak'+(streak>=5?' COMBO!':'')+'</span>';
+else el.innerHTML='';
 }
 
-function nextCard() {
-  if (currentCard < VOCAB.length - 1) { currentCard++; renderCard(); }
-  else {
-    // Auto-advance to quiz
-    document.querySelectorAll('.nav button')[1].click();
-  }
+// ═══════════ WRITING ═══════════
+let writingInited=false;
+function initWriting(){
+if(writingInited)return;writingInited=true;
+const t=document.getElementById('wordTracker');
+V.forEach(v=>{t.innerHTML+='<span class="wt" data-word="'+v.w.toLowerCase()+'">'+v.w+'</span>'});
+checkWords();
 }
-function prevCard() {
-  if (currentCard > 0) { currentCard--; renderCard(); }
-}
-
-function sayItLoud() {
-  const word = VOCAB[currentCard].word;
-  if ('speechSynthesis' in window) {
-    const u = new SpeechSynthesisUtterance(word);
-    u.lang = 'en-US';
-    u.rate = 0.85;
-    speechSynthesis.speak(u);
-  }
-}
-
-// ═══════════════════════════════════════════
-// QUIZ MODE
-// ═══════════════════════════════════════════
-let quizOrder = [];
-
-function startQuiz() {
-  quizOrder = [...Array(VOCAB.length).keys()].sort(() => Math.random() - 0.5);
-  quizIndex = 0;
-  quizCorrect = 0;
-  quizCalibrated = 0;
-  streak = 0;
-  bestStreak = 0;
-  quizTimes = [];
-  renderQuiz();
+function selPrompt(el){document.querySelectorAll('.p-opt').forEach(p=>p.classList.remove('sel'));el.classList.add('sel')}
+function checkWords(){
+const text=document.getElementById('wArea').value.toLowerCase();
+let found=0;
+document.querySelectorAll('.wt').forEach(wt=>{
+const w=wt.dataset.word;
+const isFound=text.includes(w);
+wt.classList.toggle('found',isFound);
+if(isFound)found++;
+});
+document.getElementById('wUsed').textContent=found;
+document.getElementById('wCount').textContent=text.trim().split(/\s+/).filter(x=>x).length;
+const fb=document.getElementById('wFb');
+if(found===10){
+fb.textContent='🐅 TIGER! All 10 words used — incredible work!';fb.className='fb show ok';
+if(!document.querySelector('#wFb.celebrated')){fb.classList.add('celebrated');spawnConfetti(30);sndReveal()}
+}else if(found>=7){
+fb.textContent='🐾 CUB level — '+found+'/10 words. Keep going!';fb.className='fb show cal';
+}else fb.className='fb';
 }
 
-function renderQuiz() {
-  if (quizIndex >= VOCAB.length) {
-    document.querySelectorAll('.nav button')[3].click();
-    return;
-  }
-
-  const v = VOCAB[quizOrder[quizIndex]];
-  document.getElementById('quizWord').textContent = v.word;
-
-  // Build options: 1 correct + 3 wrong
-  const options = [{ text: v.def, correct: true }];
-  v.wrong.forEach(w => options.push({ text: w, correct: false }));
-  options.sort(() => Math.random() - 0.5);
-
-  const container = document.getElementById('quizOptions');
-  container.innerHTML = '';
-  options.forEach(opt => {
-    const btn = document.createElement('div');
-    btn.className = 'quiz-option';
-    btn.textContent = opt.text;
-    btn.onclick = () => answerQuiz(btn, opt.correct);
-    container.appendChild(btn);
-  });
-
-  document.getElementById('quizFeedback').className = 'feedback';
-  document.getElementById('quizFeedback').style.display = 'none';
-  document.getElementById('quizNav').style.display = 'none';
-
-  const pct = Math.round((quizIndex / VOCAB.length) * 100);
-  document.getElementById('quizProgress').textContent = `Question ${quizIndex + 1} of ${VOCAB.length}`;
-  document.getElementById('quizPercent').textContent = pct + '%';
-  document.getElementById('quizFill').style.width = pct + '%';
-
-  quizStartTime = Date.now();
+// ═══════════ SPACED REP ═══════════
+let srInited=false;
+function initSR(){
+if(srInited)return;srInited=true;
+srDeck=V.map((v,i)=>({...v,idx:i,interval:1,ease:2.5,reps:0}));
+srDeck.sort(()=>Math.random()-.5);srIdx=0;
+document.getElementById('srDone').style.display='none';document.getElementById('srCard').style.display='flex';
+renderSR();
+}
+function renderSR(){
+if(srIdx>=srDeck.length){
+document.getElementById('srDone').style.display='block';document.getElementById('srCard').style.display='none';return;
+}
+document.getElementById('srCard').style.display='flex';
+const c=srDeck[srIdx];
+document.getElementById('srWord').textContent=c.w;
+document.getElementById('srDef').textContent=c.d;
+document.getElementById('srEx').innerHTML=c.ex;
+document.getElementById('srAns').style.display='none';
+document.getElementById('srRevWrap').style.display='block';
+document.getElementById('srBtns').style.display='none';
+const rem=srDeck.length-srIdx,pct=Math.round(srIdx/srDeck.length*100);
+document.getElementById('srProg').textContent='Cards remaining: '+rem;
+document.getElementById('srPct').textContent=pct+'%';document.getElementById('srFill').style.width=pct+'%';
+}
+function revealSR(){
+document.getElementById('srAns').style.display='block';
+document.getElementById('srRevWrap').style.display='none';
+document.getElementById('srBtns').style.display='flex';sndFlip();
+}
+function rateSR(q){
+const c=srDeck[srIdx];
+mastery[c.idx].sr=Math.min(mastery[c.idx].sr+1,3);saveMastery();
+if(q===0){const ri=Math.min(srIdx+3,srDeck.length);srDeck.splice(srIdx,1);srDeck.splice(ri,0,c);sndWrong()}
+else{srIdx++;sndCorrect()}
+renderSR();
 }
 
-function answerQuiz(btn, correct) {
-  // Prevent double-tap
-  if (document.querySelector('.quiz-option.correct, .quiz-option.wrong')) return;
+// ═══════════ SCORE ═══════════
+const TIGER_VOICES=[
+'Volume and velocity beat grammar every time. You showed up and you spoke. That is the win.',
+'Mouse to Tiger is not about being perfect. It is about being fearless. You are on the path.',
+'Every word you practice is a brick in your confidence wall. Keep stacking.',
+'Calibration is not failure. It is your brain rewiring. Trust the process.',
+'The Tiger does not apologize before speaking. The Tiger commits. You committed today.',
+'Permission over perfection. You gave yourself permission to try. That changes everything.',
+'10-5-5-3: ten words, five minutes each, five reps, three days. That is how fluency is built.',
+'Do not wait until you are ready. Speak now. Correct later. That is the Tiger way.'
+];
+function renderScore(){
+const score=Math.round(qCorrect/V.length*100)||0;
+document.getElementById('finalScore').textContent=score;
+document.getElementById('stCorrect').textContent=qCorrect;
+document.getElementById('stCal').textContent=qCal;
+document.getElementById('stStreak').textContent=bestStreak;
+const avg=qTimes.length?(qTimes.reduce((a,b)=>a+b,0)/qTimes.length).toFixed(1)+'s':'—';
+document.getElementById('stSpeed').textContent=avg;
+const b=document.getElementById('tierBadge');
+if(score>=80){b.innerHTML='<div class="tier-res t-tiger">🐅 TIGER</div>';spawnConfetti(40);sndReveal()}
+else if(score>=50)b.innerHTML='<div class="tier-res t-cub">🐾 CUB</div>';
+else b.innerHTML='<div class="tier-res t-mouse">🐭 MOUSE — Keep going. We calibrate.</div>';
+const tv=document.getElementById('tigerVoice');
+tv.innerHTML='<p>"'+TIGER_VOICES[Math.floor(Math.random()*TIGER_VOICES.length)]+'"</p><div class="tva">— Tiger Voice · Gospel 444</div>';
+const cert=document.getElementById('cert');
+if(score>0){cert.style.display='block';document.getElementById('certTier').textContent=score>=80?'🐅 TIGER TIER':score>=50?'🐾 CUB TIER':'🐭 MOUSE TIER';
+document.getElementById('certDate').textContent=new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})}
+}
+function resetAll(){curCard=0;qOrder=[];srInited=false;writingInited=false;switchTab('learn')}
 
-  const elapsed = ((Date.now() - quizStartTime) / 1000).toFixed(1);
-  quizTimes.push(parseFloat(elapsed));
-
-  const fb = document.getElementById('quizFeedback');
-
-  if (correct) {
-    btn.classList.add('correct');
-    quizCorrect++;
-    streak++;
-    if (streak > bestStreak) bestStreak = streak;
-    fb.textContent = `🔥 Yes! ${elapsed}s — keep that velocity.`;
-    fb.className = 'feedback show success';
-  } else {
-    btn.classList.add('wrong');
-    streak = 0;
-    quizCalibrated++;
-    // Show correct answer
-    document.querySelectorAll('.quiz-option').forEach(o => {
-      if (o.textContent === VOCAB[quizOrder[quizIndex]].def) o.classList.add('correct');
-    });
-    fb.textContent = `⚡ Calibrating — not wrong, just recalibrating. Lock it in.`;
-    fb.className = 'feedback show calibrate';
-  }
-
-  document.getElementById('quizNav').style.display = 'flex';
+// ═══════════ STUDENT WHEEL ═══════════
+let wheelAngle=0,spinning=false,wheelAnim=null;
+function openWheel(){
+document.getElementById('wheelModal').classList.add('open');
+document.getElementById('stuList').value=students.join('\n');
+drawWheel();AC.resume();
+}
+function closeWheel(){document.getElementById('wheelModal').classList.remove('open');document.getElementById('stuEditor').classList.remove('open')}
+function toggleEditor(){document.getElementById('stuEditor').classList.toggle('open')}
+function saveStudents(){
+students=document.getElementById('stuList').value.split('\n').map(s=>s.trim()).filter(s=>s);
+localStorage.setItem('net_students',JSON.stringify(students));
+document.getElementById('stuEditor').classList.remove('open');drawWheel();
+}
+function drawWheel(){
+const canvas=document.getElementById('wheelCanvas'),ctx=canvas.getContext('2d');
+const W=canvas.width,cx=W/2,cy=W/2,r=W/2-5;
+ctx.clearRect(0,0,W,W);
+const n=students.length;if(!n)return;
+const arc=2*Math.PI/n;
+students.forEach((s,i)=>{
+const a=wheelAngle+i*arc;
+ctx.beginPath();ctx.moveTo(cx,cy);ctx.arc(cx,cy,r,a,a+arc);ctx.closePath();
+ctx.fillStyle=WHEEL_COLORS[i%WHEEL_COLORS.length];ctx.fill();
+ctx.strokeStyle='#0f0f1a';ctx.lineWidth=2;ctx.stroke();
+ctx.save();ctx.translate(cx,cy);ctx.rotate(a+arc/2);
+ctx.textAlign='right';ctx.fillStyle='#fff';ctx.font='bold '+Math.min(16,200/n)+'px Rajdhani';
+ctx.fillText(s,r-12,5);ctx.restore();
+});
+ctx.beginPath();ctx.arc(cx,cy,22,0,Math.PI*2);ctx.fillStyle='#0f0f1a';ctx.fill();
+ctx.strokeStyle='#a855f7';ctx.lineWidth=2;ctx.stroke();
+ctx.fillStyle='#f59e0b';ctx.font='bold 14px Orbitron';ctx.textAlign='center';ctx.fillText('NET',cx,cy+5);
+}
+function spinWheel(){
+if(spinning||!students.length)return;spinning=true;AC.resume();
+document.getElementById('wmResult').innerHTML='';
+let speed=.2+Math.random()*.15;
+const decel=.997-.001*Math.random();
+let lastSeg=-1;
+function frame(){
+wheelAngle+=speed;speed*=decel;
+const n=students.length,arc=2*Math.PI/n;
+const normAngle=((3*Math.PI/2-wheelAngle)%(2*Math.PI)+2*Math.PI)%(2*Math.PI);
+const seg=Math.floor(normAngle/arc)%n;
+if(seg!==lastSeg){sndTick();lastSeg=seg}
+drawWheel();
+if(speed>.001){wheelAnim=requestAnimationFrame(frame)}
+else{spinning=false;cancelAnimationFrame(wheelAnim);
+const winner=students[seg];
+sndReveal();spawnConfetti(25);
+document.getElementById('wmResult').innerHTML='<div class="sel-name">'+winner+'</div>';
+}
+}
+frame();
 }
 
-function nextQuiz() {
-  quizIndex++;
-  renderQuiz();
+// ═══════════ CONFETTI ═══════════
+function spawnConfetti(count){
+const colors=['#a855f7','#f59e0b','#22c55e','#c084fc','#fbbf24','#7c3aed','#f97316','#ef4444'];
+for(let i=0;i<count;i++){
+const c=document.createElement('div');c.style.cssText=
+'position:fixed;width:'+[6,8,10][Math.floor(Math.random()*3)]+'px;height:'+[6,8,10][Math.floor(Math.random()*3)]+
+'px;left:'+Math.random()*100+'vw;top:-10px;background:'+colors[Math.floor(Math.random()*colors.length)]+
+';z-index:99999;pointer-events:none;border-radius:'+(Math.random()>.5?'50%':'2px')+
+';animation:cfall '+(1.5+Math.random()*2)+'s linear forwards';
+document.body.appendChild(c);setTimeout(()=>c.remove(),4000);
 }
-
-// ═══════════════════════════════════════════
-// SPACED REPETITION
-// ═══════════════════════════════════════════
-function initSR() {
-  srDeck = VOCAB.map((v, i) => ({ ...v, index: i, interval: 1, ease: 2.5, reps: 0 }));
-  srDeck.sort(() => Math.random() - 0.5);
-  srCurrentIndex = 0;
-  srCompleted = 0;
-  document.getElementById('srComplete').style.display = 'none';
-  renderSR();
 }
+const style=document.createElement('style');
+style.textContent='@keyframes cfall{0%{opacity:1;transform:translateY(0) rotate(0deg)}100%{opacity:0;transform:translateY(100vh) rotate(720deg)}}';
+document.head.appendChild(style);
 
-function renderSR() {
-  if (srCurrentIndex >= srDeck.length) {
-    document.getElementById('srComplete').style.display = 'block';
-    document.querySelector('.sr-card').style.display = 'none';
-    return;
-  }
-  document.querySelector('.sr-card').style.display = 'flex';
-  const card = srDeck[srCurrentIndex];
-  document.getElementById('srWord').textContent = card.word;
-  document.getElementById('srDef').textContent = card.def;
-  document.getElementById('srEx').innerHTML = card.example;
-  document.getElementById('srAnswer').style.display = 'none';
-  document.getElementById('srRevealWrap').style.display = 'block';
-  document.getElementById('srButtons').style.display = 'none';
+// ═══════════ UTILS ═══════════
+function toggleVN(){showVN=document.getElementById('vnCheck').checked;renderCard();renderVocabGrid()}
+function toggleFS(){if(!document.fullscreenElement)document.documentElement.requestFullscreen().catch(()=>{});else document.exitFullscreen()}
+function saveMastery(){localStorage.setItem('net_mastery',JSON.stringify(mastery))}
 
-  const remaining = srDeck.length - srCurrentIndex;
-  const pct = Math.round((srCurrentIndex / srDeck.length) * 100);
-  document.getElementById('srProgress').textContent = `Cards remaining: ${remaining}`;
-  document.getElementById('srPercent').textContent = pct + '%';
-  document.getElementById('srFill').style.width = pct + '%';
-}
+// SESSION TIMER
+setInterval(()=>{
+const s=Math.floor((Date.now()-sessionStart)/1000);
+const m=Math.floor(s/60),sec=s%60;
+document.getElementById('timerDisplay').textContent=String(m).padStart(2,'0')+':'+String(sec).padStart(2,'0');
+},1000);
 
-function revealSR() {
-  document.getElementById('srAnswer').style.display = 'block';
-  document.getElementById('srRevealWrap').style.display = 'none';
-  document.getElementById('srButtons').style.display = 'flex';
-}
-
-function rateSR(quality) {
-  // SM-2 simplified
-  const card = srDeck[srCurrentIndex];
-  if (quality === 0) {
-    // Again — re-insert 3 cards later
-    const reinsert = Math.min(srCurrentIndex + 3, srDeck.length);
-    srDeck.splice(srCurrentIndex, 1);
-    srDeck.splice(reinsert, 0, card);
-  } else {
-    srCurrentIndex++;
-  }
-  renderSR();
-}
-
-function resetSR() {
-  document.getElementById('srComplete').style.display = 'none';
-  initSR();
-}
-
-// ═══════════════════════════════════════════
-// SCORE
-// ═══════════════════════════════════════════
-function renderScore() {
-  const score = Math.round((quizCorrect / VOCAB.length) * 100) || 0;
-  document.getElementById('finalScore').textContent = score;
-  document.getElementById('statCorrect').textContent = quizCorrect;
-  document.getElementById('statCalibrate').textContent = quizCalibrated;
-  document.getElementById('statStreak').textContent = bestStreak;
-
-  const avg = quizTimes.length ? (quizTimes.reduce((a, b) => a + b, 0) / quizTimes.length).toFixed(1) + 's' : '—';
-  document.getElementById('statSpeed').textContent = avg;
-
-  // Tier
-  const badge = document.getElementById('tierBadge');
-  if (score >= 80) {
-    badge.innerHTML = '<div class="tier-result tier-tiger">🐅 TIGER</div>';
-  } else if (score >= 50) {
-    badge.innerHTML = '<div class="tier-result tier-cub">🐾 CUB</div>';
-  } else {
-    badge.innerHTML = '<div class="tier-result tier-mouse">🐭 MOUSE — Keep going. We calibrate.</div>';
-  }
-}
-
-function resetAll() {
-  currentCard = 0;
-  document.querySelectorAll('.nav button')[0].click();
-}
-
-// ═══════════════════════════════════════════
 // INIT
-// ═══════════════════════════════════════════
 renderCard();
 </script>
 </body>
