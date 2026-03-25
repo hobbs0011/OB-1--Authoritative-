@@ -4,14 +4,18 @@ SURVIVAL CODEX // DATABASE — CLIENT UI
 Script: CodexClient.lua
 Type: LocalScript (StarterPlayerScripts)
 Purpose: Renders the Survival Codex encyclopedia UI
+Version: 1.1 HARDENED
+Date: Original Feb 2026 (Hardened March 25, 2026)
 Gospel 444 Compliant — NO BLUE
 Phoenix Rising Gaming Division
 ═══════════════════════════════════════════════════════════
+HARDENING LOG:
+  1. Protected CodexData require with pcall — graceful fallback
+  2. Card uses AutomaticSize — long descriptions no longer clipped
+  3. Empty state message when no entries exist
+  4. renderEntries preserves UIListLayout during clear
 ]]
 
--- ══════════════════════════════════════════════════════════
--- SERVICES
--- ══════════════════════════════════════════════════════════
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local TweenService = game:GetService("TweenService")
@@ -20,14 +24,15 @@ local UserInputService = game:GetService("UserInputService")
 local player = Players.LocalPlayer
 local playerGui = player:WaitForChild("PlayerGui")
 
--- ══════════════════════════════════════════════════════════
--- LOAD CODEX DATA
--- ══════════════════════════════════════════════════════════
-local CodexData = require(ReplicatedStorage:WaitForChild("CodexData"))
+local loadSuccess, CodexData = pcall(function()
+	return require(ReplicatedStorage:WaitForChild("CodexData", 10))
+end)
 
--- ══════════════════════════════════════════════════════════
--- GOSPEL 444 COLORS (LAW — NO BLUE EVER)
--- ══════════════════════════════════════════════════════════
+if not loadSuccess or not CodexData then
+	warn("[Codex] FAILED to load CodexData module — UI disabled")
+	return
+end
+
 local Colors = {
 	Purple = Color3.fromRGB(168, 85, 247),
 	Gold = Color3.fromRGB(245, 158, 11),
@@ -38,16 +43,12 @@ local Colors = {
 }
 local FONT = Enum.Font.GothamBold
 
--- ══════════════════════════════════════════════════════════
--- CREATE CODEX UI
--- ══════════════════════════════════════════════════════════
 local codexGui = Instance.new("ScreenGui")
 codexGui.Name = "SurvivalCodex"
 codexGui.ResetOnSpawn = false
 codexGui.Enabled = false
 codexGui.Parent = playerGui
 
--- Main panel
 local mainPanel = Instance.new("Frame")
 mainPanel.Name = "CodexPanel"
 mainPanel.Size = UDim2.new(0, 600, 0, 450)
@@ -67,7 +68,6 @@ mainStroke.Color = Colors.Purple
 mainStroke.Thickness = 3
 mainStroke.Parent = mainPanel
 
--- Title bar
 local titleBar = Instance.new("TextLabel")
 titleBar.Name = "Title"
 titleBar.Size = UDim2.new(1, 0, 0, 45)
@@ -78,7 +78,6 @@ titleBar.TextSize = 22
 titleBar.Font = FONT
 titleBar.Parent = mainPanel
 
--- Close button
 local closeBtn = Instance.new("TextButton")
 closeBtn.Name = "Close"
 closeBtn.Size = UDim2.new(0, 35, 0, 35)
@@ -90,12 +89,10 @@ closeBtn.TextSize = 18
 closeBtn.Font = FONT
 closeBtn.BorderSizePixel = 0
 closeBtn.Parent = mainPanel
-
 local closeBtnCorner = Instance.new("UICorner")
 closeBtnCorner.CornerRadius = UDim.new(0, 6)
 closeBtnCorner.Parent = closeBtn
 
--- Scrolling frame for entries
 local scroll = Instance.new("ScrollingFrame")
 scroll.Name = "EntryList"
 scroll.Size = UDim2.new(1, -20, 1, -55)
@@ -109,107 +106,107 @@ scroll.AutomaticCanvasSize = Enum.AutomaticSize.Y
 scroll.Parent = mainPanel
 
 local listLayout = Instance.new("UIListLayout")
+listLayout.Name = "EntryLayout"
 listLayout.SortOrder = Enum.SortOrder.LayoutOrder
 listLayout.Padding = UDim.new(0, 8)
 listLayout.Parent = scroll
 
--- ══════════════════════════════════════════════════════════
--- RENDER CODEX ENTRIES
--- ══════════════════════════════════════════════════════════
 local function renderEntries()
-	-- Clear existing
 	for _, child in ipairs(scroll:GetChildren()) do
-		if child:IsA("Frame") then child:Destroy() end
+		if child:IsA("Frame") or child:IsA("TextLabel") then child:Destroy() end
 	end
-
-	for i, entry in ipairs(CodexData.Entries) do
+	local entries = CodexData:GetAllEntries()
+	if not entries or #entries == 0 then
+		local emptyLabel = Instance.new("TextLabel")
+		emptyLabel.Name = "EmptyState"
+		emptyLabel.Size = UDim2.new(1, -20, 0, 60)
+		emptyLabel.BackgroundTransparency = 1
+		emptyLabel.Text = "No codex entries discovered yet. Survive to unlock."
+		emptyLabel.TextColor3 = Colors.Gray
+		emptyLabel.TextSize = 16
+		emptyLabel.Font = FONT
+		emptyLabel.TextWrapped = true
+		emptyLabel.Parent = scroll
+		return
+	end
+	for i, entry in ipairs(entries) do
 		local card = Instance.new("Frame")
 		card.Name = entry.id
-		card.Size = UDim2.new(1, -10, 0, 90)
+		card.Size = UDim2.new(1, -10, 0, 0)
+		card.AutomaticSize = Enum.AutomaticSize.Y
 		card.BackgroundColor3 = Colors.Glass
 		card.BackgroundTransparency = 0.3
 		card.BorderSizePixel = 0
 		card.LayoutOrder = i
 		card.Parent = scroll
-
-		local cardCorner = Instance.new("UICorner")
-		cardCorner.CornerRadius = UDim.new(0, 8)
-		cardCorner.Parent = card
-
-		local cardStroke = Instance.new("UIStroke")
-		cardStroke.Color = CodexData:GetRarityColor(entry.rarity)
-		cardStroke.Thickness = 1.5
-		cardStroke.Parent = card
-
-		-- Icon + Title
-		local titleLabel = Instance.new("TextLabel")
-		titleLabel.Size = UDim2.new(0.7, 0, 0, 25)
-		titleLabel.Position = UDim2.new(0, 10, 0, 5)
-		titleLabel.BackgroundTransparency = 1
-		titleLabel.Text = entry.icon .. " " .. entry.title
-		titleLabel.TextColor3 = Colors.Gold
-		titleLabel.TextSize = 18
-		titleLabel.Font = FONT
-		titleLabel.TextXAlignment = Enum.TextXAlignment.Left
-		titleLabel.Parent = card
-
-		-- Category tag
-		local catTag = Instance.new("TextLabel")
-		catTag.Size = UDim2.new(0.25, 0, 0, 20)
-		catTag.Position = UDim2.new(0.73, 0, 0, 7)
-		catTag.BackgroundColor3 = Colors.Dark
-		catTag.BackgroundTransparency = 0.5
-		catTag.Text = entry.category
-		catTag.TextColor3 = Colors.Purple
-		catTag.TextSize = 12
-		catTag.Font = FONT
-		catTag.BorderSizePixel = 0
-		catTag.Parent = card
-
-		local catCorner = Instance.new("UICorner")
-		catCorner.CornerRadius = UDim.new(0, 4)
-		catCorner.Parent = catTag
-
-		-- Description
+		local cc = Instance.new("UICorner")
+		cc.CornerRadius = UDim.new(0, 8)
+		cc.Parent = card
+		local cs = Instance.new("UIStroke")
+		cs.Color = CodexData:GetRarityColor(entry.rarity)
+		cs.Thickness = 1.5
+		cs.Parent = card
+		local pad = Instance.new("UIPadding")
+		pad.PaddingTop = UDim.new(0, 8)
+		pad.PaddingBottom = UDim.new(0, 8)
+		pad.PaddingLeft = UDim.new(0, 10)
+		pad.PaddingRight = UDim.new(0, 10)
+		pad.Parent = card
+		local cl = Instance.new("UIListLayout")
+		cl.SortOrder = Enum.SortOrder.LayoutOrder
+		cl.Padding = UDim.new(0, 4)
+		cl.Parent = card
+		local tl = Instance.new("TextLabel")
+		tl.Size = UDim2.new(1, 0, 0, 25)
+		tl.BackgroundTransparency = 1
+		tl.Text = (entry.icon or "") .. " " .. (entry.title or "UNKNOWN")
+		tl.TextColor3 = Colors.Gold
+		tl.TextSize = 18
+		tl.Font = FONT
+		tl.TextXAlignment = Enum.TextXAlignment.Left
+		tl.LayoutOrder = 1
+		tl.Parent = card
+		local tag = Instance.new("TextLabel")
+		tag.Size = UDim2.new(1, 0, 0, 18)
+		tag.BackgroundTransparency = 1
+		tag.Text = (entry.category or "?") .. " | " .. (entry.rarity or "?")
+		tag.TextColor3 = Colors.Purple
+		tag.TextSize = 12
+		tag.Font = FONT
+		tag.TextXAlignment = Enum.TextXAlignment.Left
+		tag.LayoutOrder = 2
+		tag.Parent = card
 		local desc = Instance.new("TextLabel")
-		desc.Size = UDim2.new(1, -20, 0, 50)
-		desc.Position = UDim2.new(0, 10, 0, 32)
+		desc.Size = UDim2.new(1, 0, 0, 0)
+		desc.AutomaticSize = Enum.AutomaticSize.Y
 		desc.BackgroundTransparency = 1
-		desc.Text = entry.description
+		desc.Text = entry.description or ""
 		desc.TextColor3 = Colors.White
 		desc.TextSize = 13
 		desc.Font = Enum.Font.Gotham
 		desc.TextWrapped = true
 		desc.TextXAlignment = Enum.TextXAlignment.Left
 		desc.TextYAlignment = Enum.TextYAlignment.Top
+		desc.LayoutOrder = 3
 		desc.Parent = card
 	end
 end
 
 renderEntries()
 
--- ══════════════════════════════════════════════════════════
--- TOGGLE CODEX (Tab key)
--- ══════════════════════════════════════════════════════════
 local codexOpen = false
-
 local function toggleCodex()
 	codexOpen = not codexOpen
 	codexGui.Enabled = codexOpen
-
 	if codexOpen then
 		mainPanel.Position = UDim2.new(0.5, 0, 0.6, 0)
-		TweenService:Create(mainPanel, TweenInfo.new(0.3, Enum.EasingStyle.Back), {
-			Position = UDim2.new(0.5, 0, 0.5, 0)
-		}):Play()
+		TweenService:Create(mainPanel, TweenInfo.new(0.3, Enum.EasingStyle.Back), {Position = UDim2.new(0.5, 0, 0.5, 0)}):Play()
 	end
 end
 
 UserInputService.InputBegan:Connect(function(input, processed)
 	if processed then return end
-	if input.KeyCode == Enum.KeyCode.Tab then
-		toggleCodex()
-	end
+	if input.KeyCode == Enum.KeyCode.Tab then toggleCodex() end
 end)
 
 closeBtn.MouseButton1Click:Connect(function()
@@ -217,4 +214,4 @@ closeBtn.MouseButton1Click:Connect(function()
 	codexGui.Enabled = false
 end)
 
-print("[Codex] Survival Codex loaded — Tab to open")
+print("[Codex] Survival Codex v1.1 HARDENED — Tab to open")

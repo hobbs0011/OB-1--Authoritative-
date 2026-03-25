@@ -4,18 +4,23 @@ SURVIVAL CODEX // DATABASE
 Module: CodexData.lua
 Type: ModuleScript (ReplicatedStorage)
 Purpose: Encyclopedia data for Survive a Brainrot
+Version: 1.1 HARDENED
+Date: Original Feb 2026 (Hardened March 25, 2026)
 Gospel 444 Compliant — NO BLUE
 Phoenix Rising Gaming Division
 ═══════════════════════════════════════════════════════════
+HARDENING LOG:
+  1. Rizzlord color: BLACK (0,0,0) → Gold (245,158,11) — was INVISIBLE
+     on dark background (#0f0f1a). Supreme tier gets Gospel Gold.
+  2. Uncommon: pure green (0,255,0) → toned green (34,197,94)
+  3. Added RarityOrder for sorting
+  4. Added GetEntryCount(), GetAllEntries(), HasEntry(), GetRarityRank()
+  5. Added entry validation on module load
 ]]
 
 local CodexData = {}
 
--- ══════════════════════════════════════════════════════════
--- CODEX ENTRIES
--- ══════════════════════════════════════════════════════════
 CodexData.Entries = {
-	-- ENEMIES
 	{
 		id = "ENM-001",
 		title = "Skibidi Shambler",
@@ -46,8 +51,6 @@ CodexData.Entries = {
 		unlockCondition = "Collect 3 Fuel Barrels at Rusted Depot",
 		icon = "\240\159\145\145",
 	},
-
-	-- LOCATIONS
 	{
 		id = "LOC-001",
 		title = "The Train",
@@ -70,55 +73,56 @@ CodexData.Entries = {
 	},
 }
 
--- ══════════════════════════════════════════════════════════
--- CATEGORIES
--- ══════════════════════════════════════════════════════════
-CodexData.Categories = {
-	"Enemies",
-	"Locations",
-	"Survival",
-	"Lore",
-	"Equipment",
-}
+CodexData.Categories = { "Enemies", "Locations", "Survival", "Lore", "Equipment" }
 
--- ══════════════════════════════════════════════════════════
--- RARITY COLORS (Gospel 444)
--- ══════════════════════════════════════════════════════════
 CodexData.RarityColors = {
 	Common    = Color3.fromRGB(169, 169, 169),
-	Uncommon  = Color3.fromRGB(0, 255, 0),
+	Uncommon  = Color3.fromRGB(34, 197, 94),   -- [HARDENED] was (0,255,0)
 	Rare      = Color3.fromRGB(168, 85, 247),   -- Purple (NOT blue)
-	Epic      = Color3.fromRGB(168, 85, 247),   -- Gospel 444 Purple
+	Epic      = Color3.fromRGB(168, 85, 247),
 	Legendary = Color3.fromRGB(245, 158, 11),   -- Gospel 444 Gold
 	Mythic    = Color3.fromRGB(239, 68, 68),
 	Godly     = Color3.fromRGB(255, 255, 255),
-	Rizzlord  = Color3.fromRGB(0, 0, 0),
+	Rizzlord  = Color3.fromRGB(245, 158, 11),   -- [HARDENED] was BLACK (0,0,0) = INVISIBLE. Now Gospel Gold.
 }
 
--- ══════════════════════════════════════════════════════════
--- HELPER FUNCTIONS
--- ══════════════════════════════════════════════════════════
+CodexData.RarityOrder = {
+	Common = 1, Uncommon = 2, Rare = 3, Epic = 4,
+	Legendary = 5, Mythic = 6, Godly = 7, Rizzlord = 8,
+}
+
 function CodexData:GetEntry(id)
+	if type(id) ~= "string" then return nil end
 	for _, entry in ipairs(self.Entries) do
-		if entry.id == id then
-			return entry
-		end
+		if entry.id == id then return entry end
 	end
 	return nil
 end
 
 function CodexData:GetByCategory(category)
+	if type(category) ~= "string" then return {} end
 	local results = {}
 	for _, entry in ipairs(self.Entries) do
-		if entry.category == category then
-			table.insert(results, entry)
-		end
+		if entry.category == category then table.insert(results, entry) end
 	end
 	return results
 end
 
 function CodexData:GetRarityColor(rarity)
 	return self.RarityColors[rarity] or Color3.fromRGB(169, 169, 169)
+end
+
+function CodexData:GetEntryCount() return #self.Entries end
+function CodexData:GetAllEntries() return self.Entries end
+function CodexData:HasEntry(id) return self:GetEntry(id) ~= nil end
+function CodexData:GetRarityRank(rarity) return self.RarityOrder[rarity] or 0 end
+
+for i, entry in ipairs(CodexData.Entries) do
+	assert(type(entry.id) == "string", "[Codex] Entry " .. i .. " missing id")
+	assert(type(entry.title) == "string", "[Codex] Entry " .. i .. " missing title")
+	assert(type(entry.category) == "string", "[Codex] Entry " .. i .. " missing category")
+	assert(type(entry.rarity) == "string", "[Codex] Entry " .. i .. " missing rarity")
+	assert(CodexData.RarityColors[entry.rarity], "[Codex] Entry " .. entry.id .. " has unknown rarity: " .. entry.rarity)
 end
 
 return CodexData
