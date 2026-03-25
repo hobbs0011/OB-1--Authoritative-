@@ -1,10 +1,19 @@
 --[[
 ═══════════════════════════════════════════════════════════
 SURVIVE A BRAINROT - MONETIZATION ARCHITECTURE
-Module: Commercial Logic Script Patch v1.0
+Module: Commercial Logic Script Patch v1.1 (HARDENED)
 Purpose: High-Velocity Revenue Extraction & Trading Economy
 Target Valuation: 1,000,000,000 VND
 Source: Ultimate Marketplace Trading System
+Patched: 2026-03-25 — 100-Point Hardening Audit
+═══════════════════════════════════════════════════════════
+PATCHES APPLIED:
+  FIX #1:  Rare color BLUE (0,100,255) → Purple (168,85,247) — GOSPEL 444
+  FIX #3:  RarityTable dict → ordered array, pairs() → ipairs()
+  FIX #40: PityCounter nil initialization guard
+  FIX #99: CalculateTradeValue nil guards on BaseValue/DemandMultiplier
+  FIX:     tick() → os.clock() (deprecated API)
+  FIX:     GetAuction nil guard in PlaceBid
 ═══════════════════════════════════════════════════════════
 ]]
 
@@ -18,16 +27,18 @@ local Players = game:GetService("Players")
 
 -- ══════════════════════════════════════════════════════════
 -- 1. THE 8-TIER RARITY HIERARCHY
+-- FIX #1: Rare color was BLUE (0,100,255) — GOSPEL 444 VIOLATION → Purple
+-- FIX #3: Restructured as ordered array for deterministic ipairs()
 -- ══════════════════════════════════════════════════════════
 local RarityTable = {
-	Common    = {Chance = 0.50,   Color = Color3.fromRGB(169, 169, 169)}, -- 50%
-	Uncommon  = {Chance = 0.30,   Color = Color3.fromRGB(0, 255, 0)},     -- 30%
-	Rare      = {Chance = 0.12,   Color = Color3.fromRGB(0, 100, 255)},   -- 12%
-	Epic      = {Chance = 0.05,   Color = Color3.fromRGB(107, 76, 154)},  -- 5% (Gospel 444 Purple)
-	Legendary = {Chance = 0.02,   Color = Color3.fromRGB(212, 175, 55)},  -- 2% (Gospel 444 Gold)
-	Mythic    = {Chance = 0.008,  Color = Color3.fromRGB(255, 0, 0)},     -- 0.8%
-	Godly     = {Chance = 0.0015, Color = Color3.fromRGB(255, 255, 255)}, -- 0.15% (Rainbow)
-	Rizzlord  = {Chance = 0.0005, Color = Color3.fromRGB(0, 0, 0)}        -- 0.05% (Cosmic/Void)
+	{Name = "Common",    Chance = 0.50,   Color = Color3.fromRGB(169, 169, 169)}, -- 50%
+	{Name = "Uncommon",  Chance = 0.30,   Color = Color3.fromRGB(0, 255, 0)},     -- 30%
+	{Name = "Rare",      Chance = 0.12,   Color = Color3.fromRGB(168, 85, 247)},  -- 12% ✅ FIXED: Purple, NOT Blue
+	{Name = "Epic",      Chance = 0.05,   Color = Color3.fromRGB(107, 76, 154)},  -- 5% (Gospel 444 Purple)
+	{Name = "Legendary", Chance = 0.02,   Color = Color3.fromRGB(212, 175, 55)},  -- 2% (Gospel 444 Gold)
+	{Name = "Mythic",    Chance = 0.008,  Color = Color3.fromRGB(255, 0, 0)},     -- 0.8%
+	{Name = "Godly",     Chance = 0.0015, Color = Color3.fromRGB(255, 255, 255)}, -- 0.15% (Rainbow)
+	{Name = "Rizzlord",  Chance = 0.0005, Color = Color3.fromRGB(0, 0, 0)},       -- 0.05% (Cosmic/Void)
 }
 
 -- ══════════════════════════════════════════════════════════
@@ -45,9 +56,16 @@ local EconomyConfig = {
 
 -- ══════════════════════════════════════════════════════════
 -- 3. THE "GACHA" EXTRACTION ENGINE
+-- FIX #3:  pairs() → ipairs() for deterministic rarity order
+-- FIX #40: PityCounter initialized on nil check
 -- ══════════════════════════════════════════════════════════
 function MonetizationServer:OpenCrate(player, crateType)
 	local playerData = self:GetPlayerData(player)
+
+	-- FIX #40: Initialize PityCounter if nil (prevents nil arithmetic on first open)
+	if playerData.PityCounter == nil then
+		playerData.PityCounter = 0
+	end
 
 	-- "Ethical Pity System" Check
 	playerData.PityCounter = playerData.PityCounter + 1
@@ -59,12 +77,12 @@ function MonetizationServer:OpenCrate(player, crateType)
 		playerData.PityCounter = 0
 		self:SendNotification(player, "PITY TRIGGERED: GUARANTEED LEGENDARY!")
 	else
-		-- Standard Weighted Roll
+		-- FIX #3: ipairs() on ordered array for deterministic rarity selection
 		local currentThreshold = 0
-		for rarity, data in pairs(RarityTable) do
+		for _, data in ipairs(RarityTable) do
 			currentThreshold = currentThreshold + data.Chance
 			if roll <= currentThreshold then
-				selectedRarity = rarity
+				selectedRarity = data.Name
 				break
 			end
 		end
@@ -86,7 +104,7 @@ function MonetizationServer:InitiateTrade(player1, player2)
 		P1 = {Player = player1, Items = {}, Locked = false, Confirmed = false},
 		P2 = {Player = player2, Items = {}, Locked = false, Confirmed = false},
 		Status = "Negotiating",
-		StartTime = tick()
+		StartTime = os.clock() -- FIX: tick() → os.clock() (tick deprecated)
 	}
 	return tradeId
 end
@@ -114,9 +132,12 @@ end
 
 -- ══════════════════════════════════════════════════════════
 -- 5. AUCTION HOUSE LOGIC
+-- FIX: nil guard on GetAuction result
 -- ══════════════════════════════════════════════════════════
 function MonetizationServer:PlaceBid(player, itemId, bidAmount)
 	local currentAuction = self:GetAuction(itemId)
+	if not currentAuction then return end -- FIX: nil guard
+
 	local minBid = currentAuction.CurrentBid * 1.05 -- 5% minimum increment
 
 	if bidAmount >= minBid then
@@ -165,11 +186,14 @@ end
 
 -- ══════════════════════════════════════════════════════════
 -- HELPER FUNCTIONS
+-- FIX #99: nil guards on BaseValue and DemandMultiplier
 -- ══════════════════════════════════════════════════════════
 function MonetizationServer:CalculateTradeValue(items)
 	local total = 0
 	for _, item in pairs(items) do
-		total = total + (item.BaseValue * item.DemandMultiplier)
+		local base = item.BaseValue or 0
+		local demand = item.DemandMultiplier or 1
+		total = total + (base * demand)
 	end
 	return total
 end
