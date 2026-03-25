@@ -242,52 +242,6 @@
     font-weight: 700;
   }
 
-  /* ── ANTI-FREEZE TIMER ── */
-  .timer-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--purple), var(--gold));
-    z-index: 999;
-    transition: width 0.1s linear;
-  }
-  .freeze-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: #0f0f1aee;
-    z-index: 1000;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    text-align: center;
-    padding: 2rem;
-  }
-  .freeze-overlay.active { display: flex; }
-  .freeze-overlay h2 {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 1.8rem;
-    color: var(--gold);
-    margin-bottom: 1rem;
-  }
-  .freeze-overlay p {
-    color: var(--muted);
-    font-size: 1.1rem;
-    margin-bottom: 2rem;
-  }
-  .freeze-overlay button {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 1rem;
-    padding: 1rem 2.5rem;
-    background: linear-gradient(135deg, var(--purple), #7c3aed);
-    color: white;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    letter-spacing: 1px;
-  }
-
   /* ── QUIZ SECTION ── */
   .quiz-question {
     text-align: center;
@@ -475,16 +429,6 @@
 </style>
 </head>
 <body>
-
-<!-- ANTI-FREEZE TIMER BAR -->
-<div class="timer-bar" id="timerBar"></div>
-
-<!-- ANTI-FREEZE OVERLAY -->
-<div class="freeze-overlay" id="freezeOverlay">
-  <h2>DON'T FREEZE.</h2>
-  <p>Silence is the enemy. Say something — even if it's wrong.<br>We calibrate. We never stop.</p>
-  <button onclick="dismissFreeze()">I'M BACK</button>
-</div>
 
 <!-- HEADER -->
 <div class="header">
@@ -716,8 +660,6 @@ let streak = 0;
 let bestStreak = 0;
 let quizTimes = [];
 let quizStartTime = null;
-let freezeTimer = null;
-let freezeTimeout = 20000; // 20 seconds = anti-freeze trigger
 
 // Spaced repetition state
 let srDeck = [];
@@ -732,8 +674,6 @@ function showSection(id) {
   document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
   document.getElementById('section-' + id).classList.add('active');
   event.target.classList.add('active');
-
-  resetFreezeTimer();
 
   if (id === 'learn') renderCard();
   if (id === 'quiz') startQuiz();
@@ -763,13 +703,10 @@ function renderCard() {
   document.getElementById('learnProgress').textContent = `Word ${currentCard + 1} of ${VOCAB.length}`;
   document.getElementById('learnPercent').textContent = pct + '%';
   document.getElementById('learnFill').style.width = pct + '%';
-
-  resetFreezeTimer();
 }
 
 function flipCard() {
   document.getElementById('vocabCard').classList.toggle('card-flipped');
-  resetFreezeTimer();
 }
 
 function nextCard() {
@@ -791,7 +728,6 @@ function sayItLoud() {
     u.rate = 0.85;
     speechSynthesis.speak(u);
   }
-  resetFreezeTimer();
 }
 
 // ═══════════════════════════════════════════
@@ -844,7 +780,6 @@ function renderQuiz() {
   document.getElementById('quizFill').style.width = pct + '%';
 
   quizStartTime = Date.now();
-  resetFreezeTimer();
 }
 
 function answerQuiz(btn, correct) {
@@ -876,7 +811,6 @@ function answerQuiz(btn, correct) {
   }
 
   document.getElementById('quizNav').style.display = 'flex';
-  resetFreezeTimer();
 }
 
 function nextQuiz() {
@@ -916,15 +850,12 @@ function renderSR() {
   document.getElementById('srProgress').textContent = `Cards remaining: ${remaining}`;
   document.getElementById('srPercent').textContent = pct + '%';
   document.getElementById('srFill').style.width = pct + '%';
-
-  resetFreezeTimer();
 }
 
 function revealSR() {
   document.getElementById('srAnswer').style.display = 'block';
   document.getElementById('srRevealWrap').style.display = 'none';
   document.getElementById('srButtons').style.display = 'flex';
-  resetFreezeTimer();
 }
 
 function rateSR(quality) {
@@ -976,41 +907,9 @@ function resetAll() {
 }
 
 // ═══════════════════════════════════════════
-// ANTI-FREEZE SYSTEM
-// ═══════════════════════════════════════════
-function resetFreezeTimer() {
-  clearTimeout(freezeTimer);
-  document.getElementById('timerBar').style.width = '100%';
-
-  let start = Date.now();
-  const tick = () => {
-    const elapsed = Date.now() - start;
-    const pct = Math.max(0, 100 - (elapsed / freezeTimeout) * 100);
-    document.getElementById('timerBar').style.width = pct + '%';
-    if (pct > 0) requestAnimationFrame(tick);
-  };
-  requestAnimationFrame(tick);
-
-  freezeTimer = setTimeout(() => {
-    document.getElementById('freezeOverlay').classList.add('active');
-  }, freezeTimeout);
-}
-
-function dismissFreeze() {
-  document.getElementById('freezeOverlay').classList.remove('active');
-  resetFreezeTimer();
-}
-
-// ═══════════════════════════════════════════
 // INIT
 // ═══════════════════════════════════════════
 renderCard();
-resetFreezeTimer();
-
-// Global interaction resets freeze timer
-document.addEventListener('click', resetFreezeTimer);
-document.addEventListener('keydown', resetFreezeTimer);
-document.addEventListener('touchstart', resetFreezeTimer);
 </script>
 </body>
 </html>
