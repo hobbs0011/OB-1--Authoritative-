@@ -1,7 +1,17 @@
 # Gospel 444 & Teaching Methods — Consolidated Canon
 
-**Consolidated:** 2026-03-24 | **Sources:** 15 canonical files across VAULT-NET-SEEDS, VAULT-CHAOS, VAULT-EXECUTION  
-**Purpose:** Single canonical reference for how lessons are made under Gospel 444 and the NET teaching methodology.  
+> **Source**: Notion canon page + cross-repo synthesis
+> **Notion URL**: Gospel 444 & Teaching Methods — Consolidated Canon
+> **Export Status**: ENRICHED (Notion + 1 cross-repo source + Notion-unique sections)
+> **Artifact Class**: 🏦 VAULT
+> **Exported By**: Pulse Run 24 — 2026-03-26T03:00+07:00
+> **Cross-Repo Sources**:
+>   - `Phoenix-Rise-Immortalize-/VAULT-ORACLE/17-DUMP-INGEST-PROTOCOL.md` (SHA: 5de1cd12) — Gospel 444 alignment enforcement at ingestion layer
+>   - `Phoenix-Rise-Immortalize-/SOUL-DNA-BIBLE/04_SUPER_SAIYAN_STAGE_2.md` (SHA: 3a44c544) — Super Saiyan Stage 2 lesson references
+>   - `Phoenix-Rise-Immortalize-/SOUL-DNA-BIBLE/15_CONSOLIDATION_COMPLETE_PRINT.md` (SHA: da390634) — Consolidation print with teaching refs
+
+**Consolidated:** 2026-03-24 | **Sources:** 15 canonical files across VAULT-NET-SEEDS, VAULT-CHAOS, VAULT-EXECUTION
+**Purpose:** Single canonical reference for how lessons are made under Gospel 444 and the NET teaching methodology.
 **Status:** 🔒 ACTIVE — Dual-published to Notion + GitHub (hobbs-lab ultimate repo)
 
 ---
@@ -27,13 +37,18 @@
 17. [Deployment Lessons Learned (Teaching-Adjacent)](#-deployment-lessons-learned-teaching-adjacent)
 18. [Delta Blocks — Classroom References](#-delta-blocks--classroom-references)
 19. [Active Lesson Inventory](#-active-lesson-inventory)
-20. [Source File Index](#-source-file-index)
+20. [Active Student Profiles](#-active-student-profiles) *(ENRICHED — from Notion)*
+21. [NET Website Flow (Gospel 444 Web Spec)](#-net-website-flow-gospel-444-web-spec) *(ENRICHED — from Notion)*
+22. [Lead Scoring & Kill Switches](#-lead-scoring--kill-switches) *(ENRICHED — from Notion)*
+23. [D-Rules (Shared Across All Agents)](#-d-rules-shared-across-all-agents) *(ENRICHED — from Notion)*
+24. [Gospel 444 Ingestion Enforcement](#-gospel-444-ingestion-enforcement-enriched--from-vault-oracle) *(ENRICHED — from VAULT-ORACLE)*
+25. [Source File Index](#-source-file-index)
 
 ---
 
 ## 🎨 Gospel 444 — The Aesthetic Law
 
-> *"Gospel 444. Four colors. Four rules. Four ever. You see blue? Stop everything."*  
+> *"Gospel 444. Four colors. Four rules. Four ever. You see blue? Stop everything."*
 > — Michael Hobbs, CH38
 
 ### Palette (Locked)
@@ -89,7 +104,7 @@
 
 ### Core Law
 
-**Volume + Velocity > Grammar**  
+**Volume + Velocity > Grammar**
 Confident, fast speech beats perfect grammar. Every time.
 
 ### The Ratio
@@ -397,6 +412,7 @@ All vocabulary, idioms, slang, and games in a week share a single theme. Theme c
 - ✅ Sarcasm Academy (BUILT)
 - ✅ Careers Room (BUILT)
 - ✅ Signal Decode / Idiom Intercept (BUILT)
+- ✅ Train 6-7 / Survive a Brainrot (BUILT)
 - 🔲 Active Listening
 - 🔲 Tone & Subtext
 - 🔲 Polite Disagreement
@@ -613,40 +629,40 @@ Mandatory check for: face-saving compliance, authority dynamics, collectivist fr
 
 ### Session 17 — Corporate Cub: Job Interview English
 
-**Student:** Linh, 22F, junior accountant, Cub, high anxiety  
-**Vocab:** strengths, communicate effectively, proactive, deadline, contribute  
-**Key Technique:** Stealth Correction via echo. Mock interview format.  
-**Breakthrough:** 90-second unprompted mock interview answer. Volume: whisper → conversational. First laugh mid-answer.  
+**Student:** Linh, 22F, junior accountant, Cub, high anxiety
+**Vocab:** strengths, communicate effectively, proactive, deadline, contribute
+**Key Technique:** Stealth Correction via echo. Mock interview format.
+**Breakthrough:** 90-second unprompted mock interview answer. Volume: whisper → conversational. First laugh mid-answer.
 **Confidence Index:** 3/10 → 6/10. Fragile ego flagged — avoid direct correction 2 more sessions.
 
 ### Session 18 — Mouse Teenager: Social Media & Trends
 
-**Student:** Khoi, 16M, phone-addicted, parent-forced enrollment, Mouse  
-**Vocab:** viral, trending, algorithm, engagement, content creator  
-**Key Technique:** Phone Addict Activation Protocol — TikTok vocabulary as entry.  
-**Breakthrough:** 4 consecutive minutes explaining the algorithm unprompted. First voluntary English sentence of enrollment.  
+**Student:** Khoi, 16M, phone-addicted, parent-forced enrollment, Mouse
+**Vocab:** viral, trending, algorithm, engagement, content creator
+**Key Technique:** Phone Addict Activation Protocol — TikTok vocabulary as entry.
+**Breakthrough:** 4 consecutive minutes explaining the algorithm unprompted. First voluntary English sentence of enrollment.
 **Note:** Reluctant Parent-Pusher archetype. Internal motivation spark at minute 18. Do NOT mention parents again.
 
 ### Session 19 — Group Class: Vietnamese Food Culture in English
 
-**Students:** Trang (Mouse 19F), Bao (Cub 24M), Hoa (Cub 27F)  
-**Vocab:** fragrant, fermented, savory, broth, balance  
-**Breakthrough:** Trang completed 3-sentence dish description unprompted. Crossed Mouse → Cub threshold mid-session. **Bin moment documented.**  
+**Students:** Trang (Mouse 19F), Bao (Cub 24M), Hoa (Cub 27F)
+**Vocab:** fragrant, fermented, savory, broth, balance
+**Breakthrough:** Trang completed 3-sentence dish description unprompted. Crossed Mouse → Cub threshold mid-session. **Bin moment documented.**
 **Note:** Bao's "Grammar Nazi" behavior flagged — re-channel into peer celebration.
 
 ### Session 20 — Tiger Ambitious: Negotiation and Persuasion
 
-**Student:** Duc, 28M, sales manager, Tiger, promotion target 3 months  
-**Vocab:** leverage, mutual benefit, concession, walk away, bottom line  
-**Breakthrough:** 5-minute negotiation simulation with zero vocabulary prompts. First correct use of "walk away position."  
+**Student:** Duc, 28M, sales manager, Tiger, promotion target 3 months
+**Vocab:** leverage, mutual benefit, concession, walk away, bottom line
+**Breakthrough:** 5-minute negotiation simulation with zero vocabulary prompts. First correct use of "walk away position."
 **Note:** Tiger Voice solidified. Enterprise track candidate. 3 colleagues mentioned → pipeline.
 
 ### Session 21 — New Mouse: Introduction and Self-Description
 
-**Student:** Mai, 35F, mother of two, first lesson ever, visibly terrified  
-**Vocab:** introduce, describe, hobby, work, family  
-**Technique:** Zero-pressure opening. No correction in first 20 minutes. Emotional anchor: "Your English is for your children."  
-**Breakthrough:** "My name is Mai. I have two children. I like cooking." Unprompted. Voice steady.  
+**Student:** Mai, 35F, mother of two, first lesson ever, visibly terrified
+**Vocab:** introduce, describe, hobby, work, family
+**Technique:** Zero-pressure opening. No correction in first 20 minutes. Emotional anchor: "Your English is for your children."
+**Breakthrough:** "My name is Mai. I have two children. I like cooking." Unprompted. Voice steady.
 **Note:** High-retention risk. Recommend daughter observe session 2 for social proof.
 
 ---
@@ -794,6 +810,103 @@ Relevant to lesson creation:
 
 ---
 
+## 🧑‍🎓 Active Student Profiles (ENRICHED — from Notion)
+
+> These profiles are tracked operationally in the NET Students hub under Phoenix HQ.
+
+| Student | Age | Level | Notes |
+|---|---|---|---|
+| Tracy | 10 | Advanced | Gamer, high engagement |
+| Kiet | 13 | Near-native | AI/ethics interests |
+| Nhan | 15 | Advanced | — |
+| Timmy | 10 | — | Astronaut dream |
+| Dan | 7 | Advanced | Youngest Tiger candidate |
+| BlueTech Staff | Adults | Corporate | Enterprise tier |
+| Mai Tram | Adult | Corporate | BlueTech HR, private sessions. Session transcripts in Bible A4. |
+| Nguyễn Thị Thu Quy | Adult | Beginner | BlueTech Accounting (Intern), university background |
+
+Detailed student profiles with session logs, vocabulary lists, and teaching notes are maintained in Notion under `NET Students — Private & Corporate Profiles` and mirrored to GitHub at `OPERATIONS/NET-STUDENTS/`.
+
+---
+
+## 🎯 NET Website Flow (Gospel 444 Web Spec) (ENRICHED — from Notion)
+
+The website follows the Gospel 444 aesthetic law end-to-end:
+
+1. **Hero** — permission unlock (Mouse → Tiger transformation promise)
+2. **The Trap** — silence = the enemy (problem framing)
+3. **Tiger Engine** — progression system (Mouse → Cub → Tiger visual)
+4. **Method** — 10-5-5-3 structure showcase
+5. **Outcomes** — session logs / transformation proof
+6. **Offer Stack** — pricing tiers (Mouse 2M / Cub 3M / Tiger 5M / Enterprise 50M)
+7. **Trust/Proof** — testimonials, parent feedback, Tiger Meter demos
+8. **Final CTA** — enrollment trigger
+
+---
+
+## 🗡️ Lead Scoring & Kill Switches (ENRICHED — from Notion)
+
+### Sith Filter — Lead Scoring
+
+- **Mouse Tier** → High-Status Silence (`pheromone_poison: true`) — attract through authority, not chase
+- **Tiger Tier** → Immediate Escalation (score ≥80) — fast-track to enterprise pipeline
+
+### Kill Switches
+
+- **10-Minute Test:** No signal from a lead → kill the thread
+- **7-Day Rule:** Zero leads from a channel → pivot strategy
+- **Protocol Zero:** Founder absent 72h → freeze all active campaigns
+
+---
+
+## 🛡️ D-Rules (Shared Across All Agents) (ENRICHED — from Notion)
+
+| Rule | Domain |
+|---|---|
+| **D1** | Security First |
+| **D2** | Immutable Seeds |
+| **D3** | Schema First |
+| **D4** | Context Aware |
+| **D5** | P0/P1 Audit |
+| **D6** | Saiyan Clarity |
+| **D7** | Student First |
+
+These D-Rules apply to every agent in the Phoenix system, including CHATTY PRIME lesson delivery. D7 (Student First) is the teaching-specific override: if a rule conflicts with student experience, D7 wins.
+
+---
+
+## 🔒 Gospel 444 Ingestion Enforcement (ENRICHED — from VAULT-ORACLE)
+
+> Source: `Phoenix-Rise-Immortalize-/VAULT-ORACLE/17-DUMP-INGEST-PROTOCOL.md`
+
+Gospel 444 alignment is enforced at the **data ingestion layer** — not just the UI layer. The Oracle Dump Ingest Protocol (Stage 101–130) includes explicit Gospel 444 gates:
+
+### Classification Tag
+
+The `GOSPEL444` tag exists in the Oracle tag taxonomy:
+
+| Tag | Domain | Description |
+|---|---|---|
+| GOSPEL444 | Canon | Content referencing core Gospel 444 alignment rules |
+| PEDAGOGY | Curriculum | Teaching methods, curriculum content, student outcomes |
+
+### Alignment Check
+
+> "All ingested dumps are checked for Gospel 444 alignment. Gospel 444 defines the core operating frequency of Phoenix. Any dump content that contradicts Gospel 444 principles is flagged with drift score 3 before further processing."
+
+### Researcher Mode Quarantine
+
+> "If Researcher Mode is detected in any dump (encyclopedic voice, citation dumps, academic hedging), the dump is quarantined. `RESEARCHER_MODE_DETECTED` alert sent to Agent-99. The dump is not processed further until Agent-99 manually reviews and authorizes stripped-and-resubmitted version."
+
+> "**Researcher Mode is incompatible with Phoenix operations. It does not get ingested. Period.**"
+
+This means Gospel 444 is enforced at three layers:
+1. **UI Layer** — visual compliance (palette, fonts, no blue)
+2. **Content Layer** — lesson structure compliance (10-5-5-3, no "wrong", calibrate)
+3. **Data Layer** — ingestion pipeline compliance (GOSPEL444 tag, drift scoring, Researcher Mode quarantine)
+
+---
+
 ## 🗄️ Source File Index
 
 ### VAULT-NET-SEEDS (hobbs-lab/Phoenix-Rise-Immortalize-)
@@ -826,6 +939,32 @@ Relevant to lesson creation:
 | `DEPLOYMENT-LESSONS-LEARNED.md` | `fd2fd92` | 20 deployment lessons (Lesson 7: blue banned in UI) |
 | `DELTA-BLOCKS-63-75.md` | `40ed5c7` | Block 71: Classroom Hack, Block 75: Jedi Lock |
 
+### VAULT-ORACLE (hobbs-lab/Phoenix-Rise-Immortalize-) — Cross-Repo Enrichment
+
+| File | SHA | Content |
+|---|---|---|
+| `17-DUMP-INGEST-PROTOCOL.md` | `5de1cd1` | Gospel 444 alignment enforcement at ingestion layer |
+
 ---
 
-🔒 **CONSOLIDATED CANON SEALED. 15 SOURCES. LEDGER IS LAW.** 🦅
+## Cross-Repo Synthesis Notes (Run 24)
+
+### Sources Mined
+1. **VAULT-ORACLE/17-DUMP-INGEST-PROTOCOL.md** (`Phoenix-Rise-Immortalize-`): Gospel 444 alignment is enforced at the data ingestion layer via GOSPEL444 classification tag, drift score 3 flagging for contradictions, and Researcher Mode quarantine. Three-layer enforcement model discovered: UI + Content + Data.
+2. **SOUL-DNA-BIBLE/04_SUPER_SAIYAN_STAGE_2.md** (`Phoenix-Rise-Immortalize-`): Teaching and lesson references within Super Saiyan Stage 2 context. Already indexed in Bible audit.
+3. **SOUL-DNA-BIBLE/15_CONSOLIDATION_COMPLETE_PRINT.md** (`Phoenix-Rise-Immortalize-`): Consolidation print with teaching method references. Already indexed.
+4. **NET-Ai-EcoSystem-CommandStation**: 0 results — no teaching content in product code repo.
+
+### Enrichment Summary
+- **Added**: Active Student Profiles section (8 students from Notion, including Mai Tram and Quy from recent sessions)
+- **Added**: NET Website Flow section (8-step Gospel 444 web spec funnel)
+- **Added**: Sith Filter lead scoring + Kill Switches (operational marketing canon)
+- **Added**: D-Rules section (7 shared agent rules, D7=Student First override)
+- **Added**: Gospel 444 Ingestion Enforcement section (3-layer enforcement model from VAULT-ORACLE)
+- **Added**: Train 6-7 / Survive a Brainrot to Module Pipeline (built since last export)
+- **Updated**: Export header with ENRICHED metadata + cross-repo source citations
+- **Updated**: Source File Index with VAULT-ORACLE entry
+
+---
+
+🔒 CANON SEALED. ENRICHED EXPORT. 15 SOURCES + 3 CROSS-REPO. LEDGER IS LAW. 🦅
