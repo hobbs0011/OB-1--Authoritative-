@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NET — Vocabulary 001: Daily Survival English</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --void: #0f0f1a;
+    --purple: #a855f7;
+    --purple-dim: #a855f740;
+    --purple-glow: #a855f720;
+    --gold: #f59e0b;
+    --gold-dim: #f59e0b40;
+    --gold-glow: #f59e0b15;
+    --light: #e2e8f0;
+    --muted: #94a3b8;
+    --success: #22c55e;
+    --calibrate: #f59e0b;
+    --card-bg: #1a1a2e;
+    --card-border: #2a2a4a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--void);
+    color: var(--light);
+    font-family: 'Rajdhani', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── BACKGROUND GRID ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, var(--purple-glow) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 50%, var(--gold-glow) 0%, transparent 50%),
+      linear-gradient(180deg, transparent 0%, var(--void) 100%);
+    z-index: -1;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    text-align: center;
+    padding: 2.5rem 1rem 1.5rem;
+    border-bottom: 1px solid var(--card-border);
+  }
+  .header .brand {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+  .header h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(1.4rem, 4vw, 2.2rem);
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--purple), var(--gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.3rem;
+  }
+  .header .subtitle {
+    font-family: 'Rajdhani', sans-serif;
+    color: var(--muted);
+    font-size: 1rem;
+    font-weight: 400;
+  }
+  .tier-badge {
+    display: inline-block;
+    margin-top: 0.75rem;
+    padding: 0.25rem 1rem;
+    border: 1px solid var(--purple);
+    border-radius: 100px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    color: var(--purple);
+    text-transform: uppercase;
+  }
+
+  /* ── NAV TABS ── */
+  .nav {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    padding: 0 1rem;
+    margin-top: 1.5rem;
+    border-bottom: 1px solid var(--card-border);
+  }
+  .nav button {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    background: none;
+    border: none;
+    color: var(--muted);
+    padding: 0.75rem 1.25rem;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+  }
+  .nav button:hover { color: var(--light); }
+  .nav button.active {
+    color: var(--gold);
+    border-bottom-color: var(--gold);
+  }
+
+  /* ── SECTIONS ── */
+  .section { display: none; padding: 1.5rem 1rem 3rem; max-width: 720px; margin: 0 auto; }
+  .section.active { display: block; }
+
+  /* ── PROGRESS BAR ── */
+  .progress-wrap {
+    margin-bottom: 1.5rem;
+  }
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-bottom: 0.4rem;
+    font-family: 'Inter', sans-serif;
+  }
+  .progress-bar {
+    height: 6px;
+    background: var(--card-border);
+    border-radius: 100px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--purple), var(--gold));
+    border-radius: 100px;
+    transition: width 0.5s ease;
+    width: 0%;
+  }
+
+  /* ── VOCAB CARD ── */
+  .vocab-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+    min-height: 220px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .vocab-card:hover { border-color: var(--purple-dim); }
+  .vocab-card .word-number {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 3px;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .vocab-card .word {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+  .vocab-card .pronunciation {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    color: var(--purple);
+    margin-bottom: 1rem;
+    font-style: italic;
+  }
+  .vocab-card .definition {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.1rem;
+    color: var(--light);
+    line-height: 1.5;
+    margin-bottom: 0.75rem;
+  }
+  .vocab-card .example {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    color: var(--muted);
+    font-style: italic;
+    line-height: 1.6;
+    padding: 0.75rem;
+    background: #0f0f1a80;
+    border-radius: 8px;
+    border-left: 3px solid var(--purple-dim);
+  }
+  .vocab-card .example strong { color: var(--gold); font-style: normal; }
+  .vocab-card .tap-hint {
+    font-size: 0.7rem;
+    color: var(--muted);
+    margin-top: 1rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-family: 'Inter', sans-serif;
+  }
+  .card-flipped .front-face { display: none; }
+  .card-flipped .back-face { display: block !important; }
+  .back-face { display: none; }
+
+  /* ── CARD NAV ── */
+  .card-nav {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  .card-nav button {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+    padding: 0.6rem 1.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--card-border);
+    background: var(--card-bg);
+    color: var(--light);
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: all 0.2s;
+  }
+  .card-nav button:hover { border-color: var(--purple); }
+  .card-nav button.btn-gold {
+    background: linear-gradient(135deg, var(--gold), #d97706);
+    color: var(--void);
+    border: none;
+    font-weight: 700;
+  }
+
+  /* ── ANTI-FREEZE TIMER ── */
+  .timer-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--purple), var(--gold));
+    z-index: 999;
+    transition: width 0.1s linear;
+  }
+  .freeze-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: #0f0f1aee;
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 2rem;
+  }
+  .freeze-overlay.active { display: flex; }
+  .freeze-overlay h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.8rem;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+  .freeze-overlay p {
+    color: var(--muted);
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+  }
+  .freeze-overlay button {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1rem;
+    padding: 1rem 2.5rem;
+    background: linear-gradient(135deg, var(--purple), #7c3aed);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    letter-spacing: 1px;
+  }
+
+  /* ── QUIZ SECTION ── */
+  .quiz-question {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  .quiz-question .prompt {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 0.75rem;
+  }
+  .quiz-question .target-word {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.8rem;
+    color: var(--gold);
+  }
+  .quiz-options {
+    display: grid;
+    gap: 0.75rem;
+  }
+  .quiz-option {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.05rem;
+    color: var(--light);
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: left;
+  }
+  .quiz-option:hover { border-color: var(--purple); }
+  .quiz-option.correct {
+    border-color: var(--success);
+    background: #22c55e15;
+    color: var(--success);
+  }
+  .quiz-option.wrong {
+    border-color: var(--calibrate);
+    background: #f59e0b10;
+    color: var(--calibrate);
+  }
+
+  /* ── FEEDBACK TOAST ── */
+  .feedback {
+    text-align: center;
+    padding: 1rem;
+    border-radius: 12px;
+    margin-top: 1rem;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    display: none;
+  }
+  .feedback.show { display: block; }
+  .feedback.success { background: #22c55e15; color: var(--success); border: 1px solid #22c55e40; }
+  .feedback.calibrate { background: #f59e0b10; color: var(--calibrate); border: 1px solid #f59e0b40; }
+
+  /* ── SPACED REPETITION SECTION ── */
+  .sr-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    min-height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+  .sr-card .sr-word {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2rem;
+    color: var(--purple);
+    margin-bottom: 1.5rem;
+  }
+  .sr-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+  .sr-btn {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 0.5rem 1.25rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .sr-btn.again { background: #ef444430; color: #f87171; border: 1px solid #ef444440; }
+  .sr-btn.hard { background: #f59e0b15; color: var(--gold); border: 1px solid var(--gold-dim); }
+  .sr-btn.good { background: #22c55e15; color: var(--success); border: 1px solid #22c55e40; }
+  .sr-btn.easy { background: #a855f715; color: var(--purple); border: 1px solid var(--purple-dim); }
+
+  /* ── SCORE DISPLAY ── */
+  .score-display {
+    text-align: center;
+    padding: 2rem;
+  }
+  .score-display .score-number {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 4rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--purple), var(--gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .score-display .score-label {
+    font-size: 0.8rem;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-family: 'Inter', sans-serif;
+  }
+  .tier-result {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.5rem 2rem;
+    border-radius: 100px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+  }
+  .tier-mouse { background: #ef444420; color: #f87171; border: 1px solid #ef444440; }
+  .tier-cub { background: #f59e0b15; color: var(--gold); border: 1px solid var(--gold-dim); }
+  .tier-tiger { background: #22c55e15; color: var(--success); border: 1px solid #22c55e40; }
+
+  /* ── STATS GRID ── */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+  .stat-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 1rem;
+    text-align: center;
+  }
+  .stat-card .stat-value {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.4rem;
+    color: var(--gold);
+  }
+  .stat-card .stat-name {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 0.25rem;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    text-align: center;
+    padding: 2rem 1rem;
+    border-top: 1px solid var(--card-border);
+    margin-top: 2rem;
+  }
+  .footer p {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    color: var(--muted);
+    letter-spacing: 1px;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 480px) {
+    .nav button { padding: 0.6rem 0.8rem; font-size: 0.8rem; }
+    .vocab-card { padding: 1.5rem; }
+    .sr-buttons { gap: 0.5rem; }
+    .sr-btn { padding: 0.5rem 0.75rem; font-size: 0.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ANTI-FREEZE TIMER BAR -->
+<div class="timer-bar" id="timerBar"></div>
+
+<!-- ANTI-FREEZE OVERLAY -->
+<div class="freeze-overlay" id="freezeOverlay">
+  <h2>DON'T FREEZE.</h2>
+  <p>Silence is the enemy. Say something — even if it's wrong.<br>We calibrate. We never stop.</p>
+  <button onclick="dismissFreeze()">I'M BACK</button>
+</div>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="brand">Natural English Training</div>
+  <h1>Daily Survival English</h1>
+  <div class="subtitle">10 Words That Keep You Alive in Conversation</div>
+  <div class="tier-badge">Lesson 001 · All Tiers</div>
+</div>
+
+<!-- NAV -->
+<div class="nav">
+  <button class="active" onclick="showSection('learn')">Learn</button>
+  <button onclick="showSection('quiz')">Quiz</button>
+  <button onclick="showSection('spaced')">Spaced Rep</button>
+  <button onclick="showSection('score')">Score</button>
+</div>
+
+<!-- ═══════════ LEARN SECTION ═══════════ -->
+<div class="section active" id="section-learn">
+  <div class="progress-wrap">
+    <div class="progress-label">
+      <span id="learnProgress">Word 1 of 10</span>
+      <span id="learnPercent">0%</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="learnFill"></div></div>
+  </div>
+
+  <div class="vocab-card" id="vocabCard" onclick="flipCard()">
+    <div class="front-face">
+      <div class="word-number" id="wordNum">WORD 01</div>
+      <div class="word" id="wordText"></div>
+      <div class="pronunciation" id="wordPron"></div>
+      <div class="tap-hint">tap to reveal</div>
+    </div>
+    <div class="back-face">
+      <div class="word-number" id="wordNum2">WORD 01</div>
+      <div class="word" id="wordText2"></div>
+      <div class="definition" id="wordDef"></div>
+      <div class="example" id="wordEx"></div>
+    </div>
+  </div>
+
+  <div class="card-nav">
+    <button onclick="prevCard()">← Back</button>
+    <button onclick="sayItLoud()" style="border-color:var(--purple); color:var(--purple);">🔊 Say It</button>
+    <button class="btn-gold" onclick="nextCard()">Next →</button>
+  </div>
+</div>
+
+<!-- ═══════════ QUIZ SECTION ═══════════ -->
+<div class="section" id="section-quiz">
+  <div class="progress-wrap">
+    <div class="progress-label">
+      <span id="quizProgress">Question 1 of 10</span>
+      <span id="quizPercent">0%</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="quizFill"></div></div>
+  </div>
+
+  <div class="quiz-question">
+    <div class="prompt">What does this word mean?</div>
+    <div class="target-word" id="quizWord"></div>
+  </div>
+
+  <div class="quiz-options" id="quizOptions"></div>
+  <div class="feedback" id="quizFeedback"></div>
+
+  <div class="card-nav" id="quizNav" style="display:none; margin-top:1.5rem;">
+    <button class="btn-gold" onclick="nextQuiz()">Next →</button>
+  </div>
+</div>
+
+<!-- ═══════════ SPACED REPETITION ═══════════ -->
+<div class="section" id="section-spaced">
+  <div class="progress-wrap">
+    <div class="progress-label">
+      <span id="srProgress">Cards remaining: 10</span>
+      <span id="srPercent">0%</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="srFill"></div></div>
+  </div>
+
+  <div class="sr-card">
+    <div class="sr-word" id="srWord"></div>
+    <div id="srAnswer" style="display:none; margin-bottom:1.5rem;">
+      <div class="definition" id="srDef" style="margin-bottom:0.5rem;"></div>
+      <div class="example" id="srEx" style="font-family:'Inter',sans-serif; font-size:0.85rem; color:var(--muted); font-style:italic;"></div>
+    </div>
+    <div id="srRevealWrap">
+      <button class="btn-gold" onclick="revealSR()" style="font-family:'Rajdhani',sans-serif; font-weight:600; font-size:1rem; padding:0.75rem 2rem; border-radius:8px; border:none; cursor:pointer;">Show Answer</button>
+    </div>
+    <div class="sr-buttons" id="srButtons" style="display:none;">
+      <button class="sr-btn again" onclick="rateSR(0)">Again</button>
+      <button class="sr-btn hard" onclick="rateSR(1)">Hard</button>
+      <button class="sr-btn good" onclick="rateSR(2)">Good</button>
+      <button class="sr-btn easy" onclick="rateSR(3)">Easy</button>
+    </div>
+  </div>
+
+  <div id="srComplete" style="display:none; text-align:center; padding:2rem;">
+    <h2 style="font-family:'Orbitron',sans-serif; color:var(--gold); margin-bottom:1rem;">SESSION COMPLETE</h2>
+    <p style="color:var(--muted);">Every word reviewed. Come back tomorrow — spaced repetition locks it in.</p>
+    <button class="btn-gold" onclick="resetSR()" style="margin-top:1.5rem; font-family:'Rajdhani',sans-serif; font-weight:600; padding:0.75rem 2rem; border-radius:8px; border:none; cursor:pointer;">Run It Again</button>
+  </div>
+</div>
+
+<!-- ═══════════ SCORE SECTION ═══════════ -->
+<div class="section" id="section-score">
+  <div class="score-display">
+    <div class="score-label">Your Tiger Score</div>
+    <div class="score-number" id="finalScore">—</div>
+    <div id="tierBadge"></div>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-value" id="statCorrect">0</div>
+      <div class="stat-name">Correct</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value" id="statCalibrate">0</div>
+      <div class="stat-name">Calibrated</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value" id="statStreak">0</div>
+      <div class="stat-name">Best Streak</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value" id="statSpeed">—</div>
+      <div class="stat-name">Avg Speed</div>
+    </div>
+  </div>
+
+  <div style="text-align:center; margin-top:2rem;">
+    <button class="btn-gold" onclick="resetAll()" style="font-family:'Rajdhani',sans-serif; font-weight:600; font-size:1rem; padding:0.75rem 2.5rem; border-radius:8px; border:none; cursor:pointer;">Run It Again 🔁</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <p>NATURAL ENGLISH TRAINING · MOUSE → TIGER · VOLUME + VELOCITY > GRAMMAR</p>
+</div>
+
+<script>
+// ═══════════════════════════════════════════
+// VOCAB DATA — 10 DAILY SURVIVAL WORDS
+// ═══════════════════════════════════════════
+const VOCAB = [
+  {
+    word: "Actually",
+    pron: "/ˈæk.tʃu.ə.li/",
+    def: "Used to emphasize what is real or true, often correcting a misunderstanding.",
+    example: '"<strong>Actually</strong>, I changed my mind — let\'s eat somewhere else."',
+    wrong: ["Maybe, perhaps", "In the future", "Never, not once"]
+  },
+  {
+    word: "Basically",
+    pron: "/ˈbeɪ.sɪ.kəl.i/",
+    def: "Used to simplify or summarize the main point.",
+    example: '"<strong>Basically</strong>, we need to finish this by Friday or we\'re in trouble."',
+    wrong: ["In a complicated way", "Secretly, in private", "Loudly, with force"]
+  },
+  {
+    word: "Apparently",
+    pron: "/əˈpær.ənt.li/",
+    def: "Based on what you heard or read — not confirmed by you personally.",
+    example: '"<strong>Apparently</strong>, the meeting got moved to 3 PM."',
+    wrong: ["Definitely, for certain", "Quietly and carefully", "Angrily and loudly"]
+  },
+  {
+    word: "Honestly",
+    pron: "/ˈɒn.ɪst.li/",
+    def: "Used to show you are giving your real, unfiltered opinion.",
+    example: '"<strong>Honestly</strong>, I don\'t think this plan is going to work."',
+    wrong: ["In a dishonest way", "Without any emotion", "Very quickly"]
+  },
+  {
+    word: "Grab",
+    pron: "/ɡræb/",
+    def: "To quickly get or take something — very casual.",
+    example: '"Let me <strong>grab</strong> my jacket and we can go."',
+    wrong: ["To throw away", "To carefully examine", "To slowly build"]
+  },
+  {
+    word: "Figure out",
+    pron: "/ˈfɪɡ.ər aʊt/",
+    def: "To solve or understand something through thinking.",
+    example: '"I need to <strong>figure out</strong> how to get to the airport from here."',
+    wrong: ["To forget completely", "To give up on", "To hide from others"]
+  },
+  {
+    word: "Deal with",
+    pron: "/diːl wɪð/",
+    def: "To handle or manage a situation or problem.",
+    example: '"I\'ll <strong>deal with</strong> the complaint — don\'t worry about it."',
+    wrong: ["To ignore forever", "To make worse", "To celebrate happily"]
+  },
+  {
+    word: "End up",
+    pron: "/end ʌp/",
+    def: "To finally be in a situation that you didn't plan.",
+    example: '"We got lost and <strong>ended up</strong> in a completely different city."',
+    wrong: ["To start something new", "To plan carefully", "To refuse to go"]
+  },
+  {
+    word: "Run into",
+    pron: "/rʌn ˈɪn.tuː/",
+    def: "To meet someone by accident, or to encounter a problem.",
+    example: '"I <strong>ran into</strong> my old teacher at the coffee shop yesterday."',
+    wrong: ["To avoid someone", "To crash a vehicle", "To schedule a meeting"]
+  },
+  {
+    word: "Sort of",
+    pron: "/sɔːrt ɒv/",
+    def: "Kind of, somewhat — used to soften a statement.",
+    example: '"I <strong>sort of</strong> understand, but can you explain that last part again?"',
+    wrong: ["Completely, 100%", "Never, not at all", "To organize items"]
+  }
+];
+
+// ═══════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════
+let currentCard = 0;
+let quizIndex = 0;
+let quizCorrect = 0;
+let quizCalibrated = 0;
+let streak = 0;
+let bestStreak = 0;
+let quizTimes = [];
+let quizStartTime = null;
+let freezeTimer = null;
+let freezeTimeout = 20000; // 20 seconds = anti-freeze trigger
+
+// Spaced repetition state
+let srDeck = [];
+let srCurrentIndex = 0;
+let srCompleted = 0;
+
+// ═══════════════════════════════════════════
+// NAVIGATION
+// ═══════════════════════════════════════════
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById('section-' + id).classList.add('active');
+  event.target.classList.add('active');
+
+  resetFreezeTimer();
+
+  if (id === 'learn') renderCard();
+  if (id === 'quiz') startQuiz();
+  if (id === 'spaced') initSR();
+  if (id === 'score') renderScore();
+}
+
+// ═══════════════════════════════════════════
+// LEARN MODE (FLASHCARDS)
+// ═══════════════════════════════════════════
+function renderCard() {
+  const v = VOCAB[currentCard];
+  const num = String(currentCard + 1).padStart(2, '0');
+  document.getElementById('wordNum').textContent = 'WORD ' + num;
+  document.getElementById('wordNum2').textContent = 'WORD ' + num;
+  document.getElementById('wordText').textContent = v.word;
+  document.getElementById('wordText2').textContent = v.word;
+  document.getElementById('wordPron').textContent = v.pron;
+  document.getElementById('wordDef').textContent = v.def;
+  document.getElementById('wordEx').innerHTML = v.example;
+
+  // Reset flip
+  document.getElementById('vocabCard').classList.remove('card-flipped');
+
+  // Progress
+  const pct = Math.round(((currentCard) / VOCAB.length) * 100);
+  document.getElementById('learnProgress').textContent = `Word ${currentCard + 1} of ${VOCAB.length}`;
+  document.getElementById('learnPercent').textContent = pct + '%';
+  document.getElementById('learnFill').style.width = pct + '%';
+
+  resetFreezeTimer();
+}
+
+function flipCard() {
+  document.getElementById('vocabCard').classList.toggle('card-flipped');
+  resetFreezeTimer();
+}
+
+function nextCard() {
+  if (currentCard < VOCAB.length - 1) { currentCard++; renderCard(); }
+  else {
+    // Auto-advance to quiz
+    document.querySelectorAll('.nav button')[1].click();
+  }
+}
+function prevCard() {
+  if (currentCard > 0) { currentCard--; renderCard(); }
+}
+
+function sayItLoud() {
+  const word = VOCAB[currentCard].word;
+  if ('speechSynthesis' in window) {
+    const u = new SpeechSynthesisUtterance(word);
+    u.lang = 'en-US';
+    u.rate = 0.85;
+    speechSynthesis.speak(u);
+  }
+  resetFreezeTimer();
+}
+
+// ═══════════════════════════════════════════
+// QUIZ MODE
+// ═══════════════════════════════════════════
+let quizOrder = [];
+
+function startQuiz() {
+  quizOrder = [...Array(VOCAB.length).keys()].sort(() => Math.random() - 0.5);
+  quizIndex = 0;
+  quizCorrect = 0;
+  quizCalibrated = 0;
+  streak = 0;
+  bestStreak = 0;
+  quizTimes = [];
+  renderQuiz();
+}
+
+function renderQuiz() {
+  if (quizIndex >= VOCAB.length) {
+    document.querySelectorAll('.nav button')[3].click();
+    return;
+  }
+
+  const v = VOCAB[quizOrder[quizIndex]];
+  document.getElementById('quizWord').textContent = v.word;
+
+  // Build options: 1 correct + 3 wrong
+  const options = [{ text: v.def, correct: true }];
+  v.wrong.forEach(w => options.push({ text: w, correct: false }));
+  options.sort(() => Math.random() - 0.5);
+
+  const container = document.getElementById('quizOptions');
+  container.innerHTML = '';
+  options.forEach(opt => {
+    const btn = document.createElement('div');
+    btn.className = 'quiz-option';
+    btn.textContent = opt.text;
+    btn.onclick = () => answerQuiz(btn, opt.correct);
+    container.appendChild(btn);
+  });
+
+  document.getElementById('quizFeedback').className = 'feedback';
+  document.getElementById('quizFeedback').style.display = 'none';
+  document.getElementById('quizNav').style.display = 'none';
+
+  const pct = Math.round((quizIndex / VOCAB.length) * 100);
+  document.getElementById('quizProgress').textContent = `Question ${quizIndex + 1} of ${VOCAB.length}`;
+  document.getElementById('quizPercent').textContent = pct + '%';
+  document.getElementById('quizFill').style.width = pct + '%';
+
+  quizStartTime = Date.now();
+  resetFreezeTimer();
+}
+
+function answerQuiz(btn, correct) {
+  // Prevent double-tap
+  if (document.querySelector('.quiz-option.correct, .quiz-option.wrong')) return;
+
+  const elapsed = ((Date.now() - quizStartTime) / 1000).toFixed(1);
+  quizTimes.push(parseFloat(elapsed));
+
+  const fb = document.getElementById('quizFeedback');
+
+  if (correct) {
+    btn.classList.add('correct');
+    quizCorrect++;
+    streak++;
+    if (streak > bestStreak) bestStreak = streak;
+    fb.textContent = `🔥 Yes! ${elapsed}s — keep that velocity.`;
+    fb.className = 'feedback show success';
+  } else {
+    btn.classList.add('wrong');
+    streak = 0;
+    quizCalibrated++;
+    // Show correct answer
+    document.querySelectorAll('.quiz-option').forEach(o => {
+      if (o.textContent === VOCAB[quizOrder[quizIndex]].def) o.classList.add('correct');
+    });
+    fb.textContent = `⚡ Calibrating — not wrong, just recalibrating. Lock it in.`;
+    fb.className = 'feedback show calibrate';
+  }
+
+  document.getElementById('quizNav').style.display = 'flex';
+  resetFreezeTimer();
+}
+
+function nextQuiz() {
+  quizIndex++;
+  renderQuiz();
+}
+
+// ═══════════════════════════════════════════
+// SPACED REPETITION
+// ═══════════════════════════════════════════
+function initSR() {
+  srDeck = VOCAB.map((v, i) => ({ ...v, index: i, interval: 1, ease: 2.5, reps: 0 }));
+  srDeck.sort(() => Math.random() - 0.5);
+  srCurrentIndex = 0;
+  srCompleted = 0;
+  document.getElementById('srComplete').style.display = 'none';
+  renderSR();
+}
+
+function renderSR() {
+  if (srCurrentIndex >= srDeck.length) {
+    document.getElementById('srComplete').style.display = 'block';
+    document.querySelector('.sr-card').style.display = 'none';
+    return;
+  }
+  document.querySelector('.sr-card').style.display = 'flex';
+  const card = srDeck[srCurrentIndex];
+  document.getElementById('srWord').textContent = card.word;
+  document.getElementById('srDef').textContent = card.def;
+  document.getElementById('srEx').innerHTML = card.example;
+  document.getElementById('srAnswer').style.display = 'none';
+  document.getElementById('srRevealWrap').style.display = 'block';
+  document.getElementById('srButtons').style.display = 'none';
+
+  const remaining = srDeck.length - srCurrentIndex;
+  const pct = Math.round((srCurrentIndex / srDeck.length) * 100);
+  document.getElementById('srProgress').textContent = `Cards remaining: ${remaining}`;
+  document.getElementById('srPercent').textContent = pct + '%';
+  document.getElementById('srFill').style.width = pct + '%';
+
+  resetFreezeTimer();
+}
+
+function revealSR() {
+  document.getElementById('srAnswer').style.display = 'block';
+  document.getElementById('srRevealWrap').style.display = 'none';
+  document.getElementById('srButtons').style.display = 'flex';
+  resetFreezeTimer();
+}
+
+function rateSR(quality) {
+  // SM-2 simplified
+  const card = srDeck[srCurrentIndex];
+  if (quality === 0) {
+    // Again — re-insert 3 cards later
+    const reinsert = Math.min(srCurrentIndex + 3, srDeck.length);
+    srDeck.splice(srCurrentIndex, 1);
+    srDeck.splice(reinsert, 0, card);
+  } else {
+    srCurrentIndex++;
+  }
+  renderSR();
+}
+
+function resetSR() {
+  document.getElementById('srComplete').style.display = 'none';
+  initSR();
+}
+
+// ═══════════════════════════════════════════
+// SCORE
+// ═══════════════════════════════════════════
+function renderScore() {
+  const score = Math.round((quizCorrect / VOCAB.length) * 100) || 0;
+  document.getElementById('finalScore').textContent = score;
+  document.getElementById('statCorrect').textContent = quizCorrect;
+  document.getElementById('statCalibrate').textContent = quizCalibrated;
+  document.getElementById('statStreak').textContent = bestStreak;
+
+  const avg = quizTimes.length ? (quizTimes.reduce((a, b) => a + b, 0) / quizTimes.length).toFixed(1) + 's' : '—';
+  document.getElementById('statSpeed').textContent = avg;
+
+  // Tier
+  const badge = document.getElementById('tierBadge');
+  if (score >= 80) {
+    badge.innerHTML = '<div class="tier-result tier-tiger">🐅 TIGER</div>';
+  } else if (score >= 50) {
+    badge.innerHTML = '<div class="tier-result tier-cub">🐾 CUB</div>';
+  } else {
+    badge.innerHTML = '<div class="tier-result tier-mouse">🐭 MOUSE — Keep going. We calibrate.</div>';
+  }
+}
+
+function resetAll() {
+  currentCard = 0;
+  document.querySelectorAll('.nav button')[0].click();
+}
+
+// ═══════════════════════════════════════════
+// ANTI-FREEZE SYSTEM
+// ═══════════════════════════════════════════
+function resetFreezeTimer() {
+  clearTimeout(freezeTimer);
+  document.getElementById('timerBar').style.width = '100%';
+
+  let start = Date.now();
+  const tick = () => {
+    const elapsed = Date.now() - start;
+    const pct = Math.max(0, 100 - (elapsed / freezeTimeout) * 100);
+    document.getElementById('timerBar').style.width = pct + '%';
+    if (pct > 0) requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+
+  freezeTimer = setTimeout(() => {
+    document.getElementById('freezeOverlay').classList.add('active');
+  }, freezeTimeout);
+}
+
+function dismissFreeze() {
+  document.getElementById('freezeOverlay').classList.remove('active');
+  resetFreezeTimer();
+}
+
+// ═══════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════
+renderCard();
+resetFreezeTimer();
+
+// Global interaction resets freeze timer
+document.addEventListener('click', resetFreezeTimer);
+document.addEventListener('keydown', resetFreezeTimer);
+document.addEventListener('touchstart', resetFreezeTimer);
+</script>
+</body>
+</html>
