@@ -3,8 +3,10 @@
 **The foundational canon for lesson creation, NET PET AI, and all marketing.** Every teaching decision, lesson structure, and student interaction at Natural English Training traces back to this document.
 
 **Dual-published:** Notion + GitHub (`CANON/NET-TEACHING-METHODOLOGY.md`)  
-**Date:** 2026-03-25  
-**Author:** Agent-99 (OB1), synthesized from Michael Hobbs raw voice dictation, class notes, and Stage 4 Raw Dump
+**Date:** 2026-03-26 (ENRICHED — 26 sections)  
+**Author:** Agent-99 (OB1), synthesized from Michael Hobbs raw voice dictation, class notes, Stage 4 Raw Dump, and BlueTech classroom transcripts  
+**Status:** ENRICHED (GitHub has MORE than Notion v1 — cross-repo synthesis + 10 field-practice sections from 2026-03-26 classroom dump)  
+**Export Pipeline:** SYNCED → ENRICHED (Run 33, 2026-03-26)
 
 ---
 
@@ -13,6 +15,14 @@
 > *"Our goal is to graduate our students. Most English centers are built around keeping you a student for as long as possible to make as much money from you as possible. We have a different mindset — we want you to graduate after a year."* — Michael Hobbs
 
 Natural English Training exists to **acquire** language, not just learn it. Our methods are based on how humans learned their first language — through comprehensible input, observation, repetition, and play. We reject the Vietnamese standard of memorizing large volumes of useless words with no repetition and no scientific spacing.
+
+### The Dual Mission: English AND AI
+
+> *"These weren't just meant to be English classes. They're meant to be English and AI."* — Michael Hobbs (2026-03-26 BlueTech classroom)
+
+> *"AI is more important than English for your career and making money in the next couple years. It might already be more important than English."* — Michael Hobbs
+
+This is not just an English teaching business. NET's competitive advantage is the **dual mastery of English + AI** — the two highest-leverage skills for career advancement in Vietnam's competitive job market.
 
 ### The Three Mistakes of Traditional Vietnamese English Education
 
@@ -162,6 +172,18 @@ The central metaphor and behavioral framework of NET. Every student enters as a 
 
 A big belief in Vietnam is that you can only learn through suffering. This is false. Studies prove a person learns faster when the brain is having fun and engaged.
 
+### The Confidence-First Sequence (NEW — 2026-03-26)
+
+> *"My first thing is to work on your confidence. It's not even about the English at the beginning."* — Michael Hobbs
+
+The first 3 months of NET are explicitly NOT about English improvement. They are about:
+1. Building psychological safety
+2. Expanding the comfort zone
+3. Establishing relationships and trust
+4. Creating a fun, low-stakes environment
+
+English acquisition accelerates AFTER the confidence foundation is set. This is the "Confidence before competence" principle.
+
 ### Prohibited Language
 
 Never say: *"Wrong," "Bad," "Stupid," "Failure"*
@@ -183,6 +205,7 @@ Always say: *"Shift," "Calibrate," "Upgrade," "Refine," "Try again," "Good effor
 - Never compare students negatively
 - Make English **fun**, not a chore
 - Build community support
+- *"I'm not your mommy or your daddy. You don't have to worry about getting things wrong with me. There's no judgment here."* — Michael Hobbs
 
 ### Student Psychology — The Three Metaphors
 
@@ -334,6 +357,8 @@ The business classes aren't just about English. The main goals:
 
 > *"People focus on studying harder and getting better grades when in reality they should be focusing on learning English and learning AI — that will set them leagues ahead of the competition."* — Michael Hobbs
 
+> *"Those are the top two ways to make money in Vietnam. Those are the two things if you focus on those, you can really increase your ability to make money in Saigon's competitive job market."* — Michael Hobbs (2026-03-26 BlueTech classroom)
+
 ---
 
 ## 10. Content Categories (60 Topics)
@@ -377,6 +402,7 @@ Debates & Arguments · Sarcasm & Humor · Cultural Nuances · Idioms & Expressio
 - Community support (Buddy system + networking events)
 - Measurable transformation (Mouse → Tiger in 90 days)
 - Graduate in a year — we set you up for independence
+- **English AND AI** — dual skill mastery for career acceleration
 
 ### Brand Voice
 
@@ -397,6 +423,11 @@ Debates & Arguments · Sarcasm & Humor · Cultural Nuances · Idioms & Expressio
 - 90-minute sessions
 - Weekly schedule
 - Monthly networking events
+
+### Team Structure
+
+- **Michael Hobbs** — lead teacher, curriculum designer, sovereign
+- **Ken (Quyen Ngo)** — assistant teacher for beginner classes (confirmed 2026-03-26)
 
 ### Resources Required
 
@@ -487,6 +518,247 @@ Hear unknown word → **KEEP LISTENING** → Use context clues → Understand th
 
 ---
 
+## 17. "Everybody's Favorite Topic Is Themselves" — Universal Conversation Law
+
+**Core principle:** Every human on earth — all 8 billion — shares the same #1 favorite topic: *themselves*. This applies equally to humble people (they talk about their children, which is their life) and prideful people.
+
+**Why it matters for ESL students:**
+- If you get good at asking questions about *them*, you never have to worry about your own English being perfect
+- After 30 minutes of asking someone about themselves, they will love you — they won't think "her English is bad," they'll think "she's so nice, I really like her"
+- **You don't have to be professional at English to have a great conversation with a foreigner** — you just have to get good at asking questions
+
+**Teaching method:** Present it as a riddle/puzzle with a cash reward (100,000 VND). Let students guess. Common wrong answers: money, culture, food, happiness, hobbies. The answer is always obvious in hindsight.
+
+**Michael's exact words:** *"Everybody's favorite topic is themselves... even humble people, their favorite topic is themselves. It might be their children... because we can only feel and experience our own life."*
+
+---
+
+## 18. Follow-Up Questions — The Deeper Conversation Skill
+
+**Definition:** A follow-up question is asking a *more specific* question based on what someone just told you. You go deeper instead of pivoting to yourself.
+
+**The wrong move:** Someone says "I love music" → you say "Oh yeah, I play guitar too. Me me me."
+
+**The right move:** Someone says "I love music" → "Oh really? What instruments do you play?" → "How long have you been doing that?" → "Which one do you like better, piano or guitar?" → "Why?"
+
+**Two question types:**
+- **Closed questions** — yes/no answers. Fine to start with, but move to open ASAP
+- **Open questions** — allow many answers, open up conversation
+
+**The #1 opening question word:** *"Why"* — the single most powerful word for keeping conversations going and getting people to talk about what they love.
+
+**Professional opener flow:** "What do you do?" → "How long have you been doing that?" → "Do you like it?" → "Oh really? Why?" → now they're talking about what makes them happy → instant connection.
+
+---
+
+## 19. Vietnamese Listening Habit — Focus on Unknown vs. Known
+
+**The problem:** Vietnamese students habitually focus on what they *don't* know in a sentence instead of what they *do* know.
+
+**Example:** Teacher says "How the heck are ya?" — student fixates on "heck" (unknown) and misses "How are you?" (known). The known part carries the meaning.
+
+**The fix:** Explicitly teach students to relax and listen *casually* for what they already know, instead of panicking about unknown words. The known words usually carry enough meaning to understand the intent.
+
+**Michael's exact words:** *"I find it a habit with the Vietnamese — they will focus on what they don't know in a sentence instead of what they do know."*
+
+---
+
+## 20. Question-Asking as Confidence Bypass — For Shy/Introvert Students
+
+**Target students:** Introverts, shy speakers, students who freeze when talking to foreigners.
+
+**The problem:** Student gets stuck in their head — trying to be perfect, trying not to make mistakes, trying to translate mentally, doing too many things at once. Result: paralysis.
+
+**The solution:** Learn to ask questions. This *takes the pressure off* because:
+- You control the conversation
+- They do most of the talking
+- You practice listening (which builds comprehension)
+- You don't need perfect grammar to ask "Why?"
+- After the conversation, the foreigner thinks you're wonderful
+
+**Michael's exact words:** *"Instead of being in your head... why not learn how to ask questions because then it takes the pressure off of you... You don't have to be professional at English in order to have a great conversation with a foreigner. You just have to get very good at asking questions and follow-up questions."*
+
+---
+
+## 21. Gemini as Live Bilingual Teaching Tool
+
+**Method:** Use Google Gemini (voice mode) as a real-time Vietnamese-English bridge during beginner classes.
+
+**How it works:**
+- Teacher speaks English to Gemini
+- Gemini translates to Vietnamese for students in real-time
+- Students hear both the English original and Vietnamese meaning
+- Teacher can direct Gemini: "translate that to Vietnamese, no commentary"
+- Teacher can use Gemini for vocabulary explanations, countdowns, pronunciation drills
+
+**Key commands for Gemini in class:**
+- "Translate that directly to Vietnamese, no commentary"
+- "Tell them in Vietnamese the four things"
+- "Use English and Vietnamese like a hybrid to teach it"
+
+**Limitations observed:** Gemini sometimes adds unnecessary commentary, switches languages unprompted, refuses certain vocabulary (slang/swear words for educational purposes). Teacher must redirect firmly.
+
+**Teaching value:** Students experience *natural bilingual immersion* — the class itself models how to use AI tools, reinforcing the "classes are English AND AI" principle.
+
+---
+
+## 22. Phone Consequences System — The Four Fun Punishments
+
+**Rule:** No phones during class. Phone visible = consequence.
+
+**The four consequences (student chooses one):**
+1. 🎵 **TikTok dance** — 30 seconds
+2. 🎤 **Karaoke** — 30 seconds
+3. 📊 **Give a presentation** — 30 seconds
+4. 😂 **Tell a joke** — 30 seconds
+
+**Design philosophy:**
+- Consequences are *fun*, not punitive — they build confidence and speaking skills
+- Each consequence forces the student to perform in English (or at least perform publicly)
+- The escalation humor: if student says "no" to the consequence, it doubles, triples, quadruples
+- First offense gets mercy with a reminder
+
+**Why phones are banned:** The brain is "like a laser" — attention shifts instantly from teacher to TikTok mode. Screen visibility alone triggers the dopamine/distraction loop.
+
+---
+
+## 23. Social Media & Brain Rot as Teaching Material
+
+**Core teaching:** Social media (TikTok, Instagram, Facebook) activates the *exact same brain chemicals* as drugs, alcohol, and gambling. Companies spend trillions studying how to exploit this.
+
+**Key points taught in class:**
+- Happy chemicals normally release when you *achieve* something through hard work
+- Social media releases those chemicals *for free* — no effort required
+- Same addiction pathway as cocaine, alcohol, gambling
+- Society says "don't do drugs" but nobody says "don't do TikTok"
+- Gen Z has ~75% brain rot, Gen Alpha ~100% (humorous framing)
+- Doom scrolling = scrolling for hours without absorbing content
+
+**Student data points (honest admissions):**
+- Tram: 8 hours TikTok/day ("professional doom scroller")
+- Hung: 4-5 hours TikTok/day
+- Both admitted addiction
+
+**Teaching angle:** This isn't just a health lecture — it's vocabulary building (addicted, stressful, busy, drunk, stupid, opinion) woven into real conversation about their actual lives.
+
+---
+
+## 24. "What Do You Do?" — The Professional Opener
+
+**The phrase:** "What do you do?" = universal English opener for professional/stranger contexts. Means "What is your job/career?"
+
+**Why it works:**
+- Neutral, comfortable, appropriate for strangers
+- Opens the door to follow-up questions about their work, how long, do they like it, why
+- Contrasts with Vietnamese culture where people may ask invasive questions ("How much money do you make?") within minutes of meeting
+
+**Cultural contrast taught:** In Western culture, asking about salary is extremely private — even among family. "What do you do?" is the safe professional equivalent that lets the conversation flow naturally.
+
+**Role-play exercise:** Students practice greeting a stranger → "What's your name?" → "Nice to meet you" → "What do you do?" → follow-up questions.
+
+---
+
+## 25. Chinese Bamboo Tree & "Sharpen Your Axe" — Patience and Balance Metaphors
+
+### Chinese Bamboo Tree
+
+**Story used to teach patience:** The Chinese bamboo tree shows no visible growth for years while building its root system underground. Then it grows explosively. Used to reassure students that the first 3 months of confidence-building *are* progress even if they can't see English improvement yet.
+
+**Application:** "You're already making progress. You just don't see it."
+
+### Sharpen Your Axe
+
+**Metaphor for work-life balance:** If you keep chopping wood without sharpening your axe, the axe breaks and you can't chop at all. Used when students are visibly exhausted and stressed.
+
+**Michael's exact words:** *"If you don't sharpen your axe and you skip that and you just try to keep chopping the wood without sharpening, making it sharper, then your axe is going to break. And you're not going to be able to chop any wood."*
+
+**Application:** Direct care instruction — "I can tell in your voice that you're quite tired and stressed. You need to balance. Don't drive yourself too hard or you're going to get sick."
+
+---
+
+## 26. Advanced Classroom Techniques (From Field Practice)
+
+### The Anchor Principle (Phonics)
+
+**Origin:** Gemini-assisted phonics session with Denny Nguyen.
+
+**Method:** When a student struggles with a sound pair (e.g., CH/SH), find one word the student CAN pronounce correctly and use it as the **anchor**. Every time the student drifts on similar sounds, return to the anchor word and rebuild from there. The anchor provides a known-good reference point the brain can return to.
+
+### ABC Eyes-Closed Practice
+
+**Method:** Student closes eyes and recites the alphabet (or target sounds) focusing purely on mouth position and airflow without visual distraction. Removes the self-consciousness of being watched and forces attention to physical sound production.
+
+**Best for:** Students with strong auditory processing (e.g., Denny — quick mimicry once visual noise is removed).
+
+### The 3-Tries Rule
+
+**Method:** Student gets exactly 3 attempts at a word or phrase before the teacher provides the correct version. Not 1 (too harsh), not unlimited (wastes time and builds frustration). Three is the sweet spot between effort and efficiency.
+
+**Application:** Used with Mouse and Cub level students. After 3 tries, teacher models the correct version, student mimics, and moves on. No dwelling.
+
+### 3-Week Build / 3-Month Destroy Principle
+
+**Principle:** It takes **3 weeks** of consistent practice to build a new habit. It takes **3 months** of neglect to destroy that progress and re-cement the old pattern.
+
+**Application:** When correcting persistent errors (filler words, pronunciation habits, translation dependency), maintain correction pressure for a full 3-week cycle. If correction stops too early, the old habit returns stronger.
+
+**Example:** Linh's "uh" filler habit — requires sustained 3-week anti-filler drill cycle.
+
+### The "I Don't Know" Breakthrough
+
+**Pattern:** Many Vietnamese students default to "I don't know" as an escape phrase when they feel uncertain. It's not that they don't know — it's that they're afraid to try.
+
+**Intervention:** When a student says "I don't know," redirect: "Try. Say something. It doesn't have to be perfect." The moment a student stops saying "I don't know" and starts attempting answers is a **Mouse → Cub transition marker**.
+
+**Example:** Tiên Truong — breakthrough moment when she stopped defaulting to "I don't know" and started attempting.
+
+### 30% Slower Challenge
+
+**Method:** Ask a student to speak at 70% of their natural speed. This forces clarity, reduces filler words, and improves pronunciation accuracy. Students often speak fast to "get it over with" — slowing down reveals their actual ability is higher than their rushed output suggests.
+
+**Best for:** CUB level students who have vocabulary but poor clarity.
+
+### Genre-Based Vocabulary Hooks
+
+**Method:** Instead of generic vocabulary lists, identify what the student is **passionate about** and build vocabulary from that domain.
+
+**Examples:**
+- Horror fan (Tiên) → thriller, suspense, creepy, haunted, plot twist, jump scare
+- Streaming business (Ling) → audience, subscribe, content, viral, algorithm
+- Supply chain (Denny) → logistics, inventory, shipment, warehouse, deadline
+
+**Why it works:** Passion drives acquisition. Students talk more when the topic excites them.
+
+---
+
+## App Design Implications (From Classroom Transcripts)
+
+The classroom transcripts from 2026-03-26 contain critical design intelligence for the OBI/NET-PET-AI app:
+
+> *"This is the natural way for them to learn languages. So, this is what the app's going to do. It's going to repeat this process because I want them talking in a natural environment because studies show that that increases learning retention by a huge amount."* — Michael Hobbs
+
+> *"I'm trying to program it to be quite like a human when you're talking to it so that you can just feel like natural... because you want to trick your brain to think you're actually having a real conversation."* — Michael Hobbs
+
+**Key app requirements derived from live classroom observation:**
+1. App must replicate the natural conversation flow from live classes
+2. AI conversation partner must feel human, not robotic
+3. Spaced repetition of vocabulary integrated into natural conversation
+4. Bilingual support (Vietnamese bridge for beginners, progressive removal)
+5. Ken-as-force-multiplier pattern: AI handles drills, human teacher handles breakthrough moments
+
+---
+
+## Cross-Repo Source Intelligence
+
+### From `Phoenix-Rise-Immortalize-` (SOUL-DNA-BIBLE)
+- `VAULT-NET-SEEDS/05-BUSINESS-MODEL-PROFIT-SHARING-EXPANSION.md` — NET business model, expansion strategy, profit-sharing framework. Connected to teaching methodology through the "graduate in a year" philosophy and the business class value stack.
+
+### From `Phoenix-Rising-Protocol-Ultimate` (CANON/)
+- `GOSPEL-444-TEACHING-METHODS-CONSOLIDATED.md` (44.6KB) — the full Gospel 444 teaching canon. Complementary: Gospel 444 covers aesthetic/brand law + teaching philosophy; this document covers methodology + classroom techniques.
+- `CANON/REINCARNATION/2026-03-26-bluetech-classroom-dump.md` — 16 verbatim quotes, 7 decisions, 5 new principles from BlueTech classroom transcripts. Source for sections 17-26.
+
+---
+
 ## Source Files
 
 This canonical page synthesizes content from:
@@ -496,3 +768,12 @@ This canonical page synthesizes content from:
 - NETLESSONAPPROACH.txt, NET-MASTERCOPYWRITE-OURMETHODS.txt, OURMETHODS.txt
 - BlueTech-ClassNotes.txt
 - NET-Blueprint-DNA-V3-Singularity (Parts 2, 8, 9, 13–16)
+- **BlueTech Classroom Transcripts (2026-03-26)** — Beginner class (Gemini-assisted) + Business class (Mai Tram, Hung/Jasmine, Nga, Quy). Source for sections 17-26.
+- **Reincarnation Entry: 2026-03-26:bluetech-classroom-dump** — 16 quotes, 7 decisions, 5 new principles (Grade B+)
+- **Cross-repo: VAULT-NET-SEEDS/05-BUSINESS-MODEL** from `Phoenix-Rise-Immortalize-`
+
+---
+
+*Exported by Pulse-Incarnation Engine v5 — Run 33 (2026-03-26 12:00 ICT)*  
+*ENRICHED: GitHub has MORE than original Notion v1 — 26 sections (was 16) + cross-repo synthesis + app design implications*  
+*Dual-published: Notion (NET Teaching Methodology page) + GitHub (CANON/NET-TEACHING-METHODOLOGY.md)*
