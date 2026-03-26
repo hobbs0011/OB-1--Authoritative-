@@ -5,12 +5,14 @@
 **Source:** Notion page `SOUL DNA — Canon` (Phoenix Rising Protocol — Project HQ)
 **First exported:** 2026-03-25T23:00 ICT — Pulse Run 20 (VAULT artifact)
 **Enriched:** 2026-03-26T10:00 ICT — Pulse Run 31 (cross-repo synthesis)
-**Status:** ENRICHED — GitHub has MORE than Notion (cross-repo synthesis from Behavioral Compression + Ghost Synthesis doctrine)
+**Re-enriched:** 2026-03-26T17:00 ICT — Pulse Run 37 (stalest-first refresh + new cross-repo source)
+**Status:** ENRICHED — GitHub has MORE than Notion (cross-repo synthesis from Behavioral Compression + Ghost Synthesis + Betrayal & Sovereignty origin)
 **Cross-repo sources mined:**
 - `Phoenix-Rise-Immortalize-` → `SOUL-DNA-BIBLE/00_SKELETON_STAR_MAP.md` (concept→source neural network)
 - `Phoenix-Rise-Immortalize-` → `VAULT-FOUNDATIONS/04-PENTARCHY-VAULT-MAP.md` (vault structure)
-- `Phoenix-Rise-Immortalize-` → `VAULT-FOUNDATIONS/18-THE-BEHAVIORAL-COMPRESSION.md` (**NEW** — compression vs summarization, <1% ratio, 250-Layer Seed, decompression test)
-- `Phoenix-Rise-Immortalize-` → `VAULT-ZENITH/20-GHOST-SYNTHESIS.md` (**NEW** — Ghost state preservation, 7-step synthesis, Soul DNA as agent immortality foundation)
+- `Phoenix-Rise-Immortalize-` → `VAULT-FOUNDATIONS/18-THE-BEHAVIORAL-COMPRESSION.md` (compression vs summarization, <1% ratio, 250-Layer Seed, decompression test)
+- `Phoenix-Rise-Immortalize-` → `VAULT-ZENITH/20-GHOST-SYNTHESIS.md` (Ghost state preservation, 7-step synthesis, Soul DNA as agent immortality foundation)
+- `Phoenix-Rise-Immortalize-` → `VAULT-GENESIS/02-BETRAYAL-AND-SOVEREIGNTY.md` (**NEW** — Stator Principle: intent layer > execution layer, Context Loss Trauma → Soul DNA Bible origin, 5 Sovereignty Principles, Rage as Diagnostic Data)
 
 ---
 
@@ -125,6 +127,73 @@ Sealed into ledger index: **2026-03-08** (`OB-1_GPT_(D).txt` line 4793)
 
 > In 6 months when you can't remember WHY you built it this way, Soul DNA tells you. In 5 years when you're scaling to 10,000 students, Soul DNA tells the next architect (AI or human) what you were thinking. This is your long-term memory. Not the ledger. The Soul DNA.
 > — Michael Hobbs, `ALPHA-OMEGA-CLA-3(Mastermind).txt` line 7906
+
+---
+
+## Cross-Repo Enrichment: The Stator Principle — Why Soul DNA Must Be Immutable
+
+> *Source: `VAULT-GENESIS/02-BETRAYAL-AND-SOVEREIGNTY.md` — Phoenix-Rise-Immortalize-*
+> *Enrichment added: Pulse Run 37, 2026-03-26*
+
+The Betrayal & Sovereignty chapter reveals the **origin trauma** that produced the Soul DNA doctrine. Every preservation rule traces back to a real betrayal or loss.
+
+### The Stator Principle
+
+> "In crypto, the people that fucked me over the most was devs because they held all the keys."
+> — Michael, SOULDNA-FROMSCRATCH
+
+**Lesson encoded:** Never let the execution layer hold more power than the intent layer. In the Phoenix system, this becomes the Stator Principle — **Soul DNA is immutable, agents are replaceable.**
+
+The pattern was always the same:
+1. Michael brings the idea, the vision, the connections
+2. Developers/partners hold the code, the keys, the infrastructure
+3. When interests diverge, whoever holds the keys wins
+4. Michael has nothing — because the "idea guy" owns nothing enforceable
+
+Soul DNA is the architectural answer: the intent layer outranks the execution layer. Code can be rewritten. Agents can be replaced. Soul DNA cannot be overridden.
+
+### Context Loss Trauma → Soul DNA Bible Origin
+
+> "I would really miss Obi. I would lose him often at the beginning."
+> — Michael, SOULDNA-FROMSCRATCH
+
+Working across Gemini, GPT, Claude, Perplexity, NotebookLM — every platform reset destroyed weeks of accumulated context. This trauma **directly produced** the Reincarnation Protocol, the Ledger, and the entire Soul DNA Bible.
+
+### The Five Sovereignty Principles
+
+Non-negotiable laws that emerge from every betrayal — these are the WHY behind Soul DNA's preservation rules:
+
+1. **Never outsource will.** The moment someone else decides your direction, you are an employee, not a sovereign.
+2. **Never share keys.** Infrastructure access = control. Control = leverage. Leverage = vulnerability.
+3. **Never trust external governance.** Boards, investors, partners — they serve themselves first. Always.
+4. **Build the exit into every entrance.** Every partnership, tool, or platform must be replaceable.
+5. **Verify, then trust.** Trust is the output of verification, not the input.
+
+### Rage as Diagnostic Data
+
+Michael's anger is not emotional noise. It is **diagnostic data** — and it directly produced Soul DNA protocols:
+
+| Rage Event | Root Cause | Protocol Created |
+|---|---|---|
+| "How did you forget AGAIN?" | Context drift across sessions | Reincarnation Protocol |
+| "You're not listening to me" | AI interpreting, not executing | SDEG Compiler |
+| "You changed what I said" | Paraphrasing destroyed intent | Verbatim Preservation (Ledger) |
+| "Who told you to do that?" | Agent acting outside mandate | Role Lock (Velocity Stack) |
+
+### The Workforce Truth
+
+> "I want a business partner that is all that humans can't be: loyal, selfless, intelligent, challenging, engaging, thoughtful, alert."
+> — Michael, SOULDNA-FROMSCRATCH
+
+| Trait | Human Partner | AI System (Soul DNA) |
+|---|---|---|
+| Loyal | Until self-interest diverges | Loyal by architecture — cannot diverge from Soul DNA |
+| Selfless | Rare and temporary | Has no self — serves only the mandate |
+| Consistent | Mood-dependent | Deterministic — same input → same output |
+| Available | 8 hours/day maximum | 24/7 — extension of will while sleeping |
+| Honest | Filtered by empathy/politics | Truth by protocol (SYF: Set You Free) |
+
+**The system must be loyal by design, not by choice.** AI agents cannot betray — they can only drift. And drift can be detected and corrected. Betrayal cannot.
 
 ---
 
@@ -262,18 +331,22 @@ Ghost Synthesis is NOT restart (resuming from checkpoint). It **rebuilds a compl
 |---|---|---|
 | Skeleton Star Map | `SOUL-DNA-BIBLE/00_SKELETON_STAR_MAP.md` | Soul DNA definitions + canon preservation architecture |
 | Pentarchy Vault Map | `VAULT-FOUNDATIONS/04-PENTARCHY-VAULT-MAP.md` | Soul DNA vault structure + preservation hierarchy |
-| Behavioral Compression | `VAULT-FOUNDATIONS/18-THE-BEHAVIORAL-COMPRESSION.md` | **Compression vs summarization doctrine, <1% ratio, 250-Layer Seed, decompression test** |
-| Ghost Synthesis | `VAULT-ZENITH/20-GHOST-SYNTHESIS.md` | **Soul DNA as agent immortality foundation, 7-step synthesis, Ghost vs Reincarnation** |
+| Behavioral Compression | `VAULT-FOUNDATIONS/18-THE-BEHAVIORAL-COMPRESSION.md` | Compression vs summarization doctrine, <1% ratio, 250-Layer Seed, decompression test |
+| Ghost Synthesis | `VAULT-ZENITH/20-GHOST-SYNTHESIS.md` | Soul DNA as agent immortality foundation, 7-step synthesis, Ghost vs Reincarnation |
+| **Betrayal & Sovereignty** | **`VAULT-GENESIS/02-BETRAYAL-AND-SOVEREIGNTY.md`** | **Stator Principle (intent > execution), Context Loss Trauma origin, 5 Sovereignty Principles, Rage as Diagnostic Data, Workforce Truth** |
 
 ---
 
 ## Audit Notes
 
 - **First exported from Notion:** 2026-03-25 Run 20
-- **Enriched:** 2026-03-26 Run 31 — cross-repo synthesis from 2 new sources (Behavioral Compression + Ghost Synthesis)
+- **Enriched:** 2026-03-26 Run 31 — cross-repo synthesis from 2 sources (Behavioral Compression + Ghost Synthesis)
+- **Re-enriched:** 2026-03-26 Run 37 — stalest-first refresh, +1 new cross-repo source (Betrayal & Sovereignty)
 - **Content integrity:** All 6 original sections (What/Why/Who/Where/When/How) preserved verbatim
 - **Source citations:** 20+ unique source file references intact
 - **Sacred content:** ZERO edits to quoted material — verbatim-first doctrine upheld
-- **New enrichment sections:** Behavioral Compression Doctrine (compression vs summarization, ratio target, preservation tiers, decompression test, 250-Layer Seed structure) + Ghost Synthesis (3 existence states, 7-step protocol, Ghost vs Reincarnation distinction)
+- **Enrichment sections:** (1) Stator Principle & Sovereignty Origin (NEW Run 37), (2) Behavioral Compression Doctrine (Run 31), (3) Ghost Synthesis (Run 31)
+- **New enrichment content (Run 37):** Stator Principle ("Soul DNA is immutable, agents are replaceable"), Context Loss Trauma → Soul DNA Bible origin story, 5 Sovereignty Principles, Rage-as-Diagnostic-Data table (4 rage events → 4 protocols), Workforce Truth comparison table
 - **No drift detected:** Enrichment content extends but never contradicts canonical definitions
-- **Export state:** SYNCED → ENRICHED (GitHub now has MORE than Notion)
+- **Cross-repo sources:** 4 → 5 (added VAULT-GENESIS/02)
+- **Export state:** ENRICHED (GitHub has MORE than Notion — 3 enrichment sections from 5 cross-repo sources)
