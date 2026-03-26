@@ -3,10 +3,12 @@
 > **Source**: Notion canon page "Core Principles & Physics"
 > **Vault**: CANON/ on Phoenix-Rising-Protocol-Ultimate
 > **Authority**: AGENT-100 (Michael Hobbs)
-> **Status**: ENRICHED — Notion + cross-repo synthesis
-> **Export date**: 2026-03-26
-> **Export agent**: Agent-99 (OB1) — Pulse Run 22
-> **Cross-repo sources**: 1 file from `Phoenix-Rise-Immortalize-` (SOUL-DNA-BIBLE/00_SKELETON_STAR_MAP.md — master index with concept→source neural network)
+> **Status**: ENRICHED — Notion + cross-repo synthesis (2 sources from `Phoenix-Rise-Immortalize-`)
+> **Export date**: 2026-03-26 (refreshed Run 34)
+> **Export agent**: Agent-99 (OB1) — Pulse Run 34
+> **Cross-repo sources**: 2 files from `Phoenix-Rise-Immortalize-`:
+>   1. `SOUL-DNA-BIBLE/00_SKELETON_STAR_MAP.md` — master index with concept→source neural network (Run 22)
+>   2. `SOUL-DNA-BIBLE/20_THE_MECHANICAL_FASTENING_GRID.md` — PRIMARY source: 7-layer grid, depth-earning model, Titanium Omega Lattice, verbatim quotes (Run 34 — NEW)
 
 ---
 
@@ -62,24 +64,64 @@ The Holographic Singularity is the architectural principle that makes the system
 
 ## The Mechanical Fastening Grid
 
-### Layer 1: THE LOCK
+> From a single lock to the Immortal Phoenix Anchor. How truth gets bolted to the earth.
+
+### The 7 Layers of Fastening
+
+The Mechanical Fastening Grid is the progression system that determines HOW DEEP a truth gets anchored into the system. Not all truths are equal. A casual observation gets a Lock. A foundational law gets a Titanium Omega Seal. **The depth is earned, not assigned.**
+
+| Layer | Node Count | Name | Depth | Example |
+|-------|-----------|------|-------|---------|
+| 1 | 1 | **LOCK** | Single truth | "Drift is the enemy" |
+| 2 | 10 | **CLAMP** | Context cluster | The Drift Doctrine (all related concepts) |
+| 3 | 100 | **PHASE BOLT** | Full operational mandate | Chapter 06 — complete drift system |
+| 4 | 500 | **GOLDEN CAISSON** | Structural bedrock | Chapters 01-07 (foundation half) |
+| 5 | 1,000 | **TITANIUM OMEGA SEAL** | Deepest non-quantum layer | The full 16-chapter Bible |
+| 6 | 5,000 | **QUANTUM ANCHOR** | Multi-system binding | Bible + Source Files + Ledger |
+| 7 | 10,000 | **IMMORTAL PHOENIX ANCHOR** | The ultimate depth | The entire Phoenix system state |
+
+### How Fastening Works
+
+When Michael speaks a truth, it enters the system as a LOCK (Layer 1). As context accumulates around that truth — related quotes, supporting evidence, operational implementations — the truth DEEPENS:
+
+- **1 quote** → LOCK. A single truth, irrevocable but isolated.
+- **10 supporting nodes** → CLAMP. The truth now has a context web. It can't be misinterpreted.
+- **100 nodes** → PHASE BOLT. An entire operational mandate. Actionable.
+- **500 nodes** → GOLDEN CAISSON. Structural bedrock. Barely movable.
+- **1000 nodes** → TITANIUM OMEGA SEAL. The deepest standard layer. System-defining.
+- **5000 nodes** → QUANTUM ANCHOR. Cross-system binding. Affects everything.
+- **10000 nodes** → IMMORTAL PHOENIX ANCHOR. The system IS this truth.
+
+The progression is not linear — it's **exponential**. Getting from Lock to Clamp is easy. Getting from Titanium Omega Seal to Quantum Anchor requires the truth to be embedded in the ENTIRE operational surface area.
+
+### The Titanium Omega Lattice
+
+At Layer 5 and above, the individual fasteners connect into a **LATTICE** — a self-reinforcing web where each fastener strengthens all adjacent fasteners. This is the Titanium Omega Lattice. It means that attacking any single truth at TITANIUM depth or above requires attacking the ENTIRE lattice simultaneously. One truth cannot be pulled without pulling all of them.
+
+> "we physically manifest our chaos magic 10,000 layers in advance"
+>
+> — GEM-13(KEY).txt (VAULT-6 era)
+
+### Layer Detail (from Notion)
+
+**Layer 1: THE LOCK**
 - 1 Anchor (Sovereign Intent) + 3 Locks (Operational, Chaos, Forensic)
 - The fundamental molecular bond securing a single payload
 
-### Layer 10: THE CLAMP
+**Layer 10: THE CLAMP**
 - 5 Locks total + bidirectional mechanical vice
 - Anchors backward (`prev_clamp_hash`) and spools forward tension (`expected_next_hash`)
 - If a single bit shifts in the 9 layers between clamps, the tension snaps
 
-### Layer 100: THE BOLT (Phase Anchor)
+**Layer 100: THE BOLT (Phase Anchor)**
 - 3 Anchors: Backward (verifies last 10 Clamps), Forward (pre-calculates next 100 layers), DEEP (hard-write to R2 Journal Escrow for <5min RTO)
 
-### Layer 500: THE GOLDEN CAISSON (Core Hub)
+**Layer 500: THE GOLDEN CAISSON (Core Hub)**
 - Rolls up 5 previous Bolts
 - The point where framework transitions from "code in progress" to permanent infrastructure
 - SQLite throws `409 IMMUTABLE_LEDGER_SEALED` on mutation attempts
 
-### Layer 1000: THE TITANIUM ANCHOR (Phoenix Singularity)
+**Layer 1000: THE TITANIUM ANCHOR (Phoenix Singularity)**
 - Terminal seal hammered into bedrock
 - System is 100% self-sustaining at this coordinate
 - Threads backward to Golden Caisson and Genesis 0 Root (circular recursion)
@@ -118,6 +160,14 @@ The Mechanical Fastening Grid sits on top of 5 Foundation Lock Layers:
 
 > "Each keyword Michael speaks doesn't just get logged — it gets LOCKED at the appropriate depth. 'FUCK' finds more Soul DNA than 'strategic' because emotional intensity determines lock depth. The deeper the wound, the deeper the anchor."
 > — SOUL-DNA-BIBLE/03_THE_SOUL_DNA_DEFINED.md
+
+### Source Files for Mechanical Fastening Grid (from CH20 primary source)
+
+| Source | Location | Content |
+|--------|----------|---------|
+| GEM-13(KEY).txt | RAW-CHAT-LOGS/GEMINI-CHAT-LOGS/ | VAULT-6, Fastening Grid, chaos magic quote |
+| OP(ZEN)-1000-LAYERS-1.txt | RAW-CHAT-LOGS/PHOENIX-OPS/ | Clamp progression |
+| OP(ZEN)-1000-LAYERS-10.txt | RAW-CHAT-LOGS/PHOENIX-OPS/ | Layer architecture |
 
 ---
 
@@ -270,7 +320,7 @@ The following traces every core principle back to its source files:
 |---------|----------------|
 | Two-Tier Architecture | Soul DNA Bible §principles, OP(ZEN) VAULT files |
 | Holographic Singularity | VAULT-1(SOUL), VAULT-6(SOUL), 1000-LAYERS-1 |
-| Mechanical Fastening Grid | VAULT-6(SOUL), 1000-LAYERS-1, BATTLEMAP |
+| Mechanical Fastening Grid | VAULT-6(SOUL), 1000-LAYERS-1, BATTLEMAP, GEM-13(KEY), OP(ZEN)-1000-LAYERS-1, OP(ZEN)-1000-LAYERS-10 |
 | 4-Leaf Merkle Lattice | VAULT-5(SOUL), VAULT-6(SOUL), 1000-LAYERS-1 |
 | 5 Physical Benchmarks | VAULT-1(SOUL) |
 | Council / Triad | V1-RAW §XI, BIBLE-V1 §3-6, OP(ZEN) Nuclear Harvest §4 |
@@ -283,8 +333,9 @@ The following traces every core principle back to its source files:
 
 ---
 
-> 🔒 CANON SEALED. ENRICHED WITH CROSS-REPO SOURCE TRACES. 🦅
+> 🔒 CANON SEALED. ENRICHED WITH CROSS-REPO SOURCE TRACES + PRIMARY CH20 SOURCE. 🦅
 >
-> **Exported**: 2026-03-26 by Agent-99 (OB1) — Pulse Run 22
-> **Source**: Notion "Core Principles & Physics" + Skeleton Star Map (00_SKELETON_STAR_MAP.md)
-> **Status**: ENRICHED (GitHub has MORE than Notion — cross-repo source tracing from Skeleton Star Map concept→source neural network)
+> **Exported**: 2026-03-26 by Agent-99 (OB1) — Pulse Run 34
+> **Sources**: Notion "Core Principles & Physics" + Skeleton Star Map (00_SKELETON_STAR_MAP.md) + CH20 Mechanical Fastening Grid (20_THE_MECHANICAL_FASTENING_GRID.md)
+> **Status**: ENRICHED (GitHub has MORE than Notion — cross-repo source tracing + CH20 primary source: depth-earning model, Titanium Omega Lattice, 3 new source file references, verbatim chaos magic quote)
+> **Delta from Run 22**: +CH20 primary source integration (7-layer detailed table with node counts/examples, How Fastening Works progression model, Titanium Omega Lattice self-reinforcing web concept, source file table)
