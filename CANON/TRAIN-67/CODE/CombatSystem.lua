@@ -5,14 +5,15 @@
     PURPOSE: Player answers English questions → damage enemies.
     Wrong answer = take damage. Boss fights = harder questions.
     
-    MISSION: Teach English naturally through play.
-    NOT ESL. NOT about money. Natural English Training.
+    GOAL: MAKE MONEY. That is the only goal.
+    English is the game mechanic, not the mission.
+    This is not NET. This is a money-making machine.
     
     Teaching Law: Mouse → Tiger (permission over perfection)
     
     Architecture: ServerScript (ServerScriptService)
     Dependencies: ServerGateway, QuestionBank, EnemyFactory, EconomyManager
-    Version: 1.0.0
+    Version: 1.0.1
     Date: 2026-03-26
 --]]
 
@@ -58,7 +59,7 @@ local CONFIG = {
     COMBAT_TICK_RATE = 0.5,             -- seconds between enemy AI ticks
     ENEMY_ATTACK_INTERVAL = 3.0,        -- seconds between enemy auto-attacks
     
-    -- Rewards (coins are a teaching metric, not monetization)
+    -- Rewards (coins drive engagement → monetization)
     CORRECT_ANSWER_COINS = 5,
     BOSS_KILL_COINS = 25,
     WAVE_CLEAR_COINS = 50,
@@ -100,7 +101,7 @@ local function createCombatState(player)
         isAlive = true,
         wavesCleared = 0,
         
-        -- Teaching metrics (the REAL purpose)
+        -- Player metrics (engagement + retention data)
         questionsAnswered = 0,
         averageResponseTime = 0,
         totalResponseTime = 0,
@@ -146,8 +147,8 @@ function CombatSystem.Init()
     end)
     
     Players.PlayerRemoving:Connect(function(player)
-        -- Save teaching metrics before cleanup
-        CombatSystem._saveTeachingMetrics(player)
+        -- Save metrics before cleanup
+        CombatSystem._savePlayerMetrics(player)
         playerStates[player] = nil
     end)
     
@@ -312,7 +313,7 @@ function CombatSystem._handleCorrectAnswer(state, question, responseTime)
         end
     end
     
-    -- Reward coins (teaching metric, not monetization)
+    -- Reward coins (drives engagement loop → monetization)
     local coins = CONFIG.CORRECT_ANSWER_COINS + (state.combo * CONFIG.COMBO_BONUS_COINS)
     if enemyKilled and enemy and enemy.isBoss then
         coins = coins + CONFIG.BOSS_KILL_COINS
@@ -341,7 +342,6 @@ function CombatSystem._handleCorrectAnswer(state, question, responseTime)
         powerUpReady = state.powerUpCharge >= CONFIG.POWER_UP_MAX_CHARGE,
         tier = tierConfig.name,
         responseTime = math.floor(responseTime * 100) / 100,
-        -- Teaching feedback
         encouragement = CombatSystem._getEncouragement(state.combo, enemyKilled),
         vocabularyProgress = state.vocabularyMastered[question.targetWord] or 0,
     }
@@ -352,7 +352,7 @@ end
 --------------------------------------------------------------------------------
 
 function CombatSystem._handleWrongAnswer(state, question, responseTime, reason)
-    -- Reset combo (but preserve teaching data)
+    -- Reset combo (but preserve data)
     local lostCombo = state.combo
     state.combo = 0
     state.totalWrong = state.totalWrong + 1
@@ -372,7 +372,7 @@ function CombatSystem._handleWrongAnswer(state, question, responseTime, reason)
     if state.health <= 0 then
         died = true
         state.isAlive = false
-        -- Respawn after delay (Mouse → Tiger: encourage, don't punish)
+        -- Respawn after delay (keep them playing → keep them spending)
         task.delay(3.0, function()
             if state and state.player and state.player.Parent then
                 CombatSystem.Respawn(state.player)
@@ -408,7 +408,6 @@ function CombatSystem._handleWrongAnswer(state, question, responseTime, reason)
         tier = tierConfig.name,
         correctAnswer = question.correctAnswer,
         explanation = question.explanation or "",
-        -- Teaching feedback (Mouse → Tiger: show the right answer, encourage retry)
         encouragement = died 
             and "You'll get stronger! Every answer teaches you something new." 
             or "Almost! The answer was: " .. tostring(question.correctAnswer),
@@ -465,7 +464,7 @@ function CombatSystem._checkTierProgression(state)
 end
 
 --------------------------------------------------------------------------------
--- RESPAWN (Mouse → Tiger: Encourage, Don't Punish)
+-- RESPAWN (keep players in the loop — retention is revenue)
 --------------------------------------------------------------------------------
 
 function CombatSystem.Respawn(player)
@@ -475,8 +474,7 @@ function CombatSystem.Respawn(player)
     state.health = state.maxHealth
     state.isAlive = true
     state.combo = 0
-    -- NOTE: Do NOT reset tier, vocabulary, or teaching progress on death
-    -- Death is a learning moment, not a punishment
+    -- Do NOT reset tier or progress on death — keeps players engaged
     
     -- Notify client
     if ServerGateway then
@@ -491,15 +489,13 @@ function CombatSystem.Respawn(player)
 end
 
 --------------------------------------------------------------------------------
--- TEACHING METRICS
+-- PLAYER METRICS (engagement + retention tracking)
 --------------------------------------------------------------------------------
 
-function CombatSystem._saveTeachingMetrics(player)
+function CombatSystem._savePlayerMetrics(player)
     local state = playerStates[player]
     if not state then return end
     
-    -- This data feeds back into the teaching system
-    -- NOT for monetization — for understanding how the player learns
     local metrics = {
         totalQuestions = state.questionsAnswered,
         accuracy = state.questionsAnswered > 0 
