@@ -3,10 +3,10 @@
 **The foundational canon for lesson creation, NET PET AI, and all marketing.** Every teaching decision, lesson structure, and student interaction at Natural English Training traces back to this document.
 
 **Dual-published:** Notion + GitHub (`CANON/NET-TEACHING-METHODOLOGY.md`)  
-**Date:** 2026-03-26 (ENRICHED — 26 sections)  
+**Date:** 2026-03-26 (ENRICHED — 27 sections)  
 **Author:** Agent-99 (OB1), synthesized from Michael Hobbs raw voice dictation, class notes, Stage 4 Raw Dump, and BlueTech classroom transcripts  
-**Status:** ENRICHED (GitHub has MORE than Notion v1 — cross-repo synthesis + 10 field-practice sections from 2026-03-26 classroom dump)  
-**Export Pipeline:** SYNCED → ENRICHED (Run 33, 2026-03-26)
+**Status:** ENRICHED (GitHub has MORE than Notion — cross-repo synthesis + 11 field-practice sections from 2026-03-26 classroom dump + curriculum propagation pipeline from VAULT-NEXUS)  
+**Export Pipeline:** SYNCED → ENRICHED (Run 33) → ENRICHED+ (Run 40, 2026-03-26 20:00 ICT)
 
 ---
 
@@ -731,6 +731,48 @@ Hear unknown word → **KEEP LISTENING** → Use context clues → Understand th
 
 ---
 
+## 27. Curriculum Update & Classroom Feedback Loop (Cross-Repo: VAULT-NEXUS)
+
+**Source:** `VAULT-NEXUS/08-NET-SEEDS-TO-CHAOS-BRIDGE.md` from `Phoenix-Rise-Immortalize-`
+
+The NET curriculum (methodology canon) and classroom operations (live delivery) are connected by a two-way feedback loop. The curriculum is the **recipe**; the classroom is the **kitchen**. Updates must flow both directions.
+
+### Curriculum → Classroom Propagation
+
+When curriculum content is updated (new vocabulary units, changed assessment criteria, new delivery methodology), the change must propagate to classroom operations:
+
+1. Curriculum document updated (this page or Gospel 444)
+2. Impact assessment — which classroom operations are affected?
+3. Classroom delivery notes updated
+4. If retraining required → teacher retraining protocol triggered
+5. AI delivery endpoints updated (Cloudflare Workers, NET-PET-AI)
+6. Validation: no active classroom sessions disrupted mid-delivery
+
+### Classroom → Curriculum Feedback
+
+When classroom reality reveals that a curriculum element doesn't work:
+
+1. Teacher reports systematic failure (not isolated incidents)
+2. Root cause analysis — is it the content, the delivery method, or the student level?
+3. Curriculum document flagged for revision
+4. Previous version restored in classroom delivery if needed
+5. Pheromone trail: FAILURE → ROOT CAUSE → FIX → VERIFY
+
+### Curriculum Change Impact Matrix
+
+| Change Type | Classroom Impact | Action Required |
+|---|---|---|
+| Minor wording corrections | None | No classroom update needed |
+| New vocabulary units added | Low — additional materials | Update delivery notes |
+| Assessment criteria changed | **High** — teacher training needed | Full review + retraining protocol |
+| New delivery methodology | **High** — full classroom ops review | Michael + lead teacher review |
+| Curriculum unit removed | Medium — remove from schedule | Update classroom schedules |
+| AI delivery component changed | **High** — endpoint update | Full technical review + testing |
+
+**Key principle:** Curriculum updates are not complete until they've been validated in classroom delivery. The methodology document (this page) is the source of truth, but classroom reality is the ultimate test.
+
+---
+
 ## App Design Implications (From Classroom Transcripts)
 
 The classroom transcripts from 2026-03-26 contain critical design intelligence for the OBI/NET-PET-AI app:
@@ -753,8 +795,11 @@ The classroom transcripts from 2026-03-26 contain critical design intelligence f
 ### From `Phoenix-Rise-Immortalize-` (SOUL-DNA-BIBLE)
 - `VAULT-NET-SEEDS/05-BUSINESS-MODEL-PROFIT-SHARING-EXPANSION.md` — NET business model, expansion strategy, profit-sharing framework. Connected to teaching methodology through the "graduate in a year" philosophy and the business class value stack.
 
+### From `Phoenix-Rise-Immortalize-` (VAULT-NEXUS) — NEW Run 40
+- `VAULT-NEXUS/08-NET-SEEDS-TO-CHAOS-BRIDGE.md` (SHA `fbe7bb81`) — Curriculum update propagation pipeline, 6-type change impact matrix, classroom-to-curriculum feedback loop, rollback protocol. The operational bridge between methodology (what to teach) and classroom delivery (how it reaches students). Source for §27.
+
 ### From `Phoenix-Rising-Protocol-Ultimate` (CANON/)
-- `GOSPEL-444-TEACHING-METHODS-CONSOLIDATED.md` (44.6KB) — the full Gospel 444 teaching canon. Complementary: Gospel 444 covers aesthetic/brand law + teaching philosophy; this document covers methodology + classroom techniques.
+- `GOSPEL-444-TEACHING-METHODS-CONSOLIDATED.md` (58.1KB) — the full Gospel 444 teaching canon. Complementary: Gospel 444 covers aesthetic/brand law + teaching philosophy; this document covers methodology + classroom techniques.
 - `CANON/REINCARNATION/2026-03-26-bluetech-classroom-dump.md` — 16 verbatim quotes, 7 decisions, 5 new principles from BlueTech classroom transcripts. Source for sections 17-26.
 
 ---
@@ -771,9 +816,10 @@ This canonical page synthesizes content from:
 - **BlueTech Classroom Transcripts (2026-03-26)** — Beginner class (Gemini-assisted) + Business class (Mai Tram, Hung/Jasmine, Nga, Quy). Source for sections 17-26.
 - **Reincarnation Entry: 2026-03-26:bluetech-classroom-dump** — 16 quotes, 7 decisions, 5 new principles (Grade B+)
 - **Cross-repo: VAULT-NET-SEEDS/05-BUSINESS-MODEL** from `Phoenix-Rise-Immortalize-`
+- **Cross-repo: VAULT-NEXUS/08-NET-SEEDS-TO-CHAOS-BRIDGE** from `Phoenix-Rise-Immortalize-` — curriculum propagation pipeline (NEW Run 40)
 
 ---
 
-*Exported by Pulse-Incarnation Engine v5 — Run 33 (2026-03-26 12:00 ICT)*  
-*ENRICHED: GitHub has MORE than original Notion v1 — 26 sections (was 16) + cross-repo synthesis + app design implications*  
+*Exported by Pulse-Incarnation Engine v5 — Run 40 (2026-03-26 20:00 ICT)*  
+*ENRICHED+: GitHub has MORE than Notion — 27 sections (was 26) + cross-repo synthesis from 4 sources (was 3) + app design implications + curriculum propagation pipeline*  
 *Dual-published: Notion (NET Teaching Methodology page) + GitHub (CANON/NET-TEACHING-METHODOLOGY.md)*
