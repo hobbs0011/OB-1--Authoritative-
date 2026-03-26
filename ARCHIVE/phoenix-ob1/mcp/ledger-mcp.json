@@ -1,0 +1,50 @@
+{
+  "schema_version": "v1",
+  "name": "Phoenix Ledger MCP",
+  "id": "C1",
+  "description": "Agent-99 direct read/write into the Phoenix OB-1 ledger chain.",
+  "worker": "phoenix-ob1-system.hobbs-lab.workers.dev",
+  "auth": {
+    "type": "header",
+    "header": "x-sovereign-key",
+    "env_var": "SOVEREIGN_KEY"
+  },
+  "tools": [
+    {
+      "name": "ledger_append",
+      "description": "Append a new block to the immutable ledger chain.",
+      "method": "POST",
+      "path": "/ledger/append",
+      "auth_required": "SOVEREIGN"
+    },
+    {
+      "name": "ledger_verify",
+      "description": "Verify ledger chain integrity.",
+      "method": "GET",
+      "path": "/ledgerverify",
+      "auth_required": "PUBLIC"
+    },
+    {
+      "name": "health_check",
+      "description": "Boot Phoenix OB-1. Returns version, benchmarks, watchdog state.",
+      "method": "GET",
+      "path": "/health",
+      "auth_required": "PUBLIC"
+    },
+    {
+      "name": "chaos_assault",
+      "description": "Run 6-vector chaos self-test gauntlet.",
+      "method": "GET",
+      "path": "/chaos/assault",
+      "auth_required": "SOVEREIGN"
+    }
+  ],
+  "gospel": {
+    "void": "#0f0f1a",
+    "soul": "#a855f7",
+    "gold": "#f59e0b",
+    "blue_banned": true
+  },
+  "version": "v140-W1-UNBLOCKED",
+  "note": "Archived from mrmichaelhobbs1234-lang/phoenix-ob1. Worker URL updated to hobbs-lab."
+}
