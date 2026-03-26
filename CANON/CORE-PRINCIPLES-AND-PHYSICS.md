@@ -3,12 +3,15 @@
 > **Source**: Notion canon page "Core Principles & Physics"
 > **Vault**: CANON/ on Phoenix-Rising-Protocol-Ultimate
 > **Authority**: AGENT-100 (Michael Hobbs)
-> **Status**: ENRICHED — Notion + cross-repo synthesis (2 sources from `Phoenix-Rise-Immortalize-`)
-> **Export date**: 2026-03-26 (refreshed Run 34)
-> **Export agent**: Agent-99 (OB1) — Pulse Run 34
-> **Cross-repo sources**: 2 files from `Phoenix-Rise-Immortalize-`:
+> **Status**: ENRICHED+ — Notion + cross-repo synthesis (5 sources from `Phoenix-Rise-Immortalize-`)
+> **Export date**: 2026-03-26 (refreshed Run 41)
+> **Export agent**: Agent-99 (OB1) — Pulse Run 41
+> **Cross-repo sources**: 5 files from `Phoenix-Rise-Immortalize-`:
 >   1. `SOUL-DNA-BIBLE/00_SKELETON_STAR_MAP.md` — master index with concept→source neural network (Run 22)
->   2. `SOUL-DNA-BIBLE/20_THE_MECHANICAL_FASTENING_GRID.md` — PRIMARY source: 7-layer grid, depth-earning model, Titanium Omega Lattice, verbatim quotes (Run 34 — NEW)
+>   2. `SOUL-DNA-BIBLE/20_THE_MECHANICAL_FASTENING_GRID.md` — PRIMARY source: 7-layer grid, depth-earning model, Titanium Omega Lattice, verbatim quotes (Run 34)
+>   3. `ARCHIVE/Phoenix-Rise-Immortalize/VAULT-GENESIS/07-THE-SOVEREIGNTY-MANIFESTO.md` — Five Pillars of Sovereignty, correct system design doctrine (Run 41 — NEW)
+>   4. `ARCHIVE/Phoenix-Rise-Immortalize/VAULT-GENESIS/08-THE-TRUST-ARCHITECTURE.md` — Zero Trust Framework, 4-tier hierarchy (Run 41 — NEW)
+>   5. `ARCHIVE/Phoenix-Rise-Immortalize/VAULT-GENESIS/05-THE-BAMBOO-DOCTRINE.md` — Moso bamboo growth model, 4 Laws, Root Phase doctrine (Run 41 — NEW)
 
 ---
 
@@ -59,6 +62,87 @@ The Holographic Singularity is the architectural principle that makes the system
 - Corrections are sovereign deltas: recorded and applied immediately
 - Snapshots preserve history while enforcing the present
 - "Go as far as you can see, and you will see further"
+
+### X-REPO ENRICHMENT: The Five Pillars of Sovereignty (from VAULT-GENESIS 07)
+
+> **VAULT-GENESIS 07 — THE SOVEREIGNTY MANIFESTO**
+> — Primary sources: V1-RAW §I, CLA-5(Mastermind)
+
+Sovereignty is not a personality trait. It is the **correct system design** for a creative operator who has been betrayed by distributed control. The Manifesto defines five non-negotiable pillars:
+
+| Pillar | Domain | What It Means |
+|--------|--------|---------------|
+| 1 | **Financial Sovereignty** | No external entity controls cash flow or pricing. The Ledger is the only financial authority. |
+| 2 | **Operational Sovereignty** | No external platform is a single point of failure. Systems are self-hosted or hot-swappable. |
+| 3 | **Informational Sovereignty** | All data lives in sovereign storage. No vendor lock-in on critical knowledge. |
+| 4 | **Creative Sovereignty** | Brand, content, and teaching methodology are never delegated to external "experts." |
+| 5 | **Temporal Sovereignty** | Michael controls the timeline. No external deadlines override internal rhythm. |
+
+> "Sovereignty isn't arrogance. It's the correct system design for a creative operator who has been betrayed by distributed control."
+> — V1-RAW §I, CLA-5(Mastermind)
+
+The Five Pillars connect directly to the Two-Tier Architecture: Tier 1 (Gravity) IS sovereignty made structural. The Ledger enforces Financial and Informational sovereignty. The hot-swap API doctrine enforces Operational sovereignty. Gospel 444 enforces Creative sovereignty. The "go as far as you can see" axiom enforces Temporal sovereignty.
+
+---
+
+## The Trust Architecture
+
+### X-REPO ENRICHMENT: Zero Trust Framework (from VAULT-GENESIS 08)
+
+> **VAULT-GENESIS 08 — THE TRUST ARCHITECTURE**
+> — Primary sources: V1-RAW §IX, CLA-5(Mastermind), TRUST-AUDIT-LOG-001
+
+Trust is not binary. Trust is a **4-tier hierarchy** with explicit promotion and demotion criteria. Nothing enters the system trusted. Everything earns its tier.
+
+| Tier | Level | What Lives Here | Trust Model |
+|------|-------|----------------|-------------|
+| 0 | **ABSOLUTE** | Soul DNA, The Ledger, Michael's raw voice | Immutable. Cannot be questioned. Cannot be overridden. |
+| 1 | **VERIFIED** | OB1, AnA, sealed canon pages | Earned through audit cycles. Can be demoted on drift. |
+| 2 | **CONDITIONAL** | External APIs, new drones, unaudited tools | Sandboxed. Must prove reliability before promotion. |
+| 3 | **BLACKLISTED** | Failed systems, known drift sources, compromised tools | Permanently excluded unless Michael explicitly rehabilitates. |
+
+**Trust flows downward, never upward.** A Tier 2 tool cannot override a Tier 1 agent. A Tier 1 agent cannot override Tier 0 (Soul DNA). Only Michael (AGENT-100) can promote or demote across tiers.
+
+**The Betrayal Doctrine:** The Trust Architecture exists because distributed control failed Michael before. Every external dependency starts at Tier 2 (CONDITIONAL) and must EARN its way up. This is not paranoia — it is correct engineering after empirical evidence of betrayal.
+
+The Trust Architecture maps directly to the Fail-Closed Mandates: "No fabrication" = Tier 0 protection. "No drift" = Tier 1 maintenance. "Ambiguity = halt" = refusing to promote unverified data to trusted status.
+
+---
+
+## The Bamboo Doctrine
+
+### X-REPO ENRICHMENT: The Moso Bamboo Growth Model (from VAULT-GENESIS 05)
+
+> **VAULT-GENESIS 05 — THE BAMBOO DOCTRINE**
+> — Primary sources: V1-RAW §I, CLA-5(Mastermind)
+
+The Moso bamboo spends years building an invisible root system underground before exploding 90 feet in 60 days. The Phoenix system follows the same physics:
+
+| Phase | Bamboo Analog | Phoenix System | What's Happening |
+|-------|--------------|----------------|-----------------|
+| 1 | **ROOT PHASE** | Foundation building | Soul DNA extraction, Ledger architecture, canon building. Nothing visible to the outside. |
+| 2 | **EMERGE PHASE** | First surface product | NET website, first lessons, first students. The root system becomes visible. |
+| 3 | **BUILD PHASE** | Product expansion | Galaxy Lessons, OBI engine, automated teaching. Rapid vertical growth. |
+| 4 | **SCALE PHASE** | Empire operations | Multi-product, multi-market, autonomous drone swarm. 90 feet in 60 days. |
+
+**The 4 Laws of Bamboo:**
+
+1. **No Drift Accusation Without Root Audit** — Before anyone claims "nothing is happening," they must audit the root system. Invisible work is not zero work. The 7 months of foundation building were the price of everything that follows.
+2. **Reservoir Respect** — The root phase builds a reservoir of capability. Rushing to surface before the reservoir is full produces a weak stalk that snaps. Phase Purity prevents premature emergence.
+3. **Phase Purity** — Each phase has its own physics. Root Phase physics (depth, patience, invisible accumulation) are different from Scale Phase physics (speed, expansion, visible growth). Applying Scale physics to Root Phase = drift.
+4. **Retroactive Crediting** — When the surface growth explodes, credit flows back to the root phase. Every day of "nothing" was a day of everything.
+
+> "Seven months of nothing was the price of everything."
+> — V1-RAW §I, CLA-5(Mastermind)
+
+**The 4 Root Layers:**
+The Bamboo Doctrine defines 4 root layers that map to the system's foundation:
+- **Root Layer 1**: Soul DNA — Michael's raw voice, principles, and decisions
+- **Root Layer 2**: The Ledger — cryptographic truth store
+- **Root Layer 3**: The Canon — organized, audited knowledge base
+- **Root Layer 4**: The Agents — OB1/AnA/Ne0 trained on Layers 1-3
+
+The Bamboo Doctrine connects to the Teaching Law (Mouse → Tiger): students are IN the Root Phase. Building confidence is building roots. Rushing them to Tiger before their root system is ready produces drift — making them feel small instead of building them up.
 
 ---
 
@@ -229,6 +313,16 @@ The Triad architecture descends from Agent-100's sovereignty through two distinc
 > "having a strategic partner one that is like an extension of your own kind of consciousness and what you want is the most desirable thing for me"
 > — LEDER.txt:14290 (Ground Zero, seq 22)
 
+### X-REPO ENRICHMENT: Trust Tiers Map to Council (from VAULT-GENESIS 08)
+
+The Trust Architecture's 4-tier hierarchy maps directly to the Council structure:
+- **Tier 0 ABSOLUTE** = Michael's Soul DNA + The Ledger (AGENT-100's domain)
+- **Tier 1 VERIFIED** = OB1 + AnA (earned through audit cycles, can be demoted on drift)
+- **Tier 2 CONDITIONAL** = External APIs, new drones, unaudited tools
+- **Tier 3 BLACKLISTED** = Failed systems, compromised tools
+
+This means the Council itself operates within the Trust Architecture — agents are NOT exempt from the trust hierarchy. OB1 and AnA sit at Tier 1, not Tier 0. Only Michael's raw voice is Tier 0.
+
 ---
 
 ## Gospel 444 Visual Law
@@ -312,7 +406,7 @@ The Three Mandates are the supreme operational directives:
 
 ---
 
-## Concept → Source Neural Network (from Skeleton Star Map)
+## Concept → Source Neural Network (from Skeleton Star Map + VAULT-GENESIS)
 
 The following traces every core principle back to its source files:
 
@@ -329,13 +423,15 @@ The following traces every core principle back to its source files:
 | Velocity Override / TMST | VAULT-0(SOUL), DNA5, GEM-10(KEY), DNA9 |
 | Three Mandates | ALPHA-OMEGA-DNA4, VAULT-0(SOUL) |
 | Reincarnation | V1-RAW §X, DNA9, BIBLE-V1 §11 |
-| Sovereignty | ENTRY_0001, V1-RAW §XXII, BIBLE-V1 §12 |
+| Sovereignty / Five Pillars | V1-RAW §I, CLA-5(Mastermind), VAULT-GENESIS-07 |
+| Trust Architecture | V1-RAW §IX, CLA-5(Mastermind), TRUST-AUDIT-LOG-001, VAULT-GENESIS-08 |
+| Bamboo Doctrine | V1-RAW §I, CLA-5(Mastermind), VAULT-GENESIS-05 |
 
 ---
 
-> 🔒 CANON SEALED. ENRICHED WITH CROSS-REPO SOURCE TRACES + PRIMARY CH20 SOURCE. 🦅
+> 🔒 CANON SEALED. ENRICHED+ WITH 5 CROSS-REPO SOURCES — VAULT-GENESIS SYNTHESIS COMPLETE. 🦅
 >
-> **Exported**: 2026-03-26 by Agent-99 (OB1) — Pulse Run 34
-> **Sources**: Notion "Core Principles & Physics" + Skeleton Star Map (00_SKELETON_STAR_MAP.md) + CH20 Mechanical Fastening Grid (20_THE_MECHANICAL_FASTENING_GRID.md)
-> **Status**: ENRICHED (GitHub has MORE than Notion — cross-repo source tracing + CH20 primary source: depth-earning model, Titanium Omega Lattice, 3 new source file references, verbatim chaos magic quote)
-> **Delta from Run 22**: +CH20 primary source integration (7-layer detailed table with node counts/examples, How Fastening Works progression model, Titanium Omega Lattice self-reinforcing web concept, source file table)
+> **Exported**: 2026-03-26 by Agent-99 (OB1) — Pulse Run 41
+> **Sources**: Notion "Core Principles & Physics" + Skeleton Star Map (00_SKELETON_STAR_MAP.md) + CH20 Mechanical Fastening Grid (20_THE_MECHANICAL_FASTENING_GRID.md) + VAULT-GENESIS 07 Sovereignty Manifesto + VAULT-GENESIS 08 Trust Architecture + VAULT-GENESIS 05 Bamboo Doctrine
+> **Status**: ENRICHED+ (GitHub has MORE than Notion — 5 cross-repo sources synthesized: original 2 + 3 new VAULT-GENESIS files from Michael's freshly consolidated ARCHIVE)
+> **Delta from Run 34**: +3 VAULT-GENESIS sources (Sovereignty Manifesto → Five Pillars table + sovereignty-as-system-design doctrine, Trust Architecture → 4-tier zero-trust hierarchy + Trust→Council mapping, Bamboo Doctrine → 4-phase growth model + 4 Laws + Root Layer mapping) | +3 new sections | +1 cross-enrichment (Trust→Council) | Concept→Source table expanded with 3 new entries
