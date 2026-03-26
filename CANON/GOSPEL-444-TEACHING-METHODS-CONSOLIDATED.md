@@ -2,13 +2,16 @@
 
 > **Source**: Notion canon page + cross-repo synthesis
 > **Notion URL**: Gospel 444 & Teaching Methods — Consolidated Canon
-> **Export Status**: ENRICHED (Notion + 1 cross-repo source + Notion-unique sections)
+> **Export Status**: ENRICHED (Notion + 5 cross-repo sources + Notion-unique sections)
 > **Artifact Class**: 🏦 VAULT
-> **Exported By**: Pulse Run 24 — 2026-03-26T03:00+07:00
+> **Exported By**: Pulse Run 36 — 2026-03-26T16:00+07:00
+> **Prior Export**: Pulse Run 24 — 2026-03-26T03:00+07:00
 > **Cross-Repo Sources**:
 >   - `Phoenix-Rise-Immortalize-/VAULT-ORACLE/17-DUMP-INGEST-PROTOCOL.md` (SHA: 5de1cd12) — Gospel 444 alignment enforcement at ingestion layer
 >   - `Phoenix-Rise-Immortalize-/SOUL-DNA-BIBLE/04_SUPER_SAIYAN_STAGE_2.md` (SHA: 3a44c544) — Super Saiyan Stage 2 lesson references
 >   - `Phoenix-Rise-Immortalize-/SOUL-DNA-BIBLE/15_CONSOLIDATION_COMPLETE_PRINT.md` (SHA: da390634) — Consolidation print with teaching refs
+>   - `Phoenix-Rise-Immortalize-/VAULT-EXECUTION/04-DEVILS-ADVOCATE-SESSION.md` (SHA: 5fe7f68) — **NEW Run 36** — Mapping Principle, Negative Pheromones, Audit the Auditor, Model-Switching Logic
+>   - `Phoenix-Rise-Immortalize-/VAULT-EXECUTION/21-REVENUE-DEPLOYMENT-PIPELINE.md` (SHA: 9a6841c5) — **NEW Run 36** — Revenue deployment pipeline with teaching delivery integration
 
 **Consolidated:** 2026-03-24 | **Sources:** 15 canonical files across VAULT-NET-SEEDS, VAULT-CHAOS, VAULT-EXECUTION
 **Purpose:** Single canonical reference for how lessons are made under Gospel 444 and the NET teaching methodology.
@@ -42,7 +45,12 @@
 22. [Lead Scoring & Kill Switches](#-lead-scoring--kill-switches) *(ENRICHED — from Notion)*
 23. [D-Rules (Shared Across All Agents)](#-d-rules-shared-across-all-agents) *(ENRICHED — from Notion)*
 24. [Gospel 444 Ingestion Enforcement](#-gospel-444-ingestion-enforcement-enriched--from-vault-oracle) *(ENRICHED — from VAULT-ORACLE)*
-25. [Source File Index](#-source-file-index)
+25. [The Mapping Principle — Simulation vs Dynamic Map](#-the-mapping-principle--simulation-vs-dynamic-map) *(ENRICHED — Run 36 from VAULT-EXECUTION)*
+26. [Negative Pheromones — Dead-End Tagging for Lesson & Content Paths](#-negative-pheromones--dead-end-tagging-for-lesson--content-paths) *(ENRICHED — Run 36 from VAULT-EXECUTION)*
+27. [Audit the Auditor — Meta-Validation for Teaching Quality](#-audit-the-auditor--meta-validation-for-teaching-quality) *(ENRICHED — Run 36 from VAULT-EXECUTION)*
+28. [Model-Switching Logic — AI Models for Teaching Delivery](#-model-switching-logic--ai-models-for-teaching-delivery) *(ENRICHED — Run 36 from VAULT-EXECUTION)*
+29. [Revenue Deployment Pipeline — Teaching Delivery Integration](#-revenue-deployment-pipeline--teaching-delivery-integration) *(ENRICHED — Run 36 from VAULT-EXECUTION)*
+30. [Source File Index](#-source-file-index)
 
 ---
 
@@ -907,6 +915,188 @@ This means Gospel 444 is enforced at three layers:
 
 ---
 
+## 🗺️ The Mapping Principle — Simulation vs Dynamic Map (ENRICHED — Run 36 from VAULT-EXECUTION)
+
+> Source: `Phoenix-Rise-Immortalize-/VAULT-EXECUTION/04-DEVILS-ADVOCATE-SESSION.md` (SHA: 5fe7f68)
+
+Michael's core distinction between **simulation** and **dynamic mapping** directly governs how lessons, content, and systems are built:
+
+> A simulation tries to predict and replicate reality. A dynamic map **responds to reality as it unfolds.**
+
+### Teaching Application
+
+The Michael Method is a **dynamic map**, not a simulation of good teaching:
+
+- **Simulation approach (rejected):** Pre-script every classroom interaction, predict student responses, build branching conversation trees
+- **Dynamic map approach (adopted):** Set the emotional hook, read the room, follow the student's energy, adjust in real-time
+
+This is why:
+- The 10-5-5-3 structure is a **framework** (map), not a **script** (simulation)
+- CHATTY PRIME provides **mechanics** while the human teacher provides **dynamic response**
+- Student profiles track **vectors** (direction of growth), not **positions** (static skill snapshots)
+
+### The Chinese Bamboo Tree Analogy
+
+> "The Chinese bamboo tree spends 5 years growing roots underground. Then it grows 90 feet in 6 weeks."
+
+Applied to NET:
+- **Root phase** = all the Soul DNA documentation, system architecture, Gospel 444 spec, content factory design
+- **Growth phase** = rapid lesson deployment, student acquisition, scaling
+- The root system (planning, canon, architecture) IS the product — the explosive growth comes from having the root system already built
+
+### Content & System Design Implication
+
+Every lesson, every system component, every canon page should be built as a **map node** that connects to other nodes — not as an isolated simulation. This is why:
+- Canon pages cross-reference each other
+- Lessons link to student profiles link to assessment data
+- The Content Factory pipeline feeds back into the Chaos Register
+
+---
+
+## 🐜 Negative Pheromones — Dead-End Tagging for Lesson & Content Paths (ENRICHED — Run 36 from VAULT-EXECUTION)
+
+> Source: `Phoenix-Rise-Immortalize-/VAULT-EXECUTION/04-DEVILS-ADVOCATE-SESSION.md` (SHA: 5fe7f68)
+
+Michael's **Ant/Pheromone analogy** with a critical extension — **Negative Pheromones**:
+
+> Ants leave pheromone trails so the next ant follows the proven path. But what about dead ends? **Tag the dead ends too.** Future drones redirect before wasting time.
+
+### Teaching Application
+
+When a lesson approach, content path, or teaching technique fails:
+
+1. **Document the failure** (Chaos Register, Lesson Failure Analysis)
+2. **Tag it as a negative pheromone** — explicitly mark WHY it failed and WHAT to do instead
+3. **Future content creation routes around it** — the Content Factory checks negative pheromones before building
+
+### Examples of Negative Pheromones in NET Teaching
+
+| Dead End | Negative Pheromone Tag | Redirect |
+|---|---|---|
+| Public error correction | `NEG: Confidence destruction in Vietnamese collectivist context` | Stealth Correction (Pillar 3) |
+| Grammar-first curriculum | `NEG: Volume/velocity collapse, student silence` | Mouse → Tiger emotional-first |
+| 18+ vocabulary per session | `NEG: Recall collapse at 12+, complete failure at 18` | Hard cap 10 (Miller's Law adjusted) |
+| Blue in any UI element | `NEG: Gospel 444 violation, instant aesthetic drift` | Sacred palette only |
+| Researcher Mode in content | `NEG: Incompatible voice, quarantine on detection` | Strip and resubmit |
+
+### System-Wide Value
+
+Negative pheromones compound over time. Every documented failure makes the NEXT lesson, the NEXT content package, the NEXT system decision **faster and more accurate**. The Content Factory's Quality Gate (auto-rejection triggers) is itself a set of crystallized negative pheromones.
+
+---
+
+## 🔍 Audit the Auditor — Meta-Validation for Teaching Quality (ENRICHED — Run 36 from VAULT-EXECUTION)
+
+> Source: `Phoenix-Rise-Immortalize-/VAULT-EXECUTION/04-DEVILS-ADVOCATE-SESSION.md` (SHA: 5fe7f68)
+
+Michael's meta-validation principle: **the system that checks quality must itself be checked.**
+
+### The Protocol
+
+> "Who audits the auditor? If your quality gate has never been stress-tested, it's decoration."
+
+Applied to teaching and content quality:
+
+1. **Level 1 — Content Audit:** Does the lesson meet 10-5-5-3? Does it pass the Quality Compliance Test (5 Questions)? Does it comply with Gospel 444?
+2. **Level 2 — Audit the Audit:** Are the quality criteria themselves still valid? Has classroom data revealed a failure mode that the current quality gate doesn't catch?
+3. **Level 3 — Meta-Audit:** Is the audit process itself creating blind spots? (e.g., checking for "wrong" in scripts but not checking for equivalent shame-inducing language)
+
+### Teaching-Specific Implementation
+
+| Audit Level | What's Checked | Frequency | Owner |
+|---|---|---|---|
+| L1 — Content | Lesson packages vs 10-5-5-3 + Gospel 444 | Every package | Content Factory |
+| L2 — Criteria | Quality gates vs classroom outcome data | Monthly | Michael / Agent-99 |
+| L3 — Meta | Audit process vs undetected failure patterns | Quarterly | Michael (SOV100 only) |
+
+### Connection to Lesson Failure Analysis
+
+The 10 Failure Modes (Section 12) are the output of L2 auditing — they exist because someone audited the audit and found gaps. New failure modes discovered in classroom chaos should trigger an L2 review of whether current quality gates would have caught them.
+
+---
+
+## 🤖 Model-Switching Logic — AI Models for Teaching Delivery (ENRICHED — Run 36 from VAULT-EXECUTION)
+
+> Source: `Phoenix-Rise-Immortalize-/VAULT-EXECUTION/04-DEVILS-ADVOCATE-SESSION.md` (SHA: 5fe7f68)
+
+Michael's model-switching framework assigns specific AI models to specific cognitive functions:
+
+| Model | Role | Teaching Application |
+|---|---|---|
+| **Gemini** | Architect | Lesson structure design, curriculum planning, content framework generation |
+| **Claude** | Consolidator | Canon synthesis, document merging, cross-reference building, quality auditing |
+| **Perplexity** | Simulator | Student response prediction, market research, trend analysis for lesson topics |
+| **GPT** | Builder | HTML lesson generation, interactive content, game mechanic implementation |
+
+### Teaching Delivery Implications
+
+- **CHATTY PRIME** (student-facing) uses the **Builder** pattern — real-time response generation, interactive dialogue, game mechanics
+- **Content Factory** back-end uses **Architect** (structure) → **Consolidator** (quality check) → **Builder** (delivery package)
+- **Lesson topic research** uses **Simulator** — what topics are trending with Vietnamese youth? What vocabulary has highest real-world utility?
+
+### The Spaces Function (Document Compression)
+
+> "Compress the document into its essential functions and decisions. Strip the noise."
+
+Applied to lesson design: every lesson pack should be compressible to its **essential teaching decisions**:
+- What 10 words? (and why THESE 10)
+- What emotional hook? (and why THIS hook for THIS student profile)
+- What 3 games? (and why THIS sequence)
+
+If a lesson can't be compressed to its decisions, it has noise that needs cutting.
+
+---
+
+## 💰 Revenue Deployment Pipeline — Teaching Delivery Integration (ENRICHED — Run 36 from VAULT-EXECUTION)
+
+> Source: `Phoenix-Rise-Immortalize-/VAULT-EXECUTION/21-REVENUE-DEPLOYMENT-PIPELINE.md` (SHA: 9a6841c5)
+
+The revenue pipeline directly integrates with teaching delivery — enrollment IS the first teaching moment:
+
+### 4 Revenue Streams (Teaching-Adjacent)
+
+| Stream | Description | Teaching Connection |
+|---|---|---|
+| **Stream 1: Private Lessons** | 1-on-1 Mouse → Tiger transformation | Core Michael Method delivery |
+| **Stream 2: Group Classes** | 4-8 students, tier-matched | Tribal Engagement (Pillar 2) maximized |
+| **Stream 3: Enterprise** | Corporate deployment (BlueTech model) | Tiger Voice + professional English |
+| **Stream 4: Digital Product** | CHATTY PRIME self-service | AI-delivered 10-5-5-3, Human Moat for breakthroughs |
+
+### Stage 3 — Teaching Delivery Loop
+
+The revenue pipeline's Stage 3 is the teaching delivery itself:
+
+```
+ENROLLMENT → PLACEMENT (Mouse/Cub/Tiger) → LESSON DELIVERY → ASSESSMENT → RETENTION/UPSELL
+```
+
+- **Placement** uses the Tiger scoring threshold (≥80 = Tiger)
+- **Lesson delivery** follows the 10-5-5-3 structure with Gospel 444 compliance
+- **Assessment** is invisible (woven into games per Assessment Integration spec)
+- **Retention** is driven by parent communication (Tiger Meter + weekly Zalo)
+- **Upsell** is natural: Mouse → Cub → Tiger → Enterprise pipeline
+
+### Milestone Gates (Revenue × Teaching Quality)
+
+| Milestone | Revenue Gate | Teaching Quality Gate |
+|---|---|---|
+| M1: First 10 students | 20M VND/month | All students show confidence increase |
+| M2: First enterprise client | 50M VND/contract | Corporate satisfaction survey ≥ 8/10 |
+| M3: 50 active students | 150M VND/month | Tiger conversion rate ≥ 30% |
+| M4: Second location | 300M VND/month | Teacher certification pipeline active |
+
+### Revenue Ledger Integration
+
+Every teaching session generates a revenue event. The Revenue Ledger tracks:
+- Session delivered (date, student, tier, duration)
+- Payment status (collected / outstanding / waived)
+- Tier progression events (Mouse → Cub, Cub → Tiger)
+- Upsell triggers (student mentions colleagues, parent asks about siblings)
+
+Teaching quality and revenue are **the same measurement** — a student who progresses fast pays more AND refers more. The Michael Method IS the revenue engine.
+
+---
+
 ## 🗄️ Source File Index
 
 ### VAULT-NET-SEEDS (hobbs-lab/Phoenix-Rise-Immortalize-)
@@ -938,6 +1128,8 @@ This means Gospel 444 is enforced at three layers:
 |---|---|---|
 | `DEPLOYMENT-LESSONS-LEARNED.md` | `fd2fd92` | 20 deployment lessons (Lesson 7: blue banned in UI) |
 | `DELTA-BLOCKS-63-75.md` | `40ed5c7` | Block 71: Classroom Hack, Block 75: Jedi Lock |
+| `04-DEVILS-ADVOCATE-SESSION.md` | `5fe7f68` | **NEW Run 36** — Mapping Principle, Negative Pheromones, Audit the Auditor, Model-Switching Logic, Four Core Principles |
+| `21-REVENUE-DEPLOYMENT-PIPELINE.md` | `9a6841c5` | **NEW Run 36** — 4 revenue streams, teaching delivery loop, milestone gates, Revenue Ledger |
 
 ### VAULT-ORACLE (hobbs-lab/Phoenix-Rise-Immortalize-) — Cross-Repo Enrichment
 
@@ -947,15 +1139,42 @@ This means Gospel 444 is enforced at three layers:
 
 ---
 
-## Cross-Repo Synthesis Notes (Run 24)
+## Cross-Repo Synthesis Notes
 
-### Sources Mined
+### Run 36 (2026-03-26T16:00+07:00) — ENRICHED Refresh
+
+**New Sources Mined:**
+1. **VAULT-EXECUTION/04-DEVILS-ADVOCATE-SESSION.md** (`Phoenix-Rise-Immortalize-`, SHA: `5fe7f68`): Rich teaching-adjacent content discovered. Four unique concepts extracted and added as new sections:
+   - **The Mapping Principle** — Michael's simulation vs dynamic map distinction applied to lesson design (lessons are maps, not scripts)
+   - **Negative Pheromones** — dead-end tagging system for failed teaching approaches. Compounds over time. Content Factory Quality Gate = crystallized negative pheromones.
+   - **Audit the Auditor** — 3-level meta-validation (Content → Criteria → Meta). Connects to Lesson Failure Analysis as L2 output.
+   - **Model-Switching Logic** — Gemini=Architect, Claude=Consolidator, Perplexity=Simulator, GPT=Builder applied to teaching delivery chain. Spaces Function = lesson compression test.
+2. **VAULT-EXECUTION/21-REVENUE-DEPLOYMENT-PIPELINE.md** (`Phoenix-Rise-Immortalize-`, SHA: `9a6841c5`): Revenue pipeline Stage 3 IS the teaching delivery loop. 4 revenue streams mapped to teaching modalities. Milestone gates combine revenue and teaching quality metrics. Revenue Ledger integration — every session is a revenue event.
+
+**Also in Devils Advocate but NOT added (already covered elsewhere):**
+- Four Core Principles (Truth, Energy Governance, Rome Protocol, Faith) — covered in Core Principles & Physics canon
+- Chinese Bamboo Tree analogy — referenced in Mapping Principle section only, full treatment in Soul DNA
+- Immutable Back-End vs Flexible Front-End — covered in Comet RE architecture
+- Data Sovereignty & Vault Strategy — covered in 8 Pillars (Pillar IV)
+- $50K-for-$5K Model — business model, not directly teaching method
+- 10-Stage Audit (Stages 1-2) — audit process, referenced in Audit the Auditor
+- 20-Block Content Mapping to Bible Chapters — Bible structure, not teaching method
+
+**Enrichment Summary:**
+- **5 new sections added** (25→30 sections total)
+- **2 new cross-repo sources** (3→5 total)
+- **Zero contradictions** with existing content
+- **Zero content removed** — append-first principle maintained
+
+### Run 24 (2026-03-26T03:00+07:00) — Initial ENRICHED Export
+
+**Sources Mined:**
 1. **VAULT-ORACLE/17-DUMP-INGEST-PROTOCOL.md** (`Phoenix-Rise-Immortalize-`): Gospel 444 alignment is enforced at the data ingestion layer via GOSPEL444 classification tag, drift score 3 flagging for contradictions, and Researcher Mode quarantine. Three-layer enforcement model discovered: UI + Content + Data.
 2. **SOUL-DNA-BIBLE/04_SUPER_SAIYAN_STAGE_2.md** (`Phoenix-Rise-Immortalize-`): Teaching and lesson references within Super Saiyan Stage 2 context. Already indexed in Bible audit.
 3. **SOUL-DNA-BIBLE/15_CONSOLIDATION_COMPLETE_PRINT.md** (`Phoenix-Rise-Immortalize-`): Consolidation print with teaching method references. Already indexed.
 4. **NET-Ai-EcoSystem-CommandStation**: 0 results — no teaching content in product code repo.
 
-### Enrichment Summary
+**Enrichment Summary:**
 - **Added**: Active Student Profiles section (8 students from Notion, including Mai Tram and Quy from recent sessions)
 - **Added**: NET Website Flow section (8-step Gospel 444 web spec funnel)
 - **Added**: Sith Filter lead scoring + Kill Switches (operational marketing canon)
@@ -967,4 +1186,4 @@ This means Gospel 444 is enforced at three layers:
 
 ---
 
-🔒 CANON SEALED. ENRICHED EXPORT. 15 SOURCES + 3 CROSS-REPO. LEDGER IS LAW. 🦅
+🔒 CANON SEALED. ENRICHED EXPORT. 15 SOURCES + 5 CROSS-REPO. 30 SECTIONS. LEDGER IS LAW. 🦅
