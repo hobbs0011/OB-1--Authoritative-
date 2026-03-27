@@ -1,16 +1,17 @@
 --[[
     UnifiedServer.lua — Single Entry Point Server Script
     Skibidi Zombie: Survive the Brainrots
-    
+
     RESOLVES: The Two-Server Problem (GameMain + MainServer_v2 collision)
     This is THE one server script.
-    
+
     GOAL: MAKE MONEY. English is the game mechanic.
     Boot order: UnifiedServer → ServerGateway → all server modules
-    
+
     Architecture: Script (ServerScriptService) — THE entry point
-    Version: 1.0.0
-    Date: 2026-03-26
+    Version: 1.0.1
+    Date: 2026-03-27
+    Run: 64
 --]]
 
 local ServerScriptService = game:GetService("ServerScriptService")
@@ -28,8 +29,9 @@ local BOOT_ORDER = {
     { name = "ServerGateway",     path = "ServerGateway",     required = true  },
     { name = "SecurityLayer",     path = "SecurityLayer",     required = true  },
     { name = "DataStoreV2",       path = "DataStoreV2",       required = true  },
+    { name = "AnalyticsService",  path = "AnalyticsService",  required = false },
     -- Phase 2: Game systems
-    { name = "QuestionBank",      path = "QuestionBank",      required = true  },
+    { name = "QuestionBankV2",    path = "QuestionBankV2",    required = true  },
     { name = "EnemyFactory",      path = "EnemyFactory",      required = true  },
     { name = "CombatSystem",      path = "CombatSystem",      required = true  },
     { name = "WaveManager",       path = "WaveManager",       required = true  },
@@ -66,7 +68,7 @@ local function loadModule(entry)
     local moduleScript = ServerStorage:FindFirstChild(entry.path)
         or ServerScriptService:FindFirstChild(entry.path)
         or ServerStorage:FindFirstChild(entry.path, true)
-    
+
     if not moduleScript then
         if entry.required then
             log("FATAL", name .. " — MODULE NOT FOUND (REQUIRED)")
@@ -76,7 +78,7 @@ local function loadModule(entry)
             return true
         end
     end
-    
+
     local ok, result = pcall(require, moduleScript)
     if not ok then
         if entry.required then
@@ -87,9 +89,9 @@ local function loadModule(entry)
             return true
         end
     end
-    
+
     Modules[name] = result
-    
+
     if type(result) == "table" and type(result.Init) == "function" then
         local initOk, initErr = pcall(result.Init)
         if not initOk then
@@ -102,7 +104,7 @@ local function loadModule(entry)
             end
         end
     end
-    
+
     log("OK", name .. " — loaded")
     table.insert(BootLog, { name = name, status = "OK", time = tick() - bootStart })
     return true
@@ -114,15 +116,22 @@ end
 
 local function onPlayerAdded(player)
     log("INFO", "Player joined: " .. player.Name)
+
     if Modules.DataStoreV2 then
         Modules.DataStoreV2.LoadPlayer(player)
     end
+
+    if Modules.AnalyticsService then
+        Modules.AnalyticsService.StartSession(player)
+    end
+
     if Modules.FTUEManager then
         local data = Modules.DataStoreV2 and Modules.DataStoreV2.GetPlayerData(player)
         if data and not data.ftueComplete then
             Modules.FTUEManager.StartFTUE(player)
         end
     end
+
     if Modules.DailyRewards then
         Modules.DailyRewards.CheckIn(player)
     end
@@ -130,6 +139,11 @@ end
 
 local function onPlayerRemoving(player)
     log("INFO", "Player leaving: " .. player.Name)
+
+    if Modules.AnalyticsService then
+        Modules.AnalyticsService.EndSession(player)
+    end
+
     if Modules.DataStoreV2 then
         local ok, err = pcall(function() Modules.DataStoreV2.SavePlayer(player) end)
         if not ok then
@@ -149,7 +163,7 @@ local function setupRemoteEvents()
         remotes.Name = "Remotes"
         remotes.Parent = ReplicatedStorage
     end
-    
+
     local events = {
         "RequestQuestion", "SubmitAnswer", "ActivatePowerUp",
         "QuestionDelivered", "AnswerResult", "PlayerDied", "PlayerRespawned",
@@ -157,7 +171,7 @@ local function setupRemoteEvents()
         "PowerUpReady", "PowerUpActivated", "TierChanged",
         "CurrencyUpdate", "TeachingMilestone",
     }
-    
+
     for _, eventName in ipairs(events) do
         if not remotes:FindFirstChild(eventName) then
             local re = Instance.new("RemoteEvent")
@@ -165,7 +179,7 @@ local function setupRemoteEvents()
             re.Parent = remotes
         end
     end
-    
+
     -- Wire handlers
     local rq = remotes:FindFirstChild("RequestQuestion")
     if rq and Modules.CombatSystem and Modules.SecurityLayer then
@@ -176,7 +190,7 @@ local function setupRemoteEvents()
             if qData then remotes.QuestionDelivered:FireClient(player, qData) end
         end)
     end
-    
+
     local sa = remotes:FindFirstChild("SubmitAnswer")
     if sa and Modules.CombatSystem and Modules.SecurityLayer then
         sa.OnServerEvent:Connect(function(player, answerId)
@@ -194,7 +208,7 @@ local function setupRemoteEvents()
             end
         end)
     end
-    
+
     local ap = remotes:FindFirstChild("ActivatePowerUp")
     if ap and Modules.CombatSystem and Modules.SecurityLayer then
         ap.OnServerEvent:Connect(function(player)
@@ -205,7 +219,7 @@ local function setupRemoteEvents()
             end
         end)
     end
-    
+
     log("OK", "Remote events: " .. #events .. " configured")
 end
 
@@ -255,6 +269,12 @@ for _, player in ipairs(Players:GetPlayers()) do
     task.spawn(onPlayerAdded, player)
 end
 RunService.Heartbeat:Connect(onHeartbeat)
+
+game:BindToClose(function()
+    if Modules.AnalyticsService then
+        Modules.AnalyticsService.Shutdown()
+    end
+end)
 
 local bootTime = tick() - bootStart
 local moduleCount = 0
