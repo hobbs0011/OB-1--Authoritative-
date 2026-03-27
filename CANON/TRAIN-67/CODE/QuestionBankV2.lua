@@ -5,7 +5,7 @@ Module: QuestionBankV2.lua
 Type: Server ModuleScript (ServerStorage)
 Purpose: Replace monolithic QuestionBank.lua with chunked architecture
          scaling from 130 to 3,000+ questions.
-Version: 1.0.1
+Version: 1.0.2
 Date: March 27, 2026
 Patch: HTML entity sanitize (Studio-safe)
 Gospel 444 Compliant — NO BLUE

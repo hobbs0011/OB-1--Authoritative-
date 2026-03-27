@@ -10,7 +10,7 @@ Purpose: Centralized analytics hub — all game telemetry
          Channel 1: Roblox AnalyticsService (real-time, free, dashboard)
          Channel 2: DataStore (aggregated, in-game adaptive systems)
 
-Version: 1.0.1
+Version: 1.0.2
 Date: 2026-03-27
 Patch: HTML entity sanitize (Studio-safe)
 

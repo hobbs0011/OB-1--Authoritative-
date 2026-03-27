@@ -9,7 +9,7 @@
     Boot order: UnifiedServer → ServerGateway → all server modules
 
     Architecture: Script (ServerScriptService) — THE entry point
-    Version: 1.0.2
+    Version: 1.0.3
     Date: 2026-03-27
     Patch: HTML entity sanitize (Studio-safe)
 --]]
