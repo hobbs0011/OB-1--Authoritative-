@@ -9,9 +9,9 @@
     Boot order: UnifiedServer → ServerGateway → all server modules
 
     Architecture: Script (ServerScriptService) — THE entry point
-    Version: 1.0.1
+    Version: 1.0.2
     Date: 2026-03-27
-    Run: 64
+    Patch: HTML entity sanitize (Studio-safe)
 --]]
 
 local ServerScriptService = game:GetService("ServerScriptService")

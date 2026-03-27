@@ -5,37 +5,21 @@ Module: QuestionBankV2.lua
 Type: Server ModuleScript (ServerStorage)
 Purpose: Replace monolithic QuestionBank.lua with chunked architecture
          scaling from 130 to 3,000+ questions.
-Version: 1.0
-Date: March 27, 2026 | Pulse Run: 63
+Version: 1.0.1
+Date: March 27, 2026
+Patch: HTML entity sanitize (Studio-safe)
 Gospel 444 Compliant — NO BLUE
 Phoenix Rising Gaming Division
-
-SOURCES:
-  QuestionBank.lua (SHA: 328e63c4) — v1 monolith, 130 questions
-  ServerArchitectureQuestionBankScaling.md (SHA: f310ea1f)
-  EloManager.lua (SHA: 5d939298) — Elo adaptive difficulty
-  UnifiedServer.lua (SHA: ccd827bf) — boot order
-  AnalyticsService.lua (SHA: 6ce6451f) — telemetry
-  FTUEController.lua (SHA: 1a8475b0) — FTUE hooks
-
-ARCHITECTURE:
-  QuestionRegistry (lightweight index) → ChunkLoader (lazy tier load)
-  → DataStoreLoader (overflow + LRU cache) → FormatHandlers (6 types)
-  → LocalizationService (L1→L2 Thai) → EloManager + AnalyticsService
 =====================================================================
 ]]
 
 local QuestionBankV2 = {}
 
--- SERVICES
 local ServerStorage = game:GetService("ServerStorage")
 local ServerScriptService = game:GetService("ServerScriptService")
 local DataStoreService = game:GetService("DataStoreService")
 local HttpService = game:GetService("HttpService")
 
--- =====================================================================
--- CONFIGURATION
--- =====================================================================
 local CONFIG = {
 	CHUNK_BASE_PATH = "QuestionChunks",
 	ENABLE_DATASTORE_OVERFLOW = true,
@@ -65,9 +49,6 @@ local CONFIG = {
 	},
 }
 
--- =====================================================================
--- QUESTION REGISTRY (lightweight index — NO full bodies)
--- =====================================================================
 local Registry = {
 	byId = {},
 	byTier = {},
@@ -121,9 +102,6 @@ local function registerQuestion(entry)
 	Registry.totalCount = Registry.totalCount + 1
 end
 
--- =====================================================================
--- CHUNK LOADER (lazy-load tier ModuleScripts on demand)
--- =====================================================================
 local loadedChunks = {}
 
 local function loadChunk(chunkName)
@@ -157,9 +135,6 @@ local function getQuestionFromChunk(questionId, tier, subTier)
 	return nil
 end
 
--- =====================================================================
--- LRU CACHE (DataStore overflow questions, max 200)
--- =====================================================================
 local lruCache = {}
 local lruOrder = {}
 
@@ -187,9 +162,6 @@ local function lruPut(qid, body)
 	table.insert(lruOrder, qid)
 end
 
--- =====================================================================
--- DATASTORE LOADER (overflow for 500+ questions)
--- =====================================================================
 local dsReadCount = 0
 local dsReadResetTime = os.clock()
 
@@ -217,9 +189,6 @@ local function getQuestionFromDataStore(qid)
 	return nil
 end
 
--- =====================================================================
--- QUESTION RESOLVER (unified: chunk → DataStore → legacy fallback)
--- =====================================================================
 function QuestionBankV2.ResolveQuestion(questionId)
 	local idx = Registry.byId[questionId]
 	if not idx then return nil end
@@ -236,9 +205,6 @@ function QuestionBankV2.ResolveQuestion(questionId)
 	return nil
 end
 
--- =====================================================================
--- FORMAT HANDLERS (6 question types)
--- =====================================================================
 local FormatHandlers = {}
 
 local function shuffleArray(arr)
@@ -398,9 +364,6 @@ FormatHandlers.fill_blank = {
 	end,
 }
 
--- =====================================================================
--- LOCALIZATION SERVICE (L1→L2 Thai/English, progressive fade)
--- =====================================================================
 local function getLocalization(question, playerData)
 	local totalAnswered = playerData.totalQuestionsAnswered or 0
 	local l1 = playerData.l1Language or CONFIG.DEFAULT_L1
@@ -449,9 +412,6 @@ local function getLocalization(question, playerData)
 	}
 end
 
--- =====================================================================
--- V1 MIGRATION (convert 130 existing questions to v2 schema)
--- =====================================================================
 function QuestionBankV2.MigrateV1(v1Questions)
 	if not v1Questions or type(v1Questions) ~= "table" then return 0 end
 	loadedChunks["_legacy"] = {}
@@ -510,9 +470,6 @@ function QuestionBankV2.MigrateV1(v1Questions)
 	return migrated
 end
 
--- =====================================================================
--- CHUNK REGISTRATION (for v2-native content)
--- =====================================================================
 function QuestionBankV2.RegisterChunk(chunkName, questions)
 	loadedChunks[chunkName] = {}
 	local count = 0
@@ -535,10 +492,6 @@ function QuestionBankV2.RegisterChunk(chunkName, questions)
 	end
 	print("[QBv2] Registered chunk '" .. chunkName .. "' — " .. count .. " questions")
 end
-
--- =====================================================================
--- QUESTION SERVICE — Main API
--- =====================================================================
 
 function QuestionBankV2.GetCandidates(criteria)
 	criteria = criteria or {}
@@ -740,30 +693,6 @@ function QuestionBankV2.PreWarm(playerData)
 	end)
 end
 
-function QuestionBankV2.GetQuestionLegacy(tier, mastered, struggling)
-	local playerData = {
-		currentTier = tier or 1,
-		vocabularyMastered = mastered or {},
-		vocabularyStruggling = struggling or {},
-		totalQuestionsAnswered = 0,
-	}
-	local payload = QuestionBankV2.GetQuestion(playerData, {})
-	if not payload then return nil end
-
-	local body = QuestionBankV2.ResolveQuestion(payload.questionId)
-	if not body then return nil end
-
-	return {
-		id = body.id,
-		prompt = type(body.prompt) == "table" and body.prompt.en or body.prompt,
-		options = payload.options or {},
-		correctAnswer = body.answer or body.correctAnswer,
-		targetWord = body.targetWord,
-		explanation = body.explanation,
-		tier = tier or 1,
-	}
-end
-
 function QuestionBankV2.ValidateAnswer(questionId, answer)
 	local body = QuestionBankV2.ResolveQuestion(questionId)
 	if not body then return false end
@@ -790,20 +719,6 @@ function QuestionBankV2.GetStats()
 		lruCacheSize = #lruOrder,
 		dsReadsThisMinute = dsReadCount,
 	}
-end
-
-function QuestionBankV2.GetQuestionElo(qid)
-	local e = Registry.byId[qid]
-	return e and e.elo or 1000
-end
-
-function QuestionBankV2.UpdateQuestionElo(qid, newElo)
-	local e = Registry.byId[qid]
-	if e then e.elo = newElo end
-end
-
-function QuestionBankV2.GetFTUESequence()
-	return Registry.ftueSequence
 end
 
 function QuestionBankV2.Init(_deps)
@@ -844,7 +759,7 @@ function QuestionBankV2.Init(_deps)
 	end)
 
 	print("======================================================")
-	print("📚 QuestionBankV2 v1.0 — Chunked-Loading Question Service")
+	print("📚 QuestionBankV2 — Chunked-Loading Question Service")
 	print("  Total questions: " .. Registry.totalCount)
 	print("  Formats: " .. table.concat(CONFIG.FORMATS, ", "))
 	print("  L1 support: " .. CONFIG.DEFAULT_L1 .. " → " .. CONFIG.TARGET_L2)
