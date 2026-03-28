@@ -6,12 +6,22 @@
     This is THE one server script.
 
     GOAL: MAKE MONEY. English is the game mechanic.
-    Boot order: UnifiedServer → ServerGateway → all server modules
+    Boot order: UnifiedServer -> ServerGateway -> all server modules
 
     Architecture: Script (ServerScriptService) — THE entry point
-    Version: 1.0.4
-    Date: 2026-03-27
-    Patch: HTML entity sanitize (Studio-safe)
+    Version: 2.0.0
+    Date: 2026-03-28
+    Changes v2.0:
+      - Added 6 new modules to boot order: EloManager, ReceiptRouter,
+        MonetizationOrchestrator, EnglishRewardsManager, FTUEController,
+        CosmeticController
+      - Total server modules: 28 (was 22)
+      - Enhanced player lifecycle with EloManager + EnglishRewards hooks
+      - Enhanced shutdown with economy flush + receipt drain
+      - Added client module registry (documentation for Studio wiring)
+      - Sanitized all operators (Studio-safe, no HTML entities)
+      - Added ReceiptRouter ProcessReceipt wiring
+      - Added MonetizationOrchestrator contextual trigger hooks
 --]]
 
 local ServerScriptService = game:GetService("ServerScriptService")
@@ -19,40 +29,66 @@ local ServerStorage = game:GetService("ServerStorage")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
+local MarketplaceService = game:GetService("MarketplaceService")
 
 --------------------------------------------------------------------------------
--- BOOT SEQUENCE
+-- BOOT SEQUENCE (28 server modules, dependency-ordered)
 --------------------------------------------------------------------------------
 
 local BOOT_ORDER = {
-    -- Phase 1: Core infrastructure
-    { name = "ServerGateway",     path = "ServerGateway",     required = true  },
-    { name = "SecurityLayer",     path = "SecurityLayer",     required = true  },
-    { name = "DataStoreV2",       path = "DataStoreV2",       required = true  },
-    { name = "AnalyticsService",  path = "AnalyticsService",  required = false },
-    -- Phase 2: Game systems
-    { name = "QuestionBankV2",    path = "QuestionBankV2",    required = true  },
-    { name = "EnemyFactory",      path = "EnemyFactory",      required = true  },
-    { name = "CombatSystem",      path = "CombatSystem",      required = true  },
-    { name = "WaveManager",       path = "WaveManager",       required = true  },
-    -- Phase 3: Economy & progression (non-blocking)
-    { name = "EconomyManager",    path = "EconomyManager",    required = false },
-    { name = "MonetizationServer",path = "MonetizationServer",required = false },
-    { name = "DailyRewards",      path = "DailyRewards",      required = false },
-    { name = "BattlePass",        path = "BattlePass",        required = false },
-    { name = "GachaManager",      path = "GachaManager",      required = false },
-    -- Phase 4: Social & meta (non-blocking)
-    { name = "LeaderboardManager",path = "LeaderboardManager",required = false },
-    { name = "GuildManager",      path = "GuildManager",      required = false },
-    { name = "ReferralSystem",    path = "ReferralSystem",    required = false },
-    { name = "TradeManager",      path = "TradeManager",      required = false },
-    { name = "ChallengeManager",  path = "ChallengeManager",  required = false },
-    -- Phase 5: Advanced (non-blocking)
-    { name = "PrestigeManager",   path = "PrestigeManager",   required = false },
-    { name = "WorldBoss",         path = "WorldBoss",         required = false },
-    { name = "AnomalyDetector",   path = "AnomalyDetector",   required = false },
-    { name = "FTUEManager",       path = "FTUEManager",       required = false },
+    -- Phase 1: Core infrastructure (REQUIRED — boot fails without these)
+    { name = "ServerGateway",          path = "ServerGateway",          required = true  },
+    { name = "SecurityLayer",          path = "SecurityLayer",          required = true  },
+    { name = "DataStoreV2",            path = "DataStoreV2",            required = true  },
+    { name = "AnalyticsService",       path = "AnalyticsService",       required = false },
+
+    -- Phase 2: Core gameplay (combat + questions + progression)
+    { name = "QuestionBankV2",         path = "QuestionBankV2",         required = true  },
+    { name = "EloManager",             path = "EloManager",             required = false },
+    { name = "EnemyFactory",           path = "EnemyFactory",           required = true  },
+    { name = "CombatSystem",           path = "CombatSystem",           required = true  },
+    { name = "WaveManager",            path = "WaveManager",            required = true  },
+
+    -- Phase 3: Economy, monetization & rewards
+    { name = "EconomyManager",         path = "EconomyManager",         required = false },
+    { name = "ReceiptRouter",          path = "ReceiptRouter",          required = false },
+    { name = "MonetizationServer",     path = "MonetizationServer",     required = false },
+    { name = "MonetizationOrchestrator", path = "MonetizationOrchestrator", required = false },
+    { name = "EnglishRewardsManager",  path = "EnglishRewardsManager",  required = false },
+    { name = "DailyRewards",           path = "DailyRewards",           required = false },
+    { name = "BattlePass",             path = "BattlePass",             required = false },
+    { name = "GachaManager",           path = "GachaManager",           required = false },
+
+    -- Phase 4: Social, cosmetics & meta
+    { name = "LeaderboardManager",     path = "LeaderboardManager",     required = false },
+    { name = "GuildManager",           path = "GuildManager",           required = false },
+    { name = "ReferralSystem",         path = "ReferralSystem",         required = false },
+    { name = "TradeManager",           path = "TradeManager",           required = false },
+    { name = "ChallengeManager",       path = "ChallengeManager",       required = false },
+    { name = "CosmeticController",     path = "CosmeticController",     required = false },
+
+    -- Phase 5: Advanced systems
+    { name = "PrestigeManager",        path = "PrestigeManager",        required = false },
+    { name = "WorldBoss",              path = "WorldBoss",              required = false },
+    { name = "AnomalyDetector",        path = "AnomalyDetector",        required = false },
+    { name = "FTUEManager",            path = "FTUEManager",            required = false },
+    { name = "FTUEController",         path = "FTUEController",         required = false },
 }
+
+--[[
+    CLIENT MODULE REGISTRY (not booted here — wired in StarterPlayerScripts)
+    These modules live in ReplicatedStorage or StarterPlayerScripts:
+      - ClientBridge.lua        — client->server event dispatcher
+      - CodexClient.lua         — vocabulary codex UI
+      - CodexData.lua           — shared codex data (ReplicatedStorage)
+      - HUDController_v2.lua    — heads-up display (health, combo, wave)
+      - MobileInputController.lua — 4-mode English input (TapSelect, WordBuilder, SpeedType, QuickReact)
+
+    CONFIG MODULES (loaded by other modules, not booted independently):
+      - DevProductsConfig.lua   — developer product ID registry
+      - GamePassConfig.lua      — game pass ID registry
+      - LedgerSchema.lua        — economy ledger field definitions
+]]
 
 local Modules = {}
 local BootLog = {}
@@ -71,10 +107,10 @@ local function loadModule(entry)
 
     if not moduleScript then
         if entry.required then
-            log("FATAL", name .. " — MODULE NOT FOUND (REQUIRED)")
+            log("FATAL", name .. " -- MODULE NOT FOUND (REQUIRED)")
             return false
         else
-            log("WARN", name .. " — not found (optional, skipping)")
+            log("WARN", name .. " -- not found (optional, skipping)")
             return true
         end
     end
@@ -82,10 +118,10 @@ local function loadModule(entry)
     local ok, result = pcall(require, moduleScript)
     if not ok then
         if entry.required then
-            log("FATAL", name .. " — REQUIRE FAILED: " .. tostring(result))
+            log("FATAL", name .. " -- REQUIRE FAILED: " .. tostring(result))
             return false
         else
-            log("WARN", name .. " — require failed: " .. tostring(result))
+            log("WARN", name .. " -- require failed: " .. tostring(result))
             return true
         end
     end
@@ -96,35 +132,53 @@ local function loadModule(entry)
         local initOk, initErr = pcall(result.Init)
         if not initOk then
             if entry.required then
-                log("FATAL", name .. " — INIT FAILED: " .. tostring(initErr))
+                log("FATAL", name .. " -- INIT FAILED: " .. tostring(initErr))
                 return false
             else
-                log("WARN", name .. " — init failed: " .. tostring(initErr))
+                log("WARN", name .. " -- init failed: " .. tostring(initErr))
                 return true
             end
         end
     end
 
-    log("OK", name .. " — loaded")
+    log("OK", name .. " -- loaded")
     table.insert(BootLog, { name = name, status = "OK", time = tick() - bootStart })
     return true
 end
 
 --------------------------------------------------------------------------------
--- PLAYER LIFECYCLE
+-- PLAYER LIFECYCLE (enhanced v2.0)
 --------------------------------------------------------------------------------
 
 local function onPlayerAdded(player)
     log("INFO", "Player joined: " .. player.Name)
 
+    -- Core data load
     if Modules.DataStoreV2 then
         Modules.DataStoreV2.LoadPlayer(player)
     end
 
+    -- Analytics session
     if Modules.AnalyticsService then
         Modules.AnalyticsService.StartSession(player)
     end
 
+    -- Elo initialization (load or create rating)
+    if Modules.EloManager and type(Modules.EloManager.LoadPlayer) == "function" then
+        pcall(Modules.EloManager.LoadPlayer, player)
+    end
+
+    -- English rewards session init (streak check, tier load)
+    if Modules.EnglishRewardsManager and type(Modules.EnglishRewardsManager.OnPlayerJoin) == "function" then
+        pcall(Modules.EnglishRewardsManager.OnPlayerJoin, player)
+    end
+
+    -- Cosmetic load (pets, auras, skins)
+    if Modules.CosmeticController and type(Modules.CosmeticController.LoadPlayer) == "function" then
+        pcall(Modules.CosmeticController.LoadPlayer, player)
+    end
+
+    -- FTUE check
     if Modules.FTUEManager then
         local data = Modules.DataStoreV2 and Modules.DataStoreV2.GetPlayerData(player)
         if data and not data.ftueComplete then
@@ -132,18 +186,41 @@ local function onPlayerAdded(player)
         end
     end
 
+    -- Daily rewards check-in
     if Modules.DailyRewards then
         Modules.DailyRewards.CheckIn(player)
+    end
+
+    -- Monetization: contextual trigger for session start
+    if Modules.MonetizationOrchestrator and type(Modules.MonetizationOrchestrator.OnSessionStart) == "function" then
+        pcall(Modules.MonetizationOrchestrator.OnSessionStart, player)
     end
 end
 
 local function onPlayerRemoving(player)
     log("INFO", "Player leaving: " .. player.Name)
 
+    -- Analytics session end
     if Modules.AnalyticsService then
         Modules.AnalyticsService.EndSession(player)
     end
 
+    -- Elo save
+    if Modules.EloManager and type(Modules.EloManager.SavePlayer) == "function" then
+        pcall(Modules.EloManager.SavePlayer, player)
+    end
+
+    -- English rewards save (streak, tier state)
+    if Modules.EnglishRewardsManager and type(Modules.EnglishRewardsManager.OnPlayerLeave) == "function" then
+        pcall(Modules.EnglishRewardsManager.OnPlayerLeave, player)
+    end
+
+    -- Cosmetic save
+    if Modules.CosmeticController and type(Modules.CosmeticController.SavePlayer) == "function" then
+        pcall(Modules.CosmeticController.SavePlayer, player)
+    end
+
+    -- Core data save (last — captures all module state)
     if Modules.DataStoreV2 then
         local ok, err = pcall(function() Modules.DataStoreV2.SavePlayer(player) end)
         if not ok then
@@ -165,11 +242,21 @@ local function setupRemoteEvents()
     end
 
     local events = {
+        -- Core gameplay
         "RequestQuestion", "SubmitAnswer", "ActivatePowerUp",
         "QuestionDelivered", "AnswerResult", "PlayerDied", "PlayerRespawned",
         "WaveUpdate", "EnemySpawned", "EnemyDied", "ComboUpdate",
         "PowerUpReady", "PowerUpActivated", "TierChanged",
+        -- Economy
         "CurrencyUpdate", "TeachingMilestone",
+        -- English rewards
+        "StreakUpdate", "RewardClaimed", "TierProgression",
+        -- Cosmetics
+        "CosmeticEquipped", "CosmeticUnlocked", "FusionResult",
+        -- Mobile input
+        "InputModeChanged", "WordSubmitted",
+        -- Monetization
+        "OfferPresented", "OfferDismissed", "PurchaseComplete",
     }
 
     for _, eventName in ipairs(events) do
@@ -180,7 +267,7 @@ local function setupRemoteEvents()
         end
     end
 
-    -- Wire handlers
+    -- Wire core gameplay handlers
     local rq = remotes:FindFirstChild("RequestQuestion")
     if rq and Modules.CombatSystem and Modules.SecurityLayer then
         rq.OnServerEvent:Connect(function(player, enemyId)
@@ -205,6 +292,18 @@ local function setupRemoteEvents()
                 if result.correct and result.combo and result.combo >= 3 then
                     remotes.ComboUpdate:FireAllClients({ player = player.Name, combo = result.combo })
                 end
+                -- English rewards hook: correct answer -> reward check
+                if result.correct and Modules.EnglishRewardsManager then
+                    pcall(function()
+                        if type(Modules.EnglishRewardsManager.OnCorrectAnswer) == "function" then
+                            Modules.EnglishRewardsManager.OnCorrectAnswer(player, result)
+                        end
+                    end)
+                end
+                -- Elo update on answer
+                if Modules.EloManager and type(Modules.EloManager.OnAnswerResult) == "function" then
+                    pcall(Modules.EloManager.OnAnswerResult, player, result)
+                end
             end
         end)
     end
@@ -224,6 +323,27 @@ local function setupRemoteEvents()
 end
 
 --------------------------------------------------------------------------------
+-- RECEIPT PROCESSING (v2.0 — unified through ReceiptRouter)
+--------------------------------------------------------------------------------
+
+local function setupReceiptProcessing()
+    if Modules.ReceiptRouter and type(Modules.ReceiptRouter.ProcessReceipt) == "function" then
+        MarketplaceService.ProcessReceipt = function(receiptInfo)
+            return Modules.ReceiptRouter.ProcessReceipt(receiptInfo)
+        end
+        log("OK", "ProcessReceipt wired through ReceiptRouter")
+    elseif Modules.MonetizationServer and type(Modules.MonetizationServer.ProcessReceipt) == "function" then
+        -- Fallback to legacy monetization server
+        MarketplaceService.ProcessReceipt = function(receiptInfo)
+            return Modules.MonetizationServer.ProcessReceipt(receiptInfo)
+        end
+        log("OK", "ProcessReceipt wired through MonetizationServer (legacy fallback)")
+    else
+        log("WARN", "No ProcessReceipt handler available -- purchases will fail")
+    end
+end
+
+--------------------------------------------------------------------------------
 -- HEARTBEAT
 --------------------------------------------------------------------------------
 
@@ -240,11 +360,53 @@ local function onHeartbeat(dt)
 end
 
 --------------------------------------------------------------------------------
+-- SHUTDOWN (enhanced v2.0 — flush all stateful modules)
+--------------------------------------------------------------------------------
+
+local function onShutdown()
+    log("SHUTDOWN", "Server closing -- flushing all modules...")
+
+    -- Flush receipt queue first (money > everything)
+    if Modules.ReceiptRouter and type(Modules.ReceiptRouter.Drain) == "function" then
+        pcall(Modules.ReceiptRouter.Drain)
+    end
+
+    -- Save all player data
+    for _, player in ipairs(Players:GetPlayers()) do
+        if Modules.EloManager and type(Modules.EloManager.SavePlayer) == "function" then
+            pcall(Modules.EloManager.SavePlayer, player)
+        end
+        if Modules.EnglishRewardsManager and type(Modules.EnglishRewardsManager.OnPlayerLeave) == "function" then
+            pcall(Modules.EnglishRewardsManager.OnPlayerLeave, player)
+        end
+        if Modules.CosmeticController and type(Modules.CosmeticController.SavePlayer) == "function" then
+            pcall(Modules.CosmeticController.SavePlayer, player)
+        end
+        if Modules.DataStoreV2 then
+            pcall(function() Modules.DataStoreV2.SavePlayer(player) end)
+        end
+    end
+
+    -- Flush analytics buffer
+    if Modules.AnalyticsService then
+        pcall(Modules.AnalyticsService.Shutdown)
+    end
+
+    -- Flush economy ledger
+    if Modules.EconomyManager and type(Modules.EconomyManager.FlushLedger) == "function" then
+        pcall(Modules.EconomyManager.FlushLedger)
+    end
+
+    log("SHUTDOWN", "All modules flushed.")
+end
+
+--------------------------------------------------------------------------------
 -- MAIN BOOT
 --------------------------------------------------------------------------------
 
 log("BOOT", "=== SKIBIDI ZOMBIE: SURVIVE THE BRAINROTS ===")
 log("BOOT", "=== GOAL: MAKE MONEY ===")
+log("BOOT", "=== UnifiedServer v2.0 — 28 modules ===")
 log("BOOT", "Starting boot sequence...")
 
 local bootFailed = false
@@ -263,6 +425,8 @@ if bootFailed then
 end
 
 setupRemoteEvents()
+setupReceiptProcessing()
+
 Players.PlayerAdded:Connect(onPlayerAdded)
 Players.PlayerRemoving:Connect(onPlayerRemoving)
 for _, player in ipairs(Players:GetPlayers()) do
@@ -270,15 +434,17 @@ for _, player in ipairs(Players:GetPlayers()) do
 end
 RunService.Heartbeat:Connect(onHeartbeat)
 
-game:BindToClose(function()
-    if Modules.AnalyticsService then
-        Modules.AnalyticsService.Shutdown()
-    end
-end)
+game:BindToClose(onShutdown)
 
 local bootTime = tick() - bootStart
 local moduleCount = 0
 for _ in pairs(Modules) do moduleCount = moduleCount + 1 end
-log("BOOT", string.format("=== BOOT COMPLETE — %d modules in %.2fs ===", moduleCount, bootTime))
+log("BOOT", string.format("=== BOOT COMPLETE — %d/%d modules in %.2fs ===", moduleCount, #BOOT_ORDER, bootTime))
+
+-- Boot summary
+log("BOOT", "Server modules loaded:")
+for _, entry in ipairs(BootLog) do
+    log("BOOT", string.format("  [OK] %s (%.2fs)", entry.name, entry.time))
+end
 
 return Modules
