@@ -22,7 +22,8 @@ jobs:
       - name: Install Rojo
         run: |
           ROJO_VERSION="7.4.4"
-          curl -sL "https://github.com/rojo-rbx/rojo/releases/download/v${ROJO_VERSION}/rojo-${ROJO_VERSION}-linux-x86_64.zip" -o rojo.zip
+          curl -sL "{{https://github.com/rojo-rbx/rojo/releases/download/v${ROJO_VERSION}}}/rojo-${ROJO_VERSION}-linux-x86_64.zip" -o rojo.zip
+          mkdir -p "$HOME/.local/bin"
           unzip -o rojo.zip -d "$HOME/.local/bin"
           chmod +x "$HOME/.local/bin/rojo"
           echo "$HOME/.local/bin" >> $GITHUB_PATH
@@ -55,7 +56,7 @@ jobs:
 
           HTTP_STATUS=$(curl -s -o response.json -w "%{http_code}" \
             -X POST \
-            "https://apis.roblox.com/universes/v1/${UNIVERSE_ID}/places/${PLACE_ID}/versions?versionType=Published" \
+            "{{https://apis.roblox.com/universes/v1/${UNIVERSE_ID}}}/places/${PLACE_ID}/versions?versionType=Published" \
             -H "x-api-key: ${ROBLOX_API_KEY}" \
             -H "Content-Type: application/octet-stream" \
             --data-binary @build.rbxl)
