@@ -4,17 +4,15 @@ SURVIVE A BRAINROT — ECONOMY MANAGER (TWO-CURRENCY SYSTEM)
 Script: EconomyManager.lua
 Type: Server Module (ServerScriptService)
 Purpose: Survival Coins (soft) + Brainrot Gems (hard) economy
-Version: 1.0
-Date: March 26, 2026
-Pipeline: Stage 4 of 20 — Train 6-7 Launch Pipeline
-Gospel 444 Compliant — NO BLUE
-Phoenix Rising Gaming Division
+Version: 1.1 — ESL PURGE
+Date: March 28, 2026
+ZERO ESL REFERENCES. This game is about killing zombies and MAKING MONEY.
 ═══════════════════════════════════════════════════════════════
 DESIGN:
   Two-currency economy prevents inflation while monetizing:
   
   SURVIVAL COINS (soft currency):
-    - Earned through gameplay (kills, waves, challenges, English)
+    - Earned through gameplay (kills, waves, challenges, combos)
     - Spent on: standard weapons, basic cosmetics, repairs, crafting
     - Inflationary sinks: repair costs, crafting fees, trade tax
     
@@ -24,7 +22,7 @@ DESIGN:
     - Spent on: premium gacha, exclusive cosmetics, battle pass
     - Hard cap on free earning to preserve value
 
-  ALL transactions validated through AnomalyDetector (Stage 3)
+  ALL transactions validated through AnomalyDetector
 ═══════════════════════════════════════════════════════════════
 ]]
 
@@ -36,8 +34,7 @@ local DataStoreService = game:GetService("DataStoreService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 -- DEPENDENCIES
--- AnomalyDetector must be loaded before EconomyManager
-local AnomalyDetector = nil -- set via init()
+local AnomalyDetector = nil
 
 -- ══════════════════════════════════════════════════════════════
 -- CONFIGURATION
@@ -47,25 +44,29 @@ EconomyManager.Config = {
     StartingCoins = 100,
     StartingGems = 10,
     
-    -- Currency earn rates (per action)
+    -- Currency earn rates (per action) — COMBAT ONLY, NO ESL
     EarnRates = {
         EnemyKill = { Coins = 10, Gems = 0 },
         EliteKill = { Coins = 50, Gems = 1 },
         BossKill = { Coins = 200, Gems = 5 },
         WaveClear = { Coins = 50, Gems = 0 },
         DayComplete = { Coins = 100, Gems = 2 },
-        EnglishCorrect = { Coins = 15, Gems = 0 },
-        EnglishStreak5 = { Coins = 100, Gems = 1 },
+        ComboKill5 = { Coins = 50, Gems = 0 },
+        ComboKill10 = { Coins = 100, Gems = 1 },
+        ComboKill20 = { Coins = 200, Gems = 2 },
+        HeadshotKill = { Coins = 20, Gems = 0 },
+        ParrySuccess = { Coins = 30, Gems = 0 },
+        DodgeMaster = { Coins = 25, Gems = 0 },
         DailyChallenge = { Coins = 200, Gems = 3 },
         Achievement = { Coins = 500, Gems = 10 },
     },
     
     -- Economy sinks (prevent inflation)
     Sinks = {
-        WeaponRepairCost = 0.1,          -- 10% of weapon value
-        CraftingFee = 0.15,              -- 15% of material value
-        TradeTaxPercent = 3,             -- 3% tax on all trades
-        RebirthCostMultiplier = 1.5,     -- each rebirth costs more
+        WeaponRepairCost = 0.1,
+        CraftingFee = 0.15,
+        TradeTaxPercent = 3,
+        RebirthCostMultiplier = 1.5,
     },
     
     -- Hard currency (Gems) daily free cap
@@ -81,11 +82,11 @@ EconomyManager.Config = {
     },
     
     -- First purchase bonus
-    FirstPurchaseBonus = 2.0, -- 2x gems on first ever purchase
+    FirstPurchaseBonus = 2.0,
     
-    -- Gospel 444 Colors (NO BLUE)
-    CoinColor = Color3.fromRGB(245, 158, 11),   -- Gold #f59e0b
-    GemColor = Color3.fromRGB(168, 85, 247),     -- Purple #a855f7
+    -- Colors
+    CoinColor = Color3.fromRGB(245, 158, 11),
+    GemColor = Color3.fromRGB(168, 85, 247),
 }
 
 -- ══════════════════════════════════════════════════════════════
@@ -118,8 +119,7 @@ local function defaultEconomyData()
     }
 end
 
--- In-memory cache
-local playerEconomy = {} -- [UserId] = economy data
+local playerEconomy = {}
 
 -- ══════════════════════════════════════════════════════════════
 -- DATA MANAGEMENT
@@ -151,9 +151,7 @@ function EconomyManager.savePlayerData(player)
     
     local ok = pcall(function()
         store:UpdateAsync("eco_" .. tostring(player.UserId), function(old)
-            -- Merge with server data to prevent overwrite races
             if not old then return data end
-            -- Take the higher values for totals (append-first)
             data.TotalCoinsEarned = math.max(data.TotalCoinsEarned, old.TotalCoinsEarned or 0)
             data.TotalGemsEarned = math.max(data.TotalGemsEarned, old.TotalGemsEarned or 0)
             return data
@@ -175,6 +173,8 @@ function EconomyManager.getCoins(player)
     return data.Coins
 end
 
+EconomyManager.GetCoins = EconomyManager.getCoins
+
 function EconomyManager.getGems(player)
     local data = EconomyManager.getData(player)
     return data.Gems
@@ -189,13 +189,11 @@ end
 -- CURRENCY OPERATIONS (all validated through AnomalyDetector)
 -- ══════════════════════════════════════════════════════════════
 
---- Grant currency to player (validated)
 function EconomyManager.grant(player, currency, amount, source)
     if amount <= 0 then return false, "Amount must be positive" end
     
     local data = EconomyManager.getData(player)
     
-    -- Daily gem cap check
     if currency == "Gems" then
         local today = math.floor(os.time() / 86400)
         if data.LastDailyReset < today then
@@ -203,7 +201,6 @@ function EconomyManager.grant(player, currency, amount, source)
             data.LastDailyReset = today
         end
         
-        -- Don't cap Robux purchases, only free gems
         if source ~= "purchase" then
             local remaining = EconomyManager.Config.DailyFreeGemCap - data.DailyGemsEarned
             if remaining <= 0 then
@@ -213,7 +210,6 @@ function EconomyManager.grant(player, currency, amount, source)
         end
     end
     
-    -- Validate through AnomalyDetector
     if AnomalyDetector then
         local result = AnomalyDetector.validateTransaction(player, {
             txnId = AnomalyDetector.generateTxnId(),
@@ -229,7 +225,6 @@ function EconomyManager.grant(player, currency, amount, source)
         end
     end
     
-    -- Apply
     if currency == "Coins" then
         data.Coins = data.Coins + amount
         data.TotalCoinsEarned = data.TotalCoinsEarned + amount
@@ -241,20 +236,17 @@ function EconomyManager.grant(player, currency, amount, source)
         end
     end
     
-    -- Notify client
     EconomyManager.syncToClient(player)
     
     return true, amount
 end
 
---- Spend currency (validated, atomic check-and-subtract)
 function EconomyManager.spend(player, currency, amount, source)
     if amount <= 0 then return false, "Amount must be positive" end
     
     local data = EconomyManager.getData(player)
     local balance = currency == "Coins" and data.Coins or data.Gems
     
-    -- Validate through AnomalyDetector
     if AnomalyDetector then
         local result = AnomalyDetector.validateTransaction(player, {
             txnId = AnomalyDetector.generateTxnId(),
@@ -270,7 +262,6 @@ function EconomyManager.spend(player, currency, amount, source)
         end
     end
     
-    -- Atomic check-and-subtract
     if balance < amount then
         return false, "Insufficient " .. currency
     end
@@ -283,13 +274,40 @@ function EconomyManager.spend(player, currency, amount, source)
         data.TotalGemsSpent = data.TotalGemsSpent + amount
     end
     
-    -- Notify client
     EconomyManager.syncToClient(player)
     
     return true, data[currency]
 end
 
---- Reward player for a game action (uses EarnRates config)
+-- Bridge methods for CombatRewardsManager and other modules
+function EconomyManager.AddCoins(player, amount, source)
+    return EconomyManager.grant(player, "Coins", amount, source)
+end
+
+function EconomyManager.AddGems(player, amount, source)
+    return EconomyManager.grant(player, "Gems", amount, source)
+end
+
+function EconomyManager.AddXP(player, amount, source)
+    return EconomyManager.grant(player, "Coins", math.floor(amount * 0.5), source .. "_xp")
+end
+
+function EconomyManager.RemoveCoins(player, amount, source)
+    return EconomyManager.spend(player, "Coins", amount, source)
+end
+
+function EconomyManager.GrantCrate(player, rarity, source)
+    print(string.format("[EconomyManager] Granting %s crate to %s via %s", tostring(rarity), player.Name, tostring(source)))
+end
+
+function EconomyManager.GrantTitle(player, title, source)
+    print(string.format("[EconomyManager] Granting title '%s' to %s via %s", tostring(title), player.Name, tostring(source)))
+end
+
+function EconomyManager.ApplyBuff(player, buffId, source)
+    print(string.format("[EconomyManager] Applying buff '%s' to %s via %s", tostring(buffId), player.Name, tostring(source)))
+end
+
 function EconomyManager.reward(player, action)
     local rates = EconomyManager.Config.EarnRates[action]
     if not rates then
@@ -312,13 +330,11 @@ function EconomyManager.reward(player, action)
     return true, results
 end
 
---- Process trade tax (3% tax sink)
 function EconomyManager.calculateTradeTax(coinAmount)
     local taxRate = EconomyManager.Config.Sinks.TradeTaxPercent / 100
     return math.floor(coinAmount * taxRate)
 end
 
---- Process Robux gem purchase
 function EconomyManager.processGemPurchase(player, packIndex)
     local pack = EconomyManager.Config.GemPacks[packIndex]
     if not pack then return false, "Invalid pack" end
@@ -326,10 +342,8 @@ function EconomyManager.processGemPurchase(player, packIndex)
     local data = EconomyManager.getData(player)
     local gems = pack.Gems
     
-    -- Apply bonus
     gems = gems + math.floor(gems * pack.BonusPercent / 100)
     
-    -- First purchase bonus
     if not data.FirstPurchaseDone then
         gems = math.floor(gems * EconomyManager.Config.FirstPurchaseBonus)
         data.FirstPurchaseDone = true
@@ -337,7 +351,6 @@ function EconomyManager.processGemPurchase(player, packIndex)
     
     data.TotalRobuxSpent = data.TotalRobuxSpent + pack.Robux
     
-    -- Grant gems (bypasses daily cap for purchases)
     local ok, amount = EconomyManager.grant(player, "Gems", gems, "purchase")
     
     return ok, amount
@@ -359,7 +372,6 @@ function EconomyManager.syncToClient(player)
         })
     end
     
-    -- Also update leaderstats for compatibility
     local leaderstats = player:FindFirstChild("leaderstats")
     if leaderstats then
         local coins = leaderstats:FindFirstChild("Coins")
@@ -370,7 +382,7 @@ function EconomyManager.syncToClient(player)
 end
 
 -- ══════════════════════════════════════════════════════════════
--- ECONOMY STATS (for analytics/admin)
+-- ECONOMY STATS
 -- ══════════════════════════════════════════════════════════════
 
 function EconomyManager.getStats(player)
@@ -411,7 +423,6 @@ Players.PlayerRemoving:Connect(function(player)
     playerEconomy[player.UserId] = nil
 end)
 
--- Auto-save every 5 minutes
 task.spawn(function()
     while true do
         task.wait(300)
@@ -423,14 +434,10 @@ task.spawn(function()
     end
 end)
 
--- ══════════════════════════════════════════════════════════════
--- INIT
--- ══════════════════════════════════════════════════════════════
 print("══════════════════════════════════════════════════")
-print("💰 EconomyManager v1.0 — Two-Currency System")
+print("💰 EconomyManager v1.1 — Two-Currency System")
 print("Survival Coins (Gold) + Brainrot Gems (Purple)")
-print("Gospel 444 Compliant | NO BLUE")
-print("Pipeline: Stage 4 of 20")
+print("ZERO ESL | Pure Combat Economy")
 print("══════════════════════════════════════════════════")
 
 return EconomyManager
