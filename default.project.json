@@ -1,0 +1,12 @@
+{
+  "name": "Train67-BrainrotSurvival",
+  "tree": {
+    "$className": "DataModel",
+    "ServerScriptService": {
+      "$className": "ServerScriptService",
+      "Train67": {
+        "$path": "CANON/TRAIN-67/CODE"
+      }
+    }
+  }
+}
