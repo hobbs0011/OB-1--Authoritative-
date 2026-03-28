@@ -11,9 +11,9 @@
 
 It's designed for the Thai market (and global), targeting Roblox's **151.5 million daily players** — 70% on mobile.
 
-**The pitch:** A zombie survival game that secretly teaches English. Players think they're gaming. They're actually learning.
+**The pitch:** A zombie survival game built to **MAKE MONEY**. Players get hooked by every proven monetization and retention practice we've studied from the most successful Roblox games. The English component is what makes the game *unique* in a crowded market — it's the differentiator, not the mission. The mission is revenue.
 
-**Teaching Law:** Mouse → Tiger. Start easy, build confidence, then challenge.
+**Teaching Law:** Mouse → Tiger. Permission over perfection. (This keeps players engaged longer = more spend.)
 
 ---
 
@@ -309,6 +309,6 @@ English words learned **never reset** — learning is permanent.
 
 ## 📊 The Bottom Line
 
-A complete Roblox survival game: 41 systems, 5 enemy types, 5 difficulty tiers, 8 rarity levels, 3 cosmetic categories, 2 currencies, 5 game passes, 16+ dev products, battle pass, gacha, guilds, world boss, prestige, ranking, trading, daily rewards, referrals, challenges, leaderboards, analytics, anti-cheat, and English learning at the core.
+A complete Roblox survival game built to **MAKE MONEY**: 41 systems, 5 enemy types, 5 difficulty tiers, 8 rarity levels, 3 cosmetic categories, 2 currencies, 5 game passes, 16+ dev products, battle pass, gacha, guilds, world boss, prestige, ranking, trading, daily rewards, referrals, challenges, leaderboards, analytics, anti-cheat — all proven monetization and retention mechanics from the top Roblox games. English is the unique differentiator that sets us apart in the market, not the mission.
 
 **Launch status: 🔴 NOW.**
