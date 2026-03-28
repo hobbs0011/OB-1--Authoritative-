@@ -1,108 +1,101 @@
-# 🚀 Cloudflare Deploy Pipeline — 20 Stages
+# Cloudflare Deploy Pipeline — 20 Stages
 
-**Mission:** Deploy naturalenglishtraining.com on Cloudflare from zero to production  
-**Mode:** SUPER SAIYAN — Maximum output, governance intact  
-**Created:** 2026-03-28  
-**Repo:** hobbs-lab/Phoenix-Rising-Protocol-Ultimate  
+**Project:** Natural English Training  
+**Domain:** naturalenglishtraining.com  
+**Stack:** Cloudflare Pages + Workers + KV  
+**Started:** 2026-03-28  
+**Last updated:** 2026-03-28 22:50 ICT
 
----
+## Status Summary
 
-## Phase 1: Foundation (Stages 1–5)
+| Range | Status | Notes |
+|-------|--------|-------|
+| Stages 01-04 | ✅ SHIPPED | commit `9354ef81` |
+| Stages 05-07 | ✅ DONE | MX/SPF/DMARC via API script — ALL GREEN |
+| Stages 08-12 | ⏳ BLOCKED | Waiting on domain transfer (Squarespace → Cloudflare) |
+| Stages 13-15 | ✅ SHIPPED | commit `a60a8669` |
+| Stages 16-20 | ✅ SHIPPED | KV, widget, SEO, waitlist, QA |
 
-| # | Stage | Owner | Status | Artifact |
-|---|-------|-------|--------|----------|
-| 01 | Build OBI landing page (index.html) | AGENT | ✅ DONE | `SITE/index.html` |
-| 02 | Build 404 + error pages | AGENT | ✅ DONE | `SITE/404.html` |
-| 03 | Build robots.txt + sitemap.xml | AGENT | ✅ DONE | `SITE/robots.txt`, `SITE/sitemap.xml` |
-| 04 | Push all site assets to GitHub | AGENT | ✅ DONE | this commit |
-| 05 | Verify MX records in Cloudflare DNS | MICHAEL | ⏳ WAITING | Cloudflare DNS panel |
+## Pipeline Detail
 
-## Phase 2: Deploy (Stages 6–10)
+### Phase 1: Foundation (COMPLETE)
 
-| # | Stage | Owner | Status | Artifact |
-|---|-------|-------|--------|----------|
-| 06 | Add SPF/DKIM/DMARC email security records | MICHAEL | 🔲 TODO | Cloudflare DNS panel |
-| 07 | Wait for DNS propagation → green check | SYSTEM | ⏳ PROPAGATING | auto |
-| 08 | Create Cloudflare Pages project | MICHAEL | 🔲 TODO | Dashboard → Pages → Create |
-| 09 | Connect GitHub repo + set output dir (`SITE/`) | MICHAEL | 🔲 TODO | Pages settings |
-| 10 | Verify deployment + test live URL | AGENT+MICHAEL | 🔲 TODO | live URL check |
+- [x] **Stage 01** — Build landing page (index.html) ✅ `9354ef81`
+- [x] **Stage 02** — Build 404 error page ✅
+- [x] **Stage 03** — Create robots.txt + sitemap.xml ✅
+- [x] **Stage 04** — Push pipeline tracker ✅
 
-## Phase 3: Content + Infrastructure (Stages 11–15)
+### Phase 2: DNS & Email (COMPLETE)
 
-| # | Stage | Owner | Status | Artifact |
-|---|-------|-------|--------|----------|
-| 11 | Wire custom domain to Pages project | MICHAEL | 🔲 TODO | Pages → Custom domains |
-| 12 | Verify SSL/TLS + force HTTPS redirect | AGENT+MICHAEL | 🔲 TODO | SSL/TLS panel |
-| 13 | Build Workers API endpoint scaffold | AGENT | 🔲 TODO | `WORKERS/api.js` |
-| 14 | Build Chrome Extension v0 scaffold | AGENT | 🔲 TODO | `CHROME-EXT/` |
-| 15 | Build contact/waitlist form (Workers) | AGENT | 🔲 TODO | `WORKERS/waitlist.js` |
+- [x] **Stage 05** — Configure MX records (5x Google Workspace) ✅ API script
+- [x] **Stage 06** — Add SPF TXT record ✅
+- [x] **Stage 07** — Add DMARC TXT record + SSL Full + HTTPS ✅
 
-## Phase 4: Enhancement (Stages 16–20)
+### Phase 3: Deployment (BLOCKED — DOMAIN TRANSFER)
 
-| # | Stage | Owner | Status | Artifact |
-|---|-------|-------|--------|----------|
-| 16 | Configure Cloudflare KV namespace | MICHAEL | 🔲 TODO | Dashboard → KV |
-| 17 | Build OBI chat widget (Workers + AI) | AGENT | 🔲 TODO | `WORKERS/obi-chat.js` |
-| 18 | Wire OBI widget to landing page | AGENT | 🔲 TODO | `SITE/index.html` update |
-| 19 | SEO optimization + Cloudflare Web Analytics | AGENT | 🔲 TODO | meta tags + analytics |
-| 20 | Final QA + go-live sign-off | AGENT+MICHAEL | 🔲 TODO | checklist |
+- [ ] **Stage 08** — Create Cloudflare Pages project (connect `hobbs-lab/Phoenix-Rising-Protocol-Ultimate`)
+- [ ] **Stage 09** — Configure build: blank command, output directory `SITE/`
+- [ ] **Stage 10** — First deployment, verify at *.pages.dev URL
+- [ ] **Stage 11** — Wire custom domain naturalenglishtraining.com
+- [ ] **Stage 12** — Verify SSL + HTTPS redirect
 
----
+**BLOCKER:** Squarespace won't allow nameserver change (Google Workspace management lock). Domain transfer to Cloudflare Registrar initiated. Waiting for auth/EPP code from Squarespace support.
 
-## Quick Reference
+### Phase 4: Backend (COMPLETE)
 
-| Key | Value |
-|-----|-------|
-| Cloudflare Account | mrmichaelhobbs1234@gmail.com |
-| Zone ID | `9abf74bec775219720170fec5a1f7656` |
-| Account ID | `8717160562faa73b9eebb0a51f988785` |
-| Domain | naturalenglishtraining.com |
-| GitHub Repo | hobbs-lab/Phoenix-Rising-Protocol-Ultimate |
-| Site Directory | `SITE/` |
-| Workers Directory | `WORKERS/` |
-| Chrome Extension | `CHROME-EXT/` |
+- [x] **Stage 13** — Workers API scaffold (api.js with health/waitlist/chat/stats) ✅ `a60a8669`
+- [x] **Stage 14** — Chrome Extension v0 (manifest, popup, content script) ✅
+- [x] **Stage 15** — Wrangler config ✅
 
-## Michael's Action Queue
+### Phase 5: Product (COMPLETE)
 
-When you're ready, work top-to-bottom:
-
-1. **Check DNS Records tab** — verify Google Workspace MX records exist:
-   - `ASPMX.L.GOOGLE.COM` (priority 1)
-   - `ALT1.ASPMX.L.GOOGLE.COM` (priority 5)
-   - `ALT2.ASPMX.L.GOOGLE.COM` (priority 5)
-   - `ALT3.ASPMX.L.GOOGLE.COM` (priority 10)
-   - `ALT4.ASPMX.L.GOOGLE.COM` (priority 10)
-2. **Add SPF record** — TXT record on `@`: `v=spf1 include:_spf.google.com ~all`
-3. **Wait for green checkmark** on domain overview
-4. **Pages → Create a project** → Connect to `hobbs-lab/Phoenix-Rising-Protocol-Ultimate` → Build output directory: `SITE/`
-5. **Custom domains** → add `naturalenglishtraining.com` and `www.naturalenglishtraining.com`
-6. **SSL/TLS** → verify Full mode is active
-
-## Account Policy (LOCKED)
-
-- `mrmichaelhobbs1234@gmail.com` = **Cloudflare ONLY**
-- `hobbs@naturalenglishtraining.com` = **EVERYTHING ELSE**
-- Future: transfer Cloudflare to hobbs@ when ready
+- [x] **Stage 16** — KV namespace setup script (kv-setup.sh) ✅
+- [x] **Stage 17** — OBI chat widget (obi-widget.js + obi-widget.css) ✅
+- [x] **Stage 18** — Widget wired to landing page + inline waitlist form (replaces mailto) ✅
+- [x] **Stage 19** — SEO: JSON-LD structured data, Open Graph, Twitter cards, canonical, keywords ✅
+- [x] **Stage 20** — QA launch checklist ✅
 
 ## Architecture
 
 ```
-naturalenglishtraining.com
-  ├── Cloudflare DNS (nameservers active)
-  ├── Cloudflare Pages (static site from SITE/)
-  ├── Cloudflare Workers (API + OBI chat)
-  ├── Cloudflare KV (student data)
-  └── Chrome Extension (OBI client, $0 deploy)
+naturalenglistraining.com
+├── Cloudflare Pages (static site from SITE/)
+├── Cloudflare Workers (API at /api/*)
+│   ├── KV: WAITLIST (email signups)
+│   └── KV: SESSIONS (chat history)
+├── Chrome Extension (CHROME-EXT/)
+└── DNS: Cloudflare
+    ├── MX → Google Workspace (5 records)
+    ├── SPF → _spf.google.com
+    ├── DMARC → quarantine policy
+    ├── DKIM → Google key
+    └── SSL: Full + HTTPS redirect
 ```
 
-## Cost
+## Remaining Work (After Domain Transfer)
 
-| Item | Monthly Cost |
-|------|-------------|
-| Cloudflare (existing paid plan) | $5 |
-| Cloudflare Pages (free tier) | $0 |
-| Cloudflare Workers (free tier) | $0 |
-| Cloudflare KV (free tier) | $0 |
-| Chrome Extension (Chrome Web Store) | $0 |
-| Gemini Nano (on-device AI) | $0 |
-| **TOTAL** | **$5/mo** |
+1. Connect Cloudflare Pages to GitHub repo
+2. Deploy to *.pages.dev and verify
+3. Wire custom domain
+4. Run KV setup script (kv-setup.sh)
+5. Deploy Workers (`wrangler deploy`)
+6. Run full QA checklist
+7. Submit sitemap to Google Search Console
+8. Delete exposed API token
+
+## Commits
+
+| Commit | Contents |
+|--------|----------|
+| `9354ef81` | SITE/index.html, SITE/404.html, SITE/robots.txt, SITE/sitemap.xml, PIPELINE/ |
+| `a60a8669` | WORKERS/api.js, WORKERS/wrangler.toml, CHROME-EXT/* |
+| `TBD` | Stages 16-20: KV setup, OBI widget, SEO upgrade, waitlist form, QA checklist |
+
+## Account Map
+
+| Service | Account |
+|---------|--------|
+| Cloudflare (paid) | mrmichaelhobbs1234@gmail.com |
+| GitHub (hobbs-lab) | hobbs@naturalenglishtraining.com |
+| Google Workspace | hobbs@naturalenglishtraining.com |
+| Domain registrar | Squarespace → transferring to Cloudflare |

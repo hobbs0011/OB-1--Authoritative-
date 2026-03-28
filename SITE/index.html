@@ -4,15 +4,57 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Natural English Training — Learn English Naturally with AI</title>
-  <meta name="description" content="Learn English the way humans actually speak. AI-powered conversations that take you from nervous beginner to confident speaker.">
+  <meta name="description" content="Learn English the way humans actually speak. AI-powered conversations that take you from nervous beginner to confident speaker. Built for Thai speakers.">
+  <meta name="keywords" content="learn english, english training, AI english, thai speakers, english conversation, OBI, natural english">
+  <meta name="author" content="Natural English Training">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.naturalenglishtraining.com">
+
+  <!-- Open Graph -->
   <meta property="og:title" content="Natural English Training — Learn English Naturally with AI">
-  <meta property="og:description" content="AI-powered English learning that feels like talking to a friend.">
+  <meta property="og:description" content="AI-powered English learning that feels like talking to a friend. Built for Thai speakers.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.naturalenglishtraining.com">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:site_name" content="Natural English Training">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Natural English Training — Learn English Naturally with AI">
+  <meta name="twitter:description" content="AI-powered English learning that feels like talking to a friend.">
+
+  <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🗣️</text></svg>">
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    "name": "Natural English Training",
+    "url": "https://www.naturalenglishtraining.com",
+    "description": "AI-powered English learning that feels like talking to a friend. Built for Thai speakers.",
+    "areaServed": "Thailand",
+    "founder": {
+      "@type": "Person",
+      "name": "Michael Hobbs"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "email": "hobbs@naturalenglishtraining.com",
+      "contactType": "customer service"
+    }
+  }
+  </script>
+
+  <!-- OBI Widget Styles -->
+  <link rel="stylesheet" href="/css/obi-widget.css">
+
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -109,10 +151,44 @@
     }
     .method-step h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
     .method-step p { color: var(--gray-300); font-size: 0.9rem; line-height: 1.6; }
-    /* CTA */
+    /* WAITLIST FORM */
     .cta-section { padding: 6rem 2rem; text-align: center; background: linear-gradient(135deg, #fefce8 0%, #eff6ff 100%); }
     .cta-section h2 { font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; }
     .cta-section p { font-size: 1.1rem; color: var(--gray-500); margin-bottom: 2rem; max-width: 500px; margin-left: auto; margin-right: auto; }
+    .waitlist-form {
+      display: flex; gap: 0.75rem; justify-content: center;
+      flex-wrap: wrap; max-width: 500px; margin: 0 auto;
+    }
+    .waitlist-form input[type="email"] {
+      flex: 1; min-width: 240px; padding: 0.9rem 1.2rem;
+      border: 2px solid var(--gray-300); border-radius: 10px;
+      font-size: 1rem; font-family: 'Inter', sans-serif;
+      outline: none; transition: border-color 0.2s;
+    }
+    .waitlist-form input[type="email"]:focus {
+      border-color: var(--primary-light);
+      box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
+    }
+    .waitlist-form button {
+      padding: 0.9rem 2rem; border-radius: 10px;
+      background: var(--accent); color: var(--dark);
+      font-weight: 700; font-size: 1rem; border: none;
+      cursor: pointer; transition: all 0.2s;
+      font-family: 'Inter', sans-serif;
+    }
+    .waitlist-form button:hover {
+      background: var(--accent-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(245,158,11,0.4);
+    }
+    .waitlist-success {
+      display: none; color: #16a34a; font-weight: 600;
+      font-size: 1.1rem; margin-top: 1rem;
+    }
+    .waitlist-error {
+      display: none; color: #dc2626; font-weight: 500;
+      font-size: 0.9rem; margin-top: 0.5rem;
+    }
     /* FOOTER */
     footer { background: var(--dark); color: var(--gray-300); padding: 3rem 2rem; text-align: center; }
     footer p { font-size: 0.85rem; }
@@ -220,12 +296,55 @@
   <section class="cta-section" id="start">
     <h2>Ready to speak English naturally?</h2>
     <p>Join the waitlist for early access to OBI — your AI English conversation partner.</p>
-    <a href="mailto:hobbs@naturalenglishtraining.com?subject=I%20want%20to%20try%20OBI&body=Hi!%20I'm%20interested%20in%20learning%20English%20with%20OBI." class="btn btn-primary" style="font-size:1.1rem; padding: 1rem 2rem;">Join the Waitlist →</a>
+    <form class="waitlist-form" id="waitlist-form" onsubmit="return submitWaitlist(event)">
+      <input type="email" id="waitlist-email" placeholder="Enter your email" required>
+      <button type="submit">Join the Waitlist →</button>
+    </form>
+    <div class="waitlist-success" id="waitlist-success">🎉 You're on the list! We'll be in touch soon.</div>
+    <div class="waitlist-error" id="waitlist-error"></div>
   </section>
 
   <footer>
     <p>© 2026 Natural English Training. Built with ❤️ in Bangkok, Thailand.</p>
     <p style="margin-top:0.5rem;"><a href="mailto:hobbs@naturalenglishtraining.com">hobbs@naturalenglishtraining.com</a></p>
   </footer>
+
+  <!-- OBI Chat Widget -->
+  <script src="/js/obi-widget.js"></script>
+
+  <!-- Waitlist Form Handler -->
+  <script>
+    async function submitWaitlist(e) {
+      e.preventDefault();
+      const email = document.getElementById('waitlist-email').value.trim();
+      const successEl = document.getElementById('waitlist-success');
+      const errorEl = document.getElementById('waitlist-error');
+      const form = document.getElementById('waitlist-form');
+
+      errorEl.style.display = 'none';
+
+      try {
+        const res = await fetch('https://net-obi-api.naturalenglishtraining.com/api/waitlist', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, source: 'website' })
+        });
+
+        if (!res.ok) throw new Error('Server error');
+        const data = await res.json();
+
+        if (data.success) {
+          form.style.display = 'none';
+          successEl.style.display = 'block';
+        } else {
+          throw new Error(data.error || 'Something went wrong');
+        }
+      } catch(err) {
+        // Fallback: mailto link if API not ready
+        window.location.href = `mailto:hobbs@naturalenglishtraining.com?subject=Waitlist%20Signup&body=Hi!%20I%27d%20like%20to%20join%20the%20OBI%20waitlist.%20My%20email%20is%20${encodeURIComponent(email)}`;
+      }
+      return false;
+    }
+  </script>
 </body>
 </html>
