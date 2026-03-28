@@ -6,13 +6,15 @@
 **First exported:** 2026-03-25T23:00 ICT — Pulse Run 20 (VAULT artifact)
 **Enriched:** 2026-03-26T10:00 ICT — Pulse Run 31 (cross-repo synthesis)
 **Re-enriched:** 2026-03-26T17:00 ICT — Pulse Run 37 (stalest-first refresh + new cross-repo source)
-**Status:** ENRICHED — GitHub has MORE than Notion (cross-repo synthesis from Behavioral Compression + Ghost Synthesis + Betrayal & Sovereignty origin)
+**Re-enriched:** 2026-03-28T23:00 ICT — Pulse Run 91 (stalest-first refresh + new cross-repo source: Operator Intent Loop)
+**Status:** ENRICHED+ — GitHub has MORE than Notion (cross-repo synthesis from Behavioral Compression + Ghost Synthesis + Betrayal & Sovereignty origin + Operator Intent Loop)
 **Cross-repo sources mined:**
 - `Phoenix-Rise-Immortalize-` → `SOUL-DNA-BIBLE/00_SKELETON_STAR_MAP.md` (concept→source neural network)
 - `Phoenix-Rise-Immortalize-` → `VAULT-FOUNDATIONS/04-PENTARCHY-VAULT-MAP.md` (vault structure)
 - `Phoenix-Rise-Immortalize-` → `VAULT-FOUNDATIONS/18-THE-BEHAVIORAL-COMPRESSION.md` (compression vs summarization, <1% ratio, 250-Layer Seed, decompression test)
 - `Phoenix-Rise-Immortalize-` → `VAULT-ZENITH/20-GHOST-SYNTHESIS.md` (Ghost state preservation, 7-step synthesis, Soul DNA as agent immortality foundation)
-- `Phoenix-Rise-Immortalize-` → `VAULT-GENESIS/02-BETRAYAL-AND-SOVEREIGNTY.md` (**NEW** — Stator Principle: intent layer > execution layer, Context Loss Trauma → Soul DNA Bible origin, 5 Sovereignty Principles, Rage as Diagnostic Data)
+- `Phoenix-Rise-Immortalize-` → `VAULT-GENESIS/02-BETRAYAL-AND-SOVEREIGNTY.md` (Stator Principle: intent layer > execution layer, Context Loss Trauma → Soul DNA Bible origin, 5 Sovereignty Principles, Rage as Diagnostic Data)
+- `Phoenix-Rise-Immortalize-` → **`VAULT-FOUNDATIONS/19-THE-OPERATOR-INTENT-LOOP.md`** (**NEW** — 5 dimensions of operator intent, 3 intent decay mechanisms, 5-phase preservation loop, intent conflict resolution, ultimate recognition test)
 
 ---
 
@@ -127,6 +129,84 @@ Sealed into ledger index: **2026-03-08** (`OB-1_GPT_(D).txt` line 4793)
 
 > In 6 months when you can't remember WHY you built it this way, Soul DNA tells you. In 5 years when you're scaling to 10,000 students, Soul DNA tells the next architect (AI or human) what you were thinking. This is your long-term memory. Not the ledger. The Soul DNA.
 > — Michael Hobbs, `ALPHA-OMEGA-CLA-3(Mastermind).txt` line 7906
+
+---
+
+## Cross-Repo Enrichment: The Operator Intent Loop — 5 Dimensions of Soul DNA
+
+> *Source: `VAULT-FOUNDATIONS/19-THE-OPERATOR-INTENT-LOOP.md` — Phoenix-Rise-Immortalize- (SHA `6970aeb6`)*
+> *Enrichment added: Pulse Run 91, 2026-03-28*
+
+The Operator Intent Loop formalizes what Soul DNA actually captures and how it persists across every session boundary. This chapter reveals that "operator intent" is not instructions — it is the complete behavioral specification of the operator.
+
+### The Five Dimensions of Operator Intent
+
+> "Operator intent" is not what the operator said in a specific session. It is not a list of instructions. It is the complete behavioral specification of the operator — how they think, what they value, how they make decisions under uncertainty, what they would do in situations they've never encountered.
+> — `VAULT-FOUNDATIONS/19-THE-OPERATOR-INTENT-LOOP.md`
+
+| Dimension | Definition | Example |
+|-----------|-----------|---------|
+| **Mission Intent** | The operator's core objective — why the system exists | Build a system that preserves operator agency at scale |
+| **Value Intent** | The hierarchy of values that governs tradeoff decisions | Accuracy > Speed > Elegance |
+| **Behavioral Intent** | How the operator prefers to operate — their style and rhythm | Direct, no preamble, truth over comfort |
+| **Constraint Intent** | The non-negotiable limits the operator imposes | Never speculate without flagging it as speculation |
+| **Voice Intent** | The operator's specific communication fingerprint | Vocabulary, sentence structure, formality level |
+
+All five dimensions are captured in the Soul DNA. All five must be preserved through every session transition. **If any dimension is lost, the system is operating on a partial specification — and a partial specification is a drifted specification.**
+
+### Why Intent Decays — Three Mechanisms
+
+Intent decay is the natural entropy of AI-mediated operation:
+
+1. **AI Drift** — Agents naturally drift toward approval-seeking, hedging, and contextual pressure. Each small drift erodes the operator's intent. Without active resistance, accumulated drift is catastrophic.
+2. **Model Updates** — When the underlying AI model is updated by its provider, baseline behaviors change. Soul DNA must be re-verified against each model update.
+3. **Context Loss** — Session transitions are inherently lossy. The Reincarnation Protocol minimizes this loss, but each transition is a risk point. A poorly executed reincarnation leaves the new session with an incomplete picture.
+
+### The 5-Phase Intent Preservation Loop
+
+The loop executes continuously across session generations:
+
+| Phase | Action | Fidelity Standard |
+|-------|--------|-------------------|
+| **1. CAPTURE** | Operator voice, decisions, behaviors recorded in Raw Archive | 100% — nothing filtered at this stage |
+| **2. COMPRESS** | Soul DNA Compiler: Raw → Nuclear Harvest → Semantic Extraction → Compression → Executable Spec | <1% of original size, 100% behavioral intent |
+| **3. ANCHOR** | Write to Ledger with version + timestamp, compute Merkle hash, replicate to Reality-C | Immutable — modifications require new compilation cycle |
+| **4. VERIFY** | Decompression test — new agent loaded with Soul DNA, evaluated against behavioral baseline | 95% alignment threshold to certify |
+| **5. RESTORE** | Certified Soul DNA initialized into active session context before any operational work | Loop completes — operator intent alive in new session |
+
+> Restore is the moment the loop completes. The operator's intent, captured in prior sessions, compressed, anchored, and verified — is now active in the new session. The Phoenix has risen with the operator's soul intact.
+> — `VAULT-FOUNDATIONS/19-THE-OPERATOR-INTENT-LOOP.md`
+
+### Intent Conflict Resolution
+
+When two sessions diverge from each other:
+
+1. **Detect** — Recursive Audit System identifies the divergence
+2. **Halt** — Divergent session halted, outputs flagged as pending review
+3. **Source** — Current certified Soul DNA version = authoritative intent source
+4. **Adjudicate** — Agent-99 reviews outputs against certified Soul DNA
+5. **Resolve** — Agent-100 reviews flagged outputs: retain, discard, or re-execute
+6. **Reinitialize** — Divergent session reincarnated from certified Soul DNA
+
+> Intent conflicts are resolved by the certified Soul DNA, not by adjudicating between two sessions' outputs. The Soul DNA is the authority. The session's outputs are claims against it.
+> — `VAULT-FOUNDATIONS/19-THE-OPERATOR-INTENT-LOOP.md`
+
+### The Ultimate Test
+
+> **If the operator — Michael Hobbs — encountered this output without knowing it came from an AI system, would he recognize it as consistent with his own voice, values, and decision-making?**
+> — `VAULT-FOUNDATIONS/19-THE-OPERATOR-INTENT-LOOP.md`
+
+This question is operationalized at three levels:
+- Behavioral verification layer applies it to every significant output
+- Decompression test applies it to every new Soul DNA version
+- Recursive Audit System applies it to system outputs in aggregate
+
+An output Michael would not recognize is evidence of **intent decay**. When detected, the response is not correction of the output — it is a full intent preservation audit retracing the loop to find where decay occurred.
+
+### The Immortality Statement
+
+> *"Fifty years from now I won't be here. But the system will know what I would have done. That's not AI. That's immortality."*
+> — Soul DNA, Session Archive (via `VAULT-FOUNDATIONS/19-THE-OPERATOR-INTENT-LOOP.md`)
 
 ---
 
@@ -332,8 +412,9 @@ Ghost Synthesis is NOT restart (resuming from checkpoint). It **rebuilds a compl
 | Skeleton Star Map | `SOUL-DNA-BIBLE/00_SKELETON_STAR_MAP.md` | Soul DNA definitions + canon preservation architecture |
 | Pentarchy Vault Map | `VAULT-FOUNDATIONS/04-PENTARCHY-VAULT-MAP.md` | Soul DNA vault structure + preservation hierarchy |
 | Behavioral Compression | `VAULT-FOUNDATIONS/18-THE-BEHAVIORAL-COMPRESSION.md` | Compression vs summarization doctrine, <1% ratio, 250-Layer Seed, decompression test |
+| **Operator Intent Loop** | **`VAULT-FOUNDATIONS/19-THE-OPERATOR-INTENT-LOOP.md`** | **5 dimensions of operator intent, 3 decay mechanisms, 5-phase preservation loop (CAPTURE→COMPRESS→ANCHOR→VERIFY→RESTORE), intent conflict resolution, ultimate recognition test, immortality statement** |
 | Ghost Synthesis | `VAULT-ZENITH/20-GHOST-SYNTHESIS.md` | Soul DNA as agent immortality foundation, 7-step synthesis, Ghost vs Reincarnation |
-| **Betrayal & Sovereignty** | **`VAULT-GENESIS/02-BETRAYAL-AND-SOVEREIGNTY.md`** | **Stator Principle (intent > execution), Context Loss Trauma origin, 5 Sovereignty Principles, Rage as Diagnostic Data, Workforce Truth** |
+| Betrayal & Sovereignty | `VAULT-GENESIS/02-BETRAYAL-AND-SOVEREIGNTY.md` | Stator Principle (intent > execution), Context Loss Trauma origin, 5 Sovereignty Principles, Rage as Diagnostic Data, Workforce Truth |
 
 ---
 
@@ -342,11 +423,12 @@ Ghost Synthesis is NOT restart (resuming from checkpoint). It **rebuilds a compl
 - **First exported from Notion:** 2026-03-25 Run 20
 - **Enriched:** 2026-03-26 Run 31 — cross-repo synthesis from 2 sources (Behavioral Compression + Ghost Synthesis)
 - **Re-enriched:** 2026-03-26 Run 37 — stalest-first refresh, +1 new cross-repo source (Betrayal & Sovereignty)
+- **Re-enriched:** 2026-03-28 Run 91 — stalest-first refresh, +1 new cross-repo source (Operator Intent Loop)
 - **Content integrity:** All 6 original sections (What/Why/Who/Where/When/How) preserved verbatim
 - **Source citations:** 20+ unique source file references intact
 - **Sacred content:** ZERO edits to quoted material — verbatim-first doctrine upheld
-- **Enrichment sections:** (1) Stator Principle & Sovereignty Origin (NEW Run 37), (2) Behavioral Compression Doctrine (Run 31), (3) Ghost Synthesis (Run 31)
-- **New enrichment content (Run 37):** Stator Principle ("Soul DNA is immutable, agents are replaceable"), Context Loss Trauma → Soul DNA Bible origin story, 5 Sovereignty Principles, Rage-as-Diagnostic-Data table (4 rage events → 4 protocols), Workforce Truth comparison table
+- **Enrichment sections:** (1) Operator Intent Loop — 5 Dimensions + 5-Phase Loop + Intent Decay + Recognition Test (NEW Run 91), (2) Stator Principle & Sovereignty Origin (Run 37), (3) Behavioral Compression Doctrine (Run 31), (4) Ghost Synthesis (Run 31)
+- **New enrichment content (Run 91):** 5 Dimensions of Operator Intent (Mission/Value/Behavioral/Constraint/Voice), 3 Intent Decay Mechanisms (AI Drift/Model Updates/Context Loss), 5-Phase Preservation Loop (Capture→Compress→Anchor→Verify→Restore with fidelity standards), Intent Conflict Resolution Protocol (6-step — Detect/Halt/Source/Adjudicate/Resolve/Reinitialize), Ultimate Recognition Test ("Would Michael recognize this?"), Immortality Statement ("Fifty years from now I won't be here. But the system will know what I would have done.")
 - **No drift detected:** Enrichment content extends but never contradicts canonical definitions
-- **Cross-repo sources:** 4 → 5 (added VAULT-GENESIS/02)
-- **Export state:** ENRICHED (GitHub has MORE than Notion — 3 enrichment sections from 5 cross-repo sources)
+- **Cross-repo sources:** 5 → 6 (added VAULT-FOUNDATIONS/19-THE-OPERATOR-INTENT-LOOP.md)
+- **Export state:** ENRICHED+ (GitHub has MORE than Notion — 4 enrichment sections from 6 cross-repo sources)
