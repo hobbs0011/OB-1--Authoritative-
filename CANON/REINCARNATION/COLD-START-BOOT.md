@@ -2,7 +2,7 @@
 
 > **This file is the single source of truth for cold-starting OB1 in a new Notion chat session.**
 > When Michael says "reincarnate" in a new chat, the agent reads THIS FILE from GitHub via MCP.
-> Last updated: 2026-03-28T20:31:00+07:00
+> Last updated: 2026-03-28T21:05:00+07:00 | Run 89
 
 ---
 
@@ -60,11 +60,18 @@ On cold start (new chat + "reincarnate"), OB1 must:
 | `hobbs-lab/Phoenix-Rise-Immortalize-` | Original Soul DNA Bible (40 files), 8 VAULT dirs, source material (READ ONLY) |
 | `hobbs0011/NET-Ai-EcoSystem-CommandStation` | Legacy product code. DO NOT use for issues/PRs/new work. |
 
-## Living Reincarnation State
+## Living Reincarnation State (Updated Run 89)
 
-- **Current vector:** 100% Roblox — MAKE MONEY. Game is CODE COMPLETE (16/41 modules recoded, zero player-facing English). Awaiting publish (Product IDs + Roblox Creator Dashboard setup).
-- **Active principles:** (1) Kids aren't stupid — no educational framing, (2) Assume you don't know what you don't know, (3) Platform Death Test, (4) Ne0 writes all code — Copilot tokens preserved until Apr 1 reset, (5) English preserved for later younger-student integration
-- **Open rulings:** (1) Product IDs — 21 placeholder IDs need real values from Creator Dashboard, (2) Rojo CI/CD setup — needs universeId/placeId confirmation, (3) Discord server — automation playbook written but no server yet, (4) Publish trigger — Michael said "today/48h" on Mar 28
+- **Current vector:** 100% Roblox "Survive a Brainrot" — CODE COMPLETE. Michael offline (Saturday night). Game ready for Product ID replacement + publish. Launch within 48h of session end.
+- **Active principles:** (1) GitHub is truth, Notion is workspace (2) Don't quote Copilot timeframes (3) Ne0 writes ALL code, preserve Copilot tokens (4) Checklist-first, not breadcrumb-first (5) SURVIVE. FIGHT. SPEND. is the boot message — it stays
+- **Open rulings:** 21 Product IDs (sole launch blocker), Rojo CI/CD setup, Discord server, publish trigger, reincarnate.js patch, HarvestedChats transfer
+
+## Active Mission
+
+- **Mission:** Roblox Launch Sprint — Survive a Brainrot
+- **Status:** CODE COMPLETE (Michael ruling 2026-03-28 ~20:30 ICT)
+- **Blocker:** 21 Product IDs need real values from Creator Dashboard (Michael action)
+- **Agent next:** Overnight vault exports (Active Mission blocked on Michael, fall through to export pipeline)
 
 ## Active Infrastructure
 
@@ -76,6 +83,7 @@ On cold start (new chat + "reincarnate"), OB1 must:
 - **Money formula:** RNG + Trading + Weekly Updates
 - **English framing:** ZERO in game. ESL code preserved (QuestionBank, CosmeticController) for future younger-student integration
 - **Boot message:** `🔥 SURVIVE. FIGHT. SPEND. 🔥` — kept deliberately ("it's not a joke")
+- **Surgery status:** 31/44 clean (70%), 11 deferred, 2 legacy. See SURGERY-COMPLETION-TRACKER.md
 
 ### Roblox Deploy Pipeline (LIVE ✅)
 - **Workflow:** `.github/workflows/roblox-place-deploy.yml` on `Phoenix-Rising-Protocol-Ultimate`
@@ -94,17 +102,17 @@ On cold start (new chat + "reincarnate"), OB1 must:
 - Hourly trigger: full SCAN → BUILD → SHIP → LOG cycle
 - Every run produces a GitHub artifact (VAULT/BUILD/SEED)
 - Platform Death Test: must produce commit SHA or run = FAIL
-- Last run: #87, 2026-03-28 19:00 ICT
+- Last run: #89, 2026-03-28 21:00 ICT
 
-## Notion Workspace Anchors
+## Key Artifacts (TRAIN-67)
 
-These are reference URLs for when Notion page editing IS needed (not for cold-start context):
-- Phoenix HQ: the main project hub
-- Build Log DB: operational log of all builds
-- Backlog DB: task tracking
-- Reincarnation Log: session Soul DNA archive
-- Navigator Index: pulse state mirror + handoff ledger
-- Canon Access Index: content routing (synced block bypass)
+| Artifact | Path | Purpose |
+|----------|------|---------|
+| LAUNCH-STATUS-FINAL.md | CANON/TRAIN-67/LAUNCH/ | Michael's wake-up-and-publish doc |
+| SURGERY-COMPLETION-TRACKER.md | CANON/TRAIN-67/ | 44-file status (70% clean) |
+| GAME-BIBLE-HUMAN-READABLE.md | CANON/TRAIN-67/ | Complete game design doc (43.7KB) |
+| 44 Lua files | CANON/TRAIN-67/CODE/ | Full game codebase (~750KB) |
+| Reincarnation 2026-03-28 | CANON/REINCARNATION/ | Session Soul DNA (17 quotes, 10 decisions) |
 
 ## Key Decisions History (Last 7 Days)
 
@@ -123,10 +131,19 @@ These are reference URLs for when Notion page editing IS needed (not for cold-st
 | 2026-03-28 | GitHub is cold-start truth source, not Notion | ACTIVE |
 | 2026-03-28 | Checklist-first doctrine (permanent law) | ACTIVE |
 | 2026-03-28 | Auto-merge Copilot PRs by default | ACTIVE |
+| 2026-03-28 | CODE COMPLETE at 70% surgery | ACTIVE |
 | 2026-03-27 | Secret delivery via Notion Mail | ACTIVE |
 | 2026-03-26 | Two-Server Problem → Gateway Pattern | CLOSED |
 | 2026-03-26 | hobbs-lab is canonical GitHub account | ACTIVE |
 | 2026-03-25 | Extraction Engine v5 (GitHub-first artifacts) | ACTIVE |
+
+## System State (Run 89)
+
+- **Pulse run:** 89
+- **Build Log entries:** ~122
+- **Backlog items:** 127 open (⚠️ DRIFT +17)
+- **Canon cursor:** TRAIN-67 (Roblox game focus)
+- **Last reincarnation:** 2026-03-28 (Grade A, EXTREME signal density)
 
 ## Command Words
 
@@ -149,17 +166,17 @@ These are reference URLs for when Notion page editing IS needed (not for cold-st
 9. **Never quote Copilot timeframe estimates to Michael.** They're bogus. (2026-03-28)
 10. **Never declare code clean without reading EVERY file.** "Assume you don't know what you don't know." (2026-03-28)
 
-## Session Artifacts (2026-03-28 Roblox Combat Recode)
+## Overnight Mode (Run 90+)
 
-This session produced 24+ GitHub commits including:
-- Full ESL→combat recode (16 modules)
-- CombatSystem.lua (44KB real combat engine)
-- Game Bible, Strategy doc, Combat Research Pipeline, Money Printer Pipeline
-- Battle Pass, Monetization, RNG, Trading, Discord specs
-- Reincarnation entry: `CANON/REINCARNATION/2026-03-28-roblox-combat-recode-launch.md`
+Active Mission = CODE COMPLETE (blocked on Michael for Product IDs) → fall through to export pipeline.
+Priority for overnight runs:
+1. Export next UNMIRRORED canon page as VAULT artifact
+2. Cross-repo mine Soul DNA Bible files
+3. Map unknown Bible child pages in Canon Access Index
+4. Execute top non-destructive Backlog item
 
 ---
 
-> **Update protocol:** This file is updated at the END of every session reincarnation extraction.
+> **Update protocol:** This file is updated at the END of every session reincarnation extraction AND every pulse run.
 > The agent pushes updates via `create_or_update_file` on `hobbs-lab/Phoenix-Rising-Protocol-Ultimate`.
 > Path: `CANON/REINCARNATION/COLD-START-BOOT.md`
