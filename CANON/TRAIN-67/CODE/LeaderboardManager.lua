@@ -1,14 +1,14 @@
 --[[
-    LeaderboardManager.lua — Train 6-7: Survival English
+    LeaderboardManager.lua — Train 6-7: Survive the Brainrots
     Stage 13: Leaderboard System
     
     DESIGN LAW:
     - Server-authoritative score submission
     - Anti-cheat: scores validated before posting
-    - Multiple board types (survival, kills, English, rarest items)
+    - Multiple board types (survival, kills, combos, rarest items)
     - Friend leaderboards (strongest engagement driver)
     - Reset cycles: daily, weekly, all-time
-    - Gospel 444: English word leaderboard prominently featured
+    - Combat mastery boards prominently featured
     
     ARCHITECTURE:
     - OrderedDataStore for sorted retrieval
@@ -30,7 +30,7 @@ LeaderboardManager.__index = LeaderboardManager
 local BOARDS = {
     {
         id = "survival_time_daily",
-        displayName = "\xF0\x9F\x8F\x86 Top Survivors (Today)",
+        displayName = "🏆 Top Survivors (Today)",
         stat = "survivalTime",
         cycle = "daily",
         maxEntries = 100,
@@ -38,7 +38,7 @@ local BOARDS = {
     },
     {
         id = "survival_time_weekly",
-        displayName = "\xF0\x9F\x8F\x86 Top Survivors (Week)",
+        displayName = "🏆 Top Survivors (Week)",
         stat = "survivalTime",
         cycle = "weekly",
         maxEntries = 100,
@@ -46,7 +46,7 @@ local BOARDS = {
     },
     {
         id = "survival_time_alltime",
-        displayName = "\xF0\x9F\x8F\x86 Top Survivors (All Time)",
+        displayName = "🏆 Top Survivors (All Time)",
         stat = "survivalTime",
         cycle = "alltime",
         maxEntries = 100,
@@ -54,7 +54,7 @@ local BOARDS = {
     },
     {
         id = "kills_daily",
-        displayName = "\xE2\x9A\x94 Top Slayers (Today)",
+        displayName = "⚔ Top Slayers (Today)",
         stat = "kills",
         cycle = "daily",
         maxEntries = 100,
@@ -62,25 +62,25 @@ local BOARDS = {
     },
     {
         id = "kills_weekly",
-        displayName = "\xE2\x9A\x94 Top Slayers (Week)",
+        displayName = "⚔ Top Slayers (Week)",
         stat = "kills",
         cycle = "weekly",
         maxEntries = 100,
         unit = "count",
     },
     {
-        id = "english_words_daily",
-        displayName = "\xF0\x9F\x93\x96 Word Warriors (Today)",
-        stat = "englishWords",
+        id = "combo_masters_daily",
+        displayName = "🔥 Combo Masters (Today)",
+        stat = "bestCombo",
         cycle = "daily",
         maxEntries = 100,
         unit = "count",
-        featured = true, -- Gospel 444: English board gets premium placement
+        featured = true,
     },
     {
-        id = "english_words_alltime",
-        displayName = "\xF0\x9F\x93\x96 Word Warriors (All Time)",
-        stat = "englishWords",
+        id = "combo_masters_alltime",
+        displayName = "🔥 Combo Masters (All Time)",
+        stat = "bestCombo",
         cycle = "alltime",
         maxEntries = 100,
         unit = "count",
@@ -88,7 +88,7 @@ local BOARDS = {
     },
     {
         id = "rarest_items",
-        displayName = "\xF0\x9F\x92\x8E Rarest Collections",
+        displayName = "💎 Rarest Collections",
         stat = "rarityScore",
         cycle = "alltime",
         maxEntries = 50,
@@ -96,8 +96,16 @@ local BOARDS = {
     },
     {
         id = "coins_earned_weekly",
-        displayName = "\xF0\x9F\x92\xB0 Top Earners (Week)",
+        displayName = "💰 Top Earners (Week)",
         stat = "coinsEarned",
+        cycle = "weekly",
+        maxEntries = 100,
+        unit = "count",
+    },
+    {
+        id = "boss_kills_weekly",
+        displayName = "💀 Boss Hunters (Week)",
+        stat = "bossKills",
         cycle = "weekly",
         maxEntries = 100,
         unit = "count",
@@ -109,20 +117,20 @@ local BOARDS = {
 -- ============================================================
 
 local CONFIG = {
-    UPDATE_COOLDOWN = 30,          -- seconds between score updates per board
-    CACHE_TTL = 60,                -- seconds to cache board data
-    FRIEND_BOARD_CACHE_TTL = 30,   -- friends change less often
-    MAX_SCORE_JUMP = 10000,        -- anti-cheat: reject single-session jumps > this
-    SCORE_VALIDATION = true,       -- enable server-side score validation
+    UPDATE_COOLDOWN = 30,
+    CACHE_TTL = 60,
+    FRIEND_BOARD_CACHE_TTL = 30,
+    MAX_SCORE_JUMP = 10000,
+    SCORE_VALIDATION = true,
 }
 
 -- ============================================================
 -- STATE
 -- ============================================================
 
-local boardCache = {}          -- [boardId] = { data, timestamp }
-local playerScores = {}        -- [userId] = { [stat] = value }
-local lastUpdateTime = {}      -- [userId_boardId] = timestamp
+local boardCache = {}
+local playerScores = {}
+local lastUpdateTime = {}
 
 -- ============================================================
 -- DATE KEYS
@@ -135,7 +143,6 @@ end
 
 local function getWeeklyKey()
     local d = os.date("!*t", os.time())
-    -- ISO week number approximation
     local dayOfYear = os.date("!%j", os.time())
     local weekNum = math.ceil(tonumber(dayOfYear) / 7)
     return string.format("%04dW%02d", d.year, weekNum)
@@ -157,20 +164,15 @@ end
 
 local function validateScore(userId, stat, newScore, oldScore)
     if not CONFIG.SCORE_VALIDATION then return true end
-    
-    -- Reject negative scores
     if newScore < 0 then
         warn(string.format("[Leaderboard] REJECTED negative score: P=%d stat=%s score=%d", userId, stat, newScore))
         return false
     end
-    
-    -- Reject impossible jumps
     local jump = newScore - (oldScore or 0)
     if jump > CONFIG.MAX_SCORE_JUMP then
         warn(string.format("[Leaderboard] REJECTED suspicious jump: P=%d stat=%s jump=%d", userId, stat, jump))
         return false
     end
-    
     return true
 end
 
@@ -180,23 +182,17 @@ end
 
 function LeaderboardManager.SubmitScore(player, stat, score)
     local userId = player.UserId
-    
-    -- Initialize player scores
     if not playerScores[userId] then
         playerScores[userId] = {}
     end
     
     local oldScore = playerScores[userId][stat] or 0
-    
-    -- Validate
     if not validateScore(userId, stat, score, oldScore) then
         return { success = false, error = "SCORE_REJECTED" }
     end
     
-    -- Update local tracking
     playerScores[userId][stat] = math.max(oldScore, score)
     
-    -- Find all boards that use this stat and update them
     local updated = {}
     for _, board in ipairs(BOARDS) do
         if board.stat == stat then
@@ -206,18 +202,15 @@ function LeaderboardManager.SubmitScore(player, stat, score)
             
             if (now - lastUpdate) >= CONFIG.UPDATE_COOLDOWN then
                 local storeKey = getBoardStoreKey(board)
-                
                 task.spawn(function()
                     local success, err = pcall(function()
                         local store = DataStoreService:GetOrderedDataStore(storeKey)
                         store:SetAsync(tostring(userId), playerScores[userId][stat])
                     end)
-                    
                     if not success then
                         warn(string.format("[Leaderboard] Failed to update %s for P=%d: %s", board.id, userId, tostring(err)))
                     end
                 end)
-                
                 lastUpdateTime[cooldownKey] = now
                 table.insert(updated, board.id)
             end
@@ -234,13 +227,11 @@ end
 function LeaderboardManager.GetBoard(boardId, pageSize)
     pageSize = pageSize or 50
     
-    -- Check cache
     local cached = boardCache[boardId]
     if cached and (os.time() - cached.timestamp) < CONFIG.CACHE_TTL then
         return { success = true, data = cached.data, cached = true }
     end
     
-    -- Find board config
     local boardConfig = nil
     for _, board in ipairs(BOARDS) do
         if board.id == boardId then
@@ -259,7 +250,6 @@ function LeaderboardManager.GetBoard(boardId, pageSize)
         local store = DataStoreService:GetOrderedDataStore(storeKey)
         local pages = store:GetSortedAsync(false, pageSize)
         local currentPage = pages:GetCurrentPage()
-        
         local entries = {}
         for rank, entry in ipairs(currentPage) do
             table.insert(entries, {
@@ -272,7 +262,6 @@ function LeaderboardManager.GetBoard(boardId, pageSize)
     end)
     
     if success then
-        -- Enrich with player names
         for _, entry in ipairs(result) do
             local nameSuccess, name = pcall(function()
                 return Players:GetNameFromUserIdAsync(entry.userId)
@@ -280,7 +269,6 @@ function LeaderboardManager.GetBoard(boardId, pageSize)
             entry.displayName = nameSuccess and name or ("Player_" .. entry.userId)
         end
         
-        -- Cache it
         boardCache[boardId] = {
             data = result,
             timestamp = os.time(),
@@ -318,7 +306,6 @@ function LeaderboardManager.GetFriendBoard(player, boardId)
         return { success = false, error = "INVALID_BOARD" }
     end
     
-    -- Get friend list
     local friendSuccess, friends = pcall(function()
         return Players:GetFriendsAsync(player.UserId)
     end)
@@ -327,7 +314,7 @@ function LeaderboardManager.GetFriendBoard(player, boardId)
         return { success = false, error = "FRIENDS_UNAVAILABLE" }
     end
     
-    local friendIds = { player.UserId } -- Include self
+    local friendIds = { player.UserId }
     local friendPages = friends
     while true do
         local page = friendPages:GetCurrentPage()
@@ -339,7 +326,6 @@ function LeaderboardManager.GetFriendBoard(player, boardId)
         friendPages:AdvanceToNextPageAsync()
     end
     
-    -- Fetch scores for all friends
     local storeKey = getBoardStoreKey(boardConfig)
     local entries = {}
     
@@ -361,10 +347,7 @@ function LeaderboardManager.GetFriendBoard(player, boardId)
         end
     end
     
-    -- Sort descending
     table.sort(entries, function(a, b) return a.score > b.score end)
-    
-    -- Assign ranks
     for i, entry in ipairs(entries) do
         entry.rank = i
     end
@@ -413,7 +396,6 @@ function LeaderboardManager.GetMyRank(player, boardId)
         return { success = false, error = "INVALID_BOARD" }
     end
     
-    -- Get the full board and find player's position
     local boardResult = LeaderboardManager.GetBoard(boardId, boardConfig.maxEntries)
     if not boardResult.success then
         return boardResult
@@ -429,7 +411,7 @@ function LeaderboardManager.GetMyRank(player, boardId)
 end
 
 -- ============================================================
--- INCREMENT HELPERS (for other modules to call)
+-- INCREMENT HELPERS
 -- ============================================================
 
 function LeaderboardManager.IncrementStat(player, stat, amount)
@@ -447,14 +429,12 @@ end
 
 Players.PlayerRemoving:Connect(function(player)
     local userId = player.UserId
-    -- Final score flush
     if playerScores[userId] then
         for stat, score in pairs(playerScores[userId]) do
             LeaderboardManager.SubmitScore(player, stat, score)
         end
         playerScores[userId] = nil
     end
-    -- Clean cooldown entries
     for key in pairs(lastUpdateTime) do
         if string.find(key, "^" .. tostring(userId)) then
             lastUpdateTime[key] = nil
