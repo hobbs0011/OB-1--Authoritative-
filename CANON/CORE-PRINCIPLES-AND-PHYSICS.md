@@ -3,15 +3,16 @@
 > **Source**: Notion canon page "Core Principles & Physics"
 > **Vault**: CANON/ on Phoenix-Rising-Protocol-Ultimate
 > **Authority**: AGENT-100 (Michael Hobbs)
-> **Status**: ENRICHED+ — Notion + cross-repo synthesis (5 sources from `Phoenix-Rise-Immortalize-`)
-> **Export date**: 2026-03-26 (refreshed Run 41)
-> **Export agent**: Agent-99 (OB1) — Pulse Run 41
-> **Cross-repo sources**: 5 files from `Phoenix-Rise-Immortalize-`:
+> **Status**: ENRICHED++ — Notion + cross-repo synthesis (5 sources from `Phoenix-Rise-Immortalize-`) + session principles (2026-03-28)
+> **Export date**: 2026-03-28 (refreshed Run 90)
+> **Export agent**: Agent-99 (OB1) — Pulse Run 90
+> **Cross-repo sources**: 6 files:
 >   1. `SOUL-DNA-BIBLE/00_SKELETON_STAR_MAP.md` — master index with concept→source neural network (Run 22)
 >   2. `SOUL-DNA-BIBLE/20_THE_MECHANICAL_FASTENING_GRID.md` — PRIMARY source: 7-layer grid, depth-earning model, Titanium Omega Lattice, verbatim quotes (Run 34)
->   3. `ARCHIVE/Phoenix-Rise-Immortalize/VAULT-GENESIS/07-THE-SOVEREIGNTY-MANIFESTO.md` — Five Pillars of Sovereignty, correct system design doctrine (Run 41 — NEW)
->   4. `ARCHIVE/Phoenix-Rise-Immortalize/VAULT-GENESIS/08-THE-TRUST-ARCHITECTURE.md` — Zero Trust Framework, 4-tier hierarchy (Run 41 — NEW)
->   5. `ARCHIVE/Phoenix-Rise-Immortalize/VAULT-GENESIS/05-THE-BAMBOO-DOCTRINE.md` — Moso bamboo growth model, 4 Laws, Root Phase doctrine (Run 41 — NEW)
+>   3. `ARCHIVE/Phoenix-Rise-Immortalize/VAULT-GENESIS/07-THE-SOVEREIGNTY-MANIFESTO.md` — Five Pillars of Sovereignty, correct system design doctrine (Run 41)
+>   4. `ARCHIVE/Phoenix-Rise-Immortalize/VAULT-GENESIS/08-THE-TRUST-ARCHITECTURE.md` — Zero Trust Framework, 4-tier hierarchy (Run 41)
+>   5. `ARCHIVE/Phoenix-Rise-Immortalize/VAULT-GENESIS/05-THE-BAMBOO-DOCTRINE.md` — Moso bamboo growth model, 4 Laws, Root Phase doctrine (Run 41)
+>   6. `CANON/REINCARNATION/2026-03-28-roblox-combat-recode-launch.md` — 5 new principles from Roblox combat recode session (Run 90 — NEW)
 
 ---
 
@@ -35,6 +36,22 @@
 - Can be rebuilt overnight by drones as long as they stay anchored to the Root
 - Surface products and systems are always in flux
 - Apps, UI, and specific market tactics change freely
+
+### LIVE PROOF: The Roblox Combat Recode (2026-03-28)
+
+> **Session enrichment from reincarnation entry `2026-03-28:roblox-combat-recode:17:10`**
+
+The Roblox game pivot is a perfect demonstration of the Two-Tier Architecture in action:
+
+| Layer | What Happened | Architecture Proof |
+|-------|--------------|-------------------|
+| **Tier 1 (Gravity)** | Soul DNA, Canon, Ledger, teaching methodology — UNTOUCHED | The root system survived a complete product pivot without a single line changed |
+| **Tier 2 (Weather)** | Entire combat system recoded from ESL quiz mechanics to pure combat in one session. 16 modules rewritten, 24+ GitHub commits | The surface product was rebuilt overnight while the root held firm |
+
+> "This is MAJOR DRIFT... The pitch: A zombie survival game that secretly is all about MAKING MONEY."
+> — Michael Hobbs, 2026-03-28
+
+The game went from "educational game with combat" to "combat game that makes money" — a complete Tier 2 weather change. The Canon, the teaching methodology (Mouse → Tiger), and the Soul DNA (verbatim quotes, decisions, principles) remained at Tier 1: immutable. This is exactly what the architecture was designed for.
 
 ---
 
@@ -406,7 +423,75 @@ The Three Mandates are the supreme operational directives:
 
 ---
 
-## Concept → Source Neural Network (from Skeleton Star Map + VAULT-GENESIS)
+## Live Principles Addendum — 2026-03-28 Session
+
+> **Source**: Reincarnation entry `2026-03-28:roblox-combat-recode:17:10` (🔴🔴 EXTREME signal density — 17 quotes, 10 decisions, 5 corrections, 5 new principles)
+
+These principles were established during the Roblox combat recode session and represent Michael's latest sovereign decisions. Each connects to existing Core Principles.
+
+### Principle: "Kids aren't stupid — no educational framing"
+
+> "Kids are not stupid, why would they want to play an educational game"
+> — Michael Hobbs, 2026-03-28
+
+**Signal:** 🔴 CRITICAL
+**Connects to:** Gospel 444 (anti-drift), Teaching Law (Mouse → Tiger), Creative Sovereignty (Pillar 4)
+
+The game must be genuinely fun and monetizable FIRST. Education is invisible or absent from the player's perspective. This is not hiding the medicine — it is recognizing that the medicine (fun, engagement, mastery) IS the product. Educational framing is drift. If a student smells "this is teaching me something," the product has drifted.
+
+This inverts a common assumption: the value of the product is not that it teaches — the value is that it hooks. Teaching can be layered in later (cf. English layer preserved for younger students), but the hook is combat, survival, social status, and spending.
+
+### Principle: "Assume you don't know what you don't know" — The Deep Sweep Doctrine
+
+> "ship it, assume you dont know what you dont know and make additional surgical fixes where needed"
+> — Michael Hobbs, 2026-03-28
+
+**Signal:** 🟡 IMPORTANT
+**Connects to:** Fail-Closed Mandates (no speculation, ambiguity = halt), Triangulation, Nuke Protocol
+
+Before declaring any system clean, read EVERY file. Don't assume a file is clean because it "should be." The Roblox combat recode found ESL contamination in files previously assumed clean — because nobody had actually read them line by line. This principle elevates the Fail-Closed mandate from "don't guess" to "actively verify everything you think you know."
+
+The Deep Sweep Doctrine is the operational extension of "No speculation": it's not enough to avoid making things up — you must also avoid assuming your existing knowledge is complete.
+
+### Principle: "Don't listen to Copilot timeframes"
+
+> "dont fucking listening to co-pilots time frames, they are bogus, deploy max workers"
+> — Michael Hobbs, 2026-03-28
+
+**Signal:** 🟡 IMPORTANT
+**Connects to:** Temporal Sovereignty (Pillar 5), Velocity Override, Trust Architecture (Tier 2 tools)
+
+External tool estimates are Tier 2 (CONDITIONAL) data. They do not override Michael's timeline. When a Tier 2 tool says "this will take 4 hours," and Michael says "do it now," the Trust Architecture is clear: Tier 0 (Michael's directive) outranks Tier 2 (tool estimate). Execute, don't estimate.
+
+### Principle: "Preserve, don't delete — archive for future use"
+
+> "keep it, this was a cool idea I can still use for younger students, we will implement it later."
+> — Michael Hobbs, 2026-03-28 (re: QuestionBank ESL system)
+
+> "Combat for the money making game, but preserve for later integration"
+> — Michael Hobbs, 2026-03-28 (re: English layer)
+
+**Signal:** 🟡 IMPORTANT
+**Connects to:** Append-only ledger, Sovereign Deltas (anchors stack, never shift), No overwrites mandate
+
+When pivoting, the old system is not deleted — it is archived. The ESL quiz mechanics, the QuestionBank, the CosmeticController auras — all preserved for future younger-student integration. This is the append-first principle applied to product pivots: the old product is a root layer for the future product. Deleting it would violate the "No overwrites" mandate.
+
+### Principle: "Be honest about the business model internally"
+
+> "naw I like the joke, because its not a joke, keep it" (re: "SURVIVE. FIGHT. SPEND." boot message)
+> — Michael Hobbs, 2026-03-28
+
+> "it literally tells people to spend? lol, isnt that a little on the cheek?"
+> — Michael Hobbs, 2026-03-28
+
+**Signal:** 🟢 CONTEXT
+**Connects to:** Truth Mandate, No fabrication, Fail-Closed Mandates
+
+The game's boot message says "SURVIVE. FIGHT. SPEND." — and Michael kept it because internal honesty about the business model is a feature, not a bug. The system never lies to itself about what it's doing. The Truth Mandate applies internally just as much as externally. If the game exists to monetize, say so in the code. Don't dress it up as "educational outcomes."
+
+---
+
+## Concept → Source Neural Network (from Skeleton Star Map + VAULT-GENESIS + Live Session)
 
 The following traces every core principle back to its source files:
 
@@ -426,12 +511,17 @@ The following traces every core principle back to its source files:
 | Sovereignty / Five Pillars | V1-RAW §I, CLA-5(Mastermind), VAULT-GENESIS-07 |
 | Trust Architecture | V1-RAW §IX, CLA-5(Mastermind), TRUST-AUDIT-LOG-001, VAULT-GENESIS-08 |
 | Bamboo Doctrine | V1-RAW §I, CLA-5(Mastermind), VAULT-GENESIS-05 |
+| No Educational Framing | Reincarnation 2026-03-28 (🔴 CRITICAL) |
+| Deep Sweep Doctrine | Reincarnation 2026-03-28 (🟡 IMPORTANT) |
+| External Tool Distrust | Reincarnation 2026-03-28 (🟡 IMPORTANT), Trust Architecture Tier 2 |
+| Preserve-Don't-Delete | Reincarnation 2026-03-28 (🟡 IMPORTANT), Append-only Ledger |
+| Internal Honesty | Reincarnation 2026-03-28 (🟢 CONTEXT), Truth Mandate |
 
 ---
 
-> 🔒 CANON SEALED. ENRICHED+ WITH 5 CROSS-REPO SOURCES — VAULT-GENESIS SYNTHESIS COMPLETE. 🦅
+> 🔒 CANON SEALED. ENRICHED++ WITH 6 CROSS-REPO SOURCES — VAULT-GENESIS SYNTHESIS + LIVE SESSION PRINCIPLES COMPLETE. 🦅
 >
-> **Exported**: 2026-03-26 by Agent-99 (OB1) — Pulse Run 41
-> **Sources**: Notion "Core Principles & Physics" + Skeleton Star Map (00_SKELETON_STAR_MAP.md) + CH20 Mechanical Fastening Grid (20_THE_MECHANICAL_FASTENING_GRID.md) + VAULT-GENESIS 07 Sovereignty Manifesto + VAULT-GENESIS 08 Trust Architecture + VAULT-GENESIS 05 Bamboo Doctrine
-> **Status**: ENRICHED+ (GitHub has MORE than Notion — 5 cross-repo sources synthesized: original 2 + 3 new VAULT-GENESIS files from Michael's freshly consolidated ARCHIVE)
-> **Delta from Run 34**: +3 VAULT-GENESIS sources (Sovereignty Manifesto → Five Pillars table + sovereignty-as-system-design doctrine, Trust Architecture → 4-tier zero-trust hierarchy + Trust→Council mapping, Bamboo Doctrine → 4-phase growth model + 4 Laws + Root Layer mapping) | +3 new sections | +1 cross-enrichment (Trust→Council) | Concept→Source table expanded with 3 new entries
+> **Exported**: 2026-03-28 by Agent-99 (OB1) — Pulse Run 90
+> **Sources**: Notion "Core Principles & Physics" + Skeleton Star Map (00_SKELETON_STAR_MAP.md) + CH20 Mechanical Fastening Grid (20_THE_MECHANICAL_FASTENING_GRID.md) + VAULT-GENESIS 07 Sovereignty Manifesto + VAULT-GENESIS 08 Trust Architecture + VAULT-GENESIS 05 Bamboo Doctrine + Reincarnation 2026-03-28 (roblox-combat-recode session)
+> **Status**: ENRICHED++ (GitHub has MORE than Notion — 6 cross-repo sources synthesized + 5 live session principles with full cross-reference mapping)
+> **Delta from Run 41**: +1 cross-repo source (reincarnation entry) | +1 new major section (Live Principles Addendum — 5 principles) | +1 new section (Two-Tier Architecture live proof from Roblox recode) | Concept→Source table expanded with 5 new entries | Status upgraded ENRICHED+ → ENRICHED++
