@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Natural English Training — Learn English Naturally with AI</title>
+  <meta name="description" content="Learn English the way humans actually speak. AI-powered conversations that take you from nervous beginner to confident speaker.">
+  <meta property="og:title" content="Natural English Training — Learn English Naturally with AI">
+  <meta property="og:description" content="AI-powered English learning that feels like talking to a friend.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.naturalenglishtraining.com">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🗣️</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --primary: #1e40af;
+      --primary-light: #3b82f6;
+      --accent: #f59e0b;
+      --accent-hover: #d97706;
+      --dark: #0f172a;
+      --gray-900: #1e293b;
+      --gray-700: #334155;
+      --gray-500: #64748b;
+      --gray-300: #cbd5e1;
+      --gray-100: #f1f5f9;
+      --white: #ffffff;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--dark);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    /* NAV */
+    nav {
+      position: fixed; top: 0; width: 100%;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--gray-100);
+      z-index: 100; padding: 1rem 2rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .logo { font-weight: 800; font-size: 1.25rem; color: var(--primary); text-decoration: none; }
+    .logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 2rem; align-items: center; }
+    .nav-links a { text-decoration: none; color: var(--gray-700); font-weight: 500; font-size: 0.9rem; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--primary); }
+    .btn {
+      display: inline-block; padding: 0.75rem 1.5rem; border-radius: 8px;
+      font-weight: 600; font-size: 0.95rem; text-decoration: none;
+      transition: all 0.2s; cursor: pointer; border: none;
+    }
+    .btn-primary { background: var(--accent); color: var(--dark); }
+    .btn-primary:hover { background: var(--accent-hover); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(245,158,11,0.4); }
+    .btn-outline { background: transparent; color: var(--primary); border: 2px solid var(--primary); }
+    .btn-outline:hover { background: var(--primary); color: var(--white); }
+    /* HERO */
+    .hero {
+      padding: 8rem 2rem 5rem; text-align: center;
+      background: linear-gradient(135deg, #eff6ff 0%, #fefce8 50%, #f0fdf4 100%);
+      min-height: 90vh; display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+    }
+    .hero-badge {
+      display: inline-block; background: var(--white); border: 1px solid var(--gray-300);
+      padding: 0.4rem 1rem; border-radius: 50px; font-size: 0.85rem;
+      color: var(--gray-700); margin-bottom: 2rem; font-weight: 500;
+    }
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 800;
+      line-height: 1.1; max-width: 800px; margin-bottom: 1.5rem;
+    }
+    .hero h1 .highlight {
+      background: linear-gradient(135deg, var(--primary-light), var(--accent));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero p { font-size: 1.25rem; color: var(--gray-700); max-width: 600px; margin-bottom: 2.5rem; line-height: 1.7; }
+    .hero-cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    /* SECTIONS */
+    .section { padding: 6rem 2rem; max-width: 1100px; margin: 0 auto; }
+    .section-label { text-transform: uppercase; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; color: var(--primary-light); margin-bottom: 0.75rem; }
+    .section h2 { font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; }
+    .section .subtitle { font-size: 1.1rem; color: var(--gray-500); max-width: 600px; margin-bottom: 3rem; }
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+    .feature-card {
+      padding: 2rem; border-radius: 16px; border: 1px solid var(--gray-100);
+      background: var(--white); transition: all 0.3s;
+    }
+    .feature-card:hover { border-color: var(--gray-300); box-shadow: 0 8px 30px rgba(0,0,0,0.06); transform: translateY(-2px); }
+    .feature-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 1rem; }
+    .feature-card h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .feature-card p { color: var(--gray-500); font-size: 0.95rem; line-height: 1.6; }
+    /* METHOD */
+    .method-section { background: var(--dark); color: var(--white); padding: 6rem 2rem; }
+    .method-inner { max-width: 1100px; margin: 0 auto; }
+    .method-section .section-label { color: var(--accent); }
+    .method-section h2 { color: var(--white); }
+    .method-section .subtitle { color: var(--gray-300); }
+    .method-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; margin-top: 3rem; }
+    .method-step { text-align: center; padding: 2rem 1.5rem; }
+    .step-number {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 48px; height: 48px; border-radius: 50%;
+      background: var(--accent); color: var(--dark); font-weight: 800; font-size: 1.2rem; margin-bottom: 1rem;
+    }
+    .method-step h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+    .method-step p { color: var(--gray-300); font-size: 0.9rem; line-height: 1.6; }
+    /* CTA */
+    .cta-section { padding: 6rem 2rem; text-align: center; background: linear-gradient(135deg, #fefce8 0%, #eff6ff 100%); }
+    .cta-section h2 { font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; }
+    .cta-section p { font-size: 1.1rem; color: var(--gray-500); margin-bottom: 2rem; max-width: 500px; margin-left: auto; margin-right: auto; }
+    /* FOOTER */
+    footer { background: var(--dark); color: var(--gray-300); padding: 3rem 2rem; text-align: center; }
+    footer p { font-size: 0.85rem; }
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav { padding: 0.75rem 1rem; }
+      .nav-links { display: none; }
+      .hero { padding: 6rem 1.5rem 4rem; min-height: auto; }
+      .section { padding: 4rem 1.5rem; }
+      .method-section { padding: 4rem 1.5rem; }
+      .features-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/" class="logo">Natural English<span>.</span></a>
+    <div class="nav-links">
+      <a href="#method">Method</a>
+      <a href="#features">Features</a>
+      <a href="#start" class="btn btn-primary">Get Started</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-badge">🤖 Powered by AI — Built for humans</div>
+    <h1>Learn English <span class="highlight">the way you actually speak it</span></h1>
+    <p>No textbooks. No grammar drills. Just real conversations with an AI that adapts to your level and grows with you.</p>
+    <div class="hero-cta">
+      <a href="#start" class="btn btn-primary">Start Learning Free →</a>
+      <a href="#method" class="btn btn-outline">See How It Works</a>
+    </div>
+  </section>
+
+  <section class="section" id="features">
+    <div class="section-label">Why Natural English</div>
+    <h2>English that works in the real world</h2>
+    <p class="subtitle">Traditional courses teach you to pass tests. We teach you to have conversations, make friends, and build careers.</p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon" style="background:#eff6ff;">💬</div>
+        <h3>Real Conversations</h3>
+        <p>Practice with an AI that talks like a real person — not a textbook. Natural pace, natural topics, natural English.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:#fefce8;">🎯</div>
+        <h3>Adaptive Learning</h3>
+        <p>OBI learns how you speak and adjusts in real-time. Too easy? It pushes you. Struggling? It slows down. Always the right level.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:#f0fdf4;">🐯</div>
+        <h3>Mouse to Tiger</h3>
+        <p>Start shy, finish confident. Our progression system builds your speaking confidence one natural conversation at a time.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:#fdf2f8;">🌏</div>
+        <h3>Built for Thai Speakers</h3>
+        <p>Designed by a native English teacher living in Thailand. We understand the specific challenges Thai speakers face.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:#f5f3ff;">⚡</div>
+        <h3>Learn Anywhere</h3>
+        <p>Practice in your Chrome browser, on your phone, or at your desk. No app downloads. No subscriptions. Just open and talk.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:#fff7ed;">🧠</div>
+        <h3>Remembers Everything</h3>
+        <p>OBI remembers your vocabulary, your mistakes, and your progress. Every session picks up right where you left off.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="method-section" id="method">
+    <div class="method-inner">
+      <div class="section-label">The OBI Method</div>
+      <h2>How Natural English Training works</h2>
+      <p class="subtitle">Four steps. No textbooks. Just results.</p>
+      <div class="method-steps">
+        <div class="method-step">
+          <div class="step-number">1</div>
+          <h3>Permission</h3>
+          <p>Start with zero pressure. OBI gives you permission to make mistakes. That's where real learning begins.</p>
+        </div>
+        <div class="method-step">
+          <div class="step-number">2</div>
+          <h3>Conversation</h3>
+          <p>Talk about things that matter to you — your job, your life, your interests. Real topics build real language skills.</p>
+        </div>
+        <div class="method-step">
+          <div class="step-number">3</div>
+          <h3>Correction</h3>
+          <p>Gentle, contextual feedback woven into the conversation. You learn without being interrupted or embarrassed.</p>
+        </div>
+        <div class="method-step">
+          <div class="step-number">4</div>
+          <h3>Confidence</h3>
+          <p>Watch yourself transform from Mouse to Tiger. Track your progress as conversations get deeper and more natural.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section" id="start">
+    <h2>Ready to speak English naturally?</h2>
+    <p>Join the waitlist for early access to OBI — your AI English conversation partner.</p>
+    <a href="mailto:hobbs@naturalenglishtraining.com?subject=I%20want%20to%20try%20OBI&body=Hi!%20I'm%20interested%20in%20learning%20English%20with%20OBI." class="btn btn-primary" style="font-size:1.1rem; padding: 1rem 2rem;">Join the Waitlist →</a>
+  </section>
+
+  <footer>
+    <p>© 2026 Natural English Training. Built with ❤️ in Bangkok, Thailand.</p>
+    <p style="margin-top:0.5rem;"><a href="mailto:hobbs@naturalenglishtraining.com">hobbs@naturalenglishtraining.com</a></p>
+  </footer>
+</body>
+</html>
