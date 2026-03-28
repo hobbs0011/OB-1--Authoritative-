@@ -9,8 +9,8 @@
     Handles: tutorial triggers, UI prompts, skip detection, completion tracking.
     
     Architecture: ModuleScript (ServerStorage)
-    Version: 1.0.0
-    Date: 2026-03-26
+    Version: 2.0.0 — Combat FTUE (ESL PURGED)
+    Date: 2026-03-28
 --]]
 
 local Players = game:GetService("Players")
@@ -20,15 +20,15 @@ local FTUEWiring = {}
 
 local CONFIG = {
     STEPS = {
-        { id = "welcome",        prompt = "Welcome to Skibidi Zombie! 🧟",         action = "show_overlay",   duration = 3 },
-        { id = "movement",       prompt = "Use WASD or tap to move!",               action = "highlight_area", duration = 0 },
-        { id = "first_enemy",    prompt = "A zombie appeared! Answer to attack!",   action = "spawn_tutorial_enemy", duration = 0 },
-        { id = "first_question", prompt = "Answer the English question to deal damage!", action = "serve_tutorial_question", duration = 0 },
-        { id = "correct",        prompt = "Nice hit! 🔥 Keep answering to kill it!", action = "show_overlay",   duration = 2 },
-        { id = "combo",          prompt = "Get 3 in a row for a COMBO bonus!",      action = "show_overlay",   duration = 2 },
-        { id = "powerup",        prompt = "Fill the Power-Up bar → unleash English Power!", action = "highlight_ui", duration = 3 },
-        { id = "coins",          prompt = "Coins = your score. Spend them in the shop!", action = "highlight_ui", duration = 2 },
-        { id = "complete",       prompt = "Tutorial complete! You're ready to survive! 💀", action = "show_overlay", duration = 3 },
+        { id = "welcome",        prompt = "Welcome to Skibidi Zombie! 🧟",                action = "show_overlay",   duration = 3 },
+        { id = "movement",       prompt = "Use WASD or tap to move!",                      action = "highlight_area", duration = 0 },
+        { id = "first_enemy",    prompt = "A zombie appeared! Tap to attack! 👊",           action = "spawn_tutorial_enemy", duration = 0 },
+        { id = "melee_attack",   prompt = "Nice hit! 🔥 Keep slashing!",                   action = "show_overlay",   duration = 2 },
+        { id = "combo",          prompt = "Get 3 kills in a row for a COMBO bonus!",       action = "show_overlay",   duration = 2 },
+        { id = "dodge",          prompt = "Swipe or press SPACE to dodge roll!",            action = "highlight_ui",   duration = 3 },
+        { id = "weapon_switch",  prompt = "You found a weapon! Tap to equip it! ⚔️",       action = "highlight_ui",   duration = 3 },
+        { id = "coins",          prompt = "Coins drop from kills. Spend them in the shop!", action = "highlight_ui",   duration = 2 },
+        { id = "complete",       prompt = "Tutorial complete! You're ready to survive! 💀", action = "show_overlay",   duration = 3 },
     },
     TUTORIAL_ENEMY = {
         name = "Baby Skibidi",
@@ -40,7 +40,7 @@ local CONFIG = {
     REWARD_COINS = 25,
 }
 
-local playerFTUE = {} -- [Player] = { currentStep, startTime, completed, skipped }
+local playerFTUE = {}
 
 function FTUEWiring.Init()
     Players.PlayerAdded:Connect(function(player)
@@ -141,7 +141,7 @@ function FTUEWiring._onComplete(player)
         end
         local currEv = remotes:FindFirstChild("CurrencyUpdate")
         if currEv then
-            currEv:FireClient(player, { currency = "EnglishCoins", amount = CONFIG.REWARD_COINS, reason = "FTUE_COMPLETE" })
+            currEv:FireClient(player, { currency = "SurvivalCoins", amount = CONFIG.REWARD_COINS, reason = "FTUE_COMPLETE" })
         end
     end
 end
