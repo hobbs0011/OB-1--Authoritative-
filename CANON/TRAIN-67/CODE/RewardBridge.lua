@@ -11,8 +11,8 @@
              daily bonus multipliers, battle pass XP, first-kill bonuses.
     
     Architecture: ModuleScript (ServerStorage)
-    Version: 1.0.0
-    Date: 2026-03-26
+    Version: 1.1.0 — ESL PURGE (combat rewards only)
+    Date: 2026-03-28
 --]]
 
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
@@ -38,9 +38,11 @@ local CONFIG = {
     BOSS_WAVE_BONUS = 100,
     -- Battle Pass XP
     XP_PER_KILL = 5,
-    XP_PER_CORRECT_ANSWER = 3,
+    XP_PER_COMBO_KILL = 8,
     XP_PER_WAVE_CLEAR = 20,
     XP_PER_BOSS_KILL = 50,
+    XP_PER_HEADSHOT = 10,
+    XP_PER_PARRY = 7,
     -- Multipliers
     DAILY_FIRST_GAME_MULTIPLIER = 1.5,
     STREAK_BONUS_PER_DAY = 0.1,
@@ -125,6 +127,7 @@ function RewardBridge.OnEnemyKilled(player, enemyData, comboStreak)
     if comboStreak > 1 then
         local comboBonus = math.min(CONFIG.MAX_COMBO_COIN_BONUS, comboStreak * CONFIG.COMBO_COIN_BONUS_PER_STREAK)
         coins = coins + comboBonus
+        xp = xp + CONFIG.XP_PER_COMBO_KILL
         table.insert(breakdown, {type = "combo", amount = comboBonus, streak = comboStreak})
     end
     
@@ -156,8 +159,20 @@ function RewardBridge.OnEnemyKilled(player, enemyData, comboStreak)
     return coins, xp
 end
 
-function RewardBridge.OnCorrectAnswer(player)
-    local xp = CONFIG.XP_PER_CORRECT_ANSWER
+function RewardBridge.OnComboKill(player, comboStreak)
+    local xp = CONFIG.XP_PER_COMBO_KILL
+    RewardBridge._grantXP(player, xp)
+    return xp
+end
+
+function RewardBridge.OnHeadshot(player)
+    local xp = CONFIG.XP_PER_HEADSHOT
+    RewardBridge._grantXP(player, xp)
+    return xp
+end
+
+function RewardBridge.OnParry(player)
+    local xp = CONFIG.XP_PER_PARRY
     RewardBridge._grantXP(player, xp)
     return xp
 end
@@ -212,16 +227,24 @@ end
 
 function RewardBridge._grantCoins(player, amount)
     if EconomyManager then
-        EconomyManager.AddCurrency(player, "EnglishCoins", amount)
+        if type(EconomyManager.AddCoins) == "function" then
+            EconomyManager.AddCoins(player, amount, "combat_reward")
+        elseif type(EconomyManager.AddCurrency) == "function" then
+            EconomyManager.AddCurrency(player, "SurvivalCoins", amount)
+        end
     elseif DataStoreV2 then
-        DataStoreV2.IncrementField(player, "englishCoins", amount)
+        DataStoreV2.IncrementField(player, "survivalCoins", amount)
         DataStoreV2.IncrementField(player, "lifetimeCoins", amount)
     end
 end
 
 function RewardBridge._grantGems(player, amount)
     if EconomyManager then
-        EconomyManager.AddCurrency(player, "PremiumGems", amount)
+        if type(EconomyManager.AddGems) == "function" then
+            EconomyManager.AddGems(player, amount, "combat_reward")
+        elseif type(EconomyManager.AddCurrency) == "function" then
+            EconomyManager.AddCurrency(player, "PremiumGems", amount)
+        end
     elseif DataStoreV2 then
         DataStoreV2.IncrementField(player, "premiumGems", amount)
         DataStoreV2.IncrementField(player, "lifetimeGems", amount)
@@ -229,6 +252,12 @@ function RewardBridge._grantGems(player, amount)
 end
 
 function RewardBridge._grantXP(player, amount)
+    if EconomyManager then
+        if type(EconomyManager.AddXP) == "function" then
+            EconomyManager.AddXP(player, amount, "combat_reward")
+            return
+        end
+    end
     if DataStoreV2 then
         DataStoreV2.IncrementField(player, "battlePassXP", amount)
     end
