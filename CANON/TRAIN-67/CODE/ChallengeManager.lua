@@ -1,5 +1,5 @@
 --[[
-    ChallengeManager.lua — Train 6-7: Survival English
+    ChallengeManager.lua — Train 6-7: Survive the Brainrots
     Stage 12: Daily Challenge System
     
     DESIGN LAW:
@@ -7,13 +7,13 @@
     - Server-authoritative progress tracking
     - Streak multiplier rewards consistency
     - Challenges reset at midnight UTC
-    - Gospel 444 integration: English challenges bonus XP
+    - Combat mastery challenges bonus XP
     
     CHALLENGE TYPES:
     1. Kill challenges (kill X enemies)
     2. Survival challenges (survive X minutes)
     3. Collection challenges (collect X items)
-    4. English challenges (answer X questions correctly) — BONUS REWARDS
+    4. Combat mastery challenges (combos, headshots, parries) — BONUS REWARDS
     5. Social challenges (trade X times, revive X teammates)
     6. Economy challenges (earn X coins, spend X coins)
 ]]
@@ -49,10 +49,12 @@ local CHALLENGE_POOL = {
     { id = "collect_coins_2000", type = "collect_coins",  target = 2000,  name = "Gold Rush",         description = "Earn 2,000 Survival Coins", reward = { coins = 500, gems = 3 } },
     { id = "collect_items_5",    type = "collect_items",  target = 5,     name = "Scavenger",         description = "Collect 5 items",            reward = { coins = 200 } },
     
-    -- ENGLISH CHALLENGES (Gospel 444 — bonus rewards)
-    { id = "english_5",     type = "english",    target = 5,   name = "Word Warrior",        description = "Answer 5 English questions correctly",   reward = { coins = 300, gems = 5 },  isEnglish = true },
-    { id = "english_15",    type = "english",    target = 15,  name = "Vocabulary Master",   description = "Answer 15 English questions correctly",  reward = { coins = 750, gems = 15 }, isEnglish = true },
-    { id = "english_streak_5", type = "english_streak", target = 5, name = "Perfect Streak",  description = "Get 5 correct answers in a row",        reward = { coins = 500, gems = 10 }, isEnglish = true },
+    -- COMBAT MASTERY CHALLENGES (bonus rewards — skill-based dopamine)
+    { id = "combo_5",       type = "combo",        target = 5,   name = "Combo King",          description = "Get a 5-kill combo streak",          reward = { coins = 300, gems = 5 },  isMastery = true },
+    { id = "combo_10",      type = "combo",        target = 10,  name = "Unstoppable",         description = "Get a 10-kill combo streak",         reward = { coins = 750, gems = 15 }, isMastery = true },
+    { id = "parry_3",       type = "parry",        target = 3,   name = "Perfect Guard",       description = "Parry 3 boss attacks",              reward = { coins = 500, gems = 10 }, isMastery = true },
+    { id = "headshot_10",   type = "headshot",     target = 10,  name = "Sharpshooter",        description = "Land 10 headshots",                 reward = { coins = 400, gems = 8 },  isMastery = true },
+    { id = "dodge_5",       type = "dodge",        target = 5,   name = "Ghost",               description = "Dodge roll through 5 attacks",      reward = { coins = 350, gems = 5 },  isMastery = true },
     
     -- SOCIAL CHALLENGES
     { id = "trade_1",       type = "trade",      target = 1,   name = "Trader",              description = "Complete 1 trade",               reward = { coins = 300 } },
@@ -71,7 +73,7 @@ local CONFIG = {
     CHALLENGES_PER_DAY = 3,
     STREAK_BONUS_MULTIPLIER = 0.1,   -- +10% per streak day
     MAX_STREAK_MULTIPLIER = 2.0,     -- Cap at 2x
-    ENGLISH_CHALLENGE_BONUS = 1.5,   -- 50% bonus on English challenges
+    COMBAT_MASTERY_BONUS = 1.5,      -- 50% bonus on combat mastery challenges
     REFRESH_HOUR_UTC = 0,            -- Reset at midnight UTC
 }
 
@@ -111,12 +113,12 @@ local function selectDailyChallenges(userId)
     
     local rng = Random.new(seed)
     
-    -- Ensure at least 1 English challenge per day (Gospel 444 integration)
-    local englishChallenges = {}
+    -- Ensure at least 1 combat mastery challenge per day (skill-based dopamine)
+    local masteryChallenges = {}
     local otherChallenges = {}
     for _, challenge in ipairs(CHALLENGE_POOL) do
-        if challenge.isEnglish then
-            table.insert(englishChallenges, challenge)
+        if challenge.isMastery then
+            table.insert(masteryChallenges, challenge)
         else
             table.insert(otherChallenges, challenge)
         end
@@ -124,11 +126,11 @@ local function selectDailyChallenges(userId)
     
     local selected = {}
     
-    -- Pick 1 English challenge
-    if #englishChallenges > 0 then
-        local idx = rng:NextInteger(1, #englishChallenges)
+    -- Pick 1 combat mastery challenge
+    if #masteryChallenges > 0 then
+        local idx = rng:NextInteger(1, #masteryChallenges)
         table.insert(selected, {
-            definition = englishChallenges[idx],
+            definition = masteryChallenges[idx],
             progress = 0,
             completed = false,
             claimed = false,
@@ -277,23 +279,31 @@ function ChallengeManager.ClaimReward(player, challengeIndex)
         CONFIG.MAX_STREAK_MULTIPLIER
     )
     
-    -- English challenge bonus
-    local englishMultiplier = challenge.definition.isEnglish and CONFIG.ENGLISH_CHALLENGE_BONUS or 1
+    -- Combat mastery challenge bonus
+    local masteryMultiplier = challenge.definition.isMastery and CONFIG.COMBAT_MASTERY_BONUS or 1
     
-    local totalMultiplier = streakMultiplier * englishMultiplier
+    local totalMultiplier = streakMultiplier * masteryMultiplier
     
     local reward = challenge.definition.reward
     local grantedCoins = math.floor((reward.coins or 0) * totalMultiplier)
     local grantedGems = math.floor((reward.gems or 0) * totalMultiplier)
     
     -- Grant rewards via EconomyManager
-    local EconomyManager = require(script.Parent:FindFirstChild("EconomyManager"))
-    if EconomyManager then
+    local ok, EconomyManager = pcall(require, script.Parent:FindFirstChild("EconomyManager"))
+    if ok and EconomyManager then
         if grantedCoins > 0 then
-            EconomyManager.AddBalance(player, "SurvivalCoins", grantedCoins, "daily_challenge_" .. challenge.definition.id)
+            if type(EconomyManager.AddCoins) == "function" then
+                EconomyManager.AddCoins(player, grantedCoins, "daily_challenge_" .. challenge.definition.id)
+            elseif type(EconomyManager.AddBalance) == "function" then
+                EconomyManager.AddBalance(player, "SurvivalCoins", grantedCoins, "daily_challenge_" .. challenge.definition.id)
+            end
         end
         if grantedGems > 0 then
-            EconomyManager.AddBalance(player, "BrainrotGems", grantedGems, "daily_challenge_" .. challenge.definition.id)
+            if type(EconomyManager.AddGems) == "function" then
+                EconomyManager.AddGems(player, grantedGems, "daily_challenge_" .. challenge.definition.id)
+            elseif type(EconomyManager.AddBalance) == "function" then
+                EconomyManager.AddBalance(player, "BrainrotGems", grantedGems, "daily_challenge_" .. challenge.definition.id)
+            end
         end
     end
     
@@ -328,7 +338,7 @@ function ChallengeManager.GetChallenges(player)
             name = challenge.definition.name,
             description = challenge.definition.description,
             type = challenge.definition.type,
-            isEnglish = challenge.definition.isEnglish or false,
+            isMastery = challenge.definition.isMastery or false,
             progress = challenge.progress,
             target = challenge.definition.target,
             completed = challenge.completed,
