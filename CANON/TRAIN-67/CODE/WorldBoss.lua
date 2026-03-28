@@ -1,19 +1,16 @@
 --[[
-    WorldBoss.lua — Train 6-7: Survival English
-    Stage 19: Weekly Boss + Appointment Gaming
+    WorldBoss.lua — Weekly Boss + Appointment Gaming
+    Skibidi Zombie: Survive the Brainrots
     
     DESIGN LAW:
     - Mega Brainrot spawns on schedule (appointment gaming)
     - Exclusive loot table (unique items only from boss)
     - Server-wide cooperation required
-    - English Challenge integration (Gospel 444)
     - Limited attempts per week (scarcity = value)
+    - ZERO ESL. Pure combat damage. Kill to earn.
     
-    ARCHITECTURE:
-    - Server-authoritative boss state
-    - Phase-based boss mechanics
-    - Damage tracking for loot distribution
-    - Scheduled spawns using os.time()
+    Version: 1.1 — ESL PURGE
+    Date: 2026-03-28
 ]]
 
 local Players = game:GetService("Players")
@@ -35,32 +32,32 @@ local BOSSES = {
         name = "Mega Brainrot Sigma",
         maxHP = 500000,
         phases = 3,
-        spawnDays = { "Saturday" },  -- Weekly on Saturday
-        spawnHourUTC = 14,           -- 2 PM UTC = 9 PM ICT
+        spawnDays = { "Saturday" },
+        spawnHourUTC = 14,
         durationMinutes = 30,
         maxParticipants = 50,
-        minDamageForLoot = 500,      -- Must deal 500+ damage to qualify
+        minDamageForLoot = 500,
         
         phaseConfig = {
             [1] = {
                 hpThreshold = 1.0,
                 attackSpeed = 1.0,
                 abilities = { "slam", "charge" },
-                addSpawnRate = 30,    -- seconds between add spawns
+                addSpawnRate = 30,
             },
             [2] = {
                 hpThreshold = 0.66,
                 attackSpeed = 1.5,
                 abilities = { "slam", "charge", "aoe_shockwave" },
                 addSpawnRate = 20,
-                englishChallenge = true, -- Gospel 444: English phase
+                -- Phase 2: enrage begins, faster attacks, more adds
             },
             [3] = {
                 hpThreshold = 0.33,
                 attackSpeed = 2.0,
                 abilities = { "slam", "charge", "aoe_shockwave", "enrage_beam" },
                 addSpawnRate = 10,
-                englishChallenge = true,
+                -- Phase 3: full enrage, all abilities unlocked
             },
         },
         
@@ -79,32 +76,30 @@ local BOSSES = {
             },
             mvpBonus = {
                 { id = "boss_mvp_title", name = "Sigma Slayer Title" },
-                guaranteedRarity = "Epic", -- MVP gets guaranteed Epic+ drop
+                guaranteedRarity = "Epic",
             },
         },
     },
 }
 
 -- ============================================================
--- CONFIGURATION
+-- CONFIGURATION — ZERO ESL
 -- ============================================================
 
 local CONFIG = {
-    MAX_WEEKLY_ATTEMPTS = 3,       -- Per player per boss per week
-    RESPAWN_DELAY = 0,             -- Boss spawns immediately at scheduled time
-    ENGLISH_DAMAGE_BONUS = 1.5,    -- 50% more damage during English challenge phase
-    ENGLISH_QUESTIONS_PER_PHASE = 3,
+    MAX_WEEKLY_ATTEMPTS = 3,
+    RESPAWN_DELAY = 0,
     DAMAGE_LEADERBOARD_SIZE = 10,
+    PARRY_DAMAGE_BONUS = 1.5,  -- 50% bonus during boss stun (replaced English bonus)
 }
 
 -- ============================================================
 -- STATE
 -- ============================================================
 
-local activeBoss = nil             -- Current boss instance
-local participantDamage = {}       -- [userId] = totalDamage
-local playerWeeklyAttempts = {}    -- [userId_bossId_weekKey] = attempts
-local bossSpawnScheduled = false
+local activeBoss = nil
+local participantDamage = {}
+local playerWeeklyAttempts = {}
 
 -- ============================================================
 -- SCHEDULING
@@ -157,11 +152,10 @@ function WorldBoss.SpawnBoss(bossConfig)
     
     print(string.format("[WorldBoss] %s has spawned! HP: %d", bossConfig.name, bossConfig.maxHP))
     
-    -- Auto-despawn timer
     task.delay(bossConfig.durationMinutes * 60, function()
         if activeBoss and not activeBoss.defeated then
             print(string.format("[WorldBoss] %s despawned (timeout)", bossConfig.name))
-            WorldBoss._EndBoss(false) -- Not defeated, timed out
+            WorldBoss._EndBoss(false)
         end
     end)
     
@@ -175,25 +169,17 @@ function WorldBoss.DealDamage(player, damage)
     
     local userId = player.UserId
     
-    -- Weekly attempt check
     local attemptKey = userId .. "_" .. activeBoss.config.id .. "_" .. getWeekKey()
     local attempts = playerWeeklyAttempts[attemptKey] or 0
     if attempts >= CONFIG.MAX_WEEKLY_ATTEMPTS then
         return { success = false, error = "WEEKLY_LIMIT_REACHED" }
     end
     
-    -- Track first hit as an attempt
     if not participantDamage[userId] then
         playerWeeklyAttempts[attemptKey] = attempts + 1
     end
     
-    -- English challenge bonus
-    local currentPhase = activeBoss.config.phaseConfig[activeBoss.phase]
-    if currentPhase and currentPhase.englishChallenge then
-        damage = math.floor(damage * CONFIG.ENGLISH_DAMAGE_BONUS)
-    end
-    
-    -- Apply damage
+    -- Pure combat damage — no ESL gates
     participantDamage[userId] = (participantDamage[userId] or 0) + damage
     activeBoss.currentHP = math.max(0, activeBoss.currentHP - damage)
     activeBoss.participants[tostring(userId)] = true
@@ -207,7 +193,6 @@ function WorldBoss.DealDamage(player, damage)
         end
     end
     
-    -- Check defeat
     if activeBoss.currentHP <= 0 then
         activeBoss.defeated = true
         WorldBoss._EndBoss(true)
@@ -246,7 +231,6 @@ function WorldBoss._DistributeLoot()
     local lootTable = activeBoss.config.lootTable
     local EconomyManager = require(script.Parent:FindFirstChild("EconomyManager"))
     
-    -- Sort participants by damage for MVP
     local sorted = {}
     for odId, dmg in pairs(participantDamage) do
         if dmg >= activeBoss.config.minDamageForLoot then
@@ -255,17 +239,14 @@ function WorldBoss._DistributeLoot()
     end
     table.sort(sorted, function(a, b) return a.damage > b.damage end)
     
-    -- Distribute guaranteed loot to all qualifying participants
     for _, participant in ipairs(sorted) do
         local player = Players:GetPlayerByUserId(participant.userId)
         if player then
-            -- Guaranteed rewards
             for _, item in ipairs(lootTable.guaranteed) do
                 print(string.format("[WorldBoss Loot] Player %d: %s x%d",
                     participant.userId, item.name, item.count))
             end
             
-            -- Random loot roll
             local totalWeight = 0
             for _, item in ipairs(lootTable.random) do
                 totalWeight = totalWeight + item.weight
@@ -284,19 +265,17 @@ function WorldBoss._DistributeLoot()
         end
     end
     
-    -- MVP bonus
     if #sorted > 0 then
         local mvp = sorted[1]
         print(string.format("[WorldBoss] MVP: Player %d with %d damage!", mvp.userId, mvp.damage))
     end
     
-    -- Grant boss currency to top participants
     if EconomyManager then
         for i, participant in ipairs(sorted) do
             local player = Players:GetPlayerByUserId(participant.userId)
             if player then
-                local coinReward = math.max(500, 2000 - (i * 50)) -- Diminishing by rank
-                EconomyManager.AddBalance(player, "SurvivalCoins", coinReward, "world_boss_" .. activeBoss.config.id)
+                local coinReward = math.max(500, 2000 - (i * 50))
+                EconomyManager.AddCoins(player, coinReward, "world_boss_" .. activeBoss.config.id)
             end
         end
     end
@@ -308,7 +287,6 @@ end
 
 function WorldBoss.GetStatus()
     if not activeBoss then
-        -- Find next spawn time
         local nextSpawn = "Unknown"
         for _, boss in ipairs(BOSSES) do
             nextSpawn = string.format("%s at %d:00 UTC", boss.spawnDays[1], boss.spawnHourUTC)
@@ -327,7 +305,7 @@ function WorldBoss.GetStatus()
         phase = activeBoss.phase,
         maxPhases = #activeBoss.config.phaseConfig,
         timeRemaining = math.max(0, activeBoss.expiresAt - os.time()),
-        participantCount = 0, -- Count from participants table
+        participantCount = 0,
     }
 end
 
@@ -367,7 +345,7 @@ end
 
 task.spawn(function()
     while true do
-        task.wait(60) -- Check every minute
+        task.wait(60)
         for _, bossConfig in ipairs(BOSSES) do
             if not activeBoss and shouldSpawnBoss(bossConfig) then
                 WorldBoss.SpawnBoss(bossConfig)
