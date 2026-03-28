@@ -1,158 +1,56 @@
 --[[
-    UnifiedClient.lua — Single Entry Point Client Script
-    Skibidi Zombie: Survive the Brainrots
-
-    RESOLVES: Fragmented client scripts (5 independent LocalScripts with no
-    unified boot, no dependency injection, no lifecycle coordination).
-    This is THE one client script.
-
-    GOAL: MAKE MONEY. English is the game mechanic.
-    Boot order: UnifiedClient -> ClientBridge -> all client modules
-
-    Architecture: LocalScript (StarterPlayerScripts) — THE entry point
-    Version: 1.0.0
-    Date: 2026-03-28
-    Cross-repo sources:
-      - UnifiedServer.lua (d965f1cf) — client module registry, remote events
-      - ClientBridge.lua (8fa07a6f) — event bus + gateway pattern
-      - HUDController_v2.lua (f2f6bda5) — mobile-first HUD, Init() lifecycle
-      - MobileInputController.lua (1b5efced) — 4-mode English input, new(config)
-      - CodexClient.lua (8717a013) — vocabulary codex UI, self-init pattern
-      - CombatEnglishBridgeSpec.md (e29bbd30) — Answer-to-Attack loop
-      - FTUEImplementationSpec.md (18bee6a6) — 60s compressed FTUE flow
-
-    Run 77 | 2026-03-28 09:00 ICT | Active Mission: 100% Roblox
---]]
-
-local Players            = game:GetService("Players")
-local ReplicatedStorage  = game:GetService("ReplicatedStorage")
-local StarterPlayer      = game:GetService("StarterPlayer")
-local UserInputService   = game:GetService("UserInputService")
-local RunService         = game:GetService("RunService")
-local TweenService       = game:GetService("TweenService")
-
-local player    = Players.LocalPlayer
-local playerGui = player:WaitForChild("PlayerGui")
-
---------------------------------------------------------------------------------
--- CLIENT BOOT ORDER (dependency-ordered)
--- Mirrors UnifiedServer.lua's boot table pattern.
--- All modules live in ReplicatedStorage/ClientModules or StarterPlayerScripts.
---------------------------------------------------------------------------------
-
-local CLIENT_BOOT_ORDER = {
-    -- Phase 1: Communication layer (REQUIRED — nothing works without this)
-    { name = "ClientBridge",          path = "ClientBridge",          required = true,  initStyle = "method" },
-
-    -- Phase 2: Core display (HUD is needed before gameplay hooks)
-    { name = "HUDController",         path = "HUDController_v2",     required = true,  initStyle = "function" },
-
-    -- Phase 3: Shared data modules (ReplicatedStorage)
-    { name = "CodexData",             path = "CodexData",            required = false, initStyle = "none", storage = "replicated" },
-
-    -- Phase 4: Interactive client systems
-    { name = "CodexClient",           path = "CodexClient",          required = false, initStyle = "self" },
-    { name = "MobileInputController", path = "MobileInputController",required = false, initStyle = "constructor" },
-
-    -- Phase 5: Future client modules (placeholders for Studio wiring)
-    -- { name = "ShopUI",             path = "ShopUI",               required = false, initStyle = "function" },
-    -- { name = "SettingsUI",         path = "SettingsUI",            required = false, initStyle = "function" },
-    -- { name = "SocialUI",           path = "SocialUI",              required = false, initStyle = "function" },
-}
-
---[[
-    SERVER MODULE REGISTRY (not booted here — wired in ServerScriptService)
-    These modules live on the server and communicate via RemoteEvents:
-      - UnifiedServer.lua       — server boot sequence (28 modules)
-      - ServerGateway.lua       — client->server action router
-      - All 28 server modules   — see UnifiedServer.lua BOOT_ORDER
-
-    CONFIG MODULES (loaded by client modules, not booted independently):
-      - CodexData.lua           — shared codex entries (ReplicatedStorage)
-      - LedgerSchema.lua        — economy field definitions (ReplicatedStorage)
-
-    REMOTE EVENTS (created by UnifiedServer.lua, consumed here):
-      Core: RequestQuestion, SubmitAnswer, ActivatePowerUp, QuestionDelivered,
-            AnswerResult, PlayerDied, PlayerRespawned, WaveUpdate, EnemySpawned,
-            EnemyDied, ComboUpdate, PowerUpReady, PowerUpActivated, TierChanged
-      Economy: CurrencyUpdate, TeachingMilestone
-      English: StreakUpdate, RewardClaimed, TierProgression
-      Cosmetics: CosmeticEquipped, CosmeticUnlocked, FusionResult
-      Input: InputModeChanged, WordSubmitted
-      Monetization: OfferPresented, OfferDismissed, PurchaseComplete
+═══════════════════════════════════════════════════════════
+SURVIVE A BRAINROT — PRODUCTION CLIENT ARCHITECTURE v2.2.0
+Script: UnifiedClient.lua
+Type: Local Script (StarterPlayerScripts)
+Purpose: Client boot + event bridge. Combat-only UI wiring.
+         Zero ESL. Zero English. Pure survival combat.
+Date: February 2026 | Patched: March 28, 2026
+Version: 2.2.0 — ESL PURGE (combat-only client)
+Phoenix Rising Gaming Division
+═══════════════════════════════════════════════════════════
 ]]
 
+local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local StarterPlayer = game:GetService("StarterPlayer")
+local UserInputService = game:GetService("UserInputService")
+local RunService = game:GetService("RunService")
+local TweenService = game:GetService("TweenService")
+
+local LocalPlayer = Players.LocalPlayer
+local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
+
 --------------------------------------------------------------------------------
--- STATE
+-- CLIENT MODULE REGISTRY
 --------------------------------------------------------------------------------
 
-local Modules   = {}          -- loaded client modules (name -> module)
-local BootLog   = {}          -- boot telemetry
+local CLIENT_MODULES = {
+    { name = "ClientBridge",         path = "ClientBridge",         required = true  },
+    { name = "HUDController",        path = "HUDController_v2",     required = true  },
+    { name = "MobileInputController", path = "MobileInputController", required = false },
+    { name = "CosmeticRenderer",     path = "CosmeticRenderer",     required = false },
+    { name = "SoundManager",         path = "SoundManager",         required = false },
+    { name = "FTUEClient",           path = "FTUEClient",           required = false },
+}
+
+local Modules = {}
 local bootStart = tick()
-local isMobile  = UserInputService.TouchEnabled and not UserInputService.KeyboardEnabled
 
 local function log(level, msg)
     local ts = string.format("%.2f", tick() - bootStart)
     print(string.format("[UnifiedClient][%ss][%s] %s", ts, level, msg))
 end
 
---------------------------------------------------------------------------------
--- MODULE LOADER
---------------------------------------------------------------------------------
-
-local function findModule(entry)
-    -- Check multiple standard locations (Studio may place them differently)
-    local locations = {}
-
-    if entry.storage == "replicated" then
-        -- ReplicatedStorage root
-        table.insert(locations, ReplicatedStorage)
-    else
-        -- StarterPlayerScripts children
-        local sps = StarterPlayer:FindFirstChild("StarterPlayerScripts")
-        if sps then table.insert(locations, sps) end
-        -- ReplicatedStorage/ClientModules (organized layout)
-        local cm = ReplicatedStorage:FindFirstChild("ClientModules")
-        if cm then table.insert(locations, cm) end
-        -- ReplicatedStorage root (flat layout)
-        table.insert(locations, ReplicatedStorage)
-    end
-
-    -- Also check script parent (if modules are siblings in StarterPlayerScripts)
-    local scriptParent = script.Parent
-    if scriptParent and not table.find(locations, scriptParent) then
-        table.insert(locations, 1, scriptParent)
-    end
-
-    for _, container in ipairs(locations) do
-        local found = container:FindFirstChild(entry.path)
-        if found then return found end
-    end
-
-    -- Recursive search as last resort
-    for _, container in ipairs(locations) do
-        local found = container:FindFirstChild(entry.path, true)
-        if found then return found end
-    end
-
-    return nil
-end
-
-local function loadModule(entry)
+local function loadClientModule(entry)
     local name = entry.name
+    local moduleScript = ReplicatedStorage:FindFirstChild(entry.path)
+        or StarterPlayer:FindFirstChild("StarterPlayerScripts") and StarterPlayer.StarterPlayerScripts:FindFirstChild(entry.path)
+        or ReplicatedStorage:FindFirstChild(entry.path, true)
 
-    -- CodexClient is self-initializing — it's a LocalScript, not a ModuleScript
-    -- We skip it in the module loader and let it run on its own
-    if entry.initStyle == "self" then
-        log("OK", name .. " -- self-initializing (separate LocalScript)")
-        table.insert(BootLog, { name = name, status = "SELF", time = tick() - bootStart })
-        return true
-    end
-
-    local moduleScript = findModule(entry)
     if not moduleScript then
         if entry.required then
-            log("FATAL", name .. " -- MODULE NOT FOUND (REQUIRED)")
+            log("FATAL", name .. " -- NOT FOUND (REQUIRED)")
             return false
         else
             log("WARN", name .. " -- not found (optional, skipping)")
@@ -172,423 +70,259 @@ local function loadModule(entry)
     end
 
     Modules[name] = result
-
-    -- Initialize based on module pattern
-    if entry.initStyle == "method" then
-        -- ClientBridge pattern: module:Init()
-        if type(result) == "table" and type(result.Init) == "function" then
-            local initOk, initErr = pcall(result.Init, result)
-            if not initOk then
-                if entry.required then
-                    log("FATAL", name .. " -- INIT FAILED: " .. tostring(initErr))
-                    return false
-                else
-                    log("WARN", name .. " -- init failed: " .. tostring(initErr))
-                end
-            end
-        end
-    elseif entry.initStyle == "function" then
-        -- HUDController pattern: module.Init()
-        if type(result) == "table" and type(result.Init) == "function" then
-            local initOk, initErr = pcall(result.Init)
-            if not initOk then
-                if entry.required then
-                    log("FATAL", name .. " -- INIT FAILED: " .. tostring(initErr))
-                    return false
-                else
-                    log("WARN", name .. " -- init failed: " .. tostring(initErr))
-                end
-            end
-        end
-    elseif entry.initStyle == "constructor" then
-        -- MobileInputController pattern: module.new(config)
-        -- Deferred — constructed after all modules are loaded (needs DI)
-        log("INFO", name .. " -- loaded (constructor deferred)")
-        table.insert(BootLog, { name = name, status = "DEFERRED", time = tick() - bootStart })
-        return true
-    elseif entry.initStyle == "none" then
-        -- Data modules: no init needed
-        log("OK", name .. " -- loaded (data module)")
-    end
-
     log("OK", name .. " -- loaded")
-    table.insert(BootLog, { name = name, status = "OK", time = tick() - bootStart })
     return true
 end
 
 --------------------------------------------------------------------------------
--- DEPENDENCY INJECTION (post-boot wiring)
--- MobileInputController.new(config) needs references to other loaded modules.
--- This runs after all modules are loaded.
+-- REMOTE EVENTS BRIDGE (v2.2 — combat only, zero ESL)
 --------------------------------------------------------------------------------
 
-local function wireConstructorModules()
-    -- MobileInputController: inject loaded modules
-    local MIC = Modules.MobileInputController
-    if MIC and type(MIC.new) == "function" then
-        local config = {
-            -- Client-side module references (some are server-only and nil here)
-            questionBank   = nil,  -- Questions come from server via RemoteEvents
-            eloManager     = nil,  -- Elo is server-authoritative
-            rewardsManager = nil,  -- Rewards are server-authoritative
-            analytics      = nil,  -- Analytics is server-side (AnalyticsService)
-            combatSystem   = nil,  -- Combat is server-authoritative
-            hudController  = Modules.HUDController or nil,
-        }
-
-        local ok, instance = pcall(MIC.new, config)
-        if ok and instance then
-            Modules.MobileInputInstance = instance
-            log("OK", "MobileInputController -- constructed with DI")
-        else
-            log("WARN", "MobileInputController -- construction failed: " .. tostring(instance))
-        end
-    end
-end
-
---------------------------------------------------------------------------------
--- CLIENT BRIDGE WIRING
--- After ClientBridge is initialized, wire all client modules to server events.
--- This is the client-side equivalent of UnifiedServer's setupRemoteEvents().
---------------------------------------------------------------------------------
-
-local function wireClientBridge()
-    local bridge = Modules.ClientBridge
-    if not bridge then
-        log("WARN", "ClientBridge not available -- using direct remote connections")
-        return
-    end
-
-    -- Wire HUD updates through ClientBridge channels
-    if bridge.On then
-        -- Question delivery (server -> client)
-        bridge:On("question:serve", function(data)
-            if Modules.HUDController then
-                Modules.HUDController.ShowQuestion(data)
-            end
-            if Modules.MobileInputInstance then
-                Modules.MobileInputInstance:showQuestion(data)
-            end
-        end)
-
-        -- Answer result (server -> client)
-        bridge:On("answer:result", function(data)
-            if Modules.HUDController then
-                Modules.HUDController.ShowAnswerResult(data.selectedIndex, data.isCorrect)
-            end
-        end)
-
-        -- Currency update (server -> client)
-        bridge:On("economy:update", function(data)
-            if Modules.HUDController then
-                Modules.HUDController.UpdateCoins(data.coins or 0, data.gems or 0)
-            end
-        end)
-
-        -- Combo update (server -> client)
-        bridge:On("combat:combo", function(data)
-            if Modules.HUDController then
-                Modules.HUDController.UpdateCombo(data.streak or 0)
-            end
-        end)
-
-        -- Wave update (server -> client)
-        bridge:On("wave:update", function(data)
-            if Modules.HUDController then
-                Modules.HUDController.UpdateWave(data)
-            end
-        end)
-
-        -- Reward notification (server -> client)
-        bridge:On("reward:popup", function(data)
-            if Modules.HUDController then
-                Modules.HUDController.ShowRewardPopup(data.text or "+reward")
-            end
-        end)
-
-        -- English rewards events (streak, tier progression)
-        bridge:On("english:streak", function(data)
-            if Modules.HUDController then
-                Modules.HUDController.ShowRewardPopup("🔥 " .. (data.days or 0) .. "-day streak!")
-            end
-        end)
-
-        bridge:On("english:tier", function(data)
-            if Modules.HUDController then
-                Modules.HUDController.ShowRewardPopup("⬆️ " .. (data.tier or "?") .. " tier!")
-            end
-        end)
-
-        -- Monetization offers (server -> client)
-        bridge:On("monetization:offer", function(data)
-            -- Future: ShopUI.ShowOffer(data)
-            log("INFO", "Offer received: " .. tostring(data.offerType))
-        end)
-
-        -- Cosmetic events
-        bridge:On("cosmetic:equip", function(data)
-            -- Future: CosmeticUI.OnEquip(data)
-            log("INFO", "Cosmetic equipped: " .. tostring(data.itemId))
-        end)
-
-        -- Gateway ready signal
-        bridge:On("gateway:ready", function(data)
-            log("OK", "Server gateway ready — " .. tostring(data.version))
-        end)
-
-        log("OK", "ClientBridge channels wired (" .. 10 .. " handlers)")
-    end
-end
-
---------------------------------------------------------------------------------
--- DIRECT REMOTE EVENT FALLBACK
--- If ClientBridge is not available (or for events that bypass the bridge),
--- wire directly to RemoteEvents created by UnifiedServer.lua.
---------------------------------------------------------------------------------
-
-local function wireDirectRemotes()
-    local remotes = ReplicatedStorage:WaitForChild("Remotes", 15)
+local function wireRemoteEvents()
+    local remotes = ReplicatedStorage:WaitForChild("Remotes", 10)
     if not remotes then
-        log("WARN", "Remotes folder not found -- server may not be ready")
-        return
-    end
-
-    local function safeConnect(eventName, callback)
-        local ev = remotes:FindFirstChild(eventName)
-        if ev and ev:IsA("RemoteEvent") then
-            ev.OnClientEvent:Connect(function(...)
-                local ok, err = pcall(callback, ...)
-                if not ok then
-                    warn("[UnifiedClient] Remote handler error on " .. eventName .. ": " .. tostring(err))
-                end
-            end)
-            return true
-        end
+        log("FATAL", "Remotes folder not found")
         return false
     end
 
-    local connected = 0
+    -- ============================================================
+    -- COMBAT FEEDBACK (server → client)
+    -- ============================================================
 
-    -- Core gameplay
-    if safeConnect("QuestionDelivered", function(data)
-        if Modules.HUDController then
-            Modules.HUDController.ShowQuestion(data)
-        end
-    end) then connected = connected + 1 end
-
-    if safeConnect("AnswerResult", function(data)
-        if Modules.HUDController then
-            Modules.HUDController.ShowAnswerResult(data.selectedIndex, data.isCorrect)
-        end
-        if data.correct and data.combo and data.combo >= 3 then
+    local attackResult = remotes:FindFirstChild("AttackResult")
+    if attackResult then
+        attackResult.OnClientEvent:Connect(function(result)
             if Modules.HUDController then
-                Modules.HUDController.UpdateCombo(data.combo)
+                if result.hit then
+                    Modules.HUDController.ShowDamageNumber(result.damage, result.position, result.isCritical)
+                end
+                if result.killType then
+                    Modules.HUDController.ShowKillFeed(result.killType, result.enemyName)
+                end
             end
+            if Modules.SoundManager then
+                if result.hit then
+                    Modules.SoundManager.Play(result.isCritical and "CriticalHit" or "Hit")
+                end
+            end
+        end)
+    end
+
+    local comboUpdate = remotes:FindFirstChild("ComboUpdate")
+    if comboUpdate then
+        comboUpdate.OnClientEvent:Connect(function(comboData)
+            if Modules.HUDController then
+                Modules.HUDController.UpdateCombo(comboData.count, comboData.multiplier, comboData.timeLeft)
+            end
+        end)
+    end
+
+    local waveUpdate = remotes:FindFirstChild("WaveUpdate")
+    if waveUpdate then
+        waveUpdate.OnClientEvent:Connect(function(waveData)
+            if Modules.HUDController then
+                Modules.HUDController.UpdateWave(waveData.day, waveData.wave, waveData.enemiesLeft, waveData.totalEnemies)
+            end
+        end)
+    end
+
+    local tierChanged = remotes:FindFirstChild("TierChanged")
+    if tierChanged then
+        tierChanged.OnClientEvent:Connect(function(tierData)
+            if Modules.HUDController then
+                Modules.HUDController.ShowTierUp(tierData.newTier, tierData.reward)
+            end
+        end)
+    end
+
+    local playerDied = remotes:FindFirstChild("PlayerDied")
+    if playerDied then
+        playerDied.OnClientEvent:Connect(function(deathData)
+            if Modules.HUDController then
+                Modules.HUDController.ShowDeathScreen(deathData)
+            end
+        end)
+    end
+
+    local playerRespawned = remotes:FindFirstChild("PlayerRespawned")
+    if playerRespawned then
+        playerRespawned.OnClientEvent:Connect(function()
+            if Modules.HUDController then
+                Modules.HUDController.HideDeathScreen()
+            end
+        end)
+    end
+
+    -- ============================================================
+    -- ECONOMY FEEDBACK (server → client)
+    -- ============================================================
+
+    local currencyUpdate = remotes:FindFirstChild("CurrencyUpdate")
+    if currencyUpdate then
+        currencyUpdate.OnClientEvent:Connect(function(data)
+            if Modules.HUDController then
+                Modules.HUDController.UpdateCurrency(data.currency, data.amount, data.delta)
+            end
+        end)
+    end
+
+    local combatMilestone = remotes:FindFirstChild("CombatMilestone")
+    if combatMilestone then
+        combatMilestone.OnClientEvent:Connect(function(data)
+            if Modules.HUDController then
+                Modules.HUDController.ShowMilestone(data.name, data.description, data.reward)
+            end
+        end)
+    end
+
+    local rewardNotification = remotes:FindFirstChild("RewardNotification")
+    if rewardNotification then
+        rewardNotification.OnClientEvent:Connect(function(data)
+            if Modules.HUDController then
+                Modules.HUDController.ShowRewardPopup(data.coins, data.gems, data.source)
+            end
+        end)
+    end
+
+    local killStreakUpdate = remotes:FindFirstChild("KillStreakUpdate")
+    if killStreakUpdate then
+        killStreakUpdate.OnClientEvent:Connect(function(data)
+            if Modules.HUDController then
+                Modules.HUDController.ShowKillStreak(data.count, data.title)
+            end
+        end)
+    end
+
+    -- ============================================================
+    -- COSMETIC FEEDBACK (server → client)
+    -- ============================================================
+
+    local cosmeticEquipped = remotes:FindFirstChild("CosmeticEquipped")
+    if cosmeticEquipped then
+        cosmeticEquipped.OnClientEvent:Connect(function(data)
+            if Modules.CosmeticRenderer then
+                Modules.CosmeticRenderer.OnEquipped(data)
+            end
+        end)
+    end
+
+    local cosmeticUnlocked = remotes:FindFirstChild("CosmeticUnlocked")
+    if cosmeticUnlocked then
+        cosmeticUnlocked.OnClientEvent:Connect(function(data)
+            if Modules.HUDController then
+                Modules.HUDController.ShowUnlock(data.name, data.rarity, data.icon)
+            end
+        end)
+    end
+
+    local fusionResult = remotes:FindFirstChild("FusionResult")
+    if fusionResult then
+        fusionResult.OnClientEvent:Connect(function(data)
+            if Modules.HUDController then
+                Modules.HUDController.ShowFusionResult(data)
+            end
+        end)
+    end
+
+    -- ============================================================
+    -- MONETIZATION FEEDBACK (server → client)
+    -- ============================================================
+
+    local offerPresented = remotes:FindFirstChild("OfferPresented")
+    if offerPresented then
+        offerPresented.OnClientEvent:Connect(function(offerData)
+            if Modules.HUDController then
+                Modules.HUDController.ShowOffer(offerData)
+            end
+        end)
+    end
+
+    local purchaseComplete = remotes:FindFirstChild("PurchaseComplete")
+    if purchaseComplete then
+        purchaseComplete.OnClientEvent:Connect(function(data)
+            if Modules.HUDController then
+                Modules.HUDController.ShowPurchaseConfirm(data.productName, data.success)
+            end
+            if Modules.SoundManager and data.success then
+                Modules.SoundManager.Play("PurchaseSuccess")
+            end
+        end)
+    end
+
+    -- ============================================================
+    -- CLIENT → SERVER INPUTS
+    -- ============================================================
+
+    -- Combat input wiring (touch + keyboard)
+    if Modules.MobileInputController then
+        local meleeRemote = remotes:FindFirstChild("MeleeAttack")
+        local rangedRemote = remotes:FindFirstChild("RangedShot")
+        local dodgeRemote = remotes:FindFirstChild("DodgeRoll")
+        local parryRemote = remotes:FindFirstChild("ParryAttempt")
+        local switchRemote = remotes:FindFirstChild("WeaponSwitch")
+
+        Modules.MobileInputController.OnMeleeAttack = function(data)
+            if meleeRemote then meleeRemote:FireServer(data) end
         end
-    end) then connected = connected + 1 end
-
-    if safeConnect("ComboUpdate", function(data)
-        if Modules.HUDController then
-            Modules.HUDController.UpdateCombo(data.combo or data.streak or 0)
+        Modules.MobileInputController.OnRangedShot = function(data)
+            if rangedRemote then rangedRemote:FireServer(data) end
         end
-    end) then connected = connected + 1 end
-
-    if safeConnect("WaveUpdate", function(data)
-        if Modules.HUDController then
-            Modules.HUDController.UpdateWave(data)
+        Modules.MobileInputController.OnDodgeRoll = function()
+            if dodgeRemote then dodgeRemote:FireServer() end
         end
-    end) then connected = connected + 1 end
-
-    if safeConnect("CurrencyUpdate", function(data)
-        if Modules.HUDController then
-            local coins = data.total or data.coins or 0
-            Modules.HUDController.UpdateCoins(coins, data.gems or 0)
+        Modules.MobileInputController.OnParryAttempt = function(data)
+            if parryRemote then parryRemote:FireServer(data) end
         end
-    end) then connected = connected + 1 end
-
-    if safeConnect("PowerUpReady", function(data)
-        if Modules.HUDController then
-            Modules.HUDController.UpdatePowerUp(data.charge or 0, data.maxCharge or 100)
-        end
-    end) then connected = connected + 1 end
-
-    if safeConnect("PowerUpActivated", function(data)
-        if Modules.HUDController then
-            Modules.HUDController.ShowRewardPopup("⚡ ENGLISH POWER ACTIVATED!")
-        end
-    end) then connected = connected + 1 end
-
-    if safeConnect("TierChanged", function(data)
-        if Modules.HUDController then
-            Modules.HUDController.ShowRewardPopup("🐅 " .. (data.tier or "?"))
-        end
-    end) then connected = connected + 1 end
-
-    -- English rewards
-    if safeConnect("StreakUpdate", function(data)
-        if Modules.HUDController then
-            Modules.HUDController.ShowRewardPopup("🔥 " .. (data.days or 0) .. "-day streak!")
-        end
-    end) then connected = connected + 1 end
-
-    if safeConnect("RewardClaimed", function(data)
-        if Modules.HUDController then
-            Modules.HUDController.ShowRewardPopup("🎁 +" .. (data.amount or 0) .. " " .. (data.currency or "coins"))
-        end
-    end) then connected = connected + 1 end
-
-    if safeConnect("TierProgression", function(data)
-        if Modules.HUDController then
-            Modules.HUDController.ShowRewardPopup("⬆️ " .. (data.newTier or "?") .. " tier!")
-        end
-    end) then connected = connected + 1 end
-
-    -- Cosmetics
-    if safeConnect("CosmeticEquipped", function(data)
-        log("INFO", "Cosmetic equipped: " .. tostring(data.itemId or data.name))
-    end) then connected = connected + 1 end
-
-    if safeConnect("CosmeticUnlocked", function(data)
-        if Modules.HUDController then
-            Modules.HUDController.ShowRewardPopup("🎉 Unlocked: " .. (data.name or "item"))
-        end
-    end) then connected = connected + 1 end
-
-    -- Monetization
-    if safeConnect("OfferPresented", function(data)
-        log("INFO", "Offer presented: " .. tostring(data.offerType))
-    end) then connected = connected + 1 end
-
-    if safeConnect("PurchaseComplete", function(data)
-        if Modules.HUDController then
-            Modules.HUDController.ShowRewardPopup("✅ Purchase complete!")
-        end
-    end) then connected = connected + 1 end
-
-    -- Player lifecycle
-    if safeConnect("PlayerDied", function(data)
-        log("INFO", "Player died")
-    end) then connected = connected + 1 end
-
-    if safeConnect("PlayerRespawned", function(data)
-        log("INFO", "Player respawned")
-    end) then connected = connected + 1 end
-
-    if safeConnect("EnemySpawned", function(data)
-        -- Future: enemy indicator on HUD
-    end) then connected = connected + 1 end
-
-    if safeConnect("EnemyDied", function(data)
-        -- Future: kill feed UI
-    end) then connected = connected + 1 end
-
-    log("OK", "Direct remotes: " .. connected .. " connected")
-end
-
---------------------------------------------------------------------------------
--- MOBILE INPUT TRIGGER WIRING
--- Connect MobileInputController trigger points to combat/FTUE events.
---------------------------------------------------------------------------------
-
-local function wireMobileInputTriggers()
-    local mic = Modules.MobileInputInstance
-    if not mic then return end
-
-    local remotes = ReplicatedStorage:FindFirstChild("Remotes")
-    if not remotes then return end
-
-    local function safeConnect(eventName, callback)
-        local ev = remotes:FindFirstChild(eventName)
-        if ev and ev:IsA("RemoteEvent") then
-            ev.OnClientEvent:Connect(function(...)
-                pcall(callback, ...)
-            end)
+        Modules.MobileInputController.OnWeaponSwitch = function(slotIndex)
+            if switchRemote then switchRemote:FireServer(slotIndex) end
         end
     end
 
-    -- Wire kill streak trigger -> English question
-    local killCount = 0
-    safeConnect("EnemyDied", function(data)
-        if data and data.killer == player.Name then
-            killCount = killCount + 1
-            mic:onKillStreak(killCount)
-        end
-    end)
+    -- Keyboard fallback for PC players
+    if not UserInputService.TouchEnabled then
+        local meleeRemote = remotes:FindFirstChild("MeleeAttack")
+        local rangedRemote = remotes:FindFirstChild("RangedShot")
+        local dodgeRemote = remotes:FindFirstChild("DodgeRoll")
+        local parryRemote = remotes:FindFirstChild("ParryAttempt")
+        local switchRemote = remotes:FindFirstChild("WeaponSwitch")
 
-    -- Wire player death -> reset kill streak
-    safeConnect("PlayerDied", function()
-        killCount = 0
-    end)
-
-    -- Wire power-up ready -> English question opportunity
-    safeConnect("PowerUpReady", function(data)
-        if not mic:isActive() then
-            mic:showQuestion({ trigger = "power_up_ready" })
-        end
-    end)
-
-    log("OK", "MobileInput trigger points wired")
-end
-
---------------------------------------------------------------------------------
--- KEYBOARD SHORTCUTS (client-side global keybinds)
---------------------------------------------------------------------------------
-
-local function setupKeybinds()
-    UserInputService.InputBegan:Connect(function(input, processed)
-        if processed then return end
-
-        -- Tab: Toggle Codex (handled by CodexClient directly)
-        -- We don't duplicate it here since CodexClient is self-initializing
-
-        -- F: Full screen (toggle)
-        -- (Roblox handles this natively)
-
-        -- P: Toggle power-up (if ready)
-        if input.KeyCode == Enum.KeyCode.P then
-            local remotes = ReplicatedStorage:FindFirstChild("Remotes")
-            if remotes then
-                local ev = remotes:FindFirstChild("ActivatePowerUp")
-                if ev then ev:FireServer() end
+        UserInputService.InputBegan:Connect(function(input, processed)
+            if processed then return end
+            if input.UserInputType == Enum.UserInputType.MouseButton1 then
+                if meleeRemote then meleeRemote:FireServer({}) end
+            elseif input.UserInputType == Enum.UserInputType.MouseButton2 then
+                if rangedRemote then rangedRemote:FireServer({}) end
+            elseif input.KeyCode == Enum.KeyCode.Space then
+                if dodgeRemote then dodgeRemote:FireServer() end
+            elseif input.KeyCode == Enum.KeyCode.F then
+                if parryRemote then parryRemote:FireServer({}) end
+            elseif input.KeyCode == Enum.KeyCode.One then
+                if switchRemote then switchRemote:FireServer(1) end
+            elseif input.KeyCode == Enum.KeyCode.Two then
+                if switchRemote then switchRemote:FireServer(2) end
+            elseif input.KeyCode == Enum.KeyCode.Three then
+                if switchRemote then switchRemote:FireServer(3) end
             end
-        end
-    end)
+        end)
+    end
 
-    log("OK", "Keybinds configured")
-end
-
---------------------------------------------------------------------------------
--- CLIENT HEARTBEAT (lightweight client-side tick)
---------------------------------------------------------------------------------
-
-local CLIENT_TICK_INTERVAL = 1.0  -- 1 second (client doesn't need high frequency)
-local lastClientTick = 0
-
-local function onClientHeartbeat(dt)
-    local now = tick()
-    if now - lastClientTick < CLIENT_TICK_INTERVAL then return end
-    lastClientTick = now
-
-    -- Check MobileInputController state for auto-trigger logic
-    -- (Future: FTUE timer, idle detection, engagement tracking)
+    log("OK", "All remote events wired (combat-only)")
+    return true
 end
 
 --------------------------------------------------------------------------------
 -- MAIN BOOT
 --------------------------------------------------------------------------------
 
-log("BOOT", "=== SKIBIDI ZOMBIE: SURVIVE THE BRAINROTS ===")
-log("BOOT", "=== GOAL: MAKE MONEY ===")
-log("BOOT", "=== UnifiedClient v1.0 — client boot sequence ===")
-log("BOOT", "Platform: " .. (isMobile and "MOBILE" or "DESKTOP"))
-log("BOOT", "Starting boot sequence...")
+log("BOOT", "=== SURVIVE THE BRAINROTS — CLIENT v2.2 ===")
+log("BOOT", "=== COMBAT ENGINE ONLINE ===")
+log("BOOT", "Starting client boot...")
 
 local bootFailed = false
-for i, entry in ipairs(CLIENT_BOOT_ORDER) do
-    log("BOOT", string.format("[%d/%d] %s...", i, #CLIENT_BOOT_ORDER, entry.name))
-    if not loadModule(entry) then
+for i, entry in ipairs(CLIENT_MODULES) do
+    log("BOOT", string.format("[%d/%d] %s...", i, #CLIENT_MODULES, entry.name))
+    if not loadClientModule(entry) then
         bootFailed = true
-        log("FATAL", "Boot aborted at " .. entry.name)
         break
     end
 end
@@ -598,39 +332,32 @@ if bootFailed then
     return
 end
 
--- Phase 6: Post-boot wiring (dependency injection + event connections)
-log("BOOT", "Post-boot wiring...")
-wireConstructorModules()
-wireClientBridge()
-wireDirectRemotes()
-wireMobileInputTriggers()
-setupKeybinds()
+if not wireRemoteEvents() then
+    log("FATAL", "=== REMOTE WIRING FAILED ===")
+    return
+end
 
--- Connect heartbeat
-RunService.Heartbeat:Connect(onClientHeartbeat)
+-- Init HUD
+if Modules.HUDController and type(Modules.HUDController.Init) == "function" then
+    pcall(Modules.HUDController.Init, PlayerGui)
+end
 
--- Boot summary
+-- Init mobile input
+if Modules.MobileInputController and UserInputService.TouchEnabled then
+    if type(Modules.MobileInputController.Init) == "function" then
+        pcall(Modules.MobileInputController.Init, PlayerGui)
+    end
+end
+
+-- Init sound
+if Modules.SoundManager and type(Modules.SoundManager.Init) == "function" then
+    pcall(Modules.SoundManager.Init)
+end
+
 local bootTime = tick() - bootStart
 local moduleCount = 0
 for _ in pairs(Modules) do moduleCount = moduleCount + 1 end
-
-log("BOOT", string.format("=== BOOT COMPLETE — %d modules in %.2fs ===", moduleCount, bootTime))
-log("BOOT", "Client modules loaded:")
-for _, entry in ipairs(BootLog) do
-    log("BOOT", string.format("  [%s] %s (%.2fs)", entry.status, entry.name, entry.time))
-end
-
--- Announce readiness to server
-local bridge = Modules.ClientBridge
-if bridge and type(bridge.Send) == "function" then
-    bridge:Send("client:ready", {
-        version = "1.0.0",
-        platform = isMobile and "MOBILE" or "DESKTOP",
-        moduleCount = moduleCount,
-        bootTime = bootTime,
-    })
-end
-
-log("BOOT", "=== ENGLISH IS THE MECHANIC. MONEY IS THE MISSION. ===")
+log("BOOT", string.format("=== CLIENT READY — %d modules in %.2fs ===", moduleCount, bootTime))
+log("BOOT", "🔥 SURVIVE. FIGHT. SPEND. 🔥")
 
 return Modules
