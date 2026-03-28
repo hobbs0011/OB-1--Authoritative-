@@ -1,20 +1,17 @@
 --[[
-    BattlePass.lua — Train 6-7: Survival English
-    Stage 16: Battle Pass / Survivor Pass
+    BattlePass.lua — Survivor Pass System
+    Skibidi Zombie: Survive the Brainrots
     
     DESIGN LAW:
     - 299 R$, 30-day season, free + premium tracks
-    - COSMETIC ONLY — no pay-to-win (avoid TDX backlash)
+    - COSMETIC ONLY — no pay-to-win
     - 50 tiers per season
     - XP-based progression (play more = progress more)
-    - Gospel 444: English challenges grant bonus Battle Pass XP
+    - ZERO ESL. Combat XP only.
     - Auto-claim: offline players get rewards on next login
     
-    ARCHITECTURE:
-    - Server-authoritative tier tracking
-    - Season config is data-driven (easy to swap content)
-    - Receipt validation for premium purchase
-    - DataStore persistence
+    Version: 1.1 — ESL PURGE
+    Date: 2026-03-28
 ]]
 
 local Players = game:GetService("Players")
@@ -28,7 +25,7 @@ local BattlePass = {}
 BattlePass.__index = BattlePass
 
 -- ============================================================
--- SEASON CONFIGURATION (data-driven, swap each season)
+-- SEASON CONFIGURATION
 -- ============================================================
 
 local CURRENT_SEASON = {
@@ -37,11 +34,9 @@ local CURRENT_SEASON = {
     startDate = os.time({year=2026, month=4, day=1, hour=0}),
     endDate = os.time({year=2026, month=4, day=30, hour=23, min=59}),
     maxTier = 50,
-    premiumGamePassId = "BATTLEPASS_GAMEPASS_ID", -- Replace with actual ID
-    premiumPrice = 299, -- Robux
+    premiumGamePassId = "BATTLEPASS_GAMEPASS_ID",
+    premiumPrice = 299,
     xpPerTier = 1000,
-    
-    -- Tier rewards: [tier] = { free = {...}, premium = {...} }
     rewards = {},
 }
 
@@ -50,7 +45,6 @@ for tier = 1, CURRENT_SEASON.maxTier do
     local freeReward = nil
     local premiumReward = nil
     
-    -- Free track: coins every tier, gems every 5, items every 10
     if tier % 10 == 0 then
         freeReward = { type = "crate", crateId = "BasicCrate", count = 1 }
     elseif tier % 5 == 0 then
@@ -59,7 +53,6 @@ for tier = 1, CURRENT_SEASON.maxTier do
         freeReward = { type = "currency", currency = "SurvivalCoins", amount = 100 * math.ceil(tier / 10) }
     end
     
-    -- Premium track: better rewards at every tier
     if tier == 50 then
         premiumReward = { type = "exclusive", itemId = "bp_s1_legendary_aura", name = "Brainrot Origins Legendary Aura" }
     elseif tier == 40 then
@@ -85,31 +78,39 @@ for tier = 1, CURRENT_SEASON.maxTier do
 end
 
 -- ============================================================
--- XP SOURCES
+-- XP SOURCES — COMBAT ONLY, ZERO ESL
 -- ============================================================
 
 local XP_SOURCES = {
     kill = 10,
+    elite_kill = 25,
     survive_minute = 20,
     daily_challenge_complete = 200,
-    english_correct = 25,           -- Gospel 444 bonus: English = best XP source
-    english_streak_5 = 150,         -- Streak bonus
+    combo_kill_5 = 50,
+    combo_kill_10 = 100,
+    combo_kill_20 = 200,
+    headshot_kill = 20,
+    parry_success = 30,
+    dodge_master = 15,
     trade_complete = 50,
     boss_kill = 100,
-    login = 50,                     -- Daily login bonus
+    boss_parry = 75,
+    login = 50,
     gacha_pull = 15,
-    referral_qualified = 500,       -- Big XP for viral loop
+    referral_qualified = 500,
+    wave_clear = 25,
+    day_complete = 75,
+    no_hit_wave = 50,
 }
 
 -- ============================================================
 -- PLAYER STATE
 -- ============================================================
 
-local playerBPData = {} -- [userId] = { seasonId, tier, xp, isPremium, claimed, ... }
+local playerBPData = {}
 
 local function loadPlayerData(userId)
     if playerBPData[userId] then
-        -- Check if season changed
         if playerBPData[userId].seasonId == CURRENT_SEASON.id then
             return playerBPData[userId]
         end
@@ -127,8 +128,8 @@ local function loadPlayerData(userId)
             tier = 0,
             xp = 0,
             isPremium = false,
-            claimedFree = {},    -- [tier] = true
-            claimedPremium = {}, -- [tier] = true
+            claimedFree = {},
+            claimedPremium = {},
             totalXPEarned = 0,
         }
     end
@@ -153,7 +154,6 @@ function BattlePass.AddXP(player, source, multiplier)
     local userId = player.UserId
     local data = loadPlayerData(userId)
     
-    -- Check season is active
     local now = os.time()
     if now < CURRENT_SEASON.startDate or now > CURRENT_SEASON.endDate then
         return { success = false, error = "SEASON_INACTIVE" }
@@ -168,7 +168,6 @@ function BattlePass.AddXP(player, source, multiplier)
     data.xp = data.xp + totalXP
     data.totalXPEarned = (data.totalXPEarned or 0) + totalXP
     
-    -- Check for tier ups
     local tieredUp = false
     local oldTier = data.tier
     while data.xp >= CURRENT_SEASON.xpPerTier and data.tier < CURRENT_SEASON.maxTier do
@@ -177,7 +176,6 @@ function BattlePass.AddXP(player, source, multiplier)
         tieredUp = true
     end
     
-    -- Cap XP at max tier
     if data.tier >= CURRENT_SEASON.maxTier then
         data.tier = CURRENT_SEASON.maxTier
         data.xp = 0
@@ -210,7 +208,6 @@ function BattlePass.UpgradeToPremium(player)
         return { success = false, error = "ALREADY_PREMIUM" }
     end
     
-    -- Check game pass ownership
     local owns = false
     pcall(function()
         owns = MarketplaceService:UserOwnsGamePassAsync(userId, tonumber(CURRENT_SEASON.premiumGamePassId) or 0)
@@ -280,7 +277,11 @@ function BattlePass._GrantReward(player, reward)
     if reward.type == "currency" then
         local EconomyManager = require(script.Parent:FindFirstChild("EconomyManager"))
         if EconomyManager then
-            EconomyManager.AddBalance(player, reward.currency, reward.amount, "battle_pass")
+            if reward.currency == "SurvivalCoins" then
+                EconomyManager.AddCoins(player, reward.amount, "battle_pass")
+            elseif reward.currency == "BrainrotGems" then
+                EconomyManager.AddGems(player, reward.amount, "battle_pass")
+            end
         end
     elseif reward.type == "crate" then
         local GachaManager = require(script.Parent:FindFirstChild("GachaManager"))
@@ -290,13 +291,12 @@ function BattlePass._GrantReward(player, reward)
             end
         end
     elseif reward.type == "exclusive" then
-        -- Grant exclusive cosmetic item
         print(string.format("[BattlePass] Granted exclusive: %s to Player %d", reward.itemId, player.UserId))
     end
 end
 
 -- ============================================================
--- AUTO-CLAIM (catch up on login)
+-- AUTO-CLAIM
 -- ============================================================
 
 function BattlePass.AutoClaimAll(player)
@@ -392,7 +392,7 @@ BPRemote.OnServerInvoke = function(player, action, ...)
     elseif action == "AutoClaimAll" then
         return BattlePass.AutoClaimAll(player)
     elseif action == "AddXP" then
-        return { success = false, error = "SERVER_ONLY" } -- XP is server-side only
+        return { success = false, error = "SERVER_ONLY" }
     end
     return { success = false, error = "INVALID_ACTION" }
 end
