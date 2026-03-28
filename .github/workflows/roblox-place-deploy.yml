@@ -53,19 +53,35 @@ jobs:
 
           echo "Publishing to Universe ${UNIVERSE_ID}, Place ${PLACE_ID}..."
 
-          HTTP_STATUS=$(curl -s -o response.json -w "%{http_code}" \
-            -X POST \
-            "https://apis.roblox.com/universes/v1/${UNIVERSE_ID}/places/${PLACE_ID}/versions?versionType=Published" \
-            -H "x-api-key: ${ROBLOX_API_KEY}" \
-            -H "Content-Type: application/octet-stream" \
-            --data-binary @build.rbxl)
+          MAX_RETRIES=3
+          RETRY_DELAY=30
 
-          echo "HTTP Status: ${HTTP_STATUS}"
-          cat response.json
+          for ATTEMPT in $(seq 1 "$MAX_RETRIES"); do
+            echo "Attempt ${ATTEMPT} of ${MAX_RETRIES}..."
 
-          if [ "$HTTP_STATUS" != "200" ]; then
-            echo "::error::DEPLOY FAILED with HTTP ${HTTP_STATUS}"
-            exit 1
-          fi
+            HTTP_STATUS=$(curl -s -o response.json -w "%{http_code}" \
+              -X POST \
+              "https://apis.roblox.com/universes/v1/${UNIVERSE_ID}/places/${PLACE_ID}/versions?versionType=Published" \
+              -H "x-api-key: ${ROBLOX_API_KEY}" \
+              -H "Content-Type: application/octet-stream" \
+              --data-binary @build.rbxl)
 
-          echo "DEPLOYED — Place version published successfully."
+            echo "HTTP Status: ${HTTP_STATUS}"
+            cat response.json
+
+            if [ "$HTTP_STATUS" = "200" ]; then
+              echo "DEPLOYED — Place version published successfully."
+              break
+            elif [ "$HTTP_STATUS" = "409" ]; then
+              if [ "$ATTEMPT" -lt "$MAX_RETRIES" ]; then
+                echo "Server busy (HTTP 409). Waiting ${RETRY_DELAY}s before retry..."
+                sleep "$RETRY_DELAY"
+              else
+                echo "::error::DEPLOY FAILED — server still busy after ${MAX_RETRIES} attempts (HTTP 409)."
+                exit 1
+              fi
+            else
+              echo "::error::DEPLOY FAILED with HTTP ${HTTP_STATUS}"
+              exit 1
+            fi
+          done
