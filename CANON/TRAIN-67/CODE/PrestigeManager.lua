@@ -1,5 +1,5 @@
 --[[
-    PrestigeManager.lua — Train 6-7: Survival English
+    PrestigeManager.lua — Train 6-7: Survive the Brainrots
     Stage 20: Rebirth/Prestige + Fusion System
     
     DESIGN LAW:
@@ -8,7 +8,7 @@
     - Server-authoritative (no client trust)
     - Each prestige level adds permanent multipliers
     - Prestige cosmetics (visible flex)
-    - Gospel 444: English mastery prestige path
+    - Combat mastery prestige path
     
     ARCHITECTURE:
     - DataStore persistence
@@ -32,15 +32,11 @@ PrestigeManager.__index = PrestigeManager
 
 local PRESTIGE_CONFIG = {
     maxLevel = 50,
-    cooldownSeconds = 300,  -- 5 min between prestiges (prevent spam)
+    cooldownSeconds = 300,
     
-    -- Requirements per prestige level
     requirements = {},
-    
-    -- Multiplier bonuses per prestige level
     multipliers = {},
     
-    -- Prestige cosmetics (unlocked at specific levels)
     cosmetics = {
         [1]  = { id = "prestige_nameplate_1",  name = "★ Prestige 1 Nameplate" },
         [5]  = { id = "prestige_aura_bronze",   name = "Bronze Prestige Aura" },
@@ -54,19 +50,18 @@ local PRESTIGE_CONFIG = {
     },
 }
 
--- Generate requirements and multipliers for each level
 for level = 1, PRESTIGE_CONFIG.maxLevel do
     PRESTIGE_CONFIG.requirements[level] = {
-        minCoins = 1000 * level * level,     -- Escalating coin cost
-        minKills = 50 * level,               -- Kill requirement
-        minSurvivalTime = 600 * level,       -- Survival time requirement (seconds)
+        minCoins = 1000 * level * level,
+        minKills = 50 * level,
+        minSurvivalTime = 600 * level,
     }
     
     PRESTIGE_CONFIG.multipliers[level] = {
-        coinMultiplier = 1 + (level * 0.05),       -- +5% per prestige
-        xpMultiplier = 1 + (level * 0.03),         -- +3% per prestige
-        luckMultiplier = 1 + (level * 0.02),       -- +2% gacha luck per prestige
-        damageMultiplier = 1 + (level * 0.01),     -- +1% damage per prestige
+        coinMultiplier = 1 + (level * 0.05),
+        xpMultiplier = 1 + (level * 0.03),
+        luckMultiplier = 1 + (level * 0.02),
+        damageMultiplier = 1 + (level * 0.01),
     }
 end
 
@@ -113,7 +108,6 @@ local FUSION_RECIPES = {
     },
 }
 
--- Item rarity mapping (for fusion validation)
 local RARITY_ITEMS = {
     Common = { "common_skin_01", "common_skin_02" },
     Uncommon = { "uncommon_aura_01", "uncommon_pet_01", "uncommon_skin_03", "uncommon_aura_02" },
@@ -123,7 +117,7 @@ local RARITY_ITEMS = {
     Mythic = { "mythic_skin_01" },
 }
 
-local ITEM_RARITY = {} -- Reverse lookup: itemId → rarity
+local ITEM_RARITY = {}
 for rarity, items in pairs(RARITY_ITEMS) do
     for _, itemId in ipairs(items) do
         ITEM_RARITY[itemId] = rarity
@@ -134,7 +128,7 @@ end
 -- PLAYER STATE
 -- ============================================================
 
-local playerPrestigeData = {} -- [userId] = { level, stats, lastPrestige, ... }
+local playerPrestigeData = {}
 
 local function loadPlayerData(userId)
     if playerPrestigeData[userId] then
@@ -151,7 +145,7 @@ local function loadPlayerData(userId)
         playerPrestigeData[userId] = {
             level = 0,
             totalPrestiges = 0,
-            stats = { kills = 0, survivalTime = 0, englishWords = 0 },
+            stats = { kills = 0, survivalTime = 0, combatMastery = 0 },
             lastPrestigeTime = 0,
             fusionCount = 0,
             cosmeticsUnlocked = {},
@@ -164,7 +158,6 @@ end
 local function savePlayerData(userId)
     local data = playerPrestigeData[userId]
     if not data then return end
-    
     pcall(function()
         PrestigeStore:SetAsync("prestige_" .. tostring(userId), data)
     end)
@@ -178,12 +171,10 @@ function PrestigeManager.Prestige(player)
     local userId = player.UserId
     local data = loadPlayerData(userId)
     
-    -- Already max level
     if data.level >= PRESTIGE_CONFIG.maxLevel then
         return { success = false, error = "MAX_PRESTIGE" }
     end
     
-    -- Cooldown
     if (os.time() - data.lastPrestigeTime) < PRESTIGE_CONFIG.cooldownSeconds then
         return { success = false, error = "COOLDOWN" }
     end
@@ -191,7 +182,6 @@ function PrestigeManager.Prestige(player)
     local nextLevel = data.level + 1
     local req = PRESTIGE_CONFIG.requirements[nextLevel]
     
-    -- Check requirements
     local EconomyManager = require(script.Parent:FindFirstChild("EconomyManager"))
     if EconomyManager then
         local balance = EconomyManager.GetBalance(player, "SurvivalCoins")
@@ -210,7 +200,6 @@ function PrestigeManager.Prestige(player)
     
     -- === EXECUTE PRESTIGE (Atomic) ===
     
-    -- 1. Deduct coins
     if EconomyManager then
         local deducted = EconomyManager.Deduct(player, "SurvivalCoins", req.minCoins, "prestige_" .. nextLevel)
         if not deducted then
@@ -218,27 +207,23 @@ function PrestigeManager.Prestige(player)
         end
     end
     
-    -- 2. Reset stats (the "rebirth")
     local oldStats = {
         kills = data.stats.kills,
         survivalTime = data.stats.survivalTime,
     }
     data.stats.kills = 0
     data.stats.survivalTime = 0
-    -- Note: English words are NOT reset (Gospel 444: learning is permanent)
+    -- Combat mastery is NOT reset (permanent progression)
     
-    -- 3. Level up
     data.level = nextLevel
     data.totalPrestiges = (data.totalPrestiges or 0) + 1
     data.lastPrestigeTime = os.time()
     
-    -- 4. Check cosmetic unlocks
     local newCosmetic = PRESTIGE_CONFIG.cosmetics[nextLevel]
     if newCosmetic then
         data.cosmeticsUnlocked[newCosmetic.id] = true
     end
     
-    -- 5. Save
     task.spawn(function()
         savePlayerData(userId)
     end)
@@ -264,7 +249,6 @@ end
 function PrestigeManager.Fuse(player, recipeId, inputItemIds)
     local userId = player.UserId
     
-    -- Find recipe
     local recipe = nil
     for _, r in ipairs(FUSION_RECIPES) do
         if r.id == recipeId then
@@ -277,12 +261,10 @@ function PrestigeManager.Fuse(player, recipeId, inputItemIds)
         return { success = false, error = "INVALID_RECIPE" }
     end
     
-    -- Validate input items
     if not inputItemIds or #inputItemIds ~= recipe.inputCount then
         return { success = false, error = "WRONG_INPUT_COUNT", need = recipe.inputCount }
     end
     
-    -- Verify all items are the correct rarity
     for _, itemId in ipairs(inputItemIds) do
         local rarity = ITEM_RARITY[itemId]
         if rarity ~= recipe.inputRarity then
@@ -290,7 +272,6 @@ function PrestigeManager.Fuse(player, recipeId, inputItemIds)
         end
     end
     
-    -- Verify player owns all items
     local GachaManager = require(script.Parent:FindFirstChild("GachaManager"))
     if not GachaManager then
         return { success = false, error = "GACHA_UNAVAILABLE" }
@@ -308,7 +289,6 @@ function PrestigeManager.Fuse(player, recipeId, inputItemIds)
         end
     end
     
-    -- Check coin cost
     local EconomyManager = require(script.Parent:FindFirstChild("EconomyManager"))
     if EconomyManager and recipe.coinCost > 0 then
         local balance = EconomyManager.GetBalance(player, "SurvivalCoins")
@@ -318,12 +298,8 @@ function PrestigeManager.Fuse(player, recipeId, inputItemIds)
         EconomyManager.Deduct(player, "SurvivalCoins", recipe.coinCost, "fusion_" .. recipeId)
     end
     
-    -- === EXECUTE FUSION ===
-    -- Remove input items (consumed)
-    -- In production, this would go through GachaManager.RemoveItem()
     print(string.format("[Fusion] Player %d: consuming %d %s items", userId, recipe.inputCount, recipe.inputRarity))
     
-    -- Generate output (random item of output rarity)
     local outputItems = RARITY_ITEMS[recipe.outputRarity]
     if not outputItems or #outputItems == 0 then
         return { success = false, error = "NO_OUTPUT_ITEMS" }
@@ -331,7 +307,6 @@ function PrestigeManager.Fuse(player, recipeId, inputItemIds)
     
     local outputItem = outputItems[math.random(1, #outputItems)]
     
-    -- Track fusion count
     local data = loadPlayerData(userId)
     data.fusionCount = (data.fusionCount or 0) + 1
     
@@ -366,9 +341,9 @@ function PrestigeManager.AddSurvivalTime(player, seconds)
     data.stats.survivalTime = (data.stats.survivalTime or 0) + seconds
 end
 
-function PrestigeManager.AddEnglishWord(player, count)
+function PrestigeManager.AddCombatMastery(player, count)
     local data = loadPlayerData(player.UserId)
-    data.stats.englishWords = (data.stats.englishWords or 0) + (count or 1)
+    data.stats.combatMastery = (data.stats.combatMastery or 0) + (count or 1)
 end
 
 -- ============================================================
