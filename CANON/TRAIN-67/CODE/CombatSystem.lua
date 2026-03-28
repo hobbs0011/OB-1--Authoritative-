@@ -1,641 +1,940 @@
 --[[
-    CombatSystem.lua — THE Core Game Loop
-    Skibidi Zombie: Survive the Brainrots
-    
-    PURPOSE: Player answers English questions → damage enemies.
-    Wrong answer = take damage. Boss fights = harder questions.
-    
-    GOAL: MAKE MONEY. That is the only goal.
-    English is the game mechanic, not the mission.
-    This is not NET. This is a money-making machine.
-    
-    Teaching Law: Mouse → Tiger (permission over perfection)
-    
-    Architecture: ServerScript (ServerScriptService)
-    Dependencies: ServerGateway, QuestionBank, EnemyFactory, EconomyManager
-    Version: 1.0.1
-    Date: 2026-03-26
---]]
+	CombatSystem.lua v2.0 -- Real Tap-to-Attack Combat
+	Game: Survive a Brainrot
+	Replaces: ESL quiz combat (v1.x)
+
+	ARCHITECTURE: Server-authoritative. Client predicts, server validates.
+	Sacred Rule: < 100ms tap-to-feedback via client prediction.
+
+	Input model (mobile-first, 4 action buttons max):
+	  Attack   -- tap to melee, 3-hit combo (3rd hit = knockback)
+	  Dodge    -- 0.5s i-frames, 3s cooldown
+	  Ability  -- weapon special (Rare+ only), per-rarity cooldown
+	  Interact -- pick up drops, shop, doors
+
+	Ranged: hold aim + tap fire, 15-degree aim-assist snap on mobile.
+	Boss parry: dodge during 1.5s telegraph = 3s stun.
+
+	Combo multipliers (consecutive kills without taking damage):
+	  5x = 1.5x coins | 10x = 2x | 50x = 5x | 100x = 10x
+
+	Combat juice (mandatory):
+	  Screen shake on hit, hit flash, knockback on 3rd melee hit,
+	  floating damage numbers, haptic on mobile, kill dissolve.
+
+	Network: 2 RemoteEvents
+	  EventBus       (client -> server actions)
+	  ClientDispatch (server -> client notifications)
+
+	Dependencies: ServerGateway, WeaponData, EnemyData, EnemyFactory,
+	              EconomyManager, CombatRewardsManager, SecurityLayer
+	Version: 2.0.0
+	Date: 2026-03-28
+]]
 
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local Players = game:GetService("Players")
-local ServerStorage = game:GetService("ServerStorage")
-local RunService = game:GetService("RunService")
+local Players           = game:GetService("Players")
+local ServerStorage     = game:GetService("ServerStorage")
 
--- Module requires (lazy-loaded for boot order safety)
-local ServerGateway = nil
-local QuestionBank = nil
-local EnemyFactory = nil
-local EconomyManager = nil
+------------------------------------------------------------------------
+-- LAZY DEPENDENCIES (injected at Init)
+------------------------------------------------------------------------
+
+local ServerGateway        = nil
+local WeaponData           = nil
+local EnemyData            = nil
+local EnemyFactory         = nil
+local EconomyManager       = nil -- luacheck: ignore
+local CombatRewardsManager = nil
+local SecurityLayer        = nil
 
 local CombatSystem = {}
-CombatSystem.__index = CombatSystem
 
---------------------------------------------------------------------------------
--- CONSTANTS
---------------------------------------------------------------------------------
+------------------------------------------------------------------------
+-- CONFIGURATION
+------------------------------------------------------------------------
 
 local CONFIG = {
-    -- Difficulty tiers (Mouse → Tiger progression)
-    TIERS = {
-        { name = "Mouse",    tier = 1, damageMultiplier = 1.0, timeLimit = 15 },
-        { name = "Cat",      tier = 2, damageMultiplier = 1.2, timeLimit = 12 },
-        { name = "Wolf",     tier = 3, damageMultiplier = 1.5, timeLimit = 10 },
-        { name = "Lion",     tier = 4, damageMultiplier = 2.0, timeLimit = 8  },
-        { name = "Tiger",    tier = 5, damageMultiplier = 3.0, timeLimit = 6  },
-    },
-    
-    -- Combat tuning
-    BASE_PLAYER_HEALTH = 100,
-    BASE_PLAYER_DAMAGE = 10,
-    WRONG_ANSWER_DAMAGE = 15,          -- damage TO player on wrong answer
-    COMBO_BONUS_PER_STREAK = 0.1,       -- +10% damage per streak
-    MAX_COMBO_MULTIPLIER = 3.0,         -- cap at 3x
-    BOSS_HEALTH_MULTIPLIER = 5.0,       -- bosses have 5x health
-    BOSS_QUESTION_COUNT = 3,            -- boss fights require 3 correct answers
-    
-    -- Timing
-    QUESTION_COOLDOWN = 1.0,            -- seconds between questions
-    COMBAT_TICK_RATE = 0.5,             -- seconds between enemy AI ticks
-    ENEMY_ATTACK_INTERVAL = 3.0,        -- seconds between enemy auto-attacks
-    
-    -- Rewards (coins drive engagement → monetization)
-    CORRECT_ANSWER_COINS = 5,
-    BOSS_KILL_COINS = 25,
-    WAVE_CLEAR_COINS = 50,
-    COMBO_BONUS_COINS = 2,              -- per streak level
-    
-    -- English Power-Up
-    POWER_UP_CHARGE_PER_CORRECT = 20,   -- 5 correct = full charge
-    POWER_UP_MAX_CHARGE = 100,
-    POWER_UP_DAMAGE_MULTIPLIER = 5.0,   -- massive burst on activation
-    POWER_UP_DURATION = 5.0,            -- seconds of powered-up state
+	-- Melee
+	MELEE_COMBO_HITS      = 3,
+	MELEE_KNOCKBACK_FORCE = 60,
+	MELEE_HIT_WINDOW      = 0.4,
+	MELEE_DAMAGE_MULT     = { 1.0, 1.0, 1.5 },
+
+	-- Ranged
+	AIM_ASSIST_ANGLE      = 15,
+	AIM_ASSIST_RANGE      = 60,
+
+	-- Dodge
+	DODGE_IFRAME_DURATION = 0.5,
+	DODGE_COOLDOWN        = 3.0,
+
+	-- Boss parry
+	PARRY_STUN_DURATION   = 3.0,
+
+	-- Combo coin multipliers (consecutive kills without taking damage)
+	COMBO_MULTIPLIERS = {
+		[5]   = 1.5,
+		[10]  = 2.0,
+		[50]  = 5.0,
+		[100] = 10.0,
+	},
+
+	BASE_PLAYER_HP  = 100,
+	RESPAWN_DELAY   = 3.0,
+	AI_TICK_RATE    = 0.5,
+
+	-- Defaults (used when weapon/enemy definitions are unavailable)
+	DEFAULT_ENEMY_HP             = 30,
+	DEFAULT_MAGAZINE_SIZE        = 12,
+	ABILITY_TARGET_SEARCH_RADIUS = 30, -- studs, used when no target is provided
+	RATE_LIMIT_WINDOW = 1.0,
+	RATE_LIMIT_MAX    = 15,
 }
 
---------------------------------------------------------------------------------
--- PLAYER COMBAT STATE
---------------------------------------------------------------------------------
+------------------------------------------------------------------------
+-- PLAYER STATE
+------------------------------------------------------------------------
 
-local playerStates = {} -- [Player] = CombatState
+local playerStates = {}
 
-local function createCombatState(player)
-    return {
-        player = player,
-        health = CONFIG.BASE_PLAYER_HEALTH,
-        maxHealth = CONFIG.BASE_PLAYER_HEALTH,
-        currentTier = 1,                -- starts at Mouse
-        combo = 0,                      -- current answer streak
-        bestCombo = 0,                  -- session best
-        totalCorrect = 0,
-        totalWrong = 0,
-        totalKills = 0,
-        bossKills = 0,
-        currentQuestion = nil,          -- active question data
-        questionStartTime = 0,
-        isInCombat = false,
-        targetEnemy = nil,              -- current enemy being fought
-        powerUpCharge = 0,
-        isPoweredUp = false,
-        poweredUpUntil = 0,
-        lastQuestionTime = 0,
-        isAlive = true,
-        wavesCleared = 0,
-        
-        -- Player metrics (engagement + retention data)
-        questionsAnswered = 0,
-        averageResponseTime = 0,
-        totalResponseTime = 0,
-        vocabularyMastered = {},        -- words answered correctly 3+ times
-        vocabularyStruggling = {},      -- words answered wrong 2+ times
-        tierProgressHistory = {},       -- track tier changes over time
-    }
+local function newPlayerState(player)
+	return {
+		player           = player,
+		hp               = CONFIG.BASE_PLAYER_HP,
+		maxHp            = CONFIG.BASE_PLAYER_HP,
+		isAlive          = true,
+
+		meleeWeaponId    = "melee_rusty_pipe",
+		rangedWeaponId   = "ranged_slingshot",
+		equippedType     = "Melee",
+
+		comboHit         = 0,
+		lastMeleeTime    = 0,
+
+		isDodging        = false,
+		dodgeEndTime     = 0,
+		dodgeCooldownEnd = 0,
+
+		abilityCooldownEnd = 0,
+
+		magazineAmmo     = 0,
+		reloading        = false,
+		reloadEndTime    = 0,
+
+		killStreak       = 0,
+		totalKills       = 0,
+		bossKills        = 0,
+		damageDone       = 0,
+
+		activeEffects    = {},
+
+		_eventCount      = 0,
+		_eventWindow     = 0,
+	}
 end
 
---------------------------------------------------------------------------------
--- CORE COMBAT LOOP
---------------------------------------------------------------------------------
+------------------------------------------------------------------------
+-- ENEMY RUNTIME STATE
+------------------------------------------------------------------------
 
---[[
-    The combat loop:
-    1. Enemy appears (from WaveManager/EnemyFactory)
-    2. Player gets an English question matched to their tier
-    3. Player answers:
-       - CORRECT → deal damage to enemy, advance combo, gain coins
-       - WRONG → take damage, reset combo, track struggling word
-    4. If enemy dies → next enemy or wave complete
-    5. If player dies → respawn with encouragement (Mouse → Tiger)
-    6. Boss fights → 3 questions, harder tier, bigger reward
---]]
+local enemyStates = {}
+
+local function newEnemyState(enemyId, enemyDef, dayNumber)
+	local hp = CONFIG.DEFAULT_ENEMY_HP
+	if EnemyData then
+		hp = EnemyData.GetScaledHP(enemyId, dayNumber or 1) or hp
+	elseif enemyDef then
+		hp = enemyDef.baseHP or hp
+	end
+	return {
+		id               = enemyId,
+		def              = enemyDef,
+		hp               = hp,
+		maxHp            = hp,
+		isAlive          = true,
+		dayNumber        = dayNumber or 1,
+
+		isBleeding       = false, bleedEndTime = 0, bleedDmgPerSec = 0,
+		isConfused       = false, confusedEndTime = 0,
+		isCharmed        = false, charmedEndTime  = 0,
+		isStaggered      = false, staggerEndTime  = 0,
+		isStuned         = false, stunEndTime     = 0,
+
+		isBoss           = false,
+		isTelegraphing   = false,
+		telegraphEndTime = 0,
+		isEnraged        = false,
+		enrageTime       = 0,
+		attackIndex      = 1,
+		lastAttackTime   = 0,
+	}
+end
+
+------------------------------------------------------------------------
+-- UTILITY
+------------------------------------------------------------------------
+
+local function getComboMultiplier(killStreak)
+	local best = 1.0
+	for threshold, mult in pairs(CONFIG.COMBO_MULTIPLIERS) do
+		if killStreak >= threshold and mult > best then
+			best = mult
+		end
+	end
+	return best
+end
+
+local function isRateLimited(state)
+	local now = tick()
+	if now - state._eventWindow > CONFIG.RATE_LIMIT_WINDOW then
+		state._eventCount  = 0
+		state._eventWindow = now
+	end
+	state._eventCount = state._eventCount + 1
+	return state._eventCount > CONFIG.RATE_LIMIT_MAX
+end
+
+local _clientDispatch = nil
+
+local function fireAllClients(event, data)
+	if _clientDispatch then _clientDispatch:FireAllClients(event, data) end
+end
+
+local function fireClient(player, event, data)
+	if _clientDispatch then _clientDispatch:FireClient(player, event, data) end
+end
+
+------------------------------------------------------------------------
+-- DAMAGE APPLICATION (server-authoritative)
+------------------------------------------------------------------------
+
+local function damageEnemy(attackerPlayer, enemyState, rawDamage, isKnockback)
+	if not enemyState or not enemyState.isAlive then return 0 end
+	local damage = math.max(0, math.floor(rawDamage))
+	enemyState.hp = enemyState.hp - damage
+
+	fireAllClients("EnemyHit", {
+		enemyId   = enemyState.id,
+		damage    = damage,
+		isCrit    = false,
+		knockback = isKnockback or false,
+	})
+
+	if attackerPlayer then
+		fireClient(attackerPlayer, "ScreenShake", {
+			intensity = math.clamp(damage / 50, 0.1, 1.0),
+		})
+	end
+
+	if enemyState.hp <= 0 then
+		CombatSystem._defeatEnemy(attackerPlayer, enemyState)
+	end
+	return damage
+end
+
+local function damagePlayer(targetPlayer, amount, sourceEnemyId)
+	local state = playerStates[targetPlayer]
+	if not state or not state.isAlive then return end
+	if state.isDodging and tick() < state.dodgeEndTime then return end
+
+	state.hp = math.max(0, state.hp - amount)
+
+	if state.killStreak > 0 then
+		state.killStreak = 0
+		fireClient(targetPlayer, "ComboReset", {})
+	end
+
+	fireClient(targetPlayer, "PlayerHit", {
+		damage    = amount,
+		currentHp = state.hp,
+		maxHp     = state.maxHp,
+		source    = sourceEnemyId,
+	})
+
+	if state.hp <= 0 then
+		CombatSystem._defeatPlayer(targetPlayer)
+	end
+end
+
+------------------------------------------------------------------------
+-- DEFEAT HANDLERS
+------------------------------------------------------------------------
+
+function CombatSystem._defeatEnemy(killerPlayer, enemyState)
+	if not enemyState.isAlive then return end
+	enemyState.isAlive = false
+
+	local dayNumber   = enemyState.dayNumber or 1
+	local killerState = killerPlayer and playerStates[killerPlayer]
+	local comboMult   = 1.0
+
+	if killerState then
+		killerState.killStreak = killerState.killStreak + 1
+		killerState.totalKills = killerState.totalKills + 1
+		if enemyState.isBoss then killerState.bossKills = killerState.bossKills + 1 end
+		comboMult = getComboMultiplier(killerState.killStreak)
+
+		local streak = killerState.killStreak
+		if CONFIG.COMBO_MULTIPLIERS[streak] then
+			fireAllClients("ComboMilestone", {
+				player = killerPlayer.Name,
+				streak = streak,
+				mult   = CONFIG.COMBO_MULTIPLIERS[streak],
+			})
+		end
+	end
+
+	if CombatRewardsManager then
+		pcall(CombatRewardsManager.OnEnemyKilled, killerPlayer, {
+			enemyId   = enemyState.id,
+			isBoss    = enemyState.isBoss,
+			dayNumber = dayNumber,
+			comboMult = comboMult,
+		})
+	end
+
+	fireAllClients("EnemyDied", {
+		enemyId   = enemyState.id,
+		killedBy  = killerPlayer and killerPlayer.Name or "ENV",
+		comboMult = comboMult,
+	})
+
+	-- BrainrotMutant split on defeat
+	local def = enemyState.def
+	if def and def.specialAbility == "Split" and def.splitCount then
+		if EnemyFactory and type(EnemyFactory.SpawnSplitMinis) == "function" then
+			pcall(EnemyFactory.SpawnSplitMinis, enemyState, def)
+		end
+	end
+
+	-- Boss post-defeat gacha spin
+	if enemyState.isBoss and killerPlayer then
+		fireClient(killerPlayer, "BossGachaSpinStart", {
+			bossId = enemyState.id,
+			day    = dayNumber,
+		})
+	end
+
+	enemyStates[enemyState.id] = nil
+end
+
+function CombatSystem._defeatPlayer(player)
+	local state = playerStates[player]
+	if not state or not state.isAlive then return end
+	state.isAlive    = false
+	state.killStreak = 0
+	state.hp         = 0
+	fireAllClients("PlayerDied", { player = player.Name })
+
+	task.delay(CONFIG.RESPAWN_DELAY, function()
+		if playerStates[player] then
+			CombatSystem.RespawnPlayer(player)
+		end
+	end)
+end
+
+function CombatSystem.RespawnPlayer(player)
+	local state = playerStates[player]
+	if not state then return end
+	state.hp               = state.maxHp
+	state.isAlive          = true
+	state.killStreak       = 0
+	state.isDodging        = false
+	state.dodgeEndTime     = 0
+	state.dodgeCooldownEnd = 0
+	state.comboHit         = 0
+	state.lastMeleeTime    = 0
+	state.activeEffects    = {}
+	fireClient(player, "PlayerRespawned", { currentHp = state.hp, maxHp = state.maxHp })
+end
+
+------------------------------------------------------------------------
+-- WEAPON ABILITY DISPATCHER
+------------------------------------------------------------------------
+
+local function applyWeaponAbility(attackerState, enemyState, weaponDef)
+	if not weaponDef or not weaponDef.ability then return 0 end
+	local now = tick()
+	if now < attackerState.abilityCooldownEnd then return 0 end
+
+	local cooldown = (WeaponData and WeaponData.GetAbilityCooldown(weaponDef.id)) or 0
+	attackerState.abilityCooldownEnd = now + cooldown
+
+	local ability = weaponDef.ability
+	local addDmg  = 0
+
+	if ability == "Bleed" then
+		enemyState.isBleeding     = true
+		enemyState.bleedEndTime   = now + 4
+		enemyState.bleedDmgPerSec = 3
+
+	elseif ability == "Cleave" or ability == "DashSlash" then
+		addDmg = weaponDef.damage
+
+	elseif ability == "Shred" then
+		task.spawn(function()
+			for _ = 1, 10 do
+				if enemyState.isAlive then
+					enemyState.hp = enemyState.hp - 5
+					fireAllClients("EnemyHit", { enemyId = enemyState.id, damage = 5, isCrit = false })
+					if enemyState.hp <= 0 then
+						CombatSystem._defeatEnemy(nil, enemyState)
+						break
+					end
+				end
+				task.wait(0.2)
+			end
+		end)
+
+	elseif ability == "ToiletTornado" then
+		addDmg = 30
+
+	elseif ability == "OnePunch" then
+		if enemyState.def and enemyState.def.type == "SkibidiZombie" then
+			addDmg = enemyState.hp + 1
+		else
+			addDmg = weaponDef.damage * 2
+		end
+		fireAllClients("ScreenDistort", { intensity = 1.0 })
+
+	elseif ability == "BurstFire" then
+		addDmg = weaponDef.damage * 2
+
+	elseif ability == "Headshot" or ability == "Explosion" or ability == "Spread" then
+		addDmg = weaponDef.damage
+
+	elseif ability == "CharmBeam" then
+		enemyState.isCharmed      = true
+		enemyState.charmedEndTime = now + 5
+
+	elseif ability == "Confuse" then
+		enemyState.isConfused      = true
+		enemyState.confusedEndTime = now + 5
+	end
+
+	return addDmg
+end
+
+------------------------------------------------------------------------
+-- ACTION HANDLERS (routed from EventBus)
+------------------------------------------------------------------------
+
+function CombatSystem.OnMeleeAttack(player, data)
+	local state = playerStates[player]
+	if not state or not state.isAlive then return end
+	if isRateLimited(state) then return end
+
+	local now      = tick()
+	local weaponId = (type(data) == "table" and type(data.weaponId) == "string")
+		and data.weaponId or state.meleeWeaponId
+	local targetId = type(data) == "table" and data.targetEnemyId
+
+	if now - state.lastMeleeTime > CONFIG.MELEE_HIT_WINDOW then
+		state.comboHit = 0
+	end
+	state.comboHit      = (state.comboHit % CONFIG.MELEE_COMBO_HITS) + 1
+	state.lastMeleeTime = now
+
+	local weaponDef  = WeaponData and WeaponData.GetWeapon(weaponId)
+	local baseDamage = weaponDef and weaponDef.damage or 10
+	local hitMult    = CONFIG.MELEE_DAMAGE_MULT[state.comboHit] or 1.0
+	local damage     = math.floor(baseDamage * hitMult)
+	local isThirdHit = state.comboHit == CONFIG.MELEE_COMBO_HITS
+
+	local character = player.Character
+	local rootPart  = character and character:FindFirstChild("HumanoidRootPart")
+	local range     = (weaponDef and weaponDef.range or 8) * 1.3
+
+	local enemyState = targetId and enemyStates[targetId]
+	if enemyState and enemyState.isAlive then
+		-- Distance validation (anti-cheat)
+		if rootPart and EnemyFactory and EnemyFactory.GetEnemyPosition then
+			local ePos = EnemyFactory.GetEnemyPosition(targetId)
+			if ePos and (rootPart.Position - ePos).Magnitude > range then return end
+		end
+		damageEnemy(player, enemyState, damage, isThirdHit)
+		if isThirdHit then
+			fireAllClients("EnemyKnockback", { enemyId = targetId, force = CONFIG.MELEE_KNOCKBACK_FORCE })
+		end
+	else
+		-- Sweep nearest enemy within range
+		if rootPart and EnemyFactory and EnemyFactory.GetEnemiesInRadius then
+			local nearby = EnemyFactory.GetEnemiesInRadius(rootPart.Position, range)
+			if nearby then
+				for _, eid in ipairs(nearby) do
+					local es = enemyStates[eid]
+					if es and es.isAlive then
+						damageEnemy(player, es, damage, isThirdHit)
+						if isThirdHit then
+							fireAllClients("EnemyKnockback", { enemyId = eid, force = CONFIG.MELEE_KNOCKBACK_FORCE })
+						end
+						break
+					end
+				end
+			end
+		end
+	end
+
+	fireClient(player, "HapticPulse", { intensity = isThirdHit and 1.0 or 0.5 })
+end
+
+function CombatSystem.OnRangedFire(player, data)
+	local state = playerStates[player]
+	if not state or not state.isAlive then return end
+	if isRateLimited(state) then return end
+	if type(data) ~= "table" then return end
+
+	local weaponId  = type(data.weaponId) == "string" and data.weaponId or state.rangedWeaponId
+	local weaponDef = WeaponData and WeaponData.GetWeapon(weaponId)
+	if not weaponDef then return end
+
+	if state.magazineAmmo <= 0 then
+		-- Auto-initiate reload so the player is never left stuck
+		CombatSystem.OnReload(player, { weaponId = weaponId })
+		return
+	end
+	state.magazineAmmo = state.magazineAmmo - 1
+
+	local dirX = type(data.directionX) == "number" and data.directionX or 0
+	local dirY = type(data.directionY) == "number" and data.directionY or 0
+	local dirZ = type(data.directionZ) == "number" and data.directionZ or 1
+
+	local character = player.Character
+	local rootPart  = character and character:FindFirstChild("HumanoidRootPart")
+	local hitEnemy  = nil
+
+	if rootPart and weaponDef.aimAssist and EnemyFactory then
+		local origin  = rootPart.Position
+		local dir     = Vector3.new(dirX, dirY, dirZ).Unit
+		local bestDot = math.cos(math.rad(CONFIG.AIM_ASSIST_ANGLE))
+		local nearby  = EnemyFactory.GetEnemiesInRadius
+			and EnemyFactory.GetEnemiesInRadius(origin, CONFIG.AIM_ASSIST_RANGE)
+
+		if nearby then
+			for _, eid in ipairs(nearby) do
+				local es = enemyStates[eid]
+				if es and es.isAlive and EnemyFactory.GetEnemyPosition then
+					local ePos = EnemyFactory.GetEnemyPosition(eid)
+					if ePos then
+						local toEnemy = (ePos - origin).Unit
+						local dot = dir:Dot(toEnemy)
+						if dot >= bestDot then
+							bestDot  = dot
+							hitEnemy = es
+						end
+					end
+				end
+			end
+		end
+	end
+
+	if hitEnemy then
+		damageEnemy(player, hitEnemy, weaponDef.damage, false)
+	else
+		fireClient(player, "ShotMissed", { weaponId = weaponId })
+	end
+
+	fireClient(player, "RangedFired", {
+		weaponId = weaponId,
+		ammoLeft = state.magazineAmmo,
+		hit      = hitEnemy ~= nil,
+	})
+end
+
+function CombatSystem.OnReload(player, data)
+	local state = playerStates[player]
+	if not state or not state.isAlive or state.reloading then return end
+
+	local weaponId  = type(data) == "table" and data.weaponId or state.rangedWeaponId
+	local weaponDef = WeaponData and WeaponData.GetWeapon(weaponId)
+	if not weaponDef then return end
+
+	local reloadTime = weaponDef.reloadTime or 1.5
+	state.reloading     = true
+	state.reloadEndTime = tick() + reloadTime
+
+	fireClient(player, "ReloadStart", { weaponId = weaponId, duration = reloadTime })
+
+	task.delay(reloadTime, function()
+		if playerStates[player] then
+			state.reloading    = false
+			state.magazineAmmo = weaponDef.magazineSize or CONFIG.DEFAULT_MAGAZINE_SIZE
+			fireClient(player, "ReloadComplete", { weaponId = weaponId, ammo = state.magazineAmmo })
+		end
+	end)
+end
+
+function CombatSystem.OnDodge(player, _data)
+	local state = playerStates[player]
+	if not state or not state.isAlive then return end
+
+	local now = tick()
+	if now < state.dodgeCooldownEnd then
+		fireClient(player, "DodgeCooldown", { remaining = state.dodgeCooldownEnd - now })
+		return
+	end
+
+	state.isDodging        = true
+	state.dodgeEndTime     = now + CONFIG.DODGE_IFRAME_DURATION
+	state.dodgeCooldownEnd = now + CONFIG.DODGE_COOLDOWN
+
+	fireClient(player, "DodgeStart", { iframeDuration = CONFIG.DODGE_IFRAME_DURATION })
+
+	-- Boss parry check: if any boss is telegraphing, this dodge is a parry
+	for _, es in pairs(enemyStates) do
+		if es.isBoss and es.isTelegraphing and now < es.telegraphEndTime then
+			es.isStuned         = true
+			es.stunEndTime      = now + CONFIG.PARRY_STUN_DURATION
+			es.isTelegraphing   = false
+			fireAllClients("BossParried", {
+				bossId       = es.id,
+				stunDuration = CONFIG.PARRY_STUN_DURATION,
+			})
+			break
+		end
+	end
+
+	task.delay(CONFIG.DODGE_IFRAME_DURATION, function()
+		if playerStates[player] then
+			state.isDodging = false
+			fireClient(player, "DodgeEnd", {})
+		end
+	end)
+end
+
+function CombatSystem.OnUseAbility(player, data)
+	local state = playerStates[player]
+	if not state or not state.isAlive then return end
+
+	local now = tick()
+	if now < state.abilityCooldownEnd then
+		fireClient(player, "AbilityCooldown", { remaining = state.abilityCooldownEnd - now })
+		return
+	end
+
+	local weaponId  = state.equippedType == "Ranged" and state.rangedWeaponId or state.meleeWeaponId
+	local weaponDef = WeaponData and WeaponData.GetWeapon(weaponId)
+	if not weaponDef or not weaponDef.ability then return end
+
+	local targetId    = type(data) == "table" and data.targetEnemyId
+	local targetState = targetId and enemyStates[targetId]
+
+	if not targetState then
+		local character = player.Character
+		local rootPart  = character and character:FindFirstChild("HumanoidRootPart")
+		if rootPart and EnemyFactory and EnemyFactory.GetEnemiesInRadius then
+			local nearby = EnemyFactory.GetEnemiesInRadius(rootPart.Position, CONFIG.ABILITY_TARGET_SEARCH_RADIUS)
+			if nearby then
+				for _, eid in ipairs(nearby) do
+					if enemyStates[eid] and enemyStates[eid].isAlive then
+						targetState = enemyStates[eid]
+						break
+					end
+				end
+			end
+		end
+	end
+
+	if not targetState then return end
+
+	local extraDmg = applyWeaponAbility(state, targetState, weaponDef)
+	if extraDmg > 0 then damageEnemy(player, targetState, extraDmg, false) end
+
+	fireClient(player, "AbilityUsed", {
+		weaponId = weaponId,
+		ability  = weaponDef.ability,
+		cooldown = state.abilityCooldownEnd - now,
+	})
+end
+
+function CombatSystem.OnEquipWeapon(player, data)
+	local state = playerStates[player]
+	if not state or type(data) ~= "table" then return end
+
+	local weaponId  = type(data.weaponId) == "string" and data.weaponId
+	if not weaponId then return end
+
+	local weaponDef = WeaponData and WeaponData.GetWeapon(weaponId)
+	if not weaponDef then return end
+
+	if weaponDef.weaponType == "Melee" then
+		state.meleeWeaponId = weaponId
+		state.equippedType  = "Melee"
+		state.comboHit      = 0
+	elseif weaponDef.weaponType == "Ranged" then
+		state.rangedWeaponId = weaponId
+		state.equippedType   = "Ranged"
+		state.magazineAmmo   = weaponDef.magazineSize or 12
+		state.reloading      = false
+	elseif weaponDef.weaponType == "Throwable" then
+		state.equippedType = "Throwable"
+	end
+
+	fireClient(player, "WeaponEquipped", {
+		weaponId   = weaponId,
+		weaponType = weaponDef.weaponType,
+	})
+end
+
+------------------------------------------------------------------------
+-- ENEMY REGISTRATION (called by EnemyFactory when spawning)
+------------------------------------------------------------------------
+
+function CombatSystem.RegisterEnemy(enemyId, enemyDef, dayNumber, isBoss)
+	local es = newEnemyState(enemyId, enemyDef, dayNumber)
+	es.isBoss = isBoss or false
+	if isBoss and enemyDef then
+		es.enrageTime = tick() + (enemyDef.enrageTimer or 120)
+	end
+	enemyStates[enemyId] = es
+	return es
+end
+
+function CombatSystem.GetEnemyState(enemyId)
+	return enemyStates[enemyId]
+end
+
+function CombatSystem.UnregisterEnemy(enemyId)
+	enemyStates[enemyId] = nil
+end
+
+------------------------------------------------------------------------
+-- BOSS TELEGRAPH
+------------------------------------------------------------------------
+
+function CombatSystem.StartBossTelegraph(bossId, attackPattern, telegraphTime)
+	local es = enemyStates[bossId]
+	if not es or not es.isBoss then return end
+
+	local duration = telegraphTime or 1.5
+	es.isTelegraphing   = true
+	es.telegraphEndTime = tick() + duration
+
+	fireAllClients("BossTelegraph", {
+		bossId      = bossId,
+		attackName  = attackPattern and attackPattern.name or "Attack",
+		duration    = duration,
+		isParryable = attackPattern and attackPattern.parryable or false,
+	})
+
+	task.delay(duration, function()
+		local bes = enemyStates[bossId]
+		if not bes or not bes.isAlive or bes.isStuned then return end
+		bes.isTelegraphing = false
+
+		if attackPattern then
+			for _, p in ipairs(Players:GetPlayers()) do
+				local pChar = p.Character
+				local pRoot = pChar and pChar:FindFirstChild("HumanoidRootPart")
+				if pRoot then
+					local def     = bes.def
+					local bossDmg = def and def.baseDamage or 20
+					if attackPattern.type == "AoE" then
+						local bPos = EnemyFactory and EnemyFactory.GetEnemyPosition
+							and EnemyFactory.GetEnemyPosition(bossId)
+						if bPos and (pRoot.Position - bPos).Magnitude <= (attackPattern.radius or 12) then
+							damagePlayer(p, bossDmg, bossId)
+						end
+					else
+						damagePlayer(p, bossDmg, bossId)
+					end
+				end
+			end
+		end
+	end)
+end
+
+------------------------------------------------------------------------
+-- SERVER TICK (status effects, boss enrage, heal aura)
+------------------------------------------------------------------------
+
+local _lastAITick = 0
+
+function CombatSystem.Tick(_dt)
+	local now = tick()
+	if now - _lastAITick < CONFIG.AI_TICK_RATE then return end
+	_lastAITick = now
+
+	for enemyId, es in pairs(enemyStates) do
+		if es.isAlive then
+			-- Bleed DoT
+			if es.isBleeding then
+				if now >= es.bleedEndTime then
+					es.isBleeding = false
+				else
+					local bleedDmg = es.bleedDmgPerSec * CONFIG.AI_TICK_RATE
+					es.hp = es.hp - bleedDmg
+					fireAllClients("EnemyHit", { enemyId = enemyId, damage = math.floor(bleedDmg), isCrit = false })
+					if es.hp <= 0 then CombatSystem._defeatEnemy(nil, es) end
+				end
+			end
+
+			-- Clear expired statuses
+			if es.isConfused  and now >= es.confusedEndTime  then es.isConfused  = false end
+			if es.isCharmed   and now >= es.charmedEndTime   then es.isCharmed   = false end
+			if es.isStaggered and now >= es.staggerEndTime   then es.isStaggered = false end
+			if es.isStuned    and now >= es.stunEndTime      then es.isStuned    = false end
+
+			-- Boss enrage
+			if es.isBoss and not es.isEnraged and now >= es.enrageTime then
+				es.isEnraged = true
+				local def = es.def
+				if def then
+					fireAllClients("BossEnraged", {
+						bossId = enemyId,
+						newDmg = math.floor((def.baseDamage or 20) * (def.enrageDmgMult or 1.5)),
+					})
+				end
+			end
+		end
+	end
+
+	-- RizzMerchant heal aura
+	for _, es in pairs(enemyStates) do
+		if es.isAlive and es.def and es.def.specialAbility == "HealAura" then
+			if EnemyFactory and EnemyFactory.GetEnemyPosition then
+				local healerPos = EnemyFactory.GetEnemyPosition(es.id)
+				if healerPos then
+					local radius  = es.def.healAuraRadius or 10
+					local healAmt = (es.def.healAuraRate or 3) * CONFIG.AI_TICK_RATE
+					for _, other in pairs(enemyStates) do
+						if other.isAlive and other ~= es then
+							local oPos = EnemyFactory.GetEnemyPosition(other.id)
+							if oPos and (healerPos - oPos).Magnitude <= radius then
+								other.hp = math.min(other.maxHp, other.hp + healAmt)
+							end
+						end
+					end
+				end
+			end
+		end
+	end
+end
+
+------------------------------------------------------------------------
+-- REMOTE EVENT SETUP (EventBus + ClientDispatch)
+------------------------------------------------------------------------
+
+local function setupRemotes()
+	local remotes = ReplicatedStorage:FindFirstChild("Remotes")
+	if not remotes then
+		remotes        = Instance.new("Folder")
+		remotes.Name   = "Remotes"
+		remotes.Parent = ReplicatedStorage
+	end
+
+	local eventBus = remotes:FindFirstChild("EventBus")
+	if not eventBus then
+		eventBus        = Instance.new("RemoteEvent")
+		eventBus.Name   = "EventBus"
+		eventBus.Parent = remotes
+	end
+
+	local clientDispatch = remotes:FindFirstChild("ClientDispatch")
+	if not clientDispatch then
+		clientDispatch        = Instance.new("RemoteEvent")
+		clientDispatch.Name   = "ClientDispatch"
+		clientDispatch.Parent = remotes
+	end
+	_clientDispatch = clientDispatch
+
+	eventBus.OnServerEvent:Connect(function(player, action, data)
+		if type(action) ~= "string" then return end
+
+		if SecurityLayer and type(SecurityLayer.CheckRateLimit) == "function" then
+			if not SecurityLayer.CheckRateLimit(player, "CombatAction") then return end
+		end
+
+		if     action == "MeleeAttack"  then CombatSystem.OnMeleeAttack(player, data)
+		elseif action == "RangedFire"   then CombatSystem.OnRangedFire(player, data)
+		elseif action == "Reload"       then CombatSystem.OnReload(player, data)
+		elseif action == "Dodge"        then CombatSystem.OnDodge(player, data)
+		elseif action == "UseAbility"   then CombatSystem.OnUseAbility(player, data)
+		elseif action == "EquipWeapon"  then CombatSystem.OnEquipWeapon(player, data)
+		end
+	end)
+
+	print("[CombatSystem] EventBus + ClientDispatch configured")
+end
+
+------------------------------------------------------------------------
+-- INIT
+------------------------------------------------------------------------
 
 function CombatSystem.Init()
-    -- Lazy-load dependencies
-    local ok1, gw = pcall(require, ServerStorage:FindFirstChild("ServerGateway"))
-    if ok1 then ServerGateway = gw end
-    
-    local ok2, qb = pcall(require, ServerStorage:FindFirstChild("QuestionBank"))
-    if ok2 then QuestionBank = qb end
-    
-    local ok3, ef = pcall(require, ServerStorage:FindFirstChild("EnemyFactory"))
-    if ok3 then EnemyFactory = ef end
-    
-    local ok4, em = pcall(require, ServerStorage:FindFirstChild("EconomyManager"))
-    if ok4 then EconomyManager = em end
-    
-    -- Player lifecycle
-    Players.PlayerAdded:Connect(function(player)
-        playerStates[player] = createCombatState(player)
-    end)
-    
-    Players.PlayerRemoving:Connect(function(player)
-        -- Save metrics before cleanup
-        CombatSystem._savePlayerMetrics(player)
-        playerStates[player] = nil
-    end)
-    
-    -- Initialize existing players (late join safety)
-    for _, player in ipairs(Players:GetPlayers()) do
-        if not playerStates[player] then
-            playerStates[player] = createCombatState(player)
-        end
-    end
-    
-    print("[CombatSystem] Initialized — Mouse → Tiger ready")
-    return true
+	local function tryRequire(name)
+		local m = ServerStorage:FindFirstChild(name)
+		if not m then return nil end
+		local ok, result = pcall(require, m)
+		return ok and result or nil
+	end
+
+	ServerGateway        = tryRequire("ServerGateway")
+	WeaponData           = tryRequire("WeaponData")
+	EnemyData            = tryRequire("EnemyData")
+	EnemyFactory         = tryRequire("EnemyFactory")
+	EconomyManager       = tryRequire("EconomyManager")
+	CombatRewardsManager = tryRequire("CombatRewardsManager")
+	SecurityLayer        = tryRequire("SecurityLayer")
+
+	Players.PlayerAdded:Connect(function(player)
+		playerStates[player] = newPlayerState(player)
+		local startLoadout   = WeaponData and WeaponData.StarterLoadout
+		if startLoadout and WeaponData then
+			local rDef = WeaponData.GetWeapon(startLoadout.ranged or "ranged_slingshot")
+			playerStates[player].magazineAmmo = rDef and rDef.magazineSize or 1
+		end
+	end)
+
+	Players.PlayerRemoving:Connect(function(player)
+		playerStates[player] = nil
+	end)
+
+	for _, player in ipairs(Players:GetPlayers()) do
+		if not playerStates[player] then
+			playerStates[player] = newPlayerState(player)
+		end
+	end
+
+	setupRemotes()
+
+	print("[CombatSystem] v2.0 ready. Tap to attack.")
+	return true
 end
 
---------------------------------------------------------------------------------
--- QUESTION DELIVERY
---------------------------------------------------------------------------------
-
-function CombatSystem.ServeQuestion(player, enemy)
-    local state = playerStates[player]
-    if not state then return nil end
-    if not state.isAlive then return nil end
-    
-    -- Cooldown check
-    local now = tick()
-    if now - state.lastQuestionTime < CONFIG.QUESTION_COOLDOWN then
-        return nil
-    end
-    
-    -- Get question from QuestionBank matched to player's tier
-    local tierConfig = CONFIG.TIERS[state.currentTier] or CONFIG.TIERS[1]
-    local isBoss = enemy and enemy.isBoss
-    local questionTier = isBoss and math.min(state.currentTier + 1, 5) or state.currentTier
-    
-    local question = nil
-    if QuestionBank then
-        question = QuestionBank.GetQuestion(questionTier, state.vocabularyMastered, state.vocabularyStruggling)
-    else
-        -- Fallback: hardcoded starter questions (for testing without QuestionBank)
-        question = CombatSystem._getFallbackQuestion(questionTier)
-    end
-    
-    if not question then
-        warn("[CombatSystem] No question available for tier " .. questionTier)
-        return nil
-    end
-    
-    -- Set active question state
-    state.currentQuestion = question
-    state.questionStartTime = now
-    state.lastQuestionTime = now
-    state.targetEnemy = enemy
-    
-    -- Return question data for client UI
-    return {
-        questionId = question.id,
-        prompt = question.prompt,
-        options = question.options,        -- nil for free-type, array for multiple choice
-        tier = tierConfig.name,
-        timeLimit = tierConfig.timeLimit,
-        isBoss = isBoss,
-        enemyName = enemy and enemy.name or "Unknown",
-        combo = state.combo,
-        powerUpCharge = state.powerUpCharge,
-    }
-end
-
---------------------------------------------------------------------------------
--- ANSWER PROCESSING (SERVER-SIDE VALIDATION ONLY)
---------------------------------------------------------------------------------
-
-function CombatSystem.ProcessAnswer(player, answerId)
-    local state = playerStates[player]
-    if not state then return { success = false, reason = "NO_STATE" } end
-    if not state.currentQuestion then return { success = false, reason = "NO_QUESTION" } end
-    if not state.isAlive then return { success = false, reason = "DEAD" } end
-    
-    local question = state.currentQuestion
-    local now = tick()
-    local responseTime = now - state.questionStartTime
-    local tierConfig = CONFIG.TIERS[state.currentTier] or CONFIG.TIERS[1]
-    
-    -- Time limit check
-    if responseTime > tierConfig.timeLimit then
-        return CombatSystem._handleWrongAnswer(state, question, responseTime, "TIME_UP")
-    end
-    
-    -- Validate answer (SERVER-SIDE — never trust client)
-    local isCorrect = false
-    if QuestionBank then
-        isCorrect = QuestionBank.ValidateAnswer(question.id, answerId)
-    else
-        isCorrect = (answerId == question.correctAnswer)
-    end
-    
-    -- Clear current question
-    state.currentQuestion = nil
-    state.questionsAnswered = state.questionsAnswered + 1
-    state.totalResponseTime = state.totalResponseTime + responseTime
-    state.averageResponseTime = state.totalResponseTime / state.questionsAnswered
-    
-    if isCorrect then
-        return CombatSystem._handleCorrectAnswer(state, question, responseTime)
-    else
-        return CombatSystem._handleWrongAnswer(state, question, responseTime, "WRONG")
-    end
-end
-
---------------------------------------------------------------------------------
--- CORRECT ANSWER
---------------------------------------------------------------------------------
-
-function CombatSystem._handleCorrectAnswer(state, question, responseTime)
-    local tierConfig = CONFIG.TIERS[state.currentTier] or CONFIG.TIERS[1]
-    
-    -- Advance combo
-    state.combo = state.combo + 1
-    state.totalCorrect = state.totalCorrect + 1
-    if state.combo > state.bestCombo then
-        state.bestCombo = state.combo
-    end
-    
-    -- Calculate damage
-    local comboMultiplier = math.min(
-        1.0 + (state.combo * CONFIG.COMBO_BONUS_PER_STREAK),
-        CONFIG.MAX_COMBO_MULTIPLIER
-    )
-    local damage = CONFIG.BASE_PLAYER_DAMAGE * tierConfig.damageMultiplier * comboMultiplier
-    
-    -- Power-Up bonus
-    if state.isPoweredUp and tick() < state.poweredUpUntil then
-        damage = damage * CONFIG.POWER_UP_DAMAGE_MULTIPLIER
-    end
-    
-    -- Charge Power-Up
-    state.powerUpCharge = math.min(
-        state.powerUpCharge + CONFIG.POWER_UP_CHARGE_PER_CORRECT,
-        CONFIG.POWER_UP_MAX_CHARGE
-    )
-    
-    -- Apply damage to enemy
-    local enemyKilled = false
-    local enemy = state.targetEnemy
-    if enemy then
-        enemy.health = (enemy.health or 0) - damage
-        if enemy.health <= 0 then
-            enemyKilled = true
-            state.totalKills = state.totalKills + 1
-            if enemy.isBoss then
-                state.bossKills = state.bossKills + 1
-            end
-        end
-    end
-    
-    -- Track vocabulary mastery
-    local word = question.targetWord
-    if word then
-        state.vocabularyMastered[word] = (state.vocabularyMastered[word] or 0) + 1
-        -- Remove from struggling if mastered (3+ correct)
-        if state.vocabularyMastered[word] >= 3 and state.vocabularyStruggling[word] then
-            state.vocabularyStruggling[word] = nil
-        end
-    end
-    
-    -- Reward coins (drives engagement loop → monetization)
-    local coins = CONFIG.CORRECT_ANSWER_COINS + (state.combo * CONFIG.COMBO_BONUS_COINS)
-    if enemyKilled and enemy and enemy.isBoss then
-        coins = coins + CONFIG.BOSS_KILL_COINS
-    elseif enemyKilled then
-        coins = coins + 10
-    end
-    
-    if EconomyManager then
-        EconomyManager.AddCurrency(state.player, "EnglishCoins", coins)
-    end
-    
-    -- Tier progression check (every 10 correct answers, consider tier up)
-    if state.totalCorrect % 10 == 0 and state.totalCorrect > 0 then
-        CombatSystem._checkTierProgression(state)
-    end
-    
-    -- Build response
-    return {
-        success = true,
-        correct = true,
-        damage = math.floor(damage),
-        combo = state.combo,
-        coins = coins,
-        enemyKilled = enemyKilled,
-        powerUpCharge = state.powerUpCharge,
-        powerUpReady = state.powerUpCharge >= CONFIG.POWER_UP_MAX_CHARGE,
-        tier = tierConfig.name,
-        responseTime = math.floor(responseTime * 100) / 100,
-        encouragement = CombatSystem._getEncouragement(state.combo, enemyKilled),
-        vocabularyProgress = state.vocabularyMastered[question.targetWord] or 0,
-    }
-end
-
---------------------------------------------------------------------------------
--- WRONG ANSWER
---------------------------------------------------------------------------------
-
-function CombatSystem._handleWrongAnswer(state, question, responseTime, reason)
-    -- Reset combo (but preserve data)
-    local lostCombo = state.combo
-    state.combo = 0
-    state.totalWrong = state.totalWrong + 1
-    
-    -- Player takes damage
-    local damage = CONFIG.WRONG_ANSWER_DAMAGE
-    state.health = math.max(0, state.health - damage)
-    
-    -- Track struggling vocabulary
-    local word = question.targetWord
-    if word then
-        state.vocabularyStruggling[word] = (state.vocabularyStruggling[word] or 0) + 1
-    end
-    
-    -- Check death
-    local died = false
-    if state.health <= 0 then
-        died = true
-        state.isAlive = false
-        -- Respawn after delay (keep them playing → keep them spending)
-        task.delay(3.0, function()
-            if state and state.player and state.player.Parent then
-                CombatSystem.Respawn(state.player)
-            end
-        end)
-    end
-    
-    -- Tier regression check (if accuracy drops below 40%, step down)
-    if state.questionsAnswered > 5 then
-        local accuracy = state.totalCorrect / state.questionsAnswered
-        if accuracy < 0.4 and state.currentTier > 1 then
-            state.currentTier = state.currentTier - 1
-            table.insert(state.tierProgressHistory, {
-                time = tick(),
-                tier = state.currentTier,
-                reason = "accuracy_drop",
-                accuracy = accuracy,
-            })
-        end
-    end
-    
-    local tierConfig = CONFIG.TIERS[state.currentTier] or CONFIG.TIERS[1]
-    
-    return {
-        success = true,
-        correct = false,
-        reason = reason,
-        damageTaken = damage,
-        health = state.health,
-        maxHealth = state.maxHealth,
-        died = died,
-        lostCombo = lostCombo,
-        tier = tierConfig.name,
-        correctAnswer = question.correctAnswer,
-        explanation = question.explanation or "",
-        encouragement = died 
-            and "You'll get stronger! Every answer teaches you something new." 
-            or "Almost! The answer was: " .. tostring(question.correctAnswer),
-    }
-end
-
---------------------------------------------------------------------------------
--- ENGLISH POWER-UP
---------------------------------------------------------------------------------
-
-function CombatSystem.ActivatePowerUp(player)
-    local state = playerStates[player]
-    if not state then return false end
-    if state.powerUpCharge < CONFIG.POWER_UP_MAX_CHARGE then return false end
-    if state.isPoweredUp then return false end
-    
-    state.isPoweredUp = true
-    state.poweredUpUntil = tick() + CONFIG.POWER_UP_DURATION
-    state.powerUpCharge = 0
-    
-    -- Auto-deactivate after duration
-    task.delay(CONFIG.POWER_UP_DURATION, function()
-        if state then
-            state.isPoweredUp = false
-        end
-    end)
-    
-    return true
-end
-
---------------------------------------------------------------------------------
--- TIER PROGRESSION (Mouse → Tiger)
---------------------------------------------------------------------------------
-
-function CombatSystem._checkTierProgression(state)
-    local accuracy = state.totalCorrect / math.max(1, state.questionsAnswered)
-    local avgTime = state.averageResponseTime
-    local currentTier = state.currentTier
-    
-    -- Tier up conditions: >70% accuracy AND improving speed
-    if accuracy > 0.7 and currentTier < 5 then
-        local tierConfig = CONFIG.TIERS[currentTier]
-        if avgTime < tierConfig.timeLimit * 0.6 then  -- answering in <60% of time limit
-            state.currentTier = currentTier + 1
-            table.insert(state.tierProgressHistory, {
-                time = tick(),
-                tier = state.currentTier,
-                reason = "mastery",
-                accuracy = accuracy,
-                avgTime = avgTime,
-            })
-        end
-    end
-end
-
---------------------------------------------------------------------------------
--- RESPAWN (keep players in the loop — retention is revenue)
---------------------------------------------------------------------------------
-
-function CombatSystem.Respawn(player)
-    local state = playerStates[player]
-    if not state then return end
-    
-    state.health = state.maxHealth
-    state.isAlive = true
-    state.combo = 0
-    -- Do NOT reset tier or progress on death — keeps players engaged
-    
-    -- Notify client
-    if ServerGateway then
-        ServerGateway.SendToPlayer(player, "Respawn", {
-            health = state.health,
-            tier = CONFIG.TIERS[state.currentTier].name,
-            message = "Back in the fight! You've learned " 
-                .. tostring(CombatSystem._countMastered(state)) 
-                .. " words so far!",
-        })
-    end
-end
-
---------------------------------------------------------------------------------
--- PLAYER METRICS (engagement + retention tracking)
---------------------------------------------------------------------------------
-
-function CombatSystem._savePlayerMetrics(player)
-    local state = playerStates[player]
-    if not state then return end
-    
-    local metrics = {
-        totalQuestions = state.questionsAnswered,
-        accuracy = state.questionsAnswered > 0 
-            and (state.totalCorrect / state.questionsAnswered) or 0,
-        averageResponseTime = state.averageResponseTime,
-        wordsLearned = CombatSystem._countMastered(state),
-        wordsStruggling = CombatSystem._countStruggling(state),
-        highestTier = state.currentTier,
-        bestCombo = state.bestCombo,
-        wavesCleared = state.wavesCleared,
-        tierHistory = state.tierProgressHistory,
-    }
-    
-    -- TODO: Persist to DataStoreV2
-    print(string.format(
-        "[CombatSystem] Player %s session: %d questions, %.0f%% accuracy, %d words learned, tier %s",
-        player.Name,
-        metrics.totalQuestions,
-        metrics.accuracy * 100,
-        metrics.wordsLearned,
-        CONFIG.TIERS[state.currentTier].name
-    ))
-end
-
-function CombatSystem._countMastered(state)
-    local count = 0
-    for _, v in pairs(state.vocabularyMastered) do
-        if v >= 3 then count = count + 1 end
-    end
-    return count
-end
-
-function CombatSystem._countStruggling(state)
-    local count = 0
-    for _ in pairs(state.vocabularyStruggling) do
-        count = count + 1
-    end
-    return count
-end
-
---------------------------------------------------------------------------------
--- ENCOURAGEMENT SYSTEM (Mouse → Tiger tone)
---------------------------------------------------------------------------------
-
-function CombatSystem._getEncouragement(combo, enemyKilled)
-    if enemyKilled and combo >= 10 then
-        return "TIGER MODE! " .. combo .. " streak! You're unstoppable!"
-    elseif enemyKilled and combo >= 5 then
-        return "Wolf pack energy! " .. combo .. " answers straight!"
-    elseif enemyKilled then
-        return "Enemy defeated! Keep hunting!"
-    elseif combo >= 10 then
-        return "🔥 " .. combo .. " STREAK! You're on fire!"
-    elseif combo >= 5 then
-        return "Nice streak! " .. combo .. " in a row!"
-    elseif combo >= 3 then
-        return "Building momentum! " .. combo .. " correct!"
-    elseif combo == 1 then
-        return "Good start!"
-    else
-        return "Let's go!"
-    end
-end
-
---------------------------------------------------------------------------------
--- FALLBACK QUESTIONS (for testing without QuestionBank module)
---------------------------------------------------------------------------------
-
-function CombatSystem._getFallbackQuestion(tier)
-    local fallbackQuestions = {
-        -- Tier 1: Mouse (super easy, build confidence)
-        { id = "fb_1", prompt = "What does 'Hello' mean?", correctAnswer = "greeting", 
-          options = {"greeting", "goodbye", "thank you", "sorry"}, targetWord = "hello",
-          explanation = "'Hello' is a friendly greeting!", tier = 1 },
-        { id = "fb_2", prompt = "Choose the correct word: 'I ___ happy'", correctAnswer = "am",
-          options = {"am", "is", "are", "be"}, targetWord = "am",
-          explanation = "'I am' — first person singular!", tier = 1 },
-        -- Tier 2: Cat
-        { id = "fb_3", prompt = "What's the opposite of 'big'?", correctAnswer = "small",
-          options = {"small", "tall", "wide", "long"}, targetWord = "opposite",
-          explanation = "Big ↔ Small — they're opposites!", tier = 2 },
-        -- Tier 3: Wolf  
-        { id = "fb_4", prompt = "Which sentence is correct?", correctAnswer = "She has been waiting",
-          options = {"She has been waiting", "She have been waiting", "She has be waiting", "She been has waiting"},
-          targetWord = "present_perfect_continuous", 
-          explanation = "Present perfect continuous: has/have + been + -ing", tier = 3 },
-        -- Tier 4: Lion
-        { id = "fb_5", prompt = "What does 'ubiquitous' mean?", correctAnswer = "found everywhere",
-          options = {"found everywhere", "very rare", "extremely loud", "quite small"},
-          targetWord = "ubiquitous",
-          explanation = "'Ubiquitous' means present, appearing, or found everywhere.", tier = 4 },
-        -- Tier 5: Tiger
-        { id = "fb_6", prompt = "Identify the literary device: 'The wind whispered through the trees'",
-          correctAnswer = "personification",
-          options = {"personification", "simile", "metaphor", "alliteration"},
-          targetWord = "personification",
-          explanation = "Personification gives human qualities to non-human things.", tier = 5 },
-    }
-    
-    -- Filter by tier and return random
-    local tierQuestions = {}
-    for _, q in ipairs(fallbackQuestions) do
-        if q.tier <= tier then
-            table.insert(tierQuestions, q)
-        end
-    end
-    
-    if #tierQuestions == 0 then
-        return fallbackQuestions[1]
-    end
-    
-    return tierQuestions[math.random(#tierQuestions)]
-end
-
---------------------------------------------------------------------------------
+------------------------------------------------------------------------
 -- PUBLIC API
---------------------------------------------------------------------------------
+------------------------------------------------------------------------
 
-function CombatSystem.GetPlayerState(player)
-    return playerStates[player]
+function CombatSystem.GetConfig()            return CONFIG end
+function CombatSystem.GetPlayerState(player) return playerStates[player] end
+
+function CombatSystem.IsPlayerAlive(player)
+	local s = playerStates[player]
+	return s and s.isAlive or false
 end
 
-function CombatSystem.GetConfig()
-    return CONFIG
+function CombatSystem.OnWaveStart(_dayNumber, _waveNumber)
+	for _, state in pairs(playerStates) do
+		state.comboHit      = 0
+		state.lastMeleeTime = 0
+	end
 end
 
-function CombatSystem.SetPlayerInCombat(player, inCombat)
-    local state = playerStates[player]
-    if state then
-        state.isInCombat = inCombat
-    end
+function CombatSystem.OnWaveClear(dayNumber, waveNumber)
+	if CombatRewardsManager then
+		pcall(CombatRewardsManager.OnWaveClear, dayNumber, waveNumber)
+	end
 end
 
-function CombatSystem.OnWaveCleared(player)
-    local state = playerStates[player]
-    if not state then return end
-    state.wavesCleared = state.wavesCleared + 1
-    if EconomyManager then
-        EconomyManager.AddCurrency(state.player, "EnglishCoins", CONFIG.WAVE_CLEAR_COINS)
-    end
+function CombatSystem.DamagePlayer(player, amount, source)
+	damagePlayer(player, amount, source)
+end
+
+function CombatSystem.DamageEnemy(enemyId, amount, sourcePlayer)
+	local es = enemyStates[enemyId]
+	if es then damageEnemy(sourcePlayer, es, amount, false) end
 end
 
 return CombatSystem
