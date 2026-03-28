@@ -1,6 +1,6 @@
 --[[
-    GuildManager.lua — Train 6-7: Survival English
-    Stage 17: Guild / Squad System
+    GuildManager.lua — Guild / Squad System
+    Skibidi Zombie: Survive the Brainrots
     
     DESIGN LAW:
     - Social obligation = strongest retention hook
@@ -9,13 +9,10 @@
     - Guild rewards (shared loot for contribution)
     - Max 30 members per guild
     - Guild levels with perks
-    - Gospel 444: Guild English challenges = bonus rewards
+    - ZERO ESL. Combat quests only.
     
-    ARCHITECTURE:
-    - Server-authoritative guild management
-    - DataStore persistence for guild data
-    - Role hierarchy: Leader > Officer > Member
-    - Anti-grief: cooldowns on join/leave, kick protection
+    Version: 1.1 — ESL PURGE
+    Date: 2026-03-28
 ]]
 
 local Players = game:GetService("Players")
@@ -37,13 +34,13 @@ local CONFIG = {
     CREATE_COST = { currency = "SurvivalCoins", amount = 5000 },
     NAME_MIN_LENGTH = 3,
     NAME_MAX_LENGTH = 20,
-    JOIN_COOLDOWN = 3600,          -- 1 hour after leaving before joining another
-    KICK_PROTECTION_HOURS = 24,    -- Can't be kicked within 24h of joining
+    JOIN_COOLDOWN = 3600,
+    KICK_PROTECTION_HOURS = 24,
     MAX_OFFICERS = 5,
     GUILD_XP_PER_MEMBER_KILL = 5,
-    GUILD_XP_PER_MEMBER_ENGLISH = 10, -- Gospel 444 bonus
+    GUILD_XP_PER_COMBO_KILL = 15,
+    GUILD_XP_PER_BOSS_KILL = 50,
     
-    -- Guild level thresholds
     LEVEL_THRESHOLDS = {
         [1] = 0,
         [2] = 1000,
@@ -57,7 +54,6 @@ local CONFIG = {
         [10] = 200000,
     },
     
-    -- Guild level perks
     LEVEL_PERKS = {
         [1] = { maxMembers = 10, description = "Basic guild" },
         [2] = { maxMembers = 15, description = "+5 member slots" },
@@ -75,26 +71,29 @@ local CONFIG = {
 local ROLES = { LEADER = "LEADER", OFFICER = "OFFICER", MEMBER = "MEMBER" }
 
 -- ============================================================
--- GUILD QUEST DEFINITIONS
+-- GUILD QUEST DEFINITIONS — COMBAT ONLY, ZERO ESL
 -- ============================================================
 
 local GUILD_QUESTS = {
-    { id = "guild_kills_100",    type = "kills",   target = 100,  name = "Guild Hunt",        reward = { guildXP = 500, memberCoins = 200 } },
-    { id = "guild_kills_500",    type = "kills",   target = 500,  name = "Guild Massacre",    reward = { guildXP = 2000, memberCoins = 500, memberGems = 5 } },
-    { id = "guild_survive_60",   type = "survive", target = 3600, name = "Guild Endurance",   reward = { guildXP = 1000, memberCoins = 300 } },
-    { id = "guild_english_50",   type = "english", target = 50,   name = "Guild Scholars",    reward = { guildXP = 1500, memberCoins = 400, memberGems = 10 } },
-    { id = "guild_english_200",  type = "english", target = 200,  name = "Guild Wordsmiths",  reward = { guildXP = 5000, memberCoins = 1000, memberGems = 25 } },
-    { id = "guild_trades_10",    type = "trades",  target = 10,   name = "Guild Merchants",   reward = { guildXP = 800, memberCoins = 250 } },
-    { id = "guild_coins_50000",  type = "coins",   target = 50000,name = "Guild Fortune",     reward = { guildXP = 3000, memberGems = 15 } },
+    { id = "guild_kills_100",    type = "kills",    target = 100,  name = "Guild Hunt",          reward = { guildXP = 500, memberCoins = 200 } },
+    { id = "guild_kills_500",    type = "kills",    target = 500,  name = "Guild Massacre",      reward = { guildXP = 2000, memberCoins = 500, memberGems = 5 } },
+    { id = "guild_survive_60",   type = "survive",  target = 3600, name = "Guild Endurance",     reward = { guildXP = 1000, memberCoins = 300 } },
+    { id = "guild_combo_50",     type = "combo",    target = 50,   name = "Guild Combo Kings",   reward = { guildXP = 1500, memberCoins = 400, memberGems = 10 } },
+    { id = "guild_combo_200",    type = "combo",    target = 200,  name = "Guild Combo Gods",    reward = { guildXP = 5000, memberCoins = 1000, memberGems = 25 } },
+    { id = "guild_trades_10",    type = "trades",   target = 10,   name = "Guild Merchants",     reward = { guildXP = 800, memberCoins = 250 } },
+    { id = "guild_coins_50000",  type = "coins",    target = 50000,name = "Guild Fortune",       reward = { guildXP = 3000, memberGems = 15 } },
+    { id = "guild_bosses_5",     type = "bosses",   target = 5,    name = "Guild Boss Slayers",  reward = { guildXP = 4000, memberCoins = 800, memberGems = 20 } },
+    { id = "guild_headshots_100",type = "headshots", target = 100, name = "Guild Sharpshooters", reward = { guildXP = 2500, memberCoins = 600, memberGems = 8 } },
+    { id = "guild_parries_50",   type = "parries",  target = 50,   name = "Guild Parry Masters", reward = { guildXP = 3500, memberCoins = 700, memberGems = 12 } },
 }
 
 -- ============================================================
 -- STATE
 -- ============================================================
 
-local guildsCache = {}          -- [guildId] = guildData
-local playerGuildMap = {}       -- [userId] = guildId
-local playerCooldowns = {}      -- [userId] = leaveTimestamp
+local guildsCache = {}
+local playerGuildMap = {}
+local playerCooldowns = {}
 
 -- ============================================================
 -- GUILD DATA
@@ -150,7 +149,6 @@ local guildCounter = 0
 function GuildManager.CreateGuild(player, guildName)
     local userId = player.UserId
     
-    -- Validation
     if loadPlayerGuild(userId) then
         return { success = false, error = "ALREADY_IN_GUILD" }
     end
@@ -159,14 +157,13 @@ function GuildManager.CreateGuild(player, guildName)
         return { success = false, error = "INVALID_NAME_LENGTH" }
     end
     
-    -- Check cost
     local EconomyManager = require(script.Parent:FindFirstChild("EconomyManager"))
     if EconomyManager then
-        local balance = EconomyManager.GetBalance(player, CONFIG.CREATE_COST.currency)
+        local balance = EconomyManager.getCoins(player)
         if balance < CONFIG.CREATE_COST.amount then
             return { success = false, error = "INSUFFICIENT_FUNDS" }
         end
-        EconomyManager.Deduct(player, CONFIG.CREATE_COST.currency, CONFIG.CREATE_COST.amount, "guild_create")
+        EconomyManager.spend(player, CONFIG.CREATE_COST.currency, CONFIG.CREATE_COST.amount, "guild_create")
     end
     
     guildCounter = guildCounter + 1
@@ -191,7 +188,6 @@ function GuildManager.CreateGuild(player, guildName)
         questProgress = 0,
         questsCompleted = 0,
         totalKills = 0,
-        totalEnglishWords = 0,
     }
     
     guildsCache[guildId] = guild
@@ -214,7 +210,6 @@ function GuildManager.JoinGuild(player, guildId)
         return { success = false, error = "ALREADY_IN_GUILD" }
     end
     
-    -- Cooldown check
     local cooldown = playerCooldowns[userId]
     if cooldown and (os.time() - cooldown) < CONFIG.JOIN_COOLDOWN then
         return { success = false, error = "COOLDOWN", remaining = CONFIG.JOIN_COOLDOWN - (os.time() - cooldown) }
@@ -225,7 +220,6 @@ function GuildManager.JoinGuild(player, guildId)
         return { success = false, error = "GUILD_NOT_FOUND" }
     end
     
-    -- Check member cap based on guild level
     local perks = CONFIG.LEVEL_PERKS[guild.level] or CONFIG.LEVEL_PERKS[1]
     if guild.memberCount >= (perks.maxMembers or CONFIG.MAX_MEMBERS) then
         return { success = false, error = "GUILD_FULL" }
@@ -262,7 +256,6 @@ function GuildManager.LeaveGuild(player)
         return { success = false, error = "GUILD_NOT_FOUND" }
     end
     
-    -- Leader can't leave (must transfer or disband)
     if guild.leaderId == userId then
         return { success = false, error = "LEADER_CANNOT_LEAVE" }
     end
@@ -294,7 +287,6 @@ function GuildManager.StartQuest(player, questId)
     local guild = loadGuild(guildId)
     if not guild then return { success = false, error = "GUILD_NOT_FOUND" } end
     
-    -- Only leader/officers can start quests
     local member = guild.members[tostring(userId)]
     if not member or (member.role ~= ROLES.LEADER and member.role ~= ROLES.OFFICER) then
         return { success = false, error = "INSUFFICIENT_ROLE" }
@@ -304,7 +296,6 @@ function GuildManager.StartQuest(player, questId)
         return { success = false, error = "QUEST_ALREADY_ACTIVE" }
     end
     
-    -- Find quest
     local quest = nil
     for _, q in ipairs(GUILD_QUESTS) do
         if q.id == questId then
@@ -337,13 +328,11 @@ function GuildManager.ContributeToQuest(player, questType, amount)
     
     guild.questProgress = guild.questProgress + amount
     
-    -- Track individual contribution
     local member = guild.members[tostring(userId)]
     if member then
         member.contribution = (member.contribution or 0) + amount
     end
     
-    -- Check completion
     if guild.questProgress >= guild.activeQuest.target then
         GuildManager._CompleteQuest(guild)
     end
@@ -355,11 +344,9 @@ function GuildManager._CompleteQuest(guild)
     local quest = guild.activeQuest
     if not quest then return end
     
-    -- Grant guild XP
     guild.xp = (guild.xp or 0) + (quest.reward.guildXP or 0)
     guild.questsCompleted = (guild.questsCompleted or 0) + 1
     
-    -- Check level up
     for level = 10, 1, -1 do
         if guild.xp >= (CONFIG.LEVEL_THRESHOLDS[level] or 0) then
             if level > guild.level then
@@ -370,17 +357,16 @@ function GuildManager._CompleteQuest(guild)
         end
     end
     
-    -- Grant member rewards
     local EconomyManager = require(script.Parent:FindFirstChild("EconomyManager"))
     for memberIdStr in pairs(guild.members) do
         local memberId = tonumber(memberIdStr)
         local memberPlayer = memberId and Players:GetPlayerByUserId(memberId)
         if memberPlayer and EconomyManager then
             if quest.reward.memberCoins then
-                EconomyManager.AddBalance(memberPlayer, "SurvivalCoins", quest.reward.memberCoins, "guild_quest")
+                EconomyManager.AddCoins(memberPlayer, quest.reward.memberCoins, "guild_quest")
             end
             if quest.reward.memberGems then
-                EconomyManager.AddBalance(memberPlayer, "BrainrotGems", quest.reward.memberGems, "guild_quest")
+                EconomyManager.AddGems(memberPlayer, quest.reward.memberGems, "guild_quest")
             end
         end
     end
