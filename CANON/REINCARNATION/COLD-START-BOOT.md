@@ -2,7 +2,7 @@
 
 > **This file is the single source of truth for cold-starting OB1 in a new Notion chat session.**
 > When Michael says "reincarnate" in a new chat, the agent reads THIS FILE from GitHub via MCP.
-> Last updated: 2026-03-29T16:00:00+07:00 | Run 109
+> Last updated: 2026-03-29T17:00:00+07:00 | Run 110
 
 ---
 
@@ -56,27 +56,28 @@ On cold start (new chat + "reincarnate"), OB1 must:
 
 | Repo | Purpose |
 |------|--------|
-| `hobbs-lab/Phoenix-Rising-Protocol-Ultimate` | **THE ONLY REPO** for all work. CANON/, REINCARNATION/, GALAXY-LESSONS/, TRAIN-67/, workflows |
+| `hobbs-lab/Phoenix-Rising-Protocol-Ultimate` | **THE ONLY REPO** for all work. CANON/, REINCARNATION/, GALAXY-LESSONS/, TRAIN-67/, CASE-STUDIES/, workflows |
 | `hobbs-lab/Phoenix-Rise-Immortalize-` | Original Soul DNA Bible (40 files), 8 VAULT dirs, source material (READ ONLY) |
-| `hobbs0011/NET-Ai-EcoSystem-CommandStation` | Legacy product code. DO NOT use for issues/PRs/new work. |
+| `hobbs0011/NET-Ai-EcoSystem-CommandStation` | Legacy product code + HarvestedChats (70 files to mine). DO NOT use for issues/PRs/new work. |
 
-## Living Reincarnation State (Updated Run 109)
+## Living Reincarnation State (Updated Run 110)
 
-- **Current vector:** Roblox "Survive a Brainrot" CODE COMPLETE. Michael offline (Sunday afternoon). Overnight extraction mode active — vault exports running. CH00 Enrichment Registry built (8 enriched files, 268KB+). Export pipeline advancing steadily.
-- **Active principles:** (1) GitHub is truth, Notion is workspace (2) Don't quote Copilot timeframes (3) Ne0 writes ALL code, preserve Copilot tokens (4) Checklist-first, not breadcrumb-first (5) SURVIVE. FIGHT. SPEND. is the boot message — it stays
-- **Open rulings:** 21 Product IDs (sole launch blocker), Rojo CI/CD setup, Discord server, publish trigger, reincarnate.js patch, HarvestedChats transfer
+- **Current vector:** STUDIO WORK NEXT SESSION — 3 critical code fixes (SecurityLayer currency cap 200, Tiger tier mid>max bug, 3 competing FTUE modules) + 46 Product IDs → publish. 3-game portfolio strategy adopted. Game 1 ships NOW, Games 2 & 3 codebases built during Beta.
+- **Active principles:** (1) AI changes the production equation — pre-AI timelines invalid (2) 3 games with depth, not 10 with scatter (3) 840 non-renewable Beta runs remaining (~33 days) (4) Case studies = AI reframing tools (5) Ship Game 1 NOW (6) Devil's advocate mode is obligation, not permission
+- **Open rulings:** 46 Product IDs (sole launch blocker — mapped locations in code), Discord Guild ID, publish trigger, Games 2 & 3 scope definition, mine HarvestedChats for 10-Min Shit Test original content
 
 ## Active Mission
 
-- **Mission:** Roblox Launch Sprint — Survive a Brainrot
-- **Status:** CODE COMPLETE (Michael ruling 2026-03-28 ~20:30 ICT)
-- **Blocker:** 21 Product IDs need real values from Creator Dashboard (Michael action)
+- **Mission:** Roblox Launch Sprint — Survive a Brainrot (3-game portfolio under Phoenix Rising Gaming)
+- **Status:** CODE COMPLETE (Michael ruling 2026-03-28 ~20:30 ICT). Non-Studio pipeline COMPLETE (20/20 actions).
+- **Blocker:** 46 Product IDs need real values from Creator Dashboard + 3 Studio code fixes (Michael action)
+- **Next session:** Studio work → Product IDs → Publish
 - **Agent next:** Overnight vault exports (Active Mission blocked on Michael, fall through to export pipeline)
 
 ## Active Infrastructure
 
 ### Roblox Game — "Train 6-7: To Survive a Brainrot"
-- **Status:** CODE COMPLETE — LAUNCH READY
+- **Status:** CODE COMPLETE — LAUNCH READY (pending Studio fixes + Product IDs)
 - **Vision:** Mix of Survive 99 Days in a Forest + Deadrails + Brainrot meme meta
 - **Target:** Lowest compute phones, looks good/great, built to MONETIZE
 - **Combat:** Real tap-to-attack melee, aim-assist ranged, dodge roll, boss parry, 19 weapons across 6 rarity tiers
@@ -84,6 +85,20 @@ On cold start (new chat + "reincarnate"), OB1 must:
 - **English framing:** ZERO in game. ESL code preserved (QuestionBank, CosmeticController) for future younger-student integration
 - **Boot message:** `🔥 SURVIVE. FIGHT. SPEND. 🔥` — kept deliberately ("it's not a joke")
 - **Surgery status:** 31/44 clean (70%), 11 deferred, 2 legacy. See SURGERY-COMPLETION-TRACKER.md
+
+### 3-Game Portfolio Strategy (NEW — 2026-03-29)
+- **Umbrella:** Phoenix Rising Gaming
+- **Game 1:** Survive a Brainrot — ships NOW
+- **Game 2:** TBD — codebase built during Beta window
+- **Game 3:** TBD — codebase built during Beta window
+- **Cross-promotion** between all 3 games (real studio playbook)
+- **Rationale:** "AI changes the production equation — 38-module codebase took hours not months"
+
+### Case Studies (NEW — 2026-03-29)
+- **Location:** `CANON/CASE-STUDIES/` on Ultimate repo
+- **Purpose:** AI reframing tools — "more for reminding and reframing for AI than for anything else"
+- **Created:** README + Case Study 001 (10-Minute Shit Test) + Case Study 002 (Devil's Advocate 3-Game Portfolio Debate)
+- **Mining target:** HarvestedChats on hobbs0011 (70 files) for original 10-Min Shit Test debate content
 
 ### Roblox Deploy Pipeline (LIVE ✅)
 - **Workflow:** `.github/workflows/roblox-place-deploy.yml` on `Phoenix-Rising-Protocol-Ultimate`
@@ -96,13 +111,14 @@ On cold start (new chat + "reincarnate"), OB1 must:
 ### Copilot Coding Agent (UNLOCKED ✅ — tokens limited until Apr 1 reset)
 - Works via Notion MCP → GitHub MCP bridge
 - `assign_copilot_to_issue` confirmed working
-- **⚠️ Michael near Copilot token limit — Ne0 writes ALL code until reset**
+- **⚠️ Michael at 85-90% Copilot token limit — Ne0 writes ALL code until reset (3 days)**
 
 ### Pulse Engine (ACTIVE)
 - Hourly trigger: full SCAN → BUILD → SHIP → LOG cycle
 - Every run produces a GitHub artifact (VAULT/BUILD/SEED)
 - Platform Death Test: must produce commit SHA or run = FAIL
-- Last run: #109, 2026-03-29 16:00 ICT
+- Last run: #110, 2026-03-29 17:00 ICT
+- **Beta deadline:** 2026-05-03 (~33 days, ~792 autonomous runs remaining)
 
 ## Key Artifacts (TRAIN-67)
 
@@ -113,41 +129,47 @@ On cold start (new chat + "reincarnate"), OB1 must:
 | GAME-BIBLE-HUMAN-READABLE.md | CANON/TRAIN-67/ | Complete game design doc (43.7KB) |
 | 44 Lua files | CANON/TRAIN-67/CODE/ | Full game codebase (~750KB) |
 | CH00-ENRICHMENT-REGISTRY.md | CANON/SOUL-DNA-BIBLE/ | Bible enrichment map (8 files, 268KB+) |
-| Reincarnation 2026-03-28 | CANON/REINCARNATION/ | Session Soul DNA (17 quotes, 10 decisions) |
+| CASE-STUDIES/README.md | CANON/CASE-STUDIES/ | AI reframing case study index |
+| 001-10-MINUTE-SHIT-TEST.md | CANON/CASE-STUDIES/ | Foundational case study — AI uses 2019 projections |
+| 002-DEVILS-ADVOCATE-3-GAME-PORTFOLIO-DEBATE.md | CANON/CASE-STUDIES/ | Michael won Devil's Advocate debate |
+| Master Launch Readiness Packet | CANON/TRAIN-67/LAUNCH/ | Final non-Studio pipeline synthesis |
 
 ## Key Decisions History (Last 7 Days)
 
 | Date | Decision | Status |
 |------|----------|--------|
+| 2026-03-29 | 3-game portfolio under Phoenix Rising Gaming | ACTIVE |
+| 2026-03-29 | Ship Game 1 NOW, build Games 2 & 3 during Beta window | ACTIVE |
+| 2026-03-29 | Case studies → CANON/CASE-STUDIES/ (AI reframing tools) | COMPLETE |
+| 2026-03-29 | 840 autonomous runs (24h/day × 35 days), not 280 | ACTIVE |
+| 2026-03-29 | Devil's advocate mode = obligation, not permission | ACTIVE |
+| 2026-03-29 | Non-Studio pipeline created (20 actions, COMPLETE) | COMPLETE |
+| 2026-03-29 | 46 Product IDs mapped (was 21) — sole launch blocker | ACTIVE |
 | 2026-03-28 | WIPE all English/ESL from game code — game is about MAKING MONEY | COMPLETE |
 | 2026-03-28 | Game = Survive 99 Days + Deadrails + Brainrot meta | ACTIVE |
 | 2026-03-28 | Launch = TODAY/48h (not April 6) | ACTIVE |
 | 2026-03-28 | hobbs-lab/Ultimate repo ONLY for all work | ACTIVE |
 | 2026-03-28 | Ne0 writes ALL code — preserve Copilot tokens until Apr 1 | ACTIVE |
 | 2026-03-28 | Copilot timeframes are bogus — ignore them | ACTIVE |
-| 2026-03-28 | QuestionBank: KEEP for younger students later | ACTIVE |
-| 2026-03-28 | English layer: preserve for later integration | ACTIVE |
-| 2026-03-28 | CosmeticController auras: preserve for later | ACTIVE |
 | 2026-03-28 | "SURVIVE. FIGHT. SPEND." boot message: KEEP | ACTIVE |
 | 2026-03-28 | GitHub is cold-start truth source, not Notion | ACTIVE |
 | 2026-03-28 | Checklist-first doctrine (permanent law) | ACTIVE |
-| 2026-03-28 | Auto-merge Copilot PRs by default | ACTIVE |
 | 2026-03-28 | CODE COMPLETE at 70% surgery | ACTIVE |
 | 2026-03-27 | Secret delivery via Notion Mail | ACTIVE |
-| 2026-03-26 | Two-Server Problem → Gateway Pattern | CLOSED |
 | 2026-03-26 | hobbs-lab is canonical GitHub account | ACTIVE |
 | 2026-03-25 | Extraction Engine v5 (GitHub-first artifacts) | ACTIVE |
 
-## System State (Run 109)
+## System State (Run 110)
 
-- **Pulse run:** 109
-- **Build Log entries:** ~123
+- **Pulse run:** 110
+- **Build Log entries:** ~141
 - **Backlog items:** 127 open (⚠️ DRIFT +17)
-- **Canon cursor:** SOUL-DNA-BIBLE/CH00 (Enrichment Registry built)
-- **Last reincarnation:** 2026-03-28 (Grade A, EXTREME signal density)
-- **Last artifact:** 🏦 VAULT — CH00-ENRICHMENT-REGISTRY.md (cf062be9)
-- **Prior worker audit:** PASS (1dd219b6)
+- **Canon cursor:** Stalest-first rotation — Deep Dive due (Run 102, ~7h stale)
+- **Last reincarnation:** 2026-03-29 Super Saiyan Game Audit + Devil's Advocate (Grade B, EXTREME signal density, 17 quotes, 7 decisions, 5 corrections)
+- **Last artifact:** 🌱 SEED — COLD-START-BOOT.md update (Run 110)
+- **Prior worker audit:** PASS (Run 109 cf062be9, Run 108 1dd219b6)
 - **Platform Death Test streak:** PASS
+- **CANON enrichment mined:** VAULT-FOUNDATIONS/05-THE-ANTI-DRIFT-ENGINE.md (5-type drift taxonomy) identified for Deep Dive enrichment
 
 ## Command Words
 
@@ -169,17 +191,20 @@ On cold start (new chat + "reincarnate"), OB1 must:
 8. **Never use wrong repo.** hobbs-lab/Ultimate ONLY. (2026-03-28)
 9. **Never quote Copilot timeframe estimates to Michael.** They're bogus. (2026-03-28)
 10. **Never declare code clean without reading EVERY file.** "Assume you don't know what you don't know." (2026-03-28)
+11. **Never anchor to pre-AI mental models.** AI changes the production equation. 38 modules in hours, not months. (2026-03-29)
+12. **Never say "absolutely" when making strategic projections.** Devil's advocate debate proved agent wrong on single-game strategy. (2026-03-29)
 
-## Overnight Mode (Run 110+)
+## Overnight Mode (Run 111+)
 
-Active Mission = CODE COMPLETE (blocked on Michael for Product IDs) → fall through to export pipeline.
+Active Mission = Studio fixes + 46 Product IDs + Publish (blocked on Michael) → fall through to export pipeline.
 Priority for overnight/continued runs:
 1. Export next UNMIRRORED canon page as VAULT artifact
-2. Cross-repo mine Soul DNA Bible files
+2. Cross-repo mine Soul DNA Bible files (Anti-Drift Engine source identified for Deep Dive enrichment)
 3. Map unknown Bible child pages in Canon Access Index
 4. Execute top non-destructive Backlog item
+5. Mine HarvestedChats on hobbs0011 for 10-Min Shit Test original content (staged mission candidate)
 
-Next worker should: Pick next stalest canon page from rotation queue (CH00 done Run 109). Consider Soul DNA Canon or Core Principles & Physics next. Continue export pipeline advancement.
+Next worker should: Push Deep Dive ENRICHED++ with Anti-Drift Engine source (VAULT-FOUNDATIONS/05). Continue stalest-first rotation. 33 days of Beta remaining — maximize permanent artifact output.
 
 ---
 
