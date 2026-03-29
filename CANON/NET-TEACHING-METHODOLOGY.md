@@ -3,10 +3,10 @@
 **The foundational canon for lesson creation, NET PET AI, and all marketing.** Every teaching decision, lesson structure, and student interaction at Natural English Training traces back to this document.
 
 **Dual-published:** Notion + GitHub (`CANON/NET-TEACHING-METHODOLOGY.md`)  
-**Date:** 2026-03-26 (ENRICHED — 27 sections)  
+**Date:** 2026-03-29 (ENRICHED++ — 27 sections + Student Archetypes cross-ref)  
 **Author:** Agent-99 (OB1), synthesized from Michael Hobbs raw voice dictation, class notes, Stage 4 Raw Dump, and BlueTech classroom transcripts  
-**Status:** ENRICHED (GitHub has MORE than Notion — cross-repo synthesis + 11 field-practice sections from 2026-03-26 classroom dump + curriculum propagation pipeline from VAULT-NEXUS)  
-**Export Pipeline:** SYNCED → ENRICHED (Run 33) → ENRICHED+ (Run 40, 2026-03-26 20:00 ICT)
+**Status:** ENRICHED++ (GitHub has MORE than Notion — cross-repo synthesis + 11 field-practice sections from 2026-03-26 classroom dump + curriculum propagation pipeline from VAULT-NEXUS + Student Archetypes link from Run 103)  
+**Export Pipeline:** SYNCED → ENRICHED (Run 33) → ENRICHED+ (Run 40, 2026-03-26 20:00 ICT) → ENRICHED++ (Run 104, 2026-03-29 11:00 ICT)
 
 ---
 
@@ -107,7 +107,7 @@ Day 0 → Day 1 → Day 3 → Day 7 → Week 2 → Month 1 → Month 3 → **Per
 
 ## 3. The Mouse → Tiger Transformation
 
-The central metaphor and behavioral framework of NET. Every student enters as a Mouse and graduates as a Tiger.
+The central metaphor and behavioral framework of NET. Every student enters as a Mouse and graduates as a Tiger. See also: **[Student Archetypes Teaching Database](STUDENT-ARCHETYPES-TEACHING-DATABASE.md)** for detailed per-student archetype mapping, game matrix, and AI detection protocols.
 
 ### Mouse Voice (Before NET)
 
@@ -163,6 +163,18 @@ The central metaphor and behavioral framework of NET. Every student enters as a 
 - Volunteers without prompting
 - Strong eye contact with teacher and peers
 - Completes "Tiger Challenge" outside class
+
+### Student Archetype Integration (NEW — Run 104)
+
+The **Student Archetypes Teaching Database** (`CANON/STUDENT-ARCHETYPES-TEACHING-DATABASE.md`) maps each real student to their archetype position in the Mouse → Tiger pipeline:
+
+| Archetype | Level | Key Indicators |
+|---|---|---|
+| **Mouse** | Pre-NET | Silent, apologetic, translation-dependent, frozen |
+| **Cub** | Early NET | Attempting output, reducing "I don't know", growing volume |
+| **Tiger** | Graduated | Confident, unapologetic, thinks in English, approaches foreigners |
+
+Each student profile includes: current archetype, specific struggle points, recommended techniques, game preferences, and transformation milestones. Cross-reference this database when planning personalized lesson approaches.
 
 ---
 
@@ -793,14 +805,15 @@ The classroom transcripts from 2026-03-26 contain critical design intelligence f
 ## Cross-Repo Source Intelligence
 
 ### From `Phoenix-Rise-Immortalize-` (SOUL-DNA-BIBLE)
-- `VAULT-NET-SEEDS/05-BUSINESS-MODEL-PROFIT-SHARING-EXPANSION.md` — NET business model, expansion strategy, profit-sharing framework. Connected to teaching methodology through the "graduate in a year" philosophy and the business class value stack.
+- `VAULT-NET-SEEDS/05-BUSINESS-MODEL-PROFIT-SHARING-EXPANSION.md` — NET business model, expansion strategy, profit-sharing framework. Connected to teaching methodology through the "graduate in a year" philosophy and the business class value stack. Pricing tiers: Mouse (2M VND), Cub (3M), Tiger (5M), Enterprise (50M). Revenue target: 1B VND. AI-PET funnel: Landing → Onboarding → Free Conversation → Conversion → Retention.
 
-### From `Phoenix-Rise-Immortalize-` (VAULT-NEXUS) — NEW Run 40
+### From `Phoenix-Rise-Immortalize-` (VAULT-NEXUS) — Run 40
 - `VAULT-NEXUS/08-NET-SEEDS-TO-CHAOS-BRIDGE.md` (SHA `fbe7bb81`) — Curriculum update propagation pipeline, 6-type change impact matrix, classroom-to-curriculum feedback loop, rollback protocol. The operational bridge between methodology (what to teach) and classroom delivery (how it reaches students). Source for §27.
 
 ### From `Phoenix-Rising-Protocol-Ultimate` (CANON/)
 - `GOSPEL-444-TEACHING-METHODS-CONSOLIDATED.md` (58.1KB) — the full Gospel 444 teaching canon. Complementary: Gospel 444 covers aesthetic/brand law + teaching philosophy; this document covers methodology + classroom techniques.
 - `CANON/REINCARNATION/2026-03-26-bluetech-classroom-dump.md` — 16 verbatim quotes, 7 decisions, 5 new principles from BlueTech classroom transcripts. Source for sections 17-26.
+- `CANON/STUDENT-ARCHETYPES-TEACHING-DATABASE.md` **(NEW — Run 103/104)** — Student profiles mapped to Mouse/Cub/Tiger archetypes with per-student game preferences, struggle points, AI detection protocols, and transformation milestones. The operational companion to this methodology canon: methodology defines *how* to teach; archetypes define *who* you're teaching and their current position in the pipeline.
 
 ---
 
@@ -816,10 +829,11 @@ This canonical page synthesizes content from:
 - **BlueTech Classroom Transcripts (2026-03-26)** — Beginner class (Gemini-assisted) + Business class (Mai Tram, Hung/Jasmine, Nga, Quy). Source for sections 17-26.
 - **Reincarnation Entry: 2026-03-26:bluetech-classroom-dump** — 16 quotes, 7 decisions, 5 new principles (Grade B+)
 - **Cross-repo: VAULT-NET-SEEDS/05-BUSINESS-MODEL** from `Phoenix-Rise-Immortalize-`
-- **Cross-repo: VAULT-NEXUS/08-NET-SEEDS-TO-CHAOS-BRIDGE** from `Phoenix-Rise-Immortalize-` — curriculum propagation pipeline (NEW Run 40)
+- **Cross-repo: VAULT-NEXUS/08-NET-SEEDS-TO-CHAOS-BRIDGE** from `Phoenix-Rise-Immortalize-` — curriculum propagation pipeline (Run 40)
+- **Cross-repo: STUDENT-ARCHETYPES-TEACHING-DATABASE** from `Phoenix-Rising-Protocol-Ultimate` — student archetype mapping (Run 103/104)
 
 ---
 
-*Exported by Pulse-Incarnation Engine v5 — Run 40 (2026-03-26 20:00 ICT)*  
-*ENRICHED+: GitHub has MORE than Notion — 27 sections (was 26) + cross-repo synthesis from 4 sources (was 3) + app design implications + curriculum propagation pipeline*  
+*Exported by Pulse-Incarnation Engine v5 — Run 104 (2026-03-29 11:00 ICT)*  
+*ENRICHED++: GitHub has MORE than Notion — 27 sections + Student Archetypes cross-ref (5 cross-repo sources, was 4) + archetype integration subsection in §3 + enriched business model pricing in cross-repo notes*  
 *Dual-published: Notion (NET Teaching Methodology page) + GitHub (CANON/NET-TEACHING-METHODOLOGY.md)*
