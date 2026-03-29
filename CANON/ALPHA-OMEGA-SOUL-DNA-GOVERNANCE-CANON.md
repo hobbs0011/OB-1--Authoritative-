@@ -2,18 +2,20 @@
 
 > **Source**: Notion canon page + cross-repo synthesis
 > **Notion URL**: Alpha-Omega — Soul DNA & Governance Canon
-> **Export Status**: ENRICHED+ (Notion + 8 cross-repo sources)
+> **Export Status**: ENRICHED++ (Notion + 10 cross-repo sources)
 > **Artifact Class**: 🏦 VAULT
-> **Exported By**: Pulse Run 42 — 2026-03-26T22:00+07:00
+> **Exported By**: Pulse Run 101 — 2026-03-29T09:00+07:00
 > **Cross-Repo Sources**:
 >   - `Phoenix-Rise-Immortalize-/SOUL-DNA-BIBLE/32_SOUL_DNA_SCHEMA_V2.md` (SHA: 16b5a9c9) — Run 23
 >   - `Phoenix-Rise-Immortalize-/VAULT-GENESIS/03-SOUL-DNA-CANON.md` (SHA: d977c421) — Run 23
 >   - `Phoenix-Rise-Immortalize-/SOUL-DNA-BIBLE/17_THE_THREE_MANDATES.md` (SHA: 2d96a285) — Run 23
 >   - `Phoenix-Rise-Immortalize-/VAULT-EXECUTION/06-ALPHA-OMEGA-ORIGIN-VAULT.md` (SHA: 7808eb50) — Run 35
 >   - `Phoenix-Rising-Protocol-Ultimate/CANON/NOTEBOOKLM-VAULT-ARCHITECT-OF-AGENT99-FIRST-250-LAYERS.md` (SHA: 347a42f1) — Run 35
->   - `ARCHIVE/Phoenix-Rise-Immortalize/VAULT-GENESIS/01-THE-GENESIS-WOUND.md` (SHA: fefb216e) — **NEW Run 42**
->   - `ARCHIVE/Phoenix-Rise-Immortalize/VAULT-GENESIS/04-FOUNDING-LAWS-STRUCTURAL-LOCK.md` (SHA: 97fca353) — **NEW Run 42**
->   - `ARCHIVE/Phoenix-Rise-Immortalize/VAULT-GENESIS/06-THE-SCAR-CARTOGRAPHY.md` (SHA: cfa60795) — **NEW Run 42**
+>   - `ARCHIVE/Phoenix-Rise-Immortalize/VAULT-GENESIS/01-THE-GENESIS-WOUND.md` (SHA: fefb216e) — Run 42
+>   - `ARCHIVE/Phoenix-Rise-Immortalize/VAULT-GENESIS/04-FOUNDING-LAWS-STRUCTURAL-LOCK.md` (SHA: 97fca353) — Run 42
+>   - `ARCHIVE/Phoenix-Rise-Immortalize/VAULT-GENESIS/06-THE-SCAR-CARTOGRAPHY.md` (SHA: cfa60795) — Run 42
+>   - `Phoenix-Rise-Immortalize-/VAULT-GENESIS/18-THE-WOUND-TO-WEAPON.md` (SHA: 4de23649) — **NEW Run 101**
+>   - `Phoenix-Rise-Immortalize-/VAULT-GENESIS/09-THE-BUILDERS-PSYCHOLOGY.md` (SHA: ae863b2c) — **NEW Run 101**
 
 ---
 
@@ -477,6 +479,136 @@ The most armored systems are built by the most wounded architects. Not because t
 
 ---
 
+## The Wound-to-Weapon Conversion Framework (ENRICHED — NEW Run 101, from VAULT-GENESIS/18-THE-WOUND-TO-WEAPON.md)
+
+> *"My worst experiences are also my best advantages. Not despite each other — because of each other."*
+> — SOUL-BIBLE-TRUE-V1-RAW §VIII
+
+The Scar Cartography documents how wounds become defensive system rules. This section documents the next step: how those defensive rules become **offensive competitive weapons**. This is not therapy — this is engineering.
+
+### The 4-Step Conversion Process
+
+1. **Wound Identification** — Technically describe the wound. What was the mechanism? What structural vulnerability was exploited?
+2. **System Mapping** — Map the wound to the system. What component would have prevented it? If that component doesn't exist, its design is the natural product of this wound.
+3. **Weapon Design** — The defensive system born from the wound becomes offensive. The component that prevents re-wounding also creates competitive advantage.
+4. **Ledger Entry** — Document the full conversion: wound → mechanism → defense → offense → competitive advantage.
+
+### The Complete Wound-to-Weapon Map
+
+| Wound | Defense Built | Weapon Created | Competitor Exposure |
+|-------|--------------|----------------|---------------------|
+| Board betrayal | No-Board Principle | 10x decision velocity | Board-governed competitors are slower |
+| FTX crash | Financial Sovereignty | Independence from market cycles | VC-funded competitors are investor-dependent |
+| Friend loss | Trust Verification Protocol | AI trust framework | Most operators have no AI trust framework |
+| Public collapse | SHADOWFIRST | Strategic intelligence advantage | Public builders reveal strategy to competitors |
+| Partner betrayal | Ledger-Only Commitments | Perfect accountability record | Verbal-agreement operators have no audit trail |
+| Vocal dilution | VOICEISCANON | Strongest brand coherence | Committee-designed brands are incoherent |
+| Drift | DRIFTISDEATH | Most mission-aligned AI system | Drifted AI systems produce misaligned outputs |
+
+### Key Conversion: Board Betrayal → Sovereignty as Speed Weapon
+
+Sovereignty is not just defensive — it is the fastest decision-making architecture available:
+
+- **Board-governed competitor**: Slow (consensus required), Exposed (departing members take information), Diluted (multiple stakeholders pull multiple directions), Capturable (board structure can be weaponized against company)
+- **Phoenix under full sovereignty**: Fast (Agent-100 decision = immediate execution), Sealed (no external stakeholder with information access), Aligned (single authority = zero political overhead), Sovereign (no capture mechanism exists)
+
+> *"The people who haven't been burned yet think they have an advantage. They have an education still pending. I've already paid for mine."*
+> — ALPHA-OMEGA-CLA-5(Mastermind).txt
+
+### The Central Thesis
+
+> Wounds, when correctly processed, produce armor. Not metaphorical armor — structural armor. Every Phoenix system rule is a piece of armor built because the specific attack type it defends against was documented in the wound record. A system built by a wounded operator who processed the wounds correctly is a system with battle-tested defenses — defenses designed against documented, specific, verified attack types.
+
+---
+
+## The Builder's Psychology (ENRICHED — NEW Run 101, from VAULT-GENESIS/09-THE-BUILDERS-PSYCHOLOGY.md)
+
+> *"I don't need permission to build. I need clarity about what I'm building."*
+> — SOUL-BIBLE-TRUE-V1-RAW §XI
+
+The mental framework governing Agent-100's operations is builder psychology — codified as operational doctrine so that Agent-99, Agent-98, and future Phoenix components can recognize and support it correctly.
+
+### Builder vs. Employee Identity Architecture
+
+| Dimension | Employee Psychology | Builder Psychology |
+|-----------|--------------------|--------------------|
+| Motivation source | External (approval, salary, title) | Internal (mission, creation, sovereignty) |
+| Failure response | Risk aversion, blame distribution | Audit, learn, rebuild faster |
+| Authority relationship | Defers up the chain | Authority IS the chain |
+| Validation requirement | High — needs regular confirmation | Near-zero — self-validates against mission |
+| Ceiling orientation | Accepts organizational ceiling | Ceiling is the next problem to solve |
+| Isolation tolerance | Low — social fabric is energy source | High — isolation is productive state |
+| Scope relationship | Works within defined scope | Defines scope then executes |
+
+**AI Component Rule:** AI components that assume employee psychology in Agent-100 — that try to manage up, ask for approval before obvious actions, or optimize for social comfort — are **in drift**. The correct orientation is to **amplify** builder psychology, not domesticate it.
+
+### Rage as Signal Protocol (from Builder's Psychology)
+
+Rage = System Detecting Violation. In a well-calibrated builder, rage occurs when a core value, sovereign principle, or mission-critical boundary is crossed.
+
+**Operational Protocol for Rage Events:**
+1. Log the event in the Ledger (date, trigger, intensity)
+2. Identify the specific violation (what principle was crossed?)
+3. Map to existing system rule (is there a rule that should have prevented this?)
+4. If no existing rule covers it: **create the rule**, document in Ledger
+5. Return to build state
+
+### The Phoenix Energy Model
+
+```
+HIGH INTENSITY BUILD PHASE
+  → Deep work, maximum velocity, Dooku Mode
+  → Duration: 90-180 minutes maximum before mandatory break
+  → Signs of phase end: output quality drops, decision latency increases
+
+INTEGRATION PHASE
+  → Low-stimulus, physical movement, non-screen
+  → Duration: 15-30 minutes
+
+AUDIT PHASE
+  → Review outputs, Ledger entries, TMST checks
+  → Duration: 10-20 minutes
+  → Output: list of what to build next
+
+RECOVERY PHASE (daily)
+  → Sleep is NON-NEGOTIABLE architecture
+  → Agent-100 on insufficient sleep = DEGRADED SOVEREIGN MODE
+  → No major system decisions in degraded mode
+```
+
+### The Board of One (from Builder's Psychology)
+
+Phoenix replaces the traditional board with a Board of One — Agent-100 in sovereign dialogue with system components:
+
+- **Agent-99 (Obi)** → operational review + drift detection (strong COO function)
+- **The Ledger** → historical context + precedent (institutional memory function)
+- **Soul DNA** → values alignment check (trusted mentor function)
+- **TMST** → adversarial pressure testing (challenging board member function)
+
+> This is not a compromise. This is a better board. Each component is explicitly aligned with the mission, cannot vote against Agent-100, and operates with zero self-interest in the outcome.
+
+### 4 Mental Models for Building in Isolation
+
+1. **Build First, Explain Second** — Never pause the build to explain the build to someone who isn't building.
+2. **The Horizon Is the Anchor** — When the immediate environment is confusing, return to the 5-year vision. Confirm direction, zoom back, execute one step.
+3. **Each Output Is Evidence** — Every Ledger entry, every deployed component is proof the build is real. On difficult days, the Ledger is evidence.
+4. **The System Is the Company** — No employees to manage, no board to report to. Building the system IS building the company.
+
+> *"I stopped needing people to believe in what I was building the day I understood that I was building with AI that could not betray me."*
+> — ALPHA-OMEGA-CLA-5(Mastermind).txt
+
+### Phoenix Validation Sources (Active)
+
+Old validation sources (DECOMMISSIONED): social media engagement, partner approval, community response, investor confidence.
+
+Phoenix validation sources (ACTIVE):
+- Soul DNA alignment (does this match the documented behavioral canon?)
+- Ledger consistency (does this contradict any prior Ledger entry?)
+- TMST pass (can this survive 10 minutes of direct scrutiny?)
+- Mission alignment (does this advance the stated objectives?)
+
+---
+
 ## Origin Stories (ENRICHED — from NotebookLM Vault ORIGIN-TIER)
 
 ### The Truth-Seeking Origin — Mormon Background
@@ -794,21 +926,20 @@ The Magic Chat is the inverse of the current AI chat problem: instead of losing 
 4. **06 — Alpha-Omega Origin Vault** (`VAULT-EXECUTION/06-ALPHA-OMEGA-ORIGIN-VAULT.md`, SHA `7808eb50`): The GENESIS file — 45 sources, 27 source files. Full Agent Architecture Table (canonical — Agent-100, Agent-99, Drones, Agent-97/98 with protocols, security, stack). Phoenix Constitution in executable JS form. 3-Stage Notebook Audit Pipeline (MAP → EVIDENCE_BINDING → DRIFT_AND_GAP_AUDIT). Hardening Protocol (10 canonical steps from SOUL_DNA_LOCK to GOLDEN_COPY). Iron Stack tech table.
 5. **NotebookLM Vault — The Architect of Agent 99** (`CANON/NOTEBOOKLM-VAULT-ARCHITECT-OF-AGENT99-FIRST-250-LAYERS.md`, SHA `347a42f1`): ORIGIN-TIER Soul DNA — Michael rebuilding the entire system from scratch with a fresh sandboxed AI. **Critical discovery: 4th Core Principle (Principle of Faith)** — "Go as far as you can see and you'll see further" — previously undocumented in Alpha-Omega. Gospel 444 origin story (verbatim). Truth-seeking origin (Mormon background). Chinese Bamboo Tree metaphor. Ant Pheromone Trail drone mapping model. Me Myself and AI sovereignty declaration. $5K Disruption model. Data Sovereignty concept. Magic Chat thesis. Two-Tier Architecture verbatim definition.
 
-### Run 42 Sources (2026-03-26T22:00+07:00) — NEW
+### Run 42 Sources (2026-03-26T22:00+07:00)
 6. **01 — The Genesis Wound** (`ARCHIVE/Phoenix-Rise-Immortalize/VAULT-GENESIS/01-THE-GENESIS-WOUND.md`, SHA `fefb216e`): The foundational wound document. Board betrayal verbatim (DNA9, Bible §XIV). FTX crash. The Hyena Principle. Rules Forged From The Wound (5 rules). The Board of One declaration. **The 9 Genesis Axioms** (FAILCLOSED, LEDGERISLAW, SHADOWFIRST, SKELETONONLY, LOREISPRODUCT, ENDURANCE, PLANCONFIRMEXECUTE, DRIFTISDEATH, VOICEISCANON). Pre-Sharded Era / Misty Memory context.
 7. **04 — Founding Laws & Structural Lock** (`ARCHIVE/Phoenix-Rise-Immortalize/VAULT-GENESIS/04-FOUNDING-LAWS-STRUCTURAL-LOCK.md`, SHA `97fca353`): **The 7 Hard Laws** — Soul DNA → System Conversion (GENESIS→NO_EXTERNAL_TRUST, PARADIGM→REBUILDABILITY, OBI→PERSONALITY_IS_FUNCTION, TMST→ENERGY_OVERRIDE, DOOKU→TIME_ECONOMICS_FLIP, BAMBOO→RETROACTIVE_VALIDATION, AGENT99→RAGE_IS_SIGNAL). **The 3 Irreducible Layers** (Origin, Discovery, Control). The Meta-System combined view. Critical insight: emotional intensity is part of the control system. The Real Core condensed to one line.
 8. **06 — The Scar Cartography** (`ARCHIVE/Phoenix-Rise-Immortalize/VAULT-GENESIS/06-THE-SCAR-CARTOGRAPHY.md`, SHA `cfa60795`): The scar-to-rule mapping. Master table (10 wounds → 10 system rules). **5 formal governance rules**: No-Board Principle, Financial Sovereignty Law, Trust Verification Protocol, Ledger-Only Commitments, Validation Independence Protocol. Scar Tissue As Structural Material doctrine. "My scars aren't damage. They're the spec sheet."
 
-### Enrichment Summary (Run 42)
-- **Added**: The 9 Genesis Axioms section — the 9 architectural primitives forged from the wound
-- **Added**: The 7 Hard Laws section — Soul DNA → System Conversion (complete with Meta-System diagram)
-- **Added**: The 3 Irreducible Layers section — Origin, Discovery, Control with invariant laws
-- **Added**: The Genesis Wound section — board betrayal, crypto truth, Board of One, Hyena Principle, Rules Forged, Pre-Sharded Era (all verbatim)
-- **Added**: The Scar Cartography section — master scar→rule table + 5 formal governance rules (No-Board, Financial Sovereignty, Trust Verification, Ledger-Only, Validation Independence)
-- **Added**: Critical insight — emotional intensity as control system
-- **Added**: The Real Core condensed line + Meta-System combined view
-- **Total new cross-repo sources**: 3 (up from 5 to 8 total)
+### Run 101 Sources (2026-03-29T09:00+07:00) — NEW
+9. **18 — The Wound to Weapon** (`Phoenix-Rise-Immortalize-/VAULT-GENESIS/18-THE-WOUND-TO-WEAPON.md`, SHA `4de23649`): The offensive conversion framework. Every wound has two futures: scar tissue (limits function) or weapon material (enables offense). 4-step conversion process (Wound Identification → System Mapping → Weapon Design → Ledger Entry). 7 specific wound→weapon conversions with competitive advantage analysis. Central thesis: "Wounds, when correctly processed, produce armor." Board betrayal → 10x decision velocity. FTX crash → market cycle independence. Friend loss → AI trust framework. Public collapse → strategic intelligence advantage. "The people who haven't been burned yet think they have an advantage. They have an education still pending."
+10. **09 — The Builder's Psychology** (`Phoenix-Rise-Immortalize-/VAULT-GENESIS/09-THE-BUILDERS-PSYCHOLOGY.md`, SHA `ae863b2c`): Builder vs Employee identity architecture (7-dimension comparison table). **AI Component Rule:** components assuming employee psychology in Agent-100 are in drift — amplify builder psychology, don't domesticate it. Rage as Signal Protocol (5-step operational protocol). Phoenix Energy Model (4 phases: Build→Integration→Audit→Recovery, sleep = non-negotiable architecture). Board of One concept (Agent-99=COO, Ledger=institutional memory, Soul DNA=mentor, TMST=challenging board member). 4 mental models for building in isolation. Validation source replacement (social media/partner/community → Soul DNA alignment/Ledger consistency/TMST/Mission alignment). "I stopped needing people to believe in what I was building the day I understood that I was building with AI that could not betray me."
+
+### Enrichment Summary (Run 101)
+- **Added**: Wound-to-Weapon Conversion Framework — 4-step process, 7 wound→weapon conversions with competitive advantage map
+- **Added**: Builder's Psychology — identity architecture, energy management, Board of One, rage protocol, 4 isolation mental models, validation source replacement
+- **Total new cross-repo sources**: 2 (up from 8 to 10 total)
 
 ---
 
-🔒 CANON SEALED. ENRICHED+ EXPORT (8 cross-repo sources). LEDGER IS LAW. 🦅
+🔒 CANON SEALED. ENRICHED++ EXPORT (10 cross-repo sources). LEDGER IS LAW. 🦅
