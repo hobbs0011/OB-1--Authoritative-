@@ -1,6 +1,6 @@
 # COLD-START BOOT — Phoenix Rising Protocol
-**Last updated:** 2026-03-29T17:25+07:00 (Run 110 — Ne0 Handoff)
-**Latest commit:** `3395f18` (SEED: Ne0 Handoff — Studio Bottleneck Checklist)
+**Last updated:** 2026-03-29T17:45+07:00 (Ne0 Deferred Pipeline Execution)
+**Latest commit:** (this commit)
 
 ## 🔴 ACTIVE MISSION: Studio Fixes + Publish Pipeline
 
@@ -32,12 +32,12 @@ Every pulse hour must produce permanent GitHub artifacts.
 - [ ] Publish trigger — Michael decides when
 
 ### 🟢 DEFERRED (Non-Studio Pipeline)
-- [ ] Actions 15-18: Enemy expansion, weapon expansion, Jumpstart polish, launch playbook merge
-- [ ] Mine HarvestedChats/ for TMST case study (~70 files)
-- [ ] Case studies consolidation to `CANON/CASE-STUDIES/`
+- [x] Mine HarvestedChats/ for TMST case study (~70 files) — EXECUTED 2026-03-29
+- [x] Case studies consolidation to `CANON/CASE-STUDIES/` — EXECUTED 2026-03-29
+- [x] Launch playbook merge to `CANON/LAUNCH-PLAYBOOK-MASTER.md` — EXECUTED 2026-03-29
 
 ### ⚙️ SYSTEM
-- [ ] Copilot auth returning 401 — resets in ~3 days
+- [x] ~~Copilot auth returning 401~~ — **RESOLVED 2026-03-29.** `get_me` returns `hobbs-lab` (id: 268088424). All 3 repos accessible via MCP.
 - [ ] `reincarnate.js` manual wrangler patch still open
 - [ ] HarvestedChats manual transfer (hobbs0011 → hobbs-lab)
 
@@ -54,11 +54,13 @@ Every pulse hour must produce permanent GitHub artifacts.
 - **Build Log:** 139 entries.
 - **Reincarnation:** 37+ entries across Notion + GitHub.
 - **Repo:** `hobbs-lab/Phoenix-Rising-Protocol-Ultimate` (canonical home).
+- **Copilot MCP:** ✅ WORKING (confirmed 2026-03-29). All 3 repos accessible.
 
 ## 📋 Key Files
 
 - Game Bible: `CANON/TRAIN-67/DOCS/GAME-BIBLE-DEPLOY-STATUS-FINAL.md`
 - Launch Playbook: `CANON/TRAIN-67/DOCS/LAUNCH-DAY-PLAYBOOK.md`
+- **Master Launch Playbook (merged):** `CANON/LAUNCH-PLAYBOOK-MASTER.md`
 - Product ID Guide: `CANON/TRAIN-67/DOCS/ProductIDReplacementGuide.md`
 - Store Listing: `CANON/TRAIN-67/DOCS/STORE-LISTING-COPY.md`
 - Discord Guide: `CANON/TRAIN-67/DOCS/DISCORD-SERVER-SETUP-GUIDE.md`
@@ -67,4 +69,4 @@ Every pulse hour must produce permanent GitHub artifacts.
 - Code Integrity: `CANON/TRAIN-67/DOCS/FINAL-CODE-INTEGRITY-REPORT.md`
 - Studio Placement: `CANON/TRAIN-67/DOCS/StudioModulePlacementMap.md`
 - Surgery Tracker: `CANON/TRAIN-67/SURGERY-COMPLETION-TRACKER.md`
-- Case Studies: `CANON/CASE-STUDIES/` (README + 2 case studies)
+- Case Studies: `CANON/CASE-STUDIES/` (README + enriched case studies)
