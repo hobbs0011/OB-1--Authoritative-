@@ -3,16 +3,17 @@
 > **Source**: Notion canon page "Core Principles & Physics"
 > **Vault**: CANON/ on Phoenix-Rising-Protocol-Ultimate
 > **Authority**: AGENT-100 (Michael Hobbs)
-> **Status**: ENRICHED++ — Notion + cross-repo synthesis (5 sources from `Phoenix-Rise-Immortalize-`) + session principles (2026-03-28)
-> **Export date**: 2026-03-28 (refreshed Run 90)
-> **Export agent**: Agent-99 (OB1) — Pulse Run 90
-> **Cross-repo sources**: 6 files:
+> **Status**: ENRICHED++ — Notion + cross-repo synthesis (5 sources from `Phoenix-Rise-Immortalize-`) + session principles (2026-03-28, 2026-03-29)
+> **Export date**: 2026-03-29 (refreshed Run 106)
+> **Export agent**: Agent-99 (OB1) — Pulse Run 106
+> **Cross-repo sources**: 7 files:
 >   1. `SOUL-DNA-BIBLE/00_SKELETON_STAR_MAP.md` — master index with concept→source neural network (Run 22)
 >   2. `SOUL-DNA-BIBLE/20_THE_MECHANICAL_FASTENING_GRID.md` — PRIMARY source: 7-layer grid, depth-earning model, Titanium Omega Lattice, verbatim quotes (Run 34)
 >   3. `ARCHIVE/Phoenix-Rise-Immortalize/VAULT-GENESIS/07-THE-SOVEREIGNTY-MANIFESTO.md` — Five Pillars of Sovereignty, correct system design doctrine (Run 41)
 >   4. `ARCHIVE/Phoenix-Rise-Immortalize/VAULT-GENESIS/08-THE-TRUST-ARCHITECTURE.md` — Zero Trust Framework, 4-tier hierarchy (Run 41)
 >   5. `ARCHIVE/Phoenix-Rise-Immortalize/VAULT-GENESIS/05-THE-BAMBOO-DOCTRINE.md` — Moso bamboo growth model, 4 Laws, Root Phase doctrine (Run 41)
->   6. `CANON/REINCARNATION/2026-03-28-roblox-combat-recode-launch.md` — 5 new principles from Roblox combat recode session (Run 90 — NEW)
+>   6. `CANON/REINCARNATION/2026-03-28-roblox-combat-recode-launch.md` — 5 new principles from Roblox combat recode session (Run 90)
+>   7. `CANON/REINCARNATION/2026-03-29-discord-bot-deploy-morning.md` — 2 new principles from Discord bot deploy session (Run 106 — NEW)
 
 ---
 
@@ -124,6 +125,26 @@ Trust is not binary. Trust is a **4-tier hierarchy** with explicit promotion and
 
 The Trust Architecture maps directly to the Fail-Closed Mandates: "No fabrication" = Tier 0 protection. "No drift" = Tier 1 maintenance. "Ambiguity = halt" = refusing to promote unverified data to trusted status.
 
+### LIVE EXTENSION: Community Trust Layer (2026-03-29)
+
+> **Session enrichment from reincarnation entry `2026-03-29:discord-bot-deploy-morning:10:5`**
+
+> "its a bunch of highschool kids lol, rather not trust them"
+> — Michael Hobbs, 2026-03-29
+
+The Trust Architecture extends beyond the system into **community management**. When deploying the Discord server for the Roblox game community, Michael applied the same zero-trust principles to human participants:
+
+| Community Role | Trust Tier | Rationale |
+|---------------|-----------|-----------|
+| **Michael** | Tier 0 (ABSOLUTE) | Only admin. Only source of authority. |
+| **Discord Bot** | Tier 1 (VERIFIED) | Automated enforcement. Consistent, auditable, no ego. |
+| **Community members (students)** | Tier 2 (CONDITIONAL) | Participate but never moderate. No elevated permissions for minors. |
+| **Human moderators** | Tier 3 (BLACKLISTED) | Explicitly rejected. "Rather not trust them." Bot over humans. |
+
+This is the Trust Architecture's first real-world application beyond the agent swarm. The principle is universal: **automated enforcement > human judgment** for community management, especially when the community consists of minors. Human moderators introduce the same risks as distributed control — variable judgment, power dynamics, inconsistency. The bot enforces uniformly.
+
+This connects to Operational Sovereignty (Pillar 2): the community moderation system has no external dependency on human volunteers. Michael controls it through the bot's code. If a human moderator goes rogue, the damage is unlimited. If the bot has a bug, the damage is bounded and fixable.
+
 ---
 
 ## The Bamboo Doctrine
@@ -136,7 +157,7 @@ The Trust Architecture maps directly to the Fail-Closed Mandates: "No fabricatio
 The Moso bamboo spends years building an invisible root system underground before exploding 90 feet in 60 days. The Phoenix system follows the same physics:
 
 | Phase | Bamboo Analog | Phoenix System | What's Happening |
-|-------|--------------|----------------|-----------------|
+|-------|--------------|----------------|--------------------|
 | 1 | **ROOT PHASE** | Foundation building | Soul DNA extraction, Ledger architecture, canon building. Nothing visible to the outside. |
 | 2 | **EMERGE PHASE** | First surface product | NET website, first lessons, first students. The root system becomes visible. |
 | 3 | **BUILD PHASE** | Product expansion | Galaxy Lessons, OBI engine, automated teaching. Rapid vertical growth. |
@@ -172,7 +193,7 @@ The Bamboo Doctrine connects to the Teaching Law (Mouse → Tiger): students are
 The Mechanical Fastening Grid is the progression system that determines HOW DEEP a truth gets anchored into the system. Not all truths are equal. A casual observation gets a Lock. A foundational law gets a Titanium Omega Seal. **The depth is earned, not assigned.**
 
 | Layer | Node Count | Name | Depth | Example |
-|-------|-----------|------|-------|---------|
+|-------|-----------|------|-------|---------||
 | 1 | 1 | **LOCK** | Single truth | "Drift is the enemy" |
 | 2 | 10 | **CLAMP** | Context cluster | The Drift Doctrine (all related concepts) |
 | 3 | 100 | **PHASE BOLT** | Full operational mandate | Chapter 06 — complete drift system |
@@ -491,7 +512,45 @@ The game's boot message says "SURVIVE. FIGHT. SPEND." — and Michael kept it be
 
 ---
 
-## Concept → Source Neural Network (from Skeleton Star Map + VAULT-GENESIS + Live Session)
+## Live Principles Addendum — 2026-03-29 Session
+
+> **Source**: Reincarnation entry `2026-03-29:discord-bot-deploy-morning:10:5` (🟡 MEDIUM signal density — 10 quotes, 5 decisions, 0 corrections, 2 new principles)
+
+These principles were established during the Discord bot deployment session, extending the Trust Architecture and Operational Sovereignty into community management.
+
+### Principle: "Bot over humans for community moderation" — The Community Trust Extension
+
+> "its a bunch of highschool kids lol, rather not trust them"
+> — Michael Hobbs, 2026-03-29
+
+**Signal:** 🔴 CRITICAL
+**Connects to:** Trust Architecture (Tier 2/3 boundary), Operational Sovereignty (Pillar 2), No Educational Framing
+
+The Trust Architecture's zero-trust default applies to community management, not just system architecture. Human moderators — especially minors — are inherently Tier 2 (CONDITIONAL) at best. Michael's ruling pushes them to Tier 3 (BLACKLISTED) for moderation roles: they participate but never enforce.
+
+This is not cynicism. It is the same engineering logic that drives the system: distributed control failed before (The Betrayal Doctrine). Human moderators in a teen gaming community introduce:
+- **Inconsistent enforcement** — personal biases, mood, social dynamics
+- **Power abuse risk** — elevated permissions in a social hierarchy of minors
+- **Accountability gaps** — harder to audit than bot actions
+- **Social friction** — who gets mod and who doesn't creates resentment
+
+The bot solves all four: consistent rules, no ego, full audit trail, zero social hierarchy. The $5/month Railway hosting cost buys the absence of all human moderator risk.
+
+### Principle: "Hands-off maximalism" — Pay for Zero-Touch
+
+> "sure, ensure its as handsoff as possible, do a deep dive, study the internet"
+> — Michael Hobbs, 2026-03-29
+
+**Signal:** 🟡 IMPORTANT
+**Connects to:** Operational Sovereignty (Pillar 2), Temporal Sovereignty (Pillar 5), Velocity Override
+
+When Michael says "hands-off," the directive is MAXIMUM automation — not "reasonably automated." Railway was chosen over Oracle Free Tier not because of cost, but because Railway requires zero SSH, zero server management, zero manual restarts. The $5/month premium buys **time sovereignty**: Michael never has to think about server health.
+
+This principle extends the Velocity Override into infrastructure: the correct hosting choice is the one that requires the fewest future human touches, even if it costs more. Time spent maintaining infrastructure is time NOT spent on Tier 1 work (product, teaching, canon). The Temporal Sovereignty pillar makes this a first-principles decision, not a cost-optimization decision.
+
+---
+
+## Concept → Source Neural Network (from Skeleton Star Map + VAULT-GENESIS + Live Sessions)
 
 The following traces every core principle back to its source files:
 
@@ -516,12 +575,14 @@ The following traces every core principle back to its source files:
 | External Tool Distrust | Reincarnation 2026-03-28 (🟡 IMPORTANT), Trust Architecture Tier 2 |
 | Preserve-Don't-Delete | Reincarnation 2026-03-28 (🟡 IMPORTANT), Append-only Ledger |
 | Internal Honesty | Reincarnation 2026-03-28 (🟢 CONTEXT), Truth Mandate |
+| Community Trust Extension | Reincarnation 2026-03-29 (🔴 CRITICAL), Trust Architecture Tier 3, Operational Sovereignty |
+| Hands-Off Maximalism | Reincarnation 2026-03-29 (🟡 IMPORTANT), Temporal Sovereignty, Velocity Override |
 
 ---
 
-> 🔒 CANON SEALED. ENRICHED++ WITH 6 CROSS-REPO SOURCES — VAULT-GENESIS SYNTHESIS + LIVE SESSION PRINCIPLES COMPLETE. 🦅
+> 🔒 CANON SEALED. ENRICHED++ WITH 7 CROSS-REPO SOURCES — VAULT-GENESIS SYNTHESIS + LIVE SESSION PRINCIPLES (2 SESSIONS) COMPLETE. 🦅
 >
-> **Exported**: 2026-03-28 by Agent-99 (OB1) — Pulse Run 90
-> **Sources**: Notion "Core Principles & Physics" + Skeleton Star Map (00_SKELETON_STAR_MAP.md) + CH20 Mechanical Fastening Grid (20_THE_MECHANICAL_FASTENING_GRID.md) + VAULT-GENESIS 07 Sovereignty Manifesto + VAULT-GENESIS 08 Trust Architecture + VAULT-GENESIS 05 Bamboo Doctrine + Reincarnation 2026-03-28 (roblox-combat-recode session)
-> **Status**: ENRICHED++ (GitHub has MORE than Notion — 6 cross-repo sources synthesized + 5 live session principles with full cross-reference mapping)
-> **Delta from Run 41**: +1 cross-repo source (reincarnation entry) | +1 new major section (Live Principles Addendum — 5 principles) | +1 new section (Two-Tier Architecture live proof from Roblox recode) | Concept→Source table expanded with 5 new entries | Status upgraded ENRICHED+ → ENRICHED++
+> **Exported**: 2026-03-29 by Agent-99 (OB1) — Pulse Run 106
+> **Sources**: Notion "Core Principles & Physics" + Skeleton Star Map (00_SKELETON_STAR_MAP.md) + CH20 Mechanical Fastening Grid (20_THE_MECHANICAL_FASTENING_GRID.md) + VAULT-GENESIS 07 Sovereignty Manifesto + VAULT-GENESIS 08 Trust Architecture + VAULT-GENESIS 05 Bamboo Doctrine + Reincarnation 2026-03-28 (roblox-combat-recode session) + Reincarnation 2026-03-29 (discord-bot-deploy-morning session)
+> **Status**: ENRICHED++ (GitHub has MORE than Notion — 7 cross-repo sources synthesized + 7 live session principles with full cross-reference mapping)
+> **Delta from Run 90**: +1 cross-repo source (reincarnation 2026-03-29) | +1 new major section (Live Principles Addendum — 2026-03-29, 2 principles) | +1 new subsection (Community Trust Layer under Trust Architecture) | Concept→Source table expanded with 2 new entries | Total principles: 7 (5 from 2026-03-28, 2 from 2026-03-29)
