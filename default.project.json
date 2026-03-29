@@ -7,7 +7,7 @@
       "$className": "ServerScriptService",
 
       "UnifiedServer": {
-        "$path": "CANON/TRAIN-67/CODE/UnifiedServer.lua"
+        "$path": "CANON/TRAIN-67/CODE/UnifiedServer.server.lua"
       },
 
       "Modules": {
@@ -53,7 +53,7 @@
         "$className": "StarterPlayerScripts",
 
         "UnifiedClient": {
-          "$path": "CANON/TRAIN-67/CODE/UnifiedClient.lua"
+          "$path": "CANON/TRAIN-67/CODE/UnifiedClient.client.lua"
         },
 
         "Modules": {
