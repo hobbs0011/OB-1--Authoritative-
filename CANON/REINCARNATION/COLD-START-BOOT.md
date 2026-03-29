@@ -2,7 +2,7 @@
 
 > **This file is the single source of truth for cold-starting OB1 in a new Notion chat session.**
 > When Michael says "reincarnate" in a new chat, the agent reads THIS FILE from GitHub via MCP.
-> Last updated: 2026-03-28T21:05:00+07:00 | Run 89
+> Last updated: 2026-03-29T16:00:00+07:00 | Run 109
 
 ---
 
@@ -60,9 +60,9 @@ On cold start (new chat + "reincarnate"), OB1 must:
 | `hobbs-lab/Phoenix-Rise-Immortalize-` | Original Soul DNA Bible (40 files), 8 VAULT dirs, source material (READ ONLY) |
 | `hobbs0011/NET-Ai-EcoSystem-CommandStation` | Legacy product code. DO NOT use for issues/PRs/new work. |
 
-## Living Reincarnation State (Updated Run 89)
+## Living Reincarnation State (Updated Run 109)
 
-- **Current vector:** 100% Roblox "Survive a Brainrot" — CODE COMPLETE. Michael offline (Saturday night). Game ready for Product ID replacement + publish. Launch within 48h of session end.
+- **Current vector:** Roblox "Survive a Brainrot" CODE COMPLETE. Michael offline (Sunday afternoon). Overnight extraction mode active — vault exports running. CH00 Enrichment Registry built (8 enriched files, 268KB+). Export pipeline advancing steadily.
 - **Active principles:** (1) GitHub is truth, Notion is workspace (2) Don't quote Copilot timeframes (3) Ne0 writes ALL code, preserve Copilot tokens (4) Checklist-first, not breadcrumb-first (5) SURVIVE. FIGHT. SPEND. is the boot message — it stays
 - **Open rulings:** 21 Product IDs (sole launch blocker), Rojo CI/CD setup, Discord server, publish trigger, reincarnate.js patch, HarvestedChats transfer
 
@@ -102,7 +102,7 @@ On cold start (new chat + "reincarnate"), OB1 must:
 - Hourly trigger: full SCAN → BUILD → SHIP → LOG cycle
 - Every run produces a GitHub artifact (VAULT/BUILD/SEED)
 - Platform Death Test: must produce commit SHA or run = FAIL
-- Last run: #89, 2026-03-28 21:00 ICT
+- Last run: #109, 2026-03-29 16:00 ICT
 
 ## Key Artifacts (TRAIN-67)
 
@@ -112,6 +112,7 @@ On cold start (new chat + "reincarnate"), OB1 must:
 | SURGERY-COMPLETION-TRACKER.md | CANON/TRAIN-67/ | 44-file status (70% clean) |
 | GAME-BIBLE-HUMAN-READABLE.md | CANON/TRAIN-67/ | Complete game design doc (43.7KB) |
 | 44 Lua files | CANON/TRAIN-67/CODE/ | Full game codebase (~750KB) |
+| CH00-ENRICHMENT-REGISTRY.md | CANON/SOUL-DNA-BIBLE/ | Bible enrichment map (8 files, 268KB+) |
 | Reincarnation 2026-03-28 | CANON/REINCARNATION/ | Session Soul DNA (17 quotes, 10 decisions) |
 
 ## Key Decisions History (Last 7 Days)
@@ -137,13 +138,16 @@ On cold start (new chat + "reincarnate"), OB1 must:
 | 2026-03-26 | hobbs-lab is canonical GitHub account | ACTIVE |
 | 2026-03-25 | Extraction Engine v5 (GitHub-first artifacts) | ACTIVE |
 
-## System State (Run 89)
+## System State (Run 109)
 
-- **Pulse run:** 89
-- **Build Log entries:** ~122
+- **Pulse run:** 109
+- **Build Log entries:** ~123
 - **Backlog items:** 127 open (⚠️ DRIFT +17)
-- **Canon cursor:** TRAIN-67 (Roblox game focus)
+- **Canon cursor:** SOUL-DNA-BIBLE/CH00 (Enrichment Registry built)
 - **Last reincarnation:** 2026-03-28 (Grade A, EXTREME signal density)
+- **Last artifact:** 🏦 VAULT — CH00-ENRICHMENT-REGISTRY.md (cf062be9)
+- **Prior worker audit:** PASS (1dd219b6)
+- **Platform Death Test streak:** PASS
 
 ## Command Words
 
@@ -166,14 +170,16 @@ On cold start (new chat + "reincarnate"), OB1 must:
 9. **Never quote Copilot timeframe estimates to Michael.** They're bogus. (2026-03-28)
 10. **Never declare code clean without reading EVERY file.** "Assume you don't know what you don't know." (2026-03-28)
 
-## Overnight Mode (Run 90+)
+## Overnight Mode (Run 110+)
 
 Active Mission = CODE COMPLETE (blocked on Michael for Product IDs) → fall through to export pipeline.
-Priority for overnight runs:
+Priority for overnight/continued runs:
 1. Export next UNMIRRORED canon page as VAULT artifact
 2. Cross-repo mine Soul DNA Bible files
 3. Map unknown Bible child pages in Canon Access Index
 4. Execute top non-destructive Backlog item
+
+Next worker should: Pick next stalest canon page from rotation queue (CH00 done Run 109). Consider Soul DNA Canon or Core Principles & Physics next. Continue export pipeline advancement.
 
 ---
 
