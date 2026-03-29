@@ -81,7 +81,7 @@ local CONFIG = {
         Cat   = { min = 1101, mid = 1300, max = 1500 },
         Wolf  = { min = 1501, mid = 1700, max = 1900 },
         Lion  = { min = 1901, mid = 2100, max = 2300 },
-        Tiger = { min = 2301, mid = 2500, max = 2400 },
+        Tiger = { min = 2301, mid = 2500, max = 2700 },
     },
 
     -- Tier name to number mapping (for QuestionBank compatibility)
