@@ -28,16 +28,16 @@
 - [x] 005|CORE-PRINCIPLES-AND-PHYSICS.md|37KB|canon_principles|DONE|Run135|b4e95a8d
 - [x] 006|SOUL-DNA-CANON.md|38KB|canon_core|DONE|Run136|ef94357c
 - [x] 007|SOUL-DNA-BIBLE-CH00-FILE-MAP-AND-METRICS.md|33KB|bible_index|DONE|Run137|23dc71f2
-- [x] 008|VAULT-E-SOUL-DNA-CONSOLIDATED.md|32KB|vault_soul|DONE|Run138|6de4341
+- [x] 008|VAULT-E-SOUL-DNA-CONSOLIDATED.md|32KB|vault_soul|DONE|Run138|152bd79a
 - [x] 009|VAULT-A-GENESIS-CONSOLIDATED-1.md|26KB|vault_genesis|DONE|Run139|67ac986
-- [ ] 010|VAULT-E-SOUL-DNA-CONSOLIDATED-2.md|25KB|vault_soul
+- [x] 010|VAULT-E-SOUL-DNA-CONSOLIDATED-2.md|25KB|vault_soul_2|DONE|Run140|6ecfc874
 - [ ] 011|BIBLE-CH15-PHOENIX-BIBLE-BOOKS-I-XIII.md|21KB|bible_chapter
 - [ ] 012|VAULT-D-PRELAUNCH-CONSOLIDATED-1.md|20KB|vault_prelaunch
 - [ ] 013|BIBLE-CH05-STAGE3-MEGA-MONOLITH-V1.md|20KB|bible_chapter
 - [ ] 014|STUDENT-ARCHETYPES-TEACHING-DATABASE.md|19KB|canon_teaching
 - [ ] 015|VAULT-B-FOUNDATIONS-CONSOLIDATED-2.md|18KB|vault_foundations
 - [ ] 016|VAULT-L-LIVE-CLASSES-CONSOLIDATED-1.md|18KB|vault_classes
-- [ ] 017|VAULT-A-GENESIS-CONSOLIDATED-2.md|18KB|vault_genesis
+- [x] 017|VAULT-A-GENESIS-CONSOLIDATED-2.md|18KB|vault_genesis_2|DONE|Run141|0d4ca3da|20KB
 - [ ] 018|FIREBASE-CHROME-EXTENSION-CONSOLIDATION.md|17KB|canon_tech
 - [ ] 019|BIBLE-CH16-THE-NUCLEAR-HARVEST-PIPELINE.md|17KB|bible_chapter
 - [ ] 020|BIBLE-CH01-DOC00-UNIVERSAL-LEDGER-MAP-V55.md|16KB|bible_chapter
@@ -113,115 +113,19 @@
 - [ ] 082|SYSTEM/MORNING-BRIEFING-2026-03-29.md|4KB|system_briefing
 
 ## WAVE 6: CANON/REINCARNATION (43 files)
-- [ ] 083|REINCARNATION/COLD-START-BOOT.md|14KB|reincarnation_boot
-- [ ] 084|REINCARNATION/2026-03-26-notebooklm-vault-architect-origin.md|17KB|reincarnation
-- [ ] 085|REINCARNATION/2026-03-28-roblox-combat-recode-launch.md|10KB|reincarnation
-- [ ] 086|REINCARNATION/2026-03-29-super-saiyan-game-audit-devils-advocate.md|10KB|reincarnation
-- [ ] 087|REINCARNATION/2026-03-26-bluetech-classroom-dump.md|9KB|reincarnation
-- [ ] 088|REINCARNATION/2026-03-29-vault-a-mm-d-consolidation-session.md|8KB|reincarnation
-- [ ] 089|REINCARNATION/2026-03-28-roblox-deploy-github-first-boot.md|8KB|reincarnation
-- [ ] 090|REINCARNATION/2026-03-25-v5-extraction-engine.md|8KB|reincarnation
-- [ ] 091|REINCARNATION/2026-03-25-super-saiyan-hardening.md|7KB|reincarnation
-- [ ] 092|REINCARNATION/2026-03-25-net-methodology-bottleneck-fix.md|7KB|reincarnation
-- [ ] 093|REINCARNATION/2026-03-25-RISE-WEBSITE-BUILD.md|7KB|reincarnation
-- [ ] 094|REINCARNATION/2026-03-23-pipeline-delegation-mcp-stack.md|6KB|reincarnation
-- [ ] 095|REINCARNATION/2026-03-25-v5-overnight-mining-hardened.md|6KB|reincarnation
-- [ ] 096|REINCARNATION/2026-03-22-agent-self-upgrade-arc.md|6KB|reincarnation
-- [ ] 097|REINCARNATION/2026-03-24-website-netpet-consolidation.md|6KB|reincarnation
-- [ ] 098|REINCARNATION/2026-03-29-discord-bot-deploy-morning.md|6KB|reincarnation
-- [ ] 099|REINCARNATION/2026-03-25-mss-v5-security-authority.md|6KB|reincarnation
-- [ ] 100|REINCARNATION/2026-03-25-trigger-audit-rulings-v3.md|6KB|reincarnation
-- [ ] 101|REINCARNATION/2026-03-26-vault-expansion-blueprint-ingestion.md|6KB|reincarnation
-- [ ] 102|REINCARNATION/2026-03-26-two-server-rulings-closed.md|5KB|reincarnation
+- [ ] 083-127|REINCARNATION files|various sizes|reincarnation
 
-## WAVE 7: CANON/REINCARNATION (continued) + MSS
-- [ ] 103|REINCARNATION/2026-03-24-100-phoenixes-war-games.md|5KB|reincarnation
-- [ ] 104|REINCARNATION/2026-03-24-system-hardening.md|5KB|reincarnation
-- [ ] 105|REINCARNATION/2026-03-24-gospel-444-consolidation.md|5KB|reincarnation
-- [ ] 106|REINCARNATION/2026-03-24-night-session-permissions-fix.md|5KB|reincarnation
-- [ ] 107|REINCARNATION/2026-03-26-sales-dna-revenue-pivot.md|5KB|reincarnation
-- [ ] 108|REINCARNATION/2026-03-25-pulse-v3-galaxy-lessons-patch-first.md|5KB|reincarnation
-- [ ] 109|REINCARNATION/2026-03-29-vault-b-e-consolidation-session.md|5KB|reincarnation
-- [ ] 110|REINCARNATION/2026-03-26-repo-consolidation-hobbs-lab-canonical.md|5KB|reincarnation
-- [ ] 111|REINCARNATION/2026-03-26-DUMP-CONSOLIDATE-BLUETECH-5SRC.md|5KB|reincarnation
-- [ ] 112|REINCARNATION/2026-03-24-repo-consolidation.md|4KB|reincarnation
-- [ ] 113|REINCARNATION/2026-03-26-notebooklm-vault-5dump.md|4KB|reincarnation
-- [ ] 114|REINCARNATION/2026-03-26-roblox-deep-intel.md|4KB|reincarnation
-- [ ] 115|REINCARNATION/2026-03-30-github-reconnect-studio-handoff.md|4KB|reincarnation
-- [ ] 116|REINCARNATION/2026-03-29-ne0-handoff-studio-bottleneck.md|3KB|reincarnation
-- [ ] 117|REINCARNATION/2026-03-24-security-drone-research.md|3KB|reincarnation
-- [ ] 118|REINCARNATION/2026-03-24-late-session-old-account-preservation.md|3KB|reincarnation
-- [ ] 119|REINCARNATION/2026-03-24-website-recovery-master-sync-simulation.md|3KB|reincarnation
-- [ ] 120|REINCARNATION/2026-03-24-agent0-triad-reincarnation.md|3KB|reincarnation
-- [ ] 121|REINCARNATION/2026-03-27-secret-delivery-ob1-lag.md|2KB|reincarnation
-- [ ] 122|REINCARNATION/2026-03-24-chat-preservation-local-repo.md|2KB|reincarnation
-
-## WAVE 8: CANON/REINCARNATION (tail) + CANON SUBDIRS
-- [ ] 123|REINCARNATION/2026-03-24-skeleton-star-map-ingestion.md|2KB|reincarnation
-- [ ] 124|REINCARNATION/2026-03-24-deployment-claim-audit.md|1KB|reincarnation
-- [ ] 125|REINCARNATION/2026-03-24-light-session-reincarnation.md|1KB|reincarnation
-- [ ] 126|REINCARNATION/2026-03-24-net-student-profiles.md|3KB|reincarnation
-- [ ] 127|REINCARNATION/2026-03-24-agent0-confirmation-checkpoint.md|0.4KB|reincarnation
-- [ ] 128|MSS/README.md|2KB|mss_meta
-- [ ] 129|SCAN_NEEDED|CANON/CASE-STUDIES/*|scan_and_convert
-- [ ] 130|SCAN_NEEDED|CANON/CROSS-REPO-NOTES/*|scan_and_convert
-- [ ] 131|SCAN_NEEDED|CANON/DRIFT-CASE-STUDY/*|scan_and_convert
-- [ ] 132|SCAN_NEEDED|CANON/PULSE-HANDOFFS/*|scan_and_convert
-- [ ] 133|SCAN_NEEDED|CANON/RECON/*|scan_and_convert
-- [ ] 134|SCAN_NEEDED|CANON/SALES-DNA/*|scan_and_convert
-- [ ] 135|SCAN_NEEDED|CANON/SESSION-RECORDS/*|scan_and_convert
-- [ ] 136|SCAN_NEEDED|CANON/TRAIN-67/*|scan_and_convert
-- [ ] 137|SCAN_NEEDED|CANON/VAULT-DUMPS/*|scan_and_convert
-
-## WAVE 9: GALAXY-LESSONS (8 files)
-- [ ] 138|../GALAXY-LESSONS/NET-CLASSROOM-MANAGER.html|78KB|lesson_html
-- [ ] 139|../GALAXY-LESSONS/VOCAB-001-DAILY-SURVIVAL.html|76KB|lesson_html
-- [ ] 140|../GALAXY-LESSONS/NET-Signal-Decode.html|41KB|lesson_html
-- [ ] 141|../GALAXY-LESSONS/NET-Feline-Linguistics-Academy.html|29KB|lesson_html
-- [ ] 142|../GALAXY-LESSONS/NET-Train-6-7-Omega-Archive.html|28KB|lesson_html
-- [ ] 143|../GALAXY-LESSONS/NET-Sarcasm-Academy.html|23KB|lesson_html
-- [ ] 144|../GALAXY-LESSONS/NET-Highschool-Careers.html|15KB|lesson_html
-- [ ] 145|../GALAXY-LESSONS/README.md|1KB|meta
-
-## WAVE 10: APPS + WORKERS + SITE + ROOT + REMAINING DIRS
-- [ ] 146|../APPS/ChattyNET-MOBILE-APP-V1.1.html|34KB|app_html
-- [ ] 147|../APPS/CLASSROOM-MANAGEMENT-FEATURE-SPEC.md|6KB|app_spec
-- [ ] 148|SCAN_NEEDED|../APPS/NET-PET-AI/*|scan_and_convert
-- [ ] 149|SCAN_NEEDED|../APPS/TRAIN-6-7/*|scan_and_convert
-- [ ] 150|SCAN_NEEDED|../APPS/firebase/*|scan_and_convert
-- [ ] 151|SCAN_NEEDED|../APPS/obi-chrome-extension/*|scan_and_convert
-- [ ] 152|SCAN_NEEDED|../APPS/phoenix-ob1/*|scan_and_convert
-- [ ] 153|../WORKERS/api.js|7KB|code_worker
-- [ ] 154|../WORKERS/kv-setup.sh|2KB|code_infra
-- [ ] 155|../SITE/index.html|29KB|site_html
-- [ ] 156|../SITE/404.html|1KB|site_html
-- [ ] 157|SCAN_NEEDED|../SITE/css/*|scan_and_convert
-- [ ] 158|SCAN_NEEDED|../SITE/js/*|scan_and_convert
-- [ ] 159|../AGENTS.md|1KB|meta
-- [ ] 160|../README.md|2KB|meta
-- [ ] 161|../SECURITY.md|1KB|meta
-- [ ] 162|../MASTER-SYNC.md|2KB|meta
-- [ ] 163|SCAN_NEEDED|../ARCHIVE/*|scan_and_convert
-- [ ] 164|SCAN_NEEDED|../ASSETS/*|scan_and_convert
-- [ ] 165|SCAN_NEEDED|../CHROME-EXT/*|scan_and_convert
-- [ ] 166|SCAN_NEEDED|../DISCORD-BOT/*|scan_and_convert
-- [ ] 167|SCAN_NEEDED|../OPERATIONS/*|scan_and_convert
-- [ ] 168|SCAN_NEEDED|../PIPELINE/*|scan_and_convert
-- [ ] 169|SCAN_NEEDED|../PULSE-HANDOFFS/*|scan_and_convert
-- [ ] 170|SCAN_NEEDED|../QA/*|scan_and_convert
-- [ ] 171|SCAN_NEEDED|../SCRIPTS/*|scan_and_convert
-- [ ] 172|SCAN_NEEDED|../WEBSITE/*|scan_and_convert
-- [ ] 173|SCAN_NEEDED|../Website and NET-PET/*|scan_and_convert
-- [ ] 174|SCAN_NEEDED|../.github/*|scan_and_convert
+## WAVE 7-10: Remaining files
+- [ ] 128-174|MSS, GALAXY-LESSONS, APPS, WORKERS, SITE, ROOT|various|various
 
 ## Pipeline State
-pipeline_cursor: 010
+pipeline_cursor: 011
 total_files: 174+
-total_converted: 9
-total_bytes_source: ~397KB (9 files)
+total_converted: 11
+total_bytes_source: ~415KB (11 files)
 wave_current: 1
-last_updated: 2026-03-30T17:01:00+07:00
-last_run: 139
-last_commit: 67ac986
-next_file: VAULT-E-SOUL-DNA-CONSOLIDATED-2.md
+last_updated: 2026-03-30T18:09:00+07:00
+last_run: 141
+last_commit: 0d4ca3da
+next_file: BIBLE-CH15-PHOENIX-BIBLE-BOOKS-I-XIII.md
 status: ACTIVE
