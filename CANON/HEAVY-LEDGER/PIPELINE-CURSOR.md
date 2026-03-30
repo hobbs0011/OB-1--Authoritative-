@@ -1,23 +1,20 @@
-# Heavy Ledger Pipeline Cursor
+# Heavy Ledger Conversion Pipeline — Cursor
 
-**Current Position:** 008
-**Last Converted:** SOUL-DNA-BIBLE-CH00-FILE-MAP-AND-METRICS.json (Pipeline #007)
-**Last Commit:** 23dc71f294b3efc59f42c25f531dfcb694baf847
-**Last Run:** Run 137 — 2026-03-30T16:37+07:00
-**Total Converted:** 7/174+
+**Current cursor:** 009
+**Last completed:** 008 — VAULT-E-SOUL-DNA-CONSOLIDATED.json (22KB, commit `152bd79a`)
+**Next target:** 009 — VAULT-E-SOUL-DNA-CONSOLIDATED-2.md (25KB, vault_soul_2)
+**Total converted:** 8/174+
+**Run:** 138 (2026-03-30 17:00 ICT)
 
-## Conversion Log
+## Completed
 
-| # | Source File | JSON Output | Commit SHA | Run | Size |
-|---|---|---|---|---|---|
-| 001 | ALPHA-OMEGA-SOUL-DNA-GOVERNANCE-CANON.md (61KB) | ALPHA-OMEGA-SOUL-DNA-GOVERNANCE-CANON.json | e56adad3 | 132 | 24KB |
-| 002 | SOUL-DNA-DEEP-DIVE.md (45KB) | SOUL-DNA-DEEP-DIVE.json | e3c233bb | 133 | ~28KB |
-| 003 | GOSPEL-444-TEACHING-METHODS-CONSOLIDATED.md (58KB) | GOSPEL-444-TEACHING-METHODS-CONSOLIDATED.json | fa5b8d8a | 134 | 20KB |
-| 004 | CORE-PRINCIPLES-AND-PHYSICS.md (37KB) | CORE-PRINCIPLES-AND-PHYSICS.json | b4e95a8d | 135 | 20KB |
-| 005 | NET-TEACHING-METHODOLOGY.md (41KB) | NET-TEACHING-METHODOLOGY.json | 0c556f2f | 136a | 20KB |
-| 006 | SOUL-DNA-CANON.md (38KB) | SOUL-DNA-CANON.json | ef94357c | 136b | 20KB |
-| 007 | SOUL-DNA-BIBLE-CH00-FILE-MAP-AND-METRICS.md (33KB) | SOUL-DNA-BIBLE-CH00-FILE-MAP-AND-METRICS.json | 23dc71f2 | 137 | 31KB |
-
-## Next Target (#008)
-
-VAULT-E-SOUL-DNA-CONSOLIDATED.md (32KB, vault_soul)
+| # | Source File | Size | JSON Size | Commit | Run |
+|---|-----------|------|-----------|--------|-----|
+| 001 | ALPHA-OMEGA-SOUL-DNA-GOVERNANCE-CANON.md | 61KB | 24KB | `e56adad3` | 132 |
+| 002 | SOUL-DNA-DEEP-DIVE.md | 45KB | 29KB | `b4e95a8d` | 133 |
+| 003 | CORE-PRINCIPLES-AND-PHYSICS.md | 37KB | 20KB | `4a90c7e1` | 134 |
+| 004 | GOSPEL-444-TEACHING-METHODS-CONSOLIDATED.md | 58KB | 20KB | `1e30b8a2` | 135 |
+| 005 | NET-TEACHING-METHODOLOGY.md | 41KB | 20KB | `0c556f2f` | 136 |
+| 006 | SOUL-DNA-CANON.md | 38KB | 20KB | `ef94357c` | 136b |
+| 007 | SOUL-DNA-BIBLE-CH00-FILE-MAP-AND-METRICS.md | 33KB | 31KB | `23dc71f2` | 137 |
+| 008 | VAULT-E-SOUL-DNA-CONSOLIDATED.md | 32KB | 22KB | `152bd79a` | 138 |
