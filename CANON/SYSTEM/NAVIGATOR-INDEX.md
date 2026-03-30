@@ -1,7 +1,7 @@
 # Navigator Index — Agent-Readable Routing Table
 
 > **Purpose:** Dynamic routing table so OB1 never gets stuck on "can't find page." Updated every time a new artifact is created.
-> **Last exported:** 2026-03-26T05:00+07:00 (Pulse Run 26)
+> **Last exported:** 2026-03-30T23:00+07:00 (Pulse Run 154)
 > **Companion file:** `CANON/SYSTEM/CANON-ACCESS-INDEX.md` (synced block bypass + content routing)
 
 ---
@@ -17,7 +17,7 @@
 | Soul DNA Canon | ✅ SYNCED | `CANON/SOUL-DNA-CANON.md` (`73571c1`) |
 | Gospel 444 & Teaching Methods | ✅ ENRICHED | `CANON/GOSPEL-444-TEACHING-METHODS-CONSOLIDATED.md` (44.6KB, `5790e86`) |
 | NET Teaching Methodology | ✅ SYNCED | `CANON/NET-TEACHING-METHODOLOGY.md` (`879011ff`) |
-| Reincarnation Log | Container | 25+ entries in `CANON/REINCARNATION/` |
+| Reincarnation Log | Container | 43 entries in `CANON/REINCARNATION/` |
 
 ---
 
@@ -26,8 +26,8 @@
 | Page | Purpose |
 |------|---------|
 | Phoenix HQ | Root workspace hub |
-| Backlog DB | Task tracking (127 open as of Run 25) |
-| Build Log DB | Work audit trail (83 entries as of Run 25) |
+| Backlog DB | Task tracking |
+| Build Log DB | Work audit trail (178+ entries as of Run 154) |
 | Assets & Accounts DB | Tool/platform/account registry |
 | Tool Stack | Synced blocks — use Assets DB or `CANON/TOOL-STACK-ARSENAL-2026.md` |
 | Pulse Log | Synced blocks — use Pulse State Mirror in Navigator Index |
@@ -67,6 +67,20 @@
 
 ---
 
+## Heavy Ledger Conversion Pipeline
+
+| Status | Detail |
+|--------|--------|
+| Active Mission | HEAVY_LEDGER_CONVERSION (IMMOVABLE #1) |
+| Pipeline file | `CANON/HEAVY-LEDGER/CONVERSION-PIPELINE.md` |
+| Total files | 174+ |
+| Converted | 25 (Wave 1: 20/20 ✅, Wave 2: 5/20) |
+| Current cursor | 025 |
+| Next target | `NOTEBOOKLM-VAULT-ARCHITECT-OF-AGENT99-FIRST-250-LAYERS.md` (16KB) |
+| Wave 2 done | #021-#024 |
+
+---
+
 ## Train 6-7 Game Vault
 
 | Artifact | GitHub Path |
@@ -78,40 +92,18 @@
 
 ---
 
-## Reincarnation Records (25+ entries)
+## Reincarnation Records (43 entries)
 
-### 2026-03-22
-- `CANON/REINCARNATION/2026-03-22-agent-self-upgrade-arc.md` (6.2KB)
+### Latest (2026-03-30)
+- `2026-03-30-marketing-lane-dump-intake.md` (commit `c7a1f917`)
+- `2026-03-30-quan-career-exploration.md` (commit `004badf4`)
+- `2026-03-30-vault-e-trilogy-soul-dna-narrative.md` (commit `d0ac324a`)
 
-### 2026-03-23
-- `CANON/REINCARNATION/2026-03-23-pipeline-delegation-mcp-stack.md` (6.4KB)
+### 2026-03-29
+- Multiple entries (see `CANON/REINCARNATION/` directory)
 
-### 2026-03-24 (15 entries)
-- `2026-03-24-100-phoenixes-war-games.md` (5.2KB)
-- `2026-03-24-website-netpet-consolidation.md` (6.2KB)
-- `2026-03-24-system-hardening.md` (5KB)
-- `2026-03-24-gospel-444-consolidation.md` (5KB)
-- `2026-03-24-night-session-permissions-fix.md` (5.1KB)
-- `2026-03-24-repo-consolidation.md` (4.4KB)
-- `2026-03-24-security-drone-research.md` (3.1KB)
-- `2026-03-24-net-student-profiles.md` (2.8KB)
-- `2026-03-24-website-recovery-master-sync-simulation.md` (2.9KB)
-- `2026-03-24-late-session-old-account-preservation.md` (2.9KB)
-- `2026-03-24-agent0-triad-reincarnation.md` (2.8KB)
-- `2026-03-24-chat-preservation-local-repo.md` (2.1KB)
-- `2026-03-24-skeleton-star-map-ingestion.md` (1.8KB)
-- `2026-03-24-deployment-claim-audit.md` (1.4KB)
-- `2026-03-24-light-session-reincarnation.md` (0.7KB)
-
-### 2026-03-25 (8 entries)
-- `2026-03-25-pulse-v3-galaxy-lessons-patch-first.md`
-- `2026-03-25-trigger-audit-rulings-v3.md`
-- `2026-03-25-net-methodology-bottleneck-fix.md`
-- `2026-03-25-mss-v5-security-authority.md`
-- `2026-03-25-v5-extraction-engine.md`
-- `2026-03-25-super-saiyan-hardening.md`
-- `2026-03-25-RISE-WEBSITE-BUILD.md`
-- `2026-03-25-v5-overnight-mining-hardened.md`
+### 2026-03-22 through 2026-03-28
+- 40 entries total (see `CANON/REINCARNATION/` directory listing for full inventory)
 
 ---
 
@@ -125,7 +117,7 @@
 | Wave 4 Automation Push | Complete |
 | GitHub Mapping (100 steps) | 29/100 (blocked on admin access) |
 | 150-Action Triad | Structured (3x50 split) |
-| Overnight Website Build | 3/20 complete |
+| Heavy Ledger Conversion | ACTIVE — 25/174+ converted (cursor: 025) |
 
 ---
 
@@ -135,10 +127,11 @@
 
 1. **Load this file** — `CANON/SYSTEM/NAVIGATOR-INDEX.md` — for routing to all artifacts
 2. **Load Canon Access Index** — `CANON/SYSTEM/CANON-ACCESS-INDEX.md` — for synced block bypass and Bible chapter map
-3. **Load MSS-V5** — `CANON/MSS/MSS-V5-2026-03-25.json` — full system state snapshot
-4. **Read canon pages** in this order: Soul DNA Bible chapters → Core Principles → Alpha-Omega → Deep Dive → Gospel 444
-5. **Read reincarnation entries** newest-first for session decisions and corrections
-6. **Reconstruct Notion state** from these artifacts — every page, every decision, every principle is here
+3. **Load Cold Start Boot** — `CANON/SYSTEM/COLD-START-BOOT.md` — identity + laws + living reincarnation state
+4. **Load MSS-V5** — `CANON/MSS/MSS-V5-2026-03-25.json` — full system state snapshot
+5. **Read canon pages** in this order: Soul DNA Bible chapters → Core Principles → Alpha-Omega → Deep Dive → Gospel 444
+6. **Read reincarnation entries** newest-first for session decisions and corrections
+7. **Reconstruct Notion state** from these artifacts — every page, every decision, every principle is here
 
 ### GitHub Repos
 
@@ -150,17 +143,42 @@
 
 ---
 
-## Pulse State (as of Run 26)
+## Pulse State Mirror (as of Run 154)
 
 | Field | Value |
 |-------|-------|
-| `last_run_time` | 2026-03-26T05:00+07:00 |
-| `canon_cursor` | 8 (Build Log audit complete) |
-| `backlog_open_count` | 127 (DRIFT +17) |
-| `build_log_total` | 83 |
-| `overnight_mode` | ACTIVE (Michael asleep) |
+| `last_run_time` | 2026-03-30T23:00+07:00 |
+| `last_run_number` | 154 |
+| `canon_cursor` | Heavy Ledger Pipeline #025 |
+| `build_log_total` | 178+ |
+| `overnight_mode` | ACTIVE (23:00 ICT) |
+| `active_mission` | HEAVY_LEDGER_CONVERSION |
+| `pipeline_cursor` | 025 |
+| `wave_current` | 2 |
+| `wave_2_done` | #021, #022, #023, #024 |
+| `latest_github_commit` | `c7a1f917` (reincarnation: marketing lane dump) |
+| `prior_worker_audit` | PASS (Run 153, commit `40cb5451`) |
+| `platform_death_test` | PASS (commit `271b7e69` — HL #024) |
+| `run_grade` | B (6/8) |
 
 ### Living Reincarnation State
-- **Current vector:** Train 6-7 game launch + website build
-- **Active principles:** Platform Death Test, Self-sufficiency, Throughput 2.5+/hr, Artifact-first, Cross-repo mining mandatory
-- **Open rulings:** Two-Server Problem (GameMain vs MainServer_v2), Commander name variants (3 spellings)
+- **Current vector:** Heavy Ledger Conversion Pipeline (Wave 2, #025 next) + overnight autonomous operation
+- **Active principles:** Platform Death Test, Active Mission IMMOVABLE, Dual-Publish, Cross-Repo Mining, Compound Over Time
+- **Open rulings:** None active
+
+### Handoff Ledger (Last 7 Runs)
+| Run | Time | Artifact | SHA | Grade | PDT |
+|-----|------|----------|-----|-------|-----|
+| 154 | 2026-03-30T23:00 | HL #024 confirmed (VAULT-L-LIVE-CLASSES-2) | `271b7e69` | B | PASS |
+| 153 | 2026-03-30T22:30 | HL #023 BIBLE-CH03-DOC02-SACRED-ARTIFACT-SORTING.json | `40cb5451` | — | PASS |
+| 152 | 2026-03-30T22:00 | HL #022 SOUL-DNA-BIBLE-CH10-MACHINE.json | `3d7aec61` | — | PASS |
+| 151 | 2026-03-30T21:30 | HL #021 BIBLE-CH02-DOC01-SOUL-DNA-MAP.json | `7682c0f8` | — | PASS |
+| 150 | 2026-03-30T21:00 | HL #020 BIBLE-CH01-DOC00-UNIVERSAL-LEDGER.json | `57ed012e` | — | PASS |
+| 149 | 2026-03-30T20:30 | HL #019 BIBLE-CH16-NUCLEAR-HARVEST.json | `f1ad0bfb` | — | PASS |
+| 148 | 2026-03-30T20:00 | HL #018 FIREBASE-CHROME-EXTENSION.json | `d21cb8f9` | — | PASS |
+
+### Next Worker Should
+1. Convert #025 — `NOTEBOOKLM-VAULT-ARCHITECT-OF-AGENT99-FIRST-250-LAYERS.md` (16KB, notebooklm)
+2. Push to `CANON/HEAVY-LEDGER/NOTEBOOKLM-VAULT-ARCHITECT-OF-AGENT99-FIRST-250-LAYERS.json`
+3. Update pipeline cursor to 026
+4. Continue Wave 2 overnight cadence
