@@ -23,7 +23,7 @@
       border: none;
       color: rgba(255, 255, 255, 0.5);
       font-family: 'Inter', sans-serif;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 500;
       cursor: pointer;
       border-bottom: 2px solid transparent;
@@ -43,7 +43,7 @@
       border-bottom-color: #a855f7;
     }
     .obi-tab-icon {
-      font-size: 15px;
+      font-size: 14px;
     }
     .tab-content {
       display: none;
@@ -51,7 +51,7 @@
     .tab-content.active {
       display: block;
     }
-    #homework-panel {
+    #homework-panel, #vocab-panel {
       padding: 12px 0;
       text-align: center;
     }
@@ -92,6 +92,13 @@
     .hw-btn:hover {
       transform: translateY(-1px);
       box-shadow: 0 4px 12px rgba(168, 85, 247, 0.5);
+    }
+    .hw-btn.gold-btn {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+    }
+    .hw-btn.gold-btn:hover {
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.5);
     }
     .hw-subjects {
       display: flex;
@@ -139,6 +146,9 @@
       <button class="obi-tab" data-tab="homework">
         <span class="obi-tab-icon">📸</span> Homework
       </button>
+      <button class="obi-tab" data-tab="vocab">
+        <span class="obi-tab-icon">📚</span> Vocab
+      </button>
     </nav>
 
     <div id="offline-banner" class="offline-banner hidden">
@@ -185,6 +195,25 @@
       <div class="hw-note">Powered by Gemini 2.0 Flash • Free tier • Your photos stay private</div>
     </div>
 
+    <div id="vocab-panel" class="tab-content">
+      <div class="hw-hero">📚</div>
+      <div class="hw-title">Vocab Practice</div>
+      <div class="hw-desc">
+        Flashcards with spaced repetition.<br>
+        Learn words at your own pace — 🐭→🐯
+      </div>
+      <button class="hw-btn gold-btn" id="open-vocab-practice">
+        ⚡ Start Vocab Practice
+      </button>
+      <div class="hw-subjects">
+        <span class="hw-subject-tag">💬 Phrases</span>
+        <span class="hw-subject-tag">🏫 Classroom</span>
+        <span class="hw-subject-tag">🌅 Daily Life</span>
+        <span class="hw-subject-tag">📐 Grammar</span>
+      </div>
+      <div class="hw-note">60 cards • SRS flashcards • Works offline • XP & streaks</div>
+    </div>
+
     <footer class="obi-footer">
       <button id="open-sidepanel" class="obi-link">Open Full Panel</button>
       <span class="obi-status" id="status-indicator">● Online</span>
@@ -206,6 +235,11 @@
     // Open homework checker in new tab
     document.getElementById('open-homework-checker').addEventListener('click', () => {
       chrome.tabs.create({ url: chrome.runtime.getURL('homework-checker.html') });
+    });
+
+    // Open vocab practice in new tab
+    document.getElementById('open-vocab-practice').addEventListener('click', () => {
+      chrome.tabs.create({ url: chrome.runtime.getURL('vocab-practice.html') });
     });
   </script>
 </body>
