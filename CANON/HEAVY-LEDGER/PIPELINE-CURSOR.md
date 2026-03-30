@@ -1,10 +1,10 @@
 # Heavy Ledger Conversion Pipeline — Cursor
 
-**Current cursor:** 010
-**Last completed:** 009 — VAULT-E-SOUL-DNA-CONSOLIDATED-2.json (25KB source → structured JSON, commit `6ecfc874`)
-**Next target:** 010 — VAULT-A-GENESIS-CONSOLIDATED-2.md (18KB, vault_genesis_2)
-**Total converted:** 9/174+
-**Run:** 140 (2026-03-30 17:30 ICT)
+**Current cursor:** 020
+**Last completed:** 019 — BIBLE-CH16-THE-NUCLEAR-HARVEST-PIPELINE.json (16KB source → structured JSON, commit `f1ad0bfb`)
+**Next target:** 020 — BIBLE-CH01-DOC00-UNIVERSAL-LEDGER-MAP-V55.md (16KB, bible_chapter)
+**Total converted:** 19/174+
+**Run:** 149 (2026-03-30 21:00 ICT)
 
 ## Completed
 
@@ -19,3 +19,13 @@
 | 007 | SOUL-DNA-BIBLE-CH00-FILE-MAP-AND-METRICS.md | 33KB | 31KB | `23dc71f2` | 137 |
 | 008 | VAULT-E-SOUL-DNA-CONSOLIDATED.md | 32KB | 22KB | `152bd79a` | 138 |
 | 009 | VAULT-E-SOUL-DNA-CONSOLIDATED-2.md | 25KB | ~20KB | `6ecfc874` | 140 |
+| 010 | VAULT-A-GENESIS-CONSOLIDATED-1.md | 26KB | 24KB | `67ac986` | 139 |
+| 011 | BIBLE-CH15-PHOENIX-BIBLE-BOOKS-I-XIII.md | 21KB | 22KB | `57d2146f` | 142 |
+| 012 | VAULT-D-PRELAUNCH-CONSOLIDATED-1.md | 20KB | 25KB | `636aedbc` | 143 |
+| 013 | BIBLE-CH05-STAGE3-MEGA-MONOLITH-V1.md | 20KB | 12KB | `660606b9` | 144 |
+| 014 | STUDENT-ARCHETYPES-TEACHING-DATABASE.md | 19KB | 19KB | `7354e0c4` | 145 |
+| 015 | VAULT-B-FOUNDATIONS-CONSOLIDATED-2.md | 18KB | 23KB | `01cd948e` | 146 |
+| 016 | VAULT-L-LIVE-CLASSES-CONSOLIDATED-1.md | 18KB | 23KB | `843a5c04` | 147 |
+| 017 | VAULT-A-GENESIS-CONSOLIDATED-2.md | 18KB | 20KB | `0d4ca3da` | 141 |
+| 018 | FIREBASE-CHROME-EXTENSION-CONSOLIDATION.md | 17KB | 14KB | `d21cb8f9` | 148 |
+| 019 | BIBLE-CH16-THE-NUCLEAR-HARVEST-PIPELINE.md | 16KB | 19KB | `f1ad0bfb` | 149 |
