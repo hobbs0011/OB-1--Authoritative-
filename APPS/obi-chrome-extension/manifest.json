@@ -6,7 +6,9 @@
   "permissions": [
     "storage",
     "activeTab",
-    "sidePanel"
+    "sidePanel",
+    "contextMenus",
+    "tts"
   ],
   "host_permissions": [
     "https://naturalenglishtraining.net/*"
@@ -38,6 +40,5 @@
     "48": "icons/icon-48.png",
     "128": "icons/icon-128.png"
   },
-  "minimum_chrome_version": "120",
-  "key": "TODO_GENERATE_KEY"
+  "minimum_chrome_version": "120"
 }

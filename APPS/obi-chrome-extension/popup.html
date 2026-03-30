@@ -4,14 +4,29 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>OBI — Natural English Training</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Orbitron:wght@700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles/popup.css">
 </head>
 <body>
   <div id="obi-root">
     <header class="obi-header">
-      <h1>OBI</h1>
+      <div class="obi-header-top">
+        <h1>OBI</h1>
+        <button id="speaker-toggle" class="obi-icon-btn" title="Toggle auto-speak">🔊</button>
+      </div>
       <span class="obi-tagline">Natural English Training</span>
+      <div class="obi-level-bar">
+        <span id="level-label">🐭 Mouse</span>
+        <div class="xp-track"><div id="xp-fill" class="xp-fill"></div></div>
+        <span id="xp-count">0 XP</span>
+      </div>
     </header>
+
+    <div id="offline-banner" class="offline-banner hidden">
+      📵 Offline — Gemini Nano only
+    </div>
 
     <div id="chat-container">
       <div id="messages" class="obi-messages">
@@ -23,7 +38,10 @@
 
       <div class="obi-input-area">
         <textarea id="user-input" placeholder="Type here... (English or Vietnamese)" rows="2"></textarea>
-        <button id="send-btn" class="obi-send">Send</button>
+        <div class="obi-btn-group">
+          <button id="mic-btn" class="obi-mic" title="Speak your message">🎤</button>
+          <button id="send-btn" class="obi-send">Send</button>
+        </div>
       </div>
     </div>
 
