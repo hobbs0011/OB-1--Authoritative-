@@ -1,31 +1,17 @@
 # Heavy Ledger Conversion Pipeline — Cursor
 
-**Current cursor:** 020
-**Last completed:** 019 — BIBLE-CH16-THE-NUCLEAR-HARVEST-PIPELINE.json (16KB source → structured JSON, commit `f1ad0bfb`)
-**Next target:** 020 — BIBLE-CH01-DOC00-UNIVERSAL-LEDGER-MAP-V55.md (16KB, bible_chapter)
-**Total converted:** 19/174+
-**Run:** 149 (2026-03-30 21:00 ICT)
+**Current cursor:** 021
+**Wave:** 2 (started Run 151)
+**Total converted:** 22/174+
+**Last converted:** `BIBLE-CH02-DOC01-SOUL-DNA-MAP.json` (Run 151, commit `7682c0f8`)
+**Next:** Pipeline #022 — next file in conversion sequence (Wave 2)
 
-## Completed
+## Wave 1 Summary (COMPLETE — 20/20)
+- Runs 132-150
+- 20 files converted to structured Heavy Ledger JSON
+- All Platform Death Tests PASS
 
-| # | Source File | Size | JSON Size | Commit | Run |
-|---|-----------|------|-----------|--------|-----|
-| 001 | ALPHA-OMEGA-SOUL-DNA-GOVERNANCE-CANON.md | 61KB | 24KB | `e56adad3` | 132 |
-| 002 | SOUL-DNA-DEEP-DIVE.md | 45KB | 29KB | `b4e95a8d` | 133 |
-| 003 | CORE-PRINCIPLES-AND-PHYSICS.md | 37KB | 20KB | `4a90c7e1` | 134 |
-| 004 | GOSPEL-444-TEACHING-METHODS-CONSOLIDATED.md | 58KB | 20KB | `1e30b8a2` | 135 |
-| 005 | NET-TEACHING-METHODOLOGY.md | 41KB | 20KB | `0c556f2f` | 136 |
-| 006 | SOUL-DNA-CANON.md | 38KB | 20KB | `ef94357c` | 136b |
-| 007 | SOUL-DNA-BIBLE-CH00-FILE-MAP-AND-METRICS.md | 33KB | 31KB | `23dc71f2` | 137 |
-| 008 | VAULT-E-SOUL-DNA-CONSOLIDATED.md | 32KB | 22KB | `152bd79a` | 138 |
-| 009 | VAULT-E-SOUL-DNA-CONSOLIDATED-2.md | 25KB | ~20KB | `6ecfc874` | 140 |
-| 010 | VAULT-A-GENESIS-CONSOLIDATED-1.md | 26KB | 24KB | `67ac986` | 139 |
-| 011 | BIBLE-CH15-PHOENIX-BIBLE-BOOKS-I-XIII.md | 21KB | 22KB | `57d2146f` | 142 |
-| 012 | VAULT-D-PRELAUNCH-CONSOLIDATED-1.md | 20KB | 25KB | `636aedbc` | 143 |
-| 013 | BIBLE-CH05-STAGE3-MEGA-MONOLITH-V1.md | 20KB | 12KB | `660606b9` | 144 |
-| 014 | STUDENT-ARCHETYPES-TEACHING-DATABASE.md | 19KB | 19KB | `7354e0c4` | 145 |
-| 015 | VAULT-B-FOUNDATIONS-CONSOLIDATED-2.md | 18KB | 23KB | `01cd948e` | 146 |
-| 016 | VAULT-L-LIVE-CLASSES-CONSOLIDATED-1.md | 18KB | 23KB | `843a5c04` | 147 |
-| 017 | VAULT-A-GENESIS-CONSOLIDATED-2.md | 18KB | 20KB | `0d4ca3da` | 141 |
-| 018 | FIREBASE-CHROME-EXTENSION-CONSOLIDATION.md | 17KB | 14KB | `d21cb8f9` | 148 |
-| 019 | BIBLE-CH16-THE-NUCLEAR-HARVEST-PIPELINE.md | 16KB | 19KB | `f1ad0bfb` | 149 |
+## Wave 2 Progress
+| # | File | Run | Commit | Status |
+|---|------|-----|--------|--------|
+| 021 | BIBLE-CH02-DOC01-SOUL-DNA-MAP.json | 151 | `7682c0f8` | ✅ DONE |
