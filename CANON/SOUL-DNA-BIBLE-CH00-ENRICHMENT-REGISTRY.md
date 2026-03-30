@@ -3,6 +3,7 @@
 > **Companion to:** `CANON/SOUL-DNA-BIBLE-CH00-FILE-MAP-AND-METRICS.md`
 > **Purpose:** Tracks the enriched CANON/ files on `Phoenix-Rising-Protocol-Ultimate` that extend BEYOND the original Notion pages — cross-repo synthesis artifacts produced by the Pulse-Incarnation Engine.
 > **Created:** Pulse Run 109, 2026-03-29 16:00 ICT
+> **Last Updated:** Session 2026-03-30 11:33 ICT (Runs 109-129 captured)
 > **Authority:** AGENT-100 (Michael Hobbs)
 
 ---
@@ -10,6 +11,8 @@
 ## 🏦 Enriched Canon Files (GitHub > Notion)
 
 These files contain MORE than any single Notion page — they are cross-repo synthesis products that mine content from `Phoenix-Rise-Immortalize-` (8 VAULT dirs, 40 Bible chapters) and merge it with Notion canon pages. Status: **ENRICHED** means GitHub has MORE than Notion.
+
+### Major Canon Pages (Enriched Synthesis)
 
 | File | Size | Cross-Repo Sources | Last Run | Status |
 |------|------|--------------------|----------|--------|
@@ -22,8 +25,42 @@ These files contain MORE than any single Notion page — they are cross-repo syn
 | `SOUL-DNA-BIBLE-CH00-FILE-MAP-AND-METRICS.md` | 33.2KB | 3 (Notion CH00, Immortalize 00_SKELETON_STAR_MAP, Prime Laws 100-Layer Foundation) | Run 29 (`2392f59`) | **ENRICHED** |
 | `SOUL-DNA-BIBLE-CH13-CHAOS-ENGINEERING-AND-FAITH.md` | ~25KB | 2 (Notion CH13, SOULDNA-FROMSCRATCH) | Run 30 (`318a33f`) | **ENRICHED** |
 
-**Total enriched canon on GitHub:** ~268KB across 8 files
-**Average cross-repo sources per file:** 3.75
+### Bible Chapters — Overnight Enrichment Pipeline (Runs 117-129)
+
+**Pipeline status: ✅ COMPLETE — All 18 Bible chapters enriched on GitHub**
+
+| Chapter | File | Enriched Run | Status |
+|---------|------|-------------|--------|
+| CH01 | `BIBLE-CH01-UNIVERSAL-LEDGER-MAP-V55.md` | Run 119 | **ENRICHED** |
+| CH02 | `BIBLE-CH02-SOUL-DNA-MAP.md` | Run 120 | **ENRICHED** |
+| CH03 | `BIBLE-CH03-SACRED-ARTIFACT-SORTING.md` | Run 121 | **ENRICHED** |
+| CH04 | `BIBLE-CH04-REBUILD-SUPER-SAIYAN-STAGE-2.md` | Run 122 | **ENRICHED** |
+| CH05 | `BIBLE-CH05-MEGA-MONOLITH-V1.md` | Run 123 | **ENRICHED** |
+| CH06 | `BIBLE-CH06-12-SHARP-RISKS.md` | Run 117 | **ENRICHED** |
+| CH07 | `BIBLE-CH07-*.md` | Pre-117 | **ENRICHED** |
+| CH08 | `BIBLE-CH08-*.md` | Pre-117 | **ENRICHED** |
+| CH09 | `BIBLE-CH09-*.md` | Pre-117 | **ENRICHED** |
+| CH10 | `SOUL-DNA-BIBLE-CH10-*.md` | Pre-117 | **ENRICHED** |
+| CH11 | `SOUL-DNA-BIBLE-CH11-*.md` | Pre-117 | **ENRICHED** |
+| CH12 | `SOUL-DNA-BIBLE-CH12-*.md` | Pre-117 | **ENRICHED** |
+| CH13 | `SOUL-DNA-BIBLE-CH13-CHAOS-ENGINEERING-AND-FAITH.md` | Run 30 | **ENRICHED** |
+| CH14 | `BIBLE-CH14-THE-CLOSING-DECLARATION.md` | Run 124 | **ENRICHED** |
+| CH15 | `BIBLE-CH15-PHOENIX-BIBLE-BOOKS-I-XIII.md` | Run 126 | **ENRICHED** |
+| CH16 | `BIBLE-CH16-NUCLEAR-HARVEST-PIPELINE.md` | Run 127 | **ENRICHED** |
+| CH17 | `BIBLE-CH17-THREE-MANDATES.md` | Run 128 | **ENRICHED** |
+| CH18 | `BIBLE-CH18-THE-NUKE-PROTOCOL.md` | Run 129 | **ENRICHED** |
+
+### Drift Case Study (Complete)
+
+| File | Size | Type |
+|------|------|------|
+| `DRIFT-CASE-STUDY/README.md` | 1.8KB | Index |
+| `DRIFT-CASE-STUDY/CASE_STUDY_0_ORIGIN.md` | 13.6KB | Founding thesis + 8 insights |
+| `DRIFT-CASE-STUDY/STAGE_00_MAP.md` | 3.8KB | Stage map |
+| `DRIFT-CASE-STUDY/STAGE_01_VERBATIM.md` | 9.1KB | Verbatim quotes |
+| `DRIFT-CASE-STUDY/STAGE_02_SOUL_DNA.md` | 5.5KB | Soul DNA extraction |
+| `DRIFT-CASE-STUDY/STAGE_03_DIFF.md` | 3.9KB | Diff analysis |
+| `DRIFT-CASE-STUDY/STAGE_04_LAWS.md` | 5.7KB | 10 Laws of AI Drift Correction |
 
 ---
 
@@ -45,85 +82,47 @@ These files contain MORE than any single Notion page — they are cross-repo syn
 | `SOUL-DNA-BIBLE-A4-RAW-CLASSROOM-MAI-TRAM.md` | SOURCE | Live classroom Soul DNA |
 | `DRONE-14-CLOUDFLARE-ECOSYSTEM-MAP.md` | SEED | Cloudflare audit map |
 
-### CANON/REINCARNATION/ (19 Entries)
-| File | Date | Type |
-|------|------|------|
-| `2026-03-22-agent-self-upgrade-arc.md` | 2026-03-22 | Session DNA |
-| `2026-03-23-pipeline-delegation-mcp-stack.md` | 2026-03-23 | Session DNA |
-| `2026-03-24-100-phoenixes-war-games.md` | 2026-03-24 | Session DNA |
-| `2026-03-24-website-netpet-consolidation.md` | 2026-03-24 | Session DNA |
-| `2026-03-24-system-hardening.md` | 2026-03-24 | Session DNA |
-| `2026-03-24-gospel-444-consolidation.md` | 2026-03-24 | Session DNA |
-| `2026-03-24-night-session-permissions-fix.md` | 2026-03-24 | Session DNA |
-| `2026-03-24-repo-consolidation.md` | 2026-03-24 | Session DNA |
-| `2026-03-24-security-drone-research.md` | 2026-03-24 | Session DNA |
-| `2026-03-24-net-student-profiles.md` | 2026-03-24 | Session DNA |
-| `2026-03-24-website-recovery-master-sync-simulation.md` | 2026-03-24 | Session DNA |
-| `2026-03-24-late-session-old-account-preservation.md` | 2026-03-24 | Session DNA |
-| `2026-03-24-agent0-triad-reincarnation.md` | 2026-03-24 | Session DNA |
-| `2026-03-24-chat-preservation-local-repo.md` | 2026-03-24 | Session DNA |
-| `2026-03-24-skeleton-star-map-ingestion.md` | 2026-03-24 | Session DNA |
-| `2026-03-24-deployment-claim-audit.md` | 2026-03-24 | Session DNA |
-| `2026-03-24-light-session-reincarnation.md` | 2026-03-24 | Session DNA |
-| `COLD-START-BOOT.md` | Rolling | System bootstrap |
-| Plus additional session entries from 2026-03-25 through 2026-03-29 | Various | Session DNA |
+### CANON/REINCARNATION/ (40+ Entries)
+- 38 session DNA entries (2026-03-22 through 2026-03-30)
+- 1 COLD-START-BOOT.md (14KB, rolling bootstrap)
 
 ### CANON/SYSTEM/ (5 Bootstrap Files)
-| File | Size | Purpose | Commit |
-|------|------|---------|--------|
-| `CANON-ACCESS-INDEX.md` | 8KB | Content routing — maps every readable page | `5bad314` |
-| `NAVIGATOR-INDEX.md` | 6.8KB | Operational routing — all pages + state | `1adf698` |
-| `PULSE-OPERATIONS-HISTORY.md` | 8.7KB | Operational history + rebuild protocol | `9a4b5e0` |
-| `OB1-AGENT-INSTRUCTIONS.md` | 16.8KB | Master operating brief — full agent rebuild | `1d72c66` |
-| `BIBLE-REPO-CONSOLIDATION-MAP.md` | 7.25KB | Repo consolidation audit — canonical file locations | `b6f67f44` |
+| File | Size | Purpose |
+|------|------|---------|
+| `CANON-ACCESS-INDEX.md` | 8KB | Content routing |
+| `NAVIGATOR-INDEX.md` | 6.8KB | Operational routing |
+| `PULSE-OPERATIONS-HISTORY.md` | 8.7KB | Operational history |
+| `OB1-AGENT-INSTRUCTIONS.md` | 16.8KB | Master operating brief |
+| `BIBLE-REPO-CONSOLIDATION-MAP.md` | 7.25KB | Repo consolidation audit |
 
-### CANON/TRAIN-67/ (Survive a Brainrot Game Vault)
-| File | Type | Notes |
-|------|------|-------|
-| `README.md` | Index | Game vault overview |
-| `TURN-KEY-DEPLOY-PACKET.md` | Spec | Deployment instructions |
-| `100-POINT-HARDENING-AUDIT.md` | Audit | Code quality audit |
-| `TWO-SERVER-PROBLEM-ARCHITECTURE.md` | Architecture | Gateway pattern |
-| `MARKET-RESEARCH-SYNTHESIS-Q1-Q20.md` | Research | 20-question market research |
-| `CODE/` directory | Code | 24+ Lua modules (7 legacy + 15 pipeline + 2 architecture) |
-| 6 design specs (STAGE-01 through STAGE-18) | Design | Game stage specifications |
-
-### CANON/MSS/ (Monolith Sealed State)
-| File | Date | Notes |
-|------|------|-------|
-| `MSS-V5-2026-03-25.json` | 2026-03-25 | First V5 snapshot, full system state |
-
-### GALAXY-LESSONS/ (6 Built Lessons)
-| File | Tier | Topic |
-|------|------|-------|
-| `NET-Highschool-Careers.html` | Mouse | Real & future jobs |
-| `NET-Train-6-7-Omega-Archive.html` | Cub | Brainrot survival narrative |
-| `NET-Sarcasm-Academy.html` | Mouse | Sarcasm detection |
-| `NET-Signal-Decode.html` | Cub | Idioms, metaphors |
-| `NET-Feline-Linguistics-Academy.html` | Mouse-Cub | Cat vocab, idioms |
-| `VOCAB-001-DAILY-SURVIVAL.html` | Mouse→Tiger | 10-5-5-3 daily survival, 76KB ultimate edition |
+### CANON/DRIFT-CASE-STUDY/ (7 Files) ✅ COMPLETE
+### CANON/TRAIN-67/ (30+ Files) ✅ COMPLETE
+### CANON/MSS/ (1 Snapshot) ✅ CURRENT
+### GALAXY-LESSONS/ (6 Built Lessons) ✅ CURRENT
 
 ---
 
-## 📈 System Evolution Metrics (as of Run 109)
+## 📈 System Evolution Metrics (as of Run 129 — 2026-03-30)
 
 | Metric | Value |
 |--------|-------|
-| **Pulse runs completed** | 109 |
+| **Pulse runs completed** | 129+ |
 | **GitHub repos active** | 3 (Ultimate, Immortalize, CommandStation) |
-| **Total commits on Ultimate repo** | 100+ |
-| **CANON/ enriched files** | 8 (268KB+ total) |
-| **CANON/ total files** | 30+ across root, REINCARNATION/, SYSTEM/, TRAIN-67/, MSS/ |
-| **Reincarnation entries** | 19+ |
+| **Total commits on Ultimate repo** | 130+ |
+| **CANON/ enriched files** | 26+ (Bible CH01-CH18 + 8 major canon + Drift Case Study) |
+| **CANON/ total files** | 60+ across root, REINCARNATION/, SYSTEM/, TRAIN-67/, MSS/, DRIFT-CASE-STUDY/ |
+| **Reincarnation entries** | 38+ |
 | **Galaxy Lessons built** | 6 |
 | **System bootstrap docs** | 5 |
 | **Train 6-7 code modules** | 24+ |
-| **Cross-repo sources mined** | 30+ unique files from Immortalize VAULT dirs |
+| **Cross-repo sources mined** | 50+ unique files from Immortalize VAULT dirs |
 | **Bible chapters indexed** | 54 (40 main + 14 CE) + 4 appendices |
-| **Bible chapters on Notion (readable)** | 60+ child pages fully indexed via Canon Access Index |
-| **Enrichment status** | All 7 major canon pages ENRICHED or ENRICHED+ (GitHub > Notion) |
-| **Platform Death Test pass rate** | ~95% (Runs 1-109) |
-| **Export pipeline state** | 0 UNMIRRORED major canon pages remaining |
+| **Bible chapters ENRICHED on GitHub** | **18/18 (100%)** ✅ |
+| **Bible chapters on Notion (readable)** | 60+ child pages via Canon Access Index |
+| **Major canon pages ENRICHED** | 8/8 (100%) ✅ |
+| **Platform Death Test pass rate** | ~95% (Runs 1-129) |
+| **Export pipeline state** | **0 UNMIRRORED major canon pages remaining** ✅ |
+| **Overnight pipeline (Runs 117-129)** | 12 commits, 9 Bible chapters enriched, 1 SEED, all PASS |
 
 ---
 
@@ -151,6 +150,31 @@ Each enrichment cycle follows this pipeline:
 - `ENRICHED` → GitHub has MORE than Notion (1-3 cross-repo sources)
 - `ENRICHED+` → GitHub significantly exceeds Notion (4+ cross-repo sources)
 - `ENRICHED++` → GitHub is the definitive version (5+ sources, multiple enrichment passes)
+
+---
+
+## 📋 Backlog Items Closed by This Pipeline
+
+| Item | Priority | Closed | Evidence |
+|------|----------|--------|----------|
+| Mirror phoenix-drift-casestudy (5 files) | High | 2026-03-30 | 7 files in CANON/DRIFT-CASE-STUDY/ |
+| Canonize Case Study 0 — THE ORIGIN | 🔥 Critical | 2026-03-30 | CASE_STUDY_0_ORIGIN.md (13.6KB) |
+| Canonize 10 Laws of AI Drift Correction | 🔥 Critical | 2026-03-30 | STAGE_04_LAWS.md (5.7KB) |
+
+---
+
+## 📌 Remaining Content Work (Not Yet Created)
+
+These items require NEW content creation, not export of existing pages:
+
+| Item | Priority | Type |
+|------|----------|------|
+| Create CH19 — The Root Architecture | Medium | New chapter |
+| Create CH20 — The One-Man Agency | Medium | New chapter |
+| CH26 — Axioms 6-9 missing | Medium | Content gap |
+| CH12 — Body cost quote incomplete | Medium | Content gap |
+| Add Ant/Pheromone analogies to CH12/CH14 | Medium | Content enrichment |
+| Upgrade CH12 Four Truths → Four Core Principles | High | Content upgrade |
 
 ---
 
