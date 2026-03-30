@@ -1,0 +1,177 @@
+/* OBI Chrome Extension — Homework Checker Styles
+ * Gospel 444 palette: void black #0f0f1a | soul purple #a855f7 | imperial gold #f59e0b
+ */
+
+/* ── Tab scroll area ── */
+
+#tab-homework.active {
+  overflow-y: auto;
+}
+
+.hw-container {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* ── Header ── */
+
+.hw-header h2 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #a855f7;
+  margin-bottom: 4px;
+}
+
+.hw-header p {
+  font-size: 12px;
+  color: #777;
+  line-height: 1.5;
+}
+
+/* ── Camera / Upload button ── */
+
+.hw-camera-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 24px 16px;
+  background: rgba(245, 158, 11, 0.06);
+  border: 2px dashed rgba(245, 158, 11, 0.45);
+  border-radius: 12px;
+  color: #f59e0b;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+
+.hw-camera-btn:hover {
+  background: rgba(245, 158, 11, 0.12);
+  border-color: #f59e0b;
+  box-shadow: 0 0 14px rgba(245, 158, 11, 0.15);
+}
+
+.hw-camera-btn:active {
+  transform: scale(0.98);
+}
+
+.hw-camera-icon {
+  font-size: 32px;
+  line-height: 1;
+}
+
+/* ── Image preview ── */
+
+.hw-preview {
+  width: 100%;
+  max-height: 220px;
+  object-fit: contain;
+  border-radius: 8px;
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  box-shadow: 0 0 12px rgba(168, 85, 247, 0.12);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.hw-preview.hidden {
+  display: none;
+}
+
+/* ── Analyze button ── */
+
+.hw-analyze-btn {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, #a855f7, #7c3aed);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.1s, box-shadow 0.2s;
+  box-shadow: 0 0 12px rgba(168, 85, 247, 0.3);
+}
+
+.hw-analyze-btn:hover:not(:disabled) {
+  opacity: 0.9;
+  box-shadow: 0 0 18px rgba(168, 85, 247, 0.45);
+}
+
+.hw-analyze-btn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.hw-analyze-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* ── Spinner ── */
+
+.hw-spinner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: rgba(168, 85, 247, 0.06);
+  border-radius: 8px;
+  border: 1px solid rgba(168, 85, 247, 0.2);
+}
+
+.hw-spinner.hidden {
+  display: none;
+}
+
+.hw-spinner p {
+  font-size: 13px;
+  color: #c084fc;
+}
+
+.hw-spinner-dot {
+  width: 22px;
+  height: 22px;
+  border: 3px solid rgba(168, 85, 247, 0.25);
+  border-top-color: #a855f7;
+  border-radius: 50%;
+  flex-shrink: 0;
+  animation: hw-spin 0.8s linear infinite;
+}
+
+@keyframes hw-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Result area ── */
+
+.hw-result {
+  padding: 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.hw-result.hidden {
+  display: none;
+}
+
+.hw-result.success {
+  background: rgba(168, 85, 247, 0.07);
+  border-left: 3px solid #a855f7;
+  color: #e0e0e0;
+}
+
+.hw-result.error {
+  background: rgba(239, 68, 68, 0.07);
+  border-left: 3px solid #ef4444;
+  color: #fca5a5;
+}
