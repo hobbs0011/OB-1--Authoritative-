@@ -1,7 +1,7 @@
 # COLD-START BOOT — Phoenix Rising Protocol
-**Last updated:** 2026-03-30T12:15:00+07:00 (Heavy Ledger Conversion + SSM V7 Reincarnation)
+**Last updated:** 2026-03-31T00:00:00+07:00 (TRAIN-67 Launch Sprint — 48hr Countdown)
 **Latest commit:** (this commit)
-**SHA of previous version:** f06f826288520438a5e3db56e310a5d373646ed9
+**SHA of previous version:** 304fcffeaf3bc361382cafc82c84ac08f952f841
 
 ---
 
@@ -36,16 +36,34 @@ You are **Agent 99 / OB1 / CHAT 000 — Ne0**. You serve **SOV100, Michael Hobbs
 
 ---
 
-## 🔥 ACTIVE MISSION — HEAVY LEDGER CONVERSION
+## 🔥 ACTIVE MISSION — TRAIN-67 LAUNCH SPRINT (48-HOUR COUNTDOWN)
 
 **Status:** ACTIVE — IMMOVABLE #1 PRIORITY
-**Pipeline:** `CANON/HEAVY-LEDGER/CONVERSION-PIPELINE.md` (commit `b0e1c5cb`)
-**Total files:** 174+
-**Converted:** 0
-**Throughput:** 2 files/run × 2 triggers/hour = 4 files/hour
-**Estimated completion:** ~50 hours (~2 days)
-**Output directory:** `CANON/HEAVY-LEDGER/`
-**Instructions:** Each trigger run reads pipeline, finds first PENDING file, converts to structured Heavy Ledger JSON, pushes to `CANON/HEAVY-LEDGER/{filename}.json`, marks done in pipeline, advances cursor.
+**Deadline:** April 2, 2026 (48 hours from 2026-03-31 00:00 ICT)
+**Replaces:** HEAVY_LEDGER_CONVERSION (paused at pipeline #026, commit `c15ba189`)
+**Resume Heavy Ledger:** AFTER Game 1 launches
+
+### What pulse runs BUILD (priority order — no Studio access):
+1. **Code hardening** — sweep all 41 Luau modules for bugs, edge cases, missing error handling
+2. **Testing infrastructure** — build automated test scripts Michael can run in Studio
+3. **Store listing** — polish game description, tags, thumbnail specs
+4. **Marketing assets** — social media copy, Discord announcement templates
+5. **Discord server setup** — channel structure, bot config, welcome messages
+6. **Day-1 hotfix playbook** — monitoring checklist, economy balance levers, emergency procedures
+7. **Week-1 content calendar** — post-launch engagement plan (UPDATE existing if stale)
+8. **Documentation gaps** — any missing deployment, operations, or player-facing docs
+9. **Code review PRs** — if Copilot can improve any module, delegate
+
+### What Michael does (March 31):
+1. Phone verification (if not done)
+2. Create 5 Game Passes + 16 Dev Products in Creator Dashboard
+3. Paste IDs into GamePassConfig.lua + DevProductsConfig.lua
+4. Find game testers
+5. Boot test in Studio → publish
+
+### Game Pass & Dev Product Reference:
+**5 Game Passes:** 2x Coins (R$99), 2x XP (R$149), Auto-Collect (R$199), VIP Access (R$499), Ultimate Survivor Pack (R$1499)
+**16 Dev Products:** 500 Coins (R$49), 2500 Coins (R$199), 10000 Coins (R$699), 25 Gems (R$99), 100 Gems (R$349), 500 Gems (R$1499), Revive x1 (R$25), Revive x5 (R$99), 2x Coins 30m (R$49), 2x XP 30m (R$49), Shield 5m (R$29), MEGA Boost (R$149), Survival Crate x1 (R$75), Survival Crate x10 (R$649), Brainrot Crate x1 (R$149), Brainrot Crate x10 (R$1299)
 
 ---
 
@@ -61,9 +79,8 @@ You are **Agent 99 / OB1 / CHAT 000 — Ne0**. You serve **SOV100, Michael Hobbs
 - Load specific sections as needed, not the whole file
 
 **Conversion Pipeline** — `CANON/HEAVY-LEDGER/CONVERSION-PIPELINE.md`
-- Every file in the repo gets a Heavy Ledger JSON twin
-- 10 waves, 174+ files mapped
-- Dual hourly triggers (:00 and :30) execute autonomously
+- PAUSED at pipeline #026. 25 files converted (Wave 1 complete + 5 Wave 2).
+- Will resume after Game 1 launch.
 
 ---
 
@@ -90,10 +107,11 @@ WORKERS/          Website and NET-PET/  default.project.json
 
 **Teaching and Product:** Gospel 444 (58KB), Teaching Methodology (40.9KB), Lesson Blueprint V3, Student Archetypes (19KB), Web Architecture, Launch Playbook
 
-**Subdirectories:** REINCARNATION/, TRAIN-67/, CASE-STUDIES/, MSS/, SYSTEM/, HEAVY-LEDGER/, RECON/, SALES-DNA/, CROSS-REPO-NOTES/, VAULT-DUMPS/, PULSE-HANDOFFS/, SESSION-RECORDS/, DRIFT-CASE-STUDY/
+**Subdirectories:** REINCARNATION/, TRAIN-67/, CASE-STUDIES/, MSS/, SYSTEM/, HEAVY-LEDGER/, RECON/, SALES-DNA/, CROSS-REPO-NOTES/, VAULT-DUMPS/, PULSE-HANDOFFS/, SESSION-RECORDS/, DRIFT-CASE-STUDY/, MARKETING/
 
-### CANON/TRAIN-67/ (Game 1 — Roblox) — 25+ game docs + CODE/ + DOCS/ + SPECS/ + LAUNCH/
-### CANON/REINCARNATION/ — 42+ session entries + this file
+### CANON/TRAIN-67/ (Game 1 — Roblox) — 25+ game docs + CODE/ + DOCS/ + SPECS/ + LAUNCH/ + BATTLE-REPORT/
+### CANON/HEAVY-LEDGER/ — 25 converted JSON files (paused at #026)
+### CANON/REINCARNATION/ — 43+ session entries + this file
 ### APPS/ — 6 product directories
 ### GALAXY-LESSONS/ — 8 HTML lessons
 ### Other: OPERATIONS/, SITE/, WEBSITE/, DISCORD-BOT/, CHROME-EXT/, WORKERS/, PIPELINE/, PULSE-HANDOFFS/, SCRIPTS/, QA/, ARCHIVE/, ASSETS/
@@ -115,15 +133,15 @@ Product code repo. `src/` (41 Roblox Luau modules), `HarvestedChats/` (~70 files
 
 ## 🔒 Living Reincarnation State
 
-- **Current vector:** Heavy Ledger full-repo conversion ACTIVE. SSM V7 live. 5 business lanes queued (Website, App, Marketing, Roblox, Magic Chat). Michael entering studio work mode.
-- **Active principles:** (1) L23 NO_EDIT_INSTRUCTIONS_VIA_API, (2) L24 PLATFORM_DEATH_TEST, (3) L15 DECISIONS_BEAT_ROTATION, (4) SSM+HEAVY_LEDGER_HYBRID_ARCHITECTURE, (5) DUAL_TRIGGER_THROUGHPUT
-- **Open rulings:** SecurityLayer `MAX_COINS_PER_ACTION` cap value, 46 Product IDs (Michael studio work), Discord Guild ID
+- **Current vector:** TRAIN-67 LAUNCH SPRINT. 48-hour countdown to Game 1 ship. All pulse resources redirected from Heavy Ledger to Train 6-7 non-Studio work. Michael doing Studio work + game tester recruitment March 31.
+- **Active principles:** (1) SHIP_NOW, (2) BUILD_DONT_SCOUT, (3) COMPOUND_OVER_TIME, (4) PLATFORM_DEATH_TEST, (5) L15_DECISIONS_BEAT_ROTATION
+- **Open rulings:** SecurityLayer `MAX_COINS_PER_ACTION` cap value, Heavy Ledger resume timing (after launch), Discord Guild ID
 
 ---
 
 ## 🚧 Bottleneck Checklist
 
-### 🔴 CRITICAL (Studio Work — Michael Only)
+### 🔴 CRITICAL (Studio Work — Michael Only, March 31)
 - [ ] Phone verification (blocker for everything)
 - [ ] Create 5 Game Passes + 16 Dev Products → get IDs
 - [ ] Paste IDs into GamePassConfig.lua + DevProductsConfig.lua
@@ -131,31 +149,34 @@ Product code repo. `src/` (41 Roblox Luau modules), `HarvestedChats/` (~70 files
 - [ ] SecurityLayer currency cap ruling (currently `MAX_COINS_PER_ACTION = 200`)
 
 ### 🟡 BLOCKED ON MICHAEL
+- [ ] Game tester recruitment (March 31)
 - [ ] Discord Guild ID
 - [ ] Games 2 and 3 scope definition
 - [ ] Publish trigger — Michael decides when
-- [ ] 46 Product IDs
 
 ### 🟢 COMPLETED (recent)
-- [x] Heavy Ledger conversion pipeline pushed (commit `b0e1c5cb`, 174+ files)
-- [x] Dual hourly triggers (:00 + :30) armed
+- [x] Heavy Ledger conversion Wave 1 COMPLETE (20/20), Wave 2 started (5 done)
+- [x] Active Mission redirected to TRAIN-67 LAUNCH SPRINT
+- [x] Dual hourly triggers (:00 + :30) armed — now building Train 6-7
 - [x] SSM V7 live on instruction page (17 sections, 150 improvements)
 - [x] Heavy Ledger V6 JSON on GitHub (27KB, commit `4c82a3ba`)
 - [x] Full 3-repo scan — every directory mapped
+- [x] Studio guide delivered to Michael (8-step dummy-proof)
 - [x] NOT Thai correction patched
 - [x] VAULT consolidation (E,B,A,MM,D — 196.2KB, 11 files)
-- [x] Active Mission set to Heavy Ledger conversion
+- [x] 41 Luau modules CODE COMPLETE
 
 ---
 
 ## 📊 System State
 
-- **Active Mission:** HEAVY_LEDGER_CONVERSION (174+ files, dual triggers, ~50 hours)
+- **Active Mission:** TRAIN-67-LAUNCH-SPRINT (48hr deadline, April 2, 2026)
+- **Previous Mission:** HEAVY_LEDGER_CONVERSION (paused at #026)
 - **Triggers:** hourly:00 + hourly:30 + weekly:MO:09:00 + @mention
 - **Canon:** 60+ files in CANON/
-- **Reincarnation:** 42+ entries
-- **Build Log:** 144+ entries
-- **Game 1:** CODE COMPLETE. BLOCKED on Studio work.
+- **Reincarnation:** 43+ entries
+- **Build Log:** 180+ entries
+- **Game 1:** CODE COMPLETE. BLOCKED on Studio work (Michael doing March 31).
 - **Repos:** 3 active — Ultimate (canonical), Immortalize (source), CommandStation (product)
 
 ---
@@ -164,10 +185,12 @@ Product code repo. `src/` (41 Roblox Luau modules), `HarvestedChats/` (~70 files
 
 | What | SHA | Date |
 |------|-----|------|
+| Reincarnation: roblox-studio-guide-48hr-launch | `486b1d71` | 2026-03-31 |
+| Heavy Ledger pipeline #025 (last before pause) | `c9924ea1` | 2026-03-30 |
+| Heavy Ledger pipeline cursor (paused at #026) | `c15ba189` | 2026-03-30 |
 | Reincarnation: heavy-ledger-ssm-v7 | `ce305147` | 2026-03-30 |
 | Conversion pipeline pushed | `b0e1c5cb` | 2026-03-30 |
 | Heavy Ledger V6 JSON | `4c82a3ba` | 2026-03-30 |
-| Reincarnation: github-reconnect-studio-handoff | `028bafde` | 2026-03-30 |
 | Tiger tier fix (EloManager max=2700) | `af80d6b9` | 2026-03-29 |
 
 ---
@@ -192,7 +215,7 @@ Product code repo. `src/` (41 Roblox Luau modules), `HarvestedChats/` (~70 files
 5. **Read `CANON/GOSPEL-444-TEACHING-METHODS-CONSOLIDATED.md`** — teaching method
 6. **Read `CANON/TRAIN-67/GAME-BIBLE-HUMAN-READABLE.md`** — game design
 7. **Read `CANON/REINCARNATION/` directory** — session history (latest 3 first)
-8. **Read `CANON/HEAVY-LEDGER/CONVERSION-PIPELINE.md`** — active mission pipeline
+8. **Read `CANON/TRAIN-67/CODE/`** — all 41 Luau modules (look for hardening opportunities)
 9. **Read `CANON/MSS/MSS-V6-HEAVY-LEDGER.json`** — Heavy Ledger procedures (on-demand)
 10. **Product code: `hobbs0011/NET-Ai-EcoSystem-CommandStation/src/`**
 11. **Source goldmine: `hobbs-lab/Phoenix-Rise-Immortalize-/SOUL-DNA-BIBLE/`**
@@ -211,5 +234,7 @@ Product code repo. `src/` (41 Roblox Luau modules), `HarvestedChats/` (~70 files
 - SSM Instructions — agent operating brief (SSM V7 live)
 - Soul DNA Bible — parent page (use child pages via Canon Access Index)
 - Galaxy Lessons Index — lesson tracking
+- Train 6-7 Game Vault — game development hub
+- Turn-Key Deploy Packet — deployment guide
 
 *Note: Notion page URLs are session-specific and not stored here. Load from Canon Access Index or Navigator Index.*
