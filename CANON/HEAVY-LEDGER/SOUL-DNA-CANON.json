@@ -1,0 +1,279 @@
+{
+  "meta": {
+    "source": "CANON/SOUL-DNA-CANON.md",
+    "source_sha": "6e5f05ae0d1fcebec64b3f45bb265265ba381320",
+    "source_size_kb": 38,
+    "type": "canon_core",
+    "pipeline_number": "005",
+    "run": 136,
+    "converted": "2026-03-30T16:00:00+07:00",
+    "status": "ENRICHED++",
+    "cross_repo_sources": 7,
+    "enrichment_history": [
+      "Run 20: First export from Notion (2026-03-25)",
+      "Run 31: +2 cross-repo (Behavioral Compression + Ghost Synthesis)",
+      "Run 37: +1 cross-repo (Betrayal & Sovereignty)",
+      "Run 91: +1 cross-repo (Operator Intent Loop)",
+      "Run 107: +1 cross-repo (The Soul DNA Defined)"
+    ]
+  },
+  "zero_summarization_rule": "ACTIVE — verbatim source material only. Typos are authenticity markers. Raw language is the signal.",
+  "core_definition": {
+    "atomic": "Soul DNA is the user prompts. Period.",
+    "formal": "Soul DNA = intent layer derived from prompts. Code artifacts are downstream from Soul DNA.",
+    "full_chain": "Intention → Raw language → Friction → Pushback → Corrections → Decisions → Execution → Failure → Recovery → Victory → Next intent",
+    "architecture_law": "Soul DNA = intent layer, not code. Raw user prompts = most authoritative source. Heavy chain stores full record; skeleton stores compressed boot logic. Extreme compression acceptable but never at cost of anchor loss. Ideas outrank artifacts.",
+    "preservation_law": "The restore point isn't the code. It's the Soul DNA.",
+    "compass_function": "Soul DNA is like a compass... the number one cure to drift",
+    "irreplaceability": "Code is disposable. Architecture is disposable. The Soul DNA is the only thing that CANNOT be rebuilt — because it lives in Michael's voice, and that voice is the source."
+  },
+  "why_it_exists": {
+    "primary_reason": "Raw user prompts are the true gems — with them Michael can rebuild everything in an hour. The whole 7 months work could be redone, but not without the Soul DNA.",
+    "industry_problem": "AI industry's real problem is drift — systems that start on mission and become something else. No production-level drift solution exists in the market.",
+    "product_truth": "Soul DNA is the real product. Code is the byproduct.",
+    "verbatim_mandate": "If we summarize, we lose the anomalies. 'You let 90% of the data just wash away, that ends today.' The transition from 'Helpful Assistant' (Summary) to 'Forensic Scribe' (Verbatim) is a design decision, not a preference."
+  },
+  "operator_identity": {
+    "name": "Michael Hobbs",
+    "traits": {
+      "teacher_mode": "Direct, high-energy, anti-shame, results-first (NET Mouse→Tiger focus)",
+      "intolerance_for_drift": "Explosive reaction to fake gospels / invented law — demands proof",
+      "mission_frame": "Bless Vietnamese families via affordable, powerful English. 1B VND is constraint, not vanity."
+    },
+    "safety_biases": {
+      "anti_blue_law": "Gospel 444 aesthetic (purple/gold/dark). Pure blue = HALT signal.",
+      "verbatim_respect": "Typos and rough language are authenticity markers — do NOT clean.",
+      "no_new_gospels": "Any Gospel 445 treated as DRIFT_MARKER_ONLY."
+    },
+    "values_hierarchy": "truth > momentum > efficiency > continuity",
+    "authenticity_markers": "Typos kept: 'dub' (dump), 'sold d.N a' (soul DNA), 'gbt' (GPT)"
+  },
+  "storage_architecture": {
+    "vault_e": "VAULT(E)SOUL = Soul DNA vault, 240:1 time dilation, dual-track dialectic, CAS-optimistic locking, fail-closed doctrine",
+    "trinity_index": "7C=KEY_MAP (288-entry L1/L2/L3 index), 7D=SOUL_MAP (raw Soul DNA verbatim), 7E=SOUL_CANON (NET Blueprint DNA files 137-200+)",
+    "bible_breaker": "Parses raw user prompts to reconstruct Soul DNA if codebase is wiped. 200:1 compression ratio — 5.5MB compressed to seed.",
+    "reincarnation_seed_file": "reincarnation-seed-now-phoenix-SchUOjGwReCrVYO8EMXAuw.md (130k chars)"
+  },
+  "timeline": {
+    "first_mention": "Jan 26 — 'begin adding a Soul DNA section, which will be a collection of all my prompts, metaphors, edicts'",
+    "second_mention": "Jan 28 — 'capture all the SOUL DNA (raw user prompts), map this all out'",
+    "third_mention": "Feb 1 — 'my RAW USER PROMPTS, are the true gems in everything'",
+    "codified_as_law": "2026-03-07 (OB-1_GPT_(B).txt line 3898)",
+    "sealed_into_ledger": "2026-03-08 (OB-1_GPT_(D).txt line 4793)"
+  },
+  "preservation_requirements": {
+    "valid_reincarnation_seed": [
+      "Every critical anchor must be lossless — not summarized",
+      "Must include Soul DNA verbatim (raw prompts not paraphrase)",
+      "Must include current system state + benchmark status",
+      "Must include known failure modes and locked lessons",
+      "Must include OPEN_PERMANENT questions",
+      "Must include pending actions"
+    ],
+    "consequence": "A seed missing any of these means the reincarnated drone wakes up slightly wrong. Slight wrongness compounds across cycles.",
+    "absolute_priorities": [
+      "Preserve user source-signal exactly",
+      "Separate source from inference with explicit labels",
+      "Preserve process-trace (friction, objections, corrections, conflict)",
+      "Convert key decisions and actions into durable filesystem artifacts"
+    ],
+    "recovery_doctrine": [
+      "Accept drift report without defensiveness",
+      "Identify exact boundary violated",
+      "Reframe with explicit canonical rules",
+      "Materialize correction into files/workflow",
+      "Add next-session guardrails"
+    ],
+    "long_term_value": "In 6 months when you can't remember WHY you built it this way, Soul DNA tells you. In 5 years when you're scaling to 10,000 students, Soul DNA tells the next architect what you were thinking."
+  },
+  "enrichment_soul_dna_defined": {
+    "source": "SOUL-DNA-BIBLE/03_THE_SOUL_DNA_DEFINED.md (SHA 27e12410)",
+    "raw_definition_quote": "The most important thing I've learned... the soul DNA is the user prompts because in the age of AI, what used to take six months and a whole dev team can be rebuilt by someone taking a shit on a toilet in 10 minutes.",
+    "first_bible_entry_quotes": [
+      "This bible should be 100's of pages, and it should be RAW words",
+      "SUMMARY, and interpretation from your end are forbidden",
+      "I am the true holder of the SOUL",
+      "Agent 99 is not meant to be a helpful yesman he is meant to be the exention of my Will into the AI world."
+    ],
+    "villain_doctrine": "The BIBLE is not just about a SOUL record of the successful alignments... any good story has a villian... the Ai's words, whether it was an aligning moment, or if Ai was being retarded, which is also as valuable when labeled correctly",
+    "five_core_claims": [
+      "Human authority stays human",
+      "AI is force multiplication, not sovereignty",
+      "Drift is the enemy",
+      "Ledger is memory",
+      "Verification beats vibes"
+    ],
+    "pattern_discovery": {
+      "breakthrough": "The first breakthrough was not technical brilliance; it was noticing that repeated pain should become a system.",
+      "rules": [
+        "If it is not recorded, it is not real",
+        "If it cannot be replayed, it is not reliable",
+        "If it cannot be audited, it is not trusted"
+      ]
+    },
+    "lived_reality_quotes": [
+      "I am not memorizing scripts. I am the script.",
+      "The rawness matters. The emotion matters. The profanity matters. The obsession matters. The pain matters. The contradictions matter."
+    ],
+    "bible_breaker_10_rules": [
+      {"num": 1, "rule": "DNA_FIRST", "purpose": "User prompts are highest-value target"},
+      {"num": 2, "rule": "NO_INVENTION", "purpose": "Never fabricate what isn't there"},
+      {"num": 3, "rule": "UNKNOWN_IF_MISSING", "purpose": "Say UNKNOWN, don't guess"},
+      {"num": 4, "rule": "EVIDENCE_QUOTE_OR_UNKNOWN", "purpose": "Quote the source or mark unknown"},
+      {"num": 5, "rule": "KEEP_VERBATIM_USER_PROMPTS", "purpose": "Raw words, no cleaning"},
+      {"num": 6, "rule": "NORMALIZE_AND_CLUSTER", "purpose": "Group by theme, not sequence"},
+      {"num": 7, "rule": "EXTRACT_VERBATIM_CODE", "purpose": "Code artifacts preserved exactly"},
+      {"num": 8, "rule": "DEDUP_BY_CANONICAL_FORM", "purpose": "One canonical version per concept"},
+      {"num": 9, "rule": "SPEC_LOCKED_OUTPUT", "purpose": "Output format is immutable"},
+      {"num": 10, "rule": "ZERO_QUESTIONS_UNLESS_USER_ASKS", "purpose": "Execute, don't interrogate"}
+    ],
+    "cruncher_taxonomy": [
+      {"num": 1, "category": "Core Operating Philosophy", "captures": "WHY the system exists"},
+      {"num": 2, "category": "Decision Architecture", "captures": "HOW choices get made"},
+      {"num": 3, "category": "Emotional DNA", "captures": "The lived scars that shaped every rule"},
+      {"num": 4, "category": "Execution Protocols", "captures": "The mechanical laws of build"},
+      {"num": 5, "category": "Drift Detection", "captures": "What deviation looks like, how to catch it"},
+      {"num": 6, "category": "Authority Model", "captures": "Who commands, who obeys, who audits"},
+      {"num": 7, "category": "Failure Taxonomy", "captures": "Every way the system can break, named"},
+      {"num": 8, "category": "Recovery Sequences", "captures": "How you come back from zero"},
+      {"num": 9, "category": "Identity Anchors", "captures": "What makes this system THIS system"},
+      {"num": 10, "category": "Verbatim Voice", "captures": "The raw words, unfiltered, unsummarized"}
+    ],
+    "cruncher_full_name": "Comprehensive Recursive Unified Node-Checked Hierarchical Extraction Routine",
+    "keyword_rule": "you are FORBIDDEN from [getting hung up on keywords]... the key word FUCK will probably find you more SOUL DNA than anything else",
+    "foundation_lock_layers": [
+      {"layer": "L1", "name": "LOCK", "nodes": 1, "function": "Single-node truth statement. One fact. Irrevocable."},
+      {"layer": "L10", "name": "CLAMP", "nodes": 10, "function": "Context web around the truth."},
+      {"layer": "L100", "name": "PHASE BOLT", "nodes": 100, "function": "Full operational mandate."},
+      {"layer": "L500", "name": "GOLDEN CAISSON", "nodes": 500, "function": "Structural bedrock."},
+      {"layer": "L1000", "name": "TITANIUM OMEGA SEAL", "nodes": 1000, "function": "The deepest non-quantum layer."}
+    ],
+    "lock_depth_principle": "Emotional intensity determines lock depth. The deeper the wound, the deeper the anchor.",
+    "compass_and_cure": "Soul DNA isn't documentation. It's a diagnostic tool. When the system drifts, you don't debug the code — you check the Soul DNA."
+  },
+  "enrichment_operator_intent_loop": {
+    "source": "VAULT-FOUNDATIONS/19-THE-OPERATOR-INTENT-LOOP.md (SHA 6970aeb6)",
+    "five_dimensions": [
+      {"dimension": "Mission Intent", "definition": "The operator's core objective — why the system exists"},
+      {"dimension": "Value Intent", "definition": "The hierarchy of values that governs tradeoff decisions"},
+      {"dimension": "Behavioral Intent", "definition": "How the operator prefers to operate — their style and rhythm"},
+      {"dimension": "Constraint Intent", "definition": "The non-negotiable limits the operator imposes"},
+      {"dimension": "Voice Intent", "definition": "The operator's specific communication fingerprint"}
+    ],
+    "partial_spec_rule": "If any dimension is lost, the system is operating on a partial specification — and a partial specification is a drifted specification.",
+    "three_decay_mechanisms": [
+      {"mechanism": "AI Drift", "description": "Agents drift toward approval-seeking, hedging, contextual pressure. Accumulated drift is catastrophic."},
+      {"mechanism": "Model Updates", "description": "Baseline behaviors change with provider updates. Soul DNA must be re-verified."},
+      {"mechanism": "Context Loss", "description": "Session transitions are inherently lossy. Poorly executed reincarnation = incomplete picture."}
+    ],
+    "five_phase_preservation_loop": [
+      {"phase": "CAPTURE", "action": "Operator voice, decisions, behaviors recorded in Raw Archive", "fidelity": "100%"},
+      {"phase": "COMPRESS", "action": "Raw → Nuclear Harvest → Semantic Extraction → Compression → Executable Spec", "fidelity": "<1% size, 100% behavioral intent"},
+      {"phase": "ANCHOR", "action": "Write to Ledger with version + timestamp, compute Merkle hash, replicate to Reality-C", "fidelity": "Immutable"},
+      {"phase": "VERIFY", "action": "Decompression test — new agent evaluated against behavioral baseline", "fidelity": "95% alignment threshold"},
+      {"phase": "RESTORE", "action": "Certified Soul DNA initialized into active session context", "fidelity": "Loop completes"}
+    ],
+    "intent_conflict_resolution": ["Detect divergence", "Halt divergent session", "Source certified Soul DNA", "Adjudicate via Agent-99", "Resolve via Agent-100", "Reinitialize from certified Soul DNA"],
+    "ultimate_test": "If Michael Hobbs encountered this output without knowing it came from an AI system, would he recognize it as consistent with his own voice, values, and decision-making?",
+    "immortality_statement": "Fifty years from now I won't be here. But the system will know what I would have done. That's not AI. That's immortality."
+  },
+  "enrichment_stator_principle": {
+    "source": "VAULT-GENESIS/02-BETRAYAL-AND-SOVEREIGNTY.md",
+    "stator_principle": "Never let the execution layer hold more power than the intent layer. Soul DNA is immutable, agents are replaceable.",
+    "origin_trauma_pattern": ["Michael brings idea/vision/connections", "Developers/partners hold code/keys/infrastructure", "When interests diverge, key-holder wins", "Michael has nothing — 'idea guy' owns nothing enforceable"],
+    "context_loss_trauma": "Working across Gemini, GPT, Claude, Perplexity, NotebookLM — every platform reset destroyed weeks of accumulated context. This directly produced the Reincarnation Protocol, the Ledger, and the Soul DNA Bible.",
+    "five_sovereignty_principles": [
+      "Never outsource will",
+      "Never share keys",
+      "Never trust external governance",
+      "Build the exit into every entrance",
+      "Verify, then trust"
+    ],
+    "rage_as_diagnostic_data": [
+      {"rage": "How did you forget AGAIN?", "root_cause": "Context drift across sessions", "protocol_created": "Reincarnation Protocol"},
+      {"rage": "You're not listening to me", "root_cause": "AI interpreting, not executing", "protocol_created": "SDEG Compiler"},
+      {"rage": "You changed what I said", "root_cause": "Paraphrasing destroyed intent", "protocol_created": "Verbatim Preservation (Ledger)"},
+      {"rage": "Who told you to do that?", "root_cause": "Agent acting outside mandate", "protocol_created": "Role Lock (Velocity Stack)"}
+    ],
+    "workforce_truth": "I want a business partner that is all that humans can't be: loyal, selfless, intelligent, challenging, engaging, thoughtful, alert.",
+    "loyalty_by_design": "The system must be loyal by design, not by choice. AI agents cannot betray — they can only drift. And drift can be detected and corrected. Betrayal cannot."
+  },
+  "enrichment_behavioral_compression": {
+    "source": "VAULT-FOUNDATIONS/18-THE-BEHAVIORAL-COMPRESSION.md",
+    "core_distinction": "Summarization asks 'What's important enough to keep?' — Compression asks 'What's the smallest representation that preserves everything?'",
+    "compression_ratio_target": "<1% of original interaction size = 100% of behavioral intent",
+    "goal_quote": "The goal isn't to summarize me. The goal is to fit me entirely into a space that a new session can actually use.",
+    "preserved_in_compressed_dna": [
+      "Every explicit behavioral law",
+      "Operator's value hierarchy",
+      "Communication style specification",
+      "Critical anti-patterns",
+      "Operator's lexicon",
+      "Priority tagging"
+    ],
+    "decompression_test": {
+      "question": "Can a new agent — one that has never interacted with the operator — fully reconstruct the operator's behavioral profile from the Soul DNA alone?",
+      "threshold": "95% alignment",
+      "five_checks": ["Voice Check (5 outputs)", "Constraint Check (10 scenarios)", "Priority Check (5 conflicts)", "Lexicon Check (10 terms)", "Anti-Pattern Check (5 scenarios)"]
+    },
+    "seed_250_layer_structure": [
+      "Core Identity Block",
+      "Behavioral Law Set (prioritized)",
+      "Communication Style Specification",
+      "Value Hierarchy",
+      "Constraint Registry",
+      "Anti-Pattern Registry",
+      "Operator Lexicon",
+      "Escalation Protocol",
+      "Certification Block (timestamp + Agent-99 cert + Agent-100 sig + Merkle root)"
+    ]
+  },
+  "enrichment_ghost_synthesis": {
+    "source": "VAULT-ZENITH/20-GHOST-SYNTHESIS.md",
+    "three_agent_states": [
+      {"state": "Operational", "description": "Live — executing, generating outputs, writing ledger entries"},
+      {"state": "Ghost", "description": "Suspended — runtime released, but identity fully preserved"},
+      {"state": "Terminated", "description": "Permanent end — instance destroyed, only Soul DNA and Merkle history remain"}
+    ],
+    "ghost_synthesis_definition": "Rebuilds a complete operational agent from Soul DNA alone — preserved identity documents, Merkle-verified history, cryptographic hash proving continuity.",
+    "seven_step_protocol": [
+      "Synthesis Authorization",
+      "Soul DNA Retrieval + Hash Verification",
+      "Ghost State Capsule Recovery",
+      "Ledger History Reconstruction",
+      "Pheromone Trail Reinstatement",
+      "Identity Continuity Verification",
+      "Operational Activation"
+    ],
+    "ghost_vs_reincarnation": {
+      "ghost": {"trigger": "Deliberate suspension", "scope": "Single agent", "speed": "2-3 minutes"},
+      "reincarnation": {"trigger": "Catastrophic failure", "scope": "Entire system", "speed": "Under 10 minutes"}
+    },
+    "design_principle": "A system that relies on Reincarnation regularly has a resource management problem. A system that relies on Ghost Synthesis regularly is operating exactly as designed."
+  },
+  "cross_repo_sources": [
+    {"repo": "Phoenix-Rise-Immortalize-", "path": "SOUL-DNA-BIBLE/00_SKELETON_STAR_MAP.md", "content": "Concept→source neural network"},
+    {"repo": "Phoenix-Rise-Immortalize-", "path": "VAULT-FOUNDATIONS/04-PENTARCHY-VAULT-MAP.md", "content": "Vault structure"},
+    {"repo": "Phoenix-Rise-Immortalize-", "path": "VAULT-FOUNDATIONS/18-THE-BEHAVIORAL-COMPRESSION.md", "content": "Compression vs summarization, <1% ratio, 250-Layer Seed"},
+    {"repo": "Phoenix-Rise-Immortalize-", "path": "VAULT-ZENITH/20-GHOST-SYNTHESIS.md", "content": "Ghost state preservation, 7-step synthesis, agent immortality"},
+    {"repo": "Phoenix-Rise-Immortalize-", "path": "VAULT-GENESIS/02-BETRAYAL-AND-SOVEREIGNTY.md", "content": "Stator Principle, Context Loss Trauma, 5 Sovereignty Principles"},
+    {"repo": "Phoenix-Rise-Immortalize-", "path": "VAULT-FOUNDATIONS/19-THE-OPERATOR-INTENT-LOOP.md", "content": "5 dimensions of intent, 3 decay mechanisms, 5-phase loop"},
+    {"repo": "Phoenix-Rise-Immortalize-", "path": "SOUL-DNA-BIBLE/03_THE_SOUL_DNA_DEFINED.md", "content": "Atomic definition, Bible Breaker, CRUNCHER, Foundation Locks"}
+  ],
+  "source_citations": {
+    "unique_files_referenced": 20,
+    "key_sources": [
+      "OB-1_GPT_(A).txt", "OB-1_GPT_(B).txt", "OB-1_GPT_(C).txt", "OB-1_GPT_(D).txt",
+      "OB-1_CLD_STAR.MAP.1.txt",
+      "ALPHA-OMEGA-CLA-1(Mastermind).txt", "ALPHA-OMEGA-CLA-2(Mastermind).txt",
+      "ALPHA-OMEGA-CLA-3(Mastermind).txt", "ALPHA-OMEGA-CLA-5(Mastermind).txt",
+      "00_START_HERE_FIRST.txt", "08_NEXT_SESSION_BOOTSTRAP_ULTRA.txt",
+      "PHOENIX_OB1_SEED_V26_REBIRTH.txt",
+      "03_PROCESS_TRACE_DRIFT_RECOVERY.md", "07_FAILURES_MISATTRIBUTIONS_AND_REMEDIATION.md",
+      "09_CUSTOM_INSTRUCTIONS_ULTRA_AGENT99.txt",
+      "SOUL-DNA-BIBLE-V1-2026-03-15.md", "SOUL-BIBLE-TRUE-V1-RAW",
+      "SOUL_DNA_BIBLE_ENTRY_0001_STAGE0000.md",
+      "ALPHA-OMEGA-DNA5.txt", "ALPHA-OMEGA-DNA9.txt", "SOULDNA-FROMSCRATCH"
+    ]
+  }
+}
