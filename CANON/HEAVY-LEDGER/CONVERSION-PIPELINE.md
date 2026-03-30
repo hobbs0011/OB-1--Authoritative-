@@ -21,7 +21,7 @@
 - On completion: mark DONE, update pipeline_cursor, advance to next
 
 ## WAVE 1: CANON ROOT — SOUL DNA CORE (Priority: HIGHEST)
-- [ ] 001|ALPHA-OMEGA-SOUL-DNA-GOVERNANCE-CANON.md|61KB|canon_governance
+- [x] 001|ALPHA-OMEGA-SOUL-DNA-GOVERNANCE-CANON.md|61KB|canon_governance|DONE|Run132|e56adad3|24KB
 - [ ] 002|SOUL-DNA-DEEP-DIVE.md|45KB|canon_quotes
 - [ ] 003|GOSPEL-444-TEACHING-METHODS-CONSOLIDATED.md|58KB|canon_teaching
 - [ ] 004|NET-TEACHING-METHODOLOGY.md|41KB|canon_teaching
@@ -215,10 +215,13 @@
 - [ ] 174|SCAN_NEEDED|../.github/*|scan_and_convert
 
 ## Pipeline State
-pipeline_cursor: 001
+pipeline_cursor: 002
 total_files: 174+
-total_converted: 0
+total_converted: 1
 total_bytes_source: ~1.8MB
+total_bytes_json: ~24KB
 wave_current: 1
-last_updated: 2026-03-30T12:10:00+07:00
+last_updated: 2026-03-30T14:00:00+07:00
+last_run: 132
+last_commit: e56adad3
 status: ACTIVE
