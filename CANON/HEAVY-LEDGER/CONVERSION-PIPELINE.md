@@ -43,8 +43,8 @@
 - [x] 020|BIBLE-CH01-DOC00-UNIVERSAL-LEDGER-MAP-V55.md|16KB|bible_chapter|DONE|Run150|57ed012e|14KB
 
 ## WAVE 2: CANON ROOT — BIBLE CHAPTERS + VAULTS
-- [ ] 021|BIBLE-CH02-DOC01-SOUL-DNA-MAP.md|16KB|bible_chapter
-- [ ] 022|SOUL-DNA-BIBLE-CH10-THE-MACHINE-THAT-BUILDS-THE-MACHINE.md|16KB|bible_chapter
+- [x] 021|BIBLE-CH02-DOC01-SOUL-DNA-MAP.md|16KB|bible_chapter|DONE|Run151|7682c0f8
+- [x] 022|SOUL-DNA-BIBLE-CH10-THE-MACHINE-THAT-BUILDS-THE-MACHINE.md|16KB|bible_chapter|DONE|Run152|3d7aec61
 - [ ] 023|BIBLE-CH03-DOC02-SACRED-ARTIFACT-SORTING.md|15KB|bible_chapter
 - [ ] 024|VAULT-L-LIVE-CLASSES-CONSOLIDATED-2.md|15KB|vault_classes
 - [ ] 025|NOTEBOOKLM-VAULT-ARCHITECT-OF-AGENT99-FIRST-250-LAYERS.md|16KB|notebooklm
@@ -119,13 +119,13 @@
 - [ ] 128-174|MSS, GALAXY-LESSONS, APPS, WORKERS, SITE, ROOT|various|various
 
 ## Pipeline State
-pipeline_cursor: 021
+pipeline_cursor: 022
 total_files: 174+
-total_converted: 21
-total_bytes_source: ~569KB (21 files)
+total_converted: 22
+total_bytes_source: ~585KB (22 files)
 wave_current: 2
-last_updated: 2026-03-30T21:00:00+07:00
-last_run: 150
-last_commit: 57ed012e
-next_file: BIBLE-CH02-DOC01-SOUL-DNA-MAP.md
+last_updated: 2026-03-30T22:01:00+07:00
+last_run: 152
+last_commit: 3d7aec61
+next_file: BIBLE-CH03-DOC02-SACRED-ARTIFACT-SORTING.md
 status: ACTIVE
