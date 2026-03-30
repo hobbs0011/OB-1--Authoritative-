@@ -1,10 +1,10 @@
 # Heavy Ledger Conversion Pipeline — Cursor
 
-**Current cursor:** 009
-**Last completed:** 008 — VAULT-E-SOUL-DNA-CONSOLIDATED.json (22KB, commit `152bd79a`)
-**Next target:** 009 — VAULT-E-SOUL-DNA-CONSOLIDATED-2.md (25KB, vault_soul_2)
-**Total converted:** 8/174+
-**Run:** 138 (2026-03-30 17:00 ICT)
+**Current cursor:** 010
+**Last completed:** 009 — VAULT-E-SOUL-DNA-CONSOLIDATED-2.json (25KB source → structured JSON, commit `6ecfc874`)
+**Next target:** 010 — VAULT-A-GENESIS-CONSOLIDATED-2.md (18KB, vault_genesis_2)
+**Total converted:** 9/174+
+**Run:** 140 (2026-03-30 17:30 ICT)
 
 ## Completed
 
@@ -18,3 +18,4 @@
 | 006 | SOUL-DNA-CANON.md | 38KB | 20KB | `ef94357c` | 136b |
 | 007 | SOUL-DNA-BIBLE-CH00-FILE-MAP-AND-METRICS.md | 33KB | 31KB | `23dc71f2` | 137 |
 | 008 | VAULT-E-SOUL-DNA-CONSOLIDATED.md | 32KB | 22KB | `152bd79a` | 138 |
+| 009 | VAULT-E-SOUL-DNA-CONSOLIDATED-2.md | 25KB | ~20KB | `6ecfc874` | 140 |
