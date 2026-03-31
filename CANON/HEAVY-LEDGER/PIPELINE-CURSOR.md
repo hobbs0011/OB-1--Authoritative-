@@ -1,11 +1,11 @@
 # Heavy Ledger Pipeline Cursor
 
 ## Current State
-- **Last Completed:** #046 — BIBLE-CH14-THE-CLOSING-DECLARATION.json
-- **Last Run:** 193 (2026-03-31 13:45 ICT)
-- **Last Commit:** 1ebb3604
-- **Wave 3 Progress:** 6/10
-- **Total Converted:** 43/174+
+- **Last Completed:** #047 — LAUNCH-PLAYBOOK-MASTER.json
+- **Last Run:** 194 (2026-03-31 14:00 ICT)
+- **Last Commit:** 5e33230e
+- **Wave 3 Progress:** 7/10
+- **Total Converted:** 44/174+
 - **Note:** Wave 3 active — bible chapters + canon remaining files
 
 ## Wave 2 Queue (Stalest-First) ✅ COMPLETE
@@ -41,10 +41,10 @@
 | 044 | BIBLE-CH07-THE-LEDGER.md | ✅ DONE | 191 | 602a3113 |
 | 045 | SOUL-DNA-BIBLE-CH11-BETRAYAL-AND-SOVEREIGNTY.md | ✅ DONE | 192 | da906309 |
 | 046 | BIBLE-CH14-THE-CLOSING-DECLARATION.md | ✅ DONE | 193 | 1ebb3604 |
-| 047 | LAUNCH-PLAYBOOK-MASTER.md | ⏳ NEXT | — | — |
-| 048 | GOSPEL-444-REVENUE-BRIDGE.md | PENDING | — | — |
+| 047 | LAUNCH-PLAYBOOK-MASTER.md | ✅ DONE | 194 | 5e33230e |
+| 048 | GOSPEL-444-REVENUE-BRIDGE.md | ⏳ NEXT | — | — |
 | 049 | GOSPEL-444-COMPANION-CROSSREF.md | PENDING | — | — |
 | 050 | BIBLE-CH17-THE-THREE-MANDATES.md | PENDING | — | — |
 
 ## Next Target
-**#047 — LAUNCH-PLAYBOOK-MASTER.md** (operational document conversion)
+**#048 — GOSPEL-444-REVENUE-BRIDGE.md** (canon document conversion)
