@@ -6,7 +6,6 @@
 - **Last Commit:** (this commit)
 - **Wave 4 Progress:** 3/10
 - **Total Converted:** 50/174+
-- **Note:** Run 200 milestone — 50th Heavy Ledger artifact converted
 
 ## Wave 3 Queue ✅ COMPLETE
 | # | Source File | Status | Run | SHA |
