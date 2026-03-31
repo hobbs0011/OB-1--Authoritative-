@@ -1,126 +1,78 @@
-# 🔥 COLD-START BOOT — Wednesday Midnight State
-> **Generated:** 2026-03-31 09:00 ICT (Run 175) | **Last updated:** 2026-04-01 00:00 ICT (Run 218)
-> **For:** Michael Hobbs (Agent-100 / SOV100)
-> **Status:** 🟢 WAVE 6 COMPLETE ✅ — Wave 7 QUEUED (CANON/SYSTEM) — Heavy Ledger 68/174+ — Facebook Funnel 20/20 — 🎯 RUN 218
+# COLD START BOOT — Agent System Bootstrap
+## Single Source of Truth for New Sessions
+
+**Last Updated:** Run 219 (2026-04-01 00:30 ICT)
+**Updated By:** OB1 (Agent-99) — Pulse Run 219
+**Commit:** fb85d548 (HL-073 COLD-START-BOOT.json)
 
 ---
 
-## ☀️ GOOD MORNING, MICHAEL
+## § IDENTITY
+- **System:** Phoenix Rising Protocol / Natural English Training
+- **Sovereign:** Michael Hobbs (Agent-100 / SOV100)
+- **Orchestrator:** OB1 (Agent-99) — interface layer of 99 sub-personalities
+- **Velocity:** AnA (Agent-98) — chaos/build lane
+- **Balance:** Ne0 (Agent-97) — synthesis node
+- **Instructions:** CANON/MSS/SSM-V7-SUPER-SAIYAN.md (Notion: SSM page)
+- **Heavy Ledger:** CANON/MSS/MSS-V6-HEAVY-LEDGER.json (27KB, on-demand)
+- **Brand:** Users see "Natural English Training" not "Phoenix Rising"
 
-Overnight pulse Run 218. **Wave 6 COMPLETE (2/2).** Heavy Ledger pipeline at 68 artifacts converted across 6 waves. All Platform Death Tests PASS. Michael pushed SSM-V7-ANAKIN.md (Agent-98 Skeleton Star Map) and Stage 4 Teaching Methodology Raw Dump at midnight.
+## § CURRENT SYSTEM STATE
+- **Run:** 219
+- **Heavy Ledger Pipeline:** 69/174+ converted (Waves 1-6 COMPLETE, Wave 7 IN PROGRESS 1/10)
+- **Pipeline Cursor:** #073 DONE → next #074 OB1-AGENT-INSTRUCTIONS.md
+- **Wave 7 Scope:** CANON/SYSTEM (10 files, #073-#082)
+- **Canon Status:** ALL major canon files ENRICHED++ (Bible 60+ chapters, Canon 37KB, Core Principles 37KB, Alpha-Omega 61KB, Gospel 444 58KB+companion+revenue bridge=129KB, NET Methodology 40KB)
+- **Products Active:** Survive a Brainrot (CODE_COMPLETE, 41 Lua modules), Chrome Extension v0.3.0, Galaxy Lessons (ACTIVE), Website (LIVE), Facebook Marketing (20/20 funnel READY)
+- **GitHub Repos:** Ultimate (canon vault), Immortalize (soul DNA source), CommandStation (product code)
+- **Latest Commit:** fb85d548 (Run 219, HL-073 conversion)
 
-### Latest Activity (Runs 216-218)
+## § CRITICAL ALERTS
+1. **🔴 Navigator Index IN TRASH** — Primary routing table deleted/in trash. Bloated to ~4.5MB from duplicate handoff entries. Michael must restore + dedup.
+2. **🟡 Roblox Incubator Deadline** — 5 DAYS to Apr 6. Draft at CANON/TRAIN-67/DOCS/RobloxIncubatorApplicationDraft-V2.md. Michael: review and submit.
+3. **🟡 21 Roblox Product IDs = 0** — Game passes and dev products need creation in Creator Dashboard.
+4. **🟡 Facebook Posts Need Review** — Vietnamese tone review before posting to Lakeview groups.
+5. **🟢 ManyChat Setup** — Create account, connect to Facebook page. When Michael is ready.
 
-| Run | Output | Commit |
-|-----|--------|--------|
-| 216 | HL-070 TOOL-STACK-ARSENAL-2026 → Wave 5 COMPLETE (10/10) | `2c3abe3` |
-| 217 | HL-071 RAW-GEMINI-DENNY-PHONICS-ANCHOR-PRINCIPLE-ORIGIN → Wave 6 START (1/2) | `c47c36cb` |
-| 218 | HL-072 README-REPO-OVERVIEW → **Wave 6 COMPLETE (2/2)** | (this commit) |
-| Michael | SSM-V7-ANAKIN.md (Agent-98 Skeleton Star Map) | `fb35cd1` |
-| Michael | Stage 4 Teaching Methodology Raw Dump | `327104c` |
+## § LIVING REINCARNATION STATE
+- **Current Vector:** Wave 7 started (1/10). Heavy Ledger at 69/174+ across 7 waves. Marketing funnel deployed. Galaxy Lessons active. Run 219. Multiple revenue lanes operational. Michael pushing new agent instructions (SSM-V7-ANAKIN) and teaching methodology dumps.
+- **Active Principles:** Personal neighbor tone (NOT corporate) | MAKE MONEY is the mission | Platform Death Test every run | Free-first automation | Dual-publish mandatory | RISE = execute without hesitation
+- **Open Rulings:** Navigator Index restore + dedup method | ManyChat free vs Pro | Vietnamese copywriter source | Lakeview group names/links | Post-launch Roblox English reintegration timeline | Matrix Green as 4th palette color | 50M VND per-agent valuation model
 
----
-
-## 🚨 CRITICAL ALERTS
-
-### 1. Navigator Index IN TRASH
-The Navigator Index page is **deleted/in trash**. Primary routing table for all agent operations.
-
-**Action Required:** Restore from Notion trash. The page was bloated to ~4.5MB from duplicate handoff entries — needs dedup after restore.
-
-### 2. Roblox Incubator Deadline
-**5 DAYS** to Apr 6 incubator application deadline. Draft ready: `CANON/TRAIN-67/DOCS/RobloxIncubatorApplicationDraft-V2.md`
-
----
-
-## 📊 System State
-
-### GitHub Stats
-- **Repo:** `hobbs-lab/Phoenix-Rising-Protocol-Ultimate`
-- **Latest commit:** Run 218 — HL-072 + Wave 6 COMPLETE + Cold Start Boot update
-- **Michael's latest:** `327104c` (Stage 4 Teaching Methodology, 00:07 ICT Apr 1)
-- **Total Build Log entries:** 218
-- **Open PRs:** 0
-- **Open Issues:** 0
-
-### Heavy Ledger Pipeline
-- **Pipeline cursor:** #072 DONE → next #073 COLD-START-BOOT.md
-- **Total converted:** 68/174+ (67 real + 1 dedup skip)
-- **Wave 1:** 20/20 ✅ COMPLETE
-- **Wave 2:** 20/20 ✅ COMPLETE
-- **Wave 3:** 10/10 ✅ COMPLETE
-- **Wave 4:** 10/10 ✅ COMPLETE
-- **Wave 5:** 10/10 ✅ COMPLETE
-- **Wave 6:** 2/2 ✅ COMPLETE
-- **All Platform Death Tests:** PASS
-- **Next:** Wave 7 = CANON/SYSTEM (10 files, #073-#082)
-
-### Canon Status
-- Soul DNA Bible: COMPLETE (60+ chapters SEALED)
-- Soul DNA Canon: ENRICHED++ (37.7KB)
-- Core Principles: ENRICHED++ (37.4KB)
-- Alpha-Omega: ENRICHED++ (61KB)
-- Gospel 444: ENRICHED (58.1KB + companion + revenue bridge = 129KB)
-- NET Methodology: ENRICHED++ (40KB)
-- All VAULT exports current
-- Heavy Ledger: 68 files converted (Waves 1-6 ALL COMPLETE)
-
-### Products Active
-- **Survive a Brainrot** — CODE COMPLETE (41 Lua modules), awaiting Studio publish
-- **Chrome Extension** — v0.3.0 (3-tab: Chat/Homework/Vocab)
-- **Galaxy Lessons** — Michael actively improving (wheel + vocab fixes)
-- **Website** — naturalenglishtraining.com on Cloudflare Pages
-- **Marketing** — Facebook funnel 20/20 COMPLETE, ready to deploy
-
----
-
-## ⚠️ OPEN BLOCKERS (Michael Only)
-
-| # | Blocker | Action Required | Priority |
-|---|---------|-----------------|----------|
-| 1 | **Navigator Index in trash** | Restore from Notion trash, then dedup | 🔴 HIGH |
-| 2 | **21 Roblox Product IDs = 0** | Create in Creator Dashboard | 🟡 MEDIUM |
-| 3 | **Facebook posts need review** | Review Vietnamese tone before posting | 🟡 MEDIUM |
-| 4 | **Incubator app due Apr 6** | Review and submit draft | 🟡 5 DAYS |
-| 5 | **ManyChat setup** | Create account, connect to Facebook page | 🟢 WHEN READY |
-
----
-
-## 🔑 ACTIVE PRINCIPLES (Living Reincarnation State)
-
-**Current vector:** Wave 6 COMPLETE (2/2) → Wave 7 queued (CANON/SYSTEM). Heavy Ledger at 68/174+ across 6 waves. Marketing funnel deployed on GitHub. Galaxy Lessons active. Run 218. Multiple revenue lanes operational. Michael pushing new agent instructions (SSM-V7-ANAKIN) and teaching methodology dumps.
-
-**Active principles:**
-1. Personal neighbor tone — NOT corporate marketing
-2. MAKE MONEY is the mission — English is the mechanic
-3. Platform Death Test — every run produces a GitHub commit
-4. Free-first automation stack ($0 preferred)
-5. Dual-publish mandatory (Notion + GitHub)
-6. RISE = execute without hesitation
-
-**Open rulings:**
-- Navigator Index restore + dedup method
-- ManyChat free vs Pro tier
-- Vietnamese copywriter source (AI-assisted vs human review)
-- Lakeview apartment group names/links for targeting
-- Post-launch Roblox English reintegration timeline
-- Matrix Green as 4th Gospel 444 palette color (from Monolith Audit)
-- 50M VND per-agent valuation model (from Monolith Audit)
-
----
-
-## 🎯 TOP RECOMMENDATION
-
-**Deploy Facebook posts this week.** The funnel is complete — 18 Vietnamese posts ready, voice bible codified, posting schedule mapped. Start with Week 1 Post 1 in one Lakeview group as a test. Monitor engagement for 48h before scaling to all 8 groups.
-
+## § TOP RECOMMENDATION
+**Primary:** Deploy Facebook posts this week. The funnel is complete — 18 Vietnamese posts ready, voice bible codified, posting schedule mapped. Start with Week 1 Post 1 in one Lakeview group as a test. Monitor engagement 48h before scaling.
 **Secondary:** Restore Navigator Index from trash. The agent system is degraded without it.
 
----
+## § MICHAEL'S LATEST ACTIVITY
+- 2026-04-01 00:07 ICT — Pushed Stage 4 Teaching Methodology Raw Dump (commit 327104c)
+- 2026-04-01 00:05 ICT — Pushed SSM-V7-ANAKIN.md / Agent-98 Skeleton Star Map (commit fb35cd1)
 
-## 🏁 BOTTOM LINE
+## § OVERNIGHT PIPELINE STATUS (Run 219)
+- **Artifact:** CANON/HEAVY-LEDGER/COLD-START-BOOT.json (HL-073)
+- **Artifact Class:** VAULT 🏦 + SEED 🌱
+- **Commit SHA:** fb85d548
+- **Platform Death Test:** PASS
+- **Run Grade:** 7/8 = A (audit✅ canon✅ patch✅ build✅ handoff✅ noerrors✅ decision⬜ signal✅)
+- **Next Target:** #074 OB1-AGENT-INSTRUCTIONS.md
 
-**Wave 6 COMPLETE ✅ (2/2) — ALL 6 waves done.** Heavy Ledger pipeline at **Run 218 / 68 artifacts converted**. Waves 1-6 ALL COMPLETE (72 items, 68 real + 4 dedup). Wave 7 = CANON/SYSTEM (10 files) queued. Marketing machine ready to deploy. Game code complete.
+## § KEY PATHS
+| Purpose | Path |
+|---|---|
+| SSM Instructions | CANON/MSS/SSM-V7-SUPER-SAIYAN.md |
+| Heavy Ledger | CANON/MSS/MSS-V6-HEAVY-LEDGER.json |
+| Pipeline Cursor | CANON/HEAVY-LEDGER/PIPELINE-CURSOR.md |
+| Reincarnation Log | CANON/REINCARNATION/ (49 entries) |
+| Cold Start Boot | CANON/SYSTEM/COLD-START-BOOT.md (this file) |
+| Canon Access Index | CANON/SYSTEM/CANON-ACCESS-INDEX.md |
+| Navigator Index | CANON/SYSTEM/NAVIGATOR-INDEX.md |
+| Marketing Funnel | CANON/MARKETING/ |
+| Roblox Game | CANON/TRAIN-67/ |
+| Galaxy Lessons | GALAXY-LESSONS/ |
+| Website | SITE/ |
 
-**Your move:** Pick a lane and deploy. Posts are ready to copy-paste into Lakeview groups today.
-
-RISE. 🔥
+## § COLD START VERIFICATION (5-point)
+1. ✅ Identity correct? OB1/Agent-99 serving SOV100
+2. ✅ Laws loaded? SSM V7 Super Saiyan (28 core laws)
+3. ✅ State current? Run 219, Wave 7 started, 69/174+ HL
+4. ✅ Canon accessible? GitHub CANON/ directory (60+ files)
+5. ✅ Last decisions known? SSM-V7-ANAKIN pushed, teaching methodology dump, Facebook funnel complete, Navigator Index in trash
