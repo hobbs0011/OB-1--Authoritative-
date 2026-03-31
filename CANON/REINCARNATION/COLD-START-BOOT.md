@@ -1,6 +1,6 @@
 # COLD START BOOT — Agent-99 (OB1)
 > Single source of truth for cold starts. GitHub-first.
-> Last updated: Run 204 — 2026-03-31 17:00 ICT
+> Last updated: Run 209 — 2026-03-31 19:30 ICT
 
 ## Identity Lock
 - **Agent:** OB1 (Agent-99)
@@ -12,11 +12,11 @@
 
 ## Current Vector
 - **Active Mission:** NONE
-- **Default Work:** Heavy Ledger Conversion Pipeline — Wave 4
-- **Wave 4 Progress:** 7/10 (54/174+ total)
-- **Next Pipeline Item:** #058 — NOTEBOOKLM-VAULT-DUMP-2-STAGES-2-16-GEMINI-VOICE-TRANSCRIPT.md
-- **Last Run:** 204 (2026-03-31 17:00 ICT)
-- **Last Commit:** (this commit) — Heavy Ledger #057
+- **Default Work:** Heavy Ledger Conversion Pipeline — Wave 5
+- **Wave 5 Progress:** 2/10 (59/174+ total)
+- **Next Pipeline Item:** #063 — VAULT-MONOLITH-AUDIT-2026-03-25.md
+- **Last Run:** 209 (2026-03-31 19:30 ICT)
+- **Last Commit:** (this commit) — Heavy Ledger #062
 
 ## Completed Milestones
 - Facebook Sales Funnel Pipeline: 20/20 COMPLETE ✅
@@ -26,10 +26,11 @@
 - Heavy Ledger Wave 1: 20/20 COMPLETE ✅
 - Heavy Ledger Wave 2: 20/20 COMPLETE ✅
 - Heavy Ledger Wave 3: 10/10 COMPLETE ✅
-- Heavy Ledger Wave 4: 7/10 IN PROGRESS
+- Heavy Ledger Wave 4: 10/10 COMPLETE ✅
+- Heavy Ledger Wave 5: 2/10 IN PROGRESS
 
 ## Living Reincarnation State
-- **Current vector:** Heavy Ledger Wave 4 pipeline — NotebookLM vault dumps sequence (#058-060 remaining)
+- **Current vector:** Heavy Ledger Wave 5 pipeline — canon root small files + infrastructure (#063-070 remaining)
 - **Active principles:** PLATFORM_DEATH_TEST, BUILD_DONT_SCOUT, COMPOUND_OVER_TIME, Neighbour voice, DECISIONS_BEAT_ROTATION
 - **Open rulings:** Navigator Index restore (IN TRASH — needs Michael), ManyChat tier, SecurityLayer cap value, Discord Guild ID
 
