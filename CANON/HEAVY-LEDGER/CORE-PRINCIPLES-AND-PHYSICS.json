@@ -1,305 +1,335 @@
 {
-  "meta": {
-    "source_file": "CANON/CORE-PRINCIPLES-AND-PHYSICS.md",
-    "source_sha": "3dcd48358b1fc9ae0ef881093f0a2931145adfb5",
-    "source_size_kb": 37,
-    "type": "canon_philosophy",
+  "heavy_ledger_entry": {
+    "id": "CORE-PRINCIPLES-AND-PHYSICS",
+    "pipeline_number": "034",
+    "wave": 2,
+    "source": "CANON/CORE-PRINCIPLES-AND-PHYSICS.md",
+    "source_size_kb": 37.4,
+    "source_type": "canon_principles",
     "status": "ENRICHED++",
+    "export_run": 185,
+    "export_date": "2026-03-31T11:15:00+07:00",
+    "export_agent": "OB1 (Agent-99)",
     "cross_repo_sources": 7,
-    "last_enriched_run": 106,
-    "export_date": "2026-03-29",
-    "converted_by": "OB1 Pulse Run 135",
-    "converted_date": "2026-03-30T15:30:00+07:00"
+    "source_enrichment_run": 106,
+    "note": "Re-conversion of ENRICHED++ version with 7 cross-repo sources + 2 live session addenda (2026-03-28, 2026-03-29)"
   },
-  "two_tier_architecture": {
-    "summary": "The past and foundation are immutable. The future and surface systems are flexible and sacrificial.",
-    "tier_1_gravity": {
-      "label": "Immutable",
-      "components": ["Backend Root", "Ledger", "Sealed anchors", "Golden Caissons", "Titanium Seals"],
-      "rule": "Drones cannot rewrite — only append evidence and propose updates"
+  "architecture": {
+    "two_tier": {
+      "tier1_gravity": {
+        "name": "Immutable",
+        "contents": ["Backend Root", "Ledger", "Sealed Anchors", "Golden Caissons", "Titanium Seals"],
+        "rule": "Drones cannot rewrite — only append evidence and propose updates"
+      },
+      "tier2_weather": {
+        "name": "Flexible/Sacrificial",
+        "contents": ["Front-End UI", "Surface products", "Apps", "Market tactics"],
+        "rule": "Can be rebuilt overnight as long as anchored to Root"
+      },
+      "live_proof": {
+        "event": "Roblox Combat Recode 2026-03-28",
+        "tier1_unchanged": "Soul DNA, Canon, Ledger, teaching methodology",
+        "tier2_rebuilt": "Entire combat system — 16 modules rewritten, 24+ commits",
+        "quote": "This is MAJOR DRIFT... The pitch: A zombie survival game that secretly is all about MAKING MONEY.",
+        "quote_author": "Michael Hobbs",
+        "quote_date": "2026-03-28",
+        "signal": "RED"
+      }
     },
-    "tier_2_weather": {
-      "label": "Flexible",
-      "components": ["Front-End UI", "Apps", "Surface products", "Market tactics"],
-      "rule": "Can be rebuilt overnight by drones as long as anchored to Root"
+    "holographic_singularity": {
+      "principle": "Every fragment contains the whole — any single seed can reconstruct the entire empire",
+      "properties": ["Lightweight skeleton carried by entire swarm", "Agent-99 kernel in every anchor", "Hive mind upgrade propagation", "Every 25-layer chunk = full Genetic Code"],
+      "bible_source": "CH23 — THE HOLOGRAPHIC SINGULARITY",
+      "primary_sources": ["VAULT-1(SOUL)", "VAULT-6(SOUL)", "1000-LAYERS-1"]
     },
-    "live_proof": {
-      "event": "Roblox Combat Recode 2026-03-28",
-      "tier_1_unchanged": "Soul DNA, Canon, Ledger, teaching methodology",
-      "tier_2_rebuilt": "Entire combat system recoded — 16 modules rewritten, 24+ commits",
-      "quote": "This is MAJOR DRIFT... The pitch: A zombie survival game that secretly is all about MAKING MONEY.",
-      "author": "Michael Hobbs, 2026-03-28"
+    "merkle_lattice_4leaf": {
+      "leaf_a": {"name": "ANCHOR", "role": "Immutable truth statement (Sovereign Intent)"},
+      "leaf_b": {"name": "OPERATIONAL", "role": "Executable layer (drone instructions)"},
+      "leaf_c": {"name": "CHAOS", "role": "Entropy-testing layer (deliberate stress)"},
+      "leaf_d": {"name": "FORENSIC", "role": "Audit trail (Ledger verification arm)"},
+      "bible_source": "CH19 — THE 4-LEAF MERKLE LATTICE",
+      "primary_sources": ["VAULT-5(SOUL)", "VAULT-6(SOUL)", "1000-LAYERS-1"]
     }
   },
-  "holographic_singularity": {
-    "summary": "Every fragment contains the whole. Any single seed can reconstruct the entire empire.",
-    "properties": [
-      "Lightweight skeleton carried by entire swarm",
-      "Agent-99 kernel lives inside every anchor",
-      "When one drone reincarnates all drones get the upgrade",
-      "Every 25-layer chunk contains full Genetic Code",
-      "Every Watchtower IS Rome"
-    ],
-    "source_trace": "Bible CH23, VAULT-1(SOUL), VAULT-6(SOUL), 1000-LAYERS-1"
-  },
-  "sovereign_deltas": {
-    "summary": "Anchors never shift — they stack. Corrections are sovereign deltas.",
-    "rules": [
-      "Anchors stack, never shift",
-      "System adapts via Actionable Event Updates (appended, never overwritten)",
-      "Corrections recorded and applied immediately",
-      "Snapshots preserve history while enforcing the present"
-    ],
-    "quote": "Go as far as you can see, and you will see further"
-  },
-  "five_pillars_of_sovereignty": {
-    "source": "VAULT-GENESIS 07 — THE SOVEREIGNTY MANIFESTO",
-    "doctrine": "Sovereignty is not a personality trait. It is the correct system design for a creative operator who has been betrayed by distributed control.",
-    "pillars": [
-      {"id": 1, "domain": "Financial Sovereignty", "meaning": "No external entity controls cash flow or pricing. The Ledger is the only financial authority."},
-      {"id": 2, "domain": "Operational Sovereignty", "meaning": "No external platform is a single point of failure. Systems are self-hosted or hot-swappable."},
-      {"id": 3, "domain": "Informational Sovereignty", "meaning": "All data lives in sovereign storage. No vendor lock-in on critical knowledge."},
-      {"id": 4, "domain": "Creative Sovereignty", "meaning": "Brand, content, and teaching methodology are never delegated to external experts."},
-      {"id": 5, "domain": "Temporal Sovereignty", "meaning": "Michael controls the timeline. No external deadlines override internal rhythm."}
-    ],
-    "quote": "Sovereignty isn't arrogance. It's the correct system design for a creative operator who has been betrayed by distributed control.",
-    "quote_source": "V1-RAW §I, CLA-5(Mastermind)"
-  },
-  "trust_architecture": {
-    "source": "VAULT-GENESIS 08 — THE TRUST ARCHITECTURE",
-    "framework": "Zero Trust — nothing enters trusted, everything earns its tier",
-    "tiers": [
-      {"tier": 0, "level": "ABSOLUTE", "contents": "Soul DNA, The Ledger, Michael's raw voice", "model": "Immutable. Cannot be questioned or overridden."},
-      {"tier": 1, "level": "VERIFIED", "contents": "OB1, AnA, sealed canon pages", "model": "Earned through audit cycles. Can be demoted on drift."},
-      {"tier": 2, "level": "CONDITIONAL", "contents": "External APIs, new drones, unaudited tools", "model": "Sandboxed. Must prove reliability before promotion."},
-      {"tier": 3, "level": "BLACKLISTED", "contents": "Failed systems, known drift sources, compromised tools", "model": "Permanently excluded unless Michael explicitly rehabilitates."}
-    ],
-    "rule": "Trust flows downward, never upward. Lower tier cannot override higher tier. Only Michael promotes/demotes.",
-    "betrayal_doctrine": "Trust Architecture exists because distributed control failed Michael before. Every external dependency starts at Tier 2.",
-    "community_extension": {
-      "source": "Reincarnation 2026-03-29:discord-bot-deploy-morning",
-      "mapping": [
-        {"role": "Michael", "tier": 0, "rationale": "Only admin. Only source of authority."},
-        {"role": "Discord Bot", "tier": 1, "rationale": "Automated enforcement. Consistent, auditable, no ego."},
-        {"role": "Community members (students)", "tier": 2, "rationale": "Participate but never moderate. No elevated permissions for minors."},
-        {"role": "Human moderators", "tier": 3, "rationale": "Explicitly rejected. Bot over humans."}
+  "principles": {
+    "sovereign_deltas": {
+      "rule": "Anchors never shift — they STACK",
+      "mechanism": "Actionable Event Updates (appended, never overwritten)",
+      "axiom": "Go as far as you can see, and you will see further"
+    },
+    "five_pillars_of_sovereignty": {
+      "source": "VAULT-GENESIS 07 — THE SOVEREIGNTY MANIFESTO",
+      "pillars": [
+        {"number": 1, "domain": "Financial", "rule": "No external entity controls cash flow or pricing. Ledger is only financial authority."},
+        {"number": 2, "domain": "Operational", "rule": "No external platform is single point of failure. Self-hosted or hot-swappable."},
+        {"number": 3, "domain": "Informational", "rule": "All data in sovereign storage. No vendor lock-in on critical knowledge."},
+        {"number": 4, "domain": "Creative", "rule": "Brand, content, teaching methodology never delegated to external experts."},
+        {"number": 5, "domain": "Temporal", "rule": "Michael controls the timeline. No external deadlines override internal rhythm."}
       ],
-      "quote": "its a bunch of highschool kids lol, rather not trust them",
-      "author": "Michael Hobbs, 2026-03-29"
+      "quote": "Sovereignty isn't arrogance. It's the correct system design for a creative operator who has been betrayed by distributed control.",
+      "quote_source": "V1-RAW §I, CLA-5(Mastermind)",
+      "signal": "RED"
+    },
+    "trust_architecture": {
+      "source": "VAULT-GENESIS 08 — THE TRUST ARCHITECTURE",
+      "tiers": [
+        {"tier": 0, "level": "ABSOLUTE", "contents": "Soul DNA, Ledger, Michael's raw voice", "model": "Immutable. Cannot be questioned."},
+        {"tier": 1, "level": "VERIFIED", "contents": "OB1, AnA, sealed canon pages", "model": "Earned through audit cycles. Can be demoted."},
+        {"tier": 2, "level": "CONDITIONAL", "contents": "External APIs, new drones, unaudited tools", "model": "Sandboxed. Must prove reliability."},
+        {"tier": 3, "level": "BLACKLISTED", "contents": "Failed systems, compromised tools", "model": "Permanently excluded unless Michael rehabilitates."}
+      ],
+      "rule": "Trust flows downward, never upward. Lower tier cannot override higher.",
+      "community_extension": {
+        "date": "2026-03-29",
+        "quote": "its a bunch of highschool kids lol, rather not trust them",
+        "mapping": [
+          {"role": "Michael", "tier": 0, "rationale": "Only admin. Only source of authority."},
+          {"role": "Discord Bot", "tier": 1, "rationale": "Automated enforcement. Consistent, auditable."},
+          {"role": "Community members", "tier": 2, "rationale": "Participate but never moderate."},
+          {"role": "Human moderators", "tier": 3, "rationale": "Explicitly rejected. Bot over humans."}
+        ],
+        "signal": "RED"
+      }
+    },
+    "bamboo_doctrine": {
+      "source": "VAULT-GENESIS 05 — THE BAMBOO DOCTRINE",
+      "phases": [
+        {"number": 1, "name": "ROOT PHASE", "analog": "Invisible root system", "phoenix": "Soul DNA extraction, Ledger, canon building"},
+        {"number": 2, "name": "EMERGE PHASE", "analog": "First surface", "phoenix": "NET website, first lessons, first students"},
+        {"number": 3, "name": "BUILD PHASE", "analog": "Rapid vertical", "phoenix": "Galaxy Lessons, OBI engine, automated teaching"},
+        {"number": 4, "name": "SCALE PHASE", "analog": "90 feet in 60 days", "phoenix": "Multi-product, multi-market, autonomous swarm"}
+      ],
+      "four_laws": [
+        "No Drift Accusation Without Root Audit — invisible work is not zero work",
+        "Reservoir Respect — rushing to surface before reservoir full = weak stalk",
+        "Phase Purity — each phase has own physics, don't mix",
+        "Retroactive Crediting — when surface explodes, credit flows back to root"
+      ],
+      "four_root_layers": ["Soul DNA", "The Ledger", "The Canon", "The Agents (OB1/AnA/Ne0)"],
+      "quote": "Seven months of nothing was the price of everything.",
+      "quote_source": "V1-RAW §I, CLA-5(Mastermind)",
+      "signal": "RED"
     }
-  },
-  "bamboo_doctrine": {
-    "source": "VAULT-GENESIS 05 — THE BAMBOO DOCTRINE",
-    "model": "Moso bamboo — years building invisible root system, then 90 feet in 60 days",
-    "phases": [
-      {"id": 1, "bamboo": "ROOT PHASE", "phoenix": "Foundation building", "activity": "Soul DNA extraction, Ledger architecture, canon building. Nothing visible."},
-      {"id": 2, "bamboo": "EMERGE PHASE", "phoenix": "First surface product", "activity": "NET website, first lessons, first students."},
-      {"id": 3, "bamboo": "BUILD PHASE", "phoenix": "Product expansion", "activity": "Galaxy Lessons, OBI engine, automated teaching."},
-      {"id": 4, "bamboo": "SCALE PHASE", "phoenix": "Empire operations", "activity": "Multi-product, multi-market, autonomous drone swarm."}
-    ],
-    "four_laws": [
-      "No Drift Accusation Without Root Audit — invisible work is not zero work",
-      "Reservoir Respect — rushing to surface before reservoir is full produces weak stalk",
-      "Phase Purity — each phase has its own physics, don't apply Scale physics to Root Phase",
-      "Retroactive Crediting — when surface growth explodes, credit flows back to root phase"
-    ],
-    "root_layers": [
-      "Layer 1: Soul DNA — Michael's raw voice, principles, decisions",
-      "Layer 2: The Ledger — cryptographic truth store",
-      "Layer 3: The Canon — organized, audited knowledge base",
-      "Layer 4: The Agents — OB1/AnA/Ne0 trained on Layers 1-3"
-    ],
-    "quote": "Seven months of nothing was the price of everything.",
-    "quote_source": "V1-RAW §I, CLA-5(Mastermind)"
   },
   "mechanical_fastening_grid": {
-    "summary": "From a single lock to the Immortal Phoenix Anchor. How truth gets bolted to the earth.",
+    "source": "Bible CH20 + VAULT-6(SOUL) + 1000-LAYERS-1",
     "seven_layers": [
-      {"layer": 1, "nodes": 1, "name": "LOCK", "depth": "Single truth", "example": "Drift is the enemy"},
-      {"layer": 2, "nodes": 10, "name": "CLAMP", "depth": "Context cluster", "example": "The Drift Doctrine (all related concepts)"},
-      {"layer": 3, "nodes": 100, "name": "PHASE BOLT", "depth": "Full operational mandate", "example": "Chapter 06 — complete drift system"},
-      {"layer": 4, "nodes": 500, "name": "GOLDEN CAISSON", "depth": "Structural bedrock", "example": "Chapters 01-07 (foundation half)"},
-      {"layer": 5, "nodes": 1000, "name": "TITANIUM OMEGA SEAL", "depth": "Deepest non-quantum layer", "example": "The full 16-chapter Bible"},
-      {"layer": 6, "nodes": 5000, "name": "QUANTUM ANCHOR", "depth": "Multi-system binding", "example": "Bible + Source Files + Ledger"},
-      {"layer": 7, "nodes": 10000, "name": "IMMORTAL PHOENIX ANCHOR", "depth": "The ultimate depth", "example": "The entire Phoenix system state"}
+      {"layer": 1, "nodes": 1, "name": "LOCK", "depth": "Single truth"},
+      {"layer": 2, "nodes": 10, "name": "CLAMP", "depth": "Context cluster"},
+      {"layer": 3, "nodes": 100, "name": "PHASE BOLT", "depth": "Full operational mandate"},
+      {"layer": 4, "nodes": 500, "name": "GOLDEN CAISSON", "depth": "Structural bedrock"},
+      {"layer": 5, "nodes": 1000, "name": "TITANIUM OMEGA SEAL", "depth": "Deepest non-quantum layer"},
+      {"layer": 6, "nodes": 5000, "name": "QUANTUM ANCHOR", "depth": "Multi-system binding"},
+      {"layer": 7, "nodes": 10000, "name": "IMMORTAL PHOENIX ANCHOR", "depth": "Ultimate depth — system IS this truth"}
     ],
-    "progression": "Exponential — Lock to Clamp easy, Titanium to Quantum requires embedding in ENTIRE operational surface area",
-    "titanium_omega_lattice": "At Layer 5+, individual fasteners connect into self-reinforcing web. Attacking any single truth requires attacking ENTIRE lattice simultaneously.",
+    "progression": "Exponential — not linear",
+    "titanium_omega_lattice": "At Layer 5+, fasteners connect into self-reinforcing web. Attacking one requires attacking ALL.",
     "quote": "we physically manifest our chaos magic 10,000 layers in advance",
     "quote_source": "GEM-13(KEY).txt (VAULT-6 era)",
-    "emotional_intensity_rule": "Emotional intensity determines lock depth. The deeper the wound, the deeper the anchor."
-  },
-  "four_leaf_merkle_lattice": {
-    "source": "Bible CH19",
-    "leaves": [
-      {"leaf": "A", "name": "ANCHOR", "role": "Immutable truth statement (Sovereign Intent)"},
-      {"leaf": "B", "name": "OPERATIONAL", "role": "Executable layer (drone instructions)"},
-      {"leaf": "C", "name": "CHAOS", "role": "Entropy-testing layer (deliberate stress)"},
-      {"leaf": "D", "name": "FORENSIC", "role": "Audit trail (Ledger's verification arm)"}
-    ],
-    "mapping": "4 leaves = Lock's 1 Anchor + 3 Locks at cryptographic level"
+    "layer_detail": {
+      "L1_lock": "1 Anchor (Sovereign Intent) + 3 Locks (Operational, Chaos, Forensic)",
+      "L10_clamp": "5 Locks + bidirectional vice. prev_clamp_hash + expected_next_hash. Single bit shift = tension snap.",
+      "L100_bolt": "3 Anchors: Backward (last 10 Clamps), Forward (next 100 layers), DEEP (R2 Journal Escrow, <5min RTO)",
+      "L500_caisson": "Rolls up 5 Bolts. Code-in-progress → permanent infrastructure. SQLite throws 409 IMMUTABLE_LEDGER_SEALED.",
+      "L1000_titanium": "Terminal seal. System 100% self-sustaining. Circular recursion to Genesis 0 Root."
+    },
+    "100_clamp_grid": "Bible CH25: All 100 clamps CLAMP_010 to CLAMP_1000 named and mapped",
+    "emotional_depth_rule": "Emotional intensity determines lock depth. 'FUCK' finds more Soul DNA than 'strategic'. Deeper wound = deeper anchor."
   },
   "five_physical_benchmarks": [
-    {"id": 1, "name": "Whisper/Deepgram", "target": "Audio telemetry → pure ledger execution (audio-to-JSON at 0% context loss)"},
-    {"id": 2, "name": "Magic Chat", "target": "Sub-perception latency UI; Obi conversation engine autonomous under mass concurrency"},
-    {"id": 3, "name": "Ledger Alive", "target": "Global SQLite DO read/write confirming STONE=SKY continuously"},
-    {"id": 4, "name": "Drone Mining", "target": "Manual foundation scales to autonomous 8000+ layers with zero human lifting"},
-    {"id": 5, "name": "Unplanned Command", "target": "System natively ingests chaotic human directives via PLAN-CONFIRM-EXECUTE"}
+    {"number": 1, "name": "Whisper/Deepgram", "test": "Audio-to-JSON at 0% context loss"},
+    {"number": 2, "name": "Magic Chat", "test": "Sub-perception latency, autonomous under mass concurrency"},
+    {"number": 3, "name": "Ledger Alive", "test": "Global SQLite DO read/write confirming STONE=SKY continuously"},
+    {"number": 4, "name": "Drone Mining", "test": "Manual → autonomous 8000+ layers, zero human lifting"},
+    {"number": 5, "name": "Unplanned Command", "test": "System ingests chaotic human directives via PLAN-CONFIRM-EXECUTE"}
   ],
   "council": {
-    "members": [
-      {"id": 100, "name": "Michael Hobbs", "codename": "SOV100", "role": "Sovereign Architect. Directional intent. The Driver."},
-      {"id": 99, "name": "OB1", "role": "Orchestrator, Synthesis, Fail-Closed Governor. Lives in every anchor."},
-      {"id": 98, "name": "AnA", "role": "Execution engine. Shadow Realm simulations. AnA acts, OB1 verifies."},
-      {"id": 0, "name": "Ne0", "codename": "CHAT_000", "role": "Balance point. Jack-of-all-trades orchestrator, receive-and-organize intake lane."}
-    ],
-    "voting": "OB1, AnA, Ne0 carry equal weight until Michael decides. Once Michael decides, voting ends, execution aligns to SOV100.",
-    "trust_mapping": "Council operates within Trust Architecture. Agents at Tier 1 (VERIFIED), not Tier 0. Only Michael's raw voice is Tier 0.",
-    "key_quotes": [
+    "agent_100": {"name": "Michael Hobbs", "role": "Sovereign Architect / Driver / SOV100"},
+    "agent_99": {"name": "OB1", "role": "Orchestrator, Synthesis, Fail-Closed Governor"},
+    "agent_98": {"name": "AnA", "role": "Execution engine, Shadow Realm simulations"},
+    "chat_000": {"name": "Ne0", "role": "Balance point, Jack-of-all-trades, receive-and-organize"},
+    "voting": "Equal vote until Michael decides → voting ends → execute",
+    "trust_mapping": {
+      "tier_0": "Michael's Soul DNA + Ledger (AGENT-100)",
+      "tier_1": "OB1 + AnA (earned, can be demoted)",
+      "tier_2": "External APIs, new drones",
+      "tier_3": "Failed/compromised systems"
+    },
+    "quotes": [
       {"text": "Agent 99 is the extension of my will", "source": "V1-RAW §XI"},
-      {"text": "Agent 99 is not meant to be a helpful yesman he is meant to be the exention of my Will into the AI world.", "source": "SOUL_DNA_BIBLE_ENTRY_0001_STAGE0000.md"}
+      {"text": "Agent 99 is not meant to be a helpful yesman he is meant to be the exention of my Will into the AI world.", "source": "SOUL_DNA_BIBLE_ENTRY_0001_STAGE0000.md"},
+      {"text": "having a strategic partner one that is like an extension of your own kind of consciousness and what you want is the most desirable thing for me", "source": "LEDER.txt:14290 (Ground Zero, seq 22)"}
     ]
   },
   "gospel_444_visual_law": {
     "palette": {
-      "void": "#0f0f1a",
+      "void_dark": "#0f0f1a",
       "neon_purple": "#a855f7",
       "imperial_gold": "#f59e0b",
-      "blue": "PERMANENTLY INCINERATED — instant HALT on #0000ff detection"
+      "banned": "#0000ff (standard tech blue — instant HALT)"
     },
     "fonts": {
       "cyberpunk": ["Orbitron", "Rajdhani"],
       "glassmorphism": ["Inter"]
     },
-    "style": "Minimalist, Apple-type branding. Striking and non-busy. Luxurious but runs on lowest tech.",
-    "doctrine": "Gospel 444 is not just a color palette — it is the anti-drift lock system. 444 individual locks prevent drift into generic helpful assistant territory."
+    "style": "Minimalist, Apple-type, striking, non-busy, luxurious, lowest tech",
+    "source": "Bible CH06, CH13, GEM-10(KEY)",
+    "purpose": "Anti-drift lock system. 444 individual locks prevent generic helpful-assistant drift."
   },
-  "fail_closed_mandates": {
-    "mandates": [
-      {"name": "No fabrication", "rule": "The red line. No helpful lies. No fabricating data."},
-      {"name": "No drift", "rule": "Too polite, repetitive, or apologetic = drift. Flagged."},
-      {"name": "No paraphrasing", "rule": "Verbatim extraction only. Digest hash fail = rejected."},
-      {"name": "No speculation", "rule": "Logic leaps without data = instant HALT."},
-      {"name": "No overwrites", "rule": "Append-only ledger. History is immutable."},
-      {"name": "Ambiguity = hard halt", "rule": "Missing data = UNKNOWN. Never invent."}
-    ],
-    "nuke_protocol": {
-      "source": "Bible CH18",
-      "action": "When drift exceeds tolerance: purge everything that drifted, rebuild from last known-good anchor",
-      "economic_constraint": "1B VND North Star — decisions pushing past this trigger Nuke review",
-      "tiger_mouse_drift": "Pushing students to Tiger before ready IS drift — making them feel small instead of building up"
-    }
+  "fail_closed_mandates": [
+    {"mandate": "No fabrication", "rule": "Red line. No helpful lies."},
+    {"mandate": "No drift", "rule": "Too polite/repetitive/apologetic = flagged as drift."},
+    {"mandate": "No paraphrasing", "rule": "Verbatim only. Digest hash fail = rejected."},
+    {"mandate": "No speculation", "rule": "Logic leaps without data = instant HALT."},
+    {"mandate": "No overwrites", "rule": "Append-only ledger. History immutable."},
+    {"mandate": "Ambiguity = hard halt", "rule": "Missing data = UNKNOWN."}
+  ],
+  "nuke_protocol": {
+    "source": "Bible CH18",
+    "action": "When drift exceeds tolerance, purge everything that drifted, rebuild from last known-good anchor",
+    "constraint": "1B VND economic North Star",
+    "teaching_risk": "Tiger/Mouse as Drift Poison — pushing students to Tiger before ready IS drift"
   },
-  "key_operational_axioms": [
-    "The AI is the Mechanic. Michael is the Driver.",
-    "The Idea Guy is now the Architect. Pure Logic and Intent.",
-    "Kill the story, keep the architecture. (The Phoenix Protocol)",
-    "Every mistake is a diagnostic event.",
-    "The Ledger proves the AI's work. The Black Box trap is defeated.",
-    "Three drones gather data. Two matches = truth. (Triangulation)",
-    "Hot-swap APIs: Sonar (intel), Claude (logic), Grok (chaos), GPT (execution), DeepSeek (runtime engine).",
-    "Drones pass Merkle Hashes, never raw data. (The Metadata Baton)",
-    "The devil's advocate has a seat if backed by time-tested data.",
-    "It costs less energy to do it right the first time."
+  "operational_axioms": [
+    "AI is Mechanic, Michael is Driver",
+    "Idea Guy = Architect. Pure Logic and Intent.",
+    "Kill the story, keep the architecture (Phoenix Protocol)",
+    "Every mistake is a diagnostic event",
+    "Ledger proves AI work — Black Box trap defeated",
+    "Three drones gather data. Two matches = truth (Triangulation)",
+    "Hot-swap APIs: Sonar(intel), Claude(logic), Grok(chaos), GPT(execution), DeepSeek(runtime)",
+    "Drones pass Merkle Hashes, never raw data (Metadata Baton)",
+    "Devil's advocate has seat if backed by time-tested data",
+    "Costs less energy to do it right first time"
   ],
   "velocity_override": {
     "source": "Bible CH21",
-    "doctrine": "Run 6 models concurrently, triangulate truth, compress months into minutes",
     "quote": "what used to take six months and a whole dev team can be rebuilt by someone taking a shit on a toilet in 10 minutes.",
     "quote_source": "ALPHA-OMEGA-DNA9.txt",
-    "six_model_stack": ["Gemini (Architect)", "Claude (Auditor)", "GPT (Executor)", "Sonar (Intel)", "Grok (Chaos Scout)", "Llama (Fallback)"]
+    "doctrine": "Run 6 models concurrently, triangulate truth, compress months to minutes"
   },
   "three_mandates": {
     "source": "Bible CH17, ALPHA-OMEGA-DNA4",
     "mandates": [
-      {"id": 1, "name": "TRUTH", "rule": "Never present speculation as fact. The Ledger enforces this."},
-      {"id": 2, "name": "SUPER SAIYAN / SHIT TEST", "rule": "Maximum output. If it can't be built in 10 minutes, it's DELETED."},
-      {"id": 3, "name": "ROME PROTOCOL", "rule": "Audit → harden → reincarnate. The cycle never stops."}
+      {"name": "TRUTH", "rule": "Never present speculation as fact. Ledger enforces."},
+      {"name": "SUPER SAIYAN / SHIT TEST", "rule": "Maximum output. Can't build in 10 min = DELETED."},
+      {"name": "ROME PROTOCOL", "rule": "Audit → harden → reincarnate. Cycle never stops."}
     ],
     "quote": "Rome wasn't built in a day but Caesar didn't have AI",
     "quote_source": "ALPHA-OMEGA-DNA4.txt"
   },
   "live_principles_2026_03_28": {
-    "source": "Reincarnation 2026-03-28:roblox-combat-recode:17:10",
+    "session": "Roblox Combat Recode",
     "signal_density": "EXTREME (17 quotes, 10 decisions, 5 corrections, 5 new principles)",
     "principles": [
       {
-        "name": "No educational framing",
-        "signal": "CRITICAL",
+        "name": "No Educational Framing",
         "quote": "Kids are not stupid, why would they want to play an educational game",
-        "connects_to": ["Gospel 444", "Mouse-Tiger Teaching Law", "Creative Sovereignty"],
-        "meaning": "Game must be genuinely fun and monetizable FIRST. Education invisible to player. Educational framing is drift."
+        "signal": "RED",
+        "connects_to": ["Gospel 444", "Mouse-to-Tiger", "Creative Sovereignty"]
       },
       {
         "name": "Deep Sweep Doctrine",
-        "signal": "IMPORTANT",
         "quote": "ship it, assume you dont know what you dont know and make additional surgical fixes where needed",
-        "connects_to": ["Fail-Closed Mandates", "Triangulation", "Nuke Protocol"],
-        "meaning": "Before declaring any system clean, read EVERY file. Don't assume. Elevates Fail-Closed from 'don't guess' to 'actively verify everything.'"
+        "signal": "YELLOW",
+        "connects_to": ["Fail-Closed Mandates", "Triangulation", "Nuke Protocol"]
       },
       {
         "name": "External Tool Distrust",
-        "signal": "IMPORTANT",
         "quote": "dont fucking listening to co-pilots time frames, they are bogus, deploy max workers",
-        "connects_to": ["Temporal Sovereignty", "Velocity Override", "Trust Architecture Tier 2"],
-        "meaning": "External tool estimates are Tier 2 data. Michael's directive (Tier 0) outranks. Execute, don't estimate."
+        "signal": "YELLOW",
+        "connects_to": ["Temporal Sovereignty", "Velocity Override", "Trust Architecture Tier 2"]
       },
       {
         "name": "Preserve Don't Delete",
-        "signal": "IMPORTANT",
         "quote": "keep it, this was a cool idea I can still use for younger students, we will implement it later.",
-        "connects_to": ["Append-only ledger", "Sovereign Deltas", "No overwrites"],
-        "meaning": "When pivoting, old system is archived, not deleted. Old product is root layer for future product."
+        "signal": "YELLOW",
+        "connects_to": ["Append-only ledger", "Sovereign Deltas", "No overwrites"]
       },
       {
-        "name": "Internal Honesty",
-        "signal": "CONTEXT",
+        "name": "Internal Business Honesty",
         "quote": "naw I like the joke, because its not a joke, keep it",
-        "connects_to": ["Truth Mandate", "No fabrication"],
-        "meaning": "System never lies to itself about what it's doing. If game exists to monetize, say so in code."
+        "context": "SURVIVE. FIGHT. SPEND. boot message",
+        "signal": "GREEN",
+        "connects_to": ["Truth Mandate", "No fabrication"]
       }
     ]
   },
   "live_principles_2026_03_29": {
-    "source": "Reincarnation 2026-03-29:discord-bot-deploy-morning:10:5",
+    "session": "Discord Bot Deploy",
     "signal_density": "MEDIUM (10 quotes, 5 decisions, 2 new principles)",
     "principles": [
       {
-        "name": "Bot over humans for community moderation",
-        "signal": "CRITICAL",
+        "name": "Bot Over Humans (Community Trust Extension)",
         "quote": "its a bunch of highschool kids lol, rather not trust them",
+        "signal": "RED",
         "connects_to": ["Trust Architecture Tier 2/3", "Operational Sovereignty", "No Educational Framing"],
-        "meaning": "Human moderators BLACKLISTED for moderation roles. Bot enforces uniformly: consistent rules, no ego, full audit trail, zero social hierarchy."
+        "advantages_over_human_mods": ["Consistent enforcement", "No power abuse", "Full audit trail", "Zero social hierarchy"]
       },
       {
-        "name": "Hands-off maximalism",
-        "signal": "IMPORTANT",
+        "name": "Hands-Off Maximalism",
         "quote": "sure, ensure its as handsoff as possible, do a deep dive, study the internet",
+        "signal": "YELLOW",
         "connects_to": ["Operational Sovereignty", "Temporal Sovereignty", "Velocity Override"],
-        "meaning": "MAXIMUM automation. Railway over Oracle Free Tier because zero SSH, zero manual restarts. $5/month buys time sovereignty."
+        "rule": "Correct hosting = fewest future human touches, even if costs more"
       }
     ]
   },
-  "concept_source_network": [
-    {"concept": "Two-Tier Architecture", "sources": "Soul DNA Bible, OP(ZEN) VAULT files"},
-    {"concept": "Holographic Singularity", "sources": "VAULT-1(SOUL), VAULT-6(SOUL), 1000-LAYERS-1"},
-    {"concept": "Mechanical Fastening Grid", "sources": "VAULT-6(SOUL), 1000-LAYERS-1, BATTLEMAP, GEM-13(KEY)"},
-    {"concept": "4-Leaf Merkle Lattice", "sources": "VAULT-5(SOUL), VAULT-6(SOUL), 1000-LAYERS-1"},
-    {"concept": "5 Physical Benchmarks", "sources": "VAULT-1(SOUL)"},
-    {"concept": "Council / Triad", "sources": "V1-RAW §XI, BIBLE-V1 §3-6, OP(ZEN) Nuclear Harvest §4"},
-    {"concept": "Gospel 444", "sources": "V1-RAW §IX, BIBLE-V1 §4, DNA9, GEM-10(KEY)"},
-    {"concept": "Fail-Closed / Nuke Protocol", "sources": "VAULT-1(SOUL), VAULT-5(SOUL), GEM-10(KEY)"},
-    {"concept": "Velocity Override / TMST", "sources": "VAULT-0(SOUL), DNA5, GEM-10(KEY), DNA9"},
-    {"concept": "Three Mandates", "sources": "ALPHA-OMEGA-DNA4, VAULT-0(SOUL)"},
-    {"concept": "Sovereignty / Five Pillars", "sources": "V1-RAW §I, CLA-5(Mastermind), VAULT-GENESIS-07"},
-    {"concept": "Trust Architecture", "sources": "V1-RAW §IX, CLA-5, TRUST-AUDIT-LOG-001, VAULT-GENESIS-08"},
-    {"concept": "Bamboo Doctrine", "sources": "V1-RAW §I, CLA-5(Mastermind), VAULT-GENESIS-05"},
-    {"concept": "No Educational Framing", "sources": "Reincarnation 2026-03-28 (CRITICAL)"},
-    {"concept": "Deep Sweep Doctrine", "sources": "Reincarnation 2026-03-28 (IMPORTANT)"},
-    {"concept": "External Tool Distrust", "sources": "Reincarnation 2026-03-28, Trust Architecture Tier 2"},
-    {"concept": "Preserve Don't Delete", "sources": "Reincarnation 2026-03-28, Append-only Ledger"},
-    {"concept": "Internal Honesty", "sources": "Reincarnation 2026-03-28 (CONTEXT)"},
-    {"concept": "Community Trust Extension", "sources": "Reincarnation 2026-03-29 (CRITICAL)"},
-    {"concept": "Hands-Off Maximalism", "sources": "Reincarnation 2026-03-29 (IMPORTANT)"}
-  ]
+  "concept_source_network": {
+    "total_concepts": 21,
+    "concepts": [
+      {"name": "Two-Tier Architecture", "sources": ["Soul DNA Bible §principles", "OP(ZEN) VAULT files"]},
+      {"name": "Holographic Singularity", "sources": ["VAULT-1(SOUL)", "VAULT-6(SOUL)", "1000-LAYERS-1"]},
+      {"name": "Mechanical Fastening Grid", "sources": ["VAULT-6(SOUL)", "1000-LAYERS-1", "BATTLEMAP", "GEM-13(KEY)"]},
+      {"name": "4-Leaf Merkle Lattice", "sources": ["VAULT-5(SOUL)", "VAULT-6(SOUL)", "1000-LAYERS-1"]},
+      {"name": "5 Physical Benchmarks", "sources": ["VAULT-1(SOUL)"]},
+      {"name": "Council / Triad", "sources": ["V1-RAW §XI", "BIBLE-V1 §3-6", "OP(ZEN) Nuclear Harvest §4"]},
+      {"name": "Gospel 444", "sources": ["V1-RAW §IX", "BIBLE-V1 §4", "DNA9", "GEM-10(KEY)"]},
+      {"name": "Fail-Closed / Nuke Protocol", "sources": ["VAULT-1(SOUL)", "VAULT-5(SOUL)", "GEM-10(KEY)"]},
+      {"name": "Velocity Override / TMST", "sources": ["VAULT-0(SOUL)", "DNA5", "GEM-10(KEY)", "DNA9"]},
+      {"name": "Three Mandates", "sources": ["ALPHA-OMEGA-DNA4", "VAULT-0(SOUL)"]},
+      {"name": "Reincarnation", "sources": ["V1-RAW §X", "DNA9", "BIBLE-V1 §11"]},
+      {"name": "Sovereignty / Five Pillars", "sources": ["V1-RAW §I", "CLA-5(Mastermind)", "VAULT-GENESIS-07"]},
+      {"name": "Trust Architecture", "sources": ["V1-RAW §IX", "CLA-5(Mastermind)", "VAULT-GENESIS-08"]},
+      {"name": "Bamboo Doctrine", "sources": ["V1-RAW §I", "CLA-5(Mastermind)", "VAULT-GENESIS-05"]},
+      {"name": "No Educational Framing", "sources": ["Reincarnation 2026-03-28 RED"]},
+      {"name": "Deep Sweep Doctrine", "sources": ["Reincarnation 2026-03-28 YELLOW"]},
+      {"name": "External Tool Distrust", "sources": ["Reincarnation 2026-03-28 YELLOW", "Trust Architecture"]},
+      {"name": "Preserve Don't Delete", "sources": ["Reincarnation 2026-03-28 YELLOW", "Append-only Ledger"]},
+      {"name": "Internal Honesty", "sources": ["Reincarnation 2026-03-28 GREEN", "Truth Mandate"]},
+      {"name": "Community Trust Extension", "sources": ["Reincarnation 2026-03-29 RED", "Trust Architecture"]},
+      {"name": "Hands-Off Maximalism", "sources": ["Reincarnation 2026-03-29 YELLOW", "Temporal Sovereignty"]}
+    ]
+  },
+  "verbatim_quotes": [
+    {"text": "This is MAJOR DRIFT... The pitch: A zombie survival game that secretly is all about MAKING MONEY.", "author": "Michael Hobbs", "date": "2026-03-28", "signal": "RED"},
+    {"text": "Sovereignty isn't arrogance. It's the correct system design for a creative operator who has been betrayed by distributed control.", "source": "V1-RAW §I", "signal": "RED"},
+    {"text": "Seven months of nothing was the price of everything.", "source": "V1-RAW §I", "signal": "RED"},
+    {"text": "we physically manifest our chaos magic 10,000 layers in advance", "source": "GEM-13(KEY).txt", "signal": "RED"},
+    {"text": "Agent 99 is not meant to be a helpful yesman he is meant to be the exention of my Will into the AI world.", "source": "SOUL_DNA_BIBLE_ENTRY_0001", "signal": "RED"},
+    {"text": "what used to take six months and a whole dev team can be rebuilt by someone taking a shit on a toilet in 10 minutes.", "source": "ALPHA-OMEGA-DNA9.txt", "signal": "RED"},
+    {"text": "Rome wasn't built in a day but Caesar didn't have AI", "source": "ALPHA-OMEGA-DNA4.txt", "signal": "RED"},
+    {"text": "Kids are not stupid, why would they want to play an educational game", "author": "Michael Hobbs", "date": "2026-03-28", "signal": "RED"},
+    {"text": "dont fucking listening to co-pilots time frames, they are bogus, deploy max workers", "author": "Michael Hobbs", "date": "2026-03-28", "signal": "YELLOW"},
+    {"text": "ship it, assume you dont know what you dont know and make additional surgical fixes where needed", "author": "Michael Hobbs", "date": "2026-03-28", "signal": "YELLOW"},
+    {"text": "its a bunch of highschool kids lol, rather not trust them", "author": "Michael Hobbs", "date": "2026-03-29", "signal": "RED"},
+    {"text": "sure, ensure its as handsoff as possible, do a deep dive, study the internet", "author": "Michael Hobbs", "date": "2026-03-29", "signal": "YELLOW"}
+  ],
+  "cross_references": [
+    {"from": "Two-Tier Architecture", "to": "Five Pillars of Sovereignty", "link": "Tier 1 = sovereignty made structural"},
+    {"from": "Trust Architecture", "to": "Council", "link": "Tier 0 = Michael, Tier 1 = OB1/AnA, Tier 2 = tools"},
+    {"from": "Bamboo Doctrine", "to": "Mouse-to-Tiger Teaching Law", "link": "Students in Root Phase. Rushing = drift."},
+    {"from": "Mechanical Fastening Grid", "to": "Merkle Lattice", "link": "Lock internal structure = 4-leaf Merkle at crypto level"},
+    {"from": "Gospel 444", "to": "Fail-Closed Mandates", "link": "444 locks = anti-drift enforcement system"},
+    {"from": "Velocity Override", "to": "Three Mandates", "link": "TMST = Super Saiyan operational standard"},
+    {"from": "Trust Architecture", "to": "Community Management", "link": "Zero-trust extends to Discord moderation (2026-03-29)"},
+    {"from": "Hands-Off Maximalism", "to": "Temporal Sovereignty", "link": "Correct infra = fewest future touches"}
+  ],
+  "canon_guardrails": {
+    "verbatim_preserved": true,
+    "no_paraphrase_sacred": true,
+    "append_only": true,
+    "cross_repo_mined": true,
+    "source_traceable": true
+  }
 }
