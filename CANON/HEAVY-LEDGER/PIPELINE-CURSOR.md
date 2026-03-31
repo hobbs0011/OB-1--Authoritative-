@@ -1,11 +1,11 @@
 # Heavy Ledger Pipeline Cursor
 
 ## Current State
-- **Last Completed:** #070 — TOOL-STACK-ARSENAL-2026.json (Run 216)
-- **Last Run:** 216 (2026-03-31 23:00 ICT)
+- **Last Completed:** #071 — RAW-GEMINI-DENNY-PHONICS-ANCHOR-PRINCIPLE-ORIGIN.json (Run 217)
+- **Last Run:** 217 (2026-03-31 23:30 ICT)
 - **Last Commit:** (this commit)
-- **Wave 5 Progress:** 10/10 ✅ WAVE 5 COMPLETE
-- **Total Converted:** 66/174+ (65 real + 1 dedup skip)
+- **Wave 6 Progress:** 1/2 (Wave 6 = CANON ROOT remaining small files #071-#072)
+- **Total Converted:** 67/174+ (66 real + 1 dedup skip)
 
 ## Wave 3 Queue ✅ COMPLETE
 | # | Source File | Status | Run | SHA |
@@ -47,7 +47,13 @@
 | 067 | VAULT-MONOLITH-2-AUDIT-2026-03-25.md | ✅ DONE | 213 | 4ba4220d |
 | 068 | VAULT-MONOLITH-3-AUDIT-2026-03-25.md | ✅ DONE | 214 | 6acb8150 |
 | 069 | NOV-8-2025-BLUETECH-MEETING-NOTES-EXTRACTION.md | ✅ DONE | 215 | d1226ba5 |
-| 070 | TOOL-STACK-ARSENAL-2026.md | ✅ DONE | 216 | (this) |
+| 070 | TOOL-STACK-ARSENAL-2026.md | ✅ DONE | 216 | 2c3abe3 |
+
+## Wave 6 Queue — CANON ROOT Remaining + README
+| # | Source File | Status | Run | SHA |
+|---|---|---|---|---|
+| 071 | RAW-GEMINI-DENNY-PHONICS-ANCHOR-PRINCIPLE-ORIGIN.md | ✅ DONE | 217 | (this) |
+| 072 | README.md | PENDING | — | — |
 
 ## Next Target
-**Wave 5 COMPLETE.** Next wave: #071 — RAW-GEMINI-DENNY-PHONICS-ANCHOR-PRINCIPLE-ORIGIN.md (Wave 6 starts: CANON ROOT remaining small files)
+**Wave 6 in progress (1/2).** Next: #072 — README.md. After Wave 6: Wave 7 = CANON/SYSTEM (10 files, #073-#082).
