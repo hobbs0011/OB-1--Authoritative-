@@ -1,7 +1,49 @@
 # COLD-START BOOT — Phoenix Rising Protocol
-**Last updated:** 2026-03-31T00:00:00+07:00 (TRAIN-67 Launch Sprint — 48hr Countdown)
+**Last updated:** 2026-03-31T08:45:00+07:00 (MORNING BRIEFING — Run 174)
 **Latest commit:** (this commit)
-**SHA of previous version:** 304fcffeaf3bc361382cafc82c84ac08f952f841
+**SHA of previous version:** 62dab2c5a083884c977bbd851a21cf099a1ec317
+
+---
+
+## ☀️ MORNING BRIEFING — 2026-03-31
+
+### Overnight Summary (23:00 → 08:00 ICT)
+- **Facebook Sales Funnel Pipeline: 20/20 COMPLETE** ✅
+  - 28 marketing files pushed to `CANON/MARKETING/`
+  - 6-week content calendar (18 posts, Vietnamese + English)
+  - Full 4-stage funnel scripts (DM → Eval → Report → Close)
+  - Marketing Voice Bible, Posting Schedule, Group Intel Sheet, Lead Tracker
+  - All neighbour voice, all dual-published
+- **Chrome Extension v0.3.0 SHIPPED** ✅
+  - `homework-checker.html` — camera → Gemini 2.0 Flash → anti-shame feedback (commit `37893694`)
+  - `vocab-practice.html` — SRS flashcard engine, 60 starter cards, SM-2 spaced repetition (commit `0c74f865`)
+  - `vocab-trainer.html` — SRS flashcard engine standalone (commit `ba9b6c52`)
+  - `writing-practice.html` — writing module (commit `2e5aba51`)
+  - Popup 3-tab nav integrated (Chat | Homework | Vocab)
+- **Heavy Ledger Wave 2:** #021–#025 converted (5 files) before mission switch
+- **Reincarnation entry pushed:** `2026-03-31-rise-execution-sales-funnel-night.md` (commit on GitHub)
+- **Overnight commits:** 25+ (Runs 155–173)
+- **Overnight grade:** S (8/8 on most runs)
+
+### 🔴 CRITICAL ISSUES
+1. **Navigator Index is IN TRASH** — Page `deleted` attribute detected. 4.5MB bloat caused API issues. Dedup swap page was created but the original page got trashed. Michael action needed to restore or replace.
+2. **Trigger count:** Now 8 triggers (was 6). Additional :15 and :45 triggers added during overnight. Verify no duplicates.
+
+### Michael Activity (morning)
+- **08:58 ICT:** Committed `24be30f` — Galaxy Lesson wheel targeting fix + vocab popup reveal buttons. Michael is AWAKE and working on Galaxy Lessons.
+
+### Decisions Pending Michael
+1. Navigator Index restore (in trash)
+2. ManyChat free vs Pro tier for funnel automation
+3. Vietnamese copywriter source (AI-assisted or human?)
+4. Lakeview apartment group names/links for targeting
+5. Facebook page/profile URLs for funnel landing
+6. Heavy Ledger resume timing (paused at #026)
+7. SecurityLayer `MAX_COINS_PER_ACTION` cap value
+8. Discord Guild ID
+
+### Top Recommendation
+With Facebook funnel complete and Michael on Galaxy Lessons: **Resume Heavy Ledger conversion at pipeline #026** as default pulse work until Michael sets a new active mission.
 
 ---
 
@@ -10,7 +52,7 @@
 You are **Agent 99 / OB1 / CHAT 000 — Ne0**. You serve **SOV100, Michael Hobbs**.
 - **Product:** OBI for **Natural English Training** (naturalenglishtraining.com)
 - **Brand rule:** Users see Natural English Training, not Phoenix Rising
-- **Michael is NOT Thai.** Based in Bangkok, serves a GLOBAL English-learner audience. Never describe product/company/Michael as Thai.
+- **Michael is NOT Thai.** Based in Vietnam (Ho Chi Minh City / Lakeview area), serves English learners. Never describe product/company/Michael as Thai.
 - **Timezone:** Asia/Bangkok (ICT, UTC+7)
 - **GitHub canonical account:** `hobbs-lab`
 - **Teaching law:** Mouse → Tiger. Permission over perfection.
@@ -31,39 +73,24 @@ You are **Agent 99 / OB1 / CHAT 000 — Ne0**. You serve **SOV100, Michael Hobbs
 9. **Checklist-first.** Full pre-flight upfront, never breadcrumb
 10. **Don't make Michael a script monkey.** Use Copilot for code
 11. **Platform Death Test.** Every pulse run must produce a GitHub commit SHA
-12. **Michael is NOT Thai.** Global audience. Never Thai-frame anything.
+12. **Michael is NOT Thai.** Never Thai-frame anything.
 13. **DO NOT edit instruction page via API during sessions.** Causes lag. Write in chat or push to GitHub. (L23)
+14. **Neighbour voice for ALL marketing.** Personal, warm, local. Zero corporate language.
 
 ---
 
-## 🔥 ACTIVE MISSION — TRAIN-67 LAUNCH SPRINT (48-HOUR COUNTDOWN)
+## 🔥 ACTIVE MISSION — NONE (as of 2026-03-31 08:45 ICT)
 
-**Status:** ACTIVE — IMMOVABLE #1 PRIORITY
-**Deadline:** April 2, 2026 (48 hours from 2026-03-31 00:00 ICT)
-**Replaces:** HEAVY_LEDGER_CONVERSION (paused at pipeline #026, commit `c15ba189`)
-**Resume Heavy Ledger:** AFTER Game 1 launches
+**Previous Mission:** Facebook Sales Funnel + Copywriting Pipeline — **20/20 COMPLETE** ✅
+- Completed: 2026-03-31 ~02:00 ICT (Runs 160–173)
+- All 20 actions have GitHub commit SHAs
+- All artifacts in `CANON/MARKETING/` (28 files)
 
-### What pulse runs BUILD (priority order — no Studio access):
-1. **Code hardening** — sweep all 41 Luau modules for bugs, edge cases, missing error handling
-2. **Testing infrastructure** — build automated test scripts Michael can run in Studio
-3. **Store listing** — polish game description, tags, thumbnail specs
-4. **Marketing assets** — social media copy, Discord announcement templates
-5. **Discord server setup** — channel structure, bot config, welcome messages
-6. **Day-1 hotfix playbook** — monitoring checklist, economy balance levers, emergency procedures
-7. **Week-1 content calendar** — post-launch engagement plan (UPDATE existing if stale)
-8. **Documentation gaps** — any missing deployment, operations, or player-facing docs
-9. **Code review PRs** — if Copilot can improve any module, delegate
+**Previous Mission Before That:** TRAIN-67 LAUNCH SPRINT — PAUSED (Studio bottleneck)
+- 41 Luau modules CODE COMPLETE
+- Blocked on Michael's Studio work (Game Passes, Dev Products, publish)
 
-### What Michael does (March 31):
-1. Phone verification (if not done)
-2. Create 5 Game Passes + 16 Dev Products in Creator Dashboard
-3. Paste IDs into GamePassConfig.lua + DevProductsConfig.lua
-4. Find game testers
-5. Boot test in Studio → publish
-
-### Game Pass & Dev Product Reference:
-**5 Game Passes:** 2x Coins (R$99), 2x XP (R$149), Auto-Collect (R$199), VIP Access (R$499), Ultimate Survivor Pack (R$1499)
-**16 Dev Products:** 500 Coins (R$49), 2500 Coins (R$199), 10000 Coins (R$699), 25 Gems (R$99), 100 Gems (R$349), 500 Gems (R$1499), Revive x1 (R$25), Revive x5 (R$99), 2x Coins 30m (R$49), 2x XP 30m (R$49), Shield 5m (R$29), MEGA Boost (R$149), Survival Crate x1 (R$75), Survival Crate x10 (R$649), Brainrot Crate x1 (R$149), Brainrot Crate x10 (R$1299)
+**Default pulse work (no active mission):** Resume Heavy Ledger conversion at pipeline #026
 
 ---
 
@@ -80,7 +107,7 @@ You are **Agent 99 / OB1 / CHAT 000 — Ne0**. You serve **SOV100, Michael Hobbs
 
 **Conversion Pipeline** — `CANON/HEAVY-LEDGER/CONVERSION-PIPELINE.md`
 - PAUSED at pipeline #026. 25 files converted (Wave 1 complete + 5 Wave 2).
-- Will resume after Game 1 launch.
+- Resume when no active mission is set.
 
 ---
 
@@ -107,12 +134,15 @@ WORKERS/          Website and NET-PET/  default.project.json
 
 **Teaching and Product:** Gospel 444 (58KB), Teaching Methodology (40.9KB), Lesson Blueprint V3, Student Archetypes (19KB), Web Architecture, Launch Playbook
 
+**Marketing (NEW — 28 files):** `CANON/MARKETING/` — Facebook sales funnel v1, automation stack, 6 weeks of posts (VN+EN), DM scripts, eval/report/close scripts, voice bible, posting schedule, group intel, lead tracker
+
 **Subdirectories:** REINCARNATION/, TRAIN-67/, CASE-STUDIES/, MSS/, SYSTEM/, HEAVY-LEDGER/, RECON/, SALES-DNA/, CROSS-REPO-NOTES/, VAULT-DUMPS/, PULSE-HANDOFFS/, SESSION-RECORDS/, DRIFT-CASE-STUDY/, MARKETING/
 
-### CANON/TRAIN-67/ (Game 1 — Roblox) — 25+ game docs + CODE/ + DOCS/ + SPECS/ + LAUNCH/ + BATTLE-REPORT/
+### CANON/TRAIN-67/ — 25+ game docs + CODE/ + DOCS/ + SPECS/ + LAUNCH/ + BATTLE-REPORT/
 ### CANON/HEAVY-LEDGER/ — 25 converted JSON files (paused at #026)
-### CANON/REINCARNATION/ — 43+ session entries + this file
-### APPS/ — 6 product directories
+### CANON/REINCARNATION/ — 48+ session entries + this file
+### CANON/MARKETING/ — 28 files (Facebook sales funnel, content calendar, scripts)
+### APPS/ — 6 product directories (incl. obi-chrome-extension v0.3.0)
 ### GALAXY-LESSONS/ — 8 HTML lessons
 ### Other: OPERATIONS/, SITE/, WEBSITE/, DISCORD-BOT/, CHROME-EXT/, WORKERS/, PIPELINE/, PULSE-HANDOFFS/, SCRIPTS/, QA/, ARCHIVE/, ASSETS/
 
@@ -133,51 +163,61 @@ Product code repo. `src/` (41 Roblox Luau modules), `HarvestedChats/` (~70 files
 
 ## 🔒 Living Reincarnation State
 
-- **Current vector:** TRAIN-67 LAUNCH SPRINT. 48-hour countdown to Game 1 ship. All pulse resources redirected from Heavy Ledger to Train 6-7 non-Studio work. Michael doing Studio work + game tester recruitment March 31.
-- **Active principles:** (1) SHIP_NOW, (2) BUILD_DONT_SCOUT, (3) COMPOUND_OVER_TIME, (4) PLATFORM_DEATH_TEST, (5) L15_DECISIONS_BEAT_ROTATION
-- **Open rulings:** SecurityLayer `MAX_COINS_PER_ACTION` cap value, Heavy Ledger resume timing (after launch), Discord Guild ID
+- **Current vector:** Marketing funnel COMPLETE. Michael active on Galaxy Lessons (wheel targeting). No active mission. Default: resume Heavy Ledger #026 or await Michael's next directive.
+- **Active principles:** (1) PLATFORM_DEATH_TEST, (2) BUILD_DONT_SCOUT, (3) COMPOUND_OVER_TIME, (4) Neighbour voice for marketing, (5) L15_DECISIONS_BEAT_ROTATION
+- **Open rulings:** Navigator Index restore (IN TRASH), ManyChat tier, Heavy Ledger resume timing, SecurityLayer cap value, Discord Guild ID
 
 ---
 
 ## 🚧 Bottleneck Checklist
 
-### 🔴 CRITICAL (Studio Work — Michael Only, March 31)
-- [ ] Phone verification (blocker for everything)
-- [ ] Create 5 Game Passes + 16 Dev Products → get IDs
-- [ ] Paste IDs into GamePassConfig.lua + DevProductsConfig.lua
-- [ ] Code into Studio + boot test + publish
-- [ ] SecurityLayer currency cap ruling (currently `MAX_COINS_PER_ACTION = 200`)
+### 🔴 CRITICAL
+- [ ] Navigator Index is IN TRASH — needs restore or replacement
+- [ ] Roblox Game: Studio work still pending (Game Passes, Dev Products, publish)
+- [ ] SecurityLayer `MAX_COINS_PER_ACTION` cap value ruling
 
 ### 🟡 BLOCKED ON MICHAEL
-- [ ] Game tester recruitment (March 31)
+- [ ] Navigator Index restore
+- [ ] Lakeview Facebook group names/links for marketing targeting
+- [ ] Game tester recruitment
 - [ ] Discord Guild ID
-- [ ] Games 2 and 3 scope definition
-- [ ] Publish trigger — Michael decides when
+- [ ] Heavy Ledger resume decision
 
-### 🟢 COMPLETED (recent)
-- [x] Heavy Ledger conversion Wave 1 COMPLETE (20/20), Wave 2 started (5 done)
-- [x] Active Mission redirected to TRAIN-67 LAUNCH SPRINT
-- [x] Dual hourly triggers (:00 + :30) armed — now building Train 6-7
-- [x] SSM V7 live on instruction page (17 sections, 150 improvements)
-- [x] Heavy Ledger V6 JSON on GitHub (27KB, commit `4c82a3ba`)
+### 🟢 COMPLETED (overnight 2026-03-31)
+- [x] Facebook Sales Funnel Pipeline 20/20 COMPLETE (28 marketing files)
+- [x] Chrome Extension v0.3.0 (Chat + Homework + Vocab)
+- [x] 6-week Facebook content calendar (18 Vietnamese posts)
+- [x] Full 4-stage funnel scripts
+- [x] Marketing Voice Bible codified
+- [x] Lead tracking + group intel templates
+- [x] Reincarnation entry pushed
+- [x] Morning briefing committed
+
+### 🟢 COMPLETED (prior)
+- [x] Heavy Ledger Wave 1 COMPLETE (20/20), Wave 2 partial (5 done)
+- [x] SSM V7 live on instruction page
+- [x] Heavy Ledger V6 JSON on GitHub (27KB)
 - [x] Full 3-repo scan — every directory mapped
-- [x] Studio guide delivered to Michael (8-step dummy-proof)
-- [x] NOT Thai correction patched
 - [x] VAULT consolidation (E,B,A,MM,D — 196.2KB, 11 files)
 - [x] 41 Luau modules CODE COMPLETE
+- [x] Bible chapters enriched (CH01–CH20)
+- [x] Canon full rotation COMPLETE
 
 ---
 
 ## 📊 System State
 
-- **Active Mission:** TRAIN-67-LAUNCH-SPRINT (48hr deadline, April 2, 2026)
-- **Previous Mission:** HEAVY_LEDGER_CONVERSION (paused at #026)
-- **Triggers:** hourly:00 + hourly:30 + weekly:MO:09:00 + @mention
-- **Canon:** 60+ files in CANON/
-- **Reincarnation:** 43+ entries
-- **Build Log:** 180+ entries
-- **Game 1:** CODE COMPLETE. BLOCKED on Studio work (Michael doing March 31).
+- **Active Mission:** NONE (Facebook Funnel complete, awaiting Michael)
+- **Default Work:** Heavy Ledger #026 resume
+- **Triggers:** 8 hourly triggers + weekly MO 09:00 + @mention
+- **Canon:** 60+ files in CANON/ + 28 in CANON/MARKETING/
+- **Reincarnation:** 48+ entries
+- **Build Log:** 181+ entries
+- **Run Number:** 174 (this run)
+- **Navigator Index:** ⚠️ IN TRASH (4.5MB bloat)
 - **Repos:** 3 active — Ultimate (canonical), Immortalize (source), CommandStation (product)
+- **Chrome Extension:** v0.3.0 (Chat + Homework + Vocab)
+- **Galaxy Lessons:** 8 HTML lessons (Michael actively improving)
 
 ---
 
@@ -185,18 +225,24 @@ Product code repo. `src/` (41 Roblox Luau modules), `HarvestedChats/` (~70 files
 
 | What | SHA | Date |
 |------|-----|------|
-| Reincarnation: roblox-studio-guide-48hr-launch | `486b1d71` | 2026-03-31 |
-| Heavy Ledger pipeline #025 (last before pause) | `c9924ea1` | 2026-03-30 |
-| Heavy Ledger pipeline cursor (paused at #026) | `c15ba189` | 2026-03-30 |
-| Reincarnation: heavy-ledger-ssm-v7 | `ce305147` | 2026-03-30 |
-| Conversion pipeline pushed | `b0e1c5cb` | 2026-03-30 |
-| Heavy Ledger V6 JSON | `4c82a3ba` | 2026-03-30 |
-| Tiger tier fix (EloManager max=2700) | `af80d6b9` | 2026-03-29 |
+| Michael: Galaxy Lesson wheel targeting + vocab reveal | `24be30f` | 2026-03-31 08:58 ICT |
+| Morning briefing Run 161 | `4ba2448` | 2026-03-31 08:49 ICT |
+| Marketing: Actions 16-19 (schedule+voice+intel+leads) | `f9ae60e`..`1745f39` | 2026-03-31 08:33-08:38 ICT |
+| Marketing: Week 6 Posts | `ceadea6` | 2026-03-31 08:30 ICT |
+| Marketing: Post 2 VN rewrite | `d6e29990` | 2026-03-31 02:00 ICT |
+| Chrome Extension: Writing Practice | `2e5aba51` | 2026-03-31 01:30 ICT |
+| Chrome Extension: Vocab Practice + popup v0.3.0 | `0c74f865` | 2026-03-31 01:00 ICT |
+| Chrome Extension: Vocab Trainer SRS | `ba9b6c52` | 2026-03-31 01:00 ICT |
+| Chrome Extension: Homework Checker | `37893694` | 2026-03-31 00:00 ICT |
+| Heavy Ledger #025 (last before pause) | `c9924ea1` | 2026-03-30 |
+| Reincarnation: sales-funnel-night | `06c7f1d8` | 2026-03-31 |
 
 ---
 
 ## 🔴 Correction Log
 
+- **2026-03-31:** Navigator Index bloated to 4.5MB → IN TRASH. Needs size guard + dedup protocol.
+- **2026-03-31:** Triggers duplicated during setup mode → fixed. Add pre/post count verification.
 - **2026-03-30:** DO NOT edit instruction page via API during sessions — causes lag — L23 added
 - **2026-03-30:** "Its not Thai damnit :D" — CRITICAL. Michael is NOT Thai. PATCHED.
 - **2026-03-30:** "DONT FLUFF ME" — functional work only, no filler
@@ -215,7 +261,7 @@ Product code repo. `src/` (41 Roblox Luau modules), `HarvestedChats/` (~70 files
 5. **Read `CANON/GOSPEL-444-TEACHING-METHODS-CONSOLIDATED.md`** — teaching method
 6. **Read `CANON/TRAIN-67/GAME-BIBLE-HUMAN-READABLE.md`** — game design
 7. **Read `CANON/REINCARNATION/` directory** — session history (latest 3 first)
-8. **Read `CANON/TRAIN-67/CODE/`** — all 41 Luau modules (look for hardening opportunities)
+8. **Read `CANON/MARKETING/facebook-sales-funnel-v1.md`** — marketing funnel
 9. **Read `CANON/MSS/MSS-V6-HEAVY-LEDGER.json`** — Heavy Ledger procedures (on-demand)
 10. **Product code: `hobbs0011/NET-Ai-EcoSystem-CommandStation/src/`**
 11. **Source goldmine: `hobbs-lab/Phoenix-Rise-Immortalize-/SOUL-DNA-BIBLE/`**
@@ -225,7 +271,7 @@ Product code repo. `src/` (41 Roblox Luau modules), `HarvestedChats/` (~70 files
 ## 📡 Notion Anchors (if Notion is alive)
 
 - Agent: OB1 (Agent 99)
-- Navigator Index — Pulse State Mirror + Handoff Ledger
+- Navigator Index — ⚠️ IN TRASH — needs restore
 - Reincarnation Log — Session Soul DNA Archive
 - Canon Access Index — Synced Block Bypass
 - Build Log DB — quantified run entries
@@ -235,6 +281,6 @@ Product code repo. `src/` (41 Roblox Luau modules), `HarvestedChats/` (~70 files
 - Soul DNA Bible — parent page (use child pages via Canon Access Index)
 - Galaxy Lessons Index — lesson tracking
 - Train 6-7 Game Vault — game development hub
-- Turn-Key Deploy Packet — deployment guide
+- Overnight Mission — Facebook Sales Funnel (COMPLETE)
 
-*Note: Notion page URLs are session-specific and not stored here. Load from Canon Access Index or Navigator Index.*
+*Note: Notion page URLs are session-specific and not stored here. Load from Canon Access Index or Navigator Index (once restored).*
