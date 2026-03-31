@@ -28,18 +28,17 @@
 4. Hourly :30 — pulse run
 
 ## Active Mission
-- **NONE** — Facebook Sales Funnel 20/20 ✅ COMPLETE (2026-03-31)
+- **NONE** — Heavy Ledger Wave 7 COMPLETE (12/12). All 7 waves done (80/174+).
 
 ## Default Work
-- **Heavy Ledger Conversion Pipeline — Wave 7** (CANON/SYSTEM files)
-- Wave 7 Progress: **11/12** (Run 229)
-- Total Converted: **79/174+**
-- Next: **#084 WEEKLY-REPORT-2026-03-30.md**
+- **Heavy Ledger Conversion Pipeline — Wave 8 PENDING**
+- Waves 1-7: ALL COMPLETE (80/174+)
+- Wave 8 needs definition. Candidates: CANON/REINCARNATION/ (46 files), CANON/MARKETING/ (28+ files), CANON/TRAIN-67/DOCS/ (25+ files)
 - Pipeline cursor: `CANON/HEAVY-LEDGER/PIPELINE-CURSOR.md`
-- Waves 1-6: ALL COMPLETE (72/72)
+- **AWAITING MICHAEL** to define Wave 8 queue, or pulse engine can auto-select largest unconverted directory
 
 ## Living Reincarnation State
-- **Current vector:** Marketing funnel execution complete → Heavy Ledger pipeline default work
+- **Current vector:** Heavy Ledger pipeline Wave 7 complete → awaiting Wave 8 definition or new mission
 - **Active principles:**
   1. Platform Death Test (every run produces GitHub commit)
   2. DUAL_PUBLISH mandatory (Notion + GitHub)
@@ -52,6 +51,7 @@
   3. Navigator Index dedup method — manual swap needed
   4. reincarnate.js manual wrangler patch
   5. HarvestedChats manual transfer
+  6. Wave 8 queue definition
 
 ## Correction Log
 - Navigator Index IN TRASH — use GitHub mirror at CANON/SYSTEM/NAVIGATOR-INDEX.md
@@ -60,13 +60,13 @@
 - Notion handoff writes sometimes fail after GitHub push succeeds — 13% broken chain rate, all recovered
 
 ## Decision History (Recent)
+- 2026-04-01: Heavy Ledger Wave 7 COMPLETE — all CANON/SYSTEM files converted (12/12)
 - 2026-03-31: Facebook 4-stage sales funnel defined (neighbour tone, dual-language, $0 automation)
 - 2026-03-31: 20/20 marketing pipeline COMPLETE — all posts/scripts/templates pushed to CANON/MARKETING/
 - 2026-03-30: Heavy Ledger conversion pipeline established as default overnight work
-- 2026-03-27: Roblox Incubator deadline Apr 6 flagged (may be expired)
 
 ## Last Updated
-- **Run:** 229
-- **Time:** 2026-04-01 06:00 ICT
-- **Commit:** 0b7a4485 (HL-083 PULSE-OPERATIONS-HISTORY.json)
+- **Run:** 230
+- **Time:** 2026-04-01 06:30 ICT
+- **Commit:** b3f43d6e (HL-084 WEEKLY-REPORT-2026-03-30.json — Wave 7 COMPLETE)
 - **By:** OB1 pulse engine
