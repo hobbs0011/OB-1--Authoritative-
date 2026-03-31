@@ -1,10 +1,10 @@
 # Heavy Ledger Conversion Pipeline — Cursor
 
-**Current cursor:** 031
+**Current cursor:** 032
 **Wave:** 2
-**Total converted:** 32/174+
-**Last converted:** `VAULT-MM-MASTERMIND-CONSOLIDATED-1.json` (Run 182)
-**Next:** Pipeline #032 — VAULT-MM-MASTERMIND-CONSOLIDATED-2.md (stalest-first)
+**Total converted:** 33/174+
+**Last converted:** `VAULT-MM-MASTERMIND-CONSOLIDATED-2.json` (Run 183)
+**Next:** Pipeline #033 — VAULT-D-PRELAUNCH-CONSOLIDATED-3.md (stalest-first)
 
 ## Wave 1 Summary (COMPLETE — 20/20)
 - Runs 132-150
@@ -25,3 +25,4 @@
 | 029 | BIBLE-CH18-THE-NUKE-PROTOCOL.json | 180 | `787266b3` | ✅ DONE |
 | 030 | BIBLE-CH06-12-SHARP-RISKS.json | 181 | `42e38093` | ✅ DONE |
 | 031 | VAULT-MM-MASTERMIND-CONSOLIDATED-1.json | 182 | `17b2286f` | ✅ DONE |
+| 032 | VAULT-MM-MASTERMIND-CONSOLIDATED-2.json | 183 | *this commit* | ✅ DONE |
