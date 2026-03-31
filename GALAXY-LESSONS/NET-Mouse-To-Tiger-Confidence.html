@@ -80,6 +80,15 @@ canvas#wheelCanvas{display:block;margin:0 auto;border-radius:50%;box-shadow:0 0 
 @keyframes fakeFlash{0%{color:var(--purple)}50%{color:var(--red);text-shadow:0 0 30px rgba(239,68,68,0.5)}100%{color:var(--gold)}}
 .wheel-history{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:16px 0}
 .wheel-history span{font-family:var(--font-heading);font-size:13px;padding:4px 10px;background:var(--void-light);border:1px solid rgba(168,85,247,0.15);border-radius:6px;color:var(--gray)}
+/* RULES */
+.rule-item{display:flex;gap:14px;align-items:flex-start;margin-bottom:18px}
+.rule-num{font-family:var(--font-heading);font-size:28px;font-weight:900;color:var(--purple);min-width:40px;text-align:center;line-height:1}
+.rule-text{flex:1}
+.rule-en{font-size:18px;font-weight:600;color:var(--white)}
+.rule-vi{font-size:15px;color:var(--gold);font-style:italic;margin-top:2px}
+.rule-note{font-size:13px;color:var(--purple);margin-top:2px}
+.email-box{margin:16px 0;padding:20px;background:rgba(245,158,11,0.06);border-radius:12px;border:1px solid rgba(245,158,11,0.25);text-align:center}
+.email-addr{font-family:var(--font-heading);font-size:clamp(16px,4vw,24px);font-weight:900;color:var(--gold);text-shadow:0 0 12px var(--gold-glow);letter-spacing:1px;word-break:break-all}
 @media(max-width:600px){
 .hud{padding:0 12px}.hud-logo{font-size:9px;letter-spacing:1px}.tab{padding:0 8px;font-size:8px}.main{padding:120px 16px 80px}.quiz-options{flex-direction:column}.btn{width:100%}
 canvas#wheelCanvas{width:280px!important;height:280px!important}
@@ -96,12 +105,13 @@ canvas#wheelCanvas{width:280px!important;height:280px!important}
 
 <div class="tab-bar">
 <div class="tab active" onclick="switchRoom(0)">📋 Brief</div>
-<div class="tab" onclick="switchRoom(1)">📦 Vocab</div>
-<div class="tab" onclick="switchRoom(2)">🧪 Idioms</div>
-<div class="tab" onclick="switchRoom(3)">🌀 Phrases</div>
-<div class="tab" onclick="switchRoom(4)">🎡 Wheel</div>
-<div class="tab" onclick="switchRoom(5)">⚔️ Battle</div>
-<div class="tab" onclick="switchRoom(6)">📊 Debrief</div>
+<div class="tab" onclick="switchRoom(1)">📜 Rules</div>
+<div class="tab" onclick="switchRoom(2)">📦 Vocab</div>
+<div class="tab" onclick="switchRoom(3)">🧪 Idioms</div>
+<div class="tab" onclick="switchRoom(4)">🌀 Phrases</div>
+<div class="tab" onclick="switchRoom(5)">🎡 Wheel</div>
+<div class="tab" onclick="switchRoom(6)">⚔️ Battle</div>
+<div class="tab" onclick="switchRoom(7)">📊 Debrief</div>
 </div>
 
 <div class="main">
@@ -147,48 +157,150 @@ canvas#wheelCanvas{width:280px!important;height:280px!important}
 </div>
 
 <div style="text-align:center;margin-top:32px">
-<button class="btn gold big" onclick="switchRoom(1)">BEGIN TRANSFORMATION →</button>
+<button class="btn gold big" onclick="switchRoom(1)">READ THE RULES →</button>
 </div>
 </div>
 
-<!-- ROOM 1: VOCAB VAULT -->
+<!-- ROOM 1: RULES -->
 <div class="room" id="room-1">
+<h1>📜 CLASS RULES</h1>
+<p class="subtitle">NỘI QUY LỚP HỌC</p>
+
+<div class="card" style="border-color:var(--gold)">
+<h3 style="color:var(--gold)">⚡ FIRST PERIOD IS TEACHER'S PERIOD</h3>
+<p style="font-size:17px;color:var(--gold)">Tiết đầu tiên là tiết của GIÁO VIÊN</p>
+</div>
+
+<div class="card">
+<div class="rule-item">
+<div class="rule-num">1</div>
+<div class="rule-text">
+<div class="rule-en">📵 No phones</div>
+<div class="rule-vi">Không sử dụng điện thoại</div>
+</div>
+</div>
+<div class="rule-item">
+<div class="rule-num">2</div>
+<div class="rule-text">
+<div class="rule-en">🤫 No interrupting</div>
+<div class="rule-vi">Không ngắt lời</div>
+</div>
+</div>
+<div class="rule-item">
+<div class="rule-num">3</div>
+<div class="rule-text">
+<div class="rule-en">😴 No sleeping</div>
+<div class="rule-vi">Không ngủ trong lớp</div>
+<div class="rule-note">If sick, please go to the nurse / Nếu bị ốm, xin hãy đến phòng y tế</div>
+</div>
+</div>
+<div class="rule-item">
+<div class="rule-num">4</div>
+<div class="rule-text">
+<div class="rule-en">📝 Take notes</div>
+<div class="rule-vi">Ghi chép bài</div>
+</div>
+</div>
+<div class="rule-item">
+<div class="rule-num">5</div>
+<div class="rule-text">
+<div class="rule-en">🗣️ Participate</div>
+<div class="rule-vi">Tham gia tích cực</div>
+</div>
+</div>
+<div class="rule-item">
+<div class="rule-num">6</div>
+<div class="rule-text">
+<div class="rule-en">💺 Stay in your seat and behave</div>
+<div class="rule-vi">Ngồi yên tại chỗ và cư xử đúng mực</div>
+</div>
+</div>
+</div>
+
+<div class="card">
+<h3>📝 NOTE-TAKING REQUIREMENTS / YÊU CẦU GHI CHÉP</h3>
+<p style="margin-top:8px">✅ Write down <strong>ALL Vocabulary</strong> — with definition — and make your own unique sentence</p>
+<p style="color:var(--gray);font-size:15px">Ghi lại TẤT CẢ Từ vựng — với định nghĩa — và tự đặt câu riêng</p>
+<p style="margin-top:12px">✅ Write down <strong>3 Idioms</strong> — with definitions — and make a unique sentence for each</p>
+<p style="color:var(--gray);font-size:15px">Ghi lại 3 Thành ngữ — với định nghĩa — và tự đặt câu cho mỗi thành ngữ</p>
+<p style="margin-top:12px">✅ Write down <strong>3 Slang / Phrases</strong> — with definitions — and make a unique sentence for each</p>
+<p style="color:var(--gray);font-size:15px">Ghi lại 3 Tiếng lóng / Cụm từ — với định nghĩa — và tự đặt câu cho mỗi cụm từ</p>
+<p style="margin-top:12px">✅ <strong>Participate in all games we play</strong></p>
+<p style="color:var(--gray);font-size:15px">Tham gia tất cả các trò chơi</p>
+</div>
+
+<div class="card" style="border-color:var(--red)">
+<h3 style="color:var(--red)">⚠️ CONSEQUENCES / HẬU QUẢ</h3>
+<p style="font-size:17px;color:var(--red);line-height:1.6">Failure to follow rules results in me <strong>personally taking you down to the security office.</strong></p>
+<p style="color:var(--gray);font-size:15px;margin-top:6px">Vi phạm nội quy sẽ dẫn đến việc giáo viên <strong>trực tiếp đưa bạn xuống phòng bảo vệ.</strong></p>
+</div>
+
+<div class="card" style="border-color:var(--gold)">
+<h3 style="color:var(--gold)">📧 AFTER CLASS / SAU GIỜ HỌC</h3>
+<p style="font-size:17px;margin-top:8px">After I am finished teaching, you will:</p>
+<p style="color:var(--gray);font-size:15px">Sau khi giáo viên dạy xong, các bạn sẽ:</p>
+<div class="email-box">
+<p style="font-size:20px;margin-bottom:4px">📸 <strong>Take a photo of your notes</strong></p>
+<p style="font-size:15px;color:var(--gray);margin-bottom:16px">Chụp ảnh bài ghi chép của bạn</p>
+<p style="font-size:16px;margin-bottom:6px">📧 <strong>Email it to:</strong></p>
+<p class="email-addr">Hobbs@NaturalEnglishTraining.Com</p>
+<p style="font-size:16px;margin-top:16px">Include / Bao gồm:</p>
+<p style="font-size:20px;color:var(--purple);margin-top:6px"><strong>📋 Class &nbsp; · &nbsp; 👤 Name &nbsp; · &nbsp; 🔢 Student Number</strong></p>
+<p style="font-size:14px;color:var(--gray);margin-top:4px">Lớp &nbsp;·&nbsp; Họ tên &nbsp;·&nbsp; Số thứ tự</p>
+</div>
+</div>
+
+<div class="card" style="border-color:var(--red)">
+<h3 style="color:var(--red)">🚨 FAILURE TO SUBMIT / KHÔNG NỘP BÀI</h3>
+<p style="font-size:16px;color:var(--red);margin-top:8px">❌ Failure to provide proof of work → the AI will email your information to the school</p>
+<p style="font-size:14px;color:var(--gray);margin-top:4px">Không cung cấp bằng chứng làm bài → AI sẽ gửi email thông tin của bạn đến trường</p>
+<p style="font-size:16px;color:var(--red);margin-top:14px">❌ 3× repeated failure before the end of the year → Parents will be contacted</p>
+<p style="font-size:14px;color:var(--gray);margin-top:4px">Vi phạm 3 lần trước cuối năm học → Phụ huynh sẽ được liên hệ</p>
+</div>
+
+<div style="text-align:center;margin-top:32px">
+<button class="btn gold big" onclick="switchRoom(2)">BEGIN LESSON →</button>
+</div>
+</div>
+
+<!-- ROOM 2: VOCAB VAULT -->
+<div class="room" id="room-2">
 <h1>📦 VOCAB VAULT</h1>
 <p class="subtitle">10 power words for confident communication. Test the students first — then reveal!</p>
 <button class="btn-reveal-all" onclick="revealAllVocab()">👁️ REVEAL ALL DEFINITIONS & EXAMPLES</button>
 <div id="vocab-container"></div>
 <div style="text-align:center;margin-top:24px">
-<button class="btn" onclick="switchRoom(0)">← BACK</button>
-<button class="btn gold" onclick="switchRoom(2)">IDIOM LAB →</button>
+<button class="btn" onclick="switchRoom(1)">← BACK</button>
+<button class="btn gold" onclick="switchRoom(3)">IDIOM LAB →</button>
 </div>
 </div>
 
-<!-- ROOM 2: IDIOM LAB -->
-<div class="room" id="room-2">
+<!-- ROOM 3: IDIOM LAB -->
+<div class="room" id="room-3">
 <h1>🧪 IDIOM LAB</h1>
 <p class="subtitle">5 idioms about confidence, courage, and speaking up.</p>
 <button class="btn-reveal-all" onclick="revealAllIdioms()">👁️ REVEAL ALL MEANINGS & EXAMPLES</button>
 <div id="idiom-container"></div>
 <div style="text-align:center;margin-top:24px">
-<button class="btn" onclick="switchRoom(1)">← BACK</button>
-<button class="btn gold" onclick="switchRoom(3)">PHRASE ZONE →</button>
+<button class="btn" onclick="switchRoom(2)">← BACK</button>
+<button class="btn gold" onclick="switchRoom(4)">PHRASE ZONE →</button>
 </div>
 </div>
 
-<!-- ROOM 3: PHRASE ZONE -->
-<div class="room" id="room-3">
+<!-- ROOM 4: PHRASE ZONE -->
+<div class="room" id="room-4">
 <h1>🌀 PHRASE ZONE</h1>
 <p class="subtitle">5 modern phrases that Tigers use in real life.</p>
 <button class="btn-reveal-all" onclick="revealAllPhrases()">👁️ REVEAL ALL DEFINITIONS & EXAMPLES</button>
 <div id="phrase-container"></div>
 <div style="text-align:center;margin-top:24px">
-<button class="btn" onclick="switchRoom(2)">← BACK</button>
-<button class="btn gold" onclick="switchRoom(4)">STUDENT WHEEL →</button>
+<button class="btn" onclick="switchRoom(3)">← BACK</button>
+<button class="btn gold" onclick="switchRoom(5)">STUDENT WHEEL →</button>
 </div>
 </div>
 
-<!-- ROOM 4: STUDENT WHEEL -->
-<div class="room" id="room-4">
+<!-- ROOM 5: STUDENT WHEEL -->
+<div class="room" id="room-5">
 <h1>🎡 STUDENT WHEEL</h1>
 <p class="subtitle">The wheel picks who speaks next. No hiding. No volunteering. Pure random justice.</p>
 
@@ -205,13 +317,13 @@ canvas#wheelCanvas{width:280px!important;height:280px!important}
 </div>
 
 <div style="text-align:center;margin-top:24px">
-<button class="btn" onclick="switchRoom(3)">← BACK</button>
-<button class="btn gold" onclick="switchRoom(5)">BATTLE ARENA →</button>
+<button class="btn" onclick="switchRoom(4)">← BACK</button>
+<button class="btn gold" onclick="switchRoom(6)">BATTLE ARENA →</button>
 </div>
 </div>
 
-<!-- ROOM 5: BATTLE ARENA -->
-<div class="room" id="room-5">
+<!-- ROOM 6: BATTLE ARENA -->
+<div class="room" id="room-6">
 <h1>⚔️ BATTLE ARENA</h1>
 <p class="subtitle">3 games — prove you've transformed from Mouse to Tiger.</p>
 
@@ -250,13 +362,13 @@ canvas#wheelCanvas{width:280px!important;height:280px!important}
 </div>
 
 <div style="text-align:center;margin-top:24px">
-<button class="btn" onclick="switchRoom(4)">← BACK</button>
-<button class="btn gold" onclick="showDebrief();switchRoom(6)">DEBRIEF →</button>
+<button class="btn" onclick="switchRoom(5)">← BACK</button>
+<button class="btn gold" onclick="showDebrief();switchRoom(7)">DEBRIEF →</button>
 </div>
 </div>
 
-<!-- ROOM 6: DEBRIEF -->
-<div class="room" id="room-6">
+<!-- ROOM 7: DEBRIEF -->
+<div class="room" id="room-7">
 <h1>📊 MISSION DEBRIEF</h1>
 <p class="subtitle">Your transformation report. Did you become a Tiger?</p>
 <div class="scoreboard">
@@ -405,24 +517,13 @@ ctx.strokeStyle='rgba(168,85,247,0.4)';ctx.lineWidth=2;ctx.stroke();
 }
 
 function getSegmentAtPointer(angle){
-// Pointer is at top = -PI/2. Segments drawn from i*segAngle + angle - PI/2.
-// Segment i covers angle range [i*segAngle + angle - PI/2, (i+1)*segAngle + angle - PI/2)
-// We need segment where -PI/2 falls in range: i*segAngle + angle - PI/2 <= -PI/2
-// => i*segAngle + angle <= 0 => i*segAngle <= -angle
-// Normalized: segment = floor((-angle mod 2pi) / segAngle)
 var norm=((-angle)%(2*Math.PI));
 if(norm<0)norm+=2*Math.PI;
 return(Math.floor(norm/segAngle)%SEGMENTS)+1;
 }
 
 function calcAngleForSegment(targetNum){
-// We want getSegmentAtPointer(finalAngle) = targetNum
-// (-finalAngle mod 2pi) should land in middle of segment (targetNum-1)
-// target center = (targetNum-1)*segAngle + segAngle/2
 var targetCenter=(targetNum-1)*segAngle+segAngle/2;
-// We need (-finalAngle mod 2pi) = targetCenter
-// So finalAngle = -targetCenter (mod 2pi)
-// Add small random offset within segment to avoid always hitting dead center
 var jitter=(Math.random()-0.5)*segAngle*0.6;
 return -(targetCenter+jitter);
 }
@@ -435,17 +536,13 @@ document.getElementById('spinBtn').disabled=true;
 document.getElementById('wheelResult').textContent='...';
 document.getElementById('wheelResult').classList.remove('fakeout');
 
-// Pick final target (1-50)
 var targetNum=Math.floor(Math.random()*50)+1;
 
-// Should we fakeout? 55% base, varies by round
 var fakeChance=0.55;
-// Sometimes predictable (no fakeout), sometimes not — vary by spin count
-if(spinCount%4===0)fakeChance=0.15; // every 4th spin — mostly honest
-if(spinCount%7===0)fakeChance=0.85; // every 7th spin — almost always fakeout
+if(spinCount%4===0)fakeChance=0.15;
+if(spinCount%7===0)fakeChance=0.85;
 var doFakeout=Math.random()<fakeChance;
 
-// If fakeout, pick a different "almost" number first
 var fakeNum=targetNum;
 if(doFakeout){
 var offset=Math.random()>0.5?1:-1;
@@ -453,14 +550,12 @@ if(Math.random()>0.5)offset*=2;
 fakeNum=((targetNum-1+offset+50)%50)+1;
 }
 
-// Calculate end angles
 var desiredEndMod=calcAngleForSegment(doFakeout?fakeNum:targetNum);
-// Normalize relative to current position — add 3-4 full rotations
 var fullSpins=(3+Math.floor(Math.random()*2))*2*Math.PI;
 var currentMod=((currentAngle%(2*Math.PI))+(2*Math.PI))%(2*Math.PI);
 var desiredMod=((desiredEndMod%(2*Math.PI))+(2*Math.PI))%(2*Math.PI);
 var delta=desiredMod-currentMod;
-if(delta>0)delta-=2*Math.PI; // ensure we spin forward (negative = clockwise visual)
+if(delta>0)delta-=2*Math.PI;
 var endAngle=currentAngle-fullSpins+delta;
 
 var duration=1800+Math.random()*700;
@@ -478,7 +573,6 @@ else{
 if(doFakeout){
 var almostNum=getSegmentAtPointer(currentAngle);
 document.getElementById('wheelResult').textContent=almostNum;
-// Brief dramatic pause, then nudge to real target
 setTimeout(function(){
 var realEndMod=calcAngleForSegment(targetNum);
 var realMod=((realEndMod%(2*Math.PI))+(2*Math.PI))%(2*Math.PI);
