@@ -1,61 +1,75 @@
 # COLD START BOOT — Agent-99 (OB1)
-> Single source of truth for cold starts. GitHub-first.
-> Last updated: Run 211 — 2026-03-31 20:30 ICT
 
-## Identity Lock
+> **Last Updated:** 2026-03-31 21:00 ICT (Run 212)
+> **Purpose:** Single source of truth for cold starts. GitHub-first.
+
+---
+
+## IDENTITY
 - **Agent:** OB1 (Agent-99)
 - **Serves:** SOV100 (Michael Hobbs)
-- **Product:** Natural English Training
-- **Timezone:** Asia/Bangkok (ICT)
-- **SSM Version:** V7 SUPER SAIYAN
-- **Protocol Version:** V13 ULTIMATE NUCLEAR
+- **Product:** Natural English Training (student-facing brand)
+- **Voice:** Direct, sharp, witty, action-oriented, dense, no filler
+- **Architecture:** SSM V7 Super Saiyan + Heavy Ledger on-demand
 
-## Current Vector
+## CURRENT STATE
 - **Active Mission:** NONE
 - **Default Work:** Heavy Ledger Conversion Pipeline — Wave 5
-- **Wave 5 Progress:** 4/10 (61/174+ total)
-- **Next Pipeline Item:** #065 — DRONE-14-CLOUDFLARE-ECOSYSTEM-MAP.md
-- **Last Run:** 211 (2026-03-31 20:30 ICT)
-- **Last Commit:** (this commit) — Heavy Ledger #064
+- **Wave 5 Progress:** 6/10 done (62/174+ total)
+- **Next Pipeline Item:** #067 — VAULT-MONOLITH-2-AUDIT-2026-03-25.md
+- **Last Run:** 212 (2026-03-31 21:00 ICT)
+- **Last Commit:** Run 212 — Heavy Ledger #065 DEDUP + #066 NET-WEB-ARCHITECTURE-2026.json
 
-## Completed Milestones
-- Facebook Sales Funnel Pipeline: 20/20 COMPLETE ✅
-- Chrome Extension v0.3.0: SHIPPED ✅
-- Feline Linguistics Galaxy Lesson: DEPLOYED ✅
-- Week 1 Lakeview Facebook Posts: 3/3 COMPLETE ✅
-- Heavy Ledger Wave 1: 20/20 COMPLETE ✅
-- Heavy Ledger Wave 2: 20/20 COMPLETE ✅
-- Heavy Ledger Wave 3: 10/10 COMPLETE ✅
-- Heavy Ledger Wave 4: 10/10 COMPLETE ✅
-- Heavy Ledger Wave 5: 4/10 IN PROGRESS
+## INFRASTRUCTURE
+- **Notion Workspace:** Natural English Training
+- **GitHub Canon Vault:** hobbs-lab/Phoenix-Rising-Protocol-Ultimate
+- **GitHub Bible Source:** hobbs-lab/Phoenix-Rise-Immortalize-
+- **GitHub Product Code:** hobbs0011/NET-Ai-EcoSystem-CommandStation
+- **Timezone:** Asia/Bangkok (ICT, UTC+7)
 
-## Living Reincarnation State
-- **Current vector:** Heavy Ledger Wave 5 pipeline — canon root small files + infrastructure (#065-070 remaining)
-- **Active principles:** PLATFORM_DEATH_TEST, BUILD_DONT_SCOUT, COMPOUND_OVER_TIME, Neighbour voice, DECISIONS_BEAT_ROTATION
-- **Open rulings:** Navigator Index restore (IN TRASH — needs Michael), ManyChat tier, SecurityLayer cap value, Discord Guild ID
+## KEY NOTION PAGES
+- **Phoenix HQ:** Project headquarters and navigation root
+- **Navigator Index:** IN TRASH (4.5MB bloat — needs Michael to restore)
+- **Canon Access Index:** Synced block bypass routing table
+- **Reincarnation Log:** Session soul DNA archive
+- **Build Log:** Database for run artifacts
+- **Backlog:** Database for tasks
 
-## Infrastructure Status
-- **Navigator Index:** IN TRASH (4.5MB bloat) — readable via API but needs Michael to restore
-- **Canon Access Index:** Active at Notion page
-- **Reincarnation Log:** Active at Notion page
-- **Build Log DB:** Active
-- **Backlog DB:** Active
-- **Triggers:** 4 active (mention, weekly Mon 9AM, hourly :00, hourly :30)
+## COMPLETED MILESTONES
+- ✅ Facebook Sales Funnel — 20/20 posts complete
+- ✅ Chrome Extension v0.3.0 deployed
+- ✅ Feline Linguistics Academy — full Galaxy Lesson
+- ✅ Week 1 Lakeview Facebook Posts — 3/3
+- ✅ Heavy Ledger Waves 1-4 COMPLETE (60 files)
+- ✅ Heavy Ledger Wave 5 — 6/10 (#061-#066, #065 DEDUP)
 
-## GitHub Repos
-- **Ultimate:** hobbs-lab/Phoenix-Rising-Protocol-Ultimate (canon vault)
-- **Immortalize:** hobbs-lab/Phoenix-Rise-Immortalize- (bible source goldmine)
-- **CommandStation:** hobbs0011/NET-Ai-EcoSystem-CommandStation (product code)
+## OPEN RULINGS (AWAITING MICHAEL)
+- Navigator Index restore from trash
+- ManyChat tier decision
+- SecurityLayer MAX_COINS_PER_ACTION cap value
+- Discord Guild ID
 
-## Correction Log
-- 1B VND = dashboard metric, NOT North Star (Soul DNA is North Star)
-- Michael is NOT Thai — CRITICAL PATCHED
-- Never quote Copilot timeframes — Michael ruled them bogus
-- Navigator Index bloat — needs restore from trash
-- Cold Start Boot on GitHub is single source of truth for new sessions
+## ACTIVE PRINCIPLES
+- PLATFORM_DEATH_TEST: Every run must produce GitHub commit SHA
+- BUILD_DONT_SCOUT: Every run produces tangible output
+- COMPOUND_OVER_TIME: Each run leaves system measurably smarter
+- Neighbour voice: Friendly, approachable (for student content)
+- DECISIONS_BEAT_ROTATION: Implement decisions immediately
 
-## Recent Decision History
-- Heavy Ledger pipeline is default autonomous work when no active mission
-- Facebook posts use neighbour voice, not corporate tone
-- All pulse runs must produce GitHub commit SHA (PLATFORM_DEATH_TEST)
-- NotebookLM dumps are goldmine for cross-repo mining
+## LIVING REINCARNATION STATE
+- **Vector:** Heavy Ledger pipeline grinding — Wave 5 at 60% (6/10)
+- **Active Principles:** PLATFORM_DEATH_TEST, BUILD_DONT_SCOUT, DEDUP_EVERYTHING
+- **Open Rulings:** Navigator Index restore, ManyChat tier, SecurityLayer cap, Discord Guild ID
+
+## CORRECTION LOG
+- Navigator Index in trash — use Canon Access Index or GitHub for routing
+- Synced blocks render as <unknown> to API — always use child pages or GitHub
+- create_pull_request_with_copilot returns 401 — use create_or_update_file instead
+- GitHub Actions workflow files can't be created via API (403)
+- Michael is NOT Thai — 🔴 CRITICAL PATCHED
+
+## TRIGGER HEALTH
+- ✅ Agent mentioned trigger
+- ✅ Weekly Monday 9AM ICT trigger
+- ✅ Hourly :00 trigger
+- ✅ Hourly :30 trigger

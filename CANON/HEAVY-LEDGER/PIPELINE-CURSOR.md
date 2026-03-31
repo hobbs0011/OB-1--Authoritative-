@@ -1,11 +1,11 @@
 # Heavy Ledger Pipeline Cursor
 
 ## Current State
-- **Last Completed:** #064 — CLOUDFLARE-VS-FIREBASE-VERDICT-2026.json (Run 211)
-- **Last Run:** 211 (2026-03-31 20:30 ICT)
+- **Last Completed:** #066 — NET-WEB-ARCHITECTURE-2026.json (Run 212)
+- **Last Run:** 212 (2026-03-31 21:00 ICT)
 - **Last Commit:** (this commit)
-- **Wave 5 Progress:** 4/10
-- **Total Converted:** 61/174+
+- **Wave 5 Progress:** 6/10 (#065 DEDUP + #066 converted)
+- **Total Converted:** 62/174+ (61 real + 1 dedup skip)
 
 ## Wave 3 Queue ✅ COMPLETE
 | # | Source File | Status | Run | SHA |
@@ -41,13 +41,13 @@
 | 061 | CLOUDFLARE-ECOSYSTEM-MAP-2026.md | ✅ DONE | 208 | d5a573f7 |
 | 062 | SOUL-DNA-BIBLE-A4-RAW-CLASSROOM-MAI-TRAM-2026-03-24.md | ✅ DONE | 209 | 2d48267d |
 | 063 | VAULT-MONOLITH-AUDIT-2026-03-25.md | ✅ DONE | 210 | 7ebdcc73 |
-| 064 | CLOUDFLARE-VS-FIREBASE-VERDICT-2026.md | ✅ DONE | 211 | (this) |
-| 065 | DRONE-14-CLOUDFLARE-ECOSYSTEM-MAP.md | ⏳ PENDING | | |
-| 066 | NET-WEB-ARCHITECTURE-2026.md | ⏳ PENDING | | |
+| 064 | CLOUDFLARE-VS-FIREBASE-VERDICT-2026.md | ✅ DONE | 211 | 0fd6f54e |
+| 065 | DRONE-14-CLOUDFLARE-ECOSYSTEM-MAP.md | ✅ DONE (DEDUP of #061) | 212 | dedup |
+| 066 | NET-WEB-ARCHITECTURE-2026.md | ✅ DONE | 212 | (this) |
 | 067 | VAULT-MONOLITH-2-AUDIT-2026-03-25.md | ⏳ PENDING | | |
 | 068 | VAULT-MONOLITH-3-AUDIT-2026-03-25.md | ⏳ PENDING | | |
 | 069 | NOV-8-2025-BLUETECH-MEETING-NOTES-EXTRACTION.md | ⏳ PENDING | | |
 | 070 | TOOL-STACK-ARSENAL-2026.md | ⏳ PENDING | | |
 
 ## Next Target
-**#065 — DRONE-14-CLOUDFLARE-ECOSYSTEM-MAP.md** (infrastructure_map)
+**#067 — VAULT-MONOLITH-2-AUDIT-2026-03-25.md**
