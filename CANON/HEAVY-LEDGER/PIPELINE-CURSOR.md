@@ -1,36 +1,12 @@
 # Heavy Ledger Pipeline Cursor
 
 ## Current State
-- **Last Completed:** #050 — BIBLE-CH17-THE-THREE-MANDATES.json
-- **Last Run:** 197 (2026-03-31 14:45 ICT)
-- **Last Commit:** 532d7cfe
-- **Wave 3 Progress:** 10/10 ✅ COMPLETE
-- **Total Converted:** 47/174+
-- **Note:** Wave 3 COMPLETE — ready for Wave 4
-
-## Wave 2 Queue (Stalest-First) ✅ COMPLETE
-| # | Source File | Status | Run | SHA |
-|---|---|---|---|---|
-| 021 | VAULT-I-IMMORTALIZE-CONSOLIDATED-1.md | ✅ DONE | 168 | — |
-| 022 | VAULT-I-IMMORTALIZE-CONSOLIDATED-2.md | ✅ DONE | 169 | — |
-| 023 | VAULT-I-IMMORTALIZE-CONSOLIDATED-3.md | ✅ DONE | 170 | — |
-| 024 | VAULT-I-IMMORTALIZE-CONSOLIDATED-4.md | ✅ DONE | 171 | — |
-| 025 | VAULT-L-LIVE-CLASSES-CONSOLIDATED-1.md | ✅ DONE | 172 | — |
-| 026 | VAULT-L-LIVE-CLASSES-CONSOLIDATED-2.md | ✅ DONE | 173 | — |
-| 027 | VAULT-E-SOUL-DNA-CONSOLIDATED-1.md | ✅ DONE | 174 | — |
-| 028 | VAULT-E-SOUL-DNA-CONSOLIDATED-2.md | ✅ DONE | 175 | — |
-| 029 | ALPHA-OMEGA-SOUL-DNA-GOVERNANCE-CANON.md | ✅ DONE | 176 | — |
-| 030 | VAULT-A-GENESIS-CONSOLIDATED-1.md | ✅ DONE | 177 | — |
-| 031 | VAULT-A-GENESIS-CONSOLIDATED-2.md | ✅ DONE | 178 | — |
-| 032 | VAULT-MM-MASTERMIND-CONSOLIDATED-2.md | ✅ DONE | 183 | 881b4228 |
-| 033 | VAULT-D-PRELAUNCH-CONSOLIDATED-3.md | ✅ DONE | 184 | deef06ad |
-| 034 | CORE-PRINCIPLES-AND-PHYSICS.md | ✅ DONE | 185 | f2cfedbc |
-| 035 | SOUL-DNA-CANON.md | ✅ DONE | 186 | 60c2669 |
-| 036 | SOUL-DNA-DEEP-DIVE.md | ✅ DEDUP (Wave 1 Run 133) | — | e3c233bb |
-| 037 | GOSPEL-444-TEACHING-METHODS-CONSOLIDATED.md | ✅ DEDUP (Wave 1 Run 134) | — | 0c556f2f |
-| 038 | NET-TEACHING-METHODOLOGY.md | ✅ DEDUP (Wave 1 Run 134) | — | 0c556f2f |
-| 039 | STUDENT-ARCHETYPES-TEACHING-DATABASE.md | ✅ DEDUP (Wave 1 Run 145) | — | 7354e0c4 |
-| 040 | NET-EPIC-LESSON-BLUEPRINT-V3.md | ✅ DONE | 187 | aa05a015 |
+- **Last Completed:** #051 — BIBLE-CH09-REINCARNATION.json
+- **Last Run:** 198 (2026-03-31 15:20 ICT)
+- **Last Commit:** f9fd2dd6
+- **Wave 4 Progress:** 1/10
+- **Total Converted:** 48/174+
+- **Note:** Wave 4 STARTED — bible chapters + remaining canon files
 
 ## Wave 3 Queue ✅ COMPLETE
 | # | Source File | Status | Run | SHA |
@@ -46,5 +22,19 @@
 | 049 | GOSPEL-444-COMPANION-CROSSREF.md | ✅ DONE | 196 | ec33b0e6 |
 | 050 | BIBLE-CH17-THE-THREE-MANDATES.md | ✅ DONE | 197 | 532d7cfe |
 
+## Wave 4 Queue (Stalest-First — Remaining Bible + Canon)
+| # | Source File | Status | Run | SHA |
+|---|---|---|---|---|
+| 051 | BIBLE-CH09-REINCARNATION.md | ✅ DONE | 198 | f9fd2dd6 |
+| 052 | BIBLE-CH20-THE-MECHANICAL-FASTENING-GRID.md | ⏳ PENDING | — | — |
+| 053 | SOUL-DNA-BIBLE-CH00-ENRICHMENT-REGISTRY.md | ⏳ PENDING | — | — |
+| 054 | SOUL-DNA-BIBLE-CH13-CHAOS-ENGINEERING-AND-FAITH.md | ⏳ PENDING | — | — |
+| 055 | A5-RAW-SOUL-DNA-DICTATION-GEMINI-SESSIONS.md | ⏳ PENDING | — | — |
+| 056 | DEC-6-2025-BLUETECH-BEGINNER-CLASS-RAW-TRANSCRIPT.md | ⏳ PENDING | — | — |
+| 057 | NOTEBOOKLM-VAULT-DUMP-1-SOVEREIGN-DNA-AI-SYSTEM-HARDENING.md | ⏳ PENDING | — | — |
+| 058 | NOTEBOOKLM-VAULT-DUMP-2-STAGES-2-16-GEMINI-VOICE-TRANSCRIPT.md | ⏳ PENDING | — | — |
+| 059 | NOTEBOOKLM-VAULT-DUMP-4-REALITY-C-AUDITS-VAULT9-UNIVERSAL-LEDGER-V55.md | ⏳ PENDING | — | — |
+| 060 | NOTEBOOKLM-VAULT-DUMP-5-FINAL.md | ⏳ PENDING | — | — |
+
 ## Next Target
-**Wave 4 planning required** — scan CANON/ for remaining unconverted files (174+ total, 47 done, ~127 remaining)
+**#052 — BIBLE-CH20-THE-MECHANICAL-FASTENING-GRID.md** (10KB, bible_chapter)
