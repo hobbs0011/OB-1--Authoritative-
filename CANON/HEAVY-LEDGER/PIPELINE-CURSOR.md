@@ -1,28 +1,35 @@
-# Heavy Ledger Conversion Pipeline — Cursor
+# Heavy Ledger Pipeline Cursor
 
-**Current cursor:** 032
-**Wave:** 2
-**Total converted:** 33/174+
-**Last converted:** `VAULT-MM-MASTERMIND-CONSOLIDATED-2.json` (Run 183)
-**Next:** Pipeline #033 — VAULT-D-PRELAUNCH-CONSOLIDATED-3.md (stalest-first)
+## Current State
+- **Last Completed:** #033 — VAULT-D-PRELAUNCH-CONSOLIDATED-3.json
+- **Last Run:** 184 (2026-03-31 11:00 ICT)
+- **Last Commit:** `deef06ad`
+- **Wave 2 Progress:** 13/20 (#021–#033)
+- **Total Converted:** 34/174+
 
-## Wave 1 Summary (COMPLETE — 20/20)
-- Runs 132-150
-- 20 files converted to structured Heavy Ledger JSON
-- All Platform Death Tests PASS
+## Wave 2 Queue (Stalest-First)
+| # | Source File | Status | Run | SHA |
+|---|---|---|---|---|
+| 021 | VAULT-I-IMMORTALIZE-CONSOLIDATED-1.md | ✅ DONE | 168 | — |
+| 022 | VAULT-I-IMMORTALIZE-CONSOLIDATED-2.md | ✅ DONE | 169 | — |
+| 023 | VAULT-I-IMMORTALIZE-CONSOLIDATED-3.md | ✅ DONE | 170 | — |
+| 024 | VAULT-I-IMMORTALIZE-CONSOLIDATED-4.md | ✅ DONE | 171 | — |
+| 025 | VAULT-L-LIVE-CLASSES-CONSOLIDATED-1.md | ✅ DONE | 172 | — |
+| 026 | VAULT-L-LIVE-CLASSES-CONSOLIDATED-2.md | ✅ DONE | 173 | — |
+| 027 | VAULT-E-SOUL-DNA-CONSOLIDATED-1.md | ✅ DONE | 174 | — |
+| 028 | VAULT-E-SOUL-DNA-CONSOLIDATED-2.md | ✅ DONE | 175 | — |
+| 029 | ALPHA-OMEGA-SOUL-DNA-GOVERNANCE-CANON.md | ✅ DONE | 176 | — |
+| 030 | VAULT-A-GENESIS-CONSOLIDATED-1.md | ✅ DONE | 177 | — |
+| 031 | VAULT-A-GENESIS-CONSOLIDATED-2.md | ✅ DONE | 178 | — |
+| 032 | VAULT-MM-MASTERMIND-CONSOLIDATED-2.md | ✅ DONE | 183 | 881b4228 |
+| 033 | VAULT-D-PRELAUNCH-CONSOLIDATED-3.md | ✅ DONE | 184 | deef06ad |
+| 034 | CORE-PRINCIPLES-AND-PHYSICS.md | ⏳ NEXT | — | — |
+| 035 | SOUL-DNA-CANON.md | 🔲 QUEUED | — | — |
+| 036 | SOUL-DNA-DEEP-DIVE.md | 🔲 QUEUED | — | — |
+| 037 | GOSPEL-444-TEACHING-METHODS-CONSOLIDATED.md | 🔲 QUEUED | — | — |
+| 038 | NET-TEACHING-METHODOLOGY.md | 🔲 QUEUED | — | — |
+| 039 | STUDENT-ARCHETYPES-TEACHING-DATABASE.md | 🔲 QUEUED | — | — |
+| 040 | NET-EPIC-LESSON-BLUEPRINT-V3.md | 🔲 QUEUED | — | — |
 
-## Wave 2 Progress
-| # | File | Run | Commit | Status |
-|---|------|-----|--------|--------|
-| 021 | BIBLE-CH02-DOC01-SOUL-DNA-MAP.json | 151 | `7682c0f8` | ✅ DONE |
-| 022 | SOUL-DNA-BIBLE-CH10-THE-MACHINE-THAT-BUILDS-THE-MACHINE.json | 152 | `c2168300` | ✅ DONE |
-| 023 | BIBLE-CH03-DOC02-SACRED-ARTIFACT-SORTING.json | 153 | `40cb5451` | ✅ DONE |
-| 024 | VAULT-B-FOUNDATIONS-CONSOLIDATED-1.json | 176 | `13294db` | ✅ DONE |
-| 025 | NOTEBOOKLM-VAULT-ARCHITECT-OF-AGENT99-FIRST-250-LAYERS.json | 155 | `c9924ea1` | ✅ DONE |
-| 026 | BIBLE-CH04-DOC02-REBUILD-SUPER-SAIYAN-STAGE2.json | 177 | `c6d031b` | ✅ DONE |
-| 027 | SKELETON-STAR-MAP-PRIME-LAWS-100-LAYER-FOUNDATION.json | 178 | `2438572b` | ✅ DONE |
-| 028 | VAULT-I-IMMORTALIZE-CONSOLIDATED-1.json | 179 | `5b265539` | ✅ DONE |
-| 029 | BIBLE-CH18-THE-NUKE-PROTOCOL.json | 180 | `787266b3` | ✅ DONE |
-| 030 | BIBLE-CH06-12-SHARP-RISKS.json | 181 | `42e38093` | ✅ DONE |
-| 031 | VAULT-MM-MASTERMIND-CONSOLIDATED-1.json | 182 | `17b2286f` | ✅ DONE |
-| 032 | VAULT-MM-MASTERMIND-CONSOLIDATED-2.json | 183 | *this commit* | ✅ DONE |
+## Next Target
+**#034 — CORE-PRINCIPLES-AND-PHYSICS.md** (37KB, major canon file, stalest non-vault consolidated)
