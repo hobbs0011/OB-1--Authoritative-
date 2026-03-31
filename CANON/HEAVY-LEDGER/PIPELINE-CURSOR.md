@@ -1,10 +1,10 @@
 # Heavy Ledger Conversion Pipeline — Cursor
 
-**Current cursor:** 030
+**Current cursor:** 031
 **Wave:** 2
-**Total converted:** 31/174+
-**Last converted:** `BIBLE-CH06-12-SHARP-RISKS.json` (Run 181)
-**Next:** Pipeline #031 — Next unconverted CANON/ source file (stalest-first)
+**Total converted:** 32/174+
+**Last converted:** `VAULT-MM-MASTERMIND-CONSOLIDATED-1.json` (Run 182)
+**Next:** Pipeline #032 — VAULT-MM-MASTERMIND-CONSOLIDATED-2.md (stalest-first)
 
 ## Wave 1 Summary (COMPLETE — 20/20)
 - Runs 132-150
@@ -24,3 +24,4 @@
 | 028 | VAULT-I-IMMORTALIZE-CONSOLIDATED-1.json | 179 | `5b265539` | ✅ DONE |
 | 029 | BIBLE-CH18-THE-NUKE-PROTOCOL.json | 180 | `787266b3` | ✅ DONE |
 | 030 | BIBLE-CH06-12-SHARP-RISKS.json | 181 | `42e38093` | ✅ DONE |
+| 031 | VAULT-MM-MASTERMIND-CONSOLIDATED-1.json | 182 | `pending` | ✅ DONE |
