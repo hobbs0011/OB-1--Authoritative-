@@ -1,0 +1,216 @@
+{
+  "meta": {
+    "id": "GOSPEL-444-REVENUE-BRIDGE",
+    "pipeline_number": 48,
+    "source_file": "CANON/GOSPEL-444-REVENUE-BRIDGE.md",
+    "source_sha": "0aa0bc10b6e3900d5b4336af3544ab75b1f45e2a",
+    "source_type": "canon_enriched",
+    "source_size_kb": 11,
+    "generated_by": "OB1 Pulse Run 195",
+    "generated_at": "2026-03-31T14:15:00+07:00",
+    "wave": 3,
+    "wave_position": "8/10",
+    "canon_guardrails": {
+      "verbatim_quotes_preserved": true,
+      "no_fabrication": true,
+      "no_paraphrase_sacred": true,
+      "source_verified": true,
+      "cross_repo_sources_checked": true
+    }
+  },
+  "identity": {
+    "title": "Gospel 444 — Revenue Bridge: Teaching Method as Sales Weapon",
+    "purpose": "Bridge Gospel 444 teaching methodology to revenue generation. The teaching method IS the sales weapon.",
+    "core_thesis": "English is the mechanic, money is the mission.",
+    "artifact_class": "VAULT (ENRICHED — cross-repo synthesis)",
+    "original_generation": "2026-03-26 Run 43 — Pulse-Incarnation Engine v5"
+  },
+  "verbatim_quotes": [
+    {
+      "quote": "English is the mechanic, money is the mission.",
+      "speaker": "Michael Hobbs",
+      "date": "2026-03-26",
+      "severity": "RED",
+      "context": "Revenue-first doctrine establishment"
+    },
+    {
+      "quote": "No more neglecting real income for near future promises.",
+      "speaker": "Michael Hobbs",
+      "date": "2026-03-26",
+      "severity": "RED",
+      "context": "Revenue-first pivot"
+    },
+    {
+      "quote": "My goal is to make it so you don't need me after 1 year.",
+      "speaker": "Michael Hobbs",
+      "date": "2026-03-26",
+      "severity": "RED",
+      "context": "Ultimate Mouse-to-Tiger close — said to Dung during conversion"
+    },
+    {
+      "quote": "I really hate how the English centers take advantage of everyone.",
+      "speaker": "Michael Hobbs",
+      "date": "2026-03-26",
+      "severity": "YELLOW",
+      "context": "Anti-center positioning — genuine conviction, not manufactured"
+    },
+    {
+      "quote": "They manipulate parents... whisper answers.",
+      "speaker": "Michael Hobbs",
+      "date": "2026-03-26",
+      "severity": "YELLOW",
+      "context": "Center violations of Gospel 444 principles"
+    },
+    {
+      "quote": "The app is programmed to teach my style without me being there.",
+      "speaker": "Michael Hobbs",
+      "date": "2026-03-26",
+      "severity": "RED",
+      "context": "OBI as Gospel 444 at scale — said to Dung"
+    },
+    {
+      "quote": "If he loves Roblox, that's the topic.",
+      "speaker": "Michael Hobbs",
+      "date": "2026-03-26",
+      "severity": "YELLOW",
+      "context": "Interest-driven content selection — method demo in one sentence"
+    },
+    {
+      "quote": "I don't go below 600k an hour because I put a lot of extra work into my training.",
+      "speaker": "Michael Hobbs",
+      "date": "2026-03-26",
+      "severity": "YELLOW",
+      "context": "Anti-discount doctrine — value before price"
+    },
+    {
+      "quote": "Take special note of how she found me... she found me through some random search when I didn't even intend it. Imagine if we optimized this?",
+      "speaker": "Michael Hobbs",
+      "date": "2026-03-26",
+      "severity": "RED",
+      "context": "Findability gap identification — make the accidents happen on purpose"
+    }
+  ],
+  "key_concepts": [
+    {
+      "concept": "Mouse-to-Tiger as Sales Architecture",
+      "definition": "The same progression used in teaching (permission → confidence → competence → mastery) maps directly to the sales sequence. Sell the way you teach.",
+      "gospel_444_principle": "Start where they are",
+      "sales_application": "Ask about the kid first, not your service. Relationship-first, not pitch-first.",
+      "proven_in": "Dung conversion — first message to booked session = one conversation, same day"
+    },
+    {
+      "concept": "Anti-Center Positioning",
+      "definition": "Every Gospel 444 teaching principle has a mirror as a competitive attack against English centers. Not manufactured positioning — genuine conviction.",
+      "attacks": [
+        "Natural acquisition vs forced memorization",
+        "Student interest drives content vs rigid textbooks",
+        "Honest progress reporting vs whispered answers",
+        "Independence as goal vs dependency for revenue",
+        "AI-assisted daily practice vs scheduled sessions only"
+      ]
+    },
+    {
+      "concept": "OBI as Gospel 444 at Scale",
+      "definition": "OBI is not a separate product. OBI is Gospel 444 encoded into software. Carries the teaching method into the 23 hours/day when Michael isn't teaching.",
+      "feature_to_principle_map": {
+        "interest_based_content": "Mouse-to-Tiger",
+        "play_first_design": "Permission over perfection",
+        "daily_practice": "Consistency compounds",
+        "parent_dashboard": "Transparent progress",
+        "adaptive_difficulty": "Student-led pacing",
+        "conversation_practice": "Acquisition over memorization"
+      }
+    },
+    {
+      "concept": "Proven Sales Sequence (11-Step)",
+      "definition": "The Dung conversion reveals a sales sequence that IS Gospel 444 applied to selling.",
+      "steps": [
+        "Parent searches → finds Michael",
+        "Chat-first contact (Messenger)",
+        "Ask about kid, day, needs",
+        "Name the enemy (centers)",
+        "Tell the 7yo transformation story",
+        "Mention OBI / AI daily practice",
+        "Give pricing options",
+        "Offer free eval",
+        "Book same day",
+        "Deliver written report in 24hrs",
+        "Ongoing relationship (partner, not vendor)"
+      ]
+    },
+    {
+      "concept": "Anti-Discount Doctrine",
+      "definition": "Zero negotiation on price. Value established BEFORE price is mentioned. Maps to Gospel 444: build the experience first, then name the standard.",
+      "pricing": {
+        "live_2x_week": "600k/hr",
+        "live_1x_plus_ai": "900k/week",
+        "premium_future": "TBD"
+      }
+    },
+    {
+      "concept": "Revenue Rebuild Milestones",
+      "definition": "Phased revenue targets anchored to teaching quality scaling.",
+      "milestones": [
+        {"stage": "Survival", "students": 5, "monthly_vnd": "18-24M", "timeline": "Now → 3 months"},
+        {"stage": "Stability", "students": 10, "monthly_vnd": "40M+", "timeline": "3-6 months"},
+        {"stage": "Growth", "students": 25, "monthly_vnd": "80M+", "timeline": "6-18 months"},
+        {"stage": "Scale", "students": "100+", "monthly_vnd": "200M+", "timeline": "18-36 months"}
+      ]
+    },
+    {
+      "concept": "Findability Gap",
+      "definition": "Michael's sales DNA is elite. The gap is not conversion — the gap is discovery. Make the accidents happen on purpose.",
+      "channels": {
+        "lakeview_community": "READY",
+        "zalo_oa": "BLOCKED (voice verification)",
+        "google_business": "NOT STARTED",
+        "linkedin": "BLOCKED (ID verification)",
+        "facebook": "REBUILT (new account)",
+        "website": "ACTIVE (naturalenglishtraining.com)"
+      }
+    },
+    {
+      "concept": "Scale Architecture (Empire Blueprint)",
+      "definition": "4-phase scaling from solo teacher to multi-agent content swarm.",
+      "phases": [
+        "Phase 1: Michael 1:1 + OBI daily practice (24-40M VND/mo)",
+        "Phase 2-3: Premium 1:1 + OBI self-paced + content agents (multi-track)",
+        "Phase 4: Full swarm + course marketplace + B2B licensing (9-figure VND annual)"
+      ]
+    }
+  ],
+  "cross_references": [
+    {
+      "source": "CANON/GOSPEL-444-TEACHING-METHODS-CONSOLIDATED.md",
+      "content_used": "All 30 teaching sections, Mouse → Tiger, methodology"
+    },
+    {
+      "source": "CANON/SALES-DNA/DUNG-CONVERSION-BLUEPRINT.md",
+      "content_used": "30 tactical insights, organic funnel, revenue math"
+    },
+    {
+      "source": "ARCHIVE/Phoenix-Rise-Immortalize/VAULT-GENESIS/13-THE-EMPIRE-BLUEPRINT.md",
+      "content_used": "5-year vision, scale architecture, revenue milestones"
+    },
+    {
+      "source": "CANON/REINCARNATION/2026-03-26-sales-dna-revenue-pivot.md",
+      "content_used": "Raw quotes, decisions, revenue-first doctrine"
+    }
+  ],
+  "implementation_status": {
+    "mouse_tiger_sales": "ACTIVE — proven in Dung conversion",
+    "anti_center_positioning": "ACTIVE — core messaging deployed",
+    "obi_gospel_444": "BUILDING — Chrome Extension v0.3.0 shipped",
+    "sales_sequence": "PROVEN — needs codification into repeatable playbook",
+    "anti_discount": "ACTIVE — 600k floor enforced",
+    "findability": "PARTIAL — Facebook funnel 20/20 complete, other channels pending",
+    "scale_architecture": "DESIGN — Phase 1 active"
+  },
+  "canon_guardrails_audit": {
+    "no_fabrication": "PASS — all quotes from source markdown",
+    "no_drift": "PASS — revenue-first doctrine preserved",
+    "no_paraphrase_sacred": "PASS — 9 verbatim quotes preserved exactly",
+    "no_speculation": "PASS — implementation status reflects actual state",
+    "verbatim_first": "PASS — quotes extracted before interpretation"
+  }
+}
