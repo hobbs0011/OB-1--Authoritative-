@@ -1,10 +1,10 @@
 # Heavy Ledger Conversion Pipeline — Cursor
 
-**Current cursor:** 027
+**Current cursor:** 028
 **Wave:** 2
-**Total converted:** 28/174+
-**Last converted:** `SKELETON-STAR-MAP-PRIME-LAWS-100-LAYER-FOUNDATION.json` (Run 178)
-**Next:** Pipeline #028 — VAULT-I-IMMORTALIZE-CONSOLIDATED-1.md (14KB, vault_immortalize)
+**Total converted:** 29/174+
+**Last converted:** `VAULT-I-IMMORTALIZE-CONSOLIDATED-1.json` (Run 179)
+**Next:** Pipeline #029 — BIBLE-CH18-THE-NUKE-PROTOCOL.md (14KB, bible_chapter)
 
 ## Wave 1 Summary (COMPLETE — 20/20)
 - Runs 132-150
@@ -20,4 +20,5 @@
 | 024 | VAULT-B-FOUNDATIONS-CONSOLIDATED-1.json | 176 | `13294db` | ✅ DONE |
 | 025 | NOTEBOOKLM-VAULT-ARCHITECT-OF-AGENT99-FIRST-250-LAYERS.json | 155 | `c9924ea1` | ✅ DONE |
 | 026 | BIBLE-CH04-DOC02-REBUILD-SUPER-SAIYAN-STAGE2.json | 177 | `c6d031b` | ✅ DONE |
-| 027 | SKELETON-STAR-MAP-PRIME-LAWS-100-LAYER-FOUNDATION.json | 178 | (this commit) | ✅ DONE |
+| 027 | SKELETON-STAR-MAP-PRIME-LAWS-100-LAYER-FOUNDATION.json | 178 | `2438572b` | ✅ DONE |
+| 028 | VAULT-I-IMMORTALIZE-CONSOLIDATED-1.json | 179 | (this commit) | ✅ DONE |
