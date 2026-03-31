@@ -1,11 +1,11 @@
 # Heavy Ledger Pipeline Cursor
 
 ## Current State
-- **Last Completed:** #033 — VAULT-D-PRELAUNCH-CONSOLIDATED-3.json
-- **Last Run:** 184 (2026-03-31 11:00 ICT)
-- **Last Commit:** `deef06ad`
-- **Wave 2 Progress:** 13/20 (#021–#033)
-- **Total Converted:** 34/174+
+- **Last Completed:** #034 — CORE-PRINCIPLES-AND-PHYSICS.json
+- **Last Run:** 185 (2026-03-31 11:15 ICT)
+- **Last Commit:** `f2cfedbc`
+- **Wave 2 Progress:** 14/20 (#021–#034)
+- **Total Converted:** 35/174+
 
 ## Wave 2 Queue (Stalest-First)
 | # | Source File | Status | Run | SHA |
@@ -23,8 +23,8 @@
 | 031 | VAULT-A-GENESIS-CONSOLIDATED-2.md | ✅ DONE | 178 | — |
 | 032 | VAULT-MM-MASTERMIND-CONSOLIDATED-2.md | ✅ DONE | 183 | 881b4228 |
 | 033 | VAULT-D-PRELAUNCH-CONSOLIDATED-3.md | ✅ DONE | 184 | deef06ad |
-| 034 | CORE-PRINCIPLES-AND-PHYSICS.md | ⏳ NEXT | — | — |
-| 035 | SOUL-DNA-CANON.md | 🔲 QUEUED | — | — |
+| 034 | CORE-PRINCIPLES-AND-PHYSICS.md | ✅ DONE | 185 | f2cfedbc |
+| 035 | SOUL-DNA-CANON.md | ⏳ NEXT | — | — |
 | 036 | SOUL-DNA-DEEP-DIVE.md | 🔲 QUEUED | — | — |
 | 037 | GOSPEL-444-TEACHING-METHODS-CONSOLIDATED.md | 🔲 QUEUED | — | — |
 | 038 | NET-TEACHING-METHODOLOGY.md | 🔲 QUEUED | — | — |
@@ -32,4 +32,4 @@
 | 040 | NET-EPIC-LESSON-BLUEPRINT-V3.md | 🔲 QUEUED | — | — |
 
 ## Next Target
-**#034 — CORE-PRINCIPLES-AND-PHYSICS.md** (37KB, major canon file, stalest non-vault consolidated)
+**#035 — SOUL-DNA-CANON.md** (38KB, major canon file)
