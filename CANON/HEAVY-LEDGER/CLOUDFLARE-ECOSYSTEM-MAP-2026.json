@@ -1,0 +1,324 @@
+{
+  "artifact_id": "HL-061",
+  "source_file": "CANON/CLOUDFLARE-ECOSYSTEM-MAP-2026.md",
+  "source_sha": "7fbc8902fa8376433ec058efff4e3059cf80057f",
+  "artifact_class": "VAULT",
+  "content_type": "canon_tech",
+  "title": "Cloudflare Full Ecosystem Map — Past / Present / Future",
+  "last_updated": "2026-03-28",
+  "source_origin": "Cloudflare official docs + pricing pages + Drone 14 research",
+  "context": "Michael has Workers Paid ($5/mo). Cloudflare is OBI's ONLY production platform.",
+  "conversion_run": 208,
+  "conversion_date": "2026-03-31T19:00:00+07:00",
+  "converter": "OB1_PULSE_V5",
+  "products_active": [
+    {
+      "name": "Workers",
+      "category": "Compute",
+      "status": "GA",
+      "in_use": true,
+      "relevance": "CRITICAL",
+      "free_tier": "100K req/day, 10ms CPU",
+      "paid_tier": "10M req/mo, 30M CPU ms",
+      "role": "Core runtime — OBI lives here"
+    },
+    {
+      "name": "Durable Objects",
+      "category": "Stateful Compute",
+      "status": "GA",
+      "in_use": true,
+      "relevance": "CRITICAL",
+      "free_tier": "100K req/day, 13K GB-s/day, 5GB SQL",
+      "paid_tier": "$0.15/M req, $12.50/M GB-s",
+      "role": "Session state, conversation memory, Agents SDK runtime"
+    },
+    {
+      "name": "D1",
+      "category": "Database",
+      "status": "GA",
+      "in_use": true,
+      "relevance": "CRITICAL",
+      "free_tier": "5M rows read/day, 100K writes/day, 5GB",
+      "paid_tier": "$0.001/M rows read, $1/M writes",
+      "role": "User data, lesson progress, auth"
+    },
+    {
+      "name": "KV",
+      "category": "Key-Value Store",
+      "status": "GA",
+      "in_use": true,
+      "relevance": "MEDIUM",
+      "free_tier": "100K reads/day, 1K writes/day, 1GB",
+      "paid_tier": "10M reads/mo + $0.50/M, 1GB + $0.50/GB",
+      "role": "Config, feature flags, session tokens"
+    },
+    {
+      "name": "R2",
+      "category": "Object Storage",
+      "status": "GA",
+      "in_use": true,
+      "relevance": "MEDIUM",
+      "free_tier": "10GB, 1M Class A, 10M Class B, zero egress",
+      "paid_tier": "$0.015/GB-mo, $4.50/M Class A",
+      "role": "Audio files, lesson assets, media"
+    },
+    {
+      "name": "Pages",
+      "category": "Frontend Hosting",
+      "status": "GA",
+      "in_use": true,
+      "relevance": "MEDIUM",
+      "free_tier": "Unlimited sites, 500 builds/mo",
+      "paid_tier": "5K builds/mo",
+      "role": "naturalenglishtraining.net frontend"
+    },
+    {
+      "name": "CDN",
+      "category": "Performance",
+      "status": "GA",
+      "in_use": true,
+      "relevance": "LOW",
+      "free_tier": "Free with any plan",
+      "role": "Auto-included, global edge caching"
+    },
+    {
+      "name": "DNS",
+      "category": "Infrastructure",
+      "status": "GA",
+      "in_use": true,
+      "relevance": "LOW",
+      "free_tier": "Free",
+      "role": "Domain management"
+    }
+  ],
+  "products_untapped": [
+    {
+      "name": "Agents SDK",
+      "category": "AI Agents",
+      "status": "Beta",
+      "relevance": "CRITICAL",
+      "free_tier": "Runs on DO — same free tier",
+      "paid_tier": "DO pricing",
+      "role": "#1 UPGRADE PATH — multi-agent OBI with state, tools, MCP",
+      "upgrade_tier": 1
+    },
+    {
+      "name": "Workflows",
+      "category": "Orchestration",
+      "status": "GA",
+      "relevance": "CRITICAL",
+      "free_tier": "100K req/day, 10ms CPU, 1GB state",
+      "paid_tier": "Workers pricing",
+      "role": "Durable multi-step: onboarding flows, lesson chains, retry logic",
+      "upgrade_tier": 2
+    },
+    {
+      "name": "Vectorize",
+      "category": "Vector DB",
+      "status": "GA",
+      "relevance": "CRITICAL",
+      "free_tier": "30M queried dims/mo, 5M stored dims, 100 indexes",
+      "paid_tier": "$0.01/M queried dims, $0.05/100M stored",
+      "role": "Semantic search over lessons, RAG for OBI tutor",
+      "upgrade_tier": 1
+    },
+    {
+      "name": "AI Gateway",
+      "category": "AI Proxy",
+      "status": "GA",
+      "relevance": "CRITICAL",
+      "free_tier": "Core features free, 100K logs",
+      "paid_tier": "1M logs on paid, no per-request fee",
+      "role": "Caching, rate limiting, fallback routing for DeepSeek calls",
+      "upgrade_tier": 1
+    },
+    {
+      "name": "Workers AI",
+      "category": "AI Inference",
+      "status": "GA",
+      "relevance": "MEDIUM",
+      "free_tier": "10K Neurons/day",
+      "paid_tier": "$0.011/1K Neurons",
+      "role": "Fallback inference, embeddings, small models on-edge",
+      "upgrade_tier": 2
+    },
+    {
+      "name": "Queues",
+      "category": "Message Queue",
+      "status": "GA",
+      "relevance": "MEDIUM",
+      "free_tier": "Available on free plan",
+      "paid_tier": "Workers pricing",
+      "role": "Async audio processing, lesson generation pipeline",
+      "upgrade_tier": 2
+    },
+    {
+      "name": "Turnstile",
+      "category": "Bot Protection",
+      "status": "GA",
+      "relevance": "MEDIUM",
+      "free_tier": "Fully free, unlimited challenges, 20 widgets",
+      "role": "CAPTCHA replacement for signup/login — free forever",
+      "upgrade_tier": 2
+    },
+    {
+      "name": "Cron Triggers",
+      "category": "Scheduling",
+      "status": "GA",
+      "relevance": "MEDIUM",
+      "free_tier": "Included with Workers, 15min CPU max",
+      "role": "Scheduled lesson reminders, health checks, cleanup jobs",
+      "upgrade_tier": 2
+    },
+    {
+      "name": "Analytics Engine",
+      "category": "Analytics",
+      "status": "GA",
+      "relevance": "MEDIUM",
+      "free_tier": "Available on free",
+      "role": "Custom student usage metrics, lesson completion tracking",
+      "upgrade_tier": 3
+    },
+    {
+      "name": "Email Routing",
+      "category": "Email",
+      "status": "GA",
+      "relevance": "MEDIUM",
+      "free_tier": "Free — 25 dest addresses",
+      "role": "Route student emails, support inbox",
+      "upgrade_tier": 3
+    },
+    {
+      "name": "Browser Rendering",
+      "category": "Headless Chrome",
+      "status": "GA",
+      "relevance": "MEDIUM",
+      "free_tier": "10 min/day, 3 browsers",
+      "paid_tier": "$0.09/hr, $2/browser",
+      "role": "Screenshot testing, lesson preview rendering",
+      "upgrade_tier": 3
+    },
+    {
+      "name": "Hyperdrive",
+      "category": "DB Accelerator",
+      "status": "GA",
+      "relevance": "LOW",
+      "free_tier": "Free on all plans",
+      "role": "Connection pooling if we add external Postgres"
+    },
+    {
+      "name": "Tail Workers",
+      "category": "Observability",
+      "status": "GA",
+      "relevance": "LOW",
+      "free_tier": "Included",
+      "role": "Logging pipeline, audit trail for student interactions"
+    },
+    {
+      "name": "Logpush",
+      "category": "Observability",
+      "status": "GA",
+      "relevance": "LOW",
+      "free_tier": "Paid only",
+      "role": "Push logs to R2 or external for analytics"
+    },
+    {
+      "name": "Access (Zero Trust)",
+      "category": "Auth/Identity",
+      "status": "GA",
+      "relevance": "LOW",
+      "free_tier": "Free for up to 50 users",
+      "paid_tier": "$7/user/mo",
+      "role": "Admin panel auth, internal tools protection",
+      "upgrade_tier": 3
+    },
+    {
+      "name": "WAF",
+      "category": "Security",
+      "status": "GA",
+      "relevance": "MEDIUM",
+      "free_tier": "Basic rules on free plan",
+      "paid_tier": "Pro $20/mo for advanced",
+      "role": "Protect naturalenglishtraining.net from attacks"
+    },
+    {
+      "name": "Stream",
+      "category": "Video",
+      "status": "GA",
+      "relevance": "MEDIUM",
+      "paid_tier": "$5/mo for 1K min stored",
+      "role": "Future: video lessons, student recordings",
+      "upgrade_tier": 3
+    },
+    {
+      "name": "AI Search",
+      "category": "Search",
+      "status": "Beta",
+      "relevance": "MEDIUM",
+      "free_tier": "Free during beta",
+      "role": "Full-stack search over lesson content"
+    },
+    {
+      "name": "Constellation",
+      "category": "ML Runtime",
+      "status": "Deprecated",
+      "relevance": "NONE",
+      "role": "Replaced by Workers AI"
+    }
+  ],
+  "upgrade_path": {
+    "tier_1_activate_now": [
+      {
+        "product": "AI Gateway",
+        "rationale": "One line of code. Wraps DeepSeek calls with caching, rate limiting, fallback, analytics. Free core features. Single highest ROI move."
+      },
+      {
+        "product": "Agents SDK",
+        "rationale": "Endgame runtime for OBI. Multi-agent with persistent state on Durable Objects. Already on free tier. THIS IS the product architecture."
+      },
+      {
+        "product": "Vectorize",
+        "rationale": "RAG pipeline for lessons. Store lesson embeddings, query semantically. 30M free queried dims/month is more than enough for launch."
+      }
+    ],
+    "tier_2_this_quarter": [
+      {"product": "Workflows", "rationale": "Durable multi-step for student onboarding, lesson chains, retry logic. Free."},
+      {"product": "Turnstile", "rationale": "Free forever bot protection. Drop on signup/login forms."},
+      {"product": "Cron Triggers", "rationale": "Scheduled health checks, lesson reminders, cleanup. Already included."},
+      {"product": "Queues", "rationale": "Async audio processing pipeline. Decouple Deepgram STT from request path."}
+    ],
+    "tier_3_future_quarter": [
+      "Analytics Engine",
+      "Email Routing",
+      "Browser Rendering",
+      "Stream",
+      "Access (Zero Trust)"
+    ]
+  },
+  "cost_model": [
+    {"scenario": "Free tier only", "monthly_cost": "$0", "includes": "100K req/day, 10ms CPU, 5GB D1, 1GB KV, 10GB R2, basic DO"},
+    {"scenario": "Workers Paid (current)", "monthly_cost": "$5", "includes": "10M req/mo, 30M CPU ms, all products unlocked at usage rates"},
+    {"scenario": "100 students", "monthly_cost": "$5-8", "includes": "Within paid tier included allotments"},
+    {"scenario": "1,000 students", "monthly_cost": "$10-20", "includes": "Moderate overage on Workers + DO + D1"},
+    {"scenario": "10,000 students", "monthly_cost": "$50-100", "includes": "Still absurdly cheap for full AI product at scale"}
+  ],
+  "key_insight": "Zero egress fees on R2 saves hundreds at scale vs AWS S3",
+  "key_urls": {
+    "workers_docs": "developers.cloudflare.com/workers/",
+    "pricing": "workers.cloudflare.com/pricing",
+    "agents_sdk": "developers.cloudflare.com/agents/",
+    "ai_gateway": "developers.cloudflare.com/ai-gateway/",
+    "vectorize": "developers.cloudflare.com/vectorize/",
+    "workflows": "developers.cloudflare.com/workflows/",
+    "dashboard": "dash.cloudflare.com"
+  },
+  "summary": {
+    "total_products_mapped": 30,
+    "in_use": 8,
+    "untapped": 21,
+    "deprecated": 1,
+    "critical_untapped": ["Agents SDK", "Workflows", "Vectorize", "AI Gateway"],
+    "current_monthly_cost": "$5",
+    "projected_10k_students": "$50-100/mo"
+  }
+}

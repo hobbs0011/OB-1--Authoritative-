@@ -1,11 +1,11 @@
 # Heavy Ledger Pipeline Cursor
 
 ## Current State
-- **Last Completed:** #060 — NOTEBOOKLM-VAULT-DUMP-5-FINAL.json (Run 207)
-- **Last Run:** 207 (2026-03-31 18:30 ICT)
+- **Last Completed:** #061 — CLOUDFLARE-ECOSYSTEM-MAP-2026.json (Run 208)
+- **Last Run:** 208 (2026-03-31 19:00 ICT)
 - **Last Commit:** (this commit)
-- **Wave 4 Progress:** 10/10 ✅ COMPLETE
-- **Total Converted:** 57/174+
+- **Wave 5 Progress:** 1/10
+- **Total Converted:** 58/174+
 
 ## Wave 3 Queue ✅ COMPLETE
 | # | Source File | Status | Run | SHA |
@@ -33,11 +33,21 @@
 | 057 | NOTEBOOKLM-VAULT-DUMP-1-SOVEREIGN-DNA-AI-SYSTEM-HARDENING.md | ✅ DONE | 204 | 047e750a |
 | 058 | NOTEBOOKLM-VAULT-DUMP-2-STAGES-2-16-GEMINI-VOICE-TRANSCRIPT.json | ✅ DONE | 205 | fc5f93a9 |
 | 059 | NOTEBOOKLM-VAULT-DUMP-4-REALITY-C-AUDITS-VAULT9-UNIVERSAL-LEDGER-V55.md | ✅ DONE | 206 | affe02ee |
-| 060 | NOTEBOOKLM-VAULT-DUMP-5-FINAL.md | ✅ DONE | 207 | (this) |
+| 060 | NOTEBOOKLM-VAULT-DUMP-5-FINAL.md | ✅ DONE | 207 | ae7ed78c |
 
-## Wave 5 Planning
-**Status:** QUEUE NEEDED — Scan remaining unconverted CANON/ files for Wave 5 (10 items)
-**Candidates:** VAULT-DUMPS/NOTEBOOKLM-VAULT-DUMP-6, VAULT-I-IMMORTALIZE consolidated files, FIREBASE-CHROME-EXTENSION, SKELETON-STAR-MAP, remaining Bible chapters, product specs
+## Wave 5 Queue — CANON ROOT SMALL FILES + INFRASTRUCTURE
+| # | Source File | Status | Run | SHA |
+|---|---|---|---|---|
+| 061 | CLOUDFLARE-ECOSYSTEM-MAP-2026.md | ✅ DONE | 208 | (this) |
+| 062 | SOUL-DNA-BIBLE-A4-RAW-CLASSROOM-MAI-TRAM-2026-03-24.md | ⏳ PENDING | | |
+| 063 | VAULT-MONOLITH-AUDIT-2026-03-25.md | ⏳ PENDING | | |
+| 064 | CLOUDFLARE-VS-FIREBASE-VERDICT-2026.md | ⏳ PENDING | | |
+| 065 | DRONE-14-CLOUDFLARE-ECOSYSTEM-MAP.md | ⏳ PENDING | | |
+| 066 | NET-WEB-ARCHITECTURE-2026.md | ⏳ PENDING | | |
+| 067 | VAULT-MONOLITH-2-AUDIT-2026-03-25.md | ⏳ PENDING | | |
+| 068 | VAULT-MONOLITH-3-AUDIT-2026-03-25.md | ⏳ PENDING | | |
+| 069 | NOV-8-2025-BLUETECH-MEETING-NOTES-EXTRACTION.md | ⏳ PENDING | | |
+| 070 | TOOL-STACK-ARSENAL-2026.md | ⏳ PENDING | | |
 
 ## Next Target
-**Wave 5 queue build required** — Scan and prioritize remaining unconverted files
+**#062 — SOUL-DNA-BIBLE-A4-RAW-CLASSROOM-MAI-TRAM-2026-03-24.md** (8KB, canon_raw)
