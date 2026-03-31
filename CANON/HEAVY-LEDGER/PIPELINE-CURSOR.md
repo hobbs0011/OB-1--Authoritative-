@@ -1,11 +1,11 @@
 # Heavy Ledger Pipeline Cursor
 
 ## Current State
-- **Last Completed:** #083 — PULSE-OPERATIONS-HISTORY.json (Run 229)
-- **Last Run:** 229 (2026-04-01 06:00 ICT)
-- **Last Commit:** 0b7a4485 (HL-083)
-- **Wave 7 Progress:** 11/12
-- **Total Converted:** 79/174+ (78 real + 1 dedup skip)
+- **Last Completed:** #084 — WEEKLY-REPORT-2026-03-30.json (Run 230)
+- **Last Run:** 230 (2026-04-01 06:30 ICT)
+- **Last Commit:** b3f43d6e (HL-084)
+- **Wave 7 Progress:** 12/12 ✅ COMPLETE
+- **Total Converted:** 80/174+ (79 real + 1 dedup skip)
 
 ## Wave 7 Queue — CANON/SYSTEM
 | # | Source File | Status | Run | SHA |
@@ -21,7 +21,7 @@
 | 081 | MORNING-BRIEFING-2026-03-29.md | ✅ DONE | 227 | 499b0c59 |
 | 082 | MORNING-BRIEFING-2026-03-31.md | ✅ DONE | 228 | 67ea4994 |
 | 083 | PULSE-OPERATIONS-HISTORY.md | ✅ DONE | 229 | 0b7a4485 |
-| 084 | WEEKLY-REPORT-2026-03-30.md | PENDING | — | — |
+| 084 | WEEKLY-REPORT-2026-03-30.md | ✅ DONE | 230 | b3f43d6e |
 
 ## Completed Waves Summary
 | Wave | Items | Status |
@@ -32,5 +32,12 @@
 | 4 | 10/10 | ✅ COMPLETE |
 | 5 | 10/10 | ✅ COMPLETE |
 | 6 | 2/2 | ✅ COMPLETE |
-| 7 | 11/12 | 🔄 IN PROGRESS |
-| **Total** | **79/174+** | **Wave 7 active** |
+| 7 | 12/12 | ✅ COMPLETE |
+| **Total** | **80/174+** | **All 7 waves COMPLETE — awaiting Wave 8 queue** |
+
+## Wave 8 — PENDING
+Next wave needs to be defined. Candidates:
+- CANON/REINCARNATION/ entries (46 files)
+- CANON/MARKETING/ files (28+ files)
+- CANON/TRAIN-67/DOCS/ files (25+ files)
+- Remaining CANON/ root files not yet converted
