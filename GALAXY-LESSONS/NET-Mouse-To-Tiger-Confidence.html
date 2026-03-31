@@ -39,6 +39,20 @@ h3{font-family:var(--font-heading);font-size:14px;color:var(--purple);letter-spa
 .card.idiom::before{background:var(--gold)}
 .card.phrase::before{background:var(--green)}
 .card .origin{font-size:13px;color:var(--gray);margin-top:6px;font-style:italic}
+/* REVEAL BUTTONS */
+.reveal-zone{margin-top:12px;display:flex;flex-direction:column;gap:8px}
+.btn-reveal{font-family:var(--font-heading);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:10px 16px;border:1px solid rgba(168,85,247,0.3);background:rgba(168,85,247,0.08);color:var(--purple);border-radius:8px;cursor:pointer;transition:all .25s ease;text-align:left;display:flex;align-items:center;gap:8px}
+.btn-reveal:hover{background:rgba(168,85,247,0.18);border-color:var(--purple);box-shadow:0 0 12px var(--purple-glow)}
+.btn-reveal.gold-reveal{border-color:rgba(245,158,11,0.3);background:rgba(245,158,11,0.08);color:var(--gold)}
+.btn-reveal.gold-reveal:hover{background:rgba(245,158,11,0.18);border-color:var(--gold);box-shadow:0 0 12px var(--gold-glow)}
+.btn-reveal.green-reveal{border-color:rgba(34,197,94,0.3);background:rgba(34,197,94,0.08);color:var(--green)}
+.btn-reveal.green-reveal:hover{background:rgba(34,197,94,0.18);border-color:var(--green)}
+.reveal-content{display:none;animation:revealSlide .3s ease}
+.reveal-content.shown{display:block}
+@keyframes revealSlide{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+.btn-reveal-all{font-family:var(--font-heading);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:10px 20px;border:1px dashed rgba(168,85,247,0.4);background:transparent;color:var(--gray);border-radius:8px;cursor:pointer;transition:all .25s ease;margin:16px auto;display:block}
+.btn-reveal-all:hover{color:var(--purple);border-color:var(--purple);background:rgba(168,85,247,0.05)}
+/* END REVEAL */
 .game-card{background:linear-gradient(135deg,rgba(168,85,247,0.1),rgba(245,158,11,0.05));border:2px solid var(--purple-dim);border-radius:16px;padding:24px;margin-bottom:24px;text-align:center}
 .game-card h2{margin-top:0}
 .btn{font-family:var(--font-heading);font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:12px 24px;border:2px solid var(--purple);background:transparent;color:var(--purple);border-radius:8px;cursor:pointer;transition:all .3s ease;margin:8px}
@@ -68,7 +82,8 @@ canvas#wheelCanvas{display:block;margin:0 auto;border-radius:50%;box-shadow:0 0 
 .wheel-history span{font-family:var(--font-heading);font-size:13px;padding:4px 10px;background:var(--void-light);border:1px solid rgba(168,85,247,0.15);border-radius:6px;color:var(--gray)}
 @media(max-width:600px){
 .hud{padding:0 12px}.hud-logo{font-size:9px;letter-spacing:1px}.tab{padding:0 8px;font-size:8px}.main{padding:120px 16px 80px}.quiz-options{flex-direction:column}.btn{width:100%}
-canvas#wheelCanvas{width:260px!important;height:260px!important}
+canvas#wheelCanvas{width:280px!important;height:280px!important}
+.btn-reveal{font-size:10px;padding:8px 12px}
 }
 </style>
 </head>
@@ -139,7 +154,8 @@ canvas#wheelCanvas{width:260px!important;height:260px!important}
 <!-- ROOM 1: VOCAB VAULT -->
 <div class="room" id="room-1">
 <h1>📦 VOCAB VAULT</h1>
-<p class="subtitle">10 power words for confident communication — with Vietnamese translations.</p>
+<p class="subtitle">10 power words for confident communication. Test the students first — then reveal!</p>
+<button class="btn-reveal-all" onclick="revealAllVocab()">👁️ REVEAL ALL DEFINITIONS & EXAMPLES</button>
 <div id="vocab-container"></div>
 <div style="text-align:center;margin-top:24px">
 <button class="btn" onclick="switchRoom(0)">← BACK</button>
@@ -151,6 +167,7 @@ canvas#wheelCanvas{width:260px!important;height:260px!important}
 <div class="room" id="room-2">
 <h1>🧪 IDIOM LAB</h1>
 <p class="subtitle">5 idioms about confidence, courage, and speaking up.</p>
+<button class="btn-reveal-all" onclick="revealAllIdioms()">👁️ REVEAL ALL MEANINGS & EXAMPLES</button>
 <div id="idiom-container"></div>
 <div style="text-align:center;margin-top:24px">
 <button class="btn" onclick="switchRoom(1)">← BACK</button>
@@ -162,6 +179,7 @@ canvas#wheelCanvas{width:260px!important;height:260px!important}
 <div class="room" id="room-3">
 <h1>🌀 PHRASE ZONE</h1>
 <p class="subtitle">5 modern phrases that Tigers use in real life.</p>
+<button class="btn-reveal-all" onclick="revealAllPhrases()">👁️ REVEAL ALL DEFINITIONS & EXAMPLES</button>
 <div id="phrase-container"></div>
 <div style="text-align:center;margin-top:24px">
 <button class="btn" onclick="switchRoom(2)">← BACK</button>
@@ -181,6 +199,7 @@ canvas#wheelCanvas{width:260px!important;height:260px!important}
 </div>
 <div class="wheel-result" id="wheelResult">?</div>
 <button class="btn gold big" id="spinBtn" onclick="spinWheel()">🎡 SPIN THE WHEEL</button>
+<button class="btn" style="margin-top:8px" onclick="resetWheel()">🔄 RESET</button>
 <h3 style="margin-top:24px">HISTORY</h3>
 <div class="wheel-history" id="wheelHistory"><span style="color:var(--gray)">No spins yet</span></div>
 </div>
@@ -269,72 +288,105 @@ function miss(){streak=0;document.getElementById('streak').textContent=0;addCoin
 // === TABS ===
 function switchRoom(i){document.querySelectorAll('.room').forEach((r,idx)=>r.classList.toggle('active',idx===i));document.querySelectorAll('.tab').forEach((t,idx)=>t.classList.toggle('active',idx===i));window.scrollTo(0,0)}
 
+// === REVEAL HELPER ===
+function revealNext(btn){
+var content=btn.nextElementSibling;
+if(content){content.classList.add('shown');btn.style.display='none'}
+}
+function revealAllVocab(){document.querySelectorAll('#vocab-container .btn-reveal').forEach(b=>{b.nextElementSibling.classList.add('shown');b.style.display='none'})}
+function revealAllIdioms(){document.querySelectorAll('#idiom-container .btn-reveal').forEach(b=>{b.nextElementSibling.classList.add('shown');b.style.display='none'})}
+function revealAllPhrases(){document.querySelectorAll('#phrase-container .btn-reveal').forEach(b=>{b.nextElementSibling.classList.add('shown');b.style.display='none'})}
+
 // === VOCAB DATA ===
 const vocab=[
-{word:'Confidence',phonetic:'/ˈkɒnfɪdəns/',viet:'sự tự tin',def:'The feeling of being sure about your own abilities.',ex:'"She spoke with confidence, and everyone listened."'},
-{word:'Hesitate',phonetic:'/ˈhezɪteɪt/',viet:'do dự, ngập ngừng',def:'To pause before saying or doing something because you are nervous or unsure.',ex:'"Don\'t hesitate — just say what you think!"'},
-{word:'Fluent',phonetic:'/ˈfluːənt/',viet:'trôi chảy, lưu loát',def:'Able to speak a language smoothly and easily.',ex:'"After two years of practice, she became fluent in English."'},
-{word:'Pronounce',phonetic:'/prəˈnaʊns/',viet:'phát âm',def:'To make the sound of a word or letter.',ex:'"Can you pronounce this word for me? I want to copy your sound."'},
-{word:'Immerse',phonetic:'/ɪˈmɜːrs/',viet:'đắm chìm, hòa mình',def:'To involve yourself deeply in something.',ex:'"Immerse yourself in English — music, movies, conversations."'},
-{word:'Intimidate',phonetic:'/ɪnˈtɪmɪdeɪt/',viet:'làm sợ, đe dọa',def:'To make someone feel frightened or nervous.',ex:'"Don\'t let big words intimidate you. You can learn them all."'},
-{word:'Articulate',phonetic:'/ɑːrˈtɪkjʊlət/',viet:'diễn đạt rõ ràng',def:'Able to express ideas clearly and effectively.',ex:'"Tigers are articulate — they say exactly what they mean."'},
-{word:'Overcome',phonetic:'/ˌoʊvərˈkʌm/',viet:'vượt qua',def:'To succeed in dealing with a problem or difficulty.',ex:'"She overcame her fear of speaking in front of the class."'},
-{word:'Resilient',phonetic:'/rɪˈzɪliənt/',viet:'kiên cường, bền bỉ',def:'Able to recover quickly from difficulties.',ex:'"Resilient students learn from mistakes instead of being crushed by them."'},
-{word:'Transform',phonetic:'/trænsˈfɔːrm/',viet:'biến đổi',def:'To change completely in form, appearance, or character.',ex:'"This class will transform you from a Mouse into a Tiger."'}
+{word:'Confidence',phonetic:'/\u02C8k\u0252nf\u026Ad\u0259ns/',viet:'s\u1EF1 t\u1EF1 tin',def:'The feeling of being sure about your own abilities.',ex:'"She spoke with confidence, and everyone listened."'},
+{word:'Hesitate',phonetic:'/\u02C8hez\u026Ate\u026At/',viet:'do d\u1EF1, ng\u1EADp ng\u1EEBng',def:'To pause before saying or doing something because you are nervous or unsure.',ex:'"Don\'t hesitate \u2014 just say what you think!"'},
+{word:'Fluent',phonetic:'/\u02C8flu\u02D0\u0259nt/',viet:'tr\u00F4i ch\u1EA3y, l\u01B0u lo\u00E1t',def:'Able to speak a language smoothly and easily.',ex:'"After two years of practice, she became fluent in English."'},
+{word:'Pronounce',phonetic:'/pr\u0259\u02C8na\u028Ans/',viet:'ph\u00E1t \u00E2m',def:'To make the sound of a word or letter.',ex:'"Can you pronounce this word for me? I want to copy your sound."'},
+{word:'Immerse',phonetic:'/\u026A\u02C8m\u025C\u02D0rs/',viet:'\u0111\u1EAFm ch\u00ECm, h\u00F2a m\u00ECnh',def:'To involve yourself deeply in something.',ex:'"Immerse yourself in English \u2014 music, movies, conversations."'},
+{word:'Intimidate',phonetic:'/\u026An\u02C8t\u026Am\u026Ade\u026At/',viet:'l\u00E0m s\u1EE3, \u0111e d\u1ECDa',def:'To make someone feel frightened or nervous.',ex:'"Don\'t let big words intimidate you. You can learn them all."'},
+{word:'Articulate',phonetic:'/\u0251\u02D0r\u02C8t\u026Akj\u028Al\u0259t/',viet:'di\u1EC5n \u0111\u1EA1t r\u00F5 r\u00E0ng',def:'Able to express ideas clearly and effectively.',ex:'"Tigers are articulate \u2014 they say exactly what they mean."'},
+{word:'Overcome',phonetic:'/\u02CCo\u028Av\u0259r\u02C8k\u028Cm/',viet:'v\u01B0\u1EE3t qua',def:'To succeed in dealing with a problem or difficulty.',ex:'"She overcame her fear of speaking in front of the class."'},
+{word:'Resilient',phonetic:'/r\u026A\u02C8z\u026Ali\u0259nt/',viet:'ki\u00EAn c\u01B0\u1EDDng, b\u1EC1n b\u1EC9',def:'Able to recover quickly from difficulties.',ex:'"Resilient students learn from mistakes instead of being crushed by them."'},
+{word:'Transform',phonetic:'/tr\u00E6ns\u02C8f\u0254\u02D0rm/',viet:'bi\u1EBFn \u0111\u1ED5i',def:'To change completely in form, appearance, or character.',ex:'"This class will transform you from a Mouse into a Tiger."'}
 ];
 function renderVocab(){
 const c=document.getElementById('vocab-container');
-c.innerHTML=vocab.map((v,i)=>`<div class="card"><div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap"><div class="word">${i+1}. ${v.word}</div><span class="phonetic">${v.phonetic}</span></div><div class="viet">🇻🇳 ${v.viet}</div><div class="def">${v.def}</div><div class="example">${v.ex}</div></div>`).join('')}
+c.innerHTML=vocab.map((v,i)=>`<div class="card">
+<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap"><div class="word">${i+1}. ${v.word}</div><span class="phonetic">${v.phonetic}</span></div>
+<div class="viet">\uD83C\uDDFB\uD83C\uDDF3 ${v.viet}</div>
+<div class="reveal-zone">
+<button class="btn-reveal" onclick="revealNext(this)">\uD83D\uDCD6 Show Definition</button>
+<div class="reveal-content"><div class="def">\uD83D\uDCA1 ${v.def}</div></div>
+<button class="btn-reveal gold-reveal" onclick="revealNext(this)">\uD83D\uDCAC Show Example Sentence</button>
+<div class="reveal-content"><div class="example">${v.ex}</div></div>
+</div></div>`).join('')
+}
 renderVocab();
 
 // === IDIOM DATA ===
 const idioms=[
-{phrase:'Break the ice',meaning:'To start a conversation or make people feel comfortable in a new situation.',origin:'From ships breaking through ice to create a path — you create a path for communication.',ex:'"Let\'s play a game to break the ice before we start the lesson."'},
+{phrase:'Break the ice',meaning:'To start a conversation or make people feel comfortable in a new situation.',origin:'From ships breaking through ice to create a path \u2014 you create a path for communication.',ex:'"Let\'s play a game to break the ice before we start the lesson."'},
 {phrase:'Find your voice',meaning:'To develop the confidence to express yourself and your opinions.',origin:'The idea that your real voice is hidden inside you, waiting to come out.',ex:'"After months of practice, she finally found her voice in English."'},
-{phrase:'Speak your mind',meaning:'To say what you honestly think, even if it is not popular.',origin:'Your mind holds your true thoughts — speaking them means being honest and brave.',ex:'"In this class, you can always speak your mind. No wrong answers."'},
-{phrase:'Take the bull by the horns',meaning:'To face a difficult situation directly and with courage.',origin:'From bullfighting — grabbing the horns means you control the danger instead of running from it.',ex:'"Stop avoiding English conversations. Take the bull by the horns!"'},
+{phrase:'Speak your mind',meaning:'To say what you honestly think, even if it is not popular.',origin:'Your mind holds your true thoughts \u2014 speaking them means being honest and brave.',ex:'"In this class, you can always speak your mind. No wrong answers."'},
+{phrase:'Take the bull by the horns',meaning:'To face a difficult situation directly and with courage.',origin:'From bullfighting \u2014 grabbing the horns means you control the danger instead of running from it.',ex:'"Stop avoiding English conversations. Take the bull by the horns!"'},
 {phrase:'Actions speak louder than words',meaning:'What you DO is more important than what you SAY.',origin:'First recorded in 1628. The idea is universal: showing is better than telling.',ex:'"You say you want to be fluent? Then practice every day. Actions speak louder than words."'}
 ];
 function renderIdioms(){
 const c=document.getElementById('idiom-container');
-c.innerHTML=idioms.map((d,i)=>`<div class="card idiom"><div class="word">${i+1}. "${d.phrase}"</div><div class="def">💡 ${d.meaning}</div><div class="origin">📜 ${d.origin}</div><div class="example">${d.ex}</div></div>`).join('')}
+c.innerHTML=idioms.map((d,i)=>`<div class="card idiom">
+<div class="word">${i+1}. "${d.phrase}"</div>
+<div class="reveal-zone">
+<button class="btn-reveal" onclick="revealNext(this)">\uD83D\uDCA1 Show Meaning</button>
+<div class="reveal-content"><div class="def">\uD83D\uDCA1 ${d.meaning}</div><div class="origin">\uD83D\uDCDC ${d.origin}</div></div>
+<button class="btn-reveal gold-reveal" onclick="revealNext(this)">\uD83D\uDCAC Show Example</button>
+<div class="reveal-content"><div class="example">${d.ex}</div></div>
+</div></div>`).join('')
+}
 renderIdioms();
 
 // === PHRASE DATA ===
 const phrases=[
-{term:'Fake it till you make it',def:'Act confident even when you are not, and eventually the confidence becomes real.',scene:'Interview: "I was nervous, but I faked it till I made it — and I got the job!"',viet:'Giả vờ cho đến khi thành thật'},
-{term:'Level up',def:'To improve your skills or move to a higher stage.',scene:'Gaming/Life: "Time to level up your English — no more Mouse mode!"',viet:'Lên cấp / nâng trình'},
-{term:'Main character energy',def:'Acting like you are the star of your own life — confident, bold, present.',scene:'Social media: "Walk into that room with main character energy."',viet:'Phong thái nhân vật chính'},
-{term:'Glow up',def:'A big positive transformation in appearance, confidence, or skills.',scene:'Friends: "Your English had a serious glow up this semester!"',viet:'Lột xác / thay đổi ngoạn mục'},
-{term:'No cap',def:'No lie. I am being completely honest.',scene:'Slang: "That lesson was fire, no cap." (= That lesson was amazing, honestly.)',viet:'Không nói xạo'}
+{term:'Fake it till you make it',def:'Act confident even when you are not, and eventually the confidence becomes real.',scene:'Interview: "I was nervous, but I faked it till I made it \u2014 and I got the job!"',viet:'Gi\u1EA3 v\u1EDD cho \u0111\u1EBFn khi th\u00E0nh th\u1EADt'},
+{term:'Level up',def:'To improve your skills or move to a higher stage.',scene:'Gaming/Life: "Time to level up your English \u2014 no more Mouse mode!"',viet:'L\u00EAn c\u1EA5p / n\u00E2ng tr\u00ECnh'},
+{term:'Main character energy',def:'Acting like you are the star of your own life \u2014 confident, bold, present.',scene:'Social media: "Walk into that room with main character energy."',viet:'Phong th\u00E1i nh\u00E2n v\u1EADt ch\u00EDnh'},
+{term:'Glow up',def:'A big positive transformation in appearance, confidence, or skills.',scene:'Friends: "Your English had a serious glow up this semester!"',viet:'L\u1ED9t x\u00E1c / thay \u0111\u1ED5i ngo\u1EA1n m\u1EE5c'},
+{term:'No cap',def:'No lie. I am being completely honest.',scene:'Slang: "That lesson was fire, no cap." (= That lesson was amazing, honestly.)',viet:'Kh\u00F4ng n\u00F3i x\u1EA1o'}
 ];
 function renderPhrases(){
 const c=document.getElementById('phrase-container');
-c.innerHTML=phrases.map((s,i)=>`<div class="card phrase"><div class="word">${i+1}. ${s.term}</div><div class="viet">🇻🇳 ${s.viet}</div><div class="def">${s.def}</div><div class="example">🎬 ${s.scene}</div></div>`).join('')}
+c.innerHTML=phrases.map((s,i)=>`<div class="card phrase">
+<div class="word">${i+1}. ${s.term}</div>
+<div class="viet">\uD83C\uDDFB\uD83C\uDDF3 ${s.viet}</div>
+<div class="reveal-zone">
+<button class="btn-reveal green-reveal" onclick="revealNext(this)">\uD83D\uDCD6 Show Definition</button>
+<div class="reveal-content"><div class="def">${s.def}</div></div>
+<button class="btn-reveal gold-reveal" onclick="revealNext(this)">\uD83C\uDFAC Show Real-Life Example</button>
+<div class="reveal-content"><div class="example">\uD83C\uDFAC ${s.scene}</div></div>
+</div></div>`).join('')
+}
 renderPhrases();
 
-// ========== STUDENT WHEEL ==========
+// ========== STUDENT WHEEL (REWRITTEN) ==========
 const SEGMENTS=50;
 const canvas=document.getElementById('wheelCanvas');
 const ctx=canvas.getContext('2d');
 const W=canvas.width,H=canvas.height,CX=W/2,CY=H/2,R=Math.min(CX,CY)-8;
 const segAngle=(2*Math.PI)/SEGMENTS;
-// Color palette for segments - alternating purples and dark
 const segColors=['#1e1040','#15102a','#2a1550','#1a1030','#221245'];
 let currentAngle=0;
 let spinning=false;
 let wheelHistory=[];
+let spinCount=0;
 
 function drawWheel(angle){
 ctx.clearRect(0,0,W,H);
-// Draw segments
 for(let i=0;i<SEGMENTS;i++){
 const start=i*segAngle+angle-Math.PI/2;
 const end=start+segAngle;
 ctx.beginPath();ctx.moveTo(CX,CY);ctx.arc(CX,CY,R,start,end);ctx.closePath();
 ctx.fillStyle=segColors[i%segColors.length];ctx.fill();
 ctx.strokeStyle='rgba(168,85,247,0.25)';ctx.lineWidth=1;ctx.stroke();
-// Number text
 const mid=start+segAngle/2;
 const tx=CX+Math.cos(mid)*(R*0.72);
 const ty=CY+Math.sin(mid)*(R*0.72);
@@ -343,101 +395,139 @@ ctx.fillStyle=i%5===0?'#f59e0b':'#e5e7eb';
 ctx.font=`bold ${R>140?13:11}px Orbitron`;ctx.textAlign='center';ctx.textBaseline='middle';
 ctx.fillText(i+1,0,0);ctx.restore();
 }
-// Center circle
 ctx.beginPath();ctx.arc(CX,CY,28,0,2*Math.PI);
 ctx.fillStyle='#0f0f1a';ctx.fill();
 ctx.strokeStyle='#a855f7';ctx.lineWidth=3;ctx.stroke();
-// Center icon
 ctx.fillStyle='#a855f7';ctx.font='16px sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';
-ctx.fillText('🐯',CX,CY);
-// Outer ring glow
+ctx.fillText('\uD83D\uDC2F',CX,CY);
 ctx.beginPath();ctx.arc(CX,CY,R+2,0,2*Math.PI);
 ctx.strokeStyle='rgba(168,85,247,0.4)';ctx.lineWidth=2;ctx.stroke();
 }
 
-function getSelectedNumber(angle){
-// The pointer is at the top (12 o'clock = -PI/2)
-// We need to find which segment is under the pointer
-const normalized=((-angle%(2*Math.PI))+(2*Math.PI))%(2*Math.PI);
-const idx=Math.floor(normalized/segAngle)%SEGMENTS;
-return idx+1;
+function getSegmentAtPointer(angle){
+// Pointer is at top = -PI/2. Segments drawn from i*segAngle + angle - PI/2.
+// Segment i covers angle range [i*segAngle + angle - PI/2, (i+1)*segAngle + angle - PI/2)
+// We need segment where -PI/2 falls in range: i*segAngle + angle - PI/2 <= -PI/2
+// => i*segAngle + angle <= 0 => i*segAngle <= -angle
+// Normalized: segment = floor((-angle mod 2pi) / segAngle)
+var norm=((-angle)%(2*Math.PI));
+if(norm<0)norm+=2*Math.PI;
+return(Math.floor(norm/segAngle)%SEGMENTS)+1;
+}
+
+function calcAngleForSegment(targetNum){
+// We want getSegmentAtPointer(finalAngle) = targetNum
+// (-finalAngle mod 2pi) should land in middle of segment (targetNum-1)
+// target center = (targetNum-1)*segAngle + segAngle/2
+var targetCenter=(targetNum-1)*segAngle+segAngle/2;
+// We need (-finalAngle mod 2pi) = targetCenter
+// So finalAngle = -targetCenter (mod 2pi)
+// Add small random offset within segment to avoid always hitting dead center
+var jitter=(Math.random()-0.5)*segAngle*0.6;
+return -(targetCenter+jitter);
 }
 
 function spinWheel(){
 if(spinning)return;
 spinning=true;
+spinCount++;
 document.getElementById('spinBtn').disabled=true;
 document.getElementById('wheelResult').textContent='...';
 document.getElementById('wheelResult').classList.remove('fakeout');
 
-// Pick random target
-const targetNum=Math.floor(Math.random()*50);
-const targetAngle=targetNum*segAngle+segAngle/2;
-// 3-5 full spins + target
-const fullSpins=(3+Math.floor(Math.random()*2))*2*Math.PI;
-const endAngle=currentAngle+fullSpins+targetAngle;
+// Pick final target (1-50)
+var targetNum=Math.floor(Math.random()*50)+1;
 
-// Should we fake out? 55% chance
-const doFakeout=Math.random()<0.55;
-// Vary: sometimes overshoot forward, sometimes pull back
-const fakeDir=Math.random()>0.5?1:-1;
-const fakeAmount=(1+Math.floor(Math.random()*2))*segAngle*fakeDir;
+// Should we fakeout? 55% base, varies by round
+var fakeChance=0.55;
+// Sometimes predictable (no fakeout), sometimes not — vary by spin count
+if(spinCount%4===0)fakeChance=0.15; // every 4th spin — mostly honest
+if(spinCount%7===0)fakeChance=0.85; // every 7th spin — almost always fakeout
+var doFakeout=Math.random()<fakeChance;
 
-const duration=1800+Math.random()*700; // 1.8-2.5 seconds — FAST
-const startTime=performance.now();
-const startAngle=currentAngle;
+// If fakeout, pick a different "almost" number first
+var fakeNum=targetNum;
+if(doFakeout){
+var offset=Math.random()>0.5?1:-1;
+if(Math.random()>0.5)offset*=2;
+fakeNum=((targetNum-1+offset+50)%50)+1;
+}
+
+// Calculate end angles
+var desiredEndMod=calcAngleForSegment(doFakeout?fakeNum:targetNum);
+// Normalize relative to current position — add 3-4 full rotations
+var fullSpins=(3+Math.floor(Math.random()*2))*2*Math.PI;
+var currentMod=((currentAngle%(2*Math.PI))+(2*Math.PI))%(2*Math.PI);
+var desiredMod=((desiredEndMod%(2*Math.PI))+(2*Math.PI))%(2*Math.PI);
+var delta=desiredMod-currentMod;
+if(delta>0)delta-=2*Math.PI; // ensure we spin forward (negative = clockwise visual)
+var endAngle=currentAngle-fullSpins+delta;
+
+var duration=1800+Math.random()*700;
+var startTime=performance.now();
+var startAngle=currentAngle;
 
 function animate(now){
-const elapsed=now-startTime;
-const p=Math.min(elapsed/duration,1);
-// Ease out quart — fast start, smooth stop
-const eased=1-Math.pow(1-p,4);
+var elapsed=now-startTime;
+var p=Math.min(elapsed/duration,1);
+var eased=1-Math.pow(1-p,4);
 currentAngle=startAngle+(endAngle-startAngle)*eased;
 drawWheel(currentAngle);
 if(p<1){requestAnimationFrame(animate)}
 else{
 if(doFakeout){
-// Brief pause then nudge
-const fakeStart=currentAngle;
-const fakeEnd=currentAngle+fakeAmount;
-const fakeDur=350;
-const fakeStartTime=performance.now();
-// Show "almost" number
-const almostNum=getSelectedNumber(currentAngle);
+var almostNum=getSegmentAtPointer(currentAngle);
 document.getElementById('wheelResult').textContent=almostNum;
-setTimeout(()=>{
-function fakeAnimate(now2){
-const fe=now2-fakeStartTime;
-const fp=Math.min(fe/fakeDur,1);
-const fe2=1-Math.pow(1-fp,3);
-currentAngle=fakeStart+(fakeEnd-fakeStart)*fe2;
+// Brief dramatic pause, then nudge to real target
+setTimeout(function(){
+var realEndMod=calcAngleForSegment(targetNum);
+var realMod=((realEndMod%(2*Math.PI))+(2*Math.PI))%(2*Math.PI);
+var curMod=((currentAngle%(2*Math.PI))+(2*Math.PI))%(2*Math.PI);
+var nudge=realMod-curMod;
+if(nudge>Math.PI)nudge-=2*Math.PI;
+if(nudge<-Math.PI)nudge+=2*Math.PI;
+var nudgeEnd=currentAngle+nudge;
+var nudgeDur=300;
+var nudgeStart=performance.now();
+var nudgeFrom=currentAngle;
+function nudgeAnim(now2){
+var ne=now2-nudgeStart;
+var np=Math.min(ne/nudgeDur,1);
+var ne2=1-Math.pow(1-np,3);
+currentAngle=nudgeFrom+(nudgeEnd-nudgeFrom)*ne2;
 drawWheel(currentAngle);
-if(fp<1){requestAnimationFrame(fakeAnimate)}
-else{finishSpin(true)}
+if(np<1){requestAnimationFrame(nudgeAnim)}
+else{finishSpin(true,targetNum)}
 }
-requestAnimationFrame(fakeAnimate);
-},250); // quarter-second pause before the juke
-}else{finishSpin(false)}
+requestAnimationFrame(nudgeAnim);
+},200);
+}else{finishSpin(false,targetNum)}
 }
 }
 requestAnimationFrame(animate);
 }
 
-function finishSpin(wasFakeout){
+function finishSpin(wasFakeout,targetNum){
 spinning=false;
 document.getElementById('spinBtn').disabled=false;
-const num=getSelectedNumber(currentAngle);
-const el=document.getElementById('wheelResult');
-el.textContent='# '+num;
+var actual=getSegmentAtPointer(currentAngle);
+var el=document.getElementById('wheelResult');
+el.textContent='# '+actual;
 if(wasFakeout)el.classList.add('fakeout');
-wheelHistory.push(num);
+wheelHistory.push(actual);
 renderWheelHistory();
 }
 
 function renderWheelHistory(){
-const c=document.getElementById('wheelHistory');
+var c=document.getElementById('wheelHistory');
 if(wheelHistory.length===0){c.innerHTML='<span style="color:var(--gray)">No spins yet</span>';return}
-c.innerHTML=wheelHistory.map((n,i)=>`<span>#${n}</span>`).join('');
+c.innerHTML=wheelHistory.map(function(n,i){return '<span>#'+n+'</span>'}).join('');
+}
+
+function resetWheel(){
+wheelHistory=[];spinCount=0;
+document.getElementById('wheelResult').textContent='?';
+renderWheelHistory();
 }
 
 // Initial draw
@@ -445,30 +535,30 @@ drawWheel(currentAngle);
 
 // === GAME 1: MOUSE OR TIGER? ===
 const g1Q=[
-{q:'Someone asks you a question in English. You say: "Um... sorry... I don\'t know... maybe... sorry..."',opts:['🐭 Mouse','🐯 Tiger'],ans:0},
-{q:'Your teacher asks for your opinion. You stand up and say: "I think the answer is B, because..."',opts:['🐭 Mouse','🐯 Tiger'],ans:1},
-{q:'You make a grammar mistake. You laugh and say: "Oops! Let me try again."',opts:['🐭 Mouse','🐯 Tiger'],ans:1},
-{q:'You know the answer but you stay silent because you might be wrong.',opts:['🐭 Mouse','🐯 Tiger'],ans:0},
-{q:'In a group project, you take the lead and assign tasks to your teammates.',opts:['🐭 Mouse','🐯 Tiger'],ans:1},
-{q:'A foreigner asks you for directions. You run away.',opts:['🐭 Mouse','🐯 Tiger'],ans:0},
-{q:'You don\'t understand a word. You ask: "Can you explain that differently?"',opts:['🐭 Mouse','🐯 Tiger'],ans:1},
-{q:'You whisper your answer so quietly nobody can hear you.',opts:['🐭 Mouse','🐯 Tiger'],ans:0}
+{q:'Someone asks you a question in English. You say: "Um... sorry... I don\'t know... maybe... sorry..."',opts:['\uD83D\uDC2D Mouse','\uD83D\uDC2F Tiger'],ans:0},
+{q:'Your teacher asks for your opinion. You stand up and say: "I think the answer is B, because..."',opts:['\uD83D\uDC2D Mouse','\uD83D\uDC2F Tiger'],ans:1},
+{q:'You make a grammar mistake. You laugh and say: "Oops! Let me try again."',opts:['\uD83D\uDC2D Mouse','\uD83D\uDC2F Tiger'],ans:1},
+{q:'You know the answer but you stay silent because you might be wrong.',opts:['\uD83D\uDC2D Mouse','\uD83D\uDC2F Tiger'],ans:0},
+{q:'In a group project, you take the lead and assign tasks to your teammates.',opts:['\uD83D\uDC2D Mouse','\uD83D\uDC2F Tiger'],ans:1},
+{q:'A foreigner asks you for directions. You run away.',opts:['\uD83D\uDC2D Mouse','\uD83D\uDC2F Tiger'],ans:0},
+{q:'You don\'t understand a word. You ask: "Can you explain that differently?"',opts:['\uD83D\uDC2D Mouse','\uD83D\uDC2F Tiger'],ans:1},
+{q:'You whisper your answer so quietly nobody can hear you.',opts:['\uD83D\uDC2D Mouse','\uD83D\uDC2F Tiger'],ans:0}
 ];
 let g1Idx=0;
 function startGame1(){g1Idx=0;document.getElementById('g1-start').style.display='none';showG1()}
 function showG1(){
-if(g1Idx>=g1Q.length){document.getElementById('g1-feedback').innerHTML='<span style="color:var(--gold)">✅ GAME 1 COMPLETE!</span>';document.getElementById('g1-question').textContent='';document.getElementById('g1-options').innerHTML='';return}
-const q=g1Q[g1Idx];
+if(g1Idx>=g1Q.length){document.getElementById('g1-feedback').innerHTML='<span style="color:var(--gold)">\u2705 GAME 1 COMPLETE!</span>';document.getElementById('g1-question').textContent='';document.getElementById('g1-options').innerHTML='';document.getElementById('g1-progress').style.width='100%';return}
+var q=g1Q[g1Idx];
 document.getElementById('g1-progress').style.width=(g1Idx/g1Q.length*100)+'%';
 document.getElementById('g1-question').textContent=q.q;
 document.getElementById('g1-feedback').textContent='';
-document.getElementById('g1-options').innerHTML=q.opts.map((o,i)=>`<button class="btn" onclick="checkG1(${i})">${o}</button>`).join('');
+document.getElementById('g1-options').innerHTML=q.opts.map(function(o,i){return '<button class="btn" onclick="checkG1('+i+')">'+o+'</button>'}).join('');
 }
 function checkG1(i){
-const fb=document.getElementById('g1-feedback');
-if(i===g1Q[g1Idx].ans){hit();fb.innerHTML=`<span style="color:var(--green)">✅ Correct! ${streak>=3?'+20':'+10'} coins</span>`}
-else{miss();fb.innerHTML='<span style="color:var(--red)">❌ Nope! −5 coins</span>'}
-setTimeout(()=>{g1Idx++;showG1()},1000);
+var fb=document.getElementById('g1-feedback');
+if(i===g1Q[g1Idx].ans){hit();fb.innerHTML='<span style="color:var(--green)">\u2705 Correct! '+(streak>=3?'+20':'+10')+' coins</span>'}
+else{miss();fb.innerHTML='<span style="color:var(--red)">\u274C Nope! \u22125 coins</span>'}
+setTimeout(function(){g1Idx++;showG1()},1000);
 }
 
 // === GAME 2: IDIOM SMASH ===
@@ -482,47 +572,47 @@ const g2Q=[
 let g2Idx=0;
 function startGame2(){g2Idx=0;document.getElementById('g2-start').style.display='none';showG2()}
 function showG2(){
-if(g2Idx>=g2Q.length){document.getElementById('g2-feedback').innerHTML='<span style="color:var(--gold)">✅ GAME 2 COMPLETE!</span>';document.getElementById('g2-question').textContent='';document.getElementById('g2-options').innerHTML='';return}
-const q=g2Q[g2Idx];
+if(g2Idx>=g2Q.length){document.getElementById('g2-feedback').innerHTML='<span style="color:var(--gold)">\u2705 GAME 2 COMPLETE!</span>';document.getElementById('g2-question').textContent='';document.getElementById('g2-options').innerHTML='';document.getElementById('g2-progress').style.width='100%';return}
+var q=g2Q[g2Idx];
 document.getElementById('g2-progress').style.width=(g2Idx/g2Q.length*100)+'%';
 document.getElementById('g2-question').textContent=q.q;
 document.getElementById('g2-feedback').textContent='';
-document.getElementById('g2-options').innerHTML=q.opts.map((o,i)=>`<button class="btn" onclick="checkG2(${i})">${o}</button>`).join('');
+document.getElementById('g2-options').innerHTML=q.opts.map(function(o,i){return '<button class="btn" onclick="checkG2('+i+')">'+o+'</button>'}).join('');
 }
 function checkG2(i){
-const fb=document.getElementById('g2-feedback');
-if(i===g2Q[g2Idx].ans){hit();fb.innerHTML=`<span style="color:var(--green)">✅ Smashed it! ${streak>=3?'+20':'+10'} coins</span>`}
-else{miss();fb.innerHTML='<span style="color:var(--red)">❌ Not quite! −5 coins</span>'}
-setTimeout(()=>{g2Idx++;showG2()},1000);
+var fb=document.getElementById('g2-feedback');
+if(i===g2Q[g2Idx].ans){hit();fb.innerHTML='<span style="color:var(--green)">\u2705 Smashed it! '+(streak>=3?'+20':'+10')+' coins</span>'}
+else{miss();fb.innerHTML='<span style="color:var(--red)">\u274C Not quite! \u22125 coins</span>'}
+setTimeout(function(){g2Idx++;showG2()},1000);
 }
 
 // === GAME 3: TIGER SPEED ROUND ===
-const speedQ=vocab.map(v=>({q:v.def,ans:v.word}));
+const speedQ=vocab.map(function(v){return{q:v.def,ans:v.word}});
 let g3Idx=0,g3Timer=null,g3Time=0;
 function startGame3(){
 g3Idx=0;g3Time=0;
 document.getElementById('g3-start').style.display='none';
-g3Timer=setInterval(()=>{g3Time++;document.getElementById('g3-timer').textContent=g3Time+'s'},1000);
+g3Timer=setInterval(function(){g3Time++;document.getElementById('g3-timer').textContent=g3Time+'s'},1000);
 showG3();
 }
 function showG3(){
 if(g3Idx>=speedQ.length){
 clearInterval(g3Timer);
-document.getElementById('g3-feedback').innerHTML=`<span style="color:var(--gold)">✅ SPEED ROUND DONE in ${g3Time}s!</span>`;
-document.getElementById('g3-question').textContent='';document.getElementById('g3-options').innerHTML='';return}
-const q=speedQ[g3Idx];
+document.getElementById('g3-feedback').innerHTML='<span style="color:var(--gold)">\u2705 SPEED ROUND DONE in '+g3Time+'s!</span>';
+document.getElementById('g3-question').textContent='';document.getElementById('g3-options').innerHTML='';document.getElementById('g3-progress').style.width='100%';return}
+var q=speedQ[g3Idx];
 document.getElementById('g3-progress').style.width=(g3Idx/speedQ.length*100)+'%';
 document.getElementById('g3-question').textContent='"'+q.q+'"';
 document.getElementById('g3-feedback').textContent='';
-const wrong=vocab.filter(v=>v.word!==q.ans).sort(()=>Math.random()-0.5).slice(0,3).map(v=>v.word);
-const all=[q.ans,...wrong].sort(()=>Math.random()-0.5);
-document.getElementById('g3-options').innerHTML=all.map(o=>`<button class="btn" onclick="checkG3('${o}')">${o}</button>`).join('');
+var wrong=vocab.filter(function(v){return v.word!==q.ans}).sort(function(){return Math.random()-0.5}).slice(0,3).map(function(v){return v.word});
+var all=[q.ans].concat(wrong).sort(function(){return Math.random()-0.5});
+document.getElementById('g3-options').innerHTML=all.map(function(o){return '<button class="btn" onclick="checkG3(\''+o+'\')">'+o+'</button>'}).join('');
 }
 function checkG3(ans){
-const fb=document.getElementById('g3-feedback');
-if(ans===speedQ[g3Idx].ans){hit();fb.innerHTML=`<span style="color:var(--green)">⚡ Tiger speed! ${streak>=3?'+20':'+10'}</span>`}
-else{miss();fb.innerHTML='<span style="color:var(--red)">❌ −5</span>'}
-setTimeout(()=>{g3Idx++;showG3()},700);
+var fb=document.getElementById('g3-feedback');
+if(ans===speedQ[g3Idx].ans){hit();fb.innerHTML='<span style="color:var(--green)">\u26A1 Tiger speed! '+(streak>=3?'+20':'+10')+'</span>'}
+else{miss();fb.innerHTML='<span style="color:var(--red)">\u274C \u22125</span>'}
+setTimeout(function(){g3Idx++;showG3()},700);
 }
 
 // === DEBRIEF ===
@@ -531,13 +621,13 @@ document.getElementById('final-coins').textContent=coins;
 document.getElementById('final-streak').textContent=bestStreak;
 document.getElementById('final-correct').textContent=totalCorrect;
 document.getElementById('final-wrong').textContent=totalWrong;
-const pct=totalCorrect+totalWrong>0?Math.round(totalCorrect/(totalCorrect+totalWrong)*100):0;
-let grade='F',rank='🐣 RECRUIT';
-if(pct>=95){grade='S';rank='🐯 TIGER MASTER'}
-else if(pct>=85){grade='A';rank='🦁 LION'}
-else if(pct>=70){grade='B';rank='🐱 CUB'}
-else if(pct>=50){grade='C';rank='🐭 MOUSE'}
-else{grade='F';rank='🐣 RECRUIT'}
+var pct=totalCorrect+totalWrong>0?Math.round(totalCorrect/(totalCorrect+totalWrong)*100):0;
+var grade='F',rank='\uD83D\uDC23 RECRUIT';
+if(pct>=95){grade='S';rank='\uD83D\uDC2F TIGER MASTER'}
+else if(pct>=85){grade='A';rank='\uD83E\uDD81 LION'}
+else if(pct>=70){grade='B';rank='\uD83D\uDC31 CUB'}
+else if(pct>=50){grade='C';rank='\uD83D\uDC2D MOUSE'}
+else{grade='F';rank='\uD83D\uDC23 RECRUIT'}
 document.getElementById('final-grade').textContent=grade;
 document.getElementById('final-rank').textContent=rank;
 }
