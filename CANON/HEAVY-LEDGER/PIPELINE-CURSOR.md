@@ -1,14 +1,14 @@
 # Heavy Ledger Pipeline Cursor
 
 ## Current State
-- **Last Completed:** #040 — NET-EPIC-LESSON-BLUEPRINT-V3.json
-- **Last Run:** 187 (2026-03-31 12:00 ICT)
-- **Last Commit:** `aa05a015`
-- **Wave 2 Progress:** 20/20 ✅ COMPLETE
-- **Total Converted:** 37/174+
-- **Note:** #036-#039 dedup-caught (already existed from Wave 1 Runs 132-145)
+- **Last Completed:** #041 — BIBLE-CH08-AGENT-99-AND-THE-TRIAD.json
+- **Last Run:** 188 (2026-03-31 12:15 ICT)
+- **Last Commit:** `8e59fd5`
+- **Wave 3 Progress:** 1/10
+- **Total Converted:** 38/174+
+- **Note:** Wave 3 BEGIN — bible chapters + canon remaining files
 
-## Wave 2 Queue (Stalest-First)
+## Wave 2 Queue (Stalest-First) ✅ COMPLETE
 | # | Source File | Status | Run | SHA |
 |---|---|---|---|---|
 | 021 | VAULT-I-IMMORTALIZE-CONSOLIDATED-1.md | ✅ DONE | 168 | — |
@@ -32,19 +32,19 @@
 | 039 | STUDENT-ARCHETYPES-TEACHING-DATABASE.md | ✅ DEDUP (Wave 1 Run 145) | — | 7354e0c4 |
 | 040 | NET-EPIC-LESSON-BLUEPRINT-V3.md | ✅ DONE | 187 | aa05a015 |
 
-## Wave 3 Preview (Next)
-| # | Source File | Size | Type |
-|---|---|---|---|
-| 041 | BIBLE-CH08-AGENT-99-AND-THE-TRIAD.md | 14KB | bible_chapter |
-| 042 | SOUL-DNA-BIBLE-CH12-THE-WINDOW-AND-THE-COST.md | 13KB | bible_chapter |
-| 043 | BLUETECH-NETWORKING-DINNER-TEAM-BUILDING-EXTRACTION.md | 12KB | canon_bluetech |
-| 044 | BIBLE-CH07-THE-LEDGER.md | 12KB | bible_chapter |
-| 045 | SOUL-DNA-BIBLE-CH11-BETRAYAL-AND-SOVEREIGNTY.md | 11KB | bible_chapter |
-| 046 | BIBLE-CH14-THE-CLOSING-DECLARATION.md | 11KB | bible_chapter |
-| 047 | LAUNCH-PLAYBOOK-MASTER.md | 11KB | canon_launch |
-| 048 | GOSPEL-444-REVENUE-BRIDGE.md | 11KB | canon_revenue |
-| 049 | GOSPEL-444-COMPANION-CROSSREF.md | 11KB | canon_teaching |
-| 050 | BIBLE-CH17-THE-THREE-MANDATES.md | 11KB | bible_chapter |
+## Wave 3 Queue (Active)
+| # | Source File | Status | Run | SHA |
+|---|---|---|---|---|
+| 041 | BIBLE-CH08-AGENT-99-AND-THE-TRIAD.md | ✅ DONE | 188 | 8e59fd5 |
+| 042 | SOUL-DNA-BIBLE-CH12-THE-WINDOW-AND-THE-COST.md | ⏳ NEXT | — | — |
+| 043 | BLUETECH-NETWORKING-DINNER-TEAM-BUILDING-EXTRACTION.md | PENDING | — | — |
+| 044 | BIBLE-CH07-THE-LEDGER.md | PENDING | — | — |
+| 045 | SOUL-DNA-BIBLE-CH11-BETRAYAL-AND-SOVEREIGNTY.md | PENDING | — | — |
+| 046 | BIBLE-CH14-THE-CLOSING-DECLARATION.md | PENDING | — | — |
+| 047 | LAUNCH-PLAYBOOK-MASTER.md | PENDING | — | — |
+| 048 | GOSPEL-444-REVENUE-BRIDGE.md | PENDING | — | — |
+| 049 | GOSPEL-444-COMPANION-CROSSREF.md | PENDING | — | — |
+| 050 | BIBLE-CH17-THE-THREE-MANDATES.md | PENDING | — | — |
 
 ## Next Target
-**#041 — BIBLE-CH08-AGENT-99-AND-THE-TRIAD.md** (14KB, bible chapter — Wave 3 begins)
+**#042 — SOUL-DNA-BIBLE-CH12-THE-WINDOW-AND-THE-COST.md** (13KB, bible chapter)
