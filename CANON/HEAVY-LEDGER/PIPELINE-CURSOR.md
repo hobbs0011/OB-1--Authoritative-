@@ -1,11 +1,11 @@
 # Heavy Ledger Pipeline Cursor
 
 ## Current State
-- **Last Completed:** #082 — MORNING-BRIEFING-2026-03-31.json (Run 228)
-- **Last Run:** 228 (2026-04-01 05:29 ICT)
-- **Last Commit:** 67ea4994 (HL-082)
-- **Wave 7 Progress:** 10/12
-- **Total Converted:** 78/174+ (77 real + 1 dedup skip)
+- **Last Completed:** #083 — PULSE-OPERATIONS-HISTORY.json (Run 229)
+- **Last Run:** 229 (2026-04-01 06:00 ICT)
+- **Last Commit:** 0b7a4485 (HL-083)
+- **Wave 7 Progress:** 11/12
+- **Total Converted:** 79/174+ (78 real + 1 dedup skip)
 
 ## Wave 7 Queue — CANON/SYSTEM
 | # | Source File | Status | Run | SHA |
@@ -20,7 +20,7 @@
 | 080 | MORNING-BRIEFING-2026-03-28.md | ✅ DONE | 226 | 6374fbf4 |
 | 081 | MORNING-BRIEFING-2026-03-29.md | ✅ DONE | 227 | 499b0c59 |
 | 082 | MORNING-BRIEFING-2026-03-31.md | ✅ DONE | 228 | 67ea4994 |
-| 083 | PULSE-OPERATIONS-HISTORY.md | PENDING | — | — |
+| 083 | PULSE-OPERATIONS-HISTORY.md | ✅ DONE | 229 | 0b7a4485 |
 | 084 | WEEKLY-REPORT-2026-03-30.md | PENDING | — | — |
 
 ## Completed Waves Summary
@@ -32,5 +32,5 @@
 | 4 | 10/10 | ✅ COMPLETE |
 | 5 | 10/10 | ✅ COMPLETE |
 | 6 | 2/2 | ✅ COMPLETE |
-| 7 | 10/12 | 🔄 IN PROGRESS |
-| **Total** | **78/174+** | **Wave 7 active** |
+| 7 | 11/12 | 🔄 IN PROGRESS |
+| **Total** | **79/174+** | **Wave 7 active** |
