@@ -1,7 +1,7 @@
 # Navigator Index — Agent-Readable Routing Table
 
 > **Purpose:** Dynamic routing table so OB1 never gets stuck on "can't find page." Updated every time a new artifact is created.
-> **Last exported:** 2026-03-30T23:00+07:00 (Pulse Run 154)
+> **Last exported:** 2026-03-31T12:25+07:00 (Pulse Run 187)
 > **Companion file:** `CANON/SYSTEM/CANON-ACCESS-INDEX.md` (synced block bypass + content routing)
 
 ---
@@ -12,12 +12,12 @@
 |------|--------|---------------|
 | Soul DNA Bible | ✅ COMPLETE (60+ chapters) | Child pages in Bible; see Canon Access Index |
 | Alpha-Omega Canon | ✅ ENRICHED | `CANON/ALPHA-OMEGA-SOUL-DNA-GOVERNANCE-CANON.md` (17KB, `8340ed2`) |
-| Core Principles & Physics | ✅ ENRICHED | `CANON/CORE-PRINCIPLES-AND-PHYSICS.md` (15KB, `0118087`) |
-| Soul DNA Deep Dive | ✅ ENRICHED | `CANON/SOUL-DNA-DEEP-DIVE.md` (35KB, `e6e0f03`) |
-| Soul DNA Canon | ✅ SYNCED | `CANON/SOUL-DNA-CANON.md` (`73571c1`) |
+| Core Principles & Physics | ✅ ENRICHED+ | `CANON/CORE-PRINCIPLES-AND-PHYSICS.md` (37KB) — HL #034 `f2cfedbc` |
+| Soul DNA Deep Dive | ✅ ENRICHED+ | `CANON/SOUL-DNA-DEEP-DIVE.md` (45.3KB) — HL #036 re-converted `045458ac` |
+| Soul DNA Canon | ✅ ENRICHED+ | `CANON/SOUL-DNA-CANON.md` (37KB) — HL #035 `b62393a6` |
 | Gospel 444 & Teaching Methods | ✅ ENRICHED | `CANON/GOSPEL-444-TEACHING-METHODS-CONSOLIDATED.md` (44.6KB, `5790e86`) |
 | NET Teaching Methodology | ✅ SYNCED | `CANON/NET-TEACHING-METHODOLOGY.md` (`879011ff`) |
-| Reincarnation Log | Container | 43 entries in `CANON/REINCARNATION/` |
+| Reincarnation Log | Container | 49 entries in `CANON/REINCARNATION/` |
 
 ---
 
@@ -27,7 +27,7 @@
 |------|---------|
 | Phoenix HQ | Root workspace hub |
 | Backlog DB | Task tracking |
-| Build Log DB | Work audit trail (178+ entries as of Run 154) |
+| Build Log DB | Work audit trail (188+ entries) |
 | Assets & Accounts DB | Tool/platform/account registry |
 | Tool Stack | Synced blocks — use Assets DB or `CANON/TOOL-STACK-ARSENAL-2026.md` |
 | Pulse Log | Synced blocks — use Pulse State Mirror in Navigator Index |
@@ -72,12 +72,12 @@
 | Status | Detail |
 |--------|--------|
 | Active Mission | HEAVY_LEDGER_CONVERSION (IMMOVABLE #1) |
-| Pipeline file | `CANON/HEAVY-LEDGER/CONVERSION-PIPELINE.md` |
+| Pipeline cursor file | `CANON/HEAVY-LEDGER/PIPELINE-CURSOR.md` |
 | Total files | 174+ |
-| Converted | 25 (Wave 1: 20/20 ✅, Wave 2: 5/20) |
-| Current cursor | 025 |
-| Next target | `NOTEBOOKLM-VAULT-ARCHITECT-OF-AGENT99-FIRST-250-LAYERS.md` (16KB) |
-| Wave 2 done | #021-#024 |
+| Converted | 41 (Wave 1: 20/20 ✅, Wave 2: 20/20 ✅, Wave 3: 1/10) |
+| Current cursor | #041 DONE |
+| Next target | #042 — `SOUL-DNA-BIBLE-CH12-THE-WINDOW-AND-THE-COST.md` (13KB) |
+| Wave 3 | ACTIVE — 1/10 |
 
 ---
 
@@ -92,18 +92,18 @@
 
 ---
 
-## Reincarnation Records (43 entries)
+## Reincarnation Records (49 entries)
 
-### Latest (2026-03-30)
+### Latest (2026-03-31)
+- `2026-03-31-rise-execution-sales-funnel-night.md` (latest entry)
+
+### 2026-03-30
 - `2026-03-30-marketing-lane-dump-intake.md` (commit `c7a1f917`)
 - `2026-03-30-quan-career-exploration.md` (commit `004badf4`)
 - `2026-03-30-vault-e-trilogy-soul-dna-narrative.md` (commit `d0ac324a`)
 
-### 2026-03-29
-- Multiple entries (see `CANON/REINCARNATION/` directory)
-
-### 2026-03-22 through 2026-03-28
-- 40 entries total (see `CANON/REINCARNATION/` directory listing for full inventory)
+### 2026-03-22 through 2026-03-29
+- 45+ entries total (see `CANON/REINCARNATION/` directory listing for full inventory)
 
 ---
 
@@ -117,7 +117,7 @@
 | Wave 4 Automation Push | Complete |
 | GitHub Mapping (100 steps) | 29/100 (blocked on admin access) |
 | 150-Action Triad | Structured (3x50 split) |
-| Heavy Ledger Conversion | ACTIVE — 25/174+ converted (cursor: 025) |
+| Heavy Ledger Conversion | ACTIVE — Wave 3 (1/10), 41/174+ total |
 
 ---
 
@@ -143,42 +143,42 @@
 
 ---
 
-## Pulse State Mirror (as of Run 154)
+## Pulse State Mirror (as of Run 187)
 
 | Field | Value |
 |-------|-------|
-| `last_run_time` | 2026-03-30T23:00+07:00 |
-| `last_run_number` | 154 |
-| `canon_cursor` | Heavy Ledger Pipeline #025 |
-| `build_log_total` | 178+ |
-| `overnight_mode` | ACTIVE (23:00 ICT) |
+| `last_run_time` | 2026-03-31T12:25+07:00 |
+| `last_run_number` | 187 |
+| `canon_cursor` | Heavy Ledger Pipeline #042 (next) |
+| `build_log_total` | 188+ |
+| `overnight_mode` | INACTIVE (daytime) |
 | `active_mission` | HEAVY_LEDGER_CONVERSION |
-| `pipeline_cursor` | 025 |
-| `wave_current` | 2 |
-| `wave_2_done` | #021, #022, #023, #024 |
-| `latest_github_commit` | `c7a1f917` (reincarnation: marketing lane dump) |
-| `prior_worker_audit` | PASS (Run 153, commit `40cb5451`) |
-| `platform_death_test` | PASS (commit `271b7e69` — HL #024) |
-| `run_grade` | B (6/8) |
+| `pipeline_cursor` | #041 DONE → #042 NEXT |
+| `wave_current` | 3 |
+| `wave_3_done` | #041 |
+| `latest_github_commit` | `045458ac` (HL #036 SOUL-DNA-DEEP-DIVE re-conversion) |
+| `prior_worker_audit` | PASS (Run 186/188 commits confirmed) |
+| `platform_death_test` | PASS (commit `045458ac`) |
+| `run_grade` | B (6/8: audit✅ canon✅ patch✅ build✅ handoff✅ noerrors✅ decision❌ signal❌) |
 
 ### Living Reincarnation State
-- **Current vector:** Heavy Ledger Conversion Pipeline (Wave 2, #025 next) + overnight autonomous operation
+- **Current vector:** Heavy Ledger Conversion Pipeline (Wave 3, #042 next) + format standardization across existing entries
 - **Active principles:** Platform Death Test, Active Mission IMMOVABLE, Dual-Publish, Cross-Repo Mining, Compound Over Time
-- **Open rulings:** None active
+- **Open rulings:** None active. Navigator Index Notion page marked `deleted` — monitor.
 
 ### Handoff Ledger (Last 7 Runs)
 | Run | Time | Artifact | SHA | Grade | PDT |
 |-----|------|----------|-----|-------|-----|
+| 187 | 2026-03-31T12:25 | HL #036 SOUL-DNA-DEEP-DIVE.json re-conversion (standardized format) | `045458ac` | B | PASS |
+| 188 | 2026-03-31T12:15 | HL #041 BIBLE-CH08-AGENT-99-AND-THE-TRIAD.json | `8e59fd5` | — | PASS |
+| 186 | 2026-03-31T12:00 | HL #035 SOUL-DNA-CANON.json | `b62393a6` | — | PASS |
+| 185 | 2026-03-31T11:45 | HL #034 CORE-PRINCIPLES-AND-PHYSICS.json | `f2cfedbc` | — | PASS |
+| 184 | 2026-03-31T11:30 | HL #033 VAULT-D-PRELAUNCH-CONSOLIDATED-3.json | `deef06ad` | — | PASS |
+| 183 | 2026-03-31T11:00 | HL #032 VAULT-MM-MASTERMIND-CONSOLIDATED-2.json | `881b4228` | — | PASS |
 | 154 | 2026-03-30T23:00 | HL #024 confirmed (VAULT-L-LIVE-CLASSES-2) | `271b7e69` | B | PASS |
-| 153 | 2026-03-30T22:30 | HL #023 BIBLE-CH03-DOC02-SACRED-ARTIFACT-SORTING.json | `40cb5451` | — | PASS |
-| 152 | 2026-03-30T22:00 | HL #022 SOUL-DNA-BIBLE-CH10-MACHINE.json | `3d7aec61` | — | PASS |
-| 151 | 2026-03-30T21:30 | HL #021 BIBLE-CH02-DOC01-SOUL-DNA-MAP.json | `7682c0f8` | — | PASS |
-| 150 | 2026-03-30T21:00 | HL #020 BIBLE-CH01-DOC00-UNIVERSAL-LEDGER.json | `57ed012e` | — | PASS |
-| 149 | 2026-03-30T20:30 | HL #019 BIBLE-CH16-NUCLEAR-HARVEST.json | `f1ad0bfb` | — | PASS |
-| 148 | 2026-03-30T20:00 | HL #018 FIREBASE-CHROME-EXTENSION.json | `d21cb8f9` | — | PASS |
 
 ### Next Worker Should
-1. Convert #025 — `NOTEBOOKLM-VAULT-ARCHITECT-OF-AGENT99-FIRST-250-LAYERS.md` (16KB, notebooklm)
-2. Push to `CANON/HEAVY-LEDGER/NOTEBOOKLM-VAULT-ARCHITECT-OF-AGENT99-FIRST-250-LAYERS.json`
-3. Update pipeline cursor to 026
-4. Continue Wave 2 overnight cadence
+1. Convert #042 — `SOUL-DNA-BIBLE-CH12-THE-WINDOW-AND-THE-COST.md` (13KB, bible chapter)
+2. Push to `CANON/HEAVY-LEDGER/SOUL-DNA-BIBLE-CH12-THE-WINDOW-AND-THE-COST.json`
+3. Update pipeline cursor to #042 DONE
+4. Continue Wave 3 cadence
