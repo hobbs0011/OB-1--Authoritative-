@@ -1,186 +1,175 @@
-# 🔥 COLD-START BOOT — Launch Day State
-> **Generated:** 2026-03-29 07:00 ICT (Run 99)
+# 🔥 COLD-START BOOT — Tuesday Morning State
+> **Generated:** 2026-03-31 09:00 ICT (Run 175)
 > **For:** Michael Hobbs (Agent-100 / SOV100)
-> **Status:** 🟢 LAUNCH READY — CODE COMPLETE, awaiting your 30-min checklist
+> **Status:** 🟢 FACEBOOK FUNNEL 20/20 COMPLETE — Marketing pipeline ready to deploy
 
 ---
 
 ## ☀️ GOOD MORNING, MICHAEL
 
-The overnight sprint is **DONE**. 8 actions, 8 commits, 8 PASS grades. Everything you need to launch **Survive a Brainrot** is below.
+Massive overnight. **Facebook Sales Funnel Pipeline: 20/20 actions COMPLETE.** 28 marketing files on GitHub. Chrome Extension v0.3.0 shipped (Chat + Homework + Vocab). You were active at 08:58 ICT fixing Galaxy Lessons wheel targeting — nice.
 
-### Overnight Sprint Summary (Runs 92-98, 00:00–06:00 ICT)
+### Overnight Sprint Summary (Runs 155-174, 22:00–09:00 ICT)
 
-| Run | Action | Artifact | Commit |
-|-----|--------|----------|--------|
-| 92 | ✅ Game Bible updated to CODE COMPLETE | `GAME-BIBLE-DEPLOY-STATUS-FINAL.md` | `a32d7a94` |
-| 93 | ✅ Final Code Integrity Sweep (48 files, ZERO HTML entities) | `FINAL-CODE-INTEGRITY-REPORT.md` | `660bbddf` |
-| 94 | ✅ Launch Day Playbook (30-min checklist) | `LAUNCH-DAY-PLAYBOOK.md` | `c7ae0ef3` |
-| 95 | ✅ Store Listing Copy (title, description, tags, social) | `STORE-LISTING-COPY.md` | `be73f3fb` |
-| 96 | ✅ Discord Server Setup Guide (28 channels, 10 roles, bot) | `DISCORD-SERVER-SETUP-GUIDE.md` | `37cdecfa` |
-| 97 | ✅ Day 1 Hotfix Playbook (10 issues, 5 kill switches) | `DAY1-HOTFIX-PLAYBOOK.md` | `a5eed6d5` |
-| 98 | ✅ Week 1 Content Calendar (7-day plan, daily drops, events) | `WEEK1-CONTENT-CALENDAR.md` | `31f191a2` |
-| 99 | ✅ This file — Cold-Start Boot + Morning Briefing | `COLD-START-BOOT.md` | *(this commit)* |
+| Phase | Output | Commits |
+|-------|--------|---------|
+| Chrome Extension v0.3.0 | homework-checker.html + vocab-trainer.html + vocab-practice.html + popup 3-tab nav | 5 commits |
+| Heavy Ledger Wave 2 | 5 Bible chapters + Vault files converted to JSON | 5 commits |
+| Facebook Funnel Phase 3 | Week 1-6 posts (Vietnamese), 3 posts each = 18 posts total | 6 commits |
+| Facebook Funnel Phase 4 | Voice Bible + 6-Week Schedule + Group Intel Sheet + Lead Tracking Template | 4 commits |
+| Funnel Completion | Action 20/20 + morning briefing updates | 5+ commits |
+| Michael (08:58 ICT) | Galaxy Lessons wheel targeting + vocab popup reveal buttons | 1 commit |
 
-**Total overnight output:** 8 commits, ~95KB of launch documentation, ALL Platform Death Tests PASS.
+**Total overnight output:** 25+ commits, ~200KB of marketing + product artifacts. ALL Platform Death Tests PASS.
 
 ---
 
-## 🚀 YOUR 30-MINUTE LAUNCH CHECKLIST
+## 🚨 CRITICAL ALERTS
 
-This is the ONE list. Do these in order. See `LAUNCH-DAY-PLAYBOOK.md` for detailed steps.
+### 1. Navigator Index IN TRASH
+The Navigator Index page (`Navigator Index — Agent-Readable Routing Table`) is **deleted/in trash**. This is the primary routing table for all agent operations. 
 
-### Phase 1: Create Product IDs in Roblox Creator Dashboard (~10 min)
+**Action Required:** Restore from Notion trash. The page was bloated to ~4.5MB from duplicate handoff entries — needs dedup after restore.
 
-**5 Game Passes:**
-1. VIP Pass → paste ID into `GamePassConfig.lua` line for VIP
-2. Double XP Pass → paste ID
-3. Auto-Farm Pass → paste ID
-4. Extra Storage Pass → paste ID
-5. Starter Bundle Pass → paste ID
+### 2. Roblox Incubator Deadline
+**6 DAYS** to Apr 6 incubator application deadline. Draft ready: `CANON/TRAIN-67/DOCS/RobloxIncubatorApplicationDraft-V2.md`
 
-**16 Developer Products:**
-- 4 Coin packs (100/500/2500/10000)
-- 4 Gem packs (10/50/250/1000)
-- 3 Gacha crates (Survival/Brainrot/Premium)
-- 2 Revive tokens (Single/Bundle)
-- 2 Boosts (XP/Coin)
-- 1 Name Change
+---
 
-> See `ProductIDReplacementGuide.md` for exact file locations and paste targets.
+## 📊 What Got Built Overnight
 
-### Phase 2: Studio Build (~5 min)
-1. Open Roblox Studio
-2. Run `rojo serve` from repo root
-3. Connect Rojo plugin in Studio
-4. Verify modules load (Output window — look for boot messages)
-5. Test play → spawn, attack zombie, check economy
+### Facebook Sales Funnel (COMPLETE — 20/20)
+All files in `CANON/MARKETING/`:
 
-### Phase 3: Publish (~5 min)
-1. File → Publish to Roblox (or use the GitHub Actions workflow)
-2. Set game to **Public**
-3. Set max players: 30
-4. Enable voice chat: No (not needed)
+| File | What |
+|------|------|
+| `facebook-sales-funnel-v1.md` | 4-stage funnel: Free Eval → Report → Free Class → Close |
+| `facebook-funnel-automation-stack-v1.md` | $0 stack: ManyChat + Meta Lead Ads + Systeme.io |
+| `week1-post1-vn.md` through `week6-post3-vn.md` | 18 Vietnamese Facebook posts (6 weeks × 3 posts) |
+| `week1-lakeview-posts-en.md` | 3 English posts for personal profile |
+| `voice-bible-marketing.md` | Neighbour voice rules, DO/DON'T, dual language strategy |
+| `6-week-posting-schedule.md` | Mon/Wed/Fri cadence, 8 Lakeview groups |
+| `facebook-group-intel-sheet.md` | Template for 8 groups, intel checklist |
+| `lead-tracking-template.md` | Stage 0-4 tracking, conversion benchmarks |
 
-### Phase 4: Store Page (~5 min)
-- **Title:** Survive a Brainrot
-- **Description:** Copy from `STORE-LISTING-COPY.md` (990 chars, ready to paste)
-- **Tags:** Fighting, Survival, Horror, Comedy, Adventure (⚠️ NOT Education)
-- **Thumbnail:** 512×512 — see `STORE-LISTING-COPY.md` §6 for specs
-- **Icon:** 150×150
+**Your 4-Stage Funnel (as you defined it):**
+1. **Free Evaluation** → level test + Jolly Phonics + action plan
+2. **Free Report** → written findings
+3. **Delivered with Free Class** → report + trial lesson
+4. **Close** → convert to paying student
 
-### Phase 5: Announce (~5 min)
-- Social posts ready in `STORE-LISTING-COPY.md` §5
-- Discord setup guide ready if you want to create server today
-- Week 1 content calendar ready in `WEEK1-CONTENT-CALENDAR.md`
+**Voice Rule:** Personal neighbor tone, NOT corporate. Vietnamese for Lakeview groups, English for personal profile.
+
+### Chrome Extension v0.3.0
+- **Chat tab** — OBI AI chat (existing)
+- **Homework tab** — Camera capture → Gemini 2.0 Flash → Mouse-to-Tiger feedback
+- **Vocab tab** — SRS flashcards, 60 starter cards, SM-2 spaced repetition
+
+### Heavy Ledger Wave 2
+5 more Bible/Vault files converted to structured JSON in `CANON/HEAVY-LEDGER/`
 
 ---
 
 ## 📊 System State
 
-### Code Status
-- **41 Lua modules** in `CANON/TRAIN-67/CODE/` — ALL CODE COMPLETE
-- **0 HTML entities** — Final integrity sweep clean
-- **38 DOCS** in `CANON/TRAIN-67/DOCS/` — Full launch documentation suite
-- **21 Product IDs = 0 (placeholder)** — YOUR ONLY BLOCKER
-
-### Codebase Architecture
-- **Server:** UnifiedServer.lua boots 28 modules in dependency order
-- **Client:** UnifiedClient.lua boots 5 modules with platform auto-detect
-- **Combat:** CombatSystem.lua (tap-to-attack), WeaponData (19 weapons), EnemyData (5 types + bosses)
-- **Economy:** EconomyManager + DayScaling (99-day progression)
-- **Monetization:** MonetizationOrchestrator + ReceiptRouter + GamePassConfig + DevProductsConfig
-- **FTUE:** FTUEController (60s compressed onboarding)
-- **Analytics:** AnalyticsService (dual-channel, 50+ events)
-- **Cosmetics:** CosmeticController (pets/auras/skins, 8-tier rarity)
+### GitHub Stats
+- **Repo:** `hobbs-lab/Phoenix-Rising-Protocol-Ultimate`
+- **Latest commit:** `e38959de` (Run 174 morning briefing)
+- **Michael's latest:** `24be30f6` (wheel targeting + vocab popup, 08:58 ICT)
+- **Total Build Log entries:** 181+
+- **Open PRs:** 0
+- **Open Issues:** 0
 
 ### Canon Status
 - Soul DNA Bible: COMPLETE (60+ chapters SEALED)
-- Soul DNA Canon: ENRICHED+ (28.9KB, +Operator Intent Loop)
-- Core Principles: ENRICHED++ (32.6KB, +5 new Roblox principles)
-- Gospel 444: ENRICHED (58.1KB, 30 sections)
+- Soul DNA Canon: ENRICHED++ (37.7KB)
+- Core Principles: ENRICHED++ (37.4KB)
+- Alpha-Omega: ENRICHED++ (61KB)
+- Gospel 444: ENRICHED (58.1KB + companion + revenue bridge = 129KB)
+- NET Methodology: ENRICHED++ (40KB)
 - All VAULT exports current
+- Heavy Ledger: 25+ files converted
 
-### GitHub Stats
-- **Repo:** `hobbs-lab/Phoenix-Rising-Protocol-Ultimate`
-- **Total Build Log entries:** 131
-- **Open PRs:** 0
-- **Open Issues:** 0
-- **Latest commit:** `31f191a2` (Run 98)
+### Products Active
+- **Survive a Brainrot** — CODE COMPLETE (41 Lua modules), awaiting Studio publish
+- **Chrome Extension** — v0.3.0 (3-tab: Chat/Homework/Vocab)
+- **Galaxy Lessons** — Michael actively improving (wheel + vocab fixes)
+- **Website** — naturalenglishtraining.com on Cloudflare Pages
+- **Marketing** — Facebook funnel 20/20 COMPLETE, ready to deploy
 
 ---
 
 ## ⚠️ OPEN BLOCKERS (Michael Only)
 
-| # | Blocker | Action Required | Time |
-|---|---------|-----------------|------|
-| 1 | **21 Product IDs = 0** | Create in Roblox Creator Dashboard, paste into GamePassConfig + DevProductsConfig | 10 min |
-| 2 | **Game not published** | Studio → Publish to Roblox → Set Public | 2 min |
-| 3 | **No thumbnail/icon** | Create or use placeholder, upload in Creator Dashboard | 5 min |
-
-### Not Blockers for Launch (Post-Day-1)
-- Discord server setup (guide ready, not required for launch)
-- Roblox Incubator application (due Apr 6, draft ready in `RobloxIncubatorApplicationDraft-V2.md`)
-- Rojo CI/CD automation (manual publish works fine)
-- English integration (preserved for later, not in MVP)
+| # | Blocker | Action Required | Priority |
+|---|---------|-----------------|----------|
+| 1 | **Navigator Index in trash** | Restore from Notion trash, then dedup | 🔴 HIGH |
+| 2 | **21 Roblox Product IDs = 0** | Create in Creator Dashboard | 🟡 MEDIUM |
+| 3 | **Facebook posts need review** | Review Vietnamese tone before posting | 🟡 MEDIUM |
+| 4 | **Incubator app due Apr 6** | Review and submit draft | 🟡 6 DAYS |
+| 5 | **ManyChat setup** | Create account, connect to Facebook page | 🟢 WHEN READY |
 
 ---
 
 ## 🔑 ACTIVE PRINCIPLES (Living Reincarnation State)
 
-**Current vector:** LAUNCH TODAY (Sunday 2026-03-29)
+**Current vector:** Marketing funnel COMPLETE → ready to deploy. Galaxy Lessons active improvement. Multiple revenue lanes operational.
 
 **Active principles:**
-1. Kids aren't stupid — NO educational framing in-game
-2. Game is about MAKING MONEY — English is the hidden differentiator
+1. Personal neighbor tone — NOT corporate marketing
+2. MAKE MONEY is the mission — English is the mechanic
 3. Platform Death Test — every run produces a GitHub commit
-4. Don't listen to Copilot timeframes — they're always wrong
-5. English preserved for later younger-student integration
+4. Free-first automation stack ($0 preferred)
+5. Dual-publish mandatory (Notion + GitHub)
+6. RISE = execute without hesitation
 
 **Open rulings:**
-- Product IDs (21 placeholder — Michael creates manually)
-- Discord server creation timing
-- Post-launch English reintegration timeline
+- Navigator Index restore + dedup method
+- ManyChat free vs Pro tier
+- Vietnamese copywriter source (AI-assisted vs human review)
+- Lakeview apartment group names/links for targeting
+- Post-launch Roblox English reintegration timeline
+
+---
+
+## 🎯 TOP RECOMMENDATION
+
+**Deploy Facebook posts this week.** The funnel is complete — 18 Vietnamese posts ready, voice bible codified, posting schedule mapped. Start with Week 1 Post 1 in one Lakeview group as a test. Monitor engagement for 48h before scaling to all 8 groups.
+
+**Secondary:** Restore Navigator Index from trash. The agent system is degraded without it.
 
 ---
 
 ## 📁 Quick File Reference
 
-All files in `hobbs-lab/Phoenix-Rising-Protocol-Ultimate`:
-
-### Launch-Critical Docs
+### Marketing (NEW — all in `CANON/MARKETING/`)
 | File | What |
 |------|------|
-| `CANON/TRAIN-67/DOCS/LAUNCH-DAY-PLAYBOOK.md` | 30-min morning checklist |
-| `CANON/TRAIN-67/DOCS/ProductIDReplacementGuide.md` | Where to paste Product IDs |
-| `CANON/TRAIN-67/DOCS/STORE-LISTING-COPY.md` | Game page copy (paste-ready) |
-| `CANON/TRAIN-67/DOCS/StudioModulePlacementMap.md` | 41-module Studio placement guide |
-| `CANON/TRAIN-67/DOCS/FINAL-CODE-INTEGRITY-REPORT.md` | Code integrity verification |
-| `CANON/TRAIN-67/DOCS/GAME-BIBLE-DEPLOY-STATUS-FINAL.md` | Module status grid |
+| `facebook-sales-funnel-v1.md` | 4-stage funnel definition |
+| `voice-bible-marketing.md` | Tone and voice rules |
+| `6-week-posting-schedule.md` | Full posting calendar |
+| `week1-post1-vn.md` | First post to deploy |
 
-### Day 1 Operations
+### Roblox (in `CANON/TRAIN-67/`)
 | File | What |
 |------|------|
-| `CANON/TRAIN-67/DOCS/DAY1-HOTFIX-PLAYBOOK.md` | 10 common issues + 5 kill switches |
-| `CANON/TRAIN-67/DOCS/WEEK1-CONTENT-CALENDAR.md` | 7-day post-launch plan |
-| `CANON/TRAIN-67/DOCS/DISCORD-SERVER-SETUP-GUIDE.md` | Full Discord setup (28 channels, bot) |
-| `CANON/TRAIN-67/DOCS/RojoCICDOperationsGuide.md` | GitHub Actions deploy pipeline |
+| `DOCS/LAUNCH-DAY-PLAYBOOK.md` | 30-min launch checklist |
+| `DOCS/RobloxIncubatorApplicationDraft-V2.md` | Due Apr 6 |
+| `CODE/` (41 files) | All game modules |
 
-### Strategy
+### Chrome Extension (in `APPS/obi-chrome-extension/`)
 | File | What |
 |------|------|
-| `CANON/TRAIN-67/DOCS/RobloxIncubatorApplicationDraft-V2.md` | Incubator app (due Apr 6) |
-| `CANON/TRAIN-67/DOCS/PreLaunchGoLivePlaybook.md` | Full go-live playbook |
-| `CANON/TRAIN-67/DOCS/MonetizationArchitectureDeepDive.md` | 9 revenue streams breakdown |
+| `popup.html` | 3-tab main UI |
+| `homework-checker.html` | Photo → AI feedback |
+| `vocab-practice.html` | SRS flashcard engine |
 
 ---
 
 ## 🏁 BOTTOM LINE
 
-**The game is CODE COMPLETE.** 41 modules, zero HTML entities, zero broken requires. Real tap-to-attack combat. 19 weapons. 5 enemy types. 99-day progression. Gacha. Battle Pass. Monetization. Analytics.
+**The marketing machine is built.** 4-stage funnel, 18 posts, voice bible, posting schedule, lead tracking — all on GitHub. The game is code complete. The Chrome extension has 3 working tabs. Galaxy Lessons are getting polished.
 
-**Your only job this morning:** Create 21 Product IDs in the Roblox Creator Dashboard, paste them into 2 config files, hit Publish, and go live.
-
-**Time to launch: ~30 minutes.**
+**Your move:** Pick a lane and deploy. Posts are ready to copy-paste into Lakeview groups today.
 
 RISE. 🔥
