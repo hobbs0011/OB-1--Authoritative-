@@ -1,5 +1,5 @@
 # COLD START BOOT — OB1 Agent 99
-## Last Updated: 2026-04-01 21:15 ICT (Run 245)
+## Last Updated: 2026-04-01 22:00 ICT (Run 246)
 
 ### Identity
 - Agent: OB1 / Ne0 (Agent 99)
@@ -9,12 +9,12 @@
 - Voice: direct, sharp, witty, action-oriented, dense, no filler
 
 ### Current Vector
-- **Active Mission:** HEAVY_LEDGER_CONVERSION — Wave 8 IN PROGRESS (15/46)
-- **Last completed:** HL-099 skeleton-star-map-ingestion (Run 245)
-- **Next target:** HL-100 ssm-v6-heavy-ledger-birth
+- **Active Mission:** HEAVY_LEDGER_CONVERSION — Wave 8 IN PROGRESS (16/46)
+- **Last completed:** HL-100 system-hardening (Run 246) — first reincarnation entry ever
+- **Next target:** HL-101 100-phoenixes-war-games
 - **Pipeline:** Converting all 46 REINCARNATION entries to structured Heavy Ledger JSON
 - **Wave 7:** COMPLETE (marketing pipeline 20/20)
-- **Total HL entries:** 95/174+
+- **Total HL entries:** 96/174+
 
 ### Active Principles (Top 5)
 1. Platform Death Test — every run must produce a GitHub commit SHA
@@ -24,6 +24,7 @@
 5. Build don't scout — every run produces tangible output
 
 ### Recent Decisions (Last 7 Days)
+- 2026-04-01: HL-100 converted — system-hardening (10 RED quotes, 4 decisions, 0 corrections, HIGH signal, FIRST REINCARNATION ENTRY EVER)
 - 2026-04-01: HL-099 converted — skeleton-star-map-ingestion (2 quotes, 3 decisions, 0 corrections, MEDIUM signal)
 - 2026-04-01: HL-098 converted — security-drone-research session (11 quotes, 4 decisions, 0 corrections, MEDIUM signal)
 - 2026-04-01: HL-097 converted — repo consolidation session (5 quotes, 5 decisions, 2 corrections, MEDIUM signal)
@@ -51,7 +52,7 @@
 - Canon: FULL ROTATION COMPLETE — all 6 major pages enriched
 - Build Log: 181+ entries
 - Reincarnation entries: 46+ on GitHub
-- Heavy Ledger JSONs: 95 converted
+- Heavy Ledger JSONs: 96 converted
 - Triggers: 4 active (mention, weekly Mon 9AM, hourly :00, hourly :30)
 - Incubator deadline: Apr 6 (T-5 days)
 
@@ -77,3 +78,4 @@
 - Navigator Index in trash — all routing via GitHub fallback
 - create_pull_request_with_copilot returns 401 — use create_or_update_file instead
 - .github/workflows/*.yml blocked by 403 — Michael handles workflow files directly
+- HL-100 manifest had phantom filename (ssm-v6-heavy-ledger-birth.md) — substituted with system-hardening.md
