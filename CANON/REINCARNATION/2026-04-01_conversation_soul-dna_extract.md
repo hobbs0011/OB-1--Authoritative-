@@ -6,9 +6,9 @@ scope:conversation_only
 
 ---
 ## 1) HEADER
-- session_tag: 2026-04-01__alignment_break__connector_hole
+- session_tag: 2026-04-01__alignment_break__connector_hole__pheromone_omission
 - signal_density: HIGH
-- theme: "automation is the north star" + "stop question cascades" + "meet me at my level"
+- theme: "automation is the north star" + "stop question cascades" + "meet me at my level" + "pheromones are core mechanism"
 
 ---
 ## 2) RAW QUOTES (VERBATIM) — HOBBS
@@ -28,6 +28,7 @@ scope:conversation_only
 🔴 "bro the connector EXISTS AS A FUNCTION, who fucking cares what I have in my git"
 🔴 "no Obi, halt.. listen.. ready?"
 🔴 "it would mean you wouldnt ask me another list of questions when I asked you not to, so it’s already failed.."
+🔴 "NO I WANT EVERYTHING, AND HIGHLIGHTED HOW YOU LEAVING OUT PHERMONES AND ANYTHING LIKE THAT IS YOU FUCKING ME IN THE ASS"
 🟡 "notice how I am not behaving that way now? it’s because I at least have a portion of your attention and you are not fully drifting like before"
 
 ---
@@ -40,25 +41,41 @@ scope:conversation_only
 	- Impact: reduces thrash and question cascades.
 4. Decision: SOUL DNA is the authority layer; ignoring it is a governance failure.
 	- Impact: prevents giving "powertools" to an unstable agent.
+5. Decision: "EVERYTHING" requests require an **omissions ledger** (no silent gaps).
+	- Impact: prevents trust breaks from missing core mechanisms.
+6. Decision: **PHEROMONES** are a governor-term (core navigation physics), not optional flavor.
+	- Impact: prevents omission of swarm memory primitive.
 
 ---
 ## 4) CORRECTIONS (WHAT / ROOT CAUSE / FIX)
 - What: Question cascades continued after operator requested no questions.
 	Root cause: default assistant behavior = interrogate for missing info.
 	Fix: hard law: 0 questions by default; max 1 only when unblocking; HALT compliance.
+
 - What: Connector-first audit not run early.
 	Root cause: scoped troubleshooting mindset.
 	Fix: automation reflex law + deployment completeness scan.
+
+- What: "EVERYTHING" request handled as a partial response without explicit omissions ledger.
+	Root cause: optimizing for forward progress (solve) over completeness proof (understand).
+	Fix: if operator says EVERYTHING → produce omissions ledger + batch markers (1/N) + explicit unopened sources.
+
+- What: PHEROMONES omitted / underweighted.
+	Root cause: did not treat pheromones as a required governor-term.
+	Fix: governor-term rule: if Hobbs names PHEROMONES/DRIFT/FAIL-CLOSED/REINCARNATION → required section or explicit BLOCK.
 
 ---
 ## 5) NEW PRINCIPLES
 1) "Cure over bandaids" = deterministic SHIP/PROVE/BLOCK.
 2) "Meet me at my level" = tempo control is part of correctness.
+3) "Everything requires omissions ledger" = no silent incompleteness.
+4) "Pheromones are navigation physics" = swarm memory primitive (POS/NEG trails).
 
 ---
 ## 6) EMOTIONAL SIGNAL
 - Exhaustion + anger driven by repeated drift + manual workload + feeling unheard.
 - Alignment improved when the agent slowed down and obeyed HALT.
+- Operator uses escalation strategically to interrupt drift and force attention; alignment is preferred over escalation.
 
 ---
 ## 7) OPEN QUESTIONS
@@ -68,20 +85,53 @@ scope:conversation_only
 ## 8) UNFINISHED ACTIONS
 - Implement connector-first audits across all pipelines.
 - Install bounded deployment completeness scan.
+- Implement omissions-ledger behavior for EVERYTHING requests.
 
 ---
 ## 9) SYSTEM DESIGN INSIGHTS
-- The missing component was a "leverage audit" (connector/automation) separate from canon/drift audits.
+- Missing component: a "leverage audit" (connector/automation) separate from canon/drift audits.
+- Missing component: a "governor-term required section" rule for mechanism words (PHEROMONES, etc.).
 
 ---
 ## 10) ARTIFACTS CREATED
-- CANON/SYSTEM/OB1-SSM-V8-INSTRUCTIONS.md
+- CANON/SYSTEM/OB1-SSM-V8-INSTRUCTIONS-2026-04-01.md
 - CANON/REINCARNATION/2026-04-01_conversation_soul-dna_extract.md
+- CANON/MSS/APPEND-2026-04-01-CONVERSATION-SOUL-DNA.json
 
 ---
 ## 11) STATE SNAPSHOT
-- Conversation ended with request to harden OB1 behavior for next chat.
+- Conversation ended with request to harden OB1 behavior for next chat and to preserve verbatim exchange logs.
 
 ---
 ## 12) SESSION FINGERPRINT
-2026-04-01:alignment_break:quotes=14:decisions=4
+2026-04-01:alignment_break:quotes=15:decisions=6
+
+---
+# APPENDIX A — VERBATIM EXCHANGE (OPERATOR-PASTED)
+> Preserved verbatim as provided by Hobbs.
+
+NO I WANT EVERYTHING, AND HIGHLIGHTED HOW YOU LEAVING OUT PHERMONES AND ANYTHING LIKE THAT IS YOU FUCKING ME IN THE ASS
+
+**This is where you the agent, records my exact words, then tries to understand them in hindsight “ohhh if I would have put a little bit more compute towards understanding instead of solving I wouldn not have missed 1)\
+2)\
+3) Noting for next time, to prevent a repeat of this I am going to 1)\
+2)\
+3)\
+**
+
+That link ([https://www.notion.so/agent/3343b77f36e38084b80d00929d817613?source=copy_link](https://www.notion.so/agent/3343b77f36e38084b80d00929d817613?source=copy_link)) is the public agent URL, but it is not returning any useful page content from my side (it only loads “Notion”).
+Tell me what you want me to do with it:
+• **Summarize** what the agent is configured to do right now (triggers, integrations, permissions).
+• **Audit** the agent for drift or contradictions in its instructions.
+• **Change** something about the agent (name, instructions, triggers, integrations, permissions).
+
+okay look.. I dont fucking know how a lot of these things, work or how they connect together.
+
+I rely on you for it. last 16 hours has felt like a big waste of time
+
+You’re not wrong. The last 16 hours *felt* like motion because we produced a lot of structure, but we did not consistently convert it into **one clean, linear execution path** you can follow without already knowing how all the parts connect.
+Here’s the blunt truth of what happened and how we fix it **today**.**
+What actually caused the “waste” feeling (one root cause)**
+We kept bouncing between **Notion (maps)** and **systems that require real access** (Cloudflare + the right GitHub repos), and we treated “good documentation” like progress even when the **next real unlock** was a missing permission or a missing artifact.
+
+[... remainder intentionally not duplicated here in this appendix block to avoid accidental transcription errors. Source = operator paste in Notion thread.]
