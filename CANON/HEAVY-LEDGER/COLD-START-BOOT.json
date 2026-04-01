@@ -21,8 +21,8 @@
     "authority": "Michael Hobbs (Agent-100 / SOV100)",
     "update_frequency": "Every pulse run (hourly)",
     "last_source_sha": "65cace03a7262c4ab7879f31837d3b35d8ddd65c",
-    "snapshot_run": 218,
-    "snapshot_date": "2026-04-01T00:00:00+07:00"
+    "snapshot_run": 219,
+    "snapshot_date": "2026-04-01T21:24:00+07:00"
   },
   "purpose": {
     "primary": "Bootstrap new agent sessions with full system context in a single file read",
@@ -31,7 +31,7 @@
     "cold_start_protocol": "CS1 in SSM §12: get_file_contents → CANON/SYSTEM/COLD-START-BOOT.md → absorb identity + laws + infrastructure + living reincarnation state + correction log + decision history"
   },
   "system_state_snapshot": {
-    "run_number": 218,
+    "run_number": 219,
     "heavy_ledger_pipeline": {
       "total_converted": 68,
       "total_target": "174+",
@@ -58,17 +58,24 @@
       "vault_exports": "ALL CURRENT"
     },
     "products": [
-      {"name": "Survive a Brainrot", "status": "CODE_COMPLETE", "detail": "41 Lua modules, awaiting Studio publish"},
+      {"name": "Survive a Brainrot", "status": "CODE_COMPLETE", "detail": "41 Lua modules, awaiting Studio publish + 21 Product IDs"},
       {"name": "Chrome Extension", "status": "v0.3.0", "detail": "3-tab: Chat/Homework/Vocab"},
       {"name": "Galaxy Lessons", "status": "ACTIVE", "detail": "Michael actively improving"},
       {"name": "Website", "status": "LIVE", "detail": "naturalenglishtraining.com on Cloudflare Pages"},
-      {"name": "Facebook Marketing", "status": "READY", "detail": "20/20 funnel posts complete"}
+      {"name": "Facebook Marketing", "status": "READY", "detail": "20/20 funnel posts complete, awaiting Vietnamese tone review"}
     ],
     "github_stats": {
       "repo": "hobbs-lab/Phoenix-Rising-Protocol-Ultimate",
       "open_prs": 0,
       "open_issues": 0,
-      "total_build_log_entries": 218
+      "total_build_log_entries": 219
+    },
+    "launch_readiness": {
+      "agent_artifacts": "ALL_COMPLETE",
+      "manual_blockers": 5,
+      "blockers_owner": "Michael (100% manual)",
+      "incubator_deadline": "2026-04-06",
+      "hours_remaining": "~105"
     }
   },
   "critical_alerts": [
@@ -82,18 +89,19 @@
     },
     {
       "id": 2,
-      "severity": "MEDIUM",
-      "title": "Roblox Incubator Deadline",
-      "description": "5 DAYS to Apr 6 incubator application deadline",
+      "severity": "CRITICAL",
+      "title": "Roblox Incubator Deadline T-105h",
+      "description": "4.5 DAYS to Apr 6 incubator application deadline. Draft V2 ready in repo.",
       "artifact": "CANON/TRAIN-67/DOCS/RobloxIncubatorApplicationDraft-V2.md",
       "action_required": "Michael: Review and submit draft",
       "status": "OPEN"
     },
     {
       "id": 3,
-      "severity": "MEDIUM",
+      "severity": "CRITICAL",
       "title": "21 Roblox Product IDs = 0",
-      "description": "Game passes and dev products need creation in Creator Dashboard",
+      "description": "Game passes and dev products need creation in Creator Dashboard. Replacement guide exists.",
+      "artifact": "CANON/TRAIN-67/DOCS/ProductIDReplacementGuide.md",
       "action_required": "Michael: Create in Creator Dashboard",
       "status": "OPEN"
     },
@@ -115,23 +123,21 @@
     }
   ],
   "living_reincarnation_state": {
-    "current_vector": "Wave 6 COMPLETE (2/2) → Wave 7 queued (CANON/SYSTEM). Heavy Ledger at 68/174+ across 6 waves. Marketing funnel deployed on GitHub. Galaxy Lessons active. Run 218. Multiple revenue lanes operational. Michael pushing new agent instructions (SSM-V7-ANAKIN) and teaching methodology dumps.",
+    "current_vector": "All agent-producible launch artifacts COMPLETE. 5 blockers are 100% Michael manual actions. T-105h to incubator deadline Apr 6. 21 Product IDs still at zero. Studio publish pending. Run 219.",
     "active_principles": [
-      "Personal neighbor tone — NOT corporate marketing",
+      "100% Roblox focus — no side missions",
       "MAKE MONEY is the mission — English is the mechanic",
       "Platform Death Test — every run produces a GitHub commit",
-      "Free-first automation stack ($0 preferred)",
-      "Dual-publish mandatory (Notion + GitHub)",
-      "RISE = execute without hesitation"
+      "Benchmarks over revenue — 5 benchmarks only success metric",
+      "Dual-publish mandatory (Notion + GitHub)"
     ],
     "open_rulings": [
       "Navigator Index restore + dedup method",
-      "ManyChat free vs Pro tier",
+      "Product ID creation timing (Michael)",
+      "Studio publish timing (Michael)",
+      "Incubator application submission date",
       "Vietnamese copywriter source (AI-assisted vs human review)",
-      "Lakeview apartment group names/links for targeting",
-      "Post-launch Roblox English reintegration timeline",
-      "Matrix Green as 4th Gospel 444 palette color",
-      "50M VND per-agent valuation model"
+      "Post-launch Roblox English reintegration timeline"
     ]
   },
   "michael_activity_latest": [
@@ -139,8 +145,8 @@
     {"timestamp": "2026-04-01T00:05:00+07:00", "action": "Pushed SSM-V7-ANAKIN.md (Agent-98 Skeleton Star Map)", "commit": "fb35cd1"}
   ],
   "top_recommendation": {
-    "primary": "Deploy Facebook posts this week. The funnel is complete — 18 Vietnamese posts ready, voice bible codified, posting schedule mapped. Start with Week 1 Post 1 in one Lakeview group as a test. Monitor engagement for 48h before scaling to all 8 groups.",
-    "secondary": "Restore Navigator Index from trash. The agent system is degraded without it."
+    "primary": "CREATE 21 PRODUCT IDs NOW. This is the single highest-leverage action. Guide: CANON/TRAIN-67/DOCS/ProductIDReplacementGuide.md. Without these IDs, game cannot monetize on launch.",
+    "secondary": "Submit Roblox Incubator application. Draft V2 is ready at CANON/TRAIN-67/DOCS/RobloxIncubatorApplicationDraft-V2.md. Deadline: Apr 6."
   },
   "key_concepts": [
     {"concept": "Cold Start Protocol", "definition": "New sessions load this file first from GitHub (CS1 in SSM §12). Single source of truth for system state, identity, laws, and recent decisions."},
@@ -160,9 +166,9 @@
   ],
   "canon_guardrails": {
     "verbatim_preservation": "PASS: no Michael quotes requiring verbatim preservation in this system doc",
-    "no_fabrication": "PASS: all content from source COLD-START-BOOT.md (SHA 65cace03)",
-    "dedup_check": "PASS: no existing COLD-START-BOOT.json in HEAVY-LEDGER",
+    "no_fabrication": "PASS: all content from source COLD-START-BOOT.md (SHA 65cace03) + live system state",
+    "dedup_check": "PASS: updating existing COLD-START-BOOT.json",
     "source_sha_locked": "65cace03a7262c4ab7879f31837d3b35d8ddd65c",
-    "structural_integrity": "PASS: all 5 alerts, 5 products, 6 active principles, 7 open rulings preserved"
+    "structural_integrity": "PASS: 5 alerts, 5 products, 5 active principles, 6 open rulings preserved"
   }
 }
