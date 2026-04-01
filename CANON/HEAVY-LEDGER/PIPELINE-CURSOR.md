@@ -1,12 +1,12 @@
 # Heavy Ledger Pipeline Cursor
 
 ## Current State
-- **Last Completed:** #085 `2026-03-22-agent-self-upgrade-arc.json` (Run 231)
-- **Last Run:** 231 (2026-04-01 07:00 ICT)
-- **Last Commit:** `c141e8c8721a6c58e5932f9928b323e37d44b87b`
+- **Last Completed:** #086 `2026-03-23-pipeline-delegation-mcp-stack.json` (Run 232)
+- **Last Run:** 232 (2026-04-01 07:30 ICT)
+- **Last Commit:** (this commit)
 
-## Wave 8: CANON/REINCARNATION/ (46 files)
-**Status:** IN PROGRESS (1/46)
+## Wave 8: CANON/REINCARNATION/ (47 actual files)
+**Status:** IN PROGRESS (2/47)
 **Started:** Run 231 (2026-04-01 07:00 ICT)
 **Source Directory:** CANON/REINCARNATION/
 
@@ -14,53 +14,63 @@
 | # | File | Run | Commit |
 |---|------|-----|--------|
 | 085 | 2026-03-22-agent-self-upgrade-arc.json | 231 | `c141e8c8` |
+| 086 | 2026-03-23-pipeline-delegation-mcp-stack.json | 232 | (this commit) |
 
-### Queue (oldest first, remaining 45)
-- 2026-03-22-cold-start-protocol-origin.md
-- 2026-03-22-deployment-sprint-merkle-hardening.md
-- 2026-03-22-morning-briefing-canon-continuation.md
-- 2026-03-22-overnight-canon-mapping-first-run.md
-- 2026-03-23-agent-0-triad-reincarnation.md
-- 2026-03-23-canon-fire-5-sessions-soul-dna.md
-- 2026-03-23-leadership-vision-product-architecture.md
-- 2026-03-23-midnight-fire-build-sprint.md
-- 2026-03-23-morning-briefing-infrastructure.md
-- 2026-03-23-overnight-vault-consolidation-sprint.md
-- 2026-03-23-pipeline-sprint-execution-wave.md
-- 2026-03-23-vault-consolidation-deep-mine.md
-- 2026-03-24-canon-fire-wave-2.md
-- 2026-03-24-governance-bible-deep-work.md
-- 2026-03-24-morning-briefing-vault-consolidation.md
-- 2026-03-24-ne0-chat-triad-reincarnation.md
-- 2026-03-24-overnight-gospel-444-deep-mining.md
-- 2026-03-24-vault-execution-sprint.md
-- 2026-03-25-morning-briefing-vault-sprint-close.md
-- 2026-03-25-overnight-gospel-build-canon-sprint.md
-- 2026-03-25-pipeline-automation-sprint.md
-- 2026-03-25-teaching-canon-build-sprint.md
-- 2026-03-26-morning-briefing-teaching-canon.md
-- 2026-03-26-overnight-reincarnation-gospel-enrichment.md
-- 2026-03-26-roblox-pivot-know-unknowns.md
-- 2026-03-26-roblox-research-deep-sprint.md
-- 2026-03-27-morning-briefing-roblox-pivot.md
-- 2026-03-27-overnight-roblox-galaxy-build.md
-- 2026-03-27-roblox-game-bible-completion.md
-- 2026-03-27-roblox-market-research-combat.md
-- 2026-03-28-morning-briefing-roblox-build.md
-- 2026-03-28-overnight-galaxy-lesson-build.md
-- 2026-03-28-roblox-finalization-lesson-deploy.md
-- 2026-03-28-session-bridge-galaxy-lesson-live.md
-- 2026-03-29-morning-briefing-galaxy-live.md
-- 2026-03-29-overnight-heavy-ledger-genesis.md
-- 2026-03-29-pulse-engine-optimization.md
-- 2026-03-30-heavy-ledger-wave-1-start.md
-- 2026-03-30-morning-briefing-heavy-ledger.md
-- 2026-03-30-overnight-heavy-ledger-wave-2.md
-- 2026-03-30-rise-execution-sales-funnel.md
-- 2026-03-30-wave-3-4-acceleration.md
-- 2026-03-31-morning-briefing-wave-5.md
-- 2026-03-31-overnight-wave-5-6-completion.md
+### Queue (actual files, oldest first, remaining 45)
+- 2026-03-24-100-phoenixes-war-games.md
+- 2026-03-24-agent0-confirmation-checkpoint.md
+- 2026-03-24-agent0-triad-reincarnation.md
+- 2026-03-24-chat-preservation-local-repo.md
+- 2026-03-24-deployment-claim-audit.md
+- 2026-03-24-gospel-444-consolidation.md
+- 2026-03-24-late-session-old-account-preservation.md
+- 2026-03-24-light-session-reincarnation.md
+- 2026-03-24-net-student-profiles.md
+- 2026-03-24-night-session-permissions-fix.md
+- 2026-03-24-repo-consolidation.md
+- 2026-03-24-security-drone-research.md
+- 2026-03-24-skeleton-star-map-ingestion.md
+- 2026-03-24-system-hardening.md
+- 2026-03-24-website-netpet-consolidation.md
+- 2026-03-24-website-recovery-master-sync-simulation.md
+- 2026-03-25-RISE-WEBSITE-BUILD.md
+- 2026-03-25-mss-v5-security-authority.md
+- 2026-03-25-net-methodology-bottleneck-fix.md
+- 2026-03-25-pulse-v3-galaxy-lessons-patch-first.md
+- 2026-03-25-super-saiyan-hardening.md
+- 2026-03-25-trigger-audit-rulings-v3.md
+- 2026-03-25-v5-extraction-engine.md
+- 2026-03-25-v5-overnight-mining-hardened.md
+- 2026-03-26-DUMP-CONSOLIDATE-BLUETECH-5SRC.md
+- 2026-03-26-bluetech-classroom-dump.md
+- 2026-03-26-notebooklm-vault-5dump.md
+- 2026-03-26-notebooklm-vault-architect-origin.md
+- 2026-03-26-repo-consolidation-hobbs-lab-canonical.md
+- 2026-03-26-roblox-deep-intel.md
+- 2026-03-26-sales-dna-revenue-pivot.md
+- 2026-03-26-two-server-rulings-closed.md
+- 2026-03-26-vault-expansion-blueprint-ingestion.md
+- 2026-03-27-secret-delivery-ob1-lag.md
+- 2026-03-28-roblox-combat-recode-launch.md
+- 2026-03-28-roblox-deploy-github-first-boot.md
+- 2026-03-29-discord-bot-deploy-morning.md
+- 2026-03-29-ne0-handoff-studio-bottleneck.md
+- 2026-03-29-super-saiyan-game-audit-devils-advocate.md
+- 2026-03-29-vault-a-mm-d-consolidation-session.md
+- 2026-03-29-vault-b-e-consolidation-session.md
+- 2026-03-30-github-reconnect-studio-handoff.md
+- 2026-03-30-heavy-ledger-conversion-ssm-v7.md
+- 2026-03-30-magic-chat-chrome-extension-build.md
+- 2026-03-30-marketing-lane-dump-intake.md
+- 2026-03-30-marketing-launch-facebook-distribution.md
+- 2026-03-30-quan-career-linkedin-cv-build.md
+- 2026-03-30-quan-quang-career-setup.md
+- 2026-03-30-roblox-studio-guide-48hr-launch.md
+- 2026-03-30-vault-e-trilogy-preservation.md
+- 2026-03-30-website-lane-coldboot-migration.md
 - 2026-03-31-rise-execution-sales-funnel-night.md
+
+**NOTE:** Queue corrected Run 232 — previous cursor had synthetic filenames that didn't match actual repo files. Now uses real filenames from directory listing.
 
 ## Completed Waves Summary
 | Wave | Directory | Items | Status |
@@ -72,5 +82,5 @@
 | 5 | CANON/TRAIN-67/ | 10/10 | ✅ COMPLETE |
 | 6 | CANON/MARKETING/ (partial) | 2/2 | ✅ COMPLETE |
 | 7 | CANON/HEAVY-LEDGER/ (meta) | 12/12 | ✅ COMPLETE |
-| 8 | CANON/REINCARNATION/ | 1/46 | 🔄 IN PROGRESS |
-| **Total** | | **81/174+** | |
+| 8 | CANON/REINCARNATION/ | 2/47 | 🔄 IN PROGRESS |
+| **Total** | | **82/174+** | |

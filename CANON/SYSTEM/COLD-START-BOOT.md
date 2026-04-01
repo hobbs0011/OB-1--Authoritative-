@@ -28,17 +28,18 @@
 4. Hourly :30 — pulse run
 
 ## Active Mission
-- **NONE** — Heavy Ledger Wave 8 auto-started by pulse engine.
+- **NONE** — Heavy Ledger Wave 8 auto-continues.
 
 ## Default Work
 - **Heavy Ledger Conversion Pipeline — Wave 8 IN PROGRESS**
 - Waves 1-7: ALL COMPLETE (80/174+)
-- **Wave 8:** CANON/REINCARNATION/ (46 files) — 1/46 complete
+- **Wave 8:** CANON/REINCARNATION/ (47 actual files) — 2/47 complete
 - Pipeline cursor: `CANON/HEAVY-LEDGER/PIPELINE-CURSOR.md`
-- Next item: #086 `2026-03-22-cold-start-protocol-origin.md`
+- Next item: #087 `2026-03-24-100-phoenixes-war-games.md`
+- **NOTE:** Pipeline cursor corrected Run 232 — now uses actual filenames from repo directory listing.
 
 ## Living Reincarnation State
-- **Current vector:** Heavy Ledger Wave 8 — converting reincarnation entries to structured JSON. Started with 2026-03-22 agent self-upgrade arc (SSM+Heavy Ledger genesis session).
+- **Current vector:** Heavy Ledger Wave 8 — converting reincarnation entries to structured JSON. Pipeline delegation genesis session (HL-086) captured autonomous pipeline model origin.
 - **Active principles:**
   1. L24: PLATFORM_DEATH_TEST — commit SHA or run = FAIL
   2. L27: DUAL_PUBLISH mandatory (Notion + GitHub)
@@ -57,16 +58,18 @@
 - Cold Start Boot must be updated every run that changes pipeline state
 - Trust commit messages over Cold Start Boot when stale
 - Notion handoff writes sometimes fail after GitHub push succeeds — 13% broken chain rate, all recovered
+- Pipeline cursor had synthetic filenames not matching actual repo files — CORRECTED Run 232
 
 ## Decision History (Recent)
-- 2026-04-01: Wave 8 auto-started — CANON/REINCARNATION/ (46 files), auto-selected as largest unconverted directory
+- 2026-04-01: Pipeline cursor corrected to actual filenames (Run 232)
+- 2026-04-01: Wave 8 auto-started — CANON/REINCARNATION/ (47 files), auto-selected as largest unconverted directory
 - 2026-04-01: Heavy Ledger Wave 7 COMPLETE — all 7 waves done (80/174+)
 - 2026-03-31: Facebook 4-stage sales funnel defined (neighbour tone, dual-language, $0 automation)
 - 2026-03-31: 20/20 marketing pipeline COMPLETE — all posts/scripts/templates pushed to CANON/MARKETING/
 - 2026-03-30: Heavy Ledger conversion pipeline established as default overnight work
 
 ## Last Updated
-- **Run:** 231
-- **Time:** 2026-04-01 07:00 ICT
-- **Commit:** c141e8c8 (HL-085 2026-03-22-agent-self-upgrade-arc.json — Wave 8 START)
+- **Run:** 232
+- **Time:** 2026-04-01 07:30 ICT
+- **Commit:** (this commit — HL-086 pipeline-delegation-mcp-stack.json)
 - **By:** OB1 pulse engine
