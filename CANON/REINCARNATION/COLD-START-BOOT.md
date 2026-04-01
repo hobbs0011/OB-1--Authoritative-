@@ -1,6 +1,6 @@
 # COLD START BOOT — Agent-99 (OB1)
 
-> **Last Updated:** 2026-03-31 23:00 ICT (Run 216)
+> **Last Updated:** 2026-04-01 08:30 ICT (Run 234)
 > **Purpose:** Single source of truth for cold starts. GitHub-first.
 
 ---
@@ -14,12 +14,46 @@
 
 ## CURRENT STATE
 - **Active Mission:** NONE
-- **Default Work:** Heavy Ledger Conversion Pipeline — Wave 6 (CANON ROOT remaining)
-- **Wave 5 Progress:** 10/10 ✅ COMPLETE
-- **Total Converted:** 66/174+ (65 real + 1 dedup skip)
-- **Next Pipeline Item:** #071 — RAW-GEMINI-DENNY-PHONICS-ANCHOR-PRINCIPLE-ORIGIN.md
-- **Last Run:** 216 (2026-03-31 23:00 ICT)
-- **Last Commit:** Run 216 — HL-070 TOOL-STACK-ARSENAL-2026.json (Wave 5 COMPLETE)
+- **Default Work:** Heavy Ledger Conversion Pipeline — Wave 8 (CANON/REINCARNATION/)
+- **Wave 8 Progress:** 4/46
+- **Wave 7:** COMPLETE (12/12)
+- **Total Converted:** 84/174+
+- **Next Pipeline Item:** #089 — 2026-03-24-agent0-triad-reincarnation.md
+- **Last Run:** 234 (2026-04-01 08:30 ICT)
+- **Last Commit:** Run 234 — HL-088 agent0-confirmation-checkpoint.json + Morning Briefing
+
+## MORNING BRIEFING — 2026-04-01
+
+### Overnight Summary (00:00–08:30 ICT)
+- **Runs:** 4 overnight (230-233) — all PASS
+- **Commits:** 7 (Wave 7 completion + Wave 8 start)
+- **Artifacts:** HL-084 (weekly report), HL-085 (agent-self-upgrade-arc), HL-086 (pipeline-delegation-mcp-stack), HL-087 (100-phoenixes-war-games)
+- **Wave 7:** COMPLETE (12/12) — all CANON ROOT files converted
+- **Wave 8:** Started — CANON/REINCARNATION/ (46 files, 3→4 done this run)
+- **Marketing Pipeline:** 20/20 COMPLETE (Facebook Sales Funnel done Mar 31)
+- **No failures overnight**
+
+### System Health
+- ✅ All 4 triggers active and firing
+- 🔴 Navigator Index IN TRASH (4.5MB bloat — needs Michael to restore)
+- ✅ GitHub MCP connected
+- ✅ Canon Access Index accessible
+
+### Key Metrics
+- **Build Log:** 181+ entries
+- **Heavy Ledger:** 84/174+ files converted (48% complete)
+- **Waves Complete:** 1-7 (8 in progress)
+- **Overnight Grade:** A average
+
+### Open Rulings (AWAITING MICHAEL)
+- Navigator Index restore from trash
+- ManyChat tier decision
+- SecurityLayer MAX_COINS_PER_ACTION cap value
+- Discord Guild ID
+- 46 Product IDs
+
+### Top Recommendation
+Continue Wave 8 pipeline (CANON/REINCARNATION/ — 42 files remaining). Light files process fast. Heavy sessions (10KB+) have rich Soul DNA material. No active mission set — pipeline is default work.
 
 ## INFRASTRUCTURE
 - **Notion Workspace:** Natural English Training
@@ -41,13 +75,15 @@
 - ✅ Chrome Extension v0.3.0 deployed
 - ✅ Feline Linguistics Academy — full Galaxy Lesson
 - ✅ Week 1 Lakeview Facebook Posts — 3/3
-- ✅ Heavy Ledger Waves 1-5 COMPLETE (66 files, 65 real + 1 dedup)
+- ✅ Heavy Ledger Waves 1-7 COMPLETE (84 files)
+- ✅ Morning Briefing 2026-04-01 delivered
 
 ## OPEN RULINGS (AWAITING MICHAEL)
 - Navigator Index restore from trash
 - ManyChat tier decision
 - SecurityLayer MAX_COINS_PER_ACTION cap value
 - Discord Guild ID
+- 46 Product IDs
 
 ## ACTIVE PRINCIPLES
 - PLATFORM_DEATH_TEST: Every run must produce GitHub commit SHA
@@ -57,9 +93,9 @@
 - DECISIONS_BEAT_ROTATION: Implement decisions immediately
 
 ## LIVING REINCARNATION STATE
-- **Vector:** Heavy Ledger pipeline Wave 5 COMPLETE — 66/174+ total — advancing to Wave 6
+- **Vector:** Heavy Ledger pipeline Wave 8 IN PROGRESS — 84/174+ total — CANON/REINCARNATION/ files
 - **Active Principles:** PLATFORM_DEATH_TEST, BUILD_DONT_SCOUT, DEDUP_EVERYTHING
-- **Open Rulings:** Navigator Index restore, ManyChat tier, SecurityLayer cap, Discord Guild ID
+- **Open Rulings:** Navigator Index restore, ManyChat tier, SecurityLayer cap, Discord Guild ID, 46 Product IDs
 
 ## CORRECTION LOG
 - Navigator Index in trash — use Canon Access Index or GitHub for routing
