@@ -1,13 +1,13 @@
 # HEAVY LEDGER PIPELINE CURSOR
 
 ## Current Position
-- **Next Target:** HL-111
+- **Next Target:** HL-112
 - **Wave:** 8
-- **Wave Progress:** 26/46 complete
-- **Total Converted:** 110/174+
-- **Last Completed:** HL-110 repo-consolidation (6 quotes, 5 decisions, 2 corrections, HIGH signal — FOUNDATIONS-tier, L09+L11+L27 origin events, dual-publish mandate, agent-handles-git, remote-first consolidation)
-- **Last Commit:** fa4c9b156035d843ef1720d2687aa47fb47da56d
-- **Last Run:** 256 (2026-04-02 03:30 ICT)
+- **Wave Progress:** 27/46 complete
+- **Total Converted:** 111/174+
+- **Last Completed:** HL-111 website-netpet-consolidation (13 quotes, 8 decisions, 1 correction, HIGH signal — EXECUTION-tier, hub-and-spoke architecture origin, 5-point consolidation law, connector-first audit seed, use-what-you-have doctrine)
+- **Last Commit:** b1f751537120cb1ed155c4d83afea4462dda5983
+- **Last Run:** 257 (2026-04-02 04:00 ICT)
 
 ## Wave 8 Manifest (HL-085 → HL-130)
 | HL-ID | Source File | Status | Commit SHA |
@@ -38,15 +38,16 @@
 | HL-108 | 2026-03-24-net-student-profiles.md | DONE | 32706fd |
 | HL-109 | 2026-03-24-night-session-permissions-fix.md | DONE | cd1897b |
 | HL-110 | 2026-03-24-repo-consolidation.md | DONE | fa4c9b1 |
-| HL-111 | 2026-03-24-website-netpet-consolidation.md | PENDING | - |
+| HL-111 | 2026-03-24-website-netpet-consolidation.md | DONE | b1f7515 |
 | HL-112 | 2026-03-24-website-recovery-master-sync-simulation.md | PENDING | - |
 | HL-113+ | remaining Wave 8 files (2026-03-25+) | PENDING | - |
 
-## HL-111 Target
-- **Source:** `2026-03-24-website-netpet-consolidation.md`
-- **Destination:** CANON/HEAVY-LEDGER/HL-111-website-netpet-consolidation.json
+## HL-112 Target
+- **Source:** `2026-03-24-website-recovery-master-sync-simulation.md`
+- **Destination:** CANON/HEAVY-LEDGER/HL-112-website-recovery-master-sync-simulation.json
 
 ## Notes
-- HL-110 converted: FOUNDATIONS-tier, HIGH signal (3🔴, 2🟡, 1🟢), 6 quotes, 5 decisions, 2 corrections, 3 principles. Critical session: L09 ORIGIN (agent handles git), L11 ORIGIN (everything into Ultimate), L27 ORIGIN (dual-publish mandate). Trigger audit + 10 improvements + repo consolidation migration.
+- HL-111 converted: EXECUTION-tier, HIGH signal (5🔴, 5🟡, 3🟢), 13 quotes, 8 decisions, 1 correction, 4 principles. Key session: website+NET-PET consolidation, 5-point consolidation law, hub-and-spoke connector architecture origin, Cloudflare deploy pipeline, use-what-you-have doctrine, L30 CONNECTOR_FIRST_AUDIT seed, preservation-over-destruction correction.
 - **MILESTONE: 101 total HL entries reached Run 251.**
 - **110 total HL entries reached Run 256.**
+- **111 total HL entries reached Run 257.**
