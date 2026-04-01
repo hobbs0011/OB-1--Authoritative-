@@ -19,9 +19,17 @@ class_name = "ProfileDO"
 name = "PETS"
 class_name = "PetDO"
 
+[[durable_objects.bindings]]
+name = "LEDGER"
+class_name = "LedgerDO"
+
 [[migrations]]
 tag = "v1-net-pet-core"
 new_sqlite_classes = ["SessionDO", "ProfileDO", "PetDO"]
+
+[[migrations]]
+tag = "v2-ledger"
+new_sqlite_classes = ["LedgerDO"]
 
 [vars]
 APP_NAME = "Natural English Training"
