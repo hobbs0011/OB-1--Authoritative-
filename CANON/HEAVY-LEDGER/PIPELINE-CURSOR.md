@@ -1,13 +1,13 @@
 # HEAVY LEDGER PIPELINE CURSOR
 
 ## Current Position
-- **Next Target:** HL-105
+- **Next Target:** HL-106
 - **Wave:** 8
-- **Wave Progress:** 20/46 complete
-- **Total Converted:** 100/174+
-- **Last Completed:** HL-104 deployment-claim-audit (2 RED quotes, 2 decisions, 1 correction, EXECUTION-tier — L08 TRY_BEFORE_DECLINING origin event)
-- **Last Commit:** 2cf3e36cea592e1bc5cf06af1622b95bdcf7eae2
-- **Last Run:** 250 (2026-04-02 00:30 ICT)
+- **Wave Progress:** 21/46 complete
+- **Total Converted:** 101/174+
+- **Last Completed:** HL-105 gospel-444-consolidation (3 RED quotes, 6 decisions, 0 corrections, FOUNDATIONS-tier — dual-publish mandate, 15-source consolidation pattern)
+- **Last Commit:** afa9a5e60f78f489d3598aced31636f3628d3342
+- **Last Run:** 251 (2026-04-02 01:00 ICT)
 
 ## Wave 8 Manifest (HL-085 → HL-130)
 | HL-ID | Source File | Status | Commit SHA |
@@ -32,11 +32,12 @@
 | HL-102 | 2026-03-24-agent0-triad-reincarnation.md | DONE | a9f59a1 |
 | HL-103 | 2026-03-24-chat-preservation-local-repo.md | DONE | 2766d8b |
 | HL-104 | 2026-03-24-deployment-claim-audit.md | DONE | 2cf3e36 |
-| HL-105+ | remaining Wave 8 files | PENDING | - |
+| HL-105 | 2026-03-24-gospel-444-consolidation.md | DONE | afa9a5e |
+| HL-106+ | remaining Wave 8 files | PENDING | - |
 
-## HL-105 Target
-- **Source:** 2026-03-24-gospel-444-consolidation.md (next 2026-03-24 file after deployment-claim-audit)
-- **Destination:** CANON/HEAVY-LEDGER/HL-105-gospel-444-consolidation.json
+## HL-106 Target
+- **Source:** Next 2026-03-24 file after gospel-444-consolidation (check CANON/REINCARNATION/ directory listing)
+- **Destination:** CANON/HEAVY-LEDGER/HL-106-[tag].json
 
 ## Notes
 - HL-100 original manifest entry was `ssm-v6-heavy-ledger-birth.md` which does not exist in CANON/REINCARNATION/. Substituted with `system-hardening.md` — the first reincarnation entry ever created.
@@ -44,4 +45,5 @@
 - HL-102 converted: GENESIS-tier — triad architecture origin, REINCARNATE/RISE/SUPER_SAIYAN command words crystallized, 3_PHASE_COMMIT born from bootstrap law.
 - HL-103 converted: FOUNDATIONS-tier — Phoenix-Rising-Ultimate repo NAMED here, preservation-before-delete doctrine, local fallback principle established.
 - HL-104 converted: EXECUTION-tier — L08 TRY_BEFORE_DECLINING ORIGIN EVENT, verification-before-decline doctrine, repo truth outranks assumption principle. Light but high-signal correction (frustrated Michael).
-- **MILESTONE: 100 total HL entries converted.**
+- HL-105 converted: FOUNDATIONS-tier — dual-publish mandate (L27) ORIGIN EVENT, Gospel 444 consolidated (15 sources → 37KB), GALAXY-LESSONS/ established, "1&2" = always both platforms. 3 RED, 6 decisions, 4 principles.
+- **MILESTONE: 101 total HL entries converted.**
