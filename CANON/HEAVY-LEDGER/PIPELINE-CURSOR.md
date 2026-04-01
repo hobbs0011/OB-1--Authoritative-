@@ -1,13 +1,13 @@
 # HEAVY LEDGER PIPELINE CURSOR
 
 ## Current Position
-- **Next Target:** HL-112
+- **Next Target:** HL-113
 - **Wave:** 8
-- **Wave Progress:** 27/46 complete
-- **Total Converted:** 111/174+
-- **Last Completed:** HL-111 website-netpet-consolidation (13 quotes, 8 decisions, 1 correction, HIGH signal — EXECUTION-tier, hub-and-spoke architecture origin, 5-point consolidation law, connector-first audit seed, use-what-you-have doctrine)
-- **Last Commit:** b1f751537120cb1ed155c4d83afea4462dda5983
-- **Last Run:** 257 (2026-04-02 04:00 ICT)
+- **Wave Progress:** 28/46 complete
+- **Total Converted:** 112/174+
+- **Last Completed:** HL-112 website-recovery-master-sync-simulation (6 quotes, 4 decisions, 1 correction, MEDIUM signal — EXECUTION-tier, simulation-as-L08 implementation, master-sync-pattern origin, turn-key preparation pattern)
+- **Last Commit:** 5618a29ffa86b8d4afe41ea60e32803880b49d1b
+- **Last Run:** 258 (2026-04-02 04:30 ICT)
 
 ## Wave 8 Manifest (HL-085 → HL-130)
 | HL-ID | Source File | Status | Commit SHA |
@@ -39,15 +39,15 @@
 | HL-109 | 2026-03-24-night-session-permissions-fix.md | DONE | cd1897b |
 | HL-110 | 2026-03-24-repo-consolidation.md | DONE | fa4c9b1 |
 | HL-111 | 2026-03-24-website-netpet-consolidation.md | DONE | b1f7515 |
-| HL-112 | 2026-03-24-website-recovery-master-sync-simulation.md | PENDING | - |
+| HL-112 | 2026-03-24-website-recovery-master-sync-simulation.md | DONE | 5618a29 |
 | HL-113+ | remaining Wave 8 files (2026-03-25+) | PENDING | - |
 
-## HL-112 Target
-- **Source:** `2026-03-24-website-recovery-master-sync-simulation.md`
-- **Destination:** CANON/HEAVY-LEDGER/HL-112-website-recovery-master-sync-simulation.json
+## HL-113 Target
+- **Source:** next 2026-03-25 entry from CANON/REINCARNATION/
+- **Destination:** CANON/HEAVY-LEDGER/HL-113-*.json
 
 ## Notes
-- HL-111 converted: EXECUTION-tier, HIGH signal (5🔴, 5🟡, 3🟢), 13 quotes, 8 decisions, 1 correction, 4 principles. Key session: website+NET-PET consolidation, 5-point consolidation law, hub-and-spoke connector architecture origin, Cloudflare deploy pipeline, use-what-you-have doctrine, L30 CONNECTOR_FIRST_AUDIT seed, preservation-over-destruction correction.
+- HL-112 converted: EXECUTION-tier, MEDIUM signal (2🔴, 2🟡, 2🟢), 6 quotes, 4 decisions, 1 correction, 4 principles. Key session: website recovery with blocked access, simulation-as-L08 implementation, master sync markdown as shared control plane, reverse-engineer-now-activate-later pattern, full repo+log sweep into single master document.
 - **MILESTONE: 101 total HL entries reached Run 251.**
 - **110 total HL entries reached Run 256.**
-- **111 total HL entries reached Run 257.**
+- **112 total HL entries reached Run 258.**
