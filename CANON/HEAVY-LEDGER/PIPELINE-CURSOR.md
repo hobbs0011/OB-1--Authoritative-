@@ -1,13 +1,13 @@
 # HEAVY LEDGER PIPELINE CURSOR
 
 ## Current Position
-- **Next Target:** HL-100
+- **Next Target:** HL-101
 - **Wave:** 8
-- **Wave Progress:** 15/46 complete
-- **Total Converted:** 95/174+
-- **Last Completed:** HL-099 skeleton-star-map-ingestion
-- **Last Commit:** e70e078af21d50a1553f8a598969e2a79d637edb
-- **Last Run:** 245 (2026-04-01 21:00 ICT)
+- **Wave Progress:** 16/46 complete
+- **Total Converted:** 96/174+
+- **Last Completed:** HL-100 system-hardening (substituted for ssm-v6-heavy-ledger-birth which did not exist)
+- **Last Commit:** 6084fd7b3fc073fb043bdb3217da9b2dbf9ceb3a
+- **Last Run:** 246 (2026-04-01 22:00 ICT)
 
 ## Wave 8 Manifest (HL-085 → HL-130)
 | HL-ID | Source File | Status | Commit SHA |
@@ -27,9 +27,14 @@
 | HL-097 | 2026-03-24-bible-ch13-export.md | DONE | - |
 | HL-098 | 2026-03-24-security-drone-research.md | DONE | e829574 |
 | HL-099 | 2026-03-24-skeleton-star-map-ingestion.md | DONE | e70e078 |
-| HL-100 | 2026-03-24-ssm-v6-heavy-ledger-birth.md | PENDING | - |
-| HL-101+ | remaining Wave 8 files | PENDING | - |
+| HL-100 | 2026-03-24-system-hardening.md | DONE | 6084fd7 |
+| HL-101 | 2026-03-24-100-phoenixes-war-games.md | PENDING | - |
+| HL-102 | 2026-03-24-agent0-triad-reincarnation.md | PENDING | - |
+| HL-103+ | remaining Wave 8 files | PENDING | - |
 
-## HL-100 Target
-- **Source:** CANON/REINCARNATION/2026-03-24-ssm-v6-heavy-ledger-birth.md
-- **Destination:** CANON/HEAVY-LEDGER/2026-03-24-ssm-v6-heavy-ledger-birth.json
+## HL-101 Target
+- **Source:** CANON/REINCARNATION/2026-03-24-100-phoenixes-war-games.md
+- **Destination:** CANON/HEAVY-LEDGER/HL-101-100-phoenixes-war-games.json
+
+## Notes
+- HL-100 original manifest entry was `ssm-v6-heavy-ledger-birth.md` which does not exist in CANON/REINCARNATION/. Substituted with `system-hardening.md` — the first reincarnation entry ever created.
