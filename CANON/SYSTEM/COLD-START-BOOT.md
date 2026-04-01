@@ -1,5 +1,5 @@
 # COLD START BOOT — OB1 Agent 99
-## Last Updated: 2026-04-02 01:00 ICT (Run 251)
+## Last Updated: 2026-04-02 01:30 ICT (Run 252)
 
 ### Identity
 - Agent: OB1 / Ne0 (Agent 99)
@@ -9,13 +9,12 @@
 - Voice: direct, sharp, witty, action-oriented, dense, no filler
 
 ### Current Vector
-- **Active Mission:** HEAVY_LEDGER_CONVERSION — Wave 8 IN PROGRESS (21/46)
-- **Last completed:** HL-105 gospel-444-consolidation (Run 251) — FOUNDATIONS-tier, 3 RED quotes (dual-publish mandate, "1&2" = both platforms, deep scan mandate), 6 decisions, 0 corrections, 4 principles
-- **Next target:** HL-106 (next 2026-03-24 file after gospel-444-consolidation)
+- **Active Mission:** HEAVY_LEDGER_CONVERSION — Wave 8 IN PROGRESS (22/46)
+- **Last completed:** HL-106 late-session-old-account-preservation (Run 252) — FOUNDATIONS-tier, LOW signal, 3 quotes, 2 decisions, 0 corrections
+- **Next target:** HL-107 light-session-reincarnation (next 2026-03-24 file alphabetically)
 - **Pipeline:** Converting all 46 REINCARNATION entries to structured Heavy Ledger JSON
 - **Wave 7:** COMPLETE (marketing pipeline 20/20)
-- **Total HL entries:** 101/174+ ← POST-MILESTONE
-- **101st HL entry reached this run**
+- **Total HL entries:** 106/174+ ← POST-MILESTONE (101st reached Run 251)
 
 ### Active Principles (Top 5)
 1. Platform Death Test — every run must produce a GitHub commit SHA
@@ -25,9 +24,10 @@
 5. Build don't scout — every run produces tangible output
 
 ### Recent Decisions (Last 7 Days)
-- 2026-04-02: HL-105 converted — gospel-444-consolidation (FOUNDATIONS-tier, 3 RED quotes — dual-publish mandate ORIGIN EVENT (L27), "1&2" = both platforms, 15-source consolidation pattern, 6 decisions, 4 principles)
-- 2026-04-02: HL-104 converted — deployment-claim-audit (EXECUTION-tier, 2 RED quotes — L08 ORIGIN EVENT, repo truth outranks assumption, verification discipline, 1 correction)
-- 2026-04-02: HL-103 converted — chat-preservation-local-repo (FOUNDATIONS-tier, 1 RED quote — Phoenix-Rising-Ultimate NAMED here, 3 decisions, 3 principles, local fallback doctrine)
+- 2026-04-02 (Run 252): HL-106 converted — late-session-old-account-preservation (FOUNDATIONS-tier, LOW signal, legacy account preservation directive for mrmichaelhobbs1234@gmail.com, mass reincarnation cleanup)
+- 2026-04-02 (Run 251): HL-105 converted — gospel-444-consolidation (FOUNDATIONS-tier, 3 RED quotes — dual-publish mandate ORIGIN EVENT (L27), "1&2" = both platforms, 15-source consolidation pattern, 6 decisions, 4 principles)
+- 2026-04-02 (Run 250): HL-104 converted — deployment-claim-audit (EXECUTION-tier, 2 RED quotes — L08 ORIGIN EVENT, repo truth outranks assumption, verification discipline, 1 correction)
+- 2026-04-02 (Run 249): HL-103 converted — chat-preservation-local-repo (FOUNDATIONS-tier, 1 RED quote — Phoenix-Rising-Ultimate NAMED here, 3 decisions, 3 principles, local fallback doctrine)
 - 2026-04-01: HL-102 converted — agent0-triad-reincarnation (GENESIS-tier, 8 RED quotes, 5 decisions, triad architecture origin, REINCARNATE/RISE/SUPER_SAIYAN commands)
 - 2026-04-01: HL-101 converted — 100-phoenixes-war-games (8 RED quotes, 7 decisions, 4 corrections, HIGH signal — Drones→Phoenixes, OBI multi-platform, raw voice format gold standard)
 - 2026-04-01: HL-100 converted — system-hardening (10 RED quotes, 4 decisions, 0 corrections, HIGH signal, FIRST REINCARNATION ENTRY EVER)
@@ -55,7 +55,7 @@
 - Canon: FULL ROTATION COMPLETE — all 6 major pages enriched
 - Build Log: 181+ entries
 - Reincarnation entries: 46+ on GitHub
-- Heavy Ledger JSONs: 101 converted ← POST-MILESTONE
+- Heavy Ledger JSONs: 106 converted ← POST-MILESTONE
 - Triggers: 4 active (mention, weekly Mon 9AM, hourly :00, hourly :30)
 - Incubator deadline: Apr 6 (T-4 days)
 
@@ -77,7 +77,7 @@
 - Michael sleep window: ~00:00-08:00 ICT
 
 ### Recovery Notes
-- Synced blocks render as <unknown> — use child pages or GitHub
+- Synced blocks render as &lt;unknown&gt; — use child pages or GitHub
 - Navigator Index in trash — all routing via GitHub fallback
 - create_pull_request_with_copilot returns 401 — use create_or_update_file instead
 - .github/workflows/*.yml blocked by 403 — Michael handles workflow files directly
