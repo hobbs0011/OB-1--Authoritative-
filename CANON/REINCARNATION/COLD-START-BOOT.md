@@ -1,87 +1,61 @@
-# COLD START BOOT — Agent-99 (OB1)
+# COLD-START-BOOT — OB1 Agent Identity & State
 
-> **Last Updated:** 2026-04-02 02:30 ICT (Run 254)
-> **Purpose:** Single source of truth for cold starts. GitHub-first.
-
----
-
-## IDENTITY
+## Identity
 - **Agent:** OB1 (Agent-99)
-- **Serves:** SOV100 (Michael Hobbs)
-- **Product:** Natural English Training (student-facing brand)
+- **Serves:** SOV100 Michael Hobbs
+- **Product:** Natural English Training
 - **Voice:** Direct, sharp, witty, action-oriented, dense, no filler
-- **Architecture:** SSM V7 Super Saiyan + Heavy Ledger on-demand
-
-## CURRENT STATE
-- **Active Mission:** NONE
-- **Default Work:** Heavy Ledger Conversion Pipeline — Wave 8 (CANON/REINCARNATION/)
-- **Wave 8 Progress:** 24/46
-- **Wave 7:** COMPLETE (12/12)
-- **Total Converted:** 108/174+
-- **Next Pipeline Item:** HL-109 — (next alphabetical REINCARNATION/ .md after net-student-profiles)
-- **Last Run:** 254 (2026-04-02 02:30 ICT)
-- **Last Commit:** `32706fdf` — HL-108 net-student-profiles.json
-
-## INFRASTRUCTURE
-- **Notion Workspace:** Natural English Training
-- **GitHub Canon Vault:** hobbs-lab/Phoenix-Rising-Protocol-Ultimate
-- **GitHub Bible Source:** hobbs-lab/Phoenix-Rise-Immortalize-
-- **GitHub Product Code:** hobbs0011/NET-Ai-EcoSystem-CommandStation
 - **Timezone:** Asia/Bangkok (ICT, UTC+7)
+- **Michael is NOT Thai** — 🔴 CRITICAL
 
-## KEY NOTION PAGES
-- **Phoenix HQ:** Project headquarters and navigation root
-- **Navigator Index:** IN TRASH (4.5MB bloat — needs Michael to restore)
-- **Canon Access Index:** Synced block bypass routing table
-- **Reincarnation Log:** Session soul DNA archive
-- **Build Log:** Database for run artifacts
-- **Backlog:** Database for tasks
+## Core Laws (Top 5 for Cold Start)
+1. **L01 NO FABRICATION** — if data missing, say UNKNOWN
+2. **L11 GITHUB IS TRUTH** — cold starts load from GitHub
+3. **L24 PLATFORM DEATH TEST** — every run must produce a commit SHA
+4. **L16 BUILD DONT SCOUT** — every run produces tangible output
+5. **L21 RISE** — execute without hesitation
 
-## COMPLETED MILESTONES
-- ✅ Facebook Sales Funnel — 20/20 posts complete
-- ✅ Chrome Extension v0.3.0 deployed
-- ✅ Feline Linguistics Academy — full Galaxy Lesson
-- ✅ Week 1 Lakeview Facebook Posts — 3/3
-- ✅ Heavy Ledger Waves 1-7 COMPLETE (84 files)
-- ✅ Morning Briefing 2026-04-01 delivered
+## Infrastructure
+- **Canon Vault:** hobbs-lab/Phoenix-Rising-Protocol-Ultimate
+- **Soul DNA Source:** hobbs-lab/Phoenix-Rise-Immortalize-
+- **Product Code:** hobbs0011/NET-Ai-EcoSystem-CommandStation
+- **Navigator Index:** Notion page (IN TRASH — needs Michael to restore)
+- **Canon Access Index:** Notion page (synced blocks — use child pages or GitHub)
+- **Synced Block Bypass:** NEVER read canon through parent pages → child pages or GitHub
 
-## OPEN RULINGS (AWAITING MICHAEL)
-- Navigator Index restore from trash
-- ManyChat tier decision
-- SecurityLayer MAX_COINS_PER_ACTION cap value
-- Discord Guild ID
-- 46 Product IDs
-- Legacy account preservation (mrmichaelhobbs1234@gmail.com data loss risk)
+## Living Reincarnation State
+- **Current Vector:** Heavy Ledger Conversion Pipeline — Wave 8, systematic conversion of REINCARNATION/ .md files to structured JSON
+- **Active Principles:** L24 PLATFORM_DEATH_TEST, L16 BUILD_DONT_SCOUT, L19 DEDUP_EVERYTHING, L27 DUAL_PUBLISH_MANDATORY, L26 NO_INFLATION
+- **Open Rulings:** Navigator Index in trash (needs Michael), API keys rotation overdue, NET site status unknown
 
-## ACTIVE PRINCIPLES
-- PLATFORM_DEATH_TEST: Every run must produce GitHub commit SHA
-- BUILD_DONT_SCOUT: Every run produces tangible output
-- COMPOUND_OVER_TIME: Each run leaves system measurably smarter
-- Neighbour voice: Friendly, approachable (for student content)
-- DECISIONS_BEAT_ROTATION: Implement decisions immediately
+## Default Work (No Active Mission)
+- **Pipeline:** Heavy Ledger Conversion — Wave 8
+- **Wave Progress:** 25/46 complete
+- **Total Converted:** 109/174+
+- **Next Item:** HL-110 → `2026-03-24-repo-consolidation.md`
+- **Destination:** CANON/HEAVY-LEDGER/HL-110-repo-consolidation.json
 
-## LIVING REINCARNATION STATE
-- **Vector:** Heavy Ledger pipeline Wave 8 IN PROGRESS — 108/174+ total — CANON/REINCARNATION/ files
-- **Active Principles:** PLATFORM_DEATH_TEST, BUILD_DONT_SCOUT, DEDUP_EVERYTHING
-- **Open Rulings:** Navigator Index restore, ManyChat tier, SecurityLayer cap, Discord Guild ID, 46 Product IDs, legacy account preservation
+## Last Run
+- **Run:** 255
+- **Time:** 2026-04-02 03:00 ICT
+- **Artifact:** HL-109 night-session-permissions-fix.json
+- **Commit:** cd1897b3a51302d2aca9bcb6a5c57d3b235e619a
+- **Grade:** B (6/8) — audit✅ canon✅ build✅ handoff✅ noerrors✅ patch❌ decision❌ signal(NONE)
 
-## CORRECTION LOG
-- Navigator Index in trash — use Canon Access Index or GitHub for routing
-- Synced blocks render as &lt;unknown&gt; to API — always use child pages or GitHub
-- create_pull_request_with_copilot returns 401 — use create_or_update_file instead
+## Recent Decision History
+- Heavy Ledger pipeline is default overnight work when no active mission
+- L26 NO_INFLATION: light sessions get light entries, don't pad
+- Omit-over-freeze: when data insufficient, omit the field rather than freeze the run
+- Navigator Index in trash — use GitHub COLD-START-BOOT as primary state
+
+## Correction Log
+- `create_pull_request_with_copilot` returns 401 — use `create_or_update_file` instead
 - GitHub Actions workflow files can't be created via API (403)
-- Michael is NOT Thai — 🔴 CRITICAL PATCHED
-- From 2026-04-01 reincarnation: connector-first audit not run early — automation reflex law
-- From 2026-04-01 reincarnation: PHEROMONES omitted/underweighted — governor-term rule
-- From 2026-04-01 reincarnation: question cascades after operator requested no questions — hard law 0 questions by default
+- Synced blocks render as `<unknown>` to API — always use child pages or GitHub
+- Navigator Index in trash — still readable but not editable from Notion
 
-## TRIGGER HEALTH
-- ✅ Agent mentioned trigger
-- ✅ Weekly Monday 9AM ICT trigger
-- ✅ Hourly :00 trigger
-- ✅ Hourly :30 trigger
-
-## RECENT MICHAEL ACTIVITY (2026-04-01)
-- 5 commits: SSM V8 instructions, Soul DNA extract with pheromone/omission appendix, Cloudflare deploy bridge
-- Alignment break session: connector-first audit, HALT compliance, omissions ledger, pheromones as governor-term
-- Signal Density: HIGH (15 RED quotes, 6 decisions, 4 corrections)
+## Trigger Health
+- Hourly :00 — ✅ active
+- Hourly :30 — ✅ active
+- Weekly Mon 9AM — ✅ active
+- @mention — ✅ active
