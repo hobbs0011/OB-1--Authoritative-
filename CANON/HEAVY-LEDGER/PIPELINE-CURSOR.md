@@ -1,13 +1,13 @@
 # HEAVY LEDGER PIPELINE CURSOR
 
 ## Current Position
-- **Next Target:** HL-103
+- **Next Target:** HL-104
 - **Wave:** 8
-- **Wave Progress:** 18/46 complete
-- **Total Converted:** 98/174+
-- **Last Completed:** HL-102 agent0-triad-reincarnation (8 RED quotes, 5 decisions, 4 principles, 3 commands, GENESIS-tier — triad architecture origin)
-- **Last Commit:** a9f59a1430f7b5b40768244ca54d2bce30d0e755
-- **Last Run:** 248 (2026-04-01 23:30 ICT)
+- **Wave Progress:** 19/46 complete
+- **Total Converted:** 99/174+
+- **Last Completed:** HL-103 chat-preservation-local-repo (1 RED quote, 3 decisions, 3 principles, FOUNDATIONS-tier — Phoenix-Rising-Ultimate naming moment)
+- **Last Commit:** 2766d8b1ca3ff3b0e1e897ddca59a1a797dd58f0
+- **Last Run:** 249 (2026-04-02 00:00 ICT)
 
 ## Wave 8 Manifest (HL-085 → HL-130)
 | HL-ID | Source File | Status | Commit SHA |
@@ -30,14 +30,15 @@
 | HL-100 | 2026-03-24-system-hardening.md | DONE | 6084fd7 |
 | HL-101 | 2026-03-24-100-phoenixes-war-games.md | DONE | 850b175 |
 | HL-102 | 2026-03-24-agent0-triad-reincarnation.md | DONE | a9f59a1 |
-| HL-103 | 2026-03-24-chat-preservation-local-repo.md | PENDING | - |
+| HL-103 | 2026-03-24-chat-preservation-local-repo.md | DONE | 2766d8b |
 | HL-104+ | remaining Wave 8 files | PENDING | - |
 
-## HL-103 Target
-- **Source:** CANON/REINCARNATION/2026-03-24-chat-preservation-local-repo.md
-- **Destination:** CANON/HEAVY-LEDGER/HL-103-chat-preservation-local-repo.json
+## HL-104 Target
+- **Source:** Next 2026-03-24 file after chat-preservation-local-repo in CANON/REINCARNATION/
+- **Destination:** CANON/HEAVY-LEDGER/HL-104-{session-tag}.json
 
 ## Notes
 - HL-100 original manifest entry was `ssm-v6-heavy-ledger-birth.md` which does not exist in CANON/REINCARNATION/. Substituted with `system-hardening.md` — the first reincarnation entry ever created.
 - HL-101 converted: HIGH signal session — 100 Phoenixes deployment, Drones→Phoenixes terminology shift, OBI multi-platform vision, 4 corrections (DNA=FAIL, orchestrator role, no zoom out, raw payload format).
 - HL-102 converted: GENESIS-tier — triad architecture origin, REINCARNATE/RISE/SUPER_SAIYAN command words crystallized, 3_PHASE_COMMIT born from bootstrap law.
+- HL-103 converted: FOUNDATIONS-tier — Phoenix-Rising-Ultimate repo NAMED here, preservation-before-delete doctrine, local fallback principle established.
