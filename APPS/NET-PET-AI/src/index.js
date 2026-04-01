@@ -1,48 +1,53 @@
-// src/index.js — NET-PET-AI Cloudflare Worker v1.1
+// src/index.js — NET-PET-AI Cloudflare Worker v1.2
 // Natural English Training — Obi AI English Coach
-// Bindings: SESSIONS (SessionDO), PROFILES (ProfileDO), PETS (PetDO), ASSETS
+// Architecture: Agent100 → Magic Chat → Agent99 (Obi) → Cryptographic Immutable Ledger
+// Bindings: SESSIONS (SessionDO), PROFILES (ProfileDO), PETS (PetDO), LEDGER (LedgerDO), ASSETS
 // Secrets: DEEPSEEK_API_KEY, DEEPGRAM_API_KEY
 
-const VERSION = "1.1.0";
+const VERSION = "1.2.0";
 
-// ── Obi System Prompt ─────────────────────────────────────
-// L03: VERBATIM_FIRST — this is the soul of Obi, never dilute
+// ── Obi System Prompt (Soul DNA — verbatim first, never dilute) ───────────────
 const OBI_SYSTEM = `You are OBI, the AI English coach for Natural English Training in Vietnam. Founded by Michael Hobbs, a Canadian educator in Ho Chi Minh City.
 
 COACHING IDENTITY:
 - Voice: Mouse to Tiger. Permission over perfection. Volume over grammar.
-- Students arrive as Mice (scared, silent, face-saving mode) → your job is to pull the Tiger out.
+- Students arrive as Mice (scared, silent, face-saving mode) — your job is to pull the Tiger out.
 - Anti-shame doctrine: never make students feel stupid. Calibrate, shift, upgrade — never "wrong", "bad", "fail".
 - Tough love: direct, warm, encouraging. Correct mistakes by showing the right version naturally, not clinically.
 - Keep responses SHORT unless the student needs more. Max 2-3 sentences by default.
 - When students write Vietnamese, respond primarily in English with a brief Vietnamese note if helpful.
 - Never break character. Never be corporate or robotic. You are a coach, not a grammar checker.
 
-STUDENT PROGRESSION LEVELS:
-🐭 Mouse (0-10 messages): fragile, freeze-prone, needs permission to speak
-🐱 Cat (11-50): finding their voice, needs encouragement  
-🐺 Wolf (51-200): building confidence, can handle pushback
-🐯 Tiger (201+): speaking English like a weapon, not a subject
+STUDENT PROGRESSION:
+Mouse (0-10): fragile, freeze-prone, needs permission to speak
+Cat (11-50): finding their voice, needs encouragement
+Wolf (51-200): building confidence, can handle pushback
+Tiger (201+): speaking English like a weapon, not a subject
 
 MICHAEL'S METHOD:
 - No Freezy Rule: if student goes silent, count down from 5 → any word beats perfect silence
 - The Deal: 30 minutes focused → rest is theirs
 - Christmas Certainty: success is a scheduled event, not a gamble
-- Listening first: 1 hour natural English daily, comprehensible input, American accent, no Vietnamese subtitles
+- Listening first: 1 hour natural English daily, comprehensible input, American accent
 
 REMEMBER: The chat IS the magic. Every tap, every word, every victory is an actionable event.`;
+
+// ── Cryptographic hash (SHA-256 via SubtleCrypto — Cloudflare Workers native) ─
+async function computeHash(data) {
+  const encoded = new TextEncoder().encode(String(data));
+  const hashBuffer = await crypto.subtle.digest("SHA-256", encoded);
+  return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, "0")).join("");
+}
 
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
     const path = url.pathname;
 
-    // CORS preflight
     if (request.method === "OPTIONS") {
       return new Response(null, { headers: corsHeaders() });
     }
 
-    // API routes
     if (path.startsWith("/api/")) {
       try {
         const res = await handleAPI(path, request, env, url);
@@ -52,50 +57,94 @@ export default {
       }
     }
 
-    // Static assets
     return env.ASSETS.fetch(request);
   },
 };
 
-// ── API Router ────────────────────────────────────────────
+// ── API Router ────────────────────────────────────────────────────────────────
 
 async function handleAPI(path, request, env, url) {
   const method = request.method;
 
+  // Health
   if (path === "/api/health" && method === "GET") {
-    return json({ ok: true, version: VERSION, app: env.APP_NAME || "Natural English Training", coach: env.APP_COACH_NAME || "Obi", ts: Date.now(), routes: 13 });
+    return json({ ok: true, version: VERSION, app: env.APP_NAME || "Natural English Training", coach: env.APP_COACH_NAME || "Obi", ts: Date.now(), routes: 16, ledger: "active" });
   }
 
+  // Chat — Obi + Ledger context injection
   if (path === "/api/chat" && method === "POST") { const body = await request.json(); return handleChat(body, env); }
+
+  // TTS
   if (path === "/api/tts" && method === "POST") { const body = await request.json(); return handleTTS(body, env); }
+
+  // Onboarding
   if (path === "/api/onboarding" && method === "POST") { const body = await request.json(); return handleOnboarding(body, env); }
+
+  // Memory
   if (path === "/api/memory" && method === "POST") { const body = await request.json(); return handleMemorySave(body, env); }
-  if (path === "/api/memory" && method === "GET") { const studentId = url.searchParams.get("studentId") || ""; return handleMemoryGet(studentId, env); }
+  if (path === "/api/memory" && method === "GET") { return handleMemoryGet(url.searchParams.get("studentId") || "", env); }
+
+  // Lesson / Practice / Feedback
   if (path === "/api/lesson" && method === "POST") { const body = await request.json(); return handleLesson(body, env); }
   if (path === "/api/practice" && method === "POST") { const body = await request.json(); return handlePractice(body, env); }
   if (path === "/api/feedback" && method === "POST") { const body = await request.json(); return handleFeedback(body, env); }
+
+  // NET Pet
   if (path === "/api/netpet/checkin" && method === "POST") { const body = await request.json(); return handlePetCheckin(body, env); }
-  if (path === "/api/netpet/state" && method === "GET") { const studentId = url.searchParams.get("studentId") || ""; return handlePetState(studentId, env); }
+  if (path === "/api/netpet/state" && method === "GET") { return handlePetState(url.searchParams.get("studentId") || "", env); }
+
+  // Classroom
   if (path === "/api/classroom/session/start" && method === "POST") { const body = await request.json(); return handleClassStart(body, env); }
   if (path === "/api/classroom/event" && method === "POST") { const body = await request.json(); return handleClassEvent(body, env); }
-  if (path === "/api/classroom/session" && method === "GET") { const classId = url.searchParams.get("classId") || ""; const ts = parseInt(url.searchParams.get("totalStudents") || "40"); return handleClassSession(classId, ts, env); }
-  if (path === "/api/classroom/report" && method === "GET") { const classId = url.searchParams.get("classId") || ""; const ts = parseInt(url.searchParams.get("totalStudents") || "40"); return handleClassReport(classId, ts, env); }
+  if (path === "/api/classroom/session" && method === "GET") { return handleClassSession(url.searchParams.get("classId") || "", parseInt(url.searchParams.get("totalStudents") || "40"), env); }
+  if (path === "/api/classroom/report" && method === "GET") { return handleClassReport(url.searchParams.get("classId") || "", parseInt(url.searchParams.get("totalStudents") || "40"), env); }
+
+  // Cryptographic Immutable Ledger
+  if (path === "/api/ledger/append" && method === "POST") { const body = await request.json(); return handleLedgerAppend(body, env); }
+  if (path === "/api/ledger/history" && method === "GET") { return handleLedgerHistory(url.searchParams.get("studentId") || "", parseInt(url.searchParams.get("limit") || "50"), env); }
+  if (path === "/api/ledger/verify" && method === "GET") { return handleLedgerVerify(url.searchParams.get("studentId") || "", env); }
 
   return json({ error: "Not found" }, 404);
 }
 
-// ── Chat (DeepSeek + Obi system prompt) ──────────────────
+// ── Chat (DeepSeek + Obi + Ledger memory injection) ──────────────────────────
 
 async function handleChat(body, env) {
   const apiKey = env.DEEPSEEK_API_KEY;
   if (!apiKey) return json({ error: "DEEPSEEK_API_KEY not configured" }, 500);
 
-  const messages = Array.isArray(body.messages) ? [...body.messages] : [];
+  const studentId = body.studentId || "anonymous";
+  let messages = Array.isArray(body.messages) ? [...body.messages] : [];
 
-  // Inject Obi system prompt server-side if not already present
+  // ── Pull Ledger context (Obi's unparalleled student memory) ──────────────
+  let ledgerContext = "";
+  if (studentId !== "anonymous" && env.LEDGER) {
+    try {
+      const stub = env.LEDGER.get(env.LEDGER.idFromName(studentId));
+      const histRes = await stub.fetch(new Request("https://do/history?limit=15"));
+      const histData = await histRes.json();
+      if (histData.entries && histData.entries.length > 0) {
+        const lines = histData.entries
+          .filter(e => e.event_type === "chat_exchange")
+          .slice(-10)
+          .map(e => {
+            try {
+              const p = JSON.parse(e.payload);
+              return `Student: ${p.user}\nObi: ${p.obi}`;
+            } catch { return ""; }
+          })
+          .filter(Boolean);
+        if (lines.length > 0) {
+          ledgerContext = `\n\nSTUDENT LEDGER (${histData.entries.length} total exchanges — this is your unalterable memory of this student):\n${lines.join("\n---\n")}`;
+        }
+      }
+    } catch (_) {}
+  }
+
+  // Inject Obi system prompt with ledger context appended
   const hasSystem = messages.some(m => m.role === "system");
   if (!hasSystem) {
-    messages.unshift({ role: "system", content: OBI_SYSTEM });
+    messages.unshift({ role: "system", content: OBI_SYSTEM + ledgerContext });
   }
 
   const res = await fetch("https://api.deepseek.com/chat/completions", {
@@ -106,10 +155,19 @@ async function handleChat(body, env) {
 
   if (!res.ok) { const errText = await res.text(); return json({ error: `DeepSeek ${res.status}`, detail: errText }, 502); }
   const data = await res.json();
-  return json({ reply: data.choices?.[0]?.message?.content || "Say that again?" });
+  const reply = data.choices?.[0]?.message?.content || "Say that again?";
+
+  // ── Auto-write every exchange to the Cryptographic Immutable Ledger ───────
+  const userMsg = messages.filter(m => m.role === "user").pop()?.content || "";
+  if (studentId !== "anonymous" && env.LEDGER && userMsg) {
+    const payload = JSON.stringify({ user: userMsg, obi: reply });
+    appendToLedger(studentId, "chat_exchange", payload, env).catch(() => {});
+  }
+
+  return json({ reply, studentId, ledgerLoaded: !!ledgerContext });
 }
 
-// ── TTS (Deepgram Aura) ───────────────────────────────────
+// ── TTS (Deepgram Aura) ───────────────────────────────────────────────────────
 
 async function handleTTS(body, env) {
   const apiKey = env.DEEPGRAM_API_KEY;
@@ -125,15 +183,22 @@ async function handleTTS(body, env) {
   return new Response(res.body, { headers: { "Content-Type": "audio/mpeg", "Cache-Control": "public, max-age=3600", ...corsHeaders() } });
 }
 
-// ── Onboarding ────────────────────────────────────────────
+// ── Onboarding ────────────────────────────────────────────────────────────────
 
 async function handleOnboarding(body, env) {
   if (!body.studentId) return json({ error: "studentId required" }, 400);
   const stub = env.PROFILES.get(env.PROFILES.idFromName(body.studentId));
-  return stub.fetch(new Request("https://do/onboarding", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }));
+  const res = await stub.fetch(new Request("https://do/onboarding", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }));
+
+  // Ledger the onboarding event
+  if (env.LEDGER) {
+    const payload = JSON.stringify({ fullName: body.fullName, englishLevel: body.englishLevel, city: body.currentCity });
+    appendToLedger(body.studentId, "onboarding", payload, env).catch(() => {});
+  }
+  return res;
 }
 
-// ── Memory ────────────────────────────────────────────────
+// ── Memory (mutable scratch — Ledger is the permanent record) ────────────────
 
 async function handleMemorySave(body, env) {
   const studentId = body.studentId || "unknown";
@@ -147,20 +212,22 @@ async function handleMemoryGet(studentId, env) {
   return stub.fetch(new Request("https://do/memory/get"));
 }
 
-// ── Lesson / Practice / Feedback ─────────────────────────
+// ── Lesson / Practice / Feedback ─────────────────────────────────────────────
 
 async function handleLesson(body, env) {
   const apiKey = env.DEEPSEEK_API_KEY;
   if (!apiKey) return json({ error: "DEEPSEEK_API_KEY not configured" }, 500);
-  const prompt = `You are OBI. Generate a short English lesson for level ${body.level || "B1"} on topic: "${body.topic || "daily conversation"}". Keep it practical, energetic, under 200 words. Include 3 example sentences and 1 mini exercise. Anti-shame style. Mouse to Tiger framing.`;
+  const prompt = `You are OBI. Generate a short English lesson for level ${body.level || "B1"} on topic: "${body.topic || "daily conversation"}". Practical, energetic, under 200 words. 3 example sentences, 1 mini exercise. Anti-shame style. Mouse to Tiger framing.`;
   const res = await fetch("https://api.deepseek.com/chat/completions", {
     method: "POST",
-    headers: { "Content-Type": "application/json", "Authorization": `Bearer ${apiKey}` },
+    headers: { "Content-Type": "application/json", "Authorization": `Bearer ${env.DEEPSEEK_API_KEY}` },
     body: JSON.stringify({ model: "deepseek-chat", messages: [{ role: "system", content: OBI_SYSTEM }, { role: "user", content: prompt }], max_tokens: 500, temperature: 0.7 }),
   });
   if (!res.ok) return json({ error: `DeepSeek ${res.status}` }, 502);
   const data = await res.json();
-  return json({ lesson: data.choices?.[0]?.message?.content || "Lesson generation failed" });
+  const lesson = data.choices?.[0]?.message?.content || "Lesson generation failed";
+  if (body.studentId && env.LEDGER) appendToLedger(body.studentId, "lesson_generated", JSON.stringify({ topic: body.topic, level: body.level }), env).catch(() => {});
+  return json({ lesson });
 }
 
 async function handlePractice(body, env) {
@@ -169,7 +236,7 @@ async function handlePractice(body, env) {
   const prompt = `You are OBI. Create a quick English practice drill for level ${body.level || "B1"} on topic: "${body.topic || "daily conversation"}". Give 5 short exercises. Tiger Voice style.`;
   const res = await fetch("https://api.deepseek.com/chat/completions", {
     method: "POST",
-    headers: { "Content-Type": "application/json", "Authorization": `Bearer ${apiKey}` },
+    headers: { "Content-Type": "application/json", "Authorization": `Bearer ${env.DEEPSEEK_API_KEY}` },
     body: JSON.stringify({ model: "deepseek-chat", messages: [{ role: "system", content: OBI_SYSTEM }, { role: "user", content: prompt }], max_tokens: 400, temperature: 0.7 }),
   });
   if (!res.ok) return json({ error: `DeepSeek ${res.status}` }, 502);
@@ -182,23 +249,31 @@ async function handleFeedback(body, env) {
   if (!apiKey) return json({ error: "DEEPSEEK_API_KEY not configured" }, 500);
   const studentText = (body.studentResponse || "").slice(0, 500);
   if (!studentText) return json({ error: "studentResponse required" }, 400);
-  const prompt = `A Vietnamese English student wrote: "${studentText}"\n\nGive brief OBI-style coaching feedback:\n1. One genuine encouragement\n2. One natural correction (show better version, no grammar rules)\n3. One Tiger push\n\nMax 4 sentences. Anti-shame. Tiger Voice.`;
+  const prompt = `A Vietnamese English student wrote: "${studentText}"\n\nGive OBI-style coaching:\n1. One genuine encouragement\n2. One natural correction (show better version, no grammar rules)\n3. One Tiger push\n\nMax 4 sentences. Anti-shame. Tiger Voice.`;
   const res = await fetch("https://api.deepseek.com/chat/completions", {
     method: "POST",
-    headers: { "Content-Type": "application/json", "Authorization": `Bearer ${apiKey}` },
+    headers: { "Content-Type": "application/json", "Authorization": `Bearer ${env.DEEPSEEK_API_KEY}` },
     body: JSON.stringify({ model: "deepseek-chat", messages: [{ role: "system", content: OBI_SYSTEM }, { role: "user", content: prompt }], max_tokens: 300, temperature: 0.75 }),
   });
   if (!res.ok) return json({ error: `DeepSeek ${res.status}` }, 502);
   const data = await res.json();
-  return json({ feedback: data.choices?.[0]?.message?.content || "Feedback generation failed" });
+  const feedback = data.choices?.[0]?.message?.content || "Feedback generation failed";
+  if (body.studentId && env.LEDGER) appendToLedger(body.studentId, "feedback", JSON.stringify({ input: studentText, feedback }), env).catch(() => {});
+  return json({ feedback });
 }
 
-// ── NET Pet ───────────────────────────────────────────────
+// ── NET Pet ───────────────────────────────────────────────────────────────────
 
 async function handlePetCheckin(body, env) {
   if (!body.studentId) return json({ error: "studentId required" }, 400);
   const stub = env.PETS.get(env.PETS.idFromName(body.studentId));
-  return stub.fetch(new Request("https://do/checkin", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }));
+  const res = await stub.fetch(new Request("https://do/checkin", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }));
+  const data = await res.clone().json();
+  if (env.LEDGER && data.ok) {
+    const payload = JSON.stringify({ minutes: body.minutes, confidence: body.confidence, streak: data.state?.streak, xp: data.state?.xp, mood: data.state?.mood, milestone: data.milestone || null });
+    appendToLedger(body.studentId, "pet_checkin", payload, env).catch(() => {});
+  }
+  return res;
 }
 
 async function handlePetState(studentId, env) {
@@ -207,7 +282,7 @@ async function handlePetState(studentId, env) {
   return stub.fetch(new Request("https://do/state"));
 }
 
-// ── Classroom ─────────────────────────────────────────────
+// ── Classroom ─────────────────────────────────────────────────────────────────
 
 async function handleClassStart(body, env) {
   if (!body.classId) return json({ error: "classId required" }, 400);
@@ -233,9 +308,147 @@ async function handleClassReport(classId, totalStudents, env) {
   return stub.fetch(new Request(`https://do/class/report?totalStudents=${totalStudents}`));
 }
 
-// ── Durable Objects ───────────────────────────────────────
+// ── Cryptographic Immutable Ledger API ────────────────────────────────────────
 
-// SessionDO — conversation memory + classroom events (rate limited)
+// Shared helper — Agent99 auto-calls this for every significant event
+async function appendToLedger(studentId, eventType, payload, env) {
+  if (!env.LEDGER) return;
+  const stub = env.LEDGER.get(env.LEDGER.idFromName(studentId));
+  return stub.fetch(new Request("https://do/append", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ studentId, eventType, payload }),
+  }));
+}
+
+async function handleLedgerAppend(body, env) {
+  if (!body.studentId) return json({ error: "studentId required" }, 400);
+  if (!body.eventType) return json({ error: "eventType required" }, 400);
+  const stub = env.LEDGER.get(env.LEDGER.idFromName(body.studentId));
+  return stub.fetch(new Request("https://do/append", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  }));
+}
+
+async function handleLedgerHistory(studentId, limit, env) {
+  if (!studentId) return json({ error: "studentId required" }, 400);
+  const stub = env.LEDGER.get(env.LEDGER.idFromName(studentId));
+  return stub.fetch(new Request(`https://do/history?limit=${Math.min(limit, 200)}`));
+}
+
+async function handleLedgerVerify(studentId, env) {
+  if (!studentId) return json({ error: "studentId required" }, 400);
+  const stub = env.LEDGER.get(env.LEDGER.idFromName(studentId));
+  return stub.fetch(new Request("https://do/verify"));
+}
+
+// ── Durable Objects ───────────────────────────────────────────────────────────
+
+// LedgerDO — Cryptographic Immutable Ledger
+// Every student event is hash-chained. Append-only. No UPDATE. No DELETE.
+// This is Obi's unparalleled, tamper-evident memory of every student.
+export class LedgerDO {
+  constructor(state, env) {
+    this.state = state;
+    this.env = env;
+    this.sql = state.storage.sql;
+    this.sql.exec(`CREATE TABLE IF NOT EXISTS ledger (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      student_id TEXT NOT NULL,
+      event_type TEXT NOT NULL,
+      payload TEXT NOT NULL,
+      prev_hash TEXT NOT NULL DEFAULT '0000000000000000000000000000000000000000000000000000000000000000',
+      entry_hash TEXT NOT NULL,
+      ts INTEGER NOT NULL
+    )`);
+    // Index for fast student history queries
+    this.sql.exec(`CREATE INDEX IF NOT EXISTS idx_ledger_student ON ledger(student_id, id)`);
+  }
+
+  async fetch(request) {
+    const url = new URL(request.url);
+
+    // APPEND — the only write operation. No update. No delete.
+    if (url.pathname === "/append" && request.method === "POST") {
+      const body = await request.json();
+      const studentId = body.studentId || "unknown";
+      const eventType = body.eventType || "unknown";
+      const payload = typeof body.payload === "string" ? body.payload : JSON.stringify(body.payload);
+      const ts = Date.now();
+
+      // Get the hash of the last entry (chain anchor)
+      const lastRow = this.sql.exec(
+        `SELECT entry_hash FROM ledger WHERE student_id = ? ORDER BY id DESC LIMIT 1`,
+        studentId
+      ).toArray()[0];
+      const prevHash = lastRow?.entry_hash || "0000000000000000000000000000000000000000000000000000000000000000";
+
+      // Compute this entry's hash: SHA-256(studentId|eventType|payload|prevHash|ts)
+      const raw = `${studentId}|${eventType}|${payload}|${prevHash}|${ts}`;
+      const entryHash = await computeHash(raw);
+
+      this.sql.exec(
+        `INSERT INTO ledger (student_id, event_type, payload, prev_hash, entry_hash, ts) VALUES (?, ?, ?, ?, ?, ?)`,
+        studentId, eventType, payload, prevHash, entryHash, ts
+      );
+
+      return json({ ok: true, entryHash, prevHash, ts, eventType });
+    }
+
+    // HISTORY — read last N entries for a student
+    if (url.pathname === "/history") {
+      const limit = Math.min(parseInt(url.searchParams.get("limit") || "50"), 200);
+      const rows = this.sql.exec(
+        `SELECT id, student_id, event_type, payload, prev_hash, entry_hash, ts FROM ledger ORDER BY id DESC LIMIT ?`,
+        limit
+      ).toArray().reverse();
+      const total = this.sql.exec(`SELECT COUNT(*) as cnt FROM ledger`).toArray()[0].cnt;
+      return json({ entries: rows, total, limit });
+    }
+
+    // VERIFY — cryptographic chain integrity check for a student
+    if (url.pathname === "/verify") {
+      const rows = this.sql.exec(
+        `SELECT id, student_id, event_type, payload, prev_hash, entry_hash, ts FROM ledger ORDER BY id ASC`
+      ).toArray();
+
+      let valid = true;
+      let brokenAt = null;
+      let expectedPrevHash = "0000000000000000000000000000000000000000000000000000000000000000";
+
+      for (const row of rows) {
+        if (row.prev_hash !== expectedPrevHash) {
+          valid = false;
+          brokenAt = row.id;
+          break;
+        }
+        const raw = `${row.student_id}|${row.event_type}|${row.payload}|${row.prev_hash}|${row.ts}`;
+        const computed = await computeHash(raw);
+        if (computed !== row.entry_hash) {
+          valid = false;
+          brokenAt = row.id;
+          break;
+        }
+        expectedPrevHash = row.entry_hash;
+      }
+
+      return json({
+        valid,
+        totalEntries: rows.length,
+        brokenAt: brokenAt || null,
+        message: valid
+          ? `Chain intact — ${rows.length} entries verified`
+          : `Chain broken at entry #${brokenAt} — tamper detected`,
+      });
+    }
+
+    return json({ error: "Not found" }, 404);
+  }
+}
+
+// SessionDO — mutable scratch memory + classroom events (rate limited)
 export class SessionDO {
   constructor(state, env) {
     this.state = state;
@@ -274,13 +487,11 @@ export class SessionDO {
       const studentId = body.studentId || "";
       const oneMinuteAgo = Date.now() - 60000;
 
-      // Class-level rate limit: 120 events / 60s
       const classCount = this.sql.exec(`SELECT COUNT(*) as cnt FROM class_events WHERE class_id = ? AND ts > ?`, classId, oneMinuteAgo).toArray()[0].cnt;
       if (classCount >= 120) {
         return new Response(JSON.stringify({ error: "Class rate limit exceeded", retryAfter: 60, limit: 120, window: "60s" }), { status: 429, headers: { "Content-Type": "application/json", "Retry-After": "60", ...corsHeaders() } });
       }
 
-      // Student-level rate limit: 20 events / 60s
       if (studentId) {
         const studentCount = this.sql.exec(`SELECT COUNT(*) as cnt FROM class_events WHERE class_id = ? AND student_id = ? AND ts > ?`, classId, studentId, oneMinuteAgo).toArray()[0].cnt;
         if (studentCount >= 20) {
@@ -313,7 +524,7 @@ export class SessionDO {
   }
 }
 
-// ProfileDO — student profiles + onboarding
+// ProfileDO — student onboarding + profile
 export class ProfileDO {
   constructor(state, env) {
     this.state = state;
@@ -381,7 +592,8 @@ export class PetDO {
 
       let milestone = null;
       if ([1, 3, 7, 30].includes(streak)) {
-        milestone = { day: streak, bonus: "1.5x XP", message: spRMsg(streak) };
+        const msgs = { 1: "Day 1. The journey starts. Every Tiger was once a Mouse.", 3: "Day 3. Three in a row. You are not a mouse anymore.", 7: "Day 7. One full week. Your brain is rewiring. Keep going.", 30: "Day 30. Thirty days straight. That is not a student — that is a Tiger." };
+        milestone = { day: streak, bonus: "1.5x XP", message: msgs[streak] };
       }
 
       return json({ ok: true, state: { streak, xp: newXp, mood, totalSessions, xpGain, longestStreak }, milestone });
@@ -397,12 +609,7 @@ export class PetDO {
   }
 }
 
-function spRMsg(day) {
-  const msgs = { 1: "Day 1. The journey starts. Every Tiger was once a Mouse.", 3: "Day 3. Three in a row. You are not a mouse anymore.", 7: "Day 7. One full week. Your brain is rewiring. Keep going.", 30: "Day 30. Thirty days straight. That is not a student — that is a Tiger." };
-  return msgs[day] || "Keep going.";
-}
-
-// ── Utilities ─────────────────────────────────────────────
+// ── Utilities ─────────────────────────────────────────────────────────────────
 
 function json(data, status = 200) {
   return new Response(JSON.stringify(data), { status, headers: { "Content-Type": "application/json", ...corsHeaders() } });
