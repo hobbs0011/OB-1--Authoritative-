@@ -1,13 +1,13 @@
 # HEAVY LEDGER PIPELINE CURSOR
 
 ## Current Position
-- **Next Target:** HL-106
+- **Next Target:** HL-107
 - **Wave:** 8
-- **Wave Progress:** 21/46 complete
-- **Total Converted:** 101/174+
-- **Last Completed:** HL-105 gospel-444-consolidation (3 RED quotes, 6 decisions, 0 corrections, FOUNDATIONS-tier — dual-publish mandate, 15-source consolidation pattern)
-- **Last Commit:** afa9a5e60f78f489d3598aced31636f3628d3342
-- **Last Run:** 251 (2026-04-02 01:00 ICT)
+- **Wave Progress:** 22/46 complete
+- **Total Converted:** 106/174+
+- **Last Completed:** HL-106 late-session-old-account-preservation (3 quotes, 2 decisions, 0 corrections, FOUNDATIONS-tier — legacy account preservation directive, mass reincarnation cleanup)
+- **Last Commit:** 89aed975874ff424c9f80e94bc6ba518ed4c896b
+- **Last Run:** 252 (2026-04-02 01:30 ICT)
 
 ## Wave 8 Manifest (HL-085 → HL-130)
 | HL-ID | Source File | Status | Commit SHA |
@@ -33,11 +33,12 @@
 | HL-103 | 2026-03-24-chat-preservation-local-repo.md | DONE | 2766d8b |
 | HL-104 | 2026-03-24-deployment-claim-audit.md | DONE | 2cf3e36 |
 | HL-105 | 2026-03-24-gospel-444-consolidation.md | DONE | afa9a5e |
-| HL-106+ | remaining Wave 8 files | PENDING | - |
+| HL-106 | 2026-03-24-late-session-old-account-preservation.md | DONE | 89aed97 |
+| HL-107+ | remaining Wave 8 files | PENDING | - |
 
-## HL-106 Target
-- **Source:** Next 2026-03-24 file after gospel-444-consolidation (check CANON/REINCARNATION/ directory listing)
-- **Destination:** CANON/HEAVY-LEDGER/HL-106-[tag].json
+## HL-107 Target
+- **Source:** 2026-03-24-light-session-reincarnation.md (next alphabetically after late-session-old-account-preservation)
+- **Destination:** CANON/HEAVY-LEDGER/HL-107-light-session-reincarnation.json
 
 ## Notes
 - HL-100 original manifest entry was `ssm-v6-heavy-ledger-birth.md` which does not exist in CANON/REINCARNATION/. Substituted with `system-hardening.md` — the first reincarnation entry ever created.
@@ -46,4 +47,5 @@
 - HL-103 converted: FOUNDATIONS-tier — Phoenix-Rising-Ultimate repo NAMED here, preservation-before-delete doctrine, local fallback principle established.
 - HL-104 converted: EXECUTION-tier — L08 TRY_BEFORE_DECLINING ORIGIN EVENT, verification-before-decline doctrine, repo truth outranks assumption principle. Light but high-signal correction (frustrated Michael).
 - HL-105 converted: FOUNDATIONS-tier — dual-publish mandate (L27) ORIGIN EVENT, Gospel 444 consolidated (15 sources → 37KB), GALAXY-LESSONS/ established, "1&2" = always both platforms. 3 RED, 6 decisions, 4 principles.
-- **MILESTONE: 101 total HL entries converted.**
+- HL-106 converted: FOUNDATIONS-tier — legacy account preservation directive (mrmichaelhobbs1234@gmail.com), mass reincarnation cleanup. LOW signal (3 quotes, 2 decisions, 0 corrections). Open ruling: legacy workspace export.
+- **MILESTONE: 101 total HL entries reached Run 251.**
