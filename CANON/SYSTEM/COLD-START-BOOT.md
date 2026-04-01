@@ -1,124 +1,70 @@
-# COLD START BOOT — OB1 Agent-99
+# COLD START BOOT — OB1 Agent 99
+## Last Updated: 2026-04-01 10:30 ICT (Run 238)
 
-> **SINGLE SOURCE OF TRUTH for new sessions and cold starts.**
-> Load this file FIRST on every cold start. GitHub wins all conflicts.
+### Identity
+- Agent: OB1 / Ne0 (Agent 99)
+- Serves: SOV100 Michael Hobbs
+- Product: Natural English Training
+- Timezone: Asia/Bangkok (ICT)
+- Voice: direct, sharp, witty, action-oriented, dense, no filler
 
----
+### Current Vector
+- **Active Mission:** HEAVY_LEDGER_CONVERSION — Wave 8 IN PROGRESS (8/46)
+- **Last completed:** HL-092 gospel-444-consolidation (Run 238)
+- **Next target:** HL-093 (next reincarnation file in chronological order)
+- **Pipeline:** Converting all 46 REINCARNATION entries to structured Heavy Ledger JSON
+- **Wave 7:** COMPLETE (marketing pipeline 20/20)
+- **Total HL entries:** ~82/174+
 
-## Identity
-- **Agent:** OB1 (Agent-99) — Orchestrator, Synthesis Node, Fail-Closed Governor
-- **Serves:** SOV100 Michael Hobbs
-- **Product:** OBI for Natural English Training
-- **Timezone:** Asia/Bangkok (ICT, UTC+7)
-- **Michael is NOT Thai** — 🔴 CRITICAL
+### Active Principles (Top 5)
+1. Platform Death Test — every run must produce a GitHub commit SHA
+2. Dual-publish mandatory — Notion + GitHub always
+3. Revenue-first — English is the mechanic, money is the mission
+4. Cross-repo mining mandatory — scan all 3 repos
+5. Build don't scout — every run produces tangible output
 
-## Infrastructure
-- **Repos:** hobbs-lab/Phoenix-Rising-Protocol-Ultimate (canon vault) | hobbs-lab/Phoenix-Rise-Immortalize- (soul DNA bible source) | hobbs0011/NET-Ai-EcoSystem-CommandStation (product code)
-- **Notion workspace:** Natural English Training
-- **Navigator Index:** ⚠️ IN TRASH — 4.5MB bloat. Dedup swap page created. Needs Michael to restore/swap. OPEN RULING.
-- **Canon Access Index:** Notion page + GitHub mirror at CANON/SYSTEM/CANON-ACCESS-INDEX.md
-- **Synced blocks:** Render as `<unknown>` to API — NEVER read canon through parent pages. Use child pages or GitHub.
-- **GitHub Actions:** Cannot create workflow files via API (403). Manual only.
-- **Copilot:** create_pull_request_with_copilot returns 401. Use create_or_update_file instead.
+### Recent Decisions (Last 7 Days)
+- 2026-03-31: Facebook Sales Funnel pipeline set as active mission (20 actions)
+- 2026-03-31: Magic Chat Chrome Extension v0.3.0 shipped (Chat + Homework + Vocab)
+- 2026-03-30: Heavy Ledger Conversion pipeline active mission (Waves 1-8)
+- 2026-03-30: SSM V7 Super Saiyan deployed (150+ improvements)
+- 2026-03-30: Website lane cold boot + Squarespace→Cloudflare migration planned
+- 2026-03-29: Studio bottleneck — Michael takes Studio work directly
 
-## Triggers (4 active)
-1. @mention trigger
-2. Weekly Monday 09:00 ICT — Monday report
-3. Hourly :00 — pulse run
-4. Hourly :30 — pulse run
+### Open Rulings (AWAITING MICHAEL)
+- reincarnate.js manual wrangler patch
+- HarvestedChats manual transfer
+- 46 Product IDs assignment
+- Discord Guild ID
+- MAX_COINS_PER_ACTION cap value
 
-## Active Mission
-- **NONE** — Heavy Ledger Wave 8 auto-continues.
+### System State
+- Navigator Index: ⚠️ IN TRASH — using GitHub as fallback
+- GitHub repos: 3 (Ultimate, Immortalize, CommandStation)
+- Canon: FULL ROTATION COMPLETE — all 6 major pages enriched
+- Build Log: 181+ entries
+- Reincarnation entries: 46 on GitHub
+- Heavy Ledger JSONs: ~82 converted
+- Triggers: 4 active (mention, weekly Mon 9AM, hourly :00, hourly :30)
 
-## Default Work
-- **Heavy Ledger Conversion Pipeline — Wave 8 IN PROGRESS**
-- Waves 1-7: ALL COMPLETE (80/174+)
-- **Wave 8:** CANON/REINCARNATION/ (46 actual files excl COLD-START-BOOT.md) — 5/46 complete
-- Next item: #090 `2026-03-24-chat-preservation-local-repo.md`
-- Prior completed: HL-085 (self-upgrade-arc), HL-086 (pipeline-delegation), HL-087 (100-phoenixes-war-games), HL-088 (agent0-confirmation-checkpoint), HL-089 (agent0-triad-reincarnation)
+### Key File Locations
+- SSM Instructions: Agent config (Notion)
+- Heavy Ledger: CANON/HEAVY-LEDGER/*.json
+- Reincarnation: CANON/REINCARNATION/*.md
+- Canon pages: CANON/*.md (60+ files)
+- Galaxy Lessons: GALAXY-LESSONS/ (7 HTML lessons)
+- Products: APPS/ (8 products)
+- Website: SITE/
+- System: CANON/SYSTEM/ (10+ files)
 
-## Morning Briefing — 2026-04-01 09:00 ICT
+### Overnight Protocol
+- Execute active mission first (IMMOVABLE #1)
+- Fallthrough: export → mine → map → build → log
+- Target: 8 commits per overnight cycle
+- Michael sleep window: ~00:00-08:00 ICT
 
-### Overnight Summary (00:00–09:00 ICT)
-| Metric | Value |
-|--------|-------|
-| Runs completed | 6 (Runs 230–235) |
-| Commits pushed | 8+ |
-| Heavy Ledger items converted | 5 (HL-085 through HL-089) |
-| Wave 7 status | ✅ COMPLETE (12/12) |
-| Wave 8 status | IN PROGRESS (5/46) |
-| Total Heavy Ledger | 84/174+ |
-| Active Mission | NONE |
-| Platform Death Test | ALL PASS |
-| Grades | A average (7-8/8) |
-
-### Key Overnight Achievements
-1. **Wave 7 COMPLETE** — All 12 items in CANON/VAULT-DUMPS/ converted. 80 total at wave close.
-2. **Wave 8 AUTO-STARTED** — CANON/REINCARNATION/ (46 files). Largest unconverted directory.
-3. **Pipeline cursor corrected** (Run 232) — now uses actual filenames from repo directory listing.
-4. **HL-085:** Agent self-upgrade arc — SSM+Heavy Ledger two-tier pattern origin, standing reincarnation order.
-5. **HL-086:** Pipeline delegation genesis — 20-action autonomous pipeline model, Function 4 handoff gate.
-6. **HL-087:** 100 Phoenixes war games — Drones→Phoenixes, OBI multi-platform, Chrome extension $0 deployment.
-7. **HL-088:** Agent-0 confirmation checkpoint — identity designation, REINCARNATE command invocation.
-8. **HL-089:** Agent-0 triad reincarnation — 5-node multi-agent model, execution-forbidden bootstrap, markdown preservation graduation. 2 concepts SUPERSEDED (triad→swarm, copy-paste→pulse), 2 ACTIVE.
-
-### System Health
-- **Navigator Index:** ⚠️ IN TRASH (4.5MB bloat). Needs Michael to restore/swap with dedup page.
-- **GitHub:** All commits verified. No broken chains.
-- **Triggers:** 4/4 active and healthy.
-- **Canon coverage:** Bible CH01-CH20 enriched. All 6 canonical pages ENRICHED++. Full rotation complete.
-
-### Marketing Status (from March 31)
-- **Facebook Sales Funnel:** 4-stage funnel DEFINED (Free Eval → Free Report → Free Class → Close)
-- **20/20 marketing pipeline:** ALL COMPLETE — posts, scripts, templates pushed to CANON/MARKETING/
-- **Tone:** Personal neighbor, NOT corporate
-- **Two lanes:** Vietnamese (Lakeview groups) + English (personal profile)
-
-### Decisions Pending Michael
-1. Navigator Index dedup — restore from trash or swap with dedup page?
-2. ManyChat free vs Pro tier decision
-3. Vietnamese copywriter source
-4. Roblox Studio publish — Michael needs to handle Game Passes + Dev Products in Creator Dashboard
-5. Product IDs (46) — still AWAITING_MICHAEL
-
-### Top Recommendation
-Continue Heavy Ledger Wave 8 (41 remaining reincarnation entries). No urgent blockers. System is stable and autonomous. Navigator Index needs Michael's attention when available.
-
-## Living Reincarnation State
-- **Current vector:** Heavy Ledger Wave 8 — converting reincarnation entries to structured JSON. All canon enriched. Marketing pipeline complete. System in autonomous build mode.
-- **Active principles:**
-  1. L24: PLATFORM_DEATH_TEST — commit SHA or run = FAIL
-  2. L27: DUAL_PUBLISH mandatory (Notion + GitHub)
-  3. L16: BUILD_DONT_SCOUT (tangible output every run)
-  4. L17: COMPOUND_OVER_TIME (each run leaves system smarter)
-  5. L19: DEDUP_EVERYTHING
-- **Open rulings:**
-  1. ManyChat free vs Pro decision
-  2. Vietnamese copywriter source
-  3. Navigator Index dedup method — manual swap needed
-  4. reincarnate.js manual wrangler patch
-  5. HarvestedChats manual transfer
-
-## Correction Log
-- Navigator Index IN TRASH — use GitHub mirror at CANON/SYSTEM/NAVIGATOR-INDEX.md
-- Cold Start Boot must be updated every run that changes pipeline state
-- Trust commit messages over Cold Start Boot when stale
-- Notion handoff writes sometimes fail after GitHub push succeeds — 13% broken chain rate, all recovered
-- Pipeline cursor had synthetic filenames not matching actual repo files — CORRECTED Run 232
-
-## Decision History (Recent)
-- 2026-04-01: HL-089 converted — Agent-0 triad reincarnation (Run 235)
-- 2026-04-01: HL-088 converted — Agent-0 confirmation checkpoint (Run 234)
-- 2026-04-01: HL-087 converted — 100 Phoenixes war games (Run 233)
-- 2026-04-01: Pipeline cursor corrected to actual filenames (Run 232)
-- 2026-04-01: Wave 8 auto-started — CANON/REINCARNATION/ (46 files)
-- 2026-04-01: Heavy Ledger Wave 7 COMPLETE — all 7 waves done (80/174+)
-- 2026-03-31: Facebook 4-stage sales funnel defined (neighbour tone, dual-language, $0 automation)
-- 2026-03-31: 20/20 marketing pipeline COMPLETE — all posts/scripts/templates pushed to CANON/MARKETING/
-- 2026-03-30: Heavy Ledger conversion pipeline established as default overnight work
-
-## Last Updated
-- **Run:** 235
-- **Time:** 2026-04-01 09:00 ICT
-- **Commit:** (this commit — HL-089 + pipeline cursor + morning briefing)
-- **By:** OB1 pulse engine
+### Recovery Notes
+- Synced blocks render as <unknown> — use child pages or GitHub
+- Navigator Index in trash — all routing via GitHub fallback
+- create_pull_request_with_copilot returns 401 — use create_or_update_file instead
+- .github/workflows/*.yml blocked by 403 — Michael handles workflow files directly
