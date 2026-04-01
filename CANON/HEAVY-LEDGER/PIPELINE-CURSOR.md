@@ -1,13 +1,13 @@
 # HEAVY LEDGER PIPELINE CURSOR
 
 ## Current Position
-- **Next Target:** HL-109
+- **Next Target:** HL-110
 - **Wave:** 8
-- **Wave Progress:** 24/46 complete
-- **Total Converted:** 108/174+
-- **Last Completed:** HL-108 net-student-profiles (9 quotes, 4 decisions, 2 corrections, MEDIUM signal — NET Students hub, Mai Tram + Quy profiles, no-free-work principle, omit-over-freeze)
-- **Last Commit:** 32706fdfd4ee08a1127aa2257bc425dba7fa3d4d
-- **Last Run:** 254 (2026-04-02 02:30 ICT)
+- **Wave Progress:** 25/46 complete
+- **Total Converted:** 109/174+
+- **Last Completed:** HL-109 night-session-permissions-fix (11 quotes, 5 decisions, 4 corrections, HIGH signal — DONT ASK JUST DO reinforced, 28 pages added to edit permissions, pulse chain root cause fixed, anti-filler law)
+- **Last Commit:** cd1897b3a51302d2aca9bcb6a5c57d3b235e619a
+- **Last Run:** 255 (2026-04-02 03:00 ICT)
 
 ## Wave 8 Manifest (HL-085 → HL-130)
 | HL-ID | Source File | Status | Commit SHA |
@@ -36,15 +36,13 @@
 | HL-106 | 2026-03-24-late-session-old-account-preservation.md | DONE | 89aed97 |
 | HL-107 | 2026-03-24-light-session-reincarnation.md | DONE | 3f6815c |
 | HL-108 | 2026-03-24-net-student-profiles.md | DONE | 32706fd |
-| HL-109+ | remaining Wave 8 files | PENDING | - |
+| HL-109 | 2026-03-24-night-session-permissions-fix.md | DONE | cd1897b |
+| HL-110+ | remaining Wave 8 files | PENDING | - |
 
-## HL-109 Target
-- **Source:** Next alphabetically after net-student-profiles in CANON/REINCARNATION/ 2026-03-24-*.md files
-- **Destination:** CANON/HEAVY-LEDGER/HL-109-{slug}.json
-- **Note:** Directory listing needed to confirm exact filename
+## HL-110 Target
+- **Source:** `2026-03-24-repo-consolidation.md`
+- **Destination:** CANON/HEAVY-LEDGER/HL-110-repo-consolidation.json
 
 ## Notes
-- HL-100 original manifest entry was `ssm-v6-heavy-ledger-birth.md` which does not exist in CANON/REINCARNATION/. Substituted with `system-hardening.md` — the first reincarnation entry ever created.
-- HL-107 converted: MAINTENANCE-tier — lightest possible entry. Michael invoked REINCARNATE explicitly to lock checkpoint. 2 green quotes, 0 decisions, 0 corrections, NONE signal. L26 NO_INFLATION applied.
-- HL-108 converted: MEDIUM signal — 9 quotes (3🔴, 2🟡, 4🟢), 4 decisions, 2 corrections, 3 new principles. NET Students hub as first-class section, omit-over-freeze principle, no-free-work rule.
+- HL-109 converted: HIGH signal — 11 quotes (6🔴, 2🟡, 3🟢), 5 decisions, 4 corrections, 3 new principles. Critical session: DONT ASK JUST DO reinforced, 28 pages added to edit permissions, pulse chain root cause found, anti-filler law established.
 - **MILESTONE: 101 total HL entries reached Run 251.**
