@@ -1,6 +1,6 @@
 # COLD START BOOT — Agent-99 (OB1)
 
-> **Last Updated:** 2026-04-01 12:00 ICT (Run 240)
+> **Last Updated:** 2026-04-01 19:00 ICT (Run 241)
 > **Purpose:** Single source of truth for cold starts. GitHub-first.
 
 ---
@@ -15,12 +15,12 @@
 ## CURRENT STATE
 - **Active Mission:** NONE
 - **Default Work:** Heavy Ledger Conversion Pipeline — Wave 8 (CANON/REINCARNATION/)
-- **Wave 8 Progress:** 10/46
+- **Wave 8 Progress:** 11/46
 - **Wave 7:** COMPLETE (12/12)
-- **Total Converted:** 90/174+
-- **Next Pipeline Item:** #095 — 2026-03-24-net-student-profiles.md
-- **Last Run:** 240 (2026-04-01 12:00 ICT)
-- **Last Commit:** `7672e1db` — HL-094 light-session-reincarnation.json
+- **Total Converted:** 91/174+
+- **Next Pipeline Item:** #096 — (next alphabetical REINCARNATION/ .md not yet converted)
+- **Last Run:** 241 (2026-04-01 19:00 ICT)
+- **Last Commit:** `e48a1c7d` — HL-095 2026-03-24-net-student-profiles.json
 
 ## INFRASTRUCTURE
 - **Notion Workspace:** Natural English Training
@@ -61,7 +61,7 @@
 - DECISIONS_BEAT_ROTATION: Implement decisions immediately
 
 ## LIVING REINCARNATION STATE
-- **Vector:** Heavy Ledger pipeline Wave 8 IN PROGRESS — 90/174+ total — CANON/REINCARNATION/ files
+- **Vector:** Heavy Ledger pipeline Wave 8 IN PROGRESS — 91/174+ total — CANON/REINCARNATION/ files
 - **Active Principles:** PLATFORM_DEATH_TEST, BUILD_DONT_SCOUT, DEDUP_EVERYTHING
 - **Open Rulings:** Navigator Index restore, ManyChat tier, SecurityLayer cap, Discord Guild ID, 46 Product IDs, legacy account preservation
 
@@ -71,9 +71,17 @@
 - create_pull_request_with_copilot returns 401 — use create_or_update_file instead
 - GitHub Actions workflow files can't be created via API (403)
 - Michael is NOT Thai — 🔴 CRITICAL PATCHED
+- From 2026-04-01 reincarnation: connector-first audit not run early — automation reflex law
+- From 2026-04-01 reincarnation: PHEROMONES omitted/underweighted — governor-term rule
+- From 2026-04-01 reincarnation: question cascades after operator requested no questions — hard law 0 questions by default
 
 ## TRIGGER HEALTH
 - ✅ Agent mentioned trigger
 - ✅ Weekly Monday 9AM ICT trigger
 - ✅ Hourly :00 trigger
 - ✅ Hourly :30 trigger
+
+## RECENT MICHAEL ACTIVITY (2026-04-01)
+- 5 commits: SSM V8 instructions, Soul DNA extract with pheromone/omission appendix, Cloudflare deploy bridge
+- Alignment break session: connector-first audit, HALT compliance, omissions ledger, pheromones as governor-term
+- Signal Density: HIGH (15 RED quotes, 6 decisions, 4 corrections)
