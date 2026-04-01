@@ -1,22 +1,22 @@
 # Heavy Ledger Conversion Pipeline — Cursor State
 
-> **Last Updated:** 2026-04-01 20:00 ICT (Run 243)
+> **Last Updated:** 2026-04-01 20:35 ICT (Run 244)
 
 ## Current Wave
 - **Wave:** 8
 - **Source Directory:** CANON/REINCARNATION/
 - **Total Files in Wave:** 46
-- **Completed This Wave:** 13
-- **Remaining:** 33
+- **Completed This Wave:** 14
+- **Remaining:** 32
 
 ## Last Converted
-- **HL-097:** 2026-03-24-repo-consolidation.md → .json
-- **Run:** 243
-- **Commit:** ebaa54c9ac30b70a4f9f4ccb270880caf61d36ef
-- **Signal Density:** MEDIUM (5 quotes, 5 decisions, 2 corrections — trigger audit + 10 improvements + repo consolidation migration)
+- **HL-098:** 2026-03-24-security-drone-research.md → .json
+- **Run:** 244
+- **Commit:** e829574052446919d4f6f30a8f0026c6a4311e8b
+- **Signal Density:** MEDIUM (11 quotes, 4 decisions, 0 corrections — security remediation + 4 DRONE research briefs + preservation-before-deletion principle)
 
 ## Next Target
-- **HL-098:** CANON/REINCARNATION/2026-03-24-security-drone-research.md (next alphabetical .md file not yet converted)
+- **HL-099:** CANON/REINCARNATION/2026-03-24-skeleton-star-map-ingestion.md (next alphabetical .md file not yet converted)
 - **Category:** reincarnation_session
 
 ## Wave 8 Completed Files
@@ -33,9 +33,10 @@
 11. HL-095: 2026-03-24-net-student-profiles.md → .json (Run 241)
 12. HL-096: 2026-03-24-night-session-permissions-fix.md → .json (Run 242)
 13. HL-097: 2026-03-24-repo-consolidation.md → .json (Run 243)
+14. HL-098: 2026-03-24-security-drone-research.md → .json (Run 244)
 
 ## Pipeline Totals
-- **Total Converted:** 93/174+
+- **Total Converted:** 94/174+
 - **Waves Complete:** 1-7 (Wave 8 in progress)
 - **Wave 1:** CANON/MSS/ — 3 files ✅
 - **Wave 2:** CANON/ teaching files — 10 files ✅
@@ -44,4 +45,4 @@
 - **Wave 5:** CANON/ dumps + remaining — 10 files ✅
 - **Wave 6:** CANON ROOT remaining — 3 files ✅
 - **Wave 7:** CANON ROOT + operational — 12 files ✅
-- **Wave 8:** CANON/REINCARNATION/ — 13/46 (in progress)
+- **Wave 8:** CANON/REINCARNATION/ — 14/46 (in progress)
