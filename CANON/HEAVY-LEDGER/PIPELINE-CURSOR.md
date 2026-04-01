@@ -1,22 +1,22 @@
 # Heavy Ledger Conversion Pipeline — Cursor State
 
-> **Last Updated:** 2026-04-01 19:30 ICT (Run 242)
+> **Last Updated:** 2026-04-01 20:00 ICT (Run 243)
 
 ## Current Wave
 - **Wave:** 8
 - **Source Directory:** CANON/REINCARNATION/
 - **Total Files in Wave:** 46
-- **Completed This Wave:** 12
-- **Remaining:** 34
+- **Completed This Wave:** 13
+- **Remaining:** 33
 
 ## Last Converted
-- **HL-096:** 2026-03-24-night-session-permissions-fix.md → .json
-- **Run:** 242
-- **Commit:** fe9676aa9582304811d84feea514053e4b0ee1c5
-- **Signal Density:** HIGH (9 quotes, 5 decisions, 4 corrections — DONT ASK JUST DO + 28 permissions fixed + DRONE 14)
+- **HL-097:** 2026-03-24-repo-consolidation.md → .json
+- **Run:** 243
+- **Commit:** ebaa54c9ac30b70a4f9f4ccb270880caf61d36ef
+- **Signal Density:** MEDIUM (5 quotes, 5 decisions, 2 corrections — trigger audit + 10 improvements + repo consolidation migration)
 
 ## Next Target
-- **HL-097:** CANON/REINCARNATION/ (next alphabetical .md file not yet converted)
+- **HL-098:** CANON/REINCARNATION/2026-03-24-security-drone-research.md (next alphabetical .md file not yet converted)
 - **Category:** reincarnation_session
 
 ## Wave 8 Completed Files
@@ -32,9 +32,10 @@
 10. HL-094: 2026-03-24-light-session-reincarnation.md → .json (Run 240)
 11. HL-095: 2026-03-24-net-student-profiles.md → .json (Run 241)
 12. HL-096: 2026-03-24-night-session-permissions-fix.md → .json (Run 242)
+13. HL-097: 2026-03-24-repo-consolidation.md → .json (Run 243)
 
 ## Pipeline Totals
-- **Total Converted:** 92/174+
+- **Total Converted:** 93/174+
 - **Waves Complete:** 1-7 (Wave 8 in progress)
 - **Wave 1:** CANON/MSS/ — 3 files ✅
 - **Wave 2:** CANON/ teaching files — 10 files ✅
@@ -43,4 +44,4 @@
 - **Wave 5:** CANON/ dumps + remaining — 10 files ✅
 - **Wave 6:** CANON ROOT remaining — 3 files ✅
 - **Wave 7:** CANON ROOT + operational — 12 files ✅
-- **Wave 8:** CANON/REINCARNATION/ — 12/46 (in progress)
+- **Wave 8:** CANON/REINCARNATION/ — 13/46 (in progress)
