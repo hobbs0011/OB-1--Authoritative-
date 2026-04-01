@@ -1,13 +1,13 @@
 # HEAVY LEDGER PIPELINE CURSOR
 
 ## Current Position
-- **Next Target:** HL-108
+- **Next Target:** HL-109
 - **Wave:** 8
-- **Wave Progress:** 23/46 complete
-- **Total Converted:** 107/174+
-- **Last Completed:** HL-107 light-session-reincarnation (2 quotes, 0 decisions, 0 corrections, MAINTENANCE-tier — explicit REINCARNATE invocation checkpoint, lightest possible entry)
-- **Last Commit:** 3f6815c72c1df38052ad809517e218b9e648507a
-- **Last Run:** 253 (2026-04-02 02:00 ICT)
+- **Wave Progress:** 24/46 complete
+- **Total Converted:** 108/174+
+- **Last Completed:** HL-108 net-student-profiles (9 quotes, 4 decisions, 2 corrections, MEDIUM signal — NET Students hub, Mai Tram + Quy profiles, no-free-work principle, omit-over-freeze)
+- **Last Commit:** 32706fdfd4ee08a1127aa2257bc425dba7fa3d4d
+- **Last Run:** 254 (2026-04-02 02:30 ICT)
 
 ## Wave 8 Manifest (HL-085 → HL-130)
 | HL-ID | Source File | Status | Commit SHA |
@@ -35,13 +35,16 @@
 | HL-105 | 2026-03-24-gospel-444-consolidation.md | DONE | afa9a5e |
 | HL-106 | 2026-03-24-late-session-old-account-preservation.md | DONE | 89aed97 |
 | HL-107 | 2026-03-24-light-session-reincarnation.md | DONE | 3f6815c |
-| HL-108+ | remaining Wave 8 files | PENDING | - |
+| HL-108 | 2026-03-24-net-student-profiles.md | DONE | 32706fd |
+| HL-109+ | remaining Wave 8 files | PENDING | - |
 
-## HL-108 Target
-- **Source:** 2026-03-24-net-student-profiles.md (next alphabetically after light-session-reincarnation)
-- **Destination:** CANON/HEAVY-LEDGER/HL-108-net-student-profiles.json
+## HL-109 Target
+- **Source:** Next alphabetically after net-student-profiles in CANON/REINCARNATION/ 2026-03-24-*.md files
+- **Destination:** CANON/HEAVY-LEDGER/HL-109-{slug}.json
+- **Note:** Directory listing needed to confirm exact filename
 
 ## Notes
 - HL-100 original manifest entry was `ssm-v6-heavy-ledger-birth.md` which does not exist in CANON/REINCARNATION/. Substituted with `system-hardening.md` — the first reincarnation entry ever created.
 - HL-107 converted: MAINTENANCE-tier — lightest possible entry. Michael invoked REINCARNATE explicitly to lock checkpoint. 2 green quotes, 0 decisions, 0 corrections, NONE signal. L26 NO_INFLATION applied.
+- HL-108 converted: MEDIUM signal — 9 quotes (3🔴, 2🟡, 4🟢), 4 decisions, 2 corrections, 3 new principles. NET Students hub as first-class section, omit-over-freeze principle, no-free-work rule.
 - **MILESTONE: 101 total HL entries reached Run 251.**
