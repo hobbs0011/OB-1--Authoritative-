@@ -1,5 +1,5 @@
 # COLD START BOOT — OB1 Agent 99
-## Last Updated: 2026-04-01 11:30 ICT (Run 239)
+## Last Updated: 2026-04-01 19:30 ICT (Run 242)
 
 ### Identity
 - Agent: OB1 / Ne0 (Agent 99)
@@ -9,12 +9,12 @@
 - Voice: direct, sharp, witty, action-oriented, dense, no filler
 
 ### Current Vector
-- **Active Mission:** HEAVY_LEDGER_CONVERSION — Wave 8 IN PROGRESS (9/46)
-- **Last completed:** HL-093 late-session-old-account-preservation (Run 239)
-- **Next target:** HL-094 (2026-03-24-light-session-reincarnation.md)
+- **Active Mission:** HEAVY_LEDGER_CONVERSION — Wave 8 IN PROGRESS (12/46)
+- **Last completed:** HL-096 night-session-permissions-fix (Run 242)
+- **Next target:** HL-097 (next alphabetical REINCARNATION .md not yet converted)
 - **Pipeline:** Converting all 46 REINCARNATION entries to structured Heavy Ledger JSON
 - **Wave 7:** COMPLETE (marketing pipeline 20/20)
-- **Total HL entries:** ~83/174+
+- **Total HL entries:** 92/174+
 
 ### Active Principles (Top 5)
 1. Platform Death Test — every run must produce a GitHub commit SHA
@@ -24,18 +24,21 @@
 5. Build don't scout — every run produces tangible output
 
 ### Recent Decisions (Last 7 Days)
-- 2026-04-01: HL-093 converted — legacy account preservation directive documented
+- 2026-04-01: HL-096 converted — permissions fix session (9 quotes, 5 decisions, 4 corrections, HIGH signal)
+- 2026-04-01: Launch Gate Readiness T-120h — 3 hard blockers (Product IDs, API key, deploy workflow) all Michael-owned
+- 2026-04-01: HL-095 converted — NET student profiles (Run 241)
 - 2026-03-31: Facebook Sales Funnel pipeline set as active mission (20 actions)
 - 2026-03-31: Magic Chat Chrome Extension v0.3.0 shipped (Chat + Homework + Vocab)
 - 2026-03-30: Heavy Ledger Conversion pipeline active mission (Waves 1-8)
 - 2026-03-30: SSM V7 Super Saiyan deployed (150+ improvements)
-- 2026-03-30: Website lane cold boot + Squarespace→Cloudflare migration planned
 - 2026-03-29: Studio bottleneck — Michael takes Studio work directly
 
 ### Open Rulings (AWAITING MICHAEL)
+- 21 Roblox Product IDs (Gate 3 — CRITICAL for Apr 6 deadline)
+- ROBLOX_API_KEY secret (Gate 4)
+- Deploy workflow installation (Gate 4)
 - reincarnate.js manual wrangler patch
 - HarvestedChats manual transfer
-- 46 Product IDs assignment
 - Discord Guild ID
 - MAX_COINS_PER_ACTION cap value
 - Legacy account (mrmichaelhobbs1234@gmail.com) workspace export
@@ -45,13 +48,15 @@
 - GitHub repos: 3 (Ultimate, Immortalize, CommandStation)
 - Canon: FULL ROTATION COMPLETE — all 6 major pages enriched
 - Build Log: 181+ entries
-- Reincarnation entries: 46 on GitHub
-- Heavy Ledger JSONs: ~83 converted
+- Reincarnation entries: 46+ on GitHub
+- Heavy Ledger JSONs: 92 converted
 - Triggers: 4 active (mention, weekly Mon 9AM, hourly :00, hourly :30)
+- Incubator deadline: Apr 6 (T-5 days)
 
 ### Key File Locations
 - SSM Instructions: Agent config (Notion)
 - Heavy Ledger: CANON/HEAVY-LEDGER/*.json
+- Pipeline Cursor: CANON/HEAVY-LEDGER/PIPELINE-CURSOR.md
 - Reincarnation: CANON/REINCARNATION/*.md
 - Canon pages: CANON/*.md (60+ files)
 - Galaxy Lessons: GALAXY-LESSONS/ (7 HTML lessons)
