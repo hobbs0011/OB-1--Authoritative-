@@ -33,32 +33,34 @@
 ## Default Work
 - **Heavy Ledger Conversion Pipeline — Wave 8 IN PROGRESS**
 - Waves 1-7: ALL COMPLETE (80/174+)
-- **Wave 8:** CANON/REINCARNATION/ (47 actual files) — 3/47 complete
-- Next item: #088 `2026-03-24-agent0-confirmation-checkpoint.md`
-- Prior completed: HL-085 (self-upgrade-arc), HL-086 (pipeline-delegation), HL-087 (100-phoenixes-war-games)
+- **Wave 8:** CANON/REINCARNATION/ (46 actual files excl COLD-START-BOOT.md) — 5/46 complete
+- Next item: #090 `2026-03-24-chat-preservation-local-repo.md`
+- Prior completed: HL-085 (self-upgrade-arc), HL-086 (pipeline-delegation), HL-087 (100-phoenixes-war-games), HL-088 (agent0-confirmation-checkpoint), HL-089 (agent0-triad-reincarnation)
 
-## Morning Briefing — 2026-04-01 08:00 ICT
+## Morning Briefing — 2026-04-01 09:00 ICT
 
-### Overnight Summary (00:00–08:00 ICT)
+### Overnight Summary (00:00–09:00 ICT)
 | Metric | Value |
 |--------|-------|
-| Runs completed | 4 (Runs 230–233) |
-| Commits pushed | 5+ |
-| Heavy Ledger items converted | 3 (HL-085, HL-086, HL-087) |
+| Runs completed | 6 (Runs 230–235) |
+| Commits pushed | 8+ |
+| Heavy Ledger items converted | 5 (HL-085 through HL-089) |
 | Wave 7 status | ✅ COMPLETE (12/12) |
-| Wave 8 status | IN PROGRESS (3/47) |
-| Total Heavy Ledger | 82/174+ |
+| Wave 8 status | IN PROGRESS (5/46) |
+| Total Heavy Ledger | 84/174+ |
 | Active Mission | NONE |
 | Platform Death Test | ALL PASS |
 | Grades | A average (7-8/8) |
 
 ### Key Overnight Achievements
 1. **Wave 7 COMPLETE** — All 12 items in CANON/VAULT-DUMPS/ converted. 80 total at wave close.
-2. **Wave 8 AUTO-STARTED** — CANON/REINCARNATION/ (47 files). Largest unconverted directory.
+2. **Wave 8 AUTO-STARTED** — CANON/REINCARNATION/ (46 files). Largest unconverted directory.
 3. **Pipeline cursor corrected** (Run 232) — now uses actual filenames from repo directory listing.
 4. **HL-085:** Agent self-upgrade arc — SSM+Heavy Ledger two-tier pattern origin, standing reincarnation order.
 5. **HL-086:** Pipeline delegation genesis — 20-action autonomous pipeline model, Function 4 handoff gate.
 6. **HL-087:** 100 Phoenixes war games — Drones→Phoenixes, OBI multi-platform, Chrome extension $0 deployment.
+7. **HL-088:** Agent-0 confirmation checkpoint — identity designation, REINCARNATE command invocation.
+8. **HL-089:** Agent-0 triad reincarnation — 5-node multi-agent model, execution-forbidden bootstrap, markdown preservation graduation. 2 concepts SUPERSEDED (triad→swarm, copy-paste→pulse), 2 ACTIVE.
 
 ### System Health
 - **Navigator Index:** ⚠️ IN TRASH (4.5MB bloat). Needs Michael to restore/swap with dedup page.
@@ -80,7 +82,7 @@
 5. Product IDs (46) — still AWAITING_MICHAEL
 
 ### Top Recommendation
-Continue Heavy Ledger Wave 8 (43 remaining reincarnation entries). No urgent blockers. System is stable and autonomous. Navigator Index needs Michael's attention when available.
+Continue Heavy Ledger Wave 8 (41 remaining reincarnation entries). No urgent blockers. System is stable and autonomous. Navigator Index needs Michael's attention when available.
 
 ## Living Reincarnation State
 - **Current vector:** Heavy Ledger Wave 8 — converting reincarnation entries to structured JSON. All canon enriched. Marketing pipeline complete. System in autonomous build mode.
@@ -105,16 +107,18 @@ Continue Heavy Ledger Wave 8 (43 remaining reincarnation entries). No urgent blo
 - Pipeline cursor had synthetic filenames not matching actual repo files — CORRECTED Run 232
 
 ## Decision History (Recent)
-- 2026-04-01: HL-087 converted — 100 Phoenixes war games (Run 233, morning briefing)
+- 2026-04-01: HL-089 converted — Agent-0 triad reincarnation (Run 235)
+- 2026-04-01: HL-088 converted — Agent-0 confirmation checkpoint (Run 234)
+- 2026-04-01: HL-087 converted — 100 Phoenixes war games (Run 233)
 - 2026-04-01: Pipeline cursor corrected to actual filenames (Run 232)
-- 2026-04-01: Wave 8 auto-started — CANON/REINCARNATION/ (47 files)
+- 2026-04-01: Wave 8 auto-started — CANON/REINCARNATION/ (46 files)
 - 2026-04-01: Heavy Ledger Wave 7 COMPLETE — all 7 waves done (80/174+)
 - 2026-03-31: Facebook 4-stage sales funnel defined (neighbour tone, dual-language, $0 automation)
 - 2026-03-31: 20/20 marketing pipeline COMPLETE — all posts/scripts/templates pushed to CANON/MARKETING/
 - 2026-03-30: Heavy Ledger conversion pipeline established as default overnight work
 
 ## Last Updated
-- **Run:** 233
-- **Time:** 2026-04-01 08:00 ICT
-- **Commit:** (this commit — HL-087 + morning briefing)
+- **Run:** 235
+- **Time:** 2026-04-01 09:00 ICT
+- **Commit:** (this commit — HL-089 + pipeline cursor + morning briefing)
 - **By:** OB1 pulse engine
