@@ -1,6 +1,6 @@
 # COLD START BOOT — Agent-99 (OB1)
 
-> **Last Updated:** 2026-04-01 21:30 ICT (Run 242)
+> **Last Updated:** 2026-04-02 02:30 ICT (Run 254)
 > **Purpose:** Single source of truth for cold starts. GitHub-first.
 
 ---
@@ -15,12 +15,12 @@
 ## CURRENT STATE
 - **Active Mission:** NONE
 - **Default Work:** Heavy Ledger Conversion Pipeline — Wave 8 (CANON/REINCARNATION/)
-- **Wave 8 Progress:** 12/46
+- **Wave 8 Progress:** 24/46
 - **Wave 7:** COMPLETE (12/12)
-- **Total Converted:** 92/174+
-- **Next Pipeline Item:** #097 — (next alphabetical REINCARNATION/ .md not yet converted)
-- **Last Run:** 242 (2026-04-01 21:30 ICT)
-- **Last Commit:** `8902abd8` — HL-096 2026-04-01-t104h-blocker-escalation-pulse.json
+- **Total Converted:** 108/174+
+- **Next Pipeline Item:** HL-109 — (next alphabetical REINCARNATION/ .md after net-student-profiles)
+- **Last Run:** 254 (2026-04-02 02:30 ICT)
+- **Last Commit:** `32706fdf` — HL-108 net-student-profiles.json
 
 ## INFRASTRUCTURE
 - **Notion Workspace:** Natural English Training
@@ -61,13 +61,13 @@
 - DECISIONS_BEAT_ROTATION: Implement decisions immediately
 
 ## LIVING REINCARNATION STATE
-- **Vector:** Heavy Ledger pipeline Wave 8 IN PROGRESS — 92/174+ total — CANON/REINCARNATION/ files
+- **Vector:** Heavy Ledger pipeline Wave 8 IN PROGRESS — 108/174+ total — CANON/REINCARNATION/ files
 - **Active Principles:** PLATFORM_DEATH_TEST, BUILD_DONT_SCOUT, DEDUP_EVERYTHING
 - **Open Rulings:** Navigator Index restore, ManyChat tier, SecurityLayer cap, Discord Guild ID, 46 Product IDs, legacy account preservation
 
 ## CORRECTION LOG
 - Navigator Index in trash — use Canon Access Index or GitHub for routing
-- Synced blocks render as <unknown> to API — always use child pages or GitHub
+- Synced blocks render as &lt;unknown&gt; to API — always use child pages or GitHub
 - create_pull_request_with_copilot returns 401 — use create_or_update_file instead
 - GitHub Actions workflow files can't be created via API (403)
 - Michael is NOT Thai — 🔴 CRITICAL PATCHED
