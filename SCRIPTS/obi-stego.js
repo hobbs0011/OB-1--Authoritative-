@@ -12,9 +12,8 @@
  * L5_KEY — Irreversible actions
  */
 
-import { createCanvas, loadImage } from '@napi-rs/canvas' || createVanillaCanvas();
 import { writeFileSync, readFileSync, existsSync } from 'fs';
-import { decodeBase64, encodeBase64 } from 'buffer';
+import { randomBytes, createHash } from 'crypto';
 
 // ═══════════════════════════════════════════════════════════
 // CONFIG — Change these for your deployment
@@ -71,14 +70,7 @@ function hexToString(hex) {
  * @param {number} bytes - Length in bytes (default 32)
  */
 function generateSecretKey(bytes = 32) {
-  const hexChars = '0123456789abcdef';
-  let key = '';
-  const array = new Uint8Array(bytes);
-  crypto.getRandomValues(array);
-  for (let i = 0; i < bytes; i++) {
-    key += hexChars[array[i] % 16];
-  }
-  return key;
+  return randomBytes(bytes).toString('hex');
 }
 
 /**
@@ -92,7 +84,7 @@ function createKeyBundle(layer = 'L1') {
   // Layer key = HMAC(SECRET_TO_SECRETS, layer_name + timestamp)
   const timestamp = Date.now();
   const payload = `${CONFIG.SECRET_TO_SECRETS}:${layer}:${timestamp}`;
-  const key = crypto.createHash('sha256').update(payload).digest('hex');
+  const key = createHash('sha256').update(payload).digest('hex');
   
   return {
     layer,
