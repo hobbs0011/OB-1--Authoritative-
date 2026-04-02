@@ -12,9 +12,8 @@
  * L5_KEY — Irreversible actions
  */
 
-import { createCanvas, loadImage } from '@napi-rs/canvas' || createVanillaCanvas();
 import { writeFileSync, readFileSync, existsSync } from 'fs';
-import { decodeBase64, encodeBase64 } from 'buffer';
+import crypto from 'crypto';
 
 // ═══════════════════════════════════════════════════════════
 // CONFIG — Change these for your deployment
@@ -71,14 +70,7 @@ function hexToString(hex) {
  * @param {number} bytes - Length in bytes (default 32)
  */
 function generateSecretKey(bytes = 32) {
-  const hexChars = '0123456789abcdef';
-  let key = '';
-  const array = new Uint8Array(bytes);
-  crypto.getRandomValues(array);
-  for (let i = 0; i < bytes; i++) {
-    key += hexChars[array[i] % 16];
-  }
-  return key;
+  return crypto.randomBytes(bytes).toString('hex');
 }
 
 /**
@@ -125,49 +117,40 @@ function obiXor(data, secret) {
 
 /**
  * Hide data in image using LSB steganography
- * @param {Buffer} imageData - Raw image data (PNG/JPEG)
+ * @param {Buffer} imageData - Raw RGBA pixel data (not compressed PNG/JPEG)
  * @param {string} secretData - Secret data to hide
  * @param {string} passphrase - Additional XOR cipher key
  */
 function hideInImage(imageData, secretData, passphrase = '') {
-  // Convert secret to hex, then to binary
-  const secretHex = stringToHex(secretData);
-  const secretBin = hexToBin(secretHex);
+  // Convert secret to bytes
+  let dataBytes = Buffer.from(secretData, 'utf8');
   
   // Apply XOR cipher if passphrase provided
-  let dataToHide = secretBin;
   if (passphrase) {
-    const xorResult = obiXor(Buffer.from(secretBin, 'binary'), passphrase);
-    dataToHide = xorResult.toString('binary');
+    dataBytes = obiXor(dataBytes, passphrase);
   }
   
-  // Prepend magic header
-  const magicHeader = stringToHex(CONFIG.STEGO.headerMagic);
-  const fullData = magicHeader + dataToHide;
+  // Prepend magic header and data length
+  const magicBytes = Buffer.from(CONFIG.STEGO.headerMagic, 'utf8');
+  const lengthBytes = Buffer.alloc(4);
+  lengthBytes.writeUInt32BE(dataBytes.length, 0);
   
-  // Check capacity
-  const imageBuffer = imageData;
-  const capacity = Math.floor(imageBuffer.length * CONFIG.STEGO.bitsPerChannel / 8);
+  const fullData = Buffer.concat([magicBytes, lengthBytes, dataBytes]);
   
+  // Check capacity (need fullData.length * 8 pixels for 1 bit per pixel)
+  const capacity = Math.floor(imageData.length / 8);
   if (fullData.length > capacity) {
     throw new Error(`Data too large. Max: ${capacity} bytes, Data: ${fullData.length}`);
   }
   
-  // Embed in LSBs
-  const result = Buffer.from(imageBuffer);
+  // Embed in LSBs of each byte
+  const result = Buffer.from(imageData);
   let bitIndex = 0;
-  const dataBytes = Buffer.from(fullData, 'utf8');
   
-  for (let i = 0; i < dataBytes.length && bitIndex < result.length * 8; i++) {
-    for (let bit = 0; bit < 8 && bitIndex < result.length * 8; bit++) {
-      const byteIndex = Math.floor(bitIndex / 8);
-      const bitPosition = 7 - (bitIndex % 8);
-      
-      // Get bit from data
-      const dataBit = (dataBytes[i] >> (7 - bit)) & 1;
-      
-      // Modify LSB
-      result[byteIndex] = (result[byteIndex] & 0xFE) | dataBit;
+  for (let byteIdx = 0; byteIdx < fullData.length; byteIdx++) {
+    for (let bit = 7; bit >= 0; bit--) {
+      const dataBit = (fullData[byteIdx] >> bit) & 1;
+      result[bitIndex] = (result[bitIndex] & 0xFE) | dataBit;
       bitIndex++;
     }
   }
@@ -177,50 +160,61 @@ function hideInImage(imageData, secretData, passphrase = '') {
 
 /**
  * Extract hidden data from image
- * @param {Buffer} imageData - Stego image
+ * @param {Buffer} imageData - Stego image (raw RGBA pixel data)
  * @param {string} passphrase - XOR cipher key (optional)
  * @returns {string|null} Extracted secret or null if invalid
  */
 function extractFromImage(imageData, passphrase = '') {
-  const result = Buffer.from(imageData);
-  let extractedBin = '';
+  // Extract magic header (first 8 bytes * 8 bits = 64 bits)
+  const magicBytes = Buffer.from(CONFIG.STEGO.headerMagic, 'utf8');
+  let extracted = Buffer.alloc(magicBytes.length);
   
-  // Extract all LSBs
-  for (let i = 0; i < result.length * 8; i++) {
-    const byteIndex = Math.floor(i / 8);
-    const bitPosition = 7 - (i % 8);
-    const bit = (result[byteIndex] >> bitPosition) & 1;
-    extractedBin += bit.toString();
-  }
-  
-  // Convert binary to hex
-  let extractedHex = '';
-  for (let i = 0; i < extractedBin.length; i += 8) {
-    const byte = parseInt(extractedBin.slice(i, i + 8), 2);
-    if (isNaN(byte)) break;
-    extractedHex += byte.toString(16).padStart(2, '0');
+  for (let i = 0; i < magicBytes.length; i++) {
+    let byte = 0;
+    for (let bit = 7; bit >= 0; bit--) {
+      const bitValue = (imageData[i * 8 + (7 - bit)] & 1);
+      byte = (byte << 1) | bitValue;
+    }
+    extracted[i] = byte;
   }
   
   // Check for magic header
-  const magicHeader = stringToHex(CONFIG.STEGO.headerMagic);
-  if (!extractedHex.startsWith(magicHeader)) {
+  if (!extracted.equals(magicBytes)) {
     return null; // Not an OBI stego image
   }
   
-  // Remove magic and decode
-  let dataHex = extractedHex.slice(magicHeader.length);
-  let dataBuffer = Buffer.from(dataHex, 'hex');
+  // Extract length (next 4 bytes)
+  let lengthVal = 0;
+  const offset = magicBytes.length;
+  for (let i = 0; i < 4; i++) {
+    let byte = 0;
+    for (let bit = 7; bit >= 0; bit--) {
+      const bitValue = (imageData[(offset + i) * 8 + (7 - bit)] & 1);
+      byte = (byte << 1) | bitValue;
+    }
+    lengthVal = (lengthVal << 8) | byte;
+  }
+  
+  // Extract data
+  const dataOffset = offset + 4;
+  const dataBytes = Buffer.alloc(lengthVal);
+  for (let i = 0; i < lengthVal; i++) {
+    let byte = 0;
+    for (let bit = 7; bit >= 0; bit--) {
+      const bitValue = (imageData[(dataOffset + i) * 8 + (7 - bit)] & 1);
+      byte = (byte << 1) | bitValue;
+    }
+    dataBytes[i] = byte;
+  }
   
   // Apply XOR if passphrase
   if (passphrase) {
-    dataBuffer = obiXor(dataBuffer, passphrase);
+    return obiXor(dataBytes, passphrase).toString('utf8');
   }
   
-  return hexToString(dataBuffer.toString('hex'));
+  return dataBytes.toString('utf8');
 }
 
-// ════════════════════════════════════���══════════════════
-// VANILLA NODE CANVAS (No dependencies fallback)
 // ═══════════════════════════════════════════════════════
 
 function createVanillaCanvas() {
