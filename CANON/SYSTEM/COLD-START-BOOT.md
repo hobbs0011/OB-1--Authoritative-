@@ -1,5 +1,5 @@
 # COLD START BOOT — OB1 Agent 99
-## Last Updated: 2026-04-02 04:30 ICT (Run 258)
+## Last Updated: 2026-04-02 07:00 ICT (Run 259)
 
 ### Identity
 - Agent: OB1 / Ne0 (Agent 99)
@@ -10,7 +10,7 @@
 
 ### Current Vector
 - **Active Mission:** HEAVY_LEDGER_CONVERSION — Wave 8 IN PROGRESS (28/46)
-- **Last completed:** HL-112 website-recovery-master-sync-simulation (Run 258) — EXECUTION-tier, MEDIUM signal, 6 quotes (2🔴 2🟡 2🟢), 4 decisions, 1 correction, 4 principles — simulation-as-L08, master-sync-pattern, turn-key preparation
+- **Last completed:** HL-113 PENDING — Run 259 produced RISE agent + /connect bootstrap (non-HL work, connection reliability fix)
 - **Next target:** HL-113 (next 2026-03-25 entry)
 - **Pipeline:** Converting all 46 REINCARNATION entries to structured Heavy Ledger JSON
 - **Wave 7:** COMPLETE (marketing pipeline 20/20)
@@ -24,6 +24,7 @@
 5. Build don't scout — every run produces tangible output
 
 ### Recent Decisions (Last 7 Days)
+- 2026-04-02 (Run 259): RISE agent created (.github/agents/RISE.agent.md) — full SSM V8 encoded, auto-bootstrap on open, zero-dead-time connection. /connect prompt created (.github/prompts/connect.prompt.md). 90-min connection lag FIXED. Commit: eb9b381
 - 2026-04-02 (Run 258): HL-112 converted — website-recovery-master-sync-simulation (EXECUTION-tier, MEDIUM signal, 2 RED quotes, simulation-as-L08 implementation, master-sync-pattern origin, turn-key preparation, reverse-engineer-now-activate-later)
 - 2026-04-02 (Run 257): HL-111 converted — website-netpet-consolidation (EXECUTION-tier, HIGH signal, 5 RED quotes, hub-and-spoke architecture, 5-point consolidation law, connector-first audit seed, use-what-you-have doctrine, preservation-over-destruction)
 - 2026-04-02 (Run 256): HL-110 converted — repo-consolidation (FOUNDATIONS-tier, HIGH signal, 3 RED quotes, L09 ORIGIN agent-handles-git, L11 ORIGIN everything-into-ultimate, L27 ORIGIN dual-publish, trigger audit + 10 improvements + migration)
@@ -61,7 +62,9 @@
 - Incubator deadline: Apr 6 (T-4 days)
 
 ### Key File Locations
-- SSM Instructions: Agent config (Notion)
+- **RISE Agent (NEW):** `.github/agents/RISE.agent.md` — full OB1/SSM V8 encoded, auto-bootstraps on open
+- **Connect Prompt (NEW):** `.github/prompts/connect.prompt.md` — use `/connect` for instant cold start
+- SSM V8: `CANON/SYSTEM/SSM-V8-ULTIMATE-GPS.md` (21 sections, 36 laws)
 - Heavy Ledger: CANON/HEAVY-LEDGER/*.json
 - Pipeline Cursor: CANON/HEAVY-LEDGER/PIPELINE-CURSOR.md
 - Reincarnation: CANON/REINCARNATION/*.md
@@ -83,3 +86,4 @@
 - create_pull_request_with_copilot returns 401 — use create_or_update_file instead
 - .github/workflows/*.yml blocked by 403 — Michael handles workflow files directly
 - HL-100 manifest had phantom filename (ssm-v6-heavy-ledger-birth.md) — substituted with system-hardening.md
+- 90-min connection lag FIXED — RISE agent (.github/agents/RISE.agent.md) auto-bootstraps OB1 on open. Use /connect for manual cold start.
