@@ -69,7 +69,6 @@ local BOOT_ORDER = {
     { name = "PrestigeManager",        path = "PrestigeManager",        required = false },
     { name = "WorldBoss",              path = "WorldBoss",              required = false },
     { name = "AnomalyDetector",        path = "AnomalyDetector",        required = false },
-    { name = "FTUEManager",            path = "FTUEManager",            required = false },
     { name = "FTUEController",         path = "FTUEController",         required = false },
 }
 
@@ -141,9 +140,9 @@ local function onPlayerAdded(player)
     if Modules.CombatRewardsManager and type(Modules.CombatRewardsManager.OnPlayerJoin) == "function" then pcall(Modules.CombatRewardsManager.OnPlayerJoin, player) end
     if Modules.RewardBridge and type(Modules.RewardBridge.RegisterPlayer) == "function" then pcall(Modules.RewardBridge.RegisterPlayer, player) end
     if Modules.CosmeticController and type(Modules.CosmeticController.LoadPlayer) == "function" then pcall(Modules.CosmeticController.LoadPlayer, player) end
-    if Modules.FTUEManager then
+    if Modules.FTUEController then
         local data = Modules.DataStoreV2 and Modules.DataStoreV2.GetPlayerData(player)
-        if data and not data.ftueComplete then pcall(Modules.FTUEManager.StartFTUE, player) end
+        if data and not data.ftueComplete then pcall(Modules.FTUEController.StartFTUE, player) end
     end
     if Modules.DailyRewards then pcall(Modules.DailyRewards.CheckIn, player) end
     if Modules.MonetizationOrchestrator and type(Modules.MonetizationOrchestrator.OnSessionStart) == "function" then pcall(Modules.MonetizationOrchestrator.OnSessionStart, player) end
