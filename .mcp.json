@@ -30,6 +30,11 @@
       "command": "npx",
       "args": ["-y", "@playwright/mcp", "--headless"]
     },
+    "chrome-devtools": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "chrome-devtools-mcp"]
+    },
     "slack": {
       "type": "stdio",
       "command": "npx",
