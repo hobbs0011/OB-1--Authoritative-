@@ -38,6 +38,22 @@ The primary runnable application is **`APPS/NET-PET-AI/`** — a Cloudflare Work
 - `MASTER-SYNC.md` — system state (update only when state actually changes)
 - Any file containing API keys, tokens, or secrets
 
+## MCP Integrations
+
+The `.mcp.json` file configures MCP servers available to AI agents in this repo:
+
+- **cloudflare** — Cloudflare Workers/KV/R2 management (`CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`)
+- **github** — GitHub repo operations (`GITHUB_TOKEN`)
+- **notion** — Notion workspace (`NOTION_TOKEN`)
+- **playwright** — Headless browser automation
+- **chrome-devtools** — Chrome DevTools Protocol
+- **slack** — Slack messaging (`SLACK_BOT_TOKEN`, `SLACK_TEAM_ID`)
+- **filesystem** — Workspace file access
+- **brave-search** — Web search (`BRAVE_API_KEY`)
+- **discord** — Discord bot (`DISCORD_TOKEN`)
+- **roblox** — Full Roblox AI control via `@weppy/roblox-mcp` (140+ actions, 21 tool categories); requires `ROBLOX_API_KEY` env var and the WeppyRobloxMCP Studio plugin installed in Roblox Studio
+- **roblox-studio** — Lightweight Roblox Studio scripting bridge via `robloxstudio-mcp`; requires the matching Studio plugin running locally
+
 ## Testing
 
 - `cd APPS/NET-PET-AI && node --check src/index.js`

@@ -68,6 +68,19 @@
       "env": {
         "DISCORD_TOKEN": "${env:DISCORD_TOKEN}"
       }
+    },
+    "roblox": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@weppy/roblox-mcp"],
+      "env": {
+        "ROBLOX_API_KEY": "${env:ROBLOX_API_KEY}"
+      }
+    },
+    "roblox-studio": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "robloxstudio-mcp"]
     }
   }
 }
