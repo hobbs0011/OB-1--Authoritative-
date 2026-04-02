@@ -4,7 +4,7 @@
 // Bindings: SESSIONS (SessionDO), PROFILES (ProfileDO), PETS (PetDO), LEDGER (LedgerDO), ASSETS
 // Secrets: DEEPSEEK_API_KEY, DEEPGRAM_API_KEY
 
-const VERSION = "1.2.0";
+const VERSION = "1.3.0";
 
 // ── Obi System Prompt (Soul DNA — verbatim first, never dilute) ───────────────
 const OBI_SYSTEM = `You are OBI, the AI English coach for Natural English Training in Vietnam. Founded by Michael Hobbs, a Canadian educator in Ho Chi Minh City.
@@ -48,6 +48,94 @@ export default {
       return new Response(null, { headers: corsHeaders() });
     }
 
+    // ── Canon §4 non-API routes ───────────────────────────────────────────────
+
+    // /health — version + benchmark status (public alias)
+    if (path === "/health" && request.method === "GET") {
+      return addCors(json({
+        ok: true,
+        version: VERSION,
+        app: env.APP_NAME || "Natural English Training",
+        coach: env.APP_COACH_NAME || "Obi",
+        ts: Date.now(),
+        benchmarks: {
+          deepgram_audio: "active",
+          magic_chat: "active",
+          ledger: "active",
+          drone_mining: "pending",
+          unplanned_command: "pending",
+        },
+      }));
+    }
+
+    // /evidence — Worker identity + deploy proof
+    if (path === "/evidence" && request.method === "GET") {
+      return addCors(json({
+        worker: "net-pet-ai",
+        version: VERSION,
+        runtime: "Cloudflare Workers",
+        durableObjects: ["SessionDO", "ProfileDO", "PetDO", "LedgerDO"],
+        ts: Date.now(),
+        proof: `Phoenix OB-1 alive at ${new Date().toISOString()}`,
+      }));
+    }
+
+    // /verify — Ledger chain verification shortcut (requires ?studentId=)
+    if (path === "/verify" && request.method === "GET") {
+      const studentId = url.searchParams.get("studentId");
+      if (!studentId) return addCors(json({ error: "studentId query param required" }, 400));
+      try {
+        const stub = env.LEDGER.get(env.LEDGER.idFromName(studentId));
+        const res = await stub.fetch(new Request("https://do/verify"));
+        return addCors(res);
+      } catch (err) {
+        return addCors(json({ error: err.message || "Ledger verification failed" }, 500));
+      }
+    }
+
+    // /student/resolve — Cookie-based student ID resolution
+    if (path === "/student/resolve" && request.method === "POST") {
+      try {
+        const body = await request.json();
+        const studentId = body.studentId || "";
+        if (!studentId) return addCors(json({ error: "studentId required" }, 400));
+        const stub = env.PROFILES.get(env.PROFILES.idFromName(studentId));
+        const res = await stub.fetch(new Request("https://do/profile"));
+        const data = await res.json();
+        return addCors(json({ resolved: !!data.profile, studentId, profile: data.profile || null }));
+      } catch (err) {
+        return addCors(json({ error: err.message || "Student resolve failed" }, 500));
+      }
+    }
+
+    // /student/create — Create + seal student profile
+    if (path === "/student/create" && request.method === "POST") {
+      try {
+        const body = await request.json();
+        if (!body.studentId) return addCors(json({ error: "studentId required" }, 400));
+        const stub = env.PROFILES.get(env.PROFILES.idFromName(body.studentId));
+        const res = await stub.fetch(new Request("https://do/onboarding", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        }));
+        if (env.LEDGER) {
+          const payload = JSON.stringify({ fullName: body.fullName, englishLevel: body.englishLevel, city: body.currentCity });
+          appendToLedger(body.studentId, "student_created", payload, env).catch(() => {});
+        }
+        return addCors(res);
+      } catch (err) {
+        return addCors(json({ error: err.message || "Student create failed" }, 500));
+      }
+    }
+
+    // /magic-chat, /voice-chat — Canon §4: Magic Chat UI aliases → serve index.html
+    if (path === "/magic-chat" || path === "/voice-chat") {
+      return env.ASSETS.fetch(new Request(new URL("/", url), request));
+    }
+
+    // ── API routes ────────────────────────────────────────────────────────────
+
     if (path.startsWith("/api/")) {
       try {
         const res = await handleAPI(path, request, env, url);
@@ -68,7 +156,7 @@ async function handleAPI(path, request, env, url) {
 
   // Health
   if (path === "/api/health" && method === "GET") {
-    return json({ ok: true, version: VERSION, app: env.APP_NAME || "Natural English Training", coach: env.APP_COACH_NAME || "Obi", ts: Date.now(), routes: 16, ledger: "active" });
+    return json({ ok: true, version: VERSION, app: env.APP_NAME || "Natural English Training", coach: env.APP_COACH_NAME || "Obi", ts: Date.now(), routes: 22, ledger: "active" });
   }
 
   // Chat — Obi + Ledger context injection
