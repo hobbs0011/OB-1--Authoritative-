@@ -64,6 +64,10 @@
         // ── DOCKER ──────────────────────────────────────────────────────────────
         "ms-azuretools.vscode-docker",
 
+        // ── MCP & INTEGRATIONS ───────────────────────────────────────────────────
+        "ms-azuretools.azure-mcp-server",           // MCP server ecosystem orchestration (12+ servers, 5 tiers)
+        "humao.rest-client",                         // Subscription management: payment/lifecycle/revenue API testing
+
         // ── DX & PRODUCTIVITY ───────────────────────────────────────────────────
         "usernamehw.errorlens",
         "gruntfuggly.todo-tree",
