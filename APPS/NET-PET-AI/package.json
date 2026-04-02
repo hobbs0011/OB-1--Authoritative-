@@ -2,5 +2,20 @@
   "name": "net-pet-ai",
   "version": "1.2.0",
   "private": true,
-  "description": "AI-powered English learning companion"
+  "description": "AI-powered English learning companion",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "wrangler dev",
+    "dev:safe": "wrangler dev --port 8788",
+    "deploy": "wrangler deploy",
+    "deploy:safe": "node scripts/verify-wrangler-config.mjs && wrangler deploy --name net-pet-ai",
+    "verify:wrangler": "node scripts/verify-wrangler-config.mjs",
+    "predeploy": "node scripts/predeploy.mjs",
+    "check": "node --check src/index.js",
+    "test": "node test/smoke.js"
+  },
+  "devDependencies": {
+    "wrangler": "^4.80.0"
+  }
 }
