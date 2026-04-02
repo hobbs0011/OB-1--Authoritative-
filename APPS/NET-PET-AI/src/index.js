@@ -48,6 +48,42 @@ export default {
       return new Response(null, { headers: corsHeaders() });
     }
 
+    // ── Magic Chat canonical routes (§4 — Product Architecture) ───────────────
+    // /magic-chat and /voice-chat serve the chat UI (same as /)
+    if (path === "/magic-chat" || path === "/voice-chat") {
+      return env.ASSETS.fetch(new Request(new URL("/magic-chat.html", url.origin), request));
+    }
+
+    // /health — version + benchmark status (non-API version)
+    if (path === "/health" && request.method === "GET") {
+      return addCors(json({
+        ok: true,
+        version: VERSION,
+        app: env.APP_NAME || "Natural English Training",
+        coach: env.APP_COACH_NAME || "Obi",
+        ts: Date.now(),
+        benchmarks: {
+          deepgram_audio: "configured",
+          magic_chat: "active",
+          ledger: "active",
+          drone_mining: "pending",
+          unplanned_command: "pending",
+        },
+      }));
+    }
+
+    // /evidence — Worker identity + deploy proof
+    if (path === "/evidence" && request.method === "GET") {
+      return addCors(json({
+        worker: "net-pet-ai",
+        version: VERSION,
+        runtime: "Cloudflare Workers",
+        durableObjects: ["SessionDO", "ProfileDO", "PetDO", "LedgerDO"],
+        routes: ["/", "/magic-chat", "/voice-chat", "/health", "/evidence", "/api/*"],
+        deployProof: { ts: Date.now(), compatibility_date: "2026-03-16" },
+      }));
+    }
+
     if (path.startsWith("/api/")) {
       try {
         const res = await handleAPI(path, request, env, url);
