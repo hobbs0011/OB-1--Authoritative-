@@ -35,13 +35,13 @@ jobs:
   # PRONG 1: hobbs-lab (uses default GITHUB_TOKEN)
   # ============================================
   deploy-hobbs-lab:
-    if: $ github.event.inputs.hobbs_lab_issue != '' 
+    if: ${{ github.event.inputs.hobbs_lab_issue != '' }}
     runs-on: ubuntu-latest
     steps:
       - name: Create issue on hobbs-lab
         uses: actions/github-script@v7
         with:
-          github-token: $ secrets.GITHUB_TOKEN 
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const issue = await github.rest.issues.create({
               owner: 'hobbs-lab',
@@ -69,13 +69,13 @@ jobs:
   # PRONG 2: hobbs0011 (uses PAT_HOBBS0011 secret)
   # ============================================
   deploy-hobbs0011:
-    if: $ github.event.inputs.hobbs0011_issue != '' 
+    if: ${{ github.event.inputs.hobbs0011_issue != '' }}
     runs-on: ubuntu-latest
     steps:
       - name: Create issue on hobbs0011
         uses: actions/github-script@v7
         with:
-          github-token: $ secrets.PAT_HOBBS0011 
+          github-token: ${{ secrets.PAT_HOBBS0011 }}
           script: |
             const issue = await github.rest.issues.create({
               owner: 'hobbs0011',
@@ -101,13 +101,13 @@ jobs:
   # PRONG 3: mrmichaelhobbs1234-lang (uses PAT_LANG secret)
   # ============================================
   deploy-lang:
-    if: $ github.event.inputs.lang_issue != '' 
+    if: ${{ github.event.inputs.lang_issue != '' }}
     runs-on: ubuntu-latest
     steps:
       - name: Create issue on mrmichaelhobbs1234-lang
         uses: actions/github-script@v7
         with:
-          github-token: $ secrets.PAT_LANG 
+          github-token: ${{ secrets.PAT_LANG }} 
           script: |
             const issue = await github.rest.issues.create({
               owner: 'mrmichaelhobbs1234-lang',
