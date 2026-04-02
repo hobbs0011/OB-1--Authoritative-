@@ -240,13 +240,16 @@
   <script src="/chat.js"></script>
   <script>
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/sw.js').catch(() => {});
+      navigator.serviceWorker.register('/sw.js').catch(function(err) {
+        console.warn('SW registration failed:', err);
+      });
     }
     // Hide welcome screen when first message appears
     const welcomeEl = document.getElementById('welcome');
-    const observer = new MutationObserver(() => {
+    const observer = new MutationObserver(function() {
       if (document.getElementById('feed').children.length > 0 && welcomeEl) {
         welcomeEl.classList.remove('show');
+        observer.disconnect();
       }
     });
     observer.observe(document.getElementById('feed'), { childList: true });
