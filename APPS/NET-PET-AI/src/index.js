@@ -70,7 +70,7 @@ async function handleAPI(path, request, env, url) {
 
   // Health
   if (path === "/api/health" && method === "GET") {
-    return json({ ok: true, version: VERSION, app: env.APP_NAME || "Natural English Training", coach: env.APP_COACH_NAME || "Obi", ts: Date.now(), routes: 20, ledger: "active", notion: !!env.NOTION_API_KEY });
+    return json({ ok: true, version: VERSION, app: env.APP_NAME || "Natural English Training", coach: env.APP_COACH_NAME || "Obi", ts: Date.now(), ledger: "active", notion: !!env.NOTION_API_KEY });
   }
 
   // Chat — Obi + Ledger context injection

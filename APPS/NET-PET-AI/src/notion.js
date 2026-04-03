@@ -37,18 +37,15 @@ async function notionFetch(apiKey, endpoint, method = "GET", body = null) {
 export async function queryLessons(apiKey, databaseId, filters = {}) {
   const body = { page_size: filters.limit || 20 };
 
+  const conditions = [];
   if (filters.level) {
-    body.filter = {
-      property: "Level",
-      select: { equals: filters.level },
-    };
+    conditions.push({ property: "Level", select: { equals: filters.level } });
   }
-
   if (filters.topic) {
-    body.filter = body.filter
-      ? { and: [body.filter, { property: "Topic", rich_text: { contains: filters.topic } }] }
-      : { property: "Topic", rich_text: { contains: filters.topic } };
+    conditions.push({ property: "Topic", rich_text: { contains: filters.topic } });
   }
+  if (conditions.length === 1) body.filter = conditions[0];
+  else if (conditions.length > 1) body.filter = { and: conditions };
 
   body.sorts = [{ property: "Order", direction: "ascending" }];
 
