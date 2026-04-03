@@ -2,7 +2,9 @@
 // Natural English Training — Obi AI English Coach
 // Architecture: Agent100 → Magic Chat → Agent99 (Obi) → Cryptographic Immutable Ledger
 // Bindings: SESSIONS (SessionDO), PROFILES (ProfileDO), PETS (PetDO), LEDGER (LedgerDO), ASSETS
-// Secrets: DEEPSEEK_API_KEY, DEEPGRAM_API_KEY
+// Secrets: DEEPSEEK_API_KEY, DEEPGRAM_API_KEY, NOTION_API_KEY
+
+import { queryLessons, writeProgress, queryProgress, syncStudentProgress } from "./notion.js";
 
 const VERSION = "1.2.0";
 
@@ -68,7 +70,7 @@ async function handleAPI(path, request, env, url) {
 
   // Health
   if (path === "/api/health" && method === "GET") {
-    return json({ ok: true, version: VERSION, app: env.APP_NAME || "Natural English Training", coach: env.APP_COACH_NAME || "Obi", ts: Date.now(), routes: 16, ledger: "active" });
+    return json({ ok: true, version: VERSION, app: env.APP_NAME || "Natural English Training", coach: env.APP_COACH_NAME || "Obi", ts: Date.now(), routes: 20, ledger: "active", notion: !!env.NOTION_API_KEY });
   }
 
   // Chat — Obi + Ledger context injection
@@ -103,6 +105,12 @@ async function handleAPI(path, request, env, url) {
   if (path === "/api/ledger/append" && method === "POST") { const body = await request.json(); return handleLedgerAppend(body, env); }
   if (path === "/api/ledger/history" && method === "GET") { return handleLedgerHistory(url.searchParams.get("studentId") || "", parseInt(url.searchParams.get("limit") || "50"), env); }
   if (path === "/api/ledger/verify" && method === "GET") { return handleLedgerVerify(url.searchParams.get("studentId") || "", env); }
+
+  // Notion Integration — lesson CMS + progress tracking
+  if (path === "/api/notion/lessons" && method === "GET") { return handleNotionLessons(url, env); }
+  if (path === "/api/notion/progress" && method === "POST") { const body = await request.json(); return handleNotionProgress(body, env); }
+  if (path === "/api/notion/progress" && method === "GET") { return handleNotionProgressGet(url, env); }
+  if (path === "/api/notion/sync" && method === "POST") { const body = await request.json(); return handleNotionSync(body, env); }
 
   return json({ error: "Not found" }, 404);
 }
@@ -342,6 +350,58 @@ async function handleLedgerVerify(studentId, env) {
   if (!studentId) return json({ error: "studentId required" }, 400);
   const stub = env.LEDGER.get(env.LEDGER.idFromName(studentId));
   return stub.fetch(new Request("https://do/verify"));
+}
+
+// ── Notion Integration — Lesson CMS + Progress Tracking ───────────────────────
+
+async function handleNotionLessons(url, env) {
+  const apiKey = env.NOTION_API_KEY;
+  const dbId = env.NOTION_LESSONS_DB;
+  if (!apiKey || !dbId) return json({ error: "Notion not configured. Set NOTION_API_KEY and NOTION_LESSONS_DB secrets." }, 501);
+
+  const filters = {
+    level: url.searchParams.get("level") || undefined,
+    topic: url.searchParams.get("topic") || undefined,
+    limit: parseInt(url.searchParams.get("limit") || "20"),
+  };
+
+  const lessons = await queryLessons(apiKey, dbId, filters);
+  return json({ ok: true, count: lessons.length, lessons });
+}
+
+async function handleNotionProgress(body, env) {
+  const apiKey = env.NOTION_API_KEY;
+  const dbId = env.NOTION_PROGRESS_DB;
+  if (!apiKey || !dbId) return json({ error: "Notion not configured. Set NOTION_API_KEY and NOTION_PROGRESS_DB secrets." }, 501);
+
+  if (!body.studentId) return json({ error: "studentId required" }, 400);
+
+  const result = await writeProgress(apiKey, dbId, body);
+  return json({ ok: true, pageId: result.id });
+}
+
+async function handleNotionProgressGet(url, env) {
+  const apiKey = env.NOTION_API_KEY;
+  const dbId = env.NOTION_PROGRESS_DB;
+  if (!apiKey || !dbId) return json({ error: "Notion not configured. Set NOTION_API_KEY and NOTION_PROGRESS_DB secrets." }, 501);
+
+  const studentId = url.searchParams.get("studentId");
+  if (!studentId) return json({ error: "studentId required" }, 400);
+
+  const limit = parseInt(url.searchParams.get("limit") || "20");
+  const entries = await queryProgress(apiKey, dbId, studentId, limit);
+  return json({ ok: true, count: entries.length, entries });
+}
+
+async function handleNotionSync(body, env) {
+  const apiKey = env.NOTION_API_KEY;
+  const dbId = env.NOTION_PROGRESS_DB;
+  if (!apiKey || !dbId) return json({ error: "Notion not configured. Set NOTION_API_KEY and NOTION_PROGRESS_DB secrets." }, 501);
+
+  if (!body.studentId) return json({ error: "studentId required" }, 400);
+
+  const result = await syncStudentProgress(apiKey, dbId, env, body.studentId);
+  return json({ ok: true, ...result });
 }
 
 // ── Durable Objects ───────────────────────────────────────────────────────────
