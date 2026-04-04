@@ -8,8 +8,7 @@ const wranglerPath = path.join(rootDir, "wrangler.toml");
 const expectedBindings = new Map([
   ["SESSIONS", "SessionDO"],
   ["PROFILES", "ProfileDO"],
-  ["PETS", "PetDO"],
-  ["LEDGER", "LedgerDO"]
+  ["PETS", "PetDO"]
 ]);
 const requiredVars = ["APP_NAME", "APP_COACH_NAME"];
 
@@ -150,34 +149,15 @@ async function main() {
     fail(`durable object binding mismatch: ${bindingProblems.join(", ")}`);
   }
 
-  // Check all migrations
-  const migrations = state.migrations;
-  if (migrations.length === 0) {
-    fail("wrangler.toml must have at least one migration");
+  const migration = state.migrations[0] || {};
+  if (migration.tag !== "v1-net-pet-core") {
+    fail(`migration tag must be "v1-net-pet-core" but found ${JSON.stringify(migration.tag)}`);
   }
-
-  // v1-net-pet-core should define SessionDO, ProfileDO, PetDO
-  const v1Migration = migrations.find(m => m.tag === "v1-net-pet-core");
-  if (!v1Migration) {
-    fail("missing migration with tag 'v1-net-pet-core'");
-  }
-  const v1Classes = Array.isArray(v1Migration.new_sqlite_classes) ? v1Migration.new_sqlite_classes : [];
-  const requiredV1Classes = ["SessionDO", "ProfileDO", "PetDO"];
-  const missingV1Classes = requiredV1Classes.filter((className) => !v1Classes.includes(className));
-  if (missingV1Classes.length > 0) {
-    fail(`migration v1-net-pet-core is missing sqlite classes: ${missingV1Classes.join(", ")}`);
-  }
-
-  // v2-ledger should define LedgerDO
-  const v2Migration = migrations.find(m => m.tag === "v2-ledger");
-  if (!v2Migration) {
-    fail("missing migration with tag 'v2-ledger'");
-  }
-  const v2Classes = Array.isArray(v2Migration.new_sqlite_classes) ? v2Migration.new_sqlite_classes : [];
-  const requiredV2Classes = ["LedgerDO"];
-  const missingV2Classes = requiredV2Classes.filter((className) => !v2Classes.includes(className));
-  if (missingV2Classes.length > 0) {
-    fail(`migration v2-ledger is missing sqlite classes: ${missingV2Classes.join(", ")}`);
+  const newSqliteClasses = Array.isArray(migration.new_sqlite_classes) ? migration.new_sqlite_classes : [];
+  const requiredClasses = ["SessionDO", "ProfileDO", "PetDO"];
+  const missingClasses = requiredClasses.filter((className) => !newSqliteClasses.includes(className));
+  if (missingClasses.length > 0) {
+    fail(`migration v1-net-pet-core is missing sqlite classes: ${missingClasses.join(", ")}`);
   }
 
   const compatibilityFlags = state.topLevel.get("compatibility_flags");

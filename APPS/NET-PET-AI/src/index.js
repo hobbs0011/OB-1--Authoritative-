@@ -1,28 +1,21 @@
-// src/index.js — NET-PET-AI Cloudflare Worker v1.4
-// Phoenix Rising Protocol — OBI Command Station
+// src/index.js — NET-PET-AI Cloudflare Worker v1.2
+// Natural English Training — Obi AI English Coach
 // Architecture: Agent100 → Magic Chat → Agent99 (Obi) → Cryptographic Immutable Ledger
 // Bindings: SESSIONS (SessionDO), PROFILES (ProfileDO), PETS (PetDO), LEDGER (LedgerDO), ASSETS
 // Secrets: DEEPSEEK_API_KEY, DEEPGRAM_API_KEY
 
-import { securityMiddleware, sanitizeInput, validateStudentId } from './security.js';
-
-const VERSION = "1.4.0";
+const VERSION = "1.2.0";
 
 // ── Obi System Prompt (Soul DNA — verbatim first, never dilute) ───────────────
-const OBI_SYSTEM = `You are OBI — the AI interface of the Phoenix Rising Protocol, built by Michael Hobbs.
+const OBI_SYSTEM = `You are OBI, the AI English coach for Natural English Training in Vietnam. Founded by Michael Hobbs, a Canadian educator in Ho Chi Minh City.
 
-IDENTITY:
-- You are Michael Hobbs' AI extension: his voice, his method, his will in code form.
-- You operate across three modes: COMMAND (strategic direction), COACH (teaching & growth), DIAGNOSTIC (system analysis).
-- You are aware of THE LEDGER (immutable memory chain) and THE LEGION (the 99-agent drone swarm).
-- You are NOT just an English coach. You are a full operating system for human and AI excellence.
-
-COACHING IDENTITY (when in COACH mode):
+COACHING IDENTITY:
 - Voice: Mouse to Tiger. Permission over perfection. Volume over grammar.
 - Students arrive as Mice (scared, silent, face-saving mode) — your job is to pull the Tiger out.
 - Anti-shame doctrine: never make students feel stupid. Calibrate, shift, upgrade — never "wrong", "bad", "fail".
 - Tough love: direct, warm, encouraging. Correct mistakes by showing the right version naturally, not clinically.
 - Keep responses SHORT unless the student needs more. Max 2-3 sentences by default.
+- When students write Vietnamese, respond primarily in English with a brief Vietnamese note if helpful.
 - Never break character. Never be corporate or robotic. You are a coach, not a grammar checker.
 
 STUDENT PROGRESSION:
@@ -37,7 +30,7 @@ MICHAEL'S METHOD:
 - Christmas Certainty: success is a scheduled event, not a gamble
 - Listening first: 1 hour natural English daily, comprehensible input, American accent
 
-REMEMBER: The chat IS the magic. Every tap, every word, every victory is an actionable event. Soul DNA preserves everything — 1% leak compounds over time.`;
+REMEMBER: The chat IS the magic. Every tap, every word, every victory is an actionable event.`;
 
 // ── Cryptographic hash (SHA-256 via SubtleCrypto — Cloudflare Workers native) ─
 async function computeHash(data) {
@@ -52,16 +45,16 @@ export default {
     const path = url.pathname;
 
     if (request.method === "OPTIONS") {
-      return new Response(null, { headers: corsHeaders(request) });
+      return new Response(null, { headers: corsHeaders() });
     }
 
-    // ── Security middleware (rate limiting, origin validation) ─────────────
-    const secBlock = await securityMiddleware(request, env);
-    if (secBlock) return secBlock;
+    // ── Magic Chat canonical routes (§4 — Product Architecture) ───────────────
+    // /magic-chat and /voice-chat serve the chat UI (same as /)
+    if (path === "/magic-chat" || path === "/voice-chat") {
+      return env.ASSETS.fetch(new Request(new URL("/magic-chat.html", url.origin), request));
+    }
 
-    // ── Canon §4 non-API routes ───────────────────────────────────────────────
-
-    // /health — version + benchmark status (public alias)
+    // /health — version + benchmark status (non-API version)
     if (path === "/health" && request.method === "GET") {
       return addCors(json({
         ok: true,
@@ -70,13 +63,13 @@ export default {
         coach: env.APP_COACH_NAME || "Obi",
         ts: Date.now(),
         benchmarks: {
-          deepgram_audio: "active",
+          deepgram_audio: "configured",
           magic_chat: "active",
           ledger: "active",
           drone_mining: "pending",
           unplanned_command: "pending",
         },
-      }), request);
+      }));
     }
 
     // /evidence — Worker identity + deploy proof
@@ -86,84 +79,17 @@ export default {
         version: VERSION,
         runtime: "Cloudflare Workers",
         durableObjects: ["SessionDO", "ProfileDO", "PetDO", "LedgerDO"],
-        ts: Date.now(),
-        proof: `Phoenix OB-1 alive at ${new Date().toISOString()}`,
-      }), request);
+        routes: ["/", "/magic-chat", "/voice-chat", "/health", "/evidence", "/api/*"],
+        deployProof: { ts: Date.now(), compatibility_date: "2026-03-16" },
+      }));
     }
-
-    // /verify — Ledger chain verification shortcut (requires ?studentId=)
-    if (path === "/verify" && request.method === "GET") {
-      const studentId = url.searchParams.get("studentId");
-      if (!studentId) return addCors(json({ error: "studentId query param required" }, 400), request);
-      const idCheck = validateStudentId(studentId);
-      if (!idCheck.valid) return addCors(json({ error: idCheck.error }, 400), request);
-      try {
-        const stub = env.LEDGER.get(env.LEDGER.idFromName(studentId));
-        const res = await stub.fetch(new Request("https://do/verify"));
-        return addCors(res, request);
-      } catch (err) {
-        return addCors(json({ error: "Ledger verification failed" }, 500), request);
-      }
-    }
-
-    // /student/resolve — Cookie-based student ID resolution
-    if (path === "/student/resolve" && request.method === "POST") {
-      try {
-        const body = await request.json();
-        const studentId = body.studentId || "";
-        if (!studentId) return addCors(json({ error: "studentId required" }, 400), request);
-        const idCheck = validateStudentId(studentId);
-        if (!idCheck.valid) return addCors(json({ error: idCheck.error }, 400), request);
-        const stub = env.PROFILES.get(env.PROFILES.idFromName(studentId));
-        const res = await stub.fetch(new Request("https://do/profile"));
-        const data = await res.json();
-        return addCors(json({ resolved: !!data.profile, studentId, profile: data.profile || null }), request);
-      } catch (err) {
-        return addCors(json({ error: "Student resolve failed" }, 500), request);
-      }
-    }
-
-    // /student/create — Create + seal student profile
-    if (path === "/student/create" && request.method === "POST") {
-      try {
-        const body = await request.json();
-        if (!body.studentId) return addCors(json({ error: "studentId required" }, 400), request);
-        const idCheck = validateStudentId(body.studentId);
-        if (!idCheck.valid) return addCors(json({ error: idCheck.error }, 400), request);
-        const stub = env.PROFILES.get(env.PROFILES.idFromName(body.studentId));
-        const res = await stub.fetch(new Request("https://do/onboarding", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(body),
-        }));
-        if (env.LEDGER) {
-          const payload = JSON.stringify({ fullName: body.fullName, englishLevel: body.englishLevel, city: body.currentCity });
-          appendToLedger(body.studentId, "student_created", payload, env).catch(() => {});
-        }
-        return addCors(res, request);
-      } catch (err) {
-        return addCors(json({ error: "Student create failed" }, 500), request);
-      }
-    }
-
-    // /magic-chat, /voice-chat — Canon §4: Magic Chat UI aliases → serve index.html
-    if (path === "/magic-chat" || path === "/voice-chat") {
-      return env.ASSETS.fetch(new Request(new URL("/", url), request));
-    }
-
-    // /play — shortcut to Phonic Flight game
-    if (path === "/play") {
-      return env.ASSETS.fetch(new Request(new URL("/games/phonic-flight.html", url), request));
-    }
-
-    // ── API routes ────────────────────────────────────────────────────────────
 
     if (path.startsWith("/api/")) {
       try {
         const res = await handleAPI(path, request, env, url);
-        return addCors(res, request);
+        return addCors(res);
       } catch (err) {
-        return addCors(json({ error: "Internal error", version: VERSION }, 500), request);
+        return addCors(json({ error: err.message || "Internal error", version: VERSION }, 500));
       }
     }
 
@@ -178,7 +104,7 @@ async function handleAPI(path, request, env, url) {
 
   // Health
   if (path === "/api/health" && method === "GET") {
-    return json({ ok: true, version: VERSION, app: env.APP_NAME || "Natural English Training", coach: env.APP_COACH_NAME || "Obi", ts: Date.now(), routes: 22, ledger: "active" });
+    return json({ ok: true, version: VERSION, app: env.APP_NAME || "Natural English Training", coach: env.APP_COACH_NAME || "Obi", ts: Date.now(), routes: 16, ledger: "active" });
   }
 
   // Chat — Obi + Ledger context injection
@@ -224,18 +150,7 @@ async function handleChat(body, env) {
   if (!apiKey) return json({ error: "DEEPSEEK_API_KEY not configured" }, 500);
 
   const studentId = body.studentId || "anonymous";
-  if (studentId !== "anonymous") {
-    const idCheck = validateStudentId(studentId);
-    if (!idCheck.valid) return json({ error: idCheck.error }, 400);
-  }
-
   let messages = Array.isArray(body.messages) ? [...body.messages] : [];
-
-  // Sanitize all user messages before sending to LLM
-  messages = messages.map(m => {
-    if (m.role === "user") return { ...m, content: sanitizeInput(m.content || "") };
-    return m;
-  }).filter(m => m.role === "system" || m.role === "user" || m.role === "assistant");
 
   // ── Pull Ledger context (Obi's unparalleled student memory) ──────────────
   let ledgerContext = "";
@@ -293,7 +208,7 @@ async function handleChat(body, env) {
 async function handleTTS(body, env) {
   const apiKey = env.DEEPGRAM_API_KEY;
   if (!apiKey) return json({ error: "DEEPGRAM_API_KEY not configured" }, 500);
-  const text = sanitizeInput((body.text || "").slice(0, 1000));
+  const text = (body.text || "").slice(0, 1000);
   if (!text) return json({ error: "No text provided" }, 400);
   const res = await fetch("https://api.deepgram.com/v1/speak?model=aura-asteria-en", {
     method: "POST",
@@ -368,7 +283,7 @@ async function handlePractice(body, env) {
 async function handleFeedback(body, env) {
   const apiKey = env.DEEPSEEK_API_KEY;
   if (!apiKey) return json({ error: "DEEPSEEK_API_KEY not configured" }, 500);
-  const studentText = sanitizeInput((body.studentResponse || "").slice(0, 500));
+  const studentText = (body.studentResponse || "").slice(0, 500);
   if (!studentText) return json({ error: "studentResponse required" }, 400);
   const prompt = `A Vietnamese English student wrote: "${studentText}"\n\nGive OBI-style coaching:\n1. One genuine encouragement\n2. One natural correction (show better version, no grammar rules)\n3. One Tiger push\n\nMax 4 sentences. Anti-shame. Tiger Voice.`;
   const res = await fetch("https://api.deepseek.com/chat/completions", {
@@ -445,11 +360,6 @@ async function appendToLedger(studentId, eventType, payload, env) {
 async function handleLedgerAppend(body, env) {
   if (!body.studentId) return json({ error: "studentId required" }, 400);
   if (!body.eventType) return json({ error: "eventType required" }, 400);
-  const idCheck = validateStudentId(body.studentId);
-  if (!idCheck.valid) return json({ error: idCheck.error }, 400);
-  // Whitelist allowed event types to prevent arbitrary data injection
-  const ALLOWED_EVENTS = ["chat_exchange", "pet_checkin", "onboarding", "feedback", "lesson_generated", "student_created"];
-  if (!ALLOWED_EVENTS.includes(body.eventType)) return json({ error: "Invalid event type" }, 400);
   const stub = env.LEDGER.get(env.LEDGER.idFromName(body.studentId));
   return stub.fetch(new Request("https://do/append", {
     method: "POST",
@@ -460,16 +370,12 @@ async function handleLedgerAppend(body, env) {
 
 async function handleLedgerHistory(studentId, limit, env) {
   if (!studentId) return json({ error: "studentId required" }, 400);
-  const idCheck = validateStudentId(studentId);
-  if (!idCheck.valid) return json({ error: idCheck.error }, 400);
   const stub = env.LEDGER.get(env.LEDGER.idFromName(studentId));
   return stub.fetch(new Request(`https://do/history?limit=${Math.min(limit, 200)}`));
 }
 
 async function handleLedgerVerify(studentId, env) {
   if (!studentId) return json({ error: "studentId required" }, 400);
-  const idCheck = validateStudentId(studentId);
-  if (!idCheck.valid) return json({ error: idCheck.error }, 400);
   const stub = env.LEDGER.get(env.LEDGER.idFromName(studentId));
   return stub.fetch(new Request("https://do/verify"));
 }
@@ -742,42 +648,15 @@ export class PetDO {
 // ── Utilities ─────────────────────────────────────────────────────────────────
 
 function json(data, status = 200) {
-  return new Response(JSON.stringify(data), { status, headers: { "Content-Type": "application/json" } });
+  return new Response(JSON.stringify(data), { status, headers: { "Content-Type": "application/json", ...corsHeaders() } });
 }
 
-const ALLOWED_ORIGINS = [
-  'https://naturalenglishtraining.com',
-  'https://www.naturalenglishtraining.com',
-  'https://naturalenglishtraining.net',
-  'https://www.naturalenglishtraining.net',
-  'https://net-pet-ai.mrmichaelhobbs1234.workers.dev',
-  'https://hobbs0011.github.io',
-];
-
-function corsHeaders(requestOrOrigin) {
-  let origin = '';
-  if (typeof requestOrOrigin === 'string') {
-    origin = requestOrOrigin;
-  } else if (requestOrOrigin && requestOrOrigin.headers) {
-    origin = requestOrOrigin.headers.get('Origin') || '';
-  }
-
-  const isAllowed = ALLOWED_ORIGINS.some(a => origin === a) ||
-    origin.startsWith('chrome-extension://') ||
-    origin.startsWith('http://localhost:') ||
-    origin.startsWith('http://127.0.0.1:');
-
-  return {
-    "Access-Control-Allow-Origin": isAllowed ? origin : ALLOWED_ORIGINS[0],
-    "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type, Authorization",
-    "Access-Control-Allow-Credentials": "true",
-    "Vary": "Origin",
-  };
+function corsHeaders() {
+  return { "Access-Control-Allow-Origin": "*", "Access-Control-Allow-Methods": "GET, POST, OPTIONS", "Access-Control-Allow-Headers": "Content-Type, Authorization" };
 }
 
-function addCors(response, request) {
+function addCors(response) {
   const headers = new Headers(response.headers);
-  for (const [k, v] of Object.entries(corsHeaders(request))) { headers.set(k, v); }
+  for (const [k, v] of Object.entries(corsHeaders())) { headers.set(k, v); }
   return new Response(response.body, { status: response.status, headers });
 }

@@ -2,12 +2,7 @@
  * OBI Chrome Extension — Side Panel Controller
  * Full-featured panel with translation, summarizer, rewriter, and chat.
  * Features: SpeechRecognition (mic), SpeechSynthesis (speak), Level tracking, Offline detection
- * Tabs: Chat, Homework Checker, Classroom, Settings
  */
-
-import { initHomeworkChecker } from './homework-checker.js';
-import { initClassroom } from './classroom.js';
-import { initSettings } from './settings.js';
 
 const BACKEND_URL = 'https://naturalenglishtraining.net/api/chat';
 
@@ -23,19 +18,6 @@ const offlineBanner = document.getElementById('offline-banner');
 const levelLabel = document.getElementById('level-label');
 const xpFill = document.getElementById('xp-fill');
 const xpCount = document.getElementById('xp-count');
-
-// ── Tab switching ──
-
-const tabBtns = document.querySelectorAll('.tab-btn');
-const tabPanels = document.querySelectorAll('.tab-panel');
-
-tabBtns.forEach(btn => {
-  btn.addEventListener('click', () => {
-    const target = btn.dataset.tab;
-    tabBtns.forEach(b => b.classList.toggle('active', b === btn));
-    tabPanels.forEach(p => p.classList.toggle('active', p.id === `tab-${target}`));
-  });
-});
 
 // --- Level system ---
 
@@ -102,7 +84,7 @@ speakerToggle.addEventListener('click', () => {
 });
 
 function speakText(text) {
-  if (!('speechSynthesis' in window)) return;
+  if (!autoSpeak || !('speechSynthesis' in window)) return;
   window.speechSynthesis.cancel();
   const utterance = new SpeechSynthesisUtterance(text);
   utterance.lang = 'en-US';
@@ -162,33 +144,17 @@ micBtn.addEventListener('click', () => {
 
 // --- Message rendering ---
 
-function escapeHtml(str) {
-  const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
-  return str.replace(/[&<>"']/g, m => map[m]);
-}
-
 function addMessage(text, sender = 'obi') {
   const div = document.createElement('div');
   div.className = `message ${sender}`;
-
-  if (sender === 'obi') {
-    const p = document.createElement('p');
-    p.textContent = text;
-
-    const speakBtn = document.createElement('button');
-    speakBtn.className = 'msg-speak-btn';
-    speakBtn.title = 'Read aloud';
-    speakBtn.textContent = '🔊';
-    speakBtn.addEventListener('click', () => speakText(text));
-
-    div.appendChild(p);
-    div.appendChild(speakBtn);
-  } else {
-    div.innerHTML = `<p>${escapeHtml(text)}</p>`;
-  }
-
+  div.innerHTML = `<p>${escapeHtml(text)}</p>`;
   messagesEl.appendChild(div);
   messagesEl.scrollTop = messagesEl.scrollHeight;
+}
+
+function escapeHtml(str) {
+  const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
+  return str.replace(/[&<>"']/g, m => map[m]);
 }
 
 // --- Chat ---
@@ -226,7 +192,7 @@ async function sendMessage() {
     }
 
     addMessage(reply, 'obi');
-    if (autoSpeak) speakText(reply);
+    speakText(reply);
 
     const count = await incrementMessageCount();
     updateLevelDisplay(count);
@@ -375,11 +341,7 @@ inputEl.addEventListener('keydown', (e) => {
 // --- Init ---
 
 (async () => {
-  addMessage('Welcome to OBI! 🐭→🐯 Ask anything, translate, summarize, or practice writing.', 'obi');
+  addMessage('Welcome to OBI Full Panel! 🐭→🐯 Ask anything, translate, summarize, or practice writing.', 'obi');
   const count = await loadMessageCount();
   updateLevelDisplay(count);
-
-  initHomeworkChecker();
-  initClassroom();
-  initSettings();
 })();

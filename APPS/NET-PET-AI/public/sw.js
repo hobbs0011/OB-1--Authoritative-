@@ -7,13 +7,6 @@ const PRECACHE = [
   "/",
   "/index.html",
   OFFLINE_PAGE,
-  "/icons/favicon.svg",
-  "/icons/icon.svg",
-  "/icons/obi-avatar.svg",
-  "/icons/badge-mouse.svg",
-  "/icons/badge-cat.svg",
-  "/icons/badge-wolf.svg",
-  "/icons/badge-tiger.svg",
 ];
 
 // ── Install: precache shell ───────────────────────────────
@@ -80,8 +73,8 @@ self.addEventListener("push", event => {
   const title = data.title || "Natural English Training";
   const options = {
     body: data.body || "Obi is waiting. Keep your streak alive.",
-    icon: "/icons/icon.svg",
-    badge: "/icons/icon.svg",
+    icon: "/icons/icon-192.png",
+    badge: "/icons/icon-192.png",
     tag: data.tag || "net-reminder",
     data: { url: data.url || "/" },
     vibrate: [200, 100, 200],

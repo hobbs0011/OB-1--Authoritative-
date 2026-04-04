@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#0f0f1a">
-  <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
   <title>Offline | Natural English Training</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -20,13 +19,10 @@
       padding: 24px;
     }
     .wrap { max-width: 400px; }
-    .logo { width: 80px; height: 80px; margin-bottom: 20px; }
+    .emoji { font-size: 4rem; margin-bottom: 20px; display: block; }
     h1 { font-size: 1.6rem; margin-bottom: 12px; color: #f8f5ff; }
     p { color: #94a3b8; line-height: 1.6; margin-bottom: 24px; }
     .vi { font-size: 0.9rem; color: #64748b; }
-    .badges { display: flex; gap: 12px; justify-content: center; margin-bottom: 24px; }
-    .badges img { width: 40px; height: 40px; opacity: 0.5; }
-    .badges img:first-child { opacity: 1; }
     button {
       padding: 14px 28px;
       border: none;
@@ -40,14 +36,8 @@
 </head>
 <body>
   <div class="wrap">
-    <img src="/icons/icon.svg" alt="Obi" class="logo">
+    <span class="emoji">🐭</span>
     <h1>You are offline.</h1>
-    <div class="badges">
-      <img src="/icons/badge-mouse.svg" alt="Mouse">
-      <img src="/icons/badge-cat.svg" alt="Cat">
-      <img src="/icons/badge-wolf.svg" alt="Wolf">
-      <img src="/icons/badge-tiger.svg" alt="Tiger">
-    </div>
     <p>Obi needs an internet connection to talk. Connect and come back — your streak is waiting.</p>
     <p class="vi">Obi cần kết nối internet. Hãy kết nối lại — streak của bạn đang chờ.</p>
     <button onclick="location.reload()">Try again</button>

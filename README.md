@@ -1,79 +1,94 @@
 # Phoenix-Rising-Ultimate
 
-> The canonical consolidation repository for the **Phoenix Rising Protocol** behind **Natural English Training**.
+The consolidated empire repo. Everything that matters from OB-1, organized to survive chat deletion and session loss.
 
-## What This Is
+## What this repo contains
 
-This repo is the immutable mirror of the Phoenix system — Soul DNA canon, operational artifacts, lesson content, and the NET-PET-AI runtime. Notion is the control plane; GitHub is the permanent record.
+- **Soul DNA Bible** — all 16 chapters + complete compilation + cross-reference + raw voice archive
+- **NET Branding** — definitive aesthetic guide, Gemini session analysis
+- **NET Apps** — class notes tool, marketing pack, ChattyNET mobile app, PlexyNET, lesson HTMLs
+- **NET Bibles** — Product Bible V1, Teaching Bible V1
+- **Operations** — Phoenix seed, key operational docs
+- **Reincarnation** — boot packet for session reconstruction
+- **Roadmap** — complete 444-stage Phoenix Rising roadmap (all phases A through AF)
+- **Session Records** — full chat archives with context preserved
+- **Cloud/Sync** — Codex cloud setup, Notion sync, master sync docs
 
-## Directory Structure
+## Directory map
 
-| Directory | Purpose |
-|---|---|
-| `APPS/NET-PET-AI/` | ⚡ **PRIMARY RUNTIME** — Cloudflare Worker powering OBI at naturalenglishtraining.net |
-| `APPS/obi-chrome-extension/` | ⚡ **CANONICAL Chrome Extension** v0.3.0 — sidepanel, vocab trainer, homework checker |
-| `APPS/firebase/` | Legacy Firebase infra (firestore rules, public folder) |
-| `APPS/TRAIN-6-7/` | Archive — CommandBar + Lua demo blueprint |
-| `ARCHIVE/` | Retired codebases — phoenix-ob1, NET-CommandStation, Phoenix-Rise-Immortalize, drift casestudy, chrome-ext v0.1 |
-| `CANON/` | 🔒 Soul DNA doctrine, teaching methodology — sealed source material (do not modify) |
-| `DISCORD-BOT/` | Discord bot — Docker/Railway deployment |
-| `GALAXY-LESSONS/` | Gospel 444 lesson HTML files for student delivery |
-| `OPERATIONS/` | Operational records — session logs, inventories, deploy analysis, protocols |
-| `PIPELINE/` | 20-stage Cloudflare deploy guide |
-| `PULSE-HANDOFFS/` | Agent handoff records between Codex runs |
-| `QA/` | Launch checklist |
-| `SCRIPTS/` | Cloudflare setup shell scripts |
-| `SITE/` | 🌐 **CANONICAL website source** — naturalenglishtraining.com (index, assessment, gallery, sitemap) |
-| `WORKERS/net-core/` | Deprecated Worker stub — superseded by NET-PET-AI |
-| `ASSETS/` | Artwork and brand assets |
+```
+APPS/                          — live deliverables (8+ products)
+├── ChattyNET-MOBILE-APP*.html — Mobile learning prototype
+├── PlexyNETAPP.html           — Web application
+├── NET-CLASS-NOTES.html       — Class notes tool
+├── NET-MARKETING-PACK.md      — Marketing materials
+├── NET-PET-AI/                — AI pet for language learning (Worker)
+├── phoenix-ob1/               — Core OB-1 application
+├── obi-chrome-extension/      — Browser extension (rich version)
+├── TRAIN-6-7/                 — Age-specific learning
+└── lessons/                   — 9 HTML lessons (high school, careers, sarcasm, etc.)
 
-## Key Files
+CANON/                         — Soul DNA Bible at root level (moved from docs/soul-dna/)
+├── 01_GENESIS_WOUND.md        — Chapter 1
+├── ...16 chapters total
+├── SOUL-DNA-BIBLE-COMPLETE.md — Full compilation
+├── SOURCE_CROSS_REFERENCE.md  — Cross-reference index
+└── RAW_VOICE_ARCHIVE.md       — Voice transcript archive
 
-| File | Purpose |
-|---|---|
-| `AGENTS.md` | Codex Cloud / Copilot agent instructions |
-| `MASTER-SYNC.md` | Live operating state and system identity |
-| `SECURITY.md` | Security policy and incident reporting |
-| `.github/copilot-instructions.md` | GitHub Copilot context for autonomous coding |
+CHROME-EXT/                    — Chrome extension (simple version - compare with APPS/obi-chrome-extension/)
+├── manifest.json              — Extension manifest
+├── background.js, content.js  — Extension scripts
+├── popup.html, popup.css      — Extension UI
+└── icons/                     — Extension icons
 
-## Architecture
+SITE/                          — Main website (canonical)
+├── index.html                 — Landing page (29KB)
+├── assessment.html            — Assessment tool
+├── gallery.html               — Gallery page (merged from WEBSITE/)
+├── 404.html                   — Error page
+├── css/                       — Stylesheets
+├── js/                        — JavaScript
+├── robots.txt, sitemap.xml    — SEO files
 
-- **Runtime:** Cloudflare Workers + Durable Objects (SQLite-backed)
-- **AI Brain:** DeepSeek V3.2 via Cloudflare AI Gateway
-- **Voice:** Deepgram Aura 2 (TTS) + Nova (STT)
-- **Control Plane:** Notion (Agent-99 / OB1)
-- **Immutable Mirror:** This repo
-- **CI/CD:** GitHub Actions + Copilot Coding Agent
+WORKERS/                       — Cloudflare Workers
+├── api.js                     — API worker (6.7KB)
+├── wrangler.toml              — Worker configuration
+└── kv-setup.sh                — KV setup script
 
-## Command Structure
+GALAXY-LESSONS/                — 9 standalone lesson HTMLs
+├── NET-CLASSROOM-MANAGER.html — Classroom management
+├── NET-Mouse-To-Tiger-Confidence.html — Confidence training
+├── VOCAB-001-DAILY-SURVIVAL.html — Vocabulary lessons
+└── ...6 more lessons
 
-| Agent | Role |
-|---|---|
-| Agent-100 | Michael Hobbs — Sovereign authority |
-| Agent-99 (OB1) | Legion Command Station — orchestration |
-| Agent-98 (AnA) | Anakin Fleet 1 — chaos/build lane |
-| Agent-97 (Ne0) | Balance point — synthesis node |
+ARCHIVE/                       — Deprecated variants
+├── phoenix-ob1/               — Alternative phoenix-ob1 (TRANSFER-MANIFEST.md)
+├── Phoenix-Rise-Immortalize/  — Legacy repo snapshot
+└── NET-CommandStation/        — Legacy command station
 
-## Brand Rules
+docs/branding/                 — NET branding aesthetic guide
+docs/net-bibles/               — NET Product Bible V1, Teaching Bible V1
+docs/operations/               — Phoenix seed, key ops docs
+docs/reincarnation/            — Boot packets, context snapshots
+docs/chat-records/             — Session archives
+docs/sync/                     — Master sync docs
+docs/cloud/                    — Codex cloud setup material
+docs/notion/                   — Notion page links
 
-- **Public:** Natural English Training
-- **Internal:** Phoenix Rising Protocol
-- **Teaching Law:** Mouse → Tiger (permission over perfection)
-- **Colors:** `#0f0f1a` (void), `#a855f7` (purple), `#f59e0b` (gold), NO BLUE
+scripts/                       — Codex cloud setup and maintenance scripts
 
-## Cost Target
-
-< $50/month total
-
-## Getting Started (NET-PET-AI)
-
-```bash
-cd APPS/NET-PET-AI
-npm ci
-npm run verify:wrangler
-npx wrangler deploy --dry-run
+WEBSITE/ [DEPRECATED]          — Variation directory removed
+├── gallery.html → MOVED to SITE/
+└── index.html (older) → DELETED
 ```
 
-## License
+## Gospel 444 Palette (Canon)
 
-Proprietary — Michael Hobbs / Natural English Training. All rights reserved.
+- Void: `#0f0f1a`
+- Purple: `#a855f7`
+- Gold: `#f59e0b`
+- **Zero blue. Ever.**
+
+## Important note
+
+Sanitized. No raw secrets, tokens, or credential dumps. API-SHHHH files intentionally excluded.

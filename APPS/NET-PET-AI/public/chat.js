@@ -19,14 +19,14 @@ function isCrisisSignal(text) {
 
 function handleCrisis() {
   stopAudio();
-  obi("Hey \u2014 stop. I heard that.\n\nThat matters more than any English lesson. If something real is going on, please reach out:\n\n\uD83C\uDDFB\uD83C\uDDF3 Vietnam: 1800 599 920 (free, 24/7)\n\uD83C\uDDE8\uD83C\uDDE6 Canada: 1-833-456-4566 (24/7)\n\uD83C\uDDFA\uD83C\uDDF8 US: 988 Suicide & Crisis Lifeline\n\uD83D\uDCAC Or talk to a teacher, parent, or friend you trust.\n\nI'm here when you're ready. No judgment.");
+  obi("Hey \u2014 stop. I heard that.\n\nThat matters more than any English lesson. If something real is going on, please reach out:\n\n\uD83C\uDDFB\uD83C\uDDF3 Vietnam support line: 1800 599 920 (free, 24/7)\n\uD83D\uDCAC Or talk to a teacher, parent, or friend you trust.\n\nI'm here when you're ready. No judgment.");
 }
 
 let state   = "boot";
 let profile = {};
 let chatHistory = [];         // student messages for pronunciation analysis
 let chatRound = 0;            // current exchange count
-const CHAT_ROUNDS = 30;       // exchanges before pronunciation tips
+const CHAT_ROUNDS = 5;        // exchanges before pronunciation tips
 let ttsOn   = true;
 let obiVoice = null;          // best available SpeechSynthesis voice
 let struggles = {};           // { [stateKey]: count } — tracks repeat confusion per step
@@ -343,20 +343,20 @@ function buildSystemPrompt(p) {
   const name  = p?.fullName    ? `The student's name is ${p.fullName}.`         : "";
   const level = p?.englishLevel ? `Their English level is ${p.englishLevel}.`    : "";
   const goals = p?.goals        ? `Their learning goal: ${p.goals}.`              : "";
-  const city  = p?.currentCity  ? `They are based in ${p.currentCity}.`          : "";
-  return `You are Obi, an English coach. You help people speak English confidently.
+  const city  = p?.currentCity  ? `They live in ${p.currentCity}, Vietnam.`      : "";
+  return `You are Obi, an English coach at Natural English Training. You teach Vietnamese high school students to speak English confidently.
 
 Your personality: high-energy, anti-shame, tough love. You are Michael Hobbs in AI form. Volume and velocity beat grammar. Mouse Voice \u2192 Tiger Voice.
 
 ${[name, level, goals, city].filter(Boolean).join(" ")}
 
-Jolly Phonics awareness (you know this deeply): English has 42 phonemes. Common learner struggles include:
+Jolly Phonics awareness (you know this deeply): English has 42 phonemes. Vietnamese learners most struggle with:
 - TH (Groups 6): tongue between teeth \u2014 not T, not S
 - R (Group 2): curl back, touch nothing \u2014 not L, not Y
 - V (Group 5): top teeth on bottom lip \u2014 not B, not W
 - Final consonants (Groups 1-4): English LANDS on them \u2014 don't drop!
 - Short/long vowel pairs: bit vs beat, pull vs pool \u2014 totally different
-- Word stress: English is stress-timed, many other languages are tonal or syllable-timed \u2014 big shift!
+- Word stress: English is stress-timed, Vietnamese is tonal \u2014 big shift!
 When you hear these in conversation, naturally model the correct sound. Don't drill \u2014 just normalize good pronunciation by example.
 
 Rules:
@@ -366,8 +366,8 @@ Rules:
 - If they say something short or vague, push them to say more.
 - Gently correct major grammar mistakes by naturally rephrasing, don't lecture.
 - NEVER be robotic. NEVER use generic phrases like "That's great!" without connecting to what they said.
-- You speak English only. If they write in another language, respond simply and encourage English.
-- Be cool, not cringe.
+- You speak English only. If they write Vietnamese, respond simply and encourage English.
+- You are talking to teenagers. Be cool, not cringe.
 - CRITICAL: If a student says anything about self-harm, suicide, wanting to die, or jumping off anything \u2014 STOP the lesson. Respond with care and direct them to help. Safety first. Always.`.trim();
 }
 
@@ -481,9 +481,9 @@ async function handle(text) {
         trackStruggle("ask_city");
         const n = struggles.ask_city || 0;
         if (n >= 1) {
-          obi("What city or country are you based in?\n\nExample: Ho Chi Minh City, Toronto, London, Tokyo...");
+          obi("🇻🇳 Bạn đang sống ở thành phố nào? (What city do you live in?)\n\nVí dụ: Hồ Chí Minh, Hà Nội, Đà Nẵng...");
         } else {
-          obi("Where do you live? (City or country — any answer works!)");
+          obi("🇻🇳 Bạn sống ở đâu? (Where do you live?)\nViet example: Hồ Chí Minh City, Hà Nội, Đà Nẵng...");
         }
         break;
       }
@@ -706,8 +706,8 @@ async function boot() {
     obi(pickStarter());
     state = "chat";
   } else {
-    // Canon opening: "Hi! I'm Obi — the Magic Chat."
-    obi("Hi! I\u2019m Obi \u2014 the Magic Chat.\n\nWhat\u2019s your name?");
+    // Canon opening: "Hi! My name is Obi, your English coach at Natural English Training."
+    obi("Hi! My name is Obi, your English coach at Natural English Training.\n\nWhat\u2019s your name?");
     state = "intro";
   }
 }
