@@ -37,10 +37,11 @@
         "hex-ci.stylelint-plus",
 
         // ── GIT & GITHUB ────────────────────────────────────────────────────────
-        "eamodio.gitlens",
+        "eamodio.gitlens",                          // Git supercharged (free) — upgrade for Pro AI features
         "mhutchie.git-graph",
         "github.vscode-pull-request-github",
         "github.vscode-github-actions",
+        // "gitkraken.gitkraken-client",    // Desktop client — optional, git CLI + GUI alternative
 
         // ── PYTHON (scripts + automation) ───────────────────────────────────────
         "ms-python.python",
