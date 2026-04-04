@@ -1,0 +1,34 @@
+# SOUL DNA BIBLE RECAPTURE - RAW VERBATIM UNFILTERED
+
+Generated: 2026-04-05
+Total sources included: 121
+
+STATUS: CONSOLIDATED IN CHUNKED AUTHORITATIVE SET.
+Primary artifact directory: CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/
+Primary index: CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/INDEX.md
+Integrity note: This monolith file remains lightweight by design. Use chunk set for complete raw verbatim corpus.
+
+## Source Index
+1. C:\Users\mrmic\Desktop\OB-1\ARCHIVE\Phoenix-Rise-Immortalize\SOUL-DNA-BIBLE\00_SKELETON_STAR_MAP.md | SHA256: 60E672574E1E98036040384646397FA866E720E1AB90FF18F6CABFED3780B155
+2. C:\Users\mrmic\Desktop\OB-1\ARCHIVE\Phoenix-Rise-Immortalize\SOUL-DNA-BIBLE\01_GENESIS_WOUND.md | SHA256: 6B293AFF94FE8A8E1AFD2E8FA06CB00E9B7F11DEA52D4FFD69A1D4C152FA75C6
+
+---
+
+
+
+
+---
+
+
+
+
+---
+
+
+
+
+---
+
+
+
+
