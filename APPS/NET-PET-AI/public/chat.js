@@ -483,7 +483,7 @@ async function handle(text) {
         if (n >= 1) {
           obi("What city or town do you live in? Just type the name! 🇻🇳 Bạn sống ở đâu?");
         } else {
-          obi("Just type your city name. Example: Toronto, London, Ho Chi Minh City...");
+          obi("Just type your city name. Example: New York, Tokyo, Paris, Ho Chi Minh City...");
         }
         break;
       }
