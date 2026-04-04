@@ -1,83 +1,104 @@
 {
     // NET | Phoenix Rising Protocol — VS Code Extension Recommendations
     // Stack: Cloudflare Workers, Node.js, React (Vite), HTML/CSS/JS, Python, PowerShell, MCP
-    // Updated: 2026-04-05 | MAX MERGE Build | AnA
+    // Updated: 2026-04-05 | MAX MERGE v2 — Full Arsenal | AnA
+    // Source: CANON/TOOL-STACK-ARSENAL-2026.md + SOUL-DNA + ARCHIVES
     "recommendations": [
 
-        // ── PACKS (install one → get the whole stack) ──────────────────────────
+        // ════════════════════════════════════════════════════════════════════════════
+        // PACKS (install one → get the whole stack)
+        // ═══════════════════════════════════════════════════════════════════════════
         "waderyan.nodejs-extension-pack",           // Node: ESLint, npm intellisense, GitLens, path intellisense, Prettier
         "donjayamanne.python-extension-pack",   // Python: Pylance, Jupyter, Pylint, Black, isort, env selector
         "ms-vscode-remote.vscode-remote-extensionpack", // Remote: SSH, Containers, WSL
 
-        // ── AI & AGENTS ────────────────────────────────────────────────────────
-        // "github.copilot",                       // FREE: code completion (8k/mo)
-        // "github.copilot-chat",                  // FREE: chat interface
+        // ════════════════════════════════════════════════════════════════════════════
+        // AI & AGENTS (CODING ASSISTANTS)
+        // ═══════════════════════════════════════════════════════════════════════════
         "github.copilot",                       // [HAS PREMIUM] unlimited AI code completion + chat
         "github.copilot-chat",                  // [HAS PREMIUM] ask anything
         "kilocode.kilo-code",                   // Kilo — your AI developer on call
         "saoudrizwan.claude-dev",               // Cline / Claude Dev — autonomous coding
-        // "anthropic.claude-code",              // Claude Code (if available)
-        // "windmillcn.hyper-autocomplete",        // AI autocomplete (alternative to Copilot)
-        // "tabnine.tabnine-vscode",              // AI code completions (free tier)
+        // "anthropic.claude-code",              // Claude Code (when available)
+        // "tabnine.tabnine-vscode",              // AI code completions (free tier backup)
 
-        // ── CLOUDFLARE WORKERS (NET-PET-AI) ────────────────────────────────────
+        // ════════════════════════════════════════════════════════════════════════════
+        // CLOUDFLARE WORKERS (NET-PET-AI)
+        // ═══════════════════════════════════════════════════════════════════════════════════
         "cloudflare.cloudflare-workers",         // Workers, KV, D1, Durable Objects
 
-        // ── JAVASCRIPT / TYPESCRIPT ─────────────────────────────────────────────
+        // ════════════════════════════════════════════════════════════════════════════
+        // JAVASCRIPT / TYPESCRIPT
+        // ════════════════════════════════════════════════════════════════════════════
         "dbaeumer.vscode-eslint",             // Lint + auto-fix
         "esbenp.prettier-vscode",              // Code formatter
         "wix.vscode-import-cost",           // Bundle size inline
         "orta.vscode-jest",                // Jest test runner
         "ms-vscode.vscode-typescript-next", // TS 5.x preview
 
-        // ── REACT / VITE (CommandStation) ────────────────────────────────
+        // ════════════════════════════════════════════════════════════════════════════
+        // REACT / VITE (CommandStation, obi-chrome-extension)
+        // ════════════════════════════════════════════════════════════════════════════
         "dsznajder.es7-react-js-snippets",   // React snippets
         "burkeholland.simple-react-snippets",
         // "nmacc.hooks-extension",            // React hooks autocomplete
 
-        // ── HTML / CSS / WEB ────────────────────────────────────────────────────
+        // ════════════════════════════════════════════════════════════════════════════
+        // HTML / CSS / WEB (Magic Chat, ChattyNET, Firebase)
+        // ════════════════════════════════════════════════════════════════════════════
         "formulahendry.auto-close-tag",
         "formulahendry.auto-rename-tag",
         "ecmel.vscode-html-css",            // CSS class autocomplete
         "ritwickdey.liveserver",           // Live reload server
         "hex-ci.stylelint-plus",           // CSS lint
 
-        // ── GIT & GITHUB ────────────────────────────────────────────────────────
-        // ═══════════════════════════════════════════��═══════════════════════════════
+        // ════════════════════════════════════════════════════════════════════════════
+        // GIT & GITHUB (SOURCE CONTROL)
+        // ════════════════════════════════════════════════════════════════════════════
         // GitLens — FREE for basic | PRO for: PR Hub, Worktrees, AI, Cloud Patches
-        // Current: FREE (upgrade to PRO for unlimited AI commit/PR messages, worktrees, cloud patches)
-        // ═══════════════════════════════════════════════════════════════════════════
+        // Upgrade to PRO for unlimited AI commit/PR messages, worktrees, cloud patches
         "eamodio.gitlens",                          // [FREE] blame, hovers, file history, commit graph
-        // "eamodio.gitlens-pro",                 // [PRO] upgrade for AI commit msgs, worktrees, Cloud Patches
-        "mhutchie.git-graph",                       // Simple Git history graph
+        "mhutchie.git-graph",                       // Simple Git history graph (lightweight)
         "github.vscode-pull-request-github",       // PR workflow in VS Code
         "github.vscode-github-actions",            // GitHub Actions runner logs
+        // "gitkraken.gitkraken-client",    // [DESKTOP CLIENT] Git GUI — optional, CLI alternative
 
-        // ── PYTHON (scripts + automation) ───────────────────────────────────────
+        // ════════════════════════════════════════════════════════════════════════════
+        // PYTHON (scripts + automation)
+        // ════════════════════════════════════════════════════════════════════════════
         "ms-python.python",                    // Python runtime + debugging
-        "ms-python.vscode-pylance",            // [PRO] AI code assist (free for open source)
+        "ms-python.vscode-pylance",            // [PRO FREE for OSS] AI code assist
         "ms-python.black-formatter",              // Code formatter
-        // "ms-python.vscode-jupyter",         // Jupyter notebooks (included in python-pack)
 
-        // ── MARKDOWN (CANON/ + AGENTS.md + SOUL-DNA docs) ───────────────────────
+        // ════════════════════════════════════════════════════════════════════════════
+        // MARKDOWN (CANON/, SOUL-DNA docs, AGENTS.md)
+        // ═══════════════════════════════════════���════════════════════════════════════
         "yzhang.markdown-all-in-one",            // TOC, table formatter, etc
         "bierner.github-markdown-preview",      // GitHub-flavored preview
         "davidanson.vscode-markdownlint",      // Lint for MD
         "shd101wyy.markdown-preview-enhanced", // Mermaid → diagrams
 
-        // ── JSON / TOML / CONFIG (wrangler.toml, mcp.json, package.json) ────────
+        // ════════════════════════════════════════════════════════════════════════════
+        // JSON / TOML / CONFIG (wrangler.toml, mcp.json, package.json)
+        // ════════════════════════════════════════════════════════════════════════════
         "tamasfe.even-better-toml",           // TOML support
         "zainchen.json",                     // JSON tools
         "quicktype.quicktype",                // JSON ↔ TypeScript/Python types
 
-        // ── POWERSHELL (Windows / SCRIPTS/) ─────────────────────────────────────
+        // ════════════════════════════════════════════════════════════════════════════
+        // POWERSHELL (Windows automation)
+        // ════════════════════════════════════════════════════════════════════════════
         "ms-vscode.powershell",               // PowerShell extension
 
-        // ── DOCKER & INFRA ────────────────────────────────────────────────────
+        // ════════════════════════════════════════════════════════════════════════════
+        // DOCKER & INFRA (optional)
+        // ════════════════════════════════════════════════════════════════════════════
         "ms-azuretools.vscode-docker",       // Docker + Docker Compose
         // "ms-vscode.azurecli",              // Azure CLI tools
 
-        // ── DX & PRODUCTIVITY ─────────────────────────────────────────────────
+        // ════════════════════════════════════════════════════════════════════════════
+        // DX & PRODUCTIVITY
+        // ════════════════════════════════════════════════════════════════════════════
         "usernamehw.errorlens",             // Inline error display
         "gruntfuggly.todo-tree",             // TODO/FIXME tree view
         "streetsidesoftware.code-spell-checker",
