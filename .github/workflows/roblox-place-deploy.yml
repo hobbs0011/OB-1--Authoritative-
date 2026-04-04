@@ -37,10 +37,9 @@ jobs:
       - name: Publish to Roblox via Open Cloud
         env:
           ROBLOX_API_KEY: ${{ secrets.ROBLOX_API_KEY }}
+          UNIVERSE_ID: ${{ github.event.inputs.universeId }}
+          PLACE_ID: ${{ github.event.inputs.placeId }}
         run: |
-          UNIVERSE_ID="${{ github.event.inputs.universeId }}"
-          PLACE_ID="${{ github.event.inputs.placeId }}"
-
           if [ -z "$UNIVERSE_ID" ] || [ -z "$PLACE_ID" ]; then
             echo "::error::universeId or placeId is blank. Fail-closed."
             exit 1
