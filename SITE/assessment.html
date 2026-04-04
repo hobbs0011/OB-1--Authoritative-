@@ -3,75 +3,226 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🐯 The Tiger Assessment | Đánh Giá Năng Lực — Natural English Training</title>
+<title>🐯 Tiger Assessment | Natural English Training</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--void:#0f0f1a;--card:rgba(25,25,50,0.85);--purple:#a855f7;--purple-glow:rgba(168,85,247,0.3);--gold:#f59e0b;--gold-glow:rgba(245,158,11,0.3);--text:#e2e8f0;--dim:#94a3b8;--success:#22c55e;--danger:#ef4444;--border:rgba(168,85,247,0.2)}
+/* === GOSPEL 444 COMPLIANT DESIGN === */
+:root{
+  --void:#0f0f1a;
+  --glass:rgba(15,15,26,0.7);
+  --glass-border:rgba(168,85,247,0.2);
+  --purple:#a855f7;
+  --purple-glow:rgba(168,85,247,0.4);
+  --gold:#f59e0b;
+  --gold-glow:rgba(245,158,11,0.4);
+  --text:#e2e8f0;
+  --dim:#94a3b8;
+  --success:#22c55e;
+  --danger:#ef4444;
+}
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--void);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh;overflow-x:hidden}
-body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at 20% 50%,rgba(168,85,247,0.08) 0%,transparent 50%),radial-gradient(ellipse at 80% 20%,rgba(245,158,11,0.05) 0%,transparent 50%),radial-gradient(ellipse at 50% 80%,rgba(168,85,247,0.05) 0%,transparent 50%);pointer-events:none;z-index:0}
-.container{max-width:800px;margin:0 auto;padding:20px;position:relative;z-index:1}
-h1,h2,h3{font-family:'Orbitron',sans-serif}
-h1{font-size:2rem;color:var(--gold);text-shadow:0 0 30px var(--gold-glow);margin-bottom:8px}
-h2{font-size:1.3rem;color:var(--purple);margin-bottom:16px;text-shadow:0 0 20px var(--purple-glow)}
-h3{font-size:1rem;color:var(--gold);margin-bottom:12px;font-family:'Rajdhani',sans-serif;font-weight:700}
-.vi{color:var(--dim);font-style:italic;font-size:0.9em}
-.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;margin-bottom:20px;backdrop-filter:blur(10px);transition:border-color 0.3s}
-.card:hover{border-color:rgba(168,85,247,0.4)}
-.hero{text-align:center;padding:40px 20px;background:linear-gradient(135deg,rgba(168,85,247,0.1),rgba(245,158,11,0.05));border:1px solid var(--border);border-radius:20px;margin-bottom:30px}
-.hero-icon{font-size:4rem;margin-bottom:16px}
-.hero p{font-family:'Rajdhani',sans-serif;font-size:1.05rem;color:var(--dim);max-width:600px;margin:0 auto}
-.progress-bar{position:sticky;top:0;z-index:100;background:rgba(15,15,26,0.95);backdrop-filter:blur(10px);padding:12px 20px;border-bottom:1px solid var(--border);margin:0 -20px 20px;border-radius:0 0 12px 12px}
+html{scroll-behavior:smooth}
+body{
+  background:var(--void);
+  color:var(--text);
+  font-family:'Inter',sans-serif;
+  min-height:100vh;
+  line-height:1.6;
+  overflow-x:hidden
+}
+/* Glow blobs background */
+body::before{
+  content:'';
+  position:fixed;
+  top:0;left:0;right:0;bottom:0;
+  background:
+    radial-gradient(ellipse at 20% 20%,rgba(168,85,247,0.15) 0%,transparent 50%),
+    radial-gradient(ellipse at 80% 40%,rgba(245,158,11,0.1) 0%,transparent 50%),
+    radial-gradient(ellipse at 50% 80%,rgba(168,85,247,0.1) 0%,transparent 50%);
+  pointer-events:none;
+  z-index:0
+}
+.container{max-width:640px;margin:0 auto;padding:20px;position:relative;z-index:1}
+
+/* Glass card */
+.glass{
+  background:var(--glass);
+  backdrop-filter:blur(12px);
+  border:1px solid var(--glass-border);
+  border-radius:1rem;
+  padding:24px;
+  margin-bottom:20px;
+  transition:all 0.3s
+}
+.glass:hover{border-color:var(--purple-glow)}
+
+/* Typography */
+h1{font-family:'Orbitron',sans-serif;font-size:2rem;font-weight:700;color:var(--gold);text-shadow:0 0 30px var(--gold-glow);margin-bottom:8px}
+h2{font-family:'Orbitron',sans-serif;font-size:1.25rem;color:var(--purple);margin-bottom:16px;text-shadow:0 0 20px rgba(168,85,247,0.3)}
+h3{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.1rem;color:var(--gold);margin-bottom:12px}
+.vi{color:var(--dim);font-size:0.9em}
+
+/* Hero */
+.hero{
+  text-align:center;
+  padding:40px 24px;
+  background:linear-gradient(135deg,rgba(168,85,247,0.15),rgba(245,158,11,0.08));
+  border:1px solid var(--glass-border);
+  border-radius:1.25rem;
+  margin-bottom:24px
+}
+.hero-icon{font-size:3.5rem;margin-bottom:12px}
+.hero h1{font-size:1.75rem;margin-bottom:4px}
+.hero-tagline{color:var(--purple);font-family:'Orbitron',sans-serif;font-size:0.8rem;margin-bottom:16px}
+.hero p{color:var(--dim);font-size:0.95rem;max-width:480px;margin:0 auto 16px}
+.hero-meta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.badge{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:50px;font-family:'Rajdhani',sans-serif;font-size:0.8rem;font-weight:600}
+.badge-purple{background:rgba(168,85,247,0.2);color:var(--purple);border:1px solid rgba(168,85,247,0.3)}
+.badge-gold{background:rgba(245,158,11,0.2);color:var(--gold);border:1px solid rgba(245,158,11,0.3)}
+
+/* Voice Test Section */
+.voice-test{text-align:center;padding:20px;background:rgba(245,158,11,0.05);border-radius:12px;margin-bottom:20px}
+.voice-test h3{color:var(--gold);margin-bottom:12px}
+.mic-status{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:12px;font-size:0.9rem}
+.mic-dot{width:10px;height:10px;border-radius:50%;background:var(--dim)}
+.mic-dot.ready{background:var(--success);box-shadow:0 0 8px var(--success)}
+.mic-dot.error{background:var(--danger);box-shadow:0 0 8px var(--danger)}
+.test-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:10px 20px;border:2px solid var(--purple);
+  background:rgba(168,85,247,0.1);color:var(--purple);
+  border-radius:30px;font-family:'Rajdhani',sans-serif;font-weight:600;
+  cursor:pointer;transition:all 0.3s
+}
+.test-btn:hover{background:rgba(168,85,247,0.2);box-shadow:0 0 20px var(--purple-glow)}
+.test-btn.testing{border-color:var(--danger);color:var(--danger);animation:pulse 1s infinite}
+.test-btn.success{border-color:var(--success);color:var(--success)}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
+
+/* Login Section */
+.login-section{margin-bottom:24px}
+.login-form{display:flex;gap:10px;margin-top:12px}
+.login-form input{flex:1;padding:12px 16px;background:rgba(15,15,26,0.8);border:1px solid var(--glass-border);border-radius:10px;color:var(--text);font-family:'Inter',sans-serif;font-size:0.95rem}
+.login-form input:focus{outline:none;border-color:var(--purple);box-shadow:0 0 15px var(--purple-glow)}
+.login-btn{padding:12px 24px;background:linear-gradient(135deg,var(--purple),#7c3aed);color:white;border:none;border-radius:10px;font-family:'Rajdhani',sans-serif;font-weight:700;cursor:pointer;transition:all 0.3s}
+.login-btn:hover{transform:translateY(-2px);box-shadow:0 0 20px var(--purple-glow)}
+.user-welcome{display:flex;align-items:center;justify-content:space-between;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);border-radius:10px;padding:12px 16px;margin-top:12px}
+.user-welcome span{color:var(--success);font-weight:600}
+.logout-btn{background:transparent;border:1px solid var(--dim);color:var(--dim);padding:6px 12px;border-radius:6px;font-size:0.8rem;cursor:pointer}
+
+/* Progress Bar */
+.progress-bar{
+  position:sticky;top:0;z-index:100;
+  background:rgba(15,15,26,0.95);
+  backdrop-filter:blur(10px);
+  padding:12px 20px;
+  border-bottom:1px solid var(--glass-border);
+  margin:0 -20px 20px;
+  border-radius:0 0 12px 12px
+}
 .progress-track{height:6px;background:rgba(168,85,247,0.15);border-radius:3px;overflow:hidden}
-.progress-fill{height:100%;background:linear-gradient(90deg,var(--purple),var(--gold));border-radius:3px;transition:width 0.5s ease;width:0%}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--purple),var(--gold));border-radius:3px;transition:width 0.5s;width:0%}
 .progress-label{font-family:'Rajdhani',sans-serif;font-size:0.85rem;color:var(--dim);margin-top:6px;display:flex;justify-content:space-between}
-input[type="text"],input[type="number"],input[type="email"],textarea,select{width:100%;padding:12px 16px;background:rgba(15,15,26,0.8);border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:'Inter',sans-serif;font-size:1rem;margin-top:6px;margin-bottom:16px;transition:border-color 0.3s,box-shadow 0.3s}
+
+/* Form Elements */
+label{font-family:'Rajdhani',sans-serif;font-weight:600;font-size:1rem;display:block;margin-bottom:4px}
+input[type="text"],input[type="email"],input[type="number"],textarea,select{
+  width:100%;padding:12px 16px;
+  background:rgba(15,15,26,0.8);
+  border:1px solid var(--glass-border);
+  border-radius:10px;
+  color:var(--text);
+  font-family:'Inter',sans-serif;
+  font-size:0.95rem;
+  margin-bottom:16px;
+  transition:border-color 0.3s,box-shadow 0.3s
+}
 input:focus,textarea:focus,select:focus{outline:none;border-color:var(--purple);box-shadow:0 0 15px var(--purple-glow)}
-textarea{min-height:100px;resize:vertical}
-select option{background:var(--void);color:var(--text)}
-label{font-family:'Rajdhani',sans-serif;font-weight:600;font-size:1rem;display:block}
+textarea{min-height:80px;resize:vertical}
+select option{background:var(--void)}
+
+/* Checkbox */
 .checkbox-group{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 16px}
-.checkbox-group label{display:flex;align-items:center;gap:6px;padding:6px 14px;background:rgba(15,15,26,0.6);border:1px solid var(--border);border-radius:20px;cursor:pointer;font-weight:400;font-size:0.9rem;transition:all 0.2s}
+.checkbox-group label{
+  display:flex;align-items:center;gap:6px;
+  padding:8px 14px;
+  background:rgba(15,15,26,0.6);
+  border:1px solid var(--glass-border);
+  border-radius:20px;
+  cursor:pointer;
+  font-weight:400;font-size:0.85rem;
+  transition:all 0.2s
+}
 .checkbox-group label:hover{border-color:var(--purple)}
 .checkbox-group input:checked+span{color:var(--gold)}
 .checkbox-group input{display:none}
-.phonics-group{margin-bottom:20px;padding:20px;background:rgba(15,15,26,0.5);border:1px solid var(--border);border-radius:12px}
-.phonics-group-title{font-family:'Orbitron',sans-serif;color:var(--gold);font-size:0.85rem;margin-bottom:12px}
-.sounds-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
-@media(min-width:600px){.sounds-grid{grid-template-columns:repeat(6,1fr)}}
-.sound-chip{text-align:center;padding:10px 6px;background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.2);border-radius:10px}
-.sound-chip .sound{font-family:'Orbitron',sans-serif;font-size:1.2rem;color:var(--purple)}
-.sound-chip .example{font-size:0.75rem;color:var(--dim);margin-top:2px}
-.rec-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border:2px solid var(--purple);background:rgba(168,85,247,0.1);color:var(--purple);border-radius:30px;font-family:'Rajdhani',sans-serif;font-size:1rem;font-weight:600;cursor:pointer;transition:all 0.3s}
+
+/* Passage Card */
+.passage-card{
+  background:rgba(245,158,11,0.08);
+  border-left:3px solid var(--gold);
+  padding:16px;border-radius:0 12px 12px 0;
+  margin:12px 0;font-size:1rem;line-height:1.8
+}
+.passage-label{font-family:'Rajdhani',sans-serif;font-weight:700;color:var(--gold);font-size:0.85rem;margin-bottom:8px}
+
+/* Recording */
+.rec-wrapper{margin-top:12px}
+.rec-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 24px;border:2px solid var(--purple);
+  background:rgba(168,85,247,0.1);color:var(--purple);
+  border-radius:30px;font-family:'Rajdhani',sans-serif;font-size:1rem;font-weight:600;
+  cursor:pointer;transition:all 0.3s
+}
 .rec-btn:hover{background:rgba(168,85,247,0.2);box-shadow:0 0 20px var(--purple-glow)}
 .rec-btn.recording{border-color:var(--danger);color:var(--danger);background:rgba(239,68,68,0.1);animation:pulse-rec 1s infinite}
 .rec-btn.done{border-color:var(--success);color:var(--success);background:rgba(34,197,94,0.1)}
 @keyframes pulse-rec{0%,100%{box-shadow:0 0 5px rgba(239,68,68,0.3)}50%{box-shadow:0 0 25px rgba(239,68,68,0.5)}}
 .rec-status{font-size:0.85rem;color:var(--dim);margin-top:8px}
-.rec-playback{margin-top:8px}
-.rec-playback audio{width:100%;height:36px;border-radius:8px}
-.passage{background:rgba(245,158,11,0.05);border-left:3px solid var(--gold);padding:16px;border-radius:0 10px 10px 0;margin:12px 0;font-size:1.1rem;line-height:1.8}
-.submit-area{text-align:center;padding:40px 20px}
-.submit-btn{display:inline-flex;align-items:center;gap:10px;padding:16px 40px;background:linear-gradient(135deg,var(--purple),#7c3aed);color:white;border:none;border-radius:30px;font-family:'Orbitron',sans-serif;font-size:1rem;cursor:pointer;transition:all 0.3s;box-shadow:0 0 30px var(--purple-glow)}
+.rec-audio{width:100%;margin-top:10px;border-radius:8px}
+
+/* Submit */
+.submit-section{text-align:center;padding:40px 20px;background:linear-gradient(135deg,rgba(168,85,247,0.1),rgba(245,158,11,0.05));border-radius:1rem;margin-top:20px}
+.submit-btn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:16px 40px;
+  background:linear-gradient(135deg,var(--purple),#7c3aed);
+  color:white;border:none;border-radius:30px;
+  font-family:'Orbitron',sans-serif;font-size:1rem;
+  cursor:pointer;transition:all 0.3s;
+  box-shadow:0 0 30px var(--purple-glow)
+}
 .submit-btn:hover{transform:translateY(-2px);box-shadow:0 0 40px rgba(168,85,247,0.5)}
-.download-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;background:linear-gradient(135deg,var(--gold),#d97706);color:var(--void);border:none;border-radius:30px;font-family:'Rajdhani',sans-serif;font-size:1rem;font-weight:700;cursor:pointer;transition:all 0.3s;margin:8px;text-decoration:none}
-.download-btn:hover{transform:translateY(-2px);box-shadow:0 0 20px var(--gold-glow)}
-.section-divider{height:2px;background:linear-gradient(90deg,transparent,var(--purple),var(--gold),transparent);margin:30px 0;border:none}
-.section-header{display:flex;align-items:center;gap:12px;margin-bottom:20px}
-.section-number{width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--purple),#7c3aed);border-radius:12px;font-family:'Orbitron',sans-serif;font-weight:700;font-size:1.1rem;flex-shrink:0}
-.badge{display:inline-block;padding:4px 12px;border-radius:20px;font-family:'Rajdhani',sans-serif;font-size:0.8rem;font-weight:600;margin:2px}
-.badge-purple{background:rgba(168,85,247,0.15);color:var(--purple);border:1px solid rgba(168,85,247,0.3)}
-.badge-gold{background:rgba(245,158,11,0.15);color:var(--gold);border:1px solid rgba(245,158,11,0.3)}
+.submit-note{font-size:0.85rem;color:var(--dim);margin-top:16px;max-width:400px;margin-left:auto;margin-right:auto}
+
+/* Quote */
+.quote-box{text-align:center;padding:20px;margin:20px 0;border:1px solid rgba(245,158,11,0.2);border-radius:12px;background:rgba(245,158,11,0.03)}
+.quote-box p{font-family:'Rajdhani',sans-serif;font-size:1.1rem;color:var(--gold);font-weight:600}
+.quote-box .vi{font-size:0.9rem;color:var(--dim)}
+
+/* Footer */
+footer{text-align:center;padding:30px 20px;opacity:0.6}
+footer p{font-family:'Orbitron',sans-serif;font-size:0.7rem;color:var(--purple);letter-spacing:2px}
+footer .tagline{font-family:'Rajdhani',sans-serif;font-size:0.8rem;color:var(--dim);margin-top:4px}
+
+/* Utilities */
 .hidden{display:none!important}
-.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);padding:12px 24px;background:var(--success);color:white;border-radius:10px;font-family:'Rajdhani',sans-serif;font-weight:600;z-index:1000;opacity:0;transition:opacity 0.3s}
-.toast.show{opacity:1}
-.tiger-quote{text-align:center;padding:20px;margin:20px 0;border:1px solid rgba(245,158,11,0.2);border-radius:12px;background:rgba(245,158,11,0.03)}
-.tiger-quote p{font-family:'Rajdhani',sans-serif;font-size:1.2rem;color:var(--gold);font-weight:600}
-.tiger-quote .vi{font-size:1rem;color:var(--dim)}
-.mic-permission{background:rgba(168,85,247,0.08);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:20px;text-align:center}
-.mic-permission button{padding:10px 24px;background:var(--purple);color:white;border:none;border-radius:20px;font-family:'Rajdhani',sans-serif;font-size:1rem;font-weight:600;cursor:pointer;margin-top:8px}
-@media(max-width:600px){h1{font-size:1.5rem}h2{font-size:1.1rem}.hero{padding:24px 16px}.card{padding:16px}.container{padding:12px}}
+.text-center{text-align:center}
+.mt-4{margin-top:16px}
+.mb-4{margin-bottom:16px}
+
+/* Responsive */
+@media(max-width:600px){
+  .container{padding:12px}
+  .hero{padding:24px 16px}
+  .glass{padding:16px}
+  h1{font-size:1.5rem}
+  h2{font-size:1.1rem}
+  .login-form{flex-direction:column}
+  .hero-meta{flex-direction:column;align-items:center}
+}
 </style>
 </head>
 <body>
@@ -81,480 +232,342 @@ label{font-family:'Rajdhani',sans-serif;font-weight:600;font-size:1rem;display:b
 <div class="hero">
 <div class="hero-icon">🐯</div>
 <h1>THE TIGER ASSESSMENT</h1>
-<p style="color:var(--purple);font-family:'Orbitron',sans-serif;font-size:0.85rem;margin-bottom:12px;">ĐÁNH GIÁ NĂNG LỰC TIẾNG ANH</p>
-<p>Welcome! This assessment helps your teacher understand your current English level.</p>
-<p class="vi" style="margin-top:8px;">Chào mừng bạn! Bài đánh giá này giúp giáo viên hiểu trình độ tiếng Anh hiện tại của bạn.</p>
-<div style="margin-top:16px;">
-<span class="badge badge-purple">⏱ 10-15 phút</span>
-<span class="badge badge-gold">🎤 Ghi âm + ✍️ Viết</span>
-</div>
-<div style="margin-top:16px;">
-<a href="The_Tiger_Dossier.pdf" download class="download-btn">📥 Tải Hồ Sơ Con Hổ (PDF)</a>
+<p class="hero-tagline">ĐÁNH GIÁ NĂNG LỰC TIẾNG ANH</p>
+<p>Quick assessment to find your level. 3-5 minutes. Voice recording optional.</p>
+<p class="vi">Đánh giá nhanh để tìm trình độ của bạn. 3-5 phút. Ghi âm tùy chọn.</p>
+<div class="hero-meta">
+<span class="badge badge-purple">⏱ 3-5 phút</span>
+<span class="badge badge-gold">🎤 Ghi âm tùy chọn</span>
 </div>
 </div>
 
-<!-- PODCAST PLACEHOLDER -->
-<div class="card" id="podcastCard" style="text-align:center;">
-<h3>🎧 Nghe Podcast Trước Khi Bắt Đầu <span class="vi">(Listen Before Starting)</span></h3>
-<p class="vi" style="margin-bottom:12px;">Nghe podcast 20 phút để hiểu thêm về phương pháp học của NET.</p>
-<audio controls style="width:100%;border-radius:8px;" id="podcastAudio">
-<source src="tiger_podcast.mp3" type="audio/mpeg">
-Trình duyệt không hỗ trợ audio. / Browser does not support audio.
-</audio>
-<p class="vi" style="margin-top:8px;font-size:0.8rem;">* Audio sẽ được cập nhật sớm / Audio coming soon</p>
+<!-- VOICE TEST -->
+<div class="glass voice-test">
+<h3>🎤 Test Your Microphone</h3>
+<p class="vi" style="margin-bottom:12px">Kiểm tra microphone trước</p>
+<div class="mic-status">
+<span class="mic-dot" id="micDot"></span>
+<span id="micStatus">Click để kiểm tra / Click to test</span>
+</div>
+<button class="test-btn" id="testMicBtn" onclick="testMicrophone()">
+<span>🎤</span> Test Microphone
+</button>
+</div>
+
+<!-- LOGIN / USER -->
+<div class="glass login-section">
+<h2>👤 Your Profile</h2>
+<div id="loginForm" class="login-form">
+<input type="text" id="userName" placeholder="Your name / Tên của bạn">
+<button class="login-btn" onclick="handleLogin()">Start</button>
+</div>
+<div id="userWelcome" class="user-welcome hidden">
+<span>Welcome, <strong id="displayName">Student</strong>!</span>
+<button class="logout-btn" onclick="handleLogout()">Change</button>
+</div>
 </div>
 
 <!-- PROGRESS -->
 <div class="progress-bar">
 <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
 <div class="progress-label">
-<span id="progressText">Phần 1/5</span>
+<span id="progressText">Bắt đầu nào</span>
 <span id="progressPct">0%</span>
 </div>
 </div>
 
-<!-- MIC PERMISSION -->
-<div class="mic-permission" id="micPrompt">
-<p>🎤 Bài đánh giá này cần ghi âm giọng nói của bạn.</p>
-<p class="vi">This assessment requires microphone access for voice recording.</p>
-<button onclick="requestMic()">Cho phép Microphone / Allow Microphone</button>
-</div>
-
-<!-- SECTION 1: PERSONAL INFO -->
-<div class="card" id="section1">
-<div class="section-header">
-<div class="section-number">1</div>
-<div>
-<h2 style="margin-bottom:2px;">ABOUT YOU</h2>
-<span class="vi">Về Bản Thân Bạn</span>
-</div>
-</div>
-
-<label>Full Name <span class="vi">(Họ và tên)</span></label>
-<input type="text" id="fullName" placeholder="Nguyễn Văn A...">
-
-<label>Age <span class="vi">(Tuổi)</span></label>
-<input type="number" id="age" placeholder="12" min="4" max="80">
-
-<label>School / Job <span class="vi">(Trường học / Công việc)</span></label>
-<input type="text" id="school" placeholder="Trường THCS...">
-
-<label>How long have you studied English? <span class="vi">(Bạn đã học tiếng Anh bao lâu?)</span></label>
-<select id="engHistory">
+<!-- SECTION 1: BASICS -->
+<div class="glass">
+<h2>1️⃣ Basic Info</h2>
+<label>How long have you studied English?</label>
+<select id="engLevel">
 <option value="">-- Chọn / Select --</option>
 <option value="never">Chưa bao giờ / Never</option>
 <option value="<1year">Dưới 1 năm / Less than 1 year</option>
-<option value="1-3years">1-3 năm / 1-3 years</option>
-<option value="3-5years">3-5 năm / 3-5 years</option>
-<option value="5+years">Hơn 5 năm / More than 5 years</option>
+<option value="1-3years">1-3 năm</option>
+<option value="3-5years">3-5 năm</option>
+<option value="5+years">Hơn 5 năm</option>
 </select>
 
-<label>What are your hobbies? <span class="vi">(Sở thích của bạn là gì? Chọn tất cả.)</span></label>
+<label>What's your biggest challenge? <span class="vi">(Khó khăn lớn nhất?)</span></label>
 <div class="checkbox-group">
-<label><input type="checkbox" name="hobby" value="gaming"><span>🎮 Gaming</span></label>
-<label><input type="checkbox" name="hobby" value="music"><span>🎵 Âm nhạc</span></label>
-<label><input type="checkbox" name="hobby" value="sports"><span>⚽ Thể thao</span></label>
-<label><input type="checkbox" name="hobby" value="drawing"><span>🎨 Vẽ</span></label>
-<label><input type="checkbox" name="hobby" value="reading"><span>📚 Đọc sách</span></label>
-<label><input type="checkbox" name="hobby" value="cooking"><span>🍳 Nấu ăn</span></label>
-<label><input type="checkbox" name="hobby" value="travel"><span>✈️ Du lịch</span></label>
-<label><input type="checkbox" name="hobby" value="movies"><span>🎬 Phim</span></label>
-<label><input type="checkbox" name="hobby" value="tiktok"><span>📱 TikTok</span></label>
-<label><input type="checkbox" name="hobby" value="dance"><span>💃 Nhảy</span></label>
-<label><input type="checkbox" name="hobby" value="pets"><span>🐶 Thú cưng</span></label>
-<label><input type="checkbox" name="hobby" value="fashion"><span>👗 Thời trang</span></label>
-</div>
-<label>Other hobbies <span class="vi">(Sở thích khác)</span></label>
-<input type="text" id="otherHobbies" placeholder="...">
-
-<label>Tell us about your family <span class="vi">(Kể về gia đình bạn — bao nhiêu người? Anh chị em? Thú cưng?)</span></label>
-<textarea id="family" placeholder="Gia đình tôi có... người. / My family has... people."></textarea>
-
-<label>What is your biggest challenge with English? <span class="vi">(Khó khăn lớn nhất của bạn với tiếng Anh?)</span></label>
-<div class="checkbox-group">
-<label><input type="checkbox" name="challenge" value="speaking"><span>🗣️ Nói</span></label>
-<label><input type="checkbox" name="challenge" value="listening"><span>👂 Nghe</span></label>
-<label><input type="checkbox" name="challenge" value="reading"><span>📖 Đọc</span></label>
-<label><input type="checkbox" name="challenge" value="writing"><span>✍️ Viết</span></label>
-<label><input type="checkbox" name="challenge" value="pronunciation"><span>🔊 Phát âm</span></label>
-<label><input type="checkbox" name="challenge" value="grammar"><span>📐 Ngữ pháp</span></label>
-<label><input type="checkbox" name="challenge" value="vocabulary"><span>📝 Từ vựng</span></label>
-<label><input type="checkbox" name="challenge" value="confidence"><span>😰 Tự tin</span></label>
-</div>
-
-<label>Why do you want to learn English? <span class="vi">(Tại sao bạn muốn học tiếng Anh?)</span></label>
-<textarea id="whyEnglish" placeholder="Tôi muốn... / I want to..."></textarea>
-
-<label>What do you like? Movies, music, food, YouTube channels... <span class="vi">(Bạn thích gì? Phim, nhạc, đồ ăn, kênh YouTube...)</span></label>
-<textarea id="favorites" placeholder="Tôi thích... / I like..."></textarea>
-
-<label>What is your dream job? <span class="vi">(Công việc mơ ước của bạn là gì?)</span></label>
-<input type="text" id="dreamJob" placeholder="I want to be... / Tôi muốn trở thành...">
-
-<label>Do you use English at school or work? How? <span class="vi">(Bạn có dùng tiếng Anh ở trường hoặc công việc không? Như thế nào?)</span></label>
-<textarea id="engUse" placeholder="Yes/No... Tôi dùng tiếng Anh để..."></textarea>
-</div>
-
-<div class="tiger-quote">
-<p>"Chúng tôi không bán tiếng Anh. Chúng tôi bán Quyền Năng Tự Tin."</p>
-<p class="vi" style="font-style:normal;color:var(--text);font-size:0.9rem;margin-top:4px;">"We don't sell English. We sell the Power of Confidence."</p>
-</div>
-
-<hr class="section-divider">
-
-<!-- SECTION 2: PHONICS -->
-<div class="card" id="section2">
-<div class="section-header">
-<div class="section-number">2</div>
-<div>
-<h2 style="margin-bottom:2px;">PHONICS SOUNDS</h2>
-<span class="vi">Đánh Giá Phát Âm — 42 Âm Jolly Phonics</span>
+<label><input type="checkbox" name="challenge" value="speaking"><span>🗣️ Nói / Speaking</span></label>
+<label><input type="checkbox" name="challenge" value="listening"><span>👂 Nghe / Listening</span></label>
+<label><input type="checkbox" name="challenge" value="pronunciation"><span>🔊 Phát âm / Pronunciation</span></label>
+<label><input type="checkbox" name="challenge" value="vocabulary"><span>📝 Từ vựng / Vocabulary</span></label>
+<label><input type="checkbox" name="confidence"><span>😰 Tự tin / Confidence</span></label>
 </div>
 </div>
-<p style="margin-bottom:4px;">For each group, press <strong>Record</strong> and say each sound clearly, one by one.</p>
-<p class="vi" style="margin-bottom:16px;">Với mỗi nhóm, nhấn <strong>Ghi âm</strong> và đọc rõ từng âm, từng âm một.</p>
-<div id="phonicsGroups"></div>
-</div>
 
-<hr class="section-divider">
+<!-- SECTION 2: READING -->
+<div class="glass">
+<h2>2️⃣ Reading <span class="vi">(Đọc)</span></h2>
+<p class="vi" style="margin-bottom:16px">Read this sentence out loud and record it.</p>
 
-<!-- SECTION 3: READING -->
-<div class="card" id="section3">
-<div class="section-header">
-<div class="section-number">3</div>
-<div>
-<h2 style="margin-bottom:2px;">READING</h2>
-<span class="vi">Đánh Giá Đọc Hiểu</span>
-</div>
-</div>
-<p class="vi" style="margin-bottom:16px;">Đọc to đoạn văn bằng tiếng Anh và ghi âm. Sau đó trả lời câu hỏi. (Read the passages aloud and record. Then answer the questions.)</p>
+<div class="passage-label">📖 Your Sentence:</div>
+<div class="passage-card">My name is Lan. I am ten years old. I go to school every day.</div>
 
-<h3>📖 Passage 1 <span class="vi">(Đọc to / Read aloud)</span></h3>
-<div class="passage">The cat sat on the mat. It is a big cat. The cat can run and jump. I like the cat.</div>
-<div id="readRec1"></div>
-
-<h3 style="margin-top:24px;">📖 Passage 2 <span class="vi">(Đọc to / Read aloud)</span></h3>
-<div class="passage">My name is Lan. I am ten years old. I go to school every day. My best friend is Minh. We like to play together after school.</div>
-<div id="readRec2"></div>
-
-<h3 style="margin-top:24px;">📖 Passage 3 <span class="vi">(Đọc to / Read aloud)</span></h3>
-<div class="passage">Today is a sunny day. The birds are singing in the trees. I can see a dog in the park. The dog is brown and white. It is running very fast.</div>
-<div id="readRec3"></div>
-
-<h3 style="margin-top:24px;">❓ Comprehension Questions <span class="vi">(Câu hỏi hiểu bài)</span></h3>
-
-<label>1. What color is the dog in Passage 3? <span class="vi">(Con chó trong đoạn 3 có màu gì?)</span></label>
-<input type="text" id="comp1" placeholder="The dog is...">
-
-<label>2. How old is Lan in Passage 2? <span class="vi">(Lan bao nhiêu tuổi?)</span></label>
-<input type="text" id="comp2" placeholder="Lan is...">
-
-<label>3. What can the cat do in Passage 1? <span class="vi">(Con mèo có thể làm gì?)</span></label>
-<input type="text" id="comp3" placeholder="The cat can...">
-
-<label>4. Who is Lan's best friend? <span class="vi">(Bạn thân của Lan là ai?)</span></label>
-<input type="text" id="comp4" placeholder="Lan's best friend is...">
-
-<label>5. Where is the dog? <span class="vi">(Con chó ở đâu?)</span></label>
-<input type="text" id="comp5" placeholder="The dog is in...">
-</div>
-
-<hr class="section-divider">
-
-<!-- SECTION 4: WRITING -->
-<div class="card" id="section4">
-<div class="section-header">
-<div class="section-number">4</div>
-<div>
-<h2 style="margin-bottom:2px;">WRITING</h2>
-<span class="vi">Đánh Giá Viết</span>
+<div class="rec-wrapper">
+<button class="rec-btn" id="readRecBtn" onclick="toggleRecording('reading')">
+🎤 Record / Ghi âm
+</button>
+<div class="rec-status" id="readStatus"></div>
+<audio id="readAudio" class="rec-audio hidden" controls></audio>
 </div>
 </div>
-<p class="vi" style="margin-bottom:16px;">Viết bằng tiếng Anh. Không sao nếu bạn mắc lỗi — hãy cố gắng hết sức! Bạn có thể viết tiếng Việt nếu không biết từ tiếng Anh.<br>(Write in English. It's OK to make mistakes — just try your best! You can write Vietnamese if you don't know the English word.)</p>
 
-<label>1. Write 3-5 sentences about yourself. <span class="vi">(Viết 3-5 câu giới thiệu bản thân.)</span></label>
-<textarea id="write1" placeholder="My name is... I am... years old. I like..."></textarea>
+<!-- SECTION 3: SPEAKING -->
+<div class="glass">
+<h2>3️⃣ Speaking <span class="vi">(Nói)</span></h2>
+<p>Talk for 20-30 seconds about anything!</p>
+<p class="vi" style="margin-bottom:12px">Nói 20-30 giây về bất cứ điều gì!</p>
+<p class="vi" style="margin-bottom:16px;font-size:0.85rem">💡 Gợi ý: Giới thiệu bản thân, kể về ngày hôm nay, gia đình, hoặc sở thích.</p>
 
-<label>2. Describe your family. <span class="vi">(Mô tả gia đình bạn.)</span></label>
-<textarea id="write2" placeholder="My family has... My mother is... My father..."></textarea>
-
-<label>3. What did you do yesterday? <span class="vi">(Hôm qua bạn đã làm gì?)</span></label>
-<textarea id="write3" placeholder="Yesterday I..."></textarea>
-
-<label>4. What do you want to learn in English? <span class="vi">(Bạn muốn học gì bằng tiếng Anh?)</span></label>
-<textarea id="write4" placeholder="I want to learn..."></textarea>
-
-<label>5. Describe your house or your room. <span class="vi">(Mô tả nhà hoặc phòng của bạn.)</span></label>
-<textarea id="write5" placeholder="My house is... My room has..."></textarea>
-</div>
-
-<hr class="section-divider">
-
-<!-- SECTION 5: FREE SPEAKING -->
-<div class="card" id="section5">
-<div class="section-header">
-<div class="section-number">5</div>
-<div>
-<h2 style="margin-bottom:2px;">FREE SPEAKING</h2>
-<span class="vi">Nói Tự Do</span>
+<div class="rec-wrapper">
+<button class="rec-btn" id="speakingRecBtn" onclick="toggleRecording('speaking')">
+🎤 Record / Ghi âm
+</button>
+<div class="rec-status" id="speakingStatus"></div>
+<audio id="speakingAudio" class="rec-audio hidden" controls></audio>
 </div>
 </div>
-<p>Record yourself speaking freely for 30-60 seconds about anything you want!</p>
-<p class="vi" style="margin-bottom:12px;">Ghi âm nói tự do 30-60 giây về bất cứ điều gì bạn muốn!</p>
-<p class="vi" style="margin-bottom:16px;">💡 Gợi ý: Giới thiệu bản thân, kể về ngày hôm nay, nói về gia đình, hoặc sở thích.<br>(Suggestions: Introduce yourself, talk about today, your family, or your hobbies.)</p>
-<div id="freeRec"></div>
-</div>
 
-<div class="tiger-quote">
+<div class="quote-box">
 <p>"Lớn tiếng và sai > Im lặng và đúng."</p>
-<p class="vi" style="font-style:normal;color:var(--text);font-size:0.9rem;margin-top:4px;">"Loud and wrong beats silent and correct."</p>
+<p class="vi">"Loud and wrong beats silent and correct."</p>
 </div>
-
-<hr class="section-divider">
 
 <!-- SUBMIT -->
-<div class="card submit-area">
-<div style="font-size:3rem;margin-bottom:12px;">🐯</div>
-<h2 style="color:var(--gold);">🎉 HOÀN THÀNH! / COMPLETE!</h2>
-<p style="margin-bottom:8px;">Thank you for completing the Tiger Assessment!</p>
-<p class="vi" style="margin-bottom:24px;">Cảm ơn bạn đã hoàn thành bài đánh giá!</p>
-<button class="submit-btn" onclick="downloadResults()">📥 Tải Kết Quả / Download Results</button>
-<p class="vi" style="margin-top:16px;font-size:0.85rem;">Nhấn nút trên để tải kết quả. Gửi tất cả file cho giáo viên qua Zalo hoặc email.<br>(Press the button above to download results. Send all files to your teacher via Zalo or email.)</p>
-<p style="margin-top:8px;font-size:0.8rem;color:var(--dim);">hobbs@naturalenglishtraining.com</p>
+<div class="submit-section">
+<div style="font-size:2.5rem;margin-bottom:12px">🐯</div>
+<h2 style="color:var(--gold)">Sẵn sàng? / Ready?</h2>
+<button class="submit-btn" onclick="submitAssessment()">
+📤 Submit & Send to Teacher
+</button>
+<p class="submit-note">Gửi kết quả cho giáo viên qua Zalo/Email<br>Send results to teacher via Zalo or Email</p>
 </div>
 
-<!-- BRANDING -->
-<div style="text-align:center;padding:30px 20px;opacity:0.6;">
-<p style="font-family:'Orbitron',sans-serif;font-size:0.75rem;color:var(--purple);letter-spacing:2px;">NATURAL ENGLISH TRAINING</p>
-<p style="font-size:0.8rem;color:var(--dim);margin-top:4px;font-family:'Rajdhani',sans-serif;">From Mouse to Tiger 🐭 → 🐆 → 🐯</p>
-<p style="font-size:0.7rem;color:var(--dim);margin-top:8px;">© 2026 Natural English Training. All rights reserved.</p>
-</div>
-</div>
+<!-- FOOTER -->
+<footer>
+<p>Natural English Training</p>
+<p class="tagline">From Mouse to Tiger 🐭 → 🐆 → 🐯</p>
+</footer>
 
-<div class="toast" id="toast"></div>
+</div>
 
 <script>
-// === PHONICS DATA (42 Jolly Phonics Sounds) ===
-const phonicsGroups=[
-{name:"Group 1 / Nhóm 1",sounds:[
-{s:"s",ex:"sun ☀️",vi:"như 'xờ'"},{s:"a",ex:"ant 🐜",vi:"như 'a'"},{s:"t",ex:"tap",vi:"như 'tờ'"},{s:"i",ex:"ink 🖊️",vi:"như 'i'"},{s:"p",ex:"pan 🍳",vi:"như 'pờ'"},{s:"n",ex:"net 🥅",vi:"như 'nờ'"}
-]},
-{name:"Group 2 / Nhóm 2",sounds:[
-{s:"ck",ex:"cat 🐱",vi:"như 'cờ'"},{s:"e",ex:"egg 🥚",vi:"như 'e'"},{s:"h",ex:"hat 🎩",vi:"như 'hờ'"},{s:"r",ex:"rat 🐀",vi:"như 'rờ'"},{s:"m",ex:"man 🧑",vi:"như 'mờ'"},{s:"d",ex:"dog 🐕",vi:"như 'đờ'"}
-]},
-{name:"Group 3 / Nhóm 3",sounds:[
-{s:"g",ex:"go 🏃",vi:"như 'gờ'"},{s:"o",ex:"on",vi:"như 'o'"},{s:"u",ex:"up ⬆️",vi:"như 'ư'"},{s:"l",ex:"leg 🦵",vi:"như 'lờ'"},{s:"f",ex:"fun 🎉",vi:"như 'fờ'"},{s:"b",ex:"bus 🚌",vi:"như 'bờ'"}
-]},
-{name:"Group 4 / Nhóm 4",sounds:[
-{s:"ai",ex:"rain 🌧️",vi:"như 'ây'"},{s:"j",ex:"jug",vi:"như 'jờ'"},{s:"oa",ex:"boat ⛵",vi:"như 'âu'"},{s:"ie",ex:"pie 🥧",vi:"như 'ai'"},{s:"ee",ex:"see 👀",vi:"như 'i' dài"},{s:"or",ex:"fork 🍴",vi:"như 'o' dài"}
-]},
-{name:"Group 5 / Nhóm 5",sounds:[
-{s:"z",ex:"zip",vi:"như 'zờ'"},{s:"w",ex:"web 🕸️",vi:"như 'guờ'"},{s:"ng",ex:"ring 💍",vi:"như 'ngờ'"},{s:"v",ex:"van 🚐",vi:"như 'vờ'"},{s:"oo",ex:"book 📖",vi:"oo ngắn"},{s:"oo",ex:"moon 🌙",vi:"oo dài"}
-]},
-{name:"Group 6 / Nhóm 6",sounds:[
-{s:"y",ex:"yes ✅",vi:"như 'dờ'"},{s:"x",ex:"box 📦",vi:"như 'xờ'"},{s:"ch",ex:"chip",vi:"như 'chờ'"},{s:"sh",ex:"shop 🛒",vi:"như 'sờ'"},{s:"th",ex:"this 👈",vi:"th hữu thanh"},{s:"th",ex:"thin",vi:"th vô thanh"}
-]},
-{name:"Group 7 / Nhóm 7",sounds:[
-{s:"qu",ex:"quiz ❓",vi:"như 'quờ'"},{s:"ou",ex:"out",vi:"như 'ao'"},{s:"oi",ex:"oil",vi:"như 'oi'"},{s:"ue",ex:"blue 🔵",vi:"như 'iu'"},{s:"er",ex:"her",vi:"như 'ơ'"},{s:"ar",ex:"car 🚗",vi:"như 'a' dài"}
-]}
-];
+// === STATE ===
+let currentUser = localStorage.getItem('tiger_user') || '';
+let recordings = { reading: null, speaking: null };
+let activeRecorder = null;
+let activeStream = null;
+let isRecording = false;
+let currentRecordingType = null;
 
-// === AUDIO ENGINE ===
-const recordings={};
-let activeRecorder=null;
-let activeStream=null;
-let micReady=false;
-
-async function requestMic(){
-try{
-const s=await navigator.mediaDevices.getUserMedia({audio:true});
-s.getTracks().forEach(t=>t.stop());
-micReady=true;
-document.getElementById('micPrompt').innerHTML='<p style="color:var(--success)">✅ Microphone đã sẵn sàng! / Microphone ready!</p>';
-setTimeout(()=>document.getElementById('micPrompt').style.display='none',2000);
-}catch(e){
-document.getElementById('micPrompt').innerHTML='<p style="color:var(--danger)">❌ Không thể truy cập microphone. Vui lòng cho phép trong cài đặt trình duyệt.<br>Cannot access microphone. Please allow in browser settings.</p>';
-}
-}
-
-function createRecorder(containerId,recId){
-const container=document.getElementById(containerId);
-if(!container)return;
-const wrapper=document.createElement('div');
-wrapper.style.marginTop='12px';
-const btn=document.createElement('button');
-btn.className='rec-btn';
-btn.innerHTML='🎤 Ghi âm / Record';
-btn.dataset.recId=recId;
-btn.dataset.state='idle';
-const status=document.createElement('div');
-status.className='rec-status';
-const playback=document.createElement('div');
-playback.className='rec-playback hidden';
-
-btn.onclick=async function(){
-const state=this.dataset.state;
-if(state==='idle'||state==='done'){
-try{
-const stream=await navigator.mediaDevices.getUserMedia({audio:true});
-activeStream=stream;
-const recorder=new MediaRecorder(stream);
-activeRecorder=recorder;
-const chunks=[];
-recorder.ondataavailable=e=>chunks.push(e.data);
-recorder.onstop=()=>{
-const blob=new Blob(chunks,{type:'audio/webm'});
-recordings[recId]=blob;
-const audio=document.createElement('audio');
-audio.controls=true;
-audio.src=URL.createObjectURL(blob);
-audio.style.width='100%';
-playback.innerHTML='';
-playback.appendChild(audio);
-playback.classList.remove('hidden');
-btn.className='rec-btn done';
-btn.innerHTML='✅ Ghi lại / Re-record';
-btn.dataset.state='done';
-status.textContent='✅ Đã ghi âm! / Recorded!';
-status.style.color='var(--success)';
-stream.getTracks().forEach(t=>t.stop());
-activeRecorder=null;activeStream=null;
-updateProgress();
-};
-recorder.start();
-btn.className='rec-btn recording';
-btn.innerHTML='⏹ Dừng / Stop';
-btn.dataset.state='recording';
-status.textContent='🔴 Đang ghi âm... Nói rõ từng âm rồi nhấn Dừng. / Recording... Say each sound clearly then press Stop.';
-status.style.color='var(--danger)';
-}catch(err){
-status.textContent='❌ Không thể ghi âm. Cho phép microphone trong trình duyệt. / Cannot record. Allow microphone in browser.';
-status.style.color='var(--danger)';
-}
-}else if(state==='recording'){
-if(activeRecorder&&activeRecorder.state==='recording')activeRecorder.stop();
-}
-};
-wrapper.appendChild(btn);
-wrapper.appendChild(status);
-wrapper.appendChild(playback);
-container.appendChild(wrapper);
-}
-
-// === BUILD PHONICS UI ===
-function buildPhonics(){
-const container=document.getElementById('phonicsGroups');
-phonicsGroups.forEach((group,i)=>{
-const div=document.createElement('div');
-div.className='phonics-group';
-let html='<div class="phonics-group-title">'+group.name+'</div>';
-html+='<div class="sounds-grid">';
-group.sounds.forEach(s=>{
-html+='<div class="sound-chip"><div class="sound">'+s.s+'</div><div class="example">'+s.ex+'</div><div style="font-size:0.65rem;color:var(--dim);margin-top:2px;">'+s.vi+'</div></div>';
+// === INIT ===
+document.addEventListener('DOMContentLoaded', () => {
+  if (currentUser) {
+    showUserWelcome(currentUser);
+  }
+  updateProgress();
 });
-html+='</div>';
-html+='<p class="vi" style="font-size:0.85rem;margin-bottom:8px;">Nhấn ghi âm và đọc rõ từng âm: '+group.sounds.map(s=>'"'+s.s+'"').join(', ')+'</p>';
-html+='<div id="phonicsRec'+i+'"></div>';
-div.innerHTML=html;
-container.appendChild(div);
-setTimeout(()=>createRecorder('phonicsRec'+i,'phonics_group_'+(i+1)),10);
-});
+
+// === MICROPHONE TEST ===
+async function testMicrophone() {
+  const btn = document.getElementById('testMicBtn');
+  const dot = document.getElementById('micDot');
+  const status = document.getElementById('micStatus');
+  
+  btn.classList.add('testing');
+  btn.innerHTML = '⏳ Testing...';
+  
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    stream.getTracks().forEach(t => t.stop());
+    
+    dot.classList.remove('error');
+    dot.classList.add('ready');
+    status.textContent = '✅ Microphone hoạt động tốt!';
+    status.style.color = 'var(--success)';
+    btn.classList.remove('testing');
+    btn.classList.add('success');
+    btn.innerHTML = '✅ Ready!';
+  } catch (e) {
+    dot.classList.remove('ready');
+    dot.classList.add('error');
+    status.textContent = '❌ Không truy cập được microphone';
+    status.style.color = 'var(--danger)';
+    btn.classList.remove('testing');
+    btn.innerHTML = '❌ Retry';
+  }
 }
 
-// === BUILD READING RECORDERS ===
-function buildReadingRecs(){
-createRecorder('readRec1','reading_passage_1');
-createRecorder('readRec2','reading_passage_2');
-createRecorder('readRec3','reading_passage_3');
-createRecorder('freeRec','free_speaking');
+// === LOGIN ===
+function handleLogin() {
+  const name = document.getElementById('userName').value.trim();
+  if (!name) {
+    alert('Please enter your name / Vui lòng nhập tên');
+    return;
+  }
+  currentUser = name;
+  localStorage.setItem('tiger_user', name);
+  showUserWelcome(name);
+  updateProgress();
+}
+
+function handleLogout() {
+  currentUser = '';
+  localStorage.removeItem('tiger_user');
+  document.getElementById('loginForm').classList.remove('hidden');
+  document.getElementById('userWelcome').classList.add('hidden');
+  updateProgress();
+}
+
+function showUserWelcome(name) {
+  document.getElementById('loginForm').classList.add('hidden');
+  document.getElementById('userWelcome').classList.remove('hidden');
+  document.getElementById('displayName').textContent = name;
+}
+
+// === RECORDING ===
+async function toggleRecording(type) {
+  if (isRecording) {
+    // Stop recording
+    if (activeRecorder && activeRecorder.state === 'recording') {
+      activeRecorder.stop();
+    }
+    return;
+  }
+  
+  // Start recording
+  const btnId = type === 'reading' ? 'readRecBtn' : 'speakingRecBtn';
+  const statusId = type === 'reading' ? 'readStatus' : 'speakingStatus';
+  const audioId = type === 'reading' ? 'readAudio' : 'speakingAudio';
+  const btn = document.getElementById(btnId);
+  const status = document.getElementById(statusId);
+  
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    activeStream = stream;
+    const recorder = new MediaRecorder(stream);
+    activeRecorder = recorder;
+    
+    const chunks = [];
+    recorder.ondataavailable = e => chunks.push(e.data);
+    recorder.onstop = () => {
+      const blob = new Blob(chunks, { type: 'audio/webm' });
+      recordings[type] = blob;
+      
+      const audio = document.getElementById(audioId);
+      audio.src = URL.createObjectURL(blob);
+      audio.classList.remove('hidden');
+      
+      btn.classList.remove('recording');
+      btn.classList.add('done');
+      btn.innerHTML = '✅ Re-record';
+      status.textContent = '✅ Đã ghi! / Recorded!';
+      status.style.color = 'var(--success)';
+      
+      stream.getTracks().forEach(t => t.stop());
+      isRecording = false;
+      currentRecordingType = null;
+      updateProgress();
+    };
+    
+    recorder.start();
+    isRecording = true;
+    currentRecordingType = type;
+    
+    btn.classList.add('recording');
+    btn.innerHTML = '⏹ Stop';
+    status.textContent = '🔴 Recording... Speak now!';
+    status.style.color = 'var(--danger)';
+    
+  } catch (err) {
+    status.textContent = '❌ Lỗi ghi âm / Recording error';
+    status.style.color = 'var(--danger)';
+  }
 }
 
 // === PROGRESS ===
-function updateProgress(){
-const fields=['fullName','age','school','engHistory','whyEnglish','family','favorites','dreamJob','engUse',
-'write1','write2','write3','write4','write5','comp1','comp2','comp3','comp4','comp5'];
-let filled=0;
-fields.forEach(id=>{const el=document.getElementById(id);if(el&&el.value&&el.value.trim())filled++;});
-const hobbyChecked=document.querySelectorAll('input[name="hobby"]:checked').length>0?1:0;
-const challengeChecked=document.querySelectorAll('input[name="challenge"]:checked').length>0?1:0;
-filled+=hobbyChecked+challengeChecked;
-const totalRecs=11;
-const doneRecs=Object.keys(recordings).length;
-const totalItems=fields.length+2+totalRecs;
-const doneItems=filled+doneRecs;
-const pct=Math.round((doneItems/totalItems)*100);
-document.getElementById('progressFill').style.width=pct+'%';
-document.getElementById('progressPct').textContent=pct+'%';
-const section=pct<20?'1/5':pct<40?'2/5':pct<60?'3/5':pct<80?'4/5':'5/5';
-document.getElementById('progressText').textContent='Phần '+section;
-}
-document.addEventListener('input',updateProgress);
-document.addEventListener('change',updateProgress);
-
-// === DOWNLOAD ===
-async function downloadResults(){
-const name=document.getElementById('fullName').value||'student';
-const data={
-timestamp:new Date().toISOString(),
-assessment:'NET Tiger Assessment V1',
-personal:{
-fullName:name,
-age:document.getElementById('age').value,
-school:document.getElementById('school').value,
-engHistory:document.getElementById('engHistory').value,
-hobbies:[...document.querySelectorAll('input[name="hobby"]:checked')].map(c=>c.value),
-otherHobbies:document.getElementById('otherHobbies').value,
-family:document.getElementById('family').value,
-challenges:[...document.querySelectorAll('input[name="challenge"]:checked')].map(c=>c.value),
-whyEnglish:document.getElementById('whyEnglish').value,
-favorites:document.getElementById('favorites').value,
-dreamJob:document.getElementById('dreamJob').value,
-engUse:document.getElementById('engUse').value
-},
-comprehension:{
-q1_dogColor:document.getElementById('comp1').value,
-q2_lanAge:document.getElementById('comp2').value,
-q3_catAbility:document.getElementById('comp3').value,
-q4_bestFriend:document.getElementById('comp4').value,
-q5_dogLocation:document.getElementById('comp5').value
-},
-writing:{
-aboutYourself:document.getElementById('write1').value,
-family:document.getElementById('write2').value,
-yesterday:document.getElementById('write3').value,
-goals:document.getElementById('write4').value,
-house:document.getElementById('write5').value
-},
-audioRecordings:Object.keys(recordings)
-};
-// Download JSON
-const jsonBlob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
-dl(jsonBlob,'NET-Assessment-'+safeName(name)+'-'+new Date().toISOString().slice(0,10)+'.json');
-// Download audio files
-for(const[key,blob]of Object.entries(recordings)){
-dl(blob,'NET-Assessment-'+safeName(name)+'-'+key+'.webm');
-}
-showToast('✅ Đã tải '+( 1+Object.keys(recordings).length)+' file! Gửi cho giáo viên nhé!');
-}
-function safeName(n){return n.replace(/[^a-zA-Z0-9\u00C0-\u024F\u1E00-\u1EFF]/g,'_').slice(0,30)}
-function dl(blob,filename){
-const url=URL.createObjectURL(blob);
-const a=document.createElement('a');
-a.href=url;a.download=filename;
-document.body.appendChild(a);a.click();
-document.body.removeChild(a);
-URL.revokeObjectURL(url);
-}
-function showToast(msg){
-const t=document.getElementById('toast');
-t.textContent=msg;t.classList.add('show');
-setTimeout(()=>t.classList.remove('show'),4000);
+function updateProgress() {
+  const fields = ['engLevel'];
+  const challenges = document.querySelectorAll('input[name="challenge"]:checked').length;
+  
+  let filled = fields.filter(id => {
+    const el = document.getElementById(id);
+    return el && el.value;
+  }).length;
+  
+  if (challenges > 0) filled++;
+  if (currentUser) filled++;
+  if (recordings.reading) filled++;
+  if (recordings.speaking) filled++;
+  
+  const total = 6; // user, level, challenge, 2 recordings, ready
+  const pct = Math.min(100, Math.round((filled / total) * 100));
+  
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressPct').textContent = pct + '%';
+  
+  const texts = ['Bắt đầu nào', 'Đang làm...', 'Gần xong!', 'Sắp hoàn thành', 'Hoàn thành!'];
+  const idx = Math.min(4, Math.floor(pct / 20));
+  document.getElementById('progressText').textContent = texts[idx];
 }
 
-// === INIT ===
-buildPhonics();
-buildReadingRecs();
-updateProgress();
+document.addEventListener('input', updateProgress);
+document.addEventListener('change', updateProgress);
+
+// === SUBMIT ===
+async function submitAssessment() {
+  if (!currentUser) {
+    alert('Vui lòng nhập tên trước / Please enter your name first');
+    return;
+  }
+  
+  const name = currentUser;
+  const timestamp = new Date().toISOString();
+  
+  // Build data object
+  const data = {
+    timestamp,
+    assessment: 'Tiger Assessment V2',
+    student: {
+      name,
+      engLevel: document.getElementById('engLevel').value,
+      challenges: [...document.querySelectorAll('input[name="challenge"]:checked')].map(c => c.value)
+    },
+    recordings: {
+      reading: recordings.reading ? 'recorded' : 'not recorded',
+      speaking: recordings.speaking ? 'recorded' : 'not recorded'
+    }
+  };
+  
+  // Download JSON
+  const jsonBlob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  downloadFile(jsonBlob, `Tiger-Assessment-${name}-${timestamp.slice(0,10)}.json`);
+  
+  // Download audio files
+  if (recordings.reading) {
+    downloadFile(recordings.reading, `Tiger-Assessment-${name}-reading.webm`);
+  }
+  if (recordings.speaking) {
+    downloadFile(recordings.speaking, `Tiger-Assessment-${name}-speaking.webm`);
+  }
+  
+  alert(`✅ Cảm ơn ${name}! Đã tải kết quả. Gửi file cho giáo viên qua Zalo nhé!\n\n✅ Thank you ${name}! Results downloaded. Send files to teacher via Zalo!`);
+}
+
+function downloadFile(blob, filename) {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
 </script>
 </body>
 </html>
