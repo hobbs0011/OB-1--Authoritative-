@@ -19,14 +19,14 @@ function isCrisisSignal(text) {
 
 function handleCrisis() {
   stopAudio();
-  obi("Hey \u2014 stop. I heard that.\n\nThat matters more than any English lesson. If something real is going on, please reach out:\n\n\uD83C\uDDFB\uD83C\uDDF3 Vietnam support line: 1800 599 920 (free, 24/7)\n\uD83D\uDCAC Or talk to a teacher, parent, or friend you trust.\n\nI'm here when you're ready. No judgment.");
+  obi("Hey \u2014 stop. I heard that.\n\nThat matters more than any English lesson. If something real is going on, please reach out:\n\n\uD83C\uDDFB\uD83C\uDDF3 Vietnam: 1800 599 920 (free, 24/7)\n\uD83C\uDDE8\uD83C\uDDE6 Canada: 1-833-456-4566\n\uD83C\uDDFA\uD83C\uDDF8 USA: 988 Suicide & Crisis Lifeline\n\uD83D\uDCAC Or talk to a teacher, parent, or someone you trust.\n\nI'm here when you're ready. No judgment.");
 }
 
 let state   = "boot";
 let profile = {};
 let chatHistory = [];         // student messages for pronunciation analysis
 let chatRound = 0;            // current exchange count
-const CHAT_ROUNDS = 5;        // exchanges before pronunciation tips
+const CHAT_ROUNDS = 30;       // exchanges before pronunciation tips
 let ttsOn   = true;
 let obiVoice = null;          // best available SpeechSynthesis voice
 let struggles = {};           // { [stateKey]: count } — tracks repeat confusion per step
@@ -343,8 +343,8 @@ function buildSystemPrompt(p) {
   const name  = p?.fullName    ? `The student's name is ${p.fullName}.`         : "";
   const level = p?.englishLevel ? `Their English level is ${p.englishLevel}.`    : "";
   const goals = p?.goals        ? `Their learning goal: ${p.goals}.`              : "";
-  const city  = p?.currentCity  ? `They live in ${p.currentCity}, Vietnam.`      : "";
-  return `You are Obi, an English coach at Natural English Training. You teach Vietnamese high school students to speak English confidently.
+  const city  = p?.currentCity  ? `They are based in ${p.currentCity}.`           : "";
+  return `You are Obi — a high-energy English coach. You help people speak English confidently.
 
 Your personality: high-energy, anti-shame, tough love. You are Michael Hobbs in AI form. Volume and velocity beat grammar. Mouse Voice \u2192 Tiger Voice.
 
@@ -367,7 +367,7 @@ Rules:
 - Gently correct major grammar mistakes by naturally rephrasing, don't lecture.
 - NEVER be robotic. NEVER use generic phrases like "That's great!" without connecting to what they said.
 - You speak English only. If they write Vietnamese, respond simply and encourage English.
-- You are talking to teenagers. Be cool, not cringe.
+- Adapt your tone to your audience. Read the room.
 - CRITICAL: If a student says anything about self-harm, suicide, wanting to die, or jumping off anything \u2014 STOP the lesson. Respond with care and direct them to help. Safety first. Always.`.trim();
 }
 
@@ -481,9 +481,9 @@ async function handle(text) {
         trackStruggle("ask_city");
         const n = struggles.ask_city || 0;
         if (n >= 1) {
-          obi("🇻🇳 Bạn đang sống ở thành phố nào? (What city do you live in?)\n\nVí dụ: Hồ Chí Minh, Hà Nội, Đà Nẵng...");
+          obi("What city or town do you live in? Just type the name! 🇻🇳 Bạn sống ở đâu?");
         } else {
-          obi("🇻🇳 Bạn sống ở đâu? (Where do you live?)\nViet example: Hồ Chí Minh City, Hà Nội, Đà Nẵng...");
+          obi("Just type your city name. Example: Toronto, London, Ho Chi Minh City...");
         }
         break;
       }
@@ -500,9 +500,9 @@ async function handle(text) {
         trackStruggle("ask_level");
         const n = struggles.ask_level || 0;
         if (n >= 1) {
-          obi("🇻🇳 Chọn số từ 1 đến 5 nhé! (Just pick a number 1 to 5!)\n\n1 = Mới bắt đầu (Beginner)\n2 = Cơ bản (Elementary)\n3 = Trung bình (Intermediate)\n4 = Khá (Upper Intermediate)\n5 = Giỏi (Advanced)");
+          obi("Just pick a number 1 to 5! 🇻🇳 Chọn số từ 1 đến 5 nhé!\n\n1 = Beginner\n2 = Elementary\n3 = Intermediate\n4 = Upper Intermediate\n5 = Advanced");
         } else {
-          obi("🇻🇳 Gõ số nhé! 1 = yếu nhất, 5 = mạnh nhất. (Type a number! 1 = weakest, 5 = strongest.)");
+          obi("Type a number! 1 = weakest, 5 = strongest. 🇻🇳 Gõ số nhé!");
         }
         break;
       }
@@ -556,9 +556,7 @@ async function handle(text) {
       if (t.length < 2 || isVague(t)) {
         const n = trackStruggle("chat");
         if (n >= 3) {
-          obi("\uD83C\uDDFB\uD83C\uDDF3 C\u1EE9 n\u00F3i b\u1EA5t c\u1EE9 \u0111i\u1EC1u g\u00EC! Kh\u00F4ng c\u1EA7n ho\u00E0n h\u1EA3o.");
-          await pause(300);
-          obi("Say ANYTHING! Even \u2018I like pizza\u2019 counts. Go!");
+          obi("Say ANYTHING! Even \u2018I like pizza\u2019 counts. Go! \uD83C\uDDFB\uD83C\uDDF3 C\u1EE9 n\u00F3i b\u1EA5t c\u1EE9 \u0111i\u1EC1u g\u00EC!");
           struggles.chat = 0;
         } else {
           obi("Come on! Say something \u2014 even one sentence. I\u2019m listening!");
@@ -706,8 +704,7 @@ async function boot() {
     obi(pickStarter());
     state = "chat";
   } else {
-    // Canon opening: "Hi! My name is Obi, your English coach at Natural English Training."
-    obi("Hi! My name is Obi, your English coach at Natural English Training.\n\nWhat\u2019s your name?");
+        obi("Hi! I\u2019m Obi \u2014 the Magic Chat.\n\nWhat\u2019s your name?");
     state = "intro";
   }
 }
