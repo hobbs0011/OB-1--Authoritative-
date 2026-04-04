@@ -1,67 +1,64 @@
 name: Deploy net-core Worker
 
 on:
-	push:
-		branches:
-			- main
-			- dev
+  push:
+    branches:
+      - main
+      - dev
 
 concurrency:
-	group: net-core-$ github.ref 
-	cancel-in-progress: true
+  group: net-core-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-	deploy:
-		runs-on: ubuntu-latest
-		permissions:
-			contents: read
-		steps:
-			- name: Checkout
-				uses: actions/checkout@v4
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-			- name: Setup Node
-				uses: actions/setup-node@v4
-				with:
-					node-version: 20
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
 
-			- name: Install Wrangler
-				run: npm i -g wrangler
+      - name: Install Wrangler
+        run: npm i -g wrangler
 
-			- name: Deploy (prod or staging)
-				env:
-					CLOUDFLARE_API_TOKEN: $ secrets.CLOUDFLARE_API_TOKEN 
-					CLOUDFLARE_ACCOUNT_ID: $ secrets.CLOUDFLARE_ACCOUNT_ID 
-				run: |
-					cd WORKERS/net-core
-					if [ "${GITHUB_REF_NAME}" = "dev" ]; then
-						wrangler deploy --env staging
-					else
-						wrangler deploy
-					fi
+      - name: Deploy (prod or staging)
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          cd WORKERS/net-core
+          if [ "${GITHUB_REF_NAME}" = "dev" ]; then
+            wrangler deploy --env staging
+          else
+            wrangler deploy
+          fi
 
-			- name: Proof-of-life
-				run: |
-					set -euo pipefail
-					URL="https://naturalenglishtraining.net/health"
-					echo "Probing $URL"
-					status=$(curl -s -o /tmp/health.json -w "%{http_code}" -D /tmp/headers.txt "$URL")
-					echo "HTTP $status"
-					cat /tmp/headers.txt
-					cat /tmp/health.json
-					if [ "$status" -ne 200 ]; then
-						echo "Healthcheck failed"
-						exit 1
-					fi
+      - name: Proof-of-life
+        run: |
+          set -euo pipefail
+          URL="https://naturalenglishtraining.net/health"
+          echo "Probing $URL"
+          status=$(curl -s -o /tmp/health.json -w "%{http_code}" -D /tmp/headers.txt "$URL")
+          echo "HTTP $status"
+          cat /tmp/headers.txt
+          cat /tmp/health.json
+          if [ "$status" -ne 200 ]; then
+            echo "Healthcheck failed"
+            exit 1
+          fi
 
-			- name: Slack receipt (optional)
-				if: $ secrets.SLACK_WEBHOOK_URL != '' 
-				env:
-					SLACK_WEBHOOK_URL: $ secrets.SLACK_WEBHOOK_URL 
-				run: |
-					set -euo pipefail
-					short_sha=$(echo "${GITHUB_SHA}" | cut -c1-7)
-					payload=$(cat <<EOF
-					{"text":"net-core deploy ✅\n• branch: ${GITHUB_REF_NAME}\n• sha: ${short_sha}\n• health: https://naturalenglishtraining.net/health"}
-					EOF
-					)
-					curl -s -X POST -H 'Content-type: application/json' --data "$payload" "$SLACK_WEBHOOK_URL" >/dev/null
+      - name: Slack receipt (optional)
+        if: ${{ secrets.SLACK_WEBHOOK_URL != '' }}
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: |
+          set -euo pipefail
+          short_sha=$(echo "${GITHUB_SHA}" | cut -c1-7)
+          payload="{\"text\":\"net-core deploy \u2705\n\u2022 branch: ${GITHUB_REF_NAME}\n\u2022 sha: ${short_sha}\n\u2022 health: https://naturalenglishtraining.net/health\"}"
+          curl -s -X POST -H 'Content-type: application/json' --data "$payload" "$SLACK_WEBHOOK_URL" >/dev/null
