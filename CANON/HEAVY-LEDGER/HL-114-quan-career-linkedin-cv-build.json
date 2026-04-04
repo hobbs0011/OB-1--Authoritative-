@@ -1,0 +1,199 @@
+{
+  "hl_id": "HL-114",
+  "source_file": "2026-03-30-quan-career-linkedin-cv-build.md",
+  "session_tag": "quan-career-linkedin-cv-build",
+  "session_date": "2026-03-30",
+  "signal_density": "HIGH",
+  "signal_counts": { "red": 1, "yellow": 4, "green": 2 },
+  "tier": "EXECUTION",
+  "quote_count": 7,
+  "decision_count": 7,
+  "correction_count": 1,
+  "principle_count": 8,
+  "wave": 8,
+  "wave_position": 30,
+  "run_converted": 260,
+  "conversion_date": "2026-04-03T18:20:00+07:00",
+
+  "raw_quotes": [
+    {
+      "id": "Q114-01",
+      "priority": "RED",
+      "text": "No I want you to design his linked in, and upgrade his CV",
+      "context": "CORRECTION — rejected admin work, wants BUILD output",
+      "law_refs": ["L16_BUILD_DONT_SCOUT"],
+      "behavioral_primitive": "BUILD_NOT_ADMIN"
+    },
+    {
+      "id": "Q114-02",
+      "priority": "YELLOW",
+      "text": "mine the transcript",
+      "context": "On session mining",
+      "law_refs": [],
+      "behavioral_primitive": "MINE_TRANSCRIPT"
+    },
+    {
+      "id": "Q114-03",
+      "priority": "YELLOW",
+      "text": "Yes, and update marketing and teacing methods where relevant",
+      "context": "On updating canon",
+      "law_refs": ["L19_DEDUP_EVERYTHING"],
+      "behavioral_primitive": "CANON_UPDATE"
+    },
+    {
+      "id": "Q114-04",
+      "priority": "YELLOW",
+      "text": "now check my email for the things he sent",
+      "context": "On checking student deliverables",
+      "law_refs": [],
+      "behavioral_primitive": "EMAIL_CHECK"
+    },
+    {
+      "id": "Q114-05",
+      "priority": "YELLOW",
+      "text": "cool upgrade it again, and reincarnate",
+      "context": "On iterative quality",
+      "law_refs": ["L13_STRONGEST_IMMEDIATE_VERSION"],
+      "behavioral_primitive": "ITERATIVE_REFINEMENT"
+    },
+    {
+      "id": "Q114-06",
+      "priority": "GREEN",
+      "text": "can you check out the meeting from 6:20 today",
+      "context": "On session start",
+      "law_refs": [],
+      "behavioral_primitive": "SESSION_START"
+    }
+  ],
+
+  "decisions": [
+    {
+      "id": "D114-01",
+      "decision": "LinkedIn profile design + CV upgrade = BUILD deliverables for students, not just profile notes",
+      "impact": "HIGH",
+      "canon_affected": ["Gospel 444", "NET Students"],
+      "law_origin": "L16_BUILD_DONT_SCOUT→career_output"
+    },
+    {
+      "id": "D114-02",
+      "decision": "Meeting transcripts get mined for teaching DNA every session",
+      "impact": "MEDIUM",
+      "canon_affected": ["Gospel 444", "Reincarnation Log"],
+      "law_origin": "TRANSCRIPT_MINING→canon_enrichment"
+    },
+    {
+      "id": "D114-03",
+      "decision": "Gospel 444 updated with new session evidence (Setup Sessions, Fear-to-Fuel, 4→6 pillars)",
+      "impact": "HIGH",
+      "canon_affected": ["Gospel 444"],
+      "law_origin": "MICHAEL_METHOD_EXPANSION"
+    },
+    {
+      "id": "D114-04",
+      "decision": "Quan and Quang added as student profiles under NET Students",
+      "impact": "MEDIUM",
+      "canon_affected": ["NET Students hub"],
+      "law_origin": "STUDENT_ROSTER_UPDATE"
+    },
+    {
+      "id": "D114-05",
+      "decision": "Michael Method expanded from 4 to 6 pillars (added Setup Sessions + Fear-to-Fuel)",
+      "impact": "HIGH",
+      "canon_affected": ["Gospel 444", "Teaching Methodology"],
+      "law_origin": "MICHAEL_METHOD_EXPANSION→6_pillars"
+    },
+    {
+      "id": "D114-06",
+      "decision": "Quan identified as potential Roblox 3D modeling contractor",
+      "impact": "MEDIUM",
+      "canon_affected": ["Backlog (future)"],
+      "law_origin": "STUDENT_CONTRACTOR_PIPELINE"
+    },
+    {
+      "id": "D114-07",
+      "decision": "Iterative refinement expected on deliverables — upgrade it again = standard",
+      "impact": "MEDIUM",
+      "canon_affected": ["Process standard"],
+      "law_origin": "ITERATIVE_DELIVERY→v2_is_standard"
+    }
+  ],
+
+  "corrections": [
+    {
+      "id": "C114-01",
+      "what": "Rejected offer to update student profile page — wanted full LinkedIn profile design + CV V2",
+      "root_cause": "Agent offered admin work instead of BUILD output",
+      "fix": "Pivoted to full LinkedIn profile design + CV V2 with 30-day growth strategy, first post draft, SEO checklist",
+      "instruction_update": false
+    }
+  ],
+
+  "principles": [
+    {
+      "id": "P114-01",
+      "text": "Setup Sessions are teaching",
+      "interpretation": "Career setup (LinkedIn, CV, interview prep) IS English teaching — not separate from it. The student learns English BY doing the career work.",
+      "law_refs": []
+    },
+    {
+      "id": "P114-02",
+      "text": "Fear-to-Fuel",
+      "interpretation": "Student fear of inadequacy becomes motivation through reframing. You're not behind — you're early compared to 99% of graduates who don't have AI skills.",
+      "law_refs": []
+    },
+    {
+      "id": "P114-03",
+      "text": "Student deliverables = NET marketing",
+      "interpretation": "Every LinkedIn profile and CV Michael helps build is a walking advertisement for Natural English Training's transformation methodology.",
+      "law_refs": []
+    },
+    {
+      "id": "P114-04",
+      "text": "Michael Method 6 Pillars",
+      "interpretation": "Permission → Volume → Vocabulary → Real-World Application → Setup Sessions → Fear-to-Fuel",
+      "law_refs": []
+    },
+    {
+      "id": "P114-05",
+      "text": "Mine every class transcript",
+      "interpretation": "Live classroom sessions contain the richest teaching DNA — decisions made in real-time with real students under real pressure.",
+      "law_refs": []
+    },
+    {
+      "id": "P114-06",
+      "text": "Build for the student, not about the student",
+      "interpretation": "Profile pages are internal. LinkedIn profiles and CVs are external-facing deliverables that change the student's life.",
+      "law_refs": ["L16_BUILD_DONT_SCOUT"]
+    },
+    {
+      "id": "P114-07",
+      "text": "AI pipeline as career differentiator",
+      "interpretation": "Quan's ChatGPT→Gemini design pipeline is his #1 hiring signal — position it front and center on every professional surface.",
+      "law_refs": []
+    },
+    {
+      "id": "P114-08",
+      "text": "Iterative refinement is the standard",
+      "interpretation": "V1 is the draft. V2 is the delivery. Upgrading means the first pass is never the final product.",
+      "law_refs": ["L13_STRONGEST_IMMEDIATE_VERSION"]
+    }
+  ],
+
+  "system_design_insights": [
+    "Student career sessions are a product category — LinkedIn + CV + Interview Prep = repeatable service package",
+    "Meeting notes → transcript mining → canon update is proven 3-step pipeline",
+    "Email attachment pipeline works for CV/document intake — but hits size limits on portfolios and photos"
+  ],
+
+  "emotional_signal": "Engaged + directive — Michael was in BUILD mode — quick commands, clear corrections, no patience for admin when BUILD was possible.",
+  "session_context": "Quan Career LinkedIn + CV Build Session — First follow-up from career setup session. Iterative refinement on deliverables.",
+
+  "cross_references": {
+    "related_hl": ["HL-113", "HL-107"],
+    "canon_pages": ["Gospel 444", "NET Students"],
+    "products": ["career_tiger_package", "linkedin_cv"],
+    "repos_mined": []
+  },
+
+  "fingerprint": "2026-03-30:quan-career-linkedin-cv:7q:7d:1c:HIGH"
+}
