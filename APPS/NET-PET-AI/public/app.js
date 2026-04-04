@@ -169,45 +169,4 @@ $("generateClassReport").addEventListener("click", async () => {
   }
 });
 
-// ── Notion Integration ────────────────────────────────────────────────────────
-
-const notionOut = $("notionOut");
-
-if ($("fetchLessons")) {
-  $("fetchLessons").addEventListener("click", async () => {
-    try {
-      const level = encodeURIComponent($("notionLevel").value.trim());
-      const topic = encodeURIComponent($("notionTopic").value.trim());
-      const data = await api(`/api/notion/lessons?level=${level}&topic=${topic}`);
-      show(notionOut, data);
-    } catch (err) {
-      show(notionOut, `Fetch lessons failed: ${String(err)}`);
-    }
-  });
-}
-
-if ($("fetchProgress")) {
-  $("fetchProgress").addEventListener("click", async () => {
-    try {
-      const studentId = encodeURIComponent($("notionStudentId").value.trim() || studentIdOrFallback());
-      const data = await api(`/api/notion/progress?studentId=${studentId}`);
-      show(notionOut, data);
-    } catch (err) {
-      show(notionOut, `Fetch progress failed: ${String(err)}`);
-    }
-  });
-}
-
-if ($("syncProgress")) {
-  $("syncProgress").addEventListener("click", async () => {
-    try {
-      const studentId = $("notionStudentId").value.trim() || studentIdOrFallback();
-      const data = await api("/api/notion/sync", "POST", { studentId });
-      show(notionOut, data);
-    } catch (err) {
-      show(notionOut, `Sync failed: ${String(err)}`);
-    }
-  });
-}
-
 loadHealth();

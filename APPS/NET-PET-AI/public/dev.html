@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
   <title>NET-PET-AI — Dev Dashboard</title>
   <style>
     :root { --void: #0f0f1a; --purple: #a855f7; --gold: #f59e0b; --text: #e2e8f0; }
@@ -39,8 +38,7 @@
   </style>
 </head>
 <body>
-  <h1><img src="/icons/obi-avatar.svg" alt="Obi" style="width:28px;height:28px;vertical-align:middle;margin-right:8px">NET-PET-AI Dev Dashboard</h1>
-  <p style="margin-bottom:12px;font-size:13px"><a href="/" style="color:#a855f7;text-decoration:none">&larr; Magic Chat</a></p>
+  <h1>NET-PET-AI Dev Dashboard</h1>
   <div id="health" class="status warn">Checking API...</div>
 
   <section>
@@ -114,18 +112,6 @@
     <label>Notes</label><input id="eventNotes" placeholder="Good energy today">
     <button id="logClassEvent">Log Event</button>
     <pre id="classroomOut"></pre>
-  </section>
-
-  <section>
-    <h2>📓 Notion Integration</h2>
-    <label>Level Filter</label><input id="notionLevel" placeholder="B1">
-    <label>Topic Filter</label><input id="notionTopic" placeholder="ordering food">
-    <button id="fetchLessons">Fetch Lessons</button>
-    <br>
-    <label>Student ID</label><input id="notionStudentId" value="student-001">
-    <button id="fetchProgress">Fetch Progress</button>
-    <button id="syncProgress">Sync Ledger → Notion</button>
-    <pre id="notionOut"></pre>
   </section>
 
   <script src="/app.js"></script>
