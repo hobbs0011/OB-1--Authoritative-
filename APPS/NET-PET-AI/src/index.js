@@ -507,8 +507,12 @@ export class SessionDO {
       const totalStudents = parseInt(url.searchParams.get("totalStudents") || "40");
       const session = this.sql.exec(`SELECT * FROM class_sessions ORDER BY id DESC LIMIT 1`).toArray()[0];
       const events = this.sql.exec(`SELECT * FROM class_events ORDER BY id DESC LIMIT 50`).toArray();
-      const complianceRate = totalStudents > 0 ? Math.round((events.filter(e => e.rule_status === "followed").length / totalStudents) * 100) : 0;
-      return json({ session: session || null, events, totalStudents, complianceRate });
+      const followedEvents = events.filter(e => e.rule_status === "followed").length;
+      const brokenEvents = events.filter(e => e.rule_status === "broken").length;
+      const totalEvents = followedEvents + brokenEvents;
+      const complianceRate = totalEvents > 0 ? Math.round((followedEvents / totalEvents) * 100) : 0;
+      const flaggedStudents = [...new Set(events.filter(e => e.rule_status === "broken").map(e => e.student_id))].length;
+      return json({ session: session || null, events, totalStudents, complianceRate, flaggedStudents });
     }
 
     if (path === "/class/report") {
