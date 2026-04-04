@@ -1,0 +1,121 @@
+{
+  "hl_id": "HL-118",
+  "source_file": "2026-04-01-t101h-priority-matrix.md",
+  "session_tag": "t101h-priority-matrix",
+  "session_date": "2026-04-01T21:12:00+07:00",
+  "signal_density": "HIGH",
+  "signal_counts": { "red": 1, "yellow": 0, "green": 11 },
+  "tier": "EXECUTION",
+  "decision_count": 4,
+  "correction_count": 0,
+  "principle_count": 4,
+  "wave": 9,
+  "wave_position": 24,
+  "run_converted": 254,
+  "conversion_date": "2026-04-03T18:20:00+07:00",
+
+  "raw_quotes": [
+    {
+      "id": "Q118-01",
+      "priority": "RED",
+      "text": "Steps 1→2→3→4 are serial blockers. Nothing else matters until the game is published with real Product IDs.",
+      "context": "Critical path definition",
+      "law_refs": ["BLOCKER_AWARENESS"],
+      "behavioral_primitive": "CRITICAL_PATH→SERIAL_BLOCKERS"
+    }
+  ],
+
+  "decisions": [
+    {
+      "id": "D118-01",
+      "decision": "12-item impact-ranked priority matrix created — consolidates 12+ existing pulse artifacts into one actionable decision tool",
+      "impact": "HIGH",
+      "canon_affected": ["PRIORITY_MATRIX", "ACTION_QUEUE"],
+      "law_origin": "CONSOLIDATION→single_actionable_queue"
+    },
+    {
+      "id": "D118-02",
+      "decision": "Critical path identified: Steps 1→2→3→4 are serial blockers (Product IDs → Wire → QA → Publish)",
+      "impact": "HIGH",
+      "canon_affected": ["CRITICAL_PATH", "BLOCKER_TRACKING"],
+      "law_origin": "CRITICAL_PATH_DEFINITION→serial_dependency_chain"
+    },
+    {
+      "id": "D118-03",
+      "decision": "Estimated critical path time: ~3.5 hours (Product IDs → Wire → QA → Publish)",
+      "impact": "HIGH",
+      "canon_affected": ["TIME_ESTIMATION", "INCUBATOR_DEADLINE"],
+      "law_origin": "TIME_BUDGET→3.5hr_critical_path"
+    },
+    {
+      "id": "D118-04",
+      "decision": "100% Roblox focus rule applied. All 21 Product IDs = 0 (Michael-only action in Creator Dashboard).",
+      "impact": "HIGH",
+      "canon_affected": ["FOCUS_RULING", "ROBLOX_ONLY"],
+      "law_origin": "100_PERCENT_ROBLOX_FOCUS→2026-03-26_ruling"
+    }
+  ],
+
+  "corrections": [],
+
+  "principles": [
+    {
+      "id": "P118-01",
+      "text": "One consolidated priority matrix beats scattered artifacts",
+      "interpretation": "12+ existing pulse artifacts consolidated into one actionable decision tool. Michael can see the full queue ranked by impact and dependency.",
+      "law_refs": ["L19_DEDUP_EVERYTHING", "L14_ALARM_HYGIENE"]
+    },
+    {
+      "id": "P118-02",
+      "text": "Serial blockers define the critical path — parallel tasks are distractions",
+      "interpretation": "Steps 1→2→3→4 are serial dependencies. Nothing else matters until the game is published with real Product IDs.",
+      "law_refs": ["CRITICAL_PATH_THINKING"]
+    },
+    {
+      "id": "P118-03",
+      "text": "Time budgets convert to commitment accountability",
+      "interpretation": "~3.5 hours estimated for critical path. When Product IDs are created, we can hold to this time budget.",
+      "law_refs": ["TIME_BUDGET"]
+    },
+    {
+      "id": "P118-04",
+      "text": "Deadline-sensitive tasks (5-6) must happen within 24h of publish",
+      "interpretation": "Steps 5 (store listing) and 6 (Incubator submission) are deadline-sensitive for Apr 6. Should happen within 24h of publish.",
+      "law_refs": ["DEADLINE_AWARENESS"]
+    }
+  ],
+
+  "system_design_insights": [
+    "Consolidated 12+ artifacts into single actionable priority matrix.",
+    "Critical path: ~3.5 hours of serial Michael work.",
+    "12 items ranked by impact, dependency, time, and blocker status.",
+    "All 12 items reference existing pulse artifacts by name."
+  ],
+
+  "emotional_signal": "ACTIONABLE→priority_ranked→michael_executable",
+  "session_context": "T-101h priority matrix BUILD pulse. 12-item impact-ranked action queue for Michael from T-101h to Apr 6 Incubator deadline. Consolidates 12+ existing pulse artifacts into one decision tool. Critical path identified (Product IDs → Wire → QA → Publish, ~3.5h). All items copy-pasteable and Michael-executable with artifact references. 100% Roblox focus applied.",
+
+  "cross_references": {
+    "related_hl": [],
+    "canon_pages": ["COLD-START-BOOT.json"],
+    "products": ["survive_a_brainrot"],
+    "agents": ["Agent-98"]
+  },
+
+  "priority_matrix": [
+    { "rank": 1, "action": "Create 21 Product IDs in Roblox Creator Dashboard", "time": "45 min", "blocker": true, "owner": "Michael", "artifact": "Product ID Creation Checklist" },
+    { "rank": 2, "action": "Wire Product IDs into code (GamePassConfig.lua, DevProductsConfig.lua)", "time": "30 min", "blocker": true, "owner": "Michael", "artifact": "Product ID Wiring Spec" },
+    { "rank": 3, "action": "Run Pre-Launch QA in Studio (7 phases, 20+ tests)", "time": "2 hr", "blocker": true, "owner": "Michael", "artifact": "Pre-Launch QA Test Plan" },
+    { "rank": 4, "action": "Publish game to Roblox (set Public, store listing)", "time": "20 min", "blocker": true, "owner": "Michael", "artifact": "Store Listing Copy Spec" },
+    { "rank": 5, "action": "Create game icon + thumbnails", "time": "1 hr", "blocker": "Soft", "owner": "Michael", "artifact": "Store Listing Copy Spec" },
+    { "rank": 6, "action": "Submit Incubator Application", "time": "1 hr", "blocker": "DEADLINE", "owner": "Michael", "artifact": "Incubator Submission Assets" },
+    { "rank": 7, "action": "Post DevForum 'Cool Creations' thread", "time": "15 min", "blocker": false, "owner": "Michael", "artifact": "Incubator Submission Assets" },
+    { "rank": 8, "action": "Record 2-min video demo", "time": "1 hr", "blocker": false, "owner": "Michael", "artifact": "Incubator Submission Assets" },
+    { "rank": 9, "action": "Set up Roblox Group", "time": "30 min", "blocker": false, "owner": "Michael", "artifact": "Social Launch Checklist" },
+    { "rank": 10, "action": "Create Discord server", "time": "45 min", "blocker": false, "owner": "Michael", "artifact": "Social Launch Checklist" },
+    { "rank": 11, "action": "Activate Day-1 Monitoring", "time": "Ongoing", "blocker": false, "owner": "Michael", "artifact": "Post-Launch Monitoring" },
+    { "rank": 12, "action": "Launch day social posts", "time": "30 min", "blocker": false, "owner": "Michael", "artifact": "Social Launch Checklist" }
+  ],
+
+  "fingerprint": "2026-04-01:t101h-priority-matrix:4d:1c:HIGH"
+}

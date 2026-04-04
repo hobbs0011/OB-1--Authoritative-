@@ -1,0 +1,145 @@
+{
+  "hl_id": "HL-116",
+  "source_file": "2026-04-01-pre-launch-qa-test-plan-t116h.md",
+  "session_tag": "pre-launch-qa-test-plan-t116h",
+  "session_date": "2026-04-01",
+  "signal_density": "HIGH",
+  "signal_counts": { "red": 0, "yellow": 0, "green": 7 },
+  "tier": "EXECUTION",
+  "quote_count": 0,
+  "decision_count": 1,
+  "correction_count": 0,
+  "principle_count": 3,
+  "wave": 6,
+  "wave_position": 116,
+  "run_converted": 245,
+  "conversion_date": "2026-04-03T18:20:00+07:00",
+
+  "prerequisites": [
+    "All 21 Product IDs created in Creator Dashboard",
+    "Product IDs wired into GamePassConfig.lua and DevProductsConfig.lua",
+    "ReceiptRouter migration patch applied"
+  ],
+
+  "decisions": [
+    {
+      "id": "D116-01",
+      "decision": "7-phase QA test plan with concrete pass/fail criteria for Studio execution",
+      "impact": "HIGH",
+      "canon_affected": ["QA_TESTING", "LAUNCH_GATE"],
+      "law_origin": "TEST_PLAN→phase_by_phase_validation"
+    }
+  ],
+
+  "qa_phases": [
+    {
+      "phase": "PHASE 1 - Boot Sequence Validation",
+      "duration": "5 min",
+      "tests": [
+        "Server Boot (no errors) - verify Output shows UnifiedServer init messages",
+        "Client Boot - HUD visible, no script errors",
+        "ReceiptRouter Diagnostics - 16 dev products + 5 game passes registered, zero conflicts"
+      ]
+    },
+    {
+      "phase": "PHASE 2 - Core Gameplay Loop",
+      "duration": "10 min",
+      "tests": [
+        "Wave System Start - enemies spawn, health bars visible",
+        "Combat (Kill → Coins → Combo) - combat rewards manager awards coins",
+        "Enemy Types Match EnemyData - stages 1-3 enemies correct",
+        "Boss Wave (Wave 5) - WorldBoss spawns with unique attack pattern",
+        "Day Scaling - difficulty ramps visibly"
+      ]
+    },
+    {
+      "phase": "PHASE 3 - Economy & Monetization",
+      "duration": "15 min",
+      "tests": [
+        "Game Pass Purchase Flow (5 passes) - each activates immediately, persists",
+        "Dev Product Purchase Flow (sample 4) - ReceiptRouter processes each",
+        "No Dual ProcessReceipt - exactly one processed per purchase",
+        "EconomyManager Coin Flow - balance decreases correctly",
+        "SecurityLayer Validation - no exploit warnings"
+      ]
+    },
+    {
+      "phase": "PHASE 4 - Progression Systems",
+      "duration": "10 min",
+      "tests": [
+        "DataStore Save/Load - coins/XP/level/inventory persist",
+        "Daily Rewards - UI appears, rewards granted",
+        "Battle Pass - tier progress visible",
+        "Leaderboard - player stats display",
+        "Prestige - resets progress, grants prestige rewards"
+      ]
+    },
+    {
+      "phase": "PHASE 5 - Client Systems",
+      "duration": "5 min",
+      "tests": [
+        "FTUE - tutorial sequence completes",
+        "Mobile Controls - touch buttons appear, responsive",
+        "Gacha/Crate Opening - animation plays, item added",
+        "Cosmetic Equip - visual change applies"
+      ]
+    },
+    {
+      "phase": "PHASE 6 - Analytics & Monitoring",
+      "duration": "2 min",
+      "tests": [
+        "Analytics Events Firing - join/kill/purchase/wave_complete/death logged",
+        "Anomaly Detector - no false positives"
+      ]
+    },
+    {
+      "phase": "PHASE 7 - Publish Gate Checklist",
+      "duration": "N/A",
+      "tests": [
+        "All Phase 1-6 tests pass",
+        "Store listing uploaded",
+        "Thumbnail + icon uploaded",
+        "Game set to Public",
+        "AllowThirdPartySales = true"
+      ]
+    }
+  ],
+
+  "principles": [
+    {
+      "id": "P116-01",
+      "text": "Every test item is concrete with exact pass/fail criteria",
+      "interpretation": "No subjective judgment — expected Output messages, exact expected behaviors defined.",
+      "law_refs": ["TEST_CONCRETENESS"]
+    },
+    {
+      "id": "P116-02",
+      "text": "Module names match actual repo files",
+      "interpretation": "48 files verified against actual CANON/TRAIN-67/CODE/ contents.",
+      "law_refs": ["REPO_VERIFICATION"]
+    },
+    {
+      "id": "P116-03",
+      "text": "Tests are copy-pasteable and executable in Studio",
+      "interpretation": "Michael can run through the checklist in Studio test mode.",
+      "law_refs": ["EXECUTABLE_TEST_PLAN"]
+    }
+  ],
+
+  "known_legacy_files": [
+    "HUDController_PHASE1_REVISED.lua vs HUDController_v2.lua",
+    "QuestionBank.lua vs QuestionBankV2.lua",
+    "GameMain_PHASE1_REVISED.lua vs MainServer_v2.lua"
+  ],
+
+  "emotional_signal": "METHODICAL_TESTING→phase_by_phase_validation→publish_gate_clear",
+  "session_context": "Pre-Launch QA Test Plan at T-116h. 7-phase test plan for Studio execution after Product ID wiring. PHASE 1 (Boot, 5min), PHASE 2 (Gameplay, 10min), PHASE 3 (Monetization, 15min), PHASE 4 (Progression, 10min), PHASE 5 (Client, 5min), PHASE 6 (Analytics, 2min), PHASE 7 (Publish Gate). Must verify 48 files determine active versions before publish.",
+  "cross_references": {
+    "related_hl": ["HL-113", "HL-117"],
+    "canon_pages": ["CANON/TRAIN-67/CODE/", "CANON/TRAIN-67/DOCS/GameBible.md"],
+    "products": ["survive_a_brainrot", "roblox"],
+    "repos_mined": []
+  },
+
+  "fingerprint": "2026-04-01:pre-launch-qa-test-plan:0q:1d:0c:HIGH"
+}
