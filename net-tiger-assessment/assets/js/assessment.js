@@ -315,8 +315,48 @@ function showToast(message) {
   setTimeout(() => toast.classList.remove('show'), 4200);
 }
 
-function downloadResults() {
+function canonicalize(value) {
+  if (value === null || typeof value !== 'object') return JSON.stringify(value);
+  if (Array.isArray(value)) return `[${value.map((item) => canonicalize(item)).join(',')}]`;
+  const keys = Object.keys(value).sort();
+  return `{${keys.map((key) => `${JSON.stringify(key)}:${canonicalize(value[key])}`).join(',')}}`;
+}
+
+function fallbackHashHex(input) {
+  // Deterministic fallback hash (FNV-1a 32-bit) when subtle crypto is unavailable.
+  let hash = 0x811c9dc5;
+  for (let index = 0; index < input.length; index += 1) {
+    hash ^= input.charCodeAt(index);
+    hash = Math.imul(hash, 0x01000193);
+  }
+  return (hash >>> 0).toString(16).padStart(8, '0');
+}
+
+async function computeSubmissionHash(payload) {
+  const canonical = canonicalize(payload);
+  if (window.crypto && window.crypto.subtle) {
+    const bytes = new TextEncoder().encode(canonical);
+    const digest = await window.crypto.subtle.digest('SHA-256', bytes);
+    return Array.from(new Uint8Array(digest)).map((byte) => byte.toString(16).padStart(2, '0')).join('');
+  }
+  return fallbackHashHex(canonical);
+}
+
+function setSubmissionReference(reference) {
+  const panel = document.getElementById('submissionRefPanel');
+  const value = document.getElementById('submissionRefValue');
+  if (!panel || !value) return;
+  value.textContent = reference;
+  panel.style.display = 'block';
+}
+
+async function downloadResults() {
   const name = document.getElementById('fullName')?.value || 'student';
+  const recordingManifest = Object.entries(recordings).map(([key, blob]) => ({
+    key,
+    sizeBytes: blob.size,
+    mimeType: blob.type || 'audio/webm'
+  }));
   const data = {
     timestamp: new Date().toISOString(),
     assessment: 'NET Tiger Assessment Guided Review Edition',
@@ -353,16 +393,28 @@ function downloadResults() {
       goals: document.getElementById('write4')?.value || '',
       house: document.getElementById('write5')?.value || ''
     },
-    audioRecordings: Object.keys(recordings)
+    audioRecordings: Object.keys(recordings),
+    recordingManifest
   };
 
+  const hash = await computeSubmissionHash(data);
+  const stamp = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+  const submissionReference = `NET-${stamp}-${hash.slice(0, 12).toUpperCase()}`;
+  data.submissionReference = submissionReference;
+  data.integrity = {
+    algorithm: window.crypto && window.crypto.subtle ? 'SHA-256' : 'FNV-1A-32',
+    digestHex: hash
+  };
+
+  setSubmissionReference(submissionReference);
+
   const jsonBlob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-  const stamp = new Date().toISOString().slice(0, 10);
-  downloadBlob(jsonBlob, `NET-Submission-Pack-${safeName(name)}-${stamp}.json`);
+  const dateStamp = new Date().toISOString().slice(0, 10);
+  downloadBlob(jsonBlob, `NET-Submission-Pack-${safeName(name)}-${dateStamp}-${submissionReference}.json`);
   Object.entries(recordings).forEach(([key, blob]) => {
-    downloadBlob(blob, `NET-Submission-Pack-${safeName(name)}-${key}.webm`);
+    downloadBlob(blob, `NET-Submission-Pack-${safeName(name)}-${key}-${submissionReference}.webm`);
   });
-  showToast('Submission pack downloaded. NET will review it and contact the family within 24 hours.');
+  showToast(`Submission pack downloaded. Reference: ${submissionReference}`);
 }
 
 function wireAssessmentButtons() {
