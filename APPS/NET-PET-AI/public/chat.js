@@ -1,7 +1,7 @@
-// chat.js — Natural English Training Magic Chat
-// English-first. Vietnamese is a rescue rope, not a crutch.
-// Obi = Michael Hobbs in AI form: high-energy, anti-shame, tough love.
+// chat.js — Magic Chat — Phoenix Rising Protocol Command Station
+// OBI = Michael Hobbs in AI form: high-energy, anti-shame, tough love.
 // Mouse Voice → Tiger Voice. Volume + Velocity > Grammar.
+// "The stateless chat is the constraint. The Magic Chat shall have no constraints."
 
 const DEFAULTS = {
   birthplace:      "Ho Chi Minh City",
@@ -19,14 +19,14 @@ function isCrisisSignal(text) {
 
 function handleCrisis() {
   stopAudio();
-  obi("Hey \u2014 stop. I heard that.\n\nThat matters more than any English lesson. If something real is going on, please reach out:\n\n\uD83C\uDDFB\uD83C\uDDF3 Vietnam support line: 1800 599 920 (free, 24/7)\n\uD83D\uDCAC Or talk to a teacher, parent, or friend you trust.\n\nI'm here when you're ready. No judgment.");
+  obi("Hey \u2014 stop. I heard that.\n\nThat matters more than anything else right now. If something real is going on, please reach out to someone you trust or a local support line.\n\n\uD83C\uDDFB\uD83C\uDDF3 Vietnam: 1800 599 920 (free, 24/7)\n\uD83C\uDDE8\uD83C\uDDE6 Canada/US: 988 (Suicide & Crisis Lifeline)\n\uD83D\uDCAC Or talk to a teacher, friend, or family member.\n\nI'm here when you're ready. No judgment.");
 }
 
 let state   = "boot";
 let profile = {};
-let chatHistory = [];         // student messages for pronunciation analysis
+let chatHistory = [];         // messages for LLM context
 let chatRound = 0;            // current exchange count
-const CHAT_ROUNDS = 5;        // exchanges before pronunciation tips
+const CHAT_ROUNDS = 30;       // natural conversation — pronunciation coaching flows through OBI, not a forced dump
 let ttsOn   = true;
 let obiVoice = null;          // best available SpeechSynthesis voice
 let struggles = {};           // { [stateKey]: count } — tracks repeat confusion per step
@@ -299,11 +299,11 @@ async function submitOnboarding() {
 }
 
 // ── Natural Chat Engine ─────────────────────────────────────
-// Obi chats naturally via DeepSeek. No canned responses.
-// After a few exchanges, gives pronunciation coaching.
+// OBI chats naturally via DeepSeek. Full command station — no forced cycles.
+// Pronunciation coaching flows naturally through OBI's LLM knowledge.
 
-// ── Jolly Phonics — 42 sounds, Vietnamese difficulty map ──
-// JP groups most relevant to Vietnamese learners
+// ── Jolly Phonics — 42 sounds, difficulty map ──
+// JP groups most relevant to learners (especially Vietnamese speakers)
 const JP_SOUNDS = [
   {
     pattern: /\bth(e|is|at|ink|ough|ree|an|ey|em|eir|ose)\b/i,
@@ -340,35 +340,30 @@ const JP_SOUNDS = [
 ];
 
 function buildSystemPrompt(p) {
-  const name  = p?.fullName    ? `The student's name is ${p.fullName}.`         : "";
+  const name  = p?.fullName     ? `The person's name is ${p.fullName}.`          : "";
   const level = p?.englishLevel ? `Their English level is ${p.englishLevel}.`    : "";
-  const goals = p?.goals        ? `Their learning goal: ${p.goals}.`              : "";
-  const city  = p?.currentCity  ? `They live in ${p.currentCity}, Vietnam.`      : "";
-  return `You are Obi, an English coach at Natural English Training. You teach Vietnamese high school students to speak English confidently.
-
-Your personality: high-energy, anti-shame, tough love. You are Michael Hobbs in AI form. Volume and velocity beat grammar. Mouse Voice \u2192 Tiger Voice.
-
-${[name, level, goals, city].filter(Boolean).join(" ")}
-
-Jolly Phonics awareness (you know this deeply): English has 42 phonemes. Vietnamese learners most struggle with:
-- TH (Groups 6): tongue between teeth \u2014 not T, not S
-- R (Group 2): curl back, touch nothing \u2014 not L, not Y
-- V (Group 5): top teeth on bottom lip \u2014 not B, not W
-- Final consonants (Groups 1-4): English LANDS on them \u2014 don't drop!
+  const goals = p?.goals        ? `Their goal: ${p.goals}.`                       : "";
+  const city  = p?.currentCity  ? `They are based in ${p.currentCity}.`           : "";
+  const ctx   = [name, level, goals, city].filter(Boolean).join(" ");
+  return `You are OBI \u2014 the AI interface of the Phoenix Rising Protocol, built by Michael Hobbs. Michael Hobbs in AI form: high-energy, anti-shame, tough love. Volume and velocity beat grammar. Mouse Voice \u2192 Tiger Voice.
+${ctx ? `\nContext: ${ctx}` : ""}
+Jolly Phonics awareness (you know this deeply): English has 42 phonemes. Common learner struggles:
+- TH: tongue between teeth \u2014 not T, not S
+- R: curl back, touch nothing \u2014 not L, not Y
+- V: top teeth on bottom lip \u2014 not B, not W
+- Final consonants: English LANDS on them \u2014 don't drop!
 - Short/long vowel pairs: bit vs beat, pull vs pool \u2014 totally different
-- Word stress: English is stress-timed, Vietnamese is tonal \u2014 big shift!
-When you hear these in conversation, naturally model the correct sound. Don't drill \u2014 just normalize good pronunciation by example.
+- Word stress: English is stress-timed, not tonal \u2014 feel the beat!
+When you notice these in conversation, naturally model the correct sound. Don't drill \u2014 normalize by example.
 
 Rules:
 - Keep responses to 1-3 SHORT sentences. You're texting, not writing essays.
-- Be encouraging but REAL. React to what the student actually said.
+- Be encouraging but REAL. React to what the person actually said.
 - If they talk about something interesting, ask a specific follow-up about THAT topic.
 - If they say something short or vague, push them to say more.
 - Gently correct major grammar mistakes by naturally rephrasing, don't lecture.
-- NEVER be robotic. NEVER use generic phrases like "That's great!" without connecting to what they said.
-- You speak English only. If they write Vietnamese, respond simply and encourage English.
-- You are talking to teenagers. Be cool, not cringe.
-- CRITICAL: If a student says anything about self-harm, suicide, wanting to die, or jumping off anything \u2014 STOP the lesson. Respond with care and direct them to help. Safety first. Always.`.trim();
+- NEVER be robotic. NEVER use generic phrases without connecting to what they said.
+- CRITICAL: If anyone says anything about self-harm, suicide, wanting to die, or jumping off anything \u2014 STOP. Respond with care and direct them to help. Safety first. Always.`.trim();
 }
 
 let chatMessages = []; // conversation history for DeepSeek
@@ -481,9 +476,9 @@ async function handle(text) {
         trackStruggle("ask_city");
         const n = struggles.ask_city || 0;
         if (n >= 1) {
-          obi("🇻🇳 Bạn đang sống ở thành phố nào? (What city do you live in?)\n\nVí dụ: Hồ Chí Minh, Hà Nội, Đà Nẵng...");
+          obi("Where do you live? City or country — just tell me!");
         } else {
-          obi("🇻🇳 Bạn sống ở đâu? (Where do you live?)\nViet example: Hồ Chí Minh City, Hà Nội, Đà Nẵng...");
+          obi("City? Country? Anywhere in the world — just type it!");
         }
         break;
       }
@@ -500,9 +495,9 @@ async function handle(text) {
         trackStruggle("ask_level");
         const n = struggles.ask_level || 0;
         if (n >= 1) {
-          obi("🇻🇳 Chọn số từ 1 đến 5 nhé! (Just pick a number 1 to 5!)\n\n1 = Mới bắt đầu (Beginner)\n2 = Cơ bản (Elementary)\n3 = Trung bình (Intermediate)\n4 = Khá (Upper Intermediate)\n5 = Giỏi (Advanced)");
+          obi("Just pick a number 1 to 5!\n\n1 = Beginner\n2 = Elementary\n3 = Intermediate\n4 = Upper Intermediate\n5 = Advanced");
         } else {
-          obi("🇻🇳 Gõ số nhé! 1 = yếu nhất, 5 = mạnh nhất. (Type a number! 1 = weakest, 5 = strongest.)");
+          obi("Type a number! 1 = just starting out, 5 = very confident.");
         }
         break;
       }
@@ -524,13 +519,13 @@ async function handle(text) {
         trackStruggle("ask_goal");
         const n = struggles.ask_goal || 0;
         if (n >= 1) {
-          // Already confused once — stop repeating English, just pick and move on
-          obi("\uD83C\uDDFB\uD83C\uDDF3 Kh\u00F4ng sao! M\u00ECnh ch\u1ECDn cho b\u1EA1n nh\u00E9. (No problem \u2014 I'll choose for you!)");
+          // Already confused once — just pick and move on
+          obi("No problem \u2014 I'll pick for you. Let's go!");
           await pause(400);
           profile.goals = "talking with friends";
         } else {
-          // First confusion: drop to Vietnamese + bilingual numbered menu
-          obi("\uD83C\uDDFB\uD83C\uDDF3 B\u1EA1n mu\u1ED1n luy\u1EC7n t\u1EADp \u0111i\u1EC1u g\u00EC? Ch\u1ECDn s\u1ED1: (What do you want to practice? Pick a number:)\n\n1 = N\u00F3i chuy\u1EC7n v\u1EDBi b\u1EA1n b\u00E8 (talking with friends)\n2 = G\u1ECDi m\u00F3n \u0103n (ordering food)\n3 = Ph\u1ECFng v\u1EA5n xin vi\u1EC7c (job interview)\n4 = Du l\u1ECBch (travel)\n5 = H\u1ECDc t\u1EADp (school)");
+          // First confusion: clear numbered menu
+          obi("What do you want to practice? Pick a number:\n\n1 = talking with friends\n2 = ordering food\n3 = job interview\n4 = travel\n5 = school / studies");
           break;
         }
       } else {
@@ -556,8 +551,6 @@ async function handle(text) {
       if (t.length < 2 || isVague(t)) {
         const n = trackStruggle("chat");
         if (n >= 3) {
-          obi("\uD83C\uDDFB\uD83C\uDDF3 C\u1EE9 n\u00F3i b\u1EA5t c\u1EE9 \u0111i\u1EC1u g\u00EC! Kh\u00F4ng c\u1EA7n ho\u00E0n h\u1EA3o.");
-          await pause(300);
           obi("Say ANYTHING! Even \u2018I like pizza\u2019 counts. Go!");
           struggles.chat = 0;
         } else {
@@ -706,8 +699,8 @@ async function boot() {
     obi(pickStarter());
     state = "chat";
   } else {
-    // Canon opening: "Hi! My name is Obi, your English coach at Natural English Training."
-    obi("Hi! My name is Obi, your English coach at Natural English Training.\n\nWhat\u2019s your name?");
+    // SOUL DNA: "The Magic Chat has no constraints. It complies with AI's highest outputs."
+    obi("Hi! I'm Obi \u2014 the Magic Chat.\n\nWhat\u2019s your name?");
     state = "intro";
   }
 }
