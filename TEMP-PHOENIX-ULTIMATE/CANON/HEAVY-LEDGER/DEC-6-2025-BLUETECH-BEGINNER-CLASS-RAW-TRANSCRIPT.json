@@ -1,0 +1,343 @@
+{
+  "_meta": {
+    "id": "HL-056",
+    "source_file": "CANON/DEC-6-2025-BLUETECH-BEGINNER-CLASS-RAW-TRANSCRIPT.md",
+    "source_sha": "093651477c6c874b003252ba37e1875110819059",
+    "source_type": "raw_transcript",
+    "source_size_kb": 8.2,
+    "converted_by": "OB1-PULSE-RUN-203",
+    "converted_at": "2026-03-31T16:30:00+07:00",
+    "pipeline_wave": 4,
+    "pipeline_position": 6,
+    "canon_guardrails": {
+      "verbatim_quotes_preserved": true,
+      "no_fabrication": true,
+      "source_traceable": true,
+      "dedup_checked": true,
+      "cross_referenced": true
+    }
+  },
+  "document": {
+    "title": "Dec 6, 2025 BlueTech Business + Beginner Class Raw Transcript Extraction",
+    "date": "2025-12-06",
+    "duration_total": "~2:50",
+    "extractor": "CHAT 000 — Ne0",
+    "extraction_grade": "A",
+    "date_extracted": "2026-03-25"
+  },
+  "classes": [
+    {
+      "name": "Business Class",
+      "duration": "~1:20",
+      "order": 1,
+      "students": ["Tiên Truong", "Nga Lương", "Linh Lê Trúc", "Huong Ho"]
+    },
+    {
+      "name": "Beginner Class",
+      "duration": "~1:30",
+      "order": 2,
+      "students": ["Denny Nguyen", "Entertainment UL / Ling"]
+    }
+  ],
+  "students": [
+    {
+      "name": "Tiên Truong",
+      "nickname": "Miss Tien",
+      "level": "CUB→MOUSE",
+      "class": "Business",
+      "observations": "'I don't know' breakthrough #2 — said it immediately without freezing when asked about 'distracted'. Genre vocabulary learned (horror fan confirmed). Improving rapidly between sessions."
+    },
+    {
+      "name": "Nga Lương",
+      "nickname": "Miss Na/Miss Nya",
+      "level": "MOUSE",
+      "class": "Business",
+      "observations": "Wedding Dec 20, 2025. Fiancé: hardworking + kind. Plans: 1 boy + 1 girl. Finance dept. Lock screen = wedding photo."
+    },
+    {
+      "name": "Linh Lê Trúc",
+      "nickname": "Miss Ling/Lynn",
+      "level": "MOUSE",
+      "class": "Business",
+      "observations": "'Uh' filler habit still severe — multiple corrections this session. 3-week build / 3-month destroy timeline established. Self-observation method reinforced."
+    },
+    {
+      "name": "Huong Ho",
+      "nickname": "Ms. Nia/Ms. Hung",
+      "level": "CUB",
+      "class": "Business",
+      "observations": "Very busy week: 2 fashion workshops + 1 Peace Canada event. Leader/letter/leather phonics confusion demonstrated perfectly why phonics matter. Translated throughout."
+    },
+    {
+      "name": "Denny Nguyen",
+      "nickname": "Denny",
+      "level": "CUB",
+      "class": "Beginner",
+      "observations": "ABC practice (eyes-closed challenge). Quick mimicry. H/Z/G confusion. Translator helper role for Ling."
+    },
+    {
+      "name": "Entertainment UL / Ling",
+      "nickname": "Ling (beginner)",
+      "level": "ABSOLUTE BEGINNER",
+      "class": "Beginner",
+      "new_student": true,
+      "observations": "NEW STUDENT. Streaming business owner. Former model age 18-22 (~age 30 now). Home studio with 2 rooms. 40 models coming for photo shoot next day. Professional singer. No camera. 8-year business."
+    }
+  ],
+  "teaching_methods": [
+    {
+      "id": "TM-056-01",
+      "name": "Just the Wind",
+      "description": "Humorous English-only enforcement — 'That was just the wind, right? Not Vietnamese?'",
+      "applied_to": ["Nga", "Linh", "all"],
+      "category": "anti_shame",
+      "gospel_444_alignment": true
+    },
+    {
+      "id": "TM-056-02",
+      "name": "I Don't Know Celebration #2",
+      "description": "Second celebration of Tiên saying 'I don't know' without freezing — reinforces breakthrough habit",
+      "applied_to": ["Tiên Truong"],
+      "category": "permission_culture",
+      "gospel_444_alignment": true,
+      "mouse_to_tiger_stage": "CUB→MOUSE"
+    },
+    {
+      "id": "TM-056-03",
+      "name": "Genre Vocabulary",
+      "description": "Teaching 'genre' as French-origin English word — pronunciation vs spelling disconnect",
+      "applied_to": ["Tiên Truong"],
+      "category": "vocabulary"
+    },
+    {
+      "id": "TM-056-04",
+      "name": "Jump Scare Teaching",
+      "description": "Using horror movie concept to teach vocabulary through emotional connection and humor",
+      "applied_to": ["Tiên Truong"],
+      "category": "emotional_anchor"
+    },
+    {
+      "id": "TM-056-05",
+      "name": "Filler Word Correction",
+      "description": "Continued 'uh' elimination for Linh — '3 weeks to build, 3 months to destroy' timeline",
+      "applied_to": ["Linh Lê Trúc"],
+      "category": "habit_building"
+    },
+    {
+      "id": "TM-056-06",
+      "name": "Self-Observation",
+      "description": "'Watch yourself speak — become your own teacher' — reinforced from Nov 8",
+      "applied_to": ["Linh Lê Trúc"],
+      "category": "autonomy",
+      "gospel_444_alignment": true
+    },
+    {
+      "id": "TM-056-07",
+      "name": "AI 4-Platform Pedagogy",
+      "description": "Gemini=Architect, GPT=Builder, Perplexity=Inspector, Claude=Final Product",
+      "applied_to": ["All business class"],
+      "category": "ai_integration",
+      "platforms": {
+        "gemini": "Architect / Planner",
+        "gpt": "Builder",
+        "perplexity": "Inspector / Auditor",
+        "claude": "Final Product"
+      }
+    },
+    {
+      "id": "TM-056-08",
+      "name": "Live Lesson Generation",
+      "description": "Built full lesson ('Why humans can't lick their elbow') in real-time using AI pipeline while teaching",
+      "applied_to": ["Demonstrated to all"],
+      "category": "ai_integration",
+      "demo_output": "6-slide lesson, built at student level, funny + educational, no corrections needed"
+    },
+    {
+      "id": "TM-056-09",
+      "name": "AI-Generated Reading Script",
+      "description": "Created personalized reading script for Ling about her streaming business using AI",
+      "applied_to": ["Entertainment UL/Ling"],
+      "category": "personalization"
+    },
+    {
+      "id": "TM-056-10",
+      "name": "ABC/Phonics Foundation",
+      "description": "Full alphabet practice with reading, eyes-closed challenge, and repetition",
+      "applied_to": ["Denny", "Ling"],
+      "category": "phonics"
+    },
+    {
+      "id": "TM-056-11",
+      "name": "H Sound Secret",
+      "description": "H = number 'eight' + 'ch' sound from cheese — Vietnamese say 'hatch' but English H is different",
+      "applied_to": ["Denny", "Ling"],
+      "category": "phonics",
+      "vietnamese_specific": true
+    },
+    {
+      "id": "TM-056-12",
+      "name": "Q/Z/X Sound Secrets",
+      "description": "Q = memorize (not 'qu'), Z = zebra (not G), X = K + S sound (like cake)",
+      "applied_to": ["Denny", "Ling"],
+      "category": "phonics",
+      "vietnamese_specific": true
+    },
+    {
+      "id": "TM-056-13",
+      "name": "44 Phonics Introduction",
+      "description": "26 letters but 44 sounds — phonics ≠ alphabet — T in 'thank' sounds different than letter T",
+      "applied_to": ["Denny", "Ling"],
+      "category": "phonics"
+    },
+    {
+      "id": "TM-056-14",
+      "name": "Habit Building Timeline",
+      "description": "'3 weeks to build a habit, 3 months to destroy a bad one' — sets expectations",
+      "applied_to": ["Linh", "all beginners"],
+      "category": "habit_building"
+    },
+    {
+      "id": "TM-056-15",
+      "name": "I Say Something You Say Something",
+      "description": "Communication rule: teacher speaks → student responds. No silence. Builds conversation reflex.",
+      "applied_to": ["Denny", "Ling"],
+      "category": "conversation_reflex"
+    },
+    {
+      "id": "TM-056-16",
+      "name": "Denny as Translator Helper",
+      "description": "Assign stronger beginner as real-time translator for weaker beginner — both practice",
+      "applied_to": ["Denny (for Ling)"],
+      "category": "peer_learning"
+    },
+    {
+      "id": "TM-056-17",
+      "name": "12-Week Program Structure",
+      "description": "Week 1: AI basics. Week 2: Email/meetings. Week 7: Presentations. Tests every 4 weeks. Final exam.",
+      "applied_to": ["All business class"],
+      "category": "curriculum_design"
+    }
+  ],
+  "verbatim_quotes": [
+    {
+      "id": "VQ-056-01",
+      "speaker": "Michael",
+      "text": "1 p.m. starts until 2:30. No Vietnamese. You think in English, you dream in English, you eat in English. Everything English for 90 minutes.",
+      "context": "Dec 6 opening",
+      "signal": "RED",
+      "tags": ["immersion", "english_only", "gospel_444"]
+    },
+    {
+      "id": "VQ-056-02",
+      "speaker": "Michael",
+      "text": "Miss Tien didn't even freeze at all. She just said 'I don't know.' Yay! I want to have a party. That's how excited I am.",
+      "context": "I Don't Know celebration #2",
+      "signal": "RED",
+      "tags": ["permission_culture", "anti_shame", "mouse_to_tiger", "breakthrough"]
+    },
+    {
+      "id": "VQ-056-03",
+      "speaker": "Michael",
+      "text": "It takes three weeks to build. It will be very difficult at the beginning... then after this 3-month program, that habit will be completely destroyed.",
+      "context": "filler word correction",
+      "signal": "YELLOW",
+      "tags": ["habit_building", "expectations"]
+    },
+    {
+      "id": "VQ-056-04",
+      "speaker": "Michael",
+      "text": "If you listen to yourself speak and watch yourself speak, you become your own teacher.",
+      "context": "self-observation",
+      "signal": "RED",
+      "tags": ["autonomy", "self_observation", "gospel_444"]
+    },
+    {
+      "id": "VQ-056-05",
+      "speaker": "Michael",
+      "text": "Gemini is the architect... GPT is the builder... Perplexity is the inspector... Claude makes the final product.",
+      "context": "AI 4-platform pedagogy",
+      "signal": "RED",
+      "tags": ["ai_pedagogy", "4_platform", "methodology"]
+    },
+    {
+      "id": "VQ-056-06",
+      "speaker": "Michael",
+      "text": "That's why phonics are important.",
+      "context": "after leader/letter/leather confusion with Huong Ho",
+      "signal": "YELLOW",
+      "tags": ["phonics", "demonstration"]
+    },
+    {
+      "id": "VQ-056-07",
+      "speaker": "Michael",
+      "text": "Because you're a beginner, it'll be easy for me to help you have good habits at the beginning.",
+      "context": "to Denny + Ling",
+      "signal": "YELLOW",
+      "tags": ["habit_building", "beginner_advantage"]
+    },
+    {
+      "id": "VQ-056-08",
+      "speaker": "Michael",
+      "text": "There are 44 phonic sounds in English... the next three months we will study a lot on phonics.",
+      "context": "phonics introduction",
+      "signal": "YELLOW",
+      "tags": ["phonics", "curriculum"]
+    },
+    {
+      "id": "VQ-056-09",
+      "speaker": "Michael",
+      "text": "I say something, you say something. Not: I say something, you [silence].",
+      "context": "communication rule",
+      "signal": "RED",
+      "tags": ["conversation_reflex", "rule", "gospel_444"]
+    }
+  ],
+  "phonics_data": {
+    "vietnamese_trouble_letters": [
+      {"letter": "H", "vietnamese_tendency": "Say 'hatch'", "correct_english": "Like 'eight' + 'ch' (cheese)", "method": "H Sound Secret"},
+      {"letter": "Q", "vietnamese_tendency": "Say 'qu'", "correct_english": "Memorize as-is", "method": "Direct memorization"},
+      {"letter": "Z", "vietnamese_tendency": "Confuse with G", "correct_english": "Z like 'zebra'", "method": "Z/G distinction drill"},
+      {"letter": "X", "vietnamese_tendency": "Various", "correct_english": "K + S sound (like in 'cake' + 's')", "method": "X Sound Secret"},
+      {"letter": "S vs SH", "vietnamese_tendency": "Confuse s/sh", "correct_english": "Minimal pairs (sour/shower)", "method": "From Nov 8, continued"}
+    ],
+    "tongue_twisters": ["She sells seashells by the seashore"]
+  },
+  "program_structure": {
+    "name": "12-Week Business English Program",
+    "weeks": [
+      {"week": 1, "focus": "AI Basics — The Infinite Intern"},
+      {"week": 2, "focus": "Email Writing, Problem Reporting, Meetings & Greetings, Small Talk"},
+      {"week": "3-6", "focus": "Phone Skills, AI Scripts"},
+      {"week": 7, "focus": "Making Requests, Progress Reports, Presentations, AI Slides"},
+      {"week": "8-11", "focus": "Negotiation, Crisis Communication"},
+      {"week": 12, "focus": "Final Mission + Exam"}
+    ],
+    "testing": "Every 4 weeks",
+    "goals": ["Answer phone in English", "Write professional emails", "Use AI effectively", "Present confidently", "Speak to foreigners in meetings", "Tiger voice (not Mouse voice)"]
+  },
+  "cross_references": [
+    {"target": "HL-026 (BlueTech Extraction)", "relation": "Same student group (business class), overlapping methods"},
+    {"target": "Denny Phonics Anchor", "relation": "Denny S/SH + phonics work continues"},
+    {"target": "NET-EPIC-LESSON-BLUEPRINT-V3", "relation": "12-week program structure matches blueprint"},
+    {"target": "Nov 8 session", "relation": "Direct continuation — same methods evolving, same students progressing"}
+  ],
+  "key_concepts": [
+    {"name": "Mouse-to-Tiger Progression", "evidence": "Tiên CUB→MOUSE breakthrough, Ling ABSOLUTE BEGINNER intake", "status": "ACTIVE"},
+    {"name": "Permission Culture", "evidence": "'I Don't Know' celebrated, not penalized", "status": "ACTIVE"},
+    {"name": "AI 4-Platform Pedagogy", "evidence": "Gemini/GPT/Perplexity/Claude pipeline demonstrated live", "status": "ACTIVE"},
+    {"name": "Phonics Foundation (Vietnamese-specific)", "evidence": "H/Q/Z/X sound secrets, 44 phonics, trouble letters mapped", "status": "ACTIVE"},
+    {"name": "Self-Observation Method", "evidence": "'Watch yourself speak, become your own teacher'", "status": "ACTIVE"},
+    {"name": "Peer Learning", "evidence": "Denny as translator helper for Ling", "status": "ACTIVE"},
+    {"name": "Habit Building Timeline", "evidence": "3 weeks build / 3 months destroy", "status": "ACTIVE"}
+  ],
+  "statistics": {
+    "total_students": 6,
+    "new_students": 1,
+    "teaching_methods_extracted": 17,
+    "verbatim_quotes": 9,
+    "red_signal_quotes": 4,
+    "yellow_signal_quotes": 4,
+    "phonics_trouble_letters": 5,
+    "cross_references": 4
+  }
+}

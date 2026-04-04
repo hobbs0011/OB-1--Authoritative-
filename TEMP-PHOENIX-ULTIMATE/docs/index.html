@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Survive a Brainrot — Roblox Zombie Survival</title>
+<meta name="description" content="Fight meme-zombie hordes on a moving train for 99 days. Up to 5 players. Real combat. Legendary loot. Can you survive?">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+--void:#0a0a14;--void2:#0f0f1a;--purple:#a855f7;--purple-dim:#7c3aed;--gold:#f59e0b;--gold-dim:#d97706;
+--red:#ef4444;--green:#22c55e;--white:#f1f1f1;--gray:#888;--glass:rgba(255,255,255,0.04);
+}
+html{scroll-behavior:smooth}
+body{background:var(--void);color:var(--white);font-family:'Rajdhani',sans-serif;overflow-x:hidden;line-height:1.6}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 30%,rgba(168,85,247,.15) 0%,transparent 60%),radial-gradient(ellipse at 80% 80%,rgba(245,158,11,.08) 0%,transparent 40%);pointer-events:none}
+.hero-badge{font-family:'Inter',sans-serif;font-size:.85rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);border:1px solid var(--gold-dim);padding:.4rem 1.2rem;border-radius:999px;margin-bottom:1.5rem;display:inline-block}
+.hero h1{font-family:'Orbitron',sans-serif;font-size:clamp(2.5rem,8vw,6rem);font-weight:900;line-height:1.05;margin-bottom:.5rem}
+.hero h1 .brainrot{background:linear-gradient(135deg,var(--purple),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:clamp(1.1rem,2.5vw,1.5rem);color:var(--gray);max-width:600px;margin:1rem auto 2rem}
+.cta-row{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center}
+.btn{font-family:'Orbitron',sans-serif;font-weight:700;font-size:1rem;padding:.9rem 2.2rem;border:none;border-radius:12px;cursor:pointer;text-decoration:none;transition:all .25s ease;display:inline-flex;align-items:center;gap:.5rem}
+.btn-primary{background:linear-gradient(135deg,var(--purple),var(--purple-dim));color:#fff;box-shadow:0 0 30px rgba(168,85,247,.3)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 0 50px rgba(168,85,247,.5)}
+.btn-secondary{background:var(--glass);color:var(--gold);border:1px solid var(--gold-dim)}
+.btn-secondary:hover{background:rgba(245,158,11,.1);transform:translateY(-2px)}
+
+/* SCROLL HINT */
+.scroll-hint{position:absolute;bottom:2rem;animation:bounce 2s infinite}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(10px)}}
+.scroll-hint span{font-size:1.5rem;color:var(--gray)}
+
+/* SECTIONS */
+section{padding:5rem 2rem;max-width:1100px;margin:0 auto}
+.section-label{font-family:'Inter',sans-serif;font-size:.75rem;letter-spacing:4px;text-transform:uppercase;color:var(--purple);margin-bottom:.5rem}
+.section-title{font-family:'Orbitron',sans-serif;font-size:clamp(1.8rem,4vw,3rem);font-weight:900;margin-bottom:1rem}
+
+/* FEATURE GRID */
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:2rem}
+.feature-card{background:var(--glass);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:2rem;transition:all .3s ease;position:relative;overflow:hidden}
+.feature-card:hover{border-color:var(--purple-dim);transform:translateY(-4px);box-shadow:0 8px 40px rgba(168,85,247,.12)}
+.feature-card .icon{font-size:2.5rem;margin-bottom:1rem}
+.feature-card h3{font-family:'Orbitron',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:.5rem}
+.feature-card p{color:var(--gray);font-size:.95rem;line-height:1.5}
+
+/* STATS BAR */
+.stats-bar{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1.5rem;margin:3rem 0;text-align:center}
+.stat-item .num{font-family:'Orbitron',sans-serif;font-size:clamp(2rem,5vw,3.5rem);font-weight:900;background:linear-gradient(135deg,var(--gold),var(--gold-dim));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.stat-item .label{color:var(--gray);font-size:.85rem;text-transform:uppercase;letter-spacing:2px}
+
+/* WEAPON SHOWCASE */
+.weapon-row{display:flex;flex-wrap:wrap;gap:1rem;margin-top:1.5rem;justify-content:center}
+.weapon-tag{background:var(--glass);border:1px solid rgba(255,255,255,.06);padding:.6rem 1.2rem;border-radius:10px;font-size:.9rem;white-space:nowrap}
+.weapon-tag.legendary{border-color:var(--gold-dim);color:var(--gold)}
+.weapon-tag.rizzlord{border-color:var(--red);color:var(--red);text-shadow:0 0 8px rgba(239,68,68,.4)}
+.weapon-tag.epic{border-color:var(--purple-dim);color:var(--purple)}
+.weapon-tag.rare{border-color:#3b82f6;color:#60a5fa}
+
+/* BIOME TIMELINE */
+.timeline{margin-top:2rem;display:flex;flex-direction:column;gap:1rem}
+.timeline-item{display:flex;align-items:center;gap:1.5rem;padding:1.2rem 1.5rem;background:var(--glass);border-radius:12px;border-left:4px solid var(--gray)}
+.timeline-item.green{border-left-color:var(--green)}
+.timeline-item.yellow{border-left-color:#eab308}
+.timeline-item.orange{border-left-color:#f97316}
+.timeline-item.red{border-left-color:var(--red)}
+.timeline-item.purple{border-left-color:var(--purple)}
+.timeline-item .days{font-family:'Orbitron',sans-serif;font-weight:700;font-size:1.1rem;min-width:80px}
+.timeline-item .info h4{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.1rem}
+.timeline-item .info p{color:var(--gray);font-size:.85rem}
+
+/* MONETIZATION */
+.money-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2rem;margin-top:2rem}
+.money-card{background:var(--glass);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:1.5rem;text-align:center}
+.money-card .price{font-family:'Orbitron',sans-serif;font-size:1.8rem;font-weight:900;color:var(--gold);margin:.5rem 0}
+.money-card .name{font-weight:700;font-size:1.05rem}
+.money-card .desc{color:var(--gray);font-size:.85rem;margin-top:.3rem}
+
+/* FOOTER */
+footer{text-align:center;padding:3rem 2rem;border-top:1px solid rgba(255,255,255,.05);margin-top:3rem}
+footer p{color:var(--gray);font-size:.85rem}
+footer .brand{font-family:'Orbitron',sans-serif;font-weight:700;color:var(--purple);font-size:1rem;margin-bottom:.5rem}
+
+/* GLOW DIVIDER */
+.glow-divider{height:1px;background:linear-gradient(90deg,transparent,var(--purple),transparent);margin:0 auto;max-width:600px;opacity:.4}
+
+/* RESPONSIVE */
+@media(max-width:600px){
+  section{padding:3rem 1.2rem}
+  .cta-row{flex-direction:column;align-items:center}
+  .btn{width:100%;justify-content:center}
+  .timeline-item{flex-direction:column;align-items:flex-start;gap:.5rem}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <span class="hero-badge">🧟 Now on Roblox</span>
+  <h1>SURVIVE A<br><span class="brainrot">BRAINROT</span></h1>
+  <p class="hero-sub">Fight meme-zombie hordes on a moving train for 99 days. Up to 5 players. Real combat. Legendary loot. Will you survive?</p>
+  <div class="cta-row">
+    <a href="#" class="btn btn-primary">🎮 Play Now on Roblox</a>
+    <a href="#features" class="btn btn-secondary">⚔️ See the Arsenal</a>
+  </div>
+  <div class="scroll-hint"><span>↓</span></div>
+</div>
+
+<!-- STATS -->
+<div class="glow-divider"></div>
+<section>
+  <div class="stats-bar">
+    <div class="stat-item"><div class="num">99</div><div class="label">Days to Survive</div></div>
+    <div class="stat-item"><div class="num">19</div><div class="label">Unique Weapons</div></div>
+    <div class="stat-item"><div class="num">5</div><div class="label">Player Co-op</div></div>
+    <div class="stat-item"><div class="num">50</div><div class="label">Prestige Levels</div></div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="section-label">Why You Can't Stop Playing</div>
+  <div class="section-title">Core Systems</div>
+  <div class="features">
+    <div class="feature-card">
+      <div class="icon">⚔️</div>
+      <h3>Real Combat</h3>
+      <p>Tap-to-attack melee, aim-assist ranged, dodge roll with invincibility frames, and boss parry mechanics. No quiz gimmicks — real fighting.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">🚂</div>
+      <h3>The Train</h3>
+      <p>3 connected cars — Engine, Shield, Living Quarters. Your mobile fortress. Upgrade it, defend it, or watch it fall.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">🔥</div>
+      <h3>Combo System</h3>
+      <p>Chain kills without getting hit. 10x, 25x, 50x, 100x combos. Higher combos = massive coin multipliers + server-wide announcements.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">🎰</div>
+      <h3>Gacha & Loot</h3>
+      <p>Survival Crates and Brainrot Crates. 7-tier rarity from Common to RIZZLORD. Pity system guarantees your luck.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">🐾</div>
+      <h3>Pets & Auras</h3>
+      <p>Collect pets that follow you. Equip dual auras — cosmetic inner ring + earned combat outer ring. Flex on every server.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">👥</div>
+      <h3>Guilds & World Boss</h3>
+      <p>Join a guild, level it to 10, unlock perks. Every Saturday at 9 PM: a 500K HP world boss spawns. Fight together or die alone.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WEAPONS -->
+<div class="glow-divider"></div>
+<section>
+  <div class="section-label">The Arsenal</div>
+  <div class="section-title">19 Weapons · 6 Rarity Tiers</div>
+  <p style="color:var(--gray);max-width:600px">Every weapon has unique attack speed, damage, and special abilities. Higher rarity = deadlier moves.</p>
+  <div class="weapon-row">
+    <span class="weapon-tag">⚪ Rusty Pipe</span>
+    <span class="weapon-tag">⚪ Wooden Bat</span>
+    <span class="weapon-tag" style="color:#22c55e;border-color:#166534">🟢 Machete</span>
+    <span class="weapon-tag" style="color:#22c55e;border-color:#166534">🟢 Shotgun</span>
+    <span class="weapon-tag rare">🔵 Katana</span>
+    <span class="weapon-tag rare">🔵 AR-15</span>
+    <span class="weapon-tag epic">🟣 Chainsaw</span>
+    <span class="weapon-tag epic">🟣 Sniper</span>
+    <span class="weapon-tag legendary">🟠 Skibidi Blade</span>
+    <span class="weapon-tag legendary">🟠 Ohio Cannon</span>
+    <span class="weapon-tag rizzlord">🔴 SIGMA FIST</span>
+    <span class="weapon-tag rizzlord">🔴 RIZZ RAY</span>
+  </div>
+</section>
+
+<!-- BIOMES -->
+<div class="glow-divider"></div>
+<section>
+  <div class="section-label">The Journey</div>
+  <div class="section-title">5 Biomes · 99 Days</div>
+  <div class="timeline">
+    <div class="timeline-item green">
+      <div class="days">Day 1–15</div>
+      <div class="info"><h4>🏜️ Wasteland Plains</h4><p>Open sightlines. Learn the basics. Easy enemies — for now.</p></div>
+    </div>
+    <div class="timeline-item yellow">
+      <div class="days">Day 16–30</div>
+      <div class="info"><h4>🏚️ Rusted City</h4><p>Collapsed buildings. Tight corridors. Ambush zones everywhere.</p></div>
+    </div>
+    <div class="timeline-item orange">
+      <div class="days">Day 31–50</div>
+      <div class="info"><h4>🧪 Toxic Swamp</h4><p>Green fog. Limited visibility. Poison zones damage anyone standing still.</p></div>
+    </div>
+    <div class="timeline-item red">
+      <div class="days">Day 51–75</div>
+      <div class="info"><h4>🌋 Volcanic Rift</h4><p>Lava flows. Fire everywhere. Environmental hazards + elite mutations.</p></div>
+    </div>
+    <div class="timeline-item purple">
+      <div class="days">Day 76–99</div>
+      <div class="info"><h4>🌌 The Void</h4><p>Reality breaks. Neon glitch effects. Max difficulty. The Final Boss awaits.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- GAME PASSES -->
+<div class="glow-divider"></div>
+<section>
+  <div class="section-label">Power Up</div>
+  <div class="section-title">Game Passes</div>
+  <div class="money-grid">
+    <div class="money-card">
+      <div class="name">🪙 2x Coins</div>
+      <div class="price">99 R$</div>
+      <div class="desc">Double ALL coin earnings. Forever.</div>
+    </div>
+    <div class="money-card">
+      <div class="name">⚡ 2x XP</div>
+      <div class="price">149 R$</div>
+      <div class="desc">Level up twice as fast. Permanent.</div>
+    </div>
+    <div class="money-card">
+      <div class="name">🧲 Auto-Collect</div>
+      <div class="price">199 R$</div>
+      <div class="desc">Vacuum up every drop in 30 studs.</div>
+    </div>
+    <div class="money-card">
+      <div class="name">👑 VIP Access</div>
+      <div class="price">499 R$</div>
+      <div class="desc">VIP area, badge, 5 gems/day, chat tag.</div>
+    </div>
+    <div class="money-card">
+      <div class="name">🏆 Ultimate Survivor</div>
+      <div class="price">1,499 R$</div>
+      <div class="desc">Everything above + exclusive aura + 10 gems/day.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="glow-divider"></div>
+<section style="text-align:center">
+  <div class="section-title">Ready to Board <span style="color:var(--purple)">The Train?</span></div>
+  <p style="color:var(--gray);margin:1rem auto 2rem;max-width:500px">Grab your squad. Pick your weapons. Survive 99 days — or die trying.</p>
+  <a href="#" class="btn btn-primary" style="font-size:1.2rem;padding:1.1rem 3rem">🎮 Play Free on Roblox</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="brand">SURVIVE A BRAINROT</div>
+  <p>Built by Natural English Training · 2026</p>
+  <p style="margin-top:.3rem;font-size:.75rem;color:#555">Roblox and the Roblox logo are trademarks of Roblox Corporation.</p>
+</footer>
+
+</body>
+</html>

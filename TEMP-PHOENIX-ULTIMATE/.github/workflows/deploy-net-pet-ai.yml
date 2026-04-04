@@ -1,0 +1,58 @@
+name: Deploy NET-PET-AI Worker
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'APPS/NET-PET-AI/**'
+      - '.github/workflows/deploy-net-pet-ai.yml'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy to Cloudflare Workers
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: APPS/NET-PET-AI/package-lock.json
+
+      - name: Install Wrangler
+        run: npm install -g wrangler
+
+      - name: Install dependencies
+        working-directory: APPS/NET-PET-AI
+        run: npm ci --if-present
+
+      - name: Deploy NET-PET-AI Worker
+        working-directory: APPS/NET-PET-AI
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: wrangler deploy --name net-pet-ai
+
+      - name: Health probe (workers.dev)
+        run: |
+          sleep 10
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://net-pet-ai.naturalenglishtraining.workers.dev/api/health || echo "000")
+          echo "Health check HTTP $STATUS"
+          if [ "$STATUS" = "200" ]; then
+            echo "NET-PET-AI is live and healthy"
+          else
+            echo "Health check returned $STATUS — worker may still be propagating"
+          fi
+
+      - name: Send Slack receipt
+        if: env.SLACK_WEBHOOK_URL != ''
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: |
+          curl -s -X POST "$SLACK_WEBHOOK_URL" \
+            -H "Content-Type: application/json" \
+            -d "{\"text\":\"✅ NET-PET-AI deployed from commit \`${{ github.sha }}\` by \`${{ github.actor }}\`. Health: https://net-pet-ai.naturalenglishtraining.workers.dev/api/health\"}"

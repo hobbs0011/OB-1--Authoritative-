@@ -1,0 +1,114 @@
+{
+  "name": "Train67-BrainrotSurvival",
+  "tree": {
+    "$className": "DataModel",
+
+    "ServerScriptService": {
+      "$className": "ServerScriptService",
+
+      "UnifiedServer": {
+        "$path": "CANON/TRAIN-67/CODE/UnifiedServer.server.lua"
+      },
+
+      "Modules": {
+        "$className": "Folder",
+        "DataStoreV2":              { "$path": "CANON/TRAIN-67/CODE/DataStoreV2.lua" },
+        "SecurityLayer":            { "$path": "CANON/TRAIN-67/CODE/SecurityLayer.lua" },
+        "LedgerSchema":             { "$path": "CANON/TRAIN-67/CODE/LedgerSchema.lua" },
+        "EconomyManager":           { "$path": "CANON/TRAIN-67/CODE/EconomyManager.lua" },
+        "AnalyticsService":         { "$path": "CANON/TRAIN-67/CODE/AnalyticsService.lua" },
+        "QuestionBankV2":           { "$path": "CANON/TRAIN-67/CODE/QuestionBankV2.lua" },
+        "EloManager":               { "$path": "CANON/TRAIN-67/CODE/EloManager.lua" },
+        "CombatSystem":             { "$path": "CANON/TRAIN-67/CODE/CombatSystem.lua" },
+        "WaveManager":              { "$path": "CANON/TRAIN-67/CODE/WaveManager.lua" },
+        "EnemyFactory":             { "$path": "CANON/TRAIN-67/CODE/EnemyFactory.lua" },
+        "RewardBridge":             { "$path": "CANON/TRAIN-67/CODE/RewardBridge.lua" },
+        "DailyRewards":             { "$path": "CANON/TRAIN-67/CODE/DailyRewards.lua" },
+        "AnomalyDetector":          { "$path": "CANON/TRAIN-67/CODE/AnomalyDetector.lua" },
+        "MonetizationServer":       { "$path": "CANON/TRAIN-67/CODE/MonetizationServer.lua" },
+        "GamePassConfig":           { "$path": "CANON/TRAIN-67/CODE/GamePassConfig.lua" },
+        "DevProductsConfig":        { "$path": "CANON/TRAIN-67/CODE/DevProductsConfig.lua" },
+        "GachaManager":             { "$path": "CANON/TRAIN-67/CODE/GachaManager.lua" },
+        "BattlePass":               { "$path": "CANON/TRAIN-67/CODE/BattlePass.lua" },
+        "TradeManager":             { "$path": "CANON/TRAIN-67/CODE/TradeManager.lua" },
+        "ChallengeManager":         { "$path": "CANON/TRAIN-67/CODE/ChallengeManager.lua" },
+        "LeaderboardManager":       { "$path": "CANON/TRAIN-67/CODE/LeaderboardManager.lua" },
+        "GuildManager":             { "$path": "CANON/TRAIN-67/CODE/GuildManager.lua" },
+        "WorldBoss":                { "$path": "CANON/TRAIN-67/CODE/WorldBoss.lua" },
+        "PrestigeManager":          { "$path": "CANON/TRAIN-67/CODE/PrestigeManager.lua" },
+        "ReferralSystem":           { "$path": "CANON/TRAIN-67/CODE/ReferralSystem.lua" },
+        "ReceiptRouter":            { "$path": "CANON/TRAIN-67/CODE/ReceiptRouter.lua" },
+        "MonetizationOrchestrator": { "$path": "CANON/TRAIN-67/CODE/MonetizationOrchestrator.lua" },
+        "EnglishRewardsManager":    { "$path": "CANON/TRAIN-67/CODE/EnglishRewardsManager.lua" },
+        "FTUEController":           { "$path": "CANON/TRAIN-67/CODE/FTUEController.lua" },
+        "CosmeticController":       { "$path": "CANON/TRAIN-67/CODE/CosmeticController.lua" },
+        "ServerGateway":            { "$path": "CANON/TRAIN-67/CODE/ServerGateway.lua" }
+      }
+    },
+
+    "StarterPlayer": {
+      "$className": "StarterPlayer",
+
+      "StarterPlayerScripts": {
+        "$className": "StarterPlayerScripts",
+
+        "UnifiedClient": {
+          "$path": "CANON/TRAIN-67/CODE/UnifiedClient.client.lua"
+        },
+
+        "Modules": {
+          "$className": "Folder",
+          "ClientBridge":           { "$path": "CANON/TRAIN-67/CODE/ClientBridge.lua" },
+          "HUDController_v2":       { "$path": "CANON/TRAIN-67/CODE/HUDController_v2.lua" },
+          "MobileInputController":  { "$path": "CANON/TRAIN-67/CODE/MobileInputController.lua" },
+          "CodexClient":            { "$path": "CANON/TRAIN-67/CODE/CodexClient.lua" },
+          "CodexData":              { "$path": "CANON/TRAIN-67/CODE/CodexData.lua" }
+        }
+      }
+    },
+
+    "ReplicatedStorage": {
+      "$className": "ReplicatedStorage",
+
+      "SharedConfig": {
+        "$className": "Folder",
+        "QuestionBank":     { "$path": "CANON/TRAIN-67/CODE/QuestionBank.lua" }
+      },
+
+      "RemoteEvents": {
+        "$className": "Folder",
+        "AnswerQuestion":      { "$className": "RemoteEvent" },
+        "QuestionResult":      { "$className": "RemoteEvent" },
+        "ShowQuestion":        { "$className": "RemoteEvent" },
+        "DismissQuestion":     { "$className": "RemoteEvent" },
+        "UpdateHUD":           { "$className": "RemoteEvent" },
+        "ComboUpdate":         { "$className": "RemoteEvent" },
+        "KillStreakUpdate":    { "$className": "RemoteEvent" },
+        "PlayerDied":          { "$className": "RemoteEvent" },
+        "PlayerRespawned":     { "$className": "RemoteEvent" },
+        "EnemySpawned":        { "$className": "RemoteEvent" },
+        "EnemyDied":           { "$className": "RemoteEvent" },
+        "WaveStarted":         { "$className": "RemoteEvent" },
+        "WaveEnded":           { "$className": "RemoteEvent" },
+        "DamageDealt":         { "$className": "RemoteEvent" },
+        "RewardGranted":       { "$className": "RemoteEvent" },
+        "FTUEStep":            { "$className": "RemoteEvent" },
+        "FTUEComplete":        { "$className": "RemoteEvent" },
+        "GachaResult":         { "$className": "RemoteEvent" },
+        "TradeRequest":        { "$className": "RemoteEvent" },
+        "TradeComplete":       { "$className": "RemoteEvent" },
+        "ChatMessage":         { "$className": "RemoteEvent" },
+        "SystemNotification":  { "$className": "RemoteEvent" }
+      },
+
+      "RemoteFunctions": {
+        "$className": "Folder",
+        "GetPlayerData":   { "$className": "RemoteFunction" },
+        "GetQuestion":     { "$className": "RemoteFunction" },
+        "PurchaseItem":    { "$className": "RemoteFunction" },
+        "GetLeaderboard":  { "$className": "RemoteFunction" },
+        "GetGuildInfo":    { "$className": "RemoteFunction" }
+      }
+    }
+  }
+}

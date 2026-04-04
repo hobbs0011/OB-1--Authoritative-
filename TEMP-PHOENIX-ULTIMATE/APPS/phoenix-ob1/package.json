@@ -1,0 +1,18 @@
+{
+  "name": "phoenix-ob1",
+  "version": "139.0.0",
+  "description": "Phoenix OB-1 v139-TRUTH-SEALED — chaos engineered, hardened by Agent-99",
+  "main": "src/reincarnate.js",
+  "scripts": {
+    "deploy": "wrangler deploy",
+    "dev": "wrangler dev",
+    "tail": "wrangler tail",
+    "chaos-deploy": "node scripts/chaos-deploy.js"
+  },
+  "keywords": ["cloudflare", "workers", "chaos-magic"],
+  "author": "Michael Hobbs",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "wrangler": "^3.0.0"
+  }
+}

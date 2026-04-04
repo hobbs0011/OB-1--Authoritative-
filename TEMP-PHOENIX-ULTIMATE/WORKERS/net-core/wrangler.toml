@@ -1,0 +1,32 @@
+name = "net-core"
+main = "src/index.js"
+compatibility_date = "2026-04-01"
+
+# Route binding (choose ONE canonical strategy)
+# Option A (recommended here): route bound to zone.
+# NOTE: You must set the correct zone+route in Cloudflare Dashboard or via wrangler.
+routes = [
+	{ pattern = "naturalenglishtraining.net/*", zone_name = "naturalenglishtraining.net" }
+]
+
+# --- Bindings (placeholders) ---
+# [vars]
+# ENV = "prod"
+
+# KV example
+# [[kv_namespaces]]
+# binding = "KV"
+# id = "__REPLACE_WITH_KV_NAMESPACE_ID__"
+
+# D1 example
+# [[d1_databases]]
+# binding = "DB"
+# database_name = "net-core"
+# database_id = "__REPLACE_WITH_D1_DATABASE_ID__"
+
+[env.staging]
+name = "net-core-staging"
+# routes = [{ pattern = "staging.naturalenglishtraining.net/*", zone_name = "naturalenglishtraining.net" }]
+
+# [env.staging.vars]
+# ENV = "staging"

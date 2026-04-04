@@ -1,0 +1,157 @@
+{
+  "heavy_ledger_entry": "HL-076",
+  "pipeline_id": 76,
+  "wave": 7,
+  "source_file": "CANON/SYSTEM/CANON-ACCESS-INDEX.md",
+  "source_sha": "bd0af8a8425b4d3ba3998d37e799a139c2378f28",
+  "source_type": "system_bootstrap",
+  "source_size_kb": 7.2,
+  "converted_by": "OB1 (Agent-99) — Pulse Run 222",
+  "converted_at": "2026-04-01T02:30:00+07:00",
+  "artifact_class": "VAULT_SEED",
+  "purpose": "Master routing table for all canonical content. Synced block bypass index. Platform death rebuild playbook for content layer.",
+  "key_concepts": [
+    {
+      "id": "KC-076-01",
+      "name": "Synced Block Bypass",
+      "definition": "Soul DNA parent pages use synced blocks which render as <unknown> to API. This index maps every readable child page directly, bypassing the wall.",
+      "severity": "RED",
+      "canon_law": "L11_GITHUB_IS_TRUTH"
+    },
+    {
+      "id": "KC-076-02",
+      "name": "Canon Export Pipeline States",
+      "definition": "4-state pipeline: UNMIRRORED → MIRRORED → SYNCED → ENRICHED. Target: zero UNMIRRORED pages.",
+      "severity": "RED",
+      "canon_law": "L27_DUAL_PUBLISH_MANDATORY"
+    },
+    {
+      "id": "KC-076-03",
+      "name": "Platform Death Rebuild Protocol",
+      "definition": "8-step rebuild from GitHub alone: clone Ultimate repo, canon in CANON/, reincarnation in CANON/REINCARNATION/, system state in CANON/MSS/, bootstrap in CANON/SYSTEM/, code in GALAXY-LESSONS/ and CANON/TRAIN-67/CODE/, cross-ref with Immortalize repo, use this file as master routing table.",
+      "severity": "RED",
+      "canon_law": "L28_SELF_BOOTSTRAPPING_REPO"
+    },
+    {
+      "id": "KC-076-04",
+      "name": "Bible Chapter Map",
+      "definition": "60+ chapters fully audited and indexed. CH00-CH40 main chapters, A1-A4 appendices, CE-01 to CE-14 Chaos Engineering series. All SEALED/CANON status.",
+      "severity": "YELLOW",
+      "canon_law": "L05_NO_OVERWRITE_CANON"
+    },
+    {
+      "id": "KC-076-05",
+      "name": "Three-Repo Architecture",
+      "definition": "Ultimate (active canon vault, PRIMARY), Immortalize (original Soul DNA Bible source, 40 files, 8 VAULT dirs — mine for cross-repo enrichment), CommandStation (product code, LEGACY).",
+      "severity": "YELLOW",
+      "canon_law": "L11_GITHUB_IS_TRUTH"
+    },
+    {
+      "id": "KC-076-06",
+      "name": "Blocked Page Workarounds",
+      "definition": "6 blocked pages with specific workarounds: Bible/Canon/DeepDive/Reincarnation → read child pages or GitHub. Tool Stack → query Assets DB. Pulse Log → use Pulse State Mirror.",
+      "severity": "YELLOW",
+      "canon_law": "SYNCED_BLOCK_BYPASS"
+    },
+    {
+      "id": "KC-076-07",
+      "name": "Known Duplicates",
+      "definition": "CH29 has two versions (SDEG + THE GRAMMAR). A3 has two versions (Executable Specifications). CE-14 truncated mid-sentence.",
+      "severity": "GREEN",
+      "canon_law": "L19_DEDUP_EVERYTHING"
+    }
+  ],
+  "routing_tables": {
+    "blocked_pages": [
+      {"page": "Soul DNA Bible", "workaround": "Read child chapter pages directly (60+ indexed below) or GitHub CANON/"},
+      {"page": "Soul DNA Canon", "workaround": "Read child pages directly OR GitHub CANON/SOUL-DNA-CANON.md"},
+      {"page": "Soul DNA Deep Dive", "workaround": "Read child pages directly OR GitHub CANON/SOUL-DNA-DEEP-DIVE.md"},
+      {"page": "Reincarnation Log", "workaround": "Read child entry pages directly OR GitHub CANON/REINCARNATION/"},
+      {"page": "Tool Stack", "workaround": "Query Assets & Accounts DB instead"},
+      {"page": "Pulse Log", "workaround": "Use Pulse State Mirror in Navigator Index"}
+    ],
+    "bible_chapters": {
+      "main": 41,
+      "appendices": 4,
+      "chaos_engineering": 14,
+      "total_indexed": 59,
+      "all_status": "SEALED",
+      "known_issues": ["CH29 has two versions", "A3 has two versions", "CE-14 truncated"]
+    },
+    "export_pipeline": {
+      "enriched": ["GOSPEL-444-TEACHING-METHODS-CONSOLIDATED.md", "ALPHA-OMEGA-SOUL-DNA-GOVERNANCE-CANON.md", "CORE-PRINCIPLES-AND-PHYSICS.md", "SOUL-DNA-DEEP-DIVE.md"],
+      "synced": ["SOUL-DNA-CANON.md", "NET-TEACHING-METHODOLOGY.md"],
+      "mirrored": ["SKELETON-STAR-MAP-PRIME-LAWS-100-LAYER-FOUNDATION.md", "A5-RAW-SOUL-DNA-DICTATION-GEMINI-SESSIONS.md", "SOUL-DNA-BIBLE-A4-RAW-CLASSROOM-MAI-TRAM.md", "DRONE-14-CLOUDFLARE-ECOSYSTEM-MAP.md", "BLUETECH-NETWORKING-DINNER-TEAM-BUILDING-EXTRACTION.md", "NET-EPIC-LESSON-BLUEPRINT-V3.md"]
+    },
+    "github_repos": [
+      {"name": "hobbs-lab/Phoenix-Rising-Protocol-Ultimate", "role": "Active canon vault", "status": "PRIMARY"},
+      {"name": "hobbs-lab/Phoenix-Rise-Immortalize-", "role": "Original Soul DNA Bible source (40 files, 8 VAULT dirs)", "status": "SOURCE"},
+      {"name": "hobbs0011/NET-Ai-EcoSystem-CommandStation", "role": "Product code, HarvestedChats/, docs/", "status": "LEGACY"}
+    ],
+    "special_directories": [
+      {"path": "CANON/REINCARNATION/", "contents": "Session Soul DNA entries"},
+      {"path": "CANON/TRAIN-67/", "contents": "Train 6-7 game vault: README, Turn-Key Deploy, 100-Point Audit, CODE/"},
+      {"path": "CANON/DRIFT-CASE-STUDY/", "contents": "Drift alignment case study"},
+      {"path": "CANON/SESSION-RECORDS/", "contents": "Verbatim session records"},
+      {"path": "CANON/MSS/", "contents": "MSS-V5, MSS-V6 Heavy Ledger, SSM-V7 Super Saiyan"},
+      {"path": "CANON/SYSTEM/", "contents": "System bootstrap documents"},
+      {"path": "CANON/HEAVY-LEDGER/", "contents": "Heavy Ledger JSON conversions"},
+      {"path": "CANON/MARKETING/", "contents": "Facebook funnel, Vietnamese posts, voice bible"}
+    ],
+    "operational_pages": [
+      {"page": "Phoenix Rising Protocol — Project HQ", "purpose": "Master parent page"},
+      {"page": "Backlog (database)", "purpose": "Task tracking — query via SQL"},
+      {"page": "Build Log (database)", "purpose": "Work log — query via SQL"},
+      {"page": "Assets & Accounts (database)", "purpose": "Tool/platform inventory"},
+      {"page": "Galaxy Lessons — Lesson Index", "purpose": "HTML lesson tracker"},
+      {"page": "NET Students", "purpose": "Student profiles hub"},
+      {"page": "Navigator Index", "purpose": "Pulse State Mirror + Handoff Ledger (⚠️ IN TRASH)"}
+    ]
+  },
+  "rebuild_protocol": {
+    "steps": [
+      "1. Clone hobbs-lab/Phoenix-Rising-Protocol-Ultimate",
+      "2. All canon content is in CANON/ as clean markdown",
+      "3. Reincarnation history is in CANON/REINCARNATION/",
+      "4. System state snapshots are in CANON/MSS/",
+      "5. System bootstrap docs are in CANON/SYSTEM/",
+      "6. Game/lesson code is in GALAXY-LESSONS/ and CANON/TRAIN-67/CODE/",
+      "7. Cross-reference with hobbs-lab/Phoenix-Rise-Immortalize- for original source material",
+      "8. Use CANON-ACCESS-INDEX as master routing table"
+    ],
+    "guarantee": "The vault survives platform death."
+  },
+  "cross_references": [
+    {"target": "HL-073", "relationship": "COLD-START-BOOT references this index as mandatory first load"},
+    {"target": "HL-074", "relationship": "OB1 Agent Instructions references CANON_ACCESS_INDEX as mandatory_first_load_every_session_and_pulse"},
+    {"target": "HL-075", "relationship": "Navigator Index contains operational page links that this index also tracks"},
+    {"target": "SSM_V7_§11", "relationship": "S04: load_canon_access_index — content_routing"},
+    {"target": "SSM_V7_§14", "relationship": "CANON_MAP references canon_access_index as routing_table"},
+    {"target": "SSM_V7_§15", "relationship": "MEMORIES: canon_access_index mandatory_first_load_every_session_and_pulse"}
+  ],
+  "canon_guardrails": {
+    "verbatim_preserved": true,
+    "no_fabrication": true,
+    "source_verified": true,
+    "cross_repo_mined": false,
+    "dedup_checked": true,
+    "notes": "Source is a system-generated routing table, not raw voice material. No cross-repo mining needed — this IS the routing table."
+  },
+  "alerts": [
+    {
+      "severity": "RED",
+      "alert": "Navigator Index Notion page is IN TRASH. This index and GitHub CANON/SYSTEM/NAVIGATOR-INDEX.md are the only surviving routing references.",
+      "action_required": "Michael must restore Navigator Index from trash and dedup accumulated entries."
+    },
+    {
+      "severity": "YELLOW",
+      "alert": "Export pipeline status in this source file is STALE (reflects Run 25, 2026-03-26). Actual pipeline has advanced significantly — all major canon files now ENRICHED++.",
+      "action_required": "Source file should be refreshed to reflect current enrichment state."
+    },
+    {
+      "severity": "YELLOW",
+      "alert": "CE-14 (THE CLOSING DECLARATION) reported as TRUNCATED — THE SOUL section cut off mid-sentence.",
+      "action_required": "Locate full version and repair."
+    }
+  ]
+}

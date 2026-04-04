@@ -1,0 +1,20 @@
+# === SECRETS — NEVER PUSH ===
+API-SHHHH.txt
+API-SHHHH-2.txt
+API-MASTER.txt
+API-MASTER.7z
+NET/
+GALAXY/
+
+# === LARGE / LOCAL ONLY ===
+.venv/
+node_modules/
+OB-1.worktrees/
+
+# === SYSTEM ===
+desktop.ini
+Thumbs.db
+CON
+~$*
+*.pptx
+.vscode/mcp.json

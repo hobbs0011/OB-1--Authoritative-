@@ -1,0 +1,33 @@
+main:
+  params: [input]
+  steps:
+    - init:
+        assign:
+          - cycleId: ${default(map.get(input, "cycleId"), string(sys.now()))}
+          - subagents: ["Obi-N", "Obi-G", "Obi-C", "Obi-W"]
+    - dispatchLoop:
+        for:
+          value: subagent
+          in: ${subagents}
+          steps:
+            - publishPacket:
+                call: http.post
+                args:
+                  url: ${sys.get_env("M0_ENDPOINT") + "/run-subagent"}
+                  auth:
+                    type: OIDC
+                  body:
+                    source: ${subagent}
+                    lineage: ${cycleId}
+                    state: queued
+                    delta: heartbeat dispatch
+                    proof: scheduled $$$ heartbeat
+                    unknowns: []
+                    driftRisk: low
+                    nextAction: scan-and-report
+                    ledgerStatus: pending
+    - done:
+        return:
+          ok: true
+          cycleId: ${cycleId}
+          dispatched: ${subagents}

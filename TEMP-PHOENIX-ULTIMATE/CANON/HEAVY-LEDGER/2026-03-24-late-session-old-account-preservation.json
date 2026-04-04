@@ -1,0 +1,139 @@
+{
+  "heavy_ledger_entry": "HL-093",
+  "source_file": "CANON/REINCARNATION/2026-03-24-late-session-old-account-preservation.md",
+  "source_sha": "0104d937891f08c661e8f3affd962eca216723f1",
+  "session_date": "2026-03-24",
+  "session_tag": "late-session-old-account-preservation",
+  "session_time": "~22:15 ICT",
+  "signal_density": "LOW",
+  "signal_density_score": 2,
+  "extractor": "OB1-Pulse-Run-239",
+  "conversion_date": "2026-04-01T11:30:00+07:00",
+  "wave": 8,
+  "wave_position": "9/46",
+  "session_type": "extract_established_light",
+  "session_context": "Late evening session. Michael flagged legacy Notion account data loss risk, performed mass reincarnation of active chats, pasted Mar 23 activity dump (already captured elsewhere).",
+
+  "verbatim_quotes": [
+    {
+      "id": "Q1",
+      "text": "where do the chats go that I archive?",
+      "severity": "GREEN",
+      "tags": ["data_preservation", "workspace_mechanics"],
+      "interpretation": "Michael exploring archived chat destination — indicates awareness of potential data loss vectors."
+    },
+    {
+      "id": "Q2",
+      "text": "from past notion account on mrmichaelhobbs1234@gmail.com make sure nothing is lost",
+      "severity": "RED",
+      "tags": ["data_preservation", "legacy_account", "directive"],
+      "interpretation": "Direct preservation directive. Legacy Notion account flagged as data loss risk. Non-negotiable: verify nothing lost from old workspace."
+    },
+    {
+      "id": "Q3",
+      "text": "Also I just reincarnated all active chats",
+      "severity": "YELLOW",
+      "tags": ["session_management", "reincarnation"],
+      "interpretation": "Deliberate session cleanup before opening new thread. Mass reincarnation = fresh start pattern."
+    }
+  ],
+
+  "decisions": [
+    {
+      "id": "D1",
+      "decision": "Old account preservation directive — verify nothing lost from mrmichaelhobbs1234@gmail.com legacy Notion workspace",
+      "impact": "Data integrity",
+      "canon_pages_affected": ["Chat Archive", "Phoenix HQ"],
+      "status": "OPEN",
+      "implementation_notes": "Requires Michael to log into legacy account and perform full workspace export. Agent cannot access external accounts."
+    },
+    {
+      "id": "D2",
+      "decision": "Mass reincarnation of all active chats — deliberate session cleanup pattern",
+      "impact": "Session management",
+      "canon_pages_affected": ["Reincarnation Log"],
+      "status": "COMPLETE",
+      "implementation_notes": "Pattern documented. 14 reincarnation entries from 2026-03-24 absorbed by this session's cold start."
+    }
+  ],
+
+  "corrections": [],
+
+  "new_principles": [],
+
+  "emotional_signal": {
+    "state": "cautious",
+    "indicators": ["data_loss_concern", "cleanup_before_fresh_start"],
+    "interpretation": "Michael operating in preservation mode — securing legacy data before moving forward. Not frustrated, but vigilant about data integrity."
+  },
+
+  "system_design_insights": [
+    {
+      "id": "SD1",
+      "insight": "Mar 23 Agent-99 activity report pasted into session — already captured in prior reincarnation entries. No duplication needed.",
+      "tags": ["deduplication", "data_hygiene"],
+      "implementation": "Validates L19 DEDUP_EVERYTHING — cross-check before appending."
+    }
+  ],
+
+  "open_questions": [
+    {
+      "id": "OQ1",
+      "question": "What Notion pages exist on mrmichaelhobbs1234@gmail.com that were never exported?",
+      "status": "OPEN_AWAITING_MICHAEL",
+      "notes": "Agent cannot access external accounts. Michael must log in and export."
+    }
+  ],
+
+  "unfinished_actions": [
+    {
+      "id": "UA1",
+      "action": "Log into legacy Notion account, perform full workspace export, upload to Chat Archive",
+      "assignee": "MICHAEL",
+      "status": "OPEN"
+    }
+  ],
+
+  "artifacts_created": [],
+
+  "cross_references": [
+    {
+      "target": "CANON/REINCARNATION/2026-03-24-chat-preservation-local-repo.md",
+      "relationship": "SAME_DAY_RELATED",
+      "notes": "Earlier session established preserve-before-delete doctrine. This session extends it to legacy account."
+    },
+    {
+      "target": "CANON/REINCARNATION/2026-03-24-agent0-triad-reincarnation.md",
+      "relationship": "SAME_DAY_CONTEXT",
+      "notes": "One of 14 reincarnation entries from this date that were absorbed in cold start."
+    },
+    {
+      "target": "CANON/REINCARNATION/2026-03-23-pipeline-delegation-mcp-stack.md",
+      "relationship": "REFERENCED_CONTENT",
+      "notes": "Mar 23 activity dump pasted by Michael references this session's content. Already captured — dedup applied."
+    }
+  ],
+
+  "key_concepts": [
+    {
+      "concept": "Legacy Account Preservation",
+      "definition": "Directive to verify no data loss from mrmichaelhobbs1234@gmail.com legacy Notion workspace before archiving.",
+      "status": "OPEN_AWAITING_MICHAEL"
+    },
+    {
+      "concept": "Mass Reincarnation Pattern",
+      "definition": "Michael reincarnates all active chats before opening fresh session — deliberate cleanup for fresh context.",
+      "status": "ACTIVE_PATTERN"
+    }
+  ],
+
+  "canon_guardrails": {
+    "no_fabrication": "PASS — all content from source file",
+    "no_drift": "PASS — light session = light entry (L26)",
+    "no_paraphrase_sacred": "PASS — 3 quotes verbatim",
+    "no_overwrite": "PASS — append only",
+    "dedup_check": "PASS — no duplicate HL entry exists"
+  },
+
+  "session_fingerprint": "2026-03-24:old-account-preservation:3q:2d:LOW"
+}
