@@ -1,1284 +1,940 @@
 --[[
-    CombatSystem.lua v2.0 — THE Core Combat Engine
-    Skibidi Zombie: Survive the Brainrots
-    
-    REPLACES: v1.0 ESL quiz-based combat (answer questions → damage)
-    NOW: Real-time action combat. Tap-to-attack melee, aim-assist ranged,
-         dodge roll, boss parry, combo counter, combat juice.
-    
-    ZERO ESL. ZERO QUESTIONS. PURE COMBAT.
-    This game is about killing zombies and MAKING MONEY.
-    
-    Architecture: ServerScript (ServerScriptService)
-    Server-authoritative: all damage, hit detection, rewards validated server-side.
-    Client sends input intents only.
-    
-    Dependencies: WeaponData, EnemyData, DayScaling, CombatRewardsManager,
-                  EnemyFactory, EconomyManager, AnalyticsService
-    
-    Mobile-first: designed for lowest-compute phones.
-    All VFX are client-side cosmetic only. Server runs pure math.
-    
-    Generated: 2026-03-28 | Ne0 direct write | SUPER SAIYAN MODE
-    Platform Death Test: PASS
+	CombatSystem.lua v2.0 -- Real Tap-to-Attack Combat
+	Game: Survive a Brainrot
+	Replaces: ESL quiz combat (v1.x)
+
+	ARCHITECTURE: Server-authoritative. Client predicts, server validates.
+	Sacred Rule: < 100ms tap-to-feedback via client prediction.
+
+	Input model (mobile-first, 4 action buttons max):
+	  Attack   -- tap to melee, 3-hit combo (3rd hit = knockback)
+	  Dodge    -- 0.5s i-frames, 3s cooldown
+	  Ability  -- weapon special (Rare+ only), per-rarity cooldown
+	  Interact -- pick up drops, shop, doors
+
+	Ranged: hold aim + tap fire, 15-degree aim-assist snap on mobile.
+	Boss parry: dodge during 1.5s telegraph = 3s stun.
+
+	Combo multipliers (consecutive kills without taking damage):
+	  5x = 1.5x coins | 10x = 2x | 50x = 5x | 100x = 10x
+
+	Combat juice (mandatory):
+	  Screen shake on hit, hit flash, knockback on 3rd melee hit,
+	  floating damage numbers, haptic on mobile, kill dissolve.
+
+	Network: 2 RemoteEvents
+	  EventBus       (client -> server actions)
+	  ClientDispatch (server -> client notifications)
+
+	Dependencies: ServerGateway, WeaponData, EnemyData, EnemyFactory,
+	              EconomyManager, CombatRewardsManager, SecurityLayer
+	Version: 2.0.0
+	Date: 2026-03-28
 ]]
 
-local Players = game:GetService("Players")
-local RunService = game:GetService("RunService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Players           = game:GetService("Players")
+local ServerStorage     = game:GetService("ServerStorage")
+
+------------------------------------------------------------------------
+-- LAZY DEPENDENCIES (injected at Init)
+------------------------------------------------------------------------
+
+local ServerGateway        = nil
+local WeaponData           = nil
+local EnemyData            = nil
+local EnemyFactory         = nil
+local EconomyManager       = nil -- luacheck: ignore
+local CombatRewardsManager = nil
+local SecurityLayer        = nil
 
 local CombatSystem = {}
-CombatSystem.__index = CombatSystem
 
---------------------------------------------------------------------------------
+------------------------------------------------------------------------
 -- CONFIGURATION
---------------------------------------------------------------------------------
+------------------------------------------------------------------------
 
 local CONFIG = {
-    -- MELEE COMBAT
-    MELEE_TAP_WINDOW = 0.4,           -- seconds between taps for combo chain
-    MELEE_COMBO_MAX_HITS = 3,          -- 3-hit combo chain
-    MELEE_COMBO_FINISHER_MULT = 1.5,   -- 3rd hit deals 1.5x damage
-    MELEE_LUNGE_DISTANCE = 3,          -- studs: auto-lunge toward target
-    MELEE_HIT_CONE_ANGLE = 60,         -- degrees: frontal arc for hit detection
-    MELEE_COOLDOWN_AFTER_COMBO = 0.6,  -- seconds after full combo before next chain
-    
-    -- RANGED COMBAT
-    RANGED_AIM_ASSIST_RADIUS = 8,      -- studs: magnetism radius for mobile aim
-    RANGED_AIM_ASSIST_STRENGTH = 0.6,  -- 0-1: how much aim snaps to nearest enemy
-    RANGED_HEADSHOT_MULT = 2.0,        -- 2x damage on precision hits
-    RANGED_BODYSHOT_MULT = 1.0,
-    RANGED_FALLOFF_START = 30,         -- studs: damage falloff begins
-    RANGED_FALLOFF_END = 60,           -- studs: minimum damage distance
-    RANGED_FALLOFF_MIN_MULT = 0.5,     -- 50% damage at max range
-    
-    -- DODGE ROLL
-    DODGE_DISTANCE = 12,               -- studs traveled
-    DODGE_DURATION = 0.4,              -- seconds of roll animation
-    DODGE_IFRAMES = 0.3,               -- seconds of invincibility during roll
-    DODGE_COOLDOWN = 1.5,              -- seconds between dodges
-    DODGE_STAMINA_COST = 25,           -- stamina consumed per dodge
-    
-    -- STAMINA SYSTEM
-    STAMINA_MAX = 100,
-    STAMINA_REGEN_RATE = 15,           -- per second (out of combat: 25)
-    STAMINA_REGEN_DELAY = 1.0,         -- seconds after action before regen starts
-    STAMINA_COMBAT_REGEN = 15,
-    STAMINA_OOC_REGEN = 25,
-    
-    -- BOSS PARRY SYSTEM
-    PARRY_WINDOW = 0.5,                -- seconds (matches Combat Warriors feel)
-    PARRY_TELEGRAPH_TIME = 1.5,        -- seconds of wind-up before boss attack
-    PARRY_STUN_DURATION = 3.0,         -- seconds boss is stunned after successful parry
-    PARRY_DAMAGE_MULT = 2.0,           -- 2x damage during stun window
-    PARRY_COOLDOWN = 0.3,              -- can't spam parry
-    
-    -- COMBO COUNTER (kill streaks, not hit combos)
-    KILL_COMBO_DECAY_TIME = 4.0,       -- seconds without a kill before combo resets
-    KILL_COMBO_THRESHOLDS = {5, 10, 20, 50, 100},
-    
-    -- PLAYER BASE STATS
-    BASE_HEALTH = 100,
-    BASE_STAMINA = 100,
-    BASE_MOVE_SPEED = 16,              -- Roblox WalkSpeed
-    BASE_SPRINT_SPEED = 24,
-    SPRINT_STAMINA_COST = 10,          -- per second
-    
-    -- HEALTH REGEN
-    HEALTH_REGEN_DELAY = 5.0,          -- seconds after taking damage
-    HEALTH_REGEN_RATE = 3,             -- HP per second
-    HEALTH_REGEN_CAP = 0.30,           -- only regen up to 30% of max HP
-    
-    -- KNOCKBACK
-    KNOCKBACK_BASE = 10,               -- studs
-    KNOCKBACK_RESIST_PER_LEVEL = 0.02, -- 2% resistance per player level
-    
-    -- HIT DETECTION
-    MAX_HIT_DISTANCE_TOLERANCE = 3,    -- studs: anti-cheat tolerance
-    HIT_RATE_LIMIT = 0.1,              -- minimum seconds between registered hits
-    
-    -- COMBAT JUICE (client-side cosmetic triggers)
-    SCREEN_SHAKE_ON_HIT = true,
-    HITSTOP_FRAMES = 2,                -- frames of freeze on heavy hit
-    DAMAGE_NUMBERS = true,
-    COMBO_ANNOUNCER = true,            -- "DOUBLE KILL", "MEGA KILL" etc.
+	-- Melee
+	MELEE_COMBO_HITS      = 3,
+	MELEE_KNOCKBACK_FORCE = 60,
+	MELEE_HIT_WINDOW      = 0.4,
+	MELEE_DAMAGE_MULT     = { 1.0, 1.0, 1.5 },
+
+	-- Ranged
+	AIM_ASSIST_ANGLE      = 15,
+	AIM_ASSIST_RANGE      = 60,
+
+	-- Dodge
+	DODGE_IFRAME_DURATION = 0.5,
+	DODGE_COOLDOWN        = 3.0,
+
+	-- Boss parry
+	PARRY_STUN_DURATION   = 3.0,
+
+	-- Combo coin multipliers (consecutive kills without taking damage)
+	COMBO_MULTIPLIERS = {
+		[5]   = 1.5,
+		[10]  = 2.0,
+		[50]  = 5.0,
+		[100] = 10.0,
+	},
+
+	BASE_PLAYER_HP  = 100,
+	RESPAWN_DELAY   = 3.0,
+	AI_TICK_RATE    = 0.5,
+
+	-- Defaults (used when weapon/enemy definitions are unavailable)
+	DEFAULT_ENEMY_HP             = 30,
+	DEFAULT_MAGAZINE_SIZE        = 12,
+	ABILITY_TARGET_SEARCH_RADIUS = 30, -- studs, used when no target is provided
+	RATE_LIMIT_WINDOW = 1.0,
+	RATE_LIMIT_MAX    = 15,
 }
 
---------------------------------------------------------------------------------
--- COMBAT STATE (per player, server-authoritative)
---------------------------------------------------------------------------------
+------------------------------------------------------------------------
+-- PLAYER STATE
+------------------------------------------------------------------------
 
 local playerStates = {}
 
-local function createCombatState(player)
-    return {
-        player = player,
-        
-        -- Health
-        health = CONFIG.BASE_HEALTH,
-        maxHealth = CONFIG.BASE_HEALTH,
-        lastDamageTime = 0,
-        isAlive = true,
-        
-        -- Stamina
-        stamina = CONFIG.STAMINA_MAX,
-        maxStamina = CONFIG.STAMINA_MAX,
-        lastStaminaUseTime = 0,
-        
-        -- Melee state
-        meleeComboStep = 0,             -- 0 = idle, 1-3 = combo chain position
-        lastMeleeTime = 0,
-        meleeComboResetTime = 0,
-        
-        -- Ranged state
-        currentAmmo = 0,
-        maxAmmo = 0,
-        isReloading = false,
-        reloadEndTime = 0,
-        lastFireTime = 0,
-        
-        -- Dodge state
-        isDodging = false,
-        dodgeEndTime = 0,
-        lastDodgeTime = 0,
-        hasIFrames = false,
-        iframeEndTime = 0,
-        
-        -- Parry state
-        isParrying = false,
-        parryWindowEnd = 0,
-        lastParryTime = 0,
-        
-        -- Sprint state
-        isSprinting = false,
-        
-        -- Kill combo
-        killCombo = 0,
-        lastKillTime = 0,
-        highestKillCombo = 0,
-        
-        -- Equipped weapon refs
-        equippedMelee = nil,            -- WeaponData entry
-        equippedRanged = nil,           -- WeaponData entry
-        activeSlot = "Melee",           -- "Melee" or "Ranged"
-        
-        -- Ability cooldown
-        abilityLastUsed = 0,
-        abilityCooldownEnd = 0,
-        
-        -- Stats tracking
-        totalDamageDealt = 0,
-        totalDamageTaken = 0,
-        totalKills = 0,
-        totalDeaths = 0,
-        bossesKilled = 0,
-        dodgesUsed = 0,
-        parriesLanded = 0,
-        headshots = 0,
-        
-        -- Anti-cheat
-        lastHitRegistered = 0,
-        suspiciousHitCount = 0,
-        
-        -- Combat state
-        inCombat = false,
-        combatExitTime = 0,
-        targetEnemy = nil,
-    }
+local function newPlayerState(player)
+	return {
+		player           = player,
+		hp               = CONFIG.BASE_PLAYER_HP,
+		maxHp            = CONFIG.BASE_PLAYER_HP,
+		isAlive          = true,
+
+		meleeWeaponId    = "melee_rusty_pipe",
+		rangedWeaponId   = "ranged_slingshot",
+		equippedType     = "Melee",
+
+		comboHit         = 0,
+		lastMeleeTime    = 0,
+
+		isDodging        = false,
+		dodgeEndTime     = 0,
+		dodgeCooldownEnd = 0,
+
+		abilityCooldownEnd = 0,
+
+		magazineAmmo     = 0,
+		reloading        = false,
+		reloadEndTime    = 0,
+
+		killStreak       = 0,
+		totalKills       = 0,
+		bossKills        = 0,
+		damageDone       = 0,
+
+		activeEffects    = {},
+
+		_eventCount      = 0,
+		_eventWindow     = 0,
+	}
 end
 
---------------------------------------------------------------------------------
--- INITIALIZATION
---------------------------------------------------------------------------------
+------------------------------------------------------------------------
+-- ENEMY RUNTIME STATE
+------------------------------------------------------------------------
 
-function CombatSystem.new(deps)
-    local self = setmetatable({}, CombatSystem)
-    
-    self._weaponData = deps.WeaponData
-    self._enemyData = deps.EnemyData
-    self._dayScaling = deps.DayScaling
-    self._rewards = deps.CombatRewardsManager
-    self._enemyFactory = deps.EnemyFactory
-    self._economy = deps.EconomyManager
-    self._analytics = deps.AnalyticsService
-    
-    -- Enemy registry (server-side enemy instances)
-    self._enemies = {}  -- [enemyId] = { id, type, health, maxHealth, position, ... }
-    self._nextEnemyId = 1
-    
-    -- Player states
-    self._playerStates = {}
-    
-    return self
+local enemyStates = {}
+
+local function newEnemyState(enemyId, enemyDef, dayNumber)
+	local hp = CONFIG.DEFAULT_ENEMY_HP
+	if EnemyData then
+		hp = EnemyData.GetScaledHP(enemyId, dayNumber or 1) or hp
+	elseif enemyDef then
+		hp = enemyDef.baseHP or hp
+	end
+	return {
+		id               = enemyId,
+		def              = enemyDef,
+		hp               = hp,
+		maxHp            = hp,
+		isAlive          = true,
+		dayNumber        = dayNumber or 1,
+
+		isBleeding       = false, bleedEndTime = 0, bleedDmgPerSec = 0,
+		isConfused       = false, confusedEndTime = 0,
+		isCharmed        = false, charmedEndTime  = 0,
+		isStaggered      = false, staggerEndTime  = 0,
+		isStuned         = false, stunEndTime     = 0,
+
+		isBoss           = false,
+		isTelegraphing   = false,
+		telegraphEndTime = 0,
+		isEnraged        = false,
+		enrageTime       = 0,
+		attackIndex      = 1,
+		lastAttackTime   = 0,
+	}
 end
 
-function CombatSystem:Init()
-    Players.PlayerAdded:Connect(function(player)
-        self._playerStates[player.UserId] = createCombatState(player)
-        if self._rewards then
-            self._rewards:InitPlayer(player)
-        end
-    end)
-    
-    Players.PlayerRemoving:Connect(function(player)
-        if self._rewards then
-            self._rewards:CleanupPlayer(player)
-        end
-        self._playerStates[player.UserId] = nil
-    end)
-    
-    -- Init existing players
-    for _, player in ipairs(Players:GetPlayers()) do
-        if not self._playerStates[player.UserId] then
-            self._playerStates[player.UserId] = createCombatState(player)
-            if self._rewards then
-                self._rewards:InitPlayer(player)
-            end
-        end
-    end
-    
-    -- Server tick for stamina regen, combo decay, iframe tracking
-    RunService.Heartbeat:Connect(function(dt)
-        self:_tick(dt)
-    end)
-    
-    return true
+------------------------------------------------------------------------
+-- UTILITY
+------------------------------------------------------------------------
+
+local function getComboMultiplier(killStreak)
+	local best = 1.0
+	for threshold, mult in pairs(CONFIG.COMBO_MULTIPLIERS) do
+		if killStreak >= threshold and mult > best then
+			best = mult
+		end
+	end
+	return best
 end
 
---------------------------------------------------------------------------------
--- SERVER TICK (runs every frame)
---------------------------------------------------------------------------------
-
-function CombatSystem:_tick(dt)
-    local now = tick()
-    
-    for userId, state in pairs(self._playerStates) do
-        if not state.isAlive then continue end
-        
-        -- Stamina regen
-        if now - state.lastStaminaUseTime > CONFIG.STAMINA_REGEN_DELAY then
-            local regenRate = state.inCombat and CONFIG.STAMINA_COMBAT_REGEN or CONFIG.STAMINA_OOC_REGEN
-            state.stamina = math.min(state.maxStamina, state.stamina + regenRate * dt)
-        end
-        
-        -- Health regen (only out of combat, caps at 30%)
-        if now - state.lastDamageTime > CONFIG.HEALTH_REGEN_DELAY then
-            local regenCap = state.maxHealth * CONFIG.HEALTH_REGEN_CAP
-            if state.health < regenCap then
-                state.health = math.min(regenCap, state.health + CONFIG.HEALTH_REGEN_RATE * dt)
-            end
-        end
-        
-        -- Kill combo decay
-        if state.killCombo > 0 and now - state.lastKillTime > CONFIG.KILL_COMBO_DECAY_TIME then
-            state.killCombo = 0
-        end
-        
-        -- Dodge end
-        if state.isDodging and now > state.dodgeEndTime then
-            state.isDodging = false
-        end
-        
-        -- IFrame end
-        if state.hasIFrames and now > state.iframeEndTime then
-            state.hasIFrames = false
-        end
-        
-        -- Parry window end
-        if state.isParrying and now > state.parryWindowEnd then
-            state.isParrying = false
-        end
-        
-        -- Melee combo timeout
-        if state.meleeComboStep > 0 and now > state.meleeComboResetTime then
-            state.meleeComboStep = 0
-        end
-        
-        -- Reload completion
-        if state.isReloading and now > state.reloadEndTime then
-            state.isReloading = false
-            if state.equippedRanged then
-                state.currentAmmo = state.equippedRanged.magazineSize or 0
-                state.maxAmmo = state.currentAmmo
-            end
-        end
-        
-        -- Combat exit timer (5 sec no combat = out of combat)
-        if state.inCombat and now > state.combatExitTime then
-            state.inCombat = false
-        end
-        
-        -- Sprint stamina drain
-        if state.isSprinting and state.stamina > 0 then
-            state.stamina = math.max(0, state.stamina - CONFIG.SPRINT_STAMINA_COST * dt)
-            state.lastStaminaUseTime = now
-            if state.stamina <= 0 then
-                state.isSprinting = false
-            end
-        end
-    end
+local function isRateLimited(state)
+	local now = tick()
+	if now - state._eventWindow > CONFIG.RATE_LIMIT_WINDOW then
+		state._eventCount  = 0
+		state._eventWindow = now
+	end
+	state._eventCount = state._eventCount + 1
+	return state._eventCount > CONFIG.RATE_LIMIT_MAX
 end
 
---------------------------------------------------------------------------------
--- MELEE ATTACK (tap-to-attack with 3-hit combo chain)
---------------------------------------------------------------------------------
+local _clientDispatch = nil
 
-function CombatSystem:MeleeAttack(player, targetPosition, targetEnemyId)
-    local state = self._playerStates[player.UserId]
-    if not state or not state.isAlive then return nil end
-    if state.isDodging then return nil end
-    if state.isParrying then return nil end
-    
-    local weapon = state.equippedMelee
-    if not weapon then return { error = "NO_MELEE_WEAPON" } end
-    
-    local now = tick()
-    
-    -- Rate limit (anti-cheat)
-    if now - state.lastHitRegistered < CONFIG.HIT_RATE_LIMIT then
-        return nil
-    end
-    
-    -- Combo chain logic
-    local comboStep = state.meleeComboStep
-    if comboStep >= CONFIG.MELEE_COMBO_MAX_HITS then
-        -- Full combo completed, cooldown
-        if now < state.meleeComboResetTime then
-            return nil
-        end
-        comboStep = 0
-    end
-    
-    -- Advance combo
-    comboStep = comboStep + 1
-    state.meleeComboStep = comboStep
-    state.lastMeleeTime = now
-    state.lastHitRegistered = now
-    
-    -- Set combo reset timer
-    if comboStep >= CONFIG.MELEE_COMBO_MAX_HITS then
-        state.meleeComboResetTime = now + CONFIG.MELEE_COOLDOWN_AFTER_COMBO
-    else
-        state.meleeComboResetTime = now + CONFIG.MELEE_TAP_WINDOW
-    end
-    
-    -- Get weapon stats
-    local speedInfo = self._weaponData and self._weaponData.SpeedTier[weapon.speed]
-    local rarityInfo = self._weaponData and self._weaponData.Rarity[weapon.rarity]
-    
-    -- Calculate damage
-    local baseDamage = weapon.damage or 10
-    local rarityMult = rarityInfo and rarityInfo.powerMult or 1.0
-    local finisherMult = (comboStep == CONFIG.MELEE_COMBO_MAX_HITS) and CONFIG.MELEE_COMBO_FINISHER_MULT or 1.0
-    local damage = math.floor(baseDamage * rarityMult * finisherMult)
-    
-    -- Hit detection: find enemies in frontal cone
-    local hits = self:_findEnemiesInCone(player, weapon.range or 6, CONFIG.MELEE_HIT_CONE_ANGLE)
-    
-    -- Apply damage to all enemies in cone
-    local results = {}
-    for _, enemyId in ipairs(hits) do
-        local enemy = self._enemies[enemyId]
-        if enemy then
-            local hitResult = self:_applyDamageToEnemy(player, state, enemy, damage, "melee", comboStep)
-            table.insert(results, hitResult)
-        end
-    end
-    
-    -- Apply knockback
-    local knockback = weapon.knockback or CONFIG.KNOCKBACK_BASE
-    if comboStep == CONFIG.MELEE_COMBO_MAX_HITS then
-        knockback = knockback * 1.5 -- finisher has extra knockback
-    end
-    
-    -- Enter combat
-    state.inCombat = true
-    state.combatExitTime = now + 5.0
-    
-    -- Build response packet (sent to client for VFX)
-    return {
-        type = "MELEE_HIT",
-        comboStep = comboStep,
-        isFinisher = comboStep == CONFIG.MELEE_COMBO_MAX_HITS,
-        damage = damage,
-        knockback = knockback,
-        hits = results,
-        weaponId = weapon.id,
-        screenShake = comboStep == CONFIG.MELEE_COMBO_MAX_HITS,
-        hitstop = comboStep == CONFIG.MELEE_COMBO_MAX_HITS and CONFIG.HITSTOP_FRAMES or 0,
-    }
+local function fireAllClients(event, data)
+	if _clientDispatch then _clientDispatch:FireAllClients(event, data) end
 end
 
---------------------------------------------------------------------------------
--- RANGED ATTACK (aim-assist for mobile, precision for PC)
---------------------------------------------------------------------------------
-
-function CombatSystem:RangedAttack(player, aimDirection, aimOrigin)
-    local state = self._playerStates[player.UserId]
-    if not state or not state.isAlive then return nil end
-    if state.isDodging then return nil end
-    if state.isReloading then return nil end
-    
-    local weapon = state.equippedRanged
-    if not weapon then return { error = "NO_RANGED_WEAPON" } end
-    
-    local now = tick()
-    
-    -- Fire rate check
-    local fireInterval = 1.0 / (weapon.fireRate or 1.0)
-    if now - state.lastFireTime < fireInterval then
-        return nil
-    end
-    
-    -- Ammo check
-    if state.currentAmmo <= 0 then
-        self:StartReload(player)
-        return { type = "EMPTY_CLIP", needsReload = true }
-    end
-    
-    -- Rate limit
-    if now - state.lastHitRegistered < CONFIG.HIT_RATE_LIMIT then
-        return nil
-    end
-    
-    state.lastFireTime = now
-    state.lastHitRegistered = now
-    state.currentAmmo = state.currentAmmo - 1
-    
-    -- Aim assist (mobile-first)
-    local finalDirection = aimDirection
-    if weapon.aimAssist then
-        finalDirection = self:_applyAimAssist(aimOrigin, aimDirection, weapon.range or 50)
-    end
-    
-    -- Raycast for hit detection
-    local hitEnemy, hitPosition, hitDistance, isHeadshot = self:_raycastForEnemy(aimOrigin, finalDirection, weapon.range or 50)
-    
-    if not hitEnemy then
-        -- Enter combat state even on miss
-        state.inCombat = true
-        state.combatExitTime = now + 5.0
-        return {
-            type = "RANGED_MISS",
-            weaponId = weapon.id,
-            ammoRemaining = state.currentAmmo,
-        }
-    end
-    
-    -- Calculate damage with falloff
-    local baseDamage = weapon.damage or 10
-    local rarityInfo = self._weaponData and self._weaponData.Rarity[weapon.rarity]
-    local rarityMult = rarityInfo and rarityInfo.powerMult or 1.0
-    local headshotMult = isHeadshot and CONFIG.RANGED_HEADSHOT_MULT or CONFIG.RANGED_BODYSHOT_MULT
-    local falloffMult = self:_calculateFalloff(hitDistance)
-    
-    local damage = math.floor(baseDamage * rarityMult * headshotMult * falloffMult)
-    
-    -- Apply damage
-    local hitResult = self:_applyDamageToEnemy(player, state, hitEnemy, damage, "ranged", 0)
-    
-    if isHeadshot then
-        state.headshots = state.headshots + 1
-    end
-    
-    state.inCombat = true
-    state.combatExitTime = now + 5.0
-    
-    return {
-        type = "RANGED_HIT",
-        damage = damage,
-        isHeadshot = isHeadshot,
-        hitPosition = hitPosition,
-        hitDistance = hitDistance,
-        falloffMult = falloffMult,
-        weaponId = weapon.id,
-        ammoRemaining = state.currentAmmo,
-        enemyKilled = hitResult.killed,
-        hitResult = hitResult,
-        screenShake = isHeadshot,
-    }
+local function fireClient(player, event, data)
+	if _clientDispatch then _clientDispatch:FireClient(player, event, data) end
 end
 
-function CombatSystem:StartReload(player)
-    local state = self._playerStates[player.UserId]
-    if not state or not state.isAlive then return false end
-    if state.isReloading then return false end
-    
-    local weapon = state.equippedRanged
-    if not weapon then return false end
-    if state.currentAmmo >= (weapon.magazineSize or 0) then return false end
-    
-    state.isReloading = true
-    state.reloadEndTime = tick() + (weapon.reloadTime or 2.0)
-    
-    return true
-end
-
---------------------------------------------------------------------------------
--- DODGE ROLL
---------------------------------------------------------------------------------
-
-function CombatSystem:DodgeRoll(player, direction)
-    local state = self._playerStates[player.UserId]
-    if not state or not state.isAlive then return nil end
-    if state.isDodging then return nil end
-    
-    local now = tick()
-    if now - state.lastDodgeTime < CONFIG.DODGE_COOLDOWN then
-        return nil
-    end
-    
-    if state.stamina < CONFIG.DODGE_STAMINA_COST then
-        return { error = "NO_STAMINA" }
-    end
-    
-    -- Consume stamina
-    state.stamina = state.stamina - CONFIG.DODGE_STAMINA_COST
-    state.lastStaminaUseTime = now
-    
-    -- Activate dodge
-    state.isDodging = true
-    state.dodgeEndTime = now + CONFIG.DODGE_DURATION
-    state.lastDodgeTime = now
-    state.dodgesUsed = state.dodgesUsed + 1
-    
-    -- Activate iframes
-    state.hasIFrames = true
-    state.iframeEndTime = now + CONFIG.DODGE_IFRAMES
-    
-    return {
-        type = "DODGE_ROLL",
-        direction = direction,
-        distance = CONFIG.DODGE_DISTANCE,
-        duration = CONFIG.DODGE_DURATION,
-        staminaRemaining = state.stamina,
-    }
-end
-
---------------------------------------------------------------------------------
--- BOSS PARRY
---------------------------------------------------------------------------------
-
-function CombatSystem:AttemptParry(player)
-    local state = self._playerStates[player.UserId]
-    if not state or not state.isAlive then return nil end
-    
-    local now = tick()
-    if now - state.lastParryTime < CONFIG.PARRY_COOLDOWN then
-        return nil
-    end
-    
-    state.isParrying = true
-    state.parryWindowEnd = now + CONFIG.PARRY_WINDOW
-    state.lastParryTime = now
-    
-    return {
-        type = "PARRY_START",
-        windowDuration = CONFIG.PARRY_WINDOW,
-    }
-end
-
-function CombatSystem:_checkParryOnBossAttack(state, bossEnemy)
-    if not state.isParrying then
-        return false
-    end
-    
-    local now = tick()
-    if now > state.parryWindowEnd then
-        state.isParrying = false
-        return false
-    end
-    
-    -- Successful parry
-    state.isParrying = false
-    state.parriesLanded = state.parriesLanded + 1
-    
-    -- Stun the boss
-    bossEnemy.isStunned = true
-    bossEnemy.stunEndTime = now + CONFIG.PARRY_STUN_DURATION
-    bossEnemy.damageMult = CONFIG.PARRY_DAMAGE_MULT -- takes extra damage while stunned
-    
-    return true
-end
-
---------------------------------------------------------------------------------
--- WEAPON ABILITY (Rare+ weapons have special abilities)
---------------------------------------------------------------------------------
-
-function CombatSystem:UseAbility(player)
-    local state = self._playerStates[player.UserId]
-    if not state or not state.isAlive then return nil end
-    
-    local weapon = (state.activeSlot == "Melee") and state.equippedMelee or state.equippedRanged
-    if not weapon or not weapon.ability then
-        return { error = "NO_ABILITY" }
-    end
-    
-    local now = tick()
-    if now < state.abilityCooldownEnd then
-        return { error = "ON_COOLDOWN", remaining = state.abilityCooldownEnd - now }
-    end
-    
-    -- Get cooldown from weapon data
-    local cooldown = 10
-    if self._weaponData then
-        cooldown = self._weaponData.GetAbilityCooldown(weapon.id) or 10
-    end
-    
-    state.abilityLastUsed = now
-    state.abilityCooldownEnd = now + cooldown
-    
-    -- Execute ability based on type
-    local abilityResult = self:_executeAbility(player, state, weapon)
-    
-    return {
-        type = "ABILITY_USED",
-        abilityName = weapon.ability,
-        abilityDesc = weapon.abilityDesc,
-        cooldown = cooldown,
-        result = abilityResult,
-    }
-end
-
-function CombatSystem:_executeAbility(player, state, weapon)
-    local abilityName = weapon.ability
-    
-    -- DashSlash (Katana): dash forward, damage all enemies in path
-    if abilityName == "DashSlash" then
-        local enemies = self:_findEnemiesInLine(player, 15, 4) -- 15 studs forward, 4 wide
-        local damage = math.floor((weapon.damage or 28) * 2.0)
-        local kills = 0
-        for _, enemyId in ipairs(enemies) do
-            local enemy = self._enemies[enemyId]
-            if enemy then
-                local result = self:_applyDamageToEnemy(player, state, enemy, damage, "ability", 0)
-                if result.killed then kills = kills + 1 end
-            end
-        end
-        return { type = "DASH_SLASH", enemiesHit = #enemies, kills = kills, distance = 15 }
-    
-    -- Shred (Chainsaw): rapid hits over 2 seconds
-    elseif abilityName == "Shred" then
-        local target = state.targetEnemy
-        if not target then return { type = "NO_TARGET" } end
-        local tickDamage = 5
-        local totalTicks = 10
-        -- Schedule damage ticks (server-side)
-        for i = 1, totalTicks do
-            task.delay(i * 0.2, function()
-                if self._enemies[target.id] and state.isAlive then
-                    self:_applyDamageToEnemy(player, state, self._enemies[target.id], tickDamage, "ability", 0)
-                end
-            end)
-        end
-        return { type = "SHRED", totalDamage = tickDamage * totalTicks, duration = 2.0 }
-    
-    -- ToiletTornado (Skibidi Blade): AoE spin attack
-    elseif abilityName == "ToiletTornado" then
-        local enemies = self:_findEnemiesInRadius(player, 12)
-        local damage = 30
-        local kills = 0
-        for _, enemyId in ipairs(enemies) do
-            local enemy = self._enemies[enemyId]
-            if enemy then
-                local result = self:_applyDamageToEnemy(player, state, enemy, damage, "ability", 0)
-                if result.killed then kills = kills + 1 end
-            end
-        end
-        return { type = "AOE_SPIN", radius = 12, enemiesHit = #enemies, kills = kills }
-    
-    -- OnePunch (Sigma Fist): massive single-target
-    elseif abilityName == "OnePunch" then
-        local target = state.targetEnemy
-        if not target or not self._enemies[target.id] then return { type = "NO_TARGET" } end
-        local damage = math.floor((weapon.damage or 55) * 5.0)
-        local result = self:_applyDamageToEnemy(player, state, self._enemies[target.id], damage, "ability", 0)
-        return { type = "ONE_PUNCH", damage = damage, killed = result.killed }
-    
-    -- Explosion (Ohio Cannon): AoE ranged explosion
-    elseif abilityName == "Explosion" then
-        local enemies = self:_findEnemiesInRadius(player, 15)
-        local damage = 30
-        local kills = 0
-        for _, enemyId in ipairs(enemies) do
-            local enemy = self._enemies[enemyId]
-            if enemy then
-                local result = self:_applyDamageToEnemy(player, state, enemy, damage, "ability", 0)
-                if result.killed then kills = kills + 1 end
-            end
-        end
-        return { type = "EXPLOSION", radius = 15, enemiesHit = #enemies, kills = kills }
-    
-    -- CharmBeam (Rizz Ray): enemies fight each other
-    elseif abilityName == "CharmBeam" then
-        local enemies = self:_findEnemiesInCone(player, 45, 30)
-        for _, enemyId in ipairs(enemies) do
-            local enemy = self._enemies[enemyId]
-            if enemy then
-                enemy.isCharmed = true
-                enemy.charmEndTime = tick() + 5.0
-            end
-        end
-        return { type = "CHARM_BEAM", enemiesCharmed = #enemies, duration = 5.0 }
-    
-    -- BurstFire (AR-15): 3 rapid shots
-    elseif abilityName == "BurstFire" then
-        local target = state.targetEnemy
-        if not target or not self._enemies[target.id] then return { type = "NO_TARGET" } end
-        local shotDamage = weapon.damage or 15
-        local totalDamage = 0
-        for i = 1, 3 do
-            if self._enemies[target.id] then
-                local result = self:_applyDamageToEnemy(player, state, self._enemies[target.id], shotDamage, "ability", 0)
-                totalDamage = totalDamage + shotDamage
-                if result.killed then break end
-            end
-        end
-        return { type = "BURST_FIRE", shots = 3, totalDamage = totalDamage }
-    
-    -- Headshot (Sniper): guaranteed crit
-    elseif abilityName == "Headshot" then
-        local target = state.targetEnemy
-        if not target or not self._enemies[target.id] then return { type = "NO_TARGET" } end
-        local damage = math.floor((weapon.damage or 60) * CONFIG.RANGED_HEADSHOT_MULT)
-        local result = self:_applyDamageToEnemy(player, state, self._enemies[target.id], damage, "ability", 0)
-        state.headshots = state.headshots + 1
-        return { type = "GUARANTEED_CRIT", damage = damage, killed = result.killed }
-    
-    -- Bleed (Machete): DoT
-    elseif abilityName == "Bleed" then
-        local target = state.targetEnemy
-        if not target or not self._enemies[target.id] then return { type = "NO_TARGET" } end
-        local dotDamage = 3
-        local dotDuration = 4
-        for i = 1, dotDuration do
-            task.delay(i, function()
-                if self._enemies[target.id] and state.isAlive then
-                    self:_applyDamageToEnemy(player, state, self._enemies[target.id], dotDamage, "ability_dot", 0)
-                end
-            end)
-        end
-        return { type = "BLEED", dps = dotDamage, duration = dotDuration }
-    
-    -- Cleave (Fire Axe): hit 2 enemies in arc
-    elseif abilityName == "Cleave" then
-        local enemies = self:_findEnemiesInCone(player, weapon.range or 8, 90)
-        local damage = math.floor((weapon.damage or 22) * 1.5)
-        local maxTargets = 2
-        local kills = 0
-        for i, enemyId in ipairs(enemies) do
-            if i > maxTargets then break end
-            local enemy = self._enemies[enemyId]
-            if enemy then
-                local result = self:_applyDamageToEnemy(player, state, enemy, damage, "ability", 0)
-                if result.killed then kills = kills + 1 end
-            end
-        end
-        return { type = "CLEAVE", enemiesHit = math.min(#enemies, maxTargets), kills = kills }
-    
-    -- Spread (Shotgun): cone AoE
-    elseif abilityName == "Spread" then
-        local enemies = self:_findEnemiesInCone(player, 10, 45)
-        local damage = weapon.damage or 25
-        local kills = 0
-        for _, enemyId in ipairs(enemies) do
-            local enemy = self._enemies[enemyId]
-            if enemy then
-                local result = self:_applyDamageToEnemy(player, state, enemy, damage, "ability", 0)
-                if result.killed then kills = kills + 1 end
-            end
-        end
-        return { type = "SPREAD_SHOT", enemiesHit = #enemies, kills = kills }
-    
-    -- Confuse (Brainrot Bomb throwable ability)
-    elseif abilityName == "Confuse" then
-        local enemies = self:_findEnemiesInRadius(player, 15)
-        for _, enemyId in ipairs(enemies) do
-            local enemy = self._enemies[enemyId]
-            if enemy then
-                enemy.isConfused = true
-                enemy.confuseEndTime = tick() + 5.0
-            end
-        end
-        return { type = "CONFUSE", enemiesConfused = #enemies, duration = 5.0 }
-    end
-    
-    return { type = "UNKNOWN_ABILITY" }
-end
-
---------------------------------------------------------------------------------
+------------------------------------------------------------------------
 -- DAMAGE APPLICATION (server-authoritative)
---------------------------------------------------------------------------------
+------------------------------------------------------------------------
 
-function CombatSystem:_applyDamageToEnemy(player, state, enemy, damage, source, comboStep)
-    if not enemy or enemy.health <= 0 then
-        return { killed = false, damage = 0 }
-    end
-    
-    -- Boss stun damage multiplier
-    if enemy.isStunned and enemy.damageMult then
-        damage = math.floor(damage * enemy.damageMult)
-    end
-    
-    -- Apply damage
-    enemy.health = enemy.health - damage
-    state.totalDamageDealt = state.totalDamageDealt + damage
-    
-    local killed = enemy.health <= 0
-    
-    if killed then
-        local now = tick()
-        state.totalKills = state.totalKills + 1
-        state.killCombo = state.killCombo + 1
-        state.lastKillTime = now
-        
-        if state.killCombo > state.highestKillCombo then
-            state.highestKillCombo = state.killCombo
-        end
-        
-        local isBoss = enemy.type == "SigmaBoss"
-        if isBoss then
-            state.bossesKilled = state.bossesKilled + 1
-        end
-        
-        -- Process kill rewards
-        if self._rewards then
-            self._rewards:ProcessKill(
-                player,
-                enemy.type,
-                enemy.isElite or false,
-                isBoss,
-                enemy.dayNumber or 1,
-                0 -- prestigeLevel
-            )
-        end
-        
-        -- Remove from enemy registry
-        self._enemies[enemy.id] = nil
-    end
-    
-    return {
-        killed = killed,
-        damage = damage,
-        remainingHP = math.max(0, enemy.health),
-        killCombo = state.killCombo,
-        source = source,
-    }
+local function damageEnemy(attackerPlayer, enemyState, rawDamage, isKnockback)
+	if not enemyState or not enemyState.isAlive then return 0 end
+	local damage = math.max(0, math.floor(rawDamage))
+	enemyState.hp = enemyState.hp - damage
+
+	fireAllClients("EnemyHit", {
+		enemyId   = enemyState.id,
+		damage    = damage,
+		isCrit    = false,
+		knockback = isKnockback or false,
+	})
+
+	if attackerPlayer then
+		fireClient(attackerPlayer, "ScreenShake", {
+			intensity = math.clamp(damage / 50, 0.1, 1.0),
+		})
+	end
+
+	if enemyState.hp <= 0 then
+		CombatSystem._defeatEnemy(attackerPlayer, enemyState)
+	end
+	return damage
 end
 
---------------------------------------------------------------------------------
--- PLAYER TAKES DAMAGE (from enemy attacks)
---------------------------------------------------------------------------------
+local function damagePlayer(targetPlayer, amount, sourceEnemyId)
+	local state = playerStates[targetPlayer]
+	if not state or not state.isAlive then return end
+	if state.isDodging and tick() < state.dodgeEndTime then return end
 
-function CombatSystem:DamagePlayer(player, damage, source, attackerEnemy)
-    local state = self._playerStates[player.UserId]
-    if not state or not state.isAlive then return nil end
-    
-    -- IFrame check (dodge roll invincibility)
-    if state.hasIFrames then
-        return { type = "DODGED", damage = 0 }
-    end
-    
-    -- Parry check (for boss attacks)
-    if attackerEnemy and attackerEnemy.type == "SigmaBoss" then
-        if self:_checkParryOnBossAttack(state, attackerEnemy) then
-            return {
-                type = "PARRIED",
-                damage = 0,
-                bossStunned = true,
-                stunDuration = CONFIG.PARRY_STUN_DURATION,
-            }
-        end
-    end
-    
-    -- Apply damage
-    state.health = math.max(0, state.health - damage)
-    state.totalDamageTaken = state.totalDamageTaken + damage
-    state.lastDamageTime = tick()
-    state.inCombat = true
-    state.combatExitTime = tick() + 5.0
-    
-    -- Break kill combo on damage
-    if self._rewards then
-        self._rewards:BreakCombo(player)
-    end
-    
-    -- Death check
-    local died = state.health <= 0
-    if died then
-        state.isAlive = false
-        state.totalDeaths = state.totalDeaths + 1
-        
-        -- Death penalty
-        if self._rewards then
-            self._rewards:ProcessDeath(player)
-        end
-    end
-    
-    return {
-        type = died and "PLAYER_DIED" or "PLAYER_HIT",
-        damage = damage,
-        health = state.health,
-        maxHealth = state.maxHealth,
-        died = died,
-        source = source,
-    }
+	state.hp = math.max(0, state.hp - amount)
+
+	if state.killStreak > 0 then
+		state.killStreak = 0
+		fireClient(targetPlayer, "ComboReset", {})
+	end
+
+	fireClient(targetPlayer, "PlayerHit", {
+		damage    = amount,
+		currentHp = state.hp,
+		maxHp     = state.maxHp,
+		source    = sourceEnemyId,
+	})
+
+	if state.hp <= 0 then
+		CombatSystem._defeatPlayer(targetPlayer)
+	end
 end
 
-function CombatSystem:RespawnPlayer(player)
-    local state = self._playerStates[player.UserId]
-    if not state then return false end
-    
-    state.health = state.maxHealth
-    state.stamina = state.maxStamina
-    state.isAlive = true
-    state.isDodging = false
-    state.hasIFrames = false
-    state.isParrying = false
-    state.isReloading = false
-    state.meleeComboStep = 0
-    state.killCombo = 0
-    state.inCombat = false
-    
-    -- Reload ranged weapon
-    if state.equippedRanged then
-        state.currentAmmo = state.equippedRanged.magazineSize or 0
-    end
-    
-    return true
+------------------------------------------------------------------------
+-- DEFEAT HANDLERS
+------------------------------------------------------------------------
+
+function CombatSystem._defeatEnemy(killerPlayer, enemyState)
+	if not enemyState.isAlive then return end
+	enemyState.isAlive = false
+
+	local dayNumber   = enemyState.dayNumber or 1
+	local killerState = killerPlayer and playerStates[killerPlayer]
+	local comboMult   = 1.0
+
+	if killerState then
+		killerState.killStreak = killerState.killStreak + 1
+		killerState.totalKills = killerState.totalKills + 1
+		if enemyState.isBoss then killerState.bossKills = killerState.bossKills + 1 end
+		comboMult = getComboMultiplier(killerState.killStreak)
+
+		local streak = killerState.killStreak
+		if CONFIG.COMBO_MULTIPLIERS[streak] then
+			fireAllClients("ComboMilestone", {
+				player = killerPlayer.Name,
+				streak = streak,
+				mult   = CONFIG.COMBO_MULTIPLIERS[streak],
+			})
+		end
+	end
+
+	if CombatRewardsManager then
+		pcall(CombatRewardsManager.OnEnemyKilled, killerPlayer, {
+			enemyId   = enemyState.id,
+			isBoss    = enemyState.isBoss,
+			dayNumber = dayNumber,
+			comboMult = comboMult,
+		})
+	end
+
+	fireAllClients("EnemyDied", {
+		enemyId   = enemyState.id,
+		killedBy  = killerPlayer and killerPlayer.Name or "ENV",
+		comboMult = comboMult,
+	})
+
+	-- BrainrotMutant split on defeat
+	local def = enemyState.def
+	if def and def.specialAbility == "Split" and def.splitCount then
+		if EnemyFactory and type(EnemyFactory.SpawnSplitMinis) == "function" then
+			pcall(EnemyFactory.SpawnSplitMinis, enemyState, def)
+		end
+	end
+
+	-- Boss post-defeat gacha spin
+	if enemyState.isBoss and killerPlayer then
+		fireClient(killerPlayer, "BossGachaSpinStart", {
+			bossId = enemyState.id,
+			day    = dayNumber,
+		})
+	end
+
+	enemyStates[enemyState.id] = nil
 end
 
---------------------------------------------------------------------------------
--- ENEMY MANAGEMENT (server-side registry)
---------------------------------------------------------------------------------
+function CombatSystem._defeatPlayer(player)
+	local state = playerStates[player]
+	if not state or not state.isAlive then return end
+	state.isAlive    = false
+	state.killStreak = 0
+	state.hp         = 0
+	fireAllClients("PlayerDied", { player = player.Name })
 
-function CombatSystem:SpawnEnemy(enemyDef, dayNumber, position, isElite)
-    local id = self._nextEnemyId
-    self._nextEnemyId = id + 1
-    
-    -- Scale stats by day
-    local scaledHP = enemyDef.baseHP or 30
-    local scaledDamage = enemyDef.baseDamage or 5
-    local scaledSpeed = enemyDef.baseSpeed or 8
-    
-    if self._enemyData then
-        scaledHP = self._enemyData.GetScaledHP(enemyDef.id, dayNumber) or scaledHP
-        scaledDamage = self._enemyData.GetScaledDamage(enemyDef.id, dayNumber) or scaledDamage
-    end
-    
-    -- Elite modifier
-    if isElite then
-        scaledHP = math.floor(scaledHP * 2.0)
-        scaledDamage = math.floor(scaledDamage * 1.5)
-    end
-    
-    local enemy = {
-        id = id,
-        defId = enemyDef.id,
-        type = enemyDef.type,
-        name = enemyDef.name,
-        health = scaledHP,
-        maxHealth = scaledHP,
-        damage = scaledDamage,
-        speed = scaledSpeed,
-        position = position,
-        isElite = isElite,
-        dayNumber = dayNumber,
-        
-        -- Status effects
-        isStunned = false,
-        stunEndTime = 0,
-        isCharmed = false,
-        charmEndTime = 0,
-        isConfused = false,
-        confuseEndTime = 0,
-        damageMult = 1.0,
-        
-        -- Special ability
-        specialAbility = enemyDef.specialAbility,
-    }
-    
-    self._enemies[id] = enemy
-    return enemy
+	task.delay(CONFIG.RESPAWN_DELAY, function()
+		if playerStates[player] then
+			CombatSystem.RespawnPlayer(player)
+		end
+	end)
 end
 
-function CombatSystem:SpawnBoss(bossDef, dayNumber, position, playerCount)
-    local id = self._nextEnemyId
-    self._nextEnemyId = id + 1
-    
-    local scaledHP = bossDef.baseHP or 200
-    if self._enemyData then
-        scaledHP = self._enemyData.GetBossHP(bossDef.id, dayNumber, playerCount) or scaledHP
-    end
-    
-    local boss = {
-        id = id,
-        defId = bossDef.id,
-        type = bossDef.type,
-        name = bossDef.name,
-        health = scaledHP,
-        maxHealth = scaledHP,
-        damage = bossDef.baseDamage or 20,
-        speed = bossDef.baseSpeed or 6,
-        position = position,
-        isElite = false,
-        dayNumber = dayNumber,
-        
-        -- Boss-specific
-        isBoss = true,
-        telegraphTime = bossDef.telegraphTime or 1.5,
-        parryWindow = bossDef.parryWindow or 0.5,
-        enrageTimer = bossDef.enrageTimer or 120,
-        enrageDmgMult = bossDef.enrageDmgMult or 1.5,
-        enrageSpeedMult = bossDef.enrageSpeedMult or 1.3,
-        attackPatterns = bossDef.attackPatterns or {},
-        currentPatternIndex = 1,
-        
-        -- Status
-        isStunned = false,
-        stunEndTime = 0,
-        damageMult = 1.0,
-        isEnraged = false,
-        spawnTime = tick(),
-    }
-    
-    self._enemies[id] = boss
-    return boss
+function CombatSystem.RespawnPlayer(player)
+	local state = playerStates[player]
+	if not state then return end
+	state.hp               = state.maxHp
+	state.isAlive          = true
+	state.killStreak       = 0
+	state.isDodging        = false
+	state.dodgeEndTime     = 0
+	state.dodgeCooldownEnd = 0
+	state.comboHit         = 0
+	state.lastMeleeTime    = 0
+	state.activeEffects    = {}
+	fireClient(player, "PlayerRespawned", { currentHp = state.hp, maxHp = state.maxHp })
 end
 
---------------------------------------------------------------------------------
--- WEAPON EQUIP
---------------------------------------------------------------------------------
+------------------------------------------------------------------------
+-- WEAPON ABILITY DISPATCHER
+------------------------------------------------------------------------
 
-function CombatSystem:EquipWeapon(player, weaponId, slot)
-    local state = self._playerStates[player.UserId]
-    if not state then return false end
-    
-    if not self._weaponData then return false end
-    
-    local weapon = self._weaponData.GetWeapon(weaponId)
-    if not weapon then return false end
-    
-    if slot == "Melee" or weapon.weaponType == "Melee" then
-        state.equippedMelee = weapon
-    elseif slot == "Ranged" or weapon.weaponType == "Ranged" then
-        state.equippedRanged = weapon
-        state.currentAmmo = weapon.magazineSize or 0
-        state.maxAmmo = state.currentAmmo
-    end
-    
-    return true
+local function applyWeaponAbility(attackerState, enemyState, weaponDef)
+	if not weaponDef or not weaponDef.ability then return 0 end
+	local now = tick()
+	if now < attackerState.abilityCooldownEnd then return 0 end
+
+	local cooldown = (WeaponData and WeaponData.GetAbilityCooldown(weaponDef.id)) or 0
+	attackerState.abilityCooldownEnd = now + cooldown
+
+	local ability = weaponDef.ability
+	local addDmg  = 0
+
+	if ability == "Bleed" then
+		enemyState.isBleeding     = true
+		enemyState.bleedEndTime   = now + 4
+		enemyState.bleedDmgPerSec = 3
+
+	elseif ability == "Cleave" or ability == "DashSlash" then
+		addDmg = weaponDef.damage
+
+	elseif ability == "Shred" then
+		task.spawn(function()
+			for _ = 1, 10 do
+				if enemyState.isAlive then
+					enemyState.hp = enemyState.hp - 5
+					fireAllClients("EnemyHit", { enemyId = enemyState.id, damage = 5, isCrit = false })
+					if enemyState.hp <= 0 then
+						CombatSystem._defeatEnemy(nil, enemyState)
+						break
+					end
+				end
+				task.wait(0.2)
+			end
+		end)
+
+	elseif ability == "ToiletTornado" then
+		addDmg = 30
+
+	elseif ability == "OnePunch" then
+		if enemyState.def and enemyState.def.type == "SkibidiZombie" then
+			addDmg = enemyState.hp + 1
+		else
+			addDmg = weaponDef.damage * 2
+		end
+		fireAllClients("ScreenDistort", { intensity = 1.0 })
+
+	elseif ability == "BurstFire" then
+		addDmg = weaponDef.damage * 2
+
+	elseif ability == "Headshot" or ability == "Explosion" or ability == "Spread" then
+		addDmg = weaponDef.damage
+
+	elseif ability == "CharmBeam" then
+		enemyState.isCharmed      = true
+		enemyState.charmedEndTime = now + 5
+
+	elseif ability == "Confuse" then
+		enemyState.isConfused      = true
+		enemyState.confusedEndTime = now + 5
+	end
+
+	return addDmg
 end
 
-function CombatSystem:SwitchSlot(player, slot)
-    local state = self._playerStates[player.UserId]
-    if not state then return false end
-    
-    if slot ~= "Melee" and slot ~= "Ranged" then return false end
-    state.activeSlot = slot
-    return true
+------------------------------------------------------------------------
+-- ACTION HANDLERS (routed from EventBus)
+------------------------------------------------------------------------
+
+function CombatSystem.OnMeleeAttack(player, data)
+	local state = playerStates[player]
+	if not state or not state.isAlive then return end
+	if isRateLimited(state) then return end
+
+	local now      = tick()
+	local weaponId = (type(data) == "table" and type(data.weaponId) == "string")
+		and data.weaponId or state.meleeWeaponId
+	local targetId = type(data) == "table" and data.targetEnemyId
+
+	if now - state.lastMeleeTime > CONFIG.MELEE_HIT_WINDOW then
+		state.comboHit = 0
+	end
+	state.comboHit      = (state.comboHit % CONFIG.MELEE_COMBO_HITS) + 1
+	state.lastMeleeTime = now
+
+	local weaponDef  = WeaponData and WeaponData.GetWeapon(weaponId)
+	local baseDamage = weaponDef and weaponDef.damage or 10
+	local hitMult    = CONFIG.MELEE_DAMAGE_MULT[state.comboHit] or 1.0
+	local damage     = math.floor(baseDamage * hitMult)
+	local isThirdHit = state.comboHit == CONFIG.MELEE_COMBO_HITS
+
+	local character = player.Character
+	local rootPart  = character and character:FindFirstChild("HumanoidRootPart")
+	local range     = (weaponDef and weaponDef.range or 8) * 1.3
+
+	local enemyState = targetId and enemyStates[targetId]
+	if enemyState and enemyState.isAlive then
+		-- Distance validation (anti-cheat)
+		if rootPart and EnemyFactory and EnemyFactory.GetEnemyPosition then
+			local ePos = EnemyFactory.GetEnemyPosition(targetId)
+			if ePos and (rootPart.Position - ePos).Magnitude > range then return end
+		end
+		damageEnemy(player, enemyState, damage, isThirdHit)
+		if isThirdHit then
+			fireAllClients("EnemyKnockback", { enemyId = targetId, force = CONFIG.MELEE_KNOCKBACK_FORCE })
+		end
+	else
+		-- Sweep nearest enemy within range
+		if rootPart and EnemyFactory and EnemyFactory.GetEnemiesInRadius then
+			local nearby = EnemyFactory.GetEnemiesInRadius(rootPart.Position, range)
+			if nearby then
+				for _, eid in ipairs(nearby) do
+					local es = enemyStates[eid]
+					if es and es.isAlive then
+						damageEnemy(player, es, damage, isThirdHit)
+						if isThirdHit then
+							fireAllClients("EnemyKnockback", { enemyId = eid, force = CONFIG.MELEE_KNOCKBACK_FORCE })
+						end
+						break
+					end
+				end
+			end
+		end
+	end
+
+	fireClient(player, "HapticPulse", { intensity = isThirdHit and 1.0 or 0.5 })
 end
 
---------------------------------------------------------------------------------
--- SPRINT
---------------------------------------------------------------------------------
+function CombatSystem.OnRangedFire(player, data)
+	local state = playerStates[player]
+	if not state or not state.isAlive then return end
+	if isRateLimited(state) then return end
+	if type(data) ~= "table" then return end
 
-function CombatSystem:SetSprinting(player, sprinting)
-    local state = self._playerStates[player.UserId]
-    if not state or not state.isAlive then return false end
-    
-    if sprinting and state.stamina <= 0 then return false end
-    state.isSprinting = sprinting
-    return true
+	local weaponId  = type(data.weaponId) == "string" and data.weaponId or state.rangedWeaponId
+	local weaponDef = WeaponData and WeaponData.GetWeapon(weaponId)
+	if not weaponDef then return end
+
+	if state.magazineAmmo <= 0 then
+		-- Auto-initiate reload so the player is never left stuck
+		CombatSystem.OnReload(player, { weaponId = weaponId })
+		return
+	end
+	state.magazineAmmo = state.magazineAmmo - 1
+
+	local dirX = type(data.directionX) == "number" and data.directionX or 0
+	local dirY = type(data.directionY) == "number" and data.directionY or 0
+	local dirZ = type(data.directionZ) == "number" and data.directionZ or 1
+
+	local character = player.Character
+	local rootPart  = character and character:FindFirstChild("HumanoidRootPart")
+	local hitEnemy  = nil
+
+	if rootPart and weaponDef.aimAssist and EnemyFactory then
+		local origin  = rootPart.Position
+		local dir     = Vector3.new(dirX, dirY, dirZ).Unit
+		local bestDot = math.cos(math.rad(CONFIG.AIM_ASSIST_ANGLE))
+		local nearby  = EnemyFactory.GetEnemiesInRadius
+			and EnemyFactory.GetEnemiesInRadius(origin, CONFIG.AIM_ASSIST_RANGE)
+
+		if nearby then
+			for _, eid in ipairs(nearby) do
+				local es = enemyStates[eid]
+				if es and es.isAlive and EnemyFactory.GetEnemyPosition then
+					local ePos = EnemyFactory.GetEnemyPosition(eid)
+					if ePos then
+						local toEnemy = (ePos - origin).Unit
+						local dot = dir:Dot(toEnemy)
+						if dot >= bestDot then
+							bestDot  = dot
+							hitEnemy = es
+						end
+					end
+				end
+			end
+		end
+	end
+
+	if hitEnemy then
+		damageEnemy(player, hitEnemy, weaponDef.damage, false)
+	else
+		fireClient(player, "ShotMissed", { weaponId = weaponId })
+	end
+
+	fireClient(player, "RangedFired", {
+		weaponId = weaponId,
+		ammoLeft = state.magazineAmmo,
+		hit      = hitEnemy ~= nil,
+	})
 end
 
---------------------------------------------------------------------------------
--- HIT DETECTION HELPERS (server-side spatial queries)
---------------------------------------------------------------------------------
+function CombatSystem.OnReload(player, data)
+	local state = playerStates[player]
+	if not state or not state.isAlive or state.reloading then return end
 
-function CombatSystem:_findEnemiesInCone(player, range, angleDegs)
-    -- Server-side: check all enemies within range and angle of player facing
-    local results = {}
-    local character = player.Character
-    if not character then return results end
-    
-    local root = character:FindFirstChild("HumanoidRootPart")
-    if not root then return results end
-    
-    local origin = root.Position
-    local forward = root.CFrame.LookVector
-    local halfAngle = math.rad(angleDegs / 2)
-    
-    for id, enemy in pairs(self._enemies) do
-        if enemy.health > 0 and enemy.position then
-            local toEnemy = (enemy.position - origin)
-            local dist = toEnemy.Magnitude
-            if dist <= range then
-                local angle = math.acos(math.clamp(forward:Dot(toEnemy.Unit), -1, 1))
-                if angle <= halfAngle then
-                    table.insert(results, id)
-                end
-            end
-        end
-    end
-    
-    return results
+	local weaponId  = type(data) == "table" and data.weaponId or state.rangedWeaponId
+	local weaponDef = WeaponData and WeaponData.GetWeapon(weaponId)
+	if not weaponDef then return end
+
+	local reloadTime = weaponDef.reloadTime or 1.5
+	state.reloading     = true
+	state.reloadEndTime = tick() + reloadTime
+
+	fireClient(player, "ReloadStart", { weaponId = weaponId, duration = reloadTime })
+
+	task.delay(reloadTime, function()
+		if playerStates[player] then
+			state.reloading    = false
+			state.magazineAmmo = weaponDef.magazineSize or CONFIG.DEFAULT_MAGAZINE_SIZE
+			fireClient(player, "ReloadComplete", { weaponId = weaponId, ammo = state.magazineAmmo })
+		end
+	end)
 end
 
-function CombatSystem:_findEnemiesInRadius(player, radius)
-    local results = {}
-    local character = player.Character
-    if not character then return results end
-    
-    local root = character:FindFirstChild("HumanoidRootPart")
-    if not root then return results end
-    
-    local origin = root.Position
-    
-    for id, enemy in pairs(self._enemies) do
-        if enemy.health > 0 and enemy.position then
-            local dist = (enemy.position - origin).Magnitude
-            if dist <= radius then
-                table.insert(results, id)
-            end
-        end
-    end
-    
-    return results
+function CombatSystem.OnDodge(player, _data)
+	local state = playerStates[player]
+	if not state or not state.isAlive then return end
+
+	local now = tick()
+	if now < state.dodgeCooldownEnd then
+		fireClient(player, "DodgeCooldown", { remaining = state.dodgeCooldownEnd - now })
+		return
+	end
+
+	state.isDodging        = true
+	state.dodgeEndTime     = now + CONFIG.DODGE_IFRAME_DURATION
+	state.dodgeCooldownEnd = now + CONFIG.DODGE_COOLDOWN
+
+	fireClient(player, "DodgeStart", { iframeDuration = CONFIG.DODGE_IFRAME_DURATION })
+
+	-- Boss parry check: if any boss is telegraphing, this dodge is a parry
+	for _, es in pairs(enemyStates) do
+		if es.isBoss and es.isTelegraphing and now < es.telegraphEndTime then
+			es.isStuned         = true
+			es.stunEndTime      = now + CONFIG.PARRY_STUN_DURATION
+			es.isTelegraphing   = false
+			fireAllClients("BossParried", {
+				bossId       = es.id,
+				stunDuration = CONFIG.PARRY_STUN_DURATION,
+			})
+			break
+		end
+	end
+
+	task.delay(CONFIG.DODGE_IFRAME_DURATION, function()
+		if playerStates[player] then
+			state.isDodging = false
+			fireClient(player, "DodgeEnd", {})
+		end
+	end)
 end
 
-function CombatSystem:_findEnemiesInLine(player, length, width)
-    local results = {}
-    local character = player.Character
-    if not character then return results end
-    
-    local root = character:FindFirstChild("HumanoidRootPart")
-    if not root then return results end
-    
-    local origin = root.Position
-    local forward = root.CFrame.LookVector
-    local halfWidth = width / 2
-    
-    for id, enemy in pairs(self._enemies) do
-        if enemy.health > 0 and enemy.position then
-            local toEnemy = enemy.position - origin
-            local forwardDist = forward:Dot(toEnemy)
-            if forwardDist > 0 and forwardDist <= length then
-                local lateral = (toEnemy - forward * forwardDist).Magnitude
-                if lateral <= halfWidth then
-                    table.insert(results, id)
-                end
-            end
-        end
-    end
-    
-    return results
+function CombatSystem.OnUseAbility(player, data)
+	local state = playerStates[player]
+	if not state or not state.isAlive then return end
+
+	local now = tick()
+	if now < state.abilityCooldownEnd then
+		fireClient(player, "AbilityCooldown", { remaining = state.abilityCooldownEnd - now })
+		return
+	end
+
+	local weaponId  = state.equippedType == "Ranged" and state.rangedWeaponId or state.meleeWeaponId
+	local weaponDef = WeaponData and WeaponData.GetWeapon(weaponId)
+	if not weaponDef or not weaponDef.ability then return end
+
+	local targetId    = type(data) == "table" and data.targetEnemyId
+	local targetState = targetId and enemyStates[targetId]
+
+	if not targetState then
+		local character = player.Character
+		local rootPart  = character and character:FindFirstChild("HumanoidRootPart")
+		if rootPart and EnemyFactory and EnemyFactory.GetEnemiesInRadius then
+			local nearby = EnemyFactory.GetEnemiesInRadius(rootPart.Position, CONFIG.ABILITY_TARGET_SEARCH_RADIUS)
+			if nearby then
+				for _, eid in ipairs(nearby) do
+					if enemyStates[eid] and enemyStates[eid].isAlive then
+						targetState = enemyStates[eid]
+						break
+					end
+				end
+			end
+		end
+	end
+
+	if not targetState then return end
+
+	local extraDmg = applyWeaponAbility(state, targetState, weaponDef)
+	if extraDmg > 0 then damageEnemy(player, targetState, extraDmg, false) end
+
+	fireClient(player, "AbilityUsed", {
+		weaponId = weaponId,
+		ability  = weaponDef.ability,
+		cooldown = state.abilityCooldownEnd - now,
+	})
 end
 
-function CombatSystem:_applyAimAssist(origin, direction, maxRange)
-    -- Find nearest enemy to aim line within assist radius
-    local bestTarget = nil
-    local bestDist = CONFIG.RANGED_AIM_ASSIST_RADIUS
-    
-    for _, enemy in pairs(self._enemies) do
-        if enemy.health > 0 and enemy.position then
-            local toEnemy = enemy.position - origin
-            local projDist = direction:Dot(toEnemy)
-            if projDist > 0 and projDist <= maxRange then
-                local lateralDist = (toEnemy - direction * projDist).Magnitude
-                if lateralDist < bestDist then
-                    bestDist = lateralDist
-                    bestTarget = enemy
-                end
-            end
-        end
-    end
-    
-    if bestTarget then
-        local toTarget = (bestTarget.position - origin).Unit
-        -- Blend original aim with assist
-        local blended = (direction * (1 - CONFIG.RANGED_AIM_ASSIST_STRENGTH) + toTarget * CONFIG.RANGED_AIM_ASSIST_STRENGTH).Unit
-        return blended
-    end
-    
-    return direction
+function CombatSystem.OnEquipWeapon(player, data)
+	local state = playerStates[player]
+	if not state or type(data) ~= "table" then return end
+
+	local weaponId  = type(data.weaponId) == "string" and data.weaponId
+	if not weaponId then return end
+
+	local weaponDef = WeaponData and WeaponData.GetWeapon(weaponId)
+	if not weaponDef then return end
+
+	if weaponDef.weaponType == "Melee" then
+		state.meleeWeaponId = weaponId
+		state.equippedType  = "Melee"
+		state.comboHit      = 0
+	elseif weaponDef.weaponType == "Ranged" then
+		state.rangedWeaponId = weaponId
+		state.equippedType   = "Ranged"
+		state.magazineAmmo   = weaponDef.magazineSize or 12
+		state.reloading      = false
+	elseif weaponDef.weaponType == "Throwable" then
+		state.equippedType = "Throwable"
+	end
+
+	fireClient(player, "WeaponEquipped", {
+		weaponId   = weaponId,
+		weaponType = weaponDef.weaponType,
+	})
 end
 
-function CombatSystem:_raycastForEnemy(origin, direction, maxRange)
-    -- Simplified server-side raycast against enemy hitboxes
-    local bestHit = nil
-    local bestDist = maxRange
-    
-    for _, enemy in pairs(self._enemies) do
-        if enemy.health > 0 and enemy.position then
-            local toEnemy = enemy.position - origin
-            local projDist = direction:Dot(toEnemy)
-            if projDist > 0 and projDist <= maxRange then
-                local lateralDist = (toEnemy - direction * projDist).Magnitude
-                local hitRadius = 3 -- stud hitbox radius
-                if lateralDist <= hitRadius and projDist < bestDist then
-                    bestDist = projDist
-                    bestHit = enemy
-                end
-            end
-        end
-    end
-    
-    if bestHit then
-        -- Headshot check (top 30% of hitbox)
-        local isHeadshot = math.random() < 0.15 -- simplified; real impl checks Y position
-        return bestHit, bestHit.position, bestDist, isHeadshot
-    end
-    
-    return nil, nil, 0, false
+------------------------------------------------------------------------
+-- ENEMY REGISTRATION (called by EnemyFactory when spawning)
+------------------------------------------------------------------------
+
+function CombatSystem.RegisterEnemy(enemyId, enemyDef, dayNumber, isBoss)
+	local es = newEnemyState(enemyId, enemyDef, dayNumber)
+	es.isBoss = isBoss or false
+	if isBoss and enemyDef then
+		es.enrageTime = tick() + (enemyDef.enrageTimer or 120)
+	end
+	enemyStates[enemyId] = es
+	return es
 end
 
-function CombatSystem:_calculateFalloff(distance)
-    if distance <= CONFIG.RANGED_FALLOFF_START then
-        return 1.0
-    elseif distance >= CONFIG.RANGED_FALLOFF_END then
-        return CONFIG.RANGED_FALLOFF_MIN_MULT
-    else
-        local t = (distance - CONFIG.RANGED_FALLOFF_START) / (CONFIG.RANGED_FALLOFF_END - CONFIG.RANGED_FALLOFF_START)
-        return 1.0 - t * (1.0 - CONFIG.RANGED_FALLOFF_MIN_MULT)
-    end
+function CombatSystem.GetEnemyState(enemyId)
+	return enemyStates[enemyId]
 end
 
---------------------------------------------------------------------------------
+function CombatSystem.UnregisterEnemy(enemyId)
+	enemyStates[enemyId] = nil
+end
+
+------------------------------------------------------------------------
+-- BOSS TELEGRAPH
+------------------------------------------------------------------------
+
+function CombatSystem.StartBossTelegraph(bossId, attackPattern, telegraphTime)
+	local es = enemyStates[bossId]
+	if not es or not es.isBoss then return end
+
+	local duration = telegraphTime or 1.5
+	es.isTelegraphing   = true
+	es.telegraphEndTime = tick() + duration
+
+	fireAllClients("BossTelegraph", {
+		bossId      = bossId,
+		attackName  = attackPattern and attackPattern.name or "Attack",
+		duration    = duration,
+		isParryable = attackPattern and attackPattern.parryable or false,
+	})
+
+	task.delay(duration, function()
+		local bes = enemyStates[bossId]
+		if not bes or not bes.isAlive or bes.isStuned then return end
+		bes.isTelegraphing = false
+
+		if attackPattern then
+			for _, p in ipairs(Players:GetPlayers()) do
+				local pChar = p.Character
+				local pRoot = pChar and pChar:FindFirstChild("HumanoidRootPart")
+				if pRoot then
+					local def     = bes.def
+					local bossDmg = def and def.baseDamage or 20
+					if attackPattern.type == "AoE" then
+						local bPos = EnemyFactory and EnemyFactory.GetEnemyPosition
+							and EnemyFactory.GetEnemyPosition(bossId)
+						if bPos and (pRoot.Position - bPos).Magnitude <= (attackPattern.radius or 12) then
+							damagePlayer(p, bossDmg, bossId)
+						end
+					else
+						damagePlayer(p, bossDmg, bossId)
+					end
+				end
+			end
+		end
+	end)
+end
+
+------------------------------------------------------------------------
+-- SERVER TICK (status effects, boss enrage, heal aura)
+------------------------------------------------------------------------
+
+local _lastAITick = 0
+
+function CombatSystem.Tick(_dt)
+	local now = tick()
+	if now - _lastAITick < CONFIG.AI_TICK_RATE then return end
+	_lastAITick = now
+
+	for enemyId, es in pairs(enemyStates) do
+		if es.isAlive then
+			-- Bleed DoT
+			if es.isBleeding then
+				if now >= es.bleedEndTime then
+					es.isBleeding = false
+				else
+					local bleedDmg = es.bleedDmgPerSec * CONFIG.AI_TICK_RATE
+					es.hp = es.hp - bleedDmg
+					fireAllClients("EnemyHit", { enemyId = enemyId, damage = math.floor(bleedDmg), isCrit = false })
+					if es.hp <= 0 then CombatSystem._defeatEnemy(nil, es) end
+				end
+			end
+
+			-- Clear expired statuses
+			if es.isConfused  and now >= es.confusedEndTime  then es.isConfused  = false end
+			if es.isCharmed   and now >= es.charmedEndTime   then es.isCharmed   = false end
+			if es.isStaggered and now >= es.staggerEndTime   then es.isStaggered = false end
+			if es.isStuned    and now >= es.stunEndTime      then es.isStuned    = false end
+
+			-- Boss enrage
+			if es.isBoss and not es.isEnraged and now >= es.enrageTime then
+				es.isEnraged = true
+				local def = es.def
+				if def then
+					fireAllClients("BossEnraged", {
+						bossId = enemyId,
+						newDmg = math.floor((def.baseDamage or 20) * (def.enrageDmgMult or 1.5)),
+					})
+				end
+			end
+		end
+	end
+
+	-- RizzMerchant heal aura
+	for _, es in pairs(enemyStates) do
+		if es.isAlive and es.def and es.def.specialAbility == "HealAura" then
+			if EnemyFactory and EnemyFactory.GetEnemyPosition then
+				local healerPos = EnemyFactory.GetEnemyPosition(es.id)
+				if healerPos then
+					local radius  = es.def.healAuraRadius or 10
+					local healAmt = (es.def.healAuraRate or 3) * CONFIG.AI_TICK_RATE
+					for _, other in pairs(enemyStates) do
+						if other.isAlive and other ~= es then
+							local oPos = EnemyFactory.GetEnemyPosition(other.id)
+							if oPos and (healerPos - oPos).Magnitude <= radius then
+								other.hp = math.min(other.maxHp, other.hp + healAmt)
+							end
+						end
+					end
+				end
+			end
+		end
+	end
+end
+
+------------------------------------------------------------------------
+-- REMOTE EVENT SETUP (EventBus + ClientDispatch)
+------------------------------------------------------------------------
+
+local function setupRemotes()
+	local remotes = ReplicatedStorage:FindFirstChild("Remotes")
+	if not remotes then
+		remotes        = Instance.new("Folder")
+		remotes.Name   = "Remotes"
+		remotes.Parent = ReplicatedStorage
+	end
+
+	local eventBus = remotes:FindFirstChild("EventBus")
+	if not eventBus then
+		eventBus        = Instance.new("RemoteEvent")
+		eventBus.Name   = "EventBus"
+		eventBus.Parent = remotes
+	end
+
+	local clientDispatch = remotes:FindFirstChild("ClientDispatch")
+	if not clientDispatch then
+		clientDispatch        = Instance.new("RemoteEvent")
+		clientDispatch.Name   = "ClientDispatch"
+		clientDispatch.Parent = remotes
+	end
+	_clientDispatch = clientDispatch
+
+	eventBus.OnServerEvent:Connect(function(player, action, data)
+		if type(action) ~= "string" then return end
+
+		if SecurityLayer and type(SecurityLayer.CheckRateLimit) == "function" then
+			if not SecurityLayer.CheckRateLimit(player, "CombatAction") then return end
+		end
+
+		if     action == "MeleeAttack"  then CombatSystem.OnMeleeAttack(player, data)
+		elseif action == "RangedFire"   then CombatSystem.OnRangedFire(player, data)
+		elseif action == "Reload"       then CombatSystem.OnReload(player, data)
+		elseif action == "Dodge"        then CombatSystem.OnDodge(player, data)
+		elseif action == "UseAbility"   then CombatSystem.OnUseAbility(player, data)
+		elseif action == "EquipWeapon"  then CombatSystem.OnEquipWeapon(player, data)
+		end
+	end)
+
+	print("[CombatSystem] EventBus + ClientDispatch configured")
+end
+
+------------------------------------------------------------------------
+-- INIT
+------------------------------------------------------------------------
+
+function CombatSystem.Init()
+	local function tryRequire(name)
+		local m = ServerStorage:FindFirstChild(name)
+		if not m then return nil end
+		local ok, result = pcall(require, m)
+		return ok and result or nil
+	end
+
+	ServerGateway        = tryRequire("ServerGateway")
+	WeaponData           = tryRequire("WeaponData")
+	EnemyData            = tryRequire("EnemyData")
+	EnemyFactory         = tryRequire("EnemyFactory")
+	EconomyManager       = tryRequire("EconomyManager")
+	CombatRewardsManager = tryRequire("CombatRewardsManager")
+	SecurityLayer        = tryRequire("SecurityLayer")
+
+	Players.PlayerAdded:Connect(function(player)
+		playerStates[player] = newPlayerState(player)
+		local startLoadout   = WeaponData and WeaponData.StarterLoadout
+		if startLoadout and WeaponData then
+			local rDef = WeaponData.GetWeapon(startLoadout.ranged or "ranged_slingshot")
+			playerStates[player].magazineAmmo = rDef and rDef.magazineSize or 1
+		end
+	end)
+
+	Players.PlayerRemoving:Connect(function(player)
+		playerStates[player] = nil
+	end)
+
+	for _, player in ipairs(Players:GetPlayers()) do
+		if not playerStates[player] then
+			playerStates[player] = newPlayerState(player)
+		end
+	end
+
+	setupRemotes()
+
+	print("[CombatSystem] v2.0 ready. Tap to attack.")
+	return true
+end
+
+------------------------------------------------------------------------
 -- PUBLIC API
---------------------------------------------------------------------------------
+------------------------------------------------------------------------
 
-function CombatSystem:GetPlayerState(player)
-    return self._playerStates[player.UserId]
+function CombatSystem.GetConfig()            return CONFIG end
+function CombatSystem.GetPlayerState(player) return playerStates[player] end
+
+function CombatSystem.IsPlayerAlive(player)
+	local s = playerStates[player]
+	return s and s.isAlive or false
 end
 
-function CombatSystem:GetEnemy(enemyId)
-    return self._enemies[enemyId]
+function CombatSystem.OnWaveStart(_dayNumber, _waveNumber)
+	for _, state in pairs(playerStates) do
+		state.comboHit      = 0
+		state.lastMeleeTime = 0
+	end
 end
 
-function CombatSystem:GetAllEnemies()
-    return self._enemies
+function CombatSystem.OnWaveClear(dayNumber, waveNumber)
+	if CombatRewardsManager then
+		pcall(CombatRewardsManager.OnWaveClear, dayNumber, waveNumber)
+	end
 end
 
-function CombatSystem:GetConfig()
-    return CONFIG
+function CombatSystem.DamagePlayer(player, amount, source)
+	damagePlayer(player, amount, source)
 end
 
-function CombatSystem:GetPlayerStats(player)
-    local state = self._playerStates[player.UserId]
-    if not state then return nil end
-    
-    return {
-        totalKills = state.totalKills,
-        totalDeaths = state.totalDeaths,
-        totalDamageDealt = state.totalDamageDealt,
-        totalDamageTaken = state.totalDamageTaken,
-        highestKillCombo = state.highestKillCombo,
-        bossesKilled = state.bossesKilled,
-        headshots = state.headshots,
-        dodgesUsed = state.dodgesUsed,
-        parriesLanded = state.parriesLanded,
-    }
+function CombatSystem.DamageEnemy(enemyId, amount, sourcePlayer)
+	local es = enemyStates[enemyId]
+	if es then damageEnemy(sourcePlayer, es, amount, false) end
 end
 
 return CombatSystem
