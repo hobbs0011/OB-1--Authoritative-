@@ -51,7 +51,7 @@ local CONFIG = {
 
     -- Elo boundaries (prevent runaway ratings)
     ELO_FLOOR = 400,
-    ELO_CEILING = 2400,
+    ELO_CEILING = 2600,
 
     -- K-factor (controls rating volatility)
     -- Higher K = bigger swings per answer
@@ -81,7 +81,7 @@ local CONFIG = {
         Cat   = { min = 1101, mid = 1300, max = 1500 },
         Wolf  = { min = 1501, mid = 1700, max = 1900 },
         Lion  = { min = 1901, mid = 2100, max = 2300 },
-        Tiger = { min = 2301, mid = 2500, max = 2700 },
+        Tiger = { min = 2301, mid = 2450, max = 2600 },
     },
 
     -- Tier name to number mapping (for QuestionBank compatibility)

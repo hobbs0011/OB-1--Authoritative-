@@ -13,7 +13,16 @@
 --]]
 
 local Players = game:GetService("Players")
+local ServerStorage = game:GetService("ServerStorage")
 local SecurityLayer = {}
+
+local ok, DayScaling = pcall(function()
+    return require(ServerStorage:FindFirstChild("DayScaling", true))
+end)
+if not ok then
+    warn("[SecurityLayer] DayScaling not loaded — MAX_COINS_PER_ACTION will use base cap of 200")
+    DayScaling = nil
+end
 
 local CONFIG = {
     RATE_LIMITS = {
@@ -26,7 +35,10 @@ local CONFIG = {
     },
     MIN_ANSWER_TIME = 0.3,
     SUSPICIOUS_SPEED_THRESHOLD = 3,
-    MAX_COINS_PER_ACTION = 200,
+    MAX_COINS_PER_ACTION = function(dayNumber)
+        local mult = (DayScaling and DayScaling.GetDifficultyMult and DayScaling.GetDifficultyMult(dayNumber)) or 1
+        return math.floor(200 * mult)
+    end,
     MAX_PREMIUM_PER_ACTION = 50,
     MAX_VIOLATIONS_BEFORE_KICK = 10,
     VIOLATION_DECAY_SECONDS = 300,
@@ -142,11 +154,14 @@ function SecurityLayer.ValidateAnswerSpeed(player, questionServedTime)
     return true
 end
 
-function SecurityLayer.ValidateCurrencyChange(player, currencyType, amount, reason)
+function SecurityLayer.ValidateCurrencyChange(player, currencyType, amount, reason, dayNumber)
     local state = playerSecurity[player]
     if not state then return false end
     
-    local maxPerAction = currencyType == "PremiumGems" and CONFIG.MAX_PREMIUM_PER_ACTION or CONFIG.MAX_COINS_PER_ACTION
+    local maxCoins = type(CONFIG.MAX_COINS_PER_ACTION) == "function"
+        and CONFIG.MAX_COINS_PER_ACTION(dayNumber or 1)
+        or CONFIG.MAX_COINS_PER_ACTION
+    local maxPerAction = currencyType == "PremiumGems" and CONFIG.MAX_PREMIUM_PER_ACTION or maxCoins
     
     if amount > maxPerAction then
         SecurityLayer._recordViolation(state, "CURRENCY_OVERFLOW", { currency = currencyType, amount = amount, max = maxPerAction })

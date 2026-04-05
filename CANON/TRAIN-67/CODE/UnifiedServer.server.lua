@@ -1,24 +1,24 @@
 --[[
-    UnifiedServer.lua — Single Entry Point Server Script
-    Skibidi Zombie: Survive the Brainrots
-
-    RESOLVES: The Two-Server Problem (GameMain + MainServer_v2 collision)
-    This is THE one server script.
-
-    GOAL: MAKE MONEY. Combat is the game mechanic.
-    Boot order: UnifiedServer -> ServerGateway -> all server modules
-
-    Architecture: Script (ServerScriptService) — THE entry point
-    Version: 3.0.0
-    Date: 2026-03-28
-    Changes v3.0 (Combat Replacement):
-      - Replaced QuestionBankV2 -> WeaponData + EnemyData + DayScaling
-      - Replaced EnglishRewardsManager -> CombatRewardsManager
-      - Wired CombatRewardsManager into player lifecycle hooks
-      - Removed all ESL/English quiz remote event handlers
-      - CombatSystem v2.0 now uses EventBus + ClientDispatch (2 RemoteEvents)
-      - Boot order updated: 30 modules total
---]]
+===============================================================
+SURVIVE A BRAINROT -- PRODUCTION SERVER ARCHITECTURE v2.2.0
+Script: UnifiedServer.server.lua
+Type: Server Script (ServerScriptService)
+Purpose: Single entry point. GOAL: MAKE MONEY.
+         Combat is the mechanic. Monetize everything.
+         Boot order: UnifiedServer -> ServerGateway -> all server modules
+Date: February 2026 | Patched: March 28, 2026
+Version: 2.2.0 -- ESL PURGE (combat-only wiring)
+Changes v2.2:
+  - Replaced EnglishRewardsManager with CombatRewardsManager
+  - QuestionBankV2 downgraded from required to optional
+  - Added DayScaling + RewardBridge to boot order
+  - Replaced ESL quiz remotes with combat action remotes
+  - Stripped all English lifecycle hooks
+  - Combat-first player lifecycle
+  - Sanitized all operators (Studio-safe)
+Phoenix Rising Gaming Division
+===============================================================
+]]
 
 local ServerScriptService = game:GetService("ServerScriptService")
 local ServerStorage = game:GetService("ServerStorage")
@@ -28,31 +28,31 @@ local RunService = game:GetService("RunService")
 local MarketplaceService = game:GetService("MarketplaceService")
 
 --------------------------------------------------------------------------------
--- BOOT SEQUENCE (28 server modules, dependency-ordered)
+-- BOOT SEQUENCE (30 server modules, dependency-ordered)
 --------------------------------------------------------------------------------
 
 local BOOT_ORDER = {
-    -- Phase 1: Core infrastructure (REQUIRED — boot fails without these)
+    -- Phase 1: Core infrastructure (REQUIRED -- boot fails without these)
     { name = "ServerGateway",          path = "ServerGateway",          required = true  },
     { name = "SecurityLayer",          path = "SecurityLayer",          required = true  },
     { name = "DataStoreV2",            path = "DataStoreV2",            required = true  },
     { name = "AnalyticsService",       path = "AnalyticsService",       required = false },
 
-    -- Phase 2: Core gameplay (combat + weapons + enemies + progression)
-    { name = "WeaponData",             path = "WeaponData",             required = true  },
-    { name = "EnemyData",              path = "EnemyData",              required = true  },
-    { name = "DayScaling",             path = "DayScaling",             required = true  },
+    -- Phase 2: Core gameplay (combat + progression)
+    { name = "QuestionBankV2",         path = "QuestionBankV2",         required = false },
     { name = "EloManager",             path = "EloManager",             required = false },
     { name = "EnemyFactory",           path = "EnemyFactory",           required = true  },
     { name = "CombatSystem",           path = "CombatSystem",           required = true  },
     { name = "WaveManager",            path = "WaveManager",            required = true  },
+    { name = "DayScaling",             path = "DayScaling",             required = false },
 
     -- Phase 3: Economy, monetization & rewards
     { name = "EconomyManager",         path = "EconomyManager",         required = false },
+    { name = "CombatRewardsManager",   path = "CombatRewardsManager",   required = false },
+    { name = "RewardBridge",           path = "RewardBridge",           required = false },
     { name = "ReceiptRouter",          path = "ReceiptRouter",          required = false },
     { name = "MonetizationServer",     path = "MonetizationServer",     required = false },
     { name = "MonetizationOrchestrator", path = "MonetizationOrchestrator", required = false },
-    { name = "CombatRewardsManager",   path = "CombatRewardsManager",   required = false },
     { name = "DailyRewards",           path = "DailyRewards",           required = false },
     { name = "BattlePass",             path = "BattlePass",             required = false },
     { name = "GachaManager",           path = "GachaManager",           required = false },
@@ -69,25 +69,8 @@ local BOOT_ORDER = {
     { name = "PrestigeManager",        path = "PrestigeManager",        required = false },
     { name = "WorldBoss",              path = "WorldBoss",              required = false },
     { name = "AnomalyDetector",        path = "AnomalyDetector",        required = false },
-    { name = "FTUEManager",            path = "FTUEManager",            required = false },
     { name = "FTUEController",         path = "FTUEController",         required = false },
 }
-
---[[
-    CLIENT MODULE REGISTRY (not booted here — wired in StarterPlayerScripts)
-    These modules live in ReplicatedStorage or StarterPlayerScripts:
-      - ClientBridge.lua          — client->server event dispatcher (EventBus)
-      - HUDController_v2.lua      — heads-up display (health, combo, wave, ammo)
-      - MobileInputController.lua — 4 action buttons: Attack, Dodge, Ability, Interact
-
-    CONFIG MODULES (loaded by other modules, not booted independently):
-      - DevProductsConfig.lua   — developer product ID registry
-      - GamePassConfig.lua      — game pass ID registry
-      - LedgerSchema.lua        — economy ledger field definitions
-      - WeaponData.lua          — weapon stats (also used by GachaManager, HUD)
-      - EnemyData.lua           — enemy types and scaling
-      - DayScaling.lua          — 99-day difficulty curve
-]]
 
 local Modules = {}
 local BootLog = {}
@@ -146,90 +129,40 @@ local function loadModule(entry)
 end
 
 --------------------------------------------------------------------------------
--- PLAYER LIFECYCLE (enhanced v2.0)
+-- PLAYER LIFECYCLE (v2.2 -- combat-first, zero ESL)
 --------------------------------------------------------------------------------
 
 local function onPlayerAdded(player)
     log("INFO", "Player joined: " .. player.Name)
-
-    -- Core data load
-    if Modules.DataStoreV2 then
-        Modules.DataStoreV2.LoadPlayer(player)
-    end
-
-    -- Analytics session
-    if Modules.AnalyticsService then
-        Modules.AnalyticsService.StartSession(player)
-    end
-
-    -- Elo initialization (load or create rating)
-    if Modules.EloManager and type(Modules.EloManager.LoadPlayer) == "function" then
-        pcall(Modules.EloManager.LoadPlayer, player)
-    end
-
-    -- Combat rewards session init
-    if Modules.CombatRewardsManager and type(Modules.CombatRewardsManager.OnPlayerJoin) == "function" then
-        pcall(Modules.CombatRewardsManager.OnPlayerJoin, player)
-    end
-
-    -- Cosmetic load (pets, auras, skins)
-    if Modules.CosmeticController and type(Modules.CosmeticController.LoadPlayer) == "function" then
-        pcall(Modules.CosmeticController.LoadPlayer, player)
-    end
-
-    -- FTUE check
-    if Modules.FTUEManager then
+    if Modules.DataStoreV2 then Modules.DataStoreV2.LoadPlayer(player) end
+    if Modules.AnalyticsService then Modules.AnalyticsService.StartSession(player) end
+    if Modules.EloManager and type(Modules.EloManager.LoadPlayer) == "function" then pcall(Modules.EloManager.LoadPlayer, player) end
+    if Modules.CombatRewardsManager and type(Modules.CombatRewardsManager.OnPlayerJoin) == "function" then pcall(Modules.CombatRewardsManager.OnPlayerJoin, player) end
+    if Modules.RewardBridge and type(Modules.RewardBridge.RegisterPlayer) == "function" then pcall(Modules.RewardBridge.RegisterPlayer, player) end
+    if Modules.CosmeticController and type(Modules.CosmeticController.LoadPlayer) == "function" then pcall(Modules.CosmeticController.LoadPlayer, player) end
+    if Modules.FTUEController then
         local data = Modules.DataStoreV2 and Modules.DataStoreV2.GetPlayerData(player)
-        if data and not data.ftueComplete then
-            Modules.FTUEManager.StartFTUE(player)
-        end
+        if data and not data.ftueComplete then pcall(Modules.FTUEController.StartFTUE, player) end
     end
-
-    -- Daily rewards check-in
-    if Modules.DailyRewards then
-        Modules.DailyRewards.CheckIn(player)
-    end
-
-    -- Monetization: contextual trigger for session start
-    if Modules.MonetizationOrchestrator and type(Modules.MonetizationOrchestrator.OnSessionStart) == "function" then
-        pcall(Modules.MonetizationOrchestrator.OnSessionStart, player)
-    end
+    if Modules.DailyRewards then pcall(Modules.DailyRewards.CheckIn, player) end
+    if Modules.MonetizationOrchestrator and type(Modules.MonetizationOrchestrator.OnSessionStart) == "function" then pcall(Modules.MonetizationOrchestrator.OnSessionStart, player) end
 end
 
 local function onPlayerRemoving(player)
     log("INFO", "Player leaving: " .. player.Name)
-
-    -- Analytics session end
-    if Modules.AnalyticsService then
-        Modules.AnalyticsService.EndSession(player)
-    end
-
-    -- Elo save
-    if Modules.EloManager and type(Modules.EloManager.SavePlayer) == "function" then
-        pcall(Modules.EloManager.SavePlayer, player)
-    end
-
-    -- Combat rewards save
-    if Modules.CombatRewardsManager and type(Modules.CombatRewardsManager.OnPlayerLeave) == "function" then
-        pcall(Modules.CombatRewardsManager.OnPlayerLeave, player)
-    end
-
-    -- Cosmetic save
-    if Modules.CosmeticController and type(Modules.CosmeticController.SavePlayer) == "function" then
-        pcall(Modules.CosmeticController.SavePlayer, player)
-    end
-
-    -- Core data save (last — captures all module state)
+    if Modules.AnalyticsService then pcall(Modules.AnalyticsService.EndSession, player) end
+    if Modules.EloManager and type(Modules.EloManager.SavePlayer) == "function" then pcall(Modules.EloManager.SavePlayer, player) end
+    if Modules.CombatRewardsManager and type(Modules.CombatRewardsManager.OnPlayerLeave) == "function" then pcall(Modules.CombatRewardsManager.OnPlayerLeave, player) end
+    if Modules.RewardBridge and type(Modules.RewardBridge.UnregisterPlayer) == "function" then pcall(Modules.RewardBridge.UnregisterPlayer, player) end
+    if Modules.CosmeticController and type(Modules.CosmeticController.SavePlayer) == "function" then pcall(Modules.CosmeticController.SavePlayer, player) end
     if Modules.DataStoreV2 then
         local ok, err = pcall(function() Modules.DataStoreV2.SavePlayer(player) end)
-        if not ok then
-            warn("[UnifiedServer] CRITICAL: Save failed " .. player.Name .. ": " .. tostring(err))
-        end
+        if not ok then warn("[UnifiedServer] CRITICAL: Save failed " .. player.Name .. ": " .. tostring(err)) end
     end
 end
 
 --------------------------------------------------------------------------------
--- REMOTE EVENTS
+-- REMOTE EVENTS (v2.2 -- combat actions, zero ESL quiz flow)
 --------------------------------------------------------------------------------
 
 local function setupRemoteEvents()
@@ -240,18 +173,13 @@ local function setupRemoteEvents()
         remotes.Parent = ReplicatedStorage
     end
 
-    -- Core 2-remote combat bus (EventBus + ClientDispatch created by CombatSystem.Init)
-    -- Additional named remotes for non-combat systems:
     local events = {
-        -- Player lifecycle
-        "PlayerDied", "PlayerRespawned",
-        -- Wave / world
-        "WaveUpdate", "EnemySpawned", "EnemyDied",
-        -- Economy
-        "CurrencyUpdate",
-        -- Cosmetics
+        "MeleeAttack", "RangedShot", "DodgeRoll", "ParryAttempt", "WeaponSwitch",
+        "AttackResult", "DamageDealt", "PlayerDied", "PlayerRespawned",
+        "WaveUpdate", "EnemySpawned", "EnemyDied", "ComboUpdate", "TierChanged",
+        "CurrencyUpdate", "CombatMilestone", "RewardNotification",
+        "KillStreakUpdate", "RewardClaimed",
         "CosmeticEquipped", "CosmeticUnlocked", "FusionResult",
-        -- Monetization
         "OfferPresented", "OfferDismissed", "PurchaseComplete",
     }
 
@@ -263,14 +191,61 @@ local function setupRemoteEvents()
         end
     end
 
-    -- CombatSystem v2.0 manages its own EventBus + ClientDispatch remotes.
-    -- No additional wiring needed here for combat actions.
+    -- Wire combat action handlers
+    local melee = remotes:FindFirstChild("MeleeAttack")
+    if melee and Modules.CombatSystem and Modules.SecurityLayer then
+        melee.OnServerEvent:Connect(function(player, data)
+            if not Modules.SecurityLayer.CheckRateLimit(player, "MeleeAttack") then return end
+            if Modules.CombatSystem.OnMeleeAttack then
+                local result = Modules.CombatSystem.OnMeleeAttack(player, data)
+                if result then remotes.AttackResult:FireClient(player, result) end
+            end
+        end)
+    end
 
-    log("OK", "Remote events: " .. #events .. " configured (combat handled by CombatSystem)")
+    local ranged = remotes:FindFirstChild("RangedShot")
+    if ranged and Modules.CombatSystem and Modules.SecurityLayer then
+        ranged.OnServerEvent:Connect(function(player, data)
+            if not Modules.SecurityLayer.CheckRateLimit(player, "RangedShot") then return end
+            if Modules.CombatSystem.OnRangedShot then
+                local result = Modules.CombatSystem.OnRangedShot(player, data)
+                if result then remotes.AttackResult:FireClient(player, result) end
+            end
+        end)
+    end
+
+    local dodge = remotes:FindFirstChild("DodgeRoll")
+    if dodge and Modules.CombatSystem and Modules.SecurityLayer then
+        dodge.OnServerEvent:Connect(function(player)
+            if not Modules.SecurityLayer.CheckRateLimit(player, "DodgeRoll") then return end
+            if Modules.CombatSystem.OnDodgeRoll then Modules.CombatSystem.OnDodgeRoll(player) end
+        end)
+    end
+
+    local parry = remotes:FindFirstChild("ParryAttempt")
+    if parry and Modules.CombatSystem and Modules.SecurityLayer then
+        parry.OnServerEvent:Connect(function(player, data)
+            if not Modules.SecurityLayer.CheckRateLimit(player, "ParryAttempt") then return end
+            if Modules.CombatSystem.OnParryAttempt then
+                local result = Modules.CombatSystem.OnParryAttempt(player, data)
+                if result then remotes.AttackResult:FireClient(player, result) end
+            end
+        end)
+    end
+
+    local weaponSwitch = remotes:FindFirstChild("WeaponSwitch")
+    if weaponSwitch and Modules.CombatSystem and Modules.SecurityLayer then
+        weaponSwitch.OnServerEvent:Connect(function(player, slotIndex)
+            if not Modules.SecurityLayer.CheckRateLimit(player, "WeaponSwitch") then return end
+            if Modules.CombatSystem.OnWeaponSwitch then Modules.CombatSystem.OnWeaponSwitch(player, slotIndex) end
+        end)
+    end
+
+    log("OK", "Remote events: " .. #events .. " configured (combat-only)")
 end
 
 --------------------------------------------------------------------------------
--- RECEIPT PROCESSING (v2.0 — unified through ReceiptRouter)
+-- RECEIPT PROCESSING (v2.0 -- unified through ReceiptRouter)
 --------------------------------------------------------------------------------
 
 local function setupReceiptProcessing()
@@ -280,7 +255,6 @@ local function setupReceiptProcessing()
         end
         log("OK", "ProcessReceipt wired through ReceiptRouter")
     elseif Modules.MonetizationServer and type(Modules.MonetizationServer.ProcessReceipt) == "function" then
-        -- Fallback to legacy monetization server
         MarketplaceService.ProcessReceipt = function(receiptInfo)
             return Modules.MonetizationServer.ProcessReceipt(receiptInfo)
         end
@@ -307,43 +281,20 @@ local function onHeartbeat(dt)
 end
 
 --------------------------------------------------------------------------------
--- SHUTDOWN (enhanced v2.0 — flush all stateful modules)
+-- SHUTDOWN (v2.2 -- combat rewards, zero ESL)
 --------------------------------------------------------------------------------
 
 local function onShutdown()
     log("SHUTDOWN", "Server closing -- flushing all modules...")
-
-    -- Flush receipt queue first (money > everything)
-    if Modules.ReceiptRouter and type(Modules.ReceiptRouter.Drain) == "function" then
-        pcall(Modules.ReceiptRouter.Drain)
-    end
-
-    -- Save all player data
+    if Modules.ReceiptRouter and type(Modules.ReceiptRouter.Drain) == "function" then pcall(Modules.ReceiptRouter.Drain) end
     for _, player in ipairs(Players:GetPlayers()) do
-        if Modules.EloManager and type(Modules.EloManager.SavePlayer) == "function" then
-            pcall(Modules.EloManager.SavePlayer, player)
-        end
-        if Modules.CombatRewardsManager and type(Modules.CombatRewardsManager.OnPlayerLeave) == "function" then
-            pcall(Modules.CombatRewardsManager.OnPlayerLeave, player)
-        end
-        if Modules.CosmeticController and type(Modules.CosmeticController.SavePlayer) == "function" then
-            pcall(Modules.CosmeticController.SavePlayer, player)
-        end
-        if Modules.DataStoreV2 then
-            pcall(function() Modules.DataStoreV2.SavePlayer(player) end)
-        end
+        if Modules.EloManager and type(Modules.EloManager.SavePlayer) == "function" then pcall(Modules.EloManager.SavePlayer, player) end
+        if Modules.CombatRewardsManager and type(Modules.CombatRewardsManager.OnPlayerLeave) == "function" then pcall(Modules.CombatRewardsManager.OnPlayerLeave, player) end
+        if Modules.CosmeticController and type(Modules.CosmeticController.SavePlayer) == "function" then pcall(Modules.CosmeticController.SavePlayer, player) end
+        if Modules.DataStoreV2 then pcall(function() Modules.DataStoreV2.SavePlayer(player) end) end
     end
-
-    -- Flush analytics buffer
-    if Modules.AnalyticsService then
-        pcall(Modules.AnalyticsService.Shutdown)
-    end
-
-    -- Flush economy ledger
-    if Modules.EconomyManager and type(Modules.EconomyManager.FlushLedger) == "function" then
-        pcall(Modules.EconomyManager.FlushLedger)
-    end
-
+    if Modules.AnalyticsService then pcall(Modules.AnalyticsService.Shutdown) end
+    if Modules.EconomyManager and type(Modules.EconomyManager.FlushLedger) == "function" then pcall(Modules.EconomyManager.FlushLedger) end
     log("SHUTDOWN", "All modules flushed.")
 end
 
@@ -353,7 +304,7 @@ end
 
 log("BOOT", "=== SKIBIDI ZOMBIE: SURVIVE THE BRAINROTS ===")
 log("BOOT", "=== GOAL: MAKE MONEY ===")
-log("BOOT", "=== UnifiedServer v3.0 — Combat Replacement — 30 modules ===")
+log("BOOT", "=== UnifiedServer v2.2 -- 30 modules -- COMBAT ONLY ===")
 log("BOOT", "Starting boot sequence...")
 
 local bootFailed = false
@@ -386,9 +337,8 @@ game:BindToClose(onShutdown)
 local bootTime = tick() - bootStart
 local moduleCount = 0
 for _ in pairs(Modules) do moduleCount = moduleCount + 1 end
-log("BOOT", string.format("=== BOOT COMPLETE — %d/%d modules in %.2fs ===", moduleCount, #BOOT_ORDER, bootTime))
+log("BOOT", string.format("=== BOOT COMPLETE -- %d/%d modules in %.2fs ===", moduleCount, #BOOT_ORDER, bootTime))
 
--- Boot summary
 log("BOOT", "Server modules loaded:")
 for _, entry in ipairs(BootLog) do
     log("BOOT", string.format("  [OK] %s (%.2fs)", entry.name, entry.time))
