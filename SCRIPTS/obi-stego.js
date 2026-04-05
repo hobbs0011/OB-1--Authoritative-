@@ -36,7 +36,7 @@ const CONFIG = {
   STEGO: {
     bitsPerChannel: 2,  // LSB bits to use (1-2 recommended)
     channels: ['r', 'g', 'b'],  // RGB only (skip alpha)
-    headerMagic: 'OBI',  // Magic bytes to identify OBI stego
+    headerMagic: '🧿',  // Magic bytes to identify OBI stego
     separator: '◆'  // Between layers
   },
   
@@ -165,7 +165,7 @@ function hideInImage(imageData, secretData, passphrase = '') {
  * @returns {string|null} Extracted secret or null if invalid
  */
 function extractFromImage(imageData, passphrase = '') {
-  // Extract magic header (first 3 bytes * 8 bits = 24 bits)
+  // Extract magic header (first 8 bytes * 8 bits = 64 bits)
   const magicBytes = Buffer.from(CONFIG.STEGO.headerMagic, 'utf8');
   let extracted = Buffer.alloc(magicBytes.length);
   
@@ -215,8 +215,6 @@ function extractFromImage(imageData, passphrase = '') {
   return dataBytes.toString('utf8');
 }
 
-// ═══════════════════════════════════════════════════════
-// VANILLA NODE CANVAS (No dependencies fallback)
 // ═══════════════════════════════════════════════════════
 
 function createVanillaCanvas() {
@@ -356,7 +354,7 @@ const command = args[0] || 'help';
 
 console.log(`
 ╔══════════════════════════════════════════════════════╗
-║     OBI STEGO KEY SYSTEM                           ║
+║     🧿 OBI STEGO KEY SYSTEM 🧿                   ║
 ║     Hidden Keys • Multi-Layer Security            ║
 ╚══════════════════════════════════════════════════════╝
 `);
@@ -405,6 +403,7 @@ if (command === 'generate' || command === 'gen') {
   
   // Create test data
   const testData = { test: true, message: 'Hello from the steganogram!', layer: 'L1' };
+  const testHex = stringToHex(JSON.stringify(testData));
   
   // Create simple noise buffer to test
   const testBuffer = Buffer.alloc(1000);

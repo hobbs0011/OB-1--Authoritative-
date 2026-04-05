@@ -9,7 +9,11 @@
   "orientation": "portrait-primary",
   "lang": "vi",
   "categories": ["education"],
-  "icons": [],
+  "icons": [
+    { "src": "/icons/favicon.svg", "sizes": "any", "type": "image/svg+xml" },
+    { "src": "/icons/icon.svg", "sizes": "512x512", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "/icons/icon.svg", "sizes": "512x512", "type": "image/svg+xml", "purpose": "maskable" }
+  ],
   "screenshots": [],
   "shortcuts": [
     {
@@ -17,14 +21,14 @@
       "short_name": "Chat",
       "description": "Open Magic Chat",
       "url": "/?shortcut=chat",
-      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+      "icons": [{ "src": "/icons/icon.svg", "sizes": "512x512", "type": "image/svg+xml" }]
     },
     {
       "name": "Check Streak",
       "short_name": "Streak",
       "description": "View NET Pet streak",
       "url": "/?shortcut=pet",
-      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+      "icons": [{ "src": "/icons/icon.svg", "sizes": "512x512", "type": "image/svg+xml" }]
     }
   ]
 }
