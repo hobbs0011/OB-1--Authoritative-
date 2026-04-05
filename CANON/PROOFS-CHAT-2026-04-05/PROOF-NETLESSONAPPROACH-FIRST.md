@@ -1,0 +1,5 @@
+﻿# PROOF - NETLESSONAPPROACH FIRST
+
+Source: D:\phoenix-chat-logs\CHAT-LOGS-ONLY\NETLESSONAPPROACH.txt
+
+c

@@ -1,0 +1,5 @@
+﻿# PROOF - BADSTUDENTSELECTOR LAST
+
+Source: D:\phoenix-chat-logs\CHAT-LOGS-ONLY\BADSTUDENTSELECTOR.txt
+
+

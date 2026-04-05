@@ -1,0 +1,5 @@
+﻿# PROOF - ALPHA-OMEGA-DNA6 LAST
+
+Source: D:\phoenix-chat-logs\CHAT-LOGS-ONLY\ALPHA-OMEGA-DNA6.txt
+
+

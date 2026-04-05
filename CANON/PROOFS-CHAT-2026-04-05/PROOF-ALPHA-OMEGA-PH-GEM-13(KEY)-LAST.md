@@ -1,0 +1,5 @@
+﻿# PROOF - ALPHA-OMEGA-PH-GEM-13(KEY) LAST
+
+Source: D:\phoenix-chat-logs\CHAT-LOGS-ONLY\ALPHA-OMEGA-PH-GEM-13(KEY).txt
+
+

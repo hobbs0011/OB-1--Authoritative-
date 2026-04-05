@@ -1,0 +1,5 @@
+﻿# PROOF - NICELOOKINGLESSON LAST
+
+Source: D:\phoenix-chat-logs\CHAT-LOGS-ONLY\NICELOOKINGLESSON.txt
+
+
