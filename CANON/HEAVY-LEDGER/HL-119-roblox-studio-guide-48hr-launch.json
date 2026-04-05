@@ -1,0 +1,158 @@
+{
+  "hl_id": "HL-119",
+  "source_file": "2026-03-30-roblox-studio-guide-48hr-launch.md",
+  "session_tag": "roblox-studio-guide-48hr-launch",
+  "session_date": "2026-03-30",
+  "signal_density": "MEDIUM",
+  "signal_counts": { "red": 2, "yellow": 3, "green": 0 },
+  "tier": "EXECUTION",
+  "quote_count": 5,
+  "decision_count": 3,
+  "correction_count": 0,
+  "principle_count": 1,
+  "wave": 9,
+  "wave_position": 119,
+  "run_converted": 258,
+  "conversion_date": "2026-04-03T18:20:00+07:00",
+
+  "raw_quotes": [
+    {
+      "id": "Q119-01",
+      "priority": "RED",
+      "text": "we will launch next 48 hrs",
+      "context": "HARD DEADLINE SET: Game 1 ships by April 2, 2026"
+    },
+    {
+      "id": "Q119-02",
+      "priority": "RED",
+      "text": "set up an hourly trigger to build and contribute to train 6-7 anyway possible",
+      "context": "REDIRECT ALL PULSE RUNS to Train 6-7 work"
+    },
+    {
+      "id": "Q119-03",
+      "priority": "YELLOW",
+      "text": "I got busy with marketing NET",
+      "context": "Michael spent session on NET marketing, not Studio work"
+    },
+    {
+      "id": "Q119-04",
+      "priority": "YELLOW",
+      "text": "I will look for some game testers tomorrow",
+      "context": "Game testers recruitment March 31"
+    },
+    {
+      "id": "Q119-05",
+      "priority": "YELLOW",
+      "text": "give me step by steps, a dummy proof guide with actionable links",
+      "context": "Michael needs simple execution guides, not complex docs"
+    }
+  ],
+
+  "decisions": [
+    {
+      "id": "D119-01",
+      "decision": "48-HOUR LAUNCH WINDOW — Game 1 ships by April 2, 2026",
+      "impact": "CRITICAL",
+      "canon_affected": ["COLD-START-BOOT", "Navigator Index", "Game Bible"]
+    },
+    {
+      "id": "D119-02",
+      "decision": "REDIRECT PULSE TO TRAIN-67 — hourly triggers build anything useful for launch",
+      "impact": "CRITICAL",
+      "canon_affected": ["Navigator Index", "COLD-START-BOOT"]
+    },
+    {
+      "id": "D119-03",
+      "decision": "GAME TESTERS TOMORROW — Michael recruits testers March 31",
+      "impact": "MEDIUM",
+      "canon_affected": ["Game Bible"]
+    }
+  ],
+
+  "corrections": [],
+
+  "principles": [
+    {
+      "id": "P119-01",
+      "text": "we will launch next 48 hrs — Hard shipping deadline overrides all other work. Every pulse run must contribute to launch readiness.",
+      "law_refs": ["L21_RISE", "SHIP_NOW"]
+    }
+  ],
+
+  "system_design_insights": [
+    "Dummy-proof Studio guide format works well for Michael — step-by-step with tables and fill-in blanks",
+    "Pulse runs can contribute to Train 6-7 via: code hardening, documentation, testing scripts, store listing polish, marketing assets, Discord setup"
+  ],
+
+  "active_mission": {
+    "mission": "TRAIN-67-LAUNCH-SPRINT",
+    "deadline": "April 2, 2026 (48 hours from now)",
+    "replacing": "HEAVY_LEDGER_CONVERSION (paused at pipeline #026)"
+  },
+
+  "pulse_work_priority": [
+    "Code hardening — sweep all 41 Luau modules for bugs, edge cases, missing error handling",
+    "Testing infrastructure — build automated test scripts Michael can run in Studio",
+    "Store listing — polish game description, tags, thumbnail specs",
+    "Marketing assets — social media copy, Discord announcement templates",
+    "Discord server setup — channel structure, bot config, welcome messages",
+    "Day-1 hotfix playbook — monitoring checklist, economy balance levers, emergency procedures",
+    "Week-1 content calendar — post-launch engagement plan",
+    "Documentation — any gaps in deployment, operations, or player-facing docs"
+  ],
+
+  "michael_actions_march_31": [
+    "Phone verification (if not done)",
+    "Create 5 Game Passes + 16 Dev Products in Creator Dashboard",
+    "Paste IDs into code",
+    "Find game testers",
+    "Boot test in Studio"
+  ],
+
+  "open_questions": [
+    "Phone verification status — has Michael already done this?",
+    "Which students/contacts will be game testers?",
+    "Quan (from class session) — potential 3D modeling contractor for Roblox?"
+  ],
+
+  "unfinished_actions": [
+    "Michael must do: Phone verification → 5 Game Passes → 16 Dev Products → paste IDs → publish (Studio guide delivered this session)",
+    "Pulse runs: Build everything non-Studio-dependent for Train 6-7 overnight",
+    "Heavy Ledger: PAUSED — was at pipeline #026, will resume after launch"
+  ],
+
+  "artifacts_created": [
+    {
+      "name": "Studio Guide",
+      "delivery": "Chat delivery (not persisted to page)",
+      "type": "GUIDE"
+    },
+    {
+      "name": "This reincarnation entry",
+      "github_path": "CANON/REINCARNATION/2026-03-30-roblox-studio-guide-48hr-launch.md",
+      "type": "SESSION_LOG"
+    }
+  ],
+
+  "state_snapshot": {
+    "canon_cursor": "Heavy Ledger pipeline #026 (PAUSED for Train 6-7 active mission)",
+    "last_run_time": "2026-03-30 23:30 ICT (Run 155)",
+    "build_log_count": 180,
+    "latest_commit": "c15ba189 (Heavy Ledger pipeline cursor update)",
+    "active_mission": "TRAIN-67-LAUNCH-SPRINT (NEW — replacing HEAVY_LEDGER_CONVERSION)"
+  },
+
+  "session_context": "48-hour launch window set for Train-67 Roblox game. Game 1 ships by April 2, 2026. Heavy Ledger conversion PAUSED. Pulse triggers redirected to Train-67 launch sprint. Studio guide with step-by-step instructions delivered. Game testers recruitment scheduled for March 31.",
+
+  "cross_references": {
+    "related_hl": ["HL-112", "HL-113", "HL-114"],
+    "canon_pages": [
+      "COLD-START-BOOT.md",
+      "Game Bible"
+    ],
+    "products": ["roblox_game", "train-67"],
+    "repos_mined": ["train-67"]
+  },
+
+  "fingerprint": "2026-03-30:roblox-studio-guide-48hr-launch:5q:3d:0c:MEDIUM"
+}

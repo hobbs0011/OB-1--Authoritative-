@@ -1,0 +1,4 @@
+source_path: c:\Users\mrmic\OneDrive\Documents\GitHub\phoenix-chat-logs\CHAT-LOGS-ONLY\(KEY-SOUL10)-FROMSCRATCH__V1.jsonl.txt
+verbatim_path: c:\Users\mrmic\Desktop\OB-1\CANON\SOUL-LOG-VERBATIM-KEY-SOUL10-2026-04-05.md
+source_count=97 verbatim_count=194
+unique_in_source=0 unique_in_verbatim=0

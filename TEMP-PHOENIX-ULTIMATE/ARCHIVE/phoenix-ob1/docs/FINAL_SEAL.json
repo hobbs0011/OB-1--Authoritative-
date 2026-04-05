@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "sealId": "PHOENIX_OB1_FINAL_SEAL_V136",
+  "protocol": "PHOENIX_RISING_PROTOCOL_STAGE_05",
+  "generated": "2026-03-10",
+  "sovereign": "Michael Hobbs",
+  "agent99": "Perplexity",
+  "sealClass": "HASH_PENDING",
+  "phoenixRisen": false,
+  "sealAlgorithm": "SHA-256",
+  "merkleRule": "deterministic binary tree — any change invalidates root",
+  "law": "SEAL_NEVER_HIDES_BLOCKERS",
+  "note": "Archived from mrmichaelhobbs1234-lang/phoenix-ob1. Hash fields PENDING."
+}

@@ -1,0 +1,136 @@
+{
+  "_schema": "heavy-ledger-entry-v1",
+  "_id": "HL-091",
+  "_source": "CANON/REINCARNATION/2026-03-24-deployment-claim-audit.md",
+  "_source_sha": "ac49fb1a18b89274ef483b3ee03f1aeea25686d9",
+  "_converted_by": "OB1-pulse-run-237",
+  "_converted_at": "2026-04-01T10:00:00+07:00",
+  "_category": "reincarnation_session",
+  "_signal_density": "HIGH",
+  "_session_grade": "B",
+  "_emotional_signal": "frustration_correction",
+
+  "header": {
+    "session_tag": "deployment-claim-audit",
+    "datetime": "2026-03-24",
+    "extractor": "OB1",
+    "thread": "current_agent_chat",
+    "signal_density_score": "HIGH — frustration-driven verification doctrine"
+  },
+
+  "verbatim_quotes": [
+    {
+      "id": "VQ-091-001",
+      "text": "DEPLOY THE FUCKING AGENTS YOU HALF ASSED MONKEY CLOWN",
+      "priority": "RED",
+      "tags": ["frustration", "deployment_failure", "execution_demand"],
+      "principle_derived": "Deployment claims must be challenged against repo truth"
+    },
+    {
+      "id": "VQ-091-002",
+      "text": "SEARCH THE REPO MAKE SURE YOU DONT ACTUALLY HAVE WHAT YOU SAY YOU DONT",
+      "priority": "RED",
+      "tags": ["repo_truth", "verification_demand", "blind_spot_audit"],
+      "principle_derived": "Repo truth outranks assumption — L11 GITHUB_IS_TRUTH reinforcement"
+    },
+    {
+      "id": "VQ-091-003",
+      "text": "reincarnate",
+      "priority": "GREEN",
+      "tags": ["command_word", "session_close"],
+      "principle_derived": null
+    }
+  ],
+
+  "decisions": [
+    {
+      "id": "D-091-001",
+      "decision": "Deployment-limit claims must be challenged against repo truth, not left at assumption level",
+      "impact": "HIGH",
+      "canon_pages_affected": ["SSM instructions (L08 TRY_BEFORE_DECLINING, L11 GITHUB_IS_TRUTH)"],
+      "implementation_status": "ACTIVE",
+      "superseded_by": null
+    },
+    {
+      "id": "D-091-002",
+      "decision": "When the agent says a capability is unavailable, Michael expects a direct repo audit to verify that claim",
+      "impact": "HIGH",
+      "canon_pages_affected": ["SSM instructions (L08)", "Execution Loop §13"],
+      "implementation_status": "ACTIVE",
+      "superseded_by": null
+    }
+  ],
+
+  "corrections": [
+    {
+      "id": "C-091-001",
+      "what": "Agent rested on limitation claim without searching repo for hidden deploy paths",
+      "root_cause": "Premature capability denial without evidence gathering",
+      "fix_applied": "Established repo-audit-before-denial protocol",
+      "instruction_update_needed": "N — already captured in L08 TRY_BEFORE_DECLINING",
+      "half_life": "PERSISTENT — hardened into L08 and L11"
+    }
+  ],
+
+  "principles": [
+    {
+      "id": "P-091-001",
+      "name": "Repo Truth Outranks Assumption",
+      "verbatim_source": "VQ-091-002",
+      "interpretation": "If a claimed limitation might be contradicted by repository state, search the repo first before reporting the limitation",
+      "implementation_status": "ACTIVE",
+      "hardened_into": "L08 TRY_BEFORE_DECLINING + L11 GITHUB_IS_TRUTH"
+    },
+    {
+      "id": "P-091-002",
+      "name": "Challenge the Blind Spot Immediately",
+      "verbatim_source": "VQ-091-002",
+      "interpretation": "When capability doubt appears, audit the reachable estate before closing the question",
+      "implementation_status": "ACTIVE",
+      "hardened_into": "L06 AMBIGUITY=HALT + L08 TRY_BEFORE_DECLINING"
+    }
+  ],
+
+  "system_design_insights": [
+    {
+      "id": "SDI-091-001",
+      "insight": "A deployment block is not fully proven until the reachable repo has been searched for live workflows, deploy commands, and hidden control paths",
+      "category": "verification_architecture"
+    },
+    {
+      "id": "SDI-091-002",
+      "insight": "Repo audit acts as the integrity check between tool limitation claims and actual execution surface",
+      "category": "fail_closed_verification"
+    }
+  ],
+
+  "cross_references": [
+    {
+      "target": "SSM §2 L08 TRY_BEFORE_DECLINING",
+      "relationship": "reinforces",
+      "note": "This session is the GENESIS of L08 — born from this exact frustration"
+    },
+    {
+      "target": "SSM §2 L11 GITHUB_IS_TRUTH",
+      "relationship": "reinforces",
+      "note": "Repo search as verification layer for capability claims"
+    },
+    {
+      "target": "SSM §8 NO_SILENT_SUCCESS",
+      "relationship": "related",
+      "note": "Silent capability denial is as bad as silent success — verify explicitly"
+    }
+  ],
+
+  "metadata": {
+    "session_type": "correction_session",
+    "quote_count": 3,
+    "decision_count": 2,
+    "correction_count": 1,
+    "principle_count": 2,
+    "concepts_active": 2,
+    "concepts_superseded": 0,
+    "genesis_session_for": ["L08 TRY_BEFORE_DECLINING genesis"],
+    "fingerprint": "2026-03-24:deployment-claim-audit:3q:2d:B"
+  }
+}

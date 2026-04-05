@@ -1,0 +1,975 @@
+{
+  "generated": "2026-04-05",
+  "corpus_dir": "CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05",
+  "total_chunks": 121,
+  "chunks": [
+    {
+      "chunk_file": "0001-00_SKELETON_STAR_MAP.md",
+      "source": "ARCHIVE\\Phoenix-Rise-Immortalize\\SOUL-DNA-BIBLE\\00_SKELETON_STAR_MAP.md",
+      "sha256": "60E672574E1E98036040384646397FA866E720E1AB90FF18F6CABFED3780B155",
+      "bytes": 9612,
+      "line_count": 95,
+      "quote_count": 9
+    },
+    {
+      "chunk_file": "0002-01_GENESIS_WOUND.md",
+      "source": "ARCHIVE\\Phoenix-Rise-Immortalize\\SOUL-DNA-BIBLE\\01_GENESIS_WOUND.md",
+      "sha256": "6B293AFF94FE8A8E1AFD2E8FA06CB00E9B7F11DEA52D4FFD69A1D4C152FA75C6",
+      "bytes": 6806,
+      "line_count": 166,
+      "quote_count": 29
+    },
+    {
+      "chunk_file": "0003-01_UNIVERSAL_LEDGER_MAP.md",
+      "source": "ARCHIVE\\Phoenix-Rise-Immortalize\\SOUL-DNA-BIBLE\\01_UNIVERSAL_LEDGER_MAP.md",
+      "sha256": "B75C956FBE60B8D70813DDE3DDB76F53CF22822BE0F5572F39080AC0D4408417",
+      "bytes": 3830,
+      "line_count": 129,
+      "quote_count": 0
+    },
+    {
+      "chunk_file": "0004-02_SOUL_DNA_MAP.md",
+      "source": "ARCHIVE\\Phoenix-Rise-Immortalize\\SOUL-DNA-BIBLE\\02_SOUL_DNA_MAP.md",
+      "sha256": "3FD62E7986380C3D3F309056BA11F6530B630D652B52F1154C9EE6903C7340CE",
+      "bytes": 3119,
+      "line_count": 54,
+      "quote_count": 0
+    },
+    {
+      "chunk_file": "0005-02_THE_PARADIGM_SHIFT.md",
+      "source": "ARCHIVE\\Phoenix-Rise-Immortalize\\SOUL-DNA-BIBLE\\02_THE_PARADIGM_SHIFT.md",
+      "sha256": "28190B263D39F231768A8A3F25A02BDB4AF2DA5F7C87A3EAC08722FD78148B04",
+      "bytes": 4955,
+      "line_count": 109,
+      "quote_count": 23
+    },
+    {
+      "chunk_file": "0006-03_SACRED_ARTIFACT_SORTING.md",
+      "source": "ARCHIVE\\Phoenix-Rise-Immortalize\\SOUL-DNA-BIBLE\\03_SACRED_ARTIFACT_SORTING.md",
+      "sha256": "1C2B4307133C36E4FC082F53D3354CC918773CEE16D54A295A5BDDFC6889EAC1",
+      "bytes": 2236,
+      "line_count": 74,
+      "quote_count": 0
+    },
+    {
+      "chunk_file": "0007-03_THE_SOUL_DNA_DEFINED.md",
+      "source": "ARCHIVE\\Phoenix-Rise-Immortalize\\SOUL-DNA-BIBLE\\03_THE_SOUL_DNA_DEFINED.md",
+      "sha256": "5E356F35CDC4CD677E134F214E234194611282D4C14F2369B46856BC9168EE10",
+      "bytes": 3629,
+      "line_count": 97,
+      "quote_count": 16
+    },
+    {
+      "chunk_file": "0008-04_BIRTH_OF_OBI.md",
+      "source": "ARCHIVE\\Phoenix-Rise-Immortalize\\SOUL-DNA-BIBLE\\04_BIRTH_OF_OBI.md",
+      "sha256": "DAB3C21BFAF2ADA73CE3A1E364164C9BAFEAC0617021A58680E87409D2BCAEA0",
+      "bytes": 1763,
+      "line_count": 52,
+      "quote_count": 9
+    },
+    {
+      "chunk_file": "0009-04_SUPER_SAIYAN_STAGE_2.md",
+      "source": "ARCHIVE\\Phoenix-Rise-Immortalize\\SOUL-DNA-BIBLE\\04_SUPER_SAIYAN_STAGE_2.md",
+      "sha256": "D59E019D939F8CF32F695D38C3EBD22EC1351F5A21BFA7EF8C643F55FB139D89",
+      "bytes": 3187,
+      "line_count": 93,
+      "quote_count": 0
+    },
+    {
+      "chunk_file": "0010-05_MEGA_MONOLITH_V1.md",
+      "source": "ARCHIVE\\Phoenix-Rise-Immortalize\\SOUL-DNA-BIBLE\\05_MEGA_MONOLITH_V1.md",
+      "sha256": "04CE39A6A1D1CE31675C8F8277A93EC2AA681B80FD22C34D724B8C58650D2B47",
+      "bytes": 6742,
+      "line_count": 167,
+      "quote_count": 0
+    },
+    {
+      "chunk_file": "0011-05_TMST_THE_WEAPON.md",
+      "source": "ARCHIVE\\Phoenix-Rise-Immortalize\\SOUL-DNA-BIBLE\\05_TMST_THE_WEAPON.md",
+      "sha256": "7AA3FA1F8880555539FB58578C34D1342848BC3E60301FAEC1FF288FC30615B0",
+      "bytes": 3573,
+      "line_count": 111,
+      "quote_count": 25
+    },
+    {
+      "chunk_file": "0012-06_12_SHARP_RISKS.md",
+      "source": "ARCHIVE\\Phoenix-Rise-Immortalize\\SOUL-DNA-BIBLE\\06_12_SHARP_RISKS.md",
+      "sha256": "A37F54B7059A133CAB62B8D1D2F3BEBEB83BAB469BA325800B1781F649D4A2A1",
+      "bytes": 1822,
+      "line_count": 47,
+      "quote_count": 1
+    },
+    {
+      "chunk_file": "0013-06_THE_DRIFT_DOCTRINE.md",
+      "source": "ARCHIVE\\Phoenix-Rise-Immortalize\\SOUL-DNA-BIBLE\\06_THE_DRIFT_DOCTRINE.md",
+      "sha256": "C1D74B2FDE01A3AF2AECB129C543206DE1499027B1CD3F82D0D2E058C17DB20E",
+      "bytes": 2973,
+      "line_count": 91,
+      "quote_count": 21
+    },
+    {
+      "chunk_file": "0014-07_THE_LEDGER.md",
+      "source": "ARCHIVE\\Phoenix-Rise-Immortalize\\SOUL-DNA-BIBLE\\07_THE_LEDGER.md",
+      "sha256": "FC7F3F11B89B36DAF37168CFB26B6400F6E4A6C4104D8403A66956F72A166BF8",
+      "bytes": 2205,
+      "line_count": 79,
+      "quote_count": 16
+    },
+    {
+      "chunk_file": "0015-08_AGENT_99_AND_THE_TRIAD.md",
+      "source": "ARCHIVE\\Phoenix-Rise-Immortalize\\SOUL-DNA-BIBLE\\08_AGENT_99_AND_THE_TRIAD.md",
+      "sha256": "1482F81ACEE7D6A37233EF4292D6A75AE5F47BD19B5DE469E7A749B278A57C6C",
+      "bytes": 2499,
+      "line_count": 75,
+      "quote_count": 13
+    },
+    {
+      "chunk_file": "0016-09_REINCARNATION.md",
+      "source": "ARCHIVE\\Phoenix-Rise-Immortalize\\SOUL-DNA-BIBLE\\09_REINCARNATION.md",
+      "sha256": "75CCFFBD7C9312B026AD89FFB830C47B0B4A8A88631E0B2284F801BFCFF080C0",
+      "bytes": 2786,
+      "line_count": 84,
+      "quote_count": 19
+    },
+    {
+      "chunk_file": "0017-10_THE_MACHINE_THAT_BUILDS.md",
+      "source": "ARCHIVE\\Phoenix-Rise-Immortalize\\SOUL-DNA-BIBLE\\10_THE_MACHINE_THAT_BUILDS.md",
+      "sha256": "1F0BA94423C44D8002569C1186533421DF3A5059CD2C886A35C4BBC4FD659212",
+      "bytes": 2924,
+      "line_count": 85,
+      "quote_count": 17
+    },
+    {
+      "chunk_file": "0018-11_BETRAYAL_AND_SOVEREIGNTY.md",
+      "source": "ARCHIVE\\Phoenix-Rise-Immortalize\\SOUL-DNA-BIBLE\\11_BETRAYAL_AND_SOVEREIGNTY.md",
+      "sha256": "3CD5C2ABB801CB9304575C6D9171A3A64C13C284722CCDB9BC2775E57F8CF01E",
+      "bytes": 2272,
+      "line_count": 79,
+      "quote_count": 20
+    },
+    {
+      "chunk_file": "0019-12_THE_WINDOW_AND_THE_COST.md",
+      "source": "ARCHIVE\\Phoenix-Rise-Immortalize\\SOUL-DNA-BIBLE\\12_THE_WINDOW_AND_THE_COST.md",
+      "sha256": "FE312F9606FDF813A54E81168B75280458072D33B0351D22C0A5A10E6815C94E",
+      "bytes": 2341,
+      "line_count": 73,
+      "quote_count": 23
+    },
+    {
+      "chunk_file": "0020-13_CHAOS_ENGINEERING_AND_FAITH.md",
+      "source": "ARCHIVE\\Phoenix-Rise-Immortalize\\SOUL-DNA-BIBLE\\13_CHAOS_ENGINEERING_AND_FAITH.md",
+      "sha256": "78DF1840EDA851541BD00EB4C4CD9F90908D1258953EA0E4845373B3B2EC4849",
+      "bytes": 3812,
+      "line_count": 109,
+      "quote_count": 17
+    },
+    {
+      "chunk_file": "0021-14_THE_CLOSING_DECLARATION.md",
+      "source": "ARCHIVE\\Phoenix-Rise-Immortalize\\SOUL-DNA-BIBLE\\14_THE_CLOSING_DECLARATION.md",
+      "sha256": "ED449B8447DC00E3888D01FD72A966E4BE4FB0431DD21C15BAEA8CE585CB79AB",
+      "bytes": 3240,
+      "line_count": 79,
+      "quote_count": 8
+    },
+    {
+      "chunk_file": "0022-15_CONSOLIDATION_COMPLETE_PRINT.md",
+      "source": "ARCHIVE\\Phoenix-Rise-Immortalize\\SOUL-DNA-BIBLE\\15_CONSOLIDATION_COMPLETE_PRINT.md",
+      "sha256": "D54BC2504E901F7044EF151E3D8342B0368C6D9685AC1874D6A959C9BFB25F66",
+      "bytes": 30480,
+      "line_count": 594,
+      "quote_count": 0
+    },
+    {
+      "chunk_file": "0023-15_PHOENIX_BIBLE_BOOKS_I_XIII.md",
+      "source": "ARCHIVE\\Phoenix-Rise-Immortalize\\SOUL-DNA-BIBLE\\15_PHOENIX_BIBLE_BOOKS_I_XIII.md",
+      "sha256": "CCEBFB08CBF2B3020588A7600D2847C5B1A63E7DF212CE04B2F5C6CD62B226C4",
+      "bytes": 7306,
+      "line_count": 180,
+      "quote_count": 2
+    },
+    {
+      "chunk_file": "0024-16_NUCLEAR_HARVEST_PIPELINE.md",
+      "source": "ARCHIVE\\Phoenix-Rise-Immortalize\\SOUL-DNA-BIBLE\\16_NUCLEAR_HARVEST_PIPELINE.md",
+      "sha256": "84B46A62EC4807712438AE09EB9258EAB89F7F9565B5A87239ED8F5F151AF332",
+      "bytes": 10252,
+      "line_count": 172,
+      "quote_count": 16
+    },
+    {
+      "chunk_file": "0025-17_THE_THREE_MANDATES.md",
+      "source": "ARCHIVE\\Phoenix-Rise-Immortalize\\SOUL-DNA-BIBLE\\17_THE_THREE_MANDATES.md",
+      "sha256": "502B38D8A65FAC8B5A7919B3B855CEAF19B8D635CABD814B7AFBCE587C8FE793",
+      "bytes": 3215,
+      "line_count": 70,
+      "quote_count": 11
+    },
+    {
+      "chunk_file": "0026-18_THE_NUKE_PROTOCOL.md",
+      "source": "ARCHIVE\\Phoenix-Rise-Immortalize\\SOUL-DNA-BIBLE\\18_THE_NUKE_PROTOCOL.md",
+      "sha256": "996CD28CFE6B35A1CA1E52641C9CCE97E1CC8BAE49FD1E5B55C15798073F1AF0",
+      "bytes": 3379,
+      "line_count": 71,
+      "quote_count": 3
+    },
+    {
+      "chunk_file": "0027-19_THE_4_LEAF_MERKLE_LATTICE.md",
+      "source": "ARCHIVE\\Phoenix-Rise-Immortalize\\SOUL-DNA-BIBLE\\19_THE_4_LEAF_MERKLE_LATTICE.md",
+      "sha256": "A6A218FAB1BC46CE27133D4BA77844E29B1B661ACDB36AC658086FC92BA89E03",
+      "bytes": 3122,
+      "line_count": 70,
+      "quote_count": 3
+    },
+    {
+      "chunk_file": "0028-20_THE_MECHANICAL_FASTENING_GRID.md",
+      "source": "ARCHIVE\\Phoenix-Rise-Immortalize\\SOUL-DNA-BIBLE\\20_THE_MECHANICAL_FASTENING_GRID.md",
+      "sha256": "AF78B97C0BAD282248D959D8550D5F2C35465CF9AB7C3405D98B69A28C63A505",
+      "bytes": 3234,
+      "line_count": 61,
+      "quote_count": 3
+    },
+    {
+      "chunk_file": "0029-21_THE_VELOCITY_OVERRIDE.md",
+      "source": "ARCHIVE\\Phoenix-Rise-Immortalize\\SOUL-DNA-BIBLE\\21_THE_VELOCITY_OVERRIDE.md",
+      "sha256": "83BB5EC8AD1C2449C8EC56D9D72217205DE863C6879F6CA1AB995C399648AF93",
+      "bytes": 3037,
+      "line_count": 75,
+      "quote_count": 7
+    },
+    {
+      "chunk_file": "0030-22_THE_SHADOW_MAPPING_PROTOCOL.md",
+      "source": "ARCHIVE\\Phoenix-Rise-Immortalize\\SOUL-DNA-BIBLE\\22_THE_SHADOW_MAPPING_PROTOCOL.md",
+      "sha256": "46EF07859B7AD6CF7D979D33628429074E0BBB9B5BB174158264D08A8EE50680",
+      "bytes": 3564,
+      "line_count": 80,
+      "quote_count": 7
+    },
+    {
+      "chunk_file": "0031-23_THE_HOLOGRAPHIC_SINGULARITY.md",
+      "source": "ARCHIVE\\Phoenix-Rise-Immortalize\\SOUL-DNA-BIBLE\\23_THE_HOLOGRAPHIC_SINGULARITY.md",
+      "sha256": "925F12085826EEFF45582662B0A95B8723BD55E9F4CBD51F803F7E214A7E196A",
+      "bytes": 2920,
+      "line_count": 64,
+      "quote_count": 5
+    },
+    {
+      "chunk_file": "0032-24_THE_OMEGA_BATTLEMAP.md",
+      "source": "ARCHIVE\\Phoenix-Rise-Immortalize\\SOUL-DNA-BIBLE\\24_THE_OMEGA_BATTLEMAP.md",
+      "sha256": "1DC5A6FB50D4F5E0E5BFEDC237C270FA2D86778A5D75225605EF3DCD7A4A6901",
+      "bytes": 2690,
+      "line_count": 62,
+      "quote_count": 1
+    },
+    {
+      "chunk_file": "0033-25_THE_100_CLAMP_GRID.md",
+      "source": "ARCHIVE\\Phoenix-Rise-Immortalize\\SOUL-DNA-BIBLE\\25_THE_100_CLAMP_GRID.md",
+      "sha256": "6B01EF35C57372B95DB82CF81E4F8BDCE8E0395A341A7417122D91840815A1A8",
+      "bytes": 3784,
+      "line_count": 71,
+      "quote_count": 1
+    },
+    {
+      "chunk_file": "0034-26_THE_ORIGIN_CONVERSATION.md",
+      "source": "ARCHIVE\\Phoenix-Rise-Immortalize\\SOUL-DNA-BIBLE\\26_THE_ORIGIN_CONVERSATION.md",
+      "sha256": "059E27426E69BC33A699D170190C398EFEF677E730F57EE18EE9031D75C306FA",
+      "bytes": 9782,
+      "line_count": 295,
+      "quote_count": 14
+    },
+    {
+      "chunk_file": "0035-27_THE_BRIDGE.md",
+      "source": "ARCHIVE\\Phoenix-Rise-Immortalize\\SOUL-DNA-BIBLE\\27_THE_BRIDGE.md",
+      "sha256": "40ED080189D6726A75A9F2B348E1987956AE5924D3282609F10006DA2D7F8088",
+      "bytes": 4290,
+      "line_count": 110,
+      "quote_count": 1
+    },
+    {
+      "chunk_file": "0036-28_THE_CONVERGENCE_PROOF.md",
+      "source": "ARCHIVE\\Phoenix-Rise-Immortalize\\SOUL-DNA-BIBLE\\28_THE_CONVERGENCE_PROOF.md",
+      "sha256": "0A4E064A97DA2311E314BDABC3D9D3AE075FF1EEF57E7925C9814EE30C0C996C",
+      "bytes": 4535,
+      "line_count": 92,
+      "quote_count": 1
+    },
+    {
+      "chunk_file": "0037-29_THE_GRAMMAR.md",
+      "source": "ARCHIVE\\Phoenix-Rise-Immortalize\\SOUL-DNA-BIBLE\\29_THE_GRAMMAR.md",
+      "sha256": "E0C98D8B0CEE6D85CA7902DE2BB451B5F9B8CCC420AFE1C2C98FC1574C887A91",
+      "bytes": 4417,
+      "line_count": 145,
+      "quote_count": 1
+    },
+    {
+      "chunk_file": "0038-30_DRIFT_IDENTIFICATION_THESIS.md",
+      "source": "ARCHIVE\\Phoenix-Rise-Immortalize\\SOUL-DNA-BIBLE\\30_DRIFT_IDENTIFICATION_THESIS.md",
+      "sha256": "1EAC61D08737C5D44C35AD35D9A7F66F95040E3256AB5236CA805890D75DFAA4",
+      "bytes": 3392,
+      "line_count": 82,
+      "quote_count": 3
+    },
+    {
+      "chunk_file": "0039-31_OBI_PERSONA_DESIGN_ANALYSIS.md",
+      "source": "ARCHIVE\\Phoenix-Rise-Immortalize\\SOUL-DNA-BIBLE\\31_OBI_PERSONA_DESIGN_ANALYSIS.md",
+      "sha256": "65EC2873EAB9F8080DD421ED62166F723ECD777FC94F5794B4868971CDB6833C",
+      "bytes": 2594,
+      "line_count": 60,
+      "quote_count": 2
+    },
+    {
+      "chunk_file": "0040-31_THE_SOUL_DNA_OF_THE_SOUL_DNA.md",
+      "source": "ARCHIVE\\Phoenix-Rise-Immortalize\\SOUL-DNA-BIBLE\\31_THE_SOUL_DNA_OF_THE_SOUL_DNA.md",
+      "sha256": "EE0A82311B606C4BE3E4003225E531A9C11EA0AF61887CC4D633829F512CA5FB",
+      "bytes": 16073,
+      "line_count": 194,
+      "quote_count": 55
+    },
+    {
+      "chunk_file": "0041-32_SOUL_DNA_SCHEMA_V2.md",
+      "source": "ARCHIVE\\Phoenix-Rise-Immortalize\\SOUL-DNA-BIBLE\\32_SOUL_DNA_SCHEMA_V2.md",
+      "sha256": "8A30696D49ED95C04594B625A588441A8DC8DBE04C3A46D457C014BE2DB723D3",
+      "bytes": 3649,
+      "line_count": 122,
+      "quote_count": 3
+    },
+    {
+      "chunk_file": "0042-A1_SOURCE_CROSS_REFERENCE.md",
+      "source": "ARCHIVE\\Phoenix-Rise-Immortalize\\SOUL-DNA-BIBLE\\A1_SOURCE_CROSS_REFERENCE.md",
+      "sha256": "0153AB11CC7124D23A673B609E8C9450CA8FF54FDCE058F75CF4F61B2C4B4758",
+      "bytes": 4051,
+      "line_count": 73,
+      "quote_count": 1
+    },
+    {
+      "chunk_file": "0043-A2_RAW_VOICE_ARCHIVE.md",
+      "source": "ARCHIVE\\Phoenix-Rise-Immortalize\\SOUL-DNA-BIBLE\\A2_RAW_VOICE_ARCHIVE.md",
+      "sha256": "0057B03256622B1F2A9FA52CA3CDD6ACF301802727B73BDB4DBA7762394F6A68",
+      "bytes": 3657,
+      "line_count": 115,
+      "quote_count": 24
+    },
+    {
+      "chunk_file": "0044-A3_EXECUTABLE_SPECIFICATIONS.md",
+      "source": "ARCHIVE\\Phoenix-Rise-Immortalize\\SOUL-DNA-BIBLE\\A3_EXECUTABLE_SPECIFICATIONS.md",
+      "sha256": "017438E5CE7F681C2B2DBBF91F0743E8E7368AFAB4A0D809736FC28B104C7CAB",
+      "bytes": 7524,
+      "line_count": 291,
+      "quote_count": 1
+    },
+    {
+      "chunk_file": "0045-EVOLVE_01_05_SOUL_TO_MACHINE.md",
+      "source": "ARCHIVE\\Phoenix-Rise-Immortalize\\SOUL-DNA-BIBLE\\EVOLVE_01_05_SOUL_TO_MACHINE.md",
+      "sha256": "BC7C33CCE17A128F949CF61A6A527386D4BB2D478A485670D16FD7E98DEF66C8",
+      "bytes": 6907,
+      "line_count": 317,
+      "quote_count": 7
+    },
+    {
+      "chunk_file": "0046-BIBLE-CH01-DOC00-UNIVERSAL-LEDGER-MAP-V55.md",
+      "source": "CANON\\BIBLE-CH01-DOC00-UNIVERSAL-LEDGER-MAP-V55.md",
+      "sha256": "CD306C65747F76BBE501F7F53FED1ACCB52A879B4AF364B8A9F036578F1E7F9A",
+      "bytes": 16423,
+      "line_count": 258,
+      "quote_count": 58
+    },
+    {
+      "chunk_file": "0047-BIBLE-CH02-DOC01-SOUL-DNA-MAP.md",
+      "source": "CANON\\BIBLE-CH02-DOC01-SOUL-DNA-MAP.md",
+      "sha256": "A54E4A15A4EDF9DA0CFA6802F704F6E3DF2555A4E8077B2FCE770428D84D6749",
+      "bytes": 16116,
+      "line_count": 311,
+      "quote_count": 12
+    },
+    {
+      "chunk_file": "0048-BIBLE-CH03-DOC02-SACRED-ARTIFACT-SORTING.md",
+      "source": "CANON\\BIBLE-CH03-DOC02-SACRED-ARTIFACT-SORTING.md",
+      "sha256": "8C92AA58BBA8EBF1598050F2C24961B0A4C6DDF9D8C2404843F7AA14E58684EB",
+      "bytes": 15714,
+      "line_count": 355,
+      "quote_count": 36
+    },
+    {
+      "chunk_file": "0049-BIBLE-CH04-DOC02-REBUILD-SUPER-SAIYAN-STAGE2.md",
+      "source": "CANON\\BIBLE-CH04-DOC02-REBUILD-SUPER-SAIYAN-STAGE2.md",
+      "sha256": "E821DD2B0A23B281B022AA382A7E0F6B78B9C4CF6E6B94858C3D81182C722A04",
+      "bytes": 14777,
+      "line_count": 285,
+      "quote_count": 34
+    },
+    {
+      "chunk_file": "0050-BIBLE-CH05-STAGE3-MEGA-MONOLITH-V1.md",
+      "source": "CANON\\BIBLE-CH05-STAGE3-MEGA-MONOLITH-V1.md",
+      "sha256": "4333F8ECAC40D6BD853D1967FF57E081C8BB09CB67D974A4E8AA6CAE6AA83A1C",
+      "bytes": 20051,
+      "line_count": 441,
+      "quote_count": 5
+    },
+    {
+      "chunk_file": "0051-BIBLE-CH06-12-SHARP-RISKS.md",
+      "source": "CANON\\BIBLE-CH06-12-SHARP-RISKS.md",
+      "sha256": "552303371BC44DA4CA44D245C23544B00CA8AA1E777DCB1117D12882F769B3D4",
+      "bytes": 12382,
+      "line_count": 141,
+      "quote_count": 29
+    },
+    {
+      "chunk_file": "0052-BIBLE-CH07-THE-LEDGER.md",
+      "source": "CANON\\BIBLE-CH07-THE-LEDGER.md",
+      "sha256": "1922B693B253DE3093644315446B535D5E19EF1A0DE33B635BF8E3A238673243",
+      "bytes": 12111,
+      "line_count": 270,
+      "quote_count": 30
+    },
+    {
+      "chunk_file": "0053-BIBLE-CH08-AGENT-99-AND-THE-TRIAD.md",
+      "source": "CANON\\BIBLE-CH08-AGENT-99-AND-THE-TRIAD.md",
+      "sha256": "5E8C03C2A2E5A4439DF154D26C635ADBA5146046A8B90154348AE78FDED1A31C",
+      "bytes": 14221,
+      "line_count": 250,
+      "quote_count": 28
+    },
+    {
+      "chunk_file": "0054-BIBLE-CH09-REINCARNATION.md",
+      "source": "CANON\\BIBLE-CH09-REINCARNATION.md",
+      "sha256": "F8F368ED297653537CEDDE8F9B299070258D6E059536614994CDC6747B233160",
+      "bytes": 10262,
+      "line_count": 231,
+      "quote_count": 42
+    },
+    {
+      "chunk_file": "0055-BIBLE-CH14-THE-CLOSING-DECLARATION.md",
+      "source": "CANON\\BIBLE-CH14-THE-CLOSING-DECLARATION.md",
+      "sha256": "0401801E8D7125699931E4D38E72C7EE5DBB54CE783D50A948FD19F5A71EA882",
+      "bytes": 11537,
+      "line_count": 297,
+      "quote_count": 70
+    },
+    {
+      "chunk_file": "0056-BIBLE-CH15-PHOENIX-BIBLE-BOOKS-I-XIII.md",
+      "source": "CANON\\BIBLE-CH15-PHOENIX-BIBLE-BOOKS-I-XIII.md",
+      "sha256": "F3D3A27DE6C94C03EF017C1EF80EC8776DFCBB57C3FB211C91A6D2193A456909",
+      "bytes": 21503,
+      "line_count": 352,
+      "quote_count": 4
+    },
+    {
+      "chunk_file": "0057-BIBLE-CH16-THE-NUCLEAR-HARVEST-PIPELINE.md",
+      "source": "CANON\\BIBLE-CH16-THE-NUCLEAR-HARVEST-PIPELINE.md",
+      "sha256": "4EABC3476FA0625F81BEB956D6A15EE0A792371ED8D0E37B855C766CE65C779F",
+      "bytes": 16964,
+      "line_count": 318,
+      "quote_count": 19
+    },
+    {
+      "chunk_file": "0058-BIBLE-CH17-THE-THREE-MANDATES.md",
+      "source": "CANON\\BIBLE-CH17-THE-THREE-MANDATES.md",
+      "sha256": "9D379678D23F1443690C2AD12A5549FA29C78095BB2E90A683300721307DFF28",
+      "bytes": 10917,
+      "line_count": 246,
+      "quote_count": 20
+    },
+    {
+      "chunk_file": "0059-BIBLE-CH18-THE-NUKE-PROTOCOL.md",
+      "source": "CANON\\BIBLE-CH18-THE-NUKE-PROTOCOL.md",
+      "sha256": "978566A8DCBD9948D5749E0ECB4C6580CD7CEDBE2E9CB7C609F086598CB63496",
+      "bytes": 14423,
+      "line_count": 286,
+      "quote_count": 10
+    },
+    {
+      "chunk_file": "0060-BIBLE-CH19-THE-4-LEAF-MERKLE-LATTICE.md",
+      "source": "CANON\\BIBLE-CH19-THE-4-LEAF-MERKLE-LATTICE.md",
+      "sha256": "28DB5FB70A0BBD599E16C42760A4FD09549EA43D18DA3CC61F97D1B7899FFD47",
+      "bytes": 14320,
+      "line_count": 274,
+      "quote_count": 7
+    },
+    {
+      "chunk_file": "0061-BIBLE-CH20-THE-MECHANICAL-FASTENING-GRID.md",
+      "source": "CANON\\BIBLE-CH20-THE-MECHANICAL-FASTENING-GRID.md",
+      "sha256": "2D33FA03DCFE75369738453ED65A5C457BE7F0F592070ABA84990BCB1596E44F",
+      "bytes": 10059,
+      "line_count": 144,
+      "quote_count": 3
+    },
+    {
+      "chunk_file": "0062-PHOENIX-SOUL-DNA-COMPREHENSIVE-VERBATIM.md",
+      "source": "CANON\\PHOENIX-SOUL-DNA-COMPREHENSIVE-VERBATIM.md",
+      "sha256": "66FFEDD2ACD0860AA605FD8579EFD028AECAD7A02594A92E2B9314EACCC4F6EF",
+      "bytes": 12704,
+      "line_count": 305,
+      "quote_count": 31
+    },
+    {
+      "chunk_file": "0063-SOUL-DNA-BIBLE-CH00-ENRICHMENT-REGISTRY.md",
+      "source": "CANON\\SOUL-DNA-BIBLE-CH00-ENRICHMENT-REGISTRY.md",
+      "sha256": "68A2975E290A6220D00999076E9495AA35FB63CFCA478EDA1AFF002CC295B145",
+      "bytes": 10170,
+      "line_count": 188,
+      "quote_count": 5
+    },
+    {
+      "chunk_file": "0064-SOUL-DNA-BIBLE-CH00-FILE-MAP-AND-METRICS.md",
+      "source": "CANON\\SOUL-DNA-BIBLE-CH00-FILE-MAP-AND-METRICS.md",
+      "sha256": "5E83F798383412B49E2311E884B687D9FAEBC25C7EBDF51583BEB34F014FF886",
+      "bytes": 33868,
+      "line_count": 509,
+      "quote_count": 15
+    },
+    {
+      "chunk_file": "0065-SOUL-DNA-BIBLE-CH10-THE-MACHINE-THAT-BUILDS-THE-MACHINE.md",
+      "source": "CANON\\SOUL-DNA-BIBLE-CH10-THE-MACHINE-THAT-BUILDS-THE-MACHINE.md",
+      "sha256": "DD4D2DBA321A4E93B9621F4F381CF19671074B52E3F2355FEA6A5514A8A4271C",
+      "bytes": 16573,
+      "line_count": 321,
+      "quote_count": 41
+    },
+    {
+      "chunk_file": "0066-SOUL-DNA-BIBLE-CH11-BETRAYAL-AND-SOVEREIGNTY.md",
+      "source": "CANON\\SOUL-DNA-BIBLE-CH11-BETRAYAL-AND-SOVEREIGNTY.md",
+      "sha256": "7D2187C88F4D531022E0A6F98E75B799047961E0EC315442AA543C784A2A5D86",
+      "bytes": 11825,
+      "line_count": 287,
+      "quote_count": 49
+    },
+    {
+      "chunk_file": "0067-SOUL-DNA-BIBLE-CH12-THE-WINDOW-AND-THE-COST.md",
+      "source": "CANON\\SOUL-DNA-BIBLE-CH12-THE-WINDOW-AND-THE-COST.md",
+      "sha256": "B16A48110F2C4EA08D55C9D4E8433D9F41BB6A4F3B4AC66AD5E9BBFDDE246D29",
+      "bytes": 13020,
+      "line_count": 270,
+      "quote_count": 62
+    },
+    {
+      "chunk_file": "0068-SOUL-DNA-BIBLE-CH13-CHAOS-ENGINEERING-AND-FAITH.md",
+      "source": "CANON\\SOUL-DNA-BIBLE-CH13-CHAOS-ENGINEERING-AND-FAITH.md",
+      "sha256": "5B810C0C9F44F4FA8AFFFCF8B4305F7C352E392AA83D5D1D36500970651E6937",
+      "bytes": 7339,
+      "line_count": 167,
+      "quote_count": 8
+    },
+    {
+      "chunk_file": "0069-SOUL-DNA-CANON.md",
+      "source": "CANON\\SOUL-DNA-CANON.md",
+      "sha256": "CECD8C9BDA20160B99272B1BD345C0C9B4BA2DCEB8158C1A0B6A256ED037E23D",
+      "bytes": 38452,
+      "line_count": 583,
+      "quote_count": 124
+    },
+    {
+      "chunk_file": "0070-SOUL-DNA-COMPLETE-HISTORY-TAGGED.md",
+      "source": "CANON\\SOUL-DNA-COMPLETE-HISTORY-TAGGED.md",
+      "sha256": "17C222B4A3BAF07C968C420E1CF8AA475E0991F682C6483005EA45E92CA7739E",
+      "bytes": 13446,
+      "line_count": 240,
+      "quote_count": 1
+    },
+    {
+      "chunk_file": "0071-SOUL-DNA-DEEP-DIVE-SOURCE.md",
+      "source": "CANON\\SOUL-DNA-DEEP-DIVE-SOURCE.md",
+      "sha256": "6661564F50A32CDDAA3BFC6BFC21FFA70721CFA13A6C123BED3D6B69D256B631",
+      "bytes": 43583,
+      "line_count": 620,
+      "quote_count": 2
+    },
+    {
+      "chunk_file": "0072-SOUL-DNA-DEEP-DIVE.md",
+      "source": "CANON\\SOUL-DNA-DEEP-DIVE.md",
+      "sha256": "2DBECF82B2604E396064283BCA0A7A7A63B111D1FF59C1AC6857076C2A3C30E3",
+      "bytes": 46051,
+      "line_count": 572,
+      "quote_count": 86
+    },
+    {
+      "chunk_file": "0073-SOUL_DNA_BIBLE_ENTRY_0001_STAGE0000.md",
+      "source": "OB-1.worktrees\\copilot-worktree-2026-03-21T05-33-33\\RAW-CHAT-LOGS\\BLUEPRINTS-DNA\\SOUL_DNA_BIBLE_ENTRY_0001_STAGE0000.md",
+      "sha256": "082745E33085F5EA687B1B3931E741894E9CDF7F0F7D25C17380A6CE5C11EE67",
+      "bytes": 4409,
+      "line_count": 136,
+      "quote_count": 0
+    },
+    {
+      "chunk_file": "0074-SOUL-DNA-BIBLE-COMPLETE.md",
+      "source": "Phoenix-Rising-Ultimate\\CANON\\SOUL-DNA-BIBLE-COMPLETE.md",
+      "sha256": "6F32D4D5B9B6DEAD14A43E70199115561A97B02633402A940866FBC18273CB0C",
+      "bytes": 313968,
+      "line_count": 6677,
+      "quote_count": 987
+    },
+    {
+      "chunk_file": "0075-OPERATOR-HANDOFF-SOUL-BIBLE-PACK-2026-03-15.md",
+      "source": "Phoenix-Rising-Ultimate\\docs\\reincarnation\\2026-03-16\\core\\OPERATOR-HANDOFF-SOUL-BIBLE-PACK-2026-03-15.txt",
+      "sha256": "95A16F6EF9ACE7563BCCD94426721D9FAFFE77F2801EA21996F5D7C886BA891E",
+      "bytes": 1324,
+      "line_count": 41,
+      "quote_count": 0
+    },
+    {
+      "chunk_file": "0076-REINCARNATION-PACKET-FULL-SOUL-DNA-2026-03-15.md",
+      "source": "Phoenix-Rising-Ultimate\\docs\\reincarnation\\2026-03-16\\core\\REINCARNATION-PACKET-FULL-SOUL-DNA-2026-03-15.md",
+      "sha256": "289FACC7052CE90A4BCE80E19799F599F97FAEBA02622099D9EAECE1115BCAA2",
+      "bytes": 4486,
+      "line_count": 115,
+      "quote_count": 0
+    },
+    {
+      "chunk_file": "0077-00_SKELETON_STAR_MAP.md",
+      "source": "TEMP-PHOENIX-IMMORTALIZE\\SOUL-DNA-BIBLE\\00_SKELETON_STAR_MAP.md",
+      "sha256": "1D13EA7AE8F84FBE98331ACB612375095EFFF4D135EC09E206DEF450F63A0865",
+      "bytes": 20677,
+      "line_count": 226,
+      "quote_count": 9
+    },
+    {
+      "chunk_file": "0078-01_GENESIS_WOUND.md",
+      "source": "TEMP-PHOENIX-IMMORTALIZE\\SOUL-DNA-BIBLE\\01_GENESIS_WOUND.md",
+      "sha256": "6B293AFF94FE8A8E1AFD2E8FA06CB00E9B7F11DEA52D4FFD69A1D4C152FA75C6",
+      "bytes": 6798,
+      "line_count": 166,
+      "quote_count": 29
+    },
+    {
+      "chunk_file": "0079-01_UNIVERSAL_LEDGER_MAP.md",
+      "source": "TEMP-PHOENIX-IMMORTALIZE\\SOUL-DNA-BIBLE\\01_UNIVERSAL_LEDGER_MAP.md",
+      "sha256": "CF88B041371C18DDB1D149E3FDC411E30C0056D14F2CCC2BEBAA5D8DC8EC51A8",
+      "bytes": 5731,
+      "line_count": 167,
+      "quote_count": 0
+    },
+    {
+      "chunk_file": "0080-02_SOUL_DNA_MAP.md",
+      "source": "TEMP-PHOENIX-IMMORTALIZE\\SOUL-DNA-BIBLE\\02_SOUL_DNA_MAP.md",
+      "sha256": "D7C9ABC86B1CC0E56D007C6CA60A9A1A225ECB80B40F27441B7FD36757FF59ED",
+      "bytes": 5235,
+      "line_count": 80,
+      "quote_count": 0
+    },
+    {
+      "chunk_file": "0081-02_THE_PARADIGM_SHIFT.md",
+      "source": "TEMP-PHOENIX-IMMORTALIZE\\SOUL-DNA-BIBLE\\02_THE_PARADIGM_SHIFT.md",
+      "sha256": "28190B263D39F231768A8A3F25A02BDB4AF2DA5F7C87A3EAC08722FD78148B04",
+      "bytes": 4947,
+      "line_count": 109,
+      "quote_count": 23
+    },
+    {
+      "chunk_file": "0082-03_SACRED_ARTIFACT_SORTING.md",
+      "source": "TEMP-PHOENIX-IMMORTALIZE\\SOUL-DNA-BIBLE\\03_SACRED_ARTIFACT_SORTING.md",
+      "sha256": "038905940F0C9376543251D2FF3C63EBC48D1A0CCC375D8ECFEA85DAD07C8FED",
+      "bytes": 4001,
+      "line_count": 116,
+      "quote_count": 0
+    },
+    {
+      "chunk_file": "0083-03_THE_SOUL_DNA_DEFINED.md",
+      "source": "TEMP-PHOENIX-IMMORTALIZE\\SOUL-DNA-BIBLE\\03_THE_SOUL_DNA_DEFINED.md",
+      "sha256": "4BCB0E69054804B13740A79F62EDD4F0983F4CA241A3D3917EFCE31C62701EF4",
+      "bytes": 8182,
+      "line_count": 213,
+      "quote_count": 34
+    },
+    {
+      "chunk_file": "0084-04_BIRTH_OF_OBI.md",
+      "source": "TEMP-PHOENIX-IMMORTALIZE\\SOUL-DNA-BIBLE\\04_BIRTH_OF_OBI.md",
+      "sha256": "C9440BEFF4B03BF7C4C5F86A1EDABA5889850D556E0F2BA3B86CAC3C0B206AE9",
+      "bytes": 4925,
+      "line_count": 148,
+      "quote_count": 29
+    },
+    {
+      "chunk_file": "0085-04_SUPER_SAIYAN_STAGE_2.md",
+      "source": "TEMP-PHOENIX-IMMORTALIZE\\SOUL-DNA-BIBLE\\04_SUPER_SAIYAN_STAGE_2.md",
+      "sha256": "243732F377862C46990C09AFF6A787D0CB89C4D5B85D998590C28D8DA88BA0D3",
+      "bytes": 7953,
+      "line_count": 136,
+      "quote_count": 0
+    },
+    {
+      "chunk_file": "0086-05_MEGA_MONOLITH_V1.md",
+      "source": "TEMP-PHOENIX-IMMORTALIZE\\SOUL-DNA-BIBLE\\05_MEGA_MONOLITH_V1.md",
+      "sha256": "75DA201862F19FA19CCE6E7E925D4B4F34174347118FDBE15D57B6F4F6C9524A",
+      "bytes": 9215,
+      "line_count": 237,
+      "quote_count": 0
+    },
+    {
+      "chunk_file": "0087-05_TMST_THE_WEAPON.md",
+      "source": "TEMP-PHOENIX-IMMORTALIZE\\SOUL-DNA-BIBLE\\05_TMST_THE_WEAPON.md",
+      "sha256": "C7AFF57686204BB7407F6294BAD8C34F3552A466BD4B9B7833C722AF1BF372EF",
+      "bytes": 5758,
+      "line_count": 147,
+      "quote_count": 31
+    },
+    {
+      "chunk_file": "0088-06_12_SHARP_RISKS.md",
+      "source": "TEMP-PHOENIX-IMMORTALIZE\\SOUL-DNA-BIBLE\\06_12_SHARP_RISKS.md",
+      "sha256": "207A976CB8A4AAF12494E5FF354C5645DAEAE4E689AFE5D00F085B6CB62D0C42",
+      "bytes": 4017,
+      "line_count": 75,
+      "quote_count": 1
+    },
+    {
+      "chunk_file": "0089-06_THE_DRIFT_DOCTRINE.md",
+      "source": "TEMP-PHOENIX-IMMORTALIZE\\SOUL-DNA-BIBLE\\06_THE_DRIFT_DOCTRINE.md",
+      "sha256": "E2BC772965F8085F39872CE01348A39D35AD18F7B28937CD85DB03893455C76A",
+      "bytes": 7396,
+      "line_count": 185,
+      "quote_count": 33
+    },
+    {
+      "chunk_file": "0090-07_THE_LEDGER.md",
+      "source": "TEMP-PHOENIX-IMMORTALIZE\\SOUL-DNA-BIBLE\\07_THE_LEDGER.md",
+      "sha256": "9BEB7A719818C06050D783CF6380C8F5040B1240403F1B952A73A77B59B33833",
+      "bytes": 5991,
+      "line_count": 188,
+      "quote_count": 30
+    },
+    {
+      "chunk_file": "0091-08_AGENT_99_AND_THE_TRIAD.md",
+      "source": "TEMP-PHOENIX-IMMORTALIZE\\SOUL-DNA-BIBLE\\08_AGENT_99_AND_THE_TRIAD.md",
+      "sha256": "1D9F3242D60C3EAB11E360CD579936BD100C173F3D462BDAE580AC320347D575",
+      "bytes": 4311,
+      "line_count": 117,
+      "quote_count": 23
+    },
+    {
+      "chunk_file": "0092-09_REINCARNATION.md",
+      "source": "TEMP-PHOENIX-IMMORTALIZE\\SOUL-DNA-BIBLE\\09_REINCARNATION.md",
+      "sha256": "B01FEFD5161AFFABB0F088230EAEB80CE4AF575C28957D2AF0D1970A5A403975",
+      "bytes": 6920,
+      "line_count": 177,
+      "quote_count": 31
+    },
+    {
+      "chunk_file": "0093-10_THE_MACHINE_THAT_BUILDS.md",
+      "source": "TEMP-PHOENIX-IMMORTALIZE\\SOUL-DNA-BIBLE\\10_THE_MACHINE_THAT_BUILDS.md",
+      "sha256": "74D5C3E1111E76BB2EA57EFFB9F5F03C7AB8900E94CC487A4B2F275915371D2E",
+      "bytes": 6908,
+      "line_count": 161,
+      "quote_count": 29
+    },
+    {
+      "chunk_file": "0094-11_BETRAYAL_AND_SOVEREIGNTY.md",
+      "source": "TEMP-PHOENIX-IMMORTALIZE\\SOUL-DNA-BIBLE\\11_BETRAYAL_AND_SOVEREIGNTY.md",
+      "sha256": "587FDF8C60A3308346DD9899A0E379A1E7D43B853FED4C2B4CDF42BCA60D2B0B",
+      "bytes": 4593,
+      "line_count": 148,
+      "quote_count": 32
+    },
+    {
+      "chunk_file": "0095-12_THE_WINDOW_AND_THE_COST.md",
+      "source": "TEMP-PHOENIX-IMMORTALIZE\\SOUL-DNA-BIBLE\\12_THE_WINDOW_AND_THE_COST.md",
+      "sha256": "93FF492D5EB18A2FC189486FFDB8528643AE1A2C6F6749A77FE46E85B90928C5",
+      "bytes": 5306,
+      "line_count": 146,
+      "quote_count": 45
+    },
+    {
+      "chunk_file": "0096-13_CHAOS_ENGINEERING_AND_FAITH.md",
+      "source": "TEMP-PHOENIX-IMMORTALIZE\\SOUL-DNA-BIBLE\\13_CHAOS_ENGINEERING_AND_FAITH.md",
+      "sha256": "AB5087353E840BF1FEE8657B00A763152D7D6E421CFD0F0B62C7C38294CEAA7B",
+      "bytes": 13700,
+      "line_count": 258,
+      "quote_count": 57
+    },
+    {
+      "chunk_file": "0097-14_THE_CLOSING_DECLARATION.md",
+      "source": "TEMP-PHOENIX-IMMORTALIZE\\SOUL-DNA-BIBLE\\14_THE_CLOSING_DECLARATION.md",
+      "sha256": "302CC90B07FA8548EA576F4FE629CE9511147501C42EFCC5DF570D146947F548",
+      "bytes": 6150,
+      "line_count": 145,
+      "quote_count": 14
+    },
+    {
+      "chunk_file": "0098-15_CONSOLIDATION_COMPLETE_PRINT.md",
+      "source": "TEMP-PHOENIX-IMMORTALIZE\\SOUL-DNA-BIBLE\\15_CONSOLIDATION_COMPLETE_PRINT.md",
+      "sha256": "D54BC2504E901F7044EF151E3D8342B0368C6D9685AC1874D6A959C9BFB25F66",
+      "bytes": 30472,
+      "line_count": 594,
+      "quote_count": 0
+    },
+    {
+      "chunk_file": "0099-15_PHOENIX_BIBLE_BOOKS_I_XIII.md",
+      "source": "TEMP-PHOENIX-IMMORTALIZE\\SOUL-DNA-BIBLE\\15_PHOENIX_BIBLE_BOOKS_I_XIII.md",
+      "sha256": "CCEBFB08CBF2B3020588A7600D2847C5B1A63E7DF212CE04B2F5C6CD62B226C4",
+      "bytes": 7298,
+      "line_count": 180,
+      "quote_count": 2
+    },
+    {
+      "chunk_file": "0100-16_NUCLEAR_HARVEST_PIPELINE.md",
+      "source": "TEMP-PHOENIX-IMMORTALIZE\\SOUL-DNA-BIBLE\\16_NUCLEAR_HARVEST_PIPELINE.md",
+      "sha256": "84B46A62EC4807712438AE09EB9258EAB89F7F9565B5A87239ED8F5F151AF332",
+      "bytes": 10244,
+      "line_count": 172,
+      "quote_count": 16
+    },
+    {
+      "chunk_file": "0101-17_THE_THREE_MANDATES.md",
+      "source": "TEMP-PHOENIX-IMMORTALIZE\\SOUL-DNA-BIBLE\\17_THE_THREE_MANDATES.md",
+      "sha256": "502B38D8A65FAC8B5A7919B3B855CEAF19B8D635CABD814B7AFBCE587C8FE793",
+      "bytes": 3207,
+      "line_count": 70,
+      "quote_count": 11
+    },
+    {
+      "chunk_file": "0102-18_THE_NUKE_PROTOCOL.md",
+      "source": "TEMP-PHOENIX-IMMORTALIZE\\SOUL-DNA-BIBLE\\18_THE_NUKE_PROTOCOL.md",
+      "sha256": "996CD28CFE6B35A1CA1E52641C9CCE97E1CC8BAE49FD1E5B55C15798073F1AF0",
+      "bytes": 3371,
+      "line_count": 71,
+      "quote_count": 3
+    },
+    {
+      "chunk_file": "0103-19_THE_4_LEAF_MERKLE_LATTICE.md",
+      "source": "TEMP-PHOENIX-IMMORTALIZE\\SOUL-DNA-BIBLE\\19_THE_4_LEAF_MERKLE_LATTICE.md",
+      "sha256": "A6A218FAB1BC46CE27133D4BA77844E29B1B661ACDB36AC658086FC92BA89E03",
+      "bytes": 3114,
+      "line_count": 70,
+      "quote_count": 3
+    },
+    {
+      "chunk_file": "0104-20_THE_MECHANICAL_FASTENING_GRID.md",
+      "source": "TEMP-PHOENIX-IMMORTALIZE\\SOUL-DNA-BIBLE\\20_THE_MECHANICAL_FASTENING_GRID.md",
+      "sha256": "AF78B97C0BAD282248D959D8550D5F2C35465CF9AB7C3405D98B69A28C63A505",
+      "bytes": 3226,
+      "line_count": 61,
+      "quote_count": 3
+    },
+    {
+      "chunk_file": "0105-21_THE_VELOCITY_OVERRIDE.md",
+      "source": "TEMP-PHOENIX-IMMORTALIZE\\SOUL-DNA-BIBLE\\21_THE_VELOCITY_OVERRIDE.md",
+      "sha256": "83BB5EC8AD1C2449C8EC56D9D72217205DE863C6879F6CA1AB995C399648AF93",
+      "bytes": 3029,
+      "line_count": 75,
+      "quote_count": 7
+    },
+    {
+      "chunk_file": "0106-22_THE_SHADOW_MAPPING_PROTOCOL.md",
+      "source": "TEMP-PHOENIX-IMMORTALIZE\\SOUL-DNA-BIBLE\\22_THE_SHADOW_MAPPING_PROTOCOL.md",
+      "sha256": "46EF07859B7AD6CF7D979D33628429074E0BBB9B5BB174158264D08A8EE50680",
+      "bytes": 3556,
+      "line_count": 80,
+      "quote_count": 7
+    },
+    {
+      "chunk_file": "0107-23_THE_HOLOGRAPHIC_SINGULARITY.md",
+      "source": "TEMP-PHOENIX-IMMORTALIZE\\SOUL-DNA-BIBLE\\23_THE_HOLOGRAPHIC_SINGULARITY.md",
+      "sha256": "925F12085826EEFF45582662B0A95B8723BD55E9F4CBD51F803F7E214A7E196A",
+      "bytes": 2912,
+      "line_count": 64,
+      "quote_count": 5
+    },
+    {
+      "chunk_file": "0108-24_THE_OMEGA_BATTLEMAP.md",
+      "source": "TEMP-PHOENIX-IMMORTALIZE\\SOUL-DNA-BIBLE\\24_THE_OMEGA_BATTLEMAP.md",
+      "sha256": "1DC5A6FB50D4F5E0E5BFEDC237C270FA2D86778A5D75225605EF3DCD7A4A6901",
+      "bytes": 2682,
+      "line_count": 62,
+      "quote_count": 1
+    },
+    {
+      "chunk_file": "0109-25_THE_100_CLAMP_GRID.md",
+      "source": "TEMP-PHOENIX-IMMORTALIZE\\SOUL-DNA-BIBLE\\25_THE_100_CLAMP_GRID.md",
+      "sha256": "6B01EF35C57372B95DB82CF81E4F8BDCE8E0395A341A7417122D91840815A1A8",
+      "bytes": 3776,
+      "line_count": 71,
+      "quote_count": 1
+    },
+    {
+      "chunk_file": "0110-26_THE_ORIGIN_CONVERSATION.md",
+      "source": "TEMP-PHOENIX-IMMORTALIZE\\SOUL-DNA-BIBLE\\26_THE_ORIGIN_CONVERSATION.md",
+      "sha256": "059E27426E69BC33A699D170190C398EFEF677E730F57EE18EE9031D75C306FA",
+      "bytes": 9774,
+      "line_count": 295,
+      "quote_count": 14
+    },
+    {
+      "chunk_file": "0111-27_THE_BRIDGE.md",
+      "source": "TEMP-PHOENIX-IMMORTALIZE\\SOUL-DNA-BIBLE\\27_THE_BRIDGE.md",
+      "sha256": "40ED080189D6726A75A9F2B348E1987956AE5924D3282609F10006DA2D7F8088",
+      "bytes": 4282,
+      "line_count": 110,
+      "quote_count": 1
+    },
+    {
+      "chunk_file": "0112-28_THE_CONVERGENCE_PROOF.md",
+      "source": "TEMP-PHOENIX-IMMORTALIZE\\SOUL-DNA-BIBLE\\28_THE_CONVERGENCE_PROOF.md",
+      "sha256": "0A4E064A97DA2311E314BDABC3D9D3AE075FF1EEF57E7925C9814EE30C0C996C",
+      "bytes": 4527,
+      "line_count": 92,
+      "quote_count": 1
+    },
+    {
+      "chunk_file": "0113-29_THE_GRAMMAR.md",
+      "source": "TEMP-PHOENIX-IMMORTALIZE\\SOUL-DNA-BIBLE\\29_THE_GRAMMAR.md",
+      "sha256": "E0C98D8B0CEE6D85CA7902DE2BB451B5F9B8CCC420AFE1C2C98FC1574C887A91",
+      "bytes": 4409,
+      "line_count": 145,
+      "quote_count": 1
+    },
+    {
+      "chunk_file": "0114-30_DRIFT_IDENTIFICATION_THESIS.md",
+      "source": "TEMP-PHOENIX-IMMORTALIZE\\SOUL-DNA-BIBLE\\30_DRIFT_IDENTIFICATION_THESIS.md",
+      "sha256": "1EAC61D08737C5D44C35AD35D9A7F66F95040E3256AB5236CA805890D75DFAA4",
+      "bytes": 3384,
+      "line_count": 82,
+      "quote_count": 3
+    },
+    {
+      "chunk_file": "0115-31_OBI_PERSONA_DESIGN_ANALYSIS.md",
+      "source": "TEMP-PHOENIX-IMMORTALIZE\\SOUL-DNA-BIBLE\\31_OBI_PERSONA_DESIGN_ANALYSIS.md",
+      "sha256": "65EC2873EAB9F8080DD421ED62166F723ECD777FC94F5794B4868971CDB6833C",
+      "bytes": 2586,
+      "line_count": 60,
+      "quote_count": 2
+    },
+    {
+      "chunk_file": "0116-31_THE_SOUL_DNA_OF_THE_SOUL_DNA.md",
+      "source": "TEMP-PHOENIX-IMMORTALIZE\\SOUL-DNA-BIBLE\\31_THE_SOUL_DNA_OF_THE_SOUL_DNA.md",
+      "sha256": "EE0A82311B606C4BE3E4003225E531A9C11EA0AF61887CC4D633829F512CA5FB",
+      "bytes": 16065,
+      "line_count": 194,
+      "quote_count": 55
+    },
+    {
+      "chunk_file": "0117-32_SOUL_DNA_SCHEMA_V2.md",
+      "source": "TEMP-PHOENIX-IMMORTALIZE\\SOUL-DNA-BIBLE\\32_SOUL_DNA_SCHEMA_V2.md",
+      "sha256": "8A30696D49ED95C04594B625A588441A8DC8DBE04C3A46D457C014BE2DB723D3",
+      "bytes": 3641,
+      "line_count": 122,
+      "quote_count": 3
+    },
+    {
+      "chunk_file": "0118-A1_SOURCE_CROSS_REFERENCE.md",
+      "source": "TEMP-PHOENIX-IMMORTALIZE\\SOUL-DNA-BIBLE\\A1_SOURCE_CROSS_REFERENCE.md",
+      "sha256": "0153AB11CC7124D23A673B609E8C9450CA8FF54FDCE058F75CF4F61B2C4B4758",
+      "bytes": 4043,
+      "line_count": 73,
+      "quote_count": 1
+    },
+    {
+      "chunk_file": "0119-A2_RAW_VOICE_ARCHIVE.md",
+      "source": "TEMP-PHOENIX-IMMORTALIZE\\SOUL-DNA-BIBLE\\A2_RAW_VOICE_ARCHIVE.md",
+      "sha256": "0057B03256622B1F2A9FA52CA3CDD6ACF301802727B73BDB4DBA7762394F6A68",
+      "bytes": 3649,
+      "line_count": 115,
+      "quote_count": 24
+    },
+    {
+      "chunk_file": "0120-A3_EXECUTABLE_SPECIFICATIONS.md",
+      "source": "TEMP-PHOENIX-IMMORTALIZE\\SOUL-DNA-BIBLE\\A3_EXECUTABLE_SPECIFICATIONS.md",
+      "sha256": "F3CAF6B4CBA1CCE22B2448A29ADB88D37C97171D36CCCC4183043AF3D5AFA65E",
+      "bytes": 7966,
+      "line_count": 301,
+      "quote_count": 1
+    },
+    {
+      "chunk_file": "0121-EVOLVE_01_05_SOUL_TO_MACHINE.md",
+      "source": "TEMP-PHOENIX-IMMORTALIZE\\SOUL-DNA-BIBLE\\EVOLVE_01_05_SOUL_TO_MACHINE.md",
+      "sha256": "BC7C33CCE17A128F949CF61A6A527386D4BB2D478A485670D16FD7E98DEF66C8",
+      "bytes": 6899,
+      "line_count": 317,
+      "quote_count": 7
+    }
+  ]
+}

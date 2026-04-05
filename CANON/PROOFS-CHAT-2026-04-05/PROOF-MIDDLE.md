@@ -1,0 +1,5 @@
+Assistant: Quick answer: it was scheduled to free up C: after I copied the workspace to D:, avoiding duplicate data and reclaiming space per your earlier cleanup request.
+Assistant: I created `SCRIPTS/cleanup_reports/delete_OB1_on_reboot.cmd` as the safe delete job (it logs and self-deletes). The RunOnce fallback was intended to run that script at next login, but a command-construction error left the RunOnce empty.
+User: okay as long as you cloned it and ensure authoritative OB1 is now on D, then thats fine..
+Assistant: I'll verify the D: archive contains the OB-1 copy, remove the empty RunOnce entry, delete the fallback cmd, and mark the cleanup step done.
+Assistant: (performed) Verified `D:\C_cleanup\20260405_082611\OB-1` exists, removed `HKCU\...\RunOnce\OB1_Delete_On_Reboot`, removed `SCRIPTS/cleanup_reports/delete_OB1_on_reboot.cmd`, updated `C_moved_folders_summary_20260405_082842.csv` and `OB1_deletion_schedule_note_20260405_082950.txt`.

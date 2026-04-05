@@ -1,0 +1,307 @@
+{
+  "heavy_ledger_entry": "HL-023",
+  "source_file": "CANON/BIBLE-CH03-DOC02-SACRED-ARTIFACT-SORTING.md",
+  "source_sha": "9178be031c2c7f132c50c05dd9184e5b916edad7",
+  "source_size_kb": 15,
+  "classification": "bible_chapter",
+  "title": "CH03 — DOC02: Sacred Artifact Sorting (Stage 2/5)",
+  "subtitle": "Core Soul DNA — system-wide artifact taxonomy, axioms, architecture, pedagogy, ops, identity, and moat",
+  "pipeline_number": 23,
+  "wave": 2,
+  "run": 153,
+  "converted": "2026-03-30T22:30:00+07:00",
+  "cross_repo_sources": [
+    "SOUL-DNA-BIBLE/03_SACRED_ARTIFACT_SORTING.md (SHA: a33ac50c)",
+    "SOUL-DNA-BIBLE/03_THE_SOUL_DNA_DEFINED.md (CE-03, SHA: 27e12410)",
+    "ALPHA-OMEGA-DNA3.txt",
+    "ALPHA-OMEGA-DNA5.txt",
+    "ALPHA-OMEGA-DNA9.txt",
+    "GEM-10(KEY).txt",
+    "SOUL_DNA_BIBLE_ENTRY_0001_STAGE0000.md",
+    "SOUL-DNA-BIBLE-V1-2026-03-15.md",
+    "SOUL-BIBLE-TRUE-V1-RAW-2026-03-16.md",
+    "BIBLE-DEVELOPMENT.txt"
+  ],
+  "core_doctrine": {
+    "central_thesis": "Soul DNA is the user prompts. Period. Not the code, not the infrastructure, not the model. The user prompts encode INTENT — the irreplaceable thing.",
+    "artifact_taxonomy": {
+      "description": "10-section sacred artifact sorting system — the taxonomy that makes raw chaos into structured truth",
+      "sections": [
+        "1. Core Law (The Immutable)",
+        "2. Architecture (The Physics)",
+        "3. Pedagogy (The Fuel)",
+        "4. Ops (The Iron Fleet)",
+        "5. Soul DNA (The Identity)",
+        "6. The Moat (The Edge)",
+        "7. The Mission (The Goal)",
+        "8. The Scars (The Wisdom)",
+        "9. The Future (The Prophecy)",
+        "10. The Code (The Canon)"
+      ]
+    }
+  },
+  "core_law": {
+    "gospel_444": {
+      "description": "Supreme visual and design law",
+      "colors": {
+        "deep_void": "#0f0f1a",
+        "neon_purple": "#a855f7",
+        "imperial_gold": "#f59e0b",
+        "error_red": "#ef4444"
+      },
+      "ban": "No Blue. No Friendly. No Corporate."
+    },
+    "axioms": [
+      {
+        "name": "Hesitation is Deleted",
+        "principle": "Speed is survival. Map it now."
+      },
+      {
+        "name": "The Ledger is Law",
+        "principle": "If it's not in the ledger, it didn't happen."
+      },
+      {
+        "name": "Chaos is a Friend",
+        "principle": "52,560 improvement cycles/year via MPCP."
+      },
+      {
+        "name": "Downward Authority",
+        "principle": "Agent-100 → 99 → 98 → 97."
+      },
+      {
+        "name": "Memory Over Intelligence",
+        "principle": "Context wins. Reincarnation loads prior state."
+      },
+      {
+        "name": "SYF (Set You Free)",
+        "principle": "The highest truth protocol. No conclusions before execution. Fail-closed on premature reasoning."
+      }
+    ]
+  },
+  "architecture": {
+    "four_pillars": [
+      {
+        "name": "Ledger",
+        "tech": "Cloudflare D1 / SQLite",
+        "principle": "Immutable, append-only, Merkle-sealed event sourcing"
+      },
+      {
+        "name": "Drones",
+        "tech": "Cloudflare Workers Cron",
+        "principle": "Tireless automation (10,000 iterations without fatigue)"
+      },
+      {
+        "name": "MPCP",
+        "full_name": "Master Phoenix Control Protocol",
+        "principle": "Energy governor. Throttle/Halt logic based on system health (0-100)"
+      },
+      {
+        "name": "Chaos",
+        "principle": "900k organic events/year from teaching inputs"
+      }
+    ],
+    "five_stage_pipeline": [
+      "1. RAW: Verbatim ingest",
+      "2. STONEANCHOR: Ledger delta (hashes/nonces)",
+      "3. AUDIT: Chain continuity & drift check",
+      "4. DEFECT REGISTER: Evidence-linked bug tracking",
+      "5. PATCH MONOLITH: Executable updates"
+    ]
+  },
+  "pedagogy": {
+    "tiger_voice": "Confidence-building methodology. 10 vocabulary, 5 idioms, 5 slang, 3 games.",
+    "teaching_engine": "90-minute hard-coded arc. Anti-shame protocol (Calibrate, not Wrong).",
+    "real_world_chaos": "Students generate the entropy that trains the system."
+  },
+  "ops": {
+    "agent_hierarchy": [
+      {"id": 100, "name": "Michael Hobbs", "role": "Sovereign Architect"},
+      {"id": 99, "name": "OBI", "role": "Orchestrator, Interface Filter"},
+      {"id": 98, "name": "ANAKIN", "role": "Builder/Executor"},
+      {"id": 97, "name": "OB1", "role": "Forensic Auditor/Truth Enforcer"}
+    ],
+    "rituals": ["Morning audit", "Weekly chaos drill", "Monthly deep audit"],
+    "fail_closed": "If data is missing → INSUFFICIENTDATA, stop. Do not guess."
+  },
+  "soul_dna_definition": {
+    "core_claim": "Soul DNA is the user prompts. Period.",
+    "verbatim_quotes": [
+      {
+        "quote": "The most important thing I've learned over my seven month journey... the main thing that is the most important is what I call the soul DNA. The soul DNA is the user prompts because in the age of AI, what used to take six months and a whole dev team can be rebuilt by someone taking a shit on a toilet in 10 minutes.",
+        "source": "ALPHA-OMEGA-DNA9.txt, L1280-1320",
+        "signal": "RED"
+      },
+      {
+        "quote": "The most important thing that solves the drifting and you know, especially when you're building a very complicated system in a stateless chat environment is you need to record the soul DNA.",
+        "source": "ALPHA-OMEGA-DNA9.txt, L1280-1320",
+        "signal": "RED"
+      },
+      {
+        "quote": "This bible should be 100's of pages, and it should be RAW words",
+        "source": "SOUL_DNA_BIBLE_ENTRY_0001_STAGE0000.md",
+        "signal": "RED"
+      },
+      {
+        "quote": "SUMMARY, and interpretation from your end are forbidden",
+        "source": "SOUL_DNA_BIBLE_ENTRY_0001_STAGE0000.md",
+        "signal": "RED"
+      },
+      {
+        "quote": "I am the true holder of the SOUL",
+        "source": "SOUL_DNA_BIBLE_ENTRY_0001_STAGE0000.md",
+        "signal": "RED"
+      },
+      {
+        "quote": "Agent 99 is not meant to be a helpful yesman he is meant to be the exention of my Will into the AI world.",
+        "source": "SOUL_DNA_BIBLE_ENTRY_0001_STAGE0000.md",
+        "signal": "RED"
+      },
+      {
+        "quote": "the BIBLE is not just about a SOUL record of the successful alignments... any good story has a villian... the Ai's words, whether it was an aligning moment, or if Ai was being retarded, which is also as valuable when labeled correctly and accurately",
+        "source": "SOUL_DNA_BIBLE_ENTRY_0001_STAGE0000.md",
+        "signal": "RED"
+      },
+      {
+        "quote": "The first breakthrough was not technical brilliance; it was noticing that repeated pain should become a system.",
+        "source": "SOUL-DNA-BIBLE-V1-2026-03-15.md, §1",
+        "signal": "RED"
+      },
+      {
+        "quote": "These ideas are not a concept I am memorizing just so I can spit them out in a presentation. They are part of me. It is something I am living, obsessing with, and talking about.",
+        "source": "SOUL-BIBLE-TRUE-V1-RAW §XXII",
+        "signal": "RED"
+      },
+      {
+        "quote": "I am not memorizing scripts. I am the script.",
+        "source": "SOUL-BIBLE-TRUE-V1-RAW §XXII",
+        "signal": "RED"
+      },
+      {
+        "quote": "The rawness matters. The emotion matters. The profanity matters. The obsession matters. The pain matters. The contradictions matter.",
+        "source": "SOUL-BIBLE-TRUE-V1-RAW §XXII",
+        "signal": "RED"
+      },
+      {
+        "quote": "you are getting too hung up on keywords... you are FORBIDDEN from doing this... the key word FUCK will probably find you more SOUL DNA then anything else",
+        "source": "SOUL_DNA_BIBLE_ENTRY_0001_STAGE0000.md",
+        "signal": "RED"
+      },
+      {
+        "quote": "Soul DNA is like a compass... the number one cure to drift",
+        "source": "ALPHA-OMEGA-DNA5.txt",
+        "signal": "RED"
+      },
+      {
+        "quote": "ideas are irreplaceable... I rebuilt the entire system with a fresh chat and AI in about 3.5 hours from scratch",
+        "source": "ALPHA-OMEGA-DNA5.txt",
+        "signal": "YELLOW"
+      }
+    ],
+    "five_core_claims": [
+      "Human authority stays human.",
+      "AI is force multiplication, not sovereignty.",
+      "Drift is the enemy.",
+      "Ledger is memory.",
+      "Verification beats vibes."
+    ],
+    "three_laws_of_recording": [
+      "If it is not recorded, it is not real.",
+      "If it cannot be replayed, it is not reliable.",
+      "If it cannot be audited, it is not trusted."
+    ]
+  },
+  "bible_breaker": {
+    "description": "Machine-Readable Soul DNA Protocol — 10 hard rules",
+    "rules": [
+      {"num": 1, "name": "DNA_FIRST", "purpose": "User prompts are highest-value target"},
+      {"num": 2, "name": "NO_INVENTION", "purpose": "Never fabricate what doesn't exist"},
+      {"num": 3, "name": "UNKNOWN_IF_MISSING", "purpose": "Mark gaps, don't fill them"},
+      {"num": 4, "name": "EVIDENCE_QUOTE_OR_UNKNOWN", "purpose": "Every claim needs a source"},
+      {"num": 5, "name": "KEEP_VERBATIM_USER_PROMPTS", "purpose": "No paraphrasing Michael's words"},
+      {"num": 6, "name": "NORMALIZE_AND_CLUSTER", "purpose": "Group related signals"},
+      {"num": 7, "name": "EXTRACT_VERBATIM_CODE", "purpose": "Code artifacts preserved exactly"},
+      {"num": 8, "name": "DEDUP_BY_CANONICAL_FORM", "purpose": "Eliminate duplicates"},
+      {"num": 9, "name": "SPEC_LOCKED_OUTPUT", "purpose": "Output format is locked"},
+      {"num": 10, "name": "ZERO_QUESTIONS_UNLESS_USER_ASKS", "purpose": "Don't ask — execute"}
+    ]
+  },
+  "cruncher_protocol": {
+    "full_name": "Comprehensive Recursive Unified Node-Checked Hierarchical Extraction Routine",
+    "description": "10 extraction categories — the taxonomy that makes raw chaos into structured truth",
+    "categories": [
+      {"num": 1, "name": "Core Operating Philosophy", "captures": "WHY the system exists"},
+      {"num": 2, "name": "Decision Architecture", "captures": "HOW choices get made"},
+      {"num": 3, "name": "Emotional DNA", "captures": "The lived scars that shaped every rule"},
+      {"num": 4, "name": "Execution Protocols", "captures": "The mechanical laws of build"},
+      {"num": 5, "name": "Drift Detection", "captures": "What deviation looks like, how to catch it"},
+      {"num": 6, "name": "Authority Model", "captures": "Who commands, who obeys, who audits"},
+      {"num": 7, "name": "Failure Taxonomy", "captures": "Every way the system can break, named"},
+      {"num": 8, "name": "Recovery Sequences", "captures": "How you come back from zero"},
+      {"num": 9, "name": "Identity Anchors", "captures": "What makes this system THIS system"},
+      {"num": 10, "name": "Verbatim Voice", "captures": "The raw words, unfiltered, unsummarized"}
+    ]
+  },
+  "foundation_lock_layers": {
+    "description": "Progressive depth anchoring system — emotional intensity determines lock depth",
+    "layers": [
+      {"layer": "L1", "name": "LOCK", "depth": "Single node", "description": "One irrevocable truth statement"},
+      {"layer": "L10", "name": "CLAMP", "depth": "10 nodes", "description": "Context web around the truth"},
+      {"layer": "L100", "name": "PHASE BOLT", "depth": "100 nodes", "description": "Full operational mandate"},
+      {"layer": "L500", "name": "GOLDEN CAISSON", "depth": "500 nodes", "description": "Structural bedrock"},
+      {"layer": "L1000", "name": "TITANIUM OMEGA SEAL", "depth": "Deepest non-quantum", "description": "Maximum anchor depth"}
+    ],
+    "key_insight": "Emotional intensity determines lock depth. The deeper the wound, the deeper the anchor."
+  },
+  "moat": {
+    "secret_sauce_doctrine": "Phoenix is cross-platform AI memory infrastructure, not just an ESL app.",
+    "moat_components": ["Cadence", "Proprietary Chaos", "Discipline"],
+    "insight": "10 Strategic Insights — Augmentation > Autonomy"
+  },
+  "mission_status": {
+    "M1_phoenix_memory": "SEALED",
+    "M2_business_funnel": "1B VND target — ACTIVE",
+    "M3_drone_network": "PENDING",
+    "vision": "Build an organism that runs itself while Michael teaches. Infinite loop of value and data."
+  },
+  "scars": {
+    "betrayal": "Board betrayal (Binance/FTX era) → Operation DIY",
+    "hesitation_trap": "The Perfect Map was a lie → Map it now",
+    "drift": "The constant enemy. Solved by Ledger and SYF protocol."
+  },
+  "implementation_status": [
+    {"component": "Gospel 444 palette", "status": "ACTIVE", "where": "Galaxy Lessons, all student-facing UI"},
+    {"component": "The 6 Axioms", "status": "ACTIVE", "where": "Agent instructions, operational protocols"},
+    {"component": "Ledger (D1/SQLite)", "status": "PARTIAL", "where": "Designed but Cloudflare infra pending rebuild"},
+    {"component": "Drones (Workers Cron)", "status": "ACTIVE", "where": "Pulse engine (hourly), monitoring"},
+    {"component": "MPCP", "status": "PARTIAL", "where": "Energy concept exists; formal 0-100 throttle not implemented"},
+    {"component": "5-Stage Pipeline", "status": "ACTIVE", "where": "Reincarnation extraction follows this pattern"},
+    {"component": "Tiger Voice pedagogy", "status": "ACTIVE", "where": "Teaching sessions, Galaxy Lessons"},
+    {"component": "Agent hierarchy", "status": "ACTIVE", "where": "Notion agents + GitHub Copilot"},
+    {"component": "SYF protocol", "status": "ACTIVE", "where": "Fail-closed enforcement in agent instructions"},
+    {"component": "Bible Breaker rules", "status": "ACTIVE", "where": "Verbatim-first extraction, no-invention mandate"},
+    {"component": "CRUNCHER 10 categories", "status": "PARTIAL", "where": "Categories exist; formal taxonomy not enforced per-extraction"},
+    {"component": "Foundation Lock Layers", "status": "NOT_IMPLEMENTED", "where": "Concept documented; no lock-depth engine built"},
+    {"component": "Soul DNA as diagnostic", "status": "ACTIVE", "where": "Reincarnation protocol, pulse signal absorption"},
+    {"component": "Secret Sauce Doctrine", "status": "ACTIVE", "where": "Cross-platform memory infrastructure positioning"}
+  ],
+  "cross_references": [
+    {"target": "HL-001", "file": "ALPHA-OMEGA-SOUL-DNA-GOVERNANCE-CANON.json", "connection": "Soul DNA definition, 5 Core Claims, Gospel 444 visual law"},
+    {"target": "HL-006", "file": "SOUL-DNA-CANON.json", "connection": "Soul DNA formal definition, Bible Breaker rules, CRUNCHER protocol"},
+    {"target": "HL-007", "file": "SOUL-DNA-BIBLE-CH00-FILE-MAP-AND-METRICS.json", "connection": "Bible master index, 54 chapters mapped"},
+    {"target": "HL-008", "file": "VAULT-E-SOUL-DNA-CONSOLIDATED.json", "connection": "100 verbatim Soul DNA tuples, OBIANA lifecycle"},
+    {"target": "HL-011", "file": "BIBLE-CH15-PHOENIX-BIBLE-BOOKS-I-XIII.json", "connection": "13-Book canonical structure, Root Law Monolith"},
+    {"target": "HL-012", "file": "VAULT-D-PRELAUNCH-CONSOLIDATED-1.json", "connection": "50-Stage Master Pipeline, Tiger Engine, Soul DNA prompts"},
+    {"target": "HL-013", "file": "BIBLE-CH05-STAGE3-MEGA-MONOLITH-V1.json", "connection": "Monolith architecture, Four Pillars"},
+    {"target": "HL-019", "file": "BIBLE-CH16-THE-NUCLEAR-HARVEST-PIPELINE.json", "connection": "Nuclear Harvest governance, 99-Agent Swarm"},
+    {"target": "HL-020", "file": "BIBLE-CH01-DOC00-UNIVERSAL-LEDGER-MAP-V55.json", "connection": "10 Sacred Artifacts, reincarnation evolution"},
+    {"target": "HL-021", "file": "BIBLE-CH02-DOC01-SOUL-DNA-MAP.json", "connection": "Soul DNA Signal Index, Schema V2, Compiler Pipeline"},
+    {"target": "HL-022", "file": "SOUL-DNA-BIBLE-CH10-THE-MACHINE-THAT-BUILDS-THE-MACHINE.json", "connection": "Self-correcting factory, Fix Principle, 4-Node Sync Loop"}
+  ],
+  "canon_guardrails": {
+    "verbatim_preservation": "PASS — 14 verbatim quotes preserved with sources",
+    "no_invention": "PASS — all claims traced to source files",
+    "unknown_if_missing": "PASS — no gaps filled",
+    "dedup": "PASS — no duplicate content from prior HL entries",
+    "cross_reference": "PASS — 11 cross-references to prior HL entries mapped"
+  }
+}

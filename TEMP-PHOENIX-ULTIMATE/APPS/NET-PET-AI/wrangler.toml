@@ -1,0 +1,36 @@
+name = "net-pet-ai"
+main = "src/index.js"
+compatibility_date = "2026-03-16"
+compatibility_flags = ["nodejs_compat"]
+
+[assets]
+directory = "./public"
+binding = "ASSETS"
+
+[[durable_objects.bindings]]
+name = "SESSIONS"
+class_name = "SessionDO"
+
+[[durable_objects.bindings]]
+name = "PROFILES"
+class_name = "ProfileDO"
+
+[[durable_objects.bindings]]
+name = "PETS"
+class_name = "PetDO"
+
+[[durable_objects.bindings]]
+name = "LEDGER"
+class_name = "LedgerDO"
+
+[[migrations]]
+tag = "v1-net-pet-core"
+new_sqlite_classes = ["SessionDO", "ProfileDO", "PetDO"]
+
+[[migrations]]
+tag = "v2-ledger"
+new_sqlite_classes = ["LedgerDO"]
+
+[vars]
+APP_NAME = "Natural English Training"
+APP_COACH_NAME = "Obi"

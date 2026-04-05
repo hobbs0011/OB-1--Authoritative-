@@ -1,0 +1,130 @@
+name: "🐝 Copilot Swarm — 3-Account Parallel Deploy"
+
+# TRIGGER: Manual dispatch from Actions tab or via GitHub API
+# OB1 can trigger this via workflow_dispatch from Notion
+on:
+  workflow_dispatch:
+    inputs:
+      hobbs_lab_issue:
+        description: "Issue title for hobbs-lab/Phoenix-Rising-Protocol-Ultimate"
+        required: false
+        default: ""
+      hobbs_lab_body:
+        description: "Issue body for hobbs-lab (markdown)"
+        required: false
+        default: ""
+      hobbs0011_issue:
+        description: "Issue title for hobbs0011/NET-Ai-EcoSystem-CommandStation"
+        required: false
+        default: ""
+      hobbs0011_body:
+        description: "Issue body for hobbs0011 (markdown)"
+        required: false
+        default: ""
+      lang_issue:
+        description: "Issue title for mrmichaelhobbs1234-lang/phoenix-drift-casestudy"
+        required: false
+        default: ""
+      lang_body:
+        description: "Issue body for mrmichaelhobbs1234-lang (markdown)"
+        required: false
+        default: ""
+
+jobs:
+  # ============================================
+  # PRONG 1: hobbs-lab (uses default GITHUB_TOKEN)
+  # ============================================
+  deploy-hobbs-lab:
+    if: $ github.event.inputs.hobbs_lab_issue != '' 
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create issue on hobbs-lab
+        uses: actions/github-script@v7
+        with:
+          github-token: $ secrets.GITHUB_TOKEN 
+          script: |
+            const issue = await github.rest.issues.create({
+              owner: 'hobbs-lab',
+              repo: 'Phoenix-Rising-Protocol-Ultimate',
+              title: context.payload.inputs.hobbs_lab_issue,
+              body: context.payload.inputs.hobbs_lab_body,
+              labels: ['copilot-swarm']
+            });
+            console.log(`Created issue #${issue.data.number}: ${issue.data.html_url}`);
+            // Assign Copilot to the issue
+            try {
+              await github.rest.issues.addAssignees({
+                owner: 'hobbs-lab',
+                repo: 'Phoenix-Rising-Protocol-Ultimate',
+                issue_number: issue.data.number,
+                assignees: ['copilot']
+              });
+              console.log(`Copilot assigned to issue #${issue.data.number}`);
+            } catch (e) {
+              console.log(`Could not auto-assign Copilot: ${e.message}`);
+              console.log('Manual assignment may be needed.');
+            }
+
+  # ============================================
+  # PRONG 2: hobbs0011 (uses PAT_HOBBS0011 secret)
+  # ============================================
+  deploy-hobbs0011:
+    if: $ github.event.inputs.hobbs0011_issue != '' 
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create issue on hobbs0011
+        uses: actions/github-script@v7
+        with:
+          github-token: $ secrets.PAT_HOBBS0011 
+          script: |
+            const issue = await github.rest.issues.create({
+              owner: 'hobbs0011',
+              repo: 'NET-Ai-EcoSystem-CommandStation',
+              title: context.payload.inputs.hobbs0011_issue,
+              body: context.payload.inputs.hobbs0011_body,
+              labels: ['copilot-swarm']
+            });
+            console.log(`Created issue #${issue.data.number}: ${issue.data.html_url}`);
+            try {
+              await github.rest.issues.addAssignees({
+                owner: 'hobbs0011',
+                repo: 'NET-Ai-EcoSystem-CommandStation',
+                issue_number: issue.data.number,
+                assignees: ['copilot']
+              });
+              console.log(`Copilot assigned to issue #${issue.data.number}`);
+            } catch (e) {
+              console.log(`Could not auto-assign Copilot: ${e.message}`);
+            }
+
+  # ============================================
+  # PRONG 3: mrmichaelhobbs1234-lang (uses PAT_LANG secret)
+  # ============================================
+  deploy-lang:
+    if: $ github.event.inputs.lang_issue != '' 
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create issue on mrmichaelhobbs1234-lang
+        uses: actions/github-script@v7
+        with:
+          github-token: $ secrets.PAT_LANG 
+          script: |
+            const issue = await github.rest.issues.create({
+              owner: 'mrmichaelhobbs1234-lang',
+              repo: 'phoenix-drift-casestudy',
+              title: context.payload.inputs.lang_issue,
+              body: context.payload.inputs.lang_body,
+              labels: ['copilot-swarm']
+            });
+            console.log(`Created issue #${issue.data.number}: ${issue.data.html_url}`);
+            try {
+              await github.rest.issues.addAssignees({
+                owner: 'mrmichaelhobbs1234-lang',
+                repo: 'phoenix-drift-casestudy',
+                issue_number: issue.data.number,
+                assignees: ['copilot']
+              });
+              console.log(`Copilot assigned to issue #${issue.data.number}`);
+            } catch (e) {
+              console.log(`Could not auto-assign Copilot: ${e.message}`);
+            }

@@ -1,0 +1,24 @@
+# Secrets
+**/API-SHHHH.txt
+.env
+*.key
+
+# Dependencies
+node_modules/
+.wrangler/
+
+# OS junk
+desktop.ini
+Thumbs.db
+.DS_Store
+
+# Logs
+*.log
+
+# Python
+.venv/
+__pycache__/
+
+# IDE
+.vscode/
+.cursor/

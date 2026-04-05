@@ -1,0 +1,11 @@
+node_modules
+.env
+.env.local
+data/bot.db
+data/bot.db-wal
+data/bot.db-shm
+*.md
+.git
+.gitignore
+README.md
+DEPLOY-GUIDE.md

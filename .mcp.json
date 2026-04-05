@@ -1,5 +1,9 @@
 {
+  // NET | Phoenix Rising Protocol — MCP Servers
+  // Stack: Cloudflare, GitHub, Notion, Playwright, Chrome, Slack, FS, Brave, Discord
+  // Updated: 2026-04-05 | MAX MERGE Build | AnA
   "servers": {
+    // ── CLOUDFLARE ───────────────────────────────────────────────────────────────
     "cloudflare": {
       "type": "stdio",
       "command": "npx",
@@ -9,6 +13,8 @@
         "CLOUDFLARE_ACCOUNT_ID": "${env:CLOUDFLARE_ACCOUNT_ID}"
       }
     },
+
+    // ── GitHub ───────────────────────────────────────────────────────────────
     "github": {
       "type": "stdio",
       "command": "npx",
@@ -17,6 +23,8 @@
         "GITHUB_TOKEN": "${env:GITHUB_TOKEN}"
       }
     },
+
+    // ── NOTION (docs, knowledge base) ───────────────────────────────────────
     "notion": {
       "type": "stdio",
       "command": "npx",
@@ -25,16 +33,22 @@
         "OPENAPI_MCP_HEADERS": "{\"Authorization\": \"Bearer ${env:NOTION_TOKEN}\", \"Notion-Version\": \"2022-06-28\"}"
       }
     },
+
+    // ── PLAYWRIGHT (browser automation) ────────────────────────────────
     "playwright": {
       "type": "stdio",
       "command": "npx",
       "args": ["-y", "@playwright/mcp", "--headless"]
     },
+
+    // ── CHROME DEVTOOLS (browser debugging) ───────────────────────────────
     "chrome-devtools": {
       "type": "stdio",
       "command": "npx",
       "args": ["-y", "chrome-devtools-mcp"]
     },
+
+    // ── SLACK (team comms) ────────────────────────────────────────────────
     "slack": {
       "type": "stdio",
       "command": "npx",
@@ -44,6 +58,8 @@
         "SLACK_TEAM_ID": "${env:SLACK_TEAM_ID}"
       }
     },
+
+    // ── FILESYSTEM (workspace access) ─────────────────────────────────────
     "filesystem": {
       "type": "stdio",
       "command": "npx",
@@ -53,6 +69,8 @@
         "/workspaces/Phoenix-Rising-Protocol-Ultimate"
       ]
     },
+
+    // ── BRAVE SEARCH (web search) ────────────────────────────────────────────────
     "brave-search": {
       "type": "stdio",
       "command": "npx",
@@ -61,6 +79,8 @@
         "BRAVE_API_KEY": "${env:BRAVE_API_KEY}"
       }
     },
+
+    // ── DISCORD (community) ────────────────────────────────────────────────
     "discord": {
       "type": "stdio",
       "command": "npx",

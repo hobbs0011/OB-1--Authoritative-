@@ -1,0 +1,5 @@
+﻿# PROOF - Live-Class-KIET-02.03-C LAST
+
+Source: D:\phoenix-chat-logs\CHAT-LOGS-ONLY\Live-Class-KIET-02.03-C.txt
+
+
