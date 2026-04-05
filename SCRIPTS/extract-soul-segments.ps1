@@ -13,7 +13,9 @@ param(
     [int]   $StartAt    = 1    # 1-20: which checkpoint to start from (default = 1)
 )
 
-$outputDir = Join-Path $RepoDir 'CANON\SOUL-SEGMENTS'
+# Derive output subdir from source filename — prevents overwrite across sources
+$srcLeaf   = [System.IO.Path]::GetFileNameWithoutExtension($SourcePath) -replace '[^a-zA-Z0-9\-]', '_'
+$outputDir = Join-Path $RepoDir "CANON\SOUL-SEGMENTS\$srcLeaf"
 New-Item -ItemType Directory -Force -Path $outputDir | Out-Null
 
 # ── DNA FLAGS (verbatim markers — content untouched) ───────────────────────────
@@ -39,7 +41,7 @@ $dnaFlags = @(
 Write-Host "`n=== SOUL SEGMENT EXTRACTOR ===" -ForegroundColor Cyan
 Write-Host "RULE: RAW VERBATIM ONLY. NO PARAPHRASE. NO INTERPRETATION." -ForegroundColor Yellow
 
-if (-not (Test-Path $SourcePath)) { Write-Error "SOURCE NOT FOUND: $SourcePath"; exit 1 }
+if (-not ([System.IO.File]::Exists($SourcePath))) { Write-Error "SOURCE NOT FOUND: $SourcePath"; exit 1 }
 
 $rawText   = [System.IO.File]::ReadAllText($SourcePath, [System.Text.Encoding]::UTF8)
 $rawLF     = $rawText.Replace("`r`n","`n").Replace("`r","`n")
@@ -84,7 +86,7 @@ foreach ($cp in $checkpoints) {
 
     $segLabel  = "SEGMENT-{0:D2}-PCT{1:D3}-L{2:D5}-L{3:D5}" -f $cp.Num, $cp.Pct, $cp.StartLine, $cp.EndLine
     $outFile   = Join-Path $outputDir "$segLabel.md"
-    $relPath   = "CANON/SOUL-SEGMENTS/$segLabel.md"
+    $relPath   = "CANON/SOUL-SEGMENTS/$srcLeaf/$segLabel.md"
 
     Write-Host ("`n--- CHECKPOINT {0} ({1}%) LINES L{2}-L{3} ---" -f $cp.Num, $cp.Pct, $cp.StartLine, $cp.EndLine) -ForegroundColor Cyan
 

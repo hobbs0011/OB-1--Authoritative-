@@ -1,0 +1,6 @@
+source_path: C:\Users\mrmic\OneDrive\Documents\GitHub\phoenix-chat-logs\CHAT-LOGS-ONLY\(KEY-SOUL [1]) - ENERGY_GATE_UNLOCK.txt
+verbatim_path: C:\Users\mrmic\Desktop\OB-1\CANON\SOUL-LOG-VERBATIM-KEY-SOUL-1-ENERGY-GATE-UNLOCK-2026-04-05.md
+source_count=1053 verbatim_count=0
+unique_in_source=1 unique_in_verbatim=0
+IDs only in source:
+ - 

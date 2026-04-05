@@ -132,3 +132,12 @@ Successful chunks: 121
 Failed chunks: 0
 
 This directory is the canonical unfiltered recapture set for this run.
+
+
+## Phase 2 Raw Chat Log Ingest — 2026-04-05
+- Files processed: 806
+- Chunks added: 801
+- Skipped (empty/exists): 5
+- Failed: 0
+- Last seq: 923
+
