@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "OBI — Natural English Training",
-  "version": "0.1.0",
-  "description": "Your AI English tutor. Mouse → Tiger. Permission over perfection.",
+  "version": "1.0.0",
+  "description": "Your AI English tutor + homework checker + vocab flashcards. Mouse → Tiger. Permission over perfection.",
   "permissions": [
     "storage",
     "activeTab",
@@ -14,6 +14,9 @@
     "https://naturalenglishtraining.net/*",
     "https://generativelanguage.googleapis.com/*"
   ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
+  },
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
