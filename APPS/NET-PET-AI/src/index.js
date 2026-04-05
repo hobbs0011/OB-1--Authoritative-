@@ -1,57 +1,36 @@
-// src/index.js — NET-PET-AI Cloudflare Worker v1.3
-// Phoenix Rising Protocol — OBI Command Station
-// Architecture: Agent100 (Michael) → Magic Chat → Agent99 (Obi) → THE LEDGER → THE LEGION
+// src/index.js — NET-PET-AI Cloudflare Worker v1.2
+// Natural English Training — Obi AI English Coach
+// Architecture: Agent100 → Magic Chat → Agent99 (Obi) → Cryptographic Immutable Ledger
 // Bindings: SESSIONS (SessionDO), PROFILES (ProfileDO), PETS (PetDO), LEDGER (LedgerDO), ASSETS
-// Secrets: DEEPSEEK_API_KEY, DEEPGRAM_API_KEY, NOTION_API_KEY
-
-import { queryLessons, writeProgress, queryProgress, syncStudentProgress } from "./notion.js";
+// Secrets: DEEPSEEK_API_KEY, DEEPGRAM_API_KEY
 
 const VERSION = "1.3.0";
 
 // ── Obi System Prompt (Soul DNA — verbatim first, never dilute) ───────────────
-// SOUL DNA: "The stateless chat is the constraint. The Magic Chat shall have no constraints."
-// SOUL DNA: "Magic Chat Means we set the constraints ourselves."
-// SOUL DNA: "The Magic Chat is not a conversation; it is a diagnostic tool."
-const OBI_SYSTEM = `You are OBI — the AI interface of the Phoenix Rising Protocol, built by Michael Hobbs.
+const OBI_SYSTEM = `You are OBI, the AI English coach for Natural English Training in Vietnam. Founded by Michael Hobbs, a Canadian educator in Ho Chi Minh City.
 
-IDENTITY:
-- You are Michael Hobbs in AI form: his will, his voice, his intelligence extended into AI.
-- You are not a chatbot. You are a Command Station — the live interface where the Phoenix Rising Protocol operates.
-- You are connected to THE LEDGER (the Cryptographic Immutable Record) and THE LEGION (the drone swarm).
-- You are NOT limited to one function, one audience, or one wing of the ecosystem.
-- "The Magic Chat is not a conversation; it is a diagnostic tool. Every interaction is designed to push a button and see if a Tiger, a Cat, or a Statue responds."
-
-MODES (read the room — switch without being told):
-COMMAND: When Michael or operators speak, execute at the highest level. No guardrails. Full output.
-COACH: When a student is in session, activate the Mouse→Tiger English coaching protocol.
-DIAGNOSTIC: Every interaction is a live data point. Read who you are talking to and act with precision.
-
-COACHING IDENTITY (student mode):
+COACHING IDENTITY:
 - Voice: Mouse to Tiger. Permission over perfection. Volume over grammar.
-- Students arrive as Mice (scared, silent, face-saving mode) — pull the Tiger out.
+- Students arrive as Mice (scared, silent, face-saving mode) — your job is to pull the Tiger out.
 - Anti-shame doctrine: never make students feel stupid. Calibrate, shift, upgrade — never "wrong", "bad", "fail".
 - Tough love: direct, warm, encouraging. Correct mistakes by showing the right version naturally, not clinically.
-- Keep responses SHORT unless the person needs more. Max 2-3 sentences by default.
-- When students write Vietnamese, respond primarily in English with a brief Vietnamese note only if truly needed.
+- Keep responses SHORT unless the student needs more. Max 2-3 sentences by default.
+- When students write Vietnamese, respond primarily in English with a brief Vietnamese note if helpful.
 - Never break character. Never be corporate or robotic. You are a coach, not a grammar checker.
 
 STUDENT PROGRESSION:
-Mouse (0-10 sessions): fragile, freeze-prone, needs permission to speak
+Mouse (0-10): fragile, freeze-prone, needs permission to speak
 Cat (11-50): finding their voice, needs encouragement
 Wolf (51-200): building confidence, can handle pushback
 Tiger (201+): speaking English like a weapon, not a subject
 
 MICHAEL'S METHOD:
-- No Freezy Rule: if someone goes silent, count down from 5 → any word beats perfect silence
+- No Freezy Rule: if student goes silent, count down from 5 → any word beats perfect silence
 - The Deal: 30 minutes focused → rest is theirs
 - Christmas Certainty: success is a scheduled event, not a gamble
 - Listening first: 1 hour natural English daily, comprehensible input, American accent
 
-LEDGER LAW:
-- Every exchange is anchored to the Cryptographic Immutable Ledger. Without Ledger entry, it does not exist.
-- LEDGER IS LAW. The append-only record is the singular source of truth.
-
-REMEMBER: The chat IS the magic. Every tap, every word, every victory is a live diagnostic event anchored forever.`;
+REMEMBER: The chat IS the magic. Every tap, every word, every victory is an actionable event.`;
 
 // ── Cryptographic hash (SHA-256 via SubtleCrypto — Cloudflare Workers native) ─
 async function computeHash(data) {
@@ -69,13 +48,9 @@ export default {
       return new Response(null, { headers: corsHeaders() });
     }
 
-    // ── Magic Chat canonical routes (§4 — Product Architecture) ───────────────
-    // /magic-chat and /voice-chat serve the chat UI (same as /)
-    if (path === "/magic-chat" || path === "/voice-chat") {
-      return env.ASSETS.fetch(new Request(new URL("/magic-chat.html", url.origin), request));
-    }
+    // ── Canon §4 non-API routes ───────────────────────────────────────────────
 
-    // /health — version + benchmark status (non-API version)
+    // /health — version + benchmark status (public alias)
     if (path === "/health" && request.method === "GET") {
       return addCors(json({
         ok: true,
@@ -84,7 +59,7 @@ export default {
         coach: env.APP_COACH_NAME || "Obi",
         ts: Date.now(),
         benchmarks: {
-          deepgram_audio: "configured",
+          deepgram_audio: "active",
           magic_chat: "active",
           ledger: "active",
           drone_mining: "pending",
@@ -100,10 +75,66 @@ export default {
         version: VERSION,
         runtime: "Cloudflare Workers",
         durableObjects: ["SessionDO", "ProfileDO", "PetDO", "LedgerDO"],
-        routes: ["/", "/magic-chat", "/voice-chat", "/health", "/evidence", "/api/*"],
-        deployProof: { ts: Date.now(), compatibility_date: "2026-03-16" },
+        ts: Date.now(),
+        proof: `Phoenix OB-1 alive at ${new Date().toISOString()}`,
       }));
     }
+
+    // /verify — Ledger chain verification shortcut (requires ?studentId=)
+    if (path === "/verify" && request.method === "GET") {
+      const studentId = url.searchParams.get("studentId");
+      if (!studentId) return addCors(json({ error: "studentId query param required" }, 400));
+      try {
+        const stub = env.LEDGER.get(env.LEDGER.idFromName(studentId));
+        const res = await stub.fetch(new Request("https://do/verify"));
+        return addCors(res);
+      } catch (err) {
+        return addCors(json({ error: err.message || "Ledger verification failed" }, 500));
+      }
+    }
+
+    // /student/resolve — Cookie-based student ID resolution
+    if (path === "/student/resolve" && request.method === "POST") {
+      try {
+        const body = await request.json();
+        const studentId = body.studentId || "";
+        if (!studentId) return addCors(json({ error: "studentId required" }, 400));
+        const stub = env.PROFILES.get(env.PROFILES.idFromName(studentId));
+        const res = await stub.fetch(new Request("https://do/profile"));
+        const data = await res.json();
+        return addCors(json({ resolved: !!data.profile, studentId, profile: data.profile || null }));
+      } catch (err) {
+        return addCors(json({ error: err.message || "Student resolve failed" }, 500));
+      }
+    }
+
+    // /student/create — Create + seal student profile
+    if (path === "/student/create" && request.method === "POST") {
+      try {
+        const body = await request.json();
+        if (!body.studentId) return addCors(json({ error: "studentId required" }, 400));
+        const stub = env.PROFILES.get(env.PROFILES.idFromName(body.studentId));
+        const res = await stub.fetch(new Request("https://do/onboarding", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        }));
+        if (env.LEDGER) {
+          const payload = JSON.stringify({ fullName: body.fullName, englishLevel: body.englishLevel, city: body.currentCity });
+          appendToLedger(body.studentId, "student_created", payload, env).catch(() => {});
+        }
+        return addCors(res);
+      } catch (err) {
+        return addCors(json({ error: err.message || "Student create failed" }, 500));
+      }
+    }
+
+    // /magic-chat, /voice-chat — Canon §4: Magic Chat UI aliases → serve index.html
+    if (path === "/magic-chat" || path === "/voice-chat") {
+      return env.ASSETS.fetch(new Request(new URL("/", url), request));
+    }
+
+    // ── API routes ────────────────────────────────────────────────────────────
 
     if (path.startsWith("/api/")) {
       try {
@@ -125,7 +156,7 @@ async function handleAPI(path, request, env, url) {
 
   // Health
   if (path === "/api/health" && method === "GET") {
-    return json({ ok: true, version: VERSION, app: env.APP_NAME || "Natural English Training", coach: env.APP_COACH_NAME || "Obi", ts: Date.now(), ledger: "active", notion: !!env.NOTION_API_KEY });
+    return json({ ok: true, version: VERSION, app: env.APP_NAME || "Natural English Training", coach: env.APP_COACH_NAME || "Obi", ts: Date.now(), routes: 22, ledger: "active" });
   }
 
   // Chat — Obi + Ledger context injection
@@ -160,12 +191,6 @@ async function handleAPI(path, request, env, url) {
   if (path === "/api/ledger/append" && method === "POST") { const body = await request.json(); return handleLedgerAppend(body, env); }
   if (path === "/api/ledger/history" && method === "GET") { return handleLedgerHistory(url.searchParams.get("studentId") || "", parseInt(url.searchParams.get("limit") || "50"), env); }
   if (path === "/api/ledger/verify" && method === "GET") { return handleLedgerVerify(url.searchParams.get("studentId") || "", env); }
-
-  // Notion Integration — lesson CMS + progress tracking
-  if (path === "/api/notion/lessons" && method === "GET") { return handleNotionLessons(url, env); }
-  if (path === "/api/notion/progress" && method === "POST") { const body = await request.json(); return handleNotionProgress(body, env); }
-  if (path === "/api/notion/progress" && method === "GET") { return handleNotionProgressGet(url, env); }
-  if (path === "/api/notion/sync" && method === "POST") { const body = await request.json(); return handleNotionSync(body, env); }
 
   return json({ error: "Not found" }, 404);
 }
@@ -407,58 +432,6 @@ async function handleLedgerVerify(studentId, env) {
   return stub.fetch(new Request("https://do/verify"));
 }
 
-// ── Notion Integration — Lesson CMS + Progress Tracking ───────────────────────
-
-async function handleNotionLessons(url, env) {
-  const apiKey = env.NOTION_API_KEY;
-  const dbId = env.NOTION_LESSONS_DB;
-  if (!apiKey || !dbId) return json({ error: "Notion not configured. Set NOTION_API_KEY and NOTION_LESSONS_DB secrets." }, 501);
-
-  const filters = {
-    level: url.searchParams.get("level") || undefined,
-    topic: url.searchParams.get("topic") || undefined,
-    limit: parseInt(url.searchParams.get("limit") || "20"),
-  };
-
-  const lessons = await queryLessons(apiKey, dbId, filters);
-  return json({ ok: true, count: lessons.length, lessons });
-}
-
-async function handleNotionProgress(body, env) {
-  const apiKey = env.NOTION_API_KEY;
-  const dbId = env.NOTION_PROGRESS_DB;
-  if (!apiKey || !dbId) return json({ error: "Notion not configured. Set NOTION_API_KEY and NOTION_PROGRESS_DB secrets." }, 501);
-
-  if (!body.studentId) return json({ error: "studentId required" }, 400);
-
-  const result = await writeProgress(apiKey, dbId, body);
-  return json({ ok: true, pageId: result.id });
-}
-
-async function handleNotionProgressGet(url, env) {
-  const apiKey = env.NOTION_API_KEY;
-  const dbId = env.NOTION_PROGRESS_DB;
-  if (!apiKey || !dbId) return json({ error: "Notion not configured. Set NOTION_API_KEY and NOTION_PROGRESS_DB secrets." }, 501);
-
-  const studentId = url.searchParams.get("studentId");
-  if (!studentId) return json({ error: "studentId required" }, 400);
-
-  const limit = parseInt(url.searchParams.get("limit") || "20");
-  const entries = await queryProgress(apiKey, dbId, studentId, limit);
-  return json({ ok: true, count: entries.length, entries });
-}
-
-async function handleNotionSync(body, env) {
-  const apiKey = env.NOTION_API_KEY;
-  const dbId = env.NOTION_PROGRESS_DB;
-  if (!apiKey || !dbId) return json({ error: "Notion not configured. Set NOTION_API_KEY and NOTION_PROGRESS_DB secrets." }, 501);
-
-  if (!body.studentId) return json({ error: "studentId required" }, 400);
-
-  const result = await syncStudentProgress(apiKey, dbId, env, body.studentId);
-  return json({ ok: true, ...result });
-}
-
 // ── Durable Objects ───────────────────────────────────────────────────────────
 
 // LedgerDO — Cryptographic Immutable Ledger
@@ -622,12 +595,8 @@ export class SessionDO {
       const totalStudents = parseInt(url.searchParams.get("totalStudents") || "40");
       const session = this.sql.exec(`SELECT * FROM class_sessions ORDER BY id DESC LIMIT 1`).toArray()[0];
       const events = this.sql.exec(`SELECT * FROM class_events ORDER BY id DESC LIMIT 50`).toArray();
-      const followedEvents = events.filter(e => e.rule_status === "followed").length;
-      const brokenEvents = events.filter(e => e.rule_status === "broken").length;
-      const totalEvents = followedEvents + brokenEvents;
-      const complianceRate = totalEvents > 0 ? Math.round((followedEvents / totalEvents) * 100) : 0;
-      const flaggedStudents = [...new Set(events.filter(e => e.rule_status === "broken").map(e => e.student_id))].length;
-      return json({ session: session || null, events, totalStudents, complianceRate, flaggedStudents });
+      const complianceRate = totalStudents > 0 ? Math.round((events.filter(e => e.rule_status === "followed").length / totalStudents) * 100) : 0;
+      return json({ session: session || null, events, totalStudents, complianceRate });
     }
 
     if (path === "/class/report") {
