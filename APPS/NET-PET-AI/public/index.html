@@ -3,6 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#0f0f1a">
+  <meta name="description" content="Natural English Training — AI English coach Obi. Mouse → Tiger. Speak English like a weapon, not a subject.">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+  <link rel="apple-touch-icon" href="/icons/icon.svg">
+  <link rel="manifest" href="/manifest.json">
   <title>Natural English Training — Obi</title>
   <style>
     :root {
@@ -41,6 +48,12 @@
       font-weight: 600;
       color: var(--purple);
       flex: 1;
+    }
+    .obi-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      flex-shrink: 0;
     }
     #dot {
       width: 8px; height: 8px;
@@ -157,22 +170,89 @@
       font-size: 12px;
       margin: 2px;
     }
+    #welcome {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      padding: 24px;
+      text-align: center;
+      flex: 1;
+    }
+    #welcome.show { display: flex; }
+    .welcome-logo { width: 96px; height: 96px; animation: fadeIn 0.6s ease; }
+    .welcome-title {
+      font-size: 22px;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--purple), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .welcome-sub { color: var(--muted); font-size: 14px; line-height: 1.6; max-width: 300px; }
+    .badges {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeIn 0.8s ease;
+    }
+    .badge-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      opacity: 0.4;
+      transition: opacity 0.3s;
+    }
+    .badge-item.active { opacity: 1; }
+    .badge-item img { width: 48px; height: 48px; }
+    .badge-label { font-size: 10px; color: var(--muted); font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
   </style>
 </head>
 <body>
   <header>
     <span id="dot" title="Checking..."></span>
+    <img src="/icons/obi-avatar.svg" alt="Obi" class="obi-avatar">
     <h1>Natural English Training</h1>
-    <button id="speakToggle" title="Obi voice ON">\uD83D\uDD0A</button>
+    <button id="speakToggle" title="Obi voice ON">🔊</button>
   </header>
+  <div id="welcome" class="show">
+    <img src="/icons/icon.svg" alt="Natural English Training" class="welcome-logo">
+    <div class="welcome-title">Meet Obi</div>
+    <div class="welcome-sub">Your AI English coach. Mouse → Tiger.<br>Speak English like a weapon, not a subject.</div>
+    <div class="badges">
+      <div class="badge-item active"><img src="/icons/badge-mouse.svg" alt="Mouse"><span class="badge-label">Mouse</span></div>
+      <div class="badge-item"><img src="/icons/badge-cat.svg" alt="Cat"><span class="badge-label">Cat</span></div>
+      <div class="badge-item"><img src="/icons/badge-wolf.svg" alt="Wolf"><span class="badge-label">Wolf</span></div>
+      <div class="badge-item"><img src="/icons/badge-tiger.svg" alt="Tiger"><span class="badge-label">Tiger</span></div>
+    </div>
+  </div>
   <div id="feed"></div>
   <form id="form" autocomplete="off">
     <div id="inputBar">
-      <input id="msg" type="text" placeholder="Type here\u2026" autocomplete="off">
-      <button type="button" id="mic" title="Hold to speak">\uD83C\uDF99\uFE0F</button>
-      <button type="submit" id="sendBtn">\u27A4</button>
+      <input id="msg" type="text" placeholder="Type here…" autocomplete="off">
+      <button type="button" id="mic" title="Hold to speak">🎙️</button>
+      <button type="submit" id="sendBtn">➤</button>
     </div>
   </form>
   <script src="/chat.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js').catch(function(err) {
+        console.warn('SW registration failed:', err);
+      });
+    }
+    // Hide welcome screen when first message appears
+    const welcomeEl = document.getElementById('welcome');
+    const observer = new MutationObserver(function() {
+      if (document.getElementById('feed').children.length > 0 && welcomeEl) {
+        welcomeEl.classList.remove('show');
+        observer.disconnect();
+      }
+    });
+    observer.observe(document.getElementById('feed'), { childList: true });
+  </script>
 </body>
 </html>

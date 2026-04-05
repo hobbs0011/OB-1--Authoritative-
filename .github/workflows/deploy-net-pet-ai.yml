@@ -49,7 +49,7 @@ jobs:
           fi
 
       - name: Send Slack receipt
-        if: env.SLACK_WEBHOOK_URL != ''
+        if: ${{ secrets.SLACK_WEBHOOK_URL != '' }}
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         run: |

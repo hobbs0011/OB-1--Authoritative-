@@ -270,6 +270,96 @@
   @media (prefers-color-scheme: light) {
     /* Keep dark — this is a branded app */
   }
+  /* ── Camera & Mode Toggle ── */
+  .mode-toggle {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 14px;
+  }
+  .mode-btn {
+    flex: 1;
+    padding: 9px 6px;
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    background: transparent;
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-size: 0.82rem;
+    font-weight: 500;
+    transition: all 0.2s;
+    font-family: inherit;
+  }
+  .mode-btn:hover { border-color: var(--soul-purple); color: var(--soul-purple); }
+  .mode-btn.active {
+    border-color: var(--soul-purple);
+    background: rgba(168, 85, 247, 0.12);
+    color: var(--soul-purple);
+  }
+  .camera-section {
+    display: none;
+    margin-bottom: 12px;
+  }
+  .camera-video-wrap {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #000;
+    border: 1px solid var(--glass-border);
+  }
+  .camera-section video {
+    width: 100%;
+    display: block;
+    max-height: 240px;
+    object-fit: cover;
+  }
+  #captureCanvas { display: none; }
+  .camera-controls {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .btn-cam {
+    flex: 1;
+    padding: 11px 8px;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+  }
+  .btn-cam-capture {
+    background: linear-gradient(135deg, var(--soul-purple), var(--soul-purple-dim));
+    color: #fff;
+  }
+  .btn-cam-capture:hover { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(168,85,247,0.4); }
+  .btn-cam-stop {
+    background: rgba(239, 68, 68, 0.12);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #ef4444;
+  }
+  .ocr-status {
+    display: none;
+    margin-top: 8px;
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    text-align: center;
+  }
+  .ocr-text-preview {
+    display: none;
+    margin-top: 10px;
+    padding: 10px 12px;
+    background: var(--void);
+    border: 1px dashed var(--glass-border);
+    border-radius: 8px;
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    max-height: 80px;
+    overflow-y: auto;
+    line-height: 1.5;
+    white-space: pre-wrap;
+  }
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
@@ -283,16 +373,41 @@
 
 <!-- API Key Setup -->
 <div class="card" id="setupCard">
-  <div class="upload-zone" onclick="document.getElementById('fileInput').click()" id="uploadZone">
-    <div class="icon">📷</div>
-    <div class="label">Tap to take a photo of your homework</div>
-    <div class="hint">or choose an image from your gallery</div>
+
+  <!-- Mode toggle: Upload vs Camera -->
+  <div class="mode-toggle">
+    <button class="mode-btn active" id="modeUploadBtn" onclick="setMode('upload')">📁 Upload Photo</button>
+    <button class="mode-btn" id="modeCameraBtn" onclick="setMode('camera')">📷 Use Camera</button>
   </div>
-  <input type="file" id="fileInput" accept="image/*" capture="environment">
-  
+
+  <!-- Upload mode -->
+  <div id="uploadSection">
+    <div class="upload-zone" onclick="document.getElementById('fileInput').click()" id="uploadZone">
+      <div class="icon">📷</div>
+      <div class="label">Tap to take a photo of your homework</div>
+      <div class="hint">or choose an image from your gallery</div>
+    </div>
+    <input type="file" id="fileInput" accept="image/*">
+  </div>
+
+  <!-- Camera capture mode -->
+  <div class="camera-section" id="cameraSection">
+    <div class="camera-video-wrap">
+      <video id="cameraVideo" autoplay playsinline muted></video>
+    </div>
+    <canvas id="captureCanvas"></canvas>
+    <div class="camera-controls">
+      <button class="btn-cam btn-cam-capture" id="captureBtn" onclick="capturePhoto()">📸 Capture</button>
+      <button class="btn-cam btn-cam-stop" id="stopCameraBtn" onclick="stopCamera()">✕ Stop</button>
+    </div>
+    <div class="ocr-status" id="ocrStatus">🔍 Extracting text...</div>
+  </div>
+
+  <!-- Preview (shared) -->
   <div class="preview-container" id="previewContainer">
     <img id="previewImage" alt="Homework preview">
     <div class="file-name" id="fileName"></div>
+    <div class="ocr-text-preview" id="ocrTextPreview"></div>
   </div>
 
   <div class="subject-select">
@@ -343,27 +458,101 @@
 </div>
 
 <div class="footer">
-  Natural English Training — OBI Homework Checker v1.0<br>
-  Powered by Gemini AI · Your photos never leave the API call
+  Natural English Training — OBI Homework Checker v2.0<br>
+  Vision AI · OCR · Your photos never leave the API call
 </div>
 
+<script src="lib/tesseract.min.js"></script>
 <script>
 // ============================================================
-// OBI HOMEWORK CHECKER — Natural English Training
+// OBI HOMEWORK CHECKER — Natural English Training v2.0
 // Mouse→Tiger feedback: encouraging, never shaming
+// Camera capture + Tesseract OCR + Gemini Vision AI
 // ============================================================
 
 const GEMINI_ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
+const BACKEND_URL = 'https://naturalenglishtraining.net/api/chat';
 
 let selectedFile = null;
 let selectedBase64 = null;
+let extractedText = '';
+let cameraStream = null;
+let currentMode = 'upload';
+
+// ---- Mode Toggle ----
+function setMode(mode) {
+  currentMode = mode;
+  const uploadSection = document.getElementById('uploadSection');
+  const cameraSection = document.getElementById('cameraSection');
+  const modeUploadBtn = document.getElementById('modeUploadBtn');
+  const modeCameraBtn = document.getElementById('modeCameraBtn');
+
+  if (mode === 'camera') {
+    uploadSection.style.display = 'none';
+    cameraSection.style.display = 'block';
+    modeUploadBtn.classList.remove('active');
+    modeCameraBtn.classList.add('active');
+    startCamera();
+  } else {
+    cameraSection.style.display = 'none';
+    uploadSection.style.display = 'block';
+    modeUploadBtn.classList.add('active');
+    modeCameraBtn.classList.remove('active');
+    stopCamera();
+  }
+}
+
+// ---- Camera ----
+async function startCamera() {
+  try {
+    cameraStream = await navigator.mediaDevices.getUserMedia({
+      video: { facingMode: { ideal: 'environment' }, width: { ideal: 1280 }, height: { ideal: 720 } },
+      audio: false,
+    });
+    const video = document.getElementById('cameraVideo');
+    video.srcObject = cameraStream;
+  } catch (err) {
+    showError('Camera access denied. Please allow camera permissions and try again.');
+    setMode('upload');
+  }
+}
+
+function stopCamera() {
+  if (cameraStream) {
+    cameraStream.getTracks().forEach(t => t.stop());
+    cameraStream = null;
+  }
+  const video = document.getElementById('cameraVideo');
+  video.srcObject = null;
+}
+
+function capturePhoto() {
+  const video = document.getElementById('cameraVideo');
+  const canvas = document.getElementById('captureCanvas');
+  if (!video.videoWidth) {
+    showError('Camera not ready yet. Please wait a moment.');
+    return;
+  }
+  canvas.width = video.videoWidth;
+  canvas.height = video.videoHeight;
+  canvas.getContext('2d').drawImage(video, 0, 0);
+
+  canvas.toBlob(async (blob) => {
+    const file = new File([blob], 'homework-capture.jpg', { type: 'image/jpeg' });
+    await handleImageFile(file);
+    stopCamera();
+    setMode('upload');
+    document.getElementById('cameraSection').style.display = 'none';
+  }, 'image/jpeg', 0.9);
+}
 
 // ---- File Handling ----
-document.getElementById('fileInput').addEventListener('change', handleFileSelect);
-
-function handleFileSelect(e) {
+document.getElementById('fileInput').addEventListener('change', (e) => {
   const file = e.target.files[0];
-  if (!file) return;
+  if (file) handleImageFile(file);
+});
+
+async function handleImageFile(file) {
   if (!file.type.startsWith('image/')) {
     showError('Please select an image file (photo of your homework)');
     return;
@@ -373,9 +562,10 @@ function handleFileSelect(e) {
     return;
   }
   selectedFile = file;
-  
+  extractedText = '';
+
   const reader = new FileReader();
-  reader.onload = function(ev) {
+  reader.onload = async function(ev) {
     const base64Full = ev.target.result;
     selectedBase64 = base64Full.split(',')[1];
     document.getElementById('previewImage').src = base64Full;
@@ -383,8 +573,40 @@ function handleFileSelect(e) {
     document.getElementById('previewContainer').style.display = 'block';
     document.getElementById('checkBtn').disabled = false;
     hideError();
+
+    // Run Tesseract OCR in background if available
+    runTesseractOCR(base64Full);
   };
   reader.readAsDataURL(file);
+}
+
+// ---- Tesseract OCR ----
+async function runTesseractOCR(imageDataUrl) {
+  if (typeof Tesseract === 'undefined') return;
+  const ocrStatus = document.getElementById('ocrStatus');
+  const ocrPreview = document.getElementById('ocrTextPreview');
+
+  try {
+    ocrStatus.style.display = 'block';
+    const result = await Tesseract.recognize(imageDataUrl, 'eng', {
+      workerPath: chrome.runtime.getURL('lib/worker.min.js'),
+      logger: (m) => {
+        if (m.status === 'recognizing text') {
+          ocrStatus.textContent = `🔍 Reading text: ${Math.round(m.progress * 100)}%`;
+        }
+      },
+    });
+    extractedText = result.data.text.trim();
+    ocrStatus.style.display = 'none';
+
+    if (extractedText.length > 10) {
+      ocrPreview.textContent = `📝 Text found:\n${extractedText.slice(0, 200)}${extractedText.length > 200 ? '...' : ''}`;
+      ocrPreview.style.display = 'block';
+    }
+  } catch (e) {
+    ocrStatus.style.display = 'none';
+    console.warn('[OBI] Tesseract OCR failed:', e);
+  }
 }
 
 // ---- Drag & Drop ----
@@ -395,10 +617,7 @@ uploadZone.addEventListener('drop', (e) => {
   e.preventDefault();
   uploadZone.classList.remove('drag-over');
   const file = e.dataTransfer.files[0];
-  if (file) {
-    document.getElementById('fileInput').files = e.dataTransfer.files;
-    handleFileSelect({ target: { files: [file] } });
-  }
+  if (file) handleImageFile(file);
 });
 
 // ---- API Key Management ----
@@ -419,12 +638,6 @@ function saveApiKey() {
 
 // ---- Main Check Function ----
 async function checkHomework() {
-  const apiKey = getApiKey();
-  if (!apiKey) {
-    document.getElementById('apiSetup').style.display = 'block';
-    showError('First time? You need a free Gemini API key. Get one below!');
-    return;
-  }
   if (!selectedBase64) {
     showError('Please take a photo of your homework first');
     return;
@@ -440,55 +653,97 @@ async function checkHomework() {
   document.getElementById('loadingState').style.display = 'block';
   hideError();
 
-  const prompt = buildPrompt(subjectLabel, context);
-
   try {
-    const response = await fetch(`${GEMINI_ENDPOINT}?key=${apiKey}`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        contents: [{
-          parts: [
-            { text: prompt },
-            { inline_data: { mime_type: selectedFile.type, data: selectedBase64 } }
-          ]
-        }],
-        generationConfig: {
-          temperature: 0.4,
-          maxOutputTokens: 2048,
-          responseMimeType: 'application/json'
-        }
-      })
-    });
-
-    if (!response.ok) {
-      const errData = await response.json().catch(() => ({}));
-      if (response.status === 400 && JSON.stringify(errData).includes('API_KEY')) {
-        localStorage.removeItem('obi_gemini_key');
-        document.getElementById('apiSetup').style.display = 'block';
-        throw new Error('API key is invalid. Please enter a new one below.');
-      }
-      throw new Error(`API error (${response.status}). Please try again.`);
+    // Path 1: Gemini Vision API (best quality — multimodal image understanding)
+    const apiKey = getApiKey();
+    if (apiKey) {
+      const result = await checkWithGeminiVision(apiKey, subjectLabel, context);
+      displayResult(result);
+      return;
     }
 
-    const data = await response.json();
-    const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
-    if (!text) throw new Error('No response from AI. Please try again.');
-
-    let result;
-    try {
-      result = JSON.parse(text);
-    } catch {
-      // If JSON parse fails, show raw text
-      result = { level: 'good', summary: text, strengths: [], improvements: [], encouragement: 'Keep going! Every step forward counts. 🐯' };
+    // Path 2: Extract text with Tesseract OCR, then send to OBI backend
+    if (extractedText && extractedText.length > 10) {
+      const result = await checkWithBackend(subjectLabel, context, extractedText);
+      displayResult(result);
+      return;
     }
 
-    displayResult(result);
+    // Path 3: No API key, no extracted text — ask for API key or wait for OCR
+    document.getElementById('loadingState').style.display = 'none';
+    document.getElementById('setupCard').style.display = 'block';
+    if (typeof Tesseract !== 'undefined') {
+      showError('Still reading your homework... please wait a moment, then try again!');
+    } else {
+      document.getElementById('apiSetup').style.display = 'block';
+      showError('For best results, add a free Gemini API key below. Get one in 30 seconds!');
+    }
   } catch (err) {
     document.getElementById('loadingState').style.display = 'none';
     document.getElementById('setupCard').style.display = 'block';
     showError(err.message);
   }
+}
+
+async function checkWithGeminiVision(apiKey, subjectLabel, context) {
+  const prompt = buildPrompt(subjectLabel, context);
+  const response = await fetch(`${GEMINI_ENDPOINT}?key=${apiKey}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      contents: [{
+        parts: [
+          { text: prompt },
+          { inline_data: { mime_type: selectedFile.type || 'image/jpeg', data: selectedBase64 } }
+        ]
+      }],
+      generationConfig: { temperature: 0.4, maxOutputTokens: 2048, responseMimeType: 'application/json' }
+    })
+  });
+
+  if (!response.ok) {
+    const errData = await response.json().catch(() => ({}));
+    if (response.status === 400 && JSON.stringify(errData).includes('API_KEY')) {
+      localStorage.removeItem('obi_gemini_key');
+      document.getElementById('apiSetup').style.display = 'block';
+      throw new Error('API key is invalid. Please enter a new one below.');
+    }
+    throw new Error(`API error (${response.status}). Please try again.`);
+  }
+
+  const data = await response.json();
+  const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
+  if (!text) throw new Error('No response from AI. Please try again.');
+
+  try {
+    return JSON.parse(text);
+  } catch {
+    return { level: 'good', summary: text, strengths: [], improvements: [], encouragement: 'Keep going! Every step forward counts. 🐯' };
+  }
+}
+
+async function checkWithBackend(subjectLabel, context, ocrText) {
+  const message = `Please check this ${subjectLabel} homework. Here is the text extracted from the student's photo:\n\n${ocrText}\n\n${context ? 'Student note: ' + context : ''}\n\nRespond with encouraging feedback following the Mouse→Tiger approach. Never say "wrong" — use "let's calibrate" or "here's a tip". Find at least one strength.`;
+
+  const response = await fetch(BACKEND_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message, language: 'en' }),
+  });
+
+  if (!response.ok) throw new Error(`Server error (${response.status}). Please try again.`);
+
+  const data = await response.json();
+  const reply = data.reply || 'I couldn\'t check your homework right now. Please try again!';
+
+  return {
+    level: 'good',
+    summary: reply,
+    strengths: ['You submitted your homework — that\'s the first step to getting better! 🐭'],
+    improvements: [],
+    corrections: [],
+    encouragement: 'Every attempt brings you closer to Tiger level! 🐯',
+  };
 }
 
 function buildPrompt(subject, context) {
@@ -571,14 +826,18 @@ function displayResult(result) {
 function resetForm() {
   selectedFile = null;
   selectedBase64 = null;
+  extractedText = '';
   document.getElementById('fileInput').value = '';
   document.getElementById('previewContainer').style.display = 'none';
+  document.getElementById('ocrTextPreview').style.display = 'none';
   document.getElementById('checkBtn').disabled = true;
   document.getElementById('checkBtn').style.display = 'block';
   document.getElementById('resetBtn').style.display = 'none';
   document.getElementById('resultCard').style.display = 'none';
   document.getElementById('uploadZone').style.display = 'block';
   document.getElementById('contextInput').value = '';
+  stopCamera();
+  setMode('upload');
   hideError();
 }
 
@@ -599,7 +858,11 @@ function escapeHtml(str) {
 }
 
 // ---- Init ----
+// Show API setup only if no key stored AND Tesseract is unavailable
 if (getApiKey()) {
+  document.getElementById('apiSetup').style.display = 'none';
+} else if (typeof Tesseract !== 'undefined') {
+  // Tesseract available — OCR path works without API key
   document.getElementById('apiSetup').style.display = 'none';
 } else {
   document.getElementById('apiSetup').style.display = 'block';

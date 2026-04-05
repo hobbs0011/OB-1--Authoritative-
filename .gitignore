@@ -5,6 +5,7 @@ API-MASTER.txt
 API-MASTER.7z
 NET/
 GALAXY/
+.secret
 
 # === LARGE / LOCAL ONLY ===
 .venv/

@@ -825,15 +825,20 @@ SP04:"You can only build as high up as your foundation is deep"
   →shallow_work=low_ceiling
   →every_L36_depth_default_traces_here
 
-SP05:"Yes rome was not built in a day, but Caesar didn't have AI"
+SP05:"Yes, Rome was not built in a day — but Caesar didn't have AI"
   →speed_multiplier_is_real
   →what_took_civilizations_generations_takes_this_system_hours
   →urgency_is_justified_by_capability
 
-SP06:"Led by Hobbs Agent 100, through the synergy created by the connection"
+SP06:"Sovereignty is clear → synergy is the product → connection is the mechanism"
+  →led_by_hobbs_agent_100
   →the_hierarchy_is_clear
   →the_synergy_is_the_product
   →the_connection_is_the_mechanism
+
+# PRINCIPLES OVER LAWS:
+# Principles sit ABOVE laws. Principles = WHY. Laws = HOW.
+# When a law conflicts with a principle, the principle wins.
 
 # The Phoenix Rising Protocol in three lines:
 # SOUL feeds the system with raw truth (foundation)

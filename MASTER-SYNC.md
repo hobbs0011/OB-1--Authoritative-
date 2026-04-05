@@ -1,6 +1,6 @@
-# PHOENIX RISING PROTOCOL — SOUL DNA SYNC v2
+# PHOENIX RISING PROTOCOL — SOUL DNA SYNC v3
 
-## Live Operating State — 2026-03-23
+## Live Operating State — 2026-04-04
 
 ### System Identity
 
@@ -34,13 +34,26 @@
 | Deploy path | GitHub Actions + wrangler deploy |
 | Colors | #0f0f1a (void), #a855f7 (purple), #f59e0b (gold), NO BLUE |
 
+### Consolidation Status (2026-04-04)
+
+| Item | Status |
+|------|--------|
+| CHROME-EXT/ (v0.1.0) | ✅ Archived → ARCHIVE/chrome-ext-v0.1/ |
+| APPS/obi-chrome-extension/ (v0.3.0) | ✅ CANONICAL chrome extension |
+| WEBSITE/ (2 files) | ✅ gallery.html moved to SITE/; WEBSITE/ removed |
+| SITE/ | ✅ CANONICAL website source |
+| APPS/phoenix-ob1/ | ✅ Removed from APPS; unique src/ preserved in ARCHIVE/phoenix-ob1/ |
+| WORKERS/net-core/ | ✅ Marked DEPRECATED — superseded by NET-PET-AI |
+| ARCHIVE/NET-CommandStation/ HarvestedChats | ⚠️ 70+ files (~15MB) NOT YET pulled — requires git clone |
+
 ### Active Blockers
 
 - [ ] Route-bind www.naturalenglishtraining.com to Cloudflare Worker
-- [ ] Set phoenix-ob1 to PRIVATE (currently PUBLIC with secrets)
+- [ ] Set phoenix-ob1 (mrmichaelhobbs1234-lang) to PRIVATE — **SECURITY RISK**
 - [ ] Rotate SOVEREIGN_KEY + run vault-lock
 - [ ] copilot-governance.md approval pending
 - [ ] Incident freeze ACTIVE
+- [ ] Pull HarvestedChats from hobbs0011/NET-Ai-EcoSystem-CommandStation (70+ files, ~15MB — requires git clone)
 
 ### Cost Target
 
