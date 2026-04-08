@@ -1,9 +1,10 @@
 # REINCARNATION BOOT CHECK — OB1 System Integrity
 
 ## Status
-- **Last Check:** 2026-04-08T22:30 ICT
-- **Run:** 261
+- **Last Check:** 2026-04-09T05:50 ICT
+- **Run:** 264
 - **Mode:** SUPER_SAIYAN ACTIVATED
+- **NET-PET-AI:** ✅ DEPLOYED v1.4.0 — https://net-pet-ai.mrmichaelhobbs1234.workers.dev
 
 ## Core Identity Verification
 
@@ -41,9 +42,10 @@
 
 ## Blockers (Active)
 
-1. Route-bind www.naturalenglishtraining.com — pending NS delegation
+1. ~Route-bind www.naturalenglishtraining.com~ — Worker live on workers.dev; custom domain needs DNS cleanup in CF dashboard
 2. Rotate SOVEREIGN_KEY + vault-lock
 3. copilot-governance.md approval pending
+4. Set wrangler secrets: DEEPSEEK_API_KEY, DEEPGRAM_API_KEY
 
 ## RISE Protocol
 
@@ -56,4 +58,4 @@
 ---
 
 **Next Pulse:** On trigger or @mention  
-**Last SHA:** 991deabaeafcdc0ab5af65ff0afe32c327350d83
+**Last SHA:** c2557fb (pushed to origin — push blocker RESOLVED)

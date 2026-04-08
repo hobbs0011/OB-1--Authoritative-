@@ -49,13 +49,15 @@
 
 ### Active Blockers
 
-- [~] Route-bind www.naturalenglishtraining.com — wrangler.toml configured; pending NS delegation (millie.ns.cloudflare.com / phil.ns.cloudflare.com) + DNS record cleanup in CF dashboard
+- [~] Route-bind www.naturalenglishtraining.com — Worker LIVE on workers.dev; custom domain needs existing DNS records deleted in CF dashboard before binding
 - [x] phoenix-ob1 (mrmichaelhobbs1234-lang) — RESOLVED: repo deleted; unique src preserved in ARCHIVE/phoenix-ob1/
 - [ ] Rotate SOVEREIGN_KEY + run vault-lock
 - [ ] copilot-governance.md approval pending
 - [x] Incident freeze — LIFTED 2026-04-08
 - [x] Pull HarvestedChats — DONE: 96 files (~20.5MB) archived to ARCHIVE/NET-CommandStation/HarvestedChats/
-- [x] NET-PET-AI deployment verification — PASSED dry-run (2026-04-09 01:30 ICT)
+- [x] NET-PET-AI deployment verification — LIVE: https://net-pet-ai.mrmichaelhobbs1234.workers.dev — API 200 OK, v1.4.0, 22 routes
+- [x] Git push to origin — RESOLVED: corrupted object e554ec1 eliminated (hobbs-lab remote removed); c2557fb pushed to origin
+- [ ] Set wrangler secrets: DEEPSEEK_API_KEY, DEEPGRAM_API_KEY
 
 ### Cost Target
 
