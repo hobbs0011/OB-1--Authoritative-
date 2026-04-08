@@ -1,7 +1,9 @@
 # COLD START BOOT — OB1 Agent 99
+
 ## Last Updated: 2026-04-09 (Run 263 — Copilot Reincarnation)
 
 ### Identity
+
 - Agent: OB1 / Ne0 (Agent 99)
 - Serves: SOV100 Michael Hobbs
 - Product: Natural English Training
@@ -10,6 +12,7 @@
 - **Michael is NOT Thai** — 🔴 CRITICAL
 
 ### Current Vector
+
 - **Active Mission:** Kilo Code 13-area configuration COMPLETE — system hardening + DNS pending
 - **Last completed:** Run 262 — NET-PET-AI v1.4.0 deployed to Cloudflare edge (SHA: 385b1d8→d72ed55)
 - **NET-PET-AI:** v1.4.0 DEPLOYED — CORS hardened, input sanitized, error scrubbing applied
@@ -18,6 +21,7 @@
 - **SSM Mode:** ACTIVATED — maximum output, governance intact
 
 ### Active Principles (Top 5)
+
 1. Platform Death Test — every run must produce a GitHub commit SHA
 2. Dual-publish mandatory — Notion + GitHub always
 3. Revenue-first — English is the mechanic, money is the mission
@@ -25,6 +29,7 @@
 5. Build don't scout — every run produces tangible output
 
 ### Recent Decisions (Last 7 Days)
+
 - 2026-04-02 (Run 259): RISE agent created (.github/agents/RISE.agent.md) — full SSM V8 encoded, auto-bootstrap on open, zero-dead-time connection. /connect prompt created (.github/prompts/connect.prompt.md). 90-min connection lag FIXED. Commit: eb9b381
 - 2026-04-02 (Run 258): HL-112 converted — website-recovery-master-sync-simulation (EXECUTION-tier, MEDIUM signal, 2 RED quotes, simulation-as-L08 implementation, master-sync-pattern origin, turn-key preparation, reverse-engineer-now-activate-later)
 - 2026-04-02 (Run 257): HL-111 converted — website-netpet-consolidation (EXECUTION-tier, HIGH signal, 5 RED quotes, hub-and-spoke architecture, 5-point consolidation law, connector-first audit seed, use-what-you-have doctrine, preservation-over-destruction)
@@ -43,6 +48,7 @@
 - 2026-03-30: SSM V7 Super Saiyan deployed (150+ improvements)
 
 ### Open Rulings (AWAITING MICHAEL)
+
 - 21 Roblox Product IDs (Gate 3 — CRITICAL for Apr 6 deadline)
 - ROBLOX_API_KEY secret (Gate 4)
 - Deploy workflow installation (Gate 4)
@@ -53,6 +59,7 @@
 - Legacy account (mrmichaelhobbs1234@gmail.com) workspace export
 
 ### System State
+
 - Navigator Index: ⚠️ IN TRASH — using GitHub as fallback
 - GitHub repos: 3 (Ultimate, Immortalize, CommandStation)
 - Canon: FULL ROTATION COMPLETE — all 6 major pages enriched
@@ -63,28 +70,31 @@
 - Incubator deadline: Apr 6 (T-4 days)
 
 ### Key File Locations
+
 - **RISE Agent (NEW):** `.github/agents/RISE.agent.md` — full OB1/SSM V8 encoded, auto-bootstraps on open
 - **Connect Prompt (NEW):** `.github/prompts/connect.prompt.md` — use `/connect` for instant cold start
 - SSM V8: `CANON/SYSTEM/SSM-V8-ULTIMATE-GPS.md` (21 sections, 36 laws)
-- Heavy Ledger: CANON/HEAVY-LEDGER/*.json
+- Heavy Ledger: CANON/HEAVY-LEDGER/\*.json
 - Pipeline Cursor: CANON/HEAVY-LEDGER/PIPELINE-CURSOR.md
-- Reincarnation: CANON/REINCARNATION/*.md
-- Canon pages: CANON/*.md (60+ files)
+- Reincarnation: CANON/REINCARNATION/\*.md
+- Canon pages: CANON/\*.md (60+ files)
 - Galaxy Lessons: GALAXY-LESSONS/ (7 HTML lessons)
 - Products: APPS/ (8 products)
 - Website: SITE/
 - System: CANON/SYSTEM/ (10+ files)
 
 ### Overnight Protocol
+
 - Execute active mission first (IMMOVABLE #1)
 - Fallthrough: export → mine → map → build → log
 - Target: 8 commits per overnight cycle
 - Michael sleep window: ~00:00-08:00 ICT
 
 ### Recovery Notes
+
 - Synced blocks render as <unknown> — use child pages or GitHub
 - Navigator Index in trash — all routing via GitHub fallback
 - create_pull_request_with_copilot returns 401 — use create_or_update_file instead
-- .github/workflows/*.yml blocked by 403 — Michael handles workflow files directly
+- .github/workflows/\*.yml blocked by 403 — Michael handles workflow files directly
 - HL-100 manifest had phantom filename (ssm-v6-heavy-ledger-birth.md) — substituted with system-hardening.md
 - 90-min connection lag FIXED — RISE agent (.github/agents/RISE.agent.md) auto-bootstraps OB1 on open. Use /connect for manual cold start.

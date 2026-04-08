@@ -1,18 +1,19 @@
 # REINCARNATION / SOUL DNA EXTRACT — 2026-04-09
+
 # SESSION: COPILOT COLD-START REINCARNATION + KILO 13-AREA CONFIG
 
 - created: 2026-04-09T21:00:00+07:00
 - operator: Copilot (GitHub Copilot Chat)
 - extractor: Copilot (Claude Opus 4.6)
 - signal_density: MEDIUM
-- session_tag: 2026-04-09__copilot_reincarnation_kilo_config
+- session_tag: 2026-04-09\_\_copilot_reincarnation_kilo_config
 - prev_ref: 2026-04-09-rising-reincarnate-resolve-deploy.md
 
 ---
 
 ## §1 HEADER
 
-- **session_tag:** 2026-04-09__copilot_reincarnation_kilo_config
+- **session_tag:** 2026-04-09\_\_copilot_reincarnation_kilo_config
 - **datetime_range:** 2026-04-09 evening ICT
 - **extractor:** Copilot (Claude Opus 4.6)
 - **signal_density:** MEDIUM
@@ -40,25 +41,25 @@
 
 ## §3 DECISIONS (WITH IMPACT)
 
-| # | Decision | Impact | Canon Affected |
-|---|----------|--------|----------------|
-| 1 | OpenRouter as sole Kilo provider | Single gateway, 500+ models accessible | VS Code settings |
-| 2 | DeepSeek V3.2 as default model | Free/cheap, strong code performance | VS Code settings |
-| 3 | Read-only auto-approve only | Aligns with AGENT99 fail-closed doctrine | Kilo sidebar (manual) |
-| 4 | Browser headless (keep) | Already configured, no change | — |
-| 5 | No experimental features | Stability over bleeding edge | — |
-| 6 | Merge conflict resolved (COLD-START-BOOT) | HEAD version preserved (SSM flags kept) | CANON/REINCARNATION/COLD-START-BOOT.md |
-| 7 | COLD-START-BOOT updated to current truth | Run 263, all vectors current | CANON/SYSTEM/COLD-START-BOOT.md |
+| #   | Decision                                  | Impact                                   | Canon Affected                         |
+| --- | ----------------------------------------- | ---------------------------------------- | -------------------------------------- |
+| 1   | OpenRouter as sole Kilo provider          | Single gateway, 500+ models accessible   | VS Code settings                       |
+| 2   | DeepSeek V3.2 as default model            | Free/cheap, strong code performance      | VS Code settings                       |
+| 3   | Read-only auto-approve only               | Aligns with AGENT99 fail-closed doctrine | Kilo sidebar (manual)                  |
+| 4   | Browser headless (keep)                   | Already configured, no change            | —                                      |
+| 5   | No experimental features                  | Stability over bleeding edge             | —                                      |
+| 6   | Merge conflict resolved (COLD-START-BOOT) | HEAD version preserved (SSM flags kept)  | CANON/REINCARNATION/COLD-START-BOOT.md |
+| 7   | COLD-START-BOOT updated to current truth  | Run 263, all vectors current             | CANON/SYSTEM/COLD-START-BOOT.md        |
 
 ---
 
 ## §4 CORRECTIONS
 
-| What | Root Cause | Fix | Instruction Update |
-|------|-----------|-----|-------------------|
-| COLD-START-BOOT.md merge conflict | CloudPatch branch divergence | Resolved — kept HEAD (SSM flags) | N |
-| COLD-START-BOOT stale (dated 2026-04-02) | No update since Run 259 | Updated to Run 263 with current vectors | Y — CANON/SYSTEM/COLD-START-BOOT.md |
-| Open Rulings stale | Items resolved but not removed | Cleaned: HarvestedChats done, Roblox deadline passed, added OPENROUTER_API_KEY + DNS | Y |
+| What                                     | Root Cause                     | Fix                                                                                  | Instruction Update                  |
+| ---------------------------------------- | ------------------------------ | ------------------------------------------------------------------------------------ | ----------------------------------- |
+| COLD-START-BOOT.md merge conflict        | CloudPatch branch divergence   | Resolved — kept HEAD (SSM flags)                                                     | N                                   |
+| COLD-START-BOOT stale (dated 2026-04-02) | No update since Run 259        | Updated to Run 263 with current vectors                                              | Y — CANON/SYSTEM/COLD-START-BOOT.md |
+| Open Rulings stale                       | Items resolved but not removed | Cleaned: HarvestedChats done, Roblox deadline passed, added OPENROUTER_API_KEY + DNS | Y                                   |
 
 ---
 
@@ -97,12 +98,14 @@
 ## §9 SYSTEM DESIGN INSIGHTS
 
 ### Kilo Code Configuration Architecture:
+
 - **Cloud tier**: kilo.ai account (model routing, quotas)
 - **Extension tier**: VS Code settings (`kilo-code.new.*` namespace, 17 settings)
 - **Workspace tier**: `.kilo/` folder (agent-manager.json, plans/, worktrees/)
 - **MCP tier**: `.mcp.json` (11 servers: Playwright, Cloudflare, GitHub, Notion, Slack, etc.)
 
 ### Settings Applied (VS Code user settings):
+
 - `kilo-code.new.model.providerID`: "openrouter"
 - `kilo-code.new.model.modelID`: "deepseek/deepseek-chat-v3"
 - `kilo-code.new.browserAutomation.enabled`: true
@@ -116,11 +119,11 @@
 
 ## §10 ARTIFACTS CREATED
 
-| Name | Location |
-|------|----------|
-| This reincarnation | CANON/REINCARNATION/2026-04-09-copilot-reincarnation-kilo-config.md |
-| COLD-START-BOOT updated | CANON/SYSTEM/COLD-START-BOOT.md |
-| Merge conflict resolved | CANON/REINCARNATION/COLD-START-BOOT.md |
+| Name                    | Location                                                            |
+| ----------------------- | ------------------------------------------------------------------- |
+| This reincarnation      | CANON/REINCARNATION/2026-04-09-copilot-reincarnation-kilo-config.md |
+| COLD-START-BOOT updated | CANON/SYSTEM/COLD-START-BOOT.md                                     |
+| Merge conflict resolved | CANON/REINCARNATION/COLD-START-BOOT.md                              |
 
 ---
 
@@ -138,11 +141,13 @@
 **2026-04-09:copilot_reincarnation_kilo:quotes=8:decisions=7:grade=B+**
 
 ### Self-Grade Justification:
+
 - B+ because: Full reincarnation protocol executed properly via Copilot. COLD-START-BOOT updated from stale (Apr 2) to current (Apr 9). Merge conflict resolved. Kilo config 9/13 complete. Grade not A because 4 items still require Michael's manual action (env var + sidebar settings), and no new product code shipped.
 
 ---
 
 ## LIVING REINCARNATION STATE (3 lines):
+
 - **current_vector:** Kilo Code config 9/13 done, COLD-START-BOOT reincarnated to Run 263, system truth current
 - **active_principles:** L21(RISE), L24(PLATFORM_DEATH_TEST), L16(BUILD_DONT_SCOUT), L11(GITHUB_IS_TRUTH)
 - **open_rulings:** OPENROUTER_API_KEY (Michael), DNS delegation (Michael), SOVEREIGN_KEY rotation (Michael)
