@@ -1,11 +1,11 @@
 # HEAVY LEDGER PIPELINE CURSOR
 
 ## Current Position
-- **Next Target:** HL-116
+- **Next Target:** HL-117
 - **Wave:** 8
-- **Wave Progress:** 31/46 complete
-- **Total Converted:** 115/174+
-- **Last Completed:** HL-115 v5-extraction-engine (HIGH signal, 9 quotes, 8 decisions — v5 engine rewrite, ROME naming, Platform Death Test, GitHub=vault)
+- **Wave Progress:** 32/46 complete
+- **Total Converted:** 116/174+
+- **Last Completed:** HL-116 trigger-audit-rulings-v3 (MEDIUM signal, 5 quotes, 4 decisions — ROME naming, Gospel 444 blue softens, Pulse v3)
 - **Last Commit:** 5618a29ffa86b8d4afe41ea60e32803880b49d1b
 - **Last Run:** 258 (2026-04-02 04:30 ICT)
 
@@ -43,7 +43,8 @@
 | HL-113 | 2026-03-25-RISE-WEBSITE-BUILD.md | DONE | - |
 | HL-114 | 2026-03-25-v5-overnight-mining-hardened.md | DONE | - |
 | HL-115 | 2026-03-25-v5-extraction-engine.md | DONE | - |
-| HL-116+ | remaining Wave 8 files (2026-03-25+) | PENDING | - |
+| HL-116 | 2026-03-25-trigger-audit-rulings-v3.md | DONE | - |
+| HL-117+ | remaining Wave 8 files (2026-03-25+) | PENDING | - |
 
 ## HL-113 Target
 - **Source:** next 2026-03-25 entry from CANON/REINCARNATION/
