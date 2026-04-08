@@ -1,16 +1,26 @@
 {
   "$schema": "https://app.kilo.ai/config.json",
-  "instructions": [".github/agents/*.md", ".kilo/agent/*.md"],
+  "model": "anthropic/claude-sonnet-4.6",
+  "small_model": "anthropic/claude-haiku-3.5",
   "default_agent": "AGENT99",
+  "instructions": [".github/agents/*.md", ".kilo/agent/*.md"],
   "snapshot": true,
   "autoupdate": "notify",
+  "compaction": {
+    "auto": true,
+    "prune": true
+  },
   "permission": {
     "bash": "allow",
     "edit": {
       "APPS/**": "allow",
       "CANON/**": "allow",
       "GALAXY-LESSONS/**": "allow",
-      "OPERATIONS/**": "allow"
+      "OPERATIONS/**": "allow",
+      ".kilo/**": "allow",
+      "MASTER-SYNC.md": "allow",
+      "*.lock": "deny",
+      "*": "ask"
     },
     "glob": "allow",
     "grep": "allow",
