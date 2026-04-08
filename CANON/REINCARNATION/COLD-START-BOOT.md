@@ -29,11 +29,11 @@
 - **Open Rulings:** Navigator Index in trash (needs Michael), API keys rotation overdue, NET site status unknown
 
 ## Default Work (No Active Mission)
-- **Pipeline:** Heavy Ledger Conversion — Wave 8
-- **Wave Progress:** 31/46 complete
-- **Total Converted:** 115/174+
-- **Next Item:** HL-116 → `2026-03-24-deployment-claim-audit.md`
-- **Destination:** CANON/HEAVY-LEDGER/HL-104-deployment-claim-audit.json
+- **Pipeline:** Heavy Ledger Conversion — Wave 8 COMPLETE ✅
+- **Wave Progress:** 36/46 complete
+- **Total Converted:** 120/174+
+- **Next Item:** HL-099 → next unconverted entry
+- **Destination:** CANON/HEAVY-LEDGER/
 
 ## Session 2026-04-08 (SUPER SAIYAN Mode — Continuous)
 - **Run:** 261
