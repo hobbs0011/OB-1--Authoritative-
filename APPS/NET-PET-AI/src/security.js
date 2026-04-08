@@ -200,21 +200,20 @@ function getCorsHeaders(origin = '') {
   const headers = {
     'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+    'Vary': 'Origin',
   };
   
-  // Check if origin is allowed
+  // Check if origin is allowed — reflect allowed origin, never wildcard with credentials
   const isAllowed = SECURITY.CORS.allowedOrigins.some(allowed => 
-    allowed === '*' || 
     origin === allowed ||
-    allowed.startsWith('*') && origin.endsWith(allowed.slice(2))
+    (allowed === 'chrome-extension://*' && origin.startsWith('chrome-extension://'))
   );
   
-  if (isAllowed || SECURITY.CORS.allowedOrigins.includes('*')) {
-    headers['Access-Control-Allow-Origin'] = '*';
-  }
-  
-  if (SECURITY.CORS.allowCredentials) {
-    headers['Access-Control-Allow-Credentials'] = 'true';
+  if (isAllowed && origin) {
+    headers['Access-Control-Allow-Origin'] = origin;
+    if (SECURITY.CORS.allowCredentials) {
+      headers['Access-Control-Allow-Credentials'] = 'true';
+    }
   }
   
   return headers;
