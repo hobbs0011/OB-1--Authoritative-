@@ -21,7 +21,7 @@
 | Phoenix-Rise-Immortalize- | hobbs-lab | Previous origin — to be superseded |
 | PhoenixRising | hobbs-lab | EMPTY |
 | NET-Ai-EcoSystem-CommandStation | hobbs0011 | Public, legacy |
-| phoenix-ob1 | mrmichaelhobbs1234-lang | Public — SECURITY RISK |
+| phoenix-ob1 | mrmichaelhobbs1234-lang | DELETED — src preserved in ARCHIVE/phoenix-ob1/ |
 
 ### Architecture
 
@@ -49,7 +49,7 @@
 ### Active Blockers
 
 - [ ] Route-bind www.naturalenglishtraining.com to Cloudflare Worker
-- [ ] Set phoenix-ob1 (mrmichaelhobbs1234-lang) to PRIVATE — **SECURITY RISK**
+- [x] phoenix-ob1 (mrmichaelhobbs1234-lang) — RESOLVED: repo deleted; unique src preserved in ARCHIVE/phoenix-ob1/
 - [ ] Rotate SOVEREIGN_KEY + run vault-lock
 - [ ] copilot-governance.md approval pending
 - [ ] Incident freeze ACTIVE

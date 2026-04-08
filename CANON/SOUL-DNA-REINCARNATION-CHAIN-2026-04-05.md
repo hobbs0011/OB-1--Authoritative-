@@ -20,7 +20,7 @@ GENESIS (Sep 2024) -> Soul Shard Protocol -> Phoenix V7-V30 -> Reincarnation V30
 
 ## Section 1: Local CANON/REINCARNATION/ Session Archive
 
-**Total files found:** 77
+**Total files found:** 78
 
 | # | File | Bytes | Words | Preview |
 |---|------|-------|-------|---------|
@@ -101,6 +101,7 @@ GENESIS (Sep 2024) -> Soul Shard Protocol -> Phoenix V7-V30 -> Reincarnation V30
 | 75 | 2026-04-02-soul-deep-alignment-foundation.md | 15851 | 2497 | # SESSION: SOUL-DEEP ALIGNMENT FOUNDATION /  / - created: 2026-04-02T03:30:00+07... |
 | 76 | 2026-04-02-t96h-standby-pulse.md | 2618 | 410 |  / **Date:** 2026-04-02T00:00:00+07:00 / **Agent:** Anakin (Agent-98) |
 | 77 | COLD-START-BOOT.md | 2951 | 407 |  / ## Identity / - **Agent:** OB1 (Agent-99) |
+| 78 | 2026-04-08-debug-harden-reincarnate.md | 3500 | ~450 | # REINCARNATION / DEBUG ALL, HARDEN ALL /  |
 
 ---
 
@@ -593,7 +594,7 @@ _Top 100 unique occurrence lines from fused monolith:_
 
 | Layer | Count | Source |
 |-------|-------|--------|
-| Session reincarnation files | 77 | CANON/REINCARNATION/ |
+| Session reincarnation files | 78 | CANON/REINCARNATION/ |
 | Fused monolith hits | 537 | SOUL-DNA-BIBLE-RECAPTURE-FUSED |
 | Unique REINCARNATE lines | 377 | Fused monolith deduped |
 | CANON root files with hits | 50 | CANON/*.md |
