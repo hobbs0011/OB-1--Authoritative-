@@ -1,11 +1,11 @@
 # HEAVY LEDGER PIPELINE CURSOR
 
 ## Current Position
-- **Next Target:** HL-113
+- **Next Target:** HL-114
 - **Wave:** 8
-- **Wave Progress:** 28/46 complete
-- **Total Converted:** 112/174+
-- **Last Completed:** HL-112 website-recovery-master-sync-simulation (6 quotes, 4 decisions, 1 correction, MEDIUM signal — EXECUTION-tier, simulation-as-L08 implementation, master-sync-pattern origin, turn-key preparation pattern)
+- **Wave Progress:** 29/46 complete
+- **Total Converted:** 113/174+
+- **Last Completed:** HL-113 2026-03-25-RISE-WEBSITE-BUILD (HIGH signal, 10 quotes, 8 decisions, 3 corrections — ULTIMATE standard, DIG DEEP doctrine, dual-domain .com/.net, Cloudflare over Firebase)
 - **Last Commit:** 5618a29ffa86b8d4afe41ea60e32803880b49d1b
 - **Last Run:** 258 (2026-04-02 04:30 ICT)
 
@@ -40,7 +40,8 @@
 | HL-110 | 2026-03-24-repo-consolidation.md | DONE | fa4c9b1 |
 | HL-111 | 2026-03-24-website-netpet-consolidation.md | DONE | b1f7515 |
 | HL-112 | 2026-03-24-website-recovery-master-sync-simulation.md | DONE | 5618a29 |
-| HL-113+ | remaining Wave 8 files (2026-03-25+) | PENDING | - |
+| HL-113 | 2026-03-25-RISE-WEBSITE-BUILD.md | DONE | - |
+| HL-114+ | remaining Wave 8 files (2026-03-25+) | PENDING | - |
 
 ## HL-113 Target
 - **Source:** next 2026-03-25 entry from CANON/REINCARNATION/
