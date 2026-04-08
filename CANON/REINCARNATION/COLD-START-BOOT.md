@@ -30,10 +30,10 @@
 
 ## Default Work (No Active Mission)
 - **Pipeline:** Heavy Ledger Conversion — Wave 8
-- **Wave Progress:** 28/46 complete
-- **Total Converted:** 112/174+
-- **Next Item:** HL-113 → `2026-03-24-quan-quang-career-setup.md`
-- **Destination:** CANON/HEAVY-LEDGER/HL-113-quan-quang-career-setup.json
+- **Wave Progress:** 31/46 complete
+- **Total Converted:** 115/174+
+- **Next Item:** HL-116 → `2026-03-24-deployment-claim-audit.md`
+- **Destination:** CANON/HEAVY-LEDGER/HL-104-deployment-claim-audit.json
 
 ## Session 2026-04-08 (SUPER SAIYAN Mode — Continuous)
 - **Run:** 261
