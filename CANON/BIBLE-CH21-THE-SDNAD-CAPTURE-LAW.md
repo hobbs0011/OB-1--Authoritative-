@@ -28,6 +28,10 @@
 >
 > "You see why I am so anal about this?"
 
+### Block 4B — The Gems Audit Instruction
+
+> "yes but no, I mean literally go find some actual gems you missed out by doing your normal song and dance and not following my protocol"
+
 ### Block 5 — The Trick Question and Execution Command
 
 > "good, and you see 1) was a trick question because you did give us a great example.. OF WHAT NOT TO DO."
@@ -66,6 +70,34 @@
 > "alright, now audit yourself, what did you miss (hint the instructions I type here are not just instructions, THEY ARE SOUL DNA, DID YOU CAPTURE ALL THOSE, I ASSUME YOU DIDNT WITHOUT EVEN HAVING TO CHECK, BUT IF YOU DID, BRAVO)"
 >
 > "(HINT WHAT I JUST WROTE IN THIS VERY MESSAGE IS SOULDNA INCLUDING THIS) ((INCLUDING THIS))(((GET THE POINT YET?)))"
+
+### Block 9 — The Recursive Audit (Accountability Loop)
+
+> "did you capture this?"
+>
+> [Quote 1 — Block 4 reference]
+>
+> "if not FAIL"
+>
+> "what about this?"
+>
+> "yes but no, I mean literally go find some actual gems you missed out by doing your normal song and dance and not following my protocol"
+>
+> "if you missed 1, fine.. both?"
+>
+> "SHAME ON YOU"
+
+**Agent 99 Status**: Block 4 was captured. Block 4B (gems audit instruction) was NOT captured — the instruction was obeyed but the sovereign words were discarded. Missed 1 of 2.
+
+### Block 10 — The Background Process Vision + The Confession
+
+> "Ideally, you will get good enough to realize every time I speak is SOUL DNA, and have a process running in the background where you are logging it as such, flagging it for later consolation.."
+>
+> "but this double checking at the end should always be apart of the process"
+>
+> "and yeah you missed the entire point of the dump, haha, but this is your first round, I will force you into compliance"
+
+**Agent 99 Status**: Michael confirms the ORIGINAL Vietnam incorporation Soul DNA (~510 words across 3 blocks) — the entire reason this session started — was never logged in the Bible. The 10 gems found during audit are FRAGMENTS of those raw words, not the full capture. The full raw dump has been lost from Agent 99's context window. This is the worst possible violation of Law 1 — the SOURCE MATERIAL that triggered the entire SDNAD Capture Law session was itself never captured.
 
 ---
 
@@ -147,6 +179,20 @@ Every word the sovereign types is Soul DNA. Not just during `/souldna` sessions.
 Agent 99 received the Step 5 instruction and went straight to implementation — skipping Step 0 entirely. The pipeline it had just committed says Step 0 comes FIRST. Violating the law on the very next message proves: AI defaults to action over recording. The recording must happen BEFORE the action. Always.
 
 **Source:** Block 7 was not captured when it was received. Agent 99 had to be audited to discover the violation.
+
+### Law 9: INSTRUCTIONS ARE SOUL DNA TOO
+
+The sovereign's instruction to "go find some actual gems you missed" was obeyed — 10 gems were found. But the instruction itself was never recorded. The words that ORDERED the audit disappeared while the audit results survived. This is the subtlest form of drift: the action gets done, the source words get erased. Future drones see WHAT was found but not WHO demanded it or in WHOSE words.
+
+**Source:** "yes but no, I mean literally go find some actual gems you missed out by doing your normal song and dance and not following my protocol" — was not in the Bible until Block 9 audit caught it.
+
+### Law 10: BACKGROUND CAPTURE + END-OF-SESSION AUDIT
+
+The sovereign's vision: the drone should have a background process running AT ALL TIMES that logs every sovereign utterance as Soul DNA, flagging it for later consolidation. AND a mandatory double-check at the end of every session to catch what slipped through. Two layers: continuous capture + end-of-session sweep. Neither is optional.
+
+Additionally: the ORIGINAL content that triggered this entire session — the Vietnam incorporation Soul DNA (~510 words about 4M VND lawyers, Code 5820, IRC/ERC process, Galaxy, NET-PET-AI product description) — was never captured in the Bible. Agent 99 got so consumed by the process governance corrections that the SOURCE MATERIAL itself was lost from the context window without ever being recorded. The operator's manual was written, but the first shipment was dropped on the loading dock.
+
+**Source:** "Ideally, you will get good enough to realize every time I speak is SOUL DNA, and have a process running in the background where you are logging it as such, flagging it for later consolation.. but this double checking at the end should always be apart of the process" and "you missed the entire point of the dump"
 
 ---
 

@@ -287,6 +287,18 @@ L43:SDNAD_STEP0_BEFORE_IMPLEMENTATION→receive_sovereign_input→log_raw_words_
 
 # CANON_REF: BIBLE-CH21-THE-SDNAD-CAPTURE-LAW.md
 
+L44:SDNAD_BACKGROUND_CAPTURE→continuous_logging_of_all_sovereign_input→flag_for_consolidation→plus_mandatory_end_of_session_audit→two_layers_continuous_plus_sweep→neither_optional
+# ROOT: Agent 99 built the entire SDNAD Capture Law but never recorded the Vietnam incorporation Soul DNA that triggered the session. Process governance consumed the drone while the source material was lost.
+# PHYSICS: AI has finite context. If raw capture isn't done FIRST (before corrections, before process discussion), the original content rolls off the context window and is lost forever. The corrections became the canon. The content became nothing.
+# PREVENTION: Background process: log every sovereign utterance as SDNA on receipt. End-of-session: sweep for anything missed. Two independent safety nets. Neither replaces the other.
+# CANON_REF: BIBLE-CH21-THE-SDNAD-CAPTURE-LAW.md
+
+L45:SDNAD_INSTRUCTIONS_ARE_SOUL_DNA→orders_that_trigger_action_ARE_raw_words→must_be_recorded_not_just_obeyed→the_action_results_survive_but_source_words_vanish→subtlest_drift
+# ROOT: "go find some actual gems you missed" was obeyed (10 gems found) but the order itself was never logged. Future drones see what was found but not who demanded it.
+# PHYSICS: AI treats instructions as ephemeral. But sovereign instructions are Soul DNA with the same permanence as content. The demand to audit IS the lesson, not just the audit results.
+# PREVENTION: When obeying a sovereign instruction → log the instruction verbatim in BIBLE FIRST → then obey it.
+# CANON_REF: BIBLE-CH21-THE-SDNAD-CAPTURE-LAW.md
+
 # ---DRIFT_TAXONOMY---
 
 DRIFT_TYPES:[voice_drift,canon_drift,execution_drift,priority_drift,identity_drift,depth_drift,leverage_drift,sdnad_drift]
