@@ -74,6 +74,7 @@ docs/chat-records/             — Session archives
 docs/sync/                     — Master sync docs
 docs/cloud/                    — Codex cloud setup material
 docs/notion/                   — Notion page links
+docs/sessions/                 — Session records (epoch zero + archive)
 
 scripts/                       — Codex cloud setup and maintenance scripts
 

@@ -168,5 +168,8 @@ This is the roadmap. Every chunk has a name, a purpose, and a verification check
 | OP(ZEN)-1000-LAYERS-10.txt | RAW-CHAT-LOGS/PHOENIX-OPS/ | 1-400+ |
 | OP(ZEN)-1000-LAYERS-1.txt | RAW-CHAT-LOGS/PHOENIX-OPS/ | 100-Clamp Grid |
 | ALPHA-OMEGA-DNA4.txt | RAW-CHAT-LOGS/ALPHA-OMEGA/ | Foundation depth |
+<<<<<<<< HEAD:TEMP-PHOENIX-IMMORTALIZE/SOUL-DNA-BIBLE/16_NUCLEAR_HARVEST_PIPELINE.md
+========
 
 # END SOURCE
+>>>>>>>> 65bbb37 (phoenix: reincarnation commit — consolidate all workspace changes 2026-04-09):CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0100-16_NUCLEAR_HARVEST_PIPELINE.md

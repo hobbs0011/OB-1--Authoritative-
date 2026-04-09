@@ -3,6 +3,13 @@ main = "src/index.js"
 compatibility_date = "2026-03-16"
 compatibility_flags = ["nodejs_compat"]
 
+workers_dev = true
+
+routes = [
+  { pattern = "naturalenglishtraining.com", custom_domain = true },
+  { pattern = "www.naturalenglishtraining.com", custom_domain = true },
+]
+
 [assets]
 directory = "./public"
 binding = "ASSETS"
@@ -34,3 +41,8 @@ new_sqlite_classes = ["LedgerDO"]
 [vars]
 APP_NAME = "Natural English Training"
 APP_COACH_NAME = "Obi"
+
+# Notion Integration (optional — features degrade gracefully when unset)
+# Set via: wrangler secret put NOTION_API_KEY
+#          wrangler secret put NOTION_LESSONS_DB
+#          wrangler secret put NOTION_PROGRESS_DB

@@ -2,32 +2,20 @@
 description: Show help menu for all available commands
 agent: RISE
 ---
-Show the help menu with all available commands:
-- audit
-- checker
-- console
+Show the magnet help menu with all available commands:
 - dashboard
-- debug
-- doctor
-- gateway
-- halt
-- help
-- ledger
-- mode
+- checker
+- setup
 - onboard
 - pair
-- reincarnate
-- restart
-- reverseengineer
-- romeprotocol
+- doctor
+- console
+- gateway
 - run
-- setup
-- ssm
-- stabilize
-- start
 - status
+- start
 - stop
-- supersaiyan
+- restart
 - terminal
 
 Displays all command options and descriptions.

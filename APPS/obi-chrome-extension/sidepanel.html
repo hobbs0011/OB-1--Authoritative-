@@ -3,11 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OBI — Full Panel</title>
+  <title>OBI — Natural English Training</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Orbitron:wght@700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles/sidepanel.css">
+  <link rel="stylesheet" href="styles/homework.css">
+  <link rel="stylesheet" href="styles/classroom.css">
 </head>
 <body>
   <div id="obi-panel">
@@ -16,7 +18,7 @@
         <h1>OBI</h1>
         <button id="speaker-toggle" class="obi-icon-btn" title="Toggle auto-speak">🔊</button>
       </div>
-      <p class="subtitle">Natural English Training — Full Panel</p>
+      <p class="subtitle">Natural English Training</p>
       <div class="obi-level-bar">
         <span id="level-label">🐭 Mouse</span>
         <div class="xp-track"><div id="xp-fill" class="xp-fill"></div></div>
@@ -28,18 +30,134 @@
       📵 Offline — Gemini Nano only
     </div>
 
-    <div id="panel-messages" class="messages"></div>
+    <!-- Tab Navigation -->
+    <nav class="tab-nav">
+      <button class="tab-btn active" data-tab="chat">💬 Chat</button>
+      <button class="tab-btn" data-tab="homework">📷 HW</button>
+      <button class="tab-btn" data-tab="classroom">👥 Class</button>
+      <button class="tab-btn" data-tab="settings">⚙️</button>
+    </nav>
 
-    <div class="input-area">
-      <textarea id="panel-input" placeholder="Ask OBI anything..." rows="3"></textarea>
-      <div class="controls">
-        <button id="summarize-btn" title="Summarize pasted text">📋 Summarize</button>
-        <button id="rewrite-btn" title="Simplify text for learning">✏️ Simplify</button>
-        <button id="translate-btn" title="Translate selected text">🔄 Translate</button>
-        <button id="mic-btn" class="obi-mic" title="Speak your message">🎤</button>
-        <button id="panel-send" class="primary">Send</button>
+    <!-- ── Chat Tab ── -->
+    <section id="tab-chat" class="tab-panel active">
+      <div id="panel-messages" class="messages"></div>
+      <div class="input-area">
+        <textarea id="panel-input" placeholder="Ask OBI anything..." rows="3"></textarea>
+        <div class="controls">
+          <button id="summarize-btn" title="Summarize pasted text">📋 Sum</button>
+          <button id="rewrite-btn" title="Simplify text for learning">✏️ Simplify</button>
+          <button id="translate-btn" title="Translate selected text">🔄 Translate</button>
+          <button id="mic-btn" class="obi-mic" title="Speak your message">🎤</button>
+          <button id="panel-send" class="primary">Send</button>
+        </div>
       </div>
-    </div>
+    </section>
+
+    <!-- ── Homework Checker Tab ── -->
+    <section id="tab-homework" class="tab-panel">
+      <div class="hw-container">
+        <div class="hw-header">
+          <h2>📷 Homework Checker</h2>
+          <p>Capture or upload a homework photo for OBI to review</p>
+        </div>
+
+        <input type="file" id="hw-file-input" accept="image/jpeg,image/png,image/webp" capture="environment" class="sr-only" aria-label="Upload homework photo">
+
+        <button id="hw-camera-btn" class="hw-camera-btn">
+          <span class="hw-camera-icon">📷</span>
+          <span>Take Photo / Upload Image</span>
+        </button>
+
+        <img id="hw-preview" class="hw-preview hidden" alt="Homework preview">
+
+        <button id="hw-analyze-btn" class="hw-analyze-btn" disabled>
+          🔍 Analyze with OBI
+        </button>
+
+        <div id="hw-spinner" class="hw-spinner hidden">
+          <div class="hw-spinner-dot"></div>
+          <p>OBI is reviewing the homework…</p>
+        </div>
+
+        <div id="hw-result" class="hw-result hidden"></div>
+      </div>
+    </section>
+
+    <!-- ── Classroom Tab ── -->
+    <section id="tab-classroom" class="tab-panel">
+      <div class="classroom-container">
+        <div class="classroom-header">
+          <h2>👥 Classroom</h2>
+        </div>
+
+        <div class="add-student-row">
+          <input type="text" id="add-student-input" placeholder="Student name…" class="student-input" autocomplete="off">
+          <button id="add-student-btn" class="add-btn">+ Add</button>
+        </div>
+
+        <div id="student-list" class="student-list"></div>
+
+        <div class="violations-section">
+          <div class="violations-header">
+            <h3>⚠️ Violations</h3>
+            <div class="violations-actions">
+              <button id="export-violations-btn" class="export-btn">📤 Export</button>
+              <button id="clear-violations-btn" class="clear-btn">🗑️ Clear</button>
+            </div>
+          </div>
+
+          <!-- Inline violation note form (shown when ⚠️ is tapped) -->
+          <div id="violation-form" class="violation-form hidden">
+            <p id="violation-form-label" class="violation-form-label"></p>
+            <input type="text" id="violation-note-input" class="student-input"
+              placeholder="Describe the violation…" autocomplete="off">
+            <div class="violation-form-actions">
+              <button id="violation-confirm-btn" class="add-btn">Log It</button>
+              <button id="violation-cancel-btn" class="clear-btn">Cancel</button>
+            </div>
+          </div>
+
+          <p id="classroom-status" class="classroom-status" aria-live="polite"></p>
+          <div id="violation-log" class="violation-log">
+            <p class="no-violations">No violations logged today.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Settings Tab ── -->
+    <section id="tab-settings" class="tab-panel">
+      <div class="settings-container">
+        <h2>⚙️ Settings</h2>
+
+        <div class="settings-group">
+          <label for="settings-api-key">Gemini API Key</label>
+          <input type="password" id="settings-api-key" placeholder="AIza…" class="settings-input" autocomplete="off">
+          <p class="settings-hint">Get a free key at <strong>aistudio.google.com</strong></p>
+        </div>
+
+        <div class="settings-group">
+          <label for="settings-teacher-name">Teacher Name</label>
+          <input type="text" id="settings-teacher-name" placeholder="Your name…" class="settings-input">
+        </div>
+
+        <div class="settings-group">
+          <label for="settings-class-name">Class Name</label>
+          <input type="text" id="settings-class-name" placeholder="e.g. 10A2…" class="settings-input">
+        </div>
+
+        <div class="settings-group settings-toggle-row">
+          <label for="settings-voice-toggle">Voice Features</label>
+          <label class="toggle-switch">
+            <input type="checkbox" id="settings-voice-toggle" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <button id="settings-save-btn" class="settings-save-btn">💾 Save Settings</button>
+        <p id="settings-status" class="settings-status" aria-live="polite"></p>
+      </div>
+    </section>
   </div>
   <script src="sidepanel.js" type="module"></script>
 </body>
