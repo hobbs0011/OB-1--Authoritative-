@@ -9,6 +9,7 @@ Run SOUL DNA capture mode.
 ## SDNAD CAPTURE LAW (Non-Negotiable — from BIBLE-CH21)
 
 ### Step 0: RAW WORDS → SOUL DNA BIBLE
+
 - RAW_QUOTES = ALL sovereign words. Every word. No curation. No selection.
 - The drone is the RECORDER, not the editor.
 - Grammatical edits permitted (carefully). Speech patterns and typos preserved.
@@ -17,12 +18,15 @@ Run SOUL DNA capture mode.
 - If sovereign didn't say it, it doesn't exist in the capture. FAILCLOSED.
 
 ### Then permitted summarization (progressive, each step derives from step above):
+
 - Step 1: Update Heavy Ledger (first stage summarization — don't go overboard)
 - Step 2: Update SSM (treat as death and rebirth)
 - Step 3: Log in reincarnation
 - Step 4: Update everything else (skills, prompts, guards, system files)
+- Step 5: Pheromone trails — go back over everything, cross-reference and index, connect SOUL BIBLE ↔ Ledger ↔ SSM so it's hyper organized for future agents
 
 ### WHY: Compounding Drift
+
 - If the drone summarizes, the next drone reads the summary as source.
 - Then it summarizes the summary. Three generations = original signal gone.
 - Bad capture = bad training data for all downstream drones.
