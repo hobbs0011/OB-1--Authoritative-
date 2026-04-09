@@ -106,6 +106,13 @@ Step 3: REINCARNATION LOG
 Step 4: SYSTEM-WIDE PROPAGATION
   - /SOULDNA skill guardrails
   - Any other files that need updating
+
+Step 5: PHEROMONE TRAILS
+  - Go back over everything
+  - Lay pheromone trails for future agents
+  - Cross-reference and index
+  - Connect SOUL BIBLE ↔ Ledger ↔ SSM
+  - Hyper organized and cross referenced
   - Done → continue
 ```
 

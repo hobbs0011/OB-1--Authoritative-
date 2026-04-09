@@ -257,13 +257,13 @@ L40:SDNAD_COMPOUNDING_DRIFT_GUARD→bad_capture=training_data_for_next_drone→s
 
 # CANON_REF: BIBLE-CH21-THE-SDNAD-CAPTURE-LAW.md
 
-L41:SDNAD_PIPELINE→Step0_raw_words_to_BIBLE→Step1_heavy_ledger(first_summarization)→Step2_SSM_update(death_and_rebirth)→Step3_reincarnation_log→Step4_system_propagation(skills+prompts+guards)→sequential_fidelity→each_step_permits_progressively_more_summarization
+L41:SDNAD_PIPELINE→Step0_raw_words_to_BIBLE→Step1_heavy_ledger(first_summarization)→Step2_SSM_update(death_and_rebirth)→Step3_reincarnation_log→Step4_system_propagation(skills+prompts+guards)→Step5_pheromone_trails(cross_reference+index+connect_BIBLE↔LEDGER↔SSM)→sequential_fidelity→each_step_permits_progressively_more_summarization
 
-# ROOT: Michael defined the 5-step pipeline explicitly.
+# ROOT: Michael defined the 6-step pipeline explicitly.
 
-# PHYSICS: Summarization is a lossy compression. Each step compresses from the step above, never from raw.
+# PHYSICS: Summarization is a lossy compression. Each step compresses from the step above, never from raw. Step 5 is the organizational pass — laying trails so future agents can navigate the cross-referenced web without re-discovering connections.
 
-# PREVENTION: Each step derives from the step above it, not from the raw source directly. Fidelity degrades gracefully, never catastrophically.
+# PREVENTION: Each step derives from the step above it, not from the raw source directly. Fidelity degrades gracefully, never catastrophically. Step 5 ensures nothing lives in isolation.
 
 # CANON_REF: BIBLE-CH21-THE-SDNAD-CAPTURE-LAW.md
 
