@@ -32,15 +32,17 @@ a { color: inherit; }
     radial-gradient(1.5px 1.5px at 15% 85%, rgba(240,240,245,0.3) 0%, transparent 100%),
     radial-gradient(1px 1px at 65% 25%, rgba(240,240,245,0.25) 0%, transparent 100%),
     radial-gradient(1px 1px at 85% 65%, rgba(240,240,245,0.2) 0%, transparent 100%);
+  animation: twinkle 9s ease-in-out infinite alternate;
 }
 
 nav {
   position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
-  padding: 1rem 2rem; background: rgba(15,15,26,0.9); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  padding: 1rem 2rem; background: rgba(15,15,26,0.9); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--purple-dim);
   display: flex; justify-content: space-between; align-items: center;
 }
-.nav-logo { font-family: var(--font-display); font-size: 1.4rem; font-weight: 900; background: linear-gradient(135deg, var(--purple), var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-decoration: none; }
+.nav-logo { text-decoration: none; display: inline-flex; align-items: center; }
+.nav-logo img { height: 32px; width: auto; display: block; filter: drop-shadow(0 0 10px var(--purple-glow)); }
 .nav-back { font-family: var(--font-sub); font-weight: 600; color: var(--gray); text-decoration: none; transition: color 0.3s; }
 .nav-back:hover { color: var(--gold); }
 
@@ -53,10 +55,102 @@ nav {
 .page-header h1 { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; margin-bottom: 1rem; }
 .page-header p { font-size: 1.15rem; color: var(--gray); max-width: 600px; margin: 0 auto; line-height: 1.7; }
 
+.dossier-section {
+  position: relative;
+  z-index: 1;
+  padding: 1rem 2rem 3rem;
+}
+.dossier-shell {
+  max-width: 1200px;
+  margin: 0 auto;
+  border: 1px solid var(--purple-dim);
+  border-radius: 24px;
+  background: rgba(26, 26, 46, 0.65);
+  overflow: hidden;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+}
+.dossier-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  padding: 1.2rem 1.4rem;
+  border-bottom: 1px solid var(--purple-dim);
+}
+.dossier-top h2 {
+  font-family: var(--font-sub);
+  font-size: 1.4rem;
+  color: var(--white);
+}
+.dossier-top p {
+  color: var(--gray);
+  font-size: 0.95rem;
+}
+.dossier-controls {
+  display: flex;
+  gap: 0.55rem;
+}
+.dossier-btn {
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--purple-dim);
+  border-radius: 10px;
+  background: rgba(168, 85, 247, 0.14);
+  color: var(--white);
+  font-family: var(--font-sub);
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+.dossier-btn:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  box-shadow: 0 0 18px var(--purple-glow);
+}
+.dossier-stage {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: #0f0f1a;
+}
+.dossier-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.dossier-slide.active {
+  opacity: 1;
+}
+.dossier-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.dossier-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.95rem;
+}
+.dossier-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid var(--purple);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+.dossier-dot.active {
+  background: linear-gradient(135deg, var(--purple), var(--gold));
+  border-color: transparent;
+}
+
 .lessons-section { position: relative; z-index: 1; padding: 2rem 2rem 6rem; }
 
 .lesson-full {
-  background: rgba(26,26,46,0.6); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  background: rgba(26,26,46,0.6); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
   border: 1px solid var(--purple-dim); border-radius: 20px;
   padding: 2.5rem; margin-bottom: 2rem;
   display: grid; grid-template-columns: auto 1fr auto; gap: 2rem; align-items: center;
@@ -66,6 +160,15 @@ nav {
 .lesson-icon { font-size: 3rem; }
 .lesson-info h2 { font-family: var(--font-sub); font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; }
 .lesson-info p { color: var(--gray); font-size: 1rem; line-height: 1.7; max-width: 600px; }
+.lesson-full.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+}
+.lesson-full.reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.62s ease, transform 0.62s ease;
+}
 .lesson-meta { text-align: right; }
 .lesson-tag { display: inline-block; font-family: var(--font-sub); font-size: 0.85rem; font-weight: 600; padding: 0.3rem 1rem; border-radius: 20px; background: var(--purple-dim); color: var(--purple); margin-bottom: 0.5rem; }
 .lesson-size { font-size: 0.8rem; color: var(--gray); font-family: var(--font-sub); }
@@ -88,10 +191,30 @@ footer p { font-size: 0.85rem; color: var(--gray); }
 footer a { color: var(--purple); text-decoration: none; }
 
 @media (max-width: 768px) {
+  .dossier-section {
+    padding: 1rem 1.25rem 2.5rem;
+  }
+  .dossier-top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
   .lesson-full { grid-template-columns: 1fr; gap: 1rem; text-align: center; }
   .lesson-meta { text-align: center; }
   .page-header { padding: 7rem 1.25rem 2rem; }
   .lessons-section { padding: 1rem 1.25rem 4rem; }
+}
+
+@keyframes twinkle {
+  0% { opacity: 0.55; }
+  100% { opacity: 1; }
+}
+
+::-webkit-scrollbar { width: 12px; }
+::-webkit-scrollbar-track { background: #121222; }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #a855f7, #f59e0b);
+  border-radius: 10px;
+  border: 2px solid #121222;
 }
 </style>
 </head>
@@ -99,7 +222,9 @@ footer a { color: var(--purple); text-decoration: none; }
 <div class="stars"></div>
 
 <nav>
-  <a href="index.html" class="nav-logo">NET</a>
+  <a href="index.html" class="nav-logo" aria-label="Natural English Training home">
+    <img src="assets/brand/NET-PHXRISING-LOGO.webp" alt="Natural English Training logo">
+  </a>
   <a href="index.html" class="nav-back">← Back to Home</a>
 </nav>
 
@@ -107,6 +232,37 @@ footer a { color: var(--purple); text-decoration: none; }
   <h1>🌌 <span class="gradient">Galaxy Lessons</span></h1>
   <p>Interactive learning experiences built with the Mouse-to-Tiger methodology. Each lesson is a self-contained world — pick one and dive in.</p>
 </div>
+
+<section class="dossier-section" aria-label="Tiger dossier gallery">
+  <div class="dossier-shell">
+    <div class="dossier-top">
+      <div>
+        <h2>Tiger Dossier Visual Deck</h2>
+        <p>Slides 01-06 from the NET Tiger Dossier.</p>
+      </div>
+      <div class="dossier-controls">
+        <button class="dossier-btn" id="dossier-prev" aria-label="Previous dossier slide">‹</button>
+        <button class="dossier-btn" id="dossier-next" aria-label="Next dossier slide">›</button>
+      </div>
+    </div>
+    <div class="dossier-stage" id="dossier-stage">
+      <figure class="dossier-slide active"><img src="assets/dossier/tiger-dossier/slide-01.webp" alt="Tiger dossier slide 01" loading="lazy"></figure>
+      <figure class="dossier-slide"><img src="assets/dossier/tiger-dossier/slide-02.webp" alt="Tiger dossier slide 02" loading="lazy"></figure>
+      <figure class="dossier-slide"><img src="assets/dossier/tiger-dossier/slide-03.webp" alt="Tiger dossier slide 03" loading="lazy"></figure>
+      <figure class="dossier-slide"><img src="assets/dossier/tiger-dossier/slide-04.webp" alt="Tiger dossier slide 04" loading="lazy"></figure>
+      <figure class="dossier-slide"><img src="assets/dossier/tiger-dossier/slide-05.webp" alt="Tiger dossier slide 05" loading="lazy"></figure>
+      <figure class="dossier-slide"><img src="assets/dossier/tiger-dossier/slide-06.webp" alt="Tiger dossier slide 06" loading="lazy"></figure>
+    </div>
+    <div class="dossier-dots" id="dossier-dots">
+      <button class="dossier-dot active" aria-label="Go to slide 1"></button>
+      <button class="dossier-dot" aria-label="Go to slide 2"></button>
+      <button class="dossier-dot" aria-label="Go to slide 3"></button>
+      <button class="dossier-dot" aria-label="Go to slide 4"></button>
+      <button class="dossier-dot" aria-label="Go to slide 5"></button>
+      <button class="dossier-dot" aria-label="Go to slide 6"></button>
+    </div>
+  </div>
+</section>
 
 <div class="lessons-section">
   <div class="container">
@@ -214,5 +370,61 @@ footer a { color: var(--purple); text-decoration: none; }
 <footer>
   <p>© 2026 <a href="index.html">Natural English Training</a>. Galaxy Lessons are part of the NET learning ecosystem.</p>
 </footer>
+<script>
+  const lessonCards = document.querySelectorAll('.lesson-full');
+  const lessonObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        lessonObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.14, rootMargin: '0px 0px -8% 0px' });
+
+  lessonCards.forEach((card, idx) => {
+    card.classList.add('reveal');
+    card.style.transitionDelay = `${Math.min((idx % 4) * 65, 195)}ms`;
+    lessonObserver.observe(card);
+  });
+
+  const slides = Array.from(document.querySelectorAll('.dossier-slide'));
+  const dots = Array.from(document.querySelectorAll('.dossier-dot'));
+  const prevBtn = document.getElementById('dossier-prev');
+  const nextBtn = document.getElementById('dossier-next');
+  let currentSlide = 0;
+  let autoTimer = null;
+
+  const renderSlide = (index) => {
+    currentSlide = (index + slides.length) % slides.length;
+    slides.forEach((slide, idx) => slide.classList.toggle('active', idx === currentSlide));
+    dots.forEach((dot, idx) => dot.classList.toggle('active', idx === currentSlide));
+  };
+
+  const startAuto = () => {
+    if (autoTimer) {
+      clearInterval(autoTimer);
+    }
+    autoTimer = setInterval(() => renderSlide(currentSlide + 1), 4500);
+  };
+
+  prevBtn.addEventListener('click', () => {
+    renderSlide(currentSlide - 1);
+    startAuto();
+  });
+
+  nextBtn.addEventListener('click', () => {
+    renderSlide(currentSlide + 1);
+    startAuto();
+  });
+
+  dots.forEach((dot, idx) => {
+    dot.addEventListener('click', () => {
+      renderSlide(idx);
+      startAuto();
+    });
+  });
+
+  startAuto();
+</script>
 </body>
 </html>
