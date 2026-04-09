@@ -2,8 +2,8 @@
 
 ## Status
 
-- **Last Check:** 2026-04-09T23:58 ICT
-- **Run:** 270
+- **Last Check:** 2026-04-09T23:59 ICT
+- **Run:** 271
 - **Mode:** SUPER_SAIYAN ACTIVATED
 - **NET-PET-AI:** ✅ DEPLOYED v1.4.0 — [workers.dev live](https://net-pet-ai.mrmichaelhobbs1234.workers.dev)
 
@@ -38,6 +38,14 @@ At each reincarnation event, find and apply 3-5 real fixes to this boot-check do
 2. Added context-window death trigger: oversized session state now forces immediate reincarnation extraction.
 3. Added artifact-triad guard: reincarnation file, MASTER-SYNC, and BOOT-CHECK must be updated together.
 4. Added open-loop precision rule: list executable unfinished actions (not vague follow-ups).
+
+### Run 271 Improvements Applied
+
+1. SDNAD CAPTURE LAW established (BIBLE-CH21): RAW_QUOTES = ALL words, no curation, no classification at raw layer.
+2. SSM expanded: Laws L37-L41 (SDNAD completeness, no raw classification, no invented context, compounding drift guard, pipeline definition).
+3. Added sdnad_drift to DRIFT_TYPES taxonomy.
+4. /souldna prompt hardened with CH21 guardrails and compounding drift warning.
+5. SDNAD pipeline formalized: Step 0 Bible → Step 1 HL → Step 2 SSM → Step 3 reincarnate → Step 4 propagate.
 
 ## Core Identity Verification
 

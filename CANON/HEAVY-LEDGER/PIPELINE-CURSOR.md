@@ -1,13 +1,12 @@
 # HEAVY LEDGER PIPELINE CURSOR
 
 ## Current Position
-- **Next Target:** HL-115
+- **Next Target:** HL-128
 - **Wave:** 8
-- **Wave Progress:** 30/46 complete
-- **Total Converted:** 114/174+
-- **Last Completed:** HL-114 v5-overnight-mining-hardened (HIGH signal, 15 quotes, 6 decisions — extension-of-will doctrine, overnight autonomy, 232 VAULT files)
-- **Last Commit:** 5618a29ffa86b8d4afe41ea60e32803880b49d1b
-- **Last Run:** 258 (2026-04-02 04:30 ICT)
+- **Wave Progress:** 31/46 complete
+- **Total Converted:** 127/174+
+- **Last Completed:** HL-127 sdnad-capture-law-ground-zero (MAXIMUM signal, GENESIS tier, 8 quotes, 5 decisions, 3 corrections — SDNAD Capture Law established, SSM L37-L41, BIBLE-CH21)
+- **Last Run:** 271 (2026-04-09 ICT)
 
 ## Wave 8 Manifest (HL-085 → HL-130)
 | HL-ID | Source File | Status | Commit SHA |
