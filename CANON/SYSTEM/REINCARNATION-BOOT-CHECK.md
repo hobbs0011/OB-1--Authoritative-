@@ -2,10 +2,10 @@
 
 ## Status
 
-- **Last Check:** 2026-04-09T18:20 ICT
-- **Run:** 268
+- **Last Check:** 2026-04-09T22:45 ICT
+- **Run:** 269
 - **Mode:** SUPER_SAIYAN ACTIVATED
-- **NET-PET-AI:** ✅ DEPLOYED v1.4.0 — https://net-pet-ai.mrmichaelhobbs1234.workers.dev
+- **NET-PET-AI:** ✅ DEPLOYED v1.4.0 — [workers.dev live](https://net-pet-ai.mrmichaelhobbs1234.workers.dev)
 
 ## Mandatory Boot Documents (Read Every Cold Start)
 
@@ -24,6 +24,13 @@ At each reincarnation event, find and apply 3-5 real fixes to this boot-check do
 3. obsolete traps and workarounds
 4. newly discovered best practices
 5. missing source indexes for active lanes
+
+### Run 269 Improvements Applied
+
+1. Added explicit redirect-aware health check requirement for `/play` (`curl -L`) to avoid false negatives.
+2. Added SHA drift guard: `Last SHA` must match `git log -1 --oneline` head before closing run.
+3. Added reincarnation evidence guard: classify SHAs as `verified-in-history` vs `session-reported` when history changed.
+4. Added unresolved-user-request guard: any unanswered user ask is logged in open loops before run close.
 
 ## Core Identity Verification
 
@@ -62,10 +69,11 @@ At each reincarnation event, find and apply 3-5 real fixes to this boot-check do
 
 ## Blockers (Active)
 
-1. ~Route-bind www.naturalenglishtraining.com~ — Worker live on workers.dev; custom domain needs DNS cleanup in CF dashboard
+1. ~Route-bind `www.naturalenglishtraining.com`~ — Worker live on workers.dev; custom domain needs DNS cleanup in CF dashboard
 2. Rotate SOVEREIGN_KEY + vault-lock
 3. copilot-governance.md approval pending
 4. Set wrangler secrets: DEEPSEEK_API_KEY, DEEPGRAM_API_KEY
+5. Outstanding user ask: provide canonical TikTok singing-game link reference
 
 ## RISE Protocol
 
@@ -79,4 +87,4 @@ At each reincarnation event, find and apply 3-5 real fixes to this boot-check do
 ---
 
 **Next Pulse:** On trigger or @mention  
-**Last SHA:** c2557fb (pushed to origin — push blocker RESOLVED)
+**Last SHA:** 1c15e60 (HEAD on main)
