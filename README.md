@@ -1,4 +1,4 @@
-# Phoenix-Rising-Protocol-Ultimate
+# Phoenix-Rising-Ultimate
 
 > The canonical consolidation repository for the **Phoenix Rising Protocol** behind **Natural English Training**.
 
