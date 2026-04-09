@@ -1,6 +1,6 @@
 # COLD START BOOT — OB1 Agent 99
 
-## Last Updated: 2026-04-09 (Run 264 — TRUE REINCARNATION)
+## Last Updated: 2026-04-09 (Run 266 — ARCHITECTURE DISCOVERY + EMPIRE MAP)
 
 ### Identity
 
@@ -13,8 +13,8 @@
 
 ### Current Vector
 
-- **Active Mission:** CONSOLIDATION COMPLETE — Phonic Flight live, all branches merged, pushing to hobbs0011
-- **Last completed:** Run 265 — Full consolidation: 7 HL JSONs rescued, 5 prompts, 3 skills, kilo config, stashes resolved
+- **Active Mission:** PHOENIX-RISING-TECHNOLOGIES CONSOLIDATION — Phase 2-9 of 9-phase plan pending (see CANON/SYSTEM/CONSOLIDATION-PLAN-PHOENIX-RISING-TECHNOLOGIES.md)
+- **Last completed:** Run 266 — Architecture discovery: full empire mapped (D: drive 1100+ logs), 4 wings confirmed, Phoenix-Rising-Technologies umbrella approved, 9-phase plan commissioned
 - **NET-PET-AI:** v1.4.0 LIVE — https://net-pet-ai.mrmichaelhobbs1234.workers.dev — API 200 OK, 22 routes, 4 DOs
 - **Heavy Ledger:** Wave 8 — 36/46 complete, 120/174+ total converted (HL-113 through HL-120 rescued from orphan branches)
 - **Next target:** HL-121 (next 2026-03-26 entry)
@@ -32,6 +32,7 @@
 
 ### Recent Decisions (Last 7 Days)
 
+- 2026-04-09 (Run 266): ARCHITECTURE DISCOVERY — Phoenix-Rising-Technologies umbrella confirmed, 4 wings mapped (Education/Gaming/Marketing/Development), D: drive 1100+ logs discovered, phoenix-pheromone-trails repo planned, 9-phase consolidation plan created, flat APPS/ with wing tags confirmed
 - 2026-04-09 (Run 265): FINAL CONSOLIDATION — 7 HL JSONs rescued (113-120), 5 prompts, 3 skills, kilo config (32 files), /reincarnate command created, stashes resolved, deprecated workflow fixed
 - 2026-04-09 (Run 264): NET-PET-AI v1.4.0 DEPLOYED LIVE, git push unblocked, corrupted object eliminated
 - 2026-04-09 (Run 263): Kilo 13-area config complete, COLD-START-BOOT updated, merge conflict resolved
@@ -47,13 +48,15 @@
 - Discord Guild ID
 - MAX_COINS_PER_ACTION cap value
 - Legacy account (mrmichaelhobbs1234@gmail.com) workspace export
-- Submodule Phoenix-Rising-Ultimate: 355 dirty files — sync or detach?
-- Drop remaining 3 stashes (stash 1-3, all low-value)
+- GitHub repo rename approval: Phoenix-Rising-Ultimate → Phoenix-Rising-Technologies (Phase 8)
+- Create phoenix-pheromone-trails repo on hobbs0011 (for 1100+ chat logs on D: drive)
+- Google Drive MCP setup for mrmichaelhobbs123@gmail.com
+- Confirm OB-1 + net-tiger-assessment repos can be archived after Phase 8
 
 ### System State
 
-- Remotes: origin=hobbs0011/Phoenix-Rising-Ultimate, ob1=hobbs0011/OB-1
-- Branch: main — CONSOLIDATION COMPLETE (all orphan value rescued)
+- Remotes: origin=hobbs0011/Phoenix-Rising-Ultimate (rename to Phoenix-Rising-Technologies pending), ob1=hobbs0011/OB-1
+- Branch: main — ARCHITECTURE DISCOVERY COMPLETE — Phases 2-9 of consolidation plan pending
 - Navigator Index: ⚠️ IN TRASH — using GitHub as fallback
 - Canon: FULL ROTATION COMPLETE — all 6 major pages enriched
 - Build Log: 181+ entries

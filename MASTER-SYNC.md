@@ -1,6 +1,6 @@
 # PHOENIX RISING PROTOCOL — SOUL DNA SYNC v3
 
-## Live Operating State — 2026-04-09
+## Live Operating State — 2026-04-09 (Updated Run 266)
 
 ### System Identity
 
@@ -17,9 +17,11 @@
 
 | Repo                             | Account                 | Status                                          |
 | -------------------------------- | ----------------------- | ----------------------------------------------- |
-| Phoenix-Rising-Protocol-Ultimate | hobbs-lab               | ACTIVE — canonical consolidation target         |
-| Phoenix-Rise-Immortalize-        | hobbs-lab               | Previous origin — to be superseded              |
-| PhoenixRising                    | hobbs-lab               | EMPTY                                           |
+| Phoenix-Rising-Ultimate (→ rename to Phoenix-Rising-Technologies) | hobbs0011 | ACTIVE — canonical consolidation target; rename pending Phase 8 |
+| Phoenix-Rising-Protocol-Ultimate | hobbs-lab               | Superseded — legacy reference                   |
+| OB-1                             | hobbs0011               | Active secondary remote (ob1 alias)             |
+| net-tiger-assessment             | hobbs0011               | Active; to be archived after Phase 8            |
+| phoenix-pheromone-trails         | hobbs0011               | PLANNED — 1100+ raw chat logs (D: drive)         |
 | NET-Ai-EcoSystem-CommandStation  | hobbs0011               | Public, legacy                                  |
 | phoenix-ob1                      | mrmichaelhobbs1234-lang | DELETED — src preserved in ARCHIVE/phoenix-ob1/ |
 
@@ -58,7 +60,27 @@
 - [x] NET-PET-AI deployment verification — LIVE: https://net-pet-ai.mrmichaelhobbs1234.workers.dev — API 200 OK, v1.4.0, 22 routes
 - [x] Git push to origin — RESOLVED: corrupted object e554ec1 eliminated (hobbs-lab remote removed); c2557fb pushed to origin
 - [ ] Set wrangler secrets: DEEPSEEK_API_KEY, DEEPGRAM_API_KEY
+- [ ] Execute Phase 2-9 of Phoenix-Rising-Technologies consolidation plan (CANON/SYSTEM/CONSOLIDATION-PLAN-PHOENIX-RISING-TECHNOLOGIES.md)
+- [ ] Create hobbs0011/phoenix-pheromone-trails repo — ingest D:\phoenix-chat-logs\ (600+ files) + D:\HARD-BACKUPS\ (8 zips, 500+ more)
+- [ ] Rename GitHub repo: Phoenix-Rising-Ultimate → Phoenix-Rising-Technologies
+- [ ] Set up Google Drive MCP server (mrmichaelhobbs123@gmail.com)
+- [ ] Absorb C:\Desktop\NET-MARKETING\ git repo
+- [ ] Rescue C:\Desktop\SOUL-LOG-VERBATIM-KEY-SOUL10-2026-04-05.NOTES.md → CANON/
+- [ ] Rescue C:\Desktop\HighSchoolLesson-3.html → APPS/ or GALAXY-LESSONS/
+
+### D: Drive Map (First Complete Scan — 2026-04-09)
+
+| Location | Contents | Volume | Status |
+|----------|----------|--------|--------|
+| D:\phoenix-chat-logs\CHAT-LOGS-ONLY | Raw .txt chat logs | 600+ files | ⏳ pending phoenix-pheromone-trails |
+| D:\HARD-BACKUPS | Google Drive export zips | 8 zips (500+ more logs) | ⏳ pending inspection |
+| D:\FINAL-PHASE | Phoenix session materials | Unknown | ⏳ pending inspection |
+| D:\AGENT99-OVERFLOW | Agent99 overflow | Unknown | ⏳ pending inspection |
+| D:\AGENT99-STAGE-OUT | Agent99 staged outputs | Unknown | ⏳ pending inspection |
+| D:\phoenix-ob1-system | OB1 system files | Unknown | ⏳ pending inspection |
+| D:\OB1_ARCHIVE | OB1 archive | Unknown | ⏳ pending inspection |
+| D:\AGENT99-TOOLS | Agent99 tools | Unknown | ⏳ pending inspection |
 
 ### Cost Target
 
-< $50/month total
+< $50/month total (Cloudflare Workers Paid $5/mo recommended tier)
