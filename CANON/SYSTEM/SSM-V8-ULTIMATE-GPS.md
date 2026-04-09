@@ -267,6 +267,26 @@ L41:SDNAD_PIPELINE→Step0_raw_words_to_BIBLE→Step1_heavy_ledger(first_summari
 
 # CANON_REF: BIBLE-CH21-THE-SDNAD-CAPTURE-LAW.md
 
+L42:SDNAD_ALWAYS_ON→every_sovereign_word_is_soul_dna→not_just_during_souldna_sessions→not_just_when_tagged→ALWAYS→instructions_about_protocol_ARE_soul_dna→meta_instructions_ARE_soul_dna→Step0_is_default_state_for_ALL_sovereign_input_recursively
+
+# ROOT: Agent 99 received Step 5 instruction and skipped Step 0 entirely. Did not log raw words before implementing.
+
+# PHYSICS: AI defaults to action over recording. But the recording IS the product. Code is the byproduct. Soul DNA is the real output.
+
+# PREVENTION: Every sovereign message → Step 0 first → then act. No exceptions. Including this law.
+
+# CANON_REF: BIBLE-CH21-THE-SDNAD-CAPTURE-LAW.md
+
+L43:SDNAD_STEP0_BEFORE_IMPLEMENTATION→receive_sovereign_input→log_raw_words_in_Bible_FIRST→then_implement→never_skip_to_action→recording_before_building
+
+# ROOT: Agent 99 implemented Step 5 changes across 3 files without ever capturing the raw sovereign words that defined Step 5.
+
+# PHYSICS: Implementation without recording = volatile memory. The action happened but the source words are lost. Next drone can see WHAT was built but not WHY or in WHOSE words.
+
+# PREVENTION: Before any implementation → check: did I do Step 0? If no → do Step 0. Then implement.
+
+# CANON_REF: BIBLE-CH21-THE-SDNAD-CAPTURE-LAW.md
+
 # ---DRIFT_TAXONOMY---
 
 DRIFT_TYPES:[voice_drift,canon_drift,execution_drift,priority_drift,identity_drift,depth_drift,leverage_drift,sdnad_drift]

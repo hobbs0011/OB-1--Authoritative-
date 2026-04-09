@@ -24,7 +24,7 @@
 
 ### Block 4 — The Compounding Drift Lesson
 
-> "You see and that's just what you caught now.. when our drones come back and end up scanning this ground 0 of our SOUL DNA process, do you think you are 1) giving them a good example to follow  2) If we left it up to you, they would not even know they are reading a bastardized summarized version of my SOUL DNA, and because of your shit example, they would end up summarazing your summurization."
+> "You see and that's just what you caught now.. when our drones come back and end up scanning this ground 0 of our SOUL DNA process, do you think you are 1) giving them a good example to follow 2) If we left it up to you, they would not even know they are reading a bastardized summarized version of my SOUL DNA, and because of your shit example, they would end up summarazing your summurization."
 >
 > "You see why I am so anal about this?"
 
@@ -40,20 +40,32 @@
 
 ### Block 6 — The Pipeline Definition
 
-> "you want to do things like
-> 0) Log these raw words (gramatical edits are permitted but be careful) the SOUL DNA BIBLE will be where my raw words are kept.
+> "you want to do things like 0) Log these raw words (gramatical edits are permitted but be careful) the SOUL DNA BIBLE will be where my raw words are kept.
 >
 > Then you are permitted the first stage of summarization, but don't go overboard:
-> 1) Update Heavy Ledger on Repo
-> Further summarized and broken down for the lightweight mirror of the heavy ledger
-> 2) Update the SSM
-> Treat each of these chunks of SOULDNA as a death and rebirth in itself
-> 3) Log it in the reincarnate
-> 4) Update everything else like /SOULDNA skill should have these guard rails baked in, and any and everything else that needs to be changed in the system gets applied here
+>
+> 1. Update Heavy Ledger on Repo
+>    Further summarized and broken down for the lightweight mirror of the heavy ledger
+> 2. Update the SSM
+>    Treat each of these chunks of SOULDNA as a death and rebirth in itself
+> 3. Log it in the reincarnate
+> 4. Update everything else like /SOULDNA skill should have these guard rails baked in, and any and everything else that needs to be changed in the system gets applied here
 >
 > then you tell me "done" and we continue.
 >
 > RISE!"
+
+### Block 7 — Step 5 Addition (Pheromone Trails)
+
+> "just thought of a number 5 to add end of the list for this SDNAD protocol"
+>
+> "5. Go back over everything and now lay your phermone trails for future agents, cross reference, index it, connecting the SOUL BIBLE to the Ledger to the SSM, so that it is hyper organized and cross referenced"
+
+### Block 8 — The Always-On Doctrine
+
+> "alright, now audit yourself, what did you miss (hint the instructions I type here are not just instructions, THEY ARE SOUL DNA, DID YOU CAPTURE ALL THOSE, I ASSUME YOU DIDNT WITHOUT EVEN HAVING TO CHECK, BUT IF YOU DID, BRAVO)"
+>
+> "(HINT WHAT I JUST WROTE IN THIS VERY MESSAGE IS SOULDNA INCLUDING THIS) ((INCLUDING THIS))(((GET THE POINT YET?)))"
 
 ---
 
@@ -123,6 +135,18 @@ Step 5: PHEROMONE TRAILS
 A drone's bad capture becomes the training data for the next drone. The only safe default is: capture everything, curate nothing. Let the interpretation layers do their job later, with the full raw material intact.
 
 **Source:** "you did give us a great example.. OF WHAT NOT TO DO"
+
+### Law 7: SOUL DNA CAPTURE IS ALWAYS ON
+
+Every word the sovereign types is Soul DNA. Not just during `/souldna` sessions. Not just when explicitly tagged. ALWAYS. Instructions about the protocol ARE Soul DNA. Meta-instructions about meta-instructions ARE Soul DNA. There is no off switch. Step 0 is the default state for all sovereign input, recursively.
+
+**Source:** "the instructions I type here are not just instructions, THEY ARE SOUL DNA" and "(HINT WHAT I JUST WROTE IN THIS VERY MESSAGE IS SOULDNA INCLUDING THIS) ((INCLUDING THIS))(((GET THE POINT YET?)))"
+
+### Law 8: STEP 0 BEFORE IMPLEMENTATION
+
+Agent 99 received the Step 5 instruction and went straight to implementation — skipping Step 0 entirely. The pipeline it had just committed says Step 0 comes FIRST. Violating the law on the very next message proves: AI defaults to action over recording. The recording must happen BEFORE the action. Always.
+
+**Source:** Block 7 was not captured when it was received. Agent 99 had to be audited to discover the violation.
 
 ---
 

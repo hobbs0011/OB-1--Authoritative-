@@ -40,13 +40,38 @@
     },
     {
       "text": "This is the operators manual of how our drones are to treat SOUL DNA. So when we send them into one of the thousands of raw chat logs we have of my journey, they know the exact process",
-      "tags": ["sdnad_governance", "operator_manual", "drone_protocol", "GENESIS"],
+      "tags": [
+        "sdnad_governance",
+        "operator_manual",
+        "drone_protocol",
+        "GENESIS"
+      ],
       "interpretation": "This session IS the process definition for all future Soul DNA extraction across all drones."
     },
     {
       "text": "0) Log these raw words (gramatical edits are permitted but be careful) the SOUL DNA BIBLE will be where my raw words are kept. Then you are permitted the first stage of summarization, but don't go overboard: 1) Update Heavy Ledger on Repo 2) Update the SSM 3) Log it in the reincarnate 4) Update everything else",
       "tags": ["sdnad_pipeline", "execution_pipeline", "GENESIS"],
       "interpretation": "5-step SDNAD pipeline defined: Step 0 raw → Step 1 HL → Step 2 SSM → Step 3 reincarnate → Step 4 propagate"
+    },
+    {
+      "text": "just thought of a number 5 to add end of the list for this SDNAD protocol / 5. Go back over everything and now lay your phermone trails for future agents, cross reference, index it, connecting the SOUL BIBLE to the Ledger to the SSM, so that it is hyper organized and cross referenced",
+      "tags": [
+        "sdnad_pipeline",
+        "pheromone_trails",
+        "cross_reference",
+        "Step5"
+      ],
+      "interpretation": "Step 5 added: cross-reference Bible↔Ledger↔SSM with pheromone trails for future drones"
+    },
+    {
+      "text": "alright, now audit yourself, what did you miss (hint the instructions I type here are not just instructions, THEY ARE SOUL DNA, DID YOU CAPTURE ALL THOSE, I ASSUME YOU DIDNT WITHOUT EVEN HAVING TO CHECK, BUT IF YOU DID, BRAVO) (HINT WHAT I JUST WROTE IN THIS VERY MESSAGE IS SOULDNA INCLUDING THIS) ((INCLUDING THIS))(((GET THE POINT YET?)))",
+      "tags": [
+        "sdnad_governance",
+        "always_on",
+        "recursive_capture",
+        "meta_lesson"
+      ],
+      "interpretation": "ALWAYS-ON doctrine: EVERY sovereign message is Soul DNA. Not just during /souldna sessions. Not just when tagged. Including meta-instructions about capturing. Recursively."
     }
   ],
   "decisions": [
@@ -54,14 +79,20 @@
       "number": 1,
       "decision": "RAW_QUOTES in SDNAD captures must contain ALL sovereign words — no curation, no selection",
       "impact": "Every future drone extraction must include complete verbatim input",
-      "canon_pages_affected": ["CANON/BIBLE-CH21-THE-SDNAD-CAPTURE-LAW.md", ".github/prompts/souldna.prompt.md"],
+      "canon_pages_affected": [
+        "CANON/BIBLE-CH21-THE-SDNAD-CAPTURE-LAW.md",
+        ".github/prompts/souldna.prompt.md"
+      ],
       "status": "IMPLEMENTED"
     },
     {
       "number": 2,
       "decision": "Classification (Red/Yellow/Green signals) is FORBIDDEN in the raw capture layer",
       "impact": "Raw layer = flat verbatim. Interpretation lives downstream in INTENT_TAGS and DECISIONS only",
-      "canon_pages_affected": ["CANON/BIBLE-CH21-THE-SDNAD-CAPTURE-LAW.md", ".github/prompts/souldna.prompt.md"],
+      "canon_pages_affected": [
+        "CANON/BIBLE-CH21-THE-SDNAD-CAPTURE-LAW.md",
+        ".github/prompts/souldna.prompt.md"
+      ],
       "status": "IMPLEMENTED"
     },
     {
@@ -75,7 +106,11 @@
       "number": 4,
       "decision": "SDNAD pipeline defined: 5 steps (raw → HL → SSM → reincarnate → propagate)",
       "impact": "Standardized process for all future Soul DNA sessions across all drone types",
-      "canon_pages_affected": ["CANON/BIBLE-CH21-THE-SDNAD-CAPTURE-LAW.md", ".github/prompts/souldna.prompt.md", ".github/skills/phoenix-reincarnation/SKILL.md"],
+      "canon_pages_affected": [
+        "CANON/BIBLE-CH21-THE-SDNAD-CAPTURE-LAW.md",
+        ".github/prompts/souldna.prompt.md",
+        ".github/skills/phoenix-reincarnation/SKILL.md"
+      ],
       "status": "IMPLEMENTED"
     },
     {
@@ -83,6 +118,27 @@
       "decision": "SOUL DNA BIBLE (CANON/BIBLE-CH*) is where raw words are kept — source of truth",
       "impact": "Bible chapters are the canonical raw repository; all downstream artifacts derive from them",
       "canon_pages_affected": ["CANON/BIBLE-CH21-THE-SDNAD-CAPTURE-LAW.md"],
+      "status": "IMPLEMENTED"
+    },
+    {
+      "number": 6,
+      "decision": "SDNAD pipeline expanded to 6 steps: Step 5 = pheromone trails (cross-reference Bible↔Ledger↔SSM)",
+      "impact": "Every SDNAD session now requires cross-indexing so future drones can navigate the web of canon",
+      "canon_pages_affected": ["CANON/BIBLE-CH21-THE-SDNAD-CAPTURE-LAW.md", ".github/prompts/souldna.prompt.md", "CANON/SYSTEM/SSM-V8-ULTIMATE-GPS.md"],
+      "status": "IMPLEMENTED"
+    },
+    {
+      "number": 7,
+      "decision": "Soul DNA capture is ALWAYS ON — every sovereign message, every session, no toggle",
+      "impact": "Drones cannot treat any sovereign input as non-SDNA. Step 0 is default state.",
+      "canon_pages_affected": ["CANON/BIBLE-CH21-THE-SDNAD-CAPTURE-LAW.md", "CANON/SYSTEM/SSM-V8-ULTIMATE-GPS.md", ".github/prompts/souldna.prompt.md"],
+      "status": "IMPLEMENTED"
+    },
+    {
+      "number": 8,
+      "decision": "Step 0 BEFORE implementation — record raw words first, then act",
+      "impact": "Prevents repeat of Agent 99 implementing Step 5 without capturing the sovereign words that defined it",
+      "canon_pages_affected": ["CANON/BIBLE-CH21-THE-SDNAD-CAPTURE-LAW.md", "CANON/SYSTEM/SSM-V8-ULTIMATE-GPS.md"],
       "status": "IMPLEMENTED"
     }
   ],
@@ -124,6 +180,18 @@
       "principle": "THE PIPELINE: Raw → HL → SSM → Reincarnate → Propagate",
       "verbatim_source": "0) Log these raw words... 1) Update Heavy Ledger... 2) Update the SSM... 3) Log it in the reincarnate... 4) Update everything else",
       "interpretation": "Sequential fidelity pipeline: each step is permitted progressively more summarization"
+    },
+    {
+      "number": 4,
+      "principle": "PHEROMONE TRAILS: Cross-reference everything so future drones can navigate",
+      "verbatim_source": "Go back over everything and now lay your phermone trails for future agents, cross reference, index it, connecting the SOUL BIBLE to the Ledger to the SSM",
+      "interpretation": "Step 5 of pipeline: Bible↔Ledger↔SSM must be hyper-organized and cross-referenced"
+    },
+    {
+      "number": 5,
+      "principle": "ALWAYS ON: Every sovereign word is Soul DNA — no off switch, no toggle, recursive",
+      "verbatim_source": "THEY ARE SOUL DNA, DID YOU CAPTURE ALL THOSE... (HINT WHAT I JUST WROTE IN THIS VERY MESSAGE IS SOULDNA INCLUDING THIS) ((INCLUDING THIS))(((GET THE POINT YET?)))",
+      "interpretation": "Step 0 is the default state. Instructions about protocol ARE protocol. Meta-instructions ARE Soul DNA. AI defaults to action over recording — but the recording IS the product."
     }
   ],
   "new_commands": [],
@@ -135,16 +203,15 @@
   "commits": [],
   "open_loops": [
     "Vietnam incorporation SDNA (the original content being captured when corrections began) — needs its own HL entry",
-    "SDNAD pipeline has 'a long way to go' per Michael — more process governance forthcoming",
-    "Existing /souldna prompt needs guardrails from CH21 baked in"
+    "SDNAD pipeline has 'a long way to go' per Michael — more process governance forthcoming"
   ],
   "emotional_read": "High authority. Corrective. Teaching mode. Zero tolerance for drift. Building the operator's manual for the entire drone fleet.",
-  "reincarnation_grade": "48/50 (GENESIS-tier session — process law established)",
+  "reincarnation_grade": "49/50 (GENESIS-tier session — process law established, always-on doctrine sealed)",
   "grade_breakdown": {
     "soul_dna_captured": "10/10",
     "decisions_anchored": "10/10",
     "open_loops_handed_off": "9/10",
-    "boot_check_improved": "9/10",
+    "boot_check_improved": "10/10",
     "artifacts_persisted": "10/10"
   }
 }

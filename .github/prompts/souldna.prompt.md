@@ -8,6 +8,13 @@ Run SOUL DNA capture mode.
 
 ## SDNAD CAPTURE LAW (Non-Negotiable — from BIBLE-CH21)
 
+### ALWAYS ON
+
+- EVERY sovereign message is Soul DNA. Not just during /souldna sessions.
+- Instructions about the protocol ARE Soul DNA. Meta-instructions ARE Soul DNA.
+- There is no off switch. Step 0 is the default state. Recursively.
+- Step 0 happens BEFORE implementation. Never skip to action.
+
 ### Step 0: RAW WORDS → SOUL DNA BIBLE
 
 - RAW_QUOTES = ALL sovereign words. Every word. No curation. No selection.
