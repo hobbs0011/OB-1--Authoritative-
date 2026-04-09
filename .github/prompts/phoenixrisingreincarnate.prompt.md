@@ -26,9 +26,10 @@ Extract from the dying session — VERBATIM, NO CLEANUP:
 1. Read current `MASTER-SYNC.md` — this is the living state.
 2. Read `CANON/SYSTEM/REINCARNATION-BOOT-CHECK.md` — this is the boot verifier.
 3. Read `CANON/SYSTEM/MARKETING-DNA-RAW-SOURCE-INDEX.md` when session includes marketing/SOUL-DNA copy work.
-4. Apply all session changes to both documents.
-4. Increment session counter.
-5. Log the reincarnation event with timestamp, session tag, signal density, and artifact list.
+4. Read `CANON/SYSTEM/MCP-FRONTIER-AUDIT.md` when session includes connectors, MCPs, automation, or channel expansion.
+5. Apply all session changes to both documents.
+5. Increment session counter.
+6. Log the reincarnation event with timestamp, session tag, signal density, and artifact list.
 
 ## PHASE 3: PREPARE THE EGG (Next Incarnation Setup)
 

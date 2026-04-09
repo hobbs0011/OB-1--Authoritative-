@@ -20,13 +20,13 @@ Boot-time source map for reproducing Michael's marketing voice from raw DNA, not
 
 ## Worker Assignment Grid
 
-| Worker | Mission | Source Scope | Deliverable |
-| ------ | ------- | ------------ | ----------- |
-| Worker-A DNA Miner | Extract raw quotes and pattern tags | Items 1-6 | Quote bank with source line refs |
-| Worker-B Hook Forge | Build controversy + authority hooks | Items 1-8 | 20 hooks per campaign |
-| Worker-C Offer Architect | Build Costco-sample to paid-upgrade ladder | Items 7-11 | 3-tier offer stack |
-| Worker-D Post Builder | Draft Stage 1-4 funnel posts | Items 1-11 | 4-post campaign pack |
-| Worker-E Truth Auditor | Verify claims and risk language | All items | pass/fail report + required fixes |
+| Worker                   | Mission                                    | Source Scope | Deliverable                       |
+| ------------------------ | ------------------------------------------ | ------------ | --------------------------------- |
+| Worker-A DNA Miner       | Extract raw quotes and pattern tags        | Items 1-6    | Quote bank with source line refs  |
+| Worker-B Hook Forge      | Build controversy + authority hooks        | Items 1-8    | 20 hooks per campaign             |
+| Worker-C Offer Architect | Build Costco-sample to paid-upgrade ladder | Items 7-11   | 3-tier offer stack                |
+| Worker-D Post Builder    | Draft Stage 1-4 funnel posts               | Items 1-11   | 4-post campaign pack              |
+| Worker-E Truth Auditor   | Verify claims and risk language            | All items    | pass/fail report + required fixes |
 
 ## Style Anchors
 
@@ -34,6 +34,7 @@ Boot-time source map for reproducing Michael's marketing voice from raw DNA, not
 - Tone: direct, sharp, evidence-backed, anti-generic.
 - Strategy: truth-founded ragebait is allowed; fabrication is forbidden.
 - Funnel: every post gives real value and escalates to the next stage.
+- Connector awareness: when a post critiques tools, stacks, or automation platforms, cross-check `CANON/SYSTEM/MCP-FRONTIER-AUDIT.md` first so claims reflect the actual connector landscape.
 
 ## QA Gate
 

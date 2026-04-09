@@ -16,6 +16,7 @@ Read these first:
 2. `MASTER-SYNC.md`
 3. `CANON/SYSTEM/CONSOLIDATION-PLAN-PHOENIX-RISING-TECHNOLOGIES.md`
 4. Latest file in `CANON/REINCARNATION/`
+5. `CANON/SYSTEM/MCP-FRONTIER-AUDIT.md` when connectors, automation, agents, or social channels are involved.
 
 ## Step 2: Find Open Loops
 
@@ -25,6 +26,7 @@ Scan for:
 - `NOT STARTED`
 - `PENDING`
 - `BLOCKED`
+- unknown or unreviewed MCP opportunities
 - stale run numbers and stale SHAs
 - uncommitted local edits
 - unpushed commits
