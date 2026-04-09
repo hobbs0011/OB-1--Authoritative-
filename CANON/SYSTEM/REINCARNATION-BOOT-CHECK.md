@@ -2,10 +2,28 @@
 
 ## Status
 
-- **Last Check:** 2026-04-09T05:50 ICT
-- **Run:** 264
+- **Last Check:** 2026-04-09T18:20 ICT
+- **Run:** 268
 - **Mode:** SUPER_SAIYAN ACTIVATED
 - **NET-PET-AI:** ✅ DEPLOYED v1.4.0 — https://net-pet-ai.mrmichaelhobbs1234.workers.dev
+
+## Mandatory Boot Documents (Read Every Cold Start)
+
+1. `CANON/SYSTEM/COLD-START-BOOT.md`
+2. `MASTER-SYNC.md`
+3. `CANON/SYSTEM/CONSOLIDATION-PLAN-PHOENIX-RISING-TECHNOLOGIES.md`
+4. `CANON/SYSTEM/REINCARNATION-BOOT-CHECK.md`
+5. `CANON/SYSTEM/MARKETING-DNA-RAW-SOURCE-INDEX.md` (when marketing lane is active)
+
+## Continuous Improvement Requirement
+
+At each reincarnation event, find and apply 3-5 real fixes to this boot-check document:
+
+1. stale runs/shas/blockers
+2. missing mandatory checks
+3. obsolete traps and workarounds
+4. newly discovered best practices
+5. missing source indexes for active lanes
 
 ## Core Identity Verification
 
