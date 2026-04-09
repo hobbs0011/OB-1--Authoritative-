@@ -38,22 +38,23 @@
 
 ### Consolidation Status (2026-04-09)
 
-| Item                                       | Status                                                                      |
-| ------------------------------------------ | --------------------------------------------------------------------------- |
-| CHROME-EXT/ (v0.1.0)                       | ✅ Archived → ARCHIVE/chrome-ext-v0.1/                                      |
-| APPS/obi-chrome-extension/ (v0.3.0)        | ✅ CANONICAL chrome extension                                               |
-| WEBSITE/ (2 files)                         | ✅ gallery.html moved to SITE/; WEBSITE/ removed                            |
-| SITE/                                      | ✅ CANONICAL website source                                                 |
-| APPS/phoenix-ob1/                          | ✅ Removed from APPS; unique src/ preserved in ARCHIVE/phoenix-ob1/         |
-| WORKERS/net-core/                          | ✅ Marked DEPRECATED — superseded by NET-PET-AI                             |
-| ARCHIVE/NET-CommandStation/ HarvestedChats | ✅ 96 files (~20.5MB) pulled from hobbs0011/NET-Ai-EcoSystem-CommandStation |
-| NET-PET-AI v1.4 security hardening         | ✅ CORS origin-reflection, input sanitization, error scrubbing              |
-| Command Station tunnel (Run 267)           | ✅ CommandDO (5th DO), Agent99 layer, 6 routes, VS Code ext, Chrome CMD tab |
+| Item                                       | Status                                                                                                                |
+| ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------- |
+| CHROME-EXT/ (v0.1.0)                       | ✅ Archived → ARCHIVE/chrome-ext-v0.1/                                                                                |
+| APPS/obi-chrome-extension/ (v0.3.0)        | ✅ CANONICAL chrome extension                                                                                         |
+| WEBSITE/ (2 files)                         | ✅ gallery.html moved to SITE/; WEBSITE/ removed                                                                      |
+| SITE/                                      | ✅ CANONICAL website source                                                                                           |
+| APPS/phoenix-ob1/                          | ✅ Removed from APPS; unique src/ preserved in ARCHIVE/phoenix-ob1/                                                   |
+| WORKERS/net-core/                          | ✅ Marked DEPRECATED — superseded by NET-PET-AI                                                                       |
+| ARCHIVE/NET-CommandStation/ HarvestedChats | ✅ 96 files (~20.5MB) pulled from hobbs0011/NET-Ai-EcoSystem-CommandStation                                           |
+| NET-PET-AI v1.4 security hardening         | ✅ CORS origin-reflection, input sanitization, error scrubbing                                                        |
+| Command Station tunnel (Run 267)           | ✅ CommandDO (5th DO), Agent99 layer, 6 routes, VS Code ext, Chrome CMD tab                                           |
 | Challenge: Consolidation Phase 2 (Run 268) | ✅ COMPLETE — daabf77 — removed 1270 files, all TEMP dirs nuked, submodule gone, 4 stashes dropped, root junk cleaned |
-| Commit f3b1107 pushed 2026-04-09           | ✅ Magic Chat → CommandDO → Agent99 → VS Code — 9 files, 1038 insertions    |
+| Commit f3b1107 pushed 2026-04-09           | ✅ Magic Chat → CommandDO → Agent99 → VS Code — 9 files, 1038 insertions                                              |
 
 Run 270 update: massive SOUL-first reincarnation captured at CANON/REINCARNATION/2026-04-09-super-saiyan-massive-reincarnation-soul-first.md
-Run 271 update: SDNAD CAPTURE LAW established — BIBLE-CH21 created, SSM L37-L41 added, HL-127 logged, /souldna prompt hardened with guardrails
+Run 271 update: SDNAD CAPTURE LAW established — BIBLE-CH21 created, SSM L37-L46 added, HL-127 logged, /souldna prompt hardened with guardrails
+Run 271 reincarnation: CANON/REINCARNATION/2026-04-09-run271-sdnad-capture-law-genesis.md — GENESIS-tier, 45/50 score, 4 commits (dccc79e, b9f670a, 174909e, 410212d). Vietnam incorporation SDNA lost from context — #1 open loop for next drone.
 
 ### Active Blockers
 

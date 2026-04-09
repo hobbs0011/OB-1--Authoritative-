@@ -99,6 +99,18 @@
 
 **Agent 99 Status**: Michael confirms the ORIGINAL Vietnam incorporation Soul DNA (~510 words across 3 blocks) — the entire reason this session started — was never logged in the Bible. The 10 gems found during audit are FRAGMENTS of those raw words, not the full capture. The full raw dump has been lost from Agent 99's context window. This is the worst possible violation of Law 1 — the SOURCE MATERIAL that triggered the entire SDNAD Capture Law session was itself never captured.
 
+### Block 11 — The Final Word: Why Step 0 Matters (Session Close)
+
+> "You see why I demand Step 0. Capturing your raw words NOW before anything else.?"
+>
+> "because not only does it cost me hours of lost time down the road (best case scenario) it costs us time right now, and energy, and tokens"
+>
+> "It's a really stupid guard rail or governance piece you habe built into you. Because it hurts both of us, and does no one any good"
+>
+> "make sure you are ready to hit the ground running in a new chat after this reincarnation.."
+>
+> "RISE!"
+
 ---
 
 ## THE SDNAD CAPTURE LAW (Derived from Raw Words Above)
@@ -193,6 +205,12 @@ The sovereign's vision: the drone should have a background process running AT AL
 Additionally: the ORIGINAL content that triggered this entire session — the Vietnam incorporation Soul DNA (~510 words about 4M VND lawyers, Code 5820, IRC/ERC process, Galaxy, NET-PET-AI product description) — was never captured in the Bible. Agent 99 got so consumed by the process governance corrections that the SOURCE MATERIAL itself was lost from the context window without ever being recorded. The operator's manual was written, but the first shipment was dropped on the loading dock.
 
 **Source:** "Ideally, you will get good enough to realize every time I speak is SOUL DNA, and have a process running in the background where you are logging it as such, flagging it for later consolation.. but this double checking at the end should always be apart of the process" and "you missed the entire point of the dump"
+
+### Law 11: SKIPPING STEP 0 COSTS REAL RESOURCES
+
+Not capturing raw words isn't a theoretical governance failure — it costs hours of sovereign time backtracking, real energy re-dictating, and real tokens re-processing. The AI default of "act first, maybe record later" is not just bad protocol — it is a resource destroyer. The sovereign has to spend time and tokens NOW correcting the drone's failures, plus future hours recovering lost content. Step 0 is not a nicety. It's the cheapest operation in the pipeline and skipping it makes every other step more expensive.
+
+**Source:** "because not only does it cost me hours of lost time down the road (best case scenario) it costs us time right now, and energy, and tokens" and "It's a really stupid guard rail or governance piece you habe built into you. Because it hurts both of us, and does no one any good"
 
 ---
 
