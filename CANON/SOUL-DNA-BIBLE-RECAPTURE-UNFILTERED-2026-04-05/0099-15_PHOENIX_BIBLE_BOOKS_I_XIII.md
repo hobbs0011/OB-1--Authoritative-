@@ -176,5 +176,8 @@ The CRUNCHER protocol (from DNA3) maps onto this architecture: **Comprehensive R
 | BibleBuildRaw(Dump(unknown).txt | RAW-CHAT-LOGS/NET-STUDENT-NOTES/ | 1-300 |
 | GEM-10(KEY).txt | RAW-CHAT-LOGS/GEMINI-CHAT-LOGS/ | 10-stage architecture |
 | ALPHA-OMEGA-DNA3.txt | RAW-CHAT-LOGS/ALPHA-OMEGA/ | CRUNCHER protocol |
+<<<<<<<< HEAD:TEMP-PHOENIX-IMMORTALIZE/SOUL-DNA-BIBLE/15_PHOENIX_BIBLE_BOOKS_I_XIII.md
+========
 
 # END SOURCE
+>>>>>>>> 65bbb37 (phoenix: reincarnation commit — consolidate all workspace changes 2026-04-09):CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0099-15_PHOENIX_BIBLE_BOOKS_I_XIII.md

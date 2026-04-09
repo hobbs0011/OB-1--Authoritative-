@@ -8,6 +8,7 @@
 import { initHomeworkChecker } from './homework-checker.js';
 import { initClassroom } from './classroom.js';
 import { initSettings } from './settings.js';
+import { initCommandStation } from './command-station.js';
 
 const BACKEND_URL = 'https://naturalenglishtraining.net/api/chat';
 
@@ -382,4 +383,5 @@ inputEl.addEventListener('keydown', (e) => {
   initHomeworkChecker();
   initClassroom();
   initSettings();
+  initCommandStation();
 })();

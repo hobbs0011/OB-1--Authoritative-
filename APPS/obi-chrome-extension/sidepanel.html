@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="styles/sidepanel.css">
   <link rel="stylesheet" href="styles/homework.css">
   <link rel="stylesheet" href="styles/classroom.css">
+  <link rel="stylesheet" href="styles/command.css">
 </head>
 <body>
   <div id="obi-panel">
@@ -35,6 +36,7 @@
       <button class="tab-btn active" data-tab="chat">💬 Chat</button>
       <button class="tab-btn" data-tab="homework">📷 HW</button>
       <button class="tab-btn" data-tab="classroom">👥 Class</button>
+      <button class="tab-btn" data-tab="command">🎮 CMD</button>
       <button class="tab-btn" data-tab="settings">⚙️</button>
     </nav>
 
@@ -120,6 +122,38 @@
           <p id="classroom-status" class="classroom-status" aria-live="polite"></p>
           <div id="violation-log" class="violation-log">
             <p class="no-violations">No violations logged today.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Command Station Tab ── -->
+    <section id="tab-command" class="tab-panel">
+      <div class="cmd-container">
+        <div class="cmd-header">
+          <h2>🎮 Command Station</h2>
+          <p>SOV100 → Agent 99 → Drone Swarm → VS Code</p>
+        </div>
+
+        <div class="cmd-input-area">
+          <textarea id="cmd-input" placeholder="Deploy your will... (e.g. deploy the worker, run tests, push to main)" rows="2"></textarea>
+          <div class="cmd-controls">
+            <button id="cmd-mic" title="Voice command">🎤</button>
+            <button id="cmd-send" class="primary">⚡ Send</button>
+          </div>
+        </div>
+
+        <p id="cmd-status"></p>
+
+        <div class="cmd-feed">
+          <h3>Agent 99 Feed</h3>
+          <div id="cmd-history"></div>
+        </div>
+
+        <div class="cmd-queue-section">
+          <h3>Command Queue</h3>
+          <div id="cmd-queue">
+            <p class="cmd-empty">No commands yet. Deploy your will above.</p>
           </div>
         </div>
       </div>

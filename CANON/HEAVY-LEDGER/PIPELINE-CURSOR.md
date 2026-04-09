@@ -48,10 +48,12 @@
 | HL-118+ | remaining Wave 8 files (2026-03-25+) | PENDING | - |
 
 ## HL-113 Target
+
 - **Source:** next 2026-03-25 entry from CANON/REINCARNATION/
-- **Destination:** CANON/HEAVY-LEDGER/HL-113-*.json
+- **Destination:** CANON/HEAVY-LEDGER/HL-113-\*.json
 
 ## Notes
+
 - HL-112 converted: EXECUTION-tier, MEDIUM signal (2🔴, 2🟡, 2🟢), 6 quotes, 4 decisions, 1 correction, 4 principles. Key session: website recovery with blocked access, simulation-as-L08 implementation, master sync markdown as shared control plane, reverse-engineer-now-activate-later pattern, full repo+log sweep into single master document.
 - **MILESTONE: 101 total HL entries reached Run 251.**
 - **110 total HL entries reached Run 256.**
