@@ -1,533 +1,860 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="theme-color" content="#0f0f1a">
-  <meta name="description" content="Phonic Flight — Use your voice to fly! A pronunciation training game by Natural English Training.">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <title>Phonic Flight — NET Voice Game</title>
-  <style>
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{
-      background:#0f0f1a;
-      overflow:hidden;
-      font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
-      touch-action:none;
-      -webkit-user-select:none;
-      user-select:none;
-      color:#fff;
-    }
-    canvas{display:block;width:100vw;height:100vh}
-    .overlay{
-      position:fixed;top:0;left:0;width:100%;height:100%;
-      display:flex;flex-direction:column;align-items:center;justify-content:center;
-      background:rgba(15,15,26,0.96);z-index:10;text-align:center;padding:20px;
-    }
-    .title{
-      font-size:clamp(2.2rem,9vw,4.5rem);font-weight:900;line-height:1.1;
-      background:linear-gradient(135deg,#a855f7 0%,#f59e0b 100%);
-      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-      background-clip:text;margin-bottom:8px;
-    }
-    .subtitle{font-size:clamp(0.85rem,3vw,1.2rem);color:#a78bfa;margin-bottom:24px}
-    .instructions{
-      max-width:380px;margin:0 auto 20px;color:#9ca3af;font-size:0.92rem;line-height:1.7;
-    }
-    .instructions strong{color:#e5e7eb}
-    .vn-hint{color:#f59e0b;font-size:0.82rem;margin-top:8px;font-style:italic}
-    .btn{
-      background:linear-gradient(135deg,#a855f7,#7c3aed);color:#fff;border:none;
-      padding:16px 52px;font-size:1.15rem;font-weight:700;border-radius:50px;
-      cursor:pointer;letter-spacing:1px;
-      box-shadow:0 0 30px rgba(168,85,247,0.4);transition:transform .15s,box-shadow .15s;
-    }
-    .btn:hover,.btn:active{transform:scale(1.06);box-shadow:0 0 45px rgba(168,85,247,0.6)}
-    .modes{display:flex;gap:10px;margin:16px 0}
-    .mode-btn{
-      background:rgba(168,85,247,0.15);border:2px solid rgba(168,85,247,0.5);
-      color:#c084fc;padding:8px 22px;border-radius:25px;cursor:pointer;
-      font-size:0.88rem;font-weight:600;transition:all .2s;
-    }
-    .mode-btn.active{background:#a855f7;color:#fff;border-color:#a855f7}
-    .score-big{
-      font-size:clamp(3.5rem,12vw,6rem);font-weight:900;color:#f59e0b;
-      margin:8px 0;text-shadow:0 0 40px rgba(245,158,11,0.4);
-    }
-    .score-label{font-size:0.85rem;color:#6b7280;text-transform:uppercase;letter-spacing:3px}
-    .best-score{font-size:0.9rem;color:#a78bfa;margin:6px 0 20px}
-    .mic-warn{
-      position:fixed;top:12px;left:50%;transform:translateX(-50%);
-      color:#ef4444;font-size:0.8rem;z-index:20;
-      background:rgba(239,68,68,0.15);padding:4px 16px;border-radius:20px;
-    }
-    .hidden{display:none!important}
-    @media(max-height:500px){
-      .instructions{margin-bottom:10px;font-size:.82rem;line-height:1.4}
-      .title{font-size:clamp(1.5rem,6vw,2.5rem);margin-bottom:4px}
-      .subtitle{margin-bottom:10px}
-      .btn{padding:12px 36px;font-size:1rem}
-    }
-  </style>
-</head>
-<body>
-<canvas id="c"></canvas>
-
-<div class="overlay" id="startScreen">
-  <div class="title">PHONIC FLIGHT</div>
-  <div class="subtitle">Use Your Voice to Fly</div>
-  <div class="instructions">
-    <strong>Higher pitch → ball goes up</strong><br>
-    <strong>Lower pitch → ball goes down</strong><br>
-    Guide the ball through each gap to score!
-    <div class="vn-hint">
-      🇻🇳 Cao giọng = bóng bay lên · Thấp giọng = bóng rơi xuống
-    </div>
-  </div>
-  <div class="modes">
-    <button class="mode-btn active" data-mode="phonics">🗣️ Phonics</button>
-    <button class="mode-btn" data-mode="classic">🎵 Classic</button>
-  </div>
-  <button class="btn" id="startBtn">🎤 TAP TO START</button>
-</div>
-
-<div class="overlay hidden" id="overScreen">
-  <div class="score-label">SCORE</div>
-  <div class="score-big" id="finalScore">0</div>
-  <div class="best-score" id="bestLine"></div>
-  <div class="subtitle" id="endMsg"></div>
-  <button class="btn" id="retryBtn">TRY AGAIN</button>
-</div>
-
-<div class="mic-warn hidden" id="micWarn"></div>
-
-<script>
-(function(){
-'use strict';
-
-/* ───────────────────────── CONFIG ───────────────────────── */
-const GW = 800, GH = 600;
-const BALL_X_FRAC = 0.15;
-const BALL_R = 16;
-const WALL_W = 90;
-const BASE_GAP = 150;
-const MIN_GAP = 100;
-const BASE_SPEED = 2.2;
-const WALL_INTERVAL = 180;
-const LIVES = 3;
-const MIN_HZ = 85, MAX_HZ = 600;
-const PITCH_SMOOTH = 0.13;
-const GRAVITY_DRIFT = 1.8;
-const BALL_LERP = 0.12;
-
-const C = {
-  bg:'#0f0f1a', ball:'#f59e0b', ballHi:'#fcd34d', ballLo:'#d97706',
-  wall:'#a855f7', wallDk:'#6d28d9', wallEdge:'#c084fc',
-  danger:'#ef4444', success:'#22c55e', text:'#ffffff',
-  scoreTxt:'#f59e0b', mutedTxt:'rgba(255,255,255,0.35)',
-  gridLine:'rgba(168,85,247,0.04)', pitchBar:'rgba(168,85,247,0.12)',
-};
-
-/* ──────────────────────── PHONICS DATA ──────────────────── */
-const PHONICS = [
-  {ph:'/θ/',  w:'think',  vn:'nghĩ',    tip:'Tongue between teeth'},
-  {ph:'/ð/',  w:'this',   vn:'cái này',  tip:'Vibrate tongue tip'},
-  {ph:'/æ/',  w:'cat',    vn:'con mèo',  tip:'Open mouth wide'},
-  {ph:'/ɪ/',  w:'sit',    vn:'ngồi',     tip:'Short i sound'},
-  {ph:'/iː/', w:'see',    vn:'thấy',     tip:'Long ee sound'},
-  {ph:'/ʃ/',  w:'ship',   vn:'tàu',      tip:'Lips forward shhh'},
-  {ph:'/tʃ/', w:'cheese', vn:'phô mai',  tip:'t then sh'},
-  {ph:'/dʒ/', w:'jump',   vn:'nhảy',     tip:'Like ch but voiced'},
-  {ph:'/z/',  w:'zoo',    vn:'sở thú',   tip:'Like s but buzzing'},
-  {ph:'/v/',  w:'very',   vn:'rất',      tip:'Bite lower lip'},
-  {ph:'/r/',  w:'red',    vn:'đỏ',       tip:'Curl tongue back'},
-  {ph:'/l/',  w:'love',   vn:'yêu',      tip:'Tongue touches roof'},
-  {ph:'/ŋ/',  w:'sing',   vn:'hát',      tip:'Nasal back of throat'},
-  {ph:'/eɪ/', w:'cake',   vn:'bánh',     tip:'Slide e to ee'},
-  {ph:'/aʊ/', w:'house',  vn:'nhà',      tip:'Open then round'},
-  {ph:'/ɔɪ/', w:'boy',    vn:'con trai', tip:'Round then spread'},
-];
-const CLASSIC = [
-  {ph:'Do', w:'C'},{ph:'Re', w:'D'},{ph:'Mi', w:'E'},{ph:'Fa', w:'F'},
-  {ph:'Sol',w:'G'},{ph:'La', w:'A'},{ph:'Ti', w:'B'},
-];
-
-/* ──────────────────── PITCH DETECTION ──────────────────── */
-class PitchDetector {
-  constructor(){ this.ctx=null;this.an=null;this.buf=null;this.on=false;this.hz=0;this.smooth=0;this.vol=0; }
-
-  async init(){
-    try {
-      this.ctx = new (window.AudioContext||window.webkitAudioContext)();
-      const stream = await navigator.mediaDevices.getUserMedia({
-        audio:{echoCancellation:true,noiseSuppression:true,autoGainControl:true}
-      });
-      const src = this.ctx.createMediaStreamSource(stream);
-      this.an = this.ctx.createAnalyser();
-      this.an.fftSize = 2048;
-      src.connect(this.an);
-      this.buf = new Float32Array(this.an.fftSize);
-      this.on = true;
-      return true;
-    } catch(e){ return false; }
-  }
-
-  tick(){
-    if(!this.on) return;
-    this.an.getFloatTimeDomainData(this.buf);
-    let s=0;
-    for(let i=0;i<this.buf.length;i++) s+=this.buf[i]*this.buf[i];
-    this.vol=Math.sqrt(s/this.buf.length);
-    if(this.vol<0.008){this.hz=0;return;}
-    const f=this._ac(this.buf,this.ctx.sampleRate);
-    if(f>0){this.hz=f;this.smooth+=(f-this.smooth)*PITCH_SMOOTH;}
-  }
-
-  _ac(buf,sr){
-    const N=buf.length, H=N>>1;
-    // RMS gate
-    let rms=0;
-    for(let i=0;i<N;i++) rms+=buf[i]*buf[i];
-    rms=Math.sqrt(rms/N);
-    if(rms<0.01) return -1;
-
-    // autocorrelation
-    const corr=new Float32Array(H);
-    for(let t=0;t<H;t++){
-      let c=0;
-      for(let i=0;i<H;i++) c+=buf[i]*buf[i+t];
-      corr[t]=c;
-    }
-    // find first dip
-    let d=1;
-    while(d<H-1 && corr[d]>=corr[d-1]) d++;
-    if(d>=H-1) return -1;
-    // find peak after dip
-    let best=-1,bestI=d;
-    for(let i=d;i<H;i++){
-      if(corr[i]>best){best=corr[i];bestI=i;}
-    }
-    if(best<0.01) return -1;
-    // parabolic interpolation
-    const a=corr[bestI-1]||0, b=corr[bestI], c2=corr[bestI+1]||0;
-    const shift=(a-c2)/(2*(a-2*b+c2));
-    return sr/(bestI+(isFinite(shift)?shift:0));
-  }
-
-  norm(){
-    if(this.smooth<=0||this.vol<0.008) return -1;
-    const v=Math.max(MIN_HZ,Math.min(MAX_HZ,this.smooth));
-    return (v-MIN_HZ)/(MAX_HZ-MIN_HZ);
-  }
-}
-
-/* ──────────────────────── PARTICLES ─────────────────────── */
-class Particle {
-  constructor(x,y,col,life){
-    this.x=x;this.y=y;this.col=col;this.life=life;this.ml=life;
-    this.vx=(Math.random()-0.5)*5;this.vy=(Math.random()-0.5)*5;
-    this.sz=Math.random()*5+2;
-  }
-  tick(){ this.x+=this.vx;this.y+=this.vy;this.vx*=0.97;this.vy*=0.97;this.life-=0.025; }
-  draw(ctx){
-    const a=this.life/this.ml;
-    ctx.globalAlpha=a;ctx.fillStyle=this.col;
-    ctx.beginPath();ctx.arc(this.x,this.y,this.sz*a,0,Math.PI*2);ctx.fill();
-    ctx.globalAlpha=1;
-  }
-}
-
-/* ───────────────────────── GAME ─────────────────────────── */
-class Game {
-  constructor(){
-    this.cv=document.getElementById('c');
-    this.cx=this.cv.getContext('2d');
-    this.pd=new PitchDetector();
-    this.mode='phonics';
-    this.state='start';
-    this.score=0;this.best=+(localStorage.getItem('pf_best')||0);
-    this.lives=LIVES;
-    this.ballX=0;this.ballY=GH/2;this.ballTY=GH/2;
-    this.walls=[];this.parts=[];this.trail=[];
-    this.shake=0;this.flash=null;this.flashT=0;
-    this.wTimer=0;this.spd=1;this.tick=0;
-    this._resize();
-    window.addEventListener('resize',()=>this._resize());
-    document.getElementById('startBtn').onclick=()=>this._start();
-    document.getElementById('retryBtn').onclick=()=>this._start();
-    document.querySelectorAll('.mode-btn').forEach(b=>{
-      b.onclick=e=>{
-        document.querySelectorAll('.mode-btn').forEach(x=>x.classList.remove('active'));
-        e.currentTarget.classList.add('active');
-        this.mode=e.currentTarget.dataset.mode;
-      };
-    });
-    this._loop();
-  }
-
-  _resize(){
-    const dpr=window.devicePixelRatio||1;
-    this.cv.width=window.innerWidth*dpr;
-    this.cv.height=window.innerHeight*dpr;
-    this.sx=this.cv.width/GW;
-    this.sy=this.cv.height/GH;
-  }
-
-  async _start(){
-    if(!this.pd.on){
-      const ok=await this.pd.init();
-      const wEl=document.getElementById('micWarn');
-      if(!ok){wEl.textContent='⚠ Microphone required!';wEl.classList.remove('hidden');return;}
-      wEl.classList.add('hidden');
-    }
-    this.state='play';this.score=0;this.lives=LIVES;
-    this.walls=[];this.parts=[];this.trail=[];
-    this.ballX=GW*BALL_X_FRAC;this.ballY=GH/2;this.ballTY=GH/2;
-    this.wTimer=0;this.spd=1;this.shake=0;this.tick=0;
-    document.getElementById('startScreen').classList.add('hidden');
-    document.getElementById('overScreen').classList.add('hidden');
-  }
-
-  _data(){ return this.mode==='phonics'?PHONICS:CLASSIC; }
-
-  _spawn(){
-    const d=this._data();
-    const item=d[Math.floor(Math.random()*d.length)];
-    const gap=Math.max(MIN_GAP, BASE_GAP - this.score*1.5);
-    const margin=gap/2+30;
-    const gy=margin+Math.random()*(GH-margin*2);
-    this.walls.push({
-      x:GW+WALL_W, gy, gap, w:WALL_W,
-      scored:false, hit:false,
-      ph:item.ph, word:item.w, vn:item.vn||'', tip:item.tip||''
-    });
-  }
-
-  _update(){
-    if(this.state!=='play') return;
-    this.tick++;
-    this.spd=1+this.score*0.025;
-
-    // pitch
-    this.pd.tick();
-    const n=this.pd.norm();
-    if(n>=0){
-      this.ballTY=GH*(1-n);
-      this.ballTY=Math.max(BALL_R+4,Math.min(GH-BALL_R-4,this.ballTY));
-    } else {
-      this.ballTY=Math.min(GH-BALL_R-4, this.ballTY+GRAVITY_DRIFT);
-    }
-    this.ballY+=(this.ballTY-this.ballY)*BALL_LERP;
-
-    // walls
-    this.wTimer++;
-    if(this.wTimer>=WALL_INTERVAL/this.spd){this._spawn();this.wTimer=0;}
-
-    const sp=BASE_SPEED*this.spd;
-    for(let i=this.walls.length-1;i>=0;i--){
-      const w=this.walls[i];
-      w.x-=sp;
-      // score
-      if(!w.scored && w.x+w.w<this.ballX){
-        w.scored=true;this.score++;
-        for(let j=0;j<12;j++) this.parts.push(new Particle(this.ballX,this.ballY,C.scoreTxt,1.2));
-        this.flash=C.success;this.flashT=8;
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta name="theme-color" content="#0f0f1a" />
+    <meta
+      name="description"
+      content="Phonic Flight — Use your voice to fly! A pronunciation training game by Natural English Training."
+    />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>Phonic Flight — NET Voice Game</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
       }
-      // collision
-      if(w.x<this.ballX+BALL_R && w.x+w.w>this.ballX-BALL_R){
-        const gt=w.gy-w.gap/2, gb=w.gy+w.gap/2;
-        if((this.ballY-BALL_R<gt || this.ballY+BALL_R>gb) && !w.hit){
-          w.hit=true;this.lives--;this.shake=12;
-          this.flash=C.danger;this.flashT=12;
-          for(let j=0;j<16;j++) this.parts.push(new Particle(this.ballX,this.ballY,C.danger,0.8));
-          if(this.lives<=0){this._over();return;}
+      body {
+        background: #0f0f1a;
+        overflow: hidden;
+        font-family:
+          "Segoe UI",
+          system-ui,
+          -apple-system,
+          sans-serif;
+        touch-action: none;
+        -webkit-user-select: none;
+        user-select: none;
+        color: #fff;
+      }
+      canvas {
+        display: block;
+        width: 100vw;
+        height: 100vh;
+      }
+      .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: rgba(15, 15, 26, 0.96);
+        z-index: 10;
+        text-align: center;
+        padding: 20px;
+      }
+      .title {
+        font-size: clamp(2.2rem, 9vw, 4.5rem);
+        font-weight: 900;
+        line-height: 1.1;
+        background: linear-gradient(135deg, #a855f7 0%, #f59e0b 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 8px;
+      }
+      .subtitle {
+        font-size: clamp(0.85rem, 3vw, 1.2rem);
+        color: #a78bfa;
+        margin-bottom: 24px;
+      }
+      .instructions {
+        max-width: 380px;
+        margin: 0 auto 20px;
+        color: #9ca3af;
+        font-size: 0.92rem;
+        line-height: 1.7;
+      }
+      .instructions strong {
+        color: #e5e7eb;
+      }
+      .vn-hint {
+        color: #f59e0b;
+        font-size: 0.82rem;
+        margin-top: 8px;
+        font-style: italic;
+      }
+      .btn {
+        background: linear-gradient(135deg, #a855f7, #7c3aed);
+        color: #fff;
+        border: none;
+        padding: 16px 52px;
+        font-size: 1.15rem;
+        font-weight: 700;
+        border-radius: 50px;
+        cursor: pointer;
+        letter-spacing: 1px;
+        box-shadow: 0 0 30px rgba(168, 85, 247, 0.4);
+        transition:
+          transform 0.15s,
+          box-shadow 0.15s;
+      }
+      .btn:hover,
+      .btn:active {
+        transform: scale(1.06);
+        box-shadow: 0 0 45px rgba(168, 85, 247, 0.6);
+      }
+      .modes {
+        display: flex;
+        gap: 10px;
+        margin: 16px 0;
+      }
+      .mode-btn {
+        background: rgba(168, 85, 247, 0.15);
+        border: 2px solid rgba(168, 85, 247, 0.5);
+        color: #c084fc;
+        padding: 8px 22px;
+        border-radius: 25px;
+        cursor: pointer;
+        font-size: 0.88rem;
+        font-weight: 600;
+        transition: all 0.2s;
+      }
+      .mode-btn.active {
+        background: #a855f7;
+        color: #fff;
+        border-color: #a855f7;
+      }
+      .score-big {
+        font-size: clamp(3.5rem, 12vw, 6rem);
+        font-weight: 900;
+        color: #f59e0b;
+        margin: 8px 0;
+        text-shadow: 0 0 40px rgba(245, 158, 11, 0.4);
+      }
+      .score-label {
+        font-size: 0.85rem;
+        color: #6b7280;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+      }
+      .best-score {
+        font-size: 0.9rem;
+        color: #a78bfa;
+        margin: 6px 0 20px;
+      }
+      .mic-warn {
+        position: fixed;
+        top: 12px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: #ef4444;
+        font-size: 0.8rem;
+        z-index: 20;
+        background: rgba(239, 68, 68, 0.15);
+        padding: 4px 16px;
+        border-radius: 20px;
+      }
+      .hidden {
+        display: none !important;
+      }
+      @media (max-height: 500px) {
+        .instructions {
+          margin-bottom: 10px;
+          font-size: 0.82rem;
+          line-height: 1.4;
+        }
+        .title {
+          font-size: clamp(1.5rem, 6vw, 2.5rem);
+          margin-bottom: 4px;
+        }
+        .subtitle {
+          margin-bottom: 10px;
+        }
+        .btn {
+          padding: 12px 36px;
+          font-size: 1rem;
         }
       }
-      if(w.x+w.w<-60) this.walls.splice(i,1);
-    }
+    </style>
+  </head>
+  <body>
+    <canvas id="c"></canvas>
 
-    // particles
-    for(let i=this.parts.length-1;i>=0;i--){
-      this.parts[i].tick();
-      if(this.parts[i].life<=0) this.parts.splice(i,1);
-    }
+    <div class="overlay" id="startScreen">
+      <div class="title">PHONIC FLIGHT</div>
+      <div class="subtitle">Use Your Voice to Fly</div>
+      <div class="instructions">
+        <strong>Higher pitch → ball goes up</strong><br />
+        <strong>Lower pitch → ball goes down</strong><br />
+        Guide the ball through each gap to score!
+        <div class="vn-hint">
+          🇻🇳 Cao giọng = bóng bay lên · Thấp giọng = bóng rơi xuống
+        </div>
+      </div>
+      <div class="modes">
+        <button class="mode-btn active" data-mode="phonics">🗣️ Phonics</button>
+        <button class="mode-btn" data-mode="classic">🎵 Classic</button>
+      </div>
+      <button class="btn" id="startBtn">🎤 TAP TO START</button>
+    </div>
 
-    // trail
-    if(n>=0) this.trail.push({x:this.ballX,y:this.ballY,life:1});
-    for(let i=this.trail.length-1;i>=0;i--){
-      this.trail[i].life-=0.035;this.trail[i].x-=sp;
-      if(this.trail[i].life<=0) this.trail.splice(i,1);
-    }
+    <div class="overlay hidden" id="overScreen">
+      <div class="score-label">SCORE</div>
+      <div class="score-big" id="finalScore">0</div>
+      <div class="best-score" id="bestLine"></div>
+      <div class="subtitle" id="endMsg"></div>
+      <button class="btn" id="retryBtn">TRY AGAIN</button>
+    </div>
 
-    this.shake*=0.82;
-    if(this.flashT>0) this.flashT--;
-  }
+    <div class="mic-warn hidden" id="micWarn"></div>
 
-  _over(){
-    this.state='over';
-    if(this.score>this.best){this.best=this.score;localStorage.setItem('pf_best',''+this.best);}
-    document.getElementById('finalScore').textContent=this.score;
-    document.getElementById('bestLine').textContent=
-      this.best>0?'Best: '+this.best:'';
-    const m=this.score===0?'Make some noise! 🎤':
-            this.score<5?'Keep practicing! 💪':
-            this.score<10?'Getting better! 🔥':
-            this.score<20?'Nice voice control! 🌟':
-            this.score<35?'Phonic master! 🏆':'TIGER MODE! 🐅';
-    document.getElementById('endMsg').textContent=m;
-    document.getElementById('overScreen').classList.remove('hidden');
-  }
+    <script>
+      (function () {
+        "use strict";
 
-  /* ─────────────── DRAW ─────────────── */
-  _draw(){
-    const cx=this.cx, W=this.cv.width, H=this.cv.height;
-    cx.fillStyle=C.bg;cx.fillRect(0,0,W,H);
+        /* ───────────────────────── CONFIG ───────────────────────── */
+        const GW = 800,
+          GH = 600;
+        const BALL_X_FRAC = 0.15;
+        const BALL_R = 16;
+        const WALL_W = 90;
+        const BASE_GAP = 150;
+        const MIN_GAP = 100;
+        const BASE_SPEED = 2.2;
+        const WALL_INTERVAL = 180;
+        const LIVES = 3;
+        const MIN_HZ = 85,
+          MAX_HZ = 600;
+        const PITCH_SMOOTH = 0.13;
+        const GRAVITY_DRIFT = 1.8;
+        const BALL_LERP = 0.12;
 
-    if(this.state==='start') return;
+        const C = {
+          bg: "#0f0f1a",
+          ball: "#f59e0b",
+          ballHi: "#fcd34d",
+          ballLo: "#d97706",
+          wall: "#a855f7",
+          wallDk: "#6d28d9",
+          wallEdge: "#c084fc",
+          danger: "#ef4444",
+          success: "#22c55e",
+          text: "#ffffff",
+          scoreTxt: "#f59e0b",
+          mutedTxt: "rgba(255,255,255,0.35)",
+          gridLine: "rgba(168,85,247,0.04)",
+          pitchBar: "rgba(168,85,247,0.12)",
+        };
 
-    cx.save();
-    if(this.shake>0.5){
-      cx.translate((Math.random()-.5)*this.shake*this.sx,(Math.random()-.5)*this.shake*this.sy);
-    }
-    cx.save();cx.scale(this.sx,this.sy);
-    this._drawGame(cx);
-    cx.restore();cx.restore();
+        /* ──────────────────────── PHONICS DATA ──────────────────── */
+        const PHONICS = [
+          { ph: "/θ/", w: "think", vn: "nghĩ", tip: "Tongue between teeth" },
+          { ph: "/ð/", w: "this", vn: "cái này", tip: "Vibrate tongue tip" },
+          { ph: "/æ/", w: "cat", vn: "con mèo", tip: "Open mouth wide" },
+          { ph: "/ɪ/", w: "sit", vn: "ngồi", tip: "Short i sound" },
+          { ph: "/iː/", w: "see", vn: "thấy", tip: "Long ee sound" },
+          { ph: "/ʃ/", w: "ship", vn: "tàu", tip: "Lips forward shhh" },
+          { ph: "/tʃ/", w: "cheese", vn: "phô mai", tip: "t then sh" },
+          { ph: "/dʒ/", w: "jump", vn: "nhảy", tip: "Like ch but voiced" },
+          { ph: "/z/", w: "zoo", vn: "sở thú", tip: "Like s but buzzing" },
+          { ph: "/v/", w: "very", vn: "rất", tip: "Bite lower lip" },
+          { ph: "/r/", w: "red", vn: "đỏ", tip: "Curl tongue back" },
+          { ph: "/l/", w: "love", vn: "yêu", tip: "Tongue touches roof" },
+          { ph: "/ŋ/", w: "sing", vn: "hát", tip: "Nasal back of throat" },
+          { ph: "/eɪ/", w: "cake", vn: "bánh", tip: "Slide e to ee" },
+          { ph: "/aʊ/", w: "house", vn: "nhà", tip: "Open then round" },
+          { ph: "/ɔɪ/", w: "boy", vn: "con trai", tip: "Round then spread" },
+        ];
+        const CLASSIC = [
+          { ph: "Do", w: "C" },
+          { ph: "Re", w: "D" },
+          { ph: "Mi", w: "E" },
+          { ph: "Fa", w: "F" },
+          { ph: "Sol", w: "G" },
+          { ph: "La", w: "A" },
+          { ph: "Ti", w: "B" },
+        ];
 
-    if(this.flashT>0&&this.flash){
-      cx.globalAlpha=this.flashT/25;cx.fillStyle=this.flash;
-      cx.fillRect(0,0,W,H);cx.globalAlpha=1;
-    }
-  }
+        /* ──────────────────── PITCH DETECTION ──────────────────── */
+        class PitchDetector {
+          constructor() {
+            this.ctx = null;
+            this.an = null;
+            this.buf = null;
+            this.on = false;
+            this.hz = 0;
+            this.smooth = 0;
+            this.vol = 0;
+          }
 
-  _drawGame(cx){
-    // grid
-    cx.strokeStyle=C.gridLine;cx.lineWidth=1;
-    for(let y=0;y<GH;y+=50){cx.beginPath();cx.moveTo(0,y);cx.lineTo(GW,y);cx.stroke();}
+          async init() {
+            try {
+              this.ctx = new (
+                window.AudioContext || window.webkitAudioContext
+              )();
+              const stream = await navigator.mediaDevices.getUserMedia({
+                audio: {
+                  echoCancellation: true,
+                  noiseSuppression: true,
+                  autoGainControl: true,
+                },
+              });
+              const src = this.ctx.createMediaStreamSource(stream);
+              this.an = this.ctx.createAnalyser();
+              this.an.fftSize = 2048;
+              src.connect(this.an);
+              this.buf = new Float32Array(this.an.fftSize);
+              this.on = true;
+              return true;
+            } catch (e) {
+              return false;
+            }
+          }
 
-    // pitch bar
-    this._drawPitchBar(cx);
+          tick() {
+            if (!this.on) return;
+            this.an.getFloatTimeDomainData(this.buf);
+            let s = 0;
+            for (let i = 0; i < this.buf.length; i++)
+              s += this.buf[i] * this.buf[i];
+            this.vol = Math.sqrt(s / this.buf.length);
+            if (this.vol < 0.008) {
+              this.hz = 0;
+              return;
+            }
+            const f = this._ac(this.buf, this.ctx.sampleRate);
+            if (f > 0) {
+              this.hz = f;
+              this.smooth += (f - this.smooth) * PITCH_SMOOTH;
+            }
+          }
 
-    // trail
-    for(const t of this.trail){
-      cx.globalAlpha=t.life*0.4;cx.fillStyle=C.ball;
-      cx.beginPath();cx.arc(t.x,t.y,BALL_R*t.life*0.4,0,Math.PI*2);cx.fill();
-    }
-    cx.globalAlpha=1;
+          _ac(buf, sr) {
+            const N = buf.length,
+              H = N >> 1;
+            // RMS gate
+            let rms = 0;
+            for (let i = 0; i < N; i++) rms += buf[i] * buf[i];
+            rms = Math.sqrt(rms / N);
+            if (rms < 0.01) return -1;
 
-    // walls
-    for(const w of this.walls) this._drawWall(cx,w);
+            // autocorrelation
+            const corr = new Float32Array(H);
+            for (let t = 0; t < H; t++) {
+              let c = 0;
+              for (let i = 0; i < H; i++) c += buf[i] * buf[i + t];
+              corr[t] = c;
+            }
+            // find first dip
+            let d = 1;
+            while (d < H - 1 && corr[d] >= corr[d - 1]) d++;
+            if (d >= H - 1) return -1;
+            // find peak after dip
+            let best = -1,
+              bestI = d;
+            for (let i = d; i < H; i++) {
+              if (corr[i] > best) {
+                best = corr[i];
+                bestI = i;
+              }
+            }
+            if (best < 0.01) return -1;
+            // parabolic interpolation
+            const a = corr[bestI - 1] || 0,
+              b = corr[bestI],
+              c2 = corr[bestI + 1] || 0;
+            const shift = (a - c2) / (2 * (a - 2 * b + c2));
+            return sr / (bestI + (isFinite(shift) ? shift : 0));
+          }
 
-    // particles
-    for(const p of this.parts) p.draw(cx);
+          norm() {
+            if (this.smooth <= 0 || this.vol < 0.008) return -1;
+            const v = Math.max(MIN_HZ, Math.min(MAX_HZ, this.smooth));
+            return (v - MIN_HZ) / (MAX_HZ - MIN_HZ);
+          }
+        }
 
-    // ball
-    this._drawBall(cx);
+        /* ──────────────────────── PARTICLES ─────────────────────── */
+        class Particle {
+          constructor(x, y, col, life) {
+            this.x = x;
+            this.y = y;
+            this.col = col;
+            this.life = life;
+            this.ml = life;
+            this.vx = (Math.random() - 0.5) * 5;
+            this.vy = (Math.random() - 0.5) * 5;
+            this.sz = Math.random() * 5 + 2;
+          }
+          tick() {
+            this.x += this.vx;
+            this.y += this.vy;
+            this.vx *= 0.97;
+            this.vy *= 0.97;
+            this.life -= 0.025;
+          }
+          draw(ctx) {
+            const a = this.life / this.ml;
+            ctx.globalAlpha = a;
+            ctx.fillStyle = this.col;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.sz * a, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.globalAlpha = 1;
+          }
+        }
 
-    // HUD
-    this._drawHUD(cx);
-  }
+        /* ───────────────────────── GAME ─────────────────────────── */
+        class Game {
+          constructor() {
+            this.cv = document.getElementById("c");
+            this.cx = this.cv.getContext("2d");
+            this.pd = new PitchDetector();
+            this.mode = "phonics";
+            this.state = "start";
+            this.score = 0;
+            this.best = +(localStorage.getItem("pf_best") || 0);
+            this.lives = LIVES;
+            this.ballX = 0;
+            this.ballY = GH / 2;
+            this.ballTY = GH / 2;
+            this.walls = [];
+            this.parts = [];
+            this.trail = [];
+            this.shake = 0;
+            this.flash = null;
+            this.flashT = 0;
+            this.wTimer = 0;
+            this.spd = 1;
+            this.tick = 0;
+            this._resize();
+            window.addEventListener("resize", () => this._resize());
+            document.getElementById("startBtn").onclick = () => this._start();
+            document.getElementById("retryBtn").onclick = () => this._start();
+            document.querySelectorAll(".mode-btn").forEach((b) => {
+              b.onclick = (e) => {
+                document
+                  .querySelectorAll(".mode-btn")
+                  .forEach((x) => x.classList.remove("active"));
+                e.currentTarget.classList.add("active");
+                this.mode = e.currentTarget.dataset.mode;
+              };
+            });
+            this._loop();
+          }
 
-  _drawPitchBar(cx){
-    const x=28,top=55,bot=GH-25,h=bot-top;
-    cx.fillStyle=C.pitchBar;
-    cx.beginPath();cx.roundRect(x-7,top,14,h,7);cx.fill();
-    // zone ticks
-    cx.strokeStyle=C.mutedTxt;cx.lineWidth=0.5;
-    for(let i=1;i<5;i++){
-      const y=top+h*i/5;
-      cx.beginPath();cx.moveTo(x-6,y);cx.lineTo(x+6,y);cx.stroke();
-    }
-    const n=this.pd.norm();
-    if(n>=0){
-      const y=bot-n*h;
-      cx.fillStyle=C.ball;cx.shadowColor=C.ball;cx.shadowBlur=12;
-      cx.beginPath();cx.arc(x,y,5,0,Math.PI*2);cx.fill();
-      cx.shadowBlur=0;
-    }
-    cx.fillStyle=C.mutedTxt;cx.font='9px sans-serif';cx.textAlign='center';
-    cx.fillText('HIGH',x,top-6);cx.fillText('LOW',x,bot+14);
-  }
+          _resize() {
+            const dpr = window.devicePixelRatio || 1;
+            this.cv.width = window.innerWidth * dpr;
+            this.cv.height = window.innerHeight * dpr;
+            this.sx = this.cv.width / GW;
+            this.sy = this.cv.height / GH;
+          }
 
-  _drawWall(cx,w){
-    const gt=w.gy-w.gap/2, gb=w.gy+w.gap/2;
-    // gradient fill
-    const g=cx.createLinearGradient(w.x,0,w.x+w.w,0);
-    g.addColorStop(0,C.wallDk);g.addColorStop(0.5,C.wall);g.addColorStop(1,C.wallDk);
-    cx.fillStyle=g;
-    cx.fillRect(w.x,0,w.w,gt);
-    cx.fillRect(w.x,gb,w.w,GH-gb);
+          async _start() {
+            if (!this.pd.on) {
+              const ok = await this.pd.init();
+              const wEl = document.getElementById("micWarn");
+              if (!ok) {
+                wEl.textContent = "⚠ Microphone required!";
+                wEl.classList.remove("hidden");
+                return;
+              }
+              wEl.classList.add("hidden");
+            }
+            this.state = "play";
+            this.score = 0;
+            this.lives = LIVES;
+            this.walls = [];
+            this.parts = [];
+            this.trail = [];
+            this.ballX = GW * BALL_X_FRAC;
+            this.ballY = GH / 2;
+            this.ballTY = GH / 2;
+            this.wTimer = 0;
+            this.spd = 1;
+            this.shake = 0;
+            this.tick = 0;
+            document.getElementById("startScreen").classList.add("hidden");
+            document.getElementById("overScreen").classList.add("hidden");
+          }
 
-    // glow edges
-    cx.shadowColor=C.wallEdge;cx.shadowBlur=10;
-    cx.strokeStyle=C.wallEdge;cx.lineWidth=2;
-    cx.beginPath();cx.moveTo(w.x,gt);cx.lineTo(w.x+w.w,gt);cx.stroke();
-    cx.beginPath();cx.moveTo(w.x,gb);cx.lineTo(w.x+w.w,gb);cx.stroke();
-    cx.shadowBlur=0;
+          _data() {
+            return this.mode === "phonics" ? PHONICS : CLASSIC;
+          }
 
-    // labels in gap
-    const mx=w.x+w.w/2;
-    cx.textAlign='center';cx.textBaseline='middle';
-    // phoneme
-    cx.fillStyle='#fff';cx.font='bold 18px sans-serif';
-    cx.fillText(w.ph,mx,w.gy-14);
-    // word
-    cx.fillStyle=C.scoreTxt;cx.font='12px sans-serif';
-    cx.fillText(w.word,mx,w.gy+4);
-    // Vietnamese
-    if(w.vn){
-      cx.fillStyle='rgba(168,85,247,0.7)';cx.font='10px sans-serif';
-      cx.fillText(w.vn,mx,w.gy+18);
-    }
-  }
+          _spawn() {
+            const d = this._data();
+            const item = d[Math.floor(Math.random() * d.length)];
+            const gap = Math.max(MIN_GAP, BASE_GAP - this.score * 1.5);
+            const margin = gap / 2 + 30;
+            const gy = margin + Math.random() * (GH - margin * 2);
+            this.walls.push({
+              x: GW + WALL_W,
+              gy,
+              gap,
+              w: WALL_W,
+              scored: false,
+              hit: false,
+              ph: item.ph,
+              word: item.w,
+              vn: item.vn || "",
+              tip: item.tip || "",
+            });
+          }
 
-  _drawBall(cx){
-    const x=this.ballX,y=this.ballY,r=BALL_R;
-    // glow
-    cx.shadowColor=C.ball;cx.shadowBlur=22;
-    // body
-    const g=cx.createRadialGradient(x-3,y-3,0,x,y,r);
-    g.addColorStop(0,C.ballHi);g.addColorStop(0.7,C.ball);g.addColorStop(1,C.ballLo);
-    cx.fillStyle=g;cx.beginPath();cx.arc(x,y,r,0,Math.PI*2);cx.fill();
-    // highlight
-    cx.fillStyle='rgba(255,255,255,0.28)';
-    cx.beginPath();cx.arc(x-4,y-4,r*0.35,0,Math.PI*2);cx.fill();
-    cx.shadowBlur=0;
-    // volume ring
-    const v=Math.min(this.pd.vol*25,1);
-    if(v>0.06){
-      cx.strokeStyle='rgba(168,85,247,'+v*0.45+')';cx.lineWidth=2;
-      cx.beginPath();cx.arc(x,y,r+4+v*10,0,Math.PI*2);cx.stroke();
-    }
-  }
+          _update() {
+            if (this.state !== "play") return;
+            this.tick++;
+            this.spd = 1 + this.score * 0.025;
 
-  _drawHUD(cx){
-    // score
-    cx.textAlign='right';cx.textBaseline='top';
-    cx.fillStyle=C.scoreTxt;cx.font='bold 34px sans-serif';
-    cx.fillText(''+this.score,GW-18,12);
-    // lives
-    cx.textAlign='left';cx.font='18px sans-serif';
-    cx.fillStyle=C.danger;
-    cx.fillText('♥'.repeat(this.lives)+'♡'.repeat(LIVES-this.lives),55,16);
-    // mode
-    cx.fillStyle=C.mutedTxt;cx.font='11px sans-serif';
-    cx.fillText(this.mode==='phonics'?'PHONICS':'CLASSIC',55,40);
-    // speed
-    if(this.spd>1.3){
-      cx.fillStyle='rgba(245,158,11,0.4)';cx.font='10px sans-serif';
-      cx.fillText('×'+this.spd.toFixed(1),55,54);
-    }
-  }
+            // pitch
+            this.pd.tick();
+            const n = this.pd.norm();
+            if (n >= 0) {
+              this.ballTY = GH * (1 - n);
+              this.ballTY = Math.max(
+                BALL_R + 4,
+                Math.min(GH - BALL_R - 4, this.ballTY),
+              );
+            } else {
+              this.ballTY = Math.min(
+                GH - BALL_R - 4,
+                this.ballTY + GRAVITY_DRIFT,
+              );
+            }
+            this.ballY += (this.ballTY - this.ballY) * BALL_LERP;
 
-  _loop(){
-    this._update();this._draw();
-    requestAnimationFrame(()=>this._loop());
-  }
-}
+            // walls
+            this.wTimer++;
+            if (this.wTimer >= WALL_INTERVAL / this.spd) {
+              this._spawn();
+              this.wTimer = 0;
+            }
 
-/* ─── INIT ─── */
-window.addEventListener('DOMContentLoaded',()=>new Game());
-})();
-</script>
-</body>
+            const sp = BASE_SPEED * this.spd;
+            for (let i = this.walls.length - 1; i >= 0; i--) {
+              const w = this.walls[i];
+              w.x -= sp;
+              // score
+              if (!w.scored && w.x + w.w < this.ballX) {
+                w.scored = true;
+                this.score++;
+                for (let j = 0; j < 12; j++)
+                  this.parts.push(
+                    new Particle(this.ballX, this.ballY, C.scoreTxt, 1.2),
+                  );
+                this.flash = C.success;
+                this.flashT = 8;
+              }
+              // collision
+              if (
+                w.x < this.ballX + BALL_R &&
+                w.x + w.w > this.ballX - BALL_R
+              ) {
+                const gt = w.gy - w.gap / 2,
+                  gb = w.gy + w.gap / 2;
+                if (
+                  (this.ballY - BALL_R < gt || this.ballY + BALL_R > gb) &&
+                  !w.hit
+                ) {
+                  w.hit = true;
+                  this.lives--;
+                  this.shake = 12;
+                  this.flash = C.danger;
+                  this.flashT = 12;
+                  for (let j = 0; j < 16; j++)
+                    this.parts.push(
+                      new Particle(this.ballX, this.ballY, C.danger, 0.8),
+                    );
+                  if (this.lives <= 0) {
+                    this._over();
+                    return;
+                  }
+                }
+              }
+              if (w.x + w.w < -60) this.walls.splice(i, 1);
+            }
+
+            // particles
+            for (let i = this.parts.length - 1; i >= 0; i--) {
+              this.parts[i].tick();
+              if (this.parts[i].life <= 0) this.parts.splice(i, 1);
+            }
+
+            // trail
+            if (n >= 0)
+              this.trail.push({ x: this.ballX, y: this.ballY, life: 1 });
+            for (let i = this.trail.length - 1; i >= 0; i--) {
+              this.trail[i].life -= 0.035;
+              this.trail[i].x -= sp;
+              if (this.trail[i].life <= 0) this.trail.splice(i, 1);
+            }
+
+            this.shake *= 0.82;
+            if (this.flashT > 0) this.flashT--;
+          }
+
+          _over() {
+            this.state = "over";
+            if (this.score > this.best) {
+              this.best = this.score;
+              localStorage.setItem("pf_best", "" + this.best);
+            }
+            document.getElementById("finalScore").textContent = this.score;
+            document.getElementById("bestLine").textContent =
+              this.best > 0 ? "Best: " + this.best : "";
+            const m =
+              this.score === 0
+                ? "Make some noise! 🎤"
+                : this.score < 5
+                  ? "Keep practicing! 💪"
+                  : this.score < 10
+                    ? "Getting better! 🔥"
+                    : this.score < 20
+                      ? "Nice voice control! 🌟"
+                      : this.score < 35
+                        ? "Phonic master! 🏆"
+                        : "TIGER MODE! 🐅";
+            document.getElementById("endMsg").textContent = m;
+            document.getElementById("overScreen").classList.remove("hidden");
+          }
+
+          /* ─────────────── DRAW ─────────────── */
+          _draw() {
+            const cx = this.cx,
+              W = this.cv.width,
+              H = this.cv.height;
+            cx.fillStyle = C.bg;
+            cx.fillRect(0, 0, W, H);
+
+            if (this.state === "start") return;
+
+            cx.save();
+            if (this.shake > 0.5) {
+              cx.translate(
+                (Math.random() - 0.5) * this.shake * this.sx,
+                (Math.random() - 0.5) * this.shake * this.sy,
+              );
+            }
+            cx.save();
+            cx.scale(this.sx, this.sy);
+            this._drawGame(cx);
+            cx.restore();
+            cx.restore();
+
+            if (this.flashT > 0 && this.flash) {
+              cx.globalAlpha = this.flashT / 25;
+              cx.fillStyle = this.flash;
+              cx.fillRect(0, 0, W, H);
+              cx.globalAlpha = 1;
+            }
+          }
+
+          _drawGame(cx) {
+            // grid
+            cx.strokeStyle = C.gridLine;
+            cx.lineWidth = 1;
+            for (let y = 0; y < GH; y += 50) {
+              cx.beginPath();
+              cx.moveTo(0, y);
+              cx.lineTo(GW, y);
+              cx.stroke();
+            }
+
+            // pitch bar
+            this._drawPitchBar(cx);
+
+            // trail
+            for (const t of this.trail) {
+              cx.globalAlpha = t.life * 0.4;
+              cx.fillStyle = C.ball;
+              cx.beginPath();
+              cx.arc(t.x, t.y, BALL_R * t.life * 0.4, 0, Math.PI * 2);
+              cx.fill();
+            }
+            cx.globalAlpha = 1;
+
+            // walls
+            for (const w of this.walls) this._drawWall(cx, w);
+
+            // particles
+            for (const p of this.parts) p.draw(cx);
+
+            // ball
+            this._drawBall(cx);
+
+            // HUD
+            this._drawHUD(cx);
+          }
+
+          _drawPitchBar(cx) {
+            const x = 28,
+              top = 55,
+              bot = GH - 25,
+              h = bot - top;
+            cx.fillStyle = C.pitchBar;
+            cx.beginPath();
+            if (cx.roundRect) {
+              cx.roundRect(x - 7, top, 14, h, 7);
+            } else {
+              const r=7,l=x-7;
+              cx.moveTo(l+r,top);cx.lineTo(l+14-r,top);cx.quadraticCurveTo(l+14,top,l+14,top+r);
+              cx.lineTo(l+14,top+h-r);cx.quadraticCurveTo(l+14,top+h,l+14-r,top+h);
+              cx.lineTo(l+r,top+h);cx.quadraticCurveTo(l,top+h,l,top+h-r);
+              cx.lineTo(l,top+r);cx.quadraticCurveTo(l,top,l+r,top);
+            }
+            cx.fill();
+            // zone ticks
+            cx.strokeStyle = C.mutedTxt;
+            cx.lineWidth = 0.5;
+            for (let i = 1; i < 5; i++) {
+              const y = top + (h * i) / 5;
+              cx.beginPath();
+              cx.moveTo(x - 6, y);
+              cx.lineTo(x + 6, y);
+              cx.stroke();
+            }
+            const n = this.pd.norm();
+            if (n >= 0) {
+              const y = bot - n * h;
+              cx.fillStyle = C.ball;
+              cx.shadowColor = C.ball;
+              cx.shadowBlur = 12;
+              cx.beginPath();
+              cx.arc(x, y, 5, 0, Math.PI * 2);
+              cx.fill();
+              cx.shadowBlur = 0;
+            }
+            cx.fillStyle = C.mutedTxt;
+            cx.font = "9px sans-serif";
+            cx.textAlign = "center";
+            cx.fillText("HIGH", x, top - 6);
+            cx.fillText("LOW", x, bot + 14);
+          }
+
+          _drawWall(cx, w) {
+            const gt = w.gy - w.gap / 2,
+              gb = w.gy + w.gap / 2;
+            // gradient fill
+            const g = cx.createLinearGradient(w.x, 0, w.x + w.w, 0);
+            g.addColorStop(0, C.wallDk);
+            g.addColorStop(0.5, C.wall);
+            g.addColorStop(1, C.wallDk);
+            cx.fillStyle = g;
+            cx.fillRect(w.x, 0, w.w, gt);
+            cx.fillRect(w.x, gb, w.w, GH - gb);
+
+            // glow edges
+            cx.shadowColor = C.wallEdge;
+            cx.shadowBlur = 10;
+            cx.strokeStyle = C.wallEdge;
+            cx.lineWidth = 2;
+            cx.beginPath();
+            cx.moveTo(w.x, gt);
+            cx.lineTo(w.x + w.w, gt);
+            cx.stroke();
+            cx.beginPath();
+            cx.moveTo(w.x, gb);
+            cx.lineTo(w.x + w.w, gb);
+            cx.stroke();
+            cx.shadowBlur = 0;
+
+            // labels in gap
+            const mx = w.x + w.w / 2;
+            cx.textAlign = "center";
+            cx.textBaseline = "middle";
+            // phoneme
+            cx.fillStyle = "#fff";
+            cx.font = "bold 18px sans-serif";
+            cx.fillText(w.ph, mx, w.gy - 14);
+            // word
+            cx.fillStyle = C.scoreTxt;
+            cx.font = "12px sans-serif";
+            cx.fillText(w.word, mx, w.gy + 4);
+            // Vietnamese
+            if (w.vn) {
+              cx.fillStyle = "rgba(168,85,247,0.7)";
+              cx.font = "10px sans-serif";
+              cx.fillText(w.vn, mx, w.gy + 18);
+            }
+          }
+
+          _drawBall(cx) {
+            const x = this.ballX,
+              y = this.ballY,
+              r = BALL_R;
+            // glow
+            cx.shadowColor = C.ball;
+            cx.shadowBlur = 22;
+            // body
+            const g = cx.createRadialGradient(x - 3, y - 3, 0, x, y, r);
+            g.addColorStop(0, C.ballHi);
+            g.addColorStop(0.7, C.ball);
+            g.addColorStop(1, C.ballLo);
+            cx.fillStyle = g;
+            cx.beginPath();
+            cx.arc(x, y, r, 0, Math.PI * 2);
+            cx.fill();
+            // highlight
+            cx.fillStyle = "rgba(255,255,255,0.28)";
+            cx.beginPath();
+            cx.arc(x - 4, y - 4, r * 0.35, 0, Math.PI * 2);
+            cx.fill();
+            cx.shadowBlur = 0;
+            // volume ring
+            const v = Math.min(this.pd.vol * 25, 1);
+            if (v > 0.06) {
+              cx.strokeStyle = "rgba(168,85,247," + v * 0.45 + ")";
+              cx.lineWidth = 2;
+              cx.beginPath();
+              cx.arc(x, y, r + 4 + v * 10, 0, Math.PI * 2);
+              cx.stroke();
+            }
+          }
+
+          _drawHUD(cx) {
+            // score
+            cx.textAlign = "right";
+            cx.textBaseline = "top";
+            cx.fillStyle = C.scoreTxt;
+            cx.font = "bold 34px sans-serif";
+            cx.fillText("" + this.score, GW - 18, 12);
+            // lives
+            cx.textAlign = "left";
+            cx.font = "18px sans-serif";
+            cx.fillStyle = C.danger;
+            cx.fillText(
+              "♥".repeat(this.lives) + "♡".repeat(LIVES - this.lives),
+              55,
+              16,
+            );
+            // mode
+            cx.fillStyle = C.mutedTxt;
+            cx.font = "11px sans-serif";
+            cx.fillText(
+              this.mode === "phonics" ? "PHONICS" : "CLASSIC",
+              55,
+              40,
+            );
+            // speed
+            if (this.spd > 1.3) {
+              cx.fillStyle = "rgba(245,158,11,0.4)";
+              cx.font = "10px sans-serif";
+              cx.fillText("×" + this.spd.toFixed(1), 55, 54);
+            }
+          }
+
+          _loop() {
+            this._update();
+            this._draw();
+            requestAnimationFrame(() => this._loop());
+          }
+        }
+
+        /* ─── INIT ─── */
+        window.addEventListener("DOMContentLoaded", () => new Game());
+      })();
+    </script>
+  </body>
 </html>
