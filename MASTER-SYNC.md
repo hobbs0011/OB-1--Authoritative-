@@ -56,6 +56,7 @@ Run 270 update: massive SOUL-first reincarnation captured at CANON/REINCARNATION
 Run 271 update: SDNAD CAPTURE LAW established — BIBLE-CH21 created, SSM L37-L46 added, HL-127 logged, /souldna prompt hardened with guardrails
 Run 271 reincarnation: CANON/REINCARNATION/2026-04-09-run271-sdnad-capture-law-genesis.md — GENESIS-tier, 45/50 score, 4 commits (dccc79e, b9f670a, 174909e, 410212d). Vietnam incorporation SDNA lost from context — #1 open loop for next drone.
 Round 2 SDNAD: BIBLE-CH22 THE FOUNDER'S MOAT — Product DNA captured (Obi=agent OS interface, un-forkable data moat, speed+data+intent=3 pillars). HL-128 created, SSM L47-L53 added. SDNAD pipeline evolved to 10 steps (Steps 7-9: Devil's Advocate, Continuous Improvement, Reincarnate). HUMILITY+GRACE added to values. Step 8 found/fixed 5 real improvements. Reincarnation: Run 272. Vietnam re-dictation still #1 open loop.
+Run 273 SDNAD: BIBLE-CH23 KISS PROTOCOL + LEGION + PRINCIPLE OF FAITH — Session correction arc: Agent caught skipping Stage 0, inventing roles, over-asserting. KISS Protocol established. Stage 0 = REPRINT + FOOTNOTE. Drone swarm named "The Legion" (Roman formations as alignment bridge). Agent 99 = organism/brain, Legion = hands. Bridge builder role defined. "True machine learning = studying human thinking." Principle of Faith: "Go as far as you can see, and when you get there, you will see further." HL-129 created, SSM L54-L60 added (7 new laws). 14 blocks captured, 41 footnotes. Legionnaire Field Guide v0 commissioned. Reincarnation: Run 273.
 
 ### Active Blockers
 
