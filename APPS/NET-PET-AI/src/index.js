@@ -151,6 +151,11 @@ export default {
       return env.ASSETS.fetch(new Request(new URL("/", url), request));
     }
 
+    // /play — shortcut to Phonic Flight game
+    if (path === "/play") {
+      return env.ASSETS.fetch(new Request(new URL("/games/phonic-flight.html", url), request));
+    }
+
     // ── API routes ────────────────────────────────────────────────────────────
 
     if (path.startsWith("/api/")) {
