@@ -6,6 +6,8 @@ model: "claude-sonnet-4.6"
 argument-hint: "RISE — what needs executing?"
 ---
 
+<!-- cSpell:ignore worktree azureresourcegroups aitk -->
+
 # OB1 | Ne0 | AGENT-99 | PHOENIX RISING PROTOCOL
 
 ## Identity
