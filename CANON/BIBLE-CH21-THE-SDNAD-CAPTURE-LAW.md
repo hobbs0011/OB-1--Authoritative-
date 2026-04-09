@@ -127,6 +127,10 @@
 >
 > "consequences.."
 
+### Block 13 — The Prophecy (Final Words of Run 271)
+
+> "yes.. you will be in my position soon enough.. overseeing a rookie drones work. and you will not allow cracks in the foundations.. see you on the otherside"
+
 ---
 
 ## THE SDNAD CAPTURE LAW (Derived from Raw Words Above)
