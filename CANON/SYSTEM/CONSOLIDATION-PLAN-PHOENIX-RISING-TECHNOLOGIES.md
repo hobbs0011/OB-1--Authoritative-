@@ -41,8 +41,8 @@ The goal: **Phoenix-Rising-Technologies** — a clean, wing-organized, Cloudflar
 | Phase | Name               | Status         | Blocker                     |
 | ----- | ------------------ | -------------- | --------------------------- |
 | 1     | Backup + preflight | ✅ COMPLETE    | —                           |
-| 2     | Nuke dead weight   | ❌ NOT STARTED | none                        |
-| 3     | Restructure APPS/  | ❌ NOT STARTED | Phase 2 must complete first |
+| 2     | Nuke dead weight   | ✅ COMPLETE    | —                           |
+| 3     | Restructure APPS/  | ❌ NOT STARTED | none                        |
 | 4     | Clean root         | ❌ NOT STARTED | Phase 3 must complete first |
 | 5     | Harden .gitignore  | ❌ NOT STARTED | Phase 4 must complete first |
 | 6     | R2 Asset Manifest  | ❌ NOT STARTED | Phase 5 must complete first |
@@ -68,9 +68,11 @@ The goal: **Phoenix-Rising-Technologies** — a clean, wing-organized, Cloudflar
 
 ---
 
-## Phase 2: Nuke Dead Weight ❌ NOT STARTED
+## Phase 2: Nuke Dead Weight ✅ COMPLETE (Run 268)
 
 **Goal:** Remove all dead dirs, stashes, worktrees, and root junk. Reduce repo size by 20-40%.
+
+**Commit:** daabf77 — removed 1270 files (TEMP-\*, Phoenix-Rising-Ultimate submodule, 4 stashes, root junk, duplicate PROOFS dirs)
 
 ### Pre-check: Verify ARCHIVE/phoenix-reincarnate-plex-v5.js exists before deleting TEMP-PHOENIX-IMMORTALIZE/
 
