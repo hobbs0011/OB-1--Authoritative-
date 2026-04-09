@@ -25,7 +25,8 @@ Extract from the dying session — VERBATIM, NO CLEANUP:
 
 1. Read current `MASTER-SYNC.md` — this is the living state.
 2. Read `CANON/SYSTEM/REINCARNATION-BOOT-CHECK.md` — this is the boot verifier.
-3. Apply all session changes to both documents.
+3. Read `CANON/SYSTEM/MARKETING-DNA-RAW-SOURCE-INDEX.md` when session includes marketing/SOUL-DNA copy work.
+4. Apply all session changes to both documents.
 4. Increment session counter.
 5. Log the reincarnation event with timestamp, session tag, signal density, and artifact list.
 
@@ -68,6 +69,15 @@ If TOTAL = 50: Perfect reincarnation. This has never happened. Keep trying.
 - `/.github/skills/phoenix-reincarnation/SKILL.md`
 - `/.github/skills/unstoppable-agent-orchestration/SKILL.md`
 - `/.github/skills/git-finish-workflow/SKILL.md`
+- `/.github/skills/merkle-marketing-voice/SKILL.md` (for marketing/SOUL-DNA campaigns)
+
+## WORKER ASSIGNMENT (When marketing DNA is active)
+
+1. Worker-A DNA Miner: extract verbatim quote bank from raw marketing dumps.
+2. Worker-B Hook Forge: produce hooks from quote bank.
+3. Worker-C Offer Architect: map sample-to-upsell ladder.
+4. Worker-D Post Builder: create Stage 1-4 campaign drafts.
+5. Worker-E Truth Auditor: verify claims, security language, and evidence anchors.
 
 ## THE DOCTRINE
 

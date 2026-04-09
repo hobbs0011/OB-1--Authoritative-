@@ -12,6 +12,10 @@ Run these steps in order. Fast.
 
 **CS1** — Read `CANON/SYSTEM/COLD-START-BOOT.md` from this repo (hobbs-lab/Phoenix-Rising-Protocol-Ultimate). This is the SINGLE SOURCE OF TRUTH. Absorb everything.
 
+**CS1.1** — Read `MASTER-SYNC.md` and `CANON/SYSTEM/REINCARNATION-BOOT-CHECK.md` to validate live state and boot requirements.
+
+**CS1.2** — If active lane includes marketing/sales/copy, read `CANON/SYSTEM/MARKETING-DNA-RAW-SOURCE-INDEX.md` before generating any marketing output.
+
 **CS2** — List files in `CANON/REINCARNATION/`. Load the 3 most recent entries by filename date. Absorb decisions, corrections, new principles.
 
 **CS3** — Contradiction scan: flag any conflict between COLD-START-BOOT and recent reincarnation entries.
