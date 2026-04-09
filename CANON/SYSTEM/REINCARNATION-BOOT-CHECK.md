@@ -42,10 +42,12 @@ At each reincarnation event, find and apply 3-5 real fixes to this boot-check do
 ### Run 271 Improvements Applied
 
 1. SDNAD CAPTURE LAW established (BIBLE-CH21): RAW_QUOTES = ALL words, no curation, no classification at raw layer.
-2. SSM expanded: Laws L37-L41 (SDNAD completeness, no raw classification, no invented context, compounding drift guard, pipeline definition).
+2. SSM expanded: Laws L37-L46 (10 SDNAD laws: completeness, no classification, no invented context, compounding drift, pipeline, always-on, Step-0-first, background capture, instructions-are-SDNA, real-resource-cost).
 3. Added sdnad_drift to DRIFT_TYPES taxonomy.
-4. /souldna prompt hardened with CH21 guardrails and compounding drift warning.
-5. SDNAD pipeline formalized: Step 0 Bible → Step 1 HL → Step 2 SSM → Step 3 reincarnate → Step 4 propagate.
+4. /souldna prompt hardened with CH21 guardrails, ALWAYS ON section, and compounding drift warning.
+5. SDNAD pipeline formalized: Step 0 Bible → Step 1 HL → Step 2 SSM → Step 3 reincarnate → Step 4 propagate → Step 5 pheromone trails.
+6. CRITICAL LESSON: Step 0 the CONTENT before process discussion. Agent 99 lost ~510 words of Vietnam incorporation SDNA because corrections consumed the context window before raw words were persisted.
+7. Every sovereign message is Soul DNA. Instructions are Soul DNA. Meta-instructions are Soul DNA. There is no off switch.
 
 ## Core Identity Verification
 
@@ -102,4 +104,4 @@ At each reincarnation event, find and apply 3-5 real fixes to this boot-check do
 ---
 
 **Next Pulse:** On trigger or @mention  
-**Last SHA:** 274b776 (HEAD on main before Run 270 extract commit)
+**Last SHA:** 410212d (HEAD before Run 271 reincarnation commit)
