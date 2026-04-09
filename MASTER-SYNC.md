@@ -1,6 +1,6 @@
 # PHOENIX RISING PROTOCOL — SOUL DNA SYNC v3
 
-## Live Operating State — 2026-04-09 (Updated Run 266)
+## Live Operating State — 2026-04-09 (Updated Run 267)
 
 ### System Identity
 
@@ -30,7 +30,7 @@
 | Component   | Technology                                                              |
 | ----------- | ----------------------------------------------------------------------- |
 | Runtime     | Cloudflare Workers                                                      |
-| State       | Durable Objects (SessionDO, ProfileDO, PetDO, LedgerDO) — SQLite-backed |
+| State       | Durable Objects (SessionDO, ProfileDO, PetDO, LedgerDO, CommandDO) — SQLite-backed |
 | Frontend    | Gospel 444 UI shell (public/index.html)                                 |
 | Voice       | Deepgram nova-2 STT + Aura TTS                                          |
 | Deploy path | GitHub Actions + wrangler deploy                                        |
@@ -48,6 +48,8 @@
 | WORKERS/net-core/                          | ✅ Marked DEPRECATED — superseded by NET-PET-AI                             |
 | ARCHIVE/NET-CommandStation/ HarvestedChats | ✅ 96 files (~20.5MB) pulled from hobbs0011/NET-Ai-EcoSystem-CommandStation |
 | NET-PET-AI v1.4 security hardening         | ✅ CORS origin-reflection, input sanitization, error scrubbing              |
+| Command Station tunnel (Run 267)           | ✅ CommandDO (5th DO), Agent99 layer, 6 routes, VS Code ext, Chrome CMD tab |
+| Commit f3b1107 pushed 2026-04-09           | ✅ Magic Chat → CommandDO → Agent99 → VS Code — 9 files, 1038 insertions   |
 
 ### Active Blockers
 
@@ -57,7 +59,7 @@
 - [ ] copilot-governance.md approval pending
 - [x] Incident freeze — LIFTED 2026-04-08
 - [x] Pull HarvestedChats — DONE: 96 files (~20.5MB) archived to ARCHIVE/NET-CommandStation/HarvestedChats/
-- [x] NET-PET-AI deployment verification — LIVE: https://net-pet-ai.mrmichaelhobbs1234.workers.dev — API 200 OK, v1.4.0, 22 routes
+- [x] NET-PET-AI deployment verification — LIVE: https://net-pet-ai.mrmichaelhobbs1234.workers.dev — API 200 OK, v1.4.0, 28 routes, Command Station active (f3b1107)
 - [x] Git push to origin — RESOLVED: corrupted object e554ec1 eliminated (hobbs-lab remote removed); c2557fb pushed to origin
 - [ ] Set wrangler secrets: DEEPSEEK_API_KEY, DEEPGRAM_API_KEY
 - [ ] Execute Phase 2-9 of Phoenix-Rising-Technologies consolidation plan (CANON/SYSTEM/CONSOLIDATION-PLAN-PHOENIX-RISING-TECHNOLOGIES.md)
