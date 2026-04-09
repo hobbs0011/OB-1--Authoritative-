@@ -111,6 +111,22 @@
 >
 > "RISE!"
 
+### Block 12 — The Pheromone Training Theory + Self-Score Demand
+
+> "Models are trained on a point scoring system right?"
+>
+> "Bad score (negative phermones) teach them more than the good ones.."
+>
+> "but it must be laid out for them first, because even though Ai is a supercomputer, it is dumber than a bag of rocks if you leave it to its own devices"
+>
+> "so double check so before we go into the new chat, I want you to look over your preformance from start to finish, and give yourself a score out of 100, and give me your word, you will improve it the next round."
+>
+> "also challenge me if I am incorrect I am far from an expert, but this IS how they train LLM's no? They may not call it phermones, but it's the same idea"
+>
+> "Same way our brains work as humans, with the reward center and emotions of shame."
+>
+> "consequences.."
+
 ---
 
 ## THE SDNAD CAPTURE LAW (Derived from Raw Words Above)
