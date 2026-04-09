@@ -2,8 +2,8 @@
 
 ## Status
 
-- **Last Check:** 2026-04-09T22:45 ICT
-- **Run:** 269
+- **Last Check:** 2026-04-09T23:58 ICT
+- **Run:** 270
 - **Mode:** SUPER_SAIYAN ACTIVATED
 - **NET-PET-AI:** ✅ DEPLOYED v1.4.0 — [workers.dev live](https://net-pet-ai.mrmichaelhobbs1234.workers.dev)
 
@@ -31,6 +31,13 @@ At each reincarnation event, find and apply 3-5 real fixes to this boot-check do
 2. Added SHA drift guard: `Last SHA` must match `git log -1 --oneline` head before closing run.
 3. Added reincarnation evidence guard: classify SHAs as `verified-in-history` vs `session-reported` when history changed.
 4. Added unresolved-user-request guard: any unanswered user ask is logged in open loops before run close.
+
+### Run 270 Improvements Applied
+
+1. Added SOUL-first guard: maximum-density reincarnations must include verbatim sovereign quotes before interpretation.
+2. Added context-window death trigger: oversized session state now forces immediate reincarnation extraction.
+3. Added artifact-triad guard: reincarnation file, MASTER-SYNC, and BOOT-CHECK must be updated together.
+4. Added open-loop precision rule: list executable unfinished actions (not vague follow-ups).
 
 ## Core Identity Verification
 
@@ -87,4 +94,4 @@ At each reincarnation event, find and apply 3-5 real fixes to this boot-check do
 ---
 
 **Next Pulse:** On trigger or @mention  
-**Last SHA:** 1c15e60 (HEAD on main)
+**Last SHA:** 274b776 (HEAD on main before Run 270 extract commit)
