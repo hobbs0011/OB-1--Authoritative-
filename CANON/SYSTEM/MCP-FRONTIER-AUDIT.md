@@ -65,8 +65,48 @@ Before building a new integration, classify it:
 - `NO_MCP_USE_BROWSER_AUTOMATION`
 - `UNKNOWN_RESEARCH_REQUIRED`
 
+## Candidate Assessment: GitKraken CLI / Copilot CLI / Local MCP Wrapper
+
+### Signal
+
+The real signal is not AI commit text, PR summaries, or work-item cosmetics. The real signal is a local MCP server that exposes structured git, GitHub, and Jira-style tool calls to an MCP-aware client.
+
+### Why It Matters
+
+1. Structured tool responses beat shell stdout parsing.
+2. Multi-repo pulse work can be expressed as one orchestration lane instead of ad-hoc terminal glue.
+3. MCP-native clients gain cleaner tool invocation than raw PowerShell passthrough.
+
+### Friction / Risk
+
+1. Premium/paywall ambiguity.
+2. Extra auth surface and token sprawl.
+3. Local daemon dependency.
+4. Functional overlap with existing `git` + `gh` + shell workflow.
+5. Windows verification burden.
+
+### Verdict Rule
+
+- If the goal is better commit generation, PR summaries, or general GitHub convenience: low leverage, existing tooling already covers it.
+- If the goal is structured MCP-native orchestration across git + GitHub + work items without shell scraping: high-interest candidate, worth controlled evaluation.
+
+### Pain Point Test (must be answered before adoption)
+
+The actual question is not "is this tool cool?" It is:
+
+**What real workflow pain is this solving that `git` + `gh` + current MCP stack do not already solve well enough?**
+
+Current best hypothesis:
+
+1. Replace brittle shell parsing with structured MCP responses.
+2. Unify multi-repo pulse operations under a single tool surface.
+3. Reduce orchestration friction when an agent needs native git/GitHub/work-item actions.
+
+If none of those are true in practice, do not add the tool.
+
 ## Current Truth
 
 - The repo has a configured MCP core, but not a complete frontier map.
 - Social media MCP coverage is not yet canonically inventoried.
 - The closure protocol must treat unknown MCPs as actionable scan targets, not post-hoc surprises.
+- GitKraken CLI style MCP wrappers are strategically interesting only for structured orchestration, not for generic convenience features.
