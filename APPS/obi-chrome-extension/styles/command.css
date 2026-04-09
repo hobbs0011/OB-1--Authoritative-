@@ -1,0 +1,223 @@
+/* Command Station — Gospel 444 Aesthetic */
+/* Void black (#0f0f1a), Purple (#a855f7), Gold (#f59e0b), NO BLUE */
+
+/* ── Command Tab Panel ── */
+.cmd-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 12px;
+  padding: 12px 0;
+}
+
+.cmd-header h2 {
+  margin: 0;
+  font-family: 'Orbitron', monospace;
+  font-size: 1rem;
+  color: #a855f7;
+}
+
+.cmd-header p {
+  margin: 4px 0 0;
+  font-size: 0.75rem;
+  color: #888;
+}
+
+/* ── Input Area ── */
+.cmd-input-area {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+}
+
+.cmd-input-area textarea {
+  flex: 1;
+  background: #1a1a2e;
+  border: 1px solid #2d2d4a;
+  border-radius: 8px;
+  color: #e0e0e0;
+  padding: 10px 12px;
+  font-size: 0.85rem;
+  font-family: 'Inter', sans-serif;
+  resize: none;
+  transition: border-color 0.2s;
+}
+
+.cmd-input-area textarea:focus {
+  border-color: #a855f7;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.2);
+}
+
+.cmd-input-area textarea::placeholder {
+  color: #555;
+}
+
+.cmd-controls {
+  display: flex;
+  gap: 6px;
+}
+
+.cmd-controls button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+}
+
+#cmd-send {
+  background: linear-gradient(135deg, #a855f7, #7c3aed);
+  color: white;
+  font-weight: 600;
+}
+
+#cmd-send:hover:not(:disabled) {
+  background: linear-gradient(135deg, #c084fc, #a855f7);
+  transform: translateY(-1px);
+}
+
+#cmd-send:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+#cmd-mic {
+  background: #1a1a2e;
+  border: 1px solid #2d2d4a;
+  color: #e0e0e0;
+}
+
+#cmd-mic:hover {
+  border-color: #a855f7;
+}
+
+#cmd-mic.recording {
+  background: #a855f7;
+  color: white;
+  animation: pulse-mic 1s ease-in-out infinite;
+}
+
+@keyframes pulse-mic {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+/* ── Status Bar ── */
+#cmd-status {
+  font-size: 0.75rem;
+  color: #a855f7;
+  min-height: 18px;
+  padding: 4px 0;
+}
+
+/* ── Agent 99 Feed ── */
+.cmd-feed {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 0;
+}
+
+.cmd-feed h3 {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #f59e0b;
+  font-family: 'Orbitron', monospace;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+#cmd-history {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-height: 80px;
+  max-height: 200px;
+}
+
+.cmd-msg {
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+.cmd-msg-sent {
+  background: #1a1a2e;
+  border-left: 3px solid #a855f7;
+  color: #e0e0e0;
+}
+
+.cmd-msg-agent99 {
+  background: #1a1a2e;
+  border-left: 3px solid #f59e0b;
+  color: #f59e0b;
+}
+
+.cmd-msg-agent98 {
+  background: #1a1a2e;
+  border-left: 3px solid #ef4444;
+  color: #ef4444;
+}
+
+.cmd-msg-drone {
+  background: #1a1a2e;
+  border-left: 3px solid #22c55e;
+  color: #22c55e;
+}
+
+.cmd-msg-error {
+  background: #2a1a1a;
+  border-left: 3px solid #ef4444;
+  color: #ef4444;
+}
+
+/* ── Queue Display ── */
+.cmd-queue-section h3 {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #f59e0b;
+  font-family: 'Orbitron', monospace;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+#cmd-queue {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.cmd-queue-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  margin-bottom: 4px;
+  background: #1a1a2e;
+  border: 1px solid #2d2d4a;
+}
+
+.cmd-queue-item.cmd-pending { border-left: 3px solid #f59e0b; }
+.cmd-queue-item.cmd-claimed { border-left: 3px solid #a855f7; }
+.cmd-queue-item.cmd-completed { border-left: 3px solid #22c55e; }
+.cmd-queue-item.cmd-failed { border-left: 3px solid #ef4444; }
+
+.cmd-icon { font-size: 0.9rem; }
+.cmd-id { color: #888; font-family: monospace; min-width: 30px; }
+.cmd-intent { flex: 1; color: #e0e0e0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cmd-drone { color: #a855f7; font-size: 0.7rem; font-family: monospace; }
+
+.cmd-empty {
+  color: #555;
+  font-style: italic;
+  text-align: center;
+  padding: 20px;
+  font-size: 0.8rem;
+}
