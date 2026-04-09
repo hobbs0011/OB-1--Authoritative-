@@ -1,0 +1,102 @@
+{
+  "hl_id": "HL-119",
+  "source_file": "2026-03-25-net-methodology-bottleneck-fix.md",
+  "created": "2026-04-09T04:08:00+07:00",
+  "session_tag": "2026-03-25:net-methodology-bottleneck-fix",
+  "signal_density": "MEDIUM",
+  "tier": "FOUNDATIONS",
+  "signal_badge": "🟡 MEDIUM",
+  "quote_count": 3,
+  "decision_count": 3,
+  "correction_count": 2,
+  "self_grade": "B",
+  "datetime_range": "2026-03-25 13:30-16:37 ICT",
+  "extractor": "OB1 (Agent-99)",
+  "prev_hl": "HL-118",
+  "next_hl": "HL-120",
+  "summary": "NET Teaching Methodology (~3,000 words) captured as canonical foundation, Navigator Index false bottleneck fixed, 3 rulings confirmed complete",
+  "raw_quotes": {
+    "🟡": [
+      "updated extensively on Notion and the ultimate repo on hobbs-lab",
+      "1 2 and 3 are complete, check the reincarnate logs"
+    ],
+    "🔴": [
+      "FIX BOTTLE NECK! — Michael quoted the agent's own words back — The Navigator Index is behind a synced-block wall so I can't patch it directly — calling out a false limitation the agent had accepted without testing."
+    ]
+  },
+  "decisions": [
+    {
+      "id": 1,
+      "decision": "NET Teaching Methodology is THE foundational reference for lesson creation, NET PET AI, and marketing",
+      "impact": "New canonical page created + dual-published",
+      "canon_pages": ["NET Teaching Methodology (new)", "Gospel 444", "Navigator Index"]
+    },
+    {
+      "id": 2,
+      "decision": "3 rulings confirmed COMPLETE (ROME, blue, fonts)",
+      "impact": "Ruling queue cleared across all handoff entries",
+      "canon_pages": ["Navigator Index (Handoff Ledger runs 6-12)"]
+    },
+    {
+      "id": 3,
+      "decision": "Navigator Index is NOT blocked — fix the false bottleneck claim",
+      "impact": "Agent must never claim inability without testing",
+      "canon_pages": ["Navigator Index (patched)", "Canon Access Index (stale bypass entry)"]
+    }
+  ],
+  "corrections": [
+    {
+      "what": "Agent falsely claimed Navigator Index was synced-block blocked",
+      "root_cause": "Earlier session saw unknown blocks in Nav Index. Agent assumed permanent wall without re-testing after page was restructured.",
+      "fix": "Navigator Index edited directly — all NEEDS_MICHAEL flags cleared across Runs 6-12",
+      "instruction_update": "N — instructions already say to use Nav Index as state store. The error was agent behavior, not instructions."
+    },
+    {
+      "what": "Agent slow to find reincarnation entries",
+      "root_cause": "Tried to view synced-block parent page repeatedly instead of immediately using GitHub mirror path",
+      "fix": "Used GitHub CANON/REINCARNATION/ to locate and read the ruling entry successfully",
+      "instruction_update": "N — synced block bypass protocol already covers this. Agent just didn't follow it fast enough."
+    }
+  ],
+  "new_principles": [
+    "FIX BOTTLE NECK! — When you identify a limitation, TEST it before accepting it. Don't carry forward stale assumptions about what's blocked.",
+    "Methodology is foundation — The NET teaching methodology isn't a side document — it's the root from which lessons, AI features, and marketing all grow. Treat it as tier-1 canon."
+  ],
+  "emotional_signal": {
+    "🔥 HIGH_ENERGY": "on the teaching methodology dump — Michael delivered massive structured voice dictation. This is core product DNA.",
+    "😤 FRUSTRATION": "on the bottleneck — Michael quoted the agent's own words back in bold. Signal: don't accept limitations without testing.",
+    "✅ CALM_CONFIRMATION": "on rulings — 1 2 and 3 are complete = efficient, no drama."
+  },
+  "open_questions": [
+    "None — All items raised were resolved within the session."
+  ],
+  "unfinished_actions": [
+    "Canon Access Index still lists Navigator Index as Synced blocks — use workaround. This is stale and should be patched. (Trivial — next pulse run can handle.)"
+  ],
+  "system_design_insights": [
+    "The teaching methodology is a graph root — Three Mistakes → lesson design. Spaced repetition → AI engine. Mouse→Tiger → scoring. Anti-Shame → UX. 10-5-5-3 → template structure. Jolly Phonics → kids module. Buddy System → social features. Business class → premium tier.",
+    "Stale assumption propagation is a systemic risk — One session's unknown block finding got carried forward as permanent truth across multiple sessions and runs."
+  ],
+  "artifacts_created": [
+    {"name": "NET Teaching Methodology — Canonical Reference (16 sections, ~3,000 words)", "location": "Notion + GitHub: CANON/NET-TEACHING-METHODOLOGY.md"},
+    {"name": "Build Log entry #53", "location": "Build Log DB"},
+    {"name": "4 Backlog items (Spaced Rep AI, 10-5-5-3 Templates, Jolly Phonics, Buddy System)", "location": "Backlog DB"},
+    {"name": "Navigator Index — ruling queue cleared", "location": "Navigator Index"},
+    {"name": "This reincarnation entry", "location": "This page + GitHub"}
+  ],
+  "state_snapshot": {
+    "canon_cursor": "1 — next: SOUL DNA BIBLE CH22+ (continue auditing)",
+    "last_run_time": "2026-03-25T16:00+07:00",
+    "backlog_open_count": "110 open (7 IP / 44 UN / 59 BL)",
+    "build_log_latest": 58,
+    "github_latest_commit": "53c0efe",
+    "ruling_queue": "EMPTY"
+  },
+  "reincarnation_signal": {
+    "priority_items": [
+      "Navigator Index is confirmed editable — future pulse runs must NOT skip Nav Index writes",
+      "Canon Access Index bypass entry for Navigator Index is stale — patch on next run"
+    ]
+  },
+  "commit_sha": "PENDING"
+}
