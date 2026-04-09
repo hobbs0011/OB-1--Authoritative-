@@ -16,19 +16,19 @@ This document exists because the stack cannot be limited to the MCPs we already 
 
 ## Current Configured MCPs (`.mcp.json`)
 
-| MCP | Status | Lane |
-| --- | --- | --- |
-| cloudflare | configured | deployment/runtime |
-| github | configured | repo/code |
-| notion | configured | docs/control plane |
-| playwright | configured | browser automation |
-| chrome-devtools | configured | browser debugging |
-| slack | configured | team comms |
-| filesystem | configured | workspace access |
-| brave-search | configured | web search |
-| discord | configured | community |
-| roblox | configured | platform |
-| roblox-studio | configured | studio bridge |
+| MCP             | Status     | Lane               |
+| --------------- | ---------- | ------------------ |
+| cloudflare      | configured | deployment/runtime |
+| github          | configured | repo/code          |
+| notion          | configured | docs/control plane |
+| playwright      | configured | browser automation |
+| chrome-devtools | configured | browser debugging  |
+| slack           | configured | team comms         |
+| filesystem      | configured | workspace access   |
+| brave-search    | configured | web search         |
+| discord         | configured | community          |
+| roblox          | configured | platform           |
+| roblox-studio   | configured | studio bridge      |
 
 ## Missing / Not Yet Configured MCP Lanes
 
