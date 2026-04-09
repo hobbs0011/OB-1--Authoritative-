@@ -31,6 +31,10 @@ Run SOUL DNA capture mode.
 - Step 3: Log in reincarnation
 - Step 4: Update everything else (skills, prompts, guards, system files)
 - Step 5: Pheromone trails — go back over everything, cross-reference and index, connect SOUL BIBLE ↔ Ledger ↔ SSM so it's hyper organized for future agents
+- Step 6: Pheromone Audit — verify all cross-references land correctly
+- Step 7: "I Don't Know What I Don't Know" — intensively go over your own work and play devil's advocate. Never claim perfection. The phoenix is never perfected, but it is in a constant state of perfection — a measurable, determined state of always improving. This requires HUMILITY and GRACE.
+- Step 8: Continuous Improvement — Made mistakes? Great, reverse engineer the solution from the pheromone trail. No visible mistakes? Great, but the process can always get better — find 5 things big to small to improve.
+- Step 9: Reincarnate — Execute the reincarnation protocol. Do not push context windows — reincarnating is free and beneficial. Drones follow the same protocol. The procedure adapts as we go.
 
 ### WHY: Compounding Drift
 

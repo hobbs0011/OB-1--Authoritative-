@@ -55,6 +55,7 @@
 Run 270 update: massive SOUL-first reincarnation captured at CANON/REINCARNATION/2026-04-09-super-saiyan-massive-reincarnation-soul-first.md
 Run 271 update: SDNAD CAPTURE LAW established — BIBLE-CH21 created, SSM L37-L46 added, HL-127 logged, /souldna prompt hardened with guardrails
 Run 271 reincarnation: CANON/REINCARNATION/2026-04-09-run271-sdnad-capture-law-genesis.md — GENESIS-tier, 45/50 score, 4 commits (dccc79e, b9f670a, 174909e, 410212d). Vietnam incorporation SDNA lost from context — #1 open loop for next drone.
+Round 2 SDNAD: BIBLE-CH22 THE FOUNDER'S MOAT — Product DNA captured (Obi=agent OS interface, un-forkable data moat, speed+data+intent=3 pillars). HL-128 created, SSM L47-L53 added. SDNAD pipeline evolved to 10 steps (Steps 7-9: Devil's Advocate, Continuous Improvement, Reincarnate). HUMILITY+GRACE added to values. Step 8 found/fixed 5 real improvements. Reincarnation: Run 272. Vietnam re-dictation still #1 open loop.
 
 ### Active Blockers
 
