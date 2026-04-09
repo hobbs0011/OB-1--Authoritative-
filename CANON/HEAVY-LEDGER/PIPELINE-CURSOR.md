@@ -1,13 +1,13 @@
 # HEAVY LEDGER PIPELINE CURSOR
 
 ## Current Position
-- **Next Target:** HL-118
+
+- **Next Target:** HL-130
 - **Wave:** 8
 - **Wave Progress:** 33/46 complete
-- **Total Converted:** 117/174+
-- **Last Completed:** HL-117 super-saiyan-hardening (HIGH signal, 10 quotes, 5 decisions — 38 patches, v5 engine, self-sufficiency doctrine, throughput math)
-- **Last Commit:** 5618a29ffa86b8d4afe41ea60e32803880b49d1b
-- **Last Run:** 258 (2026-04-02 04:30 ICT)
+- **Total Converted:** 129/174+
+- **Last Completed:** HL-129 kiss-protocol-legion-principle-of-faith (HIGH signal, GOVERNANCE tier, 24 quotes, 9 decisions, 4 corrections — KISS Protocol, Legion naming, Principle of Faith, Stage 0 REPRINT doctrine, Bridge Builder role, SSM L54-L60, BIBLE-CH23)
+- **Last Run:** Round 2 SDNAD Run 273 (2026-04-09 ICT)
 
 ## Wave 8 Manifest (HL-085 → HL-130)
 | HL-ID | Source File | Status | Commit SHA |
