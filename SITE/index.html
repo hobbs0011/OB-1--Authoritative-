@@ -23,17 +23,13 @@
   <meta name="twitter:title" content="Natural English Training — Speak English Like You Mean It">
   <meta name="twitter:description" content="AI-powered English training built specifically for Vietnamese speakers. Real conversations. Real confidence. Real results.">
 
-  <!-- Theme -->
-  <meta name="theme-color" content="#0f0f1a">
-  <meta name="color-scheme" content="dark">
-
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐯</text></svg>">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
@@ -66,1842 +62,470 @@
   <link rel="stylesheet" href="/css/obi-widget.css">
 
   <style>
-    /* ============================================
-       RESET & CUSTOM PROPERTIES
-       100-point GitHub-inspired redesign
-       Gospel 444 aesthetic: void, purple, gold
-       ============================================ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      /* Core palette — Gospel 444 */
-      --void: #0d1117;
-      --void-light: #161b22;
-      --void-lighter: #21262d;
-      --void-border: #30363d;
-
-      --purple: #a855f7;
-      --purple-light: #c084fc;
-      --purple-dim: rgba(168,85,247,0.15);
-      --purple-glow: rgba(168,85,247,0.4);
-
-      --gold: #f59e0b;
-      --gold-light: #fbbf24;
-      --gold-dim: rgba(245,158,11,0.12);
-      --gold-glow: rgba(245,158,11,0.4);
-
-      --white: #f0f6fc;
-      --gray-100: #c9d1d9;
-      --gray-200: #8b949e;
-      --gray-300: #6e7681;
-      --gray-400: #484f58;
-
-      --success: #3fb950;
-      --danger: #f85149;
-
-      /* Typography */
-      --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-
-      /* Spacing */
-      --space-xs: 0.25rem;
-      --space-sm: 0.5rem;
-      --space-md: 1rem;
-      --space-lg: 1.5rem;
-      --space-xl: 2rem;
-      --space-2xl: 3rem;
-      --space-3xl: 4rem;
-      --space-4xl: 6rem;
-      --space-5xl: 8rem;
-
-      /* Transitions */
-      --ease: cubic-bezier(0.16, 1, 0.3, 1);
-      --duration: 0.3s;
-
-      /* Borders */
-      --radius-sm: 6px;
-      --radius-md: 12px;
-      --radius-lg: 16px;
-      --radius-xl: 24px;
-      --radius-full: 9999px;
+      --primary: #1e40af;
+      --primary-light: #3b82f6;
+      --accent: #f59e0b;
+      --accent-hover: #d97706;
+      --dark: #0f172a;
+      --gray-900: #1e293b;
+      --gray-700: #334155;
+      --gray-500: #64748b;
+      --gray-300: #cbd5e1;
+      --gray-100: #f1f5f9;
+      --white: #ffffff;
+      --tiger-orange: #ea580c;
+      --tiger-bg: #fff7ed;
+      --success: #16a34a;
     }
-
     html { scroll-behavior: smooth; }
-
     body {
-      font-family: var(--font);
-      background: var(--void);
-      color: var(--gray-100);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--dark);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      overflow-x: hidden;
     }
-
-    /* Skip link — accessibility */
-    .skip-link {
-      position: absolute; left: -9999px; top: auto;
-      width: 1px; height: 1px; overflow: hidden;
-      z-index: 10000;
-      padding: 1rem 2rem;
-      background: var(--gold);
-      color: var(--void);
-      font-weight: 700;
-      text-decoration: none;
-      border-radius: var(--radius-md);
-    }
-    .skip-link:focus {
-      position: fixed; left: 1rem; top: 1rem;
-      width: auto; height: auto;
-    }
-
-    /* ============================================
-       BACKGROUND EFFECTS
-       ============================================ */
-    .bg-glow {
-      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-      pointer-events: none; z-index: 0;
-      background:
-        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(168,85,247,0.15), transparent),
-        radial-gradient(ellipse 60% 40% at 100% 0%, rgba(245,158,11,0.08), transparent);
-    }
-
-    /* ============================================
-       NAVIGATION
-       ============================================ */
-    .nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-      padding: 1rem 0;
-      background: rgba(13,17,23,0.8);
-      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid transparent;
-      transition: border-color var(--duration), background var(--duration);
-    }
-    .nav.scrolled {
-      border-bottom-color: var(--void-border);
-      background: rgba(13,17,23,0.95);
-    }
-    .nav-inner {
-      max-width: 1280px; margin: 0 auto;
-      padding: 0 var(--space-xl);
+    /* NAV */
+    nav {
+      position: fixed; top: 0; width: 100%;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--gray-100);
+      z-index: 100; padding: 1rem 2rem;
       display: flex; justify-content: space-between; align-items: center;
     }
-    .nav-logo {
-      font-size: 1.25rem; font-weight: 800;
-      text-decoration: none;
-      background: linear-gradient(135deg, var(--purple), var(--gold));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-      transition: opacity var(--duration);
+    .logo { font-weight: 800; font-size: 1.25rem; color: var(--primary); text-decoration: none; }
+    .logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 2rem; align-items: center; }
+    .nav-links a { text-decoration: none; color: var(--gray-700); font-weight: 500; font-size: 0.9rem; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--primary); }
+    .btn {
+      display: inline-block; padding: 0.75rem 1.5rem; border-radius: 8px;
+      font-weight: 600; font-size: 0.95rem; text-decoration: none;
+      transition: all 0.2s; cursor: pointer; border: none;
     }
-    .nav-logo:hover { opacity: 0.8; }
+    .btn-primary { background: var(--accent); color: var(--dark); }
+    .btn-primary:hover { background: var(--accent-hover); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(245,158,11,0.4); }
+    .btn-outline { background: transparent; color: var(--primary); border: 2px solid var(--primary); }
+    .btn-outline:hover { background: var(--primary); color: var(--white); }
 
-    .nav-links {
-      display: flex; gap: var(--space-xl); align-items: center;
-      list-style: none;
-    }
-    .nav-links a {
-      font-size: 0.875rem; font-weight: 500;
-      color: var(--gray-200); text-decoration: none;
-      transition: color var(--duration);
-      position: relative;
-    }
-    .nav-links a:hover { color: var(--white); }
-    .nav-links a::after {
-      content: ''; position: absolute; bottom: -4px; left: 0;
-      width: 0; height: 2px;
-      background: linear-gradient(90deg, var(--purple), var(--gold));
-      transition: width var(--duration) var(--ease);
-    }
-    .nav-links a:hover::after { width: 100%; }
-
-    .nav-cta {
-      font-size: 0.875rem; font-weight: 600;
-      padding: 0.5rem 1.25rem;
-      background: var(--purple);
-      color: var(--white);
-      border: none; border-radius: var(--radius-sm);
-      cursor: pointer; text-decoration: none;
-      transition: all var(--duration);
-    }
-    .nav-cta:hover {
-      background: var(--purple-light);
-      box-shadow: 0 0 20px var(--purple-glow);
-    }
-
-    .nav-mobile-toggle {
-      display: none;
-      background: none; border: none;
-      color: var(--white); cursor: pointer;
-      padding: 0.5rem;
-      font-size: 1.5rem;
-      line-height: 1;
-    }
-
-    /* Mobile nav overlay */
-    .nav-mobile {
-      display: none;
-      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(13,17,23,0.98);
-      backdrop-filter: blur(20px);
-      z-index: 999;
-      flex-direction: column;
-      align-items: center; justify-content: center;
-      gap: var(--space-xl);
-      opacity: 0;
-      transition: opacity var(--duration);
-    }
-    .nav-mobile.active {
-      display: flex;
-      opacity: 1;
-    }
-    .nav-mobile a {
-      font-size: 1.5rem; font-weight: 600;
-      color: var(--gray-100);
-      text-decoration: none;
-      transition: color var(--duration);
-    }
-    .nav-mobile a:hover { color: var(--gold); }
-    .nav-mobile-close {
-      position: absolute; top: 1.25rem; right: 1.5rem;
-      background: none; border: none;
-      color: var(--gray-200); font-size: 2rem;
-      cursor: pointer;
-    }
-
-    /* ============================================
-       LAYOUT
-       ============================================ */
-    .container {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 var(--space-xl);
-    }
-    .container-narrow { max-width: 900px; margin: 0 auto; padding: 0 var(--space-xl); }
-
-    main { position: relative; z-index: 1; }
-
-    /* ============================================
-       HERO SECTION
-       ============================================ */
+    /* HERO */
     .hero {
-      position: relative;
-      min-height: 100vh;
-      display: flex; align-items: center;
-      padding: 8rem 0 6rem;
-      overflow: hidden;
+      padding: 8rem 2rem 5rem; text-align: center;
+      background: linear-gradient(135deg, #eff6ff 0%, #fff7ed 50%, #f0fdf4 100%);
+      min-height: 90vh; display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
     }
-
-    /* Animated gradient mesh */
-    .hero-bg {
-      position: absolute; inset: 0; z-index: 0;
-      overflow: hidden;
-    }
-    .hero-bg::before {
-      content: '';
-      position: absolute;
-      width: 150%; height: 150%;
-      top: -25%; left: -25%;
-      background:
-        radial-gradient(ellipse at 20% 50%, rgba(168,85,247,0.2), transparent 50%),
-        radial-gradient(ellipse at 80% 20%, rgba(245,158,11,0.12), transparent 50%),
-        radial-gradient(ellipse at 40% 80%, rgba(168,85,247,0.1), transparent 50%);
-      animation: hero-glow 15s ease-in-out infinite alternate;
-    }
-    @keyframes hero-glow {
-      0% { transform: translate(0, 0) scale(1); }
-      50% { transform: translate(-3%, 2%) scale(1.05); }
-      100% { transform: translate(2%, -1%) scale(1); }
-    }
-
-    /* Grid lines (GitHub-style) */
-    .hero-grid {
-      position: absolute; inset: 0; z-index: 0;
-      background-image:
-        linear-gradient(rgba(168,85,247,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(168,85,247,0.03) 1px, transparent 1px);
-      background-size: 60px 60px;
-      mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
-      -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
-    }
-
-    .hero-content {
-      position: relative; z-index: 1;
-      text-align: center;
-      max-width: 960px;
-      margin: 0 auto;
-    }
-
     .hero-badge {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      padding: 0.4rem 1rem;
-      border: 1px solid var(--void-border);
-      border-radius: var(--radius-full);
-      font-size: 0.8rem; font-weight: 500;
-      color: var(--gray-200);
-      margin-bottom: var(--space-xl);
-      background: rgba(22,27,34,0.8);
-      animation: fade-up 0.8s var(--ease) both;
+      display: inline-block; background: var(--white); border: 1px solid var(--gray-300);
+      padding: 0.4rem 1rem; border-radius: 50px; font-size: 0.85rem;
+      color: var(--gray-700); margin-bottom: 2rem; font-weight: 500;
     }
-    .hero-badge .badge-dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--success);
-      animation: pulse-dot 2s infinite;
-    }
-    @keyframes pulse-dot {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
-    }
-
     .hero h1 {
-      font-size: clamp(2.75rem, 7vw, 5rem);
-      font-weight: 900;
-      line-height: 1.05;
-      letter-spacing: -0.03em;
-      margin-bottom: var(--space-lg);
-      animation: fade-up 0.8s var(--ease) 0.1s both;
+      font-size: clamp(2.5rem, 6vw, 4.2rem); font-weight: 800;
+      line-height: 1.1; max-width: 820px; margin-bottom: 1.5rem;
     }
     .hero h1 .highlight {
-      background: linear-gradient(135deg, var(--purple-light), var(--gold-light));
+      background: linear-gradient(135deg, var(--tiger-orange), var(--accent));
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
-
-    .hero-sub {
-      font-size: clamp(1.05rem, 2vw, 1.3rem);
-      color: var(--gray-200);
-      max-width: 640px;
-      margin: 0 auto var(--space-2xl);
-      line-height: 1.7;
-      animation: fade-up 0.8s var(--ease) 0.2s both;
-    }
-
-    .hero-cta {
-      display: flex; gap: var(--space-md);
-      justify-content: center; flex-wrap: wrap;
-      margin-bottom: var(--space-3xl);
-      animation: fade-up 0.8s var(--ease) 0.3s both;
-    }
-
+    .hero p { font-size: 1.2rem; color: var(--gray-700); max-width: 640px; margin-bottom: 2.5rem; line-height: 1.7; }
+    .hero-cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
     .hero-quote {
-      font-style: italic;
-      color: var(--gray-300);
-      font-size: 0.9rem;
-      max-width: 520px;
-      margin: 0 auto;
-      padding-top: var(--space-2xl);
-      border-top: 1px solid var(--void-border);
-      animation: fade-up 0.8s var(--ease) 0.5s both;
+      margin-top: 3rem; font-style: italic; color: var(--gray-500);
+      font-size: 0.95rem; max-width: 500px;
     }
 
-    /* Scroll indicator */
-    .scroll-indicator {
-      position: absolute; bottom: 2rem;
-      left: 50%; transform: translateX(-50%);
-      animation: scroll-bounce 2s infinite, fade-up 0.8s var(--ease) 0.6s both;
-    }
-    .scroll-indicator span {
-      display: block; width: 24px; height: 40px;
-      border: 2px solid var(--gray-400);
-      border-radius: 12px;
-      position: relative;
-    }
-    .scroll-indicator span::after {
-      content: '';
-      position: absolute; top: 6px; left: 50%;
-      width: 4px; height: 8px;
-      background: var(--purple);
-      border-radius: 2px;
-      transform: translateX(-50%);
-      animation: scroll-dot 2s infinite;
-    }
-    @keyframes scroll-bounce {
-      0%, 100% { transform: translateX(-50%) translateY(0); }
-      50% { transform: translateX(-50%) translateY(8px); }
-    }
-    @keyframes scroll-dot {
-      0% { opacity: 1; top: 6px; }
-      100% { opacity: 0; top: 20px; }
-    }
+    /* SECTIONS */
+    .section { padding: 6rem 2rem; max-width: 1100px; margin: 0 auto; }
+    .section-label { text-transform: uppercase; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; color: var(--tiger-orange); margin-bottom: 0.75rem; }
+    .section h2 { font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; }
+    .section .subtitle { font-size: 1.1rem; color: var(--gray-500); max-width: 650px; margin-bottom: 3rem; line-height: 1.7; }
 
-    /* ============================================
-       BUTTONS
-       ============================================ */
-    .btn {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      padding: 0.85rem 1.75rem;
-      border-radius: var(--radius-md);
-      font-family: var(--font);
-      font-size: 1rem; font-weight: 600;
-      text-decoration: none;
-      cursor: pointer; border: none;
-      transition: all var(--duration) var(--ease);
-    }
-    .btn-primary {
-      background: linear-gradient(135deg, var(--purple), #9333ea);
-      color: var(--white);
-      box-shadow: 0 0 0 0 transparent, 0 4px 20px rgba(168,85,247,0.3);
-    }
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 0 30px var(--purple-glow), 0 8px 30px rgba(168,85,247,0.4);
-    }
-    .btn-secondary {
-      background: transparent;
-      color: var(--gray-100);
-      border: 1px solid var(--void-border);
-    }
-    .btn-secondary:hover {
-      border-color: var(--gray-400);
-      background: var(--void-light);
-      transform: translateY(-2px);
-    }
-    .btn-gold {
-      background: linear-gradient(135deg, var(--gold), var(--gold-light));
-      color: var(--void);
-      box-shadow: 0 4px 20px rgba(245,158,11,0.3);
-    }
-    .btn-gold:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 0 30px var(--gold-glow), 0 8px 30px rgba(245,158,11,0.4);
-    }
-    .btn-lg {
-      padding: 1rem 2.5rem;
-      font-size: 1.1rem;
-    }
-
-    /* ============================================
-       SECTION UTILITIES
-       ============================================ */
-    .section {
-      padding: var(--space-5xl) 0;
-      position: relative;
-    }
-    .section-alt {
-      background: var(--void-light);
-    }
-    .section-header {
-      text-align: center;
-      margin-bottom: var(--space-4xl);
-    }
-    .section-label {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      font-size: 0.8rem; font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--purple);
-      margin-bottom: var(--space-md);
-    }
-    .section-label::before,
-    .section-label::after {
-      content: ''; width: 24px; height: 1px;
-      background: linear-gradient(90deg, transparent, var(--purple));
-    }
-    .section-label::after {
-      background: linear-gradient(90deg, var(--purple), transparent);
-    }
-    .section-title {
-      font-size: clamp(2rem, 4.5vw, 3.25rem);
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      line-height: 1.15;
-      margin-bottom: var(--space-md);
-      color: var(--white);
-    }
-    .section-subtitle {
-      font-size: 1.1rem;
-      color: var(--gray-200);
-      max-width: 640px;
-      margin: 0 auto;
-      line-height: 1.7;
-    }
-
-    .gradient-text {
-      background: linear-gradient(135deg, var(--purple-light), var(--gold));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-    }
-
-    /* Gradient dividers */
-    .divider {
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--void-border), transparent);
-      border: none;
-      max-width: 1280px;
-      margin: 0 auto;
-    }
-
-    /* ============================================
-       SCROLL ANIMATIONS
-       ============================================ */
-    @keyframes fade-up {
-      from { opacity: 0; transform: translateY(24px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(32px);
-      transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .reveal-delay-1 { transition-delay: 0.1s; }
-    .reveal-delay-2 { transition-delay: 0.2s; }
-    .reveal-delay-3 { transition-delay: 0.3s; }
-    .reveal-delay-4 { transition-delay: 0.4s; }
-    .reveal-delay-5 { transition-delay: 0.5s; }
-
-    /* ============================================
-       PROBLEM SECTION
-       ============================================ */
-    .problem-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: var(--space-lg);
-    }
+    /* PROBLEM SECTION */
+    .problem-section { background: var(--gray-100); padding: 5rem 2rem; }
+    .problem-inner { max-width: 900px; margin: 0 auto; }
+    .problem-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
     .problem-card {
-      padding: var(--space-xl);
-      border-radius: var(--radius-lg);
-      background: rgba(248,81,73,0.04);
-      border: 1px solid rgba(248,81,73,0.15);
-      border-left: 3px solid var(--danger);
-      transition: all var(--duration);
+      padding: 1.5rem; border-radius: 12px; background: var(--white);
+      border-left: 4px solid #dc2626;
     }
-    .problem-card:hover {
-      border-color: rgba(248,81,73,0.3);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(248,81,73,0.06);
-    }
-    .problem-card h4 {
-      font-size: 1rem; font-weight: 700;
-      color: var(--danger);
-      margin-bottom: var(--space-sm);
-    }
-    .problem-card p {
-      color: var(--gray-200);
-      font-size: 0.9rem;
-      line-height: 1.65;
-    }
+    .problem-card h4 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; color: #dc2626; }
+    .problem-card p { color: var(--gray-700); font-size: 0.9rem; line-height: 1.6; }
 
-    /* ============================================
-       METHOD / PILLARS
-       ============================================ */
-    .pillars-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: var(--space-lg);
-    }
+    /* PILLARS */
+    .pillars-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 2rem; }
     .pillar-card {
-      padding: var(--space-2xl);
-      border-radius: var(--radius-lg);
-      background: var(--void-light);
-      border: 1px solid var(--void-border);
-      transition: all var(--duration) var(--ease);
-      position: relative;
+      padding: 2rem; border-radius: 16px; border: 1px solid var(--gray-100);
+      background: var(--white); transition: all 0.3s; position: relative;
       overflow: hidden;
     }
-    .pillar-card::before {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--purple), var(--gold));
-      opacity: 0;
-      transition: opacity var(--duration);
-    }
-    .pillar-card:hover {
-      border-color: var(--purple-dim);
-      transform: translateY(-4px);
-      box-shadow: 0 16px 48px rgba(0,0,0,0.3);
-    }
-    .pillar-card:hover::before { opacity: 1; }
-
+    .pillar-card:hover { border-color: var(--accent); box-shadow: 0 8px 30px rgba(0,0,0,0.08); transform: translateY(-2px); }
     .pillar-number {
       display: inline-flex; align-items: center; justify-content: center;
-      width: 40px; height: 40px;
-      border-radius: var(--radius-md);
-      background: var(--purple-dim);
-      color: var(--purple);
-      font-weight: 800; font-size: 1rem;
-      margin-bottom: var(--space-lg);
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--tiger-bg); color: var(--tiger-orange);
+      font-weight: 800; font-size: 0.9rem; margin-bottom: 1rem;
     }
-    .pillar-card h3 {
-      font-size: 1.25rem; font-weight: 700;
-      color: var(--white);
-      margin-bottom: var(--space-sm);
+    .pillar-card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .pillar-card p { color: var(--gray-500); font-size: 0.9rem; line-height: 1.6; }
+    .pillar-card .pillar-proof {
+      margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--gray-100);
+      font-size: 0.8rem; color: var(--gray-500); font-style: italic;
     }
-    .pillar-card p {
-      color: var(--gray-200);
-      font-size: 0.95rem;
-      line-height: 1.65;
-    }
-    .pillar-proof {
-      margin-top: var(--space-lg);
-      padding-top: var(--space-md);
-      border-top: 1px solid var(--void-border);
-      font-size: 0.85rem;
-      color: var(--gray-300);
-      font-style: italic;
-    }
-    .pillar-proof strong {
-      color: var(--success);
-      font-style: normal;
-    }
+    .pillar-card .pillar-proof strong { color: var(--success); font-style: normal; }
 
-    /* ============================================
-       STORIES / TESTIMONIALS
-       ============================================ */
-    .stories-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: var(--space-lg);
-    }
+    /* STORIES */
+    .stories-section { background: var(--dark); color: var(--white); padding: 6rem 2rem; }
+    .stories-inner { max-width: 1100px; margin: 0 auto; }
+    .stories-section .section-label { color: var(--accent); }
+    .stories-section h2 { color: var(--white); }
+    .stories-section .subtitle { color: var(--gray-300); }
+    .stories-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem; }
     .story-card {
-      padding: var(--space-2xl);
-      border-radius: var(--radius-lg);
-      background: var(--void-lighter);
-      border: 1px solid var(--void-border);
-      transition: all var(--duration) var(--ease);
-    }
-    .story-card:hover {
-      border-color: var(--gold-dim);
-      transform: translateY(-3px);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+      padding: 2rem; border-radius: 16px;
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
     }
     .story-tag {
-      display: inline-block;
-      padding: 0.2rem 0.75rem;
-      border-radius: var(--radius-full);
-      font-size: 0.75rem; font-weight: 600;
-      margin-bottom: var(--space-md);
+      display: inline-block; padding: 0.25rem 0.75rem; border-radius: 50px;
+      font-size: 0.75rem; font-weight: 600; margin-bottom: 1rem;
     }
-    .tag-mouse { background: rgba(248,81,73,0.15); color: #fca5a5; }
-    .tag-tiger { background: rgba(245,158,11,0.15); color: var(--gold-light); }
-    .story-card h4 {
-      font-size: 1.1rem; font-weight: 700;
-      color: var(--white);
-      margin-bottom: var(--space-sm);
-    }
-    .story-before {
-      color: var(--gray-200);
-      font-size: 0.9rem;
-      line-height: 1.65;
-      margin-bottom: var(--space-sm);
-    }
-    .story-after {
-      color: var(--gold);
-      font-size: 0.95rem;
-      font-weight: 500;
-      line-height: 1.6;
-    }
-    .story-time {
-      margin-top: var(--space-md);
-      font-size: 0.8rem;
-      color: var(--gray-300);
-    }
+    .tag-mouse { background: rgba(239,68,68,0.2); color: #fca5a5; }
+    .tag-tiger { background: rgba(234,88,12,0.2); color: #fdba74; }
+    .story-card h4 { font-size: 1.1rem; margin-bottom: 0.75rem; }
+    .story-card .story-before { color: var(--gray-300); font-size: 0.9rem; margin-bottom: 0.75rem; }
+    .story-card .story-after { color: var(--accent); font-size: 0.95rem; font-weight: 500; }
+    .story-card .story-time { margin-top: 1rem; font-size: 0.8rem; color: var(--gray-500); }
 
-    /* ============================================
-       OBI SECTION
-       ============================================ */
-    .obi-section {
-      position: relative;
-      overflow: hidden;
+    /* OBI SECTION */
+    .obi-section { padding: 6rem 2rem; background: linear-gradient(135deg, #fff7ed 0%, #eff6ff 100%); }
+    .obi-inner { max-width: 1000px; margin: 0 auto; text-align: center; }
+    .obi-features { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 3rem; text-align: left; }
+    .obi-feature {
+      padding: 1.5rem; border-radius: 12px; background: var(--white);
+      border: 1px solid var(--gray-100);
     }
-    .obi-section::before {
-      content: '';
-      position: absolute; inset: 0;
-      background:
-        radial-gradient(ellipse at 30% 50%, rgba(168,85,247,0.08), transparent 60%),
-        radial-gradient(ellipse at 70% 50%, rgba(245,158,11,0.05), transparent 60%);
-      pointer-events: none;
-    }
-    .obi-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: var(--space-4xl);
-      align-items: center;
-    }
-    .obi-preview {
-      position: relative;
-      border-radius: var(--radius-xl);
-      background: var(--void-light);
-      border: 1px solid var(--void-border);
-      padding: var(--space-xl);
-      overflow: hidden;
-    }
-    .obi-preview::before {
-      content: '';
-      position: absolute; inset: -1px;
-      border-radius: var(--radius-xl);
-      padding: 1px;
-      background: linear-gradient(135deg, var(--purple-dim), transparent 40%, transparent 60%, rgba(245,158,11,0.15));
-      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      mask-composite: exclude;
-      -webkit-mask-composite: xor;
-      pointer-events: none;
-    }
-    .obi-chat-window {
-      background: var(--void);
-      border-radius: var(--radius-md);
-      padding: var(--space-lg);
-    }
-    .chat-msg {
-      margin-bottom: var(--space-md);
-      padding: 0.75rem 1rem;
-      border-radius: var(--radius-md);
-      font-size: 0.9rem;
-      line-height: 1.6;
-      max-width: 90%;
-    }
-    .chat-user {
-      background: var(--purple-dim);
-      border: 1px solid rgba(168,85,247,0.2);
-      margin-left: auto;
-    }
-    .chat-ai {
-      background: var(--void-lighter);
-      border: 1px solid var(--void-border);
-    }
-    .chat-label {
-      font-size: 0.7rem; font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 0.25rem;
-      display: block;
-    }
-    .chat-label-user { color: var(--purple); }
-    .chat-label-ai { color: var(--gold); }
+    .obi-feature h4 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .obi-feature p { color: var(--gray-500); font-size: 0.9rem; line-height: 1.6; }
 
-    .obi-info { position: relative; z-index: 1; }
-    .obi-info h2 {
-      font-size: clamp(1.75rem, 3.5vw, 2.75rem);
-      font-weight: 800;
-      color: var(--white);
-      margin-bottom: var(--space-lg);
-      letter-spacing: -0.02em;
-    }
-    .obi-info > p {
-      color: var(--gray-200);
-      font-size: 1.05rem;
-      line-height: 1.75;
-      margin-bottom: var(--space-lg);
-    }
-    .obi-info .quote-line {
-      color: var(--gray-300);
-      font-style: italic;
-      font-size: 0.95rem;
-      margin-bottom: var(--space-2xl);
-    }
-    .obi-features-list {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: var(--space-lg);
-      margin-bottom: var(--space-2xl);
-    }
-    .obi-feat {
-      padding: var(--space-lg);
-      border-radius: var(--radius-md);
-      background: rgba(22,27,34,0.6);
-      border: 1px solid var(--void-border);
-    }
-    .obi-feat h4 {
-      font-size: 0.95rem; font-weight: 700;
-      color: var(--white);
-      margin-bottom: 0.25rem;
-    }
-    .obi-feat p {
-      font-size: 0.85rem;
-      color: var(--gray-200);
-      line-height: 1.55;
-    }
-
-    /* ============================================
-       PRICING
-       ============================================ */
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: var(--space-lg);
-    }
+    /* PRICING */
+    .pricing-section { padding: 6rem 2rem; max-width: 900px; margin: 0 auto; text-align: center; }
+    .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
     .pricing-card {
-      padding: var(--space-2xl);
-      border-radius: var(--radius-lg);
-      background: var(--void-light);
-      border: 1px solid var(--void-border);
-      transition: all var(--duration) var(--ease);
-      text-align: center;
-      position: relative;
+      padding: 2rem; border-radius: 16px; border: 2px solid var(--gray-100);
+      background: var(--white); transition: all 0.3s;
     }
-    .pricing-card.featured {
-      border-color: var(--gold-dim);
-      background: linear-gradient(180deg, rgba(245,158,11,0.05), var(--void-light));
-    }
-    .pricing-card.featured::before {
-      content: 'MOST POPULAR';
-      position: absolute;
-      top: -12px; left: 50%; transform: translateX(-50%);
-      padding: 0.25rem 1rem;
-      background: var(--gold);
-      color: var(--void);
-      font-size: 0.65rem; font-weight: 800;
-      letter-spacing: 0.1em;
-      border-radius: var(--radius-full);
-    }
-    .pricing-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 16px 48px rgba(0,0,0,0.2);
-    }
-    .tier-icon { font-size: 2.5rem; margin-bottom: var(--space-md); }
-    .pricing-card h3 {
-      font-size: 1.25rem; font-weight: 700;
-      color: var(--white);
-      margin-bottom: 0.25rem;
-    }
-    .tier-desc {
-      color: var(--gray-300);
-      font-size: 0.85rem;
-      margin-bottom: var(--space-lg);
-    }
-    .price {
-      font-size: 2rem; font-weight: 800;
-      color: var(--white);
-    }
-    .price-unit {
-      font-size: 0.85rem; font-weight: 400;
-      color: var(--gray-300);
-    }
-    .includes {
-      list-style: none;
-      margin-top: var(--space-xl);
-      text-align: left;
-    }
-    .includes li {
-      padding: 0.5rem 0;
-      font-size: 0.9rem;
-      color: var(--gray-200);
-      display: flex; align-items: center; gap: 0.5rem;
-    }
-    .includes li::before {
-      content: '✓';
-      color: var(--success);
-      font-weight: 700;
-      font-size: 0.85rem;
-      flex-shrink: 0;
-    }
-    .pricing-note {
-      margin-top: var(--space-2xl);
-      font-size: 0.9rem;
-      color: var(--gray-300);
-      font-style: italic;
-      text-align: center;
-    }
+    .pricing-card.featured { border-color: var(--accent); }
+    .pricing-card .tier-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+    .pricing-card h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.25rem; }
+    .pricing-card .tier-desc { color: var(--gray-500); font-size: 0.85rem; margin-bottom: 1rem; }
+    .pricing-card .price { font-size: 1.5rem; font-weight: 800; color: var(--dark); }
+    .pricing-card .price-unit { font-size: 0.85rem; color: var(--gray-500); font-weight: 400; }
+    .pricing-card .includes { list-style: none; margin-top: 1.5rem; text-align: left; }
+    .pricing-card .includes li { padding: 0.4rem 0; font-size: 0.9rem; color: var(--gray-700); }
+    .pricing-card .includes li::before { content: "✓ "; color: var(--success); font-weight: 700; }
 
-    /* ============================================
-       FAQ SECTION
-       ============================================ */
-    .faq-list {
-      max-width: 720px;
-      margin: 0 auto;
-    }
-    .faq-item {
-      border-bottom: 1px solid var(--void-border);
-    }
-    .faq-question {
-      width: 100%;
-      background: none; border: none;
-      padding: var(--space-lg) 0;
-      font-family: var(--font);
-      font-size: 1.05rem;
-      font-weight: 600;
-      color: var(--white);
-      text-align: left;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: var(--space-md);
-      transition: color var(--duration);
-    }
-    .faq-question:hover { color: var(--gold); }
-    .faq-icon {
-      font-size: 1.25rem;
-      color: var(--gray-400);
-      transition: transform var(--duration) var(--ease);
-      flex-shrink: 0;
-    }
-    .faq-item.active .faq-icon {
-      transform: rotate(45deg);
-      color: var(--purple);
-    }
-    .faq-answer {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.4s var(--ease), padding 0.4s;
-      color: var(--gray-200);
-      font-size: 0.95rem;
-      line-height: 1.7;
-    }
-    .faq-item.active .faq-answer {
-      max-height: 300px;
-      padding-bottom: var(--space-lg);
-    }
-
-    /* ============================================
-       COMPARISON TABLE
-       ============================================ */
-    .compare-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: var(--space-lg);
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    .compare-card {
-      padding: var(--space-2xl);
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--void-border);
-    }
-    .compare-old {
-      background: rgba(248,81,73,0.03);
-      border-color: rgba(248,81,73,0.15);
-    }
-    .compare-new {
-      background: rgba(63,185,80,0.03);
-      border-color: rgba(63,185,80,0.15);
-    }
-    .compare-card h3 {
-      font-size: 1.15rem; font-weight: 700;
-      margin-bottom: var(--space-lg);
-    }
-    .compare-old h3 { color: var(--danger); }
-    .compare-new h3 { color: var(--success); }
-    .compare-list {
-      list-style: none;
-    }
-    .compare-list li {
-      padding: 0.6rem 0;
-      font-size: 0.9rem;
-      color: var(--gray-200);
-      display: flex; align-items: flex-start; gap: 0.5rem;
-      line-height: 1.5;
-    }
-    .compare-list li .icon { flex-shrink: 0; font-size: 0.85rem; margin-top: 0.1rem; }
-    .compare-old .compare-list li .icon { color: var(--danger); }
-    .compare-new .compare-list li .icon { color: var(--success); }
-
-    /* ============================================
-       CTA SECTION
-       ============================================ */
-    .cta-section {
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .cta-section::before {
-      content: '';
-      position: absolute; inset: 0;
-      background:
-        radial-gradient(ellipse at 50% 100%, rgba(168,85,247,0.12), transparent 60%);
-      pointer-events: none;
-    }
-    .cta-section h2 {
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 800;
-      color: var(--white);
-      margin-bottom: var(--space-md);
-      letter-spacing: -0.02em;
-    }
-    .cta-section > .container > p {
-      font-size: 1.1rem;
-      color: var(--gray-200);
-      max-width: 540px;
-      margin: 0 auto var(--space-2xl);
-      line-height: 1.7;
-    }
+    /* WAITLIST */
+    .cta-section { padding: 6rem 2rem; text-align: center; background: var(--dark); color: var(--white); }
+    .cta-section h2 { font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; color: var(--white); }
+    .cta-section p { font-size: 1.1rem; color: var(--gray-300); margin-bottom: 2rem; max-width: 550px; margin-left: auto; margin-right: auto; }
     .waitlist-form {
-      display: flex; gap: 0.75rem;
-      justify-content: center; flex-wrap: wrap;
-      max-width: 480px;
-      margin: 0 auto var(--space-md);
+      display: flex; gap: 0.75rem; justify-content: center;
+      flex-wrap: wrap; max-width: 500px; margin: 0 auto;
     }
     .waitlist-form input[type="email"] {
-      flex: 1; min-width: 240px;
-      padding: 0.85rem 1.25rem;
-      border: 1px solid var(--void-border);
-      border-radius: var(--radius-md);
-      font-family: var(--font);
-      font-size: 1rem;
-      background: var(--void-light);
-      color: var(--white);
-      outline: none;
-      transition: all var(--duration);
+      flex: 1; min-width: 240px; padding: 0.9rem 1.2rem;
+      border: 2px solid rgba(255,255,255,0.2); border-radius: 10px;
+      font-size: 1rem; font-family: 'Inter', sans-serif;
+      outline: none; transition: border-color 0.2s;
+      background: rgba(255,255,255,0.05); color: var(--white);
     }
-    .waitlist-form input[type="email"]::placeholder { color: var(--gray-400); }
+    .waitlist-form input[type="email"]::placeholder { color: var(--gray-500); }
     .waitlist-form input[type="email"]:focus {
-      border-color: var(--purple);
-      box-shadow: 0 0 0 3px var(--purple-dim);
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(245,158,11,0.2);
     }
     .waitlist-form button {
-      padding: 0.85rem 2rem;
-      border-radius: var(--radius-md);
-      background: var(--gold);
-      color: var(--void);
-      font-family: var(--font);
-      font-weight: 700; font-size: 1rem;
-      border: none; cursor: pointer;
-      transition: all var(--duration);
+      padding: 0.9rem 2rem; border-radius: 10px;
+      background: var(--accent); color: var(--dark);
+      font-weight: 700; font-size: 1rem; border: none;
+      cursor: pointer; transition: all 0.2s;
+      font-family: 'Inter', sans-serif;
     }
     .waitlist-form button:hover {
-      background: var(--gold-light);
+      background: var(--accent-hover);
       transform: translateY(-1px);
-      box-shadow: 0 4px 16px var(--gold-glow);
+      box-shadow: 0 4px 12px rgba(245,158,11,0.4);
     }
-    .waitlist-success {
-      display: none;
-      color: var(--success);
-      font-weight: 600;
-      font-size: 1.1rem;
-      margin-top: var(--space-md);
-    }
-    .waitlist-note {
-      font-size: 0.8rem;
-      color: var(--gray-400);
-      margin-top: var(--space-md);
-    }
+    .waitlist-success { display: none; color: var(--success); font-weight: 600; font-size: 1.1rem; margin-top: 1rem; }
+    .waitlist-note { margin-top: 1.5rem; font-size: 0.85rem; color: var(--gray-500); }
 
-    /* ============================================
-       STATS BAR
-       ============================================ */
-    .stats-bar {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: var(--space-lg);
-      text-align: center;
-      padding: var(--space-3xl) 0;
-    }
-    .stat-item h3 {
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 800;
-      color: var(--white);
-      margin-bottom: var(--space-xs);
-    }
-    .stat-item h3 .accent { color: var(--gold); }
-    .stat-item p {
-      font-size: 0.85rem;
-      color: var(--gray-300);
-      font-weight: 500;
-    }
+    /* FOOTER */
+    footer { background: var(--gray-900); color: var(--gray-300); padding: 3rem 2rem; text-align: center; }
+    footer p { font-size: 0.85rem; }
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+    .footer-quote { font-style: italic; font-size: 0.8rem; color: var(--gray-500); margin-top: 1rem; max-width: 500px; margin-left: auto; margin-right: auto; }
 
-    /* ============================================
-       BACK TO TOP
-       ============================================ */
-    .back-to-top {
-      position: fixed;
-      bottom: 2rem; right: 2rem;
-      width: 44px; height: 44px;
-      border-radius: 50%;
-      background: var(--void-lighter);
-      border: 1px solid var(--void-border);
-      color: var(--gray-200);
-      font-size: 1.1rem;
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer;
-      z-index: 900;
-      opacity: 0; pointer-events: none;
-      transition: all var(--duration);
-      text-decoration: none;
-    }
-    .back-to-top.visible {
-      opacity: 1;
-      pointer-events: auto;
-    }
-    .back-to-top:hover {
-      background: var(--purple-dim);
-      border-color: var(--purple);
-      color: var(--purple);
-      transform: translateY(-2px);
-    }
-
-    /* ============================================
-       FOOTER
-       ============================================ */
-    footer {
-      background: var(--void-light);
-      border-top: 1px solid var(--void-border);
-      padding: var(--space-4xl) 0 var(--space-2xl);
-    }
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: var(--space-3xl);
-      margin-bottom: var(--space-3xl);
-    }
-    .footer-brand p {
-      color: var(--gray-300);
-      font-size: 0.9rem;
-      line-height: 1.65;
-      margin-top: var(--space-md);
-      max-width: 280px;
-    }
-    .footer-col h4 {
-      font-size: 0.8rem; font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--gray-200);
-      margin-bottom: var(--space-lg);
-    }
-    .footer-col a {
-      display: block;
-      font-size: 0.9rem;
-      color: var(--gray-300);
-      text-decoration: none;
-      padding: 0.3rem 0;
-      transition: color var(--duration);
-    }
-    .footer-col a:hover { color: var(--gold); }
-    .footer-bottom {
-      padding-top: var(--space-xl);
-      border-top: 1px solid var(--void-border);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: var(--space-md);
-    }
-    .footer-bottom p { font-size: 0.8rem; color: var(--gray-400); }
-    .footer-links {
-      display: flex; gap: var(--space-lg);
-    }
-    .footer-links a {
-      font-size: 0.8rem;
-      color: var(--gray-400);
-      text-decoration: none;
-      transition: color var(--duration);
-    }
-    .footer-links a:hover { color: var(--gold); }
-    .footer-quote-text {
-      text-align: center;
-      font-style: italic;
-      font-size: 0.85rem;
-      color: var(--gray-400);
-      max-width: 520px;
-      margin: var(--space-2xl) auto 0;
-      line-height: 1.6;
-    }
-
-    /* ============================================
-       SCROLL PROGRESS BAR
-       ============================================ */
-    .scroll-progress {
-      position: fixed; top: 0; left: 0;
-      height: 2px; width: 0%;
-      background: linear-gradient(90deg, var(--purple), var(--gold));
-      z-index: 1001;
-      transition: width 0.1s linear;
-    }
-
-    /* ============================================
-       RESPONSIVE
-       ============================================ */
-    @media (max-width: 1024px) {
-      .obi-grid { grid-template-columns: 1fr; gap: var(--space-2xl); }
-      .obi-preview { order: 2; }
-      .pillars-grid { grid-template-columns: 1fr; }
-      .pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; }
-    }
-
+    /* RESPONSIVE */
     @media (max-width: 768px) {
-      .nav-links, .nav-cta { display: none; }
-      .nav-mobile-toggle { display: block; }
-
-      .hero { min-height: auto; padding: 7rem 0 4rem; }
-      .hero h1 { font-size: clamp(2rem, 8vw, 3rem); }
-
-      .section { padding: var(--space-3xl) 0; }
-      .section-header { margin-bottom: var(--space-2xl); }
-
-      .problem-grid { grid-template-columns: 1fr; }
+      nav { padding: 0.75rem 1rem; }
+      .nav-links { display: none; }
+      .hero { padding: 6rem 1.5rem 4rem; min-height: auto; }
+      .section { padding: 4rem 1.5rem; }
+      .problem-section { padding: 4rem 1.5rem; }
+      .stories-section { padding: 4rem 1.5rem; }
+      .obi-section { padding: 4rem 1.5rem; }
+      .pricing-section { padding: 4rem 1.5rem; }
+      .pillars-grid { grid-template-columns: 1fr; }
       .stories-grid { grid-template-columns: 1fr; }
-      .compare-grid { grid-template-columns: 1fr; }
-      .obi-features-list { grid-template-columns: 1fr; }
-      .stats-bar { grid-template-columns: repeat(2, 1fr); }
-
-      .footer-grid { grid-template-columns: 1fr 1fr; }
-      .footer-bottom { flex-direction: column; text-align: center; }
-
-      .container, .container-narrow { padding: 0 var(--space-lg); }
-
-      .scroll-indicator { display: none; }
-    }
-
-    @media (max-width: 480px) {
-      .footer-grid { grid-template-columns: 1fr; }
-      .stats-bar { grid-template-columns: 1fr 1fr; gap: var(--space-md); }
-      .hero-cta { flex-direction: column; align-items: center; }
-      .hero-cta .btn { width: 100%; justify-content: center; }
-      .waitlist-form { flex-direction: column; }
-      .waitlist-form input[type="email"] { min-width: unset; }
-    }
-
-    /* Reduced motion */
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-      }
-      .reveal { opacity: 1; transform: none; }
-      html { scroll-behavior: auto; }
-    }
-
-    /* Print */
-    @media print {
-      .nav, .bg-glow, .hero-bg, .hero-grid, .scroll-progress, .back-to-top,
-      .scroll-indicator { display: none !important; }
-      body { background: white; color: black; }
-      .hero { min-height: auto; padding: 2rem 0; }
-      .section { padding: 2rem 0; }
     }
   </style>
 </head>
 <body>
-  <a href="#main-content" class="skip-link">Skip to main content</a>
-
-  <!-- Scroll progress bar -->
-  <div class="scroll-progress" id="scrollProgress" role="presentation"></div>
-
-  <!-- Background glow -->
-  <div class="bg-glow" aria-hidden="true"></div>
-
-  <!-- ============================================
-       NAVIGATION
-       ============================================ -->
-  <nav class="nav" id="navbar" role="navigation" aria-label="Main navigation">
-    <div class="nav-inner">
-      <a href="/" class="nav-logo" aria-label="Natural English Training home">Natural English<span style="color:var(--gold)">.</span></a>
-      <ul class="nav-links">
-        <li><a href="#method">Method</a></li>
-        <li><a href="#stories">Results</a></li>
-        <li><a href="#obi">OBI</a></li>
-        <li><a href="#pricing">Pricing</a></li>
-        <li><a href="#faq">FAQ</a></li>
-      </ul>
-      <a href="#start" class="nav-cta">Get Started →</a>
-      <button class="nav-mobile-toggle" id="menuBtn" aria-label="Open menu" aria-expanded="false">☰</button>
+  <nav>
+    <a href="/" class="logo">Natural English<span>.</span></a>
+    <div class="nav-links">
+      <a href="#method">Method</a>
+      <a href="#stories">Results</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#start" class="btn btn-primary">Get Started</a>
     </div>
   </nav>
 
-  <!-- Mobile nav overlay -->
-  <div class="nav-mobile" id="navMobile" role="dialog" aria-label="Mobile navigation">
-    <button class="nav-mobile-close" id="menuClose" aria-label="Close menu">✕</button>
-    <a href="#method">Method</a>
-    <a href="#stories">Results</a>
-    <a href="#obi">OBI</a>
-    <a href="#pricing">Pricing</a>
-    <a href="#faq">FAQ</a>
-    <a href="#start" class="btn btn-gold">Get Started →</a>
-  </div>
+  <!-- HERO — sourced from VAULT-CHAOS Synthesis + Michael Method Codified -->
+  <section class="hero">
+    <div class="hero-badge">🇻🇳 Built for Vietnamese speakers in Ho Chi Minh City</div>
+    <h1>You're already a Tiger in Vietnamese. <span class="highlight">Find that voice in English.</span></h1>
+    <p>You're not bad at English. You've been taught to be afraid of it. We fix that — with real conversations, zero shame, and an AI that learns how you think.</p>
+    <div class="hero-cta">
+      <a href="#start" class="btn btn-primary">Join the Waitlist →</a>
+      <a href="#method" class="btn btn-outline">See the Method</a>
+    </div>
+    <p class="hero-quote">"Language is not labels — it is consequences. The student who learns a word to pass a test will forget it. The student who learns a word because something depends on it will carry it forever."</p>
+  </section>
 
-  <main id="main-content">
-    <!-- ============================================
-         HERO
-         ============================================ -->
-    <section class="hero">
-      <div class="hero-bg" aria-hidden="true"></div>
-      <div class="hero-grid" aria-hidden="true"></div>
-
-      <div class="container">
-        <div class="hero-content">
-          <div class="hero-badge">
-            <span class="badge-dot"></span>
-            🇻🇳 Built for Vietnamese speakers in Ho Chi Minh City
-          </div>
-
-          <h1>You're already a Tiger<br>in Vietnamese. <span class="highlight">Find that voice in English.</span></h1>
-
-          <p class="hero-sub">You're not bad at English. You've been taught to be afraid of it. We fix that — with real conversations, zero shame, and an AI that learns how you think.</p>
-
-          <div class="hero-cta">
-            <a href="#start" class="btn btn-gold btn-lg">Join the Waitlist →</a>
-            <a href="#method" class="btn btn-secondary btn-lg">See the Method</a>
-          </div>
-
-          <p class="hero-quote">"Language is not labels — it is consequences. The student who learns a word to pass a test will forget it. The student who learns a word because something depends on it will carry it forever."</p>
+  <!-- PROBLEM — sourced from Michael Method Codified: Why Traditional ESL Fails Vietnamese Learners -->
+  <section class="problem-section">
+    <div class="problem-inner">
+      <div class="section-label">The Problem</div>
+      <h2 style="font-size:2rem; font-weight:800; margin-bottom:0.75rem;">Why English centers aren't working for you</h2>
+      <p style="color:var(--gray-500); font-size:1rem; margin-bottom:1.5rem;">Traditional methods assume mistakes are the problem. For Vietnamese learners, the real problem is silence — a rational response to systems that punish public error with social shame.</p>
+      <div class="problem-grid">
+        <div class="problem-card">
+          <h4>Face-saving culture → Silence</h4>
+          <p>Accuracy obsession in the classroom creates silence, not improvement. Students won't speak if speaking wrong means losing face.</p>
         </div>
-      </div>
-
-      <div class="scroll-indicator" aria-hidden="true">
-        <span></span>
-      </div>
-    </section>
-
-    <!-- ============================================
-         STATS BAR
-         ============================================ -->
-    <hr class="divider">
-    <div class="container">
-      <div class="stats-bar reveal">
-        <div class="stat-item">
-          <h3><span class="accent">41</span></h3>
-          <p>Source Documents</p>
+        <div class="problem-card">
+          <h4>Tonal L1 → Anxiety</h4>
+          <p>Phoneme-by-phoneme correction of Vietnamese speakers produces anxiety, not better pronunciation. Prosody matters more than individual sounds.</p>
         </div>
-        <div class="stat-item">
-          <h3><span class="accent">100+</span></h3>
-          <p>Classroom Hours</p>
-        </div>
-        <div class="stat-item">
-          <h3>24/<span class="accent">7</span></h3>
-          <p>AI Tutor Access</p>
-        </div>
-        <div class="stat-item">
-          <h3>🐭→<span class="accent">🐯</span></h3>
-          <p>Proven Method</p>
+        <div class="problem-card">
+          <h4>Centers create dependency</h4>
+          <p>They whisper answers to inflate scores. They follow rigid textbooks. They need you to keep paying — so they never teach you to be independent.</p>
         </div>
       </div>
     </div>
-    <hr class="divider">
+  </section>
 
-    <!-- ============================================
-         THE PROBLEM
-         ============================================ -->
-    <section class="section" aria-labelledby="problem-heading">
-      <div class="container">
-        <div class="section-header reveal">
-          <div class="section-label">The Problem</div>
-          <h2 class="section-title" id="problem-heading">Why English centers<br>aren't working for you</h2>
-          <p class="section-subtitle">Traditional methods assume mistakes are the problem. For Vietnamese learners, the real problem is silence — a rational response to systems that punish public error with social shame.</p>
-        </div>
-
-        <div class="problem-grid">
-          <div class="problem-card reveal reveal-delay-1">
-            <h4>Face-saving culture → Silence</h4>
-            <p>Accuracy obsession in the classroom creates silence, not improvement. Students won't speak if speaking wrong means losing face.</p>
-          </div>
-          <div class="problem-card reveal reveal-delay-2">
-            <h4>Tonal L1 → Anxiety</h4>
-            <p>Phoneme-by-phoneme correction of Vietnamese speakers produces anxiety, not better pronunciation. Prosody matters more than individual sounds.</p>
-          </div>
-          <div class="problem-card reveal reveal-delay-3">
-            <h4>Centers create dependency</h4>
-            <p>They whisper answers to inflate scores. They follow rigid textbooks. They need you to keep paying — so they never teach you to be independent.</p>
-          </div>
-        </div>
+  <!-- 4 PILLARS — sourced from VAULT-CHAOS/25-THE-MICHAEL-METHOD-CODIFIED.md -->
+  <section class="section" id="method">
+    <div class="section-label">The Method</div>
+    <h2>Four pillars. Built from hundreds of hours in Vietnamese classrooms.</h2>
+    <p class="subtitle">The Michael Method wasn't designed in a conference room. It emerged from 41 source documents of live classroom chaos, failures, breakthroughs, and behavioral observations — right here in Vietnam.</p>
+    <div class="pillars-grid">
+      <div class="pillar-card">
+        <div class="pillar-number">1</div>
+        <h3>Emotional Translation</h3>
+        <p>We connect new English words to emotions you already own in Vietnamese. Not dictionary definitions — real memories, real feelings, real stakes.</p>
+        <div class="pillar-proof"><strong>Result:</strong> Students use words outside class, spontaneously, in real situations — because the word lives in a memory, not a flashcard.</div>
       </div>
-    </section>
-
-    <!-- ============================================
-         COMPARISON
-         ============================================ -->
-    <section class="section section-alt" aria-labelledby="compare-heading">
-      <div class="container">
-        <div class="section-header reveal">
-          <div class="section-label">The Difference</div>
-          <h2 class="section-title" id="compare-heading">Old way vs. <span class="gradient-text">NET way</span></h2>
-        </div>
-
-        <div class="compare-grid">
-          <div class="compare-card compare-old reveal reveal-delay-1">
-            <h3>❌ Traditional Centers</h3>
-            <ul class="compare-list">
-              <li><span class="icon">✗</span> Punish mistakes with shame</li>
-              <li><span class="icon">✗</span> Rigid textbook curriculum</li>
-              <li><span class="icon">✗</span> Grammar drills with no context</li>
-              <li><span class="icon">✗</span> Inflated scores to keep you paying</li>
-              <li><span class="icon">✗</span> Same pace for every student</li>
-              <li><span class="icon">✗</span> "Practice" means memorize</li>
-            </ul>
-          </div>
-          <div class="compare-card compare-new reveal reveal-delay-2">
-            <h3>✓ Natural English Training</h3>
-            <ul class="compare-list">
-              <li><span class="icon">✓</span> Permission over perfection</li>
-              <li><span class="icon">✓</span> Your interests = your curriculum</li>
-              <li><span class="icon">✓</span> Grammar through natural conversation</li>
-              <li><span class="icon">✓</span> Honest progress tracking</li>
-              <li><span class="icon">✓</span> AI adapts to your level 24/7</li>
-              <li><span class="icon">✓</span> "Practice" means real conversation</li>
-            </ul>
-          </div>
-        </div>
+      <div class="pillar-card">
+        <div class="pillar-number">2</div>
+        <h3>Tribal Engagement</h3>
+        <p>Your interests become your curriculum. Football, gaming, cooking, career goals — when something is at stake, you stop thinking about grammar and start thinking in English.</p>
+        <div class="pillar-proof"><strong>Result:</strong> Students argue in English because they want to win — not because the teacher asked them to speak.</div>
       </div>
-    </section>
-
-    <!-- ============================================
-         METHOD / 4 PILLARS
-         ============================================ -->
-    <section class="section" id="method" aria-labelledby="method-heading">
-      <div class="container">
-        <div class="section-header reveal">
-          <div class="section-label">The Method</div>
-          <h2 class="section-title" id="method-heading">Four pillars. Built from hundreds<br>of hours in Vietnamese classrooms.</h2>
-          <p class="section-subtitle">The Michael Method wasn't designed in a conference room. It emerged from 41 source documents of live classroom chaos, failures, breakthroughs, and behavioral observations — right here in Vietnam.</p>
-        </div>
-
-        <div class="pillars-grid">
-          <div class="pillar-card reveal reveal-delay-1">
-            <div class="pillar-number">1</div>
-            <h3>Emotional Translation</h3>
-            <p>We connect new English words to emotions you already own in Vietnamese. Not dictionary definitions — real memories, real feelings, real stakes.</p>
-            <div class="pillar-proof"><strong>Result:</strong> Students use words outside class, spontaneously, in real situations — because the word lives in a memory, not a flashcard.</div>
-          </div>
-          <div class="pillar-card reveal reveal-delay-2">
-            <div class="pillar-number">2</div>
-            <h3>Tribal Engagement</h3>
-            <p>Your interests become your curriculum. Football, gaming, cooking, career goals — when something is at stake, you stop thinking about grammar and start thinking in English.</p>
-            <div class="pillar-proof"><strong>Result:</strong> Students argue in English because they want to win — not because the teacher asked them to speak.</div>
-          </div>
-          <div class="pillar-card reveal reveal-delay-3">
-            <div class="pillar-number">3</div>
-            <h3>Stealth Correction</h3>
-            <p>We fix your mistakes without interrupting your flow. No "actually, it's..." No red pen. Just natural modeling woven into real conversation.</p>
-            <div class="pillar-proof"><strong>Result:</strong> Accuracy improves alongside confidence — not at the expense of it. You never feel corrected.</div>
-          </div>
-          <div class="pillar-card reveal reveal-delay-4">
-            <div class="pillar-number">4</div>
-            <h3>Narrative Escalation</h3>
-            <p>Every lesson is a story with rising stakes. You're not memorizing a word list — you're the negotiator, the detective, the hero. The vocabulary you need is the vocabulary the story needs.</p>
-            <div class="pillar-proof"><strong>Result:</strong> Students remember vocabulary at 3x the rate of traditional word lists — because the words are attached to stories, not pages.</div>
-          </div>
-        </div>
+      <div class="pillar-card">
+        <div class="pillar-number">3</div>
+        <h3>Stealth Correction</h3>
+        <p>We fix your mistakes without interrupting your flow. No "actually, it's..." No red pen. Just natural modeling woven into real conversation.</p>
+        <div class="pillar-proof"><strong>Result:</strong> Accuracy improves alongside confidence — not at the expense of it. You never feel corrected.</div>
       </div>
-    </section>
-
-    <!-- ============================================
-         STORIES / TESTIMONIALS
-         ============================================ -->
-    <section class="section section-alt" id="stories" aria-labelledby="stories-heading">
-      <div class="container">
-        <div class="section-header reveal">
-          <div class="section-label">Real Results</div>
-          <h2 class="section-title" id="stories-heading">Every student starts as a Mouse.<br>Here's what happens <span class="gradient-text">next.</span></h2>
-          <p class="section-subtitle">These are real transformations from our classrooms in Ho Chi Minh City. Real people. Real progress. Real timelines.</p>
-        </div>
-
-        <div class="stories-grid">
-          <div class="story-card reveal reveal-delay-1">
-            <span class="story-tag tag-mouse">🐭 Mouse → Cub</span>
-            <h4>The Terrified Mother</h4>
-            <p class="story-before">Hands shaking during registration. First English class ever. Enrolled after her daughter started. Could barely say her name.</p>
-            <p class="story-after">"My name is Mai. I have two children. I like cooking." — Unprompted. Voice steady. 60 minutes.</p>
-            <p class="story-time">Transformation: Session 1</p>
-          </div>
-          <div class="story-card reveal reveal-delay-2">
-            <span class="story-tag tag-mouse">🐭 Mouse → Cub</span>
-            <h4>The Phone Addict</h4>
-            <p class="story-before">16 years old. Parent-forced enrollment. Slouching, no eye contact. "This is boring" at minute 7.</p>
-            <p class="story-after">Spoke for 4 consecutive minutes explaining the TikTok algorithm — in English. First voluntary sentence of the entire enrollment.</p>
-            <p class="story-time">Pivot: "You're the teacher. Explain TikTok to me like I'm 50."</p>
-          </div>
-          <div class="story-card reveal reveal-delay-3">
-            <span class="story-tag tag-tiger">🐯 Cub → Tiger</span>
-            <h4>The Corporate Climber</h4>
-            <p class="story-before">Junior accountant, 22. Whispered when unsure. Froze completely on "What is your greatest weakness?"</p>
-            <p class="story-after">Completed a 90-second mock interview answer. Unprompted. Volume: conversational. First time she laughed mid-answer.</p>
-            <p class="story-time">Confidence: 3/10 → 6/10 in one session</p>
-          </div>
-          <div class="story-card reveal reveal-delay-4">
-            <span class="story-tag tag-tiger">🐯 Tiger</span>
-            <h4>The Negotiator</h4>
-            <p class="story-before">Sales manager, 28. Tiger level. Confident but had vocabulary gaps under pressure. Defaulted to Vietnamese fillers in high-stakes moments.</p>
-            <p class="story-after">Completed a 5-minute negotiation simulation with zero vocabulary prompts. First correct use of "walk away position" in context.</p>
-            <p class="story-time">Now: Tiger-to-Enterprise track. Three colleagues referred.</p>
-          </div>
-        </div>
+      <div class="pillar-card">
+        <div class="pillar-number">4</div>
+        <h3>Narrative Escalation</h3>
+        <p>Every lesson is a story with rising stakes. You're not memorizing a word list — you're the negotiator, the detective, the hero. The vocabulary you need is the vocabulary the story needs.</p>
+        <div class="pillar-proof"><strong>Result:</strong> Students remember vocabulary at 3x the rate of traditional word lists — because the words are attached to stories, not pages.</div>
       </div>
-    </section>
-
-    <!-- ============================================
-         OBI — AI TUTOR
-         ============================================ -->
-    <section class="section obi-section" id="obi" aria-labelledby="obi-heading">
-      <div class="container">
-        <div class="obi-grid">
-          <div class="obi-info reveal">
-            <div class="section-label">Meet OBI</div>
-            <h2 id="obi-heading">Your English teacher<br>that <span class="gradient-text">never sleeps</span></h2>
-            <p>OBI is not a chatbot. OBI is the teaching method — encoded into AI. It teaches the way Michael teaches, with the same four pillars, 24 hours a day.</p>
-            <p class="quote-line">"The app is programmed to teach my style without me being there."</p>
-
-            <div class="obi-features-list">
-              <div class="obi-feat">
-                <h4>🎯 Interest-driven</h4>
-                <p>Football, cooking, Roblox — OBI adapts to what matters to you.</p>
-              </div>
-              <div class="obi-feat">
-                <h4>🐯 Progress tracking</h4>
-                <p>Real behavioral markers, not inflated scores.</p>
-              </div>
-              <div class="obi-feat">
-                <h4>🔇 Stealth Correction</h4>
-                <p>Corrects naturally within conversation. Never feels like a test.</p>
-              </div>
-              <div class="obi-feat">
-                <h4>📊 Parent dashboard</h4>
-                <p>Transparent tracking of every conversation and milestone.</p>
-              </div>
-              <div class="obi-feat">
-                <h4>🧠 Remembers you</h4>
-                <p>Your vocabulary, mistakes, breakthroughs — every session picks up where you left off.</p>
-              </div>
-              <div class="obi-feat">
-                <h4>🌐 Free daily practice</h4>
-                <p>Available in your browser. No app download. The method runs 24/7.</p>
-              </div>
-            </div>
-
-            <a href="#start" class="btn btn-primary btn-lg">Try OBI Free →</a>
-          </div>
-
-          <div class="obi-preview reveal reveal-delay-2">
-            <div class="obi-chat-window">
-              <div class="chat-msg chat-user">
-                <span class="chat-label chat-label-user">You</span>
-                I want to order food but I'm nervous about my English...
-              </div>
-              <div class="chat-msg chat-ai">
-                <span class="chat-label chat-label-ai">OBI</span>
-                That's completely normal! Let's practice together. Imagine you just sat down at a restaurant. The waiter says "What can I get for you?" — what would you say?
-              </div>
-              <div class="chat-msg chat-user">
-                <span class="chat-label chat-label-user">You</span>
-                Umm... I want... a chicken?
-              </div>
-              <div class="chat-msg chat-ai">
-                <span class="chat-label chat-label-ai">OBI</span>
-                Perfect start! 🎯 You got the message across — that's what matters most. Now let's level it up: "I'd like the chicken, please." Same meaning, sounds more confident. Try it!
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================================
-         PRICING
-         ============================================ -->
-    <section class="section section-alt" id="pricing" aria-labelledby="pricing-heading">
-      <div class="container">
-        <div class="section-header reveal">
-          <div class="section-label">Pricing</div>
-          <h2 class="section-title" id="pricing-heading">Simple. Honest. <span class="gradient-text">No contracts.</span></h2>
-          <p class="section-subtitle">"I don't go below 600k an hour because I put a lot of extra work into my training." — We establish value before price. Always.</p>
-        </div>
-
-        <div class="pricing-grid">
-          <div class="pricing-card reveal reveal-delay-1">
-            <div class="tier-icon">🐭</div>
-            <h3>Mouse</h3>
-            <p class="tier-desc">Starting your journey</p>
-            <div class="price">Free eval</div>
-            <p class="price-unit">Written report in 24hrs</p>
-            <ul class="includes">
-              <li>Full assessment session</li>
-              <li>Written evaluation report</li>
-              <li>Personalized learning plan</li>
-              <li>Zero risk — no payment until you're ready</li>
-            </ul>
-          </div>
-          <div class="pricing-card featured reveal reveal-delay-2">
-            <div class="tier-icon">🐯</div>
-            <h3>Tiger Track</h3>
-            <p class="tier-desc">Live + AI daily practice</p>
-            <div class="price">900k <span class="price-unit">VND/week</span></div>
-            <p class="price-unit">1x live session + OBI daily</p>
-            <ul class="includes">
-              <li>1 live session per week with Michael</li>
-              <li>Unlimited OBI practice daily</li>
-              <li>Parent dashboard access</li>
-              <li>Progress reports</li>
-              <li>Flexible scheduling</li>
-            </ul>
-          </div>
-          <div class="pricing-card reveal reveal-delay-3">
-            <div class="tier-icon">🦁</div>
-            <h3>Enterprise</h3>
-            <p class="tier-desc">Corporate &amp; intensive</p>
-            <div class="price">Custom</div>
-            <p class="price-unit">2x+ live sessions/week</p>
-            <ul class="includes">
-              <li>Multiple live sessions per week</li>
-              <li>Business English &amp; negotiation</li>
-              <li>Industry-specific vocabulary</li>
-              <li>Team training available</li>
-              <li>OBI corporate dashboard</li>
-            </ul>
-          </div>
-        </div>
-        <p class="pricing-note">"My goal is to make it so you don't need me after 1 year." — No center would say this. That's the difference.</p>
-      </div>
-    </section>
-
-    <!-- ============================================
-         FAQ
-         ============================================ -->
-    <section class="section" id="faq" aria-labelledby="faq-heading">
-      <div class="container">
-        <div class="section-header reveal">
-          <div class="section-label">Questions</div>
-          <h2 class="section-title" id="faq-heading">Frequently asked <span class="gradient-text">questions</span></h2>
-        </div>
-
-        <div class="faq-list reveal">
-          <div class="faq-item">
-            <button class="faq-question" aria-expanded="false">
-              What level of English do I need to start?
-              <span class="faq-icon">+</span>
-            </button>
-            <div class="faq-answer">Any level. We literally start from "I'm too scared to say hello." The Mouse-to-Tiger method is designed to meet you exactly where you are — even if that's total silence. Your first session is a free evaluation so we understand your starting point.</div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-question" aria-expanded="false">
-              How is OBI different from ChatGPT or other AI tools?
-              <span class="faq-icon">+</span>
-            </button>
-            <div class="faq-answer">OBI isn't a general chatbot. It's specifically trained on the Michael Method — the same four pillars used in our live classrooms. It uses stealth correction, emotional translation, and adaptive difficulty. It remembers your vocabulary, your mistakes, and your breakthroughs between sessions.</div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-question" aria-expanded="false">
-              Can I practice with OBI in Vietnamese?
-              <span class="faq-icon">+</span>
-            </button>
-            <div class="faq-answer">Yes! OBI understands Vietnamese and can explain concepts in both languages. The goal is to gradually shift you into English naturally — never by force. Start in Vietnamese if you need to. OBI will guide the transition.</div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-question" aria-expanded="false">
-              What happens in the free evaluation?
-              <span class="faq-icon">+</span>
-            </button>
-            <div class="faq-answer">A relaxed conversation (not a test) where Michael evaluates your current English level across speaking, listening, vocabulary, and confidence. You'll receive a written report within 24 hours with a personalized learning plan. Zero pressure, zero obligation.</div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-question" aria-expanded="false">
-              Do you teach children or adults?
-              <span class="faq-icon">+</span>
-            </button>
-            <div class="faq-answer">Both. The method adapts to age and context. We've worked with teenagers who were forced to enroll by parents, young professionals preparing for job interviews, and mothers who wanted to help their children with homework. The core principle is the same: confidence before correction.</div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-question" aria-expanded="false">
-              Can I cancel anytime?
-              <span class="faq-icon">+</span>
-            </button>
-            <div class="faq-answer">Absolutely. No contracts, no lock-in periods, no cancellation fees. If you stop learning, we stop charging. We believe if you're not seeing progress, that's on us — not on your wallet.</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================================
-         WAITLIST CTA
-         ============================================ -->
-    <section class="section cta-section" id="start" aria-labelledby="cta-heading">
-      <div class="container">
-        <h2 id="cta-heading" class="reveal">Ready to find your <span class="gradient-text">Tiger voice</span>?</h2>
-        <p class="reveal reveal-delay-1">Join the waitlist for early access to OBI and a free evaluation session. We'll start where you are — not where a textbook says you should be.</p>
-
-        <form class="waitlist-form reveal reveal-delay-2" id="waitlist-form" onsubmit="return submitWaitlist(event)">
-          <input type="email" id="waitlist-email" placeholder="Enter your email" required aria-label="Email address">
-          <button type="submit">Join the Waitlist →</button>
-        </form>
-        <div class="waitlist-success" id="waitlist-success">🐯 You're on the list! We'll be in touch soon.</div>
-        <p class="waitlist-note reveal reveal-delay-3">Free evaluation included. No payment until you're ready. Cancel anytime.</p>
-      </div>
-    </section>
-  </main>
-
-  <!-- ============================================
-       FOOTER
-       ============================================ -->
-  <footer role="contentinfo">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <a href="/" class="nav-logo" style="font-size:1.1rem;">Natural English<span style="color:var(--gold)">.</span></a>
-          <p>AI-powered English training built on real methodology. From mouse to tiger — learn naturally, speak confidently.</p>
-        </div>
-        <div class="footer-col">
-          <h4>Product</h4>
-          <a href="#obi">OBI AI Tutor</a>
-          <a href="#method">Methodology</a>
-          <a href="#pricing">Pricing</a>
-        </div>
-        <div class="footer-col">
-          <h4>Company</h4>
-          <a href="#stories">Results</a>
-          <a href="#faq">FAQ</a>
-          <a href="mailto:hobbs@naturalenglishtraining.com">Contact</a>
-        </div>
-        <div class="footer-col">
-          <h4>Get Started</h4>
-          <a href="#start">Join Waitlist</a>
-          <a href="assessment.html">Take Assessment</a>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>© 2026 Natural English Training. Built with ❤️ in Ho Chi Minh City, Vietnam.</p>
-        <div class="footer-links">
-          <a href="mailto:hobbs@naturalenglishtraining.com">hobbs@naturalenglishtraining.com</a>
-        </div>
-      </div>
-      <p class="footer-quote-text">"Every word a student speaks in English that they were afraid to speak before — that is the return on this investment."</p>
     </div>
+  </section>
+
+  <!-- REAL STORIES — sourced from VAULT-CHAOS/11-CLASS-DOCUMENTS-17-21.md (anonymized) -->
+  <section class="stories-section" id="stories">
+    <div class="stories-inner">
+      <div class="section-label">Real Results</div>
+      <h2>Every student starts as a Mouse. Here's what happens next.</h2>
+      <p class="subtitle">These are real transformations from our classrooms in Ho Chi Minh City. Real people. Real progress. Real timelines.</p>
+      <div class="stories-grid">
+        <div class="story-card">
+          <span class="story-tag tag-mouse">🐭 Mouse → Cub</span>
+          <h4>The Terrified Mother</h4>
+          <p class="story-before">Hands shaking during registration. First English class ever. Enrolled after her daughter started. Could barely say her name.</p>
+          <p class="story-after">"My name is Mai. I have two children. I like cooking." — Unprompted. Voice steady. 60 minutes.</p>
+          <p class="story-time">Transformation: Session 1</p>
+        </div>
+        <div class="story-card">
+          <span class="story-tag tag-mouse">🐭 Mouse → Cub</span>
+          <h4>The Phone Addict</h4>
+          <p class="story-before">16 years old. Parent-forced enrollment. Slouching, no eye contact. "This is boring" at minute 7.</p>
+          <p class="story-after">Spoke for 4 consecutive minutes explaining the TikTok algorithm — in English. First voluntary sentence of the entire enrollment.</p>
+          <p class="story-time">Pivot: "You're the teacher. Explain TikTok to me like I'm 50."</p>
+        </div>
+        <div class="story-card">
+          <span class="story-tag tag-tiger">🐯 Cub → Tiger</span>
+          <h4>The Corporate Climber</h4>
+          <p class="story-before">Junior accountant, 22. Whispered when unsure. Froze completely on "What is your greatest weakness?"</p>
+          <p class="story-after">Completed a 90-second mock interview answer. Unprompted. Volume: conversational. First time she laughed mid-answer.</p>
+          <p class="story-time">Confidence: 3/10 → 6/10 in one session</p>
+        </div>
+        <div class="story-card">
+          <span class="story-tag tag-tiger">🐯 Tiger</span>
+          <h4>The Negotiator</h4>
+          <p class="story-before">Sales manager, 28. Tiger level. Confident but had vocabulary gaps under pressure. Defaulted to Vietnamese fillers in high-stakes moments.</p>
+          <p class="story-after">Completed a 5-minute negotiation simulation with zero vocabulary prompts. First correct use of "walk away position" in context.</p>
+          <p class="story-time">Now: Tiger-to-Enterprise track. Three colleagues referred.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OBI — sourced from Gospel 444 Revenue Bridge -->
+  <section class="obi-section" id="obi">
+    <div class="obi-inner">
+      <div class="section-label">Meet OBI</div>
+      <h2 style="font-size:2.5rem; font-weight:800; margin-bottom:1rem;">Your English teacher that never sleeps</h2>
+      <p style="color:var(--gray-500); font-size:1.1rem; max-width:600px; margin:0 auto 1rem;">OBI is not a chatbot. OBI is the teaching method — encoded into AI. It teaches the way Michael teaches, with the same four pillars, 24 hours a day.</p>
+      <p style="color:var(--gray-700); font-size:0.95rem; font-style:italic;">"The app is programmed to teach my style without me being there."</p>
+      <div class="obi-features">
+        <div class="obi-feature">
+          <h4>🎯 Interest-driven</h4>
+          <p>If you love football, that's the topic. If your kid loves Roblox, that's the vocabulary. OBI adapts to what matters to YOU.</p>
+        </div>
+        <div class="obi-feature">
+          <h4>🐯 Mouse → Tiger tracking</h4>
+          <p>Real progress you can see. Not inflated scores — actual behavioral markers that show when you're moving from hesitation to confidence.</p>
+        </div>
+        <div class="obi-feature">
+          <h4>🔇 Stealth Correction built in</h4>
+          <p>OBI corrects you the same way: naturally, within conversation. Consistent, fast, non-judgmental. It never forgets the protocol.</p>
+        </div>
+        <div class="obi-feature">
+          <h4>📊 Parent dashboard</h4>
+          <p>You will have a login — see real progress. No guessing. No inflated reports. Transparent tracking of every conversation and milestone.</p>
+        </div>
+        <div class="obi-feature">
+          <h4>🧠 Remembers everything</h4>
+          <p>Your vocabulary, your mistakes, your breakthroughs. Every session picks up where you left off. OBI learns you the way a great teacher does.</p>
+        </div>
+        <div class="obi-feature">
+          <h4>🌐 Practice daily for free</h4>
+          <p>Available in your Chrome browser. No app download. The 23 hours a day when you're not in a live session, the method is still running.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING — sourced from Gospel 444 Revenue Bridge -->
+  <section class="pricing-section" id="pricing">
+    <div class="section-label">Pricing</div>
+    <h2>Simple. Honest. No contracts.</h2>
+    <p class="subtitle" style="margin-left:auto; margin-right:auto;">"I don't go below 600k an hour because I put a lot of extra work into my training." — We establish value before price. Always.</p>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="tier-icon">🐭</div>
+        <h3>Mouse</h3>
+        <p class="tier-desc">Starting your journey</p>
+        <div class="price">Free eval</div>
+        <p class="price-unit">Written report in 24hrs</p>
+        <ul class="includes">
+          <li>Full assessment session</li>
+          <li>Written evaluation report</li>
+          <li>Personalized learning plan</li>
+          <li>Zero risk — no payment until you're ready</li>
+        </ul>
+      </div>
+      <div class="pricing-card featured">
+        <div class="tier-icon">🐯</div>
+        <h3>Tiger Track</h3>
+        <p class="tier-desc">Live + AI daily practice</p>
+        <div class="price">900k <span class="price-unit">VND/week</span></div>
+        <p class="price-unit">1x live session + OBI daily</p>
+        <ul class="includes">
+          <li>1 live session per week with Michael</li>
+          <li>Unlimited OBI practice daily</li>
+          <li>Parent dashboard access</li>
+          <li>Progress reports</li>
+          <li>Flexible scheduling</li>
+        </ul>
+      </div>
+      <div class="pricing-card">
+        <div class="tier-icon">🦁</div>
+        <h3>Enterprise</h3>
+        <p class="tier-desc">Corporate & intensive</p>
+        <div class="price">Custom</div>
+        <p class="price-unit">2x+ live sessions/week</p>
+        <ul class="includes">
+          <li>Multiple live sessions per week</li>
+          <li>Business English & negotiation</li>
+          <li>Industry-specific vocabulary</li>
+          <li>Team training available</li>
+          <li>OBI corporate dashboard</li>
+        </ul>
+      </div>
+    </div>
+    <p style="margin-top:2rem; font-size:0.9rem; color:var(--gray-500); font-style:italic;">"My goal is to make it so you don't need me after 1 year." — No center would say this. That's the difference.</p>
+  </section>
+
+  <!-- WAITLIST CTA -->
+  <section class="cta-section" id="start">
+    <h2>Ready to find your Tiger voice?</h2>
+    <p>Join the waitlist for early access to OBI and a free evaluation session. We'll start where you are — not where a textbook says you should be.</p>
+    <form class="waitlist-form" id="waitlist-form" onsubmit="return submitWaitlist(event)">
+      <input type="email" id="waitlist-email" placeholder="Enter your email" required>
+      <button type="submit">Join the Waitlist →</button>
+    </form>
+    <div class="waitlist-success" id="waitlist-success">🐯 You're on the list! We'll be in touch soon.</div>
+    <p class="waitlist-note">Free evaluation included. No payment until you're ready. Cancel anytime.</p>
+  </section>
+
+  <footer>
+    <p>© 2026 Natural English Training. Built with ❤️ in Ho Chi Minh City, Vietnam.</p>
+    <p style="margin-top:0.5rem;"><a href="mailto:hobbs@naturalenglishtraining.com">hobbs@naturalenglishtraining.com</a></p>
+    <p class="footer-quote">"Every word a student speaks in English that they were afraid to speak before — that is the return on this investment."</p>
   </footer>
-
-  <!-- Back to top -->
-  <a href="#" class="back-to-top" id="backToTop" aria-label="Back to top">↑</a>
 
   <!-- OBI Chat Widget -->
   <script src="/js/obi-widget.js"></script>
 
-  <!-- Site JavaScript -->
+  <!-- Waitlist Form Handler -->
   <script>
-    (function() {
-      'use strict';
-
-      // === SCROLL PROGRESS BAR ===
-      const progressBar = document.getElementById('scrollProgress');
-      function updateScrollProgress() {
-        const scrollTop = window.scrollY;
-        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-        const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-        progressBar.style.width = progress + '%';
-      }
-
-      // === NAV SCROLL BEHAVIOR ===
-      const nav = document.getElementById('navbar');
-      function updateNav() {
-        nav.classList.toggle('scrolled', window.scrollY > 50);
-      }
-
-      // === BACK TO TOP ===
-      const backToTop = document.getElementById('backToTop');
-      function updateBackToTop() {
-        backToTop.classList.toggle('visible', window.scrollY > 600);
-      }
-
-      // Combined scroll handler (single rAF)
-      let ticking = false;
-      window.addEventListener('scroll', function() {
-        if (!ticking) {
-          requestAnimationFrame(function() {
-            updateScrollProgress();
-            updateNav();
-            updateBackToTop();
-            ticking = false;
-          });
-          ticking = true;
-        }
-      }, { passive: true });
-
-      // === MOBILE MENU ===
-      const menuBtn = document.getElementById('menuBtn');
-      const menuClose = document.getElementById('menuClose');
-      const navMobile = document.getElementById('navMobile');
-
-      menuBtn.addEventListener('click', function() {
-        navMobile.classList.add('active');
-        menuBtn.setAttribute('aria-expanded', 'true');
-        document.body.style.overflow = 'hidden';
-      });
-
-      function closeMenu() {
-        navMobile.classList.remove('active');
-        menuBtn.setAttribute('aria-expanded', 'false');
-        document.body.style.overflow = '';
-      }
-
-      menuClose.addEventListener('click', closeMenu);
-      navMobile.querySelectorAll('a').forEach(function(a) {
-        a.addEventListener('click', closeMenu);
-      });
-
-      // === SCROLL REVEAL (Intersection Observer) ===
-      var revealObserver = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-          }
-        });
-      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-      document.querySelectorAll('.reveal').forEach(function(el) {
-        revealObserver.observe(el);
-      });
-
-      // === FAQ ACCORDION ===
-      document.querySelectorAll('.faq-question').forEach(function(btn) {
-        btn.addEventListener('click', function() {
-          var item = this.parentElement;
-          var isActive = item.classList.contains('active');
-          var expanded = !isActive;
-
-          // Close all others
-          document.querySelectorAll('.faq-item.active').forEach(function(other) {
-            other.classList.remove('active');
-            other.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
-          });
-
-          // Toggle current
-          if (!isActive) {
-            item.classList.add('active');
-          }
-          this.setAttribute('aria-expanded', String(expanded));
-        });
-      });
-
-      // === COUNTER ANIMATION ===
-      var countersAnimated = false;
-      var counterObserver = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-          if (entry.isIntersecting && !countersAnimated) {
-            countersAnimated = true;
-            animateCounters();
-          }
-        });
-      }, { threshold: 0.3 });
-
-      var statsBar = document.querySelector('.stats-bar');
-      if (statsBar) counterObserver.observe(statsBar);
-
-      function animateCounters() {
-        document.querySelectorAll('.stat-item h3 .accent').forEach(function(el) {
-          var text = el.textContent;
-          var match = text.match(/^(\d+)/);
-          if (match) {
-            var target = parseInt(match[1]);
-            var suffix = text.replace(match[1], '');
-            var current = 0;
-            var step = Math.max(1, Math.floor(target / 40));
-            var interval = setInterval(function() {
-              current += step;
-              if (current >= target) {
-                current = target;
-                clearInterval(interval);
-              }
-              el.textContent = current + suffix;
-            }, 30);
-          }
-        });
-      }
-
-    })();
-
-    // === WAITLIST FORM (kept from original) ===
     async function submitWaitlist(e) {
       e.preventDefault();
-      var email = document.getElementById('waitlist-email').value.trim();
-      var successEl = document.getElementById('waitlist-success');
-      var form = document.getElementById('waitlist-form');
+      const email = document.getElementById('waitlist-email').value.trim();
+      const successEl = document.getElementById('waitlist-success');
+      const form = document.getElementById('waitlist-form');
 
       try {
-        var res = await fetch('https://net-obi-api.naturalenglishtraining.com/api/waitlist', {
+        const res = await fetch('https://net-obi-api.naturalenglishtraining.com/api/waitlist', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email: email, source: 'website' })
+          body: JSON.stringify({ email, source: 'website' })
         });
 
         if (!res.ok) throw new Error('Server error');
-        var data = await res.json();
+        const data = await res.json();
 
         if (data.success) {
           form.style.display = 'none';
@@ -1910,7 +534,7 @@
           throw new Error(data.error || 'Something went wrong');
         }
       } catch(err) {
-        window.location.href = 'mailto:hobbs@naturalenglishtraining.com?subject=Waitlist%20Signup&body=Hi!%20I%27d%20like%20to%20join%20the%20OBI%20waitlist.%20My%20email%20is%20' + encodeURIComponent(email);
+        window.location.href = `mailto:hobbs@naturalenglishtraining.com?subject=Waitlist%20Signup&body=Hi!%20I%27d%20like%20to%20join%20the%20OBI%20waitlist.%20My%20email%20is%20${encodeURIComponent(email)}`;
       }
       return false;
     }

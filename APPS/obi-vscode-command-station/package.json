@@ -1,0 +1,58 @@
+{
+  "name": "obi-command-station",
+  "displayName": "OBI Command Station",
+  "description": "Phoenix Rising Protocol — SOV100 → Agent99 → Drone execution tunnel",
+  "version": "1.0.0",
+  "publisher": "phoenix-rising",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./extension.js",
+  "icon": "media/icon.png",
+  "contributes": {
+    "commands": [
+      {
+        "command": "obi.connectStation",
+        "title": "OBI: Connect to Command Station"
+      },
+      {
+        "command": "obi.disconnectStation",
+        "title": "OBI: Disconnect Command Station"
+      },
+      {
+        "command": "obi.sendCommand",
+        "title": "OBI: Send Command to Station"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "obi-station",
+          "title": "OBI Command Station",
+          "icon": "media/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "obi-station": [
+        {
+          "id": "obi.commandQueue",
+          "name": "Command Queue"
+        },
+        {
+          "id": "obi.commandHistory",
+          "name": "History"
+        }
+      ]
+    }
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0"
+  }
+}
