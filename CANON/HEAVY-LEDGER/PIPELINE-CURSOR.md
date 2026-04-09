@@ -2,12 +2,12 @@
 
 ## Current Position
 
-- **Next Target:** HL-129
+- **Next Target:** HL-130
 - **Wave:** 8
-- **Wave Progress:** 32/46 complete
-- **Total Converted:** 128/174+
-- **Last Completed:** HL-128 founders-moat-product-dna (HIGH signal, PRODUCT tier, 10 quotes, 5 decisions — Founder's Moat defined, Obi as agent OS interface, un-forkable data moat, SSM L47-L49, BIBLE-CH22)
-- **Last Run:** Round 2 SDNAD (2026-04-09 ICT)
+- **Wave Progress:** 33/46 complete
+- **Total Converted:** 129/174+
+- **Last Completed:** HL-129 kiss-protocol-legion-principle-of-faith (HIGH signal, GOVERNANCE tier, 24 quotes, 9 decisions, 4 corrections — KISS Protocol, Legion naming, Principle of Faith, Stage 0 REPRINT doctrine, Bridge Builder role, SSM L54-L60, BIBLE-CH23)
+- **Last Run:** Round 2 SDNAD Run 273 (2026-04-09 ICT)
 
 ## Wave 8 Manifest (HL-085 → HL-130)
 
