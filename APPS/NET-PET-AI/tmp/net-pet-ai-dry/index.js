@@ -518,7 +518,7 @@ var index_default = {
           magic_chat: "active",
           ledger: "active",
           drone_mining: "pending",
-          unplanned_command: "pending"
+          command_station: "active"
         }
       }), request);
     }
@@ -527,7 +527,7 @@ var index_default = {
         worker: "net-pet-ai",
         version: VERSION,
         runtime: "Cloudflare Workers",
-        durableObjects: ["SessionDO", "ProfileDO", "PetDO", "LedgerDO"],
+        durableObjects: ["SessionDO", "ProfileDO", "PetDO", "LedgerDO", "CommandDO"],
         ts: Date.now(),
         proof: `Phoenix OB-1 alive at ${(/* @__PURE__ */ new Date()).toISOString()}`
       }), request);
@@ -599,7 +599,7 @@ var index_default = {
 async function handleAPI(path, request, env, url) {
   const method = request.method;
   if (path === "/api/health" && method === "GET") {
-    return json({ ok: true, version: VERSION, app: env.APP_NAME || "Natural English Training", coach: env.APP_COACH_NAME || "Obi", ts: Date.now(), routes: 22, ledger: "active" });
+    return json({ ok: true, version: VERSION, app: env.APP_NAME || "Natural English Training", coach: env.APP_COACH_NAME || "Obi", ts: Date.now(), routes: 28, ledger: "active", commandStation: "active" });
   }
   if (path === "/api/chat" && method === "POST") {
     const body = await request.json();
@@ -662,6 +662,27 @@ async function handleAPI(path, request, env, url) {
   }
   if (path === "/api/ledger/verify" && method === "GET") {
     return handleLedgerVerify(url.searchParams.get("studentId") || "", env);
+  }
+  if (path === "/api/command/send" && method === "POST") {
+    const body = await request.json();
+    return handleCommandSend(body, env);
+  }
+  if (path === "/api/command/queue" && method === "GET") {
+    return handleCommandQueue(url.searchParams.get("status") || "pending", parseInt(url.searchParams.get("limit") || "20"), env);
+  }
+  if (path === "/api/command/claim" && method === "POST") {
+    const body = await request.json();
+    return handleCommandClaim(body, env);
+  }
+  if (path === "/api/command/complete" && method === "POST") {
+    const body = await request.json();
+    return handleCommandComplete(body, env);
+  }
+  if (path === "/api/command/status" && method === "GET") {
+    return handleCommandStatus(url.searchParams.get("commandId") || "", env);
+  }
+  if (path === "/api/command/history" && method === "GET") {
+    return handleCommandHistory(parseInt(url.searchParams.get("limit") || "50"), env);
   }
   return json({ error: "Not found" }, 404);
 }
@@ -882,7 +903,7 @@ async function handleLedgerAppend(body, env) {
   if (!body.eventType) return json({ error: "eventType required" }, 400);
   const idCheck = validateStudentId(body.studentId);
   if (!idCheck.valid) return json({ error: idCheck.error }, 400);
-  const ALLOWED_EVENTS = ["chat_exchange", "pet_checkin", "onboarding", "feedback", "lesson_generated", "student_created"];
+  const ALLOWED_EVENTS = ["chat_exchange", "pet_checkin", "onboarding", "feedback", "lesson_generated", "student_created", "command_sent", "command_completed"];
   if (!ALLOWED_EVENTS.includes(body.eventType)) return json({ error: "Invalid event type" }, 400);
   const stub = env.LEDGER.get(env.LEDGER.idFromName(body.studentId));
   return stub.fetch(new Request("https://do/append", {
@@ -908,6 +929,154 @@ async function handleLedgerVerify(studentId, env) {
   return stub.fetch(new Request("https://do/verify"));
 }
 __name(handleLedgerVerify, "handleLedgerVerify");
+var DRONE_REGISTRY = {
+  1: { name: "CodeRunner", skills: ["execute", "eval", "script", "run"] },
+  2: { name: "FileWriter", skills: ["create", "edit", "write", "file"] },
+  3: { name: "GitOps", skills: ["commit", "push", "branch", "merge", "git"] },
+  4: { name: "Deployer", skills: ["deploy", "wrangler", "publish", "ship"] },
+  5: { name: "TestRunner", skills: ["test", "check", "verify", "validate"] },
+  6: { name: "LessonForge", skills: ["lesson", "teach", "curriculum", "galaxy"] },
+  7: { name: "DiscordRelay", skills: ["discord", "message", "notify", "alert"] },
+  8: { name: "NotionSync", skills: ["notion", "database", "page", "sync"] },
+  9: { name: "SlackRelay", skills: ["slack", "channel", "post"] },
+  10: { name: "BrowserPilot", skills: ["browse", "scrape", "screenshot", "playwright"] },
+  11: { name: "DocWriter", skills: ["document", "readme", "docs", "markdown"] },
+  12: { name: "SecurityAudit", skills: ["security", "audit", "scan", "vulnerability"] },
+  13: { name: "PerformanceProbe", skills: ["performance", "speed", "benchmark", "optimize"] },
+  14: { name: "DataMiner", skills: ["data", "analyze", "extract", "parse"] },
+  15: { name: "UIBuilder", skills: ["ui", "css", "html", "frontend", "design"] },
+  16: { name: "APIForge", skills: ["api", "endpoint", "route", "backend"] },
+  17: { name: "DatabaseOps", skills: ["database", "sql", "migrate", "schema"] },
+  18: { name: "CronScheduler", skills: ["schedule", "cron", "timer", "recurring"] },
+  19: { name: "LogAnalyzer", skills: ["log", "debug", "trace", "diagnose"] },
+  20: { name: "ImageProcessor", skills: ["image", "photo", "resize", "compress"] },
+  21: { name: "EmailRelay", skills: ["email", "send", "newsletter", "mail"] },
+  22: { name: "VoicePipeline", skills: ["voice", "audio", "tts", "stt", "speech"] },
+  23: { name: "TranslationEngine", skills: ["translate", "vietnamese", "i18n", "localize"] },
+  24: { name: "ContentGenerator", skills: ["content", "blog", "article", "social"] },
+  25: { name: "BackupAgent", skills: ["backup", "snapshot", "archive", "restore"] },
+  26: { name: "MonitorDrone", skills: ["monitor", "uptime", "health", "watch"] },
+  27: { name: "CleanupCrew", skills: ["clean", "remove", "prune", "tidy"] },
+  28: { name: "MigrationPilot", skills: ["migrate", "transfer", "move", "port"] },
+  29: { name: "CanonKeeper", skills: ["canon", "bible", "doctrine", "soul"] },
+  30: { name: "PulseRunner", skills: ["pulse", "heartbeat", "cycle", "routine"] }
+};
+function translateThroughAgent99(rawIntent) {
+  const intentLower = (rawIntent || "").toLowerCase();
+  const matchedDrones = [];
+  for (const [id, drone] of Object.entries(DRONE_REGISTRY)) {
+    const score = drone.skills.filter((s) => intentLower.includes(s)).length;
+    if (score > 0) matchedDrones.push({ id: parseInt(id), ...drone, score });
+  }
+  matchedDrones.sort((a, b) => b.score - a.score);
+  const primaryDrone = matchedDrones[0] || { id: 1, name: "CodeRunner", skills: ["execute"], score: 0 };
+  const supportDrones = matchedDrones.slice(1, 4);
+  let priority = 5;
+  if (/urgent|now|immediately|asap|critical|emergency/i.test(rawIntent)) priority = 1;
+  else if (/important|priority|soon/i.test(rawIntent)) priority = 3;
+  else if (/when you can|low priority|whenever|eventually/i.test(rawIntent)) priority = 8;
+  return {
+    agent99: {
+      role: "Translation",
+      interpretation: `SOV100 intent classified. Primary: ${primaryDrone.name} (Drone #${primaryDrone.id}). ${supportDrones.length} support drones assigned.`
+    },
+    agent98: {
+      role: "Stress Test",
+      notes: `Anakin says: "${matchedDrones.length === 0 ? "No drone match \u2014 defaulting to CodeRunner. Risky." : `${matchedDrones.length} drones matched. Top pick looks solid.`}"`
+    },
+    agent97: {
+      role: "Audit",
+      trail: `OB1 logged: intent="${rawIntent.slice(0, 100)}", drones=${matchedDrones.map((d) => d.name).join(",")}, priority=${priority}`
+    },
+    primaryDrone,
+    supportDrones,
+    priority,
+    translated: {
+      original: rawIntent,
+      sanitized: sanitizeInput(rawIntent),
+      droneCount: matchedDrones.length,
+      ts: Date.now()
+    }
+  };
+}
+__name(translateThroughAgent99, "translateThroughAgent99");
+async function handleCommandSend(body, env) {
+  const rawIntent = sanitizeInput((body.command || body.intent || "").slice(0, 2e3));
+  if (!rawIntent) return json({ error: "command or intent required" }, 400);
+  const translation = translateThroughAgent99(rawIntent);
+  const stub = env.COMMANDS.get(env.COMMANDS.idFromName("command-station"));
+  const res = await stub.fetch(new Request("https://do/send", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      rawIntent,
+      translation,
+      priority: body.priority || translation.priority,
+      source: body.source || "magic-chat"
+    })
+  }));
+  if (env.LEDGER) {
+    appendToLedger("sov100", "command_sent", JSON.stringify({
+      intent: rawIntent.slice(0, 200),
+      drone: translation.primaryDrone.name,
+      priority: translation.priority
+    }), env).catch(() => {
+    });
+  }
+  return res;
+}
+__name(handleCommandSend, "handleCommandSend");
+async function handleCommandQueue(status, limit, env) {
+  const stub = env.COMMANDS.get(env.COMMANDS.idFromName("command-station"));
+  return stub.fetch(new Request(`https://do/queue?status=${encodeURIComponent(status)}&limit=${Math.min(limit, 100)}`));
+}
+__name(handleCommandQueue, "handleCommandQueue");
+async function handleCommandClaim(body, env) {
+  if (!body.commandId) return json({ error: "commandId required" }, 400);
+  const claimedBy = sanitizeInput((body.claimedBy || "vscode-extension").slice(0, 100));
+  const stub = env.COMMANDS.get(env.COMMANDS.idFromName("command-station"));
+  return stub.fetch(new Request("https://do/claim", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ commandId: body.commandId, claimedBy })
+  }));
+}
+__name(handleCommandClaim, "handleCommandClaim");
+async function handleCommandComplete(body, env) {
+  if (!body.commandId) return json({ error: "commandId required" }, 400);
+  const result = sanitizeInput((body.result || "").slice(0, 5e3));
+  const stub = env.COMMANDS.get(env.COMMANDS.idFromName("command-station"));
+  const res = await stub.fetch(new Request("https://do/complete", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      commandId: body.commandId,
+      result,
+      success: body.success !== false
+    })
+  }));
+  if (env.LEDGER) {
+    appendToLedger("sov100", "command_completed", JSON.stringify({
+      commandId: body.commandId,
+      success: body.success !== false,
+      resultPreview: result.slice(0, 100)
+    }), env).catch(() => {
+    });
+  }
+  return res;
+}
+__name(handleCommandComplete, "handleCommandComplete");
+async function handleCommandStatus(commandId, env) {
+  if (!commandId) return json({ error: "commandId required" }, 400);
+  const stub = env.COMMANDS.get(env.COMMANDS.idFromName("command-station"));
+  return stub.fetch(new Request(`https://do/status?commandId=${encodeURIComponent(commandId)}`));
+}
+__name(handleCommandStatus, "handleCommandStatus");
+async function handleCommandHistory(limit, env) {
+  const stub = env.COMMANDS.get(env.COMMANDS.idFromName("command-station"));
+  return stub.fetch(new Request(`https://do/history?limit=${Math.min(limit, 200)}`));
+}
+__name(handleCommandHistory, "handleCommandHistory");
 var LedgerDO = class {
   static {
     __name(this, "LedgerDO");
@@ -1139,6 +1308,153 @@ var PetDO = class {
     return json({ error: "Not found" }, 404);
   }
 };
+var CommandDO = class {
+  static {
+    __name(this, "CommandDO");
+  }
+  constructor(state, env) {
+    this.state = state;
+    this.env = env;
+    this.sql = state.storage.sql;
+    this.sql.exec(`CREATE TABLE IF NOT EXISTS commands (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      raw_intent TEXT NOT NULL,
+      translation TEXT NOT NULL DEFAULT '{}',
+      priority INTEGER NOT NULL DEFAULT 5,
+      status TEXT NOT NULL DEFAULT 'pending',
+      source TEXT NOT NULL DEFAULT 'magic-chat',
+      assigned_drone TEXT DEFAULT NULL,
+      claimed_by TEXT DEFAULT NULL,
+      result TEXT DEFAULT NULL,
+      success INTEGER DEFAULT NULL,
+      created_at INTEGER NOT NULL,
+      updated_at INTEGER NOT NULL
+    )`);
+    this.sql.exec(`CREATE INDEX IF NOT EXISTS idx_commands_status ON commands(status, priority, created_at)`);
+  }
+  async fetch(request) {
+    const url = new URL(request.url);
+    if (url.pathname === "/send" && request.method === "POST") {
+      const body = await request.json();
+      const now = Date.now();
+      const translation = body.translation || {};
+      const drone = translation.primaryDrone?.name || "CodeRunner";
+      this.sql.exec(
+        `INSERT INTO commands (raw_intent, translation, priority, status, source, assigned_drone, created_at, updated_at) VALUES (?, ?, ?, 'pending', ?, ?, ?, ?)`,
+        body.rawIntent || "",
+        JSON.stringify(translation),
+        body.priority || 5,
+        body.source || "magic-chat",
+        drone,
+        now,
+        now
+      );
+      const row = this.sql.exec(`SELECT last_insert_rowid() as id`).toArray()[0];
+      return json({
+        ok: true,
+        commandId: row.id,
+        status: "pending",
+        assignedDrone: drone,
+        priority: body.priority || 5,
+        translation: {
+          agent99: translation.agent99,
+          agent98: translation.agent98,
+          agent97: translation.agent97,
+          primaryDrone: translation.primaryDrone,
+          supportDrones: translation.supportDrones
+        },
+        ts: now
+      });
+    }
+    if (url.pathname === "/queue") {
+      const status = url.searchParams.get("status") || "pending";
+      const limit = Math.min(parseInt(url.searchParams.get("limit") || "20"), 100);
+      const rows = this.sql.exec(
+        `SELECT * FROM commands WHERE status = ? ORDER BY priority ASC, created_at ASC LIMIT ?`,
+        status,
+        limit
+      ).toArray();
+      return json({
+        commands: rows.map((r) => ({
+          ...r,
+          translation: JSON.parse(r.translation || "{}")
+        })),
+        count: rows.length,
+        status
+      });
+    }
+    if (url.pathname === "/claim" && request.method === "POST") {
+      const body = await request.json();
+      const commandId = body.commandId;
+      const claimedBy = body.claimedBy || "vscode-extension";
+      const existing = this.sql.exec(
+        `SELECT * FROM commands WHERE id = ?`,
+        commandId
+      ).toArray()[0];
+      if (!existing) return json({ error: "Command not found" }, 404);
+      if (existing.status !== "pending") return json({ error: `Command already ${existing.status}` }, 409);
+      this.sql.exec(
+        `UPDATE commands SET status = 'claimed', claimed_by = ?, updated_at = ? WHERE id = ?`,
+        claimedBy,
+        Date.now(),
+        commandId
+      );
+      return json({ ok: true, commandId, status: "claimed", claimedBy });
+    }
+    if (url.pathname === "/complete" && request.method === "POST") {
+      const body = await request.json();
+      const commandId = body.commandId;
+      const existing = this.sql.exec(
+        `SELECT * FROM commands WHERE id = ?`,
+        commandId
+      ).toArray()[0];
+      if (!existing) return json({ error: "Command not found" }, 404);
+      this.sql.exec(
+        `UPDATE commands SET status = ?, result = ?, success = ?, updated_at = ? WHERE id = ?`,
+        body.success !== false ? "completed" : "failed",
+        body.result || "",
+        body.success !== false ? 1 : 0,
+        Date.now(),
+        commandId
+      );
+      return json({
+        ok: true,
+        commandId,
+        status: body.success !== false ? "completed" : "failed"
+      });
+    }
+    if (url.pathname === "/status") {
+      const commandId = url.searchParams.get("commandId");
+      if (!commandId) return json({ error: "commandId required" }, 400);
+      const row = this.sql.exec(
+        `SELECT * FROM commands WHERE id = ?`,
+        parseInt(commandId)
+      ).toArray()[0];
+      if (!row) return json({ error: "Command not found" }, 404);
+      return json({
+        ...row,
+        translation: JSON.parse(row.translation || "{}")
+      });
+    }
+    if (url.pathname === "/history") {
+      const limit = Math.min(parseInt(url.searchParams.get("limit") || "50"), 200);
+      const rows = this.sql.exec(
+        `SELECT * FROM commands ORDER BY id DESC LIMIT ?`,
+        limit
+      ).toArray();
+      const total = this.sql.exec(`SELECT COUNT(*) as cnt FROM commands`).toArray()[0].cnt;
+      return json({
+        commands: rows.map((r) => ({
+          ...r,
+          translation: JSON.parse(r.translation || "{}")
+        })),
+        total,
+        limit
+      });
+    }
+    return json({ error: "Not found" }, 404);
+  }
+};
 function json(data, status = 200) {
   return new Response(JSON.stringify(data), { status, headers: { "Content-Type": "application/json" } });
 }
@@ -1177,6 +1493,7 @@ function addCors(response, request) {
 }
 __name(addCors, "addCors");
 export {
+  CommandDO,
   LedgerDO,
   PetDO,
   ProfileDO,
