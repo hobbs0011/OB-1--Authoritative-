@@ -1,0 +1,21 @@
+{
+  "name": "obi-chrome-extension",
+  "version": "1.0.0",
+  "private": true,
+  "description": "OBI — Natural English Training Chrome Extension",
+  "type": "module",
+  "scripts": {
+    "dev": "vite build --watch --mode development",
+    "build": "vite build",
+    "lint": "eslint src/ --ext .js,.ts",
+    "lint:fix": "eslint src/ --ext .js,.ts --fix",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^6.0.0",
+    "@crxjs/vite-plugin": "^2.0.0-beta.28",
+    "eslint": "^9.0.0",
+    "eslint-plugin-no-unsanitized": "^4.1.0",
+    "@anthropic-ai/eslint-config-chrome-ext": "^1.0.0"
+  }
+}
