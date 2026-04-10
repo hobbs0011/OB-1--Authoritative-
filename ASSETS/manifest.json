@@ -1,0 +1,8 @@
+{
+  "version": "1.0.0",
+  "updated": "2026-04-10",
+  "r2_bucket": "phoenix-rising-assets",
+  "r2_account": "mrmichaelhobbs1234",
+  "cdn_pattern": "https://assets.naturalenglishtraining.net/{key}",
+  "assets": []
+}

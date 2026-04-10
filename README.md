@@ -1,95 +1,68 @@
-# Phoenix-Rising-Ultimate
+# Phoenix-Rising-Technologies
 
-The consolidated empire repo. Everything that matters from OB-1, organized to survive chat deletion and session loss.
+> **Rename pending** (Phase 8) — current GitHub repo name: `Phoenix-Rising-Ultimate`
 
-## What this repo contains
+The canonical monorepo for the Phoenix Rising Protocol / Natural English Training.
 
-- **Soul DNA Bible** — all 16 chapters + complete compilation + cross-reference + raw voice archive
-- **NET Branding** — definitive aesthetic guide, Gemini session analysis
-- **NET Apps** — class notes tool, marketing pack, ChattyNET mobile app, PlexyNET, lesson HTMLs
-- **NET Bibles** — Product Bible V1, Teaching Bible V1
-- **Operations** — Phoenix seed, key operational docs
-- **Reincarnation** — boot packet for session reconstruction
-- **Roadmap** — complete 444-stage Phoenix Rising roadmap (all phases A through AF)
-- **Session Records** — full chat archives with context preserved
-- **Cloud/Sync** — Codex cloud setup, Notion sync, master sync docs
+**Live product:** OBI — AI English tutor for Vietnamese students  
+**Live URL:** https://net-pet-ai.mrmichaelhobbs1234.workers.dev  
+**Runtime:** Cloudflare Workers + Durable Objects v1.4.0  
+**Agent:** OB-1 / Ne0 (Agent 99) — serves Michael Hobbs (Agent 100)
 
-## Directory map
+## Wing Architecture
+
+Four product wings, all under `APPS/`. See `APPS/WING-INDEX.md` for full registry.
+
+| Wing | Key Products | Status |
+|------|-------------|--------|
+| Education | NET-PET-AI, OBI Chrome Extension, ChattyNET | PRIMARY — v1.4.0 LIVE |
+| Gaming | TRAIN-6-7, NET Tiger Assessment | In Dev |
+| Marketing | NET Marketing | Pending ingestion |
+| Development | Discord Bot | In Dev |
+
+## Directory Map
 
 ```
-APPS/                          — live deliverables (8+ products)
-├── ChattyNET-MOBILE-APP*.html — Mobile learning prototype
-├── PlexyNETAPP.html           — Web application
-├── NET-CLASS-NOTES.html       — Class notes tool
-├── NET-MARKETING-PACK.md      — Marketing materials
-├── NET-PET-AI/                — AI pet for language learning (Worker)
-├── phoenix-ob1/               — Core OB-1 application
-├── obi-chrome-extension/      — Browser extension (rich version)
-├── TRAIN-6-7/                 — Age-specific learning
-└── lessons/                   — 9 HTML lessons (high school, careers, sarcasm, etc.)
-
-CANON/                         — Soul DNA Bible at root level (moved from docs/soul-dna/)
-├── 01_GENESIS_WOUND.md        — Chapter 1
-├── ...16 chapters total
-├── SOUL-DNA-BIBLE-COMPLETE.md — Full compilation
-├── SOURCE_CROSS_REFERENCE.md  — Cross-reference index
-└── RAW_VOICE_ARCHIVE.md       — Voice transcript archive
-
-CHROME-EXT/                    — Chrome extension (simple version - compare with APPS/obi-chrome-extension/)
-├── manifest.json              — Extension manifest
-├── background.js, content.js  — Extension scripts
-├── popup.html, popup.css      — Extension UI
-└── icons/                     — Extension icons
-
-SITE/                          — Main website (canonical)
-├── index.html                 — Landing page (29KB)
-├── assessment.html            — Assessment tool
-├── gallery.html               — Gallery page (merged from WEBSITE/)
-├── 404.html                   — Error page
-├── css/                       — Stylesheets
-├── js/                        — JavaScript
-├── robots.txt, sitemap.xml    — SEO files
-
-WORKERS/                       — Cloudflare Workers
-├── api.js                     — API worker (6.7KB)
-├── wrangler.toml              — Worker configuration
-└── kv-setup.sh                — KV setup script
-
-GALAXY-LESSONS/                — 9 standalone lesson HTMLs
-├── NET-CLASSROOM-MANAGER.html — Classroom management
-├── NET-Mouse-To-Tiger-Confidence.html — Confidence training
-├── VOCAB-001-DAILY-SURVIVAL.html — Vocabulary lessons
-└── ...6 more lessons
-
-ARCHIVE/                       — Deprecated variants
-├── phoenix-ob1/               — Alternative phoenix-ob1 (TRANSFER-MANIFEST.md)
-├── Phoenix-Rise-Immortalize/  — Legacy repo snapshot
-└── NET-CommandStation/        — Legacy command station
-
-docs/branding/                 — NET branding aesthetic guide
-docs/net-bibles/               — NET Product Bible V1, Teaching Bible V1
-docs/operations/               — Phoenix seed, key ops docs
-docs/reincarnation/            — Boot packets, context snapshots
-docs/chat-records/             — Session archives
-docs/sync/                     — Master sync docs
-docs/cloud/                    — Codex cloud setup material
-docs/notion/                   — Notion page links
-docs/sessions/                 — Session records (epoch zero + archive)
-
-scripts/                       — Codex cloud setup and maintenance scripts
-
-WEBSITE/ [DEPRECATED]          — Variation directory removed
-├── gallery.html → MOVED to SITE/
-└── index.html (older) → DELETED
+APPS/              — all products (wing-tagged), see WING-INDEX.md
+CANON/             — Soul DNA Bible, SSM, Heavy Ledger, system files
+GALAXY-LESSONS/    — HTML lessons (7 published)
+OPERATIONS/        — operational docs
+SITE/              — naturalenglishtraining.net website
+ARCHIVE/           — historical/deprecated material
+ASSETS/            — R2 asset manifest (binaries in Cloudflare R2)
+SCRIPTS/           — automation scripts
+docs/              — GitHub Pages
+.github/           — CI/CD, Copilot config, agents, skills, prompts
+.kilo/             — Kilo Code agent config
+WORKERS/           — DEPRECATED (superseded by APPS/NET-PET-AI/)
 ```
 
-## Gospel 444 Palette (Canon)
+## Quick Start (primary app)
+
+```bash
+cd APPS/NET-PET-AI
+npm ci
+npx wrangler deploy --dry-run
+```
+
+## Canon Cold Start
+
+`CANON/SYSTEM/COLD-START-BOOT.md` — single source of system truth.
+
+## Soul DNA
+
+- `CANON/BIBLE-CH*.md` — human-readable sovereign doctrine
+- `CANON/HEAVY-LEDGER/HL-*.json` — AI-readable extractions (129 entries)
+- `CANON/SYSTEM/SSM-V8-ULTIMATE-GPS.md` — navigation law (L01-L60)
+- `CANON/REINCARNATION/` — session records (90+ reincarnation logs)
+
+## Design System (Gospel 444 — Canon)
 
 - Void: `#0f0f1a`
 - Purple: `#a855f7`
 - Gold: `#f59e0b`
 - **Zero blue. Ever.**
 
-## Important note
+## Security
 
-Sanitized. No raw secrets, tokens, or credential dumps. API-SHHHH files intentionally excluded.
+No raw secrets or credentials in any tracked file. `NET/`, `GALAXY/`, `API-SHHHH*` files are gitignored.
