@@ -23,16 +23,17 @@ Treat that directory as the canonical runtime target unless a task explicitly sa
 
 ## Safe Edit Zones
 
-- `APPS/NET-PET-AI/**`
-- `.github/**`
-- `MASTER-SYNC.md`
-- `OPERATIONS/**`
-
-## Restricted Zones
-
-Do not modify unless the task explicitly requires it:
-
-- `API-SHHHH.txt`
+- `APPS/NET-PET-AI/**` — primary Cloudflare Worker app
+- `APPS/discord-bot/**` — Discord bot (moved from root in Phase 3)
+- `APPS/WING-INDEX.md` — product registry
+- `.github/**` — CI/CD, agents, skills, prompts, instructions
+- `MASTER-SYNC.md` — system state machine
+- `OPERATIONS/**` — operational docs
+- `CANON/**` — canon files (append-first, never overwrite without instruction)
+- `GALAXY-LESSONS/**` — lesson content
+- `ASSETS/**` — R2 manifest (never commit binaries)
+- `SCRIPTS/**` — automation scripts
+- `README.md` — repo overview
 - `API-SHHHH-2.txt`
 - `API-MASTER.txt`
 - `OB-1.worktrees/**`
