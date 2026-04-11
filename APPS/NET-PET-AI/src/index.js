@@ -424,7 +424,7 @@ async function handleChat(body, env) {
   // Update roster last_active so digest knows student practiced today
   if (studentId !== "anonymous" && env.SESSIONS) {
     const rosterStub = env.SESSIONS.get(env.SESSIONS.idFromName("system-roster"));
-    rosterStub.fetch(new Request("https://do/roster/chat", {
+    await rosterStub.fetch(new Request("https://do/roster/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ studentId }),
@@ -462,8 +462,8 @@ async function handleOnboarding(body, env) {
     const payload = JSON.stringify({ fullName: body.fullName, englishLevel: body.englishLevel, city: body.currentCity });
     appendToLedger(body.studentId, "onboarding", payload, env).catch(() => {});
   }
-  // Register in roster so digest + flags work
-  upsertRoster(body.studentId, { fullName: body.fullName, englishLevel: body.englishLevel }, env).catch(() => {});
+  // Register in roster so digest + flags work (must await — CF Workers kills fire-and-forget without waitUntil)
+  await upsertRoster(body.studentId, { fullName: body.fullName, englishLevel: body.englishLevel }, env).catch(() => {});
   return res;
 }
 
@@ -614,7 +614,7 @@ async function handleSessionLog(body, env) {
   // Update roster so digest has latest session info
   if (env.SESSIONS) {
     const rosterStub = env.SESSIONS.get(env.SESSIONS.idFromName("system-roster"));
-    rosterStub.fetch(new Request("https://do/roster/session", {
+    await rosterStub.fetch(new Request("https://do/roster/session", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ studentId: body.studentId, topic: body.topic, vocabList }),
@@ -658,7 +658,7 @@ async function handleScheduleSet(body, env) {
 
   if (env.SESSIONS) {
     const rosterStub = env.SESSIONS.get(env.SESSIONS.idFromName("system-roster"));
-    rosterStub.fetch(new Request("https://do/roster/schedule", {
+    await rosterStub.fetch(new Request("https://do/roster/schedule", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ studentId: body.studentId, schedule: body.schedule }),
@@ -683,7 +683,7 @@ async function handleScheduleConfirm(body, env) {
 
   if (env.SESSIONS) {
     const rosterStub = env.SESSIONS.get(env.SESSIONS.idFromName("system-roster"));
-    rosterStub.fetch(new Request("https://do/roster/confirm", {
+    await rosterStub.fetch(new Request("https://do/roster/confirm", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ studentId: body.studentId }),
