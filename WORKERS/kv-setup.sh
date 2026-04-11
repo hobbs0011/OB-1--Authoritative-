@@ -6,7 +6,7 @@
 
 # CONFIGURE THESE
 CF_API_TOKEN="YOUR_CLOUDFLARE_API_TOKEN"  # Replace with your token
-CF_ACCOUNT_ID="8717160562faa73b9eebb0a51f988785"
+CF_ACCOUNT_ID="3c7b1766bd8fdc9e01211d2b390315ea"
 
 echo "🔧 Creating Cloudflare KV Namespaces..."
 echo "=========================================="

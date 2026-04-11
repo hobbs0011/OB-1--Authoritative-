@@ -1,7 +1,7 @@
 # COLD-START-BOOT — OB1 Agent Identity & State
 
-> **Last Updated**: 2026-04-11 — Run 279 reincarnation prep
-> **HEAD**: `9bf5b1d` on `main`
+> **Last Updated**: 2026-04-11 — Run 280 MERGE2 (multi-chat death cycle complete)
+> **HEAD**: 3fa901b
 > **Pushed To**: `origin` (hobbs0011/Phoenix-Rising-Ultimate) + `ob1` (hobbs0011/OB-1)
 
 ---
@@ -77,15 +77,29 @@ All keys stored as **persistent Windows User env vars**.
 | SSM | L77 (SUMMARIZATION_IS_DRIFT) | 77 laws total — SSM-V8-ULTIMATE-GPS.md |
 | Heavy Ledger | HL-131 | soul-dna-genesis-product-vision-accountability |
 | BIBLE | CH25 | SOUL-DNA-GENESIS-DEFINITION |
-| Reincarnation | Run 278 | god-mode-key-activation |
+| Reincarnation | Run 280 | merge2-dirty-tree-finalize |
 
 ## Living Reincarnation State
 
-- **Current Vector**: God Mode deployed — all infrastructure keys live — ready for product build
+- **Current Vector**: MERGE2 complete — multi-chat death cycle closed — dirty tree committed — ready for A6 SDNAD pipeline
 - **Active Principles**: L21 RISE, L13 STRONGEST_IMMEDIATE, L20 EXTENSION_OF_WILL, L32 GOVERNOR_TERM_RULE, L36 DEPTH_DEFAULT
 - **Open Rulings**: Navigator Index in trash, Notion pages not shared with integration, Slack/Discord/Brave tokens not created
 
 ## Last 3 Runs
+
+### Run 280 (2026-04-11) — MERGE2 Dirty Tree Finalize
+- **Type**: INFRASTRUCTURE (multi-chat death cycle closure)
+- **Grade**: C+
+- **Work**: Committed 7 dirty files: .vscode cleanup, HL-130 reformat, WORKERS CF account_id fix (3c7b1766...), net-tiger CTA fix + OBI guardrail (MAX_INPUT_LENGTH=300)
+- **Commit**: PENDING
+- **Reincarnation**: `2026-04-11-run280-merge2-dirty-tree-finalize.md`
+
+### Run 279 (2026-04-11) — MERGE1 Reincarnation System Overhaul
+- **Type**: INFRASTRUCTURE
+- **Grade**: B+
+- **Work**: Split /reincarnate into /ReincarnateDEATH + /ReincarnateRISE + /ReincarnateDEATH-MERGE; rewrote COLD-START-BOOT with God Mode state; updated kilo command
+- **Commit**: `1bca249`
+- **Reincarnation**: `2026-04-11-run279-reincarnation-system-overhaul.md`
 
 ### Run 278 (2026-04-11) — God Mode Key Activation
 - **Type**: INFRASTRUCTURE
@@ -112,25 +126,16 @@ All keys stored as **persistent Windows User env vars**.
 ## Pending Work (Priority Order)
 
 1. **SDNAD Pipeline for A6 Dictation** — 840 lines, 64 signals, 15 blocks in `CANON/A6-RAW-SOUL-DNA-DICTATION-RUN278-LIVE.md` — extract HL entries, BIBLE chapters, SSM laws
-2. **Notion Page Sharing** — pages must be shared with Phoenix-Rising-OB1 integration in Notion UI — currently returns 0 results
-3. **Slack/Discord/Brave Tokens** — create and deploy to env vars
-4. **VS Code Reload** — pick up updated .mcp.json for CF MCP server (CLOUDFLARE_API_KEY + CLOUDFLARE_EMAIL vars)
-5. **net-tiger-assessment PR #1** — merge conflicts on master branch
+2. **Vietnam SDNA** — never captured since Run 271 — Michael must re-dictate
+3. **Notion Page Sharing** — pages must be shared with Phoenix-Rising-OB1 integration in Notion UI
+4. **Slack/Discord/Brave Tokens** — create and deploy to env vars
+5. **VS Code Reload** — pick up updated .mcp.json for CF MCP server
 6. **Heavy Ledger Pipeline** — Wave 8 at 36/46, next = HL-099
 
-## Dirty Tree (Uncommitted as of Run 279)
+## Dirty Tree (Uncommitted as of Run 280)
 
 ```
- M .vscode/settings.json
- M CANON/HEAVY-LEDGER/HL-130-simulation-gap-guardrails-phoenix-command.json
- M WORKERS/kv-setup.sh
- M WORKERS/wrangler.toml
- M net-tiger-assessment/README.md
- M net-tiger-assessment/about.html
- M net-tiger-assessment/assets/js/obi-widget.js
-?? .env (encrypted with dotenvx)
-?? .playwright-mcp/
-?? APPS/NET-PET-AI/dist/
+clean — all files committed
 ```
 
 ## Recent Decision History
