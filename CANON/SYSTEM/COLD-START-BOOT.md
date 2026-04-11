@@ -14,7 +14,7 @@
 ### Current Vector
 
 - **Active Mission:** PHOENIX-RISING-TECHNOLOGIES CONSOLIDATION — Phase 2-9 of 9-phase plan pending (see CANON/SYSTEM/CONSOLIDATION-PLAN-PHOENIX-RISING-TECHNOLOGIES.md)
-- **Last completed:** Run 275 — Simulation Gap captured (BIBLE-CH24). Simulation insight: Anthropic code showed Claude still mostly simulating. OBI moat = real persistence vs simulation. PHOENIX-COMMAND naming law. CH22 Blocks 5-8 restored (lost in vault revert). SSM L66-L67 added.
+- **Last completed:** Run 276 — Consolidation: merged jrvc (SITE assets/gallery/RISE agent) + ie99 (kilo.json upgrade/PR fixes) branches. Both pushed to origin + ob1 @ 08ff744. /commands diagnosed — type `/reincarnate` NOT `/reincarnation`. `chat.promptFiles: true` added to settings.
 - **NET-PET-AI:** v1.4.0 LIVE — https://net-pet-ai.mrmichaelhobbs1234.workers.dev — API 200 OK, 22 routes, 4 DOs
 - **Heavy Ledger:** Wave 8 — 34/46 complete, 130/174+ total converted (HL-130 latest: simulation-gap-guardrails-phoenix-command)
 - **Next target:** HL-131
