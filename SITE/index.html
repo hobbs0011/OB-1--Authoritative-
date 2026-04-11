@@ -29,7 +29,7 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
@@ -64,16 +64,16 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --primary: #1e40af;
-      --primary-light: #3b82f6;
+      --primary: #a855f7;
+      --primary-light: #c084fc;
       --accent: #f59e0b;
       --accent-hover: #d97706;
-      --dark: #0f172a;
-      --gray-900: #1e293b;
-      --gray-700: #334155;
-      --gray-500: #64748b;
-      --gray-300: #cbd5e1;
-      --gray-100: #f1f5f9;
+      --dark: #0f0f1a;
+      --gray-900: #171728;
+      --gray-700: #cbcad6;
+      --gray-500: #a6a5b5;
+      --gray-300: #6f6e80;
+      --gray-100: #24243a;
       --white: #ffffff;
       --tiger-orange: #ea580c;
       --tiger-bg: #fff7ed;
@@ -113,7 +113,7 @@
     /* HERO */
     .hero {
       padding: 8rem 2rem 5rem; text-align: center;
-      background: linear-gradient(135deg, #eff6ff 0%, #fff7ed 50%, #f0fdf4 100%);
+      background: linear-gradient(135deg, rgba(168,85,247,0.16) 0%, rgba(245,158,11,0.12) 100%);
       min-height: 90vh; display: flex; flex-direction: column;
       justify-content: center; align-items: center;
     }
@@ -199,7 +199,7 @@
     .story-card .story-time { margin-top: 1rem; font-size: 0.8rem; color: var(--gray-500); }
 
     /* OBI SECTION */
-    .obi-section { padding: 6rem 2rem; background: linear-gradient(135deg, #fff7ed 0%, #eff6ff 100%); }
+    .obi-section { padding: 6rem 2rem; background: linear-gradient(135deg, rgba(245,158,11,0.12) 0%, rgba(168,85,247,0.14) 100%); }
     .obi-inner { max-width: 1000px; margin: 0 auto; text-align: center; }
     .obi-features { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 3rem; text-align: left; }
     .obi-feature {
@@ -281,11 +281,332 @@
       .pillars-grid { grid-template-columns: 1fr; }
       .stories-grid { grid-template-columns: 1fr; }
     }
+    /* PLAN A OVERRIDES - Gospel 444 visuals */
+    :root {
+      --primary: #a855f7;
+      --primary-light: #c084fc;
+      --accent: #f59e0b;
+      --accent-hover: #d97706;
+      --dark: #0f0f1a;
+      --gray-900: #171728;
+      --gray-700: #cbcad6;
+      --gray-500: #a6a5b5;
+      --gray-300: #6f6e80;
+      --gray-100: #24243a;
+      --white: #f3f2fa;
+      --tiger-orange: #f59e0b;
+      --tiger-bg: rgba(245, 158, 11, 0.12);
+      --success: #f59e0b;
+    }
+    body {
+      font-family: 'Manrope', sans-serif;
+      background: radial-gradient(circle at 12% 20%, rgba(168, 85, 247, 0.15), transparent 34%),
+                  radial-gradient(circle at 84% 10%, rgba(245, 158, 11, 0.14), transparent 36%),
+                  var(--dark);
+      color: var(--white);
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        radial-gradient(1px 1px at 12% 22%, rgba(168, 85, 247, 0.4) 0, transparent 100%),
+        radial-gradient(1px 1px at 65% 14%, rgba(245, 158, 11, 0.4) 0, transparent 100%),
+        radial-gradient(1px 1px at 81% 70%, rgba(243, 242, 250, 0.35) 0, transparent 100%),
+        radial-gradient(1.5px 1.5px at 35% 84%, rgba(168, 85, 247, 0.45) 0, transparent 100%);
+      animation: twinkleStars 8s ease-in-out infinite alternate;
+    }
+    nav,
+    .hero,
+    .problem-section,
+    .section,
+    .stories-section,
+    .obi-section,
+    .pricing-section,
+    .cta-section,
+    footer {
+      position: relative;
+      z-index: 1;
+    }
+    nav {
+      background: rgba(15, 15, 26, 0.88);
+      border-bottom: 1px solid rgba(168, 85, 247, 0.3);
+    }
+    .logo {
+      display: inline-flex;
+      align-items: center;
+    }
+    .logo-mark {
+      height: 34px;
+      width: auto;
+      display: block;
+      filter: drop-shadow(0 0 10px rgba(168, 85, 247, 0.35));
+    }
+    .nav-links a {
+      color: var(--gray-700);
+    }
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), #fbbf24);
+      color: var(--dark);
+    }
+    .btn-outline {
+      color: var(--white);
+      border-color: rgba(168, 85, 247, 0.6);
+    }
+    .btn-outline:hover {
+      background: rgba(168, 85, 247, 0.2);
+      border-color: var(--primary-light);
+      color: var(--white);
+    }
+    .hero {
+      text-align: left;
+      background: linear-gradient(160deg, rgba(168, 85, 247, 0.12), rgba(245, 158, 11, 0.08));
+      overflow: hidden;
+      padding-top: 8.5rem;
+      padding-bottom: 5.5rem;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -5%;
+      right: -8%;
+      width: 52%;
+      height: 115%;
+      background: url('assets/brand/Natural-English-Training-Banner.png') no-repeat center/cover;
+      opacity: 0.22;
+      filter: saturate(0.92);
+      transform: translateY(var(--hero-parallax, 0));
+      pointer-events: none;
+    }
+    .hero-layout {
+      width: min(1140px, 100%);
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 2.2rem;
+      align-items: center;
+    }
+    .hero-content {
+      max-width: 700px;
+    }
+    .hero-visual {
+      margin-left: auto;
+      width: min(520px, 100%);
+      border-radius: 24px;
+      border: 1px solid rgba(168, 85, 247, 0.5);
+      box-shadow: 0 18px 55px rgba(0, 0, 0, 0.4);
+      overflow: hidden;
+      transform: translateY(var(--hero-parallax, 0));
+    }
+    .hero-visual img {
+      width: 100%;
+      display: block;
+    }
+    .hero-badge {
+      background: rgba(23, 23, 40, 0.9);
+      border-color: rgba(168, 85, 247, 0.4);
+      color: var(--gray-700);
+    }
+    .hero p,
+    .hero-quote,
+    .section .subtitle,
+    .problem-card p,
+    .pillar-card p,
+    .obi-feature p,
+    .pricing-card .includes li,
+    .cta-section p,
+    .waitlist-note,
+    footer p {
+      color: var(--gray-700);
+    }
+    .problem-section,
+    .obi-section,
+    footer {
+      background: linear-gradient(180deg, rgba(22, 22, 36, 0.92), rgba(15, 15, 26, 0.96));
+    }
+    .section,
+    .pricing-section,
+    .cta-section {
+      background: transparent;
+    }
+    .problem-card,
+    .pillar-card,
+    .story-card,
+    .obi-feature,
+    .pricing-card {
+      background: rgba(23, 23, 40, 0.78);
+      border: 1px solid rgba(168, 85, 247, 0.28);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+      transition: transform 0.32s ease, box-shadow 0.32s ease, border-color 0.32s ease;
+    }
+    .problem-card:hover,
+    .pillar-card:hover,
+    .story-card:hover,
+    .obi-feature:hover,
+    .pricing-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(168, 85, 247, 0.75);
+      box-shadow: 0 14px 38px rgba(168, 85, 247, 0.2);
+    }
+    .feature-strip {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1rem 2rem 5rem;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.4rem;
+      position: relative;
+      z-index: 1;
+    }
+    .feature-art-card {
+      border-radius: 18px;
+      overflow: hidden;
+      background: rgba(23, 23, 40, 0.74);
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      transition: transform 0.32s ease, box-shadow 0.32s ease, border-color 0.32s ease;
+    }
+    .feature-art-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(168, 85, 247, 0.74);
+      box-shadow: 0 16px 38px rgba(168, 85, 247, 0.22);
+    }
+    .feature-art-card img {
+      width: 100%;
+      height: 190px;
+      object-fit: cover;
+      display: block;
+    }
+    .feature-art-body {
+      padding: 1rem;
+    }
+    .feature-art-body h3 {
+      font-size: 1.04rem;
+      margin-bottom: 0.35rem;
+      color: var(--white);
+      font-family: 'Space Grotesk', sans-serif;
+    }
+    .feature-art-body p {
+      font-size: 0.9rem;
+      color: var(--gray-700);
+    }
+    .method-visual {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 1.1rem;
+      margin-bottom: 2rem;
+      align-items: stretch;
+    }
+    .method-hero,
+    .method-hover {
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(168, 85, 247, 0.36);
+      box-shadow: 0 14px 35px rgba(0, 0, 0, 0.28);
+      position: relative;
+      min-height: 260px;
+    }
+    .method-hero img,
+    .method-hover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .method-hover::after {
+      content: 'Hover: Mouse to Tiger dossier cover';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      font-size: 0.82rem;
+      padding: 0.55rem 0.8rem;
+      background: linear-gradient(to top, rgba(15, 15, 26, 0.9), transparent);
+      color: var(--white);
+      letter-spacing: 0.03em;
+    }
+    .method-hover img {
+      transition: transform 0.45s ease, filter 0.45s ease;
+      filter: saturate(0.8) contrast(1.04);
+    }
+    .method-hover:hover img {
+      transform: scale(1.06);
+      filter: saturate(1);
+    }
+    .story-tag {
+      border: 1px solid rgba(168, 85, 247, 0.3);
+    }
+    .tag-mouse,
+    .tag-tiger {
+      background: rgba(168, 85, 247, 0.15);
+      color: var(--white);
+    }
+    .waitlist-form input[type="email"] {
+      background: rgba(23, 23, 40, 0.78);
+      border-color: rgba(168, 85, 247, 0.38);
+      color: var(--white);
+    }
+    .waitlist-form input[type="email"]::placeholder {
+      color: var(--gray-500);
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    @keyframes twinkleStars {
+      0% { opacity: 0.55; }
+      100% { opacity: 0.95; }
+    }
+    ::-webkit-scrollbar {
+      width: 12px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #121222;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, #a855f7, #f59e0b);
+      border-radius: 10px;
+      border: 2px solid #121222;
+    }
+    @media (max-width: 900px) {
+      .hero {
+        text-align: center;
+      }
+      .hero-layout {
+        grid-template-columns: 1fr;
+        gap: 1.7rem;
+      }
+      .hero-content {
+        max-width: 100%;
+      }
+      .hero-cta {
+        justify-content: center;
+      }
+      .feature-strip {
+        grid-template-columns: 1fr;
+      }
+      .method-visual {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 <body>
   <nav>
-    <a href="/" class="logo">Natural English<span>.</span></a>
+    <a href="/" class="logo" aria-label="Natural English Training home">
+      <img class="logo-mark" src="assets/brand/NET-PHXRISING-LOGO.webp" alt="Natural English Training logo">
+    </a>
     <div class="nav-links">
       <a href="#method">Method</a>
       <a href="#stories">Results</a>
@@ -296,14 +617,45 @@
 
   <!-- HERO — sourced from VAULT-CHAOS Synthesis + Michael Method Codified -->
   <section class="hero">
-    <div class="hero-badge">🇻🇳 Built for Vietnamese speakers in Ho Chi Minh City</div>
-    <h1>You're already a Tiger in Vietnamese. <span class="highlight">Find that voice in English.</span></h1>
-    <p>You're not bad at English. You've been taught to be afraid of it. We fix that — with real conversations, zero shame, and an AI that learns how you think.</p>
-    <div class="hero-cta">
-      <a href="#start" class="btn btn-primary">Join the Waitlist →</a>
-      <a href="#method" class="btn btn-outline">See the Method</a>
+    <div class="hero-layout">
+      <div class="hero-content">
+        <div class="hero-badge">🇻🇳 Built for Vietnamese speakers in Ho Chi Minh City</div>
+        <h1>Stop studying English. <span class="highlight">Start speaking it.</span></h1>
+        <p>An AI tutor that adapts to your level, lessons that feel like experiences, and a methodology built on one simple truth: confidence comes before perfection.</p>
+        <div class="hero-cta">
+          <a href="#start" class="btn btn-primary">Join the Waitlist →</a>
+          <a href="#method" class="btn btn-outline">See the Method</a>
+        </div>
+        <p class="hero-quote">"Language is not labels — it is consequences. The student who learns a word because something depends on it will carry it forever."</p>
+      </div>
+      <figure class="hero-visual">
+        <img src="assets/lessons/tiger-mode-evolution.webp" alt="Mouse to Tiger growth visual">
+      </figure>
     </div>
-    <p class="hero-quote">"Language is not labels — it is consequences. The student who learns a word to pass a test will forget it. The student who learns a word because something depends on it will carry it forever."</p>
+  </section>
+
+  <section class="feature-strip" aria-label="NET core features">
+    <article class="feature-art-card reveal">
+      <img src="assets/lessons/concept-art-1.png" alt="AI-powered tutor concept art" loading="lazy">
+      <div class="feature-art-body">
+        <h3>AI-Powered Tutor</h3>
+        <p>OBI coaches pronunciation, confidence, and speaking flow any time you practice.</p>
+      </div>
+    </article>
+    <article class="feature-art-card reveal">
+      <img src="assets/lessons/mouse-to-tiger-cover.webp" alt="Mouse to Tiger methodology cover" loading="lazy">
+      <div class="feature-art-body">
+        <h3>Real Methodology</h3>
+        <p>A live-tested protocol built in Vietnamese classrooms, not textbook theory.</p>
+      </div>
+    </article>
+    <article class="feature-art-card reveal">
+      <img src="assets/lessons/tiger-mode-evolution.webp" alt="Galaxy lessons visual" loading="lazy">
+      <div class="feature-art-body">
+        <h3>Galaxy Lessons</h3>
+        <p>Scenario-first missions that push students from hesitation to clear expression.</p>
+      </div>
+    </article>
   </section>
 
   <!-- PROBLEM — sourced from Michael Method Codified: Why Traditional ESL Fails Vietnamese Learners -->
@@ -334,6 +686,14 @@
     <div class="section-label">The Method</div>
     <h2>Four pillars. Built from hundreds of hours in Vietnamese classrooms.</h2>
     <p class="subtitle">The Michael Method wasn't designed in a conference room. It emerged from 41 source documents of live classroom chaos, failures, breakthroughs, and behavioral observations — right here in Vietnam.</p>
+    <div class="method-visual reveal">
+      <figure class="method-hero">
+        <img src="assets/lessons/tiger-mode-evolution.webp" alt="Mouse to Tiger evolution framework" loading="lazy">
+      </figure>
+      <figure class="method-hover">
+        <img src="assets/lessons/mouse-to-tiger-cover.webp" alt="Mouse to Tiger hover dossier cover" loading="lazy">
+      </figure>
+    </div>
     <div class="pillars-grid">
       <div class="pillar-card">
         <div class="pillar-number">1</div>
@@ -511,6 +871,35 @@
 
   <!-- Waitlist Form Handler -->
   <script>
+    const revealTargets = document.querySelectorAll('.problem-card, .pillar-card, .story-card, .obi-feature, .pricing-card, .feature-art-card, .method-visual');
+    revealTargets.forEach((el) => el.classList.add('reveal'));
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.14, rootMargin: '0px 0px -8% 0px' });
+
+    revealTargets.forEach((el, idx) => {
+      el.style.transitionDelay = `${Math.min((idx % 4) * 70, 210)}ms`;
+      revealObserver.observe(el);
+    });
+
+    const heroSection = document.querySelector('.hero');
+    const applyParallax = () => {
+      if (!heroSection) {
+        return;
+      }
+      const offset = Math.min(window.scrollY * 0.14, 70);
+      heroSection.style.setProperty('--hero-parallax', `${offset}px`);
+    };
+
+    window.addEventListener('scroll', applyParallax, { passive: true });
+    applyParallax();
+
     async function submitWaitlist(e) {
       e.preventDefault();
       const email = document.getElementById('waitlist-email').value.trim();

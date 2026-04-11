@@ -22,7 +22,7 @@
 **File**: `.kilo/plans/1775153790635-silent-orchid.md`
 **Target**: `WEBSITE/index.html` + `WEBSITE/gallery.html`
 
-#### Immediate Actions:
+#### Immediate Actions
 1. **Hero Section** — Replace emoji-only hero with layered visual:
    - Nav logo: `WEBSITE/assets/brand/NET-PHXRISING-LOGO.webp` instead of text "NET"
    - Hero BG: `WEBSITE/assets/brand/Natural-English-Training-Banner.png` subtle bg element
@@ -54,7 +54,7 @@
 **File**: `.kilo/plans/1775147108635-sunny-wizard.md`
 **Target**: `APPS/obi-chrome-extension/`
 
-#### Immediate Actions:
+#### Immediate Actions
 1. **Dev Tool Stack**:
    - Add Vite build system to `APPS/obi-chrome-extension/`
    - Add ESLint with Chrome extension rules
@@ -80,7 +80,7 @@
 **File**: `.kilo/plans/1775147906124-eager-knight.md`
 **Target**: `APPS/NET-PET-AI/src/index.js` + all frontend HTML
 
-#### Validate:
+#### Validate
 - Gospel 444 enforced in all HTML: `#0f0f1a` void, `#a855f7` purple, `#f59e0b` gold, zero blue
 - Tiger Voice scoring (0-3 each, 5 markers, max 15) implemented in AI responses
 - Mouse→Tiger progression tracked via `PETS` Durable Object
