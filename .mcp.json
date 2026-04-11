@@ -10,6 +10,8 @@
       "args": ["-y", "@cloudflare/mcp-server-cloudflare"],
       "env": {
         "CLOUDFLARE_API_TOKEN": "${env:CLOUDFLARE_API_TOKEN}",
+        "CLOUDFLARE_API_KEY": "${env:CLOUDFLARE_API_KEY}",
+        "CLOUDFLARE_EMAIL": "${env:CLOUDFLARE_EMAIL}",
         "CLOUDFLARE_ACCOUNT_ID": "${env:CLOUDFLARE_ACCOUNT_ID}"
       }
     },
