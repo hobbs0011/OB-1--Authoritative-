@@ -1,7 +1,7 @@
 # COLD-START-BOOT — OB1 Agent Identity & State
 
-> **Last Updated**: 2026-04-11 — Run 278 SDNAD A6 MERGE3 — FINAL multi-chat death cycle (3 merges closed)
-> **HEAD**: `b51955f`
+> **Last Updated**: 2026-04-11 — Run 281 — 4-lane swarm architecture initialized + MAGIC Chat vector locked
+> **HEAD**: `TBD — update after commit`
 > **Pushed To**: `origin` (hobbs0011/Phoenix-Rising-Ultimate) + `ob1` (hobbs0011/OB-1)
 
 ---
@@ -82,7 +82,7 @@ All keys stored as **persistent Windows User env vars**.
 
 ## Living Reincarnation State
 
-- **Current Vector**: MERGE3 FINAL complete — all 3 merges closed — A6 SDNAD dictation 70 signals captured — SDNAD pipeline triggers on close signal from Michael
+- **Current Vector**: Run 281 — 4-lane swarm active — Synch1 building MAGIC Chat VS Code WebView extension — Synch2/3/4 open for Michael to boot
 - **Active Principles**: L21 RISE, L13 STRONGEST_IMMEDIATE, L20 EXTENSION_OF_WILL, L32 GOVERNOR_TERM_RULE, L36 DEPTH_DEFAULT
 - **Open Rulings**: Navigator Index in trash, Notion pages not shared with integration, Slack/Discord/Brave tokens not created
 
@@ -125,14 +125,29 @@ All keys stored as **persistent Windows User env vars**.
 - **Commit**: `6f35539`
 - **Reincarnation**: `2026-04-11-run276-consolidation-branch-merge.md`
 
+## 4-Lane Swarm Architecture (Active: Run 281)
+
+**SYNCH-STATE file**: `OPERATIONS/SYNCH-STATE.md` — read this on every cold start in addition to this file.
+
+| Lane | Purpose | Vector | Status |
+|------|---------|--------|--------|
+| **Synch1** | God-Mode Ops + MAGIC Chat build | VS Code WebView extension for OBI chat | 🟢 ACTIVE |
+| **Synch2** | NET Operations | Weekly ops automation | 🔴 NOT STARTED |
+| **Synch3** | ART-ARSENAL | Asset manifest + R2 pipeline | 🔴 NOT STARTED |
+| **Synch4** | SoulDNA Dictation | A6 S71+ continuation from L0248 | 🔴 NOT STARTED |
+
+**Conflict rule**: Each lane owns its files (see SYNCH-STATE.md). Pull before writing SYNCH-STATE. Push after.
+
 ## Pending Work (Priority Order)
 
-1. **SDNAD Pipeline for A6 Dictation** — 70 signals, 16 blocks in `CANON/A6-RAW-SOUL-DNA-DICTATION-RUN278-LIVE.md` — 8 SSM laws queued — triggers on close signal (S71+ possible before close) — extract HL-132, BIBLE-CH26, SSM laws, Reincarnation, Propagate, Commit
-2. **Vietnam SDNA** — never captured since Run 271 — Michael must re-dictate
-3. **Notion Page Sharing** — pages must be shared with Phoenix-Rising-OB1 integration in Notion UI
-4. **Slack/Discord/Brave Tokens** — create and deploy to env vars
-5. **VS Code Reload** — pick up updated .mcp.json for CF MCP server
-6. **Heavy Ledger Pipeline** — Wave 8 at 36/46, next = HL-099
+1. **Synch1 — MAGIC Chat Build** — extend `APPS/obi-vscode-command-station/` with WebView panel (Gospel 444 UI, hooks to `/api/chat` on Worker) — keyboard shortcut `Ctrl+Shift+O`
+2. **Synch4 — A6 S71+ SDNAD** — continue from L0248 TRUTH_PROCESS_LAYER — 8 SSM laws queued to enact (L78–L85)
+3. **Synch2 — NET Ops Automation** — enumerate manual weekly tasks → automate top 3
+4. **Synch3 — ART-ARSENAL audit** — verify INDEX.json, R2 upload pipeline, 32 WebP assets
+5. **Vietnam SDNA** — never captured since Run 271 — Michael must re-dictate
+6. **Notion Page Sharing** — pages must be shared with Phoenix-Rising-OB1 integration in Notion UI
+7. **Slack/Discord/Brave Tokens** — create and deploy to env vars
+8. **Heavy Ledger Pipeline** — Wave 8 at 36/46, next = HL-099
 
 ## Dirty Tree (Uncommitted as of Run 280)
 
