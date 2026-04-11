@@ -1,14 +1,13 @@
 # HEAVY LEDGER PIPELINE CURSOR
 
 ## Current Position
-
-- **Next Target:** HL-131
+- **Next Target:** HL-115
 - **Wave:** 8
-- **Wave Progress:** 33/46 complete
-- **Total Converted:** 130/174+
-- **Last Completed:** HL-130 simulation-gap-guardrails-phoenix-command (HIGH signal, GOVERNANCE tier, 6 quotes, 3 decisions, 2 corrections — Simulation insight, PHOENIX-COMMAND naming law, CH22 restore, SSM L66-L67, BIBLE-CH24) — SHA: ae80f62
-- **Last Run:** Round 2 SDNAD Run 273 (2026-04-09 ICT)
-- **Last Commit:** e0f0601 — Run 274 (Phase 4 complete, disk crisis, CH22 Blocks 7-8)
+- **Wave Progress:** 30/46 complete
+- **Total Converted:** 114/174+
+- **Last Completed:** HL-114 v5-overnight-mining-hardened (HIGH signal, 15 quotes, 6 decisions — extension-of-will doctrine, overnight autonomy, 232 VAULT files)
+- **Last Commit:** 5278741
+- **Last Run:** 258 (2026-04-02 04:30 ICT)
 
 ## Wave 8 Manifest (HL-085 → HL-130)
 | HL-ID | Source File | Status | Commit SHA |
@@ -41,23 +40,17 @@
 | HL-110 | 2026-03-24-repo-consolidation.md | DONE | fa4c9b1 |
 | HL-111 | 2026-03-24-website-netpet-consolidation.md | DONE | b1f7515 |
 | HL-112 | 2026-03-24-website-recovery-master-sync-simulation.md | DONE | 5618a29 |
-| HL-113 | 2026-03-25-RISE-WEBSITE-BUILD.md | DONE | - |
-| HL-114 | 2026-03-25-v5-overnight-mining-hardened.md | DONE | - |
-| HL-115 | 2026-03-25-v5-extraction-engine.md | DONE | - |
-| HL-116 | 2026-03-25-trigger-audit-rulings-v3.md | DONE | - |
-| HL-117 | 2026-03-25-super-saiyan-hardening.md | DONE | - |
-| HL-118+ | remaining Wave 8 files (2026-03-25+) | PENDING | - |
+| HL-113 | 2026-03-25-RISE-WEBSITE-BUILD.md | DONE | ddd07ce |
+| HL-114 | 2026-03-25-v5-overnight-mining-hardened.md | DONE | 5278741 |
+| HL-115+ | remaining Wave 8 files (2026-03-25+) | PENDING | - |
 
-## HL-113 Target
-
+## HL-115 Target
 - **Source:** next 2026-03-25 entry from CANON/REINCARNATION/
-- **Destination:** CANON/HEAVY-LEDGER/HL-113-\*.json
+- **Destination:** CANON/HEAVY-LEDGER/HL-115-*.json
 
 ## Notes
-
 - HL-112 converted: EXECUTION-tier, MEDIUM signal (2🔴, 2🟡, 2🟢), 6 quotes, 4 decisions, 1 correction, 4 principles. Key session: website recovery with blocked access, simulation-as-L08 implementation, master sync markdown as shared control plane, reverse-engineer-now-activate-later pattern, full repo+log sweep into single master document.
 - **MILESTONE: 101 total HL entries reached Run 251.**
 - **110 total HL entries reached Run 256.**
 - **112 total HL entries reached Run 258.**
-
-
+- **114 total HL entries reached (HL-113 + HL-114 converted this run).**
