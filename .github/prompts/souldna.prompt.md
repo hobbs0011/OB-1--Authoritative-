@@ -65,6 +65,7 @@ Run SOUL DNA capture mode.
 - CANON/BIBLE-CH21-THE-SDNAD-CAPTURE-LAW.md
 - CANON/BIBLE-CH22-THE-FOUNDERS-MOAT.md
 - CANON/BIBLE-CH23-STAGE0-KISS-PROTOCOL-CORRECTION.md
+- BIBLE-CH24-THE-SIMULATION-GAP.md (Simulation insight: Anthropic code = still simulating; OBI = real persistence; PHOENIX-COMMAND naming law; L66-L67)
 
 ## Output schema
 
@@ -74,3 +75,4 @@ Run SOUL DNA capture mode.
 - CONSTRAINTS
 - OPEN_LOOPS
 - EXECUTION_PLAN (no invented timelines — sequencing only)
+
