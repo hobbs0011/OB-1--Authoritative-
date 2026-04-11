@@ -169,7 +169,7 @@ const GENESIS_BLOCK = {
 
 #### Unresolved Drift Conflicts (from Schema V2)
 1. **ROME vs ROAM**: Both spellings appear. Canonical name must be locked. **RULING NEEDED.**
-2. **Gospel 444 blue prohibition vs 'Trust Blue'**: Later layer describes blue usage. **RULING NEEDED.**
+2. **Gospel 444 blue prohibition vs 'Trust Blue'**: ~~RULING NEEDED~~ → **CLOSED. RULING: BLUE IS BANNED. Full stop.** "Trust Blue" is drift. No blue in any primary design element. Authority: SIGNAL 71 (A6 BLOCK 16, Run 285, 2026-04-11) — Gospel 444 elevated to Living Law (L50 in COLD-START-BOOT). The word "Trust" is not a Gospel 444 compliance pass.
 3. **Gospel 445**: DOES NOT EXIST. Quarantined as drift marker. Only Gospel 444 is law.
 
 ---
