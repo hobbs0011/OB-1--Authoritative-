@@ -1,7 +1,7 @@
 # COLD-START-BOOT — OB1 Agent Identity & State
 
-> **Last Updated**: 2026-04-11 — Run 283 — 4-lane swarm FULLY INITIALIZED — Lane 4 = SOUL DNA OPERATIONS (Synch4 registered)
-> **HEAD**: `55dfd2c`
+> **Last Updated**: 2026-04-11 — Run 281 — Empire MCP stack expanded: Telegram + LinkedIn + Gmail added; token gap guide written
+> **HEAD**: `f0dd658`
 > **Pushed To**: `origin` (hobbs0011/Phoenix-Rising-Ultimate) + `ob1` (hobbs0011/OB-1)
 
 ---
@@ -193,17 +193,21 @@ Configured in `.mcp.json` at repo root. All servers use `${env:VARIABLE_NAME}` p
 
 | Server | Status | Notes |
 |---|---|---|
-| cloudflare | LIVE | Uses CLOUDFLARE_API_KEY + CLOUDFLARE_EMAIL + CLOUDFLARE_ACCOUNT_ID |
-| github | LIVE | Uses GITHUB_TOKEN |
-| notion | PARTIAL | Uses NOTION_TOKEN — alive but 0 results (sharing needed) |
-| playwright | LIVE | Headless browser automation |
-| chrome-devtools | LIVE | Chrome DevTools Protocol |
-| slack | OFFLINE | SLACK_BOT_TOKEN not set |
-| filesystem | LIVE | Workspace file access |
-| brave-search | OFFLINE | BRAVE_API_KEY not set |
-| discord | OFFLINE | DISCORD_TOKEN not set |
-| roblox | LIVE | 140+ actions, 21 tool categories |
-| roblox-studio | LIVE | Lightweight Studio scripting bridge |
+| cloudflare | ✅ LIVE | CLOUDFLARE_API_KEY + EMAIL + ACCOUNT_ID — Super Admin |
+| github | ✅ LIVE | GITHUB_TOKEN — 21 scopes |
+| notion | ✅ PARTIAL | NOTION_TOKEN set — 0 results (sharing needed) |
+| playwright | ✅ LIVE | Headless browser — also covers Facebook ops |
+| chrome-devtools | ✅ LIVE | Chrome DevTools Protocol |
+| filesystem | ✅ LIVE | Workspace file access |
+| roblox | ✅ LIVE | ROBLOX_API_KEY — 140+ actions |
+| roblox-studio | ✅ LIVE | Lightweight Studio scripting bridge |
+| slack | ❌ TOKEN NEEDED | Set SLACK_BOT_TOKEN + SLACK_TEAM_ID (api.slack.com/apps) |
+| discord | ❌ TOKEN NEEDED | Set DISCORD_TOKEN (discord.com/developers) |
+| brave-search | ❌ TOKEN NEEDED | Set BRAVE_API_KEY (api.search.brave.com, free tier) |
+| telegram | ❌ TOKEN NEEDED | Set TELEGRAM_API_ID + TELEGRAM_API_HASH + TELEGRAM_PHONE (my.telegram.org) |
+| linkedin | ❌ TOKEN NEEDED | Set LINKEDIN_CLIENT_ID + CLIENT_SECRET + ACCESS_TOKEN (linkedin.com/developers) |
+| gmail | ❌ TOKEN NEEDED | Set GMAIL_CREDENTIALS_PATH (Google Cloud Console → Gmail API) |
+| facebook | ⚠️ PLAYWRIGHT | No official MCP — use playwright MCP for FB ops |
 
 ## Kilo Code Config
 
