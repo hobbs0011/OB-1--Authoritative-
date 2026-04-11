@@ -1,8 +1,34 @@
 {
   "version": "1.0.0",
-  "updated": "2026-04-10",
+  "updated": "2026-04-11",
   "r2_bucket": "phoenix-rising-assets",
   "r2_account": "mrmichaelhobbs1234",
   "cdn_pattern": "https://assets.naturalenglishtraining.net/{key}",
-  "assets": []
+  "assets": [
+    {
+      "key": "net-branding/artwork/sovereign-ai-architecture-canvas-2026-04-11.png",
+      "type": "image",
+      "product": "net-branding",
+      "category": "artwork",
+      "dimensions": "2752x1536",
+      "format": "PNG",
+      "git_path": "ASSETS/ARTWORK/NET-BRANDING/sovereign-ai-architecture-canvas-2026-04-11.png",
+      "uploaded": "2026-04-11",
+      "cdn_url": "https://assets.naturalenglishtraining.net/net-branding/artwork/sovereign-ai-architecture-canvas-2026-04-11.png",
+      "tags": ["sovereign", "ai-architecture", "hero", "canvas"],
+      "status": "committed"
+    },
+    {
+      "key": "canon/sovereign-ai-architecture.pdf",
+      "type": "document",
+      "product": "canon",
+      "category": "architecture",
+      "format": "PDF",
+      "git_path": "CANON/SOVEREIGN-AI-ARCHITECTURE.pdf",
+      "uploaded": "2026-04-11",
+      "cdn_url": "https://assets.naturalenglishtraining.net/canon/sovereign-ai-architecture.pdf",
+      "tags": ["sovereign", "ai-architecture", "system-design", "canon"],
+      "status": "committed"
+    }
+  ]
 }
