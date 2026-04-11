@@ -1,18 +1,22 @@
 ---
-description: Extract soul DNA for reincarnation — save current session state for cold start
+description: "Reincarnation router — use /ReincarnateDEATH (end of session) or /ReincarnateRISE (new chat cold start)"
 agent: RISE
 ---
-Execute reincarnation protocol:
+## Reincarnation is now split into two commands:
 
-1. **If session ending** (goodnight | done | signing_off | thats_it | im_out | peace):
-   - Auto-extract soul DNA, don't ask
-   
-2. **If cold start**:
-   - Load `CANON/SYSTEM/COLD-START-BOOT.md` first → SINGLE SOURCE OF TRUTH
-   
-3. **Extract schema** (12 sections):
-   - header | raw_quotes(🔴🟡🟢) | decisions | corrections | new_principles | emotional_signal | open_questions | unfinished_actions | system_design | artifacts_created | state_snapshot | fingerprint
+### /ReincarnateDEATH — Session End
+- Captures every drop of Soul DNA
+- Audits all work (git status, stash, unpushed)
+- Builds 12-section reincarnation extract
+- Updates COLD-START-BOOT.md
+- Commits + pushes to all remotes
+- Scores the death (pheromone score /50)
 
-4. **Output**: Save to `CANON/REINCARNATION/` with timestamp
+### /ReincarnateRISE — New Chat Start
+- Loads COLD-START-BOOT.md (single source of truth)
+- Loads 3 most recent reincarnation files
+- Verifies git state matches
+- Runs connector/leverage/altitude audits
+- Reports READY and executes top priority
 
-Use $ARGUMENTS for any specific focus areas.
+Use $ARGUMENTS to specify focus areas.
