@@ -6,6 +6,8 @@ API-MASTER.7z
 NET/
 GALAXY/
 .secret
+.env.keys
+.env.local
 
 # === LARGE / LOCAL ONLY ===
 .venv/
