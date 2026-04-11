@@ -18,9 +18,10 @@
     // index hundreds of large Markdown files (CANON/, RAW-CHAT-LOGS/, etc.)
     // which exhausted memory during workspace scan.
     "github.copilot.chat.codeGeneration.useInstructionFiles": true,
+    // Enable .github/prompts/*.prompt.md files as /slash commands in Copilot Chat panel
+    "chat.promptFiles": true,
     "github.copilot.enable": {
-        "*": true,
-        "markdown": false
+        "*": true
     },
 
     // ── Search exclusions: speed up workspace searches ────────────────────
