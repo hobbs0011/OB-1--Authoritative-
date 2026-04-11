@@ -1,13 +1,42 @@
 # HEAVY LEDGER PIPELINE CURSOR
 
 ## Current Position
-- **Next Target:** HL-115
+- **Next Target:** HL-132
 - **Wave:** 8
-- **Wave Progress:** 30/46 complete
-- **Total Converted:** 114/174+
-- **Last Completed:** HL-114 v5-overnight-mining-hardened (HIGH signal, 15 quotes, 6 decisions — extension-of-will doctrine, overnight autonomy, 232 VAULT files)
-- **Last Commit:** 5278741
-- **Last Run:** 258 (2026-04-02 04:30 ICT)
+- **Wave Progress:** 34/46 complete (HL-085 → HL-118 done, HL-119 → HL-130 done in burst Runs 259-275)
+- **Total Converted:** 131/174+
+- **Last Completed:** HL-131 — soul-dna-genesis-product-vision-accountability (GENESIS tier, HIGH signal, Run 277 — 2026-04-11)
+- **Last Commit:** pending (Run 277)
+- **Last Run:** 277 (2026-04-11)
+
+## STALE CURSOR NOTE
+> This cursor was last updated at Run 258 (HL-114). Runs 259-277 converted HL-115 through HL-131 via burst pipeline that bypassed cursor updates. This overhaul brings cursor to accurate state. Previous target (HL-115) is long complete. The pipeline advanced 17 entries without cursor tracking.
+
+## Wave 8 Manifest (HL-085 → HL-130) — COMPLETE ENTRIES
+| HL-ID | Source / Session Tag | Status | Run |
+|-------|---------------------|--------|-----|
+| HL-085 through HL-114 | (Wave-start through 2026-03-25) | DONE | Runs 240-258 |
+| HL-115 through HL-120 | 2026-03-25 batch | DONE | Run 260 (orphan branch seasoned-christmas) |
+| HL-121 through HL-124 | 2026-03-26 batch | DONE | Runs 261-263 |
+| HL-125 through HL-126 | 2026-04-02 soul-deep-alignment | DONE | Run 259 |
+| HL-127 | SUPER_SAIYAN_MASSIVE_REINCARNATION | DONE | Run 270 |
+| HL-128 | founders-moat-sdnad-evolution | DONE | Run 272 |
+| HL-129 | kiss-protocol-legion-doctrine | DONE | Run 273 |
+| HL-130 | simulation-gap-guardrails-phoenix-command | DONE | Run 275 |
+| HL-131 | soul-dna-genesis-product-vision-accountability | DONE | Run 277 |
+
+## HL-132 Target
+- **Source:** Next CANON/REINCARNATION/ session — 2026-04-11 entries or next high-signal session
+- **Recommended:** Run 278 first soul dictation (Vietnam incorporation if captured)
+- **Destination:** CANON/HEAVY-LEDGER/HL-132-*.json
+
+## Notes
+- **MILESTONE: 131 total HL entries reached (Run 277 — 2026-04-11)**
+- HL-131 is GENESIS tier — Soul DNA genesis definition, first verbatim natural articulation
+- Wave 8 progress: 34/46 — 12 entries remaining in Wave 8
+- Cursor backfill: HL-115 through HL-131 burst was 17 entries — this updated cursor reflects the actual state
+- Next priority for pipeline: consolidate burst-era HL entries (115-126) with proper BIBLE source references
+
 
 ## Wave 8 Manifest (HL-085 → HL-130)
 | HL-ID | Source File | Status | Commit SHA |

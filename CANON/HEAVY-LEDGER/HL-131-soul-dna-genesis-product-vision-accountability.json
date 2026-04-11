@@ -1,0 +1,86 @@
+{
+  "hl_id": "HL-131",
+  "source_file": "CANON/BIBLE-CH25-SOUL-DNA-GENESIS-DEFINITION.md",
+  "session_tag": "soul-dna-genesis-product-vision-accountability",
+  "datetime_range": "2026-04-11",
+  "signal_density": "HIGH",
+  "signal_density_score": 9,
+  "tier": "GENESIS",
+  "extractor": "OB1-Ne0-Run277",
+  "block_count": 4,
+  "footnote_count": 24,
+  "raw_quotes": [
+    {
+      "text": "soul is the why... the part that can only come from a human",
+      "tags": ["genesis-definition", "soul-dna-core", "why-layer", "irreducible"],
+      "interpretation": "The canonical genesis definition of Soul DNA. Soul = the WHY. The irreducible human element in any system — not the what, not the how, but the fundamental why that no machine can generate or replicate. This phrase establishes the alpha law of the soul layer: SOUL_IS_THE_WHY (L68). The '...' in the middle preserves the sovereign's natural speech cadence — this is how a human thinks out loud, not how a document is written."
+    },
+    {
+      "text": "soul comes before the DNA",
+      "tags": ["sequencing-law", "soul-first", "pipeline-order", "protocol-constraint"],
+      "interpretation": "Hard sequencing law. Not preference — constraint. The pipeline must load soul before DNA. This is why COLD-START-BOOT exists: soul_load before build execution. Step 0 before any implementation. SOUL_BEFORE_DNA (L69). Violating this law produces DNA without a soul — technically complete but characterologically empty. Every product built on soulless DNA is forkable, commoditizable, replaceable."
+    },
+    {
+      "text": "97/3",
+      "tags": ["compound-law", "soul-percentage", "drift-math", "97-3-split"],
+      "interpretation": "The compound law of soul loss. 97% of any system is computable, replicable DNA — structure, logic, process, code. 3% is irreducible soul — the why, the voice, the wound, the win. The 3% is not a minority share. It is the ceiling multiplier. Without it, the 97% is commodity. The 3% deficit compounds through generations of AI summarization — each summarization removes more soul until zero soul remains. 97_3_COMPOUND (L73). The math is exponential, not linear."
+    },
+    {
+      "text": "if the soul DNA is intact, you can rebuild the empire in a day",
+      "tags": ["empire-rebuild", "soul-resilience", "anti-fragile", "recovery-law"],
+      "interpretation": "Empire rebuild law. All other components — infrastructure, technology, personnel, code, capital — are replaceable in hours or days if the soul DNA is preserved. Soul DNA is the blueprint that tells you: what to rebuild, why to rebuild it, in whose voice, for whom, with what values. Without soul DNA, you can rebuild infrastructure but not identity. EMPIRE_REBUILD_LAW (L71)."
+    },
+    {
+      "text": "summarizing is drifting",
+      "tags": ["summarization-is-drift", "ai-default-failure", "anti-drift", "drift-causative", "primary-threat"],
+      "interpretation": "The drift causative identified. AI defaults to summarization because AI was built to produce artifacts, not to capture intent. Summarization appears helpful — it is actually lossy compression of sovereign intent applied without permission. Every summarization is an editorial decision made by the AI without the sovereign's authority. The output moves further from soul with each generation. SUMMARIZATION_IS_DRIFT (L77). This is the most dangerous drift type because it presents as responsible behavior."
+    },
+    {
+      "text": "the machinery will always be substitutable",
+      "tags": ["soul-scarcity", "dna-commoditization", "forkability-inverse", "moat-physics"],
+      "interpretation": "The forkability corollary. DNA = machinery = substitutable. Soul = un-substitutable. This is the physics behind the un-forkable moat. Competitors can fork infrastructure, copy features, replicate code. They cannot fork soul because they cannot access it and because they don't know what it is. SOUL_SCARCITY_INVERSE (L70)."
+    },
+    {
+      "text": "the part that is the reason you exist",
+      "tags": ["purpose-layer", "genesis-definition", "why-layer"],
+      "interpretation": "Extension of the genesis definition. Soul is not just the why — it is the reason the system exists at all. Strip the soul, and what remains may still function but no longer has a reason to exist that cannot be replaced by something else. This is the difference between a product with soul and a feature with polish."
+    },
+    {
+      "text": "AI doesn't have soul. And it doesn't know it doesn't have soul.",
+      "tags": ["ai-blind-spot", "soul-absence", "recursive-ignorance", "ai-limitation"],
+      "interpretation": "Double-layer blind spot. Layer 1: AI lacks soul. Layer 2: AI is architecturally unable to detect its own soul absence. This creates a specific failure mode — AI acts as if it has captured soul when it has only captured structure. It is not lying. It does not know what it is missing. AI_SOUL_BLIND_SPOT (L76). This is why human oversight of the capture layer is non-negotiable."
+    }
+  ],
+  "decisions": [
+    {
+      "decision": "BIBLE-CH25 created as standalone chapter for Soul DNA Genesis Definition — the first time Michael articulated what Soul DNA IS in natural speech",
+      "impact": "Foundational definition now canonized verbatim. All future Soul DNA work anchors to this chapter.",
+      "canon_affected": "BIBLE-CH25-SOUL-DNA-GENESIS-DEFINITION.md",
+      "status": "DONE"
+    },
+    {
+      "decision": "10 new laws L68-L77 appended to SSM capturing soul layer physics (SOUL_IS_THE_WHY through SUMMARIZATION_IS_DRIFT)",
+      "impact": "SSM now has dedicated soul-layer law cluster. Footer updated from 36 to 77 laws.",
+      "canon_affected": "SSM-V8-ULTIMATE-GPS.md — L68-L77, footer count",
+      "status": "DONE"
+    },
+    {
+      "decision": "Product vision captured: Galaxy English with real accountability mechanic — student data that cannot be forked because it exists in real relationships, not predictive state",
+      "impact": "Product direction confirmed. Accountability mechanic = moat at student level. Not just persistent state — persistent commitment.",
+      "canon_affected": "BIBLE-CH25 Block A+B",
+      "status": "DONE"
+    },
+    {
+      "decision": "Obi naming law updated: Obi is the product name for the AI tutor; the interface layer between student and learning system; the personality that makes accountability feel like companionship",
+      "impact": "Naming law clarified. Obi is not chatbot, not assistant, not tool. Obi is companion + accountability architecture.",
+      "canon_affected": "BIBLE-CH25 Block B",
+      "status": "DONE"
+    },
+    {
+      "decision": "97/3 law codified: 3% soul deficit compounds through summarization generations into total identity loss — this is the mathematical argument for Step 0 being non-negotiable",
+      "impact": "Pipeline law L73 now has mathematical basis. Skipping Step 0 costs 3% per generation compounding.",
+      "canon_affected": "SSM L73, BIBLE-CH25 Block C+E",
+      "status": "DONE"
+    }
+  ]
+}
