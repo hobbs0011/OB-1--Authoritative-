@@ -38,6 +38,7 @@
 | Mirror | hobbs0011/OB-1 (`ob1`) | LIVE |
 | Soul DNA Source | hobbs-lab/Phoenix-Rise-Immortalize- | LIVE |
 | Product Code | hobbs0011/NET-Ai-EcoSystem-CommandStation | LIVE |
+| Marketing Art Repo | Phoenix-Rising-Tech/Phoenix-Rising-FullStackMarketing | LIVE — dc76553 |
 | Navigator Index | Notion page | IN TRASH |
 | Primary App | `APPS/NET-PET-AI/` — Cloudflare Worker | LIVE |
 
