@@ -39,7 +39,7 @@
 |----------|-------|------|--------|
 | `CANON/A7-SDNAD-GENESIS-TO-NOW-STEP0.md` | 1080 | Step 0 Master Compile | NEW — 159 signals, 10 blocks, 4-agent sweep |
 | `CANON/HEAVY-LEDGER/HL-132-sdnad-genesis-to-now-step0-master.json` | 68 | Heavy Ledger JSON | NEW — HL-132, 143 signals, 10 blocks |
-| `APPS/Phoenix-Rising-FullStackMarketing/` | 13 files | Marketing asset repo scaffold | NEW — art/characters/iconology/logos/processed/raw-intake/sales-funnels/social/website |
+| `APPS/Phoenix-Rising-FullStackMarketing/` | 13 files | Marketing asset repo scaffold | NEW — art/characters/iconology/logos/processed/raw-intake/sales-funnels/social/website; embedded `.git` removed |
 | `SCRIPTS/enroll-students.mjs` | TBD | Utility | NEW — student enrollment automation |
 | `.gitignore` | +3 | Config | UPDATED — dist/ and .playwright-mcp/ excluded |
 
@@ -54,6 +54,7 @@
 | Bible/Appendix | A6 latest | A7 added (open — A6 chain continues) |
 | SSM | V8.2, 77 laws | V8.2, 77 laws (no new laws this merge) |
 | Marketing Lane | Referenced in SYNCH3 | Directory committed to repo |
+| System state docs | Mixed run markers | `COLD-START-BOOT`, `REINCARNATION-BOOT-CHECK`, `MASTER-SYNC` aligned at Run 287 |
 | Remote sync | origin ahead of ob1 | Both remotes synced |
 
 ---
@@ -68,6 +69,7 @@
 6. SOVEREIGN_KEY rotation + vault-lock not done
 7. Wrangler secrets (DEEPSEEK_API_KEY, DEEPGRAM_API_KEY) not set
 8. phoenix-pheromone-trails repo not created (1100+ logs on D:)
+9. GitHub repo rename pending: `Phoenix-Rising-Ultimate` -> `Phoenix-Rising-Technologies`
 
 ---
 
@@ -87,3 +89,15 @@ No sovereign corrections this session — clean merge execution.
 | Remote sync | 10/10 — both remotes aligned |
 | Open loop precision | 9/10 — 8 specific actionable items |
 | **Total** | **45/50** |
+
+---
+
+## 8. CHAT MERGE ADDITIONS (POST-ARCHIVAL VERIFICATION)
+
+The following deltas were explicitly re-verified and merged from later chat context:
+
+1. A7 Step 0 confirmed at 1080 lines / 159 signals / 10 blocks.
+2. HL-132 sealing confirmed (`HL-132-sdnad-genesis-to-now-step0-master.json`).
+3. FullStackMarketing scaffold confirmed with embedded `.git` removed before archival.
+4. `.gitignore` exclusion intent confirmed for `dist/` and `.playwright-mcp/`.
+5. Open-loop carry-forward set explicitly: SSM L47-L65 gap, Vietnam SDNA recapture, A6 chain L0248/S71+, consolidation phases 3-9, SOVEREIGN_KEY rotation, wrangler secrets, phoenix-pheromone-trails repo, GitHub rename.
