@@ -12,7 +12,7 @@ import { argv } from "process";
 
 const isProd = argv.includes("--prod");
 const BASE = isProd
-  ? "https://net-pet-ai.mrmichaelhobbs1234.workers.dev"
+  ? "https://net-pet-ai.mrmichaelhobbs123.workers.dev"
   : "http://localhost:8787";
 
 console.log(`\nOBI Student Enrollment — NET-PET-AI`);
