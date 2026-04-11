@@ -89,6 +89,111 @@ Michael is running 4 parallel VS Code Copilot Agent chats simultaneously. This f
 
 ---
 
+---
+
+## EMPIRE MCP STACK — TOKEN SETUP QUEUE
+
+> `.mcp.json` expanded to full empire stack. Servers already configured, waiting on tokens.
+> Run each PowerShell block once, then restart VS Code. MCP activates immediately.
+
+### TOKEN STATUS DASHBOARD
+
+| Service | Status | Env Var(s) | Where to Get |
+|---------|--------|-----------|-------------|
+| Cloudflare | ✅ SET | `CLOUDFLARE_API_TOKEN` / `CLOUDFLARE_API_KEY` / `CLOUDFLARE_EMAIL` / `CLOUDFLARE_ACCOUNT_ID` | — |
+| GitHub | ✅ SET | `GITHUB_TOKEN` | — |
+| Notion | ✅ SET | `NOTION_TOKEN` | — |
+| Roblox | ✅ SET | `ROBLOX_API_KEY` | — |
+| **Telegram** | ❌ NEEDED | `TELEGRAM_API_ID`, `TELEGRAM_API_HASH`, `TELEGRAM_PHONE` | my.telegram.org → API Development Tools |
+| **LinkedIn** | ❌ NEEDED | `LINKEDIN_CLIENT_ID`, `LINKEDIN_CLIENT_SECRET`, `LINKEDIN_ACCESS_TOKEN` | linkedin.com/developers |
+| **Gmail** | ❌ NEEDED | `GMAIL_CREDENTIALS_PATH` | console.cloud.google.com → Gmail API |
+| **Slack** | ❌ NEEDED | `SLACK_BOT_TOKEN`, `SLACK_TEAM_ID` | api.slack.com/apps |
+| **Discord** | ❌ NEEDED | `DISCORD_TOKEN` | discord.com/developers/applications |
+| **Brave** | ❌ NEEDED | `BRAVE_API_KEY` | api.search.brave.com (free tier: 2000 req/mo) |
+| **Facebook** | ⚠️ PLAYWRIGHT | — | No official MCP. Use `playwright` server for FB ops. |
+
+---
+
+### POWERSHELL TOKEN SETUP COMMANDS
+
+Copy/paste each block into a PowerShell terminal. Tokens persist as Windows User env vars. Restart VS Code after setting.
+
+#### TELEGRAM (MTProto userbot — all chats/groups/channels)
+```powershell
+# 1. Go to: https://my.telegram.org → Log in → API Development Tools → Create app
+# 2. Copy api_id (short number) and api_hash (hex string)
+# 3. First MCP invocation will prompt phone + OTP → creates local session file
+
+[System.Environment]::SetEnvironmentVariable("TELEGRAM_API_ID", "YOUR_API_ID_NUMBER", "User")
+[System.Environment]::SetEnvironmentVariable("TELEGRAM_API_HASH", "YOUR_API_HASH_HEX", "User")
+[System.Environment]::SetEnvironmentVariable("TELEGRAM_PHONE", "+84XXXXXXXXX", "User")
+# Use your Telegram phone number (international format)
+```
+
+#### LINKEDIN (OAuth 2.0 — post content, read profile, manage connections)
+```powershell
+# 1. Go to: https://linkedin.com/developers → My Apps → Create App
+# 2. Products: add "Share on LinkedIn" + "Sign In with LinkedIn using OpenID Connect"
+# 3. Auth tab → copy Client ID + Client Secret
+# 4. After setting vars, run: npx linkedin-mcp-server --auth  (opens browser OAuth flow)
+# 5. After auth completes, copy access token displayed
+
+[System.Environment]::SetEnvironmentVariable("LINKEDIN_CLIENT_ID", "YOUR_CLIENT_ID", "User")
+[System.Environment]::SetEnvironmentVariable("LINKEDIN_CLIENT_SECRET", "YOUR_CLIENT_SECRET", "User")
+[System.Environment]::SetEnvironmentVariable("LINKEDIN_ACCESS_TOKEN", "YOUR_ACCESS_TOKEN", "User")
+```
+
+#### GMAIL (auto-OAuth — read/send emails)
+```powershell
+# 1. Go to: https://console.cloud.google.com → New Project → Enable Gmail API
+# 2. APIs & Services → Credentials → Create OAuth 2.0 Client ID → Desktop App
+# 3. Download credentials.json → save to: C:\Users\mrmic\gmail-credentials.json
+# 4. First MCP invocation auto-opens browser for OAuth → token cached locally
+
+[System.Environment]::SetEnvironmentVariable("GMAIL_CREDENTIALS_PATH", "C:\Users\mrmic\gmail-credentials.json", "User")
+```
+
+#### SLACK (send messages, read channels)
+```powershell
+# 1. Go to: https://api.slack.com/apps → Create New App → From Scratch
+# 2. OAuth & Permissions → Bot Token Scopes: channels:read, chat:write, users:read
+# 3. Install to Workspace → copy Bot User OAuth Token (xoxb-...)
+# 4. Team ID = workspace ID (shows in URL when viewing workspace in browser)
+
+[System.Environment]::SetEnvironmentVariable("SLACK_BOT_TOKEN", "xoxb-YOUR-TOKEN", "User")
+[System.Environment]::SetEnvironmentVariable("SLACK_TEAM_ID", "TXXXXXXXX", "User")
+```
+
+#### DISCORD (send messages, manage server)
+```powershell
+# 1. Go to: https://discord.com/developers/applications → New Application
+# 2. Bot → Reset Token → copy token
+# 3. OAuth2 → add bot permissions: Send Messages, Read Message History
+# 4. Invite URL: OAuth2 URL Generator → bot scope → copy + use to add to your server
+
+[System.Environment]::SetEnvironmentVariable("DISCORD_TOKEN", "YOUR_BOT_TOKEN", "User")
+```
+
+#### BRAVE SEARCH (web search — free tier 2000 req/mo)
+```powershell
+# 1. Go to: https://api.search.brave.com → Get Started (free plan)
+# 2. Create API key → copy
+
+[System.Environment]::SetEnvironmentVariable("BRAVE_API_KEY", "YOUR_BRAVE_KEY", "User")
+```
+
+#### FACEBOOK
+```powershell
+# Facebook has no standalone MCP package.
+# Empire path: Use the `playwright` MCP (already active) for any Facebook operations.
+# Alternative: Meta Graph API (page token for business pages)
+# 1. Go to: https://developers.facebook.com → My Apps → Create App
+# 2. Tools → Graph API Explorer → generate Page Access Token
+# (Only needed if building direct Graph API integration — Playwright covers most ops)
+```
+
+---
+
 ## SYNCH LOG
 
 | DateTime | Lane | Action | SHA |
