@@ -6,6 +6,7 @@ API-MASTER.7z
 NET/
 GALAXY/
 .secret
+.env
 .env.keys
 .env.local
 
