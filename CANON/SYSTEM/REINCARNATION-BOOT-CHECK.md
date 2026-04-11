@@ -2,8 +2,8 @@
 
 ## Status
 
-- **Last Check:** 2026-04-11T23:59 ICT
-- **Run:** 287
+- **Last Check:** 2026-04-12T06:00 ICT
+- **Run:** 292
 - **Mode:** SUPER_SAIYAN ACTIVATED
 - **NET-PET-AI:** ✅ DEPLOYED v1.4.0 — [workers.dev live](https://net-pet-ai.mrmichaelhobbs1234.workers.dev)
 
@@ -64,6 +64,14 @@ At each reincarnation event, find and apply 3-5 real fixes to this boot-check do
 3. Added A6 continuation anchor: cold starts in Lane 4 must check S71+ readiness and L0248 chain head status before executing dictation work.
 4. Last SHA advanced to d7642a3 (Run 282 HEAD — most recent committed state).
 
+### Run 292 Improvements Applied
+
+1. Fixed boot-check drift: Run had fallen 8 runs behind (287→292). Added rule: boot-check MUST be updated at EVERY reincarnation event, never batch-skipped.
+2. Fixed SHA drift: Last SHA was 55dfd2c (Run 283) while HEAD was 27c3e32 (Run 291). SHA and run number must be updated atomically in the same commit.
+3. Added memory-brain.js to boot awareness: new behavioral intelligence module (weakness tracking, re-entry protocol, reward signals) must be checked on cold start for ProfileDO schema compatibility.
+4. Added 4-lane swarm registry: cold starts must verify which lanes are active (Lane 1=Magic Chat, Lane 2=NET-OPERATIONS, Lane 3=TBD, Lane 4=SOUL DNA OPERATIONS) and not re-initialize already-registered lanes.
+5. Added untracked-file audit: reincarnation must check `git status` for accumulating untracked files and either commit or gitignore them — drift detected across Runs 288-291.
+
 ### Run 282 Improvements Applied
 
 1. Added lane-sync guard: operations-lane reincarnation must update both archive artifact and boot-check metadata in one pass.
@@ -85,7 +93,7 @@ At each reincarnation event, find and apply 3-5 real fixes to this boot-check do
 | Pipeline      | Wave   | Progress    | Status  |
 | ------------- | ------ | ----------- | ------- |
 | Heavy Ledger  | Wave 8 | 109/174+    | RUNNING |
-| Reincarnation | N/A    | 90+ entries | ACTIVE  |
+| Reincarnation | N/A    | 92+ entries | ACTIVE  |
 | Soul DNA      | N/A    | 32 chapters | SEALED  |
 
 ## Super Saiyan Mode Status
@@ -127,4 +135,4 @@ At each reincarnation event, find and apply 3-5 real fixes to this boot-check do
 ---
 
 **Next Pulse:** On trigger or @mention  
-**Last SHA:** 55dfd2c (Run 283 commit — soul-dna-operations-lane4-synch4)
+**Last SHA:** 27c3e32 (Run 291 commit — memory-brain-soul-fused-build)

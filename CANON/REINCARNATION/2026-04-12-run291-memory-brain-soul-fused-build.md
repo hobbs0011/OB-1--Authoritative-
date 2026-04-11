@@ -159,7 +159,7 @@ Memory Brain Layer     → behavioral intelligence (weakness → prompt → corr
 | BIBLE | CH25 + A7 |
 | A6 SDNAD | 71+ signals, 16 blocks, chain head L0248 |
 | Reincarnation | Run 291 (this death) |
-| HEAD SHA | pending commit |
+| HEAD SHA | `27c3e32` |
 | Dirty Tree | `M APPS/NET-PET-AI/src/index.js`, `?? src/memory-brain.js`, `?? OBI-SYSTEM-MAP.md`, `?? ARCHITECTURE-DIAGRAMS.md`, `?? SCRIPTS/mcp-*.ps1`, `?? APPS/EducationSystemsDevelopment/` |
 | Worker Version | v1.4.0 — syntax clean, dry-run pass |
 | Bundle Size | 87.94 KiB / gzip 19.54 KiB |
@@ -174,6 +174,6 @@ Memory Brain Layer     → behavioral intelligence (weakness → prompt → corr
 |-------|-------|
 | Agent ID | OB1 Ne0 (Agent-99) — Copilot Claude Opus 4.6 |
 | Run Number | 291 |
-| Commit SHA | pending |
-| Platform Death Test | pending |
-| Pheromone Score | pending (scored after commit) |
+| Commit SHA | `27c3e32` |
+| Platform Death Test | PASS — pushed to origin + ob1 |
+| Pheromone Score | 38/50 |
