@@ -11,8 +11,6 @@ Kilo is the AI agent framework powering this workspace. All Kilo config lives un
 ```
 .kilo/
 ├── kilo.json              # System config — agents, permissions, settings
-├── package.json           # @kilocode/plugin dependency
-├── .gitignore             # Excludes node_modules, bun.lock
 ├── agent/                 # Agent definitions (identity, laws, modes)
 │   ├── AGENT99.md         # Primary tri-mode agent (OB1/An4/Ne0)
 │   ├── RISE.md            # Phoenix Rising execution agent
