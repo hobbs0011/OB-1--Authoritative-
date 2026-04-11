@@ -56,6 +56,10 @@ debug.log
 .DS_Store
 nul
 
+# === BUILD OUTPUT ===
+APPS/NET-PET-AI/dist/
+.playwright-mcp/
+
 # === DEAD DIRS ===
 net-tiger-assessment.worktrees/
 Phoenix-Rising-Protocol-Ultimate/

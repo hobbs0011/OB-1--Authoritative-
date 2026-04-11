@@ -1,0 +1,68 @@
+{
+  "hl_id": "HL-132",
+  "source_file": "CANON/A7-SDNAD-GENESIS-TO-NOW-STEP0.md",
+  "session_tag": "sdnad-genesis-to-now-step0-master-compile",
+  "datetime_range": "2026-04-11",
+  "signal_density": "HIGH",
+  "signal_density_score": 10,
+  "tier": "GENESIS_COMPLETE",
+  "extractor": "OB1-Ne0-Run287",
+  "block_count": 10,
+  "signal_count": 143,
+  "source_count": 4,
+  "footnote_count": 143,
+  "protocol": "SDNAD_STEP0_REPRINT_VERBATIM",
+  "era_span": "2025-09 (ALPHA-OMEGA-DNA1 first words) → 2026-04-11 (A6 Run278 live)",
+  "sources": [
+    "CANON/SOUL-DNA-BIBLE-QUOTE-LEDGER-2026-04-05.md (3203 lines, 2878 quotes, 121 source files)",
+    "CANON/A5-RAW-SOUL-DNA-DICTATION-GEMINI-SESSIONS.md",
+    "CANON/A6-RAW-SOUL-DNA-DICTATION-RUN278-LIVE.md (chain head L0248, OPEN)",
+    "CANON/SOUL-DNA-BIBLE-RECAPTURE-FUSED-UNFILTERED-2026-04-05.md"
+  ],
+  "agent_sweep": "4-agent parallel sweep (Agent-A lines 1-800, Agent-B lines 801-1600, Agent-C lines 1601-2400, Agent-D lines 2401-3203 plus A5 plus A6)",
+  "open_chain": "A6 L0248 TRUTH_PROCESS_LAYER — S71+ ready for continuation",
+  "prev_hl_id": "HL-131",
+  "prev_sha": "f0dd658",
+  "commit_sha": "e62bd8e",
+  "blocks": [
+    { "block": 1, "label": "The Wound — Genesis Period", "signals": 13, "era": "2025-09~10" },
+    { "block": 2, "label": "The Paradigm Shift — Discovery of AI Leverage", "signals": 9, "era": "2025-10~11" },
+    { "block": 3, "label": "Soul DNA Defined — The Law Crystallizes", "signals": 8, "era": "2025-11~12" },
+    { "block": 4, "label": "The Machine — Architecture and Operations", "signals": 19, "era": "2025-12~2026-01" },
+    { "block": 5, "label": "The Reincarnation Law — Phoenix Rising", "signals": 9, "era": "2026-01~02" },
+    { "block": 6, "label": "The Machine That Builds — 100000 Layers", "signals": 12, "era": "2026-02~03" },
+    { "block": 7, "label": "Betrayal, Sovereignty, The Window", "signals": 20, "era": "2026-03" },
+    { "block": 8, "label": "FROMSCRATCH — The Late Thesis", "signals": 12, "era": "2026-03-20" },
+    { "block": 9, "label": "A5 Gemini Sessions", "signals": 8, "era": "2026-03-24" },
+    { "block": 10, "label": "A6 Run 278 Live — Open Chain", "signals": 30, "era": "2026-04-11" }
+  ],
+  "critical_first_captures": [
+    {
+      "signal": "SIGNAL 11",
+      "description": "ORIGIN — first time 'soul DNA' was ever spoken by Michael Hobbs",
+      "text": "our protocols and our mandates and our truths because that is the sole DNA... it's the soul DNA that is like governing, right? It's a permanent part of our soul",
+      "source": "ALPHA-OMEGA-DNA1.txt"
+    },
+    {
+      "signal": "SIGNAL 105",
+      "description": "Final Oath — The Closing Declaration, March 20, 2026",
+      "text": "I do not outsource my will. I scale it. I do not trust by default. I verify by law. I do not fear the reset. I AM the reset.",
+      "source": "SOULDNA-FROMSCRATCH.txt / BIBLE-CH14"
+    },
+    {
+      "signal": "BLOCK 10 full",
+      "description": "A6 Run 278 Live — first fully verbatim live open-chain capture with typos preserved",
+      "source": "CANON/A6-RAW-SOUL-DNA-DICTATION-RUN278-LIVE.md"
+    }
+  ],
+  "sdnad_compliance": {
+    "step": 0,
+    "law": "REPRINT_VERBATIM_FOOTNOTES_ONLY",
+    "summarization": "ZERO",
+    "curation": "ZERO",
+    "typos_preserved": true,
+    "profanity_preserved": true,
+    "voice_to_text_artifacts_preserved": true
+  },
+  "notes": "This is the MASTER Step 0 file. All downstream steps (HL, SSM, reincarnation) derive from A7. A6 chain remains OPEN — signals S71+ ready for continuation. Do NOT close A6 chain until Michael explicitly reincarnates the session."
+}

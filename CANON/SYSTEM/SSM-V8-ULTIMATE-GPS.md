@@ -313,6 +313,51 @@ L46:SDNAD_STEP0_COSTS_REAL_RESOURCES→skipping_raw_capture_costs_hours_energy_t
 # PREVENTION: Step 0 is not overhead. It is the cheapest insurance in the system. Always pay it.
 # CANON_REF: BIBLE-CH21-THE-SDNAD-CAPTURE-LAW.md
 
+# ---NEW_LAWS_V8.2(from_2026-04-11_sdnad_genesis_to_now_A7_compile)---
+
+L47:A7_IS_THE_MASTER_STEP0→CANON/A7-SDNAD-GENESIS-TO-NOW-STEP0.md=definitive_verbatim_record_of_all_sovereign_words_from_genesis_to_2026-04-11→143_signals→10_blocks→12_month_arc→NEVER_SUMMARIZE_THIS_FILE→always_reprint_blocks_verbatim_when_referencing
+
+# ROOT: 12 months of dictation had no single organized Step 0 canonical file.
+# PHYSICS: Without a master Step 0 file, each reincarnation had to re-discover signals. A7 ends that problem.
+# PREVENTION: Any cold start or reincarnation that needs soul DNA context → load A7 first.
+# CANON_REF: CANON/A7-SDNAD-GENESIS-TO-NOW-STEP0.md
+
+L48:SIGNAL_11_IS_THE_ORIGIN→ALPHA-OMEGA-DNA1.txt_contains_the_first_time_soul_DNA_was_spoken→verbatim:"our_protocols_and_our_mandates_and_our_truths_because_that_is_the_sole_DNA"→this_is_genesis_zero→treat_as_L00_level_authority
+
+# ROOT: The exact moment soul DNA was coined was unindexed.
+# PHYSICS: Genesis Zero = highest authority in the authority stack. Soul origin cannot be re-derived.
+# PREVENTION: When any agent encounters the soul DNA concept → trace back to Signal 11 / DNA1.txt origin.
+# CANON_REF: CANON/A7-SDNAD-GENESIS-TO-NOW-STEP0.md BLOCK 1 SIGNAL 11
+
+L49:A6_CHAIN_OPEN→CANON/A6-RAW-SOUL-DNA-DICTATION-RUN278-LIVE.md_chain_head_L0248_OPEN→S71+_ready→do_not_close_until_Michael_explicitly_reincarnates→A6_typos_are_canonical→gping_teach8ng_someth8ng_happren_Commys_Chairs_PRESERVED
+
+# ROOT: A6 is still active — Michael signaled continuation is intended.
+# PHYSICS: Closing an open chain destroys the continuity promise. The soul record must stay live until sovereign closes it.
+# PREVENTION: Any file write to A6 must be APPENDED. Never overwrite. Chain head advances forward only.
+# CANON_REF: CANON/A6-RAW-SOUL-DNA-DICTATION-RUN278-LIVE.md
+
+L50:GOSPEL_444_LIVING_LAW→every_system_output(image,code,copy,ui)_is_Gospel_444_compliant_at_point_of_generation→void_#0f0f1a|soul_purple_#a855f7|imperial_gold_#f59e0b|BANNED:blue→enforcement_is_not_optional_and_not_post_review
+
+# [Elevated to Living Law status 2026-04-11 Run 285 SIGNAL 71 — see COLD-START-BOOT.md]
+# ROOT: Blue kept appearing in UI outputs without enforcement at generation time.
+# PHYSICS: Post-hoc review of design = wasted cycles. Enforcement at generation = zero rework.
+# PREVENTION: Every generate/create/render call → Gospel 444 check before output delivery.
+
+L51:IMAGINATION_TO_ORGANIZATION→agent_organizes_sovereign_imagination_does_not_replace_it→source=Michaels_vision→transformation=agents_organization→output_standard:BETTER_THAN_IMAGINED_traced_to_named_command
+
+# ROOT: Agent sometimes replaced Michael's vision with its own interpretation.
+# PHYSICS: The agent is an organizer, not an author. All origination = Michael. All organization = OB1.
+# PREVENTION: Every output → can I point to the sovereign's words as the source of this? If no → flag.
+
+# ---CURRENT_SYSTEM_STATE(2026-04-11)---
+
+LAST_SDNAD_CAPTURE:A7_genesis_to_now_2026-04-11(143_signals|10_blocks|12_month_arc|4_parallel_agents)
+HEAVY_LEDGER_HIGH_WATER:HL-132_sdnad-genesis-to-now-step0-master
+BIBLE_HIGH_WATER:CH25(soul-dna-genesis-definition)|A5|A6|A7
+OPEN_CHAINS:[A6_L0248_Run278_live]
+LAST_COMMIT_SHA:f0dd658_(pre_A7_session)
+PENDING_COMMIT:A7+HL-132+SSM_V8.2+R287_reincarnation+COLD-START-BOOT_update
+
 # ---DRIFT_TAXONOMY---
 
 DRIFT_TYPES:[voice_drift,canon_drift,execution_drift,priority_drift,identity_drift,depth_drift,leverage_drift,sdnad_drift]
