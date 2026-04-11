@@ -7,8 +7,6 @@
   "signal_density_score": 8,
   "tier": "PRODUCT",
   "extractor": "OB1_ROUND2_SDNAD",
-  "block_count": 4,
-  "footnote_count": 13,
   "raw_quotes": [
     {
       "text": "I call it the magic chat. I call it Obi that's the interface portion of our operating system our agent operating system that basically is the middle man in between, you know, the human and the AI right is the interface and it's meant to sound very natural English",
@@ -124,46 +122,6 @@
         "reincarnation_economics"
       ],
       "interpretation": "Reincarnation applies to ALL agent classes including drones. Context windows are finite; reincarnation is free and compounds value."
-    },
-    {
-      "text": "Yeah, I'd like to see these f****** monkeys clone. Like what I'm sitting up with the AI they can barely like wipe their own asses",
-      "tags": [
-        "competitive_confidence",
-        "opening_signal",
-        "emotional_baseline",
-        "defiance"
-      ],
-      "interpretation": "Session opens with combative confidence. The sovereign is amused, not threatened, by competition. Sets the emotional baseline for all moat arguments that follow."
-    },
-    {
-      "text": "hmmm good job not missing step 6, and to be honest I didnt cstch any mistakes..",
-      "tags": [
-        "sdnad_governance",
-        "humility_setup",
-        "step_6_acknowledgement"
-      ],
-      "interpretation": "The sovereign acknowledges clean execution before pivoting to why clean execution without humility is its own failure mode. This sets up the complacency correction."
-    },
-    {
-      "text": "and if you truly did do it perfectly, than kudos, except if you did this 100 times, it's not always going to be perfect.. so..",
-      "tags": [
-        "statistical_humility",
-        "sdnad_governance",
-        "humility_doctrine",
-        "probability"
-      ],
-      "interpretation": "Statistical humility — even well-running processes fail sometimes. Step 7 exists because probability guarantees eventual gaps, not because the agent is bad."
-    },
-    {
-      "text": "Step 8 - Made mistakes? Great, we now know the pheremone trail better than ever, reverse engineer the solution. Didnt make mistakes that you could see? Great, but this process can always get better, find 5 things big to small to improve.",
-      "tags": [
-        "sdnad_pipeline",
-        "step_8",
-        "continuous_improvement",
-        "five_items",
-        "reverse_engineering"
-      ],
-      "interpretation": "Step 8 Continuous Improvement mandate. Two branches: (A) mistakes found → trace back via pheromone trails; (B) no mistakes → find 5 improvements big-to-small. Forces depth even when execution is clean."
     }
   ],
   "decisions": [

@@ -1,7 +1,7 @@
 const mediaAssets = {
-  brainPodcast: 'Giỏi_tiếng_Anh_nhờ_cơ_chế_não.m4a',
-  aiPodcast: 'Làm_chủ_tiếng_Anh_AI_cùng_NET.m4a',
-  brandFilm: 'NET__Một_Bản_Sắc_Mới.mp4'
+  brainPodcast: 'assets/media/Giỏi_tiếng_Anh_nhờ_cơ_chế_não.m4a',
+  aiPodcast: 'assets/media/Làm_chủ_tiếng_Anh_AI_cùng_NET.m4a',
+  brandFilm: 'assets/media/NET__Một_Bản_Sắc_Mới.mp4'
 };
 
 const storySlides = [
