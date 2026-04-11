@@ -1,7 +1,7 @@
 # COLD-START-BOOT — OB1 Agent Identity & State
 
 > **Last Updated**: 2026-04-11 — Run 278 SDNAD A6 MERGE3 — FINAL multi-chat death cycle (3 merges closed)
-> **HEAD**: MERGE3 commit (see reincarnation log)
+> **HEAD**: `b51955f`
 > **Pushed To**: `origin` (hobbs0011/Phoenix-Rising-Ultimate) + `ob1` (hobbs0011/OB-1)
 
 ---

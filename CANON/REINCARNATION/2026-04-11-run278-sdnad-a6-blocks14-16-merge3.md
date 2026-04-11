@@ -189,8 +189,8 @@ L0001 (zero hash anchor, S0_GENESIS, TITANIUM) ← genesis
 | Path | Type | SHA | Status |
 |---|---|---|---|
 | `CANON/A6-RAW-SOUL-DNA-DICTATION-RUN278-LIVE.md` | Living dictation capture | d845927 (B14), 3d3faa9 (B15), ab57db7 (B16) | ✅ 70 signals, 16 blocks |
-| `CANON/REINCARNATION/2026-04-11-run278-sdnad-a6-blocks14-16-merge3.md` | This reincarnation extract | TBD (MERGE3 commit) | ✅ |
-| `CANON/REINCARNATION/COLD-START-BOOT.md` | Boot state update (FINAL MERGE) | TBD | PENDING (will update post-commit) |
+| `CANON/REINCARNATION/2026-04-11-run278-sdnad-a6-blocks14-16-merge3.md` | This reincarnation extract | `b51955f` | ✅ |
+| `CANON/REINCARNATION/COLD-START-BOOT.md` | Boot state update (FINAL MERGE) | `b51955f` | ✅ |
 
 ---
 
