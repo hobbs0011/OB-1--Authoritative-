@@ -1,34 +1,188 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "updated": "2026-04-11",
   "r2_bucket": "phoenix-rising-assets",
   "r2_account": "mrmichaelhobbs1234",
   "cdn_pattern": "https://assets.naturalenglishtraining.net/{key}",
+  "_naming_convention": "{product}-{type}-{descriptor}.{ext} | slides: {deck}-slide-{nn}.webp",
   "assets": [
     {
-      "key": "net-branding/artwork/sovereign-ai-architecture-canvas-2026-04-11.png",
+      "key": "net-branding/obi-arch-gospel444-diagram.png",
       "type": "image",
       "product": "net-branding",
-      "category": "artwork",
+      "category": "architecture-diagram",
+      "dimensions": "1024x1024",
+      "format": "PNG",
+      "git_path": "ASSETS/ARTWORK/NET-BRANDING/obi-arch-gospel444-diagram.png",
+      "uploaded": "2026-04-11",
+      "cdn_url": "https://assets.naturalenglishtraining.net/net-branding/obi-arch-gospel444-diagram.png",
+      "tags": ["obi", "architecture", "gospel-444", "system-diagram", "hero"],
+      "use_in": ["website-hero", "lesson-header", "app-about", "docs"]
+    },
+    {
+      "key": "net-branding/sovereign-ai-arch-canvas.png",
+      "type": "image",
+      "product": "net-branding",
+      "category": "architecture-diagram",
       "dimensions": "2752x1536",
       "format": "PNG",
       "git_path": "ASSETS/ARTWORK/NET-BRANDING/sovereign-ai-architecture-canvas-2026-04-11.png",
       "uploaded": "2026-04-11",
-      "cdn_url": "https://assets.naturalenglishtraining.net/net-branding/artwork/sovereign-ai-architecture-canvas-2026-04-11.png",
-      "tags": ["sovereign", "ai-architecture", "hero", "canvas"],
-      "status": "committed"
+      "cdn_url": "https://assets.naturalenglishtraining.net/net-branding/sovereign-ai-arch-canvas.png",
+      "tags": ["sovereign", "ai-architecture", "hero", "wide-format"],
+      "use_in": ["website-hero", "presentation", "docs"]
     },
     {
       "key": "canon/sovereign-ai-architecture.pdf",
       "type": "document",
       "product": "canon",
-      "category": "architecture",
+      "category": "architecture-deck",
       "format": "PDF",
+      "pages": 15,
       "git_path": "CANON/SOVEREIGN-AI-ARCHITECTURE.pdf",
       "uploaded": "2026-04-11",
       "cdn_url": "https://assets.naturalenglishtraining.net/canon/sovereign-ai-architecture.pdf",
       "tags": ["sovereign", "ai-architecture", "system-design", "canon"],
-      "status": "committed"
+      "use_in": ["canon-reference"]
+    },
+    {
+      "key": "sovereign-ai-arch/slide-01.webp",
+      "type": "image",
+      "product": "sovereign-ai-arch",
+      "category": "deck-slide",
+      "dimensions": "2752x1536",
+      "format": "WebP",
+      "git_path": "ASSETS/ARTWORK/sovereign-ai-arch/slide-01.webp",
+      "uploaded": "2026-04-11",
+      "cdn_url": "https://assets.naturalenglishtraining.net/sovereign-ai-arch/slide-01.webp",
+      "tags": ["sovereign-ai-arch", "slide"],
+      "use_in": ["website", "lesson", "app"]
+    },
+    {
+      "key": "sovereign-ai-arch/slide-02.webp",
+      "type": "image", "product": "sovereign-ai-arch", "category": "deck-slide",
+      "dimensions": "2752x1536", "format": "WebP",
+      "git_path": "ASSETS/ARTWORK/sovereign-ai-arch/slide-02.webp",
+      "uploaded": "2026-04-11",
+      "cdn_url": "https://assets.naturalenglishtraining.net/sovereign-ai-arch/slide-02.webp",
+      "tags": ["sovereign-ai-arch", "slide"], "use_in": ["website", "lesson", "app"]
+    },
+    {
+      "key": "sovereign-ai-arch/slide-03.webp",
+      "type": "image", "product": "sovereign-ai-arch", "category": "deck-slide",
+      "dimensions": "2752x1536", "format": "WebP",
+      "git_path": "ASSETS/ARTWORK/sovereign-ai-arch/slide-03.webp",
+      "uploaded": "2026-04-11",
+      "cdn_url": "https://assets.naturalenglishtraining.net/sovereign-ai-arch/slide-03.webp",
+      "tags": ["sovereign-ai-arch", "slide"], "use_in": ["website", "lesson", "app"]
+    },
+    {
+      "key": "sovereign-ai-arch/slide-04.webp",
+      "type": "image", "product": "sovereign-ai-arch", "category": "deck-slide",
+      "dimensions": "2752x1536", "format": "WebP",
+      "git_path": "ASSETS/ARTWORK/sovereign-ai-arch/slide-04.webp",
+      "uploaded": "2026-04-11",
+      "cdn_url": "https://assets.naturalenglishtraining.net/sovereign-ai-arch/slide-04.webp",
+      "tags": ["sovereign-ai-arch", "slide"], "use_in": ["website", "lesson", "app"]
+    },
+    {
+      "key": "sovereign-ai-arch/slide-05.webp",
+      "type": "image", "product": "sovereign-ai-arch", "category": "deck-slide",
+      "dimensions": "2752x1536", "format": "WebP",
+      "git_path": "ASSETS/ARTWORK/sovereign-ai-arch/slide-05.webp",
+      "uploaded": "2026-04-11",
+      "cdn_url": "https://assets.naturalenglishtraining.net/sovereign-ai-arch/slide-05.webp",
+      "tags": ["sovereign-ai-arch", "slide"], "use_in": ["website", "lesson", "app"]
+    },
+    {
+      "key": "sovereign-ai-arch/slide-06.webp",
+      "type": "image", "product": "sovereign-ai-arch", "category": "deck-slide",
+      "dimensions": "2752x1536", "format": "WebP",
+      "git_path": "ASSETS/ARTWORK/sovereign-ai-arch/slide-06.webp",
+      "uploaded": "2026-04-11",
+      "cdn_url": "https://assets.naturalenglishtraining.net/sovereign-ai-arch/slide-06.webp",
+      "tags": ["sovereign-ai-arch", "slide"], "use_in": ["website", "lesson", "app"]
+    },
+    {
+      "key": "sovereign-ai-arch/slide-07.webp",
+      "type": "image", "product": "sovereign-ai-arch", "category": "deck-slide",
+      "dimensions": "2752x1536", "format": "WebP",
+      "git_path": "ASSETS/ARTWORK/sovereign-ai-arch/slide-07.webp",
+      "uploaded": "2026-04-11",
+      "cdn_url": "https://assets.naturalenglishtraining.net/sovereign-ai-arch/slide-07.webp",
+      "tags": ["sovereign-ai-arch", "slide"], "use_in": ["website", "lesson", "app"]
+    },
+    {
+      "key": "sovereign-ai-arch/slide-08.webp",
+      "type": "image", "product": "sovereign-ai-arch", "category": "deck-slide",
+      "dimensions": "2752x1536", "format": "WebP",
+      "git_path": "ASSETS/ARTWORK/sovereign-ai-arch/slide-08.webp",
+      "uploaded": "2026-04-11",
+      "cdn_url": "https://assets.naturalenglishtraining.net/sovereign-ai-arch/slide-08.webp",
+      "tags": ["sovereign-ai-arch", "slide"], "use_in": ["website", "lesson", "app"]
+    },
+    {
+      "key": "sovereign-ai-arch/slide-09.webp",
+      "type": "image", "product": "sovereign-ai-arch", "category": "deck-slide",
+      "dimensions": "2752x1536", "format": "WebP",
+      "git_path": "ASSETS/ARTWORK/sovereign-ai-arch/slide-09.webp",
+      "uploaded": "2026-04-11",
+      "cdn_url": "https://assets.naturalenglishtraining.net/sovereign-ai-arch/slide-09.webp",
+      "tags": ["sovereign-ai-arch", "slide"], "use_in": ["website", "lesson", "app"]
+    },
+    {
+      "key": "sovereign-ai-arch/slide-10.webp",
+      "type": "image", "product": "sovereign-ai-arch", "category": "deck-slide",
+      "dimensions": "2752x1536", "format": "WebP",
+      "git_path": "ASSETS/ARTWORK/sovereign-ai-arch/slide-10.webp",
+      "uploaded": "2026-04-11",
+      "cdn_url": "https://assets.naturalenglishtraining.net/sovereign-ai-arch/slide-10.webp",
+      "tags": ["sovereign-ai-arch", "slide"], "use_in": ["website", "lesson", "app"]
+    },
+    {
+      "key": "sovereign-ai-arch/slide-11.webp",
+      "type": "image", "product": "sovereign-ai-arch", "category": "deck-slide",
+      "dimensions": "2752x1536", "format": "WebP",
+      "git_path": "ASSETS/ARTWORK/sovereign-ai-arch/slide-11.webp",
+      "uploaded": "2026-04-11",
+      "cdn_url": "https://assets.naturalenglishtraining.net/sovereign-ai-arch/slide-11.webp",
+      "tags": ["sovereign-ai-arch", "slide"], "use_in": ["website", "lesson", "app"]
+    },
+    {
+      "key": "sovereign-ai-arch/slide-12.webp",
+      "type": "image", "product": "sovereign-ai-arch", "category": "deck-slide",
+      "dimensions": "2752x1536", "format": "WebP",
+      "git_path": "ASSETS/ARTWORK/sovereign-ai-arch/slide-12.webp",
+      "uploaded": "2026-04-11",
+      "cdn_url": "https://assets.naturalenglishtraining.net/sovereign-ai-arch/slide-12.webp",
+      "tags": ["sovereign-ai-arch", "slide"], "use_in": ["website", "lesson", "app"]
+    },
+    {
+      "key": "sovereign-ai-arch/slide-13.webp",
+      "type": "image", "product": "sovereign-ai-arch", "category": "deck-slide",
+      "dimensions": "2752x1536", "format": "WebP",
+      "git_path": "ASSETS/ARTWORK/sovereign-ai-arch/slide-13.webp",
+      "uploaded": "2026-04-11",
+      "cdn_url": "https://assets.naturalenglishtraining.net/sovereign-ai-arch/slide-13.webp",
+      "tags": ["sovereign-ai-arch", "slide"], "use_in": ["website", "lesson", "app"]
+    },
+    {
+      "key": "sovereign-ai-arch/slide-14.webp",
+      "type": "image", "product": "sovereign-ai-arch", "category": "deck-slide",
+      "dimensions": "2752x1536", "format": "WebP",
+      "git_path": "ASSETS/ARTWORK/sovereign-ai-arch/slide-14.webp",
+      "uploaded": "2026-04-11",
+      "cdn_url": "https://assets.naturalenglishtraining.net/sovereign-ai-arch/slide-14.webp",
+      "tags": ["sovereign-ai-arch", "slide"], "use_in": ["website", "lesson", "app"]
+    },
+    {
+      "key": "sovereign-ai-arch/slide-15.webp",
+      "type": "image", "product": "sovereign-ai-arch", "category": "deck-slide",
+      "dimensions": "2752x1536", "format": "WebP",
+      "git_path": "ASSETS/ARTWORK/sovereign-ai-arch/slide-15.webp",
+      "uploaded": "2026-04-11",
+      "cdn_url": "https://assets.naturalenglishtraining.net/sovereign-ai-arch/slide-15.webp",
+      "tags": ["sovereign-ai-arch", "slide"], "use_in": ["website", "lesson", "app"]
     }
   ]
 }
