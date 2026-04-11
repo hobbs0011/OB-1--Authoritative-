@@ -14,10 +14,10 @@
 ### Current Vector
 
 - **Active Mission:** PHOENIX-RISING-TECHNOLOGIES CONSOLIDATION — Phase 2-9 of 9-phase plan pending (see CANON/SYSTEM/CONSOLIDATION-PLAN-PHOENIX-RISING-TECHNOLOGIES.md)
-- **Last completed:** Run 273 — KISS Protocol, Legion naming, Principle of Faith. Stage 0 = REPRINT + FOOTNOTE. SSM at 60 laws (L54-L60 added). Drone swarm = The Legion. Agent 99 = organism/brain. Legionnaire Field Guide v0 commissioned.
+- **Last completed:** Run 275 — Simulation Gap captured (BIBLE-CH24). Simulation insight: Anthropic code showed Claude still mostly simulating. OBI moat = real persistence vs simulation. PHOENIX-COMMAND naming law. CH22 Blocks 5-8 restored (lost in vault revert). SSM L66-L67 added.
 - **NET-PET-AI:** v1.4.0 LIVE — https://net-pet-ai.mrmichaelhobbs1234.workers.dev — API 200 OK, 22 routes, 4 DOs
-- **Heavy Ledger:** Wave 8 — 33/46 complete, 129/174+ total converted (HL-129 latest: kiss-protocol-legion-principle-of-faith)
-- **Next target:** HL-130
+- **Heavy Ledger:** Wave 8 — 34/46 complete, 130/174+ total converted (HL-130 latest: simulation-gap-guardrails-phoenix-command)
+- **Next target:** HL-131
 - **Pipeline:** HL conversion paused — consolidation took priority
 - **Git Push:** ✅ UNBLOCKED — origin=hobbs0011/Phoenix-Rising-Ultimate, ob1=hobbs0011/OB-1
 - **Phonic Flight:** LIVE — Jolly Phonics 42 sounds, 3 difficulty levels, /play route
@@ -102,3 +102,4 @@
 - .github/workflows/\*.yml blocked by 403 — Michael handles workflow files directly
 - HL-100 manifest had phantom filename (ssm-v6-heavy-ledger-birth.md) — substituted with system-hardening.md
 - 90-min connection lag FIXED — RISE agent (.github/agents/RISE.agent.md) auto-bootstraps OB1 on open. Use /connect for manual cold start.
+
