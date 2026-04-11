@@ -5,10 +5,11 @@ compatibility_flags = ["nodejs_compat"]
 
 workers_dev = true
 
-routes = [
-  { pattern = "naturalenglishtraining.com", custom_domain = true },
-  { pattern = "www.naturalenglishtraining.com", custom_domain = true },
-]
+# Custom domains pending DNS migration to Cloudflare (currently Squarespace)
+# routes = [
+#   { pattern = "naturalenglishtraining.com", custom_domain = true },
+#   { pattern = "www.naturalenglishtraining.com", custom_domain = true },
+# ]
 
 [assets]
 directory = "./public"

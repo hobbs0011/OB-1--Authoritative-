@@ -12,6 +12,7 @@ All deployable products live under `APPS/`. Wing tags classify each by domain.
 | Product | Directory | Status | Deploy URL | Notes |
 |---------|-----------|--------|-----------|-------|
 | NET-PET-AI | `APPS/NET-PET-AI/` | ✅ LIVE v1.4.0 | https://net-pet-ai.mrmichaelhobbs1234.workers.dev | Cloudflare Worker — primary OBI app |
+| EducationSystemsDevelopment | `APPS/EducationSystemsDevelopment/` | ✅ LIVE (mirror) | https://github.com/Phoenix-Rising-Tech/EducationSystemsDevelopment | Phoenix-Rising-Tech org mirror — Worker + scripts + student profiles |
 | OBI Chrome Extension | `APPS/obi-chrome-extension/` | 🔨 IN DEV | — | Rich version |
 | OBI VSCode Command Station | `APPS/obi-vscode-command-station/` | 🔨 IN DEV | — | Dev tool |
 | ChattyNET Mobile App | `APPS/ChattyNET-MOBILE-APP-V1.1.html` | 📦 PROTOTYPE | — | Mobile learning UX prototype |

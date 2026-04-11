@@ -28,6 +28,10 @@
       {
         "command": "obi.sendCommand",
         "title": "OBI: Send Command to Station"
+      },
+      {
+        "command": "obi.openMagicChat",
+        "title": "OBI: Magic Chat"
       }
     ],
     "viewsContainers": {
