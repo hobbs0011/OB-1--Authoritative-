@@ -172,6 +172,8 @@ const GENESIS_BLOCK = {
 2. **Gospel 444 blue prohibition vs 'Trust Blue'**: ~~RULING NEEDED~~ → **CLOSED. RULING: BLUE IS BANNED. Full stop.** "Trust Blue" is drift. No blue in any primary design element. Authority: SIGNAL 71 (A6 BLOCK 16, Run 285, 2026-04-11) — Gospel 444 elevated to Living Law (L50 in COLD-START-BOOT). The word "Trust" is not a Gospel 444 compliance pass.
 3. **Gospel 445**: DOES NOT EXIST. Quarantined as drift marker. Only Gospel 444 is law.
 
+→ **Canonical Reference**: Complete Gospel 444 origin story, soul WHY, 8 Pillars, Four-ness, Living Law elevation, and compliance matrix: `CANON/BIBLE-CH26-GOSPEL-444-LIVING-LAW.md` (created Run 285, 2026-04-11)
+
 ---
 
 ### 7. The Soul DNA Compiler — 5-Stage Architecture (from VAULT-FOUNDATIONS)
