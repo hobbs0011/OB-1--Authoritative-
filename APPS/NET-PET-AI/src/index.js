@@ -5,6 +5,7 @@
 // Secrets: DEEPSEEK_API_KEY, DEEPGRAM_API_KEY
 
 import { securityMiddleware, sanitizeInput, validateStudentId } from './security.js';
+import { extractWeaknesses, buildWeaknessPrompt, buildReEntryPrompt, buildRewardSignals, buildRewardPrompt } from './memory-brain.js';
 
 const VERSION = "1.4.0";
 
@@ -188,6 +189,9 @@ async function handleAPI(path, request, env, url) {
   // Memory
   if (path === "/api/memory" && method === "POST") { const body = await request.json(); return handleMemorySave(body, env); }
   if (path === "/api/memory" && method === "GET") { return handleMemoryGet(url.searchParams.get("studentId") || "", env); }
+
+  // Progress + Weakness tracking
+  if (path === "/api/progress" && method === "GET") { return handleProgress(url.searchParams.get("studentId") || "", env); }
 
   // Lesson / Practice / Feedback
   if (path === "/api/lesson" && method === "POST") { const body = await request.json(); return handleLesson(body, env); }
@@ -399,9 +403,40 @@ async function handleChat(body, env) {
     } catch (_) {}
   }
 
+  // ── Memory Brain: Weakness injection + Re-entry detection ─────────────
+  let weaknessContext = "";
+  let reEntryContext = "";
+  let rewardContext = "";
+  let weakPointsData = [];
+  if (studentId !== "anonymous" && env.PROFILES) {
+    try {
+      const profileStub = env.PROFILES.get(env.PROFILES.idFromName(studentId));
+      const wpRes = await profileStub.fetch(new Request("https://do/weakness/get"));
+      const wpData = await wpRes.json();
+      weakPointsData = wpData.weakPoints || [];
+      weaknessContext = buildWeaknessPrompt(weakPointsData);
+    } catch (_) {}
+  }
+  if (studentId !== "anonymous" && env.PETS) {
+    try {
+      const petStub = env.PETS.get(env.PETS.idFromName(studentId));
+      const petRes = await petStub.fetch(new Request("https://do/state"));
+      const petData = await petRes.json();
+      const lastCheckin = petData.state?.lastCheckin || 0;
+      const streakDays = petData.state?.streak || 0;
+      if (lastCheckin > 0) {
+        const daysSince = Math.floor((Date.now() - lastCheckin) / 86400000);
+        const topWeak = weakPointsData[0]?.specific || null;
+        reEntryContext = buildReEntryPrompt(daysSince, topWeak);
+      }
+      const signals = buildRewardSignals(weakPointsData, streakDays);
+      rewardContext = buildRewardPrompt(signals);
+    } catch (_) {}
+  }
+
   const hasSystem = messages.some(m => m.role === "system");
   if (!hasSystem) {
-    messages.unshift({ role: "system", content: OBI_SYSTEM + ledgerContext + sessionContext });
+    messages.unshift({ role: "system", content: OBI_SYSTEM + ledgerContext + sessionContext + weaknessContext + reEntryContext + rewardContext });
   }
 
   const res = await fetch("https://api.deepseek.com/chat/completions", {
@@ -421,6 +456,19 @@ async function handleChat(body, env) {
     appendToLedger(studentId, "chat_exchange", payload, env).catch(() => {});
   }
 
+  // ── Memory Brain: Extract weaknesses from OBI's correction and store ─────
+  if (studentId !== "anonymous" && env.PROFILES) {
+    const detected = extractWeaknesses(reply);
+    if (detected.length > 0) {
+      const profileStub = env.PROFILES.get(env.PROFILES.idFromName(studentId));
+      profileStub.fetch(new Request("https://do/weakness/update", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ studentId, weaknesses: detected }),
+      })).catch(() => {});
+    }
+  }
+
   // Update roster last_active so digest knows student practiced today
   if (studentId !== "anonymous" && env.SESSIONS) {
     const rosterStub = env.SESSIONS.get(env.SESSIONS.idFromName("system-roster"));
@@ -431,7 +479,7 @@ async function handleChat(body, env) {
     })).catch(() => {});
   }
 
-  return json({ reply, studentId, ledgerLoaded: !!ledgerContext, sessionLoaded: !!sessionContext });
+  return json({ reply, studentId, ledgerLoaded: !!ledgerContext, sessionLoaded: !!sessionContext, weaknessLoaded: !!weaknessContext, reEntryMode: !!reEntryContext });
 }
 
 // ── TTS (Deepgram Aura) ───────────────────────────────────────────────────────
@@ -479,6 +527,24 @@ async function handleMemoryGet(studentId, env) {
   if (!studentId) return json({ memory: [] });
   const stub = env.SESSIONS.get(env.SESSIONS.idFromName(studentId));
   return stub.fetch(new Request("https://do/memory/get"));
+}
+
+// ── Progress ─────────────────────────────────────────────────────────────────
+
+async function handleProgress(studentId, env) {
+  if (!studentId) return json({ error: "studentId required" }, 400);
+  const profileStub = env.PROFILES.get(env.PROFILES.idFromName(studentId));
+  const progressRes = await profileStub.fetch(new Request("https://do/progress"));
+  const progressData = await progressRes.json();
+  let petState = null;
+  try {
+    const petStub = env.PETS.get(env.PETS.idFromName(studentId));
+    const petRes = await petStub.fetch(new Request("https://do/state"));
+    const petData = await petRes.json();
+    petState = petData.state || null;
+  } catch (_) {}
+  const signals = buildRewardSignals(progressData.weakPoints || [], petState?.streak || 0);
+  return json({ weakPoints: progressData.weakPoints, profile: progressData.profile, pet: petState, rewardSignals: signals });
 }
 
 // ── Lesson / Practice / Feedback ─────────────────────────────────────────────
@@ -1245,6 +1311,8 @@ export class ProfileDO {
       `ALTER TABLE profiles ADD COLUMN parent_id TEXT DEFAULT ''`,
     ];
     for (const m of _migrations) { try { this.sql.exec(m); } catch(_) {} }
+    // Weakness tracking table
+    this.sql.exec(`CREATE TABLE IF NOT EXISTS weak_points (id INTEGER PRIMARY KEY AUTOINCREMENT, specific TEXT NOT NULL, category TEXT NOT NULL, error_count INTEGER DEFAULT 1, last_seen INTEGER NOT NULL, first_seen INTEGER NOT NULL, improvement_pct REAL DEFAULT 0.0, UNIQUE(specific))`);
   }
 
   async fetch(request) {
@@ -1272,6 +1340,28 @@ export class ProfileDO {
       const b = await request.json();
       this.sql.exec(`UPDATE profiles SET last_session_date = ? WHERE student_id = ?`, b.ts || Date.now(), b.studentId || "");
       return json({ ok: true });
+    }
+    if (url.pathname === "/weakness/get" && request.method === "GET") {
+      const rows = this.sql.exec(`SELECT * FROM weak_points ORDER BY error_count DESC LIMIT 10`).toArray();
+      return json({ weakPoints: rows });
+    }
+    if (url.pathname === "/weakness/update" && request.method === "POST") {
+      const b = await request.json();
+      const now = Date.now();
+      for (const w of (b.weaknesses || [])) {
+        const existing = this.sql.exec(`SELECT id, error_count FROM weak_points WHERE specific = ?`, w.specific).toArray();
+        if (existing.length > 0) {
+          this.sql.exec(`UPDATE weak_points SET error_count = error_count + 1, last_seen = ? WHERE specific = ?`, now, w.specific);
+        } else {
+          this.sql.exec(`INSERT INTO weak_points (specific, category, error_count, last_seen, first_seen) VALUES (?, ?, 1, ?, ?)`, w.specific, w.category, now, now);
+        }
+      }
+      return json({ ok: true, updated: (b.weaknesses || []).length });
+    }
+    if (url.pathname === "/progress" && request.method === "GET") {
+      const weakPoints = this.sql.exec(`SELECT * FROM weak_points ORDER BY error_count DESC`).toArray();
+      const profile = this.sql.exec(`SELECT * FROM profiles LIMIT 1`).toArray();
+      return json({ weakPoints, profile: profile[0] || null });
     }
     return json({ error: "Not found" }, 404);
   }
