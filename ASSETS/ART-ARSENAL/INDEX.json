@@ -1,0 +1,328 @@
+{
+  "_meta": {
+    "version": "1.0.0",
+    "updated": "2026-04-11",
+    "description": "ART-ARSENAL — cross-indexed artwork library for all NET/OBI products",
+    "base_path": "ASSETS/ART-ARSENAL/",
+    "cdn_base": "https://assets.naturalenglishtraining.net/art-arsenal/",
+    "categories": ["logos", "wordmarks", "banners", "icons", "portraits", "expressions", "stickers", "emojis", "diagrams", "slides", "social", "marketing", "lesson-art", "characters", "promo", "ui", "backgrounds", "patterns"],
+    "products": ["obi", "net", "train-67", "galaxy", "sovereign", "brand", "shared"],
+    "use_slots": ["website-hero", "website-banner", "lesson-header", "lesson-body", "app-about", "app-header", "social-square-1080", "social-story-1080x1920", "discord-emoji", "discord-banner", "discord-server-icon", "presentation-slide", "email-header", "print"]
+  },
+  "assets": [
+
+    {
+      "id": "sovereign-diagrams-obi-system-arch",
+      "file": "sovereign/diagrams/obi-system-arch.webp",
+      "name": "OBI System Architecture — Gospel 444",
+      "category": "diagrams",
+      "product": "sovereign",
+      "format": "webp",
+      "dimensions": "1024x1024",
+      "tags": ["obi", "architecture", "gospel-444", "system-diagram", "ai", "flowchart"],
+      "use": ["website-hero", "app-about", "presentation-slide", "lesson-header"]
+    },
+
+    {
+      "id": "sovereign-diagrams-sovereign-ai-arch",
+      "file": "sovereign/diagrams/sovereign-ai-arch.webp",
+      "name": "Sovereign AI Architecture Canvas",
+      "category": "diagrams",
+      "product": "sovereign",
+      "format": "webp",
+      "dimensions": "2752x1536",
+      "tags": ["sovereign", "ai-architecture", "wide", "hero", "canvas"],
+      "use": ["website-hero", "presentation-slide", "email-header"]
+    },
+
+    {
+      "id": "sovereign-slides-01", "file": "sovereign/slides/slide-01.webp",
+      "name": "Sovereign AI Arch — Slide 01", "category": "slides", "product": "sovereign",
+      "format": "webp", "dimensions": "2752x1536",
+      "tags": ["sovereign", "ai-architecture", "slide"],
+      "use": ["presentation-slide", "lesson-body", "website-banner"]
+    },
+    {
+      "id": "sovereign-slides-02", "file": "sovereign/slides/slide-02.webp",
+      "name": "Sovereign AI Arch — Slide 02", "category": "slides", "product": "sovereign",
+      "format": "webp", "dimensions": "2752x1536",
+      "tags": ["sovereign", "ai-architecture", "slide"],
+      "use": ["presentation-slide", "lesson-body", "website-banner"]
+    },
+    {
+      "id": "sovereign-slides-03", "file": "sovereign/slides/slide-03.webp",
+      "name": "Sovereign AI Arch — Slide 03", "category": "slides", "product": "sovereign",
+      "format": "webp", "dimensions": "2752x1536",
+      "tags": ["sovereign", "ai-architecture", "slide"],
+      "use": ["presentation-slide", "lesson-body", "website-banner"]
+    },
+    {
+      "id": "sovereign-slides-04", "file": "sovereign/slides/slide-04.webp",
+      "name": "Sovereign AI Arch — Slide 04", "category": "slides", "product": "sovereign",
+      "format": "webp", "dimensions": "2752x1536",
+      "tags": ["sovereign", "ai-architecture", "slide"],
+      "use": ["presentation-slide", "lesson-body", "website-banner"]
+    },
+    {
+      "id": "sovereign-slides-05", "file": "sovereign/slides/slide-05.webp",
+      "name": "Sovereign AI Arch — Slide 05", "category": "slides", "product": "sovereign",
+      "format": "webp", "dimensions": "2752x1536",
+      "tags": ["sovereign", "ai-architecture", "slide"],
+      "use": ["presentation-slide", "lesson-body", "website-banner"]
+    },
+    {
+      "id": "sovereign-slides-06", "file": "sovereign/slides/slide-06.webp",
+      "name": "Sovereign AI Arch — Slide 06", "category": "slides", "product": "sovereign",
+      "format": "webp", "dimensions": "2752x1536",
+      "tags": ["sovereign", "ai-architecture", "slide"],
+      "use": ["presentation-slide", "lesson-body", "website-banner"]
+    },
+    {
+      "id": "sovereign-slides-07", "file": "sovereign/slides/slide-07.webp",
+      "name": "Sovereign AI Arch — Slide 07", "category": "slides", "product": "sovereign",
+      "format": "webp", "dimensions": "2752x1536",
+      "tags": ["sovereign", "ai-architecture", "slide"],
+      "use": ["presentation-slide", "lesson-body", "website-banner"]
+    },
+    {
+      "id": "sovereign-slides-08", "file": "sovereign/slides/slide-08.webp",
+      "name": "Sovereign AI Arch — Slide 08", "category": "slides", "product": "sovereign",
+      "format": "webp", "dimensions": "2752x1536",
+      "tags": ["sovereign", "ai-architecture", "slide"],
+      "use": ["presentation-slide", "lesson-body", "website-banner"]
+    },
+    {
+      "id": "sovereign-slides-09", "file": "sovereign/slides/slide-09.webp",
+      "name": "Sovereign AI Arch — Slide 09", "category": "slides", "product": "sovereign",
+      "format": "webp", "dimensions": "2752x1536",
+      "tags": ["sovereign", "ai-architecture", "slide"],
+      "use": ["presentation-slide", "lesson-body", "website-banner"]
+    },
+    {
+      "id": "sovereign-slides-10", "file": "sovereign/slides/slide-10.webp",
+      "name": "Sovereign AI Arch — Slide 10", "category": "slides", "product": "sovereign",
+      "format": "webp", "dimensions": "2752x1536",
+      "tags": ["sovereign", "ai-architecture", "slide"],
+      "use": ["presentation-slide", "lesson-body", "website-banner"]
+    },
+    {
+      "id": "sovereign-slides-11", "file": "sovereign/slides/slide-11.webp",
+      "name": "Sovereign AI Arch — Slide 11", "category": "slides", "product": "sovereign",
+      "format": "webp", "dimensions": "2752x1536",
+      "tags": ["sovereign", "ai-architecture", "slide"],
+      "use": ["presentation-slide", "lesson-body", "website-banner"]
+    },
+    {
+      "id": "sovereign-slides-12", "file": "sovereign/slides/slide-12.webp",
+      "name": "Sovereign AI Arch — Slide 12", "category": "slides", "product": "sovereign",
+      "format": "webp", "dimensions": "2752x1536",
+      "tags": ["sovereign", "ai-architecture", "slide"],
+      "use": ["presentation-slide", "lesson-body", "website-banner"]
+    },
+    {
+      "id": "sovereign-slides-13", "file": "sovereign/slides/slide-13.webp",
+      "name": "Sovereign AI Arch — Slide 13", "category": "slides", "product": "sovereign",
+      "format": "webp", "dimensions": "2752x1536",
+      "tags": ["sovereign", "ai-architecture", "slide"],
+      "use": ["presentation-slide", "lesson-body", "website-banner"]
+    },
+    {
+      "id": "sovereign-slides-14", "file": "sovereign/slides/slide-14.webp",
+      "name": "Sovereign AI Arch — Slide 14", "category": "slides", "product": "sovereign",
+      "format": "webp", "dimensions": "2752x1536",
+      "tags": ["sovereign", "ai-architecture", "slide"],
+      "use": ["presentation-slide", "lesson-body", "website-banner"]
+    },
+    {
+      "id": "sovereign-slides-15", "file": "sovereign/slides/slide-15.webp",
+      "name": "Sovereign AI Arch — Slide 15", "category": "slides", "product": "sovereign",
+      "format": "webp", "dimensions": "2752x1536",
+      "tags": ["sovereign", "ai-architecture", "slide"],
+      "use": ["presentation-slide", "lesson-body", "website-banner"]
+    },
+
+    {
+      "id": "brand-logos-net-lion-voice",
+      "file": "brand/logos/net-lion-voice.webp",
+      "name": "NET Lion Voice Logo",
+      "category": "logos",
+      "product": "brand",
+      "format": "webp",
+      "tags": ["net", "logo", "lion", "voice", "brand"],
+      "use": ["website-hero", "app-header", "social-square-1080", "print", "discord-server-icon"]
+    },
+
+    {
+      "id": "brand-logos-net-phoenix-logo",
+      "file": "brand/logos/net-phoenix-logo.webp",
+      "name": "NET Phoenix Rising Logo",
+      "category": "logos",
+      "product": "brand",
+      "format": "webp",
+      "tags": ["net", "logo", "phoenix", "rising", "brand"],
+      "use": ["website-hero", "app-header", "social-square-1080", "email-header", "discord-server-icon"]
+    },
+
+    {
+      "id": "net-banners-main",
+      "file": "net/banners/net-main-banner.webp",
+      "name": "Natural English Training — Main Banner",
+      "category": "banners",
+      "product": "net",
+      "format": "webp",
+      "tags": ["net", "banner", "main", "brand"],
+      "use": ["website-banner", "email-header", "discord-banner", "social-square-1080"]
+    },
+
+    {
+      "id": "net-banners-lakeview",
+      "file": "net/banners/lakeview-city-banner.webp",
+      "name": "Lakeview City Banner",
+      "category": "banners",
+      "product": "net",
+      "format": "webp",
+      "tags": ["net", "banner", "lakeview", "city", "location"],
+      "use": ["website-banner", "discord-banner", "email-header"]
+    },
+
+    {
+      "id": "net-social-facebook-marketing",
+      "file": "net/social/facebook-banner-marketing.webp",
+      "name": "Facebook Banner — Marketing",
+      "category": "social",
+      "product": "net",
+      "format": "webp",
+      "tags": ["net", "facebook", "banner", "marketing", "social"],
+      "use": ["social-square-1080", "website-banner"]
+    },
+
+    {
+      "id": "net-portraits-hobbs",
+      "file": "net/portraits/hobbs-professional.webp",
+      "name": "Michael Hobbs — Professional Photo",
+      "category": "portraits",
+      "product": "net",
+      "format": "webp",
+      "tags": ["hobbs", "founder", "professional", "portrait", "about"],
+      "use": ["website-hero", "app-about", "social-square-1080", "email-header", "print"]
+    },
+
+    {
+      "id": "net-marketing-breaking-ceiling",
+      "file": "net/marketing/breaking-the-english-ceiling.webp",
+      "name": "Breaking the English Ceiling",
+      "category": "marketing",
+      "product": "net",
+      "format": "webp",
+      "tags": ["net", "marketing", "english-ceiling", "dossier", "hero"],
+      "use": ["website-hero", "lesson-header", "social-square-1080", "presentation-slide"]
+    },
+
+    {
+      "id": "net-marketing-mouse-to-tiger",
+      "file": "net/marketing/mouse-to-tiger.webp",
+      "name": "Mouse to Tiger",
+      "category": "marketing",
+      "product": "net",
+      "format": "webp",
+      "tags": ["net", "marketing", "mouse-to-tiger", "transformation", "dossier"],
+      "use": ["website-hero", "lesson-header", "social-square-1080", "presentation-slide"]
+    },
+
+    {
+      "id": "net-marketing-tiger-dossier-cover",
+      "file": "net/marketing/tiger-dossier-cover.webp",
+      "name": "The Tiger Dossier — Cover",
+      "category": "marketing",
+      "product": "net",
+      "format": "webp",
+      "tags": ["net", "tiger-dossier", "cover", "marketing"],
+      "use": ["website-hero", "lesson-header", "social-square-1080", "email-header"]
+    },
+
+    {
+      "id": "net-marketing-tiger-mode-evolution",
+      "file": "net/marketing/tiger-mode-evolution.webp",
+      "name": "Tiger Mode Evolution",
+      "category": "marketing",
+      "product": "net",
+      "format": "webp",
+      "tags": ["net", "tiger-mode", "evolution", "progression", "marketing"],
+      "use": ["website-hero", "lesson-header", "social-square-1080", "presentation-slide"]
+    },
+
+    {
+      "id": "galaxy-lesson-art-concept-01",
+      "file": "galaxy/lesson-art/concept-art-01.webp",
+      "name": "Galaxy Lesson Concept Art 01",
+      "category": "lesson-art",
+      "product": "galaxy",
+      "format": "webp",
+      "tags": ["galaxy", "concept-art", "lesson", "illustration"],
+      "use": ["lesson-header", "lesson-body", "app-header"]
+    },
+
+    {
+      "id": "galaxy-lesson-art-concept-02",
+      "file": "galaxy/lesson-art/concept-art-02.webp",
+      "name": "Galaxy Lesson Concept Art 02",
+      "category": "lesson-art",
+      "product": "galaxy",
+      "format": "webp",
+      "tags": ["galaxy", "concept-art", "lesson", "illustration"],
+      "use": ["lesson-header", "lesson-body", "app-header"]
+    },
+
+    {
+      "id": "galaxy-lesson-art-concept-03",
+      "file": "galaxy/lesson-art/concept-art-03.webp",
+      "name": "Galaxy Lesson Concept Art 03",
+      "category": "lesson-art",
+      "product": "galaxy",
+      "format": "webp",
+      "tags": ["galaxy", "concept-art", "lesson", "illustration"],
+      "use": ["lesson-header", "lesson-body", "app-header"]
+    },
+
+    {
+      "id": "galaxy-lesson-art-mouse-to-tiger-cover",
+      "file": "galaxy/lesson-art/mouse-to-tiger-cover.webp",
+      "name": "Mouse to Tiger — Lesson Cover",
+      "category": "lesson-art",
+      "product": "galaxy",
+      "format": "webp",
+      "tags": ["galaxy", "mouse-to-tiger", "lesson", "cover"],
+      "use": ["lesson-header", "website-hero", "app-header"]
+    },
+
+    {
+      "id": "galaxy-lesson-art-tiger-mode-evolution",
+      "file": "galaxy/lesson-art/tiger-mode-evolution.webp",
+      "name": "Tiger Mode Evolution — Lesson Art",
+      "category": "lesson-art",
+      "product": "galaxy",
+      "format": "webp",
+      "tags": ["galaxy", "tiger-mode", "evolution", "lesson"],
+      "use": ["lesson-header", "lesson-body", "app-header"]
+    }
+
+  ],
+
+  "_empty_slots": {
+    "obi/portraits": "OBI character portraits — drop PNG/JPG here",
+    "obi/expressions": "OBI expression sheet — happy, thinking, error, celebrate",
+    "obi/stickers": "OBI sticker pack — Telegram/Discord/WhatsApp ready",
+    "obi/emojis": "OBI emoji set — 64x64, 128x128 WebP",
+    "brand/wordmarks": "NET wordmark variants — horizontal, stacked, mono",
+    "brand/icons": "App icons — 16, 32, 48, 64, 128, 256, 512px",
+    "net/social": "Social assets — story 1080x1920, square 1080x1080, cover 820x312",
+    "train-67/characters": "Train 6-7 Roblox character art",
+    "train-67/promo": "Game promo images",
+    "train-67/ui": "In-game UI elements",
+    "galaxy/backgrounds": "Galaxy lesson backgrounds",
+    "shared/emojis": "Shared emoji set used across all products",
+    "shared/backgrounds": "Reusable background textures",
+    "shared/patterns": "Gospel 444 pattern tiles",
+    "raw": "Unprocessed originals — agents convert on intake"
+  }
+}
