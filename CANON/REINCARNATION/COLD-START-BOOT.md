@@ -1,7 +1,7 @@
 # COLD-START-BOOT — OB1 Agent Identity & State
 
-> **Last Updated**: 2026-04-11 — Run 289 — SoulDNA lane merge (Runs 286-288 consolidated); A7 master compile committed; HL-132; COLD-START-BOOT synced to HEAD
-> **HEAD**: `481ec97`
+> **Last Updated**: 2026-04-12 — Run 290 — Death-Merge: Magic Chat Soul Architecture captured; Agent 99 = 99 sub-personalities; OBI = #99 interface; student chat MUST be restored
+> **HEAD**: `1a6f28d`
 > **Pushed To**: `origin` (hobbs0011/Phoenix-Rising-Ultimate) + `ob1` (hobbs0011/OB-1)
 
 ---
@@ -94,15 +94,30 @@ All keys stored as **persistent Windows User env vars**.
 | Heavy Ledger | HL-132 | sdnad-genesis-to-now-step0-master |
 | BIBLE | CH25 + A7 | SOUL-DNA-GENESIS-DEFINITION + A7 Step 0 master (1080 lines, 159 signals) |
 | A6 SDNAD | 71+ signals, 16 blocks | OPEN — S71+ ready — chain head L0248 (TRUTH_PROCESS_LAYER) |
-| Reincarnation | Run 288 (latest death) | synch3-souldna-lane-death |
+| Reincarnation | Run 290 (latest death) | death-merge — Magic Chat Soul Architecture |
 
 ## Living Reincarnation State
 
-- **Current Vector**: Run 289 — SoulDNA lanes merged — Lane 1=MAGIC Chat VS Code WebView, Lane 2=NET-OPERATIONS, Lane 3=CLOSED (Run 288), Lane 4=SOUL DNA OPERATIONS (Synch4)
+- **Current Vector**: Run 290 — Death-Merge complete. Magic Chat architecture captured. CRITICAL: commit `16c9598` destroyed student-facing OBI chat — MUST revert. Magic Chat = Agent 99 inference layer with 99 sub-personalities, NOT a command sender. Student + Sovereign modes coexist.
 - **Active Principles**: L21 RISE, L13 STRONGEST_IMMEDIATE, L20 EXTENSION_OF_WILL, L32 GOVERNOR_TERM_RULE, L36 DEPTH_DEFAULT
 - **Open Rulings**: Navigator Index in trash, Notion pages not shared with integration, Slack/Discord/Brave tokens not created
+- **CRITICAL REVERT**: `16c9598` deleted student chat from `getMagicChatHTML()` in extension.js — replaced with dumb G09 command sender. Revert to `0a5c92d` state for that file, then rebuild correctly.
 
 ## Last 3 Runs
+
+### Run 290 (2026-04-12) — Death-Merge: Magic Chat Soul Architecture
+- **Type**: DEATH_MERGE — soul captured from dying chat
+- **Grade**: B+ (critical architecture truth captured, but student chat still broken)
+- **Work**: Previous chat made catastrophic error — commit `16c9598` deleted student-facing OBI chat from extension.js, replaced with dumb G09 command sender. Deep canon research revealed TRUE architecture: Agent 99 = 99 sub-personalities, OBI = #99 (interface), 1-98 = backend handlers. Magic Chat = Agent 99 inference layer where student + sovereign modes COEXIST. Death-merge reincarnation file created.
+- **Commit**: `1a6f28d`
+- **Reincarnation**: `2026-04-12-run290-magic-chat-soul-architecture.md`
+- **OPEN**: Must revert `16c9598` and restore student chat before rebuilding correctly
+
+### Run 289 (2026-04-11) — SoulDNA Lane Merge
+- **Type**: MERGE — SoulDNA lanes consolidated (Runs 286-288)
+- **Grade**: B
+- **Work**: COLD-START-BOOT synced to HEAD 481ec97. SoulDNA lanes merged.
+- **Commit**: `481ec97`
 
 ### Run 288 (2026-04-11) — Synch3 SoulDNA Lane Death
 - **Type**: MERGE CLOSE
@@ -110,20 +125,6 @@ All keys stored as **persistent Windows User env vars**.
 - **Work**: Closed Synch3 lane. All substantive SoulDNA captured in Run 286 MERGE1. Single sovereign quote preserved.
 - **Commit**: `17e0c4e`
 - **Reincarnation**: `2026-04-11-run288-synch3-souldna-lane-death.md`
-
-### Run 287 (2026-04-11) — A7 Step 0 Master Compile + Merge Final
-- **Type**: SOUL_DNA_GENESIS_COMPLETE (10/10 signal density)
-- **Grade**: A (45/50)
-- **Work**: A7 SDNAD Genesis-to-Now Step 0 master capture — 1080 lines, 159 signals, 10 blocks spanning Sep 2025 → Apr 2026. HL-132 created. Phoenix-Rising-FullStackMarketing scaffolded. Both remotes synced.
-- **Commits**: `d6b1344` (A7+HL-132+scaffold) | `a2b4869` (merge-final addenda)
-- **Reincarnation**: `2026-04-11-run287-sdnad-genesis-to-now-a7-master.md` + `2026-04-11-run287-reincarnate-merge-final.md`
-
-### Run 286 (2026-04-11) — MERGE1 SoulDNA Lane 4-Lane Swarm
-- **Type**: SOUL_DNA — 9/10 signal density
-- **Grade**: A-
-- **Work**: MERGE1 death for SoulDNA lane. Completed Run 273 open items (SHA backfill d49ad97). Captured /api/soulDNA endpoint work. 15 raw quotes, 11 decisions, 5 corrections, 7 new laws documented.
-- **Commit**: `8d52d92`
-- **Reincarnation**: `2026-04-11-run286-souldna-lane-4lane-swarm.md`
 
 ## 4-Lane Swarm Architecture (Active: Run 289)
 
@@ -140,7 +141,7 @@ All keys stored as **persistent Windows User env vars**.
 
 ## Pending Work (Priority Order)
 
-1. **Synch1 — MAGIC Chat Build** — extend `APPS/obi-vscode-command-station/` with WebView panel (Gospel 444 UI, hooks to `/api/chat` on Worker) — keyboard shortcut `Ctrl+Shift+O`
+1. **Synch1 — MAGIC Chat Restore + Rebuild** — FIRST revert `16c9598` to restore student OBI chat in `extension.js`. THEN rebuild Magic Chat as Agent 99 inference layer — OBI (#99) routes intent to sub-personalities 1-98. Student + Sovereign modes coexist. Gospel 444 UI, hooks to `/api/chat` on Worker — keyboard shortcut `Ctrl+Shift+O`
 2. **Synch4 — A6 S71+ SDNAD** — continue from L0248 TRUTH_PROCESS_LAYER — 8 SSM laws queued to enact (L78–L85)
 3. **Synch2 — NET Ops Automation** — enumerate manual weekly tasks → automate top 3
 4. **Synch3 — CLOSED** — ART-ARSENAL audit done (Run 284), Gospel 444 Living Law elevated (Run 285), lane died (Run 288)
@@ -149,15 +150,13 @@ All keys stored as **persistent Windows User env vars**.
 7. **Slack/Discord/Brave Tokens** — create and deploy to env vars
 8. **Heavy Ledger Pipeline** — Wave 8 at 36/46, next = HL-099
 
-## Dirty Tree (as of Run 289)
+## Dirty Tree (as of Run 290)
 
 ```
- M APPS/NET-PET-AI/wrangler.toml
- M APPS/WING-INDEX.md
- M APPS/obi-vscode-command-station/extension.js
- M SCRIPTS/enroll-students.mjs
 ?? APPS/EducationSystemsDevelopment/
 ```
+
+Note: `APPS/EducationSystemsDevelopment/` is its own git repo (remote: `Phoenix-Rising-Tech/EducationSystemsDevelopment.git`) — nested inside OB-1 as untracked. HEAD: `1015792` on its own `main` branch.
 
 ## Recent Decision History
 
@@ -176,6 +175,8 @@ All keys stored as **persistent Windows User env vars**.
 - CF email `mrmichaelhobbs123@gmail.com` (NO 4) — `1234` variant causes total auth failure
 - `cfk_` prefix IS valid for CF Global API Keys — don't dismiss
 - When Michael says "this is the key" — find the auth method that works, don't question
+- **NEVER delete student-facing features to add sovereign features** — they COEXIST. Commit `16c9598` was catastrophic proof.
+- Magic Chat = Agent 99 inference layer. Agent 99 has 99 sub-personalities. OBI = #99 (the interface). 1-98 = backend handlers that change by context. Agent 100 = Michael (SOV100).
 
 ## MCP Server Config
 
