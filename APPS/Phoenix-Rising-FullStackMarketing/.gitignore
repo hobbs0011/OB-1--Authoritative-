@@ -1,0 +1,24 @@
+# Binaries — go to R2, not git
+*.mp4
+*.mov
+*.avi
+*.webm
+*.mp3
+*.wav
+*.aac
+*.zip
+*.7z
+*.tar.gz
+
+# Large source files in raw-intake — commit after processing
+raw-intake/*.pdf
+raw-intake/*.pptx
+raw-intake/*.ppt
+
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Node
+node_modules/

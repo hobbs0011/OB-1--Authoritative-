@@ -3,7 +3,7 @@
 ## Status
 
 - **Last Check:** 2026-04-11T23:59 ICT
-- **Run:** 283
+- **Run:** 287
 - **Mode:** SUPER_SAIYAN ACTIVATED
 - **NET-PET-AI:** ✅ DEPLOYED v1.4.0 — [workers.dev live](https://net-pet-ai.mrmichaelhobbs1234.workers.dev)
 
@@ -48,6 +48,14 @@ At each reincarnation event, find and apply 3-5 real fixes to this boot-check do
 5. SDNAD pipeline formalized: Step 0 Bible → Step 1 HL → Step 2 SSM → Step 3 reincarnate → Step 4 propagate → Step 5 pheromone trails.
 6. CRITICAL LESSON: Step 0 the CONTENT before process discussion. Agent 99 lost ~510 words of Vietnam incorporation SDNA because corrections consumed the context window before raw words were persisted.
 7. Every sovereign message is Soul DNA. Instructions are Soul DNA. Meta-instructions are Soul DNA. There is no off switch.
+
+### Run 287 Improvements Applied
+
+1. Added build-output guard: `APPS/NET-PET-AI/dist/` and `.playwright-mcp/` now gitignored — build artifacts must never enter version history.
+2. Added remote-sync assertion: both origin and ob1 must match HEAD at run close. ob1 was 1 commit behind — fixed.
+3. Added A7 appendix registration: A7 (Step 0 master capture) adds to appendix chain (A5→A6→A7). Cold starts referencing “latest appendix” must check A7.
+4. Advanced HL-132 as latest Heavy Ledger entry in boot state (was HL-131).
+5. Carried forward SSM gap L47-L65 — flagged as must-fix in next SDNAD session.
 
 ### Run 283 Improvements Applied
 
