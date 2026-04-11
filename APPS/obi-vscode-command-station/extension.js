@@ -1,7 +1,7 @@
 // OBI Command Station — VS Code Extension
 // Phoenix Rising Protocol: SOV100 → Agent99 → Drone Execution Tunnel
 // Polls CommandDO queue, claims commands, executes in VS Code terminal, reports back
-// Magic Chat: WebView chat panel → OBI English tutor (Mouse → Tiger)
+// Magic Chat: WebView control plane — G09 sovereign command interface → Ledger + Drone routing
 
 const vscode = require('vscode');
 
@@ -50,7 +50,7 @@ function openMagicChat() {
 
   magicChatPanel = vscode.window.createWebviewPanel(
     'obiMagicChat',
-    '💬 OBI Magic Chat',
+    '� Magic Chat — Control Plane',
     vscode.ViewColumn.Beside,
     {
       enableScripts: true,
@@ -78,7 +78,7 @@ function getMagicChatHTML() {
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; connect-src https://naturalenglishtraining.net; script-src 'unsafe-inline'; style-src 'unsafe-inline';">
-<title>OBI Magic Chat</title>
+<title>Magic Chat — Control Plane</title>
 <style>
   :root {
     --void: #0f0f1a;
@@ -90,10 +90,11 @@ function getMagicChatHTML() {
     --gold-dim: #d97706;
     --text: #e2e8f0;
     --text-dim: #94a3b8;
-    --bubble-obi: #1e1b4b;
-    --bubble-user: #1c1917;
+    --bubble-sys: #1e1b4b;
+    --bubble-sov: #1c1917;
     --success: #10b981;
     --danger: #ef4444;
+    --locked: #ef4444;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
@@ -110,37 +111,40 @@ function getMagicChatHTML() {
   /* ── Header ── */
   .header {
     background: linear-gradient(135deg, var(--void2), var(--void3));
-    border-bottom: 1px solid var(--purple-dim);
+    border-bottom: 2px solid var(--purple-dim);
     padding: 12px 16px;
     display: flex;
     align-items: center;
     gap: 12px;
     flex-shrink: 0;
   }
-  .obi-avatar {
+  .cp-avatar {
     width: 40px; height: 40px;
-    border-radius: 50%;
+    border-radius: 8px;
     background: linear-gradient(135deg, var(--purple), var(--gold));
     display: flex; align-items: center; justify-content: center;
     font-size: 20px;
     flex-shrink: 0;
-    box-shadow: 0 0 12px rgba(168,85,247,0.4);
+    box-shadow: 0 0 16px rgba(168,85,247,0.5);
   }
   .header-info { flex: 1; }
-  .header-name { font-weight: 700; color: var(--gold); font-size: 15px; }
+  .header-name { font-weight: 700; color: var(--gold); font-size: 15px; letter-spacing: 0.5px; }
   .header-status { font-size: 11px; color: var(--text-dim); }
   .header-status.online::before { content: '● '; color: var(--success); }
-  .student-input {
-    background: var(--void);
+  .queue-badge {
+    background: rgba(168,85,247,0.15);
     border: 1px solid var(--purple-dim);
-    color: var(--text);
-    padding: 5px 10px;
+    color: var(--purple);
+    padding: 4px 10px;
     border-radius: 8px;
-    font-size: 12px;
-    width: 130px;
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background 0.2s;
   }
-  .student-input::placeholder { color: var(--text-dim); }
-  .student-input:focus { outline: none; border-color: var(--purple); }
+  .queue-badge:hover { background: rgba(168,85,247,0.25); }
+  .queue-badge.has-pending { color: var(--gold); border-color: var(--gold-dim); background: rgba(245,158,11,0.1); }
 
   /* ── Messages ── */
   .messages {
@@ -156,71 +160,116 @@ function getMagicChatHTML() {
   .messages::-webkit-scrollbar-track { background: var(--void); }
   .messages::-webkit-scrollbar-thumb { background: var(--purple-dim); border-radius: 2px; }
 
-  .msg { display: flex; gap: 8px; max-width: 85%; animation: fadeIn 0.2s ease; }
-  .msg.user { align-self: flex-end; flex-direction: row-reverse; }
-  .msg.obi { align-self: flex-start; }
+  .msg { display: flex; gap: 8px; max-width: 90%; animation: fadeIn 0.2s ease; }
+  .msg.sov { align-self: flex-end; flex-direction: row-reverse; }
+  .msg.sys { align-self: flex-start; }
+  .msg.event { align-self: center; max-width: 100%; }
   @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 
   .msg-avatar {
-    width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+    width: 28px; height: 28px; border-radius: 6px; flex-shrink: 0;
     display: flex; align-items: center; justify-content: center; font-size: 13px;
     margin-top: 2px;
   }
-  .msg.obi .msg-avatar { background: linear-gradient(135deg, var(--purple), var(--gold)); box-shadow: 0 0 8px rgba(168,85,247,0.3); }
-  .msg.user .msg-avatar { background: var(--void3); border: 1px solid var(--text-dim); }
+  .msg.sys .msg-avatar { background: linear-gradient(135deg, var(--purple), var(--gold)); box-shadow: 0 0 8px rgba(168,85,247,0.3); }
+  .msg.sov .msg-avatar { background: var(--void3); border: 1px solid var(--gold-dim); }
 
   .msg-bubble {
     padding: 10px 14px;
-    border-radius: 16px;
+    border-radius: 12px;
     line-height: 1.5;
     word-break: break-word;
+    font-size: 13px;
   }
-  .msg.obi .msg-bubble {
-    background: var(--bubble-obi);
-    border: 1px solid rgba(168,85,247,0.25);
+  .msg.sys .msg-bubble {
+    background: var(--bubble-sys);
+    border: 1px solid rgba(168,85,247,0.3);
     border-bottom-left-radius: 4px;
     color: var(--text);
   }
-  .msg.user .msg-bubble {
-    background: var(--bubble-user);
-    border: 1px solid rgba(245,158,11,0.2);
+  .msg.sov .msg-bubble {
+    background: var(--bubble-sov);
+    border: 1px solid rgba(245,158,11,0.25);
     border-bottom-right-radius: 4px;
     color: var(--text);
   }
+  .msg.event .msg-bubble {
+    background: transparent;
+    border: none;
+    color: var(--text-dim);
+    font-size: 11px;
+    text-align: center;
+    padding: 2px 8px;
+  }
   .msg-time { font-size: 10px; color: var(--text-dim); margin-top: 3px; padding: 0 2px; }
-  .msg.user .msg-time { text-align: right; }
+  .msg.sov .msg-time { text-align: right; }
+
+  /* ack card */
+  .ack-card {
+    margin-top: 6px;
+    background: rgba(168,85,247,0.08);
+    border: 1px solid rgba(168,85,247,0.2);
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 11px;
+    color: var(--text-dim);
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .ack-card .drone { color: var(--gold); font-weight: 600; }
+  .ack-card .cmd-id { color: var(--purple); font-weight: 600; }
+
+  /* locked flash */
+  .locked-flash {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(239,68,68,0.12);
+    border: 2px solid var(--locked);
+    border-radius: 0;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    flex-direction: column;
+    gap: 12px;
+    pointer-events: none;
+    animation: flashIn 0.1s ease;
+  }
+  .locked-flash.show { display: flex; }
+  @keyframes flashIn { from { opacity: 0; } to { opacity: 1; } }
+  .locked-text { color: var(--locked); font-weight: 700; font-size: 16px; letter-spacing: 1px; text-align: center; }
 
   /* Typing indicator */
   .typing { display: none; align-self: flex-start; }
   .typing.active { display: flex; }
-  .typing-dots { display: flex; gap: 4px; padding: 12px 16px; background: var(--bubble-obi); border: 1px solid rgba(168,85,247,0.25); border-radius: 16px; border-bottom-left-radius: 4px; }
-  .typing-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--purple); animation: bounce 1.2s infinite; }
+  .typing-dots { display: flex; gap: 4px; padding: 10px 14px; background: var(--bubble-sys); border: 1px solid rgba(168,85,247,0.3); border-radius: 12px; border-bottom-left-radius: 4px; }
+  .typing-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--purple); animation: bounce 1.2s infinite; }
   .typing-dot:nth-child(2) { animation-delay: 0.2s; }
   .typing-dot:nth-child(3) { animation-delay: 0.4s; }
-  @keyframes bounce { 0%, 60%, 100% { transform: translateY(0); } 30% { transform: translateY(-6px); } }
+  @keyframes bounce { 0%, 60%, 100% { transform: translateY(0); } 30% { transform: translateY(-5px); } }
 
-  /* ── Level badge ── */
-  .level-bar {
+  /* ── Status bar ── */
+  .status-bar {
     background: var(--void2);
     border-top: 1px solid rgba(168,85,247,0.15);
-    padding: 6px 16px;
+    padding: 5px 16px;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     font-size: 11px;
     color: var(--text-dim);
     flex-shrink: 0;
   }
-  .level-badge {
+  .tier-badge {
     background: linear-gradient(135deg, var(--purple-dim), var(--purple));
     color: white;
     padding: 2px 8px;
-    border-radius: 10px;
+    border-radius: 6px;
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 0.5px;
   }
-  .msg-count { margin-left: auto; }
+  .cmd-count { margin-left: auto; color: var(--text-dim); }
 
   /* ── Input area ── */
   .input-area {
@@ -233,14 +282,14 @@ function getMagicChatHTML() {
     flex-shrink: 0;
   }
   .input-wrap { flex: 1; position: relative; }
-  #msg-input {
+  #cmd-input {
     width: 100%;
     background: var(--void);
     border: 1px solid var(--purple-dim);
     color: var(--text);
     padding: 10px 14px;
-    border-radius: 12px;
-    font-size: 14px;
+    border-radius: 10px;
+    font-size: 13px;
     font-family: inherit;
     resize: none;
     min-height: 42px;
@@ -248,12 +297,12 @@ function getMagicChatHTML() {
     overflow-y: auto;
     transition: border-color 0.2s;
   }
-  #msg-input:focus { outline: none; border-color: var(--purple); }
-  #msg-input::placeholder { color: var(--text-dim); }
+  #cmd-input:focus { outline: none; border-color: var(--purple); }
+  #cmd-input::placeholder { color: var(--text-dim); }
 
   .btn {
     width: 42px; height: 42px;
-    border-radius: 12px;
+    border-radius: 10px;
     border: none;
     cursor: pointer;
     font-size: 17px;
@@ -288,44 +337,77 @@ function getMagicChatHTML() {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 12px;
-    padding: 32px 24px;
+    gap: 10px;
+    padding: 28px 24px;
     text-align: center;
     color: var(--text-dim);
     font-size: 13px;
   }
   .welcome-logo {
-    font-size: 52px;
-    filter: drop-shadow(0 0 16px rgba(168,85,247,0.5));
-    margin-bottom: 8px;
+    font-size: 48px;
+    filter: drop-shadow(0 0 20px rgba(168,85,247,0.6));
+    margin-bottom: 4px;
   }
-  .welcome-title { font-size: 18px; font-weight: 700; color: var(--gold); }
-  .welcome-sub { color: var(--text-dim); max-width: 280px; line-height: 1.6; }
-  .welcome-level { color: var(--purple); font-weight: 600; margin-top: 4px; }
+  .welcome-title { font-size: 17px; font-weight: 700; color: var(--gold); letter-spacing: 0.5px; }
+  .welcome-sub { color: var(--text-dim); max-width: 300px; line-height: 1.6; }
+  .welcome-tier { color: var(--purple); font-weight: 600; margin-top: 4px; font-size: 12px; }
+
+  .examples {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 8px;
+    width: 100%;
+    max-width: 320px;
+  }
+  .example-cmd {
+    background: rgba(168,85,247,0.08);
+    border: 1px solid rgba(168,85,247,0.2);
+    border-radius: 8px;
+    padding: 7px 12px;
+    font-size: 12px;
+    color: var(--text-dim);
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.15s, color 0.15s;
+  }
+  .example-cmd:hover { background: rgba(168,85,247,0.18); color: var(--text); }
+  .example-cmd .cmd-arrow { color: var(--purple); margin-right: 6px; }
 </style>
 </head>
 <body>
 
+<div id="locked-flash" class="locked-flash">
+  <div style="font-size:40px">🔒</div>
+  <div class="locked-text">ACCESS DENIED<br>SOVEREIGNTY REQUIRED</div>
+</div>
+
 <div class="header">
-  <div class="obi-avatar">🔥</div>
+  <div class="cp-avatar">⚡</div>
   <div class="header-info">
-    <div class="header-name">OBI</div>
-    <div class="header-status online" id="status-text">English Tutor — Mouse → Tiger</div>
+    <div class="header-name">MAGIC CHAT</div>
+    <div class="header-status online" id="status-text">G09 Control Plane — SOV100</div>
   </div>
-  <input class="student-input" id="student-id" type="text" placeholder="Student ID (optional)" maxlength="40">
+  <div class="queue-badge" id="queue-badge" onclick="loadQueue()">Queue: —</div>
 </div>
 
 <div class="messages" id="messages">
   <div class="welcome">
-    <div class="welcome-logo">🔥</div>
-    <div class="welcome-title">Welcome to Magic Chat</div>
-    <div class="welcome-sub">Talk to OBI in English or Vietnamese. He'll help you grow from 🐭 Mouse to 🐯 Tiger — one conversation at a time.</div>
-    <div class="welcome-level">Natural English Training</div>
+    <div class="welcome-logo">⚡</div>
+    <div class="welcome-title">Control Plane Active</div>
+    <div class="welcome-sub">Issue sovereign commands in natural language. Intent routes to the Ledger spine and Drone execution network.</div>
+    <div class="welcome-tier">G09 · Tier 1 · Phoenix Rising Protocol</div>
+    <div class="examples">
+      <div class="example-cmd" onclick="fillExample(this)"><span class="cmd-arrow">›</span>deploy the worker to production</div>
+      <div class="example-cmd" onclick="fillExample(this)"><span class="cmd-arrow">›</span>run wrangler dry-run on NET-PET-AI</div>
+      <div class="example-cmd" onclick="fillExample(this)"><span class="cmd-arrow">›</span>push all pending commits to origin main</div>
+      <div class="example-cmd" onclick="fillExample(this)"><span class="cmd-arrow">›</span>check the command queue status</div>
+    </div>
   </div>
 </div>
 
 <div class="typing" id="typing">
-  <div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#7c3aed,#a855f7);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;margin-right:8px">🔥</div>
+  <div style="width:28px;height:28px;border-radius:6px;background:linear-gradient(135deg,#7c3aed,#a855f7);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;margin-right:8px">⚡</div>
   <div class="typing-dots">
     <div class="typing-dot"></div>
     <div class="typing-dot"></div>
@@ -333,82 +415,104 @@ function getMagicChatHTML() {
   </div>
 </div>
 
-<div class="level-bar">
-  <span class="level-badge" id="level-badge">🐭 MOUSE</span>
-  <span id="level-label">Start speaking — OBI adapts to your level</span>
-  <span class="msg-count" id="msg-count">0 exchanges</span>
+<div class="status-bar">
+  <span class="tier-badge">SOV100</span>
+  <span id="plane-label">Awaiting sovereign intent</span>
+  <span class="cmd-count" id="cmd-count">0 commands</span>
 </div>
 
 <div class="input-area">
   <div class="input-wrap">
-    <textarea id="msg-input" placeholder="Type in English or Vietnamese... (Enter to send)" rows="1"></textarea>
+    <textarea id="cmd-input" placeholder="Speak intent → system executes... (Enter to send)" rows="1"></textarea>
   </div>
-  <button class="btn" id="voice-btn" title="Voice input (microphone)">🎤</button>
-  <button class="btn" id="send-btn" title="Send message">↑</button>
+  <button class="btn" id="voice-btn" title="Voice input">🎤</button>
+  <button class="btn" id="send-btn" title="Issue command">↑</button>
 </div>
 
 <script>
   const API = 'https://naturalenglishtraining.net';
-  const LEVELS = ['🐭 MOUSE', '🐱 CAT', '🐺 WOLF', '🐯 TIGER'];
-  let messages = [];
-  let exchangeCount = 0;
+  let cmdCount = 0;
   let isLoading = false;
   let recognition = null;
   let isRecording = false;
 
   const messagesEl = document.getElementById('messages');
-  const inputEl = document.getElementById('msg-input');
+  const inputEl = document.getElementById('cmd-input');
   const sendBtn = document.getElementById('send-btn');
   const voiceBtn = document.getElementById('voice-btn');
   const statusEl = document.getElementById('status-text');
   const typingEl = document.getElementById('typing');
-  const levelBadge = document.getElementById('level-badge');
-  const levelLabel = document.getElementById('level-label');
-  const msgCountEl = document.getElementById('msg-count');
-  const studentIdEl = document.getElementById('student-id');
+  const planeLabel = document.getElementById('plane-label');
+  const cmdCountEl = document.getElementById('cmd-count');
+  const queueBadge = document.getElementById('queue-badge');
+  const lockedFlash = document.getElementById('locked-flash');
 
-  function getStudentId() {
-    return (studentIdEl.value || '').trim() || 'anonymous';
+  function fillExample(el) {
+    const text = el.textContent.replace('›', '').trim();
+    inputEl.value = text;
+    inputEl.focus();
+    autoResize();
   }
 
-  function updateLevel() {
-    const idx = Math.min(Math.floor(exchangeCount / 5), LEVELS.length - 1);
-    levelBadge.textContent = LEVELS[idx];
-    msgCountEl.textContent = exchangeCount + ' exchange' + (exchangeCount !== 1 ? 's' : '');
+  function updateCount() {
+    cmdCountEl.textContent = cmdCount + ' command' + (cmdCount !== 1 ? 's' : '');
   }
 
   function formatTime() {
     return new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
   }
 
-  function addMessage(role, text) {
+  function triggerLockedFlash() {
+    lockedFlash.classList.add('show');
+    setTimeout(() => lockedFlash.classList.remove('show'), 1800);
+  }
+
+  function addMessage(role, text, ackData) {
     const welcome = messagesEl.querySelector('.welcome');
     if (welcome) welcome.remove();
 
-    const isObi = role === 'obi';
+    const isSov = role === 'sov';
+    const isEvent = role === 'event';
     const wrapper = document.createElement('div');
-    wrapper.className = 'msg ' + (isObi ? 'obi' : 'user');
+    wrapper.className = 'msg ' + (isSov ? 'sov' : isEvent ? 'event' : 'sys');
 
-    const avatar = document.createElement('div');
-    avatar.className = 'msg-avatar';
-    avatar.textContent = isObi ? '🔥' : '🧑';
+    if (!isEvent) {
+      const avatar = document.createElement('div');
+      avatar.className = 'msg-avatar';
+      avatar.textContent = isSov ? '👤' : '⚡';
 
-    const inner = document.createElement('div');
-    const bubble = document.createElement('div');
-    bubble.className = 'msg-bubble';
-    bubble.textContent = text;
-    const time = document.createElement('div');
-    time.className = 'msg-time';
-    time.textContent = formatTime();
+      const inner = document.createElement('div');
+      const bubble = document.createElement('div');
+      bubble.className = 'msg-bubble';
+      bubble.textContent = text;
 
-    inner.appendChild(bubble);
-    inner.appendChild(time);
-    wrapper.appendChild(avatar);
-    wrapper.appendChild(inner);
+      if (ackData) {
+        const card = document.createElement('div');
+        card.className = 'ack-card';
+        card.innerHTML =
+          '<span>Command routed</span>' +
+          '<span class="cmd-id">ID: #' + ackData.commandId + '</span>' +
+          '<span class="drone">Drone: ' + (ackData.assignedDrone || 'Agent99') + '</span>';
+        bubble.appendChild(card);
+      }
+
+      const time = document.createElement('div');
+      time.className = 'msg-time';
+      time.textContent = formatTime();
+
+      inner.appendChild(bubble);
+      inner.appendChild(time);
+      wrapper.appendChild(avatar);
+      wrapper.appendChild(inner);
+    } else {
+      const bubble = document.createElement('div');
+      bubble.className = 'msg-bubble';
+      bubble.textContent = text;
+      wrapper.appendChild(bubble);
+    }
 
     messagesEl.insertBefore(wrapper, typingEl);
     messagesEl.scrollTop = messagesEl.scrollHeight;
-    return wrapper;
   }
 
   function setTyping(show) {
@@ -420,57 +524,97 @@ function getMagicChatHTML() {
     }
   }
 
-  async function sendMessage() {
+  async function loadQueue() {
+    try {
+      const res = await fetch(API + '/api/command/queue?status=pending&limit=10');
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const data = await res.json();
+      const cmds = data.commands || [];
+      const count = cmds.length;
+
+      queueBadge.textContent = 'Queue: ' + count + ' pending';
+      queueBadge.className = 'queue-badge' + (count > 0 ? ' has-pending' : '');
+
+      if (count === 0) {
+        addMessage('event', '— Queue empty —');
+      } else {
+        addMessage('sys', 'Active queue: ' + count + ' pending command' + (count !== 1 ? 's' : '') + '.\\n' +
+          cmds.map((c, i) => (i + 1) + '. [#' + c.id + '] ' + c.raw_intent).join('\\n'));
+      }
+    } catch (err) {
+      addMessage('sys', '⚠ Queue fetch failed: ' + err.message);
+    }
+  }
+
+  async function sendCommand() {
     const text = inputEl.value.trim();
     if (!text || isLoading) return;
+
+    // Fail-closed: empty intent → sovereignty required
+    if (text.length < 3) {
+      triggerLockedFlash();
+      return;
+    }
 
     inputEl.value = '';
     inputEl.style.height = 'auto';
     isLoading = true;
     sendBtn.disabled = true;
 
-    addMessage('user', text);
-    messages.push({ role: 'user', content: text });
+    addMessage('sov', text);
     setTyping(true);
+    planeLabel.textContent = 'Routing intent...';
+    statusEl.textContent = 'G09 Control Plane — Routing';
 
     try {
-      const res = await fetch(API + '/api/chat', {
+      const res = await fetch(API + '/api/command/send', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          studentId: getStudentId(),
-          messages: messages.slice(-20),
-        }),
+        body: JSON.stringify({ command: text, source: 'vscode-magic-chat' }),
       });
 
-      if (!res.ok) throw new Error('HTTP ' + res.status);
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({}));
+        throw new Error(errData.error || 'HTTP ' + res.status);
+      }
       const data = await res.json();
-      const reply = data.reply || 'Say that again?';
 
       setTyping(false);
-      addMessage('obi', reply);
-      messages.push({ role: 'assistant', content: reply });
-      exchangeCount++;
-      updateLevel();
 
-      // TTS (optional — speaks OBI's reply)
-      if (window.speechSynthesis && reply) {
-        const utt = new SpeechSynthesisUtterance(reply);
-        utt.rate = 0.9;
-        utt.lang = 'en-US';
-        window.speechSynthesis.speak(utt);
+      if (data.ok) {
+        addMessage('sys', 'Command acknowledged. Routing to execution network.', data);
+        cmdCount++;
+        updateCount();
+        planeLabel.textContent = 'Last: #' + data.commandId + ' → ' + (data.assignedDrone || 'Agent99');
+        statusEl.textContent = 'G09 Control Plane — SOV100';
+
+        // Refresh queue badge
+        try {
+          const qRes = await fetch(API + '/api/command/queue?status=pending&limit=1');
+          if (qRes.ok) {
+            const qData = await qRes.json();
+            const qCount = (qData.commands || []).length;
+            queueBadge.textContent = 'Queue: ' + qCount + ' pending';
+            queueBadge.className = 'queue-badge' + (qCount > 0 ? ' has-pending' : '');
+          }
+        } catch (_) {}
+      } else {
+        addMessage('sys', '⚠ Routing rejected: ' + (data.error || 'unknown'));
+        planeLabel.textContent = 'Routing failed';
       }
     } catch (err) {
       setTyping(false);
-      addMessage('obi', '⚡ Connection error — check if the worker is running. (' + err.message + ')');
+      addMessage('sys', '⚡ Control plane error — ' + err.message);
+      planeLabel.textContent = 'Error: ' + err.message.slice(0, 40);
     } finally {
       isLoading = false;
       sendBtn.disabled = false;
       inputEl.focus();
+      statusEl.textContent = 'G09 Control Plane — SOV100';
     }
   }
 
-  // ── Voice input ──────────────────────────────────────────────────────────
+  // ── Voice input ──────────────────────────────────────────────────────
   function setupVoice() {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (!SpeechRecognition) {
@@ -513,12 +657,12 @@ function getMagicChatHTML() {
     }
   });
 
-  sendBtn.addEventListener('click', sendMessage);
+  sendBtn.addEventListener('click', sendCommand);
 
   inputEl.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
-      sendMessage();
+      sendCommand();
     }
   });
 
@@ -528,14 +672,19 @@ function getMagicChatHTML() {
   }
   inputEl.addEventListener('input', autoResize);
 
-  // ── Init ────────────────────────────────────────────────────────────────
+  // ── Init ────────────────────────────────────────────────────────────
   setupVoice();
-  updateLevel();
+  updateCount();
   inputEl.focus();
+
+  // Initial queue load
+  loadQueue();
 </script>
 </body>
 </html>`;
 }
+
+
 
 async function connectStation() {
   if (pollInterval) {
