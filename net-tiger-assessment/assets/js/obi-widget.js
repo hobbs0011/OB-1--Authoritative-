@@ -12,6 +12,10 @@
   const RANDOM_TYPING_VARIANCE_MS = 400;
   const MESSAGE_STAGGER_DELAY_MS = 600;
 
+  /* ── Guardrails ── */
+  const MAX_INPUT_LENGTH = 300;
+  const GUARDRAIL_REPLY  = "I'm here to help with the Tiger Assessment. Please keep messages relevant and respectful. 🐯";
+
   /* ── Knowledge base ── */
   const responses = {
     'how does the assessment work': [
@@ -223,6 +227,13 @@
   function sendMessage(text) {
     const trimmed = text.trim();
     if (!trimmed) return;
+
+    /* ── Guardrail: enforce maximum input length ── */
+    if (trimmed.length > MAX_INPUT_LENGTH) {
+      appendMessage(GUARDRAIL_REPLY, 'agent');
+      input.value = '';
+      return;
+    }
 
     input.value = '';
     appendMessage(trimmed, 'user');

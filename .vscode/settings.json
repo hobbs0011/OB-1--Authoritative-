@@ -2,7 +2,6 @@
     // NET | Phoenix Rising Protocol — VS Code Workspace Settings
     // Stack: Cloudflare Workers, Node.js, HTML/CSS/JS, Python, PowerShell, MCP
     // Updated: 2026-04 | AnA Build
-
     // ── File exclusions: keep Explorer clean ──────────────────────────────
     "files.exclude": {
         "**/.git": true,
@@ -12,7 +11,6 @@
         "**/.venv": true,
         "**/dist": true
     },
-
     // ── Copilot: exclude massive CANON / archive dirs from AI indexing ────
     // This is the primary fix for Copilot crashing on boot — it was trying to
     // index hundreds of large Markdown files (CANON/, RAW-CHAT-LOGS/, etc.)
@@ -23,7 +21,6 @@
     "github.copilot.enable": {
         "*": true
     },
-
     // ── Search exclusions: speed up workspace searches ────────────────────
     "search.exclude": {
         "**/node_modules": true,
@@ -34,7 +31,6 @@
         "**/ARCHIVE": true,
         "**/OB-1.worktrees": true
     },
-
     // ── Watcher exclusions: reduce file watcher load ──────────────────────
     // Heavy watcher load is a known cause of Copilot / extension crashes.
     "files.watcherExclude": {
@@ -49,7 +45,6 @@
         "**/CANON/REINCARNATION/**": true,
         "**/CANON/SESSION-RECORDS/**": true
     },
-
     // ── Editor defaults ───────────────────────────────────────────────────
     "editor.formatOnSave": true,
     "editor.tabSize": 2,
@@ -58,10 +53,8 @@
     "[lua]": {
         "editor.tabSize": 4
     },
-
     // ── Copilot chat context ──────────────────────────────────────────────
     "github.copilot.chat.scopeSelection": true,
-
     // ── MCP: set a timeout so failing servers don't hang boot ─────────────
     // Servers requiring missing env vars (NOTION_TOKEN, BRAVE_API_KEY, etc.)
     // will time out instead of blocking Copilot initialisation.
