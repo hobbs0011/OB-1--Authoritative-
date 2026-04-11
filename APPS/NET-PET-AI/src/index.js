@@ -173,7 +173,7 @@ async function handleAPI(path, request, env, url) {
 
   // Health
   if (path === "/api/health" && method === "GET") {
-    return json({ ok: true, version: VERSION, app: env.APP_NAME || "Natural English Training", coach: env.APP_COACH_NAME || "Obi", ts: Date.now(), routes: 28, ledger: "active", commandStation: "active" });
+    return json({ ok: true, version: VERSION, app: env.APP_NAME || "Natural English Training", coach: env.APP_COACH_NAME || "Obi", ts: Date.now(), routes: 36, ledger: "active", commandStation: "active", soulDNA: "active" });
   }
 
   // Chat — Obi + Ledger context injection
@@ -209,6 +209,22 @@ async function handleAPI(path, request, env, url) {
   if (path === "/api/ledger/history" && method === "GET") { return handleLedgerHistory(url.searchParams.get("studentId") || "", parseInt(url.searchParams.get("limit") || "50"), env); }
   if (path === "/api/ledger/verify" && method === "GET") { return handleLedgerVerify(url.searchParams.get("studentId") || "", env); }
 
+  // Session Log (off-day pipeline core — Michael logs class, Obi inherits it)
+  if (path === "/api/session/log" && method === "POST") { const body = await request.json(); return handleSessionLog(body, env); }
+  if (path === "/api/session/latest" && method === "GET") { return handleSessionLatest(url.searchParams.get("studentId") || "", env); }
+
+  // Schedule + Accountability
+  if (path === "/api/schedule/set" && method === "POST") { const body = await request.json(); return handleScheduleSet(body, env); }
+  if (path === "/api/schedule/confirm" && method === "POST") { const body = await request.json(); return handleScheduleConfirm(body, env); }
+  if (path === "/api/schedule/flags" && method === "GET") { return handleScheduleFlags(env); }
+
+  // Daily Digest — Michael's one-URL morning report
+  if (path === "/api/digest" && method === "GET") { return handleDailyDigest(env); }
+
+  // Soul DNA — verbatim raw capture (no sanitization, no truncation, hash-chained)
+  if (path === "/api/soulDNA" && method === "POST") { const body = await request.json(); return handleSoulDNACapture(body, env); }
+  if (path === "/api/soulDNA" && method === "GET") { return handleSoulDNAGet(url, env); }
+
   // Command Station (SOV100 → Agent99 → Drones)
   if (path === "/api/command/send" && method === "POST") { const body = await request.json(); return handleCommandSend(body, env); }
   if (path === "/api/command/queue" && method === "GET") { return handleCommandQueue(url.searchParams.get("status") || "pending", parseInt(url.searchParams.get("limit") || "20"), env); }
@@ -218,6 +234,106 @@ async function handleAPI(path, request, env, url) {
   if (path === "/api/command/history" && method === "GET") { return handleCommandHistory(parseInt(url.searchParams.get("limit") || "50"), env); }
 
   return json({ error: "Not found" }, 404);
+}
+
+// ── Soul DNA Capture ─────────────────────────────────────────────────────────
+// VERBATIM FIRST. Zero transformation. Every word Michael speaks is sacred.
+// No sanitizeInput. No truncation. No paraphrase. Raw → hash → chain → ledger.
+async function handleSoulDNACapture(body, env) {
+  // ── Validation (minimal — we want everything through) ──────────────────
+  if (!body.text || typeof body.text !== "string" || body.text.length === 0) {
+    return json({ error: "text required — verbatim dictation block" }, 400);
+  }
+
+  // VERBATIM: no sanitizeInput, no trim, no truncation.
+  // The ONLY transformation allowed: normalize \r\n → \n (CRLF from Windows voice input).
+  const verbatimText = body.text.replace(/\r\n/g, "\n").replace(/\r/g, "\n");
+
+  const author   = "sov100";                          // always Michael
+  const run      = String(body.run   || "").slice(0, 20) || "untagged";
+  const blockId  = String(body.blockId || "").slice(0, 50) || `auto-${Date.now()}`;
+  const source   = String(body.source || "").slice(0, 30) || "voice"; // voice | text | paste
+  const ts       = Date.now();
+
+  // ── Build immutable payload (everything that will be hashed) ──────────
+  const payloadObj = {
+    text:    verbatimText,           // THE SOUL — verbatim, untouched
+    run,
+    blockId,
+    source,
+    author,
+    charCount:  verbatimText.length,
+    wordCount:  verbatimText.split(/\s+/).filter(Boolean).length,
+    capturedAt: new Date(ts).toISOString(),
+  };
+  const payloadStr = JSON.stringify(payloadObj);
+
+  // ── Append to LedgerDO under author namespace (hash-chained) ──────────
+  if (!env.LEDGER) return json({ error: "LEDGER binding not configured" }, 500);
+  const stub = env.LEDGER.get(env.LEDGER.idFromName(author));
+  const appendRes = await stub.fetch(new Request("https://do/append", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      studentId: author,
+      eventType: "soul_dna_capture",
+      payload:   payloadStr,
+    }),
+  }));
+  const appendData = await appendRes.json();
+
+  return json({
+    ok:        true,
+    blockId,
+    run,
+    source,
+    charCount: payloadObj.charCount,
+    wordCount: payloadObj.wordCount,
+    capturedAt: payloadObj.capturedAt,
+    entryHash:  appendData.entryHash,
+    prevHash:   appendData.prevHash,
+    chainHead:  appendData.entryHash,   // caller can use this as prevHash for next block
+    ts,
+  });
+}
+
+async function handleSoulDNAGet(url, env) {
+  const run     = url.searchParams.get("run")    || "";
+  const limit   = Math.min(parseInt(url.searchParams.get("limit") || "50"), 500);
+  const raw     = url.searchParams.get("raw")    === "true"; // raw=true → include full text in response
+
+  if (!env.LEDGER) return json({ error: "LEDGER binding not configured" }, 500);
+  const stub = env.LEDGER.get(env.LEDGER.idFromName("sov100"));
+  const histRes = await stub.fetch(
+    new Request(`https://do/history?limit=${limit}&eventType=soul_dna_capture`)
+  );
+  const { entries, total } = await histRes.json();
+
+  let blocks = entries.map(e => {
+    let p = {};
+    try { p = JSON.parse(e.payload); } catch (_) { p = { text: e.payload }; }
+    const block = {
+      id:         e.id,
+      blockId:    p.blockId   || "",
+      run:        p.run       || "untagged",
+      source:     p.source    || "unknown",
+      charCount:  p.charCount || 0,
+      wordCount:  p.wordCount || 0,
+      capturedAt: p.capturedAt || new Date(e.ts).toISOString(),
+      entryHash:  e.entry_hash,
+      prevHash:   e.prev_hash,
+    };
+    if (raw) block.text = p.text || "";
+    return block;
+  });
+
+  // Filter by run if requested
+  if (run) blocks = blocks.filter(b => b.run === run);
+
+  const totalWords = blocks.reduce((sum, b) => sum + (b.wordCount || 0), 0);
+  const totalChars = blocks.reduce((sum, b) => sum + (b.charCount || 0), 0);
+
+  return json({ ok: true, blocks, totalBlocks: blocks.length, totalWords, totalChars, total });
 }
 
 // ── Chat (DeepSeek + Obi + Ledger memory injection) ──────────────────────────
@@ -265,10 +381,27 @@ async function handleChat(body, env) {
     } catch (_) {}
   }
 
-  // Inject Obi system prompt with ledger context appended
+  // Inject Obi system prompt with ledger context + last real-class session appended
+  // Pull latest session_log so Obi knows exactly where Michael left off
+  let sessionContext = "";
+  if (studentId !== "anonymous" && env.LEDGER) {
+    try {
+      const sessionStub = env.LEDGER.get(env.LEDGER.idFromName(studentId));
+      const sessionRes = await sessionStub.fetch(new Request("https://do/history?limit=1&eventType=session_log"));
+      const sessionData = await sessionRes.json();
+      const lastEntry = (sessionData.entries || []).slice(-1)[0];
+      if (lastEntry) {
+        const s = JSON.parse(lastEntry.payload);
+        const dateStr = new Date(lastEntry.ts).toLocaleDateString("en-US", { month: "short", day: "numeric" });
+        const vocabList = Array.isArray(s.vocabList) ? s.vocabList.join(", ") : (s.vocabList || "");
+        sessionContext = `\n\nLAST REAL CLASS (${dateStr}): Topic: "${s.topic || ""}". Vocab covered: ${vocabList}. Level: ${s.studentLevel || ""}. Teacher notes: "${s.teacherNotes || ""}". Continue from exactly here — your first response should reference this content naturally without announcing it.`;
+      }
+    } catch (_) {}
+  }
+
   const hasSystem = messages.some(m => m.role === "system");
   if (!hasSystem) {
-    messages.unshift({ role: "system", content: OBI_SYSTEM + ledgerContext });
+    messages.unshift({ role: "system", content: OBI_SYSTEM + ledgerContext + sessionContext });
   }
 
   const res = await fetch("https://api.deepseek.com/chat/completions", {
@@ -288,7 +421,17 @@ async function handleChat(body, env) {
     appendToLedger(studentId, "chat_exchange", payload, env).catch(() => {});
   }
 
-  return json({ reply, studentId, ledgerLoaded: !!ledgerContext });
+  // Update roster last_active so digest knows student practiced today
+  if (studentId !== "anonymous" && env.SESSIONS) {
+    const rosterStub = env.SESSIONS.get(env.SESSIONS.idFromName("system-roster"));
+    rosterStub.fetch(new Request("https://do/roster/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ studentId }),
+    })).catch(() => {});
+  }
+
+  return json({ reply, studentId, ledgerLoaded: !!ledgerContext, sessionLoaded: !!sessionContext });
 }
 
 // ── TTS (Deepgram Aura) ───────────────────────────────────────────────────────
@@ -319,6 +462,8 @@ async function handleOnboarding(body, env) {
     const payload = JSON.stringify({ fullName: body.fullName, englishLevel: body.englishLevel, city: body.currentCity });
     appendToLedger(body.studentId, "onboarding", payload, env).catch(() => {});
   }
+  // Register in roster so digest + flags work
+  upsertRoster(body.studentId, { fullName: body.fullName, englishLevel: body.englishLevel }, env).catch(() => {});
   return res;
 }
 
@@ -432,6 +577,191 @@ async function handleClassReport(classId, totalStudents, env) {
   return stub.fetch(new Request(`https://do/class/report?totalStudents=${totalStudents}`));
 }
 
+// ── Roster helper ─────────────────────────────────────────────────────────────
+
+async function upsertRoster(studentId, data, env) {
+  if (!env.SESSIONS) return;
+  const stub = env.SESSIONS.get(env.SESSIONS.idFromName("system-roster"));
+  return stub.fetch(new Request("https://do/roster/upsert", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ studentId, ...data }),
+  }));
+}
+
+// ── Session Log (off-day pipeline core) ──────────────────────────────────────
+// Michael calls POST /api/session/log after every real class.
+// OBI inherits his teaching → continues exactly where he left off on off-days.
+
+async function handleSessionLog(body, env) {
+  if (!body.studentId) return json({ error: "studentId required" }, 400);
+  const idCheck = validateStudentId(body.studentId);
+  if (!idCheck.valid) return json({ error: idCheck.error }, 400);
+  if (!body.topic) return json({ error: "topic required" }, 400);
+
+  const vocabList = Array.isArray(body.vocabList) ? body.vocabList.map(v => sanitizeInput(String(v).slice(0, 100))) : [];
+  const payload = JSON.stringify({
+    topic: sanitizeInput((body.topic || "").slice(0, 200)),
+    vocabList,
+    teacherNotes: sanitizeInput((body.teacherNotes || "").slice(0, 1000)),
+    sessionDate: body.sessionDate || new Date().toISOString().split("T")[0],
+    studentLevel: sanitizeInput((body.studentLevel || "").slice(0, 50)),
+    durationMins: Math.min(parseInt(body.durationMins) || 0, 240),
+  });
+
+  await appendToLedger(body.studentId, "session_log", payload, env);
+
+  // Update roster so digest has latest session info
+  if (env.SESSIONS) {
+    const rosterStub = env.SESSIONS.get(env.SESSIONS.idFromName("system-roster"));
+    rosterStub.fetch(new Request("https://do/roster/session", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ studentId: body.studentId, topic: body.topic, vocabList }),
+    })).catch(() => {});
+  }
+
+  return json({ ok: true, studentId: body.studentId, topic: body.topic, vocabCount: vocabList.length, ledgered: true });
+}
+
+async function handleSessionLatest(studentId, env) {
+  if (!studentId) return json({ error: "studentId required" }, 400);
+  const idCheck = validateStudentId(studentId);
+  if (!idCheck.valid) return json({ error: idCheck.error }, 400);
+  try {
+    const stub = env.LEDGER.get(env.LEDGER.idFromName(studentId));
+    const histRes = await stub.fetch(new Request("https://do/history?limit=1&eventType=session_log"));
+    const histData = await histRes.json();
+    const lastEntry = (histData.entries || []).slice(-1)[0];
+    if (!lastEntry) return json({ session: null });
+    const parsed = JSON.parse(lastEntry.payload);
+    return json({ session: { ...parsed, ts: lastEntry.ts, entryHash: lastEntry.entry_hash } });
+  } catch (err) {
+    return json({ error: "Failed to retrieve session" }, 500);
+  }
+}
+
+// ── Schedule + Accountability ────────────────────────────────────────────────
+
+async function handleScheduleSet(body, env) {
+  if (!body.studentId) return json({ error: "studentId required" }, 400);
+  const idCheck = validateStudentId(body.studentId);
+  if (!idCheck.valid) return json({ error: idCheck.error }, 400);
+  if (!body.schedule) return json({ error: "schedule required (object with days, time)" }, 400);
+
+  const profileStub = env.PROFILES.get(env.PROFILES.idFromName(body.studentId));
+  await profileStub.fetch(new Request("https://do/schedule/set", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ studentId: body.studentId, schedule: body.schedule }),
+  }));
+
+  if (env.SESSIONS) {
+    const rosterStub = env.SESSIONS.get(env.SESSIONS.idFromName("system-roster"));
+    rosterStub.fetch(new Request("https://do/roster/schedule", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ studentId: body.studentId, schedule: body.schedule }),
+    })).catch(() => {});
+  }
+
+  appendToLedger(body.studentId, "schedule_confirmed", JSON.stringify({ action: "set", schedule: body.schedule }), env).catch(() => {});
+  return json({ ok: true, studentId: body.studentId, schedule: body.schedule });
+}
+
+async function handleScheduleConfirm(body, env) {
+  if (!body.studentId) return json({ error: "studentId required" }, 400);
+  const idCheck = validateStudentId(body.studentId);
+  if (!idCheck.valid) return json({ error: idCheck.error }, 400);
+
+  const profileStub = env.PROFILES.get(env.PROFILES.idFromName(body.studentId));
+  await profileStub.fetch(new Request("https://do/schedule/confirm", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ studentId: body.studentId }),
+  }));
+
+  if (env.SESSIONS) {
+    const rosterStub = env.SESSIONS.get(env.SESSIONS.idFromName("system-roster"));
+    rosterStub.fetch(new Request("https://do/roster/confirm", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ studentId: body.studentId }),
+    })).catch(() => {});
+  }
+
+  appendToLedger(body.studentId, "schedule_confirmed", JSON.stringify({ action: "confirmed", date: new Date().toISOString().split("T")[0] }), env).catch(() => {});
+  return json({ ok: true, studentId: body.studentId, confirmed: true, ts: Date.now() });
+}
+
+async function handleScheduleFlags(env) {
+  if (!env.SESSIONS) return json({ flags: [], error: "Sessions not available" });
+  const rosterStub = env.SESSIONS.get(env.SESSIONS.idFromName("system-roster"));
+  const res = await rosterStub.fetch(new Request("https://do/roster/flags"));
+  return res;
+}
+
+// ── Daily Digest ──────────────────────────────────────────────────────────────
+// Michael hits GET /api/digest once a day for a full picture of off-day activity.
+
+async function handleDailyDigest(env) {
+  if (!env.SESSIONS) return json({ error: "Sessions not available" }, 500);
+  const rosterStub = env.SESSIONS.get(env.SESSIONS.idFromName("system-roster"));
+  const rosterRes = await rosterStub.fetch(new Request("https://do/roster/all"));
+  const rosterData = await rosterRes.json();
+  const students = rosterData.students || [];
+
+  const oneDayAgo = Date.now() - (24 * 60 * 60 * 1000);
+  const sevenDaysAgo = Date.now() - (7 * 24 * 60 * 60 * 1000);
+
+  const active = [];
+  const inactive = [];
+  const flagged = [];
+
+  for (const s of students) {
+    const entry = {
+      studentId: s.student_id,
+      fullName: s.full_name,
+      level: s.english_level,
+      streak: s.streak,
+      xp: s.xp,
+      lastActive: s.last_active ? new Date(s.last_active).toISOString() : null,
+      lastSessionTopic: s.last_session_topic || null,
+      scheduleConfirmed: !!s.schedule_confirmed,
+      flagged: !!s.flagged,
+    };
+
+    if (s.last_active > oneDayAgo) {
+      active.push(entry);
+    } else {
+      inactive.push(entry);
+      if (s.last_active > 0 && s.last_active < sevenDaysAgo) {
+        flagged.push({ ...entry, reason: "No activity in 7+ days" });
+      }
+    }
+
+    if (!s.schedule_confirmed && s.schedule && s.schedule !== "{}") {
+      if (!flagged.find(f => f.studentId === s.student_id)) {
+        flagged.push({ ...entry, reason: "Schedule not confirmed" });
+      }
+    }
+  }
+
+  return json({
+    date: new Date().toISOString().split("T")[0],
+    summary: {
+      total: students.length,
+      activeLast24h: active.length,
+      inactive: inactive.length,
+      flagCount: flagged.length,
+    },
+    active,
+    inactive,
+    flagged,
+    generatedAt: new Date().toISOString(),
+  });
+}
+
 // ── Cryptographic Immutable Ledger API ────────────────────────────────────────
 
 // Shared helper — Agent99 auto-calls this for every significant event
@@ -451,7 +781,7 @@ async function handleLedgerAppend(body, env) {
   const idCheck = validateStudentId(body.studentId);
   if (!idCheck.valid) return json({ error: idCheck.error }, 400);
   // Whitelist allowed event types to prevent arbitrary data injection
-  const ALLOWED_EVENTS = ["chat_exchange", "pet_checkin", "onboarding", "feedback", "lesson_generated", "student_created", "command_sent", "command_completed"];
+  const ALLOWED_EVENTS = ["chat_exchange", "pet_checkin", "onboarding", "feedback", "lesson_generated", "student_created", "command_sent", "command_completed", "session_log", "schedule_confirmed", "accountability_flag", "soul_dna_capture"];
   if (!ALLOWED_EVENTS.includes(body.eventType)) return json({ error: "Invalid event type" }, 400);
   const stub = env.LEDGER.get(env.LEDGER.idFromName(body.studentId));
   return stub.fetch(new Request("https://do/append", {
@@ -695,13 +1025,22 @@ export class LedgerDO {
       return json({ ok: true, entryHash, prevHash, ts, eventType });
     }
 
-    // HISTORY — read last N entries for a student
+    // HISTORY — read last N entries for a student (supports ?eventType= filter)
     if (url.pathname === "/history") {
       const limit = Math.min(parseInt(url.searchParams.get("limit") || "50"), 200);
-      const rows = this.sql.exec(
-        `SELECT id, student_id, event_type, payload, prev_hash, entry_hash, ts FROM ledger ORDER BY id DESC LIMIT ?`,
-        limit
-      ).toArray().reverse();
+      const eventType = url.searchParams.get("eventType") || "";
+      let rows;
+      if (eventType) {
+        rows = this.sql.exec(
+          `SELECT id, student_id, event_type, payload, prev_hash, entry_hash, ts FROM ledger WHERE event_type = ? ORDER BY id DESC LIMIT ?`,
+          eventType, limit
+        ).toArray().reverse();
+      } else {
+        rows = this.sql.exec(
+          `SELECT id, student_id, event_type, payload, prev_hash, entry_hash, ts FROM ledger ORDER BY id DESC LIMIT ?`,
+          limit
+        ).toArray().reverse();
+      }
       const total = this.sql.exec(`SELECT COUNT(*) as cnt FROM ledger`).toArray()[0].cnt;
       return json({ entries: rows, total, limit });
     }
@@ -755,6 +1094,22 @@ export class SessionDO {
     this.sql.exec(`CREATE TABLE IF NOT EXISTS memory (id INTEGER PRIMARY KEY AUTOINCREMENT, student_id TEXT, user_msg TEXT, obi_msg TEXT, ts INTEGER)`);
     this.sql.exec(`CREATE TABLE IF NOT EXISTS class_sessions (id INTEGER PRIMARY KEY AUTOINCREMENT, class_id TEXT, teacher_id TEXT, total_students INTEGER, started_at INTEGER)`);
     this.sql.exec(`CREATE TABLE IF NOT EXISTS class_events (id INTEGER PRIMARY KEY AUTOINCREMENT, class_id TEXT, student_id TEXT, type TEXT, rule_status TEXT, notes TEXT, ts INTEGER)`);
+    // Roster table — system-roster instance tracks all enrolled students for digest + flags
+    this.sql.exec(`CREATE TABLE IF NOT EXISTS roster (
+      student_id TEXT PRIMARY KEY,
+      full_name TEXT DEFAULT '',
+      english_level TEXT DEFAULT '',
+      last_active INTEGER DEFAULT 0,
+      last_session_date INTEGER DEFAULT 0,
+      last_session_topic TEXT DEFAULT '',
+      last_session_vocab TEXT DEFAULT '[]',
+      schedule TEXT DEFAULT '{}',
+      schedule_confirmed INTEGER DEFAULT 0,
+      streak INTEGER DEFAULT 0,
+      xp INTEGER DEFAULT 0,
+      flagged INTEGER DEFAULT 0,
+      created_at INTEGER NOT NULL DEFAULT 0
+    )`);
   }
 
   async fetch(request) {
@@ -818,6 +1173,58 @@ export class SessionDO {
       return json({ reportText, events: events.length, summary, flagged });
     }
 
+    // ── Roster endpoints (used by system-roster instance) ────────────────────
+    if (path === "/roster/upsert" && request.method === "POST") {
+      const body = await request.json();
+      const now = Date.now();
+      this.sql.exec(`INSERT OR IGNORE INTO roster (student_id, created_at) VALUES (?, ?)`, body.studentId, now);
+      if (body.fullName !== undefined) this.sql.exec(`UPDATE roster SET full_name = ? WHERE student_id = ?`, body.fullName, body.studentId);
+      if (body.englishLevel !== undefined) this.sql.exec(`UPDATE roster SET english_level = ? WHERE student_id = ?`, body.englishLevel, body.studentId);
+      return json({ ok: true, studentId: body.studentId });
+    }
+
+    if (path === "/roster/all" && request.method === "GET") {
+      const rows = this.sql.exec(`SELECT * FROM roster ORDER BY full_name ASC`).toArray();
+      return json({ students: rows, count: rows.length });
+    }
+
+    if (path === "/roster/session" && request.method === "POST") {
+      const body = await request.json();
+      const now = Date.now();
+      this.sql.exec(
+        `UPDATE roster SET last_active = ?, last_session_date = ?, last_session_topic = ?, last_session_vocab = ?, flagged = 0 WHERE student_id = ?`,
+        now, now, body.topic || "", JSON.stringify(body.vocabList || []), body.studentId
+      );
+      return json({ ok: true });
+    }
+
+    if (path === "/roster/schedule" && request.method === "POST") {
+      const body = await request.json();
+      this.sql.exec(`UPDATE roster SET schedule = ?, schedule_confirmed = 0 WHERE student_id = ?`, JSON.stringify(body.schedule || {}), body.studentId);
+      return json({ ok: true });
+    }
+
+    if (path === "/roster/confirm" && request.method === "POST") {
+      const body = await request.json();
+      this.sql.exec(`UPDATE roster SET schedule_confirmed = 1, flagged = 0 WHERE student_id = ?`, body.studentId);
+      return json({ ok: true });
+    }
+
+    if (path === "/roster/chat" && request.method === "POST") {
+      const body = await request.json();
+      this.sql.exec(`UPDATE roster SET last_active = ? WHERE student_id = ?`, Date.now(), body.studentId);
+      return json({ ok: true });
+    }
+
+    if (path === "/roster/flags" && request.method === "GET") {
+      const sevenDaysAgo = Date.now() - (7 * 24 * 60 * 60 * 1000);
+      const rows = this.sql.exec(
+        `SELECT * FROM roster WHERE flagged = 1 OR (schedule != '{}' AND schedule_confirmed = 0) OR (last_active > 0 AND last_active < ?)`,
+        sevenDaysAgo
+      ).toArray();
+      return json({ flags: rows, count: rows.length });
+    }
+
     return json({ error: "Not found" }, 404);
   }
 }
@@ -828,7 +1235,16 @@ export class ProfileDO {
     this.state = state;
     this.env = env;
     this.sql = state.storage.sql;
-    this.sql.exec(`CREATE TABLE IF NOT EXISTS profiles (id INTEGER PRIMARY KEY AUTOINCREMENT, student_id TEXT UNIQUE, full_name TEXT, current_city TEXT, birthplace TEXT, english_level TEXT, goals TEXT, confidence_areas TEXT, occupation TEXT, fear_trigger TEXT, learning_history TEXT, motivation_now TEXT, created_at INTEGER)`);
+    this.sql.exec(`CREATE TABLE IF NOT EXISTS profiles (id INTEGER PRIMARY KEY AUTOINCREMENT, student_id TEXT UNIQUE, full_name TEXT, current_city TEXT, birthplace TEXT, english_level TEXT, goals TEXT, confidence_areas TEXT, occupation TEXT, fear_trigger TEXT, learning_history TEXT, motivation_now TEXT, last_session_date INTEGER DEFAULT 0, schedule TEXT DEFAULT '{}', schedule_flagged INTEGER DEFAULT 0, partner_id TEXT DEFAULT '', parent_id TEXT DEFAULT '', created_at INTEGER)`);
+    // Safe migrations for existing DOs
+    const _migrations = [
+      `ALTER TABLE profiles ADD COLUMN last_session_date INTEGER DEFAULT 0`,
+      `ALTER TABLE profiles ADD COLUMN schedule TEXT DEFAULT '{}'`,
+      `ALTER TABLE profiles ADD COLUMN schedule_flagged INTEGER DEFAULT 0`,
+      `ALTER TABLE profiles ADD COLUMN partner_id TEXT DEFAULT ''`,
+      `ALTER TABLE profiles ADD COLUMN parent_id TEXT DEFAULT ''`,
+    ];
+    for (const m of _migrations) { try { this.sql.exec(m); } catch(_) {} }
   }
 
   async fetch(request) {
@@ -841,6 +1257,21 @@ export class ProfileDO {
     if (url.pathname === "/profile" && request.method === "GET") {
       const rows = this.sql.exec(`SELECT * FROM profiles LIMIT 1`).toArray();
       return json({ profile: rows[0] || null });
+    }
+    if (url.pathname === "/schedule/set" && request.method === "POST") {
+      const b = await request.json();
+      this.sql.exec(`UPDATE profiles SET schedule = ?, schedule_flagged = 0 WHERE student_id = ?`, JSON.stringify(b.schedule || {}), b.studentId || "");
+      return json({ ok: true });
+    }
+    if (url.pathname === "/schedule/confirm" && request.method === "POST") {
+      const b = await request.json();
+      this.sql.exec(`UPDATE profiles SET schedule_flagged = 0 WHERE student_id = ?`, b.studentId || "");
+      return json({ ok: true });
+    }
+    if (url.pathname === "/session/update" && request.method === "POST") {
+      const b = await request.json();
+      this.sql.exec(`UPDATE profiles SET last_session_date = ? WHERE student_id = ?`, b.ts || Date.now(), b.studentId || "");
+      return json({ ok: true });
     }
     return json({ error: "Not found" }, 404);
   }
