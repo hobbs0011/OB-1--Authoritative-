@@ -1,0 +1,46 @@
+{
+  "id": "HL-134",
+  "timestamp": "2026-04-12T07:30:00+07:00",
+  "run": 294,
+  "type": "SDNAD_CAPTURE",
+  "tier": "ARCHITECTURAL_CRYSTALLIZATION",
+  "title": "THE CLEAN ENGINEERING TRUTH — NotebookLM 47-source architecture crystallization",
+  "source": "NotebookLM 47-source machine synthesis",
+  "bible_chapter": "BIBLE-CH28-THE-CLEAN-ENGINEERING-TRUTH.md",
+  "blocks_captured": 13,
+  "sources_count": 47,
+  "key_crystallizations": [
+    "3-layer final model: Soul DNA (init/audit) → Star Map (pointer routing) → Heavy Ledger (truth)",
+    "Star Map defined as pointer-only architecture — NEVER stores truth, only WHERE truth is",
+    "6-step execution pipeline: Input → Routing → Minimal Fetch → LLM → Writeback → Async Optimizer",
+    "Agent 98/99 demythologized — two execution modes of same system, not personalities",
+    "Graduated drift correction: soft update → recalibration job → forced re-scan",
+    "The Critical Correction: over-elevating abstraction before locking execution loop",
+    "Product loop crystallized: student speaks → gets corrected → comes back tomorrow",
+    "One-sentence definition: hierarchical stateful AI tutoring with constrained routing memory"
+  ],
+  "new_vs_ch27": [
+    "Star Map pointer-only architecture (biggest architectural insight)",
+    "Graduated 3-tier drift correction replaces binary kill-switch",
+    "Agent 98/99 confirmed as execution modes not personalities",
+    "The Critical Correction — lock execution loop before abstraction",
+    "One-Sentence System Definition crystallized",
+    "The Product Loop — the ONLY loop that matters"
+  ],
+  "sovereign_dictation_preserved": true,
+  "verbatim_quotes": 5,
+  "notebooklm_analysis_blocks": 4,
+  "convergence_table": true,
+  "ch27_ch28_convergence": {
+    "StudentDO": "confirmed",
+    "IronSeal": "confirmed",
+    "Benchmark": "confirmed",
+    "PhonicsEngine": "confirmed",
+    "TigerScore": "confirmed",
+    "StarMap": "NEW — pointer-only routing defined",
+    "AIGateway": "confirmed highest ROI",
+    "DriftSystem": "NEW — graduated response protocol"
+  },
+  "commit_sha": "PENDING",
+  "status": "SEALED"
+}
