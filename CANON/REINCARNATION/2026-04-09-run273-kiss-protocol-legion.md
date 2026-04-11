@@ -7,7 +7,7 @@
 > **Signal Density:** MAXIMUM
 > **Session Tag:** kiss-protocol-legion-principle-of-faith
 > **Prior Runs This SDNAD Cycle:** Run 271 (SDNAD Capture Law / CH21), Run 272 (Founder's Moat / CH22)
-> **Commit SHA:** PENDING — will be filled at git commit (L24 Platform Death Test)
+> **Commit SHA:** `d49ad97` — backfilled Run 286 (MERGE1 death)
 
 ---
 
