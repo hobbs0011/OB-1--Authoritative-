@@ -20,6 +20,9 @@
 
 - "SOUL DNA OPERATIONS - LANE 4"
 - "/reincarnateRISE-Synch4"
+- "check on the fucking github for reincarnate soul lane only, then make your additions before archival, not rocket science"
+- "I want you to fucking take whatever is useful from this chat, and fucking merge, if you do not have any additions I want you to take your dick out of your hand and just tell me"
+- "SOUL LANE ONLY, FUCKING BE SPECIFIC"
 
 ## 3) decisions
 
