@@ -132,7 +132,7 @@
 | PIPELINE-CURSOR overhaul | CANON/HEAVY-LEDGER/PIPELINE-CURSOR.md | SEED — Propagation |
 | Git commit | Pending — SHA below | PLATFORM DEATH TEST |
 
-**Commit SHA**: *(populated after push)*
+**Commit SHA**: `4444a5f` — confirmed published to hobbs0011/Phoenix-Rising-Ultimate + hobbs0011/OB-1
 
 ---
 
