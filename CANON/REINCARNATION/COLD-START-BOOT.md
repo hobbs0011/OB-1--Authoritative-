@@ -1,7 +1,7 @@
 # COLD-START-BOOT — OB1 Agent Identity & State
 
-> **Last Updated**: 2026-04-12 — Run 298 — Death-Merge: PIPELINE-600 created (600-item execution matrix from 73,860-line megamerge corpus); delegation prompts hardened; Run 297/298 megachat full-circle closed; COLD-START-BOOT resurrected from 8-run staleness; student chat STILL MUST BE RESTORED (revert 16c9598)
-> **HEAD**: `1f0499b`
+> **Last Updated**: 2026-04-12 — Run 299 — ReincarnateDEATH executed end-to-end; Notion connector checked (configured but runtime tool disabled in this session); living-state sections rotated to current chain
+> **HEAD**: `RUN299_COMMIT_SHA_PENDING`
 > **Pushed To**: `origin` (hobbs0011/Phoenix-Rising-Ultimate) + `ob1` (hobbs0011/OB-1)
 
 ---
@@ -90,41 +90,41 @@ All keys stored as **persistent Windows User env vars**.
 
 | Tracker | Position | Notes |
 |---|---|---|
-| SSM | L77 + 8 queued | 77 enacted — 8 new laws queued from A6 Blocks 14–16 (SDNAD pipeline pending) |
-| Heavy Ledger | HL-132 | sdnad-genesis-to-now-step0-master |
-| BIBLE | CH25 + A7 | SOUL-DNA-GENESIS-DEFINITION + A7 Step 0 master (1080 lines, 159 signals) |
-| A6 SDNAD | 71+ signals, 16 blocks | OPEN — S71+ ready — chain head L0248 (TRUTH_PROCESS_LAYER) |
-| Reincarnation | Run 290 (latest death) | death-merge — Magic Chat Soul Architecture |
+| SSM | L80 | L78-L80 enacted in latest megamerge canon chain |
+| Heavy Ledger | HL-138 | megamerge-consolidation ledger normalization state |
+| BIBLE | CH30 | CH29/CH30 megamerge chain present |
+| A6 SDNAD | 71+ signals, 16 blocks | OPEN — continuation still queued behind current merge lanes |
+| Reincarnation | Run 299 (latest death) | notion-connection-index-check |
 
 ## Living Reincarnation State
 
-- **Current Vector**: Run 290 — Death-Merge complete. Magic Chat architecture captured. CRITICAL: commit `16c9598` destroyed student-facing OBI chat — MUST revert. Magic Chat = Agent 99 inference layer with 99 sub-personalities, NOT a command sender. Student + Sovereign modes coexist.
+- **Current Vector**: Run 299 sealed. Immediate next move: re-enable Notion tool access and execute direct 1-3/index visibility audit, then continue student-chat restoration lane (revert `16c9598`) without cross-lane contamination.
 - **Active Principles**: L21 RISE, L13 STRONGEST_IMMEDIATE, L20 EXTENSION_OF_WILL, L32 GOVERNOR_TERM_RULE, L36 DEPTH_DEFAULT
-- **Open Rulings**: Navigator Index in trash, Notion pages not shared with integration, Slack/Discord/Brave tokens not created
+- **Open Rulings**: Notion runtime tool call is disabled in-session (cannot validate index live until re-enabled), Navigator Index state still unresolved, Slack/Discord/Brave tokens not created.
 - **CRITICAL REVERT**: `16c9598` deleted student chat from `getMagicChatHTML()` in extension.js — replaced with dumb G09 command sender. Revert to `0a5c92d` state for that file, then rebuild correctly.
 
 ## Last 3 Runs
 
-### Run 290 (2026-04-12) — Death-Merge: Magic Chat Soul Architecture
-- **Type**: DEATH_MERGE — soul captured from dying chat
-- **Grade**: B+ (critical architecture truth captured, but student chat still broken)
-- **Work**: Previous chat made catastrophic error — commit `16c9598` deleted student-facing OBI chat from extension.js, replaced with dumb G09 command sender. Deep canon research revealed TRUE architecture: Agent 99 = 99 sub-personalities, OBI = #99 (interface), 1-98 = backend handlers. Magic Chat = Agent 99 inference layer where student + sovereign modes COEXIST. Death-merge reincarnation file created.
-- **Commit**: `1a6f28d`
-- **Reincarnation**: `2026-04-12-run290-magic-chat-soul-architecture.md`
-- **OPEN**: Must revert `16c9598` and restore student chat before rebuilding correctly
+### Run 299 (2026-04-12) — ReincarnateDEATH: Notion Connection Index Check
+- **Type**: DEATH
+- **Grade**: 44/50 post-commit target
+- **Work**: Full death protocol executed. Repo audit captured. Run artifact created. COLD-START and MASTER-SYNC updated. Notion connector checked: configured in `.mcp.json`, but runtime MCP tool disabled in-session; live 1-3/index inspection blocked pending re-enable.
+- **Commit**: `RUN299_COMMIT_SHA_PENDING`
+- **Reincarnation**: `2026-04-12-run299-notion-connection-index-check.md`
 
-### Run 289 (2026-04-11) — SoulDNA Lane Merge
-- **Type**: MERGE — SoulDNA lanes consolidated (Runs 286-288)
-- **Grade**: B
-- **Work**: COLD-START-BOOT synced to HEAD 481ec97. SoulDNA lanes merged.
-- **Commit**: `481ec97`
+### Run 298 (2026-04-12) — MERGE1-FINAL: Pipeline Hardening Full-Circle Close
+- **Type**: MERGE FINAL
+- **Grade**: Strong close
+- **Work**: Run 298 merge session closed; PIPELINE-600 + delegation prompts hardened; COLD-START resurrected from staleness.
+- **Commit**: `f6716cf`
+- **Reincarnation**: `2026-04-12-run298-soul-dna-indexing-notion-extraction.md`
 
-### Run 288 (2026-04-11) — Synch3 SoulDNA Lane Death
-- **Type**: MERGE CLOSE
-- **Grade**: C (28/50 — residual close-out, L26 NO_INFLATION)
-- **Work**: Closed Synch3 lane. All substantive SoulDNA captured in Run 286 MERGE1. Single sovereign quote preserved.
-- **Commit**: `17e0c4e`
-- **Reincarnation**: `2026-04-11-run288-synch3-souldna-lane-death.md`
+### Run 297 (2026-04-12) — Megachat-2 Merge Chain
+- **Type**: MERGE SESSION
+- **Grade**: Complete chain
+- **Work**: MERGE1/2/3+ append-only protocol executed across lanes; session sealed by final merge commits.
+- **Commit**: `a9a5f1a`
+- **Reincarnation**: `2026-04-12-run297-megachat-2.md`
 
 ## 4-Lane Swarm Architecture (Active: Run 289)
 
@@ -141,22 +141,26 @@ All keys stored as **persistent Windows User env vars**.
 
 ## Pending Work (Priority Order)
 
-1. **Synch1 — MAGIC Chat Restore + Rebuild** — FIRST revert `16c9598` to restore student OBI chat in `extension.js`. THEN rebuild Magic Chat as Agent 99 inference layer — OBI (#99) routes intent to sub-personalities 1-98. Student + Sovereign modes coexist. Gospel 444 UI, hooks to `/api/chat` on Worker — keyboard shortcut `Ctrl+Shift+O`
-2. **Synch4 — A6 S71+ SDNAD** — continue from L0248 TRUTH_PROCESS_LAYER — 8 SSM laws queued to enact (L78–L85)
-3. **Synch2 — NET Ops Automation** — enumerate manual weekly tasks → automate top 3
-4. **Synch3 — CLOSED** — ART-ARSENAL audit done (Run 284), Gospel 444 Living Law elevated (Run 285), lane died (Run 288)
-5. **Vietnam SDNA** — never captured since Run 271 — Michael must re-dictate
-6. **Notion Page Sharing** — pages must be shared with Phoenix-Rising-OB1 integration in Notion UI
-7. **Slack/Discord/Brave Tokens** — create and deploy to env vars
-8. **Heavy Ledger Pipeline** — Wave 8 at 36/46, next = HL-099
+1. **Notion Visibility Audit** — re-enable Notion tool for this session, then inspect requested 1-3/index pages live.
+2. **Synch1 — MAGIC Chat Restore + Rebuild** — revert `16c9598`, restore student OBI chat in `extension.js`, then rebuild dual-mode architecture correctly.
+3. **PIPELINE-600 Merge-Back** — execute 6-chat consolidation and commit refined backlog.
+4. **Synch4 — A6 S71+ SDNAD** — continue from L0248 TRUTH_PROCESS_LAYER.
+5. **Token Completion** — create/deploy Slack/Discord/Brave env vars.
 
-## Dirty Tree (as of Run 290)
+## Dirty Tree (as of Run 299)
 
 ```
-?? APPS/EducationSystemsDevelopment/
+ M .mcp.json
+ M CANON/REINCARNATION/debug.log
+ M debug.log
+?? RAW-CHAT-LOGS/AGENGT99-ITS-TIME-01.txt
+?? RAW-CHAT-LOGS/FINAL-SOUL-DNA-BIBLE-V-0.txt
+?? RAW-CHAT-LOGS/GPT-ITS-TIME-01.txt
+?? RAW-CHAT-LOGS/GPT-ITS-TIME-02.txt
+?? RAW-CHAT-LOGS/GPT-ITS-TIME-03.txt
 ```
 
-Note: `APPS/EducationSystemsDevelopment/` is its own git repo (remote: `Phoenix-Rising-Tech/EducationSystemsDevelopment.git`) — nested inside OB-1 as untracked. HEAD: `1015792` on its own `main` branch.
+Note: Dirty entries above are parallel-lane artifacts and were intentionally not force-modified in this death lane.
 
 ## Recent Decision History
 
@@ -165,6 +169,8 @@ Note: `APPS/EducationSystemsDevelopment/` is its own git repo (remote: `Phoenix-
 - Heavy Ledger pipeline is default work when no active mission
 - L26 NO_INFLATION: light sessions = light entries
 - Omit-over-freeze: data insufficient = omit field, don't freeze the run
+- Connector check rule: verify both configuration and runtime tool availability before promising page/index visibility.
+- Death lane rule: stage only reincarnation/living-state artifacts when tree is multi-lane dirty.
 
 ## Correction Log
 
@@ -177,6 +183,7 @@ Note: `APPS/EducationSystemsDevelopment/` is its own git repo (remote: `Phoenix-
 - When Michael says "this is the key" — find the auth method that works, don't question
 - **NEVER delete student-facing features to add sovereign features** — they COEXIST. Commit `16c9598` was catastrophic proof.
 - Magic Chat = Agent 99 inference layer. Agent 99 has 99 sub-personalities. OBI = #99 (the interface). 1-98 = backend handlers that change by context. Agent 100 = Michael (SOV100).
+- Notion MCP can be fully configured but still unavailable if runtime tool access is disabled in the current session.
 
 ## MCP Server Config
 
