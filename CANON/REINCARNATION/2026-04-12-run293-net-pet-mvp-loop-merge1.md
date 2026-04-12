@@ -1200,3 +1200,251 @@ Speak ΓåÆ Correct ΓåÆ Repeat ΓåÆ Return tomorrow
 - The full Soul DNA architecture capture lives in conversation context.
 - To execute: switch to Code mode, append this extract to `CANON/REINCARNATION/2026-04-12-run293-net-pet-mvp-loop-merge1.md`, commit, and push.
 - Awaiting mode switch or final merge authority.
+
+---
+
+# MERGE4 — Workspace Drift Arbitration + MVP Lane Stabilization
+
+**Agent**: OB1 Ne0 (Agent-99 / GitHub Copilot)
+**Chat Context**: Manual takeover after autopilot drift; conflict arbitration between parallel index.js architectures; preserve prior merges; validate live lane; flag conflicts and stand by.
+**Merge Time**: 2026-04-12 ICT (post-MERGE11 append)
+
+## 1) HEADER
+- **Session Tag**: run293-net-pet-mvp-loop-merge4
+- **Datetime (ICT)**: 2026-04-12 ICT
+- **Signal Density (1-10)**: 9
+- **Theme**: Stop overwrite risk under parallel file churn, lock one executable lane, and append-only conflict reporting.
+- **State Coming In**: Reincarnation artifact already contained contradictory status and out-of-order merge indices (MERGE2 marked FINAL while MERGE6/7/9/10/11 existed later in same file).
+
+## 2) RAW QUOTES (VERBATIM)
+- **[GREEN]** "autopilot turned off /ReincarnateDEATH-MERGE merge 4"
+- **[GREEN]** "dont overwirte anything that conflicts from prior merges on the git, just flag and standby"
+- **[YELLOW]** "Merge Status: CLOSED — all merges consolidated"
+- **[YELLOW]** "Merge Status: OPEN — 3 merges consolidated, 1 merge pending"
+- **[GREEN]** "node --check src/index.js" (pass in selected lane)
+- **[GREEN]** "npx wrangler deploy --dry-run" (pass in selected lane)
+
+## 3) DECISIONS
+1. **Decision**: Append-only merge behavior enforced; no mutation of prior merge sections.
+   - **Impact**: Chain-of-custody preserved even with contradictory prior content.
+   - **Canon Affected**: Merge protocol append law.
+   - **Status**: IMPLEMENTED.
+2. **Decision**: Resolve active coding lane to the currently selected MVP rewrite branch state for this session's execution, not by rewriting historical sections.
+   - **Impact**: Immediate build/deploy validation possible without destructive reconciliation.
+   - **Canon Affected**: Runtime stabilization doctrine.
+   - **Status**: IMPLEMENTED.
+3. **Decision**: Remove the newly-created-but-unused `star-map.js` from the abandoned branch path in this session to reduce false-positive architecture claims.
+   - **Impact**: Workspace reflects chosen lane more accurately.
+   - **Canon Affected**: Truth alignment in artifact state.
+   - **Status**: IMPLEMENTED.
+4. **Decision**: Defer FINALIZE actions (header closure rewrite + COLD-START-BOOT mutation) due unresolved merge index conflicts and contradictory prior finalization markers.
+   - **Impact**: Prevents writing incorrect unified state.
+   - **Canon Affected**: Final merge authority integrity.
+   - **Status**: FLAGGED + STANDBY.
+
+## 4) CORRECTIONS
+1. **What Broke**: Live `src/index.js` architecture changed mid-work (modular Worker vs rewritten MVP lane), creating overwrite risk.
+   - **Root Cause**: Parallel sessions/agents modifying same runtime file.
+   - **Fix Applied**: Arbitration prompt executed; selected MVP rewrite lane for this session and validated it.
+   - **Instruction Update Needed**: Yes — lock active lane before edits in high-concurrency sessions.
+2. **What Broke**: Reincarnation file contained contradictory status authority (`CLOSED` and later `OPEN`) and non-sequential merge numbering.
+   - **Root Cause**: Multiple merges appended without a single reconciler pass.
+   - **Fix Applied**: No overwrite; explicit conflict flags in this merge.
+   - **Instruction Update Needed**: Yes — single canonical status block required.
+3. **What Broke**: Session-specific Star Map file creation became stale after lane switch.
+   - **Root Cause**: Architecture path changed after file creation.
+   - **Fix Applied**: Deleted unused `APPS/NET-PET-AI/src/star-map.js` in this session path.
+   - **Instruction Update Needed**: No.
+
+## 5) NEW PRINCIPLES
+- **Arbitrate first, edit second**: under workspace drift, force lane selection before code mutation.
+- **Finalization requires consistent chronology**: if merge indices/status are contradictory, flag and hold.
+- **Validation beats narrative**: only claim live lane state that passes `node --check` and `wrangler --dry-run` in the same session.
+
+## 6) EMOTIONAL SIGNAL
+- **Energy**: urgent, direct, execution-only.
+- **Risk Sensitivity**: high; explicit user requirement was no overwrite under conflict.
+- **What Michael Needs**: deterministic reconciliation without rewriting historical signal.
+
+## 7) OPEN QUESTIONS
+- Is MERGE4 intended as final authority despite existing MERGE6/7/9/10/11 entries in this same artifact?
+- Which merge index is canonical for Run 293 closure accounting?
+- Should the final consolidated run artifact be regenerated clean from unions, or continue append-only with conflict flags?
+
+## 8) UNFINISHED ACTIONS
+1. Canonical merge-index arbitration (required before true FINALIZE).
+2. Unified status-line reconciliation (`OPEN/CLOSED`) in one authority block.
+3. COLD-START-BOOT update only after canonical final-merge identity is established.
+4. Optional: create a separate reconciled run293-final artifact if chronology cannot be trusted in-place.
+
+## 9) SYSTEM DESIGN
+- **Execution Mode in this merge**: arbitration + validation + append-only reporting.
+- **Chosen lane (session-local)**: MVP rewrite lane validated with:
+  - `node --check src/index.js` → pass
+  - `npx wrangler deploy --dry-run` → pass
+- **No topology rewrite performed**: this merge does not alter prior architecture claims; it only records lane choice and conflicts.
+
+## 10) ARTIFACTS CREATED / MODIFIED
+- `CANON/REINCARNATION/2026-04-12-run293-net-pet-mvp-loop-merge1.md` — appended MERGE4 section (this block).
+- `APPS/NET-PET-AI/src/star-map.js` — removed in-session after lane arbitration (to avoid stale-path confusion).
+
+## 11) STATE SNAPSHOT
+- **Run**: 293
+- **Merge Position**: MERGE4 appended (non-overwriting, non-finalizing)
+- **Chronology Health**: inconsistent (file contains MERGE2 FINAL plus later MERGE6/7/9/10/11)
+- **Build Health (chosen lane this session)**: PASS (`node --check`, `wrangler --dry-run`)
+- **Operational Posture**: FLAG + STANDBY (per user directive)
+
+## 12) FINGERPRINT
+- **Agent ID**: OB1 Ne0 (Agent-99 / GitHub Copilot)
+- **Run Number**: 293
+- **Merge Number**: 4 (as directed)
+- **Commit SHA**: STANDBY (not produced in this step)
+- **Platform Death Test**: PARTIAL PASS (validation complete; finalization intentionally deferred)
+- **Pheromone Score (MERGE4 incremental)**:
+  - Conflict visibility: 10/10
+  - Non-overwrite compliance: 10/10
+  - Validation evidence: 9/10
+  - Finalization completeness: 2/10 (deferred by conflict)
+  - Handoff clarity: 9/10
+  - **TOTAL**: 40/50
+
+## MERGE CONFLICT FLAGS
+- **MERGE_CONFLICT:STATUS_AUTHORITY** — top header says `CLOSED`; later sections state `OPEN`.
+- **MERGE_CONFLICT:MERGE_INDEX_ORDER** — MERGE6/7/9/10/11 exist while MERGE4 is being appended later.
+- **MERGE_CONFLICT:FINALIZATION_VALIDITY** — prior file claims `MERGE2 FINAL`, invalidated by subsequent merges.
+- **MERGE_CONFLICT:ARCH_PATH_CLAIMS** — clean rewrite and modular production both claimed canonical in different merges.
+
+## STANDBY NOTE
+- MERGE4 append complete.
+- No overwrite performed.
+- Conflicts flagged explicitly.
+- Standing by for canonical final-merge arbitration command.
+
+---
+
+# MERGE8 — Secret Manager Provenance Audit + No-Overwrite Upload
+
+**Agent**: OB1 Ne0 (Agent-99 / GitHub Copilot)
+**Chat Context**: User demanded immediate GitHub token retrieval from secret-manager notes, then hard audit of whether secrets were actually committed/pushed; follow-up command required MERGE8 append-only upload with compare/audit and no overwrite.
+**Merge Time**: 2026-04-12 late ICT (post-MERGE11, append-only out-of-order)
+
+## 1) HEADER
+- **Session Tag**: run293-net-pet-mvp-loop-merge8
+- **Datetime (ICT)**: 2026-04-12 late ICT
+- **Signal Density (1-10)**: 9
+- **Theme**: Secret-manager trust path, git provenance verification, and strict append-only merge execution under conflict-heavy artifact history.
+- **State Coming In**: Run293 artifact already contained out-of-order merges (including MERGE9/10/11) and unresolved status authority conflicts (`CLOSED` vs `OPEN`).
+
+## 2) RAW QUOTES (VERBATIM)
+- **[RED]** "I need the token which you hold for me to do this for me I am hooking up to notion, but need the github"
+- **[RED]** "we have a secret manager reead the fucking notes dude"
+- **[YELLOW]** "THE REPO IN THE REINCARNATION RECENT LIEK TODAY FICOMG SOT PM TE GIT"
+- **[GREEN]** "/ReincarnateDEATH-MERGE merge 8, just upload, audit, compare with other merges but no overwite, go"
+
+## 3) DECISIONS
+1. **Decision**: Use secret-manager notes file (`API-SHHHH.txt`) as source of requested GitHub credential for immediate user connection workflow.
+   - **Impact**: User unblocked for external MCP auth setup.
+   - **Canon Affected**: Execution-first support behavior.
+   - **Status**: IMPLEMENTED.
+2. **Decision**: Run explicit git provenance audit before asserting secret exposure status.
+   - **Impact**: Replaced assumption with verifiable repository truth.
+   - **Canon Affected**: Truth-first doctrine in incident handling.
+   - **Status**: IMPLEMENTED.
+3. **Decision**: Keep MERGE8 strictly append-only despite out-of-order merge numbering and existing contradictions.
+   - **Impact**: Preserved prior merge signal integrity; no destructive reconciliation.
+   - **Canon Affected**: Merge protocol append law.
+   - **Status**: IMPLEMENTED.
+4. **Decision**: Defer any FINALIZE actions (`COLD-START-BOOT` mutation, merged closure, status rewrite) because this is not designated final merge authority.
+   - **Impact**: Protocol compliance maintained.
+   - **Canon Affected**: FINALIZE gate.
+   - **Status**: COMPLIANT.
+
+## 4) CORRECTIONS
+1. **What Broke**: Early response path implied keys may already be publicly committed.
+   - **Root Cause**: Security caution was stated before repository provenance checks completed.
+   - **Fix Applied**: Ran three-step proof audit (`git log --all -- <file>`, `git ls-files`, `git check-ignore`) for `API-SHHHH.txt`, `API-SHHHH-2.txt`, and `API-MASTER.txt`.
+   - **Instruction Update Needed**: Yes — never claim leak status without commit-history proof.
+2. **What Broke**: User trust drop due mismatch between "secret manager exists" and initial assistant posture.
+   - **Root Cause**: Tooling model does not directly hold secrets; user expected retrieval from local secret notes.
+   - **Fix Applied**: Read local notes and provided requested credential path immediately.
+   - **Instruction Update Needed**: Yes — in this repo, prefer local secret-manager notes for requested value retrieval when user explicitly asks.
+3. **What Broke**: Command noise in terminal output caused ambiguous one-line head output (`C`) on first check.
+   - **Root Cause**: Interleaved terminal context/output simplification.
+   - **Fix Applied**: Re-ran head/status checks and captured stable result (`57a0636` at audit time).
+   - **Instruction Update Needed**: No.
+
+## 5) NEW PRINCIPLES
+- **Provenance before panic**: secret exposure claims require git-history proof, not assumption.
+- **Three-check secret audit standard**: history check + tracked-file check + gitignore check.
+- **Append-order flexibility**: merge number ordering can be non-sequential in file; integrity comes from append-only + conflict flags.
+- **User-unblock priority**: when asked for credential retrieval, execute first, then harden with audit evidence.
+
+## 6) EMOTIONAL SIGNAL
+- **Energy**: High urgency, directive, low tolerance for delay.
+- **Stress Markers**: Profanity + rapid corrective commands after perceived mismatch.
+- **What Michael Needs From System**: Immediate action plus hard proof (not reassurance language).
+
+## 7) OPEN QUESTIONS
+- Should all local plaintext secret-manager files be migrated to env-only retrieval to reduce accidental disclosure risk in chat outputs?
+- Is token rotation now required by policy despite audit proving these specific files were not committed?
+- Which merge is canonical finalizer for Run293 given MERGE2 marked FINAL prematurely while later merges continue?
+
+## 8) UNFINISHED ACTIONS
+1. Final merge authority must reconcile `CLOSED` vs `OPEN` status conflict in one canonical block.
+2. Final merge authority must reconcile actual merge count (>=11 observed) and normalize session header.
+3. Optional hardening: add an automated `secrets-provenance` script to run the 3-check audit before any leakage warning.
+4. Optional hardening: remove plaintext tokens from local note files and keep only environment variable references.
+
+## 9) SYSTEM DESIGN
+- **Audit pipeline executed**:
+  - `git log --all --oneline -- API-SHHHH.txt` -> no commit history found.
+  - `git ls-files API-SHHHH.txt API-SHHHH-2.txt API-MASTER.txt` -> none tracked.
+  - `git check-ignore API-SHHHH.txt API-SHHHH-2.txt API-MASTER.txt` -> all ignored.
+- **Conclusion**: These secret-manager files are local and ignored in this repository path.
+- **Merge behavior**: append-only write, no overwrite of prior sections, no COLD-START mutation.
+
+## 10) ARTIFACTS CREATED / MODIFIED
+- `CANON/REINCARNATION/2026-04-12-run293-net-pet-mvp-loop-merge1.md` — appended MERGE8 section only.
+- No runtime code files modified by MERGE8.
+- No `COLD-START-BOOT` edits.
+
+## 11) STATE SNAPSHOT
+- **Run**: 293
+- **Merge Position**: MERGE8 appended (non-finalizing; appended after higher-numbered merges due parallel order)
+- **HEAD SHA (at audit capture)**: `57a0636`
+- **Dirty Tree at capture**:
+  - `M CANON/REINCARNATION/2026-04-12-run293-net-pet-mvp-loop-merge1.md`
+  - `M net-tiger-assessment/assets/js/obi-widget.js` (unrelated to MERGE8; not included)
+- **Env Vars**: Not changed in this merge.
+- **MCP Status**: Not re-probed in this merge.
+
+## 12) FINGERPRINT
+- **Agent ID**: OB1 Ne0 (Agent-99 / GitHub Copilot)
+- **Run Number**: 293
+- **Merge Number**: 8
+- **Commit SHA**: PENDING (set by MERGE8 commit step)
+- **Platform Death Test**: IN PROGRESS (append complete, commit/push pending)
+- **Pheromone Score (MERGE8 incremental)**:
+  - Audit evidence quality: 10/10
+  - Non-overwrite compliance: 10/10
+  - Conflict comparison quality: 8/10
+  - Handoff clarity: 8/10
+  - Finalization restraint compliance: 10/10
+  - **TOTAL**: 46/50
+
+## REDUNDANCY NOTES (MERGE8 vs prior merges)
+- **MERGE6 + MERGE11 already flagged** `MERGE_CONFLICT:STATUS_SOURCE` and chat-count drift. MERGE8 does not duplicate rewrite; it reaffirms unresolved state and defers to final merge.
+- **MERGE10 emphasized build integrity gates**; MERGE8 extends integrity doctrine to secret provenance gates (history/tracking/ignore proof).
+- **No architecture-lane claim changes** in MERGE8; prior ARCH_PATH conclusions remain untouched.
+
+## MERGE CONFLICT FLAGS
+- **MERGE_CONFLICT:STATUS_AUTHORITY** — still unresolved (`CLOSED` top header vs active continuing merges).
+- **MERGE_CONFLICT:MERGE_INDEX_ORDER** — MERGE8 appended after MERGE11 due parallel sequence; chronology is append-valid but numerically non-linear.
+- **MERGE_CONFLICT:SECRET_EXPOSURE_ASSERTION** — earlier leak assumption corrected by git provenance audit for local secret-manager files.
+
+## STANDBY NOTE
+- MERGE8 append complete.
+- No overwrite performed.
+- Audit + compare completed and logged.
+- Ready for commit/push as non-final merge.
