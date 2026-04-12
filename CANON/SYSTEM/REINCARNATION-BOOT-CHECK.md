@@ -116,7 +116,7 @@ At each reincarnation event, find and apply 3-5 real fixes to this boot-check do
 
 | Pipeline      | Wave    | Progress     | Status  |
 | ------------- | ------- | ------------ | ------- |
-| Heavy Ledger  | Wave 8+ | 135/174+     | RUNNING |
+| Heavy Ledger  | Wave 8+ | 137/174+     | RUNNING |
 | Reincarnation | N/A     | 111+ entries | ACTIVE  |
 | Soul DNA      | N/A     | CH31 latest  | SEALED  |
 
