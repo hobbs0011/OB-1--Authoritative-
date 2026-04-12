@@ -1,7 +1,7 @@
 # COLD-START-BOOT — OB1 Agent Identity & State
 
-> **Last Updated**: 2026-04-12 — Run 290 — Death-Merge: Magic Chat Soul Architecture captured; Agent 99 = 99 sub-personalities; OBI = #99 interface; student chat MUST be restored
-> **HEAD**: `1a6f28d`
+> **Last Updated**: 2026-04-12 — Run 298 — Death-Merge: PIPELINE-600 created (600-item execution matrix from 73,860-line megamerge corpus); delegation prompts hardened; Run 297/298 megachat full-circle closed; COLD-START-BOOT resurrected from 8-run staleness; student chat STILL MUST BE RESTORED (revert 16c9598)
+> **HEAD**: `1f0499b`
 > **Pushed To**: `origin` (hobbs0011/Phoenix-Rising-Ultimate) + `ob1` (hobbs0011/OB-1)
 
 ---
