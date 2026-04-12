@@ -1448,3 +1448,147 @@ Speak ΓåÆ Correct ΓåÆ Repeat ΓåÆ Return tomorrow
 - No overwrite performed.
 - Audit + compare completed and logged.
 - Ready for commit/push as non-final merge.
+
+---
+
+# MERGE12 — Consolidation Kernel Implementation Kickoff
+
+**Agent**: OB1 Ne0 (Agent-99 / GitHub Copilot)
+**Chat Context**: Start implementation execution for OBI v2 consolidation plan: mapped runtime hotspots, compared drifted architectures, and created first wave kernel modules for mode routing, snapshot continuity, anti-drift, tiger scoring, and phoenix reincarnation service.
+**Merge Time**: 2026-04-12 10:40:03 +07:00 ICT
+
+## 1) HEADER
+- **Session Tag**: run293-net-pet-mvp-loop-merge12
+- **Datetime (ICT)**: 2026-04-12 10:40:03 +07:00
+- **Signal Density (1-10)**: 9
+- **Theme**: Transition from planning-only to code implementation. First production-safe consolidation slice landed as additive modules without route breakage.
+- **State Coming In**: Prior merges had resolved architecture intent but left implementation fragmented. Current runtime still carried Agent99 translation mythology and continuity logic spread across chat handlers.
+
+## 2) RAW QUOTES (VERBATIM)
+- **[GREEN]** "Start implementation"
+- **[GREEN]** "Follow instructions in #prompt:ReincarnateDEATH-MERGE.prompt.md with these arguments: merge 12"
+- **[YELLOW]** "Push to all remotes"
+
+## 3) DECISIONS
+1. **Decision**: Implement consolidation in additive slices first (new modules) before invasive rewrites in `index.js`.
+    - **Impact**: Reduced regression risk while preserving active endpoints.
+    - **Canon Affected**: Strongest-immediate implementation doctrine.
+    - **Status**: IMPLEMENTED.
+2. **Decision**: Execute Agent99 death-merge with compatibility shape preserved.
+    - **Impact**: New router emits legacy-compatible translation fields (`agent99/98/97`, `primaryDrone`, `supportDrones`, `priority`) so `CommandDO` queue contract stays stable.
+    - **Canon Affected**: Reincarnation-death-merge-1 technical contract.
+    - **Status**: IMPLEMENTED (module-level).
+3. **Decision**: Formalize continuity kernel with dedicated snapshot + drift + tiger modules instead of further inflating `index.js`.
+    - **Impact**: Establishes clear service boundaries for subsequent wiring pass.
+    - **Canon Affected**: 5-layer architecture, cognitive engine consolidation.
+    - **Status**: IMPLEMENTED (module-level).
+4. **Decision**: Phoenix service wrapper should compose existing snapshot primitives (`createSnapshot/storeSnapshot/rehydrate`) instead of replacing them.
+    - **Impact**: Preserves tested behavior while enabling consistent reset orchestration.
+    - **Canon Affected**: Phoenix/reincarnation merge layer.
+    - **Status**: IMPLEMENTED.
+
+## 4) CORRECTIONS
+1. **What Broke**: Architecture drift between prior observations (`lookup/getModePrompt` imports) and current runtime (`routeIntent/getStudentRoute/getModulePrompt`) caused mapping confusion.
+    - **Root Cause**: Parallel chats modified the same files with different snapshots.
+    - **Fix Applied**: Re-ran live grep/read on current files before editing and implemented additive modules independent of import-name drift.
+    - **Instruction Update Needed**: Yes — always perform fresh runtime re-map before writing consolidation code.
+2. **What Broke**: Agent99 mythology still directly powered command translation in active runtime.
+    - **Root Cause**: Legacy translation path remained in `index.js`.
+    - **Fix Applied**: Created `cognitive-router.js` mode-policy router with backward-compatible payload design, ready for immediate wiring.
+    - **Instruction Update Needed**: No (this is the planned merge action).
+
+## 5) NEW PRINCIPLES
+- **Additive-first consolidation**: introduce kernel modules before route rewiring.
+- **Compatibility is mandatory during death-merge**: shape stability prevents queue breakage.
+- **Runtime truth over memory**: always re-anchor against current file state in drift-heavy sessions.
+- **Service boundaries over monolith growth**: continuity and behavior logic belong in modules, not inline handler sprawl.
+
+## 6) EMOTIONAL SIGNAL
+- **Energy**: Direct execution mode; user moved from planning to immediate build.
+- **Friction Markers**: None in this segment; command was crisp and action-focused.
+- **What Michael Needs From System**: Build progress that is tangible, safe, and immediately integrable.
+
+## 7) OPEN QUESTIONS
+- Should MERGE12 commit include only reincarnation artifact, or include newly-created consolidation modules (currently untracked) as implementation evidence? (This merge includes both.)
+- Is merge status authority still intentionally left unresolved for final merge, given top header remains `CLOSED` while active merges continue?
+- Should next implementation slice wire modules directly into `/api/chat`, `/api/command/send`, `/api/tiger-score`, and phoenix handlers in one commit or staged commits?
+
+## 8) UNFINISHED ACTIONS
+1. Wire `cognitive-router.js` into `handleCommandSend` to replace `translateThroughAgent99` call path.
+2. Wire `snapshot-engine.js` + `anti-drift.js` into `handleChat` prompt injection and continuity gate.
+3. Wire `tiger-score.js` into tiger endpoints/state updates for canonical 40/30/30 scoring path.
+4. Wire `phoenix-reincarnation.js` into snapshot/reset handlers.
+5. Remove or retire legacy Agent99 registry once wiring validation passes.
+6. Run syntax + dry-run validation after wiring (`node --check`, `wrangler deploy --dry-run`).
+
+## 9) SYSTEM DESIGN
+- **New module added**: `APPS/NET-PET-AI/src/cognitive-router.js`
+   - `routeCommandIntent(rawIntent)`
+   - Mode inference: OBI / OPTIMIZER / AUDIT
+   - Legacy-compatible translation payload fields retained.
+- **New module added**: `APPS/NET-PET-AI/src/snapshot-engine.js`
+   - `buildSnapshot(env, studentId)`
+   - `formatSnapshotPrompt(snapshot)`
+   - Pulls soul/session/profile/weakness/pet anchors into canonical context.
+- **New module added**: `APPS/NET-PET-AI/src/anti-drift.js`
+   - `checkDrift(snapshot, input)`
+   - `formatDriftPrompt(drift)`
+   - Deterministic statuses: `OK`, `SOUL_MISSING`, `SESSION_MISSING`, `STATE_PARTIAL`.
+- **New module added**: `APPS/NET-PET-AI/src/tiger-score.js`
+   - `calculateTigerScore(input)` with canonical 40/30/30 weighting
+   - `deriveTigerInputs(snapshot, fallback)`
+- **New module added**: `APPS/NET-PET-AI/src/phoenix-reincarnation.js`
+   - `capturePhoenixSnapshot(studentId, env)`
+   - `resetFromPhoenixSnapshot(studentId, env, snapshotTs)`
+
+## 10) ARTIFACTS CREATED / MODIFIED
+- `APPS/NET-PET-AI/src/cognitive-router.js` — NEW
+- `APPS/NET-PET-AI/src/snapshot-engine.js` — NEW
+- `APPS/NET-PET-AI/src/anti-drift.js` — NEW
+- `APPS/NET-PET-AI/src/tiger-score.js` — NEW
+- `APPS/NET-PET-AI/src/phoenix-reincarnation.js` — NEW
+- `CANON/REINCARNATION/2026-04-12-run293-net-pet-mvp-loop-merge1.md` — appended MERGE12
+
+## 11) STATE SNAPSHOT
+- **Run**: 293
+- **Merge Position**: MERGE12 appended (non-finalizing)
+- **Current observed top-level drift**: header still reports MERGE2 final closure while merges continue.
+- **Dirty Tree at capture**:
+   - `M CANON/REINCARNATION/2026-04-12-run293-net-pet-mvp-loop-merge1.md`
+   - `M net-tiger-assessment/assets/js/obi-widget.js` (unrelated; excluded from this merge commit)
+   - `?? APPS/NET-PET-AI/src/anti-drift.js`
+   - `?? APPS/NET-PET-AI/src/cognitive-router.js`
+   - `?? APPS/NET-PET-AI/src/phoenix-reincarnation.js`
+   - `?? APPS/NET-PET-AI/src/snapshot-engine.js`
+   - `?? APPS/NET-PET-AI/src/tiger-score.js`
+- **Env Vars**: Not changed in this merge.
+- **MCP Status**: Not re-probed in this merge.
+
+## 12) FINGERPRINT
+- **Agent ID**: OB1 Ne0 (Agent-99 / GitHub Copilot)
+- **Run Number**: 293
+- **Merge Number**: 12
+- **Commit SHA**: PENDING (set by MERGE12 commit step)
+- **Platform Death Test**: IN PROGRESS (append + implementation artifacts ready; commit/push next)
+- **Pheromone Score (MERGE12 incremental)**:
+   - Implementation signal density: 9/10
+   - Non-overwrite merge compliance: 10/10
+   - Dedupe/conflict clarity: 8/10
+   - Artifact concreteness: 10/10
+   - Finalization restraint: 10/10
+   - **TOTAL**: 47/50
+
+## REDUNDANCY NOTES (MERGE12 vs prior merges)
+- **MERGE11 already captured architecture + plan**; MERGE12 is execution delta only (module implementation started).
+- **MERGE9 described event-sourced continuity concepts**; MERGE12 adds concrete modular kernel files that operationalize the same direction.
+- **MERGE10/11 flagged status-authority conflict**; MERGE12 does not resolve it because this is not final merge authority.
+
+## MERGE CONFLICT FLAGS
+- **MERGE_CONFLICT:STATUS_AUTHORITY** — file header still says `CLOSED` while merge stream remains active through MERGE12.
+- **MERGE_CONFLICT:PARALLEL_TREE_NOISE** — unrelated modified file in `net-tiger-assessment` coexists in working tree; excluded from MERGE12 commit scope.
+
+## STANDBY NOTE
+- MERGE12 append complete.
+- No overwrite performed.
+- No COLD-START mutation.
+- Ready for non-final merge commit + push.
