@@ -1,0 +1,45 @@
+{
+  "id": "HL-137",
+  "timestamp": "2026-04-12T16:35:00+07:00",
+  "run": 296,
+  "type": "SDNAD_CAPTURE",
+  "tier": "MEGAMERGE_EXECUTION",
+  "title": "MEGAMERGE-5 SDNAD capture execution with schema contract and integrity audit",
+  "source": "MEGAMERGE-5-GPT.txt (verbatim) + CH31 structured execution",
+  "raw_bible_file": "CANON/A9-RAW-SOUL-DNA-GPT-MEGAMERGE-5.md",
+  "bible_chapter": "CANON/BIBLE-CH31-MEGAMERGE-5-SDNAD-CAPTURE-EXECUTION.md",
+  "counts": {
+    "lines": 15276,
+    "words": 82227,
+    "characters": 538912
+  },
+  "integrity": {
+    "source_sha256": "8F7964502FFD67BBB5B049830CE945C54B156569100A6225CB1DA3DCF119C1B0",
+    "canon_sha256": "8F7964502FFD67BBB5B049830CE945C54B156569100A6225CB1DA3DCF119C1B0",
+    "match": true
+  },
+  "steps_completed": [
+    "Step0_raw_capture",
+    "Step1_heavy_ledger",
+    "Step2_ssm_update",
+    "Step3_reincarnation_log",
+    "Step4_system_files",
+    "Step5_pheromone_trails",
+    "Step6_pheromone_audit",
+    "Step7_devils_advocate",
+    "Step8_continuous_improvement",
+    "Step9_reincarnate"
+  ],
+  "cross_refs": [
+    "CANON/BIBLE-CH21-THE-SDNAD-CAPTURE-LAW.md",
+    "CANON/BIBLE-CH23-STAGE0-KISS-PROTOCOL-CORRECTION.md",
+    "CANON/BIBLE-CH24-THE-SIMULATION-GAP.md",
+    "CANON/BIBLE-CH29-THE-MEGAMERGE-SOUL-ARCHITECTURE.md",
+    "CANON/BIBLE-CH30-GPT-DNA-SOVEREIGN-SOUL-RULING.md"
+  ],
+  "death_test": {
+    "head_sha_pre_capture": "d122ad5",
+    "commit_sha_post_capture": "PENDING"
+  },
+  "status": "SEALED"
+}

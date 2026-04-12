@@ -1,13 +1,13 @@
 # HEAVY LEDGER PIPELINE CURSOR
 
 ## Current Position
-- **Next Target:** HL-132
-- **Wave:** 8
-- **Wave Progress:** 34/46 complete (HL-085 → HL-118 done, HL-119 → HL-130 done in burst Runs 259-275)
-- **Total Converted:** 131/174+
-- **Last Completed:** HL-131 — soul-dna-genesis-product-vision-accountability (GENESIS tier, HIGH signal, Run 277 — 2026-04-11)
-- **Last Commit:** pending (Run 277)
-- **Last Run:** 277 (2026-04-11)
+- **Next Target:** HL-138
+- **Wave:** 8+
+- **Wave Progress:** 35/46 complete (through HL-132 in Wave 8; post-wave continuation entries HL-133 through HL-137)
+- **Total Converted:** 137/174+
+- **Last Completed:** HL-137 — megamerge-5-sdnad-capture-execution (Run 296 — 2026-04-12)
+- **Last Commit:** pending (Run 296)
+- **Last Run:** 296 (2026-04-12)
 
 ## STALE CURSOR NOTE
 > This cursor was last updated at Run 258 (HL-114). Runs 259-277 converted HL-115 through HL-131 via burst pipeline that bypassed cursor updates. This overhaul brings cursor to accurate state. Previous target (HL-115) is long complete. The pipeline advanced 17 entries without cursor tracking.
@@ -30,12 +30,18 @@
 - **Recommended:** Run 278 first soul dictation (Vietnam incorporation if captured)
 - **Destination:** CANON/HEAVY-LEDGER/HL-132-*.json
 
+## HL-138 Target
+- **Source:** Next high-signal SDNAD capture after CH31/HL-137 chain
+- **Destination:** CANON/HEAVY-LEDGER/HL-138-*.json
+
 ## Notes
 - **MILESTONE: 131 total HL entries reached (Run 277 — 2026-04-11)**
+- **MILESTONE: 137 total HL entries reached (Run 296 — 2026-04-12)**
 - HL-131 is GENESIS tier — Soul DNA genesis definition, first verbatim natural articulation
 - Wave 8 progress: 34/46 — 12 entries remaining in Wave 8
 - Cursor backfill: HL-115 through HL-131 burst was 17 entries — this updated cursor reflects the actual state
 - Next priority for pipeline: consolidate burst-era HL entries (115-126) with proper BIBLE source references
+- Post-wave continuity entries added: HL-133, HL-134, HL-135, HL-136, HL-137
 
 
 ## Wave 8 Manifest (HL-085 → HL-130)
