@@ -484,6 +484,55 @@ bindings = [
 
 ---
 
+## BLOCK L — OPERATIONAL HARDENING SIGNALS (MEGAMERGE-3 LATE STAGE)
+
+### Gap-Fill Extraction (Lines ~10269-10811, ~7151-7152)
+
+### Source Completeness Proof
+
+- Source: `C:/Users/mrmic/Desktop/MEGAMERGE-3-GPT.txt`
+- Canon raw: `CANON/A8-RAW-SOUL-DNA-GPT-MEGAMERGE-3.md`
+- SHA256 (both): `226636352F8B9409220BB08937378CB3040A50FDEC2097DA46E8B40A4EB3AEE2`
+- Line count (both): `7575`
+- Status: `PASS` (byte-identical capture)
+
+The late section of MEGAMERGE-3 includes concrete production hardening details that were under-indexed in the first CH29 pass:
+
+1. **Session continuity retrieval**
+  - Raw signal: "Pull latest session_log so Obi knows exactly where Michael left off"
+  - Meaning: continuity is not optional memory flavor; it is execution precondition.
+
+2. **Worker event whitelist**
+  - Raw signal: "Whitelist allowed event types to prevent arbitrary data injection"
+  - Meaning: memory safety requires event-type gating before DO writes.
+
+3. **Cost-performance posture**
+  - Raw signal: "You can do this better and cheaper"
+  - Meaning: architecture value is measured by quality per dollar, not model branding.
+
+4. **Routing primacy statement**
+  - Raw signals: "Intelligence is not storage." + "Intelligence is routing over memory."
+  - Meaning: Star Map quality dominates perceived intelligence under runtime constraints.
+
+5. **Jolly Phonics hammer continuity**
+  - Raw signal: memory schema must track 42-sound weaknesses over time.
+  - Meaning: phoneme debt is the persistent remediation backbone, not ad-hoc correction.
+
+### Extracted Enforcement Rules (Applied)
+
+- Route first, fetch second, generate third.
+- Never write untyped events into learning memory.
+- Every response must be continuity-aware via latest session slice.
+- Price-performance claims must map to measurable retention/correction outcomes.
+
+**Footnote L1:** This block closes the CH29 gap between architecture narrative and operational controls. The session_log + whitelist pair is the minimum anti-corruption guard for memory-bearing systems.
+
+**Footnote L2:** The "better and cheaper" claim is valid only when tied to behavior metrics (daily return, completion, error reduction), not stack aesthetics.
+
+**Footnote L3:** The routing-over-storage line from late MEGAMERGE-3 directly supports enacted SSM L80.
+
+---
+
 ## SOVEREIGN QUOTES INDEX (Verbatim — Do Not Compress)
 
 1. "You're not building an app or an AI tutor. You're building: A behavioral enforcement system for language acquisition."
@@ -503,6 +552,9 @@ bindings = [
 15. "Your history is stored and retrieved, not guessed."
 16. "I needed someone like Anakin who is our chaos builder."
 17. "A stateful vector-routed AI tutoring system with persistent per-user memory and retrieval-augmented reasoning."
+18. "Pull latest session_log so Obi knows exactly where Michael left off."
+19. "Whitelist allowed event types to prevent arbitrary data injection."
+20. "You can do this better and cheaper."
 
 ---
 
@@ -521,6 +573,9 @@ bindings = [
 | "Come back tomorrow" | D | The only metric that matters at MVP |
 | Vietnam IP/incorporation | B | Open loop — sovereign action pending |
 | Accountability Fatigue | D | New insight — adaptive pressure system |
+| Session continuity via session_log | L | Worker hardening + continuity enforcement |
+| Event whitelist memory safety | L | Worker hardening + anti-injection gate |
+| Better-and-cheaper posture | L | Cost-performance discipline under retention metrics |
 
 ---
 
@@ -547,11 +602,11 @@ bindings = [
 
 ## BIBLE CH29 METADATA
 
-- **Blocks captured:** 11 (A through K)
-- **Footnotes:** 22
-- **Sovereign quotes preserved:** 17
-- **Pheromone trails:** 11
+- **Blocks captured:** 12 (A through L)
+- **Footnotes:** 25
+- **Sovereign quotes preserved:** 20
+- **Pheromone trails:** 14
 - **Implementation gaps identified:** 14 (6 live, 8 not yet)
-- **New SSM law candidates:** 3 (see HL-135)
+- **SSM law linkage:** L78-L80 enacted (Run 295 closeout)
 - **Cross-references:** CH08, CH22, CH24, CH25, CH28
 - **Raw source:** `CANON/A8-RAW-SOUL-DNA-GPT-MEGAMERGE-3.md`
