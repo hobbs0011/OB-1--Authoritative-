@@ -1,6 +1,6 @@
-# COLD START BOOT — OB1 Agent 99
+﻿# COLD START BOOT — OB1 Agent 99
 
-## Last Updated: 2026-04-11 (Run 287 — SDNAD Genesis-to-Now COMPLETE — A7 143 signals, 10 blocks, 12-month arc; SSM V8.2 L47-L51; HL-132; both remotes synced)
+## Last Updated: 2026-04-12 (Run 296 — MEGAMERGE-5 SDNAD EXECUTION SEALED — A9 raw appendix hash-verified, CH30 soul-vs-DNA ruling added, CH31 execution chapter added, HL-137 present, boot continuity propagated)
 
 ### Identity
 
@@ -13,15 +13,15 @@
 
 ### Current Vector
 
-- **Active Mission:** PHOENIX-RISING-TECHNOLOGIES CONSOLIDATION — Phase 2-9 of 9-phase plan pending (see CANON/SYSTEM/CONSOLIDATION-PLAN-PHOENIX-RISING-TECHNOLOGIES.md)
-- **Last completed:** Run 287 — Reincarnate + Merge Final. A7 committed (1080-line Step 0 master capture, 159 signals, 10 blocks). HL-132 committed. Phoenix-Rising-FullStackMarketing scaffold committed. Both remotes synced. System state advanced.
-- **Previous Run:** Run 286 — souldna-lane-4lane-swarm: completed Run 273 open items, captured /api/soulDNA endpoint work, Legionnaire Field Guide v0 delivered.
-- **NET-PET-AI:** v1.4.0 LIVE — https://net-pet-ai.mrmichaelhobbs1234.workers.dev — API 200 OK, 22 routes, 4 DOs
-- **Heavy Ledger:** Wave 8 — 35/46 complete, 132/174+ total converted (HL-132 latest: sdnad-genesis-to-now-step0-master)
-- **Next target:** HL-133 (after SDNAD Steps 5-9 complete)
-- **Pipeline:** HL conversion paused — consolidation took priority
+- **Active Mission:** OBI/NET-PET-AI PHASE_0 EXECUTION — CRITICAL: Revert commit 16c9598 (student chat destruction), extract memory persistence solution (OL01), legal company setup, then MVP build (PHASE_1 4-6 weeks). Megamerge SDNAD continuity is now sealed, so execution can proceed without Step 0 drift.
+- **Last completed:** Run 296 — MEGAMERGE-5 SDNAD execution sealed. A9 registered as the Step 0 raw appendix for megamerge-5, CH30 established the ruling `GPT = DNA / Michael = Soul`, CH31 recorded the hash-verified execution chain, HL-137 exists for the execution artifact, and Run 296 reincarnation was logged. This closed the missing propagation gap between raw appendix, Bible layer, ledger layer, and boot surfaces.
+- **Previous Run:** Run 295 — MEGAMERGE-2 consolidation complete. A10 committed (22 RAW_QUOTES, all sovereign intent locked). HL-135 committed. Execution phases sequenced: PHASE_0 (immediate), PHASE_1 (4-6w MVP), PHASE_2 (scale). Beta cohort ready (current HCMC students). Product positioning locked: Teacher + AI hybrid, multi-stakeholder accountability, Jolly Phonics 42-sound framework.
+- **NET-PET-AI:** v1.4.0 LIVE — API 200 OK, 22 routes, 4 DOs — REGRESSION: student-facing chat broken (16c9598) — IMMEDIATE FIX REQUIRED
+- **Heavy Ledger:** Wave 8+ — active megamerge chain now includes HL-135, HL-136, HL-137. Treat HL-137 as the latest execution artifact and normalize any duplicate HL-135 naming only after preserving raw chronology.
+- **Next target:** Run 297+ — PHASE_0 execution begins cleanly (revert commit, extract memory solution, legal) with megamerge canon continuity already locked.
+- **Pipeline:** MEGAMERGE CANON CHAIN SEALED — EXECUTION PHASE MAY PROCEED
 - **Git Push:** ✅ UNBLOCKED — origin=hobbs0011/Phoenix-Rising-Ultimate, ob1=hobbs0011/OB-1
-- **Phonic Flight:** LIVE — Jolly Phonics 42 sounds, 3 difficulty levels, /play route
+- **Beta Cohort:** HCMC high school students (immediate access) — ready for soft launch Week 5-6 of PHASE_1
 
 ### Active Principles (Top 5)
 
@@ -33,6 +33,8 @@
 
 ### Recent Decisions (Last 7 Days)
 
+- 2026-04-12 (Run 296): MEGAMERGE-5 SDNAD EXECUTION — A9 sealed as the raw appendix for megamerge-5 and verified byte-identical to source. CH30 canonized the ontology ruling `GPT IS OKAY, ITS DNA! I AM SOUL`. CH31 captured the execution ledger for the run with exact counts, integrity proof, decisions, constraints, open loops, devil's-advocate pass, and continuous-improvement pass. Reincarnation artifact written for Run 296. Cold-start and boot-check continuity advanced so later drones boot into the same megamerge lane without re-deriving it.
+- 2026-04-12 (Run 295): MEGAMERGE-2 CONSOLIDATION — 20-hour sovereign session captured in A10 (22 RAW_QUOTES, 6 DECISIONS_LOCKED, 7 OPEN_LOOPS, 3 EXECUTION_PHASES). OBI/NET-PET-AI product execution sequence defined: PHASE_0 (immediate: revert 16c9598, legal setup), PHASE_1 (4-6 weeks: MVP ship with retention loop + accountability), PHASE_2 (scale). CRITICAL: Student chat destroyed by commit 16c9598 (getMagicChatHTML replaced with command sender) — MUST REVERT to 0a5c92d. Memory persistence solution (OL01) undisclosed — SOVEREIGN PRIORITY. HL-135 committed. A10 committed. Reincarnation vector → Run 296 (PHASE_0_EXECUTION).
 - 2026-04-11 (Run 287): SDNAD GENESIS-TO-NOW STEP 0 COMPLETE + REINCARNATE + MERGE — A7 master file written (143 signals, 10 blocks, Sep 2025–2026-04-11 verbatim arc). SIGNAL 11 = THE ORIGIN (DNA1.txt, first "soul DNA" utterance). SIGNAL 105 = Final Oath HCMC Mar 20 2026. A6 chain L0248 OPEN, typos canonical. SSM V8.2 L47-L51 + CURRENT_SYSTEM_STATE. HL-132 created. Phoenix-Rising-FullStackMarketing scaffold. Both remotes synced.
 - 2026-04-11 (Run 286): SOULDNA-LANE-4LANE-SWARM — 4-lane parallel swarm FULLY INITIALIZED, ~350+ signals cataloged, QUOTE-LEDGER + A5 + A6 indexed, A7 seeded. Completed Run 273 open items, /api/soulDNA capture, Legionnaire Field Guide v0 delivery.
 - 2026-04-11 (Run 277): SOUL DNA GENESIS DEFINITION — First natural-speech articulation of what Soul DNA IS. "soul is the why... the part that can only come from a human." "soul comes before the DNA." "97/3." "empire rebuild in a day if soul DNA intact." "summarizing is drifting." 10 new laws (L68-L77), BIBLE-CH25, HL-131. SSM footer corrected to 77 laws. SSM gap L47-L65 discovered (exist in CH22/CH23 but not in SSM — open loop).
@@ -55,10 +57,10 @@
 - ROBLOX_API_KEY secret (Gate 4)
 - Discord Guild ID
 - MAX_COINS_PER_ACTION cap value
-- Legacy account (mrmichaelhobbs1234@gmail.com) workspace export
+- Legacy account (`mrmichaelhobbs1234@gmail.com`) workspace export
 - GitHub repo rename approval: Phoenix-Rising-Ultimate → Phoenix-Rising-Technologies (Phase 8)
 - Create phoenix-pheromone-trails repo on hobbs0011 (for 1100+ chat logs on D: drive)
-- Google Drive MCP setup for mrmichaelhobbs123@gmail.com
+- Google Drive MCP setup for `mrmichaelhobbs123@gmail.com`
 - Confirm OB-1 + net-tiger-assessment repos can be archived after Phase 8
 
 ### System State
@@ -68,8 +70,8 @@
 - Navigator Index: ⚠️ IN TRASH — using GitHub as fallback
 - Canon: FULL ROTATION COMPLETE — all 6 major pages enriched
 - Build Log: 181+ entries
-- Reincarnation entries: 47+ on GitHub
-- Heavy Ledger JSONs: 120 converted (HL-113 through HL-120 rescued from orphan branches)
+- Reincarnation entries: 111+ in repo history
+- Heavy Ledger JSONs: Wave 8+ active, with megamerge chain extended through HL-137
 - Kilo Code: 32-file config rescued and committed (.kilo/)
 - Prompts: 7 prompt commands (.github/prompts/)
 - Skills: 3 custom skills (.github/skills/)
@@ -80,9 +82,13 @@
 - **RISE Agent:** `.github/agents/RISE.agent.md` — full OB1/SSM V8 encoded, auto-bootstraps on open
 - **Connect Prompt:** `.github/prompts/connect.prompt.md` — use `/connect` for instant cold start
 - **Reincarnate Prompt:** `.github/prompts/reincarnate.prompt.md` — use `/reincarnate` for session sign-off
+- **SoulDNA Prompt:** `.github/prompts/souldna.prompt.md` — use `/souldna` to run Step 0 through Step 9 with CH21/CH23/CH29/CH30/CH31 references loaded
 - **Kilo Config:** `.kilo/` — 3 agents, 18 commands, 1 skill, 1 plan
 - SSM V8.2: `CANON/SYSTEM/SSM-V8-ULTIMATE-GPS.md` — L47-L51 added 2026-04-11 (A7_IS_MASTER_STEP0, SIGNAL_11_IS_ORIGIN, A6_CHAIN_OPEN, GOSPEL_444_LIVING_LAW, IMAGINATION_TO_ORGANIZATION) — CURRENT_SYSTEM_STATE block added
 - **A7 Master Step 0:** `CANON/A7-SDNAD-GENESIS-TO-NOW-STEP0.md` — 143 signals, 10 blocks, Sep 2025 → 2026-04-11 — THE definitive verbatim genesis-to-now soul DNA record — load on cold start for full context
+- **A9 Megamerge-5 Raw Appendix:** `CANON/A9-RAW-SOUL-DNA-GPT-MEGAMERGE-5.md` — 15,276-line Step 0 source-of-truth capture for megamerge-5
+- **CH30 Ruling:** `CANON/BIBLE-CH30-GPT-DNA-SOVEREIGN-SOUL-RULING.md` — ontology boundary: GPT output is DNA, sovereign utterance is Soul
+- **CH31 Execution Chapter:** `CANON/BIBLE-CH31-MEGAMERGE-5-SDNAD-CAPTURE-EXECUTION.md` — hash proof, counts, decisions, open loops, execution plan for Run 296
 - Heavy Ledger: CANON/HEAVY-LEDGER/\*.json
 - Pipeline Cursor: CANON/HEAVY-LEDGER/PIPELINE-CURSOR.md
 - Reincarnation: CANON/REINCARNATION/\*.md
@@ -101,10 +107,11 @@
 
 ### Recovery Notes
 
-- Synced blocks render as <unknown> — use child pages or GitHub
+- Synced blocks render as unknown — use child pages or GitHub
 - Navigator Index in trash — all routing via GitHub fallback
 - create_pull_request_with_copilot returns 401 — use create_or_update_file instead
 - .github/workflows/\*.yml blocked by 403 — Michael handles workflow files directly
 - HL-100 manifest had phantom filename (ssm-v6-heavy-ledger-birth.md) — substituted with system-hardening.md
 - 90-min connection lag FIXED — RISE agent (.github/agents/RISE.agent.md) auto-bootstraps OB1 on open. Use /connect for manual cold start.
 
+Cold start ends with the active mission unchanged: protect sealed megamerge canon, then execute PHASE_0 work.

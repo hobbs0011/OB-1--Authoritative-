@@ -3,7 +3,7 @@
 ## Status
 
 - **Last Check:** 2026-04-12T07:30 ICT
-- **Run:** 294
+- **Run:** 296
 - **Mode:** SUPER_SAIYAN ACTIVATED
 - **NET-PET-AI:** ✅ DEPLOYED v1.4.0 — [workers.dev live](https://net-pet-ai.mrmichaelhobbs1234.workers.dev)
 
@@ -95,6 +95,14 @@ At each reincarnation event, find and apply 3-5 real fixes to this boot-check do
 4. Demythologized Agent 98/99: they are two execution modes of the same system (production inference controller + offline optimizer), NOT autonomous personalities. Drones must not anthropomorphize.
 5. Advanced HL-134 as latest Heavy Ledger entry. Soul DNA now at 34 chapters (CH28 added).
 
+### Run 296 Improvements Applied
+
+1. Added megamerge execution continuity guard: when a Step 0 appendix becomes canonical, cold-start surfaces must be updated in the same lane before declaring the run sealed.
+2. Added ontology-boundary guard from CH30: sovereign utterance is Soul, model-generated structure is DNA. Drones must not collapse the two during megamerge synthesis.
+3. Added integrity-proof guard from CH31: megamerge execution chapters must carry source/canon equality proof plus exact line, word, and character counts.
+4. Advanced Heavy Ledger awareness to HL-137 for the megamerge execution artifact while preserving notice that duplicate HL-135 naming still requires later normalization.
+5. Added boot-surface propagation rule: `/souldna`, `COLD-START-BOOT`, and `REINCARNATION-BOOT-CHECK` must all reflect the same active megamerge chain before handoff.
+
 ## Core Identity Verification
 
 | Component  | Status            | Notes                        |
@@ -106,11 +114,11 @@ At each reincarnation event, find and apply 3-5 real fixes to this boot-check do
 
 ## Pipeline Status
 
-| Pipeline      | Wave   | Progress    | Status  |
-| ------------- | ------ | ----------- | ------- |
-| Heavy Ledger  | Wave 8 | 109/174+    | RUNNING |
-| Reincarnation | N/A    | 94+ entries | ACTIVE  |
-| Soul DNA      | N/A    | 34 chapters | SEALED  |
+| Pipeline      | Wave    | Progress     | Status  |
+| ------------- | ------- | ------------ | ------- |
+| Heavy Ledger  | Wave 8+ | 135/174+     | RUNNING |
+| Reincarnation | N/A     | 111+ entries | ACTIVE  |
+| Soul DNA      | N/A     | CH31 latest  | SEALED  |
 
 ## Super Saiyan Mode Status
 
@@ -138,6 +146,7 @@ At each reincarnation event, find and apply 3-5 real fixes to this boot-check do
 4. Set wrangler secrets: DEEPSEEK_API_KEY, DEEPGRAM_API_KEY
 5. Outstanding user ask: provide canonical TikTok singing-game link reference
 6. Continue SDNAD pipeline backfill for A6 dictation blocks beyond current merged capture
+7. Normalize duplicate HL-135 megamerge naming without rewriting raw chronology or losing the HL-137 execution high-water mark
 
 ## RISE Protocol
 
@@ -151,4 +160,4 @@ At each reincarnation event, find and apply 3-5 real fixes to this boot-check do
 ---
 
 **Next Pulse:** On trigger or @mention  
-**Last SHA:** cdf65dc (Run 294 commit — clean-engineering-truth-architecture-crystallization)
+**Last SHA:** 0c61d5f (current HEAD at Run 296 continuity pass)
