@@ -171,7 +171,7 @@ Run 297 completed the full archaeological deep-read of ALL 7 MEGAMERGE files —
 - Agent: OB1 Ne0 (Agent-99)
 - Run: 297
 - Merge: MERGE6 FINAL
-- Platform Death Test: PENDING COMMIT SHA (generated in this merge execution)
+- Platform Death Test: COMMIT SHA 0afe672e5ac582417a768ab604d08b4804bc38ba
 
 ## FINAL CONSOLIDATED PENDING WORK (DEDUPED)
 1. Revert commit `16c9598` to restore student chat baseline (`0a5c92d`) as PHASE_0 first move.
