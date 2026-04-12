@@ -60,6 +60,22 @@
     ],
     'hello': [
       'Hello! Great to meet you. Ready to start the Tiger Assessment? Ask me anything or choose a quick reply below. 🌟'
+    ],
+    'come on': [
+      "It seems like you're feeling frustrated — that's totally okay. 🐯 Hard things feel hard at first.",
+      "Take a breath and let me know what's giving you trouble. Is it recording, a specific section, or something else? I'm here to help."
+    ],
+    'ugh': [
+      "Sounds like you hit a wall — it happens! 🐯 Tell me what's going wrong and we'll sort it out together."
+    ],
+    'this is hard': [
+      "Hard is good — it means you're pushing past your comfort zone. 🐯 What part is tricky? Let me help you through it."
+    ],
+    'i give up': [
+      "Don't give up — Tigers don't quit! 🐯 Tell me where you're stuck and we'll tackle it together."
+    ],
+    'too hard': [
+      "Nothing is too hard with the right support. 🐯 What part is causing the most trouble? Let's break it down step by step."
     ]
   };
 
