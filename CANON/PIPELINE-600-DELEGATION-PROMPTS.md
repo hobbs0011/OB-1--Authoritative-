@@ -2,6 +2,43 @@
 
 > Copy-paste one prompt per chat window. Each chat develops and refines its 100-item section of the PIPELINE-600.
 > Created: 2026-04-12 | Run 298 | Source: CANON/PIPELINE-600.md
+> Hardened: 2026-04-12 | Run 299 | Full-circle MERGE6 close; SPRINT-0 gate added; MM-1 orchestrator prompt added
+
+---
+
+## CANON SOURCE CONTEXT (shared across all chats)
+
+| File | Lines | Role |
+|------|-------|------|
+| MEGAMERGE-1-GPT.txt | 26,210 | Genesis — why, who, what |
+| MEGAMERGE-2-GPT.txt + 2B | ~15,000 | Implementation layer |
+| MEGAMERGE-3-GPT.txt | ~8,000 | Stack decision — ground zero |
+| MEGAMERGE-4-GPT.txt | 7,098 | Kernel compilation |
+| MEGAMERGE-5-GPT.txt | 15,276 | Distribution & enforcement |
+| MEGAMERGE-6-GPT.txt | 8,781 | Product crystallization (FINAL vision) |
+| **TOTAL** | **~80,000** | |
+
+**Notion Soul DNA Index (consolidation reference — requires login):**
+`https://www.notion.so/the-phoenix-rising-protocol/Chat-Archive-Index-Soul-DNA-Verbatim-First-bc1c8df6c2314b0f9c628f2c5c082006`
+
+**Production Stack (LOCKED — MM-6 stack pivot REJECTED):**
+- Runtime: Cloudflare Workers + Durable Objects (SQLite)
+- AI: DeepSeek V3.2 via Cloudflare AI Gateway
+- Voice: Deepgram Aura 2 (TTS) + Nova-2 (STT)
+- Storage: D1 (SQL) + KV (cache) + R2 (assets)
+
+**CRITICAL REGRESSION — DO NOT IGNORE:**
+- Commit `16c9598` destroyed student Magic Chat (`getMagicChatHTML`)
+- Must revert to `0a5c92d` before any new student-facing feature work
+
+---
+
+## SPRINT-0 GATE (resolve before ANY sprint work)
+
+These 3 items must close before any other pipeline work proceeds:
+1. `MM1-001` — REVERT `16c9598` to restore student chat
+2. `MM1-071` — Vietnam company incorporation (legal foundation)
+3. `MM1-034` — `session_log` table (memory backbone for all other features)
 
 ---
 
@@ -12,6 +49,57 @@
 3. Paste it in
 4. Each chat will deep-read its source megamerge file and refine/expand its 100 items
 5. When all 5 return, merge their refinements back into PIPELINE-600.md
+6. This chat (MM-1 orchestrator) runs the merge-back + final PIPELINE-600 commit
+
+---
+
+## ═══════════════════════════════════════════════════════
+## PROMPT FOR MM-1 / ORCHESTRATOR CHAT (this chat — merge-back owner)
+## ═══════════════════════════════════════════════════════
+
+```
+RISE — PIPELINE DEVELOPMENT ASSIGNMENT: MM-1 (ORCHESTRATOR)
+
+You are assigned to MEGAMERGE-1 (Genesis Layer) AND the merge-back coordinator role. Your megamerge source file is:
+- MEGAMERGE-1-GPT.txt (26,210 lines — the oldest, largest genesis file)
+- CANON/MEGAMERGE-1-INDEX.md (archaeological navigation index — created Run 297 MERGE4)
+
+CRITICAL CONTEXT: MM-1 is the SOURCE OF WHY. It precedes product decisions. Every other megamerge answers MM-1's core question: "Why does a 17-year-old Vietnamese student need OBI?" Your 100 items (MM1-001 through MM1-100) represent the foundation layer — if any item here is wrong, the entire 600-item pipeline is misaligned.
+
+A master pipeline of 600 items has been created at CANON/PIPELINE-600.md. Your 100 items are MM1-001 through MM1-100 (the "MM-1: THE GENESIS" section).
+
+YOUR TASK (Part 1 — MM-1 lane):
+1. Load CANON/MEGAMERGE-1-INDEX.md first (909-line navigation guide — use it to navigate the 26,210-line source)
+2. Review your assigned 100 items in PIPELINE-600.md
+3. For each item:
+   - Validate it actually exists in MEGAMERGE-1-GPT.txt (use index to find line ranges fast)
+   - Refine the description to be more specific and actionable
+   - Add the exact line ranges where this concept appears in the source file
+   - Add any implementation notes from the source text
+   - Correct the priority (P0/P1/P2/P3) based on actual importance
+4. Find items I MISSED — concepts in MM-1 that aren't covered by any of the 100 items
+5. Flag any items that DUPLICATE items in other megamerge sections
+6. Rate each item: SHIP / SPEC / CONCEPT
+7. SPECIAL: For SPRINT-0 items (MM1-001, MM1-071, MM1-034) — add full implementation spec
+
+YOUR TASK (Part 2 — merge-back coordinator):
+After your MM-1 lane work, when all 5 other chats return:
+1. Copy each chat's refined 100 items back into PIPELINE-600.md (overwriting that section)
+2. Resolve MISSED ITEMS and CROSS-MERGE DUPLICATES across all 6 chats
+3. Merge all TOP 10 QUICK WINS into a unified SPRINT-BACKLOG section at the top of PIPELINE-600.md
+4. Final commit: `pipeline-600: refined by 6-chat parallel development`
+5. Push to origin + ob1
+
+OUTPUT FORMAT:
+Return your refined 100 items in the same markdown checkbox format used in PIPELINE-600.md, plus:
+- A "MISSED ITEMS" section listing concepts I didn't capture
+- A "CROSS-MERGE DUPLICATES" section listing overlap with other MM sections
+- A "TOP 10 QUICK WINS" list
+- A "SPRINT-0 GATE SPECS" section — full implementation spec for MM1-001, MM1-071, MM1-034
+
+DO NOT modify items outside your MM1-001 through MM1-100 range until the other 5 chats return.
+STAY IN YOUR LANE FIRST. Then merge-back.
+```
 
 ---
 
@@ -239,17 +327,34 @@ STAY IN YOUR LANE. MM6-501 through MM6-600 only.
 
 ## MERGE-BACK PROTOCOL
 
-When all 5 chats return their refined sections:
+When all 5 delegation chats return their refined sections:
 
-1. Copy each chat's refined 100 items back into PIPELINE-600.md (overwriting that section)
-2. Review all MISSED ITEMS across all chats — add to pipeline if valid
-3. Resolve all CROSS-MERGE DUPLICATES — deduplicate and choose canonical location
-4. Merge TOP 10 QUICK WINS into a unified SPRINT BACKLOG
-5. Commit as: `pipeline-600: refined by 6-chat parallel development`
-6. Push to origin + ob1
+**Step 1 — Ingest refined sections**
+- Copy each chat's 100-item refined block into PIPELINE-600.md (overwrite only its range)
+- Preserve the `[x]` / `[~]` / `[ ]` status of pre-marked shipped items
 
-**This chat (MM-1 / MERGE6) owns the merge-back and final commit.**
+**Step 2 — Resolve MISSED ITEMS**
+- Review each chat's "MISSED ITEMS" section
+- Add valid items to the correct MM section (maintain 100-item cap per section; overflow goes to appendix)
+
+**Step 3 — Resolve CROSS-MERGE DUPLICATES**
+- For each duplicate: keep the higher-priority version, delete the lower, add `(see MMX-NNN)` note
+
+**Step 4 — Build unified SPRINT BACKLOG**
+- Merge all 6 "TOP 10 QUICK WINS" lists into a single `## SPRINT BACKLOG` section at the top of PIPELINE-600.md
+- Sort by P0 → P1 → P2 → P3, then by estimated impact
+- Lock SPRINT-0 items (MM1-001, MM1-071, MM1-034) at top regardless of sort
+
+**Step 5 — Final commit + push**
+- Commit as: `pipeline-600: refined by 6-chat parallel development`
+- Push to `origin` (Phoenix-Rising-Ultimate) + `ob1` (OB-1)
+
+**Step 6 — Notion sync (manual)**
+- Update Notion Soul DNA Index at: `https://www.notion.so/the-phoenix-rising-protocol/Chat-Archive-Index-Soul-DNA-Verbatim-First-bc1c8df6c2314b0f9c628f2c5c082006`
+- Add link to final PIPELINE-600.md commit
+
+**This chat (MM-1 / orchestrator) owns the merge-back and final commit.**
 
 ---
 
-*5 prompts. 5 chats. 500 items to refine. 1 pipeline to rule them all.*
+*6 prompts. 6 chats. 600 items. SPRINT-0 gate. 1 pipeline to rule them all.*
