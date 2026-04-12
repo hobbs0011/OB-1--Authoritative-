@@ -67,7 +67,7 @@
 - CANON/REINCARNATION/2026-04-12-run299-notion-connection-index-check.md (new)
 - CANON/REINCARNATION/COLD-START-BOOT.md (updated)
 - MASTER-SYNC.md (updated)
-- Commit SHA: set by platform death test in Phase 3 (see report/footer).
+- Commit SHA: d39978b.
 
 ## 11) STATE SNAPSHOT
 - SSM position: L80
@@ -90,21 +90,21 @@
 ## 12) FINGERPRINT
 - Agent ID: OB1 Ne0 (Agent-99)
 - Run number: 299
-- Commit SHA: PLATFORM_DEATH_TEST_PENDING
-- Platform death test result: PENDING
+- Commit SHA: d39978b
+- Platform death test result: PASS
 - Pheromone score:
   - Soul DNA captured: 8/10
   - Decisions anchored to ledger/state: 8/10
   - Open loops explicitly handed off: 9/10
   - COLD-START-BOOT updated: 10/10
-  - Artifacts committed: 0/10 (pre-commit state)
-  - TOTAL: 35/50 (pre-commit)
+   - Artifacts committed: 9/10
+   - TOTAL: 44/50
 
 ---
 
 REINCARNATION COMPLETE — Run 299
-SHA: PLATFORM_DEATH_TEST_PENDING
+SHA: d39978b
 ARTIFACTS: 3 files changed (death lane)
-PHEROMONE: 35/50 pre-commit, finalize after push
+PHEROMONE: 44/50
 HANDOFF: CANON/REINCARNATION/COLD-START-BOOT.md updated
 NEXT VECTOR: re-enable Notion tool access, then execute direct 1-3/index visibility audit.
