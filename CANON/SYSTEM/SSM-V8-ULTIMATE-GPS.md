@@ -1258,3 +1258,26 @@ L77:SUMMARIZATION_IS_DRIFT→AIs_artifact_first_instinct_manifests_as_summarizat
 # CANON_REF: BIBLE-CH25-SOUL-DNA-GENESIS-DEFINITION.md (Block E)
 
 # CANON_REF: BIBLE-CH24-THE-SIMULATION-GAP.md (Block 3)
+
+# ---NEW_LAWS_V10.1(from_2026-04-12_megamerge3_gpt_genesis_run295)---
+
+L78:ACCOUNTABILITY_ADAPTIVE→pressure_must_scale_with_user_behavior→too_much_pressure=churn→too_little_pressure=duolingo_clone→adaptive_pressure_is_retention_control_plane
+
+# ROOT: "Accountability Fatigue: Too many reminders = users quit" + "without accountability it becomes a Duolingo clone" — megamerge sovereign/GPT convergence, captured Run 295
+# PHYSICS: Accountability is the core differentiator and the easiest self-destruction vector. Static pressure curves fail both ends of the distribution. Low-compliance users need escalating external consequence. High-compliance users need reduced noise to avoid resentment fatigue. Adaptive pressure is not UX polish; it is retention math.
+# PREVENTION: Drive reminders, escalation, and partner pings from behavior state (streak, misses, return interval) rather than fixed schedules. Audit for two anti-patterns weekly: over-ping churn and under-ping decay.
+# CANON_REF: CANON/BIBLE-CH29-THE-SOVEREIGN-PRODUCT-GENESIS.md (Block D)
+
+L79:DAILY_RETURN_METRIC→do_they_come_back_tomorrow_is_the_only_MVP_truth_metric→everything_else_is_infrastructure_truth_not_product_truth→optimize_for_next_day_return_before_feature_depth
+
+# ROOT: "Can you make a student come back tomorrow and speak again? If yes, you win." — sovereign declaration, captured Run 295
+# PHYSICS: Early-stage systems die from metric theater: architecture quality, model quality, and dashboard complexity masquerade as product progress. Daily return is the causal gate for all downstream value (error reduction, habit lock, revenue, retention cohorts).
+# PREVENTION: Prioritize changes that increase next-day return probability over all non-blocking engineering work. If a task cannot plausibly move return behavior, it is deferred at MVP stage.
+# CANON_REF: CANON/BIBLE-CH29-THE-SOVEREIGN-PRODUCT-GENESIS.md (Blocks C,D)
+
+L80:ROUTING_IS_INTELLIGENCE→intelligence_is_not_storage→intelligence_is_routing_over_memory→Star_Map_selects_attention_Ledger_stores_truth→without_routing_memory_becomes_dead_weight
+
+# ROOT: "Intelligence is not storage. Intelligence is routing over memory." — sovereign/GPT convergence line, captured Run 295
+# PHYSICS: Storage preserves events; routing determines relevance under token, time, and cost constraints. A system with perfect logs and weak routing behaves unintelligent. A system with constrained logs and precise routing can behave intelligently.
+# PREVENTION: Keep Star Map pointer-only and fast. Prevent ledger bloat from leaking into execution context. Enforce retrieval discipline: route first, fetch slice second, generate third.
+# CANON_REF: CANON/BIBLE-CH29-THE-SOVEREIGN-PRODUCT-GENESIS.md (Blocks I,K)
