@@ -6,8 +6,12 @@
 
 import { securityMiddleware, sanitizeInput, validateStudentId } from './security.js';
 import { extractWeaknesses, buildWeaknessPrompt, buildReEntryPrompt, buildRewardSignals, buildRewardPrompt } from './memory-brain.js';
+import { lookup, buildPromptContext, selectMode, getModePrompt, computeWriteback, driftDetect, createSnapshot, storeSnapshot, rehydrate } from './star-map.js';
+import { detectErrors, selectDrills } from './phoneme-engine.js';
+import { runSessionCompression } from './session-compress.js';
+import { PHONICS_DRILLS } from './phonics-drills.js';
 
-const VERSION = "1.4.0";
+const VERSION = "1.5.0";
 
 // ── Obi System Prompt (Soul DNA — verbatim first, never dilute) ───────────────
 const OBI_SYSTEM = `You are OBI — the AI interface of the Phoenix Rising Protocol, built by Michael Hobbs.
@@ -165,6 +169,18 @@ export default {
 
     return env.ASSETS.fetch(request);
   },
+
+  async scheduled(event, env) {
+    const hour = new Date(event.scheduledTime).getUTCHours();
+    if (hour % 6 === 0) {
+      try {
+        const report = await runStarMapRecalibration(env);
+        console.log(`[CRON] Star Map recalibration: ${JSON.stringify(report)}`);
+      } catch (err) {
+        console.log(`[CRON] Star Map recalibration error: ${err.message}`);
+      }
+    }
+  },
 };
 
 // ── API Router ────────────────────────────────────────────────────────────────
@@ -179,6 +195,9 @@ async function handleAPI(path, request, env, url) {
 
   // Chat — Obi + Ledger context injection
   if (path === "/api/chat" && method === "POST") { const body = await request.json(); return handleChat(body, env); }
+  if (path === "/api/route" && method === "POST") { const body = await request.json(); return handleRoute(body, env); }
+  if (path === "/api/phoenix/snapshot" && method === "POST") { const body = await request.json(); return handlePhoenixSnapshot(body, env); }
+  if (path === "/api/phoenix/reset" && method === "POST") { const body = await request.json(); return handlePhoenixReset(body, env); }
 
   // TTS
   if (path === "/api/tts" && method === "POST") { const body = await request.json(); return handleTTS(body, env); }
@@ -189,6 +208,9 @@ async function handleAPI(path, request, env, url) {
   // Memory
   if (path === "/api/memory" && method === "POST") { const body = await request.json(); return handleMemorySave(body, env); }
   if (path === "/api/memory" && method === "GET") { return handleMemoryGet(url.searchParams.get("studentId") || "", env); }
+  if (path === "/api/session/compress" && method === "POST") { const body = await request.json(); return handleSessionCompress(body, env); }
+  if (path === "/api/fluency" && method === "GET") { return handleFluency(url.searchParams.get("studentId") || "", env); }
+  if (path === "/api/phoneme/analyze" && method === "POST") { const body = await request.json(); return handlePhonemeAnalyze(body, env); }
 
   // Progress + Weakness tracking
   if (path === "/api/progress" && method === "GET") { return handleProgress(url.searchParams.get("studentId") || "", env); }
@@ -211,6 +233,14 @@ async function handleAPI(path, request, env, url) {
   // Cryptographic Immutable Ledger
   if (path === "/api/ledger/append" && method === "POST") { const body = await request.json(); return handleLedgerAppend(body, env); }
   if (path === "/api/ledger/history" && method === "GET") { return handleLedgerHistory(url.searchParams.get("studentId") || "", parseInt(url.searchParams.get("limit") || "50"), env); }
+  if (path === "/api/ledger/range" && method === "GET") {
+    return handleLedgerRange(
+      url.searchParams.get("studentId") || "",
+      parseInt(url.searchParams.get("start") || "0", 10),
+      parseInt(url.searchParams.get("end") || "0", 10),
+      env
+    );
+  }
   if (path === "/api/ledger/verify" && method === "GET") { return handleLedgerVerify(url.searchParams.get("studentId") || "", env); }
 
   // Session Log (off-day pipeline core — Michael logs class, Obi inherits it)
@@ -435,8 +465,19 @@ async function handleChat(body, env) {
   }
 
   const hasSystem = messages.some(m => m.role === "system");
+  const userMsg = messages.filter(m => m.role === "user").pop()?.content || "";
+  
   if (!hasSystem) {
-    messages.unshift({ role: "system", content: OBI_SYSTEM + ledgerContext + sessionContext + weaknessContext + reEntryContext + rewardContext });
+    // ── Star Map routing: retrieve top matching memory pointers ────
+    let starMapContext = "";
+    if (studentId !== "anonymous" && userMsg) {
+      const inputTags = extractSemanticTags(userMsg, "");
+      if (inputTags.length > 0) {
+        const routeResult = await queryStarMapRoutes(studentId, inputTags, env);
+        starMapContext = buildStarMapPromptContext(routeResult.routes || []);
+      }
+    }
+    messages.unshift({ role: "system", content: OBI_SYSTEM + ledgerContext + sessionContext + weaknessContext + reEntryContext + rewardContext + starMapContext });
   }
 
   const res = await fetch("https://api.deepseek.com/chat/completions", {
@@ -448,23 +489,39 @@ async function handleChat(body, env) {
   if (!res.ok) { const errText = await res.text(); return json({ error: `DeepSeek ${res.status}`, detail: errText }, 502); }
   const data = await res.json();
   const reply = data.choices?.[0]?.message?.content || "Say that again?";
+  const skills = studentId !== "anonymous" ? await loadStudentSkills(studentId, env) : {};
 
   // ── Auto-write every exchange to the Cryptographic Immutable Ledger ───────
-  const userMsg = messages.filter(m => m.role === "user").pop()?.content || "";
   if (studentId !== "anonymous" && env.LEDGER && userMsg) {
     const payload = JSON.stringify({ user: userMsg, obi: reply });
     appendToLedger(studentId, "chat_exchange", payload, env).catch(() => {});
+
+    // ── Star Map update: write semantic tags from this exchange (fire-and-forget) ────
+    const semanticTags = extractSemanticTags(userMsg, reply);
+    if (semanticTags.length > 0) {
+      updateStarMapAfterChat(studentId, semanticTags, env).catch(() => {});
+    }
   }
 
-  // ── Memory Brain: Extract weaknesses from OBI's correction and store ─────
+  // ── Probabilistic phoneme detection + weakness writeback ─────────────────
+  const detection = userMsg
+    ? detectErrors(userMsg, reply, skills)
+    : { errors: [], summary: { totalErrors: 0, topCategory: null, wasCorrect: true } };
+
+  // Keep legacy extraction as a fallback signal.
   if (studentId !== "anonymous" && env.PROFILES) {
-    const detected = extractWeaknesses(reply);
-    if (detected.length > 0) {
+    const fallbackDetected = extractWeaknesses(reply);
+    const phonemeWeaknesses = detection.errors.map(e => ({
+      specific: `${e.target}_as_${e.substitution}`,
+      category: e.category,
+    }));
+    const merged = [...phonemeWeaknesses, ...fallbackDetected];
+    if (merged.length > 0) {
       const profileStub = env.PROFILES.get(env.PROFILES.idFromName(studentId));
       profileStub.fetch(new Request("https://do/weakness/update", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ studentId, weaknesses: detected }),
+        body: JSON.stringify({ studentId, weaknesses: merged }),
       })).catch(() => {});
     }
   }
@@ -479,7 +536,22 @@ async function handleChat(body, env) {
     })).catch(() => {});
   }
 
-  return json({ reply, studentId, ledgerLoaded: !!ledgerContext, sessionLoaded: !!sessionContext, weaknessLoaded: !!weaknessContext, reEntryMode: !!reEntryContext });
+  const fluency = studentId !== "anonymous" ? await computeFluencyScore(studentId, env) : null;
+
+  return json({
+    reply,
+    studentId,
+    ledgerLoaded: !!ledgerContext,
+    sessionLoaded: !!sessionContext,
+    weaknessLoaded: !!weaknessContext,
+    reEntryMode: !!reEntryContext,
+    phoneme: {
+      totalErrors: detection.summary.totalErrors,
+      topCategory: detection.summary.topCategory,
+      topErrors: detection.errors.slice(0, 3),
+    },
+    fluency,
+  });
 }
 
 // ── TTS (Deepgram Aura) ───────────────────────────────────────────────────────
@@ -527,6 +599,157 @@ async function handleMemoryGet(studentId, env) {
   if (!studentId) return json({ memory: [] });
   const stub = env.SESSIONS.get(env.SESSIONS.idFromName(studentId));
   return stub.fetch(new Request("https://do/memory/get"));
+}
+
+async function handleSessionCompress(body, env) {
+  const studentId = body.studentId || "";
+  if (!studentId) return json({ error: "studentId required" }, 400);
+  const idCheck = validateStudentId(studentId);
+  if (!idCheck.valid) return json({ error: idCheck.error }, 400);
+
+  const memoryKeep = Math.max(10, Math.min(200, parseInt(body.memoryKeep || "30", 10)));
+  const eventsKeep = Math.max(20, Math.min(500, parseInt(body.eventsKeep || "100", 10)));
+
+  const stub = env.SESSIONS.get(env.SESSIONS.idFromName(studentId));
+  return stub.fetch(new Request("https://do/memory/compress", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ memoryKeep, eventsKeep }),
+  }));
+}
+
+async function handlePhonemeAnalyze(body, env) {
+  const studentId = body.studentId || "";
+  const studentText = sanitizeInput((body.studentText || "").slice(0, 500));
+  const correctedText = sanitizeInput((body.correctedText || "").slice(0, 500));
+  if (!studentText || !correctedText) {
+    return json({ error: "studentText and correctedText required" }, 400);
+  }
+
+  const skills = studentId ? await loadStudentSkills(studentId, env) : {};
+  const detection = detectErrors(studentText, correctedText, skills);
+  const drills = selectDrills(skills, PHONICS_DRILLS, 5);
+
+  if (studentId && env.PROFILES && detection.errors.length > 0) {
+    const profileStub = env.PROFILES.get(env.PROFILES.idFromName(studentId));
+    const weaknesses = detection.errors.map(e => ({
+      specific: `${e.target}_as_${e.substitution}`,
+      category: e.category,
+    }));
+    profileStub.fetch(new Request("https://do/weakness/update", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ studentId, weaknesses }),
+    })).catch(() => {});
+  }
+
+  return json({
+    studentId: studentId || "anonymous",
+    analysis: detection,
+    suggestedDrills: drills,
+  });
+}
+
+async function handleFluency(studentId, env) {
+  if (!studentId) return json({ error: "studentId required" }, 400);
+  const idCheck = validateStudentId(studentId);
+  if (!idCheck.valid) return json({ error: idCheck.error }, 400);
+  const fluency = await computeFluencyScore(studentId, env);
+  return json({ studentId, fluency });
+}
+
+async function loadStudentSkills(studentId, env) {
+  if (!studentId || !env.PROFILES) return {};
+  try {
+    const profileStub = env.PROFILES.get(env.PROFILES.idFromName(studentId));
+    const wpRes = await profileStub.fetch(new Request("https://do/weakness/get"));
+    const wpData = await wpRes.json();
+    const map = {};
+    for (const w of (wpData.weakPoints || [])) {
+      const category = w.category || "general";
+      const errorCount = w.error_count || 0;
+      const confidence = Math.max(0.1, Math.min(0.95, 1 - Math.min(errorCount, 10) / 12));
+      map[category] = {
+        errorCount,
+        correctCount: 0,
+        confidence,
+        error_rate: Math.max(0, Math.min(1, errorCount / 10)),
+        lastErrorTs: w.last_seen || 0,
+      };
+    }
+    return map;
+  } catch (_) {
+    return {};
+  }
+}
+
+async function computeFluencyScore(studentId, env) {
+  let accuracy = 0;
+  let retention = 0;
+  let repetitionNeeded = 0;
+
+  if (env.LEDGER) {
+    try {
+      const stub = env.LEDGER.get(env.LEDGER.idFromName(studentId));
+      const res = await stub.fetch(new Request("https://do/history?limit=50"));
+      const data = await res.json();
+      const entries = data.entries || [];
+      const corrections = entries.filter(e => e.event_type === "feedback");
+      if (corrections.length > 0) {
+        const withFixes = corrections.filter(e => {
+          try {
+            const p = JSON.parse(e.payload || "{}");
+            return typeof p.feedback === "string" && p.feedback.length > 0;
+          } catch {
+            return false;
+          }
+        }).length;
+        accuracy = Math.max(0, 1 - withFixes / Math.max(corrections.length, 1));
+      }
+    } catch (_) {}
+  }
+
+  if (env.PETS) {
+    try {
+      const petStub = env.PETS.get(env.PETS.idFromName(studentId));
+      const petRes = await petStub.fetch(new Request("https://do/state"));
+      const petData = await petRes.json();
+      const streak = petData.state?.streak || 0;
+      retention = Math.min(streak / 7, 1);
+    } catch (_) {}
+  }
+
+  if (env.PROFILES) {
+    try {
+      const profileStub = env.PROFILES.get(env.PROFILES.idFromName(studentId));
+      const wpRes = await profileStub.fetch(new Request("https://do/weakness/get"));
+      const wpData = await wpRes.json();
+      const weak = wpData.weakPoints || [];
+      if (weak.length > 0) {
+        const avgErrorCount = weak.reduce((s, w) => s + (w.error_count || 0), 0) / weak.length;
+        repetitionNeeded = Math.min(avgErrorCount / 5, 1);
+      }
+    } catch (_) {}
+  }
+
+  const rawScore = accuracy + retention - repetitionNeeded;
+  const normalized = Math.max(0, Math.min(1, (rawScore + 1) / 2));
+
+  return {
+    formula: "accuracy + retention - repetition_needed",
+    components: {
+      accuracy: round2(accuracy),
+      retention: round2(retention),
+      repetition_needed: round2(repetitionNeeded),
+    },
+    raw: round2(rawScore),
+    score_0_100: Math.round(normalized * 100),
+    status: normalized >= 0.75 ? "TIGER" : normalized >= 0.5 ? "WOLF" : normalized >= 0.3 ? "CAT" : "MOUSE",
+  };
+}
+
+function round2(n) {
+  return Math.round((n || 0) * 100) / 100;
 }
 
 // ── Progress ─────────────────────────────────────────────────────────────────
@@ -593,8 +816,32 @@ async function handleFeedback(body, env) {
   if (!res.ok) return json({ error: `DeepSeek ${res.status}` }, 502);
   const data = await res.json();
   const feedback = data.choices?.[0]?.message?.content || "Feedback generation failed";
+  const skills = body.studentId ? await loadStudentSkills(body.studentId, env) : {};
+  const detection = detectErrors(studentText, feedback, skills);
+
+  if (body.studentId && env.PROFILES && detection.errors.length > 0) {
+    const profileStub = env.PROFILES.get(env.PROFILES.idFromName(body.studentId));
+    const weaknesses = detection.errors.map(e => ({
+      specific: `${e.target}_as_${e.substitution}`,
+      category: e.category,
+    }));
+    profileStub.fetch(new Request("https://do/weakness/update", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ studentId: body.studentId, weaknesses }),
+    })).catch(() => {});
+  }
+
   if (body.studentId && env.LEDGER) appendToLedger(body.studentId, "feedback", JSON.stringify({ input: studentText, feedback }), env).catch(() => {});
-  return json({ feedback });
+  return json({
+    feedback,
+    phoneme: {
+      totalErrors: detection.summary.totalErrors,
+      topCategory: detection.summary.topCategory,
+      topErrors: detection.errors.slice(0, 3),
+      suggestedDrills: selectDrills(skills, PHONICS_DRILLS, 3),
+    },
+  });
 }
 
 // ── NET Pet ───────────────────────────────────────────────────────────────────
@@ -1038,6 +1285,86 @@ async function handleCommandHistory(limit, env) {
   return stub.fetch(new Request(`https://do/history?limit=${Math.min(limit, 200)}`));
 }
 
+// ── Star Map Semantic Engine ───────────────────────────────────────────────────
+
+// Extract semantic tags from a conversational exchange
+function extractSemanticTags(input, response) {
+  const tags = [];
+  const combined = (input + " " + response).toLowerCase();
+
+  // 1. Phonics risk patterns (Vietnamese L1 interference)
+  const phonicsPatterns = {
+    "th": ["think", "this", "that", "them", "there", "these"],
+    "r_l": ["really", "right", "learn", "early"],
+    "v_w": ["very", "want", "was", "with", "what", "when"],
+    "s_sh": ["she", "ship", "sure", "should"],
+  };
+  for (const [tag, patterns] of Object.entries(phonicsPatterns)) {
+    if (patterns.some(p => combined.includes(p))) {
+      tags.push({ tag, category: "phonics", weight: 1.5 });
+    }
+  }
+
+  // 2. Grammar patterns
+  if (/past|yesterday|ago|went|was|did/.test(combined)) tags.push({ tag: "past_tense", category: "grammar", weight: 1.5 });
+  if (/article|the|a |an /.test(combined)) tags.push({ tag: "articles", category: "grammar", weight: 1.3 });
+  if (/preposition|in |on |at |to |for |with /.test(combined)) tags.push({ tag: "prepositions", category: "grammar", weight: 1.2 });
+
+  // 3. Phoneme notation in response (e.g., /θ/, /ð/)
+  const phonemes = response.match(/\/[^\/]+\//g) || [];
+  for (const p of phonemes) tags.push({ tag: p, category: "phonics", weight: 2.0 });
+
+  // 4. Topic extraction
+  const topicWords = input.split(/\s+/).filter(w => w.length > 5).slice(0, 2);
+  for (const w of topicWords) tags.push({ tag: w.toLowerCase(), category: "topic", weight: 0.5 });
+
+  // 5. Behavior signals
+  if (input.length < 15) tags.push({ tag: "low_output", category: "behavior", weight: 1.5 });
+  if (/don't|can't|i don't/.test(input)) tags.push({ tag: "confusion", category: "behavior", weight: 2.0 });
+
+  return tags;
+}
+
+// Query Star Map for top matching routes
+async function queryStarMapRoutes(studentId, tags, env) {
+  if (!env.SESSIONS) return { routes: [] };
+  try {
+    const stub = env.SESSIONS.get(env.SESSIONS.idFromName(`events-${studentId}`));
+    const res = await stub.fetch(new Request("https://do/starmap/route", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ studentId, tags }),
+    }));
+    return await res.json();
+  } catch (_) {
+    return { routes: [] };
+  }
+}
+
+// Update Star Map after each exchange
+async function updateStarMapAfterChat(studentId, tags, env) {
+  if (!env.SESSIONS || !tags || tags.length === 0) return;
+  try {
+    const stub = env.SESSIONS.get(env.SESSIONS.idFromName(`events-${studentId}`));
+    await stub.fetch(new Request("https://do/starmap/update", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ studentId, tags, ledgerRef: `chat-${Date.now()}` }),
+    }));
+  } catch (_) {}
+}
+
+// Build Star Map context for prompt injection
+function buildStarMapPromptContext(routes) {
+  if (!routes || routes.length === 0) return "";
+  const phonics = routes.filter(r => r.category === "phonics");
+  const grammar = routes.filter(r => r.category === "grammar");
+  let ctx = "\n\n━━━ STAR MAP (semantic routing) ━━━";
+  if (phonics.length > 0) ctx += `\nPHONICS: Focus on ${phonics.map(r => r.tag).join(", ")}`;
+  if (grammar.length > 0) ctx += `\nGRAMMAR: Address ${grammar.map(r => r.tag).join(", ")}`;
+  return ctx;
+}
+
 // ── Durable Objects ───────────────────────────────────────────────────────────
 
 // LedgerDO — Cryptographic Immutable Ledger
@@ -1160,6 +1487,7 @@ export class SessionDO {
     this.sql.exec(`CREATE TABLE IF NOT EXISTS memory (id INTEGER PRIMARY KEY AUTOINCREMENT, student_id TEXT, user_msg TEXT, obi_msg TEXT, ts INTEGER)`);
     this.sql.exec(`CREATE TABLE IF NOT EXISTS class_sessions (id INTEGER PRIMARY KEY AUTOINCREMENT, class_id TEXT, teacher_id TEXT, total_students INTEGER, started_at INTEGER)`);
     this.sql.exec(`CREATE TABLE IF NOT EXISTS class_events (id INTEGER PRIMARY KEY AUTOINCREMENT, class_id TEXT, student_id TEXT, type TEXT, rule_status TEXT, notes TEXT, ts INTEGER)`);
+    this.sql.exec(`CREATE TABLE IF NOT EXISTS session_events (id INTEGER PRIMARY KEY AUTOINCREMENT, student_id TEXT, event_type TEXT, payload TEXT, ts INTEGER)`);
     // Roster table — system-roster instance tracks all enrolled students for digest + flags
     this.sql.exec(`CREATE TABLE IF NOT EXISTS roster (
       student_id TEXT PRIMARY KEY,
@@ -1186,7 +1514,17 @@ export class SessionDO {
       const body = await request.json();
       const exchange = body.exchange || {};
       this.sql.exec(`INSERT INTO memory (student_id, user_msg, obi_msg, ts) VALUES (?, ?, ?, ?)`, body.studentId || "unknown", exchange.user || "", exchange.obi || "", Date.now());
+      this.sql.exec(`INSERT INTO session_events (student_id, event_type, payload, ts) VALUES (?, ?, ?, ?)`, body.studentId || "unknown", "memory_save", JSON.stringify({ hasUser: !!exchange.user, hasObi: !!exchange.obi }), Date.now());
       return json({ ok: true });
+    }
+
+    if (path === "/memory/compress" && request.method === "POST") {
+      const body = await request.json();
+      const result = runSessionCompression(this.sql, {
+        memoryKeep: body.memoryKeep || 30,
+        eventsKeep: body.eventsKeep || 100,
+      });
+      return json({ ok: true, ...result });
     }
 
     if (path === "/memory/get") {
@@ -1219,6 +1557,7 @@ export class SessionDO {
       }
 
       this.sql.exec(`INSERT INTO class_events (class_id, student_id, type, rule_status, notes, ts) VALUES (?, ?, ?, ?, ?, ?)`, classId, studentId, body.type || "", body.ruleStatus || "", body.notes || "", Date.now());
+      this.sql.exec(`INSERT INTO session_events (student_id, event_type, payload, ts) VALUES (?, ?, ?, ?)`, studentId || "class", "class_event", JSON.stringify({ classId, type: body.type || "", ruleStatus: body.ruleStatus || "" }), Date.now());
       return json({ ok: true, classId, studentId });
     }
 
