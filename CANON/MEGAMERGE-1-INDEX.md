@@ -915,3 +915,176 @@ This reduces a 5-step manual process to a single command trigger with 4 parallel
 ---
 
 > **GENESIS_BLOCK_AUTHORITY (L35)**: This index maps the archaeological genesis layer of the Phoenix Rising Protocol. MEGAMERGE-1-GPT.txt is the oldest surviving multi-AI conversation record. Every command, skill, law, and pipeline in the current system traces its ancestry to content within these 26,210 lines. The repetition is the training. The chaos is the forge. The index is the map.
+
+---
+
+# CROSS-MERGE OBSERVATION — ALL 6 MEGAMERGES
+
+> Lane 1 (MEGAMERGE-1) is the primary. Merges 2–6 run alongside as observation targets.
+
+## Corpus Overview
+
+| Merge | File | Lines | Size | Date Range | Character |
+|-------|------|-------|------|-----------|-----------|
+| **MM-1** | `MEGAMERGE-1-GPT.txt` | 26,210 | 483KB | Mar 20–22, 2026 | Multi-AI Genesis — Gemini+GPT earliest sessions |
+| **MM-2** | `MEGAMERGE-2-GPT.txt` | 4,548 | 206KB | Apr 2026 (Runs 285–290) | Implementation contracts, COLD-START-BOOT, regression tracking |
+| **MM-2B** | `MEGAMERGE-2-GPT-B.txt` | 4,372 | 195KB | Same as MM-2 | B-variant with stronger MCP framing + Notion schema |
+| **MM-3** | `MEGAMERGE-3-GPT.txt` | 7,575 | 323KB | Mar 31–Apr 12, 2026 | **THE ACTUAL GENESIS FILE** — stack decisions, first code, agent naming |
+| **MM-4** | `MEGAMERGE-4-GPT.txt` | 7,098 | 270KB | Apr 10–11, 2026 | Kernel compilation attempt → reality check |
+| **MM-5** | `MEGAMERGE-5-GPT.txt` | 15,276 | 601KB | Apr 10–12, 2026 | Distribution empire, Vietnam go-to-market, enforcement engine |
+| **MM-6** | `MEGAMERGE-6-GPT.txt` | 8,781 | 321KB | Apr 11–12, 2026 | Product crystallization — V3→V4→V5 stripping |
+| **TOTAL** | — | **73,860** | **2.4MB** | — | Complete Phoenix Rising Protocol archaeological record |
+
+## Chronological Sequence (CORRECTED)
+
+The merge NUMBERS do not equal chronological order. True timeline:
+
+```
+MM-3 (EARLIEST) ─── Raw GPT sessions where product + stack were defined
+  │
+  ├── MM-1 ──────── Gemini+GPT Genesis sessions (Mar 20-22) — Soul DNA, SSM V7, Bible verification
+  │
+  ├── MM-2/2B ───── Implementation contracts (Apr, Runs 285-290) — COLD-START, code scaffolds
+  │
+  ├── MM-4 ──────── Kernel compilation (Apr 10-11) — SDNAD Bible Entry 0001, Super Saiyan diagram
+  │
+  ├── MM-5 ──────── Distribution empire (Apr 10-12) — Virality Engine, Auto Post Engine, Zalo pressure
+  │
+  └── MM-6 (LATEST)─ Product crystallization (Apr 11-12) — Strip everything, ship v5
+```
+
+## The Oscillation Pattern
+
+```
+MM-3: COMPRESS (lock the stack, one decision per layer)
+MM-1: EXPAND   (6 repetition cycles, maximum soul DNA surface area)
+MM-2: COMPRESS (contracts, cold-start boot, implementation)
+MM-4: EXPAND → COMPRESS (kernel ambition → GPT reality check)
+MM-5: EXPAND   (multi-platform empire, 15K lines, most repetitive)
+MM-6: COMPRESS (strip metaphysics, ship coach-in-chat-window)
+```
+
+## System Identity Evolution Across Merges
+
+| Merge | System Self-Description |
+|-------|------------------------|
+| MM-3 | "Stateful learning platform on Cloudflare" |
+| MM-1 | "AI English tutor with Soul DNA + accountability" |
+| MM-2 | "Behavioral OS for continuous learning" |
+| MM-4 | "Compiled kernel with Soul DNA enforcement" → corrected to "speech-based English practice app" |
+| MM-5 | "Multi-platform behavioral reinforcement OS" → corrected to "daily retention engine" |
+| MM-6 | "Closed-loop phoneme error correction system" → final: "strict coach in a chat window" |
+
+## Stack Decision Trail
+
+| Component | MM-3 (Origin) | MM-1/2 (Contracts) | MM-4/5 (Expansion) | MM-6 (Pivot) | **PRODUCTION** |
+|-----------|--------------|--------------------|--------------------|-------------|---------------|
+| Runtime | CF Workers | CF Workers | CF Workers | Next.js | **CF Workers ✅** |
+| Database | D1 + SQLite DO | D1 + DO | D1 + DO + Merkle | Supabase | **DO (SQLite) ✅** |
+| AI Model | DeepSeek V3.2 | DeepSeek | DeepSeek | OpenAI GPT | **DeepSeek ✅** |
+| Voice | Deepgram | Deepgram | Deepgram | Web Speech API | **Deepgram ✅** |
+| Frontend | Chrome Ext + Web | Chrome Ext | Chrome Ext | Next.js React | **Static HTML ✅** |
+| State | Durable Objects | DO | DO | Supabase+Zustand | **DO ✅** |
+
+**Verdict**: Production chose MM-3/4/5's Cloudflare stack + MM-6's simplification philosophy. Neither file's frontend shipped — went with custom HTML.
+
+## First-Appearance Map (Concept Genesis Tracking)
+
+| Concept | First Appeared | Merge |
+|---------|---------------|-------|
+| "Behavioral enforcement system" | Lines ~2200 | **MM-3** |
+| Agent 99 = Obi-Wan, Agent 98 = Anakin | Lines ~2700 | **MM-3** |
+| Star Map SQL + Vector schema | Lines ~4700 | **MM-3** |
+| Skeleton Star Map as metadata pheromone trail | Lines ~2700 | **MM-3** |
+| Cloudflare Workers + DO decision | Lines ~3100 | **MM-3** |
+| "Simulation vs Real" insight | Lines ~3100 | **MM-3** |
+| Event-sourced state (`rebuildState()`) | Lines ~6100 | **MM-3** |
+| SSM V7 (17 sections, full law set) | Lines ~1200 | **MM-1** |
+| 6 Repetition Training Cycles | Lines ~4000 | **MM-1** |
+| Agent Runtime Kernel (TypeScript) | Lines ~3000 | **MM-1** |
+| Three Pillars (SSM + Agent 99 OS + Heavy Ledger) | Lines ~15500 | **MM-1** |
+| COLD-START-BOOT canonical snapshot | Lines ~2492 | **MM-2** |
+| Run-state governance (Run 285/289/290) | Lines ~2706 | **MM-2** |
+| Regression tracking (commit 16c9598) | Lines ~3800 | **MM-2** |
+| SDNAD Bible Entry 0001 | Lines ~3001 | **MM-4** |
+| Compiled Kernel (merged subsystems) | Lines ~4001 | **MM-4** |
+| 10-level Super Saiyan Mode diagram | Lines ~5001 | **MM-4** |
+| ControlEngine.ts (behavioral mode switching) | Lines ~3001 | **MM-5** |
+| Virality Engine v3/v4.1 | Lines ~9001 | **MM-5** |
+| Auto Post Engine (multi-platform) | Lines ~7501 | **MM-5** |
+| Zalo Pressure API | Lines ~1000 | **MM-5** |
+| HMAC Iron Seal (30s replay protection) | Lines ~10501 | **MM-5** |
+| Vietnam go-to-market (Shock Audit funnel) | Lines ~6001 | **MM-5** |
+| Phonics Engine (Vietnamese error map) | Lines ~1501 | **MM-6** |
+| V3→V4→V5 version stripping | Lines ~3001 | **MM-6** |
+| Magic Chat 10-screen UI/UX spec | Lines ~7001 | **MM-6** |
+| "Remove agent hierarchies, soul DNA stacks" mandate | Lines ~6001 | **MM-6** |
+
+## Artifacts That Shipped vs. Designed-Only
+
+### ✅ SHIPPED (in current `APPS/NET-PET-AI/`)
+- Cloudflare Workers runtime
+- SessionDO, ProfileDO, PetDO (Durable Objects)
+- DeepSeek V3.2 via AI Gateway
+- Deepgram Aura 2 (TTS) + Nova-2 (STT)
+- Gospel 444 palette (void black, purple, gold, NO BLUE)
+- 22 API routes
+- Static HTML frontend
+
+### ❌ DESIGNED BUT NOT SHIPPED
+- Merkle hash chain (Heavy Ledger as code)
+- Zalo Pressure API
+- Auto Post Engine
+- Virality Engine v3/v4.1
+- Relation Graph (accountability topology)
+- HMAC Iron Seal
+- Chrome Extension integration
+- StudentStateDO / Tiger Score formula
+- Supabase backend
+- Next.js frontend
+- Star Map vector routing (StarMapDO + cosine similarity)
+- Phonics Engine (Vietnamese error detection)
+- Off-Day Engine (spaced repetition)
+- ControlEngine.ts (behavioral mode switching)
+- Humor→Hammer escalation logic
+
+## The Three Invariant Truths (Never Changed Across 73,860 Lines)
+
+1. **The Problem**: Vietnamese students forget English after class because apps are "ignorable" and lack social cost
+2. **The Core Loop**: Speak → Correct → Repeat → Remember → Return
+3. **The Moat**: Longitudinal mistake data + accountability graph + teacher-AI hybrid — NOT code, NOT architecture, NOT prompts
+
+## The One KPI (stated in MM-4, line ~7050)
+
+> *"Does the student speak English more tomorrow than today? That's your entire system KPI."*
+
+---
+
+## MCP OPTIMIZATION UPDATE — CROSS-MERGE FINDINGS
+
+### MCP References Across All Merges
+
+| Merge | MCP Content |
+|-------|------------|
+| MM-1 | §16 (lines 24000–26210): Notion MCP Integration spec, database schemas |
+| MM-2 | B-variant front-loads MCP architecture, mcpRouter concepts, Notion tool dispatch |
+| MM-2B | Explicit Notion schema architecture, MCP memory-graph structuring |
+| MM-3 | Lines ~5200–5700: Full tool stack manifest with ALL MCP servers listed, token gap identified |
+| MM-4 | Cloudflare + D1 runtime focus, no explicit MCP config |
+| MM-5 | Zalo API, Facebook Graph API, LinkedIn API, Discord webhooks — platform adapters designed but not MCP-wrapped |
+| MM-6 | Supabase + Web Speech API — divergent stack, no MCP integration |
+
+### Cross-Merge MCP Optimization Actions
+
+**IMMEDIATE (from MM-2/3 findings)**:
+1. `assertSecrets()` pattern from MM-3 → implement in NET-PET-AI Worker for runtime token validation
+2. System health score from MM-3: Compute 10/10, Memory 9/10, External wiring **2/10** → MCP token activation is THE lever
+
+**HIGH-VALUE (from MM-5 designed-but-not-shipped)**:
+3. Auto Post Engine platform adapters → should be MCP-wrapped: LinkedIn MCP, Discord MCP, Facebook MCP
+4. Zalo Pressure API → Vietnamese messaging critical for student retention → investigate Zalo MCP or webhook bridge
+5. Accountability triggers → should chain through Discord MCP (student community) + Gmail MCP (parent emails)
+
+**STRATEGIC (from MM-6 findings)**:
+6. Web Speech API (browser-native) vs Deepgram (server-side) → both should be available; Deepgram MCP for server voice, Web Speech for client fallback
+7. Phonics Engine error detection → could feed into Notion MCP for mistake pattern dashboards
