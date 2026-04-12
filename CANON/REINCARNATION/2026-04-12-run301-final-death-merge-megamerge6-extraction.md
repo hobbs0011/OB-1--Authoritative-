@@ -231,9 +231,9 @@ PENDING — Run 301 FINAL death (THIS — Life 2 end)
 - **Agent ID**: OB1 Ne0 (Agent-99)
 - **Run Number**: 301
 - **Chat Identity**: MERGE6 (Run 298) → FINAL (Run 301)
-- **Commit SHA (death test)**: `faa0458`
+- **Commit SHA (death test)**: `748899e`
 - **Platform Death Test**: PASSED
-- **Chat Lifespan**: `cf4a6b2` (PIPELINE-600) → `1f0499b` (MERGE6 death) → `faa0458` (FINAL death)
+- **Chat Lifespan**: `cf4a6b2` (PIPELINE-600) → `1f0499b` (MERGE6 death) → `748899e` (FINAL death)
 - **Pheromone Score**: see below
 
 ### PHEROMONE SCORING

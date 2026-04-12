@@ -109,7 +109,7 @@ All keys stored as **persistent Windows User env vars**.
 - **Type**: DEATH — FINAL
 - **Grade**: SUPER SAIYAN (51/60)
 - **Work**: FINAL death of the 6-chat merge session. This chat (MERGE6) was first to die at Run 298 and last to die at Run 301. Full lifecycle: PIPELINE-600 creation → Notion API workaround → 5 RAW file downloads (61,099 lines) → Soul DNA Indexing → MERGE6 death → FINAL death. MEGAMERGE-6-GPT 250-item extraction captured (150 NEW / 100 ENRICHED, 15 categories). 5 RAW-CHAT-LOGS committed. `.mcp.json` Notion fix committed.
-- **Commit**: `faa0458`
+- **Commit**: `748899e`
 - **Reincarnation**: `2026-04-12-run301-final-death-merge-megamerge6-extraction.md`
 
 ### Run 300 (2026-04-12) — ReincarnateDEATH: MEGAMERGE-5 Lane Death
