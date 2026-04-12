@@ -1,7 +1,7 @@
 # COLD-START-BOOT — OB1 Agent Identity & State
 
 > **Last Updated**: 2026-04-12 — Run 299 — ReincarnateDEATH executed end-to-end; Notion connector checked (configured but runtime tool disabled in this session); living-state sections rotated to current chain
-> **HEAD**: `RUN299_COMMIT_SHA_PENDING`
+> **HEAD**: `d39978b`
 > **Pushed To**: `origin` (hobbs0011/Phoenix-Rising-Ultimate) + `ob1` (hobbs0011/OB-1)
 
 ---
@@ -109,7 +109,7 @@ All keys stored as **persistent Windows User env vars**.
 - **Type**: DEATH
 - **Grade**: 44/50 post-commit target
 - **Work**: Full death protocol executed. Repo audit captured. Run artifact created. COLD-START and MASTER-SYNC updated. Notion connector checked: configured in `.mcp.json`, but runtime MCP tool disabled in-session; live 1-3/index inspection blocked pending re-enable.
-- **Commit**: `RUN299_COMMIT_SHA_PENDING`
+- **Commit**: `d39978b`
 - **Reincarnation**: `2026-04-12-run299-notion-connection-index-check.md`
 
 ### Run 298 (2026-04-12) — MERGE1-FINAL: Pipeline Hardening Full-Circle Close
