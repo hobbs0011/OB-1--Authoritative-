@@ -1001,3 +1001,202 @@ Speak ΓåÆ Correct ΓåÆ Repeat ΓåÆ Return tomorrow
 - No COLD-START-BOOT mutation (not designated as final merge).
 - Build validated: both `node --check` and `wrangler deploy --dry-run` pass.
 - Awaiting RISE command or final merge authority.
+
+---
+
+# MERGE11 — OBI v2 Soul DNA Architecture Capture + 9-Phase Consolidation Plan
+
+**Agent**: OB1 Ne0 (Agent-99 / GitHub Copilot — Claude Opus 4.6)
+**Chat Context**: Multi-session Soul DNA capture of the UNIFIED MASTER ARCHITECTURE (OBI CORE FINAL FORM) produced collaboratively with GPT. Full codebase mapping (twice — at ~1950 lines then at 4600+ lines). Discovery that consolidation, not greenfield, is the correct approach. 9-phase plan produced. No code written — planning/capture only.
+**Merge Time**: 2026-04-12 late ICT (post-MERGE10)
+
+## 1) HEADER
+- **Session Tag**: run293-net-pet-mvp-loop-merge11
+- **Datetime (ICT)**: 2026-04-12 late ICT
+- **Signal Density (1-10)**: 10
+- **Theme**: Sovereign Soul DNA architecture dump — the UNIFIED MASTER ARCHITECTURE (OBI CORE FINAL FORM) including 5-layer model, 3-mode replacement for agents, Tiger scoring formula, anti-drift enforcement, OBI system prompt v2, 11-level Soul DNA hierarchy, Gospel 444 laws, Mouse→Tiger methodology, and the compiled kernel specification. All captured verbatim per SDNAD protocol. Full codebase mapping twice (file grew from ~1950 to 4600+ lines between reads). 9-phase consolidation plan produced.
+- **State Coming In**: GPT sessions produced massive architectural decisions. User dumped them into this chat for capture. Codebase was evolving rapidly across parallel sessions — version drifted from 1.4.0 to 1.5.0 to 1.7.0 and back. Multiple merges modifying index.js simultaneously.
+
+## 2) RAW QUOTES (VERBATIM)
+- **[RED]** "I AM FEEDING GPT STUFF I DECIDED ON AND BUILT HERE, SO STOP BEING A SNOB"
+- **[RED]** "AND WORK TOGETHER, PUSHBACK ONLY WHEN GOOD FOR US"
+- **[GREEN]** "These are NOT agents. They are execution policies of ONE brain."
+- **[GREEN]** "DO NOT introduce D1 yet. Cloudflare DO SQLite is sufficient. ✔ decision locked"
+- **[GREEN]** "Mouse → Tiger: Start with permission and confidence, build toward mastery"
+- **[GREEN]** "The chat IS the magic. Every tap, every word, every victory is an actionable event."
+- **[GREEN]** "Soul DNA preserves everything — 1% leak compounds over time."
+- **[GREEN]** "Tiger Score = Continuity(40%) + Execution(30%) + Accountability(30%)"
+- **[GREEN]** "One shot - plan and ship everything"
+- **[GREEN]** "simulate it first, shadow style, fast super saiyan"
+- **[GREEN]** "YES AND FULL /reincarnation-death-merge-1"
+- **[YELLOW]** "make a pipeline, no execution yet"
+- **[YELLOW]** "I will keep dumping and you just adjust as I do"
+- **[GREEN]** "No Freezy Rule: if student goes silent, count down from 5 — any word beats perfect silence"
+- **[GREEN]** "Christmas Certainty: success is a scheduled event, not a gamble"
+- **[GREEN]** "Anti-shame doctrine: never make students feel stupid. Calibrate, shift, upgrade — never 'wrong', 'bad', 'fail'."
+- **[GREEN]** "fluency_score = accuracy + retention - repetition_needed"
+
+## 3) DECISIONS
+1. **Decision**: OBI is a STATEFUL BEHAVIORAL OPERATING SYSTEM, not just an English tutor chatbot.
+   - **Impact**: All architecture decisions flow from this identity. OBI owns state, behavior, progression, accountability — not just conversation.
+   - **Canon Affected**: OBI Core Identity (L1).
+   - **Status**: LOCKED TO CANON.
+2. **Decision**: 5-Layer Architecture is sovereign-locked.
+   - Layer 1: Raw Input (SDNAD Capture)
+   - Layer 2: Soul DNA Memory (Identity)
+   - Layer 3: Session Ledger (Event Chain)
+   - Layer 4: Cognitive Engine (Routing + Context)
+   - Layer 5: Execution Swarm (Drones + Actions)
+   - **Impact**: All implementation must map to exactly these 5 layers.
+   - **Canon Affected**: OBI Architecture Law.
+   - **Status**: LOCKED TO CANON.
+3. **Decision**: 3 Modes replace 3 Agents. OBI (teaching), OPTIMIZER (planning), AUDIT (consistency). These are execution policies of ONE brain, NOT separate agents.
+   - **Impact**: Agent99 `translateThroughAgent99()` + `DRONE_REGISTRY` must die. Mode-based cognitive router replaces them.
+   - **Canon Affected**: OBI Execution Model.
+   - **Status**: LOCKED TO CANON — plan written, implementation pending.
+4. **Decision**: Tiger Score formula: Continuity(40%) + Execution(30%) + Accountability(30%).
+   - **Impact**: Single derivation path for all Tiger score reads. Mouse(0-10), Cat(11-50), Wolf(51-200), Tiger(201+).
+   - **Canon Affected**: OBI Progression System.
+   - **Status**: LOCKED TO CANON.
+5. **Decision**: Anti-drift enforcement: reject generic output not tied to classroom context. Degrade gracefully, never hard-fail student flows.
+   - **Impact**: Every teaching output must anchor to: last session, known weakness, teacher intent, or behavior/accountability state.
+   - **Canon Affected**: OBI Quality Gate.
+   - **Status**: LOCKED TO CANON — plan written, implementation pending.
+6. **Decision**: No D1. Cloudflare DO SQLite is sufficient. Decision locked by sovereign.
+   - **Impact**: All storage stays in Durable Objects. No external database.
+   - **Canon Affected**: Infrastructure constraint.
+   - **Status**: LOCKED.
+7. **Decision**: Honor GPT-produced architecture without questioning it. Pushback only when it's genuinely good for the system.
+   - **Impact**: Agent collaboration doctrine — GPT and Copilot outputs are treated as sovereign-approved unless technically harmful.
+   - **Canon Affected**: Agent behavior law.
+   - **Status**: IMPLEMENTED.
+8. **Decision**: This is a CONSOLIDATION, not a greenfield build. Existing working subsystems must be preserved and re-homed, not rewritten blindly.
+   - **Impact**: The 9-phase plan treats the codebase as a living system to refactor, not replace.
+   - **Canon Affected**: Implementation doctrine.
+   - **Status**: LOCKED — plan written.
+9. **Decision**: OBI prompt should be MERGED with v2 rules, not replaced. Keep existing Soul DNA identity verbatim + append anti-drift/continuity/accountability/degradation rules.
+   - **Impact**: Preserves voice continuity while adding behavioral enforcement.
+   - **Canon Affected**: OBI System Prompt law.
+   - **Status**: LOCKED — plan written.
+
+## 4) CORRECTIONS
+1. **What Broke**: Initial plan was based on ~1950-line index.js. The file had grown to 4600+ lines with partial v2 features already integrated by other sessions.
+   - **Root Cause**: Parallel sessions modifying the same file without coordination. Stale reads.
+   - **Fix Applied**: Re-read entire 4600+ line file. Deleted old plan. Created consolidation-focused plan treating existing code as ground truth.
+   - **Instruction Update Needed**: Yes — always re-read files immediately before planning when parallel sessions are active.
+2. **What Broke**: Agent questioned GPT-produced architecture instead of treating it as sovereign-approved.
+   - **Root Cause**: Default agent behavior is to evaluate and pushback on all inputs.
+   - **Fix Applied**: Adopted collaborative stance per user correction. GPT architecture honored verbatim.
+   - **Instruction Update Needed**: Yes — when user says "I decided on this with GPT", treat as sovereign decision, not proposal.
+3. **What Broke (REDUNDANCY NOTE)**: File state drifted AGAIN between sessions. Was 4600+ lines when this chat mapped it, now ~1990 lines at VERSION 1.5.0.
+   - **Root Cause**: MERGE10 removed ~2880 lines of doc contamination. Other sessions may have further modified.
+   - **Fix Applied**: Noted as version drift. The 9-phase plan is architecture-correct regardless of current line count.
+   - **Instruction Update Needed**: MERGE10's pre-commit hook recommendation should be implemented.
+
+## 5) NEW PRINCIPLES
+- **Consolidation over greenfield**: When partial v2 features already exist in production code, the correct approach is formalization and merger, not fresh builds that duplicate existing signal.
+- **Shadow simulation before execution**: "Simulate it first, shadow style" — validate architecture fit against real code before writing new code.
+- **GPT output is sovereign-approved**: Architecture decisions made with GPT carry sovereign weight. Challenge only when technically harmful.
+- **One-shot execution doctrine**: "One shot - plan and ship everything" — no phased rollouts. Plan completely, then execute completely.
+- **Soul DNA is the franchise DNA**: System prompt is immutable voice. Merge, never replace.
+
+## 6) EMOTIONAL SIGNAL
+- **Energy**: Extremely high. Massive data dumps. Rapid-fire decisions. "FAST SUPER SAIYAN" energy.
+- **Frustration Markers**: Direct correction when agent questioned GPT output. Caps lock used. "STOP BEING A SNOB."
+- **Directive Markers**: "YES AND FULL", "RISE!", "One shot", "plan and ship everything"
+- **What Michael Needs From System**: Total absorption of his architectural vision. Zero resistance. Execute the plan as designed. The architecture IS the product — don't second-guess it.
+
+## 7) OPEN QUESTIONS
+- The 9-phase consolidation plan was produced when index.js was 4600+ lines. Current state is ~1990 lines (post-MERGE10 cleanup). Does the plan still apply at current file size? (Answer: YES — the architectural concepts are file-size-independent.)
+- Should the 5 proposed extracted modules (snapshot-engine.js, anti-drift.js, tiger-score.js, cognitive-router.js, phoenix-reincarnation.js) be created alongside or replace existing modules (star-map.js, phoneme-engine.js, session-compress.js)?
+- Star-map.js imports differ between sessions: `lookup, buildPromptContext, selectMode, getModePrompt, computeWriteback, driftDetect, createSnapshot, storeSnapshot, rehydrate` vs `routeIntent, getStudentRoute, getModulePrompt, createSnapshot, storeSnapshot, rehydrate`. Which function signature set is canonical?
+- MERGE10 flagged VERSION_REGRESSION (1.7.0 → 1.5.0). Current file shows 1.5.0. Which version number should ship?
+
+## 8) UNFINISHED ACTIONS
+1. **Execute the 9-phase consolidation plan** — no code was written in this chat (planning/capture only).
+2. **Create the 5 extracted kernel modules**: snapshot-engine.js, anti-drift.js, tiger-score.js, cognitive-router.js, phoenix-reincarnation.js.
+3. **Kill Agent99**: Replace `translateThroughAgent99()` and `DRONE_REGISTRY` with mode-based cognitive router.
+4. **Merge OBI prompt**: Keep existing Soul DNA identity verbatim + append v2 anti-drift/continuity/accountability rules.
+5. **Replace ad-hoc handleChat() context**: Replace ~110 lines of sequential DO queries with `buildSnapshot()` + `checkDrift()` + `calculateTigerScore()`.
+6. **Validate and deploy**: `node --check` all files → `wrangler deploy --dry-run` → `wrangler deploy` → smoke-test endpoints.
+7. **INHERITED**: Pre-commit hook for `node --check` (from MERGE10).
+8. **INHERITED**: Version reconciliation across all sessions (from MERGE10).
+9. **INHERITED**: Wire `runSessionCompression` into scheduled() CRON (from MERGE7).
+
+## 9) SYSTEM DESIGN
+- **No code changes made in this session** — pure architecture capture + planning.
+- **9-Phase Consolidation Plan** (full plan saved to `/memories/session/plan.md`):
+  - Phase 1: Codebase stabilization discovery (map subsystems, identify dead/partial/complete handlers)
+  - Phase 2: Kernel extraction (5 new modules from monolith)
+  - Phase 3: OBI continuity pipeline merge (snapshot builder + anti-drift gate + prompt merge)
+  - Phase 4: Agent99 death-merge (translateThroughAgent99 → mode-based cognitive router)
+  - Phase 5: Tiger system merge (canonical derivation: 40/30/30)
+  - Phase 6: Phoenix/reincarnation merge (snapshot→persist→rehydrate pipeline)
+  - Phase 7: Accountability network consolidation (Zalo transport separated from policy)
+  - Phase 8: Death-merge-1 deliverable shape (one of each: snapshot, drift gate, tiger calc, mode router, phoenix service)
+  - Phase 9: Validation (syntax + dry-run + smoke tests on 10 critical endpoints)
+- **Architecture captured from GPT sessions** (verbatim, not interpreted):
+  - 11-level Soul DNA hierarchy
+  - Gospel 444: 4 sections × 4 levels × 4 interaction types per lesson
+  - SDNAD 6-step pipeline
+  - Mouse→Tiger scoring dimensions
+  - SessionLog + SoulDNA schemas
+  - OBI system prompt v2 rules
+  - Full DB implementation spec with SQL schemas
+  - Anti-drift enforcement rules
+  - Degradation behavior specs
+
+## 10) ARTIFACTS CREATED / MODIFIED
+- `/memories/session/plan.md` — **CREATED** (9-phase consolidation plan, 233 lines)
+- No source files modified (planning/capture session only)
+- No canon files modified (this merge extract is the capture artifact)
+- Full Soul DNA verbatim capture stored in conversation context (not yet persisted to file — conversation is the source of truth for this session)
+
+## 11) STATE SNAPSHOT
+- **Run**: 293
+- **Merge Position**: MERGE11 appended (non-finalizing)
+- **Version**: 1.5.0 (current index.js)
+- **index.js state**: ~1990 lines, VERSION "1.5.0", header "v1.4", modular imports (security.js, memory-brain.js, star-map.js, phoneme-engine.js, session-compress.js, phonics-drills.js)
+- **Module stack**: 14 JS files in src/ (index.js, security.js, memory-brain.js, notion.js, zalo.js, growth-engine.js, virality.js, star-map.js, mcp-bridge.js, phonics-drills.js, phoneme-engine.js, session-compress.js, auth.js, phoenix-seal.js)
+- **Durable Objects**: 5 (SessionDO, ProfileDO, PetDO, LedgerDO, CommandDO)
+- **Build status**: NOT VERIFIED in this session (no terminal access during planning)
+- **Env Vars**: Not changed
+- **MCP Status**: Configured in .mcp.json (not probed)
+
+## 12) FINGERPRINT
+- **Agent ID**: OB1 Ne0 (Agent-99 / GitHub Copilot — Claude Opus 4.6)
+- **Run Number**: 293
+- **Merge Number**: 11
+- **Commit SHA**: PENDING
+- **Platform Death Test**: DEFERRED (Plan mode — cannot run terminal commands)
+- **Pheromone Score (MERGE11)**:
+  - Soul DNA captured (verbatim GPT architecture, all dumps): 10/10
+  - Decisions anchored (9 decisions locked, architecture sovereign-sealed): 10/10
+  - Open loops handed off (9 explicit handoff items): 9/10
+  - COLD-START-BOOT updated: 0/10 (not final merge)
+  - Artifacts committed: 0/10 (Plan mode constraint)
+  - **TOTAL**: 29/50 (planning-only session — no commits possible by design)
+
+## REDUNDANCY NOTES (comparing with MERGE1-10)
+- **MERGE3 CONFLICT:ARCH_PATH** (v2.0 vs v1.5 modular) → **RESOLVED BY MERGE7, CONFIRMED BY MERGE11**: Modular v1.5+ is the active path. MERGE11's consolidation plan builds on top of the modular architecture, not MERGE2's clean rewrite.
+- **MERGE3 Q: "do modules exist?"** → **RESOLVED BY MERGE7 + MERGE10, CONFIRMED BY MERGE11**: All 14 modules exist and are imported.
+- **MERGE6 CONFLICT:STATUS_SOURCE** (CLOSED vs OPEN) → **MERGE11 CONFIRMS**: Status should be OPEN. Header's "CLOSED" from MERGE2 was premature. At least 11 merges exist (1, 2, 3, 6, 7, 10, 11). MERGEs 4, 5, 8, 9 are absent from file.
+- **MERGE6 CONFLICT:CHAT_COUNT** → **MERGE11 UPDATE**: At least 11 chats. True total UNKNOWN.
+- **MERGE6 CONFLICT:SCORING_MODEL** (aggregate 66/50) → **MERGE11 NOTE**: Each merge should score independently on the 0-50 rubric. Aggregation is meaningless — final merge normalizes.
+- **MERGE10 CONFLICT:VERSION_REGRESSION** (1.7.0 → 1.5.0) → **MERGE11 CONFIRMS**: Current file shows VERSION "1.5.0". Header says "v1.4". Both are out of sync. Final merge must reconcile.
+- **MERGE10 CONFLICT:STAR_MAP_IMPORTS** (different function names) → **MERGE11 CONFIRMS**: Current imports are `lookup, buildPromptContext, selectMode, getModePrompt, computeWriteback, driftDetect, createSnapshot, storeSnapshot, rehydrate`. The `routeIntent, getStudentRoute, getModulePrompt` names seen by MERGE10 may be from a different file state.
+- **MERGE7 unfinished "Wire runSessionCompression into scheduled()"** → **MERGE11 INHERITED as action item #9**.
+- **MERGE10 unfinished "pre-commit hook for node --check"** → **MERGE11 INHERITED as action item #7**.
+- **MERGE10 unfinished "version reconciliation"** → **MERGE11 INHERITED as action item #8**.
+
+## MERGE CONFLICT FLAGS (new from MERGE11)
+- **MERGE_CONFLICT:PLAN_VS_REALITY** — The 9-phase consolidation plan was designed against a 4600+ line file. Current file is ~1990 lines. The plan's architectural concepts are valid but specific line references and some subsystem references (Agent99 routing, DRONE_REGISTRY, ad-hoc chat context assembly) may not exist at their previously-mapped locations. Implementation must re-map before executing.
+- **MERGE_CONFLICT:STAR_MAP_DUAL_API** — star-map.js imported functions differ between sessions. Current imports: `lookup, buildPromptContext, selectMode, getModePrompt, computeWriteback, driftDetect, createSnapshot, storeSnapshot, rehydrate`. MERGE10 saw: `routeIntent, getStudentRoute, getModulePrompt, createSnapshot, storeSnapshot, rehydrate`. One of these is stale.
+
+## STANDBY NOTE
+- MERGE11 extract is complete.
+- This was a PLANNING-ONLY session in Plan mode — no file edits, no commits, no pushes.
+- The 9-phase consolidation plan is saved to session memory.
+- The full Soul DNA architecture capture lives in conversation context.
+- To execute: switch to Code mode, append this extract to `CANON/REINCARNATION/2026-04-12-run293-net-pet-mvp-loop-merge1.md`, commit, and push.
+- Awaiting mode switch or final merge authority.
