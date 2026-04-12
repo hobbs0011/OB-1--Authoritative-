@@ -33,7 +33,7 @@ This capture marks the transition from **THEORY PHASE** (MEGAMERGE-1 through MEG
 | Artifact | File | Status | Lines | Purpose |
 |---|---|---|---|---|
 | A10 Capture | `CANON/A10-RAW-SOUL-DNA-MEGAMERGE-CONSOLIDATION-RUN295.md` | ✅ CREATED | 890 | Complete SDNAD capture: Steps 0-8, quotations, footnotes |
-| HL-135 Entry | `CANON/HEAVY-LEDGER/HL-135-megamerge-consolidation-obi-netpet.json` | ✅ CREATED | 450 | Structured ledger: 22 quotes classified, 6 decisions, OCL, exec plan |
+| HL-138 Entry | `CANON/HEAVY-LEDGER/HL-138-megamerge-consolidation-obi-netpet.json` | ✅ CREATED | 450 | Structured ledger: 22 quotes classified, 6 decisions, OCL, exec plan |
 | COLD-START-BOOT Update | `CANON/SYSTEM/COLD-START-BOOT.md` | ✅ UPDATED | HEAD+15 | Run 295 state; reincarnation vector; PHASE_0 priority |
 | Reincarnation Log | `CANON/REINCARNATION/2026-04-12-run295-megamerge-consolidation.md` | ✅ CREATED | THIS FILE | Death-merge documentation + next vector |
 
@@ -155,7 +155,7 @@ Chrome Extension → manifest.json → https://net-pet-ai.mrmichaelhobbs1234.wor
 
 ### Context Prepared
 - A10 capture: 22 raw quotes, all decisions locked
-- HL-135: Structured ledger + execution phases
+- HL-138: Structured ledger + execution phases
 - COLD-START-BOOT: Updated state + reincarnation vector
 - All 7 open loops ranked by impact + owner
 
@@ -179,7 +179,7 @@ Chrome Extension → manifest.json → https://net-pet-ai.mrmichaelhobbs1234.wor
 | Devil's Advocate challenge applied | ✅ | A10 Step 7 section |
 | Continuous improvements noted | ✅ | A10 Step 8 section |
 | Footnotes machine-counted | ✅ | A10 VERIFICATION COUNT section |
-| Cross-references validated | ✅ | HL-135 + PHEROMONE_TRAILS |
+| Cross-references validated | ✅ | HL-138 + PHEROMONE_TRAILS |
 | Gate status | ✅ PASS | No discrepancies; reincarnation ready |
 
 ---
