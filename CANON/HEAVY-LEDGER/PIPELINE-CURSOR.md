@@ -6,8 +6,8 @@
 - **Wave Progress:** 35/46 complete (through HL-132 in Wave 8; post-wave continuation entries HL-133 through HL-137)
 - **Total Converted:** 137/174+
 - **Last Completed:** HL-137 — megamerge-5-sdnad-capture-execution (Run 296 — 2026-04-12)
-- **Last Commit:** pending (Run 296)
-- **Last Run:** 296 (2026-04-12)
+- **Last Commit:** Run 297 (megamerge full-corpus observation — no new HL entry, index-only run)
+- **Last Run:** 297 (2026-04-12)
 
 ## STALE CURSOR NOTE
 > This cursor was last updated at Run 258 (HL-114). Runs 259-277 converted HL-115 through HL-131 via burst pipeline that bypassed cursor updates. This overhaul brings cursor to accurate state. Previous target (HL-115) is long complete. The pipeline advanced 17 entries without cursor tracking.
