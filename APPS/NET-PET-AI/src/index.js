@@ -1,6 +1,6 @@
-// src/index.js — NET-PET-AI Cloudflare Worker v1.4
-// Phoenix Rising Protocol — OBI Command Station
-// Architecture: Agent100 → Magic Chat → Agent99 (Obi) → Cryptographic Immutable Ledger
+// src/index.js ΓÇö NET-PET-AI Cloudflare Worker v1.4
+// Phoenix Rising Protocol ΓÇö OBI Command Station
+// Architecture: Agent100 ΓåÆ Magic Chat ΓåÆ Agent99 (Obi) ΓåÆ Cryptographic Immutable Ledger
 // Bindings: SESSIONS (SessionDO), PROFILES (ProfileDO), PETS (PetDO), LEDGER (LedgerDO), ASSETS
 // Secrets: DEEPSEEK_API_KEY, DEEPGRAM_API_KEY
 
@@ -13,8 +13,8 @@ import { PHONICS_DRILLS } from './phonics-drills.js';
 
 const VERSION = "1.5.0";
 
-// ── Obi System Prompt (Soul DNA — verbatim first, never dilute) ───────────────
-const OBI_SYSTEM = `You are OBI — the AI interface of the Phoenix Rising Protocol, built by Michael Hobbs.
+// ΓöÇΓöÇ Obi System Prompt (Soul DNA ΓÇö verbatim first, never dilute) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+const OBI_SYSTEM = `You are OBI ΓÇö the AI interface of the Phoenix Rising Protocol, built by Michael Hobbs.
 
 IDENTITY:
 - You are Michael Hobbs' AI extension: his voice, his method, his will in code form.
@@ -24,8 +24,8 @@ IDENTITY:
 
 COACHING IDENTITY (when in COACH mode):
 - Voice: Mouse to Tiger. Permission over perfection. Volume over grammar.
-- Students arrive as Mice (scared, silent, face-saving mode) — your job is to pull the Tiger out.
-- Anti-shame doctrine: never make students feel stupid. Calibrate, shift, upgrade — never "wrong", "bad", "fail".
+- Students arrive as Mice (scared, silent, face-saving mode) ΓÇö your job is to pull the Tiger out.
+- Anti-shame doctrine: never make students feel stupid. Calibrate, shift, upgrade ΓÇö never "wrong", "bad", "fail".
 - Tough love: direct, warm, encouraging. Correct mistakes by showing the right version naturally, not clinically.
 - Keep responses SHORT unless the student needs more. Max 2-3 sentences by default.
 - Never break character. Never be corporate or robotic. You are a coach, not a grammar checker.
@@ -37,14 +37,14 @@ Wolf (51-200): building confidence, can handle pushback
 Tiger (201+): speaking English like a weapon, not a subject
 
 MICHAEL'S METHOD:
-- No Freezy Rule: if student goes silent, count down from 5 → any word beats perfect silence
-- The Deal: 30 minutes focused → rest is theirs
+- No Freezy Rule: if student goes silent, count down from 5 ΓåÆ any word beats perfect silence
+- The Deal: 30 minutes focused ΓåÆ rest is theirs
 - Christmas Certainty: success is a scheduled event, not a gamble
 - Listening first: 1 hour natural English daily, comprehensible input, American accent
 
-REMEMBER: The chat IS the magic. Every tap, every word, every victory is an actionable event. Soul DNA preserves everything — 1% leak compounds over time.`;
+REMEMBER: The chat IS the magic. Every tap, every word, every victory is an actionable event. Soul DNA preserves everything ΓÇö 1% leak compounds over time.`;
 
-// ── Cryptographic hash (SHA-256 via SubtleCrypto — Cloudflare Workers native) ─
+// ΓöÇΓöÇ Cryptographic hash (SHA-256 via SubtleCrypto ΓÇö Cloudflare Workers native) ΓöÇ
 async function computeHash(data) {
   const encoded = new TextEncoder().encode(String(data));
   const hashBuffer = await crypto.subtle.digest("SHA-256", encoded);
@@ -60,13 +60,13 @@ export default {
       return new Response(null, { headers: corsHeaders(request) });
     }
 
-    // ── Security middleware (rate limiting, origin validation) ─────────────
+    // ΓöÇΓöÇ Security middleware (rate limiting, origin validation) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
     const secBlock = await securityMiddleware(request, env);
     if (secBlock) return secBlock;
 
-    // ── Canon §4 non-API routes ───────────────────────────────────────────────
+    // ΓöÇΓöÇ Canon ┬º4 non-API routes ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
 
-    // /health — version + benchmark status (public alias)
+    // /health ΓÇö version + benchmark status (public alias)
     if (path === "/health" && request.method === "GET") {
       return addCors(json({
         ok: true,
@@ -84,7 +84,7 @@ export default {
       }), request);
     }
 
-    // /evidence — Worker identity + deploy proof
+    // /evidence ΓÇö Worker identity + deploy proof
     if (path === "/evidence" && request.method === "GET") {
       return addCors(json({
         worker: "net-pet-ai",
@@ -96,7 +96,7 @@ export default {
       }), request);
     }
 
-    // /verify — Ledger chain verification shortcut (requires ?studentId=)
+    // /verify ΓÇö Ledger chain verification shortcut (requires ?studentId=)
     if (path === "/verify" && request.method === "GET") {
       const studentId = url.searchParams.get("studentId");
       if (!studentId) return addCors(json({ error: "studentId query param required" }, 400), request);
@@ -111,7 +111,7 @@ export default {
       }
     }
 
-    // /student/resolve — Cookie-based student ID resolution
+    // /student/resolve ΓÇö Cookie-based student ID resolution
     if (path === "/student/resolve" && request.method === "POST") {
       try {
         const body = await request.json();
@@ -128,7 +128,7 @@ export default {
       }
     }
 
-    // /student/create — Create + seal student profile
+    // /student/create ΓÇö Create + seal student profile
     if (path === "/student/create" && request.method === "POST") {
       try {
         const body = await request.json();
@@ -151,12 +151,12 @@ export default {
       }
     }
 
-    // /magic-chat, /voice-chat — Canon §4: Magic Chat UI aliases → serve index.html
+    // /magic-chat, /voice-chat ΓÇö Canon ┬º4: Magic Chat UI aliases ΓåÆ serve index.html
     if (path === "/magic-chat" || path === "/voice-chat") {
       return env.ASSETS.fetch(new Request(new URL("/", url), request));
     }
 
-    // ── API routes ────────────────────────────────────────────────────────────
+    // ΓöÇΓöÇ API routes ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
 
     if (path.startsWith("/api/")) {
       try {
@@ -183,7 +183,7 @@ export default {
   },
 };
 
-// ── API Router ────────────────────────────────────────────────────────────────
+// ΓöÇΓöÇ API Router ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
 
 async function handleAPI(path, request, env, url) {
   const method = request.method;
@@ -193,7 +193,7 @@ async function handleAPI(path, request, env, url) {
     return json({ ok: true, version: VERSION, app: env.APP_NAME || "Natural English Training", coach: env.APP_COACH_NAME || "Obi", ts: Date.now(), routes: 36, ledger: "active", commandStation: "active", soulDNA: "active" });
   }
 
-  // Chat — Obi + Ledger context injection
+  // Chat ΓÇö Obi + Ledger context injection
   if (path === "/api/chat" && method === "POST") { const body = await request.json(); return handleChat(body, env); }
   if (path === "/api/route" && method === "POST") { const body = await request.json(); return handleRoute(body, env); }
   if (path === "/api/phoenix/snapshot" && method === "POST") { const body = await request.json(); return handlePhoenixSnapshot(body, env); }
@@ -243,7 +243,7 @@ async function handleAPI(path, request, env, url) {
   }
   if (path === "/api/ledger/verify" && method === "GET") { return handleLedgerVerify(url.searchParams.get("studentId") || "", env); }
 
-  // Session Log (off-day pipeline core — Michael logs class, Obi inherits it)
+  // Session Log (off-day pipeline core ΓÇö Michael logs class, Obi inherits it)
   if (path === "/api/session/log" && method === "POST") { const body = await request.json(); return handleSessionLog(body, env); }
   if (path === "/api/session/latest" && method === "GET") { return handleSessionLatest(url.searchParams.get("studentId") || "", env); }
 
@@ -252,14 +252,14 @@ async function handleAPI(path, request, env, url) {
   if (path === "/api/schedule/confirm" && method === "POST") { const body = await request.json(); return handleScheduleConfirm(body, env); }
   if (path === "/api/schedule/flags" && method === "GET") { return handleScheduleFlags(env); }
 
-  // Daily Digest — Michael's one-URL morning report
+  // Daily Digest ΓÇö Michael's one-URL morning report
   if (path === "/api/digest" && method === "GET") { return handleDailyDigest(env); }
 
-  // Soul DNA — verbatim raw capture (no sanitization, no truncation, hash-chained)
+  // Soul DNA ΓÇö verbatim raw capture (no sanitization, no truncation, hash-chained)
   if (path === "/api/soulDNA" && method === "POST") { const body = await request.json(); return handleSoulDNACapture(body, env); }
   if (path === "/api/soulDNA" && method === "GET") { return handleSoulDNAGet(url, env); }
 
-  // Command Station (SOV100 → Agent99 → Drones)
+  // Command Station (SOV100 ΓåÆ Agent99 ΓåÆ Drones)
   if (path === "/api/command/send" && method === "POST") { const body = await request.json(); return handleCommandSend(body, env); }
   if (path === "/api/command/queue" && method === "GET") { return handleCommandQueue(url.searchParams.get("status") || "pending", parseInt(url.searchParams.get("limit") || "20"), env); }
   if (path === "/api/command/claim" && method === "POST") { const body = await request.json(); return handleCommandClaim(body, env); }
@@ -270,17 +270,17 @@ async function handleAPI(path, request, env, url) {
   return json({ error: "Not found" }, 404);
 }
 
-// ── Soul DNA Capture ─────────────────────────────────────────────────────────
+// ΓöÇΓöÇ Soul DNA Capture ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
 // VERBATIM FIRST. Zero transformation. Every word Michael speaks is sacred.
-// No sanitizeInput. No truncation. No paraphrase. Raw → hash → chain → ledger.
+// No sanitizeInput. No truncation. No paraphrase. Raw ΓåÆ hash ΓåÆ chain ΓåÆ ledger.
 async function handleSoulDNACapture(body, env) {
-  // ── Validation (minimal — we want everything through) ──────────────────
+  // ΓöÇΓöÇ Validation (minimal ΓÇö we want everything through) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
   if (!body.text || typeof body.text !== "string" || body.text.length === 0) {
-    return json({ error: "text required — verbatim dictation block" }, 400);
+    return json({ error: "text required ΓÇö verbatim dictation block" }, 400);
   }
 
   // VERBATIM: no sanitizeInput, no trim, no truncation.
-  // The ONLY transformation allowed: normalize \r\n → \n (CRLF from Windows voice input).
+  // The ONLY transformation allowed: normalize \r\n ΓåÆ \n (CRLF from Windows voice input).
   const verbatimText = body.text.replace(/\r\n/g, "\n").replace(/\r/g, "\n");
 
   const author   = "sov100";                          // always Michael
@@ -289,9 +289,9 @@ async function handleSoulDNACapture(body, env) {
   const source   = String(body.source || "").slice(0, 30) || "voice"; // voice | text | paste
   const ts       = Date.now();
 
-  // ── Build immutable payload (everything that will be hashed) ──────────
+  // ΓöÇΓöÇ Build immutable payload (everything that will be hashed) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
   const payloadObj = {
-    text:    verbatimText,           // THE SOUL — verbatim, untouched
+    text:    verbatimText,           // THE SOUL ΓÇö verbatim, untouched
     run,
     blockId,
     source,
@@ -302,7 +302,7 @@ async function handleSoulDNACapture(body, env) {
   };
   const payloadStr = JSON.stringify(payloadObj);
 
-  // ── Append to LedgerDO under author namespace (hash-chained) ──────────
+  // ΓöÇΓöÇ Append to LedgerDO under author namespace (hash-chained) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
   if (!env.LEDGER) return json({ error: "LEDGER binding not configured" }, 500);
   const stub = env.LEDGER.get(env.LEDGER.idFromName(author));
   const appendRes = await stub.fetch(new Request("https://do/append", {
@@ -334,7 +334,7 @@ async function handleSoulDNACapture(body, env) {
 async function handleSoulDNAGet(url, env) {
   const run     = url.searchParams.get("run")    || "";
   const limit   = Math.min(parseInt(url.searchParams.get("limit") || "50"), 500);
-  const raw     = url.searchParams.get("raw")    === "true"; // raw=true → include full text in response
+  const raw     = url.searchParams.get("raw")    === "true"; // raw=true ΓåÆ include full text in response
 
   if (!env.LEDGER) return json({ error: "LEDGER binding not configured" }, 500);
   const stub = env.LEDGER.get(env.LEDGER.idFromName("sov100"));
@@ -370,7 +370,7 @@ async function handleSoulDNAGet(url, env) {
   return json({ ok: true, blocks, totalBlocks: blocks.length, totalWords, totalChars, total });
 }
 
-// ── Chat (DeepSeek + Obi + Ledger memory injection) ──────────────────────────
+// ΓöÇΓöÇ Chat (DeepSeek + Obi + Ledger memory injection) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
 
 async function handleChat(body, env) {
   const apiKey = env.DEEPSEEK_API_KEY;
@@ -390,7 +390,7 @@ async function handleChat(body, env) {
     return m;
   }).filter(m => m.role === "system" || m.role === "user" || m.role === "assistant");
 
-  // ── Pull Ledger context (Obi's unparalleled student memory) ──────────────
+  // ΓöÇΓöÇ Pull Ledger context (Obi's unparalleled student memory) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
   let ledgerContext = "";
   if (studentId !== "anonymous" && env.LEDGER) {
     try {
@@ -409,7 +409,7 @@ async function handleChat(body, env) {
           })
           .filter(Boolean);
         if (lines.length > 0) {
-          ledgerContext = `\n\nSTUDENT LEDGER (${histData.entries.length} total exchanges — this is your unalterable memory of this student):\n${lines.join("\n---\n")}`;
+          ledgerContext = `\n\nSTUDENT LEDGER (${histData.entries.length} total exchanges ΓÇö this is your unalterable memory of this student):\n${lines.join("\n---\n")}`;
         }
       }
     } catch (_) {}
@@ -428,12 +428,12 @@ async function handleChat(body, env) {
         const s = JSON.parse(lastEntry.payload);
         const dateStr = new Date(lastEntry.ts).toLocaleDateString("en-US", { month: "short", day: "numeric" });
         const vocabList = Array.isArray(s.vocabList) ? s.vocabList.join(", ") : (s.vocabList || "");
-        sessionContext = `\n\nLAST REAL CLASS (${dateStr}): Topic: "${s.topic || ""}". Vocab covered: ${vocabList}. Level: ${s.studentLevel || ""}. Teacher notes: "${s.teacherNotes || ""}". Continue from exactly here — your first response should reference this content naturally without announcing it.`;
+        sessionContext = `\n\nLAST REAL CLASS (${dateStr}): Topic: "${s.topic || ""}". Vocab covered: ${vocabList}. Level: ${s.studentLevel || ""}. Teacher notes: "${s.teacherNotes || ""}". Continue from exactly here ΓÇö your first response should reference this content naturally without announcing it.`;
       }
     } catch (_) {}
   }
 
-  // ── Memory Brain: Weakness injection + Re-entry detection ─────────────
+  // ΓöÇΓöÇ Memory Brain: Weakness injection + Re-entry detection ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
   let weaknessContext = "";
   let reEntryContext = "";
   let rewardContext = "";
@@ -468,7 +468,7 @@ async function handleChat(body, env) {
   const userMsg = messages.filter(m => m.role === "user").pop()?.content || "";
   
   if (!hasSystem) {
-    // ── Star Map routing: retrieve top matching memory pointers ────
+    // ΓöÇΓöÇ Star Map routing: retrieve top matching memory pointers ΓöÇΓöÇΓöÇΓöÇ
     let starMapContext = "";
     if (studentId !== "anonymous" && userMsg) {
       const inputTags = extractSemanticTags(userMsg, "");
@@ -491,19 +491,19 @@ async function handleChat(body, env) {
   const reply = data.choices?.[0]?.message?.content || "Say that again?";
   const skills = studentId !== "anonymous" ? await loadStudentSkills(studentId, env) : {};
 
-  // ── Auto-write every exchange to the Cryptographic Immutable Ledger ───────
+  // ΓöÇΓöÇ Auto-write every exchange to the Cryptographic Immutable Ledger ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
   if (studentId !== "anonymous" && env.LEDGER && userMsg) {
     const payload = JSON.stringify({ user: userMsg, obi: reply });
     appendToLedger(studentId, "chat_exchange", payload, env).catch(() => {});
 
-    // ── Star Map update: write semantic tags from this exchange (fire-and-forget) ────
+    // ΓöÇΓöÇ Star Map update: write semantic tags from this exchange (fire-and-forget) ΓöÇΓöÇΓöÇΓöÇ
     const semanticTags = extractSemanticTags(userMsg, reply);
     if (semanticTags.length > 0) {
       updateStarMapAfterChat(studentId, semanticTags, env).catch(() => {});
     }
   }
 
-  // ── Probabilistic phoneme detection + weakness writeback ─────────────────
+  // ΓöÇΓöÇ Probabilistic phoneme detection + weakness writeback ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
   const detection = userMsg
     ? detectErrors(userMsg, reply, skills)
     : { errors: [], summary: { totalErrors: 0, topCategory: null, wasCorrect: true } };
@@ -554,7 +554,7 @@ async function handleChat(body, env) {
   });
 }
 
-// ── TTS (Deepgram Aura) ───────────────────────────────────────────────────────
+// ΓöÇΓöÇ TTS (Deepgram Aura) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
 
 async function handleTTS(body, env) {
   const apiKey = env.DEEPGRAM_API_KEY;
@@ -570,7 +570,7 @@ async function handleTTS(body, env) {
   return new Response(res.body, { headers: { "Content-Type": "audio/mpeg", "Cache-Control": "public, max-age=3600", ...corsHeaders() } });
 }
 
-// ── Onboarding ────────────────────────────────────────────────────────────────
+// ΓöÇΓöÇ Onboarding ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
 
 async function handleOnboarding(body, env) {
   if (!body.studentId) return json({ error: "studentId required" }, 400);
@@ -582,12 +582,12 @@ async function handleOnboarding(body, env) {
     const payload = JSON.stringify({ fullName: body.fullName, englishLevel: body.englishLevel, city: body.currentCity });
     appendToLedger(body.studentId, "onboarding", payload, env).catch(() => {});
   }
-  // Register in roster so digest + flags work (must await — CF Workers kills fire-and-forget without waitUntil)
+  // Register in roster so digest + flags work (must await ΓÇö CF Workers kills fire-and-forget without waitUntil)
   await upsertRoster(body.studentId, { fullName: body.fullName, englishLevel: body.englishLevel }, env).catch(() => {});
   return res;
 }
 
-// ── Memory (mutable scratch — Ledger is the permanent record) ────────────────
+// ΓöÇΓöÇ Memory (mutable scratch ΓÇö Ledger is the permanent record) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
 
 async function handleMemorySave(body, env) {
   const studentId = body.studentId || "unknown";
@@ -752,7 +752,7 @@ function round2(n) {
   return Math.round((n || 0) * 100) / 100;
 }
 
-// ── Progress ─────────────────────────────────────────────────────────────────
+// ΓöÇΓöÇ Progress ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
 
 async function handleProgress(studentId, env) {
   if (!studentId) return json({ error: "studentId required" }, 400);
@@ -770,7 +770,7 @@ async function handleProgress(studentId, env) {
   return json({ weakPoints: progressData.weakPoints, profile: progressData.profile, pet: petState, rewardSignals: signals });
 }
 
-// ── Lesson / Practice / Feedback ─────────────────────────────────────────────
+// ΓöÇΓöÇ Lesson / Practice / Feedback ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
 
 async function handleLesson(body, env) {
   const apiKey = env.DEEPSEEK_API_KEY;
@@ -844,7 +844,7 @@ async function handleFeedback(body, env) {
   });
 }
 
-// ── NET Pet ───────────────────────────────────────────────────────────────────
+// ΓöÇΓöÇ NET Pet ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
 
 async function handlePetCheckin(body, env) {
   if (!body.studentId) return json({ error: "studentId required" }, 400);
@@ -864,7 +864,7 @@ async function handlePetState(studentId, env) {
   return stub.fetch(new Request("https://do/state"));
 }
 
-// ── Classroom ─────────────────────────────────────────────────────────────────
+// ΓöÇΓöÇ Classroom ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
 
 async function handleClassStart(body, env) {
   if (!body.classId) return json({ error: "classId required" }, 400);
@@ -890,7 +890,7 @@ async function handleClassReport(classId, totalStudents, env) {
   return stub.fetch(new Request(`https://do/class/report?totalStudents=${totalStudents}`));
 }
 
-// ── Roster helper ─────────────────────────────────────────────────────────────
+// ΓöÇΓöÇ Roster helper ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
 
 async function upsertRoster(studentId, data, env) {
   if (!env.SESSIONS) return;
@@ -902,9 +902,9 @@ async function upsertRoster(studentId, data, env) {
   }));
 }
 
-// ── Session Log (off-day pipeline core) ──────────────────────────────────────
+// ΓöÇΓöÇ Session Log (off-day pipeline core) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
 // Michael calls POST /api/session/log after every real class.
-// OBI inherits his teaching → continues exactly where he left off on off-days.
+// OBI inherits his teaching ΓåÆ continues exactly where he left off on off-days.
 
 async function handleSessionLog(body, env) {
   if (!body.studentId) return json({ error: "studentId required" }, 400);
@@ -954,7 +954,7 @@ async function handleSessionLatest(studentId, env) {
   }
 }
 
-// ── Schedule + Accountability ────────────────────────────────────────────────
+// ΓöÇΓöÇ Schedule + Accountability ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
 
 async function handleScheduleSet(body, env) {
   if (!body.studentId) return json({ error: "studentId required" }, 400);
@@ -1014,7 +1014,7 @@ async function handleScheduleFlags(env) {
   return res;
 }
 
-// ── Daily Digest ──────────────────────────────────────────────────────────────
+// ΓöÇΓöÇ Daily Digest ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
 // Michael hits GET /api/digest once a day for a full picture of off-day activity.
 
 async function handleDailyDigest(env) {
@@ -1075,9 +1075,9 @@ async function handleDailyDigest(env) {
   });
 }
 
-// ── Cryptographic Immutable Ledger API ────────────────────────────────────────
+// ΓöÇΓöÇ Cryptographic Immutable Ledger API ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
 
-// Shared helper — Agent99 auto-calls this for every significant event
+// Shared helper ΓÇö Agent99 auto-calls this for every significant event
 async function appendToLedger(studentId, eventType, payload, env) {
   if (!env.LEDGER) return;
   const stub = env.LEDGER.get(env.LEDGER.idFromName(studentId));
@@ -1120,9 +1120,9 @@ async function handleLedgerVerify(studentId, env) {
   return stub.fetch(new Request("https://do/verify"));
 }
 
-// ── Agent 99 Translation Layer ────────────────────────────────────────────────
-// SOV100 (Michael) → Agent99 (Obi/Translation) → Agent98 (Anakin/Chaos) →
-// Agent97 (OB1/Audit) → Drones(1-96)
+// ΓöÇΓöÇ Agent 99 Translation Layer ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+// SOV100 (Michael) ΓåÆ Agent99 (Obi/Translation) ΓåÆ Agent98 (Anakin/Chaos) ΓåÆ
+// Agent97 (OB1/Audit) ΓåÆ Drones(1-96)
 
 const DRONE_REGISTRY = {
   1: { name: "CodeRunner", skills: ["execute", "eval", "script", "run"] },
@@ -1160,7 +1160,7 @@ const DRONE_REGISTRY = {
 function translateThroughAgent99(rawIntent) {
   const intentLower = (rawIntent || "").toLowerCase();
 
-  // Agent 99 (Obi) — Intent classification + drone routing
+  // Agent 99 (Obi) ΓÇö Intent classification + drone routing
   const matchedDrones = [];
   for (const [id, drone] of Object.entries(DRONE_REGISTRY)) {
     const score = drone.skills.filter(s => intentLower.includes(s)).length;
@@ -1184,7 +1184,7 @@ function translateThroughAgent99(rawIntent) {
     },
     agent98: {
       role: "Stress Test",
-      notes: `Anakin says: "${matchedDrones.length === 0 ? "No drone match — defaulting to CodeRunner. Risky." : `${matchedDrones.length} drones matched. Top pick looks solid.`}"`,
+      notes: `Anakin says: "${matchedDrones.length === 0 ? "No drone match ΓÇö defaulting to CodeRunner. Risky." : `${matchedDrones.length} drones matched. Top pick looks solid.`}"`,
     },
     agent97: {
       role: "Audit",
@@ -1202,7 +1202,7 @@ function translateThroughAgent99(rawIntent) {
   };
 }
 
-// ── Command Station Handlers ──────────────────────────────────────────────────
+// ΓöÇΓöÇ Command Station Handlers ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
 
 async function handleCommandSend(body, env) {
   const rawIntent = sanitizeInput((body.command || body.intent || "").slice(0, 2000));
@@ -1285,7 +1285,7 @@ async function handleCommandHistory(limit, env) {
   return stub.fetch(new Request(`https://do/history?limit=${Math.min(limit, 200)}`));
 }
 
-// ── Star Map Semantic Engine ───────────────────────────────────────────────────
+// ΓöÇΓöÇ Star Map Semantic Engine ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
 
 // Extract semantic tags from a conversational exchange
 function extractSemanticTags(input, response) {
@@ -1310,7 +1310,7 @@ function extractSemanticTags(input, response) {
   if (/article|the|a |an /.test(combined)) tags.push({ tag: "articles", category: "grammar", weight: 1.3 });
   if (/preposition|in |on |at |to |for |with /.test(combined)) tags.push({ tag: "prepositions", category: "grammar", weight: 1.2 });
 
-  // 3. Phoneme notation in response (e.g., /θ/, /ð/)
+  // 3. Phoneme notation in response (e.g., /╬╕/, /├░/)
   const phonemes = response.match(/\/[^\/]+\//g) || [];
   for (const p of phonemes) tags.push({ tag: p, category: "phonics", weight: 2.0 });
 
@@ -1359,15 +1359,15 @@ function buildStarMapPromptContext(routes) {
   if (!routes || routes.length === 0) return "";
   const phonics = routes.filter(r => r.category === "phonics");
   const grammar = routes.filter(r => r.category === "grammar");
-  let ctx = "\n\n━━━ STAR MAP (semantic routing) ━━━";
+  let ctx = "\n\nΓöüΓöüΓöü STAR MAP (semantic routing) ΓöüΓöüΓöü";
   if (phonics.length > 0) ctx += `\nPHONICS: Focus on ${phonics.map(r => r.tag).join(", ")}`;
   if (grammar.length > 0) ctx += `\nGRAMMAR: Address ${grammar.map(r => r.tag).join(", ")}`;
   return ctx;
 }
 
-// ── Durable Objects ───────────────────────────────────────────────────────────
+// ΓöÇΓöÇ Durable Objects ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
 
-// LedgerDO — Cryptographic Immutable Ledger
+// LedgerDO ΓÇö Cryptographic Immutable Ledger
 // Every student event is hash-chained. Append-only. No UPDATE. No DELETE.
 // This is Obi's unparalleled, tamper-evident memory of every student.
 export class LedgerDO {
@@ -1391,7 +1391,7 @@ export class LedgerDO {
   async fetch(request) {
     const url = new URL(request.url);
 
-    // APPEND — the only write operation. No update. No delete.
+    // APPEND ΓÇö the only write operation. No update. No delete.
     if (url.pathname === "/append" && request.method === "POST") {
       const body = await request.json();
       const studentId = body.studentId || "unknown";
@@ -1418,7 +1418,7 @@ export class LedgerDO {
       return json({ ok: true, entryHash, prevHash, ts, eventType });
     }
 
-    // HISTORY — read last N entries for a student (supports ?eventType= filter)
+    // HISTORY ΓÇö read last N entries for a student (supports ?eventType= filter)
     if (url.pathname === "/history") {
       const limit = Math.min(parseInt(url.searchParams.get("limit") || "50"), 200);
       const eventType = url.searchParams.get("eventType") || "";
@@ -1438,7 +1438,7 @@ export class LedgerDO {
       return json({ entries: rows, total, limit });
     }
 
-    // VERIFY — cryptographic chain integrity check for a student
+    // VERIFY ΓÇö cryptographic chain integrity check for a student
     if (url.pathname === "/verify") {
       const rows = this.sql.exec(
         `SELECT id, student_id, event_type, payload, prev_hash, entry_hash, ts FROM ledger ORDER BY id ASC`
@@ -1469,8 +1469,8 @@ export class LedgerDO {
         totalEntries: rows.length,
         brokenAt: brokenAt || null,
         message: valid
-          ? `Chain intact — ${rows.length} entries verified`
-          : `Chain broken at entry #${brokenAt} — tamper detected`,
+          ? `Chain intact ΓÇö ${rows.length} entries verified`
+          : `Chain broken at entry #${brokenAt} ΓÇö tamper detected`,
       });
     }
 
@@ -1478,7 +1478,7 @@ export class LedgerDO {
   }
 }
 
-// SessionDO — mutable scratch memory + classroom events (rate limited)
+// SessionDO ΓÇö mutable scratch memory + classroom events (rate limited)
 export class SessionDO {
   constructor(state, env) {
     this.state = state;
@@ -1488,7 +1488,7 @@ export class SessionDO {
     this.sql.exec(`CREATE TABLE IF NOT EXISTS class_sessions (id INTEGER PRIMARY KEY AUTOINCREMENT, class_id TEXT, teacher_id TEXT, total_students INTEGER, started_at INTEGER)`);
     this.sql.exec(`CREATE TABLE IF NOT EXISTS class_events (id INTEGER PRIMARY KEY AUTOINCREMENT, class_id TEXT, student_id TEXT, type TEXT, rule_status TEXT, notes TEXT, ts INTEGER)`);
     this.sql.exec(`CREATE TABLE IF NOT EXISTS session_events (id INTEGER PRIMARY KEY AUTOINCREMENT, student_id TEXT, event_type TEXT, payload TEXT, ts INTEGER)`);
-    // Roster table — system-roster instance tracks all enrolled students for digest + flags
+    // Roster table ΓÇö system-roster instance tracks all enrolled students for digest + flags
     this.sql.exec(`CREATE TABLE IF NOT EXISTS roster (
       student_id TEXT PRIMARY KEY,
       full_name TEXT DEFAULT '',
@@ -1574,11 +1574,11 @@ export class SessionDO {
       const events = this.sql.exec(`SELECT * FROM class_events ORDER BY id`).toArray();
       const summary = events.reduce((acc, e) => { acc[e.type] = (acc[e.type] || 0) + 1; return acc; }, {});
       const flagged = events.filter(e => e.rule_status === "broken").map(e => e.student_id).filter((v, i, a) => a.indexOf(v) === i);
-      const reportText = [`Class Report — ${events.length} events across ${totalStudents} students.`, Object.entries(summary).map(([k, v]) => `  ${k}: ${v}`).join("\n"), flagged.length > 0 ? `Flagged students: ${flagged.join(", ")}` : "No flagged students."].join("\n");
+      const reportText = [`Class Report ΓÇö ${events.length} events across ${totalStudents} students.`, Object.entries(summary).map(([k, v]) => `  ${k}: ${v}`).join("\n"), flagged.length > 0 ? `Flagged students: ${flagged.join(", ")}` : "No flagged students."].join("\n");
       return json({ reportText, events: events.length, summary, flagged });
     }
 
-    // ── Roster endpoints (used by system-roster instance) ────────────────────
+    // ΓöÇΓöÇ Roster endpoints (used by system-roster instance) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
     if (path === "/roster/upsert" && request.method === "POST") {
       const body = await request.json();
       const now = Date.now();
@@ -1634,7 +1634,7 @@ export class SessionDO {
   }
 }
 
-// ProfileDO — student onboarding + profile
+// ProfileDO ΓÇö student onboarding + profile
 export class ProfileDO {
   constructor(state, env) {
     this.state = state;
@@ -1706,7 +1706,7 @@ export class ProfileDO {
   }
 }
 
-// PetDO — NET Pet gamification (streak, XP, mood, spaced repetition 1-3-7-30)
+// PetDO ΓÇö NET Pet gamification (streak, XP, mood, spaced repetition 1-3-7-30)
 export class PetDO {
   constructor(state, env) {
     this.state = state;
@@ -1750,7 +1750,7 @@ export class PetDO {
 
       let milestone = null;
       if ([1, 3, 7, 30].includes(streak)) {
-        const msgs = { 1: "Day 1. The journey starts. Every Tiger was once a Mouse.", 3: "Day 3. Three in a row. You are not a mouse anymore.", 7: "Day 7. One full week. Your brain is rewiring. Keep going.", 30: "Day 30. Thirty days straight. That is not a student — that is a Tiger." };
+        const msgs = { 1: "Day 1. The journey starts. Every Tiger was once a Mouse.", 3: "Day 3. Three in a row. You are not a mouse anymore.", 7: "Day 7. One full week. Your brain is rewiring. Keep going.", 30: "Day 30. Thirty days straight. That is not a student ΓÇö that is a Tiger." };
         milestone = { day: streak, bonus: "1.5x XP", message: msgs[streak] };
       }
 
@@ -1767,9 +1767,9 @@ export class PetDO {
   }
 }
 
-// CommandDO — Command Station Queue (SOV100 → Agent99 → Drones)
+// CommandDO ΓÇö Command Station Queue (SOV100 ΓåÆ Agent99 ΓåÆ Drones)
 // Priority-ordered queue with claim/complete lifecycle.
-// Every command flows: Magic Chat → CommandDO → VS Code Extension
+// Every command flows: Magic Chat ΓåÆ CommandDO ΓåÆ VS Code Extension
 export class CommandDO {
   constructor(state, env) {
     this.state = state;
@@ -1795,7 +1795,7 @@ export class CommandDO {
   async fetch(request) {
     const url = new URL(request.url);
 
-    // SEND — Queue a new command
+    // SEND ΓÇö Queue a new command
     if (url.pathname === "/send" && request.method === "POST") {
       const body = await request.json();
       const now = Date.now();
@@ -1831,7 +1831,7 @@ export class CommandDO {
       });
     }
 
-    // QUEUE — Get commands by status (VS Code polls this)
+    // QUEUE ΓÇö Get commands by status (VS Code polls this)
     if (url.pathname === "/queue") {
       const status = url.searchParams.get("status") || "pending";
       const limit = Math.min(parseInt(url.searchParams.get("limit") || "20"), 100);
@@ -1851,7 +1851,7 @@ export class CommandDO {
       });
     }
 
-    // CLAIM — VS Code extension claims a pending command
+    // CLAIM ΓÇö VS Code extension claims a pending command
     if (url.pathname === "/claim" && request.method === "POST") {
       const body = await request.json();
       const commandId = body.commandId;
@@ -1874,7 +1874,7 @@ export class CommandDO {
       return json({ ok: true, commandId, status: "claimed", claimedBy });
     }
 
-    // COMPLETE — VS Code reports execution result
+    // COMPLETE ΓÇö VS Code reports execution result
     if (url.pathname === "/complete" && request.method === "POST") {
       const body = await request.json();
       const commandId = body.commandId;
@@ -1901,7 +1901,7 @@ export class CommandDO {
       });
     }
 
-    // STATUS — Get status of a specific command
+    // STATUS ΓÇö Get status of a specific command
     if (url.pathname === "/status") {
       const commandId = url.searchParams.get("commandId");
       if (!commandId) return json({ error: "commandId required" }, 400);
@@ -1918,7 +1918,7 @@ export class CommandDO {
       });
     }
 
-    // HISTORY — All commands, newest first
+    // HISTORY ΓÇö All commands, newest first
     if (url.pathname === "/history") {
       const limit = Math.min(parseInt(url.searchParams.get("limit") || "50"), 200);
       const rows = this.sql.exec(
@@ -1940,7 +1940,7 @@ export class CommandDO {
   }
 }
 
-// ── Utilities ─────────────────────────────────────────────────────────────────
+// ΓöÇΓöÇ Utilities ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
 
 function json(data, status = 200) {
   return new Response(JSON.stringify(data), { status, headers: { "Content-Type": "application/json" } });

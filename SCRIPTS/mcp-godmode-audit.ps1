@@ -34,8 +34,8 @@ function Test-Cloudflare {
 
         return [pscustomobject]@{
             Service = "Cloudflare"
-            Live = $true
-            Detail = "Accounts=$($accounts.result.Count); Workers=$workers; Email=$email"
+            Live    = $true
+            Detail  = "Accounts=$($accounts.result.Count); Workers=$workers; Email=$email"
         }
     }
     catch {
@@ -112,8 +112,8 @@ $checks = @(
 if ($Json) {
     [pscustomobject]@{
         Timestamp = (Get-Date).ToString("yyyy-MM-dd HH:mm:ss")
-        Env = $envStatus
-        Checks = $checks
+        Env       = $envStatus
+        Checks    = $checks
     } | ConvertTo-Json -Depth 6
     exit 0
 }

@@ -1,6 +1,6 @@
 name = "net-pet-ai"
 main = "src/index.js"
-compatibility_date = "2026-03-16"
+compatibility_date = "2026-04-12"
 compatibility_flags = ["nodejs_compat"]
 
 workers_dev = true
@@ -16,42 +16,13 @@ directory = "./public"
 binding = "ASSETS"
 
 [[durable_objects.bindings]]
-name = "SESSIONS"
-class_name = "SessionDO"
-
-[[durable_objects.bindings]]
-name = "PROFILES"
-class_name = "ProfileDO"
-
-[[durable_objects.bindings]]
-name = "PETS"
-class_name = "PetDO"
-
-[[durable_objects.bindings]]
-name = "LEDGER"
-class_name = "LedgerDO"
-
-[[durable_objects.bindings]]
-name = "COMMANDS"
-class_name = "CommandDO"
+name = "MEMORY"
+class_name = "MemoryDO"
 
 [[migrations]]
-tag = "v1-net-pet-core"
-new_sqlite_classes = ["SessionDO", "ProfileDO", "PetDO"]
-
-[[migrations]]
-tag = "v2-ledger"
-new_sqlite_classes = ["LedgerDO"]
-
-[[migrations]]
-tag = "v3-command-station"
-new_sqlite_classes = ["CommandDO"]
+tag = "v4-ship-memory"
+new_sqlite_classes = ["MemoryDO"]
 
 [vars]
 APP_NAME = "Natural English Training"
 APP_COACH_NAME = "Obi"
-
-# Notion Integration (optional — features degrade gracefully when unset)
-# Set via: wrangler secret put NOTION_API_KEY
-#          wrangler secret put NOTION_LESSONS_DB
-#          wrangler secret put NOTION_PROGRESS_DB
