@@ -1323,6 +1323,74 @@ Speak ΓåÆ Correct ΓåÆ Repeat ΓåÆ Return tomorrow
 
 ---
 
+# MERGE4-FINAL — Lane 4 Ground Truth Audit (Read-Only)
+
+**Agent**: OB1 Ne0 (Agent-99 / GitHub Copilot — Claude Opus 4.6)
+**Merge Time**: 2026-04-12 ~04:05 ICT
+**Type**: READ-ONLY AUDIT — no code changed, no files modified except this append
+
+## BUILD STATUS: BROKEN
+
+`node --check` passes (syntax valid). `wrangler deploy --dry-run` **FAILS with 5 import errors**:
+
+### star-map.js — 3 phantom imports
+index.js line 13 imports: `routeIntent, getStudentRoute, getModulePrompt, createSnapshot, storeSnapshot, rehydrate`
+star-map.js actually exports: `lookup, buildPromptContext, selectMode, getModePrompt, computeWriteback, driftDetect, createSnapshot, storeSnapshot, rehydrate`
+
+| Import (broken) | Actual export (fix target) |
+|-----------------|---------------------------|
+| `routeIntent` ❌ | `lookup` |
+| `getStudentRoute` ❌ | `selectMode` (probable) |
+| `getModulePrompt` ❌ | `getModePrompt` |
+| `createSnapshot` ✅ | ✅ |
+| `storeSnapshot` ✅ | ✅ |
+| `rehydrate` ✅ | ✅ |
+
+### notion.js — 2 phantom imports
+index.js line 9 imports: `queryLessons, writeProgress, queryProgress, syncStudentProgress, writeSoulDNA, writeChatExchange`
+notion.js actually exports: `queryLessons, writeProgress, queryProgress, syncStudentProgress`
+
+| Import (broken) | Exists? |
+|-----------------|---------|
+| `writeSoulDNA` ❌ | Not in notion.js — remove or build |
+| `writeChatExchange` ❌ | Not in notion.js — remove or build |
+
+## FILE STATE — Ground Truth Snapshot
+
+| Fact | Value |
+|------|-------|
+| `index.js` lines | 4246 |
+| Header comment | `v1.4` |
+| VERSION constant | `"1.5.0"` |
+| Header ≠ constant | YES — mismatch |
+| Build status | **BROKEN** (5 import errors) |
+| Modules imported | 7 (security, memory-brain, notion, zalo, growth-engine, virality, star-map) |
+| Durable Objects | 5 (SessionDO, ProfileDO, PetDO, LedgerDO, CommandDO) |
+
+## MERGE INVENTORY CORRECTION
+
+- **MERGE5**: NOT Run 293 — found in Run 291 artifact (`2026-04-12-run291-memory-brain-soul-fused-build.md`)
+- **MERGE8**: MIA — no trace in any CANON file
+- **Run 293 actual merge count**: 9 (MERGE 1, 2, 3, 4, 6, 7, 9, 10, 11)
+- **Run 293 missing**: MERGE8 only (MERGE5 was wrongly attributed)
+
+## PRIORITY FIX LIST FOR NEXT SESSION
+
+1. **P0**: Fix 5 import mismatches (star-map.js × 3, notion.js × 2) — restores build
+2. **P1**: Align header `v1.4` and constant `"1.5.0"` to one version
+3. **P1**: Update this artifact's header block (chat count, status)
+4. **P2**: COLD-START-BOOT update (Run 290 → Run 293)
+5. **P3**: Pre-commit hook for `node --check`
+
+## LANE 4 CLOSURE
+- Lane 4 contributed: architecture arbitration (MERGE4) + full ground-truth audit (MERGE4-FINAL)
+- Total appends: 2
+- Code changes: 0
+- Overwrites: 0
+- Lane 4 is CLOSED.
+
+---
+
 # MERGE14 — SoulDNA Lane Death-Merge + COLD-START-BOOT Recovery
 
 **Agent**: OB1 Ne0 (Agent-99)
