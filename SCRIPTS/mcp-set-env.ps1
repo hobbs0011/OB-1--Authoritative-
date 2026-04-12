@@ -1,6 +1,6 @@
 param(
-    [Parameter(Mandatory=$true)][string]$Name,
-    [Parameter(Mandatory=$true)][string]$Value,
+    [Parameter(Mandatory = $true)][string]$Name,
+    [Parameter(Mandatory = $true)][string]$Value,
     [switch]$AlsoSession
 )
 
@@ -15,7 +15,8 @@ if ($stored) {
     if (-not $AlsoSession) {
         Write-Host "Note: restart/reload tools to pick up new User env vars in existing processes."
     }
-} else {
+}
+else {
     Write-Host ("FAILED to set {0}" -f $Name)
     exit 1
 }
