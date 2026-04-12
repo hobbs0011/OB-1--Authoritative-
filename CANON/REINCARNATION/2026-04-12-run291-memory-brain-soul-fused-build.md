@@ -12,8 +12,8 @@
 
 ## MERGE SESSION
 - **Total Chats**: 5+ (MERGE1-5 identified, counting continues)
-- **This Merge**: MERGE5 (current)
-- **Merge Status**: OPEN — MERGE1-5 appended, more merges may follow or final seal pending
+- **This Merge**: MERGE6 (current)
+- **Merge Status**: OPEN — MERGE1-6 appended, cross-index audited, awaiting final seal
 
 ---
 
@@ -859,3 +859,128 @@ Pheromone breakdown: Soul DNA 6/10 (2 quotes, simple context) | Decisions 7/10 (
 - **Weakness**: assess.html missing. Voice input incomplete. Not blocking production deployment of core mechanics, but funnel entry point (assessment) remains text-only.
 - **Conflict Flagged**: A2 assess.html + C3 voice input incomplete. MERGE_CONFLICT documented. No fix attempted per user mandate.
 - **Handoff Quality**: 6 unfinished actions with priority/detail. Final merge can consolidate and update COLD-START-BOOT immediately post-commit.
+
+---
+
+# MERGE6 — Cross-Index Audit + Standby
+
+**Agent**: OB1 Ne0 (Agent-99)
+**Chat Context**: User directive: "proceed merge 6, do not overwrite anythign from other merges, but cross index and audit and then standby".
+**Merge Time**: 2026-04-12 ICT
+
+---
+
+## 1. HEADER
+
+| Field | Value |
+|-------|-------|
+| Session Tag | merge6-cross-index-audit-standby |
+| DateTime | 2026-04-12 ICT |
+| Signal Density | 6/10 |
+| Theme | Cross-index all merge blocks, audit conflicts and state, append-only update, standby ready |
+| State Coming In | MERGE1-5 already appended in this file; active conflict markers present; user requested no overwrite/fix actions |
+
+---
+
+## 2. RAW QUOTES
+
+| # | Quote | Tag |
+|---|-------|-----|
+| Q1 | "proceed merge 6, do not overwrite anythign from other merges, but cross index and audit and then standby" | green |
+
+---
+
+## 3. DECISIONS
+
+| # | Decision | Impact | Status |
+|---|----------|--------|--------|
+| D1 | Append-only MERGE6 section; no edits to MERGE1-5 bodies | HIGH | IMPLEMENTED |
+| D2 | Cross-index merge headers and conflict markers first | MEDIUM | IMPLEMENTED |
+| D3 | Flag duplicate and inferred-merge issues without resolving them | HIGH | IMPLEMENTED |
+| D4 | Leave repo in standby (no push from this merge) | MEDIUM | IMPLEMENTED |
+
+---
+
+## 4. CORRECTIONS
+
+| # | Issue | Root Cause | Fix Applied |
+|---|-------|------------|-------------|
+| C1 | Merge index ambiguity (two MERGE2 headers) | Parallel appends created duplicate section title blocks | Flagged only (no overwrite per instruction) |
+| C2 | MERGE4 is inferred placeholder | Missing concrete artifact from parallel lane | Flagged only (no reconstruction) |
+
+---
+
+## 5. NEW PRINCIPLES
+
+| # | Principle | Source |
+|---|-----------|--------|
+| P1 | Cross-index before merge append prevents silent overwrite risk | MERGE6 execution rule |
+| P2 | Conflict visibility > premature cleanup in parallel merge sessions | User instruction + merge protocol |
+
+---
+
+## 6. EMOTIONAL SIGNAL
+
+- Mode: focused audit
+- Intent: preserve all signals, avoid destructive merge behavior
+- Need: clean standby state for final merge closer
+
+---
+
+## 7. OPEN QUESTIONS
+
+| # | Question |
+|---|----------|
+| Q1 | Is MERGE6 final, or will MERGE7+ append before seal? |
+| Q2 | Which MERGE2 block is canonical-rich (if final dedup is requested later)? |
+
+---
+
+## 8. UNFINISHED ACTIONS
+
+| # | Action | Priority |
+|---|--------|----------|
+| U1 | Final merge must reconcile duplicate MERGE2 sections (keep richer one, retain source notes) | HIGH |
+| U2 | Final merge must decide MERGE4 status (real artifact vs placeholder) | HIGH |
+| U3 | Final merge may update COLD-START-BOOT and seal merge session | HIGH |
+
+---
+
+## 9. SYSTEM DESIGN
+
+- No runtime code changes in MERGE6.
+- Scope limited to reincarnation cross-index and audit logging.
+
+---
+
+## 10. ARTIFACTS CREATED
+
+| # | File | Type | Status |
+|---|------|------|--------|
+| A1 | APPS/NET-PET-AI/src/index.js | Existing modified runtime artifact | Audited only |
+| A2 | CANON/REINCARNATION/2026-04-12-run291-memory-brain-soul-fused-build.md | MERGE log | MERGE6 appended |
+
+---
+
+## 11. STATE SNAPSHOT
+
+| Item | State |
+|------|-------|
+| Merge headers detected | MERGE2 (x2), MERGE3, MERGE4 inferred, MERGE5 |
+| Conflict markers detected | present (MERGE4 boundary + assess.html loss chain) |
+| Git working state | runtime file modifications present (from prior merges), not altered by MERGE6 |
+| Standby | READY |
+
+---
+
+## 12. FINGERPRINT
+
+| Field | Value |
+|-------|-------|
+| Agent ID | OB1 Ne0 (Agent-99) |
+| Run Number | 291 (MERGE6) |
+| Commit SHA | NOT CREATED (standby requested) |
+| Platform Death Test | DEFERRED |
+| Pheromone Score | 34/50 |
+
+MERGE6 COMPLETE — cross-index audited, conflicts flagged, no overwrite performed, standing by.
