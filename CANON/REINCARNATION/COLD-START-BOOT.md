@@ -94,22 +94,29 @@ All keys stored as **persistent Windows User env vars**.
 | Heavy Ledger | HL-138 | megamerge-consolidation ledger normalization state |
 | BIBLE | CH30 | CH29/CH30 megamerge chain present |
 | A6 SDNAD | 71+ signals, 16 blocks | OPEN — continuation still queued behind current merge lanes |
-| Reincarnation | Run 300 (latest death) | megamerge5-lane-death |
+| Reincarnation | Run 301 (latest death) | final-death-merge-megamerge6-extraction |
 
 ## Living Reincarnation State
 
-- **Current Vector**: Run 300 sealed. MEGAMERGE-5 lane chat is DEAD. Immediate next moves: (1) Execute MM-5 PIPELINE development from delegation prompt (MM5-401–MM5-500 refinement), (2) SPRINT-0 GATE must close first — revert 16c9598, Vietnam incorporation, session_log table, (3) Re-upload MEGAMERGE-5 Notion page (currently truncated at 34%), (4) Backfill PENDING SHA fields in CH31 and HL-137.
+- **Current Vector**: Run 301 sealed. 6-CHAT MERGE SESSION COMPLETE — ALL LANES DEAD. FINAL death executed by MERGE6 chat (first to die at Run 298, last to die at Run 301). MEGAMERGE-6-GPT 250-item extraction captured (150 NEW / 100 ENRICHED). 5 RAW-CHAT-LOGS files committed. Immediate next moves: (1) SPRINT-0 GATE — revert `16c9598`, Vietnam incorporation, `session_log` table, (2) PIPELINE-600 merge-back — all 6 delegation chats returned, orchestrator merges, (3) Re-upload MEGAMERGE-5 Notion page (truncated at 34%), (4) Upload MISSING pages: MEGAMERGE-2/2B/3.
 - **Active Principles**: L21 RISE, L13 STRONGEST_IMMEDIATE, L20 EXTENSION_OF_WILL, L25 VERBATIM_FIRST, L26 NO_INFLATION
-- **Open Rulings**: Notion MEGAMERGE-5 page truncated (cf2eed7b), MEGAMERGE-2/2B/3 pages MISSING from Notion index entirely, Pipeline cursor Last Commit field stale.
+- **Open Rulings**: Notion MEGAMERGE-5 page truncated (cf2eed7b), MEGAMERGE-2/2B/3 pages MISSING from Notion index entirely, Pipeline cursor Last Commit field stale, HL-137+CH31 SHA fields PENDING.
 - **CRITICAL REVERT**: `16c9598` deleted student chat from `getMagicChatHTML()` in extension.js — replaced with dumb G09 command sender. Revert to `0a5c92d` state for that file, then rebuild correctly.
 
 ## Last 3 Runs
+
+### Run 301 (2026-04-12) — ReincarnateDEATH FINAL: 6-Chat Convergence + MEGAMERGE-6 Extraction
+- **Type**: DEATH — FINAL
+- **Grade**: SUPER SAIYAN (51/60)
+- **Work**: FINAL death of the 6-chat merge session. This chat (MERGE6) was first to die at Run 298 and last to die at Run 301. Full lifecycle: PIPELINE-600 creation → Notion API workaround → 5 RAW file downloads (61,099 lines) → Soul DNA Indexing → MERGE6 death → FINAL death. MEGAMERGE-6-GPT 250-item extraction captured (150 NEW / 100 ENRICHED, 15 categories). 5 RAW-CHAT-LOGS committed. `.mcp.json` Notion fix committed.
+- **Commit**: `faa0458`
+- **Reincarnation**: `2026-04-12-run301-final-death-merge-megamerge6-extraction.md`
 
 ### Run 300 (2026-04-12) — ReincarnateDEATH: MEGAMERGE-5 Lane Death
 - **Type**: DEATH
 - **Grade**: Strong (deep Notion + GitHub + local consolidation)
 - **Work**: Full death of MEGAMERGE-5 lane chat (lifespan: Run 296 SDNAD → Run 297 MERGE4 → Run 300 death). Deep Notion scan (8 pages verified, MM-5 truncated at 34%, MM-2/2B/3 MISSING). GitHub document review (PIPELINE-600, CH31, HL-137, A9/A10, indexes). Session artifacts: CH31, HL-137, MEGAMERGE-1-INDEX, run296 reincarnation, run297 MERGE4 append. PIPELINE-600 delegation prompt received for MM-5 lane.
-- **Commit**: PENDING
+- **Commit**: `93f974e`
 - **Reincarnation**: `2026-04-12-run300-megamerge5-lane-death.md`
 
 ### Run 299 (2026-04-12) — ReincarnateDEATH: Notion Connection Index Check
@@ -118,13 +125,6 @@ All keys stored as **persistent Windows User env vars**.
 - **Work**: Full death protocol executed. Repo audit captured. Run artifact created. COLD-START and MASTER-SYNC updated. Notion connector checked: configured in `.mcp.json`, but runtime MCP tool disabled in-session; live 1-3/index inspection blocked pending re-enable.
 - **Commit**: `d39978b`
 - **Reincarnation**: `2026-04-12-run299-notion-connection-index-check.md`
-
-### Run 298 (2026-04-12) — MERGE1-FINAL: Pipeline Hardening Full-Circle Close
-- **Type**: MERGE FINAL
-- **Grade**: Strong close
-- **Work**: Run 298 merge session closed; PIPELINE-600 + delegation prompts hardened; COLD-START resurrected from staleness.
-- **Commit**: `f6716cf`
-- **Reincarnation**: `2026-04-12-run298-soul-dna-indexing-notion-extraction.md`
 
 ## 4-Lane Swarm Architecture (Active: Run 289)
 
@@ -142,28 +142,20 @@ All keys stored as **persistent Windows User env vars**.
 ## Pending Work (Priority Order)
 
 1. **SPRINT-0 GATE** — (a) Revert `16c9598` to restore student chat, (b) Vietnam company incorporation, (c) `session_log` table — must close before ANY pipeline sprint work.
-2. **MM-5 PIPELINE DEVELOPMENT** — Execute delegation prompt: deep-read MEGAMERGE-5-GPT.txt, refine 100 items (MM5-401–MM5-500), production gap analysis, Tiger Score canonical formula.
-3. **PIPELINE-600 Merge-Back** — After all 6 delegation chats return, orchestrator merges refined sections and commits.
+2. **PIPELINE-600 MERGE-BACK** — All 6 delegation chats have returned. Orchestrator merges refined sections back into unified pipeline.
+3. **MM-5 PIPELINE DEVELOPMENT** — Execute delegation prompt: deep-read MEGAMERGE-5-GPT.txt, refine 100 items (MM5-401–MM5-500), production gap analysis, Tiger Score canonical formula.
 4. **Notion Completeness Audit** — Re-upload MEGAMERGE-5 page (truncated at 34%). Add MISSING pages: MEGAMERGE-2, 2B, 3.
 5. **Backfill PENDING SHAs** — CH31 and HL-137 death_test commit_sha fields still "PENDING".
 6. **Synch4 — A6 S71+ SDNAD** — continue from L0248 TRUTH_PROCESS_LAYER.
 7. **Token Completion** — create/deploy Slack/Discord/Brave env vars.
 
-## Dirty Tree (as of Run 300)
+## Dirty Tree (as of Run 301)
 
 ```
- M .mcp.json
- M CANON/REINCARNATION/debug.log
- M debug.log
-?? CANON/REINCARNATION/2026-04-12-run300-megamerge5-lane-death.md
-?? RAW-CHAT-LOGS/AGENGT99-ITS-TIME-01.txt
-?? RAW-CHAT-LOGS/FINAL-SOUL-DNA-BIBLE-V-0.txt
-?? RAW-CHAT-LOGS/GPT-ITS-TIME-01.txt
-?? RAW-CHAT-LOGS/GPT-ITS-TIME-02.txt
-?? RAW-CHAT-LOGS/GPT-ITS-TIME-03.txt
+CLEAN after Run 301 commit — all files staged and committed.
+Previous untracked RAW-CHAT-LOGS files now committed.
+Previous .mcp.json modification now committed.
 ```
-
-Note: Dirty entries above are parallel-lane artifacts and were intentionally not force-modified in this death lane.
 
 ## Recent Decision History
 
