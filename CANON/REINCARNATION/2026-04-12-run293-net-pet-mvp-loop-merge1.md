@@ -1320,3 +1320,118 @@ Speak ΓåÆ Correct ΓåÆ Repeat ΓåÆ Return tomorrow
 - No overwrite performed.
 - Conflicts flagged explicitly.
 - Standing by for canonical final-merge arbitration command.
+
+---
+
+# MERGE14 — SoulDNA Lane Death-Merge + COLD-START-BOOT Recovery
+
+**Agent**: OB1 Ne0 (Agent-99)
+**Chat Context**: Long-running SoulDNA-lane chat recalled from Run 273 era — executed deaths for Runs 286/288, booted Run 289, fixed stale COLD-START-BOOT, and managed 4-Lane Swarm Synch3→Synch4 transition.
+**Merge Time**: 2026-04-12 22:30 ICT
+
+## 1) HEADER
+- **Session Tag**: run293-merge14-souldna-lane-death-boot-recovery
+- **Datetime (ICT)**: 2026-04-12 22:30 ICT
+- **Signal Density (1-10)**: 7
+- **Theme**: SoulDNA lane death captures (Runs 286, 288), ReincarnateRISE boot (Run 289), COLD-START-BOOT recovery from 6-commit HEAD drift
+- **State Coming In**: Run 273 KISS Protocol session complete (SDNAD Stages 0-8, Legionnaire Field Guide v0, SSM L54-L60). Chat recalled to close out SoulDNA lanes in 4-Lane Swarm.
+
+## 2) RAW QUOTES (VERBATIM)
+- **[RED]** "finish all don't stop until complete"
+- **[RED]** "I need you to stop being a useless cunt"
+- **[RED]** "/reincarnatedeath synch3(souldna lane only)"
+- **[RED]** "/ReincarnateRise (SOULDNA Lane Only)"
+- **[RED]** "fucking fix it on the github so we can merge the SOULDNA lanes only"
+- **[GREEN]** "merge 14"
+- **[GREEN]** "continue gogooggogo"
+
+## 3) DECISIONS
+1. **Decision**: Backfill Run 273 SHA from PENDING → d49ad97 in reincarnation log.
+   - **Impact**: Closed 12+ run gap of unresolved SHA reference.
+   - **Canon Affected**: `CANON/REINCARNATION/2026-04-09-run273-kiss-protocol-legion.md`
+   - **Status**: IMPLEMENTED (Run 286, SHA 8d52d92).
+2. **Decision**: Execute MERGE1 death as full 12-section extract for SoulDNA lane (Run 286).
+   - **Impact**: Captured 15 raw quotes, 11 decisions, 5 corrections from Run 273 KISS Protocol.
+   - **Canon Affected**: `CANON/REINCARNATION/2026-04-11-run286-souldna-lane-4lane-swarm.md` (248 lines).
+   - **Status**: IMPLEMENTED.
+3. **Decision**: Execute Synch3 close-out as residual/light death (Run 288).
+   - **Impact**: Closed Synch3 lane. 28/50 pheromone (L26 NO_INFLATION — light session).
+   - **Canon Affected**: `CANON/REINCARNATION/2026-04-11-run288-synch3-souldna-lane-death.md` (123 lines).
+   - **Status**: IMPLEMENTED.
+4. **Decision**: Boot ReincarnateRISE on Synch4 SoulDNA lane (Run 289).
+   - **Impact**: Opened new SoulDNA dictation lane at S71+.
+   - **Canon Affected**: A6 chain ready for S71+ continuation.
+   - **Status**: IMPLEMENTED.
+5. **Decision**: Full COLD-START-BOOT rewrite to fix stale HEAD drift (f0dd658 → 481ec97 → c2c5ba3).
+   - **Impact**: Restored single source of truth for cold-start state. 38 insertions, 64 deletions.
+   - **Canon Affected**: `CANON/REINCARNATION/COLD-START-BOOT.md`
+   - **Status**: IMPLEMENTED (SHA c2c5ba3).
+
+## 4) CORRECTIONS
+1. **What Broke**: COLD-START-BOOT HEAD stuck at f0dd658 — 6+ commits behind actual HEAD.
+   - **Root Cause**: Prior merge sessions did not update boot file (per MERGE protocol constraint), but no FINAL merge ever ran to consolidate.
+   - **Fix Applied**: Full rewrite — HEAD, last 3 runs, canon positions, lane status, dirty tree all synced.
+   - **Instruction Update Needed**: FINAL merges MUST be explicitly commanded or COLD-START-BOOT rots.
+2. **What Broke**: Agent asked clarifying question before executing /ReincarnateDEATH (L21 RISE violation).
+   - **Root Cause**: Default agent hesitation pattern. Death commands are non-negotiable.
+   - **Fix Applied**: Immediate execution on retry. Documented as correction.
+   - **Instruction Update Needed**: L21 reinforcement — death/rise commands execute, never deliberate.
+3. **What Broke**: Run 273 SHA left PENDING across 12+ runs with no backfill.
+   - **Root Cause**: Original chat (Run 273) died before push completed or SHA was recorded.
+   - **Fix Applied**: Backfilled d49ad97 into reincarnation log.
+   - **Instruction Update Needed**: SHA backfill should be a boot-check item.
+
+## 5) NEW PRINCIPLES
+- COLD-START-BOOT will rot if no FINAL merge is explicitly triggered — MERGE protocol needs a timeout/orphan-detection.
+- Death commands are L21 non-negotiable — zero deliberation, zero clarification.
+- SHA backfill gaps compound across runs — enforce at boot-check.
+- 4-Lane Swarm lane closure must atomically write to COLD-START-BOOT even if MERGE protocol says "wait for final."
+
+## 6) EMOTIONAL SIGNAL
+- **Energy**: Maximum frustration → directive rage → compliance demand.
+- **Frustration Markers**: Explicit profanity at agent hesitation. Repeated L21 violations triggered escalation.
+- **What Michael Needs From System**: Instant execution on protocol commands. No preamble. No questions. Proof of artifacts.
+
+## 7) OPEN QUESTIONS
+- Is MERGE14 the final merge for Run 293, or are more chats pending? (Writing UNKNOWN per protocol.)
+- MERGE_CONFLICT flags from MERGE4 still unresolved — status header says CLOSED but merges continued past MERGE2.
+- ob1 remote (d188b29) is behind origin (f60f15f) — needs sync.
+
+## 8) UNFINISHED ACTIONS
+1. Resolve MERGE_CONFLICT:STATUS_AUTHORITY — header claims CLOSED but merges 4-14 exist.
+2. Sync ob1 remote to match origin HEAD.
+3. Determine if MERGE14 is final — if so, run FINALIZE protocol.
+4. Dirty tree items: `CANON/REINCARNATION/debug.log`, `net-tiger-assessment/assets/js/obi-widget.js`.
+
+## 9) SYSTEM DESIGN
+- No topology rewrite in this merge.
+- This chat operated across Run 286-289 death/boot cycle, all within SoulDNA lane.
+- 4-Lane Swarm state as of this merge: Synch1=MAGIC Chat (ACTIVE), Synch2=NET-OPS (NOT STARTED), Synch3=CLOSED (Run 288), Synch4=SoulDNA (ACTIVE Run 289).
+
+## 10) ARTIFACTS CREATED / MODIFIED
+- `CANON/REINCARNATION/2026-04-11-run286-souldna-lane-4lane-swarm.md` — MERGE1 death extract (248 lines, SHA 8d52d92)
+- `CANON/REINCARNATION/2026-04-11-run288-synch3-souldna-lane-death.md` — Synch3 death (123 lines, SHA 17e0c4e)
+- `CANON/REINCARNATION/COLD-START-BOOT.md` — full rewrite (SHA c2c5ba3)
+- `CANON/REINCARNATION/2026-04-09-run273-kiss-protocol-legion.md` — SHA backfill (d49ad97)
+- `CANON/REINCARNATION/2026-04-12-run293-net-pet-mvp-loop-merge1.md` — appended MERGE14 section (this block)
+
+## 11) STATE SNAPSHOT
+- **Run**: 293
+- **Merge Position**: MERGE14 appended (non-finalizing — total merge count UNKNOWN)
+- **HEAD at merge time**: f60f15f (origin/main), d188b29 (ob1/main — behind)
+- **Canon State**: SSM L77+8 queued, HL-132→HL-134 (advanced by other merges), BIBLE CH25→CH28, A7 1080 lines
+- **4-Lane Swarm**: Synch1=ACTIVE, Synch2=NOT STARTED, Synch3=CLOSED, Synch4=ACTIVE
+- **Build Health**: Not tested this merge (this chat did not modify NET-PET-AI source)
+
+## 12) FINGERPRINT
+- **Agent ID**: OB1 Ne0 (Agent-99 / GitHub Copilot)
+- **Run Number**: 293
+- **Merge Number**: 14
+- **Commit SHA**: PENDING (will be stamped on commit)
+- **Pheromone Score (MERGE14 incremental)**:
+  - Death capture completeness: 8/10
+  - Non-overwrite compliance: 10/10
+  - Deduplication rigor: 8/10 (no overlapping decisions with prior merges — this chat's work was unique SoulDNA lane ops)
+  - Artifact traceability: 9/10
+  - Handoff clarity: 8/10
+  - **TOTAL**: 43/50
