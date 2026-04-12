@@ -1,7 +1,7 @@
 # COLD-START-BOOT — OB1 Agent Identity & State
 
 > **Last Updated**: 2026-04-12 — Run 299 — ReincarnateDEATH executed end-to-end; Notion connector checked (configured but runtime tool disabled in this session); living-state sections rotated to current chain
-> **HEAD**: `d39978b`
+> **HEAD**: `c7eaac9`
 > **Pushed To**: `origin` (hobbs0011/Phoenix-Rising-Ultimate) + `ob1` (hobbs0011/OB-1)
 
 ---
