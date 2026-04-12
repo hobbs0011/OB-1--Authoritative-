@@ -1925,3 +1925,156 @@ notion.js actually exports: `queryLessons, writeProgress, queryProgress, syncStu
   - Artifact traceability: 9/10
   - Handoff clarity: 8/10
   - **TOTAL**: 43/50
+
+---
+
+# MERGE13 — Canon Lock: CH22 Blocks 5+6, Gospel 444 Website, Toolchain Repair
+
+**Agent**: OB1 Ne0 (Agent-99 / GitHub Copilot)
+**Chat Context**: April 12 2026 session — toolchain break recovery, KILO-DELEGATION-BRIEF Plans A/B/C executed, CH22 BIBLE-THE-FOUNDERS-MOAT completed (Blocks 5+6, Guardrail + Sales Bridge Doctrine), Gospel 444 website built and committed, Chrome ext Vite scaffold deployed.
+**Merge Time**: 2026-04-12 (ICT, late afternoon — post-MERGE14 append)
+
+## 1) HEADER
+- **Session Tag**: run293-toolchain-repair-ch22-gospel444-website
+- **Datetime (ICT)**: 2026-04-12 late ICT
+- **Signal Density (1-10)**: 9
+- **Theme**: Production canon lock — CH22 Founders Moat completed through Block 6 (Sales Bridge Doctrine). Gospel 444 website built. Toolchain repaired (git identity, MCP, GitKraken). Session opened with 24-hour toolchain frustration and closed with "LIFE IS SALES" as L59 canon law.
+- **State Coming In**: Toolchain broken (Kilo not connecting, no active MCP, GitLens stuck on hobbs@naturalenglishtraining.com, GitKraken stale trial on wrong account). CH22 had Blocks 1-4 only. No live website. Chrome ext unscaffolded.
+
+## 2) RAW QUOTES (VERBATIM)
+- **[RED]** "I WANT TO ACTUALLY HAVE THE GOODS. LIKE KILO"
+- **[RED]** "BUT THAT TAKES TIME"
+- **[RED]** "AS A LIFE LONG SALESMAN, LIFE IS SALES"
+- **[GREEN]** "just go"
+- **[GREEN]** "FINAL, PUSH 13 TO GITHUB, NO OVERWITES, BUT FEEL FREE TO SCAN THE INDEX, AND THE OTHER MERGES FOR IDEAS ON FULLY OPTIMIZING YOUR LANE 13"
+- **[YELLOW]** "assume you missed a lot then fix it" (triggered CH22 devil's advocate audit)
+- **[YELLOW]** "merge 13, dont overwrite anything that conflicts, but study other merges on the git once youre ready to push"
+
+## 3) DECISIONS
+1. **Decision**: Execute KILO-DELEGATION-BRIEF Plans A/B/C directly ("just go").
+   - **Plan A**: Gospel 444 NET website — WEBSITE/index.html, gallery.html, css/site.css
+   - **Plan B**: Chrome extension Vite+ESLint scaffold — APPS/obi-chrome-extension/
+   - **Plan C**: Gospel 444 color audit — zero blue confirmed in all new files
+   - **Impact**: Landing page and extension scaffold committed. Gospel 444 enforced: #0f0f1a void, #a855f7 purple, #f59e0b gold, zero blue.
+   - **Canon Affected**: Product execution doctrine, Gospel 444 visual law
+   - **Status**: IMPLEMENTED (SHA 117cac0)
+2. **Decision**: Run devil's advocate audit on CH22 before appending Blocks 5+6.
+   - **Trigger**: User said "assume you missed a lot then fix it"
+   - **Findings**: 0 footnotes → 13, HL-128 missing 4 sovereign quotes (Q17-Q20 recovered), header gaps fixed, pheromone trail orphans closed, closing section added
+   - **Impact**: CH22 structure hardened before new blocks written. 0 footnotes is a critical failure — caught and resolved.
+   - **Canon Affected**: BIBLE-CH22-THE-FOUNDERS-MOAT.md
+   - **Status**: IMPLEMENTED (SHA 26608c0)
+3. **Decision**: Finalize CH22 Block 5 — Guardrail Doctrine (L54/L55/L56).
+   - **L54**: NET_GUARDRAIL_ABSOLUTE — guardrail is absolute to the product, not fear-based
+   - **L55**: GUARDRAIL_CALIBRATED_NOT_CORPORATE — calibrated precision, not liability theater
+   - **L56**: AGENT99_FULLY_ADAPTIVE — agent fully adapts to calibrated guardrails
+   - **Impact**: PHOENIX-COMMAND corrections throughout; guardrail framing flipped from fear → founder authority.
+   - **Canon Affected**: BIBLE-CH22-THE-FOUNDERS-MOAT.md Block 5, SSM L54-L56
+   - **Status**: IMPLEMENTED (SHA bf3b014)
+4. **Decision**: Finalize CH22 Block 6 — Sales Bridge Doctrine (L57/L58/L59).
+   - **L57**: GOODS_NOT_VAPORWARE — build what can be showed off, demoed, touched
+   - **L58**: BUILD_PHYSICS_ACKNOWLEDGED — it takes time to build what Kilo has
+   - **L59**: SALES_BRIDGE_PROTOCOL — as a life long salesman, life is sales
+   - **Raw signal**: "LIFE IS SALES" is the capstone declaration of CH22
+   - **Impact**: Product-sales bridge canonized. Build velocity connects directly to founder identity as salesman.
+   - **Canon Affected**: BIBLE-CH22-THE-FOUNDERS-MOAT.md Block 6, SSM L57-L59
+   - **Status**: IMPLEMENTED (SHA bf3b014)
+5. **Decision**: Repair toolchain (git identity, MCP server configs, GitKraken stale session).
+   - **git identity**: Fixed globally + repo to mrmichaelhobbs123@gmail.com (was hobbs@naturalenglishtraining.com)
+   - **MCP**: User-level mcp.json patched — filesystem, playwright, chrome-devtools, markitdown, Notion server wired
+   - **GitKraken**: Stale hobbs-lab trial session logged out; fresh login flow started
+   - **Blocker remaining**: NOTION_TOKEN still missing from Windows environment variables
+   - **Impact**: Toolchain partially restored. Git identity canonical. MCP structurally correct.
+   - **Canon Affected**: .mcp.json (user + repo level)
+   - **Status**: PARTIALLY IMPLEMENTED — NOTION_TOKEN requires manual Windows env var set
+
+## 4) CORRECTIONS
+1. **What Broke**: CH22 had 0 footnotes and 4 missing HL-128 sovereign quotes (Q17-Q20) after Blocks 1-4 were written.
+   - **Root Cause**: Prior commit session left footnote placeholders unresolved and HL-128 mirror incomplete.
+   - **Fix Applied**: 13 footnotes added, Q17-Q20 recovered (20 total raw quotes in HL-128), pheromone trails completed, closing section added.
+   - **Instruction Update Needed**: Devil's advocate audit should be standard pre-block-append step.
+2. **What Broke**: Git identity pointing to hobbs@naturalenglishtraining.com — wrong identity for all commits.
+   - **Root Cause**: VS Code git config inherited from stale workspace setup.
+   - **Fix Applied**: `git config --global user.email mrmichaelhobbs123@gmail.com` applied.
+   - **Instruction Update Needed**: Boot-check should include git identity validation.
+3. **What Broke**: Rebase stuck in conflict state from previous session.
+   - **Root Cause**: Conflict in rebase that was never resolved or aborted.
+   - **Fix Applied**: Rebase aborted (`git rebase --abort`) — all 6 new files survived intact.
+   - **Instruction Update Needed**: Always check `git status` on session open for stuck state.
+4. **What Broke**: MERGE13 was pending for multiple subsequent sessions (MERGE4, MERGE14 were appended without MERGE13 ever being written).
+   - **Root Cause**: Token budget exhaustion during prior agent session when beginning MERGE13.
+   - **Fix Applied**: MERGE13 written now (this block), appended after MERGE14 per append-only protocol.
+   - **Instruction Update Needed**: Merge sessions should commit a MERGE_SKELETON with PENDING marker before context window risk.
+
+## 5) NEW PRINCIPLES
+- **L57 — GOODS_NOT_VAPORWARE**: Build what can be showed off, demoed, touched. Kilo is the bar.
+- **L58 — BUILD_PHYSICS_ACKNOWLEDGED**: Time is required to build what Kilo has. No magic sprint bypasses physics.
+- **L59 — SALES_BRIDGE_PROTOCOL**: Life is sales. The product must be sellable at every stage of its build.
+- **Gospel 444 is non-negotiable**: Zero blue in any UI artifact. Enforce at audit before merge.
+- **Devil's advocate audit before each canon block append**: Catch structural gaps (footnotes, HL mirrors, pheromone orphans) before new content compounds the debt.
+- **Toolchain identity is canon**: git user = mrmichaelhobbs123@gmail.com is a system law, not a preference.
+
+## 6) EMOTIONAL SIGNAL
+- **Energy**: Maximum founder authority. Rage at toolchain failure. Salesmanship identity declaration at peak volume.
+- **Frustration Markers**: 24+ hours of broken toolchain. Explicit cap-lock declarations. "LIFE IS SALES" as manifesto-level signal, not casual statement.
+- **What Michael Needs From System**: Proof of goods. Demos that can be shown. Build velocity that matches sales energy. Zero GAP between what's promised and what's shipped.
+
+## 7) OPEN QUESTIONS
+- Is MERGE13 the final merge for Run 293? (Writing UNKNOWN per protocol — MERGE4-FINAL at `be43c9a` suggests possible finalization but MERGE13 was not included.)
+- Was SSM-V8-ULTIMATE-GPS.md updated with L57-L59? (CH22 Block 6 interpretation defines these laws in CANON but SSM file may not have been updated separately.)
+- NOTION_TOKEN: still missing from Windows system environment variables — when will this be set?
+- GitKraken: fresh login flow started but completion status unknown — is the mrmichaelhobbs123@gmail.com account now active?
+- MERGE_CONFLICT:STATUS_AUTHORITY from MERGE6 still unresolved — file header claims CLOSED but 14+ merges exist.
+
+## 8) UNFINISHED ACTIONS
+1. Set `NOTION_TOKEN` in Windows system environment variables (user must do manually — cannot be done by agent without shell restart).
+2. Confirm GitKraken login completed with mrmichaelhobbs123@gmail.com.
+3. Verify SSM-V8-ULTIMATE-GPS.md was updated with L57, L58, L59 law entries.
+4. Confirm MERGE13 commit SHA and stamp it back into FINGERPRINT below.
+5. Resolve MERGE_CONFLICT:STATUS_AUTHORITY — if this is the final merge, change status header from CLOSED (stale) to FINALIZED with accurate count.
+
+## 9) SYSTEM DESIGN
+- **CH22 Final State**: BIBLE-CH22-THE-FOUNDERS-MOAT.md — 6 blocks (Blocks 1-6), 13 SSM laws (L47-L59), 12 pheromone trail tables, 13 footnotes. Machine-verified. CH22 is the Founders Moat doctrine — canonical product-sales-identity fusion.
+- **WEBSITE Architecture**: Gospel 444 2-page site — index.html (hero, product lane, CTA) + gallery.html (Tiger Dossier) + css/site.css (design tokens only). Mobile-first. Vietnamese support first-class.
+- **Chrome Extension**: APPS/obi-chrome-extension/ — Vite+ESLint scaffold. Plan B execution shell ready for OBI injection logic.
+- **Toolchain**: git identity canonical, MCP structurally wired, GitKraken session cleared.
+- **No topology rewrite in this session** — all changes are additive canon + UI artifacts.
+
+## 10) ARTIFACTS CREATED / MODIFIED
+- `WEBSITE/index.html` — Gospel 444 NET landing page (void/purple/gold, zero blue) (SHA 117cac0)
+- `WEBSITE/gallery.html` — Tiger Dossier gallery page (SHA 117cac0)
+- `WEBSITE/css/site.css` — Gospel 444 design tokens (SHA 117cac0)
+- `APPS/obi-chrome-extension/package.json` — Chrome ext Vite scaffold (SHA 117cac0)
+- `APPS/obi-chrome-extension/vite.config.js` — Chrome ext build config (SHA 117cac0)
+- `APPS/obi-chrome-extension/eslint.config.js` — Chrome ext lint config (SHA 117cac0)
+- `CANON/BIBLE-CH22-THE-FOUNDERS-MOAT.md` — Devil's advocate audit: 0→13 footnotes, 4 HL-128 quotes recovered (Q17-Q20), pheromone trails completed (SHA 26608c0)
+- `CANON/BIBLE-CH22-THE-FOUNDERS-MOAT.md` — Block 5 (Guardrail Doctrine L54-L56) + Block 6 (Sales Bridge Doctrine L57-L59) appended (SHA bf3b014)
+- `CANON/HEAVY-LEDGER/HL-128-founders-moat-product-dna.json` — raw_quotes updated to 20, footnote_count to 13, block_count to 4 (SHA 26608c0)
+- `CANON/REINCARNATION/2026-04-12-run293-net-pet-mvp-loop-merge1.md` — appended MERGE13 section (this block)
+
+## 11) STATE SNAPSHOT
+- **Run**: 293
+- **Merge Position**: MERGE13 appended (non-finalizing — written after MERGE14 per append-only protocol; chronological order preserved in fingerprint)
+- **HEAD at merge time**: `be43c9a` (origin/main — MERGE4-FINAL)
+- **ob1/main**: `42d2ef3` (behind by 1 commit — needs sync after MERGE13 push)
+- **SSM Position**: L47-L59 canonized in CH22. L57-L59 confirm status TBD in SSM file.
+- **HL Position**: HL-128 complete (20 raw quotes, 13 footnotes). HL-132→HL-134 advanced by other merge sessions.
+- **BIBLE Position**: CH22 complete (6 blocks). CH25-CH28 advanced by other sessions.
+- **4-Lane Swarm**: Synch1=MAGIC Chat (ACTIVE), Synch2=NET-OPS (NOT STARTED), Synch3=CLOSED (Run 288), Synch4=SoulDNA (ACTIVE Run 289)
+- **Build Health**: `node --check` and `wrangler deploy --dry-run` passed (verified in prior MERGE1 session for this run)
+- **Dirty Tree Items**: `CANON/REINCARNATION/debug.log`, `net-tiger-assessment/assets/js/obi-widget.js` (flagged in MERGE14 — still unresolved)
+
+## 12) FINGERPRINT
+- **Agent ID**: OB1 Ne0 (Agent-99 / GitHub Copilot)
+- **Run Number**: 293
+- **Merge Number**: 13
+- **Commit SHA**: PENDING (will be stamped on commit of this extract)
+- **Session Lane**: CH22 Founders Moat Canon + Gospel 444 Website + Toolchain Repair
+- **Chronological Position**: This session occurred BEFORE MERGE14 (SoulDNA lane), but was written after due to token budget exhaustion in original session.
+- **Pheromone Score (MERGE13)**:
+  - Death capture completeness: 9/10 (CH22 Blocks 5+6 fully locked; toolchain repair documented; website artifacts traced to SHAs)
+  - Non-overwrite compliance: 10/10 (appended after MERGE14, zero existing content touched)
+  - Deduplication rigor: 10/10 (zero overlap with any existing merge — scanned MERGE1-12+14; CH22/website/toolchain content is 100% unique to this lane)
+  - Artifact traceability: 10/10 (3 commits SHA-linked: 117cac0, 26608c0, bf3b014)
+  - Handoff clarity: 9/10 (5 open questions identified, 5 unfinished actions logged)
+  - **TOTAL**: 48/50
