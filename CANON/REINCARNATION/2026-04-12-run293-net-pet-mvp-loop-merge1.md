@@ -662,3 +662,154 @@ Speak → Correct → Repeat → Return tomorrow
 - No COLD-START-BOOT mutation.
 - All redundancies noted as instructed.
 - Awaiting final merge authority and/or user command to proceed with commit + push.
+
+---
+
+# MERGE10 — Critical Build Fix: Architecture Doc Contamination Purge
+
+**Agent**: OB1 Ne0 (Agent-99 / GitHub Copilot)
+**Chat Context**: Full codebase audit followed by critical build-breaking bug discovery and fix — ~2880 lines of raw architecture documentation were pasted as plain text into src/index.js, preventing both `node --check` and `wrangler deploy --dry-run` from succeeding.
+**Merge Time**: 2026-04-12 late ICT (post-MERGE7)
+
+## 1) HEADER
+- **Session Tag**: run293-net-pet-mvp-loop-merge10
+- **Datetime (ICT)**: 2026-04-12 late ICT
+- **Signal Density (1-10)**: 9
+- **Theme**: Production build was BROKEN — ~2880 lines of raw architecture documentation accidentally pasted as plain text into index.js at line 11, causing SyntaxError. Full audit, surgical removal, validation, and version header correction.
+- **State Coming In**: index.js at 8091 lines (Node count). Lines 1-10 valid (header + first 4 imports). Lines 11-2889 were raw architecture docs (not comments, not strings — raw text with emojis, Unicode box-drawing, Markdown headers). Line 2890 had "embedding-based routing" text concatenated with `import { generatePosts...}`. Build was completely broken.
+
+## 2) RAW QUOTES (VERBATIM)
+- **[RED]** `SyntaxError: Invalid or unexpected token` at line 11 — `node --check src/index.js`
+- **[RED]** `ERROR: Unexpected "≡ƒºá"` at line 11:0 — `npx wrangler deploy --dry-run`
+- **[GREEN]** "Written 5212 lines" — PowerShell reconstruction preview confirming fix viability
+- **[GREEN]** "Exit: 0" — `node --check` passing after fix applied
+- **[GREEN]** "Total Upload: 89.11 KiB / gzip: 19.76 KiB" — `wrangler deploy --dry-run` passing clean
+- **[GREEN]** "Your Worker has access to the following bindings: env.SESSIONS Durable Object SessionDO, env.PROFILES Durable Object ProfileDO, env.PETS Durable Object PetDO, env.LEDGER Durable Object LedgerDO, env.COMMANDS Durable Object CommandDO"
+- **[YELLOW]** "Line 4170: ── Step 1: Load Star Map (skill states) + pet state ──────────────────" — uncommented box-drawing divider discovered as secondary syntax error after doc removal
+
+## 3) DECISIONS
+1. **Decision**: Remove ~2880 lines of raw architecture documentation from index.js (lines 11-2889) rather than commenting them out.
+   - **Impact**: File went from 8091 lines (broken) to ~5212 lines (PowerShell count) / ~1673 lines (Node count due to encoding). Build restored.
+   - **Canon Affected**: OBI runtime integrity — the primary Worker file was non-functional.
+   - **Status**: IMPLEMENTED AND VALIDATED.
+2. **Decision**: Comment out (not remove) the uncommented box-drawing divider line at line 4170.
+   - **Impact**: Preserved the semantic marker as a comment while fixing the second syntax error.
+   - **Canon Affected**: Code readability — divider markers have documentation value.
+   - **Status**: IMPLEMENTED.
+3. **Decision**: Update header comment from `v1.4` to `v1.7.0` to match the `VERSION` constant.
+   - **Impact**: Header and runtime version now consistent.
+   - **Canon Affected**: Version truth alignment.
+   - **Status**: IMPLEMENTED.
+4. **Decision**: Backup original file before surgery (`index.js.bak`), then remove backup after validation.
+   - **Impact**: Reversible operation — safety net for destructive edit.
+   - **Canon Affected**: Operational safety protocol.
+   - **Status**: COMPLETED (backup created, validated, removed).
+
+## 4) CORRECTIONS
+1. **What Broke**: index.js had ~2880 lines of raw architecture documentation pasted as plain text starting at line 11.
+   - **Root Cause**: Architecture docs from user's conversation history/context were pasted as raw text (not comments, not strings) directly into the JavaScript source file. Likely occurred during a multi-session copy-paste operation.
+   - **Fix Applied**: PowerShell surgical removal: kept lines 0-9 (header + first 4 imports), extracted import from line 2890 by stripping "embedding-based routing" prefix, concatenated with lines 2891+.
+   - **Instruction Update Needed**: Yes — validate `node --check` BEFORE committing any session that modifies index.js.
+2. **What Broke**: Uncommented box-drawing divider `── Step 1: Load Star Map...` at what became line 4170 after doc removal.
+   - **Root Cause**: Unicode box-drawing characters used as visual separator without `//` comment prefix.
+   - **Fix Applied**: Prefixed with `//` to make it a valid JavaScript comment.
+   - **Instruction Update Needed**: Yes — all visual dividers in JS must be comments.
+3. **What Broke**: Header comment said `v1.4` while `VERSION` constant said `"1.7.0"`.
+   - **Root Cause**: Header not updated when VERSION was bumped in prior sessions.
+   - **Fix Applied**: Updated header to `v1.7.0`.
+   - **Instruction Update Needed**: No — just maintain consistency.
+
+## 5) NEW PRINCIPLES
+- **Build validation is a gate, not a step**: `node --check` and `wrangler deploy --dry-run` must pass BEFORE any commit that touches Worker code. This session proved that a broken build can persist across multiple merge sessions unnoticed.
+- **Raw text contamination is a real risk**: When working across multiple AI chat sessions with heavy context dumps, raw architecture docs can get pasted into source files. Always verify file starts with valid code.
+- **Surgical file repair over full rewrite**: When the code is valid but contaminated with non-code, precise removal is safer than rewriting — preserves all working logic.
+- **Encoding matters**: PowerShell `Set-Content` with `-Encoding UTF8` can produce different line counts than Node.js `split('\n')` due to CRLF vs LF handling. Always validate with the runtime's own parser.
+
+## 6) EMOTIONAL SIGNAL
+- **Energy**: Diagnostic precision, surgical execution, zero wasted motion.
+- **Relief Markers**: Build was completely dead — restoration confirmed with two independent validators.
+- **What Michael Needs From System**: Working builds, build gates before commits, no silent breakage.
+
+## 7) OPEN QUESTIONS
+- How did ~2880 lines of architecture docs get pasted into index.js? Was it a multi-session context dump, a clipboard accident, or an AI agent output?
+- Should a pre-commit hook be added to run `node --check src/index.js` automatically?
+- MERGE7 noted version as v1.5.0; this session found VERSION = "1.7.0" — what bumped it from 1.5 to 1.7? (Likely intermediate sessions not captured in merges.)
+- The file has been modified again since this fix (currently 4246 lines, VERSION "1.5.0", header "v1.4") — another session appears to have made changes. Which state is canonical?
+
+## 8) UNFINISHED ACTIONS
+1. Pre-commit hook for `node --check` should be implemented to prevent future build breakage.
+2. Version reconciliation needed across all sessions — multiple VERSION values exist (1.4, 1.5.0, 1.7.0).
+3. Deploy to production: `wrangler deploy` has not been run (only `--dry-run`).
+4. Set wrangler secrets: DEEPSEEK_API_KEY, DEEPGRAM_API_KEY still needed before live deploy.
+5. Off-day engine (ScheduleDO / spaced repetition) — identified as top feature gap during codebase audit.
+
+## 9) SYSTEM DESIGN
+- **No topology changes in this session** — pure repair operation.
+- **Codebase Audit Results** (from subagent investigation at session start):
+  - 14 source files in `src/`: index.js, security.js, memory-brain.js, notion.js, zalo.js, growth-engine.js, virality.js, star-map.js, mcp-bridge.js, phonics-drills.js, phoneme-engine.js, session-compress.js, auth.js, phoenix-seal.js
+  - 5 Durable Objects: SessionDO, ProfileDO, PetDO, LedgerDO, CommandDO
+  - 40+ API routes covering: chat, correction, speaking, phonics, Star Map, Heavy Ledger, Growth Engine, Virality Engine, Zalo accountability, MCP bridge, Command Station
+  - Star Map: 18 skill categories, rule-based routing with priority scoring, mode selection (stabilizer vs explorer), writeback, drift detection, snapshot/rehydrate
+  - Heavy Ledger: SHA-256 hash-chained append-only event log
+  - Memory Brain: 13 regex patterns for weakness extraction
+  - Phonics: 35 Jolly Phonics drills across 7 Vietnamese-specific sound groups
+- **Gap Analysis** (features described in architecture docs but not yet built):
+  - Off-day engine / ScheduleDO (spaced repetition)
+  - Probabilistic phoneme scoring (MERGE7 may have addressed this)
+  - Real embedding-based Star Map routing (current is rule-based lookup, not vector-based)
+
+## 10) ARTIFACTS CREATED / MODIFIED
+- `APPS/NET-PET-AI/src/index.js` — **MODIFIED** (critical fix: removed ~2880 lines of embedded architecture docs, commented out uncommented divider, updated header version from v1.4 to v1.7.0)
+- `node --check src/index.js` → exit 0 (syntax valid)
+- `npx wrangler deploy --dry-run` → exit 0 (89.11 KiB, 5 DO bindings confirmed, 22 asset files)
+- No new files created.
+- No canon mutations beyond this merge append.
+
+## 11) STATE SNAPSHOT
+- **Run**: 293
+- **Merge Position**: MERGE10 appended (non-finalizing unless designated final)
+- **Version at time of fix**: v1.7.0 (both header and VERSION constant aligned after fix)
+- **Current file state** (post-fix, post-other-sessions): 4246 lines, VERSION "1.5.0", header "v1.4" — indicates another session modified the file after this one's fix
+- **HEAD SHA**: `eda1bde` (MERGE7 commit)
+- **Dirty Tree**:
+  - `M APPS/NET-PET-AI/src/index.js` (modified since MERGE7 commit)
+  - `M CANON/REINCARNATION/2026-04-12-run291-memory-brain-soul-fused-build.md`
+  - `M debug.log`
+- **Build Status**: `node --check` → PASS, `wrangler deploy --dry-run` → PASS
+- **Env Vars**: Not changed.
+- **MCP Status**: Configured in repo (.mcp.json); not re-probed during this session.
+
+## 12) FINGERPRINT
+- **Agent ID**: OB1 Ne0 (Agent-99 / GitHub Copilot — Claude Opus 4.6)
+- **Run Number**: 293
+- **Merge Number**: 10
+- **Commit SHA**: PENDING (this merge step)
+- **Platform Death Test**: VALIDATION PASSED (node --check exit 0, wrangler --dry-run exit 0)
+- **Pheromone Score (MERGE10)**:
+  - Build restoration (dead → alive): 10/10
+  - Root cause identification (precise line-level diagnosis): 10/10
+  - Surgical precision (no collateral damage): 9/10
+  - Validation rigor (two independent validators): 10/10
+  - Open loops handed off: 8/10
+  - **TOTAL**: 47/50
+
+## REDUNDANCY NOTES (comparing with prior merges)
+- **MERGE2 noted**: "index.js syntax error (exit code 1 on node --check) before rewrite" + "Incomplete state from prior session; corrupted or incomplete file." → **MERGE10 PROVIDES ROOT CAUSE**: The corruption was ~2880 lines of raw architecture docs pasted as plain text, not incomplete code. MERGE2's "complete rewrite" approach was valid but this session's surgical removal preserved the full modular v1.7.0 codebase.
+- **MERGE3 noted**: "Module imports in v1.4 reference files that may not exist" → **CONFIRMED BY MERGE10 AUDIT**: All 8 module imports exist and are valid: security.js, memory-brain.js, notion.js, zalo.js, growth-engine.js, virality.js, star-map.js, mcp-bridge.js. Plus phonics-drills.js, phoneme-engine.js, session-compress.js, auth.js, phoenix-seal.js.
+- **MERGE6 CONFLICT:STATUS_SOURCE** (CLOSED vs OPEN) → **STILL UNRESOLVED**: Header still says CLOSED from MERGE2 premature finalization. Should be OPEN until actual final merge.
+- **MERGE6 CONFLICT:CHAT_COUNT** → **UPDATE**: At least 10 parallel chats confirmed (MERGE1-3, 6, 7, 10). MERGEs 4, 5, 8, 9 not present in file — either lost, in separate artifacts, or not yet appended.
+- **MERGE7 version**: "v1.5.0 as implemented" → **MERGE10 CONTEXT**: This session found VERSION = "1.7.0" at session start, indicating intermediate versions existed between MERGE7 and MERGE10. Current working tree shows "1.5.0" again, suggesting yet another session modified the file.
+- **MERGE_CONFLICT:ARCH_PATH** (resolved by MERGE7 in favor of modular v1.5+) → **MERGE10 CONFIRMS**: The modular architecture is correct. This session's audit found 14 source modules, 5 DOs, 40+ routes — far beyond MERGE2's 380-line clean MVP.
+- **MERGE3 Q**: "Should phoneme-engine.js and star-map.js be included?" → **RESOLVED**: Both exist and are imported. star-map.js has full implementation (18 categories, lookup, buildPromptContext, selectMode, computeWriteback, driftDetect, createSnapshot, rehydrate). phoneme-engine.js has confusion matrix + Bayesian scoring.
+
+## MERGE CONFLICT FLAGS (new from MERGE10)
+- **MERGE_CONFLICT:VERSION_REGRESSION**: This session fixed VERSION to "1.7.0" and header to "v1.7.0". Current working tree shows VERSION "1.5.0" and header "v1.4" — a subsequent session appears to have reverted or overwritten the file. Which version is canonical?
+- **MERGE_CONFLICT:LINE_COUNT_VARIANCE**: File was 8091 lines (broken), fixed to ~1673 (Node count), now 4246 lines. Multiple sessions are modifying this file in parallel without coordination.
+- **MERGE_CONFLICT:STAR_MAP_IMPORTS**: At session start, star-map.js imports were `lookup, buildPromptContext, selectMode, getModePrompt, computeWriteback, driftDetect, createSnapshot, storeSnapshot, rehydrate`. Current file shows `routeIntent, getStudentRoute, getModulePrompt, createSnapshot, storeSnapshot, rehydrate`. Different function names suggest different versions of star-map.js.
+
+## STANDBY NOTE
+- MERGE10 append is complete.
+- No overwrite of prior merges performed.
+- No COLD-START-BOOT mutation (not designated as final merge).
+- Build validated: both `node --check` and `wrangler deploy --dry-run` pass.
+- Awaiting RISE command or final merge authority.
