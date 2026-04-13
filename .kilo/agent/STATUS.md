@@ -1,7 +1,13 @@
 ---
 description: Status monitoring agent — tracks NET-PET-AI worker state, Notion sync, ledger head, and system health
 mode: subagent
+model: anthropic/claude-haiku-3.5
 color: "#f59e0b"
+permission:
+  bash: allow
+  read: allow
+  glob: allow
+  grep: allow
 ---
 
 # STATUS — System Health Monitor

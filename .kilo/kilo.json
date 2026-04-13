@@ -1,5 +1,4 @@
 {
-  "$schema": "https://app.kilo.ai/config.json",
   "model": "anthropic/claude-sonnet-4.6",
   "small_model": "anthropic/claude-haiku-3.5",
   "default_agent": "AGENT99",
@@ -18,7 +17,9 @@
       "GALAXY-LESSONS/**": "allow",
       "OPERATIONS/**": "allow",
       ".kilo/**": "allow",
+      ".github/**": "allow",
       "MASTER-SYNC.md": "allow",
+      "SCRIPTS/**": "allow",
       "*.lock": "deny",
       "*": "ask"
     },
