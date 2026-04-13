@@ -1,9 +1,9 @@
 {
   // NET | Phoenix Rising Protocol — MCP Servers
   // Stack: Cloudflare, GitHub, Notion, Playwright, Chrome, Slack, FS, Brave, Discord,
-  //        Telegram, LinkedIn, Gmail, Roblox
-  // Updated: 2026-04-11 | Run 281 | 4-Lane Swarm | Empire Command Stack
-  // TOKEN STATUS: CF/GH/Notion/Roblox = SET | Slack/Discord/Brave/TG/LI/Gmail = needs token
+  //        Telegram, LinkedIn, Gmail, Outlook, Roblox
+  // Updated: 2026-04-14 | Run 281+ | Empire Command Stack
+  // TOKEN STATUS: CF/GH/Notion/Roblox = SET | Slack/Discord/Brave/TG/LI/Gmail/Outlook = needs token
   "servers": {
 
     // ── CLOUDFLARE ─── SET ✓ ─────────────────────────────────────────────────
@@ -158,6 +158,32 @@
       "args": ["-y", "@gongrzhe/server-gmail-autoauth-mcp"],
       "env": {
         "GMAIL_CREDENTIALS_PATH": "${env:GMAIL_CREDENTIALS_PATH}"
+      }
+    },
+
+    // ── OUTLOOK / MICROSOFT 365 ─── TOKEN NEEDED ─────────────────────────
+    // Enables: 75+ tools — Email (20), Calendar (12), Contacts (8), Tasks (7),
+    //          Teams (25), Folder Mgmt (3), Rules (3), Auth (2)
+    // Setup:
+    //   1. portal.azure.com → App registrations → New registration
+    //      Name: "Outlook MCP Server"
+    //      Account types: "Accounts in any org directory + personal MS accounts"
+    //      Redirect URI: http://localhost:3333/auth/callback
+    //   2. API permissions → Microsoft Graph → Delegated:
+    //      offline_access, User.Read, Mail.Read, Mail.ReadWrite, Mail.Send,
+    //      Calendars.Read, Calendars.ReadWrite, Contacts.Read, Contacts.ReadWrite,
+    //      Tasks.Read, Tasks.ReadWrite, Team.ReadBasic.All, Chat.Read, Chat.ReadWrite,
+    //      ChatMessage.Read, ChatMessage.Send, Presence.Read, OnlineMeetings.ReadWrite
+    //   3. Certificates & secrets → New client secret → copy value
+    //   4. Set env vars: MS_CLIENT_ID, MS_CLIENT_SECRET
+    //   5. First use: call "authenticate" tool → opens browser for OAuth login
+    "outlook": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "outlook-mcp"],
+      "env": {
+        "MS_CLIENT_ID": "${env:MS_CLIENT_ID}",
+        "MS_CLIENT_SECRET": "${env:MS_CLIENT_SECRET}"
       }
     }
   }

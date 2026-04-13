@@ -17,6 +17,7 @@
 > Pasted by sovereign as comparative validation input — NOT sovereign words
 
 **Key facts preserved for framing:**
+
 - Plug&Pay consolidated: Cursor + CodeRabbit + Claude Code + BugBot + Perplexity + Augment Code → Kilo Code
 - 80% developer adoption achieved post-consolidation
 - Key quote (DevOps engineer Niels Bresser): *"Kilo lives right in my IDE and understands my entire infrastructure setup. It knows exactly where to look to solve architectural challenges without me having to feed it context."*
