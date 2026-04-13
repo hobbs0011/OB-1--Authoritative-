@@ -145,6 +145,42 @@ export function getModePrompt(mode) {
   return "\n\nMODE: STABILIZER — Correct clearly. Simplify explanations. Enforce the correction pattern. This student needs consistency and repetition.";
 }
 
+// ── getStudentRoute —— Full routing decision for a student ──────────────────
+// Combines lookup + selectMode into a single route object for the correction loop
+export function getStudentRoute(studentId, transcript, weakAreas, petState) {
+  const skillStates = (weakAreas || []).map(w => ({
+    skill: w.category || w.skill || w,
+    confidence: w.confidence || 0.5,
+    error_rate: w.error_rate || 0,
+    error_count: w.error_count || 0,
+    ledger_start: w.ledger_start || null,
+    ledger_end: w.ledger_end || null,
+  }));
+
+  const starMap = lookup(skillStates);
+  const mode = selectMode(petState, skillStates);
+
+  return {
+    studentId,
+    mode,
+    strategy: starMap.strategy,
+    priority: starMap.priority,
+    focus_skills: starMap.focus_skills,
+    route: starMap.route,
+    ledger_ranges: starMap.ledger_ranges,
+  };
+}
+
+// ── getModulePrompt —— Returns combined mode + strategy prompt for a route ──
+export function getModulePrompt(route) {
+  const modePrompt = getModePrompt(route.mode);
+  let strategyHint = "";
+  if (route.focus_skills && route.focus_skills.length > 0) {
+    strategyHint = `\nFOCUS: ${route.route.join(", ")}\nSTRATEGY: ${route.strategy}`;
+  }
+  return modePrompt + strategyHint;
+}
+
 // ── writeback —— Update skill states after a correction ──────────────────────
 // Returns array of skill updates to apply to ProfileDO
 export function computeWriteback(correction, existingSkills) {
