@@ -53,6 +53,9 @@
     "[lua]": {
         "editor.tabSize": 4
     },
+    "[jsonc]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
     // ── Copilot chat context ──────────────────────────────────────────────
     "github.copilot.chat.scopeSelection": true,
     // ── MCP: set a timeout so failing servers don't hang boot ─────────────
