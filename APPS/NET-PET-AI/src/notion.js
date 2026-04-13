@@ -170,3 +170,44 @@ function extractNumber(props, name) {
   if (!prop || prop.type !== "number") return 0;
   return prop.number || 0;
 }
+
+// ── Soul DNA: Write Soul DNA entry to Notion database ─────────────────────────
+
+export async function writeSoulDNA(apiKey, databaseId, payload) {
+  const properties = {
+    "Entry": { title: [{ text: { content: payload.source || "soul_dna_capture" } }] },
+    "Run": { rich_text: [{ text: { content: String(payload.run || "") } }] },
+    "Hash": { rich_text: [{ text: { content: payload.entryHash || "" } }] },
+    "Date": { date: { start: new Date().toISOString() } },
+  };
+
+  if (payload.text) {
+    properties["Content"] = { rich_text: [{ text: { content: payload.text.slice(0, 2000) } }] };
+  }
+
+  return notionFetch(apiKey, "/pages", "POST", {
+    parent: { database_id: databaseId },
+    properties,
+  });
+}
+
+// ── Chat Exchange: Mirror chat to Notion progress DB ──────────────────────────
+
+export async function writeChatExchange(apiKey, databaseId, exchange) {
+  const { studentId, userMessage, obiReply, level } = exchange;
+
+  const properties = {
+    "Student ID": { title: [{ text: { content: studentId } }] },
+    "Lesson": { rich_text: [{ text: { content: "chat_exchange" } }] },
+    "Level": { select: { name: level || "Mouse" } },
+    "Notes": { rich_text: [{ text: { content: `User: ${(userMessage || "").slice(0, 800)}\nOBI: ${(obiReply || "").slice(0, 800)}` } }] },
+    "Date": { date: { start: new Date().toISOString() } },
+    "Score": { number: 0 },
+    "XP": { number: 0 },
+  };
+
+  return notionFetch(apiKey, "/pages", "POST", {
+    parent: { database_id: databaseId },
+    properties,
+  });
+}

@@ -10,7 +10,7 @@ import { queryLessons, writeProgress, queryProgress, syncStudentProgress, writeS
 import { sendZaloMessage, checkAndEscalate, runEscalationSweep, getAccountabilityLinks } from './zalo.js';
 import { generatePosts, routePost, buildInsightPost } from './growth-engine.js';
 import { calculateVirality, calculateConversion, generateVariants, evaluateExperiment, extractPattern, optimizeHook, mutatePrompt, runLearningLoop } from './virality.js';
-import { routeIntent, getStudentRoute, getModulePrompt, createSnapshot, storeSnapshot, rehydrate } from './star-map.js';
+import { getStudentRoute, getModulePrompt, createSnapshot, storeSnapshot, rehydrate } from './star-map.js';
 
 const VERSION = "1.5.0";
 
@@ -4243,4 +4243,88 @@ function addCors(response, request) {
   const headers = new Headers(response.headers);
   for (const [k, v] of Object.entries(corsHeaders(request))) { headers.set(k, v); }
   return new Response(response.body, { status: response.status, headers });
+}
+
+// ── MemoryDO — Per-Student Long-Term Memory + Session Log ─────────────────────
+// SQLite-backed Durable Object for session_log and memory_state.
+// Binding: env.MEMORY — declared in wrangler.toml, wired when router connects.
+export class MemoryDO {
+  constructor(state, env) {
+    this.state = state;
+    this.env = env;
+    this.sql = state.storage.sql;
+    this.sql.exec(`CREATE TABLE IF NOT EXISTS session_log (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      student_id TEXT NOT NULL,
+      session_type TEXT NOT NULL DEFAULT 'chat',
+      input TEXT NOT NULL DEFAULT '',
+      output TEXT NOT NULL DEFAULT '',
+      score INTEGER DEFAULT 0,
+      weak_areas TEXT DEFAULT '[]',
+      route TEXT DEFAULT '{}',
+      ts INTEGER NOT NULL
+    )`);
+    this.sql.exec(`CREATE INDEX IF NOT EXISTS idx_session_log_student ON session_log(student_id, ts)`);
+    this.sql.exec(`CREATE TABLE IF NOT EXISTS memory_state (
+      student_id TEXT PRIMARY KEY,
+      level TEXT DEFAULT 'A1',
+      goal TEXT DEFAULT 'daily speaking',
+      streak INTEGER DEFAULT 0,
+      last_active INTEGER DEFAULT 0,
+      last_score INTEGER DEFAULT 0,
+      weak_areas TEXT DEFAULT '[]',
+      summary TEXT DEFAULT '',
+      updated_at INTEGER DEFAULT 0
+    )`);
+  }
+
+  async fetch(request) {
+    const url = new URL(request.url);
+
+    if (url.pathname === "/log" && request.method === "POST") {
+      const body = await request.json();
+      const now = Date.now();
+      this.sql.exec(
+        `INSERT INTO session_log (student_id, session_type, input, output, score, weak_areas, route, ts) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+        String(body.studentId || "anon"), String(body.sessionType || "chat"),
+        String(body.input || ""), String(body.output || ""),
+        Number(body.score) || 0, JSON.stringify(body.weakAreas || []),
+        JSON.stringify(body.route || {}), now
+      );
+      return json({ ok: true, ts: now });
+    }
+
+    if (url.pathname === "/log" && request.method === "GET") {
+      const studentId = url.searchParams.get("studentId") || "anon";
+      const limit = Math.min(parseInt(url.searchParams.get("limit") || "30"), 200);
+      const rows = this.sql.exec(
+        `SELECT * FROM session_log WHERE student_id = ? ORDER BY ts DESC LIMIT ?`,
+        studentId, limit
+      ).toArray();
+      return json({ entries: rows, count: rows.length });
+    }
+
+    if (url.pathname === "/state" && request.method === "GET") {
+      const studentId = url.searchParams.get("studentId") || "anon";
+      const row = this.sql.exec(
+        `SELECT * FROM memory_state WHERE student_id = ?`, studentId
+      ).toArray()[0];
+      return json(row || { student_id: studentId, level: "A1", goal: "daily speaking", streak: 0, last_active: 0, last_score: 0, weak_areas: "[]", summary: "" });
+    }
+
+    if (url.pathname === "/state" && request.method === "POST") {
+      const body = await request.json();
+      const sid = String(body.studentId || "anon");
+      const now = Date.now();
+      this.sql.exec(
+        `INSERT INTO memory_state (student_id, level, goal, streak, last_active, last_score, weak_areas, summary, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT(student_id) DO UPDATE SET level=excluded.level, goal=excluded.goal, streak=excluded.streak, last_active=excluded.last_active, last_score=excluded.last_score, weak_areas=excluded.weak_areas, summary=excluded.summary, updated_at=excluded.updated_at`,
+        sid, String(body.level || "A1"), String(body.goal || "daily speaking"),
+        Number(body.streak) || 0, now, Number(body.lastScore) || 0,
+        JSON.stringify(body.weakAreas || []), String(body.summary || ""), now
+      );
+      return json({ ok: true, studentId: sid });
+    }
+
+    return json({ error: "Not found" }, 404);
+  }
 }
