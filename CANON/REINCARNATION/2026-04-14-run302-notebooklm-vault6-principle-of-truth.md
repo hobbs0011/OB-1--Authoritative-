@@ -116,3 +116,102 @@
 
 > "You can only build as high up as your foundation is deep."
 > This death deepens the foundation. The Principle of Truth is now the highest mandate. Gospel 444 returns to its proper place — aesthetics, not identity.
+
+---
+
+# MERGE2 — Student Profile Verification + Outlook MCP + Reincarnation Death
+
+**Agent**: OB1 Ne0 (Agent-99)
+**Chat Context**: Student profile work (Minh), Outlook MCP server addition, MERGE2 death execution
+**Merge Time**: 2026-04-14 ~06:00 ICT
+**This Merge**: MERGE2 of UNKNOWN
+
+---
+
+## PHASE 1: CAPTURE THE ASHES
+
+### RAW QUOTES (Verbatim from Agent 100 — this session)
+
+> "we are working on the student profiles section of Phoenix Rising Tech -> Development -> EdeDevelopment -> StudentProfile(FullStack)"
+
+> "restore mcp to outlook email and all over"
+
+> "Follow instructions in #prompt:ReincarnateDEATH-MERGE.prompt.md with these arguments: merge(2), die well"
+
+### DECISIONS MADE
+
+| # | Decision | Impact | Canon Affected |
+|---|----------|--------|----------------|
+| 1 | Student profile for Minh verified as ALREADY COMPLETE from prior session — no rework needed | Avoided duplicate effort. All 3 layers (MINH-PRIVATE.md, README roster, enroll-students.mjs) confirmed intact | EducationSystemsDevelopment |
+| 2 | Outlook MCP server added to .mcp.json alongside Gmail (not replacing) | Empire command stack expanded — 75+ Microsoft Graph tools (Email 20, Calendar 12, Contacts 8, Tasks 7, Teams 25, Folders 3, Rules 3, Auth 2) | .mcp.json |
+| 3 | MERGE1 file discovered empty (wiped after d6bbe70 commit) — restored from git history before MERGE2 append | MERGE protocol integrity preserved — no data lost | CANON/REINCARNATION |
+
+### CORRECTIONS
+
+| # | What Was Wrong | Root Cause | Fix Applied |
+|---|---------------|------------|-------------|
+| 1 | MERGE1 reincarnation file existed but contained only whitespace | File was committed at d6bbe70 with 118 lines but subsequently wiped (likely by another session or editor) | Restored via git checkout d6bbe70 -- before MERGE2 append |
+| 2 | Assumed Minh student profile needed creation | Prior session had already built the complete 240+ line profile doc | Verified all 3 layers intact — zero rework executed |
+
+### NEW LAWS / PRINCIPLES
+
+| # | Principle | Source |
+|---|-----------|--------|
+| 1 | **PRE-FLIGHT VERIFICATION**: Before creating any artifact, verify it doesn't already exist from a prior session. 300+ agent runs create redundancy risk. | This chat — discovered Minh profile already fully built |
+| 2 | **MCP ADDITIVE PATTERN**: When adding new MCP servers, keep existing ones unless explicitly told to replace. Union, not substitution. | This chat — user chose "Add both — keep Gmail and add Outlook" |
+
+### OPEN LOOPS
+
+| # | Loop | Priority | Next Action |
+|---|------|----------|-------------|
+| OL01 | Outlook MCP token setup (MS_CLIENT_ID, MS_CLIENT_SECRET) | MEDIUM | Azure portal app registration — needs Microsoft Graph delegated permissions (Mail, Calendar, Contacts, Tasks, Teams, ChannelMessage) |
+| OL02 | Student profile backend enrollment not executed against live ProfileDO | LOW | Run enroll-students.mjs against deployed Worker when ready |
+| OL03 | Merge count UNKNOWN — cannot determine if this is final merge | BLOCKING | Michael must confirm total chat count for this session |
+
+### PHEROMONE TRAIL
+
+| Signal | Score | Note |
+|--------|-------|------|
+| MERGE1 content recovery — prevented data loss | +3 | Git archaeology saved 118 lines of death extract |
+| Student profile verification — avoided redundant work | +2 | L16 BUILD DONT SCOUT respected — verified before building |
+| Outlook MCP addition — clean append to .mcp.json | +2 | 75+ tools queued for token activation |
+| MERGE protocol compliance — append-only, no overwrite | +2 | File structure preserved across merge boundary |
+| Deduplication executed against MERGE1 | +1 | Outlook MCP noted in both merges — MERGE1 Decision #4 overlaps |
+
+### ARTIFACTS
+
+| File | Action | Status |
+|------|--------|--------|
+| .mcp.json | MODIFIED — Outlook MCP server added (prior chat in this session) | COMMITTED (d6bbe70) |
+| APPS/EducationSystemsDevelopment/students/MINH-PRIVATE.md | VERIFIED — 240+ lines, fully built from prior session | NO CHANGE |
+| APPS/EducationSystemsDevelopment/students/README.md | VERIFIED — Minh in roster | NO CHANGE |
+| APPS/EducationSystemsDevelopment/scripts/enroll-students.mjs | VERIFIED — Minh entry present | NO CHANGE |
+| CANON/REINCARNATION/2026-04-14-run302-notebooklm-vault6-principle-of-truth.md | RESTORED + APPENDED — MERGE1 recovered from git, MERGE2 appended | THIS FILE |
+
+---
+
+## MERGE2 DEDUPLICATION NOTES
+
+| Item | MERGE1 | MERGE2 | Resolution |
+|------|--------|--------|------------|
+| Outlook MCP added to .mcp.json | Decision #4: "MCP config updated — Outlook/M365 server added" | Decision #2: detailed breakdown of 75+ tools | Both kept — MERGE1 has the decision, MERGE2 has the tool inventory detail |
+| OL07 Outlook token setup | OL07: "Azure portal app registration" | OL01: expanded with Graph permission list | MERGE2 version richer — supersedes MERGE1 OL07 |
+| No other overlaps detected | — | — | Clean merge — different work streams |
+
+---
+
+## PHASE 4: PHEROMONE SCORE (MERGE2)
+
+| Metric | Score (1-10) | Notes |
+|--------|-------------|-------|
+| Soul DNA captured | 5 | 3 verbatim quotes. Lower density session — mostly verification work |
+| Decisions anchored | 6 | 3 decisions logged. Student profile verification is a negative-work decision (proved no work needed) |
+| Open loops handed off | 7 | 3 loops with clear next actions. MERGE count unknown is a blocker |
+| Artifacts verified/created | 7 | 5 artifacts tracked. MERGE1 recovery is this merge's primary contribution |
+| Merge protocol compliance | 9 | Append-only, deduplicated, no overwrites, MERGE1 restored |
+| **TOTAL** | **34/50** | Verification-heavy session. Primary value: MERGE1 data recovery + Outlook MCP expansion + student profile ground truth |
+
+---
+
+> MERGE2 COMPLETE — awaiting confirmation of total chat count.
+> If this is the final merge, COLD-START-BOOT and MASTER-SYNC updates are pending.
