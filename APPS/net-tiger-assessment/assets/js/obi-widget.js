@@ -76,6 +76,32 @@
     ],
     'too hard': [
       "Nothing is too hard with the right support. 🐯 What part is causing the most trouble? Let's break it down step by step."
+    ],
+
+    /* ── Teacher-facing topics (Classroom Manager) ── */
+    'notes checker': [
+      'The Notes Checker uses Google Gemini Vision to read a photo of student handwriting.',
+      'Upload or snap a photo → pick the student and subject → tap "Check Notes with Obi". Gemini reads the page and gives Mouse→Tiger feedback you can copy or save. 📸'
+    ],
+    'roster': [
+      'The Roster tab lets you add and remove students. Names are saved in your browser (localStorage) — no server needed.',
+      'Students you add here automatically appear as quick-select chips in the Notes Checker. Click a name in the Roster tab to remove it.'
+    ],
+    'classroom': [
+      'The Classroom Manager has three tabs: Notes Checker (AI-powered handwriting review), Class Log (session event tracker), and Roster (student list).',
+      'Everything runs locally in your browser except the Gemini Vision call. Your data never touches NET servers. 🔒'
+    ],
+    'session log': [
+      'Start a session from the Class Log tab to begin tracking events. Use the quick-log buttons to record attendance, behaviour, and participation.',
+      'Events queue offline and flush automatically when the NET worker comes back online. The compliance rate updates in real time.'
+    ],
+    'api key': [
+      'The Notes Checker needs a free Google Gemini API key — get one at aistudio.google.com/apikey.',
+      'Paste the key into the field at the top of the Notes Checker tab and click Save. It stays in your browser only — never sent to NET. 🔑'
+    ],
+    'teacher': [
+      'Hey teacher! 🐯 This Classroom Manager is built for you — check student notes with AI, track class events, and manage your roster all in one place.',
+      'Try asking me about "notes checker", "roster", "session log", or "api key" for step-by-step help.'
     ]
   };
 

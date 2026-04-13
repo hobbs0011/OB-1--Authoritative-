@@ -16,6 +16,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="assets/css/site.css" />
+    <link rel="stylesheet" href="assets/css/obi-widget.css" />
     <style>
       /* ── Classroom Manager ── */
       .cm-hero {
@@ -761,14 +762,14 @@
               <div class="field-row">
                 <label>Student (optional)</label>
                 <div class="student-chips" id="studentChips">
-                  <div class="chip" onclick="selectStudent(this, 'Mai Trâm')">
-                    Mai Trâm
+                  <div class="chip" onclick="selectStudent(this, 'Minh')">
+                    Minh
                   </div>
-                  <div class="chip" onclick="selectStudent(this, 'Hương')">
-                    Hương
+                  <div class="chip" onclick="selectStudent(this, 'Hana')">
+                    Hana
                   </div>
-                  <div class="chip" onclick="selectStudent(this, 'Quý')">
-                    Quý
+                  <div class="chip" onclick="selectStudent(this, 'Hiếu')">
+                    Hiếu
                   </div>
                   <div class="chip" onclick="selectStudent(this, '')">
                     + Add
@@ -1125,6 +1126,15 @@
       const GEMINI_URL =
         "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
       const NET_API = "https://naturalenglishtraining.net";
+
+      function sanitize(str) {
+        const el = document.createElement('span');
+        el.textContent = str;
+        return el.innerHTML.replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+      }
+      function safeClass(val) {
+        return String(val || '').replace(/[^a-zA-Z0-9_-]/g, '') || 'neutral';
+      }
       const STORE = {
         roster: "net_cm_roster",
         log: "net_cm_log",
@@ -1687,11 +1697,11 @@ Rules:
           .map(
             (e) => `
       <tr>
-        <td>${new Date(e.ts).toLocaleTimeString()}</td>
-        <td>${e.student_id || e.studentId || "—"}</td>
-        <td>${e.type || "—"}</td>
-        <td><span class="status-pill status-${e.rule_status || e.ruleStatus || "neutral"}">${e.rule_status || e.ruleStatus || "—"}</span></td>
-        <td style="color:var(--muted)">${e.notes || ""}</td>
+        <td>${sanitize(new Date(e.ts).toLocaleTimeString())}</td>
+        <td>${sanitize(e.student_id || e.studentId || "—")}</td>
+        <td>${sanitize(e.type || "—")}</td>
+        <td><span class="status-pill status-${safeClass(e.rule_status || e.ruleStatus)}">${sanitize(e.rule_status || e.ruleStatus || "—")}</span></td>
+        <td style="color:var(--muted)">${sanitize(e.notes || "")}</td>
       </tr>`,
           )
           .join("");
@@ -1712,10 +1722,10 @@ Rules:
         const tbody = table.querySelector("tbody");
         const tr = document.createElement("tr");
         tr.innerHTML = `
-      <td>${new Date(e.ts).toLocaleTimeString()}</td>
-      <td>${e.studentId || "—"}</td>
-      <td>${e.type}</td>
-      <td><span class="status-pill status-${e.ruleStatus}">${e.ruleStatus}</span></td>
+      <td>${sanitize(new Date(e.ts).toLocaleTimeString())}</td>
+      <td>${sanitize(e.studentId || "—")}</td>
+      <td>${sanitize(e.type)}</td>
+      <td><span class="status-pill status-${safeClass(e.ruleStatus)}">${sanitize(e.ruleStatus)}</span></td>
       <td></td>`;
         tbody.insertBefore(tr, tbody.firstChild);
       }
@@ -1723,7 +1733,7 @@ Rules:
       // ── Roster ────────────────────────────────────────────
       function getRoster() {
         return JSON.parse(
-          localStorage.getItem(STORE.roster) || '["Mai Trâm","Hương","Quý"]',
+          localStorage.getItem(STORE.roster) || '["Minh","Hana","Hiếu"]',
         );
       }
       function saveRoster(r) {
@@ -1810,5 +1820,122 @@ Rules:
         document.getElementById("checkErr").classList.remove("show");
       }
     </script>
+
+    <!-- OBI Agent Widget -->
+    <div
+      class="obi-widget"
+      id="obiWidget"
+      role="complementary"
+      aria-label="OBI Classroom Agent"
+    >
+      <div
+        class="obi-panel"
+        id="obiPanel"
+        aria-live="polite"
+        aria-label="OBI agent conversation"
+      >
+        <div class="obi-header">
+          <div class="obi-avatar" aria-hidden="true">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M12 2a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4z"
+              />
+            </svg>
+          </div>
+          <div class="obi-header-text">
+            <div class="obi-name">OBI · NET Agent</div>
+            <div class="obi-status">Online</div>
+          </div>
+        </div>
+
+        <div class="obi-messages" id="obiMessages">
+          <div class="obi-msg agent">
+            <div class="obi-bubble">
+              Hey teacher! I'm OBI — your classroom assistant. I can help with
+              the Notes Checker, Session Log, Roster, or getting your Gemini API
+              key set up. 🐯
+            </div>
+            <div class="obi-timestamp">Now</div>
+          </div>
+        </div>
+
+        <div class="obi-quick-replies" id="obiChips">
+          <button
+            class="obi-chip"
+            type="button"
+            data-reply="notes checker"
+          >
+            Notes Checker
+          </button>
+          <button class="obi-chip" type="button" data-reply="session log">
+            Session Log
+          </button>
+          <button class="obi-chip" type="button" data-reply="api key">
+            API Key Setup
+          </button>
+        </div>
+
+        <div class="obi-input-row">
+          <input
+            class="obi-input"
+            id="obiInput"
+            type="text"
+            placeholder="Ask OBI anything…"
+            aria-label="Message OBI"
+            autocomplete="off"
+            maxlength="300"
+          />
+          <button
+            class="obi-send"
+            id="obiSend"
+            type="button"
+            aria-label="Send message"
+          >
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <button
+        class="obi-toggle"
+        id="obiToggle"
+        type="button"
+        aria-controls="obiPanel"
+        aria-expanded="false"
+        aria-label="Open OBI agent"
+      >
+        <span
+          class="obi-badge"
+          id="obiBadge"
+          hidden
+          aria-label="unread messages"
+          >1</span
+        >
+        <svg
+          class="obi-icon-open"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          <path
+            d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.17L4 17.17V4h16v12z"
+          />
+        </svg>
+        <svg
+          class="obi-icon-close"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          <path
+            d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+          />
+        </svg>
+      </button>
+    </div>
+
+    <script src="assets/js/obi-widget.js" defer></script>
   </body>
 </html>
