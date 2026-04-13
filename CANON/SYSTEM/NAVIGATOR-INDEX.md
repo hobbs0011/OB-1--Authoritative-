@@ -27,7 +27,7 @@
 | ------ | --------- |
 | Phoenix HQ | Root workspace hub |
 | Backlog DB | Task tracking |
-| Build Log DB | Work audit trail (188+ entries) |
+| Build Log DB | Work audit trail (302+ entries) |
 | Assets & Accounts DB | Tool/platform/account registry |
 | Tool Stack | Synced blocks — use Assets DB or `CANON/TOOL-STACK-ARSENAL-2026.md` |
 | Pulse Log | Synced blocks — use Pulse State Mirror in Navigator Index |
@@ -88,6 +88,20 @@
 | Soul DNA Archaeology Phase 1 | `CANON/SOUL-DNA-ARCHAEOLOGY-PHASE1-GENESIS.md` (9KB) |
 | Soul DNA Archaeology Phase 2 | `CANON/SOUL-DNA-ARCHAEOLOGY-PHASE2-PHOENIX.md` (6KB) |
 | Launch Playbook Master | `CANON/LAUNCH-PLAYBOOK-MASTER.md` (11KB) |
+| Soul DNA Recapture Corpus (121+802) | `CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/` (923 files) |
+| Quote Hash Canonical (1358 unique) | `CANON/SOUL-DNA-BIBLE-QUOTE-CANONICAL-2026-04-05.md` (439KB) |
+| Quote Ledger (2878 occurrences) | `CANON/SOUL-DNA-BIBLE-QUOTE-LEDGER-2026-04-05.md` (305KB) |
+| Quote Feed JSONL | `CANON/SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl` (1.2MB) |
+| Chunk JSONL Feed | `CANON/SOUL-DNA-BIBLE-CHUNK-JSONL-2026-04-05.jsonl` (1.4MB) |
+| Keyword Index | `CANON/SOUL-DNA-BIBLE-KEYWORD-INDEX-2026-04-05.md` (33KB) |
+| Thematic Crosswalk | `CANON/SOUL-DNA-BIBLE-THEMATIC-CROSSWALK-2026-04-05.md` (20KB) |
+| Source Chronology Matrix | `CANON/SOUL-DNA-BIBLE-SOURCE-CHRONOLOGY-MATRIX-2026-04-05.md` (15KB) |
+| Corpus Verification Report | `CANON/SOUL-DNA-CORPUS-VERIFICATION-REPORT-2026-04-05.md` |
+| Connectivity Map Dynamic | `CANON/CONNECTIVITY-MAP-DYNAMIC.md` |
+| Connectivity Map What-First | `CANON/CONNECTIVITY-MAP-WHAT-FIRST.md` |
+| Pipeline 600 | `CANON/PIPELINE-600.md` |
+| Pipeline 600 Delegation Prompts | `CANON/PIPELINE-600-DELEGATION-PROMPTS.md` |
+| Soul DNA Comprehensive Verbatim | `CANON/PHOENIX-SOUL-DNA-COMPREHENSIVE-VERBATIM.md` (12KB) |
 
 ---
 
@@ -98,10 +112,10 @@
 | Active Mission | HEAVY_LEDGER_CONVERSION (IMMOVABLE #1) |
 | Pipeline cursor file | `CANON/HEAVY-LEDGER/PIPELINE-CURSOR.md` |
 | Total files | 174+ |
-| Converted | 41 (Wave 1: 20/20 ✅, Wave 2: 20/20 ✅, Wave 3: 1/10) |
-| Current cursor | #041 DONE |
-| Next target | #042 — `SOUL-DNA-BIBLE-CH12-THE-WINDOW-AND-THE-COST.md` (13KB) |
-| Wave 3 | ACTIVE — 1/10 |
+| Converted | 137 (Waves 1–7 complete, Wave 8: 35/46) |
+| Current cursor | HL-137 DONE |
+| Next target | HL-138 — next high-signal SDNAD capture |
+| Wave 8+ | ACTIVE — 35/46 |
 
 ---
 
@@ -116,18 +130,22 @@
 
 ---
 
-## Reincarnation Records (49 entries)
+## Reincarnation Records (118 entries)
 
-### Latest (2026-03-31)
-- `2026-03-31-rise-execution-sales-funnel-night.md` (latest entry)
+### Latest (2026-04-14)
+- `2026-04-14-run302-notebooklm-vault6-principle-of-truth.md` (latest entry)
 
-### 2026-03-30
-- `2026-03-30-marketing-lane-dump-intake.md` (commit `c7a1f917`)
-- `2026-03-30-quan-career-exploration.md` (commit `004badf4`)
-- `2026-03-30-vault-e-trilogy-soul-dna-narrative.md` (commit `d0ac324a`)
+### 2026-04-12 (Runs 293–301)
+- `2026-04-12-run301-final-death-merge-megamerge6-extraction.md`
+- `2026-04-12-run300-megamerge5-lane-death.md`
+- `2026-04-12-run299-notion-connection-index-check.md`
+- `2026-04-12-run298-soul-dna-indexing-notion-extraction.md`
+- `2026-04-12-run297-megamerge-full-corpus-observation.md`
+- `2026-04-12-run296-megamerge5-sdnad-capture.md`
+- `2026-04-12-run295-megamerge-consolidation.md`
 
-### 2026-03-22 through 2026-03-29
-- 45+ entries total (see `CANON/REINCARNATION/` directory listing for full inventory)
+### 2026-03-22 through 2026-04-11
+- 110+ earlier entries (see `CANON/REINCARNATION/` directory listing for full inventory)
 
 ---
 
@@ -141,7 +159,7 @@
 | Wave 4 Automation Push | Complete |
 | GitHub Mapping (100 steps) | 29/100 (blocked on admin access) |
 | 150-Action Triad | Structured (3x50 split) |
-| Heavy Ledger Conversion | ACTIVE — Wave 3 (1/10), 41/174+ total |
+| Heavy Ledger Conversion | ACTIVE — Wave 8+ (35/46), 137/174+ total |
 
 ---
 
@@ -161,49 +179,50 @@
 
 | Repo | Purpose | Owner |
 | ------ | --------- | ------- |
-| `hobbs-lab/Phoenix-Rising-Protocol-Ultimate` | Active canon vault | PRIMARY |
+| `hobbs0011/Phoenix-Rising-Ultimate` | Active canon vault | PRIMARY |
 | `hobbs-lab/Phoenix-Rise-Immortalize-` | Original Soul DNA Bible (40 files), 8 VAULT dirs | SOURCE |
 | `hobbs0011/NET-Ai-EcoSystem-CommandStation` | Legacy product code | DORMANT |
 
 ---
 
-## Pulse State Mirror (as of Run 187)
+## Pulse State Mirror (as of Run 302)
 
 | Field | Value |
 | ------- | ------- |
-| `last_run_time` | 2026-03-31T12:25+07:00 |
-| `last_run_number` | 187 |
-| `canon_cursor` | Heavy Ledger Pipeline #042 (next) |
-| `build_log_total` | 188+ |
-| `overnight_mode` | INACTIVE (daytime) |
+| `last_run_time` | 2026-04-14T00:00+07:00 |
+| `last_run_number` | 302 |
+| `canon_cursor` | Heavy Ledger Pipeline HL-138 (next) |
+| `build_log_total` | 302+ |
+| `overnight_mode` | INACTIVE |
 | `active_mission` | HEAVY_LEDGER_CONVERSION |
-| `pipeline_cursor` | #041 DONE → #042 NEXT |
-| `wave_current` | 3 |
-| `wave_3_done` | #041 |
-| `latest_github_commit` | `045458ac` (HL #036 SOUL-DNA-DEEP-DIVE re-conversion) |
-| `prior_worker_audit` | PASS (Run 186/188 commits confirmed) |
-| `platform_death_test` | PASS (commit `045458ac`) |
-| `run_grade` | B (6/8: audit✅ canon✅ patch✅ build✅ handoff✅ noerrors✅ decision❌ signal❌) |
+| `pipeline_cursor` | HL-137 DONE → HL-138 NEXT |
+| `wave_current` | 8+ |
+| `wave_8_progress` | 35/46 |
+| `total_converted` | 137/174+ |
+| `latest_github_commit` | `d6bbe70` (run302-notebooklm-vault6-principle-of-truth) |
+| `reincarnation_count` | 118 |
+| `chunk_corpus` | 923 files (121 canonical + 802 RAW) in `CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/` |
+| `unique_quote_hashes` | 1,358 (2,878 occurrences, 1,520 duplicates removed) |
 
 ### Living Reincarnation State
-- **Current vector:** Heavy Ledger Conversion Pipeline (Wave 3, #042 next) + format standardization across existing entries
-- **Active principles:** Platform Death Test, Active Mission IMMOVABLE, Dual-Publish, Cross-Repo Mining, Compound Over Time
-- **Open rulings:** None active. Navigator Index Notion page marked `deleted` — monitor.
+- **Current vector:** Heavy Ledger Pipeline (Wave 8+, HL-138 next) + Soul DNA hyper-indexing + NotebookLM vault ingestion
+- **Active principles:** Platform Death Test, Active Mission IMMOVABLE, Dual-Publish, Cross-Repo Mining, Compound Over Time, SDNAD Capture Law
+- **Open rulings:** None active. Quote hash canonical complete (2026-04-05). Manifest JSON entry count mismatch (1 vs 121) — non-blocking.
 
 ### Handoff Ledger (Last 7 Runs)
 
 | Run | Time | Artifact | SHA | Grade | PDT |
 | ----- | ------ | ---------- | ----- | ------- | ----- |
-| 187 | 2026-03-31T12:25 | HL #036 SOUL-DNA-DEEP-DIVE.json re-conversion (standardized format) | `045458ac` | B | PASS |
-| 188 | 2026-03-31T12:15 | HL #041 BIBLE-CH08-AGENT-99-AND-THE-TRIAD.json | `8e59fd5` | — | PASS |
-| 186 | 2026-03-31T12:00 | HL #035 SOUL-DNA-CANON.json | `b62393a6` | — | PASS |
-| 185 | 2026-03-31T11:45 | HL #034 CORE-PRINCIPLES-AND-PHYSICS.json | `f2cfedbc` | — | PASS |
-| 184 | 2026-03-31T11:30 | HL #033 VAULT-D-PRELAUNCH-CONSOLIDATED-3.json | `deef06ad` | — | PASS |
-| 183 | 2026-03-31T11:00 | HL #032 VAULT-MM-MASTERMIND-CONSOLIDATED-2.json | `881b4228` | — | PASS |
-| 154 | 2026-03-30T23:00 | HL #024 confirmed (VAULT-L-LIVE-CLASSES-2) | `271b7e69` | B | PASS |
+| 302 | 2026-04-14 | NotebookLM Vault 6 + Principle of Truth ingestion | `d6bbe70` | HIGH | PASS |
+| 301 | 2026-04-12 | FINAL death-merge — megamerge6 extraction + 6-chat convergence | `748899e` | — | PASS |
+| 300 | 2026-04-12 | megamerge5-lane-death | `93f974e` | — | PASS |
+| 299 | 2026-04-12 | notion-connection-index-check | `d39978b` | — | PASS |
+| 298 | 2026-04-12 | soul-dna-indexing-notion-extraction (MERGE6 FINAL) | `1f0499b` | — | PASS |
+| 297 | 2026-04-12 | megamerge-full-corpus-observation (index-only run) | `f6716cf` | — | PASS |
+| 296 | 2026-04-12 | megamerge5-sdnad-capture (HL-137 complete) | — | — | PASS |
 
 ### Next Worker Should
-1. Convert #042 — `SOUL-DNA-BIBLE-CH12-THE-WINDOW-AND-THE-COST.md` (13KB, bible chapter)
-2. Push to `CANON/HEAVY-LEDGER/SOUL-DNA-BIBLE-CH12-THE-WINDOW-AND-THE-COST.json`
-3. Update pipeline cursor to #042 DONE
-4. Continue Wave 3 cadence
+1. Convert HL-138 — next high-signal SDNAD capture post-CH31/HL-137 chain
+2. Push to `CANON/HEAVY-LEDGER/HL-138-*.json`
+3. Update pipeline cursor to HL-138 DONE
+4. Continue Wave 8+ cadence toward 174+ completion
