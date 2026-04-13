@@ -24,7 +24,7 @@ All deployable products live under `APPS/`. Wing tags classify each by domain.
 | Product | Directory | Status | Deploy URL | Notes |
 |---------|-----------|--------|-----------|-------|
 | TRAIN-6-7 | `APPS/TRAIN-6-7/` | 🔨 IN DEV | — | Age-specific Roblox learning game |
-| NET Tiger Assessment | `net-tiger-assessment/` | 🔨 IN DEV | — | Tiger-level assessment tool (has own .git — pending APPS/ migration) |
+| NET Tiger Assessment | `APPS/net-tiger-assessment/` | 🔨 IN DEV | — | Classroom Manager — teacher tool (notes checker, session log, roster) |
 
 ## Wing: Marketing (`wing:marketing`)
 
@@ -44,7 +44,6 @@ All deployable products live under `APPS/`. Wing tags classify each by domain.
 
 | Item | Blocker | Owner |
 |------|---------|-------|
-| `net-tiger-assessment` → `APPS/net-tiger-assessment/` | Has own `.git` — needs subtree strategy or copy-without-git | OB1 |
 | `APPS/net-marketing/` | NET-MARKETING directory on Desktop not yet ingested | Michael |
 | TRAIN-6-7 Roblox Product IDs | 21 Product IDs pending | Michael |
 | ROBLOX_API_KEY secret | Not yet set | Michael |
