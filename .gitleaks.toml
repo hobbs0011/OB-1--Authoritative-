@@ -1,0 +1,13 @@
+title = "Phoenix Rising Gitleaks Config"
+
+[allowlist]
+description = "Allow known-safe public metadata and placeholders"
+regexes = [
+  '''DOTENV_PUBLIC_KEY\s*=\s*["']?[A-Za-z0-9]{16,}["']?''',
+  '''(example|placeholder|REPLACE_ME|YOUR_[A-Z_]+)''',
+]
+paths = [
+  '''^ARCHIVE/''',
+  '''^TEMP-''',
+  '''^RAW-CHAT-LOGS/''',
+]
