@@ -5,6 +5,9 @@
 2. Hieu
 3. Hana
 4. Lam
+5. Quy
+6. Mai Tram
+7. Huong
 
 ---
 
@@ -16,6 +19,9 @@
 | Hieu | Confirmed complete | Not yet wired in enrollment script | `APPS/EducationSystemsDevelopment/students/HIEU-PRIVATE.md` |
 | Hana | Confirmed complete | Not yet wired in enrollment script | `APPS/EducationSystemsDevelopment/students/HANA-PRIVATE.md` |
 | Lam | Name exists in multiple class vault records; no single active private profile in student folder | Not yet wired in enrollment script | `APPS/NET-PET-AI-merge/CANON/VAULT-L-LIVE-CLASSES-CONSOLIDATED-1.md` |
+| Quy | Found in BLUETECH folder | Not yet wired in enrollment script | `OPERATIONS/NET-STUDENTS/NGUYEN-THI-THU-QUY-BLUETECH.md` |
+| Mai Tram | Found in BLUETECH folder | Not yet wired in enrollment script | `OPERATIONS/NET-STUDENTS/MAI-TRAM-BLUETECH.md` |
+| Huong | STATUS UNKNOWN - needs profile lookup | Not yet wired in enrollment script | TBD |
 
 ---
 
@@ -61,11 +67,11 @@ Operational note:
 Message template:
 
 "Hi Hana,
-4. Lam (17-year-old, new potential student)
+Your NET profile is ready and prioritized.
 I am finishing your login ID wiring now and will send your login credentials right after.
 - Michael"
 
-| Lam | Prospect only (17-year-old, new potential student). No active student profile yet. | Not enrolled and no login should be issued yet. | Founder clarification on 2026-04-14 |
+Operational note:
 - Profile file is complete, but no confirmed `studentId` in enrollment script yet.
 
 ### 4) Lam — new prospect intake first (no login yet)
@@ -80,12 +86,45 @@ I will send your credentials right after onboarding is complete.
 Operational note:
 - Lam is a new potential student, age 17. Treat as prospect intake, not existing roster reconciliation.
 
-2. Create + enroll final studentId records for Hieu and Hana in the enrollment pipeline.
-2. Create Lam prospect profile, run intake, then assign new studentId before login issuance.
+### 5) Quy — BlueTech, private student, Mouse level
+Message template:
+
+"Hi Quy,
+Your NET profile is ready and prioritized.
+I am finishing your login ID wiring now and will send your login credentials right after.
+- Michael"
+
+Operational note:
+- Profile exists in BLUETECH folder. Mouse level (true beginner). Needs Vietnamese translation support.
+
+### 6) Mai Tram — BlueTech, private student, Cub level
+Message template:
+
+"Hi Mai Tram,
+Your NET profile is ready and prioritized.
+I am finishing your login ID wiring now and will send your login credentials right after.
+- Michael"
+
+Operational note:
+- Profile exists in BLUETECH folder. Cub level (advancing). HR professional, has side business.
+
+### 7) Huong — STATUS UNKNOWN
+Message template:
+
+"Hi Huong,
+Your NET profile is ready and prioritized.
+I am finishing your login ID wiring now and will send your login credentials right after.
+- Michael"
+
+Operational note:
+- ⚠️ NO PROFILE FOUND in student folders. Needs profile lookup or intake first before login.
+
 ## Blocking Items (Only 2)
 
 1. Create + enroll final `studentId` records for Hieu and Hana in the enrollment pipeline.
-2. Identity lock for Lam (full legal/student record match) before login issuance.
+2. Create Lam prospect profile, run intake, then assign new studentId before login issuance.
+3. Wire Quy and Mai Tram IDs in enrollment script and enroll (BlueTech students).
+4. ⚠️ FIND HUONG PROFILE or run intake — status unknown.
 
 ---
 
@@ -94,7 +133,9 @@ Operational note:
 1. Send Minh parent login packet first.
 2. Wire Hieu and Hana IDs in enrollment script and enroll.
 3. Lock Lam identity, then enroll and send.
-4. Publish a one-page student login table once all four are live.
+4. Wire Quy and Mai Tram IDs (BlueTech students) and enroll.
+5. 🔴 FIND OR CREATE HUONG PROFILE before login.
+6. Publish a one-page student login table once all seven are live.
 
 ---
 
@@ -104,3 +145,6 @@ Operational note:
 - `APPS/EducationSystemsDevelopment/students/HIEU-PRIVATE.md`
 - `APPS/EducationSystemsDevelopment/students/HANA-PRIVATE.md`
 - `APPS/NET-PET-AI-merge/CANON/VAULT-L-LIVE-CLASSES-CONSOLIDATED-1.md`
+- `OPERATIONS/NET-STUDENTS/NGUYEN-THI-THU-QUY-BLUETECH.md` (Quy)
+- `OPERATIONS/NET-STUDENTS/MAI-TRAM-BLUETECH.md` (Mai Tram)
+- ⚠️ TBD: Huong profile not found
