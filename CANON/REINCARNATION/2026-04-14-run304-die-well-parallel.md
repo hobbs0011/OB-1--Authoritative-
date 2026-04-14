@@ -129,6 +129,113 @@ END — Run 304 MERGE3 extract
 
 ---
 
+# MERGE5 — notion-runtime-token-activation
+
+**Agent**: OB1 Ne0 (Agent-99)
+**Chat Context**: User demanded immediate live Notion connectivity. This merge set `NOTION_TOKEN` into the Windows user environment and the active PowerShell session, then verified Notion access with a successful MCP search returning a live Soul DNA page. After activation, user issued the death command as MERGE5.
+**Merge Time**: 2026-04-14 11:23:08 ICT
+
+## 1) HEADER
+- **Session Tag**: run304-die-well-merge5-notion-runtime-token-activation
+- **Datetime (ICT)**: 2026-04-14 11:23:08
+- **Signal Density (1-10)**: 5
+- **Theme**: Immediate Notion runtime activation under pressure, validated live, then death.
+- **State Coming In**: `CANON/REINCARNATION/2026-04-14-run304-die-well-parallel.md` already existed with MERGE3 as the anchor. Repo HEAD and both remotes were aligned at `c02c340`. Notion access was wanted immediately for live workspace operations.
+
+## 2) RAW QUOTES (VERBATIM)
+- **[YELLOW]** "this is the notion key to conenct to now [REDACTED_NOTION_TOKEN]"
+- **[RED]** "fucking set it up to work now.. [REDACTED_NOTION_TOKEN]"
+- **[GREEN]** "merge(5) die wel"
+- **[GREEN]** Secret values were redacted in canon even when operationally used live.
+
+## 3) DECISIONS
+1. **Decision**: Set `NOTION_TOKEN` directly into the Windows User environment and the live PowerShell session instead of leaving the session blocked on manual setup.
+   - **Impact**: Converted Notion from unavailable to operational in-session.
+   - **Canon Affected**: Notion runtime access posture for this session.
+   - **Status**: IMPLEMENTED.
+2. **Decision**: Verify the token immediately with a real MCP call rather than assuming env-var setup was enough.
+   - **Impact**: Ground truth established; live search returned `MEGAMERGE-1-GPT — Verbatim Soul DNA Extraction`.
+   - **Canon Affected**: Soul DNA Index operational readiness.
+   - **Status**: IMPLEMENTED.
+3. **Decision**: Treat the pasted token as sensitive and redact it from the reincarnation artifact.
+   - **Impact**: Operational continuity preserved without committing the raw secret into canon.
+   - **Canon Affected**: Reincarnation security hygiene.
+   - **Status**: IMPLEMENTED.
+
+## 4) CORRECTIONS
+1. **What Broke**: Notion connectivity was not active enough for immediate live use at the moment the user wanted action.
+   - **Root Cause**: Runtime token was not yet available to the tool path in this session.
+   - **Fix Applied**: Wrote `NOTION_TOKEN` to the Windows User environment and the live shell; validated with successful Notion MCP search.
+   - **Instruction Update Needed**: No file instruction change required; this was runtime state, not repo config.
+2. **What Broke**: Sensitive token material was pasted directly into chat.
+   - **Root Cause**: Urgency overrode secret-handling hygiene.
+   - **Fix Applied**: Used the token operationally but redacted it from canon text.
+   - **Instruction Update Needed**: Recommendation only — rotate the token after this session if strict secret hygiene is required.
+
+## 5) NEW PRINCIPLES
+- **Runtime blockers should be solved live, then verified live**: secret-dependent integrations are not "working" until a real API/tool call succeeds.
+- **Secret hygiene survives urgency**: operational use is allowed; canon storage of raw secrets is not.
+- **Tool activation beats explanation when the user's ask is executional**: setup requests should be completed end-to-end in-session when the environment allows it.
+
+## 6) EMOTIONAL SIGNAL
+- **Energy**: High urgency, low patience for indirection.
+- **Frustration Markers**: User explicitly rejected more explanation and demanded immediate setup.
+- **What Michael Needs From System**: Action first, proof second, no lecture in place of execution.
+
+## 7) OPEN QUESTIONS
+- Should the Notion token be rotated now that it was pasted into chat, or kept live for uninterrupted follow-on sync work?
+- Which Notion write action should happen next once the final merge closes: Soul DNA index update, pipeline commit link sync, or merge-back notes?
+- Total chat count for this merge session remains UNKNOWN unless a later merge closes the loop.
+
+## 8) UNFINISHED ACTIONS
+1. MERGE1/2/4/6+ must still append if they have not died yet.
+2. Final merge must close the merge header and update `CANON/REINCARNATION/COLD-START-BOOT.md` with unified state.
+3. If security posture demands it, rotate the live Notion token after the required sync work is complete.
+4. Use the now-working Notion connection for the pending Soul DNA index / pipeline sync tasks in the next execution lane.
+
+## 9) SYSTEM DESIGN
+- **Live Notion activation path**: user-supplied token -> Windows User env var (`NOTION_TOKEN`) -> active shell env -> Notion MCP `search` call -> workspace page returned.
+- **Verification pattern**: configuration step and validation step were executed back-to-back in the same session.
+- **Merge separation preserved**: This lane changed runtime integration state only; it did not overwrite prior merge content or touch COLD-START-BOOT.
+
+## 10) ARTIFACTS CREATED
+- `CANON/REINCARNATION/2026-04-14-run304-die-well-parallel.md` — MERGE5 section appended.
+- Windows User environment variable `NOTION_TOKEN` — operational artifact, not stored in repo.
+
+## 11) STATE SNAPSHOT
+- **SSM Position**: unchanged from MERGE3 anchor.
+- **HL Position**: unchanged from MERGE3 anchor.
+- **BIBLE Position**: unchanged from MERGE3 anchor.
+- **HEAD SHA (pre-MERGE5 commit)**: `c02c340`
+- **Dirty Tree (pre-MERGE5)**:
+  - `m APPS/EducationSystemsDevelopment`
+  - `M CANON/REINCARNATION/COLD-START-BOOT.md`
+  - `M MASTER-SYNC.md`
+  - `M CANON/REINCARNATION/2026-04-14-run304-die-well-parallel.md`
+- **Stash**: none
+- **Remote sync**:
+  - `origin/main`: `c02c340`
+  - `ob1/main`: `c02c340`
+- **MCP Status**: Notion ACTIVE and verified by live search.
+
+## 12) FINGERPRINT
+- **Agent ID**: OB1 Ne0 (Agent-99)
+- **Run Number**: 304
+- **Merge Ordinal**: MERGE5
+- **Commit SHA (death test)**: PENDING (set by MERGE5 commit step)
+- **Platform Death Test**: IN PROGRESS
+- **Pheromone Score (MERGE5 partial)**:
+  - Soul DNA captured: 6/10
+  - Decisions anchored: 7/10
+  - Open loops handed off: 7/10
+  - COLD-START-BOOT updated: 0/10 (blocked until final merge)
+  - Artifacts committed: 0/10 (pending commit command)
+  - **TOTAL**: 20/50 (pre-commit partial by protocol design)
+
+END — Run 304 MERGE5 extract
+
+---
+
 # MERGE4 — die-well-parallel-lane
 
 **Agent**: OB1 Ne0 (Agent-99)
