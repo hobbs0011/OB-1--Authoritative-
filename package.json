@@ -1,4 +1,12 @@
 {
+  "name": "ob-1-control-plane",
+  "private": true,
+  "scripts": {
+    "canon:doctor": "pwsh -NoProfile -ExecutionPolicy Bypass -File SCRIPTS/obi.ps1 doctor",
+    "canon:verify": "pwsh -NoProfile -ExecutionPolicy Bypass -File SCRIPTS/obi.ps1 verify",
+    "canon:dev": "pwsh -NoProfile -ExecutionPolicy Bypass -File SCRIPTS/obi.ps1 dev",
+    "canon:mcp-audit": "pwsh -NoProfile -ExecutionPolicy Bypass -File SCRIPTS/obi.ps1 mcp-audit"
+  },
   "devDependencies": {
     "wrangler": "^4.80.0"
   }

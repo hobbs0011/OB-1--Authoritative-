@@ -10,6 +10,9 @@ API-MASTER.7z
 NET/
 GALAXY/
 .secret
+.env
+.env.keys
+.env.local
 
 # === LARGE / LOCAL ONLY ===
 .venv/
@@ -30,4 +33,44 @@ CON
 ~$*
 *.pptx
 .vscode/mcp.json
+
+# === MEDIA (use Cloudflare R2) ===
+*.mp4
+*.m4a
+*.wav
+*.mp3
+*.mov
+*.avi
+*.mkv
+*.webm
+*.aac
+*.flac
+
+# === OFFICE DOCS (use Google Drive) ===
+*.docx
+*.doc
+*.xlsx
+*.xls
+*.pdf
+
+# === ARCHIVES (use HARD-BACKUPS on D:) ===
+*.7z
+*.zip
+*.rar
+*.tar.gz
+*.tar.bz2
+
+# === TEMP ===
+tmp_*
+*.tmp
 debug.log
+.DS_Store
+nul
+
+# === BUILD OUTPUT ===
+APPS/NET-PET-AI/dist/
+.playwright-mcp/
+
+# === DEAD DIRS ===
+net-tiger-assessment.worktrees/
+Phoenix-Rising-Protocol-Ultimate/

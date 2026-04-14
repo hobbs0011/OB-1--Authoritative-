@@ -6,12 +6,20 @@
 
 This repo is the immutable mirror of the Phoenix system — Soul DNA canon, operational artifacts, lesson content, and the NET-PET-AI runtime. Notion is the control plane; GitHub is the permanent record.
 
+## Canonical Operating Lane
+
+- **Repo:** `OB-1`
+- **Runtime app:** `APPS/NET-PET-AI-merge/APPS/NET-PET-AI`
+- **Operator email:** `mrmichaelhobbs123@gmail.com`
+- **Legacy references:** `mrmichaelhobbs1234*` are archival unless explicitly needed for forensics
+- **Workflow entrypoint:** `pwsh -File SCRIPTS/obi.ps1 <doctor|verify|dev|mcp-audit>`
+
 ## Directory Structure
 
 | Directory | Purpose |
-|---|---|
+| --- | --- |
 | `APPS/` | Runnable applications — NET-PET-AI (Cloudflare Worker), ChattyNET, lesson prototypes |
-| `APPS/NET-PET-AI/` | **Primary runtime target** — Cloudflare Worker powering OBI at naturalenglishtraining.net |
+| `APPS/NET-PET-AI-merge/APPS/NET-PET-AI/` | **Primary runtime target** — verified Cloudflare Worker source for OBI |
 | `CANON/` | Soul DNA doctrine, teaching methodology, sealed source material |
 | `GALAXY-LESSONS/` | Gospel 444 lesson content — HTML lesson files for student delivery |
 | `OPERATIONS/` | Operational records — session logs, inventories, deploy analysis, protocols |
@@ -20,7 +28,7 @@ This repo is the immutable mirror of the Phoenix system — Soul DNA canon, oper
 ## Key Files
 
 | File | Purpose |
-|---|---|
+| --- | --- |
 | `AGENTS.md` | Codex Cloud / Copilot agent instructions |
 | `MASTER-SYNC.md` | Live operating state and system identity |
 | `SECURITY.md` | Security policy and incident reporting |
@@ -38,7 +46,7 @@ This repo is the immutable mirror of the Phoenix system — Soul DNA canon, oper
 ## Command Structure
 
 | Agent | Role |
-|---|---|
+| --- | --- |
 | Agent-100 | Michael Hobbs — Sovereign authority |
 | Agent-99 (OB1) | Legion Command Station — orchestration |
 | Agent-98 (AnA) | Anakin Fleet 1 — chaos/build lane |
@@ -58,10 +66,8 @@ This repo is the immutable mirror of the Phoenix system — Soul DNA canon, oper
 ## Getting Started (NET-PET-AI)
 
 ```bash
-cd APPS/NET-PET-AI
-npm ci
-npm run verify:wrangler
-npx wrangler deploy --dry-run
+pwsh -File SCRIPTS/obi.ps1 doctor
+pwsh -File SCRIPTS/obi.ps1 verify
 ```
 
 ## License

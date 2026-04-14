@@ -1,0 +1,20 @@
+name = "phoenix-empire"
+main = "src/index.js"
+compatibility_date = "2024-01-01"
+
+[durable_objects]
+bindings = [
+  { name = "PHOENIX_LEDGER", class_name = "PhoenixLedgerDOv2" }
+]
+
+[[migrations]]
+tag = "v66-new-sqlite-class"
+new_sqlite_classes = ["PhoenixLedgerDOv2"]
+
+[vars]
+PHOENIX_VERSION = "v67.0-REVENUE-PIPELINE"
+GOSPEL = "444"
+ALLOWED_ORIGINS = "https://magic-chat-phoenix.vercel.app"
+CHAT_RPM = "60"
+CHAT_TIMEOUT_MS = "20000"
+MAX_BODY_BYTES = "65536"

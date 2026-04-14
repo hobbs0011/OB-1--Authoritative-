@@ -10,6 +10,8 @@
       "args": ["-y", "@cloudflare/mcp-server-cloudflare"],
       "env": {
         "CLOUDFLARE_API_TOKEN": "${env:CLOUDFLARE_API_TOKEN}",
+        "CLOUDFLARE_API_KEY": "${env:CLOUDFLARE_API_KEY}",
+        "CLOUDFLARE_EMAIL": "${env:CLOUDFLARE_EMAIL}",
         "CLOUDFLARE_ACCOUNT_ID": "${env:CLOUDFLARE_ACCOUNT_ID}"
       }
     },
@@ -20,7 +22,8 @@
       "command": "npx",
       "args": ["-y", "@modelcontextprotocol/server-github"],
       "env": {
-        "GITHUB_TOKEN": "${env:GITHUB_TOKEN}"
+        "GITHUB_TOKEN": "${env:GITHUB_TOKEN}",
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${env:GITHUB_TOKEN}"
       }
     },
 
@@ -66,7 +69,18 @@
       "args": [
         "-y",
         "@modelcontextprotocol/server-filesystem",
-        "/workspaces/Phoenix-Rising-Protocol-Ultimate"
+        "C:\\Users\\mrmic\\Desktop\\OB-1"
+      ]
+    },
+
+    // ── FILESYSTEM (NET-PET-AI scoped) ──────────────────────────────────────
+    "filesystem-net-pet-ai": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI"
       ]
     },
 

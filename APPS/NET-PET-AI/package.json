@@ -1,8 +1,7 @@
 {
   "name": "net-pet-ai",
-  "version": "1.2.0",
+  "version": "0.1.0",
   "private": true,
-  "description": "AI-powered English learning companion",
   "type": "module",
   "engines": {
     "node": ">=20.0.0"
@@ -12,7 +11,7 @@
     "dev:safe": "set BROWSER=none&& wrangler dev --port 8788",
     "deploy": "wrangler deploy",
     "deploy:safe": "node -e \"if(!process.env.CLOUDFLARE_API_TOKEN){console.error('Missing CLOUDFLARE_API_TOKEN');process.exit(1)}\" && wrangler deploy",
-    "verify:wrangler": "node scripts/verify-wrangler-config.mjs"
+    "verify:wrangler": "node --check src/index.js && npx wrangler deploy --dry-run --outdir /tmp/net-pet-ai-dry"
   },
   "devDependencies": {
     "wrangler": "^4.0.0"
