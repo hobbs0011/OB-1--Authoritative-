@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Block common secret leaks before commit.
+BLOCKED=0
+
+staged_files=$(git diff --cached --name-only --diff-filter=ACMRTUXB)
+if [[ -z "${staged_files}" ]]; then
+  exit 0
+fi
+
+# Always block explicit private key files.
+if echo "${staged_files}" | grep -Eq '(^|/|\\)\.env\.keys$'; then
+  echo "[secret-guard] .env.keys cannot be committed."
+  BLOCKED=1
+fi
+
+# High-signal patterns for credentials and private keys.
+secret_pattern='(DOTENV_PRIVATE_KEY\s*=|BEGIN[[:space:]]+([A-Z]+[[:space:]]+)?PRIVATE[[:space:]]+KEY|API[_-]?KEY[[:space:]]*[:=][[:space:]]*[^[:space:]]+|ghp_[A-Za-z0-9]{36}|github_pat_[A-Za-z0-9_]{20,}|sk-[A-Za-z0-9]{20,}|AIza[0-9A-Za-z\-_]{35}|xox[baprs]-[A-Za-z0-9-]{10,})'
+
+while IFS= read -r file; do
+  [[ -z "${file}" ]] && continue
+
+  # Skip removed files and skip binary blobs.
+  if ! git cat-file -e ":${file}" 2>/dev/null; then
+    continue
+  fi
+  if ! git show ":${file}" | grep -Iq .; then
+    continue
+  fi
+
+  if git show ":${file}" | grep -E -n "${secret_pattern}" >/dev/null; then
+    echo "[secret-guard] Potential secret detected in ${file}"
+    git show ":${file}" | grep -E -n "${secret_pattern}" | sed 's/^/[secret-guard]   /'
+    BLOCKED=1
+  fi
+done <<< "${staged_files}"
+
+if [[ ${BLOCKED} -ne 0 ]]; then
+  echo "[secret-guard] Commit blocked. Remove secrets or move them to Wrangler/GitHub secrets."
+  exit 1
+fi
+
+exit 0
