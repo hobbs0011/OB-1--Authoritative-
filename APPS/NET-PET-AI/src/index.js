@@ -159,6 +159,10 @@ async function handleAPI(path, request, env, url) {
   if (path === "/api/ledger/history" && method === "GET") { return handleLedgerHistory(url.searchParams.get("studentId") || "", parseInt(url.searchParams.get("limit") || "50"), env); }
   if (path === "/api/ledger/verify" && method === "GET") { return handleLedgerVerify(url.searchParams.get("studentId") || "", env); }
 
+  // Virality Analytics
+  if (path === "/api/virality" && method === "POST") { const body = await request.json(); return handleVirality(body, env); }
+  if (path === "/api/virality/top" && method === "GET") { return handleViraityTop(parseInt(url.searchParams.get("limit") || "10"), env); }
+
   return json({ error: "Not found" }, 404);
 }
 
@@ -397,6 +401,71 @@ async function handleLedgerVerify(studentId, env) {
   if (!studentId) return json({ error: "studentId required" }, 400);
   const stub = env.LEDGER.get(env.LEDGER.idFromName(studentId));
   return stub.fetch(new Request("https://do/verify"));
+}
+
+// ── Virality Analytics (NEW) ──────────────────────────────────────────────────
+
+async function handleVirality(body, env) {
+  // POST /api/virality — track a post engagement metric
+  if (!body.postId) return json({ error: "postId required" }, 400);
+  const postId = body.postId;
+  const metrics = {
+    platform: body.platform || "unknown",
+    hook: body.hook || "",
+    body: body.body || "",
+    tone: body.tone || "neutral",
+    format: body.format || "text",
+    baseInsight: body.baseInsight || "",
+    experimentId: body.experimentId || null,
+    impressions: Math.max(0, body.impressions || 0),
+    likes: Math.max(0, body.likes || 0),
+    comments: Math.max(0, body.comments || 0),
+    shares: Math.max(0, body.shares || 0),
+    saves: Math.max(0, body.saves || 0),
+    clicks: Math.max(0, body.clicks || 0),
+    watchTime: Math.max(0, body.watchTime || 0),
+    ts: Date.now(),
+  };
+
+  // Compute virality score: (engagement × 100) / impressions, capped at 100%
+  const engagement = metrics.likes + (metrics.comments * 2) + (metrics.shares * 3) + (metrics.saves * 1.5);
+  const vScore = metrics.impressions > 0 ? Math.min(100, Math.round((engagement / Math.max(1, metrics.impressions)) * 100)) : 0;
+
+  // Conversion score: clicks / impressions
+  const cScore = metrics.impressions > 0 ? Math.round((metrics.clicks / Math.max(1, metrics.impressions)) * 100) : 0;
+
+  const entry = { ...metrics, viralityScore: vScore, conversionScore: cScore };
+
+  // Store in memory (or real implementation would use a DO)
+  // For now, return the computed scores
+  return json({
+    ok: true,
+    postId,
+    viralityScore: vScore,
+    conversionScore: cScore,
+    engagement,
+    tier: vScore >= 80 ? "viral" : vScore >= 50 ? "hot" : vScore >= 20 ? "trending" : "organic",
+    entry,
+  });
+}
+
+async function handleViraityTop(limit, env) {
+  // GET /api/virality/top?limit=10 — mock: return sample top posts
+  // Real implementation would query a global metrics store (Durable Objects / KV)
+  const samples = [
+    { postId: "post-001", platform: "youtube", hook: "5 min lesson", viralityScore: 92, conversionScore: 18, impressions: 5420, likes: 1240, shares: 340 },
+    { postId: "post-002", platform: "tiktok", hook: "Tiger mode trick", viralityScore: 87, conversionScore: 15, impressions: 12900, likes: 2840, shares: 1200 },
+    { postId: "post-003", platform: "instagram", hook: "Student win story", viralityScore: 72, conversionScore: 12, impressions: 8200, likes: 1240, shares: 240 },
+    { postId: "post-004", platform: "discord", hook: "Live coaching session", viralityScore: 65, conversionScore: 22, impressions: 2100, likes: 340, shares: 120 },
+    { postId: "post-005", platform: "youtube", hook: "10 min conversation", viralityScore: 58, conversionScore: 9, impressions: 3850, likes: 420, shares: 85 },
+  ];
+
+  return json({
+    ok: true,
+    limit,
+    topPosts: samples.slice(0, limit),
+    note: "Mock data — real implementation uses DO storage",
+  });
 }
 
 // ── Durable Objects ───────────────────────────────────────────────────────────
