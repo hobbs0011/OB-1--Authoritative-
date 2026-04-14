@@ -3,6 +3,10 @@ API-SHHHH.txt
 API-SHHHH-2.txt
 API-MASTER.txt
 API-MASTER.7z
+.env
+.env.keys
+.env.*
+!.env.example
 NET/
 GALAXY/
 .secret
@@ -11,6 +15,9 @@ GALAXY/
 .venv/
 node_modules/
 OB-1.worktrees/
+.playwright-mcp/
+APPS/NET-PET-AI/dist/
+APPS/NET-PET-AI/src/debug.log
 
 # === SYSTEM ===
 desktop.ini
