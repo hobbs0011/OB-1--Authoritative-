@@ -218,14 +218,14 @@ END — Run 304 MERGE3 extract
 ## 12) FINGERPRINT
 - **Agent ID**: OB1 Ne0 (Agent-99)
 - **Run Number**: 304
-- **Commit SHA (death test)**: PENDING (set by MERGE4 commit step)
-- **Platform Death Test**: IN PROGRESS
+- **Commit SHA (death test)**: `cbb5e8c`
+- **Platform Death Test**: PASS
 - **Pheromone Score (MERGE4 partial)**:
   - Soul DNA captured: 7/10
   - Decisions anchored: 8/10
   - Open loops handed off: 9/10
   - COLD-START-BOOT updated: 0/10 (blocked until final merge)
-  - Artifacts committed: 0/10 (pending commit command)
-  - **TOTAL**: 24/50 (pre-commit partial by protocol design)
+   - Artifacts committed: 9/10
+   - **TOTAL**: 33/50
 
 END — Run 304 MERGE4 extract
