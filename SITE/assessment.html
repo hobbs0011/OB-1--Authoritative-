@@ -1,539 +1,560 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#0f0f1a">
-  <meta name="description" content="The Tiger Assessment by Natural English Training — a premium bilingual English diagnostic for Vietnamese learners. 42 Jolly Phonics sounds, reading, writing, and speaking. Human-reviewed within 24 hours.">
-  <title>The Tiger Assessment | Natural English Training</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/site.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🐯 The Tiger Assessment | Đánh Giá Năng Lực — Natural English Training</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--void:#0f0f1a;--card:rgba(25,25,50,0.85);--purple:#a855f7;--purple-glow:rgba(168,85,247,0.3);--gold:#f59e0b;--gold-glow:rgba(245,158,11,0.3);--text:#e2e8f0;--dim:#94a3b8;--success:#22c55e;--danger:#ef4444;--border:rgba(168,85,247,0.2)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--void);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at 20% 50%,rgba(168,85,247,0.08) 0%,transparent 50%),radial-gradient(ellipse at 80% 20%,rgba(245,158,11,0.05) 0%,transparent 50%),radial-gradient(ellipse at 50% 80%,rgba(168,85,247,0.05) 0%,transparent 50%);pointer-events:none;z-index:0}
+.container{max-width:800px;margin:0 auto;padding:20px;position:relative;z-index:1}
+h1,h2,h3{font-family:'Orbitron',sans-serif}
+h1{font-size:2rem;color:var(--gold);text-shadow:0 0 30px var(--gold-glow);margin-bottom:8px}
+h2{font-size:1.3rem;color:var(--purple);margin-bottom:16px;text-shadow:0 0 20px var(--purple-glow)}
+h3{font-size:1rem;color:var(--gold);margin-bottom:12px;font-family:'Rajdhani',sans-serif;font-weight:700}
+.vi{color:var(--dim);font-style:italic;font-size:0.9em}
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;margin-bottom:20px;backdrop-filter:blur(10px);transition:border-color 0.3s}
+.card:hover{border-color:rgba(168,85,247,0.4)}
+.hero{text-align:center;padding:40px 20px;background:linear-gradient(135deg,rgba(168,85,247,0.1),rgba(245,158,11,0.05));border:1px solid var(--border);border-radius:20px;margin-bottom:30px}
+.hero-icon{font-size:4rem;margin-bottom:16px}
+.hero p{font-family:'Rajdhani',sans-serif;font-size:1.05rem;color:var(--dim);max-width:600px;margin:0 auto}
+.progress-bar{position:sticky;top:0;z-index:100;background:rgba(15,15,26,0.95);backdrop-filter:blur(10px);padding:12px 20px;border-bottom:1px solid var(--border);margin:0 -20px 20px;border-radius:0 0 12px 12px}
+.progress-track{height:6px;background:rgba(168,85,247,0.15);border-radius:3px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--purple),var(--gold));border-radius:3px;transition:width 0.5s ease;width:0%}
+.progress-label{font-family:'Rajdhani',sans-serif;font-size:0.85rem;color:var(--dim);margin-top:6px;display:flex;justify-content:space-between}
+input[type="text"],input[type="number"],input[type="email"],textarea,select{width:100%;padding:12px 16px;background:rgba(15,15,26,0.8);border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:'Inter',sans-serif;font-size:1rem;margin-top:6px;margin-bottom:16px;transition:border-color 0.3s,box-shadow 0.3s}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--purple);box-shadow:0 0 15px var(--purple-glow)}
+textarea{min-height:100px;resize:vertical}
+select option{background:var(--void);color:var(--text)}
+label{font-family:'Rajdhani',sans-serif;font-weight:600;font-size:1rem;display:block}
+.checkbox-group{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 16px}
+.checkbox-group label{display:flex;align-items:center;gap:6px;padding:6px 14px;background:rgba(15,15,26,0.6);border:1px solid var(--border);border-radius:20px;cursor:pointer;font-weight:400;font-size:0.9rem;transition:all 0.2s}
+.checkbox-group label:hover{border-color:var(--purple)}
+.checkbox-group input:checked+span{color:var(--gold)}
+.checkbox-group input{display:none}
+.phonics-group{margin-bottom:20px;padding:20px;background:rgba(15,15,26,0.5);border:1px solid var(--border);border-radius:12px}
+.phonics-group-title{font-family:'Orbitron',sans-serif;color:var(--gold);font-size:0.85rem;margin-bottom:12px}
+.sounds-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
+@media(min-width:600px){.sounds-grid{grid-template-columns:repeat(6,1fr)}}
+.sound-chip{text-align:center;padding:10px 6px;background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.2);border-radius:10px}
+.sound-chip .sound{font-family:'Orbitron',sans-serif;font-size:1.2rem;color:var(--purple)}
+.sound-chip .example{font-size:0.75rem;color:var(--dim);margin-top:2px}
+.rec-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border:2px solid var(--purple);background:rgba(168,85,247,0.1);color:var(--purple);border-radius:30px;font-family:'Rajdhani',sans-serif;font-size:1rem;font-weight:600;cursor:pointer;transition:all 0.3s}
+.rec-btn:hover{background:rgba(168,85,247,0.2);box-shadow:0 0 20px var(--purple-glow)}
+.rec-btn.recording{border-color:var(--danger);color:var(--danger);background:rgba(239,68,68,0.1);animation:pulse-rec 1s infinite}
+.rec-btn.done{border-color:var(--success);color:var(--success);background:rgba(34,197,94,0.1)}
+@keyframes pulse-rec{0%,100%{box-shadow:0 0 5px rgba(239,68,68,0.3)}50%{box-shadow:0 0 25px rgba(239,68,68,0.5)}}
+.rec-status{font-size:0.85rem;color:var(--dim);margin-top:8px}
+.rec-playback{margin-top:8px}
+.rec-playback audio{width:100%;height:36px;border-radius:8px}
+.passage{background:rgba(245,158,11,0.05);border-left:3px solid var(--gold);padding:16px;border-radius:0 10px 10px 0;margin:12px 0;font-size:1.1rem;line-height:1.8}
+.submit-area{text-align:center;padding:40px 20px}
+.submit-btn{display:inline-flex;align-items:center;gap:10px;padding:16px 40px;background:linear-gradient(135deg,var(--purple),#7c3aed);color:white;border:none;border-radius:30px;font-family:'Orbitron',sans-serif;font-size:1rem;cursor:pointer;transition:all 0.3s;box-shadow:0 0 30px var(--purple-glow)}
+.submit-btn:hover{transform:translateY(-2px);box-shadow:0 0 40px rgba(168,85,247,0.5)}
+.download-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;background:linear-gradient(135deg,var(--gold),#d97706);color:var(--void);border:none;border-radius:30px;font-family:'Rajdhani',sans-serif;font-size:1rem;font-weight:700;cursor:pointer;transition:all 0.3s;margin:8px;text-decoration:none}
+.download-btn:hover{transform:translateY(-2px);box-shadow:0 0 20px var(--gold-glow)}
+.section-divider{height:2px;background:linear-gradient(90deg,transparent,var(--purple),var(--gold),transparent);margin:30px 0;border:none}
+.section-header{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.section-number{width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--purple),#7c3aed);border-radius:12px;font-family:'Orbitron',sans-serif;font-weight:700;font-size:1.1rem;flex-shrink:0}
+.badge{display:inline-block;padding:4px 12px;border-radius:20px;font-family:'Rajdhani',sans-serif;font-size:0.8rem;font-weight:600;margin:2px}
+.badge-purple{background:rgba(168,85,247,0.15);color:var(--purple);border:1px solid rgba(168,85,247,0.3)}
+.badge-gold{background:rgba(245,158,11,0.15);color:var(--gold);border:1px solid rgba(245,158,11,0.3)}
+.hidden{display:none!important}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);padding:12px 24px;background:var(--success);color:white;border-radius:10px;font-family:'Rajdhani',sans-serif;font-weight:600;z-index:1000;opacity:0;transition:opacity 0.3s}
+.toast.show{opacity:1}
+.tiger-quote{text-align:center;padding:20px;margin:20px 0;border:1px solid rgba(245,158,11,0.2);border-radius:12px;background:rgba(245,158,11,0.03)}
+.tiger-quote p{font-family:'Rajdhani',sans-serif;font-size:1.2rem;color:var(--gold);font-weight:600}
+.tiger-quote .vi{font-size:1rem;color:var(--dim)}
+.mic-permission{background:rgba(168,85,247,0.08);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:20px;text-align:center}
+.mic-permission button{padding:10px 24px;background:var(--purple);color:white;border:none;border-radius:20px;font-family:'Rajdhani',sans-serif;font-size:1rem;font-weight:600;cursor:pointer;margin-top:8px}
+@media(max-width:600px){h1{font-size:1.5rem}h2{font-size:1.1rem}.hero{padding:24px 16px}.card{padding:16px}.container{padding:12px}}
+</style>
 </head>
-<body class="assessment-page" data-page="assessment">
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+<body>
+<div class="container">
 
-  <header class="topbar">
-    <div class="shell topbar-inner">
-      <a class="brand" href="index.html" aria-label="Natural English Training — home">
-        <img src="assets/brand/NET-PHXRISING-LOGO.webp" alt="NET logo" width="40" height="40" fetchpriority="high">
-        <span>
-          Natural English Training
-          <small>Assessment • Founder • NET-PET-AI</small>
-        </span>
-      </a>
-      <nav class="global-nav" aria-label="Site navigation">
-        <a aria-current="page" href="index.html">Assessment</a>
-        <a href="about.html">About Michael</a>
-        <a href="about.html#netpet">NET-PET-AI</a>
-      </nav>
-      <a class="topbar-cta" href="#submission">Submit</a>
-    </div>
-  </header>
+<!-- HERO -->
+<div class="hero">
+<div class="hero-icon">🐯</div>
+<h1>THE TIGER ASSESSMENT</h1>
+<p style="color:var(--purple);font-family:'Orbitron',sans-serif;font-size:0.85rem;margin-bottom:12px;">ĐÁNH GIÁ NĂNG LỰC TIẾNG ANH</p>
+<p>Welcome! This assessment helps your teacher understand your current English level.</p>
+<p class="vi" style="margin-top:8px;">Chào mừng bạn! Bài đánh giá này giúp giáo viên hiểu trình độ tiếng Anh hiện tại của bạn.</p>
+<div style="margin-top:16px;">
+<span class="badge badge-purple">⏱ 10-15 phút</span>
+<span class="badge badge-gold">🎤 Ghi âm + ✍️ Viết</span>
+</div>
+<div style="margin-top:16px;">
+<a href="The_Tiger_Dossier.pdf" download class="download-btn">📥 Tải Hồ Sơ Con Hổ (PDF)</a>
+</div>
+</div>
 
-  <main class="site-main" id="main-content">
-    <section class="hero">
-      <div class="shell hero-panel">
-        <div class="hero-grid">
-          <div class="hero-copy">
-            <span class="eyebrow">Lakeview City · District 2 · Human reviewed</span>
-            <div>
-              <h1 class="hero-title">The Tiger Assessment</h1>
-              <p class="hero-subtitle">No instant score — real follow-up within 24 hours.</p>
-            </div>
-            <p class="hero-lead">A premium bilingual diagnostic covering phonics, reading, writing, and speaking. Your family completes the assessment, downloads the submission pack, and NET contacts you within 24 hours to book your free in-person or video-call class.</p>
-            <p class="vi">Bài đánh giá này không trả kết quả ngay. NET sẽ xem xét bài nộp, nghe ghi âm, và liên hệ trong 24 giờ để hẹn buổi học thử miễn phí — trực tiếp nếu ở gần, video call nếu ở xa.</p>
-            <div class="button-row">
-              <a class="button button-primary" href="#section1">Start Assessment</a>
-              <a class="button button-secondary" href="#dossierSlideshow">View Tiger Dossier</a>
-            </div>
-            <div class="pill-row">
-              <span class="pill">42 phonics sounds</span>
-              <span class="pill">Local audio capture</span>
-              <span class="pill">Bilingual VI + EN</span>
-              <span class="pill">Export-ready data</span>
-            </div>
-            <div class="status-grid">
-              <article class="status-card">
-                <strong>Human Review</strong>
-                <p>Every submission is reviewed by Michael personally, not scored by an algorithm. The assessment leads into a real conversation.</p>
-              </article>
-              <article class="status-card">
-                <strong>Free Class</strong>
-                <p>The follow-up is the close. Local families get an in-person trial class; remote learners get a dedicated video-call session.</p>
-              </article>
-              <article class="status-card">
-                <strong>Full Diagnostic</strong>
-                <p>Phonics, reading aloud, writing, and free speaking — five complete sections with bilingual prompts throughout.</p>
-              </article>
-            </div>
-          </div>
+<!-- PODCAST PLACEHOLDER -->
+<div class="card" id="podcastCard" style="text-align:center;">
+<h3>🎧 Nghe Podcast Trước Khi Bắt Đầu <span class="vi">(Listen Before Starting)</span></h3>
+<p class="vi" style="margin-bottom:12px;">Nghe podcast 20 phút để hiểu thêm về phương pháp học của NET.</p>
+<audio controls style="width:100%;border-radius:8px;" id="podcastAudio">
+<source src="tiger_podcast.mp3" type="audio/mpeg">
+Trình duyệt không hỗ trợ audio. / Browser does not support audio.
+</audio>
+<p class="vi" style="margin-top:8px;font-size:0.8rem;">* Audio sẽ được cập nhật sớm / Audio coming soon</p>
+</div>
 
-          <div class="visual-stage" aria-hidden="true">
-            <div class="visual-stage-main">
-              <img src="assets/brand/NET-LION-VOICE-4.png" alt="NET Tiger campaign artwork" fetchpriority="high">
-            </div>
-            <div class="visual-stage-grid">
-              <article class="hero-card">
-                <img src="assets/dossier/covers/the-tiger-dossier.webp" alt="The Tiger Dossier cover" loading="lazy">
-                <div class="hero-card-copy">
-                  <span>Tiger Dossier</span>
-                  <p>The brand story — click through inside the page.</p>
-                </div>
-              </article>
-              <article class="hero-card">
-                <img src="assets/dossier/covers/mouse-to-tiger.webp" alt="Mouse to Tiger cover" loading="lazy">
-                <div class="hero-card-copy">
-                  <span>Mouse to Tiger</span>
-                  <p>The psychological spine of the NET method.</p>
-                </div>
-              </article>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+<!-- PROGRESS -->
+<div class="progress-bar">
+<div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+<div class="progress-label">
+<span id="progressText">Phần 1/5</span>
+<span id="progressPct">0%</span>
+</div>
+</div>
 
-    <nav class="shell local-nav" aria-label="Jump to assessment section">
-      <a href="#assessmentBrief">Brief</a>
-      <a href="#dossierSlideshow">Dossier</a>
-      <a href="#listeningLounge">Listening</a>
-      <a href="#section1">About You</a>
-      <a href="#section2">Phonics</a>
-      <a href="#section3">Reading</a>
-      <a href="#section4">Writing</a>
-      <a href="#section5">Speaking</a>
-      <a href="#submission">Submit</a>
-    </nav>
+<!-- MIC PERMISSION -->
+<div class="mic-permission" id="micPrompt">
+<p>🎤 Bài đánh giá này cần ghi âm giọng nói của bạn.</p>
+<p class="vi">This assessment requires microphone access for voice recording.</p>
+<button onclick="requestMic()">Cho phép Microphone / Allow Microphone</button>
+</div>
 
-    <section class="shell section-shell" id="assessmentBrief" aria-label="Assessment overview">
-      <div class="workflow-grid">
-        <article class="workflow-card">
-          <strong>01 · Diagnostic</strong>
-          <h3>Real data, not guesswork</h3>
-          <p>Five sections capture identity, phonics accuracy, reading fluency, writing range, and spoken confidence — everything NET needs before the first real class.</p>
-        </article>
-        <article class="workflow-card">
-          <strong>02 · Human Review</strong>
-          <h3>No instant-result theater</h3>
-          <p>Michael listens to the recordings and reads the written answers. Families receive an honest assessment, not a generic score from a form backend.</p>
-        </article>
-        <article class="workflow-card">
-          <strong>03 · Free Class</strong>
-          <h3>The submission is the start</h3>
-          <p>The end of the assessment is the beginning of the relationship. Contact comes within 24 hours with a free class invitation and a real plan.</p>
-        </article>
-      </div>
-      <div class="info-strip">
-        <div>
-          <strong>How it works</strong>
-          <p>Complete all five sections, download the submission pack, and send it to NET. Michael reviews everything personally and contacts your family within 24 hours.</p>
-        </div>
-        <div>
-          <strong>What you get</strong>
-          <p>A free trial class — in person at Lakeview City if you are local, or a dedicated video call if you are anywhere else in the world.</p>
-        </div>
-      </div>
-    </section>
+<!-- SECTION 1: PERSONAL INFO -->
+<div class="card" id="section1">
+<div class="section-header">
+<div class="section-number">1</div>
+<div>
+<h2 style="margin-bottom:2px;">ABOUT YOU</h2>
+<span class="vi">Về Bản Thân Bạn</span>
+</div>
+</div>
 
-    <section class="shell section-shell panel" id="dossierSlideshow" aria-label="Tiger Dossier slideshow">
-      <div class="section-header">
-        <div class="section-copy-block">
-          <span class="section-eyebrow">Story deck</span>
-          <h2 class="section-title">Tiger Dossier Storyline</h2>
-          <p class="section-copy">The full brand story built in as a click-through deck. Tap the image or the thumbnails to move through each chapter — no download, no interruption.</p>
-        </div>
-        <div class="pill-row">
-          <span class="pill">Click to advance</span>
-          <span class="pill">6 chapters</span>
-        </div>
-      </div>
-      <div class="panel-body story-layout">
-        <div class="story-stage">
-          <div class="story-frame" role="img" aria-label="Tiger dossier slide viewer — click to advance">
-            <img id="storySlide" src="assets/dossier/tiger-dossier/slide-01.webp" alt="Tiger dossier slide 1" fetchpriority="high">
-            <div class="story-overlay">
-              <span class="story-kicker">Tiger dossier</span>
-              <h3 id="storyTitle">Lakeview opener</h3>
-              <p class="story-summary" id="storySummary">A polished first impression for parents and professionals who want a real assessment path, not another generic center brochure.</p>
-            </div>
-          </div>
-          <div class="story-controls">
-            <div class="story-actions">
-              <button class="story-button" id="storyPrev" type="button" aria-label="Previous chapter">Back</button>
-              <button class="story-button" id="storyNext" type="button" aria-label="Next chapter">Forward</button>
-            </div>
-            <div class="story-meta">
-              <span class="slide-count" id="storyMeta" aria-live="polite">Chapter 01 / 06</span>
-            </div>
-          </div>
-          <div class="story-thumbs" id="storyThumbs" role="tablist" aria-label="Jump to chapter"></div>
-        </div>
+<label>Full Name <span class="vi">(Họ và tên)</span></label>
+<input type="text" id="fullName" placeholder="Nguyễn Văn A...">
 
-        <aside class="story-shelf" aria-label="Related brand decks">
-          <article class="deck-card">
-            <div class="deck-cover"><img src="assets/dossier/covers/mouse-to-tiger.webp" alt="Mouse to Tiger cover" loading="lazy"></div>
-            <div class="deck-card-body">
-              <strong>Mouse to Tiger</strong>
-              <h3>Identity shift, not worksheet culture</h3>
-              <p>The psychological spine of NET: move learners from quiet compliance to visible, powerful confidence in English.</p>
-            </div>
-          </article>
-          <article class="deck-card">
-            <div class="deck-cover"><img src="assets/dossier/covers/breaking-the-english-ceiling.webp" alt="Breaking the English Ceiling cover" loading="lazy"></div>
-            <div class="deck-card-body">
-              <strong>Breaking the Ceiling</strong>
-              <h3>Why the ceiling exists</h3>
-              <p>Context for Lakeview City families: the surrounding premium environment reinforces location, status, and real English confidence.</p>
-            </div>
-          </article>
-          <article class="deck-card">
-            <div class="deck-cover"><img src="assets/dossier/covers/tiger-mode-evolution.webp" alt="Tiger Mode Evolution cover" loading="lazy"></div>
-            <div class="deck-card-body">
-              <strong>Tiger Mode</strong>
-              <h3>Evolution, not repetition</h3>
-              <p>The real goal is not better test scores. It is a student who walks into any room and speaks with visible authority.</p>
-            </div>
-          </article>
-        </aside>
-      </div>
-    </section>
+<label>Age <span class="vi">(Tuổi)</span></label>
+<input type="number" id="age" placeholder="12" min="4" max="80">
 
-    <section class="shell section-shell panel" id="listeningLounge" aria-label="Listening Lounge">
-      <div class="section-header">
-        <div class="section-copy-block">
-          <span class="section-eyebrow">Brand media</span>
-          <h2 class="section-title">Listening Lounge</h2>
-          <p class="section-copy">Hear the NET philosophy directly. Both podcasts and the brand film are embedded so families can listen and watch before, during, or after completing the assessment.</p>
-        </div>
-      </div>
-      <div class="panel-body listening-grid">
-        <article class="media-card">
-          <div class="media-image">
-            <img src="assets/dossier/tiger-dossier/slide-06.webp" alt="Brain-based English learning graphic" loading="lazy">
-          </div>
-          <div class="media-card-body">
-            <strong>Podcast 01</strong>
-            <h3>Giỏi tiếng Anh nhờ cơ chế não</h3>
-            <p>Brain-based English learning — why comprehension and rhythm beat memorization every time.</p>
-            <audio controls preload="none" aria-label="Podcast 01: Giỏi tiếng Anh nhờ cơ chế não">
-              <source data-asset="brainPodcast" type="audio/mp4">
-              Your browser does not support audio playback.
-            </audio>
-          </div>
-        </article>
+<label>School / Job <span class="vi">(Trường học / Công việc)</span></label>
+<input type="text" id="school" placeholder="Trường THCS...">
 
-        <article class="media-card">
-          <div class="media-image">
-            <img src="assets/brand/Facebook-Banner-Marketing.png" alt="NET AI English learning" loading="lazy">
-          </div>
-          <div class="media-card-body">
-            <strong>Podcast 02</strong>
-            <h3>Làm chủ tiếng Anh AI cùng NET</h3>
-            <p>AI-forward English: why mastering language and AI together is the most powerful skill stack for 2025 and beyond.</p>
-            <audio controls preload="none" aria-label="Podcast 02: Làm chủ tiếng Anh AI cùng NET">
-              <source data-asset="aiPodcast" type="audio/mp4">
-              Your browser does not support audio playback.
-            </audio>
-          </div>
-        </article>
+<label>How long have you studied English? <span class="vi">(Bạn đã học tiếng Anh bao lâu?)</span></label>
+<select id="engHistory">
+<option value="">-- Chọn / Select --</option>
+<option value="never">Chưa bao giờ / Never</option>
+<option value="<1year">Dưới 1 năm / Less than 1 year</option>
+<option value="1-3years">1-3 năm / 1-3 years</option>
+<option value="3-5years">3-5 năm / 3-5 years</option>
+<option value="5+years">Hơn 5 năm / More than 5 years</option>
+</select>
 
-        <article class="media-card">
-          <div class="media-image">
-            <img src="assets/brand/Natural-English-Training-Banner.png" alt="Natural English Training banner" loading="lazy">
-          </div>
-          <div class="media-card-body">
-            <strong>Brand Film</strong>
-            <h3>NET — Một Bản Sắc Mới</h3>
-            <p>The NET brand story in motion. A new identity for English learning in Vietnam — on your terms, in your voice.</p>
-            <video controls preload="metadata" poster="assets/brand/Natural-English-Training-Banner.png" aria-label="NET brand film: Một Bản Sắc Mới">
-              <source data-asset="brandFilm" type="video/mp4">
-              Your browser does not support video playback.
-            </video>
-          </div>
-        </article>
-      </div>
-    </section>
+<label>What are your hobbies? <span class="vi">(Sở thích của bạn là gì? Chọn tất cả.)</span></label>
+<div class="checkbox-group">
+<label><input type="checkbox" name="hobby" value="gaming"><span>🎮 Gaming</span></label>
+<label><input type="checkbox" name="hobby" value="music"><span>🎵 Âm nhạc</span></label>
+<label><input type="checkbox" name="hobby" value="sports"><span>⚽ Thể thao</span></label>
+<label><input type="checkbox" name="hobby" value="drawing"><span>🎨 Vẽ</span></label>
+<label><input type="checkbox" name="hobby" value="reading"><span>📚 Đọc sách</span></label>
+<label><input type="checkbox" name="hobby" value="cooking"><span>🍳 Nấu ăn</span></label>
+<label><input type="checkbox" name="hobby" value="travel"><span>✈️ Du lịch</span></label>
+<label><input type="checkbox" name="hobby" value="movies"><span>🎬 Phim</span></label>
+<label><input type="checkbox" name="hobby" value="tiktok"><span>📱 TikTok</span></label>
+<label><input type="checkbox" name="hobby" value="dance"><span>💃 Nhảy</span></label>
+<label><input type="checkbox" name="hobby" value="pets"><span>🐶 Thú cưng</span></label>
+<label><input type="checkbox" name="hobby" value="fashion"><span>👗 Thời trang</span></label>
+</div>
+<label>Other hobbies <span class="vi">(Sở thích khác)</span></label>
+<input type="text" id="otherHobbies" placeholder="...">
 
-    <div class="shell progress-shell" aria-label="Assessment completion progress">
-      <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-labelledby="progressText">
-        <div class="progress-fill" id="progressFill"></div>
-      </div>
-      <div class="progress-meta">
-        <span id="progressText">Assessment progress · Part 1 of 5</span>
-        <span id="progressPct">0%</span>
-      </div>
-    </div>
+<label>Tell us about your family <span class="vi">(Kể về gia đình bạn — bao nhiêu người? Anh chị em? Thú cưng?)</span></label>
+<textarea id="family" placeholder="Gia đình tôi có... người. / My family has... people."></textarea>
 
-    <section class="shell microphone-banner" id="micPrompt" aria-label="Microphone access">
-      <p><strong>Microphone needed</strong> — recordings stay on this device until you download and share the submission pack.</p>
-      <p class="vi">Bài đánh giá cần microphone cho phần phát âm và nói. File ghi âm vẫn trên thiết bị của bạn cho đến khi tải submission pack.</p>
-      <button class="mic-button" id="requestMicBtn" type="button">Allow Microphone · Cho phép Microphone</button>
-    </section>
+<label>What is your biggest challenge with English? <span class="vi">(Khó khăn lớn nhất của bạn với tiếng Anh?)</span></label>
+<div class="checkbox-group">
+<label><input type="checkbox" name="challenge" value="speaking"><span>🗣️ Nói</span></label>
+<label><input type="checkbox" name="challenge" value="listening"><span>👂 Nghe</span></label>
+<label><input type="checkbox" name="challenge" value="reading"><span>📖 Đọc</span></label>
+<label><input type="checkbox" name="challenge" value="writing"><span>✍️ Viết</span></label>
+<label><input type="checkbox" name="challenge" value="pronunciation"><span>🔊 Phát âm</span></label>
+<label><input type="checkbox" name="challenge" value="grammar"><span>📐 Ngữ pháp</span></label>
+<label><input type="checkbox" name="challenge" value="vocabulary"><span>📝 Từ vựng</span></label>
+<label><input type="checkbox" name="challenge" value="confidence"><span>😰 Tự tin</span></label>
+</div>
 
-    <section class="shell section-shell panel form-panel" id="section1" aria-label="Part 1: About You">
-      <div class="form-banner" style="--banner-image:url('assets/dossier/tiger-dossier/slide-01.webp');">
-        <span class="section-step">Part 1</span>
-        <h2 class="section-title">About You</h2>
-        <p class="section-copy">Identity, learning history, interests, and motivation. This context helps Michael personalise the follow-up class from day one.</p>
-      </div>
-      <div class="form-content">
-        <div class="field-grid">
-          <div class="field">
-            <label for="fullName">Full Name <span class="vi">(Họ và tên)</span></label>
-            <input type="text" id="fullName" autocomplete="name" placeholder="Nguyen Van A…">
-          </div>
-          <div class="field">
-            <label for="age">Age <span class="vi">(Tuổi)</span></label>
-            <input type="number" id="age" inputmode="numeric" placeholder="12" min="4" max="80">
-          </div>
-          <div class="field">
-            <label for="school">School / Job <span class="vi">(Trường học / Công việc)</span></label>
-            <input type="text" id="school" autocomplete="organization" placeholder="Trường THCS…">
-          </div>
-          <div class="field">
-            <label for="engHistory">How long have you studied English? <span class="vi">(Học tiếng Anh bao lâu?)</span></label>
-            <select id="engHistory" autocomplete="off">
-              <option value="">— Chọn / Select —</option>
-              <option value="never">Chưa bao giờ / Never</option>
-              <option value="<1year">Dưới 1 năm / Less than 1 year</option>
-              <option value="1-3years">1–3 năm / 1–3 years</option>
-              <option value="3-5years">3–5 năm / 3–5 years</option>
-              <option value="5+years">Hơn 5 năm / More than 5 years</option>
-            </select>
-          </div>
-          <div class="field-span">
-            <label>What are your hobbies? <span class="vi">(Sở thích của bạn — chọn tất cả)</span></label>
-            <div class="choice-row" role="group" aria-label="Hobbies">
-              <label><input type="checkbox" name="hobby" value="gaming"><span>Gaming</span></label>
-              <label><input type="checkbox" name="hobby" value="music"><span>Âm nhạc</span></label>
-              <label><input type="checkbox" name="hobby" value="sports"><span>Thể thao</span></label>
-              <label><input type="checkbox" name="hobby" value="drawing"><span>Vẽ</span></label>
-              <label><input type="checkbox" name="hobby" value="reading"><span>Đọc sách</span></label>
-              <label><input type="checkbox" name="hobby" value="cooking"><span>Nấu ăn</span></label>
-              <label><input type="checkbox" name="hobby" value="travel"><span>Du lịch</span></label>
-              <label><input type="checkbox" name="hobby" value="movies"><span>Phim</span></label>
-              <label><input type="checkbox" name="hobby" value="tiktok"><span>TikTok</span></label>
-              <label><input type="checkbox" name="hobby" value="dance"><span>Nhảy</span></label>
-              <label><input type="checkbox" name="hobby" value="pets"><span>Thú cưng</span></label>
-              <label><input type="checkbox" name="hobby" value="fashion"><span>Thời trang</span></label>
-            </div>
-          </div>
-          <div class="field-span">
-            <label for="otherHobbies">Other hobbies <span class="vi">(Sở thích khác)</span></label>
-            <input type="text" id="otherHobbies" autocomplete="off" placeholder="…">
-          </div>
-          <div class="field-span">
-            <label for="family">Tell us about your family <span class="vi">(Kể về gia đình — bao nhiêu người? Anh chị em? Thú cưng?)</span></label>
-            <textarea id="family" placeholder="Gia đình tôi có… người. / My family has… people."></textarea>
-          </div>
-          <div class="field-span">
-            <label>What is your biggest challenge with English? <span class="vi">(Khó khăn lớn nhất với tiếng Anh?)</span></label>
-            <div class="choice-row" role="group" aria-label="Challenges">
-              <label><input type="checkbox" name="challenge" value="speaking"><span>Nói</span></label>
-              <label><input type="checkbox" name="challenge" value="listening"><span>Nghe</span></label>
-              <label><input type="checkbox" name="challenge" value="reading"><span>Đọc</span></label>
-              <label><input type="checkbox" name="challenge" value="writing"><span>Viết</span></label>
-              <label><input type="checkbox" name="challenge" value="pronunciation"><span>Phát âm</span></label>
-              <label><input type="checkbox" name="challenge" value="grammar"><span>Ngữ pháp</span></label>
-              <label><input type="checkbox" name="challenge" value="vocabulary"><span>Từ vựng</span></label>
-              <label><input type="checkbox" name="challenge" value="confidence"><span>Tự tin</span></label>
-            </div>
-          </div>
-          <div class="field-span">
-            <label for="whyEnglish">Why do you want to learn English? <span class="vi">(Tại sao bạn muốn học tiếng Anh?)</span></label>
-            <textarea id="whyEnglish" placeholder="Tôi muốn… / I want to…"></textarea>
-          </div>
-          <div class="field-span">
-            <label for="favorites">What do you enjoy? Movies, music, food, channels… <span class="vi">(Bạn thích gì? Phim, nhạc, kênh YouTube…)</span></label>
-            <textarea id="favorites" placeholder="Tôi thích… / I like…"></textarea>
-          </div>
-          <div class="field">
-            <label for="dreamJob">Dream job <span class="vi">(Công việc mơ ước)</span></label>
-            <input type="text" id="dreamJob" autocomplete="organization-title" placeholder="I want to be… / Tôi muốn trở thành…">
-          </div>
-          <div class="field">
-            <label for="engUse">Do you use English at school or work? <span class="vi">(Bạn có dùng tiếng Anh không? Như thế nào?)</span></label>
-            <textarea id="engUse" placeholder="Yes / No. I use English to…"></textarea>
-          </div>
-        </div>
-      </div>
-    </section>
+<label>Why do you want to learn English? <span class="vi">(Tại sao bạn muốn học tiếng Anh?)</span></label>
+<textarea id="whyEnglish" placeholder="Tôi muốn... / I want to..."></textarea>
 
-    <section class="shell quote-panel" aria-hidden="true">
-      <strong>Brand line</strong>
-      <p>"Chúng tôi không bán tiếng Anh. Chúng tôi bán Quyền Năng Tự Tin."</p>
-      <p class="vi">"We don't sell English. We sell the Power of Confidence."</p>
-    </section>
+<label>What do you like? Movies, music, food, YouTube channels... <span class="vi">(Bạn thích gì? Phim, nhạc, đồ ăn, kênh YouTube...)</span></label>
+<textarea id="favorites" placeholder="Tôi thích... / I like..."></textarea>
 
-    <section class="shell section-shell panel form-panel" id="section2" aria-label="Part 2: Jolly Phonics">
-      <div class="form-banner" style="--banner-image:url('assets/dossier/tiger-dossier/slide-02.webp');">
-        <span class="section-step">Part 2</span>
-        <h2 class="section-title">Jolly Phonics</h2>
-        <p class="section-copy">42 core sounds across seven groups. Record each group out loud so Michael can assess pronunciation accuracy and phonemic awareness directly.</p>
-      </div>
-      <div class="form-content">
-        <p class="helper">Read each sound clearly. Press record for each group and say the sounds aloud.</p>
-        <p class="helper vi">Đọc rõ từng âm. Nhấn ghi âm cho mỗi nhóm và nói to các âm.</p>
-        <div id="phonicsGroups"></div>
-      </div>
-    </section>
+<label>What is your dream job? <span class="vi">(Công việc mơ ước của bạn là gì?)</span></label>
+<input type="text" id="dreamJob" placeholder="I want to be... / Tôi muốn trở thành...">
 
-    <section class="shell section-shell panel form-panel" id="section3" aria-label="Part 3: Reading">
-      <div class="form-banner" style="--banner-image:url('assets/dossier/tiger-dossier/slide-04.webp');">
-        <span class="section-step">Part 3</span>
-        <h2 class="section-title">Reading</h2>
-        <p class="section-copy">Read each passage aloud, record your voice, then answer the comprehension questions in writing.</p>
-      </div>
-      <div class="form-content reading-stack">
-        <p class="helper vi">Đọc to đoạn văn và ghi âm. Sau đó trả lời câu hỏi. / Read the passages aloud and record. Then answer the questions.</p>
-        <div>
-          <h3>Passage 1 <span class="vi">(Đọc to / Read aloud)</span></h3>
-          <div class="passage">The cat sat on the mat. It is a big cat. The cat can run and jump. I like the cat.</div>
-          <div id="readRec1"></div>
-        </div>
-        <div>
-          <h3>Passage 2 <span class="vi">(Đọc to / Read aloud)</span></h3>
-          <div class="passage">My name is Lan. I am ten years old. I go to school every day. My best friend is Minh. We like to play together after school.</div>
-          <div id="readRec2"></div>
-        </div>
-        <div>
-          <h3>Passage 3 <span class="vi">(Đọc to / Read aloud)</span></h3>
-          <div class="passage">Today is a sunny day. The birds are singing in the trees. I can see a dog in the park. The dog is brown and white. It is running very fast.</div>
-          <div id="readRec3"></div>
-        </div>
-        <div class="field-grid">
-          <div class="field">
-            <label for="comp1">1. What colour is the dog in Passage 3? <span class="vi">(Con chó màu gì?)</span></label>
-            <input type="text" id="comp1" autocomplete="off" placeholder="The dog is…">
-          </div>
-          <div class="field">
-            <label for="comp2">2. How old is Lan in Passage 2? <span class="vi">(Lan bao nhiêu tuổi?)</span></label>
-            <input type="text" id="comp2" autocomplete="off" placeholder="Lan is…">
-          </div>
-          <div class="field">
-            <label for="comp3">3. What can the cat do in Passage 1? <span class="vi">(Con mèo có thể làm gì?)</span></label>
-            <input type="text" id="comp3" autocomplete="off" placeholder="The cat can…">
-          </div>
-          <div class="field">
-            <label for="comp4">4. Who is Lan's best friend? <span class="vi">(Bạn thân của Lan là ai?)</span></label>
-            <input type="text" id="comp4" autocomplete="off" placeholder="Lan's best friend is…">
-          </div>
-          <div class="field-span">
-            <label for="comp5">5. Where is the dog? <span class="vi">(Con chó ở đâu?)</span></label>
-            <input type="text" id="comp5" autocomplete="off" placeholder="The dog is in…">
-          </div>
-        </div>
-      </div>
-    </section>
+<label>Do you use English at school or work? How? <span class="vi">(Bạn có dùng tiếng Anh ở trường hoặc công việc không? Như thế nào?)</span></label>
+<textarea id="engUse" placeholder="Yes/No... Tôi dùng tiếng Anh để..."></textarea>
+</div>
 
-    <section class="shell quote-panel" aria-hidden="true">
-      <strong>Operating principle</strong>
-      <p>"Lớn tiếng và sai &gt; Im lặng và đúng."</p>
-      <p class="vi">"Loud and wrong beats silent and correct."</p>
-    </section>
+<div class="tiger-quote">
+<p>"Chúng tôi không bán tiếng Anh. Chúng tôi bán Quyền Năng Tự Tin."</p>
+<p class="vi" style="font-style:normal;color:var(--text);font-size:0.9rem;margin-top:4px;">"We don't sell English. We sell the Power of Confidence."</p>
+</div>
 
-    <section class="shell section-shell panel form-panel" id="section4" aria-label="Part 4: Writing">
-      <div class="form-banner" style="--banner-image:url('assets/dossier/tiger-dossier/slide-05.webp');">
-        <span class="section-step">Part 4</span>
-        <h2 class="section-title">Writing</h2>
-        <p class="section-copy">Write as much as you can. Mistakes are fine — authentic language matters more than perfection.</p>
-      </div>
-      <div class="form-content">
-        <p class="helper vi">Viết bằng tiếng Anh. Không sao nếu bạn mắc lỗi — hãy cố gắng hết sức. Bạn có thể viết tiếng Việt nếu không biết từ tiếng Anh.</p>
-        <div class="field-grid">
-          <div class="field-span">
-            <label for="write1">1. Write 3–5 sentences about yourself. <span class="vi">(Viết 3–5 câu giới thiệu bản thân.)</span></label>
-            <textarea id="write1" placeholder="My name is… I am… years old. I like…"></textarea>
-          </div>
-          <div class="field-span">
-            <label for="write2">2. Describe your family. <span class="vi">(Mô tả gia đình bạn.)</span></label>
-            <textarea id="write2" placeholder="My family has… My mother is… My father…"></textarea>
-          </div>
-          <div class="field-span">
-            <label for="write3">3. What did you do yesterday? <span class="vi">(Hôm qua bạn đã làm gì?)</span></label>
-            <textarea id="write3" placeholder="Yesterday I…"></textarea>
-          </div>
-          <div class="field-span">
-            <label for="write4">4. What do you want to learn in English? <span class="vi">(Bạn muốn học gì bằng tiếng Anh?)</span></label>
-            <textarea id="write4" placeholder="I want to learn…"></textarea>
-          </div>
-          <div class="field-span">
-            <label for="write5">5. Describe your home or bedroom. <span class="vi">(Mô tả nhà hoặc phòng của bạn.)</span></label>
-            <textarea id="write5" placeholder="My house is… My room has…"></textarea>
-          </div>
-        </div>
-      </div>
-    </section>
+<hr class="section-divider">
 
-    <section class="shell section-shell panel form-panel" id="section5" aria-label="Part 5: Free Speaking">
-      <div class="form-banner" style="--banner-image:url('assets/brand/NET-LION-VOICE-4.png');">
-        <span class="section-step">Part 5</span>
-        <h2 class="section-title">Free Speaking</h2>
-        <p class="section-copy">Speak for 30–60 seconds about anything you want. Confidence matters more than perfection.</p>
-      </div>
-      <div class="form-content">
-        <p class="helper">Record yourself speaking freely for 30–60 seconds. Any topic, any style — just speak naturally.</p>
-        <p class="helper vi">Ghi âm nói tự do 30–60 giây về bất cứ điều gì bạn muốn. Hãy nói tự nhiên.</p>
-        <div class="pill-row">
-          <span class="pill">Introduce yourself</span>
-          <span class="pill">Talk about your family</span>
-          <span class="pill">Describe your day</span>
-          <span class="pill">Share a hobby</span>
-        </div>
-        <div id="freeRec"></div>
-      </div>
-    </section>
+<!-- SECTION 2: PHONICS -->
+<div class="card" id="section2">
+<div class="section-header">
+<div class="section-number">2</div>
+<div>
+<h2 style="margin-bottom:2px;">PHONICS SOUNDS</h2>
+<span class="vi">Đánh Giá Phát Âm — 42 Âm Jolly Phonics</span>
+</div>
+</div>
+<p style="margin-bottom:4px;">For each group, press <strong>Record</strong> and say each sound clearly, one by one.</p>
+<p class="vi" style="margin-bottom:16px;">Với mỗi nhóm, nhấn <strong>Ghi âm</strong> và đọc rõ từng âm, từng âm một.</p>
+<div id="phonicsGroups"></div>
+</div>
 
-    <section class="shell submit-shell" id="submission" aria-label="Submit assessment">
-      <div class="pill-row" style="justify-content:center; margin-bottom: 14px;">
-        <span class="pill">Submission pack</span>
-        <span class="pill">24-hour follow-up</span>
-        <span class="pill">Free trial class</span>
-      </div>
-      <h2>Complete the Assessment</h2>
-      <p>Thank you for finishing the Tiger Assessment. Download the submission pack below and send it to NET. Michael will review your answers personally and contact you within 24 hours to discuss the results and arrange your free class.</p>
-      <p class="vi">Cảm ơn bạn đã hoàn thành bài đánh giá. Tải submission pack và gửi cho NET. Michael sẽ xem xét câu trả lời và liên hệ trong 24 giờ để hẹn buổi học thử miễn phí.</p>
-      <div class="next-steps" style="margin-top: 24px;">
-        <article class="step-card">
-          <strong>Step 1</strong>
-          <h3>Download the pack</h3>
-          <p>Grab the full JSON data file with your answers and metadata from this session.</p>
-        </article>
-        <article class="step-card">
-          <strong>Step 2</strong>
-          <h3>Send to Michael</h3>
-          <p>WhatsApp or email the file to NET. Include any audio recordings from your device if you made them.</p>
-        </article>
-        <article class="step-card">
-          <strong>Step 3</strong>
-          <h3>Hear back in 24 hours</h3>
-          <p>Michael follows up with his assessment, a personalised plan, and an invitation to the free trial class.</p>
-        </article>
-      </div>
-      <button class="submit-button" id="downloadResultsBtn" type="button">Download Submission Pack</button>
-      <p class="vi" style="margin-top: 20px;">NET sẽ liên hệ trong 24 giờ để trao đổi kết quả và hẹn buổi học thử miễn phí.</p>
-      <p style="margin-top: 10px; color: var(--muted); font-size: 0.95rem;">
-        <a href="mailto:hobbs@naturalenglishtraining.com" style="color: var(--purple); text-decoration: none;">hobbs@naturalenglishtraining.com</a>
-      </p>
-    </section>
+<hr class="section-divider">
 
-    <footer class="shell footer-shell">
-      <div class="footer-panel">
-        <h2 class="footer-title">Natural English Training</h2>
-        <p>From Mouse to Tiger. Assessment first. Confidence first. Human follow-up first.</p>
-        <div class="footer-links">
-          <a href="index.html" aria-current="page">Assessment</a>
-          <a href="about.html">About Michael</a>
-          <a href="about.html#netpet">NET-PET-AI</a>
-          <a href="mailto:hobbs@naturalenglishtraining.com">hobbs@naturalenglishtraining.com</a>
-        </div>
-      </div>
-    </footer>
-  </main>
+<!-- SECTION 3: READING -->
+<div class="card" id="section3">
+<div class="section-header">
+<div class="section-number">3</div>
+<div>
+<h2 style="margin-bottom:2px;">READING</h2>
+<span class="vi">Đánh Giá Đọc Hiểu</span>
+</div>
+</div>
+<p class="vi" style="margin-bottom:16px;">Đọc to đoạn văn bằng tiếng Anh và ghi âm. Sau đó trả lời câu hỏi. (Read the passages aloud and record. Then answer the questions.)</p>
 
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="assets/js/assessment.js" defer></script>
+<h3>📖 Passage 1 <span class="vi">(Đọc to / Read aloud)</span></h3>
+<div class="passage">The cat sat on the mat. It is a big cat. The cat can run and jump. I like the cat.</div>
+<div id="readRec1"></div>
+
+<h3 style="margin-top:24px;">📖 Passage 2 <span class="vi">(Đọc to / Read aloud)</span></h3>
+<div class="passage">My name is Lan. I am ten years old. I go to school every day. My best friend is Minh. We like to play together after school.</div>
+<div id="readRec2"></div>
+
+<h3 style="margin-top:24px;">📖 Passage 3 <span class="vi">(Đọc to / Read aloud)</span></h3>
+<div class="passage">Today is a sunny day. The birds are singing in the trees. I can see a dog in the park. The dog is brown and white. It is running very fast.</div>
+<div id="readRec3"></div>
+
+<h3 style="margin-top:24px;">❓ Comprehension Questions <span class="vi">(Câu hỏi hiểu bài)</span></h3>
+
+<label>1. What color is the dog in Passage 3? <span class="vi">(Con chó trong đoạn 3 có màu gì?)</span></label>
+<input type="text" id="comp1" placeholder="The dog is...">
+
+<label>2. How old is Lan in Passage 2? <span class="vi">(Lan bao nhiêu tuổi?)</span></label>
+<input type="text" id="comp2" placeholder="Lan is...">
+
+<label>3. What can the cat do in Passage 1? <span class="vi">(Con mèo có thể làm gì?)</span></label>
+<input type="text" id="comp3" placeholder="The cat can...">
+
+<label>4. Who is Lan's best friend? <span class="vi">(Bạn thân của Lan là ai?)</span></label>
+<input type="text" id="comp4" placeholder="Lan's best friend is...">
+
+<label>5. Where is the dog? <span class="vi">(Con chó ở đâu?)</span></label>
+<input type="text" id="comp5" placeholder="The dog is in...">
+</div>
+
+<hr class="section-divider">
+
+<!-- SECTION 4: WRITING -->
+<div class="card" id="section4">
+<div class="section-header">
+<div class="section-number">4</div>
+<div>
+<h2 style="margin-bottom:2px;">WRITING</h2>
+<span class="vi">Đánh Giá Viết</span>
+</div>
+</div>
+<p class="vi" style="margin-bottom:16px;">Viết bằng tiếng Anh. Không sao nếu bạn mắc lỗi — hãy cố gắng hết sức! Bạn có thể viết tiếng Việt nếu không biết từ tiếng Anh.<br>(Write in English. It's OK to make mistakes — just try your best! You can write Vietnamese if you don't know the English word.)</p>
+
+<label>1. Write 3-5 sentences about yourself. <span class="vi">(Viết 3-5 câu giới thiệu bản thân.)</span></label>
+<textarea id="write1" placeholder="My name is... I am... years old. I like..."></textarea>
+
+<label>2. Describe your family. <span class="vi">(Mô tả gia đình bạn.)</span></label>
+<textarea id="write2" placeholder="My family has... My mother is... My father..."></textarea>
+
+<label>3. What did you do yesterday? <span class="vi">(Hôm qua bạn đã làm gì?)</span></label>
+<textarea id="write3" placeholder="Yesterday I..."></textarea>
+
+<label>4. What do you want to learn in English? <span class="vi">(Bạn muốn học gì bằng tiếng Anh?)</span></label>
+<textarea id="write4" placeholder="I want to learn..."></textarea>
+
+<label>5. Describe your house or your room. <span class="vi">(Mô tả nhà hoặc phòng của bạn.)</span></label>
+<textarea id="write5" placeholder="My house is... My room has..."></textarea>
+</div>
+
+<hr class="section-divider">
+
+<!-- SECTION 5: FREE SPEAKING -->
+<div class="card" id="section5">
+<div class="section-header">
+<div class="section-number">5</div>
+<div>
+<h2 style="margin-bottom:2px;">FREE SPEAKING</h2>
+<span class="vi">Nói Tự Do</span>
+</div>
+</div>
+<p>Record yourself speaking freely for 30-60 seconds about anything you want!</p>
+<p class="vi" style="margin-bottom:12px;">Ghi âm nói tự do 30-60 giây về bất cứ điều gì bạn muốn!</p>
+<p class="vi" style="margin-bottom:16px;">💡 Gợi ý: Giới thiệu bản thân, kể về ngày hôm nay, nói về gia đình, hoặc sở thích.<br>(Suggestions: Introduce yourself, talk about today, your family, or your hobbies.)</p>
+<div id="freeRec"></div>
+</div>
+
+<div class="tiger-quote">
+<p>"Lớn tiếng và sai > Im lặng và đúng."</p>
+<p class="vi" style="font-style:normal;color:var(--text);font-size:0.9rem;margin-top:4px;">"Loud and wrong beats silent and correct."</p>
+</div>
+
+<hr class="section-divider">
+
+<!-- SUBMIT -->
+<div class="card submit-area">
+<div style="font-size:3rem;margin-bottom:12px;">🐯</div>
+<h2 style="color:var(--gold);">🎉 HOÀN THÀNH! / COMPLETE!</h2>
+<p style="margin-bottom:8px;">Thank you for completing the Tiger Assessment!</p>
+<p class="vi" style="margin-bottom:24px;">Cảm ơn bạn đã hoàn thành bài đánh giá!</p>
+<button class="submit-btn" onclick="downloadResults()">📥 Tải Kết Quả / Download Results</button>
+<p class="vi" style="margin-top:16px;font-size:0.85rem;">Nhấn nút trên để tải kết quả. Gửi tất cả file cho giáo viên qua Zalo hoặc email.<br>(Press the button above to download results. Send all files to your teacher via Zalo or email.)</p>
+<p style="margin-top:8px;font-size:0.8rem;color:var(--dim);">hobbs@naturalenglishtraining.com</p>
+</div>
+
+<!-- BRANDING -->
+<div style="text-align:center;padding:30px 20px;opacity:0.6;">
+<p style="font-family:'Orbitron',sans-serif;font-size:0.75rem;color:var(--purple);letter-spacing:2px;">NATURAL ENGLISH TRAINING</p>
+<p style="font-size:0.8rem;color:var(--dim);margin-top:4px;font-family:'Rajdhani',sans-serif;">From Mouse to Tiger 🐭 → 🐆 → 🐯</p>
+<p style="font-size:0.7rem;color:var(--dim);margin-top:8px;">© 2026 Natural English Training. All rights reserved.</p>
+</div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// === PHONICS DATA (42 Jolly Phonics Sounds) ===
+const phonicsGroups=[
+{name:"Group 1 / Nhóm 1",sounds:[
+{s:"s",ex:"sun ☀️",vi:"như 'xờ'"},{s:"a",ex:"ant 🐜",vi:"như 'a'"},{s:"t",ex:"tap",vi:"như 'tờ'"},{s:"i",ex:"ink 🖊️",vi:"như 'i'"},{s:"p",ex:"pan 🍳",vi:"như 'pờ'"},{s:"n",ex:"net 🥅",vi:"như 'nờ'"}
+]},
+{name:"Group 2 / Nhóm 2",sounds:[
+{s:"ck",ex:"cat 🐱",vi:"như 'cờ'"},{s:"e",ex:"egg 🥚",vi:"như 'e'"},{s:"h",ex:"hat 🎩",vi:"như 'hờ'"},{s:"r",ex:"rat 🐀",vi:"như 'rờ'"},{s:"m",ex:"man 🧑",vi:"như 'mờ'"},{s:"d",ex:"dog 🐕",vi:"như 'đờ'"}
+]},
+{name:"Group 3 / Nhóm 3",sounds:[
+{s:"g",ex:"go 🏃",vi:"như 'gờ'"},{s:"o",ex:"on",vi:"như 'o'"},{s:"u",ex:"up ⬆️",vi:"như 'ư'"},{s:"l",ex:"leg 🦵",vi:"như 'lờ'"},{s:"f",ex:"fun 🎉",vi:"như 'fờ'"},{s:"b",ex:"bus 🚌",vi:"như 'bờ'"}
+]},
+{name:"Group 4 / Nhóm 4",sounds:[
+{s:"ai",ex:"rain 🌧️",vi:"như 'ây'"},{s:"j",ex:"jug",vi:"như 'jờ'"},{s:"oa",ex:"boat ⛵",vi:"như 'âu'"},{s:"ie",ex:"pie 🥧",vi:"như 'ai'"},{s:"ee",ex:"see 👀",vi:"như 'i' dài"},{s:"or",ex:"fork 🍴",vi:"như 'o' dài"}
+]},
+{name:"Group 5 / Nhóm 5",sounds:[
+{s:"z",ex:"zip",vi:"như 'zờ'"},{s:"w",ex:"web 🕸️",vi:"như 'guờ'"},{s:"ng",ex:"ring 💍",vi:"như 'ngờ'"},{s:"v",ex:"van 🚐",vi:"như 'vờ'"},{s:"oo",ex:"book 📖",vi:"oo ngắn"},{s:"oo",ex:"moon 🌙",vi:"oo dài"}
+]},
+{name:"Group 6 / Nhóm 6",sounds:[
+{s:"y",ex:"yes ✅",vi:"như 'dờ'"},{s:"x",ex:"box 📦",vi:"như 'xờ'"},{s:"ch",ex:"chip",vi:"như 'chờ'"},{s:"sh",ex:"shop 🛒",vi:"như 'sờ'"},{s:"th",ex:"this 👈",vi:"th hữu thanh"},{s:"th",ex:"thin",vi:"th vô thanh"}
+]},
+{name:"Group 7 / Nhóm 7",sounds:[
+{s:"qu",ex:"quiz ❓",vi:"như 'quờ'"},{s:"ou",ex:"out",vi:"như 'ao'"},{s:"oi",ex:"oil",vi:"như 'oi'"},{s:"ue",ex:"blue 🔵",vi:"như 'iu'"},{s:"er",ex:"her",vi:"như 'ơ'"},{s:"ar",ex:"car 🚗",vi:"như 'a' dài"}
+]}
+];
+
+// === AUDIO ENGINE ===
+const recordings={};
+let activeRecorder=null;
+let activeStream=null;
+let micReady=false;
+
+async function requestMic(){
+try{
+const s=await navigator.mediaDevices.getUserMedia({audio:true});
+s.getTracks().forEach(t=>t.stop());
+micReady=true;
+document.getElementById('micPrompt').innerHTML='<p style="color:var(--success)">✅ Microphone đã sẵn sàng! / Microphone ready!</p>';
+setTimeout(()=>document.getElementById('micPrompt').style.display='none',2000);
+}catch(e){
+document.getElementById('micPrompt').innerHTML='<p style="color:var(--danger)">❌ Không thể truy cập microphone. Vui lòng cho phép trong cài đặt trình duyệt.<br>Cannot access microphone. Please allow in browser settings.</p>';
+}
+}
+
+function createRecorder(containerId,recId){
+const container=document.getElementById(containerId);
+if(!container)return;
+const wrapper=document.createElement('div');
+wrapper.style.marginTop='12px';
+const btn=document.createElement('button');
+btn.className='rec-btn';
+btn.innerHTML='🎤 Ghi âm / Record';
+btn.dataset.recId=recId;
+btn.dataset.state='idle';
+const status=document.createElement('div');
+status.className='rec-status';
+const playback=document.createElement('div');
+playback.className='rec-playback hidden';
+
+btn.onclick=async function(){
+const state=this.dataset.state;
+if(state==='idle'||state==='done'){
+try{
+const stream=await navigator.mediaDevices.getUserMedia({audio:true});
+activeStream=stream;
+const recorder=new MediaRecorder(stream);
+activeRecorder=recorder;
+const chunks=[];
+recorder.ondataavailable=e=>chunks.push(e.data);
+recorder.onstop=()=>{
+const blob=new Blob(chunks,{type:'audio/webm'});
+recordings[recId]=blob;
+const audio=document.createElement('audio');
+audio.controls=true;
+audio.src=URL.createObjectURL(blob);
+audio.style.width='100%';
+playback.innerHTML='';
+playback.appendChild(audio);
+playback.classList.remove('hidden');
+btn.className='rec-btn done';
+btn.innerHTML='✅ Ghi lại / Re-record';
+btn.dataset.state='done';
+status.textContent='✅ Đã ghi âm! / Recorded!';
+status.style.color='var(--success)';
+stream.getTracks().forEach(t=>t.stop());
+activeRecorder=null;activeStream=null;
+updateProgress();
+};
+recorder.start();
+btn.className='rec-btn recording';
+btn.innerHTML='⏹ Dừng / Stop';
+btn.dataset.state='recording';
+status.textContent='🔴 Đang ghi âm... Nói rõ từng âm rồi nhấn Dừng. / Recording... Say each sound clearly then press Stop.';
+status.style.color='var(--danger)';
+}catch(err){
+status.textContent='❌ Không thể ghi âm. Cho phép microphone trong trình duyệt. / Cannot record. Allow microphone in browser.';
+status.style.color='var(--danger)';
+}
+}else if(state==='recording'){
+if(activeRecorder&&activeRecorder.state==='recording')activeRecorder.stop();
+}
+};
+wrapper.appendChild(btn);
+wrapper.appendChild(status);
+wrapper.appendChild(playback);
+container.appendChild(wrapper);
+}
+
+// === BUILD PHONICS UI ===
+function buildPhonics(){
+const container=document.getElementById('phonicsGroups');
+phonicsGroups.forEach((group,i)=>{
+const div=document.createElement('div');
+div.className='phonics-group';
+let html='<div class="phonics-group-title">'+group.name+'</div>';
+html+='<div class="sounds-grid">';
+group.sounds.forEach(s=>{
+html+='<div class="sound-chip"><div class="sound">'+s.s+'</div><div class="example">'+s.ex+'</div><div style="font-size:0.65rem;color:var(--dim);margin-top:2px;">'+s.vi+'</div></div>';
+});
+html+='</div>';
+html+='<p class="vi" style="font-size:0.85rem;margin-bottom:8px;">Nhấn ghi âm và đọc rõ từng âm: '+group.sounds.map(s=>'"'+s.s+'"').join(', ')+'</p>';
+html+='<div id="phonicsRec'+i+'"></div>';
+div.innerHTML=html;
+container.appendChild(div);
+setTimeout(()=>createRecorder('phonicsRec'+i,'phonics_group_'+(i+1)),10);
+});
+}
+
+// === BUILD READING RECORDERS ===
+function buildReadingRecs(){
+createRecorder('readRec1','reading_passage_1');
+createRecorder('readRec2','reading_passage_2');
+createRecorder('readRec3','reading_passage_3');
+createRecorder('freeRec','free_speaking');
+}
+
+// === PROGRESS ===
+function updateProgress(){
+const fields=['fullName','age','school','engHistory','whyEnglish','family','favorites','dreamJob','engUse',
+'write1','write2','write3','write4','write5','comp1','comp2','comp3','comp4','comp5'];
+let filled=0;
+fields.forEach(id=>{const el=document.getElementById(id);if(el&&el.value&&el.value.trim())filled++;});
+const hobbyChecked=document.querySelectorAll('input[name="hobby"]:checked').length>0?1:0;
+const challengeChecked=document.querySelectorAll('input[name="challenge"]:checked').length>0?1:0;
+filled+=hobbyChecked+challengeChecked;
+const totalRecs=11;
+const doneRecs=Object.keys(recordings).length;
+const totalItems=fields.length+2+totalRecs;
+const doneItems=filled+doneRecs;
+const pct=Math.round((doneItems/totalItems)*100);
+document.getElementById('progressFill').style.width=pct+'%';
+document.getElementById('progressPct').textContent=pct+'%';
+const section=pct<20?'1/5':pct<40?'2/5':pct<60?'3/5':pct<80?'4/5':'5/5';
+document.getElementById('progressText').textContent='Phần '+section;
+}
+document.addEventListener('input',updateProgress);
+document.addEventListener('change',updateProgress);
+
+// === DOWNLOAD ===
+async function downloadResults(){
+const name=document.getElementById('fullName').value||'student';
+const data={
+timestamp:new Date().toISOString(),
+assessment:'NET Tiger Assessment V1',
+personal:{
+fullName:name,
+age:document.getElementById('age').value,
+school:document.getElementById('school').value,
+engHistory:document.getElementById('engHistory').value,
+hobbies:[...document.querySelectorAll('input[name="hobby"]:checked')].map(c=>c.value),
+otherHobbies:document.getElementById('otherHobbies').value,
+family:document.getElementById('family').value,
+challenges:[...document.querySelectorAll('input[name="challenge"]:checked')].map(c=>c.value),
+whyEnglish:document.getElementById('whyEnglish').value,
+favorites:document.getElementById('favorites').value,
+dreamJob:document.getElementById('dreamJob').value,
+engUse:document.getElementById('engUse').value
+},
+comprehension:{
+q1_dogColor:document.getElementById('comp1').value,
+q2_lanAge:document.getElementById('comp2').value,
+q3_catAbility:document.getElementById('comp3').value,
+q4_bestFriend:document.getElementById('comp4').value,
+q5_dogLocation:document.getElementById('comp5').value
+},
+writing:{
+aboutYourself:document.getElementById('write1').value,
+family:document.getElementById('write2').value,
+yesterday:document.getElementById('write3').value,
+goals:document.getElementById('write4').value,
+house:document.getElementById('write5').value
+},
+audioRecordings:Object.keys(recordings)
+};
+// Download JSON
+const jsonBlob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+dl(jsonBlob,'NET-Assessment-'+safeName(name)+'-'+new Date().toISOString().slice(0,10)+'.json');
+// Download audio files
+for(const[key,blob]of Object.entries(recordings)){
+dl(blob,'NET-Assessment-'+safeName(name)+'-'+key+'.webm');
+}
+showToast('✅ Đã tải '+( 1+Object.keys(recordings).length)+' file! Gửi cho giáo viên nhé!');
+}
+function safeName(n){return n.replace(/[^a-zA-Z0-9\u00C0-\u024F\u1E00-\u1EFF]/g,'_').slice(0,30)}
+function dl(blob,filename){
+const url=URL.createObjectURL(blob);
+const a=document.createElement('a');
+a.href=url;a.download=filename;
+document.body.appendChild(a);a.click();
+document.body.removeChild(a);
+URL.revokeObjectURL(url);
+}
+function showToast(msg){
+const t=document.getElementById('toast');
+t.textContent=msg;t.classList.add('show');
+setTimeout(()=>t.classList.remove('show'),4000);
+}
+
+// === INIT ===
+buildPhonics();
+buildReadingRecs();
+updateProgress();
+</script>
 </body>
 </html>

@@ -1,29 +1,34 @@
 # Codex Cloud Instructions
 
-## Primary Target
+## Canonical Lane
 
-This repository is multi-purpose, but the primary runnable app for Codex cloud tasks is:
+Use the repo root as the single control plane.
 
-- **`APPS/NET-PET-AI`**
+- **One repo:** `OB-1`
+- **One runtime app:** `APPS/NET-PET-AI-merge/APPS/NET-PET-AI`
+- **One operator email:** `mrmichaelhobbs123@gmail.com`
+- **One workflow entrypoint:** `pwsh -File SCRIPTS/obi.ps1 <doctor|verify|dev|mcp-audit>`
 
-Treat that directory as the canonical runtime target unless a task explicitly says otherwise.
+Treat `APPS/NET-PET-AI-merge/APPS/NET-PET-AI` as the canonical runtime target unless a task explicitly says otherwise.
+
+Legacy `mrmichaelhobbs1234*` references are historical and should not be treated as the live operator identity unless a task is explicitly archival.
 
 ## First Steps
 
-1. `cd APPS/NET-PET-AI`
-2. `npm ci`
+1. `pwsh -File SCRIPTS/obi.ps1 doctor`
+2. `pwsh -File SCRIPTS/obi.ps1 verify`
 3. Read `README.md`
-4. Inspect `wrangler.toml`, `package.json`, and `src/index.js`
+4. Inspect `APPS/NET-PET-AI-merge/APPS/NET-PET-AI/wrangler.toml`, `APPS/NET-PET-AI-merge/APPS/NET-PET-AI/package.json`, and `APPS/NET-PET-AI-merge/APPS/NET-PET-AI/src/index.js`
 
 ## Validation Commands
 
-- `cd APPS/NET-PET-AI && npm run verify:wrangler`
-- `cd APPS/NET-PET-AI && node --check src/index.js`
-- `cd APPS/NET-PET-AI && npx wrangler deploy --dry-run`
+- `pwsh -File SCRIPTS/obi.ps1 verify`
+- `cd APPS/NET-PET-AI-merge/APPS/NET-PET-AI && node --check src/index.js`
+- `cd APPS/NET-PET-AI-merge/APPS/NET-PET-AI && npx wrangler deploy --dry-run`
 
 ## Safe Edit Zones
 
-- `APPS/NET-PET-AI/**`
+- `APPS/NET-PET-AI-merge/APPS/NET-PET-AI/**`
 - `.github/**`
 - `MASTER-SYNC.md`
 - `OPERATIONS/**`
@@ -45,7 +50,8 @@ Do not modify unless the task explicitly requires it:
 ## Cloud Task Boundaries
 
 - Repo root contains archival material. Do not assume the repo root is the app.
-- The Cloudflare app is nested under `APPS/NET-PET-AI`.
+- The verified Cloudflare app is nested under `APPS/NET-PET-AI-merge/APPS/NET-PET-AI`.
+- The root repo is still the canonical operator surface for scripts, MCP config, and workflow entrypoints.
 - Prefer repo-side code, docs, tests, and CI work over live production actions.
 
 ## Output Expectations

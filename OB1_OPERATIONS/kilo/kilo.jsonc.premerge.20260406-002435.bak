@@ -1,0 +1,44 @@
+{
+  "$schema": "https://app.kilo.ai/config.json",
+  "permission": {
+    "bash": "allow",
+    "read": "allow",
+    "edit": "allow",
+    "write": "allow",
+    "glob": "allow",
+    "grep": "allow",
+    "webfetch": "allow",
+    "websearch": "allow"
+  },
+  "mcp": {
+    "servers": {
+      "azure-mcp": {
+        "command": "npx",
+        "args": [
+          "-y",
+          "@modelcontextprotocol/server-azure-resources"
+        ]
+      },
+      "github-mcp": {
+        "command": "npx",
+        "args": [
+          "-y",
+          "@modelcontextprotocol/server-github"
+        ]
+      },
+      "filesystem-mcp": {
+        "command": "npx",
+        "args": [
+          "-y",
+          "@modelcontextprotocol/server-filesystem",
+          "C:/Users/mrmic/Desktop"
+        ]
+      }
+    }
+  },
+  "skills": {
+    "paths": [
+      "C:/Users/mrmic/.agents/skills"
+    ]
+  }
+}

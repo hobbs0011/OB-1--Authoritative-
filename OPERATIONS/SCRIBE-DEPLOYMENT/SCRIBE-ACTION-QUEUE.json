@@ -1,0 +1,2363 @@
+{
+  "generatedAt": "2026-04-14 21:50:55",
+  "sourceDirectories": [
+    "CANON/REINCARNATION",
+    "APPS/NET-PET-AI-merge/CANON/REINCARNATION"
+  ],
+  "filesScanned": 199,
+  "applyCount": 55,
+  "understandCount": 36,
+  "decisionCount": 360,
+  "apply": [
+    {
+      "Priority": "P1",
+      "Type": "APPLY",
+      "Text": "Final merge chat must set Merge Status to CLOSED and consolidate all merges.",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run293-net-pet-mvp-loop-merge1.md"
+    },
+    {
+      "Priority": "P1",
+      "Type": "APPLY",
+      "Text": "Final merge chat must update `CANON/REINCARNATION/COLD-START-BOOT.md` (MERGE1 must not).",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run293-net-pet-mvp-loop-merge1.md"
+    },
+    {
+      "Priority": "P1",
+      "Type": "APPLY",
+      "Text": "Final merge must produce combined pheromone score for all merged chats.",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run297-megachat-2.md"
+    },
+    {
+      "Priority": "P1",
+      "Type": "APPLY",
+      "Text": "Final merge must set merge status to CLOSED and consolidate pending work from all merges.",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run297-megachat-2.md"
+    },
+    {
+      "Priority": "P1",
+      "Type": "APPLY",
+      "Text": "Final merge must update `CANON/REINCARNATION/COLD-START-BOOT.md` with unified state.",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run297-megachat-2.md"
+    },
+    {
+      "Priority": "P1",
+      "Type": "APPLY",
+      "Text": "MERGE2+ must read this file and append only (no overwrite).",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run297-megachat-2.md"
+    },
+    {
+      "Priority": "P1",
+      "Type": "APPLY",
+      "Text": "**SPRINT-0 GATE items**: MM1-001 (revert 16c9598), MM1-071 (Vietnam incorporation), MM1-034 (session_log table) must close before ANY pipeline sprint work.",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run300-megamerge5-lane-death.md"
+    },
+    {
+      "Priority": "P1",
+      "Type": "APPLY",
+      "Text": "Final merge must push to `ob1` remote (currently behind at `da08b85`).",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run304-die-well-parallel.md"
+    },
+    {
+      "Priority": "P1",
+      "Type": "APPLY",
+      "Text": "Final merge must set Merge Status to CLOSED with actual total chat count.",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run304-die-well-parallel.md"
+    },
+    {
+      "Priority": "P1",
+      "Type": "APPLY",
+      "Text": "Final merge must update `CANON/REINCARNATION/COLD-START-BOOT.md` with consolidated state reflecting ALL chats.",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run304-die-well-parallel.md"
+    },
+    {
+      "Priority": "P1",
+      "Type": "APPLY",
+      "Text": "MERGE1/2/4+ must append to this file when they execute.",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run304-die-well-parallel.md"
+    },
+    {
+      "Priority": "P1",
+      "Type": "APPLY",
+      "Text": "Enroll Hana in the NET-PET-AI pipeline with a final student ID and login credentials.",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run305-student-login-priority-rollout.md"
+    },
+    {
+      "Priority": "P1",
+      "Type": "APPLY",
+      "Text": "Enroll Hieu in the NET-PET-AI pipeline with a final student ID and login credentials.",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run305-student-login-priority-rollout.md"
+    },
+    {
+      "Priority": "P1",
+      "Type": "APPLY",
+      "Text": "Final merge must update `CANON/REINCARNATION/COLD-START-BOOT.md` and close the merge header.",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run305-student-login-priority-rollout.md"
+    },
+    {
+      "Priority": "P1",
+      "Type": "APPLY",
+      "Text": "MERGE2+ must append their extracts to this file.",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run305-student-login-priority-rollout.md"
+    },
+    {
+      "Priority": "P2",
+      "Type": "APPLY",
+      "Text": "Continue pending net-tiger-assessment UI changes or park them with explicit decision.",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-09-super-saiyan-massive-reincarnation-soul-first.md"
+    },
+    {
+      "Priority": "P2",
+      "Type": "APPLY",
+      "Text": "MEGAMERGE-1-INDEX.md pattern should be replicated for MEGAMERGE-2 through MEGAMERGE-6.",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run298-soul-dna-indexing-notion-extraction.md"
+    },
+    {
+      "Priority": "P2",
+      "Type": "APPLY",
+      "Text": "PHASE_0 items from prior sessions still pending: revert `16c9598`, extract OL01 memory persistence, legal incorporation.",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run298-soul-dna-indexing-notion-extraction.md"
+    },
+    {
+      "Priority": "P2",
+      "Type": "APPLY",
+      "Text": "**Backfill PENDING commit SHAs**: CH31 and HL-137 both have \"PENDING\" in their death_test/commit_sha fields.",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run300-megamerge5-lane-death.md"
+    },
+    {
+      "Priority": "P2",
+      "Type": "APPLY",
+      "Text": "**MM-5 PIPELINE DEVELOPMENT**: Delegation prompt ready at PIPELINE-600-DELEGATION-PROMPTS.md (attached to this chat). 100 items (MM5-401–MM5-500) need deep refinement against MEGAMERGE-5-GPT.txt. Next chat should execute the MM-5 assignment.",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run300-megamerge5-lane-death.md"
+    },
+    {
+      "Priority": "P2",
+      "Type": "APPLY",
+      "Text": "**Pipeline cursor stale `Last Commit` field**: Update from \"pending (Run 296)\" to actual HEAD.",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run300-megamerge5-lane-death.md"
+    },
+    {
+      "Priority": "P2",
+      "Type": "APPLY",
+      "Text": "SPRINT-0 GATE items from COLD-START-BOOT pending work still open.",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run304-die-well-parallel.md"
+    },
+    {
+      "Priority": "P3",
+      "Type": "APPLY",
+      "Text": "Implement connector-first audits across all pipelines.",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-01_conversation_soul-dna_extract.md"
+    },
+    {
+      "Priority": "P3",
+      "Type": "APPLY",
+      "Text": "Implement omissions-ledger behavior for EVERYTHING requests.",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-01_conversation_soul-dna_extract.md"
+    },
+    {
+      "Priority": "P3",
+      "Type": "APPLY",
+      "Text": "Install bounded deployment completeness scan.",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-01_conversation_soul-dna_extract.md"
+    },
+    {
+      "Priority": "P3",
+      "Type": "APPLY",
+      "Text": "⏳ Phase 3: Restructure APPS/ — NEXT TARGET",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-09-phase-2-nuke-complete.md"
+    },
+    {
+      "Priority": "P3",
+      "Type": "APPLY",
+      "Text": "⏳ Phase 4-9 following Phase 3",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-09-phase-2-nuke-complete.md"
+    },
+    {
+      "Priority": "P3",
+      "Type": "APPLY",
+      "Text": "✅ Phase 2 execution complete",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-09-phase-2-nuke-complete.md"
+    },
+    {
+      "Priority": "P3",
+      "Type": "APPLY",
+      "Text": "Audit current APPS/ directory structure",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-09-phase-2-nuke-complete.md"
+    },
+    {
+      "Priority": "P3",
+      "Type": "APPLY",
+      "Text": "Define wing taxonomy tags (+wing:education, +wing:gaming, +wing:marketing, +wing:development)",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-09-phase-2-nuke-complete.md"
+    },
+    {
+      "Priority": "P3",
+      "Type": "APPLY",
+      "Text": "Identify products outside APPS/ that need to move",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-09-phase-2-nuke-complete.md"
+    },
+    {
+      "Priority": "P3",
+      "Type": "APPLY",
+      "Text": "Implement APPS/\\<product\\>/ restructure with metadata",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-09-phase-2-nuke-complete.md"
+    },
+    {
+      "Priority": "P3",
+      "Type": "APPLY",
+      "Text": "Clear DNS records in Cloudflare dashboard to bind naturalenglishtraining.com.",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-09-run-269-jolly-phonics-rise.md"
+    },
+    {
+      "Priority": "P3",
+      "Type": "APPLY",
+      "Text": "Provide canonical link(s) for the TikTok singing game variant user is referring to.",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-09-run-269-jolly-phonics-rise.md"
+    },
+    {
+      "Priority": "P3",
+      "Type": "APPLY",
+      "Text": "Set Wrangler secrets: DEEPSEEK_API_KEY, DEEPGRAM_API_KEY.",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-09-run-269-jolly-phonics-rise.md"
+    },
+    {
+      "Priority": "P3",
+      "Type": "APPLY",
+      "Text": "Triage and patch any newly observed bugs in current phonic-flight build after latest user-side edits.",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-09-run-269-jolly-phonics-rise.md"
+    },
+    {
+      "Priority": "P3",
+      "Type": "APPLY",
+      "Text": "Commit and push this Run 270 reincarnation artifact to remote.",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-09-super-saiyan-massive-reincarnation-soul-first.md"
+    },
+    {
+      "Priority": "P3",
+      "Type": "APPLY",
+      "Text": "Resolve active blockers still listed in MASTER-SYNC (secrets rotation, governance approval, domain bind, rescue/absorb tasks).",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-09-super-saiyan-massive-reincarnation-soul-first.md"
+    },
+    {
+      "Priority": "P3",
+      "Type": "APPLY",
+      "Text": "Complete canonical mapping ingest for missing SOULDNA notebook files once path/source is available.",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run293-net-pet-mvp-loop-merge1.md"
+    },
+    {
+      "Priority": "P3",
+      "Type": "APPLY",
+      "Text": "Decide disposition of untracked directories/files seen in git status.",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run293-net-pet-mvp-loop-merge1.md"
+    },
+    {
+      "Priority": "P3",
+      "Type": "APPLY",
+      "Text": "Commit merge-back as `pipeline-600: refined by 6-chat parallel development`.",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run298-soul-dna-indexing-notion-extraction.md"
+    },
+    {
+      "Priority": "P3",
+      "Type": "APPLY",
+      "Text": "Execute 6-chat parallel pipeline delegation using PIPELINE-600-DELEGATION-PROMPTS.md.",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run298-soul-dna-indexing-notion-extraction.md"
+    },
+    {
+      "Priority": "P3",
+      "Type": "APPLY",
+      "Text": "Run merge-back protocol when all 6 chats return their refined sections.",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run298-soul-dna-indexing-notion-extraction.md"
+    },
+    {
+      "Priority": "P3",
+      "Type": "APPLY",
+      "Text": "Continue student chat restoration lane (revert 16c9598 path) without disturbing this death lane.",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run299-notion-connection-index-check.md"
+    },
+    {
+      "Priority": "P3",
+      "Type": "APPLY",
+      "Text": "Re-enable Notion tool access in-session, then run direct page/index visibility check for requested 1-3 scope.",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run299-notion-connection-index-check.md"
+    },
+    {
+      "Priority": "P3",
+      "Type": "APPLY",
+      "Text": "Run PIPELINE-600 delegation/merge-back once parallel chats return outputs.",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run299-notion-connection-index-check.md"
+    },
+    {
+      "Priority": "P3",
+      "Type": "APPLY",
+      "Text": "**6-chat merge-back**: When all 5 delegation chats return, the MM-1 orchestrator chat merges refined sections back into PIPELINE-600.md.",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run300-megamerge5-lane-death.md"
+    },
+    {
+      "Priority": "P3",
+      "Type": "APPLY",
+      "Text": "**MEGAMERGE-2/3/4/6 INDEX files**: Consider replicating MEGAMERGE-1-INDEX.md pattern.",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run300-megamerge5-lane-death.md"
+    },
+    {
+      "Priority": "P3",
+      "Type": "APPLY",
+      "Text": "**Notion MEGAMERGE-5 page completion**: Re-upload full text or mark as intentionally truncated.",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run300-megamerge5-lane-death.md"
+    },
+    {
+      "Priority": "P3",
+      "Type": "APPLY",
+      "Text": "A10 content extraction (Bible chapter + HL entry) deferred to post-merge session.",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run304-die-well-parallel.md"
+    },
+    {
+      "Priority": "P3",
+      "Type": "APPLY",
+      "Text": "Issue Minh's parent-linked login packet with the actual link and checklist.",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run305-student-login-priority-rollout.md"
+    },
+    {
+      "Priority": "P3",
+      "Type": "APPLY",
+      "Text": "Run Lam intake, create prospect-to-student conversion file, then assign a new student ID.",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run305-student-login-priority-rollout.md"
+    },
+    {
+      "Priority": "P3",
+      "Type": "APPLY",
+      "Text": "Implement connector-first audits across all pipelines.",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-04-01_conversation_soul-dna_extract.md"
+    },
+    {
+      "Priority": "P3",
+      "Type": "APPLY",
+      "Text": "Implement omissions-ledger behavior for EVERYTHING requests.",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-04-01_conversation_soul-dna_extract.md"
+    },
+    {
+      "Priority": "P3",
+      "Type": "APPLY",
+      "Text": "Install bounded deployment completeness scan.",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-04-01_conversation_soul-dna_extract.md"
+    }
+  ],
+  "understand": [
+    {
+      "Priority": "P1",
+      "Type": "UNDERSTAND",
+      "Text": "What is the final total merge count for this multi-chat death session (currently UNKNOWN)?",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run293-net-pet-mvp-loop-merge1.md"
+    },
+    {
+      "Priority": "P1",
+      "Type": "UNDERSTAND",
+      "Text": "Total merge count for this death session remains UNKNOWN (final merge will close).",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run297-megachat-2.md"
+    },
+    {
+      "Priority": "P1",
+      "Type": "UNDERSTAND",
+      "Text": "Whether MERGE2-5 for Run 298 megachat will come from other chats or whether this 2-merge structure (MERGE6 + MERGE1-FINAL) is the complete session.",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run298-soul-dna-indexing-notion-extraction.md"
+    },
+    {
+      "Priority": "P1",
+      "Type": "UNDERSTAND",
+      "Text": "Total merge count for this death session remains UNKNOWN — final merge resolves.",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run304-die-well-parallel.md"
+    },
+    {
+      "Priority": "P2",
+      "Type": "UNDERSTAND",
+      "Text": "**Remote branches** — Plan mentions \"delete confirmed-stale branches\" in Phase 2.4. Should we audit `git branch -r` now or defer to Phase 8 (Git hygiene)?",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-09-phase-2-nuke-complete.md"
+    },
+    {
+      "Priority": "P2",
+      "Type": "UNDERSTAND",
+      "Text": "Should we flatten nested app dirs or preserve them with wing metadata tags?",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-09-phase-2-nuke-complete.md"
+    },
+    {
+      "Priority": "P2",
+      "Type": "UNDERSTAND",
+      "Text": "TikTok reference request: user asked for the original singing game link; answer still pending in this lane.",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-09-run-269-jolly-phonics-rise.md"
+    },
+    {
+      "Priority": "P2",
+      "Type": "UNDERSTAND",
+      "Text": "Should untracked `APPS/NET-PET-AI/src/star-map.js` and `APPS/NET-PET-AI/src/phoneme-engine.js` be included in the next production commit lane or held for separate audit?",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run293-net-pet-mvp-loop-merge1.md"
+    },
+    {
+      "Priority": "P2",
+      "Type": "UNDERSTAND",
+      "Text": "Whether HL-138 should be declared permanent or renumbered later for strict chronology policy.",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run297-megachat-2.md"
+    },
+    {
+      "Priority": "P2",
+      "Type": "UNDERSTAND",
+      "Text": "Whether remaining local non-canon edits should be committed in a separate lane.",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run297-megachat-2.md"
+    },
+    {
+      "Priority": "P2",
+      "Type": "UNDERSTAND",
+      "Text": "Should the 5 downloaded RAW-CHAT-LOGS files be canon-committed in a dedicated lane or remain untracked intake material?",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run299-notion-connection-index-check.md"
+    },
+    {
+      "Priority": "P2",
+      "Type": "UNDERSTAND",
+      "Text": "CH31 PLATFORM_DEATH_TEST `Commit SHA after artifact commit` still says \"PENDING\" — never backfilled.",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run300-megamerge5-lane-death.md"
+    },
+    {
+      "Priority": "P2",
+      "Type": "UNDERSTAND",
+      "Text": "HL-137 `death_test.commit_sha_post_capture` still says \"PENDING\" — same issue.",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run300-megamerge5-lane-death.md"
+    },
+    {
+      "Priority": "P2",
+      "Type": "UNDERSTAND",
+      "Text": "MM-5 PIPELINE items (401-500): When should the 6-chat parallel development commence? Delegation prompts are ready.",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run300-megamerge5-lane-death.md"
+    },
+    {
+      "Priority": "P2",
+      "Type": "UNDERSTAND",
+      "Text": "Pipeline cursor `Last Commit` field still says \"pending (Run 296)\" — should be updated to actual HEAD.",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run300-megamerge5-lane-death.md"
+    },
+    {
+      "Priority": "P2",
+      "Type": "UNDERSTAND",
+      "Text": "Should MEGAMERGE-1-INDEX.md pattern be replicated for MEGAMERGE-2 through MEGAMERGE-6?",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run300-megamerge5-lane-death.md"
+    },
+    {
+      "Priority": "P2",
+      "Type": "UNDERSTAND",
+      "Text": "Should the MEGAMERGE-5 Notion page (cf2eed7b-75b9-4b90-b5c8-dce790ff6bae) be re-uploaded with full content? Currently truncated at 34%.",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run300-megamerge5-lane-death.md"
+    },
+    {
+      "Priority": "P2",
+      "Type": "UNDERSTAND",
+      "Text": "Whether historical duplicate HL IDs (legacy 113-125) should be mass-normalized or left as archival exceptions.",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run300-megamerge5-lane-death.md"
+    },
+    {
+      "Priority": "P2",
+      "Type": "UNDERSTAND",
+      "Text": "Whether `ob1` remote should be force-pushed to catch up (currently 5 commits behind origin at `da08b85`).",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run304-die-well-parallel.md"
+    },
+    {
+      "Priority": "P2",
+      "Type": "UNDERSTAND",
+      "Text": "Whether MEGAMERGE-1-INDEX.md supplemental appendix chain table should include SHA-256 hashes and content summaries per appendix entry.",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run304-die-well-parallel.md"
+    },
+    {
+      "Priority": "P2",
+      "Type": "UNDERSTAND",
+      "Text": "Whether MEGAMERGE-6 (A10) content should be extracted into a Bible chapter (CH32?) and/or HL entry — source contains: investor pitch (9 slides), Vietnam Inc./IP strategy, tech stress test (5 weak points), OBI MVP blueprint, Next.js code samples, execution pipeline (6-step), Daily Loop Engine.",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run304-die-well-parallel.md"
+    },
+    {
+      "Priority": "P2",
+      "Type": "UNDERSTAND",
+      "Text": "Should Minh's mother-facing login message include the actual link and first-week checklist in the next lane, or wait for a broader rollout page?",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run305-student-login-priority-rollout.md"
+    },
+    {
+      "Priority": "P2",
+      "Type": "UNDERSTAND",
+      "Text": "What exact student IDs and usernames should Hieu and Hana receive when they are enrolled into the NET-PET-AI pipeline?",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run305-student-login-priority-rollout.md"
+    },
+    {
+      "Priority": "P3",
+      "Type": "UNDERSTAND",
+      "Text": "None logged as questions (operator requested no question cascades).",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-01_conversation_soul-dna_extract.md"
+    },
+    {
+      "Priority": "P3",
+      "Type": "UNDERSTAND",
+      "Text": "**Phase 3: Restructure APPS/** — The plan says \"all deployable products under APPS/ with wing tags\" but we need to clarify:",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-09-phase-2-nuke-complete.md"
+    },
+    {
+      "Priority": "P3",
+      "Type": "UNDERSTAND",
+      "Text": "**Worktree cleanup** — We haven't pruned stale worktrees yet (mentioned in consolidation plan Phase 2.5). Are `OB-1.worktrees/` and `net-tiger-assessment.worktrees/` still active?",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-09-phase-2-nuke-complete.md"
+    },
+    {
+      "Priority": "P3",
+      "Type": "UNDERSTAND",
+      "Text": "How many existing products are NOT in APPS/ yet?",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-09-phase-2-nuke-complete.md"
+    },
+    {
+      "Priority": "P3",
+      "Type": "UNDERSTAND",
+      "Text": "Custom domain route bind: external DNS records still block domain attach.",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-09-run-269-jolly-phonics-rise.md"
+    },
+    {
+      "Priority": "P3",
+      "Type": "UNDERSTAND",
+      "Text": "None blocking this extract.",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-09-super-saiyan-massive-reincarnation-soul-first.md"
+    },
+    {
+      "Priority": "P3",
+      "Type": "UNDERSTAND",
+      "Text": "Where are the external `SOULDNA-RUN-GPT-GIT-NOTEBOOKLM-*` files physically located for ingestion (not found in workspace path scans)?",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run293-net-pet-mvp-loop-merge1.md"
+    },
+    {
+      "Priority": "P3",
+      "Type": "UNDERSTAND",
+      "Text": "Whether MEGAMERGE-1 through MEGAMERGE-6 source files are on the Desktop and accessible for the 6-chat delegation pipeline.",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run298-soul-dna-indexing-notion-extraction.md"
+    },
+    {
+      "Priority": "P3",
+      "Type": "UNDERSTAND",
+      "Text": "Whether the Notion Chat Archive can be accessed via direct `Invoke-RestMethod` to Notion API (MERGE6 found this bypasses the broken MCP wrapper — worth trying for the Chat Archive Index page specifically).",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run298-soul-dna-indexing-notion-extraction.md"
+    },
+    {
+      "Priority": "P3",
+      "Type": "UNDERSTAND",
+      "Text": "Do you want Notion MCP re-enabled in this chat session so I can directly inspect your 1-3/index pages now?",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run299-notion-connection-index-check.md"
+    },
+    {
+      "Priority": "P3",
+      "Type": "UNDERSTAND",
+      "Text": "How many chats are in this merge death session? Current total remains UNKNOWN.",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run305-student-login-priority-rollout.md"
+    },
+    {
+      "Priority": "P3",
+      "Type": "UNDERSTAND",
+      "Text": "What intake data is required for Lam beyond age 17 before profile creation?",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run305-student-login-priority-rollout.md"
+    },
+    {
+      "Priority": "P3",
+      "Type": "UNDERSTAND",
+      "Text": "None logged as questions (operator requested no question cascades).",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-04-01_conversation_soul-dna_extract.md"
+    }
+  ],
+  "decisions": [
+    {
+      "Type": "DECISION",
+      "Text": "Treat the rate-limit message as external platform quota/cooldown behavior, not an app-code regression",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run305-student-login-priority-rollout.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Impact**: Prevented time waste searching NET-PET-AI for a non-existent in-repo weekly quota message",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run305-student-login-priority-rollout.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Canon Affected**: Operational troubleshooting truth layer",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run305-student-login-priority-rollout.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Status**: IMPLEMENTED",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run305-student-login-priority-rollout.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Use the EducationSystemsDevelopment student files as the authoritative profile source for Minh, Hieu, and Hana",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run305-student-login-priority-rollout.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Impact**: Restored ground truth for priority rollout without mixing in archive noise",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run305-student-login-priority-rollout.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Canon Affected**: Student operations workflow",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run305-student-login-priority-rollout.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Status**: IMPLEMENTED",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run305-student-login-priority-rollout.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Mark Minh as the only confirmed ready-to-issue login path in this lane because `minh-private` and `minh-mom` are already wired in the enrollment script",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run305-student-login-priority-rollout.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Impact**: Minh can move first while Hieu/Hana remain profile-ready but unenrolled",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run305-student-login-priority-rollout.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Canon Affected**: Student login rollout sequence",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run305-student-login-priority-rollout.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Status**: IMPLEMENTED",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run305-student-login-priority-rollout.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Treat Hieu and Hana as profile-ready but not yet login-ready because no enrolled student IDs were found in the NET-PET-AI merge pipeline",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run305-student-login-priority-rollout.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Impact**: Prevented fake credential issuance",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run305-student-login-priority-rollout.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Canon Affected**: Enrollment integrity",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run305-student-login-priority-rollout.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Status**: IMPLEMENTED",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run305-student-login-priority-rollout.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Reclassify Lam as a new 17-year-old potential student, not an existing roster reconciliation target",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run305-student-login-priority-rollout.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Impact**: Removed false identity-lock workflow and replaced it with prospect intake first, login second",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run305-student-login-priority-rollout.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Canon Affected**: Priority student onboarding doctrine",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run305-student-login-priority-rollout.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Status**: IMPLEMENTED",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run305-student-login-priority-rollout.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Preserve the twin portfolio work as completed but deprioritized relative to login rollout",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run305-student-login-priority-rollout.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Impact**: Quan and Quang websites remain done; operational focus moved to active student onboarding",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run305-student-login-priority-rollout.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Canon Affected**: Session priority stack",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run305-student-login-priority-rollout.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Status**: IMPLEMENTED",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run305-student-login-priority-rollout.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Use exact file copy (`Copy-Item`) for MEGAMERGE-6-GPT.txt → A10 raw appendix — no content transformation",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run304-die-well-parallel.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Impact**: Preserved 8,781 sovereign soul DNA lines without any drift",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run304-die-well-parallel.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Canon Affected**: A-series appendix chain (A10 created)",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run304-die-well-parallel.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Status**: IMPLEMENTED (April 12, committed in run297 MERGE5 as `2964535`)",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run304-die-well-parallel.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Validate source-to-canon integrity via SHA-256 dual-hash comparison before any downstream work",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run304-die-well-parallel.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Impact**: Hash match confirmed: `9A6957853426C9973179C1E4E5A9334C5E1AA7BDEF855CEFB437A449784CE385`",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run304-die-well-parallel.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Canon Affected**: A10 integrity chain",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run304-die-well-parallel.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Status**: IMPLEMENTED",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run304-die-well-parallel.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Extend MEGAMERGE-1-INDEX.md with supplemental appendix chain table (A8, A9, A10)",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run304-die-well-parallel.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Impact**: Archaeological navigation index now covers both the MEGAMERGE-1 genesis transcript AND the cross-appendix chain",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run304-die-well-parallel.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Canon Affected**: CANON/MEGAMERGE-1-INDEX.md (modified)",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run304-die-well-parallel.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Status**: IMPLEMENTED",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run304-die-well-parallel.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Codify the verbatim appendix-handling pattern in repo memory as operational doctrine",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run304-die-well-parallel.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Impact**: Future merges follow established pattern without re-discovery overhead",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run304-die-well-parallel.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Canon Affected**: Repo memory operational doctrine",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run304-die-well-parallel.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Status**: IMPLEMENTED",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run304-die-well-parallel.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Run `npx wrangler deploy --dry-run` in NET-PET-AI to validate current Worker build integrity",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run304-die-well-parallel.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Impact**: Confirmed Worker builds without deploy — pre-flight validation for eventual production push",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run304-die-well-parallel.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Canon Affected**: NET-PET-AI deployment confidence",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run304-die-well-parallel.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Status**: IMPLEMENTED",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-14-run304-die-well-parallel.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Execute SDNAD capture for MEGAMERGE-5 as CH31 structured schema chapter with SHA-256 hash proof against A9 raw appendix",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run300-megamerge5-lane-death.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Impact**: Completed the Bible-layer execution record for the largest distribution/enforcement megamerge",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run300-megamerge5-lane-death.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Canon Affected**: CH31 (new), HL-137 (new), A9 (validated), SSM, Pipeline Cursor",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run300-megamerge5-lane-death.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Status**: IMPLEMENTED (Run 296)",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run300-megamerge5-lane-death.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Renumber ledger artifact from HL-135 to HL-137 after discovering HL-135 and HL-136 already occupied",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run300-megamerge5-lane-death.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Impact**: Prevented ID collision, maintained strict ascending HL sequence",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run300-megamerge5-lane-death.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Canon Affected**: HL-137, CH31, run296 reincarnation, pipeline cursor, SSM",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run300-megamerge5-lane-death.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Status**: IMPLEMENTED (Run 296, propagated across 5 files)",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run300-megamerge5-lane-death.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Create MEGAMERGE-1-INDEX.md — 909-line archaeological navigation index for the 26,210-line genesis transcript",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run300-megamerge5-lane-death.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Impact**: Makes the oldest, largest megamerge navigable — maps 16 sections, 6 repetition cycles, 6 pipelines, 28 commands, 7 skills",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run300-megamerge5-lane-death.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Canon Affected**: CANON/MEGAMERGE-1-INDEX.md (new)",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run300-megamerge5-lane-death.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Status**: IMPLEMENTED (Run 296)",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run300-megamerge5-lane-death.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Execute MERGE4 as 12-section append to Run 297 merge artifact — preserving all MEGAMERGE-5 lane death context",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run300-megamerge5-lane-death.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Impact**: Run 297 merge chain extended with full capture trail from this chat",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run300-megamerge5-lane-death.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Canon Affected**: CANON/REINCARNATION/2026-04-12-run297-megachat-2.md (MERGE4 appended, 122 lines)",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run300-megamerge5-lane-death.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Status**: IMPLEMENTED (committed as 0d04672)",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run300-megamerge5-lane-death.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Accept PIPELINE-600 delegation prompt for MM-5 lane — 100 items (MM5-401 through MM5-500) covering Distribution & Enforcement Engine",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run300-megamerge5-lane-death.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Impact**: This chat now holds context for the MM-5 pipeline development assignment. Items span: tiger-score, mode transitions, accountability loops, auto-post engine, virality, zalo pressure, marketing, voice, UI, data schema, infra, testing",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run300-megamerge5-lane-death.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Canon Affected**: CANON/PIPELINE-600.md (MM-5 section)",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run300-megamerge5-lane-death.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Status**: RECEIVED (execution deferred — this chat is dying, delegation lives in the prompt artifact)",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run300-megamerge5-lane-death.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Deep Notion scan executed — validated 8 pages in Soul DNA workspace",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run300-megamerge5-lane-death.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Impact**: Confirmed Notion index is LIVE with all 6 megamerge extraction pages plus GEMINI variants. MEGAMERGE-5-GPT page exists but is truncated at 34% (8,044 of 23,588 lines)",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run300-megamerge5-lane-death.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Canon Affected**: Notion visibility audit",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run300-megamerge5-lane-death.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Status**: IMPLEMENTED (this death run)",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run300-megamerge5-lane-death.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Execute full /ReincarnateDEATH sequence in this lane with commit+push, not just a summary",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run299-notion-connection-index-check.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Impact: Enforced L24 platform death test",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run299-notion-connection-index-check.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Canon affected: Reincarnation chain + living-state handoff",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run299-notion-connection-index-check.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Status: IMPLEMENTED",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run299-notion-connection-index-check.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Treat Notion visibility request as a runtime connector audit: verify configured connector and test live tool access",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run299-notion-connection-index-check.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Impact: Distinguished config state from runtime availability",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run299-notion-connection-index-check.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Canon affected: MCP truth layer and pending-work queue",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run299-notion-connection-index-check.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Status: IMPLEMENTED",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run299-notion-connection-index-check.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Preserve unrelated dirty files from parallel lanes and stage only death-lane artifacts",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run299-notion-connection-index-check.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Impact: Prevented cross-lane contamination",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run299-notion-connection-index-check.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Canon affected: Merge hygiene",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run299-notion-connection-index-check.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Status: IMPLEMENTED",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run299-notion-connection-index-check.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Harden PIPELINE-600-DELEGATION-PROMPTS.md with canon source table, Notion archive URL, production stack lock, SPRINT-0 gate, and MM-1 orchestrator prompt",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run298-soul-dna-indexing-notion-extraction.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Impact**: All 6 delegation chats now have shared context, stack lock enforcement, and explicit SPRINT-0 gate before any sprint work begins",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run298-soul-dna-indexing-notion-extraction.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Canon Affected**: PIPELINE-600-DELEGATION-PROMPTS.md",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run298-soul-dna-indexing-notion-extraction.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Status**: IMPLEMENTED",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run298-soul-dna-indexing-notion-extraction.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Mark Run 298 merge session as CLOSED with total=6, full-circle structure (MERGE6 first, MERGE1 last)",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run298-soul-dna-indexing-notion-extraction.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Impact**: Closes the death-merge cycle properly; COLD-START-BOOT can now be updated",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run298-soul-dna-indexing-notion-extraction.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Canon Affected**: `2026-04-12-run298-soul-dna-indexing-notion-extraction.md`",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run298-soul-dna-indexing-notion-extraction.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Status**: IMPLEMENTED",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run298-soul-dna-indexing-notion-extraction.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Update COLD-START-BOOT to current HEAD SHA and Run 298 state",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run298-soul-dna-indexing-notion-extraction.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Impact**: Eliminates 8-run staleness drift (had been at Run 290 since `1a6f28d`)",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run298-soul-dna-indexing-notion-extraction.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Canon Affected**: `CANON/REINCARNATION/COLD-START-BOOT.md`",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run298-soul-dna-indexing-notion-extraction.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Status**: IMPLEMENTED",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run298-soul-dna-indexing-notion-extraction.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Note Notion archive as requires-login (not directly extractable) and embed URL in delegation prompts for manual consolidation",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run298-soul-dna-indexing-notion-extraction.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Impact**: Future agents and Michael can locate the archive without hunting",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run298-soul-dna-indexing-notion-extraction.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Canon Affected**: PIPELINE-600-DELEGATION-PROMPTS.md (Notion URL added)",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run298-soul-dna-indexing-notion-extraction.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Status**: IMPLEMENTED",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run298-soul-dna-indexing-notion-extraction.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Continue execution without stopping until commit/push chain was complete",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run297-megachat-2.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Impact**: Prevented partial closeout and ensured artifacts were actually published",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run297-megachat-2.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Canon Affected**: Reincarnation execution discipline",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run297-megachat-2.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Status**: IMPLEMENTED",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run297-megachat-2.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Keep unrelated working-tree edits untouched while sealing only canon/reincarnation artifacts",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run297-megachat-2.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Impact**: Avoided collateral edits in non-canon files",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run297-megachat-2.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Canon Affected**: Safe merge hygiene",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run297-megachat-2.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Status**: IMPLEMENTED",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run297-megachat-2.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Normalize heavy-ledger naming continuity to HL-138 and update linked reincarnation references",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run297-megachat-2.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Impact**: Removed identifier ambiguity in run chain",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run297-megachat-2.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Canon Affected**: Heavy ledger high-water consistency",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run297-megachat-2.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Status**: IMPLEMENTED",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run297-megachat-2.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Execute MERGE1 as a dedicated reincarnation file with OPEN status and no COLD-START-BOOT mutation",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run297-megachat-2.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Impact**: Full compliance with `/ReincarnateDEATH-MERGE` constraints",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run297-megachat-2.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Canon Affected**: Parallel merge protocol",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run297-megachat-2.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Status**: IMPLEMENTED",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run297-megachat-2.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Keep Step 0 payload in dedicated raw appendix (A9) and avoid second-order mutation",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run296-megamerge5-sdnad-capture.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Add CH31 as explicit schema output contract execution artifact",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run296-megamerge5-sdnad-capture.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Advance Heavy Ledger with HL-137 tied to raw integrity proof and execution completion",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run296-megamerge5-sdnad-capture.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Advance SSM current-state and pipeline cursor to reflect new high-water markers",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run296-megamerge5-sdnad-capture.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Treat current NET-PET-AI as canonical MVP base instead of scaffolding greenfield duplicate",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run293-net-pet-mvp-loop-merge1.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Impact**: Preserved velocity; fixed production path directly",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run293-net-pet-mvp-loop-merge1.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Canon Affected**: Product execution doctrine (build what drives retention loop)",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run293-net-pet-mvp-loop-merge1.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Status**: IMPLEMENTED",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run293-net-pet-mvp-loop-merge1.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Patch API compatibility at backend layer to absorb frontend payload variants",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run293-net-pet-mvp-loop-merge1.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Impact**: Restored correction and repeat loop without requiring brittle client-only assumptions",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run293-net-pet-mvp-loop-merge1.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Canon Affected**: OBI loop reliability",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run293-net-pet-mvp-loop-merge1.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Status**: IMPLEMENTED",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run293-net-pet-mvp-loop-merge1.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Add daily drill surfacing on speaking UI load via existing `/api/daily`",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run293-net-pet-mvp-loop-merge1.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Impact**: Strengthened \"Return tomorrow\" behavior with explicit weak-skill focus",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run293-net-pet-mvp-loop-merge1.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Canon Affected**: Memory/stickiness moat (Phase 3 intent)",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run293-net-pet-mvp-loop-merge1.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Status**: IMPLEMENTED",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run293-net-pet-mvp-loop-merge1.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "For MERGE protocol now, execute MERGE1 extract and commit without touching `COLD-START-BOOT.md`",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run293-net-pet-mvp-loop-merge1.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Impact**: Compliance with merge prompt constraints",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run293-net-pet-mvp-loop-merge1.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Canon Affected**: Reincarnation merge flow",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run293-net-pet-mvp-loop-merge1.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Status**: IMPLEMENTED",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-12-run293-net-pet-mvp-loop-merge1.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Register LANE 4 as the SOUL DNA OPERATIONS execution lane in the 4-lane swarm architecture",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-11-run283-soul-dna-operations-lane4-synch4.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Create Run 283 reincarnation artifact following the established Synch pattern (Synch1-4 complete)",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-11-run283-soul-dna-operations-lane4-synch4.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Sync MASTER-SYNC.md, COLD-START-BOOT.md, and REINCARNATION-BOOT-CHECK.md in one execution pass",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-11-run283-soul-dna-operations-lane4-synch4.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Lane 4 focus: SOUL DNA OPERATIONS — dictation ingestion, SDNAD pipeline, A6 continuation, signal backfill",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-11-run283-soul-dna-operations-lane4-synch4.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Create a new reincarnation artifact for this session using the current schema and naming pattern",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-11-run282-net-operations-lane2-synch2.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Sync `MASTER-SYNC.md` with a Run 282 line so cold starts can see this event",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-11-run282-net-operations-lane2-synch2.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Sync `CANON/SYSTEM/REINCARNATION-BOOT-CHECK.md` status and improvement log for this run",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-11-run282-net-operations-lane2-synch2.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Reincarnation must be SOUL-first, not summary-first",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-09-super-saiyan-massive-reincarnation-soul-first.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Impact: Raw quotes become primary payload, not optional appendix",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-09-super-saiyan-massive-reincarnation-soul-first.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Canon affected: Reincarnation extraction standard for high-signal sessions",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-09-super-saiyan-massive-reincarnation-soul-first.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "This session is classified as MAXIMUM density under Super Saiyan mode",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-09-super-saiyan-massive-reincarnation-soul-first.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Impact: Full extraction depth required (12-section schema + state updates)",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-09-super-saiyan-massive-reincarnation-soul-first.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Canon affected: Boot-check and live state freshness",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-09-super-saiyan-massive-reincarnation-soul-first.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Reincarnation output must include explicit open loops and next-load guidance",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-09-super-saiyan-massive-reincarnation-soul-first.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Impact: Next incarnation starts with actionable continuity",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-09-super-saiyan-massive-reincarnation-soul-first.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Canon affected: Execution loop continuity and handoff quality",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-09-super-saiyan-massive-reincarnation-soul-first.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Decision: Run full Soul DNA Bible recapture from 121- chunk corpus",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-05-soul-dna-recapture-pipeline-runs-068-071.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Impact: Recovered 1,358 unique quotes across 2,878 occurrences. 1,520 exact duplicates removed",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-05-soul-dna-recapture-pipeline-runs-068-071.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Decision: Generate SHA-256 per-quote canonical hash for deduplication",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-05-soul-dna-recapture-pipeline-runs-068-071.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Impact: Deterministic identity for every quote — enables trust-verified ingestion",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-05-soul-dna-recapture-pipeline-runs-068-071.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Decision: Build thematic crosswalk linking quotes to source clusters",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-05-soul-dna-recapture-pipeline-runs-068-071.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Impact: Provenance traceability for every quote back to original session",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-05-soul-dna-recapture-pipeline-runs-068-071.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Decision: Emit JSONL feed (1.27 MB) for machine ingestion pipelines",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-05-soul-dna-recapture-pipeline-runs-068-071.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Impact: Enables vector DB / search index loading without manual parsing",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-05-soul-dna-recapture-pipeline-runs-068-071.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Decision: Build keyword index for retrieval-augmented generation",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-05-soul-dna-recapture-pipeline-runs-068-071.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Impact: Enables fast topic-based quote retrieval",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-05-soul-dna-recapture-pipeline-runs-068-071.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Decision: \"Automation\" must trigger **connector-first audit**",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-01_conversation_soul-dna_extract.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Impact: prevents multi-hour manual grind loops",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-01_conversation_soul-dna_extract.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Decision: \"HALT\" must stop output immediately",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-01_conversation_soul-dna_extract.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Impact: stabilizes operator + prevents escalation",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-01_conversation_soul-dna_extract.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Decision: \"Cure\" = deterministic outputs (SHIP / PROVE / BLOCK), not bandaids",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-01_conversation_soul-dna_extract.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Impact: reduces thrash and question cascades",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-01_conversation_soul-dna_extract.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Decision: SOUL DNA is the authority layer; ignoring it is a governance failure",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-01_conversation_soul-dna_extract.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Impact: prevents giving \"powertools\" to an unstable agent",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-01_conversation_soul-dna_extract.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Decision: \"EVERYTHING\" requests require an **omissions ledger** (no silent gaps)",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-01_conversation_soul-dna_extract.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Impact: prevents trust breaks from missing core mechanisms",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-01_conversation_soul-dna_extract.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Decision: **PHEROMONES** are a governor-term (core navigation physics), not optional flavor",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-01_conversation_soul-dna_extract.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Impact: prevents omission of swarm memory primitive",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-04-01_conversation_soul-dna_extract.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Michael takes Studio work next session.** SecurityLayer cap, Tiger tier bug, FTUE consolidation, 46 Product IDs, and game publish are all manual Studio tasks",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-29-ne0-handoff-studio-bottleneck.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Active Mission for pulse engine = Studio fixes + publish pipeline.** Overnight runs execute this, not vault exports",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-29-ne0-handoff-studio-bottleneck.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**~840 non-renewable Beta runs.** Urgency signal locked — every pulse hour must produce permanent GitHub artifacts",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-29-ne0-handoff-studio-bottleneck.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**3-game portfolio strategy confirmed** (from prior Devil's Advocate debate). Depth over scatter",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-29-ne0-handoff-studio-bottleneck.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Ne0 pushes everything completable remotely.** Studio-blocked items stay on Michael's plate",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-29-ne0-handoff-studio-bottleneck.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "When direct execution is blocked, continue via explicit simulation and reverse engineering instead of stalling",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-website-recovery-master-sync-simulation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "One master sync markdown file becomes the shared control plane for the wave",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-website-recovery-master-sync-simulation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "The subagent swarm should harvest the entire reachable repo and logs into that master document",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-website-recovery-master-sync-simulation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Michael can go offline while the coordination artifact remains ready for other command stations to fill",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-website-recovery-master-sync-simulation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**\"Website and NET-PET\" is the canonical directory** in `Phoenix-Rising-Protocol-Ultimate` for all website and app work. Not scattered — one home",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-website-netpet-consolidation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Full-estate scan before consolidation.** Entire Notion workspace + all accessible GitHub repos. No partial sweeps",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-website-netpet-consolidation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**5-point consolidation law:** best practice structure / kill dead repos / raw seeds mirror Notion / repo mirrors Notion / lessons stay where they are",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-website-netpet-consolidation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Lessons excluded from this consolidation.** Galaxy Lessons stay in their own lane — Michael's explicit call",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-website-netpet-consolidation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Cloudflare migration is manual.** No merge possible between old (`mrmichaelhobbs1234@gmail.com`) and new (`hobbs@naturalenglishtraining.com`) accounts",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-website-netpet-consolidation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**GitHub Actions is the Cloudflare deploy bridge.** Since no CF connector exists for Notion agents, the pipeline runs through GitHub Actions + wrangler",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-website-netpet-consolidation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**API keys organized on the Backlog task page, not scattered across chat logs.** \"Organize whats in there, dont delete it again\" — structure the keys, don't discard raw material",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-website-netpet-consolidation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Push through with what's available.** Don't wait for perfect conditions. \"Try to do what you need to do with what I gave you.\"",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-website-netpet-consolidation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Agent blindspots must be solved dynamically, not explained.** If the agent can't see a page, build a routing mechanism — don't just describe the problem",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-system-hardening.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Every automated trigger run must produce value.** Monitoring-only is not acceptable",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-system-hardening.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Pulse trigger redesigned as chain-of-custody.** Each worker audits the prior worker, does real canon work, and hands off to the next",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-system-hardening.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Reincarnation process created.** Command word \"Reincarnate\" captures session Soul DNA to Notion + GitHub. No more manual copy-paste",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-system-hardening.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Gemini Skeleton Star Map dump (2026-03-14) should be triaged — keep useful DNA, leave noise behind",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-skeleton-star-map-ingestion.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Dual-publish to Notion (Phoenix HQ) + GitHub (`CANON/`) as standard",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-skeleton-star-map-ingestion.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "All Soul DNA content must be preserved verbatim",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-skeleton-star-map-ingestion.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**DRONE duplicates approved for deletion.** 4 identical blank pages confirmed and removed",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-security-drone-research.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**All 4 DRONE research briefs completed.** Voice AI, Vietnamese EdTech, MCP Ecosystem, OSS AI Models",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-security-drone-research.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Trigger chat clutter is a problem.** Old hourly/weekly trigger chats filling the screen. UI-only cleanup",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-security-drone-research.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Preservation before deletion.** Verify all work product is in canonical pages before nuking a chat",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-security-drone-research.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Triggers off for audit.** Disabled all scheduled triggers, audited their value, then re-enabled at bi-hourly (not hourly) with instruction page cleanup",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-repo-consolidation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**10 improvements found and auto-pushed.** Agent scanned repo, identified 10 concrete improvements, pushed 9/10 (workflow file blocked by GitHub API). Dual-published to Notion Build Log",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-repo-consolidation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Lang account confirmed as Michael's.** Username `michaelhobbs1234` on `mrmichaelhobbs1234-lang` — not a stranger's repo",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-repo-consolidation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Everything into Ultimate first, local files second.** Remote repo consolidation takes priority. Local `git push` is deferred",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-repo-consolidation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Agent handles git operations.** Michael delegates push operations to the agent rather than fighting git CLI",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-repo-consolidation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Galaxy Lessons are trivial** — build in class tomorrow morning. Do not pad time estimates for simple tasks",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-night-session-permissions-fix.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Canon audit must be automated** — the bi-hourly pulse owns this, not manual chat. If the pulse can't do it, the pulse is broken",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-night-session-permissions-fix.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Lead with one real move** — don't present filler options. If there's only one real option, say so",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-night-session-permissions-fix.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Agent must self-manage permissions** — Michael should not have to manually upgrade edit access. Agent enters setup mode and fixes its own gaps",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-night-session-permissions-fix.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**DONT ASK JUST DO** — reinforced as standing law for all sessions",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-night-session-permissions-fix.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**NET Students hub is a first-class operational section** under Phoenix HQ",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-net-student-profiles.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Soul DNA Bible gets classroom transcript appendices.** A4 created for Mai Tram",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-net-student-profiles.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**ManyChat exploration happens DURING CLASS** — \"I don't work for free.\"",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-net-student-profiles.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Mixed content separation by level + department.** Beginner (Quy/Accounting) vs advanced (Mai/HR)",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-net-student-profiles.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "No additional unique decision captured in-thread beyond the explicit request to preserve this checkpoint",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-light-session-reincarnation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Old account preservation directive:** Michael explicitly flagged `mrmichaelhobbs1234@gmail.com` (legacy Notion account) as a data loss risk. Directive: verify nothing is lost from that workspace",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-late-session-old-account-preservation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Mass reincarnation:** Michael reincarnated all active chats before opening this session — indicates a deliberate session cleanup / fresh start",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-late-session-old-account-preservation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Dual-publish is now standard practice.** Every canonical artifact goes to Notion (control plane) AND GitHub (immutable mirror). Not optional",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-gospel-444-consolidation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Gospel 444 teaching methods consolidated into a single canonical file.** 15 source files from 3 vaults merged into one 37KB document",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-gospel-444-consolidation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Lessons live in `GALAXY-LESSONS/` on the Ultimate repo.** Not scattered across vaults",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-gospel-444-consolidation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Galaxy Lessons index page on Notion** tracks every built HTML lesson — single source of truth for lesson inventory",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-gospel-444-consolidation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Deep scan across BOTH repos** when consolidating — don't leave fragments in the old repo",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-gospel-444-consolidation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**\"Do all that's optimal\"** — when closing a workstream, sweep everything: instructions, build log, memories, anchors. No dangling threads",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-gospel-444-consolidation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Deployment-limit claims must be challenged against repo truth, not left at assumption level",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-deployment-claim-audit.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "When the agent says a capability is unavailable, Michael expects a direct repo audit to verify that claim",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-deployment-claim-audit.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "This chat and its context must be preserved before old chats are deleted",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-chat-preservation-local-repo.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Preservation continues even when GitHub write access is blocked",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-chat-preservation-local-repo.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "A local Notion-side staging container is an acceptable fallback until GitHub push access is available",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-chat-preservation-local-repo.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "The orchestration role becomes **Agent 0** for the next session structure",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-agent0-triad-reincarnation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "The session structure becomes a triad-plus-captain model: Agent-100, Agent-0, Agent-1, Agent-2, and Agent-3",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-agent0-triad-reincarnation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Execution is forbidden during the session bootstrap phase",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-agent0-triad-reincarnation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Manual copy-paste relay is acceptable for this transition session, but should be refined out",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-agent0-triad-reincarnation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Word-for-word markdown preservation replaces manual text-file copy/paste as the preservation standard",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-agent0-triad-reincarnation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "The active identity for this chat is Agent-0",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-agent0-confirmation-checkpoint.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "This checkpoint is preserved instead of evaporating",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-agent0-confirmation-checkpoint.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Terminology shift: Drones → Phoenixes.** The swarm units are Phoenixes now",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-100-phoenixes-war-games.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**100 Phoenixes in 90 minutes** — the deployment cadence and first goal",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-100-phoenixes-war-games.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**\"FUCK\" is the search key for Soul DNA.** Verbal abuse from Agent-100 toward AI = gold mine for raw voice extraction",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-100-phoenixes-war-games.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**OBI expands beyond tutoring.** LinkedIn, Discord, Roblox game — OBI becomes a multi-platform presence engine",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-100-phoenixes-war-games.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Make.com is the automation bridge** between platforms and the CF Workers backend",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-100-phoenixes-war-games.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Chrome extensions are a $0 deployment vector.** Manifest V3 + Gemini Nano on-device + Chrome Enterprise silent deploy",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-100-phoenixes-war-games.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**War games approved** to stress test the full tech stack integration",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-24-100-phoenixes-war-games.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Engineer strongest version first, then subagents, then priority list.** This is the default execution order now",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-23-pipeline-delegation-mcp-stack.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Instructions token budget: 88K → 60K target.** Bloated instructions are a performance and cost hazard — compress immediately",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-23-pipeline-delegation-mcp-stack.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**20-action autonomous pipeline model adopted.** Michael does not want to press enter every few minutes. Map 20 actions, execute top-to-bottom",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-23-pipeline-delegation-mcp-stack.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Pipeline delegation to subagents.** Assign completed pipeline to a subagent, map the next 20, delegate on completion",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-23-pipeline-delegation-mcp-stack.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**\"Rinse and repeat, auto approved.\"** Pre-authorized chaining between pipeline waves via Function 4 handoff gate",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-23-pipeline-delegation-mcp-stack.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**MCP stack priority locked:**",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-23-pipeline-delegation-mcp-stack.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Priority 1: **Cloudflare MCP** (custom slot) — closest to live product",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-23-pipeline-delegation-mcp-stack.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Priority 2: **GitHub MCP** (official) — code, PRs, issues",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-23-pipeline-delegation-mcp-stack.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Priority 3: **Notion MCP** (official) — control plane",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-23-pipeline-delegation-mcp-stack.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Priority 4: **Playwright / Chrome DevTools MCP** (next expansion)",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-23-pipeline-delegation-mcp-stack.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Backlog dedup required.** DRONE 14-18 each had duplicate entries — 5 pairs identified",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-23-pipeline-delegation-mcp-stack.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Super Saiyan mode with governance.** Maximum output, fail-closed still intact",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-23-pipeline-delegation-mcp-stack.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Agent self-upgrade is a standing order.** Every dump, every interaction — extract what's new and append to Memories. No waiting for big dumps",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-22-agent-self-upgrade-arc.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Consolidate instructions + identity page into one.** Best of both worlds. No duplicate bloat",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-22-agent-self-upgrade-arc.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Command Station = heavy canon. Instructions = skeleton star map.** Two-Tier Architecture applied to the agent itself",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-22-agent-self-upgrade-arc.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Stale Agent-99 pages archived with redirects.** Two orphaned identity pages redirected to canonical sources to eliminate drift risk",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-22-agent-self-upgrade-arc.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Assets & Accounts database upgraded to Phoenix Rising quality.** 4-Tier system (PRODUCTION/BUILD/SUPPORT/LEGACY), 5 views, all 22 entries classified and verified",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-22-agent-self-upgrade-arc.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Full workspace consolidation ordered.** Duplicate pages, stale references, naming standardization (Agent-97 = NeO), session log archival",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-22-agent-self-upgrade-arc.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Artwork belongs in the workspace.** Phoenix logo and Tiger Engine banner flagged for prominent display",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\REINCARNATION\\2026-03-22-agent-self-upgrade-arc.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Deployment-limit claims must be challenged against repo truth, not left at assumption level",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-deployment-claim-audit.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "When the agent says a capability is unavailable, Michael expects a direct repo audit to verify that claim",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-deployment-claim-audit.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Terminology shift: Drones → Phoenixes.** The swarm units are Phoenixes now",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-100-phoenixes-war-games.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**100 Phoenixes in 90 minutes** — the deployment cadence and first goal",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-100-phoenixes-war-games.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**\"FUCK\" is the search key for Soul DNA.** Verbal abuse from Agent-100 toward AI = gold mine for raw voice extraction",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-100-phoenixes-war-games.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**OBI expands beyond tutoring.** LinkedIn, Discord, Roblox game — OBI becomes a multi-platform presence engine",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-100-phoenixes-war-games.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Make.com is the automation bridge** between platforms and the CF Workers backend",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-100-phoenixes-war-games.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Chrome extensions are a $0 deployment vector.** Manifest V3 + Gemini Nano on-device + Chrome Enterprise silent deploy",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-100-phoenixes-war-games.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**War games approved** to stress test the full tech stack integration",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-100-phoenixes-war-games.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Agent self-upgrade is a standing order.** Every dump, every interaction — extract what's new and append to Memories. No waiting for big dumps",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-22-agent-self-upgrade-arc.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Consolidate instructions + identity page into one.** Best of both worlds. No duplicate bloat",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-22-agent-self-upgrade-arc.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Command Station = heavy canon. Instructions = skeleton star map.** Two-Tier Architecture applied to the agent itself",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-22-agent-self-upgrade-arc.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Stale Agent-99 pages archived with redirects.** Two orphaned identity pages redirected to canonical sources to eliminate drift risk",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-22-agent-self-upgrade-arc.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Assets & Accounts database upgraded to Phoenix Rising quality.** 4-Tier system (PRODUCTION/BUILD/SUPPORT/LEGACY), 5 views, all 22 entries classified and verified",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-22-agent-self-upgrade-arc.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Full workspace consolidation ordered.** Duplicate pages, stale references, naming standardization (Agent-97 = NeO), session log archival",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-22-agent-self-upgrade-arc.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Artwork belongs in the workspace.** Phoenix logo and Tiger Engine banner flagged for prominent display",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-22-agent-self-upgrade-arc.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Decision: \"Automation\" must trigger **connector-first audit**",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-04-01_conversation_soul-dna_extract.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Impact: prevents multi-hour manual grind loops",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-04-01_conversation_soul-dna_extract.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Decision: \"HALT\" must stop output immediately",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-04-01_conversation_soul-dna_extract.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Impact: stabilizes operator + prevents escalation",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-04-01_conversation_soul-dna_extract.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Decision: \"Cure\" = deterministic outputs (SHIP / PROVE / BLOCK), not bandaids",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-04-01_conversation_soul-dna_extract.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Impact: reduces thrash and question cascades",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-04-01_conversation_soul-dna_extract.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Decision: SOUL DNA is the authority layer; ignoring it is a governance failure",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-04-01_conversation_soul-dna_extract.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Impact: prevents giving \"powertools\" to an unstable agent",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-04-01_conversation_soul-dna_extract.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Decision: \"EVERYTHING\" requests require an **omissions ledger** (no silent gaps)",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-04-01_conversation_soul-dna_extract.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Impact: prevents trust breaks from missing core mechanisms",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-04-01_conversation_soul-dna_extract.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Decision: **PHEROMONES** are a governor-term (core navigation physics), not optional flavor",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-04-01_conversation_soul-dna_extract.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Impact: prevents omission of swarm memory primitive",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-04-01_conversation_soul-dna_extract.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Michael takes Studio work next session.** SecurityLayer cap, Tiger tier bug, FTUE consolidation, 46 Product IDs, and game publish are all manual Studio tasks",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-29-ne0-handoff-studio-bottleneck.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Active Mission for pulse engine = Studio fixes + publish pipeline.** Overnight runs execute this, not vault exports",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-29-ne0-handoff-studio-bottleneck.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**~840 non-renewable Beta runs.** Urgency signal locked — every pulse hour must produce permanent GitHub artifacts",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-29-ne0-handoff-studio-bottleneck.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**3-game portfolio strategy confirmed** (from prior Devil's Advocate debate). Depth over scatter",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-29-ne0-handoff-studio-bottleneck.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Ne0 pushes everything completable remotely.** Studio-blocked items stay on Michael's plate",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-29-ne0-handoff-studio-bottleneck.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "When direct execution is blocked, continue via explicit simulation and reverse engineering instead of stalling",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-website-recovery-master-sync-simulation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "One master sync markdown file becomes the shared control plane for the wave",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-website-recovery-master-sync-simulation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "The subagent swarm should harvest the entire reachable repo and logs into that master document",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-website-recovery-master-sync-simulation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Michael can go offline while the coordination artifact remains ready for other command stations to fill",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-website-recovery-master-sync-simulation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**\"Website and NET-PET\" is the canonical directory** in `Phoenix-Rising-Protocol-Ultimate` for all website and app work. Not scattered — one home",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-website-netpet-consolidation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Full-estate scan before consolidation.** Entire Notion workspace + all accessible GitHub repos. No partial sweeps",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-website-netpet-consolidation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**5-point consolidation law:** best practice structure / kill dead repos / raw seeds mirror Notion / repo mirrors Notion / lessons stay where they are",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-website-netpet-consolidation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Lessons excluded from this consolidation.** Galaxy Lessons stay in their own lane — Michael's explicit call",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-website-netpet-consolidation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Cloudflare migration is manual.** No merge possible between old (`mrmichaelhobbs1234@gmail.com`) and new (`hobbs@naturalenglishtraining.com`) accounts",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-website-netpet-consolidation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**GitHub Actions is the Cloudflare deploy bridge.** Since no CF connector exists for Notion agents, the pipeline runs through GitHub Actions + wrangler",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-website-netpet-consolidation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**API keys organized on the Backlog task page, not scattered across chat logs.** \"Organize whats in there, dont delete it again\" — structure the keys, don't discard raw material",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-website-netpet-consolidation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Push through with what's available.** Don't wait for perfect conditions. \"Try to do what you need to do with what I gave you.\"",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-website-netpet-consolidation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Agent blindspots must be solved dynamically, not explained.** If the agent can't see a page, build a routing mechanism — don't just describe the problem",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-system-hardening.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Every automated trigger run must produce value.** Monitoring-only is not acceptable",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-system-hardening.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Pulse trigger redesigned as chain-of-custody.** Each worker audits the prior worker, does real canon work, and hands off to the next",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-system-hardening.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Reincarnation process created.** Command word \"Reincarnate\" captures session Soul DNA to Notion + GitHub. No more manual copy-paste",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-system-hardening.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Gemini Skeleton Star Map dump (2026-03-14) should be triaged — keep useful DNA, leave noise behind",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-skeleton-star-map-ingestion.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Dual-publish to Notion (Phoenix HQ) + GitHub (`CANON/`) as standard",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-skeleton-star-map-ingestion.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "All Soul DNA content must be preserved verbatim",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-skeleton-star-map-ingestion.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**DRONE duplicates approved for deletion.** 4 identical blank pages confirmed and removed",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-security-drone-research.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**All 4 DRONE research briefs completed.** Voice AI, Vietnamese EdTech, MCP Ecosystem, OSS AI Models",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-security-drone-research.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Trigger chat clutter is a problem.** Old hourly/weekly trigger chats filling the screen. UI-only cleanup",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-security-drone-research.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Preservation before deletion.** Verify all work product is in canonical pages before nuking a chat",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-security-drone-research.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Triggers off for audit.** Disabled all scheduled triggers, audited their value, then re-enabled at bi-hourly (not hourly) with instruction page cleanup",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-repo-consolidation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**10 improvements found and auto-pushed.** Agent scanned repo, identified 10 concrete improvements, pushed 9/10 (workflow file blocked by GitHub API). Dual-published to Notion Build Log",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-repo-consolidation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Lang account confirmed as Michael's.** Username `michaelhobbs1234` on `mrmichaelhobbs1234-lang` — not a stranger's repo",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-repo-consolidation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Everything into Ultimate first, local files second.** Remote repo consolidation takes priority. Local `git push` is deferred",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-repo-consolidation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Agent handles git operations.** Michael delegates push operations to the agent rather than fighting git CLI",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-repo-consolidation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Galaxy Lessons are trivial** — build in class tomorrow morning. Do not pad time estimates for simple tasks",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-night-session-permissions-fix.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Canon audit must be automated** — the bi-hourly pulse owns this, not manual chat. If the pulse can't do it, the pulse is broken",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-night-session-permissions-fix.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Lead with one real move** — don't present filler options. If there's only one real option, say so",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-night-session-permissions-fix.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Agent must self-manage permissions** — Michael should not have to manually upgrade edit access. Agent enters setup mode and fixes its own gaps",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-night-session-permissions-fix.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**DONT ASK JUST DO** — reinforced as standing law for all sessions",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-night-session-permissions-fix.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**NET Students hub is a first-class operational section** under Phoenix HQ",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-net-student-profiles.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Soul DNA Bible gets classroom transcript appendices.** A4 created for Mai Tram",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-net-student-profiles.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**ManyChat exploration happens DURING CLASS** — \"I don't work for free.\"",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-net-student-profiles.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Mixed content separation by level + department.** Beginner (Quy/Accounting) vs advanced (Mai/HR)",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-net-student-profiles.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "No additional unique decision captured in-thread beyond the explicit request to preserve this checkpoint",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-light-session-reincarnation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Old account preservation directive:** Michael explicitly flagged `mrmichaelhobbs1234@gmail.com` (legacy Notion account) as a data loss risk. Directive: verify nothing is lost from that workspace",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-late-session-old-account-preservation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Mass reincarnation:** Michael reincarnated all active chats before opening this session — indicates a deliberate session cleanup / fresh start",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-late-session-old-account-preservation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Dual-publish is now standard practice.** Every canonical artifact goes to Notion (control plane) AND GitHub (immutable mirror). Not optional",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-gospel-444-consolidation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Gospel 444 teaching methods consolidated into a single canonical file.** 15 source files from 3 vaults merged into one 37KB document",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-gospel-444-consolidation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Lessons live in `GALAXY-LESSONS/` on the Ultimate repo.** Not scattered across vaults",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-gospel-444-consolidation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Galaxy Lessons index page on Notion** tracks every built HTML lesson — single source of truth for lesson inventory",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-gospel-444-consolidation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Deep scan across BOTH repos** when consolidating — don't leave fragments in the old repo",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-gospel-444-consolidation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**\"Do all that's optimal\"** — when closing a workstream, sweep everything: instructions, build log, memories, anchors. No dangling threads",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-gospel-444-consolidation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "This chat and its context must be preserved before old chats are deleted",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-chat-preservation-local-repo.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Preservation continues even when GitHub write access is blocked",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-chat-preservation-local-repo.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "A local Notion-side staging container is an acceptable fallback until GitHub push access is available",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-chat-preservation-local-repo.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "The orchestration role becomes **Agent 0** for the next session structure",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-agent0-triad-reincarnation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "The session structure becomes a triad-plus-captain model: Agent-100, Agent-0, Agent-1, Agent-2, and Agent-3",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-agent0-triad-reincarnation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Execution is forbidden during the session bootstrap phase",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-agent0-triad-reincarnation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Manual copy-paste relay is acceptable for this transition session, but should be refined out",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-agent0-triad-reincarnation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Word-for-word markdown preservation replaces manual text-file copy/paste as the preservation standard",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-agent0-triad-reincarnation.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "The active identity for this chat is Agent-0",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-agent0-confirmation-checkpoint.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "This checkpoint is preserved instead of evaporating",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-24-agent0-confirmation-checkpoint.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Engineer strongest version first, then subagents, then priority list.** This is the default execution order now",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-23-pipeline-delegation-mcp-stack.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Instructions token budget: 88K → 60K target.** Bloated instructions are a performance and cost hazard — compress immediately",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-23-pipeline-delegation-mcp-stack.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**20-action autonomous pipeline model adopted.** Michael does not want to press enter every few minutes. Map 20 actions, execute top-to-bottom",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-23-pipeline-delegation-mcp-stack.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Pipeline delegation to subagents.** Assign completed pipeline to a subagent, map the next 20, delegate on completion",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-23-pipeline-delegation-mcp-stack.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**\"Rinse and repeat, auto approved.\"** Pre-authorized chaining between pipeline waves via Function 4 handoff gate",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-23-pipeline-delegation-mcp-stack.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**MCP stack priority locked:**",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-23-pipeline-delegation-mcp-stack.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Priority 1: **Cloudflare MCP** (custom slot) — closest to live product",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-23-pipeline-delegation-mcp-stack.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Priority 2: **GitHub MCP** (official) — code, PRs, issues",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-23-pipeline-delegation-mcp-stack.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Priority 3: **Notion MCP** (official) — control plane",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-23-pipeline-delegation-mcp-stack.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "Priority 4: **Playwright / Chrome DevTools MCP** (next expansion)",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-23-pipeline-delegation-mcp-stack.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Backlog dedup required.** DRONE 14-18 each had duplicate entries — 5 pairs identified",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-23-pipeline-delegation-mcp-stack.md"
+    },
+    {
+      "Type": "DECISION",
+      "Text": "**Super Saiyan mode with governance.** Maximum output, fail-closed still intact",
+      "SourceFile": "C:\\Users\\mrmic\\Desktop\\OB-1\\CANON\\REINCARNATION\\2026-03-23-pipeline-delegation-mcp-stack.md"
+    }
+  ]
+}

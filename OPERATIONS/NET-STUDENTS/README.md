@@ -11,6 +11,8 @@
 | Timmy | Private | — | — | 10yo, Grade 5, wants to be astronaut |
 | Tracy | Private | — | Advanced | Timmy's sister, gamer, high engagement |
 | Dan | Private | — | Advanced | 7yo, youngest Tiger candidate |
+| Quan Nguyen | Private | — | Cub (advancing) | Twin (older by 1 min). 3D modeler. AI pipeline user. 2+ years with Michael. |
+| Quang Nguyen | Private | — | Cub (low) | Twin (younger). University. Matcha marketing project. S/SH phonics Rx needed. |
 | BlueTech Staff | Corporate | BlueTech | Mixed | Vietnamese corporate students |
 
 ## Teaching Framework
@@ -22,3 +24,5 @@
 ## Student Profiles
 - [Mai Tram — BlueTech](MAI-TRAM-BLUETECH.md)
 - [Nguyễn Thị Thu Quy — BlueTech](NGUYEN-THI-THU-QUY-BLUETECH.md)
+- [Quan Nguyen — Private (Twin)](QUAN-NGUYEN-PRIVATE.md)
+- [Quang Nguyen — Private (Twin)](QUANG-NGUYEN-PRIVATE.md)
