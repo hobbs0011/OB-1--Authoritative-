@@ -18,6 +18,10 @@ OB-1.worktrees/
 .playwright-mcp/
 APPS/NET-PET-AI/dist/
 APPS/NET-PET-AI/src/debug.log
+APPS/EducationSystemsDevelopment/
+APPS/net-tiger-assessment/
+CANON/*.pdf
+CANON/debug.log
 
 # === SYSTEM ===
 desktop.ini
