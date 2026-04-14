@@ -14,16 +14,64 @@ Current MVP supports two lanes:
 - Static frontend served through Worker assets
 - Node 20 + Wrangler 4
 
-## Run
+## Quick Start
+
+### Local Dev (Docker Recommended)
+
+```bash
+# Prerequisites: Docker, Docker Compose
+docker-compose up
+
+# Opens wrangler dev on http://localhost:8787
+# Webhook mock on http://localhost:3000
+```
+
+See [DOCKER-GK-WORKFLOW.md](./DOCKER-GK-WORKFLOW.md) for full Docker + MultiRepo setup.
+
+### Local Dev (No Docker)
 
 1. Install deps: npm install
-2. Run dev (no browser auto-open): npm run dev:safe
+2. Run dev: npm run dev:safe
 3. Open <http://127.0.0.1:8788>
+
+## Multi-Repo Workflow (GitKraken)
+
+For work spanning NET-PET-AI + Galaxy Lessons + other OB-1 apps:
+
+```bash
+# From OB-1 root
+gk work create "Feature Name"
+gk work add ./APPS/NET-PET-AI
+gk work add ./GALAXY-LESSONS
+# ... edit across repos ...
+gk work commit --ai
+gk work push
+gk work pr create --ai
+```
+
+See [DOCKER-GK-WORKFLOW.md](./DOCKER-GK-WORKFLOW.md) for complete workflow.
 
 ## Deploy
 
-1. Set env var once (PowerShell): `$env:CLOUDFLARE_API_TOKEN="<token>"`
-2. Run deploy: npm run deploy:safe
+### Option 1: GitHub Actions (Recommended)
+
+Push to `main` → `.github/workflows/deploy-net-pet-ai.yml` runs automatically:
+
+```bash
+git push origin main
+# Actions triggers: npm ci → wrangler deploy
+# Live in 2-3 minutes on .workers.dev
+```
+
+### Option 2: Manual Deploy
+
+```bash
+# Set env var once (PowerShell)
+$env:CLOUDFLARE_API_TOKEN="<token>"
+
+# Deploy
+npm run deploy:safe
+```
 
 ## Domain hookup
 
