@@ -1,0 +1,42 @@
+version: '3.9'
+
+services:
+  # NET-PET-AI Cloudflare Worker (local dev)
+  net-pet-ai:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8787:8787"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - WRANGLER_LOG=debug
+    command: wrangler dev --ip 0.0.0.0 --port 8787
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8787/api/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+  # Optional: Deepgram mock or webhook receiver
+  webhook:
+    image: node:20-alpine
+    working_dir: /app
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./dev/webhook-mock.js:/app/index.js
+    command: node index.js
+    environment:
+      - PORT=3000
+
+volumes:
+  app_node_modules:
+
+networks:
+  default:
+    name: net-pet-network
