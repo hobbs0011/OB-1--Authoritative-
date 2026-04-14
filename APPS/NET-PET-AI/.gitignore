@@ -2,3 +2,5 @@ node_modules/
 .dev.vars
 .wrangler/
 tmp/
+dist/
+src/debug.log
