@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unit 8: The Media - Lesson 2.1 | NET-PET-AI</title>
+  <meta name="description" content="English vocabulary and listening lesson about media and social media. Practice vocabulary related to the media, listening for gist and specific information.">
+  
+  <link rel="canonical" href="https://naturalenglishtraining.com/lesson-unit8-media.html">
+  <meta property="og:title" content="Unit 8: The Media - Lesson 2.1">
+  <meta property="og:description" content="Practice vocabulary related to the media. Listen and practice functional English.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://naturalenglishtraining.com/lesson-unit8-media.html">
+  
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📺</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary: #102854;
+      --primary-light: #1e40af;
+      --accent: #f59e0b;
+      --accent-hover: #d97706;
+      --dark: #0f172a;
+      --gray-900: #1e293b;
+      --gray-700: #334155;
+      --gray-500: #64748b;
+      --gray-300: #cbd5e1;
+      --gray-100: #f1f5f9;
+      --white: #ffffff;
+      --success: #16a34a;
+      --bg-slide: #f8fafc;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--dark);
+      line-height: 1.6;
+      background: var(--bg-slide);
+    }
+    
+    /* Nav */
+    nav {
+      position: fixed; top: 0; width: 100%;
+      background: var(--primary);
+      color: var(--white);
+      z-index: 100;
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    nav .brand {
+      font-weight: 800;
+      font-size: 1.1rem;
+      letter-spacing: 0.02em;
+    }
+    nav .brand span { color: var(--accent); }
+    nav .nav-controls {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .slide-counter {
+      font-size: 0.85rem;
+      opacity: 0.8;
+    }
+    .nav-btn {
+      background: rgba(255,255,255,0.15);
+      border: none;
+      color: var(--white);
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .nav-btn:hover { background: rgba(255,255,255,0.25); }
+    
+    /* Slides */
+    .slide {
+      display: none;
+      min-height: 100vh;
+      padding: 5rem 2rem 3rem;
+    }
+    .slide.active { display: block; }
+    
+    /* Slide Variants */
+    .slide-hero {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--primary) 0%, #1e3a8a 100%);
+      color: var(--white);
+      text-align: center;
+    }
+    .slide-hero .icon { font-size: 5rem; margin-bottom: 1.5rem; }
+    .slide-hero h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; margin-bottom: 0.75rem; line-height: 1.15; }
+    .slide-hero .meta { font-size: 1.1rem; opacity: 0.85; margin-bottom: 0.5rem; }
+    .slide-hero .pages { font-size: 0.9rem; opacity: 0.6; }
+    
+    .slide-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: var(--primary);
+      color: var(--white);
+      text-align: center;
+    }
+    .slide-section h2 { font-size: font-size: clamp(1.5rem, 4vw, 2.5rem); font-weight: 700; margin-bottom: 2rem; }
+    .section-grid {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .section-box {
+      background: rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 1.5rem 2rem;
+      min-width: 140px;
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+    .section-box .icon { font-size: 2rem; margin-bottom: 0.5rem; }
+    .section-box p { font-weight: 600; font-size: 0.95rem; }
+    
+    .slide-objectives {
+      background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+      color: var(--white);
+    }
+    .slide-objectives .obj-list {
+      max-width: 600px;
+      text-align: left;
+    }
+    .slide-objectives li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+      font-size: 1.15rem;
+    }
+    .slide-objectives .check { 
+      color: var(--accent); 
+      font-size: 1.4rem; 
+      font-weight: 700;
+    }
+    
+    .slide-content {
+      background: var(--bg-slide);
+      max-width: 900px;
+      margin: 0 auto;
+      padding-top: 4.5rem;
+    }
+    .slide-content .label {
+      display: inline-block;
+      background: var(--primary);
+      color: var(--white);
+      padding: 0.4rem 1rem;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .slide-content h2 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--gray-900);
+      margin-bottom: 1.5rem;
+    }
+    
+    .warmup-card {
+      background: var(--white);
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+    }
+    .warmup-card h3 { font-size: 1.1rem; margin-bottom: 1rem; color: var(--gray-700); }
+    .warmup-card ol { padding-left: 1.25rem; }
+    .warmup-card li { margin-bottom: 0.5rem; color: var(--gray-600); }
+    
+    .answer-box {
+      background: #eff6ff;
+      border-left: 4px solid var(--primary-light);
+      padding: 1.25rem;
+      border-radius: 0 8px 8px 0;
+    }
+    .answer-box p { color: var(--gray-700); font-size: 0.95rem; }
+    .answer-box strong { color: var(--primary); }
+    
+    /* Vocab Bank */
+    .vocab-bank {
+      background: linear-gradient(180deg, #eff6ff 0%, var(--white) 100%);
+    }
+    .vocab-bank .header-box {
+      background: var(--primary);
+      color: var(--white);
+      padding: 2rem;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    .vocab-bank h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; }
+    .vocab-bank .sub { font-size: 1.1rem; opacity: 0.85; }
+    
+    .vocab-grid {
+      display: grid;
+      gap: 0.75rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .vocab-card {
+      display: flex;
+      align-items: center;
+      background: var(--white);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      border-left: 4px solid var(--primary);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .vocab-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+    .vocab-card .word {
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: var(--primary);
+      min-width: 160px;
+    }
+    .vocab-card .meaning {
+      color: var(--gray-600);
+      font-size: 0.95rem;
+    }
+    
+    .vocab-tip {
+      text-align: center;
+      margin-top: 2rem;
+      color: var(--gray-500);
+      font-size: 0.9rem;
+      font-style: italic;
+    }
+    
+    /* Vocab Context */
+    .context-sentences {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      margin-bottom: 1.5rem;
+    }
+    .context-sentences p {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--gray-100);
+    }
+    .context-sentences p:last-child { border-bottom: none; padding-bottom: 0; margin-bottom: 0; }
+    .highlight {
+      color: var(--primary-light);
+      font-weight: 600;
+      text-decoration: underline;
+    }
+    
+    /* Matching */
+    .match-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .match-box {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+    .match-box h4 { font-weight: 700; margin-bottom: 1rem; color: var(--gray-700); }
+    .match-box ul { list-style: none; }
+    .match-box li { padding: 0.4rem 0; color: var(--gray-600); }
+    
+    /* Phonetics */
+    .phonetic-card {
+      background: var(--white);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .phonetic-header {
+      background: var(--primary);
+      color: var(--white);
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .phonetic-header .word { font-size: 1.75rem; font-weight: 700; }
+    .phonetic-header .ipa { font-size: 1.1rem; opacity: 0.8; font-family: monospace; }
+    .phonetic-body { padding: 1.5rem; }
+    .phonetic-body p { font-size: 1rem; color: var(--gray-600); }
+    
+    .phonetic-examples {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+    .phonetic-example {
+      background: var(--gray-100);
+      padding: 0.75rem;
+      border-radius: 8px;
+      text-align: center;
+    }
+    .phonetic-example .word { font-size: 0.85rem; color: var(--gray-700); font-weight: 600; }
+    .phonetic-example .ipa { font-size: 0.75rem; color: var(--gray-500); }
+    
+    /* Listening */
+    .listening-section { background: #f0fdf4; }
+    .listening-card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .listening-card h3 { font-size: 1.25rem; margin-bottom: 1.5rem; color: var(--gray-800); }
+    .listening-item {
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--gray-100);
+    }
+    .listening-item:last-child { border-bottom: none; }
+    .listening-item p { color: var(--gray-600); }
+    
+    /* Script */
+    .script-box {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .script-line {
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--gray-100);
+    }
+    .script-line:last-child { border-bottom: none; }
+    .speaker { font-weight: 700; margin-right: 0.5rem; }
+    .speaker-kim { color: var(--primary-light); }
+    .speaker-john { color: var(--success); }
+    
+    /* Skills */
+    .skills-box {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+    .skills-list { list-style: none; }
+    .skills-list li {
+      padding: 0.6rem 0;
+      color: var(--gray-600);
+      font-size: 1.05rem;
+    }
+    .skills-list li::before {
+      content: "✓ ";
+      color: var(--success);
+      font-weight: 700;
+    }
+    
+    /* Consolidation */
+    .consolidation-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .consolidation-card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+    .consolidation-card h4 {
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--gray-700);
+    }
+    .tag {
+      display: inline-block;
+      background: #eff6ff;
+      color: var(--primary-light);
+      padding: 0.25rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      margin-right: 0.4rem;
+      margin-bottom: 0.4rem;
+    }
+    
+    /* Wrap-up */
+    .slide-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--primary) 0%, #1e3a8a 100%);
+      color: var(--white);
+      text-align: center;
+    }
+    .wrap-content { max-width: 700px; }
+    .wrap-content h2 { font-size: 2rem; margin-bottom: 1.5rem; }
+    .wrap-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+    .wrap-icon { font-size: 1.4rem; }
+    
+    /* Homework */
+    .homework-list {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .homework-item {
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--gray-100);
+    }
+    .homework-item:last-child { border-bottom: none; }
+    .homework-item h4 { font-weight: 700; color: var(--gray-800); margin-bottom: 0.25rem; }
+    .homework-item p { color: var(--gray-600); font-size: 0.95rem; }
+    
+    /* Goodbye */
+    .slide-goodbye {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+      color: var(--white);
+      text-align: center;
+    }
+    .goodbye-icon { font-size: 5rem; margin-bottom: 1.5rem; }
+    .goodbye h2 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; }
+    .goodbye p { font-size: 1.2rem; opacity: 0.9; }
+    
+    /* Responsive */
+    @media (max-width: 640px) {
+      nav { padding: 0.6rem 1rem; }
+      .vocab-card { flex-direction: column; align-items: flex-start; gap: 0.25rem; }
+      .vocab-card .word { min-width: auto; }
+      .phonetic-examples { grid-template-columns: 1fr; }
+      .section-grid { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="brand">NET-PET-<span>AI</span></div>
+  <div class="nav-controls">
+    <span class="slide-counter" id="slideCounter">Slide 1/17</span>
+    <button class="nav-btn" onclick="prevSlide()">← Prev</button>
+    <button class="nav-btn" onclick="nextSlide()">Next →</button>
+  </div>
+</nav>
+
+<!-- Slide 1: Title -->
+<section class="slide slide-hero active" data-slide="1">
+  <div>
+    <div class="icon">📺</div>
+    <h1>Unit 8: The Media</h1>
+    <p class="meta">Lesson 2.1: Vocab & Listening</p>
+    <p class="pages">Pages: 89 & 90</p>
+  </div>
+</section>
+
+<!-- Slide 2: Lesson Flow -->
+<section class="slide slide-section" data-slide="2">
+  <h2>Today's Lesson</h2>
+  <div class="section-grid">
+    <div class="section-box"><div class="icon">🔥</div><p>Warm-up</p></div>
+    <div class="section-box"><div class="icon">📝</div><p>Vocabulary</p></div>
+    <div class="section-box"><div class="icon">🎧</div><p>Listening</p></div>
+    <div class="section-box"><div class="icon">✅</div><p>Consolidation</p></div>
+  </div>
+</section>
+
+<!-- Slide 3: Objectives -->
+<section class="slide slide-section slide-objectives" data-slide="3">
+  <h2>By the end of this lesson...</h2>
+  <ul class="obj-list">
+    <li><span class="check">✓</span> Practice and learn vocabulary related to the media</li>
+    <li><span class="check">✓</span> Practice listening for gist and specific information</li>
+    <li><span class="check">✓</span> Practice functional English for expressing opinions</li>
+  </ul>
+</section>
+
+<!-- Slide 4: Warm-up -->
+<section class="slide slide-content" data-slide="4">
+  <span class="label">Warm-up</span>
+  <h2>Picture Discussion</h2>
+  <div class="warmup-card">
+    <h3>Look at the picture and answer:</h3>
+    <ol>
+      <li>What are the people doing?</li>
+      <li>Why do you think they do this?</li>
+      <li>How often do you use social media?</li>
+    </ol>
+  </div>
+  <div class="answer-box">
+    <p><strong>Suggested:</strong> In the picture, people are using phones to take photos of their food. They likely want to share these on social media.</p>
+  </div>
+</section>
+
+<!-- Slide 5: Vocabulary Bank (NEW) -->
+<section class="slide slide-content vocab-bank" data-slide="5">
+  <div class="header-box">
+    <h1>Vocabulary Bank</h1>
+    <p class="sub">Unit 8 - The Media | Key words for speaking and listening</p>
+  </div>
+  <div class="vocab-grid">
+    <div class="vocab-card">
+      <span class="word">self-esteem</span>
+      <span class="meaning">how confident and valuable you feel about yourself</span>
+    </div>
+    <div class="vocab-card">
+      <span class="word">express</span>
+      <span class="meaning">to show your thoughts or feelings clearly</span>
+    </div>
+    <div class="vocab-card">
+      <span class="word">cyberbullying</span>
+      <span class="meaning">using the internet to hurt or threaten others</span>
+    </div>
+    <div class="vocab-card">
+      <span class="word">anonymous</span>
+      <span class="meaning">without showing your real name or identity</span>
+    </div>
+    <div class="vocab-card">
+      <span class="word">gossip</span>
+      <span class="meaning">unofficial talk about other people's private lives</span>
+    </div>
+    <div class="vocab-card">
+      <span class="word">embarrassment</span>
+      <span class="meaning">the shy or uncomfortable feeling after a mistake</span>
+    </div>
+    <div class="vocab-card">
+      <span class="word">trustworthy</span>
+      <span class="meaning">reliable and likely to give correct information</span>
+    </div>
+    <div class="vocab-card">
+      <span class="word">body image</span>
+      <span class="meaning">how you think and feel about your body</span>
+    </div>
+  </div>
+  <p class="vocab-tip">Tip: Ask students to make one original sentence with each word.</p>
+</section>
+
+<!-- Slide 6: Vocab in Context -->
+<section class="slide slide-content" data-slide="6">
+  <span class="label">Vocabulary</span>
+  <h2>Read the sentences. Underlined words = new vocabulary.</h2>
+  <div class="context-sentences">
+    <p>1. Some teenagers today have negative <span class="highlight">body images</span>, lower <span class="highlight">self-esteem</span>, and feel worse about themselves.</p>
+    <p>2. My sister loves hearing about celebrity <span class="highlight">gossip</span>. She likes to hear what people are doing and who is dating who.</p>
+  </div>
+  <div class="answer-box">
+    <p><strong>Task:</strong> Match the underlined words with their definitions on the next slide.</p>
+  </div>
+</section>
+
+<!-- Slide 7: Matching -->
+<section class="slide slide-content" data-slide="7">
+  <span class="label">Vocabulary</span>
+  <h2>Match the words with definitions</h2>
+  <div class="match-grid">
+    <div class="match-box">
+      <h4>Word Bank</h4>
+      <ul>
+        <li>1. body image</li>
+        <li>2. express</li>
+        <li>3. cyberbullying</li>
+        <li>4. anonymous</li>
+        <li>5. gossip</li>
+        <li>6. embarrassment</li>
+      </ul>
+    </div>
+    <div class="match-box">
+      <h4>Definitions</h4>
+      <ul>
+        <li>( ) how you think and feel about your body</li>
+        <li>( ) to show your thoughts or feelings</li>
+        <li>( ) using internet to hurt others</li>
+        <li>( ) without revealing your identity</li>
+        <li>( ) talk about private lives of others</li>
+        <li>( ) feeling shy after a mistake</li>
+      </ul>
+    </div>
+  </div>
+  <div class="answer-box" style="margin-top: 1.5rem;">
+    <p>🎧 Listen and repeat after the audio!</p>
+  </div>
+</section>
+
+<!-- Slide 8: Phonetics -->
+<section class="slide slide-content" data-slide="8">
+  <span class="label">Pronunciation</span>
+  <h2>Pronunciation Practice</h2>
+  <div class="phonetic-card">
+    <div class="phonetic-header">
+      <span class="word">anonymous</span>
+      <span class="ipa">/əˈnɑːnəməs/</span>
+    </div>
+    <div class="phonetic-body">
+      <p>Tip: The stress is on the second syllable: <strong>a-NON-a-mous</strong></p>
+      <div class="phonetic-examples">
+        <div class="phonetic-example"><div class="word">self-esteem</div><div class="ipa">/ˌself ɪˈstiːm/</div></div>
+        <div class="phonetic-example"><div class="word">express</div><div class="ipa">/ɪkˈspres/</div></div>
+        <div class="phonetic-example"><div class="word">gossip</div><div class="ipa">/ˈɡɒsɪp/</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Slide 9: Pre-Listening -->
+<section class="slide slide-content" data-slide="9">
+  <span class="label">Pre-Listening</span>
+  <h2>Before you listen</h2>
+  <div class="warmup-card">
+    <p class="mb-4">You will hear two students discussing the impact of social media.</p>
+    <p><strong>What do you think they will talk about?</strong></p>
+    <ul style="margin-top: 1rem;">
+      <li>☐ How much time people spend online</li>
+      <li>☐ Types of content people share</li>
+      <li>☐ How people behave online vs. real life</li>
+    </ul>
+  </div>
+  <div class="answer-box" style="margin-top: 1rem;">
+    <p>🎧 Listen and check your predictions!</p>
+  </div>
+</section>
+
+<!-- Slide 10: While-Listening -->
+<section class="slide slide-content listening-section" data-slide="10">
+  <span class="label" style="background: var(--success);">While-Listening</span>
+  <h2 style="color: var(--gray-800);">Fill in the blanks</h2>
+  <div class="listening-card">
+    <h3>Listen again. Write no more than TWO words for each blank.</h3>
+    <div class="listening-item">
+      <p>1. Kim thinks that people worry about their ______________</p>
+    </div>
+    <div class="listening-item">
+      <p>2. John uses social media for ______________ and ______________.</p>
+    </div>
+    <div class="listening-item">
+      <p>3. Kim says people are ______________ on social media than in real life.</p>
+    </div>
+    <div class="listening-item">
+      <p>4. John thinks information on social media is ______________.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Slide 11: Listening Script -->
+<section class="slide slide-content" data-slide="11">
+  <span class="label">Listening Script</span>
+  <h2>Conversation: The Impact of Social Media</h2>
+  <div class="script-box">
+    <div class="script-line">
+      <span class="speaker speaker-kim">Kim:</span> Hey, John. Let's discuss the impact of social media.
+    </div>
+    <div class="script-line">
+      <span class="speaker speaker-john">John:</span> OK. First point, people use social media more than they used to.
+    </div>
+    <div class="script-line">
+      <span class="speaker speaker-kim">Kim:</span> Like what?
+    </div>
+    <div class="script-line">
+      <span class="speaker speaker-john">John:</span> Well, fun stuff like gossip about celebrities, or useful things like information on stores in your town.
+    </div>
+    <div class="script-line">
+      <span class="speaker speaker-kim">Kim:</span> Good point. Another thing, people worry about their body image, you know, looking good in photos.
+    </div>
+    <div class="script-line">
+      <span class="speaker speaker-john">John:</span> Yeah, I agree.
+    </div>
+    <div class="script-line">
+      <span class="speaker speaker-kim">Kim:</span> Hmm. OK. Final point, today, people are meaner on social media than in real life. I agree with that.
+    </div>
+    <div class="script-line">
+      <span class="speaker speaker-john">John:</span> Why?
+    </div>
+    <div class="script-line">
+      <span class="speaker speaker-kim">Kim:</span> People post rude comments because they can be anonymous.
+    </div>
+  </div>
+</section>
+
+<!-- Slide 12: Conversation Skills -->
+<section class="slide slide-content" data-slide="12">
+  <span class="label" style="background: #0d9488;">Post-Listening</span>
+  <h2>Conversation Skills: Expressing Opinions</h2>
+  <div class="skills-box">
+    <h4 style="margin-bottom: 1rem; color: var(--gray-700);">Useful phrases:</h4>
+    <ul class="skills-list">
+      <li>"I think / I believe..."</li>
+      <li>"In my opinion..."</li>
+      <li>"I agree / I don't agree with..."</li>
+      <li>"That's a good point, but..."</li>
+      <li>"Why do you think...?"</li>
+    </ul>
+  </div>
+  <div class="answer-box" style="margin-top: 1.5rem;">
+    <p><strong>Practice:</strong> In pairs, discuss which opinions from the listening you agree or disagree with.</p>
+  </div>
+</section>
+
+<!-- Slide 13: Consolidation -->
+<section class="slide slide-content" data-slide="13">
+  <span class="label" style="background: var(--success);">Consolidation</span>
+  <h2>What did we learn today?</h2>
+  <div class="consolidation-grid">
+    <div class="consolidation-card">
+      <h4>Vocabulary</h4>
+      <div>
+        <span class="tag">self-esteem</span>
+        <span class="tag">express</span>
+        <span class="tag">cyberbullying</span>
+        <span class="tag">anonymous</span>
+        <span class="tag">gossip</span>
+        <span class="tag">trustworthy</span>
+      </div>
+    </div>
+    <div class="consolidation-card">
+      <h4>Skills</h4>
+      <ul style="color: var(--gray-600); font-size: 0.95rem;">
+        <li>• Listening for gist</li>
+        <li>• Listening for specific info</li>
+        <li>• Expressing opinions</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Slide 14: Wrap-up -->
+<section class="slide slide-wrap" data-slide="14">
+  <div class="wrap-content">
+    <h2>Today's Lesson</h2>
+    <div class="wrap-item">
+      <span class="wrap-icon">📝</span>
+      <span><strong>Vocabulary:</strong> practice and learn vocabulary related to the media</span>
+    </div>
+    <div class="wrap-item">
+      <span class="wrap-icon">🎧</span>
+      <span><strong>Listening:</strong> practice listening for gist and specific information</span>
+    </div>
+    <div class="wrap-item">
+      <span class="wrap-icon">🗣️</span>
+      <span><strong>Speaking:</strong> express opinions about social media</span>
+    </div>
+  </div>
+</section>
+
+<!-- Slide 15: Homework -->
+<section class="slide slide-content" data-slide="15">
+  <span class="label" style="background: #dc2626;">Homework</span>
+  <h2>Today's Homework</h2>
+  <div class="homework-list">
+    <div class="homework-item">
+      <h4>1. Learn the new words</h4>
+      <p>Make sentences using each vocabulary word.</p>
+    </div>
+    <div class="homework-item">
+      <h4>2. Do workbook exercises</h4>
+      <p>Page 46 in your workbook</p>
+    </div>
+    <div class="homework-item">
+      <h4>3. Functional English</h4>
+      <p>Practice expressing your opinions about social media.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Slide 16: Goodbye -->
+<section class="slide slide-goodbye" data-slide="16">
+  <div class="goodbye">
+    <div class="goodbye-icon">😊</div>
+    <h2>Stay positive!</h2>
+    <p>Have a great day!</p>
+  </div>
+</section>
+
+<!-- Slide 17: End Marker -->
+<section class="slide slide-content" data-slide="17" style="display: flex; align-items: center; justify-content: center; min-height: 100vh; background: var(--primary);">
+  <div style="text-align: center; color: var(--white);">
+    <p style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">End of Lesson</p>
+    <p style="opacity: 0.7;">NET-PET-AI | Unit 8: The Media</p>
+  </div>
+</section>
+
+<script>
+let currentSlide = 1;
+const totalSlides = 17;
+
+function showSlide(n) {
+  const slides = document.querySelectorAll('.slide');
+  slides.forEach(s => s.classList.remove('active'));
+  
+  const target = document.querySelector(`[data-slide="${n}"]`);
+  if (target) {
+    target.classList.add('active');
+    window.scrollTo(0, 0);
+  }
+  
+  document.getElementById('slideCounter').textContent = `Slide ${n}/${totalSlides}`;
+  currentSlide = n;
+}
+
+function nextSlide() {
+  if (currentSlide < totalSlides) showSlide(currentSlide + 1);
+}
+
+function prevSlide() {
+  if (currentSlide > 1) showSlide(currentSlide - 1);
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); nextSlide(); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); prevSlide(); }
+});
+
+// Initialize
+showSlide(1);
+</script>
+
+</body>
+</html>
