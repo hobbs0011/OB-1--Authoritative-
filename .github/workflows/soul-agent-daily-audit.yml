@@ -1,0 +1,98 @@
+name: Soul Agent Daily Audit — Neural Ledger Formation
+
+on:
+  schedule:
+    # 09:00 ICT (UTC+7) = 02:00 UTC
+    - cron: "0 2 * * *"
+  workflow_dispatch:
+    inputs:
+      student_id:
+        description: "Target student (or 'all' for batch)"
+        required: false
+        default: "all"
+      dry_run:
+        description: "Audit only, don't commit"
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  soul-agent-audit:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        student: [huong-bluetech, mai-tram-bluetech, quy-bluetech, lam-prospect, quan-nguyen, quang-nguyen]
+      max-parallel: 1
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Configure Git
+        run: |
+          git config user.email "soul-agent-audit@net.ai"
+          git config user.name "Soul Agent Auditor"
+
+      - name: Prepare student context
+        id: prep
+        run: |
+          STUDENT=${{ matrix.student }}
+          DATE=$(date -d "$(TZ='Asia/Bangkok' date)" +%Y-%m-%d)
+          RUN_NUM=$(grep -m1 "Current Run:" CANON/REINCARNATION/COLD-START-BOOT.md | grep -oE '[0-9]+' | head -1)
+          
+          echo "student_id=$STUDENT" >> $GITHUB_OUTPUT
+          echo "audit_date=$DATE" >> $GITHUB_OUTPUT
+          echo "run_number=$RUN_NUM" >> $GITHUB_OUTPUT
+          
+          # Find next HL number
+          LATEST_HL=$(ls -1 CANON/HEAVY-LEDGER/HL-*.json 2>/dev/null | sed 's/.*HL-//; s/-.*//' | sort -n | tail -1)
+          NEXT_HL=$((LATEST_HL + 1))
+          echo "next_hl=$NEXT_HL" >> $GITHUB_OUTPUT
+
+      - name: Invoke Soul Agent Copilot
+        id: audit
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          GH_DEBUG: api
+        run: |
+          # This step would normally invoke Copilot API or a local script
+          # For now, placeholder for Soul Agent execution
+          echo "Soul Agent audit for ${{ steps.prep.outputs.student_id }} on ${{ steps.prep.outputs.audit_date }}"
+          echo "Next HL entry: HL-${{ steps.prep.outputs.next_hl }}"
+          echo "Run: ${{ steps.prep.outputs.run_number }}"
+
+      - name: Stage audit artifacts
+        if: success() && !inputs.dry_run
+        run: |
+          git add CANON/HEAVY-LEDGER/HL-*.json CANON/REINCARNATION/*soul-agent*.md 2>/dev/null || true
+          git status
+
+      - name: Commit neural ledger entry
+        if: success() && !inputs.dry_run
+        run: |
+          if git diff --cached --quiet; then
+            echo "No changes to commit (dry run or no audit output)"
+          else
+            git commit -m "soul-agent: neural ledger for ${{ steps.prep.outputs.student_id }} (HL-${{ steps.prep.outputs.next_hl }}) — run ${{ steps.prep.outputs.run_number }}"
+            git push origin $(git rev-parse --abbrev-ref HEAD)
+          fi
+
+      - name: Report audit summary
+        run: |
+          echo "## Soul Agent Audit Report — ${{ steps.prep.outputs.student_id }}"
+          echo "- Run: ${{ steps.prep.outputs.run_number }}"
+          echo "- Date: ${{ steps.prep.outputs.audit_date }}"
+          echo "- Ledger Entry: HL-${{ steps.prep.outputs.next_hl }}"
+          echo "- Status: Complete"
