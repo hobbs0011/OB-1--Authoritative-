@@ -17,7 +17,7 @@
 
 | Repo | Account | Status |
 |---|---|---|
-| OB-1 | hobbs0011 | CANONICAL — branch canon (default), HEAD 3140404 — Run 311 |
+| OB-1 | hobbs0011 | CANONICAL — branch canon (default), HEAD 10882b2 — Run 311 |
 | OB-1--Authoritative- | hobbs0011 | SYNCED — at 54bff5d (Run 309) |
 | Phoenix-Rising-Protocol-Ultimate | hobbs-lab | SUPERSEDED |
 | phoenix-ob1 | mrmichaelhobbs1234-lang | Public — SECURITY RISK (still unresolved) |
@@ -55,7 +55,7 @@
 | Run | HEAD | Date | Notes |
 |---|---|---|---|
 | Run 310 | 160505e | 2026-04-19 | 100-stage pipeline: CF Pages, workflow hardening, Notion guard, SOVEREIGN_KEY rotated |
-| Run 311 | 3140404 | 2026-04-20 | wrangler 4.80→4.83, phase4/5/6 snapshots, Phoenix-Rising-Ultimate 39 dead branches purged |
+| Run 311 | 10882b2 | 2026-04-20 | wrangler 4.80→4.83, phase4/5/6 snapshots, Phoenix-Rising-Ultimate 39 dead branches purged |
 
 ### Cost Target
 
