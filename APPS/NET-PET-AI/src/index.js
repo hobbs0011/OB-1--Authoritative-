@@ -912,7 +912,8 @@ async function handleChat(body, env) {
   }
 
   // ── Notion sync: mirror chat exchange to Notion progress DB ─────────────
-  if (studentId !== "anonymous" && env.NOTION_API_KEY && env.NOTION_PROGRESS_DB && userMsg) {
+  // Disabled by default (free-tier protection). Set NOTION_CHAT_MIRROR=1 to enable.
+  if (studentId !== "anonymous" && env.NOTION_API_KEY && env.NOTION_PROGRESS_DB && env.NOTION_CHAT_MIRROR === "1" && userMsg) {
     writeChatExchange(env.NOTION_API_KEY, env.NOTION_PROGRESS_DB, {
       studentId,
       userMessage: userMsg,
