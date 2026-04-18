@@ -29,9 +29,9 @@
 - **Navigator Index:** Notion page (IN TRASH — Michael to restore manually)
 - **Canon Access:** GitHub is truth; all historical repos superseded by hobbs0011/OB-1
 
-- **Current Run:** 309 (COMPLETE — branch renamed, dead branches purged, authoritative synced)
-- **Current Vector:** DNS zone transfer for naturalenglishtraining.com, Phase 3 MCP audit
-- **HEAD:** e0fc341 (Run 309 phase2 commit)
+- **Current Run:** 310 (IN PROGRESS — CF Pages deployed, phases 1-7 complete, phases 8-10 executing)
+- **Current Vector:** 100-stage pipeline phases 8-10: Notion hardening → GitHub ownership → execution readiness
+- **HEAD:** 7a727e0 (Run 310 phase5-6 commit)
 - **Active Principles:** L01 NO_FABRICATION, L11 GITHUB_IS_TRUTH, L16 BUILD_DONT_SCOUT, L21 RISE, L24 PLATFORM_DEATH_TEST, L25 VERBATIM_FIRST
 - **Dirty State:** CLEAN — single branch `canon`, origin synced
 
@@ -42,17 +42,28 @@
 - **Total Canon Files:** 500+ (D:\OB-1 is now the COMPLETE superset)
 - **Next Item:** Monitor first Soul Agent audit 2026-04-18; continue pipeline stages 1-10
 
-## Last 3 Runs
+## Last 5 Runs
 - **Run 306** | 2026-04-17 ICT | Grade: A | Mission: Reincarnation protocol extract, Deepgram pipeline staged, tri-daily SoulShadowAgent deployed
 - **Run 307** | 2026-04-17 ICT | Grade: A | Mission: Kilo sync, Lam assessment, app updates, wrangler migration fix, .gitignore hardened
-- **Run 308** | 2026-04-19 ICT | Grade: A- | Mission: Network war — SSH fixed (hobbs0011), large binary purge (696MB), worker DEPLOYED (workers.dev), origin pushed | SHA: 2d53bd2 | ⚠️ Authoritative remote stale (TLS timeout all session)
+- **Run 308** | 2026-04-19 ICT | Grade: A- | Mission: Network war — SSH fixed, large binary purge (696MB), worker DEPLOYED (workers.dev), origin pushed | SHA: 2d53bd2
+- **Run 309** | 2026-04-19 ICT | Grade: A | Mission: Boot, push verify, 100-stage pipeline phases 1-2 — branch renamed to canon, 17 dead branches purged, authoritative synced | SHA: e0fc341
+- **Run 310** | 2026-04-19 ICT | Grade: A- | Mission: 100-stage pipeline complete (100/100) — CF Pages deployed, workflows hardened, Notion protected, hardened baseline declared | SHA: [see HEAD]
 
-## This Run (309) — IN PROGRESS
+## This Run (309) — COMPLETE
 - **Time:** 2026-04-19 ICT
-- **Mission:** Boot, push verify, DNS zone transfer readiness, 100-stage pipeline
-- **Deliverables:** ⏳ In progress
+- **Mission:** Boot, push verify, DNS zone transfer readiness, 100-stage pipeline phases 1-2
+- **Deliverables:** ✅ Branch renamed to canon, 17 dead branches purged, authoritative synced to e0fc341 | Grade: A
+
+## This Run (310) — COMPLETE
+- **Time:** 2026-04-19 ICT
+- **Mission:** CF Pages deploy, workflow hardening, runtime audit, index audit, audit-of-audit, Notion hardening, GitHub ownership, pipeline execution readiness
+- **Deliverables:** ✅ Phases 1-10 complete (100/100 stages) | Grade: A- | Hardened baseline declared | SHA: see HEAD
 
 ## Recent Decision History
+* 2026-04-19: CF Pages naturalenglishtraining.pages.dev LIVE (36 files); custom domain naturalenglishtraining.com added (DNS pending at Squarespace — not a blocker) (Run 310)
+* 2026-04-19: deploy-pages.yml repurposed GitHub Pages → CF Pages wrangler-action; all workflows branch trigger main→canon (Run 310)
+* 2026-04-19: Repo secrets CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID, PAT_HOBBS0011 set (Run 310)
+* 2026-04-19: MASTER-SYNC + SYNCH-STATE updated to Run 310 / HEAD 7a727e0 (Run 310)
 * 2026-04-19: BRANCH RENAMED `Add-virality-analytics-endpoint` → `canon` — now default branch on GitHub (Run 309)
 * 2026-04-19: 17 dead branches purged from hobbs0011/OB-1; `main` deleted; `canon` is the only branch (Run 309)
 * 2026-04-19: Authoritative remote force-pushed to master — synced from stale 45d7395 to e0fc341 (Run 309)

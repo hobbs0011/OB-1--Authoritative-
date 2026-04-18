@@ -12,7 +12,7 @@ const NOTION_VERSION = "2022-06-28";
 
 // ── Core fetch wrapper ────────────────────────────────────────────────────────
 
-async function notionFetch(apiKey, endpoint, method = "GET", body = null) {
+async function notionFetch(apiKey, endpoint, method = "GET", body = null, retries = 2) {
   const opts = {
     method,
     headers: {
@@ -27,6 +27,11 @@ async function notionFetch(apiKey, endpoint, method = "GET", body = null) {
   const data = await res.json();
 
   if (!res.ok) {
+    // Retry on transient server errors (5xx) only
+    if (retries > 0 && res.status >= 500) {
+      await new Promise(r => setTimeout(r, 600 * (3 - retries)));
+      return notionFetch(apiKey, endpoint, method, body, retries - 1);
+    }
     throw new Error(data.message || `Notion API ${res.status}`);
   }
   return data;
