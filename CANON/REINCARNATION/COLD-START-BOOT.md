@@ -23,15 +23,17 @@
 
 ## Infrastructure
 - **Canon Vault:** hobbs0011/OB-1 (branch: **canon**) — LIVE + synced — default branch
-- **Runtime App:** APPS/NET-PET-AI (Cloudflare Worker) — verified build
+- **Runtime App:** APPS/NET-PET-AI (Cloudflare Worker) — ✅ DEPLOYED to net-pet-ai.mrmichaelhobbs123.workers.dev (Run 311)
+- **Marketing Site:** naturalenglishtraining.pages.dev (CF Pages, LIVE, Run 310)
+- **Soul DNA Endpoint:** /souldna (3 routes: POST submit, GET status, GET pipeline ref) — LIVE (Run 311d)
 - **Workspace:** D:\OB-1 — THE canonical complete superset (158 files FinalMerge-reconciled)
 - **Kilo System:** NOT initialized (legacy, superseded by Copilot prompts)
 - **Navigator Index:** Notion page (IN TRASH — Michael to restore manually)
 - **Canon Access:** GitHub is truth; all historical repos superseded by hobbs0011/OB-1
 
-- **Current Run:** 310 (IN PROGRESS — CF Pages deployed, phases 1-7 complete, phases 8-10 executing)
-- **Current Vector:** 100-stage pipeline phases 8-10: Notion hardening → GitHub ownership → execution readiness
-- **HEAD:** 7a727e0 (Run 310 phase5-6 commit)
+- **Current Run:** 312 (booting)
+- **Current Vector:** (loading from Run 311 artifact)
+- **HEAD:** 91308c8 (Run 311d SOULDNA-QUICK-START commit)
 - **Active Principles:** L01 NO_FABRICATION, L11 GITHUB_IS_TRUTH, L16 BUILD_DONT_SCOUT, L21 RISE, L24 PLATFORM_DEATH_TEST, L25 VERBATIM_FIRST
 - **Dirty State:** CLEAN — single branch `canon`, origin synced
 
@@ -47,17 +49,19 @@
 - **Run 307** | 2026-04-17 ICT | Grade: A | Mission: Kilo sync, Lam assessment, app updates, wrangler migration fix, .gitignore hardened
 - **Run 308** | 2026-04-19 ICT | Grade: A- | Mission: Network war — SSH fixed, large binary purge (696MB), worker DEPLOYED (workers.dev), origin pushed | SHA: 2d53bd2
 - **Run 309** | 2026-04-19 ICT | Grade: A | Mission: Boot, push verify, 100-stage pipeline phases 1-2 — branch renamed to canon, 17 dead branches purged, authoritative synced | SHA: e0fc341
-- **Run 310** | 2026-04-19 ICT | Grade: A- | Mission: 100-stage pipeline complete (100/100) — CF Pages deployed, workflows hardened, Notion protected, hardened baseline declared | SHA: [see HEAD]
+- **Run 310** | 2026-04-19 ICT | Grade: A- | Mission: 100-stage pipeline complete (100/100) — CF Pages deployed, workflows hardened, Notion protected, hardened baseline declared | SHA: 7a727e0
+- **Run 311** | 2026-04-20 ICT | Grade: A | Mission: Pipeline continuation (wrangler upgrade, branch cleanup), BYPASS product (naturalenglishtraining.pages.dev LIVE, DNS deferred), /souldna endpoint + Legionnaire integration | SHA: 91308c8
 
 ## This Run (309) — COMPLETE
 - **Time:** 2026-04-19 ICT
 - **Mission:** Boot, push verify, DNS zone transfer readiness, 100-stage pipeline phases 1-2
 - **Deliverables:** ✅ Branch renamed to canon, 17 dead branches purged, authoritative synced to e0fc341 | Grade: A
 
-## This Run (310) — COMPLETE
-- **Time:** 2026-04-19 ICT
-- **Mission:** CF Pages deploy, workflow hardening, runtime audit, index audit, audit-of-audit, Notion hardening, GitHub ownership, pipeline execution readiness
-- **Deliverables:** ✅ Phases 1-10 complete (100/100 stages) | Grade: A- | Hardened baseline declared | SHA: see HEAD
+## This Run (312) — BOOTING
+- **Time:** 2026-04-20 ICT
+- **Mission:** (loading from Run 311 artifact — will be set on bootstrap)
+- **Precedent:** Run 311 completed: wrangler upgrade, 39 dead branches purged from Phoenix-Rising-Ultimate, CF zone pre-staged, product LIVE (.pages.dev), /souldna endpoint deployed, Security audit (zero hardcoded secrets, gitleaks enabled)
+- **Unfinished (from Run 311):** Worker secrets (BRAVE_API_KEY, NOTION_SOUL_DNA_DB), DNS Squarespace work (explicit deferral), typo cleanup pass (40+ logged)
 
 ## Recent Decision History
 * 2026-04-19: CF Pages naturalenglishtraining.pages.dev LIVE (36 files); custom domain naturalenglishtraining.com added (DNS pending at Squarespace — not a blocker) (Run 310)
@@ -101,7 +105,9 @@
 - Origin remote: SYNCED ✅ (branch: canon, SHA e0fc341)
 - Authoritative remote: SYNCED ✅ (master force-pushed to e0fc341, Run 309)
 
-## Next Vector (Run 310)
-1. DNS zone transfer: naturalenglishtraining.com → Cloudflare (Michael manual action)
-2. Phase 3: MCP Integrity and Token Health audit (stages 21-30)
-3. Soul Agent audit monitoring: check HL-141+ ledger entries for 6 students
+## Next Vector (Run 312)
+1. **Immediate:** Load Run 311 artifact + identify top priority
+2. **If deployment approved:** `wrangler secret put BRAVE_API_KEY` + `wrangler secret put NOTION_SOUL_DNA_DB` → `wrangler deploy --env production`
+3. **Post-deployment:** Health checks + product smoke test
+4. **Optional:** Typo cleanup pass (40+ logged in index.js, low priority)
+5. **Deferred:** Squarespace DNS work (no customer blocking dependency)
