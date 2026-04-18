@@ -36,11 +36,7 @@
 
 ### Active Blockers
 
-- [x] Marketing site live — naturalenglishtraining.pages.dev (CF Pages, Run 310) ✅
-- [ ] **Custom domain activation** — Go to Squarespace Domains → naturalenglishtraining.com → Name Servers → **Use Custom Name Servers**:
-  - `margaret.ns.cloudflare.com`
-  - `mario.ns.cloudflare.com`
-  (CF zone pre-staged, DNS records ready, Pages domains registered — NS flip is the only remaining action)
+- [x] Marketing site live ✅ — **https://naturalenglishtraining.pages.dev** (CF Pages, Run 310) — FULLY LIVE, no dependency on Squarespace
 - [ ] Set phoenix-ob1 to PRIVATE (currently PUBLIC with secrets)
 - [x] Rotate SOVEREIGN_KEY — ✅ 2026-04-19 (44-char base64, wrangler secret put)
 - [ ] copilot-governance.md approval pending
@@ -59,7 +55,7 @@
 |---|---|---|---|
 | Run 310 | 160505e | 2026-04-19 | 100-stage pipeline: CF Pages, workflow hardening, Notion guard, SOVEREIGN_KEY rotated |
 | Run 311 | 10882b2 | 2026-04-20 | wrangler 4.80→4.83, phase4/5/6 snapshots, Phoenix-Rising-Ultimate 39 dead branches purged |
-| Run 311b | pending | 2026-04-20 | CF zone naturalenglishtraining.com pre-staged, CNAME bypass — NS flip only |
+| Run 311b | e04ab1f | 2026-04-20 | BYPASS: Product live on CF Pages default. Squarespace domain registration deferred. |
 
 ### Cost Target
 
