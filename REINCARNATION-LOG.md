@@ -1,6 +1,37 @@
 # Reincarnation Log
 
-_Last updated: 2026-04-17 ICT_
+_Last updated: 2026-04-20 ICT_
+
+## Run 311: Pipeline Bypass + Soul DNA Capture (2026-04-20)
+**Artifact:** `CANON/REINCARNATION/2026-04-20-run311-pipeline-bypass-souldna.md`
+
+**Summary:**
+- Completed Run 310 sprint queue continuation
+- Implemented BYPASS pattern (product velocity > DNS perfection): product live on CF Pages default domain
+- Created 3 soul DNA pipeline endpoints: POST /souldna, GET /souldna/{id}, GET /souldna/pipeline
+- Security audit: zero hardcoded secrets across 3 public repos + gitleaks enabled
+- CF zone for naturalenglishtraining.com pre-staged (NS flip deferred until Squarespace registration)
+- 39 dead branches purged from Phoenix-Rising-Ultimate (46→7 surviving)
+- Wrangler dependency upgraded 4.80.0→4.83.0
+- Worker deployment ready (awaiting BRAVE_API_KEY + NOTION_SOUL_DNA_DB + approval)
+
+**Key decisions:**
+- BYPASS: use CF Pages default domain for MVP, custom domain DNS deferred
+- Soul DNA pipeline integration: /souldna → Legionnaire Field Guide → Ledger (sov100) → Notion (optional) → CANON/
+- Product velocity > perfection governance established
+
+**Unfinished (explicit handoff):**
+1. Worker deployment: ready for `wrangler deploy --env production` (need secrets + approval)
+2. Custom domain NS flip: deferred (not blocking MVP)
+3. BRAVE_API_KEY retrieval, NOTION_SOUL_DNA_DB creation (Michael actions)
+
+**HEAD:** 5c3e23f (reincarnation artifact committed)
+
+---
+
+## Historical Sessions
+
+_Last session (Run 310): 2026-04-17 ICT_
 
 ## Purpose
 Persistent handoff log so each new chat/session can recover operational context fast and continue execution without drift.
