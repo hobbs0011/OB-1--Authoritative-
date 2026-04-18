@@ -1,6 +1,6 @@
 # PHOENIX RISING PROTOCOL — SOUL DNA SYNC v2
 
-## Live Operating State — 2026-04-16
+## Live Operating State — 2026-04-19
 
 ### System Identity
 
@@ -17,11 +17,10 @@
 
 | Repo | Account | Status |
 |---|---|---|
-| Phoenix-Rising-Protocol-Ultimate | hobbs-lab | ACTIVE — canonical consolidation target |
-| Phoenix-Rise-Immortalize- | hobbs-lab | Previous origin — to be superseded |
-| PhoenixRising | hobbs-lab | EMPTY |
-| NET-Ai-EcoSystem-CommandStation | hobbs0011 | Public, legacy |
-| phoenix-ob1 | mrmichaelhobbs1234-lang | Public — SECURITY RISK |
+| OB-1 | hobbs0011 | CANONICAL — branch Add-virality-analytics-endpoint, HEAD 45310d8 |
+| OB-1--Authoritative- | hobbs0011 | STALE — at 45d73956, push blocked by network (next session) |
+| Phoenix-Rising-Protocol-Ultimate | hobbs-lab | SUPERSEDED |
+| phoenix-ob1 | mrmichaelhobbs1234-lang | Public — SECURITY RISK (still unresolved) |
 
 ### Architecture
 
@@ -36,11 +35,18 @@
 
 ### Active Blockers
 
-- [ ] Route-bind www.naturalenglishtraining.com to Cloudflare Worker
+- [ ] Route-bind www.naturalenglishtraining.com to Cloudflare Worker — REQUIRES DNS zone transfer from Squarespace first
 - [ ] Set phoenix-ob1 to PRIVATE (currently PUBLIC with secrets)
-- [ ] Rotate SOVEREIGN_KEY + run vault-lock
+- [x] Rotate SOVEREIGN_KEY — ✅ 2026-04-19 (44-char base64, wrangler secret put)
 - [ ] copilot-governance.md approval pending
-- [ ] Incident freeze ACTIVE
+- [ ] Push authoritative mirror — blocked by network TLS timeout 2026-04-19; retry next session
+- [ ] ⚠️ CLOUDFLARE_API_TOKEN env var: must `Remove-Item Env:\CLOUDFLARE_API_TOKEN` before every `wrangler deploy`
+
+### Worker State
+
+| Worker | URL | Version | Status |
+|---|---|---|---|
+| net-pet-ai | https://net-pet-ai.mrmichaelhobbs123.workers.dev | 934ce2a9 | ✅ LIVE 2026-04-19 |
 
 ### Cost Target
 
