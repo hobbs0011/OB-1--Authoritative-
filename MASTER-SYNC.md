@@ -55,7 +55,9 @@
 |---|---|---|---|
 | Run 310 | 160505e | 2026-04-19 | 100-stage pipeline: CF Pages, workflow hardening, Notion guard, SOVEREIGN_KEY rotated |
 | Run 311 | 10882b2 | 2026-04-20 | wrangler 4.80→4.83, phase4/5/6 snapshots, Phoenix-Rising-Ultimate 39 dead branches purged |
-| Run 311b | e04ab1f | 2026-04-20 | BYPASS: Product live on CF Pages default. Squarespace domain registration deferred. |
+| Run 311 | 10882b2 | 2026-04-20 | wrangler 4.80→4.83, phase4/5/6 snapshots, Phoenix-Rising-Ultimate 39 dead branches purged |
+| Run 311b | 97d34a2 | 2026-04-20 | BYPASS: Product live on naturalenglishtraining.pages.dev |
+| Run 311c | pending | 2026-04-20 | Security audit complete ✅ — zero hardcoded secrets, gitleaks enabled, env vars cleared |
 
 ### Cost Target
 
