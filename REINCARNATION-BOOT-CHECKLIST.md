@@ -21,6 +21,15 @@ Before starting a new chat context, verify:
 4. **No Polite Erasure** - Preserve raw wording
 5. **Append-Only** - Never overwrite reincarnation entries
 
+## ⚠️ Critical Operational Warnings (New 2026-04-19)
+
+| Warning | Action |
+|---------|--------|
+| `CLOUDFLARE_API_TOKEN` env var is a restricted `cfk_*` token | Run `Remove-Item Env:\CLOUDFLARE_API_TOKEN -ErrorAction SilentlyContinue` BEFORE every `npx wrangler deploy` |
+| `wrangler.toml` migration chain MUST include `v4-ship-memory` | Do NOT remove — matches live DO state. `MemoryDO` has no binding but must stay in history |
+| DNS route `[[routes]]` is commented out | `naturalenglishtraining.com` zone not on CF account yet — Squarespace DNS still active |
+| Authoritative mirror at `45d73956` | Stale — push failed due to network. Retry: `git -c http.version=HTTP/1.1 push --force "https://hobbs0011:$token@github.com/hobbs0011/OB-1--Authoritative-.git" HEAD:master` |
+
 ## Run Entry Points
 
 | Command | Purpose |
