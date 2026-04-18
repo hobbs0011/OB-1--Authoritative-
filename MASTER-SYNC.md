@@ -17,7 +17,7 @@
 
 | Repo | Account | Status |
 |---|---|---|
-| OB-1 | hobbs0011 | CANONICAL — branch canon (default), HEAD 10882b2 — Run 311 |
+| OB-1 | hobbs0011 | CANONICAL — branch canon (default), HEAD 5eabf24 — Run 312 |
 | OB-1--Authoritative- | hobbs0011 | SYNCED — at 54bff5d (Run 309) |
 | Phoenix-Rising-Protocol-Ultimate | hobbs-lab | SUPERSEDED |
 | phoenix-ob1 | mrmichaelhobbs1234-lang | Public — SECURITY RISK (still unresolved) |
@@ -38,6 +38,7 @@
 
 - [x] Marketing site live ✅ — **https://naturalenglishtraining.pages.dev** (CF Pages, Run 310) — FULLY LIVE, no dependency on Squarespace
 - [x] Soul DNA capture pipeline ✅ — POST /souldna, GET /souldna/{id}, GET /souldna/pipeline (Run 311d) — Ready for legionnaire processing
+- [x] Worker deployed to production ✅ — **https://net-pet-ai-production.mrmichaelhobbs123.workers.dev** (Run 312) — LIVE (v1.5.0, bindings 5/5, awaiting secrets)
 - [ ] Set phoenix-ob1 to PRIVATE (currently PUBLIC with secrets)
 - [x] Rotate SOVEREIGN_KEY — ✅ 2026-04-19 (44-char base64, wrangler secret put)
 - [ ] copilot-governance.md approval pending
@@ -48,6 +49,7 @@
 
 | Worker | URL | Version | Status |
 |---|---|---|---|
+| net-pet-ai-production | https://net-pet-ai-production.mrmichaelhobbs123.workers.dev | 1.5.0 | ✅ LIVE (Run 312) |
 | net-pet-ai | https://net-pet-ai.mrmichaelhobbs123.workers.dev | 934ce2a9 | ✅ LIVE 2026-04-19 |
 
 ### Run History
