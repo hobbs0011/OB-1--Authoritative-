@@ -2,7 +2,7 @@ name: Deploy NET-PET-AI Worker
 
 on:
   push:
-    branches: [main]
+    branches: [canon]
     paths:
       - 'APPS/NET-PET-AI/**'
       - '.github/workflows/deploy-net-pet-ai.yml'
@@ -40,7 +40,7 @@ jobs:
       - name: Health probe (workers.dev)
         run: |
           sleep 10
-          STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://net-pet-ai.naturalenglishtraining.workers.dev/api/health || echo "000")
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://net-pet-ai.mrmichaelhobbs123.workers.dev/api/health || echo "000")
           echo "Health check HTTP $STATUS"
           if [ "$STATUS" = "200" ]; then
             echo "NET-PET-AI is live and healthy"
