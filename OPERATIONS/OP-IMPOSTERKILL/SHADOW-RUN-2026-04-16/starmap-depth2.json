@@ -1,0 +1,3989 @@
+{
+  "generated_at": "2026-04-16T16:01:01.5114773+07:00",
+  "node_count": 443,
+  "edge_count": 441,
+  "notes": "Depth-2 starmap generated in shadow mode for speed/safety",
+  "nodes": [
+    {
+      "id": "C:",
+      "level": 0,
+      "kind": "root"
+    },
+    {
+      "id": "C:\\$Recycle.Bin",
+      "level": 1,
+      "kind": "branch"
+    },
+    {
+      "id": "C:\\$Recycle.Bin\\S-1-5-18",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\$Recycle.Bin\\S-1-5-21-23002035-2115523900-3690897368-1001",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\$Recycle.Bin\\S-1-5-21-23002035-2115523900-3690897368-1003",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\$SysReset",
+      "level": 1,
+      "kind": "branch"
+    },
+    {
+      "id": "C:\\$SysReset\\Scratch",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Backups",
+      "level": 1,
+      "kind": "branch"
+    },
+    {
+      "id": "C:\\Config.Msi",
+      "level": 1,
+      "kind": "branch"
+    },
+    {
+      "id": "C:\\Documents and Settings",
+      "level": 1,
+      "kind": "branch"
+    },
+    {
+      "id": "C:\\inetpub",
+      "level": 1,
+      "kind": "branch"
+    },
+    {
+      "id": "C:\\nvm4w",
+      "level": 1,
+      "kind": "branch"
+    },
+    {
+      "id": "C:\\nvm4w\\nodejs",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\OneDriveTemp",
+      "level": 1,
+      "kind": "branch"
+    },
+    {
+      "id": "C:\\OneDriveTemp\\S-1-5-21-23002035-2115523900-3690897368-1001",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files",
+      "level": 1,
+      "kind": "branch"
+    },
+    {
+      "id": "C:\\Program Files\\7-Zip",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files\\Application Verifier",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files\\ASUS",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files\\BLACKBOXAI",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files\\BlueStacks_nxt",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files\\BraveSoftware",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files\\Common Files",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files\\Docker",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files\\dotnet",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files\\Git",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files\\GitHub CLI",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files\\Google",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files\\Hardcoded Software",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files\\Internet Explorer",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files\\Java",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files\\Kubernetes",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files\\McAfee",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files\\Microsoft GameInput",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files\\Microsoft Office",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files\\Microsoft Office 15",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files\\Microsoft SDKs",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files\\Microsoft VS Code",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files\\ModifiableWindowsApps",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files\\nodejs",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files\\NVIDIA Corporation",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files\\PackageManagement",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files\\PowerShell",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files\\Proton",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files\\Uninstall Information",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files\\VeePN",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files\\Windows Defender",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files\\Windows Kits",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files\\Windows Mail",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files\\Windows Media Player",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files\\Windows NT",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files\\Windows Photo Viewer",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files\\Windows Sidebar",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files\\WindowsApps",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files\\WindowsPowerShell",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files\\WSL",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files (x86)",
+      "level": 1,
+      "kind": "branch"
+    },
+    {
+      "id": "C:\\Program Files (x86)\\Application Verifier",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files (x86)\\ASUS",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files (x86)\\BlueStacks X",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files (x86)\\BraveSoftware",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files (x86)\\Common Files",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files (x86)\\Google",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files (x86)\\InstallShield Installation Information",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files (x86)\\Internet Download Manager",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files (x86)\\Internet Explorer",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files (x86)\\LightingService",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files (x86)\\Microsoft",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files (x86)\\Microsoft SDKs",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files (x86)\\Microsoft Visual Studio",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files (x86)\\Microsoft.NET",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files (x86)\\MSBuild",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files (x86)\\NVIDIA Corporation",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files (x86)\\Reference Assemblies",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files (x86)\\Windows Defender",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files (x86)\\Windows Kits",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files (x86)\\Windows Mail",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files (x86)\\Windows Media Player",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files (x86)\\Windows NT",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files (x86)\\Windows Photo Viewer",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files (x86)\\Windows Sidebar",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Program Files (x86)\\WindowsPowerShell",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\ProgramData",
+      "level": 1,
+      "kind": "branch"
+    },
+    {
+      "id": "C:\\ProgramData\\Application Data",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\ProgramData\\ASUS",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\ProgramData\\BlueStacks_nxt",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\ProgramData\\bst_boost_interprocess",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\ProgramData\\chocolatey",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\ProgramData\\ChocolateyHttpCache",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\ProgramData\\Claude",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\ProgramData\\CrossDevice",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\ProgramData\\Desktop",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\ProgramData\\DockerDesktop",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\ProgramData\\Documents",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\ProgramData\\Dolby",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\ProgramData\\IDM",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\ProgramData\\Intel",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\ProgramData\\McAfee",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\ProgramData\\Microsoft",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\ProgramData\\Microsoft DevDiv",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\ProgramData\\Microsoft OneDrive",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\ProgramData\\Mozilla-1de4eec8-1241-4177-a864-e594e8d1fb38",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\ProgramData\\mrmic",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\ProgramData\\NVIDIA",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\ProgramData\\NVIDIA Corporation",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\ProgramData\\Package Cache",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\ProgramData\\Packages",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\ProgramData\\regid.1991-06.com.microsoft",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\ProgramData\\Samsung",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\ProgramData\\shimgen",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\ProgramData\\SoftwareDistribution",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\ProgramData\\ssh",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\ProgramData\\Start Menu",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\ProgramData\\Templates",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\ProgramData\\USOPrivate",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\ProgramData\\USOShared",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\ProgramData\\Whesvc",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\ProgramData\\Windows App Certification Kit",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\ProgramData\\WindowsHolographicDevices",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\ProgramData\\Wondershare",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\ProgramData\\Wondershare Filmora",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Python314",
+      "level": 1,
+      "kind": "branch"
+    },
+    {
+      "id": "C:\\Python314\\DLLs",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Python314\\Doc",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Python314\\include",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Python314\\Lib",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Python314\\libs",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Python314\\Scripts",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Python314\\tcl",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Recovery",
+      "level": 1,
+      "kind": "branch"
+    },
+    {
+      "id": "C:\\System Volume Information",
+      "level": 1,
+      "kind": "branch"
+    },
+    {
+      "id": "C:\\Temp",
+      "level": 1,
+      "kind": "branch"
+    },
+    {
+      "id": "C:\\Temp\\ob1-deploy",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\tmp",
+      "level": 1,
+      "kind": "branch"
+    },
+    {
+      "id": "C:\\tmp\\net-pet-ai-dry",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Users",
+      "level": 1,
+      "kind": "branch"
+    },
+    {
+      "id": "C:\\Users\\All Users",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Users\\CodexSandboxOffline",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Users\\Default",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Users\\Default User",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Users\\mrmic",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Users\\mrmic_3f13u0b",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Users\\Public",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Users\\WsiAccount",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows",
+      "level": 1,
+      "kind": "branch"
+    },
+    {
+      "id": "C:\\Windows\\appcompat",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\apppatch",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\AppReadiness",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\assembly",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\ASUS",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\bcastdvr",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\Boot",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\Branding",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\BrowserCore",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\CbsTemp",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\Cursors",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\debug",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\diagnostics",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\DiagTrack",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\DigitalLocker",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\Downloaded Program Files",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\ELAMBKUP",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\en-US",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\Firmware",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\Fonts",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\GameBarPresenceWriter",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\Globalization",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\Help",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\id-ID",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\IdentityCRL",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\IME",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\ImmersiveControlPanel",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\InboxApps",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\INF",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\InputMethod",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\Installer",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\L2Schemas",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\LanguageOverlayCache",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\LiveKernelReports",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\Log",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\Logs",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\Media",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\Microsoft",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\Microsoft.NET",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\Migration",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\Minidump",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\ModemLogs",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\OCR",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\OEM",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\Offline Web Pages",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\Panther",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\Performance",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\PLA",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\PolicyDefinitions",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\Prefetch",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\Provisioning",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\Registration",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\rescache",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\Resources",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\SchCache",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\schemas",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\security",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\ServiceProfiles",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\ServiceState",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\servicing",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\Setup",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\ShellComponents",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\ShellExperiences",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\SKB",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\SoftwareDistribution",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\Speech",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\Speech_OneCore",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\System",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\System32",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\SystemApps",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\SystemResources",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\SystemTemp",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\SysWOW64",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\TAPI",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\Tasks",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\Temp",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\th-TH",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\tracing",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\twain_32",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\UUS",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\vi-VN",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\Vss",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\WaaS",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\Web",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\WinSxS",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\WUModels",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\zh-CN",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\Windows\\zh-TW",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\XboxGames",
+      "level": 1,
+      "kind": "branch"
+    },
+    {
+      "id": "C:\\XboxGames\\GameSave",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "C:\\XboxGames\\OB-1-r305",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:",
+      "level": 0,
+      "kind": "root"
+    },
+    {
+      "id": "D:\\.vscode-insiders",
+      "level": 1,
+      "kind": "branch"
+    },
+    {
+      "id": "D:\\.vscode-insiders\\cli",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\.vscode-insiders\\extensions",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\.vscode-server",
+      "level": 1,
+      "kind": "branch"
+    },
+    {
+      "id": "D:\\.vscode-server\\data",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\.vscode-server\\extensions",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\$RECYCLE.BIN",
+      "level": 1,
+      "kind": "branch"
+    },
+    {
+      "id": "D:\\$RECYCLE.BIN\\S-1-5-21-23002035-2115523900-3690897368-1001",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\$RECYCLE.BIN\\S-1-5-21-23002035-2115523900-3690897368-1003",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\AGENT99-OVERFLOW",
+      "level": 1,
+      "kind": "branch"
+    },
+    {
+      "id": "D:\\AGENT99-OVERFLOW\\from-C",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\AGENT99-OVERFLOW\\keepers",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\AGENT99-OVERFLOW\\manifests",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\AGENT99-OVERFLOW\\quarantine",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\AGENT99-STAGE-OUT",
+      "level": 1,
+      "kind": "branch"
+    },
+    {
+      "id": "D:\\AGENT99-STAGE-OUT\\drive_map",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\AGENT99-STAGE-OUT\\hashes",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\AGENT99-STAGE-OUT\\priority_corpus",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\AGENT99-STAGE-OUT\\relocation",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\AGENT99-STAGE-OUT\\SOUL-BIBLE",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\AGENT99-STAGE-OUT\\stage_ledger",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\AGENT99-STAGE-OUT\\toolstack",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\AGENT99-TOOLS",
+      "level": 1,
+      "kind": "branch"
+    },
+    {
+      "id": "D:\\c",
+      "level": 1,
+      "kind": "branch"
+    },
+    {
+      "id": "D:\\c\\Users",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\C_cleanup",
+      "level": 1,
+      "kind": "branch"
+    },
+    {
+      "id": "D:\\C_cleanup\\20260405_082038",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\C_cleanup\\20260405_082611",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\FINAL-PHASE",
+      "level": 1,
+      "kind": "branch"
+    },
+    {
+      "id": "D:\\FINAL-PHASE\\CHAOS-RANDOM FOLDER (NEEDS SORTING)(NON PRIORITY)",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\FINAL-PHASE\\DEPLOY- ATTEMPTS (KEY DEPLOY DIAGNOSTICS)",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\FINAL-PHASE\\DEV - PHASES (PRIORITY GENESIS-NOW)",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\FinalMerge",
+      "level": 1,
+      "kind": "branch"
+    },
+    {
+      "id": "D:\\FinalMerge\\MergeMedia",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\FinalMerge\\MergePersonal",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\FinalMerge\\MergeReports",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\HARD-BACKUPS",
+      "level": 1,
+      "kind": "branch"
+    },
+    {
+      "id": "D:\\Microsoft VS Code Insiders",
+      "level": 1,
+      "kind": "branch"
+    },
+    {
+      "id": "D:\\Microsoft VS Code Insiders\\.git",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\Microsoft VS Code Insiders\\.kilo",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\Microsoft VS Code Insiders\\00515ed0a3",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\Microsoft VS Code Insiders\\2b44ec5c3f",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\Microsoft VS Code Insiders\\3d70aab9a4",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\Microsoft VS Code Insiders\\47add6dfa5",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\Microsoft VS Code Insiders\\54b695e02e",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\Microsoft VS Code Insiders\\59b7facd31",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\Microsoft VS Code Insiders\\69eb462356",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\Microsoft VS Code Insiders\\6c8fcf1806",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\Microsoft VS Code Insiders\\863765d4a5",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\Microsoft VS Code Insiders\\8c85df126b",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\Microsoft VS Code Insiders\\b826afb9f0",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\Microsoft VS Code Insiders\\bin",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\Microsoft VS Code Insiders\\c99f8109a6",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\Microsoft VS Code Insiders\\d63819fd8f",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\Microsoft VS Code Insiders\\dcd017c96b",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\Microsoft VS Code Insiders\\ee6bfc559a",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\Microsoft VS Code Insiders\\fc23f2d266",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1",
+      "level": 1,
+      "kind": "branch"
+    },
+    {
+      "id": "D:\\OB-1\\_SORTED",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\.copilot-backups",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\.git",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\.githooks",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\.github",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\.kilo",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\.playwright-mcp",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\.ruff_cache",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\.venv",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\.vscode",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\a1eaf6a5-0df2-430c-8715-e4ed98cd4a6f_Export-16500c93-ae1f-4d82-aace-2a53b25bf090",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\AGENT99-POST-GITHUB",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\APPS",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\ARCHIVE",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\ASSETS",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\Branding Content",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\CANON",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\codex_preview",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\CrossDevice",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\DISCORD-BOT",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\docs",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\FINAL SOUL DNA (OP-SOUL-SEARCH)",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\GALAXY",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\GALAXY-LESSONS",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\NET",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\NET_AI_ECOSYSTEM",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\NET_ASSET_VAULT",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\NET-MARKETING",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\net-tiger-assessment",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\net-tiger-assessment.worktrees",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\node_modules",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\OB-1-merge6",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\OB1_OPERATIONS",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\OPERATION PHOENIX MEMORY",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\OPERATIONS",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\Phoenix-Rising",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\Phoenix-Rising-Protocol-Ultimate",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\Phoenix-Rising-Ultimate",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\PIPELINE",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\Private & Shared",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\PROOFS-KEY-SOUL-10-2026-04-05-2026-04-05",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\PROOFS-KEY-SOUL10-2026-04-05-2026-04-05",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\PROOFS-SOUL-LOG-VERBATIM-KEY-SOUL-10-2026-04-05-2026-04-15",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\PROOFS-SOUL-LOG-VERBATIM-KEY-SOUL-10-2026-04-05-NORMALIZED-2026-04-05-2026-04-15",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\PROOFS-SOUL-LOG-VERBATIM-KEY-SOUL10-2026-04-05-2026-04-15",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\PROOFS-SOUL-LOG-VERBATIM-KEY-SOUL10-2026-04-05-NORMALIZED-2026-04-05-2026-04-15",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\PULSE-HANDOFFS",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\QA",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\Quick Share",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\RAW-CHAT-LOGS",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\SCRIPTS",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\SESSIONS",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\SITE",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\TEMP-COMMANDSTATION",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\TEMP-PHOENIX-IMMORTALIZE",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\TEMP-PHOENIX-ULTIMATE",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\TTS-ART",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\TTS-REVIEW-AUDIO-VIDEO",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\Ultimate Consolidation",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\Vietnamese Audios",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\WEBSITE",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\Website and NET-PET",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\worker",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1\\WORKERS",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1-r305",
+      "level": 1,
+      "kind": "branch"
+    },
+    {
+      "id": "D:\\OB-1-r305\\.githooks",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1-r305\\.github",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1-r305\\.kilo",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1-r305\\.vscode",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1-r305\\APPS",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1-r305\\ARCHIVE",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1-r305\\ASSETS",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1-r305\\CANON",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1-r305\\docs",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1-r305\\GALAXY-LESSONS",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1-r305\\OPERATIONS",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1-r305\\Phoenix-Rising-Protocol-Ultimate",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1-r305\\PIPELINE",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1-r305\\PULSE-HANDOFFS",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1-r305\\QA",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1-r305\\RAW-CHAT-LOGS",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1-r305\\SCRIPTS",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1-r305\\SESSIONS",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1-r305\\SITE",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1-r305\\TEMP-COMMANDSTATION",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB-1-r305\\WORKERS",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB1_ARCHIVE",
+      "level": 1,
+      "kind": "branch"
+    },
+    {
+      "id": "D:\\OB1_ARCHIVE\\net-tiger-assessment",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB1_ARCHIVE\\OB-1",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB1_ARCHIVE\\OB-1.worktrees",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB1_ARCHIVE\\Website-and-NET-PET",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB1_MOVED",
+      "level": 1,
+      "kind": "branch"
+    },
+    {
+      "id": "D:\\OB1_MOVED\\reports",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB1_MOVED\\root",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB1_MOVED\\users",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB1_OPERATIONS",
+      "level": 1,
+      "kind": "branch"
+    },
+    {
+      "id": "D:\\OB1_OPERATIONS\\.agents",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB1_OPERATIONS\\backup-NET-Ai-EcoSystem-CommandStation",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB1_OPERATIONS\\kilo",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\OB1_OPERATIONS\\reports",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\Personal Files",
+      "level": 1,
+      "kind": "branch"
+    },
+    {
+      "id": "D:\\Personal Files\\CONTENT",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\Personal Files\\Galaxy",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\Personal Files\\PERSONAL PICTURES",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\Personal Files\\QRS",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\Personal Files\\RANDOM (NON-PRIORITY)",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\Personal Files\\SHHHHHHH",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\Personal Files\\Vietnamese Audios",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\Personal Files\\Workout Session",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\phoenix-chat-logs",
+      "level": 1,
+      "kind": "branch"
+    },
+    {
+      "id": "D:\\phoenix-chat-logs\\.git",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\phoenix-chat-logs\\B3",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\phoenix-chat-logs\\CHAT-EXPORTS",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\phoenix-chat-logs\\CHAT-LOGS-ONLY",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\phoenix-chat-logs\\LAYERS",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\phoenix-chat-logs\\LOGS",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\phoenix-chat-logs\\scripts",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\phoenix-ob1-system",
+      "level": 1,
+      "kind": "branch"
+    },
+    {
+      "id": "D:\\phoenix-ob1-system\\.git",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\phoenix-ob1-system\\.github",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\phoenix-ob1-system\\artifacts",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\phoenix-ob1-system\\docs",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\phoenix-ob1-system\\validators",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\Steam",
+      "level": 1,
+      "kind": "branch"
+    },
+    {
+      "id": "D:\\Steam\\appcache",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\Steam\\bin",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\Steam\\clientui",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\Steam\\config",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\Steam\\controller_base",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\Steam\\depotcache",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\Steam\\dumps",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\Steam\\friends",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\Steam\\graphics",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\Steam\\logs",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\Steam\\package",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\Steam\\public",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\Steam\\resource",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\Steam\\steam",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\Steam\\steamapps",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\Steam\\steamui",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\Steam\\tenfoot",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\Steam\\userdata",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\System Volume Information",
+      "level": 1,
+      "kind": "branch"
+    },
+    {
+      "id": "D:\\tmp",
+      "level": 1,
+      "kind": "branch"
+    },
+    {
+      "id": "D:\\tmp\\net-pet-ai-dry",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\Zalo Data",
+      "level": 1,
+      "kind": "branch"
+    },
+    {
+      "id": "D:\\Zalo Data\\media",
+      "level": 2,
+      "kind": "bud"
+    },
+    {
+      "id": "D:\\Zalo Data\\message",
+      "level": 2,
+      "kind": "bud"
+    }
+  ],
+  "edges": [
+    {
+      "from": "C:",
+      "to": "C:\\$Recycle.Bin"
+    },
+    {
+      "from": "C:\\$Recycle.Bin",
+      "to": "C:\\$Recycle.Bin\\S-1-5-18"
+    },
+    {
+      "from": "C:\\$Recycle.Bin",
+      "to": "C:\\$Recycle.Bin\\S-1-5-21-23002035-2115523900-3690897368-1001"
+    },
+    {
+      "from": "C:\\$Recycle.Bin",
+      "to": "C:\\$Recycle.Bin\\S-1-5-21-23002035-2115523900-3690897368-1003"
+    },
+    {
+      "from": "C:",
+      "to": "C:\\$SysReset"
+    },
+    {
+      "from": "C:\\$SysReset",
+      "to": "C:\\$SysReset\\Scratch"
+    },
+    {
+      "from": "C:",
+      "to": "C:\\Backups"
+    },
+    {
+      "from": "C:",
+      "to": "C:\\Config.Msi"
+    },
+    {
+      "from": "C:",
+      "to": "C:\\Documents and Settings"
+    },
+    {
+      "from": "C:",
+      "to": "C:\\inetpub"
+    },
+    {
+      "from": "C:",
+      "to": "C:\\nvm4w"
+    },
+    {
+      "from": "C:\\nvm4w",
+      "to": "C:\\nvm4w\\nodejs"
+    },
+    {
+      "from": "C:",
+      "to": "C:\\OneDriveTemp"
+    },
+    {
+      "from": "C:\\OneDriveTemp",
+      "to": "C:\\OneDriveTemp\\S-1-5-21-23002035-2115523900-3690897368-1001"
+    },
+    {
+      "from": "C:",
+      "to": "C:\\Program Files"
+    },
+    {
+      "from": "C:\\Program Files",
+      "to": "C:\\Program Files\\7-Zip"
+    },
+    {
+      "from": "C:\\Program Files",
+      "to": "C:\\Program Files\\Application Verifier"
+    },
+    {
+      "from": "C:\\Program Files",
+      "to": "C:\\Program Files\\ASUS"
+    },
+    {
+      "from": "C:\\Program Files",
+      "to": "C:\\Program Files\\BLACKBOXAI"
+    },
+    {
+      "from": "C:\\Program Files",
+      "to": "C:\\Program Files\\BlueStacks_nxt"
+    },
+    {
+      "from": "C:\\Program Files",
+      "to": "C:\\Program Files\\BraveSoftware"
+    },
+    {
+      "from": "C:\\Program Files",
+      "to": "C:\\Program Files\\Common Files"
+    },
+    {
+      "from": "C:\\Program Files",
+      "to": "C:\\Program Files\\Docker"
+    },
+    {
+      "from": "C:\\Program Files",
+      "to": "C:\\Program Files\\dotnet"
+    },
+    {
+      "from": "C:\\Program Files",
+      "to": "C:\\Program Files\\Git"
+    },
+    {
+      "from": "C:\\Program Files",
+      "to": "C:\\Program Files\\GitHub CLI"
+    },
+    {
+      "from": "C:\\Program Files",
+      "to": "C:\\Program Files\\Google"
+    },
+    {
+      "from": "C:\\Program Files",
+      "to": "C:\\Program Files\\Hardcoded Software"
+    },
+    {
+      "from": "C:\\Program Files",
+      "to": "C:\\Program Files\\Internet Explorer"
+    },
+    {
+      "from": "C:\\Program Files",
+      "to": "C:\\Program Files\\Java"
+    },
+    {
+      "from": "C:\\Program Files",
+      "to": "C:\\Program Files\\Kubernetes"
+    },
+    {
+      "from": "C:\\Program Files",
+      "to": "C:\\Program Files\\McAfee"
+    },
+    {
+      "from": "C:\\Program Files",
+      "to": "C:\\Program Files\\Microsoft GameInput"
+    },
+    {
+      "from": "C:\\Program Files",
+      "to": "C:\\Program Files\\Microsoft Office"
+    },
+    {
+      "from": "C:\\Program Files",
+      "to": "C:\\Program Files\\Microsoft Office 15"
+    },
+    {
+      "from": "C:\\Program Files",
+      "to": "C:\\Program Files\\Microsoft SDKs"
+    },
+    {
+      "from": "C:\\Program Files",
+      "to": "C:\\Program Files\\Microsoft VS Code"
+    },
+    {
+      "from": "C:\\Program Files",
+      "to": "C:\\Program Files\\ModifiableWindowsApps"
+    },
+    {
+      "from": "C:\\Program Files",
+      "to": "C:\\Program Files\\nodejs"
+    },
+    {
+      "from": "C:\\Program Files",
+      "to": "C:\\Program Files\\NVIDIA Corporation"
+    },
+    {
+      "from": "C:\\Program Files",
+      "to": "C:\\Program Files\\PackageManagement"
+    },
+    {
+      "from": "C:\\Program Files",
+      "to": "C:\\Program Files\\PowerShell"
+    },
+    {
+      "from": "C:\\Program Files",
+      "to": "C:\\Program Files\\Proton"
+    },
+    {
+      "from": "C:\\Program Files",
+      "to": "C:\\Program Files\\Uninstall Information"
+    },
+    {
+      "from": "C:\\Program Files",
+      "to": "C:\\Program Files\\VeePN"
+    },
+    {
+      "from": "C:\\Program Files",
+      "to": "C:\\Program Files\\Windows Defender"
+    },
+    {
+      "from": "C:\\Program Files",
+      "to": "C:\\Program Files\\Windows Kits"
+    },
+    {
+      "from": "C:\\Program Files",
+      "to": "C:\\Program Files\\Windows Mail"
+    },
+    {
+      "from": "C:\\Program Files",
+      "to": "C:\\Program Files\\Windows Media Player"
+    },
+    {
+      "from": "C:\\Program Files",
+      "to": "C:\\Program Files\\Windows NT"
+    },
+    {
+      "from": "C:\\Program Files",
+      "to": "C:\\Program Files\\Windows Photo Viewer"
+    },
+    {
+      "from": "C:\\Program Files",
+      "to": "C:\\Program Files\\Windows Sidebar"
+    },
+    {
+      "from": "C:\\Program Files",
+      "to": "C:\\Program Files\\WindowsApps"
+    },
+    {
+      "from": "C:\\Program Files",
+      "to": "C:\\Program Files\\WindowsPowerShell"
+    },
+    {
+      "from": "C:\\Program Files",
+      "to": "C:\\Program Files\\WSL"
+    },
+    {
+      "from": "C:",
+      "to": "C:\\Program Files (x86)"
+    },
+    {
+      "from": "C:\\Program Files (x86)",
+      "to": "C:\\Program Files (x86)\\Application Verifier"
+    },
+    {
+      "from": "C:\\Program Files (x86)",
+      "to": "C:\\Program Files (x86)\\ASUS"
+    },
+    {
+      "from": "C:\\Program Files (x86)",
+      "to": "C:\\Program Files (x86)\\BlueStacks X"
+    },
+    {
+      "from": "C:\\Program Files (x86)",
+      "to": "C:\\Program Files (x86)\\BraveSoftware"
+    },
+    {
+      "from": "C:\\Program Files (x86)",
+      "to": "C:\\Program Files (x86)\\Common Files"
+    },
+    {
+      "from": "C:\\Program Files (x86)",
+      "to": "C:\\Program Files (x86)\\Google"
+    },
+    {
+      "from": "C:\\Program Files (x86)",
+      "to": "C:\\Program Files (x86)\\InstallShield Installation Information"
+    },
+    {
+      "from": "C:\\Program Files (x86)",
+      "to": "C:\\Program Files (x86)\\Internet Download Manager"
+    },
+    {
+      "from": "C:\\Program Files (x86)",
+      "to": "C:\\Program Files (x86)\\Internet Explorer"
+    },
+    {
+      "from": "C:\\Program Files (x86)",
+      "to": "C:\\Program Files (x86)\\LightingService"
+    },
+    {
+      "from": "C:\\Program Files (x86)",
+      "to": "C:\\Program Files (x86)\\Microsoft"
+    },
+    {
+      "from": "C:\\Program Files (x86)",
+      "to": "C:\\Program Files (x86)\\Microsoft SDKs"
+    },
+    {
+      "from": "C:\\Program Files (x86)",
+      "to": "C:\\Program Files (x86)\\Microsoft Visual Studio"
+    },
+    {
+      "from": "C:\\Program Files (x86)",
+      "to": "C:\\Program Files (x86)\\Microsoft.NET"
+    },
+    {
+      "from": "C:\\Program Files (x86)",
+      "to": "C:\\Program Files (x86)\\MSBuild"
+    },
+    {
+      "from": "C:\\Program Files (x86)",
+      "to": "C:\\Program Files (x86)\\NVIDIA Corporation"
+    },
+    {
+      "from": "C:\\Program Files (x86)",
+      "to": "C:\\Program Files (x86)\\Reference Assemblies"
+    },
+    {
+      "from": "C:\\Program Files (x86)",
+      "to": "C:\\Program Files (x86)\\Windows Defender"
+    },
+    {
+      "from": "C:\\Program Files (x86)",
+      "to": "C:\\Program Files (x86)\\Windows Kits"
+    },
+    {
+      "from": "C:\\Program Files (x86)",
+      "to": "C:\\Program Files (x86)\\Windows Mail"
+    },
+    {
+      "from": "C:\\Program Files (x86)",
+      "to": "C:\\Program Files (x86)\\Windows Media Player"
+    },
+    {
+      "from": "C:\\Program Files (x86)",
+      "to": "C:\\Program Files (x86)\\Windows NT"
+    },
+    {
+      "from": "C:\\Program Files (x86)",
+      "to": "C:\\Program Files (x86)\\Windows Photo Viewer"
+    },
+    {
+      "from": "C:\\Program Files (x86)",
+      "to": "C:\\Program Files (x86)\\Windows Sidebar"
+    },
+    {
+      "from": "C:\\Program Files (x86)",
+      "to": "C:\\Program Files (x86)\\WindowsPowerShell"
+    },
+    {
+      "from": "C:",
+      "to": "C:\\ProgramData"
+    },
+    {
+      "from": "C:\\ProgramData",
+      "to": "C:\\ProgramData\\Application Data"
+    },
+    {
+      "from": "C:\\ProgramData",
+      "to": "C:\\ProgramData\\ASUS"
+    },
+    {
+      "from": "C:\\ProgramData",
+      "to": "C:\\ProgramData\\BlueStacks_nxt"
+    },
+    {
+      "from": "C:\\ProgramData",
+      "to": "C:\\ProgramData\\bst_boost_interprocess"
+    },
+    {
+      "from": "C:\\ProgramData",
+      "to": "C:\\ProgramData\\chocolatey"
+    },
+    {
+      "from": "C:\\ProgramData",
+      "to": "C:\\ProgramData\\ChocolateyHttpCache"
+    },
+    {
+      "from": "C:\\ProgramData",
+      "to": "C:\\ProgramData\\Claude"
+    },
+    {
+      "from": "C:\\ProgramData",
+      "to": "C:\\ProgramData\\CrossDevice"
+    },
+    {
+      "from": "C:\\ProgramData",
+      "to": "C:\\ProgramData\\Desktop"
+    },
+    {
+      "from": "C:\\ProgramData",
+      "to": "C:\\ProgramData\\DockerDesktop"
+    },
+    {
+      "from": "C:\\ProgramData",
+      "to": "C:\\ProgramData\\Documents"
+    },
+    {
+      "from": "C:\\ProgramData",
+      "to": "C:\\ProgramData\\Dolby"
+    },
+    {
+      "from": "C:\\ProgramData",
+      "to": "C:\\ProgramData\\IDM"
+    },
+    {
+      "from": "C:\\ProgramData",
+      "to": "C:\\ProgramData\\Intel"
+    },
+    {
+      "from": "C:\\ProgramData",
+      "to": "C:\\ProgramData\\McAfee"
+    },
+    {
+      "from": "C:\\ProgramData",
+      "to": "C:\\ProgramData\\Microsoft"
+    },
+    {
+      "from": "C:\\ProgramData",
+      "to": "C:\\ProgramData\\Microsoft DevDiv"
+    },
+    {
+      "from": "C:\\ProgramData",
+      "to": "C:\\ProgramData\\Microsoft OneDrive"
+    },
+    {
+      "from": "C:\\ProgramData",
+      "to": "C:\\ProgramData\\Mozilla-1de4eec8-1241-4177-a864-e594e8d1fb38"
+    },
+    {
+      "from": "C:\\ProgramData",
+      "to": "C:\\ProgramData\\mrmic"
+    },
+    {
+      "from": "C:\\ProgramData",
+      "to": "C:\\ProgramData\\NVIDIA"
+    },
+    {
+      "from": "C:\\ProgramData",
+      "to": "C:\\ProgramData\\NVIDIA Corporation"
+    },
+    {
+      "from": "C:\\ProgramData",
+      "to": "C:\\ProgramData\\Package Cache"
+    },
+    {
+      "from": "C:\\ProgramData",
+      "to": "C:\\ProgramData\\Packages"
+    },
+    {
+      "from": "C:\\ProgramData",
+      "to": "C:\\ProgramData\\regid.1991-06.com.microsoft"
+    },
+    {
+      "from": "C:\\ProgramData",
+      "to": "C:\\ProgramData\\Samsung"
+    },
+    {
+      "from": "C:\\ProgramData",
+      "to": "C:\\ProgramData\\shimgen"
+    },
+    {
+      "from": "C:\\ProgramData",
+      "to": "C:\\ProgramData\\SoftwareDistribution"
+    },
+    {
+      "from": "C:\\ProgramData",
+      "to": "C:\\ProgramData\\ssh"
+    },
+    {
+      "from": "C:\\ProgramData",
+      "to": "C:\\ProgramData\\Start Menu"
+    },
+    {
+      "from": "C:\\ProgramData",
+      "to": "C:\\ProgramData\\Templates"
+    },
+    {
+      "from": "C:\\ProgramData",
+      "to": "C:\\ProgramData\\USOPrivate"
+    },
+    {
+      "from": "C:\\ProgramData",
+      "to": "C:\\ProgramData\\USOShared"
+    },
+    {
+      "from": "C:\\ProgramData",
+      "to": "C:\\ProgramData\\Whesvc"
+    },
+    {
+      "from": "C:\\ProgramData",
+      "to": "C:\\ProgramData\\Windows App Certification Kit"
+    },
+    {
+      "from": "C:\\ProgramData",
+      "to": "C:\\ProgramData\\WindowsHolographicDevices"
+    },
+    {
+      "from": "C:\\ProgramData",
+      "to": "C:\\ProgramData\\Wondershare"
+    },
+    {
+      "from": "C:\\ProgramData",
+      "to": "C:\\ProgramData\\Wondershare Filmora"
+    },
+    {
+      "from": "C:",
+      "to": "C:\\Python314"
+    },
+    {
+      "from": "C:\\Python314",
+      "to": "C:\\Python314\\DLLs"
+    },
+    {
+      "from": "C:\\Python314",
+      "to": "C:\\Python314\\Doc"
+    },
+    {
+      "from": "C:\\Python314",
+      "to": "C:\\Python314\\include"
+    },
+    {
+      "from": "C:\\Python314",
+      "to": "C:\\Python314\\Lib"
+    },
+    {
+      "from": "C:\\Python314",
+      "to": "C:\\Python314\\libs"
+    },
+    {
+      "from": "C:\\Python314",
+      "to": "C:\\Python314\\Scripts"
+    },
+    {
+      "from": "C:\\Python314",
+      "to": "C:\\Python314\\tcl"
+    },
+    {
+      "from": "C:",
+      "to": "C:\\Recovery"
+    },
+    {
+      "from": "C:",
+      "to": "C:\\System Volume Information"
+    },
+    {
+      "from": "C:",
+      "to": "C:\\Temp"
+    },
+    {
+      "from": "C:\\Temp",
+      "to": "C:\\Temp\\ob1-deploy"
+    },
+    {
+      "from": "C:",
+      "to": "C:\\tmp"
+    },
+    {
+      "from": "C:\\tmp",
+      "to": "C:\\tmp\\net-pet-ai-dry"
+    },
+    {
+      "from": "C:",
+      "to": "C:\\Users"
+    },
+    {
+      "from": "C:\\Users",
+      "to": "C:\\Users\\All Users"
+    },
+    {
+      "from": "C:\\Users",
+      "to": "C:\\Users\\CodexSandboxOffline"
+    },
+    {
+      "from": "C:\\Users",
+      "to": "C:\\Users\\Default"
+    },
+    {
+      "from": "C:\\Users",
+      "to": "C:\\Users\\Default User"
+    },
+    {
+      "from": "C:\\Users",
+      "to": "C:\\Users\\mrmic"
+    },
+    {
+      "from": "C:\\Users",
+      "to": "C:\\Users\\mrmic_3f13u0b"
+    },
+    {
+      "from": "C:\\Users",
+      "to": "C:\\Users\\Public"
+    },
+    {
+      "from": "C:\\Users",
+      "to": "C:\\Users\\WsiAccount"
+    },
+    {
+      "from": "C:",
+      "to": "C:\\Windows"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\appcompat"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\apppatch"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\AppReadiness"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\assembly"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\ASUS"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\bcastdvr"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\Boot"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\Branding"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\BrowserCore"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\CbsTemp"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\Cursors"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\debug"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\diagnostics"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\DiagTrack"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\DigitalLocker"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\Downloaded Program Files"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\ELAMBKUP"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\en-US"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\Firmware"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\Fonts"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\GameBarPresenceWriter"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\Globalization"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\Help"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\id-ID"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\IdentityCRL"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\IME"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\ImmersiveControlPanel"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\InboxApps"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\INF"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\InputMethod"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\Installer"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\L2Schemas"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\LanguageOverlayCache"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\LiveKernelReports"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\Log"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\Logs"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\Media"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\Microsoft"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\Microsoft.NET"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\Migration"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\Minidump"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\ModemLogs"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\OCR"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\OEM"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\Offline Web Pages"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\Panther"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\Performance"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\PLA"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\PolicyDefinitions"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\Prefetch"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\Provisioning"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\Registration"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\rescache"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\Resources"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\SchCache"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\schemas"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\security"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\ServiceProfiles"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\ServiceState"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\servicing"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\Setup"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\ShellComponents"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\ShellExperiences"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\SKB"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\SoftwareDistribution"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\Speech"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\Speech_OneCore"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\System"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\System32"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\SystemApps"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\SystemResources"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\SystemTemp"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\SysWOW64"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\TAPI"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\Tasks"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\Temp"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\th-TH"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\tracing"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\twain_32"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\UUS"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\vi-VN"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\Vss"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\WaaS"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\Web"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\WinSxS"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\WUModels"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\zh-CN"
+    },
+    {
+      "from": "C:\\Windows",
+      "to": "C:\\Windows\\zh-TW"
+    },
+    {
+      "from": "C:",
+      "to": "C:\\XboxGames"
+    },
+    {
+      "from": "C:\\XboxGames",
+      "to": "C:\\XboxGames\\GameSave"
+    },
+    {
+      "from": "C:\\XboxGames",
+      "to": "C:\\XboxGames\\OB-1-r305"
+    },
+    {
+      "from": "D:",
+      "to": "D:\\.vscode-insiders"
+    },
+    {
+      "from": "D:\\.vscode-insiders",
+      "to": "D:\\.vscode-insiders\\cli"
+    },
+    {
+      "from": "D:\\.vscode-insiders",
+      "to": "D:\\.vscode-insiders\\extensions"
+    },
+    {
+      "from": "D:",
+      "to": "D:\\.vscode-server"
+    },
+    {
+      "from": "D:\\.vscode-server",
+      "to": "D:\\.vscode-server\\data"
+    },
+    {
+      "from": "D:\\.vscode-server",
+      "to": "D:\\.vscode-server\\extensions"
+    },
+    {
+      "from": "D:",
+      "to": "D:\\$RECYCLE.BIN"
+    },
+    {
+      "from": "D:\\$RECYCLE.BIN",
+      "to": "D:\\$RECYCLE.BIN\\S-1-5-21-23002035-2115523900-3690897368-1001"
+    },
+    {
+      "from": "D:\\$RECYCLE.BIN",
+      "to": "D:\\$RECYCLE.BIN\\S-1-5-21-23002035-2115523900-3690897368-1003"
+    },
+    {
+      "from": "D:",
+      "to": "D:\\AGENT99-OVERFLOW"
+    },
+    {
+      "from": "D:\\AGENT99-OVERFLOW",
+      "to": "D:\\AGENT99-OVERFLOW\\from-C"
+    },
+    {
+      "from": "D:\\AGENT99-OVERFLOW",
+      "to": "D:\\AGENT99-OVERFLOW\\keepers"
+    },
+    {
+      "from": "D:\\AGENT99-OVERFLOW",
+      "to": "D:\\AGENT99-OVERFLOW\\manifests"
+    },
+    {
+      "from": "D:\\AGENT99-OVERFLOW",
+      "to": "D:\\AGENT99-OVERFLOW\\quarantine"
+    },
+    {
+      "from": "D:",
+      "to": "D:\\AGENT99-STAGE-OUT"
+    },
+    {
+      "from": "D:\\AGENT99-STAGE-OUT",
+      "to": "D:\\AGENT99-STAGE-OUT\\drive_map"
+    },
+    {
+      "from": "D:\\AGENT99-STAGE-OUT",
+      "to": "D:\\AGENT99-STAGE-OUT\\hashes"
+    },
+    {
+      "from": "D:\\AGENT99-STAGE-OUT",
+      "to": "D:\\AGENT99-STAGE-OUT\\priority_corpus"
+    },
+    {
+      "from": "D:\\AGENT99-STAGE-OUT",
+      "to": "D:\\AGENT99-STAGE-OUT\\relocation"
+    },
+    {
+      "from": "D:\\AGENT99-STAGE-OUT",
+      "to": "D:\\AGENT99-STAGE-OUT\\SOUL-BIBLE"
+    },
+    {
+      "from": "D:\\AGENT99-STAGE-OUT",
+      "to": "D:\\AGENT99-STAGE-OUT\\stage_ledger"
+    },
+    {
+      "from": "D:\\AGENT99-STAGE-OUT",
+      "to": "D:\\AGENT99-STAGE-OUT\\toolstack"
+    },
+    {
+      "from": "D:",
+      "to": "D:\\AGENT99-TOOLS"
+    },
+    {
+      "from": "D:",
+      "to": "D:\\c"
+    },
+    {
+      "from": "D:\\c",
+      "to": "D:\\c\\Users"
+    },
+    {
+      "from": "D:",
+      "to": "D:\\C_cleanup"
+    },
+    {
+      "from": "D:\\C_cleanup",
+      "to": "D:\\C_cleanup\\20260405_082038"
+    },
+    {
+      "from": "D:\\C_cleanup",
+      "to": "D:\\C_cleanup\\20260405_082611"
+    },
+    {
+      "from": "D:",
+      "to": "D:\\FINAL-PHASE"
+    },
+    {
+      "from": "D:\\FINAL-PHASE",
+      "to": "D:\\FINAL-PHASE\\CHAOS-RANDOM FOLDER (NEEDS SORTING)(NON PRIORITY)"
+    },
+    {
+      "from": "D:\\FINAL-PHASE",
+      "to": "D:\\FINAL-PHASE\\DEPLOY- ATTEMPTS (KEY DEPLOY DIAGNOSTICS)"
+    },
+    {
+      "from": "D:\\FINAL-PHASE",
+      "to": "D:\\FINAL-PHASE\\DEV - PHASES (PRIORITY GENESIS-NOW)"
+    },
+    {
+      "from": "D:",
+      "to": "D:\\FinalMerge"
+    },
+    {
+      "from": "D:\\FinalMerge",
+      "to": "D:\\FinalMerge\\MergeMedia"
+    },
+    {
+      "from": "D:\\FinalMerge",
+      "to": "D:\\FinalMerge\\MergePersonal"
+    },
+    {
+      "from": "D:\\FinalMerge",
+      "to": "D:\\FinalMerge\\MergeReports"
+    },
+    {
+      "from": "D:",
+      "to": "D:\\HARD-BACKUPS"
+    },
+    {
+      "from": "D:",
+      "to": "D:\\Microsoft VS Code Insiders"
+    },
+    {
+      "from": "D:\\Microsoft VS Code Insiders",
+      "to": "D:\\Microsoft VS Code Insiders\\.git"
+    },
+    {
+      "from": "D:\\Microsoft VS Code Insiders",
+      "to": "D:\\Microsoft VS Code Insiders\\.kilo"
+    },
+    {
+      "from": "D:\\Microsoft VS Code Insiders",
+      "to": "D:\\Microsoft VS Code Insiders\\00515ed0a3"
+    },
+    {
+      "from": "D:\\Microsoft VS Code Insiders",
+      "to": "D:\\Microsoft VS Code Insiders\\2b44ec5c3f"
+    },
+    {
+      "from": "D:\\Microsoft VS Code Insiders",
+      "to": "D:\\Microsoft VS Code Insiders\\3d70aab9a4"
+    },
+    {
+      "from": "D:\\Microsoft VS Code Insiders",
+      "to": "D:\\Microsoft VS Code Insiders\\47add6dfa5"
+    },
+    {
+      "from": "D:\\Microsoft VS Code Insiders",
+      "to": "D:\\Microsoft VS Code Insiders\\54b695e02e"
+    },
+    {
+      "from": "D:\\Microsoft VS Code Insiders",
+      "to": "D:\\Microsoft VS Code Insiders\\59b7facd31"
+    },
+    {
+      "from": "D:\\Microsoft VS Code Insiders",
+      "to": "D:\\Microsoft VS Code Insiders\\69eb462356"
+    },
+    {
+      "from": "D:\\Microsoft VS Code Insiders",
+      "to": "D:\\Microsoft VS Code Insiders\\6c8fcf1806"
+    },
+    {
+      "from": "D:\\Microsoft VS Code Insiders",
+      "to": "D:\\Microsoft VS Code Insiders\\863765d4a5"
+    },
+    {
+      "from": "D:\\Microsoft VS Code Insiders",
+      "to": "D:\\Microsoft VS Code Insiders\\8c85df126b"
+    },
+    {
+      "from": "D:\\Microsoft VS Code Insiders",
+      "to": "D:\\Microsoft VS Code Insiders\\b826afb9f0"
+    },
+    {
+      "from": "D:\\Microsoft VS Code Insiders",
+      "to": "D:\\Microsoft VS Code Insiders\\bin"
+    },
+    {
+      "from": "D:\\Microsoft VS Code Insiders",
+      "to": "D:\\Microsoft VS Code Insiders\\c99f8109a6"
+    },
+    {
+      "from": "D:\\Microsoft VS Code Insiders",
+      "to": "D:\\Microsoft VS Code Insiders\\d63819fd8f"
+    },
+    {
+      "from": "D:\\Microsoft VS Code Insiders",
+      "to": "D:\\Microsoft VS Code Insiders\\dcd017c96b"
+    },
+    {
+      "from": "D:\\Microsoft VS Code Insiders",
+      "to": "D:\\Microsoft VS Code Insiders\\ee6bfc559a"
+    },
+    {
+      "from": "D:\\Microsoft VS Code Insiders",
+      "to": "D:\\Microsoft VS Code Insiders\\fc23f2d266"
+    },
+    {
+      "from": "D:",
+      "to": "D:\\OB-1"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\_SORTED"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\.copilot-backups"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\.git"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\.githooks"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\.github"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\.kilo"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\.playwright-mcp"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\.ruff_cache"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\.venv"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\.vscode"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\a1eaf6a5-0df2-430c-8715-e4ed98cd4a6f_Export-16500c93-ae1f-4d82-aace-2a53b25bf090"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\AGENT99-POST-GITHUB"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\APPS"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\ARCHIVE"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\ASSETS"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\Branding Content"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\CANON"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\codex_preview"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\CrossDevice"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\DISCORD-BOT"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\docs"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\FINAL SOUL DNA (OP-SOUL-SEARCH)"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\GALAXY"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\GALAXY-LESSONS"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\NET"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\NET_AI_ECOSYSTEM"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\NET_ASSET_VAULT"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\NET-MARKETING"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\net-tiger-assessment"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\net-tiger-assessment.worktrees"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\node_modules"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\OB-1-merge6"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\OB1_OPERATIONS"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\OPERATION PHOENIX MEMORY"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\OPERATIONS"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\Phoenix-Rising"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\Phoenix-Rising-Protocol-Ultimate"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\Phoenix-Rising-Ultimate"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\PIPELINE"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\Private & Shared"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\PROOFS-KEY-SOUL-10-2026-04-05-2026-04-05"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\PROOFS-KEY-SOUL10-2026-04-05-2026-04-05"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\PROOFS-SOUL-LOG-VERBATIM-KEY-SOUL-10-2026-04-05-2026-04-15"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\PROOFS-SOUL-LOG-VERBATIM-KEY-SOUL-10-2026-04-05-NORMALIZED-2026-04-05-2026-04-15"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\PROOFS-SOUL-LOG-VERBATIM-KEY-SOUL10-2026-04-05-2026-04-15"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\PROOFS-SOUL-LOG-VERBATIM-KEY-SOUL10-2026-04-05-NORMALIZED-2026-04-05-2026-04-15"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\PULSE-HANDOFFS"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\QA"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\Quick Share"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\RAW-CHAT-LOGS"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\SCRIPTS"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\SESSIONS"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\SITE"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\TEMP-COMMANDSTATION"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\TEMP-PHOENIX-IMMORTALIZE"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\TEMP-PHOENIX-ULTIMATE"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\TTS-ART"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\TTS-REVIEW-AUDIO-VIDEO"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\Ultimate Consolidation"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\Vietnamese Audios"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\WEBSITE"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\Website and NET-PET"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\worker"
+    },
+    {
+      "from": "D:\\OB-1",
+      "to": "D:\\OB-1\\WORKERS"
+    },
+    {
+      "from": "D:",
+      "to": "D:\\OB-1-r305"
+    },
+    {
+      "from": "D:\\OB-1-r305",
+      "to": "D:\\OB-1-r305\\.githooks"
+    },
+    {
+      "from": "D:\\OB-1-r305",
+      "to": "D:\\OB-1-r305\\.github"
+    },
+    {
+      "from": "D:\\OB-1-r305",
+      "to": "D:\\OB-1-r305\\.kilo"
+    },
+    {
+      "from": "D:\\OB-1-r305",
+      "to": "D:\\OB-1-r305\\.vscode"
+    },
+    {
+      "from": "D:\\OB-1-r305",
+      "to": "D:\\OB-1-r305\\APPS"
+    },
+    {
+      "from": "D:\\OB-1-r305",
+      "to": "D:\\OB-1-r305\\ARCHIVE"
+    },
+    {
+      "from": "D:\\OB-1-r305",
+      "to": "D:\\OB-1-r305\\ASSETS"
+    },
+    {
+      "from": "D:\\OB-1-r305",
+      "to": "D:\\OB-1-r305\\CANON"
+    },
+    {
+      "from": "D:\\OB-1-r305",
+      "to": "D:\\OB-1-r305\\docs"
+    },
+    {
+      "from": "D:\\OB-1-r305",
+      "to": "D:\\OB-1-r305\\GALAXY-LESSONS"
+    },
+    {
+      "from": "D:\\OB-1-r305",
+      "to": "D:\\OB-1-r305\\OPERATIONS"
+    },
+    {
+      "from": "D:\\OB-1-r305",
+      "to": "D:\\OB-1-r305\\Phoenix-Rising-Protocol-Ultimate"
+    },
+    {
+      "from": "D:\\OB-1-r305",
+      "to": "D:\\OB-1-r305\\PIPELINE"
+    },
+    {
+      "from": "D:\\OB-1-r305",
+      "to": "D:\\OB-1-r305\\PULSE-HANDOFFS"
+    },
+    {
+      "from": "D:\\OB-1-r305",
+      "to": "D:\\OB-1-r305\\QA"
+    },
+    {
+      "from": "D:\\OB-1-r305",
+      "to": "D:\\OB-1-r305\\RAW-CHAT-LOGS"
+    },
+    {
+      "from": "D:\\OB-1-r305",
+      "to": "D:\\OB-1-r305\\SCRIPTS"
+    },
+    {
+      "from": "D:\\OB-1-r305",
+      "to": "D:\\OB-1-r305\\SESSIONS"
+    },
+    {
+      "from": "D:\\OB-1-r305",
+      "to": "D:\\OB-1-r305\\SITE"
+    },
+    {
+      "from": "D:\\OB-1-r305",
+      "to": "D:\\OB-1-r305\\TEMP-COMMANDSTATION"
+    },
+    {
+      "from": "D:\\OB-1-r305",
+      "to": "D:\\OB-1-r305\\WORKERS"
+    },
+    {
+      "from": "D:",
+      "to": "D:\\OB1_ARCHIVE"
+    },
+    {
+      "from": "D:\\OB1_ARCHIVE",
+      "to": "D:\\OB1_ARCHIVE\\net-tiger-assessment"
+    },
+    {
+      "from": "D:\\OB1_ARCHIVE",
+      "to": "D:\\OB1_ARCHIVE\\OB-1"
+    },
+    {
+      "from": "D:\\OB1_ARCHIVE",
+      "to": "D:\\OB1_ARCHIVE\\OB-1.worktrees"
+    },
+    {
+      "from": "D:\\OB1_ARCHIVE",
+      "to": "D:\\OB1_ARCHIVE\\Website-and-NET-PET"
+    },
+    {
+      "from": "D:",
+      "to": "D:\\OB1_MOVED"
+    },
+    {
+      "from": "D:\\OB1_MOVED",
+      "to": "D:\\OB1_MOVED\\reports"
+    },
+    {
+      "from": "D:\\OB1_MOVED",
+      "to": "D:\\OB1_MOVED\\root"
+    },
+    {
+      "from": "D:\\OB1_MOVED",
+      "to": "D:\\OB1_MOVED\\users"
+    },
+    {
+      "from": "D:",
+      "to": "D:\\OB1_OPERATIONS"
+    },
+    {
+      "from": "D:\\OB1_OPERATIONS",
+      "to": "D:\\OB1_OPERATIONS\\.agents"
+    },
+    {
+      "from": "D:\\OB1_OPERATIONS",
+      "to": "D:\\OB1_OPERATIONS\\backup-NET-Ai-EcoSystem-CommandStation"
+    },
+    {
+      "from": "D:\\OB1_OPERATIONS",
+      "to": "D:\\OB1_OPERATIONS\\kilo"
+    },
+    {
+      "from": "D:\\OB1_OPERATIONS",
+      "to": "D:\\OB1_OPERATIONS\\reports"
+    },
+    {
+      "from": "D:",
+      "to": "D:\\Personal Files"
+    },
+    {
+      "from": "D:\\Personal Files",
+      "to": "D:\\Personal Files\\CONTENT"
+    },
+    {
+      "from": "D:\\Personal Files",
+      "to": "D:\\Personal Files\\Galaxy"
+    },
+    {
+      "from": "D:\\Personal Files",
+      "to": "D:\\Personal Files\\PERSONAL PICTURES"
+    },
+    {
+      "from": "D:\\Personal Files",
+      "to": "D:\\Personal Files\\QRS"
+    },
+    {
+      "from": "D:\\Personal Files",
+      "to": "D:\\Personal Files\\RANDOM (NON-PRIORITY)"
+    },
+    {
+      "from": "D:\\Personal Files",
+      "to": "D:\\Personal Files\\SHHHHHHH"
+    },
+    {
+      "from": "D:\\Personal Files",
+      "to": "D:\\Personal Files\\Vietnamese Audios"
+    },
+    {
+      "from": "D:\\Personal Files",
+      "to": "D:\\Personal Files\\Workout Session"
+    },
+    {
+      "from": "D:",
+      "to": "D:\\phoenix-chat-logs"
+    },
+    {
+      "from": "D:\\phoenix-chat-logs",
+      "to": "D:\\phoenix-chat-logs\\.git"
+    },
+    {
+      "from": "D:\\phoenix-chat-logs",
+      "to": "D:\\phoenix-chat-logs\\B3"
+    },
+    {
+      "from": "D:\\phoenix-chat-logs",
+      "to": "D:\\phoenix-chat-logs\\CHAT-EXPORTS"
+    },
+    {
+      "from": "D:\\phoenix-chat-logs",
+      "to": "D:\\phoenix-chat-logs\\CHAT-LOGS-ONLY"
+    },
+    {
+      "from": "D:\\phoenix-chat-logs",
+      "to": "D:\\phoenix-chat-logs\\LAYERS"
+    },
+    {
+      "from": "D:\\phoenix-chat-logs",
+      "to": "D:\\phoenix-chat-logs\\LOGS"
+    },
+    {
+      "from": "D:\\phoenix-chat-logs",
+      "to": "D:\\phoenix-chat-logs\\scripts"
+    },
+    {
+      "from": "D:",
+      "to": "D:\\phoenix-ob1-system"
+    },
+    {
+      "from": "D:\\phoenix-ob1-system",
+      "to": "D:\\phoenix-ob1-system\\.git"
+    },
+    {
+      "from": "D:\\phoenix-ob1-system",
+      "to": "D:\\phoenix-ob1-system\\.github"
+    },
+    {
+      "from": "D:\\phoenix-ob1-system",
+      "to": "D:\\phoenix-ob1-system\\artifacts"
+    },
+    {
+      "from": "D:\\phoenix-ob1-system",
+      "to": "D:\\phoenix-ob1-system\\docs"
+    },
+    {
+      "from": "D:\\phoenix-ob1-system",
+      "to": "D:\\phoenix-ob1-system\\validators"
+    },
+    {
+      "from": "D:",
+      "to": "D:\\Steam"
+    },
+    {
+      "from": "D:\\Steam",
+      "to": "D:\\Steam\\appcache"
+    },
+    {
+      "from": "D:\\Steam",
+      "to": "D:\\Steam\\bin"
+    },
+    {
+      "from": "D:\\Steam",
+      "to": "D:\\Steam\\clientui"
+    },
+    {
+      "from": "D:\\Steam",
+      "to": "D:\\Steam\\config"
+    },
+    {
+      "from": "D:\\Steam",
+      "to": "D:\\Steam\\controller_base"
+    },
+    {
+      "from": "D:\\Steam",
+      "to": "D:\\Steam\\depotcache"
+    },
+    {
+      "from": "D:\\Steam",
+      "to": "D:\\Steam\\dumps"
+    },
+    {
+      "from": "D:\\Steam",
+      "to": "D:\\Steam\\friends"
+    },
+    {
+      "from": "D:\\Steam",
+      "to": "D:\\Steam\\graphics"
+    },
+    {
+      "from": "D:\\Steam",
+      "to": "D:\\Steam\\logs"
+    },
+    {
+      "from": "D:\\Steam",
+      "to": "D:\\Steam\\package"
+    },
+    {
+      "from": "D:\\Steam",
+      "to": "D:\\Steam\\public"
+    },
+    {
+      "from": "D:\\Steam",
+      "to": "D:\\Steam\\resource"
+    },
+    {
+      "from": "D:\\Steam",
+      "to": "D:\\Steam\\steam"
+    },
+    {
+      "from": "D:\\Steam",
+      "to": "D:\\Steam\\steamapps"
+    },
+    {
+      "from": "D:\\Steam",
+      "to": "D:\\Steam\\steamui"
+    },
+    {
+      "from": "D:\\Steam",
+      "to": "D:\\Steam\\tenfoot"
+    },
+    {
+      "from": "D:\\Steam",
+      "to": "D:\\Steam\\userdata"
+    },
+    {
+      "from": "D:",
+      "to": "D:\\System Volume Information"
+    },
+    {
+      "from": "D:",
+      "to": "D:\\tmp"
+    },
+    {
+      "from": "D:\\tmp",
+      "to": "D:\\tmp\\net-pet-ai-dry"
+    },
+    {
+      "from": "D:",
+      "to": "D:\\Zalo Data"
+    },
+    {
+      "from": "D:\\Zalo Data",
+      "to": "D:\\Zalo Data\\media"
+    },
+    {
+      "from": "D:\\Zalo Data",
+      "to": "D:\\Zalo Data\\message"
+    }
+  ]
+}

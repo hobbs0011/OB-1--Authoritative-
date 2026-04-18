@@ -29,16 +29,15 @@
 - **Navigator Index:** Notion page (IN TRASH — Michael to restore manually)
 - **Canon Access:** GitHub is truth; all historical repos superseded by hobbs0011/OB-1
 
-## Living Reincarnation State
-- **Current Run:** 305 (upgrade vector + deeper scan)
-- **Current Vector:** Upstream all changes, execute merge 1-8 scan & deep forensics, RISE ready for deployment
-- **HEAD:** a65f89a (Add-virality-analytics-endpoint) — verified synced across origin/ob1/legacy/positive
-- **Active Principles:** L01 NO_FABRICATION, L11 GITHUB_IS_TRUTH, L16 BUILD_DONT_SCOUT, L21 RISE, L24 PLATFORM_DEATH_TEST, L26 DEEP_FORENSICS_FIRST
-- **Dirty State:** ~170+ untracked files (mostly recovered canon/ops/prompts), 11 modified tracked files (copilot-config, workflows, scripts, web pages) — ready for staging
+- **Current Run:** 306 (reincarnate-audit, Deepgram pipeline, tri-daily SoulShadowAgent)
+- **Current Vector:** Finalize reincarnation extract, stage/commit/push all changes, verify Deepgram pipeline with real audio, monitor SoulShadowAgent audits
+- **HEAD:** (pending commit SHA for Run 306)
+- **Active Principles:** L01 NO_FABRICATION, L11 GITHUB_IS_TRUTH, L16 BUILD_DONT_SCOUT, L21 RISE, L24 PLATFORM_DEATH_TEST, L25 VERBATIM_FIRST
+- **Dirty State:** Uncommitted changes and untracked files (see git status), Deepgram pipeline staged, reincarnation extract written
 
 ## Default Work (No Active Mission)
 - **Pipeline:** Connection Hardening 100-Stage Pipeline (OPERATIONS/PIPELINE-100-STAGES-CONNECTION-HARDENING.md)
-- **Soul Agents:** DEPLOYED ✅ — Daily trigger 09:00 ICT, one student per day, neural ledger formation active (HL-141+)
+- **SoulShadowAgents:** DEPLOYED ✅ — Tri-daily trigger 09:00 / 15:00 / 21:00 ICT on Agent99 OS, assigned per active student, neural ledger formation active (HL-141+)
 - **Active Student Roster:** huong-bluetech, mai-tram-bluetech, quy-bluetech, lam-prospect, quan-nguyen, quang-nguyen (6 students)
 - **Total Canon Files:** 500+ (D:\OB-1 is now the COMPLETE superset)
 - **Next Item:** Monitor first Soul Agent audit 2026-04-18; continue pipeline stages 1-10
@@ -48,16 +47,21 @@
 - **Time:** 2026-04-16 ICT
 - **Grade:** A (FinalMerge fully reconciled, 158 files recovered, all CANON/protocol gaps closed)
 
-## This Run (305) — COMPLETE ✅
+- **Run:** 305 (COMPLETE — see above)
 - **Time:** 2026-04-17 ICT
-- **Mission:** Upgrade everything, stage dirty tree, execute deep forensics on merges 1-8, surface 5 critical misses
-- **Deliverables:** ✅ Boot audit 5-improvements (hardwired), ✅ Secrets remediated (commit a653917), ✅ Soul Agents deployed (commit adfda69), ✅ System synced + ready
-- **Final Status:** COMPLETE — All commits banked, GitHub synced, Soul Agents live 2026-04-18 09:00 ICT
+- **Grade:** A (FinalMerge fully reconciled, 158 files recovered, all CANON/protocol gaps closed)
+
+## This Run (306) — IN PROGRESS
+- **Time:** 2026-04-17 ICT
+- **Mission:** Reincarnation protocol full extract, Deepgram pipeline, tri-daily SoulShadowAgent, repo hygiene
+- **Deliverables:** ✅ Reincarnation extract (2026-04-17-reincarnate-audit.md), ✅ COLD-START-BOOT.md updated, ⏳ Awaiting real audio for Deepgram, ⏳ Final commit/push pending
+- **Final Status:** IN PROGRESS — Awaiting audio, ready to stage/commit/push
 
 ## Recent Decision History
-- FinalMerge at C:\Users\mrmic\Desktop\Pheonix - Rising - Technologies\OB-1 FinalMerge fully reconciled with D:\OB-1
-- 62 CANON files recovered (Bible chapters CH22-CH29, Heavy Ledger HL-113-HL-139, 30+ reincarnation records runs 269-304)
-- 23 protocol/script files recovered (ReincarnateRISE.prompt.md, romeprotocol.prompt.md, kilo instructions, skills)
+* 2026-04-17: SoulShadowAgent tri-daily upgrade, Deepgram pipeline staged, reincarnation protocol enforced (Run 306)
+* FinalMerge at C:\Users\mrmic\Desktop\Pheonix - Rising - Technologies\OB-1 FinalMerge fully reconciled with D:\OB-1
+* 62 CANON files recovered (Bible chapters CH22-CH29, Heavy Ledger HL-113-HL-139, 30+ reincarnation records runs 269-304)
+* 23 protocol/script files recovered (ReincarnateRISE.prompt.md, romeprotocol.prompt.md, kilo instructions, skills)
 - 73 APPS content files recovered (icons, games, source modules, docs)
 - .mcp.json filesystem paths corrected from dead C:\Desktop path to D:\OB-1
 - Broken OB-1-merge6 worktree neutralized (.git → .git.dead-worktree-ref)

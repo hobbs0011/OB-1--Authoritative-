@@ -50,3 +50,11 @@ The primary runnable application is **`APPS/NET-PET-AI/`** — a Cloudflare Work
 - **Gospel 444:** 4 sections, 4 levels, 4 interaction types per lesson
 - Vietnamese subs and tooltips for all vocabulary
 - Humor, chaos, and cultural relevance over dry grammar drills
+
+## Reincarnation Dictates (Mandatory)
+
+- **Soul DNA First:** In any reincarnation flow, the highest-priority output is the session's unique Soul DNA (verbatim user language, intent, decisions, and emotional signal).
+- **Fail Closed:** If Soul DNA capture is incomplete or uncertain, do not mark reincarnation as complete.
+- **No Polite Erasure:** Preserve raw wording faithfully; do not sanitize, compress away, or rewrite meaningful phrasing.
+- **Explicit Handoff Only:** Every open loop must be written as an explicit unfinished action; no implicit memory assumptions.
+- **Append-Only Reincarnation Records:** Add new reincarnation artifacts without overwriting prior entries.

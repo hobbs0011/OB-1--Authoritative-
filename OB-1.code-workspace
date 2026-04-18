@@ -1,0 +1,39 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"github.copilot.chat.codeGeneration.useInstructionFiles": true,
+		"github.copilot.enable": {
+			"*": true,
+			"plaintext": false,
+			"markdown": true,
+			"scminput": false
+		},
+		"github.copilot.chat.scopeSelection": true,
+		"git.confirmSync": false,
+		"chat.tools.terminal.autoApprove": {
+			"/^Test-Path \\.gitmodules; git ls-files --stage -- net-tiger-assessment \\| Measure-Object \\| Select-Object Count$/": {
+				"approve": true,
+				"matchCommandLine": true
+			},
+			"git -C d:\\OB-1": true
+		},
+		"mcp": {
+			"servers": {
+				"my-mcp-server-3cfe70d5": {
+					"url": "???",
+					"type": "http"
+				}
+			},
+			"inputs": []
+		}
+	},
+	"extensions": {
+		"recommendations": [
+			"ms-windows-ai-studio.windows-ai-studio"
+		]
+	}
+}

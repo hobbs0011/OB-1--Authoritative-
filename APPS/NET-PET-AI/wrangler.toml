@@ -3,6 +3,11 @@ main = "src/index.js"
 compatibility_date = "2026-03-16"
 compatibility_flags = ["nodejs_compat"]
 
+# DNS route - requires naturalenglishtraining.com zone to be on this CF account first
+# [[routes]]
+# pattern = "www.naturalenglishtraining.com/*"
+# zone_name = "naturalenglishtraining.com"
+
 [assets]
 directory = "./public"
 binding = "ASSETS"
@@ -31,6 +36,11 @@ new_sqlite_classes = ["SessionDO", "ProfileDO", "PetDO"]
 tag = "v2-ledger"
 new_sqlite_classes = ["LedgerDO"]
 
+[[migrations]]
+tag = "v4-ship-memory"
+new_sqlite_classes = ["MemoryDO"]
+
 [vars]
 APP_NAME = "Natural English Training"
 APP_COACH_NAME = "Obi"
+IMAGE_GEN_URL = ""

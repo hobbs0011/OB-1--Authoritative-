@@ -84,6 +84,11 @@ export default {
 
     // ── Canon §4 non-API routes ───────────────────────────────────────────────
 
+    // /imagegen — serve the turnkey imagegen UI
+    if (path === "/imagegen" && request.method === "GET") {
+      return env.ASSETS.fetch(new Request(new URL("/public/imagegen.html", url), request));
+    }
+
     // /health — REAL dependency validation (not cosmetic)
     if (path === "/health" && request.method === "GET") {
       const secrets = {
@@ -267,10 +272,35 @@ export default {
 
 async function handleAPI(path, request, env, url) {
   const method = request.method;
+  
+  // Image Generation Proxy — forwards to configured Image Gen URL (Vast.ai, RunPod, or local)
+    if (path === "/api/image" && method === "POST") {
+      try {
+        const body = await request.json();
+        const prompt = body.prompt || "";
+        const targetUrl = env.IMAGE_GEN_URL || "http://127.0.0.1:7860/";
+        
+        const flaskRes = await fetch(targetUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: new URLSearchParams({ prompt }),
+        });
+        const html = await flaskRes.text();
+        // Extract base64 image from HTML response
+        const match = html.match(/src=\"data:image\/png;base64,([^\"]+)/);
+        if (match && match[1]) {
+          return json({ ok: true, image: match[1] });
+        } else {
+          return json({ ok: false, error: "No image found in response." }, 502);
+        }
+      } catch (err) {
+        return json({ ok: false, error: err.message }, 500);
+}
+    }
 
-  // Health — lightweight
+    // Health — lightweight
   if (path === "/api/health" && method === "GET") {
-    return json({ ok: !!env.DEEPSEEK_API_KEY, version: VERSION, app: env.APP_NAME || "Natural English Training", coach: env.APP_COACH_NAME || "Obi", ts: Date.now(), routes: 40, ai: env.DEEPSEEK_API_KEY ? "LIVE" : "DEAD", voice: env.DEEPGRAM_API_KEY ? "LIVE" : "DEAD", notion: env.NOTION_API_KEY ? "LIVE" : "DEAD", readiness: (env.DEEPSEEK_API_KEY && env.DEEPGRAM_API_KEY) ? "PRODUCTION" : "NEEDS_SECRETS" });
+    return json({ ok: !!env.DEEPSEEK_API_KEY, version: VERSION, app: env.APP_NAME || "Natural English Training", coach: env.APP_COACH_NAME || "Obi", ts: Date.now(), routes: 40, ai: env.DEEPSEEK_API_KEY ? "LIVE" : "DEAD", voice: env.DEEPGRAM_API_KEY ? "LIVE" : "DEAD", notion: env.NOTION_API_KEY ? "LIVE" : "DEAD", imagegen: env.IMAGE_GEN_URL ? "CONFIGURED" : "NOT_SET", readiness: (env.DEEPSEEK_API_KEY && env.DEEPGRAM_API_KEY) ? "PRODUCTION" : "NEEDS_SECRETS" });
   }
 
   // Deep health — full dependency probe (hit each external service)

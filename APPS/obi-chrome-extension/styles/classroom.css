@@ -1,0 +1,488 @@
+/* OBI Chrome Extension — Classroom Management Styles
+ * Gospel 444 palette: void black #0f0f1a | soul purple #a855f7 | imperial gold #f59e0b
+ */
+
+/* ── Tab scroll area ── */
+
+#tab-classroom.active,
+#tab-settings.active {
+  overflow-y: auto;
+}
+
+/* ── Classroom container ── */
+
+.classroom-container {
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.classroom-header h2 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #a855f7;
+}
+
+/* ── Add student row ── */
+
+.add-student-row {
+  display: flex;
+  gap: 8px;
+}
+
+.student-input {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.05);
+  color: #e0e0e0;
+  border: 1px solid rgba(168, 85, 247, 0.25);
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-size: 13px;
+  font-family: inherit;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.student-input:focus {
+  outline: none;
+  border-color: #a855f7;
+  box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.2);
+}
+
+.student-input::placeholder {
+  color: #555;
+}
+
+.add-btn {
+  padding: 8px 14px;
+  background: #a855f7;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.add-btn:hover {
+  background: #9333ea;
+}
+
+.add-btn:active {
+  transform: scale(0.97);
+}
+
+/* ── Student list ── */
+
+.student-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.no-students {
+  font-size: 12px;
+  color: #555;
+  text-align: center;
+  padding: 10px 0;
+}
+
+.student-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px;
+  background: rgba(168, 85, 247, 0.06);
+  border: 1px solid rgba(168, 85, 247, 0.18);
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+.student-item.absent {
+  background: rgba(239, 68, 68, 0.05);
+  border-color: rgba(239, 68, 68, 0.2);
+}
+
+.student-check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  flex: 1;
+  min-width: 0;
+}
+
+.student-check input[type="checkbox"] {
+  width: 15px;
+  height: 15px;
+  accent-color: #a855f7;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.student-name {
+  font-size: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.absent .student-name {
+  color: #888;
+  text-decoration: line-through;
+}
+
+.student-actions {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.violation-btn,
+.remove-student-btn {
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  padding: 3px 5px;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.violation-btn:hover {
+  background: rgba(245, 158, 11, 0.12);
+  border-color: rgba(245, 158, 11, 0.35);
+}
+
+.remove-student-btn {
+  color: #666;
+  font-size: 11px;
+}
+
+.remove-student-btn:hover {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.3);
+  color: #fca5a5;
+}
+
+/* ── Violations section ── */
+
+.violations-section {
+  border-top: 1px solid rgba(168, 85, 247, 0.15);
+  padding-top: 12px;
+}
+
+.violations-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.violations-header h3 {
+  font-size: 13px;
+  font-weight: 600;
+  color: #f59e0b;
+}
+
+.violations-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.export-btn,
+.clear-btn {
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 11px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.export-btn {
+  background: rgba(168, 85, 247, 0.1);
+  color: #c084fc;
+  border: 1px solid rgba(168, 85, 247, 0.3);
+}
+
+.export-btn:hover {
+  background: rgba(168, 85, 247, 0.2);
+}
+
+.clear-btn {
+  background: rgba(239, 68, 68, 0.08);
+  color: #fca5a5;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.clear-btn:hover {
+  background: rgba(239, 68, 68, 0.15);
+}
+
+/* ── Inline violation form ── */
+
+.violation-form {
+  background: rgba(245, 158, 11, 0.07);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  border-radius: 8px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.violation-form.hidden {
+  display: none;
+}
+
+.violation-form-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #f59e0b;
+}
+
+.violation-form-actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* ── Classroom status toast ── */
+
+.classroom-status {
+  font-size: 12px;
+  color: #4ade80;
+  min-height: 16px;
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+
+.classroom-status.visible {
+  opacity: 1;
+}
+
+/* ── Violation log ── */
+
+.violation-log {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.no-violations {
+  font-size: 12px;
+  color: #555;
+  text-align: center;
+  padding: 8px 0;
+}
+
+.violation-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 8px 10px;
+  background: rgba(245, 158, 11, 0.05);
+  border: 1px solid rgba(245, 158, 11, 0.15);
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.v-icon {
+  flex-shrink: 0;
+  font-size: 13px;
+}
+
+.v-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.v-student {
+  font-weight: 600;
+  color: #f59e0b;
+}
+
+.v-note {
+  color: #ccc;
+  word-break: break-word;
+}
+
+.v-time {
+  font-size: 10px;
+  color: #666;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.v-delete-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #555;
+  font-size: 10px;
+  padding: 1px 3px;
+  flex-shrink: 0;
+  transition: color 0.15s;
+}
+
+.v-delete-btn:hover {
+  color: #fca5a5;
+}
+
+/* ── Settings container ── */
+
+.settings-container {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.settings-container h2 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #a855f7;
+}
+
+.settings-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.settings-group label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #aaa;
+  letter-spacing: 0.5px;
+}
+
+.settings-input {
+  background: rgba(255, 255, 255, 0.05);
+  color: #e0e0e0;
+  border: 1px solid rgba(168, 85, 247, 0.25);
+  border-radius: 6px;
+  padding: 9px 12px;
+  font-size: 13px;
+  font-family: inherit;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.settings-input:focus {
+  outline: none;
+  border-color: #a855f7;
+  box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.2);
+}
+
+.settings-input::placeholder {
+  color: #444;
+}
+
+.settings-hint {
+  font-size: 11px;
+  color: #555;
+  line-height: 1.4;
+}
+
+.settings-hint strong {
+  color: #777;
+}
+
+/* ── Voice toggle row ── */
+
+.settings-toggle-row {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* CSS toggle switch */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 42px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  cursor: pointer;
+  transition: background 0.25s;
+}
+
+.toggle-slider::before {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  left: 3px;
+  top: 3px;
+  background: #aaa;
+  border-radius: 50%;
+  transition: transform 0.25s, background 0.25s;
+}
+
+.toggle-switch input:checked + .toggle-slider {
+  background: rgba(168, 85, 247, 0.35);
+}
+
+.toggle-switch input:checked + .toggle-slider::before {
+  transform: translateX(18px);
+  background: #a855f7;
+}
+
+/* ── Save button ── */
+
+.settings-save-btn {
+  padding: 11px;
+  background: linear-gradient(135deg, #a855f7, #7c3aed);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.1s;
+  box-shadow: 0 0 12px rgba(168, 85, 247, 0.3);
+}
+
+.settings-save-btn:hover {
+  opacity: 0.9;
+}
+
+.settings-save-btn:active {
+  transform: scale(0.98);
+}
+
+/* ── Status message ── */
+
+.settings-status {
+  font-size: 13px;
+  text-align: center;
+  min-height: 18px;
+  color: transparent;
+  transition: color 0.2s;
+}
+
+.settings-status.success {
+  color: #4ade80;
+}

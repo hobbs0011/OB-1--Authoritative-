@@ -1,0 +1,35 @@
+{
+  "$schema": "https://app.kilo.ai/config.json",
+  "instructions": [
+    ".kilo/agent/*.md",
+    ".github/agents/*.md"
+  ],
+  "default_agent": "AGENT99",
+  "snapshot": true,
+  "autoupdate": "notify",
+  "compaction": {
+    "auto": true,
+    "prune": true
+  },
+  "permission": {
+    "bash": "allow",
+    "read": "allow",
+    "write": "allow",
+    "glob": "allow",
+    "grep": "allow",
+    "webfetch": "allow",
+    "edit": {
+      "APPS/**": "allow",
+      "CANON/**": "allow",
+      "GALAXY-LESSONS/**": "allow",
+      "OPERATIONS/**": "allow",
+      "MASTER-SYNC.md": "allow",
+      ".kilo/**": "allow",
+      ".github/**": "allow",
+      "SCRIPTS/**": "allow",
+      "SESSIONS/**": "allow",
+      "PULSE-HANDOFFS/**": "allow",
+      "*": "allow"
+    }
+  }
+}
