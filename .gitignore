@@ -81,5 +81,19 @@ _SORTED/TEMP-DOWNLOADS/
 *.crdownload
 *.bak
 SITE/assets/lessons/concept-art-*.png
+SITE/assets/lessons/*.webp
 _unpushed-*.bundle
 _push-delta.bundle
+
+# === STUDENT AUDIO / MEDIA (local only) ===
+OPERATIONS/NET-STUDENTS/AUDIO-ARCHIVE/**/*.ogg
+OPERATIONS/NET-STUDENTS/AUDIO-ARCHIVE/**/*.mp3
+OPERATIONS/NET-STUDENTS/AUDIO-ARCHIVE/**/*.wav
+OPERATIONS/NET-STUDENTS/AUDIO-ARCHIVE/**/*.m4a
+OPERATIONS/NET-STUDENTS/AUDIO-ARCHIVE/**/*.mp4
+Vietnamese Audios/
+_SORTED/AUDIO-TRANSCRIPTS/
+_SORTED/AUDIO-STUDENTS/
+
+# === SYSTEM LOGS (local only) ===
+OPERATIONS/system-health-logs/
