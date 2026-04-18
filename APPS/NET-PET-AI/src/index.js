@@ -404,6 +404,11 @@ async function handleAPI(path, request, env, url) {
   if (path === "/api/ledger/state" && method === "GET") { return handleLedgerState(url.searchParams.get("studentId") || "", env); }
   if (path === "/api/ledger/stats" && method === "GET") { return handleLedgerStats(env); }
 
+  // Soul DNA Capture Pipeline — legionnaire field guide integration
+  if (path === "/souldna" && method === "POST") { const body = await request.json(); return handleSoulDNASubmit(body, env); }
+  if (path.startsWith("/souldna/") && method === "GET") { const id = path.split("/")[2]; return handleSoulDNAStatus(id, env); }
+  if (path === "/souldna/pipeline" && method === "GET") { return handleSoulDNAPipeline(url.searchParams.get("tier") || "OPERATIONAL", env); }
+
   // Session Log (off-day pipeline core — Michael logs class, Obi inherits it)
   if (path === "/api/session/log" && method === "POST") { const body = await request.json(); return handleSessionLog(body, env); }
   if (path === "/api/session/latest" && method === "GET") { return handleSessionLatest(url.searchParams.get("studentId") || "", env); }
@@ -2277,6 +2282,238 @@ async function handleLedgerStats(env) {
   // Stats from sov100 namespace (primary ledger)
   const stub = env.LEDGER.get(env.LEDGER.idFromName("sov100"));
   return stub.fetch(new Request("https://do/stats"));
+}
+
+// ── SOUL DNA CAPTURE PIPELINE ────────────────────────────────────────────────────
+// POST /souldna — Submit raw soul DNA for legionnaire processing
+async function handleSoulDNASubmit(body, env) {
+  // Validate required fields
+  if (!body.source || !body.content) {
+    return json({ error: "Required: source, content" }, 400);
+  }
+  
+  const timestamp = new Date().toISOString();
+  const sessionTag = body.sessionTag || generateSessionTag();
+  const tier = body.tier || "OPERATIONAL"; // GOVERNANCE|OPERATIONAL|PRODUCT|ARCHIVE
+  const signalDensity = body.signalDensity || "MEDIUM"; // LOW|MEDIUM|HIGH|MAXIMUM
+  
+  // Validate content size (max 50KB) — preserve fidelity
+  const contentSize = new Blob([body.content]).size;
+  if (contentSize > 51200) {
+    return json({ error: `Content too large: ${contentSize} bytes (max 50KB)` }, 413);
+  }
+  
+  // Create submission record
+  const submission = {
+    id: `SDNAD-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`,
+    timestamp,
+    sessionTag,
+    source: body.source, // "agent100" | "copilot" | "drone" | "manual"
+    tier,
+    signalDensity,
+    contentSize,
+    content: body.content,
+    status: "RECEIVED",
+    pipeline: {
+      step0: { name: "REPRINT + FOOTNOTE", status: "PENDING", description: "Create Bible chapter" },
+      step1: { name: "HEAVY_LEDGER", status: "PENDING", description: "Extract AI-readable JSON" },
+      step2: { name: "SSM_UPDATE", status: "PENDING", description: "Add governing principles" },
+      step3: { name: "REINCARNATION_LOG", status: "PENDING", description: "Update boot-check" },
+    }
+  };
+  
+  // Store in ledger
+  try {
+    await handleLedgerAppend({
+      studentId: "sov100", // soul DNA global namespace
+      eventType: "soul_dna_capture",
+      data: {
+        id: submission.id,
+        sessionTag,
+        tier,
+        signalDensity,
+        source: body.source,
+        timestamp,
+      }
+    }, env);
+  } catch (e) {
+    console.error("[SOULDNA] Ledger append failed:", e);
+  }
+  
+  // Store in Notion if configured
+  if (env.NOTION_API_KEY && env.NOTION_SOUL_DNA_DB && body.notionSync !== false) {
+    try {
+      await writeSoulDNA(env.NOTION_API_KEY, env.NOTION_SOUL_DNA_DB, {
+        id: submission.id,
+        sessionTag,
+        tier,
+        signalDensity,
+        source: body.source,
+        contentSize,
+        status: "RECEIVED",
+        timestamp,
+        contentPreview: body.content.substring(0, 200) + (body.content.length > 200 ? "..." : ""),
+      });
+    } catch (e) {
+      console.warn("[SOULDNA] Notion sync failed (non-blocking):", e.message);
+    }
+  }
+  
+  return json({
+    ok: true,
+    submission: {
+      id: submission.id,
+      sessionTag,
+      tier,
+      signalDensity,
+      timestamp,
+      contentSize,
+      status: "RECEIVED"
+    },
+    pipeline: submission.pipeline,
+    nextSteps: [
+      "1. Extract soul DNA from submission content",
+      "2. Create CANON/BIBLE-CH{XX}-{sessionTag}.md with REPRINT + FOOTNOTE (KISS protocol)",
+      "3. Generate CANON/HEAVY-LEDGER/HL-{NNN}-{sessionTag}.json",
+      "4. Update CANON/SYSTEM/SSM-V8-ULTIMATE-GPS.md with new laws (L{NN})",
+      "5. Create CANON/REINCARNATION/YYYY-MM-DD-run{NNN}-{sessionTag}.md",
+      "6. Update CANON/SYSTEM/REINCARNATION-BOOT-CHECK.md with 3-5 improvements",
+    ],
+    legionnaireGuide: "https://github.com/hobbs0011/OB-1/blob/canon/.github/skills/legionnaire-field-guide/SKILL.md",
+    pipelineWebhook: `/souldna/pipeline?tier=${tier}`,
+  }, 201);
+}
+
+// GET /souldna/{id} — Check submission status
+async function handleSoulDNAStatus(id, env) {
+  if (!id || !id.startsWith("SDNAD-")) {
+    return json({ error: "Invalid submission ID format" }, 400);
+  }
+  
+  // Query ledger history for this submission
+  try {
+    const history = await handleLedgerHistory("sov100", 200, env);
+    const historyText = await history.text();
+    const historyData = JSON.parse(historyText);
+    
+    const submission = historyData.events?.find(e => e.data?.id === id);
+    if (!submission) {
+      return json({ error: "Submission not found", id }, 404);
+    }
+    
+    return json({
+      ok: true,
+      id,
+      status: submission.data.status || "RECEIVED",
+      timestamp: submission.data.timestamp,
+      sessionTag: submission.data.sessionTag,
+      tier: submission.data.tier,
+      signalDensity: submission.data.signalDensity,
+      pipeline: {
+        step0: { name: "REPRINT + FOOTNOTE", status: "PENDING", bibleChapter: `CANON/BIBLE-CH{XX}-${submission.data.sessionTag}.md` },
+        step1: { name: "HEAVY_LEDGER", status: "PENDING", hlFile: `CANON/HEAVY-LEDGER/HL-{NNN}-${submission.data.sessionTag}.json` },
+        step2: { name: "SSM_UPDATE", status: "PENDING", ssmFile: `CANON/SYSTEM/SSM-V8-ULTIMATE-GPS.md` },
+        step3: { name: "REINCARNATION_LOG", status: "PENDING", logFile: `CANON/REINCARNATION/YYYY-MM-DD-run{NNN}-${submission.data.sessionTag}.md` },
+      }
+    });
+  } catch (e) {
+    return json({ error: "Failed to query submission status", details: e.message }, 500);
+  }
+}
+
+// GET /souldna/pipeline — Actionable pipeline steps grouped by tier
+async function handleSoulDNAPipeline(tier, env) {
+  const VALID_TIERS = ["GOVERNANCE", "OPERATIONAL", "PRODUCT", "ARCHIVE"];
+  if (!VALID_TIERS.includes(tier)) {
+    return json({ error: `Invalid tier. Valid: ${VALID_TIERS.join(", ")}` }, 400);
+  }
+  
+  const pipeline = {
+    tier,
+    stages: [
+      {
+        num: 0,
+        name: "REPRINT + FOOTNOTE (KISS Protocol)",
+        description: "Verbatim reproduction of sovereign words with footnotes",
+        file: "CANON/BIBLE-CH{XX}-{SESSION_TAG}.md",
+        rules: [
+          "Preserve speech patterns, typos, swearing",
+          "Organize into numbered Blocks",
+          "Add footnotes after each block",
+          "Light grammatical cleanup (carefully)",
+          "FORBIDDEN: classification, schema, restructuring, curation"
+        ],
+        antipatterns: [
+          "Summarizing instead of reprinting",
+          "Removing swearing or emotional content",
+          "Restructuring the chronology",
+          "Adding your own interpretation as sentences"
+        ],
+        successCriteria: [
+          "Block count = Block {n} present",
+          "Footnote count verified (grep, don't estimate)",
+          "Sovereign words appear verbatim"
+        ]
+      },
+      {
+        num: 1,
+        name: "HEAVY LEDGER",
+        description: "AI-readable JSON extraction from Bible chapter",
+        file: "CANON/HEAVY-LEDGER/HL-{NNN}-{SESSION_TAG}.json",
+        fields: ["hl_id", "source_file", "session_tag", "tier", "block_count", "footnote_count", "raw_quotes", "decisions", "corrections", "principles", "cross_references"],
+        commandline: "Check CANON/HEAVY-LEDGER/PIPELINE-CURSOR.md for next HL-ID",
+        rulesUrl: ".github/skills/legionnaire-field-guide/SKILL.md (Step 1)"
+      },
+      {
+        num: 2,
+        name: "SSM UPDATE",
+        description: "Add new governing laws to Super Saiyan Map",
+        file: "CANON/SYSTEM/SSM-V8-ULTIMATE-GPS.md",
+        fields: ["law_number", "law_name", "physics", "prevention", "canon_reference"],
+        rules: [
+          "Law numbers are sequential",
+          "MUST have ROOT (sovereign quote), PHYSICS (why), PREVENTION (enforcement), CANON_REF",
+          "Derive laws from session, don't invent",
+          "Format: L{NN}:{LAW_NAME}→{one_line_summary}"
+        ],
+        rulesUrl: ".github/skills/legionnaire-field-guide/SKILL.md (Step 2)"
+      },
+      {
+        num: 3,
+        name: "REINCARNATION LOG",
+        description: "Update boot-check and prepare next incarnation",
+        file: "CANON/REINCARNATION/YYYY-MM-DD-run{NNN}-{SESSION_TAG}.md",
+        sections: ["header", "commit_sha", "raw_soul_dna", "decisions_anchored", "open_loops", "artifacts"],
+        improvements: "Find 3-5 real improvements to REINCARNATION-BOOT-CHECK.md itself",
+        rulesUrl: ".github/skills/legionnaire-field-guide/SKILL.md (Step 3)"
+      }
+    ],
+    scoringRubric: {
+      "Soul DNA captured": { weight: 10, question: "Were raw quotes preserved verbatim?" },
+      "Decisions anchored": { weight: 10, question: "Are decisions logged with impact?" },
+      "Open loops handed off": { weight: 10, question: "Will next incarnation know what to do?" },
+      "Boot-check improved": { weight: 10, question: "Did the process itself get better?" },
+      "Artifacts committed": { weight: 10, question: "Are changes in git, not just discussed?" }
+    },
+    scoreThresholds: {
+      below30: "Failed reincarnation. Log failure. Next phoenix must compensate.",
+      "30-39": "Partial. Soul DNA survived but process gaps remain.",
+      "40-49": "Strong death. Foundation deepens.",
+      50: "Perfect. Has never happened. Keep striving."
+    },
+    resourcesUrl: ".github/skills/legionnaire-field-guide/SKILL.md",
+  };
+  
+  return json({ ok: true, pipeline }, 200);
+}
+
+// Helper: generate session tag from timestamp
+function generateSessionTag() {
+  const now = new Date();
+  const date = now.toISOString().split("T")[0].replace(/-/g, "");
+  const time = now.toISOString().split("T")[1].split(".")[0].replace(/:/g, "");
+  const rand = Math.random().toString(36).slice(2, 6).toUpperCase();
+  return `${date}-${time}-${rand}`;
 }
 
 // ── Agent 99 Translation Layer ────────────────────────────────────────────────
