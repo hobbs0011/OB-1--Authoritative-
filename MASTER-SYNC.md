@@ -37,6 +37,7 @@
 ### Active Blockers
 
 - [x] Marketing site live ✅ — **https://naturalenglishtraining.pages.dev** (CF Pages, Run 310) — FULLY LIVE, no dependency on Squarespace
+- [x] Soul DNA capture pipeline ✅ — POST /souldna, GET /souldna/{id}, GET /souldna/pipeline (Run 311d) — Ready for legionnaire processing
 - [ ] Set phoenix-ob1 to PRIVATE (currently PUBLIC with secrets)
 - [x] Rotate SOVEREIGN_KEY — ✅ 2026-04-19 (44-char base64, wrangler secret put)
 - [ ] copilot-governance.md approval pending
@@ -57,7 +58,10 @@
 | Run 311 | 10882b2 | 2026-04-20 | wrangler 4.80→4.83, phase4/5/6 snapshots, Phoenix-Rising-Ultimate 39 dead branches purged |
 | Run 311 | 10882b2 | 2026-04-20 | wrangler 4.80→4.83, phase4/5/6 snapshots, Phoenix-Rising-Ultimate 39 dead branches purged |
 | Run 311b | 97d34a2 | 2026-04-20 | BYPASS: Product live on naturalenglishtraining.pages.dev |
-| Run 311c | pending | 2026-04-20 | Security audit complete ✅ — zero hardcoded secrets, gitleaks enabled, env vars cleared |
+| Run 311 | 10882b2 | 2026-04-20 | wrangler 4.80→4.83, phase4/5/6 snapshots, Phoenix-Rising-Ultimate 39 dead branches purged |
+| Run 311b | 97d34a2 | 2026-04-20 | BYPASS: Product live on naturalenglishtraining.pages.dev |
+| Run 311c | 05f9a5a | 2026-04-20 | Security audit complete ✅ — zero hardcoded secrets, gitleaks enabled, env vars cleared |
+| Run 311d | bf603f9 | 2026-04-20 | /souldna endpoint ✅ — soul DNA capture pipeline, legionnaire field guide integration, 3 HTTP routes |
 
 ### Cost Target
 
