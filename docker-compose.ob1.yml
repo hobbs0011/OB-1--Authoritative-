@@ -1,0 +1,53 @@
+services:
+  net-pet-ai:
+    build:
+      context: ./APPS/NET-PET-AI
+      dockerfile: Dockerfile
+    working_dir: /app
+    ports:
+      - "8787:8787"
+    env_file:
+      - ./APPS/NET-PET-AI/.dev.vars
+    environment:
+      NODE_ENV: development
+      WRANGLER_LOG: debug
+    volumes:
+      - ./APPS/NET-PET-AI:/app
+      - /app/node_modules
+    command: wrangler dev --ip 0.0.0.0 --port 8787
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8787/api/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+    profiles: ["core", "all"]
+
+  net-pet-webhook:
+    image: node:20-alpine
+    working_dir: /app
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./APPS/NET-PET-AI/dev/webhook-mock.js:/app/index.js:ro
+    command: node index.js
+    environment:
+      PORT: 3000
+    profiles: ["core", "all"]
+
+  discord-bot:
+    build:
+      context: ./APPS/discord-bot
+      dockerfile: Dockerfile
+    working_dir: /app
+    env_file:
+      - ./APPS/discord-bot/.env.example
+    volumes:
+      - ./APPS/discord-bot/data:/app/data
+    command: node src/index.js
+    restart: unless-stopped
+    profiles: ["discord", "all"]
+
+networks:
+  default:
+    name: ob1-network

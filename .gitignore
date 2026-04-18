@@ -74,3 +74,12 @@ APPS/NET-PET-AI/dist/
 # === DEAD DIRS ===
 net-tiger-assessment.worktrees/
 Phoenix-Rising-Protocol-Ultimate/
+
+# === LARGE BINARIES / INSTALLERS (never commit) ===
+_SORTED/INSTALLERS/
+_SORTED/TEMP-DOWNLOADS/
+*.crdownload
+*.bak
+SITE/assets/lessons/concept-art-*.png
+_unpushed-*.bundle
+_push-delta.bundle

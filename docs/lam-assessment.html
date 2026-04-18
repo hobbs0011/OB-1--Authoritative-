@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lam Assessment • Natural English Training</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@600;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0b14;
+      --surface: #141427;
+      --surface-2: #1b1b33;
+      --purple: #a855f7;
+      --gold: #f59e0b;
+      --cyan: #22d3ee;
+      --text: #ececf4;
+      --muted: #9da0b3;
+      --line: rgba(255,255,255,.08);
+      --ok: #34d399;
+      --warn: #fbbf24;
+      --danger: #f87171;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: radial-gradient(circle at 20% 0%, rgba(168,85,247,.15), transparent 35%), var(--bg);
+      color: var(--text);
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      line-height: 1.4;
+    }
+
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 28px 18px 60px; }
+
+    .hero {
+      background: linear-gradient(145deg, rgba(168,85,247,.16), rgba(245,158,11,.10));
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 22px;
+      margin-bottom: 18px;
+    }
+    .brand { font: 600 12px/1 Orbitron, sans-serif; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; }
+    .title { font: 700 clamp(28px, 5vw, 44px)/1.05 Rajdhani, sans-serif; margin: 10px 0 8px; }
+    .subtitle { color: var(--muted); font-size: 14px; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 14px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px;
+    }
+
+    .kpi { grid-column: span 3; }
+    .kpi h3 { margin: 0; font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+    .kpi .score { font: 700 34px/1 Rajdhani, sans-serif; margin-top: 8px; }
+    .badge {
+      display: inline-block;
+      margin-top: 6px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 12px;
+      border: 1px solid var(--line);
+      color: var(--text);
+      background: rgba(255,255,255,.03);
+    }
+
+    .full { grid-column: 1 / -1; }
+    .half { grid-column: span 6; }
+
+    h2 { margin: 0 0 10px; font: 700 21px/1.1 Rajdhani, sans-serif; }
+    h4 { margin: 0 0 6px; font-size: 14px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { border-bottom: 1px solid var(--line); padding: 9px 8px; text-align: left; }
+    th { color: var(--muted); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: .8px; }
+    tr:hover td { background: rgba(255,255,255,.02); }
+
+    .pill { padding: 2px 7px; border-radius: 999px; font-size: 12px; border: 1px solid var(--line); }
+    .i { color: var(--cyan); }
+    .e { color: var(--warn); }
+    .a { color: var(--ok); }
+
+    .meta { color: var(--muted); font-size: 13px; }
+
+    .priority li { margin: 8px 0; }
+
+    @media (max-width: 900px) {
+      .kpi { grid-column: span 6; }
+      .half { grid-column: 1 / -1; }
+    }
+    @media (max-width: 620px) {
+      .kpi { grid-column: 1 / -1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div class="brand">Natural English Training • NET</div>
+      <div class="title">Lam — Comprehensive English Assessment</div>
+      <div class="subtitle">Source: LamAssessmentAudio1-5 + LamAssessment6 • Updated 2026-04-18 21:01 (GMT+7)</div>
+    </section>
+
+    <section class="grid" style="margin-bottom:14px;">
+      <article class="card kpi">
+        <h3>Listening / Speaking</h3>
+        <div class="score">64.0</div>
+        <span class="badge">I2</span>
+      </article>
+      <article class="card kpi">
+        <h3>SecondarySkills</h3>
+        <div class="score" style="font-size:26px">N/A</div>
+        <span class="badge">R/W Not Tested</span>
+      </article>
+      <article class="card kpi">
+        <h3>Soft Skills</h3>
+        <div class="score">58.0</div>
+        <span class="badge">I2</span>
+      </article>
+      <article class="card kpi">
+        <h3>42-Phonics</h3>
+        <div class="score">61</div>
+        <span class="badge">I2</span>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card half">
+        <h2>Skill Area 1 — Listening / Speaking</h2>
+        <table>
+          <thead><tr><th>Dimension</th><th>Score</th><th>Rating</th></tr></thead>
+          <tbody>
+            <tr><td>Listening</td><td>65</td><td><span class="pill i">I3</span></td></tr>
+            <tr><td>Speaking</td><td>63</td><td><span class="pill i">I2</span></td></tr>
+            <tr><td><strong>Composite</strong></td><td><strong>64.0</strong></td><td><span class="pill i">I2</span></td></tr>
+          </tbody>
+        </table>
+      </article>
+
+      <article class="card half">
+        <h2>Skill Area 2 — SecondarySkills</h2>
+        <table>
+          <thead><tr><th>Dimension</th><th>Score</th><th>Rating</th></tr></thead>
+          <tbody>
+            <tr><td>Reading</td><td>N/T</td><td>Not Tested</td></tr>
+            <tr><td>Writing</td><td>N/T</td><td>Not Tested</td></tr>
+            <tr><td><strong>Composite</strong></td><td><strong>N/A</strong></td><td>Pending R/W assessment</td></tr>
+          </tbody>
+        </table>
+      </article>
+
+      <article class="card half">
+        <h2>Skill Area 3 — Soft Skills</h2>
+        <table>
+          <thead><tr><th>Dimension</th><th>Score</th><th>Rating</th></tr></thead>
+          <tbody>
+            <tr><td>Confidence</td><td>44</td><td><span class="pill e">E4</span></td></tr>
+            <tr><td>Motivation</td><td>72</td><td><span class="pill i">I4</span></td></tr>
+            <tr><td><strong>Composite</strong></td><td><strong>58.0</strong></td><td><span class="pill i">I2</span></td></tr>
+          </tbody>
+        </table>
+      </article>
+
+      <article class="card half">
+        <h2>Top Priority Calibration Queue</h2>
+        <ol class="priority">
+          <li>TH (voiced + voiceless)</li>
+          <li>SH / S contrast stabilization</li>
+          <li>V / Z voiced consonant control</li>
+          <li>J affricate clarity under speed</li>
+          <li>Final consonant voicing (d/t, g/k carryover)</li>
+        </ol>
+        <p class="meta">14-day target: raise weak sounds by +10 each, move phonics from I2 to I3 trajectory.</p>
+      </article>
+
+      <article class="card full">
+        <h2>42-Sound Scorecard (Pronunciation Subsystem)</h2>
+        <table>
+          <thead>
+            <tr><th>#</th><th>Sound</th><th>Score</th><th>Rating</th><th>Evidence Snapshot</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>s</td><td>63</td><td><span class="pill i">I2</span></td><td>"sat", "sun" mostly stable; occasional drift in connected speech</td></tr>
+            <tr><td>2</td><td>a</td><td>66</td><td><span class="pill i">I3</span></td><td>"cat/mat" family mostly present, some vowel substitution noise</td></tr>
+            <tr><td>3</td><td>t</td><td>61</td><td><span class="pill i">I2</span></td><td>Final /t/ generally present but unstable in long lines</td></tr>
+            <tr><td>4</td><td>i</td><td>58</td><td><span class="pill i">I2</span></td><td>Short /i/ in "milk/stick" okay, but consistency drops under speed</td></tr>
+            <tr><td>5</td><td>p</td><td>55</td><td><span class="pill i">I1</span></td><td>Present in "cup/path" contexts, some clipping</td></tr>
+            <tr><td>6</td><td>n</td><td>69</td><td><span class="pill i">I3</span></td><td>/n/ generally clear across many words</td></tr>
+            <tr><td>7</td><td>c/k</td><td>60</td><td><span class="pill i">I2</span></td><td>"cat/catch" contexts mixed; occasional substitution artifacts</td></tr>
+            <tr><td>8</td><td>e</td><td>57</td><td><span class="pill i">I1</span></td><td>Mid-vowel control inconsistent in sentence-level output</td></tr>
+            <tr><td>9</td><td>h</td><td>64</td><td><span class="pill i">I2</span></td><td>/h/ mostly audible in "he/hard/horse"</td></tr>
+            <tr><td>10</td><td>r</td><td>54</td><td><span class="pill i">I1</span></td><td>/r/ present but quality fluctuates in clusters</td></tr>
+            <tr><td>11</td><td>m</td><td>70</td><td><span class="pill i">I3</span></td><td>"mat/milk/moon" family generally stable</td></tr>
+            <tr><td>12</td><td>d</td><td>52</td><td><span class="pill i">I1</span></td><td>Final consonant voicing inconsistencies (d/t drift)</td></tr>
+            <tr><td>13</td><td>g</td><td>56</td><td><span class="pill i">I1</span></td><td>"garden"-type words show variable realization</td></tr>
+            <tr><td>14</td><td>o</td><td>59</td><td><span class="pill i">I2</span></td><td>Rounded vowels often intelligible, not always precise</td></tr>
+            <tr><td>15</td><td>u</td><td>58</td><td><span class="pill i">I2</span></td><td>Short /u/ in connected reading not fully stable</td></tr>
+            <tr><td>16</td><td>l</td><td>67</td><td><span class="pill i">I3</span></td><td>/l/ mostly strong in "looked/likes/late"</td></tr>
+            <tr><td>17</td><td>f</td><td>55</td><td><span class="pill i">I1</span></td><td>/f/ appears but feather-family lines show instability</td></tr>
+            <tr><td>18</td><td>b</td><td>60</td><td><span class="pill i">I2</span></td><td>/b/ mostly present, occasional confusion in dense lines</td></tr>
+            <tr><td>19</td><td>ai</td><td>65</td><td><span class="pill i">I3</span></td><td>Long vowel in target words often acceptable</td></tr>
+            <tr><td>20</td><td>j</td><td>48</td><td><span class="pill e">E4</span></td><td>J-lines show distortion/substitution under load</td></tr>
+            <tr><td>21</td><td>oa</td><td>57</td><td><span class="pill i">I1</span></td><td>Long /oa/ variable in sentence carry</td></tr>
+            <tr><td>22</td><td>ie</td><td>53</td><td><span class="pill i">I1</span></td><td>Diphthong control inconsistent</td></tr>
+            <tr><td>23</td><td>ee</td><td>62</td><td><span class="pill i">I2</span></td><td>"green/queen" often intelligible</td></tr>
+            <tr><td>24</td><td>or</td><td>56</td><td><span class="pill i">I1</span></td><td>/or/ quality fluctuates by context</td></tr>
+            <tr><td>25</td><td>z</td><td>49</td><td><span class="pill e">E4</span></td><td>Voicing contrast (z/s) unstable in rapid reading</td></tr>
+            <tr><td>26</td><td>w</td><td>60</td><td><span class="pill i">I2</span></td><td>/w/ generally present ("while/wish/water")</td></tr>
+            <tr><td>27</td><td>ng</td><td>58</td><td><span class="pill i">I2</span></td><td>-ng endings partially stable, sometimes weakened</td></tr>
+            <tr><td>28</td><td>v</td><td>47</td><td><span class="pill e">E4</span></td><td>/v/ often softened toward /w/ or reduced</td></tr>
+            <tr><td>29</td><td>oo (book)</td><td>54</td><td><span class="pill i">I1</span></td><td>Short oo appears but not consistently clean</td></tr>
+            <tr><td>30</td><td>oo (moon)</td><td>66</td><td><span class="pill i">I3</span></td><td>Long oo relatively strong (e.g., "moon")</td></tr>
+            <tr><td>31</td><td>y</td><td>62</td><td><span class="pill i">I2</span></td><td>/y/ glide in common words generally okay</td></tr>
+            <tr><td>32</td><td>x</td><td>51</td><td><span class="pill i">I1</span></td><td>Sparse evidence; acceptable but unstable</td></tr>
+            <tr><td>33</td><td>ch</td><td>50</td><td><span class="pill i">I1</span></td><td>Affricate present but occasional over/under-articulation</td></tr>
+            <tr><td>34</td><td>sh</td><td>46</td><td><span class="pill e">E4</span></td><td>SH-family remains a known weak point</td></tr>
+            <tr><td>35</td><td>th (voiceless)</td><td>45</td><td><span class="pill e">E4</span></td><td>"th" lines show repeated instability</td></tr>
+            <tr><td>36</td><td>th (voiced)</td><td>44</td><td><span class="pill e">E4</span></td><td>Voiced TH weakest contrast in current set</td></tr>
+            <tr><td>37</td><td>qu</td><td>63</td><td><span class="pill i">I2</span></td><td>"queen/questions" mostly understandable</td></tr>
+            <tr><td>38</td><td>ou</td><td>58</td><td><span class="pill i">I2</span></td><td>Diphthong output understandable, not locked</td></tr>
+            <tr><td>39</td><td>oi</td><td>52</td><td><span class="pill i">I1</span></td><td>Limited but moderate control</td></tr>
+            <tr><td>40</td><td>ue</td><td>57</td><td><span class="pill i">I1</span></td><td>Long u-family partially stable</td></tr>
+            <tr><td>41</td><td>er</td><td>50</td><td><span class="pill i">I1</span></td><td>/er/ present but often flattened</td></tr>
+            <tr><td>42</td><td>ar</td><td>59</td><td><span class="pill i">I2</span></td><td>/ar/ generally intelligible in reading passages</td></tr>
+          </tbody>
+        </table>
+      </article>
+    </section>
+  </div>
+</body>
+</html>

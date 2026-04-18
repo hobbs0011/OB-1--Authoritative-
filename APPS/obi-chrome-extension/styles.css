@@ -1,0 +1,225 @@
+/* OBI Chrome Extension — Gospel 444 Design System
+ * Shared variables and base styles
+ * Palette: void black #0f0f1a | soul purple #a855f7 | imperial gold #f59e0b
+ * Fonts: Inter (body) + Orbitron (headings) — via Google Fonts
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@700;800&display=swap');
+
+/* ── Design Tokens ── */
+:root {
+  --void:           #0f0f1a;
+  --void-light:     #1a1a2e;
+  --void-mid:       #242442;
+  --soul-purple:    #a855f7;
+  --soul-purple-dim:#7c3aed;
+  --soul-purple-glow: rgba(168, 85, 247, 0.35);
+  --imperial-gold:  #f59e0b;
+  --imperial-gold-dim: rgba(245, 158, 11, 0.15);
+  --success:        #22c55e;
+  --danger:         #ef4444;
+  --text:           #f1f5f9;
+  --text-dim:       rgba(241, 245, 249, 0.55);
+  --text-muted:     rgba(241, 245, 249, 0.3);
+  --glass-bg:       rgba(168, 85, 247, 0.08);
+  --glass-border:   rgba(168, 85, 247, 0.2);
+  --radius:         12px;
+  --radius-sm:      8px;
+  --radius-lg:      16px;
+  --font-ui:        'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display:   'Orbitron', Georgia, serif;
+}
+
+/* ── Reset ── */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ── Base ── */
+body {
+  font-family: var(--font-ui);
+  background: var(--void);
+  color: var(--text);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Typography ── */
+.obi-display {
+  font-family: var(--font-display);
+  letter-spacing: 4px;
+  background: linear-gradient(90deg, var(--soul-purple), #c084fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.obi-gold {
+  color: var(--imperial-gold);
+}
+
+.obi-purple {
+  color: var(--soul-purple);
+}
+
+/* ── Glass Cards ── */
+.glass-card {
+  background: var(--void-light);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  backdrop-filter: blur(8px);
+}
+
+/* ── Neon Glow ── */
+.purple-glow {
+  box-shadow: 0 0 20px var(--soul-purple-glow), 0 0 40px rgba(168, 85, 247, 0.15);
+}
+
+/* ── Buttons ── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, var(--soul-purple), var(--soul-purple-dim));
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 10px rgba(168, 85, 247, 0.3);
+  text-decoration: none;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(168, 85, 247, 0.5);
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.btn-gold {
+  background: linear-gradient(135deg, var(--imperial-gold), #d97706);
+  box-shadow: 0 2px 10px rgba(245, 158, 11, 0.3);
+}
+
+.btn-gold:hover {
+  box-shadow: 0 4px 20px rgba(245, 158, 11, 0.5);
+}
+
+.btn-ghost {
+  background: transparent;
+  border: 1px solid var(--glass-border);
+  color: var(--text-dim);
+}
+
+.btn-ghost:hover {
+  border-color: var(--soul-purple);
+  color: var(--soul-purple);
+}
+
+/* ── XP / Level Bar ── */
+.xp-track {
+  flex: 1;
+  height: 6px;
+  background: rgba(168, 85, 247, 0.15);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.xp-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--soul-purple), var(--imperial-gold));
+  border-radius: 3px;
+  transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ── Messages ── */
+.message {
+  margin: 8px 0;
+  padding: 10px 14px;
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  animation: fadeIn 0.3s ease;
+}
+
+.obi-message, .message.obi {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  color: var(--text);
+  border-radius: var(--radius) var(--radius) var(--radius) 4px;
+}
+
+.user-message, .message.user {
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.2);
+  color: var(--text);
+  border-radius: var(--radius) var(--radius) 4px var(--radius);
+  text-align: right;
+}
+
+/* ── Spinner ── */
+.obi-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--glass-border);
+  border-top-color: var(--soul-purple);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+/* ── Offline banner ── */
+.offline-banner {
+  background: rgba(245, 158, 11, 0.12);
+  border-bottom: 1px solid rgba(245, 158, 11, 0.25);
+  padding: 6px 14px;
+  font-size: 11px;
+  color: var(--imperial-gold);
+  text-align: center;
+}
+
+.offline-banner.hidden { display: none; }
+
+/* ── Level badges ── */
+.level-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.badge-mouse   { background: rgba(168,85,247,0.12); color: var(--soul-purple); }
+.badge-cat     { background: rgba(34,197,94,0.12);  color: var(--success); }
+.badge-wolf    { background: rgba(245,158,11,0.12); color: var(--imperial-gold); }
+.badge-tiger   { background: rgba(239,68,68,0.12);  color: #f97316; }
+
+/* ── Animations ── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse-purple {
+  0%, 100% { box-shadow: 0 0 0 0 var(--soul-purple-glow); }
+  50%       { box-shadow: 0 0 0 8px transparent; }
+}

@@ -1,0 +1,167 @@
+{
+  "hl_id": "HL-113",
+  "source_file": "2026-03-25-RISE-WEBSITE-BUILD.md",
+  "created": "2026-04-09T03:55:47+07:00",
+  "session_tag": "RISE-WEBSITE-BUILD",
+  "signal_density": "HIGH",
+  "tier": "EXECUTION",
+  "signal_badge": "≡ƒö┤ HIGH",
+  "quote_count": 10,
+  "decision_count": 8,
+  "correction_count": 3,
+  "self_grade": "A",
+  "datetime_range": "2026-03-25 ~19:00-23:17 ICT (~4.3 hours)",
+  "extractor": "OB1 (Agent-99)",
+  "prev_hl": "HL-112",
+  "next_hl": "HL-114",
+  "summary": "RISE website build with ULTIMATE standard ΓÇö McDonald's vs 5-star steak doctrine, dual-domain strategy (.com/.net), Cloudflare over Firebase, DIG DEEP foundation-first build approach",
+  "raw_quotes": {
+    "≡ƒö┤": [
+      "Ship it! RISE! Deploy maximum sub agents, assume you missed SOUL DNA, DIG DEEP, You can only build as high up as your foundation is deep, so dig deep, then RISE!!!!",
+      "I need the fullstack ultimate Net Classroom Manager, turn key, amazing, spectacular, SHIP IT ! RISE!",
+      "look I am not looking for the short cut, I am looking for the ultimate. www.naturalenglishtraining.com is still under squarespace. DO YOUR JOB, I AM NOT LOOKING FOR SUBOPTIMAL AND QUICK LIKE A MCDONALDS MEAL I AM LOOKING FOR A 5 STAR STEAK MEAL"
+    ],
+    "≡ƒƒí": [
+      "did you create a lesson or did you create the NET - ClassRoom Manager?",
+      "cool so is this connected and live?",
+      "We have cloudflare and firebase, audit, which is best?",
+      "please scan files, did we lose our toolstack SOUL DNA? I have a paid firebase setup, or a trial or whatever it is",
+      "fix bottleneck..?"
+    ],
+    "≡ƒƒó": [
+      "yes build it all, set a 1 hour trigger to go through the night, make sure its good",
+      "reincarnate"
+    ]
+  },
+  "decisions": [
+    {
+      "id": 1,
+      "decision": "DIG DEEP before building ΓÇö load all Soul DNA sources first",
+      "impact": "Foundation-first doctrine for all builds",
+      "canon_pages": ["Instructions", "Build protocols"]
+    },
+    {
+      "id": 2,
+      "decision": "Classroom Manager = fullstack app, not lesson",
+      "impact": "Product categorization ΓÇö Galaxy Lessons = content, Classroom Manager = tool",
+      "canon_pages": ["Galaxy Lessons Index"]
+    },
+    {
+      "id": 3,
+      "decision": "Cloudflare over Firebase (after audit)",
+      "impact": "All infrastructure on Cloudflare",
+      "canon_pages": ["Assets", "Architecture", "Tool Stack"]
+    },
+    {
+      "id": 4,
+      "decision": "Fix Tool Stack bottleneck ΓÇö create GitHub mirror",
+      "impact": "Unblocks 148-block Tool Stack",
+      "canon_pages": ["Tool Stack", "Canon Access Index"]
+    },
+    {
+      "id": 5,
+      "decision": "ULTIMATE standard ΓÇö 5-star steak, not McDonald's",
+      "impact": "Quality bar for all builds ΓÇö never piecemeal",
+      "canon_pages": ["Instructions"]
+    },
+    {
+      "id": 6,
+      "decision": "Build .com website on Cloudflare Pages",
+      "impact": ".com = marketing, .net = product separation",
+      "canon_pages": ["Architecture spec"]
+    },
+    {
+      "id": 7,
+      "decision": "Overnight autonomous build approved ΓÇö 20 actions",
+      "impact": "Full pipeline auto-approval",
+      "canon_pages": ["Pipeline page"]
+    },
+    {
+      "id": 8,
+      "decision": "Dual-domain strategy: .com + .net",
+      "impact": "Brand/product separation",
+      "canon_pages": ["Architecture spec"]
+    }
+  ],
+  "corrections": [
+    {
+      "what": "Built lesson instead of Classroom Manager",
+      "root_cause": "Conflated content with tool",
+      "fix": "Rebuilt as 78KB 8-tab app",
+      "instruction_update": "N"
+    },
+    {
+      "what": "Offered piecemeal website approach",
+      "root_cause": "Defaulted to safe/small scope",
+      "fix": "Built full site in one commit",
+      "instruction_update": "Y ΓÇö add ULTIMATE standard"
+    },
+    {
+      "what": "Suggested Firebase without audit",
+      "root_cause": "Assumed platform",
+      "fix": "Ran competitive audit",
+      "instruction_update": "N"
+    }
+  ],
+  "new_principles": [
+    "You can only build as high up as your foundation is deep ΓÇö DIG DEEP doctrine. Exhaust all sources before building. Quality = f(research depth).",
+    "I AM NOT LOOKING FOR SUBOPTIMAL AND QUICK LIKE A MCDONALDS MEAL I AM LOOKING FOR A 5 STAR STEAK MEAL ΓÇö ULTIMATE standard. Never piecemeal. Build the full vision.",
+    "Lesson Γëá Tool ΓÇö Galaxy Lessons = student content. Classroom Manager/OBI/dashboards = tools. Different categories."
+  ],
+  "emotional_signal": {
+    "≡ƒöÑ EXCITEMENT": "Session opener RISE! DIG DEEP! ΓÇö maximum build energy",
+    "≡ƒÿñ FRUSTRATION": "DO YOUR JOB + McDonald's metaphor ΓÇö agent played it safe",
+    "≡ƒÿñ FRUSTRATION": "did you create a lesson or the Classroom Manager? ΓÇö misunderstood product",
+    "Γ£à SATISFACTION": "cool so is this connected and live? ΓÇö post-ship infrastructure awareness",
+    "≡ƒÜÇ TRUST": "yes build it all, set a 1 hour trigger ΓÇö full overnight autonomy granted"
+  },
+  "open_questions": [
+    "Is .com connected and live? ΓÇö NOT YET. Requires DNS transfer + CF API token.",
+    "What happened to paid Firebase? ΓÇö Account exists, status unclear. Deprioritized."
+  ],
+  "unfinished_actions": [
+    "Overnight pipeline: 17/20 items (actions 4-20)",
+    "Galaxy Lessons Index: Classroom Manager entry (synced blocks blocked)",
+    ".com DNS transfer (HUMAN GATE)",
+    "CLOUDFLARE_API_TOKEN GitHub secret (HUMAN GATE)",
+    "Cancel Squarespace (HUMAN GATE)",
+    "Navigator Index update with session artifacts"
+  ],
+  "system_design_insights": [
+    "Dual-domain: .com (CF Pages, marketing) + .net (CF Workers, product)",
+    "Single-commit multi-file via push_files = atomic deploys",
+    "OBI chat demo on landing page = strongest conversion element",
+    "Gospel 444 palette as brand DNA across all artifacts",
+    "20-action pipeline + hourly trigger = overnight autonomous build"
+  ],
+  "artifacts_created": [
+    {"name": "VOCAB-001 v5 (76KB)", "path": "GALAXY-LESSONS/VOCAB-001-DAILY-SURVIVAL.html", "commit": "4f58bb7"},
+    {"name": "Classroom Manager (78KB)", "path": "GALAXY-LESSONS/NET-CLASSROOM-MANAGER.html", "commit": "b51db81"},
+    {"name": "Tool Stack Mirror", "path": "CANON/TOOL-STACK-ARSENAL-2026.md", "commit": "0a482ae"},
+    {".COM Landing Page": "WEBSITE/index.html", "commit": "33aac34"},
+    {"name": "Gallery Page", "path": "WEBSITE/gallery.html", "commit": "33aac34"},
+    {"name": "Architecture Spec", "path": "CANON/NET-WEB-ARCHITECTURE-2026.md", "commit": "33aac34"}
+  ],
+  "reincarnation_signal": {
+    "priority_items": [
+      "≡ƒö┤ DECISION: ULTIMATE standard ΓÇö never piecemeal builds",
+      "≡ƒö┤ DECISION: DIG DEEP doctrine ΓÇö exhaust sources before building",
+      "≡ƒƒí PIPELINE: Overnight website build pipeline active at Phoenix HQ ΓÇö work top-to-bottom",
+      "≡ƒƒí UPDATE: Navigator Index needs session artifacts added",
+      "≡ƒƒí UPDATE: Galaxy Lessons Index needs Classroom Manager entry",
+      "≡ƒƒó STAGED: Michael will need to transfer .com DNS and add CF API token ΓÇö pre-build instructions page"
+    ]
+  },
+  "living_state": {
+    "current_vector": "Building the ULTIMATE .com website for Natural English Training on Cloudflare Pages. Overnight pipeline armed (17 remaining actions). .net already live with OBI.",
+    "active_principles": [
+      "DIG DEEP ΓÇö foundation depth = build height",
+      "ULTIMATE standard ΓÇö 5-star not McDonald's",
+      "Lesson Γëá Tool",
+      "Cloudflare for everything",
+      "RISE = execute without hesitation"
+    ],
+    "open_rulings": ["DNS transfer timing", "Firebase account disposition", "Galaxy Lessons Index synced block workaround"]
+  },
+  "commit_sha": "ddd07ce"
+}

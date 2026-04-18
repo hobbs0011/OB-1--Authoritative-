@@ -1,15 +1,21 @@
-name: Soul Agent Daily Audit — Neural Ledger Formation
+name: SoulShadowAgent Tri-Daily Audit — Agent99 OS
 
 on:
   schedule:
-    # 09:00 ICT (UTC+7) = 02:00 UTC
+    # 3x daily in ICT (UTC+7): 09:00, 15:00, 21:00
     - cron: "0 2 * * *"
+    - cron: "0 8 * * *"
+    - cron: "0 14 * * *"
   workflow_dispatch:
     inputs:
       student_id:
-        description: "Target student (or 'all' for batch)"
+        description: "Target student (or 'all' for full tri-daily batch)"
         required: false
         default: "all"
+      cycle_slot:
+        description: "Cycle slot (auto for schedule, or force a slot manually)"
+        required: false
+        default: "auto"
       dry_run:
         description: "Audit only, don't commit"
         required: false
@@ -20,12 +26,31 @@ permissions:
   contents: write
   pull-requests: write
 
+concurrency:
+  group: soulshadowagent-tridaily
+  cancel-in-progress: false
+
 jobs:
   soul-agent-audit:
     runs-on: ubuntu-latest
+    env:
+      AGENT_OS: "AGENT99-OS"
+      AGENT_MODE: "SoulShadowAgent"
     strategy:
       matrix:
-        student: [huong-bluetech, mai-tram-bluetech, quy-bluetech, lam-prospect, quan-nguyen, quang-nguyen]
+        include:
+          - student: huong-bluetech
+            soulshadow_agent: shadow-huong-99
+          - student: mai-tram-bluetech
+            soulshadow_agent: shadow-maitram-99
+          - student: quy-bluetech
+            soulshadow_agent: shadow-quy-99
+          - student: lam-prospect
+            soulshadow_agent: shadow-lam-99
+          - student: quan-nguyen
+            soulshadow_agent: shadow-quan-99
+          - student: quang-nguyen
+            soulshadow_agent: shadow-quang-99
       max-parallel: 1
 
     steps:
@@ -50,48 +75,86 @@ jobs:
           STUDENT=${{ matrix.student }}
           DATE=$(date -d "$(TZ='Asia/Bangkok' date)" +%Y-%m-%d)
           RUN_NUM=$(grep -m1 "Current Run:" CANON/REINCARNATION/COLD-START-BOOT.md | grep -oE '[0-9]+' | head -1)
+          SLOT_UTC=$(date -u +%H)
+          SLOT_NAME="night"
+          if [ "$SLOT_UTC" = "2" ]; then SLOT_NAME="morning"; fi
+          if [ "$SLOT_UTC" = "8" ]; then SLOT_NAME="afternoon"; fi
+          if [ "$SLOT_UTC" = "14" ]; then SLOT_NAME="night"; fi
+          if [ "${{ inputs.cycle_slot }}" != "" ] && [ "${{ inputs.cycle_slot }}" != "auto" ]; then
+            SLOT_NAME="${{ inputs.cycle_slot }}"
+          fi
           
           echo "student_id=$STUDENT" >> $GITHUB_OUTPUT
+          echo "soulshadow_agent=${{ matrix.soulshadow_agent }}" >> $GITHUB_OUTPUT
           echo "audit_date=$DATE" >> $GITHUB_OUTPUT
           echo "run_number=$RUN_NUM" >> $GITHUB_OUTPUT
+          echo "cycle_slot=$SLOT_NAME" >> $GITHUB_OUTPUT
           
           # Find next HL number
           LATEST_HL=$(ls -1 CANON/HEAVY-LEDGER/HL-*.json 2>/dev/null | sed 's/.*HL-//; s/-.*//' | sort -n | tail -1)
           NEXT_HL=$((LATEST_HL + 1))
           echo "next_hl=$NEXT_HL" >> $GITHUB_OUTPUT
 
-      - name: Invoke Soul Agent Copilot
+      - name: Apply target filter (manual runs)
+        id: filter
+        run: |
+          if [ "${{ inputs.student_id }}" = "" ] || [ "${{ inputs.student_id }}" = "all" ]; then
+            echo "run_this=true" >> $GITHUB_OUTPUT
+          elif [ "${{ inputs.student_id }}" = "${{ matrix.student }}" ]; then
+            echo "run_this=true" >> $GITHUB_OUTPUT
+          else
+            echo "run_this=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Invoke SoulShadowAgent (Agent99 OS)
         id: audit
+        if: steps.filter.outputs.run_this == 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
           GH_DEBUG: api
         run: |
-          # This step would normally invoke Copilot API or a local script
-          # For now, placeholder for Soul Agent execution
-          echo "Soul Agent audit for ${{ steps.prep.outputs.student_id }} on ${{ steps.prep.outputs.audit_date }}"
-          echo "Next HL entry: HL-${{ steps.prep.outputs.next_hl }}"
-          echo "Run: ${{ steps.prep.outputs.run_number }}"
+          # Agent99 OS fail-closed gate: this workflow does not fabricate ledger output.
+          echo "SoulShadowAgent audit dispatch"
+          echo "student: ${{ steps.prep.outputs.student_id }}"
+          echo "agent: ${{ steps.prep.outputs.soulshadow_agent }}"
+          echo "slot: ${{ steps.prep.outputs.cycle_slot }}"
+          echo "run: ${{ steps.prep.outputs.run_number }}"
+          echo "next_hl_hint: HL-${{ steps.prep.outputs.next_hl }}"
+
+      - name: Verify audit artifacts exist (fail-closed)
+        if: steps.filter.outputs.run_this == 'true' && (github.event_name != 'workflow_dispatch' || github.event.inputs.dry_run != 'true')
+        run: |
+          MATCH_HL=$(find CANON/HEAVY-LEDGER -maxdepth 1 -type f -name "HL-*-soul-audit-${{ steps.prep.outputs.student_id }}-*.json" | wc -l)
+          MATCH_BATCH=$(find CANON/REINCARNATION -maxdepth 1 -type f -name "*-soul-agent-audit-batch.md" | wc -l)
+          if [ "$MATCH_HL" -eq 0 ] || [ "$MATCH_BATCH" -eq 0 ]; then
+            echo "Agent99 OS fail-closed: missing ledger artifacts for ${{ steps.prep.outputs.student_id }}"
+            exit 1
+          fi
 
       - name: Stage audit artifacts
-        if: success() && !inputs.dry_run
+        if: success() && steps.filter.outputs.run_this == 'true' && (github.event_name != 'workflow_dispatch' || github.event.inputs.dry_run != 'true')
         run: |
           git add CANON/HEAVY-LEDGER/HL-*.json CANON/REINCARNATION/*soul-agent*.md 2>/dev/null || true
           git status
 
       - name: Commit neural ledger entry
-        if: success() && !inputs.dry_run
+        if: success() && steps.filter.outputs.run_this == 'true' && (github.event_name != 'workflow_dispatch' || github.event.inputs.dry_run != 'true')
         run: |
           if git diff --cached --quiet; then
             echo "No changes to commit (dry run or no audit output)"
           else
-            git commit -m "soul-agent: neural ledger for ${{ steps.prep.outputs.student_id }} (HL-${{ steps.prep.outputs.next_hl }}) — run ${{ steps.prep.outputs.run_number }}"
+            git commit -m "soulshadowagent: ${{ steps.prep.outputs.student_id }} via ${{ steps.prep.outputs.soulshadow_agent }} (${{ steps.prep.outputs.cycle_slot }}) run ${{ steps.prep.outputs.run_number }}"
             git push origin $(git rev-parse --abbrev-ref HEAD)
           fi
 
       - name: Report audit summary
+        if: steps.filter.outputs.run_this == 'true'
         run: |
-          echo "## Soul Agent Audit Report — ${{ steps.prep.outputs.student_id }}"
+          echo "## SoulShadowAgent Audit Report — ${{ steps.prep.outputs.student_id }}"
+          echo "- Agent OS: ${AGENT_OS}"
+          echo "- Agent Mode: ${AGENT_MODE}"
+          echo "- Assigned Agent: ${{ steps.prep.outputs.soulshadow_agent }}"
+          echo "- Cycle Slot: ${{ steps.prep.outputs.cycle_slot }}"
           echo "- Run: ${{ steps.prep.outputs.run_number }}"
           echo "- Date: ${{ steps.prep.outputs.audit_date }}"
           echo "- Ledger Entry: HL-${{ steps.prep.outputs.next_hl }}"

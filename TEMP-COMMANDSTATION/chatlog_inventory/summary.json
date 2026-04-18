@@ -1,0 +1,122 @@
+{
+  "GeneratedAtUtc": "2026-04-16T09:02:46.6077073Z",
+  "TotalCandidates": 915,
+  "ByRoot": [
+    {
+      "Root": "C",
+      "Count": 386
+    },
+    {
+      "Root": "D",
+      "Count": 529
+    }
+  ],
+  "ByCategory": [
+    {
+      "Category": "ChatLogs",
+      "Count": 416
+    },
+    {
+      "Category": "DNA",
+      "Count": 49
+    },
+    {
+      "Category": "SOUL",
+      "Count": 450
+    }
+  ],
+  "DuplicateGroups": 105,
+  "StageCount": 12,
+  "TopStages": [
+    {
+      "Stage": 1,
+      "Phase": "Users",
+      "Total": 297,
+      "ChatLogs": 139,
+      "SOUL": 154,
+      "DNA": 4,
+      "LargestPath": "C:\\Users\\mrmic\\Desktop\\Pheonix - Rising - Protocol\\OB-1 (Authoritative)\\duplicate-delete-plan.json"
+    },
+    {
+      "Stage": 2,
+      "Phase": "OB-1",
+      "Total": 291,
+      "ChatLogs": 133,
+      "SOUL": 154,
+      "DNA": 4,
+      "LargestPath": "D:\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05\\0913-RAW-T6-7_Serve_Consolidation_dump_txt.md"
+    },
+    {
+      "Stage": 3,
+      "Phase": "C_cleanup",
+      "Total": 88,
+      "ChatLogs": 47,
+      "SOUL": 40,
+      "DNA": 1,
+      "LargestPath": "D:\\C_cleanup\\20260405_082611\\OB-1\\CANON\\SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05\\0913-RAW-T6-7_Serve_Consolidation_dump_txt.md"
+    },
+    {
+      "Stage": 4,
+      "Phase": "OB-1-r305",
+      "Total": 82,
+      "ChatLogs": 35,
+      "SOUL": 46,
+      "DNA": 1,
+      "LargestPath": "D:\\OB-1-r305\\CANON\\SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05\\0913-RAW-T6-7_Serve_Consolidation_dump_txt.md"
+    },
+    {
+      "Stage": 5,
+      "Phase": "XboxGames",
+      "Total": 82,
+      "ChatLogs": 35,
+      "SOUL": 46,
+      "DNA": 1,
+      "LargestPath": "C:\\XboxGames\\OB-1-r305\\CANON\\SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05\\0913-RAW-T6-7_Serve_Consolidation_dump_txt.md"
+    },
+    {
+      "Stage": 6,
+      "Phase": "OB1_MOVED",
+      "Total": 39,
+      "ChatLogs": 8,
+      "SOUL": 0,
+      "DNA": 31,
+      "LargestPath": "D:\\OB1_MOVED\\users\\extensions\\extensions\\ms-vscode.powershell-2025.4.0\\modules\\PSScriptAnalyzer\\1.24.0\\compatibility_profiles\\win-8_x64_10.0.17763.0_5.1.17763.316_x64_4.0.30319.42000_framework.json"
+    },
+    {
+      "Stage": 7,
+      "Phase": "FINAL-PHASE",
+      "Total": 11,
+      "ChatLogs": 5,
+      "SOUL": 6,
+      "DNA": 0,
+      "LargestPath": "D:\\FINAL-PHASE\\DEV - PHASES (PRIORITY GENESIS-NOW)\\DEV-PHASE BLUEPRINT-SUPERDUMPS\\phoenix-lessons-arsenal.json"
+    },
+    {
+      "Stage": 8,
+      "Phase": "phoenix-chat-logs",
+      "Total": 9,
+      "ChatLogs": 9,
+      "SOUL": 0,
+      "DNA": 0,
+      "LargestPath": "D:\\phoenix-chat-logs\\CHAT-EXPORTS\\T6-7 Serve Consolidation dump.txt"
+    },
+    {
+      "Stage": 9,
+      "Phase": "Python314",
+      "Total": 7,
+      "ChatLogs": 0,
+      "SOUL": 0,
+      "DNA": 7,
+      "LargestPath": "C:\\Python314\\Doc\\html\\library\\inspect.html"
+    },
+    {
+      "Stage": 10,
+      "Phase": "OB1_ARCHIVE",
+      "Total": 6,
+      "ChatLogs": 4,
+      "SOUL": 2,
+      "DNA": 0,
+      "LargestPath": "D:\\OB1_ARCHIVE\\OB-1\\DELETED_DUPES_20260405-161443\\topic_soul_dna_hits.txt"
+    }
+  ]
+}

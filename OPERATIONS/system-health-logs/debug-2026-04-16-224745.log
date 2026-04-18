@@ -1,0 +1,42 @@
+[22:47:45] [section] ═══════════════════════════════════════ PHASE 1: VIRTUAL ENVIRONMENT ═══════════════════════════════════════
+[22:47:45] [ok] Python found: Python 3.14.4
+[22:47:45] [ok] Virtual environment activated
+[22:47:45] [section] ═══════════════════════════════════════ PHASE 2: SYSTEM HEALTH CHECKS ═══════════════════════════════════════
+[22:47:45] [info] Running doctor diagnostic...
+[22:47:46] [ok] Doctor: All credentials verified ✓
+[22:47:46] [info] Running build verification...
+[22:47:51] [ok] Build: Verification passed ✓
+[22:47:51] [info] Checking git state...
+[22:47:51] [ok] Git branch: Add-virality-analytics-endpoint
+[22:47:51] [warn] Git state: DIRTY
+[22:47:51] [section] ═══════════════════════════════════════ PHASE 3: MCP CONNECTION AUDIT ═══════════════════════════════════════
+[22:47:51] [info] Checking Cloudflare connection...
+[22:47:54] [ok] Cloudflare: Connected ✓
+[22:47:54] [info] Checking GitHub connection...
+[22:47:56] [ok] GitHub: Authenticated ✓
+[22:47:56] [info] Checking Notion integration...
+[22:47:56] [ok] Notion: Module present ✓
+[22:47:56] [warn] Deepgram: Not yet integrated (planned)
+[22:47:56] [warn] NotebookLM: Not yet integrated (planned)
+[22:47:56] [warn] Stripe: Not yet integrated (planned)
+[22:47:56] [section] ═══════════════════════════════════════ PHASE 4: DEVELOPMENT TOOLS ═══════════════════════════════════════
+[22:47:56] [info] Checking GitKraken...
+[22:47:56] [warn] GitKraken: Not in PATH (https://www.gitkraken.com/)
+[22:47:56] [info] Checking VS Code extensions...
+[22:47:59] [warn]   ✗ GitHub.copilot (install via: code --install-extension GitHub.copilot)
+[22:48:02] [warn]   ✗ eamodio.gitlens (install via: code --install-extension eamodio.gitlens)
+[22:48:05] [warn]   ✗ Axosoft.gitkraken-gitlens (install via: code --install-extension Axosoft.gitkraken-gitlens)
+[22:48:08] [warn]   ✗ googlecloudtools.cloudcode (install via: code --install-extension googlecloudtools.cloudcode)
+[22:48:08] [info] Checking Node.js...
+[22:48:08] [ok] Node.js: v20.20.0 ✓
+[22:48:08] [section] ═══════════════════════════════════════ PHASE 5: CLOUDFLARE GOD MODE VERIFICATION ═══════════════════════════════════════
+[22:48:08] [info] Checking Cloudflare ultimate configuration...
+[22:48:08] [ok] Durable Objects: ✓
+[22:48:08] [warn] KV Namespaces: ✗
+[22:48:08] [warn] AI Gateway: ✗
+[22:48:08] [warn] Workers KV: ✗
+[22:48:08] [ok] Doctor: ✓ PASS
+[22:48:08] [ok] Build: ✓ PASS
+[22:48:08] [warn] Git: ⚠ DIRTY
+[22:48:08] [warn] Cloudflare: ✗ LIMITED
+[22:48:08] [info] MCP Ready: 3/6

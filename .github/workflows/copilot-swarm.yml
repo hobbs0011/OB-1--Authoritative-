@@ -5,6 +5,10 @@ name: "🐝 Copilot Swarm — 3-Account Parallel Deploy"
 on:
   workflow_dispatch:
     inputs:
+      enable_legacy_targets:
+        description: "Set true only when intentionally targeting legacy/suspended accounts"
+        required: false
+        default: "false"
       hobbs_lab_issue:
         description: "Issue title for hobbs-lab/Phoenix-Rising-Protocol-Ultimate"
         required: false
@@ -35,7 +39,7 @@ jobs:
   # PRONG 1: hobbs-lab (uses default GITHUB_TOKEN)
   # ============================================
   deploy-hobbs-lab:
-    if: ${{ github.event.inputs.hobbs_lab_issue != '' }}
+    if: ${{ github.event.inputs.enable_legacy_targets == 'true' && github.event.inputs.hobbs_lab_issue != '' }}
     runs-on: ubuntu-latest
     permissions:
       issues: write
@@ -104,7 +108,7 @@ jobs:
   # PRONG 3: mrmichaelhobbs1234-lang (uses PAT_LANG secret)
   # ============================================
   deploy-lang:
-    if: ${{ github.event.inputs.lang_issue != '' }}
+    if: ${{ github.event.inputs.enable_legacy_targets == 'true' && github.event.inputs.lang_issue != '' }}
     runs-on: ubuntu-latest
     permissions: {}
     steps:

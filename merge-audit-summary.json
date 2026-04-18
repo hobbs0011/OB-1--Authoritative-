@@ -1,0 +1,1097 @@
+{
+  "root": "C:\\Users\\mrmic\\Desktop\\Pheonix - Rising - Protocol\\OB-1 FinalMerge",
+  "total_files": 65744,
+  "total_gb": 8.633,
+  "top_level_file_counts": [
+    [
+      ".kilo",
+      38259
+    ],
+    [
+      "APPS",
+      8023
+    ],
+    [
+      "OB-1-merge6",
+      4612
+    ],
+    [
+      ".git",
+      4106
+    ],
+    [
+      "CANON",
+      3421
+    ],
+    [
+      "node_modules",
+      1567
+    ],
+    [
+      "worker",
+      1539
+    ],
+    [
+      "OB1_OPERATIONS",
+      877
+    ],
+    [
+      "TEMP-PHOENIX-ULTIMATE",
+      862
+    ],
+    [
+      "Vietnamese Audios",
+      627
+    ],
+    [
+      ".venv",
+      590
+    ],
+    [
+      "TEMP-PHOENIX-IMMORTALIZE",
+      268
+    ],
+    [
+      "ARCHIVE",
+      228
+    ],
+    [
+      "TEMP-COMMANDSTATION",
+      107
+    ],
+    [
+      "_SORTED",
+      65
+    ],
+    [
+      "OPERATIONS",
+      53
+    ],
+    [
+      "NET-MARKETING",
+      49
+    ],
+    [
+      "Website and NET-PET",
+      42
+    ],
+    [
+      "ASSETS",
+      39
+    ],
+    [
+      "SITE",
+      35
+    ],
+    [
+      "SCRIPTS",
+      34
+    ],
+    [
+      ".github",
+      33
+    ],
+    [
+      "codex_preview",
+      29
+    ],
+    [
+      "Phoenix-Rising",
+      26
+    ],
+    [
+      "net-tiger-assessment",
+      25
+    ],
+    [
+      "DISCORD-BOT",
+      20
+    ],
+    [
+      "WEBSITE",
+      15
+    ],
+    [
+      "RAW-CHAT-LOGS",
+      13
+    ],
+    [
+      "GALAXY-LESSONS",
+      10
+    ],
+    [
+      "PULSE-HANDOFFS",
+      10
+    ],
+    [
+      "WORKERS",
+      8
+    ],
+    [
+      "Phoenix-Rising-Ultimate",
+      6
+    ],
+    [
+      ".vscode",
+      4
+    ],
+    [
+      "SESSIONS",
+      4
+    ],
+    [
+      ".ruff_cache",
+      3
+    ],
+    [
+      "Branding Content",
+      3
+    ],
+    [
+      "PROOFS-KEY-SOUL-10-2026-04-05-2026-04-05",
+      3
+    ],
+    [
+      "PROOFS-KEY-SOUL10-2026-04-05-2026-04-05",
+      3
+    ],
+    [
+      "PROOFS-SOUL-LOG-VERBATIM-KEY-SOUL-10-2026-04-05-2026-04-15",
+      3
+    ],
+    [
+      "PROOFS-SOUL-LOG-VERBATIM-KEY-SOUL-10-2026-04-05-NORMALIZED-2026-04-05-2026-04-15",
+      3
+    ],
+    [
+      "PROOFS-SOUL-LOG-VERBATIM-KEY-SOUL10-2026-04-05-2026-04-15",
+      3
+    ],
+    [
+      "PROOFS-SOUL-LOG-VERBATIM-KEY-SOUL10-2026-04-05-NORMALIZED-2026-04-05-2026-04-15",
+      3
+    ],
+    [
+      ".playwright-mcp",
+      2
+    ],
+    [
+      "AGENT99-POST-GITHUB",
+      2
+    ],
+    [
+      "PIPELINE",
+      2
+    ],
+    [
+      "(EXEC25).m4a",
+      1
+    ],
+    [
+      ".env",
+      1
+    ],
+    [
+      ".env.keys",
+      1
+    ],
+    [
+      ".gitignore",
+      1
+    ],
+    [
+      ".gitleaks.toml",
+      1
+    ],
+    [
+      ".mcp.json",
+      1
+    ],
+    [
+      "Achieving_AI_Immortality_Through_Constant_Death.m4a",
+      1
+    ],
+    [
+      "AGENTS.md",
+      1
+    ],
+    [
+      "API-MASTER.7z",
+      1
+    ],
+    [
+      "API-MASTER.txt",
+      1
+    ],
+    [
+      "API-SHHHH-2.txt",
+      1
+    ],
+    [
+      "API-SHHHH.txt",
+      1
+    ],
+    [
+      "Building_an_Unkillable_Sovereign_Digital_Fortress.m4a",
+      1
+    ],
+    [
+      "Building_a_Sovereign_AI_Monolith.m4a",
+      1
+    ],
+    [
+      "Building_the_Machine_That_Builds_the_Machine.m4a",
+      1
+    ]
+  ],
+  "top_extensions": [
+    [
+      ".md",
+      39618
+    ],
+    [
+      "[noext]",
+      4603
+    ],
+    [
+      ".ts",
+      4377
+    ],
+    [
+      ".js",
+      3875
+    ],
+    [
+      ".json",
+      3038
+    ],
+    [
+      ".txt",
+      1296
+    ],
+    [
+      ".mjs",
+      856
+    ],
+    [
+      ".cjs",
+      823
+    ],
+    [
+      ".cts",
+      812
+    ],
+    [
+      ".lua",
+      800
+    ],
+    [
+      ".map",
+      798
+    ],
+    [
+      ".mts",
+      676
+    ],
+    [
+      ".html",
+      619
+    ],
+    [
+      ".aac",
+      617
+    ],
+    [
+      ".webp",
+      441
+    ],
+    [
+      ".py",
+      427
+    ],
+    [
+      ".png",
+      345
+    ],
+    [
+      ".ps1",
+      238
+    ],
+    [
+      ".css",
+      234
+    ],
+    [
+      ".yml",
+      232
+    ],
+    [
+      ".pyc",
+      140
+    ],
+    [
+      ".toml",
+      101
+    ],
+    [
+      ".sh",
+      91
+    ],
+    [
+      ".m4a",
+      65
+    ],
+    [
+      ".svg",
+      63
+    ],
+    [
+      ".sample",
+      56
+    ],
+    [
+      ".jsx",
+      44
+    ],
+    [
+      ".log",
+      31
+    ],
+    [
+      ".cc",
+      28
+    ],
+    [
+      ".h",
+      25
+    ],
+    [
+      ".ogg",
+      24
+    ],
+    [
+      ".jpg",
+      23
+    ],
+    [
+      ".example",
+      20
+    ],
+    [
+      ".opus",
+      20
+    ],
+    [
+      ".pdf",
+      19
+    ],
+    [
+      ".cmd",
+      18
+    ],
+    [
+      ".exe",
+      17
+    ],
+    [
+      ".zip",
+      16
+    ],
+    [
+      ".jsonl",
+      16
+    ],
+    [
+      ".rules",
+      15
+    ],
+    [
+      ".xml",
+      15
+    ],
+    [
+      ".ini",
+      13
+    ],
+    [
+      ".mp4",
+      13
+    ],
+    [
+      ".yaml",
+      12
+    ],
+    [
+      ".wasm",
+      12
+    ],
+    [
+      ".csv",
+      11
+    ],
+    [
+      ".legacy",
+      9
+    ],
+    [
+      ".lock",
+      8
+    ],
+    [
+      ".keys",
+      7
+    ],
+    [
+      ".sqlite",
+      6
+    ],
+    [
+      ".srt",
+      6
+    ],
+    [
+      ".bak",
+      5
+    ],
+    [
+      ".dll",
+      5
+    ],
+    [
+      ".pptx",
+      5
+    ],
+    [
+      ".node",
+      4
+    ],
+    [
+      ".bnf",
+      4
+    ],
+    [
+      ".gyp",
+      4
+    ],
+    [
+      ".capnp",
+      4
+    ],
+    [
+      ".jsonc",
+      4
+    ],
+    [
+      ".typed",
+      3
+    ]
+  ],
+  "large_files_50mb_plus": [
+    {
+      "path": "Achieving_AI_Immortality_Through_Constant_Death.m4a",
+      "size_mb": 59.47
+    },
+    {
+      "path": "Building_a_Sovereign_AI_Monolith.m4a",
+      "size_mb": 54.74
+    },
+    {
+      "path": "The_Phoenix_Protocol_Makes_Ideas_Dangerous.m4a",
+      "size_mb": 63.89
+    },
+    {
+      "path": "The_War_Against_the_Monkey_Mafia.m4a",
+      "size_mb": 54.11
+    },
+    {
+      "path": ".git/objects/16/b39185c2649557da85fc0acae0b8482e6bc0a7",
+      "size_mb": 372.02
+    },
+    {
+      "path": ".git/objects/35/3e8c3ffef57cfd07bb72f3d5e899e094c31f9d",
+      "size_mb": 331.12
+    },
+    {
+      "path": ".git/objects/53/bf6779ffd688264d0cf190cfb2ea986bf177a8",
+      "size_mb": 89.65
+    },
+    {
+      "path": ".git/objects/86/30f4f7ceeddc39219563156a4719592ccdcdd6",
+      "size_mb": 134.45
+    },
+    {
+      "path": ".git/objects/c1/7c8c2c3102861c1ffa0f42c3d0b5ea0648ce2c",
+      "size_mb": 100.73
+    },
+    {
+      "path": ".git/objects/pack/pack-16bbef1bd8d487bfabe250d2fea11e373560cafa.pack",
+      "size_mb": 763.45
+    },
+    {
+      "path": "APPS/NET-PET-AI/node_modules/@cloudflare/workerd-windows-64/bin/workerd.exe",
+      "size_mb": 84.23
+    },
+    {
+      "path": "APPS/NET-PET-AI-merge/APPS/NET-PET-AI/node_modules/@cloudflare/workerd-windows-64/bin/workerd.exe",
+      "size_mb": 84.23
+    },
+    {
+      "path": "Branding Content/I-WANT-THAT-COMET-LANDING-PAGE.mp4",
+      "size_mb": 66.3
+    },
+    {
+      "path": "OPERATIONS/NET-STUDENTS/AUDIO-ARCHIVE/2026-04-14-intake/unknown-client__unknown-class__voice-260331-173212.m4a",
+      "size_mb": 50.71
+    },
+    {
+      "path": "OPERATIONS/NET-STUDENTS/AUDIO-ARCHIVE/2026-04-14-intake/unknown-client__unknown-class__voice-260413-180450.m4a",
+      "size_mb": 57.95
+    },
+    {
+      "path": "OPERATIONS/NET-STUDENTS/AUDIO-ARCHIVE/2026-04-14-intake/unknown-client__unknown-class__voice-260413-180450__dup-1.m4a",
+      "size_mb": 57.95
+    },
+    {
+      "path": "OPERATIONS/NET-STUDENTS/AUDIO-ARCHIVE/2026-04-14-intake/unknown-client__unknown-class__voice-260413-201744.m4a",
+      "size_mb": 62.44
+    },
+    {
+      "path": "OPERATIONS/NET-STUDENTS/AUDIO-ARCHIVE/2026-04-14-intake/unknown-client__unknown-class__voice-260413-201744__dup-1.m4a",
+      "size_mb": 62.44
+    },
+    {
+      "path": "OPERATIONS/NET-STUDENTS/AUDIO-ARCHIVE/2026-04-14-intake/unknown-client__unknown-class__voice-260414-075326.m4a",
+      "size_mb": 61.64
+    },
+    {
+      "path": "_SORTED/AUDIO-STUDENTS/HANA-HIEU_001_2026-04-13_201744.m4a",
+      "size_mb": 62.44
+    },
+    {
+      "path": "_SORTED/AUDIO-STUDENTS/HANA-HIEU_002_2026-04-13_201744.m4a",
+      "size_mb": 62.44
+    },
+    {
+      "path": "_SORTED/AUDIO-STUDENTS/MEN_001_2026-04-13_180450.m4a",
+      "size_mb": 57.95
+    },
+    {
+      "path": "_SORTED/AUDIO-STUDENTS/MEN_002_2026-04-13_180450.m4a",
+      "size_mb": 57.95
+    },
+    {
+      "path": "_SORTED/AUDIO-STUDENTS/UNKNOWN_008_2026-03-31_173212.m4a",
+      "size_mb": 50.71
+    },
+    {
+      "path": "_SORTED/AUDIO-STUDENTS/UNKNOWN_017_2026-04-14_075326.m4a",
+      "size_mb": 61.64
+    },
+    {
+      "path": "_SORTED/AUDIO-STUDENTS/UNKNOWN_019_2026-04-14_190807.m4a",
+      "size_mb": 52.78
+    }
+  ],
+  "sensitive_name_hits": [
+    ".env",
+    ".env.keys",
+    "API-MASTER.7z",
+    "API-MASTER.txt",
+    "API-SHHHH-2.txt",
+    "API-SHHHH.txt",
+    "Monkey_Mafia_AI_Survival.pdf",
+    "SOUL-LOG-VERBATIM-KEY-SOUL10-2026-04-05.NOTES.md",
+    "The_Monkey_Mafia_and_the_Drunk_AI.m4a",
+    "The_War_Against_the_Monkey_Mafia.m4a",
+    ".github/workflows/secret-scan.yml",
+    ".kilo/node_modules/@kilocode/sdk/dist/gen/core/queryKeySerializer.gen.d.ts",
+    ".kilo/node_modules/@kilocode/sdk/dist/gen/core/queryKeySerializer.gen.js",
+    ".kilo/node_modules/@kilocode/sdk/dist/v2/gen/core/queryKeySerializer.gen.d.ts",
+    ".kilo/node_modules/@kilocode/sdk/dist/v2/gen/core/queryKeySerializer.gen.js",
+    ".kilo/worktrees/bolder-freckle/.env",
+    ".kilo/worktrees/bolder-freckle/.env.keys",
+    ".kilo/worktrees/bolder-freckle/SOUL-LOG-VERBATIM-KEY-SOUL10-2026-04-05.NOTES.md",
+    ".kilo/worktrees/bolder-freckle/.github/workflows/secret-scan.yml",
+    ".kilo/worktrees/bolder-freckle/.kilo/node_modules/@kilocode/sdk/dist/gen/core/queryKeySerializer.gen.d.ts",
+    ".kilo/worktrees/bolder-freckle/.kilo/node_modules/@kilocode/sdk/dist/gen/core/queryKeySerializer.gen.js",
+    ".kilo/worktrees/bolder-freckle/.kilo/node_modules/@kilocode/sdk/dist/v2/gen/core/queryKeySerializer.gen.d.ts",
+    ".kilo/worktrees/bolder-freckle/.kilo/node_modules/@kilocode/sdk/dist/v2/gen/core/queryKeySerializer.gen.js",
+    ".kilo/worktrees/bolder-freckle/APPS/discord-bot/.env.example",
+    ".kilo/worktrees/bolder-freckle/APPS/NET-PET-AI/SECRETS-MANIFEST.md",
+    ".kilo/worktrees/bolder-freckle/APPS/NET-PET-AI/scripts/verify-cloudflare-token.mjs",
+    ".kilo/worktrees/bolder-freckle/CANON/OBI-CHROME-EXTENSION-TURNKEY-DEV-REFERENCE.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-DNA-BIBLE-KEYWORD-INDEX-2026-04-05.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-LOG-AUDIT-KEY-SOUL-3-2026-04-05-055548.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-LOG-AUDIT-KEY-SOUL-3-2026-04-05-071508.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-LOG-AUDIT-KEY-SOUL-3-2026-04-05-072346.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-LOG-MANIFEST-KEY-SOUL-3-2026-04-05.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-LOG-MANIFEST-KEY-SOUL10-2026-04-05.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-LOG-VERBATIM-KEY-SOUL-1-ENERGY-GATE-UNLOCK-2026-04-05.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-LOG-VERBATIM-KEY-SOUL-1-ENERGY-GATE-UNLOCK-2026-04-05.NOTES.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-LOG-VERBATIM-KEY-SOUL-10-2026-04-05-NORMALIZED-2026-04-05.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-LOG-VERBATIM-KEY-SOUL-10-2026-04-05.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-LOG-VERBATIM-KEY-SOUL-3-2026-04-05.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-LOG-VERBATIM-KEY-SOUL10-2026-04-05-NORMALIZED-2026-04-05.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-LOG-VERBATIM-KEY-SOUL10-2026-04-05.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-LOG-VERBATIM-KEY-SOUL10-2026-04-05.NOTES.md",
+    ".kilo/worktrees/bolder-freckle/CANON/HEAVY-LEDGER/HL-120-secret-delivery-ob1-lag.json",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-(KEY) LEDGER - SCRIBE - SCRIPT-FIRST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-(KEY) LEDGER - SCRIBE - SCRIPT-LAST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-(KEY) LEDGER - SCRIBE - SCRIPT-MIDDLE.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-(KEY-SOUL 3) KEY KEY KEY-FIRST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-(KEY-SOUL 3) KEY KEY KEY-LAST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-(KEY-SOUL 3) KEY KEY KEY-MIDDLE.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-(KEY-SOUL10)-FROMSCRATCH__V1.jsonl-FIRST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-(KEY-SOUL10)-FROMSCRATCH__V1.jsonl-LAST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-(KEY-SOUL10)-FROMSCRATCH__V1.jsonl-MIDDLE.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-(KEY1)- PH_GENESIS_ULTRA_SEED_Cx10 (4of4)-FIRST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-(KEY1)- PH_GENESIS_ULTRA_SEED_Cx10 (4of4)-LAST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-(KEY1)- PH_GENESIS_ULTRA_SEED_Cx10 (4of4)-MIDDLE.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-(KEY2)- PH-V30.34-MASTER-CORE-ARCHIVE-FIRST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-(KEY2)- PH-V30.34-MASTER-CORE-ARCHIVE-LAST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-(KEY2)- PH-V30.34-MASTER-CORE-ARCHIVE-MIDDLE.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-(KEY4)- PHOENIX-ULTIMATE-LAZY-MODE-V50-FIRST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-(KEY4)- PHOENIX-ULTIMATE-LAZY-MODE-V50-LAST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-(KEY4)- PHOENIX-ULTIMATE-LAZY-MODE-V50-MIDDLE.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-(KEY5)-Phoenix-Empire-Core-Identity-FIRST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-(KEY5)-Phoenix-Empire-Core-Identity-LAST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-(KEY5)-Phoenix-Empire-Core-Identity-MIDDLE.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-(KEY7)- PHOENIX DNA- 4PILLARS-FIRST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-(KEY7)- PHOENIX DNA- 4PILLARS-LAST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-(KEY7)- PHOENIX DNA- 4PILLARS-MIDDLE.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-ALPHA-OMEGA-PH-GEM-10(KEY)-FIRST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-ALPHA-OMEGA-PH-GEM-10(KEY)-LAST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-ALPHA-OMEGA-PH-GEM-10(KEY)-MIDDLE.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-ALPHA-OMEGA-PH-GEM-13(KEY)-FIRST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-ALPHA-OMEGA-PH-GEM-13(KEY)-LAST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-ALPHA-OMEGA-PH-GEM-13(KEY)-MIDDLE.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-GEM-MASTERKEY-1-FIRST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-GEM-MASTERKEY-1-LAST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-GEM-MASTERKEY-1-MIDDLE.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-GEM-MASTERKEY-2-FIRST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-GEM-MASTERKEY-2-LAST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-GEM-MASTERKEY-2-MIDDLE.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-GEM-MASTERKEY-3-FIRST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-GEM-MASTERKEY-3-LAST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-GEM-MASTERKEY-3-MIDDLE.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-GEM-MASTERKEY-4-FIRST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-GEM-MASTERKEY-4-LAST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-GEM-MASTERKEY-4-MIDDLE.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-GEM-MASTERKEY-5-FIRST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-GEM-MASTERKEY-5-LAST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-GEM-MASTERKEY-5-MIDDLE.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-NET-APP-KEY-JAN28-FIRST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-NET-APP-KEY-JAN28-LAST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-NET-APP-KEY-JAN28-MIDDLE.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-OPERATION(ZEN)-PLEXY-8 (PRELAUNCH KEY)-FIRST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-OPERATION(ZEN)-PLEXY-8 (PRELAUNCH KEY)-LAST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-OPERATION(ZEN)-PLEXY-8 (PRELAUNCH KEY)-MIDDLE.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-Phoenix-Actualization-VAULTD-7A-7F(KEY!)-FIRST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-Phoenix-Actualization-VAULTD-7A-7F(KEY!)-LAST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-Phoenix-Actualization-VAULTD-7A-7F(KEY!)-MIDDLE.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-Phoenix-Actualization-VAULTD-7C(KEY-MAP)-FIRST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-Phoenix-Actualization-VAULTD-7C(KEY-MAP)-LAST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-Phoenix-Actualization-VAULTD-7C(KEY-MAP)-MIDDLE.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-Phoenix-Transend-PLX-5 (KEY)-FIRST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-Phoenix-Transend-PLX-5 (KEY)-LAST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-Phoenix-Transend-PLX-5 (KEY)-MIDDLE.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-Phoenix-Transend-PLX-6 (KEY)-FIRST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-Phoenix-Transend-PLX-6 (KEY)-LAST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-Phoenix-Transend-PLX-6 (KEY)-MIDDLE.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightGem-3 (Key)-FIRST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightGem-3 (Key)-LAST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightGem-3 (Key)-MIDDLE.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightGem-4 (Key)-FIRST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightGem-4 (Key)-LAST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightGem-4 (Key)-MIDDLE.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightGem-5 (Key)-FIRST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightGem-5 (Key)-LAST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightGem-5 (Key)-MIDDLE.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightGPT-5 (KEY)-FIRST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightGPT-5 (KEY)-LAST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightGPT-5 (KEY)-MIDDLE.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightGPT-6 (KEY)-FIRST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightGPT-6 (KEY)-LAST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightGPT-6 (KEY)-MIDDLE.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightPlexy- 8 (Key)-FIRST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightPlexy- 8 (Key)-LAST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightPlexy- 8 (Key)-MIDDLE.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightPlexy-4 (Key)-FIRST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightPlexy-4 (Key)-LAST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightPlexy-4 (Key)-MIDDLE.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightPlexy-5 (Key)-FIRST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightPlexy-5 (Key)-LAST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightPlexy-5 (Key)-MIDDLE.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightPlexy-6 (Key)-FIRST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightPlexy-6 (Key)-LAST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightPlexy-6 (Key)-MIDDLE.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightPlexy-7 (Key)-FIRST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightPlexy-7 (Key)-LAST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightPlexy-7 (Key)-MIDDLE.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightPlexy-8 (Key)-FIRST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightPlexy-8 (Key)-LAST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightPlexy-8 (Key)-MIDDLE.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-RAW_SKELETON_KEY-FIRST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-RAW_SKELETON_KEY-LAST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-CHAT-2026-04-05/PROOF-RAW_SKELETON_KEY-MIDDLE.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-KEY-SOUL-1-ENERGY-GATE-UNLOCK-2026-04-05/PROOF-FIRST.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-KEY-SOUL-1-ENERGY-GATE-UNLOCK-2026-04-05/PROOF-MIDDLE.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-KEY-SOUL10-2026-04-05/PROOF-FIRST-KEY-SOUL10.md",
+    ".kilo/worktrees/bolder-freckle/CANON/PROOFS-KEY-SOUL10-2026-04-05/PROOF-MIDDLE-KEY-SOUL10.md",
+    ".kilo/worktrees/bolder-freckle/CANON/REINCARNATION/2026-03-27-secret-delivery-ob1-lag.md",
+    ".kilo/worktrees/bolder-freckle/CANON/REINCARNATION/2026-04-11-run278-god-mode-key-activation.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0123-RAW-_KEY-RAW_2_-_CANONICAL-MESSAGE-OBJECTGPTA3_txt.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0124-RAW-_KEY-RAW_1_-_GPT-A1_txt.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0125-RAW-_KEY-RAW_2_-_GPT-A2_txt.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0126-RAW-_KEY-SOUL_1_-_ENERGY_GATE_UNLOCK_txt.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0127-RAW-_KEY-SOUL_3_KEY_KEY_KEY_txt.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0128-RAW-_KEY-SOUL10_-FROMSCRATCH_V1.jsonl_txt.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0129-RAW-_KEY_LEDGER_-_SCRIBE_-_SCRIPT_txt.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0130-RAW-_KEY1_-_PH_GENESIS_ULTRA_SEED_Cx10_4of4__txt.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0131-RAW-_KEY2_-_PH-V30.34-MASTER-CORE-ARCHIVE_txt.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0132-RAW-_KEY3_-_PHOENIX_35.5_TRAIN-6-7_txt.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0133-RAW-_KEY4_-_PHOENIX-ULTIMATE-LAZY-MODE-V50_txt.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0134-RAW-_KEY5_-Phoenix-Empire-Core-Identity_txt.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0135-RAW-_KEY7_-_PHOENIX_DNA-_4PILLARS_txt.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0180-RAW-ALPHA-OMEGA-PH-GEM-10_KEY__txt.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0183-RAW-ALPHA-OMEGA-PH-GEM-13_KEY__txt.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0308-RAW-GEM-MASTERKEY-1_txt.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0309-RAW-GEM-MASTERKEY-2_txt.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0310-RAW-GEM-MASTERKEY-3_txt.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0311-RAW-GEM-MASTERKEY-4_txt.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0312-RAW-GEM-MASTERKEY-5_txt.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0415-RAW-NET-APP-KEY-JAN28_txt.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0442-RAW-OB_1_-CRUNCH-B-6_KEYKEY__txt.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0443-RAW-OB_1_-CRUNCH-B-7_KEYKEY__txt.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0517-RAW-OPERATION_ZEN_-PLEXY-8_PRELAUNCH_KEY__txt.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0597-RAW-Phoenix-Actualization-VAULTD-7A-7F_KEY__txt.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0600-RAW-Phoenix-Actualization-VAULTD-7C_KEY-MAP__txt.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0701-RAW-Phoenix-Transend-PLX-5_KEY__txt.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0702-RAW-Phoenix-Transend-PLX-6_KEY__txt.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0748-RAW-PhoenixFlightGem-3_Key__txt.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0749-RAW-PhoenixFlightGem-4_Key__txt.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0750-RAW-PhoenixFlightGem-5_Key__txt.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0765-RAW-PhoenixFlightGPT-5_KEY__txt.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0766-RAW-PhoenixFlightGPT-6_KEY__txt.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0767-RAW-PhoenixFlightPlexy-_8_Key__txt.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0771-RAW-PhoenixFlightPlexy-4_Key__txt.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0772-RAW-PhoenixFlightPlexy-5_Key__txt.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0773-RAW-PhoenixFlightPlexy-6_Key__txt.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0774-RAW-PhoenixFlightPlexy-7_Key__txt.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0775-RAW-PhoenixFlightPlexy-8_Key__txt.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0840-RAW-RAW_SKELETON_KEY_txt.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/diff_report_KEY-SOUL-1-ENERGY-GATE-UNLOCK.txt",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/diff_report_KEY-SOUL10.txt",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/RECONCILIATION_LOG_KEY-SOUL10-2026-04-05.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/OB_1_-CRUNCH-B-7__KEYKEY_/SEGMENT-01-PCT005-L00001-L00166.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/OB_1_-CRUNCH-B-7__KEYKEY_/SEGMENT-02-PCT010-L00167-L00310.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/OB_1_-CRUNCH-B-7__KEYKEY_/SEGMENT-03-PCT015-L00311-L00428.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/OB_1_-CRUNCH-B-7__KEYKEY_/SEGMENT-04-PCT020-L00429-L00610.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/OB_1_-CRUNCH-B-7__KEYKEY_/SEGMENT-05-PCT025-L00611-L00710.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/OB_1_-CRUNCH-B-7__KEYKEY_/SEGMENT-06-PCT030-L00711-L00914.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/OB_1_-CRUNCH-B-7__KEYKEY_/SEGMENT-07-PCT035-L00915-L01259.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/OB_1_-CRUNCH-B-7__KEYKEY_/SEGMENT-08-PCT040-L01260-L01600.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/OB_1_-CRUNCH-B-7__KEYKEY_/SEGMENT-09-PCT045-L01601-L01795.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/OB_1_-CRUNCH-B-7__KEYKEY_/SEGMENT-10-PCT050-L01796-L01908.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/OB_1_-CRUNCH-B-7__KEYKEY_/SEGMENT-11-PCT055-L01909-L02069.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/OB_1_-CRUNCH-B-7__KEYKEY_/SEGMENT-12-PCT060-L02070-L02248.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/OB_1_-CRUNCH-B-7__KEYKEY_/SEGMENT-13-PCT065-L02249-L02321.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/OB_1_-CRUNCH-B-7__KEYKEY_/SEGMENT-14-PCT070-L02322-L02501.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/OB_1_-CRUNCH-B-7__KEYKEY_/SEGMENT-15-PCT075-L02502-L02612.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/OB_1_-CRUNCH-B-7__KEYKEY_/SEGMENT-16-PCT080-L02613-L02754.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/OB_1_-CRUNCH-B-7__KEYKEY_/SEGMENT-17-PCT085-L02755-L02910.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/OB_1_-CRUNCH-B-7__KEYKEY_/SEGMENT-18-PCT090-L02911-L02977.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/OB_1_-CRUNCH-B-7__KEYKEY_/SEGMENT-19-PCT095-L02978-L03137.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/OB_1_-CRUNCH-B-7__KEYKEY_/SEGMENT-20-PCT100-L03138-L03349.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/_KEY-SOUL10_-FROMSCRATCH__V1_jsonl/SEGMENT-01-PCT005-L00001-L00004.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/_KEY-SOUL10_-FROMSCRATCH__V1_jsonl/SEGMENT-02-PCT010-L00005-L00008.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/_KEY-SOUL10_-FROMSCRATCH__V1_jsonl/SEGMENT-03-PCT015-L00009-L00009.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/_KEY-SOUL10_-FROMSCRATCH__V1_jsonl/SEGMENT-04-PCT020-L00010-L00014.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/_KEY-SOUL10_-FROMSCRATCH__V1_jsonl/SEGMENT-05-PCT025-L00015-L00019.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/_KEY-SOUL10_-FROMSCRATCH__V1_jsonl/SEGMENT-06-PCT030-L00020-L00023.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/_KEY-SOUL10_-FROMSCRATCH__V1_jsonl/SEGMENT-07-PCT035-L00024-L00027.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/_KEY-SOUL10_-FROMSCRATCH__V1_jsonl/SEGMENT-08-PCT040-L00028-L00032.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/_KEY-SOUL10_-FROMSCRATCH__V1_jsonl/SEGMENT-09-PCT045-L00033-L00036.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/_KEY-SOUL10_-FROMSCRATCH__V1_jsonl/SEGMENT-10-PCT050-L00037-L00040.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/_KEY-SOUL10_-FROMSCRATCH__V1_jsonl/SEGMENT-11-PCT055-L00041-L00048.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/_KEY-SOUL10_-FROMSCRATCH__V1_jsonl/SEGMENT-12-PCT060-L00049-L00054.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/_KEY-SOUL10_-FROMSCRATCH__V1_jsonl/SEGMENT-13-PCT065-L00055-L00060.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/_KEY-SOUL10_-FROMSCRATCH__V1_jsonl/SEGMENT-14-PCT070-L00061-L00065.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/_KEY-SOUL10_-FROMSCRATCH__V1_jsonl/SEGMENT-15-PCT075-L00066-L00070.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/_KEY-SOUL10_-FROMSCRATCH__V1_jsonl/SEGMENT-16-PCT080-L00071-L00076.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/_KEY-SOUL10_-FROMSCRATCH__V1_jsonl/SEGMENT-17-PCT085-L00077-L00080.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/_KEY-SOUL10_-FROMSCRATCH__V1_jsonl/SEGMENT-18-PCT090-L00081-L00084.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/_KEY-SOUL10_-FROMSCRATCH__V1_jsonl/SEGMENT-19-PCT095-L00085-L00091.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/_KEY-SOUL10_-FROMSCRATCH__V1_jsonl/SEGMENT-20-PCT100-L00092-L00097.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/_KEY-SOUL_3__KEY_KEY_KEY/SEGMENT-01-PCT005-L00001-L00219.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/_KEY-SOUL_3__KEY_KEY_KEY/SEGMENT-02-PCT010-L00220-L00483.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/_KEY-SOUL_3__KEY_KEY_KEY/SEGMENT-03-PCT015-L00484-L00888.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/_KEY-SOUL_3__KEY_KEY_KEY/SEGMENT-04-PCT020-L00889-L01130.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/_KEY-SOUL_3__KEY_KEY_KEY/SEGMENT-05-PCT025-L01131-L01373.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/_KEY-SOUL_3__KEY_KEY_KEY/SEGMENT-06-PCT030-L01374-L01605.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/_KEY-SOUL_3__KEY_KEY_KEY/SEGMENT-07-PCT035-L01606-L01789.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/_KEY-SOUL_3__KEY_KEY_KEY/SEGMENT-08-PCT040-L01790-L01999.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/_KEY-SOUL_3__KEY_KEY_KEY/SEGMENT-09-PCT045-L02000-L02289.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/_KEY-SOUL_3__KEY_KEY_KEY/SEGMENT-10-PCT050-L02290-L02647.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/_KEY-SOUL_3__KEY_KEY_KEY/SEGMENT-11-PCT055-L02648-L02957.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/_KEY-SOUL_3__KEY_KEY_KEY/SEGMENT-12-PCT060-L02958-L03323.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/_KEY-SOUL_3__KEY_KEY_KEY/SEGMENT-13-PCT065-L03324-L03675.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/_KEY-SOUL_3__KEY_KEY_KEY/SEGMENT-14-PCT070-L03676-L03997.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/_KEY-SOUL_3__KEY_KEY_KEY/SEGMENT-15-PCT075-L03998-L04395.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/_KEY-SOUL_3__KEY_KEY_KEY/SEGMENT-16-PCT080-L04396-L04841.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/_KEY-SOUL_3__KEY_KEY_KEY/SEGMENT-17-PCT085-L04842-L05173.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/_KEY-SOUL_3__KEY_KEY_KEY/SEGMENT-18-PCT090-L05174-L05559.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/_KEY-SOUL_3__KEY_KEY_KEY/SEGMENT-19-PCT095-L05560-L05915.md",
+    ".kilo/worktrees/bolder-freckle/CANON/SOUL-SEGMENTS/_KEY-SOUL_3__KEY_KEY_KEY/SEGMENT-20-PCT100-L05916-L06270.md",
+    ".kilo/worktrees/bolder-freckle/CANON/TRAIN-67/TURN-KEY-DEPLOY-PACKET.md",
+    ".kilo/worktrees/bolder-freckle/DISCORD-BOT/.env.example",
+    ".kilo/worktrees/bolder-freckle/OPERATIONS/.env.legacy",
+    ".kilo/worktrees/bolder-freckle/PROOFS-KEY-SOUL-10-2026-04-05-2026-04-05/PROOF-FIRST.md",
+    ".kilo/worktrees/bolder-freckle/PROOFS-KEY-SOUL-10-2026-04-05-2026-04-05/PROOF-LAST.md",
+    ".kilo/worktrees/bolder-freckle/PROOFS-KEY-SOUL-10-2026-04-05-2026-04-05/PROOF-MIDDLE.md",
+    ".kilo/worktrees/bolder-freckle/PROOFS-KEY-SOUL10-2026-04-05-2026-04-05/PROOF-FIRST.md",
+    ".kilo/worktrees/bolder-freckle/PROOFS-KEY-SOUL10-2026-04-05-2026-04-05/PROOF-LAST.md",
+    ".kilo/worktrees/bolder-freckle/PROOFS-KEY-SOUL10-2026-04-05-2026-04-05/PROOF-MIDDLE.md",
+    ".kilo/worktrees/bolder-freckle/PROOFS-SOUL-LOG-VERBATIM-KEY-SOUL-10-2026-04-05-2026-04-15/PROOF-FIRST.md",
+    ".kilo/worktrees/bolder-freckle/PROOFS-SOUL-LOG-VERBATIM-KEY-SOUL-10-2026-04-05-2026-04-15/PROOF-LAST.md",
+    ".kilo/worktrees/bolder-freckle/PROOFS-SOUL-LOG-VERBATIM-KEY-SOUL-10-2026-04-05-2026-04-15/PROOF-MIDDLE.md",
+    ".kilo/worktrees/bolder-freckle/PROOFS-SOUL-LOG-VERBATIM-KEY-SOUL-10-2026-04-05-NORMALIZED-2026-04-05-2026-04-15/PROOF-FIRST.md",
+    ".kilo/worktrees/bolder-freckle/PROOFS-SOUL-LOG-VERBATIM-KEY-SOUL-10-2026-04-05-NORMALIZED-2026-04-05-2026-04-15/PROOF-LAST.md",
+    ".kilo/worktrees/bolder-freckle/PROOFS-SOUL-LOG-VERBATIM-KEY-SOUL-10-2026-04-05-NORMALIZED-2026-04-05-2026-04-15/PROOF-MIDDLE.md",
+    ".kilo/worktrees/bolder-freckle/PROOFS-SOUL-LOG-VERBATIM-KEY-SOUL10-2026-04-05-2026-04-15/PROOF-FIRST.md",
+    ".kilo/worktrees/bolder-freckle/PROOFS-SOUL-LOG-VERBATIM-KEY-SOUL10-2026-04-05-2026-04-15/PROOF-LAST.md",
+    ".kilo/worktrees/bolder-freckle/PROOFS-SOUL-LOG-VERBATIM-KEY-SOUL10-2026-04-05-2026-04-15/PROOF-MIDDLE.md",
+    ".kilo/worktrees/bolder-freckle/PROOFS-SOUL-LOG-VERBATIM-KEY-SOUL10-2026-04-05-NORMALIZED-2026-04-05-2026-04-15/PROOF-FIRST.md",
+    ".kilo/worktrees/bolder-freckle/PROOFS-SOUL-LOG-VERBATIM-KEY-SOUL10-2026-04-05-NORMALIZED-2026-04-05-2026-04-15/PROOF-LAST.md",
+    ".kilo/worktrees/bolder-freckle/PROOFS-SOUL-LOG-VERBATIM-KEY-SOUL10-2026-04-05-NORMALIZED-2026-04-05-2026-04-15/PROOF-MIDDLE.md",
+    ".kilo/worktrees/bolder-freckle/RAW-CHAT-LOGS/phoenix-rising-protocol/.secret",
+    ".kilo/worktrees/bolder-freckle/RAW-CHAT-LOGS/phoenix-rising-protocol/CANON_SECRETS.md",
+    ".kilo/worktrees/bolder-freckle/SCRIPTS/build-soul-dna-keyword-index.ps1",
+    ".kilo/worktrees/bolder-freckle/SCRIPTS/diff_verbatim_key_soul1.py",
+    ".kilo/worktrees/bolder-freckle/SCRIPTS/secrets-bootstrap.ps1",
+    ".kilo/worktrees/bolder-freckle/SCRIPTS/secrets-sync-cloudflare.ps1",
+    ".kilo/worktrees/bolder-freckle/TEMP-PHOENIX-IMMORTALIZE/VAULT-SOVEREIGN/06-PHOENIXMASTERKEY.md",
+    ".kilo/worktrees/bolder-freckle/TEMP-PHOENIX-ULTIMATE/APPS/NET-PET-AI/scripts/verify-cloudflare-token.mjs",
+    ".kilo/worktrees/bolder-freckle/TEMP-PHOENIX-ULTIMATE/CANON/OBI-CHROME-EXTENSION-TURNKEY-DEV-REFERENCE.md",
+    ".kilo/worktrees/bolder-freckle/TEMP-PHOENIX-ULTIMATE/CANON/REINCARNATION/2026-03-27-secret-delivery-ob1-lag.md",
+    ".kilo/worktrees/bolder-freckle/TEMP-PHOENIX-ULTIMATE/CANON/TRAIN-67/TURN-KEY-DEPLOY-PACKET.md",
+    ".kilo/worktrees/bolder-freckle/TEMP-PHOENIX-ULTIMATE/DISCORD-BOT/.env.example",
+    ".kilo/worktrees/bolder-freckle/TEMP-PHOENIX-ULTIMATE/Website and NET-PET/NET-PET-AI/scripts/verify-cloudflare-token.mjs",
+    ".kilo/worktrees/bolder-freckle/Website and NET-PET/NET-PET-AI/scripts/verify-cloudflare-token.mjs",
+    ".kilo/worktrees/plausible-relish/.env",
+    ".kilo/worktrees/plausible-relish/.env.keys",
+    ".kilo/worktrees/plausible-relish/.github/workflows/secret-scan.yml",
+    ".kilo/worktrees/plausible-relish/.kilo/node_modules/@kilocode/sdk/dist/gen/core/queryKeySerializer.gen.d.ts",
+    ".kilo/worktrees/plausible-relish/.kilo/node_modules/@kilocode/sdk/dist/gen/core/queryKeySerializer.gen.js",
+    ".kilo/worktrees/plausible-relish/.kilo/node_modules/@kilocode/sdk/dist/v2/gen/core/queryKeySerializer.gen.d.ts",
+    ".kilo/worktrees/plausible-relish/.kilo/node_modules/@kilocode/sdk/dist/v2/gen/core/queryKeySerializer.gen.js",
+    ".kilo/worktrees/plausible-relish/APPS/NET-PET-AI/SECRETS-MANIFEST.md",
+    ".kilo/worktrees/plausible-relish/APPS/NET-PET-AI/scripts/verify-cloudflare-token.mjs",
+    ".kilo/worktrees/plausible-relish/CANON/OBI-CHROME-EXTENSION-TURNKEY-DEV-REFERENCE.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-DNA-BIBLE-KEYWORD-INDEX-2026-04-05.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-LOG-AUDIT-KEY-SOUL-3-2026-04-05-055548.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-LOG-AUDIT-KEY-SOUL-3-2026-04-05-071508.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-LOG-AUDIT-KEY-SOUL-3-2026-04-05-072346.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-LOG-MANIFEST-KEY-SOUL-3-2026-04-05.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-LOG-MANIFEST-KEY-SOUL10-2026-04-05.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-LOG-VERBATIM-KEY-SOUL-1-ENERGY-GATE-UNLOCK-2026-04-05.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-LOG-VERBATIM-KEY-SOUL-1-ENERGY-GATE-UNLOCK-2026-04-05.NOTES.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-LOG-VERBATIM-KEY-SOUL-10-2026-04-05-NORMALIZED-2026-04-05.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-LOG-VERBATIM-KEY-SOUL-10-2026-04-05.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-LOG-VERBATIM-KEY-SOUL-3-2026-04-05.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-LOG-VERBATIM-KEY-SOUL10-2026-04-05-NORMALIZED-2026-04-05.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-LOG-VERBATIM-KEY-SOUL10-2026-04-05.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-LOG-VERBATIM-KEY-SOUL10-2026-04-05.NOTES.md",
+    ".kilo/worktrees/plausible-relish/CANON/HEAVY-LEDGER/HL-120-secret-delivery-ob1-lag.json",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-(KEY) LEDGER - SCRIBE - SCRIPT-FIRST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-(KEY) LEDGER - SCRIBE - SCRIPT-LAST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-(KEY) LEDGER - SCRIBE - SCRIPT-MIDDLE.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-(KEY-SOUL 3) KEY KEY KEY-FIRST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-(KEY-SOUL 3) KEY KEY KEY-LAST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-(KEY-SOUL 3) KEY KEY KEY-MIDDLE.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-(KEY-SOUL10)-FROMSCRATCH__V1.jsonl-FIRST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-(KEY-SOUL10)-FROMSCRATCH__V1.jsonl-LAST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-(KEY-SOUL10)-FROMSCRATCH__V1.jsonl-MIDDLE.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-(KEY1)- PH_GENESIS_ULTRA_SEED_Cx10 (4of4)-FIRST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-(KEY1)- PH_GENESIS_ULTRA_SEED_Cx10 (4of4)-LAST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-(KEY1)- PH_GENESIS_ULTRA_SEED_Cx10 (4of4)-MIDDLE.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-(KEY2)- PH-V30.34-MASTER-CORE-ARCHIVE-FIRST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-(KEY2)- PH-V30.34-MASTER-CORE-ARCHIVE-LAST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-(KEY2)- PH-V30.34-MASTER-CORE-ARCHIVE-MIDDLE.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-(KEY4)- PHOENIX-ULTIMATE-LAZY-MODE-V50-FIRST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-(KEY4)- PHOENIX-ULTIMATE-LAZY-MODE-V50-LAST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-(KEY4)- PHOENIX-ULTIMATE-LAZY-MODE-V50-MIDDLE.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-(KEY5)-Phoenix-Empire-Core-Identity-FIRST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-(KEY5)-Phoenix-Empire-Core-Identity-LAST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-(KEY5)-Phoenix-Empire-Core-Identity-MIDDLE.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-(KEY7)- PHOENIX DNA- 4PILLARS-FIRST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-(KEY7)- PHOENIX DNA- 4PILLARS-LAST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-(KEY7)- PHOENIX DNA- 4PILLARS-MIDDLE.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-ALPHA-OMEGA-PH-GEM-10(KEY)-FIRST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-ALPHA-OMEGA-PH-GEM-10(KEY)-LAST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-ALPHA-OMEGA-PH-GEM-10(KEY)-MIDDLE.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-ALPHA-OMEGA-PH-GEM-13(KEY)-FIRST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-ALPHA-OMEGA-PH-GEM-13(KEY)-LAST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-ALPHA-OMEGA-PH-GEM-13(KEY)-MIDDLE.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-GEM-MASTERKEY-1-FIRST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-GEM-MASTERKEY-1-LAST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-GEM-MASTERKEY-1-MIDDLE.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-GEM-MASTERKEY-2-FIRST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-GEM-MASTERKEY-2-LAST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-GEM-MASTERKEY-2-MIDDLE.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-GEM-MASTERKEY-3-FIRST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-GEM-MASTERKEY-3-LAST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-GEM-MASTERKEY-3-MIDDLE.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-GEM-MASTERKEY-4-FIRST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-GEM-MASTERKEY-4-LAST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-GEM-MASTERKEY-4-MIDDLE.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-GEM-MASTERKEY-5-FIRST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-GEM-MASTERKEY-5-LAST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-GEM-MASTERKEY-5-MIDDLE.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-NET-APP-KEY-JAN28-FIRST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-NET-APP-KEY-JAN28-LAST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-NET-APP-KEY-JAN28-MIDDLE.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-OPERATION(ZEN)-PLEXY-8 (PRELAUNCH KEY)-FIRST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-OPERATION(ZEN)-PLEXY-8 (PRELAUNCH KEY)-LAST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-OPERATION(ZEN)-PLEXY-8 (PRELAUNCH KEY)-MIDDLE.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-Phoenix-Actualization-VAULTD-7A-7F(KEY!)-FIRST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-Phoenix-Actualization-VAULTD-7A-7F(KEY!)-LAST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-Phoenix-Actualization-VAULTD-7A-7F(KEY!)-MIDDLE.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-Phoenix-Actualization-VAULTD-7C(KEY-MAP)-FIRST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-Phoenix-Actualization-VAULTD-7C(KEY-MAP)-LAST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-Phoenix-Actualization-VAULTD-7C(KEY-MAP)-MIDDLE.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-Phoenix-Transend-PLX-5 (KEY)-FIRST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-Phoenix-Transend-PLX-5 (KEY)-LAST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-Phoenix-Transend-PLX-5 (KEY)-MIDDLE.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-Phoenix-Transend-PLX-6 (KEY)-FIRST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-Phoenix-Transend-PLX-6 (KEY)-LAST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-Phoenix-Transend-PLX-6 (KEY)-MIDDLE.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightGem-3 (Key)-FIRST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightGem-3 (Key)-LAST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightGem-3 (Key)-MIDDLE.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightGem-4 (Key)-FIRST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightGem-4 (Key)-LAST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightGem-4 (Key)-MIDDLE.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightGem-5 (Key)-FIRST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightGem-5 (Key)-LAST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightGem-5 (Key)-MIDDLE.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightGPT-5 (KEY)-FIRST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightGPT-5 (KEY)-LAST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightGPT-5 (KEY)-MIDDLE.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightGPT-6 (KEY)-FIRST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightGPT-6 (KEY)-LAST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightGPT-6 (KEY)-MIDDLE.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightPlexy- 8 (Key)-FIRST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightPlexy- 8 (Key)-LAST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightPlexy- 8 (Key)-MIDDLE.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightPlexy-4 (Key)-FIRST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightPlexy-4 (Key)-LAST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightPlexy-4 (Key)-MIDDLE.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightPlexy-5 (Key)-FIRST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightPlexy-5 (Key)-LAST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightPlexy-5 (Key)-MIDDLE.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightPlexy-6 (Key)-FIRST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightPlexy-6 (Key)-LAST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightPlexy-6 (Key)-MIDDLE.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightPlexy-7 (Key)-FIRST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightPlexy-7 (Key)-LAST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightPlexy-7 (Key)-MIDDLE.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightPlexy-8 (Key)-FIRST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightPlexy-8 (Key)-LAST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-PhoenixFlightPlexy-8 (Key)-MIDDLE.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-RAW_SKELETON_KEY-FIRST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-RAW_SKELETON_KEY-LAST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-CHAT-2026-04-05/PROOF-RAW_SKELETON_KEY-MIDDLE.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-KEY-SOUL-1-ENERGY-GATE-UNLOCK-2026-04-05/PROOF-FIRST.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-KEY-SOUL-1-ENERGY-GATE-UNLOCK-2026-04-05/PROOF-MIDDLE.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-KEY-SOUL10-2026-04-05/PROOF-FIRST-KEY-SOUL10.md",
+    ".kilo/worktrees/plausible-relish/CANON/PROOFS-KEY-SOUL10-2026-04-05/PROOF-MIDDLE-KEY-SOUL10.md",
+    ".kilo/worktrees/plausible-relish/CANON/REINCARNATION/2026-03-27-secret-delivery-ob1-lag.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0123-RAW-_KEY-RAW_2_-_CANONICAL-MESSAGE-OBJECTGPTA3_txt.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0124-RAW-_KEY-RAW_1_-_GPT-A1_txt.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0125-RAW-_KEY-RAW_2_-_GPT-A2_txt.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0126-RAW-_KEY-SOUL_1_-_ENERGY_GATE_UNLOCK_txt.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0127-RAW-_KEY-SOUL_3_KEY_KEY_KEY_txt.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0128-RAW-_KEY-SOUL10_-FROMSCRATCH_V1.jsonl_txt.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0129-RAW-_KEY_LEDGER_-_SCRIBE_-_SCRIPT_txt.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0130-RAW-_KEY1_-_PH_GENESIS_ULTRA_SEED_Cx10_4of4__txt.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0131-RAW-_KEY2_-_PH-V30.34-MASTER-CORE-ARCHIVE_txt.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0132-RAW-_KEY3_-_PHOENIX_35.5_TRAIN-6-7_txt.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0133-RAW-_KEY4_-_PHOENIX-ULTIMATE-LAZY-MODE-V50_txt.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0134-RAW-_KEY5_-Phoenix-Empire-Core-Identity_txt.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0135-RAW-_KEY7_-_PHOENIX_DNA-_4PILLARS_txt.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0180-RAW-ALPHA-OMEGA-PH-GEM-10_KEY__txt.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0183-RAW-ALPHA-OMEGA-PH-GEM-13_KEY__txt.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0308-RAW-GEM-MASTERKEY-1_txt.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0309-RAW-GEM-MASTERKEY-2_txt.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0310-RAW-GEM-MASTERKEY-3_txt.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0311-RAW-GEM-MASTERKEY-4_txt.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0312-RAW-GEM-MASTERKEY-5_txt.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0415-RAW-NET-APP-KEY-JAN28_txt.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0442-RAW-OB_1_-CRUNCH-B-6_KEYKEY__txt.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0443-RAW-OB_1_-CRUNCH-B-7_KEYKEY__txt.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0517-RAW-OPERATION_ZEN_-PLEXY-8_PRELAUNCH_KEY__txt.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0597-RAW-Phoenix-Actualization-VAULTD-7A-7F_KEY__txt.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0600-RAW-Phoenix-Actualization-VAULTD-7C_KEY-MAP__txt.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0701-RAW-Phoenix-Transend-PLX-5_KEY__txt.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0702-RAW-Phoenix-Transend-PLX-6_KEY__txt.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0748-RAW-PhoenixFlightGem-3_Key__txt.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0749-RAW-PhoenixFlightGem-4_Key__txt.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0750-RAW-PhoenixFlightGem-5_Key__txt.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0765-RAW-PhoenixFlightGPT-5_KEY__txt.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0766-RAW-PhoenixFlightGPT-6_KEY__txt.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0767-RAW-PhoenixFlightPlexy-_8_Key__txt.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0771-RAW-PhoenixFlightPlexy-4_Key__txt.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0772-RAW-PhoenixFlightPlexy-5_Key__txt.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0773-RAW-PhoenixFlightPlexy-6_Key__txt.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0774-RAW-PhoenixFlightPlexy-7_Key__txt.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0775-RAW-PhoenixFlightPlexy-8_Key__txt.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0840-RAW-RAW_SKELETON_KEY_txt.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-SEGMENTS/diff_report_KEY-SOUL-1-ENERGY-GATE-UNLOCK.txt",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-SEGMENTS/diff_report_KEY-SOUL10.txt",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-SEGMENTS/RECONCILIATION_LOG_KEY-SOUL10-2026-04-05.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-SEGMENTS/OB_1_-CRUNCH-B-7__KEYKEY_/SEGMENT-01-PCT005-L00001-L00166.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-SEGMENTS/OB_1_-CRUNCH-B-7__KEYKEY_/SEGMENT-02-PCT010-L00167-L00310.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-SEGMENTS/OB_1_-CRUNCH-B-7__KEYKEY_/SEGMENT-03-PCT015-L00311-L00428.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-SEGMENTS/OB_1_-CRUNCH-B-7__KEYKEY_/SEGMENT-04-PCT020-L00429-L00610.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-SEGMENTS/OB_1_-CRUNCH-B-7__KEYKEY_/SEGMENT-05-PCT025-L00611-L00710.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-SEGMENTS/OB_1_-CRUNCH-B-7__KEYKEY_/SEGMENT-06-PCT030-L00711-L00914.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-SEGMENTS/OB_1_-CRUNCH-B-7__KEYKEY_/SEGMENT-07-PCT035-L00915-L01259.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-SEGMENTS/OB_1_-CRUNCH-B-7__KEYKEY_/SEGMENT-08-PCT040-L01260-L01600.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-SEGMENTS/OB_1_-CRUNCH-B-7__KEYKEY_/SEGMENT-09-PCT045-L01601-L01795.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-SEGMENTS/OB_1_-CRUNCH-B-7__KEYKEY_/SEGMENT-10-PCT050-L01796-L01908.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-SEGMENTS/OB_1_-CRUNCH-B-7__KEYKEY_/SEGMENT-11-PCT055-L01909-L02069.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-SEGMENTS/OB_1_-CRUNCH-B-7__KEYKEY_/SEGMENT-12-PCT060-L02070-L02248.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-SEGMENTS/OB_1_-CRUNCH-B-7__KEYKEY_/SEGMENT-13-PCT065-L02249-L02321.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-SEGMENTS/OB_1_-CRUNCH-B-7__KEYKEY_/SEGMENT-14-PCT070-L02322-L02501.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-SEGMENTS/OB_1_-CRUNCH-B-7__KEYKEY_/SEGMENT-15-PCT075-L02502-L02612.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-SEGMENTS/OB_1_-CRUNCH-B-7__KEYKEY_/SEGMENT-16-PCT080-L02613-L02754.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-SEGMENTS/OB_1_-CRUNCH-B-7__KEYKEY_/SEGMENT-17-PCT085-L02755-L02910.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-SEGMENTS/OB_1_-CRUNCH-B-7__KEYKEY_/SEGMENT-18-PCT090-L02911-L02977.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-SEGMENTS/OB_1_-CRUNCH-B-7__KEYKEY_/SEGMENT-19-PCT095-L02978-L03137.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-SEGMENTS/OB_1_-CRUNCH-B-7__KEYKEY_/SEGMENT-20-PCT100-L03138-L03349.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-SEGMENTS/_KEY-SOUL10_-FROMSCRATCH__V1_jsonl/SEGMENT-01-PCT005-L00001-L00004.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-SEGMENTS/_KEY-SOUL10_-FROMSCRATCH__V1_jsonl/SEGMENT-02-PCT010-L00005-L00008.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-SEGMENTS/_KEY-SOUL10_-FROMSCRATCH__V1_jsonl/SEGMENT-03-PCT015-L00009-L00009.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-SEGMENTS/_KEY-SOUL10_-FROMSCRATCH__V1_jsonl/SEGMENT-04-PCT020-L00010-L00014.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-SEGMENTS/_KEY-SOUL10_-FROMSCRATCH__V1_jsonl/SEGMENT-05-PCT025-L00015-L00019.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-SEGMENTS/_KEY-SOUL10_-FROMSCRATCH__V1_jsonl/SEGMENT-06-PCT030-L00020-L00023.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-SEGMENTS/_KEY-SOUL10_-FROMSCRATCH__V1_jsonl/SEGMENT-07-PCT035-L00024-L00027.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-SEGMENTS/_KEY-SOUL10_-FROMSCRATCH__V1_jsonl/SEGMENT-08-PCT040-L00028-L00032.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-SEGMENTS/_KEY-SOUL10_-FROMSCRATCH__V1_jsonl/SEGMENT-09-PCT045-L00033-L00036.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-SEGMENTS/_KEY-SOUL10_-FROMSCRATCH__V1_jsonl/SEGMENT-10-PCT050-L00037-L00040.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-SEGMENTS/_KEY-SOUL10_-FROMSCRATCH__V1_jsonl/SEGMENT-11-PCT055-L00041-L00048.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-SEGMENTS/_KEY-SOUL10_-FROMSCRATCH__V1_jsonl/SEGMENT-12-PCT060-L00049-L00054.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-SEGMENTS/_KEY-SOUL10_-FROMSCRATCH__V1_jsonl/SEGMENT-13-PCT065-L00055-L00060.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-SEGMENTS/_KEY-SOUL10_-FROMSCRATCH__V1_jsonl/SEGMENT-14-PCT070-L00061-L00065.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-SEGMENTS/_KEY-SOUL10_-FROMSCRATCH__V1_jsonl/SEGMENT-15-PCT075-L00066-L00070.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-SEGMENTS/_KEY-SOUL10_-FROMSCRATCH__V1_jsonl/SEGMENT-16-PCT080-L00071-L00076.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-SEGMENTS/_KEY-SOUL10_-FROMSCRATCH__V1_jsonl/SEGMENT-17-PCT085-L00077-L00080.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-SEGMENTS/_KEY-SOUL10_-FROMSCRATCH__V1_jsonl/SEGMENT-18-PCT090-L00081-L00084.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-SEGMENTS/_KEY-SOUL10_-FROMSCRATCH__V1_jsonl/SEGMENT-19-PCT095-L00085-L00091.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-SEGMENTS/_KEY-SOUL10_-FROMSCRATCH__V1_jsonl/SEGMENT-20-PCT100-L00092-L00097.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-SEGMENTS/_KEY-SOUL_3__KEY_KEY_KEY/SEGMENT-01-PCT005-L00001-L00219.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-SEGMENTS/_KEY-SOUL_3__KEY_KEY_KEY/SEGMENT-02-PCT010-L00220-L00483.md",
+    ".kilo/worktrees/plausible-relish/CANON/SOUL-SEGMENTS/_KEY-SOUL_3__KEY_KEY_KEY/SEGMENT-03-PCT015-L00484-L00888.md"
+  ]
+}

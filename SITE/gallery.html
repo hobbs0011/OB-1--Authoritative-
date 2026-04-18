@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Galaxy Lessons — Natural English Training</title>
+<meta name="description" content="Interactive English learning experiences. Vocabulary, conversation, pronunciation, career English — all powered by AI and the Mouse-to-Tiger method.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌌</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --void: #0f0f1a; --void-light: #1a1a2e; --void-lighter: #242440;
+  --purple: #a855f7; --purple-glow: rgba(168,85,247,0.3); --purple-dim: rgba(168,85,247,0.15);
+  --gold: #f59e0b; --gold-glow: rgba(245,158,11,0.3);
+  --white: #f0f0f5; --gray: #9ca3af;
+  --font-display: 'Orbitron', sans-serif;
+  --font-sub: 'Rajdhani', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-body); background: var(--void); color: var(--white); overflow-x: hidden; line-height: 1.6; }
+a { color: inherit; }
+
+.stars {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0;
+  background:
+    radial-gradient(1px 1px at 10% 20%, rgba(168,85,247,0.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 50% 10%, rgba(168,85,247,0.3) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 15% 85%, rgba(240,240,245,0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 65% 25%, rgba(240,240,245,0.25) 0%, transparent 100%),
+    radial-gradient(1px 1px at 85% 65%, rgba(240,240,245,0.2) 0%, transparent 100%);
+  animation: twinkle 9s ease-in-out infinite alternate;
+}
+
+nav {
+  position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
+  padding: 1rem 2rem; background: rgba(15,15,26,0.9); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--purple-dim);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.nav-logo { text-decoration: none; display: inline-flex; align-items: center; }
+.nav-logo img { height: 32px; width: auto; display: block; filter: drop-shadow(0 0 10px var(--purple-glow)); }
+.nav-back { font-family: var(--font-sub); font-weight: 600; color: var(--gray); text-decoration: none; transition: color 0.3s; }
+.nav-back:hover { color: var(--gold); }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+.gradient { background: linear-gradient(135deg, var(--purple), var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+.page-header {
+  position: relative; z-index: 1; padding: 8rem 2rem 3rem; text-align: center;
+}
+.page-header h1 { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; margin-bottom: 1rem; }
+.page-header p { font-size: 1.15rem; color: var(--gray); max-width: 600px; margin: 0 auto; line-height: 1.7; }
+
+.dossier-section {
+  position: relative;
+  z-index: 1;
+  padding: 1rem 2rem 3rem;
+}
+.dossier-shell {
+  max-width: 1200px;
+  margin: 0 auto;
+  border: 1px solid var(--purple-dim);
+  border-radius: 24px;
+  background: rgba(26, 26, 46, 0.65);
+  overflow: hidden;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+}
+.dossier-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  padding: 1.2rem 1.4rem;
+  border-bottom: 1px solid var(--purple-dim);
+}
+.dossier-top h2 {
+  font-family: var(--font-sub);
+  font-size: 1.4rem;
+  color: var(--white);
+}
+.dossier-top p {
+  color: var(--gray);
+  font-size: 0.95rem;
+}
+.dossier-controls {
+  display: flex;
+  gap: 0.55rem;
+}
+.dossier-btn {
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--purple-dim);
+  border-radius: 10px;
+  background: rgba(168, 85, 247, 0.14);
+  color: var(--white);
+  font-family: var(--font-sub);
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+.dossier-btn:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  box-shadow: 0 0 18px var(--purple-glow);
+}
+.dossier-stage {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: #0f0f1a;
+}
+.dossier-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.dossier-slide.active {
+  opacity: 1;
+}
+.dossier-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.dossier-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.95rem;
+}
+.dossier-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid var(--purple);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+.dossier-dot.active {
+  background: linear-gradient(135deg, var(--purple), var(--gold));
+  border-color: transparent;
+}
+
+.lessons-section { position: relative; z-index: 1; padding: 2rem 2rem 6rem; }
+
+.lesson-full {
+  background: rgba(26,26,46,0.6); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  border: 1px solid var(--purple-dim); border-radius: 20px;
+  padding: 2.5rem; margin-bottom: 2rem;
+  display: grid; grid-template-columns: auto 1fr auto; gap: 2rem; align-items: center;
+  transition: all 0.3s; text-decoration: none; color: inherit;
+}
+.lesson-full:hover { border-color: var(--gold); transform: translateY(-3px); box-shadow: 0 8px 40px rgba(245,158,11,0.08); }
+.lesson-icon { font-size: 3rem; }
+.lesson-info h2 { font-family: var(--font-sub); font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; }
+.lesson-info p { color: var(--gray); font-size: 1rem; line-height: 1.7; max-width: 600px; }
+.lesson-full.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+}
+.lesson-full.reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.62s ease, transform 0.62s ease;
+}
+.lesson-meta { text-align: right; }
+.lesson-tag { display: inline-block; font-family: var(--font-sub); font-size: 0.85rem; font-weight: 600; padding: 0.3rem 1rem; border-radius: 20px; background: var(--purple-dim); color: var(--purple); margin-bottom: 0.5rem; }
+.lesson-size { font-size: 0.8rem; color: var(--gray); font-family: var(--font-sub); }
+.lesson-launch { font-family: var(--font-sub); font-weight: 700; color: var(--gold); font-size: 1.1rem; margin-top: 0.5rem; }
+
+.cta-banner {
+  position: relative; z-index: 1;
+  text-align: center; padding: 4rem 2rem 6rem;
+}
+.cta-banner h2 { font-family: var(--font-display); font-size: 1.8rem; font-weight: 700; margin-bottom: 1rem; }
+.cta-banner p { color: var(--gray); margin-bottom: 2rem; font-size: 1.05rem; }
+.btn-primary { font-family: var(--font-sub); font-weight: 700; padding: 1rem 2.5rem; font-size: 1.1rem; background: linear-gradient(135deg, var(--gold), #d97706); color: var(--void); border: none; border-radius: 12px; cursor: pointer; transition: all 0.3s; text-decoration: none; display: inline-block; }
+.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 30px var(--gold-glow); }
+
+footer {
+  background: var(--void-light); border-top: 1px solid var(--purple-dim);
+  padding: 2rem; text-align: center; position: relative; z-index: 1;
+}
+footer p { font-size: 0.85rem; color: var(--gray); }
+footer a { color: var(--purple); text-decoration: none; }
+
+@media (max-width: 768px) {
+  .dossier-section {
+    padding: 1rem 1.25rem 2.5rem;
+  }
+  .dossier-top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .lesson-full { grid-template-columns: 1fr; gap: 1rem; text-align: center; }
+  .lesson-meta { text-align: center; }
+  .page-header { padding: 7rem 1.25rem 2rem; }
+  .lessons-section { padding: 1rem 1.25rem 4rem; }
+}
+
+@keyframes twinkle {
+  0% { opacity: 0.55; }
+  100% { opacity: 1; }
+}
+
+::-webkit-scrollbar { width: 12px; }
+::-webkit-scrollbar-track { background: #121222; }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #a855f7, #f59e0b);
+  border-radius: 10px;
+  border: 2px solid #121222;
+}
+</style>
+</head>
+<body>
+<div class="stars"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo" aria-label="Natural English Training home">
+    <img src="assets/brand/NET-PHXRISING-LOGO.webp" alt="Natural English Training logo">
+  </a>
+  <a href="index.html" class="nav-back">← Back to Home</a>
+</nav>
+
+<div class="page-header">
+  <h1>🌌 <span class="gradient">Galaxy Lessons</span></h1>
+  <p>Interactive learning experiences built with the Mouse-to-Tiger methodology. Each lesson is a self-contained world — pick one and dive in.</p>
+</div>
+
+<section class="dossier-section" aria-label="Tiger dossier gallery">
+  <div class="dossier-shell">
+    <div class="dossier-top">
+      <div>
+        <h2>Tiger Dossier Visual Deck</h2>
+        <p>Slides 01-06 from the NET Tiger Dossier.</p>
+      </div>
+      <div class="dossier-controls">
+        <button class="dossier-btn" id="dossier-prev" aria-label="Previous dossier slide">‹</button>
+        <button class="dossier-btn" id="dossier-next" aria-label="Next dossier slide">›</button>
+      </div>
+    </div>
+    <div class="dossier-stage" id="dossier-stage">
+      <figure class="dossier-slide active"><img src="assets/dossier/tiger-dossier/slide-01.webp" alt="Tiger dossier slide 01" loading="lazy"></figure>
+      <figure class="dossier-slide"><img src="assets/dossier/tiger-dossier/slide-02.webp" alt="Tiger dossier slide 02" loading="lazy"></figure>
+      <figure class="dossier-slide"><img src="assets/dossier/tiger-dossier/slide-03.webp" alt="Tiger dossier slide 03" loading="lazy"></figure>
+      <figure class="dossier-slide"><img src="assets/dossier/tiger-dossier/slide-04.webp" alt="Tiger dossier slide 04" loading="lazy"></figure>
+      <figure class="dossier-slide"><img src="assets/dossier/tiger-dossier/slide-05.webp" alt="Tiger dossier slide 05" loading="lazy"></figure>
+      <figure class="dossier-slide"><img src="assets/dossier/tiger-dossier/slide-06.webp" alt="Tiger dossier slide 06" loading="lazy"></figure>
+    </div>
+    <div class="dossier-dots" id="dossier-dots">
+      <button class="dossier-dot active" aria-label="Go to slide 1"></button>
+      <button class="dossier-dot" aria-label="Go to slide 2"></button>
+      <button class="dossier-dot" aria-label="Go to slide 3"></button>
+      <button class="dossier-dot" aria-label="Go to slide 4"></button>
+      <button class="dossier-dot" aria-label="Go to slide 5"></button>
+      <button class="dossier-dot" aria-label="Go to slide 6"></button>
+    </div>
+  </div>
+</section>
+
+<div class="lessons-section">
+  <div class="container">
+
+    <a class="lesson-full" href="../GALAXY-LESSONS/VOCAB-001-DAILY-SURVIVAL.html">
+      <div class="lesson-icon">📚</div>
+      <div class="lesson-info">
+        <h2>Daily Survival English — VOCAB-001</h2>
+        <p>Master the 50 most essential English phrases for everyday situations. Restaurants, taxis, shopping, directions, emergencies — everything you need to survive and thrive. Interactive flashcards, pronunciation guides, and real-world scenarios.</p>
+      </div>
+      <div class="lesson-meta">
+        <div class="lesson-tag">Vocabulary</div>
+        <div class="lesson-size">76 KB · Interactive</div>
+        <div class="lesson-launch">Launch →</div>
+      </div>
+    </a>
+
+    <a class="lesson-full" href="../GALAXY-LESSONS/NET-CLASSROOM-MANAGER.html">
+      <div class="lesson-icon">🏫</div>
+      <div class="lesson-info">
+        <h2>NET Classroom Manager</h2>
+        <p>The ultimate teacher command center. 8-tab architecture: HQ dashboard, student grid, behavior enforcement, random spinner, work mode timer, vocabulary games, scoring system, and progress reports. 25 Soul DNA integrations. Built for real classrooms with up to 56 students.</p>
+      </div>
+      <div class="lesson-meta">
+        <div class="lesson-tag">Teacher Tools</div>
+        <div class="lesson-size">78 KB · Full App</div>
+        <div class="lesson-launch">Launch →</div>
+      </div>
+    </a>
+
+    <a class="lesson-full" href="../GALAXY-LESSONS/NET-Signal-Decode.html">
+      <div class="lesson-icon">🔍</div>
+      <div class="lesson-info">
+        <h2>Signal Decode</h2>
+        <p>Learn to read between the lines of English conversation. What does "That's interesting" really mean? Decode hidden social signals, understand sarcasm, pick up on tone shifts, and master the unspoken layer of English communication.</p>
+      </div>
+      <div class="lesson-meta">
+        <div class="lesson-tag">Communication</div>
+        <div class="lesson-size">41 KB · Interactive</div>
+        <div class="lesson-launch">Launch →</div>
+      </div>
+    </a>
+
+    <a class="lesson-full" href="../GALAXY-LESSONS/NET-Feline-Linguistics-Academy.html">
+      <div class="lesson-icon">🐱</div>
+      <div class="lesson-info">
+        <h2>Feline Linguistics Academy</h2>
+        <p>Grammar and language concepts made unforgettable through creative, hilarious cat-themed scenarios. Learn sentence structure, verb tenses, and vocabulary through stories so entertaining you forget you're studying.</p>
+      </div>
+      <div class="lesson-meta">
+        <div class="lesson-tag">Fun</div>
+        <div class="lesson-size">29 KB · Interactive</div>
+        <div class="lesson-launch">Launch →</div>
+      </div>
+    </a>
+
+    <a class="lesson-full" href="../GALAXY-LESSONS/NET-Sarcasm-Academy.html">
+      <div class="lesson-icon">😏</div>
+      <div class="lesson-info">
+        <h2>Sarcasm Academy</h2>
+        <p>The ultimate advanced English challenge. Can you tell when someone is being sarcastic? Master tone recognition, context clues, cultural references, and the delicate art of English humor and wit.</p>
+      </div>
+      <div class="lesson-meta">
+        <div class="lesson-tag">Advanced</div>
+        <div class="lesson-size">23 KB · Interactive</div>
+        <div class="lesson-launch">Launch →</div>
+      </div>
+    </a>
+
+    <a class="lesson-full" href="../GALAXY-LESSONS/NET-Highschool-Careers.html">
+      <div class="lesson-icon">💼</div>
+      <div class="lesson-info">
+        <h2>Career English</h2>
+        <p>Professional English for the real world. Job interviews, presentations, emails, meetings, networking — the complete toolkit for students preparing for careers where English matters.</p>
+      </div>
+      <div class="lesson-meta">
+        <div class="lesson-tag">Professional</div>
+        <div class="lesson-size">15 KB · Interactive</div>
+        <div class="lesson-launch">Launch →</div>
+      </div>
+    </a>
+
+    <a class="lesson-full" href="../GALAXY-LESSONS/NET-Train-6-7-Omega-Archive.html">
+      <div class="lesson-icon">🚂</div>
+      <div class="lesson-info">
+        <h2>Training Archive — Omega</h2>
+        <p>Deep practice modules for building foundational English skills. Grammar in natural contexts, listening comprehension drills, writing confidence builders, and structured progression tracks.</p>
+      </div>
+      <div class="lesson-meta">
+        <div class="lesson-tag">Foundation</div>
+        <div class="lesson-size">28 KB · Interactive</div>
+        <div class="lesson-launch">Launch →</div>
+      </div>
+    </a>
+
+  </div>
+</div>
+
+<div class="cta-banner">
+  <h2>Want the <span class="gradient">Full Experience</span>?</h2>
+  <p>These lessons are even better with OBI — your AI tutor that adapts to your level and keeps you on track.</p>
+  <a href="https://naturalenglishtraining.net" class="btn-primary">Try OBI Free →</a>
+</div>
+
+<footer>
+  <p>© 2026 <a href="index.html">Natural English Training</a>. Galaxy Lessons are part of the NET learning ecosystem.</p>
+</footer>
+<script>
+  const lessonCards = document.querySelectorAll('.lesson-full');
+  const lessonObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        lessonObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.14, rootMargin: '0px 0px -8% 0px' });
+
+  lessonCards.forEach((card, idx) => {
+    card.classList.add('reveal');
+    card.style.transitionDelay = `${Math.min((idx % 4) * 65, 195)}ms`;
+    lessonObserver.observe(card);
+  });
+
+  const slides = Array.from(document.querySelectorAll('.dossier-slide'));
+  const dots = Array.from(document.querySelectorAll('.dossier-dot'));
+  const prevBtn = document.getElementById('dossier-prev');
+  const nextBtn = document.getElementById('dossier-next');
+  let currentSlide = 0;
+  let autoTimer = null;
+
+  const renderSlide = (index) => {
+    currentSlide = (index + slides.length) % slides.length;
+    slides.forEach((slide, idx) => slide.classList.toggle('active', idx === currentSlide));
+    dots.forEach((dot, idx) => dot.classList.toggle('active', idx === currentSlide));
+  };
+
+  const startAuto = () => {
+    if (autoTimer) {
+      clearInterval(autoTimer);
+    }
+    autoTimer = setInterval(() => renderSlide(currentSlide + 1), 4500);
+  };
+
+  prevBtn.addEventListener('click', () => {
+    renderSlide(currentSlide - 1);
+    startAuto();
+  });
+
+  nextBtn.addEventListener('click', () => {
+    renderSlide(currentSlide + 1);
+    startAuto();
+  });
+
+  dots.forEach((dot, idx) => {
+    dot.addEventListener('click', () => {
+      renderSlide(idx);
+      startAuto();
+    });
+  });
+
+  startAuto();
+</script>
+</body>
+</html>

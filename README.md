@@ -9,7 +9,7 @@ This repo is the immutable mirror of the Phoenix system — Soul DNA canon, oper
 ## Canonical Operating Lane
 
 - **Repo:** `OB-1`
-- **Runtime app:** `APPS/NET-PET-AI-merge/APPS/NET-PET-AI`
+- **Runtime app:** `APPS/NET-PET-AI`
 - **Operator email:** `mrmichaelhobbs123@gmail.com`
 - **Legacy references:** `mrmichaelhobbs1234*` are archival unless explicitly needed for forensics
 - **Workflow entrypoint:** `pwsh -File SCRIPTS/obi.ps1 <doctor|verify|dev|mcp-audit>`
@@ -19,7 +19,7 @@ This repo is the immutable mirror of the Phoenix system — Soul DNA canon, oper
 | Directory | Purpose |
 | --- | --- |
 | `APPS/` | Runnable applications — NET-PET-AI (Cloudflare Worker), ChattyNET, lesson prototypes |
-| `APPS/NET-PET-AI-merge/APPS/NET-PET-AI/` | **Primary runtime target** — verified Cloudflare Worker source for OBI |
+| `APPS/NET-PET-AI/` | **Primary runtime target** — verified Cloudflare Worker source for OBI |
 | `CANON/` | Soul DNA doctrine, teaching methodology, sealed source material |
 | `GALAXY-LESSONS/` | Gospel 444 lesson content — HTML lesson files for student delivery |
 | `OPERATIONS/` | Operational records — session logs, inventories, deploy analysis, protocols |

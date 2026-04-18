@@ -1,0 +1,272 @@
+[
+  {
+    "Stage": 1,
+    "Slice": "Users\\\\mrmic\\\\Desktop\\\\Pheonix - Rising - Protocol",
+    "Total": 289,
+    "ChatLogs": 131,
+    "SOUL": 154,
+    "DNA": 4,
+    "Largest": "C:\\Users\\mrmic\\Desktop\\Pheonix - Rising - Protocol\\OB-1 (Authoritative)\\duplicate-delete-plan.json"
+  },
+  {
+    "Stage": 2,
+    "Slice": "C_cleanup\\\\20260405_082611\\\\OB-1",
+    "Total": 87,
+    "ChatLogs": 46,
+    "SOUL": 40,
+    "DNA": 1,
+    "Largest": "D:\\C_cleanup\\20260405_082611\\OB-1\\CANON\\SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05\\0913-RAW-T6-7_Serve_Consolidation_dump_txt.md"
+  },
+  {
+    "Stage": 3,
+    "Slice": "OB-1\\\\APPS\\\\NET-PET-AI-merge",
+    "Total": 82,
+    "ChatLogs": 35,
+    "SOUL": 46,
+    "DNA": 1,
+    "Largest": "D:\\OB-1\\APPS\\NET-PET-AI-merge\\CANON\\SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05\\0913-RAW-T6-7_Serve_Consolidation_dump_txt.md"
+  },
+  {
+    "Stage": 4,
+    "Slice": "OB-1\\\\OB-1-merge6\\\\CANON",
+    "Total": 79,
+    "ChatLogs": 34,
+    "SOUL": 45,
+    "DNA": 0,
+    "Largest": "D:\\OB-1\\OB-1-merge6\\CANON\\SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05\\0913-RAW-T6-7_Serve_Consolidation_dump_txt.md"
+  },
+  {
+    "Stage": 5,
+    "Slice": "XboxGames\\\\OB-1-r305\\\\CANON",
+    "Total": 79,
+    "ChatLogs": 34,
+    "SOUL": 45,
+    "DNA": 0,
+    "Largest": "C:\\XboxGames\\OB-1-r305\\CANON\\SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05\\0913-RAW-T6-7_Serve_Consolidation_dump_txt.md"
+  },
+  {
+    "Stage": 6,
+    "Slice": "OB-1\\\\CANON\\\\REINCARNATION",
+    "Total": 39,
+    "ChatLogs": 13,
+    "SOUL": 26,
+    "DNA": 0,
+    "Largest": "D:\\OB-1\\CANON\\REINCARNATION\\2026-04-12-run291-memory-brain-soul-fused-build.md"
+  },
+  {
+    "Stage": 7,
+    "Slice": "OB1_MOVED\\\\users\\\\extensions",
+    "Total": 39,
+    "ChatLogs": 8,
+    "SOUL": 0,
+    "DNA": 31,
+    "Largest": "D:\\OB1_MOVED\\users\\extensions\\extensions\\ms-vscode.powershell-2025.4.0\\modules\\PSScriptAnalyzer\\1.24.0\\compatibility_profiles\\win-8_x64_10.0.17763.0_5.1.17763.316_x64_4.0.30319.42000_framework.json"
+  },
+  {
+    "Stage": 8,
+    "Slice": "OB-1-r305\\\\CANON\\\\REINCARNATION",
+    "Total": 39,
+    "ChatLogs": 13,
+    "SOUL": 26,
+    "DNA": 0,
+    "Largest": "D:\\OB-1-r305\\CANON\\REINCARNATION\\2026-04-12-run291-memory-brain-soul-fused-build.md"
+  },
+  {
+    "Stage": 9,
+    "Slice": "OB-1\\\\TEMP-PHOENIX-ULTIMATE\\\\CANON",
+    "Total": 33,
+    "ChatLogs": 18,
+    "SOUL": 15,
+    "DNA": 0,
+    "Largest": "D:\\OB-1\\TEMP-PHOENIX-ULTIMATE\\CANON\\REINCARNATION\\2026-03-26-notebooklm-vault-architect-origin.md"
+  },
+  {
+    "Stage": 10,
+    "Slice": "OB-1\\\\CANON\\\\HEAVY-LEDGER",
+    "Total": 28,
+    "ChatLogs": 11,
+    "SOUL": 17,
+    "DNA": 0,
+    "Largest": "D:\\OB-1\\CANON\\HEAVY-LEDGER\\HL-126-notebooklm-vault-architect-origin.json"
+  },
+  {
+    "Stage": 11,
+    "Slice": "OB-1-r305\\\\CANON\\\\HEAVY-LEDGER",
+    "Total": 28,
+    "ChatLogs": 11,
+    "SOUL": 17,
+    "DNA": 0,
+    "Largest": "D:\\OB-1-r305\\CANON\\HEAVY-LEDGER\\HL-126-notebooklm-vault-architect-origin.json"
+  },
+  {
+    "Stage": 12,
+    "Slice": "Users\\\\mrmic\\\\OneDrive\\\\Documents",
+    "Total": 8,
+    "ChatLogs": 8,
+    "SOUL": 0,
+    "DNA": 0,
+    "Largest": "C:\\Users\\mrmic\\OneDrive\\Documents\\GitHub\\phoenix-chat-logs\\CHAT-LOGS-ONLY\\T6-7 Serve Consolidation dump.txt"
+  },
+  {
+    "Stage": 13,
+    "Slice": "Python314\\\\Doc\\\\html",
+    "Total": 7,
+    "ChatLogs": 0,
+    "SOUL": 0,
+    "DNA": 7,
+    "Largest": "C:\\Python314\\Doc\\html\\library\\inspect.html"
+  },
+  {
+    "Stage": 14,
+    "Slice": "OB-1-r305\\\\CANON\\\\PROOFS-CHAT-2026-04-05",
+    "Total": 6,
+    "ChatLogs": 6,
+    "SOUL": 0,
+    "DNA": 0,
+    "Largest": "D:\\OB-1-r305\\CANON\\PROOFS-CHAT-2026-04-05\\PROOF-CrashLogs1(Oldersessions)-FIRST.md"
+  },
+  {
+    "Stage": 15,
+    "Slice": "FINAL-PHASE\\\\DEPLOY- ATTEMPTS (KEY DEPLOY DIAGNOSTICS)\\\\Phoenix-Notebook-Vaults",
+    "Total": 6,
+    "ChatLogs": 1,
+    "SOUL": 5,
+    "DNA": 0,
+    "Largest": "D:\\FINAL-PHASE\\DEPLOY- ATTEMPTS (KEY DEPLOY DIAGNOSTICS)\\Phoenix-Notebook-Vaults\\VAULT-[ZEN]ITH\\BLUEPRINTS & MONOLITHS & REINCARNATIONS\\js reincarnation monolithic, bring all we need to.md"
+  },
+  {
+    "Stage": 16,
+    "Slice": "OB-1\\\\CANON\\\\PROOFS-CHAT-2026-04-05",
+    "Total": 6,
+    "ChatLogs": 6,
+    "SOUL": 0,
+    "DNA": 0,
+    "Largest": "D:\\OB-1\\CANON\\PROOFS-CHAT-2026-04-05\\PROOF-CrashLogs1(Oldersessions)-FIRST.md"
+  },
+  {
+    "Stage": 17,
+    "Slice": "OB-1\\\\_SORTED\\\\AUDIO-TRANSCRIPTS",
+    "Total": 6,
+    "ChatLogs": 6,
+    "SOUL": 0,
+    "DNA": 0,
+    "Largest": "D:\\OB-1\\_SORTED\\AUDIO-TRANSCRIPTS\\Voice 260413_180450-transcript.json"
+  },
+  {
+    "Stage": 18,
+    "Slice": "OB-1\\\\CANON\\\\SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05",
+    "Total": 4,
+    "ChatLogs": 3,
+    "SOUL": 1,
+    "DNA": 0,
+    "Largest": "D:\\OB-1\\CANON\\SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05\\0913-RAW-T6-7_Serve_Consolidation_dump_txt.md"
+  },
+  {
+    "Stage": 19,
+    "Slice": "OB-1-r305\\\\CANON\\\\SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05",
+    "Total": 4,
+    "ChatLogs": 3,
+    "SOUL": 1,
+    "DNA": 0,
+    "Largest": "D:\\OB-1-r305\\CANON\\SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05\\0913-RAW-T6-7_Serve_Consolidation_dump_txt.md"
+  },
+  {
+    "Stage": 20,
+    "Slice": "OB1_ARCHIVE\\\\OB-1.worktrees\\\\copilot-worktree-2026-03-21T05-33-33",
+    "Total": 4,
+    "ChatLogs": 4,
+    "SOUL": 0,
+    "DNA": 0,
+    "Largest": "D:\\OB1_ARCHIVE\\OB-1.worktrees\\copilot-worktree-2026-03-21T05-33-33\\RAW-CHAT-LOGS\\ARCHIVE\\T6-7 Serve Consolidation dump.txt"
+  },
+  {
+    "Stage": 21,
+    "Slice": "OB-1\\\\OPERATIONS\\\\NET-STUDENTS",
+    "Total": 2,
+    "ChatLogs": 2,
+    "SOUL": 0,
+    "DNA": 0,
+    "Largest": "D:\\OB-1\\OPERATIONS\\NET-STUDENTS\\AUDIO-ARCHIVE\\NAMED-STUDENT-AUDIO-2026-04-15\\CONFIRMED\\hana-hieu__assessment-phonics__transcript.txt"
+  },
+  {
+    "Stage": 22,
+    "Slice": "Personal Files\\\\RANDOM (NON-PRIORITY)\\\\FRONT-ENDS",
+    "Total": 2,
+    "ChatLogs": 0,
+    "SOUL": 2,
+    "DNA": 0,
+    "Largest": "D:\\Personal Files\\RANDOM (NON-PRIORITY)\\FRONT-ENDS\\phoenix_magic_chat.html"
+  },
+  {
+    "Stage": 23,
+    "Slice": "FINAL-PHASE\\\\DEV - PHASES (PRIORITY GENESIS-NOW)\\\\PHOENIX-BIBLE-AND-RANDOMS",
+    "Total": 2,
+    "ChatLogs": 2,
+    "SOUL": 0,
+    "DNA": 0,
+    "Largest": "D:\\FINAL-PHASE\\DEV - PHASES (PRIORITY GENESIS-NOW)\\PHOENIX-BIBLE-AND-RANDOMS\\forgeminitranscription.txt"
+  },
+  {
+    "Stage": 24,
+    "Slice": "OB1_OPERATIONS\\\\backup-NET-Ai-EcoSystem-CommandStation\\\\HarvestedChats",
+    "Total": 1,
+    "ChatLogs": 1,
+    "SOUL": 0,
+    "DNA": 0,
+    "Largest": "D:\\OB1_OPERATIONS\\backup-NET-Ai-EcoSystem-CommandStation\\HarvestedChats\\CrashLogs1(Oldersessions).txt"
+  },
+  {
+    "Stage": 25,
+    "Slice": "phoenix-chat-logs\\\\CHAT-EXPORTS\\\\CrashLogs1(Oldersessions).txt",
+    "Total": 1,
+    "ChatLogs": 1,
+    "SOUL": 0,
+    "DNA": 0,
+    "Largest": "D:\\phoenix-chat-logs\\CHAT-EXPORTS\\CrashLogs1(Oldersessions).txt"
+  },
+  {
+    "Stage": 26,
+    "Slice": "OB1_ARCHIVE\\\\OB-1\\\\DELETED_DUPES_20260405-162530",
+    "Total": 1,
+    "ChatLogs": 0,
+    "SOUL": 1,
+    "DNA": 0,
+    "Largest": "D:\\OB1_ARCHIVE\\OB-1\\DELETED_DUPES_20260405-162530\\topic_soul_dna_hits.txt"
+  },
+  {
+    "Stage": 27,
+    "Slice": "OB1_ARCHIVE\\\\OB-1\\\\DELETED_DUPES_20260405-161443",
+    "Total": 1,
+    "ChatLogs": 0,
+    "SOUL": 1,
+    "DNA": 0,
+    "Largest": "D:\\OB1_ARCHIVE\\OB-1\\DELETED_DUPES_20260405-161443\\topic_soul_dna_hits.txt"
+  },
+  {
+    "Stage": 28,
+    "Slice": "phoenix-chat-logs\\\\CHAT-LOGS-ONLY\\\\CrashLogs1(Oldersessions).txt",
+    "Total": 1,
+    "ChatLogs": 1,
+    "SOUL": 0,
+    "DNA": 0,
+    "Largest": "D:\\phoenix-chat-logs\\CHAT-LOGS-ONLY\\CrashLogs1(Oldersessions).txt"
+  },
+  {
+    "Stage": 29,
+    "Slice": "phoenix-chat-logs\\\\CHAT-EXPORTS\\\\found_likely_phoenix.txt",
+    "Total": 1,
+    "ChatLogs": 1,
+    "SOUL": 0,
+    "DNA": 0,
+    "Largest": "D:\\phoenix-chat-logs\\CHAT-EXPORTS\\found_likely_phoenix.txt"
+  },
+  {
+    "Stage": 30,
+    "Slice": "phoenix-chat-logs\\\\CHAT-EXPORTS\\\\OPERATOR1_audit_reincarnation.txt",
+    "Total": 1,
+    "ChatLogs": 1,
+    "SOUL": 0,
+    "DNA": 0,
+    "Largest": "D:\\phoenix-chat-logs\\CHAT-EXPORTS\\OPERATOR1_audit_reincarnation.txt"
+  }
+]
