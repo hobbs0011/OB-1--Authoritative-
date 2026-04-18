@@ -17,8 +17,8 @@
 
 | Repo | Account | Status |
 |---|---|---|
-| OB-1 | hobbs0011 | CANONICAL — branch Add-virality-analytics-endpoint, HEAD 45310d8 |
-| OB-1--Authoritative- | hobbs0011 | STALE — at 45d73956, push blocked by network (next session) |
+| OB-1 | hobbs0011 | CANONICAL — branch canon (default), HEAD da64a88 — Run 310 |
+| OB-1--Authoritative- | hobbs0011 | SYNCED — at 54bff5d (Run 309) |
 | Phoenix-Rising-Protocol-Ultimate | hobbs-lab | SUPERSEDED |
 | phoenix-ob1 | mrmichaelhobbs1234-lang | Public — SECURITY RISK (still unresolved) |
 
@@ -30,12 +30,14 @@
 | State | Durable Objects (SessionDO, ProfileDO, PetDO) — SQLite-backed |
 | Frontend | Gospel 444 UI shell (public/index.html) |
 | Voice | Deepgram nova-2 STT + Aura TTS |
-| Deploy path | GitHub Actions + wrangler deploy |
+| Deploy path | GitHub Actions + wrangler deploy (branch: canon) |
+| Marketing Site | Cloudflare Pages — naturalenglishtraining.pages.dev |
 | Colors | #0f0f1a (void), #a855f7 (purple), #f59e0b (gold), NO BLUE |
 
 ### Active Blockers
 
-- [ ] Route-bind www.naturalenglishtraining.com to Cloudflare Worker — REQUIRES DNS zone transfer from Squarespace first
+- [x] Marketing site live — naturalenglishtraining.pages.dev (CF Pages, Run 310) ✅
+- [ ] Custom domain DNS — add CNAME at Squarespace: www → naturalenglishtraining.pages.dev (Michael action)
 - [ ] Set phoenix-ob1 to PRIVATE (currently PUBLIC with secrets)
 - [x] Rotate SOVEREIGN_KEY — ✅ 2026-04-19 (44-char base64, wrangler secret put)
 - [ ] copilot-governance.md approval pending
