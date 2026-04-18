@@ -205,6 +205,29 @@ export default {
       return env.ASSETS.fetch(new Request(new URL("/speak.html", url), request));
     }
 
+    // ── Soul DNA Capture Pipeline (root-level routes) ────────────────────────
+
+    // POST /souldna — Submit raw soul DNA for legionnaire processing
+    if (path === "/souldna" && request.method === "POST") {
+      const body = await request.json();
+      const res = await handleSoulDNASubmit(body, env);
+      return addCors(res, request);
+    }
+
+    // GET /souldna/{id} — Check submission status
+    if (path.startsWith("/souldna/") && request.method === "GET" && !path.includes("pipeline")) {
+      const id = path.split("/")[2];
+      const res = await handleSoulDNAStatus(id, env);
+      return addCors(res, request);
+    }
+
+    // GET /souldna/pipeline — Actionable pipeline steps grouped by tier
+    if (path === "/souldna/pipeline" && request.method === "GET") {
+      const tier = url.searchParams.get("tier") || "OPERATIONAL";
+      const res = await handleSoulDNAPipeline(tier, env);
+      return addCors(res, request);
+    }
+
     // ── API routes ────────────────────────────────────────────────────────────
 
     if (path.startsWith("/api/")) {
@@ -403,11 +426,6 @@ async function handleAPI(path, request, env, url) {
   if (path === "/api/ledger/verify" && method === "GET") { return handleLedgerVerify(url.searchParams.get("studentId") || "", env); }
   if (path === "/api/ledger/state" && method === "GET") { return handleLedgerState(url.searchParams.get("studentId") || "", env); }
   if (path === "/api/ledger/stats" && method === "GET") { return handleLedgerStats(env); }
-
-  // Soul DNA Capture Pipeline — legionnaire field guide integration
-  if (path === "/souldna" && method === "POST") { const body = await request.json(); return handleSoulDNASubmit(body, env); }
-  if (path.startsWith("/souldna/") && method === "GET") { const id = path.split("/")[2]; return handleSoulDNAStatus(id, env); }
-  if (path === "/souldna/pipeline" && method === "GET") { return handleSoulDNAPipeline(url.searchParams.get("tier") || "OPERATIONAL", env); }
 
   // Session Log (off-day pipeline core — Michael logs class, Obi inherits it)
   if (path === "/api/session/log" && method === "POST") { const body = await request.json(); return handleSessionLog(body, env); }
