@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OBI Vocab Practice — Natural English Training</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --void: #0f0f1a;
+      --void-light: #1a1a2e;
+      --soul-purple: #a855f7;
+      --soul-purple-dim: rgba(168, 85, 247, 0.15);
+      --imperial-gold: #f59e0b;
+      --gold-dim: rgba(245, 158, 11, 0.15);
+      --success: #22c55e;
+      --success-dim: rgba(34, 197, 94, 0.15);
+      --danger: #ef4444;
+      --danger-dim: rgba(239, 68, 68, 0.15);
+      --text: #f1f5f9;
+      --text-dim: rgba(241, 245, 249, 0.5);
+      --text-muted: rgba(241, 245, 249, 0.3);
+      --radius: 12px;
+      --radius-sm: 8px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--void);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 520px;
+      width: 100%;
+    }
+
+    /* ===== HEADER ===== */
+    .header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .header h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 28px;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--soul-purple), var(--imperial-gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .header .subtitle {
+      font-size: 13px;
+      color: var(--text-dim);
+      margin-top: 4px;
+    }
+
+    /* ===== STATS BAR ===== */
+    .stats-bar {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .stat-card {
+      flex: 1;
+      background: var(--void-light);
+      border: 1px solid rgba(168, 85, 247, 0.1);
+      border-radius: var(--radius-sm);
+      padding: 10px;
+      text-align: center;
+    }
+    .stat-value {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--soul-purple);
+    }
+    .stat-value.gold { color: var(--imperial-gold); }
+    .stat-value.green { color: var(--success); }
+    .stat-label {
+      font-size: 10px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 2px;
+    }
+
+    /* ===== LEVEL BAR ===== */
+    .level-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding: 10px 14px;
+      background: var(--void-light);
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(168, 85, 247, 0.1);
+    }
+    .level-icon { font-size: 24px; }
+    .level-info { flex: 1; }
+    .level-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--imperial-gold);
+    }
+    .xp-track {
+      height: 6px;
+      background: rgba(168, 85, 247, 0.1);
+      border-radius: 3px;
+      margin-top: 4px;
+      overflow: hidden;
+    }
+    .xp-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--soul-purple), var(--imperial-gold));
+      border-radius: 3px;
+      transition: width 0.5s ease;
+    }
+    .xp-text {
+      font-size: 11px;
+      color: var(--text-dim);
+      white-space: nowrap;
+    }
+
+    /* ===== CATEGORY SELECTOR ===== */
+    .categories {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .cat-btn {
+      padding: 6px 12px;
+      border: 1px solid rgba(168, 85, 247, 0.2);
+      background: transparent;
+      color: var(--text-dim);
+      border-radius: 20px;
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .cat-btn:hover { border-color: var(--soul-purple); color: var(--text); }
+    .cat-btn.active {
+      background: var(--soul-purple-dim);
+      border-color: var(--soul-purple);
+      color: var(--soul-purple);
+    }
+
+    /* ===== FLASHCARD ===== */
+    .card-area {
+      perspective: 1000px;
+      margin-bottom: 20px;
+    }
+    .flashcard {
+      position: relative;
+      width: 100%;
+      height: 240px;
+      cursor: pointer;
+      transform-style: preserve-3d;
+      transition: transform 0.5s ease;
+    }
+    .flashcard.flipped { transform: rotateY(180deg); }
+    .card-face {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      border-radius: var(--radius);
+      backface-visibility: hidden;
+      border: 1px solid rgba(168, 85, 247, 0.15);
+    }
+    .card-front {
+      background: linear-gradient(145deg, var(--void-light), #12122a);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(168, 85, 247, 0.1);
+    }
+    .card-back {
+      background: linear-gradient(145deg, #1a1035, var(--void-light));
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(245, 158, 11, 0.1);
+      transform: rotateY(180deg);
+      border-color: rgba(245, 158, 11, 0.15);
+    }
+    .card-lang {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+    .card-word {
+      font-size: 28px;
+      font-weight: 700;
+      text-align: center;
+      line-height: 1.3;
+    }
+    .card-front .card-word { color: var(--text); }
+    .card-back .card-word { color: var(--imperial-gold); }
+    .card-example {
+      font-size: 13px;
+      color: var(--text-dim);
+      margin-top: 12px;
+      text-align: center;
+      font-style: italic;
+      line-height: 1.4;
+    }
+    .card-hint {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: auto;
+    }
+    .card-counter {
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    /* ===== ANSWER BUTTONS ===== */
+    .answer-btns {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .ans-btn {
+      flex: 1;
+      padding: 12px;
+      border: 1px solid;
+      border-radius: var(--radius-sm);
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .ans-btn:hover { transform: translateY(-1px); }
+    .btn-again {
+      background: var(--danger-dim);
+      border-color: rgba(239, 68, 68, 0.3);
+      color: var(--danger);
+    }
+    .btn-hard {
+      background: var(--gold-dim);
+      border-color: rgba(245, 158, 11, 0.3);
+      color: var(--imperial-gold);
+    }
+    .btn-good {
+      background: var(--success-dim);
+      border-color: rgba(34, 197, 94, 0.3);
+      color: var(--success);
+    }
+    .btn-easy {
+      background: var(--soul-purple-dim);
+      border-color: rgba(168, 85, 247, 0.3);
+      color: var(--soul-purple);
+    }
+
+    /* ===== FEEDBACK ===== */
+    .feedback {
+      text-align: center;
+      padding: 12px;
+      border-radius: var(--radius-sm);
+      margin-bottom: 16px;
+      font-size: 14px;
+      font-weight: 500;
+      display: none;
+    }
+    .feedback.show { display: block; animation: fadeIn 0.3s ease; }
+    .feedback.positive {
+      background: var(--success-dim);
+      border: 1px solid rgba(34, 197, 94, 0.2);
+      color: var(--success);
+    }
+    .feedback.neutral {
+      background: var(--gold-dim);
+      border: 1px solid rgba(245, 158, 11, 0.2);
+      color: var(--imperial-gold);
+    }
+    .feedback.encourage {
+      background: var(--soul-purple-dim);
+      border: 1px solid rgba(168, 85, 247, 0.2);
+      color: var(--soul-purple);
+    }
+
+    /* ===== EMPTY STATE ===== */
+    .empty-state {
+      text-align: center;
+      padding: 40px 20px;
+      display: none;
+    }
+    .empty-state.show { display: block; }
+    .empty-icon { font-size: 48px; margin-bottom: 12px; }
+    .empty-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--imperial-gold);
+      margin-bottom: 6px;
+    }
+    .empty-desc {
+      font-size: 13px;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+    .reset-btn {
+      margin-top: 16px;
+      padding: 10px 20px;
+      background: linear-gradient(135deg, var(--soul-purple), #7c3aed);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      text-align: center;
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(168, 85, 247, 0.1);
+    }
+    .footer-text {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+    .footer-brand {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 10px;
+      color: var(--soul-purple);
+      margin-top: 4px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== STREAK ANIMATION ===== */
+    .streak-fire {
+      animation: pulse 0.6s ease;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+    }
+
+    @media (max-width: 480px) {
+      body { padding: 12px; }
+      .card-word { font-size: 22px; }
+      .flashcard { height: 200px; }
+      .stats-bar { gap: 4px; }
+      .stat-card { padding: 8px 4px; }
+      .stat-value { font-size: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>VOCAB PRACTICE</h1>
+      <div class="subtitle">Tap the card to flip • Learn at your pace 🐭→🐯</div>
+    </div>
+
+    <div class="stats-bar">
+      <div class="stat-card">
+        <div class="stat-value" id="stat-due">0</div>
+        <div class="stat-label">Due</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value green" id="stat-learned">0</div>
+        <div class="stat-label">Learned</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value gold" id="stat-streak">0</div>
+        <div class="stat-label">🔥 Streak</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="stat-xp">0</div>
+        <div class="stat-label">XP</div>
+      </div>
+    </div>
+
+    <div class="level-bar">
+      <span class="level-icon" id="level-icon">🐭</span>
+      <div class="level-info">
+        <div class="level-name" id="level-name">Mouse</div>
+        <div class="xp-track"><div class="xp-fill" id="xp-fill" style="width: 0%"></div></div>
+      </div>
+      <span class="xp-text" id="xp-text">0 / 100 XP</span>
+    </div>
+
+    <div class="categories" id="categories"></div>
+
+    <div id="card-counter" class="card-counter"></div>
+
+    <div id="feedback" class="feedback"></div>
+
+    <div class="card-area" id="card-area">
+      <div class="flashcard" id="flashcard">
+        <div class="card-face card-front">
+          <div class="card-lang" id="front-lang">ENGLISH</div>
+          <div class="card-word" id="front-word">Loading...</div>
+          <div class="card-example" id="front-example"></div>
+          <div class="card-hint">Tap to reveal answer</div>
+        </div>
+        <div class="card-face card-back">
+          <div class="card-lang" id="back-lang">TIẾNG VIỆT</div>
+          <div class="card-word" id="back-word">...</div>
+          <div class="card-example" id="back-example"></div>
+          <div class="card-hint">How well did you know it?</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="answer-btns" id="answer-btns" style="display: none;">
+      <button class="ans-btn btn-again" data-quality="0">Again</button>
+      <button class="ans-btn btn-hard" data-quality="1">Hard</button>
+      <button class="ans-btn btn-good" data-quality="2">Good</button>
+      <button class="ans-btn btn-easy" data-quality="3">Easy ⚡</button>
+    </div>
+
+    <div class="empty-state" id="empty-state">
+      <div class="empty-icon">🐯</div>
+      <div class="empty-title">All Done!</div>
+      <div class="empty-desc">
+        You've reviewed all the cards due right now.<br>
+        Come back later for more — your brain needs rest too.
+      </div>
+      <button class="reset-btn" id="reset-btn">Practice Again</button>
+    </div>
+
+    <div class="footer">
+      <div class="footer-text">Permission over perfection • Every word counts</div>
+      <div class="footer-brand">OBI — NATURAL ENGLISH TRAINING</div>
+    </div>
+  </div>
+
+  <script>
+    // ===== VOCAB DATABASE =====
+    const VOCAB_DB = [
+      // === COMMON PHRASES ===
+      { en: "How are you?", vi: "Bạn khỏe không?", cat: "phrases", ex_en: "How are you doing today?", ex_vi: "Hôm nay bạn thế nào?" },
+      { en: "Nice to meet you", vi: "Rất vui được gặp bạn", cat: "phrases", ex_en: "Nice to meet you, I'm Mai.", ex_vi: "Rất vui được gặp bạn, mình là Mai." },
+      { en: "What do you mean?", vi: "Ý bạn là gì?", cat: "phrases", ex_en: "Sorry, what do you mean by that?", ex_vi: "Xin lỗi, ý bạn là gì vậy?" },
+      { en: "I don't understand", vi: "Tôi không hiểu", cat: "phrases", ex_en: "I don't understand this question.", ex_vi: "Tôi không hiểu câu hỏi này." },
+      { en: "Can you repeat that?", vi: "Bạn có thể nhắc lại không?", cat: "phrases", ex_en: "Can you repeat that more slowly?", ex_vi: "Bạn có thể nhắc lại chậm hơn không?" },
+      { en: "How do you say...?", vi: "...nói thế nào?", cat: "phrases", ex_en: "How do you say 'thank you' in Vietnamese?", ex_vi: "'Thank you' tiếng Việt nói thế nào?" },
+      { en: "I agree", vi: "Tôi đồng ý", cat: "phrases", ex_en: "I agree with your idea.", ex_vi: "Tôi đồng ý với ý kiến của bạn." },
+      { en: "That makes sense", vi: "Điều đó hợp lý", cat: "phrases", ex_en: "Oh, that makes sense now!", ex_vi: "À, giờ thì hợp lý rồi!" },
+      { en: "I'm not sure", vi: "Tôi không chắc", cat: "phrases", ex_en: "I'm not sure about the answer.", ex_vi: "Tôi không chắc về câu trả lời." },
+      { en: "Could you help me?", vi: "Bạn có thể giúp tôi không?", cat: "phrases", ex_en: "Could you help me with this?", ex_vi: "Bạn có thể giúp tôi với cái này không?" },
+      { en: "What does this mean?", vi: "Cái này nghĩa là gì?", cat: "phrases", ex_en: "What does this word mean?", ex_vi: "Từ này nghĩa là gì?" },
+      { en: "I think so", vi: "Tôi nghĩ vậy", cat: "phrases", ex_en: "Is it correct? I think so.", ex_vi: "Đúng không? Tôi nghĩ vậy." },
+      { en: "Let me think", vi: "Để tôi nghĩ", cat: "phrases", ex_en: "Let me think about it for a moment.", ex_vi: "Để tôi nghĩ một chút." },
+      { en: "That's interesting", vi: "Điều đó thú vị", cat: "phrases", ex_en: "That's really interesting!", ex_vi: "Điều đó thực sự thú vị!" },
+      { en: "No problem", vi: "Không sao", cat: "phrases", ex_en: "No problem, I can help you.", ex_vi: "Không sao, tôi có thể giúp bạn." },
+
+      // === CLASSROOM ENGLISH ===
+      { en: "homework", vi: "bài tập về nhà", cat: "classroom", ex_en: "Did you finish your homework?", ex_vi: "Bạn làm xong bài tập về nhà chưa?" },
+      { en: "textbook", vi: "sách giáo khoa", cat: "classroom", ex_en: "Open your textbook to page 42.", ex_vi: "Mở sách giáo khoa trang 42." },
+      { en: "vocabulary", vi: "từ vựng", cat: "classroom", ex_en: "Let's practice vocabulary today.", ex_vi: "Hôm nay chúng ta luyện từ vựng." },
+      { en: "pronunciation", vi: "phát âm", cat: "classroom", ex_en: "Your pronunciation is improving!", ex_vi: "Phát âm của bạn đang tiến bộ!" },
+      { en: "grammar", vi: "ngữ pháp", cat: "classroom", ex_en: "Grammar is important but don't worry about mistakes.", ex_vi: "Ngữ pháp quan trọng nhưng đừng lo về lỗi sai." },
+      { en: "sentence", vi: "câu", cat: "classroom", ex_en: "Can you make a sentence with this word?", ex_vi: "Bạn có thể đặt câu với từ này không?" },
+      { en: "paragraph", vi: "đoạn văn", cat: "classroom", ex_en: "Write a short paragraph about your family.", ex_vi: "Viết một đoạn văn ngắn về gia đình bạn." },
+      { en: "dictionary", vi: "từ điển", cat: "classroom", ex_en: "You can use a dictionary if you need.", ex_vi: "Bạn có thể dùng từ điển nếu cần." },
+      { en: "exam", vi: "bài kiểm tra", cat: "classroom", ex_en: "The exam is next Friday.", ex_vi: "Bài kiểm tra vào thứ Sáu tới." },
+      { en: "to practice", vi: "luyện tập", cat: "classroom", ex_en: "Practice makes progress!", ex_vi: "Luyện tập tạo ra tiến bộ!" },
+      { en: "to improve", vi: "cải thiện", cat: "classroom", ex_en: "You're improving every day.", ex_vi: "Bạn đang cải thiện mỗi ngày." },
+      { en: "correct", vi: "đúng", cat: "classroom", ex_en: "That's correct! Well done.", ex_vi: "Đúng rồi! Giỏi lắm." },
+      { en: "mistake", vi: "lỗi sai", cat: "classroom", ex_en: "Mistakes help you learn.", ex_vi: "Lỗi sai giúp bạn học hỏi." },
+      { en: "to review", vi: "ôn tập", cat: "classroom", ex_en: "Let's review what we learned yesterday.", ex_vi: "Hãy ôn tập những gì học hôm qua." },
+      { en: "presentation", vi: "bài thuyết trình", cat: "classroom", ex_en: "Your presentation was great!", ex_vi: "Bài thuyết trình của bạn rất hay!" },
+
+      // === DAILY LIFE ===
+      { en: "breakfast", vi: "bữa sáng", cat: "daily", ex_en: "What did you have for breakfast?", ex_vi: "Bạn ăn gì cho bữa sáng?" },
+      { en: "weather", vi: "thời tiết", cat: "daily", ex_en: "The weather is hot today.", ex_vi: "Hôm nay thời tiết nóng." },
+      { en: "to commute", vi: "đi lại", cat: "daily", ex_en: "How do you commute to school?", ex_vi: "Bạn đi đến trường bằng gì?" },
+      { en: "schedule", vi: "lịch trình", cat: "daily", ex_en: "What's your schedule tomorrow?", ex_vi: "Lịch trình ngày mai của bạn thế nào?" },
+      { en: "hobby", vi: "sở thích", cat: "daily", ex_en: "What are your hobbies?", ex_vi: "Sở thích của bạn là gì?" },
+      { en: "weekend", vi: "cuối tuần", cat: "daily", ex_en: "What did you do last weekend?", ex_vi: "Cuối tuần rồi bạn làm gì?" },
+      { en: "shopping", vi: "mua sắm", cat: "daily", ex_en: "I went shopping at the mall.", ex_vi: "Tôi đi mua sắm ở trung tâm thương mại." },
+      { en: "exercise", vi: "tập thể dục", cat: "daily", ex_en: "Do you exercise every day?", ex_vi: "Bạn có tập thể dục mỗi ngày không?" },
+      { en: "neighborhood", vi: "khu phố", cat: "daily", ex_en: "I like my neighborhood.", ex_vi: "Tôi thích khu phố của mình." },
+      { en: "delicious", vi: "ngon", cat: "daily", ex_en: "This phở is delicious!", ex_vi: "Phở này ngon quá!" },
+      { en: "appointment", vi: "cuộc hẹn", cat: "daily", ex_en: "I have a doctor's appointment.", ex_vi: "Tôi có cuộc hẹn với bác sĩ." },
+      { en: "traffic", vi: "giao thông", cat: "daily", ex_en: "The traffic in Saigon is crazy!", ex_vi: "Giao thông ở Sài Gòn điên lắm!" },
+      { en: "to relax", vi: "thư giãn", cat: "daily", ex_en: "I like to relax after work.", ex_vi: "Tôi thích thư giãn sau giờ làm." },
+      { en: "birthday", vi: "sinh nhật", cat: "daily", ex_en: "Happy birthday! How old are you?", ex_vi: "Chúc mừng sinh nhật! Bạn bao nhiêu tuổi?" },
+      { en: "favorite", vi: "yêu thích", cat: "daily", ex_en: "What's your favorite food?", ex_vi: "Món ăn yêu thích của bạn là gì?" },
+
+      // === GRAMMAR PATTERNS ===
+      { en: "used to + verb", vi: "đã từng (thói quen cũ)", cat: "grammar", ex_en: "I used to play soccer in school.", ex_vi: "Tôi đã từng chơi bóng đá ở trường." },
+      { en: "going to + verb", vi: "sẽ / sắp (kế hoạch)", cat: "grammar", ex_en: "I'm going to study tonight.", ex_vi: "Tối nay tôi sẽ học bài." },
+      { en: "have to + verb", vi: "phải (bắt buộc)", cat: "grammar", ex_en: "I have to finish my homework.", ex_vi: "Tôi phải hoàn thành bài tập." },
+      { en: "should + verb", vi: "nên (lời khuyên)", cat: "grammar", ex_en: "You should practice every day.", ex_vi: "Bạn nên luyện tập mỗi ngày." },
+      { en: "would like to", vi: "muốn (lịch sự)", cat: "grammar", ex_en: "I would like to order coffee.", ex_vi: "Tôi muốn gọi cà phê." },
+      { en: "present perfect", vi: "hiện tại hoàn thành", cat: "grammar", ex_en: "I have lived here for 5 years.", ex_vi: "Tôi đã sống ở đây 5 năm." },
+      { en: "passive voice", vi: "câu bị động", cat: "grammar", ex_en: "The book was written by her.", ex_vi: "Cuốn sách được viết bởi cô ấy." },
+      { en: "if + present → will", vi: "nếu...thì sẽ (ĐK loại 1)", cat: "grammar", ex_en: "If it rains, I will stay home.", ex_vi: "Nếu trời mưa, tôi sẽ ở nhà." },
+      { en: "comparative (-er/more)", vi: "so sánh hơn", cat: "grammar", ex_en: "English is easier than you think.", ex_vi: "Tiếng Anh dễ hơn bạn nghĩ." },
+      { en: "superlative (-est/most)", vi: "so sánh nhất", cat: "grammar", ex_en: "She is the smartest student.", ex_vi: "Cô ấy là học sinh giỏi nhất." },
+      { en: "too + adjective", vi: "quá (tiêu cực)", cat: "grammar", ex_en: "This is too difficult for me.", ex_vi: "Cái này quá khó với tôi." },
+      { en: "enough + noun", vi: "đủ", cat: "grammar", ex_en: "Do you have enough time?", ex_vi: "Bạn có đủ thời gian không?" },
+      { en: "reported speech", vi: "câu tường thuật", cat: "grammar", ex_en: "She said she was tired.", ex_vi: "Cô ấy nói cô ấy mệt." },
+      { en: "tag questions", vi: "câu hỏi đuôi", cat: "grammar", ex_en: "You like coffee, don't you?", ex_vi: "Bạn thích cà phê, phải không?" },
+      { en: "gerund (-ing as noun)", vi: "danh động từ", cat: "grammar", ex_en: "Swimming is good exercise.", ex_vi: "Bơi lội là bài tập tốt." }
+    ];
+
+    const CATEGORIES = [
+      { id: 'all', label: '📚 All', emoji: '📚' },
+      { id: 'phrases', label: '💬 Phrases', emoji: '💬' },
+      { id: 'classroom', label: '🏫 Classroom', emoji: '🏫' },
+      { id: 'daily', label: '🌅 Daily Life', emoji: '🌅' },
+      { id: 'grammar', label: '📐 Grammar', emoji: '📐' }
+    ];
+
+    const LEVELS = [
+      { name: 'Mouse', icon: '🐭', xp: 0 },
+      { name: 'Cat', icon: '🐱', xp: 100 },
+      { name: 'Fox', icon: '🦊', xp: 300 },
+      { name: 'Wolf', icon: '🐺', xp: 600 },
+      { name: 'Lion', icon: '🦁', xp: 1000 },
+      { name: 'Tiger', icon: '🐯', xp: 1500 }
+    ];
+
+    const POSITIVE_FEEDBACK = [
+      "Nice work! Every word counts. 💪",
+      "You're getting stronger! 🐭→🐯",
+      "That's the way! Keep going! ⚡",
+      "Progress, not perfection! 🌟",
+      "Your vocabulary is growing! 📈",
+      "Excellent! You remembered that! 🎯"
+    ];
+    const ENCOURAGE_FEEDBACK = [
+      "No worries — you'll get it next time! 🌱",
+      "This one is tricky. You're still learning! 💜",
+      "Permission to not know yet. That's how we grow! 🐭",
+      "Every expert was once a beginner. 🌟",
+      "It's okay! Review it again soon. 💪"
+    ];
+
+    // ===== STATE =====
+    const STORAGE_KEY = 'obi_vocab_srs';
+    let state = loadState();
+    let currentCard = null;
+    let currentCategory = 'all';
+    let dueCards = [];
+    let cardIndex = 0;
+
+    function loadState() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) return JSON.parse(saved);
+      } catch (e) {}
+      return { cards: {}, xp: 0, streak: 0, lastDate: null, totalReviewed: 0 };
+    }
+
+    function saveState() {
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+    }
+
+    function getCardState(card) {
+      const key = card.en;
+      if (!state.cards[key]) {
+        state.cards[key] = { interval: 0, ease: 2.5, due: Date.now(), reviews: 0, correct: 0 };
+      }
+      return state.cards[key];
+    }
+
+    // ===== SRS ENGINE (simplified SM-2) =====
+    function updateSRS(card, quality) {
+      const cs = getCardState(card);
+      cs.reviews++;
+      if (quality >= 2) cs.correct++;
+
+      if (quality === 0) {
+        cs.interval = 1; // 1 minute
+      } else if (quality === 1) {
+        cs.interval = Math.max(cs.interval * 0.5, 5); // half interval, min 5 min
+      } else if (quality === 2) {
+        cs.interval = cs.interval === 0 ? 10 : cs.interval * cs.ease; // good
+      } else {
+        cs.interval = cs.interval === 0 ? 60 : cs.interval * cs.ease * 1.3; // easy
+      }
+
+      // Adjust ease factor
+      cs.ease = Math.max(1.3, cs.ease + (0.1 - (3 - quality) * 0.15));
+      cs.due = Date.now() + cs.interval * 60 * 1000;
+      saveState();
+    }
+
+    // ===== XP & LEVELS =====
+    function addXP(amount) {
+      state.xp += amount;
+      // Streak tracking
+      const today = new Date().toDateString();
+      if (state.lastDate !== today) {
+        if (state.lastDate === new Date(Date.now() - 86400000).toDateString()) {
+          state.streak++;
+        } else if (state.lastDate !== null) {
+          state.streak = 1;
+        } else {
+          state.streak = 1;
+        }
+        state.lastDate = today;
+      }
+      state.totalReviewed++;
+      saveState();
+      updateUI();
+    }
+
+    function getLevel() {
+      for (let i = LEVELS.length - 1; i >= 0; i--) {
+        if (state.xp >= LEVELS[i].xp) return { current: LEVELS[i], next: LEVELS[i + 1] || null, index: i };
+      }
+      return { current: LEVELS[0], next: LEVELS[1], index: 0 };
+    }
+
+    // ===== UI =====
+    function updateUI() {
+      const level = getLevel();
+      document.getElementById('level-icon').textContent = level.current.icon;
+      document.getElementById('level-name').textContent = level.current.name;
+      document.getElementById('stat-xp').textContent = state.xp;
+      document.getElementById('stat-streak').textContent = state.streak;
+
+      const learned = Object.values(state.cards).filter(c => c.correct >= 3).length;
+      document.getElementById('stat-learned').textContent = learned;
+      document.getElementById('stat-due').textContent = dueCards.length - cardIndex;
+
+      if (level.next) {
+        const progress = ((state.xp - level.current.xp) / (level.next.xp - level.current.xp)) * 100;
+        document.getElementById('xp-fill').style.width = Math.min(progress, 100) + '%';
+        document.getElementById('xp-text').textContent = `${state.xp} / ${level.next.xp} XP`;
+      } else {
+        document.getElementById('xp-fill').style.width = '100%';
+        document.getElementById('xp-text').textContent = `${state.xp} XP — MAX 🐯`;
+      }
+    }
+
+    function buildCategories() {
+      const container = document.getElementById('categories');
+      CATEGORIES.forEach(cat => {
+        const btn = document.createElement('button');
+        btn.className = 'cat-btn' + (cat.id === currentCategory ? ' active' : '');
+        btn.textContent = cat.label;
+        btn.onclick = () => {
+          currentCategory = cat.id;
+          document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          loadDueCards();
+          showNextCard();
+        };
+        container.appendChild(btn);
+      });
+    }
+
+    function loadDueCards() {
+      const now = Date.now();
+      let pool = currentCategory === 'all' ? VOCAB_DB : VOCAB_DB.filter(c => c.cat === currentCategory);
+      dueCards = pool.filter(card => {
+        const cs = getCardState(card);
+        return cs.due <= now;
+      });
+      // Shuffle
+      for (let i = dueCards.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [dueCards[i], dueCards[j]] = [dueCards[j], dueCards[i]];
+      }
+      cardIndex = 0;
+    }
+
+    function showNextCard() {
+      const fb = document.getElementById('feedback');
+      fb.classList.remove('show');
+      const flashcard = document.getElementById('flashcard');
+      flashcard.classList.remove('flipped');
+      document.getElementById('answer-btns').style.display = 'none';
+
+      if (cardIndex >= dueCards.length) {
+        document.getElementById('card-area').style.display = 'none';
+        document.getElementById('card-counter').style.display = 'none';
+        document.getElementById('empty-state').classList.add('show');
+        updateUI();
+        return;
+      }
+
+      document.getElementById('card-area').style.display = 'block';
+      document.getElementById('card-counter').style.display = 'block';
+      document.getElementById('empty-state').classList.remove('show');
+
+      currentCard = dueCards[cardIndex];
+      document.getElementById('front-word').textContent = currentCard.en;
+      document.getElementById('front-example').textContent = currentCard.ex_en;
+      document.getElementById('back-word').textContent = currentCard.vi;
+      document.getElementById('back-example').textContent = currentCard.ex_vi;
+      document.getElementById('card-counter').textContent =
+        `Card ${cardIndex + 1} of ${dueCards.length}`;
+      updateUI();
+    }
+
+    function showFeedback(quality) {
+      const fb = document.getElementById('feedback');
+      if (quality >= 2) {
+        fb.className = 'feedback show positive';
+        fb.textContent = POSITIVE_FEEDBACK[Math.floor(Math.random() * POSITIVE_FEEDBACK.length)];
+      } else if (quality === 1) {
+        fb.className = 'feedback show neutral';
+        fb.textContent = "Almost there — keep at it! 🌱";
+      } else {
+        fb.className = 'feedback show encourage';
+        fb.textContent = ENCOURAGE_FEEDBACK[Math.floor(Math.random() * ENCOURAGE_FEEDBACK.length)];
+      }
+    }
+
+    // ===== EVENT HANDLERS =====
+    document.getElementById('flashcard').addEventListener('click', () => {
+      const flashcard = document.getElementById('flashcard');
+      if (!flashcard.classList.contains('flipped')) {
+        flashcard.classList.add('flipped');
+        document.getElementById('answer-btns').style.display = 'flex';
+      }
+    });
+
+    document.querySelectorAll('.ans-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const quality = parseInt(btn.dataset.quality);
+        updateSRS(currentCard, quality);
+        const xpGain = quality === 3 ? 15 : quality === 2 ? 10 : quality === 1 ? 5 : 2;
+        addXP(xpGain);
+        showFeedback(quality);
+        document.getElementById('answer-btns').style.display = 'none';
+        cardIndex++;
+        setTimeout(showNextCard, 800);
+      });
+    });
+
+    document.getElementById('reset-btn').addEventListener('click', () => {
+      // Reset due times for current category
+      const pool = currentCategory === 'all' ? VOCAB_DB : VOCAB_DB.filter(c => c.cat === currentCategory);
+      pool.forEach(card => {
+        const cs = getCardState(card);
+        cs.due = Date.now();
+      });
+      saveState();
+      loadDueCards();
+      showNextCard();
+    });
+
+    // ===== INIT =====
+    buildCategories();
+    loadDueCards();
+    showNextCard();
+  </script>
+</body>
+</html>

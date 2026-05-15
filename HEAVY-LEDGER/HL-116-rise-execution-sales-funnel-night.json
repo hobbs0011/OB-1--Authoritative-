@@ -1,0 +1,237 @@
+{
+  "hl_id": "HL-116",
+  "source_file": "2026-03-31-rise-execution-sales-funnel-night.md",
+  "session_tag": "rise-execution-sales-funnel-night",
+  "session_date": "2026-03-31",
+  "signal_density": "HIGH",
+  "signal_counts": { "red": 7, "yellow": 4, "green": 2 },
+  "tier": "EXECUTION",
+  "quote_count": 13,
+  "decision_count": 6,
+  "correction_count": 2,
+  "principle_count": 3,
+  "wave": 9,
+  "wave_position": 116,
+  "run_converted": 258,
+  "conversion_date": "2026-04-03T18:20:00+07:00",
+
+  "raw_quotes": [
+    {
+      "id": "Q116-01",
+      "priority": "RED",
+      "text": "Stage 1 - Free Evaluation... A level test, A Jolly Phonics proficiency test, A proposed action plan for the child (all of the above free)",
+      "context": "Sales funnel Stage 1 definition"
+    },
+    {
+      "id": "Q116-02",
+      "priority": "RED",
+      "text": "Stage 2 - Free Report... A written report of the findings from the evaluation",
+      "context": "Sales funnel Stage 2 definition"
+    },
+    {
+      "id": "Q116-03",
+      "priority": "RED",
+      "text": "Stage 3 - Delivered with Free Class... The report from stage 2 is delivered alongside a free trial lesson",
+      "context": "Sales funnel Stage 3 definition"
+    },
+    {
+      "id": "Q116-04",
+      "priority": "RED",
+      "text": "Stage 4 - Close... This is where we convert the prospect to a paying student",
+      "context": "Sales funnel Stage 4 definition"
+    },
+    {
+      "id": "Q116-05",
+      "priority": "RED",
+      "text": "DONT EDIT CURRENT TRIGGERS, MAKE ADDDITIONAL TRIGGERS, IF YOU CHANGED ANY CURRENT RESTORE AND THEN MAKE ADDITIONAL",
+      "context": "Trigger management instruction"
+    },
+    {
+      "id": "Q116-06",
+      "priority": "RED",
+      "text": "the tone should be personal... like your talking to your neighbour about their kid... NOT A CORPORATE GENERIC FUNNEL",
+      "context": "Voice/tone rule for marketing copy"
+    },
+    {
+      "id": "Q116-07",
+      "priority": "RED",
+      "text": "rise, super saiyan mode engaged (means max agents deployed), imma make another coffee",
+      "context": "RISE command with Super Saiyan = max agents deployed"
+    },
+    {
+      "id": "Q116-08",
+      "priority": "YELLOW",
+      "text": "this is for kids AND adults — two different marketing lanes",
+      "context": "Dual audience segmentation"
+    },
+    {
+      "id": "Q116-09",
+      "priority": "YELLOW",
+      "text": "Vietnamese for Lakeview apartment groups, English for personal profile",
+      "context": "Language targeting by channel"
+    },
+    {
+      "id": "Q116-10",
+      "priority": "YELLOW",
+      "text": "free is preferred, but not mandatory, look at all options",
+      "context": "Cost preference guidance"
+    },
+    {
+      "id": "Q116-11",
+      "priority": "YELLOW",
+      "text": "I see magnus, meta ai, can either of these be used to automate a funnel?",
+      "context": "Automation stack research request"
+    },
+    {
+      "id": "Q116-12",
+      "priority": "GREEN",
+      "text": "Copy this into a fresh chat with me",
+      "context": "Handoff request to new session"
+    },
+    {
+      "id": "Q116-13",
+      "priority": "GREEN",
+      "text": "cool",
+      "context": "Confirmed trigger setup was clean after dedup"
+    }
+  ],
+
+  "decisions": [
+    {
+      "id": "D116-01",
+      "decision": "4-stage sales funnel: Free Eval → Free Report → Free Class → Close",
+      "impact": "CORE",
+      "canon_affected": ["Overnight Mission", "facebook-sales-funnel-v1.md"]
+    },
+    {
+      "id": "D116-02",
+      "decision": "Tone = personal neighbor, NOT corporate",
+      "impact": "CORE",
+      "canon_affected": ["All marketing artifacts"]
+    },
+    {
+      "id": "D116-03",
+      "decision": "Two lanes: Vietnamese (Lakeview groups) + English (personal profile)",
+      "impact": "HIGH",
+      "canon_affected": ["Marketing canon"]
+    },
+    {
+      "id": "D116-04",
+      "decision": "Don't edit existing triggers — only ADD new ones",
+      "impact": "MEDIUM",
+      "canon_affected": ["SSM instructions"]
+    },
+    {
+      "id": "D116-05",
+      "decision": "$0 automation stack preferred (ManyChat + Meta Lead Ads + Systeme.io)",
+      "impact": "MEDIUM",
+      "canon_affected": ["funnel-automation-stack-v1.md"]
+    },
+    {
+      "id": "D116-06",
+      "decision": "RISE + Super Saiyan = max autonomous execution",
+      "impact": "HIGH",
+      "canon_affected": ["Active session"]
+    }
+  ],
+
+  "corrections": [
+    {
+      "id": "C116-01",
+      "what": "Triggers duplicated (3x) when adding :15 trigger",
+      "root_cause": "Setup mode created duplicates",
+      "fix": "Deleted extras, restored originals, added single clean :15 trigger",
+      "instruction_update": true
+    },
+    {
+      "id": "C116-02",
+      "what": "Navigator Index bloated to 4.5MB",
+      "root_cause": "Session artifact duplication (hundreds of Skeleton/Soul DNA rows)",
+      "fix": "Created dedup swap page — API cannot edit 4.5MB page",
+      "instruction_update": true
+    }
+  ],
+
+  "principles": [
+    {
+      "id": "P116-01",
+      "text": "like your talking to your neighbour about your kid — All NET marketing must feel personal, warm, local. Zero corporate language.",
+      "law_refs": ["voice_tone"]
+    },
+    {
+      "id": "P116-02",
+      "text": "free is preferred, but not mandatory, look at all options — Research wide, bias toward $0, but don't exclude paid if ROI justifies.",
+      "law_refs": ["automation_cost"]
+    },
+    {
+      "id": "P116-03",
+      "text": "Super Saiyan = max agents deployed — When Michael says super saiyan mode engaged, deploy maximum parallel execution.",
+      "law_refs": ["L21_RISE"]
+    }
+  ],
+
+  "system_design_insights": [
+    "Navigator Index needs size guard: Automated dedup or row-count check before appending Session Artifacts",
+    "Trigger management needs pre/post count verification: Setup mode can create duplicates silently",
+    "Marketing canon emerging: CANON/MARKETING/ directory established with 2 files",
+    "4.5MB API limit is hard ceiling: Any page approaching this size needs proactive pruning"
+  ],
+
+  "artifacts_created": [
+    {
+      "name": "Facebook Sales Funnel v1",
+      "github_path": "CANON/MARKETING/facebook-sales-funnel-v1.md",
+      "commit_sha": "aacc8643"
+    },
+    {
+      "name": "Facebook Funnel Automation Stack v1",
+      "github_path": "CANON/MARKETING/facebook-funnel-automation-stack-v1.md",
+      "commit_sha": "17660b4f"
+    },
+    {
+      "name": "This Reincarnation Entry",
+      "github_path": "CANON/REINCARNATION/2026-03-31-rise-execution-sales-funnel-night.md",
+      "commit_sha": "current"
+    }
+  ],
+
+  "unfinished_actions": [
+    "Navigator Index dedup — 4.5MB page, API blocked. Swap page created. Manual swap required.",
+    "Handoff Ledger entry — blocked by Navigator Index bloat. Entry ready on swap page.",
+    "Overnight Mission Phase 3 — copywriting (Vietnamese + English) not started",
+    "ManyChat account setup — research done, implementation pending Michael's go-ahead",
+    "Phase 4 actions (9-10 on mission page) — scheduling/booking system + close strategy"
+  ],
+
+  "open_questions": [
+    "ManyChat free tier (1000 contacts) — sufficient for launch or need Pro?",
+    "Vietnamese copywriting — who writes? Michael or AI-assisted?",
+    "Lakeview apartment group names/links for targeting?",
+    "Facebook page/profile URLs for funnel landing?",
+    "Jolly Phonics test format — digital or paper-based for Stage 1?"
+  ],
+
+  "state_snapshot": {
+    "canon_cursor": "CANON/MARKETING/ (new directory)",
+    "last_run_time": "2026-03-31 01:30 ICT",
+    "active_mission": "Facebook Sales Funnel Pipeline",
+    "backlog_count": "Unknown (Navigator Index unreadable)",
+    "latest_commits": ["aacc8643", "17660b4f"],
+    "navigator_index_status": "BLOATED (4.5MB)",
+    "trigger_count": "6 (5 original + 1 new :15)"
+  },
+
+  "session_context": "RISE execution session defining 4-stage sales funnel for NET (Free Eval → Free Report → Free Class → Close). Tone set to 'personal neighbor'. Dual-language strategy (Vietnamese for Lakeview groups, English for personal profile). Automation stack researched (ManyChat, Meta Lead Ads, Systeme.io). Two corrections applied: trigger dedup, Navigator Index dedup.",
+
+  "cross_references": {
+    "related_hl": ["HL-111", "HL-112"],
+    "canon_pages": [
+      "CANON/MARKETING/facebook-sales-funnel-v1.md",
+      "CANON/MARKETING/facebook-funnel-automation-stack-v1.md"
+    ],
+    "products": ["net_english", "marketing_funnel"],
+    "repos_mined": ["ultimate"]
+  },
+
+  "fingerprint": "2026-03-31:rise-execution-sales-funnel-night:7q:6d:2c:HIGH"
+}

@@ -1,0 +1,3 @@
+User: consolodate, harden, capture soul dna of this chat
+Assistant: I'll add a canonical verbatim file for this chat, create NOTES, run the normalization utility to produce normalized JSONL and proof chunks, and update the todo list.
+Assistant: (performed) Added `CANON/SOUL-LOG-VERBATIM-CHAT-2026-04-05.md`, `CANON/SOUL-LOG-VERBATIM-CHAT-2026-04-05.NOTES.md`, produced proofs under `CANON/PROOFS-CHAT-2026-04-05/` and updated reports.

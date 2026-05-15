@@ -1,0 +1,5 @@
+﻿# PROOF - OPERATION(ZEN)-VAULT-2(SOUL) LAST
+
+Source: D:\phoenix-chat-logs\CHAT-LOGS-ONLY\OPERATION(ZEN)-VAULT-2(SOUL).txt
+
+

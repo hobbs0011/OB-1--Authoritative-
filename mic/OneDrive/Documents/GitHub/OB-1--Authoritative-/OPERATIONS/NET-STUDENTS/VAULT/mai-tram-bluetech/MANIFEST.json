@@ -1,0 +1,21 @@
+{
+  "vault_root": "d:\\OB-1\\OPERATIONS\\NET-STUDENTS\\VAULT\\mai-tram-bluetech",
+  "recordings": [
+    {
+      "created": "2026-04-17T01:16:45.3957235+07:00",
+      "filename": "mai-tram-bluetech_general_2026-04-15_005509.m4a",
+      "type": "assessment",
+      "path": "D:\\OB-1\\OPERATIONS\\NET-STUDENTS\\VAULT\\mai-tram-bluetech\\assessments\\mai-tram-bluetech_general_2026-04-15_005509.m4a",
+      "size": 2933793
+    },
+    {
+      "created": "2026-04-17T01:16:45.3127296+07:00",
+      "filename": "mai-tram-bluetech_phonics-practice_2026-04-15_005157.m4a",
+      "type": "phonics",
+      "path": "D:\\OB-1\\OPERATIONS\\NET-STUDENTS\\VAULT\\mai-tram-bluetech\\phonics\\mai-tram-bluetech_phonics-practice_2026-04-15_005157.m4a",
+      "size": 2933793
+    }
+  ],
+  "created": "2026-04-17T01:16:45.5641324+07:00",
+  "student_id": "mai-tram-bluetech"
+}

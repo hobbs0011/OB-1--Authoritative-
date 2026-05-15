@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0f0f1a">
+  <meta name="description" content="Natural English Training Classroom Manager — Student Notes Checker, class dashboard, and Obi-powered feedback tools for teachers.">
+  <title>Classroom Manager | Natural English Training</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/site.css">
+  <style>
+    /* ── Classroom Manager ── */
+    .cm-hero {
+      padding: 80px 0 48px;
+      border-bottom: 1px solid var(--panel-border);
+    }
+    .cm-hero .eyebrow { margin-bottom: 12px; display: inline-block; }
+    .cm-hero h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #f8f5ff 30%, #a855f7 70%, #f59e0b 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 12px;
+    }
+    .cm-hero p { color: var(--muted); max-width: 560px; line-height: 1.7; }
+
+    /* ── Tab Nav ── */
+    .cm-tabs {
+      display: flex;
+      gap: 4px;
+      padding: 24px 0 0;
+      border-bottom: 1px solid var(--panel-border);
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .cm-tabs::-webkit-scrollbar { display: none; }
+    .cm-tab {
+      padding: 10px 22px;
+      border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+      border: 1px solid transparent;
+      border-bottom: none;
+      background: transparent;
+      color: var(--muted);
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+      letter-spacing: 0.03em;
+    }
+    .cm-tab:hover { color: var(--text); background: rgba(168,85,247,0.06); }
+    .cm-tab.active {
+      background: var(--panel);
+      border-color: var(--panel-border);
+      color: var(--purple);
+      position: relative;
+    }
+    .cm-tab.active::after {
+      content: '';
+      position: absolute;
+      bottom: -1px; left: 0; right: 0;
+      height: 1px;
+      background: var(--panel);
+    }
+
+    /* ── Panels ── */
+    .cm-panel { display: none; padding: 40px 0 80px; }
+    .cm-panel.active { display: block; }
+
+    /* ── Notes Checker ── */
+    .checker-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+    .checker-upload {
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .checker-upload h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.05em;
+    }
+    .drop-zone {
+      border: 2px dashed rgba(168,85,247,0.3);
+      border-radius: var(--radius-md);
+      padding: 40px 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      position: relative;
+    }
+    .drop-zone:hover, .drop-zone.drag-over {
+      border-color: var(--purple);
+      background: rgba(168,85,247,0.06);
+    }
+    .drop-zone .dz-icon { font-size: 2.5rem; margin-bottom: 10px; }
+    .drop-zone .dz-label { color: var(--purple); font-weight: 700; font-size: 1rem; margin-bottom: 4px; }
+    .drop-zone .dz-hint { color: var(--muted); font-size: 0.82rem; }
+    .drop-zone input[type=file] { display: none; }
+    .preview-box {
+      display: none;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      border: 1px solid var(--panel-border);
+      position: relative;
+    }
+    .preview-box img { width: 100%; display: block; max-height: 240px; object-fit: contain; background: #0a0a14; }
+    .preview-box .preview-label { padding: 8px 12px; font-size: 0.8rem; color: var(--muted); background: var(--panel); }
+    .field-row { display: flex; flex-direction: column; gap: 6px; }
+    .field-row label { font-size: 0.8rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+    .field-row select, .field-row textarea, .field-row input[type=text] {
+      padding: 12px 14px;
+      background: rgba(0,0,0,0.3);
+      border: 1px solid var(--panel-border);
+      border-radius: var(--radius-sm);
+      color: var(--text);
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .field-row select:focus, .field-row textarea:focus, .field-row input[type=text]:focus { border-color: var(--purple); }
+    .field-row select { appearance: none; cursor: pointer; }
+    .field-row textarea { resize: vertical; min-height: 64px; }
+
+    /* Student name chips */
+    .student-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip {
+      padding: 5px 14px;
+      border-radius: 999px;
+      background: rgba(168,85,247,0.1);
+      border: 1px solid rgba(168,85,247,0.25);
+      color: var(--muted);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .chip:hover, .chip.selected { background: rgba(168,85,247,0.2); border-color: var(--purple); color: var(--text); }
+    .chip.selected { color: var(--purple); }
+
+    .check-btn {
+      padding: 16px;
+      border: none;
+      border-radius: var(--radius-sm);
+      background: linear-gradient(135deg, #7c3aed, #a855f7);
+      color: #fff;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .check-btn:hover:not(:disabled) { opacity: 0.9; transform: translateY(-1px); }
+    .check-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+    /* ── Results Panel ── */
+    .checker-result {
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      min-height: 300px;
+    }
+    .result-empty {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 260px;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      text-align: center;
+    }
+    .result-empty span { font-size: 3rem; }
+    .result-header-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--panel-border);
+    }
+    .result-header-row .level-badge {
+      padding: 4px 16px;
+      border-radius: 999px;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+    .badge-great { background: rgba(34,197,94,0.15); color: var(--green); border: 1px solid rgba(34,197,94,0.3); }
+    .badge-good  { background: rgba(245,158,11,0.15); color: var(--gold); border: 1px solid rgba(245,158,11,0.3); }
+    .badge-try   { background: rgba(168,85,247,0.15); color: var(--purple); border: 1px solid rgba(168,85,247,0.3); }
+    .result-student-name {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--muted);
+    }
+
+    .feedback-block {
+      background: rgba(0,0,0,0.25);
+      border-radius: var(--radius-sm);
+      padding: 16px 20px;
+    }
+    .feedback-block h3 {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .feedback-block p, .feedback-block ul {
+      font-size: 0.92rem;
+      line-height: 1.7;
+      color: var(--muted-strong);
+    }
+    .feedback-block ul { padding-left: 18px; }
+    .feedback-block li { margin-bottom: 4px; }
+
+    .encouragement-bar {
+      text-align: center;
+      padding: 14px;
+      background: rgba(245,158,11,0.08);
+      border: 1px solid rgba(245,158,11,0.2);
+      border-radius: var(--radius-sm);
+      color: var(--gold);
+      font-style: italic;
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+
+    .result-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+    .result-actions button {
+      padding: 10px 20px;
+      border-radius: var(--radius-sm);
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .act-primary { background: var(--purple); color: #fff; border: none; }
+    .act-primary:hover { opacity: 0.85; }
+    .act-ghost { background: transparent; border: 1px solid var(--panel-border); color: var(--muted); }
+    .act-ghost:hover { border-color: var(--purple); color: var(--text); }
+
+    /* Loading spinner */
+    .checker-loading {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 260px;
+      gap: 16px;
+    }
+    .spinner {
+      width: 44px; height: 44px;
+      border: 3px solid var(--panel-border);
+      border-top-color: var(--purple);
+      border-radius: 50%;
+      animation: spin 0.9s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .checking-msg { color: var(--muted); font-size: 0.9rem; text-align: center; }
+    .checking-msg strong { color: var(--purple); display: block; font-family: 'Orbitron', sans-serif; font-size: 0.85rem; margin-bottom: 4px; }
+
+    /* ── Class Log panel ── */
+    .class-log-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .log-stat {
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      border-radius: var(--radius-md);
+      padding: 20px;
+    }
+    .log-stat .ls-label { font-size: 0.78rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; }
+    .log-stat .ls-val { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; font-weight: 800; color: var(--text); }
+    .log-stat .ls-sub { font-size: 0.78rem; color: var(--purple); margin-top: 4px; }
+
+    .event-log {
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    .event-log-header {
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--panel-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .event-log-header h3 { font-family: 'Orbitron', sans-serif; font-size: 0.85rem; font-weight: 700; color: var(--text); }
+    .event-table { width: 100%; border-collapse: collapse; }
+    .event-table th {
+      padding: 10px 24px;
+      text-align: left;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      border-bottom: 1px solid var(--panel-border);
+      background: rgba(0,0,0,0.15);
+    }
+    .event-table td { padding: 12px 24px; font-size: 0.88rem; border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--muted-strong); }
+    .event-table tr:last-child td { border-bottom: none; }
+    .event-table tr:hover td { background: rgba(168,85,247,0.04); }
+    .status-pill {
+      padding: 2px 10px; border-radius: 999px; font-size: 0.75rem; font-weight: 700;
+    }
+    .status-followed { background: rgba(34,197,94,0.12); color: var(--green); }
+    .status-broken   { background: rgba(239,68,68,0.12);  color: var(--danger); }
+    .status-neutral  { background: rgba(168,85,247,0.12); color: var(--purple); }
+
+    /* ── API Key setup card ── */
+    .api-key-notice {
+      background: rgba(245,158,11,0.08);
+      border: 1px solid rgba(245,158,11,0.25);
+      border-radius: var(--radius-sm);
+      padding: 16px 20px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .api-key-notice .notice-icon { font-size: 1.3rem; flex-shrink: 0; }
+    .api-key-notice a { color: var(--gold); }
+    .api-key-input-row { display: flex; gap: 10px; margin-top: 12px; }
+    .api-key-input-row input {
+      flex: 1;
+      padding: 10px 14px;
+      background: rgba(0,0,0,0.3);
+      border: 1px solid var(--panel-border);
+      border-radius: var(--radius-sm);
+      color: var(--text);
+      font-family: monospace;
+      font-size: 0.85rem;
+      outline: none;
+    }
+    .api-key-input-row input:focus { border-color: var(--gold); }
+    .api-key-input-row button {
+      padding: 10px 18px;
+      border: none;
+      border-radius: var(--radius-sm);
+      background: var(--gold);
+      color: #0f0f1a;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    /* Error bar */
+    .err-bar {
+      display: none;
+      padding: 10px 16px;
+      border-radius: var(--radius-sm);
+      background: rgba(239,68,68,0.1);
+      border: 1px solid rgba(239,68,68,0.3);
+      color: #f87171;
+      font-size: 0.88rem;
+    }
+    .err-bar.show { display: block; }
+
+    @media (max-width: 768px) {
+      .checker-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body data-page="classroom">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="topbar">
+    <div class="shell topbar-inner">
+      <a class="brand" href="index.html" aria-label="Natural English Training — home">
+        <img src="assets/brand/NET-PHXRISING-LOGO.webp" alt="NET logo" width="40" height="40" fetchpriority="high">
+        <span>
+          Natural English Training
+          <small>Assessment • Founder • NET-PET-AI</small>
+        </span>
+      </a>
+      <nav class="global-nav" aria-label="Site navigation">
+        <a href="index.html">Assessment</a>
+        <a href="about.html">About Michael</a>
+        <a href="huong-gospel444.html">Huong 444</a>
+        <a href="testimonials.html">Student Stories</a>
+        <a href="lessons.html">Lessons</a>
+        <a aria-current="page" href="classroom.html">Classroom</a>
+        <a href="login.html">Login</a>
+      </nav>
+      <a class="topbar-cta" href="index.html#submission">Submit</a>
+    </div>
+  </header>
+
+  <main class="site-main" id="main-content">
+    <div class="shell">
+
+      <!-- Hero -->
+      <div class="cm-hero">
+        <span class="eyebrow">Teacher Tools · Lakeview City · District 2</span>
+        <h1>Classroom Manager</h1>
+        <p>Student notes checker, class event log, and Obi-powered feedback — all in one place. Mouse→Tiger, one student at a time.</p>
+      </div>
+
+      <!-- Tab Nav -->
+      <div class="cm-tabs" role="tablist">
+        <button class="cm-tab active" role="tab" aria-selected="true"  onclick="switchTab('notes')">📸 Notes Checker</button>
+        <button class="cm-tab"        role="tab" aria-selected="false" onclick="switchTab('log')">📋 Class Log</button>
+        <button class="cm-tab"        role="tab" aria-selected="false" onclick="switchTab('roster')">🐯 Roster</button>
+      </div>
+
+      <!-- ═══ NOTES CHECKER ═══ -->
+      <div class="cm-panel active" id="panel-notes">
+
+        <!-- Gemini API key notice (shown until key saved) -->
+        <div class="api-key-notice" id="apiKeyNotice">
+          <span class="notice-icon">🔑</span>
+          <div>
+            <strong style="color:var(--gold);display:block;margin-bottom:4px;">Gemini API key required for Notes Checker</strong>
+            This tool uses Google Gemini Vision to read handwritten notes. Free at
+            <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey</a>.
+            Your key is stored locally — never sent to NET servers.
+            <div class="api-key-input-row">
+              <input type="password" id="geminiKeyInput" placeholder="Paste Gemini API key (AIza…)">
+              <button onclick="saveGeminiKey()">Save Key</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="checker-grid" style="margin-top:28px;">
+
+          <!-- ── LEFT: Upload + Config ── -->
+          <div class="checker-upload">
+            <h2>📸 Student Notes Checker</h2>
+
+            <div class="drop-zone" id="dropZone"
+                 onclick="document.getElementById('noteFile').click()"
+                 ondragover="dzOver(event)" ondragleave="dzLeave()" ondrop="dzDrop(event)">
+              <div class="dz-icon">📷</div>
+              <div class="dz-label">Tap to upload / take photo</div>
+              <div class="dz-hint">Photo of student's handwritten notes or homework</div>
+              <input type="file" id="noteFile" accept="image/*" capture="environment" onchange="handleFile(event)">
+            </div>
+
+            <div class="preview-box" id="previewBox">
+              <img id="previewImg" alt="Notes preview">
+              <div class="preview-label" id="previewLabel"></div>
+            </div>
+
+            <div class="field-row">
+              <label>Subject / Focus</label>
+              <select id="subjectSelect">
+                <option value="english-writing">English — Writing & Grammar</option>
+                <option value="english-vocab">English — Vocabulary</option>
+                <option value="english-phonics">English — Phonics & Pronunciation</option>
+                <option value="english-reading">English — Reading Comprehension</option>
+                <option value="math">Math</option>
+                <option value="science">Science</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="field-row">
+              <label>Student (optional)</label>
+              <div class="student-chips" id="studentChips">
+                <div class="chip" onclick="selectStudent(this, 'Mai Trâm')">Mai Trâm</div>
+                <div class="chip" onclick="selectStudent(this, 'Hương')">Hương</div>
+                <div class="chip" onclick="selectStudent(this, 'Quý')">Quý</div>
+                <div class="chip" onclick="selectStudent(this, '')">+ Add</div>
+              </div>
+              <input type="text" id="studentNameInput" placeholder="Or type student name…" style="margin-top:8px;">
+            </div>
+
+            <div class="field-row">
+              <label>Context for Obi (optional)</label>
+              <textarea id="contextInput" placeholder="e.g. 'Past tense exercise, chapter 4' or 'Phonics test on long vowel sounds'"></textarea>
+            </div>
+
+            <div class="err-bar" id="checkErr"></div>
+
+            <button class="check-btn" id="checkBtn" disabled onclick="runCheck()">
+              ✦ Check Notes with Obi
+            </button>
+
+            <button class="check-btn" id="resetBtn" style="display:none;background:transparent;border:1px solid var(--panel-border);color:var(--muted);" onclick="resetChecker()">
+              ↺ Check Another
+            </button>
+          </div>
+
+          <!-- ── RIGHT: Results ── -->
+          <div class="checker-result" id="resultPanel">
+
+            <!-- Empty state -->
+            <div class="result-empty" id="resultEmpty">
+              <span>📋</span>
+              <p>Upload student notes and hit<br><strong style="color:var(--purple);">Check Notes with Obi</strong></p>
+              <p style="font-size:0.8rem;color:var(--muted);margin-top:4px;">Obi reads the handwriting, spots patterns,<br>and gives Mouse→Tiger feedback.</p>
+            </div>
+
+            <!-- Loading -->
+            <div class="checker-loading" id="resultLoading">
+              <div class="spinner"></div>
+              <div class="checking-msg">
+                <strong>Obi is reading the notes…</strong>
+                Spotting patterns. Finding the win first.
+              </div>
+            </div>
+
+            <!-- Result content (hidden until result arrives) -->
+            <div id="resultContent" style="display:none; flex-direction:column; gap:16px;">
+
+              <div class="result-header-row">
+                <span id="resultEmoji" style="font-size:1.6rem;"></span>
+                <span class="level-badge" id="resultBadge"></span>
+                <span class="result-student-name" id="resultStudentName"></span>
+              </div>
+
+              <div class="feedback-block">
+                <h3>📌 Summary</h3>
+                <p id="fbSummary"></p>
+              </div>
+
+              <div class="feedback-block" id="fbStrengthsBlock">
+                <h3>✅ What's Working</h3>
+                <ul id="fbStrengths"></ul>
+              </div>
+
+              <div class="feedback-block" id="fbImprovementsBlock">
+                <h3>🎯 Next Move</h3>
+                <ul id="fbImprovements"></ul>
+              </div>
+
+              <div class="encouragement-bar" id="fbEncouragement"></div>
+
+              <div class="result-actions">
+                <button class="act-primary" onclick="copyFeedback()">📋 Copy Feedback</button>
+                <button class="act-ghost" onclick="saveFeedbackLog()">💾 Save to Log</button>
+                <button class="act-ghost" onclick="resetChecker()">↺ Check Another</button>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ═══ CLASS LOG ═══ -->
+      <div class="cm-panel" id="panel-log">
+        <div class="class-log-grid" id="logStats">
+          <div class="log-stat">
+            <div class="ls-label">Class ID</div>
+            <div class="ls-val" id="logClassId" style="font-size:0.9rem;">—</div>
+            <div class="ls-sub">active session</div>
+          </div>
+          <div class="log-stat">
+            <div class="ls-label">Events</div>
+            <div class="ls-val" id="logEventCount">0</div>
+            <div class="ls-sub">logged this session</div>
+          </div>
+          <div class="log-stat">
+            <div class="ls-label">Compliance</div>
+            <div class="ls-val" id="logCompliance">—</div>
+            <div class="ls-sub">rules followed</div>
+          </div>
+          <div class="log-stat">
+            <div class="ls-label">Obi Status</div>
+            <div class="ls-val" id="logObiStatus" style="font-size:0.9rem;">Checking…</div>
+            <div class="ls-sub" id="logObiSub">NET-PET-AI worker</div>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:12px;margin-bottom:24px;flex-wrap:wrap;align-items:center;">
+          <input type="text" id="classIdInput"
+            style="padding:10px 14px;background:rgba(0,0,0,0.3);border:1px solid var(--panel-border);border-radius:var(--radius-sm);color:var(--text);font-family:'Rajdhani',sans-serif;font-size:0.95rem;outline:none;width:200px;"
+            placeholder="Class ID (e.g. grade12-a)">
+          <button onclick="startClass()" class="check-btn" style="width:auto;padding:10px 22px;font-size:0.82rem;">Start Session</button>
+          <button onclick="loadClassLog()" class="check-btn" style="width:auto;padding:10px 22px;font-size:0.82rem;background:linear-gradient(135deg,#1e1b4b,#2e1065);">Refresh Log</button>
+        </div>
+
+        <!-- Quick event logger -->
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px;" id="quickEvents">
+          <button onclick="logEvent('focus_tap','followed')" class="chip" style="cursor:pointer;border-color:rgba(34,197,94,0.3);color:var(--green);">✓ On task</button>
+          <button onclick="logEvent('distracted','broken')" class="chip" style="cursor:pointer;border-color:rgba(239,68,68,0.3);color:var(--danger);">✗ Distracted</button>
+          <button onclick="logEvent('answered','followed')" class="chip" style="cursor:pointer;border-color:rgba(168,85,247,0.3);color:var(--purple);">💬 Answered</button>
+          <button onclick="logEvent('silent','broken')" class="chip" style="cursor:pointer;border-color:rgba(245,158,11,0.3);color:var(--gold);">😶 Silent (No Freezy)</button>
+          <button onclick="logEvent('tiger_moment','followed')" class="chip" style="cursor:pointer;border-color:rgba(245,158,11,0.4);color:var(--gold);background:rgba(245,158,11,0.08);">🐯 Tiger moment</button>
+        </div>
+
+        <div class="event-log" id="eventLogTable">
+          <div class="event-log-header">
+            <h3>Class Event Feed</h3>
+            <span style="font-size:0.8rem;color:var(--muted);" id="logTimestamp">No session active</span>
+          </div>
+          <div id="eventTableBody" style="padding:40px;text-align:center;color:var(--muted);font-size:0.9rem;">
+            Start a session to begin logging events.
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ ROSTER ═══ -->
+      <div class="cm-panel" id="panel-roster">
+        <div style="max-width:640px;">
+          <p style="color:var(--muted);margin-bottom:28px;line-height:1.7;">
+            Student roster is stored locally and synced to the Cryptographic Immutable Ledger once Obi is live.
+            Add students below — they'll appear as chips in the Notes Checker.
+          </p>
+          <div style="display:flex;gap:10px;margin-bottom:20px;">
+            <input type="text" id="newStudentInput"
+              style="flex:1;padding:12px 14px;background:rgba(0,0,0,0.3);border:1px solid var(--panel-border);border-radius:var(--radius-sm);color:var(--text);font-family:'Rajdhani',sans-serif;font-size:0.95rem;outline:none;"
+              placeholder="Student name…" onkeydown="if(event.key==='Enter')addStudent()">
+            <button onclick="addStudent()" class="check-btn" style="width:auto;padding:12px 20px;font-size:0.82rem;">Add</button>
+          </div>
+          <div class="student-chips" id="rosterChips" style="gap:10px;"></div>
+          <p style="margin-top:20px;font-size:0.8rem;color:var(--muted);">Click a student name to remove them from the roster.</p>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-inner">
+      <span>© 2026 Natural English Training · Lakeview City, District 2, HCMC</span>
+      <span>Built for Tigers.</span>
+    </div>
+  </footer>
+
+  <script>
+  // ═══════════════════════════════════════════════════════
+  // NET Classroom Manager — JavaScript
+  // Mouse→Tiger feedback doctrine throughout.
+  // ═══════════════════════════════════════════════════════
+
+  const GEMINI_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
+  const NET_API    = 'https://naturalenglishtraining.net';
+  const STORE      = { roster: 'net_cm_roster', log: 'net_cm_log', apiKey: 'net_cm_gemini', eventQueue: 'net_cm_event_queue' };
+  const API_TIMEOUT_MS = 10000;
+  const API_MAX_RETRIES = 2;
+  const API_RETRY_BASE_MS = 350;
+
+  let selectedFile = null;
+  let selectedB64  = null;
+  let selectedMime = null;
+  let selectedStudent = '';
+  let activeClassId = '';
+  let feedbackCache = null;
+
+  // ── Tab switching ─────────────────────────────────────
+  function switchTab(name) {
+    document.querySelectorAll('.cm-tab').forEach((t, i) => {
+      const panels = ['notes','log','roster'];
+      t.classList.toggle('active', panels[i] === name);
+      t.setAttribute('aria-selected', panels[i] === name);
+    });
+    document.querySelectorAll('.cm-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById(`panel-${name}`).classList.add('active');
+    if (name === 'log') loadClassLog();
+    if (name === 'roster') renderRoster();
+  }
+
+  // ── NET API helpers ──────────────────────────────────
+  function wait(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  function shouldRetryStatus(status) {
+    return status === 408 || status === 429 || status >= 500;
+  }
+
+  async function fetchWithTimeout(url, options = {}, timeoutMs = API_TIMEOUT_MS) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), timeoutMs);
+    try {
+      return await fetch(url, { ...options, signal: controller.signal });
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+
+  async function apiJson(path, options = {}) {
+    for (let attempt = 0; attempt <= API_MAX_RETRIES; attempt++) {
+      try {
+        const res = await fetchWithTimeout(`${NET_API}${path}`, options);
+        let data = null;
+        try { data = await res.json(); } catch {}
+
+        if (res.ok) return data;
+
+        const msg = data?.error || data?.message || `Request failed (${res.status})`;
+        if (attempt < API_MAX_RETRIES && shouldRetryStatus(res.status)) {
+          await wait(API_RETRY_BASE_MS * (2 ** attempt));
+          continue;
+        }
+        throw new Error(msg);
+      } catch (err) {
+        const isTimeout = err?.name === 'AbortError';
+        const isNetwork = err instanceof TypeError || isTimeout;
+        if (attempt < API_MAX_RETRIES && isNetwork) {
+          await wait(API_RETRY_BASE_MS * (2 ** attempt));
+          continue;
+        }
+        if (isTimeout) throw new Error('Request timed out. Please try again.');
+        throw err;
+      }
+    }
+
+    throw new Error('Request failed after retries.');
+  }
+
+  // ── Offline event queue ─────────────────────────────
+  function getEventQueue() {
+    return JSON.parse(localStorage.getItem(STORE.eventQueue) || '[]');
+  }
+
+  function saveEventQueue(queue) {
+    localStorage.setItem(STORE.eventQueue, JSON.stringify(queue.slice(-200)));
+  }
+
+  function queueEvent(payload) {
+    const q = getEventQueue();
+    q.push(payload);
+    saveEventQueue(q);
+    return q.length;
+  }
+
+  async function flushEventQueue(classIdHint = '') {
+    const queue = getEventQueue();
+    if (!queue.length) return 0;
+
+    const pending = [...queue];
+    const unsent = [];
+    let sent = 0;
+
+    for (const item of pending) {
+      try {
+        await apiJson('/api/classroom/event', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(item),
+        });
+        sent++;
+      } catch {
+        unsent.push(item);
+      }
+    }
+
+    saveEventQueue(unsent);
+    if (sent > 0 && (classIdHint || activeClassId)) {
+      document.getElementById('logTimestamp').textContent = `Synced ${sent} queued event${sent > 1 ? 's' : ''}`;
+    }
+    return sent;
+  }
+
+  // ── Gemini Key ────────────────────────────────────────
+  function getKey() { return localStorage.getItem(STORE.apiKey) || ''; }
+
+  function saveGeminiKey() {
+    const k = document.getElementById('geminiKeyInput').value.trim();
+    if (!k || !k.startsWith('AIza')) { showErr('Key should start with AIza…'); return; }
+    localStorage.setItem(STORE.apiKey, k);
+    document.getElementById('apiKeyNotice').style.display = 'none';
+  }
+
+  function checkKeyNotice() {
+    if (getKey()) document.getElementById('apiKeyNotice').style.display = 'none';
+  }
+
+  // ── File handling ─────────────────────────────────────
+  function handleFile(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    if (!file.type.startsWith('image/')) { showErr('Please select an image file.'); return; }
+    if (file.size > 20 * 1024 * 1024) { showErr('Image too large. Max 20MB.'); return; }
+    selectedFile = file;
+    selectedMime = file.type;
+    const reader = new FileReader();
+    reader.onload = ev => {
+      const full = ev.target.result;
+      selectedB64 = full.split(',')[1];
+      document.getElementById('previewImg').src = full;
+      document.getElementById('previewLabel').textContent = file.name;
+      document.getElementById('previewBox').style.display = 'block';
+      document.getElementById('checkBtn').disabled = false;
+      hideErr();
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function dzOver(e) { e.preventDefault(); document.getElementById('dropZone').classList.add('drag-over'); }
+  function dzLeave() { document.getElementById('dropZone').classList.remove('drag-over'); }
+  function dzDrop(e) {
+    e.preventDefault(); dzLeave();
+    const file = e.dataTransfer.files[0];
+    if (file) { document.getElementById('noteFile').files = e.dataTransfer.files; handleFile({ target: { files: [file] } }); }
+  }
+
+  // ── Student chips ─────────────────────────────────────
+  function selectStudent(el, name) {
+    document.querySelectorAll('#studentChips .chip').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+    if (name === '') {
+      document.getElementById('studentNameInput').focus();
+      selectedStudent = '';
+    } else {
+      selectedStudent = name;
+      document.getElementById('studentNameInput').value = '';
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('studentNameInput').addEventListener('input', e => {
+      selectedStudent = e.target.value.trim();
+      document.querySelectorAll('#studentChips .chip').forEach(c => c.classList.remove('selected'));
+    });
+    checkKeyNotice();
+    loadRosterChips();
+    checkObiHealth();
+    window.addEventListener('online', () => { flushEventQueue(activeClassId).catch(() => {}); });
+  });
+
+  // ── Main check ────────────────────────────────────────
+  async function runCheck() {
+    const key = getKey();
+    if (!key) {
+      document.getElementById('apiKeyNotice').style.display = '';
+      showErr('Add your Gemini API key above first.');
+      return;
+    }
+    if (!selectedB64) { showErr('Upload a photo of student notes first.'); return; }
+
+    const subject = document.getElementById('subjectSelect').selectedOptions[0].text;
+    const context = document.getElementById('contextInput').value.trim();
+    const student = document.getElementById('studentNameInput').value.trim() || selectedStudent;
+
+    setResultState('loading');
+    hideErr();
+
+    const prompt = buildPrompt(subject, context, student);
+
+    try {
+      const res = await fetch(`${GEMINI_URL}?key=${key}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{ parts: [
+            { text: prompt },
+            { inline_data: { mime_type: selectedMime, data: selectedB64 } }
+          ]}],
+          generationConfig: { temperature: 0.35, maxOutputTokens: 1024, responseMimeType: 'application/json' }
+        })
+      });
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        const errorStatus = err && err.error ? (err.error.status || err.error.code) : undefined;
+        if (res.status === 400 && errorStatus === 'INVALID_ARGUMENT') {
+          localStorage.removeItem(STORE.apiKey);
+          document.getElementById('apiKeyNotice').style.display = '';
+          throw new Error('API key invalid. Enter a new one above.');
+        }
+        throw new Error(`Gemini API error (${res.status}). Try again.`);
+      }
+
+      const data = await res.json();
+      const raw = data.candidates?.[0]?.content?.parts?.[0]?.text;
+      if (!raw) throw new Error('No response from Gemini. Try again.');
+
+      let result;
+      try { result = JSON.parse(raw); }
+      catch { result = { level: 'good', summary: raw, strengths: [], improvements: [], encouragement: 'Keep going — every step forward counts. 🐯' }; }
+
+      feedbackCache = { result, student, subject, ts: Date.now() };
+      renderResult(result, student);
+
+    } catch (err) {
+      setResultState('empty');
+      showErr(err.message);
+    }
+  }
+
+  function buildPrompt(subject, context, student) {
+    return `You are OBI, the AI English coach for Natural English Training in Vietnam.
+Your feedback doctrine: Mouse→Tiger. Find the win FIRST. Calibrate, shift, upgrade — never "wrong", "bad", "fail".
+Never shame. Always encourage. Tough love means: direct, warm, actionable.
+
+A teacher has submitted a photo of ${student ? student + "'s" : "a student's"} ${subject} work.
+${context ? 'Teacher context: ' + context : ''}
+
+Analyze what you see in the image and respond ONLY as valid JSON with this exact structure:
+{
+  "level": "great" | "good" | "try",
+  "summary": "1-2 sentence plain-English summary of what you observe",
+  "strengths": ["specific thing 1 done well", "specific thing 2", ...],
+  "improvements": ["one concrete next step", "another if needed"],
+  "encouragement": "One short Tiger-voice encouragement sentence for the student. Warm, direct, never hollow."
+}
+
+Rules:
+- level "great" = strong work, only minor polish needed
+- level "good" = solid foundation, clear path forward  
+- level "try" = needs support — frame as opportunity, never failure
+- strengths array: always at least 1 item. Find something real.
+- improvements: max 2 items. Prioritize ruthlessly.
+- encouragement: speak directly to the student. Reference their actual work if possible.
+- Vietnamese students are especially shame-sensitive — anti-shame doctrine is non-negotiable`;
+  }
+
+  function renderResult(r, student) {
+    const levelMap = {
+      great: { badge: 'GREAT WORK', cls: 'badge-great', emoji: '🐯' },
+      good:  { badge: 'GOOD START', cls: 'badge-good',  emoji: '🐺' },
+      try:   { badge: 'KEEP GOING', cls: 'badge-try',   emoji: '🐱' },
+    };
+    const lv = levelMap[r.level] || levelMap.good;
+
+    document.getElementById('resultEmoji').textContent = lv.emoji;
+    document.getElementById('resultBadge').textContent = lv.badge;
+    document.getElementById('resultBadge').className = `level-badge ${lv.cls}`;
+    document.getElementById('resultStudentName').textContent = student || '';
+
+    document.getElementById('fbSummary').textContent = r.summary || '';
+
+    const strEl = document.getElementById('fbStrengths');
+    strEl.innerHTML = '';
+    (r.strengths || []).forEach(s => { const li = document.createElement('li'); li.textContent = s; strEl.appendChild(li); });
+    document.getElementById('fbStrengthsBlock').style.display = r.strengths?.length ? '' : 'none';
+
+    const impEl = document.getElementById('fbImprovements');
+    impEl.innerHTML = '';
+    (r.improvements || []).forEach(s => { const li = document.createElement('li'); li.textContent = s; impEl.appendChild(li); });
+    document.getElementById('fbImprovementsBlock').style.display = r.improvements?.length ? '' : 'none';
+
+    document.getElementById('fbEncouragement').textContent = r.encouragement || '';
+
+    setResultState('result');
+  }
+
+  function setResultState(state) {
+    document.getElementById('resultEmpty').style.display   = state === 'empty'   ? 'flex' : 'none';
+    document.getElementById('resultLoading').style.display = state === 'loading' ? 'flex' : 'none';
+    document.getElementById('resultContent').style.display = state === 'result'  ? 'flex' : 'none';
+    document.getElementById('checkBtn').style.display  = state !== 'result' ? '' : 'none';
+    document.getElementById('resetBtn').style.display  = state === 'result'  ? '' : 'none';
+  }
+
+  function resetChecker() {
+    selectedFile = null; selectedB64 = null; selectedMime = null;
+    document.getElementById('noteFile').value = '';
+    document.getElementById('previewBox').style.display = 'none';
+    document.getElementById('checkBtn').disabled = true;
+    document.getElementById('contextInput').value = '';
+    document.getElementById('studentNameInput').value = '';
+    document.querySelectorAll('#studentChips .chip').forEach(c => c.classList.remove('selected'));
+    feedbackCache = null;
+    hideErr();
+    setResultState('empty');
+  }
+
+  function copyFeedback() {
+    if (!feedbackCache) return;
+    const r = feedbackCache.result;
+    const text = [
+      `OBI Feedback — ${feedbackCache.student || 'Student'} — ${feedbackCache.subject}`,
+      `Level: ${r.level?.toUpperCase()}`,
+      `Summary: ${r.summary}`,
+      r.strengths?.length ? `\nStrengths:\n${r.strengths.map(s => '• ' + s).join('\n')}` : '',
+      r.improvements?.length ? `\nNext steps:\n${r.improvements.map(s => '• ' + s).join('\n')}` : '',
+      r.encouragement ? `\n"${r.encouragement}"` : '',
+    ].filter(Boolean).join('\n');
+    navigator.clipboard.writeText(text).then(() => alert('Copied to clipboard!'));
+  }
+
+  function saveFeedbackLog() {
+    if (!feedbackCache) return;
+    const logs = JSON.parse(localStorage.getItem(STORE.log) || '[]');
+    logs.unshift(feedbackCache);
+    localStorage.setItem(STORE.log, JSON.stringify(logs.slice(0, 50)));
+    alert('Saved to local log! (Class Log tab)');
+  }
+
+  // ── Class Log ─────────────────────────────────────────
+  async function startClass() {
+    const classId = document.getElementById('classIdInput').value.trim() || `class-${Date.now()}`;
+    activeClassId = classId;
+    document.getElementById('logClassId').textContent = classId;
+
+    try {
+      await apiJson('/api/classroom/session/start', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ classId, teacherId: 'michael', totalStudents: 40 }),
+      });
+      await flushEventQueue(classId);
+      document.getElementById('logTimestamp').textContent = `Started ${new Date().toLocaleTimeString()}`;
+      loadClassLog();
+    } catch {
+      document.getElementById('logTimestamp').textContent = `Offline — logging locally`;
+    }
+  }
+
+  async function logEvent(type, ruleStatus) {
+    if (!activeClassId) { alert('Start a session first.'); return; }
+    const student = document.getElementById('studentNameInput')?.value?.trim() || '';
+    const payload = { classId: activeClassId, studentId: student, type, ruleStatus, ts: Date.now() };
+
+    try {
+      await flushEventQueue(activeClassId);
+      await apiJson('/api/classroom/event', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+    } catch {
+      const queued = queueEvent(payload);
+      document.getElementById('logTimestamp').textContent = `Offline — ${queued} queued`;
+    }
+
+    // Always update local count
+    const cur = parseInt(document.getElementById('logEventCount').textContent) || 0;
+    document.getElementById('logEventCount').textContent = cur + 1;
+    appendEventRow({ type, ruleStatus, studentId: student, ts: payload.ts });
+  }
+
+  async function loadClassLog() {
+    const classId = document.getElementById('classIdInput')?.value?.trim() || activeClassId;
+    if (!classId) return;
+    activeClassId = classId;
+    document.getElementById('logClassId').textContent = classId;
+
+    try {
+      await flushEventQueue(classId);
+      const q = new URLSearchParams({ classId, totalStudents: '40' }).toString();
+      const data = await apiJson(`/api/classroom/session?${q}`);
+      document.getElementById('logEventCount').textContent = data.events?.length || 0;
+      document.getElementById('logCompliance').textContent = (data.complianceRate ?? '—') + (data.complianceRate != null ? '%' : '');
+      renderEventTable(data.events || []);
+    } catch {
+      document.getElementById('logObiStatus').textContent = 'Offline';
+      document.getElementById('logObiStatus').style.color = 'var(--danger)';
+    }
+  }
+
+  function renderEventTable(events) {
+    if (!events.length) {
+      document.getElementById('eventTableBody').innerHTML = '<div style="padding:32px;text-align:center;color:var(--muted);">No events logged yet. Start a session and tap the quick-log buttons above.</div>';
+      return;
+    }
+    const rows = events.slice(-30).reverse().map(e => `
+      <tr>
+        <td>${new Date(e.ts).toLocaleTimeString()}</td>
+        <td>${e.student_id || e.studentId || '—'}</td>
+        <td>${e.type || '—'}</td>
+        <td><span class="status-pill status-${e.rule_status || e.ruleStatus || 'neutral'}">${e.rule_status || e.ruleStatus || '—'}</span></td>
+        <td style="color:var(--muted)">${e.notes || ''}</td>
+      </tr>`).join('');
+    document.getElementById('eventTableBody').innerHTML = `
+      <table class="event-table">
+        <thead><tr><th>Time</th><th>Student</th><th>Event</th><th>Status</th><th>Notes</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>`;
+  }
+
+  function appendEventRow(e) {
+    const body = document.getElementById('eventTableBody');
+    const table = body.querySelector('table');
+    if (!table) { renderEventTable([e]); return; }
+    const tbody = table.querySelector('tbody');
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${new Date(e.ts).toLocaleTimeString()}</td>
+      <td>${e.studentId || '—'}</td>
+      <td>${e.type}</td>
+      <td><span class="status-pill status-${e.ruleStatus}">${e.ruleStatus}</span></td>
+      <td></td>`;
+    tbody.insertBefore(tr, tbody.firstChild);
+  }
+
+  // ── Roster ────────────────────────────────────────────
+  function getRoster() { return JSON.parse(localStorage.getItem(STORE.roster) || '["Mai Trâm","Hương","Quý"]'); }
+  function saveRoster(r) { localStorage.setItem(STORE.roster, JSON.stringify(r)); }
+
+  function addStudent() {
+    const name = document.getElementById('newStudentInput').value.trim();
+    if (!name) return;
+    const roster = getRoster();
+    if (!roster.includes(name)) { roster.push(name); saveRoster(roster); }
+    document.getElementById('newStudentInput').value = '';
+    renderRoster();
+    loadRosterChips();
+  }
+
+  function removeStudent(name) {
+    saveRoster(getRoster().filter(n => n !== name));
+    renderRoster();
+    loadRosterChips();
+  }
+
+  function renderRoster() {
+    const el = document.getElementById('rosterChips');
+    el.innerHTML = '';
+    getRoster().forEach(name => {
+      const chip = document.createElement('div');
+      chip.className = 'chip';
+      chip.textContent = `${name} ✕`;
+      chip.onclick = () => { if (confirm(`Remove ${name}?`)) removeStudent(name); };
+      el.appendChild(chip);
+    });
+  }
+
+  function loadRosterChips() {
+    const container = document.getElementById('studentChips');
+    container.innerHTML = '';
+    getRoster().forEach(name => {
+      const chip = document.createElement('div');
+      chip.className = 'chip';
+      chip.textContent = name;
+      chip.onclick = () => selectStudent(chip, name);
+      container.appendChild(chip);
+    });
+    const add = document.createElement('div');
+    add.className = 'chip';
+    add.textContent = '+ Add';
+    add.onclick = () => selectStudent(add, '');
+    container.appendChild(add);
+  }
+
+  // ── Obi health check ─────────────────────────────────
+  async function checkObiHealth() {
+    try {
+      const data = await apiJson('/api/health');
+      document.getElementById('logObiStatus').textContent = data.ok ? `v${data.version} ✓` : 'Error';
+      document.getElementById('logObiStatus').style.color = data.ok ? 'var(--green)' : 'var(--danger)';
+      document.getElementById('logObiSub').textContent = `${data.coach || 'Obi'} · ${data.routes} routes`;
+    } catch {
+      document.getElementById('logObiStatus').textContent = 'Offline';
+      document.getElementById('logObiStatus').style.color = 'var(--muted)';
+      document.getElementById('logObiSub').textContent = 'Worker not yet deployed';
+    }
+  }
+
+  // ── Utils ─────────────────────────────────────────────
+  function showErr(msg) {
+    const el = document.getElementById('checkErr');
+    el.textContent = msg; el.classList.add('show');
+  }
+  function hideErr() { document.getElementById('checkErr').classList.remove('show'); }
+  </script>
+</body>
+</html>

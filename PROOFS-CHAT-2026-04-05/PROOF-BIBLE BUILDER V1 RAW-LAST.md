@@ -1,0 +1,5 @@
+﻿# PROOF - BIBLE BUILDER V1 RAW LAST
+
+Source: D:\phoenix-chat-logs\CHAT-LOGS-ONLY\BIBLE BUILDER V1 RAW.txt
+
+

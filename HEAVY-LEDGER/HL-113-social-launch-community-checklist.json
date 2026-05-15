@@ -1,0 +1,104 @@
+{
+  "hl_id": "HL-113",
+  "source_file": "2026-04-01-social-launch-community-checklist-t108h.md",
+  "session_tag": "social-launch-community-checklist-t108h",
+  "session_date": "2026-04-01",
+  "signal_density": "MEDIUM",
+  "signal_counts": { "red": 0, "yellow": 1, "green": 6 },
+  "tier": "EXECUTION",
+  "quote_count": 0,
+  "decision_count": 1,
+  "correction_count": 0,
+  "principle_count": 5,
+  "wave": 6,
+  "wave_position": 108,
+  "run_converted": 245,
+  "conversion_date": "2026-04-03T18:20:00+07:00",
+
+  "decisions": [
+    {
+      "id": "D113-01",
+      "decision": "Social/community launch requires manual Michael execution on Roblox Creator Dashboard, Discord, and Roblox Group — agent produces checklist only",
+      "impact": "HIGH",
+      "canon_affected": ["LAUNCH_CHECKLIST", "INCUBATOR_APPLICATION"],
+      "law_origin": "MANUAL_ONLY→checklist_provided_as_execution_guide"
+    }
+  ],
+
+  "principles": [
+    {
+      "id": "P113-01",
+      "text": "Every checklist item must be concrete, copy-pasteable, or link to an existing artifact",
+      "interpretation": "No ambiguity in action items. Each references exact paths, commits, or UI locations.",
+      "law_refs": ["EXECUTION_CLARITY"]
+    },
+    {
+      "id": "P113-02",
+      "text": "Social/community prep is Michael-only execution — no code patch needed",
+      "interpretation": "Roblox Dashboard, Discord server, Roblox Group creation require human login and manual actions.",
+      "law_refs": ["MANUAL_EXECUTION_RECOGNIZED"]
+    },
+    {
+      "id": "P113-03",
+      "text": "Pre-write content before launch day — draft during T-108h, post on day 0",
+      "interpretation": "Launch day is not the time to compose announcements. Pre-write DevForum post, Discord messages, group shouts.",
+      "law_refs": ["ANTICIPATE_DONT_REACT"]
+    },
+    {
+      "id": "P113-04",
+      "text": "First 48 hours is the engagement playbook — execute E1-E7 in sequence",
+      "interpretation": "Hour 0: flip public + post. Hour 1: play. Hour 2-6: monitor bug reports. Hour 12: update. Hour 24: thank you. Hour 48: balance patch.",
+      "law_refs": ["EXECUTION_SEQUENCE"]
+    },
+    {
+      "id": "P113-05",
+      "text": " incubator application tie-in needs live game URL, player metrics, and community size",
+      "interpretation": "Before submitting Apr 6, have game live, track first 48h player count, count group + Discord members.",
+      "law_refs": ["INCUBATOR_DEADLINE"]
+    }
+  ],
+
+  "actions": [
+    {
+      "section": "A",
+      "area": "Roblox Game Page Setup",
+      "items": ["Upload game icon (512×512)", "Upload 3 thumbnails", "Paste store listing copy", "Set genre → Adventure + Comedy", "Set max players → 30", "Enable voice chat", "Set game access → Private", "Add social links"]
+    },
+    {
+      "section": "B",
+      "area": "Roblox Group Setup",
+      "items": ["Create group", "Upload group icon", "Write group description", "Set public join", "Create roles", "Publish under group", "Create group store item"]
+    },
+    {
+      "section": "C",
+      "area": "Discord Server",
+      "items": ["Create server", "Create channels", "Set icon", "Create permanent invite", "Post welcome message", "Add bot", "Set up webhook"]
+    },
+    {
+      "section": "D",
+      "area": "Launch Day Content",
+      "items": ["Draft DevForum post", "Draft Discord announcement", "Draft group shout", "Create promo codes"]
+    },
+    {
+      "section": "E",
+      "area": "First 48 Hours",
+      "items": ["Hour 0: Flip public + post", "Hour 1: Play + clip", "Hour 2-6: Monitor bugs", "Hour 12: 12h update", "Hour 24: Thank you post", "Hour 48: Balance patch"]
+    },
+    {
+      "section": "F",
+      "area": "Incubator Application Tie-in",
+      "items": ["Reference live game URL", "Include player metrics", "Show community size"]
+    }
+  ],
+
+  "emotional_signal": "PLANNED_EXECUTION→checklist_delivery→manual_actions_clear",
+  "session_context": "Social Launch & Community Readiness Checklist at T-108h. Game code complete (41 Lua modules). 21 Product IDs blocker. Store listing copy, QA test plan, monitoring plan all done. Missing: social/community prep for launch day. Checklist covers Roblox game page (A), Roblox group (B), Discord (C), launch day content (D), 48hr engagement playbook (E), incubator tie-in (F). All Michael-only execution items.",
+  "cross_references": {
+    "related_hl": ["HL-112", "HL-114"],
+    "canon_pages": ["CANON/TRAIN-67/DOCS/StoreListingCopy-V1.md"],
+    "products": ["survive_a_brainrot", "roblox"],
+    "repos_mined": []
+  },
+
+  "fingerprint": "2026-04-01:social-launch-community-checklist:0q:1d:0c:MEDIUM"
+}

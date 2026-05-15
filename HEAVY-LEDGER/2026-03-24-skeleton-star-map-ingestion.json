@@ -1,0 +1,97 @@
+{
+  "hl_id": "HL-099",
+  "source_file": "CANON/REINCARNATION/2026-03-24-skeleton-star-map-ingestion.md",
+  "source_sha": "0290ee263be8a28fd6ad468856c56b61917f3903",
+  "category": "reincarnation_session",
+  "date": "2026-03-24",
+  "time_approx": "20:19",
+  "timezone": "Asia/Bangkok",
+  "session_tag": "skeleton-star-map-ingestion",
+  "signal_density": "MEDIUM",
+  "mode": "extract",
+  "thread": "OB1 Chat (Skeleton Star Map Ingestion)",
+  "quotes": [
+    {
+      "id": "Q1",
+      "text": "Random Skeleton Stuff, see if useful, leave what isn't, super Saiyan mode activated, update notion and ultimate Hobbs-Lab repo accordingly, this is mostly DNA it looks like, but make sure to capture any SOUL verbatim",
+      "priority": "RED",
+      "tags": ["triage_directive", "dual_publish", "verbatim_first", "super_saiyan"]
+    },
+    {
+      "id": "Q2",
+      "text": "reincarnate",
+      "priority": "GREEN",
+      "tags": ["command_word", "session_close"]
+    }
+  ],
+  "decisions": [
+    {
+      "id": "D1",
+      "decision": "Gemini Skeleton Star Map dump (2026-03-14) should be triaged — keep useful DNA, leave noise behind",
+      "impact": "Canon triage methodology established — external dumps get filtered not bulk-imported",
+      "canon_pages_affected": ["CANON/SKELETON-STAR-MAP-PRIME-LAWS-100-LAYER-FOUNDATION-2026-03-14.md"]
+    },
+    {
+      "id": "D2",
+      "decision": "Dual-publish to Notion (Phoenix HQ) + GitHub (CANON/) as standard",
+      "impact": "Reinforces L27 DUAL_PUBLISH_MANDATORY",
+      "canon_pages_affected": ["SSM_instructions", "all_new_artifacts"]
+    },
+    {
+      "id": "D3",
+      "decision": "All Soul DNA content must be preserved verbatim",
+      "impact": "Reinforces L03 NO_PARAPHRASE_SACRED and L25 VERBATIM_FIRST",
+      "canon_pages_affected": ["SSM_instructions"]
+    }
+  ],
+  "corrections": [],
+  "new_principles": [],
+  "emotional_signal": "neutral",
+  "open_questions": [],
+  "unfinished_actions": [],
+  "artifacts_created": [
+    {
+      "name": "Skeleton Star Map Dump — Prime Laws, 100-Layer Foundation & Architecture (Gemini 2026-03-14)",
+      "notion_url": "Phoenix HQ child page",
+      "github_path": "CANON/SKELETON-STAR-MAP-PRIME-LAWS-100-LAYER-FOUNDATION-2026-03-14.md",
+      "commit_sha": "cbfcc0d"
+    }
+  ],
+  "execution_summary": "Triaged ~15K-char Gemini dump: separated verbatim Soul DNA (Prime Laws, Root Law, 100-Layer Foundation, high-signal layers, 10 ledger event types) from structural analysis and noise. Created Notion page + GitHub markdown. Core signal: triage directive + verbatim-first reinforcement.",
+  "key_concepts": [
+    {
+      "concept": "External Dump Triage Protocol",
+      "description": "When Michael brings external AI session dumps, filter for Soul DNA signal, discard noise, dual-publish the useful content",
+      "status": "ACTIVE"
+    },
+    {
+      "concept": "Prime Laws",
+      "description": "Foundational law system extracted from Gemini Skeleton Star Map — part of 100-Layer Foundation architecture",
+      "status": "ACTIVE"
+    },
+    {
+      "concept": "100-Layer Foundation",
+      "description": "Architecture concept from Skeleton Star Map — layered system design pattern",
+      "status": "ACTIVE"
+    }
+  ],
+  "cross_references": [
+    "CANON/SKELETON-STAR-MAP-PRIME-LAWS-100-LAYER-FOUNDATION-2026-03-14.md",
+    "SSM V7 §2 L03 NO_PARAPHRASE_SACRED",
+    "SSM V7 §2 L25 VERBATIM_FIRST",
+    "SSM V7 §2 L27 DUAL_PUBLISH_MANDATORY"
+  ],
+  "canon_guardrails": {
+    "verbatim_preserved": true,
+    "no_fabrication": true,
+    "source_verified": true,
+    "dual_published": true,
+    "dedup_checked": true
+  },
+  "conversion_metadata": {
+    "converter": "OB1_pulse_run_245",
+    "converted_at": "2026-04-01T21:00:00+07:00",
+    "wave": 8,
+    "pipeline_position": 15
+  }
+}

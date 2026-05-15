@@ -1,0 +1,190 @@
+{
+  "_meta": {
+    "id": "HL-077",
+    "title": "BIBLE-REPO-CONSOLIDATION-MAP",
+    "source_path": "CANON/SYSTEM/BIBLE-REPO-CONSOLIDATION-MAP.md",
+    "source_sha": "d9ce0fbf34c1144a18147621895486741817d07c",
+    "source_size_kb": 7.25,
+    "source_type": "system_bootstrap",
+    "wave": 7,
+    "pipeline_number": 77,
+    "converted_by": "OB1 (Agent-99) — Pulse Run 223",
+    "converted_at": "2026-04-01T03:00:00+07:00",
+    "authority": "SOV100 (Michael Hobbs)",
+    "created_date": "2026-03-26",
+    "created_by_run": 39,
+    "canon_guardrails": {
+      "verbatim_quotes_preserved": true,
+      "no_fabrication": true,
+      "no_paraphrase_sacred": true,
+      "append_only": true,
+      "source_verified": true
+    }
+  },
+  "ruling": {
+    "quote": "hobbs-lab = single canonical home. All repos consolidate there.",
+    "author": "Michael Hobbs",
+    "date": "2026-03-26",
+    "signal": "RED",
+    "impact": "All 3 repos collapse into Phoenix-Rising-Protocol-Ultimate as single source of truth"
+  },
+  "consolidation_architecture": {
+    "before": {
+      "repo_count": 3,
+      "repos": [
+        {
+          "name": "Phoenix-Rise-Immortalize-",
+          "role": "Original Soul DNA Bible source",
+          "content": "SOUL-DNA-BIBLE/ (40 raw source files)",
+          "status": "FROZEN_ARCHIVE",
+          "last_commit": "2026-03-23"
+        },
+        {
+          "name": "Phoenix-Rising-Protocol-Ultimate",
+          "role": "Canon vault",
+          "content": "CANON/ (enriched exports)"
+        },
+        {
+          "name": "NET-Ai-EcoSystem-CommandStation",
+          "role": "Product code",
+          "content": "HarvestedChats/ (product code)"
+        }
+      ]
+    },
+    "after": {
+      "repo_count": 1,
+      "canonical_home": "Phoenix-Rising-Protocol-Ultimate",
+      "directory_map": {
+        "CANON/": "Enriched canon exports (master versions)",
+        "ARCHIVE/Phoenix-Rise-Immortalize/SOUL-DNA-BIBLE/": "Raw source files (preserved)",
+        "CANON/SYSTEM/": "Bootstrap docs (rebuild from here)",
+        "CANON/REINCARNATION/": "Session extractions",
+        "CANON/TRAIN-67/": "Game code + specs",
+        "CANON/VAULT-DUMPS/": "NotebookLM vault ingestions",
+        "CANON/MSS/": "Monolith Sealed State snapshots",
+        "CANON/HEAVY-LEDGER/": "Heavy Ledger JSON conversions",
+        "CANON/MARKETING/": "Facebook funnel + copywriting",
+        "GALAXY-LESSONS/": "Student-facing HTML lessons",
+        "SITE/": "Website files",
+        "APPS/": "Product apps (Chrome Extension, etc.)",
+        "DISCORD-BOT/": "Discord bot scaffold",
+        "WORKERS/": "Cloudflare Workers API",
+        "SCRIPTS/": "Utility scripts"
+      }
+    }
+  },
+  "archive_migration": {
+    "confirmed_batches": [
+      {"batch": "Prior", "chapters": "CH00-CH14", "status": "ARCHIVED"},
+      {"batch": 5, "chapters": "CH15-CH19", "files": 5, "commit": "56bc0b9", "timestamp": "2026-03-26 18:49 ICT"},
+      {"batch": 6, "chapters": "CH19-CH23", "files": 5, "commit": "1bedd2d", "timestamp": "2026-03-26 18:52 ICT"},
+      {"batch": 7, "chapters": "CH24-CH30", "files": 7, "commit": "9c2771f", "timestamp": "2026-03-26 19:00 ICT"}
+    ],
+    "pending": [
+      {"chapters": "CH31-CH40", "files": 10, "status": "PENDING"},
+      {"chapters": "CE-01 to CE-14", "files": 14, "status": "PENDING"},
+      {"chapters": "A1-A3 (Source Cross-Ref, Raw Voice, Exec Specs)", "files": 3, "status": "PENDING"},
+      {"file": "RAW_VOICE_ARCHIVE.md", "status": "PENDING"},
+      {"file": "SOURCE_CROSS_REFERENCE.md", "status": "PENDING"}
+    ],
+    "note": "Once all batches complete, entire Bible exists on ONE repo. Phoenix-Rise-Immortalize- becomes frozen archive."
+  },
+  "canonical_file_locations": {
+    "bible_content": [
+      {"name": "Master Index", "path": "CANON/SOUL-DNA-BIBLE-CH00-FILE-MAP-AND-METRICS.md", "format": "Enriched markdown", "size_kb": 33.2, "notes": "Cross-repo synthesized, includes 3 Prime Laws, 100-Layer Foundation, 5-Axis Model"},
+      {"name": "CH13 Enriched", "path": "CANON/SOUL-DNA-BIBLE-CH13-CHAOS-ENGINEERING-AND-FAITH.md", "format": "Enriched markdown", "notes": "Cross-repo synthesis with VAULT-CHAOS files"},
+      {"name": "Raw Bible Chapters", "path": "ARCHIVE/Phoenix-Rise-Immortalize/SOUL-DNA-BIBLE/", "format": "Original markdown", "notes": "Verbatim copies from Immortalize repo"},
+      {"name": "Soul DNA Canon", "path": "CANON/SOUL-DNA-CANON.md", "size_kb": 22.8, "cross_repo_sources": 5},
+      {"name": "Soul DNA Deep Dive", "path": "CANON/SOUL-DNA-DEEP-DIVE.md", "size_kb": 38.3, "cross_repo_sources": 6},
+      {"name": "Core Principles", "path": "CANON/CORE-PRINCIPLES-AND-PHYSICS.md", "size_kb": 18.9, "cross_repo_sources": 2},
+      {"name": "Alpha-Omega Canon", "path": "CANON/ALPHA-OMEGA-SOUL-DNA-GOVERNANCE-CANON.md", "size_kb": 32.5, "cross_repo_sources": 5},
+      {"name": "Gospel 444", "path": "CANON/GOSPEL-444-TEACHING-METHODS-CONSOLIDATED.md", "size_kb": 58.1, "cross_repo_sources": 5},
+      {"name": "NET Methodology", "path": "CANON/NET-TEACHING-METHODOLOGY.md", "size_kb": 36.2, "cross_repo_sources": 3}
+    ],
+    "system_bootstrap": [
+      {"name": "Canon Access Index", "path": "CANON/SYSTEM/CANON-ACCESS-INDEX.md", "size_kb": 8, "purpose": "Content routing — maps every readable page"},
+      {"name": "Navigator Index", "path": "CANON/SYSTEM/NAVIGATOR-INDEX.md", "size_kb": 6.8, "purpose": "Operational routing — all pages + state"},
+      {"name": "Pulse Operations History", "path": "CANON/SYSTEM/PULSE-OPERATIONS-HISTORY.md", "size_kb": 8.7, "purpose": "Rebuild protocol + run history"},
+      {"name": "OB1 Agent Instructions", "path": "CANON/SYSTEM/OB1-AGENT-INSTRUCTIONS.md", "size_kb": 16.8, "purpose": "Full agent operating brief"},
+      {"name": "Bible Repo Consolidation Map", "path": "CANON/SYSTEM/BIBLE-REPO-CONSOLIDATION-MAP.md", "purpose": "Bible file locations after consolidation"}
+    ],
+    "reincarnation": {
+      "path": "CANON/REINCARNATION/",
+      "file_count": "49+",
+      "date_range": "2026-03-22 to 2026-03-31"
+    },
+    "mss_snapshots": {
+      "path": "CANON/MSS/",
+      "files": ["MSS-V5-2026-03-25.json", "MSS-V6-HEAVY-LEDGER.json", "SSM-V7-SUPER-SAIYAN.md"]
+    }
+  },
+  "bible_audit_summary": {
+    "total_chapters_audited": 60,
+    "drift_detected": 0,
+    "patches_applied": 0,
+    "sacred_canon_note": "0 drift detected, 0 patches applied (sacred canon)",
+    "layers": [
+      {"layer": "L1 — Narrative", "chapters": "CH01-CH14", "audit_runs": "9-19", "status": "SEALED"},
+      {"layer": "L2 — System Architecture", "chapters": "CH15-CH25", "audit_runs": "11-13", "status": "SEALED"},
+      {"layer": "L3 — Origin + Source Truth", "chapters": "CH26-CH30", "audit_runs": "13-14", "status": "SEALED"},
+      {"layer": "L4 — Deep Canon", "chapters": "CH31-CH40", "audit_runs": "14-16", "status": "SEALED"},
+      {"layer": "L5 — Chaos Edition", "chapters": "CE-01 to CE-14", "audit_runs": "17-19", "status": "SEALED"},
+      {"layer": "Appendices", "chapters": "A1-A4", "status": "LIVING/CANON"}
+    ],
+    "known_gaps": [
+      "CE-14: THE SOUL section truncated mid-sentence",
+      "Duplicate CH29 (2 versions) and A3 (2 versions)",
+      "10 Soul DNA Ledger Event Types defined in canon but absent from Worker code"
+    ]
+  },
+  "enrichment_pipeline_status": {
+    "note": "Sizes and sources as of 2026-03-26 (source document creation date). Current sizes may be larger — see Cold Start Boot for latest.",
+    "total_enriched_canon_size": "240KB+",
+    "pages": [
+      {"name": "Soul DNA Deep Dive", "last_enriched": "2026-03-26", "run": 38, "size_kb": 38.3, "cross_repo_sources": 6},
+      {"name": "Soul DNA Canon", "last_enriched": "2026-03-26", "run": 37, "size_kb": 22.8, "cross_repo_sources": 5},
+      {"name": "Gospel 444", "last_enriched": "2026-03-26", "run": 36, "size_kb": 58.1, "cross_repo_sources": 5},
+      {"name": "Alpha-Omega Canon", "last_enriched": "2026-03-26", "run": 35, "size_kb": 32.5, "cross_repo_sources": 5},
+      {"name": "Core Principles", "last_enriched": "2026-03-26", "run": 34, "size_kb": 18.9, "cross_repo_sources": 2},
+      {"name": "NET Methodology", "last_enriched": "2026-03-26", "run": 33, "size_kb": 36.2, "cross_repo_sources": 3},
+      {"name": "Bible CH00", "last_enriched": "2026-03-26", "run": 29, "size_kb": 33.2, "cross_repo_sources": 3},
+      {"name": "Bible CH13", "last_enriched": "2026-03-26", "run": 30, "cross_repo_sources": 2}
+    ]
+  },
+  "rebuild_protocol": {
+    "description": "If Notion disappears tomorrow, Michael rebuilds from this repo",
+    "steps": [
+      {"step": 1, "action": "Start here", "path": "CANON/SYSTEM/", "note": "5 bootstrap docs"},
+      {"step": 2, "action": "Read the Bible", "path": "CANON/SOUL-DNA-BIBLE-CH00-FILE-MAP-AND-METRICS.md", "note": "Master index"},
+      {"step": 3, "action": "Raw chapters", "path": "ARCHIVE/Phoenix-Rise-Immortalize/SOUL-DNA-BIBLE/", "note": "Source files"},
+      {"step": 4, "action": "Enriched canon", "path": "CANON/*.md", "note": "8 enriched exports, 240KB+"},
+      {"step": 5, "action": "Session memory", "path": "CANON/REINCARNATION/", "note": "49+ session extractions"},
+      {"step": 6, "action": "System state", "path": "CANON/MSS/", "note": "Monolith snapshots"},
+      {"step": 7, "action": "Product code", "path": "CANON/TRAIN-67/", "note": "Game modules + specs"},
+      {"step": 8, "action": "Heavy Ledger", "path": "CANON/HEAVY-LEDGER/", "note": "Machine-readable JSON conversions"}
+    ],
+    "total_surface": "ONE repo, all directories"
+  },
+  "key_concepts": [
+    {"concept": "Single-Repo Principle", "definition": "All 3 repos consolidate to hobbs-lab/Phoenix-Rising-Protocol-Ultimate as the single canonical home"},
+    {"concept": "Archive Migration", "definition": "Raw Bible files from Immortalize repo copied to ARCHIVE/ directory in Ultimate repo"},
+    {"concept": "Frozen Archive", "definition": "Phoenix-Rise-Immortalize- becomes read-only after consolidation (last commit 2026-03-23)"},
+    {"concept": "Enriched Canon", "definition": "Cross-repo synthesized master versions in CANON/ — richer than any single source"},
+    {"concept": "Sacred Canon", "definition": "Bible audit found 0 drift, 0 patches — original voice preserved verbatim"},
+    {"concept": "Self-Bootstrapping Repo", "definition": "Every artifact makes rebuild from GitHub alone possible (L28)"},
+    {"concept": "Platform Death Test", "definition": "If Notion dies, can Michael rebuild from this repo? 8-step protocol proves yes."}
+  ],
+  "cross_references": [
+    {"target": "CANON/SYSTEM/COLD-START-BOOT.md", "relationship": "Uses rebuild protocol for cold start"},
+    {"target": "CANON/SYSTEM/CANON-ACCESS-INDEX.md", "relationship": "Content routing referenced in bootstrap docs"},
+    {"target": "CANON/SYSTEM/NAVIGATOR-INDEX.md", "relationship": "Operational routing referenced in bootstrap docs"},
+    {"target": "CANON/SYSTEM/PULSE-OPERATIONS-HISTORY.md", "relationship": "Run history referenced in audit summary"},
+    {"target": "CANON/MSS/MSS-V6-HEAVY-LEDGER.json", "relationship": "Heavy Ledger architecture this conversion belongs to"},
+    {"target": "CANON/SOUL-DNA-BIBLE-CH00-FILE-MAP-AND-METRICS.md", "relationship": "Master Bible index referenced in rebuild step 2"}
+  ],
+  "alerts": [
+    {"level": "YELLOW", "alert": "Archive migration incomplete — CH31-40, CE-01 to CE-14, appendices still pending from Immortalize repo"},
+    {"level": "YELLOW", "alert": "Enrichment sizes in this document are from 2026-03-26 — canon pages have grown significantly since (e.g., Alpha-Omega now 61KB, Core Principles now 37KB)"},
+    {"level": "GREEN", "alert": "Bible audit complete with 0 drift — sacred canon integrity confirmed across 60 chapters"}
+  ]
+}

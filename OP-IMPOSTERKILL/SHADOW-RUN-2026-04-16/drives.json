@@ -1,0 +1,20 @@
+[
+  {
+    "Name": "C",
+    "Root": "C:\\",
+    "Used": 220284788736,
+    "Free": 46526464
+  },
+  {
+    "Name": "D",
+    "Root": "D:\\",
+    "Used": 136083517440,
+    "Free": 126059429888
+  },
+  {
+    "Name": "Temp",
+    "Root": "C:\\Users\\mrmic\\AppData\\Local\\Temp\\",
+    "Used": 220284788736,
+    "Free": 46526464
+  }
+]

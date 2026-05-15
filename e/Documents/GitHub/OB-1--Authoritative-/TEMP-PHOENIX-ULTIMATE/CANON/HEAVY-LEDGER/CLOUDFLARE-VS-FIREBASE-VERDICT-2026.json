@@ -1,0 +1,155 @@
+{
+  "_meta": {
+    "pipeline_id": 64,
+    "source_file": "CANON/CLOUDFLARE-VS-FIREBASE-VERDICT-2026.md",
+    "source_sha": "c080e647a709a6a3bb15f697078921fa49dcc2f5",
+    "source_type": "canon_verdict",
+    "source_size_bytes": 6800,
+    "converted_by": "OB1_PULSE_RUN_211",
+    "converted_at": "2026-03-31T20:30:00+07:00",
+    "wave": 5,
+    "schema_version": "heavy-ledger-v1"
+  },
+  "title": "Cloudflare vs Firebase — Strategic Verdict",
+  "decision_date": "2026-03-28",
+  "decided_by": "Michael Hobbs (SOV100) + OB1 analysis",
+  "status": "DECIDED",
+  "verdict": "Cloudflare is the stack. Firebase is backup/dormant.",
+  "artifact_class": "VAULT",
+  "core_decision": {
+    "statement": "Build EVERYTHING on Cloudflare. One stack. One bill. One dashboard. Keep Firebase account alive (it's free) but don't build on it.",
+    "rationale": "Firebase is redundant. Cloudflare's $5/mo paid tier already covers every capability Firebase offers on the free Spark plan, with higher limits and better architecture for OBI.",
+    "impact": "SYSTEM_WIDE — eliminates dual-platform complexity, consolidates to single deploy pipeline"
+  },
+  "head_to_head": [
+    {
+      "category": "Database",
+      "cloudflare": "D1 (SQLite relational) — 5M reads/day, 100K writes/day, 5GB",
+      "firebase": "Firestore (NoSQL document) — 50K reads/day, 20K writes/day, 1GB",
+      "winner": "Cloudflare",
+      "reason": "100x read capacity, SQL is better for student progress tracking, lesson analytics, teacher dashboards"
+    },
+    {
+      "category": "Compute",
+      "cloudflare": "Workers — 10M req/mo, zero cold starts, 300+ edge cities, V8 isolates",
+      "firebase": "Functions — 125K/mo, cold starts, single region, Node.js only",
+      "winner": "Cloudflare",
+      "reason": "80x capacity, zero cold starts, edge-native. OBI already runs on Workers."
+    },
+    {
+      "category": "Auth",
+      "cloudflare": "OAuth2 in Workers (~50 LOC) + Access (Zero Trust, free 50 users)",
+      "firebase": "Auth SDK drop-in UI widget",
+      "winner": "Cloudflare",
+      "reason": "Slightly more code but no SDK dependency. Firebase Auth is the ONE genuinely easier thing but not worth second platform."
+    },
+    {
+      "category": "Hosting",
+      "cloudflare": "Pages — unlimited sites, 500 builds/mo free, 300+ edge nodes",
+      "firebase": "Hosting — 1 per project, 1 build/day on Spark",
+      "winner": "Cloudflare",
+      "reason": "Already hosts naturalenglishtraining.net"
+    },
+    {
+      "category": "Storage",
+      "cloudflare": "R2 — 10GB, ZERO egress ever",
+      "firebase": "Storage — 5GB, egress on Blaze ($0.12/GB)",
+      "winner": "Cloudflare",
+      "reason": "Zero egress is a permanent cost advantage at scale"
+    },
+    {
+      "category": "AI",
+      "cloudflare": "AI Gateway (free), Workers AI (10K neurons/day), Vectorize (30M dims/mo), Agents SDK",
+      "firebase": "Nothing",
+      "winner": "Cloudflare",
+      "reason": "Not even a contest. Firebase has zero AI infrastructure."
+    },
+    {
+      "category": "Security",
+      "cloudflare": "Turnstile (free forever), DDoS (enterprise-grade), WAF, Zero Trust (50 users free)",
+      "firebase": "Basic DDoS only",
+      "winner": "Cloudflare",
+      "reason": "Complete security stack included"
+    }
+  ],
+  "unique_cloudflare_capabilities": [
+    {"name": "Durable Objects", "use": "Persistent stateful sessions, conversation memory", "cost": "Included"},
+    {"name": "Workflows", "use": "Durable multi-step onboarding flows, lesson chains", "cost": "Included"},
+    {"name": "Queues", "use": "Async audio processing pipeline", "cost": "Included"},
+    {"name": "Cron Triggers", "use": "Scheduled reminders, health checks", "cost": "Included"},
+    {"name": "Email Routing", "use": "Route student emails, support inbox", "cost": "Free"},
+    {"name": "Analytics Engine", "use": "Custom student usage metrics", "cost": "Included"},
+    {"name": "Browser Rendering", "use": "Headless Chrome for lesson previews", "cost": "10 min/day free"},
+    {"name": "Tail Workers", "use": "Logging pipeline, audit trail", "cost": "Included"}
+  ],
+  "cost_projection": {
+    "0_to_100_students": "$5/mo (Cloudflare only) vs $5/mo + complexity tax (dual)",
+    "100_to_1000_students": "$5-10/mo vs $5-10/mo + Firebase dashboard + SDK dependency",
+    "1000_to_10000_students": "$10-50/mo vs $10-50/mo + Firebase Blaze reads",
+    "operational_overhead": "1 dashboard vs 2 dashboards, 2 CLIs, 2 deploy pipelines, 2 auth systems",
+    "key_insight": "Firebase adds complexity for zero additional capability"
+  },
+  "firebase_exceptions": {
+    "when_firebase_makes_sense": [
+      "Need Firebase Auth drop-in UI for rapid prototyping (OBI is past prototyping)",
+      "Need Firestore real-time sync for collaborative feature (D1 + Durable Objects handles this)",
+      "Need Firebase Cloud Messaging for push notifications (Chrome Extension handles natively)",
+      "Not already on Cloudflare (already paid and active)"
+    ],
+    "applies_now": false
+  },
+  "final_architecture": {
+    "primary_platform": "Cloudflare ($5/mo)",
+    "services": [
+      "Workers — OBI runtime",
+      "D1 — Student data, lesson progress, teacher dashboard",
+      "Durable Objects — Session state, conversation memory",
+      "KV — Config, feature flags, session tokens",
+      "R2 — Audio, media, lesson assets (ZERO egress)",
+      "Pages — Frontend (naturalenglishtraining.com)",
+      "AI Gateway — DeepSeek caching + fallback",
+      "Vectorize — RAG over lesson content",
+      "Agents SDK — Multi-agent OBI (future)",
+      "Turnstile — Bot protection (free forever)",
+      "Cron Triggers — Reminders, health checks",
+      "DNS + CDN + WAF — Already active"
+    ],
+    "chrome_extension": {
+      "cost": "$0",
+      "components": ["Gemini Nano (on-device AI)", "Chrome Enterprise (silent install)", "Backend fallback to Workers"]
+    },
+    "firebase": {
+      "status": "DORMANT",
+      "action": "Keep account, don't build",
+      "reserved_for": "Emergency backup, future real-time sync if needed"
+    }
+  },
+  "verbatim_quotes": [
+    {
+      "text": "Build EVERYTHING on Cloudflare. One stack. One bill. One dashboard. Keep Firebase account alive (it's free) but don't build on it.",
+      "signal": "RED",
+      "type": "decision"
+    },
+    {
+      "text": "Firebase adds complexity for zero additional capability.",
+      "signal": "RED",
+      "type": "principle"
+    },
+    {
+      "text": "Zero egress is a permanent cost advantage at scale.",
+      "signal": "YELLOW",
+      "type": "insight"
+    }
+  ],
+  "cross_references": [
+    "CANON/HEAVY-LEDGER/CLOUDFLARE-ECOSYSTEM-MAP-2026.json",
+    "CANON/HEAVY-LEDGER/FIREBASE-CHROME-EXTENSION-CONSOLIDATION.json"
+  ],
+  "canon_guardrails": {
+    "no_fabrication": "PASS — all data from source verdict",
+    "no_drift": "PASS — decision preserved verbatim",
+    "no_paraphrase_sacred": "PASS — 3 verbatim quotes extracted",
+    "no_speculation": "PASS — comparison data from official platform specs",
+    "no_overwrite_canon": "PASS — new artifact, no overwrite"
+  }
+}

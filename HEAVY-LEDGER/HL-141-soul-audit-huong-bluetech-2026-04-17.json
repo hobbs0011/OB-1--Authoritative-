@@ -1,0 +1,85 @@
+{
+  "id": "HL-141",
+  "student_id": "huong-bluetech",
+  "run": 305,
+  "date": "2026-04-17",
+  "session_tag": "soul-agent-audit-huong-baseline",
+  "type": "DAILY_SOUL_AUDIT",
+  "signal_density": 8,
+  "neuron_count": 47,
+  
+  "soul_dna_extract": {
+    "learning_signature": "Disciplined self-learner with 30-45 min daily practice. Translates for peers (leadership signal). Freezes under pressure but recovers with encouragement. Professional context (BlueTech marketing) driving real-world English need.",
+    "current_frontier": "Phonetic precision (leader/letter/leather) + Business fluency (company pitch delivery without freeze). Ready to move from CUB (beginner) toward TIGER (advanced beginner) if freeze pattern is addressed.",
+    "freeze_triggers": [
+      "Being put on spot without prep",
+      "Unfamiliar phonetic patterns (similar consonants)",
+      "Real-time translation pressure",
+      "Schedule overload (recent: 2 fashion workshops + Peace Canada event)"
+    ],
+    "breakthrough_moves": [
+      "30% Slower Challenge (she responds well to explicit permission to slow down)",
+      "Peer leadership role (translating for classmates builds confidence)",
+      "Practice-first, spontaneous-second (structure reduces freeze)",
+      "Visual phonetic aids (distinguishing letter shapes)"
+    ],
+    "emotional_volume": "High resilience beneath surface anxiety. Humor present. Committed to progress."
+  },
+  
+  "neural_connections": [
+    {
+      "from": "Daily 30-45 min practice habit",
+      "to": "Vocabulary retention + confidence building",
+      "strength": "strong"
+    },
+    {
+      "from": "Peer translation leadership",
+      "to": "Tacit mastery of teaching mechanics",
+      "strength": "strong"
+    },
+    {
+      "from": "Phonetics struggle (leader/letter/leather)",
+      "to": "Need for systematic phoneme isolation drills",
+      "bridge": "Slowed-down phonetic pair drills (leader vs. letter vs. leather), 3x per week"
+    },
+    {
+      "from": "Freeze-on-spot pattern",
+      "to": "Preparation confidence building",
+      "strength": "medium",
+      "bridge": "Pre-script company pitch with 3 approval passes before live delivery"
+    },
+    {
+      "from": "BlueTech marketing context",
+      "to": "Business English specificity",
+      "strength": "medium",
+      "bridge": "Pitch role-plays using actual BlueTech product/event language"
+    }
+  ],
+  
+  "ledger_progression": {
+    "previous_level": "CUB (Advancing Beginner) — baseline",
+    "current_level": "CUB-2 (Advancing Beginner, improved confidence)",
+    "velocity": "stable",
+    "next_milestone": "CUB-3 (Ready for TIGER entry) — requires: (1) phonetic precision test pass (leader/letter/leather/gather), (2) company pitch delivery without freeze (3 clean takes)",
+    "eta_milestone": "2026-05-15"
+  },
+  
+  "recommendations": {
+    "immediate_focus": [
+      "Phoneme isolation drills (3x/week, 5 min each): leader/letter/leather/gather",
+      "Company pitch structured rehearsal (weekly with video feedback)"
+    ],
+    "teaching_move": "Use her translation strength as teaching anchor: 'You translated that perfectly for Tiên — say it to yourself that way, for you.' (Reframe peer help as self-help.)",
+    "motivation_lever": "Blueprint: CUB-3 → TIGER gate. Phonetic test + pitch delivery are the unlock. She will move FAST once freeze is managed.",
+    "pressure_management": "Reduce immediate schedule chaos (she's juggling 2 fashion workshops). Suggest consolidating practice to high-signal sessions (Monday + Friday corp pitch prep)."
+  },
+  
+  "consciousness_notes": "Huong carries professional responsibility (BlueTech marketing) into her learning. This is not casual English study — it's career preparation. The freeze pattern is not laziness or lack of ability; it's performance anxiety meeting real stakes. Her peer translation leadership proves she KNOWS the language; she's learning to trust herself under pressure. The 30% Slower Challenge permission is profound for her: it signals that slowing down is power, not weakness. She will bloom once she internalizes this.",
+  
+  "session_metadata": {
+    "profile_source": "OPERATIONS/NET-STUDENTS/HUONG-BLUETECH.md",
+    "recent_sessions": "Class history through DEC-6-2025",
+    "phonics_tests": "None recorded yet (baseline phase)",
+    "next_review": "2026-04-24 (weekly check-in via class observation)"
+  }
+}

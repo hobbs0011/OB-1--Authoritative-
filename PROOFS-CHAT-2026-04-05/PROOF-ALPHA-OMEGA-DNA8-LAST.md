@@ -1,0 +1,5 @@
+﻿# PROOF - ALPHA-OMEGA-DNA8 LAST
+
+Source: D:\phoenix-chat-logs\CHAT-LOGS-ONLY\ALPHA-OMEGA-DNA8.txt
+
+

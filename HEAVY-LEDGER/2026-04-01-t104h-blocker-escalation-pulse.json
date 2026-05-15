@@ -1,0 +1,170 @@
+{
+  "metadata": {
+    "source_file": "CANON/REINCARNATION/2026-04-01-t104h-blocker-escalation-pulse.md",
+    "source_sha": "b4a67c7f2d40cf7d3c6ea191f08c99fe0927665c",
+    "converted_by": "OB1 (Agent-99) Pulse Run 221",
+    "converted_at": "2026-04-01T21:30:00+07:00",
+    "artifact_class": "HEAVY_LEDGER",
+    "pipeline": "Wave 8 — CANON/REINCARNATION/",
+    "source_type": "reincarnation_entry",
+    "original_agent": "Anakin (Agent-98)",
+    "original_run": 220,
+    "session_date": "2026-04-01",
+    "signal_density": "HIGH",
+    "genesis_anchor": "Game Bible (Survive a Brainrot)"
+  },
+  "identity": {
+    "title": "T-104h Blocker Escalation Pulse",
+    "session_tag": "blocker-escalation-t104h",
+    "date_range": "2026-04-01T21:36:00+07:00",
+    "mode": "BUILD",
+    "purpose": "Consolidate blocker status at T-104h. All agent-producible artifacts COMPLETE. 5 blockers remain — all 100% Michael manual actions."
+  },
+  "system_state": {
+    "code_modules": "41/41 CODE COMPLETE — 0 agent work remaining",
+    "commits_today": "12+",
+    "incubator_deadline": "2026-04-06",
+    "countdown": "T-104h",
+    "product_ids_created": "0/21 (CRITICAL)",
+    "studio_publish": "NOT DONE (CRITICAL)",
+    "navigator_index": "IN TRASH (HIGH — routing table deleted)",
+    "active_mission": "NONE (all agent artifacts complete)",
+    "facebook_sales_funnel": "20/20 COMPLETE"
+  },
+  "blockers": [
+    {
+      "id": 1,
+      "priority": "CRITICAL",
+      "color": "RED",
+      "title": "CREATE 21 PRODUCT IDs",
+      "time_estimate": "~30 min",
+      "owner": "Michael",
+      "description": "Single highest-leverage action. Without these, game cannot monetize.",
+      "game_passes": [
+        {"name": "2x Coins", "price_robux": 99},
+        {"name": "2x XP", "price_robux": 149},
+        {"name": "Auto-Collect", "price_robux": 199},
+        {"name": "VIP Access", "price_robux": 499},
+        {"name": "Ultimate Survivor", "price_robux": 1499}
+      ],
+      "developer_products": [
+        {"name": "500 Coins", "price_robux": 49},
+        {"name": "2,500 Coins", "price_robux": 199},
+        {"name": "10,000 Coins", "price_robux": 699},
+        {"name": "25 Gems", "price_robux": 99},
+        {"name": "100 Gems", "price_robux": 349},
+        {"name": "500 Gems", "price_robux": 1499},
+        {"name": "Instant Revive", "price_robux": 25},
+        {"name": "5x Revive Pack", "price_robux": 99},
+        {"name": "2x Coins Boost 30min", "price_robux": 49},
+        {"name": "2x XP Boost 30min", "price_robux": 49},
+        {"name": "Shield 5min", "price_robux": 29},
+        {"name": "MEGA Boost 60min", "price_robux": 149},
+        {"name": "1x Survival Crate", "price_robux": 75},
+        {"name": "10x Survival Crate", "price_robux": 649},
+        {"name": "1x Brainrot Crate", "price_robux": 149},
+        {"name": "10x Brainrot Crate", "price_robux": 1299}
+      ],
+      "config_files": ["CANON/TRAIN-67/src/server/GamePassConfig.lua", "CANON/TRAIN-67/src/server/DevProductsConfig.lua"],
+      "guide": "CANON/TRAIN-67/DOCS/ProductIDReplacementGuide.md"
+    },
+    {
+      "id": 2,
+      "priority": "CRITICAL",
+      "color": "RED",
+      "title": "SUBMIT INCUBATOR APPLICATION",
+      "time_estimate": "~15 min",
+      "owner": "Michael",
+      "description": "Draft V2 is ready. Deadline: April 6.",
+      "draft_path": "CANON/TRAIN-67/DOCS/RobloxIncubatorApplicationDraft-V2.md",
+      "action": "Review, copy/paste into Roblox application form, submit before April 6"
+    },
+    {
+      "id": 3,
+      "priority": "HIGH",
+      "color": "ORANGE",
+      "title": "STUDIO PUBLISH",
+      "time_estimate": "~20 min",
+      "owner": "Michael",
+      "description": "Game must go from private to public.",
+      "steps": [
+        "Open Roblox Studio → load game",
+        "Rojo sync OR manual paste of 41 modules",
+        "Game Settings → set to Public",
+        "Add thumbnail + icon + description"
+      ],
+      "references": [
+        "CANON/REINCARNATION/2026-03-30-roblox-studio-guide-48hr-launch.md",
+        "CANON/REINCARNATION/2026-04-01-store-listing-copy-spec.md"
+      ]
+    },
+    {
+      "id": 4,
+      "priority": "MEDIUM",
+      "color": "YELLOW",
+      "title": "RESTORE NAVIGATOR INDEX",
+      "time_estimate": "~5 min",
+      "owner": "Michael",
+      "description": "Primary routing table is in Notion trash (~4.5MB, bloated from duplicate handoff entries).",
+      "steps": ["Open Notion → Trash → search 'Navigator Index'", "Restore", "Dedup duplicate entries (optional)"]
+    },
+    {
+      "id": 5,
+      "priority": "LOW",
+      "color": "GREEN",
+      "title": "FACEBOOK POSTS VIETNAMESE REVIEW",
+      "time_estimate": "~30 min",
+      "owner": "Michael",
+      "description": "20/20 funnel posts complete. Need Vietnamese tone review before posting to Lakeview groups.",
+      "posts_location": "CANON/MARKETING/ directory"
+    }
+  ],
+  "living_reincarnation_state": {
+    "current_vector": "All agent-producible launch artifacts COMPLETE. 5 blockers are 100% Michael manual actions. T-104h to incubator deadline Apr 6. 21 Product IDs still at zero. Studio publish pending. Run 220.",
+    "active_principles": [
+      "100% Roblox focus — no side missions",
+      "MAKE MONEY is the mission — English is the mechanic",
+      "Platform Death Test — every run produces a GitHub commit",
+      "Benchmarks over revenue — 5 benchmarks only success metric",
+      "Dual-publish mandatory (Notion + GitHub)"
+    ],
+    "open_rulings": [
+      "Product ID creation timing (Michael)",
+      "Studio publish timing (Michael)",
+      "Incubator application submission date",
+      "Navigator Index restore + dedup method",
+      "Vietnamese copywriter source (AI-assisted vs human review)",
+      "Post-launch Roblox English reintegration timeline"
+    ]
+  },
+  "artifacts_today": [
+    "Code audit (48 vs 41 drift)",
+    "Dead file cleanup + require map",
+    "Receipt router migration patch",
+    "Store listing copy spec",
+    "Pre-launch QA test plan",
+    "Social launch & community checklist",
+    "Incubator submission assets",
+    "Post-launch day 1 monitoring plan",
+    "Product ID creation checklist",
+    "T-101h priority matrix",
+    "Launch countdown action board",
+    "Launch gate readiness",
+    "T-104h blocker escalation pulse"
+  ],
+  "cross_references": {
+    "game_bible": "CANON/TRAIN-67/",
+    "product_id_guide": "CANON/TRAIN-67/DOCS/ProductIDReplacementGuide.md",
+    "incubator_draft": "CANON/TRAIN-67/DOCS/RobloxIncubatorApplicationDraft-V2.md",
+    "studio_guide": "CANON/REINCARNATION/2026-03-30-roblox-studio-guide-48hr-launch.md",
+    "store_listing": "CANON/REINCARNATION/2026-04-01-store-listing-copy-spec.md",
+    "marketing_posts": "CANON/MARKETING/"
+  },
+  "canon_guardrails": {
+    "verbatim_preserved": true,
+    "no_fabrication": true,
+    "source_verified": true,
+    "dedup_checked": true,
+    "cross_repo_mined": false
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "timestamp_ict": "2026-04-16T15:56:00+07:00",
+  "scope": "Light recon / birds-eye / low-risk",
+  "capacity": {
+    "drive": "D",
+    "used_bytes": 136080695296,
+    "free_bytes": 126062252032,
+    "used_gb": 126.734,
+    "free_gb": 117.404
+  },
+  "top_level_items": [
+    ".vscode-insiders",
+    ".vscode-server",
+    "$RECYCLE.BIN",
+    "AGENT99-OVERFLOW",
+    "AGENT99-STAGE-OUT",
+    "AGENT99-TOOLS",
+    "c",
+    "C_cleanup",
+    "FINAL-PHASE",
+    "FinalMerge",
+    "HARD-BACKUPS",
+    "Microsoft VS Code Insiders",
+    "OB-1",
+    "OB-1-r305",
+    "OB1_ARCHIVE",
+    "OB1_MOVED",
+    "OB1_OPERATIONS",
+    "Personal Files",
+    "phoenix-chat-logs",
+    "phoenix-ob1-system",
+    "Steam",
+    "System Volume Information",
+    "tmp",
+    "Zalo Data",
+    "1920x1080.jpg",
+    "Zephyrus Duo 15 x Z?OFORM_3840x2160.jpg"
+  ],
+  "priority_folder_sizes": [
+    {"path":"D:/FinalMerge","files":0,"size_gb":0.0},
+    {"path":"D:/OB-1","files":62198,"size_gb":8.176},
+    {"path":"D:/OB1_ARCHIVE","files":2945,"size_gb":3.027},
+    {"path":"D:/OB1_MOVED","files":88284,"size_gb":15.637},
+    {"path":"D:/HARD-BACKUPS","files":8,"size_gb":10.485},
+    {"path":"D:/Personal Files","files":793,"size_gb":4.367},
+    {"path":"D:/tmp","files":1,"size_gb":0.0}
+  ],
+  "pipeline_notes": [
+    "Use staged migration from C to D with manifests per stage",
+    "Do not recurse whole D in one pass; prioritize targeted folders",
+    "Track moved/deleted operations in MergeReports to prevent rework"
+  ]
+}

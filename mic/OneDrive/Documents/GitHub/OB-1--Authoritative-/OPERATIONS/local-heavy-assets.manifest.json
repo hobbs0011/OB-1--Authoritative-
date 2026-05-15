@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "policy": "Metadata tracked in Git; heavy binaries remain local-only on drive.",
+  "generatedAtUtc": "2026-04-15T00:00:00Z",
+  "assets": [
+    {
+      "path": "_SORTED/INSTALLERS/GitKrakenSetup.exe",
+      "storage": "local-drive",
+      "sizeBytes": 390276016,
+      "sizeMB": 372.2,
+      "lastWriteTimeUtc": "2026-04-14T20:46:31.7098323Z",
+      "sha256": "2ACFD74E1079AB75EDF42785D50F312353CE762E15B67E5ADBBAC5F68E351AE2"
+    },
+    {
+      "path": "_SORTED/INSTALLERS/VSCodeUserSetup-x64-1.115.0.exe",
+      "storage": "local-drive",
+      "sizeBytes": 141434432,
+      "sizeMB": 134.88,
+      "lastWriteTimeUtc": "2026-04-14T20:46:32.9048419Z",
+      "sha256": "A76E88B38379C286EC30832062EEE42FEA3B0A5E44D52708F9713BFB5059D012"
+    },
+    {
+      "path": "_SORTED/TEMP-DOWNLOADS/Unconfirmed 41601.crdownload",
+      "storage": "local-drive",
+      "sizeBytes": 105663710,
+      "sizeMB": 100.77,
+      "lastWriteTimeUtc": "2026-04-14T20:46:33.6146476Z",
+      "sha256": "4831DAF55BC31F5A2C56DF0B23F058686D76B09273EAD5A018C197455C20F5A6"
+    }
+  ]
+}

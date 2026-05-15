@@ -1,8 +1,8 @@
 {
-  "verify_ok": true,
+  "git_head": "5f5338f RISE: Convert HL-113 MSS-V5 security authority session to Heavy Ledger JSON",
+  "verify_ok": false,
+  "timestamp": "2026-05-15T20:23:49.3685038+07:00",
   "doctor_ok": true,
-  "timestamp": "2026-05-15T16:42:02.5825244+07:00",
   "git_branch": "master",
-  "soul_ok": true,
-  "git_head": "0fcd23a RISE: Reincarnation artifact for MEGAREPOMERGE event (2026-05-15). Genesis block. Platform Death Test compliance."
+  "soul_ok": true
 }

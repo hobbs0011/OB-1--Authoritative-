@@ -1,0 +1,8 @@
+{
+  "doctor_ok": true,
+  "verify_ok": true,
+  "soul_ok": true,
+  "git_branch": "master",
+  "timestamp": "2026-05-15T18:14:58.1264186+07:00",
+  "git_head": "5f5338f RISE: Convert HL-113 MSS-V5 security authority session to Heavy Ledger JSON"
+}

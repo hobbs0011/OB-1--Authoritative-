@@ -1,0 +1,434 @@
+[2026-04-17 00:54:11] [INFO] --- SYSTEM STATE CAPTURE: 04/17/2026 00:54:11 ---
+[2026-04-17 00:54:11] [INFO] === DOCTOR CHECK ===
+[2026-04-17 00:54:13] [SUCCESS] ✓ Doctor check passed
+{
+  "repo_root": "D:\\OB-1",
+  "runtime_app": "D:\\OB-1\\APPS\\NET-PET-AI",
+  "canonical_email": "mrmichaelhobbs123@gmail.com",
+  "configured_email": "mrmichaelhobbs123@gmail.com",
+  "email_match": true,
+  "github_token": true,
+  "cloudflare_api_key": true,
+  "notion_token": true,
+  "canon_files": 3875,
+  "canon_ok": true,
+  "reincarnation_files": 109,
+  "reincarnation_ok": true,
+  "ledger_files": 179,
+  "ledger_ok": true,
+  "cold_start_boot": true,
+  "mcp_paths_valid": true,
+  "soul_integrity": true
+}
+
+[2026-04-17 00:54:13] [INFO] === VERIFY CHECK ===
+[2026-04-17 00:54:23] [SUCCESS] ✓ Verify check passed
+
+> net-pet-ai@0.1.0 verify:wrangler
+> node --check src/index.js && npx wrangler deploy --dry-run --outdir /tmp/net-pet-ai-dry
+
+
+ Γ¢à∩╕Å wrangler 4.80.0 (update available 4.83.0)
+ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+Γ£¿ Read 21 files from the assets directory D:\OB-1\APPS\NET-PET-AI\public
+Total Upload: 248.80 KiB / gzip: 52.74 KiB
+Your Worker has access to the following bindings:
+Binding                                              Resource                  
+env.SESSIONS (SessionDO)                             Durable Object            
+env.PROFILES (ProfileDO)                             Durable Object            
+env.PETS (PetDO)                                     Durable Object            
+env.LEDGER (LedgerDO)                                Durable Object            
+env.ASSETS                                           Assets                    
+env.APP_NAME ("Natural English Training")            Environment Variable      
+env.APP_COACH_NAME ("Obi")                           Environment Variable      
+
+--dry-run: exiting now.
+
+[2026-04-17 00:54:23] [INFO] === GIT STATUS ===
+[2026-04-17 00:54:23] [INFO] Branch: Add-virality-analytics-endpoint
+[2026-04-17 00:54:23] [INFO] HEAD: a65f89a chore: sync EducationSystemsDevelopment pointer
+[2026-04-17 00:54:23] [INFO] Working Tree: DIRTY
+[2026-04-17 00:54:24] [INFO] === SOUL DNA INTEGRITY CHECK ===
+[2026-04-17 00:54:26] [SUCCESS] ✓ Soul DNA integrity: INTACT
+
+  SOUL CHECK: PASS
+    Canon: 3875 | Reincarnation: 109 | Ledger: 179 | Bible: 23
+
+{
+  "status": "SOUL_INTACT",
+  "canon_files": 3875,
+  "reincarnation_files": 109,
+  "ledger_files": 179,
+  "bible_chapters": 23,
+  "cold_start_boot": true,
+  "protocol_files_ok": true,
+  "mcp_paths_valid": true,
+  "local_head": "a65f89abd2094939f84a7a2305059cf7a3e37687",
+  "failures": [],
+  "warnings": []
+}
+
+[2026-04-17 00:54:26] [INFO] State saved to D:\OB-1\SCRIPTS/../OPERATIONS/system-health-logs/system-state.json
+[2026-04-17 00:54:26] [INFO] 
+[2026-04-17 01:13:38] [INFO] --- SYSTEM STATE CAPTURE: 04/17/2026 01:13:38 ---
+[2026-04-17 01:13:38] [INFO] === DOCTOR CHECK ===
+[2026-04-17 01:13:42] [SUCCESS] ✓ Doctor check passed
+{
+  "repo_root": "D:\\OB-1",
+  "runtime_app": "D:\\OB-1\\APPS\\NET-PET-AI",
+  "canonical_email": "mrmichaelhobbs123@gmail.com",
+  "configured_email": "mrmichaelhobbs123@gmail.com",
+  "email_match": true,
+  "github_token": true,
+  "cloudflare_api_key": true,
+  "notion_token": true,
+  "canon_files": 3876,
+  "canon_ok": true,
+  "reincarnation_files": 110,
+  "reincarnation_ok": true,
+  "ledger_files": 179,
+  "ledger_ok": true,
+  "cold_start_boot": true,
+  "mcp_paths_valid": true,
+  "soul_integrity": true
+}
+
+[2026-04-17 01:13:42] [INFO] === VERIFY CHECK ===
+[2026-04-17 01:14:00] [SUCCESS] ✓ Verify check passed
+
+> net-pet-ai@0.1.0 verify:wrangler
+> node --check src/index.js && npx wrangler deploy --dry-run --outdir /tmp/net-pet-ai-dry
+
+
+ Γ¢à∩╕Å wrangler 4.80.0 (update available 4.83.0)
+ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+Γ£¿ Read 21 files from the assets directory D:\OB-1\APPS\NET-PET-AI\public
+Total Upload: 248.80 KiB / gzip: 52.74 KiB
+Your Worker has access to the following bindings:
+Binding                                              Resource                  
+env.SESSIONS (SessionDO)                             Durable Object            
+env.PROFILES (ProfileDO)                             Durable Object            
+env.PETS (PetDO)                                     Durable Object            
+env.LEDGER (LedgerDO)                                Durable Object            
+env.ASSETS                                           Assets                    
+env.APP_NAME ("Natural English Training")            Environment Variable      
+env.APP_COACH_NAME ("Obi")                           Environment Variable      
+
+--dry-run: exiting now.
+
+[2026-04-17 01:14:00] [INFO] === GIT STATUS ===
+[2026-04-17 01:14:01] [INFO] Branch: Add-virality-analytics-endpoint
+[2026-04-17 01:14:01] [INFO] HEAD: 0d16069 run305: mark complete ΓÇö all deliverables shipped, system ready
+[2026-04-17 01:14:01] [INFO] Working Tree: DIRTY
+[2026-04-17 01:14:01] [INFO] === SOUL DNA INTEGRITY CHECK ===
+[2026-04-17 01:14:05] [SUCCESS] ✓ Soul DNA integrity: INTACT
+
+  SOUL CHECK: PASS
+    Canon: 3876 | Reincarnation: 110 | Ledger: 179 | Bible: 23
+
+{
+  "status": "SOUL_INTACT",
+  "canon_files": 3876,
+  "reincarnation_files": 110,
+  "ledger_files": 179,
+  "bible_chapters": 23,
+  "cold_start_boot": true,
+  "protocol_files_ok": true,
+  "mcp_paths_valid": true,
+  "local_head": "0d1606997af1f9359ed6977e3dbb0f783cb9dbb4",
+  "failures": [],
+  "warnings": []
+}
+
+[2026-04-17 01:14:06] [INFO] State saved to D:\OB-1\SCRIPTS/../OPERATIONS/system-health-logs/system-state.json
+[2026-04-17 01:14:06] [INFO] 
+[2026-04-17 02:14:34] [INFO] --- SYSTEM STATE CAPTURE: 04/17/2026 02:14:34 ---
+[2026-04-17 02:14:34] [INFO] === DOCTOR CHECK ===
+[2026-04-17 02:14:37] [SUCCESS] ✓ Doctor check passed
+{
+  "repo_root": "D:\\OB-1",
+  "runtime_app": "D:\\OB-1\\APPS\\NET-PET-AI",
+  "canonical_email": "mrmichaelhobbs123@gmail.com",
+  "configured_email": "mrmichaelhobbs123@gmail.com",
+  "email_match": true,
+  "github_token": true,
+  "cloudflare_api_key": true,
+  "notion_token": true,
+  "canon_files": 3878,
+  "canon_ok": true,
+  "reincarnation_files": 111,
+  "reincarnation_ok": true,
+  "ledger_files": 180,
+  "ledger_ok": true,
+  "cold_start_boot": true,
+  "mcp_paths_valid": true,
+  "soul_integrity": true
+}
+
+[2026-04-17 02:14:37] [INFO] === VERIFY CHECK ===
+[2026-04-17 02:14:53] [SUCCESS] ✓ Verify check passed
+
+> net-pet-ai@0.1.0 verify:wrangler
+> node --check src/index.js && npx wrangler deploy --dry-run --outdir /tmp/net-pet-ai-dry
+
+
+ Γ¢à∩╕Å wrangler 4.80.0 (update available 4.83.0)
+ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+Γ£¿ Read 21 files from the assets directory D:\OB-1\APPS\NET-PET-AI\public
+Total Upload: 248.80 KiB / gzip: 52.74 KiB
+Your Worker has access to the following bindings:
+Binding                                              Resource                  
+env.SESSIONS (SessionDO)                             Durable Object            
+env.PROFILES (ProfileDO)                             Durable Object            
+env.PETS (PetDO)                                     Durable Object            
+env.LEDGER (LedgerDO)                                Durable Object            
+env.ASSETS                                           Assets                    
+env.APP_NAME ("Natural English Training")            Environment Variable      
+env.APP_COACH_NAME ("Obi")                           Environment Variable      
+
+--dry-run: exiting now.
+
+[2026-04-17 02:14:53] [INFO] === GIT STATUS ===
+[2026-04-17 02:14:54] [INFO] Branch: Add-virality-analytics-endpoint
+[2026-04-17 02:14:54] [INFO] HEAD: f838a56 run305: first soul agent audit complete ΓÇö HL-141 huong-bluetech neural ledger entry + batch log
+[2026-04-17 02:14:54] [INFO] Working Tree: DIRTY
+[2026-04-17 02:14:54] [INFO] === SOUL DNA INTEGRITY CHECK ===
+[2026-04-17 02:14:57] [SUCCESS] ✓ Soul DNA integrity: INTACT
+
+  SOUL CHECK: PASS
+    Canon: 3878 | Reincarnation: 111 | Ledger: 180 | Bible: 23
+
+{
+  "status": "SOUL_INTACT",
+  "canon_files": 3878,
+  "reincarnation_files": 111,
+  "ledger_files": 180,
+  "bible_chapters": 23,
+  "cold_start_boot": true,
+  "protocol_files_ok": true,
+  "mcp_paths_valid": true,
+  "local_head": "f838a56b47e20969c15e76f5dcbab35ccf21cb5c",
+  "failures": [],
+  "warnings": []
+}
+
+[2026-04-17 02:14:58] [INFO] State saved to D:\OB-1\SCRIPTS/../OPERATIONS/system-health-logs/system-state.json
+[2026-04-17 02:14:58] [INFO] 
+[2026-04-17 05:00:11] [INFO] --- SYSTEM STATE CAPTURE: 04/17/2026 05:00:11 ---
+[2026-04-17 05:00:11] [INFO] === DOCTOR CHECK ===
+[2026-04-17 05:00:12] [SUCCESS] ✓ Doctor check passed
+{
+  "repo_root": "D:\\OB-1",
+  "runtime_app": "D:\\OB-1\\APPS\\NET-PET-AI",
+  "canonical_email": "mrmichaelhobbs123@gmail.com",
+  "configured_email": "mrmichaelhobbs123@gmail.com",
+  "email_match": true,
+  "github_token": true,
+  "cloudflare_api_key": true,
+  "notion_token": true,
+  "canon_files": 3880,
+  "canon_ok": true,
+  "reincarnation_files": 112,
+  "reincarnation_ok": true,
+  "ledger_files": 180,
+  "ledger_ok": true,
+  "cold_start_boot": true,
+  "mcp_paths_valid": true,
+  "soul_integrity": true
+}
+
+[2026-04-17 05:00:12] [INFO] === VERIFY CHECK ===
+[2026-04-17 05:00:16] [SUCCESS] ✓ Verify check passed
+
+> net-pet-ai@0.1.0 verify:wrangler
+> node --check src/index.js && npx wrangler deploy --dry-run --outdir /tmp/net-pet-ai-dry
+
+
+ Γ¢à∩╕Å wrangler 4.80.0 (update available 4.83.0)
+ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+Γ£¿ Read 21 files from the assets directory D:\OB-1\APPS\NET-PET-AI\public
+Total Upload: 248.80 KiB / gzip: 52.74 KiB
+Your Worker has access to the following bindings:
+Binding                                              Resource                  
+env.SESSIONS (SessionDO)                             Durable Object            
+env.PROFILES (ProfileDO)                             Durable Object            
+env.PETS (PetDO)                                     Durable Object            
+env.LEDGER (LedgerDO)                                Durable Object            
+env.ASSETS                                           Assets                    
+env.APP_NAME ("Natural English Training")            Environment Variable      
+env.APP_COACH_NAME ("Obi")                           Environment Variable      
+
+--dry-run: exiting now.
+
+[2026-04-17 05:00:16] [INFO] === GIT STATUS ===
+[2026-04-17 05:00:16] [INFO] Branch: Add-virality-analytics-endpoint
+[2026-04-17 05:00:16] [INFO] HEAD: a83ac05 reincarnation: 2026-04-17-reincarnate-audit ΓÇö Run 306
+[2026-04-17 05:00:16] [INFO] Working Tree: DIRTY
+[2026-04-17 05:00:16] [INFO] === SOUL DNA INTEGRITY CHECK ===
+[2026-04-17 05:00:17] [SUCCESS] ✓ Soul DNA integrity: INTACT
+
+  SOUL CHECK: PASS
+    Canon: 3880 | Reincarnation: 112 | Ledger: 180 | Bible: 23
+
+{
+  "status": "SOUL_INTACT",
+  "canon_files": 3880,
+  "reincarnation_files": 112,
+  "ledger_files": 180,
+  "bible_chapters": 23,
+  "cold_start_boot": true,
+  "protocol_files_ok": true,
+  "mcp_paths_valid": true,
+  "local_head": "a83ac0574b031cfa874b03e020266992f43ffdb7",
+  "failures": [],
+  "warnings": []
+}
+
+[2026-04-17 05:00:18] [INFO] State saved to D:\OB-1\SCRIPTS/../OPERATIONS/system-health-logs/system-state.json
+[2026-04-17 05:00:18] [INFO] 
+[2026-04-17 06:16:48] [INFO] --- SYSTEM STATE CAPTURE: 04/17/2026 06:16:48 ---
+[2026-04-17 06:16:48] [INFO] === DOCTOR CHECK ===
+[2026-04-17 06:16:49] [SUCCESS] ✓ Doctor check passed
+{
+  "repo_root": "D:\\OB-1",
+  "runtime_app": "D:\\OB-1\\APPS\\NET-PET-AI",
+  "canonical_email": "mrmichaelhobbs123@gmail.com",
+  "configured_email": "mrmichaelhobbs123@gmail.com",
+  "email_match": true,
+  "github_token": true,
+  "cloudflare_api_key": true,
+  "notion_token": true,
+  "canon_files": 3880,
+  "canon_ok": true,
+  "reincarnation_files": 112,
+  "reincarnation_ok": true,
+  "ledger_files": 180,
+  "ledger_ok": true,
+  "cold_start_boot": true,
+  "mcp_paths_valid": true,
+  "soul_integrity": true
+}
+
+[2026-04-17 06:16:49] [INFO] === VERIFY CHECK ===
+[2026-04-17 06:16:57] [SUCCESS] ✓ Verify check passed
+
+> net-pet-ai@0.1.0 verify:wrangler
+> node --check src/index.js && npx wrangler deploy --dry-run --outdir /tmp/net-pet-ai-dry
+
+
+ Γ¢à∩╕Å wrangler 4.80.0 (update available 4.83.0)
+ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+Γ£¿ Read 22 files from the assets directory D:\OB-1\APPS\NET-PET-AI\public
+Total Upload: 249.80 KiB / gzip: 53.05 KiB
+Your Worker has access to the following bindings:
+Binding                                              Resource                  
+env.SESSIONS (SessionDO)                             Durable Object            
+env.PROFILES (ProfileDO)                             Durable Object            
+env.PETS (PetDO)                                     Durable Object            
+env.LEDGER (LedgerDO)                                Durable Object            
+env.ASSETS                                           Assets                    
+env.APP_NAME ("Natural English Training")            Environment Variable      
+env.APP_COACH_NAME ("Obi")                           Environment Variable      
+env.IMAGE_GEN_URL ("")                               Environment Variable      
+
+--dry-run: exiting now.
+
+[2026-04-17 06:16:58] [INFO] === GIT STATUS ===
+[2026-04-17 06:16:58] [INFO] Branch: Add-virality-analytics-endpoint
+[2026-04-17 06:16:58] [INFO] HEAD: 64ac000 reincarnation: finalize Run 307, Deepgram pipeline verification, SoulShadowAgent audit rotation, repo hygiene
+[2026-04-17 06:16:58] [INFO] Working Tree: DIRTY
+[2026-04-17 06:16:58] [INFO] === SOUL DNA INTEGRITY CHECK ===
+[2026-04-17 06:16:59] [SUCCESS] ✓ Soul DNA integrity: INTACT
+
+  SOUL CHECK: PASS
+    Canon: 3880 | Reincarnation: 112 | Ledger: 180 | Bible: 23
+
+{
+  "status": "SOUL_INTACT",
+  "canon_files": 3880,
+  "reincarnation_files": 112,
+  "ledger_files": 180,
+  "bible_chapters": 23,
+  "cold_start_boot": true,
+  "protocol_files_ok": true,
+  "mcp_paths_valid": true,
+  "local_head": "64ac00008b8838051179d53474c56f121868e889",
+  "failures": [],
+  "warnings": []
+}
+
+[2026-04-17 06:16:59] [INFO] State saved to D:\OB-1\SCRIPTS/../OPERATIONS/system-health-logs/system-state.json
+[2026-04-17 06:16:59] [INFO] 
+[2026-04-17 06:40:24] [INFO] --- SYSTEM STATE CAPTURE: 04/17/2026 06:40:24 ---
+[2026-04-17 06:40:24] [INFO] === DOCTOR CHECK ===
+[2026-04-17 06:40:25] [SUCCESS] ✓ Doctor check passed
+{
+  "repo_root": "D:\\OB-1",
+  "runtime_app": "D:\\OB-1\\APPS\\NET-PET-AI",
+  "canonical_email": "mrmichaelhobbs123@gmail.com",
+  "configured_email": "mrmichaelhobbs123@gmail.com",
+  "email_match": true,
+  "github_token": true,
+  "cloudflare_api_key": true,
+  "notion_token": true,
+  "canon_files": 3880,
+  "canon_ok": true,
+  "reincarnation_files": 112,
+  "reincarnation_ok": true,
+  "ledger_files": 180,
+  "ledger_ok": true,
+  "cold_start_boot": true,
+  "mcp_paths_valid": true,
+  "soul_integrity": true
+}
+
+[2026-04-17 06:40:25] [INFO] === VERIFY CHECK ===
+[2026-04-17 06:40:32] [SUCCESS] ✓ Verify check passed
+
+> net-pet-ai@0.1.0 verify:wrangler
+> node --check src/index.js && npx wrangler deploy --dry-run --outdir /tmp/net-pet-ai-dry
+
+
+ Γ¢à∩╕Å wrangler 4.80.0 (update available 4.83.0)
+ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+Γ£¿ Read 22 files from the assets directory D:\OB-1\APPS\NET-PET-AI\public
+Total Upload: 249.80 KiB / gzip: 53.05 KiB
+Your Worker has access to the following bindings:
+Binding                                              Resource                  
+env.SESSIONS (SessionDO)                             Durable Object            
+env.PROFILES (ProfileDO)                             Durable Object            
+env.PETS (PetDO)                                     Durable Object            
+env.LEDGER (LedgerDO)                                Durable Object            
+env.ASSETS                                           Assets                    
+env.APP_NAME ("Natural English Training")            Environment Variable      
+env.APP_COACH_NAME ("Obi")                           Environment Variable      
+env.IMAGE_GEN_URL ("")                               Environment Variable      
+
+--dry-run: exiting now.
+
+[2026-04-17 06:40:32] [INFO] === GIT STATUS ===
+[2026-04-17 06:40:33] [INFO] Branch: Add-virality-analytics-endpoint
+[2026-04-17 06:40:33] [INFO] HEAD: 6c94097 ] Fixes #4
+[2026-04-17 06:40:33] [INFO] Working Tree: DIRTY
+[2026-04-17 06:40:33] [INFO] === SOUL DNA INTEGRITY CHECK ===
+[2026-04-17 06:40:34] [SUCCESS] ✓ Soul DNA integrity: INTACT
+
+  SOUL CHECK: PASS
+    Canon: 3880 | Reincarnation: 112 | Ledger: 180 | Bible: 23
+
+{
+  "status": "SOUL_INTACT",
+  "canon_files": 3880,
+  "reincarnation_files": 112,
+  "ledger_files": 180,
+  "bible_chapters": 23,
+  "cold_start_boot": true,
+  "protocol_files_ok": true,
+  "mcp_paths_valid": true,
+  "local_head": "6c940974795bce24c2a545d7105398b6471a09c9",
+  "failures": [],
+  "warnings": []
+}
+
+[2026-04-17 06:40:34] [INFO] State saved to D:\OB-1\SCRIPTS/../OPERATIONS/system-health-logs/system-state.json
+[2026-04-17 06:40:34] [INFO] 
