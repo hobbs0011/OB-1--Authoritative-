@@ -1,0 +1,94 @@
+{
+  "hl_id": "HL-106",
+  "source": "CANON/REINCARNATION/2026-03-24-late-session-old-account-preservation.md",
+  "source_sha": "0104d937891f08c661e8f3affd962eca216723f1",
+  "session_date": "2026-03-24T22:15:00+07:00",
+  "session_tag": "late-session-old-account-preservation",
+  "tier": "FOUNDATIONS",
+  "tier_rationale": "Data preservation and integrity — legacy account export directive to prevent data loss from mrmichaelhobbs1234@gmail.com workspace",
+  "signal_density": "LOW",
+  "signal_counts": {
+    "raw_quotes": 3,
+    "decisions": 2,
+    "corrections": 0,
+    "new_principles": 0,
+    "system_design_insights": 1
+  },
+  "raw_quotes": [
+    {
+      "text": "where do the chats go that I archive?",
+      "priority": "green",
+      "category": "context"
+    },
+    {
+      "text": "from past notion account on mrmichaelhobbs1234@gmail.com make sure nothing is lost",
+      "priority": "yellow",
+      "category": "directive"
+    },
+    {
+      "text": "Also I just reincarnated all active chats",
+      "priority": "green",
+      "category": "context"
+    }
+  ],
+  "decisions": [
+    {
+      "id": "D-106-1",
+      "decision": "Old account preservation directive — verify nothing lost from mrmichaelhobbs1234@gmail.com legacy Notion workspace",
+      "impact": "Data integrity — unknown pages/databases on legacy account may contain unpreserved Soul DNA or early Phoenix work",
+      "canon_pages_affected": ["Chat Archive", "Soul DNA Bible", "Canon Access Index"],
+      "status": "OPEN_RULING"
+    },
+    {
+      "id": "D-106-2",
+      "decision": "Mass reincarnation — Michael reincarnated all active chats before this session as deliberate cleanup/fresh start",
+      "impact": "Session hygiene — signals intentional state reset",
+      "canon_pages_affected": ["Reincarnation Log"],
+      "status": "IMPLEMENTED"
+    }
+  ],
+  "corrections": [],
+  "new_principles": [],
+  "system_design_insights": [
+    {
+      "insight": "Mar 23 Agent-99 activity report pasted by Michael was already captured in prior reincarnation entries — no duplication needed",
+      "implication": "Dedup guard working correctly across sessions"
+    }
+  ],
+  "old_account_audit": {
+    "legacy_account": "mrmichaelhobbs1234@gmail.com",
+    "legacy_github": "mrmichaelhobbs1234-lang",
+    "known_preserved": [
+      "GitHub repo (hobbs-lab/Phoenix-Rising-Protocol-Ultimate) — CANON/, REINCARNATION/, SESSION-RECORDS/, GALAXY-LESSONS/, OPERATIONS/, APPS/",
+      "Chat Archive (Notion) — Raw .txt files from desktop (~1000+ files, 15 buckets)",
+      "Soul DNA Bible — 47 subpages Notion, 45 files GitHub",
+      "Canon pages — Soul DNA Canon, Deep Dive, Core Principles, Alpha-Omega, Gospel 444 — all dual-published",
+      "Session records — Multiple Mar 23 chat records preserved verbatim",
+      "Agent-2 Archive — Verbatim triad setup dump",
+      "Iron Stack, Master Skeleton, Overnight Briefing, Drone reports"
+    ],
+    "at_risk_unknown": [
+      "Notion pages on old account never exported or recreated",
+      "Old agent chat history on legacy account — likely unrecoverable unless manually exported",
+      "Database content (if any)"
+    ],
+    "recommended_actions": [
+      "Log into mrmichaelhobbs1234@gmail.com Notion — full workspace export",
+      "Upload export to Chat Archive under Phoenix HQ",
+      "Compare against current workspace for gaps",
+      "Once verified, old account can be safely archived"
+    ]
+  },
+  "cross_repo_sources": {
+    "immortalize": "No matches found",
+    "ultimate": "Source file only — no additional cross-references",
+    "commandstation": "Not searched (no product refs expected)"
+  },
+  "conversion_meta": {
+    "converted_by": "OB1_PULSE_RUN_252",
+    "converted_at": "2026-04-02T01:30:00+07:00",
+    "wave": 8,
+    "wave_position": "22/46",
+    "pipeline_total": 106
+  }
+}

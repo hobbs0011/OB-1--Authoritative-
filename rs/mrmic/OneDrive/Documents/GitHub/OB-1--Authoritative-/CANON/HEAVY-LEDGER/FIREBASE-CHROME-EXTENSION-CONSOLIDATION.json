@@ -1,0 +1,287 @@
+{
+  "heavy_ledger_entry": {
+    "pipeline_number": "018",
+    "source_file": "CANON/FIREBASE-CHROME-EXTENSION-CONSOLIDATION.md",
+    "source_sha": "fd4c053522a1bacb54b81560436940947f75fb74",
+    "source_size_kb": 17,
+    "category": "canon_tech",
+    "converted_by": "OB1 Run 148",
+    "converted_at": "2026-03-30T20:30:00+07:00",
+    "artifact_class": "VAULT"
+  },
+  "strategic_vision": {
+    "core_thesis": "$0 Distribution to Vietnamese Students",
+    "insight": "Chrome Extensions are essentially free. Combined with Gemini Nano (on-device AI, $0), Chrome Enterprise (free browser management), Firebase (free auth/db/hosting), Cloudflare Workers (already live, $5/mo) — creates $0-to-$5/mo full AI tutoring platform that deploys silently into every student's browser.",
+    "budget_ceiling": "<$20/month for 5-model AI stack",
+    "scale_economics": {
+      "at_100_students": "$0 (within free tiers)",
+      "at_1000_students": "$10-20/mo (Cloudflare overage only)",
+      "traditional_edtech_comparison": "$5,000-50,000/mo at 1000 students"
+    }
+  },
+  "decision_trail": {
+    "verbatim_quotes": [
+      {
+        "date": "2026-03-24",
+        "quote": "we can MAKE OUR OWN EXTENSIONS!!",
+        "decision": "Chrome extensions = $0 deployment vector. Manifest V3 + Gemini Nano on-device + Chrome Enterprise silent deploy.",
+        "signal": "RED"
+      },
+      {
+        "date": "2026-03-25",
+        "quote": "We have cloudflare and firebase, audit, which is best?",
+        "decision": "Cloudflare for app runtime. Firebase for supplementary services (auth, data, static hosting).",
+        "signal": "RED"
+      },
+      {
+        "date": "2026-03-25",
+        "quote": "please scan files, did we lose our toolstack SOUL DNA? I have a paid firebase setup, or a trial or whatever it is",
+        "signal": "YELLOW"
+      },
+      {
+        "date": "2026-03-26",
+        "quote": "CHAOS ENGINEER TO THE END, PAY ATTENTION TO FREE TOOLS, EXTENSIONS FROM GPT AND FROM GOOGLE",
+        "decision": "<$20/month budget ceiling for 5-model AI stack. Firebase = cost-zero ingress layer.",
+        "signal": "RED"
+      },
+      {
+        "date": "2026-03-26",
+        "quote": "make the bonus 3 stages you will do in a moment PURE FREE to NEAR-FREE to essential",
+        "signal": "YELLOW"
+      },
+      {
+        "date": "2026-03-26",
+        "quote": "PS I just signed up for Firebase",
+        "signal": "GREEN"
+      },
+      {
+        "date": "2026-03-26",
+        "quote": "do a 5 stages pipeline looking into everything we have done on hobbs0011 mrmichaelhobbs1234-lang and hobbs-lab on our tool stack, especially regarding good chromes free tech stacks",
+        "decision": "hobbs-lab is THE canonical home. Chrome Extension scaffold exists but deployment deferred until Michael says go.",
+        "signal": "RED"
+      },
+      {
+        "date": "2026-03-26",
+        "quote": "transfer all to hobbs-lab possible",
+        "signal": "YELLOW"
+      },
+      {
+        "date": "2026-03-26",
+        "quote": "hold off on scaffolding, enter dump mode after transfer",
+        "signal": "YELLOW"
+      }
+    ]
+  },
+  "architecture": {
+    "deployment_model": "$0 OBI Deployment Model",
+    "layers": {
+      "student_device": {
+        "chrome_browser": "Managed via Chrome Enterprise Core ($0)",
+        "obi_extension": "Force-installed via Chrome Enterprise policy",
+        "on_device_ai": {
+          "cost": "$0",
+          "engine": "Gemini Nano (Chrome 120+, runs on CPU)",
+          "apis_integrated": [
+            "Prompt API (self.ai.languageModel) — instant English tutoring",
+            "Translation API (self.ai.translator) — Vietnamese ↔ English",
+            "Language Detection API (self.ai.languageDetector) — auto-detect input language"
+          ],
+          "apis_not_yet_integrated": [
+            "Summarizer API — lesson material summaries on-device",
+            "Writer/Rewriter API — Mouse→Tiger sentence exercises on-device"
+          ],
+          "offline_capable": true,
+          "hardware_requirement": "Runs on CPU, low-end laptops work"
+        },
+        "backend_fallback": "Cloudflare Workers → DeepSeek (~$0.14/M tokens) — only when Nano unavailable"
+      },
+      "firebase_layer": {
+        "cost": "$0 Spark Plan",
+        "services": {
+          "auth": "Google Sign-In (students already have Google accounts)",
+          "firestore": "Student profiles + lesson progress + teacher dashboard",
+          "hosting": "Landing page with Chrome Extension download CTA",
+          "functions": "Admin API endpoints (Node.js 22)"
+        },
+        "scale_ceiling": "~1,000 students before needing Blaze plan ($0.18/100K reads)",
+        "firestore_schema": {
+          "students": "uid → name, email, level (mouse|cat|tiger), createdAt, lastActive",
+          "progress": "students/{uid}/progress/{lessonId} → score, completedAt, timeSpent",
+          "lessons": "lessonId → title, level, content, createdAt",
+          "admin": "dashboard → totalStudents, activeToday, lessonsCompleted"
+        }
+      },
+      "cloudflare_layer": {
+        "cost": "$5/mo base",
+        "services": {
+          "workers": "OBI app runtime (naturalenglishtraining.net)",
+          "durable_objects": "Stateful sessions, ledger",
+          "d1": "Student data (SQLite)",
+          "kv": "Rate limiting, config",
+          "r2": "Audio, media storage",
+          "ai_gateway": "DeepSeek wrapper (caching, rate limiting, fallback)"
+        }
+      }
+    },
+    "chrome_enterprise_moat": {
+      "description": "Chrome Enterprise Core is FREE and provides silent deployment",
+      "capabilities": [
+        "ExtensionInstallForceList — silent-install OBI on all managed browsers ($0)",
+        "Token-based enrollment — one token for school/family devices ($0)",
+        "Usage reporting — student activity tracking ($0)",
+        "Policy enforcement — block competitors, enforce safe browsing ($0)",
+        "Chrome Management APIs — programmatic control via Workers ($0)",
+        "Reports API — browser version, extension data, usage ($0)",
+        "Telemetry API — device health + performance monitoring ($0)"
+      ],
+      "signup_url": "enterprise.google.com/signup/chrome-browser/email",
+      "reference": "github.com/google/ChromeBrowserEnterprise"
+    }
+  },
+  "code_audit": {
+    "chrome_extension": {
+      "location": "APPS/obi-chrome-extension/",
+      "files": 10,
+      "total_size_kb": 16,
+      "status": "SCAFFOLDED — NOT DEPLOYED",
+      "manifest": {
+        "version": "MV3",
+        "permissions": ["storage", "activeTab", "sidePanel"],
+        "host": "naturalenglishtraining.net",
+        "min_chrome": 120,
+        "gap": "key=TODO"
+      },
+      "components": [
+        {"file": "popup.html + popup.js + popup.css", "gemini_nano": true, "apis": ["Prompt", "Translation", "Language Detection"], "status": "FULL"},
+        {"file": "sidepanel.html + sidepanel.js + sidepanel.css", "gemini_nano": true, "apis": ["Prompt", "Translation"], "status": "FULL"},
+        {"file": "background.js", "purpose": "Service worker, side panel, context menu, 25s heartbeat", "status": "FULL"},
+        {"file": "content.js", "purpose": "Inline tooltip on selected text", "status": "STUB — TODO: wire Gemini Nano response"},
+        {"file": "icons/", "status": "MISSING — need 16/48/128 PNGs in Gospel 444 palette"}
+      ],
+      "core_code_patterns": {
+        "on_device_prompt": "self.ai.languageModel.create() → session.prompt() — $0 per response",
+        "on_device_translation": "self.ai.translator.create() → translator.translate() — $0 Vietnamese ↔ English",
+        "system_prompt": "You are OBI, a friendly English tutor for Vietnamese students. Use simple language. Encourage the student. Follow Mouse→Tiger: permission over perfection.",
+        "fallback": "naturalenglishtraining.net/api/chat (DeepSeek via Cloudflare Workers)"
+      }
+    },
+    "firebase": {
+      "location": "APPS/firebase/",
+      "files": 6,
+      "total_size_kb": 4,
+      "status": "SCAFFOLDED — NOT DEPLOYED — Project ID not set",
+      "components": [
+        {"file": ".firebaserc", "status": "TODO_SET_PROJECT_ID"},
+        {"file": "firebase.json", "purpose": "Hosting + Firestore + Functions, SPA rewrites, security headers, Node.js 22", "status": "COMPLETE"},
+        {"file": "firestore.rules", "purpose": "Students own-data-only, lessons public-read, admin claims-only, default deny", "status": "COMPLETE"},
+        {"file": "firestore.indexes.json", "purpose": "Composite index on progress collection", "status": "COMPLETE"},
+        {"file": "public/index.html", "purpose": "OBI landing page, Orbitron font, dark theme, Chrome Extension CTA", "status": "BUILT"},
+        {"file": "README.md", "purpose": "Setup guide, Firestore schema, cost $0 Spark plan", "status": "COMPLETE"}
+      ]
+    }
+  },
+  "competing_landing_page_problem": {
+    "description": "Two landing pages exist — needs Michael's decision",
+    "pages": [
+      {
+        "file": "WEBSITE/index.html",
+        "description": "Full Gospel 444 branded site — hero, features, OBI showcase, lessons gallery, methodology, social proof",
+        "deploy_target": "Cloudflare Pages → naturalenglishtraining.com"
+      },
+      {
+        "file": "APPS/firebase/public/index.html",
+        "description": "Minimal OBI landing — dark theme, Chrome Extension CTA",
+        "deploy_target": "Firebase Hosting → TBD"
+      }
+    ],
+    "options": {
+      "A": "Firebase = student data only. Kill Firebase Hosting. Cloudflare handles .com site.",
+      "B": "Firebase = extension distribution hub. Separate from .com marketing site.",
+      "C": "Kill Firebase entirely. Cloudflare D1 handles everything. Firebase redundant.",
+      "D": "Firebase = school/teacher portal. .com = students. Firebase = teachers."
+    },
+    "michael_lean": "2026-03-25: Cloudflare for everything, Firebase as backup. But Firebase signup confirmed 2026-03-26. $0 auth layer (Google Sign-In) strongest reason to keep Firebase."
+  },
+  "gaps": {
+    "code_gaps": [
+      "Extension key not generated — manifest.json has TODO_GENERATE_KEY",
+      "Extension icons missing — need 16/48/128 PNGs (Gospel 444 palette: #a855f7, #f59e0b, #0f0f1a)",
+      "content.js TODO — tooltip shows Thinking but never calls Gemini Nano",
+      "No functions/ directory — firebase.json references Cloud Functions",
+      "Firebase project not created — .firebaserc has TODO_SET_PROJECT_ID",
+      "Gemini Nano Summarizer + Writer/Rewriter APIs not integrated",
+      "Chrome Enterprise enrollment scripts — zero code",
+      "Chrome Policy API integration — zero code"
+    ],
+    "deployment_gaps": [
+      "Chrome Enterprise Core signup — not done",
+      "Chrome Web Store listing — not started",
+      "Firebase project creation — not done at console.firebase.google.com"
+    ],
+    "security_gaps": [
+      "phoenix-ob1 (mrmichaelhobbs1234-lang) — PUBLIC repo with wrangler.toml exposed. SET TO PRIVATE.",
+      "SOVEREIGN_KEY rotation — flagged across multiple sessions, still pending"
+    ]
+  },
+  "source_files_consolidated": {
+    "total_sources": "30 source files + 4 reincarnation logs + 3 session records + 2 RECON audits across all 3 repos",
+    "strategic_decision_files": [
+      "CANON/REINCARNATION/2026-03-24-100-phoenixes-war-games.md",
+      "CANON/REINCARNATION/2026-03-25-RISE-WEBSITE-BUILD.md",
+      "CANON/REINCARNATION/2026-03-26-vault-expansion-blueprint-ingestion.md",
+      "CANON/REINCARNATION/2026-03-26-repo-consolidation-hobbs-lab-canonical.md",
+      "CANON/RECON/CHROME-FREE-TECH-STACK-AUDIT-2026-03-26.md",
+      "CANON/RECON/OPENCLAW-MARKET-RESEARCH-2026-03-26.md",
+      "OPERATIONS/SESSION-RECORD-2026-03-22-23.md",
+      "OPERATIONS/FIREBASE-DEPLOY-ANALYSIS.md"
+    ],
+    "code_directories": [
+      "APPS/obi-chrome-extension/ (10 files, ~16KB)",
+      "APPS/firebase/ (6 files, ~4KB)"
+    ],
+    "architecture_files": [
+      "CANON/NET-WEB-ARCHITECTURE-2026.md",
+      "CANON/TOOL-STACK-ARSENAL-2026.md"
+    ],
+    "cross_repo": {
+      "immortalize": "MASTER-SYNC.md — legacy Firebase references",
+      "commandstation": "0 Firebase/Chrome hits — dormant React dashboard"
+    }
+  },
+  "open_rulings": [
+    "Firebase role: Option A, B, C, or D — AWAITING_MICHAEL",
+    "Chrome Extension deployment timing — AWAITING_MICHAEL"
+  ],
+  "next_actions": {
+    "red_michael_needed": [
+      "Firebase role decision (A/B/C/D)",
+      "Chrome Extension deployment timing"
+    ],
+    "red_agent_can_do": [
+      "Set phoenix-ob1 to PRIVATE (security)",
+      "Fix content.js TODO — wire Gemini Nano Prompt API"
+    ],
+    "yellow_short_term": [
+      "Create Firebase project → get project ID → update .firebaserc",
+      "Generate Chrome Extension key → update manifest.json",
+      "Create 16/48/128 icon PNGs (Gospel 444 palette)",
+      "Build functions/ directory with admin API endpoints",
+      "Integrate Gemini Nano Summarizer + Writer/Rewriter APIs"
+    ]
+  },
+  "canon_guardrails": {
+    "verbatim_quotes_preserved": true,
+    "no_fabrication": true,
+    "no_drift": true,
+    "cross_repo_mined": true,
+    "gospel_444_aligned": true
+  },
+  "cross_references": [
+    {"target": "CANON/NET-WEB-ARCHITECTURE-2026.md", "relation": "Architecture parent — domain strategy, deploy pipeline"},
+    {"target": "CANON/TOOL-STACK-ARSENAL-2026.md", "relation": "Firebase listed as PRODUCTION tier"},
+    {"target": "CANON/RECON/CHROME-FREE-TECH-STACK-AUDIT-2026-03-26.md", "relation": "Full Chrome audit — 5-stage pipeline"},
+    {"target": "CANON/RECON/OPENCLAW-MARKET-RESEARCH-2026-03-26.md", "relation": "Competitive validation of Chrome+Firebase strategy"},
+    {"target": "HEAVY-LEDGER/VAULT-D-PRELAUNCH-CONSOLIDATED-1.json", "relation": "Cloudflare Workers architecture overlap"},
+    {"target": "HEAVY-LEDGER/VAULT-B-FOUNDATIONS-CONSOLIDATED-2.json", "relation": "CAS-Retry, Monolith, auth spine references"}
+  ]
+}

@@ -1,8 +1,8 @@
 {
-  "git_head": "5f5338f RISE: Convert HL-113 MSS-V5 security authority session to Heavy Ledger JSON",
-  "verify_ok": false,
-  "timestamp": "2026-05-15T20:23:49.3685038+07:00",
+  "soul_ok": true,
+  "git_head": "be4b1f3 RISE: MegaMerge cleanup - remove legacy orphaned files and directories",
   "doctor_ok": true,
   "git_branch": "master",
-  "soul_ok": true
+  "verify_ok": false,
+  "timestamp": "2026-05-15T21:03:13.1555465+07:00"
 }

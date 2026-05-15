@@ -1,0 +1,5 @@
+﻿# PROOF - PROTOCOL_FINGERPRINT LAST
+
+Source: D:\phoenix-chat-logs\CHAT-LOGS-ONLY\PROTOCOL_FINGERPRINT.txt
+
+

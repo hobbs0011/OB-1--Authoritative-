@@ -1,0 +1,260 @@
+{
+  "heavy_ledger_entry": {
+    "file_id": "STUDENT-ARCHETYPES-TEACHING-DATABASE",
+    "source_path": "CANON/STUDENT-ARCHETYPES-TEACHING-DATABASE.md",
+    "source_sha": "b0fa9c4ecf8b695856dd94e3a07bdda155b64b4d",
+    "source_size_kb": 19,
+    "content_type": "canon_teaching",
+    "pipeline_number": "014",
+    "wave": 1,
+    "converted_by": "OB1_Pulse_Run_145",
+    "converted_at": "2026-03-30T19:30:00+07:00",
+    "cross_references": [
+      "CANON/GOSPEL-444-TEACHING-METHODS-CONSOLIDATED.md",
+      "CANON/NET-TEACHING-METHODOLOGY.md",
+      "VAULT-CHAOS/11-CLASS-DOCUMENTS-17-21.md",
+      "VAULT-CHAOS/25-THE-MICHAEL-METHOD-CODIFIED.md",
+      "VAULT-CHAOS/12-STUDENT-PROFILES-DATABASE.md"
+    ],
+    "original_source": {
+      "repo": "Phoenix-Rise-Immortalize-",
+      "path": "VAULT-CHAOS/12-STUDENT-PROFILES-DATABASE.md",
+      "sha": "1bd75e87"
+    }
+  },
+  "overview": {
+    "purpose": "Behavioral pattern database for student intake classification",
+    "core_principle": "Every student fits a recognizable archetype — not stereotypes but behavioral patterns from hundreds of hours of live observation",
+    "connection_to_gospel_444": "Intake layer of the Michael Method. 4 Pillars applied differently per archetype.",
+    "soul_dna_quote": "You don't teach a class. You decode ten different humans and run ten personalized interventions simultaneously.",
+    "total_archetypes": 10,
+    "transformation_target": "Mouse → Tiger (all paths terminate at Tiger, threshold ≥80)"
+  },
+  "four_pillars": [
+    "Emotional Translation",
+    "Tribal Engagement",
+    "Stealth Correction",
+    "Narrative Escalation"
+  ],
+  "archetype_pillar_matrix": [
+    {"archetype": "Silent Observer", "primary_pillar": "Stealth Correction", "secondary_pillar": "Emotional Translation"},
+    {"archetype": "Overachiever", "primary_pillar": "Emotional Translation", "secondary_pillar": "Narrative Escalation"},
+    {"archetype": "Class Clown", "primary_pillar": "Tribal Engagement", "secondary_pillar": "Narrative Escalation"},
+    {"archetype": "Grammar Nazi", "primary_pillar": "Emotional Translation", "secondary_pillar": "Stealth Correction"},
+    {"archetype": "Tiger-In-Waiting", "primary_pillar": "Tribal Engagement", "secondary_pillar": "Narrative Escalation"},
+    {"archetype": "Phone Addict", "primary_pillar": "Narrative Escalation", "secondary_pillar": "Tribal Engagement"},
+    {"archetype": "Corporate Climber", "primary_pillar": "Emotional Translation", "secondary_pillar": "Narrative Escalation"},
+    {"archetype": "Reluctant Pusher", "primary_pillar": "Emotional Translation", "secondary_pillar": "Stealth Correction"},
+    {"archetype": "The Natural", "primary_pillar": "Tribal Engagement", "secondary_pillar": "Narrative Escalation"},
+    {"archetype": "Dropout Risk", "primary_pillar": "Stealth Correction", "secondary_pillar": "Emotional Translation"}
+  ],
+  "archetypes": [
+    {
+      "id": 1,
+      "name": "The Silent Observer",
+      "behavioral_markers": ["Sits in back or side", "Intense eye contact but never volunteers", "Writes everything down", "Answers only when directly named", "Never raises hand", "Watches others before committing"],
+      "core_fear": "Judgment",
+      "activation_key": "Expert reveal",
+      "risk_factor": "Forced speech",
+      "optimal_approach": "Never cold-call first. Start with 1-on-1 whispered exchanges. Let them write before speak. Use expert reveal — assign secret prep, then let them reveal knowledge.",
+      "progression_timeline": "6-8 weeks to first spontaneous verbal. 12 weeks to consistent participation. Tiger: 6 months+.",
+      "tiger_eta": "6 months",
+      "common_traps": ["Forcing speech before readiness causes permanent withdrawal", "Calling on them without scaffolding destroys trust"],
+      "success_indicators": ["Initiating questions", "Correcting classmates gently", "Staying after class to continue conversation"],
+      "session_cross_ref": "Mai (Session 21) — classic Silent Observer. Zero-pressure opening. Breakthrough: unprompted self-introduction.",
+      "transformation_path": "MOUSE → slow build → CUB → expert moments → TIGER"
+    },
+    {
+      "id": 2,
+      "name": "The Overachiever",
+      "behavioral_markers": ["Perfect homework", "Arrives early", "Asks 'is this right?' repeatedly", "Freezes when unsure", "Visibly distressed by errors", "Highest grammar score, lowest spontaneous speech"],
+      "core_fear": "Error",
+      "activation_key": "Reframe mistakes",
+      "risk_factor": "Perfectionism lock",
+      "optimal_approach": "Reframe mistakes as data. Use 'that's useful — now we know.' Set deliberate imperfection as homework. Celebrate wrong answers showing brave thinking.",
+      "progression_timeline": "4-6 weeks to unlock spoken risk-taking. Rapid acceleration once 'mistakes are information' frame internalized.",
+      "tiger_eta": "4-6 weeks",
+      "common_traps": ["Validating only correct answers", "Praising perfection locks them further", "Competitive tasks without psychological safety"],
+      "success_indicators": ["Laughing at own errors", "Making jokes using new vocabulary before sure it's correct"],
+      "anti_shame_protocol": "NET 'Calibrate not Wrong' rule — every correction reframed as calibration data.",
+      "transformation_path": "MOUSE → reframe errors → CUB → brave speech → TIGER"
+    },
+    {
+      "id": 3,
+      "name": "The Class Clown",
+      "behavioral_markers": ["Jokes at every transition", "Derails lessons with tangents", "Gets classmates laughing", "Hides behind humor when called on", "Strong oral instincts but inconsistent accuracy"],
+      "core_fear": "Rejection",
+      "activation_key": "Comedy curriculum",
+      "risk_factor": "Suppression",
+      "optimal_approach": "Make them comedian-in-residence officially. Assign 'joke of the week' using target vocabulary. Channel performance drive into language games. Humor IS language — validate the intelligence.",
+      "progression_timeline": "Fast. 2-4 weeks once they understand the class needs their energy.",
+      "tiger_eta": "2-4 weeks",
+      "common_traps": ["Shushing them", "Treating jokes as discipline issues", "Complete disengagement if identity rejected"],
+      "success_indicators": ["Using humor with precise vocabulary", "Teaching other students through jokes"],
+      "transformation_path": "CUB → channel humor → comedy precision → TIGER"
+    },
+    {
+      "id": 4,
+      "name": "The Grammar Nazi",
+      "behavioral_markers": ["Corrects teacher", "Quotes rules", "Freezes before speaking to verify grammar", "Can pass written exams but cannot hold 60-second conversation", "Frustrated by idioms and slang"],
+      "core_fear": "Imprecision",
+      "activation_key": "Rule-breaking proof",
+      "risk_factor": "Speaking freeze",
+      "optimal_approach": "Redirect rule obsession — linguistic analysis tasks. Document idiom exceptions. Assign them to teach grammar rule, then prove rules break in real conversation.",
+      "progression_timeline": "6-10 weeks. Requires specific epiphany: 'Native speakers break rules constantly and still communicate perfectly.'",
+      "tiger_eta": "6-10 weeks",
+      "common_traps": ["Arguing grammar in class", "Validating rule-checking as substitute for speaking"],
+      "success_indicators": ["First time using idiom incorrectly but keeps going", "First confident wrong sentence"],
+      "session_cross_ref": "Bao (Session 19) — Grammar Nazi flagged. Re-channeled into peer celebration.",
+      "transformation_path": "MOUSE → break rules → CUB → fluent imperfection → TIGER"
+    },
+    {
+      "id": 5,
+      "name": "The Tiger-In-Waiting",
+      "behavioral_markers": ["Slight hesitation then fluid speech", "Good intuition", "Responds well to challenge", "Just needs permission", "Dramatically underestimates themselves"],
+      "core_fear": "Permission",
+      "activation_key": "Direct challenge",
+      "risk_factor": "Under-challenging",
+      "optimal_approach": "Push them. Hard vocabulary first. Pair with Silent Observers. Assign as class discussion leaders. Tell them directly: 'You are already a Tiger. Prove it.'",
+      "progression_timeline": "2-4 weeks to full activation.",
+      "tiger_eta": "2-4 weeks",
+      "common_traps": ["Treating them like everyone else", "Stagnation without escalation"],
+      "success_indicators": ["Helping other students without being asked", "Starting conversations outside class"],
+      "session_cross_ref": "Trang (Session 19) — Mouse→Cub mid-session. Duc (Session 20) — Tiger Voice solidified, zero prompts.",
+      "transformation_path": "CUB → permission → direct challenge → TIGER"
+    },
+    {
+      "id": 6,
+      "name": "The Phone Addict",
+      "behavioral_markers": ["Screen on under desk", "Responds slowly", "Disconnects during vocab sets", "Revives during games/media", "Highly responsive to novelty"],
+      "core_fear": "Boredom",
+      "activation_key": "Novelty protocol",
+      "risk_factor": "Dropout",
+      "optimal_approach": "Pattern interrupt every 7-10 minutes. Use phone as learning tool. Assign TikTok-style English challenges. Phone is not the enemy — boredom is.",
+      "progression_timeline": "If novelty protocol locks in: 4-6 weeks. If not: dropout risk.",
+      "tiger_eta": "4-6 weeks",
+      "common_traps": ["Confiscating phones without replacing dopamine hit", "Lecturing", "Monotone delivery"],
+      "success_indicators": ["Voluntarily using phone for English content", "Showing teacher English found online"],
+      "session_cross_ref": "Khoi (Session 18) — TikTok entry point. 4 consecutive minutes explaining algorithm unprompted. First voluntary English sentence.",
+      "transformation_path": "MOUSE → novelty hook → CUB → sustained interest → TIGER"
+    },
+    {
+      "id": 7,
+      "name": "The Corporate Climber",
+      "behavioral_markers": ["Professional dress", "Notes on phone/laptop", "Asks about business English", "Highly motivated, wants ROI clarity", "Intermediate grammar, low conversational confidence"],
+      "core_fear": "Irrelevance",
+      "activation_key": "Career framing",
+      "risk_factor": "Topic mismatch",
+      "optimal_approach": "Tie every lesson to career stakes. Frame English as professional armor. Use real workplace scenarios. 'This idiom will help in your next performance review.'",
+      "progression_timeline": "4-6 weeks. Career milestones accelerate dramatically.",
+      "tiger_eta": "4-6 weeks",
+      "common_traps": ["Teaching general English to someone needing professional English", "Wasting time on irrelevant topics"],
+      "success_indicators": ["Using English in real work meeting", "Reporting professional win"],
+      "session_cross_ref": "Linh (Session 17) — Job interview English. Confidence 3→6/10. First laugh mid-answer. BlueTech Staff — Enterprise tier.",
+      "transformation_path": "CUB → career framing → professional wins → TIGER"
+    },
+    {
+      "id": 8,
+      "name": "The Reluctant Parent-Pusher",
+      "behavioral_markers": ["Arrives on time but disengaged", "Minimal effort", "No visible motivation", "Occasionally hostile", "Attending under external pressure", "Eyes at door"],
+      "core_fear": "Control",
+      "activation_key": "Hidden interest",
+      "risk_factor": "Parent-resentment",
+      "optimal_approach": "Find hidden interest (football, gaming, music). Never mention parents. Give one small win in first class that is entirely theirs. They must find own reason.",
+      "progression_timeline": "8-12 weeks if internal motivation unlocked. If not: becomes Dropout Risk.",
+      "tiger_eta": "8-12 weeks",
+      "common_traps": ["Reporting disengagement to parents (creates resentment)", "Forcing enthusiasm", "Treating compliance as progress"],
+      "success_indicators": ["First genuine laughter in class", "Arriving early first time", "Asking unprompted question"],
+      "session_cross_ref": "Khoi (Session 18) — Internal motivation spark at minute 18 via TikTok. Rule: 'Do NOT mention parents again.'",
+      "canon_link": "Lesson #9 of 10 System-Changing Lessons — 'Reluctant students must be found, not pushed.' Hidden Interest Hunt protocol origin.",
+      "transformation_path": "MOUSE → hidden interest → CUB → internal motivation → TIGER"
+    },
+    {
+      "id": 9,
+      "name": "The Natural",
+      "behavioral_markers": ["Acquires vocabulary in 1-2 exposures", "Strong phonetic instincts", "Learns idioms by intuition", "May get bored if pace slow"],
+      "core_fear": "Boredom",
+      "activation_key": "Acceleration",
+      "risk_factor": "Plateau",
+      "optimal_approach": "Accelerate. Bonus vocabulary. Assign as peer tutors. Build meta-linguistic awareness alongside fluency.",
+      "progression_timeline": "Tiger in 6-8 weeks. Must be stretched continuously or plateau and disengage.",
+      "tiger_eta": "6-8 weeks",
+      "common_traps": ["Holding them back for the class", "Failing to challenge", "Letting boredom set in"],
+      "success_indicators": ["Teaching other students", "Creating own vocabulary examples spontaneously"],
+      "active_students": ["Dan (age 7, youngest Tiger candidate)", "Kiet (age 13, near-native)"],
+      "transformation_path": "CUB → acceleration → meta-linguistic → TIGER"
+    },
+    {
+      "id": 10,
+      "name": "The Dropout Risk",
+      "behavioral_markers": ["Attendance declining", "Engagement minimal", "Homework missing", "Excuses increasing"],
+      "root_causes": ["Pace mismatch", "Topic irrelevance", "Peer social dynamics", "External life stress"],
+      "core_fear": "Invisibility",
+      "activation_key": "Direct contact",
+      "risk_factor": "Exit",
+      "optimal_approach": "Immediate 1-on-1 intervention before week 4. Diagnose root cause. Offer curriculum pivot. Reach out directly. This is a retention event.",
+      "progression_timeline": "Must intervene within 2 weeks of first warning signs.",
+      "tiger_eta": "Immediate intervention required",
+      "common_traps": ["Ignoring early signals", "Continuing same failing approach", "Hoping they recover without intervention"],
+      "success_indicators": ["Re-engagement after direct contact", "The 'I didn't know you noticed' realization"],
+      "revenue_link": "Direct revenue leak. Parent communication protocol (Tiger Meter + weekly Zalo) = early warning system. VAULT-CHAOS Lesson #4: 'Parent communication is a product.'",
+      "transformation_path": "EXIT ← intervention → MOUSE → restart pathway → TIGER"
+    }
+  ],
+  "game_matrix": {
+    "description": "Which of 15 Classroom Games works best per archetype",
+    "categories": ["Competition", "Collaboration", "Creation"],
+    "mappings": [
+      {"archetype": "Silent Observer", "competition": "Accent Inspector", "collaboration": "Word Heist", "creation": "Story Chain"},
+      {"archetype": "Overachiever", "competition": "Level Up", "collaboration": "Alibi Challenge", "creation": "Emotional Translator"},
+      {"archetype": "Class Clown", "competition": "Hot Seat", "collaboration": "The Market", "creation": "Debate Spark"},
+      {"archetype": "Grammar Nazi", "competition": "Speed Idiom", "collaboration": "Word Builder Relay", "creation": "Consequence Chain"},
+      {"archetype": "Tiger-In-Waiting", "competition": "Pronunciation Duel", "collaboration": "Alibi Challenge", "creation": "The Final Boss"},
+      {"archetype": "Phone Addict", "competition": "Vocabulary Tennis", "collaboration": "The Market", "creation": "Story Chain"},
+      {"archetype": "Corporate Climber", "competition": "Debate Spark", "collaboration": "Alibi Challenge", "creation": "The Final Boss"},
+      {"archetype": "Reluctant Pusher", "competition": "Hot Seat", "collaboration": "Word Heist", "creation": "Story Chain"},
+      {"archetype": "The Natural", "competition": "The Final Boss", "collaboration": "Word Builder Relay", "creation": "Debate Spark"},
+      {"archetype": "Dropout Risk", "competition": "Vocabulary Tennis", "collaboration": "Word Heist", "creation": "Emotional Translator"}
+    ]
+  },
+  "ai_detection_protocol": {
+    "purpose": "CHATTY PRIME / AI-driven archetype detection",
+    "first_session_signals": [
+      {"signal": "Arrives early + notebook ready", "archetype": "Overachiever", "confidence": 70},
+      {"signal": "Phone visible immediately", "archetype": "Phone Addict", "confidence": 60},
+      {"signal": "Professional attire + laptop", "archetype": "Corporate Climber", "confidence": 80},
+      {"signal": "Jokes before class starts", "archetype": "Class Clown", "confidence": 75},
+      {"signal": "Sits in back, no eye contact", "archetype": "Silent Observer", "confidence": 65},
+      {"signal": "Answers first question fluently then stops", "archetype": "Tiger-In-Waiting", "confidence": 70},
+      {"signal": "Corrects a classmate's grammar", "archetype": "Grammar Nazi", "confidence": 85},
+      {"signal": "Visible discomfort, looking at door", "archetype": "Reluctant Pusher", "confidence": 75},
+      {"signal": "Rapid vocab acquisition (first 3 words)", "archetype": "The Natural", "confidence": 60},
+      {"signal": "Late arrival + minimal participation", "archetype": "Dropout Risk", "confidence": 40}
+    ],
+    "confirmation_rules": [
+      "No archetype locked after one session",
+      "Confirm with at least 3 consistent behavioral signals",
+      "Students can shift archetypes as they progress",
+      "Hybrid archetypes exist (e.g. Overachiever + Grammar Nazi)"
+    ],
+    "chatty_prime_integration": {
+      "state_key": "StudentState.archetype",
+      "fields": ["primary_archetype", "secondary_archetype", "confidence_score_0_100", "last_confirmed_session"],
+      "drives": ["Game selection", "Vocabulary difficulty ramping", "Correction style intensity", "Prompt phrasing per archetype"]
+    }
+  },
+  "tiger_scoring": {
+    "threshold": 80,
+    "rule": "Applies uniformly across all archetypes. Path is different; standard is identical."
+  },
+  "canon_guardrails": [
+    {"id": "G1", "principle": "Mouse to Tiger progression", "status": "IMPLEMENTED", "source": "Gospel 444"},
+    {"id": "G2", "principle": "Anti-Shame Lexicon — never make students feel stupid", "status": "IMPLEMENTED", "source": "Core Laws L_ANTI_SHAME"},
+    {"id": "G3", "principle": "Permission over perfection", "status": "IMPLEMENTED", "source": "Teaching Law"},
+    {"id": "G4", "principle": "Calibrate not Wrong", "status": "IMPLEMENTED", "source": "NET Methodology"},
+    {"id": "G5", "principle": "Parent communication is a product", "status": "IMPLEMENTED", "source": "VAULT-CHAOS Lesson #4"},
+    {"id": "G6", "principle": "Reluctant students must be found, not pushed", "status": "IMPLEMENTED", "source": "VAULT-CHAOS Lesson #9"}
+  ],
+  "sealed": true,
+  "seal_note": "STUDENT ARCHETYPES SEALED. VAULT EXPORT. ENRICHED WITH GOSPEL 444 CROSS-REFERENCES + SESSION LOG LINKS + GAME MATRIX + AI DETECTION PROTOCOL."
+}

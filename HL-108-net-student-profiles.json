@@ -1,0 +1,153 @@
+{
+  "heavy_ledger_entry": {
+    "id": "HL-108",
+    "source_file": "CANON/REINCARNATION/2026-03-24-net-student-profiles.md",
+    "source_sha": "e56e3c7eb1aaddf9458c13ee58f266c74ea14297",
+    "session_tag": "net-student-profiles",
+    "date_range": "2026-03-24T19:00:00+07:00/2026-03-24T21:53:00+07:00",
+    "signal_density": "MEDIUM",
+    "signal_tier": "OPERATIONAL",
+    "extractor": "OB1-PULSE-RUN-254",
+    "conversion_timestamp": "2026-04-02T02:30:00+07:00",
+    "wave": 8,
+    "wave_position": "24/46"
+  },
+  "raw_quotes": [
+    {
+      "priority": "yellow",
+      "tag": "dual-publish-scope",
+      "verbatim": "make a dual update to notion with this that mirrors the repo on Hobbs-Lab that ends with 'ultimate'"
+    },
+    {
+      "priority": "yellow",
+      "tag": "soul-dna-bible-update",
+      "verbatim": "make a SOUL DNA BIBLE update as this lesson was rich with SOUL DNA"
+    },
+    {
+      "priority": "yellow",
+      "tag": "student-section-creation",
+      "verbatim": "make a new student section and a sub section for Mai Tram specifically"
+    },
+    {
+      "priority": "green",
+      "tag": "broad-distribution",
+      "verbatim": "and add this to whatever other folder on both notion and the repo that is useful and applicable"
+    },
+    {
+      "priority": "green",
+      "tag": "quy-context",
+      "verbatim": "this is past class with private student from Blue Tech Nguy\u1ec5n Th\u1ecb Thu Quy"
+    },
+    {
+      "priority": "green",
+      "tag": "quy-level",
+      "verbatim": "as you can see she is more of a beginner"
+    },
+    {
+      "priority": "red",
+      "tag": "no-free-work",
+      "verbatim": "we will work on her stuff during class, I dont work for free"
+    },
+    {
+      "priority": "red",
+      "tag": "mixed-dump-separation",
+      "verbatim": "some of the following dump is Mai and some Quy, try and seperate, you should be able to see the difference because of their level also Quy is in Accounting and Mai is HR"
+    },
+    {
+      "priority": "red",
+      "tag": "speed-over-freeze",
+      "verbatim": "you froze, dont take it too seriously, if you cant know where to place something, just omit, go quick"
+    }
+  ],
+  "decisions": [
+    {
+      "number": 1,
+      "decision": "NET Students hub is a first-class operational section under Phoenix HQ",
+      "impact": "NEW_SECTION",
+      "canon_pages_affected": ["PHOENIX_RISING_PROTOCOL_PROJECT_HQ", "OPERATIONS/NET-STUDENTS/"]
+    },
+    {
+      "number": 2,
+      "decision": "Soul DNA Bible gets classroom transcript appendices - A4 created for Mai Tram",
+      "impact": "CANON_EXPANSION",
+      "canon_pages_affected": ["SOUL_DNA_BIBLE", "SOUL-DNA-BIBLE/A4"]
+    },
+    {
+      "number": 3,
+      "decision": "ManyChat exploration happens DURING CLASS - no free work",
+      "impact": "BUSINESS_RULE",
+      "canon_pages_affected": ["CORE_PRINCIPLES_AND_PHYSICS"]
+    },
+    {
+      "number": 4,
+      "decision": "Mixed content separation by student level + department (Beginner/Accounting vs Advanced/HR)",
+      "impact": "OPERATIONAL_PATTERN",
+      "canon_pages_affected": ["OPERATIONS/NET-STUDENTS/"]
+    }
+  ],
+  "corrections": [
+    {
+      "what": "Quy is Accounting, NOT HR",
+      "root_cause": "Agent misclassified student department",
+      "fix_applied": "Corrected to Accounting in student profile",
+      "instruction_update_needed": false
+    },
+    {
+      "what": "Speed over perfection on ambiguous sorting - freeze equals mission failure",
+      "root_cause": "Agent froze on uncertain classification instead of omitting and moving forward",
+      "fix_applied": "Omit-over-freeze principle established",
+      "instruction_update_needed": false
+    }
+  ],
+  "new_principles": [
+    {
+      "number": 1,
+      "verbatim": "we will work on her stuff during class, I dont work for free",
+      "interpretation": "Tool research and student prep happens during paid class time only. No free labor."
+    },
+    {
+      "number": 2,
+      "verbatim": "you froze, dont take it too seriously, if you cant know where to place something, just omit, go quick",
+      "interpretation": "Speed outranks completeness on low-stakes sorting. Omit ambiguous items rather than freezing."
+    },
+    {
+      "number": 3,
+      "principle": "Student profiles are operational canon",
+      "interpretation": "Dual-published under OPERATIONS/NET-STUDENTS/ on GitHub and under Phoenix HQ on Notion."
+    }
+  ],
+  "execution_completed": [
+    "NET Students hub created under Phoenix HQ",
+    "Mai Tram profile - Session 1 + Session 2 (HR interview methodology)",
+    "Quy profile - Accounting (Intern), BlueTech B2B, university background",
+    "Soul DNA Bible A4 - raw classroom transcript",
+    "3 GitHub commits (b10c31a, f3a4b95, profile updates)",
+    "3 Build Log entries",
+    "Navigator Index updated"
+  ],
+  "system_design_insights": [
+    "Student profiles as structured operational docs - repeatable template",
+    "Mixed transcript separation by level + department + content domain",
+    "OPERATIONS/NET-STUDENTS/ is the GitHub home for student artifacts"
+  ],
+  "artifacts_created": [
+    {
+      "name": "Mai Tram Profile",
+      "github_path": "OPERATIONS/NET-STUDENTS/mai-tram/"
+    },
+    {
+      "name": "Quy Profile",
+      "github_path": "OPERATIONS/NET-STUDENTS/quy/"
+    },
+    {
+      "name": "Soul DNA Bible A4",
+      "github_path": "CANON/SOUL-DNA-BIBLE/A4-raw-classroom-mai-tram.md"
+    }
+  ],
+  "session_fingerprint": "2026-03-24:net-student-profiles:9q:4d:2c",
+  "cross_references": {
+    "canon_pages_read": ["SOUL_DNA_BIBLE", "PHOENIX_RISING_PROTOCOL_PROJECT_HQ"],
+    "related_hl_entries": ["HL-102", "HL-105"],
+    "github_commits": ["b10c31a", "f3a4b95"]
+  }
+}

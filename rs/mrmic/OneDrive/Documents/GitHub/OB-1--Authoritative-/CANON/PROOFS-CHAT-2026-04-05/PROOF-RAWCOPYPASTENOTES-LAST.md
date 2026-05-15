@@ -1,0 +1,5 @@
+﻿# PROOF - RAWCOPYPASTENOTES LAST
+
+Source: D:\phoenix-chat-logs\CHAT-LOGS-ONLY\RAWCOPYPASTENOTES.txt
+
+

@@ -1,0 +1,189 @@
+{
+  "meta": {
+    "source_file": "CANON/REINCARNATION/2026-03-24-net-student-profiles.md",
+    "source_sha": "e56e3c7eb1aaddf9458c13ee58f266c74ea14297",
+    "converted_by": "OB1 Pulse Run 241",
+    "converted_at": "2026-04-01T19:00:00+07:00",
+    "pipeline_id": "HL-095",
+    "wave": 8,
+    "category": "reincarnation_session",
+    "signal_density": "MEDIUM",
+    "session_tag": "2026-03-24-net-student-profiles"
+  },
+  "header": {
+    "session_date": "2026-03-24",
+    "time_range": "19:00-21:53 ICT",
+    "thread": "OB1 Chat — NET Student Profiles Session",
+    "theme": "Student profiles as operational canon + mixed dump separation + speed over perfection"
+  },
+  "verbatim_quotes": [
+    {
+      "id": "Q1",
+      "priority": "RED",
+      "text": "make a dual update to notion with this that mirrors the repo on Hobbs-Lab that ends with 'ultimate'",
+      "context": "dual-publish directive",
+      "governor_terms": ["DUAL_PUBLISH"]
+    },
+    {
+      "id": "Q2",
+      "priority": "RED",
+      "text": "make a SOUL DNA BIBLE update as this lesson was rich with SOUL DNA",
+      "context": "classroom transcript = canon material",
+      "governor_terms": ["SOUL_DNA"]
+    },
+    {
+      "id": "Q3",
+      "priority": "YELLOW",
+      "text": "make a new student section and a sub section for Mai Tram specifically",
+      "context": "student profiles as first-class operational section",
+      "governor_terms": []
+    },
+    {
+      "id": "Q4",
+      "priority": "YELLOW",
+      "text": "and add this to whatever other folder on both notion and the repo that is useful and applicable",
+      "context": "cross-indexing directive",
+      "governor_terms": ["DUAL_PUBLISH"]
+    },
+    {
+      "id": "Q5",
+      "priority": "GREEN",
+      "text": "this is past class with private student from Blue Tech Nguyễn Thị Thu Quy",
+      "context": "student identification — Quy is BlueTech private student",
+      "governor_terms": []
+    },
+    {
+      "id": "Q6",
+      "priority": "RED",
+      "text": "we will work on her stuff during class, I dont work for free",
+      "context": "NEW PRINCIPLE: tool research for students happens during paid class time only",
+      "governor_terms": ["REVENUE"]
+    },
+    {
+      "id": "Q7",
+      "priority": "RED",
+      "text": "some of the following dump is Mai and some Quy, try and seperate, you should be able to see the difference because of their level also Quy is in Accounting and Mai is HR",
+      "context": "mixed content separation directive — by level + department",
+      "governor_terms": []
+    },
+    {
+      "id": "Q8",
+      "priority": "RED",
+      "text": "you froze, dont take it too seriously, if you cant know where to place something, just omit, go quick",
+      "context": "CORRECTION: speed over perfection on ambiguous sorting — freeze = mission failure",
+      "governor_terms": ["VELOCITY"]
+    }
+  ],
+  "decisions": [
+    {
+      "id": "D1",
+      "decision": "NET Students hub is a first-class operational section under Phoenix HQ",
+      "impact": "Creates permanent student tracking infrastructure",
+      "canon_pages_affected": ["Phoenix HQ", "Navigator Index"],
+      "implemented": true
+    },
+    {
+      "id": "D2",
+      "decision": "Soul DNA Bible gets classroom transcript appendices",
+      "impact": "A4 appendix created for Mai Tram — raw classroom material = canon-grade",
+      "canon_pages_affected": ["Soul DNA Bible"],
+      "implemented": true
+    },
+    {
+      "id": "D3",
+      "decision": "ManyChat exploration happens DURING CLASS — no free work",
+      "impact": "Revenue protection: tool research for students = billable hours only",
+      "canon_pages_affected": ["NET Teaching Methodology"],
+      "implemented": true
+    },
+    {
+      "id": "D4",
+      "decision": "Mixed content separation by level + department",
+      "impact": "Beginner (Quy/Accounting) vs advanced (Mai/HR) — sorting heuristic",
+      "canon_pages_affected": ["OPERATIONS/NET-STUDENTS/"],
+      "implemented": true
+    }
+  ],
+  "corrections": [
+    {
+      "id": "C1",
+      "what": "Quy is Accounting, NOT HR",
+      "root_cause": "Agent had wrong department assignment",
+      "fix": "Corrected in student profile — Quy = Accounting intern at BlueTech",
+      "instruction_update_needed": false
+    },
+    {
+      "id": "C2",
+      "what": "Speed over perfection on ambiguous sorting — agent froze",
+      "root_cause": "Trying to perfectly categorize ambiguous mixed content instead of moving fast",
+      "fix": "NEW LAW: omit over freeze — speed outranks completeness on low-stakes sorting",
+      "instruction_update_needed": true,
+      "instruction_patch": "Add to §2 CORE_LAWS or §7 VELOCITY: OMIT_OVER_FREEZE → ambiguous low-stakes → skip and move → freeze = mission failure"
+    }
+  ],
+  "new_principles": [
+    {
+      "id": "P1",
+      "verbatim": "I don't work for free.",
+      "interpretation": "Tool research and exploration for students happens exclusively during paid class time. No unbillable student prep.",
+      "governor_term": "REVENUE_PROTECTION"
+    },
+    {
+      "id": "P2",
+      "verbatim": "dont take it too seriously, if you cant know where to place something, just omit, go quick",
+      "interpretation": "Omit over freeze. Speed outranks completeness on low-stakes sorting. A frozen agent is worse than an imperfect one.",
+      "governor_term": "VELOCITY"
+    },
+    {
+      "id": "P3",
+      "verbatim": "make a new student section",
+      "interpretation": "Student profiles are operational canon — dual-published under OPERATIONS/NET-STUDENTS/. First-class data, not afterthought.",
+      "governor_term": "OPERATIONAL_CANON"
+    }
+  ],
+  "emotional_signal": {
+    "tone": "directive_engaged",
+    "energy": "HIGH",
+    "frustration_triggers": ["agent freeze on ambiguous content"],
+    "excitement_triggers": ["rich Soul DNA from classroom session", "student profiles becoming operational"],
+    "alignment_notes": "Michael corrected quickly and moved on — not a pattern break, just a speed correction"
+  },
+  "artifacts_created": [
+    {
+      "name": "NET Students hub",
+      "location_notion": "Under Phoenix HQ",
+      "location_github": "OPERATIONS/NET-STUDENTS/"
+    },
+    {
+      "name": "Mai Tram profile (Session 1 + 2)",
+      "location_notion": "NET Students",
+      "location_github": "OPERATIONS/NET-STUDENTS/"
+    },
+    {
+      "name": "Quy profile",
+      "location_notion": "NET Students",
+      "location_github": "OPERATIONS/NET-STUDENTS/"
+    },
+    {
+      "name": "Soul DNA Bible A4 — raw classroom transcript",
+      "location_notion": "Soul DNA Bible",
+      "location_github": "CANON/"
+    }
+  ],
+  "commits_referenced": ["b10c31a", "f3a4b95"],
+  "cross_references": {
+    "canon_pages": ["Soul DNA Bible", "NET Teaching Methodology", "Gospel 444"],
+    "governor_terms_active": ["DUAL_PUBLISH", "SOUL_DNA", "REVENUE", "VELOCITY"],
+    "related_heavy_ledger": ["SOUL-DNA-BIBLE-A4-RAW-CLASSROOM-MAI-TRAM-2026-03-24.json", "NET-TEACHING-METHODOLOGY.json"]
+  },
+  "system_design_insights": [
+    "Student profiles as structured operational docs — repeatable template for all NET students",
+    "Mixed transcript separation heuristic: level + department + content domain",
+    "OPERATIONS/NET-STUDENTS/ is the GitHub home for student artifacts"
+  ],
+  "omissions_ledger": {
+    "explicitly_omitted": [],
+    "not_available": ["Exact transcript content from Mai/Quy sessions — referenced but not included in reincarnation entry"],
+    "batch_markers": "1/1 — complete conversion"
+  }
+}

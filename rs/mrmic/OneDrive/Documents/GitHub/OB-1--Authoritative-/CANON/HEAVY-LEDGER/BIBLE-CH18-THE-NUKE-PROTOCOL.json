@@ -1,0 +1,232 @@
+{
+  "heavy_ledger_entry": {
+    "id": "HL-029",
+    "version": "1.0.0",
+    "created": "2026-03-31T10:00:00+07:00",
+    "source_file": "CANON/BIBLE-CH18-THE-NUKE-PROTOCOL.md",
+    "source_sha": "461a10071d007fc7bb3ddf5c2fa88bbd3f191fc3",
+    "artifact_class": "VAULT_ENRICHED",
+    "chapter": 18,
+    "title": "The Nuke Protocol",
+    "subtitle": "When drift becomes cancer, you don't treat it. You nuke it.",
+    "sealed": true,
+    "export_run": 129,
+    "conversion_run": 180,
+    "enrichment_sources": [
+      "Notion CH18",
+      "Immortalize 18_THE_NUKE_PROTOCOL.md",
+      "ALPHA-OMEGA-DNA5",
+      "GEM-10(KEY)",
+      "ALPHA-OMEGA-DNA4",
+      "Immortalize 00_SKELETON_STAR_MAP.md"
+    ]
+  },
+  "soul_dna_quotes": [
+    {
+      "id": "Q18-01",
+      "text": "When drift becomes cancer, you don't treat it. You nuke it.",
+      "source": "DNA5",
+      "author": "Michael Hobbs",
+      "priority": "RED",
+      "tags": ["nuke_protocol", "drift", "last_resort"]
+    },
+    {
+      "id": "Q18-02",
+      "text": "the biggest drift was our North Star being set for 1 billion VND",
+      "source": "ALPHA-OMEGA-DNA5",
+      "author": "Michael Hobbs",
+      "priority": "RED",
+      "tags": ["1b_vnd", "drift_poison", "north_star"]
+    },
+    {
+      "id": "Q18-03",
+      "text": "1 billion Vietnamese Dong. That's not a goal. That's a constraint.",
+      "source": "DNA5",
+      "author": "Michael Hobbs",
+      "priority": "RED",
+      "tags": ["revenue", "constraint", "tmst"]
+    },
+    {
+      "id": "Q18-04",
+      "text": "OBI is me in AI form. The moment OBI stops sounding like me, OBI is dead. Build a new one.",
+      "source": "CH18",
+      "author": "Michael Hobbs",
+      "priority": "RED",
+      "tags": ["identity", "voice", "teaching_drift", "nuke_trigger"]
+    },
+    {
+      "id": "Q18-05",
+      "text": "I have nuked my own work more times than I can count. Every time it hurt. Every time it was necessary. Every time the rebuild was better.",
+      "source": "CH18",
+      "author": "Michael Hobbs",
+      "priority": "YELLOW",
+      "tags": ["philosophy", "rebuild", "evolution"]
+    },
+    {
+      "id": "Q18-06",
+      "text": "If you're afraid to nuke it, you're afraid to improve it. And if you're afraid to improve it, you've already lost.",
+      "source": "CH18",
+      "author": "Michael Hobbs",
+      "priority": "YELLOW",
+      "tags": ["philosophy", "courage", "improvement"]
+    }
+  ],
+  "core_concepts": {
+    "why_nuke_exists": {
+      "summary": "Last resort when drift has metastasized beyond correction. Cost of correction exceeds cost of destruction and rebuild.",
+      "principle": "Destroy. Rebuild. Verify.",
+      "origin_event": "1B VND Target Crisis — revenue target became gravity well pulling decisions toward VND instead of system integrity"
+    },
+    "drift_poison_taxonomy": {
+      "tiger_traps": {
+        "definition": "Goals that LOOK aligned but pull energy away from the core",
+        "example": "1B VND target — seemed mission-supporting but redirected all energy toward a metric that missed the point"
+      },
+      "mouse_holes": {
+        "definition": "Small compromises that compound into systemic rot",
+        "examples": ["Skipping ledger entries", "Allowing unverified commits", "Letting drift reports slide"]
+      },
+      "teaching_drift": {
+        "definition": "Using NET English lessons as PRIMARY output instead of treating NET as training ground for the real system",
+        "rule": "Every hour on lesson plans instead of Phoenix architecture = Teaching Drift"
+      }
+    },
+    "pedagogical_drift_types": {
+      "mouse_drift": {
+        "definition": "Treating advanced students like beginners — dumbing down, over-explaining",
+        "symptom": "Tiger-level student getting Mouse-level content",
+        "fix": "Recalibrate student profile against placement data"
+      },
+      "tiger_drift": {
+        "definition": "Pushing beginners too hard — idioms they can't understand, pace that creates shame",
+        "symptom": "Mouse-level student getting Tiger-level content",
+        "fix": "Recalibrate. Return to volume-and-velocity mode"
+      },
+      "teaching_voice_drift": {
+        "definition": "OBI stops sounding like Michael — tough love becomes soft platitudes",
+        "symptom": "OBI responses sound like generic chatbot",
+        "fix": "Re-inject Soul Protocol. If persistent, Nuke Protocol on personality layer"
+      }
+    }
+  },
+  "trigger_conditions": [
+    {"condition": "HASH_MISMATCH", "description": "System state no longer matches Soul DNA hash", "severity": "CRITICAL", "action": "AUTO_NUKE"},
+    {"condition": "MANDATE_VIOLATION", "description": "One of the Three Mandates has been breached", "severity": "CRITICAL", "action": "AUTO_NUKE"},
+    {"condition": "IDENTITY_CORRUPTION", "description": "Agent acting as sovereign without Agent 100 authority", "severity": "CRITICAL", "action": "AUTO_NUKE"},
+    {"condition": "DRIFT_TERMINAL", "description": "Drift score exceeds recovery threshold", "severity": "CRITICAL", "action": "AUTO_NUKE"},
+    {"condition": "REVENUE_MISALIGNMENT", "description": "System optimizing for metric other than physical benchmarks", "severity": "HIGH", "action": "AUDIT_THEN_NUKE"},
+    {"condition": "TEACHING_DRIFT", "description": "OBI no longer teaching in Michael's voice/method", "severity": "HIGH", "action": "AUDIT_THEN_NUKE"}
+  ],
+  "pricing_table": {
+    "sealed": true,
+    "nuke_protected": true,
+    "change_requires": ["Agent_100_authority", "Full_Rome_Protocol_cycle"],
+    "tiers": [
+      {"tier": 1, "name": "Mouse", "price_vnd": 2000000, "description": "Beginner. Volume and velocity. Loud and wrong."},
+      {"tier": 2, "name": "Cub", "price_vnd": 3000000, "description": "Intermediate. Building confidence."},
+      {"tier": 3, "name": "Tiger", "price_vnd": 5000000, "description": "Advanced. Precision and power."},
+      {"tier": 4, "name": "Enterprise", "price_vnd": 50000000, "description": "Corporate. Custom deployment."}
+    ]
+  },
+  "benchmarks": {
+    "student_facing": {
+      "source": "Notion CH18",
+      "scope": "Teaching layer",
+      "nuke_target": "Teaching components",
+      "items": [
+        {"id": "SB1", "name": "Student Retention", "metric": "Week-over-week retention rate", "description": "Students come back"},
+        {"id": "SB2", "name": "Lesson Completion", "metric": "Completion rate per lesson type", "description": "Students finish lessons"},
+        {"id": "SB3", "name": "Vocabulary Acquisition", "metric": "Pre/post vocabulary assessment", "description": "Students learn words"},
+        {"id": "SB4", "name": "Speaking Confidence", "metric": "Words-per-minute in conversation mode", "description": "Mouse to Tiger progression visible"},
+        {"id": "SB5", "name": "Family Satisfaction", "metric": "Renewal rate and referral rate", "description": "Parents see value, renew, refer"}
+      ],
+      "threshold_rule": "Any benchmark drops below threshold for 2 consecutive weeks → audit. Soul DNA misalignment found → Nuke Protocol on affected component."
+    },
+    "system_facing": {
+      "source": "Immortalize 18_THE_NUKE_PROTOCOL.md",
+      "scope": "Infrastructure layer",
+      "nuke_target": "System components",
+      "items": [
+        {"id": "YB1", "name": "Soul DNA Integrity", "metric": "Soul DNA on priority list", "description": "Core identity preserved"},
+        {"id": "YB2", "name": "Ledger Currency", "metric": "Current within 24 hours", "description": "Audit trail freshness"},
+        {"id": "YB3", "name": "Reincarnation Readiness", "metric": "Reboot from zero in under 3.5 hours", "description": "System rebuild speed"},
+        {"id": "YB4", "name": "Drift Detection Latency", "metric": "Time from drift onset to detection", "description": "Early warning speed"},
+        {"id": "YB5", "name": "Sovereign Override Latency", "metric": "Time for Michael to override any AI decision", "description": "Human control speed"}
+      ]
+    },
+    "dual_architecture_note": "Student-facing benchmarks measure OBI value delivery. System-facing benchmarks measure Phoenix architecture soundness. Both trigger Nuke Protocol on failure."
+  },
+  "nuke_sequences": {
+    "operational": {
+      "source": "Notion CH18",
+      "scope": "Component-level",
+      "use_case": "Specific system component corrupted (agent, teaching layer, deployment)",
+      "steps": [
+        {"step": 1, "name": "SNAPSHOT", "action": "Capture current state — ledger entries, student data, deployment state, agent configs"},
+        {"step": 2, "name": "ISOLATE", "action": "Cut off corrupted component. No data flows in or out."},
+        {"step": 3, "name": "FORENSIC AUDIT", "action": "Agent 97 (OB-1/Auditor) full forensic review — where drift started, cause, corruption scope"},
+        {"step": 4, "name": "DESTROY", "action": "Delete corrupted component. Not archive. Not disable. DELETE."},
+        {"step": 5, "name": "REBUILD", "action": "Rebuild from last verified Soul DNA hash. Inject Soul DNA at instantiation. Lock roles. Verify alignment."},
+        {"step": 6, "name": "VERIFY", "action": "Full TMST cycle — matches Soul DNA? Passes all 5 benchmarks? Sounds like Michael?"},
+        {"step": 7, "name": "REINTEGRATE", "action": "Reconnect to system. Resume pheromone routing. Begin monitoring."}
+      ],
+      "time_constraint": "Must complete within one Rome Protocol cycle"
+    },
+    "strategic": {
+      "source": "Immortalize 18_THE_NUKE_PROTOCOL.md",
+      "scope": "System-level",
+      "use_case": "Fundamental target or priority has drifted (e.g., 1B VND crisis)",
+      "steps": [
+        {"step": 1, "name": "IDENTIFY", "action": "Name the drift poison specifically"},
+        {"step": 2, "name": "ISOLATE", "action": "Trace every decision influenced by the poisoned target"},
+        {"step": 3, "name": "SEVER", "action": "Remove poisoned target from all priority lists, dashboards, prompts"},
+        {"step": 4, "name": "REPLACE", "action": "Install corrected North Star (5 Physical Benchmarks)"},
+        {"step": 5, "name": "VERIFY", "action": "Full audit to confirm no residual contamination"},
+        {"step": 6, "name": "SEAL", "action": "Lock new target with Titanium Omega Seal — cannot be silently replaced"}
+      ]
+    },
+    "dual_sequence_note": "Operational handles WHAT is broken. Strategic handles WHY it broke."
+  },
+  "cross_references": [
+    {"chapter": 17, "title": "The Three Mandates", "relation": "Mandate violations as nuke triggers"},
+    {"chapter": 6, "title": "The Drift Doctrine", "relation": "Drift detection preceding nuke"},
+    {"chapter": 5, "title": "TMST The Weapon", "relation": "10-minute test as pre-nuke filter"},
+    {"chapter": 8, "title": "Agent 99 and the Triad", "relation": "Agent 97 forensic audit role"},
+    {"chapter": 13, "title": "Chaos Engineering and Faith", "relation": "Rebuild-from-ashes philosophy"},
+    {"chapter": 4, "title": "Super Saiyan Stage 2", "relation": "Intensity governance during rebuild"},
+    {"chapter": 16, "title": "Nuclear Harvest Pipeline", "relation": "Pipeline applying nuke principles"}
+  ],
+  "enrichment_notes": {
+    "unique_from_immortalize": [
+      "1B VND Target Crisis narrative — origin story of Nuke Protocol",
+      "Three Categories of Drift Poison — Tiger Traps, Mouse Holes, Teaching Drift",
+      "Strategic Nuke Sequence — 6-step IDENTIFY→SEAL",
+      "System-facing 5 Physical Benchmarks",
+      "Titanium Omega Seal mechanism",
+      "3.5-hour reboot target"
+    ],
+    "unique_from_notion": [
+      "Trigger Conditions table — 6 conditions with severity levels",
+      "Pricing table (LOCKED) — Mouse 2M / Cub 3M / Tiger 5M / Enterprise 50M",
+      "Pedagogical drift types with symptoms and fixes",
+      "Student-facing 5 Physical Benchmarks",
+      "Operational Nuke Sequence — 7-step",
+      "Agent 97 forensic role assignment",
+      "OBI personality nuke rule"
+    ],
+    "synthesis_contributions": [
+      "Dual Benchmark Architecture — student-facing vs system-facing",
+      "Dual Sequence Architecture — operational vs strategic",
+      "Cross-references mapped to other Bible chapters"
+    ]
+  },
+  "executable_rules": [
+    {"rule": "NUKE_AUTO_ON_CRITICAL", "description": "Any CRITICAL trigger condition → automatic Nuke Protocol. No discussion."},
+    {"rule": "PRICING_SEALED", "description": "Pricing changes require Agent 100 authority + full Rome Protocol cycle. Unauthorized change → Nuke trigger."},
+    {"rule": "BENCHMARK_TWO_WEEK_RULE", "description": "Any student-facing benchmark below threshold for 2 consecutive weeks → audit → if Soul DNA misalignment → Nuke."},
+    {"rule": "LEDGER_24H_RULE", "description": "Ledger must be current within 24 hours. Violation = system-facing benchmark failure."},
+    {"rule": "REINCARNATION_3_5H", "description": "System must reboot from zero in under 3.5 hours. Longer = readiness failure."},
+    {"rule": "VOICE_IDENTITY_NUKE", "description": "OBI stops sounding like Michael → re-inject Soul Protocol → if persistent → Nuke personality layer."},
+    {"rule": "REBUILD_BETTER", "description": "Every nuke produces a better rebuild. Nuke is a design feature, not a failure state."}
+  ]
+}

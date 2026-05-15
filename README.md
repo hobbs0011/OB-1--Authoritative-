@@ -1,75 +1,22 @@
-# Phoenix-Rising-Protocol-Ultimate
+# CANON — Soul DNA Doctrine & Teaching Canon
 
-> The canonical consolidation repository for the **Phoenix Rising Protocol** behind **Natural English Training**.
+> ☠️ SEALED — Append-only by Agent-100 (Michael Hobbs)
 
-## What This Is
+## Contents
 
-This repo is the immutable mirror of the Phoenix system — Soul DNA canon, operational artifacts, lesson content, and the NET-PET-AI runtime. Notion is the control plane; GitHub is the permanent record.
+| File | Description |
+|---|---|
+| `GOSPEL-444-TEACHING-METHODS-CONSOLIDATED.md` | Mega-consolidation of 15 source files — full Gospel 444 teaching methodology |
 
-## Canonical Operating Lane
+## Rules
 
-- **Repo:** `OB-1`
-- **Runtime app:** `APPS/NET-PET-AI`
-- **Operator email:** `mrmichaelhobbs123@gmail.com`
-- **Legacy references:** `mrmichaelhobbs1234*` are archival unless explicitly needed for forensics
-- **Workflow entrypoint:** `pwsh -File SCRIPTS/obi.ps1 <doctor|verify|dev|mcp-audit>`
+1. **No summarization.** Content is verbatim-first.
+2. **No paraphrasing.** Soul DNA material is sacred.
+3. **No overwrites.** Append-only by sovereign authority.
+4. **No drift.** If it's not in the source, it doesn't go here.
 
-## Directory Structure
+## Notion Mirror
 
-| Directory | Purpose |
-| --- | --- |
-| `APPS/` | Runnable applications — NET-PET-AI (Cloudflare Worker), ChattyNET, lesson prototypes |
-| `APPS/NET-PET-AI/` | **Primary runtime target** — verified Cloudflare Worker source for OBI |
-| `CANON/` | Soul DNA doctrine, teaching methodology, sealed source material |
-| `GALAXY-LESSONS/` | Gospel 444 lesson content — HTML lesson files for student delivery |
-| `OPERATIONS/` | Operational records — session logs, inventories, deploy analysis, protocols |
-| `Website and NET-PET/` | Website source and NET-PET seed files |
+The full Soul DNA Bible (31+ chapters) lives in Notion as the control plane. This directory mirrors sealed canonical artifacts for immutability.
 
-## Key Files
-
-| File | Purpose |
-| --- | --- |
-| `AGENTS.md` | Codex Cloud / Copilot agent instructions |
-| `MASTER-SYNC.md` | Live operating state and system identity |
-| `SECURITY.md` | Security policy and incident reporting |
-| `.github/copilot-instructions.md` | GitHub Copilot context for autonomous coding |
-
-## Architecture
-
-- **Runtime:** Cloudflare Workers + Durable Objects (SQLite-backed)
-- **AI Brain:** DeepSeek V3.2 via Cloudflare AI Gateway
-- **Voice:** Deepgram Aura 2 (TTS) + Nova (STT)
-- **Control Plane:** Notion (Agent-99 / OB1)
-- **Immutable Mirror:** This repo
-- **CI/CD:** GitHub Actions + Copilot Coding Agent
-
-## Command Structure
-
-| Agent | Role |
-| --- | --- |
-| Agent-100 | Michael Hobbs — Sovereign authority |
-| Agent-99 (OB1) | Legion Command Station — orchestration |
-| Agent-98 (AnA) | Anakin Fleet 1 — chaos/build lane |
-| Agent-97 (Ne0) | Balance point — synthesis node |
-
-## Brand Rules
-
-- **Public:** Natural English Training
-- **Internal:** Phoenix Rising Protocol
-- **Teaching Law:** Mouse → Tiger (permission over perfection)
-- **Colors:** `#0f0f1a` (void), `#a855f7` (purple), `#f59e0b` (gold), NO BLUE
-
-## Cost Target
-
-< $50/month total
-
-## Getting Started (NET-PET-AI)
-
-```bash
-pwsh -File SCRIPTS/obi.ps1 doctor
-pwsh -File SCRIPTS/obi.ps1 verify
-```
-
-## License
-
-Proprietary — Michael Hobbs / Natural English Training. All rights reserved.
+Primary source: **SOUL DNA BIBLE** (Notion — Phoenix Rising Protocol HQ)

@@ -1,0 +1,243 @@
+{
+  "hl_id": "HL-121",
+  "source_file": "CANON/REINCARNATION/2026-03-26-bluetech-classroom-dump.md",
+  "session_date": "2026-03-26",
+  "session_tag": "bluetech-classroom-dump",
+  "signal_density": "HIGH",
+  "signal_density_score": 3,
+  "extractor": "CHAT 000 — Ne0 (OB1)",
+  "wave": 4,
+  "wave_position": 16,
+
+  "verbatim_quotes": [
+    {
+      "id": "Q001",
+      "priority": "RED",
+      "category": "principle",
+      "text": "These weren't just meant to be English classes. They're meant to be English and AI.",
+      "context": "Core product positioning shift"
+    },
+    {
+      "id": "Q002",
+      "priority": "RED",
+      "category": "principle",
+      "text": "AI is more important than English for your career and making money in the next couple years. It might already be more important than English.",
+      "context": "Career outcome prioritization"
+    },
+    {
+      "id": "Q003",
+      "priority": "RED",
+      "category": "principle",
+      "text": "Those are the top two ways to make money in Vietnam. Those are the two things if you focus on those, you can really increase your ability to make money in Saigon's competitive job market.",
+      "context": "Product value proposition"
+    },
+    {
+      "id": "Q004",
+      "priority": "RED",
+      "category": "methodology",
+      "text": "My first thing is to work on your confidence. It's not even about the English at the beginning.",
+      "context": "Teaching sequence redesign"
+    },
+    {
+      "id": "Q005",
+      "priority": "RED",
+      "category": "design",
+      "text": "This is the natural way for them to learn languages. So, this is what the app's going to do. It's going to repeat this process because I want them talking in a natural environment because studies show that that increases learning retention by a huge amount.",
+      "context": "App architecture requirement"
+    },
+    {
+      "id": "Q006",
+      "priority": "YELLOW",
+      "category": "correction",
+      "text": "I find it a habit with the Vietnamese is they will focus on what they don't know in a sentence instead of what they do know.",
+      "context": "Learner habit correction"
+    },
+    {
+      "id": "Q007",
+      "priority": "YELLOW",
+      "category": "methodology",
+      "text": "Instead of being in your head... why not learn how to ask questions because then it takes the pressure off of you.",
+      "context": "Curriculum addition"
+    },
+    {
+      "id": "Q008",
+      "priority": "YELLOW",
+      "category": "methodology",
+      "text": "You don't have to be professional at English in order to have a great conversation with a foreigner. You just have to get very good at asking questions and follow-up questions.",
+      "context": "Curriculum addition"
+    },
+    {
+      "id": "Q009",
+      "priority": "YELLOW",
+      "category": "methodology",
+      "text": "Everybody's favorite topic is themselves.",
+      "context": "Pedagogical insight"
+    },
+    {
+      "id": "Q010",
+      "priority": "YELLOW",
+      "category": "principle",
+      "text": "If you don't sharpen your axe and you skip that and you just try to keep chopping the wood without sharpening... then your axe is going to break.",
+      "context": "Rest and recovery prerequisite"
+    },
+    {
+      "id": "Q011",
+      "priority": "YELLOW",
+      "category": "design",
+      "text": "I'm trying to program it to be quite like a human when you're talking to it so that you can just feel like natural... because you want to trick your brain to think you're actually having a real conversation.",
+      "context": "App design philosophy"
+    },
+    {
+      "id": "Q012",
+      "priority": "YELLOW",
+      "category": "status",
+      "text": "The app is almost done. We're almost done programming the app... live testing has went well and we made our first connection to our server last night.",
+      "context": "Product delivery status"
+    },
+    {
+      "id": "Q013",
+      "priority": "GREEN",
+      "category": "context",
+      "text": "I'm not your mommy or your daddy. You don't have to worry about getting things wrong with me. There's no judgment here.",
+      "context": "Learning environment"
+    },
+    {
+      "id": "Q014",
+      "priority": "GREEN",
+      "category": "methodology",
+      "text": "Don't try to understand. Just repeat. Listen. Repeat. Don't think.",
+      "context": "Learning methodology"
+    },
+    {
+      "id": "Q015",
+      "priority": "GREEN",
+      "category": "methodology",
+      "text": "So the four consequences: TikTok 30 second, karaoke 30 second, give a presentation 30 second or tell me a joke for 30 seconds.",
+      "context": "Class management protocol"
+    },
+    {
+      "id": "Q016",
+      "priority": "GREEN",
+      "category": "context",
+      "text": "I can tell in your voice that you're quite tired and stressed. So, you need to balance... don't drive yourself too hard or you're going to get sick.",
+      "context": "Student wellbeing check"
+    }
+  ],
+
+  "decisions": [
+    {
+      "id": "D001",
+      "decision": "Classes are English AND AI — dual mission",
+      "impact": "Core product positioning shift",
+      "canon_pages_affected": ["Gospel 444", "Teaching Methodology", "Core Principles"]
+    },
+    {
+      "id": "D002",
+      "decision": "Confidence first, English second — first 3 months focus on comfort zone expansion",
+      "impact": "Teaching sequence redesign",
+      "canon_pages_affected": ["Teaching Methodology", "Student Profiles"]
+    },
+    {
+      "id": "D003",
+      "decision": "Follow-up questions as core skill for shy/introvert students",
+      "impact": "Curriculum addition",
+      "canon_pages_affected": ["Teaching Methodology", "Gospel 444"]
+    },
+    {
+      "id": "D004",
+      "decision": "App must replicate natural conversation pattern from live classes",
+      "impact": "Product architecture requirement",
+      "canon_pages_affected": ["Backlog", "Build Log"]
+    },
+    {
+      "id": "D005",
+      "decision": "4 fun consequences system for phone rule violations (TikTok/karaoke/presentation/joke — 30s each)",
+      "impact": "Class management protocol",
+      "canon_pages_affected": ["Teaching Methodology"]
+    },
+    {
+      "id": "D006",
+      "decision": "Ken (Quyen Ngo) confirmed as assistant teacher for beginner class",
+      "impact": "Team structure",
+      "canon_pages_affected": ["Student Profiles", "Assets & Accounts"]
+    },
+    {
+      "id": "D007",
+      "decision": "Updated Telegram seed distribution workflow — post updated seed, students delete old one",
+      "impact": "Product delivery method",
+      "canon_pages_affected": ["Backlog"]
+    }
+  ],
+
+  "corrections": [],
+
+  "new_principles": [
+    {
+      "id": "P001",
+      "verbatim": "Classes are English AND AI",
+      "interpretation": "The product is not just English teaching. AI literacy is equal or greater priority for student career outcomes."
+    },
+    {
+      "id": "P002",
+      "verbatim": "Confidence before competence",
+      "interpretation": "First 3 months: build comfort zone, relationships, and relaxation. English skill comes after the foundation of psychological safety."
+    },
+    {
+      "id": "P003",
+      "verbatim": "Listen for what you know, not what you don't",
+      "interpretation": "Counter the Vietnamese learner habit of fixating on unknown words. Train pattern recognition on familiar structures."
+    },
+    {
+      "id": "P004",
+      "verbatim": "Questions are the shy person's superpower",
+      "interpretation": "Introverts can control conversations and build connections through follow-up questions without needing advanced English."
+    },
+    {
+      "id": "P005",
+      "verbatim": "Sharpen the axe",
+      "interpretation": "Rest and balance are prerequisites for sustained performance. Overwork without recovery breaks the tool."
+    }
+  ],
+
+  "emotional_signal": {
+    "primary": "excitement",
+    "secondary": "confidence",
+    "frustration_level": "low",
+    "notes": "High energy / excitement when discussing app progress: 'live testing went well', 'first connection to our server last night'. Passionate conviction on AI + English dual mission. Genuine care for student wellbeing."
+  },
+
+  "system_design_insights": [
+    "Natural conversation replication — The app's core value proposition is replicating the organic conversation flow from live classes. The transcripts ARE the training data for what the app should feel like.",
+    "AI as co-teacher pattern — Gemini was used as real-time translator/assistant despite limitations. The OBI app should do this better.",
+    "Student profiling from transcripts — Rich personality, learning style, and progress data extractable from classroom transcripts.",
+    "Ken as force multiplier — Assistant teacher model works. Ken handles warm-up/practice while Michael takes breaks."
+  ],
+
+  "artifacts_created": [
+    {"artifact": "Hung/Jasmine student profile", "location": "Notion — NET Students hub"},
+    {"artifact": "Nga student profile", "location": "Notion — NET Students hub"},
+    {"artifact": "Quy profile updated (Session 2)", "location": "Notion — NET Students hub"},
+    {"artifact": "Mai Tram profile updated (Session 3)", "location": "Notion — NET Students hub"},
+    {"artifact": "Teaching Methodology sections 17-25", "location": "Notion — Teaching Methodology page"},
+    {"artifact": "This reincarnation entry", "location": "Notion — Reincarnation Log + GitHub CANON/REINCARNATION/"}
+  ],
+
+  "execution_completed": [
+    "Classroom transcripts archived",
+    "Student profiles created/updated",
+    "Teaching Methodology expanded"
+  ],
+
+  "metadata": {
+    "quote_count": 16,
+    "red_count": 5,
+    "yellow_count": 8,
+    "green_count": 3,
+    "decision_count": 7,
+    "correction_count": 0,
+    "principle_count": 5,
+    "source_type": "reincarnation_entry",
+    "source_size_bytes": 6400,
+    "conversion_timestamp": "2026-04-03T18:26:36+07:00"
+  }
+}

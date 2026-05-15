@@ -1,0 +1,5 @@
+﻿# PROOF - HIGHSCHOOLLESSON LAST
+
+Source: D:\phoenix-chat-logs\CHAT-LOGS-ONLY\HIGHSCHOOLLESSON.txt
+
+

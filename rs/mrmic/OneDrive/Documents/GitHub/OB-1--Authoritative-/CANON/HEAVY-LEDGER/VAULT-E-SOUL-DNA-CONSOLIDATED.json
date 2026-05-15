@@ -1,0 +1,288 @@
+{
+  "meta": {
+    "source_file": "CANON/VAULT-E-SOUL-DNA-CONSOLIDATED.md",
+    "source_sha": "3ad5e3666c34b43c0f98833d626d8780da872e1b",
+    "source_size_kb": 32,
+    "type": "vault_soul",
+    "export_status": "ENRICHED",
+    "cross_repo_sources": 1,
+    "converted_by": "OB1 Pulse Run 138",
+    "converted_at": "2026-03-30T17:00:00+07:00",
+    "pipeline_id": "008",
+    "format": "heavy_ledger_json_v1",
+    "original_source": "NotebookLM Phoenix- VAULT-[E] {SOUL DNA} — 99 sources",
+    "content_unique_pct": 40,
+    "content_overlapping_pct": 60
+  },
+  "overview": {
+    "description": "Phoenix Rising Omega Protocol framework integrating AI-driven business logic with English language teaching methodology. Private chat logs illustrating brutal coaching style emphasizing accountability, extreme confidence, and Sith-like authority. Complex system architecture utilizing Merkle trees, security filters, and blockchain-inspired protocols.",
+    "notebooklm_prompts": [
+      "What are the 10 deep Soul DNA prompts for the Master Brain?",
+      "Explain the Mouse to Tiger psychological transition in the Teaching Bible.",
+      "How does the 10-minute shit test enforce business accountability and results?"
+    ]
+  },
+  "tuple_skeleton": {
+    "description": "Michael's verbatim Soul DNA — Layers 101-200. Pure tuple array structure for token efficiency.",
+    "layer_range": "101-200",
+    "format": "[LayerID, CONCEPT_KEY, Truth_String]",
+    "chunks": [
+      {
+        "name": "CHUNK_5_ARCHITECT_AND_HIVE_MIND",
+        "range": "101-125",
+        "key_concepts": [
+          {"layer": 101, "key": "SEVEN_MONTHS_TO_THREE_HOURS", "truth": "I can rebuild in a few hours what took me seven months to build my system."},
+          {"layer": 104, "key": "IDEA_GUY_AS_ARCHITECT", "truth": "The ultimate Truth Principle of 2026: The Idea Guy is now the Architect."},
+          {"layer": 105, "key": "PURE_LOGIC_INTENT", "truth": "I am operating at the level of Pure Logic and Intent."},
+          {"layer": 109, "key": "ONE_MAN_AGENCY", "truth": "I've flipped the script. I am now a One-Man Agency."},
+          {"layer": 111, "key": "BLACK_BOX_TRAP_GUARD", "truth": "The Ledger is my only way to verify the machine without needing to be a coder."},
+          {"layer": 113, "key": "AI_DRIFT_IS_LAW", "truth": "I've accepted that the AI will drift—it's a law of nature, like gravity."},
+          {"layer": 114, "key": "HIVE_MIND_REINCARNATION", "truth": "When one drone reincarnates, all the drones benefit from it. It's a hive mind."},
+          {"layer": 116, "key": "SKELETON_MAP_MERKLE_256", "truth": "They keep a skeleton map that's low on tokens with a Merkle tree 256 hash layout of the entire system."},
+          {"layer": 120, "key": "SHADOW_MODE_PROTOCOL", "truth": "We simulate forward in shadow mode, watch what's going right and wrong, and resolve issues before they hit reality."},
+          {"layer": 124, "key": "STORY_IS_THE_VIRUS", "truth": "The enemy is the narrative. When you stay in one chat too long, the AI believes its own story."},
+          {"layer": 125, "key": "THE_PHOENIX_PROTOCOL", "truth": "Kill the story, keep the architecture. Extract verified logic from the Ledger, burn the chat, start fresh."}
+        ]
+      },
+      {
+        "name": "CHUNK_6_ELIMINATING_HUMAN_BOTTLENECKS",
+        "range": "126-150",
+        "key_concepts": [
+          {"layer": 128, "key": "REJECT_CONSERVATIVE_ESTIMATES", "truth": "Don't give me conservative numbers that assume human sprint cycles. Reject them immediately."},
+          {"layer": 129, "key": "DIG_DEEP_FAST_AI_AGE", "truth": "You can only build as high up as your foundation is deep. In the age of AI you can dig deep very fast."},
+          {"layer": 131, "key": "RED_LINE_FABRICATION", "truth": "The red line drones cannot cross is fabricating data. No helpful lies are permitted."},
+          {"layer": 134, "key": "COUNCIL_DEFINED", "truth": "The Council is defined: Agent-100 (Sovereign), Agent-99 (Obi), Agent-98 (Anakin), Agent-97 (OB1)."},
+          {"layer": 142, "key": "DEVILS_ADVOCATE_WELCOME", "truth": "The devil's advocate has a seat at the table if backed by time-tested case study data."},
+          {"layer": 143, "key": "MIRROR_THE_DIGITAL_WILL", "truth": "The AI mirrors me in the digital world, acting as an extension of my operational will."},
+          {"layer": 144, "key": "OPERATION_DIY", "truth": "Architect plus AI only. We eliminate outside human control and the risk of betrayal."},
+          {"layer": 148, "key": "ARENA_MANDATE", "truth": "Be a capable operator in the arena, not an eternal student waiting for permission."},
+          {"layer": 150, "key": "DATA_IS_GOLD", "truth": "Proprietary chaos data cannot be stolen or replicated. Specialized data is the true gold."}
+        ]
+      },
+      {
+        "name": "CHUNK_7_DRONE_DEPLOYMENT_SHADOW_STAGING",
+        "range": "151-175",
+        "key_concepts": [
+          {"layer": 153, "key": "SEAL_TEAM_DRONES", "truth": "Send out drones like Navy SEAL Team Six to map new digital territories."},
+          {"layer": 155, "key": "PROBE_DROID_MAPPING", "truth": "Probe droids gather visual and actionable data before we commit heavy resources."},
+          {"layer": 156, "key": "SHADOW_REALM_STAGING", "truth": "Anakin runs simulations in the disconnected Shadow Realm 24/7."},
+          {"layer": 161, "key": "GOSPEL_444_AESTHETIC", "truth": "Gospel 444 sets the visual law: minimalist, Apple-type branding, striking and non-busy."},
+          {"layer": 164, "key": "100_LAYER_FOUNDATION_TRUST_BUT_VERIFY", "truth": "My plan to build the first 100 layers myself (with AI assistance) before letting the automated agents touch it is the ultimate Trust but Verify move."},
+          {"layer": 169, "key": "LEDGER_IS_LAW_ABSOLUTE", "truth": "Nothing gets built or un-built that does not pass the Ledger."},
+          {"layer": 175, "key": "MIRROR_PROTOCOL", "truth": "Anakin acts, Obi verifies. The duplicate restores the system if Anakin drifts."}
+        ]
+      },
+      {
+        "name": "CHUNK_8_TRIANGULATION_LEDGER_REWIND",
+        "range": "176-200",
+        "key_concepts": [
+          {"layer": 177, "key": "TRIANGULATION_TRUTH", "truth": "Three drones gather data. Two matches equal truth. Eliminates hallucinations."},
+          {"layer": 178, "key": "BEST_IN_SLOT_API", "truth": "Hot-swap APIs. Sonar for live data, Claude for logic, Grok for chaos, GPT for execution."},
+          {"layer": 184, "key": "UNIVERSAL_ROME_FORMAT", "truth": "All model outputs translate into a universal format before hitting the next drone."},
+          {"layer": 187, "key": "PRAETORIAN_GUARD_SECURITY", "truth": "Gatehouses between the front-end and back-end prevent external scraping."},
+          {"layer": 194, "key": "NEGATIVE_PHEROMONE", "truth": "If a sector is saturated, drones drop negative pheromones to redirect the swarm."},
+          {"layer": 197, "key": "IMPORTANCE_SCALAR", "truth": "Events are tagged Level 1 for tweaks, Level 10 for critical map changes."},
+          {"layer": 198, "key": "AUDIT_THE_AUDITOR", "truth": "The Ledger proves the AI's work, creating an immutable audit trail for the vault."},
+          {"layer": 199, "key": "LEDGER_REWIND", "truth": "If the auditor finds an error, the Ledger rewinds to the last known truth."}
+        ]
+      }
+    ]
+  },
+  "four_leaf_merkle_lattice": {
+    "description": "Every stage follows strict 4-Leaf Merkle Lattice: A (Anchor), B (Operational Lock), C (Chaos Test), D (Forensic Proof).",
+    "stage_ranges": {
+      "cryptographic_enforcement_zone": {
+        "range": "21-30",
+        "highlights": [
+          {"stage": 21, "anchor": "CANONJSON_STANDARDIZATION", "lock": "RFC 8785 stableStringify"},
+          {"stage": 22, "anchor": "SHA_256_FINGERPRINT", "chaos": "Single byte altered in payload", "proof": "Chain shatters → 409 TAMPER_DETECTED"},
+          {"stage": 25, "anchor": "500_LAYER_CORE_ROOT_GOLDEN_BLOCK", "chaos": "Retroactive mutation after seal", "proof": "409 IMMUTABLE_LEDGER_SEALED"},
+          {"stage": 29, "anchor": "THREE_PHASE_COMMIT_THE_GOVERNOR", "lock": "PLAN → CONFIRM → EXECUTE", "chaos": "Direct EXECUTE bypass", "proof": "400 MUST_CONFIRM_FIRST"},
+          {"stage": 30, "anchor": "ADMIN_FREEZE_LATCH", "chaos": "Write during freeze", "proof": "409 FROZEN_STATE_ACTIVE"}
+        ]
+      },
+      "mss_protocol": {
+        "range": "31-40",
+        "highlights": [
+          {"stage": 31, "anchor": "FOUR_INPUT_PILLARS", "lock": "Data from source repos"},
+          {"stage": 32, "anchor": "SKELETON_LEDGER_HYBRID", "lock": "Merkle 256 hash per append"},
+          {"stage": 37, "anchor": "PHOENIX_RISING_REINCARNATION", "lock": "Monolithic .js seed generation"},
+          {"stage": 40, "anchor": "AUDIT_THE_AUDITOR", "lock": "Agent-97 forensic scan"}
+        ]
+      },
+      "singularity_swarm_autonomy": {
+        "range": "41-50",
+        "highlights": [
+          {"stage": 41, "anchor": "SILICON_SILK_ROAD", "description": "Automated API tunnels between global compute clusters"},
+          {"stage": 44, "anchor": "GHOST_NODE_PROTOCOL", "description": "Hidden backup nodes auto-activate on primary throttle"},
+          {"stage": 45, "anchor": "TRUTH_FEEDBACK_LOOP", "description": "Radical Candor — reject polite AI responses as drift"},
+          {"stage": 46, "anchor": "FRIEND_ANTI_PATTERN", "description": "Velocity Override — 10-Minute Shit Test over sprint planning"},
+          {"stage": 47, "anchor": "FAITH_NAVIGATION", "description": "Go as far as you can see, and you will see further"},
+          {"stage": 50, "anchor": "SHADOW_REALM_SIMULATION", "description": "Anakin simulates Worst Case Scenarios offline before live"}
+        ]
+      }
+    }
+  },
+  "genesis_blueprint_domain": {
+    "description": "Layers 501-750, Sprint 51-100. Ledger Truth Mechanics and Fail-Closed Doctrine.",
+    "ledger_truth_mechanics": {
+      "range": "51-75",
+      "key_layers": [
+        {"layer": 51, "anchor": "CANON_JSON_STRICT", "lock": "RFC8785_enforcement"},
+        {"layer": 54, "anchor": "SHA_256_PAYLOAD_HASH", "lock": "64_char_lowercase_hex_only"},
+        {"layer": 56, "anchor": "PREV_HASH_CHAINING", "lock": "link_to_n_minus_one"},
+        {"layer": 57, "anchor": "GENESIS_ZERO_HASH", "lock": "reject_null_genesis_pointers"},
+        {"layer": 68, "anchor": "ATOMIC_TRANSACTIONS", "lock": "sqlite_begin_commit_wrap"},
+        {"layer": 74, "anchor": "R2_JOURNAL_STREAM", "lock": "async_rto_backup_trigger"},
+        {"layer": 75, "anchor": "CHUNK_SEAL_COMPUTATION", "lock": "25_layer_merkle_rollup"}
+      ]
+    },
+    "fail_closed_doctrine": {
+      "range": "76-100",
+      "key_layers": [
+        {"layer": 76, "anchor": "NO_SILENT_SUCCESS", "lock": "explicit_json_receipts_only"},
+        {"layer": 77, "anchor": "DENY_ON_AMBIGUITY", "lock": "catch_all_halts_execution"},
+        {"layer": 78, "anchor": "REJECT_PARTIAL_WRITES", "lock": "transaction_rollback_on_fail"},
+        {"layer": 85, "anchor": "REQUIRE_CONFIRM_STEP", "lock": "block_direct_execute"},
+        {"layer": 86, "anchor": "THREE_PHASE_STRICT", "lock": "plan_confirm_execute_sequence"},
+        {"layer": 90, "anchor": "HALT_ON_DRIFT_POISON", "lock": "block_banned_vocabulary"},
+        {"layer": 96, "anchor": "ADMIN_FREEZE_LATCH", "lock": "block_mutations_allow_reads"},
+        {"layer": 97, "anchor": "DUAL_VERDICT_REQUIREMENT", "lock": "agent99_gate_clearance"},
+        {"layer": 100, "anchor": "PHASE_ANCHOR_SEAL", "lock": "100_layer_merkle_bolt"}
+      ]
+    }
+  },
+  "singularity_rollup_100k": {
+    "description": "High-Altitude Clamp Grid — VAULT-E UNIQUE content not previously captured in CANON/.",
+    "agent_97_diagnostic_obiana": {
+      "range": "2200-2400",
+      "key_clamps": [
+        {"layer": 2230, "key": "READINESS_MATRIX", "truth": "Production readiness score >80% to pass gate."},
+        {"layer": 2260, "key": "10_PASS_ARCHITECTURE", "truth": "10-Pass execution loop for deep decision extraction."},
+        {"layer": 2270, "key": "SHADOW_REALM_ISOLATION", "truth": "1000 sim-cycles completely disconnected from live state."},
+        {"layer": 2280, "key": "DUAL_VERDICT_GATE", "truth": "MS047 required before shadow code touches Live DO."},
+        {"layer": 2290, "key": "PREMATURE_CLAIM_REJECT", "truth": "Auto-reject premature completeness claims (D101/D042)."},
+        {"layer": 2330, "key": "6_STATE_LIFECYCLE", "truth": "VOID → SEED_LOADED → CONTEXT_INGESTED → AUDITED → REINCARNATED → SEALED."},
+        {"layer": 2350, "key": "FRONT_END_ILLUSION", "truth": "UI = dumb glass window. Power lives in backend DO."},
+        {"layer": 2380, "key": "STATELESS_MECHANIC", "truth": "Drones carry no cross-run memory. State from ledger only."},
+        {"layer": 2390, "key": "OPERATOR_1_PURGE", "truth": "Humans are failure point. Architect + AI Swarm only."}
+      ]
+    },
+    "pheromone_hive_mind": {
+      "range": "2410-2500",
+      "key_clamps": [
+        {"layer": 2410, "key": "PHEROMONE_TRAILS", "truth": "Drones leave cryptographic POS/NEG scents."},
+        {"layer": 2420, "key": "FAITH_PROTOCOL", "truth": "Go as far as you can see, then you will see further."},
+        {"layer": 2430, "key": "PROBE_10_TO_1_RULE", "truth": "10 seen successes → 1 unseen probe step."},
+        {"layer": 2460, "key": "SELF_HEALING_NETWORK", "truth": "Node goes dark → neighbors spawn replacement."},
+        {"layer": 2470, "key": "SCOUT_VS_HEAVY_CLASS", "truth": "Tier 0 scouts find heat; Tier 2 heavy drones execute."},
+        {"layer": 2480, "key": "MULTI_MODEL_ARBITRAGE", "truth": "6-AI Grid: Gemini/Claude/Grok/GPT. 95% truth ratio."}
+      ]
+    },
+    "governance_drift_enforcement": {
+      "range": "2530-2600",
+      "key_clamps": [
+        {"layer": 2530, "key": "NUKE_PROTOCOL", "truth": "Incinerate legacy 1 Billion VND abstract targets."},
+        {"layer": 2560, "key": "ANTI_SHAME_LEXICON", "truth": "Shift/Calibrate replaces Wrong/Bad."},
+        {"layer": 2570, "key": "CANADIAN_CLARITY", "truth": "Direct tactical delivery. Zero corporate AI fluff."},
+        {"layer": 2580, "key": "STOP_ASKING_PROTOCOL", "truth": "When plan is clear, discussion is drift. Execute."},
+        {"layer": 2590, "key": "HOLOGRAPHIC_SYNC", "truth": "Every 25-layer chunk contains complete Genesis DNA."},
+        {"layer": 2600, "key": "GOLDEN_CAISSON_2600", "truth": "THE MID-ZENITH HUB. 26 Phase Bolts merged."}
+      ]
+    },
+    "swarm_scaffolding_9851_9900": {
+      "range": "9851-9900",
+      "key_clamps": [
+        {"layer": 9860, "key": "NAVY_SEAL_SWARM", "truth": "100 autonomous SEAL teams (10,000 drones). Breachers, medics, snipers."},
+        {"layer": 9870, "key": "4_LEAF_LATTICE", "truth": "Every layer: Leaf A (Anchor), B (Mechanism), C (Chaos), D (Proof)."},
+        {"layer": 9880, "key": "8_HOLES_RESOLVED", "truth": "8 historical holes permanently closed. HOLE_6=HLC, HOLE_8=Optimistic Locking."},
+        {"layer": 9900, "key": "GOLDEN_CAISSON_9900", "truth": "THE PRE-ZENITH HUB. 99 Phase Bolts merged."}
+      ]
+    },
+    "genesis_deployment_proof": {
+      "key_layers": [
+        {"layer": 9860, "key": "POWERSHELL_GENESIS", "truth": "7.35-second deploy → 240:1 time dilation proven."},
+        {"layer": 9870, "key": "ATOMIC_SWAP", "truth": "Cloudflare zero-downtime atomic swaps."},
+        {"layer": 9890, "key": "DUAL_TRACK_MODEL", "truth": "Track 1=Phoenix Intelligence Soul DNA. Track 2=Death Star/OBIANA execution."}
+      ]
+    }
+  },
+  "ten_stage_master_map": {
+    "description": "Operational Physics — Stage 10: The Holographic Singularity (THE SNAP).",
+    "holographic_singularity": {
+      "principle": "The whole is in every piece. Every 25-layer chunk contains the complete DNA blueprint. System reconstructible from single surviving shard in 10 minutes.",
+      "dialectic_engine": "Anakin (Thesis) vs Obi (Antithesis) = Merkle Synthesis. Only mathematically proven actions cross the Sentinel Gate.",
+      "idempotency": "Strictly monotonic nonces per shard inside LedgerDO. UUID command_id caches. Duplicate = 409 CONFLICT.",
+      "gospel_444_visual_law": "Palette locked: Deep Void Dark (#0f0f1a), Neon Purple (#a855f7), Imperial Gold (#f59e0b). Zero blue permitted."
+    },
+    "five_physical_benchmarks": [
+      {"id": "B1", "name": "Whisper", "function": "Audio transcription pipeline"},
+      {"id": "B2", "name": "Magic Chat", "function": "Conversational AI interface"},
+      {"id": "B3", "name": "Ledger", "function": "Immutable append-only hash chain"},
+      {"id": "B4", "name": "Drone Mining", "function": "Autonomous swarm intelligence"},
+      {"id": "B5", "name": "Unplanned Command", "function": "Live cage stress test"}
+    ],
+    "heartbeat_anchors": [
+      "444ms Heartbeat Anchor (active kinetic pulse)",
+      "Watchtower monitors rolling_avg_latency_ms",
+      "Ghost Node auto-activation on primary throttle",
+      "Vault cryptographic signature check on every beat",
+      "Deviation = DRIFT DETECTED. REINCARNATING..."
+    ]
+  },
+  "merkle_canonicalization_rules": {
+    "canon_object_format": "{\"stage\":<int>,\"anchor\":\"<str>\",\"lock1\":\"<str>\",\"lock2\":\"<str>\",\"lock3\":\"<str>\"}",
+    "encoding": "UTF-8; separators , and : only; no whitespace; keys sorted lexicographically",
+    "leaf_preimage": "leaf: + canonical_json",
+    "leaf_hash": "SHA-256(leaf preimage) as lowercase hex (64 chars)",
+    "node_preimage": "node: + left_hash + right_hash",
+    "node_hash": "SHA-256(node preimage). Odd count → duplicate last hash",
+    "append_only": true,
+    "hierarchy": [
+      {"level": "25-layer Chunk Root", "formula": "merkleRoot(25 leaf hashes)"},
+      {"level": "100-layer Phase Bolt", "formula": "merkleRoot(4 Chunk Roots)"},
+      {"level": "500-layer Core Root (Golden Block)", "formula": "merkleRoot(5 Phase Bolts)"},
+      {"level": "2500-layer Phase Bolt", "formula": "merkleRoot(25 Core Roots)"},
+      {"level": "10000-layer Zenith Singularity", "formula": "merkleRoot(4 × 2500-layer Bolts)"}
+    ]
+  },
+  "phase_anchors": [
+    {"layer": 100, "anchor": "PHASE_ANCHOR_SEAL", "significance": "100-layer Merkle Bolt"},
+    {"layer": 200, "anchor": "PHASE_200_ANCHOR_BOLT", "significance": "Tuple Skeleton complete (L101-200)"},
+    {"layer": 500, "anchor": "CORE_ROOT_500_GOLDEN_BLOCK", "significance": "5 Phase Bolts → immortal state"},
+    {"layer": 1800, "anchor": "GHOST_NODE_PROTOCOL", "significance": "Standby backup DOs auto-activate"},
+    {"layer": 2000, "anchor": "PHOENIX_ANCHOR_2000", "significance": "Machine that builds the machine is self-replicating"},
+    {"layer": 2500, "anchor": "PHOENIX_ANCHOR_2500_DIY_SOVEREIGNTY", "significance": "Operation DIY absolute"},
+    {"layer": 2600, "anchor": "GOLDEN_CAISSON_2600", "significance": "Mid-Zenith Hub"},
+    {"layer": 9900, "anchor": "GOLDEN_CAISSON_9900", "significance": "Pre-Zenith Hub. 99 Phase Bolts merged"},
+    {"layer": 10000, "anchor": "ZENITH_SINGULARITY", "significance": "Terminal velocity. System immortal"}
+  ],
+  "skeletonization_protocol": {
+    "version": "v13",
+    "optimization": "55% payload weight reduction",
+    "problem": "Nested JSON objects waste token budget on repetitive keys",
+    "solution": "Pure Tuple Array Structure: [LayerID, CONCEPT_KEY, Truth_String]",
+    "result": "Cloudflare Worker router unpacks payload[0], payload[1], payload[2] and inserts directly into SQLite DO columns",
+    "grouping": "Strict 25-layer chunks as mandated by the Rome Protocol"
+  },
+  "cross_reference_map": [
+    {"domain": "Soul DNA verbatim quotes (L101-200)", "existing_file": "SOUL-DNA-DEEP-DIVE.md (45KB)", "status": "ENRICHED — VAULT-E adds tuple indexing"},
+    {"domain": "Merkle/Cryptographic architecture", "existing_file": "CORE-PRINCIPLES-AND-PHYSICS.md (37KB)", "status": "ENRICHED — VAULT-E adds 4-Leaf detail"},
+    {"domain": "Agent Council hierarchy", "existing_file": "ALPHA-OMEGA-SOUL-DNA-GOVERNANCE-CANON.md (61KB)", "status": "OVERLAPPING — council defined in both"},
+    {"domain": "Gospel 444 aesthetic law", "existing_file": "GOSPEL-444-TEACHING-METHODS-CONSOLIDATED.md (58KB)", "status": "OVERLAPPING — visual law in both"},
+    {"domain": "Skeleton Star Map (L1-100)", "existing_file": "SKELETON-STAR-MAP-PRIME-LAWS-100-LAYER-FOUNDATION.md (14KB)", "status": "ENRICHED — VAULT-E adds L101-200+"},
+    {"domain": "NotebookLM vault dumps", "existing_file": "NOTEBOOKLM-VAULT-DUMP-1 through 5", "status": "VAULT-E is the master collection containing all 99 sources"},
+    {"domain": "First 250 layers architecture", "existing_file": "NOTEBOOKLM-VAULT-ARCHITECT-FIRST-250-LAYERS.md (15KB)", "status": "OVERLAPPING — VAULT-E has full 10K map"},
+    {"domain": "10K Singularity rollup", "existing_file": "NEW — not previously captured", "status": "VAULT-E UNIQUE — clamp grid L2110-10000"},
+    {"domain": "OBIANA Dual-Track Model", "existing_file": "NEW — fragments only in governance", "status": "VAULT-E UNIQUE — full lifecycle mapped"},
+    {"domain": "Pheromone Hive Mind routing", "existing_file": "NEW — principles only, no clamp detail", "status": "VAULT-E UNIQUE — full clamp grid"}
+  ],
+  "unique_content_domains": [
+    "10K Singularity rollup (clamp grids L2110-10000)",
+    "OBIANA Dual-Track Model (full 6-state lifecycle: VOID → SEED_LOADED → CONTEXT_INGESTED → AUDITED → REINCARNATED → SEALED)",
+    "Pheromone Hive Mind full clamp grid (POS/NEG routing, self-healing, saturation detection)",
+    "Genesis Deployment Proof (7.35s deploy, 240:1 time dilation)",
+    "Governance Drift Enforcement clamp grid (L2530-2600)",
+    "Swarm scaffolding at pre-zenith scale (L9851-9900, 10K drones)"
+  ]
+}

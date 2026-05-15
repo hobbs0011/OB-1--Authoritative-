@@ -1,0 +1,55 @@
+{
+  "heavy_ledger_entry": "HL-094",
+  "source_file": "CANON/REINCARNATION/2026-03-24-light-session-reincarnation.md",
+  "source_sha": "c6fa5d1b4ae8407836a4897a4392520daf8e806f",
+  "session_tag": "2026-03-24-light-session-checkpoint",
+  "datetime_range": "2026-03-24",
+  "extractor": "OB1-PULSE-RUN-240",
+  "signal_density": "NONE",
+  "session_type": "light_checkpoint",
+  "wave": 8,
+  "wave_position": "10/46",
+  "raw_quotes": [
+    {
+      "text": "how did we do",
+      "severity": "GREEN",
+      "category": "confirmation"
+    },
+    {
+      "text": "reincarnate",
+      "severity": "GREEN",
+      "category": "command_invocation"
+    }
+  ],
+  "decisions": [],
+  "corrections": [],
+  "new_principles": [],
+  "emotional_signal": "neutral — routine checkpoint, no unique energy",
+  "open_questions": [],
+  "unfinished_actions": [],
+  "system_design_insights": [
+    {
+      "insight": "Explicit REINCARNATE command invocation locks even minimal sessions as checkpoints rather than letting them evaporate",
+      "category": "reincarnation_protocol"
+    }
+  ],
+  "artifacts_created": [],
+  "cross_references": [
+    "CANON/HEAVY-LEDGER/2026-03-24-late-session-old-account-preservation.json",
+    "CANON/HEAVY-LEDGER/2026-03-24-gospel-444-consolidation.json"
+  ],
+  "canon_guardrails": {
+    "no_fabrication": "PASS",
+    "no_drift": "PASS",
+    "no_paraphrase_sacred": "PASS",
+    "no_speculation": "PASS",
+    "no_overwrite_canon": "PASS"
+  },
+  "implementation_notes": "LIGHT SESSION — L26 NO_INFLATION applied. Two verbatim lines, no decisions, no corrections, no principles. Checkpoint locked because Michael explicitly invoked REINCARNATE command. Minimal JSON reflects minimal session.",
+  "conversion_metadata": {
+    "converted_by": "OB1-PULSE-RUN-240",
+    "converted_at": "2026-04-01T12:00:00+07:00",
+    "source_size_bytes": 708,
+    "output_format": "heavy_ledger_v6"
+  }
+}

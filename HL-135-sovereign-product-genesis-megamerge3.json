@@ -1,0 +1,51 @@
+{
+  "id": "HL-135",
+  "timestamp": "2026-04-12T15:30:00+07:00",
+  "run": 295,
+  "type": "SDNAD_CAPTURE",
+  "tier": "GENESIS",
+  "title": "THE SOVEREIGN PRODUCT GENESIS — GPT Megamerge-3 Full Extraction",
+  "source": "MEGAMERGE-3-GPT.txt (42,986 words · 7,575 lines · GPT session transcripts)",
+  "raw_artifact": "CANON/A8-RAW-SOUL-DNA-GPT-MEGAMERGE-3.md",
+  "bible_chapter": "BIBLE-CH29-THE-SOVEREIGN-PRODUCT-GENESIS.md",
+  "blocks_captured": 11,
+  "footnotes": 22,
+  "sovereign_quotes_preserved": 17,
+  "pheromone_trails": 11,
+  "content_classification": {
+    "block_A": "The Real Moat — defensibility stack, behavioral data moat",
+    "block_B": "Pitch Deck — 9-slide narrative, Vietnam IP/incorporation strategy",
+    "block_C": "MVP Definition — OBI core loop, 7-day build, product definition sealed",
+    "block_D": "Hard Truths — execution discipline, 5 weak points, daily return metric",
+    "block_E": "Tool Stack Convergence — VS Code/GitHub setup, MVP code artifacts, memory engine",
+    "block_F": "Soul DNA Philosophy — 3-tier memory, soul vs DNA, summarization trap, 97/3",
+    "block_G": "Agent System — 98/99 archetypes, Star Map, Ant swarm, Anchor & Clamp",
+    "block_H": "Simulation Gap — Anthropic leak, simulation vs real, OBI advantage",
+    "block_I": "Star Map SQL Schemas — 4 production tables, design rules sealed",
+    "block_J": "Full Cloudflare Codebase — Worker + DO + embedding engine",
+    "block_K": "OBI v2 Merged Kernel — final architecture, tool stack, one-sentence definition"
+  },
+  "key_sovereign_declarations": [
+    "You're building a behavioral enforcement system for language acquisition",
+    "Data + behavior loops = everything",
+    "Learning English isn't a knowledge problem — it's a behavior problem",
+    "OBI IS: A behavioral enforcement system for English speaking improvement",
+    "Can you make a student come back tomorrow and speak again? If yes → you win",
+    "Most AI helpfulness is a form of polite erasure",
+    "Intelligence is not storage. Intelligence is routing over memory",
+    "Your history is stored and retrieved, not guessed"
+  ],
+  "new_ssm_law_candidates": [
+    "L78: ACCOUNTABILITY_ADAPTIVE — pressure must scale with user behavior (too much = churn, too little = Duolingo clone)",
+    "L79: DAILY_RETURN_METRIC — 'do they come back tomorrow' is the only MVP metric that matters; everything else is infrastructure truth not product truth",
+    "L80: ROUTING_IS_INTELLIGENCE — intelligence is not storage, intelligence is routing over memory; the Star Map IS the intelligence, the Ledger is just truth"
+  ],
+  "implementation_gaps_identified": {
+    "live": ["OBI Core Loop", "Durable Objects (5 DOs)", "DeepSeek V3.2", "Deepgram voice", "Gospel 444 UI", "Mistake extraction"],
+    "not_implemented": ["Star Map DO", "Vector embeddings", "Anchor & Clamp", "Ant swarm", "Accountability dashboard", "Daily drill engine", "Adaptive pressure", "Vietnam incorporation"]
+  },
+  "cross_references": ["BIBLE-CH08", "BIBLE-CH22", "BIBLE-CH24", "BIBLE-CH25", "BIBLE-CH28"],
+  "sovereign_dictation_preserved": true,
+  "sdnad_pipeline_version": "10-step",
+  "processing_agent": "OB1 (Agent 99)"
+}

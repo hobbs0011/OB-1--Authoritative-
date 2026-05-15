@@ -1,0 +1,210 @@
+{
+  "heavy_ledger_entry": {
+    "id": "HL-062",
+    "run": 209,
+    "timestamp": "2026-03-31T19:30:00+07:00",
+    "source": {
+      "file": "CANON/SOUL-DNA-BIBLE-A4-RAW-CLASSROOM-MAI-TRAM-2026-03-24.md",
+      "sha": "1c6309c2f3afb7cc67c1efe14ad24023241afb57",
+      "size_kb": 8,
+      "type": "canon_raw",
+      "category": "classroom_transcript",
+      "sealed": true
+    },
+    "metadata": {
+      "date": "2026-03-24",
+      "student": "Mai Tram (BlueTech, Private)",
+      "teacher": "Michael Hobbs",
+      "ai_assist": "Gemini",
+      "session_topic": "Bird's Nest Supplements, Vietnamese Culture Shock, Business English, AI Race & Noah's Ark Metaphor"
+    },
+    "verbatim_quotes": [
+      {
+        "id": "Q001",
+        "severity": "RED",
+        "text": "so I don't want to just teach you English. I want to teach you AI as well. and my struggle over last 9 months. I learned the hard way. And now I can just share what I've learned with you and you don't have to suffer. as much as I have with trying to learn this, right and so that's my vision for teaching you. I don't want to just teach you English. I want to teach you. Something like AI that can help you. Not die.",
+        "context": "Defining the NET mission beyond language — English + AI dual mission",
+        "principle": "NOT_JUST_ENGLISH"
+      },
+      {
+        "id": "Q002",
+        "severity": "RED",
+        "text": "right now. There's a race happening a race, you know race. Like two people they say one two, three go and they run run and that's a race right now. There's a race happening. But people don't know. They they put their head in the sand, you know ostrich.",
+        "context": "The AI Race metaphor — urgency about AI disruption",
+        "principle": "AI_RACE_URGENCY"
+      },
+      {
+        "id": "Q003",
+        "severity": "RED",
+        "text": "I'm trying to instant the big wave coming instead of put my head in the sand. I'm trying to build a boat. So in the wave head You know I can float. And not die.",
+        "context": "Noah's Ark metaphor for AI preparedness — build before the flood",
+        "principle": "BUILD_THE_BOAT"
+      },
+      {
+        "id": "Q004",
+        "severity": "RED",
+        "text": "my parents are getting old they're old now, so they can't work forever. He's already 70. And I I see what's coming. Yeah with AI and I know that if I don't work hard. right now",
+        "context": "Raw vulnerability on family duty and AI urgency",
+        "principle": "GENESIS_WOUND_FAMILY_DUTY"
+      },
+      {
+        "id": "Q005",
+        "severity": "RED",
+        "text": "And I can be very very smart, but it can be very stupid. That's been that's why I stay up so a lot so that's good. Because of AI was super smart. Nobody had job already. So the fact that AI is still difficult and a little bit stupid is our opportunity",
+        "context": "The AI Opportunity Window thesis — AI imperfection = human opportunity",
+        "principle": "AI_OPPORTUNITY_WINDOW"
+      },
+      {
+        "id": "Q006",
+        "severity": "YELLOW",
+        "text": "when you're selling something You can sell the knowledge. Oh, it has amino acid blah blah science science or when you're selling You want to sell the feeling? Cuz that's what people care about. The reason people want to be healthy. Because they want to feel good. So you kind of sell the end result",
+        "context": "Teaching Features vs Benefits distinction live — sell feelings not features",
+        "principle": "SELL_THE_FEELING"
+      },
+      {
+        "id": "Q007",
+        "severity": "YELLOW",
+        "text": "I Vietnamese are very very smart like Like for example you go to war. With Vietnamese and even though they have, you know less weapons. They they will build traps, right, you know traps in the jungle traps",
+        "context": "Vietnamese war resourcefulness → modern AI adaptation",
+        "principle": "THINK_OUTSIDE_THE_BOX"
+      },
+      {
+        "id": "Q008",
+        "severity": "YELLOW",
+        "text": "they also can be quite stupid in some ways and that it's not because they don't they don't have the intelligence. It's because they think inside of a box. Right because their parents thinking this box and then their parents thinking this Mom, right?",
+        "context": "Generational box problem — inherited constraints vs innate intelligence",
+        "principle": "GENERATIONAL_BOX_PROBLEM"
+      },
+      {
+        "id": "Q009",
+        "severity": "YELLOW",
+        "text": "She says that she uses AI. I think she thinks she's already using it optimally but I'm going to challenge her and say that she's probably only using it to 10% of what she could be using it.",
+        "context": "The 5-10% Challenge — AI adoption gap awareness",
+        "principle": "AI_ADOPTION_CHALLENGE"
+      },
+      {
+        "id": "Q010",
+        "severity": "YELLOW",
+        "text": "So I'm going to ask her if she knows what weird means. What does weird mean? Weird, you know that word. That's a good word for you to know so weird.",
+        "context": "Live Mouse→Tiger pedagogy — vocabulary through culture shock",
+        "principle": "MOUSE_TO_TIGER"
+      },
+      {
+        "id": "Q011",
+        "severity": "YELLOW",
+        "text": "It's called two words. You can call it saliva. That's like the professional scientific word. But we we say spit. spit like that Yeah, it's more. Saliva is more like professional.",
+        "context": "Teaching register awareness — formal vs street English",
+        "principle": "REGISTER_AWARENESS"
+      },
+      {
+        "id": "Q012",
+        "severity": "GREEN",
+        "text": "Yucky yucky. Yes, like a word to say like gross like a kid would say that a kid. But we would say like as adults we'd say more like oh that's gross. Or if we want to say it more strong that's disgusting, right disgusting.",
+        "context": "Teaching intensity scaling — kid language to adult register",
+        "principle": "INTENSITY_SCALING"
+      },
+      {
+        "id": "Q013",
+        "severity": "RED",
+        "text": "I'm going to graduate. from University in 2030 Look at how fast AI is improving already right by 2030. AI is going to be able to do a lot of things almost every almost everything it already can so the next few years are going to be very dangerous.",
+        "context": "Warning to university students — AI timeline urgency",
+        "principle": "AI_TIMELINE_WARNING"
+      }
+    ],
+    "principles_manifested": [
+      {
+        "principle": "Mouse → Tiger",
+        "manifestation": "Mai Tram practicing vocab through real product — confidence over correctness"
+      },
+      {
+        "principle": "Anti-Shame",
+        "manifestation": "Horse fish → Seahorse correction done with humor, not shame"
+      },
+      {
+        "principle": "Sell the Feeling",
+        "manifestation": "Teaching to sell benefits (energy, youthful skin) not features (amino acids)"
+      },
+      {
+        "principle": "The Ostrich Problem",
+        "manifestation": "People burying heads in sand about AI — new metaphor for drift"
+      },
+      {
+        "principle": "Build the Boat",
+        "manifestation": "Noah's Ark as AI preparedness metaphor — build before the flood"
+      },
+      {
+        "principle": "Think Outside the Box",
+        "manifestation": "Vietnamese resourcefulness in war → apply same intelligence to AI"
+      },
+      {
+        "principle": "The AI Window",
+        "manifestation": "AI is still a little bit stupid = our opportunity to get ahead"
+      },
+      {
+        "principle": "Not Just English",
+        "manifestation": "Teaching AI skills alongside language — the full NET vision"
+      },
+      {
+        "principle": "Truth Over Comfort",
+        "manifestation": "Raw vulnerability about fear, sleeplessness, aging parents"
+      }
+    ],
+    "metaphors_minted": [
+      "The Ostrich & The Tiger — hiding your head exposes your neck",
+      "Noah's Ark — build the boat before the rain starts",
+      "The 5-10% Challenge — you're using AI at 10% capacity",
+      "Body at War — immune system as army, supplements as soldiers",
+      "Worker → Architect — stop doing the work, build the system",
+      "Saliva vs Spit — same product, different register = different perception"
+    ],
+    "vocabulary_domains": [
+      {
+        "domain": "Reactions & Intensity Scale",
+        "words": ["Yucky", "Gross", "Nasty", "Disgusting", "Repulsive"]
+      },
+      {
+        "domain": "Culture & Ingredients",
+        "words": ["Weird", "Strange", "Awkward", "Peculiar", "Saliva", "Spit", "Seahorse", "Bone", "Amino Acids", "Supplement", "Pill", "Powder", "Recipe"]
+      },
+      {
+        "domain": "Business English",
+        "words": ["Supplement", "B2B", "Target Audience", "Prevention", "Investment", "Result", "Youthful", "Innovation", "Features vs Benefits"]
+      },
+      {
+        "domain": "Body & Health",
+        "words": ["Immune System", "Germs", "Bacteria", "Virus", "Defense", "Protect", "Boost", "Fight", "Prevent", "Collagen", "Vitamin C/A/D"]
+      },
+      {
+        "domain": "AI & Automation",
+        "words": ["Automate", "Workflow", "Optimal", "Prompt", "Draft", "Efficient", "Database", "Trigger", "Pipeline", "Filter", "Scalable", "Integration"]
+      },
+      {
+        "domain": "Philosophy & Survival",
+        "words": ["Fearful", "Race", "Overwhelmed", "Survive", "Provide for", "Outdated", "Visionary", "Think Outside the Box"]
+      }
+    ],
+    "cross_references": [
+      "CANON/GOSPEL-444-TEACHING-METHODS-CONSOLIDATED.md — Mouse→Tiger, Anti-Shame, Intensity Scaling",
+      "CANON/NET-TEACHING-METHODOLOGY.md — Register awareness, Features vs Benefits teaching",
+      "CANON/SOUL-DNA-CANON.md — Genesis wound (family duty), Build the Boat, AI Window thesis",
+      "CANON/CORE-PRINCIPLES-AND-PHYSICS.md — Truth Over Comfort, Ostrich Problem as drift metaphor",
+      "CANON/STUDENT-ARCHETYPES-TEACHING-DATABASE.md — Mai Tram profile, BlueTech private",
+      "CANON/GOSPEL-444-REVENUE-BRIDGE.md — Sell the Feeling principle in revenue context"
+    ],
+    "canon_guardrails": {
+      "zero_summarization": "PASS — all quotes verbatim from sealed source",
+      "no_fabrication": "PASS — all content from source SHA 1c6309c2",
+      "no_paraphrase_sacred": "PASS — raw voice preserved with typos as authenticity markers",
+      "dedup_check": "PASS — no prior Heavy Ledger entry for this file",
+      "source_verification": "PASS — SHA matches canonical file"
+    },
+    "implementation_status": {
+      "mouse_to_tiger_live": "ACTIVE — demonstrated in every classroom session",
+      "anti_shame_culture": "ACTIVE — humor-based corrections standard practice",
+      "ai_dual_mission": "ACTIVE — English + AI teaching integrated",
+      "features_vs_benefits": "ACTIVE — business English curriculum standard",
+      "noahs_ark_metaphor": "ACTIVE — used in student motivation speeches",
+      "register_awareness": "ACTIVE — formal/informal distinction in every lesson"
+    }
+  }
+}
