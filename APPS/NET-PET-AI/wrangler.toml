@@ -28,6 +28,10 @@ class_name = "PetDO"
 name = "LEDGER"
 class_name = "LedgerDO"
 
+[[durable_objects.bindings]]
+name = "COMMANDS"
+class_name = "CommandDO"
+
 [[migrations]]
 tag = "v1-net-pet-core"
 new_sqlite_classes = ["SessionDO", "ProfileDO", "PetDO"]
@@ -40,7 +44,20 @@ new_sqlite_classes = ["LedgerDO"]
 tag = "v4-ship-memory"
 new_sqlite_classes = ["MemoryDO"]
 
+[[migrations]]
+tag = "v5-commands"
+new_sqlite_classes = ["CommandDO"]
+
 [vars]
+APP_NAME = "Natural English Training"
+APP_COACH_NAME = "Obi"
+IMAGE_GEN_URL = ""
+
+# Production environment — deploys as net-pet-ai-production
+[env.production]
+name = "net-pet-ai-production"
+
+[env.production.vars]
 APP_NAME = "Natural English Training"
 APP_COACH_NAME = "Obi"
 IMAGE_GEN_URL = ""
