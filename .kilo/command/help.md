@@ -6,6 +6,7 @@ Show the help menu with all available commands:
 - audit
 - backup
 - checker
+- claude
 - console
 - dashboard
 - debug
