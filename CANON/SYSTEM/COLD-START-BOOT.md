@@ -36,6 +36,7 @@
 | Run | Summary |
 |-----|---------|
 | 315 | Run 315 — Re-synch COLD-START-BOOT.md to 189-total ledger baseline; produce reincarnation record; produce Regeneration Audit report; triage Open Rulings |
+| 316 | Run 316 — REGENERATION GAP CLOSED (MegaMergeOfficial-2): manifest vs ledger reconciled; 34 active entries confirmed HL-113-141; 6 gap IDs HL-127/128/131/132/136/137 confirmed MISSING; run316 artifact sealed |
 | 312b | CLOUDFLARE_API_TOKEN secret cleared post-deploy; REINCARNATION-LOG.md closed |
 | 312 | Net-PET-AI worker DEPLOYED to production v1.5.0; run312 artifact committed & pushed (clean tree) |
 | 311 | BYPASS deployment; /souldna pipeline endpoints (POST /souldna, GET /souldna/pipeline); BRAVE_API_KEY + NOTION_SOUL_DNA_DB deferred (optional) |
@@ -104,5 +105,5 @@
 - 90-min connection lag FIXED — RISE agent auto-bootstraps; use `/connect` for manual cold start
 - CLOUDFLARE_API_TOKEN must be UNSET before every `npx wrangler deploy` — hard rule from Run 308/312
 - MERGE9 DONE — 9 repos consolidated; single canonical OB-1 root; tree clean, fully synced
-- **REGENERATION REPORT INCOMPLETE** — Wave-gap audit (75+ boundary entries) will be produced in next run
+- **REGENERATION GAP CLOSED** (run316, 2026-05-16) — Wave-gap boundary sealed: 34 active ledger entries confirmed across `HL-113`–`HL-141`; **6 confirmed MISSING**: `HL-127`/`HL-128`/`HL-131`/`HL-132`/`HL-136`/`HL-137`. Death-link: run315 (MAGA) → run316 (MEGA Retention). Artifact → `CANON/REINCARNATION/2026-05-16-run316-regeneration-gap-sealed-MegaMergeOfficial-2.md`
 - **Open Rulings triage table above** — Items 1–2 expired 2025-Apr-6; 16 open items total — escalation to Michael required
