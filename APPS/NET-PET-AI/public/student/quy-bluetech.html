@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quy — NET Student Portal</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+      color: #fff;
+      min-height: 100vh;
+      padding: 24px 16px 48px;
+    }
+    .container { max-width: 720px; margin: 0 auto; }
+    .hero { text-align: center; padding: 36px 0 28px; }
+    .avatar {
+      width: 80px; height: 80px; border-radius: 50%;
+      background: linear-gradient(135deg, #a78bfa, #7c3aed);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 36px; margin: 0 auto 16px;
+      box-shadow: 0 0 32px rgba(167,139,250,0.4);
+    }
+    .hero h1 { font-size: 2rem; font-weight: 700; letter-spacing: -0.5px; }
+    .hero .subtitle { color: #99aacc; margin-top: 6px; font-size: 0.95rem; }
+    .level-chip {
+      display: inline-block;
+      background: rgba(167,139,250,0.15);
+      border: 1px solid rgba(167,139,250,0.4);
+      color: #a78bfa; border-radius: 20px;
+      padding: 4px 14px; font-size: 0.8rem; font-weight: 600;
+      margin-top: 10px; letter-spacing: 0.5px;
+    }
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 24px 0; }
+    .stat {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px; padding: 16px 8px; text-align: center;
+    }
+    .stat-val { font-size: 1.7rem; font-weight: 700; color: #fff; line-height: 1; }
+    .stat-val.loading { font-size: 1.2rem; color: #556; }
+    .stat-label { font-size: 0.7rem; color: #778; margin-top: 5px; text-transform: uppercase; letter-spacing: 0.8px; }
+    .status-card {
+      border-radius: 16px; padding: 20px; margin-bottom: 14px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.05);
+    }
+    .status-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+    .status-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      border-radius: 20px; padding: 5px 14px;
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.5px;
+    }
+    .status-badge.mouse { background: rgba(79,195,247,0.15); border: 1px solid #4fc3f7; color: #4fc3f7; }
+    .status-badge.cub   { background: rgba(255,152,0,0.15);  border: 1px solid #ff9800; color: #ff9800; }
+    .status-badge.tiger { background: rgba(255,215,0,0.15);  border: 1px solid #ffd700; color: #ffd700; }
+    .score-big { font-size: 2rem; font-weight: 800; }
+    .progress-track { height: 8px; background: rgba(255,255,255,0.08); border-radius: 99px; overflow: hidden; }
+    .progress-fill { height: 100%; border-radius: 99px; background: linear-gradient(90deg, #4fc3f7, #0080ff); transition: width 0.8s ease; width: 0%; }
+    .progress-fill.cub   { background: linear-gradient(90deg, #ff9800, #ff5722); }
+    .progress-fill.tiger { background: linear-gradient(90deg, #ffd700, #ff8c00); }
+    .status-msg { margin-top: 10px; color: #aab; font-size: 0.88rem; font-style: italic; }
+    .daily-card {
+      background: linear-gradient(135deg, rgba(167,139,250,0.08), rgba(124,58,237,0.05));
+      border: 1px solid rgba(167,139,250,0.25);
+      border-radius: 16px; padding: 22px; margin-bottom: 14px;
+    }
+    .daily-card .section-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; color: #a78bfa; font-weight: 700; margin-bottom: 8px; }
+    .task-type-chip {
+      display: inline-block; background: rgba(167,139,250,0.15);
+      border-radius: 6px; padding: 2px 10px; font-size: 0.75rem;
+      color: #a78bfa; margin-bottom: 12px; text-transform: capitalize;
+    }
+    .task-prompt { font-size: 1.05rem; line-height: 1.6; color: #e0e8ff; margin-bottom: 14px; }
+    .task-meta { display: flex; gap: 16px; }
+    .task-meta span { font-size: 0.78rem; color: #778; background: rgba(255,255,255,0.05); padding: 4px 10px; border-radius: 6px; }
+    .cta {
+      display: block;
+      background: linear-gradient(135deg, #a78bfa, #7c3aed);
+      color: #fff; text-align: center; padding: 16px; border-radius: 14px;
+      text-decoration: none; font-weight: 700; font-size: 1rem;
+      letter-spacing: 0.3px; margin-bottom: 14px;
+      box-shadow: 0 4px 20px rgba(124,58,237,0.35);
+      transition: opacity 0.2s;
+    }
+    .cta:hover { opacity: 0.9; }
+    .profile-card {
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px; padding: 18px 20px; margin-bottom: 14px;
+    }
+    .profile-card .section-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; color: #556; font-weight: 700; margin-bottom: 12px; }
+    .profile-row { display: flex; gap: 10px; margin-bottom: 8px; align-items: flex-start; }
+    .profile-key { font-size: 0.78rem; color: #667; min-width: 80px; padding-top: 1px; }
+    .profile-val { font-size: 0.88rem; color: #ccd; line-height: 1.5; }
+    .back-link { display: block; text-align: center; color: #556; font-size: 0.85rem; text-decoration: none; margin-top: 10px; }
+    .back-link:hover { color: #a78bfa; }
+    @keyframes shimmer { 0% { opacity: 0.3; } 50% { opacity: 0.6; } 100% { opacity: 0.3; } }
+    .loading { animation: shimmer 1.5s infinite; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="hero">
+      <div class="avatar">📚</div>
+      <h1>Quy</h1>
+      <p class="subtitle">Nguyễn Thị Thu Quy · Accounting Intern · BlueTech</p>
+      <span class="level-chip">A2 · MOUSE LEVEL</span>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><div class="stat-val loading" id="val-score">—</div><div class="stat-label">Tiger Score</div></div>
+      <div class="stat"><div class="stat-val loading" id="val-streak">—</div><div class="stat-label">Streak</div></div>
+      <div class="stat"><div class="stat-val loading" id="val-xp">—</div><div class="stat-label">XP</div></div>
+      <div class="stat"><div class="stat-val loading" id="val-sessions">—</div><div class="stat-label">Sessions</div></div>
+    </div>
+
+    <div class="status-card">
+      <div class="status-row">
+        <span class="status-badge mouse" id="status-badge">🐭 MOUSE MODE</span>
+        <span class="score-big" id="score-big">0</span>
+      </div>
+      <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+      <p class="status-msg" id="status-msg">Loading...</p>
+    </div>
+
+    <div class="daily-card">
+      <div class="section-label">Today's Mission</div>
+      <div class="task-type-chip" id="task-type">—</div>
+      <p class="task-prompt" id="task-prompt">Loading your task...</p>
+      <div class="task-meta">
+        <span id="task-focus">—</span>
+        <span id="task-duration">—</span>
+      </div>
+    </div>
+
+    <a href="/magic-chat.html?student=quy-bluetech" class="cta">Start Session →</a>
+
+    <div class="profile-card">
+      <div class="section-label">Profile</div>
+      <div class="profile-row"><span class="profile-key">Goal</span><span class="profile-val" id="p-goals">—</span></div>
+      <div class="profile-row"><span class="profile-key">Strength</span><span class="profile-val" id="p-strength">—</span></div>
+      <div class="profile-row"><span class="profile-key">Focus</span><span class="profile-val" id="p-trigger">—</span></div>
+    </div>
+
+    <a href="/student-portal.html" class="back-link">← All Students</a>
+  </div>
+
+  <script>
+    const studentId = 'quy-bluetech';
+    const BASE = 'https://net-pet-ai.mrmichaelhobbs123.workers.dev';
+    function statusClass(s) { if (!s) return 'mouse'; if (s.includes('TIGER')) return 'tiger'; if (s.includes('CUB')) return 'cub'; return 'mouse'; }
+    function statusLabel(s) { if (!s) return '🐭 MOUSE MODE'; if (s.includes('TIGER')) return '🐯 TIGER MODE'; if (s.includes('CUB')) return '🐻 CUB MODE'; return '🐭 MOUSE MODE'; }
+    function setVal(id, val) { const el = document.getElementById(id); if (el) { el.textContent = val; el.classList.remove('loading'); } }
+    async function loadAll() {
+      try {
+        const [tigerRes, petRes, dailyRes, profileRes] = await Promise.all([
+          fetch(`${BASE}/api/tiger-score?studentId=${studentId}`).then(r => r.json()),
+          fetch(`${BASE}/api/netpet/state?studentId=${studentId}`).then(r => r.json()),
+          fetch(`${BASE}/api/daily?studentId=${studentId}`).then(r => r.json()),
+          fetch(`${BASE}/api/student/state?studentId=${studentId}`).then(r => r.json()),
+        ]);
+        const score = tigerRes.tigerScore ?? 0;
+        setVal('val-score', score); setVal('val-streak', tigerRes.streak ?? 0);
+        setVal('val-xp', petRes.state?.xp ?? 0); setVal('val-sessions', petRes.state?.totalSessions ?? 0);
+        const status = tigerRes.status || 'MOUSE_MODE';
+        const cls = statusClass(status);
+        const badge = document.getElementById('status-badge');
+        badge.textContent = statusLabel(status); badge.className = `status-badge ${cls}`;
+        setVal('score-big', score);
+        const fill = document.getElementById('progress-fill');
+        fill.style.width = `${Math.min(score, 100)}%`; fill.className = `progress-fill ${cls}`;
+        setVal('status-msg', dailyRes.message || '');
+        if (dailyRes.task) {
+          setVal('task-type', dailyRes.task.type || '—');
+          setVal('task-prompt', dailyRes.task.prompt || '—');
+          setVal('task-focus', `Focus: ${dailyRes.focus || '—'}`);
+          setVal('task-duration', `${dailyRes.task.duration ?? '?'} min`);
+        }
+        const prof = profileRes.profile;
+        if (prof) { setVal('p-goals', prof.goals || '—'); setVal('p-strength', prof.confidence_areas || '—'); setVal('p-trigger', prof.fear_trigger || '—'); }
+      } catch (e) { document.getElementById('status-msg').textContent = 'Could not load data — check connection.'; }
+    }
+    loadAll();
+  </script>
+</body>
+</html>
