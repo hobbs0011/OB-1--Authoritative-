@@ -291,9 +291,15 @@ switch ($Command) {
         $allAssets   = @($workerResults) + @($pageResults)
         # Workers/projects that intentionally return 404 — API-only or known staging slots
         $expected404s = @("submission-api", "phoenix-coder", "net-pet-ai-staging")
-        $broken      = $allAssets | Where-Object { $_.health -ne 200 -and $_.health -ne "200" -and $_.name -notin $expected404s }
-        $untracked   = $allAssets | Where-Object { -not $_.tracked }
-        $healthy     = $allAssets | Where-Object { $_.health -eq 200 -or $_.health -eq "200" }
+
+        # Count helpers — $null-safe under Set-StrictMode
+        $totalCount  = @($allAssets).Count
+        $brokenCount = @($allAssets | Where-Object { $_.health -ne 200 -and $_.health -ne "200" -and $_.name -notin $expected404s }).Count
+        $untracked    = @($allAssets | Where-Object { -not $_.tracked })
+        $untrackedCount = $untracked.Count
+        $healthyCount  = @($allAssets | Where-Object { $_.health -eq 200 -or $_.health -eq "200" }).Count
+        $healthy      = @($allAssets | Where-Object { $_.health -eq 200 -or $_.health -eq "200" })
+        $broken       = @($allAssets | Where-Object { $_.health -ne 200 -and $_.health -ne "200" -and $_.name -notin $expected404s })
 
         # --- Print report ---
         Write-Host ""
@@ -312,17 +318,17 @@ switch ($Command) {
         }
         Write-Host ""
         Write-Host "  SUMMARY" -ForegroundColor Cyan
-        Write-Host "    Total assets : $($allAssets.Count)"
-        Write-Host "    Healthy (200): $($healthy.Count)"  -ForegroundColor Green
-        Write-Host "    Broken       : $($broken.Count)"   -ForegroundColor $(if($broken.Count) {"Red"} else {"Green"})
-        Write-Host "    Untracked    : $($untracked.Count)" -ForegroundColor $(if($untracked.Count) {"Yellow"} else {"Green"})
+        Write-Host "    Total assets : $totalCount"
+        Write-Host "    Healthy (200): $healthyCount"  -ForegroundColor Green
+        Write-Host "    Broken       : $brokenCount"   -ForegroundColor $(if($brokenCount) {"Red"} else {"Green"})
+        Write-Host "    Untracked    : $untrackedCount" -ForegroundColor $(if($untrackedCount) {"Yellow"} else {"Green"})
         Write-Host ""
 
         [pscustomobject]@{
-            total_assets     = $allAssets.Count
-            healthy          = $healthy.Count
-            broken           = $broken.Count
-            untracked        = $untracked.Count
+            total_assets     = $totalCount
+            healthy          = $healthyCount
+            broken           = $brokenCount
+            untracked        = $untrackedCount
             workers_live     = $liveWorkers.Count
             pages_live       = $livePages.Count
             broken_assets    = @($broken  | Select-Object name, health, tracked, type)
