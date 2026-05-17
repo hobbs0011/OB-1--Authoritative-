@@ -1,48 +1,63 @@
 # CLOUDFLARE MANIFEST — OB-1 CANONICAL
 
-**Account:** mrmichaelhobbs123@gmail.com  
-**Account ID:** 3c7b1766bd8fdc9e01211d2b390315ea  
-**Last audited:** 2026-05-17  
+**Account:** mrmichaelhobbs123@gmail.com
+**Account ID:** 3c7b1766bd8fdc9e01211d2b390315ea
+**Last audited:** 2026-05-18
+**Audit command:** `pwsh -File SCRIPTS/obi.ps1 cf-audit`
+**Last audit result:** total 18 · healthy 15 · broken 0 · untracked 0
 
-This file is the authoritative inventory of all live Cloudflare assets. Run `pwsh -File SCRIPTS/obi.ps1 cf-audit` to refresh (not yet implemented — see GAP-1).
-
----
-
-## Workers (11)
-
-| Worker | URL | Last Deploy | Health | Tracked in Repo | Notes |
-|---|---|---|---|---|---|
-| net-pet-ai | net-pet-ai.mrmichaelhobbs123.workers.dev | 2026-05-16 | ✅ 200 | ✅ APPS/NET-PET-AI | Primary worker — canon branch |
-| net-pet-ai-production | net-pet-ai-production.mrmichaelhobbs123.workers.dev | 2026-05-02 | ✅ 200 | ⚠️ same source | Ghost assets present — see RESCUED |
-| net-pet-ai-staging | net-pet-ai-staging.mrmichaelhobbs123.workers.dev | 2026-04-19 | ❌ 404 | ❌ | Staging slot, no health route |
-| net-pet-ai-mvp | net-pet-ai-mvp.mrmichaelhobbs123.workers.dev | 2026-04-19 | ✅ 200 | ❌ | MVP build, untracked |
-| net-obi-api | net-obi-api.mrmichaelhobbs123.workers.dev | 2026-04-14 | ❌ 404 | ❌ | Legacy API worker |
-| net-core | net-core.mrmichaelhobbs123.workers.dev | 2026-04-14 | ❌ 404 | ❌ | Legacy core worker |
-| phoenix-coder | phoenix-coder.mrmichaelhobbs123.workers.dev | 2026-05-17 | ❌ 404 | ❌ PROJECTS/phoenix-coder | Standalone repo, not APPS/ |
-| soul-logger | soul-logger.mrmichaelhobbs123.workers.dev | 2026-05-06 | ✅ 200 | ✅ APPS/SOUL-LOGGER | Chat dump ingestion drone. DB: soul-archive. Parsers: claude/chatgpt/notebooklm/vscode/gemini |
-| submission-api | submission-api.mrmichaelhobbs123.workers.dev | 2026-05-05 | ✅ 200 | ✅ APPS/SUBMISSION-API | NET assessment submissions → net-submissions D1. Resend email notify. 9 test rows in DB. |
-| frosty-bush-c14f | frosty-bush-c14f.mrmichaelhobbs123.workers.dev | 2025-12-28 | ❓ | ❌ | Early prototype — likely orphaned |
-| phoenix-v5-test | phoenix-v5-test.mrmichaelhobbs123.workers.dev | 2025-12-26 | ❌ 404 | ❌ | Early prototype — likely orphaned |
+This file is the authoritative inventory of all live Cloudflare assets.
 
 ---
 
-## Pages Projects (13)
+## Workers (8 live)
 
-| Project | URL | Last Deploy | Live | Tracked in Repo | Notes |
-|---|---|---|---|---|---|
-| net-tiger-assessment | net-tiger-assessment.pages.dev | 1 month ago | ✅ 200 | ✅ RESCUED → public/net-tiger-assessment.html | Bilingual (VI/EN) intake assessment |
-| naturalenglishtraining | naturalenglishtraining.pages.dev | 4 weeks ago | ✅ 200 | ❌ | Marketing site — primary brand domain |
-| net-marketing-landing | net-marketing-landing.pages.dev | 1 week ago | ✅ 200 | ❌ | Landing page |
-| netpetai-presentation | netpetai-presentation.pages.dev | 4 days ago | ✅ 200 | ❌ | Presentation deck |
-| tigers-4room | tigers-4room.pages.dev | 2026-05-18 | ✅ 200 | ✅ APPS/PAGES/tigers-4room | NET Tigers child assessment (8-17). RESCUED + promoted. |
-| cubs-4room | cubs-4room.pages.dev | 2026-05-18 | ✅ 200 | ✅ APPS/PAGES/cubs-4room | NET Cubs child assessment (3-7). RESCUED + promoted. |
-| professional-4room | professional-4room.pages.dev | 2026-05-18 | ✅ 200 | ✅ APPS/PAGES/professional-4room | NET Professional assessment. RESCUED + promoted. |
-| career-4room | career-4room.pages.dev | 2026-05-18 | ✅ 200 | ✅ APPS/PAGES/career-4room | NET Career assessment. RESCUED + promoted. |
-| university-4room | university-4room.pages.dev | 2026-05-18 | ✅ 200 | ✅ APPS/PAGES/university-4room | NET University assessment. RESCUED + promoted. |
-| tigers-selection | tigers-selection.pages.dev | 2026-05-18 | ✅ 200 | ✅ APPS/PAGES/tigers-selection | Selection funnel: Cubs vs Tigers. RESCUED + promoted. |
-| professional-selection | professional-selection.pages.dev | 2026-05-18 | ✅ 200 | ✅ APPS/PAGES/professional-selection | Selection funnel: University vs Career. RESCUED + promoted. |
-| net-marketing | net-marketing.pages.dev | 1 week ago | ❌ 404 | ❌ | Deployed but broken |
-| obi-landing | obi-landing.pages.dev | 2 weeks ago | ❌ 404 | ❌ | Deployed but broken |
+| Worker | URL | Health | Tracked in Repo | Notes |
+|---|---|---|---|---|
+| frosty-bush-c14f | frosty-bush-c14f.mrmichaelhobbs123.workers.dev | ✅ 200 | ✅ APPS/FROSTY-BUSH-C14F | Phoenix Vault — Google Docs OAuth writer. Early soul-DNA capture tool, superseded by soul-logger. |
+| net-obi-api | net-obi-api.mrmichaelhobbs123.workers.dev | ✅ 200 | ✅ APPS/NET-OBI-API | Legacy API worker. Early prototype (waitlist + hardcoded chat, AI never wired). Superseded by net-pet-ai. Kept as legacy reference. |
+| net-pet-ai | net-pet-ai.mrmichaelhobbs123.workers.dev | ✅ 200 | ✅ APPS/NET-PET-AI | Primary worker — canon branch |
+| net-pet-ai-production | net-pet-ai-production.mrmichaelhobbs123.workers.dev | ✅ 200 | ✅ APPS/NET-PET-AI | Production slot — shared source with net-pet-ai. Ghost web assets (Minh portal, Tiger assessment) rescued 2026-05-17. |
+| net-pet-ai-staging | net-pet-ai-staging.mrmichaelhobbs123.workers.dev | ❌ 404 | ✅ APPS/NET-PET-AI | Staging slot — no health route by design. Known exclusion (in expect-404 list). |
+| phoenix-coder | phoenix-coder.mrmichaelhobbs123.workers.dev | ❌ 404 | ⚠️ PROJECTS/phoenix-coder (standalone) | Standalone repo. API-only worker — intentionally no GET / route. Known exclusion. |
+| soul-logger | soul-logger.mrmichaelhobbs123.workers.dev | ✅ 200 | ✅ APPS/SOUL-LOGGER | Chat dump ingestion drone. D1: soul-archive. Parsers: claude / chatgpt / notebooklm / vscode / gemini. |
+| submission-api | submission-api.mrmichaelhobbs123.workers.dev | ❌ 404 | ✅ APPS/SUBMISSION-API | NET assessment submission handler. D1: net-submissions. Resend email notify. API-only (POST /api/submit only). Known exclusion. |
+
+### Removed / Deleted (no longer in CF account)
+
+| Worker | Reason |
+|---|---|
+| net-core | Deleted via CF API — 404 orphan, early 2025 prototype, no repo source |
+| net-pet-ai-mvp | Deleted via CF API — old MVP deployment, 404 |
+| net-pet-ai-selection | Deleted via CF API — 404 orphan, superseded by 4room apps |
+| net-pet-ai-cubs | Deleted via CF API — 404 orphan, superseded by 4room apps |
+| obi-landing | Deleted via CF API — 404 dead Pages project |
+| phoenix-v5-test | Deleted via CF API — 404 orphan, early 2025 prototype, no repo source |
+
+---
+
+## Pages Projects (10 live)
+
+| Project | URL | Live | Tracked in Repo | Notes |
+|---|---|---|---|---|
+| career-4room | career-4room.pages.dev | ✅ 200 | ✅ APPS/PAGES/career-4room | NET Career pathway assessment. RESCUED 2026-05-18 — promoted to production branch. |
+| cubs-4room | cubs-4room.pages.dev | ✅ 200 | ✅ APPS/PAGES/cubs-4room | NET Cubs child assessment (ages 3–7). RESCUED 2026-05-18 — promoted to production branch. |
+| naturalenglishtraining | naturalenglishtraining.pages.dev | ✅ 200 | ✅ APPS/PAGES/naturalenglishtraining | Marketing site — primary brand domain. Rescued to repo 2026-05-17. |
+| net-marketing-landing | net-marketing-landing.pages.dev | ✅ 200 | ✅ APPS/PAGES/net-marketing-landing | Landing page. Rescued to repo 2026-05-17. |
+| netpetai-presentation | netpetai-presentation.pages.dev | ✅ 200 | ✅ APPS/PAGES/netpetai-presentation | Interactive presentation deck with cloned chat.js. Rescued to repo 2026-05-17. |
+| professional-4room | professional-4room.pages.dev | ✅ 200 | ✅ APPS/PAGES/professional-4room | NET Professional (adult) pathway assessment. RESCUED 2026-05-18 — promoted to production branch. |
+| professional-selection | professional-selection.pages.dev | ✅ 200 | ✅ APPS/PAGES/professional-selection | Selection funnel: University vs Career. RESCUED 2026-05-18 — promoted to production branch. |
+| tigers-4room | tigers-4room.pages.dev | ✅ 200 | ✅ APPS/PAGES/tigers-4room | NET Tigers child assessment (ages 8–17). RESCUED 2026-05-18 — promoted to production branch. |
+| tigers-selection | tigers-selection.pages.dev | ✅ 200 | ✅ APPS/PAGES/tigers-selection | Selection funnel: Cubs vs Tigers. RESCUED 2026-05-18 — promoted to production branch. |
+| university-4room | university-4room.pages.dev | ✅ 200 | ✅ APPS/PAGES/university-4room | NET University pathway assessment. RESCUED 2026-05-18 — promoted to production branch. |
+
+### Removed / Deleted (no longer in CF account)
+
+| Project | Reason |
+|---|---|
+| net-tiger-assessment | Deleted via CF API — 404 dead, source rescued to APPS/NET-PET-AI/public/ |
+| net-marketing | Deleted via CF API — 404 dead |
+| obi-landing | Deleted via CF API — 404 dead |
 
 ---
 
@@ -60,8 +75,10 @@ This file is the authoritative inventory of all live Cloudflare assets. Run `pws
 
 | Name | UUID | Created | Tables |
 |---|---|---|---|
-| soul-archive | c69a11bc-064b-478f-9b1f-e9b8e2431fb8 | 2026-05-05 | 0 (empty) |
-| net-submissions | 1a7246ce-1227-4205-9234-76cbd036fa48 | 2026-05-05 | 0 (empty) |
+| soul-archive | c69a11bc-064b-478f-9b1f-e9b8e2431fb8 | 2026-05-05 | 7+ |
+| net-submissions | 1a7246ce-1227-4205-9234-76cbd036fa48 | 2026-05-05 | 3+ |
+
+> **Note:** Initial audit reported 0 tables — false negative. Both databases have active schema confirmed via CF MCP API. Counts are live and may increase as ingestion progresses.
 
 ---
 
@@ -85,12 +102,12 @@ Files that existed in the deployed `net-pet-ai-production` worker but were absen
 
 ## Gaps / Action Items
 
-| # | Gap | Impact | Fix |
-|---|---|---|---|
-| GAP-1 | `obi.ps1 doctor` has no Cloudflare API query | Audit blindspot for all 24 assets | Add `cf-audit` command to obi.ps1 |
-| GAP-2 | 7 live Workers not tracked in repo | Source code invisible to canon | Audit each, add APPS/ entries or mark as intentional-external |
-| GAP-3 | naturalenglishtraining.pages.dev not in repo | Marketing site is a ghost | Pull and add to APPS/ |
-| GAP-4 | 7 Pages projects deployed but returning 404 | Dead deployments consuming CF quota | Investigate — delete or fix |
-| GAP-5 | 2 D1 databases exist but have 0 tables | Created, never migrated | Run migrations or delete |
-| GAP-6 | Mai Tram, Quy, Huong built on wrong template | Missing multi-tab portal experience | Rebuild against rescued minh portal |
-| GAP-7 | submission-api and soul-logger untracked | Business-critical workers invisible | Locate source, add to APPS/ |
+| # | Gap | Status |
+|---|---|---|
+| GAP-1 | `obi.ps1 doctor` had no Cloudflare API query | ✅ **CLOSED** — `cf-audit` command added and verified (commit `2da6358`) |
+| GAP-2 | 7 live Workers not tracked in repo | ✅ **CLOSED** — all traced: net-obi-api + frosty-bush-c14f rescued; phoenix-coder doc'd as standalone; dead workers (net-core, phoenix-v5-test) deleted via CF API |
+| GAP-3 | `naturalenglishtraining.pages.dev` not in repo | ✅ **CLOSED** — rescued to `APPS/PAGES/naturalenglishtraining` (commit `a70fc8c`) |
+| GAP-4 | 7 Pages projects returning 404 | ✅ **CLOSED** — 6 rescued & promoted to production; 1 (net-marketing) deleted via CF API as dead |
+| GAP-5 | 2 D1 databases reported as empty | ✅ **CLOSED** — both have active schema, 0 rows false-negative from CAPIv4 incomplete listing |
+| GAP-6 | BlueTech students on wrong portal template | ✅ **CLOSED** — Mai Tram, Quy, Huong rebuilt against 5-tab multi-portal template (commit `fb280e6`) |
+| GAP-7 | `submission-api` and `soul-logger` untracked | ✅ **CLOSED** — both located and tracked in `APPS/` (commit `fe16efe`) |
