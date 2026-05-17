@@ -62,39 +62,13 @@ function Test-GitHub {
 }
 
 function Test-Notion {
-    $tokenNames = @("NOTION_TOKEN", "NOTION_TOKEN_2", "NOTION_TOKEN_3", "NOTION_TOKEN_4", "NOTION_TOKEN_5", "NOTION_TOKEN_6")
-    $live = 0
-    $details = @()
-
-    foreach ($name in $tokenNames) {
-        $token = [Environment]::GetEnvironmentVariable($name, "User")
-        if (-not $token) {
-            continue
-        }
-
-        try {
-            $headers = @{ Authorization = "Bearer $token"; "Notion-Version" = "2022-06-28"; "Content-Type" = "application/json" }
-            $me = Invoke-RestMethod -Uri "https://api.notion.com/v1/users/me" -Method Get -Headers $headers
-            $search = Invoke-RestMethod -Uri "https://api.notion.com/v1/search" -Method Post -Headers $headers -Body '{"page_size":5}'
-            $live++
-            $details += "${name}:$($me.bot.workspace_name):results=$($search.results.Count)"
-        }
-        catch {
-            $details += "${name}:FAIL"
-        }
-    }
-
-    if ($live -gt 0) {
-        return [pscustomobject]@{ Service = "Notion"; Live = $true; Detail = ($details -join "; ") }
-    }
-
-    return [pscustomobject]@{ Service = "Notion"; Live = $false; Detail = "No valid tokens" }
+    # Notion is BLACKLISTED — no API calls are made
+    return [pscustomobject]@{ Service = "Notion"; Live = $false; Detail = "BLACKLISTED — future connections permanently disabled" }
 }
 
 $envVars = @(
     "CLOUDFLARE_API_KEY", "CLOUDFLARE_EMAIL", "CLOUDFLARE_API_TOKEN", "CLOUDFLARE_ACCOUNT_ID",
     "GITHUB_TOKEN",
-    "NOTION_TOKEN", "NOTION_TOKEN_2", "NOTION_TOKEN_3", "NOTION_TOKEN_4", "NOTION_TOKEN_5", "NOTION_TOKEN_6",
     "ROBLOX_API_KEY",
     "SLACK_BOT_TOKEN", "SLACK_TEAM_ID", "DISCORD_TOKEN", "BRAVE_API_KEY",
     "TELEGRAM_API_ID", "TELEGRAM_API_HASH", "TELEGRAM_PHONE",

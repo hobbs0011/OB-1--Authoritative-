@@ -55,18 +55,8 @@ function Test-GitHubOwner {
 function Test-NotionToken {
     param([string]$EnvName)
 
-    $token = [Environment]::GetEnvironmentVariable($EnvName, "User")
-    if (-not $token) {
-        return [pscustomobject]@{ name = $EnvName; valid = $false; status = "MISSING" }
-    }
-
-    try {
-        $resp = Invoke-WebRequest -Uri "https://api.notion.com/v1/users/me" -Headers @{ Authorization = "Bearer $token"; "Notion-Version" = "2022-06-28" } -Method Get
-        return [pscustomobject]@{ name = $EnvName; valid = $true; status = $resp.StatusCode }
-    }
-    catch {
-        return [pscustomobject]@{ name = $EnvName; valid = $false; status = "FAIL" }
-    }
+    # Notion is BLACKLISTED — future connections permanently disabled
+    return [pscustomobject]@{ name = $EnvName; valid = $false; status = "BLACKLISTED" }
 }
 
 $branch = (git branch --show-current)
@@ -101,7 +91,6 @@ foreach ($t in $notionTokens) {
 }
 
 $legacyRemotes = $remoteRows | Where-Object { $_.classification -eq "LEGACY" }
-$invalidNotion = $notionChecks | Where-Object { -not $_.valid }
 
 $result = [pscustomobject]@{
     timestamp = (Get-Date).ToString("yyyy-MM-dd HH:mm:ss")
@@ -111,7 +100,7 @@ $result = [pscustomobject]@{
     notion = $notionChecks
     findings = @(
         "Legacy remotes count: $($legacyRemotes.Count)",
-        "Invalid/Missing Notion tokens: $($invalidNotion.Count)",
+        "Notion: BLACKLISTED — future connections permanently disabled",
         "Active remotes count: $(($remoteRows | Where-Object { $_.classification -eq 'ACTIVE' }).Count)"
     )
 }
@@ -131,8 +120,7 @@ Write-Host ""
 Write-Host "GitHub Owner Reachability"
 $ownerChecks | Format-Table -AutoSize
 Write-Host ""
-Write-Host "Notion Token Health"
-$notionChecks | Format-Table -AutoSize
+Write-Host "Notion — BLACKLISTED (platform usage permanently disabled)"
 Write-Host ""
 Write-Host "Findings"
 $result.findings | ForEach-Object { Write-Host "- $_" }

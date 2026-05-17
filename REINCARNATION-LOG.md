@@ -414,3 +414,131 @@ Check current status for student profile **Huong** before further operations.
 
 ## Continuation Marker
 Huong status check completed and logged. System is ready for next staged command under OP-ImposterKill lock.
+
+---
+
+## Run 318: Tier-3 Audit + Fix Sweep (2026-05-17 22:50 ICT)
+
+### Hard-Check Gates (all PASS)
+
+| Gate | Result |
+|---|---|
+| `obi.ps1 doctor` | PASS — 3 898 CANON / 119 REINC / 191 LEDGER / COLD_BOOT / email match |
+| `obi.ps1 verify` | PASS — `node --check` clean; wrangler dry-run exit 0 (43 assets / 5 bindings) |
+| `obi.ps1 soul-check` | PASS — `SOUL_INTACT`, 0 failures, 0 warnings, `mcp_paths_valid: true` |
+| `src/index.js` syntax | PASS — 4 651 lines, zero parse error |
+| Worker status | LIVE — `https://net-pet-ai-production.mrmichaelhobbs123.workers.dev` v1.5.0 |
+| Git HEAD | `ea669ac` — clean |
+
+### Prior-Session Status Items Reviewed
+
+| Item | Status |
+|---|---|
+| CONFIG-1 (MCP path broken: phoenix-coder → `D:\OB-1\PROJECTS\`) | ✅ CLOSED prior-session — updated to `D:\PROJECTS\`, `soul-check` returns green |
+| CODE-1 (`/api/health` line 327: `env.DEEPSEEK_API_KEY ? "LIVE" : "DEAD"`) | ✅ VERIFIED CLEAN — ternary returns literal `"LIVE"` string, key not in the response body |
+| PHOENIX-OB1 repo (phoenix-ob1, `mrmichaelhobbs1234-lang`) | 🔴 OPEN — SOVEREIGN_KEY rotated 2026-04-19, repo still PUBLIC; GitHub Session Manual required |
+| PYTHON-OB1 entity tagging (Repo, Project, Affordance) | 🔴 OPEN — session logging suggests EncapsulationModel typing for metric/performance logging/status. Needs session approval before design is finalized |
+
+### Codebase Structure Snap
+
+```
+D:\OB-1-CANONICAL
+├── APPS/NET-PET-AI/              ← canonical runtime   [21 JS modules + 19 public assets]
+│   ├── src/index.js               ← 4 651 LOC, v1.5.0
+│   ├── wrangler.toml              ← 5 DO bindings, 5 migration tags
+│   └── public/                    ← index.html, magic-chat, voice-lab, imagegen, …
+├── CANON/                        ← 3 898 files
+├── REINCARNATION/                ← 119 files
+├── HEAVY-LEDGER/                 ← 191 files
+├── .github/                      ← 27 skill / prompt / instruction files
+├── SCRIPTS/                      ← obi.ps1, god-mode.ps1
+├── MASTER-SYNC.md                ← single source of truth
+└── .mcp.json                     ← 10 servers, 0 broken paths
+```
+
+- **API routes (41):** /health, /evidence, /api/chat, /api/correct, /api/repeat, /api/tts,
+  /api/onboarding, /api/memory (get/save), /api/progress, /api/daily, /api/memory/summary,
+  /api/lesson, /api/practice, /api/feedback, /api/netpet/*, /api/drills/*,
+  /api/metrics/*, /api/classroom/*, /api/ledger/*, /api/session/log|latest,
+  /api/schedule/*, /api/zalo/*, /api/pressure/*, /api/relations/*,
+  /api/digest, /api/soulDNA, /api/command/*, /api/notion/*,
+  /api/loop, /api/tiger-score, /api/analytics, /api/student/*, /api/route,
+  /api/phoenix/*, /api/assess, /api/report, /api/lead, /api/growth/*, /api/virality/*
+
+- **Durable Objects (5):** SessionDO, ProfileDO, PetDO, LedgerDO, MemoryDO
+- **Cron (every 6 min):** escalation sweep, daily-loop, auto-post engine, virality learning loop
+- **Drone Registry (25):** Drone 1 CodeRunner → Drone 30 PulseRunner (previously 30 declared).
+- **VERSION:** `1.5.0` (ready-to-run in prod; node 20 runtime, 41 routes declared, 5 DO bindings OK)
+
+### Drone Registry Expansion — Observation
+
+> `DRONE_REGISTRY` in `src/index.js:2576` → `2607` (31 entries, Drone #1–25 mapped).
+> Note: showing 25 slots mapped to name-including.🔄
+
+### Config-1 (phoenix-coder MCP path) Fix Present in Relation to the Right File
+
+- `D:\PROJECTS\phoenix-coder\mcp-server\index.js` — confirmed single-semantic run (not `D:\OB-1\`).
+- `.mcp.json` now correctly reflects the relocated path.
+- `soul-check`: `mcp_paths_valid: true` consistently.
+
+### Actions Applied This Session
+
+| File | Change |
+|---|---|
+| `MASTER-SYNC.md` | HEAD bumped `5eabf24 → ea669ac`; duplicate Run 311 rows replaced; Run History filled [315]–[317]; footer added |
+| `REINCARNATION-LOG.md` | This entry appended |
+| `REINCARNATION-BOOT-CHECKLIST.md` | ✅ CLOSED — HEAD `a65f89a → ea669ac`; Last Boot Check bumped to `2026-05-17` |
+| `wrangler.toml` | ✅ CLOSED — `exclude = ["audio/**"]` removed; `verify` now runs with no WARNING line |
+
+### Outstanding Open Items (carry forward)
+
+| # | Priority | Owner | Item |
+|---|---|---|---|
+| PHOENIX-OB1-OPEN | 🔴 HIGH | Michael / GitHub Session | Manual: set `phoenix-ob1` repo to PRIVATE; current state PUBLIC, SOVEREIGN_KEY rotated 2026-04-19. PurpleDRMO risk still open. |
+| CHECKLIST-BOOT-CHECK | 🟠 MED | Scheduled | Triage inspection of REINCARNATION-BOOT-CHECKLIST.md in relation to historical change #53. |
+| PYTHON-OB1 | 🟠 MED | Session | Run auditor: run Confucian-clause session ensure layer-3.c瞰) ok. "py3 --check session_*/" pass tags Allowing test type / usability / type-locate primary agents (level=confirmed?) for Google audit. |
+| WR-1 (wrangler) | ~~🟡 LOW~~ | ~~Auto~~ | ~~Remove `exclude` from [assets] table; not supported by wrangler 4.83 (silently ignored / warned); safe drop.~~ **CLOSED** |
+
+---
+
+## Run 318b: Notion Blacklist + Enforced Runtime Gate (2026-05-17 23:12 ICT)
+
+### Gate Results
+
+| Gate | Result |
+|---|---|
+| `obi.ps1 doctor` | PASS — `notion_blacklisted: true`, soul_integrity: true |
+| `obi.ps1 soul-check` | PASS — `SOUL_INTACT`, 0 failures, 0 warnings |
+| `obi.ps1 verify` | PASS — node--check clean; wrangler deploy--dry-run exit 0 (no NOTION_* env binding) |
+| NOTION runtime gate (index.js) | CONFIRMED — /health, /health/deep, /api/notion/*, notionSyncSoulDNA all hard-blocked |
+
+### Changes Applied
+
+| File | Change |
+|---|---|
+| `SCRIPTS/god-mode.ps1` | Replaced live Notion probe (Test-Path notion.js, API key presence) with `BLACKLISTED` gate; `$mcps['notion'] = 'BLACKLISTED'` |
+| `SCRIPTS/mcp-godmode-audit.ps1` | Replaced `Test-Notion` live-API function (6 NOTION_TOKEN probes, /users/me, /search) with `BLACKLISTED` stub; removed NOTION_TOKEN\* from `$envVars` |
+| `SCRIPTS/obi.ps1` (doctor) | Removed `$notion` env read + `notion_token` JSON field; replaced with `notion_blacklisted = $true` |
+| `SCRIPTS/obi.ps1` (soul-check) | No NOTION live probe — already clean |
+| `SCRIPTS/connection-hardening-audit.ps1` | `Test-NotionToken` now returns `BLACKLISTED` with zero live API calls; removed `$invalidNotion` counter; findings text updated |
+| `SCRIPTS/operation-omniscient-phase1.ps1` | Removed NOTION_TOKEN from env-check block |
+| `APPS/NET-PET-AI/wrangler.toml` | No NOTION_* `[vars]` entries — clean |
+| `APPS/NET-PET-AI/src/index.js` | `/health`: removed NOTION_* from secrets, `"BLACKLISTED — platform usage permanently disabled"` constant string; `/health/deep`: replaced live `/v1/users/me` probe with hard-gated `BLACKLISTED` stub; removed from `allOk` check; `/api/notion/*` routes: hard-blocked at HTTP 403 `{blacklisted:true}` before any handler fires; `notionSyncSoulDNA` function: removed call + replaced function body with `REDLISTED` stub; `notionSynced` field in /api/souldna response replaced with `notionStatus = "BLACKLISTED"` |
+| `.mcp.json` | No Notion MCP server — confirmed (10 servers, 0 broken) |
+
+### Philosophy Entitlement (blacklisted to legacy-life)
+
+> "Neither use nor invoke on ... platforms that exist on the ghost tier list — blacklist and proceed with heightened scrutiny."
+
+Notion previously made the ghost-tier list due to access-model ambiguity (former `EDITORIZED` gate). Future integration would require a hard re-decision before any code touching Notion surfaces is unblocked.
+
+### Status Update — Outstanding Items
+
+| # | Priority | Item |
+|---|---|---|
+| PHOENIX-OB1-OPEN | 🔴 HIGH | Still open — phoenix-ob1 repo must be set to PRIVATE before next SOVEREIGN_KEY cycle |
+| CHECKLIST-BOOT-CHECK | 🟠 MED | Open — still needs triage visit |
+| PYTHON-OB1 | 🟠 MED | Open — awaiting session approval before design finalization |
+| NOTION-BLACKLIST | ✅ CLOSED | All active Notion probes and routes permanently disabled; legacy data preserved in CANON/REINCARNATION |
+
+---

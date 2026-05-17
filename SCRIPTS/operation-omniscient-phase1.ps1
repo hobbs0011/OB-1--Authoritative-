@@ -73,7 +73,6 @@ $checks = [ordered]@{
         GITHUB_TOKEN = -not [string]::IsNullOrWhiteSpace((Get-EnvValue -Name "GITHUB_TOKEN"))
         GITHUB_PERSONAL_ACCESS_TOKEN = -not [string]::IsNullOrWhiteSpace((Get-EnvValue -Name "GITHUB_PERSONAL_ACCESS_TOKEN"))
         CLOUDFLARE_API_TOKEN = -not [string]::IsNullOrWhiteSpace((Get-EnvValue -Name "CLOUDFLARE_API_TOKEN"))
-        NOTION_TOKEN = -not [string]::IsNullOrWhiteSpace((Get-EnvValue -Name "NOTION_TOKEN"))
     }
 }
 

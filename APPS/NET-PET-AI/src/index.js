@@ -95,10 +95,6 @@ export default {
       const secrets = {
         DEEPSEEK_API_KEY:  !!env.DEEPSEEK_API_KEY,
         DEEPGRAM_API_KEY:  !!env.DEEPGRAM_API_KEY,
-        NOTION_API_KEY:    !!env.NOTION_API_KEY,
-        NOTION_LESSONS_DB: !!env.NOTION_LESSONS_DB,
-        NOTION_PROGRESS_DB:!!env.NOTION_PROGRESS_DB,
-        NOTION_SOUL_DNA_DB:!!env.NOTION_SOUL_DNA_DB,
       };
       const bindings = {
         SESSIONS: !!env.SESSIONS,
@@ -110,7 +106,6 @@ export default {
       };
       const secretsOk = secrets.DEEPSEEK_API_KEY && secrets.DEEPGRAM_API_KEY;
       const bindingsOk = Object.values(bindings).every(Boolean);
-      const notionOk = secrets.NOTION_API_KEY && secrets.NOTION_LESSONS_DB && secrets.NOTION_PROGRESS_DB && secrets.NOTION_SOUL_DNA_DB;
       return addCors(json({
         ok: secretsOk && bindingsOk,
         version: VERSION,
@@ -120,7 +115,7 @@ export default {
         oxygen: {
           ai:      secrets.DEEPSEEK_API_KEY  ? "LIVE" : "DEAD",
           voice:   secrets.DEEPGRAM_API_KEY   ? "LIVE" : "DEAD",
-          notion:  notionOk                   ? "LIVE" : "PARTIAL",
+          notion:  "BLACKLISTED — platform usage permanently disabled",
           compute: bindingsOk                 ? "LIVE" : "DEAD",
         },
         secrets,
@@ -324,7 +319,7 @@ async function handleAPI(path, request, env, url) {
 
     // Health — lightweight
   if (path === "/api/health" && method === "GET") {
-    return json({ ok: !!env.DEEPSEEK_API_KEY, version: VERSION, app: env.APP_NAME || "Natural English Training", coach: env.APP_COACH_NAME || "Obi", ts: Date.now(), routes: 40, ai: env.DEEPSEEK_API_KEY ? "LIVE" : "DEAD", voice: env.DEEPGRAM_API_KEY ? "LIVE" : "DEAD", notion: env.NOTION_API_KEY ? "LIVE" : "DEAD", imagegen: env.IMAGE_GEN_URL ? "CONFIGURED" : "NOT_SET", readiness: (env.DEEPSEEK_API_KEY && env.DEEPGRAM_API_KEY) ? "PRODUCTION" : "NEEDS_SECRETS" });
+    return json({ ok: !!env.DEEPSEEK_API_KEY, version: VERSION, app: env.APP_NAME || "Natural English Training", coach: env.APP_COACH_NAME || "Obi", ts: Date.now(), routes: 40, ai: env.DEEPSEEK_API_KEY ? "LIVE" : "DEAD", voice: env.DEEPGRAM_API_KEY ? "LIVE" : "DEAD", notion: "BLACKLISTED — platform usage permanently disabled", imagegen: env.IMAGE_GEN_URL ? "CONFIGURED" : "NOT_SET", readiness: (env.DEEPSEEK_API_KEY && env.DEEPGRAM_API_KEY) ? "PRODUCTION" : "NEEDS_SECRETS" });
   }
 
   // Deep health — full dependency probe (hit each external service)
@@ -352,18 +347,11 @@ async function handleAPI(path, request, env, url) {
         checks.deepgram = { ok: dgRes.ok, status: dgRes.status };
       } catch (e) { checks.deepgram = { ok: false, error: e.message }; }
     } else { checks.deepgram = { ok: false, error: "SECRET_MISSING" }; }
-    // Notion probe
-    if (env.NOTION_API_KEY) {
-      try {
-        const nRes = await fetch("https://api.notion.com/v1/users/me", {
-          headers: { "Authorization": `Bearer ${env.NOTION_API_KEY}`, "Notion-Version": "2022-06-28" },
-        });
-        checks.notion = { ok: nRes.ok, status: nRes.status };
-      } catch (e) { checks.notion = { ok: false, error: e.message }; }
-    } else { checks.notion = { ok: false, error: "SECRET_MISSING" }; }
+    // Notion probe — BLACKLISTED: platform usage permanently disabled; no API calls made
+    checks.notion = { ok: false, detail: "BLACKLISTED — future connections permanently disabled" };
     // DO bindings
     checks.durableObjects = { SESSIONS: !!env.SESSIONS, PROFILES: !!env.PROFILES, PETS: !!env.PETS, LEDGER: !!env.LEDGER, COMMANDS: !!env.COMMANDS };
-    const allOk = checks.deepseek?.ok && checks.deepgram?.ok && checks.notion?.ok;
+    const allOk = checks.deepseek?.ok && checks.deepgram?.ok;
     return json({ ok: allOk, version: VERSION, checks, readiness: allOk ? "ALL_SYSTEMS_GO" : "DEGRADED", ts: Date.now() });
   }
 
@@ -462,13 +450,11 @@ async function handleAPI(path, request, env, url) {
   if (path === "/api/command/claim" && method === "POST") { const body = await request.json(); return handleCommandClaim(body, env); }
   if (path === "/api/command/complete" && method === "POST") { const body = await request.json(); return handleCommandComplete(body, env); }
   if (path === "/api/command/status" && method === "GET") { return handleCommandStatus(url.searchParams.get("commandId") || "", env); }
-  if (path === "/api/command/history" && method === "GET") { return handleCommandHistory(parseInt(url.searchParams.get("limit") || "50"), env); }
+  if (path === "/api/command/history" && method === "GET") { return handleCommandHistory(parseInt(url.searchParams.get("limit") || "50"), env);   }
 
-  // Notion Integration (all routes degrade gracefully when NOTION_API_KEY is unset)
-  if (path === "/api/notion/lessons" && method === "GET") { return handleNotionLessons(url, env); }
-  if (path === "/api/notion/progress" && method === "GET") { return handleNotionProgress(url, env); }
-  if (path === "/api/notion/progress" && method === "POST") { const body = await request.json(); return handleNotionProgressWrite(body, env); }
-  if (path === "/api/notion/sync" && method === "POST") { const body = await request.json(); return handleNotionSync(body, env); }
+  // ── Notion: BLACKLISTED ────────────────────────────────────────────────────
+  // All /api/notion/* routes are permanently disabled — legacy data preserved in CANON/REINCARNATION.
+  if (path.startsWith("/api/notion/")) { return json({ blacklisted: true, notion: "BLACKLISTED — platform usage permanently disabled" }, 403); }
 
   // ── Behavioral Loop Engine ────────────────────────────────────────────────
   // /api/loop — Enforced speak→correct→repeat→score cycle (single call)
@@ -587,11 +573,9 @@ async function handleSoulDNACapture(body, env) {
   }));
   const appendData = await appendRes.json();
 
-  // Mirror to Notion (non-blocking — Ledger is source of truth, Notion is searchable archive)
-  notionSyncSoulDNA(payloadObj, appendData.entryHash, env).catch(() => {});
+  // Notion: BLACKLISTED — no sync calls made; legacy data preserved in CANON/REINCARNATION
 
   return json({
-    ok:        true,
     blockId,
     run,
     source,
@@ -601,21 +585,9 @@ async function handleSoulDNACapture(body, env) {
     entryHash:  appendData.entryHash,
     prevHash:   appendData.prevHash,
     chainHead:  appendData.entryHash,   // caller can use this as prevHash for next block
-    notionSynced: !!(env.NOTION_API_KEY && env.NOTION_SOUL_DNA_DB),
+    notionStatus: "BLACKLISTED — platform usage permanently disabled",
     ts,
   });
-}
-
-// ── Notion: Soul DNA mirror (non-blocking, fire-and-forget) ─────────────────
-// Mirrors verbatim Soul DNA blocks to Notion database for searchable archive.
-async function notionSyncSoulDNA(payloadObj, entryHash, env) {
-  if (!env.NOTION_API_KEY || !env.NOTION_SOUL_DNA_DB) return;
-  try {
-    await writeSoulDNA(env.NOTION_API_KEY, env.NOTION_SOUL_DNA_DB, {
-      ...payloadObj,
-      entryHash,
-    });
-  } catch (_) {}
 }
 
 async function handleSoulDNAGet(url, env) {
@@ -926,16 +898,7 @@ async function handleChat(body, env) {
     appendToLedger(studentId, "chat_exchange", payload, env).catch(() => {});
   }
 
-  // ── Notion sync: mirror chat exchange to Notion progress DB ─────────────
-  // Disabled by default (free-tier protection). Set NOTION_CHAT_MIRROR=1 to enable.
-  if (studentId !== "anonymous" && env.NOTION_API_KEY && env.NOTION_PROGRESS_DB && env.NOTION_CHAT_MIRROR === "1" && userMsg) {
-    writeChatExchange(env.NOTION_API_KEY, env.NOTION_PROGRESS_DB, {
-      studentId,
-      userMessage: userMsg,
-      obiReply: reply,
-      level: body.level || "Mouse",
-    }).catch(() => {});
-  }
+  // ── Notion sync: BLACKLISTED — platform usage permanently disabled ────────
 
   // ── Memory Brain: Extract weaknesses from OBI's correction and store ─────
   if (studentId !== "anonymous" && env.PROFILES) {
@@ -2393,24 +2356,7 @@ async function handleSoulDNASubmit(body, env) {
     console.error("[SOULDNA] Ledger append failed:", e);
   }
   
-  // Store in Notion if configured
-  if (env.NOTION_API_KEY && env.NOTION_SOUL_DNA_DB && body.notionSync !== false) {
-    try {
-      await writeSoulDNA(env.NOTION_API_KEY, env.NOTION_SOUL_DNA_DB, {
-        id: submission.id,
-        sessionTag,
-        tier,
-        signalDensity,
-        source: body.source,
-        contentSize,
-        status: "RECEIVED",
-        timestamp,
-        contentPreview: body.content.substring(0, 200) + (body.content.length > 200 ? "..." : ""),
-      });
-    } catch (e) {
-      console.warn("[SOULDNA] Notion sync failed (non-blocking):", e.message);
-    }
-  }
+  // ── Notion SOUL_DNA: BLACKLISTED — legacy data preserved in CANON/REINCARNATION ─
   
   return json({
     ok: true,

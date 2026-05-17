@@ -175,16 +175,9 @@ function Audit-MCPs {
         $mcps['github'] = $false
     }
     
-    # Notion
-    Write-Log "Checking Notion integration..." 'info'
-    if (Test-Path "$RepoRoot\APPS\NET-PET-AI\src\notion.js") {
-        Write-Log "Notion: Module present ✓" 'ok'
-        $mcps['notion'] = $true
-    }
-    else {
-        Write-Log "Notion: Module not found" 'warn'
-        $mcps['notion'] = $false
-    }
+    # Notion — BLACKLISTED (future connections permanently disabled; legacy data preserved)
+    Write-Log "Notion: BLACKLISTED — platform usage is permanently disabled" 'warn'
+    $mcps['notion'] = 'BLACKLISTED'
     
     # Deepgram (Future)
     Write-Log "Deepgram: Not yet integrated (planned)" 'warn'
