@@ -1,0 +1,424 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAI TRAM PORTAL — Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --void: #0a0a12;
+            --card: rgba(22, 22, 35, 0.85);
+            --purple: #a855f7;
+            --purple-glow: rgba(168, 85, 247, 0.25);
+            --gold: #f59e0b;
+            --gold-glow: rgba(245, 158, 11, 0.25);
+            --teal: #14b8a6;
+            --teal-glow: rgba(20, 184, 166, 0.25);
+            --text: #f8fafc;
+            --dim: #94a3b8;
+            --success: #22c55e;
+            --danger: #ef4444;
+            --border: rgba(255, 255, 255, 0.08);
+        }
+
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--void);
+            color: var(--text);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            background:
+                radial-gradient(ellipse at 25% 15%, var(--purple-glow) 0%, transparent 55%),
+                radial-gradient(ellipse at 75% 20%, var(--gold-glow) 0%, transparent 55%),
+                radial-gradient(ellipse at 50% 60%, rgba(168, 85, 247, 0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 30% 80%, rgba(245, 158, 11, 0.06) 0%, transparent 50%);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: -300px 0;
+            }
+            100% {
+                background-position: 300px 0;
+            }
+        }
+
+        @keyframes shake {
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+            10%,
+            50%,
+            90% {
+                transform: translateX(-8px);
+            }
+            30%,
+            70% {
+                transform: translateX(8px);
+            }
+        }
+
+        @keyframes pulse-glow {
+            0%,
+            100% {
+                box-shadow: 0 0 20px var(--purple-glow), 0 0 40px rgba(168, 85, 247, 0.1);
+            }
+            50% {
+                box-shadow: 0 0 35px var(--purple-glow), 0 0 60px rgba(168, 85, 247, 0.2);
+            }
+        }
+
+        @keyframes progressPulse {
+            0%,
+            100% {
+                box-shadow: 0 0 8px var(--gold-glow), inset 0 0 8px rgba(245, 158, 11, 0.15);
+            }
+            50% {
+                box-shadow: 0 0 20px var(--gold-glow), inset 0 0 16px rgba(245, 158, 11, 0.3);
+            }
+        }
+
+        /* ── LOGIN OVERLAY ── */
+        #loginScreen {
+            position: fixed;
+            inset: 0;
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(10, 10, 18, 0.97);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            flex-direction: column;
+            gap: 24px;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        html[data-auth="true"] #loginScreen {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        #loginScreen .login-crest {
+            width: 90px;
+            height: auto;
+            opacity: 0.9;
+            filter: drop-shadow(0 0 24px var(--purple-glow));
+            animation: pulse-glow 3s ease-in-out infinite;
+        }
+
+        #loginScreen h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            color: var(--text);
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        #loginScreen p {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.1rem;
+            color: var(--dim);
+            letter-spacing: 0.04em;
+            text-align: center;
+            margin-top: -8px;
+        }
+
+        #loginScreen .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            align-items: center;
+            width: 100%;
+            max-width: 340px;
+        }
+
+        #loginScreen input[type="password"] {
+            width: 100%;
+            padding: 14px 20px;
+            border-radius: 16px;
+            border: 1.5px solid var(--border);
+            background: rgba(22, 22, 35, 0.7);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            letter-spacing: 0.05em;
+            outline: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+
+        #loginScreen input[type="password"]:focus {
+            border-color: var(--purple);
+            box-shadow: 0 0 20px var(--purple-glow);
+        }
+
+        #loginScreen input[type="password"].shake {
+            animation: shake 0.5s ease-in-out;
+            border-color: var(--danger);
+            box-shadow: 0 0 16px rgba(239, 68, 68, 0.35);
+        }
+
+        #loginScreen .btn-enter {
+            padding: 14px 48px;
+            border-radius: 16px;
+            border: none;
+            background: linear-gradient(135deg, var(--purple), #9333ea);
+            color: #fff;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            box-shadow: 0 8px 28px var(--purple-glow);
+        }
+
+        #loginScreen .btn-enter:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 36px rgba(168, 85, 247, 0.4);
+            background: linear-gradient(135deg, #b871f9, #a855f7);
+        }
+
+        #loginScreen .btn-enter:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 16px var(--purple-glow);
+        }
+
+        /* ── TOP NAV BAR ── */
+        #topNav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 9000;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 28px;
+            background: rgba(14, 14, 26, 0.82);
+            backdrop-filter: blur(22px);
+            -webkit-backdrop-filter: blur(22px);
+            border-bottom: 1px solid var(--border);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.35);
+        }
+
+        #topNav .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        #topNav .nav-brand img {
+            width: 38px;
+            height: auto;
+            opacity: 0.9;
+            filter: drop-shadow(0 0 10px var(--purple-glow));
+        }
+
+        #topNav .nav-brand span {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            color: var(--text);
+            text-transform: uppercase;
+        }
+
+        #topNav .nav-links {
+            display: none;
+            align-items: center;
+            gap: 6px;
+            list-style: none;
+        }
+
+        html[data-auth="true"] #topNav .nav-links {
+            display: flex;
+        }
+
+        #topNav .nav-links a {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            color: var(--dim);
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 10px;
+            transition: all 0.25s ease;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        #topNav .nav-links a:hover {
+            color: var(--text);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        #topNav .nav-links a.active {
+            color: var(--purple);
+            background: rgba(168, 85, 247, 0.12);
+            box-shadow: 0 0 14px var(--purple-glow);
+        }
+
+        #topNav .btn-logout {
+            display: none;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            color: var(--danger);
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.25);
+            padding: 8px 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        html[data-auth="true"] #topNav .btn-logout {
+            display: inline-block;
+        }
+
+        #topNav .btn-logout:hover {
+            background: rgba(239, 68, 68, 0.22);
+            border-color: rgba(239, 68, 68, 0.5);
+            box-shadow: 0 0 16px rgba(239, 68, 68, 0.2);
+        }
+
+        /* ── WATERMARK ── */
+        #portalWatermark {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 0;
+            width: 180px;
+            height: auto;
+            opacity: 0.055;
+            pointer-events: none;
+            user-select: none;
+            filter: grayscale(30%);
+        }
+
+        /* ── MAIN CONTENT ── */
+        #mainContent {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 110px 24px 60px;
+            animation: fadeIn 0.7s ease-out;
+        }
+
+        /* ── HEADER ── */
+        .portal-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .portal-header h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.4rem;
+            font-weight: 800;
+            letter-spacing: 0.06em;
+            color: var(--text);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            text-shadow: 0 0 40px var(--purple-glow);
+        }
+
+        .portal-header .subtitle {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 500;
+            color: var(--dim);
+            letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .portal-header .subtitle .dot-sep {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--purple);
+            display: inline-block;
+        }
+
+        .portal-header .badge-b1 {
+            display: inline-block;
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--gold);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            padding: 4px 12px;
+            border-radius: 20px;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        /* ── STAT GRID ── */
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+
+        @media (max-width: 768px) {
+            .stat-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            #topNav .nav-links {
+                gap: 2

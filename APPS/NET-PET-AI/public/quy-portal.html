@@ -1,0 +1,807 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUY PORTAL — Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&family=Orbitron:wght@500;600;700;800&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --void: #0a0a12;
+            --card: rgba(22, 22, 35, 0.85);
+            --purple: #a855f7;
+            --purple-glow: rgba(168, 85, 247, 0.25);
+            --gold: #f59e0b;
+            --gold-glow: rgba(245, 158, 11, 0.25);
+            --teal: #14b8a6;
+            --teal-glow: rgba(20, 184, 166, 0.25);
+            --text: #f8fafc;
+            --dim: #94a3b8;
+            --success: #22c55e;
+            --danger: #ef4444;
+            --border: rgba(255, 255, 255, 0.08);
+            --font-display: 'Orbitron', sans-serif;
+            --font-heading: 'Rajdhani', sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--void);
+            color: var(--text);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 28% 18%, rgba(168, 85, 247, 0.14) 0%, transparent 55%),
+                radial-gradient(ellipse at 72% 55%, rgba(245, 158, 11, 0.09) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 80%, rgba(20, 184, 166, 0.06) 0%, transparent 45%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(14px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInOverlay {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes shake {
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+            10%,
+            50%,
+            90% {
+                transform: translateX(-6px);
+            }
+            30%,
+            70% {
+                transform: translateX(6px);
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: -300% 0;
+            }
+            100% {
+                background-position: 300% 0;
+            }
+        }
+
+        @keyframes pulseGlow {
+            0%,
+            100% {
+                box-shadow: 0 0 12px var(--purple-glow), 0 0 24px rgba(168, 85, 247, 0.08);
+            }
+            50% {
+                box-shadow: 0 0 20px var(--purple-glow), 0 0 40px rgba(168, 85, 247, 0.14);
+            }
+        }
+
+        /* ── LOGIN OVERLAY ── */
+        #loginScreen {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            background: rgba(10, 10, 18, 0.92);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeInOverlay 0.4s ease-out;
+        }
+
+        #loginScreen.hidden {
+            display: none;
+        }
+
+        .login-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 28px;
+            padding: 48px 40px 40px;
+            text-align: center;
+            max-width: 440px;
+            width: 90%;
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            box-shadow: 0 0 60px rgba(168, 85, 247, 0.12), 0 0 120px rgba(245, 158, 11, 0.06);
+            animation: fadeIn 0.6s ease-out;
+            transition: transform 0.3s ease;
+        }
+
+        .login-card.shake {
+            animation: shake 0.5s ease-in-out;
+        }
+
+        .login-crest {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            display: block;
+            object-fit: contain;
+            filter: drop-shadow(0 0 18px rgba(168, 85, 247, 0.4));
+        }
+
+        .login-title {
+            font-family: var(--font-display);
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            color: var(--text);
+            margin-bottom: 6px;
+        }
+
+        .login-subtitle {
+            font-family: var(--font-heading);
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--dim);
+            letter-spacing: 0.04em;
+            margin-bottom: 28px;
+        }
+
+        .login-input {
+            width: 100%;
+            padding: 14px 18px;
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--text);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            letter-spacing: 0.02em;
+            outline: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+
+        .login-input:focus {
+            border-color: var(--purple);
+            box-shadow: 0 0 0 4px var(--purple-glow);
+        }
+
+        .login-input::placeholder {
+            color: rgba(148, 163, 184, 0.5);
+            letter-spacing: 0.04em;
+        }
+
+        .login-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 13px 40px;
+            border-radius: 14px;
+            border: none;
+            background: var(--purple);
+            color: #fff;
+            font-family: var(--font-display);
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px var(--purple-glow);
+        }
+
+        .login-btn:hover {
+            background: #c084fc;
+            box-shadow: 0 0 32px rgba(168, 85, 247, 0.45);
+            transform: translateY(-2px);
+        }
+
+        .login-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 0 14px var(--purple-glow);
+        }
+
+        .login-error {
+            color: var(--danger);
+            font-size: 0.85rem;
+            margin-top: 10px;
+            min-height: 20px;
+            font-family: var(--font-heading);
+            letter-spacing: 0.03em;
+        }
+
+        /* ── TOP NAV ── */
+        #topNav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 70px;
+            z-index: 900;
+            background: rgba(10, 10, 18, 0.78);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 32px;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        #topNav.hidden {
+            display: none;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-brand img {
+            width: 42px;
+            height: 42px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 10px rgba(168, 85, 247, 0.35));
+        }
+
+        .nav-brand span {
+            font-family: var(--font-display);
+            font-size: 1.05rem;
+            font-weight: 700;
+            letter-spacing: 0.07em;
+            color: var(--text);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            display: inline-block;
+            padding: 10px 18px;
+            border-radius: 10px;
+            font-family: var(--font-heading);
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            color: var(--dim);
+            text-decoration: none;
+            transition: all 0.25s ease;
+            white-space: nowrap;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .nav-links a.active {
+            color: var(--gold);
+            background: rgba(245, 158, 11, 0.08);
+            box-shadow: inset 0 0 0 1px rgba(245, 158, 11, 0.2);
+        }
+
+        .nav-logout {
+            padding: 8px 18px;
+            border-radius: 10px;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            background: transparent;
+            color: #f87171;
+            font-family: var(--font-heading);
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .nav-logout:hover {
+            background: rgba(239, 68, 68, 0.1);
+            border-color: rgba(239, 68, 68, 0.55);
+            color: #fca5a5;
+        }
+
+        /* ── WATERMARK ── */
+        .watermark {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 0;
+            opacity: 0.055;
+            pointer-events: none;
+            width: 180px;
+            height: 180px;
+            object-fit: contain;
+        }
+
+        /* ── MAIN CONTENT ── */
+        #mainContent {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 110px 24px 60px;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        #mainContent.hidden {
+            display: none;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 36px;
+        }
+
+        .page-header h1 {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 0.07em;
+            color: var(--text);
+            margin-bottom: 6px;
+        }
+
+        .page-header .subtitle {
+            font-family: var(--font-heading);
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: var(--dim);
+            letter-spacing: 0.04em;
+        }
+
+        .page-header .subtitle .highlight-gold {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .page-header .subtitle .highlight-teal {
+            color: var(--teal);
+            font-weight: 600;
+        }
+
+        /* ── STAT BOXES ── */
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+
+        .stat-box {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 20px 18px;
+            text-align: center;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            animation: fadeIn 0.5s ease-out;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 32px rgba(168, 85, 247, 0.1);
+        }
+
+        .stat-box .stat-label {
+            font-family: var(--font-heading);
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            color: var(--dim);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .stat-box .stat-value {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            color: var(--text);
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .stat-box .stat-value.shimmer-placeholder {
+            background: linear-gradient(90deg,
+                    rgba(255, 255, 255, 0.03) 0%,
+                    rgba(255, 255, 255, 0.09) 40%,
+                    rgba(255, 255, 255, 0.03) 80%);
+            background-size: 300% 100%;
+            animation: shimmer 1.6s infinite;
+            border-radius: 8px;
+            color: transparent;
+            width: 70%;
+            margin: 0 auto;
+            height: 34px;
+        }
+
+        .stat-box.tiger-score .stat-value {
+            color: var(--gold);
+        }
+        .stat-box.streak .stat-value {
+            color: var(--success);
+        }
+        .stat-box.sessions .stat-value {
+            color: var(--teal);
+        }
+        .stat-box.next-session .stat-value {
+            color: var(--purple);
+        }
+
+        /* ── CARDS ── */
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 28px 30px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            animation: fadeIn 0.5s ease-out;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            font-family: var(--font-heading);
+            font-size: 1.15rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            color: var(--text);
+            margin-bottom: 12px;
+        }
+
+        /* ── TEACHER NOTE ── */
+        .teacher-note {
+            border-left: 4px solid var(--teal);
+            background: var(--card);
+            border-radius: 0 20px 20px 0;
+            border-top: 1px solid var(--border);
+            border-right: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 24px 28px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            animation: fadeIn 0.5s ease-out;
+            margin-bottom: 20px;
+        }
+
+        .teacher-note .note-label {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            color: var(--teal);
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .teacher-note p {
+            font-family: var(--font-body);
+            font-size: 0.93rem;
+            line-height: 1.7;
+            color: var(--dim);
+            margin-bottom: 8px;
+        }
+
+        .teacher-note .note-signature {
+            font-family: var(--font-heading);
+            font-weight: 600;
+            color: var(--teal);
+            letter-spacing: 0.04em;
+            font-size: 0.9rem;
+            margin-top: 6px;
+        }
+
+        /* ── MILESTONE CARD ── */
+        .milestone-card .level-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 20px;
+            background: rgba(245, 158, 11, 0.12);
+            color: var(--gold);
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            margin-bottom: 14px;
+        }
+
+        .milestone-card .progress-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 8px;
+        }
+
+        .milestone-card .progress-info .current-level {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--gold);
+            letter-spacing: 0.04em;
+        }
+
+        .milestone-card .progress-info .next-level {
+            font-family: var(--font-heading);
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--dim);
+            letter-spacing: 0.04em;
+        }
+
+        .milestone-card .progress-info .pct {
+            font-family: var(--font-display);
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--gold);
+            letter-spacing: 0.04em;
+        }
+
+        .progress-bar-outer {
+            width: 100%;
+            height: 10px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.06);
+            overflow: hidden;
+        }
+
+        .progress-bar-inner {
+            height: 100%;
+            border-radius: 10px;
+            background: linear-gradient(90deg, #f59e0b, #fbbf24, #f59e0b);
+            background-size: 200% 100%;
+            transition: width 0.8s cubic-bezier(0.25, 0.8, 0.25, 1.2);
+            box-shadow: 0 0 12px var(--gold-glow);
+        }
+
+        /* ── DAILY TASK ── */
+        .daily-task .task-text {
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .daily-task .task-meta {
+            font-family: var(--font-heading);
+            font-size: 0.85rem;
+            color: var(--dim);
+            letter-spacing: 0.03em;
+            margin-top: 8px;
+        }
+
+        /* ── ACTION BUTTONS ── */
+        .action-buttons {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin-top: 4px;
+        }
+
+        .action-btn {
+            flex: 1;
+            min-width: 140px;
+            padding: 14px 22px;
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            background: var(--card);
+            color: var(--text);
+            font-family: var(--font-heading);
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(168, 85, 247, 0.15);
+            border-color: rgba(168, 85, 247, 0.4);
+        }
+
+        .action-btn.purple-btn {
+            border-color: rgba(168, 85, 247, 0.35);
+            background: rgba(168, 85, 247, 0.08);
+        }
+        .action-btn.purple-btn:hover {
+            background: rgba(168, 85, 247, 0.16);
+            box-shadow: 0 8px 28px var(--purple-glow);
+        }
+
+        .action-btn.teal-btn {
+            border-color: rgba(20, 184, 166, 0.35);
+            background: rgba(20, 184, 166, 0.08);
+        }
+        .action-btn.teal-btn:hover {
+            background: rgba(20, 184, 166, 0.16);
+            box-shadow: 0 8px 28px var(--teal-glow);
+        }
+
+        .action-btn.gold-btn {
+            border-color: rgba(245, 158, 11, 0.35);
+            background: rgba(245, 158, 11, 0.08);
+        }
+        .action-btn.gold-btn:hover {
+            background: rgba(245, 158, 11, 0.16);
+            box-shadow: 0 8px 28px var(--gold-glow);
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 768px) {
+            .stat-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+
+            #topNav {
+                padding: 0 14px;
+                height: 60px;
+            }
+
+            .nav-brand span {
+                font-size: 0.85rem;
+            }
+
+            .nav-links a {
+                padding: 7px 10px;
+                font-size: 0.78rem;
+                border-radius: 8px;
+            }
+
+            .nav-links {
+                gap: 2px;
+            }
+
+            .nav-logout {
+                padding: 6px 12px;
+                font-size: 0.75rem;
+            }
+
+            .nav-brand img {
+                width: 32px;
+                height: 32px;
+            }
+
+            #mainContent {
+                padding: 90px 14px 40px;
+            }
+
+            .page-header h1 {
+                font-size: 1.4rem;
+            }
+
+            .page-header .subtitle {
+                font-size: 0.85rem;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .action-btn {
+                min-width: auto;
+            }
+
+            .login-card {
+                padding: 32px 22px 28px;
+            }
+
+            .login-title {
+                font-size: 1.3rem;
+            }
+
+            .watermark {
+                width: 100px;
+                height: 100px;
+                bottom: 10px;
+                right: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stat-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+            }
+
+            .stat-box {
+                padding: 14px 10px;
+            }
+
+            .stat-box .stat-value {
+                font-size: 1.3rem;
+                min-height: 30px;
+            }
+
+            .stat-box .stat-label {
+                font-size: 0.7rem;
+            }
+
+            .nav-links a {
+                padding: 6px 7px;
+                font-size: 0.7rem;
+                letter-spacing: 0.02em;
+            }
+
+            #topNav {
+                padding: 0 8px;
+            }
+
+            .nav-brand span {
+                font-size: 0.72rem;
+                letter-spacing: 0.04em;
+            }
+
+            .nav-brand img {
+                width: 28px;
+                height: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ── LOGIN OVERLAY ── -->
+    <div id="loginScreen">
+        <div class="login-card" id="loginCard">
+            <img
+            class="login-crest"
+            src="./assets/brand/system-marks/phoenix-dna-crest-mark.png"
+            alt="Phoenix Crest"
+            onerror="this.style.display='none';"
+            >
+            <div class="login-title">QUY PORTAL</div>
+            <div class="login-sub

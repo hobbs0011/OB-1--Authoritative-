@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profile | QUY PORTAL</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--void:#0a0a12;--card:rgba(22,22,35,0.85);--purple:#a855f7;--purple-glow:rgba(168,85,247,0.25);--gold:#f59e0b;--gold-glow:rgba(245,158,11,0.25);--teal:#14b8a6;--teal-glow:rgba(20,184,166,0.25);--text:#f8fafc;--dim:#94a3b8;--success:#22c55e;--danger:#ef4444;--border:rgba(255,255,255,0.08);}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--void);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased;padding-top:80px;}
+body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle at 15% 30%,var(--purple-glow) 0%,transparent 50%),radial-gradient(circle at 85% 70%,var(--gold-glow) 0%,transparent 50%);pointer-events:none;z-index:-1;}
+.top-nav{position:fixed;top:0;left:0;right:0;height:70px;background:rgba(10,10,18,0.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);z-index:1000;display:flex;align-items:center;}
+.nav-container{max-width:1000px;width:100%;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between;align-items:center;}
+.nav-brand{font-family:'Orbitron',sans-serif;color:var(--text);text-decoration:none;font-size:1.2rem;font-weight:700;display:flex;align-items:center;gap:10px;}
+.nav-brand-mark{width:28px;height:28px;object-fit:contain;opacity:0.88;filter:grayscale(1) brightness(1.3);}
+.nav-links{display:flex;gap:20px;align-items:center;}
+.nav-links a{color:var(--dim);text-decoration:none;font-family:'Rajdhani',sans-serif;font-size:1.1rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;transition:color 0.3s;}
+.nav-links a:hover,.nav-links a.active{color:var(--purple);text-shadow:0 0 10px var(--purple-glow);}
+.logout-btn{background:transparent;border:1px solid var(--border);color:var(--dim);padding:6px 12px;border-radius:6px;cursor:pointer;font-family:'Inter',sans-serif;font-size:0.9rem;transition:all 0.3s;}
+.logout-btn:hover{background:rgba(255,255,255,0.05);color:var(--text);}
+.container{max-width:900px;margin:0 auto;padding:40px 20px;position:relative;z-index:1;}
+.portal-watermark{position:fixed;right:3vw;bottom:4vh;width:min(26vw,280px);opacity:0.055;pointer-events:none;z-index:0;}
+.portal-watermark img{display:block;width:100%;height:auto;filter:grayscale(1) brightness(1.5);}
+h1,h2,h3{font-family:'Orbitron',sans-serif;line-height:1.2;}
+h1{font-size:clamp(2rem,5vw,3rem);background:linear-gradient(to right,#fff,#cbd5e1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px;text-align:center;letter-spacing:1px;}
+.welcome-sub{text-align:center;color:var(--gold);font-family:'Rajdhani',sans-serif;font-size:1.2rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:40px;font-weight:600;}
+h2{font-size:clamp(1.3rem,3vw,1.6rem);color:var(--text);margin-bottom:24px;display:flex;align-items:center;gap:12px;}
+h2::before{content:'';display:block;width:24px;height:2px;background:var(--purple);box-shadow:0 0 10px var(--purple-glow);}
+.card{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:clamp(24px,5vw,48px);margin-bottom:40px;backdrop-filter:blur(20px);box-shadow:0 20px 40px rgba(0,0,0,0.4),inset 0 1px 0 rgba(255,255,255,0.1);animation:fadeIn 0.8s cubic-bezier(0.2,0.8,0.2,1) forwards;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+@media(max-width:768px){.grid-2{grid-template-columns:1fr;}}
+p.body-text{color:var(--dim);line-height:1.75;font-size:1.05rem;margin-bottom:16px;}
+.label{font-family:'Rajdhani',sans-serif;text-transform:uppercase;letter-spacing:1px;font-size:0.82rem;font-weight:700;color:var(--purple);margin-bottom:8px;}
+.focus-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:16px;}
+.focus-pill{background:rgba(168,85,247,0.08);border:1px solid rgba(168,85,247,0.25);border-radius:12px;padding:12px 16px;color:var(--text);font-size:0.92rem;line-height:1.5;}
+.evolution-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px;}
+@media(max-width:768px){.evolution-grid{grid-template-columns:1fr;}}
+.evo-card{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:16px;padding:20px;}
+.evo-label{display:inline-block;padding:4px 10px;border-radius:999px;font-size:0.75rem;text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-bottom:10px;}
+.evo-label.before{background:rgba(148,163,184,0.15);color:#cbd5e1;}
+.evo-label.now{background:rgba(168,85,247,0.18);color:#f3e8ff;}
+.evo-card p{color:var(--dim);line-height:1.7;font-size:0.97rem;}
+.sig{margin-top:20px;font-family:'Rajdhani',sans-serif;font-size:1.1rem;color:var(--teal);font-weight:600;}
+</style>
+<script>if(localStorage.getItem('quy_auth')!=='true'){window.location.href='quy-portal.html';}</script>
+</head>
+<body>
+<div class="portal-watermark" aria-hidden="true"><img src="./assets/brand/system-marks/phoenix-dna-crest-mark.png" alt=""></div>
+<nav class="top-nav">
+  <div class="nav-container">
+    <a href="quy-portal.html" class="nav-brand"><img src="./assets/brand/system-marks/phoenix-dna-crest-mark.png" class="nav-brand-mark" alt="NET"><span>QUY PORTAL</span></a>
+    <div class="nav-links">
+      <a href="quy-portal.html">Dashboard</a>
+      <a href="quy-profile.html" class="active">Profile</a>
+      <a href="quy-methodology.html">Methodology</a>
+      <a href="quy-transcripts.html">Transcripts</a>
+      <a href="quy-action-plan.html">Action Plan</a>
+      <button onclick="logout()" class="logout-btn">Log Out</button>
+    </div>
+  </div>
+</nav>
+<div class="container">
+  <header><h1>DEEP DIVE PROFILE</h1><p class="welcome-sub">Learner Analytics</p></header>
+  <section class="card">
+    <h2>Baseline &amp; Current State</h2>
+    <div class="grid-2">
+      <div>
+        <div class="label">Baseline</div>
+        <p class="body-text">Quy arrived at A2 level with limited spoken English experience. Strong attention to detail (accounting background) means she is excellent at recognising patterns but tends to freeze when asked to produce language spontaneously. She fears making mistakes in front of others.</p>
+      </div>
+      <div>
+        <div class="label">Current State</div>
+        <p class="body-text">Building foundational spoken vocabulary. Most sessions are heavily scaffolded. She is responding faster and with less self-correction. The goal is fluency over accuracy at this stage.</p>
+        <div class="label" style="margin-top:16px;">First Breakthrough</div>
+        <p class="body-text">First shift: Quy responded to a simple question about her weekend in English without asking permission to use Vietnamese first. Small moment, massive signal. The fear of imperfection is starting to loosen.</p>
+      </div>
+    </div>
+  </section>
+  <section class="card">
+    <h2>Active Focus Areas</h2>
+    <p class="body-text">These are the specific skills targeted in every session right now:</p>
+    <div class="focus-grid">
+      <div class='focus-pill'>Basic Sentence Construction</div>
+      <div class='focus-pill'>Everyday Vocabulary</div>
+      <div class='focus-pill'>Speaking Without Freezing</div>
+      <div class='focus-pill'>Reducing Mistake-Fear</div>
+    </div>
+  </section>
+  <section class="card" style="border-left:4px solid var(--teal);background:linear-gradient(90deg,rgba(20,184,166,0.05),transparent);">
+    <h2>Coach Note</h2>
+    <p class="body-text">This profile is a living document. It updates as the student evolves. The most important thing to understand about Quy is that progress is not linear — there will be sessions that feel like regression but are actually consolidation phases before the next leap.</p>
+    <p class="body-text">Trust the process. Track the trend, not the session.</p>
+    <div class="sig">OBI &mdash; NET Coach</div>
+  </section>
+</div>
+<script>function logout(){localStorage.removeItem('quy_auth');window.location.href='quy-portal.html';}</script>
+<script src="/assets/brand/system-marks/global-brand-shelf.js"></script>
+</body>
+</html>
