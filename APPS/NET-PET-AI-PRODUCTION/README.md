@@ -8,6 +8,23 @@
 
 ---
 
+## GAP-8 Status: FROZEN
+
+Deploy path is intentionally frozen. Production slot is stable on v1.6.2 — do not attempt to redeploy.
+
+**To unfreeze, ALL of the following must be true:**
+
+1. `StudentProfileDO` source recovered and added to `src/durable-objects/`
+2. `CohortAnalysisDO` source recovered and added to `src/durable-objects/`
+3. `phase6-init.js` recovered and added to `src/db-migrations/`
+4. All remaining DO binding names confirmed (currently 23 unknown in wrangler-production.toml)
+5. Migration tags for phase6 DOs confirmed against live slot via `/evidence` endpoint
+6. Full diff of v1.6.0 → v1.6.2 audited and applied to src/
+
+Until these are met: do not run `wrangler deploy` against this slot under any circumstances.
+
+---
+
 ## CRITICAL — DO NOT OVERWRITE WITH CANON CODE
 
 This slot runs a **completely different codebase** from `APPS/NET-PET-AI/` (which is v1.5.0).

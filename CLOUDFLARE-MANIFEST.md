@@ -144,4 +144,4 @@ Apps in `APPS/` with no Cloudflare Worker or Pages deployment entry in this mani
 | GAP-5 | 2 D1 databases reported as empty | ✅ **CLOSED** — both have active schema, 0 rows false-negative from CAPIv4 incomplete listing |
 | GAP-6 | BlueTech students on wrong portal template | ✅ **CLOSED** — Mai Tram, Quy, Huong rebuilt against 5-tab multi-portal template (commit `fb280e6`) |
 | GAP-7 | `submission-api` and `soul-logger` untracked | ✅ **CLOSED** — both located and tracked in `APPS/` (commit `fe16efe`) |
-| GAP-8 | `net-pet-ai-production` runs v1.6.2 (30 DOs) — canon repo is v1.5.0 (4 DOs) | ⚠️ **OPEN** — bundle rescued to `APPS/NET-PET-AI-PRODUCTION/`. v1.6.2 source not yet recovered. Do not deploy canon code to this slot. |
+| GAP-8 | net-pet-ai-production deploy path | 🔒 **FROZEN** — Production stable on v1.6.2. Deploy intentionally blocked: src/ incomplete (missing StudentProfileDO, CohortAnalysisDO, phase6-init.js). Do not deploy until full source recovery. See APPS/NET-PET-AI-PRODUCTION/README.md. |
