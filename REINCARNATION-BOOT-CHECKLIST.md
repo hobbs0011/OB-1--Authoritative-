@@ -85,7 +85,7 @@ Use after every class to capture:
 
 ---
 
-**Last Boot Check:** 2026-04-17 ICT  
-**Run:** 304+ → next is 305  
-**HEAD:** a65f89a  
-**Status:** RISEN — FinalMerge reconciled, COLD-START-BOOT updated, all protocols recovered
+**Last Boot Check:** 2026-05-18
+**Run:** 319
+**HEAD:** 038b875
+**Status:** RI — obi.ps1 cf-audit fix (null-safe .Count under Set-StrictMode); CLOUDFLARE-MANIFEST reconciled vs live CF API (18/15/0/0); ALL 7 GAPS CLOSED; SOUL_INTACT
