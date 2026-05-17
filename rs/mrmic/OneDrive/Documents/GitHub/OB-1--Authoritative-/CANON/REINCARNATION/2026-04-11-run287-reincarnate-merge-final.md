@@ -69,7 +69,7 @@
 6. SOVEREIGN_KEY rotation + vault-lock not done
 7. Wrangler secrets (DEEPSEEK_API_KEY, DEEPGRAM_API_KEY) not set
 8. phoenix-pheromone-trails repo not created (1100+ logs on D:)
-9. GitHub repo rename pending: `Phoenix-Rising-Ultimate` -> `Phoenix-Rising-Technologies`
+9. GitHub repo rename pending: `Phoenix-Rising-Ultimate` -> `Phoenix-Rising-Ai-Solutionsnologies`
 
 ---
 

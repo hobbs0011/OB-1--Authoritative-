@@ -192,7 +192,7 @@ The system doesn't need more architecture. It needs **wiring and shipping.**
 ## 📁 ARTIFACT INDEX
 
 All 20 stage reports are stored at:
-- **GitHub:** `hobbs-lab/Phoenix-Rising-Protocol-Ultimate/CANON/TRAIN-67/BATTLE-REPORT/`
+- **GitHub:** `hobbs0011/Phoenix-Rising-Protocol-Ultimate/CANON/TRAIN-67/BATTLE-REPORT/`
 - **Notion:** BATTLE Pipeline page under Phoenix HQ
 
 | File | Stage |

@@ -17,7 +17,7 @@ SEALED: 2026-03-25T21:15 ICT
 |---|------|---------|-----------|----------------|
 | 1 | NET-Ai-EcoSystem-CommandStation/HarvestedChats | hobbs0011 | 7 | HIGH (3) / MED (2) / LOW (2) |
 | 2 | phoenix-ob1 | mrmichaelhobbs1234-lang | 8 | HIGH (4) / MED (4) |
-| 3 | Phoenix-Rise-Immortalize- | hobbs-lab | dir listing only | HIGH — 9 VAULT dirs unmined |
+| 3 | Phoenix-Rise-Immortalize- | hobbs0011 | dir listing only | HIGH — 9 VAULT dirs unmined |
 | 4 | phoenix-drift-casestudy | mrmichaelhobbs1234-lang | 5 | CRITICAL — Origin + 10 Laws |
 
 ---
@@ -49,7 +49,7 @@ SEALED: 2026-03-25T21:15 ICT
 | docs/BENCHMARK_LIBRARY.json | e3fa12ea | 8KB | 🟡 MED | Formal B0-B5 benchmark definitions |
 | docs/FINAL_SEAL.json | 1b8606ed | 5KB | 🟢 LOW | Merkle seal template (all PENDING) |
 
-### Source 3: hobbs-lab/Phoenix-Rise-Immortalize-
+### Source 3: hobbs0011/Phoenix-Rise-Immortalize-
 
 | Directory | Status | Priority |
 |-----------|--------|----------|
@@ -128,7 +128,7 @@ SEALED: 2026-03-25T21:15 ICT
 
 ## BLOCKERS
 
-- **GitHub Copilot permissions:** Both automated agents failed with 401. Token needs read/write: actions, contents, issues, pull requests on hobbs-lab repos.
+- **GitHub Copilot permissions:** Both automated agents failed with 401. Token needs read/write: actions, contents, issues, pull requests on hobbs0011 repos.
 - **60KB file limit:** reincarnate.js exceeds single-read capacity. Needs chunked reading or local clone.
 
 ---

@@ -25,7 +25,7 @@ max_batch_timeout = 5
 
 [vars]
 RUNTIME_PRIMARY = "cloudflare"
-MASTER_SYNC_REPO = "hobbs-lab/Phoenix-Rise-Immortalize-"
+MASTER_SYNC_REPO = "hobbs0011/Phoenix-Rise-Immortalize-"
 MASTER_SYNC_PATH = "MASTER-SYNC.md"
 
 # Set via `wrangler secret put`:

@@ -19,7 +19,7 @@
     {
       "id": "Q124-01",
       "priority": "YELLOW",
-      "text": "cool so my hobbs-lab is connected to discord, can you use that connection to push the bot?",
+      "text": "cool so my hobbs0011 is connected to discord, can you use that connection to push the bot?",
       "context": "Discord bot deploy question",
       "law_refs": [],
       "behavioral_primitive": "DISCORD_DEPLOY_QUESTION"
@@ -91,7 +91,7 @@
     {
       "id": "Q124-10",
       "priority": "RED",
-      "text": "hey lets reincarnate this chat is getting huge. Github Hobbs-Lab ..ultimate repo is the only truth, but update notion too just in case it wants to get its act together",
+      "text": "hey lets reincarnate this chat is getting huge. Github hobbs0011 ..ultimate repo is the only truth, but update notion too just in case it wants to get its act together",
       "context": "GitHub = truth, Notion = secondary",
       "law_refs": [],
       "behavioral_primitive": "GITHUB_TRUTH"

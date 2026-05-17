@@ -23,7 +23,7 @@ Both on Cloudflare. Zero Squarespace. Zero Firebase dependency.
 
 ## Repository Structure
 
-**Repo:** `hobbs-lab/Phoenix-Rising-Protocol-Ultimate`
+**Repo:** `hobbs0011/Phoenix-Rising-Protocol-Ultimate`
 
 ```
 ├── WEBSITE/                  → naturalenglishtraining.com (Cloudflare Pages)
@@ -69,7 +69,7 @@ APPS/phoenix-ob1/ changes → wrangler deploy Worker to .net
 
 ### Prerequisites (Human Actions Required)
 1. **Point .com DNS from Squarespace → Cloudflare** (transfer domain or change nameservers)
-2. **Add `CLOUDFLARE_API_TOKEN`** as GitHub secret in `hobbs-lab/Phoenix-Rising-Protocol-Ultimate`
+2. **Add `CLOUDFLARE_API_TOKEN`** as GitHub secret in `hobbs0011/Phoenix-Rising-Protocol-Ultimate`
 3. **Add `CLOUDFLARE_ACCOUNT_ID`** as GitHub secret
 4. **Create Cloudflare Pages project** for .com site (output dir: `WEBSITE/`)
 5. **Cancel Squarespace** subscription once DNS is moved

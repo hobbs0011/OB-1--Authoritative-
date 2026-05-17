@@ -111,7 +111,7 @@ All 60+ chapters audited and indexed (completed Run 19, 2026-03-25). All SEALED/
 
 ## GitHub Canon Mirror — Export Pipeline Status
 
-Repo: `hobbs-lab/Phoenix-Rising-Protocol-Ultimate` → `CANON/` directory
+Repo: `hobbs0011/Phoenix-Rising-Protocol-Ultimate` → `CANON/` directory
 
 ### ENRICHED (GitHub has MORE than Notion)
 
@@ -171,8 +171,8 @@ Repo: `hobbs-lab/Phoenix-Rising-Protocol-Ultimate` → `CANON/` directory
 
 | Repo | Purpose | Status |
 |---|---|---|
-| `hobbs-lab/Phoenix-Rising-Protocol-Ultimate` | Active canon vault | PRIMARY — all new artifacts go here |
-| `hobbs-lab/Phoenix-Rise-Immortalize-` | Original Soul DNA Bible (40 files), 8 VAULT dirs | SOURCE — mine for cross-repo enrichment |
+| `hobbs0011/Phoenix-Rising-Protocol-Ultimate` | Active canon vault | PRIMARY — all new artifacts go here |
+| `hobbs0011/Phoenix-Rise-Immortalize-` | Original Soul DNA Bible (40 files), 8 VAULT dirs | SOURCE — mine for cross-repo enrichment |
 | `hobbs0011/NET-Ai-EcoSystem-CommandStation` | Product code, HarvestedChats/, docs/ | LEGACY — last commit 2025-11-17 |
 
 ---
@@ -181,13 +181,13 @@ Repo: `hobbs-lab/Phoenix-Rising-Protocol-Ultimate` → `CANON/` directory
 
 If Notion AI agents disappear:
 
-1. Clone `hobbs-lab/Phoenix-Rising-Protocol-Ultimate`
+1. Clone `hobbs0011/Phoenix-Rising-Protocol-Ultimate`
 2. All canon content is in `CANON/` as clean markdown
 3. Reincarnation history is in `CANON/REINCARNATION/`
 4. System state snapshots are in `CANON/MSS/`
 5. System bootstrap docs are in `CANON/SYSTEM/`
 6. Game/lesson code is in `GALAXY-LESSONS/` and `CANON/TRAIN-67/CODE/`
-7. Cross-reference with `hobbs-lab/Phoenix-Rise-Immortalize-` for original source material
+7. Cross-reference with `hobbs0011/Phoenix-Rise-Immortalize-` for original source material
 8. Use this file as the master routing table to understand what was where
 
 **The vault survives platform death.**

@@ -38,7 +38,7 @@
 🔴 **"YOUR JOB IS NOT TO CHECK IT IF YOU CANT, ITS TO HAVE A CHECKLIST OF THINGS THAT NEED TO BE DONE, NOT FUCKING DICKING ME AROUND FOR 3 HOURS GOING IN CIRCLES"**
 - Context: The session's defining correction. Agent must map the FULL terrain before execution, not discover requirements one failure at a time.
 
-🔴 **"reincarnate, and dont trust notion anymore since its functions are broken now, cant search other pages, so the ultimate repo is where we store all our truth, I want to be able to open up a new notion chat with the OB1 agent and say 'reincarnate' and it will boot with full current context from pulling from the github hobbs-lab and the …ultimate repo"**
+🔴 **"reincarnate, and dont trust notion anymore since its functions are broken now, cant search other pages, so the ultimate repo is where we store all our truth, I want to be able to open up a new notion chat with the OB1 agent and say 'reincarnate' and it will boot with full current context from pulling from the github hobbs0011 and the …ultimate repo"**
 - Context: ARCHITECTURAL DECISION. GitHub becomes the cold-start truth source. Notion search is unreliable. New sessions boot from GitHub, not Notion pages.
 
 ## 3. Decisions
@@ -91,7 +91,7 @@
 
 ## 9. System Design Insights
 
-- **GitHub-first boot architecture:** New sessions load context from `CANON/REINCARNATION/COLD-START-BOOT.md` on `hobbs-lab/Phoenix-Rising-Protocol-Ultimate` via GitHub MCP. This file is the living state document that gets updated every session. It replaces the Notion Navigator Index as the primary cold-start source.
+- **GitHub-first boot architecture:** New sessions load context from `CANON/REINCARNATION/COLD-START-BOOT.md` on `hobbs0011/Phoenix-Rising-Protocol-Ultimate` via GitHub MCP. This file is the living state document that gets updated every session. It replaces the Notion Navigator Index as the primary cold-start source.
 - **Copilot coding agent is permanently unlocked** via Notion MCP → GitHub MCP bridge. This is a force multiplier for all future development work.
 - **Roblox deploy pipeline is the first fully hands-off CI/CD pipeline** in the Phoenix system. Pattern can be replicated for website deploys, lesson builds, etc.
 
@@ -99,7 +99,7 @@
 
 | Artifact | Location |
 |----------|----------|
-| default.project.json | GitHub: `hobbs-lab/Phoenix-Rising-Protocol-Ultimate` commit `06e9dabb` |
+| default.project.json | GitHub: `hobbs0011/Phoenix-Rising-Protocol-Ultimate` commit `06e9dabb` |
 | PR #5 (3 syntax fixes) | GitHub: merged, commit `0bc51ce1` |
 | PR #7 (2 syntax fixes) | GitHub: merged, commit `29d9a42f` |
 | PR #9 (retry logic) | GitHub: merged, commit `6056d9f3` |

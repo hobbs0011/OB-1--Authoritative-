@@ -3,7 +3,7 @@
   "name": "Phoenix Ledger MCP",
   "id": "C1",
   "description": "Agent-99 direct read/write into the Phoenix OB-1 ledger chain.",
-  "worker": "phoenix-ob1-system.hobbs-lab.workers.dev",
+  "worker": "phoenix-ob1-system.hobbs0011.workers.dev",
   "auth": {
     "type": "header",
     "header": "x-sovereign-key",
@@ -46,5 +46,5 @@
     "blue_banned": true
   },
   "version": "v140-W1-UNBLOCKED",
-  "note": "Archived from mrmichaelhobbs1234-lang/phoenix-ob1. Worker URL updated to hobbs-lab."
+  "note": "Archived from mrmichaelhobbs1234-lang/phoenix-ob1. Worker URL updated to hobbs0011."
 }

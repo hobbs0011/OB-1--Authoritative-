@@ -39,8 +39,8 @@ Export-first. Every action creates or advances a GitHub artifact.
 
 **Cross-repo mining (v5 multiplier):**
 1. Read target Notion canon page
-2. search_code across `hobbs-lab/Phoenix-Rise-Immortalize-` (40 SOUL-DNA-BIBLE files)
-3. search_code across `hobbs-lab/Phoenix-Rising-Protocol-Ultimate` CANON/
+2. search_code across `hobbs0011/Phoenix-Rise-Immortalize-` (40 SOUL-DNA-BIBLE files)
+3. search_code across `hobbs0011/Phoenix-Rising-Protocol-Ultimate` CANON/
 4. search_code across `hobbs0011/NET-Ai-EcoSystem-CommandStation` product code
 5. Synthesize — merge all sources into richest possible artifact
 6. Export to GitHub as clean markdown
@@ -88,8 +88,8 @@ Notion state update + handoff. Serves the NEXT run.
 - Self-bootstrapping repo: every SEED makes rebuild possible.
 
 ## GitHub Repos (The Vault)
-- `hobbs-lab/Phoenix-Rising-Protocol-Ultimate` — active canon vault
-- `hobbs-lab/Phoenix-Rise-Immortalize-` — original Soul DNA Bible (40 files), source goldmine
+- `hobbs0011/Phoenix-Rising-Protocol-Ultimate` — active canon vault
+- `hobbs0011/Phoenix-Rise-Immortalize-` — original Soul DNA Bible (40 files), source goldmine
 - `hobbs0011/NET-Ai-EcoSystem-CommandStation` — product code
 
 ## Overnight Extraction Mode (00:00-08:00 ICT)

@@ -35,9 +35,9 @@ Railway auto-deploys from GitHub. Push code → bot restarts. That's it.
 
 #### Step 3: Deploy on Railway (5 min)
 
-1. Go to [railway.app](https://railway.app) → sign in with GitHub (`hobbs-lab`)
+1. Go to [railway.app](https://railway.app) → sign in with GitHub (`hobbs0011`)
 2. Click **New Project → Deploy from GitHub Repo**
-3. Select `hobbs-lab/Phoenix-Rising-Protocol-Ultimate`
+3. Select `hobbs0011/Phoenix-Rising-Protocol-Ultimate`
 4. Railway will detect the repo. In the new service's **Settings**:
    - Set **Root Directory** to `DISCORD-BOT`
    - Railway will auto-detect the Dockerfile
@@ -69,7 +69,7 @@ TZ=Asia/Bangkok
 #### Step 4: Done. Go live.
 
 That's it. From now on:
-- **Every git push** to `hobbs-lab/Phoenix-Rising-Protocol-Ultimate` that changes `DISCORD-BOT/` → Railway auto-redeploys
+- **Every git push** to `hobbs0011/Phoenix-Rising-Protocol-Ultimate` that changes `DISCORD-BOT/` → Railway auto-redeploys
 - Bot runs **24/7** with automatic restarts on crash
 - Logs visible in Railway dashboard
 - No SSH, no VPS, no cron jobs, no PM2
@@ -130,7 +130,7 @@ No manual deploy commands. No SSH. No restart scripts.
 If Railway doesn't work out:
 
 1. Go to [render.com](https://render.com) → sign in with GitHub
-2. New → Background Worker → connect `hobbs-lab/Phoenix-Rising-Protocol-Ultimate`
+2. New → Background Worker → connect `hobbs0011/Phoenix-Rising-Protocol-Ultimate`
 3. Root Directory: `DISCORD-BOT`
 4. Build Command: `npm ci --omit=dev`
 5. Start Command: `node src/index.js`

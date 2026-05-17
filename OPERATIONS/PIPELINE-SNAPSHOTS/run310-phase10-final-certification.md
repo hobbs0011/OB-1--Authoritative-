@@ -37,7 +37,7 @@
 | docs/ API URL dead (net-obi-api.naturalenglishtraining.com) | Fixed to workers.dev URL | Run 310 Phase 3 |
 | Notion chat mirror = unlimited free-tier bleed | Guarded behind NOTION_CHAT_MIRROR=1 | Run 310 Phase 8 |
 | notionFetch no retry on 5xx | Added exponential backoff retry | Run 310 Phase 8 |
-| hobbs-lab/mrmichaelhobbs1234-lang swarm targets ungated | Already gated behind enable_legacy_targets | Run 310 Phase 9 |
+| hobbs0011/mrmichaelhobbs1234-lang swarm targets ungated | Already gated behind enable_legacy_targets | Run 310 Phase 9 |
 
 ---
 

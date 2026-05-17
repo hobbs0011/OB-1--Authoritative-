@@ -1,6 +1,6 @@
 # ARCHIVE NOTE: Full 20-stage Phoenix Rising Protocol pipeline
 # Preserved from mrmichaelhobbs1234-lang/phoenix-ob1 (27KB original)
-# Worker URL references updated to hobbs-lab
+# Worker URL references updated to hobbs0011
 # Stages: ignition -> repo-truth -> entrypoint -> migration-guard -> kv-truth ->
 #   body-guard -> chaos-scan -> validator-truth -> dep-lock -> dry-run ->
 #   hash-seal -> pre-deploy-probe -> deploy -> propagation -> smoke-health ->
@@ -18,7 +18,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  WORKER_URL: https://phoenix-ob1-system.hobbs-lab.workers.dev
+  WORKER_URL: https://phoenix-ob1-system.hobbs0011.workers.dev
   WORKER_NAME: phoenix-ob1-system
   NODE_VERSION: '20'
 

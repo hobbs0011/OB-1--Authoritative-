@@ -19,7 +19,7 @@
     {
       "id": "Q1",
       "priority": "RED",
-      "text": "yeah lets consolodate and load everything into files on notion and the ultimate repo on hobbs-lab as standard practive from now on",
+      "text": "yeah lets consolodate and load everything into files on notion and the ultimate repo on hobbs0011 as standard practive from now on",
       "category": "system_changing",
       "impact": "Dual-publish mandate — every canonical artifact to Notion AND GitHub. Not optional.",
       "laws_referenced": ["L27_DUAL_PUBLISH_MANDATORY"]
@@ -65,7 +65,7 @@
     {
       "id": "Q7",
       "priority": "GREEN",
-      "text": "confirm name of repo? Phoenix-Rising-Protocol-Ultimate on hobbs-lab right?",
+      "text": "confirm name of repo? Phoenix-Rising-Protocol-Ultimate on hobbs0011 right?",
       "category": "confirmation",
       "impact": "Repo name confirmation"
     },
@@ -134,7 +134,7 @@
     {
       "id": "P1",
       "principle": "Dual-publish is non-negotiable",
-      "verbatim_source": "yeah lets consolodate and load everything into files on notion and the ultimate repo on hobbs-lab as standard practive from now on",
+      "verbatim_source": "yeah lets consolodate and load everything into files on notion and the ultimate repo on hobbs0011 as standard practive from now on",
       "interpretation": "Notion + GitHub for every canonical artifact. No exceptions."
     },
     {

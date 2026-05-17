@@ -28,7 +28,7 @@ jobs:
       - name: Post-deploy health check
         run: |
           sleep 5
-          curl -f https://phoenix-ob1-system.hobbs-lab.workers.dev/health || exit 1
+          curl -f https://phoenix-ob1-system.hobbs0011.workers.dev/health || exit 1
       - name: Rollback on failure
         if: failure()
         run: |

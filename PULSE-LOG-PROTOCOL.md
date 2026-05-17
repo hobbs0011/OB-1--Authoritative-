@@ -23,7 +23,7 @@ Lightweight state-diff protocol for Agent-99 scheduled pulse runs. Runs every 2 
 
 1. **Read** the Pulse Log Current State table (Notion)
 2. **Notion Pulse** — Query Backlog + Build Log for items changed since `last_run_time`
-3. **GitHub Pulse** — `list_commits`, `list_pull_requests`, `list_issues` on `hobbs-lab` repos → compare to stored values
+3. **GitHub Pulse** — `list_commits`, `list_pull_requests`, `list_issues` on `hobbs0011` repos → compare to stored values
 4. **Decision gate:**
    - Delta detected → update Current State + append to Alert History → close
    - No delta → update `last_run_time` only → silent close

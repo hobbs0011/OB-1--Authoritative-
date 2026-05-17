@@ -8,7 +8,7 @@
 
 ## 💬 Raw Quotes (Verbatim, Michael's Words)
 
-> "Random Skeleton Stuff, see if useful, leave what isn't, super Saiyan mode activated, update notion and ultimate Hobbs-Lab repo accordingly, this is mostly DNA it looks like, but make sure to capture any SOUL verbatim"
+> "Random Skeleton Stuff, see if useful, leave what isn't, super Saiyan mode activated, update notion and ultimate hobbs0011 repo accordingly, this is mostly DNA it looks like, but make sure to capture any SOUL verbatim"
 >
 > "reincarnate"
 

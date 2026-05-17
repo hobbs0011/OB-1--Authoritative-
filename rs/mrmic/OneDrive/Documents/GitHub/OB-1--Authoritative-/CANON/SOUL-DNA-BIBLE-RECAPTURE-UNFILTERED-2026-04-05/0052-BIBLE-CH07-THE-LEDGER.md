@@ -6,7 +6,7 @@ SHA256: 1922B693B253DE3093644315446B535D5E19EF1A0DE33B635BF8E3A238673243
 
 > *Nothing happens that does not get recorded. Memory as law.*
 
-**Source:** Soul DNA Bible CH07 — Notion + `hobbs-lab/Phoenix-Rise-Immortalize-` `SOUL-DNA-BIBLE/07_THE_LEDGER.md` (SHA `ab77a7b1`)
+**Source:** Soul DNA Bible CH07 — Notion + `hobbs0011/Phoenix-Rise-Immortalize-` `SOUL-DNA-BIBLE/07_THE_LEDGER.md` (SHA `ab77a7b1`)
 **Export:** VAULT ENRICHED — Run 115, 2026-03-29
 **Cross-repo sources:** 1 (Immortalize `07_THE_LEDGER.md`)
 

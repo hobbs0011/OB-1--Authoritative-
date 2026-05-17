@@ -8,8 +8,8 @@
   "law": "SYSTEM_BECOMES_STRONGER_WHEN_IT_SURVIVES_REPRODUCTION",
   "identity": {
     "workerName": "phoenix-ob1-system",
-    "canonicalUrl": "https://phoenix-ob1-system.hobbs-lab.workers.dev",
-    "repo": "github.com/hobbs-lab/Phoenix-Rising-Protocol-Ultimate",
+    "canonicalUrl": "https://phoenix-ob1-system.hobbs0011.workers.dev",
+    "repo": "github.com/hobbs0011/Phoenix-Rising-Protocol-Ultimate",
     "version": "v136-PRODUCTION-HARDENED",
     "targetVersion": "v137-PHOENIX-SEALED",
     "entrypoint": "src/reincarnate.js",

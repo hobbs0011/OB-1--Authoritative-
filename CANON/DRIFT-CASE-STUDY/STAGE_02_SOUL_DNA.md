@@ -66,7 +66,7 @@
   },
 
   "case_study_repo": "github.com/mrmichaelhobbs1234-lang/phoenix-drift-casestudy",
-  "migrated_to": "hobbs-lab/Phoenix-Rising-Protocol-Ultimate/CANON/DRIFT-CASE-STUDY/",
+  "migrated_to": "hobbs0011/Phoenix-Rising-Protocol-Ultimate/CANON/DRIFT-CASE-STUDY/",
   "sealed_at": "2026-03-11T03:53 ICT"
 }
 ```

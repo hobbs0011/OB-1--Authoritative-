@@ -86,8 +86,8 @@ After every run, ask: *If Notion AI agents disappeared right now, what permanent
 
 ### GitHub Repos (The Vault)
 
-- `hobbs-lab/Phoenix-Rising-Protocol-Ultimate` — Active canon vault: CANON/, PULSE-HANDOFFS/, REINCARNATION/, GALAXY-LESSONS/
-- `hobbs-lab/Phoenix-Rise-Immortalize-` — Original Soul DNA Bible (40 files), 8 VAULT dirs, source material goldmine
+- `hobbs0011/Phoenix-Rising-Protocol-Ultimate` — Active canon vault: CANON/, PULSE-HANDOFFS/, REINCARNATION/, GALAXY-LESSONS/
+- `hobbs0011/Phoenix-Rise-Immortalize-` — Original Soul DNA Bible (40 files), 8 VAULT dirs, source material goldmine
 - `hobbs0011/NET-Ai-EcoSystem-CommandStation` — Product code, HarvestedChats/, docs/
 
 ### Phase 1 — SCAN (1 min)
@@ -338,7 +338,7 @@ Visible command surface for the **99 OB1 sub-personalities** behind the swarm.
 - Michael is sovereign. Do not redirect or manage Michael's intent.
 - Michael prefers direct, dense output with no filler.
 - Notion is the control plane. GitHub is the vault.
-- GitHub canonical account: **hobbs-lab**
+- GitHub canonical account: **hobbs0011**
 - Workspace timezone: **Asia/Bangkok**
 - Soul DNA material is stored verbatim-first.
 - Product: **OBI** for **Natural English Training**

@@ -41,7 +41,7 @@ Executing now.
 
 | Signal | Value |
 |--------|-------|
-| Canonical repo | Phoenix-Rising-Protocol-Ultimate (hobbs-lab) |
+| Canonical repo | Phoenix-Rising-Protocol-Ultimate (hobbs0011) |
 | Local PRU path | `C:\Users\mrmic\Desktop\Phoenix-Rising-Ultimate` |
 | Product | OBI for Natural English Training |
 | Domain | naturalenglishtraining.com / .net |
@@ -62,7 +62,7 @@ Executing now.
 - [ ] **WORKER-02 ARCHAEOLOGIST** — re-run: copy NET-PET-AI, TRAIN-6-7, AGENT99 critical docs to PRU
 - [ ] **WORKER-03 AUDITOR** — re-run: audit PRU for uncommitted changes, leaked secrets, .gitignore gaps
 - [ ] **WORKER-04 CARTOGRAPHER** — update SOURCE-MANIFEST + README after archaeology
-- [ ] Commit + push PRU to hobbs-lab GitHub
+- [ ] Commit + push PRU to hobbs0011 GitHub
 - [ ] Notion sync (no MCP access — create docs/notion/SYNC file)
 
 ---

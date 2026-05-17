@@ -9,7 +9,7 @@ REPO:         github.com/mrmichaelhobbs1234-lang/phoenix-drift-casestudy
 PHOENIX REPO: github.com/mrmichaelhobbs1234-lang/phoenix-ob1
 PROTOCOL:     PHOENIX RISING — DRIFT CORRECTION CASE STUDY
 VERSION:      v1.0-SOUL-DNA-SEALED
-MIGRATED TO:  hobbs-lab/Phoenix-Rising-Protocol-Ultimate/CANON/DRIFT-CASE-STUDY/
+MIGRATED TO:  hobbs0011/Phoenix-Rising-Protocol-Ultimate/CANON/DRIFT-CASE-STUDY/
 ```
 
 ---

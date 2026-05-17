@@ -65,7 +65,7 @@
 | Step | Action | Time |
 |---|---|---|
 | 6.1 | Create Discord Application + Bot account at discord.dev | 15 min |
-| 6.2 | Set up bot repo: `hobbs-lab/net-obi-discord-bot` | 10 min |
+| 6.2 | Set up bot repo: `hobbs0011/net-obi-discord-bot` | 10 min |
 | 6.3 | Scaffold discord.js v14 project | 30 min |
 | 6.4 | Implement `/obi chat` command — proxy to DeepSeek via Cloudflare Worker | 4 hours |
 | 7.1 | Implement `/obi vocab` command | 2 hours |

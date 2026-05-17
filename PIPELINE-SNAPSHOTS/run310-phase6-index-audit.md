@@ -6,7 +6,7 @@
 
 - `README.md` checked for canonical owner references
 - Primary statement: `hobbs0011/OB-1` is THE canonical repo
-- No stale `mrmichaelhobbs1234` or `hobbs-lab` as primary references
+- No stale `mrmichaelhobbs1234` or `hobbs0011` as primary references
 
 ## Stage 52 — MASTER-SYNC Freshness Audit ✅ UPDATED
 

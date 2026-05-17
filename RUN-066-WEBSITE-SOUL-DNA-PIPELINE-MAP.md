@@ -2,7 +2,7 @@
 
 ## 0) Scope Lock
 - Trigger: "check it out, our website prototype so far, include that in your pipeline of mapping. And don't forget the SOUL DNA."
-- Website target reviewed: https://hobbs-lab.github.io/net-tiger-assessment/index.html
+- Website target reviewed: https://hobbs0011.github.io/net-tiger-assessment/index.html
 - Local prototype root: `net-tiger-assessment/`
 - Canon source for doctrine mapping: `CANON/SOUL-DNA-CANON.md`
 

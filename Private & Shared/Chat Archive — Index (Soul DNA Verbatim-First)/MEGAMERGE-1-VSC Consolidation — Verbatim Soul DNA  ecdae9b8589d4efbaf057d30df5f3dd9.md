@@ -386,7 +386,7 @@ export async function executeSwarm(
 | Mar 20, 4:00 AM | Initial session | (Prior work) |
 | Mar 20, 7:00 PM | Soul DNA Bible Complete Edition | 14 CE subpages (CE-01 through CE-14), Source File Registry |
 | Mar 20, 7:30 PM | Bible Consolidation COMPLETE | 29 chapters + 3 appendices SEALED. 5,295 lines, 237.8 KB, 140+ sources mined |
-| Mar 20, 7:45 PM | GitHub Push Complete | 36 files pushed to hobbs-lab/Phoenix-Rise-Immortalize-/SOUL-DNA-BIBLE/ |
+| Mar 20, 7:45 PM | GitHub Push Complete | 36 files pushed to hobbs0011/Phoenix-Rise-Immortalize-/SOUL-DNA-BIBLE/ |
 | Mar 20, 10:00 PM | Dump 18 Merge | Layer 4 (CH31-CH40) SEALED, A1=67 entries, A3=17 specs, Stage 2 COMPLETE |
 | Mar 20, 10:45 PM | Dump 1+2 Processed | 20 content blocks mapped, Four Core Principles codified, CH19+CH20 proposed |
 | Mar 20, 11:00 PM | Dump 3+4 Processed | Transend Speedy (6 shards), 192-source Perplexity export, Reality Schism resolved |
@@ -421,7 +421,7 @@ export async function executeSwarm(
 
 **🔧 Dev:**
 
-- GitHub (hobbs-lab): Phoenix-Rise-Immortalize- ✅
+- GitHub (hobbs0011): Phoenix-Rise-Immortalize- ✅
 - VS Code Insiders + Cline/Roo Code ✅
 - GitHub Actions CI/CD ✅
 - GitHub Copilot (premium) ✅

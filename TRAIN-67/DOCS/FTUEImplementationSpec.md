@@ -4,7 +4,7 @@
 > **Run:** 51 | **Date:** 2026-03-27 06:00 ICT
 > **Active Mission:** 100% Roblox — MAKE MONEY is the only goal
 > **Sources:** FTUECompressionAnalysis.md (`c47a1859`), MobileFirstEnglishInputDesign.md (`305efd84`), MonetizationArchitectureDeepDive.md (`63234bee`), AnalyticsTelemetryIntegrationSpec.md (`f182ccfd`), STAGE-01-FTUE-DESIGN-SPEC.md (`ef84a545`), FTUEManager.lua (`33a7d165`), FTUEWiring.lua (`5adf3afd`)
-> **Cross-repo sources:** 7 files from `hobbs-lab/Phoenix-Rising-Protocol-Ultimate`
+> **Cross-repo sources:** 7 files from `hobbs0011/Phoenix-Rising-Protocol-Ultimate`
 
 ---
 
@@ -894,5 +894,5 @@ Comprehensive status after this spec — all 13 original items plus new items fr
 
 *Artifact produced by Pulse Run 51 | Active Mission: 100% Roblox — MAKE MONEY is the only goal*
 *Platform Death Test: PASS (if commit succeeds)*
-*Cross-repo sources: 7 files mined from `hobbs-lab/Phoenix-Rising-Protocol-Ultimate`*
+*Cross-repo sources: 7 files mined from `hobbs0011/Phoenix-Rising-Protocol-Ultimate`*
 *Gospel 444 alignment: Mouse → Tiger, Permission over Perfection, English is the mechanic money is the mission*

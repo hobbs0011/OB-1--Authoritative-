@@ -12,7 +12,7 @@
   "related_chapters": ["CH09", "CH13", "CH00", "CH12"],
   "cross_repo_sources": [
     {
-      "repo": "hobbs-lab/Phoenix-Rise-Immortalize-",
+      "repo": "hobbs0011/Phoenix-Rise-Immortalize-",
       "file": "SOUL-DNA-BIBLE/08_AGENT_99_AND_THE_TRIAD.md",
       "sha": "65ad73f4",
       "usage": "Base text, verbatim quotes, structure"
@@ -23,7 +23,7 @@
       "usage": "Current canon state verification"
     },
     {
-      "repo": "hobbs-lab/Phoenix-Rising-Protocol-Ultimate",
+      "repo": "hobbs0011/Phoenix-Rising-Protocol-Ultimate",
       "file": "Agent instructions (OB1/Ne0)",
       "usage": "v5 operational reality enrichment"
     }

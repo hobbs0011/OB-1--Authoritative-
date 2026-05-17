@@ -21,16 +21,16 @@
     },
     {
       "id": "Q2",
-      "text": "yeah lets consolodate and load everything into files on notion and the ultimate repo on hobbs-lab as standard practive from now on",
+      "text": "yeah lets consolodate and load everything into files on notion and the ultimate repo on hobbs0011 as standard practive from now on",
       "severity": "RED",
       "tags": ["dual_publish", "standard_practice", "canonical_ruling"],
       "context": "Establishing dual-publish as permanent non-negotiable standard"
     },
     {
       "id": "Q3",
-      "text": "confirm name of repo? Phoenix-Rising-Protocol-Ultimate on hobbs-lab right?",
+      "text": "confirm name of repo? Phoenix-Rising-Protocol-Ultimate on hobbs0011 right?",
       "severity": "YELLOW",
-      "tags": ["repo_confirmation", "hobbs-lab"],
+      "tags": ["repo_confirmation", "hobbs0011"],
       "context": "Confirming canonical repo identity"
     },
     {
@@ -127,7 +127,7 @@
     {
       "id": "P1",
       "principle": "Dual-publish is non-negotiable",
-      "verbatim_source": "yeah lets consolodate and load everything into files on notion and the ultimate repo on hobbs-lab as standard practive from now on",
+      "verbatim_source": "yeah lets consolodate and load everything into files on notion and the ultimate repo on hobbs0011 as standard practive from now on",
       "interpretation": "Every canonical artifact must exist on both Notion and GitHub. No exceptions. This became L27 in the core laws."
     },
     {

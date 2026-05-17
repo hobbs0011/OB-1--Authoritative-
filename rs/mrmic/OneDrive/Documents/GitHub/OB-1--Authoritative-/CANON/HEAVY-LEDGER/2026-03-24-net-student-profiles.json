@@ -20,7 +20,7 @@
     {
       "id": "Q1",
       "priority": "RED",
-      "text": "make a dual update to notion with this that mirrors the repo on Hobbs-Lab that ends with 'ultimate'",
+      "text": "make a dual update to notion with this that mirrors the repo on hobbs0011 that ends with 'ultimate'",
       "context": "dual-publish directive",
       "governor_terms": ["DUAL_PUBLISH"]
     },

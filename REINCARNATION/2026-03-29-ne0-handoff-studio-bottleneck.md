@@ -59,7 +59,7 @@
 ### ⚙️ SYSTEM
 - [ ] Copilot auth 401 — resets ~3 days
 - [ ] `reincarnate.js` manual wrangler patch open
-- [ ] HarvestedChats manual transfer (hobbs0011 → hobbs-lab)
+- [ ] HarvestedChats manual transfer (hobbs0011 → hobbs0011)
 
 ## 🔒 Living Reincarnation State
 

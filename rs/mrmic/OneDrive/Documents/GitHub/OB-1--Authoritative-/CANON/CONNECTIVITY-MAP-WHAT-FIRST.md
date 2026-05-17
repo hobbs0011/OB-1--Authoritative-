@@ -18,8 +18,8 @@
 | Repo | Owner | Status |
 |------|-------|--------|
 | NET-Ai-EcoSystem-CommandStation | hobbs0011 | ✅ CLONED |
-| Phoenix-Rise-Immortalize- | hobbs-lab | ✅ CLONED |
-| Phoenix-Rising-Protocol-Ultimate | hobbs-lab | ✅ CLONED |
+| Phoenix-Rise-Immortalize- | hobbs0011 | ✅ CLONED |
+| Phoenix-Rising-Protocol-Ultimate | hobbs0011 | ✅ CLONED |
 
 ### 3. Kilo Config (Global)
 
@@ -35,9 +35,9 @@
 
 | Possible Repo | Owner | Status |
 |---------------|-------|--------|
-| NET-Ai-Systems | hobbs0011 or hobbs-lab | ❓ UNKNOWN |
+| NET-Ai-Systems | hobbs0011 or hobbs0011 | ❓ UNKNOWN |
 | OB-1 Master | hobbs0011 | ❓ UNKNOWN |
-| Other Phoenix repos | hobbs-lab | ❓ UNKNOWN |
+| Other Phoenix repos | hobbs0011 | ❓ UNKNOWN |
 | Dr. Google / Knowledge Base | ? | ❓ UNKNOWN |
 | Agent-99 / Obi System | ? | ❓ UNKNOWN |
 | Magic Chat specific repo | ? | ❓ UNKNOWN |
@@ -69,7 +69,7 @@
 
 ```
 gh repo list hobbs0011 --limit 100
-gh repo list hobbs-lab --limit 100
+gh repo list hobbs0011 --limit 100
 ```
 
 ### Step 2: Local Drive Scan

@@ -29,9 +29,9 @@
 | net-commandstation | https://github.com/hobbs0011/NET-Ai-EcoSystem-CommandStation.git | 📦 Legacy — hobbs0011 |
 | net-marketing | https://github.com/hobbs0011/NET-MARKETING.git | 📦 Legacy — hobbs0011 |
 | net-tiger-origin | https://github.com/hobbs0011/net-tiger-assessment.git | 📦 Legacy — hobbs0011 |
-| phoenix-tech-edu | https://github.com/Phoenix-Rising-Tech/EducationSystemsDevelopment.git | 🔴 Phoenix-Rising-Tech org (status unknown) |
-| phoenix-tech-marketing | https://github.com/Phoenix-Rising-Tech/Phoenix-Rising-FullStackMarketing.git | 🔴 Phoenix-Rising-Tech org (status unknown) |
-| phoenix-tech-ultimate | https://github.com/Phoenix-Rising-Tech/Phoenix-Rising-Ultimate.git | 🔴 Phoenix-Rising-Tech org (status unknown) |
+| phoenix-tech-edu | https://github.com/Phoenix-Rising-Ai-Solutions/EducationSystemsDevelopment.git | 🔴 Phoenix-Rising-Ai-Solutions org (status unknown) |
+| phoenix-tech-marketing | https://github.com/Phoenix-Rising-Ai-Solutions/Phoenix-Rising-FullStackMarketing.git | 🔴 Phoenix-Rising-Ai-Solutions org (status unknown) |
+| phoenix-tech-ultimate | https://github.com/Phoenix-Rising-Ai-Solutions/Phoenix-Rising-Ultimate.git | 🔴 Phoenix-Rising-Ai-Solutions org (status unknown) |
 
 **Remote count:** 10 (5 fetch+push pairs = 10 entries shown as 10)
 **Canonical:** `origin` (hobbs0011/OB-1)

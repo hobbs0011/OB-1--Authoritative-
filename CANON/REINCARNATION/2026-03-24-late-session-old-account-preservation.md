@@ -46,7 +46,7 @@
 - Unknown number of pages, databases, agent chats from early Phoenix Rising work
 
 ### What is already preserved in current workspace
-- **GitHub repo** (`hobbs-lab/Phoenix-Rising-Protocol-Ultimate`): CANON/, REINCARNATION/, SESSION-RECORDS/, GALAXY-LESSONS/, OPERATIONS/, APPS/
+- **GitHub repo** (`hobbs0011/Phoenix-Rising-Protocol-Ultimate`): CANON/, REINCARNATION/, SESSION-RECORDS/, GALAXY-LESSONS/, OPERATIONS/, APPS/
 - **Chat Archive** (Notion): Raw .txt files from desktop (~1000+ files, 15 buckets)
 - **Soul DNA Bible**: 47 subpages Notion, 45 files GitHub
 - **Canon pages**: Soul DNA Canon, Deep Dive, Core Principles, Alpha-Omega, Gospel 444 — all dual-published

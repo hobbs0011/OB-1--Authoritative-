@@ -1005,6 +1005,6 @@ local RATE_LIMITS = {
 
 > **Platform Death Test:** This document is a permanent BUILD artifact on GitHub.
 > If Notion dies tomorrow, the EnglishRewardsManager spec survives at:
-> `hobbs-lab/Phoenix-Rising-Protocol-Ultimate/CANON/TRAIN-67/DOCS/EnglishRewardsManagerSpec.md`
+> `hobbs0011/Phoenix-Rising-Protocol-Ultimate/CANON/TRAIN-67/DOCS/EnglishRewardsManagerSpec.md`
 >
 > **Run 53 | Artifact Class: 🔨 BUILD | Active Mission: 100% Roblox**

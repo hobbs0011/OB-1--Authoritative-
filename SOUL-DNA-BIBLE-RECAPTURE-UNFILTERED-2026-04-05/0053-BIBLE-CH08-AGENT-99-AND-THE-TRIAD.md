@@ -233,9 +233,9 @@ The sovereign's identity is non-negotiable canon: Michael is not a teacher who u
 
 | Repo | File | Used For |
 |------|------|----------|
-| `hobbs-lab/Phoenix-Rise-Immortalize-` | `SOUL-DNA-BIBLE/08_AGENT_99_AND_THE_TRIAD.md` | Base text (verbatim quotes, structure) |
+| `hobbs0011/Phoenix-Rise-Immortalize-` | `SOUL-DNA-BIBLE/08_AGENT_99_AND_THE_TRIAD.md` | Base text (verbatim quotes, structure) |
 | Notion Workspace | Soul DNA Bible → CH08 child page | Current canon state verification |
-| `hobbs-lab/Phoenix-Rising-Protocol-Ultimate` | Agent instructions (OB1/Ne0) | v5 operational reality enrichment |
+| `hobbs0011/Phoenix-Rising-Protocol-Ultimate` | Agent instructions (OB1/Ne0) | v5 operational reality enrichment |
 
 ---
 

@@ -31,7 +31,7 @@ Michael is running 4 parallel VS Code Copilot Agent chats simultaneously. This f
 - **Status**: 🟢 COMPLETED — Run 288/290
 - **Deployed**: Worker `a9500e3a` live at `net-pet-ai.mrmichaelhobbs123.workers.dev`
 - **Students**: 6/6 enrolled in production (mai-tram, quy-bluetech, timmy-private, tracy-private, dan-private, minh-private)
-- **New repo**: `Phoenix-Rising-Tech/EducationSystemsDevelopment` — https://github.com/Phoenix-Rising-Tech/EducationSystemsDevelopment
+- **New repo**: `Phoenix-Rising-Ai-Solutions/EducationSystemsDevelopment` — https://github.com/Phoenix-Rising-Ai-Solutions/EducationSystemsDevelopment
 - **Last commit**: `d6b1344`
 
 ### SYNCH3 — ART-ARSENAL + Marketing Lane

@@ -71,7 +71,7 @@ None — all 5 dumps processed, all indexes updated.
 - `canon_cursor`: UNKNOWN (pulse state in synced blocks)
 - `last_run_time`: 2026-03-26T15:42 ICT
 - GitHub commit (Dump 5): `17bc9777f9adf8976569ca615d5f3ae441f7f4a2`
-- 5 new CANON files on `hobbs-lab/Phoenix-Rising-Protocol-Ultimate`
+- 5 new CANON files on `hobbs0011/Phoenix-Rising-Protocol-Ultimate`
 
 ## 12. Session Fingerprint
 
@@ -85,12 +85,12 @@ None — all 5 dumps processed, all indexes updated.
 
 | File | Repo |
 |---|---|
-| `CANON/NOTEBOOKLM-VAULT-DUMP-1.md` | `hobbs-lab/Phoenix-Rising-Protocol-Ultimate` |
-| `CANON/NOTEBOOKLM-VAULT-DUMP-2.md` | `hobbs-lab/Phoenix-Rising-Protocol-Ultimate` |
-| `CANON/NOTEBOOKLM-VAULT-DUMP-3-STAGES-GEMINI-MEGAMONOLITH.md` | `hobbs-lab/Phoenix-Rising-Protocol-Ultimate` |
-| `CANON/NOTEBOOKLM-VAULT-DUMP-4.md` | `hobbs-lab/Phoenix-Rising-Protocol-Ultimate` |
-| `CANON/NOTEBOOKLM-VAULT-DUMP-5-FINAL.md` | `hobbs-lab/Phoenix-Rising-Protocol-Ultimate` |
-| `CANON/REINCARNATION/2026-03-26-notebooklm-vault-5dump.md` | `hobbs-lab/Phoenix-Rising-Protocol-Ultimate` |
+| `CANON/NOTEBOOKLM-VAULT-DUMP-1.md` | `hobbs0011/Phoenix-Rising-Protocol-Ultimate` |
+| `CANON/NOTEBOOKLM-VAULT-DUMP-2.md` | `hobbs0011/Phoenix-Rising-Protocol-Ultimate` |
+| `CANON/NOTEBOOKLM-VAULT-DUMP-3-STAGES-GEMINI-MEGAMONOLITH.md` | `hobbs0011/Phoenix-Rising-Protocol-Ultimate` |
+| `CANON/NOTEBOOKLM-VAULT-DUMP-4.md` | `hobbs0011/Phoenix-Rising-Protocol-Ultimate` |
+| `CANON/NOTEBOOKLM-VAULT-DUMP-5-FINAL.md` | `hobbs0011/Phoenix-Rising-Protocol-Ultimate` |
+| `CANON/REINCARNATION/2026-03-26-notebooklm-vault-5dump.md` | `hobbs0011/Phoenix-Rising-Protocol-Ultimate` |
 
 ## Collision Report
 

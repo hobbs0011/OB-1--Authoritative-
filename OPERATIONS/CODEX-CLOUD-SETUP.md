@@ -3,7 +3,7 @@
 ## Setup Steps
 
 1. Go to codex.openai.com
-2. Connect GitHub account (hobbs-lab)
+2. Connect GitHub account (hobbs0011)
 3. Select repo: Phoenix-Rising-Protocol-Ultimate
 4. Codex reads AGENTS.md automatically for instructions
 5. Primary target: APPS/NET-PET-AI

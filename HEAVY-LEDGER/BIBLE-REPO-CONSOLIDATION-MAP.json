@@ -22,7 +22,7 @@
     }
   },
   "ruling": {
-    "quote": "hobbs-lab = single canonical home. All repos consolidate there.",
+    "quote": "hobbs0011 = single canonical home. All repos consolidate there.",
     "author": "Michael Hobbs",
     "date": "2026-03-26",
     "signal": "RED",
@@ -166,7 +166,7 @@
     "total_surface": "ONE repo, all directories"
   },
   "key_concepts": [
-    {"concept": "Single-Repo Principle", "definition": "All 3 repos consolidate to hobbs-lab/Phoenix-Rising-Protocol-Ultimate as the single canonical home"},
+    {"concept": "Single-Repo Principle", "definition": "All 3 repos consolidate to hobbs0011/Phoenix-Rising-Protocol-Ultimate as the single canonical home"},
     {"concept": "Archive Migration", "definition": "Raw Bible files from Immortalize repo copied to ARCHIVE/ directory in Ultimate repo"},
     {"concept": "Frozen Archive", "definition": "Phoenix-Rise-Immortalize- becomes read-only after consolidation (last commit 2026-03-23)"},
     {"concept": "Enriched Canon", "definition": "Cross-repo synthesized master versions in CANON/ — richer than any single source"},

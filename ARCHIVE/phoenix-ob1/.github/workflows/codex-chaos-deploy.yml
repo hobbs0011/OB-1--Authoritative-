@@ -1,6 +1,6 @@
 # ARCHIVE NOTE: Full 6-job CODEX pipeline preserved from mrmichaelhobbs1234-lang/phoenix-ob1
 # Jobs: preflight -> chaos-gate -> deploy -> smoke -> benchmark-ping -> seal
-# Worker URL references updated to hobbs-lab where applicable
+# Worker URL references updated to hobbs0011 where applicable
 # Original file: 10.4KB, see source repo for full content
 name: CODEX Chaos Magic Accelerated Deploy
 
@@ -15,7 +15,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  WORKER_URL: https://phoenix-ob1-system.hobbs-lab.workers.dev
+  WORKER_URL: https://phoenix-ob1-system.hobbs0011.workers.dev
   WORKER_NAME: phoenix-ob1-system
   NODE_VERSION: '20'
 
@@ -57,6 +57,6 @@ jobs:
     needs: deploy
     steps:
       - run: sleep 10
-      - run: curl -sf https://phoenix-ob1-system.hobbs-lab.workers.dev/health || exit 1
-      - run: curl -sf https://phoenix-ob1-system.hobbs-lab.workers.dev/evidence || exit 1
-      - run: curl -sf https://phoenix-ob1-system.hobbs-lab.workers.dev/ledgerverify || exit 1
+      - run: curl -sf https://phoenix-ob1-system.hobbs0011.workers.dev/health || exit 1
+      - run: curl -sf https://phoenix-ob1-system.hobbs0011.workers.dev/evidence || exit 1
+      - run: curl -sf https://phoenix-ob1-system.hobbs0011.workers.dev/ledgerverify || exit 1

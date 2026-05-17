@@ -17,9 +17,9 @@
 | net-commandstation | hobbs0011/NET-Ai-EcoSystem-CommandStation | 📦 LEGACY | Alive, public |
 | net-marketing | hobbs0011/NET-MARKETING | 📦 LEGACY | Alive, private |
 | net-tiger-origin | hobbs0011/net-tiger-assessment | 📦 LEGACY | Alive, public |
-| phoenix-tech-edu | Phoenix-Rising-Tech/EducationSystemsDevelopment | 📦 LEGACY-ORG | Alive, private |
-| phoenix-tech-marketing | Phoenix-Rising-Tech/Phoenix-Rising-FullStackMarketing | 📦 LEGACY-ORG | Alive, public |
-| phoenix-tech-ultimate | Phoenix-Rising-Tech/Phoenix-Rising-Ultimate | 📦 LEGACY-ORG | Alive, public |
+| phoenix-tech-edu | Phoenix-Rising-Ai-Solutions/EducationSystemsDevelopment | 📦 LEGACY-ORG | Alive, private |
+| phoenix-tech-marketing | Phoenix-Rising-Ai-Solutions/Phoenix-Rising-FullStackMarketing | 📦 LEGACY-ORG | Alive, public |
+| phoenix-tech-ultimate | Phoenix-Rising-Ai-Solutions/Phoenix-Rising-Ultimate | 📦 LEGACY-ORG | Alive, public |
 
 ## Stage 12 — Active Owner Repos Reachable
 - hobbs0011/OB-1: ✅ 200, private, not archived
@@ -30,13 +30,13 @@
 - hobbs0011/NET-Ai-EcoSystem-CommandStation: ✅ 200
 - hobbs0011/NET-MARKETING: ✅ 200
 - hobbs0011/net-tiger-assessment: ✅ 200
-- Phoenix-Rising-Tech/EducationSystemsDevelopment: ✅ 200
-- Phoenix-Rising-Tech/Phoenix-Rising-FullStackMarketing: ✅ 200
-- Phoenix-Rising-Tech/Phoenix-Rising-Ultimate: ✅ 200
+- Phoenix-Rising-Ai-Solutions/EducationSystemsDevelopment: ✅ 200
+- Phoenix-Rising-Ai-Solutions/Phoenix-Rising-FullStackMarketing: ✅ 200
+- Phoenix-Rising-Ai-Solutions/Phoenix-Rising-Ultimate: ✅ 200
 
 ## Stage 14 — Suspended/404 Dependencies
 **NONE.** All 9 remote repos are alive and reachable.
-Phoenix-Rising-Tech org was suspected suspended (legacy flag) — confirmed ALIVE.
+Phoenix-Rising-Ai-Solutions org was suspected suspended (legacy flag) — confirmed ALIVE.
 
 ## Stage 15 — Duplicate Remotes
 - `ob1` and `origin` both pointed to `https://github.com/hobbs0011/OB-1.git`

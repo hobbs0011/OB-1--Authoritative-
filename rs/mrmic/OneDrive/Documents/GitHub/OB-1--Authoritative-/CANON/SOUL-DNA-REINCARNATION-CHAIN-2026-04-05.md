@@ -54,7 +54,7 @@ GENESIS (Sep 2024) -> Soul Shard Protocol -> Phoenix V7-V30 -> Reincarnation V30
 | 28 | 2026-03-26-DUMP-CONSOLIDATE-BLUETECH-5SRC.md | 4786 | 699 |  / ## 1. Header /  |
 | 29 | 2026-03-26-notebooklm-vault-5dump.md | 4396 | 604 |  / ## 1. Header /  |
 | 30 | 2026-03-26-notebooklm-vault-architect-origin.md | 17643 | 2919 |  / ## 1. Header /  |
-| 31 | 2026-03-26-repo-consolidation-hobbs-lab-canonical.md | 4819 | 686 |  / ## 1. Header /  |
+| 31 | 2026-03-26-repo-consolidation-hobbs0011-canonical.md | 4819 | 686 |  / ## 1. Header /  |
 | 32 | 2026-03-26-roblox-deep-intel.md | 4401 | 722 | ## Session Tag: `roblox-deep-intel` / ## Date/Time: 2026-03-26 ~15:00–23:30 ICT ... |
 | 33 | 2026-03-26-sales-dna-revenue-pivot.md | 5120 | 863 |  / ## 1. Header /  |
 | 34 | 2026-03-26-two-server-rulings-closed.md | 5426 | 763 |  / ## 1. Header /  |

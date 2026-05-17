@@ -369,7 +369,7 @@ Open each flag URL from Section 1 → set to Enabled → Relaunch Chrome
 
 ### Step 3: Clone & Load Extension
 ```bash
-git clone https://github.com/hobbs-lab/Phoenix-Rising-Protocol-Ultimate.git
+git clone https://github.com/hobbs0011/Phoenix-Rising-Protocol-Ultimate.git
 cd Phoenix-Rising-Protocol-Ultimate/APPS/obi-chrome-extension
 ```
 - Open `chrome://extensions`
@@ -428,8 +428,8 @@ cd Phoenix-Rising-Protocol-Ultimate/APPS/obi-chrome-extension
 ### GitHub Repos (Ours)
 | Repo | URL | Access |
 |------|-----|--------|
-| Phoenix-Rising-Protocol-Ultimate | https://github.com/hobbs-lab/Phoenix-Rising-Protocol-Ultimate | ✅ Write |
-| Phoenix-Rise-Immortalize- | https://github.com/hobbs-lab/Phoenix-Rise-Immortalize- | ✅ Write |
+| Phoenix-Rising-Protocol-Ultimate | https://github.com/hobbs0011/Phoenix-Rising-Protocol-Ultimate | ✅ Write |
+| Phoenix-Rise-Immortalize- | https://github.com/hobbs0011/Phoenix-Rise-Immortalize- | ✅ Write |
 | NET-Ai-EcoSystem-CommandStation | https://github.com/hobbs0011/NET-Ai-EcoSystem-CommandStation | ❌ Read only |
 
 ### Design Palette (Gospel 444)

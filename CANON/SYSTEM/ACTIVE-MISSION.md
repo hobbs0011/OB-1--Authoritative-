@@ -11,7 +11,7 @@ Build OBI Chrome Extension with Magic Chat + Homework Photo Checker to TURNKEY s
 Overnight Mission — Magic Chat + Homework Checker Build
 
 ## Copilot PR
-PR #13: https://github.com/hobbs-lab/Phoenix-Rising-Protocol-Ultimate/pull/13
+PR #13: https://github.com/hobbs0011/Phoenix-Rising-Protocol-Ultimate/pull/13
 - Homework Photo Checker (camera capture + Gemini API)
 - Magic Chat Voice (Web Speech STT + TTS)
 - Classroom Management Tab (attendance + violations)

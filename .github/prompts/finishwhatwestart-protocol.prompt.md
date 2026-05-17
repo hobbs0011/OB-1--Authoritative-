@@ -14,7 +14,7 @@ Read these first:
 
 1. `CANON/SYSTEM/COLD-START-BOOT.md`
 2. `MASTER-SYNC.md`
-3. `CANON/SYSTEM/CONSOLIDATION-PLAN-PHOENIX-RISING-TECHNOLOGIES.md`
+3. `CANON/SYSTEM/CONSOLIDATION-PLAN-Phoenix-Rising-Ai-SolutionsNOLOGIES.md`
 4. Latest file in `CANON/REINCARNATION/`
 5. `CANON/SYSTEM/MCP-FRONTIER-AUDIT.md` when connectors, automation, agents, or social channels are involved.
 

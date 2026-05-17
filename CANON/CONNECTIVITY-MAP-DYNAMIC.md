@@ -5,7 +5,7 @@
 | Source | Status | Notes |
 |--------|--------|-------|
 | `hobbs0011` | ⚠️ PARTIAL | 1 repo - NET-Ai-EcoSystem-CommandStation (already cloned) |
-| `hobbs-lab` | ⚠️ PARTIAL | 3 repos - net-tiger-assessment (NEW), vscode-remote-release, expand-your-team-with-copilot |
+| `hobbs0011` | ⚠️ PARTIAL | 3 repos - net-tiger-assessment (NEW), vscode-remote-release, expand-your-team-with-copilot |
 | `naturalenglishtraining.com` | ❌ NOT FOUND | No public GitHub tied to this domain |
 | `mrmichaelhobbs123` | ❌ NOT FOUND | No public GitHub account |
 | `mrmichaelhobbs1234` | ❌ NOT FOUND | No public GitHub account |
@@ -16,8 +16,8 @@
 ## What I CLONED This Session
 
 1. `NET-Ai-EcoSystem-CommandStation` (hobbs0011)
-2. `Phoenix-Rise-Immortalize-` (hobbs-lab)
-3. `Phoenix-Rising-Protocol-Ultimate` (hobbs-lab)
+2. `Phoenix-Rise-Immortalize-` (hobbs0011)
+3. `Phoenix-Rising-Protocol-Ultimate` (hobbs0011)
 
 ---
 

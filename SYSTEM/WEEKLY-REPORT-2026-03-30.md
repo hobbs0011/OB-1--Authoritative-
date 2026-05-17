@@ -73,13 +73,13 @@ All 7 were cross-repo synthesized (Notion + Immortalize source + Complete Editio
 
 ### 3. GitHub Pulse + Mirror Drift
 
-**`hobbs-lab/Phoenix-Rising-Protocol-Ultimate`:**
+**`hobbs0011/Phoenix-Rising-Protocol-Ultimate`:**
 - Latest commit: `732ae4ac` (2026-03-30T00:18 UTC) — CH14 ENRICHED
 - 10 most recent commits: all VAULT ENRICHED Bible chapters + system files
 - CANON/ directory: 60+ files, multiple subdirectories
 - Mirror drift: LOW — overnight runs kept GitHub current
 
-**`hobbs-lab/Phoenix-Rise-Immortalize-`:**
+**`hobbs0011/Phoenix-Rise-Immortalize-`:**
 - Source material repo. No new commits expected (source goldmine, read-only reference).
 
 **`hobbs0011/NET-Ai-EcoSystem-CommandStation`:**

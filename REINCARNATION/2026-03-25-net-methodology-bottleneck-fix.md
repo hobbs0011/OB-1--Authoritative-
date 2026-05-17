@@ -21,7 +21,7 @@
 ## 2. Raw Quotes
 
 🟡 **On NET Teaching Methodology as foundation (directive before massive voice dump):**
-> "updated extensively on Notion and the ultimate repo on hobbs-lab"
+> "updated extensively on Notion and the ultimate repo on hobbs0011"
 
 *Michael then provided a ~3,000-word raw voice dictation covering the full NET teaching methodology: Three Mistakes, spaced repetition, comprehensible input, acquire vs learn, Mouse→Tiger, Anti-Shame, 10-5-5-3 structure, Jolly Phonics, Buddy System, business class value stack, 60 topics. Full content captured verbatim in NET Teaching Methodology — Canonical Reference (Notion) and `CANON/NET-TEACHING-METHODOLOGY.md` (GitHub).*
 

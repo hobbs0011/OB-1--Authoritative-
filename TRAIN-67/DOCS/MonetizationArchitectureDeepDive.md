@@ -4,7 +4,7 @@
 > **Run:** 47 | **Date:** 2026-03-27 03:00 ICT
 > **Active Mission:** 100% Roblox — MAKE MONEY is the only goal
 > **Sources:** MonetizationServer.lua, GamePassConfig.lua, DevProductsConfig.lua, GachaManager.lua, BattlePass.lua, FTUECompressionAnalysis.md, Gospel-444-Revenue-Bridge.md, RobloxLaunchIntelligence-DeepDive-GapClosure.md
-> **Cross-repo sources:** 8 files from `hobbs-lab/Phoenix-Rising-Protocol-Ultimate`
+> **Cross-repo sources:** 8 files from `hobbs0011/Phoenix-Rising-Protocol-Ultimate`
 
 ---
 

@@ -79,7 +79,7 @@
 ### GitHub
 - **Latest commit:** `29ffe84` (Action 16 — Group Intel Sheet)
 - **Open PRs:** 0
-- **Repo:** `hobbs-lab/Phoenix-Rising-Protocol-Ultimate`
+- **Repo:** `hobbs0011/Phoenix-Rising-Protocol-Ultimate`
 - **CANON/MARKETING/:** 28 files (grew from 2 → 28 overnight)
 
 ### Canon Status

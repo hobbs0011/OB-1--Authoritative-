@@ -12,19 +12,19 @@
   "related_chapters": ["GOSPEL-444", "CORE-PRINCIPLES", "NET-TEACHING", "STUDENT-ARCHETYPES"],
   "cross_repo_sources": [
     {
-      "repo": "hobbs-lab/Phoenix-Rising-Protocol-Ultimate",
+      "repo": "hobbs0011/Phoenix-Rising-Protocol-Ultimate",
       "file": "CANON/BLUETECH-NETWORKING-DINNER-TEAM-BUILDING-EXTRACTION.md",
       "sha": "f8975423",
       "usage": "Primary source — 16-transcript extraction"
     },
     {
-      "repo": "hobbs-lab/Phoenix-Rising-Protocol-Ultimate",
+      "repo": "hobbs0011/Phoenix-Rising-Protocol-Ultimate",
       "file": "CANON/REINCARNATION/2026-03-26-DUMP-CONSOLIDATE-BLUETECH-5SRC.md",
       "sha": "42f32dbc",
       "usage": "Session context — dump consolidation session metadata"
     },
     {
-      "repo": "hobbs-lab/Phoenix-Rising-Protocol-Ultimate",
+      "repo": "hobbs0011/Phoenix-Rising-Protocol-Ultimate",
       "file": "CANON/REINCARNATION/2026-03-26-bluetech-classroom-dump.md",
       "sha": "ab50913a",
       "usage": "Companion extraction — classroom dump session"

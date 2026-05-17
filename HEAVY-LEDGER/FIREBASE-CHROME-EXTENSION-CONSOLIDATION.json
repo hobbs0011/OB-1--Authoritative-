@@ -56,13 +56,13 @@
       },
       {
         "date": "2026-03-26",
-        "quote": "do a 5 stages pipeline looking into everything we have done on hobbs0011 mrmichaelhobbs1234-lang and hobbs-lab on our tool stack, especially regarding good chromes free tech stacks",
-        "decision": "hobbs-lab is THE canonical home. Chrome Extension scaffold exists but deployment deferred until Michael says go.",
+        "quote": "do a 5 stages pipeline looking into everything we have done on hobbs0011 mrmichaelhobbs1234-lang and hobbs0011 on our tool stack, especially regarding good chromes free tech stacks",
+        "decision": "hobbs0011 is THE canonical home. Chrome Extension scaffold exists but deployment deferred until Michael says go.",
         "signal": "RED"
       },
       {
         "date": "2026-03-26",
-        "quote": "transfer all to hobbs-lab possible",
+        "quote": "transfer all to hobbs0011 possible",
         "signal": "YELLOW"
       },
       {
@@ -229,7 +229,7 @@
       "CANON/REINCARNATION/2026-03-24-100-phoenixes-war-games.md",
       "CANON/REINCARNATION/2026-03-25-RISE-WEBSITE-BUILD.md",
       "CANON/REINCARNATION/2026-03-26-vault-expansion-blueprint-ingestion.md",
-      "CANON/REINCARNATION/2026-03-26-repo-consolidation-hobbs-lab-canonical.md",
+      "CANON/REINCARNATION/2026-03-26-repo-consolidation-hobbs0011-canonical.md",
       "CANON/RECON/CHROME-FREE-TECH-STACK-AUDIT-2026-03-26.md",
       "CANON/RECON/OPENCLAW-MARKET-RESEARCH-2026-03-26.md",
       "OPERATIONS/SESSION-RECORD-2026-03-22-23.md",

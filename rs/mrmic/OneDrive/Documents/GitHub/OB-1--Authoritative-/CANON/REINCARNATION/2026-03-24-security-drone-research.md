@@ -15,7 +15,7 @@
 > "Files are gone. Now let me check what services used those secrets so I can flag what needs manual rotation — then move to Block 3."
 
 ### On Block 3 (git sync + rebase)
-> "Remote points to hobbs0011/Phoenix-Rising-Ultimate. Needs updating to hobbs-lab/Phoenix-Rising-Protocol-Ultimate."
+> "Remote points to hobbs0011/Phoenix-Rising-Ultimate. Needs updating to hobbs0011/Phoenix-Rising-Protocol-Ultimate."
 >
 > "The 0732c05 local version is more complete for both files. Taking --theirs (our local replay) for both conflicts."
 >

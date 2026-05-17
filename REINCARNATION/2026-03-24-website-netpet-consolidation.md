@@ -48,7 +48,7 @@
 > "try to do what you need to do with what I gave you"
 
 **On repo targeting (repeated twice for emphasis):**
-> "use the hobbs-lab …ultimate repo"
+> "use the hobbs0011 …ultimate repo"
 
 ---
 
@@ -94,7 +94,7 @@
 ## 🧠 System Design Insights
 
 1. **GitHub MCP write permissions are session-dependent.** `push_files` and `create_or_update_file` can both 403 even when read works fine. Workaround: give Michael the file contents for local push.
-2. **NaturalEnglishTraining GitHub org is access-denied from MCP.** Token doesn't cover it. All work routes through `hobbs-lab` personal account.
+2. **NaturalEnglishTraining GitHub org is access-denied from MCP.** Token doesn't cover it. All work routes through `hobbs0011` personal account.
 3. **Cloudflare Workers deploy via GitHub Actions is the viable pipeline.** `wrangler deploy` triggered on push to `Website and NET-PET/` or `wrangler.toml`. Secrets stored as GitHub repo secrets.
 4. **API key inventory pattern works.** Comment dump → structured tables by provider → .env template → security notes. Repeatable for any future key audit.
 5. **Worker source code is UNKNOWN.** Not in any accessible repo. Likely on Michael's local machine at `C:\Users\mrmic\Desktop\OB-1\`. Recovery is a manual step.

@@ -7,9 +7,9 @@ compatibility_date = "2024-04-01"
 WORKER_VERSION = "v139-TRUTH-SEALED"
 DEPLOYED_AT = "2026-03-11T01:19:00Z"
 CHAOS_LEVEL = "OFF"
-# WRANGLER FIX: Updated from mrmichaelhobbs1234 → hobbs-lab
-CANONICAL_WORKER_URL = "phoenix-ob1-system.hobbs-lab.workers.dev"
-ALLOWED_ORIGINS = "https://phoenix-ob1-system.hobbs-lab.workers.dev"
+# WRANGLER FIX: Updated from mrmichaelhobbs1234 → hobbs0011
+CANONICAL_WORKER_URL = "phoenix-ob1-system.hobbs0011.workers.dev"
+ALLOWED_ORIGINS = "https://phoenix-ob1-system.hobbs0011.workers.dev"
 # BUNDLE_HASH injected by CI: wrangler deploy --var BUNDLE_HASH:$(sha256sum dist/index.js | awk '{print $1}')
 
 # SECRETS (set via: wrangler secret put <NAME>)

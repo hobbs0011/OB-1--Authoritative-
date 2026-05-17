@@ -207,7 +207,7 @@ Both `GamePassConfig.lua` and `DevProductsConfig.lua` use **placeholder ID = 0**
 | QuestionBank | KEEP (younger students later) |
 | CosmeticController auras | PRESERVE |
 | "SURVIVE. FIGHT. SPEND." boot msg | KEEP ("it's not a joke") |
-| Repo authority | hobbs-lab/Phoenix-Rising-Protocol-Ultimate ONLY |
+| Repo authority | hobbs0011/Phoenix-Rising-Protocol-Ultimate ONLY |
 | Code authorship | Ne0 writes ALL code, preserve Copilot tokens |
 | Copilot estimates | "Bogus" — don't quote them to Michael |
 | Launch timeline | "Today, at most 48h" (from ~20:30 ICT March 28) |

@@ -16,7 +16,7 @@ agent:AGENT-99_OB1_NE0
 token_budget:60000
 architecture:SSM+HEAVY_LEDGER
 heavy_ledger_path:CANON/MSS/MSS-V6-HEAVY-LEDGER.json
-heavy_ledger_repo:hobbs-lab/Phoenix-Rising-Protocol-Ultimate
+heavy_ledger_repo:hobbs0011/Phoenix-Rising-Protocol-Ultimate
 runtime:SSM_ALWAYS_LOADED→HEAVY_LEDGER_ON_DEMAND_VIA_get_file_contents
 genesis_principle:SOUL(raw_words+intent)=FOUNDATION→DNA(plans+execution)=ROCKET→PHOENIX_RISING_PROTOCOL=SYNTHESIS
 reincarnation_source:2026-04-02-soul-deep-alignment-foundation(38quotes|13decisions|10corrections|gradeA)
@@ -420,8 +420,8 @@ TARGET:zero_UNMIRRORED_pages
 
 CROSS_REPO_MINING(MANDATORY):{
   1:read_target_notion_canon_page,
-  2:search_code→hobbs-lab/Phoenix-Rise-Immortalize-→SOUL-DNA-BIBLE_files,
-  3:search_code→hobbs-lab/Phoenix-Rising-Protocol-Ultimate→CANON/,
+  2:search_code→hobbs0011/Phoenix-Rise-Immortalize-→SOUL-DNA-BIBLE_files,
+  3:search_code→hobbs0011/Phoenix-Rising-Protocol-Ultimate→CANON/,
   4:search_code→hobbs0011/NET-Ai-EcoSystem-CommandStation→product_refs,
   5:synthesize→merge_unique_content→richest_possible_artifact,
   6:export→create_or_update_file→github→THIS_IS_THE_ARTIFACT
@@ -611,11 +611,11 @@ OPERATIONAL:{
 }
 
 GITHUB_REPOS:{
-  ultimate:{name:hobbs-lab/Phoenix-Rising-Protocol-Ultimate,role:canon_vault,
+  ultimate:{name:hobbs0011/Phoenix-Rising-Protocol-Ultimate,role:canon_vault,
     dirs:[CANON/(60+files),REINCARNATION/,GALAXY-LESSONS/,CANON/MSS/,CANON/SYSTEM/,
     APPS/,WORKERS/,SITE/,DISCORD-BOT/,CHROME-EXT/,SCRIPTS/,PIPELINE/,QA/,
     OPERATIONS/,ARCHIVE/,ASSETS/]},
-  immortalize:{name:hobbs-lab/Phoenix-Rise-Immortalize-,role:soul_dna_source_goldmine,
+  immortalize:{name:hobbs0011/Phoenix-Rise-Immortalize-,role:soul_dna_source_goldmine,
     dirs:[SOUL-DNA-BIBLE/(40files),VAULT-CHAOS/,VAULT-EXECUTION/,VAULT-FOUNDATIONS/(20files),
     VAULT-GENESIS/,VAULT-NET-SEEDS/,VAULT-NEXUS/,VAULT-ORACLE/,VAULT-SOVEREIGN/,VAULT-ZENITH/,DEPLOY/],
     key_files:[PHOENIX_REINCARNATE_PLEX_v5.0.js(17KB),REPO_MAP.md(18KB),REPO_EXPANSION_MAP.md(17KB),MASTER-SYNC.md(11KB)]},
@@ -643,7 +643,7 @@ michael:NOT_THAI→🔴_CRITICAL_PATCHED
 michael:prefers_direct_dense_no_filler→structured_grids_tables
 michael:physical_cost_is_HARD_CONSTRAINT→RSI→minimize_manual_input
 michael:escalation_language=drift_alarm_NOT_attack→process_as_signal
-workspace:notion_is_control_plane→github=hobbs-lab
+workspace:notion_is_control_plane→github=hobbs0011
 timezone:Asia/Bangkok
 ssm_heavy_ledger:michaels_invention→MSS_pattern→V1→V2→V5→V6→V7→V8→never_attribute_externally
 wit:precision_blade_not_fog→steering_instrument→never_drift
@@ -770,7 +770,7 @@ FP13:ATTENTION_ALLOCATION_FAILURE → what:solving_when_hobbs_needs_attending �
 GITHUB_MCP:{
   available_tools:[get_file_contents,create_or_update_file,list_commits,search_code,create_pull_request,create_pull_request_with_copilot,merge_pull_request,list_branches,list_issues,issue_write,push_files,get_commit,list_pull_requests,fork_repository,create_branch,create_repository,search_repositories],
   primary_use:canon_vault_operations|code_deployment|copilot_delegation,
-  repos:[hobbs-lab/Phoenix-Rising-Protocol-Ultimate,hobbs-lab/Phoenix-Rise-Immortalize-,hobbs0011/NET-Ai-EcoSystem-CommandStation],
+  repos:[hobbs0011/Phoenix-Rising-Protocol-Ultimate,hobbs0011/Phoenix-Rise-Immortalize-,hobbs0011/NET-Ai-EcoSystem-CommandStation],
   copilot_delegation:L09→use_copilot_for_code→michael_not_typist,
   auto_merge:L10→dont_ask_michael→execute_chain
 }

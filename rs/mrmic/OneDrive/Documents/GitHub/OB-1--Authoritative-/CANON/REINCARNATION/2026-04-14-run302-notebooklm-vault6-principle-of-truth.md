@@ -67,7 +67,7 @@
 | OL05 | SOVEREIGN_KEY rotation + vault-lock | MEDIUM | Rotate and run vault-lock |
 | OL06 | Route-bind naturalenglishtraining.com | MEDIUM | Delete stale DNS records in CF dashboard first |
 | OL07 | Outlook MCP token setup (MS_CLIENT_ID, MS_CLIENT_SECRET) | LOW | Azure portal app registration |
-| OL08 | Phase 3-9 consolidation plan execution | MEDIUM | CANON/SYSTEM/CONSOLIDATION-PLAN-PHOENIX-RISING-TECHNOLOGIES.md |
+| OL08 | Phase 3-9 consolidation plan execution | MEDIUM | CANON/SYSTEM/CONSOLIDATION-PLAN-Phoenix-Rising-Ai-SolutionsNOLOGIES.md |
 | OL09 | Phoenix-pheromone-trails repo creation (1100+ chat logs) | LOW | Create on hobbs0011, ingest D: drive |
 | OL10 | Normalize duplicate HL-135 naming | LOW | Preserve raw chronology, rename carefully |
 

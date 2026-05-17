@@ -25,8 +25,8 @@ These case studies serve as calibration tools for AI agents in the system.
 ## Enrichment Pipeline
 
 Case studies are enriched via cross-repo mining:
-1. `hobbs-lab/Phoenix-Rise-Immortalize-` — SOUL-DNA-BIBLE original source material
-2. `hobbs-lab/Phoenix-Rising-Protocol-Ultimate` — CANON/ consolidated artifacts
+1. `hobbs0011/Phoenix-Rise-Immortalize-` — SOUL-DNA-BIBLE original source material
+2. `hobbs0011/Phoenix-Rising-Protocol-Ultimate` — CANON/ consolidated artifacts
 3. `hobbs0011/NET-Ai-EcoSystem-CommandStation` — HarvestedChats raw chat logs
 
 **Target:** Every case study cross-referenced with at least one SOUL-DNA-BIBLE chapter.

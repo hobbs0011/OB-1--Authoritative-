@@ -11,7 +11,7 @@ LAW: NO_SYSTEM_IS_COMPLETE_UNLESS_OPERATOR_CAN_EXECUTE_IT_FROM_ZERO
 ```
 
 > ARCHIVE NOTE: This runbook references the original mrmichaelhobbs1234 worker URLs.
-> For hobbs-lab deployment, update CANONICAL_URL to phoenix-ob1-system.hobbs-lab.workers.dev
+> For hobbs0011 deployment, update CANONICAL_URL to phoenix-ob1-system.hobbs0011.workers.dev
 
 Full runbook preserved. See source: github.com/mrmichaelhobbs1234-lang/phoenix-ob1/docs/OPERATOR_RUNBOOK.md
 

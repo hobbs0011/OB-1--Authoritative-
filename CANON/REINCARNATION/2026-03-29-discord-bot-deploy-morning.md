@@ -11,7 +11,7 @@
 
 ## 2. Raw Quotes
 
-- 🟡 "cool so my hobbs-lab is connected to discord, can you use that connection to push the bot?"
+- 🟡 "cool so my hobbs0011 is connected to discord, can you use that connection to push the bot?"
 - 🟡 "sure, ensure its as handsoff as possible, do a deep dive, study the internet, I have a discord server already"
 - 🔴 "alright, lets set it up, and for the mod thing, I don't need mods then right? its a bunch of highschool kids lol, rather not trust them"
 - 🟡 "when installed can you get it to demote all other mods?"
@@ -20,7 +20,7 @@
 - 🟡 "how long does this take — SSH, Node.js install, PM2 process manager. Not as hands-off."
 - 🟡 "when would I need to pay the $5? credit card will be available in a couple days for payments I need for whatever"
 - 🟡 "I dont care" (re: bot token posted in chat — dismisses security concern)
-- 🔴 "hey lets reincarnate this chat is getting huge. Github Hobbs-Lab ..ultimate repo is the only truth, but update notion too just in case it wants to get its act together (test to see if you can scan other chats yet)"
+- 🔴 "hey lets reincarnate this chat is getting huge. Github hobbs0011 ..ultimate repo is the only truth, but update notion too just in case it wants to get its act together (test to see if you can scan other chats yet)"
 
 ## 3. Decisions
 
@@ -73,7 +73,7 @@ None raised by Michael this session.
 
 | Artifact | Location |
 |---|---|
-| `DISCORD-BOT/Dockerfile` | GitHub `hobbs-lab/Phoenix-Rising-Protocol-Ultimate` (commit `aafc93c6`) |
+| `DISCORD-BOT/Dockerfile` | GitHub `hobbs0011/Phoenix-Rising-Protocol-Ultimate` (commit `aafc93c6`) |
 | `DISCORD-BOT/railway.json` | GitHub (same commit) |
 | `DISCORD-BOT/.dockerignore` | GitHub (same commit) |
 | `DISCORD-BOT/DEPLOY-GUIDE.md` | GitHub (same commit) |

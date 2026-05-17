@@ -1,7 +1,7 @@
 # 🔮 MAGIC CHAT — Consolidated Canon
 
 > **Consolidated:** 2026-03-30 by Agent-99 (OB1/Ne0)
-> **Cross-repo sources:** 98 files across hobbs-lab repos + 4 magic_chat + 4 MagicChat variants
+> **Cross-repo sources:** 98 files across hobbs0011 repos + 4 magic_chat + 4 MagicChat variants
 > **Authority:** AGENT-100 (Michael Hobbs — The Sovereign Architect)
 > **Artifact class:** 🏦 VAULT
 > **Status:** CANON — The Ledger is Law
@@ -339,7 +339,7 @@ The Magic Chat UI follows Gospel 444 visual law:
 
 | Search Query | Hits | Key Repos |
 |-------------|------|-----------|
-| "magic chat" org:hobbs-lab | 98 | Immortalize + Ultimate |
+| "magic chat" org:hobbs0011 | 98 | Immortalize + Ultimate |
 | "magic_chat" (underscore) | 4 | BENCHMARK_LIBRARY.json, SOUL-DNA-DEEP-DIVE.json, GOSPEL-444 |
 | "MagicChat" (camelCase) | 4 | VAULT-D-PRELAUNCH, VAULT-MM-MASTERMIND |
 | "magic chat" user:hobbs0011 | 0 | CommandStation doesn't contain exact phrase |
@@ -364,7 +364,7 @@ The Magic Chat UI follows Gospel 444 visual law:
 | 2025-02-25 | 25-document Soul DNA harvest + 11-Stage Synchronization Audit |
 | 2026-02-27 | MASTER_CONTRACT.md sealed — governance anchor for phoenix-ob1 |
 | 2026-03-10 | phoenix-ob1 rebuilt via 5-stage pre-nuke extraction |
-| 2026-03-24 | phoenix-ob1 migrated to hobbs-lab/Phoenix-Rising-Protocol-Ultimate/APPS/ |
+| 2026-03-24 | phoenix-ob1 migrated to hobbs0011/Phoenix-Rising-Protocol-Ultimate/APPS/ |
 | 2026-03-30 | This consolidated canon created |
 
 ---
@@ -379,6 +379,6 @@ The Magic Chat is not just a chat interface — it is the **front line** of the 
 
 ---
 
-*Consolidated from 98+ source files across hobbs-lab/Phoenix-Rise-Immortalize- and hobbs-lab/Phoenix-Rising-Protocol-Ultimate*
+*Consolidated from 98+ source files across hobbs0011/Phoenix-Rise-Immortalize- and hobbs0011/Phoenix-Rising-Protocol-Ultimate*
 *Pushed to GitHub: CANON/MAGIC-CHAT-CONSOLIDATED.md*
 *Dual-published to Notion*

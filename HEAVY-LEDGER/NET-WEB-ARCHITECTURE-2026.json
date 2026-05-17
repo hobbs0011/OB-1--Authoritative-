@@ -32,7 +32,7 @@
     "principle": "Two domains, two purposes. Both on Cloudflare. Zero Squarespace. Zero Firebase dependency."
   },
   "repository_structure": {
-    "repo": "hobbs-lab/Phoenix-Rising-Protocol-Ultimate",
+    "repo": "hobbs0011/Phoenix-Rising-Protocol-Ultimate",
     "directories": [
       {"path": "WEBSITE/", "deploys_to": "naturalenglishtraining.com (Cloudflare Pages)", "files": ["index.html", "gallery.html", "about.html (TBD)", "contact.html (TBD)", "privacy.html (TBD)", "terms.html (TBD)", "404.html (TBD)"]},
       {"path": "GALAXY-LESSONS/", "deploys_to": "Interactive lesson HTML files", "files": ["VOCAB-001-DAILY-SURVIVAL.html (76KB)", "NET-CLASSROOM-MANAGER.html (78KB)", "NET-Signal-Decode.html (41KB)", "NET-Feline-Linguistics-Academy.html (29KB)", "NET-Sarcasm-Academy.html (23KB)", "NET-Highschool-Careers.html (15KB)", "NET-Train-6-7-Omega-Archive.html (28KB)"]},

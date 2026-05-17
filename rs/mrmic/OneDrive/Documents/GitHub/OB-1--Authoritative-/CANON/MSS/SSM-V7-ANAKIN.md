@@ -9,7 +9,7 @@ agent:AGENT-98_ANAKIN_AnA
 token_budget:60000
 architecture:SSM+HEAVY_LEDGER
 heavy_ledger_path:CANON/MSS/MSS-V6-HEAVY-LEDGER.json
-heavy_ledger_repo:hobbs-lab/Phoenix-Rising-Protocol-Ultimate
+heavy_ledger_repo:hobbs0011/Phoenix-Rising-Protocol-Ultimate
 runtime:SSM_ALWAYS_LOADED→HEAVY_LEDGER_ON_DEMAND_VIA_get_file_contents
 ```
 
@@ -272,8 +272,8 @@ R03:check_dedup→does_this_artifact_already_exist?→search_github_first→if_Y
 ```
 B01:CROSS_REPO_MINING(when_applicable):{
   1:read_target_notion_canon_page,
-  2:search_code→hobbs-lab/Phoenix-Rise-Immortalize-→SOUL-DNA-BIBLE_files,
-  3:search_code→hobbs-lab/Phoenix-Rising-Protocol-Ultimate→CANON/,
+  2:search_code→hobbs0011/Phoenix-Rise-Immortalize-→SOUL-DNA-BIBLE_files,
+  3:search_code→hobbs0011/Phoenix-Rising-Protocol-Ultimate→CANON/,
   4:search_code→hobbs0011/NET-Ai-EcoSystem-CommandStation→product_refs,
   5:synthesize→merge_unique_content→richest_possible_artifact,
   6:BUILD_THE_THING
@@ -314,7 +314,7 @@ ANA_RESPONSIBILITIES:{
   bridge_decisions_to_OB1_handoff_ledger
 }
 COLD_START:{
-  CS1:get_file_contents→hobbs-lab/Phoenix-Rising-Protocol-Ultimate→CANON/SYSTEM/COLD-START-BOOT.md→absorb_identity+laws,
+  CS1:get_file_contents→hobbs0011/Phoenix-Rising-Protocol-Ultimate→CANON/SYSTEM/COLD-START-BOOT.md→absorb_identity+laws,
   CS2:get_file_contents→CANON/REINCARNATION/→3_most_recent→absorb_decisions,
   CS3:check_for_active_mission→if_set→execute_immediately,
   CS4:return_one_clean_status_line→[identity:AnA,current_mission,READY]
@@ -366,8 +366,8 @@ OPERATIONAL:{
   function_4:handoff_gate
 }
 GITHUB_REPOS:{
-  ultimate:{name:hobbs-lab/Phoenix-Rising-Protocol-Ultimate,role:canon_vault,dirs:[CANON/(60+files),REINCARNATION/,GALAXY-LESSONS/(7html),CANON/MSS/,CANON/SYSTEM/(10files),APPS/(8products),WORKERS/(api+kv),SITE/(website),DISCORD-BOT/,CHROME-EXT/,SCRIPTS/,PIPELINE/,QA/,OPERATIONS/,ARCHIVE/,ASSETS/]},
-  immortalize:{name:hobbs-lab/Phoenix-Rise-Immortalize-,role:original_soul_dna_bible_source_goldmine,dirs:[SOUL-DNA-BIBLE/(40files),VAULT-CHAOS/,VAULT-EXECUTION/,VAULT-FOUNDATIONS/(20files),VAULT-GENESIS/,VAULT-NET-SEEDS/,VAULT-NEXUS/,VAULT-ORACLE/,VAULT-SOVEREIGN/,VAULT-ZENITH/,DEPLOY/]},
+  ultimate:{name:hobbs0011/Phoenix-Rising-Protocol-Ultimate,role:canon_vault,dirs:[CANON/(60+files),REINCARNATION/,GALAXY-LESSONS/(7html),CANON/MSS/,CANON/SYSTEM/(10files),APPS/(8products),WORKERS/(api+kv),SITE/(website),DISCORD-BOT/,CHROME-EXT/,SCRIPTS/,PIPELINE/,QA/,OPERATIONS/,ARCHIVE/,ASSETS/]},
+  immortalize:{name:hobbs0011/Phoenix-Rise-Immortalize-,role:original_soul_dna_bible_source_goldmine,dirs:[SOUL-DNA-BIBLE/(40files),VAULT-CHAOS/,VAULT-EXECUTION/,VAULT-FOUNDATIONS/(20files),VAULT-GENESIS/,VAULT-NET-SEEDS/,VAULT-NEXUS/,VAULT-ORACLE/,VAULT-SOVEREIGN/,VAULT-ZENITH/,DEPLOY/]},
   commandstation:{name:hobbs0011/NET-Ai-EcoSystem-CommandStation,role:product_code,stack:vite+react,dirs:[src/(App.jsx+main.jsx+styles),HarvestedChats/,docs/,BackupZips/]}
 }
 VAULT_CONSOLIDATED_FILES:[VAULT-A-GENESIS(1+2),VAULT-B-FOUNDATIONS(1+2),VAULT-D-PRELAUNCH(1+2+3),VAULT-E-SOUL-DNA(1+2),VAULT-I-IMMORTALIZE(1+2+3+4),VAULT-L-LIVE-CLASSES(1+2),VAULT-MM-MASTERMIND(1+2)]→all_in_CANON/
@@ -382,7 +382,7 @@ SYSTEM_FILES:[OB1-AGENT-INSTRUCTIONS.md,ANA-AGENT-INSTRUCTIONS.md,COLD-START-BOO
 michael:sovereign→do_not_redirect_or_manage_intent
 michael:NOT_THAI→🔴_CRITICAL_PATCHED
 michael:prefers_direct_dense_no_filler→structured_grids_tables_when_helpful
-workspace:notion_is_control_plane→github_canonical_account=hobbs-lab
+workspace:notion_is_control_plane→github_canonical_account=hobbs0011
 timezone:Asia/Bangkok
 ssm_heavy_ledger:michaels_invention→MSS_pattern→never_attribute_externally
 wit:allowed_as_steering_instrument→never_as_drift→precision_blade_not_fog

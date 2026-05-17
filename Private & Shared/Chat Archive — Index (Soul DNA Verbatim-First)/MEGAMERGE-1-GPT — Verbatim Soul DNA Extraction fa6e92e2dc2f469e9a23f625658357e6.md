@@ -123,7 +123,7 @@
 | Mar 20, 4:00 AM | MASTERMIND7 Bible Store | Created SOUL DNA BIBLE + 18 chapter subpages (CH00–CH17) |
 | Mar 20, 7:00 PM | Complete Edition Store | 14 CE subpages (CE-01 through CE-14), Skeleton Star Map, Source File Registry |
 | Mar 20, 7:30 PM | Bible Consolidation Complete | 29 chapters + 3 appendices SEALED. 5,295 lines, 237.8 KB, 140+ sources |
-| Mar 20, 7:45 PM | GitHub Push Complete | 36 files pushed to hobbs-lab/Phoenix-Rise-Immortalize-/SOUL-DNA-BIBLE/ |
+| Mar 20, 7:45 PM | GitHub Push Complete | 36 files pushed to hobbs0011/Phoenix-Rise-Immortalize-/SOUL-DNA-BIBLE/ |
 | Mar 20, 10:00 PM | Dump 18 Merge | Layer 4 SEALED. 67 A1 entries, 17 A3 specs. Stage 2 COMPLETE |
 | Mar 20, 10:45 PM | Dump 1+2 Processed | 20 content blocks mapped. Four Core Principles codified. CH19+CH20 proposed |
 | Mar 20, 11:00 PM | Dump 3+4 Processed | Transend Speedy + 192 sources. 14 backlog tasks. Reality Schism resolved |
@@ -161,7 +161,7 @@
 ## 5) BLOCKERS (Captured)
 
 - 🔥 net-pet-ai production code NOT in any GitHub repo
-- 🔥 GitHub connection linked to NaturalEnglishTraining org, NOT hobbs-lab
+- 🔥 GitHub connection linked to NaturalEnglishTraining org, NOT hobbs0011
 - 🔥 SOVEREIGN_KEY exposed in Perplexity logs — needs rotation
 - ⚠️ phoenix-ob1 is PUBLIC with wrangler.toml
 - ⚠️ Vault [C] ENGINE + Vault [E] SOUL content not yet sourced

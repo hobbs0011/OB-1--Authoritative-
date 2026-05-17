@@ -27,7 +27,7 @@
     {
       "id": "Q3",
       "priority": "YELLOW",
-      "text": "cool, find 10 improvements then push them automatically make sure this is logged here on notion and mirrored under the ultimate repo on hobbs-lab",
+      "text": "cool, find 10 improvements then push them automatically make sure this is logged here on notion and mirrored under the ultimate repo on hobbs0011",
       "topic": "dual_publish_directive",
       "canon_impact": ["dual_publish", "build_log"]
     },
@@ -141,7 +141,7 @@
     "L11_GITHUB_IS_TRUTH",
     "L27_DUAL_PUBLISH_MANDATORY",
     "SSM_pulse_engine",
-    "repo_consolidation_to_hobbs-lab"
+    "repo_consolidation_to_hobbs0011"
   ],
   "canon_guardrails": {
     "no_fabrication": "PASS",

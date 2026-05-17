@@ -220,7 +220,7 @@ If using Rojo CI/CD pipeline:
 
 ### Option C: Selective File Rollback (GitHub)
 If only one module is broken:
-1. Go to `hobbs-lab/Phoenix-Rising-Protocol-Ultimate` on GitHub
+1. Go to `hobbs0011/Phoenix-Rising-Protocol-Ultimate` on GitHub
 2. Navigate to the broken file in `CANON/TRAIN-67/CODE/`
 3. Click "History" → find the last working version
 4. Copy the file content → paste into Studio → Re-publish

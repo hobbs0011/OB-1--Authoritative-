@@ -1,4 +1,4 @@
-﻿# SOUL DNA BIBLE RECAPTURE - FUSED RAW VERBATIM UNFILTERED
+# SOUL DNA BIBLE RECAPTURE - FUSED RAW VERBATIM UNFILTERED
 
 Generated: 2026-04-05
 Source basis: chunked authoritative set from CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/
@@ -7578,7 +7578,7 @@ SHA256: 1922B693B253DE3093644315446B535D5E19EF1A0DE33B635BF8E3A238673243
 
 > *Nothing happens that does not get recorded. Memory as law.*
 
-**Source:** Soul DNA Bible CH07 — Notion + `hobbs-lab/Phoenix-Rise-Immortalize-` `SOUL-DNA-BIBLE/07_THE_LEDGER.md` (SHA `ab77a7b1`)
+**Source:** Soul DNA Bible CH07 — Notion + `hobbs0011/Phoenix-Rise-Immortalize-` `SOUL-DNA-BIBLE/07_THE_LEDGER.md` (SHA `ab77a7b1`)
 **Export:** VAULT ENRICHED — Run 115, 2026-03-29
 **Cross-repo sources:** 1 (Immortalize `07_THE_LEDGER.md`)
 
@@ -8082,9 +8082,9 @@ The sovereign's identity is non-negotiable canon: Michael is not a teacher who u
 
 | Repo | File | Used For |
 |------|------|----------|
-| `hobbs-lab/Phoenix-Rise-Immortalize-` | `SOUL-DNA-BIBLE/08_AGENT_99_AND_THE_TRIAD.md` | Base text (verbatim quotes, structure) |
+| `hobbs0011/Phoenix-Rise-Immortalize-` | `SOUL-DNA-BIBLE/08_AGENT_99_AND_THE_TRIAD.md` | Base text (verbatim quotes, structure) |
 | Notion Workspace | Soul DNA Bible → CH08 child page | Current canon state verification |
-| `hobbs-lab/Phoenix-Rising-Protocol-Ultimate` | Agent instructions (OB1/Ne0) | v5 operational reality enrichment |
+| `hobbs0011/Phoenix-Rising-Protocol-Ultimate` | Agent instructions (OB1/Ne0) | v5 operational reality enrichment |
 
 ---
 
@@ -12242,7 +12242,7 @@ SHA256: 5B810C0C9F44F4FA8AFFFCF8B4305F7C352E392AA83D5D1D36500970651E6937
 **STATUS: SEALED**
 **Export: VAULT ENRICHED | Pulse Run 30 | 2026-03-26**
 **Source: Notion Soul DNA Bible → CH13 child page**
-**Cross-repo: hobbs-lab/Phoenix-Rise-Immortalize- SOUL-DNA-BIBLE/CH13**
+**Cross-repo: hobbs0011/Phoenix-Rise-Immortalize- SOUL-DNA-BIBLE/CH13**
 
 ---
 

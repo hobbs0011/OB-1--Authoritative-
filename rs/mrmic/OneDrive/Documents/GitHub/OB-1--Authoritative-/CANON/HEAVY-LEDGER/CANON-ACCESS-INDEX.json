@@ -84,8 +84,8 @@
       "mirrored": ["SKELETON-STAR-MAP-PRIME-LAWS-100-LAYER-FOUNDATION.md", "A5-RAW-SOUL-DNA-DICTATION-GEMINI-SESSIONS.md", "SOUL-DNA-BIBLE-A4-RAW-CLASSROOM-MAI-TRAM.md", "DRONE-14-CLOUDFLARE-ECOSYSTEM-MAP.md", "BLUETECH-NETWORKING-DINNER-TEAM-BUILDING-EXTRACTION.md", "NET-EPIC-LESSON-BLUEPRINT-V3.md"]
     },
     "github_repos": [
-      {"name": "hobbs-lab/Phoenix-Rising-Protocol-Ultimate", "role": "Active canon vault", "status": "PRIMARY"},
-      {"name": "hobbs-lab/Phoenix-Rise-Immortalize-", "role": "Original Soul DNA Bible source (40 files, 8 VAULT dirs)", "status": "SOURCE"},
+      {"name": "hobbs0011/Phoenix-Rising-Protocol-Ultimate", "role": "Active canon vault", "status": "PRIMARY"},
+      {"name": "hobbs0011/Phoenix-Rise-Immortalize-", "role": "Original Soul DNA Bible source (40 files, 8 VAULT dirs)", "status": "SOURCE"},
       {"name": "hobbs0011/NET-Ai-EcoSystem-CommandStation", "role": "Product code, HarvestedChats/, docs/", "status": "LEGACY"}
     ],
     "special_directories": [
@@ -110,13 +110,13 @@
   },
   "rebuild_protocol": {
     "steps": [
-      "1. Clone hobbs-lab/Phoenix-Rising-Protocol-Ultimate",
+      "1. Clone hobbs0011/Phoenix-Rising-Protocol-Ultimate",
       "2. All canon content is in CANON/ as clean markdown",
       "3. Reincarnation history is in CANON/REINCARNATION/",
       "4. System state snapshots are in CANON/MSS/",
       "5. System bootstrap docs are in CANON/SYSTEM/",
       "6. Game/lesson code is in GALAXY-LESSONS/ and CANON/TRAIN-67/CODE/",
-      "7. Cross-reference with hobbs-lab/Phoenix-Rise-Immortalize- for original source material",
+      "7. Cross-reference with hobbs0011/Phoenix-Rise-Immortalize- for original source material",
       "8. Use CANON-ACCESS-INDEX as master routing table"
     ],
     "guarantee": "The vault survives platform death."

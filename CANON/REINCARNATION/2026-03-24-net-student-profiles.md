@@ -8,7 +8,7 @@
 ## Raw Quotes (Verbatim, Michael's Words)
 
 ### On dual-publish and scope:
-> "make a dual update to notion with this that mirrors the repo on Hobbs-Lab that ends with 'ultimate'"
+> "make a dual update to notion with this that mirrors the repo on hobbs0011 that ends with 'ultimate'"
 >
 > "make a SOUL DNA BIBLE update as this lesson was rich with SOUL DNA"
 >

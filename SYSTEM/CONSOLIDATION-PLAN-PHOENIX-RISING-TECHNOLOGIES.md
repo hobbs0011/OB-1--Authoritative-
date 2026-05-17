@@ -1,8 +1,8 @@
-# Phoenix-Rising-Technologies — Consolidation Plan
+# Phoenix-Rising-Ai-Solutionsnologies — Consolidation Plan
 
 ## Commissioned: 2026-04-09 | Run 266 | Status: PHASE 1 COMPLETE
 
-> This document is the canonical preservation of the 9-phase, 32-step consolidation plan designed during the architecture-discovery session (Run 266). The plan transforms the OB-1 monorepo into the clean, scalable Phoenix-Rising-Technologies platform.
+> This document is the canonical preservation of the 9-phase, 32-step consolidation plan designed during the architecture-discovery session (Run 266). The plan transforms the OB-1 monorepo into the clean, scalable Phoenix-Rising-Ai-Solutionsnologies platform.
 >
 > **CRITICAL:** Read this file at the start of any consolidation session. Execute phases in order. Do NOT skip or merge phases.
 
@@ -21,13 +21,13 @@ The current repo (`hobbs0011/Phoenix-Rising-Ultimate`) contains years of accumul
 - Stale worktrees
 - No .gitignore coverage for media/docs/archives
 
-The goal: **Phoenix-Rising-Technologies** — a clean, wing-organized, Cloudflare-native monorepo that can scale for years.
+The goal: **Phoenix-Rising-Ai-Solutionsnologies** — a clean, wing-organized, Cloudflare-native monorepo that can scale for years.
 
 ---
 
 ## Architecture Decisions (Non-Negotiable)
 
-1. **Repo name:** `Phoenix-Rising-Technologies` (GitHub rename pending)
+1. **Repo name:** `Phoenix-Rising-Ai-Solutionsnologies` (GitHub rename pending)
 2. **Wing taxonomy:** Education, Gaming, Marketing, Development — flat APPS/ with `wing:X` tags, NO nested dirs
 3. **Binary assets:** Cloudflare R2 + `ASSETS/manifest.json` — never in git
 4. **Chat logs:** Separate repo `hobbs0011/phoenix-pheromone-trails` — never in main repo
@@ -402,13 +402,13 @@ git branch -r | Select-String -NotMatch "main|HEAD" | ForEach-Object {
 
 ### Step 8.2: Rename GitHub repo (do via GitHub web UI)
 
-- hobbs0011/Phoenix-Rising-Ultimate → hobbs0011/Phoenix-Rising-Technologies
+- hobbs0011/Phoenix-Rising-Ultimate → hobbs0011/Phoenix-Rising-Ai-Solutionsnologies
 - ⚠️ GitHub auto-redirects old URL, but update remote URL in git config
 
 ### Step 8.3: Update remote URL after rename
 
 ```powershell
-git remote set-url origin https://github.com/hobbs0011/Phoenix-Rising-Technologies.git
+git remote set-url origin https://github.com/hobbs0011/Phoenix-Rising-Ai-Solutionsnologies.git
 ```
 
 ### Step 8.4: Archive OB-1 repo (GitHub web UI)
@@ -429,7 +429,7 @@ git gc --aggressive --prune=now
 
 ```powershell
 git add -A
-git commit -m "hygiene: stale branches pruned, repo renamed to Phoenix-Rising-Technologies [Phase 8]"
+git commit -m "hygiene: stale branches pruned, repo renamed to Phoenix-Rising-Ai-Solutionsnologies [Phase 8]"
 ```
 
 ---
@@ -460,7 +460,7 @@ git push ob1 main
 
 ### Step 9.6: Verify on GitHub
 
-- Check hobbs0011/Phoenix-Rising-Technologies is live
+- Check hobbs0011/Phoenix-Rising-Ai-Solutionsnologies is live
 - Check Actions run (CI/CD)
 - Check README renders correctly
 

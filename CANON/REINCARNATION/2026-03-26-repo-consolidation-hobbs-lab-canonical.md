@@ -1,10 +1,10 @@
-# 2026-03-26 — Repo Consolidation & hobbs-lab Canonical Home
+# 2026-03-26 — Repo Consolidation & hobbs0011 Canonical Home
 
 ## 1. Header
 
 | Field | Value |
 |-------|-------|
-| Session Tag | `repo-consolidation-hobbs-lab-canonical` |
+| Session Tag | `repo-consolidation-hobbs0011-canonical` |
 | Date/Time | 2026-03-26 ~14:30–17:07 ICT |
 | Extractor | OB1 (Agent-99) |
 | Signal Density | 🟡 MEDIUM — focused infrastructure session, 5 decisions, 0 corrections |
@@ -13,13 +13,13 @@
 
 ## 2. Raw Quotes
 
-🟡 *"do a 5 stages pipeline looking into everything we have done on hobbs00111 mrmichaelhobbs1234-lang and hobbs-lab on our tool stack, especially regarding good chromes free tech stacks"*
+🟡 *"do a 5 stages pipeline looking into everything we have done on hobbs00111 mrmichaelhobbs1234-lang and hobbs0011 on our tool stack, especially regarding good chromes free tech stacks"*
 
-🔴 *"transfer all to hobbs-lab possible"*
+🔴 *"transfer all to hobbs0011 possible"*
 
 🔴 *"hold off on scaffolding, enter dump mode after transfer"*
 
-🔴 *"Option C- find All that is not on hobbs-Lab and push it there, make a 10 stage pipeline to map it out"*
+🔴 *"Option C- find All that is not on hobbs0011 and push it there, make a 10 stage pipeline to map it out"*
 
 🔴 *"FIX wrangler bottlenecks, handsoff"*
 
@@ -29,11 +29,11 @@
 
 | # | Decision | Impact | Canon Pages Affected |
 |---|----------|--------|---------------------|
-| 1 | **hobbs-lab is THE canonical repo home** — all content from hobbs0011 and mrmichaelhobbs1234-lang consolidates there | Structural — single source of truth for all code | Instructions (repo refs), Navigator Index, Canon Access Index |
+| 1 | **hobbs0011 is THE canonical repo home** — all content from hobbs0011 and mrmichaelhobbs1234-lang consolidates there | Structural — single source of truth for all code | Instructions (repo refs), Navigator Index, Canon Access Index |
 | 2 | **Hold off on Chrome Extension scaffolding** | Deferred — no scaffold until Michael says go | Tool Stack, Backlog |
 | 3 | **Dump mode over scaffolding** when transferring | Operational style — raw transfer first, structure later | Working style |
-| 4 | **Option C: comprehensive mirror** — find ALL not on hobbs-lab, push it | Execution — 37 files pushed, 70+ documented for manual | ARCHIVE/ dirs on GitHub |
-| 5 | **Fix wrangler bottlenecks** — all old mrmichaelhobbs1234 refs → hobbs-lab | Infrastructure — 4/5 wrangler refs patched | phoenix-ob1 wrangler.toml, SOUL_DNA_SEED.json, ledger-mcp.json |
+| 4 | **Option C: comprehensive mirror** — find ALL not on hobbs0011, push it | Execution — 37 files pushed, 70+ documented for manual | ARCHIVE/ dirs on GitHub |
+| 5 | **Fix wrangler bottlenecks** — all old mrmichaelhobbs1234 refs → hobbs0011 | Infrastructure — 4/5 wrangler refs patched | phoenix-ob1 wrangler.toml, SOUL_DNA_SEED.json, ledger-mcp.json |
 
 ---
 
@@ -45,7 +45,7 @@ None this session.
 
 ## 5. New Principles
 
-1. 🔴 **"transfer all to hobbs-lab possible"** — hobbs-lab is the single canonical home. No more split repos. Everything consolidates.
+1. 🔴 **"transfer all to hobbs0011 possible"** — hobbs0011 is the single canonical home. No more split repos. Everything consolidates.
 2. 🟡 **"hold off on scaffolding, enter dump mode"** — when consolidating, raw dump first. Structure comes after the material is safe.
 
 ---
@@ -78,7 +78,7 @@ None raised this session.
 
 ## 9. System Design Insights
 
-- **ARCHIVE/ pattern works** — clean directory structure on hobbs-lab for mirrored repos
+- **ARCHIVE/ pattern works** — clean directory structure on hobbs0011 for mirrored repos
 - **Transfer manifests** solve the API size limit problem — document what can't be pushed, let Michael handle via CLI
 - **Duplicate SHA detection** across HarvestedChats reveals 5 exact duplicate file pairs — dedup opportunity
 - **API rendering artifacts** (HTML entities, compressed URL mangling) are a known limitation for large JS files with template literals
@@ -91,9 +91,9 @@ None raised this session.
 |----------|----------|
 | Chrome Free Tech Stack Audit | `CANON/RECON/CHROME-FREE-TECH-STACK-AUDIT-2026-03-26.md` |
 | Tool Stack Arsenal | `CANON/TOOL-STACK-ARSENAL-2026.md` |
-| ARCHIVE/phoenix-drift-casestudy/ (7 files) | `hobbs-lab/Phoenix-Rising-Protocol-Ultimate` |
-| ARCHIVE/phoenix-ob1/ (23 files + manifest) | `hobbs-lab/Phoenix-Rising-Protocol-Ultimate` |
-| ARCHIVE/NET-CommandStation/ (7 files + manifest) | `hobbs-lab/Phoenix-Rising-Protocol-Ultimate` |
+| ARCHIVE/phoenix-drift-casestudy/ (7 files) | `hobbs0011/Phoenix-Rising-Protocol-Ultimate` |
+| ARCHIVE/phoenix-ob1/ (23 files + manifest) | `hobbs0011/Phoenix-Rising-Protocol-Ultimate` |
+| ARCHIVE/NET-CommandStation/ (7 files + manifest) | `hobbs0011/Phoenix-Rising-Protocol-Ultimate` |
 | 10-Stage Consolidation Pipeline | Notion: under Phoenix HQ |
 
 ---
@@ -107,7 +107,7 @@ None raised this session.
 | backlog_open | 127 ⚠️ DRIFT +17 |
 | build_log_total | 93 |
 | latest_commits | `b106f0c1` (NET-CommandStation), `c1d0c1e9` (manifests) |
-| total_session_commits | 6 (on hobbs-lab) |
+| total_session_commits | 6 (on hobbs0011) |
 
 ---
 

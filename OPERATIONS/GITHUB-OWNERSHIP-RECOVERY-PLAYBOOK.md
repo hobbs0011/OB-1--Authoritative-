@@ -16,7 +16,7 @@ Legacy owners in `.github/workflows/copilot-swarm.yml`:
 
 | Owner | Target | Gate |
 |---|---|---|
-| `hobbs-lab` | `Phoenix-Rising-Protocol-Ultimate` | `enable_legacy_targets=true` input required |
+| `hobbs0011` | `Phoenix-Rising-Protocol-Ultimate` | `enable_legacy_targets=true` input required |
 | `mrmichaelhobbs1234-lang` | `phoenix-drift-casestudy` | `enable_legacy_targets=true` input required |
 | `hobbs0011` | `NET-Ai-EcoSystem-CommandStation` | Always active (correct) |
 
@@ -25,7 +25,7 @@ No other workflows reference legacy owners.
 
 ## Stage 83 — Suspended Account Fallback
 
-- `hobbs-lab`: SUPERSEDED (labelled in MASTER-SYNC). Not depended on by any critical CI.
+- `hobbs0011`: SUPERSEDED (labelled in MASTER-SYNC). Not depended on by any critical CI.
 - `mrmichaelhobbs1234-lang`: Legacy/archival. `PAT_LANG` secret must be live to use this prong.
 - `mrmichaelhobbs1234` (operator email): Historical account login context only, not used in CI.
 - **Fallback is automatic:** if suspended accounts are unreachable, all active production deploys continue via `hobbs0011` — no manual intervention required.
@@ -35,7 +35,7 @@ No other workflows reference legacy owners.
 | Dependency | Status |
 |---|---|
 | `hobbs0011/OB-1` | ✅ Canonical — no pending transfers |
-| `hobbs-lab/Phoenix-Rising-Protocol-Ultimate` | Superseded — NOT a transfer target |
+| `hobbs0011/Phoenix-Rising-Protocol-Ultimate` | Superseded — NOT a transfer target |
 | `hobbs0011/NET-Ai-EcoSystem-CommandStation` | Active secondary (CommandStation) |
 | CF Pages `naturalenglishtraining` | Lives in Cloudflare account 3c7b1766 (no transfer needed) |
 

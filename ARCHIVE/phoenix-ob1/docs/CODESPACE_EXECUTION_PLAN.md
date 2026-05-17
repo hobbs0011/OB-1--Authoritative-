@@ -11,7 +11,7 @@ PROOF_RULE: proof_gt_claim. Commit links or it didn't happen.
 ```
 
 > NOTE: URLs in this archive reference the original mrmichaelhobbs1234 account.
-> For hobbs-lab deployments, update worker URLs accordingly.
+> For hobbs0011 deployments, update worker URLs accordingly.
 
 ---
 

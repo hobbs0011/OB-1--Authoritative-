@@ -24,7 +24,7 @@
 
 ### 🟡 Important
 
-5. > "A2? I have no clue, use your git connection to Hobbs0011 and Hobbs-Lab to find what you need through co-pilot agents"
+5. > "A2? I have no clue, use your git connection to Hobbs0011 and hobbs0011 to find what you need through co-pilot agents"
 
 6. > "Make V5"
 

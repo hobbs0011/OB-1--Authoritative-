@@ -265,7 +265,7 @@ STUDENT'S DEVICE (Vietnamese household)
 **2026-03-26:** "hold off on scaffolding, enter dump mode after transfer"
 → Scaffold exists but deployment deferred until Michael says go.
 
-**2026-03-26:** "do a 5 stages pipeline looking into everything we have done on hobbs0011 mrmichaelhobbs1234-lang and hobbs-lab on our tool stack, especially regarding good chromes free tech stacks"
+**2026-03-26:** "do a 5 stages pipeline looking into everything we have done on hobbs0011 mrmichaelhobbs1234-lang and hobbs0011 on our tool stack, especially regarding good chromes free tech stacks"
 → Full audit produced: CANON/RECON/CHROME-FREE-TECH-STACK-AUDIT-2026-03-26.md
 
 **2026-03-30:** "pull all the recent findings on how we can use chromes toolstack to run OBI and magic chat for virtually free"

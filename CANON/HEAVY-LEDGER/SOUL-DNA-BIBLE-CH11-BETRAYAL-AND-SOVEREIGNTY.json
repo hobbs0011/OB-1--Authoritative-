@@ -12,12 +12,12 @@
   "related_chapters": ["CH08", "CH09", "CH13", "CH07"],
   "cross_repo_sources": [
     {
-      "repo": "hobbs-lab/Phoenix-Rise-Immortalize-",
+      "repo": "hobbs0011/Phoenix-Rise-Immortalize-",
       "file": "SOUL-DNA-BIBLE/11_BETRAYAL_AND_SOVEREIGNTY.md",
       "usage": "Primary source: verbatim quotes, operator failures, sovereignty principles"
     },
     {
-      "repo": "hobbs-lab/Phoenix-Rising-Protocol-Ultimate",
+      "repo": "hobbs0011/Phoenix-Rising-Protocol-Ultimate",
       "file": "ARCHIVE/VAULT-GENESIS/02-BETRAYAL-AND-SOVEREIGNTY.md",
       "usage": "Enrichment: crypto betrayal narrative, business partner pattern, Hyena signal table, rage diagnostic, Human vs AI comparison, Two-World Firewall"
     },

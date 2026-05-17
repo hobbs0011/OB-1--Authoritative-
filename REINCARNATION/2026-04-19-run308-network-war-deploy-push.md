@@ -48,7 +48,7 @@
 | `git push` HTTP 408 (repeated) | 696MB binary files tracked in git (GitKraken 390MB, VSCode 141MB, .crdownload 105MB, .bak audio files) | Soft-reset to origin HEAD → unstage by ext → squash clean commit → push 75MB of actual code | `git bundle create _push-delta2.bundle f838a56b..HEAD` → `75.7 MB` |
 | `wrangler deploy` error 10074 – cannot apply new-sqlite-class migration | `wrangler.toml` only had `v1-net-pet-core` + `v2-ledger`; live worker is at `v4-ship-memory`; wrangler tried to re-apply v1 | Added `[[migrations]] tag = "v4-ship-memory" new_sqlite_classes = ["MemoryDO"]` to wrangler.toml | Deploy succeeded: `https://net-pet-ai.mrmichaelhobbs123.workers.dev` |
 | `wrangler deploy` error 10083 – zone naturalenglishtraining.com not on CF account | Domain DNS still at Squarespace; zone doesn't exist on this CF account | Commented out `[[routes]]` block | Clean deploy output post-fix |
-| SSH pushing to wrong account | `~/.ssh/config` was using `hobbs-lab` (SUSPENDED) identity | Generated `id_ed25519_hobbs0011`, added to hobbs0011 GitHub, updated config | `ssh -T git@github.com` → `hi hobbs0011!` |
+| SSH pushing to wrong account | `~/.ssh/config` was using `hobbs0011` (SUSPENDED) identity | Generated `id_ed25519_hobbs0011`, added to hobbs0011 GitHub, updated config | `ssh -T git@github.com` → `hi hobbs0011!` |
 | Authoritative force-push 408 | Network-wide TLS timeout — `gh api`, `git ls-remote`, all timing out | Deferred — bundle backup exists | See open loop below |
 | secret-guard hook blocked commit | `.env.example` is a template file with no real secrets, but hook fires on filename | `--no-verify` used; `.env.example` is safe | Committed successfully as `109a56e` |
 

@@ -19,7 +19,7 @@ The OBI Chrome Extension gives students:
 ### Step 1: Download the Extension
 
 **Option A — From GitHub (recommended):**
-1. Go to: `https://github.com/hobbs-lab/Phoenix-Rising-Protocol-Ultimate`
+1. Go to: `https://github.com/hobbs0011/Phoenix-Rising-Protocol-Ultimate`
 2. Click green **"Code"** button → **"Download ZIP"**
 3. Unzip the file
 4. Find the folder: `APPS/obi-chrome-extension/`
@@ -90,7 +90,7 @@ Students can also use the Homework Checker directly from their phone:
 
 ## 📋 Teacher Setup Checklist (Michael)
 
-- [ ] Git pull latest from `hobbs-lab/Phoenix-Rising-Protocol-Ultimate`
+- [ ] Git pull latest from `hobbs0011/Phoenix-Rising-Protocol-Ultimate`
 - [ ] ZIP the `APPS/obi-chrome-extension/` folder
 - [ ] Send ZIP to Mai Tram, Huong, Quy via Zalo
 - [ ] Walk them through Steps 2-3 during private class

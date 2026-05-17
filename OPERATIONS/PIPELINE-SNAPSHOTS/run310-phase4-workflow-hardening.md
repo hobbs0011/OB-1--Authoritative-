@@ -21,7 +21,7 @@ All 8 workflows audited:
 
 | Workflow | Legacy Ref | Status |
 |---|---|---|
-| copilot-swarm.yml PRONG 1 | hobbs-lab | Gated: `enable_legacy_targets=true` required |
+| copilot-swarm.yml PRONG 1 | hobbs0011 | Gated: `enable_legacy_targets=true` required |
 | copilot-swarm.yml PRONG 3 | mrmichaelhobbs1234-lang | Gated: `enable_legacy_targets=true` required |
 | All others | None | Clean |
 
@@ -36,7 +36,7 @@ Default: `"false"` — legacy prongs do not execute.
 ## Stage 34 — Default Behavior Verified
 
 Without `enable_legacy_targets=true`:
-- PRONG 1 (hobbs-lab): SKIPS silently
+- PRONG 1 (hobbs0011): SKIPS silently
 - PRONG 2 (hobbs0011): RUNS (no legacy guard)
 - PRONG 3 (mrmichaelhobbs1234-lang): SKIPS silently
 

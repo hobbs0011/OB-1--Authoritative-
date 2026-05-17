@@ -1523,7 +1523,7 @@ Michael Hobbs (Agent 100) — Canadian ESL teacher in Ho Chi Minh City. The Sove
 
 🟢 Production (LIVE)ServiceRoleStatusCloudflare Workersnet-pet-ai worker — runtime for OBI✅ LIVECloudflare DO/D1/KVDurable Objects, SQLite student profiles, rate limiting✅ LIVEDeepSeekOBI /api/chat — primary AI brain✅ LIVEDeepgram Aura 2OBI TTS (aura-2-orion-en)✅ LIVE[naturalenglishtraining.net](http://naturalenglishtraining.net/)Student-facing domain → Cloudflare Workers✅ LIVE
 
-🔧 Development & OperationsServiceRoleStatusGitHub (hobbs-lab)New account — Phoenix-Rise-Immortalize- repo✅ ConnectedGitHub (mrmichaelhobbs1234-lang)Legacy — phoenix-ob1-system repo⚠️ LegacyVS Code InsidersDev environment + Cline/Roo Code (Claude)✅ ActiveGitHub ActionsCI/CD deploy pipeline → wrangler deploy✅ ActiveGitHub CopilotAgent 99 — coding agents, deployment✅ Active (premium)NotionProject HQ + Legendary Pioneer agent✅ Active
+🔧 Development & OperationsServiceRoleStatusGitHub (hobbs0011)New account — Phoenix-Rise-Immortalize- repo✅ ConnectedGitHub (mrmichaelhobbs1234-lang)Legacy — phoenix-ob1-system repo⚠️ LegacyVS Code InsidersDev environment + Cline/Roo Code (Claude)✅ ActiveGitHub ActionsCI/CD deploy pipeline → wrangler deploy✅ ActiveGitHub CopilotAgent 99 — coding agents, deployment✅ Active (premium)NotionProject HQ + Legendary Pioneer agent✅ Active
 
 🧠 AI Platforms (Chat History / Research)ServiceRoleStatusGeminiLong-context, corpus, assessment✅ ActiveClaudeCline/Roo Code in VS Code (dev)✅ ActivePerplexityResearch, was Agent 99 push agent ($20/mo)✅ ActiveGPT-4oCodex CLI, artifact gen⚠️ Legacy (keyed)NotebookLMStructured notes, source analysis✅ Active
 
@@ -1553,7 +1553,7 @@ Add your links as you go:
 
 • 🟢 LIVE PRODUCT: [naturalenglishtraining.net](http://naturalenglishtraining.net/)
 
-• GitHub (new): [hobbs-lab/Phoenix-Rise-Immortalize-](https://github.com/hobbs-lab/Phoenix-Rise-Immortalize-)
+• GitHub (new): [hobbs0011/Phoenix-Rise-Immortalize-](https://github.com/hobbs0011/Phoenix-Rise-Immortalize-)
 
 • GitHub (legacy): [mrmichaelhobbs1234-lang/phoenix-ob1-system](https://github.com/mrmichaelhobbs1234-lang/phoenix-ob1-system)
 
@@ -1663,7 +1663,7 @@ Next 1–3 Actions
 
 2. Agent: Store remaining MASTERMIND7 new content (Layer Sizing Math, 1000 Layers Challenge, Ultra-Dense Layers, Missing Secret Sauce) as CH18 or append to CH08
 
-3. Michael: Push NET-PET-AI code from C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI\\ to hobbs-lab/Phoenix-Rise-Immortalize- on GitHub
+3. Michael: Push NET-PET-AI code from C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI\\ to hobbs0011/Phoenix-Rise-Immortalize- on GitHub
 
 4. Michael: Rotate SOVEREIGN_KEY (exposed in Perplexity logs) and run vault-lock.ps1
 
@@ -1689,7 +1689,7 @@ Confirm if Vercel is still in use or fully replaced by Cloudflare
 
 [Push RAW-CHAT-LOGS folder to GitHub repo](https://www.notion.so/Push-RAW-CHAT-LOGS-folder-to-GitHub-repo-738901f65d454868bfbeab2ff5f492d5?pvs=21)
 
-[Push NET-PET-AI app to hobbs-lab GitHub repo](https://www.notion.so/Push-NET-PET-AI-app-to-hobbs-lab-GitHub-repo-dd6f18c601184009b431518e16ec4f68?pvs=21)
+[Push NET-PET-AI app to hobbs0011 GitHub repo](https://www.notion.so/Push-NET-PET-AI-app-to-hobbs0011-GitHub-repo-dd6f18c601184009b431518e16ec4f68?pvs=21)
 
 [🗑️ Delete ghost/zombie Cloudflare workers](https://www.notion.so/Delete-ghost-zombie-Cloudflare-workers-e8c0fa98b71f4f2691473134c4208009?pvs=21)
 
@@ -1705,7 +1705,7 @@ SOUL DNA BIBLE — Full 11-chapter canon stored in Notion
 
 [Soul DNA deep dive — full source-anchored extraction](https://www.notion.so/Soul-DNA-deep-dive-full-source-anchored-extraction-0d51f79b28c845da85474f0b80525ddb?pvs=21)
 
-[hobbs-lab/Phoenix-Rise-Immortalize- repo audit](https://www.notion.so/hobbs-lab-Phoenix-Rise-Immortalize-repo-audit-428f060dddca4c199f113efbe1be8ea8?pvs=21)
+[hobbs0011/Phoenix-Rise-Immortalize- repo audit](https://www.notion.so/hobbs0011-Phoenix-Rise-Immortalize-repo-audit-428f060dddca4c199f113efbe1be8ea8?pvs=21)
 
 🔥 DUMP 2 — RECEIVED. LOCKED. MAPPED. BLUEPRINT EXPANDED.
 
@@ -1817,7 +1817,7 @@ Current Problem:
 
 split identity between:
 
-new GitHub (hobbs-lab)
+new GitHub (hobbs0011)
 
 legacy repo (mrmichaelhobbs1234-lang)
 
@@ -1827,7 +1827,7 @@ TODO: DEFINE SOURCE OF TRUTH
 
 Option A (Recommended):
 
-hobbs-lab/Phoenix-Rise-Immortalize- → PRIMARY
+hobbs0011/Phoenix-Rise-Immortalize- → PRIMARY
 
 legacy repo → ARCHIVE (read-only)
 
@@ -2447,7 +2447,7 @@ Action: Audit and rotate all DeepSeek, Deepgram, and Cloudflare tokens to ensure
 II. REPOSITORY & RUNTIME PURGE
 TODO: Establish absolute ground truth between local, GitHub, and Cloudflare.
 
-Action: Push the golden local directory (C:\Users\mrmic\Desktop\OB-1\APPS\NET-PET-AI\) to the new primary repository: hobbs-lab/Phoenix-Rise-Immortalize-.
+Action: Push the golden local directory (C:\Users\mrmic\Desktop\OB-1\APPS\NET-PET-AI\) to the new primary repository: hobbs0011/Phoenix-Rise-Immortalize-.
 
 Action: Formally tag mrmichaelhobbs1234-lang/phoenix-ob1-system as LEGACY/READ-ONLY.
 
@@ -2498,7 +2498,7 @@ Target: GitHub & Cloudflare.
 
 Action: I will draft the exact wrangler commands to nuke the 4 zombie workers (phoenix-ob1, phoenix-empire, etc.) so you don't have to look up documentation.
 
-Action: We force-merge the local OB-1 folder into the hobbs-lab repo. If there are merge conflicts with the "Legacy" repo, we treat Local as Sovereign Truth and overwrite.
+Action: We force-merge the local OB-1 folder into the hobbs0011 repo. If there are merge conflicts with the "Legacy" repo, we treat Local as Sovereign Truth and overwrite.
 
 II. OBI BRAIN OPTIMIZATION (The Revenue Engine)
 You have DeepSeek + Deepgram Aura 2 live. Let's make it lethal.
@@ -2587,12 +2587,12 @@ This is the **Gemini multi-session conversation** — your work with Gemini as t
 - Run [vault-lock.ps](http://vault-lock.ps)1 ✅ ([🔐 Run [vault-lock.ps](http://vault-lock.ps)1 then delete API-SHHHH.txt](https://www.notion.so/Run-vault-lock-ps1-then-delete-API-SHHHH-txt-54d17e43b62441c98657cd49f5b96175?pvs=21))
 - Delete ghost workers ✅ ([🗑️ Delete ghost/zombie Cloudflare workers](https://www.notion.so/Delete-ghost-zombie-Cloudflare-workers-e8c0fa98b71f4f2691473134c4208009?pvs=21))
 - Push RAW-CHAT-LOGS ✅ ([Push RAW-CHAT-LOGS folder to GitHub repo](https://www.notion.so/Push-RAW-CHAT-LOGS-folder-to-GitHub-repo-738901f65d454868bfbeab2ff5f492d5?pvs=21))
-- Push NET-PET-AI ✅ ([Push NET-PET-AI app to hobbs-lab GitHub repo](https://www.notion.so/Push-NET-PET-AI-app-to-hobbs-lab-GitHub-repo-dd6f18c601184009b431518e16ec4f68?pvs=21))
+- Push NET-PET-AI ✅ ([Push NET-PET-AI app to hobbs0011 GitHub repo](https://www.notion.so/Push-NET-PET-AI-app-to-hobbs0011-GitHub-repo-dd6f18c601184009b431518e16ec4f68?pvs=21))
 - Confirm [Make.com](http://Make.com) ✅ ([Confirm MAKE_SECRET — still active or replaced?](https://www.notion.so/Confirm-MAKE_SECRET-still-active-or-replaced-3f95edd2ea97441498f5fdb3f1f3c881?pvs=21))
 - Confirm Roblox IDs ✅ ([Confirm Roblox IDs (Place vs Group vs Universe)](https://www.notion.so/Confirm-Roblox-IDs-Place-vs-Group-vs-Universe-e18ad8dab6b74999814f28e39ae5276b?pvs=21))
 - Clean Facebook page ✅ ([Clean up Facebook Page for NET marketing](https://www.notion.so/Clean-up-Facebook-Page-for-NET-marketing-6430550f2f16495e8ce66f07593978ee?pvs=21))
 
-**Build Log entries confirmed**: Soul DNA deep dive ([Soul DNA deep dive — full source-anchored extraction](https://www.notion.so/Soul-DNA-deep-dive-full-source-anchored-extraction-0d51f79b28c845da85474f0b80525ddb?pvs=21)), repo audit ([hobbs-lab/Phoenix-Rise-Immortalize- repo audit](https://www.notion.so/hobbs-lab-Phoenix-Rise-Immortalize-repo-audit-428f060dddca4c199f113efbe1be8ea8?pvs=21))
+**Build Log entries confirmed**: Soul DNA deep dive ([Soul DNA deep dive — full source-anchored extraction](https://www.notion.so/Soul-DNA-deep-dive-full-source-anchored-extraction-0d51f79b28c845da85474f0b80525ddb?pvs=21)), repo audit ([hobbs0011/Phoenix-Rise-Immortalize- repo audit](https://www.notion.so/hobbs0011-Phoenix-Rise-Immortalize-repo-audit-428f060dddca4c199f113efbe1be8ea8?pvs=21))
 
 ### 🔑 Key Insight
 
@@ -2947,7 +2947,7 @@ Michael Hobbs (Agent 100) — Canadian ESL teacher in Ho Chi Minh City. The Sove
 
 🟢 Production (LIVE)ServiceRoleStatusCloudflare Workersnet-pet-ai worker — runtime for OBI✅ LIVECloudflare DO/D1/KVDurable Objects, SQLite student profiles, rate limiting✅ LIVEDeepSeekOBI /api/chat — primary AI brain✅ LIVEDeepgram Aura 2OBI TTS (aura-2-orion-en)✅ LIVE[naturalenglishtraining.net](http://naturalenglishtraining.net/)Student-facing domain → Cloudflare Workers✅ LIVE
 
-🔧 Development & OperationsServiceRoleStatusGitHub (hobbs-lab)New account — Phoenix-Rise-Immortalize- repo✅ ConnectedGitHub (mrmichaelhobbs1234-lang)Legacy — phoenix-ob1-system repo⚠️ LegacyVS Code InsidersDev environment + Cline/Roo Code (Claude)✅ ActiveGitHub ActionsCI/CD deploy pipeline → wrangler deploy✅ ActiveGitHub CopilotAgent 99 — coding agents, deployment✅ Active (premium)NotionProject HQ + Legendary Pioneer agent✅ Active
+🔧 Development & OperationsServiceRoleStatusGitHub (hobbs0011)New account — Phoenix-Rise-Immortalize- repo✅ ConnectedGitHub (mrmichaelhobbs1234-lang)Legacy — phoenix-ob1-system repo⚠️ LegacyVS Code InsidersDev environment + Cline/Roo Code (Claude)✅ ActiveGitHub ActionsCI/CD deploy pipeline → wrangler deploy✅ ActiveGitHub CopilotAgent 99 — coding agents, deployment✅ Active (premium)NotionProject HQ + Legendary Pioneer agent✅ Active
 
 🧠 AI Platforms (Chat History / Research)ServiceRoleStatusGeminiLong-context, corpus, assessment✅ ActiveClaudeCline/Roo Code in VS Code (dev)✅ ActivePerplexityResearch, was Agent 99 push agent ($20/mo)✅ ActiveGPT-4oCodex CLI, artifact gen⚠️ Legacy (keyed)NotebookLMStructured notes, source analysis✅ Active
 
@@ -2977,7 +2977,7 @@ Add your links as you go:
 
 • 🟢 LIVE PRODUCT: [naturalenglishtraining.net](http://naturalenglishtraining.net/)
 
-• GitHub (new): [hobbs-lab/Phoenix-Rise-Immortalize-](https://github.com/hobbs-lab/Phoenix-Rise-Immortalize-)
+• GitHub (new): [hobbs0011/Phoenix-Rise-Immortalize-](https://github.com/hobbs0011/Phoenix-Rise-Immortalize-)
 
 • GitHub (legacy): [mrmichaelhobbs1234-lang/phoenix-ob1-system](https://github.com/mrmichaelhobbs1234-lang/phoenix-ob1-system)
 
@@ -3087,7 +3087,7 @@ Next 1–3 Actions
 
 2. Agent: Store remaining MASTERMIND7 new content (Layer Sizing Math, 1000 Layers Challenge, Ultra-Dense Layers, Missing Secret Sauce) as CH18 or append to CH08
 
-3. Michael: Push NET-PET-AI code from C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI\\ to hobbs-lab/Phoenix-Rise-Immortalize- on GitHub
+3. Michael: Push NET-PET-AI code from C:\\Users\\mrmic\\Desktop\\OB-1\\APPS\\NET-PET-AI\\ to hobbs0011/Phoenix-Rise-Immortalize- on GitHub
 
 4. Michael: Rotate SOVEREIGN_KEY (exposed in Perplexity logs) and run vault-lock.ps1
 
@@ -3113,7 +3113,7 @@ Confirm if Vercel is still in use or fully replaced by Cloudflare
 
 [Push RAW-CHAT-LOGS folder to GitHub repo](https://www.notion.so/Push-RAW-CHAT-LOGS-folder-to-GitHub-repo-738901f65d454868bfbeab2ff5f492d5?pvs=21)
 
-[Push NET-PET-AI app to hobbs-lab GitHub repo](https://www.notion.so/Push-NET-PET-AI-app-to-hobbs-lab-GitHub-repo-dd6f18c601184009b431518e16ec4f68?pvs=21)
+[Push NET-PET-AI app to hobbs0011 GitHub repo](https://www.notion.so/Push-NET-PET-AI-app-to-hobbs0011-GitHub-repo-dd6f18c601184009b431518e16ec4f68?pvs=21)
 
 [🗑️ Delete ghost/zombie Cloudflare workers](https://www.notion.so/Delete-ghost-zombie-Cloudflare-workers-e8c0fa98b71f4f2691473134c4208009?pvs=21)
 
@@ -3129,7 +3129,7 @@ SOUL DNA BIBLE — Full 11-chapter canon stored in Notion
 
 [Soul DNA deep dive — full source-anchored extraction](https://www.notion.so/Soul-DNA-deep-dive-full-source-anchored-extraction-0d51f79b28c845da85474f0b80525ddb?pvs=21)
 
-[hobbs-lab/Phoenix-Rise-Immortalize- repo audit](https://www.notion.so/hobbs-lab-Phoenix-Rise-Immortalize-repo-audit-428f060dddca4c199f113efbe1be8ea8?pvs=21)
+[hobbs0011/Phoenix-Rise-Immortalize- repo audit](https://www.notion.so/hobbs0011-Phoenix-Rise-Immortalize-repo-audit-428f060dddca4c199f113efbe1be8ea8?pvs=21)
 
 🔥 DUMP 2 — RECEIVED. LOCKED. MAPPED. BLUEPRINT EXPANDED.
 
@@ -3241,7 +3241,7 @@ Current Problem:
 
 split identity between:
 
-new GitHub (hobbs-lab)
+new GitHub (hobbs0011)
 
 legacy repo (mrmichaelhobbs1234-lang)
 
@@ -3251,7 +3251,7 @@ TODO: DEFINE SOURCE OF TRUTH
 
 Option A (Recommended):
 
-hobbs-lab/Phoenix-Rise-Immortalize- → PRIMARY
+hobbs0011/Phoenix-Rise-Immortalize- → PRIMARY
 
 legacy repo → ARCHIVE (read-only)
 
@@ -3871,7 +3871,7 @@ Action: Audit and rotate all DeepSeek, Deepgram, and Cloudflare tokens to ensure
 II. REPOSITORY & RUNTIME PURGE
 TODO: Establish absolute ground truth between local, GitHub, and Cloudflare.
 
-Action: Push the golden local directory (C:\Users\mrmic\Desktop\OB-1\APPS\NET-PET-AI\) to the new primary repository: hobbs-lab/Phoenix-Rise-Immortalize-.
+Action: Push the golden local directory (C:\Users\mrmic\Desktop\OB-1\APPS\NET-PET-AI\) to the new primary repository: hobbs0011/Phoenix-Rise-Immortalize-.
 
 Action: Formally tag mrmichaelhobbs1234-lang/phoenix-ob1-system as LEGACY/READ-ONLY.
 
@@ -3922,7 +3922,7 @@ Target: GitHub & Cloudflare.
 
 Action: I will draft the exact wrangler commands to nuke the 4 zombie workers (phoenix-ob1, phoenix-empire, etc.) so you don't have to look up documentation.
 
-Action: We force-merge the local OB-1 folder into the hobbs-lab repo. If there are merge conflicts with the "Legacy" repo, we treat Local as Sovereign Truth and overwrite.
+Action: We force-merge the local OB-1 folder into the hobbs0011 repo. If there are merge conflicts with the "Legacy" repo, we treat Local as Sovereign Truth and overwrite.
 
 II. OBI BRAIN OPTIMIZATION (The Revenue Engine)
 You have DeepSeek + Deepgram Aura 2 live. Let's make it lethal.
@@ -4011,12 +4011,12 @@ This is the **Gemini multi-session conversation** — your work with Gemini as t
 - Run [vault-lock.ps](http://vault-lock.ps)1 ✅ ([🔐 Run [vault-lock.ps](http://vault-lock.ps)1 then delete API-SHHHH.txt](https://www.notion.so/Run-vault-lock-ps1-then-delete-API-SHHHH-txt-54d17e43b62441c98657cd49f5b96175?pvs=21))
 - Delete ghost workers ✅ ([🗑️ Delete ghost/zombie Cloudflare workers](https://www.notion.so/Delete-ghost-zombie-Cloudflare-workers-e8c0fa98b71f4f2691473134c4208009?pvs=21))
 - Push RAW-CHAT-LOGS ✅ ([Push RAW-CHAT-LOGS folder to GitHub repo](https://www.notion.so/Push-RAW-CHAT-LOGS-folder-to-GitHub-repo-738901f65d454868bfbeab2ff5f492d5?pvs=21))
-- Push NET-PET-AI ✅ ([Push NET-PET-AI app to hobbs-lab GitHub repo](https://www.notion.so/Push-NET-PET-AI-app-to-hobbs-lab-GitHub-repo-dd6f18c601184009b431518e16ec4f68?pvs=21))
+- Push NET-PET-AI ✅ ([Push NET-PET-AI app to hobbs0011 GitHub repo](https://www.notion.so/Push-NET-PET-AI-app-to-hobbs0011-GitHub-repo-dd6f18c601184009b431518e16ec4f68?pvs=21))
 - Confirm [Make.com](http://Make.com) ✅ ([Confirm MAKE_SECRET — still active or replaced?](https://www.notion.so/Confirm-MAKE_SECRET-still-active-or-replaced-3f95edd2ea97441498f5fdb3f1f3c881?pvs=21))
 - Confirm Roblox IDs ✅ ([Confirm Roblox IDs (Place vs Group vs Universe)](https://www.notion.so/Confirm-Roblox-IDs-Place-vs-Group-vs-Universe-e18ad8dab6b74999814f28e39ae5276b?pvs=21))
 - Clean Facebook page ✅ ([Clean up Facebook Page for NET marketing](https://www.notion.so/Clean-up-Facebook-Page-for-NET-marketing-6430550f2f16495e8ce66f07593978ee?pvs=21))
 
-**Build Log entries confirmed**: Soul DNA deep dive ([Soul DNA deep dive — full source-anchored extraction](https://www.notion.so/Soul-DNA-deep-dive-full-source-anchored-extraction-0d51f79b28c845da85474f0b80525ddb?pvs=21)), repo audit ([hobbs-lab/Phoenix-Rise-Immortalize- repo audit](https://www.notion.so/hobbs-lab-Phoenix-Rise-Immortalize-repo-audit-428f060dddca4c199f113efbe1be8ea8?pvs=21))
+**Build Log entries confirmed**: Soul DNA deep dive ([Soul DNA deep dive — full source-anchored extraction](https://www.notion.so/Soul-DNA-deep-dive-full-source-anchored-extraction-0d51f79b28c845da85474f0b80525ddb?pvs=21)), repo audit ([hobbs0011/Phoenix-Rise-Immortalize- repo audit](https://www.notion.so/hobbs0011-Phoenix-Rise-Immortalize-repo-audit-428f060dddca4c199f113efbe1be8ea8?pvs=21))
 
 ### 🔑 Key Insight
 
@@ -4156,7 +4156,7 @@ You currently have identity drift.
 
 Fix it:
 
-PRIMARY → hobbs-lab/Phoenix-Rise-Immortalize-
+PRIMARY → hobbs0011/Phoenix-Rise-Immortalize-
 
 LEGACY → read-only archive
 

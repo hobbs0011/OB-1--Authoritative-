@@ -45,7 +45,7 @@
 | 3 | Create /reincarnate as persistent prompt command | Convention established for session sign-off | .github/prompts/ |
 | 4 | Pop stash@{0} — HL progress to COLD-START-BOOT | Wave 8 count updated (HL-120 reached) | COLD-START-BOOT |
 | 5 | Resolve COLD-START-BOOT merge conflict | Both sides merged — deployment status + HL count | COLD-START-BOOT |
-| 6 | origin/hobbs-lab DEAD — remotes reconfigured | origin now = hobbs0011/Phoenix-Rising-Ultimate | git config |
+| 6 | origin/hobbs0011 DEAD — remotes reconfigured | origin now = hobbs0011/Phoenix-Rising-Ultimate | git config |
 | 7 | Clean 4 stashes (2 useful, 1 outdated vscode settings, 1 empty) | Stash debt zeroed | git stash |
 | 8 | Submodule Phoenix-Rising-Ultimate has 355 dirty files | NOTED — not resolved this session (separate concern) | submodule |
 
@@ -58,7 +58,7 @@
 | 7 HL JSONs stranded on orphan branches | Branches created during kilo sessions, never merged | Cherry-picked HL-113 through HL-120 JSONs to main | HL count now 120 |
 | 5 prompt commands missing from main | Created on epoch-zero orphan branch | Extracted: incorporationlog, phoenixrisingreincarnate, romeprotocol, souldna, supersaiyan | .github/prompts/ now 7 files |
 | Kilo config (.kilo/) missing from main | Created on vscode session branch, stashed but never committed | Extracted 32 files: agents, commands, skills, plans, kilo.json | .kilo/ now populated |
-| COLD-START-BOOT stale — still referenced hobbs-lab | Remote died, boot file not updated | Updated to reference hobbs0011 remotes, Run 265, current state | COLD-START-BOOT.md |
+| COLD-START-BOOT stale — still referenced hobbs0011 | Remote died, boot file not updated | Updated to reference hobbs0011 remotes, Run 265, current state | COLD-START-BOOT.md |
 | /reincarnate command didn't exist | Never created as a VS Code prompt | Creating .github/prompts/reincarnate.prompt.md | New file |
 | Deprecated workflow still active | cloudflare-deploy-net-core.yml pointed at dead WORKERS/net-core | Replaced with deprecation notice + pointer to deploy-net-pet-ai.yml | .github/workflows/ |
 
@@ -94,14 +94,14 @@
 - Push to hobbs0011 (in progress this session)
 - Submodule sync (355 dirty files — separate session)
 - Drop remaining stashes after confirming no unique value
-- Update MASTER-SYNC.md repo table (hobbs-lab references → hobbs0011)
+- Update MASTER-SYNC.md repo table (hobbs0011 references → hobbs0011)
 
 ---
 
 ## §9 SYSTEM DESIGN
 
 - **Repo topology:** origin=hobbs0011/Phoenix-Rising-Ultimate, ob1=hobbs0011/OB-1, net-tiger-origin=hobbs0011/net-tiger-assessment
-- **Dead remote:** hobbs-lab/Phoenix-Rising-Protocol-Ultimate — fully absorbed, no longer accessible
+- **Dead remote:** hobbs0011/Phoenix-Rising-Protocol-Ultimate — fully absorbed, no longer accessible
 - **Branch cleanup:** All local branches merged or deleted. 45+ remote branches remain as historical refs.
 - **Kilo Code:** 13-area configuration complete — agents, commands, skills, plans, model config
 

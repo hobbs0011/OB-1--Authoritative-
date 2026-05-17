@@ -15,7 +15,7 @@
 
 **Consolidated:** 2026-03-24 | **Sources:** 15 canonical files across VAULT-NET-SEEDS, VAULT-CHAOS, VAULT-EXECUTION
 **Purpose:** Single canonical reference for how lessons are made under Gospel 444 and the NET teaching methodology.
-**Status:** 🔒 ACTIVE — Dual-published to Notion + GitHub (hobbs-lab ultimate repo)
+**Status:** 🔒 ACTIVE — Dual-published to Notion + GitHub (hobbs0011 ultimate repo)
 
 ---
 
@@ -1099,7 +1099,7 @@ Teaching quality and revenue are **the same measurement** — a student who prog
 
 ## 🗄️ Source File Index
 
-### VAULT-NET-SEEDS (hobbs-lab/Phoenix-Rise-Immortalize-)
+### VAULT-NET-SEEDS (hobbs0011/Phoenix-Rise-Immortalize-)
 
 | File | SHA | Content |
 |---|---|---|
@@ -1111,7 +1111,7 @@ Teaching quality and revenue are **the same measurement** — a student who prog
 | `19-GAMIFICATION-FRAMEWORK.md` | `7185f66` | Points, badges, leaderboards, anti-gaming |
 | `20-CONTENT-FACTORY-SPEC.md` | `32b3ecb` | 8-step pipeline, quality gate, freshness protocol |
 
-### VAULT-CHAOS (hobbs-lab/Phoenix-Rise-Immortalize-)
+### VAULT-CHAOS (hobbs0011/Phoenix-Rise-Immortalize-)
 
 | File | SHA | Content |
 |---|---|---|
@@ -1122,7 +1122,7 @@ Teaching quality and revenue are **the same measurement** — a student who prog
 | `25-THE-MICHAEL-METHOD-CODIFIED.md` | `666bfde` | 4 Pillars, perfect lesson sequence, quality test |
 | `29-VAULT-CHAOS-SYNTHESIS.md` | `56c23e7` | 28-chapter synthesis, 5 truths, 10 system-changing lessons |
 
-### VAULT-EXECUTION (hobbs-lab/Phoenix-Rise-Immortalize-)
+### VAULT-EXECUTION (hobbs0011/Phoenix-Rise-Immortalize-)
 
 | File | SHA | Content |
 |---|---|---|
@@ -1131,7 +1131,7 @@ Teaching quality and revenue are **the same measurement** — a student who prog
 | `04-DEVILS-ADVOCATE-SESSION.md` | `5fe7f68` | **NEW Run 36** — Mapping Principle, Negative Pheromones, Audit the Auditor, Model-Switching Logic, Four Core Principles |
 | `21-REVENUE-DEPLOYMENT-PIPELINE.md` | `9a6841c5` | **NEW Run 36** — 4 revenue streams, teaching delivery loop, milestone gates, Revenue Ledger |
 
-### VAULT-ORACLE (hobbs-lab/Phoenix-Rise-Immortalize-) — Cross-Repo Enrichment
+### VAULT-ORACLE (hobbs0011/Phoenix-Rise-Immortalize-) — Cross-Repo Enrichment
 
 | File | SHA | Content |
 |---|---|---|

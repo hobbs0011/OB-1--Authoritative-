@@ -42,11 +42,11 @@ This creates a **$0-to-$5/mo full AI tutoring platform** that deploys silently i
 > Decision: <$20/month budget ceiling for 5-model AI stack. Firebase = cost-zero ingress layer.
 
 **2026-03-26 — Consolidation Directive:**
-> "do a 5 stages pipeline looking into everything we have done on hobbs0011 mrmichaelhobbs1234-lang and hobbs-lab on our tool stack, especially regarding good chromes free tech stacks"
-> "transfer all to hobbs-lab possible"
+> "do a 5 stages pipeline looking into everything we have done on hobbs0011 mrmichaelhobbs1234-lang and hobbs0011 on our tool stack, especially regarding good chromes free tech stacks"
+> "transfer all to hobbs0011 possible"
 > "hold off on scaffolding, enter dump mode after transfer"
 >
-> Decision: hobbs-lab is THE canonical home. Chrome Extension scaffold exists but deployment deferred until Michael says go.
+> Decision: hobbs0011 is THE canonical home. Chrome Extension scaffold exists but deployment deferred until Michael says go.
 
 ---
 
@@ -269,7 +269,7 @@ Two landing pages exist. This needs Michael's decision.
 | `CANON/REINCARNATION/2026-03-24-100-phoenixes-war-games.md` | "we can MAKE OUR OWN EXTENSIONS!!" — Chrome extension revelation. Decision #6: Chrome extensions = $0 deployment vector. |
 | `CANON/REINCARNATION/2026-03-25-RISE-WEBSITE-BUILD.md` | Firebase vs Cloudflare audit. Decision: Cloudflare for runtime, Firebase as backup. Firebase paid account confirmed. |
 | `CANON/REINCARNATION/2026-03-26-vault-expansion-blueprint-ingestion.md` | "PAY ATTENTION TO FREE TOOLS, EXTENSIONS FROM GPT AND FROM GOOGLE". Firebase signup. <$20/month budget. Firebase as cost-zero ingress. |
-| `CANON/REINCARNATION/2026-03-26-repo-consolidation-hobbs-lab-canonical.md` | "hold off on scaffolding" for Chrome Extension. All repos → hobbs-lab. Free tech stack audit ordered. |
+| `CANON/REINCARNATION/2026-03-26-repo-consolidation-hobbs0011-canonical.md` | "hold off on scaffolding" for Chrome Extension. All repos → hobbs0011. Free tech stack audit ordered. |
 | `CANON/RECON/CHROME-FREE-TECH-STACK-AUDIT-2026-03-26.md` | The full 5-stage Chrome audit. Chrome Enterprise, Gemini Nano 5 APIs, $0 deployment blueprint. Gap: 100% between strategy and code. |
 | `CANON/RECON/OPENCLAW-MARKET-RESEARCH-2026-03-26.md` | Competitive validation. "Chrome + Firebase decision is the right call." OpenClaw validates multi-channel but OBI's $0 model is better for ESL. |
 | `OPERATIONS/SESSION-RECORD-2026-03-22-23.md` | Firebase rejected for app RUNTIME (Cloudflare Workers wins). Firebase Hosting evaluated and set aside. |
@@ -293,7 +293,7 @@ Two landing pages exist. This needs Michael's decision.
 
 | Source | Content |
 |--------|---------|
-| `hobbs-lab/Phoenix-Rise-Immortalize-/MASTER-SYNC.md` | Legacy Firebase references from original repo |
+| `hobbs0011/Phoenix-Rise-Immortalize-/MASTER-SYNC.md` | Legacy Firebase references from original repo |
 | `hobbs0011/NET-Ai-EcoSystem-CommandStation` | 0 Firebase/Chrome hits — dormant React dashboard |
 
 ---

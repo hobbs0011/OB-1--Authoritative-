@@ -9,7 +9,7 @@
   "signal_density": "HIGH",
   "signal_score": "3🔴 2🟡 1🟢",
   "tier": "FOUNDATIONS",
-  "tier_rationale": "Establishes canonical repo home (hobbs-lab/Ultimate), dual-publish pattern, agent-handles-git doctrine, and trigger cadence — all infrastructure-level decisions",
+  "tier_rationale": "Establishes canonical repo home (hobbs0011/Ultimate), dual-publish pattern, agent-handles-git doctrine, and trigger cadence — all infrastructure-level decisions",
 
   "quotes": [
     {
@@ -29,11 +29,11 @@
     },
     {
       "id": "Q3",
-      "text": "cool, find 10 improvements then push them automatically make sure this is logged here on notion and mirrored under the ultimate repo on hobbs-lab",
+      "text": "cool, find 10 improvements then push them automatically make sure this is logged here on notion and mirrored under the ultimate repo on hobbs0011",
       "signal": "🔴",
-      "tags": ["dual-publish", "automation", "hobbs-lab", "L27_ORIGIN"],
+      "tags": ["dual-publish", "automation", "hobbs0011", "L27_ORIGIN"],
       "law_refs": ["L27_DUAL_PUBLISH_MANDATORY"],
-      "note": "ORIGIN EVENT for dual-publish pattern — logged on notion AND mirrored on GitHub. hobbs-lab named as canonical home."
+      "note": "ORIGIN EVENT for dual-publish pattern — logged on notion AND mirrored on GitHub. hobbs0011 named as canonical home."
     },
     {
       "id": "Q4",
@@ -133,7 +133,7 @@
     },
     {
       "id": "P3",
-      "verbatim": "make sure this is logged here on notion and mirrored under the ultimate repo on hobbs-lab",
+      "verbatim": "make sure this is logged here on notion and mirrored under the ultimate repo on hobbs0011",
       "interpretation": "Dual-publish as standard — every artifact exists on both Notion and GitHub",
       "law_ref": "L27_DUAL_PUBLISH_MANDATORY"
     }
@@ -185,7 +185,7 @@
     "repo-consolidation",
     "agent-handles-git",
     "remote-first",
-    "hobbs-lab-canonical-home",
+    "hobbs0011-canonical-home",
     "deduplication"
   ],
 

@@ -438,7 +438,7 @@ Preserved exactly as spoken. Unedited.
   "proof_chain": "Merkle ledger — every signal auditable",
   "next_horizon": "Fine-tune open model on Soul DNA + pheromone signals = Obi as weights",
   "sealed_at": "2026-03-11T04:11 ICT",
-  "migrated_to": "hobbs-lab/Phoenix-Rising-Protocol-Ultimate/CANON/DRIFT-CASE-STUDY/",
+  "migrated_to": "hobbs0011/Phoenix-Rising-Protocol-Ultimate/CANON/DRIFT-CASE-STUDY/",
   "original_repo": "github.com/mrmichaelhobbs1234-lang/phoenix-drift-casestudy"
 }
 ```

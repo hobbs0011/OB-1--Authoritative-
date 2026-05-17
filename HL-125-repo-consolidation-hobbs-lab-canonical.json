@@ -1,7 +1,7 @@
 {
   "hl_id": "HL-125",
-  "source_file": "2026-03-26-repo-consolidation-hobbs-lab-canonical.md",
-  "session_tag": "repo-consolidation-hobbs-lab-canonical",
+  "source_file": "2026-03-26-repo-consolidation-hobbs0011-canonical.md",
+  "session_tag": "repo-consolidation-hobbs0011-canonical",
   "session_date": "2026-03-26",
   "signal_density": "MEDIUM",
   "signal_counts": { "red": 3, "yellow": 2, "green": 0 },
@@ -19,7 +19,7 @@
     {
       "id": "Q125-01",
       "priority": "YELLOW",
-      "text": "do a 5 stages pipeline looking into everything we have done on hobbs00111 mrmichaelhobbs1234-lang and hobbs-lab on our tool stack, especially regarding good chromes free tech stacks",
+      "text": "do a 5 stages pipeline looking into everything we have done on hobbs00111 mrmichaelhobbs1234-lang and hobbs0011 on our tool stack, especially regarding good chromes free tech stacks",
       "context": "Tool stack audit directive",
       "law_refs": [],
       "behavioral_primitive": "AUDIT_DIRECTIVE"
@@ -27,7 +27,7 @@
     {
       "id": "Q125-02",
       "priority": "RED",
-      "text": "transfer all to hobbs-lab possible",
+      "text": "transfer all to hobbs0011 possible",
       "context": "Consolidation directive",
       "law_refs": [],
       "behavioral_primitive": "CONSOLIDATION"
@@ -43,7 +43,7 @@
     {
       "id": "Q125-04",
       "priority": "RED",
-      "text": "Option C- find All that is not on hobbs-Lab and push it there, make a 10 stage pipeline to map it out",
+      "text": "Option C- find All that is not on hobbs0011 and push it there, make a 10 stage pipeline to map it out",
       "context": "Comprehensive mirror directive",
       "law_refs": [],
       "behavioral_primitive": "COMPREHENSIVE_MIRROR"
@@ -61,7 +61,7 @@
   "decisions": [
     {
       "id": "D125-01",
-      "decision": "hobbs-lab is THE canonical repo home — all content from hobbs0011 and mrmichaelhobbs1234-lang consolidates there",
+      "decision": "hobbs0011 is THE canonical repo home — all content from hobbs0011 and mrmichaelhobbs1234-lang consolidates there",
       "impact": "HIGH",
       "canon_affected": ["Instructions (repo refs)", "Navigator Index", "Canon Access Index"],
       "law_origin": "REPO→canonical_home"
@@ -82,14 +82,14 @@
     },
     {
       "id": "D125-04",
-      "decision": "Option C: comprehensive mirror — find ALL not on hobbs-lab, push it",
+      "decision": "Option C: comprehensive mirror — find ALL not on hobbs0011, push it",
       "impact": "HIGH",
       "canon_affected": ["ARCHIVE/ dirs on GitHub"],
       "law_origin": "MIRROR→comprehensive"
     },
     {
       "id": "D125-05",
-      "decision": "Fix wrangler bottlenecks — all old mrmichaelhobbs1234 refs → hobbs-lab",
+      "decision": "Fix wrangler bottlenecks — all old mrmichaelhobbs1234 refs → hobbs0011",
       "impact": "MEDIUM",
       "canon_affected": ["phoenix-ob1 wrangler.toml", "SOUL_DNA_SEED.json", "ledger-mcp.json"],
       "law_origin": "INFRA→wrangler_patch"
@@ -101,8 +101,8 @@
   "principles": [
     {
       "id": "P125-01",
-      "text": "transfer all to hobbs-lab possible — hobbs-lab is the single canonical home. No more split repos. Everything consolidates.",
-      "interpretation": "Single source of truth for all code. All repos merge to hobbs-lab.",
+      "text": "transfer all to hobbs0011 possible — hobbs0011 is the single canonical home. No more split repos. Everything consolidates.",
+      "interpretation": "Single source of truth for all code. All repos merge to hobbs0011.",
       "law_refs": []
     },
     {
@@ -114,20 +114,20 @@
   ],
 
   "system_design_insights": [
-    "ARCHIVE/ pattern works — clean directory structure on hobbs-lab for mirrored repos",
+    "ARCHIVE/ pattern works — clean directory structure on hobbs0011 for mirrored repos",
     "Transfer manifests solve the API size limit problem — document what can't be pushed, let Michael handle via CLI",
     "Duplicate SHA detection across HarvestedChats reveals 5 exact duplicate file pairs — dedup opportunity",
     "API rendering artifacts (HTML entities, compressed URL mangling) are a known limitation for large JS files with template literals"
   ],
 
   "emotional_signal": "Urgency HIGH — Michael wants everything consolidated NOW, not incrementally. Frustration LOW — clean session, no friction. Direction CLEAR — Option C was decisive, no hesitation.",
-  "session_context": "Repo Consolidation & hobbs-lab Canonical Home — hobbs-lab is THE canonical repo home. Comprehensive mirror Option C executed. Wrangler bottlenecks fixed.",
+  "session_context": "Repo Consolidation & hobbs0011 Canonical Home — hobbs0011 is THE canonical repo home. Comprehensive mirror Option C executed. Wrangler bottlenecks fixed.",
 
   "cross_references": {
     "related_hl": [],
     "canon_pages": ["Navigator Index", "Canon Access Index", "Tool Stack"],
     "products": [],
-    "repos_mined": ["hobbs0011", "mrmichaelhobbs1234-lang", "hobbs-lab"]
+    "repos_mined": ["hobbs0011", "mrmichaelhobbs1234-lang", "hobbs0011"]
   },
 
   "fingerprint": "2026-03-26:repo-consolidation:5:5:0:MEDIUM"

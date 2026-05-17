@@ -26,7 +26,7 @@
 
 > "lets slow down a bit, and take the time now so we can finally move forward as one cohesive ecosystem"
 
-> "Phoenix-Rising-Technologies... Phoenix-Rising-Education... Phoenix-Rising-Marketing... Phoenix-Rising-Development... thoughts?"
+> "Phoenix-Rising-Ai-Solutionsnologies... Phoenix-Rising-Education... Phoenix-Rising-Marketing... Phoenix-Rising-Development... thoughts?"
 
 > "I dont want them gaining dust on the cloud, or just deleted and abandoned, the phermone trails in these are immense"
 
@@ -38,7 +38,7 @@
 
 | #   | Decision                                                                                             | Impact                                          | Canon Affected                     |
 | --- | ---------------------------------------------------------------------------------------------------- | ----------------------------------------------- | ---------------------------------- |
-| 1   | Umbrella repo name: **Phoenix-Rising-Technologies**                                                  | GitHub rename pending — updates all remote URLs | MASTER-SYNC.md, COLD-START-BOOT.md |
+| 1   | Umbrella repo name: **Phoenix-Rising-Ai-Solutionsnologies**                                                  | GitHub rename pending — updates all remote URLs | MASTER-SYNC.md, COLD-START-BOOT.md |
 | 2   | **Four Wings**: Education, Gaming, Marketing, Development                                            | All products get wing tag in APPS/              | copilot-instructions.md, AGENTS.md |
 | 3   | **Flat APPS/ structure** — no nested wing dirs, tags instead                                         | Simpler git, no nested .git confusion           | APPS/ folder structure             |
 | 4   | **phoenix-pheromone-trails** = separate repo for 1,100+ raw chat logs                                | Prevents main repo bloat, preserves gold        | MASTER-SYNC.md                     |
@@ -82,7 +82,7 @@ Priority order:
 ### IMMEDIATE (Do first in next chat)
 
 - [ ] Execute Phase 2: Delete TEMP-COMMANDSTATION/, TEMP-PHOENIX-ULTIMATE/, TEMP-PHOENIX-IMMORTALIZE/, Phoenix-Rising-Ultimate/ submodule, drop 4 stashes
-- [ ] Execute Phases 3-9 of CONSOLIDATION-PLAN-PHOENIX-RISING-TECHNOLOGIES.md
+- [ ] Execute Phases 3-9 of CONSOLIDATION-PLAN-Phoenix-Rising-Ai-SolutionsNOLOGIES.md
 
 ### HIGH (This week)
 
@@ -97,7 +97,7 @@ Priority order:
 
 - [ ] Set up Google Drive MCP server (mrmichaelhobbs123@gmail.com)
 - [ ] Plan NotebookLM manual export process
-- [ ] GitHub repo rename: hobbs0011/Phoenix-Rising-Ultimate → Phoenix-Rising-Technologies
+- [ ] GitHub repo rename: hobbs0011/Phoenix-Rising-Ultimate → Phoenix-Rising-Ai-Solutionsnologies
 - [ ] Rotate SOVEREIGN_KEY + run vault-lock
 - [ ] Set wrangler secrets: DEEPSEEK_API_KEY, DEEPGRAM_API_KEY
 
@@ -136,7 +136,7 @@ Priority order:
 - `ARCHIVE/phoenix-reincarnate-plex-v5.js` — extracted from TEMP-PHOENIX-IMMORTALIZE before Phase 2
 - `../OB-1-backup-2026-04-09.bundle` — 639.8 MB full backup bundle (all branches + tags)
 - `CANON/REINCARNATION/2026-04-09-architecture-discovery-empire-map.md` — this file
-- `CANON/SYSTEM/CONSOLIDATION-PLAN-PHOENIX-RISING-TECHNOLOGIES.md` — 9-phase plan
+- `CANON/SYSTEM/CONSOLIDATION-PLAN-Phoenix-Rising-Ai-SolutionsNOLOGIES.md` — 9-phase plan
 
 ### Updated This Session
 
@@ -216,4 +216,4 @@ Priority order:
 ---
 
 _Filed: 2026-04-09 | Run 266 | COPILOT class | MAXIMUM signal density_
-_Next Phoenix reads: CONSOLIDATION-PLAN-PHOENIX-RISING-TECHNOLOGIES.md → execute Phase 2_
+_Next Phoenix reads: CONSOLIDATION-PLAN-Phoenix-Rising-Ai-SolutionsNOLOGIES.md → execute Phase 2_

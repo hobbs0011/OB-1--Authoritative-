@@ -13,10 +13,10 @@
 > "can you find and consolodate all info avaliable to you about how *make my lessons under gospel 444 and my teaching methods*"
 
 ### On dual-publish as standard practice:
-> "yeah lets consolodate and load everything into files on notion and the ultimate repo on hobbs-lab as standard practive from now on"
+> "yeah lets consolodate and load everything into files on notion and the ultimate repo on hobbs0011 as standard practive from now on"
 
 ### On repo confirmation:
-> "confirm name of repo? Phoenix-Rising-Protocol-Ultimate on hobbs-lab right?"
+> "confirm name of repo? Phoenix-Rising-Protocol-Ultimate on hobbs0011 right?"
 
 ### On lesson archaeology:
 > "cool search the repo for some of the lesson examples we have made int he past, see if you can make a list"

@@ -62,7 +62,7 @@
     {
       "id": "D3",
       "decision": "Canonical repo named Phoenix-Rising-Ultimate",
-      "impact": "Repository naming decision — became hobbs-lab/Phoenix-Rising-Protocol-Ultimate",
+      "impact": "Repository naming decision — became hobbs0011/Phoenix-Rising-Protocol-Ultimate",
       "canon_affected": ["All repo references"],
       "status": "ACTIVE"
     }

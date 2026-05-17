@@ -16,7 +16,7 @@
 | 5 | `OPERATIONS/README.md` | New | ✅ Pushed | Operations directory index |
 | 6 | `GALAXY-LESSONS/README.md` | New | ✅ Pushed | Lesson directory index with Gospel 444 format spec |
 | 7 | `SECURITY.md` | New | ✅ Pushed | Security policy — known risks, secret management, incident response |
-| 8 | `.github/CODEOWNERS` | New | ✅ Pushed | Code ownership — all changes route to @hobbs-lab |
+| 8 | `.github/CODEOWNERS` | New | ✅ Pushed | Code ownership — all changes route to @hobbs0011 |
 | 9 | `OPERATIONS/PULSE-LOG-PROTOCOL.md` | New | ✅ Pushed | Bi-hourly pulse protocol mirrored from Notion |
 | 10 | `OPERATIONS/IMPROVEMENT-LOG-2026-03-24.md` | New | ✅ Pushed | This file — improvement audit trail |
 

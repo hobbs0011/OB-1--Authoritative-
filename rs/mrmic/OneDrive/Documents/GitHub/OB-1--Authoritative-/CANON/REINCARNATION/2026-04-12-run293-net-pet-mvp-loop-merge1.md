@@ -20,6 +20,28 @@ Speak ΓåÆ Correct ΓåÆ Repeat ΓåÆ Return tomorrow
 - **[GREEN]** "a"
 - **[YELLOW]** "map these out, these contain everything"
 - **[YELLOW]** "Commit Changes and Delegate: \"Delegate to cloud agent\""
+- **[YEL# REINCARNATION ΓÇö Run 293
+
+## MERGE SESSION
+- **Total Chats**: 2 (MERGE1 + MERGE2-FINAL)
+- **This Merge**: MERGE2 of 2 (FINAL)
+- **Merge Status**: CLOSED ΓÇö all merges consolidated
+
+## 1) HEADER
+- **Session Tag**: run293-net-pet-mvp-loop-merge1
+- **Datetime (ICT)**: 2026-04-12 09:44:48 ICT
+- **Signal Density (1-10)**: 8
+- **Theme**: OBI MVP execution reality-check, core loop repair, and merge-protocol death capture
+- **State Coming In**: Existing NET-PET-AI already beyond MVP scope, but the core Speak -> Correct -> Repeat flow had request/response field drift causing functional breakage.
+
+## 2) RAW QUOTES (VERBATIM)
+- **[GREEN]** "ΓÜÖ∩╕Å OBI MVP ΓÇö 30 DAY BUILD PLAN (REAL COMPANY VERSION)"
+- **[GREEN]** "If it doesnΓÇÖt improve:
+Speak ΓåÆ Correct ΓåÆ Repeat ΓåÆ Return tomorrow
+ΓåÆ DO NOT BUILD IT"
+- **[GREEN]** "a"
+- **[YELLOW]** "map these out, these contain everything"
+- **[YELLOW]** "Commit Changes and Delegate: \"Delegate to cloud agent\""
 - **[YELLOW]** "\"C:\\Users\\mrmic\\Desktop\\OB-1\\SOULDNA-RUN-GPT-GIT-NOTEBOOKLM-2.txt\""
 - **[GREEN]** "Follow instructions in #prompt:ReincarnateDEATH-MERGE.prompt.md with these arguments: merge1"
 
@@ -1982,7 +2004,7 @@ notion.js actually exports: `queryLessons, writeProgress, queryProgress, syncStu
 5. **Decision**: Repair toolchain (git identity, MCP server configs, GitKraken stale session).
    - **git identity**: Fixed globally + repo to mrmichaelhobbs123@gmail.com (was hobbs@naturalenglishtraining.com)
    - **MCP**: User-level mcp.json patched — filesystem, playwright, chrome-devtools, markitdown, Notion server wired
-   - **GitKraken**: Stale hobbs-lab trial session logged out; fresh login flow started
+   - **GitKraken**: Stale hobbs0011 trial session logged out; fresh login flow started
    - **Blocker remaining**: NOTION_TOKEN still missing from Windows environment variables
    - **Impact**: Toolchain partially restored. Git identity canonical. MCP structurally correct.
    - **Canon Affected**: .mcp.json (user + repo level)

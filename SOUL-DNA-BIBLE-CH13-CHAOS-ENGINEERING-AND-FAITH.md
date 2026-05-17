@@ -6,7 +6,7 @@
 **STATUS: SEALED**
 **Export: VAULT ENRICHED | Pulse Run 30 | 2026-03-26**
 **Source: Notion Soul DNA Bible → CH13 child page**
-**Cross-repo: hobbs-lab/Phoenix-Rise-Immortalize- SOUL-DNA-BIBLE/CH13**
+**Cross-repo: hobbs0011/Phoenix-Rise-Immortalize- SOUL-DNA-BIBLE/CH13**
 
 ---
 

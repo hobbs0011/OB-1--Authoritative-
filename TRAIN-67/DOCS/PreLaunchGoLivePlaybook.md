@@ -7,7 +7,7 @@
 > **Deadline:** 🔴 8 DAYS TO INCUBATOR (Apr 6, 2026)
 > **Time estimate:** ~2 hours active work by Michael
 > **Sources:** GO-NO-GO-Assessment.md (63/100), PublishChecklist.md, MonetizationArchitectureDeepDive.md, StudioModulePlacementMap.md, StudioIntegrationGuide.md, StudioSmokeTestScript.md, GamePageSEO.md, all 41+ Lua modules
-> **Cross-repo sources:** 6 files from `hobbs-lab/Phoenix-Rising-Protocol-Ultimate`
+> **Cross-repo sources:** 6 files from `hobbs0011/Phoenix-Rising-Protocol-Ultimate`
 
 ---
 

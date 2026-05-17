@@ -29,10 +29,10 @@
 - **Role:** OBI TTS (aura-2-orion-en)
 - **Status:** ✅ LIVE (PRODUCTION)
 
-### GitHub (hobbs-lab)
+### GitHub (hobbs0011)
 - **Role:** Canonical repo account
 - **Repos:** Phoenix-Rising-Protocol-Ultimate (private), Phoenix-Rise-Immortalize- (private)
-- **Note:** Notion AI GitHub integration linked to NaturalEnglishTraining org, NOT hobbs-lab
+- **Note:** Notion AI GitHub integration linked to NaturalEnglishTraining org, NOT hobbs0011
 
 ### Firebase (PAID)
 - **Role:** Potential deployment target for static apps (Galaxy Lessons, Classroom Manager)
@@ -119,7 +119,7 @@
 ### GitHub (hobbs0011)
 - **URL:** https://github.com/hobbs0011
 - **Repos:** NET-Ai-EcoSystem-CommandStation (PUBLIC, dormant since 2025-11-17)
-- **Action:** Archive or transfer to hobbs-lab
+- **Action:** Archive or transfer to hobbs0011
 
 ### Roblox Open Cloud API
 - **Role:** Student engagement/reward system
@@ -131,7 +131,7 @@
 
 1. **CLOUDFLARE_API_TOKEN** not set as GitHub secret → blocks GitHub Actions deploy bridge
 2. **phoenix-ob1 repo is PUBLIC** with wrangler.toml → secret exposure risk
-3. **NaturalEnglishTraining org** connected to Notion AI instead of hobbs-lab → blocks direct repo access
+3. **NaturalEnglishTraining org** connected to Notion AI instead of hobbs0011 → blocks direct repo access
 4. **SOVEREIGN_KEY rotation** still pending
 5. **Ghost CF workers** not yet deleted (phoenix-ob1, phoenix-empire, phoenix-rising-protocol)
 6. **Firebase** capabilities not yet audited — hosting, Firestore, Auth, Functions available?

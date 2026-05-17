@@ -131,9 +131,9 @@
 
 - Canon Vault: hobbs0011/Phoenix-Rising-Ultimate (origin) ✅
 - Mirror: hobbs0011/OB-1 ✅
-- Soul DNA Source: hobbs-lab/Phoenix-Rise-Immortalize- ✅
+- Soul DNA Source: hobbs0011/Phoenix-Rise-Immortalize- ✅
 - Product Code: hobbs0011/NET-Ai-EcoSystem-CommandStation ✅
-- **Marketing Art Repo: Phoenix-Rising-Tech/Phoenix-Rising-FullStackMarketing** (NEW)
+- **Marketing Art Repo: Phoenix-Rising-Ai-Solutions/Phoenix-Rising-FullStackMarketing** (NEW)
 - Navigator Index: IN TRASH
 
 ### CRITICAL REVERT

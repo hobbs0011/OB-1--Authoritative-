@@ -137,8 +137,8 @@
 
 | Repo | Purpose | Owner |
 |------|---------|-------|
-| `hobbs-lab/Phoenix-Rising-Protocol-Ultimate` | Active canon vault | PRIMARY |
-| `hobbs-lab/Phoenix-Rise-Immortalize-` | Original Soul DNA Bible (40 files), 8 VAULT dirs | SOURCE |
+| `hobbs0011/Phoenix-Rising-Protocol-Ultimate` | Active canon vault | PRIMARY |
+| `hobbs0011/Phoenix-Rise-Immortalize-` | Original Soul DNA Bible (40 files), 8 VAULT dirs | SOURCE |
 | `hobbs0011/NET-Ai-EcoSystem-CommandStation` | Legacy product code | DORMANT |
 
 ---

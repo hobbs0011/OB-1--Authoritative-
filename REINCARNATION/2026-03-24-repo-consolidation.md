@@ -14,7 +14,7 @@
 > "green light, 2 hours, daily every 2 hours, cleanup approved"
 
 **On improvements:**
-> "cool, find 10 improvements then push them automatically make sure this is logged here on notion and mirrored under the ultimate repo on hobbs-lab"
+> "cool, find 10 improvements then push them automatically make sure this is logged here on notion and mirrored under the ultimate repo on hobbs0011"
 
 **On the local commit (200+ staged files):**
 > "so should we keep it or not"

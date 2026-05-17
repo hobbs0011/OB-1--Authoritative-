@@ -12,12 +12,12 @@
     "run": 193,
     "cross_repo_sources": [
       {
-        "repo": "hobbs-lab/Phoenix-Rising-Protocol-Ultimate",
+        "repo": "hobbs0011/Phoenix-Rising-Protocol-Ultimate",
         "path": "CANON/BIBLE-CH14-THE-CLOSING-DECLARATION.md",
         "sha": "5ff9330cda352ea1cb6193ae25ccf0f9101e52c6"
       },
       {
-        "repo": "hobbs-lab/Phoenix-Rise-Immortalize-",
+        "repo": "hobbs0011/Phoenix-Rise-Immortalize-",
         "path": "SOUL-DNA-BIBLE/14_THE_CLOSING_DECLARATION.md",
         "sha": "e16e4fb9aedbd8da894ae5cbd4bb36b217f1af33"
       }

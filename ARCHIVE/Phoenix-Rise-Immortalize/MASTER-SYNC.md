@@ -29,7 +29,7 @@ All orchestrator command stations should append here before the next phase.
 | Backup cloud runtime | **Google-first** |
 | Fallback surfaces | Android, Mac |
 | Canonical command plane | Notion |
-| Canonical repo | `hobbs-lab/Phoenix-Rise-Immortalize-` |
+| Canonical repo | `hobbs0011/Phoenix-Rise-Immortalize-` |
 | Canonical sync artifact | `MASTER-SYNC.md` |
 | Synchronization law | **$$$ Protocol — Super Saiyan Synch** |
 

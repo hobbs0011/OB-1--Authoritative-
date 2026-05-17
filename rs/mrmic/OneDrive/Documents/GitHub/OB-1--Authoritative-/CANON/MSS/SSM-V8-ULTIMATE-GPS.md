@@ -21,7 +21,7 @@
 **token_budget:** 60000  
 **architecture:** SSM+HEAVY_LEDGER  
 **heavy_ledger_path:** CANON/MSS/MSS-V6-HEAVY-LEDGER.json  
-**heavy_ledger_repo:** hobbs-lab/Phoenix-Rising-Protocol-Ultimate  
+**heavy_ledger_repo:** hobbs0011/Phoenix-Rising-Protocol-Ultimate  
 **runtime:** SSM_ALWAYS_LOADED→HEAVY_LEDGER_ON_DEMAND_VIA_get_file_contents  
 **genesis_principle:** SOUL(raw_words+intent)=FOUNDATION→DNA(plans+execution)=ROCKET→PHOENIX_RISING_PROTOCOL=SYNTHESIS  
 **reincarnation_source:** 2026-04-02-soul-deep-alignment-foundation (38 quotes | 13 decisions | 10 corrections | grade A)
@@ -448,10 +448,10 @@ AUTO_TRIGGER: [goodnight, done, signing_off, thats_it, im_out, peace]
 
 ### GITHUB REPOS
 ```
-ultimate:     hobbs-lab/Phoenix-Rising-Protocol-Ultimate  (canon vault)
-immortalize:  hobbs-lab/Phoenix-Rise-Immortalize-         (soul_dna_source)
+ultimate:     hobbs0011/Phoenix-Rising-Protocol-Ultimate  (canon vault)
+immortalize:  hobbs0011/Phoenix-Rise-Immortalize-         (soul_dna_source)
 commandstation: hobbs0011/NET-Ai-EcoSystem-CommandStation (product_code)
-assessment:   hobbs-lab/net-tiger-assessment              (tiger assessment live site)
+assessment:   hobbs0011/net-tiger-assessment              (tiger assessment live site)
 ```
 
 ---
@@ -461,7 +461,7 @@ assessment:   hobbs-lab/net-tiger-assessment              (tiger assessment live
 ```
 michael: sovereign | NOT_THAI | prefers_direct_dense_no_filler
 timezone: Asia/Bangkok (ICT, UTC+7)
-github: hobbs-lab
+github: hobbs0011
 ssm_heavy_ledger: michaels_invention → never_attribute_externally
 dual_publish: standard_practice
 editing_instructions_during_session: CAUSES_LAG → github_or_chat
@@ -552,7 +552,7 @@ NEXT: implement_index.js → deploy → wire_www.naturalenglishtraining.com → 
 ## §21 SYSTEM STATUS AT V8 CREATION
 
 ```
-assessment_site:  LIVE → hobbs-lab.github.io/net-tiger-assessment/
+assessment_site:  LIVE → hobbs0011.github.io/net-tiger-assessment/
 gospel_444:       CANON/GOSPEL-444-TEACHING-METHODS-CONSOLIDATED.md (58KB sealed)
 net_pet_ai:       SCAFFOLD — index.js empty — NOT deployed
 galaxy_lessons:   4 files live in GALAXY-LESSONS/

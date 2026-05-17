@@ -1,7 +1,7 @@
 # Phoenix Rising — FullStack Marketing
 ## Art / Images / Iconology Subsystem
 
-**Org**: [Phoenix-Rising-Tech](https://github.com/Phoenix-Rising-Tech)  
+**Org**: [Phoenix-Rising-Ai-Solutions](https://github.com/Phoenix-Rising-Ai-Solutions)  
 **Parent system**: [Phoenix-Rising-Ultimate](https://github.com/hobbs0011/Phoenix-Rising-Ultimate) (canon vault)  
 **Brand**: Natural English Training (naturalenglishtraining.net)  
 **Agent**: OB1 Ne0 | Marketing Lane | Synch3
@@ -20,7 +20,7 @@ This repo = art, visual identity, asset management, social graphics, icons, logo
 ## Subsystem Map
 
 ```
-Phoenix-Rising-Tech/
+Phoenix-Rising-Ai-Solutions/
 └── Phoenix-Rising-FullStackMarketing/
     ├── art/              ← core artwork (hero pieces, key visuals)
     ├── logos/            ← logo variations (primary, stacked, icon-only, white, dark)

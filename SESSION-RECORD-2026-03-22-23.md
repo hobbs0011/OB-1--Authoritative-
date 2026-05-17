@@ -6,8 +6,8 @@
 
 | Field | Value |
 |---|---|
-| New canonical repo | hobbs-lab/Phoenix-Rising-Protocol-Ultimate |
-| Previous origin | hobbs-lab/Phoenix-Rise-Immortalize- |
+| New canonical repo | hobbs0011/Phoenix-Rising-Protocol-Ultimate |
+| Previous origin | hobbs0011/Phoenix-Rise-Immortalize- |
 | Local workspace | C:\\Users\\mrmic\\Desktop\\OB-1 |
 | App target | APPS/NET-PET-AI (Cloudflare Worker) |
 

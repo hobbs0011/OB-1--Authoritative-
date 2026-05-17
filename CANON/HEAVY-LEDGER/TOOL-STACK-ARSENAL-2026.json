@@ -48,11 +48,11 @@
           "status": "LIVE"
         },
         {
-          "name": "GitHub (hobbs-lab)",
+          "name": "GitHub (hobbs0011)",
           "role": "Canonical repo account",
           "repos": ["Phoenix-Rising-Protocol-Ultimate", "Phoenix-Rise-Immortalize-"],
           "visibility": "private",
-          "note": "Notion AI GitHub integration linked to NaturalEnglishTraining org, NOT hobbs-lab"
+          "note": "Notion AI GitHub integration linked to NaturalEnglishTraining org, NOT hobbs0011"
         },
         {
           "name": "Firebase",
@@ -134,7 +134,7 @@
           "url": "https://github.com/hobbs0011",
           "repos": ["NET-Ai-EcoSystem-CommandStation"],
           "note": "PUBLIC, dormant since 2025-11-17",
-          "action": "Archive or transfer to hobbs-lab"
+          "action": "Archive or transfer to hobbs0011"
         },
         {
           "name": "Roblox Open Cloud API",
@@ -147,7 +147,7 @@
   "known_gaps": [
     {"id": 1, "issue": "CLOUDFLARE_API_TOKEN not set as GitHub secret", "impact": "Blocks GitHub Actions deploy bridge", "severity": "HIGH"},
     {"id": 2, "issue": "phoenix-ob1 repo is PUBLIC with wrangler.toml", "impact": "Secret exposure risk", "severity": "CRITICAL"},
-    {"id": 3, "issue": "NaturalEnglishTraining org connected to Notion AI instead of hobbs-lab", "impact": "Blocks direct repo access", "severity": "MEDIUM"},
+    {"id": 3, "issue": "NaturalEnglishTraining org connected to Notion AI instead of hobbs0011", "impact": "Blocks direct repo access", "severity": "MEDIUM"},
     {"id": 4, "issue": "SOVEREIGN_KEY rotation still pending", "impact": "Security hygiene", "severity": "MEDIUM"},
     {"id": 5, "issue": "Ghost CF workers not yet deleted", "impact": "phoenix-ob1, phoenix-empire, phoenix-rising-protocol still exist", "severity": "LOW"},
     {"id": 6, "issue": "Firebase capabilities not yet audited", "impact": "Hosting, Firestore, Auth, Functions availability unknown", "severity": "LOW"},

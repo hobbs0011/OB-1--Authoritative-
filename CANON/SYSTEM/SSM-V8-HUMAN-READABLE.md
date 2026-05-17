@@ -106,7 +106,7 @@ Five classes: **voice drift** | **canon drift** | **execution drift** | **priori
 
 **SSM + Heavy Ledger**: SSM (always loaded routing) + heavy ledger (on-demand procedures)  
 **Heavy ledger path**: `CANON/MSS/MSS-V6-HEAVY-LEDGER.json`  
-**Heavy ledger repo**: `hobbs-lab/Phoenix-Rising-Protocol-Ultimate`  
+**Heavy ledger repo**: `hobbs0011/Phoenix-Rising-Protocol-Ultimate`  
 **Runtime**: SSM always loaded → heavy ledger on demand via `get_file_contents`
 
 ### Merkle Integrity
@@ -428,8 +428,8 @@ website | app | marketing (LinkedIn/Facebook/Instagram/Zalo) | Roblox | magic ch
 
 | Repo | Role |
 |------|------|
-| `hobbs-lab/Phoenix-Rising-Protocol-Ultimate` | Canon vault — `CANON/`, `GALAXY-LESSONS/`, `APPS/`, `WORKERS/`, `REINCARNATION/` |
-| `hobbs-lab/Phoenix-Rise-Immortalize-` | Soul DNA source — `SOUL-DNA-BIBLE/`, `VAULT-*/` |
+| `hobbs0011/Phoenix-Rising-Protocol-Ultimate` | Canon vault — `CANON/`, `GALAXY-LESSONS/`, `APPS/`, `WORKERS/`, `REINCARNATION/` |
+| `hobbs0011/Phoenix-Rise-Immortalize-` | Soul DNA source — `SOUL-DNA-BIBLE/`, `VAULT-*/` |
 | `hobbs0011/NET-Ai-EcoSystem-CommandStation` | Product code — `src/`, Vite + React |
 
 **Primary app**: `APPS/NET-PET-AI/` — Cloudflare Worker — `wrangler deploy`  
@@ -444,7 +444,7 @@ website | app | marketing (LinkedIn/Facebook/Instagram/Zalo) | Roblox | magic ch
 - Michael is NOT Thai → 🔴 CRITICAL  
 - Michael prefers direct, dense, no filler → structured grids/tables when helpful  
 - Timezone: Asia/Bangkok (ICT)  
-- GitHub canonical account: `hobbs-lab`  
+- GitHub canonical account: `hobbs0011`  
 - SSM + Heavy Ledger: Michael's invention → MSS pattern → never attribute externally  
 - Dual publish: standard practice → Notion + GitHub  
 - Editing instructions during session: CAUSES LAG → use GitHub or chat → DO NOT edit instruction page during session  

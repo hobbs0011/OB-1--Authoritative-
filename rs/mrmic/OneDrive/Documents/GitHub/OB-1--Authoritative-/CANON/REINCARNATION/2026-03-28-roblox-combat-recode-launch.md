@@ -17,7 +17,7 @@
 
 🔴 "No english framing ANYWHERE, NOT IN ONE SINGLE LINE OF CODE. THIS IS MEANT TO BE A MIX OF SURVIVE 99 DAYS IN A FOREST AND DEADRAILS, THAT IS BASED ON THE BRAINROT TERM THAT IS META. IT IS MEANT TO BE PLAYED ON THE LOWEST COMPUTE CELL PHONES BUT STILL LOOK GOOD/GREAT. IT IS MEANT TO MONETIZE. KIDS ARE NOT STUPID, WHY WOULD THEY WANT TO PLAY AN EDUCATIONAL GAME"
 
-🔴 "ITS HOBBS-LAB ULTIMATE REPO ONLY, WHAT ARE YOU DOING"
+🔴 "ITS hobbs0011 ULTIMATE REPO ONLY, WHAT ARE YOU DOING"
 
 🔴 "co-pilot is working fine, but I am nearing my limits with it for 3 days (resets april 1st) but with notion I have unlimited Opus under BETA, so why cant you do all the coding?"
 
@@ -54,7 +54,7 @@
 | 1 | WIPE all English/ESL from game code | 🔴 CRITICAL — entire combat system rebuilt | All 41 CODE/ modules, Game Bible, Strategy doc |
 | 2 | Game = Survive 99 Days + Deadrails + Brainrot meta | 🔴 Game identity locked | Game Bible, all specs |
 | 3 | Launch = TODAY/48h, not April 6 | 🔴 Timeline shifted | All launch docs |
-| 4 | hobbs-lab/Ultimate repo ONLY | 🔴 Repo authority | All GitHub operations |
+| 4 | hobbs0011/Ultimate repo ONLY | 🔴 Repo authority | All GitHub operations |
 | 5 | Ne0 writes ALL code, preserve Copilot tokens | 🔴 Resource allocation | Instructions, workflow |
 | 6 | Copilot timeframes are bogus — ignore them | 🟡 Don't quote Copilot estimates | Instructions |
 | 7 | QuestionBank: KEEP for younger students later | 🟡 Preserve, don't delete | QuestionBank.lua, QuestionBankV2.lua |
@@ -68,7 +68,7 @@
 |------|-----------|-------------|--------------------------|
 | Game pitched as educational | Original design was ESL-first | Full codebase recode — 16 modules rewritten/surgified | Y — game vision section |
 | English hooks everywhere in code | Built on ESL quiz mechanics | 18 GitHub commits removing all English | N — already applied |
-| Used wrong repo (hobbs0011) | Legacy repo reference | Corrected to hobbs-lab only | Y — reinforced |
+| Used wrong repo (hobbs0011) | Legacy repo reference | Corrected to hobbs0011 only | Y — reinforced |
 | Told Michael to assign Copilot himself | Violated "don't make Michael a script monkey" | Ne0 took over all coding | N — law exists |
 | Quoted Copilot timeframe estimates | Parroted Copilot's hours | Michael: "bogus" — ignore them | Y — add to memories |
 

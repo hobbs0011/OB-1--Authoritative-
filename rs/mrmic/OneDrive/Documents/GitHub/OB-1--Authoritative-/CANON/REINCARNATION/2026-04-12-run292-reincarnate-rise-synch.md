@@ -50,7 +50,7 @@ None discovered — reincarnation housekeeping run, no new doctrine.
 | 7 | Revert `16c9598` in extension.js (student OBI chat)       | MEDIUM   | Next VS Code extension session       |
 | 8 | Fix weakness_pct calculation (currently 0.0)              | LOW      | Next NET-OPERATIONS session          |
 | 9 | Create phoenix-pheromone-trails repo (1100+ logs on D:\)  | LOW      | Sovereign scheduling                 |
-| 10| GitHub rename: Phoenix-Rising-Ultimate → Phoenix-Rising-Technologies | LOW | Sovereign web UI action      |
+| 10| GitHub rename: Phoenix-Rising-Ultimate → Phoenix-Rising-Ai-Solutionsnologies | LOW | Sovereign web UI action      |
 
 ## PHEROMONE_TRAIL
 

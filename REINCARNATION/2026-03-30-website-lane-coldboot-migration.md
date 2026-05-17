@@ -83,7 +83,7 @@
 ## 🔮 Active Mission Set (For Pulse Engine)
 
 **Mission:** BUILD FULLSTACK NET WEBSITE
-**Target:** `WEBSITE/` directory on `hobbs-lab/Phoenix-Rising-Protocol-Ultimate`
+**Target:** `WEBSITE/` directory on `hobbs0011/Phoenix-Rising-Protocol-Ultimate`
 **Design:** Gospel 444 — void #0f0f1a, soul_purple #a855f7, imperial_gold #f59e0b, Orbitron/Rajdhani/Inter, black glass luxury, purple neon edge glow, gold accents, big typography
 **Brand:** Natural English Training (NEVER Phoenix Rising)
 **Domains:** naturalenglishtraining.com (marketing, CF Pages), naturalenglishtraining.net (app, CF Workers)

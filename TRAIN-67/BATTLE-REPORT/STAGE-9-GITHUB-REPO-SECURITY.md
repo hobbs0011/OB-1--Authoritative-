@@ -19,8 +19,8 @@ The repos have reasonable gitignore coverage and a SECURITY.md policy, but lack 
 
 | Repo | Account | Visibility | Last Commit | Purpose |
 |---|---|---|---|---|
-| `Phoenix-Rising-Protocol-Ultimate` | hobbs-lab | Private | `0159b57` (2026-03-26) | Primary canon + code + website |
-| `Phoenix-Rise-Immortalize-` | hobbs-lab | Public(?) | `5289053` | Vault + deployment configs |
+| `Phoenix-Rising-Protocol-Ultimate` | hobbs0011 | Private | `0159b57` (2026-03-26) | Primary canon + code + website |
+| `Phoenix-Rise-Immortalize-` | hobbs0011 | Public(?) | `5289053` | Vault + deployment configs |
 | `NET-Ai-EcoSystem-CommandStation` | hobbs0011 | Unknown | `d9785b2` | Legacy React app (abandoned) |
 
 **🔴 CRITICAL from SECURITY.md itself:** "phoenix-ob1 repo is PUBLIC with potential secrets" — status: ⚠️ OPEN
@@ -61,10 +61,10 @@ The repos have reasonable gitignore coverage and a SECURITY.md policy, but lack 
 
 ### CODEOWNERS (Ultimate repo)
 ```
-* @hobbs-lab
-/CANON/ @hobbs-lab
-/APPS/NET-PET-AI/ @hobbs-lab
-/OPERATIONS/ @hobbs-lab
+* @hobbs0011
+/CANON/ @hobbs0011
+/APPS/NET-PET-AI/ @hobbs0011
+/OPERATIONS/ @hobbs0011
 ```
 **Assessment:** ✅ All paths require sovereign review. Good.
 
@@ -78,9 +78,9 @@ The repos have reasonable gitignore coverage and a SECURITY.md policy, but lack 
 ### Account Fragmentation
 | Issue | Detail |
 |---|---|
-| Two GitHub accounts | `hobbs-lab` (primary) and `hobbs0011` (legacy) |
+| Two GitHub accounts | `hobbs0011` (primary) and `hobbs0011` (legacy) |
 | Risk | Forgotten repos on old account, inconsistent security policies |
-| **Recommendation** | Transfer `NET-Ai-EcoSystem-CommandStation` to `hobbs-lab` or archive it |
+| **Recommendation** | Transfer `NET-Ai-EcoSystem-CommandStation` to `hobbs0011` or archive it |
 
 ---
 
@@ -172,6 +172,6 @@ The Ultimate repo has a `SECURITY.md` — good practice. But it documents **know
 | 🟡 P1 | Create basic GitHub Actions workflow (lint + security scan on PR) | 1 hour |
 | 🟡 P1 | Enable Dependabot on repos with dependencies | 10 minutes |
 | 🟡 P1 | Scan full commit history for leaked secrets (`git log -p | grep -i key\|secret\|token`) | 30 minutes |
-| 🟢 P2 | Transfer or archive `NET-Ai-EcoSystem-CommandStation` from hobbs0011 to hobbs-lab | 15 minutes |
+| 🟢 P2 | Transfer or archive `NET-Ai-EcoSystem-CommandStation` from hobbs0011 to hobbs0011 | 15 minutes |
 | 🟢 P2 | Consolidate deployment configs — pick Cloudflare OR GCP, not both | 1 hour |
 | 🟢 P2 | Add `.github/workflows/security-scan.yml` automated on push | 1 hour |

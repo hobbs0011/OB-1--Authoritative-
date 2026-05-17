@@ -96,4 +96,4 @@ See [`validators/MASTER_CONTRACT.md`](validators/MASTER_CONTRACT.md) — sealed 
 
 ---
 *Rebuilt from phoenix-ob1-system via 5-stage pre-nuke extraction — 2026-03-10*
-*Migrated to hobbs-lab/Phoenix-Rising-Protocol-Ultimate/APPS/phoenix-ob1/ — 2026-03-24*
+*Migrated to hobbs0011/Phoenix-Rising-Protocol-Ultimate/APPS/phoenix-ob1/ — 2026-03-24*

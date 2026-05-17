@@ -176,8 +176,8 @@ READY.
 
 | Repo | Role | Key Dirs |
 |------|------|----------|
-| `hobbs-lab/Phoenix-Rising-Protocol-Ultimate` | Canon vault | `CANON/`, `GALAXY-LESSONS/`, `APPS/`, `WORKERS/`, `REINCARNATION/` |
-| `hobbs-lab/Phoenix-Rise-Immortalize-` | Soul DNA source | `SOUL-DNA-BIBLE/`, `VAULT-*/` |
+| `hobbs0011/Phoenix-Rising-Protocol-Ultimate` | Canon vault | `CANON/`, `GALAXY-LESSONS/`, `APPS/`, `WORKERS/`, `REINCARNATION/` |
+| `hobbs0011/Phoenix-Rise-Immortalize-` | Soul DNA source | `SOUL-DNA-BIBLE/`, `VAULT-*/` |
 | `hobbs0011/NET-Ai-EcoSystem-CommandStation` | Product code | `src/`, Vite+React |
 
 **Primary app**: `APPS/NET-PET-AI/` — Cloudflare Worker — `wrangler deploy`  

@@ -248,7 +248,7 @@ Scheduled reinforcement: if student inactive → trigger recall drill → pull l
 - [ ] Set wrangler secrets: DEEPSEEK_API_KEY, DEEPGRAM_API_KEY
 - [ ] Execute Phase 3-9 consolidation plan
 - [ ] Create phoenix-pheromone-trails repo (600+ chat logs + 8 backup zips)
-- [ ] Rename repo: Phoenix-Rising-Ultimate → Phoenix-Rising-Technologies
+- [ ] Rename repo: Phoenix-Rising-Ultimate → Phoenix-Rising-Ai-Solutionsnologies
 - [x] NET-PET-AI deployment verified LIVE (v1.4.0, 28 routes)
 
 ---

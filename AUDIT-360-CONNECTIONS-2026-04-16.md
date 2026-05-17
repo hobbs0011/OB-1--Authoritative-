@@ -38,7 +38,7 @@ Remotes:
 
 Owner reachability:
 - `hobbs0011`: reachable (200)
-- `hobbs-lab`: not reachable (404)
+- `hobbs0011`: not reachable (404)
 - `mrmichaelhobbs1234-lang`: not reachable (404)
 
 Implication:
@@ -50,7 +50,7 @@ Implication:
 High-priority mismatches found:
 
 1. Root sync docs conflict on canonical owner direction.
-- `MASTER-SYNC.md` (root) still shows older hobbs-lab-centric state.
+- `MASTER-SYNC.md` (root) still shows older hobbs0011-centric state.
 - `_SORTED/TEXT-NOTES/MASTER-SYNC.md` reflects newer hobbs0011-active state.
 
 2. Workflow references legacy target repos/accounts by default language.
@@ -75,7 +75,7 @@ Remaining blind spots:
 
 1. `.github/workflows/copilot-swarm.yml`
 - Added `enable_legacy_targets` input (default `false`).
-- Legacy jobs (`hobbs-lab`, `mrmichaelhobbs1234-lang`) now gated and OFF by default.
+- Legacy jobs (`hobbs0011`, `mrmichaelhobbs1234-lang`) now gated and OFF by default.
 
 2. `SCRIPTS/connection-hardening-audit.ps1`
 - New script to audit:

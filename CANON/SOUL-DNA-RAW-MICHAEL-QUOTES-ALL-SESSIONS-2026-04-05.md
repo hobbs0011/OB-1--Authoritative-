@@ -188,9 +188,9 @@ _File: 2026-03-24-gospel-444-consolidation.md | Quotes: 9_
 **Sovereign Michael Hobbs (SOV100):**
 > "can you find and consolodate all info avaliable to you about how *make my lessons under gospel 444 and my teaching methods*"
 
-> "yeah lets consolodate and load everything into files on notion and the ultimate repo on hobbs-lab as standard practive from now on"
+> "yeah lets consolodate and load everything into files on notion and the ultimate repo on hobbs0011 as standard practive from now on"
 
-> "confirm name of repo? Phoenix-Rising-Protocol-Ultimate on hobbs-lab right?"
+> "confirm name of repo? Phoenix-Rising-Protocol-Ultimate on hobbs0011 right?"
 
 > "cool search the repo for some of the lesson examples we have made int he past, see if you can make a list"
 
@@ -235,7 +235,7 @@ _File: 2026-03-24-light-session-reincarnation.md | Quotes: 1_
 _File: 2026-03-24-net-student-profiles.md | Quotes: 4_
 
 **Date 2026-03-24 ~1900–2153 ICT:**
-> "make a dual update to notion with this that mirrors the repo on Hobbs-Lab that ends with 'ultimate'"
+> "make a dual update to notion with this that mirrors the repo on hobbs0011 that ends with 'ultimate'"
 >
 > "make a SOUL DNA BIBLE update as this lesson was rich with SOUL DNA"
 >
@@ -290,7 +290,7 @@ _File: 2026-03-24-repo-consolidation.md | Quotes: 6_
 
 > "green light, 2 hours, daily every 2 hours, cleanup approved"
 
-> "cool, find 10 improvements then push them automatically make sure this is logged here on notion and mirrored under the ultimate repo on hobbs-lab"
+> "cool, find 10 improvements then push them automatically make sure this is logged here on notion and mirrored under the ultimate repo on hobbs0011"
 
 > "so should we keep it or not"
 
@@ -312,7 +312,7 @@ _File: 2026-03-24-security-drone-research.md | Quotes: 4_
 >
 > "Files are gone. Now let me check what services used those secrets so I can flag what needs manual rotation — then move to Block 3."
 
-> "Remote points to hobbs0011/Phoenix-Rising-Ultimate. Needs updating to hobbs-lab/Phoenix-Rising-Protocol-Ultimate."
+> "Remote points to hobbs0011/Phoenix-Rising-Ultimate. Needs updating to hobbs0011/Phoenix-Rising-Protocol-Ultimate."
 >
 > "The 0732c05 local version is more complete for both files. Taking --theirs (our local replay) for both conflicts."
 >
@@ -334,7 +334,7 @@ _File: 2026-03-24-security-drone-research.md | Quotes: 4_
 _File: 2026-03-24-skeleton-star-map-ingestion.md | Quotes: 1_
 
 **Mode Extract (established session):**
-> "Random Skeleton Stuff, see if useful, leave what isn't, super Saiyan mode activated, update notion and ultimate Hobbs-Lab repo accordingly, this is mostly DNA it looks like, but make sure to capture any SOUL verbatim"
+> "Random Skeleton Stuff, see if useful, leave what isn't, super Saiyan mode activated, update notion and ultimate hobbs0011 repo accordingly, this is mostly DNA it looks like, but make sure to capture any SOUL verbatim"
 >
 > "reincarnate"
 
@@ -408,7 +408,7 @@ _File: 2026-03-24-website-netpet-consolidation.md | Quotes: 14_
 
 > "try to do what you need to do with what I gave you"
 
-> "use the hobbs-lab …ultimate repo"
+> "use the hobbs0011 …ultimate repo"
 
 ---
 
@@ -436,7 +436,7 @@ _File: 2026-03-24-website-recovery-master-sync-simulation.md | Quotes: 3_
 _File: 2026-03-25-net-methodology-bottleneck-fix.md | Quotes: 3_
 
 **Signal density 🟡 Medium — 1 massive content dump + 1 critical correction + 1 ruling confirmation:**
-> "updated extensively on Notion and the ultimate repo on hobbs-lab"
+> "updated extensively on Notion and the ultimate repo on hobbs0011"
 
 > "1 2 and 3 are complete, check the reincarnate logs"
 

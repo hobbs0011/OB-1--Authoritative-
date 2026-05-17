@@ -4,7 +4,7 @@
 > **Run:** 50 | **Date:** 2026-03-27 05:00 ICT
 > **Active Mission:** 100% Roblox — MAKE MONEY is the only goal
 > **Sources:** MonetizationArchitectureDeepDive.md (`63234bee`), ServerArchitectureQuestionBankScaling.md (`f310ea1f`), FTUECompressionAnalysis.md (`c47a1859`), ReceiptRouter.lua (`11303d4c`), MobileFirstEnglishInputDesign.md (`305efd84`)
-> **Cross-repo sources:** 5 files from `hobbs-lab/Phoenix-Rising-Protocol-Ultimate`
+> **Cross-repo sources:** 5 files from `hobbs0011/Phoenix-Rising-Protocol-Ultimate`
 
 ---
 

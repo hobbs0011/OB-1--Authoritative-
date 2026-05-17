@@ -129,4 +129,4 @@ Fearful · Race · Overwhelmed · Survive · Provide for · Outdated · Visionar
 ## Source
 
 Full session transcript: Live Gemini-assisted class, Michael Hobbs with Mai Tram (BlueTech Private), 2026-03-24.
-Dual-published: Notion (Soul DNA Bible A4) + GitHub (`hobbs-lab/Phoenix-Rising-Protocol-Ultimate`).
+Dual-published: Notion (Soul DNA Bible A4) + GitHub (`hobbs0011/Phoenix-Rising-Protocol-Ultimate`).

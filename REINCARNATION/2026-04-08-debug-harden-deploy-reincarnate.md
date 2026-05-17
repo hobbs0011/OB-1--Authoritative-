@@ -32,7 +32,7 @@
 
 ## §3 DECISIONS (WITH IMPACT)
 
-1. Decision: Create new GitHub repo `hobbs0011/net-tiger-assessment` for GitHub Pages deployment (old `hobbs-lab` repo was deleted/missing).
+1. Decision: Create new GitHub repo `hobbs0011/net-tiger-assessment` for GitHub Pages deployment (old `hobbs0011` repo was deleted/missing).
    - Impact: Tiger Assessment site now live at `https://hobbs0011.github.io/net-tiger-assessment/`
 
 2. Decision: Wire `security.js` middleware into `index.js` (was imported but never called).

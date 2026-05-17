@@ -90,7 +90,7 @@
 | **GitHub Actions** | ✅ WIRED | `.github/` | CI/CD pipeline. Auto-deploys on push. |
 | **GitHub Copilot** | ✅ WIRED | `.github/copilot-instructions.md` | Agent instructions, task execution, PR automation. |
 | **VS Code** | 📋 REFERENCED | — | Primary IDE. No direct codebase integration. |
-| **GitHub (hobbs-lab org)** | ✅ WIRED | This repo | `hobbs-lab/Phoenix-Rising-Protocol-Ultimate` — canonical source. |
+| **GitHub (hobbs0011 org)** | ✅ WIRED | This repo | `hobbs0011/Phoenix-Rising-Protocol-Ultimate` — canonical source. |
 | **GitHub (hobbs0011)** | 📋 REFERENCED | — | Secondary personal account. |
 | **GitHub (mrmichaelhobbs1234-lang)** | 📋 REFERENCED | — | Language-focused account. |
 | **Roblox Creator Account** | ❌ NOT USED | — | Separate platform. Not integrated with Worker. |

@@ -492,5 +492,5 @@ CANON/TRAIN-67/
 
 *Consolidated: 2026-03-28 by OB1 for SOV100*
 *Updated: 2026-03-28 — Combat recode status added, deadline corrected to NOW, ESL references marked for replacement*
-*Source: `hobbs-lab/Phoenix-Rising-Protocol-Ultimate` repo, `CANON/TRAIN-67/` directory*
+*Source: `hobbs0011/Phoenix-Rising-Protocol-Ultimate` repo, `CANON/TRAIN-67/` directory*
 *Artifact class: 🏦 VAULT — consolidated strategy document*

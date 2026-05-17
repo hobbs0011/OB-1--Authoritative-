@@ -200,8 +200,8 @@ unnamed.png
 .git/logs/refs/remotes/legacy-phoenix/copilot/vscode-mnv75ipm-bsyk
 .git/logs/refs/remotes/legacy-phoenix/copilot/vscode-mnv76854-1y8f
 .git/logs/refs/remotes/legacy-phoenix/copilot/vscode-mnvbpotv-y50n
-.git/logs/refs/remotes/legacy-phoenix/hobbs-lab/0011
-.git/logs/refs/remotes/legacy-phoenix/hobbs-lab/issue10
+.git/logs/refs/remotes/legacy-phoenix/hobbs0011/0011
+.git/logs/refs/remotes/legacy-phoenix/hobbs0011/issue10
 .git/logs/refs/remotes/legacy-phoenix/pr/copilot-swe-agent/20
 .git/logs/refs/remotes/legacy-phoenix/pr/copilot-swe-agent/21
 .git/logs/refs/remotes/legacy-phoenix/pr/copilot-swe-agent/21-1
@@ -4094,8 +4094,8 @@ unnamed.png
 .git/refs/remotes/legacy-phoenix/copilot/vscode-mnv75ipm-bsyk
 .git/refs/remotes/legacy-phoenix/copilot/vscode-mnv76854-1y8f
 .git/refs/remotes/legacy-phoenix/copilot/vscode-mnvbpotv-y50n
-.git/refs/remotes/legacy-phoenix/hobbs-lab/0011
-.git/refs/remotes/legacy-phoenix/hobbs-lab/issue10
+.git/refs/remotes/legacy-phoenix/hobbs0011/0011
+.git/refs/remotes/legacy-phoenix/hobbs0011/issue10
 .git/refs/remotes/legacy-phoenix/pr/copilot-swe-agent/20
 .git/refs/remotes/legacy-phoenix/pr/copilot-swe-agent/21
 .git/refs/remotes/legacy-phoenix/pr/copilot-swe-agent/21-1
@@ -6598,7 +6598,7 @@ unnamed.png
 .kilo/worktrees/bolder-freckle/CANON/HEAVY-LEDGER/HL-124-discord-bot-deploy-morning.json
 .kilo/worktrees/bolder-freckle/CANON/HEAVY-LEDGER/HL-124-roblox-deep-intel.json
 .kilo/worktrees/bolder-freckle/CANON/HEAVY-LEDGER/HL-124-v5-extraction-engine.json
-.kilo/worktrees/bolder-freckle/CANON/HEAVY-LEDGER/HL-125-repo-consolidation-hobbs-lab-canonical.json
+.kilo/worktrees/bolder-freckle/CANON/HEAVY-LEDGER/HL-125-repo-consolidation-hobbs0011-canonical.json
 .kilo/worktrees/bolder-freckle/CANON/HEAVY-LEDGER/HL-125-roblox-deploy-github-first-boot.json
 .kilo/worktrees/bolder-freckle/CANON/HEAVY-LEDGER/HL-125-trigger-audit-rulings-v3.json
 .kilo/worktrees/bolder-freckle/CANON/HEAVY-LEDGER/HL-126-notebooklm-vault-architect-origin.json
@@ -8835,7 +8835,7 @@ unnamed.png
 .kilo/worktrees/bolder-freckle/CANON/REINCARNATION/2026-03-26-DUMP-CONSOLIDATE-BLUETECH-5SRC.md
 .kilo/worktrees/bolder-freckle/CANON/REINCARNATION/2026-03-26-notebooklm-vault-5dump.md
 .kilo/worktrees/bolder-freckle/CANON/REINCARNATION/2026-03-26-notebooklm-vault-architect-origin.md
-.kilo/worktrees/bolder-freckle/CANON/REINCARNATION/2026-03-26-repo-consolidation-hobbs-lab-canonical.md
+.kilo/worktrees/bolder-freckle/CANON/REINCARNATION/2026-03-26-repo-consolidation-hobbs0011-canonical.md
 .kilo/worktrees/bolder-freckle/CANON/REINCARNATION/2026-03-26-roblox-deep-intel.md
 .kilo/worktrees/bolder-freckle/CANON/REINCARNATION/2026-03-26-sales-dna-revenue-pivot.md
 .kilo/worktrees/bolder-freckle/CANON/REINCARNATION/2026-03-26-two-server-rulings-closed.md
@@ -9836,7 +9836,7 @@ unnamed.png
 .kilo/worktrees/bolder-freckle/CANON/SYSTEM/BIBLE-REPO-CONSOLIDATION-MAP.md
 .kilo/worktrees/bolder-freckle/CANON/SYSTEM/CANON-ACCESS-INDEX.md
 .kilo/worktrees/bolder-freckle/CANON/SYSTEM/COLD-START-BOOT.md
-.kilo/worktrees/bolder-freckle/CANON/SYSTEM/CONSOLIDATION-PLAN-PHOENIX-RISING-TECHNOLOGIES.md
+.kilo/worktrees/bolder-freckle/CANON/SYSTEM/CONSOLIDATION-PLAN-Phoenix-Rising-Ai-SolutionsNOLOGIES.md
 .kilo/worktrees/bolder-freckle/CANON/SYSTEM/debug.log
 .kilo/worktrees/bolder-freckle/CANON/SYSTEM/GENESIS_BLUEPRINTS_51_100.md
 .kilo/worktrees/bolder-freckle/CANON/SYSTEM/KILO-DELEGATION-BRIEF.md
@@ -11201,7 +11201,7 @@ unnamed.png
 .kilo/worktrees/bolder-freckle/TEMP-PHOENIX-ULTIMATE/CANON/REINCARNATION/2026-03-26-DUMP-CONSOLIDATE-BLUETECH-5SRC.md
 .kilo/worktrees/bolder-freckle/TEMP-PHOENIX-ULTIMATE/CANON/REINCARNATION/2026-03-26-notebooklm-vault-5dump.md
 .kilo/worktrees/bolder-freckle/TEMP-PHOENIX-ULTIMATE/CANON/REINCARNATION/2026-03-26-notebooklm-vault-architect-origin.md
-.kilo/worktrees/bolder-freckle/TEMP-PHOENIX-ULTIMATE/CANON/REINCARNATION/2026-03-26-repo-consolidation-hobbs-lab-canonical.md
+.kilo/worktrees/bolder-freckle/TEMP-PHOENIX-ULTIMATE/CANON/REINCARNATION/2026-03-26-repo-consolidation-hobbs0011-canonical.md
 .kilo/worktrees/bolder-freckle/TEMP-PHOENIX-ULTIMATE/CANON/REINCARNATION/2026-03-26-roblox-deep-intel.md
 .kilo/worktrees/bolder-freckle/TEMP-PHOENIX-ULTIMATE/CANON/REINCARNATION/2026-03-26-sales-dna-revenue-pivot.md
 .kilo/worktrees/bolder-freckle/TEMP-PHOENIX-ULTIMATE/CANON/REINCARNATION/2026-03-26-two-server-rulings-closed.md
@@ -12892,7 +12892,7 @@ unnamed.png
 .kilo/worktrees/plausible-relish/CANON/HEAVY-LEDGER/HL-124-discord-bot-deploy-morning.json
 .kilo/worktrees/plausible-relish/CANON/HEAVY-LEDGER/HL-124-roblox-deep-intel.json
 .kilo/worktrees/plausible-relish/CANON/HEAVY-LEDGER/HL-124-v5-extraction-engine.json
-.kilo/worktrees/plausible-relish/CANON/HEAVY-LEDGER/HL-125-repo-consolidation-hobbs-lab-canonical.json
+.kilo/worktrees/plausible-relish/CANON/HEAVY-LEDGER/HL-125-repo-consolidation-hobbs0011-canonical.json
 .kilo/worktrees/plausible-relish/CANON/HEAVY-LEDGER/HL-125-roblox-deploy-github-first-boot.json
 .kilo/worktrees/plausible-relish/CANON/HEAVY-LEDGER/HL-125-trigger-audit-rulings-v3.json
 .kilo/worktrees/plausible-relish/CANON/HEAVY-LEDGER/HL-126-notebooklm-vault-architect-origin.json
@@ -15116,7 +15116,7 @@ unnamed.png
 .kilo/worktrees/plausible-relish/CANON/REINCARNATION/2026-03-26-DUMP-CONSOLIDATE-BLUETECH-5SRC.md
 .kilo/worktrees/plausible-relish/CANON/REINCARNATION/2026-03-26-notebooklm-vault-5dump.md
 .kilo/worktrees/plausible-relish/CANON/REINCARNATION/2026-03-26-notebooklm-vault-architect-origin.md
-.kilo/worktrees/plausible-relish/CANON/REINCARNATION/2026-03-26-repo-consolidation-hobbs-lab-canonical.md
+.kilo/worktrees/plausible-relish/CANON/REINCARNATION/2026-03-26-repo-consolidation-hobbs0011-canonical.md
 .kilo/worktrees/plausible-relish/CANON/REINCARNATION/2026-03-26-roblox-deep-intel.md
 .kilo/worktrees/plausible-relish/CANON/REINCARNATION/2026-03-26-sales-dna-revenue-pivot.md
 .kilo/worktrees/plausible-relish/CANON/REINCARNATION/2026-03-26-two-server-rulings-closed.md
@@ -17329,7 +17329,7 @@ unnamed.png
 .kilo/worktrees/plausible-relish/TEMP-PHOENIX-ULTIMATE/CANON/REINCARNATION/2026-03-26-DUMP-CONSOLIDATE-BLUETECH-5SRC.md
 .kilo/worktrees/plausible-relish/TEMP-PHOENIX-ULTIMATE/CANON/REINCARNATION/2026-03-26-notebooklm-vault-5dump.md
 .kilo/worktrees/plausible-relish/TEMP-PHOENIX-ULTIMATE/CANON/REINCARNATION/2026-03-26-notebooklm-vault-architect-origin.md
-.kilo/worktrees/plausible-relish/TEMP-PHOENIX-ULTIMATE/CANON/REINCARNATION/2026-03-26-repo-consolidation-hobbs-lab-canonical.md
+.kilo/worktrees/plausible-relish/TEMP-PHOENIX-ULTIMATE/CANON/REINCARNATION/2026-03-26-repo-consolidation-hobbs0011-canonical.md
 .kilo/worktrees/plausible-relish/TEMP-PHOENIX-ULTIMATE/CANON/REINCARNATION/2026-03-26-roblox-deep-intel.md
 .kilo/worktrees/plausible-relish/TEMP-PHOENIX-ULTIMATE/CANON/REINCARNATION/2026-03-26-sales-dna-revenue-pivot.md
 .kilo/worktrees/plausible-relish/TEMP-PHOENIX-ULTIMATE/CANON/REINCARNATION/2026-03-26-two-server-rulings-closed.md
@@ -18945,7 +18945,7 @@ unnamed.png
 .kilo/worktrees/spiny-brand/CANON/HEAVY-LEDGER/HL-124-discord-bot-deploy-morning.json
 .kilo/worktrees/spiny-brand/CANON/HEAVY-LEDGER/HL-124-roblox-deep-intel.json
 .kilo/worktrees/spiny-brand/CANON/HEAVY-LEDGER/HL-124-v5-extraction-engine.json
-.kilo/worktrees/spiny-brand/CANON/HEAVY-LEDGER/HL-125-repo-consolidation-hobbs-lab-canonical.json
+.kilo/worktrees/spiny-brand/CANON/HEAVY-LEDGER/HL-125-repo-consolidation-hobbs0011-canonical.json
 .kilo/worktrees/spiny-brand/CANON/HEAVY-LEDGER/HL-125-roblox-deploy-github-first-boot.json
 .kilo/worktrees/spiny-brand/CANON/HEAVY-LEDGER/HL-125-trigger-audit-rulings-v3.json
 .kilo/worktrees/spiny-brand/CANON/HEAVY-LEDGER/HL-126-notebooklm-vault-architect-origin.json
@@ -21169,7 +21169,7 @@ unnamed.png
 .kilo/worktrees/spiny-brand/CANON/REINCARNATION/2026-03-26-DUMP-CONSOLIDATE-BLUETECH-5SRC.md
 .kilo/worktrees/spiny-brand/CANON/REINCARNATION/2026-03-26-notebooklm-vault-5dump.md
 .kilo/worktrees/spiny-brand/CANON/REINCARNATION/2026-03-26-notebooklm-vault-architect-origin.md
-.kilo/worktrees/spiny-brand/CANON/REINCARNATION/2026-03-26-repo-consolidation-hobbs-lab-canonical.md
+.kilo/worktrees/spiny-brand/CANON/REINCARNATION/2026-03-26-repo-consolidation-hobbs0011-canonical.md
 .kilo/worktrees/spiny-brand/CANON/REINCARNATION/2026-03-26-roblox-deep-intel.md
 .kilo/worktrees/spiny-brand/CANON/REINCARNATION/2026-03-26-sales-dna-revenue-pivot.md
 .kilo/worktrees/spiny-brand/CANON/REINCARNATION/2026-03-26-two-server-rulings-closed.md
@@ -23383,7 +23383,7 @@ unnamed.png
 .kilo/worktrees/spiny-brand/TEMP-PHOENIX-ULTIMATE/CANON/REINCARNATION/2026-03-26-DUMP-CONSOLIDATE-BLUETECH-5SRC.md
 .kilo/worktrees/spiny-brand/TEMP-PHOENIX-ULTIMATE/CANON/REINCARNATION/2026-03-26-notebooklm-vault-5dump.md
 .kilo/worktrees/spiny-brand/TEMP-PHOENIX-ULTIMATE/CANON/REINCARNATION/2026-03-26-notebooklm-vault-architect-origin.md
-.kilo/worktrees/spiny-brand/TEMP-PHOENIX-ULTIMATE/CANON/REINCARNATION/2026-03-26-repo-consolidation-hobbs-lab-canonical.md
+.kilo/worktrees/spiny-brand/TEMP-PHOENIX-ULTIMATE/CANON/REINCARNATION/2026-03-26-repo-consolidation-hobbs0011-canonical.md
 .kilo/worktrees/spiny-brand/TEMP-PHOENIX-ULTIMATE/CANON/REINCARNATION/2026-03-26-roblox-deep-intel.md
 .kilo/worktrees/spiny-brand/TEMP-PHOENIX-ULTIMATE/CANON/REINCARNATION/2026-03-26-sales-dna-revenue-pivot.md
 .kilo/worktrees/spiny-brand/TEMP-PHOENIX-ULTIMATE/CANON/REINCARNATION/2026-03-26-two-server-rulings-closed.md
@@ -25252,7 +25252,7 @@ unnamed.png
 .kilo/worktrees/splendid-cotija/CANON/HEAVY-LEDGER/HL-124-discord-bot-deploy-morning.json
 .kilo/worktrees/splendid-cotija/CANON/HEAVY-LEDGER/HL-124-roblox-deep-intel.json
 .kilo/worktrees/splendid-cotija/CANON/HEAVY-LEDGER/HL-124-v5-extraction-engine.json
-.kilo/worktrees/splendid-cotija/CANON/HEAVY-LEDGER/HL-125-repo-consolidation-hobbs-lab-canonical.json
+.kilo/worktrees/splendid-cotija/CANON/HEAVY-LEDGER/HL-125-repo-consolidation-hobbs0011-canonical.json
 .kilo/worktrees/splendid-cotija/CANON/HEAVY-LEDGER/HL-125-roblox-deploy-github-first-boot.json
 .kilo/worktrees/splendid-cotija/CANON/HEAVY-LEDGER/HL-125-trigger-audit-rulings-v3.json
 .kilo/worktrees/splendid-cotija/CANON/HEAVY-LEDGER/HL-126-notebooklm-vault-architect-origin.json
@@ -27482,7 +27482,7 @@ unnamed.png
 .kilo/worktrees/splendid-cotija/CANON/REINCARNATION/2026-03-26-DUMP-CONSOLIDATE-BLUETECH-5SRC.md
 .kilo/worktrees/splendid-cotija/CANON/REINCARNATION/2026-03-26-notebooklm-vault-5dump.md
 .kilo/worktrees/splendid-cotija/CANON/REINCARNATION/2026-03-26-notebooklm-vault-architect-origin.md
-.kilo/worktrees/splendid-cotija/CANON/REINCARNATION/2026-03-26-repo-consolidation-hobbs-lab-canonical.md
+.kilo/worktrees/splendid-cotija/CANON/REINCARNATION/2026-03-26-repo-consolidation-hobbs0011-canonical.md
 .kilo/worktrees/splendid-cotija/CANON/REINCARNATION/2026-03-26-roblox-deep-intel.md
 .kilo/worktrees/splendid-cotija/CANON/REINCARNATION/2026-03-26-sales-dna-revenue-pivot.md
 .kilo/worktrees/splendid-cotija/CANON/REINCARNATION/2026-03-26-two-server-rulings-closed.md
@@ -28469,7 +28469,7 @@ unnamed.png
 .kilo/worktrees/splendid-cotija/CANON/SYSTEM/BIBLE-REPO-CONSOLIDATION-MAP.md
 .kilo/worktrees/splendid-cotija/CANON/SYSTEM/CANON-ACCESS-INDEX.md
 .kilo/worktrees/splendid-cotija/CANON/SYSTEM/COLD-START-BOOT.md
-.kilo/worktrees/splendid-cotija/CANON/SYSTEM/CONSOLIDATION-PLAN-PHOENIX-RISING-TECHNOLOGIES.md
+.kilo/worktrees/splendid-cotija/CANON/SYSTEM/CONSOLIDATION-PLAN-Phoenix-Rising-Ai-SolutionsNOLOGIES.md
 .kilo/worktrees/splendid-cotija/CANON/SYSTEM/debug.log
 .kilo/worktrees/splendid-cotija/CANON/SYSTEM/GENESIS_BLUEPRINTS_51_100.md
 .kilo/worktrees/splendid-cotija/CANON/SYSTEM/KILO-DELEGATION-BRIEF.md
@@ -30045,7 +30045,7 @@ unnamed.png
 .kilo/worktrees/young-hamburger/CANON/HEAVY-LEDGER/HL-124-discord-bot-deploy-morning.json
 .kilo/worktrees/young-hamburger/CANON/HEAVY-LEDGER/HL-124-roblox-deep-intel.json
 .kilo/worktrees/young-hamburger/CANON/HEAVY-LEDGER/HL-124-v5-extraction-engine.json
-.kilo/worktrees/young-hamburger/CANON/HEAVY-LEDGER/HL-125-repo-consolidation-hobbs-lab-canonical.json
+.kilo/worktrees/young-hamburger/CANON/HEAVY-LEDGER/HL-125-repo-consolidation-hobbs0011-canonical.json
 .kilo/worktrees/young-hamburger/CANON/HEAVY-LEDGER/HL-125-roblox-deploy-github-first-boot.json
 .kilo/worktrees/young-hamburger/CANON/HEAVY-LEDGER/HL-125-trigger-audit-rulings-v3.json
 .kilo/worktrees/young-hamburger/CANON/HEAVY-LEDGER/HL-126-notebooklm-vault-architect-origin.json
@@ -32269,7 +32269,7 @@ unnamed.png
 .kilo/worktrees/young-hamburger/CANON/REINCARNATION/2026-03-26-DUMP-CONSOLIDATE-BLUETECH-5SRC.md
 .kilo/worktrees/young-hamburger/CANON/REINCARNATION/2026-03-26-notebooklm-vault-5dump.md
 .kilo/worktrees/young-hamburger/CANON/REINCARNATION/2026-03-26-notebooklm-vault-architect-origin.md
-.kilo/worktrees/young-hamburger/CANON/REINCARNATION/2026-03-26-repo-consolidation-hobbs-lab-canonical.md
+.kilo/worktrees/young-hamburger/CANON/REINCARNATION/2026-03-26-repo-consolidation-hobbs0011-canonical.md
 .kilo/worktrees/young-hamburger/CANON/REINCARNATION/2026-03-26-roblox-deep-intel.md
 .kilo/worktrees/young-hamburger/CANON/REINCARNATION/2026-03-26-sales-dna-revenue-pivot.md
 .kilo/worktrees/young-hamburger/CANON/REINCARNATION/2026-03-26-two-server-rulings-closed.md
@@ -34482,7 +34482,7 @@ unnamed.png
 .kilo/worktrees/young-hamburger/TEMP-PHOENIX-ULTIMATE/CANON/REINCARNATION/2026-03-26-DUMP-CONSOLIDATE-BLUETECH-5SRC.md
 .kilo/worktrees/young-hamburger/TEMP-PHOENIX-ULTIMATE/CANON/REINCARNATION/2026-03-26-notebooklm-vault-5dump.md
 .kilo/worktrees/young-hamburger/TEMP-PHOENIX-ULTIMATE/CANON/REINCARNATION/2026-03-26-notebooklm-vault-architect-origin.md
-.kilo/worktrees/young-hamburger/TEMP-PHOENIX-ULTIMATE/CANON/REINCARNATION/2026-03-26-repo-consolidation-hobbs-lab-canonical.md
+.kilo/worktrees/young-hamburger/TEMP-PHOENIX-ULTIMATE/CANON/REINCARNATION/2026-03-26-repo-consolidation-hobbs0011-canonical.md
 .kilo/worktrees/young-hamburger/TEMP-PHOENIX-ULTIMATE/CANON/REINCARNATION/2026-03-26-roblox-deep-intel.md
 .kilo/worktrees/young-hamburger/TEMP-PHOENIX-ULTIMATE/CANON/REINCARNATION/2026-03-26-sales-dna-revenue-pivot.md
 .kilo/worktrees/young-hamburger/TEMP-PHOENIX-ULTIMATE/CANON/REINCARNATION/2026-03-26-two-server-rulings-closed.md
@@ -36098,7 +36098,7 @@ unnamed.png
 .kilo/worktrees/zinc-fahrenheit/CANON/HEAVY-LEDGER/HL-124-discord-bot-deploy-morning.json
 .kilo/worktrees/zinc-fahrenheit/CANON/HEAVY-LEDGER/HL-124-roblox-deep-intel.json
 .kilo/worktrees/zinc-fahrenheit/CANON/HEAVY-LEDGER/HL-124-v5-extraction-engine.json
-.kilo/worktrees/zinc-fahrenheit/CANON/HEAVY-LEDGER/HL-125-repo-consolidation-hobbs-lab-canonical.json
+.kilo/worktrees/zinc-fahrenheit/CANON/HEAVY-LEDGER/HL-125-repo-consolidation-hobbs0011-canonical.json
 .kilo/worktrees/zinc-fahrenheit/CANON/HEAVY-LEDGER/HL-125-roblox-deploy-github-first-boot.json
 .kilo/worktrees/zinc-fahrenheit/CANON/HEAVY-LEDGER/HL-125-trigger-audit-rulings-v3.json
 .kilo/worktrees/zinc-fahrenheit/CANON/HEAVY-LEDGER/HL-126-notebooklm-vault-architect-origin.json
@@ -38322,7 +38322,7 @@ unnamed.png
 .kilo/worktrees/zinc-fahrenheit/CANON/REINCARNATION/2026-03-26-DUMP-CONSOLIDATE-BLUETECH-5SRC.md
 .kilo/worktrees/zinc-fahrenheit/CANON/REINCARNATION/2026-03-26-notebooklm-vault-5dump.md
 .kilo/worktrees/zinc-fahrenheit/CANON/REINCARNATION/2026-03-26-notebooklm-vault-architect-origin.md
-.kilo/worktrees/zinc-fahrenheit/CANON/REINCARNATION/2026-03-26-repo-consolidation-hobbs-lab-canonical.md
+.kilo/worktrees/zinc-fahrenheit/CANON/REINCARNATION/2026-03-26-repo-consolidation-hobbs0011-canonical.md
 .kilo/worktrees/zinc-fahrenheit/CANON/REINCARNATION/2026-03-26-roblox-deep-intel.md
 .kilo/worktrees/zinc-fahrenheit/CANON/REINCARNATION/2026-03-26-sales-dna-revenue-pivot.md
 .kilo/worktrees/zinc-fahrenheit/CANON/REINCARNATION/2026-03-26-two-server-rulings-closed.md
@@ -40535,7 +40535,7 @@ unnamed.png
 .kilo/worktrees/zinc-fahrenheit/TEMP-PHOENIX-ULTIMATE/CANON/REINCARNATION/2026-03-26-DUMP-CONSOLIDATE-BLUETECH-5SRC.md
 .kilo/worktrees/zinc-fahrenheit/TEMP-PHOENIX-ULTIMATE/CANON/REINCARNATION/2026-03-26-notebooklm-vault-5dump.md
 .kilo/worktrees/zinc-fahrenheit/TEMP-PHOENIX-ULTIMATE/CANON/REINCARNATION/2026-03-26-notebooklm-vault-architect-origin.md
-.kilo/worktrees/zinc-fahrenheit/TEMP-PHOENIX-ULTIMATE/CANON/REINCARNATION/2026-03-26-repo-consolidation-hobbs-lab-canonical.md
+.kilo/worktrees/zinc-fahrenheit/TEMP-PHOENIX-ULTIMATE/CANON/REINCARNATION/2026-03-26-repo-consolidation-hobbs0011-canonical.md
 .kilo/worktrees/zinc-fahrenheit/TEMP-PHOENIX-ULTIMATE/CANON/REINCARNATION/2026-03-26-roblox-deep-intel.md
 .kilo/worktrees/zinc-fahrenheit/TEMP-PHOENIX-ULTIMATE/CANON/REINCARNATION/2026-03-26-sales-dna-revenue-pivot.md
 .kilo/worktrees/zinc-fahrenheit/TEMP-PHOENIX-ULTIMATE/CANON/REINCARNATION/2026-03-26-two-server-rulings-closed.md

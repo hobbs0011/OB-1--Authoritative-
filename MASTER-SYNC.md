@@ -19,7 +19,7 @@
 |---|---|---|
 | OB-1 | hobbs0011 | CANONICAL — branch canon (default), HEAD 5eabf24 — Run 312 |
 | OB-1--Authoritative- | hobbs0011 | SYNCED — at 54bff5d (Run 309) |
-| Phoenix-Rising-Protocol-Ultimate | hobbs-lab | SUPERSEDED |
+| Phoenix-Rising-Protocol-Ultimate | hobbs0011 | SUPERSEDED |
 | phoenix-ob1 | mrmichaelhobbs1234-lang | Public — SECURITY RISK (still unresolved) |
 
 ### Architecture

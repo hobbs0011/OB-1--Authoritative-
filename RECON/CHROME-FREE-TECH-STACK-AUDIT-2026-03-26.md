@@ -1,6 +1,6 @@
 # Chrome & Free Tech Stack Audit — All GitHub Accounts
 > **Date:** 2026-03-26 15:21 ICT
-> **Source:** 5-stage pipeline scan across hobbs0011, mrmichaelhobbs1234-lang, hobbs-lab + Notion Tool Stack + DRONE 14
+> **Source:** 5-stage pipeline scan across hobbs0011, mrmichaelhobbs1234-lang, hobbs0011 + Notion Tool Stack + DRONE 14
 > **Artifact class:** 🏦 VAULT + 🔨 BUILD hybrid
 
 ---
@@ -22,7 +22,7 @@
 
 **Structure:** `src/` (App.jsx, main.jsx, styles/), `docs/` (index.html), `HarvestedChats/`, `BackupZips/`
 **Verdict:** Dashboard skeleton. No Chrome, no extension, no AI APIs. Dormant 4+ months.
-**Action:** Archive or transfer to hobbs-lab.
+**Action:** Archive or transfer to hobbs0011.
 
 ### mrmichaelhobbs1234-lang (2 repos)
 | Repo | Language | Status | Chrome Content | Last Updated |
@@ -32,9 +32,9 @@
 
 **phoenix-ob1 structure:** `src/`, `mcp/`, `docs/`, `scripts/`, `validators/`, `wrangler.toml` (EXPOSED)
 **Verdict:** Cloudflare Workers AI system. Has MCP support scaffolded. No Chrome content. wrangler.toml in public repo = active secret risk.
-**Action:** Set phoenix-ob1 to PRIVATE immediately. Consider migrating MCP scaffold to hobbs-lab.
+**Action:** Set phoenix-ob1 to PRIVATE immediately. Consider migrating MCP scaffold to hobbs0011.
 
-### hobbs-lab (3 repos)
+### hobbs0011 (3 repos)
 | Repo | Language | Status | Chrome Content | Last Updated |
 |------|----------|--------|----------------|--------------|
 | Phoenix-Rising-Protocol-Ultimate | HTML | Private | 🟡 PARTIAL (Tool Stack mirror only) | 2026-03-26 |
@@ -127,7 +127,7 @@ Student Device
 | **DRONE 14** | ❌ (Cloudflare only) | ❌ | ❌ | ❌ |
 | **hobbs0011 repos** | ❌ | ❌ | ❌ | ❌ |
 | **mrmichaelhobbs1234-lang repos** | ❌ | ❌ | ❌ | ❌ |
-| **hobbs-lab repos** | 🟡 Partial mention | ❌ | ❌ | ❌ |
+| **hobbs0011 repos** | 🟡 Partial mention | ❌ | ❌ | ❌ |
 
 **Drift score:** GitHub mirror is ~40% behind Notion Tool Stack. The entire Chrome Enterprise + Gemini Nano section (Section 8) was never exported.
 
@@ -156,9 +156,9 @@ Student Device
 9. **Chrome DevTools MCP** — connect to VS Code Agent Mode for testing
 
 ### ⚪ HOUSEKEEPING
-10. **Archive `hobbs0011/NET-Ai-EcoSystem-CommandStation`** or transfer to hobbs-lab
-11. **Transfer `phoenix-ob1` MCP scaffold** to hobbs-lab if useful
-12. **Consolidate to single GitHub account** (hobbs-lab) — 3 accounts creates confusion
+10. **Archive `hobbs0011/NET-Ai-EcoSystem-CommandStation`** or transfer to hobbs0011
+11. **Transfer `phoenix-ob1` MCP scaffold** to hobbs0011 if useful
+12. **Consolidate to single GitHub account** (hobbs0011) — 3 accounts creates confusion
 
 ---
 

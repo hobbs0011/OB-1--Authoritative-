@@ -153,4 +153,4 @@ Detect contradictions, missing controls, security/scale risk.
 - **URL**: `https://phoenix-empire.mrmichaelhobbs123.workers.dev`
 - **Response**: `PHOENIX_EMPIRE_ONLINE`
 - **Account**: mrmichaelhobbs1234-lang (legacy)
-- **Note**: This is the OLD worker. Current canonical worker is `net-pet-ai` on hobbs-lab.
+- **Note**: This is the OLD worker. Current canonical worker is `net-pet-ai` on hobbs0011.

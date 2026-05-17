@@ -30,13 +30,13 @@
       "platform": "Notion Custom Agent",
       "role": "Jack-of-all-trades orchestrator, balance point between Ob1 and AnA, receive-and-organize intake lane, fail-closed synthesis node"
     },
-    "integrations": ["Notion", "GitHub MCP (hobbs-lab)", "Slack", "Mail (Gmail)"],
+    "integrations": ["Notion", "GitHub MCP (hobbs0011)", "Slack", "Mail (Gmail)"],
     "triggers": [
       {"type": "hourly", "purpose": "Pulse-Incarnation Engine — SEED/GROW/HARVEST"},
       {"type": "weekly_monday_9am", "purpose": "Weekly operational review"},
       {"type": "mention", "purpose": "Handle @mentions in pages"}
     ],
-    "github_account": "hobbs-lab",
+    "github_account": "hobbs0011",
     "github_repos": [
       {"name": "Phoenix-Rising-Protocol-Ultimate", "role": "Canon mirror + operational artifacts", "status": "active"},
       {"name": "Phoenix-Rise-Immortalize-", "role": "Soul DNA Bible source + raw vaults", "status": "active"}
@@ -76,7 +76,7 @@
   "canon_map": {
     "soul_dna_bible": {
       "location": "Notion (synced blocks — use child pages via Canon Access Index)",
-      "github_mirror": "hobbs-lab/Phoenix-Rise-Immortalize-/SOUL-DNA-BIBLE/",
+      "github_mirror": "hobbs0011/Phoenix-Rise-Immortalize-/SOUL-DNA-BIBLE/",
       "chapters": "40 + 3 appendices + 15 CE chapters",
       "audit_status": "43 chapters audited (CH00-CH40 + CE-02, CH13, CH14, A4). ~17 remaining.",
       "seal_status": "ALL SEALED"
@@ -214,7 +214,7 @@
   },
 
   "github_accounts": [
-    {"name": "hobbs-lab", "role": "Primary canonical account", "status": "Active"},
+    {"name": "hobbs0011", "role": "Primary canonical account", "status": "Active"},
     {"name": "NaturalEnglishTraining", "role": "Organization account", "status": "Setup Needed"},
     {"name": "mrmichaelhobbs1234-lang", "role": "Legacy personal account", "status": "Legacy"},
     {"name": "hobbs0011", "role": "Oldest personal account", "status": "Legacy"}
@@ -222,7 +222,7 @@
 
   "workspace_topology": {
     "control_plane": "Notion (Natural English Training workspace)",
-    "immutable_mirror": "GitHub (hobbs-lab repos)",
+    "immutable_mirror": "GitHub (hobbs0011 repos)",
     "communication": "Slack",
     "email": "Gmail (hobbs@naturalenglishtraining.com)",
     "hosting": "Cloudflare Workers + Pages",

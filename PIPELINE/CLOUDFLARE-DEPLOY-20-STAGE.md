@@ -33,7 +33,7 @@
 
 ### Phase 3: Deployment (BLOCKED — DOMAIN TRANSFER)
 
-- [ ] **Stage 08** — Create Cloudflare Pages project (connect `hobbs-lab/Phoenix-Rising-Protocol-Ultimate`)
+- [ ] **Stage 08** — Create Cloudflare Pages project (connect `hobbs0011/Phoenix-Rising-Protocol-Ultimate`)
 - [ ] **Stage 09** — Configure build: blank command, output directory `SITE/`
 - [ ] **Stage 10** — First deployment, verify at *.pages.dev URL
 - [ ] **Stage 11** — Wire custom domain naturalenglishtraining.com
@@ -96,6 +96,6 @@ naturalenglistraining.com
 | Service | Account |
 |---------|--------|
 | Cloudflare (paid) | mrmichaelhobbs1234@gmail.com |
-| GitHub (hobbs-lab) | hobbs@naturalenglishtraining.com |
+| GitHub (hobbs0011) | hobbs@naturalenglishtraining.com |
 | Google Workspace | hobbs@naturalenglishtraining.com |
 | Domain registrar | Squarespace → transferring to Cloudflare |

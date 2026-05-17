@@ -35,7 +35,7 @@
 | Decision | Rationale | Canon Impact |
 |---|---|---|
 | Wrangler 4.80 → 4.83 upgrade | Sprint queue item; security patches in dependencies | `APPS/NET-PET-AI/package.json` + `package-lock.json` updated |
-| Phoenix-Rising-Ultimate: 39 dead branch purge (46→7) | Repository hygiene; reduce onboarding friction; remove copilot/vscode-* branches, random-name branches, old hobbs-lab/ branches | 7 surviving branches: main, Add-virality-analytics-endpoint, epoch-zero-2026-04-08, hardened-ultra-steel-2026-04-08, run-260-2026-04-07, sdnad-2026-04-07, sdnad-2026-04-08 |
+| Phoenix-Rising-Ultimate: 39 dead branch purge (46→7) | Repository hygiene; reduce onboarding friction; remove copilot/vscode-* branches, random-name branches, old hobbs0011/ branches | 7 surviving branches: main, Add-virality-analytics-endpoint, epoch-zero-2026-04-08, hardened-ultra-steel-2026-04-08, run-260-2026-04-07, sdnad-2026-04-07, sdnad-2026-04-08 |
 | Create Phase 4/5/6 standalone snapshots | Run 310 phases 7-10 captured; distribute stage documentation across OPERATIONS/PIPELINE-SNAPSHOTS | 3 new files: stage 31-40, 41-50, 51-60 (9/10, 10/10, green scores) |
 | CF zone for naturalenglishtraining.com created + pre-staged | BYPASS DNS work: zone + CNAME records ready NOW, only NS flip needed at Squarespace later | Zone ID 9274b3b413921f0f72e4851cfbe9f9ed; both www and apex CNAMEs proxied to CF Pages |
 | Product LIVE on naturalenglishtraining.pages.dev (BYPASS custom domain) | Zero customer blocking dependency on DNS; service is live and accessible immediately | Pages project has 2 pending custom domains (no longer required for MVP) |

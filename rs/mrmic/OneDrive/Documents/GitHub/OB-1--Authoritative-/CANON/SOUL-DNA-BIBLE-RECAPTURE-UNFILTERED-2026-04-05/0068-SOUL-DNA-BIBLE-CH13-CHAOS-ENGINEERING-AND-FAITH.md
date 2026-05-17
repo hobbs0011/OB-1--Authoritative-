@@ -10,7 +10,7 @@ SHA256: 5B810C0C9F44F4FA8AFFFCF8B4305F7C352E392AA83D5D1D36500970651E6937
 **STATUS: SEALED**
 **Export: VAULT ENRICHED | Pulse Run 30 | 2026-03-26**
 **Source: Notion Soul DNA Bible → CH13 child page**
-**Cross-repo: hobbs-lab/Phoenix-Rise-Immortalize- SOUL-DNA-BIBLE/CH13**
+**Cross-repo: hobbs0011/Phoenix-Rise-Immortalize- SOUL-DNA-BIBLE/CH13**
 
 ---
 

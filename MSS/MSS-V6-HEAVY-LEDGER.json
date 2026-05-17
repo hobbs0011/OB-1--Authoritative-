@@ -70,8 +70,8 @@
         "mandatory": true,
         "steps": [
           "1. Read the target Notion canon page",
-          "2. search_code across hobbs-lab/Phoenix-Rise-Immortalize- for related SOUL-DNA-BIBLE files",
-          "3. search_code across hobbs-lab/Phoenix-Rising-Protocol-Ultimate CANON/ for related content",
+          "2. search_code across hobbs0011/Phoenix-Rise-Immortalize- for related SOUL-DNA-BIBLE files",
+          "3. search_code across hobbs0011/Phoenix-Rising-Protocol-Ultimate CANON/ for related content",
           "4. search_code across hobbs0011/NET-Ai-EcoSystem-CommandStation for product references",
           "5. Synthesize — merge unique content from all sources into the richest possible artifact",
           "6. Export merged artifact to GitHub as clean markdown — THIS IS the run's artifact"
@@ -204,7 +204,7 @@
       "trigger": "New session (fresh chat, no prior work)",
       "primary_source": "GitHub. Do NOT depend on Notion search for cold-start context.",
       "steps": [
-        "1. Load COLD-START-BOOT.md from GitHub — get_file_contents on hobbs-lab/Phoenix-Rising-Protocol-Ultimate path CANON/REINCARNATION/COLD-START-BOOT.md. Single source of truth. Absorb identity, laws, active infrastructure, living reincarnation state, correction log, decision history.",
+        "1. Load COLD-START-BOOT.md from GitHub — get_file_contents on hobbs0011/Phoenix-Rising-Protocol-Ultimate path CANON/REINCARNATION/COLD-START-BOOT.md. Single source of truth. Absorb identity, laws, active infrastructure, living reincarnation state, correction log, decision history.",
         "2. Load last 3 reincarnation entries from GitHub — list files in CANON/REINCARNATION/, sort by filename date (newest first), get_file_contents on 3 most recent. Absorb decisions, principles, corrections.",
         "3. Contradiction scan — check entries against each other and current instructions. Flag contradictions.",
         "4. (Optional) Load Notion state if needed — Navigator Index for pulse state. GitHub wins conflicts.",
@@ -411,8 +411,8 @@
       {"name": "Canon Access Index", "type": "routing_table"}
     ],
     "github_repos": [
-      {"name": "hobbs-lab/Phoenix-Rising-Protocol-Ultimate", "role": "Canon vault. CANON/, REINCARNATION/, GALAXY-LESSONS/, CANON/MSS/, CANON/SYSTEM/"},
-      {"name": "hobbs-lab/Phoenix-Rise-Immortalize-", "role": "Original Soul DNA Bible (40 files), 8 VAULT dirs, source material goldmine"},
+      {"name": "hobbs0011/Phoenix-Rising-Protocol-Ultimate", "role": "Canon vault. CANON/, REINCARNATION/, GALAXY-LESSONS/, CANON/MSS/, CANON/SYSTEM/"},
+      {"name": "hobbs0011/Phoenix-Rise-Immortalize-", "role": "Original Soul DNA Bible (40 files), 8 VAULT dirs, source material goldmine"},
       {"name": "hobbs0011/NET-Ai-EcoSystem-CommandStation", "role": "Product code (Vite/React), HarvestedChats/, docs/"}
     ]
   },

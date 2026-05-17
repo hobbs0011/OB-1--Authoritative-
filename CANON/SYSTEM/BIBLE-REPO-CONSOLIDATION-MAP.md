@@ -2,8 +2,8 @@
 
 > **Authority:** SOV100 (Michael Hobbs)
 > **Created:** 2026-03-26, Pulse Run 39
-> **Purpose:** Documents where every Bible file lives after the repo consolidation to `hobbs-lab/Phoenix-Rising-Protocol-Ultimate` — the single canonical home.
-> **Ruling:** "hobbs-lab = single canonical home. All repos consolidate there." — Michael Hobbs, 2026-03-26
+> **Purpose:** Documents where every Bible file lives after the repo consolidation to `hobbs0011/Phoenix-Rising-Protocol-Ultimate` — the single canonical home.
+> **Ruling:** "hobbs0011 = single canonical home. All repos consolidate there." — Michael Hobbs, 2026-03-26
 
 ---
 
@@ -149,5 +149,5 @@ If Notion disappears tomorrow, Michael rebuilds from this repo:
 
 ---
 
-*"hobbs-lab is THE canonical home. All repos consolidate there."*
+*"hobbs0011 is THE canonical home. All repos consolidate there."*
 — Michael Hobbs, 2026-03-26

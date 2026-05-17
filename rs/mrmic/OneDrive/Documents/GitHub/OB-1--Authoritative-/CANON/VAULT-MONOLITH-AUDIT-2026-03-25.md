@@ -132,4 +132,4 @@ VAULT — Phoenix Supreme Monolith Audit page under Phoenix Rising Protocol — 
 
 ## GitHub Path
 
-`CANON/VAULT-MONOLITH-AUDIT-2026-03-25.md` on `hobbs-lab/Phoenix-Rising-Protocol-Ultimate`
+`CANON/VAULT-MONOLITH-AUDIT-2026-03-25.md` on `hobbs0011/Phoenix-Rising-Protocol-Ultimate`

@@ -20,6 +20,28 @@ Speak ΓåÆ Correct ΓåÆ Repeat ΓåÆ Return tomorrow
 - **[GREEN]** "a"
 - **[YELLOW]** "map these out, these contain everything"
 - **[YELLOW]** "Commit Changes and Delegate: \"Delegate to cloud agent\""
+- **[YEL# REINCARNATION ΓÇö Run 293
+
+## MERGE SESSION
+- **Total Chats**: 2 (MERGE1 + MERGE2-FINAL)
+- **This Merge**: MERGE2 of 2 (FINAL)
+- **Merge Status**: CLOSED ΓÇö all merges consolidated
+
+## 1) HEADER
+- **Session Tag**: run293-net-pet-mvp-loop-merge1
+- **Datetime (ICT)**: 2026-04-12 09:44:48 ICT
+- **Signal Density (1-10)**: 8
+- **Theme**: OBI MVP execution reality-check, core loop repair, and merge-protocol death capture
+- **State Coming In**: Existing NET-PET-AI already beyond MVP scope, but the core Speak -> Correct -> Repeat flow had request/response field drift causing functional breakage.
+
+## 2) RAW QUOTES (VERBATIM)
+- **[GREEN]** "ΓÜÖ∩╕Å OBI MVP ΓÇö 30 DAY BUILD PLAN (REAL COMPANY VERSION)"
+- **[GREEN]** "If it doesnΓÇÖt improve:
+Speak ΓåÆ Correct ΓåÆ Repeat ΓåÆ Return tomorrow
+ΓåÆ DO NOT BUILD IT"
+- **[GREEN]** "a"
+- **[YELLOW]** "map these out, these contain everything"
+- **[YELLOW]** "Commit Changes and Delegate: \"Delegate to cloud agent\""
 - **[YELLOW]** "\"C:\\Users\\mrmic\\Desktop\\OB-1\\SOULDNA-RUN-GPT-GIT-NOTEBOOKLM-2.txt\""
 - **[GREEN]** "Follow instructions in #prompt:ReincarnateDEATH-MERGE.prompt.md with these arguments: merge1"
 
@@ -2107,7 +2129,7 @@ notion.js actually exports: `queryLessons, writeProgress, queryProgress, syncStu
 |---|-------|-----|
 | Q1 | "so I am going to go through each share with you and share soul DNA through this, and you are going to revive our gospel444 mandates and make them living law, so that each piece that is made in our system to serve a command I have given, come out better than I imagined, because they came from my imagination, but organized, which is what you are doing" | 🟢 green — SIGNAL 71, the Living Law elevation mandate |
 | Q2 | "SUPER SAIYAN MODE ENGAGED, GO BACK AND FIND ALL DNA SINCE GENESIS (The blueprints, guides, bibles, ect ect) of Gospel444, and then go deeper to find the truth of WHY through the SOUL. Max agents mandated" | 🔴 red — full excavation order, 4 parallel agents deployed |
-| Q3 | "first make an interconnected REPO on GITHUB you are the ART/IMAGES/ICONOLOGY subsection under the Phoenix-Rising-Tech -> Phoenix-Rising-FullStackMarketing" | 🟢 green — org repo genesis order |
+| Q3 | "first make an interconnected REPO on GITHUB you are the ART/IMAGES/ICONOLOGY subsection under the Phoenix-Rising-Ai-Solutions -> Phoenix-Rising-FullStackMarketing" | 🟢 green — org repo genesis order |
 | Q4 | "I do like some the wording on these though, find a hybrid solution, because no point in removing aesthetically placed good copywrite from images, thats too strict. just no backroom talk like Sovereign, gospel444 or any other term that is not marketing meta and ambiguous" | 🟡 yellow — the hybrid copy rule: keep brand narrative, strip metadata leakage only |
 | Q5 | "this will not have to do with copywriting, thats a separate subsection and we are focused on the Art images and iconology on this" | 🟢 green — scope boundary for marketing repo |
 | Q6 | "autopilot engaged" | 🟢 green — full send |
@@ -2125,7 +2147,7 @@ notion.js actually exports: `queryLessons, writeProgress, queryProgress, syncStu
 | D3 | Create /marketing-intake kilo command — 5-phase pipeline: scan → classify → grade → index → commit | HIGH — no intake pipeline existed | .kilo/command/marketing-intake.md | IMPLEMENTED (SHA b64aa2c) |
 | D4 | Create art-arsenal-intake skill with full protocol spec | HIGH — skill didn't exist | .kilo/skill/art-arsenal-intake/SKILL.md | IMPLEMENTED (SHA b64aa2c) |
 | D5 | Expand INDEX.json with 30 use_slots, platform dimensions, Gospel 444 compliance block | HIGH — taxonomy was undefined | ASSETS/ART-ARSENAL/INDEX.json | IMPLEMENTED (SHA b64aa2c) |
-| D6 | Create Phoenix-Rising-FullStackMarketing repo under Phoenix-Rising-Tech org | HIGH — marketing art repo didn't exist | github.com/Phoenix-Rising-Tech/Phoenix-Rising-FullStackMarketing | IMPLEMENTED (SHA dc76553) |
+| D6 | Create Phoenix-Rising-FullStackMarketing repo under Phoenix-Rising-Ai-Solutions org | HIGH — marketing art repo didn't exist | github.com/Phoenix-Rising-Ai-Solutions/Phoenix-Rising-FullStackMarketing | IMPLEMENTED (SHA dc76553) |
 | D7 | Scaffold 9 folders: raw-intake, art, logos, iconology, social, sales-funnel, website, characters, processed | MEDIUM — org structure for hyper-indexed content library | New repo scaffold | IMPLEMENTED (SHA dc76553) |
 | D8 | Wire cross-repo connection in COLD-START-BOOT infrastructure map | MEDIUM — traceability | COLD-START-BOOT.md | IMPLEMENTED (SHA f23da40) |
 | D9 | Hybrid copy rule: keep brand narrative in images (Tiger Mode, Phoenix Way, Grammar Prison), strip only metadata leakage (hex codes, font variable names, token names) | HIGH — resolved "too strict" vs "too loose" tension | INTAKE-PROTOCOL.md | IMPLEMENTED (SHA 197d3a6) |
@@ -2204,7 +2226,7 @@ notion.js actually exports: `queryLessons, writeProgress, queryProgress, syncStu
 ### New Infrastructure Created This Session
 
 ```
-Phoenix-Rising-Tech/Phoenix-Rising-FullStackMarketing (NEW GITHUB ORG REPO)
+Phoenix-Rising-Ai-Solutions/Phoenix-Rising-FullStackMarketing (NEW GITHUB ORG REPO)
 ├── raw-intake/          ← drop zone for unprocessed assets
 ├── art/                 ← core artwork
 ├── logos/               ← logo variations (primary-dark, primary-light, stacked, icon)
@@ -2251,7 +2273,7 @@ Phoenix-Rising-Tech/Phoenix-Rising-FullStackMarketing (NEW GITHUB ORG REPO)
 | A5 | `.kilo/command/marketing-intake.md` | CREATED | b64aa2c |
 | A6 | `.kilo/skill/art-arsenal-intake/SKILL.md` | CREATED | b64aa2c |
 | A7 | `ASSETS/ART-ARSENAL/INDEX.json` | MODIFIED (30 use_slots + Gospel 444 compliance block) | b64aa2c |
-| A8 | `Phoenix-Rising-Tech/Phoenix-Rising-FullStackMarketing` (entire repo) | CREATED | dc76553 |
+| A8 | `Phoenix-Rising-Ai-Solutions/Phoenix-Rising-FullStackMarketing` (entire repo) | CREATED | dc76553 |
 | A9 | `APPS/Phoenix-Rising-FullStackMarketing/INTAKE-PROTOCOL.md` | MODIFIED (hybrid copy rule added) | 197d3a6 |
 | A10 | `CANON/A6-RAW-SOUL-DNA-DICTATION-RUN278-LIVE.md` | MODIFIED (BLOCK 16, SIGNAL 71) | a63db78 |
 | A11 | `CANON/BIBLE-CH02-DOC01-SOUL-DNA-MAP.md` | MODIFIED (Trust Blue closed + CH26 forward-ref) | a63db78, 0a5c92d |
@@ -2270,7 +2292,7 @@ Phoenix-Rising-Tech/Phoenix-Rising-FullStackMarketing (NEW GITHUB ORG REPO)
 | Merge Position | MERGE14-B appended (non-finalizing — total merge count UNKNOWN) |
 | HEAD at merge time | 81d4c67 (origin/main — MERGE13 SHA stamp) |
 | SHAs from this chat | cc4c5ac, 14dab72, b64aa2c, f23da40, 197d3a6, a63db78, 0a5c92d (7 commits, all pushed to origin/main) |
-| External repo | Phoenix-Rising-Tech/Phoenix-Rising-FullStackMarketing SHA dc76553 (separate remote) |
+| External repo | Phoenix-Rising-Ai-Solutions/Phoenix-Rising-FullStackMarketing SHA dc76553 (separate remote) |
 | Canon State | BIBLE CH26 created; A6 SIGNAL 71 / BLOCK 16; L50+L51 in COLD-START-BOOT |
 | SSM Position | L50+L51 in COLD-START-BOOT but NOT in formal SSM file — potential numbering collision with MERGE13's L54-L59 |
 | Blue Violations Remaining | 0 in SITE/css/obi-widget.css + docs/index.html (verified post-patch) |
