@@ -289,9 +289,9 @@ switch ($Command) {
         }
 
         $allAssets   = @($workerResults) + @($pageResults)
-        # API-only workers that intentionally return 404 on GET / — not broken
-        $apiOnlyWorkers = @("submission-api", "phoenix-coder")
-        $broken      = $allAssets | Where-Object { $_.health -ne 200 -and $_.health -ne "200" -and $_.name -notin $apiOnlyWorkers }
+        # Workers/projects that intentionally return 404 — API-only or known staging slots
+        $expected404s = @("submission-api", "phoenix-coder", "net-pet-ai-staging")
+        $broken      = $allAssets | Where-Object { $_.health -ne 200 -and $_.health -ne "200" -and $_.name -notin $expected404s }
         $untracked   = $allAssets | Where-Object { -not $_.tracked }
         $healthy     = $allAssets | Where-Object { $_.health -eq 200 -or $_.health -eq "200" }
 
