@@ -1,15 +1,11 @@
 name = "net-pet-ai-production"
-# main = "???"  # Source not yet recovered — DO NOT DEPLOY without v1.6.2 source
+main = "src/index.js"
+# NOTE: src/ is v1.6.0 (2026-04-20 GDRIVE snapshot). Production runs v1.6.2+v68.1-phase4-advanced.
+# Delta: ~0.0.2 versions + phase6 cohort DOs (StudentProfileDO, CohortAnalysisDO) missing from src/.
+# DO NOT DEPLOY without verifying the phase6 DO migration tags match the live slot.
+# See README.md and wrangler-v160-reference.toml for full context.
 compatibility_date = "2026-03-16"
 compatibility_flags = ["nodejs_compat"]
-
-# WARNING: This wrangler.toml is INCOMPLETE.
-# The production slot (v1.6.2+v68.1-phase4-advanced) was built from a codebase
-# not present in this repo. Until the v1.6.2 source is recovered, this file
-# is a documentation artifact only — not a deploy config.
-#
-# Deploying the canon APPS/NET-PET-AI/ code to this slot will orphan 30 live DOs.
-# See README.md before taking any action on this slot.
 
 [assets]
 directory = "./public"

@@ -56,11 +56,24 @@ The production slot pre-dates the NOTION_BLACKLISTED refactor. Live Notion API r
 
 ---
 
-## worker.js
+## Source Recovery Status
 
-`worker.js` in this directory is the bundled output from Cloudflare (retrieved via CF MCP API).
-It is a reference only — not deployable as-is to this slot without reconstructing the proper
-wrangler.toml with all 30+ DO bindings.
+### src/ — v1.6.0 (recovered 2026-05-18)
 
-The actual v1.6.2 source (pre-bundle) is not in this repo. It needs to be recovered from
-wherever it was built and committed here before this slot can be safely managed.
+`src/` contains the v1.6.0 source recovered from `D:\Inspect\GDRIVE-MIRROR-STAGING\SOURCE-CODE\APPS\NET-PET-AI\`
+— a Google Drive mirror snapshotted 2026-04-20, 12 days before the May 2 production deployment.
+
+This is the **closest available source** to the live v1.6.2. The known delta:
+- v1.6.0 → v1.6.2: ~2 patch versions of unknown changes
+- Missing: `src/durable-objects/student-profile-do.js` (StudentProfileDO)
+- Missing: `src/db-migrations/phase6-init.js` (CohortAnalysisDO — 7 SQLite tables)
+
+`src/index.js` is 236KB — the monolithic main worker entry point.
+See `wrangler-v160-reference.toml` for the multi-environment wrangler config that was used
+to deploy to both `net-pet-ai` (dev) and `net-pet-ai-production` via `wrangler deploy --env production`.
+
+### worker.js — bundled production output
+
+`worker.js` is the 872KB bundled output pulled from Cloudflare (CF MCP API, 2026-05-18).
+It contains the full v1.6.2 code including the missing phase6 DO classes.
+Use as a reference for the missing delta — not deployable directly.
