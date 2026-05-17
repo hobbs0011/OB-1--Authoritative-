@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NET Tigers Assessment — 4-Room | Mouse to Tiger</title>
+  <meta name="description" content="NET Tigers 4-Room Assessment. Bilingual English assessment for Vietnamese students ages 3–17." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@500;700;800;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="obi-widget.css" />
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- HEADER -->
+    <header class="header">
+      <div class="header-badge">NET Tigers · Ages 3–17</div>
+      <h1 class="header-title">Tigers Assessment</h1>
+      <p class="header-subtitle">Mouse to Tiger — Từ Chuột Thành Hổ</p>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+      <img src="CHILD_WATCHING_TIGER.png" alt="" class="hero-bg" aria-hidden="true" />
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <h2 class="hero-title">Break the Chains.<br>Find Your Tiger Voice.</h2>
+        <p class="hero-sub">
+          A personal English assessment for Vietnamese students ages 3–17.
+          Bilingual. No grammar prison. Just your real voice.
+          <span class="vi"> / Bài đánh giá tiếng Anh cá nhân cho học sinh 3–17 tuổi. Song ngữ. Không nhà tù ngữ pháp.</span>
+        </p>
+        <button class="hero-btn" id="heroBeginBtn" type="button">Begin Assessment — Bắt Đầu ›</button>
+      </div>
+    </section>
+
+    <!-- ASSESSMENT BODY (revealed by hero button) -->
+    <div id="assessment-body" style="display:none">
+
+    <!-- AGE BRANCH SELECTOR -->
+    <div class="age-selector" role="group" aria-label="Select age group">
+      <button class="age-card active" data-age="junior" type="button">
+        <img src="TIGER_CUBS_3-7.png" alt="Junior Tigers — Ages 3–7" class="age-card-img" />
+        <div class="age-card-label">Ages 3–7 · Junior Tigers</div>
+      </button>
+      <button class="age-card" data-age="senior" type="button">
+        <img src="TIGERS_8-17.png" alt="Senior Tigers — Ages 8–17" class="age-card-img" />
+        <div class="age-card-label">Ages 8–17 · Senior Tigers</div>
+      </button>
+    </div>
+
+    <!-- ROOM NAVIGATION -->
+    <nav class="room-nav" aria-label="Assessment rooms">
+      <button class="room-tab active" data-room="1" type="button">
+        <span class="room-number">Room 1</span>
+        About You
+      </button>
+      <button class="room-tab" data-room="2" type="button">
+        <span class="room-number">Room 2</span>
+        Sounds
+      </button>
+      <button class="room-tab" data-room="3" type="button">
+        <span class="room-number">Room 3</span>
+        Reading
+      </button>
+      <button class="room-tab" data-room="4" type="button">
+        <span class="room-number">Room 4</span>
+        Speaking
+      </button>
+    </nav>
+
+    <main>
+
+      <!-- ROOM 1: ABOUT YOU -->
+      <section class="room-panel active" id="room-1" aria-label="Room 1 — About You">
+        <div class="card">
+          <div class="card-title">Room 1 — About You</div>
+          <p class="room-intro">
+            Identity, learning history, interests, and motivation.
+            This helps Michael personalise the follow-up from day one.
+            <span class="vi"> / Thông tin cá nhân, lịch sử học tập, sở thích và động lực.</span>
+          </p>
+
+          <!-- ── JUNIOR BRANCH (ages 3–10) ── -->
+          <div class="r1-branch" id="r1-junior">
+            <div class="parent-note">
+              <strong>For parents / Dành cho phụ huynh</strong>
+              Please fill this in together with your child — or on their behalf for ages 3–6.
+              Vui lòng điền cùng con — hoặc thay con nếu bé 3–6 tuổi.
+            </div>
+
+            <div class="field-grid">
+
+              <div class="field">
+                <label for="r1j-name">Child's full name <span class="vi">(Họ và tên)</span></label>
+                <input type="text" id="r1j-name" autocomplete="name" placeholder="Nguyen Van A…" />
+              </div>
+
+              <div class="field">
+                <label for="r1j-age">Age <span class="vi">(Tuổi)</span></label>
+                <input type="number" id="r1j-age" inputmode="numeric" placeholder="8" min="3" max="10" />
+              </div>
+
+              <div class="field">
+                <label for="r1j-school">School <span class="vi">(Trường)</span></label>
+                <input type="text" id="r1j-school" autocomplete="organization" placeholder="Trường Tiểu học…" />
+              </div>
+
+              <div class="field">
+                <label for="r1j-grade">Grade / Class <span class="vi">(Lớp)</span></label>
+                <input type="text" id="r1j-grade" placeholder="Grade 3 / Lớp 3A…" />
+              </div>
+
+              <div class="field-section">Parent / Guardian</div>
+
+              <div class="field">
+                <label for="r1j-parent-name">Parent / Guardian name <span class="vi">(Tên phụ huynh)</span></label>
+                <input type="text" id="r1j-parent-name" autocomplete="name" placeholder="Nguyen Thi B…" />
+              </div>
+
+              <div class="field">
+                <label for="r1j-parent-contact">WhatsApp / Phone <span class="vi">(Zalo / Điện thoại)</span></label>
+                <input type="tel" id="r1j-parent-contact" autocomplete="tel" placeholder="09xx xxx xxx" />
+              </div>
+
+              <div class="field-section">English Background</div>
+
+              <div class="field-span">
+                <label for="r1j-eng-history">How long has your child studied English? <span class="vi">(Bé học tiếng Anh bao lâu?)</span></label>
+                <select id="r1j-eng-history">
+                  <option value="">— Chọn / Select —</option>
+                  <option value="never">Chưa bao giờ / Never</option>
+                  <option value="<1year">Dưới 1 năm / Less than 1 year</option>
+                  <option value="1-3years">1–3 năm / 1–3 years</option>
+                  <option value="3+years">Hơn 3 năm / More than 3 years</option>
+                </select>
+              </div>
+
+              <div class="field-section">Interests &amp; Context</div>
+
+              <div class="field-span">
+                <label>What does your child enjoy? <span class="vi">(Bé thích gì? — chọn tất cả)</span></label>
+                <div class="choice-row" role="group" aria-label="Junior hobbies">
+                  <label><input type="checkbox" name="r1j-hobby" value="gaming"><span>Gaming 🎮</span></label>
+                  <label><input type="checkbox" name="r1j-hobby" value="drawing"><span>Drawing / Vẽ 🎨</span></label>
+                  <label><input type="checkbox" name="r1j-hobby" value="animals"><span>Animals / Thú cưng 🐾</span></label>
+                  <label><input type="checkbox" name="r1j-hobby" value="sports"><span>Sports / Thể thao ⚽</span></label>
+                  <label><input type="checkbox" name="r1j-hobby" value="music"><span>Music / Nhạc 🎵</span></label>
+                  <label><input type="checkbox" name="r1j-hobby" value="cartoons"><span>Cartoons / Hoạt hình 📺</span></label>
+                  <label><input type="checkbox" name="r1j-hobby" value="lego"><span>Lego / Building 🧱</span></label>
+                  <label><input type="checkbox" name="r1j-hobby" value="dancing"><span>Dancing / Nhảy 💃</span></label>
+                  <label><input type="checkbox" name="r1j-hobby" value="reading"><span>Reading / Đọc sách 📚</span></label>
+                  <label><input type="checkbox" name="r1j-hobby" value="cooking"><span>Cooking / Nấu ăn 🍳</span></label>
+                </div>
+              </div>
+
+              <div class="field-span">
+                <label for="r1j-fav-media">Favourite show, game, or cartoon <span class="vi">(Phim / game / hoạt hình yêu thích)</span></label>
+                <input type="text" id="r1j-fav-media" placeholder="Minecraft, Doraemon, Bluey…" />
+              </div>
+
+              <div class="field-section">Challenges</div>
+
+              <div class="field-span">
+                <label>What's hardest for your child in English? <span class="vi">(Điều khó nhất với tiếng Anh?)</span></label>
+                <div class="choice-row" role="group" aria-label="Junior challenges">
+                  <label><input type="checkbox" name="r1j-challenge" value="saying-words"><span>Saying words / Phát âm</span></label>
+                  <label><input type="checkbox" name="r1j-challenge" value="understanding"><span>Understanding / Hiểu</span></label>
+                  <label><input type="checkbox" name="r1j-challenge" value="reading"><span>Reading / Đọc</span></label>
+                  <label><input type="checkbox" name="r1j-challenge" value="writing"><span>Writing / Viết</span></label>
+                  <label><input type="checkbox" name="r1j-challenge" value="confidence"><span>Confidence / Tự tin</span></label>
+                  <label><input type="checkbox" name="r1j-challenge" value="freeze"><span>Freezes up / Đứng hình</span></label>
+                </div>
+              </div>
+
+              <div class="field-span">
+                <label for="r1j-why">Why do you want your child to learn English? <span class="vi">(Tại sao muốn con học tiếng Anh?)</span></label>
+                <textarea id="r1j-why" placeholder="I want my child to… / Tôi muốn con…"></textarea>
+              </div>
+
+            </div><!-- /.field-grid junior -->
+          </div><!-- /#r1-junior -->
+
+          <!-- ── SENIOR BRANCH (ages 11–17) ── -->
+          <div class="r1-branch" id="r1-senior" style="display:none">
+            <div class="field-grid">
+
+              <div class="field">
+                <label for="r1s-name">Full name <span class="vi">(Họ và tên)</span></label>
+                <input type="text" id="r1s-name" autocomplete="name" placeholder="Nguyen Van A…" />
+              </div>
+
+              <div class="field">
+                <label for="r1s-age">Age <span class="vi">(Tuổi)</span></label>
+                <input type="number" id="r1s-age" inputmode="numeric" placeholder="15" min="11" max="17" />
+              </div>
+
+              <div class="field">
+                <label for="r1s-school">School <span class="vi">(Trường)</span></label>
+                <input type="text" id="r1s-school" autocomplete="organization" placeholder="Trường THCS / THPT…" />
+              </div>
+
+              <div class="field">
+                <label for="r1s-grade">Grade / Class <span class="vi">(Lớp)</span></label>
+                <input type="text" id="r1s-grade" placeholder="Grade 10 / Lớp 10A1…" />
+              </div>
+
+              <div class="field-section">English Background</div>
+
+              <div class="field-span">
+                <label for="r1s-eng-history">How long have you studied English? <span class="vi">(Học tiếng Anh bao lâu?)</span></label>
+                <select id="r1s-eng-history">
+                  <option value="">— Chọn / Select —</option>
+                  <option value="never">Chưa bao giờ / Never</option>
+                  <option value="<1year">Dưới 1 năm / Less than 1 year</option>
+                  <option value="1-3years">1–3 năm / 1–3 years</option>
+                  <option value="3-5years">3–5 năm / 3–5 years</option>
+                  <option value="5+years">Hơn 5 năm / More than 5 years</option>
+                </select>
+              </div>
+
+              <div class="field-span">
+                <label>Where do you use English now? <span class="vi">(Bạn dùng tiếng Anh ở đâu? — chọn tất cả)</span></label>
+                <div class="choice-row" role="group" aria-label="English usage">
+                  <label><input type="checkbox" name="r1s-usage" value="school"><span>School subjects / Học</span></label>
+                  <label><input type="checkbox" name="r1s-usage" value="youtube"><span>YouTube / Netflix</span></label>
+                  <label><input type="checkbox" name="r1s-usage" value="gaming"><span>Online gaming</span></label>
+                  <label><input type="checkbox" name="r1s-usage" value="social"><span>Social media</span></label>
+                  <label><input type="checkbox" name="r1s-usage" value="conversation"><span>Talking to people</span></label>
+                  <label><input type="checkbox" name="r1s-usage" value="nowhere"><span>Nowhere yet / Chưa dùng</span></label>
+                </div>
+              </div>
+
+              <div class="field-section">Interests</div>
+
+              <div class="field-span">
+                <label>Your hobbies <span class="vi">(Sở thích — chọn tất cả)</span></label>
+                <div class="choice-row" role="group" aria-label="Senior hobbies">
+                  <label><input type="checkbox" name="r1s-hobby" value="gaming"><span>Gaming 🎮</span></label>
+                  <label><input type="checkbox" name="r1s-hobby" value="tiktok"><span>TikTok / YouTube</span></label>
+                  <label><input type="checkbox" name="r1s-hobby" value="music"><span>Music / Nhạc 🎵</span></label>
+                  <label><input type="checkbox" name="r1s-hobby" value="sports"><span>Sports / Thể thao ⚽</span></label>
+                  <label><input type="checkbox" name="r1s-hobby" value="anime"><span>Anime / Manga</span></label>
+                  <label><input type="checkbox" name="r1s-hobby" value="fashion"><span>Fashion / Thời trang 👗</span></label>
+                  <label><input type="checkbox" name="r1s-hobby" value="art"><span>Art / Vẽ 🎨</span></label>
+                  <label><input type="checkbox" name="r1s-hobby" value="coding"><span>Coding / Lập trình 💻</span></label>
+                  <label><input type="checkbox" name="r1s-hobby" value="travel"><span>Travel / Du lịch ✈️</span></label>
+                  <label><input type="checkbox" name="r1s-hobby" value="photography"><span>Photography 📷</span></label>
+                </div>
+              </div>
+
+              <div class="field-section">Challenges</div>
+
+              <div class="field-span">
+                <label>What's hardest about English for you? <span class="vi">(Khó khăn lớn nhất với tiếng Anh?)</span></label>
+                <div class="choice-row" role="group" aria-label="Senior challenges">
+                  <label><input type="checkbox" name="r1s-challenge" value="speaking"><span>Speaking / Nói</span></label>
+                  <label><input type="checkbox" name="r1s-challenge" value="native-speed"><span>Native speaker speed</span></label>
+                  <label><input type="checkbox" name="r1s-challenge" value="pronunciation"><span>Pronunciation / Phát âm</span></label>
+                  <label><input type="checkbox" name="r1s-challenge" value="grammar"><span>Grammar / Ngữ pháp</span></label>
+                  <label><input type="checkbox" name="r1s-challenge" value="vocabulary"><span>Vocabulary / Từ vựng</span></label>
+                  <label><input type="checkbox" name="r1s-challenge" value="confidence"><span>Confidence / Tự tin</span></label>
+                  <label><input type="checkbox" name="r1s-challenge" value="freeze"><span>Freezes up / Đứng hình</span></label>
+                  <label><input type="checkbox" name="r1s-challenge" value="writing"><span>Writing / Viết</span></label>
+                </div>
+              </div>
+
+              <div class="field-section">Goals &amp; Motivation</div>
+
+              <div class="field-span">
+                <label for="r1s-why">Why do you want to improve your English? <span class="vi">(Tại sao bạn muốn học tiếng Anh tốt hơn?)</span></label>
+                <textarea id="r1s-why" placeholder="I want to… / Tôi muốn…"></textarea>
+              </div>
+
+              <div class="field">
+                <label for="r1s-dream-job">Dream job / career direction <span class="vi">(Nghề nghiệp mơ ước)</span></label>
+                <input type="text" id="r1s-dream-job" placeholder="Engineer, doctor, YouTuber…" />
+              </div>
+
+              <div class="field-span">
+                <label for="r1s-without-barrier">If English wasn't a problem, what would you do differently? <span class="vi">(Nếu tiếng Anh không còn là rào cản, bạn sẽ làm gì?)</span></label>
+                <textarea id="r1s-without-barrier" placeholder="I would… / Tôi sẽ…"></textarea>
+              </div>
+
+            </div><!-- /.field-grid senior -->
+          </div><!-- /#r1-senior -->
+
+        </div><!-- /.card -->
+      </section>
+
+      <!-- ROOM 2: PASSION AUDIT -->
+      <section class="room-panel" id="room-2" aria-label="Room 2 — Passion Audit">
+        <div class="card">
+          <div class="card-title">Room 2 — Passion Audit</div>
+          <p class="room-intro">
+            No grammar. No rules. Just press record and <em>talk</em> about what you love.
+            Michael wants to hear your real voice — not your "English class" voice.
+            <span class="vi"> / Không ngữ pháp. Không quy tắc. Nhấn ghi âm và nói về những gì bạn yêu thích. Michael muốn nghe giọng thật của bạn.</span>
+          </p>
+
+          <div class="mic-note" id="r2MicNote">
+            <span class="mic-note-icon">🎙</span>
+            <span>This room records audio. If your browser asks for microphone permission, tap <strong>Allow</strong>.
+            <span class="vi"> / Phòng này ghi âm. Nếu trình duyệt hỏi quyền microphone, chọn <strong>Cho phép</strong>.</span></span>
+          </div>
+
+          <!-- Prompt 1 -->
+          <div class="passion-prompt">
+            <div class="passion-num">01</div>
+            <div class="passion-content">
+              <p class="passion-q">What do you love doing? Tell me everything!</p>
+              <p class="passion-q-vi">Bạn thích làm gì? Kể hết cho tôi nghe!</p>
+              <div class="rec-slot" id="rec-passion1"></div>
+            </div>
+          </div>
+
+          <!-- Prompt 2 -->
+          <div class="passion-prompt">
+            <div class="passion-num">02</div>
+            <div class="passion-content">
+              <p class="passion-q">Why do you love it?</p>
+              <p class="passion-q-vi">Tại sao bạn thích?</p>
+              <div class="rec-slot" id="rec-passion2"></div>
+            </div>
+          </div>
+
+          <!-- Prompt 3 -->
+          <div class="passion-prompt">
+            <div class="passion-num">03</div>
+            <div class="passion-content">
+              <p class="passion-q">Who do you do it with?</p>
+              <p class="passion-q-vi">Bạn làm cùng với ai?</p>
+              <div class="rec-slot" id="rec-passion3"></div>
+            </div>
+          </div>
+
+          <!-- Prompt 4 -->
+          <div class="passion-prompt">
+            <div class="passion-num">04</div>
+            <div class="passion-content">
+              <p class="passion-q">When did you start?</p>
+              <p class="passion-q-vi">Bạn bắt đầu từ khi nào?</p>
+              <div class="rec-slot" id="rec-passion4"></div>
+            </div>
+          </div>
+
+          <!-- Prompt 5 -->
+          <div class="passion-prompt">
+            <div class="passion-num">05</div>
+            <div class="passion-content">
+              <p class="passion-q">If you could do this all day, what would that look like?</p>
+              <p class="passion-q-vi">Nếu được làm cả ngày, sẽ như thế nào?</p>
+              <div class="rec-slot" id="rec-passion5"></div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ROOM 3: READING -->
+      <section class="room-panel" id="room-3" aria-label="Room 3 — Reading">
+        <div class="card">
+          <div class="card-title">Room 3 — Reading</div>
+          <p class="room-intro">
+            Read the passage aloud — clearly and naturally. Then answer the questions below in English.
+            Don't worry about being perfect. Michael is listening for your real voice.
+            <span class="vi"> / Đọc to đoạn văn — rõ ràng và tự nhiên. Sau đó trả lời các câu hỏi bằng tiếng Anh.</span>
+          </p>
+
+          <!-- ── JUNIOR BRANCH (ages 3–10) ── -->
+          <div class="r3-branch" id="r3-junior">
+
+            <div class="passage-card">
+              <div class="passage-label">Read aloud / Đọc to</div>
+              <h3 class="passage-title">Max's Big Day</h3>
+              <div class="passage-text">
+                <p>Max is a big brown dog. He lives in a small house with Lan and her family. Every morning, Max wakes up early and runs to the garden. He loves to play with his red ball.</p>
+                <p>One day, Max found a tiny kitten under the tree. The kitten was lost and scared. Max wagged his tail and sat next to the kitten. Soon, they became the best of friends.</p>
+              </div>
+            </div>
+
+            <div class="passage-rec-row">
+              <p class="passage-rec-label">Record yourself reading the passage aloud. <span class="vi">Ghi âm bạn đọc đoạn văn.</span></p>
+              <div class="rec-slot" id="rec-r3-junior"></div>
+            </div>
+
+            <div class="comp-questions">
+              <div class="comp-section-label">Comprehension / Câu hỏi đọc hiểu</div>
+
+              <div class="comp-q">
+                <label class="comp-label" for="r3j-q1">Q1 — What colour is Max? <span class="vi">(Màu của Max?)</span></label>
+                <input type="text" id="r3j-q1" placeholder="Max is…" />
+              </div>
+
+              <div class="comp-q">
+                <label class="comp-label" for="r3j-q2">Q2 — What does Max love to do in the garden? <span class="vi">(Max thích làm gì trong vườn?)</span></label>
+                <input type="text" id="r3j-q2" placeholder="Max loves to…" />
+              </div>
+
+              <div class="comp-q">
+                <label class="comp-label" for="r3j-q3">Q3 — What did Max find under the tree? <span class="vi">(Max tìm thấy gì dưới gốc cây?)</span></label>
+                <input type="text" id="r3j-q3" placeholder="Max found…" />
+              </div>
+
+              <div class="comp-q">
+                <label class="comp-label" for="r3j-q4">Q4 — Do you have a pet? What is it? <span class="vi">(Bạn có thú cưng không?)</span></label>
+                <textarea id="r3j-q4" placeholder="Yes, I have… / No, but I want…"></textarea>
+              </div>
+
+            </div>
+          </div><!-- /#r3-junior -->
+
+          <!-- ── SENIOR BRANCH (ages 11–17) ── -->
+          <div class="r3-branch" id="r3-senior" style="display:none">
+
+            <div class="passage-card">
+              <div class="passage-label">Read aloud / Đọc to</div>
+              <h3 class="passage-title">The Language Advantage</h3>
+              <div class="passage-text">
+                <p>In Vietnam today, English is no longer just a school subject — it is an advantage. Young people who speak English with confidence earn more, travel more freely, and access opportunities that others cannot reach. But most students spend years studying grammar rules and still freeze the moment they need to speak.</p>
+                <p>Why? Because schools teach English as a code to crack, not a voice to find. The students who break through are the ones who stopped waiting to be perfect and started speaking anyway. They made mistakes, got corrected, and kept going. That is the only path.</p>
+              </div>
+            </div>
+
+            <div class="passage-rec-row">
+              <p class="passage-rec-label">Record yourself reading the passage aloud. <span class="vi">Ghi âm bạn đọc đoạn văn.</span></p>
+              <div class="rec-slot" id="rec-r3-senior"></div>
+            </div>
+
+            <div class="comp-questions">
+              <div class="comp-section-label">Comprehension / Câu hỏi đọc hiểu</div>
+
+              <div class="comp-q">
+                <label class="comp-label" for="r3s-q1">Q1 — Why do most students freeze when they need to speak? <span class="vi">(Tại sao học sinh thường đứng hình khi cần nói?)</span></label>
+                <textarea id="r3s-q1" placeholder="Because…"></textarea>
+              </div>
+
+              <div class="comp-q">
+                <label class="comp-label" for="r3s-q2">Q2 — What do students who break through have in common? <span class="vi">(Điểm chung của những học sinh tiến bộ?)</span></label>
+                <textarea id="r3s-q2" placeholder="They…"></textarea>
+              </div>
+
+              <div class="comp-q">
+                <label class="comp-label" for="r3s-q3">Q3 — What does "a code to crack" mean in your own words? <span class="vi">(Cụm từ "a code to crack" nghĩa là gì theo cách hiểu của bạn?)</span></label>
+                <textarea id="r3s-q3" placeholder="I think it means…"></textarea>
+              </div>
+
+              <div class="comp-q">
+                <label class="comp-label" for="r3s-q4">Q4 — Do you agree that making mistakes is necessary? Why or why not? <span class="vi">(Bạn có đồng ý rằng mắc lỗi là cần thiết không?)</span></label>
+                <textarea id="r3s-q4" placeholder="I agree / disagree because…"></textarea>
+              </div>
+
+            </div>
+          </div><!-- /#r3-senior -->
+
+        </div>
+      </section>
+
+      <!-- ROOM 4: SPEAKING -->
+      <section class="room-panel" id="room-4" aria-label="Room 4 — Speaking">
+        <div class="card">
+          <div class="card-title">Room 4 — Free Speaking</div>
+          <p class="room-intro">
+            Pick a topic and just talk. No preparation, no script — this is your real voice, not your homework voice.
+            <span class="vi"> / Chọn chủ đề và nói tự nhiên. Không chuẩn bị, không viết sẵn — đây là giọng thật của bạn.</span>
+          </p>
+
+          <!-- ── JUNIOR BRANCH (ages 3–10) ── -->
+          <div class="r4-branch" id="r4-junior">
+            <div class="speak-instructions">
+              <span class="speak-instructions-icon">🎙</span>
+              <div>
+                <strong>Pick one topic, press Record, and talk for 30–60 seconds. Just keep going!</strong>
+                <span class="vi"> / Chọn một chủ đề, nhấn Ghi âm và nói 30–60 giây. Cứ nói tiếp!</span>
+              </div>
+            </div>
+
+            <div class="speak-topics" id="r4j-topics">
+              <button class="speak-topic-btn" type="button" data-topic="game-cartoon">My favourite game or cartoon 🎮</button>
+              <button class="speak-topic-btn" type="button" data-topic="pet">My pet or dream pet 🐾</button>
+              <button class="speak-topic-btn" type="button" data-topic="best-day">My best day ever ⭐</button>
+            </div>
+
+            <div class="speak-selected-label" id="r4j-selected-label" hidden>
+              Topic selected — now press Record and tell Michael about it!
+              <span class="vi"> / Đã chọn chủ đề — nhấn Ghi âm và kể cho Michael nghe!</span>
+            </div>
+
+            <div class="rec-slot" id="rec-r4-junior"></div>
+          </div><!-- /#r4-junior -->
+
+          <!-- ── SENIOR BRANCH (ages 11–17) ── -->
+          <div class="r4-branch" id="r4-senior" style="display:none">
+            <div class="speak-instructions">
+              <span class="speak-instructions-icon">🎙</span>
+              <div>
+                <strong>Pick one topic, press Record, and speak for 45–90 seconds. Give your real opinion — don't just describe.</strong>
+                <span class="vi"> / Chọn chủ đề, nhấn Ghi âm và nói 45–90 giây. Đưa ra ý kiến thật của bạn.</span>
+              </div>
+            </div>
+
+            <div class="speak-topics" id="r4s-topics">
+              <button class="speak-topic-btn" type="button" data-topic="learn-english">What is the best way to learn English?</button>
+              <button class="speak-topic-btn" type="button" data-topic="change-school">If you could change one thing about your school, what would it be?</button>
+              <button class="speak-topic-btn" type="button" data-topic="social-media">Social media — is it good, bad, or both?</button>
+            </div>
+
+            <div class="speak-selected-label" id="r4s-selected-label" hidden>
+              Good choice — now press Record and give your opinion!
+              <span class="vi"> / Chọn tốt — nhấn Ghi âm và đưa ra ý kiến!</span>
+            </div>
+
+            <div class="rec-slot" id="rec-r4-senior"></div>
+          </div><!-- /#r4-senior -->
+
+        </div>
+      </section>
+
+      <!-- THANK YOU / NET-PET -->
+      <section class="thankyou-section" aria-label="What's next — NET-PET">
+        <span class="netpet-badge">Coming Soon · AI Coaching</span>
+        <img src="NETPET_PHONE.png" alt="NET-PET — Your AI Tiger Coach" class="thankyou-phone" />
+        <h2 class="thankyou-title">You're Done. What's Next?</h2>
+        <p class="thankyou-body">
+          After Michael reviews your submission, you'll be matched with <strong>NET-PET</strong> — your personal AI tiger coach.
+          It tracks your streak, pushes you daily, and turns your real voice into your weapon.
+        </p>
+        <p class="thankyou-body">
+          <span class="vi">Sau khi Michael xem xét bài nộp, bạn sẽ được ghép với NET-PET — AI coach hổ cá nhân của bạn. Theo dõi streak, thúc đẩy hàng ngày, biến giọng thật thành vũ khí.</span>
+        </p>
+      </section>
+
+      <!-- SUBMISSION -->
+      <section class="submit-section" aria-label="Submit assessment">
+        <h2>Submit Assessment</h2>
+        <p>
+          Complete all four rooms, then submit. Your audio recordings will download locally as a backup.
+          Michael reviews every submission personally and follows up within 24 hours.
+          <br>Hoàn thành 4 phòng, gửi bài. Audio sẽ tải về máy bạn làm bản sao lưu — Michael liên hệ trong 24 giờ.
+        </p>
+        <button class="submit-btn" id="submitAssessmentBtn" type="button">
+          Submit Assessment — Gửi Bài Đánh Giá
+        </button>
+        <div class="submit-state" id="submitState" hidden></div>
+      </section>
+
+    </main>
+
+    </div><!-- /#assessment-body -->
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <p>NET — Natural English Training · Mouse to Tiger</p>
+      <p style="margin-top: 6px;">
+        <a href="mailto:hobbs@naturalenglishtraining.com">hobbs@naturalenglishtraining.com</a>
+      </p>
+    </footer>
+
+  </div><!-- /.container -->
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- OBI AGENT WIDGET -->
+  <div class="obi-widget" id="obiWidget" role="complementary" aria-label="OBI Assessment Agent">
+    <div class="obi-panel" id="obiPanel" aria-live="polite" aria-label="OBI agent conversation">
+      <div class="obi-header">
+        <div class="obi-avatar" aria-hidden="true">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4z"/>
+          </svg>
+        </div>
+        <div class="obi-header-text">
+          <div class="obi-name">OBI · NET Agent</div>
+          <div class="obi-status">Online</div>
+        </div>
+      </div>
+
+      <div class="obi-messages" id="obiMessages">
+        <div class="obi-msg agent">
+          <div class="obi-bubble">
+            Hi! I'm OBI — your Tigers Assessment guide. Ask me anything about the rooms, recording, or submission. 🐯
+          </div>
+          <div class="obi-timestamp">Now</div>
+        </div>
+        <div class="obi-msg agent">
+          <div class="obi-bubble">
+            Xin chào! OBI ở đây để hỗ trợ bạn hoàn thành bài đánh giá. Bạn cần giúp gì không?
+          </div>
+          <div class="obi-timestamp">Now</div>
+        </div>
+      </div>
+
+      <div class="obi-quick-replies" id="obiChips">
+        <button class="obi-chip" type="button" data-reply="How does the assessment work?">How it works</button>
+        <button class="obi-chip" type="button" data-reply="What do I record?">Recording help</button>
+        <button class="obi-chip" type="button" data-reply="How do I submit my answers?">Submit pack</button>
+      </div>
+
+      <div class="obi-input-row">
+        <input class="obi-input" id="obiInput" type="text"
+          placeholder="Ask OBI anything…" aria-label="Message OBI"
+          autocomplete="off" maxlength="300" />
+        <button class="obi-send" id="obiSend" type="button" aria-label="Send message">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <button class="obi-toggle" id="obiToggle" type="button"
+      aria-controls="obiPanel" aria-expanded="false" aria-label="Open OBI agent">
+      <span class="obi-badge" id="obiBadge" hidden aria-label="unread messages">1</span>
+      <svg class="obi-icon-open" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.17L4 17.17V4h16v12z"/>
+      </svg>
+      <svg class="obi-icon-close" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+      </svg>
+    </button>
+  </div>
+
+  <script>
+    /* ── Hero reveal ── */
+    document.getElementById('heroBeginBtn').addEventListener('click', () => {
+      document.getElementById('hero').style.display = 'none';
+      document.getElementById('assessment-body').style.display = 'block';
+      requestAnimationFrame(() => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    });
+
+    /* ── Room navigation ── */
+    const roomTabs   = document.querySelectorAll('.room-tab');
+    const roomPanels = document.querySelectorAll('.room-panel');
+
+    roomTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const target = tab.dataset.room;
+        roomTabs.forEach(t => t.classList.remove('active'));
+        roomPanels.forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById('room-' + target)?.classList.add('active');
+      });
+    });
+
+    /* ── Age branch ── */
+    const ageBtns = document.querySelectorAll('.age-card');
+    ageBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        ageBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const age = btn.dataset.age;
+        ['r1', 'r3', 'r4'].forEach(prefix => {
+          document.querySelectorAll('.' + prefix + '-branch').forEach(b => { b.style.display = 'none'; });
+          const br = document.getElementById(prefix + '-' + age);
+          if (br) br.style.display = 'block';
+        });
+      });
+    });
+
+    /* ── Collect Room 1 ── */
+    function getChecked(name) {
+      return [...document.querySelectorAll(`input[name="${name}"]:checked`)].map(el => el.value);
+    }
+    function val(id) { return document.getElementById(id)?.value.trim() ?? ''; }
+
+    function collectRoom1() {
+      const age = document.querySelector('.age-card.active')?.dataset.age;
+      if (age === 'junior') {
+        return {
+          branch: 'junior',
+          name: val('r1j-name'), age: val('r1j-age'),
+          school: val('r1j-school'), grade: val('r1j-grade'),
+          parentName: val('r1j-parent-name'), parentContact: val('r1j-parent-contact'),
+          engHistory: val('r1j-eng-history'),
+          hobbies: getChecked('r1j-hobby'), otherHobbies: val('r1j-fav-media'),
+          challenges: getChecked('r1j-challenge'),
+          whyEnglish: val('r1j-why')
+        };
+      }
+      return {
+        branch: 'senior',
+        name: val('r1s-name'), age: val('r1s-age'),
+        school: val('r1s-school'), grade: val('r1s-grade'),
+        engHistory: val('r1s-eng-history'),
+        engUsage: getChecked('r1s-usage'),
+        hobbies: getChecked('r1s-hobby'),
+        challenges: getChecked('r1s-challenge'),
+        whyEnglish: val('r1s-why'),
+        dreamJob: val('r1s-dream-job'),
+        withoutBarrier: val('r1s-without-barrier')
+      };
+    }
+
+    /* ── Room 2 — Passion Audit ── */
+    const r2Recordings = new Map();
+
+    function createPassionRecorder(slotId, promptId) {
+      const slot = document.getElementById(slotId);
+      if (!slot) return;
+
+      let activeRec    = null;
+      let activeStream = null;
+
+      const btn      = document.createElement('button');
+      const status   = document.createElement('div');
+      const playback = document.createElement('div');
+
+      btn.type = 'button';
+      btn.className = 'rec-btn';
+      btn.dataset.state = 'idle';
+      btn.textContent = 'Record — Ghi âm';
+
+      status.className = 'rec-status';
+      status.textContent = 'Tap record when ready. / Nhấn ghi âm khi sẵn sàng.';
+
+      playback.className = 'rec-playback';
+      playback.hidden = true;
+
+      btn.addEventListener('click', async () => {
+        if (!window.MediaRecorder) {
+          status.textContent = 'Recording not supported in this browser.';
+          status.style.color = 'var(--rec-red)';
+          return;
+        }
+        const state = btn.dataset.state;
+
+        if (state === 'idle' || state === 'done') {
+          try {
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            activeStream = stream;
+            const recorder = new MediaRecorder(stream);
+            activeRec = recorder;
+            const chunks = [];
+
+            recorder.ondataavailable = e => chunks.push(e.data);
+            recorder.onstop = () => {
+              const blob = new Blob(chunks, { type: 'audio/webm' });
+              r2Recordings.set(promptId, blob);
+
+              const audio = document.createElement('audio');
+              audio.controls = true;
+              audio.src = URL.createObjectURL(blob);
+              playback.innerHTML = '';
+              playback.appendChild(audio);
+              playback.hidden = false;
+
+              btn.textContent = 'Re-record — Ghi lại';
+              btn.className = 'rec-btn done';
+              btn.dataset.state = 'done';
+              status.textContent = '✓ Recorded. Listen back or re-record. / Đã ghi xong.';
+              status.style.color = 'var(--green)';
+
+              stream.getTracks().forEach(t => t.stop());
+              activeRec = null; activeStream = null;
+            };
+
+            recorder.start();
+            btn.textContent = 'Stop — Dừng lại ⏹';
+            btn.className = 'rec-btn recording';
+            btn.dataset.state = 'recording';
+            status.textContent = '● Recording… nói tự nhiên rồi nhấn Stop.';
+            status.style.color = 'var(--rec-red)';
+
+          } catch (err) {
+            status.textContent = 'Cannot access microphone. Allow it in browser settings. / Không thể truy cập microphone.';
+            status.style.color = 'var(--rec-red)';
+          }
+
+        } else if (state === 'recording') {
+          if (activeRec?.state === 'recording') activeRec.stop();
+          if (activeStream) activeStream.getTracks().forEach(t => t.stop());
+        }
+      });
+
+      slot.appendChild(btn);
+      slot.appendChild(status);
+      slot.appendChild(playback);
+    }
+
+    function blobToBase64(blob) {
+      return new Promise(resolve => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result);
+        reader.readAsDataURL(blob);
+      });
+    }
+
+    async function collectRoom2() {
+      const ids = ['passion1', 'passion2', 'passion3', 'passion4', 'passion5'];
+      const result = {};
+      for (const id of ids) {
+        const blob = r2Recordings.get(id);
+        result[id] = blob
+          ? { recorded: true, sizeBytes: blob.size, mimeType: blob.type || 'audio/webm', dataUrl: await blobToBase64(blob) }
+          : { recorded: false };
+      }
+      return result;
+    }
+
+    ['passion1','passion2','passion3','passion4','passion5'].forEach(id => {
+      createPassionRecorder('rec-' + id, id);
+    });
+
+    /* ── Room 3 — Reading ── */
+    const r3Recordings = new Map();
+
+    function createReadingRecorder(slotId, recordId) {
+      const slot = document.getElementById(slotId);
+      if (!slot) return;
+
+      let activeRec = null, activeStream = null;
+      const btn      = document.createElement('button');
+      const status   = document.createElement('div');
+      const playback = document.createElement('div');
+
+      btn.type = 'button';
+      btn.className = 'rec-btn';
+      btn.dataset.state = 'idle';
+      btn.textContent = 'Record read-aloud — Ghi âm';
+
+      status.className = 'rec-status';
+      status.textContent = 'Tap record, then read the passage clearly. / Nhấn ghi âm rồi đọc to đoạn văn.';
+
+      playback.className = 'rec-playback';
+      playback.hidden = true;
+
+      btn.addEventListener('click', async () => {
+        if (!window.MediaRecorder) {
+          status.textContent = 'Recording not supported in this browser.';
+          status.style.color = 'var(--rec-red)';
+          return;
+        }
+        const state = btn.dataset.state;
+        if (state === 'idle' || state === 'done') {
+          try {
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            activeStream = stream;
+            const recorder = new MediaRecorder(stream);
+            activeRec = recorder;
+            const chunks = [];
+
+            recorder.ondataavailable = e => chunks.push(e.data);
+            recorder.onstop = () => {
+              const blob = new Blob(chunks, { type: 'audio/webm' });
+              r3Recordings.set(recordId, blob);
+
+              const audio = document.createElement('audio');
+              audio.controls = true;
+              audio.src = URL.createObjectURL(blob);
+              playback.innerHTML = '';
+              playback.appendChild(audio);
+              playback.hidden = false;
+
+              btn.textContent = 'Re-record — Ghi lại';
+              btn.className = 'rec-btn done';
+              btn.dataset.state = 'done';
+              status.textContent = '✓ Recorded. Listen back or re-record. / Đã ghi xong.';
+              status.style.color = 'var(--green)';
+              stream.getTracks().forEach(t => t.stop());
+              activeRec = null; activeStream = null;
+            };
+
+            recorder.start();
+            btn.textContent = 'Stop — Dừng lại ⏹';
+            btn.className = 'rec-btn recording';
+            btn.dataset.state = 'recording';
+            status.textContent = '● Recording… đọc rõ ràng và tự nhiên.';
+            status.style.color = 'var(--rec-red)';
+          } catch (err) {
+            status.textContent = 'Cannot access microphone. Allow it in browser settings.';
+            status.style.color = 'var(--rec-red)';
+          }
+        } else if (state === 'recording') {
+          if (activeRec?.state === 'recording') activeRec.stop();
+          if (activeStream) activeStream.getTracks().forEach(t => t.stop());
+        }
+      });
+
+      slot.appendChild(btn);
+      slot.appendChild(status);
+      slot.appendChild(playback);
+    }
+
+    function r3Val(id) { return document.getElementById(id)?.value.trim() ?? ''; }
+
+    async function collectRoom3() {
+      const age  = document.querySelector('.age-card.active')?.dataset.age ?? 'junior';
+      const blob = r3Recordings.get('r3_reading_' + age);
+      const reading = blob
+        ? { recorded: true, sizeBytes: blob.size, mimeType: blob.type || 'audio/webm', dataUrl: await blobToBase64(blob) }
+        : { recorded: false };
+
+      if (age === 'junior') {
+        return { branch: 'junior', reading, comprehension: {
+          q1_colour:    r3Val('r3j-q1'),
+          q2_garden:    r3Val('r3j-q2'),
+          q3_found:     r3Val('r3j-q3'),
+          q4_pet:       r3Val('r3j-q4')
+        }};
+      }
+      return { branch: 'senior', reading, comprehension: {
+        q1_freeze:    r3Val('r3s-q1'),
+        q2_breakThru: r3Val('r3s-q2'),
+        q3_codeMeaning: r3Val('r3s-q3'),
+        q4_mistakes:  r3Val('r3s-q4')
+      }};
+    }
+
+    createReadingRecorder('rec-r3-junior', 'r3_reading_junior');
+    createReadingRecorder('rec-r3-senior', 'r3_reading_senior');
+
+    /* ── Room 4 — Free Speaking ── */
+    const r4Recordings = new Map();
+
+    function createSpeakingRecorder(slotId, recordId) {
+      const slot = document.getElementById(slotId);
+      if (!slot) return;
+
+      let activeRec = null, activeStream = null;
+      const btn      = document.createElement('button');
+      const status   = document.createElement('div');
+      const playback = document.createElement('div');
+
+      btn.type = 'button';
+      btn.className = 'rec-btn';
+      btn.dataset.state = 'idle';
+      btn.textContent = 'Record — Ghi âm';
+
+      status.className = 'rec-status';
+      status.textContent = 'Select a topic above, then tap Record. / Chọn chủ đề rồi nhấn Ghi âm.';
+
+      playback.className = 'rec-playback';
+      playback.hidden = true;
+
+      btn.addEventListener('click', async () => {
+        if (!window.MediaRecorder) {
+          status.textContent = 'Recording not supported in this browser.';
+          status.style.color = 'var(--rec-red)';
+          return;
+        }
+        const state = btn.dataset.state;
+        if (state === 'idle' || state === 'done') {
+          try {
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            activeStream = stream;
+            const recorder = new MediaRecorder(stream);
+            activeRec = recorder;
+            const chunks = [];
+
+            recorder.ondataavailable = e => chunks.push(e.data);
+            recorder.onstop = () => {
+              const blob = new Blob(chunks, { type: 'audio/webm' });
+              r4Recordings.set(recordId, blob);
+
+              const audio = document.createElement('audio');
+              audio.controls = true;
+              audio.src = URL.createObjectURL(blob);
+              playback.innerHTML = '';
+              playback.appendChild(audio);
+              playback.hidden = false;
+
+              btn.textContent = 'Re-record — Ghi lại';
+              btn.className = 'rec-btn done';
+              btn.dataset.state = 'done';
+              status.textContent = '✓ Recorded. Listen back or re-record. / Đã ghi xong.';
+              status.style.color = 'var(--green)';
+              stream.getTracks().forEach(t => t.stop());
+              activeRec = null; activeStream = null;
+            };
+
+            recorder.start();
+            btn.textContent = 'Stop — Dừng lại ⏹';
+            btn.className = 'rec-btn recording';
+            btn.dataset.state = 'recording';
+            status.textContent = '● Recording… speak naturally! / Nói tự nhiên!';
+            status.style.color = 'var(--rec-red)';
+          } catch (err) {
+            status.textContent = 'Cannot access microphone. Allow it in browser settings.';
+            status.style.color = 'var(--rec-red)';
+          }
+        } else if (state === 'recording') {
+          if (activeRec?.state === 'recording') activeRec.stop();
+          if (activeStream) activeStream.getTracks().forEach(t => t.stop());
+        }
+      });
+
+      slot.appendChild(btn);
+      slot.appendChild(status);
+      slot.appendChild(playback);
+    }
+
+    function r4Topic(age) {
+      const id = age === 'junior' ? 'r4j-topics' : 'r4s-topics';
+      return document.querySelector(`#${id} .speak-topic-btn.selected`)?.dataset.topic ?? '';
+    }
+
+    async function collectRoom4() {
+      const age  = document.querySelector('.age-card.active')?.dataset.age ?? 'junior';
+      const blob = r4Recordings.get('r4_speaking_' + age);
+      const speaking = blob
+        ? { recorded: true, sizeBytes: blob.size, mimeType: blob.type || 'audio/webm', dataUrl: await blobToBase64(blob) }
+        : { recorded: false };
+      return { branch: age, topicChosen: r4Topic(age), speaking };
+    }
+
+    /* ── Topic selection ── */
+    document.querySelectorAll('.speak-topics').forEach(group => {
+      group.addEventListener('click', e => {
+        const btn = e.target.closest('.speak-topic-btn');
+        if (!btn) return;
+        group.querySelectorAll('.speak-topic-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        const label = group.nextElementSibling;
+        if (label?.classList.contains('speak-selected-label')) label.hidden = false;
+      });
+    });
+
+    createSpeakingRecorder('rec-r4-junior', 'r4_speaking_junior');
+    createSpeakingRecorder('rec-r4-senior', 'r4_speaking_senior');
+
+    /* ── Toast helper ── */
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 4000);
+    }
+
+    /* ── Submission pack ── */
+    function downloadBlob(blob, filename) {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(() => { URL.revokeObjectURL(url); a.remove(); }, 1000);
+    }
+
+    function generateRef() {
+      const stamp = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+      const rand  = Math.random().toString(36).slice(2, 8).toUpperCase();
+      return `NET-TIG-${stamp}-${rand}`;
+    }
+
+    const API_ENDPOINT = 'https://submission-api.mrmichaelhobbs123.workers.dev/api/submit';
+
+    document.getElementById('submitAssessmentBtn').addEventListener('click', async () => {
+      const btn      = document.getElementById('submitAssessmentBtn');
+      const stateEl  = document.getElementById('submitState');
+      btn.disabled   = true;
+      btn.textContent = 'Submitting… — Đang gửi…';
+      stateEl.hidden = false;
+      stateEl.innerHTML = '<div class="submit-loading">⏳ Sending your assessment — Đang gửi bài đánh giá…</div>';
+
+      const ref = generateRef();
+      const [room2, room3, room4] = await Promise.all([collectRoom2(), collectRoom3(), collectRoom4()]);
+      const fullData = {
+        assessment:          'tigers-4room',
+        submissionReference: ref,
+        submittedAt:         new Date().toISOString(),
+        ageGroup:            document.querySelector('.age-card.active')?.dataset.age ?? 'unknown',
+        rooms: { room1: collectRoom1(), room2, room3, room4 }
+      };
+
+      /* Local backup download with full audio */
+      const date = new Date().toISOString().slice(0, 10);
+      downloadBlob(
+        new Blob([JSON.stringify(fullData, null, 2)], { type: 'application/json' }),
+        `NET-Tigers-${date}-${ref}.json`
+      );
+
+      /* Strip audio for API payload */
+      const apiPayload = JSON.parse(JSON.stringify(fullData, (k, v) =>
+        k === 'dataUrl' && typeof v === 'string' && v.startsWith('data:audio') ? '[audio-local-download]' : v
+      ));
+
+      try {
+        const res = await fetch(API_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(apiPayload),
+        });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        btn.style.display = 'none';
+        stateEl.innerHTML = `
+          <div class="submit-success">
+            <div class="submit-success-icon">✓</div>
+            <div class="submit-success-title">Submitted!</div>
+            <div class="submit-success-ref">${ref}</div>
+            <p>Michael will contact you within 24 hours. — Michael sẽ liên hệ trong 24 giờ.</p>
+          </div>`;
+        showToast(`Submitted. Reference: ${ref}`);
+      } catch {
+        stateEl.innerHTML = `
+          <div class="submit-error">
+            <p>Submission failed. Your pack was saved locally — please send it to Michael directly at michael@netai.com or via WhatsApp.<br>
+            Gửi thất bại. Pack đã lưu về máy — vui lòng gửi cho Michael qua email hoặc WhatsApp.</p>
+          </div>`;
+        btn.disabled = false;
+        btn.textContent = 'Try Again — Thử Lại';
+      }
+    });
+  </script>
+
+  <script src="obi-widget.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NET Professional Assessment — 4-Room | Become Irreplaceable</title>
+  <meta name="description" content="NET Professional 4-Room Assessment. English assessment for Vietnamese professionals and university students 18+." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@500;700;800;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="obi-widget.css" />
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- HEADER -->
+    <header class="header">
+      <div class="header-badge">NET Professional · 18+ University &amp; Career</div>
+      <h1 class="header-title">Professional Assessment</h1>
+      <p class="header-subtitle">Become Irreplaceable — Trở Thành Nhân Sự Không Thể Thay Thế</p>
+    </header>
+
+    <!-- ROOM NAVIGATION -->
+    <nav class="room-nav" aria-label="Assessment rooms">
+      <button class="room-tab active" data-room="1" type="button">
+        <span class="room-number">Room 1</span>
+        Profile
+      </button>
+      <button class="room-tab" data-room="2" type="button">
+        <span class="room-number">Room 2</span>
+        Writing
+      </button>
+      <button class="room-tab" data-room="3" type="button">
+        <span class="room-number">Room 3</span>
+        Speaking
+      </button>
+      <button class="room-tab" data-room="4" type="button">
+        <span class="room-number">Room 4</span>
+        AI Fluency
+      </button>
+    </nav>
+
+    <main>
+
+      <!-- ROOM 1: PROFILE -->
+      <section class="room-panel active" id="room-1" aria-label="Room 1 — Profile">
+        <div class="card">
+          <div class="card-title">Room 1 — Professional Profile</div>
+          <p class="room-intro">
+            Tell Michael who you are and what you need English for. This shapes everything that follows.
+            <span class="vi"> / Cho Michael biết bạn là ai và bạn cần tiếng Anh để làm gì. Điều này quyết định tất cả.</span>
+          </p>
+
+          <div class="field-grid">
+
+            <div class="field">
+              <label for="r1-name">Full name <span class="vi">(Họ và tên)</span></label>
+              <input type="text" id="r1-name" autocomplete="name" placeholder="Nguyen Van A…" />
+            </div>
+
+            <div class="field">
+              <label for="r1-age">Age <span class="vi">(Tuổi)</span></label>
+              <input type="number" id="r1-age" inputmode="numeric" placeholder="25" min="18" max="65" />
+            </div>
+
+            <div class="field">
+              <label for="r1-email">Email</label>
+              <input type="text" id="r1-email" autocomplete="email" placeholder="your@email.com" />
+            </div>
+
+            <div class="field">
+              <label for="r1-phone">WhatsApp / Zalo</label>
+              <input type="tel" id="r1-phone" autocomplete="tel" placeholder="09xx xxx xxx" />
+            </div>
+
+            <div class="field-section">Work &amp; Study</div>
+
+            <div class="field">
+              <label for="r1-job-title">Job title / Course <span class="vi">(Chức danh / Ngành học)</span></label>
+              <input type="text" id="r1-job-title" placeholder="Marketing Manager / Business English…" />
+            </div>
+
+            <div class="field">
+              <label for="r1-industry">Industry / Faculty <span class="vi">(Ngành / Khoa)</span></label>
+              <input type="text" id="r1-industry" placeholder="Finance / Engineering / Tourism…" />
+            </div>
+
+            <div class="field-span">
+              <label for="r1-company">Company / University <span class="vi">(Công ty / Trường)</span></label>
+              <input type="text" id="r1-company" placeholder="ABC Corp / Đại học…" />
+            </div>
+
+            <div class="field-section">English Background</div>
+
+            <div class="field-span">
+              <label for="r1-eng-history">How long have you studied English? <span class="vi">(Học tiếng Anh bao lâu?)</span></label>
+              <select id="r1-eng-history">
+                <option value="">— Select / Chọn —</option>
+                <option value="never">Never / Chưa bao giờ</option>
+                <option value="<1year">Less than 1 year / Dưới 1 năm</option>
+                <option value="1-3years">1–3 years / 1–3 năm</option>
+                <option value="3-5years">3–5 years / 3–5 năm</option>
+                <option value="5+years">5+ years / Hơn 5 năm</option>
+              </select>
+            </div>
+
+            <div class="field-span">
+              <label>Where do you use English now? <span class="vi">(Bạn dùng tiếng Anh ở đâu? — chọn tất cả)</span></label>
+              <div class="choice-row" role="group" aria-label="English usage contexts">
+                <label><input type="checkbox" name="r1-usage" value="meetings"><span>Meetings / Họp</span></label>
+                <label><input type="checkbox" name="r1-usage" value="emails"><span>Emails</span></label>
+                <label><input type="checkbox" name="r1-usage" value="reports"><span>Reports / Báo cáo</span></label>
+                <label><input type="checkbox" name="r1-usage" value="clients"><span>International clients</span></label>
+                <label><input type="checkbox" name="r1-usage" value="youtube"><span>YouTube / Netflix</span></label>
+                <label><input type="checkbox" name="r1-usage" value="social"><span>Social media</span></label>
+                <label><input type="checkbox" name="r1-usage" value="exams"><span>IELTS / TOEIC</span></label>
+                <label><input type="checkbox" name="r1-usage" value="nowhere"><span>Nowhere yet / Chưa dùng</span></label>
+              </div>
+            </div>
+
+            <div class="field-section">Self-Assessment</div>
+
+            <div class="field-span">
+              <label for="r1-self-assess">How would you describe your current English? <span class="vi">(Mô tả trình độ tiếng Anh hiện tại)</span></label>
+              <select id="r1-self-assess">
+                <option value="">— Select / Chọn —</option>
+                <option value="freeze">Freeze — I know it but can't speak when it matters / Tôi biết nhưng không nói được khi cần</option>
+                <option value="functional">Functional — I get by but I'm not confident / Tôi dùng được nhưng chưa tự tin</option>
+                <option value="fluent">Fluent — I communicate well but want to refine / Tôi giao tiếp tốt nhưng muốn hoàn thiện hơn</option>
+              </select>
+            </div>
+
+            <div class="field-section">Goals</div>
+
+            <div class="field-span">
+              <label for="r1-goal">What do you want English to do for your career? <span class="vi">(Bạn muốn tiếng Anh làm gì cho sự nghiệp?)</span></label>
+              <textarea id="r1-goal" placeholder="I want to… / Tôi muốn…"></textarea>
+            </div>
+
+            <div class="field-span">
+              <label>What's holding you back most? <span class="vi">(Điều gì cản trở bạn nhất? — chọn tất cả)</span></label>
+              <div class="choice-row" role="group" aria-label="Main barriers">
+                <label><input type="checkbox" name="r1-barrier" value="speaking-confidence"><span>Speaking confidence / Tự tin khi nói</span></label>
+                <label><input type="checkbox" name="r1-barrier" value="pronunciation"><span>Pronunciation / Phát âm</span></label>
+                <label><input type="checkbox" name="r1-barrier" value="vocabulary"><span>Vocabulary / Từ vựng</span></label>
+                <label><input type="checkbox" name="r1-barrier" value="listening-speed"><span>Listening speed / Nghe tốc độ nhanh</span></label>
+                <label><input type="checkbox" name="r1-barrier" value="professional-writing"><span>Professional writing / Viết chuyên nghiệp</span></label>
+                <label><input type="checkbox" name="r1-barrier" value="grammar"><span>Grammar / Ngữ pháp</span></label>
+                <label><input type="checkbox" name="r1-barrier" value="none"><span>Nothing major / Không có gì lớn</span></label>
+              </div>
+            </div>
+
+          </div><!-- /.field-grid -->
+        </div><!-- /.card -->
+      </section>
+
+      <!-- ROOM 2: WRITING -->
+      <section class="room-panel" id="room-2" aria-label="Room 2 — Professional Writing">
+        <div class="card">
+          <div class="card-title">Room 2 — Professional Writing</div>
+          <p class="room-intro">
+            Three short writing tasks. Write naturally — don't translate from Vietnamese or use AI.
+            Michael is assessing clarity, vocabulary range, and professional register.
+            <span class="vi"> / Ba bài viết ngắn. Hãy viết tự nhiên — đừng dịch từ tiếng Việt hay dùng AI.</span>
+          </p>
+
+          <!-- Prompt 1 -->
+          <div class="writing-prompt">
+            <div class="writing-prompt-header">
+              <span class="writing-prompt-num">01</span>
+              <div>
+                <div class="writing-prompt-label">Email Reply <span class="vi">/ Trả lời email</span></div>
+                <div class="writing-word-count">50–80 words</div>
+              </div>
+            </div>
+            <div class="writing-scenario">
+              <strong>Your manager sent you this email:</strong>
+              <blockquote>"Hi, I need you to present your project update to the team on Friday at 2pm. Please prepare a 5-minute summary. Let me know if you have any questions."</blockquote>
+              <p class="writing-task">Write a professional reply. <span class="vi">/ Viết email trả lời chuyên nghiệp.</span></p>
+            </div>
+            <textarea id="r2-prompt1" placeholder="Dear [Name],&#10;Thank you for…"></textarea>
+          </div>
+
+          <!-- Prompt 2 -->
+          <div class="writing-prompt">
+            <div class="writing-prompt-header">
+              <span class="writing-prompt-num">02</span>
+              <div>
+                <div class="writing-prompt-label">Professional Introduction <span class="vi">/ Giới thiệu bản thân</span></div>
+                <div class="writing-word-count">60–100 words</div>
+              </div>
+            </div>
+            <p class="writing-task">
+              Write a professional introduction about yourself — as if you were meeting a new international client or colleague for the first time.
+              <span class="vi"> / Viết đoạn giới thiệu bản thân chuyên nghiệp — như thể bạn đang gặp khách hàng hoặc đồng nghiệp quốc tế lần đầu.</span>
+            </p>
+            <textarea id="r2-prompt2" placeholder="My name is… I work as… I specialise in…"></textarea>
+          </div>
+
+          <!-- Prompt 3 -->
+          <div class="writing-prompt">
+            <div class="writing-prompt-header">
+              <span class="writing-prompt-num">03</span>
+              <div>
+                <div class="writing-prompt-label">Your Opinion <span class="vi">/ Ý kiến của bạn</span></div>
+                <div class="writing-word-count">60–100 words</div>
+              </div>
+            </div>
+            <p class="writing-task">
+              What is one change that would most improve English teaching in Vietnam? Give your opinion and explain your reasoning.
+              <span class="vi"> / Một thay đổi nào sẽ cải thiện việc dạy tiếng Anh ở Việt Nam nhất? Đưa ra ý kiến và giải thích.</span>
+            </p>
+            <textarea id="r2-prompt3" placeholder="In my opinion…"></textarea>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ROOM 3: SPEAKING -->
+      <section class="room-panel" id="room-3" aria-label="Room 3 — Speaking">
+        <div class="card">
+          <div class="card-title">Room 3 — Spoken English</div>
+          <p class="room-intro">
+            Pick one topic and record 60–90 seconds. No script, no preparation — this is your real professional English voice.
+            Michael is listening for confidence, clarity, and how you express yourself naturally.
+            <span class="vi"> / Chọn một chủ đề và ghi âm 60–90 giây. Không có kịch bản, không chuẩn bị.</span>
+          </p>
+
+          <div class="speak-instructions">
+            <span class="speak-instructions-icon">🎙</span>
+            <div>
+              <strong>Choose a topic, press Record, and speak for 60–90 seconds. Give real opinions — avoid rehearsed answers.</strong>
+              <span class="vi"> / Chọn chủ đề, nhấn Ghi âm và nói 60–90 giây. Đưa ra ý kiến thật của bạn.</span>
+            </div>
+          </div>
+
+          <div class="speak-topics" id="r3-topics">
+            <button class="speak-topic-btn" type="button" data-topic="work-english">Describe your job or studies — and where English fits in, or should fit in.</button>
+            <button class="speak-topic-btn" type="button" data-topic="challenge">Tell me about a challenge you're currently facing at work or university.</button>
+            <button class="speak-topic-btn" type="button" data-topic="goal">What goal are you working toward right now, and why does it matter to you?</button>
+          </div>
+
+          <div class="speak-selected-label" id="r3-selected-label" hidden>
+            Good choice — press Record and start talking. No preparation needed.
+            <span class="vi"> / Chọn tốt — nhấn Ghi âm và bắt đầu nói. Không cần chuẩn bị.</span>
+          </div>
+
+          <div class="rec-slot" id="rec-r3"></div>
+
+        </div>
+      </section>
+
+      <!-- ROOM 4: AI FLUENCY -->
+      <section class="room-panel" id="room-4" aria-label="Room 4 — AI Fluency">
+        <div class="card">
+          <div class="card-title">Room 4 — AI Fluency</div>
+          <p class="room-intro">
+            This room is about how you use — or plan to use — AI in your professional life, and your ability to discuss it in English.
+            <span class="vi"> / Phòng này đánh giá cách bạn dùng AI trong công việc và khả năng thảo luận về AI bằng tiếng Anh.</span>
+          </p>
+
+          <!-- Part 1: Written -->
+          <div class="ai-part">
+            <div class="ai-part-header">
+              <span class="ai-part-num">Part 1</span>
+              <div>
+                <div class="ai-part-label">Written Response <span class="vi">/ Trả lời viết</span></div>
+                <div class="writing-word-count">80–120 words</div>
+              </div>
+            </div>
+            <p class="writing-task">
+              Describe one task you currently use AI for in your work or studies.
+              If you haven't tried AI tools yet, describe what you've heard about them and whether you think they would help you.
+              <span class="vi"> / Mô tả một tác vụ bạn đang dùng AI trong công việc. Nếu chưa dùng, hãy mô tả những gì bạn đã nghe và liệu bạn nghĩ AI có giúp ích không.</span>
+            </p>
+            <textarea id="r4-written" placeholder="I currently use AI to… / I haven't used AI yet, but I've heard…"></textarea>
+          </div>
+
+          <!-- Part 2: Speaking -->
+          <div class="ai-part">
+            <div class="ai-part-header">
+              <span class="ai-part-num">Part 2</span>
+              <div>
+                <div class="ai-part-label">Spoken Response <span class="vi">/ Trả lời nói</span></div>
+                <div class="writing-word-count">60–90 seconds</div>
+              </div>
+            </div>
+            <p class="writing-task">
+              Record your answer to this question: <strong>How could AI change your role in the next 2 years? Do you see it as a threat or an opportunity?</strong>
+              <span class="vi"> / Ghi âm câu trả lời: AI có thể thay đổi vai trò của bạn như thế nào trong 2 năm tới? Đó là mối đe dọa hay cơ hội?</span>
+            </p>
+            <div class="rec-slot" id="rec-r4"></div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SUBMISSION -->
+      <section class="submit-section" aria-label="Submit assessment">
+        <h2>Download Submission Pack</h2>
+        <p>
+          Complete all four rooms, then download your pack and send it to Michael.
+          He reviews every submission personally and follows up within 24 hours.
+          <br>Hoàn thành 4 phòng, tải pack và gửi cho Michael — liên hệ trong 24 giờ.
+        </p>
+        <button class="submit-btn" id="downloadResultsBtn" type="button">
+          Download Submission Pack — Tải Submission Pack
+        </button>
+        <div class="submit-ref-panel" id="submissionRefPanel">
+          <p class="submit-ref-label">Submission Reference</p>
+          <p class="submit-ref-value" id="submissionRefValue">NET-REF-PENDING</p>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <p>NET — Natural English Training · Become Irreplaceable</p>
+      <p style="margin-top: 6px;">
+        <a href="mailto:hobbs@naturalenglishtraining.com">hobbs@naturalenglishtraining.com</a>
+      </p>
+    </footer>
+
+  </div><!-- /.container -->
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- OBI AGENT WIDGET -->
+  <div class="obi-widget" id="obiWidget" role="complementary" aria-label="OBI Assessment Agent">
+    <div class="obi-panel" id="obiPanel" aria-live="polite" aria-label="OBI agent conversation">
+      <div class="obi-header">
+        <div class="obi-avatar" aria-hidden="true">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4z"/>
+          </svg>
+        </div>
+        <div class="obi-header-text">
+          <div class="obi-name">OBI · NET Agent</div>
+          <div class="obi-status">Online</div>
+        </div>
+      </div>
+
+      <div class="obi-messages" id="obiMessages">
+        <div class="obi-msg agent">
+          <div class="obi-bubble">
+            Hi! I'm OBI — your Professional Assessment guide. Ask me about the rooms, recording, or how to submit. 🎯
+          </div>
+          <div class="obi-timestamp">Now</div>
+        </div>
+        <div class="obi-msg agent">
+          <div class="obi-bubble">
+            Xin chào! OBI ở đây để hỗ trợ bài đánh giá Professional của bạn. Bạn cần giúp gì không?
+          </div>
+          <div class="obi-timestamp">Now</div>
+        </div>
+      </div>
+
+      <div class="obi-quick-replies" id="obiChips">
+        <button class="obi-chip" type="button" data-reply="How does the assessment work?">How it works</button>
+        <button class="obi-chip" type="button" data-reply="What do I record?">Recording help</button>
+        <button class="obi-chip" type="button" data-reply="How do I submit my answers?">Submit pack</button>
+      </div>
+
+      <div class="obi-input-row">
+        <input class="obi-input" id="obiInput" type="text"
+          placeholder="Ask OBI anything…" aria-label="Message OBI"
+          autocomplete="off" maxlength="300" />
+        <button class="obi-send" id="obiSend" type="button" aria-label="Send message">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <button class="obi-toggle" id="obiToggle" type="button"
+      aria-controls="obiPanel" aria-expanded="false" aria-label="Open OBI agent">
+      <span class="obi-badge" id="obiBadge" hidden aria-label="unread messages">1</span>
+      <svg class="obi-icon-open" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.17L4 17.17V4h16v12z"/>
+      </svg>
+      <svg class="obi-icon-close" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+      </svg>
+    </button>
+  </div>
+
+  <script>
+    /* ── Room navigation ── */
+    const roomTabs   = document.querySelectorAll('.room-tab');
+    const roomPanels = document.querySelectorAll('.room-panel');
+
+    roomTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const target = tab.dataset.room;
+        roomTabs.forEach(t => t.classList.remove('active'));
+        roomPanels.forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById('room-' + target)?.classList.add('active');
+      });
+    });
+
+    /* ── Room 1 — Profile ── */
+    function getChecked(name) {
+      return [...document.querySelectorAll(`input[name="${name}"]:checked`)].map(el => el.value);
+    }
+    function val(id) { return document.getElementById(id)?.value.trim() ?? ''; }
+
+    function collectRoom1() {
+      return {
+        name:          val('r1-name'),
+        age:           val('r1-age'),
+        email:         val('r1-email'),
+        phone:         val('r1-phone'),
+        jobTitle:      val('r1-job-title'),
+        industry:      val('r1-industry'),
+        company:       val('r1-company'),
+        engHistory:    val('r1-eng-history'),
+        engUsage:      getChecked('r1-usage'),
+        selfAssess:    val('r1-self-assess'),
+        goalStatement: val('r1-goal'),
+        barriers:      getChecked('r1-barrier')
+      };
+    }
+
+    /* ── Room 2 — Writing ── */
+    function collectRoom2() {
+      return {
+        prompt1_emailReply:   val('r2-prompt1'),
+        prompt2_selfIntro:    val('r2-prompt2'),
+        prompt3_opinionPara:  val('r2-prompt3')
+      };
+    }
+
+    /* ── Recorder factory ── */
+    function blobToBase64(blob) {
+      return new Promise(resolve => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result);
+        reader.readAsDataURL(blob);
+      });
+    }
+
+    function createRecorder(slotId, store, recordId, idleLabel) {
+      const slot = document.getElementById(slotId);
+      if (!slot) return;
+
+      let activeRec = null, activeStream = null;
+      const btn      = document.createElement('button');
+      const status   = document.createElement('div');
+      const playback = document.createElement('div');
+
+      btn.type = 'button';
+      btn.className = 'rec-btn';
+      btn.dataset.state = 'idle';
+      btn.textContent = 'Record — Ghi âm';
+
+      status.className = 'rec-status';
+      status.textContent = idleLabel;
+
+      playback.className = 'rec-playback';
+      playback.hidden = true;
+
+      btn.addEventListener('click', async () => {
+        if (!window.MediaRecorder) {
+          status.textContent = 'Recording not supported in this browser.';
+          status.style.color = '#ef4444';
+          return;
+        }
+        const state = btn.dataset.state;
+        if (state === 'idle' || state === 'done') {
+          try {
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            activeStream = stream;
+            const recorder = new MediaRecorder(stream);
+            activeRec = recorder;
+            const chunks = [];
+
+            recorder.ondataavailable = e => chunks.push(e.data);
+            recorder.onstop = () => {
+              const blob = new Blob(chunks, { type: 'audio/webm' });
+              store.set(recordId, blob);
+
+              const audio = document.createElement('audio');
+              audio.controls = true;
+              audio.src = URL.createObjectURL(blob);
+              playback.innerHTML = '';
+              playback.appendChild(audio);
+              playback.hidden = false;
+
+              btn.textContent = 'Re-record — Ghi lại';
+              btn.className = 'rec-btn done';
+              btn.dataset.state = 'done';
+              status.textContent = '✓ Recorded. Listen back or re-record. / Đã ghi xong.';
+              status.style.color = 'var(--green)';
+              stream.getTracks().forEach(t => t.stop());
+              activeRec = null; activeStream = null;
+            };
+
+            recorder.start();
+            btn.textContent = 'Stop — Dừng lại ⏹';
+            btn.className = 'rec-btn recording';
+            btn.dataset.state = 'recording';
+            status.textContent = '● Recording… speak naturally! / Nói tự nhiên!';
+            status.style.color = '#ef4444';
+          } catch (err) {
+            status.textContent = 'Cannot access microphone. Allow it in browser settings.';
+            status.style.color = '#ef4444';
+          }
+        } else if (state === 'recording') {
+          if (activeRec?.state === 'recording') activeRec.stop();
+          if (activeStream) activeStream.getTracks().forEach(t => t.stop());
+        }
+      });
+
+      slot.appendChild(btn);
+      slot.appendChild(status);
+      slot.appendChild(playback);
+    }
+
+    /* ── Room 3 — Speaking ── */
+    const r3Recordings = new Map();
+
+    document.querySelector('#r3-topics')?.addEventListener('click', e => {
+      const btn = e.target.closest('.speak-topic-btn');
+      if (!btn) return;
+      document.querySelectorAll('#r3-topics .speak-topic-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      const label = document.getElementById('r3-selected-label');
+      if (label) label.hidden = false;
+    });
+
+    createRecorder('rec-r3', r3Recordings, 'r3_speaking',
+      'Select a topic above, then tap Record. / Chọn chủ đề rồi nhấn Ghi âm.');
+
+    async function collectRoom3() {
+      const blob = r3Recordings.get('r3_speaking');
+      const topicBtn = document.querySelector('#r3-topics .speak-topic-btn.selected');
+      const speaking = blob
+        ? { recorded: true, sizeBytes: blob.size, mimeType: blob.type || 'audio/webm', dataUrl: await blobToBase64(blob) }
+        : { recorded: false };
+      return { topicChosen: topicBtn?.dataset.topic ?? '', speaking };
+    }
+
+    /* ── Room 4 — AI Fluency ── */
+    const r4Recordings = new Map();
+
+    createRecorder('rec-r4', r4Recordings, 'r4_ai_speaking',
+      'Tap Record when ready. Aim for 60–90 seconds. / Nhấn Ghi âm khi sẵn sàng.');
+
+    async function collectRoom4() {
+      const blob = r4Recordings.get('r4_ai_speaking');
+      const speaking = blob
+        ? { recorded: true, sizeBytes: blob.size, mimeType: blob.type || 'audio/webm', dataUrl: await blobToBase64(blob) }
+        : { recorded: false };
+      return { writtenResponse: val('r4-written'), speaking };
+    }
+
+    /* ── Toast helper ── */
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 4000);
+    }
+
+    /* ── Submission pack ── */
+    function downloadBlob(blob, filename) {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(() => { URL.revokeObjectURL(url); a.remove(); }, 1000);
+    }
+
+    function generateRef() {
+      const stamp = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+      const rand  = Math.random().toString(36).slice(2, 8).toUpperCase();
+      return `NET-PRO-${stamp}-${rand}`;
+    }
+
+    document.getElementById('downloadResultsBtn').addEventListener('click', async () => {
+      const ref = generateRef();
+      const [room3, room4] = await Promise.all([collectRoom3(), collectRoom4()]);
+      const data = {
+        assessment: 'professional-4room',
+        submissionReference: ref,
+        submittedAt: new Date().toISOString(),
+        rooms: { room1: collectRoom1(), room2: collectRoom2(), room3, room4 }
+      };
+
+      document.getElementById('submissionRefValue').textContent = ref;
+      document.getElementById('submissionRefPanel').style.display = 'block';
+
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const date = new Date().toISOString().slice(0, 10);
+      downloadBlob(blob, `NET-Professional-Submission-${date}-${ref}.json`);
+      showToast(`Pack downloaded. Reference: ${ref}`);
+    });
+  </script>
+
+  <script src="obi-widget.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,277 @@
+/* ════════════════════════════════════════════════════════════════
+   NET PROFESSIONAL SELECTION — GOSPEL 444 AESTHETIC LAW
+   Gold primary. NO BLUE. ABSOLUTE.
+   ════════════════════════════════════════════════════════════════ */
+
+:root {
+  --purple: #a855f7;
+  --gold: #f59e0b;
+  --gold-light: #fbbf24;
+  --dark: #0f0f1a;
+  --darker: #0a0a0f;
+  --glass-bg: rgba(15, 12, 5, 0.88);
+  --glass-border: rgba(245, 158, 11, 0.3);
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.8);
+  --text-muted: rgba(255, 255, 255, 0.55);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  width: 100%;
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+  color: var(--text-primary);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* ─── HERO BACKGROUND ─────────────────────────────── */
+
+.hero-bg-wrap {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+}
+
+.hero-bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+}
+
+.hero-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(8, 6, 2, 0.78) 0%, rgba(8, 6, 2, 0.92) 100%),
+    radial-gradient(circle at 50% 25%, rgba(245, 158, 11, 0.1) 0%, transparent 60%);
+}
+
+/* ─── PAGE WRAP ───────────────────────────────────── */
+
+.page-wrap {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 55px 20px 45px;
+}
+
+/* ─── HEADER ──────────────────────────────────────── */
+
+.header {
+  text-align: center;
+  margin-bottom: 50px;
+  animation: fadeUp 0.8s ease both;
+}
+
+.header-eyebrow {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+.header-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(2.2rem, 7vw, 3.8rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--purple) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 12px;
+}
+
+.header-subtitle {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: 8px;
+  letter-spacing: 0.3px;
+}
+
+.header-subtitle .vi {
+  color: var(--text-secondary);
+  font-weight: 400;
+  font-style: italic;
+}
+
+.header-choose {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+}
+
+/* ─── CARDS ROW ───────────────────────────────────── */
+
+.cards-row {
+  display: flex;
+  gap: 28px;
+  justify-content: center;
+  align-items: stretch;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 860px;
+  animation: fadeUp 0.9s ease 0.15s both;
+  flex: 1;
+}
+
+/* ─── SELECTION CARD ──────────────────────────────── */
+
+.sel-card {
+  flex: 1;
+  min-width: 270px;
+  max-width: 390px;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  background: var(--glass-bg);
+  border-radius: 24px;
+  overflow: hidden;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 2px solid rgba(245, 158, 11, 0.3);
+  box-shadow: 0 0 30px rgba(245, 158, 11, 0.12);
+  transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.sel-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  border-color: var(--gold);
+  box-shadow: 0 0 55px rgba(245, 158, 11, 0.5), 0 0 100px rgba(245, 158, 11, 0.18);
+}
+
+.sel-card-img-wrap {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: var(--darker);
+  flex-shrink: 0;
+}
+
+.sel-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.4s ease;
+  pointer-events: none;
+}
+
+.sel-card:hover .sel-card-img {
+  transform: scale(1.06);
+}
+
+.sel-card-body {
+  padding: 22px 24px 26px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.sel-age-badge {
+  display: inline-block;
+  padding: 5px 13px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  margin-bottom: 14px;
+  align-self: flex-start;
+}
+
+.sel-card-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 7px;
+  letter-spacing: -0.01em;
+}
+
+.sel-card-sub {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--gold);
+  text-shadow: 0 0 16px rgba(245, 158, 11, 0.35);
+  margin-bottom: 3px;
+}
+
+.sel-card-sub-vi {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-style: italic;
+  margin-bottom: 14px;
+}
+
+.sel-card-desc {
+  font-size: 0.87rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 20px;
+  flex: 1;
+}
+
+.sel-card-cta {
+  display: block;
+  text-align: center;
+  background: linear-gradient(135deg, var(--gold) 0%, var(--purple) 100%);
+  color: var(--darker);
+  padding: 13px 18px;
+  border-radius: 10px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.7px;
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+  transition: all 0.3s ease;
+}
+
+.sel-card:hover .sel-card-cta {
+  box-shadow: 0 0 38px rgba(245, 158, 11, 0.6);
+  letter-spacing: 1px;
+}
+
+/* ─── FOOTER ──────────────────────────────────────── */
+
+.footer {
+  margin-top: 50px;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.footer a {
+  color: var(--gold);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.footer a:hover { color: var(--purple); }
+
+/* ─── ANIMATIONS ──────────────────────────────────── */
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── RESPONSIVE ──────────────────────────────────── */
+
+@media (max-width: 620px) {
+  .page-wrap { padding: 40px 16px 35px; }
+  .cards-row { flex-direction: column; align-items: center; gap: 20px; }
+  .sel-card { max-width: 100%; min-width: unset; }
+  .header-title { font-size: 1.9rem; }
+  .header { margin-bottom: 36px; }
+}

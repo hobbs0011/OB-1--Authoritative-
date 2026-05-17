@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NET University Assessment — 4-Room | Level Up. Stand Out.</title>
+  <meta name="description" content="NET University 4-Room Assessment. English assessment for Vietnamese university students and graduates." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@500;700;800;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="obi-widget.css" />
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- HEADER -->
+    <header class="header">
+      <div class="header-badge">NET University · Students &amp; Graduates</div>
+      <h1 class="header-title">University Assessment</h1>
+      <p class="header-subtitle">Level Up. Stand Out. — Nâng Cấp. Nổi Bật.</p>
+    </header>
+
+    <!-- ROOM NAVIGATION -->
+    <nav class="room-nav" aria-label="Assessment rooms">
+      <button class="room-tab active" data-room="1" type="button">
+        <span class="room-number">Room 1</span>
+        About You
+      </button>
+      <button class="room-tab" data-room="2" type="button">
+        <span class="room-number">Room 2</span>
+        Truth Filter
+      </button>
+      <button class="room-tab" data-room="3" type="button">
+        <span class="room-number">Room 3</span>
+        Comfort Zone
+      </button>
+      <button class="room-tab" data-room="4" type="button">
+        <span class="room-number">Room 4</span>
+        AI Fluency
+      </button>
+    </nav>
+
+    <main>
+
+      <!-- ROOM 1: ABOUT YOU -->
+      <section class="room-panel active" id="room-1" aria-label="Room 1 — About You">
+        <div class="card">
+          <div class="card-title">Room 1 — About You</div>
+          <p class="room-intro">
+            Tell Michael who you are. This shapes your entire assessment and the feedback he gives you.
+            <span class="vi"> / Cho Michael biết bạn là ai. Điều này quyết định toàn bộ bài đánh giá và phản hồi bạn nhận được.</span>
+          </p>
+
+          <div class="field-grid">
+
+            <div class="field">
+              <label for="r1-name">Full name <span class="vi">(Họ và tên)</span></label>
+              <input type="text" id="r1-name" autocomplete="name" placeholder="Nguyen Van A…" />
+            </div>
+
+            <div class="field">
+              <label for="r1-age">Age <span class="vi">(Tuổi)</span></label>
+              <input type="number" id="r1-age" inputmode="numeric" placeholder="20" min="16" max="40" />
+            </div>
+
+            <div class="field">
+              <label for="r1-email">Email</label>
+              <input type="email" id="r1-email" autocomplete="email" placeholder="your@email.com" />
+            </div>
+
+            <div class="field">
+              <label for="r1-phone">WhatsApp / Zalo</label>
+              <input type="tel" id="r1-phone" autocomplete="tel" placeholder="09xx xxx xxx" />
+            </div>
+
+            <div class="field-section">University &amp; Major</div>
+
+            <div class="field-span">
+              <label for="r1-university">University name <span class="vi">(Tên trường)</span></label>
+              <input type="text" id="r1-university" placeholder="RMIT / UEH / VNU / HCMUTE…" />
+            </div>
+
+            <div class="field">
+              <label for="r1-major">Major / Faculty <span class="vi">(Chuyên ngành)</span></label>
+              <input type="text" id="r1-major" placeholder="Business / Engineering / Tourism…" />
+            </div>
+
+            <div class="field">
+              <label for="r1-year">Year of study <span class="vi">(Năm học)</span></label>
+              <select id="r1-year">
+                <option value="">— Select / Chọn —</option>
+                <option value="1">Year 1 — Năm 1</option>
+                <option value="2">Year 2 — Năm 2</option>
+                <option value="3">Year 3 — Năm 3</option>
+                <option value="4">Year 4 — Năm 4</option>
+                <option value="graduate">Graduate / Sau đại học</option>
+                <option value="recent-grad">Recent graduate / Mới tốt nghiệp</option>
+              </select>
+            </div>
+
+            <div class="field-section">English Background</div>
+
+            <div class="field-span">
+              <label for="r1-eng-history">How long have you studied English? <span class="vi">(Học tiếng Anh bao lâu?)</span></label>
+              <select id="r1-eng-history">
+                <option value="">— Select / Chọn —</option>
+                <option value="<3years">Less than 3 years / Dưới 3 năm</option>
+                <option value="3-6years">3–6 years / 3–6 năm</option>
+                <option value="6-10years">6–10 years / 6–10 năm</option>
+                <option value="10+years">10+ years / Hơn 10 năm</option>
+              </select>
+            </div>
+
+            <div class="field-span">
+              <label>Where do you use English now? <span class="vi">(Bạn dùng tiếng Anh ở đâu? — chọn tất cả)</span></label>
+              <div class="choice-row" role="group">
+                <label><input type="checkbox" name="r1-usage" value="lectures"><span>Lectures / Lên lớp</span></label>
+                <label><input type="checkbox" name="r1-usage" value="assignments"><span>Assignments / Bài tập</span></label>
+                <label><input type="checkbox" name="r1-usage" value="research"><span>Research / Nghiên cứu</span></label>
+                <label><input type="checkbox" name="r1-usage" value="presentations"><span>Presentations / Thuyết trình</span></label>
+                <label><input type="checkbox" name="r1-usage" value="social"><span>Social / Giao lưu</span></label>
+                <label><input type="checkbox" name="r1-usage" value="youtube"><span>YouTube / Netflix</span></label>
+                <label><input type="checkbox" name="r1-usage" value="exams"><span>IELTS / TOEIC</span></label>
+                <label><input type="checkbox" name="r1-usage" value="work"><span>Part-time work / Việc bán thời gian</span></label>
+              </div>
+            </div>
+
+            <div class="field-section">Self-Assessment</div>
+
+            <div class="field-span">
+              <label for="r1-self-assess">How would you describe your current English? <span class="vi">(Mô tả trình độ tiếng Anh hiện tại)</span></label>
+              <select id="r1-self-assess">
+                <option value="">— Select / Chọn —</option>
+                <option value="freeze">Freeze — I know it but can't speak when it matters / Biết nhưng không nói được khi cần</option>
+                <option value="functional">Functional — I get by but lack confidence / Dùng được nhưng thiếu tự tin</option>
+                <option value="fluent">Fluent — I communicate well but want to sharpen / Giao tiếp tốt nhưng muốn hoàn thiện hơn</option>
+              </select>
+            </div>
+
+            <div class="field-span">
+              <label for="r1-goal">What do you want English to do for your career? <span class="vi">(Bạn muốn tiếng Anh làm gì cho sự nghiệp?)</span></label>
+              <textarea id="r1-goal" placeholder="After I graduate, I want to… / Sau khi ra trường, tôi muốn…"></textarea>
+            </div>
+
+          </div><!-- /.field-grid -->
+        </div>
+      </section>
+
+      <!-- ROOM 2: TRUTH FILTER -->
+      <section class="room-panel" id="room-2" aria-label="Room 2 — Truth Filter">
+        <div class="card">
+          <div class="card-title">Room 2 — Truth Filter</div>
+          <p class="room-intro">
+            This is not a test. It's a mirror. Tell Michael what's really holding your English back — then say it out loud.
+            <span class="vi"> / Đây không phải bài kiểm tra. Đây là gương phản chiếu. Cho Michael biết điều gì thực sự cản trở tiếng Anh của bạn — rồi nói to lên.</span>
+          </p>
+
+          <!-- Part A: Blockers -->
+          <div class="truth-part">
+            <div class="truth-part-header">
+              <span class="truth-part-num">A</span>
+              <div>
+                <div class="truth-part-label">What's blocking you? <span class="vi">/ Điều gì đang cản trở bạn?</span></div>
+                <div class="truth-part-hint">Check all that apply / Chọn tất cả những gì phù hợp</div>
+              </div>
+            </div>
+            <div class="choice-row" role="group" aria-label="English blockers">
+              <label><input type="checkbox" name="r2-blockers" value="academic-pressure"><span>Academic pressure — other subjects come first</span></label>
+              <label><input type="checkbox" name="r2-blockers" value="class-fear"><span>Fear of mistakes in class / Sợ mắc lỗi trước lớp</span></label>
+              <label><input type="checkbox" name="r2-blockers" value="grammar-overthink"><span>Overthink grammar before speaking / Nghĩ quá về ngữ pháp</span></label>
+              <label><input type="checkbox" name="r2-blockers" value="no-practice"><span>No real speaking opportunities / Không có cơ hội luyện nói</span></label>
+              <label><input type="checkbox" name="r2-blockers" value="pronunciation"><span>Embarrassed about pronunciation / Xấu hổ về phát âm</span></label>
+              <label><input type="checkbox" name="r2-blockers" value="vocabulary"><span>Vocabulary gaps / Thiếu từ vựng</span></label>
+              <label><input type="checkbox" name="r2-blockers" value="passive-only"><span>I consume English but don't produce it / Nghe nhiều nhưng không nói</span></label>
+              <label><input type="checkbox" name="r2-blockers" value="none"><span>Nothing major — I want to level up</span></label>
+            </div>
+          </div>
+
+          <!-- Part B: Written Reflection -->
+          <div class="truth-part">
+            <div class="truth-part-header">
+              <span class="truth-part-num">B</span>
+              <div>
+                <div class="truth-part-label">Written Reflection <span class="vi">/ Suy nghĩ bằng văn bản</span></div>
+                <div class="truth-part-hint">60–100 words</div>
+              </div>
+            </div>
+            <p class="writing-task">
+              Describe the last time English let you down — a class, a presentation, a conversation with a foreigner. What happened? How did it feel?
+              <span class="vi"> / Mô tả lần cuối tiếng Anh không giúp được bạn — một buổi học, bài thuyết trình, hay trò chuyện với người nước ngoài. Điều gì xảy ra? Bạn cảm thấy thế nào?</span>
+            </p>
+            <textarea id="r2-written" placeholder="The last time was when… / Lần đó tôi…"></textarea>
+          </div>
+
+          <!-- Part C: Spoken Response -->
+          <div class="truth-part">
+            <div class="truth-part-header">
+              <span class="truth-part-num">C</span>
+              <div>
+                <div class="truth-part-label">Spoken Response <span class="vi">/ Trả lời nói</span></div>
+                <div class="truth-part-hint">30–60 seconds</div>
+              </div>
+            </div>
+            <p class="writing-task">
+              Record your answer: <strong>What is the ONE English situation you most want to master — and why does it matter to your future?</strong>
+              <span class="vi"> / Ghi âm câu trả lời: Tình huống tiếng Anh nào bạn muốn làm chủ NHẤT — và tại sao nó quan trọng với tương lai của bạn?</span>
+            </p>
+            <div class="rec-slot" id="rec-r2"></div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ROOM 3: COMFORT ZONE TEST -->
+      <section class="room-panel" id="room-3" aria-label="Room 3 — Comfort Zone Test">
+        <div class="card">
+          <div class="card-title">Room 3 — Comfort Zone Test</div>
+          <p class="room-intro">
+            Five real academic and presentation scenarios. Read each passage aloud and record. No preparation — just read it cold, naturally. Michael is listening for how you sound under real conditions.
+            <span class="vi"> / Năm kịch bản học thuật và thuyết trình thực tế. Đọc to từng đoạn và ghi âm. Không chuẩn bị — đọc tự nhiên ngay lần đầu tiên.</span>
+          </p>
+
+          <!-- Passage 01 -->
+          <div class="passage-card">
+            <div class="passage-header">
+              <span class="passage-num">01</span>
+              <div>
+                <div class="passage-scenario">Class Presentation Opening</div>
+                <div class="passage-tag">Academic · Formal</div>
+              </div>
+            </div>
+            <div class="passage-text">
+              <p>"Good morning everyone. My name is [your name], and I'm presenting today on the role of artificial intelligence in modern healthcare. I'll cover three key areas: current clinical applications, ethical considerations, and the future outlook for Vietnam. My research is based on a review of twelve peer-reviewed studies and two case studies from hospitals in Hanoi and Singapore."</p>
+            </div>
+            <div class="passage-rec-row">
+              <p class="passage-rec-label">Read this passage aloud and record. <span class="vi">/ Đọc to đoạn văn này và ghi âm.</span></p>
+              <div class="rec-slot" id="rec-r3-1"></div>
+            </div>
+          </div>
+
+          <!-- Passage 02 -->
+          <div class="passage-card">
+            <div class="passage-header">
+              <span class="passage-num">02</span>
+              <div>
+                <div class="passage-scenario">Email to Professor</div>
+                <div class="passage-tag">Academic · Formal Email</div>
+              </div>
+            </div>
+            <div class="passage-text">
+              <p>"Dear Professor Nguyen, I hope this message finds you well. I am writing to request a brief extension for the Research Methods assignment due this Friday. Unfortunately, I have been managing a family health situation this week that has significantly impacted my study schedule. I would sincerely appreciate the opportunity to submit by next Monday morning. I want to assure you that the work is substantially complete, and I am committed to delivering my strongest effort. Thank you for your understanding and continued support this semester."</p>
+            </div>
+            <div class="passage-rec-row">
+              <p class="passage-rec-label">Read this passage aloud and record. <span class="vi">/ Đọc to đoạn văn này và ghi âm.</span></p>
+              <div class="rec-slot" id="rec-r3-2"></div>
+            </div>
+          </div>
+
+          <!-- Passage 03 -->
+          <div class="passage-card">
+            <div class="passage-header">
+              <span class="passage-num">03</span>
+              <div>
+                <div class="passage-scenario">Seminar Opinion Statement</div>
+                <div class="passage-tag">Academic · Persuasive</div>
+              </div>
+            </div>
+            <div class="passage-text">
+              <p>"In my view, universities in Vietnam are producing graduates who are technically competent but communicatively limited. The issue is not intelligence — our students are hardworking and capable. The gap is that our education system has historically rewarded silent memorisation over active expression. A student can score ninety percent on a grammar examination and still freeze completely in a real seminar discussion. Closing that gap between passive knowledge and active fluency is the most urgent challenge we face."</p>
+            </div>
+            <div class="passage-rec-row">
+              <p class="passage-rec-label">Read this passage aloud and record. <span class="vi">/ Đọc to đoạn văn này và ghi âm.</span></p>
+              <div class="rec-slot" id="rec-r3-3"></div>
+            </div>
+          </div>
+
+          <!-- Passage 04 -->
+          <div class="passage-card">
+            <div class="passage-header">
+              <span class="passage-num">04</span>
+              <div>
+                <div class="passage-scenario">Group Project Introduction</div>
+                <div class="passage-tag">Academic · Team Presentation</div>
+              </div>
+            </div>
+            <div class="passage-text">
+              <p>"Before we begin the presentation, let me briefly introduce our team structure. My role today is to cover the introduction and research methodology. My teammate will walk you through the data analysis and key findings. Our third member will present the conclusions and strategic recommendations. We've structured the session to take approximately fifteen minutes in total, with five minutes reserved for your questions at the end. Please feel free to raise questions as we go."</p>
+            </div>
+            <div class="passage-rec-row">
+              <p class="passage-rec-label">Read this passage aloud and record. <span class="vi">/ Đọc to đoạn văn này và ghi âm.</span></p>
+              <div class="rec-slot" id="rec-r3-4"></div>
+            </div>
+          </div>
+
+          <!-- Passage 05 -->
+          <div class="passage-card">
+            <div class="passage-header">
+              <span class="passage-num">05</span>
+              <div>
+                <div class="passage-scenario">Job Interview Answer</div>
+                <div class="passage-tag">Professional · Interview</div>
+              </div>
+            </div>
+            <div class="passage-text">
+              <p>"I'm currently in my final year studying International Business Administration. Over the past four years I've developed strong skills in financial analysis, cross-cultural communication, and strategic planning. During my internship last summer at a logistics company, I was responsible for preparing English-language reports for international partners and participating in weekly conference calls with clients in Singapore and Japan. That experience confirmed this is the career direction I want to pursue."</p>
+            </div>
+            <div class="passage-rec-row">
+              <p class="passage-rec-label">Read this passage aloud and record. <span class="vi">/ Đọc to đoạn văn này và ghi âm.</span></p>
+              <div class="rec-slot" id="rec-r3-5"></div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ROOM 4: AI FLUENCY -->
+      <section class="room-panel" id="room-4" aria-label="Room 4 — AI Fluency">
+        <div class="card">
+          <div class="card-title">Room 4 — AI Fluency</div>
+          <p class="room-intro">
+            The future belongs to people who can use AI fluently — in English. This room assesses where you are and where you can go.
+            <span class="vi"> / Tương lai thuộc về những người có thể dùng AI thành thạo — bằng tiếng Anh. Phòng này đánh giá bạn đang ở đâu và có thể đi đến đâu.</span>
+          </p>
+
+          <!-- Part 1: Written -->
+          <div class="ai-part">
+            <div class="ai-part-header">
+              <span class="ai-part-num">Part 1</span>
+              <div>
+                <div class="ai-part-label">Written Response <span class="vi">/ Trả lời viết</span></div>
+                <div class="writing-word-count">80–120 words</div>
+              </div>
+            </div>
+            <p class="writing-task">
+              Describe how you currently use AI tools in your studies or daily life.
+              If you haven't started yet, describe what you know about AI tools and whether you think they would help you academically.
+              <span class="vi"> / Mô tả cách bạn đang dùng AI trong học tập hoặc cuộc sống. Nếu chưa dùng, hãy mô tả những gì bạn biết về AI và liệu bạn nghĩ nó có hữu ích không.</span>
+            </p>
+            <textarea id="r4-written" placeholder="I currently use AI to… / I haven't tried AI yet, but I know that…"></textarea>
+          </div>
+
+          <!-- Part 2: Speaking -->
+          <div class="ai-part">
+            <div class="ai-part-header">
+              <span class="ai-part-num">Part 2</span>
+              <div>
+                <div class="ai-part-label">Spoken Response <span class="vi">/ Trả lời nói</span></div>
+                <div class="writing-word-count">60–90 seconds</div>
+              </div>
+            </div>
+            <p class="writing-task">
+              Record your answer to this question: <strong>How would fluent English + AI skills change your career opportunities in Vietnam over the next five years?</strong>
+              <span class="vi"> / Ghi âm câu trả lời: Tiếng Anh thành thạo + kỹ năng AI sẽ thay đổi cơ hội nghề nghiệp của bạn ở Việt Nam như thế nào trong 5 năm tới?</span>
+            </p>
+            <div class="rec-slot" id="rec-r4"></div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- NET-PET TEASER -->
+      <section class="netpet-section" aria-label="What's next — NET-PET">
+        <div class="netpet-inner">
+          <div class="netpet-content">
+            <span class="netpet-badge">Coming Soon · AI Coaching</span>
+            <h2 class="netpet-title">Your NET-PET Awaits</h2>
+            <p class="netpet-body">
+              After Michael reviews your submission, you'll be matched with <strong>NET-PET</strong> — your personal AI English coach.
+              It tracks your daily streak, gives you targeted practice, and turns your real voice into your career weapon.
+            </p>
+            <p class="netpet-body-vi">
+              Sau khi Michael xem xét bài nộp, bạn sẽ được ghép với NET-PET — AI coach tiếng Anh cá nhân của bạn.
+              Theo dõi streak hàng ngày, luyện tập có mục tiêu, biến giọng thật thành vũ khí nghề nghiệp.
+            </p>
+          </div>
+          <img src="NETPET_PHONE.png" alt="NET-PET App Preview" class="netpet-phone" />
+        </div>
+      </section>
+
+      <!-- SUBMISSION -->
+      <section class="submit-section" aria-label="Submit assessment">
+        <h2>Submit Assessment</h2>
+        <p>
+          Complete all four rooms, then submit. Your audio recordings will download locally as a backup.
+          Michael reviews every submission personally and follows up within 24 hours.
+          <br>Hoàn thành 4 phòng, gửi bài. Audio sẽ tải về máy bạn làm bản sao lưu — Michael liên hệ trong 24 giờ.
+        </p>
+        <button class="submit-btn" id="submitAssessmentBtn" type="button">
+          Submit Assessment — Gửi Bài Đánh Giá
+        </button>
+        <div class="submit-state" id="submitState" hidden></div>
+      </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <p>NET — Natural English Training · University Assessment</p>
+      <p style="margin-top: 6px;">
+        <a href="mailto:michael@netai.com">michael@netai.com</a>
+      </p>
+    </footer>
+
+  </div><!-- /.container -->
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- OBI AGENT WIDGET -->
+  <div class="obi-widget" id="obiWidget" role="complementary" aria-label="OBI Assessment Agent">
+    <div class="obi-panel" id="obiPanel" aria-live="polite" aria-label="OBI agent conversation">
+      <div class="obi-header">
+        <div class="obi-avatar" aria-hidden="true">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4z"/>
+          </svg>
+        </div>
+        <div class="obi-header-text">
+          <div class="obi-name">OBI · NET Agent</div>
+          <div class="obi-status">Online</div>
+        </div>
+      </div>
+
+      <div class="obi-messages" id="obiMessages">
+        <div class="obi-msg agent">
+          <div class="obi-bubble">
+            Hi! I'm OBI — your University Assessment guide. 4 rooms: About You, Truth Filter, Comfort Zone, AI Fluency. Ask me anything. 🎯
+          </div>
+          <div class="obi-timestamp">Now</div>
+        </div>
+        <div class="obi-msg agent">
+          <div class="obi-bubble">
+            Xin chào! OBI ở đây hỗ trợ bài đánh giá University. Bạn cần giúp gì không?
+          </div>
+          <div class="obi-timestamp">Now</div>
+        </div>
+      </div>
+
+      <div class="obi-quick-replies" id="obiChips">
+        <button class="obi-chip" type="button" data-reply="How does the assessment work?">How it works</button>
+        <button class="obi-chip" type="button" data-reply="What do I record?">Recording help</button>
+        <button class="obi-chip" type="button" data-reply="How do I submit my answers?">Submit pack</button>
+      </div>
+
+      <div class="obi-input-row">
+        <input class="obi-input" id="obiInput" type="text"
+          placeholder="Ask OBI anything…" aria-label="Message OBI"
+          autocomplete="off" maxlength="300" />
+        <button class="obi-send" id="obiSend" type="button" aria-label="Send message">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <button class="obi-toggle" id="obiToggle" type="button"
+      aria-controls="obiPanel" aria-expanded="false" aria-label="Open OBI agent">
+      <span class="obi-badge" id="obiBadge" hidden aria-label="unread messages">1</span>
+      <svg class="obi-icon-open" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.17L4 17.17V4h16v12z"/>
+      </svg>
+      <svg class="obi-icon-close" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+      </svg>
+    </button>
+  </div>
+
+  <script>
+    /* ── Room navigation ── */
+    const roomTabs   = document.querySelectorAll('.room-tab');
+    const roomPanels = document.querySelectorAll('.room-panel');
+
+    roomTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const target = tab.dataset.room;
+        roomTabs.forEach(t => t.classList.remove('active'));
+        roomPanels.forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById('room-' + target)?.classList.add('active');
+      });
+    });
+
+    /* ── Helpers ── */
+    function getChecked(name) {
+      return [...document.querySelectorAll(`input[name="${name}"]:checked`)].map(el => el.value);
+    }
+    function val(id) { return document.getElementById(id)?.value.trim() ?? ''; }
+
+    function blobToBase64(blob) {
+      return new Promise(resolve => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result);
+        reader.readAsDataURL(blob);
+      });
+    }
+
+    /* ── Recorder factory ── */
+    function createRecorder(slotId, store, recordId, idleLabel) {
+      const slot = document.getElementById(slotId);
+      if (!slot) return;
+
+      let activeRec = null, activeStream = null;
+      const btn      = document.createElement('button');
+      const status   = document.createElement('div');
+      const playback = document.createElement('div');
+
+      btn.type = 'button';
+      btn.className = 'rec-btn';
+      btn.dataset.state = 'idle';
+      btn.textContent = 'Record — Ghi âm';
+
+      status.className = 'rec-status';
+      status.textContent = idleLabel;
+
+      playback.className = 'rec-playback';
+      playback.hidden = true;
+
+      btn.addEventListener('click', async () => {
+        if (!window.MediaRecorder) {
+          status.textContent = 'Recording not supported in this browser.';
+          status.style.color = '#ef4444';
+          return;
+        }
+        const state = btn.dataset.state;
+        if (state === 'idle' || state === 'done') {
+          try {
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            activeStream = stream;
+            const recorder = new MediaRecorder(stream);
+            activeRec = recorder;
+            const chunks = [];
+
+            recorder.ondataavailable = e => chunks.push(e.data);
+            recorder.onstop = () => {
+              const blob = new Blob(chunks, { type: 'audio/webm' });
+              store.set(recordId, blob);
+
+              const audio = document.createElement('audio');
+              audio.controls = true;
+              audio.src = URL.createObjectURL(blob);
+              playback.innerHTML = '';
+              playback.appendChild(audio);
+              playback.hidden = false;
+
+              btn.textContent = 'Re-record — Ghi lại';
+              btn.className = 'rec-btn done';
+              btn.dataset.state = 'done';
+              status.textContent = '✓ Recorded. Listen back or re-record. / Đã ghi xong.';
+              status.style.color = 'var(--green)';
+              stream.getTracks().forEach(t => t.stop());
+              activeRec = null; activeStream = null;
+            };
+
+            recorder.start();
+            btn.textContent = 'Stop — Dừng lại ⏹';
+            btn.className = 'rec-btn recording';
+            btn.dataset.state = 'recording';
+            status.textContent = '● Recording… speak naturally! / Nói tự nhiên!';
+            status.style.color = '#ef4444';
+          } catch (err) {
+            status.textContent = 'Cannot access microphone. Allow it in browser settings.';
+            status.style.color = '#ef4444';
+          }
+        } else if (state === 'recording') {
+          if (activeRec?.state === 'recording') activeRec.stop();
+          if (activeStream) activeStream.getTracks().forEach(t => t.stop());
+        }
+      });
+
+      slot.appendChild(btn);
+      slot.appendChild(status);
+      slot.appendChild(playback);
+    }
+
+    /* ── Room 1 — About You ── */
+    function collectRoom1() {
+      return {
+        name:         val('r1-name'),
+        age:          val('r1-age'),
+        email:        val('r1-email'),
+        phone:        val('r1-phone'),
+        university:   val('r1-university'),
+        major:        val('r1-major'),
+        year:         val('r1-year'),
+        engHistory:   val('r1-eng-history'),
+        engUsage:     getChecked('r1-usage'),
+        selfAssess:   val('r1-self-assess'),
+        careerGoal:   val('r1-goal')
+      };
+    }
+
+    /* ── Room 2 — Truth Filter ── */
+    const r2Recordings = new Map();
+    createRecorder('rec-r2', r2Recordings, 'r2_speaking',
+      'Tap Record and speak for 30–60 seconds. / Nhấn Ghi âm và nói 30–60 giây.');
+
+    async function collectRoom2() {
+      const blob = r2Recordings.get('r2_speaking');
+      const speaking = blob
+        ? { recorded: true, sizeBytes: blob.size, mimeType: blob.type || 'audio/webm', dataUrl: await blobToBase64(blob) }
+        : { recorded: false };
+      return {
+        blockers:          getChecked('r2-blockers'),
+        writtenReflection: val('r2-written'),
+        speaking
+      };
+    }
+
+    /* ── Room 3 — Comfort Zone Test ── */
+    const r3Recordings = new Map();
+    [1,2,3,4,5].forEach(n => {
+      createRecorder(`rec-r3-${n}`, r3Recordings, `r3_passage_${n}`,
+        'Read the passage above aloud, then tap Record. / Đọc đoạn văn rồi nhấn Ghi âm.');
+    });
+
+    async function collectRoom3() {
+      const result = {};
+      for (let n = 1; n <= 5; n++) {
+        const blob = r3Recordings.get(`r3_passage_${n}`);
+        result[`passage${n}`] = blob
+          ? { recorded: true, sizeBytes: blob.size, mimeType: blob.type || 'audio/webm', dataUrl: await blobToBase64(blob) }
+          : { recorded: false };
+      }
+      return result;
+    }
+
+    /* ── Room 4 — AI Fluency ── */
+    const r4Recordings = new Map();
+    createRecorder('rec-r4', r4Recordings, 'r4_speaking',
+      'Tap Record when ready. Aim for 60–90 seconds. / Nhấn Ghi âm khi sẵn sàng.');
+
+    async function collectRoom4() {
+      const blob = r4Recordings.get('r4_speaking');
+      const speaking = blob
+        ? { recorded: true, sizeBytes: blob.size, mimeType: blob.type || 'audio/webm', dataUrl: await blobToBase64(blob) }
+        : { recorded: false };
+      return { writtenResponse: val('r4-written'), speaking };
+    }
+
+    /* ── Toast ── */
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 4000);
+    }
+
+    /* ── Download helper ── */
+    function downloadBlob(blob, filename) {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(() => { URL.revokeObjectURL(url); a.remove(); }, 1000);
+    }
+
+    /* ── Reference code ── */
+    function generateRef() {
+      const stamp = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+      const rand  = Math.random().toString(36).slice(2, 8).toUpperCase();
+      return `NET-UNI-${stamp}-${rand}`;
+    }
+
+    /* ── Submission ── */
+    const API_ENDPOINT = 'https://submission-api.mrmichaelhobbs123.workers.dev/api/submit';
+
+    document.getElementById('submitAssessmentBtn').addEventListener('click', async () => {
+      const btn      = document.getElementById('submitAssessmentBtn');
+      const stateEl  = document.getElementById('submitState');
+      btn.disabled   = true;
+      btn.textContent = 'Submitting… — Đang gửi…';
+      stateEl.hidden = false;
+      stateEl.innerHTML = '<div class="submit-loading">⏳ Sending your assessment — Đang gửi bài đánh giá…</div>';
+
+      const ref = generateRef();
+      const [room2, room3, room4] = await Promise.all([collectRoom2(), collectRoom3(), collectRoom4()]);
+      const fullData = {
+        assessment:          'university-4room',
+        submissionReference: ref,
+        submittedAt:         new Date().toISOString(),
+        rooms: { room1: collectRoom1(), room2, room3, room4 }
+      };
+
+      /* Local backup download with full audio */
+      const date = new Date().toISOString().slice(0, 10);
+      downloadBlob(
+        new Blob([JSON.stringify(fullData, null, 2)], { type: 'application/json' }),
+        `NET-University-${date}-${ref}.json`
+      );
+
+      /* Strip audio for API payload */
+      const apiPayload = JSON.parse(JSON.stringify(fullData, (k, v) =>
+        k === 'dataUrl' && typeof v === 'string' && v.startsWith('data:audio') ? '[audio-local-download]' : v
+      ));
+
+      try {
+        const res = await fetch(API_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(apiPayload),
+        });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        btn.style.display = 'none';
+        stateEl.innerHTML = `
+          <div class="submit-success">
+            <div class="submit-success-icon">✓</div>
+            <div class="submit-success-title">Submitted!</div>
+            <div class="submit-success-ref">${ref}</div>
+            <p>Michael will contact you within 24 hours. — Michael sẽ liên hệ trong 24 giờ.</p>
+          </div>`;
+        showToast(`Submitted. Reference: ${ref}`);
+      } catch {
+        stateEl.innerHTML = `
+          <div class="submit-error">
+            <p>Submission failed. Your pack was saved locally — please send it to Michael directly at michael@netai.com or via WhatsApp.<br>
+            Gửi thất bại. Pack đã lưu về máy — vui lòng gửi cho Michael qua email hoặc WhatsApp.</p>
+          </div>`;
+        btn.disabled = false;
+        btn.textContent = 'Try Again — Thử Lại';
+      }
+    });
+  </script>
+
+  <script src="obi-widget.js" defer></script>
+</body>
+</html>

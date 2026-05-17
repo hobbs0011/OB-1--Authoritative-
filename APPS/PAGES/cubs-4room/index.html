@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NET Cubs — Parent Survey | Natural English Training</title>
+  <meta name="description" content="NET Cubs parent survey — share your child's details and English background. We'll contact you within 24 hours to book your in-person assessment at Lakeview." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- HERO BACKGROUND -->
+  <div class="hero-bg-wrap">
+    <img src="CHILD_WATCHING_TIGER.png" alt="" class="hero-bg-img" />
+    <div class="hero-bg-overlay"></div>
+  </div>
+
+  <div class="page-wrap">
+
+    <!-- HERO -->
+    <header class="hero" id="hero">
+      <div class="hero-badge">
+        <img src="TIGER_CUBS_3-7.png" alt="NET Cubs" class="hero-badge-img" />
+      </div>
+      <div class="hero-eyebrow">NET — Natural English Training</div>
+      <h1 class="hero-title">NET Cubs</h1>
+      <p class="hero-subtitle">Ages 3 – 7 &nbsp;·&nbsp; <span class="vi">Độ Tuổi 3 – 7</span></p>
+      <p class="hero-desc">Little Learners. Big Roars. Build confidence and natural English from the very beginning.</p>
+      <p class="hero-desc-vi">Người Học Nhỏ. Tiếng Gầm To. Xây dựng sự tự tin và tiếng Anh tự nhiên ngay từ đầu.</p>
+      <button class="hero-btn" id="heroBeginBtn">Tell Us About Your Child — Kể Chúng Tôi Nghe ›</button>
+    </header>
+
+    <!-- SURVEY BODY -->
+    <div id="survey-body" style="display:none; width:100%; max-width:720px;">
+
+      <div class="survey-intro">
+        <p>This short survey helps us prepare the right assessment for your child. Fill in the details below and we'll contact you within 24 hours to book an in-person session at <strong>Lakeview</strong>.</p>
+        <p class="survey-intro-vi">Bảng khảo sát ngắn này giúp chúng tôi chuẩn bị đánh giá phù hợp cho con bạn. Điền thông tin bên dưới và chúng tôi sẽ liên hệ trong vòng 24 giờ để đặt lịch học trực tiếp tại <strong>Lakeview</strong>.</p>
+      </div>
+
+      <form id="cubsForm" novalidate>
+
+        <!-- SECTION 1: PARENT INFO -->
+        <section class="survey-section">
+          <h2 class="section-title">
+            <span class="section-num">1</span>
+            Parent / Guardian — Phụ Huynh
+          </h2>
+
+          <div class="field-row">
+            <div class="field-group">
+              <label class="field-label" for="parentName">Your Name *</label>
+              <input class="field-input" type="text" id="parentName" name="parentName" placeholder="Full name" required />
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="relationship">Relationship to Child *</label>
+              <select class="field-input" id="relationship" name="relationship" required>
+                <option value="">Select...</option>
+                <option value="mother">Mother — Mẹ</option>
+                <option value="father">Father — Bố</option>
+                <option value="grandparent">Grandparent — Ông/Bà</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field-group">
+              <label class="field-label" for="phone">Phone Number * <span class="field-hint">(for booking)</span></label>
+              <input class="field-input" type="tel" id="phone" name="phone" placeholder="0909 xxx xxx" required />
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="email">Email <span class="field-hint">(optional)</span></label>
+              <input class="field-input" type="email" id="email" name="email" placeholder="your@email.com" />
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 2: CHILD INFO -->
+        <section class="survey-section">
+          <h2 class="section-title">
+            <span class="section-num">2</span>
+            About Your Child — Về Con Bạn
+          </h2>
+
+          <div class="field-row">
+            <div class="field-group">
+              <label class="field-label" for="childName">Child's Name *</label>
+              <input class="field-input" type="text" id="childName" name="childName" placeholder="First name or nickname" required />
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="childAge">Age *</label>
+              <select class="field-input" id="childAge" name="childAge" required>
+                <option value="">Select age...</option>
+                <option value="3">3 years old</option>
+                <option value="4">4 years old</option>
+                <option value="5">5 years old</option>
+                <option value="6">6 years old</option>
+                <option value="7">7 years old</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field-group field-group-full">
+            <label class="field-label">Current English Exposure *</label>
+            <div class="radio-group">
+              <label class="radio-option">
+                <input type="radio" name="engExposure" value="none" /> None — Chưa học tiếng Anh
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="engExposure" value="some" /> A little — Học một chút (songs, cartoons)
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="engExposure" value="kindergarten" /> Kindergarten English — Tiếng Anh mầm non
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="engExposure" value="centre" /> English centre / tutor — Trung tâm / gia sư
+              </label>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 3: PARENT QUESTIONS -->
+        <section class="survey-section">
+          <h2 class="section-title">
+            <span class="section-num">3</span>
+            A Few Questions — Vài Câu Hỏi
+          </h2>
+
+          <div class="field-group field-group-full">
+            <label class="field-label" for="q1">
+              What is your biggest goal for your child's English? *
+              <span class="field-label-vi">Mục tiêu lớn nhất của bạn cho tiếng Anh của con là gì?</span>
+            </label>
+            <textarea class="field-textarea" id="q1" name="q1" rows="4"
+              placeholder="e.g. I want my child to speak confidently with foreigners. I want them to enjoy English, not fear it..."
+              required></textarea>
+          </div>
+
+          <div class="field-group field-group-full">
+            <label class="field-label" for="q2">
+              Does your child show any shyness or hesitation around English right now? Tell us more.
+              <span class="field-label-vi">Con bạn có tỏ ra e ngại hay ngại ngùng với tiếng Anh không? Kể cho chúng tôi nghe.</span>
+            </label>
+            <textarea class="field-textarea" id="q2" name="q2" rows="4"
+              placeholder="e.g. She freezes when a foreigner speaks to her. He knows words but won't say them out loud..."></textarea>
+          </div>
+        </section>
+
+        <!-- SUBMIT -->
+        <section class="submit-section">
+          <p class="submit-note">
+            After submitting, a NET team member will contact you within <strong>24 hours</strong> to schedule your child's free in-person assessment at <strong>Lakeview</strong>.
+          </p>
+          <p class="submit-note-vi">Sau khi gửi, thành viên nhóm NET sẽ liên hệ bạn trong vòng <strong>24 giờ</strong> để sắp xếp buổi đánh giá trực tiếp miễn phí cho con tại <strong>Lakeview</strong>.</p>
+          <button type="submit" class="submit-btn" id="submitBtn">
+            SUBMIT — GỬI THÔNG TIN ›
+          </button>
+        </section>
+
+      </form>
+
+    </div><!-- /survey-body -->
+
+    <!-- CONFIRMATION -->
+    <div id="confirmation" style="display:none; width:100%; max-width:620px;">
+      <div class="confirm-card">
+        <div class="confirm-icon">🐯</div>
+        <h2 class="confirm-title">Thank You!</h2>
+        <p class="confirm-title-vi">Cảm ơn bạn!</p>
+        <p class="confirm-body">We've received your survey. A NET team member will contact you within <strong>24 hours</strong> to book your child's free in-person assessment at <strong>Lakeview</strong>.</p>
+        <p class="confirm-body-vi">Chúng tôi đã nhận được khảo sát của bạn. Thành viên nhóm NET sẽ liên hệ trong vòng <strong>24 giờ</strong> để đặt lịch đánh giá miễn phí trực tiếp tại <strong>Lakeview</strong>.</p>
+        <div class="confirm-ref" id="confirmRef"></div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <p>NET — Natural English Training &nbsp;|&nbsp; <a href="mailto:michael@netai.com">michael@netai.com</a></p>
+    </footer>
+
+  </div><!-- /page-wrap -->
+
+  <script>
+    // Hero → survey reveal
+    document.getElementById('heroBeginBtn').addEventListener('click', () => {
+      document.getElementById('hero').style.display = 'none';
+      document.getElementById('survey-body').style.display = 'block';
+      requestAnimationFrame(() => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    });
+
+    // Reference code
+    function generateRef() {
+      const d = new Date();
+      const date = d.getFullYear().toString() +
+        String(d.getMonth() + 1).padStart(2, '0') +
+        String(d.getDate()).padStart(2, '0');
+      const rand = Math.random().toString(36).substring(2, 8).toUpperCase();
+      return 'NET-CUB-' + date + '-' + rand;
+    }
+
+    const API_ENDPOINT = 'https://submission-api.mrmichaelhobbs123.workers.dev/api/submit';
+
+    // Form submit
+    document.getElementById('cubsForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const required = document.querySelectorAll('[required]');
+      let valid = true;
+      required.forEach(el => {
+        if (!el.value.trim()) {
+          el.classList.add('field-error');
+          valid = false;
+        } else {
+          el.classList.remove('field-error');
+        }
+      });
+
+      // Check radio group
+      const engExposure = document.querySelector('input[name="engExposure"]:checked');
+      if (!engExposure) {
+        document.querySelector('.radio-group').classList.add('radio-error');
+        valid = false;
+      } else {
+        document.querySelector('.radio-group').classList.remove('radio-error');
+      }
+
+      if (!valid) {
+        document.querySelector('.field-error, .radio-error')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
+
+      const form = e.target;
+      const ref = generateRef();
+      document.getElementById('confirmRef').textContent = 'Reference: ' + ref;
+
+      document.getElementById('survey-body').style.display = 'none';
+      document.getElementById('confirmation').style.display = 'block';
+      requestAnimationFrame(() => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+      // Fire-and-forget API submission
+      const payload = {
+        assessment:          'cubs-4room',
+        submissionReference: ref,
+        submittedAt:         new Date().toISOString(),
+        rooms: {
+          room1: {
+            name:         form.querySelector('[name="parentName"]')?.value ?? '',
+            relationship: form.querySelector('[name="relationship"]')?.value ?? '',
+            phone:        form.querySelector('[name="phone"]')?.value ?? '',
+            email:        form.querySelector('[name="email"]')?.value ?? '',
+            childName:    form.querySelector('[name="childName"]')?.value ?? '',
+            childAge:     form.querySelector('[name="childAge"]')?.value ?? '',
+            engExposure:  engExposure?.value ?? '',
+            q1:           form.querySelector('[name="q1"]')?.value ?? '',
+            q2:           form.querySelector('[name="q2"]')?.value ?? '',
+          }
+        }
+      };
+      fetch(API_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      }).catch(() => { /* silent — user has already seen confirmation */ });
+    });
+
+    // Clear error state on input
+    document.querySelectorAll('.field-input, .field-textarea').forEach(el => {
+      el.addEventListener('input', () => el.classList.remove('field-error'));
+    });
+    document.querySelectorAll('input[name="engExposure"]').forEach(el => {
+      el.addEventListener('change', () => document.querySelector('.radio-group').classList.remove('radio-error'));
+    });
+  </script>
+
+</body>
+</html>
