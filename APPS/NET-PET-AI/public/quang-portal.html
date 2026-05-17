@@ -1,0 +1,709 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>QUANG PORTAL · Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600&family=Orbitron:wght@700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --void: #0a0a12;
+      --card: rgba(22, 22, 35, 0.85);
+      --purple: #a855f7;
+      --purple-glow: rgba(168, 85, 247, 0.25);
+      --gold: #f59e0b;
+      --gold-glow: rgba(245, 158, 11, 0.25);
+      --teal: #14b8a6;
+      --teal-glow: rgba(20, 184, 166, 0.25);
+      --text: #f8fafc;
+      --dim: #94a3b8;
+      --success: #22c55e;
+      --danger: #ef4444;
+      --border: rgba(255, 255, 255, 0.08);
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--void);
+      color: var(--text);
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+      padding-top: 72px; /* nav height */
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 10% 20%, rgba(168, 85, 247, 0.12) 0%, transparent 45%),
+        radial-gradient(circle at 90% 80%, rgba(245, 158, 11, 0.1) 0%, transparent 45%),
+        radial-gradient(circle at 30% 70%, rgba(168, 85, 247, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 70% 30%, rgba(245, 158, 11, 0.06) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Fixed Login Overlay */
+    .login-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 10, 18, 0.96);
+      backdrop-filter: blur(12px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .login-overlay.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .login-box {
+      background: var(--card);
+      border: 1px solid rgba(168, 85, 247, 0.2);
+      border-radius: 24px;
+      padding: 2.5rem;
+      max-width: 420px;
+      width: 90%;
+      text-align: center;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px var(--purple-glow);
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    .login-crest {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 1.5rem;
+      opacity: 0.9;
+      filter: drop-shadow(0 0 8px var(--gold-glow));
+    }
+
+    .login-box h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 900;
+      font-size: 2rem;
+      letter-spacing: 0.05em;
+      background: linear-gradient(135deg, var(--purple), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.25rem;
+    }
+
+    .login-subtitle {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 500;
+      color: var(--dim);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 14px 16px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      border-radius: 12px;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      margin-bottom: 1.25rem;
+    }
+
+    .login-box input:focus {
+      border-color: var(--purple);
+      box-shadow: 0 0 15px var(--purple-glow);
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, var(--purple), #7c3aed);
+      border: none;
+      border-radius: 12px;
+      color: white;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 600;
+      font-size: 1.1rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 15px var(--purple-glow);
+    }
+
+    .login-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 25px var(--purple-glow);
+    }
+
+    .login-error {
+      color: var(--danger);
+      font-size: 0.85rem;
+      margin-top: 0.5rem;
+      min-height: 1.2rem;
+    }
+
+    /* Fixed Top Navigation */
+    .portal-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 999;
+      background: rgba(10, 10, 18, 0.85);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(168, 85, 247, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 2rem;
+      height: 72px;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 900;
+      font-size: 1.35rem;
+      letter-spacing: 0.05em;
+      background: linear-gradient(135deg, var(--purple), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 0.25rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--dim);
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--text);
+      background: rgba(168, 85, 247, 0.15);
+      box-shadow: 0 0 8px var(--purple-glow);
+    }
+
+    .nav-logout {
+      background: none;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: var(--dim);
+      padding: 0.5rem 1.2rem;
+      border-radius: 8px;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .nav-logout:hover {
+      border-color: var(--danger);
+      color: var(--danger);
+      background: rgba(239, 68, 68, 0.1);
+    }
+
+    /* Watermark */
+    .portal-watermark {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      width: 180px;
+      opacity: 0.055;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Main Content */
+    .dashboard-content {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    .portal-header {
+      margin-bottom: 2.5rem;
+      text-align: center;
+    }
+
+    .portal-header h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 900;
+      font-size: 3rem;
+      letter-spacing: 0.05em;
+      background: linear-gradient(135deg, var(--purple) 20%, var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.25rem;
+    }
+
+    .portal-header .subtitle {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 500;
+      color: var(--dim);
+      letter-spacing: 0.06em;
+      font-size: 1.05rem;
+    }
+
+    /* Stats Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+
+    .stat-card {
+      background: var(--card);
+      backdrop-filter: blur(20px);
+      border-radius: 24px;
+      padding: 1.5rem;
+      border: 1px solid var(--border);
+      text-align: center;
+      transition: transform 0.2s, box-shadow 0.2s;
+      animation: fadeIn 0.6s ease-out backwards;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card:nth-child(1) { animation-delay: 0.1s; }
+    .stat-card:nth-child(2) { animation-delay: 0.2s; }
+    .stat-card:nth-child(3) { animation-delay: 0.3s; }
+    .stat-card:nth-child(4) { animation-delay: 0.4s; }
+
+    .stat-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+    }
+
+    .stat-card .stat-value {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 900;
+      font-size: 2.2rem;
+      margin: 0.5rem 0;
+      background: linear-gradient(135deg, var(--purple), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .stat-card .stat-label {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 0.06em;
+      color: var(--dim);
+      text-transform: uppercase;
+    }
+
+    .stat-card .stat-icon {
+      font-size: 1.6rem;
+      margin-bottom: 0.5rem;
+      opacity: 0.8;
+    }
+
+    .stat-loading {
+      color: var(--dim);
+      font-size: 0.95rem;
+    }
+
+    .stat-error {
+      color: var(--danger);
+      font-size: 0.85rem;
+    }
+
+    /* Teacher Note */
+    .teacher-note {
+      background: var(--card);
+      backdrop-filter: blur(20px);
+      border-radius: 24px;
+      padding: 1.75rem;
+      border-left: 4px solid var(--teal);
+      margin-bottom: 2rem;
+      animation: fadeIn 0.6s ease-out 0.2s backwards;
+    }
+
+    .teacher-note p {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+
+    .teacher-signature {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 600;
+      color: var(--teal);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    /* Milestone Card */
+    .milestone-card {
+      background: var(--card);
+      backdrop-filter: blur(20px);
+      border-radius: 24px;
+      padding: 1.75rem;
+      margin-bottom: 2rem;
+      border: 1px solid rgba(245, 158, 11, 0.2);
+      animation: fadeIn 0.6s ease-out 0.3s backwards;
+    }
+
+    .milestone-card h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+
+    .milestone-details {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .milestone-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .milestone-item span:last-child {
+      font-weight: 500;
+      color: var(--dim);
+    }
+
+    .progress-ring {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: conic-gradient(var(--purple) 75%, rgba(255,255,255,0.1) 75%);
+      position: relative;
+    }
+
+    .progress-ring::after {
+      content: '75%';
+      position: absolute;
+      inset: 4px;
+      background: #0a0a12;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--purple);
+    }
+
+    /* Quick Links */
+    .quick-links {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1rem;
+      margin-top: 0.5rem;
+    }
+
+    .quick-link {
+      background: var(--card);
+      backdrop-filter: blur(20px);
+      border-radius: 16px;
+      padding: 1.2rem;
+      text-align: center;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      transition: all 0.2s;
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .quick-link:hover {
+      border-color: var(--purple);
+      box-shadow: 0 8px 25px var(--purple-glow);
+      transform: translateY(-2px);
+    }
+
+    .quick-link .link-icon {
+      font-size: 1.5rem;
+    }
+
+    .quick-link .link-text {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 640px) {
+      .portal-nav {
+        flex-wrap: wrap;
+        height: auto;
+        padding: 0.75rem 1rem;
+      }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Fixed Login Overlay -->
+  <div id="loginOverlay" class="login-overlay">
+    <div class="login-box">
+      <img src="./assets/brand/system-marks/phoenix-dna-crest-mark.png" alt="Phoenix DNA Crest" class="login-crest" onerror="this.style.display='none'">
+      <h2>QUANG PORTAL</h2>
+      <p class="login-subtitle">Natural English Training</p>
+      <input type="password" id="portalPassword" placeholder="Enter portal password" autocomplete="off">
+      <button class="login-btn" id="loginBtn">Unlock Portal</button>
+      <p class="login-error" id="loginError"></p>
+    </div>
+  </div>
+
+  <!-- Fixed Top Navigation -->
+  <nav class="portal-nav">
+    <a href="quang-portal.html" class="nav-brand">🔥 QUANG PORTAL</a>
+    <ul class="nav-links">
+      <li><a href="quang-portal.html" class="active">Dashboard</a></li>
+      <li><a href="quang-profile.html">Profile</a></li>
+      <li><a href="quang-methodology.html">Methodology</a></li>
+      <li><a href="quang-transcripts.html">Transcripts</a></li>
+      <li><a href="quang-action-plan.html">Action Plan</a></li>
+    </ul>
+    <button class="nav-logout" id="logoutBtn">Logout</button>
+  </nav>
+
+  <!-- Watermark -->
+  <img src="./assets/brand/system-marks/phoenix-dna-crest-mark.png" class="portal-watermark" alt="">
+
+  <!-- Main Dashboard Content -->
+  <main class="dashboard-content">
+    <div class="portal-header">
+      <h1>QUANG</h1>
+      <p class="subtitle">Marketing & AI Creator · Private Student · CUB · S/SH Phonics</p>
+    </div>
+
+    <!-- Stats Grid -->
+    <section class="stats-grid" id="statsGrid">
+      <!-- Tiger Score -->
+      <div class="stat-card" id="statTiger">
+        <div class="stat-icon">🐯</div>
+        <div class="stat-label">Tiger Score</div>
+        <div class="stat-value stat-loading">…</div>
+      </div>
+      <!-- Streak -->
+      <div class="stat-card" id="statStreak">
+        <div class="stat-icon">🔥</div>
+        <div class="stat-label">Streak</div>
+        <div class="stat-value stat-loading">…</div>
+      </div>
+      <!-- Sessions -->
+      <div class="stat-card" id="statSessions">
+        <div class="stat-icon">📅</div>
+        <div class="stat-label">Sessions</div>
+        <div class="stat-value stat-loading">…</div>
+      </div>
+      <!-- Next Session -->
+      <div class="stat-card" id="statNext">
+        <div class="stat-icon">⏰</div>
+        <div class="stat-label">Next Session</div>
+        <div class="stat-value stat-loading">…</div>
+      </div>
+    </section>
+
+    <!-- Teacher Note -->
+    <article class="teacher-note">
+      <p>
+        Quang is the younger twin. His matcha marketing project is his teaching vehicle.
+        The main challenge is specificity — he defaults to repeating concepts without applying them.
+        S/SH minimal pairs are the phonics priority: ship/sip, sheep/seep, shoe/sue.
+        Real-world career setup is his highest engagement.
+        We are building the habit of going first.
+      </p>
+      <span class="teacher-signature">— OBI / NET Coach</span>
+    </article>
+
+    <!-- Milestone Card -->
+    <section class="milestone-card">
+      <h3>📛 CUB Level · S/SH Phonics Track</h3>
+      <div class="milestone-details">
+        <div class="milestone-item">
+          <div class="progress-ring"></div>
+          <span>Progress toward Tiger</span>
+        </div>
+        <div class="milestone-item">
+          <span style="font-size:1.5rem;">🎯</span>
+          <span>Next Milestone: Tiger Cub</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Links -->
+    <section class="quick-links">
+      <a href="quang-profile.html" class="quick-link">
+        <span class="link-icon">👤</span>
+        <span class="link-text">Profile</span>
+      </a>
+      <a href="quang-methodology.html" class="quick-link">
+        <span class="link-icon">📘</span>
+        <span class="link-text">Methodology</span>
+      </a>
+      <a href="/magic-chat.html?student=quang-nguyen" class="quick-link">
+        <span class="link-icon">⚡</span>
+        <span class="link-text">Start Session</span>
+      </a>
+    </section>
+  </main>
+
+  <script>
+    // --- Authentication Gate ---
+    const AUTH_KEY = 'quang_auth';
+    const VALID_PASSWORD = 'twins2026';
+    const STUDENT_ID = 'quang-nguyen';
+    const API_BASE = 'https://net-pet-ai.mrmichaelhobbs123.workers.dev';
+
+    const loginOverlay = document.getElementById('loginOverlay');
+    const passwordInput = document.getElementById('portalPassword');
+    const loginBtn = document.getElementById('loginBtn');
+    const loginError = document.getElementById('loginError');
+    const logoutBtn = document.getElementById('logoutBtn');
+
+    function checkAuth() {
+      if (localStorage.getItem(AUTH_KEY) !== 'true') {
+        loginOverlay.classList.remove('hidden');
+      } else {
+        loginOverlay.classList.add('hidden');
+      }
+    }
+
+    loginBtn.addEventListener('click', () => {
+      if (passwordInput.value === VALID_PASSWORD) {
+        localStorage.setItem(AUTH_KEY, 'true');
+        loginOverlay.classList.add('hidden');
+        loginError.textContent = '';
+        loadDashboard(); // reload stats after login
+      } else {
+        loginError.textContent = 'Incorrect portal password.';
+      }
+    });
+
+    passwordInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') loginBtn.click();
+    });
+
+    logoutBtn.addEventListener('click', () => {
+      localStorage.removeItem(AUTH_KEY);
+      loginOverlay.classList.remove('hidden');
+      // reset stats display
+      document.querySelectorAll('.stat-value').forEach(el => {
+        el.textContent = '…';
+        el.classList.add('stat-loading');
+      });
+    });
+
+    // --- Stats Loading ---
+    async function fetchJSON(url) {
+      const res = await fetch(url);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      return res.json();
+    }
+
+    async function loadDashboard() {
+      const tigerEl = document.querySelector('#statTiger .stat-value');
+      const streakEl = document.querySelector('#statStreak .stat-value');
+      const sessionsEl = document.querySelector('#statSessions .stat-value');
+      const nextEl = document.querySelector('#statNext .stat-value');
+
+      try {
+        const [tigerData, stateData] = await Promise.all([
+          fetchJSON(`${API_BASE}/api/tiger-score?studentId=${STUDENT_ID}`),
+          fetchJSON(`${API_BASE}/api/netpet/state?studentId=${STUDENT_ID}`)
+        ]);
+
+        // Tiger Score
+        tigerEl.textContent = tigerData?.score ?? '---';
+        tigerEl.classList.remove('stat-loading');
+
+        // From state: streak, sessionCount, nextSession
+        if (stateData) {
+          streakEl.textContent = stateData.streak ?? '0 days';
+          sessionsEl.textContent = stateData.sessionCount ?? '0';
+          nextEl.textContent = stateData.nextSession ?? 'No upcoming';
+        } else {
+          throw new Error('No state data');
+        }
+        streakEl.classList.remove('stat-loading');
+        sessionsEl.classList.remove('stat-loading');
+        nextEl.classList.remove('stat-loading');
+
+      } catch (err) {
+        console.warn('Dashboard stats fetch error:', err);
+        document.querySelectorAll('.stat-value').forEach(el => {
+          if (el.textContent === '…' || el.classList.contains('stat-loading')) {
+            el.textContent = '⚠️';
+            el.classList.remove('stat-loading');
+            el.classList.add('stat-error');
+          }
+        });
+      }
+    }
+
+    // Initialise
+    checkAuth();
+    if (localStorage.getItem(AUTH_KEY) === 'true') {
+      loadDashboard();
+    }
+  </script>
+
+  <script src="/global-brand-shelf.js"></script>
+</body>
+</html>
+```

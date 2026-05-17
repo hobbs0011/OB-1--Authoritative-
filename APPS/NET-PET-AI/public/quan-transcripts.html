@@ -1,0 +1,561 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transcripts | QUAN PORTAL</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --void: #0a0a12;
+            --card: rgba(22,22,35,0.85);
+            --purple: #a855f7;
+            --gold: #f59e0b;
+            --teal: #14b8a6;
+            --text: #f8fafc;
+            --dim: #94a3b8;
+            --border: rgba(255,255,255,0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--void);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Portal Watermark */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background:
+                radial-gradient(ellipse at 20% 20%, rgba(168,85,247,0.04) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 60%, rgba(20,184,166,0.03) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 80%, rgba(245,158,11,0.03) 0%, transparent 50%);
+        }
+
+        body::after {
+            content: 'QUAN PORTAL';
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-15deg);
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(80px, 15vw, 200px);
+            font-weight: 900;
+            color: rgba(255,255,255,0.015);
+            pointer-events: none;
+            z-index: 0;
+            white-space: nowrap;
+            letter-spacing: 20px;
+            user-select: none;
+        }
+
+        /* Fixed Top Nav */
+        .top-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            background: rgba(10,10,18,0.92);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 24px;
+        }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 60px;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .nav-brand {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: 1.05rem;
+            letter-spacing: 2px;
+            color: var(--purple);
+            white-space: nowrap;
+            flex-shrink: 0;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .nav-links a {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            color: var(--dim);
+            text-decoration: none;
+            padding: 8px 14px;
+            border-radius: 6px;
+            transition: all 0.25s ease;
+            white-space: nowrap;
+            border: 1px solid transparent;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+            background: rgba(255,255,255,0.04);
+            border-color: var(--border);
+        }
+
+        .nav-links a.active {
+            color: var(--teal);
+            background: rgba(20,184,166,0.08);
+            border-color: rgba(20,184,166,0.25);
+        }
+
+        .nav-logout {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            color: #ef4444 !important;
+            cursor: pointer;
+            background: none;
+            border: 1px solid rgba(239,68,68,0.3);
+            padding: 8px 14px;
+            border-radius: 6px;
+            transition: all 0.25s ease;
+            white-space: nowrap;
+            margin-left: 4px;
+        }
+
+        .nav-logout:hover {
+            background: rgba(239,68,68,0.1);
+            border-color: rgba(239,68,68,0.5);
+            color: #f87171 !important;
+        }
+
+        /* Main Content */
+        .main-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 100px 24px 60px;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .page-header h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 800;
+            font-size: clamp(1.6rem, 4vw, 2.4rem);
+            letter-spacing: 4px;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .page-header .subtitle {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 500;
+            font-size: 1rem;
+            letter-spacing: 2px;
+            color: var(--teal);
+            text-transform: uppercase;
+        }
+
+        /* Session Cards */
+        .sessions-list {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .session-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 28px 30px;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .session-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--teal);
+            border-radius: 4px 0 0 4px;
+            opacity: 0.6;
+        }
+
+        .session-card:hover {
+            border-color: rgba(20,184,166,0.25);
+            box-shadow: 0 0 30px rgba(20,184,166,0.04);
+        }
+
+        .session-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .session-title-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .session-label {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            color: var(--purple);
+            text-transform: uppercase;
+        }
+
+        .session-title {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            font-size: 1.35rem;
+            letter-spacing: 1px;
+            color: var(--text);
+        }
+
+        .session-date-badge {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 600;
+            font-size: 0.75rem;
+            letter-spacing: 1.5px;
+            color: #0a0a12;
+            background: var(--teal);
+            padding: 6px 14px;
+            border-radius: 20px;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .session-meta-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 18px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .session-meta-item {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            color: var(--dim);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .session-meta-item strong {
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .meta-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--gold);
+            flex-shrink: 0;
+        }
+
+        .session-body {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .session-section-label {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            color: var(--gold);
+            text-transform: uppercase;
+        }
+
+        .session-body p {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--dim);
+        }
+
+        .session-body p.text-light {
+            color: #cbd5e1;
+        }
+
+        .session-outcome {
+            background: rgba(20,184,166,0.06);
+            border: 1px solid rgba(20,184,166,0.15);
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-top: 6px;
+        }
+
+        .session-outcome p {
+            color: #cbd5e1;
+            font-weight: 500;
+        }
+
+        .session-quotes {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 4px;
+        }
+
+        .session-quote {
+            font-family: 'Inter', sans-serif;
+            font-style: italic;
+            font-weight: 400;
+            font-size: 0.9rem;
+            color: #e2e8f0;
+            padding-left: 16px;
+            border-left: 2px solid var(--purple);
+            line-height: 1.6;
+        }
+
+        .session-decisions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 4px;
+        }
+
+        .decision-tag {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            font-size: 0.8rem;
+            letter-spacing: 0.5px;
+            color: var(--teal);
+            background: rgba(20,184,166,0.08);
+            border: 1px solid rgba(20,184,166,0.2);
+            padding: 6px 14px;
+            border-radius: 20px;
+        }
+
+        .soul-dna-high {
+            display: inline-block;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            color: #0a0a12;
+            background: var(--gold);
+            padding: 4px 10px;
+            border-radius: 12px;
+            text-transform: uppercase;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-inner {
+                height: auto;
+                padding: 10px 0;
+                gap: 6px;
+            }
+            .nav-links {
+                gap: 2px;
+            }
+            .nav-links a {
+                font-size: 0.78rem;
+                padding: 6px 10px;
+            }
+            .nav-logout {
+                font-size: 0.78rem;
+                padding: 6px 10px;
+            }
+            .main-content {
+                padding: 120px 16px 40px;
+            }
+            .session-card {
+                padding: 20px 18px;
+            }
+            .session-card-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-brand {
+                font-size: 0.85rem;
+            }
+            .nav-links a {
+                font-size: 0.7rem;
+                padding: 5px 7px;
+            }
+            .session-date-badge {
+                font-size: 0.65rem;
+                padding: 4px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Fixed Top Navigation -->
+    <nav class="top-nav">
+        <div class="nav-inner">
+            <a href="quan-portal.html" class="nav-brand">QUAN PORTAL</a>
+            <div class="nav-links">
+                <a href="quan-portal.html">Dashboard</a>
+                <a href="quan-profile.html">Profile</a>
+                <a href="quan-methodology.html">Methodology</a>
+                <a href="quan-transcripts.html" class="active">Transcripts</a>
+                <a href="quan-action-plan.html">Action Plan</a>
+                <button class="nav-logout" onclick="handleLogout()">LOGOUT</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="page-header">
+            <h1>TRANSCRIPTS</h1>
+            <p class="subtitle">Session Records · Private Cohort</p>
+        </div>
+
+        <div class="sessions-list">
+            <!-- Session 1 — 2026-04-10 · GitHub Copilot Setup -->
+            <article class="session-card">
+                <div class="session-card-header">
+                    <div class="session-title-group">
+                        <span class="session-label">Session 1</span>
+                        <span class="session-title">GitHub Copilot Setup</span>
+                    </div>
+                    <span class="session-date-badge">2026-04-10</span>
+                </div>
+                <div class="session-meta-row">
+                    <span class="session-meta-item"><span class="meta-dot"></span> <strong>Format:</strong> Private class — Quan + Quang (twin pair)</span>
+                    <span class="session-meta-item"><strong>Activity:</strong> AI tooling onboarding</span>
+                </div>
+                <div class="session-body">
+                    <div>
+                        <span class="session-section-label">What Happened</span>
+                        <p>Set up GitHub accounts for both twins. Signed up for Copilot Premium ($10/mo individual plan). Discussed splitting Copilot Pro (6-person plan). Entered credit card for trial. Reviewed what Copilot gives: higher usage limits, access to AI models.</p>
+                    </div>
+                    <div class="session-outcome">
+                        <p><strong>Key outcome:</strong> Quan now has GitHub + Copilot Premium active — ready for AI project work in class.</p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Session 2 — 2026-03-30 · Career Setup -->
+            <article class="session-card">
+                <div class="session-card-header">
+                    <div class="session-title-group">
+                        <span class="session-label">Session 2</span>
+                        <span class="session-title">Career Setup</span>
+                    </div>
+                    <span class="session-date-badge">2026-03-30</span>
+                </div>
+                <div class="session-meta-row">
+                    <span class="session-meta-item"><span class="meta-dot"></span> <strong>Format:</strong> Private class — Quan + Quang (twin pair)</span>
+                    <span class="session-meta-item"><span class="soul-dna-high">SOUL DNA · HIGH</span></span>
+                </div>
+                <div class="session-body">
+                    <div>
+                        <span class="session-section-label">What Happened</span>
+                        <p>Zero vocabulary drill — entire session was real-world career setup. Discussed LinkedIn profile, blog, website, AI headshots, freelance profiles. Career Tiger Package demonstrated live. Quan promised mother to find job this week — LinkedIn + website in one sitting. AI headshot service offered. Fiverr/Upwork discussion. Notion free trial signed up.</p>
+                    </div>
+                    <div class="session-quotes">
+                        <span class="session-section-label">Key Quotes</span>
+                        <p class="session-quote">'You don't have to be perfect. You have to get started.'</p>
+                        <p class="session-quote">'While you're sleeping, you could be getting your website built.'</p>
+                    </div>
+                    <div>
+                        <span class="session-section-label">Decisions</span>
+                        <div class="session-decisions">
+                            <span class="decision-tag">Wednesday 7PM = career setup sessions</span>
+                            <span class="decision-tag">Quan emails CV + portfolio + photos</span>
+                            <span class="decision-tag">Potential Roblox 3D paid work</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Session 3 — Earlier Sessions 2024–2026 · Strategic Laziness & Phonics -->
+            <article class="session-card">
+                <div class="session-card-header">
+                    <div class="session-title-group">
+                        <span class="session-label">Session 3</span>
+                        <span class="session-title">Strategic Laziness &amp; Phonics</span>
+                    </div>
+                    <span class="session-date-badge">2024–2026</span>
+                </div>
+                <div class="session-meta-row">
+                    <span class="session-meta-item"><span class="meta-dot"></span> <strong>Format:</strong> Gemini Live voice sessions + NotebookLM</span>
+                    <span class="session-meta-item"><strong>Duration:</strong> 2+ years private sessions</span>
+                </div>
+                <div class="session-body">
+                    <div>
+                        <span class="session-section-label">Key Moments</span>
+                        <p class="text-light">'She sells seashells by the seashore' tongue twister (Quan led drill). Strategic Laziness philosophy. Sinking Ship, Train of Opportunity, Ostrich vs Tiger metaphors. 5-step plan created together. NotebookLM podcast played as teaching tool.</p>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <script>
+        // Auth gate
+        if (localStorage.getItem('quan_auth') !== 'true') {
+            window.location.href = 'quan-portal.html';
+        }
+
+        function handleLogout() {
+            localStorage.removeItem('quan_auth');
+            window.location.href = 'quan-portal.html';
+        }
+    </script>
+    <script src="global-brand-shelf.js"></script>
+</body>
+</html>
+```

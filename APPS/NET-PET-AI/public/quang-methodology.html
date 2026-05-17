@@ -1,0 +1,644 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Methodology | QUANG PORTAL</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        if (localStorage.getItem('quang_auth') !== 'true') {
+            window.location.href = 'quang-portal.html';
+        }
+    </script>
+    <style>
+        :root {
+            --void: #0a0a12;
+            --card: rgba(22, 22, 35, 0.85);
+            --purple: #a855f7;
+            --gold: #f59e0b;
+            --teal: #14b8a6;
+            --text: #f8fafc;
+            --dim: #94a3b8;
+            --border: rgba(255, 255, 255, 0.08);
+            --nav-height: 62px;
+            --shadow-purple: 0 0 20px rgba(168, 85, 247, 0.15);
+            --shadow-gold: 0 0 20px rgba(245, 158, 11, 0.12);
+            --shadow-teal: 0 0 20px rgba(20, 184, 166, 0.12);
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--void);
+            color: var(--text);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            padding-top: var(--nav-height);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(ellipse at 25% 20%, rgba(168, 85, 247, 0.06) 0%, transparent 55%),
+                radial-gradient(ellipse at 75% 60%, rgba(20, 184, 166, 0.05) 0%, transparent 55%),
+                radial-gradient(ellipse at 50% 40%, rgba(245, 158, 11, 0.04) 0%, transparent 55%),
+                radial-gradient(ellipse at 60% 80%, rgba(168, 85, 247, 0.04) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .watermark {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-22deg);
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(4rem, 12vw, 10rem);
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.018);
+            white-space: nowrap;
+            pointer-events: none;
+            z-index: 0;
+            letter-spacing: 0.15em;
+            user-select: none;
+            text-transform: uppercase;
+        }
+
+        /* ── NAVIGATION ── */
+        .nav-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--nav-height);
+            background: rgba(10, 10, 18, 0.92);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 28px;
+            z-index: 1000;
+        }
+
+        .nav-brand {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: 1.05rem;
+            letter-spacing: 0.08em;
+            color: var(--text);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+
+        .nav-brand .brand-dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: var(--purple);
+            box-shadow: 0 0 10px var(--purple);
+            flex-shrink: 0;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .nav-links::-webkit-scrollbar {
+            display: none;
+        }
+
+        .nav-link {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
+            color: var(--dim);
+            text-decoration: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            transition: all 0.22s ease;
+            white-space: nowrap;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--text);
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .nav-link.active {
+            color: var(--purple);
+            background: rgba(168, 85, 247, 0.1);
+            box-shadow: inset 0 0 0 1px rgba(168, 85, 247, 0.25);
+        }
+
+        .nav-link.logout-link {
+            color: #ef4444;
+            margin-left: 6px;
+        }
+
+        .nav-link.logout-link:hover {
+            background: rgba(239, 68, 68, 0.1);
+            color: #f87171;
+        }
+
+        /* ── MAIN LAYOUT ── */
+        .main-container {
+            position: relative;
+            z-index: 1;
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 40px 24px 60px;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 44px;
+        }
+
+        .page-header h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 800;
+            font-size: clamp(1.6rem, 4vw, 2.2rem);
+            letter-spacing: 0.12em;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .page-header .subtitle {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 500;
+            font-size: 1rem;
+            letter-spacing: 0.06em;
+            color: var(--dim);
+        }
+
+        /* ── CARDS ── */
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 28px 30px;
+            margin-bottom: 22px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .card:hover {
+            border-color: rgba(255, 255, 255, 0.14);
+        }
+
+        .card.border-purple {
+            border-left: 4px solid var(--purple);
+            box-shadow: var(--shadow-purple);
+        }
+
+        .card.border-gold {
+            border-left: 4px solid var(--gold);
+            box-shadow: var(--shadow-gold);
+        }
+
+        .card.border-teal {
+            border-left: 4px solid var(--teal);
+            box-shadow: var(--shadow-teal);
+        }
+
+        .card h2 {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            font-size: 1.35rem;
+            letter-spacing: 0.04em;
+            color: var(--text);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card h2 .indicator-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .dot-purple {
+            background: var(--purple);
+            box-shadow: 0 0 8px var(--purple);
+        }
+        .dot-gold {
+            background: var(--gold);
+            box-shadow: 0 0 8px var(--gold);
+        }
+        .dot-teal {
+            background: var(--teal);
+            box-shadow: 0 0 8px var(--teal);
+        }
+
+        .card p {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--dim);
+            margin-bottom: 10px;
+        }
+
+        .card p:last-child {
+            margin-bottom: 0;
+        }
+
+        .card p strong {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        /* ── PILLARS GRID ── */
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .pillar-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px 22px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: border-color 0.25s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pillar-card:hover {
+            border-color: rgba(255, 255, 255, 0.14);
+        }
+
+        .pillar-card .pillar-number {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 800;
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            color: var(--purple);
+            margin-bottom: 8px;
+            opacity: 0.8;
+        }
+
+        .pillar-card:nth-child(2) .pillar-number {
+            color: var(--gold);
+        }
+        .pillar-card:nth-child(3) .pillar-number {
+            color: var(--teal);
+        }
+        .pillar-card:nth-child(4) .pillar-number {
+            color: var(--purple);
+        }
+
+        .pillar-card h3 {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: 0.03em;
+            color: var(--text);
+            margin-bottom: 6px;
+        }
+
+        .pillar-card p {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: 0.88rem;
+            line-height: 1.6;
+            color: var(--dim);
+        }
+
+        /* ── PHONICS TABLE ── */
+        .phonics-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 14px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .phonics-table thead th {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            font-size: 0.85rem;
+            letter-spacing: 0.06em;
+            color: var(--dim);
+            text-align: left;
+            padding: 10px 14px;
+            border-bottom: 1px solid var(--border);
+            text-transform: uppercase;
+        }
+
+        .phonics-table tbody td {
+            padding: 11px 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .phonics-table tbody tr {
+            transition: background 0.2s ease;
+        }
+
+        .phonics-table tbody tr:hover {
+            background: rgba(255, 255, 255, 0.025);
+        }
+
+        .phonics-table .pair-s {
+            color: #f87171;
+            font-weight: 600;
+        }
+        .phonics-table .pair-sh {
+            color: var(--teal);
+            font-weight: 600;
+        }
+
+        /* ── ORDERED LIST ── */
+        .card ol {
+            padding-left: 22px;
+            margin-top: 6px;
+        }
+
+        .card ol li {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: 0.93rem;
+            line-height: 1.75;
+            color: var(--dim);
+            margin-bottom: 4px;
+        }
+
+        .card ol li strong {
+            color: var(--text);
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 680px) {
+            .nav-bar {
+                padding: 0 12px;
+                gap: 4px;
+            }
+            .nav-brand {
+                font-size: 0.85rem;
+                gap: 6px;
+            }
+            .nav-link {
+                font-size: 0.78rem;
+                padding: 8px 10px;
+            }
+            .main-container {
+                padding: 24px 14px 48px;
+            }
+            .card {
+                padding: 20px 18px;
+            }
+            .pillars-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            .phonics-table {
+                font-size: 0.78rem;
+            }
+            .phonics-table thead th,
+            .phonics-table tbody td {
+                padding: 8px 8px;
+            }
+        }
+
+        @media (max-width: 440px) {
+            .nav-brand {
+                font-size: 0.7rem;
+                letter-spacing: 0.03em;
+            }
+            .nav-brand .brand-dot {
+                width: 6px;
+                height: 6px;
+            }
+            .nav-link {
+                font-size: 0.7rem;
+                padding: 6px 7px;
+                letter-spacing: 0.02em;
+            }
+            .nav-link.logout-link {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="watermark" aria-hidden="true">QUANG PORTAL</div>
+
+    <!-- ── FIXED NAVIGATION ── -->
+    <nav class="nav-bar" role="navigation" aria-label="Main navigation">
+        <a href="quang-portal.html" class="nav-brand" aria-label="Quang Portal Home">
+            <span class="brand-dot"></span> QUANG
+        </a>
+        <div class="nav-links">
+            <a href="quang-portal.html" class="nav-link">Dashboard</a>
+            <a href="quang-profile.html" class="nav-link">Profile</a>
+            <a href="quang-methodology.html" class="nav-link active" aria-current="page">Methodology</a>
+            <a href="quang-transcripts.html" class="nav-link">Transcripts</a>
+            <a href="quang-action-plan.html" class="nav-link">Action Plan</a>
+            <a href="#" class="nav-link logout-link" id="logoutBtn">Logout</a>
+        </div>
+    </nav>
+
+    <!-- ── MAIN CONTENT ── -->
+    <main class="main-container">
+        <header class="page-header">
+            <h1>METHODOLOGY</h1>
+            <p class="subtitle">Natural English Training &middot; OBI System</p>
+        </header>
+
+        <!-- Section 1: Core Philosophy -->
+        <section class="card border-purple" aria-labelledby="philosophy-heading">
+            <h2 id="philosophy-heading">
+                <span class="indicator-dot dot-purple"></span> Core Philosophy
+            </h2>
+            <p>
+                <strong>NET</strong> — Natural English Training — teaches English through <strong>real-world stakes</strong>. The session <em>is</em> the career move. Every interaction in English carries weight because it connects directly to Quang's actual goals: passing interviews, landing freelance work, presenting with authority.
+            </p>
+            <p>
+                Grammar is incidental. Fluency comes from <strong>doing real things</strong> in English — negotiating, pitching, explaining, defending ideas. The language emerges from authentic need, not from worksheet completion. When Quang builds his matcha marketing deck, he is not "practicing English" — he is <strong>building his future</strong>, and English is simply the tool he uses to do it.
+            </p>
+        </section>
+
+        <!-- Section 2: Quang's Teaching Vehicle -->
+        <section class="card border-gold" aria-labelledby="vehicle-heading">
+            <h2 id="vehicle-heading">
+                <span class="indicator-dot dot-gold"></span> Quang's Teaching Vehicle
+            </h2>
+            <p>
+                The <strong>matcha marketing project</strong> is Quang's primary vehicle — a real school assignment transformed into an English marketing campaign. Every session revolves around producing tangible deliverables: market analysis write-ups, brand positioning statements, pitch scripts, visual briefs. The school project becomes the <strong>English output engine</strong>.
+            </p>
+            <p>
+                <strong>Career setup sessions</strong> form the secondary vehicle. These include LinkedIn profile optimization, Fiverr gig creation, portfolio structuring, and outreach message drafting — all conducted in English. The governing principle: <strong>real output > textbook repetition</strong>. Quang is not rehearsing; he is producing assets that will live beyond the classroom.
+            </p>
+        </section>
+
+        <!-- Section 3: The Specificity Protocol -->
+        <section class="card border-teal" aria-labelledby="specificity-heading">
+            <h2 id="specificity-heading">
+                <span class="indicator-dot dot-teal"></span> The Specificity Protocol
+            </h2>
+            <p>
+                Quang's main growth edge is <strong>specificity</strong>. Michael's standing rule: <em>"Don't repeat my words back to me — apply them."</em> Every session includes a moment where Quang must produce an <strong>original application</strong> of a concept, not a paraphrase of what was just said.
+            </p>
+            <p>
+                This protocol is the <strong>core of the methodology</strong> for him. When a principle is introduced — say, a marketing framework or a communication tactic — Quang must immediately generate his own example from his own context. He must take the abstract and <strong>make it concrete</strong> through his unique lens. This is where real cognitive ownership happens, and where English stops being a subject and becomes a <strong>medium of thought</strong>.
+            </p>
+        </section>
+
+        <!-- Section 4: Phonics Track -->
+        <section class="card" aria-labelledby="phonics-heading">
+            <h2 id="phonics-heading">
+                <span class="indicator-dot dot-teal"></span> Phonics Track — S/SH Minimal Pairs
+            </h2>
+            <p>
+                <strong>S/SH Minimal Pairs</strong> are Quang's dedicated phonics work. These drills target the distinction between /s/ and /ʃ/ — a critical articulation point that currently triggers <strong>Korean language detection</strong> in Gemini's speech analysis. The pronunciation goal is clear: <strong>pass the Gemini language detection test</strong> as a native-like English speaker.
+            </p>
+            <p>
+                Anchor words build from <strong>slow deliberate</strong> articulation to <strong>natural conversational speed</strong>. Each pair is practiced in isolation, then in carrier phrases, then in spontaneous sentence generation. The progression is: control → speed → automaticity.
+            </p>
+            <table class="phonics-table" aria-label="S/SH minimal pairs drill table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">/s/ Word</th>
+                        <th scope="col">/ʃ/ Word</th>
+                        <th scope="col">Focus</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td class="pair-s">ship</td>
+                        <td class="pair-sh">sip</td>
+                        <td>Tongue position — /ʃ/ retracted, /s/ forward</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td class="pair-s">sheep</td>
+                        <td class="pair-sh">seep</td>
+                        <td>Lip rounding on /ʃ/, spread on /s/</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td class="pair-s">shoe</td>
+                        <td class="pair-sh">sue</td>
+                        <td>Airflow channel width differentiation</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td class="pair-s">she</td>
+                        <td class="pair-sh">sea</td>
+                        <td>Minimal pair in carrier: "___ is..."</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td class="pair-s">cash</td>
+                        <td class="pair-sh">class</td>
+                        <td>Final-position contrast; cluster awareness</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Section 5: The 4 Pillars -->
+        <section aria-labelledby="pillars-heading">
+            <h2 id="pillars-heading" style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.35rem;letter-spacing:0.04em;color:var(--text);margin-bottom:14px;">
+                The 4 Pillars
+            </h2>
+            <div class="pillars-grid">
+                <div class="pillar-card">
+                    <div class="pillar-number">PILLAR 01</div>
+                    <h3>Real Stakes &gt; Drills</h3>
+                    <p>Language is acquired fastest when the outcome matters. Quang's sessions are structured around deliverables that have consequences beyond the classroom — client-facing materials, public profiles, real pitches.</p>
+                </div>
+                <div class="pillar-card">
+                    <div class="pillar-number">PILLAR 02</div>
+                    <h3>Specificity &gt; Repetition</h3>
+                    <p>Rote repetition builds habit; specificity builds ownership. Quang advances by generating original applications of every concept, not by echoing the teacher's examples.</p>
+                </div>
+                <div class="pillar-card">
+                    <div class="pillar-number">PILLAR 03</div>
+                    <h3>Matcha as Marketing Lab</h3>
+                    <p>The school project is not a side task — it is the central English output engine. Market research, brand strategy, and campaign design all happen in English, transforming an academic assignment into a professional portfolio piece.</p>
+                </div>
+                <div class="pillar-card">
+                    <div class="pillar-number">PILLAR 04</div>
+                    <h3>Go First</h3>
+                    <p>Quang is building the habit of <strong>leading</strong>, not always following his brother Quan. In sessions, Quang speaks first, proposes first, critiques first. Leadership in English is leadership in life.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: Strategic Laziness -->
+        <section class="card" aria-labelledby="laziness-heading" style="margin-top:22px;">
+            <h2 id="laziness-heading">
+                <span class="indicator-dot dot-gold"></span> Strategic Laziness — 5-Step Plan
+            </h2>
+            <p>Quang's productivity framework, developed in class, applies the principle of <strong>minimum effective dose</strong> to study and work habits. The goal is not to do more — it is to do <strong>only what moves the needle</strong>.</p>
+            <ol>
+                <li><strong>Centralize tasks</strong> — Gather all commitments into one visible system; eliminate scattered to-do lists and mental notes.</li>
+                <li><strong>Identify crucial tasks</strong> — Apply the 80/20 filter: which 20% of tasks produce 80% of the results? Ruthlessly separate signal from noise.</li>
+                <li><strong>Schedule study blocks</strong> — Assign fixed, non-negotiable time windows for deep English work. Calendar before convenience.</li>
+                <li><strong>Automate reminders</strong> — Use tools (phone alarms, calendar notifications, recurring prompts) to remove cognitive load from remembering.</li>
+                <li><strong>Review and eliminate</strong> — Weekly audit: what tasks consumed time but produced zero impact? Cut them without guilt.</li>
+            </ol>
+        </section>
+    </main>
+
+    <!-- ── GLOBAL BRAND SHELF ── -->
+    <script src="global-brand-shelf.js"></script>
+
+    <!-- ── LOGOUT HANDLER ── -->
+    <script>
+        document.getElementById('logoutBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            localStorage.removeItem('quang_auth');
+            window.location.href = 'quang-portal.html';
+        });
+    </script>
+</body>
+</html>
+```
