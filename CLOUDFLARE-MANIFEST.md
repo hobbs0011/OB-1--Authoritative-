@@ -17,7 +17,7 @@ This file is the authoritative inventory of all live Cloudflare assets.
 | frosty-bush-c14f | frosty-bush-c14f.mrmichaelhobbs123.workers.dev | ✅ 200 | ✅ APPS/FROSTY-BUSH-C14F | Phoenix Vault — Google Docs OAuth writer. Early soul-DNA capture tool, superseded by soul-logger. |
 | net-obi-api | net-obi-api.mrmichaelhobbs123.workers.dev | ✅ 200 | ✅ APPS/NET-OBI-API | Legacy API worker. Early prototype (waitlist + hardcoded chat, AI never wired). Superseded by net-pet-ai. Kept as legacy reference. |
 | net-pet-ai | net-pet-ai.mrmichaelhobbs123.workers.dev | ✅ 200 | ✅ APPS/NET-PET-AI | Primary worker — canon branch |
-| net-pet-ai-production | net-pet-ai-production.mrmichaelhobbs123.workers.dev | ✅ 200 | ✅ APPS/NET-PET-AI | Production slot — shared source with net-pet-ai. Ghost web assets (Minh portal, Tiger assessment) rescued 2026-05-17. |
+| net-pet-ai-production | net-pet-ai-production.mrmichaelhobbs123.workers.dev | ✅ 200 | ⚠️ APPS/NET-PET-AI-PRODUCTION (bundle rescued) | **SEPARATE DEPLOY PIPELINE.** Running v1.6.2+v68.1-phase4-advanced (repo is v1.5.0). 30 DO class exports — monetization layer (Stripe, affiliate, cohort analysis, churn, rate limiting). Contains phase6 schema (7 SQLite tables). Notion pre-blacklist: LIVE. DO NOT deploy canon code here — will orphan 30 live DO namespaces. Bundle rescued 2026-05-18. v1.6.2 source not yet recovered. |
 | net-pet-ai-staging | net-pet-ai-staging.mrmichaelhobbs123.workers.dev | ❌ 404 | ✅ APPS/NET-PET-AI | Staging slot — no health route by design. Known exclusion (in expect-404 list). |
 | phoenix-coder | phoenix-coder.mrmichaelhobbs123.workers.dev | ❌ 404 | ⚠️ PROJECTS/phoenix-coder (standalone) | Standalone repo. API-only worker — intentionally no GET / route. Known exclusion. |
 | soul-logger | soul-logger.mrmichaelhobbs123.workers.dev | ✅ 200 | ✅ APPS/SOUL-LOGGER | Chat dump ingestion drone. D1: soul-archive. Parsers: claude / chatgpt / notebooklm / vscode / gemini. |
@@ -111,3 +111,4 @@ Files that existed in the deployed `net-pet-ai-production` worker but were absen
 | GAP-5 | 2 D1 databases reported as empty | ✅ **CLOSED** — both have active schema, 0 rows false-negative from CAPIv4 incomplete listing |
 | GAP-6 | BlueTech students on wrong portal template | ✅ **CLOSED** — Mai Tram, Quy, Huong rebuilt against 5-tab multi-portal template (commit `fb280e6`) |
 | GAP-7 | `submission-api` and `soul-logger` untracked | ✅ **CLOSED** — both located and tracked in `APPS/` (commit `fe16efe`) |
+| GAP-8 | `net-pet-ai-production` runs v1.6.2 (30 DOs) — canon repo is v1.5.0 (4 DOs) | ⚠️ **OPEN** — bundle rescued to `APPS/NET-PET-AI-PRODUCTION/`. v1.6.2 source not yet recovered. Do not deploy canon code to this slot. |

@@ -1,0 +1,79 @@
+name = "net-pet-ai-production"
+# main = "???"  # Source not yet recovered — DO NOT DEPLOY without v1.6.2 source
+compatibility_date = "2026-03-16"
+compatibility_flags = ["nodejs_compat"]
+
+# WARNING: This wrangler.toml is INCOMPLETE.
+# The production slot (v1.6.2+v68.1-phase4-advanced) was built from a codebase
+# not present in this repo. Until the v1.6.2 source is recovered, this file
+# is a documentation artifact only — not a deploy config.
+#
+# Deploying the canon APPS/NET-PET-AI/ code to this slot will orphan 30 live DOs.
+# See README.md before taking any action on this slot.
+
+[assets]
+directory = "./public"
+binding = "ASSETS"
+
+# === KNOWN DO BINDINGS (from /evidence endpoint + health check) ===
+# Canon bindings (also in APPS/NET-PET-AI/wrangler.toml)
+[[durable_objects.bindings]]
+name = "SESSIONS"
+class_name = "SessionDO"
+
+[[durable_objects.bindings]]
+name = "PROFILES"
+class_name = "ProfileDO"
+
+[[durable_objects.bindings]]
+name = "PETS"
+class_name = "PetDO"
+
+[[durable_objects.bindings]]
+name = "LEDGER"
+class_name = "LedgerDO"
+
+[[durable_objects.bindings]]
+name = "COMMANDS"
+class_name = "CommandDO"
+
+# Production-only bindings (NOT in canon wrangler.toml)
+# These must exist for the slot to function — removing them orphans live DO data.
+[[durable_objects.bindings]]
+name = "STUDENT_PROFILES"
+class_name = "StudentProfileDO"
+
+[[durable_objects.bindings]]
+name = "COHORT_ANALYSIS"
+class_name = "CohortAnalysisDO"
+
+# Additional bindings likely present (exported by bundle — binding names unknown)
+# AdaptiveDifficultyDO, AffiliateCommissionDO, CacheDO, ChurnModelDO,
+# CohortRevenueTrackingDO, ControlledSynthesisDO, FastSealCursorDO,
+# GitHubOAuthDO, HeavyLedger, LocalizationGatewayDO, MemoryDO,
+# PetPersonalityDO, PheromoneTrailDO, QuotaEnforcementDO, RateLimiterDO,
+# ReEngagementDO, RevenueCheckoutDO, SessionSubscriptionDO, StreakDO,
+# StripeCheckoutDO, StudentBrainV2, StudentDO, StudentInfoDO, WebhookResilienceDO
+
+# === MIGRATIONS (reconstructed from bundle analysis) ===
+[[migrations]]
+tag = "v1-net-pet-core"
+new_sqlite_classes = ["SessionDO", "ProfileDO", "PetDO"]
+
+[[migrations]]
+tag = "v2-ledger"
+new_sqlite_classes = ["LedgerDO"]
+
+[[migrations]]
+tag = "v4-ship-memory"
+new_sqlite_classes = ["MemoryDO"]
+
+# Additional migrations for production-only DOs — tags unknown
+# [[migrations]]
+# tag = "v??-phase6-cohort"
+# new_sqlite_classes = ["StudentProfileDO", "CohortAnalysisDO"]
+
+[vars]
+APP_NAME = "Natural English Training"
+APP_COACH_NAME = "Obi"
+IMAGE_GEN_URL = ""
