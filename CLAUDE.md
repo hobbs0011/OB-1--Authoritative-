@@ -60,7 +60,7 @@ Always print before executing:
 
 ## OB-1 Operating Rules (from AGENTS.md)
 
-- Canonical repo: `c:\Users\mrmic\OneDrive\Documents\GitHub\OB-1--Authoritative-`
+- Canonical repo: `D:\OB-1-CANONICAL`
 - Runtime app: `APPS/NET-PET-AI`
 - Operator: `mrmichaelhobbs123@gmail.com`
 - Run `pwsh -File SCRIPTS/obi.ps1 doctor` before heavy operations
