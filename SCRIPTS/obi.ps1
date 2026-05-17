@@ -1,5 +1,5 @@
 param(
-    [ValidateSet("doctor", "verify", "dev", "mcp-audit", "soul-check")]
+    [ValidateSet("doctor", "verify", "dev", "mcp-audit", "soul-check", "cf-audit")]
     [string]$Command = "doctor"
 )
 
@@ -28,7 +28,6 @@ switch ($Command) {
         $email = [Environment]::GetEnvironmentVariable("CLOUDFLARE_EMAIL", "User")
         $githubToken = [Environment]::GetEnvironmentVariable("GITHUB_TOKEN", "User")
         $cfKey = [Environment]::GetEnvironmentVariable("CLOUDFLARE_API_KEY", "User")
-        $notion = [Environment]::GetEnvironmentVariable("NOTION_TOKEN", "User")
 
         # --- Canon integrity gate (HL-140 mandate) ---
         $canonDir = Join-Path $repoRoot "CANON"
@@ -75,7 +74,7 @@ switch ($Command) {
             email_match = ($email -eq $canonicalEmail)
             github_token = [bool]$githubToken
             cloudflare_api_key = [bool]$cfKey
-            notion_token = [bool]$notion
+            notion_blacklisted = $true
             canon_files = $canonCount
             canon_ok = $canonOk
             reincarnation_files = $reincCount
@@ -216,5 +215,117 @@ switch ($Command) {
         Write-Host ""
 
         $result | ConvertTo-Json -Depth 3
+    }
+    "cf-audit" {
+        $account = "3c7b1766bd8fdc9e01211d2b390315ea"
+        $key   = [Environment]::GetEnvironmentVariable("CLOUDFLARE_API_KEY", "User")
+        $email = [Environment]::GetEnvironmentVariable("CLOUDFLARE_EMAIL", "User")
+        if (-not $key -or -not $email) { throw "CLOUDFLARE_API_KEY and CLOUDFLARE_EMAIL env vars required" }
+
+        $h = @{ "X-Auth-Key" = $key; "X-Auth-Email" = $email; "Content-Type" = "application/json" }
+
+        Write-Host "`n  CF AUDIT — querying Cloudflare API..." -ForegroundColor Cyan
+
+        # --- Workers ---
+        $wResp = Invoke-RestMethod -Uri "https://api.cloudflare.com/client/v4/accounts/$account/workers/scripts" -Headers $h
+        $liveWorkers = $wResp.result | Select-Object -ExpandProperty id | Sort-Object
+
+        # --- Pages ---
+        $pResp = Invoke-RestMethod -Uri "https://api.cloudflare.com/client/v4/accounts/$account/pages/projects" -Headers $h
+        $livePages = $pResp.result | Select-Object -ExpandProperty name | Sort-Object
+
+        # --- Repo-tracked directories ---
+        $appsDir   = Join-Path $repoRoot "APPS"
+        $pagesDir  = Join-Path $appsDir  "PAGES"
+        $trackedWorkerDirs = if (Test-Path $appsDir) {
+            Get-ChildItem $appsDir -Directory | Where-Object { $_.Name -ne "PAGES" } |
+                ForEach-Object { $_.Name.ToLower().Replace("_","-") }
+        } else { @() }
+        $trackedPageDirs = if (Test-Path $pagesDir) {
+            Get-ChildItem $pagesDir -Directory | ForEach-Object { $_.Name }
+        } else { @() }
+
+        # Known multi-worker source (net-pet-ai covers all net-pet-ai-* variants)
+        $workerSourceMap = @{
+            "net-pet-ai"            = "APPS/NET-PET-AI"
+            "net-pet-ai-production" = "APPS/NET-PET-AI"
+            "net-pet-ai-staging"    = "APPS/NET-PET-AI"
+            "net-pet-ai-mvp"        = "APPS/NET-PET-AI"
+            "soul-logger"           = "APPS/SOUL-LOGGER"
+            "submission-api"        = "APPS/SUBMISSION-API"
+            "phoenix-coder"         = "PROJECTS/phoenix-coder (standalone)"
+        }
+
+        # --- Health check workers ---
+        Write-Host "  Checking $($liveWorkers.Count) workers..." -ForegroundColor Gray
+        $workerResults = foreach ($w in $liveWorkers) {
+            $url = "https://$w.mrmichaelhobbs123.workers.dev/"
+            $status = "?"
+            try {
+                $r = Invoke-WebRequest -Uri $url -UseBasicParsing -TimeoutSec 6 -ErrorAction Stop
+                $status = $r.StatusCode
+            } catch {
+                $status = if ($_.Exception.Response) { [int]$_.Exception.Response.StatusCode } else { "ERR" }
+            }
+            $tracked = if ($workerSourceMap.ContainsKey($w)) { $workerSourceMap[$w] }
+                       elseif ($w -in $trackedWorkerDirs) { "APPS/$($w.ToUpper())" }
+                       else { $null }
+            [pscustomobject]@{ name=$w; health=$status; tracked=$tracked; type="worker" }
+        }
+
+        # --- Health check Pages ---
+        Write-Host "  Checking $($livePages.Count) Pages projects..." -ForegroundColor Gray
+        $pageResults = foreach ($p in $livePages) {
+            $url = "https://$p.pages.dev/"
+            $status = "?"
+            try {
+                $r = Invoke-WebRequest -Uri $url -UseBasicParsing -TimeoutSec 6 -ErrorAction Stop
+                $status = $r.StatusCode
+            } catch {
+                $status = if ($_.Exception.Response) { [int]$_.Exception.Response.StatusCode } else { "ERR" }
+            }
+            $tracked = if ($p -in $trackedPageDirs) { "APPS/PAGES/$p" } else { $null }
+            [pscustomobject]@{ name=$p; health=$status; tracked=$tracked; type="pages" }
+        }
+
+        $allAssets   = @($workerResults) + @($pageResults)
+        # submission-api intentionally returns 404 on GET / (only POST /api/submit is valid)
+        $broken      = $allAssets | Where-Object { $_.health -ne 200 -and $_.health -ne "200" -and $_.name -ne "submission-api" }
+        $untracked   = $allAssets | Where-Object { -not $_.tracked }
+        $healthy     = $allAssets | Where-Object { $_.health -eq 200 -or $_.health -eq "200" }
+
+        # --- Print report ---
+        Write-Host ""
+        Write-Host "  WORKERS ($($liveWorkers.Count) live)" -ForegroundColor White
+        foreach ($w in $workerResults) {
+            $color = if ($w.health -eq 200) { "Green" } else { "Red" }
+            $tag   = if ($w.tracked) { "[✅ $($w.tracked)]" } else { "[❌ UNTRACKED]" }
+            Write-Host "    $($w.health)  $($w.name)  $tag" -ForegroundColor $color
+        }
+        Write-Host ""
+        Write-Host "  PAGES ($($livePages.Count) live)" -ForegroundColor White
+        foreach ($p in $pageResults) {
+            $color = if ($p.health -eq 200) { "Green" } else { "Red" }
+            $tag   = if ($p.tracked) { "[✅ $($p.tracked)]" } else { "[❌ UNTRACKED]" }
+            Write-Host "    $($p.health)  $($p.name)  $tag" -ForegroundColor $color
+        }
+        Write-Host ""
+        Write-Host "  SUMMARY" -ForegroundColor Cyan
+        Write-Host "    Total assets : $($allAssets.Count)"
+        Write-Host "    Healthy (200): $($healthy.Count)"  -ForegroundColor Green
+        Write-Host "    Broken       : $($broken.Count)"   -ForegroundColor $(if($broken.Count) {"Red"} else {"Green"})
+        Write-Host "    Untracked    : $($untracked.Count)" -ForegroundColor $(if($untracked.Count) {"Yellow"} else {"Green"})
+        Write-Host ""
+
+        [pscustomobject]@{
+            total_assets     = $allAssets.Count
+            healthy          = $healthy.Count
+            broken           = $broken.Count
+            untracked        = $untracked.Count
+            workers_live     = $liveWorkers.Count
+            pages_live       = $livePages.Count
+            broken_assets    = @($broken  | Select-Object name, health, tracked, type)
+            untracked_assets = @($untracked | Select-Object name, health, type)
+        } | ConvertTo-Json -Depth 4
     }
 }
