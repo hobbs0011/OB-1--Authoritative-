@@ -1,8 +1,8 @@
 {
+  "timestamp": "2026-05-17T19:04:10.7526857+07:00",
   "soul_ok": true,
-  "git_head": "be4b1f3 RISE: MegaMerge cleanup - remove legacy orphaned files and directories",
   "doctor_ok": true,
   "git_branch": "master",
-  "verify_ok": false,
-  "timestamp": "2026-05-15T21:03:13.1555465+07:00"
+  "git_head": "525f334 kilo: register Claude superboost agent + /claude command",
+  "verify_ok": true
 }

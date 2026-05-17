@@ -24,6 +24,7 @@ function handleCrisis() {
 
 let state   = "boot";
 let profile = {};
+let studentToken = "";        // HMAC token issued at onboarding, used to authenticate memory calls
 let chatHistory = [];         // messages for LLM context
 let chatRound = 0;            // current exchange count
 const CHAT_ROUNDS = 30;       // natural conversation — pronunciation coaching flows through OBI, not a forced dump
@@ -198,14 +199,18 @@ function student(text) { bubble("student", text); }
 
 // ── API ────────────────────────────────────────────────────
 
-async function api(path, method = "GET", body) {
+async function api(path, method = "GET", body, extraHeaders = {}) {
   const res = await fetch(path, {
     method,
-    headers: { "content-type": "application/json" },
+    headers: { "content-type": "application/json", ...extraHeaders },
     body: body ? JSON.stringify(body) : undefined
   });
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   return res.json();
+}
+
+function memHeaders() {
+  return studentToken ? { "X-Student-Token": studentToken } : {};
 }
 
 async function withTyping(fn) {
@@ -282,7 +287,7 @@ function isGreeting(text) {
 // ── Onboarding ─────────────────────────────────────────────
 
 async function submitOnboarding() {
-  await withTyping(() => api("/api/onboarding", "POST", {
+  const res = await withTyping(() => api("/api/onboarding", "POST", {
     studentId:       profile.studentId,
     fullName:        profile.fullName,
     currentCity:     profile.currentCity,
@@ -295,6 +300,10 @@ async function submitOnboarding() {
     learningHistory: DEFAULTS.learningHistory,
     motivationNow:   profile.goals
   }));
+  if (res?.studentToken) {
+    studentToken = res.studentToken;
+    try { sessionStorage.setItem("net_student_token", studentToken); } catch {}
+  }
   try { localStorage.setItem("net_profile", JSON.stringify(profile)); } catch {}
 }
 
@@ -387,7 +396,7 @@ async function reactLLM(text) {
     chatMessages.push({ role: "assistant", content: reply });
     // Persist exchange to server ledger so Obi remembers this student next session
     if (profile.studentId) {
-      api("/api/memory", "POST", { studentId: profile.studentId, exchange: { user: text, obi: reply } }).catch(() => {});
+      api("/api/memory", "POST", { studentId: profile.studentId, exchange: { user: text, obi: reply } }, memHeaders()).catch(() => {});
     }
     return reply;
   } catch (err) {
@@ -684,9 +693,10 @@ async function boot() {
 
   if (saved?.studentId && saved?.fullName) {
     profile = saved;
+    try { studentToken = sessionStorage.getItem("net_student_token") || ""; } catch {}
     // Restore conversation memory from server so Obi knows this student
     try {
-      const mem = await api(`/api/memory?studentId=${encodeURIComponent(profile.studentId)}`);
+      const mem = await api(`/api/memory?studentId=${encodeURIComponent(profile.studentId)}`, "GET", undefined, memHeaders());
       if (mem?.memory?.length) {
         for (const ex of mem.memory.slice(-10)) {
           if (ex?.user) chatMessages.push({ role: "user",      content: ex.user });

@@ -8,6 +8,13 @@ compatibility_flags = ["nodejs_compat"]
 # pattern = "www.naturalenglishtraining.com/*"
 # zone_name = "naturalenglishtraining.com"
 
+# KV namespace for distributed rate limiting (survives worker restarts)
+# To provision: wrangler kv namespace create RATELIMIT
+# Then paste the returned id below
+# [[kv_namespaces]]
+# binding = "RATELIMIT"
+# id = "<paste-id-here>"
+
 [assets]
 directory = "./public"
 binding = "ASSETS"
@@ -39,6 +46,14 @@ new_sqlite_classes = ["LedgerDO"]
 [[migrations]]
 tag = "v4-ship-memory"
 new_sqlite_classes = ["MemoryDO"]
+
+[[migrations]]
+tag = "v2-student-brain-v2-2026-04-20"
+new_sqlite_classes = []
+
+[[migrations]]
+tag = "v5-drop-student-brain"
+deleted_classes = ["StudentBrainV2"]
 
 [vars]
 APP_NAME = "Natural English Training"

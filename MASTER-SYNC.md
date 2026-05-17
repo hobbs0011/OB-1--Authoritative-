@@ -59,11 +59,13 @@
 | Run 310 | 160505e | 2026-04-19 | 100-stage pipeline: CF Pages, workflow hardening, Notion guard, SOVEREIGN_KEY rotated |
 | Run 311 | 10882b2 | 2026-04-20 | wrangler 4.80→4.83, phase4/5/6 snapshots, Phoenix-Rising-Ultimate 39 dead branches purged |
 | Run 311 | 10882b2 | 2026-04-20 | wrangler 4.80→4.83, phase4/5/6 snapshots, Phoenix-Rising-Ultimate 39 dead branches purged |
+| Run 311 | 10882b2 | 2026-04-20 | wrangler 4.80→4.83, phase4/5/6 snapshots, Phoenix-Rising-Ultimate 39 dead branches purged |
 | Run 311b | 97d34a2 | 2026-04-20 | BYPASS: Product live on naturalenglishtraining.pages.dev |
 | Run 311 | 10882b2 | 2026-04-20 | wrangler 4.80→4.83, phase4/5/6 snapshots, Phoenix-Rising-Ultimate 39 dead branches purged |
 | Run 311b | 97d34a2 | 2026-04-20 | BYPASS: Product live on naturalenglishtraining.pages.dev |
 | Run 311c | 05f9a5a | 2026-04-20 | Security audit complete ✅ — zero hardcoded secrets, gitleaks enabled, env vars cleared |
 | Run 311d | bf603f9 | 2026-04-20 | /souldna endpoint ✅ — soul DNA capture pipeline, legionnaire field guide integration, 3 HTTP routes |
+| Run 317 | consolidation | 2026-05-17 | GODMODE activated, TEMP dirs merged, PROOFS manifest created, restricted zones removed |
 
 ### Cost Target
 

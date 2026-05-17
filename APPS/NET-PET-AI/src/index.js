@@ -6,6 +6,7 @@
 
 import { securityMiddleware, sanitizeInput, validateStudentId } from './security.js';
 import { extractWeaknesses, buildWeaknessPrompt, buildReEntryPrompt, buildRewardSignals, buildRewardPrompt } from './memory-brain.js';
+import { trackTokens, getUsage } from './token-track.js';
 import { queryLessons, writeProgress, queryProgress, syncStudentProgress, writeSoulDNA, writeChatExchange } from './notion.js';
 import { sendZaloMessage, checkAndEscalate, runEscalationSweep, getAccountabilityLinks } from './zalo.js';
 import { generatePosts, routePost, buildInsightPost } from './growth-engine.js';
@@ -383,8 +384,8 @@ async function handleAPI(path, request, env, url) {
   if (path === "/api/onboarding" && method === "POST") { const body = await request.json(); return handleOnboarding(body, env); }
 
   // Memory
-  if (path === "/api/memory" && method === "POST") { const body = await request.json(); return handleMemorySave(body, env); }
-  if (path === "/api/memory" && method === "GET") { return handleMemoryGet(url.searchParams.get("studentId") || "", env); }
+  if (path === "/api/memory" && method === "POST") { const body = await request.json(); return handleMemorySave(body, env, request); }
+  if (path === "/api/memory" && method === "GET") { return handleMemoryGet(url.searchParams.get("studentId") || "", env, request); }
 
   // Progress + Weakness tracking
   if (path === "/api/progress" && method === "GET") { return handleProgress(url.searchParams.get("studentId") || "", env); }
@@ -527,24 +528,15 @@ async function handleAPI(path, request, env, url) {
   if (path === "/api/growth/log" && method === "GET") { return handleGrowthLog(parseInt(url.searchParams.get("limit") || "20"), env); }
 
   // ── Virality Engine ────────────────────────────────────────────────────
-  // POST /api/virality/metrics — Submit post engagement metrics
-  if (path === "/api/virality/metrics" && method === "POST") { return handleViralityProxy("/virality/metrics", "POST", body, env); }
-  // GET /api/virality/metrics — Get recent post metrics
+  if (path === "/api/virality/metrics" && method === "POST") { const body = await request.json(); return handleViralityProxy("/virality/metrics", "POST", body, env); }
   if (path === "/api/virality/metrics" && method === "GET") { return handleViralityProxy("/virality/metrics", "GET", null, env, url.searchParams); }
-  // GET /api/virality/top — Top performing posts
   if (path === "/api/virality/top" && method === "GET") { return handleViralityProxy("/virality/top", "GET", null, env, url.searchParams); }
-  // POST /api/virality/experiment — Create experiment variant group
-  if (path === "/api/virality/experiment" && method === "POST") { return handleViralityProxy("/virality/experiment", "POST", body, env); }
-  // GET /api/virality/experiments — List experiments by status
+  if (path === "/api/virality/experiment" && method === "POST") { const body = await request.json(); return handleViralityProxy("/virality/experiment", "POST", body, env); }
   if (path === "/api/virality/experiments" && method === "GET") { return handleViralityProxy("/virality/experiments", "GET", null, env, url.searchParams); }
-  // GET /api/virality/patterns — Get winning content patterns
   if (path === "/api/virality/patterns" && method === "GET") { return handleViralityProxy("/virality/patterns", "GET", null, env, url.searchParams); }
-  // POST /api/virality/learn — Trigger learning loop manually
   if (path === "/api/virality/learn" && method === "POST") { return handleViralityLearn(env); }
-  // POST /api/virality/score — Calculate virality score for given metrics
-  if (path === "/api/virality/score" && method === "POST") { return handleViralityScore(body); }
-  // POST /api/virality/variants — Generate hook variants from insight
-  if (path === "/api/virality/variants" && method === "POST") { return handleViralityVariants(body, env); }
+  if (path === "/api/virality/score" && method === "POST") { const body = await request.json(); return handleViralityScore(body); }
+  if (path === "/api/virality/variants" && method === "POST") { const body = await request.json(); return handleViralityVariants(body, env); }
 
   return json({ error: "Not found" }, 404);
 }
@@ -1300,6 +1292,8 @@ async function handleTeacherDashboard(env) {
 
 async function handleOnboarding(body, env) {
   if (!body.studentId) return json({ error: "studentId required" }, 400);
+  const idCheck = validateStudentId(body.studentId);
+  if (!idCheck.valid) return json({ error: idCheck.error }, 400);
   const stub = env.PROFILES.get(env.PROFILES.idFromName(body.studentId));
   const res = await stub.fetch(new Request("https://do/onboarding", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }));
 
@@ -1310,19 +1304,60 @@ async function handleOnboarding(body, env) {
   }
   // Register in roster so digest + flags work (must await — CF Workers kills fire-and-forget without waitUntil)
   await upsertRoster(body.studentId, { fullName: body.fullName, englishLevel: body.englishLevel }, env).catch(() => {});
-  return res;
+
+  // Issue a student-scoped HMAC token so the client can authenticate memory calls
+  const key = await crypto.subtle.importKey(
+    "raw",
+    new TextEncoder().encode(env.SESSION_SECRET || "phoenix-fallback-dev-key"),
+    { name: "HMAC", hash: "SHA-256" },
+    false,
+    ["sign"]
+  );
+  const sig = await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(body.studentId));
+  const studentToken = Array.from(new Uint8Array(sig)).map(b => b.toString(16).padStart(2, "0")).join("");
+
+  const resData = await res.json().catch(() => ({}));
+  return json({ ...resData, studentToken });
 }
 
 // ── Memory (mutable scratch — Ledger is the permanent record) ────────────────
 
-async function handleMemorySave(body, env) {
+// Verify that the X-Student-Token header matches the requested studentId.
+// Token = HMAC-SHA256(studentId, SESSION_SECRET). Issued at onboarding, stored client-side.
+async function _verifyStudentToken(studentId, token, env) {
+  if (!token) return false;
+  const key = await crypto.subtle.importKey(
+    "raw",
+    new TextEncoder().encode(env.SESSION_SECRET || "phoenix-fallback-dev-key"),
+    { name: "HMAC", hash: "SHA-256" },
+    false,
+    ["sign"]
+  );
+  const sig = await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(studentId));
+  const expected = Array.from(new Uint8Array(sig)).map(b => b.toString(16).padStart(2, "0")).join("");
+  return expected === token;
+}
+
+async function handleMemorySave(body, env, request) {
   const studentId = body.studentId || "unknown";
+  const idCheck = validateStudentId(studentId);
+  if (!idCheck.valid) return json({ error: idCheck.error }, 400);
+  const token = request?.headers?.get("X-Student-Token") || body._token || "";
+  if (!await _verifyStudentToken(studentId, token, env)) {
+    return json({ error: "Unauthorized" }, 401);
+  }
   const stub = env.SESSIONS.get(env.SESSIONS.idFromName(studentId));
   return stub.fetch(new Request("https://do/memory/save", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }));
 }
 
-async function handleMemoryGet(studentId, env) {
+async function handleMemoryGet(studentId, env, request) {
   if (!studentId) return json({ memory: [] });
+  const idCheck = validateStudentId(studentId);
+  if (!idCheck.valid) return json({ error: idCheck.error }, 400);
+  const token = request?.headers?.get("X-Student-Token") || request?.url && new URL(request.url).searchParams.get("_token") || "";
+  if (!await _verifyStudentToken(studentId, token, env)) {
+    return json({ error: "Unauthorized" }, 401);
+  }
   const stub = env.SESSIONS.get(env.SESSIONS.idFromName(studentId));
   return stub.fetch(new Request("https://do/memory/get"));
 }

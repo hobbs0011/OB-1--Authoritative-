@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx wrangler *)",
+      "Bash(curl -s \"https://api.cloudflare.com/client/v4/accounts/3c7b1766bd8fdc9e01211d2b390315ea/workers/subdomain\" -H \"X-Auth-Email: mrmichaelhobbs123@gmail.com\" --config -)",
+      "PowerShell(Get-ChildItem \"C:\\\\Users\\\\mrmic\\\\.wrangler\\\\logs\\\\\" | Sort-Object LastWriteTime -Descending | Where-Object { $_.Length -gt 1000 } | Select-Object -First 10 | ForEach-Object { $path = $_.FullName; $content = Get-Content $path -Raw; if \\($content -match 'workers\\\\.dev'\\) { Write-Host \"=== $path ===\"; $content | Select-String 'workers\\\\.dev' | Select-Object -First 3 } })",
+      "PowerShell(Get-ChildItem \"C:\\\\Users\\\\mrmic\\\\.wrangler\\\\logs\\\\\" | Sort-Object LastWriteTime -Descending | Select-Object -First 30 | ForEach-Object { $content = Get-Content $_.FullName -Raw -ErrorAction SilentlyContinue; if \\($content -match 'workers\\\\.dev|deployed to|Deployed to'\\) { Write-Host \"FILE: $\\($_.Name\\)\"; $content | Select-String 'workers\\\\.dev|deployed to|Deployed to' } })",
+      "Bash(ls \"C:\\\\Users\\\\mrmic\\\\.claude\\\\projects\\\\\" 2>&1)",
+      "Read(//c/Users/mrmic/.claude/**)",
+      "PowerShell(npx wrangler workers list 2>&1)",
+      "Skill(update-config)",
+      "Skill(update-config:*)",
+      "PowerShell($key = $env:CF_API_KEY; $r = curl -s \"https://api.cloudflare.com/client/v4/accounts/3c7b1766bd8fdc9e01211d2b390315ea/workers/subdomain\" -H \"X-Auth-Email: mrmichaelhobbs123@gmail.com\" -H \"X-Auth-Key: $key\"; Write-Output $r)",
+      "PowerShell(Get-Content \"$env:USERPROFILE\\\\.wrangler\\\\logs\\\\wrangler-2026-05-09_13-23-35_130.log\" -ErrorAction SilentlyContinue | Select-String \"workers.dev|url|URL\" | Select-Object -First 20; Get-ChildItem \"$env:USERPROFILE\\\\.wrangler\\\\logs\\\\\" | Sort-Object LastWriteTime | Select-Object Name, LastWriteTime -Last 5)",
+      "PowerShell($key = $env:CF_API_KEY; $headers = @{ \"X-Auth-Email\" = \"mrmichaelhobbs123@gmail.com\"; \"X-Auth-Key\" = $key }; $r = Invoke-RestMethod -Uri \"https://api.cloudflare.com/client/v4/accounts/3c7b1766bd8fdc9e01211d2b390315ea/workers/subdomain\" -Headers $headers; $r.result)",
+      "PowerShell($token = \"cfk_Y1Lh80L9zJ87gQlwO5bIXt0uuM4nBCanjkk3StN93e4c17fe\"; $r = Invoke-RestMethod -Uri \"https://api.cloudflare.com/client/v4/user/tokens/verify\" -Headers @{ \"Authorization\" = \"Bearer $token\" }; $r | ConvertTo-Json)",
+      "PowerShell(Get-ChildItem Env: | Where-Object { $_.Name -match \"CLOUD|CF_|WRANGLER|WORKERS\" } | Select-Object Name, Value)",
+      "PowerShell(New-Item -ItemType Directory -Force \"D:\\\\OB-1\\\\PROJECTS\\\\phoenix-coder\\\\mcp-server\")",
+      "PowerShell(curl -s \"https://phoenix-coder.mrmichaelhobbs123.workers.dev/api/status\")",
+      "PowerShell(curl -s -X POST \"https://phoenix-coder.mrmichaelhobbs123.workers.dev/api/code\" -H \"Content-Type: application/json\" -d $body)",
+      "PowerShell($body = '{\"task\":\"Write a TypeScript hello world function that takes a name parameter and returns a greeting string\"}')",
+      "mcp__claude_ai_Cloudflare_Developer_Platform__set_active_account",
+      "mcp__claude_ai_Cloudflare_Developer_Platform__workers_get_worker_code",
+      "PowerShell($token = $env:CLOUDFLARE_API_KEY; $r = Invoke-WebRequest -Uri \"https://api.cloudflare.com/client/v4/accounts/3c7b1766bd8fdc9e01211d2b390315ea/ai-gateway/gateways\" -Headers @{\"Authorization\"=\"Bearer $token\"} -UseBasicParsing 2>&1; Write-Output $r.Content)",
+      "PowerShell(curl -s https://phoenix-coder.mrmichaelhobbs123.workers.dev/api/status)"
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+{
+	"permissions": {
+		"allow": [
+			"Bash(npx *)",
+			"Bash(wrangler *)"
+		],
+		"additionalDirectories": [
+			"D:\\OB-1\\PROJECTS\\phoenix-coder"
+		]
+	}
+}

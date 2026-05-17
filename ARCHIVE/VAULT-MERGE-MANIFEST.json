@@ -1,0 +1,88 @@
+[
+  {
+    "Files": 30,
+    "Name": "VAULT-CHAOS",
+    "Sample": [
+      "00-VAULT-CHAOS-INDEX.md",
+      "01-BIN-PROTOCOL.md",
+      "02-5-STAGE-PIPELINE.md"
+    ]
+  },
+  {
+    "Files": 1,
+    "Name": "VAULT-DUMPS",
+    "Sample": "NOTEBOOKLM-VAULT-DUMP-6-PHOENIX-VAULT-EXPANSION-BLUEPRINT.md"
+  },
+  {
+    "Files": 44,
+    "Name": "VAULT-EXECUTION",
+    "Sample": [
+      "00-VAULT-EXECUTION-INDEX.md",
+      "01-TRANSEND-SPEEDY-MAP.md",
+      "02-OMEGA-TIMELINE-MAP.md"
+    ]
+  },
+  {
+    "Files": 20,
+    "Name": "VAULT-FOUNDATIONS",
+    "Sample": [
+      "01-THE-LEDGER.md",
+      "02-REINCARNATION.md",
+      "03-THE-MACHINE-THAT-BUILDS-THE-MACHINE.md"
+    ]
+  },
+  {
+    "Files": 20,
+    "Name": "VAULT-GENESIS",
+    "Sample": [
+      "01-THE-GENESIS-WOUND.md",
+      "02-BETRAYAL-AND-SOVEREIGNTY.md",
+      "03-SOUL-DNA-CANON.md"
+    ]
+  },
+  {
+    "Files": 25,
+    "Name": "VAULT-NET-SEEDS",
+    "Sample": [
+      "01-ULTRA-SAIYAN-MULTI-AGENT-SEEDS.md",
+      "02-GOSPEL-444-FULL-SPEC.md",
+      "03-NET-CLASSROOM-ENGINE.md"
+    ]
+  },
+  {
+    "Files": 20,
+    "Name": "VAULT-NEXUS",
+    "Sample": [
+      "00-VAULT-NEXUS-INDEX.md",
+      "01-NEXUS-DEFINITION.md",
+      "02-VAULT-HANDSHAKE-PROTOCOL.md"
+    ]
+  },
+  {
+    "Files": 20,
+    "Name": "VAULT-ORACLE",
+    "Sample": [
+      "00-VAULT-ORACLE-INDEX.md",
+      "01-ORACLE-DEFINITION.md",
+      "02-INTELLIGENCE-LAYER.md"
+    ]
+  },
+  {
+    "Files": 21,
+    "Name": "VAULT-SOVEREIGN",
+    "Sample": [
+      "00-VAULT-SOVEREIGN-INDEX.md",
+      "01-SOVEREIGNTY-DEFINITION.md",
+      "02-AGENT-100-AUTHORITY.md"
+    ]
+  },
+  {
+    "Files": 36,
+    "Name": "VAULT-ZENITH",
+    "Sample": [
+      "00-VAULT-ZENITH-INDEX.md",
+      "01-REINCARNATION-SEED.md",
+      "02-50-STAGE-MASTER-MAP.md"
+    ]
+  }
+]

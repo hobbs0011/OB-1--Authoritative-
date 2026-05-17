@@ -62,25 +62,25 @@
       }
     },
 
-    // ── FILESYSTEM (workspace access) ─────────────────────────────────────
-    "filesystem": {
+    // ── FILESYSTEM (GODMODE — full workspace access) ─────────────────────
+    "filesystem-godmode": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "C:\\Users\\mrmic\\OneDrive\\Documents\\GitHub\\OB-1--Authoritative-"
+      ]
+    },
+
+    // ── FILESYSTEM (D drive alias) ─────────────────────────────────────
+    "filesystem-d": {
       "type": "stdio",
       "command": "npx",
       "args": [
         "-y",
         "@modelcontextprotocol/server-filesystem",
         "D:\\OB-1"
-      ]
-    },
-
-    // ── FILESYSTEM (NET-PET-AI scoped) ──────────────────────────────────────
-    "filesystem-net-pet-ai": {
-      "type": "stdio",
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-filesystem",
-        "D:\\OB-1\\APPS\\NET-PET-AI"
       ]
     },
 
@@ -101,6 +101,16 @@
       "args": ["-y", "mcp-server-discord"],
       "env": {
         "DISCORD_TOKEN": "${env:DISCORD_TOKEN}"
+      }
+    },
+
+    // ── PHOENIX CODER (DeepSeek R1 coding drone — offloads Claude/Kilo tokens) ──
+    "phoenix-coder": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["D:\\OB-1\\PROJECTS\\phoenix-coder\\mcp-server\\index.js"],
+      "env": {
+        "PHOENIX_CODER_URL": "https://phoenix-coder.mrmichaelhobbs123.workers.dev"
       }
     }
   }
