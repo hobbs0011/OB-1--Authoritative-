@@ -1,6 +1,6 @@
 # Turn-Key Deployment Packet — Survive a Brainrot
 
-**Status:** 🟡 Awaiting 5 code files + API keys
+**Status:** 🟡 Awaiting API keys only — all code files present
 **Last updated:** 2026-03-25 19:43 ICT
 
 ---
@@ -19,24 +19,24 @@
 
 ### ServerScriptService (Server Scripts)
 
-| # | Script Name | Source File | Status |
-|---|-------------|-------------|--------|
-| 1 | GameMain | GameMain_PHASE1_REVISED.lua | 🔴 Need file |
-| 2 | MonetizationServer | MonetizationServer.lua | ✅ Ready |
+| # | Script Name         | Source File                  | Status   |
+|---|---------------------|------------------------------|----------|
+| 1 | GameMain            | GameMain_PHASE1_REVISED.lua  | ✅ Ready |
+| 2 | MonetizationServer  | MonetizationServer.lua       | ✅ Ready |
 
 ### StarterPlayerScripts (Client Scripts)
 
-| # | Script Name | Source File | Status |
-|---|-------------|-------------|--------|
-| 3 | HUDController | HUDController_PHASE1_REVISED.lua | 🔴 Need file |
+| # | Script Name    | Source File                       | Status   |
+|---|----------------|-----------------------------------|----------|
+| 3 | HUDController  | HUDController_PHASE1_REVISED.lua  | ✅ Ready |
 
 ### ReplicatedStorage (Module Scripts)
 
-| # | Script Name | Source File | Status |
-|---|-------------|-------------|--------|
-| 4 | CodexData | CodexData.lua | 🔴 Need file |
-| 5 | CodexClient | CodexClient.lua | 🔴 Need file |
-| 6 | LedgerSchema | LedgerSchema.lua | ✅ Ready |
+| # | Script Name   | Source File     | Status   |
+|---|---------------|-----------------|----------|
+| 4 | CodexData     | CodexData.lua   | ✅ Ready |
+| 5 | CodexClient   | CodexClient.lua | ✅ Ready |
+| 6 | LedgerSchema  | LedgerSchema.lua| ✅ Ready |
 
 ---
 

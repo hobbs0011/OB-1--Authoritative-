@@ -37,9 +37,9 @@ Railway auto-deploys from GitHub. Push code → bot restarts. That's it.
 
 1. Go to [railway.app](https://railway.app) → sign in with GitHub (`hobbs0011`)
 2. Click **New Project → Deploy from GitHub Repo**
-3. Select `hobbs0011/Phoenix-Rising-Protocol-Ultimate`
+3. Select `Phoenix-Rising-Ai-Solutions/OB-1--Authoritative-`
 4. Railway will detect the repo. In the new service's **Settings**:
-   - Set **Root Directory** to `DISCORD-BOT`
+   - Set **Root Directory** to `APPS/discord-bot`
    - Railway will auto-detect the Dockerfile
 5. Go to the **Variables** tab and add:
 
@@ -63,13 +63,14 @@ WEEKLY_UPDATE_CRON=0 3 * * 2
 TZ=Asia/Bangkok
 ```
 
-6. Click **Deploy** → Railway builds the Docker image and starts the bot
+6. Click **Deploy** → Railway detects the Dockerfile and builds the image, then starts the bot
 7. Check the **Logs** tab — you should see the bot come online
 
 #### Step 4: Done. Go live.
 
 That's it. From now on:
-- **Every git push** to `hobbs0011/Phoenix-Rising-Protocol-Ultimate` that changes `DISCORD-BOT/` → Railway auto-redeploys
+
+- **Every git push** to `Phoenix-Rising-Ai-Solutions/OB-1--Authoritative-` that changes `APPS/discord-bot/` → Railway auto-redeploys
 - Bot runs **24/7** with automatic restarts on crash
 - Logs visible in Railway dashboard
 - No SSH, no VPS, no cron jobs, no PM2
@@ -130,8 +131,8 @@ No manual deploy commands. No SSH. No restart scripts.
 If Railway doesn't work out:
 
 1. Go to [render.com](https://render.com) → sign in with GitHub
-2. New → Background Worker → connect `hobbs0011/Phoenix-Rising-Protocol-Ultimate`
-3. Root Directory: `DISCORD-BOT`
+2. New → Background Worker → connect `Phoenix-Rising-Ai-Solutions/OB-1--Authoritative-`
+3. Root Directory: `APPS/discord-bot`
 4. Build Command: `npm ci --omit=dev`
 5. Start Command: `node src/index.js`
 6. Add all environment variables
@@ -153,9 +154,9 @@ For truly $0/mo hosting with 24GB RAM:
 
 ## Architecture Note
 
-The bot lives inside the `Phoenix-Rising-Protocol-Ultimate` monorepo at `DISCORD-BOT/`.
-Railway's **Root Directory** feature isolates it — only `DISCORD-BOT/` changes trigger redeploys.
-This means pulse engine commits to `CANON/` won't cause unnecessary bot restarts.
+The bot lives inside the `OB-1--Authoritative-` monorepo at `APPS/discord-bot/`.
+Railway's **Root Directory** feature isolates it — only `APPS/discord-bot/` changes trigger redeploys.
+This means commits to other paths in the repo won't cause unnecessary bot restarts.
 
 ---
 
