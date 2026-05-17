@@ -19,8 +19,8 @@ This file is the authoritative inventory of all live Cloudflare assets. Run `pws
 | net-obi-api | net-obi-api.mrmichaelhobbs123.workers.dev | 2026-04-14 | ❌ 404 | ❌ | Legacy API worker |
 | net-core | net-core.mrmichaelhobbs123.workers.dev | 2026-04-14 | ❌ 404 | ❌ | Legacy core worker |
 | phoenix-coder | phoenix-coder.mrmichaelhobbs123.workers.dev | 2026-05-17 | ❌ 404 | ❌ PROJECTS/phoenix-coder | Standalone repo, not APPS/ |
-| soul-logger | soul-logger.mrmichaelhobbs123.workers.dev | 2026-05-06 | ✅ 200 | ❌ | Untracked — source unknown |
-| submission-api | submission-api.mrmichaelhobbs123.workers.dev | 2026-05-05 | ✅ 200 | ❌ | Handles Tiger Assessment submissions |
+| soul-logger | soul-logger.mrmichaelhobbs123.workers.dev | 2026-05-06 | ✅ 200 | ✅ APPS/SOUL-LOGGER | Chat dump ingestion drone. DB: soul-archive. Parsers: claude/chatgpt/notebooklm/vscode/gemini |
+| submission-api | submission-api.mrmichaelhobbs123.workers.dev | 2026-05-05 | ✅ 200 | ✅ APPS/SUBMISSION-API | NET assessment submissions → net-submissions D1. Resend email notify. 9 test rows in DB. |
 | frosty-bush-c14f | frosty-bush-c14f.mrmichaelhobbs123.workers.dev | 2025-12-28 | ❓ | ❌ | Early prototype — likely orphaned |
 | phoenix-v5-test | phoenix-v5-test.mrmichaelhobbs123.workers.dev | 2025-12-26 | ❌ 404 | ❌ | Early prototype — likely orphaned |
 
@@ -34,13 +34,13 @@ This file is the authoritative inventory of all live Cloudflare assets. Run `pws
 | naturalenglishtraining | naturalenglishtraining.pages.dev | 4 weeks ago | ✅ 200 | ❌ | Marketing site — primary brand domain |
 | net-marketing-landing | net-marketing-landing.pages.dev | 1 week ago | ✅ 200 | ❌ | Landing page |
 | netpetai-presentation | netpetai-presentation.pages.dev | 4 days ago | ✅ 200 | ❌ | Presentation deck |
-| tigers-4room | tigers-4room.pages.dev | 1 week ago | ❌ 404 | ❌ | Deployed but empty/broken |
-| cubs-4room | cubs-4room.pages.dev | 1 week ago | ❌ 404 | ❌ | Deployed but empty/broken |
-| professional-4room | professional-4room.pages.dev | 1 week ago | ❌ 404 | ❌ | Deployed but empty/broken |
-| career-4room | career-4room.pages.dev | 1 week ago | ❌ 404 | ❌ | Deployed but empty/broken |
-| university-4room | university-4room.pages.dev | 1 week ago | ❌ 404 | ❌ | Deployed but empty/broken |
-| tigers-selection | tigers-selection.pages.dev | 1 week ago | ❌ 404 | ❌ | Deployed but empty/broken |
-| professional-selection | professional-selection.pages.dev | 1 week ago | ❌ 404 | ❌ | Deployed but empty/broken |
+| tigers-4room | tigers-4room.pages.dev | 2026-05-18 | ✅ 200 | ✅ APPS/PAGES/tigers-4room | NET Tigers child assessment (8-17). RESCUED + promoted. |
+| cubs-4room | cubs-4room.pages.dev | 2026-05-18 | ✅ 200 | ✅ APPS/PAGES/cubs-4room | NET Cubs child assessment (3-7). RESCUED + promoted. |
+| professional-4room | professional-4room.pages.dev | 2026-05-18 | ✅ 200 | ✅ APPS/PAGES/professional-4room | NET Professional assessment. RESCUED + promoted. |
+| career-4room | career-4room.pages.dev | 2026-05-18 | ✅ 200 | ✅ APPS/PAGES/career-4room | NET Career assessment. RESCUED + promoted. |
+| university-4room | university-4room.pages.dev | 2026-05-18 | ✅ 200 | ✅ APPS/PAGES/university-4room | NET University assessment. RESCUED + promoted. |
+| tigers-selection | tigers-selection.pages.dev | 2026-05-18 | ✅ 200 | ✅ APPS/PAGES/tigers-selection | Selection funnel: Cubs vs Tigers. RESCUED + promoted. |
+| professional-selection | professional-selection.pages.dev | 2026-05-18 | ✅ 200 | ✅ APPS/PAGES/professional-selection | Selection funnel: University vs Career. RESCUED + promoted. |
 | net-marketing | net-marketing.pages.dev | 1 week ago | ❌ 404 | ❌ | Deployed but broken |
 | obi-landing | obi-landing.pages.dev | 2 weeks ago | ❌ 404 | ❌ | Deployed but broken |
 
