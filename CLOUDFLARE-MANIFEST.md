@@ -120,12 +120,12 @@ Apps in `APPS/` with no Cloudflare Worker or Pages deployment entry in this mani
 
 | Name | Deploy Target | Status | Notes |
 |---|---|---|---|
-| EducationSystemsDevelopment | NONE | LOCAL-ONLY | Empty directory — 0 files, 0 bytes. Created as placeholder. No code, no deploy config. |
+| EducationSystemsDevelopment | NONE | DELETED | Empty directory — 0 files, 0 bytes. Created as placeholder. Removed from git and disk 2026-05-18. |
 | Phoenix-Rising-FullStackMarketing | NONE | LOCAL-ONLY | Marketing art/asset library — logos, iconology, social graphics, brand assets. No deploy target (static image repo). Canonical image library for NET/OBI brand. |
 | NET-PET-AI-merge | N/A | DEAD | Listed in merge commit (2f7fbb2) as an `AA` entry — empty directory artifact from workspace merge. Does not exist on disk. No content, no action needed. |
-| TRAIN-6-7 | NONE | LOCAL-ONLY | Roblox game design docs only in APPS/. Full source (code, battle reports, specs) lives at root `TRAIN-67/`. `APPS/TRAIN-6-7/` contains only 3 empty placeholder items. The root `TRAIN-67/` is the real source. Stub placeholder. |
+| TRAIN-67 | NONE | LOCAL-ONLY | Roblox game "Survive a Brainrot" — 41 Lua modules, full battle reports, specs, launch docs. No Cloudflare deploy target (Roblox-hosted game, not a CF worker). Moved from root `TRAIN-67/` → `APPS/TRAIN-67/` 2026-05-18. Stub `APPS/TRAIN-6-7/` (5 files) deleted. |
 | discord-bot | Railway / Render / Fly.io | LOCAL-ONLY | Train 6-7 Discord bot (`train67-discord-bot`). Node.js + discord.js. Not yet deployed. README lists Railway/Render/Fly.io as hosting options. No deploy secrets configured. |
-| firebase | Firebase Hosting | UNKNOWN | Firebase config for NET OBI — static hosting + Firestore student profiles. Has `firebase.json`, `firestore.rules`. No `.firebaserc` project ID confirmed. Deploy status unknown — Firebase console not audited. |
+| firebase | Firebase Hosting | LOCAL-ONLY (never configured) | Firebase config for NET OBI — static hosting + Firestore student profiles. `.firebaserc` has `"TODO_SET_PROJECT_ID"` — project ID never set. No functions source dir. Never deployed. Config is a template scaffold only. |
 | obi-chrome-extension | Chrome Web Store | LOCAL-ONLY | OBI Chrome Extension v0.3.0 (manifest_version 3). AI English tutor + homework checker. Not published — sideload only per `SIDELOAD-GUIDE.md`. |
 | obi-vscode-command-station | VS Code Marketplace | LOCAL-ONLY | OBI Command Station VS Code extension v1.0.0. Phoenix Rising Protocol — command tunnel. Not published to marketplace. |
 | phoenix-ob1 | CF Workers | DEAD | `phoenix-ob1-system` worker — v139-TRUTH-SEALED, deployed to `mrmichaelhobbs1234.workers.dev` (old account, note: `1234` not `123`). 5 DO classes with migration tags. NOT in current CF account (`mrmichaelhobbs123`). Treat as dead — old account artifact. Has unique DO architecture (5 classes). |
