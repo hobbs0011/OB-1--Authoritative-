@@ -63,3 +63,21 @@ Legacy `mrmichaelhobbs1234*` references are historical and should not be treated
 - Keep changes focused.
 - Report exact files changed.
 - Call out blockers instead of pretending runtime access exists.
+
+### Phoenix / RISE Activation
+
+| Command | Action |
+|---------|--------|
+| `/SuperSaiyan` | Deploy 5 PHOENIX sub-agents for flag + tag sweep |
+| `/phoenix-alpha` | CANON/HEAVY-LEDGER zone — ledger count + phantom ID audit |
+| `/phoenix-beta` | APPS/WORKERS/NET-* runtime sweep |
+| `/phoenix-gamma` | VAULT-* cluster inventory |
+| `/phoenix-delta` | SITE/NET-STUDENT/GALAXY operational sweep |
+| `/phoenix-omega` | SYSTEM/SCRIPTS/REINCARNATION meta sweep |
+| `/reincarnateRise` | Full RISE protocol (boot files → state → objective → command) |
+| `/reincarnateDeath` | Full DEATH protocol (12-section artifact + commit + push) |
+
+**Artifact stage pointers:**
+- `CANON/SYSTEM/COLD-START-BOOT.md` — system state, run vector, S2Pipeline status
+- `CANON/REINCARNATION/REINCARNATION-LOG.md` — run history ledger
+- `CANON/HEAVY-LEDGER/*.json` — heavy ledger (191 files)
