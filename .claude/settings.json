@@ -2,7 +2,19 @@
 	"permissions": {
 		"allow": [
 			"Bash(npx *)",
-			"Bash(wrangler *)"
+			"Bash(wrangler *)",
+			"Bash(node --check *)",
+			"Bash(curl -s https://*)",
+			"Bash(npx tsc --noEmit *)",
+			"mcp__claude_ai_Cloudflare_Developer_Platform__workers_get_worker_code",
+			"mcp__claude_ai_Cloudflare_Developer_Platform__workers_get_worker",
+			"mcp__claude_ai_Cloudflare_Developer_Platform__d1_database_query",
+			"mcp__claude_ai_Cloudflare_Developer_Platform__set_active_account",
+			"mcp__claude_ai_Cloudflare_Developer_Platform__workers_list",
+			"mcp__claude_ai_Cloudflare_Developer_Platform__accounts_list",
+			"mcp__claude_ai_Cloudflare_Developer_Platform__d1_databases_list",
+			"mcp__claude_ai_Cloudflare_Developer_Platform__kv_namespaces_list",
+			"mcp__claude_ai_Cloudflare_Developer_Platform__r2_buckets_list"
 		],
 		"additionalDirectories": [
 			"D:\\PROJECTS\\phoenix-coder"

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>OBI NET Companion</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      width: 360px;
+      min-height: 280px;
+      background: #0a0a12;
+      color: #f8fafc;
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 14px;
+      padding: 24px 20px;
+    }
+    .header { text-align: center; margin-bottom: 20px; }
+    .header h1 {
+      font-family: monospace;
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: #a855f7;
+      margin-bottom: 4px;
+    }
+    .header p { font-size: 0.8rem; color: #94a3b8; letter-spacing: 0.04em; }
+    .section { margin-bottom: 16px; }
+    label { display: block; font-size: 0.75rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
+    input {
+      width: 100%; padding: 10px 12px; border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.05);
+      color: #f8fafc; font-size: 0.9rem; outline: none;
+      transition: border-color 0.2s;
+    }
+    input:focus { border-color: #a855f7; }
+    .btn {
+      width: 100%; padding: 10px; border-radius: 8px; border: none; cursor: pointer;
+      font-size: 0.85rem; font-weight: 600; letter-spacing: 0.04em;
+      transition: all 0.2s;
+    }
+    .btn-primary { background: linear-gradient(135deg, #a855f7, #9333ea); color: #fff; }
+    .btn-primary:hover { background: linear-gradient(135deg, #b86ef8, #a855f7); }
+    .btn-danger { background: transparent; color: #f87171; border: 1px solid rgba(248,113,113,0.3); margin-top: 8px; }
+    .btn-danger:hover { background: rgba(248,113,113,0.1); }
+    .connected { display: flex; align-items: center; gap: 8px; padding: 10px 12px; background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.2); border-radius: 8px; margin-bottom: 8px; }
+    .dot { width: 8px; height: 8px; background: #22c55e; border-radius: 50%; flex-shrink: 0; }
+    .connected span { font-size: 0.85rem; color: #86efac; }
+    .last-hint { padding: 10px 12px; background: rgba(168,85,247,0.07); border: 1px solid rgba(168,85,247,0.15); border-radius: 8px; margin-bottom: 12px; }
+    .last-hint .hint-label { font-size: 0.72rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+    .last-hint .hint-title { font-size: 0.88rem; color: #e2e8f0; }
+    .last-hint .hint-time { font-size: 0.72rem; color: #64748b; margin-top: 2px; }
+    .footer { text-align: center; margin-top: 16px; }
+    .footer a { color: #a855f7; text-decoration: none; font-size: 0.82rem; }
+    .footer a:hover { text-decoration: underline; }
+    #noId, #hasId { display: none; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>OBI</h1>
+    <p>Natural English Training Companion</p>
+  </div>
+
+  <div id="noId">
+    <div class="section">
+      <label>Your Student ID</label>
+      <input type="text" id="idInput" placeholder="e.g. huong-bluetech">
+    </div>
+    <button class="btn btn-primary" id="saveBtn">CONNECT</button>
+  </div>
+
+  <div id="hasId">
+    <div class="connected">
+      <div class="dot"></div>
+      <span id="connectedAs">Connected</span>
+    </div>
+    <div id="lastHintBox" class="last-hint" style="display:none;">
+      <div class="hint-label">Last session logged</div>
+      <div class="hint-title" id="lastTitle"></div>
+      <div class="hint-time" id="lastTime"></div>
+    </div>
+    <button class="btn btn-danger" id="disconnectBtn">Disconnect</button>
+  </div>
+
+  <div class="footer">
+    <a href="https://net-pet-ai.mrmichaelhobbs123.workers.dev/magic-chat.html" id="obiLink" target="_blank">Open OBI Chat ›</a>
+  </div>
+
+  <script>
+    const idInput = document.getElementById('idInput');
+    const saveBtn = document.getElementById('saveBtn');
+    const disconnectBtn = document.getElementById('disconnectBtn');
+    const noIdEl = document.getElementById('noId');
+    const hasIdEl = document.getElementById('hasId');
+    const connectedAs = document.getElementById('connectedAs');
+    const lastHintBox = document.getElementById('lastHintBox');
+    const lastTitle = document.getElementById('lastTitle');
+    const lastTime = document.getElementById('lastTime');
+    const obiLink = document.getElementById('obiLink');
+
+    function timeAgo(ts) {
+      const mins = Math.round((Date.now() - ts) / 60000);
+      if (mins < 2) return 'just now';
+      if (mins < 60) return `${mins} min ago`;
+      return `${Math.round(mins / 60)}h ago`;
+    }
+
+    chrome.storage.local.get(['studentId', 'lastHint'], ({ studentId, lastHint }) => {
+      if (studentId) {
+        noIdEl.style.display = 'none';
+        hasIdEl.style.display = 'block';
+        connectedAs.textContent = `Connected as: ${studentId}`;
+        obiLink.href = `https://net-pet-ai.mrmichaelhobbs123.workers.dev/magic-chat.html?student=${encodeURIComponent(studentId)}`;
+        if (lastHint && lastHint.videoTitle) {
+          lastTitle.textContent = lastHint.videoTitle;
+          lastTime.textContent = timeAgo(lastHint.timestamp);
+          lastHintBox.style.display = 'block';
+        }
+      } else {
+        noIdEl.style.display = 'block';
+        hasIdEl.style.display = 'none';
+      }
+    });
+
+    saveBtn.addEventListener('click', () => {
+      const id = idInput.value.trim();
+      if (!id) return;
+      chrome.storage.local.set({ studentId: id }, () => window.location.reload());
+    });
+
+    disconnectBtn.addEventListener('click', () => {
+      chrome.storage.local.remove(['studentId', 'lastHint'], () => window.location.reload());
+    });
+  </script>
+</body>
+</html>

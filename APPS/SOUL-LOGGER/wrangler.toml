@@ -1,0 +1,15 @@
+name = "soul-logger"
+main = "src/index.js"
+compatibility_date = "2026-03-16"
+compatibility_flags = ["nodejs_compat"]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "soul-archive"
+database_id = "c69a11bc-064b-478f-9b1f-e9b8e2431fb8"
+
+[ai]
+binding = "AI"
+
+[vars]
+APP_NAME = "Soul Logger"

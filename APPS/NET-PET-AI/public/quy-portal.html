@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,7 +6,7 @@
     <title>QUY PORTAL — Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&family=Orbitron:wght@500;600;700;800&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Orbitron:wght@400;500;600;700;800&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --void: #0a0a12;
@@ -22,786 +22,428 @@
             --success: #22c55e;
             --danger: #ef4444;
             --border: rgba(255, 255, 255, 0.08);
-            --font-display: 'Orbitron', sans-serif;
-            --font-heading: 'Rajdhani', sans-serif;
-            --font-body: 'Inter', sans-serif;
         }
-
-        *,
-        *::before,
-        *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html {
-            font-size: 16px;
-            scroll-behavior: smooth;
-        }
-
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; background-color: var(--void); }
         body {
-            font-family: var(--font-body);
-            background: var(--void);
+            font-family: 'Inter', system-ui, sans-serif;
+            background-color: var(--void);
             color: var(--text);
             min-height: 100vh;
             position: relative;
             overflow-x: hidden;
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
-
         body::before {
             content: '';
             position: fixed;
             inset: 0;
-            background:
-                radial-gradient(ellipse at 28% 18%, rgba(168, 85, 247, 0.14) 0%, transparent 55%),
-                radial-gradient(ellipse at 72% 55%, rgba(245, 158, 11, 0.09) 0%, transparent 50%),
-                radial-gradient(ellipse at 50% 80%, rgba(20, 184, 166, 0.06) 0%, transparent 45%);
             pointer-events: none;
             z-index: 0;
+            background:
+                radial-gradient(ellipse at 20% 15%, var(--purple-glow) 0%, transparent 55%),
+                radial-gradient(ellipse at 75% 70%, var(--gold-glow) 0%, transparent 55%),
+                radial-gradient(ellipse at 50% 40%, rgba(168, 85, 247, 0.08) 0%, transparent 60%);
+        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes shake { 0%,100%{transform:translateX(0)} 10%,50%,90%{transform:translateX(-6px)} 30%,70%{transform:translateX(6px)} }
+        @keyframes shimmer { 0%{background-position:-200% 0} 100%{background-position:200% 0} }
+        @keyframes progressPulse {
+            0%,100%{box-shadow:0 0 8px rgba(245,158,11,0.4),inset 0 0 4px rgba(245,158,11,0.2)}
+            50%{box-shadow:0 0 18px rgba(245,158,11,0.7),inset 0 0 8px rgba(245,158,11,0.35)}
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(14px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInOverlay {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes shake {
-            0%,
-            100% {
-                transform: translateX(0);
-            }
-            10%,
-            50%,
-            90% {
-                transform: translateX(-6px);
-            }
-            30%,
-            70% {
-                transform: translateX(6px);
-            }
-        }
-
-        @keyframes shimmer {
-            0% {
-                background-position: -300% 0;
-            }
-            100% {
-                background-position: 300% 0;
-            }
-        }
-
-        @keyframes pulseGlow {
-            0%,
-            100% {
-                box-shadow: 0 0 12px var(--purple-glow), 0 0 24px rgba(168, 85, 247, 0.08);
-            }
-            50% {
-                box-shadow: 0 0 20px var(--purple-glow), 0 0 40px rgba(168, 85, 247, 0.14);
-            }
-        }
-
-        /* ── LOGIN OVERLAY ── */
+        /* ── LOGIN ── */
         #loginScreen {
             position: fixed;
             inset: 0;
-            z-index: 1000;
-            background: rgba(10, 10, 18, 0.92);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            z-index: 10000;
             display: flex;
             align-items: center;
             justify-content: center;
-            animation: fadeInOverlay 0.4s ease-out;
+            background: rgba(10, 10, 18, 0.97);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: opacity 0.45s ease, visibility 0.45s ease;
         }
-
-        #loginScreen.hidden {
-            display: none;
-        }
-
-        .login-card {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 28px;
-            padding: 48px 40px 40px;
-            text-align: center;
-            max-width: 440px;
-            width: 90%;
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            box-shadow: 0 0 60px rgba(168, 85, 247, 0.12), 0 0 120px rgba(245, 158, 11, 0.06);
-            animation: fadeIn 0.6s ease-out;
-            transition: transform 0.3s ease;
-        }
-
-        .login-card.shake {
-            animation: shake 0.5s ease-in-out;
-        }
-
-        .login-crest {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 20px;
-            display: block;
-            object-fit: contain;
-            filter: drop-shadow(0 0 18px rgba(168, 85, 247, 0.4));
-        }
-
-        .login-title {
-            font-family: var(--font-display);
-            font-size: 1.6rem;
-            font-weight: 700;
-            letter-spacing: 0.06em;
-            color: var(--text);
-            margin-bottom: 6px;
-        }
-
-        .login-subtitle {
-            font-family: var(--font-heading);
-            font-size: 1rem;
-            font-weight: 500;
-            color: var(--dim);
-            letter-spacing: 0.04em;
-            margin-bottom: 28px;
-        }
-
-        .login-input {
-            width: 100%;
-            padding: 14px 18px;
-            border-radius: 14px;
-            border: 1px solid var(--border);
-            background: rgba(255, 255, 255, 0.04);
-            color: var(--text);
-            font-family: var(--font-body);
-            font-size: 1rem;
-            letter-spacing: 0.02em;
-            outline: none;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-            text-align: center;
-        }
-
-        .login-input:focus {
-            border-color: var(--purple);
-            box-shadow: 0 0 0 4px var(--purple-glow);
-        }
-
-        .login-input::placeholder {
-            color: rgba(148, 163, 184, 0.5);
-            letter-spacing: 0.04em;
-        }
-
-        .login-btn {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 13px 40px;
-            border-radius: 14px;
-            border: none;
-            background: var(--purple);
-            color: #fff;
-            font-family: var(--font-display);
-            font-size: 0.9rem;
-            font-weight: 600;
-            letter-spacing: 0.06em;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 20px var(--purple-glow);
-        }
-
-        .login-btn:hover {
-            background: #c084fc;
-            box-shadow: 0 0 32px rgba(168, 85, 247, 0.45);
-            transform: translateY(-2px);
-        }
-
-        .login-btn:active {
-            transform: translateY(0);
-            box-shadow: 0 0 14px var(--purple-glow);
-        }
-
-        .login-error {
-            color: var(--danger);
-            font-size: 0.85rem;
-            margin-top: 10px;
-            min-height: 20px;
-            font-family: var(--font-heading);
-            letter-spacing: 0.03em;
-        }
-
-        /* ── TOP NAV ── */
-        #topNav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 70px;
-            z-index: 900;
-            background: rgba(10, 10, 18, 0.78);
-            backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 32px;
-            animation: fadeIn 0.5s ease-out;
-        }
-
-        #topNav.hidden {
-            display: none;
-        }
-
-        .nav-brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .nav-brand img {
-            width: 42px;
-            height: 42px;
-            object-fit: contain;
-            filter: drop-shadow(0 0 10px rgba(168, 85, 247, 0.35));
-        }
-
-        .nav-brand span {
-            font-family: var(--font-display);
-            font-size: 1.05rem;
-            font-weight: 700;
-            letter-spacing: 0.07em;
-            color: var(--text);
-        }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            display: inline-block;
-            padding: 10px 18px;
-            border-radius: 10px;
-            font-family: var(--font-heading);
-            font-size: 0.95rem;
-            font-weight: 600;
-            letter-spacing: 0.04em;
-            color: var(--dim);
-            text-decoration: none;
-            transition: all 0.25s ease;
-            white-space: nowrap;
-        }
-
-        .nav-links a:hover {
-            color: var(--text);
-            background: rgba(255, 255, 255, 0.04);
-        }
-
-        .nav-links a.active {
-            color: var(--gold);
-            background: rgba(245, 158, 11, 0.08);
-            box-shadow: inset 0 0 0 1px rgba(245, 158, 11, 0.2);
-        }
-
-        .nav-logout {
-            padding: 8px 18px;
-            border-radius: 10px;
-            border: 1px solid rgba(239, 68, 68, 0.3);
-            background: transparent;
-            color: #f87171;
-            font-family: var(--font-heading);
-            font-size: 0.85rem;
-            font-weight: 600;
-            letter-spacing: 0.04em;
-            cursor: pointer;
-            transition: all 0.25s ease;
-        }
-
-        .nav-logout:hover {
-            background: rgba(239, 68, 68, 0.1);
-            border-color: rgba(239, 68, 68, 0.55);
-            color: #fca5a5;
-        }
-
-        /* ── WATERMARK ── */
-        .watermark {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 0;
-            opacity: 0.055;
-            pointer-events: none;
-            width: 180px;
-            height: 180px;
-            object-fit: contain;
-        }
-
-        /* ── MAIN CONTENT ── */
-        #mainContent {
-            position: relative;
-            z-index: 1;
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 110px 24px 60px;
-            animation: fadeIn 0.6s ease-out;
-        }
-
-        #mainContent.hidden {
-            display: none;
-        }
-
-        .page-header {
-            text-align: center;
-            margin-bottom: 36px;
-        }
-
-        .page-header h1 {
-            font-family: var(--font-display);
-            font-size: 2rem;
-            font-weight: 700;
-            letter-spacing: 0.07em;
-            color: var(--text);
-            margin-bottom: 6px;
-        }
-
-        .page-header .subtitle {
-            font-family: var(--font-heading);
-            font-size: 1.05rem;
-            font-weight: 500;
-            color: var(--dim);
-            letter-spacing: 0.04em;
-        }
-
-        .page-header .subtitle .highlight-gold {
-            color: var(--gold);
-            font-weight: 600;
-        }
-
-        .page-header .subtitle .highlight-teal {
-            color: var(--teal);
-            font-weight: 600;
-        }
-
-        /* ── STAT BOXES ── */
-        .stat-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-            margin-bottom: 28px;
-        }
-
-        .stat-box {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 20px 18px;
-            text-align: center;
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            animation: fadeIn 0.5s ease-out;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .stat-box:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 32px rgba(168, 85, 247, 0.1);
-        }
-
-        .stat-box .stat-label {
-            font-family: var(--font-heading);
-            font-size: 0.8rem;
-            font-weight: 600;
-            letter-spacing: 0.06em;
-            color: var(--dim);
-            text-transform: uppercase;
-            margin-bottom: 8px;
-        }
-
-        .stat-box .stat-value {
-            font-family: var(--font-display);
-            font-size: 1.8rem;
-            font-weight: 700;
-            letter-spacing: 0.04em;
-            color: var(--text);
-            min-height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .stat-box .stat-value.shimmer-placeholder {
-            background: linear-gradient(90deg,
-                    rgba(255, 255, 255, 0.03) 0%,
-                    rgba(255, 255, 255, 0.09) 40%,
-                    rgba(255, 255, 255, 0.03) 80%);
-            background-size: 300% 100%;
-            animation: shimmer 1.6s infinite;
-            border-radius: 8px;
-            color: transparent;
-            width: 70%;
-            margin: 0 auto;
-            height: 34px;
-        }
-
-        .stat-box.tiger-score .stat-value {
-            color: var(--gold);
-        }
-        .stat-box.streak .stat-value {
-            color: var(--success);
-        }
-        .stat-box.sessions .stat-value {
-            color: var(--teal);
-        }
-        .stat-box.next-session .stat-value {
-            color: var(--purple);
-        }
-
-        /* ── CARDS ── */
-        .card {
+        #loginScreen.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+        .login-box {
             background: var(--card);
             border: 1px solid var(--border);
             border-radius: 24px;
-            padding: 28px 30px;
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            animation: fadeIn 0.5s ease-out;
-            margin-bottom: 20px;
-        }
-
-        .card h3 {
-            font-family: var(--font-heading);
-            font-size: 1.15rem;
-            font-weight: 700;
-            letter-spacing: 0.04em;
-            color: var(--text);
-            margin-bottom: 12px;
-        }
-
-        /* ── TEACHER NOTE ── */
-        .teacher-note {
-            border-left: 4px solid var(--teal);
-            background: var(--card);
-            border-radius: 0 20px 20px 0;
-            border-top: 1px solid var(--border);
-            border-right: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-            padding: 24px 28px;
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            animation: fadeIn 0.5s ease-out;
-            margin-bottom: 20px;
-        }
-
-        .teacher-note .note-label {
-            font-family: var(--font-display);
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 0.08em;
-            color: var(--teal);
-            text-transform: uppercase;
-            margin-bottom: 10px;
-        }
-
-        .teacher-note p {
-            font-family: var(--font-body);
-            font-size: 0.93rem;
-            line-height: 1.7;
-            color: var(--dim);
-            margin-bottom: 8px;
-        }
-
-        .teacher-note .note-signature {
-            font-family: var(--font-heading);
-            font-weight: 600;
-            color: var(--teal);
-            letter-spacing: 0.04em;
-            font-size: 0.9rem;
-            margin-top: 6px;
-        }
-
-        /* ── MILESTONE CARD ── */
-        .milestone-card .level-badge {
-            display: inline-block;
-            padding: 6px 16px;
-            border-radius: 20px;
-            background: rgba(245, 158, 11, 0.12);
-            color: var(--gold);
-            font-family: var(--font-display);
-            font-size: 0.8rem;
-            font-weight: 600;
-            letter-spacing: 0.06em;
-            margin-bottom: 14px;
-        }
-
-        .milestone-card .progress-info {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            margin-bottom: 8px;
-        }
-
-        .milestone-card .progress-info .current-level {
-            font-family: var(--font-heading);
-            font-weight: 700;
-            font-size: 1rem;
-            color: var(--gold);
-            letter-spacing: 0.04em;
-        }
-
-        .milestone-card .progress-info .next-level {
-            font-family: var(--font-heading);
-            font-weight: 600;
-            font-size: 0.9rem;
-            color: var(--dim);
-            letter-spacing: 0.04em;
-        }
-
-        .milestone-card .progress-info .pct {
-            font-family: var(--font-display);
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--gold);
-            letter-spacing: 0.04em;
-        }
-
-        .progress-bar-outer {
-            width: 100%;
-            height: 10px;
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.06);
-            overflow: hidden;
-        }
-
-        .progress-bar-inner {
-            height: 100%;
-            border-radius: 10px;
-            background: linear-gradient(90deg, #f59e0b, #fbbf24, #f59e0b);
-            background-size: 200% 100%;
-            transition: width 0.8s cubic-bezier(0.25, 0.8, 0.25, 1.2);
-            box-shadow: 0 0 12px var(--gold-glow);
-        }
-
-        /* ── DAILY TASK ── */
-        .daily-task .task-text {
-            font-family: var(--font-body);
-            font-size: 0.95rem;
-            color: var(--text);
-            line-height: 1.6;
-        }
-
-        .daily-task .task-meta {
-            font-family: var(--font-heading);
-            font-size: 0.85rem;
-            color: var(--dim);
-            letter-spacing: 0.03em;
-            margin-top: 8px;
-        }
-
-        /* ── ACTION BUTTONS ── */
-        .action-buttons {
-            display: flex;
-            gap: 14px;
-            flex-wrap: wrap;
-            margin-top: 4px;
-        }
-
-        .action-btn {
-            flex: 1;
-            min-width: 140px;
-            padding: 14px 22px;
-            border-radius: 14px;
-            border: 1px solid var(--border);
-            background: var(--card);
-            color: var(--text);
-            font-family: var(--font-heading);
-            font-size: 0.95rem;
-            font-weight: 600;
-            letter-spacing: 0.04em;
+            padding: 48px 40px;
             text-align: center;
-            text-decoration: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            max-width: 420px;
+            width: 90%;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 8px 40px rgba(0,0,0,0.5), 0 0 60px var(--purple-glow);
+            animation: fadeIn 0.5s ease;
         }
+        .login-box.shaking { animation: shake 0.5s ease; }
+        .login-crest { width: 80px; height: 80px; margin: 0 auto 20px; display: block; object-fit: contain; }
+        .login-box h1 { font-family: 'Orbitron', sans-serif; font-size: 1.6rem; font-weight: 700; letter-spacing: 0.06em; margin-bottom: 6px; }
+        .login-subtitle { font-family: 'Rajdhani', sans-serif; font-size: 1rem; font-weight: 500; color: var(--dim); letter-spacing: 0.04em; margin-bottom: 28px; }
+        .login-box input[type="password"] {
+            width: 100%; padding: 14px 18px; border-radius: 12px; border: 1px solid var(--border);
+            background: rgba(255,255,255,0.04); color: var(--text); font-family: 'Inter', sans-serif;
+            font-size: 1rem; outline: none; transition: border-color 0.3s, box-shadow 0.3s;
+            margin-bottom: 16px; letter-spacing: 0.15em;
+        }
+        .login-box input[type="password"]:focus { border-color: var(--purple); box-shadow: 0 0 0 3px rgba(168,85,247,0.15); }
+        .login-box input::placeholder { color: var(--dim); letter-spacing: 0.04em; opacity: 0.6; }
+        .login-btn {
+            width: 100%; padding: 14px; border-radius: 12px; border: none;
+            background: linear-gradient(135deg, var(--purple), #9333ea); color: #fff;
+            font-family: 'Orbitron', sans-serif; font-size: 0.95rem; font-weight: 600;
+            letter-spacing: 0.06em; cursor: pointer; transition: all 0.3s;
+            box-shadow: 0 4px 16px rgba(168,85,247,0.3);
+        }
+        .login-btn:hover { background: linear-gradient(135deg, #b86ef8, #a855f7); box-shadow: 0 6px 24px rgba(168,85,247,0.45); transform: translateY(-1px); }
+        .login-error { color: #f87171; font-size: 0.85rem; margin-top: 10px; min-height: 20px; opacity: 0; transition: opacity 0.3s; }
+        .login-error.visible { opacity: 1; }
 
-        .action-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 28px rgba(168, 85, 247, 0.15);
-            border-color: rgba(168, 85, 247, 0.4);
+        /* ── TOP NAV ── */
+        #topNav {
+            position: fixed; top: 0; left: 0; right: 0; height: 70px; z-index: 9000;
+            background: rgba(10,10,18,0.82); backdrop-filter: blur(18px);
+            border-bottom: 1px solid var(--border);
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 28px; transition: opacity 0.4s;
         }
+        #topNav.hidden { opacity: 0; pointer-events: none; }
+        .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text); flex-shrink: 0; }
+        .nav-brand img { width: 40px; height: 40px; object-fit: contain; }
+        .nav-brand span { font-family: 'Orbitron', sans-serif; font-size: 1.05rem; font-weight: 600; letter-spacing: 0.05em; }
+        .nav-links { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+        .nav-links a {
+            font-family: 'Rajdhani', sans-serif; font-size: 0.9rem; font-weight: 600;
+            letter-spacing: 0.04em; color: var(--dim); text-decoration: none;
+            padding: 8px 14px; border-radius: 8px; transition: all 0.25s; white-space: nowrap;
+        }
+        .nav-links a:hover { color: var(--text); background: rgba(255,255,255,0.04); }
+        .nav-links a.active { color: var(--gold); background: rgba(245,158,11,0.08); box-shadow: 0 0 0 1px rgba(245,158,11,0.2); }
+        .nav-logout {
+            font-family: 'Rajdhani', sans-serif; font-size: 0.85rem; font-weight: 600;
+            letter-spacing: 0.04em; color: #f87171; background: transparent;
+            border: 1px solid rgba(248,113,113,0.3); padding: 7px 14px; border-radius: 8px;
+            cursor: pointer; transition: all 0.25s; white-space: nowrap; margin-left: 4px;
+        }
+        .nav-logout:hover { background: rgba(248,113,113,0.1); border-color: rgba(248,113,113,0.55); color: #fca5a5; }
 
-        .action-btn.purple-btn {
-            border-color: rgba(168, 85, 247, 0.35);
-            background: rgba(168, 85, 247, 0.08);
-        }
-        .action-btn.purple-btn:hover {
-            background: rgba(168, 85, 247, 0.16);
-            box-shadow: 0 8px 28px var(--purple-glow);
-        }
+        /* ── WATERMARK ── */
+        .portal-watermark { position: fixed; bottom: 20px; right: 20px; z-index: 0; pointer-events: none; opacity: 0.055; width: 280px; height: 280px; object-fit: contain; }
 
-        .action-btn.teal-btn {
-            border-color: rgba(20, 184, 166, 0.35);
-            background: rgba(20, 184, 166, 0.08);
-        }
-        .action-btn.teal-btn:hover {
-            background: rgba(20, 184, 166, 0.16);
-            box-shadow: 0 8px 28px var(--teal-glow);
-        }
+        /* ── MAIN CONTENT ── */
+        .main-container { max-width: 900px; margin: 0 auto; padding: 110px 40px 60px; position: relative; z-index: 1; }
 
-        .action-btn.gold-btn {
-            border-color: rgba(245, 158, 11, 0.35);
-            background: rgba(245, 158, 11, 0.08);
-        }
-        .action-btn.gold-btn:hover {
-            background: rgba(245, 158, 11, 0.16);
-            box-shadow: 0 8px 28px var(--gold-glow);
-        }
+        .dashboard-header { margin-bottom: 36px; animation: fadeIn 0.5s ease; }
+        .dashboard-header h1 { font-family: 'Orbitron', sans-serif; font-size: 2.2rem; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 6px; }
+        .dashboard-header .subtitle { font-family: 'Rajdhani', sans-serif; font-size: 1.05rem; font-weight: 500; color: var(--dim); letter-spacing: 0.03em; }
 
-        /* ── RESPONSIVE ── */
+        /* ── STATS ── */
+        .stats-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+            margin-bottom: 28px; animation: fadeIn 0.55s ease;
+        }
+        @media (max-width: 700px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
+        .stat-card {
+            background: var(--card); border: 1px solid var(--border); border-radius: 20px;
+            padding: 20px 18px; backdrop-filter: blur(20px); text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s; position: relative; overflow: hidden;
+        }
+        .stat-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.35); }
+        .stat-accent { position: absolute; top: 0; left: 0; right: 0; height: 3px; border-radius: 3px 3px 0 0; }
+        .stat-card.purple .stat-accent { background: var(--purple); box-shadow: 0 0 16px var(--purple-glow); }
+        .stat-card.gold .stat-accent { background: var(--gold); box-shadow: 0 0 16px var(--gold-glow); }
+        .stat-card.teal .stat-accent { background: var(--teal); box-shadow: 0 0 16px var(--teal-glow); }
+        .stat-card.success .stat-accent { background: var(--success); box-shadow: 0 0 16px rgba(34,197,94,0.25); }
+        .stat-label { font-family: 'Rajdhani', sans-serif; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.06em; color: var(--dim); text-transform: uppercase; margin: 6px 0; }
+        .stat-value { font-family: 'Orbitron', sans-serif; font-size: 1.7rem; font-weight: 700; letter-spacing: 0.04em; min-height: 42px; display: flex; align-items: center; justify-content: center; }
+        .stat-value.loading { color: transparent; }
+        .skeleton { background: linear-gradient(90deg, rgba(255,255,255,0.03) 25%, rgba(255,255,255,0.09) 50%, rgba(255,255,255,0.03) 75%); background-size: 200% 100%; animation: shimmer 1.6s infinite; border-radius: 8px; min-height: 28px; width: 60%; }
+
+        /* ── DAY 1 CARD ── */
+        .day1-card {
+            background: var(--card); border: 1px solid rgba(168,85,247,0.25);
+            border-radius: 24px; padding: 36px 32px; margin-bottom: 28px;
+            backdrop-filter: blur(20px); animation: fadeIn 0.55s ease; text-align: center;
+            box-shadow: 0 0 40px rgba(168,85,247,0.08);
+        }
+        .day1-card .day1-badge {
+            display: inline-block; font-family: 'Orbitron', sans-serif; font-size: 0.75rem; font-weight: 700;
+            letter-spacing: 0.08em; padding: 6px 16px; border-radius: 20px;
+            background: rgba(168,85,247,0.15); color: var(--purple); border: 1px solid rgba(168,85,247,0.3);
+            margin-bottom: 16px;
+        }
+        .day1-card h2 { font-family: 'Orbitron', sans-serif; font-size: 1.3rem; font-weight: 700; letter-spacing: 0.04em; margin-bottom: 12px; }
+        .day1-card p { font-size: 0.95rem; color: var(--dim); line-height: 1.7; max-width: 480px; margin: 0 auto 24px; }
+        .day1-steps { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+        .day1-step {
+            background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 14px;
+            padding: 16px 20px; text-align: center; min-width: 160px;
+        }
+        .day1-step .step-num { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--gold); margin-bottom: 6px; }
+        .day1-step .step-label { font-family: 'Rajdhani', sans-serif; font-size: 0.9rem; font-weight: 600; color: var(--text); }
+        .day1-step .step-sub { font-size: 0.78rem; color: var(--dim); margin-top: 2px; }
+
+        /* ── CONTENT CARDS ── */
+        .content-card {
+            background: var(--card); border: 1px solid var(--border); border-radius: 24px;
+            padding: 28px; backdrop-filter: blur(20px); animation: fadeIn 0.55s ease; margin-bottom: 20px;
+        }
+        .card-label { font-family: 'Rajdhani', sans-serif; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; color: var(--dim); text-transform: uppercase; margin-bottom: 10px; }
+        .teacher-note { border-left: 4px solid var(--teal); padding-left: 20px; }
+        .teacher-note .note-body { font-size: 0.95rem; line-height: 1.75; color: #d1d5db; font-style: italic; margin-bottom: 12px; }
+        .teacher-note .note-sig { font-family: 'Rajdhani', sans-serif; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.05em; color: var(--teal); }
+
+        /* ── MILESTONE ── */
+        .milestone-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
+        .milestone-badge {
+            display: inline-block; font-family: 'Orbitron', sans-serif; font-size: 0.75rem; font-weight: 700;
+            letter-spacing: 0.07em; padding: 6px 14px; border-radius: 20px;
+            background: rgba(168,85,247,0.15); color: var(--purple); border: 1px solid rgba(168,85,247,0.3);
+        }
+        .milestone-track { font-family: 'Rajdhani', sans-serif; font-size: 0.95rem; font-weight: 500; letter-spacing: 0.03em; }
+        .progress-bar-wrap { margin-top: 10px; height: 8px; background: rgba(255,255,255,0.06); border-radius: 10px; overflow: hidden; }
+        .progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--purple), var(--gold)); border-radius: 10px; transition: width 0.6s ease; animation: progressPulse 2.5s infinite; }
+        .progress-label { font-family: 'Rajdhani', sans-serif; font-size: 0.82rem; color: var(--dim); letter-spacing: 0.03em; margin-top: 6px; }
+
+        /* ── QUICK LINKS ── */
+        .quick-links-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+        @media (max-width: 600px) { .quick-links-grid { grid-template-columns: 1fr; } }
+        .quick-link-card {
+            display: block; background: var(--card); border: 1px solid var(--border);
+            border-radius: 20px; padding: 22px 18px; text-align: center; text-decoration: none;
+            backdrop-filter: blur(20px); transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+        }
+        .quick-link-card:hover { transform: translateY(-3px); box-shadow: 0 14px 36px rgba(0,0,0,0.4); border-color: rgba(168,85,247,0.4); }
+        .quick-link-card.primary-link { border-color: rgba(168,85,247,0.25); background: rgba(168,85,247,0.06); }
+        .quick-link-card.primary-link:hover { border-color: var(--purple); box-shadow: 0 14px 36px rgba(168,85,247,0.2); }
+        .ql-icon { font-size: 1.6rem; margin-bottom: 8px; display: block; }
+        .ql-label { font-family: 'Orbitron', sans-serif; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.05em; color: var(--text); }
+        .ql-sub { font-family: 'Rajdhani', sans-serif; font-size: 0.78rem; color: var(--dim); letter-spacing: 0.03em; margin-top: 3px; }
+
         @media (max-width: 768px) {
-            .stat-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 10px;
-            }
-
-            #topNav {
-                padding: 0 14px;
-                height: 60px;
-            }
-
-            .nav-brand span {
-                font-size: 0.85rem;
-            }
-
-            .nav-links a {
-                padding: 7px 10px;
-                font-size: 0.78rem;
-                border-radius: 8px;
-            }
-
-            .nav-links {
-                gap: 2px;
-            }
-
-            .nav-logout {
-                padding: 6px 12px;
-                font-size: 0.75rem;
-            }
-
-            .nav-brand img {
-                width: 32px;
-                height: 32px;
-            }
-
-            #mainContent {
-                padding: 90px 14px 40px;
-            }
-
-            .page-header h1 {
-                font-size: 1.4rem;
-            }
-
-            .page-header .subtitle {
-                font-size: 0.85rem;
-            }
-
-            .action-buttons {
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            .action-btn {
-                min-width: auto;
-            }
-
-            .login-card {
-                padding: 32px 22px 28px;
-            }
-
-            .login-title {
-                font-size: 1.3rem;
-            }
-
-            .watermark {
-                width: 100px;
-                height: 100px;
-                bottom: 10px;
-                right: 10px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .stat-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 8px;
-            }
-
-            .stat-box {
-                padding: 14px 10px;
-            }
-
-            .stat-box .stat-value {
-                font-size: 1.3rem;
-                min-height: 30px;
-            }
-
-            .stat-box .stat-label {
-                font-size: 0.7rem;
-            }
-
-            .nav-links a {
-                padding: 6px 7px;
-                font-size: 0.7rem;
-                letter-spacing: 0.02em;
-            }
-
-            #topNav {
-                padding: 0 8px;
-            }
-
-            .nav-brand span {
-                font-size: 0.72rem;
-                letter-spacing: 0.04em;
-            }
-
-            .nav-brand img {
-                width: 28px;
-                height: 28px;
-            }
+            .main-container { padding: 90px 20px 40px; }
+            #topNav { padding: 0 16px; }
+            .nav-links a { padding: 6px 10px; font-size: 0.8rem; }
+            .dashboard-header h1 { font-size: 1.7rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- ── LOGIN OVERLAY ── -->
+    <!-- LOGIN OVERLAY -->
     <div id="loginScreen">
-        <div class="login-card" id="loginCard">
-            <img
-            class="login-crest"
-            src="./assets/brand/system-marks/phoenix-dna-crest-mark.png"
-            alt="Phoenix Crest"
-            onerror="this.style.display='none';"
-            >
-            <div class="login-title">QUY PORTAL</div>
-            <div class="login-sub
+        <div class="login-box" id="loginBox">
+            <img src="/icons/badge-tiger.svg" alt="Tiger Badge" class="login-crest" onerror="this.style.display='none'">
+            <h1>QUY PORTAL</h1>
+            <p class="login-subtitle">Natural English Training</p>
+            <input type="password" id="portalPw" placeholder="Enter portal password" autocomplete="off">
+            <button class="login-btn" id="loginBtn">UNLOCK PORTAL</button>
+            <p class="login-error" id="loginErr"></p>
+        </div>
+    </div>
+
+    <!-- TOP NAV -->
+    <nav id="topNav" class="hidden">
+        <a class="nav-brand" href="quy-portal.html">
+            <img src="/icons/badge-tiger.svg" alt="Tiger Badge" onerror="this.style.display='none'">
+            <span>QUY PORTAL</span>
+        </a>
+        <div class="nav-links">
+            <a href="quy-portal.html" class="active">Dashboard</a>
+            <a href="quy-profile.html">Profile</a>
+            <a href="quy-methodology.html">Methodology</a>
+            <a href="quy-transcripts.html">Transcripts</a>
+            <a href="quy-action-plan.html">Action Plan</a>
+            <button class="nav-logout" id="logoutBtn">LOGOUT</button>
+        </div>
+    </nav>
+
+    <!-- WATERMARK -->
+    <img src="/icons/badge-tiger.svg" alt="" class="portal-watermark" onerror="this.style.display='none'">
+
+    <!-- MAIN CONTENT -->
+    <main class="main-container" id="mainContent" style="display:none;">
+
+        <div class="dashboard-header">
+            <h1>QUY</h1>
+            <p class="subtitle">BlueTech · CUB · Precision Builder</p>
+        </div>
+
+        <!-- Stats Grid (shown when sessions > 0) -->
+        <div class="stats-grid" id="statsGrid" style="display:none;">
+            <div class="stat-card purple">
+                <div class="stat-accent"></div>
+                <div class="stat-label">Tiger Score</div>
+                <div class="stat-value loading" id="tigerScore"><div class="skeleton"></div></div>
+            </div>
+            <div class="stat-card gold">
+                <div class="stat-accent"></div>
+                <div class="stat-label">Streak</div>
+                <div class="stat-value loading" id="streakVal"><div class="skeleton"></div></div>
+            </div>
+            <div class="stat-card teal">
+                <div class="stat-accent"></div>
+                <div class="stat-label">Sessions</div>
+                <div class="stat-value loading" id="sessionsVal"><div class="skeleton"></div></div>
+            </div>
+            <div class="stat-card success">
+                <div class="stat-accent"></div>
+                <div class="stat-label">Next Session</div>
+                <div class="stat-value loading" id="nextSessionVal"><div class="skeleton"></div></div>
+            </div>
+        </div>
+
+        <!-- Day 1 Card (shown when no sessions yet) -->
+        <div class="day1-card" id="day1Card" style="display:none;">
+            <div class="day1-badge">DAY 1 — BLUETECH ENGLISH</div>
+            <h2>Your journey starts today.</h2>
+            <p>Two things, every day. That's the whole system. Show up here after each listening session and tell OBI what you heard.</p>
+            <div class="day1-steps">
+                <div class="day1-step">
+                    <div class="step-num">45 min</div>
+                    <div class="step-label">Listen</div>
+                    <div class="step-sub">YouTube · Podcasts · Netflix</div>
+                </div>
+                <div class="day1-step">
+                    <div class="step-num">15 min</div>
+                    <div class="step-label">Talk to OBI</div>
+                    <div class="step-sub">Tell OBI what you watched</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Teacher Note -->
+        <div class="content-card">
+            <div class="card-label">Coach Note</div>
+            <div class="teacher-note">
+                <p class="note-body">
+                    Quy is a precision thinker. She chooses words carefully and constructs sentences with intention — this is a rare quality. Her challenge is letting that precision flow naturally without pausing to perfect each word before it exits. The PRECISION BUILDER track means we are not correcting her thinking, we are accelerating its output. She already has the architecture. We are removing the friction.
+                </p>
+                <p class="note-sig">— OBI / NET Coach</p>
+            </div>
+        </div>
+
+        <!-- Milestone -->
+        <div class="content-card">
+            <div class="card-label">Current Level</div>
+            <div class="milestone-row">
+                <span class="milestone-badge">CUB</span>
+                <span class="milestone-track">Precision Builder Track · Progress toward Tiger</span>
+            </div>
+            <div class="progress-bar-wrap">
+                <div class="progress-bar-fill" style="width: 15%;"></div>
+            </div>
+            <div class="progress-label">CUB → TIGER: Complete 10 sessions with consistent Precision Builder marks</div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="content-card">
+            <div class="card-label">Quick Access</div>
+            <div class="quick-links-grid">
+                <a href="quy-profile.html" class="quick-link-card">
+                    <span class="ql-icon">👤</span>
+                    <div class="ql-label">Profile</div>
+                    <div class="ql-sub">Goals &amp; background</div>
+                </a>
+                <a href="quy-methodology.html" class="quick-link-card">
+                    <span class="ql-icon">📚</span>
+                    <div class="ql-label">Methodology</div>
+                    <div class="ql-sub">The NET system</div>
+                </a>
+                <a href="/magic-chat.html?student=quy-bluetech" class="quick-link-card primary-link">
+                    <span class="ql-icon">🔮</span>
+                    <div class="ql-label">Start Session</div>
+                    <div class="ql-sub">Chat with OBI now</div>
+                </a>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        const AUTH_KEY = 'quy_auth';
+        const STUDENT_ID = 'quy-bluetech';
+        const API = 'https://net-pet-ai.mrmichaelhobbs123.workers.dev';
+
+        function isAuthed() { return localStorage.getItem(AUTH_KEY) === 'true'; }
+
+        function showPortal() {
+            document.getElementById('loginScreen').classList.add('hidden');
+            document.getElementById('topNav').classList.remove('hidden');
+            document.getElementById('mainContent').style.display = '';
+            loadPortalData();
+        }
+
+        // Auth check on load
+        if (isAuthed()) {
+            showPortal();
+        }
+
+        // Login
+        function attemptLogin() {
+            const pw = document.getElementById('portalPw').value;
+            const err = document.getElementById('loginErr');
+            const box = document.getElementById('loginBox');
+            if (pw === 'bluetech2026') {
+                localStorage.setItem(AUTH_KEY, 'true');
+                showPortal();
+            } else {
+                err.textContent = 'Incorrect password.';
+                err.classList.add('visible');
+                box.classList.remove('shaking');
+                void box.offsetWidth;
+                box.classList.add('shaking');
+                setTimeout(() => box.classList.remove('shaking'), 600);
+            }
+        }
+
+        document.getElementById('loginBtn').addEventListener('click', attemptLogin);
+        document.getElementById('portalPw').addEventListener('keydown', e => { if (e.key === 'Enter') attemptLogin(); });
+
+        // Logout
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            localStorage.removeItem(AUTH_KEY);
+            window.location.reload();
+        });
+
+        // Load portal data
+        async function loadPortalData() {
+            try {
+                const [scoreRes, stateRes] = await Promise.all([
+                    fetch(`${API}/api/tiger-score?studentId=${STUDENT_ID}`).then(r => r.ok ? r.json() : {}).catch(() => ({})),
+                    fetch(`${API}/api/netpet/state?studentId=${STUDENT_ID}`).then(r => r.ok ? r.json() : {}).catch(() => ({}))
+                ]);
+
+                const tigerScore = scoreRes?.score ?? 0;
+                const streak = stateRes?.streak ?? stateRes?.pet?.streak ?? 0;
+                const sessions = stateRes?.sessions ?? stateRes?.totalSessions ?? stateRes?.pet?.sessions ?? 0;
+
+                if (sessions === 0 && tigerScore === 0) {
+                    document.getElementById('statsGrid').style.display = 'none';
+                    document.getElementById('day1Card').style.display = 'block';
+                } else {
+                    document.getElementById('statsGrid').style.display = 'grid';
+                    document.getElementById('day1Card').style.display = 'none';
+                    setVal('tigerScore', tigerScore);
+                    setVal('streakVal', streak + (streak === 1 ? ' day' : ' days'));
+                    setVal('sessionsVal', sessions);
+                    setVal('nextSessionVal', 'Anytime');
+                }
+            } catch {
+                document.getElementById('statsGrid').style.display = 'none';
+                document.getElementById('day1Card').style.display = 'block';
+            }
+        }
+
+        function setVal(id, val) {
+            const el = document.getElementById(id);
+            if (el) { el.textContent = val; el.classList.remove('loading'); }
+        }
+    </script>
+    <script src="./global-brand-shelf.js" defer onerror="void 0"></script>
+</body>
+</html>

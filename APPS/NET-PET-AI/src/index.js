@@ -561,7 +561,53 @@ async function handleAPI(path, request, env, url) {
   if (path === "/api/virality/score" && method === "POST") { const body = await request.json(); return handleViralityScore(body); }
   if (path === "/api/virality/variants" && method === "POST") { const body = await request.json(); return handleViralityVariants(body, env); }
 
+  // ── Session Hint (Chrome extension → chat.js YouTube personalization) ────
+  if (path === "/api/session-hint") {
+    if (method === "POST") return handleSessionHintPost(request, env);
+    else return handleSessionHintGet(request, env);
+  }
+
   return json({ error: "Not found" }, 404);
+}
+
+// ── Session Hint Handlers (Chrome extension → KV → chat.js) ─────────────────
+
+// POST /api/session-hint — Chrome extension posts {studentId, videoTitle, videoUrl}
+async function handleSessionHintPost(request, env) {
+  const body = await request.json().catch(() => ({}));
+  const { studentId, videoTitle, videoUrl } = body;
+  if (!studentId || !videoTitle) return new Response(JSON.stringify({ error: "missing fields" }), { status: 400, headers: { "Content-Type": "application/json" } });
+  if (!env.NET_PET_KV) return new Response(JSON.stringify({ error: "NET_PET_KV binding not configured" }), { status: 500, headers: { "Content-Type": "application/json" } });
+  await env.NET_PET_KV.put(
+    `session-hint:${studentId}`,
+    JSON.stringify({ studentId, videoTitle, videoUrl: videoUrl || "", timestamp: Date.now() }),
+    { expirationTtl: 86400 }
+  );
+  return new Response(JSON.stringify({ ok: true }), { status: 200, headers: { "Content-Type": "application/json" } });
+}
+
+// GET /api/session-hint?studentId=X — chat.js checks for recent YouTube session
+async function handleSessionHintGet(request, env) {
+  const url = new URL(request.url);
+  const studentId = url.searchParams.get("studentId");
+  if (!studentId) return new Response(JSON.stringify({ error: "missing studentId" }), { status: 400, headers: { "Content-Type": "application/json" } });
+  if (!env.NET_PET_KV) return new Response(JSON.stringify({ videoTitle: null }), { status: 200, headers: { "Content-Type": "application/json" } });
+  const raw = await env.NET_PET_KV.get(`session-hint:${studentId}`);
+
+  // Fetch soul context from soul-logger (fire, don't let failures block hint delivery)
+  let soulContext = '';
+  try {
+    const ctxResp = await fetch(`${env.SOUL_LOGGER_URL || 'https://soul-logger.mrmichaelhobbs123.workers.dev'}/api/soul/context/${studentId}`);
+    if (ctxResp.ok) {
+      const ctxData = await ctxResp.json();
+      if (ctxData.context_brief) soulContext = ctxData.context_brief;
+    }
+  } catch(e) {}
+
+  if (!raw) return new Response(JSON.stringify({ videoTitle: null, soul_context: soulContext }), { status: 200, headers: { "Content-Type": "application/json" } });
+  let hint = {};
+  try { hint = JSON.parse(raw); } catch(e) { hint = { videoTitle: null }; }
+  return new Response(JSON.stringify({ ...hint, soul_context: soulContext }), { status: 200, headers: { "Content-Type": "application/json" } });
 }
 
 // ── Soul DNA Capture ─────────────────────────────────────────────────────────
@@ -812,6 +858,17 @@ function formatContextForPrompt(ctx) {
   return injection;
 }
 
+// ── Soul Logger: fire-and-forget cross-session awareness bus ─────────────────
+
+async function logSoulEvent(env, studentId, sessionId, role, text) {
+  const url = (env.SOUL_LOGGER_URL || 'https://soul-logger.mrmichaelhobbs123.workers.dev') + '/api/soul/event';
+  await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ student_id: studentId, session_id: sessionId, role, text, timestamp: new Date().toISOString() })
+  });
+}
+
 // ── Chat (DeepSeek + Obi + Ledger memory injection) ──────────────────────────
 
 async function handleChat(body, env) {
@@ -913,9 +970,21 @@ async function handleChat(body, env) {
   }
   const contextInjection = structuredCtx ? formatContextForPrompt(structuredCtx) : "";
 
+  // ── Soul context: fetch student soul brief from soul-logger ─────────────
+  let soulContext = '';
+  if (studentId !== "anonymous") {
+    try {
+      const ctxResp = await fetch(`${env.SOUL_LOGGER_URL || 'https://soul-logger.mrmichaelhobbs123.workers.dev'}/api/soul/context/${studentId}`);
+      if (ctxResp.ok) {
+        const ctxData = await ctxResp.json();
+        if (ctxData.context_brief) soulContext = `\n\nSOUL CONTEXT (who this student really is):\n${ctxData.context_brief}`;
+      }
+    } catch(e) {}
+  }
+
   const hasSystem = messages.some(m => m.role === "system");
   if (!hasSystem) {
-    messages.unshift({ role: "system", content: OBI_SYSTEM + ledgerContext + sessionContext + weaknessContext + reEntryContext + rewardContext + contextInjection });
+    messages.unshift({ role: "system", content: OBI_SYSTEM + ledgerContext + sessionContext + weaknessContext + reEntryContext + rewardContext + contextInjection + soulContext });
   }
 
   const res = await fetch("https://api.deepseek.com/chat/completions", {
@@ -930,9 +999,21 @@ async function handleChat(body, env) {
 
   // ── Auto-write every exchange to the Cryptographic Immutable Ledger ───────
   const userMsg = messages.filter(m => m.role === "user").pop()?.content || "";
+  // Stable daily session ID — groups all turns in the same calendar day per student
+  const sessionId = `${studentId}-${new Date().toISOString().slice(0, 10)}`;
   if (studentId !== "anonymous" && env.LEDGER && userMsg) {
     const payload = JSON.stringify({ user: userMsg, obi: reply });
     appendToLedger(studentId, "chat_exchange", payload, env).catch(() => {});
+  }
+
+  // ── Soul Logger: push user turn (fire-and-forget) ───────────────────────
+  if (studentId !== "anonymous" && userMsg) {
+    logSoulEvent(env, studentId, sessionId, 'user', userMsg).catch(() => {});
+  }
+
+  // ── Soul Logger: push assistant turn (fire-and-forget) ──────────────────
+  if (studentId !== "anonymous") {
+    logSoulEvent(env, studentId, sessionId, 'assistant', reply).catch(() => {});
   }
 
   // ── Notion sync: BLACKLISTED — platform usage permanently disabled ────────
@@ -2684,6 +2765,7 @@ function translateThroughAgent99(rawIntent) {
 async function handleCommandSend(body, env) {
   const rawIntent = sanitizeInput((body.command || body.intent || "").slice(0, 2000));
   if (!rawIntent) return json({ error: "command or intent required" }, 400);
+  if (!env.COMMANDS) return json({ error: "COMMANDS DO not configured" }, 503);
 
   const translation = translateThroughAgent99(rawIntent);
 
@@ -2711,12 +2793,14 @@ async function handleCommandSend(body, env) {
 }
 
 async function handleCommandQueue(status, limit, env) {
+  if (!env.COMMANDS) return json({ error: "COMMANDS DO not configured" }, 503);
   const stub = env.COMMANDS.get(env.COMMANDS.idFromName("command-station"));
   return stub.fetch(new Request(`https://do/queue?status=${encodeURIComponent(status)}&limit=${Math.min(limit, 100)}`));
 }
 
 async function handleCommandClaim(body, env) {
   if (!body.commandId) return json({ error: "commandId required" }, 400);
+  if (!env.COMMANDS) return json({ error: "COMMANDS DO not configured" }, 503);
   const claimedBy = sanitizeInput((body.claimedBy || "vscode-extension").slice(0, 100));
   const stub = env.COMMANDS.get(env.COMMANDS.idFromName("command-station"));
   return stub.fetch(new Request("https://do/claim", {
@@ -2728,6 +2812,7 @@ async function handleCommandClaim(body, env) {
 
 async function handleCommandComplete(body, env) {
   if (!body.commandId) return json({ error: "commandId required" }, 400);
+  if (!env.COMMANDS) return json({ error: "COMMANDS DO not configured" }, 503);
   const result = sanitizeInput((body.result || "").slice(0, 5000));
   const stub = env.COMMANDS.get(env.COMMANDS.idFromName("command-station"));
   const res = await stub.fetch(new Request("https://do/complete", {
@@ -2753,11 +2838,13 @@ async function handleCommandComplete(body, env) {
 
 async function handleCommandStatus(commandId, env) {
   if (!commandId) return json({ error: "commandId required" }, 400);
+  if (!env.COMMANDS) return json({ error: "COMMANDS DO not configured" }, 503);
   const stub = env.COMMANDS.get(env.COMMANDS.idFromName("command-station"));
   return stub.fetch(new Request(`https://do/status?commandId=${encodeURIComponent(commandId)}`));
 }
 
 async function handleCommandHistory(limit, env) {
+  if (!env.COMMANDS) return json({ error: "COMMANDS DO not configured" }, 503);
   const stub = env.COMMANDS.get(env.COMMANDS.idFromName("command-station"));
   return stub.fetch(new Request(`https://do/history?limit=${Math.min(limit, 200)}`));
 }

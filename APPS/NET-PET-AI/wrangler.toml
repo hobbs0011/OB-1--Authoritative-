@@ -15,6 +15,11 @@ compatibility_flags = ["nodejs_compat"]
 # binding = "RATELIMIT"
 # id = "<paste-id-here>"
 
+# KV namespace for session hints (Chrome extension → chat.js YouTube personalization)
+[[kv_namespaces]]
+binding = "NET_PET_KV"
+id = "0583d1a59bb24e598c4645396647eb94"
+
 [assets]
 directory = "./public"
 binding = "ASSETS"
@@ -34,6 +39,14 @@ class_name = "PetDO"
 [[durable_objects.bindings]]
 name = "LEDGER"
 class_name = "LedgerDO"
+
+[[durable_objects.bindings]]
+name = "MEMORY"
+class_name = "MemoryDO"
+
+[[durable_objects.bindings]]
+name = "COMMANDS"
+class_name = "CommandDO"
 
 [[migrations]]
 tag = "v1-net-pet-core"
@@ -55,7 +68,12 @@ new_sqlite_classes = []
 tag = "v5-drop-student-brain"
 deleted_classes = ["StudentBrainV2"]
 
+[[migrations]]
+tag = "v6-command-station"
+new_sqlite_classes = []
+
 [vars]
 APP_NAME = "Natural English Training"
 APP_COACH_NAME = "Obi"
 IMAGE_GEN_URL = ""
+SOUL_LOGGER_URL = "https://soul-logger.mrmichaelhobbs123.workers.dev"

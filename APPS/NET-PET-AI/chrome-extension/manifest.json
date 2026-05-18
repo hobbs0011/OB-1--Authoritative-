@@ -1,0 +1,25 @@
+{
+  "manifest_version": 3,
+  "name": "OBI — Natural English Training",
+  "version": "1.0.0",
+  "description": "Links your YouTube listening session to OBI for personalised English coaching.",
+  "permissions": ["storage", "activeTab"],
+  "host_permissions": [
+    "https://www.youtube.com/*",
+    "https://net-pet-ai.mrmichaelhobbs123.workers.dev/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "OBI NET Companion"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.youtube.com/watch*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  }
+}

@@ -732,7 +732,22 @@ async function boot() {
     } catch {}
     obi(`${firstName()}! Let's go.`);
     await pause(350);
-    obi(pickStarter());
+    // Extract company tag from studentId (e.g. "huong-bluetech" → "BlueTech")
+    const _idParts = (urlStudentId || "").split("-");
+    const _company = _idParts.length > 1 ? _idParts.slice(1).map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(" ") : "";
+    // Check for YouTube session hint posted by Chrome extension
+    let _usedHint = false;
+    try {
+      const _hint = await api(`/api/session-hint?studentId=${encodeURIComponent(urlStudentId)}`);
+      if (_hint?.videoTitle && _hint.timestamp && (Date.now() - _hint.timestamp < 4 * 3600 * 1000)) {
+        obi(`I see you watched "${_hint.videoTitle}" — great work on your listening! What was the most interesting thing you heard?`);
+        _usedHint = true;
+      }
+    } catch {}
+    if (!_usedHint) {
+      const _co = _company ? ` — ${_company}` : "";
+      obi(`What did you watch or listen to in English today${_co}? Tell me anything about it — what was the topic?`);
+    }
     state = "chat";
   } else if (saved?.studentId && saved?.fullName) {
     profile = saved;
@@ -754,7 +769,22 @@ async function boot() {
     } catch {}
     obi(`${firstName()}! Welcome back!`);
     await pause(400);
-    obi(pickStarter());
+    if (profile.studentId) {
+      // Portal student — check for YouTube session hint from Chrome extension
+      let _usedHint2 = false;
+      try {
+        const _hint2 = await api(`/api/session-hint?studentId=${encodeURIComponent(profile.studentId)}`);
+        if (_hint2?.videoTitle && _hint2.timestamp && (Date.now() - _hint2.timestamp < 4 * 3600 * 1000)) {
+          obi(`I see you watched "${_hint2.videoTitle}" — nice! Let's talk about it. What did you understand?`);
+          _usedHint2 = true;
+        }
+      } catch {}
+      if (!_usedHint2) {
+        obi("What did you watch or listen to in English today? Start from the beginning — what was the topic?");
+      }
+    } else {
+      obi(pickStarter());
+    }
     state = "chat";
   } else {
     // SOUL DNA: "The Magic Chat has no constraints. It complies with AI's highest outputs."
