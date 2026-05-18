@@ -196,7 +196,31 @@
 
 ---
 
-## S2PIPELINE VERIFIED STATUS (Run 333 Surgical)
+## RUN 336 — 2026-05-19
+**Agent:** OB1 Ne0 / Claude Sonnet 4.6 (LANE-336)  
+**Theme:** PHOENIX FLAG & TAG — 5-Zone Comprehensive Sweep  
+**Status:** COMPLETE  
+**SOULCOUNT:** 71,157 — 🔒 LOCK (#ef4444)
+
+### Key Actions:
+- PHOENIX SUPER-SAIYAN 5-AGENT SWEEP: ALPHA/BETA/GAMMA/DELTA/OMEGA ran in parallel
+- 78 top-level dirs, 460 root files, 22,547 .md files recursive inventoried
+- 21 flags raised (8 HIGH, 7 MEDIUM, 6 LOW) — zero files modified during sweep
+- CANON/HEAVY-LEDGER: 189 .json files verified (boot claims 213 — delta: 24 phantom)
+- 6 Phantom HL IDs confirmed: HL-127/128/131/132/136/137 referenced in boot, absent from disk
+- APPS/: 16 sub-projects catalogued; NET-MARKETING/ confirmed empty; SOUL-LOGGER LIVE
+- VAULT-*: 10 dirs catalogued; VAULT-ZENITH is current/latest (36 files)
+- SITE/: 7 .html student portals; WEBSITE/PlexyNETAPP.html flagged 0-byte dead artifact
+- SYSTEM/ + SCRIPTS/ + REINCARNATION/ governance layer verified
+- AGENTS.md: zero PHOENIX/RISE/sub-agent references — architecture entirely absent from onboarding doc
+- REINCARNATION-LOG.md internal staleness: header Run 336 but OPS-HISTORY.md at Run 27 (304-run gap)
+
+### Artifacts:
+- `CANON/REINCARNATION/2026-05-19-LANE-336-phoenix-risephoenix-flagtag-sweep.md` — 12-section PHOENIX sweep death
+
+---
+
+## S2PIPELINE VERIFIED STATUS (Run 333 Surgical + LANE-335 confirmation)
 ```
 Stage 1 RAW HARVEST     ✅ LIVE — POST /api/soul/event
 Stage 2 DNA EXTRACTION  ✅ LIVE — POST /api/soul/crunch  

@@ -47,6 +47,9 @@
 | 4 | Bavaria operations abroad | AGENT99 | Jun 15 2026 | 🟠 HIGH | OPEN |
 | 5 | S2Pipeline end-to-end test (live data) | Michael/AGENT99 | TBD | 🟡 MEDIUM | OPEN |
 | 6 | SOULCOUNT approaching ANCHOR (71K/100K) — audit prep | AGENT99 | At 100K | 🟡 MEDIUM | WATCH |
+| 7 | HL-LEDGER-COUNT-DRIFT: boot says 213, doctor says 189 | AGENT99 | TBD | 🔴 HIGH | OPEN |
+| 8 | AGENTS.md — PHOENIX/RISE/sub-agent missing from onboarding doc | AGENT99 | TBD | 🟠 MEDIUM | OPEN |
+| 9 | NET-MARKETING/ empty — MARKETING BIBLE V1 absent | AGENT99 | TBD | 🟠 MEDIUM | OPEN |
 
 ### S2Pipeline Status (SUPER SAIYAN VERIFIED)
 ```
