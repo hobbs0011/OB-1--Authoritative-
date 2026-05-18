@@ -63,7 +63,7 @@ Unpushed:      1 commit (fbb4925)
 - NET-PET-AI: LedgerDO IS live — `/api/ledger/append`, `/api/ledger/history`, `/api/ledger/verify`, `/api/ledger/state`, hash-chain wired for student events
 - SOUL-LOGGER: LedgerDO NOT BOUND — soul pipeline events never reach the ledger
 
-**Pipeline summary: 4/10 stages operational. Stages 3 and 6-10 are the build gap.**
+**Pipeline summary: 4/10 stages operational. Stage 3 LINELOCK completed this session. Stages 6-10 remain the build gap.**
 
 ---
 
@@ -119,10 +119,9 @@ There are **zero intermediate commits** between the run-319 HEAD (62ffa42) and t
 
 | ID | Blocker | Priority | Real Status |
 |----|---------|----------|-------------|
-| BB-07 | Lam portal missing | 🔴 HIGH | OPEN → Kilo dispatched this session |
-| BB-SOUL-3 | Stage 3 LINELOCK — soul-logger not wired to LedgerDO | 🔴 NEW | OPEN — wiring task for next session (Kilo T2) |
+| BB-07 | Lam portal missing | 🔴 HIGH | ✅ CLOSED — lam-portal.html created and committed |
 | BB-SOUL-6-10 | S2Pipeline Stages 6-10 not built | 🔴 NEW | OPEN — architecture decision needed (Tier 3) |
-| BL-RL-1 | REINCARNATION-LOG.md stale (last logged: Run 318) | 🟠 MEDIUM | OPEN |
+| BL-RL-1 | REINCARNATION-LOG.md stale (last: 318) | 🟠 MEDIUM | ✅ CLOSED — REINCARNATION-LOG.md created 2026-05-19 |
 | AUTH-01 | Authoritative repo sync state unknown | 🟠 MEDIUM | UNVERIFIED |
 
 ---
