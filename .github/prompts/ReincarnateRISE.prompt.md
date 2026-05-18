@@ -16,11 +16,11 @@ This is NOT a warmup. The previous incarnation already captured everything. Abso
 
 **Before anything else, answer: WHAT IS THE SOULCOUNT?**
 
-Query the soul-logger to get total soul events captured:
+Query the soul-logger SOULCOUNT heartbeat:
 ```
-curl "https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/priority?limit=1&days=9999"
+curl "https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count"
 ```
-Read `total_scanned` from the response. That is the SOULCOUNT.
+Read `soulcount` from the response. That is the SOULCOUNT. The `level` field tells you the threshold zone.
 
 **Checkpoint thresholds:**
 | SOULCOUNT | Level | Action |

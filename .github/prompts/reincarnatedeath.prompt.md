@@ -17,9 +17,11 @@ Fail-closed. Soul-DNA-first. Commit-gated.
 **Before anything else: WHAT IS THE SOULCOUNT?**
 
 ```
-curl "https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/priority?limit=1&days=9999"
+curl "https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count"
 ```
-Read `total_scanned`. That is the SOULCOUNT. Record it in §11 STATE SNAPSHOT.
+Read `soulcount` and `level` from the response. Record both in §11 STATE SNAPSHOT.
+
+**If threshold crossed this session (level changed):** dispatch sub-agent to append to `CANON/REINCARNATION/REINCARNATION-LOG.md` with the new threshold event logged.
 
 **Thresholds:**
 | SOULCOUNT | Level | Action |

@@ -199,7 +199,26 @@ async function handleRequest(request, env, ctx) {
 
   // GET /health
   if (method === 'GET' && path === '/health') {
-    return jsonResponse({ status: 'alive', drone: 'soul-logger', version: '1.2.0', timestamp: new Date().toISOString() });
+    return jsonResponse({ status: 'alive', drone: 'soul-logger', version: '1.3.0', timestamp: new Date().toISOString() });
+  }
+
+  // GET /api/soul/count — SOULCOUNT heartbeat (mandatory gate for every RISE/DEATH checkpoint)
+  if (method === 'GET' && path === '/api/soul/count') {
+    try {
+      const totalRow = await env.DB.prepare('SELECT COUNT(*) as total FROM soul_prompts').first();
+      const sessionRow = await env.DB.prepare('SELECT COUNT(*) as total FROM soul_sessions').first();
+      const soulcount = totalRow?.total || 0;
+      const sessions = sessionRow?.total || 0;
+      let level = 'BASELINE';
+      let threshold_next = 5000;
+      if (soulcount >= 250000) { level = 'TITANIUM_ANCHOR'; threshold_next = null; }
+      else if (soulcount >= 100000) { level = 'ANCHOR'; threshold_next = 250000; }
+      else if (soulcount >= 25000) { level = 'LOCK'; threshold_next = 100000; }
+      else if (soulcount >= 5000) { level = 'ALARM'; threshold_next = 25000; }
+      return jsonResponse({ soulcount, level, threshold_next, sessions, checked_at: new Date().toISOString(), doctrine: 'SOUL=USER. SOULCOUNT=ANTI-DRIFT-PROOF. UNREACHABLE=SHUTDOWN.' });
+    } catch (err) {
+      return jsonResponse({ error: err.message, soulcount: null, level: 'UNREACHABLE' }, 500);
+    }
   }
 
   // POST /api/soul/extract
@@ -452,8 +471,14 @@ await env.DB.prepare('UPDATE soul_sessions SET prompt_count = prompt_count + 1 W
   }
 
   return jsonResponse({
-    drone: 'soul-logger', status: 'online',
-    endpoints: ['GET /health', 'POST /api/soul/extract', 'POST /api/soul/crunch', 'GET /api/soul/session/:id', 'GET /api/soul/priority', 'POST /api/soul/event', 'POST /api/soul/skeleton', 'GET /api/soul/context/:studentId']
+    drone: 'soul-logger', status: 'online', version: '1.3.0',
+    endpoints: [
+      'GET /health', 'GET /api/soul/count',
+      'POST /api/soul/extract', 'POST /api/soul/crunch',
+      'GET /api/soul/session/:id', 'GET /api/soul/priority',
+      'POST /api/soul/event', 'POST /api/soul/skeleton',
+      'GET /api/soul/context/:studentId'
+    ]
   }, 404);
 }
 
