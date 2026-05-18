@@ -12,6 +12,7 @@ import { sendZaloMessage, checkAndEscalate, runEscalationSweep, getAccountabilit
 import { generatePosts, routePost, buildInsightPost } from './growth-engine.js';
 import { calculateVirality, calculateConversion, generateVariants, evaluateExperiment, extractPattern, optimizeHook, mutatePrompt, runLearningLoop } from './virality.js';
 import { getStudentRoute, getModulePrompt, createSnapshot, storeSnapshot, rehydrate } from './star-map.js';
+import { computeNextReview, buildVocabContext, generateVocabId } from './vocab-srs.js';
 
 const VERSION = "1.5.0";
 
@@ -397,6 +398,12 @@ async function handleAPI(path, request, env, url) {
       return json({ error: err.message }, 500);
     }
   }
+
+  // Vocabulary SRS
+  if (path === "/api/vocab/add"    && method === "POST") { const body = await request.json(); return handleVocabAdd(body, env); }
+  if (path === "/api/vocab/due"    && method === "GET")  { return handleVocabDue(url.searchParams.get("studentId") || "", env); }
+  if (path === "/api/vocab/review" && method === "POST") { const body = await request.json(); return handleVocabReview(body, env); }
+  if (path === "/api/vocab/list"   && method === "GET")  { return handleVocabList(url.searchParams.get("studentId") || "", env); }
 
   // Onboarding
   if (path === "/api/onboarding" && method === "POST") { const body = await request.json(); return handleOnboarding(body, env); }
@@ -1020,6 +1027,51 @@ async function handleChat(body, env) {
     state: structuredCtx?.studentState?.state || null,
     mouseTigerScore: structuredCtx?.studentState?.mouse_tiger_score || null,
   });
+}
+
+// ── Vocab SRS API handlers ────────────────────────────────────────────────────
+
+async function handleVocabAdd(body, env) {
+  const studentId = body.studentId || "anonymous";
+  const idCheck = validateStudentId(studentId);
+  if (!idCheck.valid) return json({ error: idCheck.error }, 400);
+  if (!body.word?.trim()) return json({ error: "word required" }, 400);
+  const stub = env.PROFILES.get(env.PROFILES.idFromName(studentId));
+  const res = await stub.fetch(new Request("https://do/vocab/add", {
+    method: "POST", headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ ...body, studentId }),
+  }));
+  return addCors(res, { headers: {} });
+}
+
+async function handleVocabDue(studentId, env) {
+  if (!studentId) return json({ due: [], count: 0 });
+  const idCheck = validateStudentId(studentId);
+  if (!idCheck.valid) return json({ error: idCheck.error }, 400);
+  const stub = env.PROFILES.get(env.PROFILES.idFromName(studentId));
+  const res = await stub.fetch(new Request("https://do/vocab/due"));
+  return addCors(res, { headers: {} });
+}
+
+async function handleVocabReview(body, env) {
+  const studentId = body.studentId || "anonymous";
+  const idCheck = validateStudentId(studentId);
+  if (!idCheck.valid) return json({ error: idCheck.error }, 400);
+  const stub = env.PROFILES.get(env.PROFILES.idFromName(studentId));
+  const res = await stub.fetch(new Request("https://do/vocab/review", {
+    method: "POST", headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  }));
+  return addCors(res, { headers: {} });
+}
+
+async function handleVocabList(studentId, env) {
+  if (!studentId) return json({ words: [], total: 0 });
+  const idCheck = validateStudentId(studentId);
+  if (!idCheck.valid) return json({ error: idCheck.error }, 400);
+  const stub = env.PROFILES.get(env.PROFILES.idFromName(studentId));
+  const res = await stub.fetch(new Request("https://do/vocab/list"));
+  return addCors(res, { headers: {} });
 }
 
 // ── TTS (Deepgram Aura) ───────────────────────────────────────────────────────
@@ -3333,6 +3385,8 @@ export class ProfileDO {
     try { this.sql.exec(`ALTER TABLE profiles ADD COLUMN summary TEXT DEFAULT ''`); } catch(_) {}
     // Weakness tracking table
     this.sql.exec(`CREATE TABLE IF NOT EXISTS weak_points (id INTEGER PRIMARY KEY AUTOINCREMENT, specific TEXT NOT NULL, category TEXT NOT NULL, error_count INTEGER DEFAULT 1, last_seen INTEGER NOT NULL, first_seen INTEGER NOT NULL, improvement_pct REAL DEFAULT 0.0, UNIQUE(specific))`);
+    // Spaced repetition vocabulary table
+    this.sql.exec(`CREATE TABLE IF NOT EXISTS vocab (id TEXT PRIMARY KEY, word TEXT NOT NULL, translation TEXT DEFAULT '', context TEXT DEFAULT '', source TEXT DEFAULT 'class', added_at INTEGER NOT NULL, next_review INTEGER NOT NULL, interval INTEGER DEFAULT 1, repetitions INTEGER DEFAULT 0, ease_factor REAL DEFAULT 2.5, last_grade INTEGER DEFAULT -1)`);
     // Student behavioral state (Mouse → Tiger state machine)
     this.sql.exec(`CREATE TABLE IF NOT EXISTS student_state (
       student_id TEXT PRIMARY KEY,
@@ -3402,6 +3456,38 @@ export class ProfileDO {
     if (url.pathname === "/summary/get" && request.method === "GET") {
       const profile = this.sql.exec(`SELECT summary, english_level FROM profiles LIMIT 1`).toArray();
       return json({ summary: profile[0]?.summary || "", level: profile[0]?.english_level || "A1" });
+    }
+    // Vocab SRS handlers
+    if (url.pathname === "/vocab/add" && request.method === "POST") {
+      const b = await request.json();
+      const now = Date.now();
+      const id = generateVocabId(b.studentId || "anon", b.word || "");
+      this.sql.exec(
+        `INSERT OR REPLACE INTO vocab (id, word, translation, context, source, added_at, next_review, interval, repetitions, ease_factor, last_grade) VALUES (?, ?, ?, ?, ?, ?, ?, 1, 0, 2.5, -1)`,
+        id, (b.word || "").toLowerCase().trim(), b.translation || "", b.context || "", b.source || "class", now, now
+      );
+      return json({ ok: true, id, word: b.word });
+    }
+    if (url.pathname === "/vocab/due" && request.method === "GET") {
+      const now = Date.now();
+      const rows = this.sql.exec(`SELECT * FROM vocab WHERE next_review <= ? ORDER BY next_review ASC LIMIT 10`, now).toArray();
+      return json({ due: rows, count: rows.length });
+    }
+    if (url.pathname === "/vocab/review" && request.method === "POST") {
+      const b = await request.json();
+      const id = generateVocabId(b.studentId || "anon", b.word || "");
+      const existing = this.sql.exec(`SELECT * FROM vocab WHERE id = ?`, id).toArray();
+      if (!existing.length) return json({ error: "Word not found" }, 404);
+      const updated = computeNextReview(existing[0], b.grade ?? 3);
+      this.sql.exec(
+        `UPDATE vocab SET interval = ?, repetitions = ?, ease_factor = ?, next_review = ?, last_grade = ? WHERE id = ?`,
+        updated.interval, updated.repetitions, updated.ease_factor, updated.next_review, updated.last_grade, id
+      );
+      return json({ ok: true, next_review: updated.next_review, interval: updated.interval });
+    }
+    if (url.pathname === "/vocab/list" && request.method === "GET") {
+      const rows = this.sql.exec(`SELECT * FROM vocab ORDER BY next_review ASC`).toArray();
+      return json({ words: rows, total: rows.length });
     }
     if (url.pathname === "/summary/update" && request.method === "POST") {
       const b = await request.json();

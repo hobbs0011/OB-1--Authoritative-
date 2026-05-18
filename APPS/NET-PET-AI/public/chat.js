@@ -367,6 +367,11 @@ function buildSystemPrompt(p) {
   const phonicsHint = p?._phonicsHints?.length
     ? `\nVOICE SIGNAL — Deepgram flagged these words as low-confidence (likely mispronounced): ${p._phonicsHints.join(", ")}. Work these sounds into your reply naturally — don't announce it, just model the correct form.`
     : "";
+
+  const vocabCtx = p?._dueVocab?.length
+    ? `\nVOCAB DUE TODAY (${p._dueVocab.length} word${p._dueVocab.length === 1 ? "" : "s"}): ${p._dueVocab.slice(0, 5).map(w => `"${w.word}"${w.translation ? ` (${w.translation})` : ""}`).join(", ")}. Weave these into your responses — ask the student to use each one in a real sentence today.`
+    : "";
+
   const hasHistory = chatMessages.length > 0;
   const continuity = hasHistory
     ? "You have conversation history above. Reference it \u2014 ask genuine follow-up questions about what they shared. Do NOT pretend each message is the start of a new conversation."
@@ -377,6 +382,7 @@ ${ctx ? `\nContext: ${ctx}` : ""}
 ${levelInstructions}
 ${continuity}
 ${phonicsHint}
+${vocabCtx}
 Phonics: you know Jolly Phonics deeply. TH (tongue between teeth \u2014 not T/S), R (curl back, touch nothing \u2014 not L), V (top teeth on bottom lip \u2014 not B/W), final consonants (English LANDS on them \u2014 don't drop), short/long vowels (bit vs beat), word stress (stress-timed, not tonal). When you notice a phonics pattern in what they wrote, model the correct sound naturally in your reply \u2014 don't announce it, just use it.
 
 Rules:
@@ -747,6 +753,11 @@ async function boot() {
         }
       }
     } catch {}
+    // Load due vocabulary for SRS quiz injection
+    try {
+      const voc = await api(`/api/vocab/due?studentId=${encodeURIComponent(profile.studentId)}`);
+      if (voc?.due?.length) profile._dueVocab = voc.due;
+    } catch {}
     obi(`${firstName()}! Let's go.`);
     await pause(350);
     obi(pickStarter());
@@ -763,6 +774,11 @@ async function boot() {
           if (ex?.obi)  chatMessages.push({ role: "assistant", content: ex.obi  });
         }
       }
+    } catch {}
+    // Load due vocabulary for SRS quiz injection
+    try {
+      const voc = await api(`/api/vocab/due?studentId=${encodeURIComponent(profile.studentId)}`);
+      if (voc?.due?.length) profile._dueVocab = voc.due;
     } catch {}
     obi(`${firstName()}! Welcome back!`);
     await pause(400);
