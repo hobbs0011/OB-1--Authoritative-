@@ -28,6 +28,24 @@ async function sha256(text) {
   return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 }
 
+async function buildMerkleRoot(hashes) {
+  if (!hashes || hashes.length === 0) return null;
+  if (hashes.length === 1) return hashes[0];
+  let layer = [...hashes];
+  while (layer.length > 1) {
+    if (layer.length % 2 !== 0) layer.push(layer[layer.length - 1]);
+    const next = [];
+    for (let i = 0; i < layer.length; i += 2) {
+      const encoder = new TextEncoder();
+      const combined = encoder.encode(layer[i] + layer[i + 1]);
+      const buf = await crypto.subtle.digest('SHA-256', combined);
+      next.push(Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join(''));
+    }
+    layer = next;
+  }
+  return layer[0];
+}
+
 function detectMarkers(text) {
   const words = text.match(/\b[A-Z]{2,}\b/g) || [];
   const caps_words = words.length;
@@ -482,6 +500,94 @@ await env.DB.prepare('UPDATE soul_sessions SET prompt_count = prompt_count + 1 W
     }
   }
 
+  // POST /api/soul/truth — Stage 6: 6-AI TRUTH
+  if (method === 'POST' && path === '/api/soul/truth') {
+    try {
+      const body = await request.json();
+      const { session_id, focus_text } = body;
+      if (!session_id && !focus_text) return jsonResponse({ error: 'session_id or focus_text required' }, 400);
+      let inputText = focus_text || '';
+      if (!inputText && session_id) {
+        const { results: prompts } = await env.DB.prepare('SELECT text FROM soul_prompts WHERE session_id = ? ORDER BY position DESC LIMIT 10').bind(session_id).all();
+        if (!prompts || prompts.length === 0) return jsonResponse({ error: 'Session not found or no prompts' }, 404);
+        inputText = prompts.reverse().map(p => p.text).join('\n');
+      }
+      const soulTruthPrompt = 'You are a soul-truth engine. Identify the 3 highest-charge directives from this conversation. Return ONLY valid JSON: {"directives":["...","...","..."],"charge_score":5,"key_phrases":["..."]}';
+      let modelA = null, modelB = null;
+      if (env.AI) {
+        try { const ra = await env.AI.run('@cf/meta/llama-3-8b-instruct', { messages: [{ role: 'system', content: soulTruthPrompt }, { role: 'user', content: inputText.slice(0, 3000) }] }); modelA = typeof ra === 'string' ? ra : (ra.response || null); } catch(e) {}
+        try { const rb = await env.AI.run('@cf/mistral/mistral-7b-instruct-v0.1', { messages: [{ role: 'system', content: soulTruthPrompt }, { role: 'user', content: inputText.slice(0, 3000) }] }); modelB = typeof rb === 'string' ? rb : (rb.response || null); } catch(e) {}
+      }
+      let parsedA = null, parsedB = null;
+      try { const m = (modelA || '').match(/\{[\s\S]*\}/); if (m) parsedA = JSON.parse(m[0]); } catch(e) {}
+      try { const m = (modelB || '').match(/\{[\s\S]*\}/); if (m) parsedB = JSON.parse(m[0]); } catch(e) {}
+      const scoreA = parsedA?.charge_score || 0, scoreB = parsedB?.charge_score || 0;
+      const consensusScore = Math.round((scoreA + scoreB) / 2);
+      const consensusAchieved = Math.abs(scoreA - scoreB) <= 3;
+      const truthId = generateUUID();
+      ctx.waitUntil(appendToLedger(env, { studentId: session_id?.split('-')[0] || 'sov100', eventType: 'soul_truth_capture', data: { truth_id: truthId, consensus_score: consensusScore, consensus_achieved: consensusAchieved } }));
+      return jsonResponse({ truth_id: truthId, session_id, consensus_score: consensusScore, consensus_achieved: consensusAchieved, model_a_score: scoreA, model_b_score: scoreB, agreed_directives: parsedA?.directives || parsedB?.directives || [], key_phrases: parsedA?.key_phrases || parsedB?.key_phrases || [], generated_at: new Date().toISOString(), stage: 'S2-STAGE-6-TRUTH' }, 201);
+    } catch (err) { return jsonResponse({ error: err.message }, 500); }
+  }
+
+  // POST /api/soul/shadow — Stage 7: SHADOW REALM
+  if (method === 'POST' && path === '/api/soul/shadow') {
+    try {
+      const body = await request.json();
+      const { text, session_id } = body;
+      if (!text && !session_id) return jsonResponse({ error: 'text or session_id required' }, 400);
+      let inputText = text || '';
+      if (!inputText && session_id) {
+        const { results: prompts } = await env.DB.prepare('SELECT text FROM soul_prompts WHERE session_id = ? ORDER BY position DESC LIMIT 5').bind(session_id).all();
+        inputText = (prompts || []).reverse().map(p => p.text).join('\n');
+      }
+      const dookuPrompt = 'You are Dooku — adversarial soul-challenger. Find the drift, lies, contradictions. Be hostile. Return ONLY valid JSON: {"challenge":"finding","drift_indicators":["..."],"intensity_score":5,"verdict":"DRIFT_DETECTED"}';
+      let challengeRaw = null;
+      if (env.AI) { try { const r = await env.AI.run('@cf/mistral/mistral-7b-instruct-v0.1', { messages: [{ role: 'system', content: dookuPrompt }, { role: 'user', content: inputText.slice(0, 2000) }] }); challengeRaw = typeof r === 'string' ? r : (r.response || null); } catch(e) {} }
+      let parsed = null;
+      try { const m = (challengeRaw || '').match(/\{[\s\S]*\}/); if (m) parsed = JSON.parse(m[0]); } catch(e) {}
+      const shadowId = generateUUID();
+      ctx.waitUntil(appendToLedger(env, { studentId: session_id?.split('-')[0] || 'sov100', eventType: 'soul_shadow_challenge', data: { shadow_id: shadowId, verdict: parsed?.verdict || 'UNKNOWN', intensity: parsed?.intensity_score || 0 } }));
+      return jsonResponse({ shadow_id: shadowId, verdict: parsed?.verdict || 'UNKNOWN', challenge: parsed?.challenge || challengeRaw || 'Dooku offline', drift_indicators: parsed?.drift_indicators || [], intensity_score: parsed?.intensity_score || 0, generated_at: new Date().toISOString(), stage: 'S2-STAGE-7-SHADOW' }, 201);
+    } catch (err) { return jsonResponse({ error: err.message }, 500); }
+  }
+
+  // GET /api/soul/merkle/:session_id — Stage 8: MERKLE LATTICE
+  if (method === 'GET' && path.startsWith('/api/soul/merkle/')) {
+    const sessionId = path.replace('/api/soul/merkle/', '');
+    if (!sessionId) return jsonResponse({ error: 'session_id required' }, 400);
+    try {
+      const { results: prompts } = await env.DB.prepare('SELECT hash_sha256 FROM soul_prompts WHERE session_id = ? AND hash_sha256 IS NOT NULL ORDER BY position ASC').bind(sessionId).all();
+      if (!prompts || prompts.length === 0) return jsonResponse({ error: 'No hashed prompts found for session' }, 404);
+      const hashes = prompts.map(p => p.hash_sha256).filter(Boolean);
+      const merkleRoot = await buildMerkleRoot(hashes);
+      return jsonResponse({ session_id: sessionId, merkle_root: merkleRoot, leaf_count: hashes.length, depth: Math.ceil(Math.log2(hashes.length || 1)) + 1, generated_at: new Date().toISOString(), stage: 'S2-STAGE-8-MERKLE' });
+    } catch (err) { return jsonResponse({ error: err.message }, 500); }
+  }
+
+  // GET /api/soul/apex — Stage 10: APEX ROLLUP
+  if (method === 'GET' && path === '/api/soul/apex') {
+    try {
+      const studentId = url.searchParams.get('student_id') || 'sov100';
+      const limit = parseInt(url.searchParams.get('limit') || '5', 10);
+      const days = parseInt(url.searchParams.get('days') || '30', 10);
+      const cutoff = new Date(Date.now() - days * 24 * 60 * 60 * 1000).toISOString();
+      const { results: rawPrompts } = await env.DB.prepare('SELECT p.text, p.emotional_markers, p.session_id FROM soul_prompts p JOIN soul_sessions s ON p.session_id = s.session_id WHERE s.ingested_at >= ? ORDER BY s.ingested_at DESC LIMIT 100').bind(cutoff).all();
+      const scored = (rawPrompts || []).map(row => {
+        let markers = { caps_words: 0, exclamations: 0 };
+        try { if (row.emotional_markers) markers = JSON.parse(row.emotional_markers); } catch(e) {}
+        const score = (markers.caps_words * 3) + (markers.exclamations * 2) + (detectProfanity(row.text) * 10);
+        return { text: row.text, score, session_id: row.session_id };
+      }).sort((a, b) => b.score - a.score);
+      let topKeywords = [];
+      try { const { results: kw } = await env.DB.prepare('SELECT keyword, weight FROM soul_keywords WHERE student_id = ? ORDER BY weight DESC LIMIT 10').bind(studentId).all(); topKeywords = kw || []; } catch(e) {}
+      const topItems = scored.slice(0, limit);
+      const apexScore = topItems.length > 0 ? Math.round(topItems.reduce((s, i) => s + i.score, 0) / topItems.length) : 0;
+      ctx.waitUntil(appendToLedger(env, { studentId, eventType: 'soul_apex_rollup', data: { apex_score: apexScore, items_scored: scored.length, keywords: topKeywords.slice(0, 3).map(k => k.keyword) } }));
+      return jsonResponse({ student_id: studentId, apex_score: apexScore, soul_directives: topItems.map(i => ({ text: i.text.slice(0, 200), charge: i.score })), top_keywords: topKeywords, total_prompts_scanned: rawPrompts?.length || 0, generated_at: new Date().toISOString(), stage: 'S2-STAGE-10-APEX' });
+    } catch (err) { return jsonResponse({ error: err.message }, 500); }
+  }
+
   return jsonResponse({
     drone: 'soul-logger', status: 'online', version: '1.3.0',
     endpoints: [
@@ -489,7 +595,9 @@ await env.DB.prepare('UPDATE soul_sessions SET prompt_count = prompt_count + 1 W
       'POST /api/soul/extract', 'POST /api/soul/crunch',
       'GET /api/soul/session/:id', 'GET /api/soul/priority',
       'POST /api/soul/event', 'POST /api/soul/skeleton',
-      'GET /api/soul/context/:studentId'
+      'GET /api/soul/context/:studentId',
+      'POST /api/soul/truth', 'POST /api/soul/shadow',
+      'GET /api/soul/merkle/:session_id', 'GET /api/soul/apex'
     ]
   }, 404);
 }
