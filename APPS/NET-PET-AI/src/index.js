@@ -368,6 +368,36 @@ async function handleAPI(path, request, env, url) {
   // TTS
   if (path === "/api/tts" && method === "POST") { const body = await request.json(); return handleTTS(body, env); }
 
+  // STT — Deepgram Nova-3 speech-to-text with word confidence
+  if (path === "/api/stt" && method === "POST") {
+    const apiKey = env.DEEPGRAM_API_KEY;
+    if (!apiKey) return json({ error: "DEEPGRAM_API_KEY not configured" }, 500);
+    const contentType = request.headers.get("content-type") || "audio/webm";
+    const audioBuffer = await request.arrayBuffer();
+    if (!audioBuffer.byteLength) return json({ error: "No audio received" }, 400);
+    try {
+      const dgRes = await fetch(
+        "https://api.deepgram.com/v1/listen?model=nova-3&punctuate=true&smart_format=true&utterances=true",
+        {
+          method: "POST",
+          headers: { "Authorization": `Token ${apiKey}`, "Content-Type": contentType },
+          body: audioBuffer,
+        }
+      );
+      if (!dgRes.ok) return json({ error: `Deepgram STT ${dgRes.status}` }, 502);
+      const data = await dgRes.json();
+      const alt = data?.results?.channels?.[0]?.alternatives?.[0];
+      if (!alt) return json({ error: "No transcript returned" }, 422);
+      return addCors(json({
+        transcript: alt.transcript || "",
+        words: (alt.words || []).map(w => ({ word: w.word, confidence: w.confidence, start: w.start, end: w.end })),
+        duration: data?.metadata?.duration || 0,
+      }), request);
+    } catch (err) {
+      return json({ error: err.message }, 500);
+    }
+  }
+
   // Onboarding
   if (path === "/api/onboarding" && method === "POST") { const body = await request.json(); return handleOnboarding(body, env); }
 

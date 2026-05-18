@@ -364,6 +364,9 @@ function buildSystemPrompt(p) {
     ? "ADVANCED: Challenge them. Ask complex follow-ups. Push for more nuance and detail. Don't accept vague answers \u2014 probe deeper. You can point out subtle mistakes because they can handle it."
     : "INTERMEDIATE: Build confidence while pushing their limits. Mix encouragement with challenge. Rephrase their mistakes naturally in your response without calling them out.";
 
+  const phonicsHint = p?._phonicsHints?.length
+    ? `\nVOICE SIGNAL — Deepgram flagged these words as low-confidence (likely mispronounced): ${p._phonicsHints.join(", ")}. Work these sounds into your reply naturally — don't announce it, just model the correct form.`
+    : "";
   const hasHistory = chatMessages.length > 0;
   const continuity = hasHistory
     ? "You have conversation history above. Reference it \u2014 ask genuine follow-up questions about what they shared. Do NOT pretend each message is the start of a new conversation."
@@ -373,6 +376,7 @@ function buildSystemPrompt(p) {
 ${ctx ? `\nContext: ${ctx}` : ""}
 ${levelInstructions}
 ${continuity}
+${phonicsHint}
 Phonics: you know Jolly Phonics deeply. TH (tongue between teeth \u2014 not T/S), R (curl back, touch nothing \u2014 not L), V (top teeth on bottom lip \u2014 not B/W), final consonants (English LANDS on them \u2014 don't drop), short/long vowels (bit vs beat), word stress (stress-timed, not tonal). When you notice a phonics pattern in what they wrote, model the correct sound naturally in your reply \u2014 don't announce it, just use it.
 
 Rules:
@@ -619,50 +623,79 @@ async function handle(text) {
   }
 }
 
-// ── Voice input (Web Speech API) ───────────────────────────
+// ── Voice input (Deepgram Nova-3 STT) ──────────────
+let mediaRecorder = null;
+let audioChunks   = [];
+let listening     = false;
 
-const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-let recog     = null;
-let listening = false;
+async function startListening() {
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    audioChunks  = [];
+    const mimeType = MediaRecorder.isTypeSupported("audio/webm;codecs=opus")
+      ? "audio/webm;codecs=opus" : "audio/webm";
+    mediaRecorder = new MediaRecorder(stream, { mimeType });
 
-if (SR) {
-  recog = new SR();
-  recog.lang = "en-US";
-  recog.interimResults = true;
-  recog.continuous = false;
+    mediaRecorder.ondataavailable = (e) => {
+      if (e.data.size > 0) audioChunks.push(e.data);
+    };
 
-  recog.onresult = (e) => {
-    input.value = Array.from(e.results).map(r => r[0].transcript).join("");
-  };
+    mediaRecorder.onstop = async () => {
+      stream.getTracks().forEach(t => t.stop());
+      const blob = new Blob(audioChunks, { type: mimeType });
+      input.placeholder = "Processing\u2026";
+      try {
+        const res = await fetch("/api/stt", {
+          method: "POST",
+          headers: { "Content-Type": mimeType },
+          body: blob,
+        });
+        const data = await res.json();
+        const transcript = (data.transcript || "").trim();
+        if (transcript) {
+          input.value = transcript;
+          // Store low-confidence words so OBI can address pronunciation in next reply
+          const lowConf = (data.words || []).filter(w => w.confidence < 0.75);
+          if (lowConf.length > 0) {
+            profile._phonicsHints = lowConf.map(w => w.word);
+          } else {
+            profile._phonicsHints = null;
+          }
+          handle(transcript);
+        } else {
+          input.placeholder = "Didn't catch that — try again!";
+          setTimeout(() => { input.placeholder = "Type here\u2026"; }, 2500);
+        }
+      } catch {
+        input.placeholder = "Voice error — type instead";
+        setTimeout(() => { input.placeholder = "Type here\u2026"; }, 2500);
+      }
+      listening = false;
+      micBtn.classList.remove("mic-active");
+      if (input.placeholder === "Processing\u2026") input.placeholder = "Type here\u2026";
+    };
 
-  recog.onend = () => {
-    listening = false;
-    micBtn.classList.remove("mic-active");
-    input.placeholder = "Type here\u2026";
-    const t = input.value.trim();
-    if (t) handle(t);
-  };
+    mediaRecorder.start();
+    listening = true;
+    micBtn.classList.add("mic-active");
+    input.value = "";
+    input.placeholder = "Listening\u2026";
+  } catch {
+    input.placeholder = "Mic access denied";
+    setTimeout(() => { input.placeholder = "Type here\u2026"; }, 2500);
+  }
+}
 
-  recog.onerror = () => {
-    listening = false;
-    micBtn.classList.remove("mic-active");
-    input.placeholder = "Type here\u2026";
-  };
-} else {
-  micBtn.style.display = "none";
+function stopListening() {
+  if (mediaRecorder && mediaRecorder.state !== "inactive") mediaRecorder.stop();
+  listening = false;
+  micBtn.classList.remove("mic-active");
 }
 
 micBtn.addEventListener("click", () => {
-  if (!recog || micBtn.disabled) return;
-  if (listening) {
-    recog.stop();
-    return;
-  }
-  recog.start();
-  listening = true;
-  micBtn.classList.add("mic-active");
-  input.value = "";
-  input.placeholder = "Listening\u2026";
+  if (micBtn.disabled) return;
+  if (listening) { stopListening(); return; }
+  startListening();
 });
 
 // ── Form submit ────────────────────────────────────────────
