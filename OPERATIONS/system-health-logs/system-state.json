@@ -1,8 +1,8 @@
 {
-  "doctor_ok": true,
-  "timestamp": "2026-05-18T12:55:45.6094454+07:00",
-  "soul_ok": true,
   "git_branch": "master",
+  "timestamp": "2026-05-19T00:06:17.1280795+07:00",
+  "soul_ok": true,
+  "git_head": "742034a feat: complete portal fixes + NET_PET_KV + soul-logger priority",
   "verify_ok": true,
-  "git_head": "56568e4 feat: add Quan + Quang private student portals (5 tabs each)"
+  "doctor_ok": true
 }
