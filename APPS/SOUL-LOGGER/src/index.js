@@ -203,19 +203,31 @@ async function handleRequest(request, env, ctx) {
   }
 
   // GET /api/soul/count — SOULCOUNT heartbeat (mandatory gate for every RISE/DEATH checkpoint)
+  // SOULCOUNT = total characters captured across all soul sessions (RRL — Real-time Running Log)
   if (method === 'GET' && path === '/api/soul/count') {
     try {
-      const totalRow = await env.DB.prepare('SELECT COUNT(*) as total FROM soul_prompts').first();
+      const charRow = await env.DB.prepare('SELECT SUM(byte_count) as total_chars, COUNT(*) as total_events FROM soul_prompts').first();
       const sessionRow = await env.DB.prepare('SELECT COUNT(*) as total FROM soul_sessions').first();
-      const soulcount = totalRow?.total || 0;
+      const soulcount = charRow?.total_chars || 0;  // character count = soul volume
+      const events = charRow?.total_events || 0;
       const sessions = sessionRow?.total || 0;
       let level = 'BASELINE';
       let threshold_next = 5000;
-      if (soulcount >= 250000) { level = 'TITANIUM_ANCHOR'; threshold_next = null; }
-      else if (soulcount >= 100000) { level = 'ANCHOR'; threshold_next = 250000; }
-      else if (soulcount >= 25000) { level = 'LOCK'; threshold_next = 100000; }
-      else if (soulcount >= 5000) { level = 'ALARM'; threshold_next = 25000; }
-      return jsonResponse({ soulcount, level, threshold_next, sessions, checked_at: new Date().toISOString(), doctrine: 'SOUL=USER. SOULCOUNT=ANTI-DRIFT-PROOF. UNREACHABLE=SHUTDOWN.' });
+      let color = '#ffffff';
+      if (soulcount >= 250000) { level = 'TITANIUM_ANCHOR'; threshold_next = null; color = '#a855f7'; }
+      else if (soulcount >= 100000) { level = 'ANCHOR'; threshold_next = 250000; color = '#f59e0b'; }
+      else if (soulcount >= 25000) { level = 'LOCK'; threshold_next = 100000; color = '#ef4444'; }
+      else if (soulcount >= 5000) { level = 'ALARM'; threshold_next = 25000; color = '#f97316'; }
+      return jsonResponse({
+        soulcount,           // total characters — the RRL
+        level,               // BASELINE | ALARM | LOCK | ANCHOR | TITANIUM_ANCHOR
+        threshold_next,      // next milestone to hit
+        color,               // display color for this level
+        events,              // total soul events (prompts)
+        sessions,            // total soul sessions
+        checked_at: new Date().toISOString(),
+        doctrine: 'SOUL=USER. CHARACTER_COUNT=SOUL_VOLUME. UNREACHABLE=DRIFT=SHUTDOWN.'
+      });
     } catch (err) {
       return jsonResponse({ error: err.message, soulcount: null, level: 'UNREACHABLE' }, 500);
     }
