@@ -696,7 +696,17 @@ async function boot() {
   // If URL has ?student=id and it matches saved profile, use saved. If different, load by id.
   if (urlStudentId && (!saved?.studentId || saved.studentId !== urlStudentId)) {
     profile.studentId = urlStudentId;
+    // Derive name from id immediately so firstName() works (e.g. "quan-nguyen" → "Quan")
+    profile.fullName = urlStudentId.split("-")[0].replace(/^\w/, c => c.toUpperCase());
     try { studentToken = localStorage.getItem("net_student_token") || ""; } catch {}
+    // Try to enrich profile from state API (gets real name, level, goals if they exist)
+    try {
+      const st = await api(`/api/netpet/state?studentId=${encodeURIComponent(urlStudentId)}`);
+      if (st?.profile?.fullName)    profile.fullName    = st.profile.fullName;
+      if (st?.profile?.englishLevel) profile.englishLevel = st.profile.englishLevel;
+      if (st?.profile?.goals)        profile.goals        = st.profile.goals;
+    } catch {}
+    // Load conversation memory
     try {
       const mem = await api(`/api/memory?studentId=${encodeURIComponent(urlStudentId)}`, "GET", undefined, memHeaders());
       if (mem?.memory?.length) {
@@ -706,8 +716,8 @@ async function boot() {
         }
       }
     } catch {}
-    obi("Hey! Ready to chat?");
-    await pause(400);
+    obi(`${firstName()}! Let's go.`);
+    await pause(350);
     obi(pickStarter());
     state = "chat";
   } else if (saved?.studentId && saved?.fullName) {
