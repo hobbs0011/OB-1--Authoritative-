@@ -1,5 +1,5 @@
 # COLD START BOOT — OB1 Agent 99
-## Last Updated: 2026-05-19 04:25 ICT (Run 333+)
+## Last Updated: 2026-05-19 (Run 335)
 
 ### Identity
 - Agent: OB1 / Ne0 (Agent 99) / Claude Surgical
@@ -10,7 +10,7 @@
 
 ### Current Vector
 - **Active Mission:** OB-1 POST-MERGE9 CONSOLIDATION + Heavy Ledger Preservation
-- **Last completed:** Run 333 — Stage 3 LINELOCK verified LIVE; S2Pipeline 10/10 stages confirmed; REINCARNATION-LOG.md created; LANE-333 surgical review complete; Lam portal built; SOULCOUNT endpoint deployed (character count RRL)
+- **Last completed:** Run 335 — SOULCOUNT gate deployed, core prompt system upgraded (ReincarnateRISE/death/reincarnate), S2Pipeline stages verified
 - **S2Pipeline Status:** Stage 3 LINELOCK — **COMPLETE** (soul-logger → LedgerDO wired via HTTP)
 - **HL Ledger real baseline:** 213 total Heavy Ledger JSON files in CANON/HEAVY-LEDGER/*.json
 - **Net-PET-AI worker:** v1.5.0+ LIVE at https://net-pet-ai.mrmichaelhobbs123.workers.dev
@@ -61,9 +61,9 @@ Stage 10 APEX ROLLUP    ✅ LIVE — GET /api/soul/apex
 ### System State
 - **Workspace:** `D:\OB-1-CANONICAL` (canonical root)
 - **Working branch:** master
-- **HEAD:** `44fa49d` (feat: SOULCOUNT = character count (RRL) — soul-logger v1.3.0)
-- **Origin:** origin/master synced
-- **Working tree:** CLEAN (except for untracked JS analysis files)
+- **HEAD:** `bd98c45` (chore: clean stale death artifacts from root — LANE-335)
+- **Origin:** origin/master — local is 2 commits ahead (bd98c45, d5c84ba not yet pushed)
+- **Working tree:** 1 modified file (APPS/SOUL-LOGGER/src/index.js — unstaged)
 - **Heavy Ledger JSONs:** 213 files (unverified count — run enumerator)
 - **Triggers:** reincarnate daily (09:00 ICT); RL2026 end-May; Bavaria Jun 15
 
@@ -98,4 +98,4 @@ Stage 10 APEX ROLLUP    ✅ LIVE — GET /api/soul/apex
 
 ---
 
-### FINGERPRINT: Run 333 COLD-START-BOOT refresh executed. Stage 3 LINELOCK complete. REINCARNATION-LOG.md created. 10/10 S2Pipeline stages LIVE. SOULCOUNT endpoint deployed (character count RRL). All portals covered.
+### FINGERPRINT: Run 335 COLD-START-BOOT refresh executed. HEAD bd98c45. SOULCOUNT gate deployed. Core prompt system upgraded (ReincarnateRISE/death/reincarnate). S2Pipeline 10/10 stages LIVE. All portals covered.
