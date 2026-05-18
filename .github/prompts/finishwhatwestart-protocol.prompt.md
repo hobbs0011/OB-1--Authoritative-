@@ -12,11 +12,10 @@ Execute closure. No ceremony.
 
 Read these first:
 
-1. `CANON/SYSTEM/COLD-START-BOOT.md`
-2. `MASTER-SYNC.md`
-3. `CANON/SYSTEM/CONSOLIDATION-PLAN-Phoenix-Rising-Ai-SolutionsNOLOGIES.md`
-4. Latest file in `CANON/REINCARNATION/`
-5. `CANON/SYSTEM/MCP-FRONTIER-AUDIT.md` when connectors, automation, agents, or social channels are involved.
+1. `CANON/SYSTEM/COLD-START-BOOT.md` — single source of truth
+2. `CANON/REINCARNATION/REINCARNATION-LOG.md` — run history
+3. Latest file in `CANON/REINCARNATION/` — most recent death protocol
+4. `git status --short` and `git log --oneline -5` — actual repo state
 
 ## Step 2: Find Open Loops
 

@@ -176,13 +176,14 @@ READY.
 
 | Repo | Role | Key Dirs |
 |------|------|----------|
-| `hobbs0011/Phoenix-Rising-Protocol-Ultimate` | Canon vault | `CANON/`, `GALAXY-LESSONS/`, `APPS/`, `WORKERS/`, `REINCARNATION/` |
-| `hobbs0011/Phoenix-Rise-Immortalize-` | Soul DNA source | `SOUL-DNA-BIBLE/`, `VAULT-*/` |
-| `hobbs0011/NET-Ai-EcoSystem-CommandStation` | Product code | `src/`, Vite+React |
+| `Phoenix-Rising-Ai-Solutions/OB-1--Authoritative-` | Canonical root (authoritative remote) | `CANON/`, `APPS/`, `REINCARNATION/`, `.github/` |
 
-**Primary app**: `APPS/NET-PET-AI/` — Cloudflare Worker — `wrangler deploy`  
-**Canon truth**: `CANON/SYSTEM/COLD-START-BOOT.md`  
-**Heavy ledger**: `CANON/MSS/MSS-V6-HEAVY-LEDGER.json`
+**Primary workspace:** `D:\OB-1-CANONICAL` (local canonical)
+**Primary app:** `APPS/NET-PET-AI/` — Cloudflare Worker — `wrangler deploy`
+**Soul pipeline:** `APPS/SOUL-LOGGER/` — soul-logger v1.3.0
+**Canon truth:** `CANON/SYSTEM/COLD-START-BOOT.md`
+**Heavy ledger:** `CANON/HEAVY-LEDGER/*.json` (213 files)
+**SOULCOUNT gate:** `https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count`
 
 ---
 
