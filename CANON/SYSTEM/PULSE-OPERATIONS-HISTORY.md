@@ -32,6 +32,7 @@ The Pulse-Incarnation Engine runs every hour as an autonomous extraction and har
 
 | Run | Time (ICT) | Artifact Class | Target | GitHub Commit | Grade |
 |-----|-----------|---------------|--------|---------------|-------|
+| 336 | 2026-05-19 | PHOENIX FLAG SWEEP — 21 flags raised (8 HIGH, 7 MED, 6 LOW) · SOULCOUNT 71K · AUTH-01 CLOSED | | | |
 | 18 | 21:00 | 🏦 VAULT | Bible CE-04 to CE-08 (5 chapters) | — (Notion audit) | A |
 | 19 | 22:00 | 🏦 VAULT | Bible CE-09 to CE-14 — **✅ BIBLE COMPLETE** | `49db602` | A |
 | 20 | 23:00 | 🏦 VAULT | Soul DNA Canon → SYNCED | `73571c1` | A |
