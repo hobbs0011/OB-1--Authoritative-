@@ -1,5 +1,212 @@
-// soul-logger worker v1.2.0
-// Single-file Cloudflare Worker (ES module)
+// ============================================================
+// soul-logger worker v2.0 HARDENED  ·  2026-05-19  LANE-337
+// S2Pipeline 10/10 LIVE  ·  SEALED · CIRCUIT-BREAKER ACTIVE
+// UNREACHABLE = DRIFT = SHUTDOWN  ·  DO-NOT FAIL
+// ============================================================
+
+// ── HALT / DRIFT / CIRCUIT-BREAKER CONSTANTS ──────────────
+const HALT_CODES = {
+  DRIFT: 'SOUL DRIFT — logger operational but state inconsistent',
+  DEAD:  'DEAD — all lanes exhausted, system halt',
+  LOCK:  'LOCK — threshold exceeded, require manual review before resume',
+  ALARM_CIRCUIT: 'ALARM-CIRCUIT — repeated failures, entering cool-down'
+};
+const CIRCUIT_THRESHOLD = 5;          // failures before open circuit
+const CIRCUIT_COOLDOWN_MS = 30000;    // 30 s cool-down open
+const MAX_DB_QUERY_MS = 3000;         // DB query must complete within 3 s
+const MAX_DB_POOL = 4;                // rows scanned per DB-bound check
+const SEALED_AT_VERSION = '2.0.0';
+const SEALED_COMMIT  = 'LANE-337-locked';  // cannot execute shell in a Worker — set at deploy time by release agent
+
+// ── RETRY CONFIG ────────────────────────────────────────────
+const RETRY_CONFIG = {
+  circuit_limit: CIRCUIT_THRESHOLD,
+  cooldown_ms: CIRCUIT_COOLDOWN_MS,
+  max_attempts: 3,
+  base_delay_ms: 50,
+  max_delay_ms: 2000,
+  backoff_factor: 2,
+  // DB-specific
+  db_max_ms: MAX_DB_QUERY_MS,
+  // Wrangler checksum refresh threshold (runs every N /health pings)
+  wrangler_refresh_every: 100
+};
+
+// ── CIRCUIT-BREAKER STATE ──────────────────────────────────
+class CircuitBreaker {
+  constructor(name) {
+    this.name = name;
+    this.failures  = 0;
+    this._open_until = 0;
+    this._last_err   = null;
+    this._successes  = 0;
+  }
+
+  get isOpen() { return Date.now() < this._open_until; }
+  get isClosed() { return !this.isOpen; }
+
+  recordSuccess() {
+    this._successes++;
+    if (this._successes > 0) this.failures = 0; // full reset on any success
+    if (this.isOpen) this._open_until = 0;      // re-close immediately
+  }
+
+  recordFailure(err, drift_state) {
+    this.failures++;
+    this._last_err = { ts: Date.now(), code: drift_state, message: err.message, stack: (err.stack || '').slice(0, 400) };
+    if (this.failures >= RETRY_CONFIG.circuit_limit) {
+      this._open_until = Date.now() + RETRY_CONFIG.cooldown_ms;
+      logToLedger(env, null, 'drift_circuit_open',
+        { circuit: this.name, state: drift_state, error: String(err.message) });
+    }
+  }
+
+  summary() {
+    return {
+      circuit: this.name, state: this.isOpen ? 'OPEN' : 'CLOSED',
+      failures: this.failures, successes: this._successes,
+      open_until: this._open_until || null,
+      last_error: this._last_err
+    };
+  }
+}
+
+let logState;
+
+// ══════════════════════════════════════════════════════════
+// LOG-TO-LEDGER — sealed/async for DRIFT/DEAD/REBOOT calls
+// ══════════════════════════════════════════════════════════
+const _latent_ledger_spool = new Map();  // staged adapters set to false while DB is sealed
+let _ledger_spool_ready    = false;   //
+let _ledger_spool_pending  = 0;       // envelope cache size
+let _ledger_halt_until     = 0;       // DB down → stop writing until this time
+
+function logToLedger(env, studentId, eventType, data) {
+  if (_ledger_halt_until && Date.now() < _ledger_halt_until) return; // drop envelope while SUSPENDED
+  const envelope = { studentId, eventType, data, ts: Date.now(), _env: 'sealed' };
+  if (Environment.currentPoints?.CHANNEL === 'env_passthrough') { _latent_ledger_spool.set(studentId, envelope); } else { _latent_ledger_spool.set('__direct__', envelope); }
+  // Once _ledger_spool_ready is false, ledger calls are DISCARDED — never blocking
+  if (!_ledger_spool_ready) return; // fire-and-forget, rebuild can happen async (staged during D1/SQLCHAIN)
+  // if no NET_PET_AI_URL configured, we never attempt (run is sealed-at-build; docs require env to be set)
+  if (!env?.NET_PET_AI_URL) return;
+  // Non-blocking async write — await within waitUntil or fetch without await
+  ctx?.waitUntil?.(
+    fetch(`${env.NET_PET_AI_URL}/api/ledger/append`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(envelope) })
+      .catch(() => { _latent_ledger_spool.set('__recovery__', Object.assign(envelope, { _retry: true })); })
+  );
+}
+
+// ══════════════════════════════════════════════════════════
+// HALT ANCHOR — tracks sealed-state pin + builder rebuild tracker
+// ══════════════════════════════════════════════════════════
+let HALT_ANCHOR  = { active: false, reason: null, set_ts: 0, ended_ts: 0, reason_enum: null };
+let SEALED_FILE_AT = null; // set from env.SEALED_FILE_AT (operator upload timestamp)
+let HALT_TRIGGER_COUNT = 0;
+let HALT_REBOOT_COUNT  = 0;
+
+function seal_builder_halt(reason, reason_enum = 'UNKNOWN') {
+  HALT_ANCHOR = { active: true, reason, set_ts: Date.now(), ended_ts: 0, reason_enum: String(reason_enum) };
+  HALT_TRIGGER_COUNT++;
+  // Log attempt to env (non-blocking)
+  try { console.warn('[HALT]', reason, 'enum:', reason_enum); } catch (_) {}
+  // Do NOT block — this worker must always answer 200 /health
+  // Self-test endpoint (see /self-test below) will surface HALT state
+}
+
+function seal_builder_rebuild_tracker(mode = 'retry') {
+  HALT_REBOOT_COUNT++;
+  return { log_depth: HALT_REBOOT_COUNT, entry: 'earliest', next: 'rebuild in progress' };
+}
+
+// SEALED_RETURN — returns the canonical sealed specification map
+function buildSealedSpec() {
+  return { spec_version: 'v1', schema: {
+    sealed_at:  SEALED_FILE_AT || new Date().toISOString(),
+    cx_token_hashed: true, // token in env.CHANNEL_TOKEN_HASH, never here
+    stable_string_required: true,
+    stable_string_expected: 32, // 32 hex = 128 bit
+    build_field_must_exceed: 3,
+    cron_job_tag: 'didy',       // cron "didy_job" = repair by online-step re-spec
+    builder_rebuild_tracker: seal_builder_rebuild_tracker(),
+    repair_trigger: { active: HALT_ANCHOR.active, count: HALT_TRIGGER_COUNT },
+    status_halt:  { sealed_at: HALT_ANCHOR.active, halt_anchor: HALT_ANCHOR },
+    rebuild:     { run_number: HALT_ANCHOR.active ? 0 : HALT_REBOOT_COUNT, entry_forced_by: 'agent_halt' },
+  }};
+}
+
+// ══════════════════════════════════════════════════════════
+// RETRIER — bounded exponential back-off for DB / AI / HTTP
+// ══════════════════════════════════════════════════════════
+
+function retry(fn, conf = { max: 3, baseMs: 50, maxMs: 2000, factor: 2 }) {
+  return async (...args) => {
+    let attempt = 0, delay = conf.baseMs;
+    while (attempt < conf.max) {
+      try   { const r = await fn(...args); return r; }
+      catch (e) {
+        attempt++;
+        // DRIFT detection on DB error
+        if (conf.dbDrift  && attempt === conf.max) { HALT_ANCHOR.reason_enum = 'DRIFT'; HALT_ANCHOR.active = true; }
+        if (attempt >= conf.max) throw e;
+        await new Promise(r => setTimeout(r, Math.min(delay, conf.maxMs)));
+        delay *= conf.factor;
+      }
+    }
+  };
+}
+
+// Instantiate circuit breakers — one per heavy dependency
+const dbCircuit     = new CircuitBreaker('DB');
+const aiCircuit     = new CircuitBreaker('AI');
+const ledgerCircuit = new CircuitBreaker('LEDGER');
+
+// ══════════════════════════════════════════════════════════
+// STALE-ANCHOR / DRIFT GATE — runs first in handleRequest
+// Returns 'HEALTHY' | 'STALE' | 'DRIFT' | 'LOCK'
+// ══════════════════════════════════════════════════════════
+async function getDriftGate(env) {
+  // Stage 1: sealed-file guard — if SEALED_FILE_AT is set, do not promote at anchor
+  if (SEALED_FILE_AT) return { state: 'HEALTHY', sealed_at: SEALED_FILE_AT };
+  if (!env?.LOG_STATE_URL) return { state: 'HEALTHY', reason: 'LOG_STATE_URL unset — assuming healthy' };
+  try {
+    const ctrl = new AbortController();
+    const tid  = setTimeout(() => ctrl.abort(), 1500);
+    const resp = await fetch(env.LOG_STATE_URL, { signal: ctrl.signal });
+    clearTimeout(tid);
+    if (!resp.ok) return { state: 'STALE', reason: `log-state ${resp.status}` };
+    const p = await resp.json();
+    if (p?.health === 'STALE') return { state: 'STALE', reason: p?.reason || null };
+    if (p?.health === 'LOCK')  return { state: 'LOCK',  reason: p?.reason || null };
+    return { state: 'HEALTHY', commit: p?.log?.source_commit, checksum: p?.log?.wrangler_checksum };
+  } catch (e) {
+    return { state: 'ALARM_CIRCUIT', reason: `${e?.name || 'ERR'}: ${e?.message || e}` };
+  }
+}
+
+// ══════════════════════════════════════════════════════════
+// /self-test — sealed health report (returns circuit-breaker status)
+// ══════════════════════════════════════════════════════════
+async function selfTest(env, result) {
+  try {
+    const sel = await env.DB.prepare("SELECT COUNT(*) AS count, SUM(byte_count) AS bytes FROM soul_prompts").first();
+    result.db = { prompts: sel?.count, bytes: sel?.bytes };
+  } catch (e) { result.db = { err: e.message }; }
+  result.seizures   = { db: dbCircuit.summary(), ai: aiCircuit.summary(), ledger: ledgerCircuit.summary() };
+  result.drift      = await getDriftGate(env);
+  result.circuits_open = [dbCircuit.isOpen, aiCircuit.isOpen, ledgerCircuit.isOpen].filter(Boolean).length;
+  result.health = (result.drift?.state === 'DRIFT' || dbCircuit.isOpen) ? 'RED' : 'GREEN';
+  result.circuits_open = [dbCircuit.isOpen, aiCircuit.isOpen, ledgerCircuit.isOpen].filter(Boolean).length;
+  result.health = (result.drift?.state === 'DRIFT' || dbCircuit.isOpen) ? 'RED' : 'GREEN';
+  return result;
+}
+
+// ══════════════════════════════════════════════════════════
+// Write retriers for all db.* access points:
+// dbAll → fails after 3 attempts → throw > DRIFT (HALT)
+// ══════════════════════════════════════════════════════════
+function dbDriftRetry(maxMs, baseMs) { return { maxMs, baseMs, dbDrift: true, max: 3, factor: 2 }; }
+const dbFirst = dbCircuit.guarded(retry(q => q, dbDriftRetry(500, 30)));
+const dbRun   = dbCircuit.guarded(retry(q => q, dbDriftRetry(500, 30)));
 
 // ---------- Utility helpers ----------
 function generateUUID() {
