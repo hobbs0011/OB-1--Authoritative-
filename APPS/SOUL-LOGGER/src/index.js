@@ -6,6 +6,20 @@ function generateUUID() {
   return crypto.randomUUID();
 }
 
+// ---------- Ledger Append Helper (Stage 3 LINELOCK) ----------
+async function appendToLedger(env, body) {
+  if (!env.NET_PET_AI_URL) return; // silently fail if not configured
+  try {
+    await fetch(`${env.NET_PET_AI_URL}/api/ledger/append`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body)
+    });
+  } catch (e) {
+    // fire-and-forget, never block soul pipeline
+  }
+}
+
 async function sha256(text) {
   const encoder = new TextEncoder();
   const data = encoder.encode(text);
@@ -253,10 +267,18 @@ async function handleRequest(request, env, ctx) {
         aiTierUsed = 'deepseek';
       }
       if (!artifact) return jsonResponse({ error: 'AI generation failed' }, 500);
-      const crunchId = generateUUID();
-      await env.DB.prepare(`INSERT INTO soul_crunches (crunch_id, session_id, crunch_mode, artifact, ai_tier_used, created_at) VALUES (?, ?, ?, ?, ?, ?)`)
-        .bind(crunchId, sessionId, mode, artifact, aiTierUsed, new Date().toISOString()).run();
-      return jsonResponse({ crunch_id: crunchId, mode, ai_tier_used: aiTierUsed, artifact_trimmed: artifact.substring(0, 200) + '...', created_at: new Date().toISOString() }, 201);
+const crunchId = generateUUID();
+       await env.DB.prepare(`INSERT INTO soul_crunches (crunch_id, session_id, crunch_mode, artifact, ai_tier_used, created_at) VALUES (?, ?, ?, ?, ?, ?)`)
+         .bind(crunchId, sessionId, mode, artifact, aiTierUsed, new Date().toISOString()).run();
+
+       // Stage 3 LINELOCK — append crunch to LedgerDO
+       ctx.waitUntil(appendToLedger(env, {
+         studentId: sessionId.split('-')[0] || "sov100", // extract student from session or use global
+         eventType: "soul_dna_capture",
+         data: { crunch_id: crunchId, session_id: sessionId, mode, ai_tier_used: aiTierUsed }
+       }));
+
+       return jsonResponse({ crunch_id: crunchId, mode, ai_tier_used: aiTierUsed, artifact_trimmed: artifact.substring(0, 200) + '...', created_at: new Date().toISOString() }, 201);
     } catch (err) {
       return jsonResponse({ error: err.message }, 500);
     }
@@ -304,8 +326,16 @@ async function handleRequest(request, env, ctx) {
         const score = (caps_words * 3) + (exclamations * 2) + (profanity_count * 10);
         return { prompt_id: row.prompt_id, session_id: row.session_id, position: row.position, text: row.text, score, caps_words, exclamations, profanity_count, estimated_timestamp: row.estimated_timestamp };
       });
-      scored.sort((a, b) => b.score - a.score);
-      return jsonResponse({ priority_items: scored.slice(0, limit), total_scanned: results.length, generated_at: new Date().toISOString(), algorithm: 'follow-the-fucks-v1' });
+scored.sort((a, b) => b.score - a.score);
+
+       // Stage 3 LINELOCK — append priority scan to LedgerDO
+       ctx.waitUntil(appendToLedger(env, {
+         studentId: "sov100",
+         eventType: "soul_dna_capture",
+         data: { scan: "priority", items_scanned: results.length, items_returned: scored.slice(0, limit).length }
+       }));
+
+       return jsonResponse({ priority_items: scored.slice(0, limit), total_scanned: results.length, generated_at: new Date().toISOString(), algorithm: 'follow-the-fucks-v1' });
     } catch (err) {
       return jsonResponse({ error: err.message }, 500);
     }
@@ -333,9 +363,18 @@ async function handleRequest(request, env, ctx) {
       const markers = detectMarkers(text);
       await env.DB.prepare(`INSERT INTO soul_prompts (prompt_id, session_id, position, text, estimated_timestamp, byte_count, hash_sha256, emotional_markers) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`)
         .bind(promptId, session_id, position, text, ts, byteCount, hash, markers).run();
-      await env.DB.prepare('UPDATE soul_sessions SET prompt_count = prompt_count + 1 WHERE session_id = ?').bind(session_id).run();
+await env.DB.prepare('UPDATE soul_sessions SET prompt_count = prompt_count + 1 WHERE session_id = ?').bind(session_id).run();
 
-      // Auto-trigger skeleton every 10 events (fire-and-forget)
+       // Stage 3 LINELOCK — append to LedgerDO via NET-PET-AI
+       if (student_id) {
+         ctx.waitUntil(appendToLedger(env, {
+           studentId: student_id,
+           eventType: "soul_dna_capture",
+           data: { session_id, prompt_id: promptId, text_preview: text.slice(0, 200) }
+         }));
+       }
+
+       // Auto-trigger skeleton every 10 events (fire-and-forget)
       const newCountRow = await env.DB.prepare('SELECT COUNT(*) as cnt FROM soul_prompts WHERE session_id = ?').bind(session_id).first();
       const newCount = newCountRow?.cnt || 0;
       if (newCount > 0 && newCount % 10 === 0) {
