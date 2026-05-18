@@ -191,9 +191,9 @@ export default {
       }
     }
 
-    // /magic-chat, /voice-chat — Canon §4: Magic Chat UI aliases → serve index.html
+    // /magic-chat, /voice-chat — Canon §4: Magic Chat UI aliases → serve magic-chat.html
     if (path === "/magic-chat" || path === "/voice-chat") {
-      return env.ASSETS.fetch(new Request(new URL("/", url), request));
+      return env.ASSETS.fetch(new Request(new URL("/magic-chat.html", url), request));
     }
 
     // /speak — Speech-to-Learning MVP UI

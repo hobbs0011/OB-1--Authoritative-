@@ -302,7 +302,7 @@ async function submitOnboarding() {
   }));
   if (res?.studentToken) {
     studentToken = res.studentToken;
-    try { sessionStorage.setItem("net_student_token", studentToken); } catch {}
+    try { localStorage.setItem("net_student_token", studentToken); } catch {}
   }
   try { localStorage.setItem("net_profile", JSON.stringify(profile)); } catch {}
 }
@@ -686,14 +686,33 @@ async function boot() {
     dot.title = "Offline";
   }
 
+  const urlStudentId = new URLSearchParams(window.location.search).get("student");
+
   let saved = null;
   try { saved = JSON.parse(localStorage.getItem("net_profile") || "null"); } catch {}
 
   await pause(350);
 
-  if (saved?.studentId && saved?.fullName) {
+  // If URL has ?student=id and it matches saved profile, use saved. If different, load by id.
+  if (urlStudentId && (!saved?.studentId || saved.studentId !== urlStudentId)) {
+    profile.studentId = urlStudentId;
+    try { studentToken = localStorage.getItem("net_student_token") || ""; } catch {}
+    try {
+      const mem = await api(`/api/memory?studentId=${encodeURIComponent(urlStudentId)}`, "GET", undefined, memHeaders());
+      if (mem?.memory?.length) {
+        for (const ex of mem.memory.slice(-10)) {
+          if (ex?.user) chatMessages.push({ role: "user",      content: ex.user });
+          if (ex?.obi)  chatMessages.push({ role: "assistant", content: ex.obi  });
+        }
+      }
+    } catch {}
+    obi("Hey! Ready to chat?");
+    await pause(400);
+    obi(pickStarter());
+    state = "chat";
+  } else if (saved?.studentId && saved?.fullName) {
     profile = saved;
-    try { studentToken = sessionStorage.getItem("net_student_token") || ""; } catch {}
+    try { studentToken = localStorage.getItem("net_student_token") || ""; } catch {}
     // Restore conversation memory from server so Obi knows this student
     try {
       const mem = await api(`/api/memory?studentId=${encodeURIComponent(profile.studentId)}`, "GET", undefined, memHeaders());
