@@ -511,54 +511,26 @@ async function handle(text) {
       }
       clearStruggle("ask_city");
       profile.currentCity = t;
-      state = "ask_level";
+      profile.englishLevel = "B1 Intermediate";
+      state = "ask_goal";
       await pause();
-      obi("What is your English level? Type a number:\n\n1 = A1 Beginner — I know almost nothing\n2 = A2 Elementary — I know some basics\n3 = B1 Intermediate — I can have simple conversations\n4 = B2 Upper Intermediate — I make mistakes but I manage\n5 = C1 Advanced — I'm confident and fluent");
+      obi(`Nice! ${t} is a great city.\n\nWhat do you want to practice today? Tell me anything — what you've been watching, what happened at work, or what you're thinking about. Or just say hello and we'll go from there!`);
       break;
     }
     case "ask_level": {
-      const t = text.trim();
-      if (!looksLikeLevel(t)) {
-        trackStruggle("ask_level");
-        const n = struggles.ask_level || 0;
-        if (n >= 1) {
-          obi("Just pick a number 1 to 5!\n\n1 = Beginner\n2 = Elementary\n3 = Intermediate\n4 = Upper Intermediate\n5 = Advanced");
-        } else {
-          obi("Type a number! 1 = just starting out, 5 = very confident.");
-        }
-        break;
-      }
-      clearStruggle("ask_level");
-      profile.englishLevel = normalizeLevel(t);
+      // Legacy state — skip straight to ask_goal
+      profile.englishLevel = profile.englishLevel || "B1 Intermediate";
       state = "ask_goal";
-      await pause();
-      obi("What do you want to practice?\n\n1 = talking with friends\n2 = ordering food\n3 = job interview\n4 = travel\n5 = school / studies");
+      obi("What do you want to talk about today?");
       break;
     }
     case "ask_goal": {
-      // Allow numeric shortcuts 1-5
-      const goalMap = { "1": "talking with friends", "2": "ordering food", "3": "job interview", "4": "travel", "5": "school and studies" };
-      const mapped = goalMap[text.trim()];
-      if (mapped) {
-        clearStruggle("ask_goal");
-        profile.goals = mapped;
-      } else if (isVague(text)) {
-        trackStruggle("ask_goal");
-        const n = struggles.ask_goal || 0;
-        if (n >= 1) {
-          // Already confused once — just pick and move on
-          obi("No problem \u2014 I'll pick for you. Let's go!");
-          await pause(400);
-          profile.goals = "talking with friends";
-        } else {
-          // First confusion: clear numbered menu
-          obi("What do you want to practice? Pick a number:\n\n1 = talking with friends\n2 = ordering food\n3 = job interview\n4 = travel\n5 = school / studies");
-          break;
-        }
-      } else {
-        clearStruggle("ask_goal");
-        profile.goals = text.trim();
+      const t = text.trim();
+      if (t.length < 2) {
+        obi("Just tell me anything — what happened today, what you watched, or what you want to practice!");
+        break;
       }
+      profile.goals = t;
       lock();
       await submitOnboarding();
       unlock();

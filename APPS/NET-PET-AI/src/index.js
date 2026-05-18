@@ -1041,7 +1041,7 @@ async function handleVocabAdd(body, env) {
     method: "POST", headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ ...body, studentId }),
   }));
-  return addCors(res, { headers: {} });
+  return res;
 }
 
 async function handleVocabDue(studentId, env) {
@@ -1050,7 +1050,7 @@ async function handleVocabDue(studentId, env) {
   if (!idCheck.valid) return json({ error: idCheck.error }, 400);
   const stub = env.PROFILES.get(env.PROFILES.idFromName(studentId));
   const res = await stub.fetch(new Request("https://do/vocab/due"));
-  return addCors(res, { headers: {} });
+  return res;
 }
 
 async function handleVocabReview(body, env) {
@@ -1062,7 +1062,7 @@ async function handleVocabReview(body, env) {
     method: "POST", headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),
   }));
-  return addCors(res, { headers: {} });
+  return res;
 }
 
 async function handleVocabList(studentId, env) {
@@ -1071,7 +1071,7 @@ async function handleVocabList(studentId, env) {
   if (!idCheck.valid) return json({ error: idCheck.error }, 400);
   const stub = env.PROFILES.get(env.PROFILES.idFromName(studentId));
   const res = await stub.fetch(new Request("https://do/vocab/list"));
-  return addCors(res, { headers: {} });
+  return res;
 }
 
 // ── TTS (Deepgram Aura) ───────────────────────────────────────────────────────
