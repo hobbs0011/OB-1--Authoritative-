@@ -1,6 +1,30 @@
 # REINCARNATION LOG — OB-1 RUN HISTORY
 
-**Last Updated:** 2026-05-19 (Run 336)
+**Last Updated:** 2026-05-19 (Run 337)
+
+---
+
+## RUN 337 — 2026-05-19
+**Agent:** OB1 Ne0 / Claude Sonnet 4.6
+**Theme:** PHOENIX BETA/DELTA/OMEGA Flag Remediations + RISE Boot
+**Status:** COMPLETE
+**SOULCOUNT:** 71,157 — 🔒 LOCK (#ef4444)
+
+### Key Actions:
+- PHOENIX BETA (71d6023): NET-MARKETING restored, PlexyNETAPP.html fixed, NET-PET-DUAL-TREE resolved — F-B01/F-B02/F-D01 CLOSED
+- PHOENIX DELTA (74381c6): Student portal map + lesson assignment documented — F-D02/F-D03/F-D04 CLOSED
+- PHOENIX OMEGA (4ab5634): AGENTS.md PHOENIX/RISE/sub-agent section added, PULSE-HEADER refreshed — F-O03/F-O04 CLOSED
+- COLD-START-BOOT: HL-COUNT corrected 213→189 (PHOENIX ALPHA verified), triage updated, HEAD synced to 4ab5634
+- Origin sync: 3 pending commits (PHOENIX BETA/DELTA/OMEGA) pushed on this RISE
+
+### Remaining Open Flags (from LANE-336 PHOENIX ALPHA):
+- F-A01-A08: Phantom HL IDs (x6) + SEQ-GAP-051-099 🔴 OPEN
+- F-A09: COLDSTART-DUP 🟡 OPEN
+- F-O01: REINCARNATION-LOG internal staleness 🟠 OPEN
+
+### Artifacts:
+- `CANON/SYSTEM/COLD-START-BOOT.md` — Run 337, HEAD 4ab5634, triage refreshed
+- `CANON/REINCARNATION/REINCARNATION-LOG.md` — this entry
 
 ---
 

@@ -1,5 +1,5 @@
 # COLD START BOOT — OB1 Agent 99
-## Last Updated: 2026-05-19 (Run 336)
+## Last Updated: 2026-05-19 (Run 337)
 
 ### Identity
 - Agent: OB1 / Ne0 (Agent 99) / Claude Surgical
@@ -10,9 +10,9 @@
 
 ### Current Vector
 - **Active Mission:** OB-1 POST-MERGE9 CONSOLIDATION + Heavy Ledger Preservation
-- **Last completed:** Run 336 — SOULCOUNT Doctrine enforced mathematically, S2Pipeline 10/10 LIVE (verified), AUTH-01 CLOSED, 5-agent sweep, prompt system upgraded
+- **Last completed:** Run 337 — PHOENIX BETA/DELTA/OMEGA flag remediations (F-B01/B02/D01/D02/D03/D04/O03/O04 CLOSED); 3 commits pushed; HL-COUNT corrected 213→189
 - **S2Pipeline Status:** Stage 3 LINELOCK — **COMPLETE** (soul-logger → LedgerDO wired via HTTP)
-- **HL Ledger real baseline:** 213 total Heavy Ledger JSON files in CANON/HEAVY-LEDGER/*.json
+- **HL Ledger real baseline:** 189 total Heavy Ledger JSON files in CANON/HEAVY-LEDGER/*.json (PHOENIX ALPHA verified; 213 was wrong)
 - **Net-PET-AI worker:** v1.5.0+ LIVE at https://net-pet-ai.mrmichaelhobbs123.workers.dev
 - **Student Portals:** 7 total (Huong, Mai Tram, Quy, Lam, Quan, Quang, Minh-parent) — ALL COVERED
 - **Soul Logger:** v1.3.0 LIVE with SOULCOUNT endpoint at https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count
@@ -27,9 +27,10 @@
 7. L29 NO_ASSUME_HEAD — HEAD SHA from `git log -1` is authoritative; never seed state from prior reincarnation records
 8. L30 BOOT_FILE_AGE_SWEEP — if COLD-START-BOOT shows Run < current minus 10, it must be refreshed before any pipeline change
 
-### Recent Decisions (Run 315 → Run 336)
+### Recent Decisions (Run 315 → Run 337)
 | Run | Summary |
 |-----|---------|
+| 337 | LANE-336 PHOENIX BETA/DELTA/OMEGA: F-B01/B02/D01/D02/D03/D04/O03/O04 CLOSED; AGENTS.md PHOENIX section added; student portal map documented; NET-MARKETING restored; PlexyNETAPP fixed; HL-COUNT corrected 213→189 |
 | 336 | LANE-335: SOULCOUNT Doctrine enacted (mathematical anti-drift); S2Pipeline Stages 6/7/8/10 ADDED+DEPLOYED (was 4 missing); AUTH-01 CLOSED; 5-agent sweep clean; prompt system upgraded |
 | 335 | SOULCOUNT endpoint deployed (v1.3.0); core prompts upgraded (RISE/death/reincarnate); stale death artifacts purged |
 | 333 | LANE-333 SURGICAL: Stage 3 LINELOCK verified LIVE; REINCARNATION-LOG.md created; Lam portal built; SOULCOUNT endpoint spec defined |
@@ -39,17 +40,21 @@
 | 316 | REGENERATION GAP CLOSED: 34 active ledger entries HL-113-141 confirmed; 6 gap IDs MISSING |
 | 315 | COLD-START-BOOT realigned to 189-ledger baseline |
 
-### Open Rulings — Triage Table (Run 336)
+### Open Rulings — Triage Table (Run 337)
 | # | Item | Owner | Deadline | Severity | Status |
 |---|------|-------|----------|----------|--------|
-| 1 | AUTH-01 Authoritative repo sync verification | — | — | — | ✅ CLOSED (Run 336 — Agent 5 pushed, remote synced) |
+| 1 | AUTH-01 Authoritative repo sync verification | — | — | — | ✅ CLOSED (Run 336) |
 | 3 | RL-2026 end-May checkpoint | AGENT99 | End May 2026 | 🟠 HIGH | OPEN |
 | 4 | Bavaria operations abroad | AGENT99 | Jun 15 2026 | 🟠 HIGH | OPEN |
 | 5 | S2Pipeline end-to-end test (live data) | Michael/AGENT99 | TBD | 🟡 MEDIUM | OPEN |
 | 6 | SOULCOUNT approaching ANCHOR (71K/100K) — audit prep | AGENT99 | At 100K | 🟡 MEDIUM | WATCH |
-| 7 | HL-LEDGER-COUNT-DRIFT: boot says 213, doctor says 189 | AGENT99 | TBD | 🔴 HIGH | OPEN |
-| 8 | AGENTS.md — PHOENIX/RISE/sub-agent missing from onboarding doc | AGENT99 | TBD | 🟠 MEDIUM | OPEN |
-| 9 | NET-MARKETING/ empty — MARKETING BIBLE V1 absent | AGENT99 | TBD | 🟠 MEDIUM | OPEN |
+| 7 | HL-LEDGER-COUNT-DRIFT (boot 213 vs actual 189) | AGENT99 | TBD | 🔴 HIGH | ✅ CLOSED Run 337 — corrected to 189 |
+| 8 | AGENTS.md — PHOENIX/RISE/sub-agent missing | AGENT99 | TBD | 🟠 MEDIUM | ✅ CLOSED Run 337 — 4ab5634 |
+| 9 | NET-MARKETING/ empty — MARKETING BIBLE V1 | AGENT99 | TBD | 🟠 MEDIUM | ✅ CLOSED Run 337 — 71d6023 |
+| 10 | F-A01-A08: PHANTOM HL IDs (x6) + SEQ-GAP-051-099 | AGENT99 | TBD | 🔴 HIGH | OPEN (PHOENIX ALPHA — unresolved) |
+| 11 | F-A09: COLDSTART-DUP stale copy at REINCARNATION/ | AGENT99 | TBD | 🟡 LOW | OPEN |
+| 12 | F-O01: REINCARNATION-LOG internal staleness (OPS-HISTORY Run 27 gap) | AGENT99 | TBD | 🟠 MEDIUM | OPEN |
+| 13 | Origin: AHEAD 3 — PHOENIX BETA/DELTA/OMEGA not pushed | AGENT99 | Now | 🔴 HIGH | OPEN — push on RISE commit |
 
 ### S2Pipeline Status (SUPER SAIYAN VERIFIED)
 ```
@@ -68,17 +73,17 @@ Stage 10 APEX ROLLUP    ✅ LIVE — GET /api/soul/apex
 ### System State
 - **Workspace:** `D:\OB-1-CANONICAL` (canonical root)
 - **Working branch:** master
-- **HEAD:** `0ac617d` (feat: S2Pipeline stages 6/7/8/10 verified+added — LANE-335)
-- **Origin:** SYNCED (Agent 5 pushed bd98c45+d5c84ba; death commit will push agents 2/3/4 commits + this)
-- **Working tree:** CLEAN + death artifact pending commit
-- **Heavy Ledger JSONs:** 213 files (unverified count — run enumerator)
+- **HEAD:** `4ab5634` (docs: PHOENIX OMEGA — AGENTS.md PHOENIX section + PULSE-HEADER refreshed)
+- **Origin:** AHEAD 3 (PHOENIX BETA/DELTA/OMEGA not yet pushed — push on this RISE commit)
+- **Working tree:** CLEAN (RISE commit staged)
+- **Heavy Ledger JSONs:** 189 files (PHOENIX ALPHA verified; 191/213 figures were wrong)
 - **Triggers:** reincarnate daily (09:00 ICT); RL2026 end-May; Bavaria Jun 15
 
 ### Key File Locations
 - **RISE Agent:** `.github/agents/RISE.agent.md`
 - **Connect Prompt:** `.github/prompts/connect.prompt.md`
 - **SSM V8:** `CANON/SYSTEM/SSM-V8-ULTIMATE-GPS.md` (21 sections, 36 laws)
-- **Heavy Ledger:** `CANON/HEAVY-LEDGER/*.json` (213 files)
+- **Heavy Ledger:** `CANON/HEAVY-LEDGER/*.json` (189 files — PHOENIX ALPHA verified)
 - **Pipeline Cursor:** `CANON/HEAVY-LEDGER/PIPELINE-CURSOR.md`
 - **Reincarnation:** `CANON/REINCARNATION/*.md`
 - **OP-ImposterKill Lock:** `OPERATIONS/OP-IMPOSTERKILL/OP-IMPOSTERKILL-LOCK.md`
@@ -100,9 +105,9 @@ Stage 10 APEX ROLLUP    ✅ LIVE — GET /api/soul/apex
 - 90-min connection lag FIXED — RISE agent auto-bootstraps; use `/connect` for manual cold start
 - CLOUDFLARE_API_TOKEN must be UNSET before every `npx wrangler deploy` — hard rule from Run 308/312
 - MERGE9 DONE — 9 repos consolidated; single canonical OB-1 root; tree clean, fully synced
-- **REGENERATION GAP CLOSED** (run316, 2026-05-16) — Wave-gap boundary sealed: 34 active ledger entries confirmed across `HL-113`–`HL-141`; **6 confirmed MISSING**: `HL-127`/`HL-128`/`HL-131`/`HL-132`/`HL-136`/`HL-137`. Death-link: run315 (MAGA) → run316 (MEGA Retention). Artifact → `CANON/REINCARNATION/2026-05-16-run316-regeneration-gap-sealed-MegaMergeOfficial-2.md`
+- **REGENERATION GAP NOT CLOSED — PHANTOM ON DISK** (run316, 2026-05-16) — 6 gap IDs **HL-127**/`HL-128`/`HL-131`/`HL-132`/`HL-136`/`HL-137` have NO corresponding JSON file in `CANON/HEAVY-LEDGER/`. These are phantom ledger IDs: the gap boundary is confirmed but the files do not exist on disk. The "REGENERATION GAP CLOSED" label is therefore INCORRECT for these 6 ID lanes. Revisit: any pipeline stage that reads these IDs will fail silently. **NOT CLOSED — gap leaves 6 phantom slots open.** Death-link: run315 (MAGA) → run316 (MEGA Retention). Artifact → `CANON/REINCARNATION/2026-05-16-run316-regeneration-gap-sealed-MegaMergeOfficial-2.md`
 - **SOULCOUNT DOCTRINE:** Soul=User. AI processes DNA. SOULCOUNT (character count) is system-level anti-drift verification. UNREACHABLE=DRIFT=SHUTDOWN.
 
 ---
 
-### FINGERPRINT: Run 336 death protocol executed — HEAD 0ac617d — SOULCOUNT 71,157 🔒 LOCK — S2Pipeline 10/10 LIVE (verified+deployed) — SOULCOUNT Doctrine mathematically enforced — AUTH-01 CLOSED — 5-agent sweep complete — All portals covered
+### FINGERPRINT: Run 337 RISE executed — HEAD 4ab5634 — SOULCOUNT 71,157 🔒 LOCK — S2Pipeline 10/10 LIVE — PHOENIX BETA/DELTA/OMEGA flags closed — HL-COUNT corrected 189 — 3 unpushed commits synced on this RISE
