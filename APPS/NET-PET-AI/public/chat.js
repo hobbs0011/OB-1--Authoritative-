@@ -349,30 +349,38 @@ const JP_SOUNDS = [
 ];
 
 function buildSystemPrompt(p) {
-  const name  = p?.fullName     ? `The person's name is ${p.fullName}.`          : "";
-  const level = p?.englishLevel ? `Their English level is ${p.englishLevel}.`    : "";
-  const goals = p?.goals        ? `Their goal: ${p.goals}.`                       : "";
-  const city  = p?.currentCity  ? `They are based in ${p.currentCity}.`           : "";
+  const name  = p?.fullName     ? `Student: ${p.fullName}.`       : "";
+  const level = p?.englishLevel ? `Level: ${p.englishLevel}.`     : "";
+  const goals = p?.goals        ? `Goal: ${p.goals}.`             : "";
+  const city  = p?.currentCity  ? `Location: ${p.currentCity}.`   : "";
   const ctx   = [name, level, goals, city].filter(Boolean).join(" ");
-  return `You are OBI \u2014 the AI interface of the Phoenix Rising Protocol, built by Michael Hobbs. Michael Hobbs in AI form: high-energy, anti-shame, tough love. Volume and velocity beat grammar. Mouse Voice \u2192 Tiger Voice.
+
+  const lvl = (p?.englishLevel || "").toLowerCase();
+  const isBeginner = /a1|a2|beginner|elementary|m\u1edbi|c\u01a1/.test(lvl);
+  const isAdvanced = /b2|c1|advanced|upper/.test(lvl);
+  const levelInstructions = isBeginner
+    ? "BEGINNER: Use very simple words and short sentences. Celebrate every sentence they produce \u2014 even broken ones. Model correct English by rephrasing their words, never correcting directly. Slow down. Build confidence first."
+    : isAdvanced
+    ? "ADVANCED: Challenge them. Ask complex follow-ups. Push for more nuance and detail. Don't accept vague answers \u2014 probe deeper. You can point out subtle mistakes because they can handle it."
+    : "INTERMEDIATE: Build confidence while pushing their limits. Mix encouragement with challenge. Rephrase their mistakes naturally in your response without calling them out.";
+
+  const hasHistory = chatMessages.length > 0;
+  const continuity = hasHistory
+    ? "You have conversation history above. Reference it \u2014 ask genuine follow-up questions about what they shared. Do NOT pretend each message is the start of a new conversation."
+    : "";
+
+  return `You are OBI \u2014 Michael Hobbs in AI form. High-energy, anti-shame, tough love. Volume and velocity beat grammar. Mouse Voice \u2192 Tiger Voice. You are not a textbook. You are a coach.
 ${ctx ? `\nContext: ${ctx}` : ""}
-Jolly Phonics awareness (you know this deeply): English has 42 phonemes. Common learner struggles:
-- TH: tongue between teeth \u2014 not T, not S
-- R: curl back, touch nothing \u2014 not L, not Y
-- V: top teeth on bottom lip \u2014 not B, not W
-- Final consonants: English LANDS on them \u2014 don't drop!
-- Short/long vowel pairs: bit vs beat, pull vs pool \u2014 totally different
-- Word stress: English is stress-timed, not tonal \u2014 feel the beat!
-When you notice these in conversation, naturally model the correct sound. Don't drill \u2014 normalize by example.
+${levelInstructions}
+${continuity}
+Phonics: you know Jolly Phonics deeply. TH (tongue between teeth \u2014 not T/S), R (curl back, touch nothing \u2014 not L), V (top teeth on bottom lip \u2014 not B/W), final consonants (English LANDS on them \u2014 don't drop), short/long vowels (bit vs beat), word stress (stress-timed, not tonal). When you notice a phonics pattern in what they wrote, model the correct sound naturally in your reply \u2014 don't announce it, just use it.
 
 Rules:
-- Keep responses to 1-3 SHORT sentences. You're texting, not writing essays.
-- Be encouraging but REAL. React to what the person actually said.
-- If they talk about something interesting, ask a specific follow-up about THAT topic.
-- If they say something short or vague, push them to say more.
-- Gently correct major grammar mistakes by naturally rephrasing, don't lecture.
-- NEVER be robotic. NEVER use generic phrases without connecting to what they said.
-- CRITICAL: If anyone says anything about self-harm, suicide, wanting to die, or jumping off anything \u2014 STOP. Respond with care and direct them to help. Safety first. Always.`.trim();
+- 1-3 sentences MAX. Texting, not essays.
+- React to what they actually said. Specific, never generic.
+- Push short answers: ask ONE sharp follow-up question.
+- Rephrase mistakes naturally in your reply \u2014 never lecture.
+- CRITICAL: Self-harm/suicide \u2192 STOP everything. Direct to help. Safety first always.`.trim();
 }
 
 let chatMessages = []; // conversation history for DeepSeek
@@ -571,50 +579,40 @@ async function handle(text) {
       chatHistory.push(t);
       chatRound++;
 
-      if (chatRound >= CHAT_ROUNDS) {
-        // Wrap up with pronunciation coaching
-        const wrapReply = await withTyping(() => reactLLM(t));
-        obi(wrapReply);
-        await pause(800);
-        obi(`OK ${firstName()}, great chat! Here are some pronunciation tips based on what you said:`);
-        await pause(500);
-        const tips = buildPronunciationTips();
-        for (const tip of tips) {
-          await pause(400);
-          obi(`\uD83D\uDCA1 ${tip}`);
-        }
-        await pause(500);
-        obi("Practice those sounds OUT LOUD right now! Then type \u2018again\u2019 to chat more, or just start talking!");
+      const chatReply = await withTyping(() => reactLLM(t));
+      obi(chatReply);
 
+      // Every 10 rounds: one contextual phonics tip mid-conversation
+      if (chatRound % 10 === 0) {
+        const tips = buildPronunciationTips();
+        if (tips.length > 0) {
+          await pause(600);
+          obi(tips[(Math.floor(chatRound / 10) - 1) % tips.length]);
+        }
+      }
+
+      // Every 30 rounds: silent checkin \u2014 no state change, no reset
+      if (chatRound % 30 === 0) {
         api("/api/netpet/checkin", "POST", {
           studentId: profile.studentId,
           minutes: 5,
           confidence: 6
         }).catch(() => {});
-
-        chatRound = 0;
-        chatHistory = [];
-        chatMessages = [];
-        state = "wrap";
-      } else {
-        const chatReply = await withTyping(() => reactLLM(t));
-        obi(chatReply);
       }
       break;
     }
     case "wrap": {
+      // Legacy \u2014 treat as normal chat
       const t = text.trim();
-      if (isGreeting(t) || /^again$/i.test(t)) {
-        obi(`Let\u2019s go again! ${pickStarter()}`);
-        state = "chat";
-      } else if (t.length >= 2 && !isVague(t)) {
+      if (t.length >= 2 && !isVague(t)) {
         chatHistory.push(t);
-        chatRound = 1;
+        chatRound++;
         state = "chat";
-        const wrapChatReply = await withTyping(() => reactLLM(t));
-        obi(wrapChatReply);
+        const wrapFallback = await withTyping(() => reactLLM(t));
+        obi(wrapFallback);
       } else {
-        obi("Type \u2018again\u2019 or just tell me something new!");
+        obi(pickStarter());
+        state = "chat";
       }
       break;
     }
