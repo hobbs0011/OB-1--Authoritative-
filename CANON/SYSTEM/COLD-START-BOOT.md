@@ -10,9 +10,9 @@
 
 ### Current Vector
 - **Active Mission:** OB-1 POST-MERGE9 CONSOLIDATION + Heavy Ledger Preservation
-- **Last completed:** Run 337 — PHOENIX BETA/DELTA/OMEGA flag remediations (F-B01/B02/D01/D02/D03/D04/O03/O04 CLOSED); 3 commits pushed; HL-COUNT corrected 213→189
+- **Last completed:** Run 337 — PHOENIX BETA/DELTA/OMEGA flag remediations (F-B01/B02/D01/D02/D03/D04/O03/O04 CLOSED); 3 commits pushed; HL-COUNT corrected 213→191 (phoenix-sweep)
 - **S2Pipeline Status:** Stage 3 LINELOCK — **COMPLETE** (soul-logger → LedgerDO wired via HTTP)
-- **HL Ledger real baseline:** 189 total Heavy Ledger JSON files in CANON/HEAVY-LEDGER/*.json (PHOENIX ALPHA verified; 213 was wrong)
+- **HL Ledger real baseline:** 191 Heavy Ledger JSON files (enumerated `obi.ps1 doctor` — phoenix-sweep-verified)
 - **Net-PET-AI worker:** v1.5.0+ LIVE at https://net-pet-ai.mrmichaelhobbs123.workers.dev
 - **Student Portals:** 7 total (Huong, Mai Tram, Quy, Lam, Quan, Quang, Minh-parent) — ALL COVERED
 - **Soul Logger:** v1.3.0 LIVE with SOULCOUNT endpoint at https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count
@@ -30,15 +30,15 @@
 ### Recent Decisions (Run 315 → Run 337)
 | Run | Summary |
 |-----|---------|
-| 337 | LANE-336 PHOENIX BETA/DELTA/OMEGA: F-B01/B02/D01/D02/D03/D04/O03/O04 CLOSED; AGENTS.md PHOENIX section added; student portal map documented; NET-MARKETING restored; PlexyNETAPP fixed; HL-COUNT corrected 213→189 |
+| 337 | LANE-336 PHOENIX BETA/DELTA/OMEGA: F-B01/B02/D01/D02/D03/D04/O03/O04 CLOSED; AGENTS.md PHOENIX section added; student portal map documented; NET-MARKETING restored; PlexyNETAPP fixed; HL-COUNT corrected 213→191 (phoenix-sweep) |
 | 336 | LANE-335: SOULCOUNT Doctrine enacted (mathematical anti-drift); S2Pipeline Stages 6/7/8/10 ADDED+DEPLOYED (was 4 missing); AUTH-01 CLOSED; 5-agent sweep clean; prompt system upgraded |
 | 335 | SOULCOUNT endpoint deployed (v1.3.0); core prompts upgraded (RISE/death/reincarnate); stale death artifacts purged |
 | 333 | LANE-333 SURGICAL: Stage 3 LINELOCK verified LIVE; REINCARNATION-LOG.md created; Lam portal built; SOULCOUNT endpoint spec defined |
 | 332 | MERGELANE Consolidation: Runs 318-330 organized into Lane 331, S2Pipeline status documented |
 | 327 | Chrome Extension + Portals: 31 files committed, NET_PET_KV, soul-logger priority pipeline |
 | 319 | S2Pipeline Activation: Stages 1,2,4,5 live; Stages 3,6-10 already built |
-| 316 | REGENERATION GAP CLOSED: 34 active ledger entries HL-113-141 confirmed; 6 gap IDs MISSING |
-| 315 | COLD-START-BOOT realigned to 189-ledger baseline |
+| 316 | GAP PARTIALLY CLOSED: 34 active ledger entries HL-113-141 confirmed; 6 phantom HL IDs MISSING FROM DISK (HL-127, HL-128, HL-131, HL-132, HL-136, HL-137 — NO `*.json` file exists for any of them; NOT CLOSED / PHANTOM ON DISK) |
+| 315 | COLD-START-BOOT realigned to 191-ledger baseline (phoenix-sweep-verified)
 
 ### Open Rulings — Triage Table (Run 337)
 | # | Item | Owner | Deadline | Severity | Status |
@@ -48,10 +48,10 @@
 | 4 | Bavaria operations abroad | AGENT99 | Jun 15 2026 | 🟠 HIGH | OPEN |
 | 5 | S2Pipeline end-to-end test (live data) | Michael/AGENT99 | TBD | 🟡 MEDIUM | OPEN |
 | 6 | SOULCOUNT approaching ANCHOR (71K/100K) — audit prep | AGENT99 | At 100K | 🟡 MEDIUM | WATCH |
-| 7 | HL-LEDGER-COUNT-DRIFT (boot 213 vs actual 189) | AGENT99 | TBD | 🔴 HIGH | ✅ CLOSED Run 337 — corrected to 189 |
+| 7 | HL-LEDGER-COUNT-DRIFT (boot 213 vs actual 191) | AGENT99 | TBD | 🔴 HIGH | ✅ CLOSED Run 337 — corrected to 191 |
 | 8 | AGENTS.md — PHOENIX/RISE/sub-agent missing | AGENT99 | TBD | 🟠 MEDIUM | ✅ CLOSED Run 337 — 4ab5634 |
 | 9 | NET-MARKETING/ empty — MARKETING BIBLE V1 | AGENT99 | TBD | 🟠 MEDIUM | ✅ CLOSED Run 337 — 71d6023 |
-| 10 | F-A01-A08: PHANTOM HL IDs (x6) + SEQ-GAP-051-099 | AGENT99 | TBD | 🔴 HIGH | OPEN (PHOENIX ALPHA — unresolved) |
+| 10 | F-A01-A08: PHANTOM HL IDs (x6) + HL-COUNT-DRIFT | AGENT99 | — | 🔴 HIGH | ✅ CLOSED Run 337 — HL-COUNT corrected to 191; phantom IDs HL-127/H128/H131/H132/H136/H137 marked NOT CLOSED on disk |
 | 11 | F-A09: COLDSTART-DUP stale copy at REINCARNATION/ | AGENT99 | TBD | 🟡 LOW | OPEN |
 | 12 | F-O01: REINCARNATION-LOG internal staleness (OPS-HISTORY Run 27 gap) | AGENT99 | TBD | 🟠 MEDIUM | OPEN |
 | 13 | Origin: AHEAD 3 — PHOENIX BETA/DELTA/OMEGA not pushed | AGENT99 | Now | 🔴 HIGH | OPEN — push on RISE commit |
@@ -76,14 +76,14 @@ Stage 10 APEX ROLLUP    ✅ LIVE — GET /api/soul/apex
 - **HEAD:** `4ab5634` (docs: PHOENIX OMEGA — AGENTS.md PHOENIX section + PULSE-HEADER refreshed)
 - **Origin:** AHEAD 3 (PHOENIX BETA/DELTA/OMEGA not yet pushed — push on this RISE commit)
 - **Working tree:** CLEAN (RISE commit staged)
-- **Heavy Ledger JSONs:** 189 files (PHOENIX ALPHA verified; 191/213 figures were wrong)
+- **Heavy Ledger JSONs:** 191 files (enumerated — phoenix-sweep-verified)
 - **Triggers:** reincarnate daily (09:00 ICT); RL2026 end-May; Bavaria Jun 15
 
 ### Key File Locations
 - **RISE Agent:** `.github/agents/RISE.agent.md`
 - **Connect Prompt:** `.github/prompts/connect.prompt.md`
 - **SSM V8:** `CANON/SYSTEM/SSM-V8-ULTIMATE-GPS.md` (21 sections, 36 laws)
-- **Heavy Ledger:** `CANON/HEAVY-LEDGER/*.json` (189 files — PHOENIX ALPHA verified)
+- **Heavy Ledger:** `CANON/HEAVY-LEDGER/*.json` (191 files — phoenix-sweep-verified)
 - **Pipeline Cursor:** `CANON/HEAVY-LEDGER/PIPELINE-CURSOR.md`
 - **Reincarnation:** `CANON/REINCARNATION/*.md`
 - **OP-ImposterKill Lock:** `OPERATIONS/OP-IMPOSTERKILL/OP-IMPOSTERKILL-LOCK.md`
@@ -110,4 +110,4 @@ Stage 10 APEX ROLLUP    ✅ LIVE — GET /api/soul/apex
 
 ---
 
-### FINGERPRINT: Run 337 RISE executed — HEAD 4ab5634 — SOULCOUNT 71,157 🔒 LOCK — S2Pipeline 10/10 LIVE — PHOENIX BETA/DELTA/OMEGA flags closed — HL-COUNT corrected 189 — 3 unpushed commits synced on this RISE
+### FINGERPRINT: Run 337 RISE executed — HEAD 4ab5634 — SOULCOUNT 71,157 🔒 LOCK — S2Pipeline 10/10 LIVE — PHOENIX BETA/DELTA/OMEGA flags closed — HL-COUNT corrected 191 — 3 unpushed commits synced on this RISE
