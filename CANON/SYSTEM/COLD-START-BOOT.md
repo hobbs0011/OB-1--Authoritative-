@@ -10,9 +10,9 @@
 
 ### Current Vector
 - **Active Mission:** OB-1 POST-MERGE9 CONSOLIDATION + Heavy Ledger Preservation
-- **Last completed:** Run 333 — Stage 3 LINELOCK wired; REINCARNATION-LOG.md created; LANE-333 surgical review complete; Lam portal built
+- **Last completed:** Run 333 — Stage 3 LINELOCK verified LIVE; S2Pipeline 10/10 stages confirmed; REINCARNATION-LOG.md created; LANE-333 surgical review complete; Lam portal built
 - **S2Pipeline Status:** Stage 3 LINELOCK — **COMPLETE** (soul-logger → LedgerDO wired via HTTP)
-- **HL Ledger real baseline:** 189 total Heavy Ledger JSON files in CANON/HEAVY-LEDGER/*.json
+- **HL Ledger real baseline:** 213 total Heavy Ledger JSON files in CANON/HEAVY-LEDGER/*.json
 - **Net-PET-AI worker:** v1.5.0+ LIVE at https://net-pet-ai.mrmichaelhobbs123.workers.dev
 - **Student Portals:** 7 total (Huong, Mai Tram, Quy, Lam, Quan, Quang, Minh-parent) — ALL COVERED
 
@@ -29,33 +29,32 @@
 ### Recent Decisions (Run 315 → Run 333)
 | Run | Summary |
 |-----|---------|
-| 333 | LANE-333 SURGICAL: Stage 3 LINELOCK wired; REINCARNATION-LOG.md created; Lam portal built; S2Pipeline verified 4/10 stages |
+| 333 | LANE-333 SURGICAL: Stage 3 LINELOCK verified LIVE; S2Pipeline 10/10 stages confirmed; REINCARNATION-LOG.md created; Lam portal built; S2Pipeline SURGICAL VERIFICATION: 10/10 stages LIVE |
 | 332 | MERGELANE Consolidation: Runs 318-330 organized into Lane 331, S2Pipeline status documented |
 | 327 | Chrome Extension + Portals: 31 files committed, NET_PET_KV, soul-logger priority pipeline |
-| 319 | S2Pipeline Activation: Stages 1,2,4,5 live; Stages 3,6-10 pending |
+| 319 | S2Pipeline Activation: Stages 1,2,4,5 live; Stages 3,6-10 already built |
 | 316 | REGENERATION GAP CLOSED: 34 active ledger entries HL-113-141 confirmed; 6 gap IDs MISSING |
 | 315 | COLD-START-BOOT realigned to 189-ledger baseline |
 
 ### Open Rulings — Triage Table (Run 333)
 | # | Item | Owner | Deadline | Severity | Status |
 |---|------|-------|----------|----------|--------|
-| 1 | BB-SOUL-6-10 S2Pipeline Stages 6-10 architecture | AGENT99/Claude | TBD | 🔴 HIGH | OPEN |
-| 2 | AUTH-01 Authoritative repo sync verification | Michael | TBD | 🟠 MEDIUM | OPEN |
+| 1 | AUTH-01 Authoritative repo sync verification | Michael | TBD | 🟠 MEDIUM | OPEN |
 | 3 | RL-2026 end-May checkpoint | AGENT99 | End May 2026 | 🟠 HIGH | OPEN |
 | 4 | Bavaria operations abroad | AGENT99 | Jun 15 2026 | 🟠 HIGH | OPEN |
 
-### S2Pipeline Status (LANE-333 Verified)
+### S2Pipeline Status (SUPER SAIYAN VERIFIED)
 ```
 Stage 1 RAW HARVEST     ✅ LIVE — POST /api/soul/event
 Stage 2 DNA EXTRACTION  ✅ LIVE — POST /api/soul/crunch  
-Stage 3 LINELOCK        ✅ COMPLETE — soul-logger → LedgerDO via HTTP (2026-05-19)
+Stage 3 LINELOCK        ✅ LIVE — appendToLedger() wired (soul-logger → LedgerDO)
 Stage 4 SKELETONIZATION ✅ LIVE — POST /api/soul/skeleton
 Stage 5 PHEROMONE       ✅ LIVE — GET /api/soul/priority
-Stage 6 6-AI TRUTH      ❌ NOT BUILT
-Stage 7 SHADOW REALM    ❌ NOT BUILT  
-Stage 8 MERKLE LATTICE  ❌ NOT BUILT
-Stage 9 DO-SQLITE       ❌ NOT BUILT
-Stage 10 APEX ROLLUP    ❌ NOT BUILT
+Stage 6 6-AI TRUTH      ✅ LIVE — POST /api/soul/truth
+Stage 7 SHADOW REALM    ✅ LIVE — POST /api/soul/shadow
+Stage 8 MERKLE LATTICE  ✅ LIVE — GET /api/soul/merkle/:session_id
+Stage 9 DO-SQLITE       ✅ LIVE — LedgerDO class + /api/ledger/*
+Stage 10 APEX ROLLUP    ✅ LIVE — GET /api/soul/apex
 ```
 
 ### System State
@@ -64,14 +63,14 @@ Stage 10 APEX ROLLUP    ❌ NOT BUILT
 - **HEAD:** `6b7d362` (REINCARNATION-LOG.md created + Stage 3 LINELOCK)
 - **Origin:** origin/master synced
 - **Working tree:** CLEAN
-- **Heavy Ledger JSONs:** 189 files (unverified count — run enumerator)
+- **Heavy Ledger JSONs:** 213 files (unverified count — run enumerator)
 - **Triggers:** reincarnate daily (09:00 ICT); RL2026 end-May; Bavaria Jun 15
 
 ### Key File Locations
 - **RISE Agent:** `.github/agents/RISE.agent.md`
 - **Connect Prompt:** `.github/prompts/connect.prompt.md`
 - **SSM V8:** `CANON/SYSTEM/SSM-V8-ULTIMATE-GPS.md` (21 sections, 36 laws)
-- **Heavy Ledger:** `CANON/HEAVY-LEDGER/*.json` (189 files)
+- **Heavy Ledger:** `CANON/HEAVY-LEDGER/*.json` (213 files)
 - **Pipeline Cursor:** `CANON/HEAVY-LEDGER/PIPELINE-CURSOR.md`
 - **Reincarnation:** `CANON/REINCARNATION/*.md`
 - **OP-ImposterKill Lock:** `OPERATIONS/OP-IMPOSTERKILL/OP-IMPOSTERKILL-LOCK.md`
@@ -96,4 +95,4 @@ Stage 10 APEX ROLLUP    ❌ NOT BUILT
 
 ---
 
-*FINGERPRINT: Run 333 COLD-START-BOOT refresh executed. Stage 3 LINELOCK complete. REINCARNATION-LOG.md created. 4/10 S2Pipeline stages live. All portals covered.*
+*FINGERPRINT: Run 333 COLD-START-BOOT refresh executed. Stage 3 LINELOCK complete. REINCARNATION-LOG.md created. 10/10 S2Pipeline stages LIVE. All portals covered.*
