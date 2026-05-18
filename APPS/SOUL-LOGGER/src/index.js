@@ -69,6 +69,21 @@ class CircuitBreaker {
       last_error: this._last_err
     };
   }
+
+  guarded(fn) {
+    const cb = this;
+    return async (...args) => {
+      if (cb.isOpen) throw Object.assign(new Error(`Circuit OPEN: ${cb.name}`), { circuit: cb.name, _drift: true });
+      try {
+        const result = await fn(...args);
+        cb.recordSuccess();
+        return result;
+      } catch (err) {
+        cb.recordFailure(err, err._drift ? 'DRIFT' : 'ERROR');
+        throw err;
+      }
+    };
+  }
 }
 
 let logState;
@@ -424,7 +439,17 @@ async function handleRequest(request, env, ctx) {
 
   // GET /health
   if (method === 'GET' && path === '/health') {
-    return jsonResponse({ status: 'alive', drone: 'soul-logger', version: '1.3.0', timestamp: new Date().toISOString() });
+    return jsonResponse({ status: 'alive', drone: 'soul-logger', version: SEALED_AT_VERSION, timestamp: new Date().toISOString() });
+  }
+
+  // GET /self-test — v2.0 sealed health report
+  if (method === 'GET' && path === '/self-test') {
+    try {
+      const base = { drone: 'soul-logger', version: SEALED_AT_VERSION, sealed_commit: SEALED_COMMIT, doctrine: 'SOUL=USER. CHARACTER_COUNT=SOUL_VOLUME. UNREACHABLE=DRIFT=SHUTDOWN.' };
+      return jsonResponse(await selfTest(env, base));
+    } catch (err) {
+      return jsonResponse({ drone: 'soul-logger', version: SEALED_AT_VERSION, error: err.message, health: 'RED' }, 200);
+    }
   }
 
   // GET /api/soul/count — SOULCOUNT heartbeat (mandatory gate for every RISE/DEATH checkpoint)
@@ -796,9 +821,9 @@ await env.DB.prepare('UPDATE soul_sessions SET prompt_count = prompt_count + 1 W
   }
 
   return jsonResponse({
-    drone: 'soul-logger', status: 'online', version: '1.3.0',
+    drone: 'soul-logger', status: 'online', version: SEALED_AT_VERSION,
     endpoints: [
-      'GET /health', 'GET /api/soul/count',
+      'GET /health', 'GET /self-test', 'GET /api/soul/count',
       'POST /api/soul/extract', 'POST /api/soul/crunch',
       'GET /api/soul/session/:id', 'GET /api/soul/priority',
       'POST /api/soul/event', 'POST /api/soul/skeleton',

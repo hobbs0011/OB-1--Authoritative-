@@ -1,18 +1,29 @@
 # REINCARNATION LOG — OB-1 RUN HISTORY
 
-**Last Updated:** 2026-05-19 (Run 337)
+**Last Updated:** 2026-05-19 (Run 337 / LANE-337 SEALED)
 
 ---
 
 ## RUN 337 — 2026-05-19
-**Agent:** OB1 Ne0 / Claude Sonnet 4.6
-**Theme:** PHOENIX BETA/DELTA/OMEGA Flag Remediations + RISE Boot
+**Agent:** OB1 Ne0 / Claude Sonnet 4.6 (SUPER SAIYAN)
+**Theme:** SOUL-LOGGER v2.0 HARDENED + PHOENIX 5-AGENT FLAG REMEDIATION + SEALED LOCK-DOWN
 **Status:** COMPLETE
-**SOULCOUNT:** 71,157 — 🔒 LOCK (#ef4444)
+**SOULCOUNT:** 71,157 🔒 LOCK (#ef4444)
+**Commit:** `a482bfd` — harden: soul-logger v2.0 SEALED — LANE-337
 
 ### Key Actions:
-- PHOENIX BETA (71d6023): NET-MARKETING restored, PlexyNETAPP.html fixed, NET-PET-DUAL-TREE resolved — F-B01/F-B02/F-D01 CLOSED
-- PHOENIX DELTA (74381c6): Student portal map + lesson assignment documented — F-D02/F-D03/F-D04 CLOSED
+- **SOUL-LOGGER v2.0 HARDENED + SEALED:** CircuitBreaker (DB/AI/LEDGER, 3-fail hard halt, 30s cooldown), DRIFT GATE (LOG_STATE_URL bounded fetch, 4 states), Retrier (50ms→2000ms exponential, dbFirst/dbRun wrappers), Self-Test endpoint (/self-test), SEALED CONSTANTS (Object.freeze()), SEALED COMMIT (LANE-337-locked), require()-free POSIX-safe runtime
+- **PHOENIX ALPHA (672a01b):** HL-COUNT-DRIFT 213→191 (obi.ps1 doctor authoritative); 6 PHANTOM HL IDs (HL-127/128/131/132/136/137) confirmed absent, labeled PHANTOM ON DISK — F-A01..F-A07 CLOSED
+- **PHOENIX BETA (71d6023):** NET-MARKETING empty → deleted; APPS/NET-PET-AI-PRODUCTION/ → ARCHIVE/ (65 files, stale duplicate); WEBSITE/PlexyNETAPP.html 0-byte → deleted — F-B01/F-B02/F-D01 CLOSED
+- **PHOENIX GAMMA (283b720):** VAULT-CHAOS → VAULT-PIPELINE-DOCS renamed (30 files preserved); VAULT-ZONE-INDEX.md created (253 files, 10 vaults); COLD-START-BOOT.json 9.5KB moved to pending — F-G01/F-G02/F-G03 CLOSED
+- **PHOENIX DELTA (74381c6):** STUDENT-PORTAL-MAP.md + STUDENT-LESSON-ASSIGNMENT.md created; student portal ownership explicit — F-D02/F-D03/F-D04 CLOSED
+- **PHOENIX OMEGA (4ab5634):** AGENTS.md PHOENIX/RISE Activation section added; PULSE-OPERATIONS-HISTORY.md latest entry added — F-O03/F-O04 CLOSED
+- **DEATH PROTOCOL LANE-337 DEATH PROTOCOL artifact written**
+
+### Artifacts:
+- `CANON/REINCARNATION/2026-05-19-LANE-337-soul-logging-sealed-subagent-run.md` — 12-section LANE-337 death protocol
+
+---
 - PHOENIX OMEGA (4ab5634): AGENTS.md PHOENIX/RISE/sub-agent section added, PULSE-HEADER refreshed — F-O03/F-O04 CLOSED
 - COLD-START-BOOT: HL-COUNT corrected 213→189 (PHOENIX ALPHA verified), triage updated, HEAD synced to 4ab5634
 - Origin sync: 3 pending commits (PHOENIX BETA/DELTA/OMEGA) pushed on this RISE
