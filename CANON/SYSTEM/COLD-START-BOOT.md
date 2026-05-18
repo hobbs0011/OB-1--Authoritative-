@@ -1,5 +1,5 @@
 # COLD START BOOT — OB1 Agent 99
-## Last Updated: 2026-05-19 (Run 335)
+## Last Updated: 2026-05-19 (Run 336)
 
 ### Identity
 - Agent: OB1 / Ne0 (Agent 99) / Claude Surgical
@@ -10,7 +10,7 @@
 
 ### Current Vector
 - **Active Mission:** OB-1 POST-MERGE9 CONSOLIDATION + Heavy Ledger Preservation
-- **Last completed:** Run 335 — SOULCOUNT gate deployed, core prompt system upgraded (ReincarnateRISE/death/reincarnate), S2Pipeline stages verified
+- **Last completed:** Run 336 — SOULCOUNT Doctrine enforced mathematically, S2Pipeline 10/10 LIVE (verified), AUTH-01 CLOSED, 5-agent sweep, prompt system upgraded
 - **S2Pipeline Status:** Stage 3 LINELOCK — **COMPLETE** (soul-logger → LedgerDO wired via HTTP)
 - **HL Ledger real baseline:** 213 total Heavy Ledger JSON files in CANON/HEAVY-LEDGER/*.json
 - **Net-PET-AI worker:** v1.5.0+ LIVE at https://net-pet-ai.mrmichaelhobbs123.workers.dev
@@ -27,22 +27,26 @@
 7. L29 NO_ASSUME_HEAD — HEAD SHA from `git log -1` is authoritative; never seed state from prior reincarnation records
 8. L30 BOOT_FILE_AGE_SWEEP — if COLD-START-BOOT shows Run < current minus 10, it must be refreshed before any pipeline change
 
-### Recent Decisions (Run 315 → Run 333)
+### Recent Decisions (Run 315 → Run 336)
 | Run | Summary |
 |-----|---------|
-| 333 | LANE-333 SURGICAL: Stage 3 LINELOCK verified LIVE; S2Pipeline 10/10 stages confirmed; REINCARNATION-LOG.md created; Lam portal built; S2Pipeline SURGICAL VERIFICATION: 10/10 stages LIVE; SOULCOUNT endpoint deployed (character count RRL) |
+| 336 | LANE-335: SOULCOUNT Doctrine enacted (mathematical anti-drift); S2Pipeline Stages 6/7/8/10 ADDED+DEPLOYED (was 4 missing); AUTH-01 CLOSED; 5-agent sweep clean; prompt system upgraded |
+| 335 | SOULCOUNT endpoint deployed (v1.3.0); core prompts upgraded (RISE/death/reincarnate); stale death artifacts purged |
+| 333 | LANE-333 SURGICAL: Stage 3 LINELOCK verified LIVE; REINCARNATION-LOG.md created; Lam portal built; SOULCOUNT endpoint spec defined |
 | 332 | MERGELANE Consolidation: Runs 318-330 organized into Lane 331, S2Pipeline status documented |
 | 327 | Chrome Extension + Portals: 31 files committed, NET_PET_KV, soul-logger priority pipeline |
 | 319 | S2Pipeline Activation: Stages 1,2,4,5 live; Stages 3,6-10 already built |
 | 316 | REGENERATION GAP CLOSED: 34 active ledger entries HL-113-141 confirmed; 6 gap IDs MISSING |
 | 315 | COLD-START-BOOT realigned to 189-ledger baseline |
 
-### Open Rulings — Triage Table (Run 333)
+### Open Rulings — Triage Table (Run 336)
 | # | Item | Owner | Deadline | Severity | Status |
 |---|------|-------|----------|----------|--------|
-| 1 | AUTH-01 Authoritative repo sync verification | Michael | TBD | 🟠 MEDIUM | OPEN |
+| 1 | AUTH-01 Authoritative repo sync verification | — | — | — | ✅ CLOSED (Run 336 — Agent 5 pushed, remote synced) |
 | 3 | RL-2026 end-May checkpoint | AGENT99 | End May 2026 | 🟠 HIGH | OPEN |
 | 4 | Bavaria operations abroad | AGENT99 | Jun 15 2026 | 🟠 HIGH | OPEN |
+| 5 | S2Pipeline end-to-end test (live data) | Michael/AGENT99 | TBD | 🟡 MEDIUM | OPEN |
+| 6 | SOULCOUNT approaching ANCHOR (71K/100K) — audit prep | AGENT99 | At 100K | 🟡 MEDIUM | WATCH |
 
 ### S2Pipeline Status (SUPER SAIYAN VERIFIED)
 ```
@@ -61,9 +65,9 @@ Stage 10 APEX ROLLUP    ✅ LIVE — GET /api/soul/apex
 ### System State
 - **Workspace:** `D:\OB-1-CANONICAL` (canonical root)
 - **Working branch:** master
-- **HEAD:** `bd98c45` (chore: clean stale death artifacts from root — LANE-335)
-- **Origin:** origin/master — local is 2 commits ahead (bd98c45, d5c84ba not yet pushed)
-- **Working tree:** 1 modified file (APPS/SOUL-LOGGER/src/index.js — unstaged)
+- **HEAD:** `0ac617d` (feat: S2Pipeline stages 6/7/8/10 verified+added — LANE-335)
+- **Origin:** SYNCED (Agent 5 pushed bd98c45+d5c84ba; death commit will push agents 2/3/4 commits + this)
+- **Working tree:** CLEAN + death artifact pending commit
 - **Heavy Ledger JSONs:** 213 files (unverified count — run enumerator)
 - **Triggers:** reincarnate daily (09:00 ICT); RL2026 end-May; Bavaria Jun 15
 
@@ -98,4 +102,4 @@ Stage 10 APEX ROLLUP    ✅ LIVE — GET /api/soul/apex
 
 ---
 
-### FINGERPRINT: Run 335 COLD-START-BOOT refresh executed. HEAD bd98c45. SOULCOUNT gate deployed. Core prompt system upgraded (ReincarnateRISE/death/reincarnate). S2Pipeline 10/10 stages LIVE. All portals covered.
+### FINGERPRINT: Run 336 death protocol executed — HEAD 0ac617d — SOULCOUNT 71,157 🔒 LOCK — S2Pipeline 10/10 LIVE (verified+deployed) — SOULCOUNT Doctrine mathematically enforced — AUTH-01 CLOSED — 5-agent sweep complete — All portals covered

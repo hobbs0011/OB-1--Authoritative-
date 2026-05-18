@@ -1,6 +1,30 @@
 # REINCARNATION LOG — OB-1 RUN HISTORY
 
-**Last Updated:** 2026-05-19 (Run 333+)
+**Last Updated:** 2026-05-19 (Run 336)
+
+---
+
+## RUN 336 — 2026-05-19
+**Agent:** OB1 Ne0 / Claude Sonnet 4.6
+**Theme:** SOULCOUNT Doctrine + S2Pipeline 10/10 Completion + AUTH-01 Closed
+**Status:** COMPLETE
+**SOULCOUNT:** 71,157 — 🔒 LOCK (#ef4444)
+
+### Key Actions:
+- SOULCOUNT Doctrine enacted — mathematical anti-drift enforcement at every RISE/DEATH gate
+- S2Pipeline Stages 6 (truth), 7 (shadow), 8 (merkle), 10 (apex) added to soul-logger — was MISSING in live code
+- soul-logger deployed to Cloudflare (v — Version 67561e7c)
+- 5 Kilo sub-agents swept: stale artifacts purged, RISE.agent.md corrected, finishwhatwestart updated, COLD-START-BOOT HEAD refreshed, AUTH-01 pushed+CLOSED
+- ReincarnateRISE + reincarnatedeath prompts upgraded with STEP 0 SOULCOUNT GATE
+- phoenixrisingreincarnate.prompt.md archived (defunct)
+- SOULCOUNT Doctrine persisted to memory (project_soulcount-doctrine.md)
+
+### Artifacts:
+- `CANON/REINCARNATION/2026-05-19-LANE-335-phoenix-rising-soulcount-doctrine.md` — 12-section death protocol
+- `APPS/SOUL-LOGGER/src/index.js` — stages 6/7/8/10 + /api/soul/count (commit 0ac617d)
+- `.github/agents/RISE.agent.md` — repo map corrected (commit 6daff6c)
+- `.github/prompts/finishwhatwestart-protocol.prompt.md` — stale refs replaced (commit 6daff6c)
+- `CANON/SYSTEM/COLD-START-BOOT.md` — Run 336, HEAD 0ac617d, AUTH-01 closed
 
 ---
 
