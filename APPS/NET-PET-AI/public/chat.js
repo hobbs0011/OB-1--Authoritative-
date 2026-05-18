@@ -399,7 +399,7 @@ async function reactLLM(text) {
   ];
 
   try {
-    const res = await api("/api/chat", "POST", { messages });
+    const res = await api("/api/chat", "POST", { messages, studentId: profile.studentId || "anonymous" });
     const reply = res.reply || "Say that again? I didn't catch it.";
     chatMessages.push({ role: "assistant", content: reply });
     // Persist exchange to server ledger so Obi remembers this student next session
