@@ -156,7 +156,7 @@ Fonts: **Inter** (UI body) + **Orbitron** (OBI header, bold display)
 When Gemini Nano is unavailable or offline detection activates:
 
 ```
-POST https://naturalenglishtraining.net/api/chat
+POST https://net-pet-ai.mrmichaelhobbs123.workers.dev/api/chat
 Content-Type: application/json
 
 { "message": "...", "language": "en" }

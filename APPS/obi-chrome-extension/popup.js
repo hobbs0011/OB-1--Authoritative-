@@ -1,12 +1,12 @@
 /**
  * OBI Chrome Extension — Popup Controller
  * Handles chat input, sends to backend, renders responses.
- * Backend: Cloudflare Workers (naturalenglishtraining.net)
+ * Backend: Cloudflare Workers (net-pet-ai.mrmichaelhobbs123.workers.dev)
  * On-device: Gemini Nano APIs (Translation, Prompt, Language Detection)
  * Features: SpeechRecognition (mic), SpeechSynthesis (speak), Level tracking, Offline detection
  */
 
-const BACKEND_URL = 'https://naturalenglishtraining.net/api/chat';
+const BACKEND_URL = 'https://net-pet-ai.mrmichaelhobbs123.workers.dev/api/chat';
 
 const messagesEl = document.getElementById('messages');
 const userInput = document.getElementById('user-input');

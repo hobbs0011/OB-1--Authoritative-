@@ -4,7 +4,7 @@
  * Tab: 🎮 CMD in the sidepanel
  */
 
-const CMD_API = 'https://naturalenglishtraining.net/api/command';
+const CMD_API = 'https://net-pet-ai.mrmichaelhobbs123.workers.dev/api/command';
 
 let cmdHistoryEl, cmdInputEl, cmdSendBtn, cmdStatusEl, cmdQueueEl;
 let cmdPollInterval = null;

@@ -142,6 +142,8 @@
         }
         .nav-links a:hover { color: var(--text); background: rgba(255,255,255,0.04); }
         .nav-links a.active { color: var(--gold); background: rgba(245,158,11,0.08); box-shadow: 0 0 0 1px rgba(245,158,11,0.2); }
+        .nav-links a.nav-coach { color: var(--purple); background: rgba(168,85,247,0.08); box-shadow: 0 0 0 1px rgba(168,85,247,0.25), 0 0 12px rgba(168,85,247,0.15); }
+        .nav-links a.nav-coach:hover { color: #d8b4fe; background: rgba(168,85,247,0.14); box-shadow: 0 0 0 1px rgba(168,85,247,0.45), 0 0 20px rgba(168,85,247,0.3); }
         .nav-logout {
             font-family: 'Rajdhani', sans-serif; font-size: 0.85rem; font-weight: 600;
             letter-spacing: 0.04em; color: #f87171; background: transparent;
@@ -291,6 +293,7 @@
             <a href="quy-career">Career</a>
             <a href="quy-transcripts">Transcripts</a>
             <a href="quy-action-plan">Action Plan</a>
+            <a href="/magic-chat?studentId=quy-bluetech" class="nav-coach">COACH</a>
             <button class="nav-logout" id="logoutBtn">LOGOUT</button>
         </div>
     </nav>
@@ -618,13 +621,18 @@
             var SB_STUDENT_ID = 'quy-bluetech';
             var SB_API = 'https://net-pet-ai.mrmichaelhobbs123.workers.dev';
 
-            function sbRender(data) {
+            function sbRender(data, due) {
                 var badge = document.getElementById('streak-badge');
                 if (!badge) return;
                 var s = data.todayStatus || 'active';
                 var streak = data.currentStreak || 0;
                 var total = data.totalDays || 0;
                 var longest = data.longestStreak || 0;
+                var dueCount = (due && typeof due.count === 'number') ? due.count : null;
+                var dueHtml = dueCount === null ? '' :
+                    dueCount > 0
+                        ? '<div class="sb-srs-due" style="font-size:0.78rem;font-weight:700;letter-spacing:0.04em;color:#f59e0b;margin-bottom:6px;">📚 ' + dueCount + ' WORDS DUE</div>'
+                        : '<div class="sb-srs-due" style="font-size:0.78rem;font-weight:700;letter-spacing:0.04em;color:#22c55e;margin-bottom:6px;">📚 ALL CAUGHT UP</div>';
                 badge.className = '';
                 if (s === 'active') badge.classList.add('sb-active');
                 else if (s === 'at_risk') badge.classList.add('sb-at-risk');
@@ -641,6 +649,7 @@
                     '<div class="sb-streak-count' + (s !== 'active' ? ' sb-count-danger' : '') + '">' + streak + ' DAY STREAK</div>' +
                     statusText +
                     '<div class="sb-total-days">' + total + ' total active days &nbsp;&bull;&nbsp; best: ' + longest + '</div>' +
+                    dueHtml +
                     '<button class="sb-btn-checkin" id="sbCheckinBtn">CHECK IN</button>' +
                     saveFaceHtml +
                     '<div class="sb-confirm" id="sbConfirm"></div>';
@@ -674,7 +683,13 @@
             function sbFetch() {
                 fetch(SB_API + '/api/student/streak/' + SB_STUDENT_ID)
                     .then(function(r){ return r.ok ? r.json() : null; })
-                    .then(function(d){ if (d) sbRender(d); })
+                    .then(function(d){
+                        if (!d) return;
+                        fetch(SB_API + '/api/vocab/due?studentId=' + SB_STUDENT_ID)
+                            .then(function(r){ return r.ok ? r.json() : null; })
+                            .then(function(due){ sbRender(d, due); })
+                            .catch(function(){ sbRender(d, null); });
+                    })
                     .catch(function(){});
             }
 

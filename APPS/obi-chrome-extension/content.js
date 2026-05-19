@@ -4,7 +4,7 @@
  * Minimal footprint — only activates on user action.
  */
 
-const BACKEND_URL = 'https://naturalenglishtraining.net/api/chat';
+const BACKEND_URL = 'https://net-pet-ai.mrmichaelhobbs123.workers.dev/api/chat';
 
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (msg.action === 'askObi' && msg.text) {
