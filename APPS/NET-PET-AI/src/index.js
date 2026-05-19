@@ -501,6 +501,37 @@ async function handleAPI(path, request, env, url) {
   // /api/analytics — The only 4 metrics that matter
   if (path === "/api/analytics" && method === "GET") { return handleAnalytics(env); }
 
+  // ── Student Password Management (KV-backed, SHA-256 hashed) ────────────
+  // POST /api/student/checkpw — { studentId, pw } → { ok, isDefault }
+  if (path === "/api/student/checkpw" && method === "POST") {
+    const { studentId, pw } = await request.json();
+    if (!studentId || !pw) return addCors(json({ error: "studentId and pw required" }, 400), request);
+    const [hash, defaultHash, stored] = await Promise.all([
+      computeHash(pw),
+      computeHash("bluetech2026"),
+      env.NET_PET_KV.get(`student_pw_${studentId}`)
+    ]);
+    if (stored) return addCors(json({ ok: hash === stored, isDefault: false }), request);
+    const isDefault = hash === defaultHash;
+    return addCors(json({ ok: isDefault, isDefault }), request);
+  }
+  // POST /api/student/setpw — { studentId, currentPw, newPw } → { ok }
+  if (path === "/api/student/setpw" && method === "POST") {
+    const { studentId, currentPw, newPw } = await request.json();
+    if (!studentId || !currentPw || !newPw) return addCors(json({ error: "studentId, currentPw, newPw required" }, 400), request);
+    if (newPw.length < 6) return addCors(json({ ok: false, error: "Password must be at least 6 characters" }, 400), request);
+    const [currentHash, defaultHash, stored] = await Promise.all([
+      computeHash(currentPw),
+      computeHash("bluetech2026"),
+      env.NET_PET_KV.get(`student_pw_${studentId}`)
+    ]);
+    const validCurrent = stored ? currentHash === stored : currentHash === defaultHash;
+    if (!validCurrent) return addCors(json({ ok: false, error: "Current password incorrect" }, 403), request);
+    const newHash = await computeHash(newPw);
+    await env.NET_PET_KV.put(`student_pw_${studentId}`, newHash);
+    return addCors(json({ ok: true }), request);
+  }
+
   // ── v2 Pipeline: Student State + Session Events ───────────────────────────
   // /api/student/state — Full behavioral state (Mouse/Cub/Tiger + scores)
   if (path === "/api/student/state" && method === "GET") {
