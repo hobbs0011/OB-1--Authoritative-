@@ -621,6 +621,27 @@ async function handleAPI(path, request, env, url) {
   if (path.startsWith("/api/referral/stats/") && method === "GET") { const referrerId = path.split("/api/referral/stats/")[1] || ""; return handleReferralStats(referrerId, request, env); }
   if (path === "/api/referral/convert" && method === "POST") { const body = await request.json(); return handleReferralConvert(body, request, env); }
 
+  // ── Phoenix Coder Queue Proxy ─────────────────────────────────────────────
+  // POST /api/pc/queue — queue a code generation task to Phoenix Coder drone
+  if (path === "/api/pc/queue" && method === "POST") {
+    const body = await request.json();
+    if (!body.task || !body.targetfile) return json({ error: "task and targetfile required" }, 400);
+    const pcResp = await fetch("https://phoenix-coder.mrmichaelhobbs123.workers.dev/api/queue", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ task: body.task, targetfile: body.targetfile, context: body.context || "", priority: body.priority || "normal" })
+    });
+    const pcData = await pcResp.json();
+    return addCors(json({ ...pcData, proxied: true }), request);
+  }
+  // GET /api/pc/queue — check queue status
+  if (path === "/api/pc/queue" && method === "GET") {
+    const status = url.searchParams.get("status") || "pending";
+    const pcResp = await fetch(`https://phoenix-coder.mrmichaelhobbs123.workers.dev/api/queue?status=${status}`);
+    const pcData = await pcResp.json();
+    return addCors(json({ ...pcData, proxied: true }), request);
+  }
+
   return json({ error: "Not found" }, 404);
 }
 
