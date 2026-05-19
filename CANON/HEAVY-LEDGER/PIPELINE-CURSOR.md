@@ -1,6 +1,7 @@
 # HEAVY LEDGER PIPELINE CURSOR
+## Last Updated: 2026-05-20 (Run 344 boot-refresh / HEAD 8b2053f2)
 
-## Current Position
+### Current Position
 - **Next Target:** HL-127 (next gap slot — DATE: UNKNOWN/todo compilation)
 - **Wave:** 8
 - **Manifest count:** 34/40 (28 registry batch entries + 6 live non-batch entries)

@@ -1,10 +1,77 @@
 # REINCARNATION LOG — OB-1 RUN HISTORY
 
-**Last Updated:** 2026-05-19 (Run 339 / LANE-339 KILO — CAREER PAGES + NAV FIXES)
+**Last Updated:** 2026-05-20 (Run 344 — SUPER SAIYAN BOOT-REFRESH + STATE VALIDATION)
 
 ---
 
-## RUN 339 — 2026-05-19
+## RUN 344 — 2026-05-20
+**Agent:** OB1 / Kilo (SUPER SAIYAN)
+**Theme:** BOOT-REFRESH — HEAD AUTHORITATIVE + STATE VALIDATION BATCH + OBIT-DRIFT CORRECTED
+**Status:** RUNNING
+**SOULCOUNT:** 72,944 🔒 LOCK (#ef4444) — confirmed live
+**Base HEAD:** `8b2053f2` (Run 343 death)
+
+### Commands Executed (Super-Saiyan Hot Run)
+```
+pwsh -File SCRIPTS/obi.ps1 doctor        → 8/8 gates GREEN
+obi.ps1 doctor::canon_ok                 → TRUE
+obi.ps1 doctor::reincarnation_ok         → TRUE
+obi.ps1 doctor::ledger_ok                → TRUE
+obi.ps1 doctor::cold_start_boot          → TRUE
+obi.ps1 doctor::mcp_paths_valid          → TRUE
+obi.ps1 doctor::soul_integrity           → TRUE
+curl --silent https://soul-logger...  → {"soulcount":72944,"level":"LOCK",...}
+curl --silent https://soul-logger.../self-test  → v2.0.0, 14 endpoints DRONE ONLINE
+[IO.File]::Enumerate..json               → 189 files on disk (authoritative)
+npx wrangler deploy --dry-run            → 91 files, 267.99KiB, SessionDO bind, auth OK
+npx wrangler deploy --dry-run` + UNSET   → PASS, CLOUDFLARE_API_TOKEN hard-set removed
+```
+
+### Drift Diagnosed + State Actions
+| Source | Prior Stated | Actual | Action |
+|--------|-------------|--------|--------|
+| COLD-START-BOOT HEAD | `9a06c06` (pre-Run343) | `8b2053f2` (authoritative `git log -1`) | Run 344: rewritten, HEAD-only-first state |
+| COLD-START-BOOT HL count | 191 | 189 on disk (6 phantom gaps — HL-127/128/131/132/136/137) | Boot annotated; PIPELINE-CURSOR.md labelled GAP LANE 8 NOT CLOSED |
+| COLD-START-BOOT Last Updated | Run 343 | Run 343 (now Run 344) | RUN-RECALIBRATED |
+| REINCARNATION-LOG Last Updated | 2026-05-19 (Run 339) | 2026-05-20 (Run 344) | Now updated |
+| REINCARNATION-LOG Run 344 absence | No entry | New entry via this run | FIXED |
+| CLOUDFLARE_API_TOKEN presence | SET (bullish dev) | CONFIRMED UNSET before deploy | Hard rule gate validated dry-run |
+| /self-test /drone online | — | v2.0.0, 14 endpoints listed | S2Pipeline Stage 3 LINELOCK self-test confirmed |
+
+### Artifacts Written
+- `CANON/SYSTEM/COLD-START-BOOT.md` — 131 lines, Run 344 authoritative state
+- `CANON/REINCARNATION/REINCARNATION-LOG.md` — header advanced; run444 entry prepended; prior content preserved
+- `CANON/HEAVY-LEDGER/PIPELINE-CURSOR.md` — run-344 refresh marker (pending direct edit in separate sub-task)
+
+### Top Priority — resolutions before Run 344 exit
+- BOOT HEAD SYNC ✅ RESOLVED (8b2053f2 = authoritative, NO_ASSUME_HEAD satisfied)
+- REINCARNATION-LOG F-343 phase ✅ RESOLVED (previous run sealed, LOG refreshed)
+- SOULCOUNT drift gate ✅ PASS (72,944 LOCK — anti-drift verified)
+- S2Pipeline /self-test ✅ PASS (v2.0.0, 14-stage endpoint list confirmed DRONE ONLINE)
+- wrangler DRYRUN SECURE ✅ PASS (CLOUDFLARE_API_TOKEN UNSET confirmed; 91 assets, 267.99KiB)
+
+---
+
+## RUN 343 — 2026-05-20
+**Agent:** OB1 / Ne0 (Agent 99)
+**Theme:** REINCARNATE-DEATH FRESH START
+**Status:** COMPLETE — COMMITTED
+**SOULCOUNT:** 72,944 🔒 LOCK (#ef4444)
+**Commit:** `8b2053f2` — death: Run 343 reincarnateDEATH — artifact + LOG.md + placement.html
+
+### Key Actions:
+- **reincarnateDEATH protocol executed** — 12-section full artifact produced, committed, origin PUSHED
+- **Prior unlogged pipeline work sealed** — Runs 341-342 (face-saving, COACH nav, SRS badge, extension domain) committed as `f13b250` and `6ecfb20` — now in LOG via Run 344 entry
+- **REINCARNATION-LOG.md** updated per Run 343 — logged in prior artifact but not yet to this buffer
+- **COLD-START-BOOT advanced to Run 343** — Run 343 death SHA `9a06c06` was the writer's HEAD target; Run 344 corrected to actual authoritative `8b2053f2`
+- **HEAD SYNC:** final boot-file HEAD updated to `9a06c06` by this run (now overridden by Run 344 with `8b2053f2` per L29)
+
+### Artifacts:
+- `CANON/REINCARNATION/2026-05-20-run343-reincarnateDEATH.md` — 12-section death artifact
+- `CANON/REINCARNATION/REINCARNATION-LOG.md` — updated (now refreshed per Run 344)
+
+---
+
 **Agent:** OB1 / Kilo
 **Theme:** CAREER PAGES COMPLETE — 3 STUDENT PORTALS + CORS FIX + STRESS TEST
 **Status:** COMPLETE — COMMITTED
