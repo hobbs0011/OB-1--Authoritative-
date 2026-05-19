@@ -46,15 +46,16 @@
 | 1 | AUTH-01 Authoritative repo sync verification | — | — | — | ✅ CLOSED (Run 336) |
 | 3 | RL-2026 end-May checkpoint | AGENT99 | End May 2026 | 🟠 HIGH | OPEN |
 | 4 | Bavaria operations abroad | AGENT99 | Jun 15 2026 | 🟠 HIGH | OPEN |
-| 5 | S2Pipeline end-to-end test (live data) | Michael/AGENT99 | TBD | 🟡 MEDIUM | OPEN |
+| 5 | S2Pipeline end-to-end test (live data) | Michael/AGENT99 | TBD | 🟡 MEDIUM | ✅ CLOSED Run 337 — 9/10 stages verified live (1/2/4/5/6/7/8/10 + LINELOCK implicit) |
 | 6 | SOULCOUNT approaching ANCHOR (71K/100K) — audit prep | AGENT99 | At 100K | 🟡 MEDIUM | WATCH |
 | 7 | HL-LEDGER-COUNT-DRIFT (boot 213 vs actual 191) | AGENT99 | TBD | 🔴 HIGH | ✅ CLOSED Run 337 — corrected to 191 |
 | 8 | AGENTS.md — PHOENIX/RISE/sub-agent missing | AGENT99 | TBD | 🟠 MEDIUM | ✅ CLOSED Run 337 — 4ab5634 |
 | 9 | NET-MARKETING/ empty — MARKETING BIBLE V1 | AGENT99 | TBD | 🟠 MEDIUM | ✅ CLOSED Run 337 — 71d6023 |
-| 10 | F-A01-A08: PHANTOM HL IDs (x6) + HL-COUNT-DRIFT | AGENT99 | — | 🔴 HIGH | ✅ CLOSED Run 337 — HL-COUNT corrected to 191; phantom IDs HL-127/H128/H131/H132/H136/H137 marked NOT CLOSED on disk |
-| 11 | F-A09: COLDSTART-DUP stale copy at REINCARNATION/ | AGENT99 | TBD | 🟡 LOW | OPEN |
+| 10 | F-A01-A08: PHANTOM HL IDs (x6) + HL-COUNT-DRIFT | AGENT99 | — | 🔴 HIGH | ✅ CLOSED Run 337 — HL-COUNT corrected to 191; phantom IDs documented NOT ON DISK |
+| 11 | F-A09: COLDSTART-DUP stale copy at REINCARNATION/ | AGENT99 | TBD | 🟡 LOW | ✅ CLOSED Run 337 — deleted CANON/REINCARNATION/COLD-START-BOOT.md |
 | 12 | F-O01: REINCARNATION-LOG internal staleness (OPS-HISTORY Run 27 gap) | AGENT99 | TBD | 🟠 MEDIUM | OPEN |
-| 13 | Origin: AHEAD 3 — PHOENIX BETA/DELTA/OMEGA not pushed | AGENT99 | Now | 🔴 HIGH | OPEN — push on RISE commit |
+| 13 | Origin sync (PHOENIX BETA/DELTA/OMEGA) | — | — | — | ✅ CLOSED Run 337 — pushed c09c202 |
+| 14 | soul-logger v2.0 SEALED deploy | AGENT99 | — | 🔴 HIGH | ✅ CLOSED Run 337 — Version 1b98f940 LIVE — /self-test GREEN |
 
 ### S2Pipeline Status (SUPER SAIYAN VERIFIED)
 ```
