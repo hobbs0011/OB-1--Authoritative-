@@ -252,6 +252,24 @@
             .dashboard-header h1 { font-size: 1.7rem; }
         }
 
+        /* ── WEEKLY PROGRESS WIDGET ── */
+        #weekly-widget {
+            display: flex; gap: 12px; margin: 12px 0; flex-wrap: wrap;
+        }
+        .ww-stat {
+            flex: 1; min-width: 90px;
+            background: var(--card); backdrop-filter: blur(16px);
+            border: 1px solid var(--border); border-radius: 14px;
+            padding: 14px 12px; text-align: center;
+        }
+        .ww-label { font-family: 'Rajdhani', sans-serif; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: var(--dim); margin-bottom: 6px; }
+        .ww-value { font-family: 'Orbitron', sans-serif; font-size: 1.15rem; font-weight: 700; color: var(--purple); }
+        .ww-value.gold { color: var(--gold); }
+        .ww-value.teal { color: var(--teal); }
+        .ww-sub { font-size: 0.7rem; color: var(--dim); margin-top: 3px; }
+        .ww-bar-wrap { height: 4px; background: rgba(255,255,255,0.06); border-radius: 4px; margin-top: 6px; overflow: hidden; }
+        .ww-bar-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, var(--purple), var(--gold)); transition: width 0.6s ease; }
+
         /* ── GRADUATION FORECAST WIDGET ── */
         #forecast-widget {
             background: var(--card);
@@ -409,6 +427,26 @@
                     <div class="ql-label">Start Session</div>
                     <div class="ql-sub">Chat with OBI now</div>
                 </a>
+            </div>
+        </div>
+
+        <!-- Weekly Progress Widget -->
+        <div id="weekly-widget" style="display:none;">
+            <div class="ww-stat">
+                <div class="ww-label">Mastered Words</div>
+                <div class="ww-value" id="ww-mastered">—</div>
+                <div class="ww-sub" id="ww-mastered-sub"></div>
+            </div>
+            <div class="ww-stat">
+                <div class="ww-label">Current Streak</div>
+                <div class="ww-value gold" id="ww-streak">—</div>
+                <div class="ww-sub" id="ww-streak-sub"></div>
+            </div>
+            <div class="ww-stat">
+                <div class="ww-label">Level Progress</div>
+                <div class="ww-value teal" id="ww-level">—</div>
+                <div class="ww-bar-wrap"><div class="ww-bar-fill" id="ww-bar" style="width:0%"></div></div>
+                <div class="ww-sub" id="ww-level-sub"></div>
             </div>
         </div>
 
@@ -735,6 +773,44 @@
             } catch(e) {}
         }
         document.addEventListener('DOMContentLoaded', loadForecast);
+
+        async function loadWeeklyWidget() {
+            try {
+                const [fRes, sRes] = await Promise.all([
+                    fetch(`/api/student/forecast/mai-tram-bluetech`).then(r => r.ok ? r.json() : null).catch(() => null),
+                    fetch(`/api/student/streak/mai-tram-bluetech`).then(r => r.ok ? r.json() : null).catch(() => null),
+                ]);
+                if (!fRes && !sRes) return;
+                const widget = document.getElementById('weekly-widget');
+                if (!widget) return;
+
+                const mastered = fRes?.masteredWords ?? 0;
+                const total = fRes?.totalWords ?? 0;
+                document.getElementById('ww-mastered').textContent = mastered;
+                document.getElementById('ww-mastered-sub').textContent = total > 0 ? `of ${total} studied` : 'keep reviewing!';
+
+                const streak = sRes?.currentStreak ?? 0;
+                const best = sRes?.longestStreak ?? 0;
+                document.getElementById('ww-streak').textContent = streak + (streak === 1 ? ' day' : ' days');
+                document.getElementById('ww-streak-sub').textContent = streak >= 7 ? '🔥 on fire!' : `best: ${best}d`;
+
+                const CEFR = [{l:'A1',t:50},{l:'A2',t:150},{l:'B1',t:300},{l:'B2',t:500},{l:'C1',t:800}];
+                const cur = fRes?.currentLevel || 'A1';
+                const tgt = fRes?.targetLevel || 'A2';
+                const nextTarget = CEFR.find(c => c.l === tgt);
+                const prevTarget = CEFR[CEFR.findIndex(c => c.l === tgt) - 1];
+                const prevWords = prevTarget ? prevTarget.t : 0;
+                const nextWords = nextTarget ? nextTarget.t : 50;
+                const pct = Math.min(100, Math.round(((mastered - prevWords) / (nextWords - prevWords)) * 100)) || 0;
+                document.getElementById('ww-level').textContent = cur;
+                document.getElementById('ww-bar').style.width = pct + '%';
+                document.getElementById('ww-level-sub').textContent = `${pct}% to ${tgt}`;
+
+                widget.style.display = 'flex';
+            } catch(e) {}
+        }
+        document.addEventListener('portalUnlocked', loadWeeklyWidget);
+        if (typeof isAuthed === 'function' && isAuthed()) loadWeeklyWidget();
     </script>
     <script src="./global-brand-shelf.js" defer onerror="void 0"></script>
 </body>

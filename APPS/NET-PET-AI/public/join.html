@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Natural English Training — Free Placement Test</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Orbitron:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --void: #0a0a12;
+            --card: rgba(22, 22, 35, 0.9);
+            --purple: #a855f7;
+            --purple-glow: rgba(168, 85, 247, 0.25);
+            --gold: #f59e0b;
+            --gold-glow: rgba(245, 158, 11, 0.2);
+            --text: #f8fafc;
+            --dim: #94a3b8;
+            --border: rgba(255, 255, 255, 0.08);
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; background-color: var(--void); }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background-color: var(--void);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 24px 16px;
+            position: relative;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            background:
+                radial-gradient(ellipse at 30% 20%, var(--purple-glow) 0%, transparent 55%),
+                radial-gradient(ellipse at 70% 75%, var(--gold-glow) 0%, transparent 55%);
+        }
+        .card {
+            position: relative; z-index: 1;
+            background: var(--card); backdrop-filter: blur(20px);
+            border: 1px solid var(--border); border-radius: 24px;
+            padding: 48px 36px; text-align: center;
+            max-width: 440px; width: 100%;
+            box-shadow: 0 8px 48px rgba(0,0,0,0.6), 0 0 80px var(--purple-glow);
+        }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+        .card { animation: fadeUp 0.5s ease; }
+
+        /* Icon */
+        .join-icon { font-size: 3rem; margin-bottom: 18px; }
+
+        /* Referral badge */
+        .ref-badge {
+            display: none;
+            background: rgba(168,85,247,0.1); border: 1px solid rgba(168,85,247,0.3);
+            border-radius: 12px; padding: 10px 16px; margin-bottom: 20px;
+            font-size: 0.85rem; color: var(--dim);
+        }
+        .ref-badge strong { color: var(--purple); }
+        .ref-badge.visible { display: block; }
+
+        /* Heading */
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(1.3rem, 5vw, 1.7rem);
+            font-weight: 800; letter-spacing: 0.04em;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            font-size: 1rem; color: var(--dim); line-height: 1.6; margin-bottom: 28px;
+        }
+        .subtitle span { color: var(--gold); font-weight: 600; }
+
+        /* Features */
+        .features {
+            display: flex; flex-direction: column; gap: 10px;
+            margin-bottom: 32px; text-align: left;
+        }
+        .feature {
+            display: flex; align-items: flex-start; gap: 12px;
+            background: rgba(255,255,255,0.03); border-radius: 10px;
+            padding: 10px 14px; border: 1px solid var(--border);
+        }
+        .feature-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+        .feature-text { font-size: 0.88rem; color: var(--dim); line-height: 1.4; }
+        .feature-text strong { color: var(--text); }
+
+        /* CTA */
+        .cta-btn {
+            display: block; width: 100%; padding: 16px 20px;
+            border-radius: 14px; border: none;
+            background: linear-gradient(135deg, var(--purple), #9333ea);
+            color: #fff; font-family: 'Orbitron', sans-serif;
+            font-size: 0.95rem; font-weight: 700; letter-spacing: 0.06em;
+            cursor: pointer; text-decoration: none;
+            box-shadow: 0 4px 20px rgba(168,85,247,0.4);
+            transition: all 0.25s; margin-bottom: 14px;
+        }
+        .cta-btn:hover {
+            background: linear-gradient(135deg, #b86ef8, #a855f7);
+            box-shadow: 0 6px 28px rgba(168,85,247,0.55);
+            transform: translateY(-2px);
+        }
+
+        /* Disclaimer */
+        .disclaimer {
+            font-size: 0.75rem; color: var(--dim); line-height: 1.5; opacity: 0.7;
+        }
+        .disclaimer a { color: var(--purple); text-decoration: none; }
+        .disclaimer a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="join-icon">🎓</div>
+
+        <div class="ref-badge" id="refBadge">
+            Your classmate <strong id="refName">a friend</strong> invited you!
+        </div>
+
+        <h1>Natural English Training</h1>
+        <p class="subtitle">
+            Graduate in <span>12–18 months</span> — or we haven't done our job.
+            No fake engagement. Real results.
+        </p>
+
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon">🤖</div>
+                <div class="feature-text"><strong>AI-powered spaced repetition</strong> — learns what you need to review and when.</div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🔥</div>
+                <div class="feature-text"><strong>Daily streak system</strong> — stay consistent, outrank your classmates.</div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">📊</div>
+                <div class="feature-text"><strong>Your own progress dashboard</strong> — see exactly how far you've come.</div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🆓</div>
+                <div class="feature-text"><strong>Free placement test</strong> — starts in under 2 minutes, no signup needed.</div>
+            </div>
+        </div>
+
+        <a href="/placement.html" class="cta-btn" id="ctaBtn">Take the Free Placement Test</a>
+
+        <p class="disclaimer">
+            100% free to start. No credit card. &nbsp;|&nbsp;
+            <a href="/leaderboard.html">See student rankings</a>
+        </p>
+    </div>
+
+    <script>
+        // Read ?ref= from URL, store in localStorage, show referral badge
+        (function () {
+            const params = new URLSearchParams(window.location.search);
+            const ref = params.get('ref');
+            if (ref) {
+                localStorage.setItem('net_ref_code', ref);
+                // Try to decode referrer name from code: ref-{studentId}-{timestamp}
+                const parts = ref.split('-');
+                // parts[1] would be the first name segment
+                if (parts.length >= 2) {
+                    const rawId = parts.slice(1, -1).join('-'); // strip last segment (timestamp)
+                    const studentNames = {
+                        'huong-bluetech': 'Huong',
+                        'mai-tram-bluetech': 'Mai Tram',
+                        'quy-bluetech': 'Quy',
+                    };
+                    const name = studentNames[rawId] || 'your classmate';
+                    document.getElementById('refName').textContent = name;
+                }
+                document.getElementById('refBadge').classList.add('visible');
+            }
+
+            // Append ref to placement link so the test page can inherit it
+            if (ref) {
+                const btn = document.getElementById('ctaBtn');
+                btn.href = `/placement.html?ref=${encodeURIComponent(ref)}`;
+            }
+        })();
+    </script>
+</body>
+</html>

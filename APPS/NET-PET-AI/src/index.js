@@ -613,6 +613,14 @@ async function handleAPI(path, request, env, url) {
   // ── Magic Chat — Obi quick-response with optional student context inject ──
   if (path === "/api/magic-chat" && method === "POST") { const body = await request.json(); return handleMagicChat(body, request, env); }
 
+  // ── Leaderboard — Public student rankings by streak + mastered words ──────
+  if (path === "/api/leaderboard" && method === "GET") { return handleLeaderboard(request, env); }
+
+  // ── Referral System ───────────────────────────────────────────────────────
+  if (path === "/api/referral/register" && method === "POST") { const body = await request.json(); return handleReferralRegister(body, request, env); }
+  if (path.startsWith("/api/referral/stats/") && method === "GET") { const referrerId = path.split("/api/referral/stats/")[1] || ""; return handleReferralStats(referrerId, request, env); }
+  if (path === "/api/referral/convert" && method === "POST") { const body = await request.json(); return handleReferralConvert(body, request, env); }
+
   return json({ error: "Not found" }, 404);
 }
 
@@ -853,6 +861,134 @@ async function handleStudentForecast(studentId, env) {
     projectedDays, graduationDate, confidence,
     activeDays
   });
+}
+
+// ── Leaderboard — GET /api/leaderboard ───────────────────────────────────────
+// Public rankings: streak + mastered words. No auth required.
+async function handleLeaderboard(request, env) {
+  if (!env.NET_PET_KV) return addCors(json({ error: "NET_PET_KV not configured" }, 500), request);
+
+  const STUDENTS = [
+    { id: "huong-bluetech",     displayName: "Huong" },
+    { id: "mai-tram-bluetech",  displayName: "Mai Tram" },
+    { id: "quy-bluetech",       displayName: "Quy" },
+  ];
+
+  const CEFR_TARGETS = [50, 150, 300, 500, 800];
+
+  function getTier(masteredWords) {
+    if (masteredWords >= 80) return "TIGER🔥";
+    if (masteredWords >= 40) return "CUB🐯";
+    return "MOUSE🐭";
+  }
+
+  const rankings = await Promise.all(STUDENTS.map(async (s) => {
+    const [streakRaw, srsKeys] = await Promise.all([
+      env.NET_PET_KV.get(`streak:${s.id}`).catch(() => null),
+      env.NET_PET_KV.list({ prefix: `srs:${s.id}:` }).catch(() => ({ keys: [] })),
+    ]);
+    const streak = streakRaw ? JSON.parse(streakRaw) : { currentStreak: 0, totalDays: 0, longestStreak: 0 };
+    const totalWords = srsKeys.keys.length;
+
+    // Count mastered words (repetitions >= 3)
+    const wordData = await Promise.all(
+      srsKeys.keys.slice(0, 300).map(k => env.NET_PET_KV.get(k.name).catch(() => null))
+    );
+    const masteredWords = wordData.filter(w => {
+      if (!w) return false;
+      try { return (JSON.parse(w).repetitions || 0) >= 3; } catch { return false; }
+    }).length;
+
+    return {
+      studentId: s.id,
+      displayName: s.displayName,
+      currentStreak: streak.currentStreak || 0,
+      longestStreak: streak.longestStreak || 0,
+      totalDays: streak.totalDays || 0,
+      masteredWords,
+      totalWords,
+      tier: getTier(masteredWords),
+    };
+  }));
+
+  // Sort: totalDays DESC, then masteredWords DESC
+  rankings.sort((a, b) => b.totalDays - a.totalDays || b.masteredWords - a.masteredWords);
+  rankings.forEach((r, i) => { r.rank = i + 1; });
+
+  return addCors(json({ updatedAt: new Date().toISOString(), rankings }), request);
+}
+
+// ── Referral System ───────────────────────────────────────────────────────────
+
+// POST /api/referral/register — { referrerStudentId, referredName, referredEmail }
+async function handleReferralRegister(body, request, env) {
+  const { referrerStudentId, referredName, referredEmail } = body || {};
+  if (!referrerStudentId || !referredName) {
+    return addCors(json({ error: "referrerStudentId and referredName required" }, 400), request);
+  }
+  if (!env.NET_PET_KV) return addCors(json({ error: "NET_PET_KV not configured" }, 500), request);
+
+  const code = `ref-${referrerStudentId}-${Date.now().toString(36)}`;
+  const referral = {
+    code,
+    referrerStudentId,
+    referredName,
+    referredEmail: referredEmail || "",
+    timestamp: Date.now(),
+    converted: false,
+  };
+
+  // Store referral record
+  await env.NET_PET_KV.put(`referral:${code}`, JSON.stringify(referral), { expirationTtl: 90 * 24 * 60 * 60 });
+
+  // Append to referrer's list
+  const listKey = `referral-list:${referrerStudentId}`;
+  const existing = await env.NET_PET_KV.get(listKey).catch(() => null);
+  const list = existing ? JSON.parse(existing) : [];
+  list.push(code);
+  await env.NET_PET_KV.put(listKey, JSON.stringify(list));
+
+  const shareUrl = `/join?ref=${code}`;
+  return addCors(json({ ok: true, code, shareUrl }), request);
+}
+
+// GET /api/referral/stats/:referrerStudentId
+async function handleReferralStats(referrerStudentId, request, env) {
+  if (!referrerStudentId) return addCors(json({ error: "referrerStudentId required" }, 400), request);
+  if (!env.NET_PET_KV) return addCors(json({ error: "NET_PET_KV not configured" }, 500), request);
+
+  const listRaw = await env.NET_PET_KV.get(`referral-list:${referrerStudentId}`).catch(() => null);
+  const codes = listRaw ? JSON.parse(listRaw) : [];
+
+  const referrals = await Promise.all(
+    codes.map(c => env.NET_PET_KV.get(`referral:${c}`).then(r => r ? JSON.parse(r) : null).catch(() => null))
+  );
+  const valid = referrals.filter(Boolean);
+  const converted = valid.filter(r => r.converted).length;
+
+  return addCors(json({
+    referrerStudentId,
+    totalReferrals: valid.length,
+    converted,
+    pending: valid.length - converted,
+    referrals: valid,
+  }), request);
+}
+
+// POST /api/referral/convert — { code } → mark converted
+async function handleReferralConvert(body, request, env) {
+  const { code } = body || {};
+  if (!code) return addCors(json({ error: "code required" }, 400), request);
+  if (!env.NET_PET_KV) return addCors(json({ error: "NET_PET_KV not configured" }, 500), request);
+
+  const raw = await env.NET_PET_KV.get(`referral:${code}`).catch(() => null);
+  if (!raw) return addCors(json({ error: "referral not found" }, 404), request);
+
+  const referral = JSON.parse(raw);
+  referral.converted = true;
+  referral.convertedAt = Date.now();
+  await env.NET_PET_KV.put(`referral:${code}`, JSON.stringify(referral), { expirationTtl: 90 * 24 * 60 * 60 });
+  return addCors(json({ ok: true }), request);
 }
 
 // ── Voice Drill Scoring — Deepgram STT + SRS update ──────────────────────────

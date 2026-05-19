@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueTech English Rankings — Natural English Training</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Orbitron:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --void: #0a0a12;
+            --card: rgba(22, 22, 35, 0.85);
+            --purple: #a855f7;
+            --purple-glow: rgba(168, 85, 247, 0.25);
+            --gold: #f59e0b;
+            --gold-glow: rgba(245, 158, 11, 0.25);
+            --teal: #14b8a6;
+            --text: #f8fafc;
+            --dim: #94a3b8;
+            --border: rgba(255, 255, 255, 0.08);
+            --silver: #cbd5e1;
+            --bronze: #a16207;
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; background-color: var(--void); }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background-color: var(--void);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 16px;
+            position: relative;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            background:
+                radial-gradient(ellipse at 20% 15%, var(--purple-glow) 0%, transparent 55%),
+                radial-gradient(ellipse at 75% 70%, var(--gold-glow) 0%, transparent 55%);
+        }
+        .container {
+            position: relative; z-index: 1;
+            width: 100%; max-width: 580px;
+        }
+
+        /* ── HEADER ── */
+        .header { text-align: center; margin-bottom: 36px; }
+        .header-badge {
+            display: inline-block;
+            font-family: 'Orbitron', sans-serif; font-size: 0.7rem; font-weight: 600;
+            letter-spacing: 0.12em; text-transform: uppercase;
+            color: var(--purple); background: rgba(168,85,247,0.12);
+            border: 1px solid rgba(168,85,247,0.3); border-radius: 20px;
+            padding: 4px 14px; margin-bottom: 14px;
+        }
+        .header h1 {
+            font-family: 'Orbitron', sans-serif; font-size: clamp(1.6rem, 5vw, 2.2rem);
+            font-weight: 800; letter-spacing: 0.04em;
+            background: linear-gradient(135deg, var(--purple), var(--gold));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text; margin-bottom: 8px;
+        }
+        .header-sub {
+            font-size: 0.9rem; color: var(--dim); letter-spacing: 0.03em;
+        }
+        #last-updated {
+            font-size: 0.75rem; color: var(--dim); margin-top: 6px; opacity: 0.7;
+        }
+
+        /* ── RANK CARDS ── */
+        .rankings { display: flex; flex-direction: column; gap: 14px; margin-bottom: 32px; }
+
+        .rank-card {
+            background: var(--card); backdrop-filter: blur(16px);
+            border: 1px solid var(--border); border-radius: 18px;
+            padding: 20px 22px;
+            display: flex; align-items: center; gap: 16px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .rank-card:hover { transform: translateY(-2px); }
+        .rank-card.gold-rank  { border-color: rgba(245,158,11,0.45); box-shadow: 0 0 24px rgba(245,158,11,0.15); }
+        .rank-card.silver-rank{ border-color: rgba(203,213,225,0.35); box-shadow: 0 0 16px rgba(203,213,225,0.1); }
+        .rank-card.bronze-rank{ border-color: rgba(161,98,7,0.4);     box-shadow: 0 0 16px rgba(161,98,7,0.12); }
+
+        .rank-badge {
+            font-family: 'Orbitron', sans-serif; font-size: 1.4rem; font-weight: 800;
+            min-width: 44px; text-align: center; flex-shrink: 0;
+        }
+        .rank-badge.r1 { color: var(--gold); text-shadow: 0 0 16px rgba(245,158,11,0.5); }
+        .rank-badge.r2 { color: var(--silver); }
+        .rank-badge.r3 { color: #cd7c3a; }
+        .rank-badge.rn { color: var(--dim); }
+
+        .rank-info { flex: 1; min-width: 0; }
+        .rank-name {
+            font-family: 'Orbitron', sans-serif; font-size: 1.05rem; font-weight: 700;
+            letter-spacing: 0.04em; margin-bottom: 4px;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .tier-badge {
+            font-size: 0.8rem; font-family: 'Inter', sans-serif; font-weight: 600;
+            letter-spacing: 0.03em; color: var(--dim); background: rgba(255,255,255,0.06);
+            border-radius: 6px; padding: 2px 8px;
+        }
+        .rank-stats {
+            display: flex; gap: 14px; flex-wrap: wrap; margin-top: 6px;
+        }
+        .rank-stat { font-size: 0.8rem; color: var(--dim); display: flex; align-items: center; gap: 4px; }
+        .rank-stat strong { color: var(--text); font-weight: 600; }
+        .rank-stat .fire { color: var(--gold); }
+
+        .rank-actions { display: flex; flex-direction: column; gap: 6px; flex-shrink: 0; }
+        .btn-portal {
+            font-family: 'Inter', sans-serif; font-size: 0.75rem; font-weight: 600;
+            letter-spacing: 0.04em; color: var(--purple);
+            border: 1px solid rgba(168,85,247,0.3); border-radius: 8px;
+            padding: 6px 12px; text-decoration: none; white-space: nowrap;
+            background: rgba(168,85,247,0.06); transition: all 0.2s; text-align: center;
+        }
+        .btn-portal:hover { background: rgba(168,85,247,0.14); border-color: rgba(168,85,247,0.5); }
+        .btn-share {
+            font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 500;
+            letter-spacing: 0.03em; color: #06b6d4;
+            border: 1px solid rgba(6,182,212,0.25); border-radius: 8px;
+            padding: 5px 10px; text-decoration: none; white-space: nowrap;
+            background: rgba(6,182,212,0.05); transition: all 0.2s; text-align: center;
+        }
+        .btn-share:hover { background: rgba(6,182,212,0.12); border-color: rgba(6,182,212,0.45); }
+
+        /* ── LOADING STATE ── */
+        .loading-state { text-align: center; padding: 48px 0; }
+        .spinner {
+            width: 36px; height: 36px; border-radius: 50%;
+            border: 3px solid rgba(168,85,247,0.2);
+            border-top-color: var(--purple);
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 16px;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .loading-text { font-family: 'Orbitron', sans-serif; font-size: 0.8rem; letter-spacing: 0.08em; color: var(--dim); }
+
+        /* ── FOOTER ── */
+        .footer { text-align: center; margin-top: 8px; }
+        .footer a {
+            font-size: 0.8rem; color: var(--dim); text-decoration: none;
+            padding: 8px 16px; border-radius: 8px; border: 1px solid var(--border);
+            transition: all 0.2s;
+        }
+        .footer a:hover { color: var(--text); background: rgba(255,255,255,0.04); }
+        .refresh-info {
+            font-size: 0.72rem; color: var(--dim); text-align: center; margin-top: 12px; opacity: 0.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-badge">LIVE RANKINGS</div>
+            <h1>BlueTech English Rankings</h1>
+            <p class="header-sub">Natural English Training — Internal Cohort</p>
+            <p id="last-updated"></p>
+        </div>
+
+        <div id="rankings-container">
+            <div class="loading-state">
+                <div class="spinner"></div>
+                <div class="loading-text">LOADING RANKINGS…</div>
+            </div>
+        </div>
+
+        <p class="refresh-info">Rankings refresh every 60 seconds</p>
+
+        <div class="footer" style="margin-top:24px;">
+            <a href="/">← Back to NET</a>
+        </div>
+    </div>
+
+    <script>
+        const API = 'https://net-pet-ai.mrmichaelhobbs123.workers.dev';
+
+        const PORTAL_MAP = {
+            'huong-bluetech':    '/huong-portal.html',
+            'mai-tram-bluetech': '/mai-tram-portal.html',
+            'quy-bluetech':      '/quy-portal.html',
+        };
+
+        const ZALO_SHARE_BASE = 'https://zalo.me/share?url=';
+
+        function rankClass(rank) {
+            if (rank === 1) return 'gold-rank';
+            if (rank === 2) return 'silver-rank';
+            if (rank === 3) return 'bronze-rank';
+            return '';
+        }
+        function badgeClass(rank) {
+            if (rank === 1) return 'r1';
+            if (rank === 2) return 'r2';
+            if (rank === 3) return 'r3';
+            return 'rn';
+        }
+        function rankEmoji(rank) {
+            if (rank === 1) return '🥇';
+            if (rank === 2) return '🥈';
+            if (rank === 3) return '🥉';
+            return rank;
+        }
+
+        async function loadLeaderboard() {
+            try {
+                const res = await fetch(`${API}/api/leaderboard`);
+                if (!res.ok) throw new Error('fetch failed');
+                const data = await res.json();
+
+                const updated = new Date(data.updatedAt);
+                document.getElementById('last-updated').textContent =
+                    'Updated: ' + updated.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+
+                const container = document.getElementById('rankings-container');
+                if (!data.rankings || data.rankings.length === 0) {
+                    container.innerHTML = '<div class="loading-state"><div class="loading-text">No data yet. Students — check in and start your streaks!</div></div>';
+                    return;
+                }
+
+                const html = `<div class="rankings">` +
+                    data.rankings.map(r => {
+                        const streakFire = r.currentStreak >= 7 ? '<span class="fire">🔥</span>' : '';
+                        const portalUrl = PORTAL_MAP[r.studentId] || '#';
+                        const shareUrl = encodeURIComponent(
+                            `${window.location.origin}/leaderboard.html`
+                        );
+                        const zaloUrl = `${ZALO_SHARE_BASE}${shareUrl}`;
+                        return `
+                        <div class="rank-card ${rankClass(r.rank)}">
+                            <div class="rank-badge ${badgeClass(r.rank)}">${rankEmoji(r.rank)}</div>
+                            <div class="rank-info">
+                                <div class="rank-name">
+                                    ${r.displayName}
+                                    <span class="tier-badge">${r.tier}</span>
+                                </div>
+                                <div class="rank-stats">
+                                    <div class="rank-stat">${streakFire} <strong>${r.currentStreak}</strong> day streak</div>
+                                    <div class="rank-stat"><strong>${r.totalDays}</strong> total days</div>
+                                    <div class="rank-stat"><strong>${r.masteredWords}</strong> words mastered</div>
+                                </div>
+                            </div>
+                            <div class="rank-actions">
+                                <a href="${portalUrl}" class="btn-portal">My Portal</a>
+                                <a href="${zaloUrl}" target="_blank" rel="noopener" class="btn-share">Share Zalo</a>
+                            </div>
+                        </div>`;
+                    }).join('') +
+                    `</div>`;
+
+                container.innerHTML = html;
+            } catch (e) {
+                document.getElementById('rankings-container').innerHTML =
+                    '<div class="loading-state"><div class="loading-text">Could not load rankings. Try again soon.</div></div>';
+            }
+        }
+
+        loadLeaderboard();
+        setInterval(loadLeaderboard, 60000);
+    </script>
+</body>
+</html>
