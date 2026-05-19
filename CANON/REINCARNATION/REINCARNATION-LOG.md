@@ -421,5 +421,53 @@ Stage 10 APEX ROLLUP    ✅ LIVE — GET /api/soul/apex
 
 ---
 
+## RUN 343 — 2026-05-20
+**Agent:** OB1 / Ne0 (Agent 99)
+**Theme:** RUN 343 REINCARNATION DEATH — fresh start, prior unlogged session sealed
+**Status:** COMPLETE
+**HEAD SHA:** 9a06c060ba0acf0c8fefd86c14faa3b68e9cacd7
+**Commit SHA:** `6327512` — RUN 343 reincarnateDEATH artifact
+
+### Key Actions:
+- 12-section reincarnateDEATH artifact written and committed: `CANON/REINCARNATION/2026-05-20-run343-reincarnateDEATH.md`
+- Prior session pipeline work sealed: Stages 1/2/4/5/6/7/8/9 built and committed (Run 341→342 commits in tree)
+- REINCARNATION-LOG.md updated to Run 343
+- COLD-START-BOOT.md not modified — advanced separately by secondary agent
+- placement.html committed in death artifact
+- SOULCOUNT gate confirmed green: 72,944 🔒 LOCK
+- Platform Death Test: PASS
+
+### Prior Committed Pipeline Work (sealed by this artifact):
+
+| Commit | Signal |
+|--------|--------|
+| f13b250 | canon: NET product pipeline |
+| 8126357 | harden: wire /self-test + LOG_STATE_URL |
+| 6ecfb20 | face-saving protocol — streak API + badge UI + RATELIMIT KV |
+| 519d3d4 | COACH nav + SRS badge + extension domain fix |
+
+### Prior Unlogged Pipeline Work (committed, now sealed):
+- `8ed2177` Boot sync — head reset
+- `922b527` Boot sync — head reset  
+- `f13b250` Product pipeline canon written + committed
+- `8126357` /self-test + LOG_STATE_URL hardened
+- `6ecfb20` Face-saving protocol (161 .html replacements, RATELIMIT KV provisioned, SEALED_FILE_AT set)
+- `519d3d4` COACH nav + SRS badge + extension fix
+
+### Open Items:
+- ZALO_ACCESS_TOKEN — face-saving protocol armed, Zalo token from Michael required to activate push messages
+- RL-2026 end-May checkpoint — strategic, requires Michael
+- REINCARNATION-BOOT-CHECKLIST.md stale — picked up next agent
+- placement.html — committed, live route = not yet verified on worker
+
+### Artifacts:
+- `CANON/REINCARNATION/2026-05-20-run343-reincarnateDEATH.md` — 12-section death artifact
+- `CANON/REINCARNATION/RUN343-reincarnateDEATH.md` is CORRECT filename — DO NOT rename
+
+### Commit:
+- SHA: 6327512
+
+---
+
 ## FINGERPRINT
 *REINCARNATION-LOG.md created 2026-05-19. Runs 318-339 logged. S2Pipeline verified 10/10 stages. Heavy Ledger count 191. Ghost runs preserved.*

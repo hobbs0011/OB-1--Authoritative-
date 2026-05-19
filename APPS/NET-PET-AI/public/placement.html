@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Level Assessment — Natural English Training</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Orbitron:wght@400;500;600;700;800&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --void: #0a0a12;
+            --card: rgba(22, 22, 35, 0.85);
+            --purple: #a855f7;
+            --purple-glow: rgba(168, 85, 247, 0.25);
+            --gold: #f59e0b;
+            --gold-glow: rgba(245, 158, 11, 0.25);
+            --teal: #14b8a6;
+            --teal-glow: rgba(20, 184, 166, 0.25);
+            --text: #f8fafc;
+            --dim: #94a3b8;
+            --success: #22c55e;
+            --danger: #ef4444;
+            --border: rgba(255, 255, 255, 0.08);
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; background-color: var(--void); }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background-color: var(--void);
+            color: var(--text);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            background:
+                radial-gradient(ellipse at 20% 15%, var(--purple-glow) 0%, transparent 55%),
+                radial-gradient(ellipse at 75% 70%, var(--gold-glow) 0%, transparent 55%),
+                radial-gradient(ellipse at 50% 40%, rgba(168, 85, 247, 0.08) 0%, transparent 60%);
+        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes progressPulse {
+            0%,100%{box-shadow:0 0 8px rgba(168,85,247,0.4)}
+            50%{box-shadow:0 0 18px rgba(168,85,247,0.7)}
+        }
+        @keyframes resultAppear {
+            from { opacity: 0; transform: scale(0.92) translateY(16px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        /* ── TOP NAV ── */
+        #topNav {
+            position: fixed; top: 0; left: 0; right: 0; height: 70px; z-index: 9000;
+            background: rgba(10,10,18,0.82); backdrop-filter: blur(18px);
+            border-bottom: 1px solid var(--border);
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 28px;
+        }
+        .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text); }
+        .nav-brand span { font-family: 'Orbitron', sans-serif; font-size: 1.05rem; font-weight: 600; letter-spacing: 0.05em; }
+        .nav-links { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+        .nav-links a {
+            font-family: 'Rajdhani', sans-serif; font-size: 0.9rem; font-weight: 600;
+            letter-spacing: 0.04em; color: var(--dim); text-decoration: none;
+            padding: 8px 14px; border-radius: 8px; transition: all 0.25s; white-space: nowrap;
+        }
+        .nav-links a:hover { color: var(--text); background: rgba(255,255,255,0.04); }
+        .nav-links a.active { color: var(--gold); background: rgba(245,158,11,0.08); box-shadow: 0 0 0 1px rgba(245,158,11,0.2); }
+
+        /* ── MAIN ── */
+        .main-container {
+            max-width: 720px; margin: 0 auto; padding: 100px 32px 80px;
+            position: relative; z-index: 1;
+        }
+
+        /* ── PAGE HEADER ── */
+        .page-header { text-align: center; margin-bottom: 40px; animation: fadeIn 0.5s ease; }
+        .page-header h1 {
+            font-family: 'Orbitron', sans-serif; font-size: 2rem; font-weight: 700;
+            letter-spacing: 0.05em; margin-bottom: 10px;
+            background: linear-gradient(135deg, var(--purple), var(--gold));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .page-header p { font-family: 'Rajdhani', sans-serif; font-size: 1.05rem; color: var(--dim); letter-spacing: 0.03em; }
+
+        /* ── STUDENT ID INPUT ── */
+        .id-section {
+            background: var(--card); border: 1px solid var(--border); border-radius: 20px;
+            padding: 24px 28px; margin-bottom: 28px; backdrop-filter: blur(20px);
+            animation: fadeIn 0.55s ease;
+        }
+        .id-section label {
+            display: block; font-family: 'Rajdhani', sans-serif; font-size: 0.82rem;
+            font-weight: 700; letter-spacing: 0.06em; color: var(--dim); text-transform: uppercase; margin-bottom: 10px;
+        }
+        .id-section input {
+            width: 100%; padding: 12px 16px; border-radius: 12px; border: 1px solid var(--border);
+            background: rgba(255,255,255,0.04); color: var(--text); font-family: 'Inter', sans-serif;
+            font-size: 1rem; outline: none; transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        .id-section input:focus { border-color: var(--purple); box-shadow: 0 0 0 3px rgba(168,85,247,0.15); }
+        .id-section input::placeholder { color: var(--dim); opacity: 0.6; }
+
+        /* ── PROGRESS BAR ── */
+        .progress-section { margin-bottom: 24px; animation: fadeIn 0.5s ease; }
+        .progress-header {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 10px;
+        }
+        .progress-label {
+            font-family: 'Rajdhani', sans-serif; font-size: 0.82rem; font-weight: 700;
+            letter-spacing: 0.06em; color: var(--dim); text-transform: uppercase;
+        }
+        .progress-count {
+            font-family: 'Orbitron', sans-serif; font-size: 0.9rem; font-weight: 600;
+            color: var(--purple);
+        }
+        .progress-bar-track {
+            height: 6px; background: rgba(255,255,255,0.06); border-radius: 10px; overflow: hidden;
+        }
+        .progress-bar-fill {
+            height: 100%; background: linear-gradient(90deg, var(--purple), var(--gold));
+            border-radius: 10px; transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: progressPulse 2s infinite;
+        }
+
+        /* ── QUESTION CARD ── */
+        .question-card {
+            background: var(--card); border: 1px solid var(--border); border-radius: 24px;
+            padding: 32px 28px; backdrop-filter: blur(20px); animation: fadeIn 0.4s ease;
+            margin-bottom: 20px;
+        }
+        .q-category {
+            display: inline-block; font-family: 'Rajdhani', sans-serif; font-size: 0.75rem;
+            font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+            padding: 4px 12px; border-radius: 20px; margin-bottom: 16px;
+            background: rgba(168,85,247,0.12); color: var(--purple); border: 1px solid rgba(168,85,247,0.25);
+        }
+        .q-text {
+            font-size: 1.05rem; font-weight: 500; line-height: 1.7; margin-bottom: 24px; color: var(--text);
+        }
+
+        /* Multiple choice */
+        .choices { display: flex; flex-direction: column; gap: 10px; }
+        .choice-btn {
+            width: 100%; padding: 14px 18px; border-radius: 12px; border: 1px solid var(--border);
+            background: rgba(255,255,255,0.03); color: var(--text); font-family: 'Inter', sans-serif;
+            font-size: 0.95rem; text-align: left; cursor: pointer; transition: all 0.2s;
+        }
+        .choice-btn:hover { border-color: rgba(168,85,247,0.4); background: rgba(168,85,247,0.06); }
+        .choice-btn.selected { border-color: var(--purple); background: rgba(168,85,247,0.12); color: var(--text); }
+
+        /* Free text */
+        .free-input {
+            width: 100%; padding: 14px 18px; border-radius: 12px; border: 1px solid var(--border);
+            background: rgba(255,255,255,0.04); color: var(--text); font-family: 'Inter', sans-serif;
+            font-size: 1rem; outline: none; transition: border-color 0.3s, box-shadow 0.3s;
+            margin-bottom: 8px;
+        }
+        .free-input:focus { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(20,184,166,0.15); }
+        .free-input::placeholder { color: var(--dim); opacity: 0.6; }
+
+        /* Slider */
+        .slider-wrap { display: flex; flex-direction: column; gap: 10px; }
+        .slider-labels { display: flex; justify-content: space-between; }
+        .slider-label-text { font-family: 'Rajdhani', sans-serif; font-size: 0.8rem; color: var(--dim); letter-spacing: 0.03em; }
+        .slider-value {
+            font-family: 'Orbitron', sans-serif; font-size: 2rem; font-weight: 700;
+            text-align: center; color: var(--purple); margin: 8px 0;
+        }
+        input[type="range"] {
+            width: 100%; height: 6px; -webkit-appearance: none; appearance: none;
+            background: rgba(255,255,255,0.08); border-radius: 10px; outline: none; cursor: pointer;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--purple), #9333ea);
+            box-shadow: 0 0 8px rgba(168,85,247,0.5); cursor: pointer;
+        }
+
+        /* Next button */
+        .next-btn {
+            width: 100%; padding: 15px; border-radius: 14px; border: none;
+            background: linear-gradient(135deg, var(--purple), #9333ea); color: #fff;
+            font-family: 'Orbitron', sans-serif; font-size: 0.95rem; font-weight: 600;
+            letter-spacing: 0.06em; cursor: pointer; transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(168,85,247,0.35); margin-top: 8px;
+        }
+        .next-btn:hover { box-shadow: 0 6px 28px rgba(168,85,247,0.5); transform: translateY(-1px); }
+        .next-btn:disabled { opacity: 0.4; cursor: default; transform: none; }
+
+        /* ── RESULTS ── */
+        #resultsSection { display: none; }
+        .result-card {
+            background: var(--card); border: 1px solid rgba(168,85,247,0.3); border-radius: 28px;
+            padding: 48px 36px; backdrop-filter: blur(20px); text-align: center;
+            box-shadow: 0 0 60px rgba(168,85,247,0.12);
+            animation: resultAppear 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .result-emoji { font-size: 5rem; margin-bottom: 12px; display: block; }
+        .result-level {
+            font-family: 'Orbitron', sans-serif; font-size: 3rem; font-weight: 800;
+            letter-spacing: 0.06em; margin-bottom: 8px;
+            background: linear-gradient(135deg, var(--purple), var(--gold));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .result-tier {
+            display: inline-block; font-family: 'Orbitron', sans-serif; font-size: 0.85rem;
+            font-weight: 700; letter-spacing: 0.08em; padding: 6px 20px; border-radius: 20px;
+            background: rgba(168,85,247,0.15); color: var(--purple); border: 1px solid rgba(168,85,247,0.3);
+            margin-bottom: 20px;
+        }
+        .result-message { font-size: 1.05rem; color: var(--dim); line-height: 1.7; margin-bottom: 32px; max-width: 460px; margin-left: auto; margin-right: auto; }
+
+        /* Score breakdown */
+        .score-breakdown {
+            background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+            border-radius: 16px; padding: 20px 24px; margin: 24px 0; text-align: left;
+        }
+        .breakdown-title {
+            font-family: 'Rajdhani', sans-serif; font-size: 0.8rem; font-weight: 700;
+            letter-spacing: 0.07em; color: var(--dim); text-transform: uppercase; margin-bottom: 14px;
+        }
+        .breakdown-row {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+        .breakdown-row:last-child { border-bottom: none; }
+        .breakdown-cat { font-family: 'Rajdhani', sans-serif; font-size: 0.9rem; font-weight: 500; color: var(--text); }
+        .breakdown-score { font-family: 'Orbitron', sans-serif; font-size: 0.85rem; font-weight: 700; color: var(--purple); }
+
+        .result-cta { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 8px; }
+        .cta-primary {
+            padding: 14px 28px; border-radius: 12px; border: none;
+            background: linear-gradient(135deg, var(--purple), #9333ea); color: #fff;
+            font-family: 'Orbitron', sans-serif; font-size: 0.9rem; font-weight: 600;
+            letter-spacing: 0.05em; cursor: pointer; transition: all 0.3s; text-decoration: none; display: inline-block;
+            box-shadow: 0 4px 16px rgba(168,85,247,0.35);
+        }
+        .cta-primary:hover { box-shadow: 0 6px 24px rgba(168,85,247,0.5); transform: translateY(-1px); }
+        .cta-secondary {
+            padding: 14px 28px; border-radius: 12px;
+            border: 1px solid rgba(168,85,247,0.3); background: rgba(168,85,247,0.06);
+            color: var(--purple); font-family: 'Rajdhani', sans-serif; font-size: 0.95rem;
+            font-weight: 700; letter-spacing: 0.04em; cursor: pointer; transition: all 0.3s; text-decoration: none; display: inline-block;
+        }
+        .cta-secondary:hover { background: rgba(168,85,247,0.12); border-color: var(--purple); }
+
+        @media (max-width: 768px) {
+            .main-container { padding: 90px 16px 60px; }
+            #topNav { padding: 0 16px; }
+            .nav-links a { padding: 6px 10px; font-size: 0.8rem; }
+            .page-header h1 { font-size: 1.5rem; }
+            .question-card { padding: 24px 18px; }
+            .result-card { padding: 36px 20px; }
+            .result-level { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TOP NAV -->
+    <nav id="topNav">
+        <a class="nav-brand" href="/">
+            <span>NET PORTAL</span>
+        </a>
+        <div class="nav-links">
+            <a href="/placement" class="active">Placement Test</a>
+            <a href="/roi">ROI Calculator</a>
+        </div>
+    </nav>
+
+    <!-- MAIN -->
+    <main class="main-container">
+
+        <!-- Header -->
+        <div class="page-header">
+            <h1>English Level Assessment</h1>
+            <p>Find your starting level in 5 minutes</p>
+        </div>
+
+        <!-- Student ID -->
+        <div class="id-section" id="idSection">
+            <label for="studentIdInput">Your name or student ID</label>
+            <input type="text" id="studentIdInput" placeholder="e.g. mai-tram or your full name" autocomplete="off">
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="progress-section" id="progressSection" style="display:none;">
+            <div class="progress-header">
+                <span class="progress-label">Progress</span>
+                <span class="progress-count" id="progressCount">1 / 15</span>
+            </div>
+            <div class="progress-bar-track">
+                <div class="progress-bar-fill" id="progressFill" style="width: 6.67%;"></div>
+            </div>
+        </div>
+
+        <!-- Question Area -->
+        <div id="questionSection">
+            <!-- rendered by JS -->
+        </div>
+
+        <!-- Results -->
+        <div id="resultsSection">
+            <div class="result-card" id="resultCard">
+                <span class="result-emoji" id="resultEmoji">🐭</span>
+                <div class="result-level" id="resultLevel">A1</div>
+                <div class="result-tier" id="resultTier">MOUSE</div>
+                <p class="result-message" id="resultMessage"></p>
+                <div class="score-breakdown">
+                    <div class="breakdown-title">Score Breakdown</div>
+                    <div class="breakdown-row"><span class="breakdown-cat">Vocabulary</span><span class="breakdown-score" id="bdVocab">0/3</span></div>
+                    <div class="breakdown-row"><span class="breakdown-cat">Grammar</span><span class="breakdown-score" id="bdGrammar">0/3</span></div>
+                    <div class="breakdown-row"><span class="breakdown-cat">Reading / Comprehension</span><span class="breakdown-score" id="bdReading">0/3</span></div>
+                    <div class="breakdown-row"><span class="breakdown-cat">Listening</span><span class="breakdown-score" id="bdListening">0/3</span></div>
+                    <div class="breakdown-row"><span class="breakdown-cat">Speaking Self-Assessment</span><span class="breakdown-score" id="bdSpeaking">0/2</span></div>
+                    <div class="breakdown-row" style="border-top: 1px solid rgba(255,255,255,0.1); margin-top: 4px; padding-top: 12px;">
+                        <span class="breakdown-cat" style="font-weight:700; color: var(--text);">Total</span>
+                        <span class="breakdown-score" id="bdTotal" style="color: var(--gold);">0/17</span>
+                    </div>
+                </div>
+                <div class="result-cta">
+                    <a href="#" class="cta-primary" id="startJourneyBtn">Start Your Learning Journey</a>
+                    <a href="/placement" class="cta-secondary">Retake Test</a>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+    (function() {
+        const API = 'https://net-pet-ai.mrmichaelhobbs123.workers.dev';
+
+        // Questions definition
+        const QUESTIONS = [
+            // Q1 — Vocabulary
+            {
+                id: 1, category: 'Vocabulary', type: 'mc',
+                text: "What is the meaning of 'negotiate'?",
+                choices: ['argue', 'discuss to reach agreement', 'disagree', 'ignore'],
+                correct: 1
+            },
+            // Q2 — Grammar
+            {
+                id: 2, category: 'Grammar', type: 'mc',
+                text: 'Choose the correct sentence:',
+                choices: [
+                    'I am work here since 2020.',
+                    'I have worked here since 2020.',
+                    'I working here since 2020.',
+                    'I work here since 2020 ago.'
+                ],
+                correct: 1
+            },
+            // Q3 — Reading
+            {
+                id: 3, category: 'Reading', type: 'mc',
+                text: "In a business email, 'Please revert at your earliest convenience' means:",
+                choices: ['come back', 'reply soon', 'reverse your decision', 'attend a meeting'],
+                correct: 1
+            },
+            // Q4 — Vocabulary
+            {
+                id: 4, category: 'Vocabulary', type: 'mc',
+                text: "What does 'deadline' mean?",
+                choices: ['a type of fishing line', 'the last time to complete something', 'a dangerous road', 'end of life'],
+                correct: 1
+            },
+            // Q5 — Grammar
+            {
+                id: 5, category: 'Grammar', type: 'mc',
+                text: "Complete: 'Could you please _____ the report by Friday?'",
+                choices: ['finishing', 'to finish', 'finish', 'finished'],
+                correct: 2
+            },
+            // Q6 — Reading
+            {
+                id: 6, category: 'Reading', type: 'mc',
+                text: "'I would like to schedule a meeting' is used to:",
+                choices: ['cancel a meeting', 'arrange a time to meet', 'complain about a meeting', 'attend a meeting'],
+                correct: 1
+            },
+            // Q7 — Vocabulary
+            {
+                id: 7, category: 'Vocabulary', type: 'mc',
+                text: "What is a 'KPI'?",
+                choices: ['a type of coffee', 'Key Performance Indicator', 'Korean Product Invoice', 'Knowledge Processing Interface'],
+                correct: 1
+            },
+            // Q8 — Grammar
+            {
+                id: 8, category: 'Grammar', type: 'mc',
+                text: "Choose correct: 'The team _____ the project last month.'",
+                choices: ['has completed', 'completed', 'completing', 'will complete'],
+                correct: 1
+            },
+            // Q9 — Reading
+            {
+                id: 9, category: 'Reading', type: 'mc',
+                text: "'Proactive' means:",
+                choices: ['waiting for problems', 'solving problems before they occur', 'causing problems', 'ignoring problems'],
+                correct: 1
+            },
+            // Q10 — Listening (text-based)
+            {
+                id: 10, category: 'Listening', type: 'mc',
+                text: "In a meeting, 'Let's table this' means (in American English):",
+                choices: ["let's discuss it now", "let's postpone it", "let's put it on the table", "let's delete it"],
+                correct: 1
+            },
+            // Q11 — Free text
+            {
+                id: 11, category: 'Listening', type: 'free',
+                text: "Correct the error: 'She don't have the presentation ready yet.'",
+                placeholder: "Type the corrected sentence here…"
+            },
+            // Q12 — Slider
+            {
+                id: 12, category: 'Listening', type: 'slider',
+                text: 'How comfortable are you speaking English on a phone call?',
+                min: 1, max: 5,
+                minLabel: '1 — Never done it',
+                maxLabel: '5 — Very comfortable'
+            },
+            // Q13 — Vocabulary
+            {
+                id: 13, category: 'Vocabulary', type: 'mc',
+                text: "What does 'stakeholder' mean?",
+                choices: ['someone who owns shares', 'anyone affected by a project', 'a type of steak', 'a company founder'],
+                correct: 1
+            },
+            // Q14 — Listening
+            {
+                id: 14, category: 'Listening', type: 'mc',
+                text: 'Choose correct email opener:',
+                choices: ["'Hey!'", "'Yo boss'", "'Dear Mr. Nguyen,'", "'What's up?'"],
+                correct: 2
+            },
+            // Q15 — Slider
+            {
+                id: 15, category: 'Speaking', type: 'slider',
+                text: 'Rate your confidence writing a professional email in English.',
+                min: 1, max: 5,
+                minLabel: '1 — Cannot do it',
+                maxLabel: '5 — Very confident'
+            }
+        ];
+
+        // Category groupings for scoring
+        const CATEGORY_MAP = {
+            'Vocabulary': [1, 4, 7, 13],
+            'Grammar': [2, 5, 8],
+            'Reading': [3, 6, 9],
+            'Listening': [10, 11, 14],
+            'Speaking': [12, 15]
+        };
+
+        let currentQ = 0;
+        let answers = {}; // qId -> { score, raw }
+        let sliderValues = { 12: 3, 15: 3 };
+
+        // Read studentId from URL param or localStorage
+        function getStudentId() {
+            const params = new URLSearchParams(window.location.search);
+            const fromParam = params.get('studentId');
+            if (fromParam) return fromParam;
+            return localStorage.getItem('net_student_id') || '';
+        }
+
+        // Init
+        const studentIdInput = document.getElementById('studentIdInput');
+        studentIdInput.value = getStudentId();
+
+        // Start test when user starts answering (show progress after first interaction)
+        function ensureStarted() {
+            if (document.getElementById('progressSection').style.display === 'none') {
+                document.getElementById('progressSection').style.display = 'block';
+            }
+        }
+
+        function renderQuestion(idx) {
+            ensureStarted();
+            const q = QUESTIONS[idx];
+            const section = document.getElementById('questionSection');
+            const pct = ((idx + 1) / QUESTIONS.length * 100).toFixed(2);
+            document.getElementById('progressFill').style.width = pct + '%';
+            document.getElementById('progressCount').textContent = (idx + 1) + ' / ' + QUESTIONS.length;
+
+            let bodyHtml = '';
+            if (q.type === 'mc') {
+                const letters = ['a', 'b', 'c', 'd'];
+                bodyHtml = '<div class="choices" id="choicesGroup">' +
+                    q.choices.map((c, i) =>
+                        `<button class="choice-btn" data-idx="${i}">${letters[i]}) ${c}</button>`
+                    ).join('') +
+                    '</div>';
+            } else if (q.type === 'free') {
+                bodyHtml = `<input type="text" class="free-input" id="freeInput" placeholder="${q.placeholder || 'Type your answer…'}">`;
+            } else if (q.type === 'slider') {
+                const cur = sliderValues[q.id] || 3;
+                bodyHtml = `<div class="slider-wrap">
+                    <div class="slider-value" id="sliderDisplay">${cur}</div>
+                    <input type="range" id="sliderInput" min="${q.min}" max="${q.max}" value="${cur}" step="1">
+                    <div class="slider-labels">
+                        <span class="slider-label-text">${q.minLabel}</span>
+                        <span class="slider-label-text">${q.maxLabel}</span>
+                    </div>
+                </div>`;
+            }
+
+            section.innerHTML = `
+                <div class="question-card" id="qCard">
+                    <span class="q-category">${q.category}</span>
+                    <p class="q-text">${q.text}</p>
+                    ${bodyHtml}
+                    <button class="next-btn" id="nextBtn" ${q.type !== 'slider' && q.type !== 'free' ? 'disabled' : ''}>${idx === QUESTIONS.length - 1 ? 'See My Results' : 'Next Question'}</button>
+                </div>`;
+
+            // Event wiring
+            if (q.type === 'mc') {
+                document.querySelectorAll('.choice-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        document.querySelectorAll('.choice-btn').forEach(b => b.classList.remove('selected'));
+                        btn.classList.add('selected');
+                        document.getElementById('nextBtn').disabled = false;
+                    });
+                });
+            }
+            if (q.type === 'slider') {
+                const sliderEl = document.getElementById('sliderInput');
+                sliderEl.addEventListener('input', () => {
+                    document.getElementById('sliderDisplay').textContent = sliderEl.value;
+                    sliderValues[q.id] = parseInt(sliderEl.value);
+                });
+            }
+            if (q.type === 'free') {
+                document.getElementById('freeInput').addEventListener('input', function() {
+                    document.getElementById('nextBtn').disabled = this.value.trim().length === 0;
+                });
+            }
+
+            document.getElementById('nextBtn').addEventListener('click', () => recordAndAdvance(idx));
+        }
+
+        function recordAndAdvance(idx) {
+            const q = QUESTIONS[idx];
+            let score = 0;
+            let raw = null;
+
+            if (q.type === 'mc') {
+                const sel = document.querySelector('.choice-btn.selected');
+                if (sel) {
+                    raw = parseInt(sel.dataset.idx);
+                    score = raw === q.correct ? 1 : 0;
+                }
+            } else if (q.type === 'free') {
+                raw = document.getElementById('freeInput').value.trim();
+                const lower = raw.toLowerCase();
+                score = (lower.includes("doesn't") || lower.includes("does not")) ? 1 : 0;
+            } else if (q.type === 'slider') {
+                raw = sliderValues[q.id];
+                score = raw / 5; // 0.2 to 1.0
+            }
+
+            answers[q.id] = { score, raw };
+
+            if (idx < QUESTIONS.length - 1) {
+                currentQ++;
+                renderQuestion(currentQ);
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            document.getElementById('questionSection').innerHTML = '';
+            document.getElementById('progressSection').style.display = 'none';
+            document.getElementById('idSection').style.display = 'none';
+
+            // Calculate totals
+            let vocabScore = 0, grammarScore = 0, readingScore = 0, listeningScore = 0, speakingScore = 0;
+
+            CATEGORY_MAP['Vocabulary'].forEach(id => { vocabScore += (answers[id]?.score || 0); });
+            CATEGORY_MAP['Grammar'].forEach(id => { grammarScore += (answers[id]?.score || 0); });
+            CATEGORY_MAP['Reading'].forEach(id => { readingScore += (answers[id]?.score || 0); });
+            CATEGORY_MAP['Listening'].forEach(id => { listeningScore += (answers[id]?.score || 0); });
+            CATEGORY_MAP['Speaking'].forEach(id => { speakingScore += (answers[id]?.score || 0); });
+
+            const total = vocabScore + grammarScore + readingScore + listeningScore + speakingScore;
+
+            // CEFR mapping
+            let level, tier, emoji;
+            if (total >= 17) { level = 'C1'; tier = 'TIGER'; emoji = '🔥'; }
+            else if (total >= 15) { level = 'B2'; tier = 'CUB'; emoji = '🐯'; }
+            else if (total >= 12) { level = 'B1'; tier = 'CUB'; emoji = '🐯'; }
+            else if (total >= 7) { level = 'A2'; tier = 'MOUSE'; emoji = '🐭'; }
+            else { level = 'A1'; tier = 'MOUSE'; emoji = '🐭'; }
+
+            // Determine dashboard link
+            const studentId = studentIdInput.value.trim() || getStudentId();
+            if (studentId) localStorage.setItem('net_student_id', studentId);
+            const dashId = studentId.replace(/\s+/g, '-').toLowerCase();
+            const dashLink = '/' + dashId + '-portal';
+
+            // Populate results
+            document.getElementById('resultEmoji').textContent = emoji;
+            document.getElementById('resultLevel').textContent = level;
+            document.getElementById('resultTier').textContent = tier;
+            document.getElementById('resultMessage').textContent =
+                `Your English level is ${level}. You're a ${tier}! ${
+                    tier === 'TIGER' ? 'Outstanding — you have advanced business English skills.' :
+                    tier === 'CUB' ? 'Solid foundation — you're ready to accelerate with targeted practice.' :
+                    'Great starting point — every expert was once a beginner. Let's build your English together.'
+                }`;
+
+            document.getElementById('bdVocab').textContent = Math.round(vocabScore) + '/4';
+            document.getElementById('bdGrammar').textContent = Math.round(grammarScore) + '/3';
+            document.getElementById('bdReading').textContent = Math.round(readingScore) + '/3';
+            document.getElementById('bdListening').textContent = (listeningScore).toFixed(1) + '/4';
+            document.getElementById('bdSpeaking').textContent = (speakingScore).toFixed(1) + '/2';
+            document.getElementById('bdTotal').textContent = total.toFixed(1) + '/17';
+
+            document.getElementById('startJourneyBtn').href = dashLink;
+
+            document.getElementById('resultsSection').style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // Save to localStorage regardless
+            const resultData = { studentId: studentId || 'anonymous', level, tier, score: parseFloat(total.toFixed(1)), timestamp: new Date().toISOString() };
+            localStorage.setItem('net_placement_result', JSON.stringify(resultData));
+
+            // Try to POST to API
+            if (studentId) {
+                fetch(API + '/api/student/placement', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(resultData)
+                }).catch(() => {}); // silent fail if 404
+            }
+        }
+
+        // Render first question
+        renderQuestion(0);
+    })();
+    </script>
+</body>
+</html>
