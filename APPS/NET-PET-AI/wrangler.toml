@@ -62,9 +62,9 @@ new_sqlite_classes = ["MemoryDO"]
 tag = "v2-student-brain-v2-2026-04-20"
 new_sqlite_classes = []
 
-[[migrations]]
-tag = "v5-drop-student-brain"
-deleted_classes = ["StudentBrainV2"]
+# [[migrations]]
+# tag = "v5-drop-student-brain"
+# deleted_classes = ["StudentBrainV2"]
 
 [[migrations]]
 tag = "v6-command-station"
