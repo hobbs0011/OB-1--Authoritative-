@@ -53,7 +53,7 @@
 | 9 | NET-MARKETING/ empty — MARKETING BIBLE V1 | AGENT99 | TBD | 🟠 MEDIUM | ✅ CLOSED Run 337 — 71d6023 |
 | 10 | F-A01-A08: PHANTOM HL IDs (x6) + HL-COUNT-DRIFT | AGENT99 | — | 🔴 HIGH | ✅ CLOSED Run 337 — HL-COUNT corrected to 191; phantom IDs documented NOT ON DISK |
 | 11 | F-A09: COLDSTART-DUP stale copy at REINCARNATION/ | AGENT99 | TBD | 🟡 LOW | ✅ CLOSED Run 337 — deleted CANON/REINCARNATION/COLD-START-BOOT.md |
-| 12 | F-O01: REINCARNATION-LOG internal staleness (OPS-HISTORY Run 27 gap) | AGENT99 | TBD | 🟠 MEDIUM | OPEN |
+| 12 | F-O01: REINCARNATION-LOG internal staleness (OPS-HISTORY Run 27 gap) | AGENT99 | TBD | 🟠 MEDIUM | ✅ CLOSED Run 337 — PULSE-OPERATIONS-HISTORY bridged Run 27→337 (20995ef) |
 | 13 | Origin sync (PHOENIX BETA/DELTA/OMEGA) | — | — | — | ✅ CLOSED Run 337 — pushed c09c202 |
 | 14 | soul-logger v2.0 SEALED deploy | AGENT99 | — | 🔴 HIGH | ✅ CLOSED Run 337 — Version 1b98f940 LIVE — /self-test GREEN |
 
