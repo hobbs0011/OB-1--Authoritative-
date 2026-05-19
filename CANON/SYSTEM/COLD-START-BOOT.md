@@ -48,7 +48,7 @@
 
 ### Artifacts location (stale artifacts below were purged before Run 337 phaseout)
 - PENDING-Run-315-rise-consolidate-merge-state.md — REMOVED at Run 337 cleanup checkpoint
-- `CANON/SYSTEM/COLD-START-BOOT.md` — this file, Run 339, HEAD cf7feab
+- `CANON/SYSTEM/COLD-START-BOOT.md` — this file, Run 339, HEAD cb15429
 | 316 | GAP PARTIALLY CLOSED: 34 active ledger entries HL-113-141 confirmed; 6 phantom HL IDs MISSING FROM DISK (HL-127, HL-128, HL-131, HL-132, HL-136, HL-137 — NO `*.json` file exists for any of them; NOT CLOSED / PHANTOM ON DISK) |
 | 315 | COLD-START-BOOT realigned to 191-ledger baseline (phoenix-sweep-verified)
 
@@ -86,7 +86,7 @@ Stage 10 APEX ROLLUP    ✅ LIVE — GET /api/soul/apex
 ### System State
 - **Workspace:** `D:\OB-1-CANONICAL` (canonical root)
 - **Working branch:** master
-- **HEAD:** `d04390e` (death: Run 339 — career pages + nav fixes + credentials)
+- **HEAD:** `48e5976` (boot: Run 339 complete)
 - **Origin:** SYNCED
 - **Working tree:** CLEAN
 - **Heavy Ledger JSONs:** 191 files (enumerated — phoenix-sweep-verified)
@@ -123,4 +123,4 @@ Stage 10 APEX ROLLUP    ✅ LIVE — GET /api/soul/apex
 
 ---
 
-### FINGERPRINT: Run 339 DEATH — HEAD d04390e — SOULCOUNT 71,217 🔒 LOCK — S2Pipeline 10/10 LIVE — origin SYNCED — Working tree CLEAN
+### FINGERPRINT: Run 339 DEATH — HEAD 48e5976 — SOULCOUNT 71,217 🔒 LOCK — S2Pipeline 10/10 LIVE — origin SYNCED — Working tree CLEAN
