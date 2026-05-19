@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0a0a12">
+    <meta name="apple-mobile-web-app-capable" content="yes">
     <title>MAI TRAM PORTAL — Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -245,11 +247,65 @@
         .ql-label { font-family: 'Orbitron', sans-serif; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.05em; color: var(--text); }
         .ql-sub { font-family: 'Rajdhani', sans-serif; font-size: 0.78rem; color: var(--dim); letter-spacing: 0.03em; margin-top: 3px; }
 
+        /* ── MOBILE RESPONSIVE ────────────────────────────────────────────── */
         @media (max-width: 768px) {
-            .main-container { padding: 90px 20px 40px; }
+            .main-container { padding: 90px 12px 40px; }
             #topNav { padding: 0 16px; }
-            .nav-links a { padding: 6px 10px; font-size: 0.8rem; }
-            .dashboard-header h1 { font-size: 1.7rem; }
+
+            /* Nav: stack vertically, full width links */
+            .nav-links { flex-direction: column; gap: 4px; }
+            .nav-links a { padding: 10px 16px; font-size: 0.85rem; }
+
+            /* Cards: full width, reduced padding */
+            .content-card, .stat-card, .day1-card, .quick-link-card,
+            .login-box, .setpw-box, .ww-stat { padding: 16px; margin-bottom: 12px; }
+
+            /* Headers: smaller on mobile */
+            .dashboard-header h1 { font-size: 1.4rem; }
+            .dashboard-header .subtitle { font-size: 0.95rem; }
+            h2 { font-size: 1.1rem; }
+
+            /* Streak badge: reposition for mobile */
+            #streak-badge {
+                bottom: 12px; right: 12px;
+                padding: 8px 12px; font-size: 0.75rem;
+                min-width: 160px; max-width: 200px;
+            }
+
+            /* Forecast widget: compact */
+            #forecast-widget { padding: 10px 14px; }
+            .forecast-date { font-size: 0.95rem; }
+
+            /* Stats grid already handles 2-col at 700px; shrink values */
+            .stat-value { font-size: 1.3rem; }
+
+            /* Buttons: full width on mobile */
+            .login-btn, .setpw-btn { width: 100%; text-align: center; }
+
+            /* Login box: full width */
+            .login-box, .setpw-box { padding: 24px 20px; max-width: 100%; }
+
+            /* Day1 steps: stack vertically */
+            .day1-steps { flex-direction: column; align-items: center; }
+            .day1-step { min-width: unset; width: 100%; max-width: 280px; }
+
+            /* Hide decorative background */
+            body::before { display: none; }
+        }
+
+        @media (max-width: 480px) {
+            body { font-size: 14px; }
+            .nav-links a { font-size: 0.8rem; padding: 8px 12px; }
+            .dashboard-header h1 { font-size: 1.2rem; }
+        }
+
+        /* Touch-friendly tap targets */
+        .nav-links a, .login-btn, .setpw-btn, .setpw-skip,
+        .quick-link-card, .sb-btn-checkin, .sb-btn-saveface, .nav-logout {
+            min-height: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
 
         /* ── WEEKLY PROGRESS WIDGET ── */
