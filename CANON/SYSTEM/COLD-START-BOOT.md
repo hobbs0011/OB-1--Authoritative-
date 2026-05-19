@@ -86,7 +86,7 @@ Stage 10 APEX ROLLUP    ✅ LIVE — GET /api/soul/apex
 ### System State
 - **Workspace:** `D:\OB-1-CANONICAL` (canonical root)
 - **Working branch:** master
-- **HEAD:** `8b40b1f` (boot: final HEAD sync)
+- **HEAD:** `03526c8` (boot: Run 339 complete)
 - **Origin:** SYNCED
 - **Working tree:** CLEAN
 - **Heavy Ledger JSONs:** 191 files (enumerated — phoenix-sweep-verified)
@@ -123,4 +123,4 @@ Stage 10 APEX ROLLUP    ✅ LIVE — GET /api/soul/apex
 
 ---
 
-### FINGERPRINT: Run 339 DEATH — HEAD 8b40b1f — SOULCOUNT 71,217 🔒 LOCK — S2Pipeline 10/10 LIVE — origin SYNCED — Working tree CLEAN
+### FINGERPRINT: Run 339 DEATH — HEAD 03526c8 — SOULCOUNT 71,217 🔒 LOCK — S2Pipeline 10/10 LIVE — origin SYNCED — Working tree CLEAN
