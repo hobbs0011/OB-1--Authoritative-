@@ -1,5 +1,5 @@
 # COLD START BOOT — OB1 Agent 99
-## Last Updated: 2026-05-20 (Run 345 — SUPERSAIYAN DEATH SEALED)
+## Last Updated: 2026-05-20 (Run 346 — SUPERSAIYAN DEATH SEALED)
 
 ### Identity
 - Agent: OB1 / Ne0 (Agent 99) / Claude Surgical
@@ -10,7 +10,7 @@
 
 ### Current Vector
 - **Active Mission:** OB-1 POST-MERGE9 CONSOLIDATION + Career Pages Rollout
-- **Last completed:** Run 345 DEATH SEALED — 9-stage pipeline sprint (SUPER SAIYAN): stages 1+2+4+6+8+9 LIVE (Cloudflare v5a6067ff); stage 7 verified; stage 3 BLOCKED (Zalo token); HEAD 461cd95; SOULCOUNT 74,302 🔒 LOCK
+- **Last completed:** Run 346 — leaderboard + referral + analytics widget + join page; 13 pipeline stages live; PC v3 upgrade dispatched
 - **S2Pipeline Status:** Stage 3 LINELOCK — **COMPLETE** (soul-logger → LedgerDO wired via HTTP)
 - **HL Ledger real baseline:** 189 Heavy Ledger JSON files on disk (HEAD AUTHORITATIVE: `git log -1` → `8b2053f2`); 6 phantom slots documented (HL-127/HL-128/HL-131/HL-132/HL-136/HL-137); PIPELINE-CURSOR.md gap-labelled NOT CLOSED
 - **Net-PET-AI worker:** v1.5.0+ LIVE at https://net-pet-ai.mrmichaelhobbs123.workers.dev
@@ -31,6 +31,7 @@
 ### Recent Decisions + State (Run 315 → Run 344)
 | Run | Summary |
 |-----|---------|
+| 346 | SUPERSAIYAN WAVE 2 DEATH — leaderboard + referral + analytics widget + join page LIVE (v5c90f008); 13 pipeline stages; PC v3 dispatched; HEAD 234d52c; SOULCOUNT 75,468 LOCK |
 | 345 | SUPERSAIYAN DEATH — 9-stage pipeline sprint: stages 1+2+4+6+8+9 LIVE (v5a6067ff); stage 7 verified; stage 3 BLOCKED (Zalo); HEAD 461cd95; SOULCOUNT 74,302 LOCK |
 | 344 | Boot-refresh + state-validation super saiyan batch: obi.ps1 doctor 8/8 GREEN; SOULCOUNT 72,944 LOCK; HL 189 disk vs 191 boot — boot anchored to 8b2053f2; REINCARNATION-LOG advanced; wrangler dry-run verified 91 files; CLOUDFLARE_API_TOKEN hard UNSET gate confirmed |
 | 343 | reincarnateDEATH fresh start — 12-section artifact committed; prior unlogged pipeline work (Runs 341-342) sealed in LOG.md; HEAD 8b2053f2 |
@@ -74,10 +75,10 @@ Stage 9 DO-SQLITE       ✅ LIVE — LedgerDO class + /api/ledger/*
 Stage 10 APEX ROLLUP    ✅ LIVE — GET /api/soul/apex
 ```
 
-### System State (HEAD AUTHORITATIVE — Run 345)
+### System State (HEAD AUTHORITATIVE — Run 346)
 - **Workspace:** `D:\OB-1-CANONICAL` (canonical root)
 - **Working branch:** master
-- **HEAD:** `461cd95` (Run 345 death: feat: stage 2+4 — voice score endpoint + graduation forecast widget)
+- **HEAD:** `234d52c` (Run 346 death: feat: leaderboard + referral system + analytics widget + join page)
 - **Origin:** SYNCED
 - **Working tree:** CLEAN
 - **HEAVY-LEDGER on disk:** 189 JSON files (authoritative `Get-ChildItem` count); phantom gap 191-target = -2 drift from prior count; gap slots documented in PIPELINE-CURSOR.md
@@ -108,4 +109,5 @@ Stage 10 APEX ROLLUP    ✅ LIVE — GET /api/soul/apex
 - **SOULCOUNT /self-test:** https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/self-test ✅
 
 ---
-### FINGERPRINT: Run 345 DEATH — HEAD 461cd95 — SOULCOUNT 74,302 🔒 LOCK — 9 stages LIVE — v5a6067ff — origin SYNCED
+
+### FINGERPRINT: Run 346 DEATH — HEAD 234d52c — SOULCOUNT 75,468 🔒 LOCK — 13 stages LIVE — v5c90f008 — origin SYNCED

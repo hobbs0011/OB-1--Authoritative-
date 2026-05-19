@@ -1,6 +1,15 @@
 # REINCARNATION LOG — OB-1 RUN HISTORY
 
-**Last Updated:** 2026-05-20 (Run 345 — SUPERSAIYAN RISE — 9-stage pipeline sprint)
+**Last Updated:** 2026-05-20 (Run 346 — SUPERSAIYAN WAVE 2 — leaderboard + referral + analytics + join)
+
+---
+
+## Run 346 — 2026-05-20 ICT — SUPERSAIYAN WAVE 2
+
+- Leaderboard + referral + analytics widget + join page LIVE (v5c90f008)
+- 13/25 pipeline stages complete
+- PC v3 upgrade: queue + batch + cron + GitHub auto-commit deployed
+- HEAD: 234d52c | SOULCOUNT: 75,468 🔒 LOCK
 
 ---
 
