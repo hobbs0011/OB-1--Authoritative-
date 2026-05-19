@@ -9,11 +9,9 @@ compatibility_flags = ["nodejs_compat"]
 # zone_name = "naturalenglishtraining.com"
 
 # KV namespace for distributed rate limiting (survives worker restarts)
-# To provision: wrangler kv namespace create RATELIMIT
-# Then paste the returned id below
-# [[kv_namespaces]]
-# binding = "RATELIMIT"
-# id = "<paste-id-here>"
+[[kv_namespaces]]
+binding = "RATELIMIT"
+id = "b27d144f71c44b00a4c87360841e525f"
 
 # KV namespace for session hints (Chrome extension → chat.js YouTube personalization)
 [[kv_namespaces]]

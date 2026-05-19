@@ -280,17 +280,17 @@
 
     <!-- TOP NAV -->
     <nav id="topNav" class="hidden">
-        <a class="nav-brand" href="quy-portal.html">
+        <a class="nav-brand" href="quy-portal">
             <img src="/icons/badge-tiger.svg" alt="Tiger Badge" onerror="this.style.display='none'">
             <span>QUY PORTAL</span>
         </a>
         <div class="nav-links">
-            <a href="quy-portal.html" class="active">Dashboard</a>
-            <a href="quy-profile.html">Profile</a>
-            <a href="quy-methodology.html">Methodology</a>
-            <a href="quy-career.html">Career</a>
-            <a href="quy-transcripts.html">Transcripts</a>
-            <a href="quy-action-plan.html">Action Plan</a>
+            <a href="quy-portal" class="active">Dashboard</a>
+            <a href="quy-profile">Profile</a>
+            <a href="quy-methodology">Methodology</a>
+            <a href="quy-career">Career</a>
+            <a href="quy-transcripts">Transcripts</a>
+            <a href="quy-action-plan">Action Plan</a>
             <button class="nav-logout" id="logoutBtn">LOGOUT</button>
         </div>
     </nav>
@@ -377,12 +377,12 @@
         <div class="content-card">
             <div class="card-label">Quick Access</div>
             <div class="quick-links-grid">
-                <a href="quy-profile.html" class="quick-link-card">
+                <a href="quy-profile" class="quick-link-card">
                     <span class="ql-icon">👤</span>
                     <div class="ql-label">Profile</div>
                     <div class="ql-sub">Goals &amp; background</div>
                 </a>
-                <a href="quy-methodology.html" class="quick-link-card">
+                <a href="quy-methodology" class="quick-link-card">
                     <span class="ql-icon">📚</span>
                     <div class="ql-label">Methodology</div>
                     <div class="ql-sub">The NET system</div>
@@ -394,6 +394,9 @@
                 </a>
             </div>
         </div>
+
+    <!-- STREAK BADGE -->
+    <div id="streak-badge" style="display:none;"></div>
 
     </main>
 
@@ -409,6 +412,7 @@
             document.getElementById('topNav').classList.remove('hidden');
             document.getElementById('mainContent').style.display = '';
             loadPortalData();
+            document.dispatchEvent(new Event('portalUnlocked'));
         }
 
         // Auth check on load
@@ -548,6 +552,138 @@
             const el = document.getElementById(id);
             if (el) { el.textContent = val; el.classList.remove('loading'); }
         }
+    </script>
+
+    <style>
+        /* ── STREAK BADGE ── */
+        #streak-badge {
+            position: fixed; bottom: 24px; right: 24px; z-index: 8000;
+            background: var(--card); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(168,85,247,0.35); border-radius: 20px;
+            padding: 16px 20px; min-width: 200px; max-width: 260px;
+            box-shadow: 0 0 24px rgba(168,85,247,0.2), 0 8px 32px rgba(0,0,0,0.5);
+            font-family: 'Rajdhani', sans-serif; transition: box-shadow 0.4s, border-color 0.4s;
+        }
+        #streak-badge.sb-active {
+            border-color: rgba(245,158,11,0.5);
+            box-shadow: 0 0 28px rgba(245,158,11,0.25), 0 8px 32px rgba(0,0,0,0.5);
+        }
+        #streak-badge.sb-at-risk {
+            border-color: rgba(239,68,68,0.6);
+            box-shadow: 0 0 28px rgba(239,68,68,0.35), 0 8px 32px rgba(0,0,0,0.5);
+            animation: sbPulseRed 1.8s ease-in-out infinite;
+        }
+        #streak-badge.sb-broken {
+            border-color: rgba(239,68,68,0.5);
+            box-shadow: 0 0 20px rgba(239,68,68,0.25), 0 8px 32px rgba(0,0,0,0.5);
+        }
+        @keyframes sbPulseRed {
+            0%,100% { box-shadow: 0 0 20px rgba(239,68,68,0.25), 0 8px 32px rgba(0,0,0,0.5); }
+            50% { box-shadow: 0 0 40px rgba(239,68,68,0.55), 0 8px 32px rgba(0,0,0,0.5); }
+        }
+        .sb-fire { font-size: 1.4rem; line-height: 1; }
+        .sb-streak-count {
+            font-family: 'Orbitron', sans-serif; font-size: 1.3rem; font-weight: 700;
+            letter-spacing: 0.04em; color: var(--gold); margin: 4px 0 2px;
+        }
+        .sb-streak-count.sb-count-danger { color: var(--danger); }
+        .sb-status {
+            font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em;
+            text-transform: uppercase; margin-bottom: 6px;
+        }
+        .sb-status.ok { color: var(--success); }
+        .sb-status.warn { color: var(--danger); }
+        .sb-total-days { font-size: 0.75rem; color: var(--dim); letter-spacing: 0.03em; margin-bottom: 10px; }
+        .sb-btn-checkin {
+            display: block; width: 100%; padding: 8px 12px; border-radius: 10px; border: none;
+            background: linear-gradient(135deg, var(--purple), #9333ea); color: #fff;
+            font-family: 'Orbitron', sans-serif; font-size: 0.75rem; font-weight: 600;
+            letter-spacing: 0.05em; cursor: pointer; transition: all 0.25s; margin-bottom: 6px;
+            box-shadow: 0 2px 10px rgba(168,85,247,0.3);
+        }
+        .sb-btn-checkin:hover { box-shadow: 0 4px 16px rgba(168,85,247,0.5); transform: translateY(-1px); }
+        .sb-btn-checkin:disabled { opacity: 0.5; cursor: default; transform: none; }
+        .sb-btn-saveface {
+            display: block; width: 100%; padding: 6px 12px; border-radius: 10px;
+            border: 1px solid rgba(239,68,68,0.4); background: rgba(239,68,68,0.08);
+            color: #f87171; font-family: 'Rajdhani', sans-serif; font-size: 0.78rem;
+            font-weight: 700; letter-spacing: 0.04em; cursor: pointer; transition: all 0.25s;
+        }
+        .sb-btn-saveface:hover { background: rgba(239,68,68,0.15); border-color: rgba(239,68,68,0.6); }
+        .sb-confirm { font-size: 0.75rem; color: var(--success); text-align: center; margin-top: 6px; min-height: 16px; }
+    </style>
+
+    <script>
+        (function() {
+            var SB_STUDENT_ID = 'quy-bluetech';
+            var SB_API = 'https://net-pet-ai.mrmichaelhobbs123.workers.dev';
+
+            function sbRender(data) {
+                var badge = document.getElementById('streak-badge');
+                if (!badge) return;
+                var s = data.todayStatus || 'active';
+                var streak = data.currentStreak || 0;
+                var total = data.totalDays || 0;
+                var longest = data.longestStreak || 0;
+                badge.className = '';
+                if (s === 'active') badge.classList.add('sb-active');
+                else if (s === 'at_risk') badge.classList.add('sb-at-risk');
+                else if (s === 'broken') badge.classList.add('sb-broken');
+                var saveFaceHtml = (s === 'at_risk' || s === 'broken')
+                    ? '<button class="sb-btn-saveface" id="sbSaveFaceBtn">🙏 Save Face</button>' : '';
+                var statusText = s === 'active'
+                    ? '<span class="sb-status ok">TODAY: DONE ✓</span>'
+                    : s === 'at_risk'
+                    ? '<span class="sb-status warn">CHECK IN NOW — FACE AT RISK 🚨</span>'
+                    : '<span class="sb-status warn">STREAK BROKEN — RESTART TODAY</span>';
+                badge.innerHTML =
+                    '<div class="sb-fire">🔥</div>' +
+                    '<div class="sb-streak-count' + (s !== 'active' ? ' sb-count-danger' : '') + '">' + streak + ' DAY STREAK</div>' +
+                    statusText +
+                    '<div class="sb-total-days">' + total + ' total active days &nbsp;&bull;&nbsp; best: ' + longest + '</div>' +
+                    '<button class="sb-btn-checkin" id="sbCheckinBtn">CHECK IN</button>' +
+                    saveFaceHtml +
+                    '<div class="sb-confirm" id="sbConfirm"></div>';
+                badge.style.display = '';
+                document.getElementById('sbCheckinBtn').addEventListener('click', function() {
+                    var btn = this; btn.disabled = true; btn.textContent = 'CHECKING IN…';
+                    fetch(SB_API + '/api/student/checkin', {
+                        method: 'POST', headers: {'Content-Type':'application/json'},
+                        body: JSON.stringify({studentId: SB_STUDENT_ID})
+                    }).then(function(r){ return r.json(); }).then(function(){
+                        sbFetch();
+                    }).catch(function(){
+                        btn.disabled = false; btn.textContent = 'CHECK IN';
+                    });
+                });
+                var sfBtn = document.getElementById('sbSaveFaceBtn');
+                if (sfBtn) {
+                    sfBtn.addEventListener('click', function() {
+                        var b = this; b.disabled = true;
+                        fetch(SB_API + '/api/student/saveface', {
+                            method: 'POST', headers: {'Content-Type':'application/json'},
+                            body: JSON.stringify({studentId: SB_STUDENT_ID})
+                        }).then(function(){
+                            var c = document.getElementById('sbConfirm');
+                            if (c) { c.textContent = 'Save face logged ✓'; }
+                        }).catch(function(){ b.disabled = false; });
+                    });
+                }
+            }
+
+            function sbFetch() {
+                fetch(SB_API + '/api/student/streak/' + SB_STUDENT_ID)
+                    .then(function(r){ return r.ok ? r.json() : null; })
+                    .then(function(d){ if (d) sbRender(d); })
+                    .catch(function(){});
+            }
+
+            if (typeof isAuthed === 'function' && isAuthed()) {
+                sbFetch();
+            } else {
+                document.addEventListener('portalUnlocked', sbFetch);
+            }
+        })();
     </script>
     <script src="./global-brand-shelf.js" defer onerror="void 0"></script>
 </body>

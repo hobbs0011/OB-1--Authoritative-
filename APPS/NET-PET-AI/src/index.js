@@ -598,6 +598,11 @@ async function handleAPI(path, request, env, url) {
     else return handleSessionHintGet(request, env);
   }
 
+  // ── Face-Saving Protocol — Streak + Accountability (Vietnamese culture) ──
+  if (path === "/api/student/checkin" && method === "POST") { const body = await request.json(); return handleStudentCheckin(body, request, env); }
+  if (path.startsWith("/api/student/streak/") && method === "GET") { const studentId = path.split("/api/student/streak/")[1] || ""; return handleStudentStreak(studentId, request, env); }
+  if (path === "/api/student/saveface" && method === "POST") { const body = await request.json(); return handleStudentSaveface(body, request, env); }
+
   return json({ error: "Not found" }, 404);
 }
 
@@ -639,6 +644,154 @@ async function handleSessionHintGet(request, env) {
   let hint = {};
   try { hint = JSON.parse(raw); } catch(e) { hint = { videoTitle: null }; }
   return new Response(JSON.stringify({ ...hint, soul_context: soulContext }), { status: 200, headers: { "Content-Type": "application/json" } });
+}
+
+// ── Face-Saving Protocol — Streak Tracking + Accountability ──────────────────
+// Vietnamese culture: public commitment prevents quitting. Streaks = social contract.
+
+const FACE_SAVING_STUDENTS = ["huong-bluetech", "mai-tram-bluetech", "quy-bluetech"];
+
+// Get today's date string in ICT (UTC+7) as YYYY-MM-DD
+function getICTDateString(offsetMs = 0) {
+  const nowMs = Date.now() + offsetMs;
+  const ictMs = nowMs + 7 * 60 * 60 * 1000; // shift to UTC+7
+  const d = new Date(ictMs);
+  const yyyy = d.getUTCFullYear();
+  const mm   = String(d.getUTCMonth() + 1).padStart(2, "0");
+  const dd   = String(d.getUTCDate()).padStart(2, "0");
+  return `${yyyy}-${mm}-${dd}`;
+}
+
+// Returns "today", "yesterday", or "older" relative to ICT now
+function relativeDayICT(dateStr) {
+  if (!dateStr) return "older";
+  const today     = getICTDateString(0);
+  const yesterday = getICTDateString(-24 * 60 * 60 * 1000);
+  if (dateStr === today)     return "today";
+  if (dateStr === yesterday) return "yesterday";
+  return "older";
+}
+
+// POST /api/student/checkin — record a daily check-in, maintain streak
+async function handleStudentCheckin(body, request, env) {
+  const { studentId } = body || {};
+  if (!studentId) return addCors(json({ error: "studentId required" }, 400), request);
+  if (!FACE_SAVING_STUDENTS.includes(studentId)) {
+    return addCors(json({ error: "Unknown studentId — must be one of: " + FACE_SAVING_STUDENTS.join(", ") }, 400), request);
+  }
+  if (!env.NET_PET_KV) return addCors(json({ error: "NET_PET_KV binding not configured" }, 500), request);
+
+  const today = getICTDateString();
+  const kvKey = `streak:${studentId}`;
+  const raw   = await env.NET_PET_KV.get(kvKey);
+  let streak  = raw ? JSON.parse(raw) : { currentStreak: 0, lastCheckin: null, longestStreak: 0, totalDays: 0 };
+
+  const rel = relativeDayICT(streak.lastCheckin);
+  let status;
+
+  if (rel === "today") {
+    // Already checked in today — idempotent
+    status = "already_done";
+  } else if (rel === "yesterday") {
+    // Consecutive day — extend streak
+    streak.currentStreak += 1;
+    streak.totalDays     += 1;
+    streak.lastCheckin    = today;
+    status = "checked_in";
+  } else {
+    // Streak broken (or first ever check-in)
+    const wasBroken = streak.lastCheckin !== null;
+    streak.currentStreak = 1;
+    streak.totalDays    += 1;
+    streak.lastCheckin   = today;
+    status = wasBroken ? "streak_broken" : "checked_in";
+  }
+
+  if (streak.currentStreak > streak.longestStreak) {
+    streak.longestStreak = streak.currentStreak;
+  }
+
+  if (status !== "already_done") {
+    await env.NET_PET_KV.put(kvKey, JSON.stringify(streak));
+  }
+
+  return addCors(json({
+    studentId,
+    currentStreak:  streak.currentStreak,
+    longestStreak:  streak.longestStreak,
+    totalDays:      streak.totalDays,
+    lastCheckin:    streak.lastCheckin,
+    status,
+  }), request);
+}
+
+// GET /api/student/streak/:studentId — read streak + compute today's status
+async function handleStudentStreak(studentId, request, env) {
+  if (!studentId) return addCors(json({ error: "studentId required" }, 400), request);
+  if (!FACE_SAVING_STUDENTS.includes(studentId)) {
+    return addCors(json({ error: "Unknown studentId — must be one of: " + FACE_SAVING_STUDENTS.join(", ") }, 400), request);
+  }
+  if (!env.NET_PET_KV) return addCors(json({ error: "NET_PET_KV binding not configured" }, 500), request);
+
+  const raw    = await env.NET_PET_KV.get(`streak:${studentId}`);
+  const streak = raw ? JSON.parse(raw) : { currentStreak: 0, lastCheckin: null, longestStreak: 0, totalDays: 0 };
+
+  const rel = relativeDayICT(streak.lastCheckin);
+  let todayStatus;
+  if (rel === "today")     todayStatus = "active";
+  else if (rel === "yesterday") todayStatus = "at_risk";
+  else                     todayStatus = "broken";
+
+  return addCors(json({
+    studentId,
+    currentStreak:  streak.currentStreak,
+    longestStreak:  streak.longestStreak,
+    totalDays:      streak.totalDays,
+    lastCheckin:    streak.lastCheckin,
+    todayStatus,
+  }), request);
+}
+
+// POST /api/student/saveface — log accountability event when streak is at risk
+async function handleStudentSaveface(body, request, env) {
+  const { studentId, message } = body || {};
+  if (!studentId) return addCors(json({ error: "studentId required" }, 400), request);
+  if (!FACE_SAVING_STUDENTS.includes(studentId)) {
+    return addCors(json({ error: "Unknown studentId — must be one of: " + FACE_SAVING_STUDENTS.join(", ") }, 400), request);
+  }
+  if (!env.NET_PET_KV) return addCors(json({ error: "NET_PET_KV binding not configured" }, 500), request);
+
+  const raw    = await env.NET_PET_KV.get(`streak:${studentId}`);
+  const streak = raw ? JSON.parse(raw) : { currentStreak: 0, lastCheckin: null, longestStreak: 0, totalDays: 0 };
+
+  const rel = relativeDayICT(streak.lastCheckin);
+  let todayStatus;
+  if (rel === "today")          todayStatus = "active";
+  else if (rel === "yesterday") todayStatus = "at_risk";
+  else                          todayStatus = "broken";
+
+  // Log saveface event if streak is at_risk or already broken
+  if (todayStatus === "at_risk" || todayStatus === "broken") {
+    const today    = getICTDateString();
+    const eventKey = `saveface:${studentId}:${today}`;
+    const event    = {
+      studentId,
+      date:           today,
+      currentStreak:  streak.currentStreak,
+      todayStatus,
+      message:        message || "",
+      ts:             Date.now(),
+    };
+    await env.NET_PET_KV.put(eventKey, JSON.stringify(event), { expirationTtl: 30 * 24 * 60 * 60 }); // keep 30 days
+  }
+
+  return addCors(json({
+    studentId,
+    streakAtRisk:    streak.currentStreak,
+    todayStatus,
+    message:         "Cứu em với! Streak sắp đứt!",
+    recoveryOptions: ["Complete a lesson now", "Review vocabulary", "Practice pronunciation"],
+  }), request);
 }
 
 // ── Soul DNA Capture ─────────────────────────────────────────────────────────
