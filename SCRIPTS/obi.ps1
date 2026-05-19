@@ -1,6 +1,8 @@
 param(
-    [ValidateSet("doctor", "verify", "dev", "mcp-audit", "soul-check", "cf-audit")]
-    [string]$Command = "doctor"
+    [ValidateSet("doctor", "verify", "dev", "mcp-audit", "soul-check", "cf-audit", "phoenix-queue", "phoenix-status")]
+    [string]$Command = "doctor",
+    [string]$Task,
+    [string]$TargetFile
 )
 
 Set-StrictMode -Version Latest
@@ -334,5 +336,21 @@ switch ($Command) {
             broken_assets    = @($broken  | Select-Object name, health, tracked, type)
             untracked_assets = @($untracked | Select-Object name, health, type)
         } | ConvertTo-Json -Depth 4
+    }
+    "phoenix-queue" {
+        if (-not $Task) { $Task = Read-Host "Task description" }
+        if (-not $TargetFile) { $TargetFile = Read-Host "Target file (absolute path)" }
+        $body = @{ task = $Task; targetfile = $TargetFile } | ConvertTo-Json
+        $result = Invoke-RestMethod -Uri "https://phoenix-coder.mrmichaelhobbs123.workers.dev/api/queue" -Method POST -Body $body -ContentType "application/json"
+        Write-Host "Queued: $($result.queueId) — status: $($result.status)"
+    }
+    "phoenix-status" {
+        $status = Invoke-RestMethod -Uri "https://phoenix-coder.mrmichaelhobbs123.workers.dev/api/status"
+        $queue = Invoke-RestMethod -Uri "https://phoenix-coder.mrmichaelhobbs123.workers.dev/api/queue?status=pending"
+        Write-Host "PC v$($status.version) — $($status.status) — queue depth: $($status.queueDepth) — cron: $($status.cronSchedule)"
+        if ($queue.count -gt 0) {
+            Write-Host "Pending tasks:"
+            $queue.tasks | ForEach-Object { Write-Host "  $($_.id): $($_.task.Substring(0, [Math]::Min(60, $_.task.Length)))..." }
+        }
     }
 }
