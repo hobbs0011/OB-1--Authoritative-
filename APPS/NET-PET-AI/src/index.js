@@ -642,7 +642,108 @@ async function handleAPI(path, request, env, url) {
     return addCors(json({ ...pcData, proxied: true }), request);
   }
 
+  // ── Anti-Cheat Engagement Scoring ─────────────────────────────────────────
+  // POST /api/anticheat/score — score a student session for genuine engagement
+  if (path === "/api/anticheat/score" && method === "POST") { const body = await request.json(); return handleAntiCheatScore(body, env); }
+  // GET /api/anticheat/history/:studentId — last 30 days of scores
+  if (path.startsWith("/api/anticheat/history/") && method === "GET") {
+    const studentId = path.split("/api/anticheat/history/")[1] || "";
+    return handleAntiCheatHistory(studentId, env);
+  }
+
   return json({ error: "Not found" }, 404);
+}
+
+// ── Anti-Cheat Handlers ───────────────────────────────────────────────────────
+
+// POST /api/anticheat/score
+async function handleAntiCheatScore(body, env) {
+  const { studentId, sessionData } = body || {};
+  if (!studentId || !sessionData) return json({ error: "studentId and sessionData required" }, 400);
+
+  const events = Array.isArray(sessionData) ? sessionData : [];
+  const total = events.length;
+
+  // Signals of real engagement
+  const tabVisible = events.filter(e => e.type === "tab_visible").length;
+  const tabHidden = events.filter(e => e.type === "tab_hidden").length;
+  const seeks = events.filter(e => e.type === "seek").length;
+  const clicks = events.filter(e => e.type === "click").length;
+  const keypresses = events.filter(e => e.type === "keypress").length;
+  const scrolls = events.filter(e => e.type === "scroll").length;
+
+  // Cheat signals
+  const hiddenRatio = total > 0 ? tabHidden / Math.max(tabVisible, 1) : 0; // high = tab usually hidden
+  const interactionRate = total > 0 ? (clicks + keypresses + scrolls) / Math.max(total, 1) : 0;
+
+  // Score 0-100: higher = more genuine
+  let score = 100;
+  if (hiddenRatio > 0.5) score -= 40; // tab was hidden more than visible = strong cheat signal
+  if (hiddenRatio > 0.8) score -= 20; // extreme background play
+  if (interactionRate < 0.02 && total > 20) score -= 20; // very long session, zero interaction
+  if (seeks === 0 && total > 50) score -= 10; // never seeked = passive/background
+  score = Math.max(0, Math.min(100, score));
+
+  const verdict = score >= 70 ? "GENUINE" : score >= 40 ? "SUSPICIOUS" : "FAKE";
+
+  // Store result in KV
+  const today = new Date(Date.now() + 7 * 3600000).toISOString().slice(0, 10);
+  const kvKey = `anticheat:${studentId}:${today}`;
+  await env.NET_PET_KV.put(kvKey, JSON.stringify({
+    score,
+    verdict,
+    events: total,
+    hiddenRatio: Math.round(hiddenRatio * 100) / 100,
+    interactionRate: Math.round(interactionRate * 100) / 100,
+    timestamp: Date.now()
+  }), { expirationTtl: 86400 * 30 });
+
+  return json({
+    studentId,
+    score,
+    verdict,
+    signals: {
+      hiddenRatio: Math.round(hiddenRatio * 100) / 100,
+      interactionRate: Math.round(interactionRate * 100) / 100,
+      seeks,
+      totalEvents: total
+    },
+    message: verdict === "GENUINE"
+      ? "Real engagement detected 🎯"
+      : verdict === "SUSPICIOUS"
+        ? "Engagement looks off — stay focused"
+        : "Background play detected — watching counts only if you're actually watching"
+  });
+}
+
+// GET /api/anticheat/history/:studentId — last 30 days
+async function handleAntiCheatHistory(studentId, env) {
+  if (!studentId) return json({ error: "studentId required" }, 400);
+
+  const prefix = `anticheat:${studentId}:`;
+  const listed = await env.NET_PET_KV.list({ prefix });
+  const days = [];
+
+  for (const key of listed.keys) {
+    const raw = await env.NET_PET_KV.get(key.name);
+    if (!raw) continue;
+    const data = JSON.parse(raw);
+    const date = key.name.replace(prefix, "");
+    days.push({ date, score: data.score, verdict: data.verdict });
+  }
+
+  days.sort((a, b) => (a.date > b.date ? -1 : 1)); // most recent first
+  const limited = days.slice(0, 30);
+
+  const averageScore = limited.length > 0
+    ? Math.round(limited.reduce((sum, d) => sum + d.score, 0) / limited.length)
+    : null;
+
+  const overallVerdict = averageScore === null
+    ? "NO_DATA"
+    : averageScore >= 70 ? "GENUINE" : averageScore >= 40 ? "SUSPICIOUS" : "FAKE";
+
+  return json({ studentId, days: limited, averageScore, overallVerdict });
 }
 
 // ── Session Hint Handlers (Chrome extension → KV → chat.js) ─────────────────
