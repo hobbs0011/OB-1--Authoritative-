@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NET Command — Michael Hobbs</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --void: #0a0a12;
+            --card: rgba(22, 22, 35, 0.85);
+            --purple: #a855f7;
+            --purple-glow: rgba(168, 85, 247, 0.25);
+            --gold: #f59e0b;
+            --gold-glow: rgba(245, 158, 11, 0.25);
+            --teal: #14b8a6;
+            --teal-glow: rgba(20, 184, 166, 0.25);
+            --text: #f8fafc;
+            --dim: #94a3b8;
+            --border: rgba(255, 255, 255, 0.08);
+            --success: #22c55e;
+            --danger: #ef4444;
+            --warning: #f97316;
+            --silver: #cbd5e1;
+            --bronze: #a16207;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; background-color: var(--void); }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background-color: var(--void);
+            color: var(--text);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            background:
+                radial-gradient(ellipse at 15% 10%, var(--purple-glow) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 75%, var(--gold-glow) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(168, 85, 247, 0.06) 0%, transparent 60%);
+        }
+
+        /* ── ANIMATIONS ── */
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes shake { 0%,100%{transform:translateX(0)} 10%,50%,90%{transform:translateX(-6px)} 30%,70%{transform:translateX(6px)} }
+        @keyframes shimmer { 0%{background-position:-200% 0} 100%{background-position:200% 0} }
+        @keyframes pulse-glow {
+            0%,100%{box-shadow:0 0 8px rgba(168,85,247,0.3)}
+            50%{box-shadow:0 0 20px rgba(168,85,247,0.6)}
+        }
+        @keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+
+        /* ── LOGIN ── */
+        #loginScreen {
+            position: fixed;
+            inset: 0;
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(10, 10, 18, 0.97);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+        #loginScreen.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+
+        .login-box {
+            background: var(--card);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            border-radius: 24px;
+            padding: 48px 40px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 8px 40px rgba(0,0,0,0.5), 0 0 60px var(--purple-glow);
+            animation: fadeIn 0.4s ease;
+        }
+        .login-box h1 {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.4rem;
+            color: var(--purple);
+            margin-bottom: 8px;
+            letter-spacing: 0.05em;
+        }
+        .login-box p {
+            color: var(--dim);
+            font-size: 0.85rem;
+            margin-bottom: 28px;
+        }
+        .login-box input {
+            width: 100%;
+            padding: 14px 18px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: var(--text);
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+            transition: border-color 0.2s;
+            text-align: center;
+            letter-spacing: 0.1em;
+            margin-bottom: 16px;
+        }
+        .login-box input:focus { border-color: var(--purple); }
+        .login-box input.shake { animation: shake 0.4s ease; border-color: var(--danger); }
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--purple), rgba(168,85,247,0.7));
+            border: none;
+            border-radius: 12px;
+            color: #fff;
+            font-family: 'Orbitron', monospace;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            cursor: pointer;
+            transition: opacity 0.2s, transform 0.1s;
+        }
+        .login-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+        .login-btn:active { transform: translateY(0); }
+        .login-error {
+            color: var(--danger);
+            font-size: 0.8rem;
+            margin-top: 10px;
+            min-height: 20px;
+        }
+
+        /* ── MAIN APP ── */
+        #app {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 32px 20px 60px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        /* ── HEADER ── */
+        .header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 36px;
+            flex-wrap: wrap;
+        }
+        .header-left h1 {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(1.4rem, 3vw, 2rem);
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: 0.04em;
+            line-height: 1.2;
+        }
+        .header-left h1 span { color: var(--purple); }
+        .header-left p {
+            color: var(--dim);
+            font-size: 0.85rem;
+            margin-top: 4px;
+        }
+        .clock-block {
+            text-align: right;
+            flex-shrink: 0;
+        }
+        .clock-time {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--teal);
+            letter-spacing: 0.06em;
+        }
+        .clock-label {
+            font-size: 0.75rem;
+            color: var(--dim);
+            margin-top: 2px;
+            letter-spacing: 0.05em;
+        }
+
+        /* ── SECTION LABELS ── */
+        .section-label {
+            font-family: 'Orbitron', monospace;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            color: var(--dim);
+            text-transform: uppercase;
+            margin-bottom: 14px;
+        }
+
+        /* ── GLASS CARD BASE ── */
+        .glass-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            padding: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: linear-gradient(135deg, rgba(255,255,255,0.04) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        /* ── SOULCOUNT ── */
+        .soulcount-panel {
+            margin-bottom: 32px;
+        }
+        .soulcount-inner {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+        .soulcount-value {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: var(--purple);
+            text-shadow: 0 0 24px rgba(168,85,247,0.5);
+            letter-spacing: 0.04em;
+            min-width: 140px;
+        }
+        .soulcount-value.loading-val { color: var(--dim); font-size: 1.6rem; }
+        .soulcount-right { flex: 1; min-width: 200px; }
+        .soulcount-label {
+            font-size: 0.8rem;
+            color: var(--dim);
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .soulcount-threshold {
+            font-weight: 600;
+            color: var(--purple);
+        }
+        .threshold-bar {
+            height: 8px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 999px;
+            overflow: hidden;
+        }
+        .threshold-fill {
+            height: 100%;
+            border-radius: 999px;
+            background: linear-gradient(90deg, var(--purple), var(--gold));
+            box-shadow: 0 0 12px rgba(168,85,247,0.4);
+            transition: width 0.6s ease;
+        }
+        .threshold-ticks {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 6px;
+            font-size: 0.7rem;
+            color: var(--dim);
+        }
+        .tick-anchor { color: var(--purple); font-weight: 600; }
+
+        /* ── STUDENT CARDS ── */
+        .students-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+        .student-card {
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .student-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+        }
+        .card-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+        .student-name {
+            font-family: 'Orbitron', monospace;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: 0.04em;
+        }
+        .tier-badge {
+            font-size: 1.4rem;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 999px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+        .status-active { background: rgba(34,197,94,0.18); color: var(--success); border: 1px solid rgba(34,197,94,0.3); }
+        .status-at_risk { background: rgba(249,115,22,0.18); color: var(--warning); border: 1px solid rgba(249,115,22,0.3); }
+        .status-inactive { background: rgba(148,163,184,0.12); color: var(--dim); border: 1px solid rgba(148,163,184,0.2); }
+
+        .card-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+        .stat-item {
+            background: rgba(255,255,255,0.04);
+            border-radius: 10px;
+            padding: 10px 12px;
+        }
+        .stat-lbl {
+            font-size: 0.68rem;
+            color: var(--dim);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 3px;
+        }
+        .stat-val {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+        .stat-val.gold { color: var(--gold); }
+        .stat-val.teal { color: var(--teal); }
+        .stat-val.purple { color: var(--purple); }
+
+        .card-links {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .quick-link {
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-decoration: none;
+            letter-spacing: 0.04em;
+            transition: background 0.2s, color 0.2s;
+            border: 1px solid var(--border);
+            color: var(--dim);
+            background: rgba(255,255,255,0.04);
+        }
+        .quick-link:hover { background: rgba(168,85,247,0.15); color: var(--purple); border-color: rgba(168,85,247,0.3); }
+        .quick-link.primary { background: rgba(168,85,247,0.15); color: var(--purple); border-color: rgba(168,85,247,0.3); }
+
+        /* ── TWO-COL GRID ── */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+        @media (max-width: 700px) { .two-col { grid-template-columns: 1fr; } }
+
+        /* ── LEADERBOARD ── */
+        .lb-list { display: flex; flex-direction: column; gap: 10px; }
+        .lb-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 14px;
+            background: rgba(255,255,255,0.04);
+            border-radius: 10px;
+        }
+        .lb-rank {
+            font-family: 'Orbitron', monospace;
+            font-size: 0.85rem;
+            font-weight: 700;
+            min-width: 24px;
+        }
+        .rank-1 { color: var(--gold); }
+        .rank-2 { color: var(--silver); }
+        .rank-3 { color: #cd7f32; }
+        .lb-name { flex: 1; font-size: 0.9rem; font-weight: 500; }
+        .lb-score {
+            font-family: 'Orbitron', monospace;
+            font-size: 0.85rem;
+            color: var(--teal);
+        }
+
+        /* ── ALERTS ── */
+        .alerts-section { margin-bottom: 32px; }
+        .alerts-list { display: flex; flex-direction: column; gap: 10px; }
+        .alert-card {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 12px;
+            padding: 14px 18px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.9rem;
+        }
+        .alert-icon { font-size: 1.2rem; flex-shrink: 0; }
+        .alert-text { color: #fca5a5; }
+        .alert-text strong { color: var(--danger); }
+        .no-alerts {
+            color: var(--success);
+            font-size: 0.85rem;
+            padding: 10px 0;
+        }
+
+        /* ── DIGEST ── */
+        .digest-text {
+            color: var(--dim);
+            font-size: 0.9rem;
+            line-height: 1.7;
+            white-space: pre-wrap;
+        }
+        .digest-date {
+            font-size: 0.75rem;
+            color: var(--teal);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        /* ── FOOTER ── */
+        .footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+            margin-top: 8px;
+        }
+        .footer-info { color: var(--dim); font-size: 0.8rem; }
+        .footer-info span { color: var(--teal); }
+        .refresh-btn {
+            padding: 8px 20px;
+            border: 1px solid var(--purple);
+            background: transparent;
+            border-radius: 10px;
+            color: var(--purple);
+            font-family: 'Orbitron', monospace;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .refresh-btn:hover { background: rgba(168,85,247,0.15); }
+        .refresh-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        /* ── SKELETON LOADER ── */
+        .skeleton {
+            display: inline-block;
+            background: linear-gradient(90deg, rgba(255,255,255,0.06) 25%, rgba(255,255,255,0.12) 50%, rgba(255,255,255,0.06) 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.4s infinite linear;
+            border-radius: 6px;
+        }
+        .sk-text { height: 1em; width: 80px; }
+        .sk-text-wide { height: 1em; width: 120px; }
+        .sk-text-sm { height: 0.85em; width: 60px; }
+        .sk-block { height: 2rem; width: 100%; border-radius: 8px; }
+        .sk-bar { height: 8px; width: 100%; border-radius: 999px; }
+    </style>
+</head>
+<body>
+
+    <!-- ── LOGIN OVERLAY ── -->
+    <div id="loginScreen">
+        <div class="login-box">
+            <h1>NET <span style="color:var(--gold)">CMD</span></h1>
+            <p>Michael Hobbs · Admin Access</p>
+            <input type="password" id="pwInput" placeholder="Enter password" autocomplete="current-password">
+            <button class="login-btn" onclick="checkPassword()">UNLOCK</button>
+            <div class="login-error" id="loginError"></div>
+        </div>
+    </div>
+
+    <!-- ── MAIN APP ── -->
+    <div id="app" style="display:none;">
+
+        <!-- HEADER -->
+        <header class="header">
+            <div class="header-left">
+                <h1>NET <span>COMMAND</span></h1>
+                <p>Michael Hobbs &middot; Admin View &middot; Natural English Training</p>
+            </div>
+            <div class="clock-block">
+                <div class="clock-time" id="clockTime">--:--:--</div>
+                <div class="clock-label">ICT &middot; UTC+7</div>
+            </div>
+        </header>
+
+        <!-- SOULCOUNT -->
+        <section class="soulcount-panel">
+            <div class="section-label">Soul Logger</div>
+            <div class="glass-card">
+                <div class="soulcount-inner">
+                    <div class="soulcount-value" id="souldCountVal">
+                        <span class="skeleton sk-block" style="width:140px;height:2.4rem;"></span>
+                    </div>
+                    <div class="soulcount-right">
+                        <div class="soulcount-label">
+                            <span>SOULCOUNT</span>
+                            <span class="soulcount-threshold" id="souldThresholdLabel">— / 100,000</span>
+                        </div>
+                        <div class="threshold-bar">
+                            <div class="threshold-fill" id="souldFill" style="width:0%"></div>
+                        </div>
+                        <div class="threshold-ticks">
+                            <span>0</span>
+                            <span style="color:var(--warning)">5k ALARM</span>
+                            <span style="color:var(--danger)">25k LOCK</span>
+                            <span class="tick-anchor">100k ANCHOR</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- STUDENT CARDS -->
+        <section class="students-section" style="margin-bottom:32px;">
+            <div class="section-label">Students</div>
+            <div class="students-grid" id="studentsGrid">
+                <!-- Skeleton cards -->
+                <div class="glass-card student-card">
+                    <div class="card-top">
+                        <span class="student-name"><span class="skeleton sk-text"></span></span>
+                        <span class="skeleton" style="width:32px;height:32px;border-radius:50%;"></span>
+                    </div>
+                    <div class="card-stats">
+                        <div class="stat-item"><div class="stat-lbl">Streak</div><div class="skeleton sk-text-sm"></div></div>
+                        <div class="stat-item"><div class="stat-lbl">CEFR</div><div class="skeleton sk-text-sm"></div></div>
+                        <div class="stat-item"><div class="stat-lbl">Mastered</div><div class="skeleton sk-text-sm"></div></div>
+                        <div class="stat-item"><div class="stat-lbl">Status</div><div class="skeleton sk-text-sm"></div></div>
+                    </div>
+                </div>
+                <div class="glass-card student-card">
+                    <div class="card-top">
+                        <span class="student-name"><span class="skeleton sk-text"></span></span>
+                        <span class="skeleton" style="width:32px;height:32px;border-radius:50%;"></span>
+                    </div>
+                    <div class="card-stats">
+                        <div class="stat-item"><div class="stat-lbl">Streak</div><div class="skeleton sk-text-sm"></div></div>
+                        <div class="stat-item"><div class="stat-lbl">CEFR</div><div class="skeleton sk-text-sm"></div></div>
+                        <div class="stat-item"><div class="stat-lbl">Mastered</div><div class="skeleton sk-text-sm"></div></div>
+                        <div class="stat-item"><div class="stat-lbl">Status</div><div class="skeleton sk-text-sm"></div></div>
+                    </div>
+                </div>
+                <div class="glass-card student-card">
+                    <div class="card-top">
+                        <span class="student-name"><span class="skeleton sk-text"></span></span>
+                        <span class="skeleton" style="width:32px;height:32px;border-radius:50%;"></span>
+                    </div>
+                    <div class="card-stats">
+                        <div class="stat-item"><div class="stat-lbl">Streak</div><div class="skeleton sk-text-sm"></div></div>
+                        <div class="stat-item"><div class="stat-lbl">CEFR</div><div class="skeleton sk-text-sm"></div></div>
+                        <div class="stat-item"><div class="stat-lbl">Mastered</div><div class="skeleton sk-text-sm"></div></div>
+                        <div class="stat-item"><div class="stat-lbl">Status</div><div class="skeleton sk-text-sm"></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ALERTS -->
+        <section class="alerts-section">
+            <div class="section-label">Alerts</div>
+            <div class="glass-card">
+                <div class="alerts-list" id="alertsList">
+                    <div class="skeleton sk-block"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LEADERBOARD + DIGEST -->
+        <div class="two-col" style="margin-bottom:32px;">
+            <div>
+                <div class="section-label">Leaderboard</div>
+                <div class="glass-card">
+                    <div class="lb-list" id="lbList">
+                        <div class="skeleton sk-block"></div>
+                        <div class="skeleton sk-block" style="margin-top:8px;"></div>
+                        <div class="skeleton sk-block" style="margin-top:8px;"></div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="section-label">Daily Digest</div>
+                <div class="glass-card">
+                    <div id="digestDate" class="digest-date"></div>
+                    <div class="digest-text" id="digestText">
+                        <span class="skeleton sk-block"></span>
+                        <span class="skeleton sk-block" style="margin-top:8px;width:75%;"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            <div class="footer-info">
+                Last refreshed: <span id="lastRefreshed">—</span> &nbsp;&middot;&nbsp; Auto-refresh: 60s
+            </div>
+            <button class="refresh-btn" id="refreshBtn" onclick="loadData()">↻ REFRESH</button>
+        </div>
+
+    </div><!-- /#app -->
+
+    <script>
+        // ── AUTH ──
+        const AUTH_KEY = 'net_admin_auth';
+        const CORRECT_PW = 'net2026admin';
+
+        function checkPassword() {
+            const input = document.getElementById('pwInput');
+            const val = input.value.trim();
+            if (val === CORRECT_PW) {
+                localStorage.setItem(AUTH_KEY, 'true');
+                location.reload();
+            } else {
+                input.classList.remove('shake');
+                void input.offsetWidth;
+                input.classList.add('shake');
+                document.getElementById('loginError').textContent = 'Incorrect password.';
+                input.value = '';
+                setTimeout(() => input.classList.remove('shake'), 450);
+            }
+        }
+
+        document.getElementById('pwInput').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') checkPassword();
+        });
+
+        function initAuth() {
+            const authed = localStorage.getItem(AUTH_KEY) === 'true';
+            if (authed) {
+                document.getElementById('loginScreen').classList.add('hidden');
+                document.getElementById('app').style.display = 'block';
+                initClock();
+                loadData();
+                setInterval(loadData, 60000);
+            }
+        }
+
+        // ── CLOCK (ICT = UTC+7) ──
+        function initClock() {
+            function tick() {
+                const now = new Date();
+                const ict = new Date(now.getTime() + (7 * 60 * 60 * 1000));
+                const hh = String(ict.getUTCHours()).padStart(2, '0');
+                const mm = String(ict.getUTCMinutes()).padStart(2, '0');
+                const ss = String(ict.getUTCSeconds()).padStart(2, '0');
+                document.getElementById('clockTime').textContent = `${hh}:${mm}:${ss}`;
+            }
+            tick();
+            setInterval(tick, 1000);
+        }
+
+        // ── STUDENT CONFIG ──
+        const STUDENTS = [
+            { id: 'huong-bluetech',     name: 'Huong',    portal: '/huong-portal',    profile: '/huong-profile',    career: '/huong-career' },
+            { id: 'mai-tram-bluetech',  name: 'Mai Tram', portal: '/mai-tram-portal', profile: '/mai-tram-profile', career: '/mai-tram-career' },
+            { id: 'quy-bluetech',       name: 'Quy',      portal: '/quy-portal',      profile: '/quy-profile',      career: '/quy-career' },
+        ];
+
+        const TIER_EMOJI = { CUB: '🐾', TIGER: '🐯', LEGEND: '🌟' };
+
+        function tierEmoji(tier) {
+            return TIER_EMOJI[String(tier).toUpperCase()] || '📘';
+        }
+
+        function safeGet(resp) {
+            if (resp.status === 'fulfilled') return resp.value;
+            return null;
+        }
+
+        // ── FETCH HELPERS ──
+        async function fetchJson(url) {
+            const r = await fetch(url);
+            if (!r.ok) throw new Error(`${r.status}`);
+            return r.json();
+        }
+
+        // ── MAIN LOAD ──
+        async function loadData() {
+            const btn = document.getElementById('refreshBtn');
+            if (btn) btn.disabled = true;
+
+            // Fire all fetches in parallel
+            const promises = [];
+            for (const s of STUDENTS) {
+                promises.push(fetchJson(`/api/student/streak/${s.id}`).catch(() => null));
+                promises.push(fetchJson(`/api/student/forecast/${s.id}`).catch(() => null));
+                promises.push(fetchJson(`/api/student/state?studentId=${s.id}`).catch(() => null));
+            }
+            promises.push(fetchJson('/api/leaderboard').catch(() => null));
+            promises.push(fetchJson('/api/digest').catch(() => null));
+            promises.push(fetchJson('https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count').catch(() => null));
+
+            const results = await Promise.all(promises);
+
+            // results order: [streak0, forecast0, state0, streak1, forecast1, state1, streak2, forecast2, state2, lb, digest, soul]
+            const studentData = STUDENTS.map((s, i) => ({
+                student: s,
+                streak:   results[i * 3],
+                forecast: results[i * 3 + 1],
+                state:    results[i * 3 + 2],
+            }));
+            const lbData     = results[9];
+            const digestData = results[10];
+            const soulData   = results[11];
+
+            renderSoulCount(soulData);
+            renderStudentCards(studentData);
+            renderAlerts(studentData);
+            renderLeaderboard(lbData);
+            renderDigest(digestData);
+
+            const now = new Date();
+            const ict = new Date(now.getTime() + (7 * 60 * 60 * 1000));
+            const ts = ict.toUTCString().replace('GMT', 'ICT');
+            document.getElementById('lastRefreshed').textContent = ts;
+
+            if (btn) btn.disabled = false;
+        }
+
+        // ── RENDER: SOULCOUNT ──
+        function renderSoulCount(data) {
+            const valEl = document.getElementById('souldCountVal');
+            const fillEl = document.getElementById('souldFill');
+            const labelEl = document.getElementById('souldThresholdLabel');
+
+            if (!data || data.count == null) {
+                valEl.textContent = '—';
+                valEl.style.color = 'var(--dim)';
+                labelEl.textContent = '— / 100,000';
+                fillEl.style.width = '0%';
+                return;
+            }
+
+            const count = Number(data.count);
+            const anchor = 100000;
+            const pct = Math.min(100, (count / anchor) * 100).toFixed(1);
+
+            valEl.innerHTML = `${count.toLocaleString()} <span style="font-size:1rem;color:var(--dim);font-family:Inter,sans-serif;">chars</span>`;
+            fillEl.style.width = `${pct}%`;
+            labelEl.textContent = `${count.toLocaleString()} / 100,000 — ANCHOR`;
+
+            // Color threshold
+            if (count >= 100000) {
+                fillEl.style.background = 'linear-gradient(90deg, var(--purple), #7c3aed)';
+            } else if (count >= 25000) {
+                fillEl.style.background = 'linear-gradient(90deg, var(--danger), #f97316)';
+            } else if (count >= 5000) {
+                fillEl.style.background = 'linear-gradient(90deg, var(--warning), var(--gold))';
+            }
+        }
+
+        // ── RENDER: STUDENT CARDS ──
+        function renderStudentCards(studentData) {
+            const grid = document.getElementById('studentsGrid');
+            grid.innerHTML = studentData.map(({ student, streak, forecast, state }) => {
+                const tier = state?.tier || '—';
+                const emoji = tierEmoji(tier);
+                const currentStreak = streak?.current ?? 0;
+                const streakEmoji = currentStreak >= 7 ? '🔥' : '⚡';
+                const cefrLevel = forecast?.cefrLevel || '—';
+                const gradDate = forecast?.graduationDate || forecast?.projectedDate || '—';
+                const mastered = state?.masteredWords ?? '—';
+                const total = state?.totalWords ?? '—';
+                const todayStatus = (state?.todayStatus || 'inactive').toLowerCase();
+
+                let badgeClass = 'status-inactive';
+                let badgeText = 'INACTIVE';
+                if (todayStatus === 'active') { badgeClass = 'status-active'; badgeText = 'ACTIVE'; }
+                else if (todayStatus === 'at_risk') { badgeClass = 'status-at_risk'; badgeText = 'AT RISK'; }
+
+                return `
+                <div class="glass-card student-card">
+                    <div class="card-top">
+                        <div>
+                            <div class="student-name">${student.name}</div>
+                            <div style="margin-top:4px;"><span class="status-badge ${badgeClass}">${badgeText}</span></div>
+                        </div>
+                        <div class="tier-badge" title="${tier}">${emoji}</div>
+                    </div>
+                    <div class="card-stats">
+                        <div class="stat-item">
+                            <div class="stat-lbl">Streak</div>
+                            <div class="stat-val gold">${streakEmoji} ${currentStreak} days</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-lbl">CEFR Level</div>
+                            <div class="stat-val teal">${cefrLevel}</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-lbl">Mastered</div>
+                            <div class="stat-val purple">${mastered} / ${total}</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-lbl">Graduation</div>
+                            <div class="stat-val" style="font-size:0.82rem;">${gradDate}</div>
+                        </div>
+                    </div>
+                    <div class="card-links">
+                        <a href="${student.portal}" class="quick-link primary">Portal</a>
+                        <a href="${student.profile}" class="quick-link">Profile</a>
+                        <a href="${student.career}" class="quick-link">Career</a>
+                    </div>
+                </div>`;
+            }).join('');
+        }
+
+        // ── RENDER: ALERTS ──
+        function renderAlerts(studentData) {
+            const list = document.getElementById('alertsList');
+            const atRisk = studentData.filter(d => (d.state?.todayStatus || '').toLowerCase() === 'at_risk');
+            if (atRisk.length === 0) {
+                list.innerHTML = '<p class="no-alerts">✅ All students checked in — no alerts today.</p>';
+                return;
+            }
+            list.innerHTML = atRisk.map(({ student, streak }) => {
+                const day = streak?.current ?? '?';
+                return `
+                <div class="alert-card">
+                    <span class="alert-icon">⚠️</span>
+                    <div class="alert-text"><strong>${student.name}</strong> streak at risk — Day ${day}</div>
+                </div>`;
+            }).join('');
+        }
+
+        // ── RENDER: LEADERBOARD ──
+        function renderLeaderboard(data) {
+            const el = document.getElementById('lbList');
+            if (!data || !data.rankings || data.rankings.length === 0) {
+                el.innerHTML = '<p style="color:var(--dim);font-size:0.85rem;">No leaderboard data available.</p>';
+                return;
+            }
+            const top3 = data.rankings.slice(0, 3);
+            el.innerHTML = top3.map((entry, i) => {
+                const rankClass = `rank-${i + 1}`;
+                const medal = ['🥇', '🥈', '🥉'][i] || '';
+                return `
+                <div class="lb-row">
+                    <div class="lb-rank ${rankClass}">${medal} #${entry.rank || i + 1}</div>
+                    <div class="lb-name">${entry.name || entry.studentId}</div>
+                    <div class="lb-score">${entry.score != null ? entry.score.toLocaleString() : '—'}</div>
+                </div>`;
+            }).join('');
+        }
+
+        // ── RENDER: DIGEST ──
+        function renderDigest(data) {
+            const textEl = document.getElementById('digestText');
+            const dateEl = document.getElementById('digestDate');
+            if (!data || !data.digest) {
+                dateEl.textContent = '';
+                textEl.textContent = 'No digest available today.';
+                return;
+            }
+            dateEl.textContent = data.date || '';
+            textEl.textContent = data.digest;
+        }
+
+        // ── INIT ──
+        initAuth();
+    </script>
+</body>
+</html>
