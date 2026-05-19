@@ -251,6 +251,20 @@
             .nav-links a { padding: 6px 10px; font-size: 0.8rem; }
             .dashboard-header h1 { font-size: 1.7rem; }
         }
+
+        /* ── GRADUATION FORECAST WIDGET ── */
+        #forecast-widget {
+            background: var(--card);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 14px 18px;
+            margin: 12px 0;
+            text-align: center;
+        }
+        .forecast-level { font-size: 0.75rem; color: var(--dim); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px; }
+        .forecast-date { font-size: 1.1rem; color: var(--gold); font-weight: 600; }
+        .forecast-sub { font-size: 0.78rem; color: var(--dim); margin-top: 4px; }
     </style>
 </head>
 <body>
@@ -397,6 +411,9 @@
                 </a>
             </div>
         </div>
+
+        <!-- Graduation Forecast Widget -->
+        <div id="forecast-widget" style="display:none;"></div>
 
     <!-- STREAK BADGE -->
     <div id="streak-badge" style="display:none;"></div>
@@ -699,6 +716,25 @@
                 document.addEventListener('portalUnlocked', sbFetch);
             }
         })();
+
+        async function loadForecast() {
+            try {
+                const r = await fetch(`/api/student/forecast/mai-tram-bluetech`);
+                const d = await r.json();
+                if (!d.graduationDate) return;
+                const el = document.getElementById('forecast-widget');
+                if (!el) return;
+                const days = d.projectedDays;
+                const conf = { low: '~', medium: '', high: '' }[d.confidence] || '';
+                el.innerHTML = `
+                    <div class="forecast-level">${d.currentLevel} → ${d.targetLevel}</div>
+                    <div class="forecast-date">🎓 ${conf}${d.graduationDate}</div>
+                    <div class="forecast-sub">${d.masteredWords}/${d.totalWords} words · ${days}d to next level</div>
+                `;
+                el.style.display = 'block';
+            } catch(e) {}
+        }
+        document.addEventListener('DOMContentLoaded', loadForecast);
     </script>
     <script src="./global-brand-shelf.js" defer onerror="void 0"></script>
 </body>

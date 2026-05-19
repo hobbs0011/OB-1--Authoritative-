@@ -404,6 +404,7 @@ async function handleAPI(path, request, env, url) {
   if (path === "/api/vocab/due"    && method === "GET")  { return handleVocabDue(url.searchParams.get("studentId") || "", env); }
   if (path === "/api/vocab/review" && method === "POST") { const body = await request.json(); return handleVocabReview(body, env); }
   if (path === "/api/vocab/list"   && method === "GET")  { return handleVocabList(url.searchParams.get("studentId") || "", env); }
+  if (path === "/api/voice/score"  && method === "POST") { const body = await request.json(); return handleVoiceScore(body, env); }
 
   // Onboarding
   if (path === "/api/onboarding" && method === "POST") { const body = await request.json(); return handleOnboarding(body, env); }
@@ -851,6 +852,62 @@ async function handleStudentForecast(studentId, env) {
     velocity: Math.round(velocity * 10) / 10,
     projectedDays, graduationDate, confidence,
     activeDays
+  });
+}
+
+// ── Voice Drill Scoring — Deepgram STT + SRS update ──────────────────────────
+// POST /api/voice/score — { studentId, word, audioBase64 } → { score, transcript, nextReview }
+
+async function handleVoiceScore(body, env) {
+  const { studentId, word, audioBase64 } = body || {};
+  if (!studentId || !word) return json({ error: "studentId and word required" }, 400);
+
+  let transcript = null;
+  let fallback = false;
+
+  if (env.DEEPGRAM_API_KEY && audioBase64) {
+    try {
+      const audioBytes = Uint8Array.from(atob(audioBase64), c => c.charCodeAt(0));
+      const dgResp = await fetch("https://api.deepgram.com/v1/listen?model=nova-2&language=en-US", {
+        method: "POST",
+        headers: {
+          "Authorization": `Token ${env.DEEPGRAM_API_KEY}`,
+          "Content-Type": "audio/webm"
+        },
+        body: audioBytes
+      });
+      if (dgResp.ok) {
+        const dgData = await dgResp.json();
+        transcript = dgData?.results?.channels?.[0]?.alternatives?.[0]?.transcript || "";
+      }
+    } catch(e) { fallback = true; }
+  } else {
+    fallback = true;
+  }
+
+  // Score: 5=exact, 3=partial, 1=miss (or fallback default 3)
+  let score = 3;
+  if (!fallback && transcript !== null) {
+    const clean = t => t.toLowerCase().replace(/[^a-z]/g, "");
+    if (clean(transcript) === clean(word)) score = 5;
+    else if (clean(transcript).includes(clean(word))) score = 3;
+    else score = 1;
+  }
+
+  // Load existing SRS word and update via computeNextReview
+  const vocabId = `${studentId}:${word.toLowerCase().trim().replace(/\s+/g, "-")}`;
+  const kvKey = `srs:${studentId}:${vocabId}`;
+  const existing = await env.NET_PET_KV.get(kvKey);
+  const wordData = existing ? JSON.parse(existing) : { word, interval: 1, repetitions: 0, ease_factor: 2.5, next_review: 0 };
+
+  const updated = computeNextReview(wordData, score);
+  await env.NET_PET_KV.put(kvKey, JSON.stringify({ ...wordData, ...updated }), { expirationTtl: 86400 * 365 });
+
+  return json({
+    word, transcript: transcript ?? "[voice unavailable]",
+    score, fallback,
+    nextReview: updated.next_review,
+    message: score >= 4 ? "Great job! 🔥" : score >= 3 ? "Good — keep practicing!" : "Keep trying! 💪"
   });
 }
 
