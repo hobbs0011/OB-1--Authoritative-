@@ -651,7 +651,60 @@ async function handleAPI(path, request, env, url) {
     return handleAntiCheatHistory(studentId, env);
   }
 
+  // ── Waitlist — Phase 2 free trial funnel (100-seat cap) ───────────────────
+  if (path === "/api/waitlist" && method === "POST") { const body = await request.json(); return handleWaitlistJoin(body, env); }
+  if (path === "/api/waitlist/count" && method === "GET") { return handleWaitlistCount(env); }
+  if (path === "/api/waitlist/list" && method === "GET") { return handleWaitlistList(env); }
+
   return json({ error: "Not found" }, 404);
+}
+
+// ── Waitlist Handlers ─────────────────────────────────────────────────────────
+
+// POST /api/waitlist — add a student to the free-trial waitlist
+async function handleWaitlistJoin(body, env) {
+  const { name, email, phone, jobCategory, currentLevel, referralSource } = body || {};
+  if (!name || !email) return json({ error: "name and email required" }, 400);
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return json({ error: "invalid email" }, 400);
+
+  const id = `wl-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`;
+  const entry = {
+    id,
+    name,
+    email,
+    phone: phone || "",
+    jobCategory: jobCategory || "",
+    currentLevel: currentLevel || "",
+    referralSource: referralSource || "",
+    joinedAt: new Date(Date.now() + 7 * 3600000).toISOString(),
+    status: "waiting"
+  };
+
+  // Store individual entry (1 year TTL)
+  await env.NET_PET_KV.put(`waitlist:entry:${id}`, JSON.stringify(entry), { expirationTtl: 86400 * 365 });
+
+  // Append to index (get-append-put, max 500)
+  const indexRaw = await env.NET_PET_KV.get("waitlist:index");
+  const index = indexRaw ? JSON.parse(indexRaw) : [];
+  index.push(id);
+  await env.NET_PET_KV.put("waitlist:index", JSON.stringify(index.slice(-500)));
+
+  return json({ ok: true, id, position: index.length, message: "You're on the list!" });
+}
+
+// GET /api/waitlist/count — public count of waitlist entries
+async function handleWaitlistCount(env) {
+  const indexRaw = await env.NET_PET_KV.get("waitlist:index");
+  const count = indexRaw ? JSON.parse(indexRaw).length : 0;
+  return json({ count });
+}
+
+// GET /api/waitlist/list — admin: last 50 entries with full details
+async function handleWaitlistList(env) {
+  const indexRaw = await env.NET_PET_KV.get("waitlist:index");
+  const ids = indexRaw ? JSON.parse(indexRaw) : [];
+  const entries = await Promise.all(ids.slice(-50).map(id => env.NET_PET_KV.get(`waitlist:entry:${id}`)));
+  return json({ count: ids.length, entries: entries.map(e => e ? JSON.parse(e) : null).filter(Boolean) });
 }
 
 // ── Anti-Cheat Handlers ───────────────────────────────────────────────────────
