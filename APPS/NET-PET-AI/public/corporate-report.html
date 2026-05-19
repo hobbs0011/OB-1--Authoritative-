@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee Progress Report | Natural English Training</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ── Design tokens ── */
+    :root {
+      --bg:          #f8fafc;
+      --surface:     #ffffff;
+      --surface-2:   #f1f5f9;
+      --border:      #e2e8f0;
+      --border-dark: #cbd5e1;
+      --text:        #0f172a;
+      --text-2:      #334155;
+      --text-3:      #64748b;
+      --purple:      #a855f7;
+      --purple-light:#f3e8ff;
+      --purple-dark: #7c3aed;
+      --green:       #16a34a;
+      --green-light: #dcfce7;
+      --amber:       #d97706;
+      --amber-light: #fef3c7;
+      --red:         #dc2626;
+      --red-light:   #fee2e2;
+      --radius:      8px;
+      --radius-lg:   12px;
+      --shadow:      0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
+      --shadow-md:   0 4px 6px -1px rgba(0,0,0,.08), 0 2px 4px -1px rgba(0,0,0,.06);
+      --font: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* ── Layout ── */
+    .page-wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 24px 60px;
+    }
+
+    /* ── Header bar ── */
+    .report-header {
+      background: var(--surface);
+      border-bottom: 2px solid var(--purple);
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+    .header-logo {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.01em;
+    }
+    .header-logo span {
+      color: var(--purple);
+    }
+    .header-meta {
+      text-align: right;
+      font-size: 0.85rem;
+      color: var(--text-3);
+      line-height: 1.5;
+    }
+    .header-meta strong {
+      display: block;
+      color: var(--text-2);
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    /* ── Print button ── */
+    .print-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--purple);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius);
+      padding: 9px 18px;
+      font-family: var(--font);
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      text-decoration: none;
+      margin-bottom: 28px;
+    }
+    .print-btn:hover { background: var(--purple-dark); transform: translateY(-1px); }
+
+    /* ── Section titles ── */
+    .section-title {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-3);
+      margin-bottom: 12px;
+    }
+
+    /* ── Card base ── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+
+    /* ── Executive summary ── */
+    .exec-card {
+      border-left: 4px solid var(--purple);
+      padding: 24px 24px 24px 28px;
+    }
+    .exec-card h2 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--purple-dark);
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .exec-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px 32px;
+    }
+    @media (max-width: 560px) { .exec-grid { grid-template-columns: 1fr; } }
+    .exec-row {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .exec-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--text-3);
+    }
+    .exec-value {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .exec-value.highlight { color: var(--purple); }
+
+    /* Status badge */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 14px;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .status-badge.on-track {
+      background: var(--green-light);
+      color: var(--green);
+      border: 1px solid #bbf7d0;
+    }
+    .status-badge.needs-support {
+      background: var(--amber-light);
+      color: var(--amber);
+      border: 1px solid #fde68a;
+    }
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    /* ── CEFR bar ── */
+    .cefr-track {
+      position: relative;
+      margin: 20px 0 10px;
+    }
+    .cefr-labels {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+    .cefr-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-3);
+      flex: 1;
+      text-align: center;
+    }
+    .cefr-label.active { color: var(--purple); font-weight: 700; }
+    .cefr-bar-row {
+      display: flex;
+      height: 12px;
+      border-radius: 6px;
+      overflow: hidden;
+      gap: 2px;
+    }
+    .cefr-seg {
+      flex: 1;
+      background: var(--surface-2);
+      border-radius: 3px;
+      transition: background 0.3s;
+    }
+    .cefr-seg.done { background: var(--border-dark); }
+    .cefr-seg.current { background: var(--purple); }
+    .cefr-subtext {
+      font-size: 0.8rem;
+      color: var(--text-3);
+      margin-top: 8px;
+    }
+
+    /* ── Streak calendar ── */
+    .streak-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 12px;
+    }
+    .streak-day {
+      width: 20px;
+      height: 20px;
+      border-radius: 3px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      flex-shrink: 0;
+      title: '';
+    }
+    .streak-day.active {
+      background: #86efac;
+      border-color: #4ade80;
+    }
+    .streak-day.today {
+      background: var(--purple);
+      border-color: var(--purple-dark);
+    }
+    .streak-legend {
+      display: flex;
+      gap: 16px;
+      margin-top: 10px;
+      font-size: 0.75rem;
+      color: var(--text-3);
+    }
+    .streak-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    /* ── Vocab progress bar ── */
+    .vocab-bar-wrap {
+      margin-top: 14px;
+    }
+    .vocab-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .vocab-bar-track {
+      flex: 1;
+      height: 14px;
+      background: var(--surface-2);
+      border-radius: 7px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .vocab-bar-fill {
+      height: 100%;
+      border-radius: 7px;
+      background: linear-gradient(90deg, var(--purple) 0%, var(--purple-dark) 100%);
+      transition: width 1s ease;
+    }
+    .vocab-bar-pct {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--purple);
+      min-width: 36px;
+      text-align: right;
+    }
+    .vocab-counts {
+      display: flex;
+      gap: 20px;
+      margin-top: 10px;
+      font-size: 0.85rem;
+      color: var(--text-3);
+    }
+    .vocab-count-item strong {
+      color: var(--text-2);
+      font-weight: 600;
+    }
+
+    /* ── ROI section ── */
+    .roi-card {
+      border-left: 4px solid #f59e0b;
+    }
+    .roi-card h2 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #92400e;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .roi-statement {
+      font-size: 1.05rem;
+      color: var(--text-2);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+    .roi-statement strong {
+      color: var(--text);
+      font-weight: 700;
+    }
+    .roi-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.875rem;
+    }
+    .roi-table th {
+      text-align: left;
+      padding: 8px 12px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      font-weight: 600;
+      color: var(--text-3);
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+    }
+    .roi-table td {
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      color: var(--text-2);
+    }
+    .roi-table tr.highlighted td {
+      background: var(--purple-light);
+      font-weight: 600;
+      color: var(--purple-dark);
+    }
+
+    /* ── Recommendation box ── */
+    .rec-card.progressing {
+      border-left: 4px solid var(--green);
+    }
+    .rec-card.support {
+      border-left: 4px solid var(--amber);
+    }
+    .rec-card h2 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .rec-card.progressing h2 { color: var(--green); }
+    .rec-card.support h2 { color: var(--amber); }
+    .rec-body {
+      font-size: 0.9rem;
+      color: var(--text-2);
+      line-height: 1.65;
+    }
+
+    /* ── Footer ── */
+    .report-footer {
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      font-size: 0.78rem;
+      color: var(--text-3);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .report-footer a {
+      color: var(--purple);
+      text-decoration: none;
+    }
+    .report-footer a:hover { text-decoration: underline; }
+
+    /* ── Loading / error states ── */
+    .loading-state {
+      text-align: center;
+      padding: 60px 24px;
+      color: var(--text-3);
+    }
+    .loading-spinner {
+      width: 36px;
+      height: 36px;
+      border: 3px solid var(--border);
+      border-top-color: var(--purple);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 16px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .error-banner {
+      background: var(--red-light);
+      border: 1px solid #fca5a5;
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      color: var(--red);
+      font-size: 0.875rem;
+      margin-bottom: 20px;
+    }
+
+    /* ── Print styles ── */
+    @media print {
+      @page { size: A4; margin: 15mm 18mm; }
+      body { background: #fff; }
+      .page-wrap { max-width: 100%; padding: 0; }
+      .report-header { page-break-inside: avoid; }
+      .card { box-shadow: none; page-break-inside: avoid; }
+      .print-btn { display: none !important; }
+      .loading-state { display: none !important; }
+    }
+
+    /* ── Visibility helpers ── */
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+
+<!-- ── Header ── -->
+<div class="report-header">
+  <div class="header-logo">
+    NET <span>🎓</span> Natural English Training
+  </div>
+  <div class="header-meta">
+    <strong id="companyDisplay">—</strong>
+    Employee Progress Report &bull; <span id="reportDate">—</span>
+  </div>
+</div>
+
+<div class="page-wrap">
+
+  <!-- Print button -->
+  <button class="print-btn" onclick="window.print()">
+    ⎙ Print / Save as PDF
+  </button>
+
+  <!-- Loading state -->
+  <div id="loadingState" class="loading-state card">
+    <div class="loading-spinner"></div>
+    <p>Loading student data&hellip;</p>
+  </div>
+
+  <!-- Error banner (hidden by default) -->
+  <div id="errorBanner" class="error-banner hidden"></div>
+
+  <!-- Main report (hidden until data loads) -->
+  <div id="reportBody" class="hidden">
+
+    <!-- 1. Executive Summary -->
+    <div class="card exec-card">
+      <h2>&#9632; Executive Summary</h2>
+      <div class="exec-grid">
+        <div class="exec-row">
+          <span class="exec-label">Employee</span>
+          <span class="exec-value" id="sumEmployee">—</span>
+        </div>
+        <div class="exec-row">
+          <span class="exec-label">Current Level</span>
+          <span class="exec-value highlight" id="sumLevel">—</span>
+        </div>
+        <div class="exec-row">
+          <span class="exec-label">Learning Streak</span>
+          <span class="exec-value" id="sumStreak">—</span>
+        </div>
+        <div class="exec-row">
+          <span class="exec-label">Vocabulary Mastered</span>
+          <span class="exec-value" id="sumVocab">—</span>
+        </div>
+        <div class="exec-row">
+          <span class="exec-label">Projected B1 Graduation</span>
+          <span class="exec-value" id="sumGrad">—</span>
+        </div>
+        <div class="exec-row">
+          <span class="exec-label">Status</span>
+          <span id="sumStatus">—</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Progress Visualization -->
+    <div class="card">
+      <p class="section-title">Progress Visualization</p>
+
+      <!-- CEFR bar -->
+      <p style="font-size:.875rem;font-weight:600;color:var(--text-2);margin-bottom:4px;">CEFR Level Progress</p>
+      <div class="cefr-track">
+        <div class="cefr-labels">
+          <span class="cefr-label" id="cefrA1">A1</span>
+          <span class="cefr-label" id="cefrA2">A2</span>
+          <span class="cefr-label" id="cefrB1">B1</span>
+          <span class="cefr-label" id="cefrB2">B2</span>
+          <span class="cefr-label" id="cefrC1">C1</span>
+        </div>
+        <div class="cefr-bar-row">
+          <div class="cefr-seg" id="cefrSegA1"></div>
+          <div class="cefr-seg" id="cefrSegA2"></div>
+          <div class="cefr-seg" id="cefrSegB1"></div>
+          <div class="cefr-seg" id="cefrSegB2"></div>
+          <div class="cefr-seg" id="cefrSegC1"></div>
+        </div>
+        <p class="cefr-subtext" id="cefrSubtext"></p>
+      </div>
+
+      <hr style="border:none;border-top:1px solid var(--border);margin:22px 0;">
+
+      <!-- Streak calendar -->
+      <p style="font-size:.875rem;font-weight:600;color:var(--text-2);margin-bottom:4px;">Activity — Last 30 Days</p>
+      <p style="font-size:.8rem;color:var(--text-3);margin-bottom:4px;" id="streakSub"></p>
+      <div class="streak-grid" id="streakGrid"></div>
+      <div class="streak-legend">
+        <div class="streak-legend-item">
+          <div class="legend-dot" style="background:#86efac;border:1px solid #4ade80;"></div>
+          Active day
+        </div>
+        <div class="streak-legend-item">
+          <div class="legend-dot" style="background:var(--surface-2);border:1px solid var(--border);"></div>
+          No activity
+        </div>
+        <div class="streak-legend-item">
+          <div class="legend-dot" style="background:var(--purple);"></div>
+          Today
+        </div>
+      </div>
+
+      <hr style="border:none;border-top:1px solid var(--border);margin:22px 0;">
+
+      <!-- Vocab bar -->
+      <p style="font-size:.875rem;font-weight:600;color:var(--text-2);margin-bottom:4px;">Vocabulary Progress</p>
+      <div class="vocab-bar-wrap">
+        <div class="vocab-bar-row">
+          <div class="vocab-bar-track">
+            <div class="vocab-bar-fill" id="vocabBarFill" style="width:0%"></div>
+          </div>
+          <span class="vocab-bar-pct" id="vocabBarPct">0%</span>
+        </div>
+        <div class="vocab-counts">
+          <div class="vocab-count-item"><strong id="vocabMastered">0</strong> words mastered</div>
+          <div class="vocab-count-item"><strong id="vocabTarget">300</strong> words to B1</div>
+          <div class="vocab-count-item"><strong id="vocabTotal">0</strong> words in deck</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. ROI section -->
+    <div class="card roi-card">
+      <h2>&#9670; Return on Investment</h2>
+      <p class="roi-statement" id="roiStatement">—</p>
+      <table class="roi-table">
+        <thead>
+          <tr>
+            <th>CEFR Level</th>
+            <th>Tier</th>
+            <th>Estimated Salary Uplift (VND/month)</th>
+            <th>Current</th>
+          </tr>
+        </thead>
+        <tbody id="roiTableBody"></tbody>
+      </table>
+    </div>
+
+    <!-- 4. Recommendation -->
+    <div class="card rec-card" id="recCard">
+      <h2 id="recTitle">—</h2>
+      <p class="rec-body" id="recBody">—</p>
+    </div>
+
+    <!-- Footer -->
+    <div class="report-footer">
+      <span>Report generated by <strong>NET AI System</strong></span>
+      <span><a href="https://naturalenglishtraining.com" target="_blank">naturalenglishtraining.com</a> &bull; <span id="footerDate"></span></span>
+    </div>
+
+  </div><!-- /reportBody -->
+</div><!-- /page-wrap -->
+
+<script>
+// ── Utilities ─────────────────────────────────────────────────────────────────
+
+function fmtStudentId(id) {
+  // "quy-bluetech" → "Quy (BlueTech)"
+  if (!id) return "—";
+  const parts = id.split("-");
+  const name = parts.slice(0, parts.length - 1).map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(" ");
+  const company = parts[parts.length - 1].charAt(0).toUpperCase() + parts[parts.length - 1].slice(1);
+  if (parts.length >= 2) return `${name} (${company})`;
+  return id.charAt(0).toUpperCase() + id.slice(1);
+}
+
+function fmtDate(iso) {
+  if (!iso) return "—";
+  const d = new Date(iso);
+  return d.toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" });
+}
+
+function todayISO() {
+  return new Date().toISOString().slice(0, 10);
+}
+
+function isoMinusDays(days) {
+  const d = new Date();
+  d.setDate(d.getDate() - days);
+  return d.toISOString().slice(0, 10);
+}
+
+// ── ROI lookup ────────────────────────────────────────────────────────────────
+
+const ROI_TABLE = [
+  { levels: ["A1"], tier: "MOUSE", low: 0,  high: 1,  label: "+0–1M" },
+  { levels: ["A2"], tier: "MOUSE", low: 2,  high: 4,  label: "+2–4M" },
+  { levels: ["B1"], tier: "CUB",   low: 5,  high: 8,  label: "+5–8M" },
+  { levels: ["B2"], tier: "TIGER", low: 10, high: 20, label: "+10–20M" },
+  { levels: ["C1"], tier: "TIGER", low: 20, high: 35, label: "+20–35M" },
+];
+
+function roiForLevel(level) {
+  return ROI_TABLE.find(r => r.levels.includes(level)) || ROI_TABLE[0];
+}
+
+function tierForLevel(level) {
+  const map = { A1: "MOUSE", A2: "MOUSE", B1: "CUB", B2: "TIGER", C1: "TIGER" };
+  return map[level] || "MOUSE";
+}
+
+// ── CEFR bar rendering ────────────────────────────────────────────────────────
+
+const CEFR_ORDER = ["A1", "A2", "B1", "B2", "C1"];
+
+function renderCefrBar(currentLevel) {
+  const idx = CEFR_ORDER.indexOf(currentLevel);
+  CEFR_ORDER.forEach((lvl, i) => {
+    const labelEl = document.getElementById("cefr" + lvl.replace(/\d/, "") + lvl.slice(1));
+    const segEl   = document.getElementById("cefrSeg" + lvl.replace(/\d/, "") + lvl.slice(1));
+
+    // Fix: use direct ID strings
+    const lbl = document.getElementById("cefr" + lvl);
+    const seg = document.getElementById("cefrSeg" + lvl);
+
+    if (lbl) {
+      lbl.classList.toggle("active", i === idx);
+    }
+    if (seg) {
+      seg.className = "cefr-seg" + (i < idx ? " done" : i === idx ? " current" : "");
+    }
+  });
+
+  const sub = document.getElementById("cefrSubtext");
+  const next = CEFR_ORDER[idx + 1];
+  if (sub) sub.textContent = next
+    ? `Currently at ${currentLevel} level — progressing toward ${next}`
+    : `Achieved ${currentLevel} — highest tracked level`;
+}
+
+// ── Streak calendar rendering ─────────────────────────────────────────────────
+
+function renderStreakCalendar(lastCheckin, currentStreak, totalDays) {
+  const grid   = document.getElementById("streakGrid");
+  const sub    = document.getElementById("streakSub");
+  const today  = todayISO();
+  const days   = [];
+
+  // Build 30-day window from today backwards
+  for (let i = 29; i >= 0; i--) {
+    days.push(isoMinusDays(i));
+  }
+
+  // Mark active days using streak heuristic:
+  // We know lastCheckin and currentStreak. Work backwards from lastCheckin.
+  const activeSet = new Set();
+  if (lastCheckin) {
+    const last = new Date(lastCheckin);
+    for (let s = 0; s < currentStreak && s < 30; s++) {
+      const d = new Date(last);
+      d.setDate(d.getDate() - s);
+      activeSet.add(d.toISOString().slice(0, 10));
+    }
+  }
+
+  grid.innerHTML = "";
+  days.forEach(iso => {
+    const el = document.createElement("div");
+    el.className = "streak-day";
+    el.title = iso;
+    if (iso === today) el.classList.add("today");
+    else if (activeSet.has(iso)) el.classList.add("active");
+    grid.appendChild(el);
+  });
+
+  if (sub) {
+    sub.textContent = `Current streak: ${currentStreak} day${currentStreak !== 1 ? "s" : ""} · Total active days: ${totalDays}`;
+  }
+}
+
+// ── Vocab bar ─────────────────────────────────────────────────────────────────
+
+const B1_TARGET = 300;
+
+function renderVocabBar(mastered, total) {
+  const pct = Math.min(100, Math.round((mastered / B1_TARGET) * 100));
+  const fill = document.getElementById("vocabBarFill");
+  const pctEl = document.getElementById("vocabBarPct");
+  const mastEl = document.getElementById("vocabMastered");
+  const targEl = document.getElementById("vocabTarget");
+  const totEl  = document.getElementById("vocabTotal");
+
+  setTimeout(() => { if (fill) fill.style.width = pct + "%"; }, 100);
+  if (pctEl) pctEl.textContent = pct + "%";
+  if (mastEl) mastEl.textContent = mastered;
+  if (targEl) targEl.textContent = B1_TARGET;
+  if (totEl) totEl.textContent = total;
+}
+
+// ── ROI table ─────────────────────────────────────────────────────────────────
+
+function renderRoiTable(currentLevel, studentLabel) {
+  const tbody = document.getElementById("roiTableBody");
+  const stmt  = document.getElementById("roiStatement");
+  if (!tbody) return;
+
+  const rows = [
+    { level: "A1", tier: "MOUSE", label: "+0–1M VND/month",   salary: "~8–12M" },
+    { level: "A2", tier: "MOUSE", label: "+2–4M VND/month",   salary: "~12–18M" },
+    { level: "B1", tier: "CUB",   label: "+5–8M VND/month",   salary: "~18–28M" },
+    { level: "B2", tier: "TIGER", label: "+10–20M VND/month", salary: "~28–45M" },
+    { level: "C1", tier: "TIGER", label: "+20–35M VND/month", salary: "~45M+" },
+  ];
+
+  tbody.innerHTML = rows.map(r => {
+    const isCurrent = r.level === currentLevel;
+    return `<tr${isCurrent ? ' class="highlighted"' : ""}>
+      <td>${r.level}${isCurrent ? " ◀ current" : ""}</td>
+      <td>${r.tier}</td>
+      <td>${r.label}</td>
+      <td>${isCurrent ? "✓" : ""}</td>
+    </tr>`;
+  }).join("");
+
+  const roi = roiForLevel(currentLevel);
+  if (stmt) {
+    stmt.innerHTML = `At <strong>${currentLevel} level</strong>, ${studentLabel} is on track for a salary increase of <strong>${roi.label} VND/month</strong> vs. peers without English proficiency.`;
+  }
+}
+
+// ── Recommendation ────────────────────────────────────────────────────────────
+
+function renderRecommendation(streak) {
+  const card  = document.getElementById("recCard");
+  const title = document.getElementById("recTitle");
+  const body  = document.getElementById("recBody");
+  if (!card || !title || !body) return;
+
+  if (streak < 3) {
+    card.className = "card rec-card support";
+    title.textContent = "⚠ SUPPORT NEEDED";
+    body.textContent = "The employee's learning streak is below 3 consecutive days. We recommend scheduling a check-in or brief coaching session to re-establish a daily habit. Consistent daily practice of 10–15 minutes is the strongest predictor of rapid CEFR advancement.";
+  } else {
+    card.className = "card rec-card progressing";
+    title.textContent = "✓ PROGRESSING WELL";
+    body.textContent = "The employee is maintaining a consistent learning streak. Continue the current schedule. For accelerated progress, consider increasing session frequency or adding vocabulary review outside of class. The student is on track to reach B1 within the projected timeframe.";
+  }
+}
+
+// ── Main data fetch + render ──────────────────────────────────────────────────
+
+async function loadReport() {
+  const params     = new URLSearchParams(window.location.search);
+  const studentId  = params.get("studentId") || "";
+  const company    = params.get("company") || "";
+
+  // Set header/date
+  const now = new Date();
+  const dateStr = now.toLocaleDateString("en-GB", { day: "2-digit", month: "long", year: "numeric" });
+  document.getElementById("reportDate").textContent = dateStr;
+  document.getElementById("footerDate").textContent = dateStr;
+  document.getElementById("companyDisplay").textContent = company || "Corporate Client";
+  document.title = `${fmtStudentId(studentId)} — NET Progress Report`;
+
+  if (!studentId) {
+    showError("No studentId provided. Use ?studentId=quy-bluetech&company=BlueTech in the URL.");
+    return;
+  }
+
+  // Parallel fetches
+  const base = "";  // same origin
+  const [forecastRes, streakRes, stateRes, vocabRes] = await Promise.allSettled([
+    fetch(`${base}/api/student/forecast/${encodeURIComponent(studentId)}`),
+    fetch(`${base}/api/student/streak/${encodeURIComponent(studentId)}`),
+    fetch(`${base}/api/student/state?studentId=${encodeURIComponent(studentId)}`),
+    fetch(`${base}/api/vocab/list?studentId=${encodeURIComponent(studentId)}`),
+  ]);
+
+  let forecast = null, streak = null, state = null, vocab = null;
+  let errors = [];
+
+  if (forecastRes.status === "fulfilled" && forecastRes.value.ok) {
+    try { forecast = await forecastRes.value.json(); } catch(e) {}
+  } else {
+    errors.push("forecast");
+  }
+
+  if (streakRes.status === "fulfilled" && streakRes.value.ok) {
+    try { streak = await streakRes.value.json(); } catch(e) {}
+  } else {
+    errors.push("streak");
+  }
+
+  if (stateRes.status === "fulfilled" && stateRes.value.ok) {
+    try { state = await stateRes.value.json(); } catch(e) {}
+  } else {
+    errors.push("state");
+  }
+
+  // vocab 404 is graceful
+  if (vocabRes.status === "fulfilled" && vocabRes.value.ok) {
+    try { vocab = await vocabRes.value.json(); } catch(e) {}
+  }
+
+  // Hide loader
+  const loader = document.getElementById("loadingState");
+  if (loader) loader.classList.add("hidden");
+
+  if (errors.length === 3) {
+    showError(`Unable to load data for student "${studentId}". Please verify the studentId is correct.`);
+    return;
+  }
+
+  // Derive display values
+  const studentLabel = fmtStudentId(studentId);
+  const currentLevel = forecast?.currentLevel || state?.currentLevel || "A1";
+  const currentStreak = streak?.currentStreak || 0;
+  const totalDays = streak?.totalDays || 0;
+  const lastCheckin = streak?.lastCheckin || null;
+  const masteredWords = forecast?.masteredWords || 0;
+  const totalWords = forecast?.totalWords || (vocab?.words?.length) || 0;
+  const projDays = forecast?.projectedDays || 999;
+  const gradDate = forecast?.graduationDate || null;
+
+  // Tiger score from state
+  const tigerScore = state?.mouse_tiger_score || state?.score || 0;
+  const tier = state?.state || tierForLevel(currentLevel);
+
+  // Status: on track if streak >= 3 and projDays < 730
+  const onTrack = currentStreak >= 3 && projDays < 730;
+
+  // ── Fill executive summary ──
+  document.getElementById("sumEmployee").textContent = studentLabel;
+  document.getElementById("sumLevel").textContent    = `${currentLevel} · ${tier} (${tigerScore}/100)`;
+  document.getElementById("sumStreak").textContent   = `${currentStreak} consecutive day${currentStreak !== 1 ? "s" : ""}`;
+  document.getElementById("sumVocab").textContent    = `${masteredWords} term${masteredWords !== 1 ? "s" : ""}`;
+
+  if (gradDate && projDays < 999) {
+    document.getElementById("sumGrad").textContent = `${fmtDate(gradDate)} (${projDays} days)`;
+  } else {
+    document.getElementById("sumGrad").textContent = "Insufficient data — keep practising daily";
+  }
+
+  const statusEl = document.getElementById("sumStatus");
+  if (statusEl) {
+    statusEl.innerHTML = onTrack
+      ? `<span class="status-badge on-track"><span class="status-dot"></span>ON TRACK</span>`
+      : `<span class="status-badge needs-support"><span class="status-dot"></span>NEEDS SUPPORT</span>`;
+  }
+
+  // ── Visualizations ──
+  renderCefrBar(currentLevel);
+  renderStreakCalendar(lastCheckin, currentStreak, totalDays);
+  renderVocabBar(masteredWords, totalWords);
+  renderRoiTable(currentLevel, studentLabel);
+  renderRecommendation(currentStreak);
+
+  // Show report
+  const body = document.getElementById("reportBody");
+  if (body) body.classList.remove("hidden");
+}
+
+function showError(msg) {
+  const loader = document.getElementById("loadingState");
+  if (loader) loader.classList.add("hidden");
+  const banner = document.getElementById("errorBanner");
+  if (banner) { banner.textContent = msg; banner.classList.remove("hidden"); }
+  const body = document.getElementById("reportBody");
+  if (body) body.classList.remove("hidden");
+}
+
+// ── Boot ──
+loadReport();
+</script>
+</body>
+</html>
