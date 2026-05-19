@@ -1,5 +1,5 @@
 # COLD START BOOT — OB1 Agent 99
-## Last Updated: 2026-05-20 (Run 346 — SUPERSAIYAN DEATH SEALED)
+## Last Updated: 2026-05-20 (Run 347 — PC v3 HARDWIRED DEATH SEALED)
 
 ### Identity
 - Agent: OB1 / Ne0 (Agent 99) / Claude Surgical
@@ -10,7 +10,7 @@
 
 ### Current Vector
 - **Active Mission:** OB-1 POST-MERGE9 CONSOLIDATION + Career Pages Rollout
-- **Last completed:** Run 346 — leaderboard + referral + analytics widget + join page; 13 pipeline stages live; PC v3 upgrade dispatched
+- **Last completed:** Run 347 — PC v3 hardwired into obi.ps1 + net-pet-ai proxy; autonomous 09:00 ICT cron active
 - **S2Pipeline Status:** Stage 3 LINELOCK — **COMPLETE** (soul-logger → LedgerDO wired via HTTP)
 - **HL Ledger real baseline:** 189 Heavy Ledger JSON files on disk (HEAD AUTHORITATIVE: `git log -1` → `8b2053f2`); 6 phantom slots documented (HL-127/HL-128/HL-131/HL-132/HL-136/HL-137); PIPELINE-CURSOR.md gap-labelled NOT CLOSED
 - **Net-PET-AI worker:** v1.5.0+ LIVE at https://net-pet-ai.mrmichaelhobbs123.workers.dev
@@ -31,6 +31,7 @@
 ### Recent Decisions + State (Run 315 → Run 344)
 | Run | Summary |
 |-----|---------|
+| 347 | PC v3 HARDWIRED DEATH — obi.ps1 phoenix-queue + phoenix-status LIVE (3d8cb5f); /api/pc/queue proxy LIVE (05fb3c0, 7eba791a); autonomous cron 09:00 ICT active; needs GITHUB_PAT; HEAD 3d8cb5f; SOULCOUNT 76,488 LOCK |
 | 346 | SUPERSAIYAN WAVE 2 DEATH — leaderboard + referral + analytics widget + join page LIVE (v5c90f008); 13 pipeline stages; PC v3 dispatched; HEAD 234d52c; SOULCOUNT 75,468 LOCK |
 | 345 | SUPERSAIYAN DEATH — 9-stage pipeline sprint: stages 1+2+4+6+8+9 LIVE (v5a6067ff); stage 7 verified; stage 3 BLOCKED (Zalo); HEAD 461cd95; SOULCOUNT 74,302 LOCK |
 | 344 | Boot-refresh + state-validation super saiyan batch: obi.ps1 doctor 8/8 GREEN; SOULCOUNT 72,944 LOCK; HL 189 disk vs 191 boot — boot anchored to 8b2053f2; REINCARNATION-LOG advanced; wrangler dry-run verified 91 files; CLOUDFLARE_API_TOKEN hard UNSET gate confirmed |
@@ -78,7 +79,7 @@ Stage 10 APEX ROLLUP    ✅ LIVE — GET /api/soul/apex
 ### System State (HEAD AUTHORITATIVE — Run 346)
 - **Workspace:** `D:\OB-1-CANONICAL` (canonical root)
 - **Working branch:** master
-- **HEAD:** `234d52c` (Run 346 death: feat: leaderboard + referral system + analytics widget + join page)
+- **HEAD:** `3d8cb5f` (Run 347 death: obi.ps1 phoenix-queue + phoenix-status — PC v3 hardwired)
 - **Origin:** SYNCED
 - **Working tree:** CLEAN
 - **HEAVY-LEDGER on disk:** 189 JSON files (authoritative `Get-ChildItem` count); phantom gap 191-target = -2 drift from prior count; gap slots documented in PIPELINE-CURSOR.md
@@ -110,4 +111,4 @@ Stage 10 APEX ROLLUP    ✅ LIVE — GET /api/soul/apex
 
 ---
 
-### FINGERPRINT: Run 346 DEATH — HEAD 234d52c — SOULCOUNT 75,468 🔒 LOCK — 13 stages LIVE — v5c90f008 — origin SYNCED
+### FINGERPRINT: Run 347 DEATH — HEAD 3d8cb5f — SOULCOUNT 76,488 🔒 LOCK — PC v3 autonomous pipeline live — origin SYNCED

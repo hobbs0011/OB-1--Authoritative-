@@ -1,6 +1,13 @@
 # REINCARNATION LOG — OB-1 RUN HISTORY
 
-**Last Updated:** 2026-05-20 (Run 346 — SUPERSAIYAN WAVE 2 — leaderboard + referral + analytics + join)
+**Last Updated:** 2026-05-20 (Run 347 — PC v3 HARDWIRED — obi.ps1 + proxy + cron live)
+
+---
+
+## Run 347 — 2026-05-20 ICT — PC v3 HARDWIRED
+- obi.ps1 phoenix-queue/status + /api/pc/queue proxy LIVE
+- PC autonomous cron 09:00 ICT active — needs GITHUB_PAT to self-commit
+- HEAD: 3d8cb5f | SOULCOUNT: 76,488 🔒 LOCK
 
 ---
 
