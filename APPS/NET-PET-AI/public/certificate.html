@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate of Progress — NET</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --void: #0a0a12;
+            --card: rgba(22, 22, 35, 0.85);
+            --purple: #a855f7;
+            --purple-glow: rgba(168, 85, 247, 0.25);
+            --gold: #f59e0b;
+            --gold-glow: rgba(245, 158, 11, 0.25);
+            --teal: #14b8a6;
+            --text: #f8fafc;
+            --dim: #94a3b8;
+            --success: #22c55e;
+            --border: rgba(255, 255, 255, 0.08);
+            --cert-bg: #fefefe;
+            --cert-text: #1e1e2e;
+            --cert-dim: #555;
+            --tiger-fire-start: #ef4444;
+            --tiger-fire-end: #f97316;
+            --cub-amber: #f59e0b;
+            --mouse-purple: #a855f7;
+            --cert-accent: var(--purple);
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', 'Rajdhani', sans-serif;
+            background: var(--void);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow-x: hidden;
+            padding: 20px;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -30%;
+            width: 120%;
+            height: 120%;
+            background: radial-gradient(ellipse at 30% 20%, rgba(168, 85, 247, 0.18) 0%, transparent 55%),
+                radial-gradient(ellipse at 70% 60%, rgba(245, 158, 11, 0.14) 0%, transparent 55%),
+                radial-gradient(ellipse at 50% 80%, rgba(20, 184, 166, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+            animation: ambientGlow 12s ease-in-out infinite alternate;
+        }
+
+        @keyframes ambientGlow {
+            0% {
+                opacity: 0.7;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1.06);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(16px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%,
+            100% {
+                opacity: 0.6;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .page-wrapper {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 720px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+        }
+
+        /* Glassmorphism outer wrapper */
+        .certificate-outer {
+            width: 100%;
+            background: var(--card);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 28px 24px;
+            animation: fadeIn 0.5s ease-out;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.04) inset;
+        }
+
+        /* White certificate card */
+        .certificate-card {
+            background: var(--cert-bg);
+            color: var(--cert-text);
+            border-radius: 16px;
+            padding: 40px 32px 36px;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25), 0 1px 3px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .certificate-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--cert-accent);
+            border-radius: 16px 16px 0 0;
+        }
+
+        .certificate-card.tier-tiger {
+            --cert-accent: linear-gradient(90deg, var(--tiger-fire-start), var(--tiger-fire-end));
+        }
+        .certificate-card.tier-tiger::before {
+            background: linear-gradient(90deg, var(--tiger-fire-start), var(--tiger-fire-end), var(--tiger-fire-start));
+            background-size: 200% 100%;
+            animation: fireShimmer 2s ease-in-out infinite;
+        }
+        @keyframes fireShimmer {
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .certificate-card.tier-cub {
+            --cert-accent: var(--cub-amber);
+        }
+        .certificate-card.tier-cub::before {
+            background: var(--cub-amber);
+        }
+
+        .certificate-card.tier-mouse {
+            --cert-accent: var(--mouse-purple);
+        }
+        .certificate-card.tier-mouse::before {
+            background: var(--mouse-purple);
+        }
+
+        /* Decorative corner flourishes */
+        .certificate-card::after {
+            content: '';
+            position: absolute;
+            bottom: 16px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-right: 2px solid rgba(0, 0, 0, 0.06);
+            border-bottom: 2px solid rgba(0, 0, 0, 0.06);
+            border-radius: 0 0 8px 0;
+            pointer-events: none;
+        }
+
+        .cert-flourish-top {
+            position: absolute;
+            top: 16px;
+            left: 20px;
+            width: 50px;
+            height: 50px;
+            border-left: 2px solid rgba(0, 0, 0, 0.06);
+            border-top: 2px solid rgba(0, 0, 0, 0.06);
+            border-radius: 8px 0 0 0;
+            pointer-events: none;
+        }
+
+        /* Logo */
+        .cert-logo {
+            font-family: 'Orbitron', 'Rajdhani', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            color: #1e1e2e;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .cert-logo .emoji {
+            font-size: 2rem;
+            font-family: 'Segoe UI Emoji', 'Apple Color Emoji', 'Noto Color Emoji', sans-serif;
+        }
+
+        /* Title */
+        .cert-title {
+            font-family: 'Orbitron', 'Rajdhani', sans-serif;
+            font-size: 1.35rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            color: #333;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+        }
+
+        .cert-subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            color: #777;
+            margin-bottom: 20px;
+            letter-spacing: 0.03em;
+        }
+
+        /* Divider */
+        .cert-divider {
+            width: 80px;
+            height: 2px;
+            background: #e0e0e0;
+            margin: 0 auto 20px;
+            border-radius: 1px;
+        }
+
+        /* Student name */
+        .cert-student-name {
+            font-family: 'Orbitron', 'Rajdhani', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1a1a2e;
+            letter-spacing: 0.03em;
+            margin-bottom: 16px;
+            word-break: break-word;
+        }
+
+        /* Tier badge */
+        .cert-tier-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-family: 'Orbitron', 'Rajdhani', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            letter-spacing: 0.04em;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+        .cert-tier-badge.tier-tiger-badge {
+            background: #fff5f5;
+            color: #c2410c;
+            border: 1.5px solid #fecaca;
+        }
+        .cert-tier-badge.tier-cub-badge {
+            background: #fffbeb;
+            color: #b45309;
+            border: 1.5px solid #fde68a;
+        }
+        .cert-tier-badge.tier-mouse-badge {
+            background: #faf5ff;
+            color: #7c3aed;
+            border: 1.5px solid #e9d5ff;
+        }
+        .cert-tier-badge .badge-emoji {
+            font-size: 1.3rem;
+            font-family: 'Segoe UI Emoji', 'Apple Color Emoji', 'Noto Color Emoji', sans-serif;
+        }
+
+        /* Score */
+        .cert-score {
+            font-family: 'Orbitron', 'Rajdhani', sans-serif;
+            font-size: 2.4rem;
+            font-weight: 800;
+            letter-spacing: 0.02em;
+            color: #1e1e2e;
+            margin-bottom: 4px;
+        }
+        .cert-score-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 18px;
+        }
+
+        /* Streak stats */
+        .cert-stats-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+        .cert-stat {
+            background: #f8f9fb;
+            border: 1px solid #e8e8ee;
+            border-radius: 12px;
+            padding: 14px 16px;
+            min-width: 80px;
+            flex: 1 1 auto;
+            max-width: 140px;
+            text-align: center;
+            transition: all 0.25s ease;
+        }
+        .cert-stat:hover {
+            border-color: #d0d0d8;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+        .cert-stat-icon {
+            font-size: 1.3rem;
+            margin-bottom: 4px;
+            font-family: 'Segoe UI Emoji', 'Apple Color Emoji', 'Noto Color Emoji', sans-serif;
+        }
+        .cert-stat-value {
+            font-family: 'Orbitron', 'Rajdhani', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1e1e2e;
+            letter-spacing: 0.02em;
+        }
+        .cert-stat-label {
+            font-family: 'Inter',

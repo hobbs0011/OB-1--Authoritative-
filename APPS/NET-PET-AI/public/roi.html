@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What Is Your English Worth? | ROI Calculator | NET PET AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --void: #0a0a12;
+            --card: rgba(22, 22, 35, 0.85);
+            --purple: #a855f7;
+            --purple-glow: rgba(168, 85, 247, 0.35);
+            --gold: #f59e0b;
+            --gold-glow: rgba(245, 158, 11, 0.4);
+            --teal: #14b8a6;
+            --text: #f8fafc;
+            --dim: #94a3b8;
+            --success: #22c55e;
+            --success-glow: rgba(34, 197, 94, 0.45);
+            --border: rgba(255, 255, 255, 0.08);
+            --border-light: rgba(255, 255, 255, 0.14);
+            --radius-sm: 12px;
+            --radius: 16px;
+            --radius-lg: 20px;
+            --radius-xl: 24px;
+            --font-display: 'Orbitron', 'Inter', sans-serif;
+            --font-body: 'Inter', system-ui, sans-serif;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--void);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background-image:
+                radial-gradient(ellipse at 15% 20%, rgba(168, 85, 247, 0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 75% 60%, rgba(245, 158, 11, 0.06) 0%, transparent 55%),
+                radial-gradient(ellipse at 50% 85%, rgba(20, 184, 166, 0.05) 0%, transparent 50%),
+                radial-gradient(ellipse at 30% 50%, rgba(34, 197, 94, 0.03) 0%, transparent 50%);
+            background-attachment: fixed;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--void);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(168, 85, 247, 0.4);
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(168, 85, 247, 0.7);
+        }
+
+        /* Selection */
+        ::selection {
+            background: rgba(168, 85, 247, 0.5);
+            color: #fff;
+        }
+
+        /* ── Container ── */
+        .container {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ── Glass Card Base ── */
+        .glass-card {
+            background: var(--card);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            transition: var(--transition);
+        }
+        .glass-card:hover {
+            border-color: var(--border-light);
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.35), 0 0 80px rgba(168, 85, 247, 0.06);
+        }
+
+        /* ── Header / Nav ── */
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 14px 0;
+            background: rgba(10, 10, 18, 0.75);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border-bottom: 1px solid var(--border);
+        }
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+        .logo {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.15rem;
+            letter-spacing: 0.04em;
+            color: var(--text);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .logo-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--purple);
+            box-shadow: 0 0 12px var(--purple-glow);
+            animation: logo-pulse 2.5s ease-in-out infinite;
+        }
+        @keyframes logo-pulse {
+            0%,
+            100% {
+                box-shadow: 0 0 12px var(--purple-glow);
+            }
+            50% {
+                box-shadow: 0 0 24px rgba(168, 85, 247, 0.7);
+            }
+        }
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .nav-links a {
+            color: var(--dim);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color var(--transition);
+            white-space: nowrap;
+        }
+        .nav-links a:hover {
+            color: var(--text);
+        }
+        .nav-cta {
+            background: linear-gradient(135deg, var(--purple), #9333ea);
+            color: #fff !important;
+            padding: 9px 20px;
+            border-radius: 50px;
+            font-weight: 600 !important;
+            font-size: 0.85rem !important;
+            letter-spacing: 0.02em;
+            transition: all var(--transition) !important;
+            box-shadow: 0 4px 18px rgba(168, 85, 247, 0.3);
+        }
+        .nav-cta:hover {
+            box-shadow: 0 6px 28px rgba(168, 85, 247, 0.55) !important;
+            transform: translateY(-1px);
+            color: #fff !important;
+        }
+
+        /* ── Section Spacing ── */
+        .section {
+            padding: 64px 0;
+        }
+        .section-sm {
+            padding: 40px 0;
+        }
+
+        /* ── Hero ── */
+        .hero {
+            text-align: center;
+            padding: 72px 0 48px;
+        }
+        .hero-badge {
+            display: inline-block;
+            background: rgba(168, 85, 247, 0.15);
+            border: 1px solid rgba(168, 85, 247, 0.35);
+            color: var(--purple);
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            padding: 8px 18px;
+            border-radius: 50px;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+        }
+        .hero h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2.2rem, 5vw, 3.6rem);
+            font-weight: 800;
+            letter-spacing: 0.02em;
+            line-height: 1.15;
+            margin-bottom: 16px;
+            background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero h1 .accent {
+            background: linear-gradient(135deg, var(--gold), #fbbf24);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-subtitle {
+            font-size: 1.15rem;
+            color: var(--dim);
+            max-width: 620px;
+            margin: 0 auto 8px;
+            font-weight: 400;
+            line-height: 1.5;
+        }
+        .hero-subtitle strong {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        /* ── Section Headings ── */
+        .section-heading {
+            font-family: var(--font-display);
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            margin-bottom: 8px;
+            color: var(--text);
+        }
+        .section-subheading {
+            color: var(--dim);
+            font-size: 0.95rem;
+            margin-bottom: 36px;
+            line-height: 1.5;
+        }
+
+        /* ── Salary Cards Grid ── */
+        .salary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .salary-card {
+            background: var(--card);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 24px 22px 22px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        .salary-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+           
