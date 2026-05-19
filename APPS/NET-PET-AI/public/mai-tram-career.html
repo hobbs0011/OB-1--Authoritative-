@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NET Career | MAI TRAM PORTAL</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root { --void:#0a0a12; --card:rgba(22,22,35,0.85); --purple:#a855f7; --purple-glow:rgba(168,85,247,0.25); --gold:#f59e0b; --gold-glow:rgba(245,158,11,0.25); --teal:#14b8a6; --teal-glow:rgba(20,184,166,0.25); --text:#f8fafc; --dim:#94a3b8; --success:#22c55e; --danger:#ef4444; --border:rgba(255,255,255,0.08); }
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--void);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased;padding-top:80px;}
+body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle at 15% 30%,var(--purple-glow) 0%,transparent 50%),radial-gradient(circle at 85% 70%,var(--gold-glow) 0%,transparent 50%);pointer-events:none;z-index:-1;}
+.top-nav{position:fixed;top:0;left:0;right:0;height:70px;background:rgba(10,10,18,0.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);z-index:1000;display:flex;align-items:center;}
+.nav-container{max-width:1000px;width:100%;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between;align-items:center;}
+.nav-brand{font-family:'Orbitron',sans-serif;color:var(--text);text-decoration:none;font-size:1.2rem;font-weight:700;display:flex;align-items:center;gap:10px;}
+.nav-brand-mark{width:28px;height:28px;object-fit:contain;opacity:0.88;filter:grayscale(1) brightness(1.3);}
+.nav-links{display:flex;gap:20px;align-items:center;}
+.nav-links a{color:var(--dim);text-decoration:none;font-family:'Rajdhani',sans-serif;font-size:1.1rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;transition:color 0.3s;}
+.nav-links a:hover,.nav-links a.active{color:var(--purple);text-shadow:0 0 10px var(--purple-glow);}
+.logout-btn{background:transparent;border:1px solid var(--border);color:var(--dim);padding:6px 12px;border-radius:6px;cursor:pointer;font-family:'Inter',sans-serif;font-size:0.9rem;transition:all 0.3s;}
+.logout-btn:hover{background:rgba(255,255,255,0.05);color:var(--text);}
+.container{max-width:900px;margin:0 auto;padding:40px 20px;position:relative;z-index:1;}
+.portal-watermark{position:fixed;right:3vw;bottom:4vh;width:min(26vw,280px);opacity:0.055;pointer-events:none;z-index:0;mix-blend-mode:screen;}
+.portal-watermark img{display:block;width:100%;height:auto;filter:grayscale(1) brightness(1.5);}
+h1,h2,h3{font-family:'Orbitron',sans-serif;line-height:1.2;}
+h1{font-size:clamp(2rem,5vw,3rem);background:linear-gradient(to right,#fff,#cbd5e1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px;text-align:center;letter-spacing:1px;}
+.welcome-sub{text-align:center;color:var(--gold);font-family:'Rajdhani',sans-serif;font-size:1.2rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:40px;font-weight:600;}
+h2{font-size:clamp(1.3rem,3vw,1.6rem);color:var(--text);margin-bottom:24px;letter-spacing:0.5px;display:flex;align-items:center;gap:12px;}
+h2::before{content:'';display:block;width:24px;height:2px;background:var(--purple);box-shadow:0 0 10px var(--purple-glow);}
+.card{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:clamp(24px,5vw,48px);margin-bottom:40px;backdrop-filter:blur(20px);box-shadow:0 20px 40px rgba(0,0,0,0.4),inset 0 1px 0 rgba(255,255,255,0.1);animation:fadeIn 0.8s cubic-bezier(0.2,0.8,0.2,1) forwards;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+.vocab-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:16px;}
+.vocab-item{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:12px;padding:12px;text-align:center;}
+.vocab-item .term{font-family:'Orbitron',sans-serif;color:var(--gold);font-weight:700;font-size:0.95rem;margin-bottom:4px;}
+.vocab-item .def{color:var(--dim);font-size:0.85rem;line-height:1.3;}
+.action-list{list-style:none;margin-top:20px;}
+.action-list li{padding:16px;background:rgba(255,255,255,0.03);margin-bottom:12px;border-radius:12px;border-left:3px solid var(--gold);display:flex;align-items:flex-start;gap:15px;font-size:1.05rem;}
+.action-list li::before{content:'✓';color:var(--gold);font-weight:bold;margin-top:2px;}
+.action-list li p{color:var(--dim);line-height:1.6;}
+.action-list li strong{color:var(--text);}
+</style>
+<script>if(localStorage.getItem('mai_tram_auth')!=='true'){window.location.href='mai-tram-portal.html';}</script>
+</head>
+<body>
+<div class="portal-watermark" aria-hidden="true"><img src="./assets/brand/system-marks/phoenix-dna-crest-mark.png" alt=""></div>
+<nav class="top-nav">
+  <div class="nav-container">
+    <a href="mai-tram-portal.html" class="nav-brand"><img src="./assets/brand/art/net-phoenix-logo.png" class="nav-brand-mark" alt="NET"><span>MAI TRAM PORTAL</span></a>
+    <div class="nav-links">
+      <a href="mai-tram-portal.html">Dashboard</a>
+      <a href="mai-tram-profile.html">Profile</a>
+      <a href="mai-tram-methodology.html">Methodology</a>
+      <a href="mai-tram-career.html" class="active">Career</a>
+      <a href="mai-tram-transcripts.html">Transcripts</a>
+      <a href="mai-tram-action-plan.html">Action Plan</a>
+      <button onclick="logout()" class="logout-btn">Log Out</button>
+    </div>
+  </div>
+</nav>
+<div class="container">
+  <header>
+    <h1>CAREER ENGLISH</h1>
+    <p class="welcome-sub">HR · Sales · Events Track</p>
+  </header>
+  <section class="card teacher-note">
+    <h2>Role Snapshot</h2>
+    <p>Mai Tram wears two hats at BlueTech. As HR, she handles recruitment, interviews, onboarding, and internal communications. As Sales Account Manager, she manages client relationships, prepares proposals, and represents BlueTech at trade shows and networking events. English is essential for both: professional emails, meeting foreign clients at events, and presenting the company.</p>
+    <div class="sig">HR &amp; Sales &mdash; BlueTech</div>
+  </section>
+  <section class="card">
+    <h2>HR Vocabulary</h2>
+    <div class="vocab-grid">
+      <div class="vocab-item"><div class="term">Recruitment</div><div class="def">Finding and hiring people</div></div>
+      <div class="vocab-item"><div class="term">Job Description</div><div class="def">Document listing job duties</div></div>
+      <div class="vocab-item"><div class="term">Shortlist</div><div class="def">Best candidates selected</div></div>
+      <div class="vocab-item"><div class="term">Interview</div><div class="def">Talking with job candidates</div></div>
+      <div class="vocab-item"><div class="term">Onboarding</div><div class="def">New employee training</div></div>
+      <div class="vocab-item"><div class="term">Probation Period</div><div class="def">Trial time for new hire</div></div>
+      <div class="vocab-item"><div class="term">Performance Review</div><div class="def">Evaluating employee work</div></div>
+      <div class="vocab-item"><div class="term">KPI</div><div class="def">Key job targets</div></div>
+      <div class="vocab-item"><div class="term">Employee Benefits</div><div class="def">Company perks for staff</div></div>
+      <div class="vocab-item"><div class="term">Notice Period</div><div class="def">Time before leaving job</div></div>
+      <div class="vocab-item"><div class="term">Resignation</div><div class="def">Quitting your job</div></div>
+      <div class="vocab-item"><div class="term">Work Permit</div><div class="def">Legal right to work</div></div>
+      <div class="vocab-item"><div class="term">Headcount</div><div class="def">Number of employees</div></div>
+      <div class="vocab-item"><div class="term">Job Offer</div><div class="def">Employment proposal</div></div>
+      <div class="vocab-item"><div class="term">Reference Check</div><div class="def">Asking about candidate</div></div>
+    </div>
+  </section>
+  <section class="card">
+    <h2>Sales & Account Management</h2>
+    <div class="vocab-grid">
+      <div class="vocab-item"><div class="term">Prospect</div><div class="def">Potential customer</div></div>
+      <div class="vocab-item"><div class="term">Lead</div><div class="def">Possible sale contact</div></div>
+      <div class="vocab-item"><div class="term">Pipeline</div><div class="def">Sales process stages</div></div>
+      <div class="vocab-item"><div class="term">Quotation</div><div class="def">Price estimate</div></div>
+      <div class="vocab-item"><div class="term">Proposal</div><div class="def">Offer document</div></div>
+      <div class="vocab-item"><div class="term">Follow-up</div><div class="def">Checking on client</div></div>
+      <div class="vocab-item"><div class="term">Closing</div><div class="def">Finalizing sale</div></div>
+      <div class="vocab-item"><div class="term">Client Retention</div><div class="def">Keeping customers</div></div>
+      <div class="vocab-item"><div class="term">B2B</div><div class="def">Business to business</div></div>
+      <div class="vocab-item"><div class="term">Cold Call</div><div class="def">First phone contact</div></div>
+      <div class="vocab-item"><div class="term">Pitch</div><div class="def">Quick sales presentation</div></div>
+      <div class="vocab-item"><div class="term">Commission</div><div class="def">Sales bonus money</div></div>
+      <div class="vocab-item"><div class="term">Revenue Target</div><div class="def">Sales goal</div></div>
+      <div class="vocab-item"><div class="term">Contract</div><div class="def">Signed agreement</div></div>
+      <div class="vocab-item"><div class="term">Account</div><div class="def">Customer relationship</div></div>
+    </div>
+  </section>
+  <section class="card">
+    <h2>Trade Show & Events</h2>
+    <div class="vocab-grid">
+      <div class="vocab-item"><div class="term">Trade Show</div><div class="def">Industry exhibition</div></div>
+      <div class="vocab-item"><div class="term">Exhibition Booth</div><div class="def">Company display area</div></div>
+      <div class="vocab-item"><div class="term">Networking</div><div class="def">Meeting other professionals</div></div>
+      <div class="vocab-item"><div class="term">Business Card</div><div class="def">Contact information card</div></div>
+      <div class="vocab-item"><div class="term">Elevator Pitch</div><div class="def">30-second company intro</div></div>
+      <div class="vocab-item"><div class="term">Product Demo</div><div class="def">Showing how thing works</div></div>
+      <div class="vocab-item"><div class="term">Brochure</div><div class="def">Company information paper</div></div>
+      <div class="vocab-item"><div class="term">Lead Generation</div><div class="def">Finding new customers</div></div>
+      <div class="vocab-item"><div class="term">Badge</div><div class="def">Event entry card</div></div>
+      <div class="vocab-item"><div class="term">Conference</div><div class="def">Formal meeting event</div></div>
+      <div class="vocab-item"><div class="term">Panel Discussion</div><div class="def">Expert talk group</div></div>
+      <div class="vocab-item"><div class="term">Exhibitor</div><div class="def">Company at event</div></div>
+      <div class="vocab-item"><div class="term">Walk-in</div><div class="def">Unscheduled visitor</div></div>
+      <div class="vocab-item"><div class="term">Attendee</div><div class="def">Event participant</div></div>
+      <div class="vocab-item"><div class="term">Follow-up Meeting</div><div class="def">After event discussion</div></div>
+    </div>
+  </section>
+  <section class="card">
+    <h2>Key Phrases</h2>
+    <ul class="action-list">
+      <li><p><strong>Introducing yourself:</strong> "Hi, I'm Mai Tram from BlueTech. We provide [service]. Do you have a moment?"</p></li>
+      <li><p><strong>Asking for business card:</strong> "Could I get your card? I'd love to follow up with you."</p></li>
+      <li><p><strong>Following up after event:</strong> "It was great meeting you at [event]. I wanted to follow up and share more about what we do."</p></li>
+      <li><p><strong>Scheduling interview:</strong> "I'd like to invite you for an interview on [date]. Does that work for you?"</p></li>
+      <li><p><strong>Feedback after interview:</strong> "Thank you for coming in. We'll be in touch within [X] days."</p></li>
+      <li><p><strong>Sending proposal:</strong> "Please find our proposal attached. Let me know if you have any questions."</p></li>
+      <li><p><strong>Checking on deal:</strong> "I wanted to check in — have you had a chance to review our proposal?"</p></li>
+    </ul>
+  </section>
+  <section class="card">
+    <h2>Fluency Drill</h2>
+    <p style="color:var(--dim);margin-bottom:12px;">Practice these questions with OBI. Answer immediately — no thinking time.</p>
+    <ul class="action-list">
+      <li><p><strong>"What does BlueTech do?"</strong> → Practice answer in 2 sentences</p></li>
+      <li><p><strong>"How many people work at your company?"</strong> → 1 sentence answer</p></li>
+      <li><p><strong>"What's your role?"</strong> → 1 sentence answer</p></li>
+      <li><p><strong>"Are you looking to hire right now?"</strong> → Yes/No + 1 reason</p></li>
+      <li><p><strong>"What makes BlueTech different?"</strong> → 2-3 sentence pitch</p></li>
+    </ul>
+    <p class="teacher-note" style="margin-top:16px;">Speak before you're ready. The goal is not a perfect answer. The goal is an answer that comes out.</p>
+  </section>
+  <section class="card teacher-note" style="border-left-color:var(--teal);">
+    <h2>Coach Note</h2>
+    <p>Mai Tram's dual role is an asset in English learning. HR trains her to ask good questions. Sales trains her to listen for what the other person actually wants. Both skills translate directly into English conversation. She already has the instincts — the work is letting them out faster.</p>
+    <div class="sig">OBI &mdash; NET Coach</div>
+  </section>
+</div>
+<script>
+function logout(){localStorage.removeItem('mai_tram_auth');window.location.href='mai-tram-portal.html';}
+</script>
+<script src="/assets/brand/system-marks/global-brand-shelf.js"></script>
+</body>
+</html>
