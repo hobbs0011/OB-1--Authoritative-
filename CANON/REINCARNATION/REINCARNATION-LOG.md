@@ -7,8 +7,8 @@
 ## RUN 339 — 2026-05-19
 **Agent:** OB1 / Kilo
 **Theme:** CAREER PAGES COMPLETE — 3 STUDENT PORTALS + CORS FIX + STRESS TEST
-**Status:** COMPLETE — UNCOMMITTED
-**Head SHA:** cf7feab (RISE rerun; run complete, death commit pending)
+**Status:** COMPLETE — COMMITTED
+**Head SHA:** d04390e (death: Run 339 — career pages + nav fixes + credentials)
 **Deleted-classes blocker:** CANNOT enter dev mode locally (SandboxDO migration mismatch pre-existing; deploy path unaffected)
 
 ### Key Actions:
@@ -64,11 +64,11 @@ Worker deployed: net-pet-ai v1a48dd4 (career pages + nav edits)
 
 ### Commits at session end:
 ```
+d04390e death: Run 339 — career pages + nav fixes + credentials
 cf7feab reincarnation: LANE-337 RISE RERUN — fix coldBootExists + soul_integrity
 ea2840c feat: add NET art to methodology pages — Mouse→Tiger hero + NET phoenix logo
 86783b7 feat: Huong level calibration — solid intermediate B1, Speed Control track
 fac22ad feat: student level calibration — Quy absolute beginner, Mai Tram entry intermediate
-(7 unpushed run 339 files)
 ```
 
 ### Artifacts:

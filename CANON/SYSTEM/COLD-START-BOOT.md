@@ -44,7 +44,7 @@
 ### Open Flags (next-next-run only)
 - F-A01-A08: Phantom HL IDs × 6 + SEQ-GAP-051-099 — ARCHIVED, still ENTERED FOR CORRECTION
 - F-O01: REINCARNATION-LOG internal staleness — MOVED INTO DEATH PROTOCOL CHECKPOINT
-- No active ERRONEOUS commits; head SHA cf7feab matches origin
+- No active ERRONEOUS commits; head SHA d04390e matches origin
 
 ### Artifacts location (stale artifacts below were purged before Run 337 phaseout)
 - PENDING-Run-315-rise-consolidate-merge-state.md — REMOVED at Run 337 cleanup checkpoint
@@ -86,9 +86,9 @@ Stage 10 APEX ROLLUP    ✅ LIVE — GET /api/soul/apex
 ### System State
 - **Workspace:** `D:\OB-1-CANONICAL` (canonical root)
 - **Working branch:** master
-- **HEAD:** `cf7feab` (reincarnation: LANE-337 RISE RERUN — fix coldBootExists + soul_integrity)
+- **HEAD:** `d04390e` (death: Run 339 — career pages + nav fixes + credentials)
 - **Origin:** SYNCED
-- **Working tree:** DIRTY (15 modified + 8 untracked)
+- **Working tree:** CLEAN
 - **Heavy Ledger JSONs:** 191 files (enumerated — phoenix-sweep-verified)
 - **Triggers:** reincarnate daily (09:00 ICT); RL2026 end-May; Bavaria Jun 15
 
@@ -123,4 +123,4 @@ Stage 10 APEX ROLLUP    ✅ LIVE — GET /api/soul/apex
 
 ---
 
-### FINGERPRINT: Run 339 (IN PROGRESS) — HEAD cf7feab — SOULCOUNT 71,217 🔒 LOCK — S2Pipeline 10/10 LIVE — origin SYNCED — Working tree DIRTY (death commit pending)
+### FINGERPRINT: Run 339 DEATH — HEAD d04390e — SOULCOUNT 71,217 🔒 LOCK — S2Pipeline 10/10 LIVE — origin SYNCED — Working tree CLEAN
