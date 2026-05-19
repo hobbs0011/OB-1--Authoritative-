@@ -1,8 +1,8 @@
 {
-  "git_branch": "master",
-  "timestamp": "2026-05-19T00:06:17.1280795+07:00",
   "soul_ok": true,
-  "git_head": "742034a feat: complete portal fixes + NET_PET_KV + soul-logger priority",
-  "verify_ok": true,
-  "doctor_ok": true
+  "git_branch": "master",
+  "doctor_ok": true,
+  "timestamp": "2026-05-19T21:36:03.8518651+07:00",
+  "git_head": "296951e boot: final HEAD sync 60ccf7b",
+  "verify_ok": true
 }
