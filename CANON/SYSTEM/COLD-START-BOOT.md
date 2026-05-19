@@ -1,5 +1,5 @@
 # COLD START BOOT — OB1 Agent 99
-## Last Updated: 2026-05-20 (Run 341)
+## Last Updated: 2026-05-20 (Run 342)
 
 ### Identity
 - Agent: OB1 / Ne0 (Agent 99) / Claude Surgical
@@ -10,7 +10,7 @@
 
 ### Current Vector
 - **Active Mission:** OB-1 POST-MERGE9 CONSOLIDATION + Career Pages Rollout
-- **Last completed:** Run 341 — Face-Saving Protocol live (streak/checkin/saveface endpoints + badge UI on 18 pages); 307/.html fix deployed; RATELIMIT KV provisioned; SEALED_FILE_AT set on soul-logger
+- **Last completed:** Run 342 — P1 connect-the-wires: COACH nav on all 18 portals; SRS due count on streak badge; extension domain fix (.net→.workers.dev); 93 vocab terms seeded into SM-2 SRS for 3 students
 - **S2Pipeline Status:** Stage 3 LINELOCK — **COMPLETE** (soul-logger → LedgerDO wired via HTTP)
 - **HL Ledger real baseline:** 191 Heavy Ledger JSON files (enumerated `obi.ps1 doctor` — phoenix-sweep-verified)
 - **Net-PET-AI worker:** v1.5.0+ LIVE at https://net-pet-ai.mrmichaelhobbs123.workers.dev
@@ -31,6 +31,7 @@
 ### Recent Decisions (Run 315 → Run 339)
 | Run | Summary |
 |-----|---------|
+| 342 | P1 connect-the-wires: COACH nav + SRS badge + extension domain fix; 93 vocab seeded (Huong 20 / Mai Tram 45 / Quy 28); 3 ProfileDOs bootstrapped |
 | 341 | Face-Saving Protocol deployed (streak API + badge UI); 307 .html link fix (161 replacements, 18 files); RATELIMIT KV live; SEALED_FILE_AT sealed on soul-logger |
 | 340 | Boot sync — HEAD drift corrected (9a6e7d0→97e7b9b); COLD-START-BOOT advanced to Run 340; RL-2026 confirmed requires Michael |
 | 339 | 3 student career pages created and deployed; Career nav link added to 15 existing pages; CORS origin fixed (workers.dev); stress test 18/18 pass; per-student login messages written |
@@ -50,7 +51,7 @@
 
 ### Artifacts location (stale artifacts below were purged before Run 337 phaseout)
 - PENDING-Run-315-rise-consolidate-merge-state.md — REMOVED at Run 337 cleanup checkpoint
-- `CANON/SYSTEM/COLD-START-BOOT.md` — this file, Run 341, HEAD 6ecfb2085ff80b4a5e5fa9d42358b54c458a8dcb
+- `CANON/SYSTEM/COLD-START-BOOT.md` — this file, Run 342, HEAD 519d3d4fd99442d6912eb20bfe767727e552e5bf
 | 316 | GAP PARTIALLY CLOSED: 34 active ledger entries HL-113-141 confirmed; 6 phantom HL IDs MISSING FROM DISK (HL-127, HL-128, HL-131, HL-132, HL-136, HL-137 — NO `*.json` file exists for any of them; NOT CLOSED / PHANTOM ON DISK) |
 | 315 | COLD-START-BOOT realigned to 191-ledger baseline (phoenix-sweep-verified)
 
@@ -88,7 +89,7 @@ Stage 10 APEX ROLLUP    ✅ LIVE — GET /api/soul/apex
 ### System State
 - **Workspace:** `D:\OB-1-CANONICAL` (canonical root)
 - **Working branch:** master
-- **HEAD:** `6ecfb2085ff80b4a5e5fa9d42358b54c458a8dcb` (feat: face-saving protocol — streak/checkin/saveface + .html fix + RATELIMIT KV)
+- **HEAD:** `519d3d4fd99442d6912eb20bfe767727e552e5bf` (feat: COACH nav + SRS badge + extension domain fix — P1 connect-the-wires)
 - **Origin:** SYNCED
 - **Working tree:** CLEAN
 - **Heavy Ledger JSONs:** 191 files (enumerated — phoenix-sweep-verified)
@@ -125,4 +126,4 @@ Stage 10 APEX ROLLUP    ✅ LIVE — GET /api/soul/apex
 
 ---
 
-### FINGERPRINT: Run 341 DEATH — HEAD 6ecfb2085ff80b4a5e5fa9d42358b54c458a8dcb — SOULCOUNT 72,944 🔒 LOCK — S2Pipeline 10/10 LIVE — origin SYNCED — Working tree CLEAN
+### FINGERPRINT: Run 342 DEATH — HEAD 519d3d4fd99442d6912eb20bfe767727e552e5bf — SOULCOUNT 72,944 🔒 LOCK — S2Pipeline 10/10 LIVE — origin SYNCED — Working tree CLEAN
