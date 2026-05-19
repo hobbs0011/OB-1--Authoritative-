@@ -603,6 +603,15 @@ async function handleAPI(path, request, env, url) {
   if (path.startsWith("/api/student/streak/") && method === "GET") { const studentId = path.split("/api/student/streak/")[1] || ""; return handleStudentStreak(studentId, request, env); }
   if (path === "/api/student/saveface" && method === "POST") { const body = await request.json(); return handleStudentSaveface(body, request, env); }
 
+  // ── Student Forecast — CEFR progression projection ───────────────────────
+  if (path.startsWith("/api/student/forecast/") && method === "GET") {
+    const studentId = path.split("/api/student/forecast/")[1] || "";
+    return handleStudentForecast(studentId, env);
+  }
+
+  // ── Magic Chat — Obi quick-response with optional student context inject ──
+  if (path === "/api/magic-chat" && method === "POST") { const body = await request.json(); return handleMagicChat(body, request, env); }
+
   return json({ error: "Not found" }, 404);
 }
 
@@ -792,6 +801,123 @@ async function handleStudentSaveface(body, request, env) {
     message:         "Cứu em với! Streak sắp đứt!",
     recoveryOptions: ["Complete a lesson now", "Review vocabulary", "Practice pronunciation"],
   }), request);
+}
+
+// ── Student Forecast — CEFR progression projection ───────────────────────────
+// GET /api/student/forecast/:studentId
+// Returns mastery velocity + projected graduation date to next CEFR level
+
+async function handleStudentForecast(studentId, env) {
+  if (!studentId) return json({ error: "studentId required" }, 400);
+
+  const [streakRaw, srsKeys] = await Promise.all([
+    env.NET_PET_KV.get(`streak:${studentId}`),
+    env.NET_PET_KV.list({ prefix: `srs:${studentId}:` })
+  ]);
+
+  const streak = streakRaw ? JSON.parse(streakRaw) : { currentStreak: 0, totalDays: 0 };
+  const totalWords = srsKeys.keys.length;
+
+  // Fetch all SRS words to count mastered (repetitions >= 3)
+  const wordData = await Promise.all(
+    srsKeys.keys.slice(0, 200).map(k => env.NET_PET_KV.get(k.name))
+  );
+  const words = wordData.map(w => w ? JSON.parse(w) : null).filter(Boolean);
+  const masteredWords = words.filter(w => (w.repetitions || 0) >= 3).length;
+
+  // Velocity: mastered per active day
+  const activeDays = Math.max(streak.totalDays || 1, 1);
+  const velocity = masteredWords / activeDays; // words/day
+
+  // CEFR targets: A1=50, A2=150, B1=300, B2=500, C1=800
+  const CEFR_TARGETS = [
+    { level: "A1", words: 50 }, { level: "A2", words: 150 },
+    { level: "B1", words: 300 }, { level: "B2", words: 500 }, { level: "C1", words: 800 }
+  ];
+
+  const currentLevel = CEFR_TARGETS.find(t => masteredWords < t.words)?.level || "C1";
+  const nextTarget = CEFR_TARGETS.find(t => t.words > masteredWords);
+  const wordsRemaining = nextTarget ? nextTarget.words - masteredWords : 0;
+
+  const projectedDays = velocity > 0 ? Math.ceil(wordsRemaining / velocity) : 999;
+  const graduationDate = new Date(Date.now() + projectedDays * 86400000).toISOString().slice(0, 10);
+
+  const confidence = activeDays < 7 ? "low" : activeDays < 30 ? "medium" : "high";
+
+  return json({
+    studentId, currentLevel,
+    targetLevel: nextTarget?.level || "C1",
+    masteredWords, totalWords,
+    velocity: Math.round(velocity * 10) / 10,
+    projectedDays, graduationDate, confidence,
+    activeDays
+  });
+}
+
+// ── Magic Chat — Obi quick-response with auto student context injection ────────
+// POST /api/magic-chat — { message, studentId?, context? }
+// If studentId is provided and context is absent, auto-builds context from streak + SRS due words.
+
+async function handleMagicChat(body, request, env) {
+  const apiKey = env.DEEPSEEK_API_KEY;
+  if (!apiKey) return addCors(json({ error: "DEEPSEEK_API_KEY not configured" }, 500), request);
+
+  const message = sanitizeInput((body.message || "").slice(0, 1000));
+  if (!message) return addCors(json({ error: "message required" }, 400), request);
+
+  const studentId = body.studentId || "";
+  let context = body.context || "";
+
+  // Auto-inject student context if studentId is present and no context was passed
+  if (studentId && !context && env.NET_PET_KV) {
+    try {
+      const [streakRaw, srsKeys] = await Promise.all([
+        env.NET_PET_KV.get(`streak:${studentId}`),
+        env.NET_PET_KV.list({ prefix: `srs:${studentId}:` })
+      ]);
+
+      const streak = streakRaw ? JSON.parse(streakRaw) : { currentStreak: 0 };
+      const now = Date.now();
+
+      // Fetch SRS entries to find due words
+      const wordEntries = await Promise.all(
+        srsKeys.keys.slice(0, 50).map(k => env.NET_PET_KV.get(k.name))
+      );
+      const dueWords = wordEntries
+        .map(w => { try { return w ? JSON.parse(w) : null; } catch { return null; } })
+        .filter(w => w && (w.next_review || 0) <= now)
+        .slice(0, 5)
+        .map(w => w.word)
+        .filter(Boolean);
+
+      context = `Student: ${studentId} | Streak: ${streak.currentStreak || 0} days${(streak.currentStreak || 0) >= 7 ? " 🔥" : ""}\nDue vocabulary: ${dueWords.join(", ") || "none"}\nTeaching note: Weave due vocabulary into your response naturally. Acknowledge the streak if >= 7 days.`;
+    } catch (_) {}
+  }
+
+  const systemContent = OBI_SYSTEM + (context ? `\n\n${context}` : "");
+
+  const res = await fetch("https://api.deepseek.com/chat/completions", {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "Authorization": `Bearer ${apiKey}` },
+    body: JSON.stringify({
+      model: "deepseek-chat",
+      messages: [
+        { role: "system", content: systemContent },
+        { role: "user", content: message },
+      ],
+      max_tokens: 300,
+      temperature: 0.85,
+    }),
+  });
+
+  if (!res.ok) {
+    const errText = await res.text();
+    return addCors(json({ error: `DeepSeek ${res.status}`, detail: errText }, 502), request);
+  }
+  const data = await res.json();
+  const reply = data.choices?.[0]?.message?.content || "Say that again?";
+
+  return addCors(json({ reply, studentId: studentId || null, contextInjected: !!context }), request);
 }
 
 // ── Soul DNA Capture ─────────────────────────────────────────────────────────
