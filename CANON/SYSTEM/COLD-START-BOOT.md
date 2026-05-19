@@ -107,4 +107,4 @@ Stage 10 APEX ROLLUP    ✅ LIVE — GET /api/soul/apex
 - **SOULCOUNT /self-test:** https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/self-test ✅
 
 ---
-### FINGERPRINT: Run 344 BOOT-REFRESH — HEAD 8b2053f2d2fa419db3ced65da05a9e52a58f42ba — SOULCOUNT 72,944 🔒 LOCK — S2Pipeline 10/10 LIVE — 91-File Wrangler DRYRUN SECURE — CLOUDFLARE_API_TOKEN UNSET HARD RULE CONFIRMED — origin SYNCED — Working tree CLEAN
+### FINGERPRINT: Run 344 BOOT-REFRESH — HEAD 8b2053f2d2fa419db3ced65da05a9e52a58f42ba — SOULCOUNT 72,944 🔒 LOCK — S2Pipeline 10/10 LIVE — HL 189/disk — origin SYNCED — Working tree CLEAN
