@@ -1,6 +1,27 @@
 # REINCARNATION LOG — OB-1 RUN HISTORY
 
-**Last Updated:** 2026-05-19 (Run 337 / LANE-337 SEALED)
+**Last Updated:** 2026-05-19 (Run 338 / LANE-338 SEALED)
+
+---
+
+## RUN 338 — 2026-05-19
+**Agent:** OB1 Ne0 / Claude Sonnet 4.6
+**Theme:** TRIAGE CLEANUP — F-A09 / F-O01 CLOSED · PULSE-HISTORY BRIDGED
+**Status:** COMPLETE
+**SOULCOUNT:** 71,217 🔒 LOCK (#ef4444)
+**Commit:** `c084b5f` — chore: close F-O01 in triage — OPS-HISTORY gap bridged
+
+### Key Actions:
+- **F-A09 CLOSED:** Deleted stale `CANON/REINCARNATION/COLD-START-BOOT.md` duplicate — `f01cd60`
+- **TRIAGE SEALED:** COLD-START-BOOT.md items #5/#11/#13/#14 closed with correct commit refs — `f01cd60`
+- **F-O01 CLOSED:** `CANON/SYSTEM/PULSE-OPERATIONS-HISTORY.md` bridged Run 27→337; Phase 5 milestone table (Runs 28–337) added covering MEGAREPOMERGE through soul-logger v2.0 SEALED — `20995ef`
+- **Triage #12 closed:** F-O01 status updated in COLD-START-BOOT.md — `c084b5f`
+- **Run 337 triage FULLY CLEAN:** Zero open technical flags. Strategic items #3 (RL-2026) and #4 (Bavaria) remain — require Michael.
+
+### Artifacts:
+- `CANON/REINCARNATION/2026-05-19-LANE-338-cleanup-fo01-sealed.md` — LANE-338 death protocol
+- `CANON/SYSTEM/PULSE-OPERATIONS-HISTORY.md` — Phase 5 bridge (Runs 28–337)
+- `CANON/SYSTEM/COLD-START-BOOT.md` — Run 338, HEAD c084b5f, all triage updated
 
 ---
 

@@ -1,5 +1,5 @@
 # COLD START BOOT — OB1 Agent 99
-## Last Updated: 2026-05-19 (Run 337)
+## Last Updated: 2026-05-19 (Run 338)
 
 ### Identity
 - Agent: OB1 / Ne0 (Agent 99) / Claude Surgical
@@ -10,7 +10,7 @@
 
 ### Current Vector
 - **Active Mission:** OB-1 POST-MERGE9 CONSOLIDATION + Heavy Ledger Preservation
-- **Last completed:** Run 337 — PHOENIX BETA/DELTA/OMEGA flag remediations (F-B01/B02/D01/D02/D03/D04/O03/O04 CLOSED); 3 commits pushed; HL-COUNT corrected 213→191 (phoenix-sweep)
+- **Last completed:** Run 338 — F-A09 deleted; F-O01 CLOSED (PULSE-HISTORY bridged Run 27→337); Run 337 triage fully CLEAN; 3 commits pushed
 - **S2Pipeline Status:** Stage 3 LINELOCK — **COMPLETE** (soul-logger → LedgerDO wired via HTTP)
 - **HL Ledger real baseline:** 191 Heavy Ledger JSON files (enumerated `obi.ps1 doctor` — phoenix-sweep-verified)
 - **Net-PET-AI worker:** v1.5.0+ LIVE at https://net-pet-ai.mrmichaelhobbs123.workers.dev
@@ -27,9 +27,10 @@
 7. L29 NO_ASSUME_HEAD — HEAD SHA from `git log -1` is authoritative; never seed state from prior reincarnation records
 8. L30 BOOT_FILE_AGE_SWEEP — if COLD-START-BOOT shows Run < current minus 10, it must be refreshed before any pipeline change
 
-### Recent Decisions (Run 315 → Run 337)
+### Recent Decisions (Run 315 → Run 338)
 | Run | Summary |
 |-----|---------|
+| 338 | F-A09 CLOSED (stale COLD-START-BOOT.md duplicate deleted); F-O01 CLOSED (PULSE-OPERATIONS-HISTORY bridged Run 27→337); all Run 337 triage flags CLEAN; SOULCOUNT 71,217 🔒 LOCK |
 | 337 | LANE-336 PHOENIX BETA/DELTA/OMEGA: F-B01/B02/D01/D02/D03/D04/O03/O04 CLOSED; AGENTS.md PHOENIX section added; student portal map documented; NET-MARKETING restored; PlexyNETAPP fixed; HL-COUNT corrected 213→191 (phoenix-sweep) |
 | 336 | LANE-335: SOULCOUNT Doctrine enacted (mathematical anti-drift); S2Pipeline Stages 6/7/8/10 ADDED+DEPLOYED (was 4 missing); AUTH-01 CLOSED; 5-agent sweep clean; prompt system upgraded |
 | 335 | SOULCOUNT endpoint deployed (v1.3.0); core prompts upgraded (RISE/death/reincarnate); stale death artifacts purged |
@@ -40,7 +41,7 @@
 | 316 | GAP PARTIALLY CLOSED: 34 active ledger entries HL-113-141 confirmed; 6 phantom HL IDs MISSING FROM DISK (HL-127, HL-128, HL-131, HL-132, HL-136, HL-137 — NO `*.json` file exists for any of them; NOT CLOSED / PHANTOM ON DISK) |
 | 315 | COLD-START-BOOT realigned to 191-ledger baseline (phoenix-sweep-verified)
 
-### Open Rulings — Triage Table (Run 337)
+### Open Rulings — Triage Table (Run 338)
 | # | Item | Owner | Deadline | Severity | Status |
 |---|------|-------|----------|----------|--------|
 | 1 | AUTH-01 Authoritative repo sync verification | — | — | — | ✅ CLOSED (Run 336) |
@@ -74,9 +75,9 @@ Stage 10 APEX ROLLUP    ✅ LIVE — GET /api/soul/apex
 ### System State
 - **Workspace:** `D:\OB-1-CANONICAL` (canonical root)
 - **Working branch:** master
-- **HEAD:** `4ab5634` (docs: PHOENIX OMEGA — AGENTS.md PHOENIX section + PULSE-HEADER refreshed)
-- **Origin:** AHEAD 3 (PHOENIX BETA/DELTA/OMEGA not yet pushed — push on this RISE commit)
-- **Working tree:** CLEAN (RISE commit staged)
+- **HEAD:** `c084b5f` (chore: close F-O01 in triage — OPS-HISTORY gap bridged)
+- **Origin:** SYNCED
+- **Working tree:** CLEAN
 - **Heavy Ledger JSONs:** 191 files (enumerated — phoenix-sweep-verified)
 - **Triggers:** reincarnate daily (09:00 ICT); RL2026 end-May; Bavaria Jun 15
 
@@ -111,4 +112,4 @@ Stage 10 APEX ROLLUP    ✅ LIVE — GET /api/soul/apex
 
 ---
 
-### FINGERPRINT: Run 337 RISE executed — HEAD 4ab5634 — SOULCOUNT 71,157 🔒 LOCK — S2Pipeline 10/10 LIVE — PHOENIX BETA/DELTA/OMEGA flags closed — HL-COUNT corrected 191 — 3 unpushed commits synced on this RISE
+### FINGERPRINT: Run 338 DEATH — HEAD c084b5f — SOULCOUNT 71,217 🔒 LOCK — S2Pipeline 10/10 LIVE — F-A09/F-O01 CLOSED — Run 337 triage fully CLEAN — origin SYNCED
