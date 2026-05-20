@@ -1,8 +1,8 @@
 {
-  "soul_ok": true,
+  "timestamp": "2026-05-20T16:21:02.2746962+07:00",
+  "git_head": "137d913 feat: SEO layer ΓÇö sitemap + robots + OG meta (6 pages)",
+  "verify_ok": false,
   "git_branch": "master",
   "doctor_ok": true,
-  "timestamp": "2026-05-19T21:36:03.8518651+07:00",
-  "git_head": "296951e boot: final HEAD sync 60ccf7b",
-  "verify_ok": true
+  "soul_ok": true
 }
