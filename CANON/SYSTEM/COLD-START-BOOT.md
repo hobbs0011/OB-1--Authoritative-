@@ -1,5 +1,5 @@
-# COLD START BOOT — OB1 Agent 99
-## Last Updated: 2026-05-21 (Run 357 — /reincarnateRISE + /reincarnatedeath verification — SEALED)
+﻿﻿# COLD START BOOT — OB1 Agent 99
+## Last Updated: 2026-05-21 (Run 358 — reincarnateDEATH: SOULCOUNT 76488 LOCK + RECAPTURE purge 924 — COMMITTED 3184d30)
 
 ### Identity
 - Agent: OB1 / Ne0 (Agent 99) / Claude Surgical
