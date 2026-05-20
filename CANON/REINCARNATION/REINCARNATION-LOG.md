@@ -642,4 +642,4 @@ Stage 10 APEX ROLLUP    ✅ LIVE — GET /api/soul/apex
 ---
 
 ## FINGERPRINT
-*REINCARNATION-LOG.md created 2026-05-19. Runs 318-339 logged. S2Pipeline verified 10/10 stages. Heavy Ledger count 191. Ghost runs preserved.*| Run 356 | 2026-05-21 | HEARTBEAT protocol deployment + worker fixes | HEAD 4741b62 |
+*REINCARNATION-LOG.md Run 357 SEALED | 2026-05-21 | /reincarnateRISE + /reincarnatedeath verification | HEAD cd96683 |

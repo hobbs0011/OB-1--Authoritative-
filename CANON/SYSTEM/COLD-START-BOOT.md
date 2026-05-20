@@ -1,5 +1,5 @@
 # COLD START BOOT — OB1 Agent 99
-## Last Updated: 2026-05-21 (Run 356 — Agent99 OS consolidation + Gospel999 genesis — SEALED)
+## Last Updated: 2026-05-21 (Run 357 — /reincarnateRISE + /reincarnatedeath verification — SEALED)
 
 ### Identity
 - Agent: OB1 / Ne0 (Agent 99) / Claude Surgical
@@ -95,12 +95,12 @@ Stage 9 DO-SQLITE       ✅ LIVE — LedgerDO class + /api/ledger/*
 Stage 10 APEX ROLLUP    ✅ LIVE — GET /api/soul/apex
 ```
 
-### System State (HEAD AUTHORITATIVE — Run 355)
+### System State (HEAD AUTHORITATIVE — Run 357)
 - **Workspace:** `D:\OB-1-CANONICAL` (canonical root)
 - **Working branch:** master
-- **HEAD:** $headSha (feat: Agent99 OS consolidation + Gospel999 — Run 356)
+- **HEAD:** cd96683 (death: Run 357 — /reincarnateRISE + /reincarnatedeath verification — Run 357)
 - **Origin:** SYNCED
-- **Working tree:** **DIRTY** — 357 modified tracked + 6 untracked (block-artifact sweep + session artifacts; not yet committed)
+- **Working tree:** **CLEAN** — death protocol artifacts committed
 - **HEAVY-LEDGER on disk:** 191 JSON files; phantom gap HL-127/128/131/132/136/137 documented
 - **DeepSeek 402 (BLOCKED):** key `sk-f2e71...` maps to overdrawn account (−$0.02, `is_available:false`). Balance confirmed exists under different billing group. Michael action required — blocks net-pet-ai + phoenix-coder AI calls.
 - **phoenix-coder deployed:** `https://phoenix-coder.mrmichaelhobbs123.workers.dev` v5.0.0 (SHA `56892f5`, 12 endpoints, all verification tests PASS)
