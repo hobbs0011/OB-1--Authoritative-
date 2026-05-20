@@ -654,7 +654,198 @@ async function handleAPI(path, request, env, url) {
   // ── Waitlist — Phase 2 free trial funnel (100-seat cap) ───────────────────
   if (path === "/api/waitlist" && method === "POST") { const body = await request.json(); return handleWaitlistJoin(body, env); }
   if (path === "/api/waitlist/count" && method === "GET") { return handleWaitlistCount(env); }
-  if (path === "/api/waitlist/list" && method === "GET") { return handleWaitlistList(env); }
+  else if (path === "/api/waitlist/list" && method === "GET") { return handleWaitlistList(env); }
+
+  // ── DELETE /api/vocab/delete ──────────────────────────────────────────────
+  else if (method === "DELETE" && path.includes("/api/vocab/delete")) {
+    try {
+      const body = await request.json().catch(() => ({}));
+      const { studentId, vocabId } = body;
+      if (!studentId || !vocabId) return json({ error: "studentId and vocabId required" }, 400);
+      const key = `vocab:${studentId}:${vocabId}`;
+      const existing = await env.NET_PET_KV.get(key);
+      if (!existing) return json({ error: "Vocabulary word not found" }, 404);
+      await env.NET_PET_KV.delete(key);
+      return json({ success: true });
+    } catch (err) {
+      return json({ error: String(err) }, 500);
+    }
+  }
+
+  // ── GET/POST /api/student/goals ───────────────────────────────────────────
+  else if (path.includes("/api/student/goals")) {
+    if (method === "GET") {
+      const studentId = path.split("?studentId=")[1]?.split("&")[0];
+      if (!studentId) return json({ error: "studentId query param required" }, 400);
+      const raw = await env.NET_PET_KV.get(`goals:${studentId}`);
+      if (!raw) return json({ targetScore: null, deadlineDays: null });
+      return json(JSON.parse(raw));
+    }
+    if (method === "POST") {
+      try {
+        const body = await request.json().catch(() => ({}));
+        const { studentId, targetScore, deadlineDays } = body;
+        if (!studentId || targetScore == null || deadlineDays == null) {
+          return json({ error: "studentId, targetScore, deadlineDays required" }, 400);
+        }
+        const goal = { studentId, targetScore: Number(targetScore), deadlineDays: Number(deadlineDays), createdAt: new Date().toISOString() };
+        await env.NET_PET_KV.put(`goals:${studentId}`, JSON.stringify(goal));
+        return json({ success: true, goal });
+      } catch (err) {
+        return json({ error: String(err) }, 500);
+      }
+    }
+  }
+
+  // ── GET /api/challenge/today ──────────────────────────────────────────────
+  else if (method === "GET" && path.includes("/api/challenge/today")) {
+    const today = new Date().toISOString().slice(0, 10);
+    const raw = await env.NET_PET_KV.get(`challenge:${today}`);
+    if (raw) {
+      const q = JSON.parse(raw);
+      const { correctAnswer, ...safe } = q;
+      return json(safe);
+    }
+    const CHALLENGE_BANK = [
+      {q:"Choose the correct verb: She ___ to school every day.", o:["go","goes","going","gone"],a:"goes"},
+      {q:"Which is the plural of 'child'?", o:["childs","children","childes","childern"],a:"children"},
+      {q:"Fill in: I have ___ a book.", o:["read","readed","reading","reads"],a:"read"},
+      {q:"What is the opposite of 'hot'?", o:["cold","warm","cool","wet"],a:"cold"},
+      {q:"Which sentence is correct?", o:["He don't like it.","He doesn't like it.","He not like it.","He no like it."],a:"He doesn't like it."},
+    ];
+    const questionNum = Math.floor(Math.random() * 30) + 1;
+    const pool = CHALLENGE_BANK.length > 0 ? CHALLENGE_BANK : [{q:"Default Q",o:["A","B","C","D"],a:"A"}];
+    const pick = pool[questionNum % pool.length];
+    const qObj = { question: pick.q, options: pick.o, correctAnswer: pick.a,
+      difficulty: "A1-A2", category: "grammar", generatedAt: new Date().toISOString(), expiresAt: new Date(Date.now() + 86400000).toISOString() };
+    await env.NET_PET_KV.put(`challenge:${today}`, JSON.stringify(qObj), { expirationTtl: 86400 });
+    const { correctAnswer, ...safeQ } = qObj;
+    return json(safeQ);
+  }
+
+  // ── POST /api/challenge/answer ────────────────────────────────────────────
+  else if (method === "POST" && path.includes("/api/challenge/answer")) {
+    try {
+      const body = await request.json().catch(() => ({}));
+      const { studentId, answer } = body;
+      if (!studentId || answer == null) return json({ error: "studentId and answer required" }, 400);
+      const today = new Date().toISOString().slice(0, 10);
+      const raw = await env.NET_PET_KV.get(`challenge:${today}`);
+      if (!raw) return json({ error: "No challenge for today. Get today's challenge first.", correct: false }, 404);
+      const q = JSON.parse(raw);
+      const correct = String(answer).trim().toLowerCase() === String(q.correctAnswer).trim().toLowerCase();
+      const resultKey = `challenge:result:${studentId}:${today}`;
+      await env.NET_PET_KV.put(resultKey, JSON.stringify({ studentId, answer, correct, checkedAt: new Date().toISOString() }));
+      return json({
+        correct,
+        correctAnswer: q.correctAnswer,
+        explanation: correct ? "Correct! Well done." : `Not quite. The correct answer is "${q.correctAnswer}".`,
+        date: today
+      });
+    } catch (err) {
+      return json({ error: String(err) }, 500);
+    }
+  }
+
+  // ── GET /api/employer/profile ─────────────────────────────────────────────
+  else if (method === "GET" && path.includes("/api/employer/profile")) {
+    const code = url.searchParams.get("employerCode");
+    if (!code) return json({ error: "employerCode query param required" }, 400);
+    const raw = await env.NET_PET_KV.get(`employer:${code}`);
+    if (!raw) return json({ error: "Employer not found" }, 404);
+    return json(JSON.parse(raw));
+  }
+
+  // ── GET /api/referral/stats ───────────────────────────────────────────────
+  else if (method === "GET" && path.includes("/api/referral/stats")) {
+    try {
+      const waitlistJson = await env.NET_PET_KV.get("waitlist:index");
+      let totalWaitlist = 0, totalSent = 0, totalConverted = 0, topName = null, topScore = 0;
+      const entries = waitlistJson ? JSON.parse(waitlistJson) : [];
+      for (const id of entries) {
+        const w = env.NET_PET_KV ? await env.NET_PET_KV.get(`waitlist:${id}`).then(r => r ? JSON.parse(r) : null).catch(() => null) : null;
+        if (!w || !w.isActive) continue;
+        totalWaitlist++;
+        const n = w.referredCount || 0;
+        totalSent += n;
+        if (n > topScore) { topScore = n; topName = w.name || "top referrer"; }
+        if (w.status === "converted") totalConverted++;
+      }
+      const conv = totalWaitlist > 0 ? ((totalConverted / totalWaitlist) * 100).toFixed(1) + "%" : "0%";
+      return json({
+        totalWaitlist: totalWaitlist + 0, totalSent, totalConversions: totalConverted,
+        conversionRate: conv, topReferrer: { name: topName, converted: topScore }
+      });
+    } catch (err) {
+      return json({ error: String(err) }, 500);
+    }
+  }
+
+  // ── GET /api/student/achievements ─────────────────────────────────────────
+  else if (method === "GET" && path.includes("/api/student/achievements")) {
+    try {
+      const sid = url.searchParams.get("studentId");
+      if (!sid) return json({ error: "studentId query param required" }, 400);
+      const cached = await env.NET_PET_KV.get(`achievements:${sid}`);
+      if (cached) return json(JSON.parse(cached));
+      const goalRaw = await env.NET_PET_KV.get(`goals:${sid}`);
+      const today = new Date().toISOString().slice(0, 10);
+      let correct30 = 0;
+      for (let i = 0; i < 30; i++) {
+        const d = new Date(); d.setDate(d.getDate() - i);
+        const rk = `challenge:result:${sid}:${d.toISOString().slice(0,10)}`;
+        const r = await env.NET_PET_KV.get(rk).then(raw => raw ? JSON.parse(raw) : null).catch(() => null);
+        if (r && r.correct) correct30++;
+      }
+      const allBadges = [
+        { id:"first_steps",  name:"First Steps",     icon:"👣", desc:"Set your first goal",                    check:()=>!!goalRaw },
+        { id:"scholar_10",   name:"Sharp Scholar",   icon:"📚", desc:"10 correct daily challenges in 30 days", check:()=>correct30 >= 10 },
+      ];
+      const badges = allBadges.map(b => ({ id:b.id, name:b.name, icon:b.icon, desc:b.desc, unlocked: !!b.check(), unlockedAt: b.check() ? new Date().toISOString() : null }));
+      await env.NET_PET_KV.put(`achievements:${sid}`, JSON.stringify(badges), { expirationTtl: 3600 });
+      return json({ badges });
+    } catch (err) {
+      return json({ error: String(err) }, 500);
+    }
+  }
+
+  // ── POST /api/student/onboard ─────────────────────────────────────────────
+  else if (method === "POST" && path.includes("/api/student/onboard")) {
+    try {
+      const body = await request.json().catch(() => ({}));
+      const { studentId, cefr, goal, notificationPrefs } = body;
+      if (!studentId) return json({ error: "studentId required" }, 400);
+      const prefs = notificationPrefs || {};
+      await env.NET_PET_KV.put(`onboard:${studentId}`, JSON.stringify({
+        studentId, cefr: cefr || "A1", goal: goal || "general_english",
+        notificationPrefs: prefs,
+        completedAt: new Date().toISOString()
+      }));
+      return json({ success: true, studentId, message: "Onboarding complete." });
+    } catch (err) {
+      return json({ error: String(err) }, 500);
+    }
+  }
+
+  // ── GET/POST /api/notify/prefs ────────────────────────────────────────────
+  else if (path.includes("/api/notify/prefs")) {
+    if (method === "GET") {
+      const sid = path.split("?studentId=")[1]?.split("&")[0];
+      if (!sid) return json({ error: "studentId query param required" }, 400);
+      const raw = await env.NET_PET_KV.get(`notify:${sid}`);
+      return json(raw ? JSON.parse(raw) : { zaloId:"", email:"", preferredTime:"09:00", frequency:"daily", smsEnabled: false });
+    }
+    try {
+      const body = await request.json().catch(() => ({}));
+      const { studentId, zaloId, email, preferredTime, frequency, smsEnabled } = body;
+      if (!studentId || !zaloId) return json({ error: "studentId and zaloId required" }, 400);
+      const prefs = { studentId, zaloId, email: email||"", preferredTime: preferredTime||"09:00", frequency: frequency||"daily", smsEnabled: !!smsEnabled, updatedAt: new Date().toISOString() };
+      await env.NET_PET_KV.put(`notify:${studentId}`, JSON.stringify(prefs));
+      return json({ success: true, prefs });
+    } catch (err) {
+      return json({ error: String(err) }, 500);
+    }
+  }
 
   return json({ error: "Not found" }, 404);
 }
