@@ -1,5 +1,0 @@
-﻿# PROOF - ICONDISPLAY5 LAST
-
-Source: D:\phoenix-chat-logs\CHAT-LOGS-ONLY\ICONDISPLAY5.txt
-
-

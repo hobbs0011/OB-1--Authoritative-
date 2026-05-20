@@ -1,5 +1,0 @@
-﻿# PROOF - COMMANDSCRIPTSDUMP LAST
-
-Source: D:\phoenix-chat-logs\CHAT-LOGS-ONLY\COMMANDSCRIPTSDUMP.txt
-
-

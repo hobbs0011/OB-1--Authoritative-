@@ -1,5 +1,0 @@
-﻿# PROOF - RAW-PHOENIX-GPT-18 LAST
-
-Source: D:\phoenix-chat-logs\CHAT-LOGS-ONLY\RAW-PHOENIX-GPT-18.txt
-
-

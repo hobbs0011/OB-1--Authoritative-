@@ -1,5 +1,0 @@
-﻿# PROOF - 99_ARCHIVE_DUMPS FIRST
-
-Source: D:\phoenix-chat-logs\CHAT-LOGS-ONLY\99_ARCHIVE_DUMPS.txt
-
-T

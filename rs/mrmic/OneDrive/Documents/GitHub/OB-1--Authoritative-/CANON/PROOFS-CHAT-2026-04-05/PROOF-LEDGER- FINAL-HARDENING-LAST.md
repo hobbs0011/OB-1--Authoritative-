@@ -1,5 +1,0 @@
-﻿# PROOF - LEDGER- FINAL-HARDENING LAST
-
-Source: D:\phoenix-chat-logs\CHAT-LOGS-ONLY\LEDGER- FINAL-HARDENING.txt
-
-

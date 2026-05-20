@@ -1,5 +1,0 @@
-﻿# PROOF - PLEX 16-20 - SUMPERDUMPS LAST
-
-Source: D:\phoenix-chat-logs\CHAT-LOGS-ONLY\PLEX 16-20 - SUMPERDUMPS.txt
-
-

@@ -1,5 +1,0 @@
-﻿# PROOF - ALPHA-OMEGA-DNA5 LAST
-
-Source: D:\phoenix-chat-logs\CHAT-LOGS-ONLY\ALPHA-OMEGA-DNA5.txt
-
-

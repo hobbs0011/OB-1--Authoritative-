@@ -1,5 +1,0 @@
-﻿# PROOF - OP(ZEN)-1000-LAYERS-5 LAST
-
-Source: D:\phoenix-chat-logs\CHAT-LOGS-ONLY\OP(ZEN)-1000-LAYERS-5.txt
-
-

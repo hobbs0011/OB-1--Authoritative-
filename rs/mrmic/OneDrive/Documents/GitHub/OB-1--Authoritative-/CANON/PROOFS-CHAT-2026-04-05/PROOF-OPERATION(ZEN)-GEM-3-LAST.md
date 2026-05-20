@@ -1,5 +1,0 @@
-﻿# PROOF - OPERATION(ZEN)-GEM-3 LAST
-
-Source: D:\phoenix-chat-logs\CHAT-LOGS-ONLY\OPERATION(ZEN)-GEM-3.txt
-
-

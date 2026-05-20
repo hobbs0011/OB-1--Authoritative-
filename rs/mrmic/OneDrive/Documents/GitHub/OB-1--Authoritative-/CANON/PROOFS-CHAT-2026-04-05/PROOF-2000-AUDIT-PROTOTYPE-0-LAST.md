@@ -1,5 +1,0 @@
-﻿# PROOF - 2000-AUDIT-PROTOTYPE-0 LAST
-
-Source: D:\phoenix-chat-logs\CHAT-LOGS-ONLY\2000-AUDIT-PROTOTYPE-0.txt
-
-

@@ -1,5 +1,0 @@
-﻿# PROOF - ASSETSSAVED1 LAST
-
-Source: D:\phoenix-chat-logs\CHAT-LOGS-ONLY\ASSETSSAVED1.txt
-
-

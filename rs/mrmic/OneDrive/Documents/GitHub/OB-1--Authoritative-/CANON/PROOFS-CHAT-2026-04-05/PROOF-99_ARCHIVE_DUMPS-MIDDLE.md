@@ -1,5 +1,0 @@
-﻿# PROOF - 99_ARCHIVE_DUMPS MIDDLE
-
-Source: D:\phoenix-chat-logs\CHAT-LOGS-ONLY\99_ARCHIVE_DUMPS.txt
-
-T

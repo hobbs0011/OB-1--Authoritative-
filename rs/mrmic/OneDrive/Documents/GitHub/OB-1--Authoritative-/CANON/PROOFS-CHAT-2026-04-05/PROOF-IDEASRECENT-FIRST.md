@@ -1,5 +1,0 @@
-﻿# PROOF - IDEASRECENT FIRST
-
-Source: D:\phoenix-chat-logs\CHAT-LOGS-ONLY\IDEASRECENT.txt
-
-O

@@ -1,5 +1,0 @@
-﻿# PROOF - LAUNCHPAD-PHOENIX11 LAST
-
-Source: D:\phoenix-chat-logs\CHAT-LOGS-ONLY\LAUNCHPAD-PHOENIX11.txt
-
-
