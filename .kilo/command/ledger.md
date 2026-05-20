@@ -1,38 +1,66 @@
 ---
-description: Query the Phoenix Ledger — read state, append entries, verify integrity
+description: "Query the Heavy Ledger — read entries, verify integrity, view pipeline cursor. Routes to CANON/HEAVY-LEDGER/"
 agent: RISE
 ---
-Execute ledger operations:
 
-**Usage**: `/ledger <environment> <operation> <args>`
+# /ledger
 
-**Environments**: `prod`, `dev`, `staging`
+Heavy Ledger operations against `CANON/HEAVY-LEDGER/`.
 
-**Operations**:
+**Usage**: `/ledger <operation> <args>`
 
-1. **read** — Read latest entry or by index
-   - `/ledger prod read` → latest block
-   - `/ledger prod read 42` → block #42
+**Task:** $ARGUMENTS
 
-2. **append** — Add new entry
-   - `/ledger prod append "<content>"`
+---
 
-3. **head** — Show current head hash
-   - `/ledger prod head`
+## Operations
 
-4. **verify** — Verify ledger integrity (hash chain)
-   - `/ledger prod verify`
+### read — Read ledger entry by ID
 
-5. **snapshot** — Create checkpoint
-   - `/ledger prod snapshot "<description>"`
+```powershell
+Get-Content "D:\OB-1-CANONICAL\CANON\HEAVY-LEDGER\HL-NNN.json" | ConvertFrom-Json
+```
 
-6. **restore** — Restore from checkpoint
-   - `/ledger prod restore <snapshot_id>`
+Replace NNN with zero-padded ID (e.g., HL-001, HL-189).
 
-**Default**: If no environment specified, use `prod`
+### list — Show all ledger files on disk
 
-**Ledgers available**:
-- `CANON/MSS/MSS-V6-HEAVY-LEDGER.json` (procedures)
-- `CANON/LEDGER/` (append-only log)
+```powershell
+Get-ChildItem "D:\OB-1-CANONICAL\CANON\HEAVY-LEDGER\*.json" | Sort-Object Name | Select-Object Name, LastWriteTime
+```
 
-Example: `/ledger dev append "Deploy: NET-PET-AI v1.2.3"`
+### count — Count JSON files vs expected range
+
+```powershell
+$files = Get-ChildItem "D:\OB-1-CANONICAL\CANON\HEAVY-LEDGER\*.json"
+Write-Host "On disk: $($files.Count) files"
+Write-Host "Phantom gaps (documented): HL-127/128/131/132/136/137 — 6 slots"
+```
+
+### head — Current pipeline cursor state
+
+```powershell
+Get-Content "D:\OB-1-CANONICAL\CANON\HEAVY-LEDGER\PIPELINE-CURSOR.md"
+```
+
+### verify — Spot-check a range for gaps
+
+```powershell
+$present = Get-ChildItem "D:\OB-1-CANONICAL\CANON\HEAVY-LEDGER\HL-*.json" |
+  ForEach-Object { [int]($_.BaseName -replace 'HL-', '') }
+$min = $present | Measure-Object -Minimum | Select-Object -ExpandProperty Minimum
+$max = $present | Measure-Object -Maximum | Select-Object -ExpandProperty Maximum
+$gaps = ($min..$max) | Where-Object { $_ -notin $present }
+Write-Host "Range: HL-$min to HL-$max"
+Write-Host "Gaps: $($gaps -join ', ')"
+```
+
+---
+
+## Key Facts
+
+- **191 JSON files on disk** (as of Run 352)
+- **6 documented phantom gaps**: HL-127/128/131/132/136/137 — NOT CLOSED — on disk but empty slots
+- **PIPELINE-CURSOR.md** tracks gap labels and lane state
+- **Ledger path**: `CANON/HEAVY-LEDGER/` — NOT `CANON/MSS/` or `CANON/LEDGER/`
+- New entries: write JSON to `CANON/HEAVY-LEDGER/HL-NNN.json` — never overwrite existing
