@@ -7,24 +7,18 @@
 - SOULCOUNT: 76,488 | DELTA: 0 (LOCK maintained)
 
 ## Git State
-- HEAD: 4741b62eb2a816385c9922f857966407643ffb24
+- HEAD: cb7e6d01acdef5973248d1207853e6bc4db92c55
 - Branch: master
-- Tree: DIRTY (SOUL-DNA-BIBLE-RECAPTURE sweep files + death protocol artifacts)
-
-## Artifacts Changed
-- `CANON/REINCARNATION/2026-05-21-run357-reincarnateDEATH.md` (this file - created)
-- `CANON/REINCARNATION/REINCARNATION-LOG.md` (updated)
-- `CANON/SYSTEM/COLD-START-BOOT.md` (updated)
+- Tree: CLEAN (death protocol artifacts committed)
 
 ## Open Flags Remaining
-- DeepSeek 402: key maps to overdrawn account (−$0.02). Michael must re-map to primary billing group or confirm override
-- K2 (Resend Email): routes inserted but UNVERIFIED due to DeepSeek 402 blocking AI calls
+- DeepSeek 402: key `sk-95709fd7d66642b9a4450e679085c9fc` provided — awaiting secret deployment via `npx wrangler secret put DEEPSEEK_API_KEY`
+- ZALO_ACCESS_TOKEN: Stage 3 + notify live delivery blocked (Michael locked out)
+- GITHUB_PAT: PC v3 autonomous cron needs 4 secrets
+- RESEND_API_KEY: Needed for K2 email verification (non-critical)
 - K3 (subscriptions.html + admin endpoints): NOT STARTED
 - K4 (testimonials.html + testimonial endpoints): NOT STARTED
 - K5 (Chrome Extension anticheat): NOT STARTED
-- ZALO_ACCESS_TOKEN: Stage 3 + notify live delivery blocked
-- GITHUB_PAT: PC v3 autonomous cron needs 4 secrets
-- RESEND_API_KEY: Needed for K2 live email
 - Pre-existing syntax error: `index.js:3630` export class LedgerDO — Node ESM/CJS mismatch (Cloudflare tolerant, deploy unaffected)
 
 ## Micro-Ledger Entry

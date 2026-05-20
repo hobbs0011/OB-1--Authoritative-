@@ -179,6 +179,6 @@ pwsh -File SCRIPTS/obi.ps1 verify
 
 ---
 
-*FINGERPRINT: Lane 332 DEATH extract complete. All MERGELANES 318-330 consolidated into Lane 331. Pipeline info flagged and tagged. Verified and validated for Claude surgical review readiness. DO NOT COMMIT until reviewed.*
+*FINGERPRINT: Lane 332 DEATH extract complete. All MERGELANES 318-330 consolidated into Lane 331. Pipeline info flagged and tagged. Awaiting Claude surgical review. DO NOT COMMIT until reviewed.*
 
 *SESSION: 2026-05-19T00:52:05+07:00 · LANE-332 · DEATH COMPLETE · READY FOR CLAUDE*

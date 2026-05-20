@@ -114,10 +114,17 @@ async function handleHeartbeat(env) {
   const SOUL_LOCK = 76488;
   const results = { ts, soulcount: null, soulDelta: null, soulGate: "UNKNOWN", pcStatus: "UNKNOWN", selfStatus: "UNKNOWN" };
 
+  // Helper to create a fetch with timeout
+  const timeoutFetch = (url, options = {}, timeoutMs = 5000) => {
+    return Promise.race([
+      fetch(url, options),
+      new Promise((_, reject) => setTimeout(() => reject(new Error('Fetch timeout')), timeoutMs))
+    ]);
+  };
+
   // Ping 1 — SOULCOUNT
   try {
-    const r = await fetch("https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count",
-      { signal: AbortSignal.timeout(5000) });
+    const r = await timeoutFetch("https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count");
     const d = await r.json();
     results.soulcount = d.soulcount ?? null;
     const delta = Math.abs((results.soulcount ?? 0) - SOUL_LOCK);
@@ -130,8 +137,7 @@ async function handleHeartbeat(env) {
 
   // Ping 2 — Phoenix Coder
   try {
-    const r = await fetch("https://phoenix-coder.mrmichaelhobbs123.workers.dev/api/status",
-      { signal: AbortSignal.timeout(5000) });
+    const r = await timeoutFetch("https://phoenix-coder.mrmichaelhobbs123.workers.dev/api/status");
     const d = await r.json();
     results.pcStatus = r.ok ? "UP v" + (d.version || "?") : "ERROR " + r.status;
   } catch (err) {
@@ -141,8 +147,7 @@ async function handleHeartbeat(env) {
 
   // Ping 3 — Self (NET-PET-AI /health)
   try {
-    const r = await fetch("https://net-pet-ai.mrmichaelhobbs123.workers.dev/health",
-      { signal: AbortSignal.timeout(5000) });
+    const r = await timeoutFetch("https://net-pet-ai.mrmichaelhobbs123.workers.dev/health");
     const d = await r.json();
     results.selfStatus = d.ok ? "UP" : "DEGRADED";
   } catch (err) {
@@ -153,13 +158,12 @@ async function handleHeartbeat(env) {
   // Log event to soul-logger (fire-and-forget)
   const soulUrl = env.SOUL_LOGGER_URL || "https://soul-logger.mrmichaelhobbs123.workers.dev";
   try {
-    await fetch(soulUrl + "/api/soul/event", {
+    await timeoutFetch(soulUrl + "/api/soul/event", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ type: "HEARTBEAT", soulcount: results.soulcount,
         soulGate: results.soulGate, soulDelta: results.soulDelta,
-        pcStatus: results.pcStatus, selfStatus: results.selfStatus, ts }),
-      signal: AbortSignal.timeout(5000),
+        pcStatus: results.pcStatus, selfStatus: results.selfStatus, ts })
     });
   } catch (err) {
     console.log("[HEARTBEAT] event log failed: " + err.message);
@@ -336,12 +340,13 @@ export default {
       }
     }
 
-    // /api/heartbeat — manual trigger for testing (returns last pulse results)
-    if (path === "/api/heartbeat" && request.method === "GET") {
-      await handleHeartbeat(env);
-      return addCors(json({ triggered: true, ts: new Date().toISOString() }));
-    }
-    // /api/heartbeat — manual trigger for testing (returns last pulse results)\n    if (path === "/api/heartbeat" && request.method === "GET") {\n      await handleHeartbeat(env);\n      return addCors(json({ triggered: true, ts: new Date().toISOString() }));\n    }\n\n    return env.ASSETS.fetch(request);
+     // /api/heartbeat — manual trigger for testing (returns last pulse results)
+     if (path === "/api/heartbeat" && request.method === "GET") {
+       await handleHeartbeat(env);
+       return addCors(json({ triggered: true, ts: new Date().toISOString() }));
+     }
+
+     return env.ASSETS.fetch(request);
   },
 
   // ── Cron triggers ───────────────────────────────────────────────────────

@@ -443,17 +443,17 @@ Huong status check completed and logged. System is ready for next staged command
 
 ```
 D:\OB-1-CANONICAL
-├── APPS/NET-PET-AI/              ← canonical runtime   [21 JS modules + 19 public assets]
-│   ├── src/index.js               ← 4 651 LOC, v1.5.0
-│   ├── wrangler.toml              ← 5 DO bindings, 5 migration tags
-│   └── public/                    ← index.html, magic-chat, voice-lab, imagegen, …
-├── CANON/                        ← 3 898 files
-├── REINCARNATION/                ← 119 files
-├── HEAVY-LEDGER/                 ← 191 files
-├── .github/                      ← 27 skill / prompt / instruction files
-├── SCRIPTS/                      ← obi.ps1, god-mode.ps1
-├── MASTER-SYNC.md                ← single source of truth
-└── .mcp.json                     ← 10 servers, 0 broken paths
+─ APPS/NET-PET-AI/              ← canonical runtime   [21 JS modules + 19 public assets]
+│   ─ src/index.js               ← 4 651 LOC, v1.5.0
+│   ─ wrangler.toml              ← 5 DO bindings, 5 migration tags
+│   ─ public/                    ← index.html, magic-chat, voice-lab, imagegen, …
+─ CANON/                        ← 3 898 files
+─ REINCARNATION/                ← 119 files
+─ HEAVY-LEDGER/                 ← 191 files
+─ .github/                      ← 27 skill / prompt / instruction files
+─ SCRIPTS/                      ← obi.ps1, god-mode.ps1
+─ MASTER-SYNC.md                ← single source of truth
+─ .mcp.json                     ← 10 servers, 0 broken paths
 ```
 
 - **API routes (41):** /health, /evidence, /api/chat, /api/correct, /api/repeat, /api/tts,
@@ -542,3 +542,4 @@ Notion previously made the ghost-tier list due to access-model ambiguity (former
 | NOTION-BLACKLIST | ✅ CLOSED | All active Notion probes and routes permanently disabled; legacy data preserved in CANON/REINCARNATION |
 
 ---
+
