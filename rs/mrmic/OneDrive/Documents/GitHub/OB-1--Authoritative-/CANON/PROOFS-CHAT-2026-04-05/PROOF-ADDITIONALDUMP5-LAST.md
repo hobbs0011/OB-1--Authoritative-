@@ -1,5 +1,0 @@
-﻿# PROOF - ADDITIONALDUMP5 LAST
-
-Source: D:\phoenix-chat-logs\CHAT-LOGS-ONLY\ADDITIONALDUMP5.txt
-
-

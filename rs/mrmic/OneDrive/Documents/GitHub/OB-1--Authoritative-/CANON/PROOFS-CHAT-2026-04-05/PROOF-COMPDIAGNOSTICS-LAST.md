@@ -1,5 +1,0 @@
-﻿# PROOF - COMPDIAGNOSTICS LAST
-
-Source: D:\phoenix-chat-logs\CHAT-LOGS-ONLY\COMPDIAGNOSTICS.txt
-
-

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employer Portal — NET-PET-AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #111827; color: #f3f4f6; font-family: system-ui, sans-serif; }
+        .card { background-color: #1f2937; border: 1px solid #374151; border-radius: 0.75rem; padding: 1.5rem; }
+        .cefr-a1 { color: #f87171; } .cefr-a2 { color: #fb923c; } .cefr-b1 { color: #facc15; }
+        .cefr-b2 { color: #4ade80; } .cefr-c1 { color: #60a5fa; } .cefr-c2 { color: #a78bfa; }
+        #gate, #dashboard { transition: opacity 0.3s ease; }
+        @media print {
+            html, body { background: #fff !important; color: #000 !important; }
+            #gate, #employer-selector, #print-btn { display: none !important; }
+            #dashboard { opacity: 1 !important; }
+            .card { background: #fff !important; border: 1px solid #ccc !important; color: #000 !important; page-break-inside: avoid; }
+            .cefr-a1,.cefr-a2,.cefr-b1,.cefr-b2,.cefr-c1,.cefr-c2 { color: #000 !important; }
+            #stats-bar { color: #000 !important; }
+            * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+        }
+    </style>
+</head>
+<body class="min-h-screen p-4 md:p-8">
+
+    <!-- ═══ EMPLOYER SELECTOR ═══ -->
+    <div id="employer-selector" class="max-w-5xl mx-auto mb-6">
+        <label class="text-sm text-gray-400 mr-2">Employer:</label>
+        <select id="employerCode" class="bg-gray-800 border border-gray-600 rounded px-3 py-1.5 text-sm">
+            <option value="BLUETECH">BLUETECH</option>
+            <option value="MAIN">MAIN</option>
+        </select>
+    </div>
+
+    <!-- ═══ PIN GATE ═══ -->
+    <div id="gate" class="max-w-md mx-auto mt-24 text-center">
+        <h1 class="text-2xl font-bold mb-2">Employer Portal</h1>
+        <p class="text-gray-400 mb-6">Enter your employer PIN to access the dashboard.</p>
+        <form id="pinForm" class="space-y-4">
+            <input id="pinInput" type="password" placeholder="Employer PIN"
+                class="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 text-center text-xl tracking-widest focus:ring-2 focus:ring-blue-500 focus:outline-none" />
+            <button type="submit"
+                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition">
+                Unlock Dashboard
+            </button>
+        </form>
+        <p id="authError" class="text-red-400 mt-3 text-sm hidden">Invalid PIN. Please try again.</p>
+    </div>
+
+    <!-- ═══ DASHBOARD ═══ -->
+    <div id="dashboard" class="max-w-5xl mx-auto hidden">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-bold">Dashboard — <span id="dashEmployerCode"></span></h2>
+            <button id="print-btn" onclick="window.print()"
+                class="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg text-sm font-medium transition">
+                Print All
+            </button>
+        </div>
+
+        <!-- Stats Bar -->
+        <div id="stats-bar" class="grid grid-cols-3 gap-4 mb-8">
+            <div class="card text-center">
+                <div class="text-3xl font-bold" id="stat-total">—</div>
+                <div class="text-gray-400 text-sm mt-1">Total Employees</div>
+            </div>
+            <div class="card text-center">
+                <div class="text-3xl font-bold" id="stat-cefr">—</div>
+                <div class="text-gray-400 text-sm mt-1">Avg CEFR Level</div>
+            </div>
+            <div class="card text-center">
+                <div class="text-3xl font-bold" id="stat-streak">—</div>
+                <div class="text-gray-400 text-sm mt-1">Avg Streak</div>
+            </div>
+        </div>
+
+        <!-- Card Grid -->
+        <div id="card-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+
+        <div id="no-data" class="text-gray-500 text-center py-12 hidden">No employee data found.</div>
+    </div>
+
+    <script>
+    const GATE    = document.getElementById('gate');
+    const DASH    = document.getElementById('dashboard');
+    const PIN_EL  = document.getElementById('pinInput');
+    const ERR_EL  = document.getElementById('authError');
+    const FORM    = document.getElementById('pinForm');
+    const EMP_SEL = document.getElementById('employerCode');
+
+    // ── SubtleCrypto helpers ──────────────────────────────────────────────
+    async function sha256Hex(str) {
+        const buf  = new TextEncoder().encode(str);
+        const hash = await crypto.subtle.digest('SHA-256', buf);
+        return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2,'0')).join('');
+    }
+
+    // ── CEFR level helpers ────────────────────────────────────────────────
+    const CEFR_ORDER  = ['A1','A2','B1','B2','C1','C2'];
+    const CEFR_SCORES = { A1:'A1 – Beginner', A2:'A2 – Elementary', B1:'B1 – Intermediate',
+                          B2:'B2 – Upper Intermediate', C1:'C1 – Advanced', C2:'C2 – Mastery' };
+
+    async function fetchProfile(employerCode) {
+        const r = await fetch(`/api/employer/profile?employerCode=${encodeURIComponent(employerCode)}`);
+        if (!r.ok) throw new Error('profile fetch failed');
+        return r.json();
+    }
+
+    function cefrClass(level) { return 'cefr-' + (level || '').toLowerCase(); }
+
+    function avgCEFR(employees) {
+        const vals = employees.map(e => CEFR_ORDER.indexOf((e.cefrLevel || '').toUpperCase())).filter(v => v >= 0);
+        if (!vals.length) return 0;
+        return (vals.reduce((a,b)=>a+b, 0) / vals.length).toFixed(1);
+    }
+
+    // ── Render dashboard ─────────────────────────────────────────────────
+    async function loadDashboard(employerCode) {
+        const data = await fetchProfile(employerCode);
+        const list = data.employees || [];
+
+        document.getElementById('dashEmployerCode').textContent = employerCode;
+        document.getElementById('stat-total').textContent        = list.length;
+        document.getElementById('stat-cefr').textContent         = list.length ? avgCEFR(list) : '0';
+        document.getElementById('stat-streak').textContent       = list.length
+            ? Math.round(list.reduce((a,e)=>a+(e.streakCount||0), 0)/list.length) : 0;
+
+        const grid = document.getElementById('card-grid');
+        const none = document.getElementById('no-data');
+        grid.innerHTML = '';
+
+        if (!list.length) { grid.classList.add('hidden'); none.classList.remove('hidden'); return; }
+        grid.classList.remove('hidden'); none.classList.add('hidden');
+
+        list.forEach(emp => {
+            const level   = emp.cefrLevel || '—';
+            const mae     = emp.maeScore  != null ? emp.maeScore.toFixed(2) : '—';
+            const streak  = emp.streakCount ?? '—';
+            const card    = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <div class="flex items-center gap-3 mb-3">
+                    <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center font-bold text-white text-sm">
+                        ${emp.studentName ? emp.studentName.charAt(0).toUpperCase() : '?'}
+                    </div>
+                    <div>
+                        <div class="font-semibold text-white">${emp.studentName || 'Unknown'}</div>
+                        <div class="${cefrClass(level)} text-xs uppercase font-bold tracking-wide">
+                            ${CEFR_SCORES[level.toUpperCase()] || level}
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-2 text-sm mt-2 border-t border-gray-700 pt-2">
+                    <div><span class="text-gray-400">Streak:</span> <span class="font-semibold">${streak} days</span></div>
+                    <div><span class="text-gray-400">MAE:</span> <span class="font-semibold">${mae}</span></div>
+                </div>`;
+            grid.appendChild(card);
+        });
+    }
+
+    // ── Auth flow ────────────────────────────────────────────────────────
+    FORM.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        ERR_EL.classList.add('hidden');
+        const code  = EMP_SEL.value;
+        const pin   = PIN_EL.value;
+        const hash  = await sha256Hex(pin);
+
+        try {
+            const r = await fetch('/api/employer/auth', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ employerCode: code, pinHash: hash })
+            });
+            const res = await r.json();
+            if (!res.authorized) { ERR_EL.classList.remove('hidden'); return; }
+
+            GATE.style.opacity = '0';
+            setTimeout(() => { GATE.classList.add('hidden'); DASH.classList.remove('hidden'); DASH.style.opacity = '1'; }, 300);
+
+            await loadDashboard(code);
+        } catch(err) {
+            ERR_EL.classList.remove('hidden'); ERR_EL.textContent = 'Network error. Please try again.';
+        }
+    });
+
+    // Reload dashboard on employer code change
+    EMP_SEL.addEventListener('change', () => loadDashboard(EMP_SEL.value));
+    </script>
+</body>
+</html>

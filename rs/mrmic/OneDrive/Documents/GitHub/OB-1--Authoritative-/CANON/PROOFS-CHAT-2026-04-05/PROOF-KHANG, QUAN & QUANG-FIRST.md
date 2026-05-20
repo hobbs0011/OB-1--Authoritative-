@@ -1,6 +1,0 @@
-﻿# PROOF - KHANG, QUAN & QUANG FIRST
-
-Source: D:\phoenix-chat-logs\CHAT-LOGS-ONLY\KHANG, QUAN & QUANG.txt
-
-KHANG, QUAN & QUANG
-

@@ -1,5 +1,0 @@
-﻿# PROOF - RAW-PHOENIX-LEDGER-1 LAST
-
-Source: D:\phoenix-chat-logs\CHAT-LOGS-ONLY\RAW-PHOENIX-LEDGER-1.txt
-
-

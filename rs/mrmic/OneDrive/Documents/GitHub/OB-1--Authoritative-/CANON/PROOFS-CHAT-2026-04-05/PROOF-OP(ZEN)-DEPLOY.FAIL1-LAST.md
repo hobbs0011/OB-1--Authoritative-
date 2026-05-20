@@ -1,5 +1,0 @@
-﻿# PROOF - OP(ZEN)-DEPLOY.FAIL1 LAST
-
-Source: D:\phoenix-chat-logs\CHAT-LOGS-ONLY\OP(ZEN)-DEPLOY.FAIL1.txt
-
-

@@ -1,5 +1,0 @@
-﻿# PROOF - ALPHA-OMEGA-PH-GEM-1 LAST
-
-Source: D:\phoenix-chat-logs\CHAT-LOGS-ONLY\ALPHA-OMEGA-PH-GEM-1.txt
-
-

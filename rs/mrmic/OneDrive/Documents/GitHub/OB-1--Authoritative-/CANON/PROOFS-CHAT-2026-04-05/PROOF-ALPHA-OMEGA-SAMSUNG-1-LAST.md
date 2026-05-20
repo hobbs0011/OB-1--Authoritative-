@@ -1,5 +1,0 @@
-﻿# PROOF - ALPHA-OMEGA-SAMSUNG-1 LAST
-
-Source: D:\phoenix-chat-logs\CHAT-LOGS-ONLY\ALPHA-OMEGA-SAMSUNG-1.txt
-
-

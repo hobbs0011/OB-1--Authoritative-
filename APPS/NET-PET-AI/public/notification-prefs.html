@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Notification Preferences</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            dark: '#111827',
+            'dark-card': '#1F2937',
+            'dark-border': '#374151',
+            'dark-input': '#111827',
+            accent: '#6366F1',
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    body { background-color: #111827; }
+    .toast {
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+    }
+    .toast.show {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body class="min-h-screen text-gray-200 flex items-center justify-center py-12 px-4">
+
+  <!-- ---- Error Banner ---- -->
+  <div id="error-banner" class="hidden fixed top-4 left-1/2 -translate-x-1/2 bg-red-600 text-white px-6 py-3 rounded-lg shadow-lg z-50 max-w-xl text-center">
+    <span id="error-msg"></span>
+  </div>
+
+  <!-- ---- Loading Overlay ---- -->
+  <div id="loading-overlay"
+       class="fixed inset-0 bg-black/70 flex flex-col items-center justify-center z-40 transition-opacity duration-300">
+    <svg class="animate-spin h-10 w-10 text-indigo-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+      <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C6.747 0 0 6.747 0 15h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 2.971 7.47L6 20l2-2.709z"></path>
+    </svg>
+    <p class="text-gray-400 mt-4 text-sm" id="loading-msg">Loading preferences…</p>
+  </div>
+
+  <!-- ---- "Saved" Toast ---- -->
+  <div id="toast"
+       class="fixed bottom-6 right-6 bg-green-600 text-white px-5 py-2 rounded-lg shadow-lg earth-shadow z-50 toast pointer-events-none">
+    ✓ Saved
+  </div>
+
+  <!-- ---- Main Card ---- -->
+  <div id="main-card" class="opacity-0 transition-opacity duration-300 w-full max-w-3xl">
+    <div class="bg-gray-800 rounded-2xl border border-gray-700 shadow-2xl overflow-hidden">
+
+      <!-- Header -->
+      <div class="bg-gradient-to-r from-indigo-600 to-indigo-500 px-8 py-6">
+        <h1 class="text-2xl font-bold text-white">🔔 Notification Preferences</h1>
+        <p class="text-indigo-200 text-sm mt-1">Manage how you receive updates</p>
+      </div>
+
+      <!-- Body -->
+      <form id="pref-form" class="px-8 py-8 space-y-6" autocomplete="off">
+
+        <!-- Zalo ID -->
+        <div>
+          <label class="block text-sm font-medium text-gray-300 mb-1.5" for="zalo-id">Zalo ID</label>
+          <input id="zalo-id" name="zaloId"
+                 class="w-full bg-gray-900 border border-gray-600 rounded-lg px-4 py-2.5 text-gray-100
+                        focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition"
+                 type="text" placeholder="e.g. +84901234567" />
+        </div>
+
+        <!-- Email -->
+        <div>
+          <label class="block text-sm font-medium text-gray-300 mb-1.5" for="email">Email</label>
+          <input id="email" name="email"
+                 class="w-full bg-gray-900 border border-gray-600 rounded-lg px-4 py-2.5 text-gray-100
+                        focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition"
+                 type="email" placeholder="you@example.com" />
+        </div>
+
+        <!-- Preferred Time -->
+        <div>
+          <label class="block text-sm font-medium text-gray-300 mb-1.5" for="pref-time">Preferred Time</label>
+          <input id="pref-time" name="preferredTime"
+                 class="w-full bg-gray-900 border border-gray-600 rounded-lg px-4 py-2.5 text-gray-100
+                        focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition"
+                 type="time" min="06:00" max="22:00" />
+        </div>
+
+        <!-- Frequency -->
+        <div>
+          <label class="block text-sm font-medium text-gray-300 mb-1.5" for="frequency">Frequency</label>
+          <select id="frequency" name="frequency"
+                  class="w-full bg-gray-900 border border-gray-600 rounded-lg px-4 py-2.5 text-gray-100
+                         focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition">
+            <option value="daily">Daily</option>
+            <option value="weekly">Weekly</option>
+            <option value="monthly">Monthly</option>
+          </select>
+        </div>
+
+        <!-- Language Toggle -->
+        <div>
+          <label class="block text-sm font-medium text-gray-300 mb-1.5">Language</label>
+          <div class="flex items-center gap-3">
+            <span id="lang-vi" class="px-3 py-1 rounded-lg text-sm font-medium bg-indigo-600 text-white transition">VI</span>
+            <button type="button" id="lang-toggle"
+                    class="relative w-12 h-6 rounded-full bg-indigo-600 transition
+                           hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2 focus:ring-offset-gray-800"
+                    role="switch" aria-checked="true">
+              <span id="lang-knob"
+                    class="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow
+                           transform translate-x-6 transition-transform"></span>
+            </button>
+            <span id="lang-en" class="px-3 py-1 rounded-lg text-sm font-medium bg-gray-700 text-gray-400 transition">EN</span>
+            <input type="hidden" name="language" id="lang-input" value="vi" />
+          </div>
+        </div>
+
+        <!-- SMS Enabled Toggle -->
+        <div>
+          <label class="block text-sm font-medium text-gray-300 mb-1.5">SMS Enabled</label>
+          <div class="flex items-center gap-3">
+            <span class="text-sm text-gray-500">Off</span>
+            <button type="button" id="sms-toggle"
+                    class="relative w-12 h-6 rounded-full bg-indigo-600 transition
+                           hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2 focus:ring-offset-gray-800"
+                    role="switch" aria-checked="true">
+              <span id="sms-knob"
+                    class="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow
+                           transform translate-x-6 transition-transform"></span>
+            </button>
+            <span class="text-sm text-gray-300">On</span>
+            <input type="hidden" name="smsEnabled" id="sms-input" value="true" />
+          </div>
+        </div>
+
+        <!-- Status -->
+        <div id="status-bar"
+             class="hidden rounded-lg px-4 py-3 text-sm font-medium border transition"
+             aria-live="polite"></div>
+
+      </form>
+    </div>
+  </div>
+
+  <script>
+    (() => {
+      'use strict';
+
+      // ── Helpers ──────────────────────────────────────────────
+      const $ = (sel) => document.querySelector(sel);
+      const toggleKnob = (btn, knobEl, on) => {
+        if (on) {
+          btn.classList.remove('bg-gray-600');
+          btn.classList.add('bg-indigo-600');
+          knobEl.classList.add('translate-x-6');
+          knobEl.classList.remove('translate-x-0');
+        } else {
+          btn.classList.remove('bg-indigo-600');
+          btn.classList.add('bg-gray-600');
+          knobEl.classList.remove('translate-x-6');
+          knobEl.classList.add('translate-x-0');
+        }
+      };
+
+      // ── URL Parsing ──────────────────────────────────────────
+      const params = new URLSearchParams(window.location.search);
+      const studentId = params.get('studentId');
+
+      if (!studentId) {
+        $('#loading-overlay').classList.add('hidden');
+        $('#error-banner').classList.remove('hidden');
+        $('#error-msg').textContent = 'Missing studentId — provide ?studentId= in the URL.';
+        return;
+      }
+
+      // ── State ────────────────────────────────────────────────
+      const apiBase   = '/api/notify/prefs';
+      let saveTimer   = null;
+      let serializing = false;
+
+      // ── UI Refs ─────────────────────────────────────────────
+      const langToggleBtn   = $('#lang-toggle');
+      const langKnob        = $('#lang-knob');
+      const langViLabel     = $('#lang-vi');
+      const langEnLabel     = $('#lang-en');
+      const langInput       = $('#lang-input');
+
+      const smsToggleBtn    = $('#sms-toggle');
+      const smsKnob         = $('#sms-knob');
+      const smsInput        = $('#sms-input');
+
+      const toast           = $('#toast');
+      const loadingOverlay  = $('#loading-overlay');
+      const mainCard        = $('#main-card');
+      const loadingMsg      = $('#loading-msg');
+      const statusBar       = $('#status-bar');
+
+      // ── Toggle: Language ────────────────────────────────────
+      function setLanguage(vi) {
+        toggleKnob(langToggleBtn, langKnob, vi);
+        langInput.value = vi ? 'vi' : 'en';
+        langViLabel.className = vi
+          ? 'px-3 py-1 rounded-lg text-sm font-medium bg-indigo-600 text-white transition'
+          : 'px-3 py-1 rounded-lg text-sm font-medium bg-gray-700 text-gray-400 transition';
+        langEnLabel.className = vi
+          ? 'px-3 py-1 rounded-lg text-sm font-medium bg-gray-700 text-gray-400 transition'
+          : 'px-3 py-1 rounded-lg text-sm font-medium bg-indigo-600 text-white transition';
+      }
+      langToggleBtn.addEventListener('click', () => setLanguage(langInput.value === 'en'));
+
+      // ── Toggle: SMS ─────────────────────────────────────────
+      function setSms(on) {
+        toggleKnob(smsToggleBtn, smsKnob, on);
+        smsInput.value = on ? 'true' : 'false';
+      }
+      smsToggleBtn.addEventListener('click', () => setSms(smsInput.value === 'false'));
+
+      // ── Toast ───────────────────────────────────────────────
+      function showToast(msg, type = 'green') {
+        const colors = {
+          green:  'bg-green-600',
+          red:    'bg-red-600',
+          yellow: 'bg-yellow-600',
+        };
+        toast.textContent = msg;
+        toast.className   = `fixed bottom-6 right-6 ${colors[type]} text-white px-5 py-2 rounded-lg shadow-lg z-50 toast pointer-events-none show`;
+        setTimeout(() => toast.classList.add('hidden'), 2500);
+        setTimeout(() => toast.classList.remove('show'), 2800);
+      }
+
+      // ── Status Bar ──────────────────────────────────────────
+      function setStatus(msg, type = 'info') {
+        const styles = {
+          info:    'bg-blue-900/40 text-blue-200 border-blue-600/40',
+          success: 'bg-green-900/40 text-green-200 border-green-600/40',
+          error:   'bg-red-900/40 text-red-200 border-red-600/40',
+          saving:  'bg-yellow-900/40 text-yellow-200 border-yellow-600/40',
+        };
+        statusBar.className = `rounded-lg px-4 py-3 text-sm font-medium border transition visible ${styles[type]}`;
+        statusBar.textContent = msg;
+      }
+
+      // ── Load Preferences ────────────────────────────────────
+      async function loadPrefs() {
+        loadingMsg.textContent = 'Loading preferences…';
+        loadingOverlay.classList.remove('hidden');
+        mainCard.classList.add('opacity-0');
+        statusBar.classList.add('hidden');
+
+        try {
+          const res = await fetch(`${apiBase}?studentId=${encodeURIComponent(studentId)}`);
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+          const data = await res.json();
+
+          $('#zalo-id').value       = data.zaloId       ?? '';
+          $('#email').value         = data.email        ?? '';
+          $('#pref-time').value     = data.preferredTime ?? '09:00';
+          $('#frequency').value     = data.frequency    ?? 'weekly';
+          setLanguage(data.language === 'en');
+          setSms(data.smsEnabled === true || data.smsEnabled === 'true');
+
+          loadingOverlay.classList.add('hidden');
+          mainCard.classList.remove('opacity-0');
+          mainCard.classList.add('opacity-100');
+
+        } catch (err) {
+          loadigngMsg = 'Failed to load preferences.';
+          showToast('Failed to load preferences.', 'red');
+          loadingOverlay.classList.add('hidden');
+          mainCard.classList.remove('opacity-0');
+          mainCard.classList.add('opacity-1');
+        }
+      }
+
+      // ── Debounced Save ──────────────────────────────────────
+      function scheduleSave() {
+        clearTimeout(saveTimer);
+        saveTimer = setTimeout(savePrefs, 400);
+      }
+
+      function collectFields() {
+        return {
+          studentId:     studentId,
+          zaloId:        $('#zalo-id').value.trim(),
+          email:         $('#email').value.trim(),
+          preferredTime: $('#pref-time').value,
+          frequency:     $('#frequency').value,
+          language:      langInput.value,
+          smsEnabled:    smsInput.value === 'true',
+        };
+      }
+
+      async function savePrefs() {
+        const fields = collectFields();
+        setStatus('Saving…', 'saving');
+        showToast('Saving…', 'yellow');
+
+        try {
+          const res = await fetch(apiBase, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(fields),
+          });
+          if (!res.ok) {
+            const body = await res.json().catch(() => ({}));
+            throw new Error(body.message || `HTTP ${res.status}`);
+          }
+          setStatus('All changes saved.', 'success');
+          showToast('Saved', 'green');
+        } catch (err) {
+          setStatus(`Save failed: ${err.message}`, 'error');
+          showToast('Save failed — retry pending.', 'red');
+          // re-schedule retry on blur
+          setTimeout(savePrefs, 2000);
+        }
+      }
+
+      // ── Wire blur → save ───────────────────────────────────
+      document.getElementById('pref-form').addEventListener('blur', (e) => {
+        if (e.target instanceof HTMLInputElement || e.target instanceof HTMLSelectElement) {
+          scheduleSave();
+        }
+      }, true);
+
+      // ── Init ───────────────────────────────────────────────
+      loadPrefs();
+    })();
+  </script>
+</body>
+</html>

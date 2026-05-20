@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Employer Onboarding — Natural English Training</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --void: #0a0a12;
+    --glass: rgba(255,255,255,.04);
+    --glass-border: rgba(255,255,255,.08);
+    --purple: #a855f7;
+    --purple-dim: rgba(168,85,247,.15);
+    --gold: #f59e0b;
+    --teal: #14b8a6;
+    --danger: #ef4444;
+    --success: #22c55e;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 16px; }
+  body {
+    background: var(--void);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 1rem;
+    background-image:
+      radial-gradient(ellipse at 20% 20%, rgba(168,85,247,.12) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 80%, rgba(20,184,166,.08) 0%, transparent 60%);
+  }
+  .brand { font-family: 'Orbitron', sans-serif; font-size: 1.15rem; color: var(--purple); margin-bottom: 1.5rem; letter-spacing: .08em; }
+  .glass {
+    background: var(--glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 1.1rem;
+    padding: 2rem 2.2rem;
+    width: 100%;
+    max-width: 560px;
+    box-shadow: 0 8px 40px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.06);
+  }
+  .glass h2 { font-family: 'Orbitron', sans-serif; font-size: 1.05rem; color: var(--purple); margin-bottom: 1.5rem; text-align: center; letter-spacing: .06em; }
+  .field { margin-bottom: 1.15rem; }
+  label { display: block; font-size: .78rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .07em; margin-bottom: .4rem; }
+  .preview { font-size: .78rem; color: var(--teal); margin-top: .3rem; font-weight: 500; }
+  input[type="text"], input[type="number"] {
+    width: 100%;
+    background: rgba(255,255,255,.05);
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: .55rem;
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: .95rem;
+    padding: .6rem .8rem;
+    outline: none;
+    transition: border-color .2s, box-shadow .2s;
+  }
+  input[type="text"]:focus, input[type="number"]:focus {
+    border-color: var(--purple);
+    box-shadow: 0 0 0 3px var(--purple-dim);
+  }
+  .pin-wrap { position: relative; }
+  .pin-wrap input { padding-right: 2.8rem; }
+  .pin-toggle {
+    position: absolute; right: .6rem; top: 50%; transform: translateY(-50%);
+    background: none; border: none; cursor: pointer; font-size: 1rem; color: var(--muted); line-height: 1; padding: .2rem;
+  }
+  .pin-toggle:hover { color: var(--text); }
+  .students-section { margin: 1.4rem 0; }
+  .students-section label { text-transform: uppercase; }
+  .student-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: .5rem;
+    margin-bottom: .5rem;
+    align-items: start;
+  }
+  .student-row input { font-size: .875rem; padding: .5rem .65rem; }
+  .remove-btn {
+    background: rgba(239,68,68,.1); border: 1px solid rgba(239,68,68,.25);
+    border-radius: .45rem; color: var(--danger); cursor: pointer;
+    font-size: .8rem; padding: .45rem .6rem; margin-top: 1.4rem;
+    transition: background .2s;
+  }
+  .remove-btn:hover { background: rgba(239,68,68,.2); }
+  #addStudentBtn {
+    width: 100%;
+    background: rgba(20,184,166,.08); border: 1px dashed rgba(20,184,166,.3);
+    border-radius: .55rem; color: var(--teal); cursor: pointer;
+    font-family: 'Inter', sans-serif; font-size: .875rem; font-weight: 500;
+    padding: .55rem; transition: background .2s, border-color .2s;
+  }
+  #addStudentBtn:hover { background: rgba(20,184,166,.15); border-color: rgba(20,184,166,.5); }
+  #addStudentBtn:disabled { opacity: .35; cursor: not-allowed; }
+  .submit-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #7c3aed, #a855f7, #6d28d9);
+    border: none; border-radius: .6rem;
+    color: #fff; font-family: 'Inter', sans-serif; font-weight: 700;
+    font-size: 1rem; padding: .75rem 1.2rem; cursor: pointer;
+    letter-spacing: .02em; transition: opacity .2s, transform .15s;
+    margin-top: .5rem;
+    box-shadow: 0 4px 18px rgba(168,85,247,.35);
+  }
+  .submit-btn:hover { opacity: .9; transform: translateY(-1px); }
+  .submit-btn:disabled { opacity: .45; cursor: not-allowed; transform: none; }
+  .msg { margin-top: 1.2rem; border-radius: .6rem; padding: .9rem 1.1rem; font-size: .9rem; font-weight: 500; }
+  .msg.success { background: rgba(34,197,94,.1); border: 1px solid rgba(34,197,94,.3); color: var(--success); }
+  .msg.error { background: rgba(239,68,68,.1); border: 1px solid rgba(239,68,68,.3); color: var(--danger); }
+  .copy-btn {
+    background: rgba(20,184,166,.12); border: 1px solid rgba(20,184,166,.3);
+    border-radius: .45rem; color: var(--teal); cursor: pointer;
+    font-size: .8rem; padding: .3rem .7rem; margin-top: .6rem;
+    font-family: 'Inter', sans-serif; font-weight: 600;
+    transition: background .2s;
+  }
+  .copy-btn:hover { background: rgba(20,184,166,.22); }
+  .success-details { font-size: .85rem; color: var(--muted); margin-top: .6rem; line-height: 1.65; }
+  /* Password gate */
+  #gate {
+    position: fixed; inset: 0; z-index: 999;
+    background: var(--void);
+    display: flex; align-items: center; justify-content: center;
+  }
+  #gate.hidden { display: none; }
+  #gate .glass { max-width: 380px; text-align: center; }
+  #gate .glass h2 { color: var(--gold); }
+  #gate .pin-wrap { width: 100%; }
+  @keyframes shake {
+    0%,100% { transform: translateX(0); }
+    20% { transform: translateX(-10px); }
+    40% { transform: translateX(10px); }
+    60% { transform: translateX(-8px); }
+    80% { transform: translateX(8px); }
+  }
+  .shake { animation: shake .4s ease-in-out; }
+</style>
+</head>
+<body>
+
+<!-- ═══ PASSWORD GATE ═══ -->
+<div id="gate">
+  <div class="glass" id="gateCard">
+    <h2>🔒 Admin Access</h2>
+    <div class="field">
+      <label>Admin Password</label>
+      <div class="pin-wrap">
+        <input type="password" id="gatePass" placeholder="Enter admin password" autocomplete="off">
+        <button class="pin-toggle" id="gateToggle" type="button">👁️</button>
+      </div>
+      <p id="gateError" style="color:var(--danger);font-size:.8rem;margin-top:.4rem;display:none">Incorrect password</p>
+    </div>
+    <button class="submit-btn" id="gateSubmit">Unlock</button>
+  </div>
+</div>
+
+<!-- ═══ MAIN FORM ═══ -->
+<div id="app" style="display:none">
+  <div class="brand">⚡ NATURAL ENGLISH</div>
+  <div class="glass">
+    <h2>🏢 Employer Onboarding</h2>
+    <div class="field">
+      <label for="companyName">Company Name</label>
+      <input type="text" id="companyName" placeholder="e.g. BlueTech Vietnam">
+    </div>
+    <div class="field">
+      <label for="companyCode">Company Code</label>
+      <input type="text" id="companyCode" placeholder="e.g. Blue Tech Vietnam">
+      <p class="preview" id="codePreview"></p>
+    </div>
+    <div class="field">
+      <label>Admin PIN</label>
+      <div class="pin-wrap">
+        <input type="password" id="pin" placeholder="4–6 digit PIN" maxlength="6" inputmode="numeric">
+        <button class="pin-toggle" id="pinToggle" type="button">👁️</button>
+      </div>
+    </div>
+    <div class="field">
+      <label>Confirm PIN</label>
+      <div class="pin-wrap">
+        <input type="password" id="pinConfirm" placeholder="Re-enter PIN" maxlength="6" inputmode="numeric">
+      </div>
+      <p class="preview" id="pinMismatch" style="color:var(--danger);display:none">PINs do not match</p>
+    </div>
+
+    <div class="students-section">
+      <label>Students</label>
+      <div id="studentList"></div>
+      <button id="addStudentBtn" type="button">+ Add Student</button>
+    </div>
+
+    <button class="submit-btn" id="submitBtn">Create Employer Account</button>
+    <div id="msg"></div>
+  </div>
+</div>
+
+<script>
+(function () {
+  const ADMIN_PASS = 'net2026admin';
+  const AUTH_KEY   = 'net_admin_auth';
+  const MAX_STUDENTS = 10;
+
+  // ── helpers
+  function slugify(s) { return s.toUpperCase().replace(/[\s\-]+/g, '_').replace(/[^A-Z0-9_]/g, ''); }
+  function sha256Hex(str) {
+    return crypto.subtle.digest('SHA-256', new TextEncoder().encode(str))
+      .then(buf => [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2,'0')).join(''));
+  }
+
+  // ── password gate
+  const gate      = document.getElementById('gate');
+  const gateCard  = document.getElementById('gateCard');
+  const gatePass  = document.getElementById('gatePass');
+  const gateToggle= document.getElementById('gateToggle');
+  const gateError = document.getElementById('gateError');
+
+  function shakeGate() {
+    gateCard.classList.remove('shake');
+    void gateCard.offsetWidth;
+    gateCard.classList.add('shake');
+  }
+
+  if (localStorage.getItem(AUTH_KEY) === 'true') { gate.classList.add('hidden'); document.getElementById('app').style.display='block'; }
+
+  gateToggle.addEventListener('click', function () {
+    gatePass.type = gatePass.type === 'password' ? 'text' : 'password';
+  });
+
+  document.getElementById('gateSubmit').addEventListener('click', async () => {
+    if (gatePass.value === ADMIN_PASS) {
+      localStorage.setItem(AUTH_KEY, 'true');
+      gate.classList.add('hidden');
+      document.getElementById('app').style.display = 'block';
+    } else {
+      gateError.style.display = 'block';
+      shakeGate();
+    }
+    gatePass.value = '';
+  });
+  gatePass.addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('gateSubmit').click(); });
+
+  // ── PIN show/hide
+  document.getElementById('pinToggle').addEventListener('click', function () {
+    const p = document.getElementById('pin');
+    p.type = p.type === 'password' ? 'text' : 'password';
+  });
+
+  // ── code slugify + preview
+  const codeInput   = document.getElementById('companyCode');
+  const codePreview = document.getElementById('codePreview');
+  codeInput.addEventListener('input', function () { codePreview.textContent = ''; });
+  codeInput.addEventListener('blur', function () {
+    const slug = slugify(codeInput.value);
+    if (slug) codePreview.textContent = 'Portal login code: ' + slug;
+  });
+
+  // ── students list
+  const list   = document.getElementById('studentList');
+  const addBtn = document.getElementById('addStudentBtn');
+
+  function addRow(id, name) {
+    if (list.children.length >= MAX_STUDENTS) { addBtn.disabled = true; return; }
+    const row = document.createElement('div');
+    row.className = 'student-row';
+    row.innerHTML =
+      `<input class="s-id" type="text" placeholder="Student ID" value="${esc(id)}">`
+      + `<input class="s-name" type="text" placeholder="Display Name" value="${esc(name)}">`
+      + `<button class="remove-btn" type="button">✕ Remove</button>`;
+    row.querySelector('.remove-btn').addEventListener('click', function () { row.remove(); if (list.children.length < MAX_STUDENTS) addBtn.disabled = false; });
+    list.appendChild(row);
+  }
+
+  function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;'); }
+
+  addBtn.addEventListener('click', function () { addRow('',''); });
+
+  // pre-fill first row
+  addRow('huong-bluetech', 'Huong Nguyen');
+
+  // ── submit
+  document.getElementById('submitBtn').addEventListener('click', async function () {
+    const msg = document.getElementById('msg');
+    msg.innerHTML = '';
+
+    const companyName = document.getElementById('companyName').value.trim();
+    let   rawCode     = codeInput.value.trim();
+    const pin         = document.getElementById('pin').value;
+    const pinConfirm  = document.getElementById('pinConfirm').value;
+
+    if (!companyName || !rawCode || !pin) {
+      msg.innerHTML = '<div class="msg error">All fields are required.</div>';
+      return;
+    }
+    const code = slugify(rawCode);
+    if (!code) {
+      msg.innerHTML = '<div class="msg error">Company code must contain at least one letter or number.</div>';
+      return;
+    }
+    if (!/^\d{4,6}$/.test(pin)) {
+      msg.innerHTML = '<div class="msg error">PIN must be 4–6 digits.</div>';
+      return;
+    }
+    if (pin !== pinConfirm) {
+      msg.innerHTML = '<div class="msg error">PINs do not match.</div>';
+      return;
+    }
+
+    const students = [];
+    list.querySelectorAll('.student-row').forEach(row => {
+      const id = row.querySelector('.s-id').value.trim();
+      const nm = row.querySelector('.s-name').value.trim();
+      if (id && nm) students.push({ studentId: id, name: nm });
+    });
+    if (students.length === 0) { msg.innerHTML = '<div class="msg error">Add at least one student.</div>'; return; }
+
+    this.disabled = true;
+    this.textContent = 'Creating…';
+
+    try {
+      const res = await fetch('/api/employer/create', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ companyName, code, pin, students })
+      });
+      const data = await res.json();
+      if (res.ok) {
+        msg.innerHTML =
+          `<div class="msg success">
+            ✅ ${esc(data.companyName)} created
+            <div class="success-details">
+              Code: <strong style="color:var(--text)">${esc(data.code)}</strong><br>
+              Students: ${data.studentCount} enrolled<br>
+              Test login → <a href="/employer-portal" style="color:var(--teal)">/employer-portal</a> → code ${esc(data.code)}
+            </div>
+            <button class="copy-btn" id="copyBtn">📋 Copy code to clipboard</button>
+          </div>`;
+        document.getElementById('copyBtn').addEventListener('click', function () {
+          navigator.clipboard.writeText(data.code);
+          this.textContent = '✅ Copied!';
+          setTimeout(() => { this.textContent = '📋 Copy code to clipboard'; }, 2000);
+        });
+      } else {
+        msg.innerHTML = `<div class="msg error">${esc(data.error || 'Request failed').replace(data.code || code, `<strong>${data.code || code}</strong>`)}</div>`;
+      }
+    } catch (e) {
+      msg.innerHTML = `<div class="msg error">Network error: ${esc(e.message)}</div>`;
+    } finally {
+      this.disabled = false;
+      this.textContent = 'Create Employer Account';
+    }
+  });
+})();
+</script>
+</body>
+</html>

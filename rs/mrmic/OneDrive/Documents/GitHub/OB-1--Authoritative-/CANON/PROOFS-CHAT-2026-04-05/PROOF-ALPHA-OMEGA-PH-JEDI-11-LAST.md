@@ -1,5 +1,0 @@
-﻿# PROOF - ALPHA-OMEGA-PH-JEDI-11 LAST
-
-Source: D:\phoenix-chat-logs\CHAT-LOGS-ONLY\ALPHA-OMEGA-PH-JEDI-11.txt
-
-

@@ -1,5 +1,0 @@
-﻿# PROOF - BIBLE-DEVELOPMENT LAST
-
-Source: D:\phoenix-chat-logs\CHAT-LOGS-ONLY\BIBLE-DEVELOPMENT.txt
-
-

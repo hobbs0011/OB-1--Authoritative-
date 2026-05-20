@@ -1,5 +1,0 @@
-﻿# PROOF - (KEY) LEDGER - SCRIBE - SCRIPT LAST
-
-Source: D:\phoenix-chat-logs\CHAT-LOGS-ONLY\(KEY) LEDGER - SCRIBE - SCRIPT.txt
-
-

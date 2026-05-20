@@ -1,5 +1,0 @@
-﻿# PROOF - (KEY7)- PHOENIX DNA- 4PILLARS LAST
-
-Source: D:\phoenix-chat-logs\CHAT-LOGS-ONLY\(KEY7)- PHOENIX DNA- 4PILLARS.txt
-
-

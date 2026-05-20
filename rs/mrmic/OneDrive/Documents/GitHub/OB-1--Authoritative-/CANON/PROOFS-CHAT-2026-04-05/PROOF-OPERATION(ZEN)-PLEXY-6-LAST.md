@@ -1,5 +1,0 @@
-﻿# PROOF - OPERATION(ZEN)-PLEXY-6 LAST
-
-Source: D:\phoenix-chat-logs\CHAT-LOGS-ONLY\OPERATION(ZEN)-PLEXY-6.txt
-
-

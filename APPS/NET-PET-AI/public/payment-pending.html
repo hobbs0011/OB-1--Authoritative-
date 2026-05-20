@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Complete Payment — Natural English Training</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #0a0e1a 0%, #111827 50%, #0a0e1a 100%);
+      color: #e2e8f0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 480px;
+      width: 100%;
+    }
+    h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.5rem;
+      text-align: center;
+      color: #e2e8f0;
+      margin-bottom: 8px;
+    }
+    .subtitle { text-align: center; color: #94a3b8; font-size: 14px; margin-bottom: 24px; }
+    .tab-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .tab {
+      flex: 1;
+      padding: 10px;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.04);
+      color: #94a3b8;
+      transition: all 0.2s;
+    }
+    .tab.active {
+      background: rgba(34,197,94,0.15);
+      border-color: #22c55e;
+      color: #22c55e;
+    }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+    .qr-box {
+      background: rgba(128,128,128,0.12);
+      border: 2px dashed rgba(128,128,128,0.3);
+      border-radius: 16px;
+      padding: 48px 24px;
+      text-align: center;
+      color: #6b7280;
+      font-size: 15px;
+      margin-bottom: 16px;
+    }
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      font-size: 14px;
+    }
+    .info-row:last-child { border-bottom: none; }
+    .info-label { color: #94a3b8; }
+    .info-val { font-weight: 600; }
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 14px 24px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      text-align: center;
+      cursor: pointer;
+      border: none;
+      transition: opacity 0.2s;
+      margin-top: 20px;
+    }
+    .btn-confirm {
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      color: #fff;
+    }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .confirmed-msg {
+      display: none;
+      background: rgba(34,197,94,0.1);
+      border: 1px solid rgba(34,197,94,0.3);
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+      color: #22c55e;
+      font-weight: 600;
+      margin-top: 16px;
+    }
+    .zalo-note {
+      text-align: center;
+      color: #6b7280;
+      font-size: 13px;
+      margin-top: 20px;
+    }
+    .zalo-note a { color: #a855f7; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Complete Your Payment</h1>
+    <p class="subtitle" id="subtitle">—</p>
+
+    <div class="tab-row">
+      <button class="tab active" onclick="switchTab(this,'momo')">📱 MoMo QR</button>
+      <button class="tab" onclick="switchTab(this,'bank')">🏦 Bank Transfer</button>
+    </div>
+
+    <!-- Tab A: MoMo QR -->
+    <div class="tab-panel active" id="panel-momo">
+      <div class="qr-box">
+        MoMo QR — Michael adds image here
+      </div>
+      <div class="info-row">
+        <span class="info-label">Account</span>
+        <span class="info-val">0901234567</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Amount</span>
+        <span class="info-val" id="amount-momo">—</span>
+      </div>
+    </div>
+
+    <!-- Tab B: Bank Transfer -->
+    <div class="tab-panel" id="panel-bank">
+      <div class="qr-box">
+        Bank details — Michael adds image here
+      </div>
+      <div class="info-row">
+        <span class="info-label">Bank Name</span>
+        <span class="info-val">—</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Account Number</span>
+        <span class="info-val">—</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Amount</span>
+        <span class="info-val" id="amount-bank">—</span>
+      </div>
+    </div>
+
+    <button class="btn btn-confirm" id="confirmBtn" onclick="confirmPayment()">I've Sent Payment ✓</button>
+    <div class="confirmed-msg" id="confirmedMsg">✅ Payment confirmed! Redirecting…</div>
+
+    <p class="zalo-note">Questions? Zalo: <a href="https://zalo.me/0901234567">0901234567</a></p>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const plan   = params.get('plan')   || 'NET';
+    const amount = params.get('amount') || '';
+    const amountStr = amount ? Number(amount).toLocaleString('vi-VN') + ' VND' : '—';
+
+    document.getElementById('subtitle').textContent   = `Plan: ${plan}`;
+    document.getElementById('amount-momo').textContent = amountStr;
+    document.getElementById('amount-bank').textContent = amountStr;
+
+    function switchTab(btn, tab) {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('panel-' + tab).classList.add('active');
+    }
+
+    function confirmPayment() {
+      const btn = document.getElementById('confirmBtn');
+      btn.disabled = true;
+      btn.textContent = 'Processing…';
+      try {
+        localStorage.setItem('pending', 'true');
+        localStorage.setItem('pending_plan', plan);
+        if (amount) localStorage.setItem('pending_amount', amount);
+      } catch (_) {}
+      document.getElementById('confirmedMsg').style.display = 'block';
+      setTimeout(() => { window.location.href = '/payment-success?plan=' + encodeURIComponent(plan) + '&amount=' + encodeURIComponent(amount); }, 1800);
+    }
+  </script>
+</body>
+</html>

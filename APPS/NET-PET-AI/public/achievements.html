@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Achievements — NET Pet AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        void: '#111827',
+                        card: 'rgba(31, 41, 55, 0.8)',
+                        purple: '#a855f7',
+                        gold: '#f59e0b',
+                        teal: '#14b8a6',
+                        violet: '#8b5cf6',
+                        pink: '#ec4899'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 12px rgba(168, 85, 247, 0.4), 0 0 24px rgba(245, 158, 11, 0.2); }
+            50% { box-shadow: 0 0 20px rgba(168, 85, 247, 0.6), 0 0 32px rgba(245, 158, 11, 0.4); }
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .badge-unlocked {
+            animation: glow 2s ease-in-out infinite;
+        }
+        .badge-locked {
+            filter: grayscale(100%);
+            opacity: 0.4;
+        }
+        .progress-fill {
+            transition: width 0.6s ease;
+        }
+    </style>
+</head>
+<body class="bg-void text-white min-h-screen">
+    <div class="max-w-4xl mx-auto px-4 py-8">
+        <div class="text-center mb-10">
+            <h1 class="text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-400 to-amber-400 bg-clip-text text-transparent mb-4">
+                Achievements
+            </h1>
+            <p class="text-slate-400">Earn badges by completing milestones in your English journey</p>
+        </div>
+
+        <div class="mb-8 flex justify-center">
+            <select id="studentSelector" class="bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-purple-500">
+                <option value="huong-bluetech">Huong</option>
+                <option value="mai-tram-bluetech">Mai Tram</option>
+                <option value="quy-bluetech">Quy</option>
+            </select>
+        </div>
+
+        <div id="badgesContainer" class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+            <div class="skeleton-loader col-span-3 md:col-span-4 lg:col-span-6 text-center py-12">
+                <div class="animate-spin rounded-full h-10 w-10 border-b-2 border-purple-500 mx-auto mb-4"></div>
+                <p class="text-slate-400">Loading achievements...</p>
+            </div>
+        </div>
+
+        <div id="progressSection" class="hidden mt-12 bg-gray-800/50 rounded-xl p-6">
+            <h2 class="text-lg font-semibold mb-4 text-purple-400">Progress to Next Badge</h2>
+            <div class="space-y-3">
+                <div class="flex justify-between text-sm">
+                    <span id="nextBadgeName" class="text-slate-300">—</span>
+                    <span id="nextBadgeProgress" class="text-amber-400 font-medium">—</span>
+                </div>
+                <div class="h-3 bg-gray-700 rounded-full overflow-hidden">
+                    <div id="progressBar" class="h-full bg-gradient-to-r from-purple-500 to-amber-400 rounded-full progress-fill" style="width: 0%"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API = 'https://net-pet-ai.mrmichaelhobbs123.workers.dev';
+        
+        const BADGES = [
+            { id: 'first-steps', name: 'First Steps', emoji: '👣', desc: 'Complete your first session' },
+            { id: 'week-streaker', name: 'Week Streaker', emoji: '🔥', desc: '7 day streak' },
+            { id: 'sharp-scholar', name: 'Sharp Scholar', emoji: '📚', desc: 'Master 50 words' },
+            { id: 'navigator', name: 'Navigator', emoji: '🧭', desc: '10 sessions completed' },
+            { id: 'champion-30', name: '30-Day Champion', emoji: '🏆', desc: '30 day streak' },
+            { id: 'rising-star', name: 'Rising Star', emoji: '⭐', desc: 'Master 100 words' },
+            { id: 'perfect-week', name: 'Perfect Week', emoji: '💎', desc: '7 perfect sessions' },
+            { id: 'word-hunter', name: 'Word Hunter', emoji: '🎯', desc: 'Master 250 words' },
+            { id: 'speed-demon', name: 'Speed Demon', emoji: '⚡', desc: 'Fast response time' },
+            { id: 'conversation-king', name: 'Conversation King/Queen', emoji: '👑', desc: '100 conversations' },
+            { id: 'day-one-veteran', name: 'Day One Veteran', emoji: '🎖️', desc: 'Complete Day 1' },
+            { id: 'bug-hunter', name: 'Bug Hunter', emoji: '🐛', desc: 'Find an issue' }
+        ];
+
+        async function loadAchievements(studentId) {
+            const container = document.getElementById('badgesContainer');
+            container.innerHTML = '<div class="col-span-3 md:col-span-4 lg:col-span-6 text-center py-12"><div class="animate-spin rounded-full h-10 w-10 border-b-2 border-purple-500 mx-auto mb-4"></div><p class="text-slate-400">Loading...</p></div>';
+
+            try {
+                const res = await fetch(`${API}/api/student/achievements?studentId=${studentId}`);
+                const data = res.ok ? await res.json() : { badges: [] };
+                const unlocked = new Set(data.badges || []);
+
+                renderBadges(unlocked);
+                renderProgress(data, unlocked);
+            } catch (e) {
+                container.innerHTML = '<p class="col-span-3 md:col-span-4 lg:col-span-6 text-center text-red-400">Failed to load achievements</p>';
+            }
+        }
+
+        function renderBadges(unlocked) {
+            const container = document.getElementById('badgesContainer');
+            container.innerHTML = BADGES.map(badge => {
+                const isUnlocked = unlocked.has(badge.id);
+                return `
+                    <div class="bg-gray-800/50 rounded-xl p-4 text-center transition-all duration-300 ${isUnlocked ? 'badge-unlocked border border-purple-500/50' : 'badge-locked border border-gray-700'}">
+                        <div class="text-4xl mb-2">${isUnlocked ? badge.emoji : '🔒'}</div>
+                        <div class="text-xs font-medium ${isUnlocked ? 'text-white' : 'text-gray-500'}">${badge.name}</div>
+                        ${isUnlocked ? '<div class="text-purple-400 text-xs mt-1">✓ Unlocked</div>' : '<div class="text-gray-600 text-xs mt-1">Locked</div>'}
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function renderProgress(data, unlocked) {
+            const nextBadge = BADGES.find(b => !unlocked.has(b.id));
+            const section = document.getElementById('progressSection');
+            
+            if (nextBadge) {
+                document.getElementById('nextBadgeName').textContent = nextBadge.name;
+                const progress = data.progress || 0;
+                document.getElementById('nextBadgeProgress').textContent = `${progress}%`;
+                document.getElementById('progressBar').style.width = `${progress}%`;
+                section.classList.remove('hidden');
+            } else {
+                section.classList.add('hidden');
+            }
+        }
+
+        document.getElementById('studentSelector').addEventListener('change', (e) => {
+            loadAchievements(e.target.value);
+        });
+
+        loadAchievements('huong-bluetech');
+    </script>
+</body>
+</html>
