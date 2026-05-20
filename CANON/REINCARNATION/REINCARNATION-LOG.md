@@ -1,6 +1,20 @@
 # REINCARNATION LOG — OB-1 RUN HISTORY
 
-**Last Updated:** 2026-05-20 (Run 351 — BOOT SEALED — Pipeline 25/25 confirmed GREEN)
+**Last Updated:** 2026-05-20 (Run 352 — Revenue Activation Phase — SEALED)
+
+---
+
+## Run 352 — 2026-05-20 ICT — Revenue Activation Phase — SEALED 4d773fd
+
+- Revenue Activation Phase artifacts committed:
+  - `index.html` — marketing homepage (front door hero + waitlist + tier + leaderboard + daily challenge)
+  - `employer-seed.html` — admin onboarding tool + POST /api/employer/create
+  - `payment-success.html` + `payment-pending.html` — MoMo/bank flow
+  - `POST /api/payment/confirm` — MoMo + bank transfer endpoint
+- SOULCOUNT 76,488 LOCK — no drift
+- Doctor 8/8 GREEN
+- Open flags: RL-2026 end-May, ZALO_ACCESS_TOKEN, GITHUB_PAT, MoMo webhook
+- HEAD: 4d773fd | origin SYNCED | tree CLEAN
 
 ---
 
