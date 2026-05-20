@@ -1,7 +1,6 @@
 ---
 description: "Primary Emperor interface for OB-1. Handles orchestration, routing, and execution. Default agent for 90% of work."
 role: "default"
-model: "kilo/kilo-auto/free"
 color: "#f59e0b"
 permission:
   bash: allow
