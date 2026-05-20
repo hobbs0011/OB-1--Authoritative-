@@ -71,6 +71,42 @@ async function computeHash(data) {
   return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, "0")).join("");
 }
 
+// ── POST /api/employer/create — admin: register a new company (internal tool)
+async function handleEmployerCreate(body, env) {
+  const { companyName, code, pin, students = [] } = body || {};
+  if (!companyName || !code || !pin || students.length === 0)
+    return json({ error: "companyName, code, pin, and at least 1 student required" }, 400);
+
+  const cleanCode = String(code).toUpperCase().replace(/[^A-Z0-9_]/g, "");
+  if (cleanCode.length < 3 || cleanCode.length > 20)
+    return json({ error: "code must be 3-20 chars, alphanumeric + underscore" }, 400);
+  if (!/^\d{4,6}$/.test(String(pin)))
+    return json({ error: "PIN must be 4-6 digits" }, 400);
+
+  const existing = await env.NET_PET_KV.get(`employer:${cleanCode}`);
+  if (existing) return json({ error: `Code ${cleanCode} already taken` }, 409);
+
+  // SHA-256 hash the PIN (same pattern as employer-portal.html client-side)
+  const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(String(pin)));
+  const pinHash = [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, "0")).join("");
+
+  const cleanStudents = students.map(s => ({
+    studentId: String(s.studentId || "").trim(),
+    name: String(s.name || "").trim()
+  })).filter(s => s.studentId && s.name);
+
+  const record = { companyName, pinHash, students: cleanStudents, createdAt: new Date(Date.now() + 7*3600000).toISOString() };
+  await env.NET_PET_KV.put(`employer:${cleanCode}`, JSON.stringify(record));
+
+  // Append to employer index
+  const idxRaw = await env.NET_PET_KV.get("employer:index");
+  const idx = idxRaw ? JSON.parse(idxRaw) : [];
+  idx.push(cleanCode);
+  await env.NET_PET_KV.put("employer:index", JSON.stringify(idx.slice(-100)));
+
+  return json({ success: true, code: cleanCode, companyName, studentCount: cleanStudents.length });
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -756,7 +792,12 @@ async function handleAPI(path, request, env, url) {
     return json(JSON.parse(raw));
   }
 
-  // ── GET /api/referral/stats ───────────────────────────────────────────────
+  // ── POST /api/employer/create — admin: register a new company (internal tool)
+  if (path === "/api/employer/create" && method === "POST") {
+    return handleEmployerCreate(await request.json(), env);
+  }
+
+   // ── GET /api/referral/stats ───────────────────────────────────────────────
   else if (method === "GET" && path.includes("/api/referral/stats")) {
     try {
       const waitlistJson = await env.NET_PET_KV.get("waitlist:index");
