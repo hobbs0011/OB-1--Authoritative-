@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+Disallow: /admin-dashboard
+Disallow: /vocab-admin
+Disallow: /referral-admin
+Disallow: /analytics-deep
+Disallow: /employer-seed
+Disallow: /dev
+
+Sitemap: https://net-pet-ai.mrmichaelhobbs123.workers.dev/sitemap.xml
