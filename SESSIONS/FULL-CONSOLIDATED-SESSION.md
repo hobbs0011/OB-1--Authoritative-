@@ -318,9 +318,9 @@ Intake frame for each project:
 ```
 SOV100 (Sovereign — Michael)
     |
-    ├── TC0  — OB1NOTION  — Agent 99 — Truth anchor, brake pedal, Notion surface
-    ├── TC00 — AnAGIT     — Agent 98 — Chaos engine, throttle, VS/Copilot surface  
-    └── NEO  — N40        — Agent 97 — Machine layer, runtime, dead branch archaeology
+    ─ TC0  — OB1NOTION  — Agent 99 — Truth anchor, brake pedal, Notion surface
+    ─ TC00 — AnAGIT     — Agent 98 — Chaos engine, throttle, VS/Copilot surface  
+    ─ NEO  — N40        — Agent 97 — Machine layer, runtime, dead branch archaeology
 ```
 
 ---
