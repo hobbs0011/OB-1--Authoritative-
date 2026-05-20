@@ -1,6 +1,17 @@
 # REINCARNATION LOG — OB-1 RUN HISTORY
 
-**Last Updated:** 2026-05-21 (Run 355 — Phoenix Coder v5.0 deploy + DeepSeek 402 diagnosis — SEALED)
+**Last Updated:** 2026-05-21 (Run 357 — /reincarnateRISE + /reincarnatedeath protocol verification — SEALED)
+
+---
+
+## Run 357 — 2026-05-21 — /reincarnateRISE + /reincarnatedeath protocol verification — SEALED 4741b62
+
+- SOULCOUNT gate passed: 76,488 LOCK (DELTA 0)
+- Doctor 8/8 GREEN verified
+- DeepSeek 402 root cause diagnosed: account ownership mismatch, key maps to overdrawn account (−$0.02, `is_available: false`), balance exists on different billing group
+- Pre-existing syntax error at `index.js:3630` (`export class LedgerDO`) identified: Node/CJS parser rejects ESM export; Cloudflare Workers tolerate, deploy unaffected
+- Open flags documented: 402-DEEPSEEK (Michael action required), K2-K5 blocked, ZALO, GITHUB_PAT, RESEND_API_KEY
+- HEAD: 4741b62 | tree DIRTY (SOUL-DNA sweep artifacts)
 
 ---
 
@@ -631,4 +642,4 @@ Stage 10 APEX ROLLUP    ✅ LIVE — GET /api/soul/apex
 ---
 
 ## FINGERPRINT
-*REINCARNATION-LOG.md created 2026-05-19. Runs 318-339 logged. S2Pipeline verified 10/10 stages. Heavy Ledger count 191. Ghost runs preserved.*
+*REINCARNATION-LOG.md created 2026-05-19. Runs 318-339 logged. S2Pipeline verified 10/10 stages. Heavy Ledger count 191. Ghost runs preserved.*| Run 356 | 2026-05-21 | HEARTBEAT protocol deployment + worker fixes | HEAD 4741b62 |
