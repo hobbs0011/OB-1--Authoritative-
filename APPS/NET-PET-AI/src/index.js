@@ -657,29 +657,16 @@ async function handleAPI(path, request, env, url) {
   if (path.startsWith("/api/referral/stats/") && method === "GET") { const referrerId = path.split("/api/referral/stats/")[1] || ""; return handleReferralStats(referrerId, request, env); }
   if (path === "/api/referral/convert" && method === "POST") { const body = await request.json(); return handleReferralConvert(body, request, env); }
 
-  // ── Phoenix Coder Queue Proxy ─────────────────────────────────────────────
-  // POST /api/pc/queue — queue a code generation task to Phoenix Coder drone
-  if (path === "/api/pc/queue" && method === "POST") {
-    const body = await request.json();
-    if (!body.task || !body.targetfile) return json({ error: "task and targetfile required" }, 400);
-    const pcResp = await fetch("https://phoenix-coder.mrmichaelhobbs123.workers.dev/api/queue", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ task: body.task, targetfile: body.targetfile, context: body.context || "", priority: body.priority || "normal" })
-    });
-    const pcData = await pcResp.json();
-    return addCors(json({ ...pcData, proxied: true }), request);
-  }
-  // GET /api/pc/queue — check queue status
-  if (path === "/api/pc/queue" && method === "GET") {
-    const status = url.searchParams.get("status") || "pending";
-    const pcResp = await fetch(`https://phoenix-coder.mrmichaelhobbs123.workers.dev/api/queue?status=${status}`);
-    const pcData = await pcResp.json();
-    return addCors(json({ ...pcData, proxied: true }), request);
-  }
-
-  // ── Anti-Cheat Engagement Scoring ─────────────────────────────────────────
-  // POST /api/anticheat/score — score a student session for genuine engagement
+   // ── Phoenix Coder Queue Proxy ─────────────────────────────────────────────
+   // POST /api/pc/queue — queue a code generation task to Phoenix Coder drone
+   if (path === "/api/pc/queue" && method === "POST") {
+   // ── Admin Statistics ─────────────────────────────────────────────────────
+   // GET /api/admin/stats — admin dashboard metrics
+   if (path === "/api/admin/stats" && method === "GET") {
+     return handleAdminStats(env);
+   }
+   // ── Anti-Cheat Engagement Scoring ─────────────────────────────────────────
+   // POST /api/anticheat/score — score a student session for genuine engagement
   if (path === "/api/anticheat/score" && method === "POST") { const body = await request.json(); return handleAntiCheatScore(body, env); }
   // GET /api/anticheat/history/:studentId — last 30 days of scores
   if (path.startsWith("/api/anticheat/history/") && method === "GET") {
@@ -730,218 +717,94 @@ async function handleAPI(path, request, env, url) {
       } catch (err) {
         return json({ error: String(err) }, 500);
       }
-    }
+}
+  // ── Payment Confirmation ────────────────────────────────────────────────────
+  // POST /api/payment/confirm — record a confirmed payment, activate subscription
+  if (path === "/api/payment/confirm" && method === "POST") {
+    const body = await request.json();
+    return handlePaymentConfirm(body, env);
   }
 
-  // ── GET /api/challenge/today ──────────────────────────────────────────────
-  else if (method === "GET" && path.includes("/api/challenge/today")) {
-    const today = new Date().toISOString().slice(0, 10);
-    const raw = await env.NET_PET_KV.get(`challenge:${today}`);
-    if (raw) {
-      const q = JSON.parse(raw);
-      const { correctAnswer, ...safe } = q;
-      return json(safe);
-    }
-    const CHALLENGE_BANK = [
-      {q:"Choose the correct verb: She ___ to school every day.", o:["go","goes","going","gone"],a:"goes"},
-      {q:"Which is the plural of 'child'?", o:["childs","children","childes","childern"],a:"children"},
-      {q:"Fill in: I have ___ a book.", o:["read","readed","reading","reads"],a:"read"},
-      {q:"What is the opposite of 'hot'?", o:["cold","warm","cool","wet"],a:"cold"},
-      {q:"Which sentence is correct?", o:["He don't like it.","He doesn't like it.","He not like it.","He no like it."],a:"He doesn't like it."},
-    ];
-    const questionNum = Math.floor(Math.random() * 30) + 1;
-    const pool = CHALLENGE_BANK.length > 0 ? CHALLENGE_BANK : [{q:"Default Q",o:["A","B","C","D"],a:"A"}];
-    const pick = pool[questionNum % pool.length];
-    const qObj = { question: pick.q, options: pick.o, correctAnswer: pick.a,
-      difficulty: "A1-A2", category: "grammar", generatedAt: new Date().toISOString(), expiresAt: new Date(Date.now() + 86400000).toISOString() };
-    await env.NET_PET_KV.put(`challenge:${today}`, JSON.stringify(qObj), { expirationTtl: 86400 });
-    const { correctAnswer, ...safeQ } = qObj;
-    return json(safeQ);
-  }
-
-  // ── POST /api/challenge/answer ────────────────────────────────────────────
-  else if (method === "POST" && path.includes("/api/challenge/answer")) {
-    try {
-      const body = await request.json().catch(() => ({}));
-      const { studentId, answer } = body;
-      if (!studentId || answer == null) return json({ error: "studentId and answer required" }, 400);
-      const today = new Date().toISOString().slice(0, 10);
-      const raw = await env.NET_PET_KV.get(`challenge:${today}`);
-      if (!raw) return json({ error: "No challenge for today. Get today's challenge first.", correct: false }, 404);
-      const q = JSON.parse(raw);
-      const correct = String(answer).trim().toLowerCase() === String(q.correctAnswer).trim().toLowerCase();
-      const resultKey = `challenge:result:${studentId}:${today}`;
-      await env.NET_PET_KV.put(resultKey, JSON.stringify({ studentId, answer, correct, checkedAt: new Date().toISOString() }));
-      return json({
-        correct,
-        correctAnswer: q.correctAnswer,
-        explanation: correct ? "Correct! Well done." : `Not quite. The correct answer is "${q.correctAnswer}".`,
-        date: today
-      });
-    } catch (err) {
-      return json({ error: String(err) }, 500);
-    }
-  }
-
-  // ── GET /api/employer/profile ─────────────────────────────────────────────
-  else if (method === "GET" && path.includes("/api/employer/profile")) {
-    const code = url.searchParams.get("employerCode");
-    if (!code) return json({ error: "employerCode query param required" }, 400);
-    const raw = await env.NET_PET_KV.get(`employer:${code}`);
-    if (!raw) return json({ error: "Employer not found" }, 404);
-    return json(JSON.parse(raw));
-  }
-
-  // ── POST /api/employer/create — admin: register a new company (internal tool)
-  if (path === "/api/employer/create" && method === "POST") {
-    return handleEmployerCreate(await request.json(), env);
-  }
-
-   // ── GET /api/referral/stats ───────────────────────────────────────────────
-  else if (method === "GET" && path.includes("/api/referral/stats")) {
-    try {
-      const waitlistJson = await env.NET_PET_KV.get("waitlist:index");
-      let totalWaitlist = 0, totalSent = 0, totalConverted = 0, topName = null, topScore = 0;
-      const entries = waitlistJson ? JSON.parse(waitlistJson) : [];
-      for (const id of entries) {
-        const w = env.NET_PET_KV ? await env.NET_PET_KV.get(`waitlist:${id}`).then(r => r ? JSON.parse(r) : null).catch(() => null) : null;
-        if (!w || !w.isActive) continue;
-        totalWaitlist++;
-        const n = w.referredCount || 0;
-        totalSent += n;
-        if (n > topScore) { topScore = n; topName = w.name || "top referrer"; }
-        if (w.status === "converted") totalConverted++;
-      }
-      const conv = totalWaitlist > 0 ? ((totalConverted / totalWaitlist) * 100).toFixed(1) + "%" : "0%";
-      return json({
-        totalWaitlist: totalWaitlist + 0, totalSent, totalConversions: totalConverted,
-        conversionRate: conv, topReferrer: { name: topName, converted: topScore }
-      });
-    } catch (err) {
-      return json({ error: String(err) }, 500);
-    }
-  }
-
-  // ── GET /api/student/achievements ─────────────────────────────────────────
-  else if (method === "GET" && path.includes("/api/student/achievements")) {
-    try {
-      const sid = url.searchParams.get("studentId");
-      if (!sid) return json({ error: "studentId query param required" }, 400);
-      const cached = await env.NET_PET_KV.get(`achievements:${sid}`);
-      if (cached) return json(JSON.parse(cached));
-      const goalRaw = await env.NET_PET_KV.get(`goals:${sid}`);
-      const today = new Date().toISOString().slice(0, 10);
-      let correct30 = 0;
-      for (let i = 0; i < 30; i++) {
-        const d = new Date(); d.setDate(d.getDate() - i);
-        const rk = `challenge:result:${sid}:${d.toISOString().slice(0,10)}`;
-        const r = await env.NET_PET_KV.get(rk).then(raw => raw ? JSON.parse(raw) : null).catch(() => null);
-        if (r && r.correct) correct30++;
-      }
-      const allBadges = [
-        { id:"first_steps",  name:"First Steps",     icon:"👣", desc:"Set your first goal",                    check:()=>!!goalRaw },
-        { id:"scholar_10",   name:"Sharp Scholar",   icon:"📚", desc:"10 correct daily challenges in 30 days", check:()=>correct30 >= 10 },
-      ];
-      const badges = allBadges.map(b => ({ id:b.id, name:b.name, icon:b.icon, desc:b.desc, unlocked: !!b.check(), unlockedAt: b.check() ? new Date().toISOString() : null }));
-      await env.NET_PET_KV.put(`achievements:${sid}`, JSON.stringify(badges), { expirationTtl: 3600 });
-      return json({ badges });
-    } catch (err) {
-      return json({ error: String(err) }, 500);
-    }
-  }
-
-  // ── POST /api/student/onboard ─────────────────────────────────────────────
-  else if (method === "POST" && path.includes("/api/student/onboard")) {
-    try {
-      const body = await request.json().catch(() => ({}));
-      const { studentId, cefr, goal, notificationPrefs } = body;
-      if (!studentId) return json({ error: "studentId required" }, 400);
-      const prefs = notificationPrefs || {};
-      await env.NET_PET_KV.put(`onboard:${studentId}`, JSON.stringify({
-        studentId, cefr: cefr || "A1", goal: goal || "general_english",
-        notificationPrefs: prefs,
-        completedAt: new Date().toISOString()
-      }));
-      return json({ success: true, studentId, message: "Onboarding complete." });
-    } catch (err) {
-      return json({ error: String(err) }, 500);
-    }
-  }
-
-  // ── GET/POST /api/notify/prefs ────────────────────────────────────────────
-  else if (path.includes("/api/notify/prefs")) {
-    if (method === "GET") {
-      const sid = path.split("?studentId=")[1]?.split("&")[0];
-      if (!sid) return json({ error: "studentId query param required" }, 400);
-      const raw = await env.NET_PET_KV.get(`notify:${sid}`);
-      return json(raw ? JSON.parse(raw) : { zaloId:"", email:"", preferredTime:"09:00", frequency:"daily", smsEnabled: false });
-    }
-    try {
-      const body = await request.json().catch(() => ({}));
-      const { studentId, zaloId, email, preferredTime, frequency, smsEnabled } = body;
-      if (!studentId || !zaloId) return json({ error: "studentId and zaloId required" }, 400);
-      const prefs = { studentId, zaloId, email: email||"", preferredTime: preferredTime||"09:00", frequency: frequency||"daily", smsEnabled: !!smsEnabled, updatedAt: new Date().toISOString() };
-      await env.NET_PET_KV.put(`notify:${studentId}`, JSON.stringify(prefs));
-      return json({ success: true, prefs });
-    } catch (err) {
-      return json({ error: String(err) }, 500);
-    }
-  }
-
-  return json({ error: "Not found" }, 404);
 }
 
-// ── Waitlist Handlers ─────────────────────────────────────────────────────────
+// ── Payment Handler ─────────────────────────────────────────────────────────────
 
-// POST /api/waitlist — add a student to the free-trial waitlist
-async function handleWaitlistJoin(body, env) {
-  const { name, email, phone, jobCategory, currentLevel, referralSource } = body || {};
-  if (!name || !email) return json({ error: "name and email required" }, 400);
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return json({ error: "invalid email" }, 400);
-
-  const id = `wl-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`;
-  const entry = {
-    id,
-    name,
-    email,
-    phone: phone || "",
-    jobCategory: jobCategory || "",
-    currentLevel: currentLevel || "",
-    referralSource: referralSource || "",
-    joinedAt: new Date(Date.now() + 7 * 3600000).toISOString(),
-    status: "waiting"
+async function handlePaymentConfirm(body, env) {
+  const { studentId, companyCode, plan, amountVND, txnId, confirmedBy } = body || {};
+  if (!plan || !txnId || !amountVND) return json({ error: "plan, txnId, amountVND required" }, 400);
+  const record = {
+    studentId: studentId || null, companyCode: companyCode || null, plan,
+    amountVND: Number(amountVND),
+    txnId: String(txnId).trim(),
+    confirmedBy: confirmedBy || "manual",
+    confirmedAt: new Date(Date.now()+7*3600000).toISOString(), status: "confirmed"
   };
-
-  // Store individual entry (1 year TTL)
-  await env.NET_PET_KV.put(`waitlist:entry:${id}`, JSON.stringify(entry), { expirationTtl: 86400 * 365 });
-
-  // Append to index (get-append-put, max 500)
-  const indexRaw = await env.NET_PET_KV.get("waitlist:index");
-  const index = indexRaw ? JSON.parse(indexRaw) : [];
-  index.push(id);
-  await env.NET_PET_KV.put("waitlist:index", JSON.stringify(index.slice(-500)));
-
-  return json({ ok: true, id, position: index.length, message: "You're on the list!" });
+  await env.NET_PET_KV.put(`payment:${txnId}`, JSON.stringify(record), { expirationTtl: 86400*365 });
+  const idxRaw = await env.NET_PET_KV.get("payment:index").catch(()=>null);
+  const idx = idxRaw ? JSON.parse(idxRaw) : [];
+  idx.push(txnId);
+  await env.NET_PET_KV.put("payment:index", JSON.stringify(idx.slice(-1000)));
+  const subKey = studentId ? `subscription:${studentId}` : `subscription:employer:${companyCode}`;
+  await env.NET_PET_KV.put(subKey, JSON.stringify({
+    plan, paidUntil: new Date(Date.now()+30*86400000).toISOString(), txnId,
+    activatedAt: record.confirmedAt
+  }));
+  const until = new Date(Date.now()+30*86400000).toISOString().slice(0,10);
+  return json({ success: true, txnId, activatedUntil: until });
 }
 
-// GET /api/waitlist/count — public count of waitlist entries
-async function handleWaitlistCount(env) {
-  const indexRaw = await env.NET_PET_KV.get("waitlist:index");
-  const count = indexRaw ? JSON.parse(indexRaw).length : 0;
-  return json({ count });
-}
+// ── Admin Statistics Handler ───────────────────────────────────────────────────
 
-// GET /api/waitlist/list — admin: last 50 entries with full details
-async function handleWaitlistList(env) {
-  const indexRaw = await env.NET_PET_KV.get("waitlist:index");
-  const ids = indexRaw ? JSON.parse(indexRaw) : [];
-  const entries = await Promise.all(ids.slice(-50).map(id => env.NET_PET_KV.get(`waitlist:entry:${id}`)));
-  return json({ count: ids.length, entries: entries.map(e => e ? JSON.parse(e) : null).filter(Boolean) });
+// GET /api/admin/stats — admin dashboard metrics
+async function handleAdminStats(env) {
+  const now = new Date(Date.now() + 7*3600000).toISOString();
+  const today = now.slice(0,10);
+
+  // Waitlist count
+  const wlIdx = await env.NET_PET_KV.get("waitlist:index").then(r => r ? JSON.parse(r) : []).catch(() => []);
+  const waitlistCount = wlIdx.length;
+
+  // Payment count
+  const payIdx = await env.NET_PET_KV.get("payment:index").then(r => r ? JSON.parse(r) : []).catch(() => []);
+  const totalRevenue = (await Promise.all(payIdx.slice(-100).map(async id => {
+    const raw = await env.NET_PET_KV.get(`payment:${id}`).catch(() => null);
+    return raw ? JSON.parse(raw).amountVND || 0 : 0;
+  }))).reduce((a,b) => a+b, 0);
+
+  // Employer count
+  const empIdx = await env.NET_PET_KV.get("employer:index").then(r => r ? JSON.parse(r) : []).catch(() => []);
+
+  // Active students (streak > 0, lastCheckin within 7 days)
+  const students = ["huong-bluetech","mai-tram-bluetech","quy-bluetech"];
+  let activeStudents = 0;
+  const streakChecks = await Promise.all(students.map(s => env.NET_PET_KV.get(`streak:${s}`).catch(() => null)));
+  streakChecks.forEach((raw, i) => {
+    if (raw) {
+      const d = JSON.parse(raw);
+      const p = d.lastCheckin ? Date.now() - d.lastCheckin : 999999;
+      if (d.currentStreak > 0 && p < 7*86400000) activeStudents++;
+    }
+  });
+
+  // Challenge attempts today
+  let challengeAttemptsToday = 0;
+  const chalRaw = await env.NET_PET_KV.get(`challenge:attempts:${today}`).catch(() => null);
+  if (chalRaw) challengeAttemptsToday = JSON.parse(chalRaw).length || 0;
+
+  return json({
+    waitlistCount,
+    paymentCount: payIdx.length,
+    totalRevenueVND: totalRevenue,
+    employerCount: empIdx.length,
+    activeStudents,
+    challengeAttemptsToday,
+    generatedAt: now
+  });
 }
 
 // ── Anti-Cheat Handlers ───────────────────────────────────────────────────────
 
-// POST /api/anticheat/score
+// POST /api/anticheat/score — score a student session for genuine engagement
 async function handleAntiCheatScore(body, env) {
   const { studentId, sessionData } = body || {};
   if (!studentId || !sessionData) return json({ error: "studentId and sessionData required" }, 400);

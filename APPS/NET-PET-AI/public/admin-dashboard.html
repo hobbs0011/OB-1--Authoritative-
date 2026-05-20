@@ -512,6 +512,24 @@
             </div>
         </header>
 
+        <!-- Platform Metrics -->
+        <div class="card" id="platform-metrics" style="margin-bottom:16px;display:none">
+          <div class="card-label">📊 PLATFORM METRICS</div>
+          <div id="metrics-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-top:12px">
+            <div class="metric-item"><div class="metric-value" id="m-waitlist">—</div><div class="metric-label">🎯 Waitlist</div></div>
+            <div class="metric-item"><div class="metric-value" id="m-revenue">—</div><div class="metric-label">💰 Revenue</div></div>
+            <div class="metric-item"><div class="metric-value" id="m-employers">—</div><div class="metric-label">🏢 Employers</div></div>
+            <div class="metric-item"><div class="metric-value" id="m-active">—</div><div class="metric-label">👥 Active 7d</div></div>
+            <div class="metric-item"><div class="metric-value" id="m-challenge">—</div><div class="metric-label">⚡ Today</div></div>
+            <div class="metric-item"><div class="metric-value" id="m-genuine">—</div><div class="metric-label">✅ Genuine</div></div>
+          </div>
+          <style>
+            .metric-item { background:var(--card);border:1px solid var(--border);border-radius:10px;padding:10px;text-align:center }
+            .metric-value { font-size:1.4rem;font-weight:700;color:var(--purple);font-family:'Orbitron',monospace }
+            .metric-label { font-size:0.72rem;color:var(--dim);margin-top:3px }
+          </style>
+        </div>
+
         <!-- SOULCOUNT -->
         <section class="soulcount-panel">
             <div class="section-label">Soul Logger</div>
@@ -660,6 +678,7 @@
                 initClock();
                 loadData();
                 setInterval(loadData, 60000);
+                setInterval(loadAdminStats, 60000);
             }
         }
 
@@ -704,6 +723,7 @@
 
         // ── MAIN LOAD ──
         async function loadData() {
+            loadAdminStats();
             const btn = document.getElementById('refreshBtn');
             if (btn) btn.disabled = true;
 
@@ -881,6 +901,25 @@
             }
             dateEl.textContent = data.date || '';
             textEl.textContent = data.digest;
+        }
+
+        // ── RENDER: ADMIN STATS ──
+        async function loadAdminStats() {
+            try {
+                const r = await fetch('/api/admin/stats');
+                if (!r.ok) return;
+                const d = await r.json();
+                const el = document.getElementById('platform-metrics');
+                if (!el) return;
+                document.getElementById('m-waitlist').textContent = d.waitlistCount || 0;
+                document.getElementById('m-revenue').textContent = (d.totalRevenueVND||0)/1000 >= 1
+                    ? ((d.totalRevenueVND||0)/1000).toFixed(0)+'K VND' : '0';
+                document.getElementById('m-employers').textContent = d.employerCount || 0;
+                document.getElementById('m-active').textContent = (d.activeStudents||0)+'/3';
+                document.getElementById('m-challenge').textContent = d.challengeAttemptsToday || 0;
+                document.getElementById('m-genuine').textContent = d.genuinePct ? Math.round(d.genuinePct)+'%' : '—';
+                el.style.display = 'block';
+            } catch(e) {}
         }
 
         // ── INIT ──
