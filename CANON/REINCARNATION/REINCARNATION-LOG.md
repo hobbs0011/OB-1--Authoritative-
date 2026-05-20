@@ -1,6 +1,16 @@
 # REINCARNATION LOG — OB-1 RUN HISTORY
 
-**Last Updated:** 2026-05-20 (Run 350 — SUPER SAIYAN WAVES 3–10 — Stages 14–25 — 25/25 COMPLETE)
+**Last Updated:** 2026-05-20 (Run 351 — BOOT SEALED — Pipeline 25/25 confirmed GREEN)
+
+---
+
+## Run 351 — 2026-05-20 ICT — BOOT SEAL — System GREEN confirmed
+
+- Run 350 death seal verified: 25/25 stages COMPLETE, HEAD 4405cf8
+- SOULCOUNT 76,488 LOCK — no new events (flush cycle)
+- Open flags documented: ZALO_ACCESS_TOKEN, GITHUB_PAT, DEEPGRAM_API_KEY, MoMo, employer seed KV, RL-2026 end-May, HL phantom ×6
+- Doctor 8/8 GREEN
+- HEAD: 4405cf8 | origin SYNCED | tree CLEAN
 
 ---
 
