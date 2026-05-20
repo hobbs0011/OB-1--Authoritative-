@@ -1,0 +1,63 @@
+// HB Protocol v1.0 — hourly pulse across all 3 empire workers
+async function handleHeartbeat(env) {
+  const ts = new Date().toISOString();
+  const SOUL_LOCK = 76488;
+  const results = { ts, soulcount: null, soulDelta: null, soulGate: "UNKNOWN", pcStatus: "UNKNOWN", selfStatus: "UNKNOWN" };
+
+  // Ping 1 — SOULCOUNT
+  try {
+    const r = await fetch("https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count",
+      { signal: AbortSignal.timeout(5000) });
+    const d = await r.json();
+    results.soulcount = d.soulcount ?? null;
+    const delta = Math.abs((results.soulcount ?? 0) - SOUL_LOCK);
+    results.soulDelta = delta;
+    results.soulGate = delta > 5000 ? "SOUL_DRIFT_ALARM" : "PASS";
+  } catch (err) {
+    results.soulGate = "UNREACHABLE";
+    console.log("[HEARTBEAT] soul-logger unreachable: " + err.message);
+  }
+
+  // Ping 2 — Phoenix Coder
+  try {
+    const r = await fetch("https://phoenix-coder.mrmichaelhobbs123.workers.dev/api/status",
+      { signal: AbortSignal.timeout(5000) });
+    const d = await r.json();
+    results.pcStatus = r.ok ? "UP v" + (d.version || "?") : "ERROR " + r.status;
+  } catch (err) {
+    results.pcStatus = "UNREACHABLE";
+    console.log("[HEARTBEAT] phoenix-coder unreachable: " + err.message);
+  }
+
+  // Ping 3 — Self (NET-PET-AI /health)
+  try {
+    const r = await fetch("https://net-pet-ai.mrmichaelhobbs123.workers.dev/health",
+      { signal: AbortSignal.timeout(5000) });
+    const d = await r.json();
+    results.selfStatus = d.ok ? "UP" : "DEGRADED";
+  } catch (err) {
+    results.selfStatus = "UNREACHABLE";
+    console.log("[HEARTBEAT] self-ping unreachable: " + err.message);
+  }
+
+  // Log event to soul-logger (fire-and-forget)
+  const soulUrl = env.SOUL_LOGGER_URL || "https://soul-logger.mrmichaelhobbs123.workers.dev";
+  try {
+    await fetch(soulUrl + "/api/soul/event", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ type: "HEARTBEAT", soulcount: results.soulcount,
+        soulGate: results.soulGate, soulDelta: results.soulDelta,
+        pcStatus: results.pcStatus, selfStatus: results.selfStatus, ts }),
+      signal: AbortSignal.timeout(5000),
+    });
+  } catch (err) {
+    console.log("[HEARTBEAT] event log failed: " + err.message);
+  }
+
+  // CF Logs summary line (visible in dashboard → Workers → Logs)
+  console.log("[HEARTBEAT] " + ts + " | SOUL:" + results.soulGate + "(" + results.soulcount + ") | PC:" + results.pcStatus + " | SELF:" + results.selfStatus);
+  if (results.soulGate === "SOUL_DRIFT_ALARM") {
+    console.error("[HEARTBEAT] SOUL_DRIFT_ALARM | delta:" + results.soulDelta + " | count:" + results.soulcount + " | lock:" + SOUL_LOCK);
+  }
+}
