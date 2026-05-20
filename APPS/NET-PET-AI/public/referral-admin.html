@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Referral Admin — NET-PET-AI</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            base: '#1f2937',
+            surface: '#111827',
+            text: '#e5e7eb',
+            accent: '#8b5cf6',
+            muted: '#6b7280',
+            gold: '#fbbf24',
+            silver: '#9ca3af',
+            bronze: '#b45309',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #1f2937; color: #e5e7eb; }
+    .card { background-color: #111827; }
+  </style>
+</head>
+<body class="min-h-screen">
+
+  <!-- ═══════════════════════════════════════ -->
+  <!--  PIN GATE                              -->
+  <!-- ═══════════════════════════════════════ -->
+  <div id="pin-gate" class="min-h-screen flex items-center justify-center">
+    <div class="card rounded-xl p-8 w-full max-w-md border border-accent/30 shadow-lg shadow-accent/10">
+      <h1 class="text-2xl font-bold text-accent mb-1">Referral Admin</h1>
+      <p class="text-muted text-sm mb-6">Enter administrator PIN to continue.</p>
+      <label for="pin-input" class="block text-sm font-medium mb-2">Admin PIN</label>
+      <input
+        id="pin-input"
+        type="password"
+        maxlength="30"
+        placeholder="Enter PIN"
+        class="w-full bg-surface border border-gray-600 rounded-lg px-4 py-2.5 text-text focus:outline-none focus:border-accent mb-4"
+      />
+      <p id="pin-error" class="text-red-500 text-sm mb-2 hidden">Incorrect PIN. Access denied.</p>
+      <button
+        id="pin-submit"
+        class="w-full bg-accent hover:bg-purple-600 text-white font-semibold py-2.5 rounded-lg transition-colors"
+      >Unlock</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!--  ADMIN PANEL                           -->
+  <!-- ═══════════════════════════════════════ -->
+  <div id="admin-panel" class="hidden min-h-screen p-6 md:p-10">
+
+    <!-- Header -->
+    <header class="flex items-center justify-between mb-8">
+      <div>
+        <h1 class="text-3xl font-bold text-accent">Referral Admin</h1>
+        <p class="text-muted mt-1">Live dashboard</p>
+      </div>
+      <div class="flex items-center gap-3">
+        <span id="last-refresh" class="text-muted text-sm"></span>
+        <button
+          id="refresh-btn"
+          class="bg-surface border border-gray-600 hover:border-accent text-text text-sm px-4 py-2 rounded-lg transition-colors"
+        >Refresh</button>
+        <button
+          id="lock-btn"
+          class="bg-surface border border-red-600 hover:bg-red-900/40 text-red-400 text-sm px-4 py-2 rounded-lg transition-colors"
+        >Lock</button>
+      </div>
+    </header>
+
+    <!-- Loading state -->
+    <div id="loading" class="hidden text-muted text-center py-20 text-lg">Loading data…</div>
+
+    <!-- Funnel Summary Cards -->
+    <section id="funnel-section" class="hidden mb-10">
+      <h2 class="text-lg font-semibold mb-4 text-muted uppercase tracking-wide">Funnel Summary</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+
+        <div class="card rounded-xl p-5 border border-gray-700 hover:border-accent/40 transition-colors">
+          <p class="text-muted text-xs uppercase tracking-wider mb-1">Total Waitlist</p>
+          <p id="card-waitlist" class="text-3xl font-bold text-text">—</p>
+        </div>
+
+        <div class="card rounded-xl p-5 border border-gray-700 hover:border-accent/40 transition-colors">
+          <p class="text-muted text-xs uppercase tracking-wider mb-1">Referrals Sent</p>
+          <p id="card-referrals" class="text-3xl font-bold text-text">—</p>
+        </div>
+
+        <div class="card rounded-xl p-5 border border-gray-700 hover:border-accent/40 transition-colors">
+          <p class="text-muted text-xs uppercase tracking-wider mb-1">Conversion Rate</p>
+          <p id="card-conversion" class="text-3xl font-bold text-accent">—</p>
+        </div>
+
+        <div class="card rounded-xl p-5 border border-gray-700 hover:border-accent/40 transition-colors">
+          <p class="text-muted text-xs uppercase tracking-wider mb-1">Top Referrer</p>
+          <p id="card-topref" class="text-3xl font-bold text-text truncate">—</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Referral Code Table -->
+    <section id="table-section" class="hidden mb-10">
+      <h2 class="text-lg font-semibold mb-4 text-muted uppercase tracking-wide">All Referral Codes</h2>
+      <div class="card rounded-xl border border-gray-700 overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="bg-surface border-b border-gray-700">
+                <th class="text-left px-5 py-3 text-muted font-semibold uppercase tracking-wider">Referral Code</th>
+                <th class="text-left px-5 py-3 text-muted font-semibold uppercase tracking-wider">Referrer Name</th>
+                <th class="text-right px-5 py-3 text-muted font-semibold uppercase tracking-wider">Uses</th>
+                <th class="text-right px-5 py-3 text-muted font-semibold uppercase tracking-wider">Converted</th>
+              </tr>
+            </thead>
+            <tbody id="code-tbody">
+              <tr><td colspan="4" class="px-5 py-6 text-center text-muted">Loading…</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p id="code-empty" class="hidden px-5 py-6 text-center text-muted">No referral codes found.</p>
+      </div>
+    </section>
+
+    <!-- Top 10 Referrers Leaderboard -->
+    <section id="leaderboard-section" class="hidden">
+      <h2 class="text-lg font-semibold mb-4 text-muted uppercase tracking-wide">Top 10 Referrers</h2>
+      <div class="card rounded-xl border border-gray-700 overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="bg-surface border-b border-gray-700">
+                <th class="text-center px-5 py-3 text-muted font-semibold uppercase tracking-wider w-16">Rank</th>
+                <th class="text-left px-5 py-3 text-muted font-semibold uppercase tracking-wider">Name</th>
+                <th class="text-right px-5 py-3 text-muted font-semibold uppercase tracking-wider">Converted</th>
+              </tr>
+            </thead>
+            <tbody id="leader-tbody">
+              <tr><td colspan="3" class="px-5 py-6 text-center text-muted">Loading…</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p id="leader-empty" class="hidden px-5 py-6 text-center text-muted">No referrer data.</p>
+      </div>
+    </section>
+
+    <!-- Error banner -->
+    <div id="error-banner" class="hidden fixed bottom-6 left-1/2 -translate-x-1/2 bg-red-900/80 border border-red-500 text-red-200 px-6 py-3 rounded-lg shadow-lg max-w-lg text-sm"></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!--  SCRIPT                                  -->
+  <!-- ═══════════════════════════════════════ -->
+  <script>
+    (() => {
+      'use strict';
+
+      // ── Elements ──────────────────────────────────────
+      const pinGate       = document.getElementById('pin-gate');
+      const adminPanel    = document.getElementById('admin-panel');
+      const pinInput      = document.getElementById('pin-input');
+      const pinError      = document.getElementById('pin-error');
+      const pinSubmit     = document.getElementById('pin-submit');
+      const lockBtn       = document.getElementById('lock-btn');
+      const refreshBtn    = document.getElementById('refresh-btn');
+      const loadingEl     = document.getElementById('loading');
+      const lastRefreshEl = document.getElementById('last-refresh');
+      const errorBanner   = document.getElementById('error-banner');
+
+      const funnelSec     = document.getElementById('funnel-section');
+      const tableSec      = document.getElementById('table-section');
+      const leaderSec     = document.getElementById('leaderboard-section');
+
+      const cardWaitlist  = document.getElementById('card-waitlist');
+      const cardReferrals = document.getElementById('card-referrals');
+      const cardConv      = document.getElementById('card-conversion');
+      const cardTopref    = document.getElementById('card-topref');
+
+      const codeTbody     = document.getElementById('code-tbody');
+      const codeEmpty     = document.getElementById('code-empty');
+      const leaderTbody   = document.getElementById('leader-tbody');
+      const leaderEmpty   = document.getElementById('leader-empty');
+
+      const CORRECT_PIN   = 'net2026admin';
+
+      // ── Helpers ───────────────────────────────────────
+      function showError(msg) {
+        pinError.textContent = msg || 'Incorrect PIN. Access denied.';
+        pinError.classList.remove('hidden');
+        setTimeout(() => pinError.classList.add('hidden'), 4000);
+      }
+
+      function showErrorBanner(msg) {
+        errorBanner.textContent = msg;
+        errorBanner.classList.remove('hidden');
+        setTimeout(() => errorBanner.classList.add('hidden'), 5000);
+      }
+
+      function fmt(n) {
+        if (n === null || n === undefined || isNaN(n)) return '—';
+        return Number(n).toLocaleString();
+      }
+
+      function fmtPct(n, d) {
+        if (n === null || n === undefined) return '—';
+        return Number(n).toFixed(d !== undefined ? d : 1) + '%';
+      }
+
+      function setLastRefresh(ts) {
+        if (ts) {
+          lastRefreshEl.textContent = 'Updated ' + new Date(ts).toLocaleTimeString(undefined, {
+            hour: '2-digit', minute: '2-digit', second: '2-digit'
+          });
+        }
+      }
+
+      function lockPanel() {
+        adminPanel.classList.add('hidden');
+        pinGate.classList.remove('hidden');
+        pinInput.value = '';
+        pinError.classList.add('hidden');
+      }
+
+      // ── PIN Gate ─────────────────────────────────────
+      pinSubmit.addEventListener('click', attemptUnlock);
+      pinInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') attemptUnlock();
+      });
+
+      function attemptUnlock() {
+        if (pinInput.value === CORRECT_PIN) {
+          pinError.classList.add('hidden');
+          pinGate.classList.add('hidden');
+          adminPanel.classList.remove('hidden');
+          loadAll();
+        } else {
+          pinError.classList.remove('hidden');
+          pinInput.value = '';
+          pinInput.focus();
+        }
+      }
+
+      lockBtn.addEventListener('click', lockPanel);
+
+      // ── Fetch: waitlist & stats ──────────────────────
+      async function fetchJSON(url) {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(`HTTP ${res.status} — ${res.statusText} (${url})`);
+        return res.json();
+      }
+
+      async function loadAll() {
+        loadingEl.classList.remove('hidden');
+        funnelSec.classList.add('hidden');
+        tableSec.classList.add('hidden');
+        leaderSec.classList.add('hidden');
+
+        try {
+          const [waitlistRes, statsRes] = await Promise.all([
+            fetchJSON('/api/waitlist/list'),
+            fetchJSON('/api/referral/stats'),
+          ]);
+
+          renderFunnel(waitlistRes, statsRes);
+          renderCodeTable(statsRes);
+          renderLeaderboard(statsRes);
+          setLastRefresh(Date.now());
+        } catch (err) {
+          showErrorBanner('Failed to load data: ' + err.message);
+        } finally {
+          loadingEl.classList.add('hidden');
+        }
+      }
+
+      // ── Render: funnel ───────────────────────────────
+      function renderFunnel(waitlist, stats) {
+        funnelSec.classList.remove('hidden');
+
+        const total = Array.isArray(waitlist) ? waitlist.length : 0;
+        cardWaitlist.textContent = fmt(total);
+
+        const sentCount   = stats?.totalReferralsSent   != null ? stats.totalReferralsSent   : (stats?.referralsSent != null ? stats.referralsSent : '—');
+        const convRate    = stats?.conversionRate       != null ? stats.conversionRate : '—';
+        const topRefName  = stats?.topReferrerName      || stats?.topReferrer?.name || '—';
+
+        cardReferrals.textContent = fmt(sentCount);
+        cardConv.textContent      = typeof convRate === 'number' ? fmtPct(convRate, 1) : (convRate || '—');
+        cardTopref.textContent    = topRefName;
+      }
+
+      // ── Render: code table ───────────────────────────
+      function renderCodeTable(stats) {
+        tableSec.classList.remove('hidden');
+        codeTbody.innerHTML = '';
+        codeEmpty.classList.add('hidden');
+
+        let rows = stats?.referralCodes || stats?.codes || stats?.topReferralCodes || [];
+
+        if (!Array.isArray(rows) || rows.length === 0) {
+          codeEmpty.classList.remove('hidden');
+          return;
+        }
+
+        rows.sort((a, b) => (b.converted ?? b.convertedCount ?? 0) - (a.converted ?? a.convertedCount ?? 0));
+
+        rows.forEach(row => {
+          const code      = row.code    || row.referralCode || row.id     || '—';
+          const name      = row.name    || row.referrerName || row.owner  || '—';
+          const uses      = row.uses    ?? row.useCount    ?? row.count ?? 0;
+          const converted = row.converted ?? row.convertedCount ?? 0;
+
+          const tr = document.createElement('tr');
+          tr.className = 'border-b border-gray-700/60 hover:bg-surface/50 transition-colors';
+          tr.innerHTML = `
+            <td class="px-5 py-3 font-mono text-accent">${escHtml(code)}</td>
+            <td class="px-5 py-3 text-text">${escHtml(name)}</td>
+            <td class="px-5 py-3 text-right text-muted">${fmt(uses)}</td>
+            <td class="px-5 py-3 text-right font-semibold text-green-400">${fmt(converted)}</td>
+          `;
+          codeTbody.appendChild(tr);
+        });
+      }
+
+      // ── Render: leaderboard ──────────────────────────
+      function renderLeaderboard(stats) {
+        leaderSec.classList.remove('hidden');
+        leaderTbody.innerHTML = '';
+        leaderEmpty.classList.add('hidden');
+
+        let entries = stats?.topReferrers || stats?.leaderboard || [];
+
+        if (!Array.isArray(entries) || entries.length === 0) {
+          leaderEmpty.classList.remove('hidden');
+          return;
+        }
+
+        // Sort by converted descending, take top 10
+        entries.sort((a, b) => (b.converted ?? b.convertedCount ?? 0) - (a.converted ?? a.convertedCount ?? 0));
+        entries = entries.slice(0, 10);
+
+        const medal = ['🥇', '🥈', '🥉'];
+
+        entries.forEach((entry, i) => {
+          const rank = i + 1;
+          const name = entry.name || entry.referrerName || entry.owner || '—';
+          const converted = entry.converted ?? entry.convertedCount ?? 0;
+
+          const medalRaw = entry.rank ?? entry.medal ?? null;
+          let badge = '';
+          if (medalRaw === 1 || medalRaw === 'gold')      badge = '🥇';
+          else if (medalRaw === 2 || medalRaw === 'silver') badge = '🥈';
+          else if (medalRaw === 3 || medalRaw === 'bronze') badge = '🥉';
+          else badge = rank <= 3 ? medal[i] : '#';
+
+          const rankColor = i === 0 ? 'text-gold'   : i === 1 ? 'text-silver' : i === 2 ? 'text-bronze' : 'text-muted';
+
+          const tr = document.createElement('tr');
+          tr.className = 'border-b border-gray-700/60 hover:bg-surface/50 transition-colors';
+          tr.innerHTML = `
+            <td class="px-5 py-3 text-center text-lg font-bold ${rankColor}">${escHtml(badge)}</td>
+            <td class="px-5 py-3 text-text font-medium">${escHtml(name)}</td>
+            <td class="px-5 py-3 text-right font-semibold text-green-400">${fmt(converted)}</td>
+          `;
+          leaderTbody.appendChild(tr);
+        });
+      }
+
+      // ── Utility ───────────────────────────────────────
+      function escHtml(str) {
+        const d = document.createElement('div');
+        d.textContent = str;
+        return d.innerHTML;
+      }
+
+      // ── Auto-refresh ──────────────────────────────────
+      refreshBtn.addEventListener('click', loadAll);
+
+      // ── Auto-refresh every 60 s ───────────────────────
+      setInterval(loadAll, 60_000);
+
+    })();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vocabulary Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #1f2937; color: #e5e7eb; }
+        .progress-bar { height: 0.5rem; border-radius: 0.25rem; }
+        .progress-red { background-color: #ef4444; }
+        .progress-amber { background-color: #f59e0b; }
+        .progress-green { background-color: #10b981; }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Password Gate -->
+    <div id="password-gate" class="flex items-center justify-center min-h-screen">
+        <div class="bg-[#111827] p-8 rounded-lg shadow-xl w-full max-w-sm">
+            <h1 class="text-2xl font-bold mb-6 text-center text-[#f59e0b]">Vocabulary Admin</h1>
+            <label class="block text-sm font-medium mb-2">Admin PIN</label>
+            <input type="password" id="admin-pin" autocomplete="current-password" class="w-full px-3 py-2 bg-[#1f2937] border border-[#374151] rounded-md focus:outline-none focus:ring-2 focus:ring-[#f59e0b] mb-4" placeholder="Enter PIN">
+            <button type="button" id="unlock-btn" class="w-full bg-[#f59e0b] text-gray-900 font-semibold py-2 rounded-md hover:bg-amber-600 transition">Unlock</button>
+            <p id="pin-error" class="mt-4 text-red-500 text-sm hidden">Incorrect PIN. Access denied.</p>
+        </div>
+    </div>
+
+    <!-- Admin Panel -->
+    <div id="admin-panel" class="hidden p-6">
+        <h1 class="text-3xl font-bold mb-6 text-[#f59e0b]">Vocabulary Admin Panel</h1>
+
+        <!-- Student Selector -->
+        <div class="mb-6">
+            <label class="block text-sm font-medium mb-2">Select Student</label>
+            <select id="student-select" class="px-3 py-2 bg-[#111827] border border-[#374151] rounded-md focus:outline-none focus:ring-2 focus:ring-[#f59e0b]">
+                <option value="huong">Huong</option>
+                <option value="mai-tram">Mai Tram</option>
+                <option value="quy">Quy</option>
+            </select>
+        </div>
+
+        <!-- Bulk Add Vocabulary -->
+        <div class="mb-8">
+            <h2 class="text-xl font-semibold mb-3">Bulk Add Vocabulary</h2>
+            <p class="text-sm text-gray-400 mb-2">Format: word | Vietnamese | part_of_speech (one per line)</p>
+            <textarea id="vocab-input" rows="5" class="w-full px-3 py-2 bg-[#111827] border border-[#374151] rounded-md focus:outline-none focus:ring-2 focus:ring-[#f59e0b] mb-3" placeholder="hello | xin chào | greeting
+goodbye | tạm biệt | greeting"></textarea>
+            <button type="button" id="add-words-btn" class="bg-[#f59e0b] text-gray-900 font-semibold px-4 py-2 rounded-md hover:bg-amber-600 transition">Add Words</button>
+            <p id="add-result" class="mt-2 text-sm"></p>
+        </div>
+
+        <!-- Vocabulary Table -->
+        <div class="mb-6">
+            <div class="flex justify-between items-center mb-3">
+                <h2 class="text-xl font-semibold">Vocabulary List</h2>
+                <button type="button" id="export-csv-btn" class="bg-[#111827] border border-[#f59e0b] text-[#f59e0b] px-4 py-2 rounded-md hover:bg-[#1f2937] transition">Export CSV</button>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full bg-[#111827] rounded-lg overflow-hidden">
+                    <thead>
+                        <tr class="bg-[#1f2937] text-left">
+                            <th class="px-4 py-3 font-medium">Word</th>
+                            <th class="px-4 py-3 font-medium">Vietnamese</th>
+                            <th class="px-4 py-3 font-medium">Mastery</th>
+                            <th class="px-4 py-3 font-medium">SRS Due</th>
+                        </tr>
+                    </thead>
+                    <tbody id="vocab-table-body"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            const CORRECT_PIN = 'net2026admin';
+            const STUDENT_MAP = {
+                'huong': 'huong',
+                'mai-tram': 'mai-tram',
+                'quy': 'quy'
+            };
+
+            // DOM Elements
+            const passwordGate = document.getElementById('password-gate');
+            const adminPanel = document.getElementById('admin-panel');
+            const adminPin = document.getElementById('admin-pin');
+            const unlockBtn = document.getElementById('unlock-btn');
+            const pinError = document.getElementById('pin-error');
+            const studentSelect = document.getElementById('student-select');
+            const vocabInput = document.getElementById('vocab-input');
+            const addWordsBtn = document.getElementById('add-words-btn');
+            const addResult = document.getElementById('add-result');
+            const vocabTableBody = document.getElementById('vocab-table-body');
+            const exportCsvBtn = document.getElementById('export-csv-btn');
+
+            let currentVocab = [];
+
+            // Password Gate Handler
+            unlockBtn.addEventListener('click', function() {
+                if (adminPin.value === CORRECT_PIN) {
+                    passwordGate.classList.add('hidden');
+                    adminPanel.classList.remove('hidden');
+                    loadVocab(studentSelect.value);
+                } else {
+                    pinError.classList.remove('hidden');
+                    adminPin.value = '';
+                }
+            });
+
+            adminPin.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    unlockBtn.click();
+                }
+            });
+
+            // Student Select Handler
+            studentSelect.addEventListener('change', function() {
+                loadVocab(this.value);
+            });
+
+            // Add Words Handler
+            addWordsBtn.addEventListener('click', function() {
+                const lines = vocabInput.value.trim().split('\n');
+                let addedCount = 0;
+
+                for (const line of lines) {
+                    const parts = line.split('|').map(p => p.trim()).filter(p => p);
+                    if (parts.length >= 3) {
+                        const [word, vietnamese, pos] = parts;
+                        addWord({ word, vietnamese, pos, studentId: studentSelect.value });
+                        addedCount++;
+                    }
+                }
+
+                if (addedCount > 0) {
+                    addResult.textContent = `Added ${addedCount} word(s) successfully.`;
+                    addResult.className = 'mt-2 text-sm text-green-400';
+                    vocabInput.value = '';
+                    loadVocab(studentSelect.value);
+                } else {
+                    addResult.textContent = 'No valid entries found. Use format: word | Vietnamese | part_of_speech';
+                    addResult.className = 'mt-2 text-sm text-red-400';
+                }
+            });
+
+            // Export CSV Handler
+            exportCsvBtn.addEventListener('click', function() {
+                if (currentVocab.length === 0) {
+                    alert('No vocabulary to export.');
+                    return;
+                }
+
+                let csvContent = 'Word,Vietnamese,Mastery,SRS Due\n';
+                currentVocab.forEach(item => {
+                    csvContent += `"${item.word}","${item.vietnamese}","${item.mastery}%","${item.srsDue || ''}"\n`;
+                });
+
+                const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.setAttribute('href', url);
+                link.setAttribute('download', `vocab_${studentSelect.value}_${new Date().toISOString().split('T')[0]}.csv`);
+                link.style.visibility = 'hidden';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            });
+
+            // API Functions
+            async function loadVocab(studentId) {
+                try {
+                    const response = await fetch(`/api/vocab/list?studentId=${studentId}`);
+                    if (response.ok) {
+                        currentVocab = await response.json();
+                        renderVocabTable();
+                    } else {
+                        currentVocab = [];
+                        renderVocabTable();
+                    }
+                } catch (error) {
+                    console.error('Failed to load vocabulary:', error);
+                    currentVocab = [];
+                    renderVocabTable();
+                }
+            }
+
+            async function addWord(data) {
+                try {
+                    const response = await fetch('/api/vocab/add', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(data)
+                    });
+                    return response.ok;
+                } catch (error) {
+                    console.error('Failed to add word:', error);
+                    return false;
+                }
+            }
+
+            // Render Functions
+            function renderVocabTable() {
+                vocabTableBody.innerHTML = '';
+
+                if (currentVocab.length === 0) {
+                    const row = document.createElement('tr');
+                    const cell = document.createElement('td');
+                    cell.colSpan = 4;
+                    cell.className = 'px-4 py-3 text-center text-gray-500';
+                    cell.textContent = 'No vocabulary found.';
+                    row.appendChild(cell);
+                    vocabTableBody.appendChild(row);
+                    return;
+                }
+
+                currentVocab.forEach(item => {
+                    const row = document.createElement('tr');
+                    row.className = 'border-b border-[#1f2937]';
+
+                    // Word Column
+                    const wordCell = document.createElement('td');
+                    wordCell.className = 'px-4 py-3';
+                    wordCell.textContent = item.word || '';
+                    row.appendChild(wordCell);
+
+                    // Vietnamese Column
+                    const vietCell = document.createElement('td');
+                    vietCell.className = 'px-4 py-3';
+                    vietCell.textContent = item.vietnamese || '';
+                    row.appendChild(vietCell);
+
+                    // Mastery Column
+                    const masteryCell = document.createElement('td');
+                    masteryCell.className = 'px-4 py-3';
+                    const mastery = item.mastery || 0;
+                    const progressDiv = document.createElement('div');
+                    progressDiv.className = 'w-full bg-[#1f2937] rounded-full overflow-hidden';
+                    const progressBar = document.createElement('div');
+                    progressBar.className = 'progress-bar';
+                    progressBar.style.width = `${mastery}%`;
+                    if (mastery < 30) {
+                        progressBar.classList.add('progress-red');
+                    } else if (mastery <= 70) {
+                        progressBar.classList.add('progress-amber');
+                    } else {
+                        progressBar.classList.add('progress-green');
+                    }
+                    progressDiv.appendChild(progressBar);
+                    const masteryText = document.createElement('div');
+                    masteryText.className = 'text-xs mt-1';
+                    masteryText.textContent = `${mastery}%`;
+                    masteryCell.appendChild(progressDiv);
+                    masteryCell.appendChild(masteryText);
+                    row.appendChild(masteryCell);
+
+                    // SRS Due Column
+                    const srsCell = document.createElement('td');
+                    srsCell.className = 'px-4 py-3';
+                    srsCell.textContent = item.srsDue || '-';
+                    row.appendChild(srsCell);
+
+                    vocabTableBody.appendChild(row);
+                });
+            }
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Discover how Natural English Training uses AI-powered coaching and a structured roadmap to take you from A1 to B1 fluency.">
+    <title>How It Works - Natural English Training</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        accent: {
+                            DEFAULT: '#10b981',
+                            light: '#34d399',
+                            dark: '#059669',
+                        },
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        :root { color-scheme: dark; }
+        html { background-color: #111827; }
+        body { font-family: 'Inter', system-ui, sans-serif; }
+        .gantt-bar { transition: width 0.6s ease, background-color 0.3s ease; }
+        @media (min-width: 768px) {
+            .step-connector::after {
+                content: ''; position: absolute;
+                background-color: rgba(16, 185, 129, 0.3);
+                top: 50%; left: 100%; width: calc(100% - 4rem); height: 2px; transform: translateY(-50%);
+            }
+            .step-item:last-child .step-connector::after { display: none; }
+        }
+        @media (max-width: 767px) {
+            .step-connector::after {
+                content: ''; position: absolute;
+                background-color: rgba(16, 185, 129, 0.3);
+                top: 100%; left: 50%; width: 2px; height: 2rem; transform: translateX(-50%);
+            }
+            .step-item:last-child .step-connector::after { display: none; }
+        }
+        .timeline-dot { box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.15); }
+        .accent-glow { box-shadow: 0 0 24px rgba(16, 185, 129, 0.12), 0 0 4px rgba(16, 185, 129, 0.2); }
+        .roadmap-bar { height: 28px; border-radius: 6px; min-width: 4px; }
+        table { border-collapse: separate; border-spacing: 0; }
+    </style>
+</head>
+<body class="bg-[#111827] text-[#f9fafb] min-h-screen">
+    <nav class="sticky top-0 z-50 bg-[#111827]/95 backdrop-blur-md border-b border-gray-800/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-lg bg-emerald-500/20 flex items-center justify-center">
+                        <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/>
+                        </svg>
+                    </span>
+                    <span class="text-lg font-semibold tracking-tight text-gray-100">Natural English</span>
+                </div>
+                <div class="hidden sm:flex items-center gap-6 text-sm font-medium text-gray-400">
+                    <a href="#how-it-works" class="hover:text-emerald-400 transition">How It Works</a>
+                    <a href="#tech-stack" class="hover:text-emerald-400 transition">Tech Stack</a>
+                    <a href="#roadmap" class="hover:text-emerald-400 transition">Roadmap</a>
+                    <a href="#outcomes" class="hover:text-emerald-400 transition">Outcomes</a>
+                </div>
+                <div class="flex items-center gap-2 text-xs text-emerald-400/80 font-medium">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span class="hidden sm:inline">Carbon-Neutral Infrastructure</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section id="how-it-works" class="relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-emerald-500/5 via-transparent to-transparent pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12 md:pt-24 md:pb-16 relative">
+            <div class="text-center max-w-3xl mx-auto">
+                <span class="inline-block px-4 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase bg-emerald-500/10 text-emerald-400 border border-emerald-500/25 mb-6">AI-Powered Language Training</span>
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-gray-50 leading-tight">How It <span class="text-emerald-400">Works</span></h1>
+                <p class="mt-5 text-lg sm:text-xl text-gray-400 leading-relaxed max-w-2xl mx-auto">A structured 6-month journey from A1 beginner to B1 conversational fluency - powered by edge AI, personalized coaching, and proven learning science.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+        <div class="text-center mb-14">
+            <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-gray-50">Your Learning Journey</h2>
+            <p class="mt-3 text-gray-400 text-lg max-w-xl mx-auto">Five deliberate steps designed to transform your English ability.</p>
+        </div>
+        <div class="flex flex-col md:flex-row items-stretch md:items-start justify-center gap-0 md:gap-0">
+            <div class="step-item relative flex-1 flex flex-col items-center text-center px-3 pb-8 md:pb-0">
+                <div class="step-connector relative z-10 flex-shrink-0 w-16 h-16 rounded-full bg-[#1a2332] border-2 border-emerald-500/60 flex items-center justify-center timeline-dot mb-4"><span class="text-2xl font-bold text-emerald-400">1</span></div>
+                <h3 class="text-lg font-semibold text-gray-100 mb-2">Assessment</h3>
+                <p class="text-sm text-gray-400 leading-relaxed max-w-[200px]">Initial diagnostic evaluates your level across speaking, listening, reading, and writing in under 15 minutes.</p>
+            </div>
+            <div class="step-item relative flex-1 flex flex-col items-center text-center px-3 pb-8 md:pb-0">
+                <div class="step-connector relative z-10 flex-shrink-0 w-16 h-16 rounded-full bg-[#1a2332] border-2 border-emerald-500/60 flex items-center justify-center timeline-dot mb-4"><span class="text-2xl font-bold text-emerald-400">2</span></div>
+                <h3 class="text-lg font-semibold text-gray-100 mb-2">Custom Plan</h3>
+                <p class="text-sm text-gray-400 leading-relaxed max-w-[200px]">AI generates a personalized learning path targeting your specific weaknesses, goals, and preferred pace.</p>
+            </div>
+            <div class="step-item relative flex-1 flex flex-col items-center text-center px-3 pb-8 md:pb-0">
+                <div class="step-connector relative z-10 flex-shrink-0 w-16 h-16 rounded-full bg-[#1a2332] border-2 border-emerald-500/60 flex items-center justify-center timeline-dot mb-4"><span class="text-2xl font-bold text-emerald-400">3</span></div>
+                <h3 class="text-lg font-semibold text-gray-100 mb-2">AI Coach</h3>
+                <p class="text-sm text-gray-400 leading-relaxed max-w-[200px]">24/7 conversational AI coach delivers real-time feedback on pronunciation, grammar, and natural phrasing.</p>
+            </div>
+            <div class="step-item relative flex-1 flex flex-col items-center text-center px-3 pb-8 md:pb-0">
+                <div class="step-connector relative z-10 flex-shrink-0 w-16 h-16 rounded-full bg-[#1a2332] border-2 border-emerald-500/60 flex items-center justify-center timeline-dot mb-4"><span class="text-2xl font-bold text-emerald-400">4</span></div>
+                <h3 class="text-lg font-semibold text-gray-100 mb-2">Practice</h3>
+                <p class="text-sm text-gray-400 leading-relaxed max-w-[200px]">Daily micro-lessons and interactive exercises reinforce learning through spaced repetition and active recall.</p>
+            </div>
+            <div class="step-item relative flex-1 flex flex-col items-center text-center px-3 pb-8 md:pb-0">
+                <div class="step-connector relative z-10 flex-shrink-0 w-16 h-16 rounded-full bg-emerald-500/20 border-2 border-emerald-400 flex items-center justify-center accent-glow mb-4"><span class="text-2xl font-bold text-emerald-300">5</span></div>
+                <h3 class="text-lg font-semibold text-emerald-300 mb-2">Fluency</h3>
+                <p class="text-sm text-gray-400 leading-relaxed max-w-[200px]">Achieve natural, confident English communication at B1 level - ready for work, travel, and daily life.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="tech-stack" class="bg-[#0f1521] border-y border-gray-800/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-gray-50">Powered by Modern Edge Technology</h2>
+                <p class="mt-3 text-gray-400 text-lg max-w-xl mx-auto">Our infrastructure runs on carbon-neutral edge cloud — fast, scalable, and globally distributed.</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                <div class="bg-[#111827] border border-gray-700/50 rounded-xl p-6 hover:border-emerald-500/30 transition">
+                    <div class="w-10 h-10 bg-emerald-500/10 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </div>
+                    <h3 class="font-semibold text-gray-100 mb-1">Cloudflare Workers</h3>
+                    <p class="text-sm text-gray-400">Serverless edge compute — sub-millisecond response globally. No servers, zero maintenance.</p>
+                </div>
+                <div class="bg-[#111827] border border-gray-700/50 rounded-xl p-6 hover:border-emerald-500/30 transition">
+                    <div class="w-10 h-10 bg-emerald-500/10 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2 1 3 3 3s3-1 3-3V7c0-2-1-3-3-3S4 5 4 7zm0 6c0 2 1 3 3 3s3-1 3-3"/></svg>
+                    </div>
+                    <h3 class="font-semibold text-gray-100 mb-1">KV Store</h3>
+                    <p class="text-sm text-gray-400">Distributed key-value store for student sessions, vocab decks, and rate limits. Global, durable, fast.</p>
+                </div>
+                <div class="bg-[#111827] border border-gray-700/50 rounded-xl p-6 hover:border-emerald-500/30 transition">
+                    <div class="w-10 h-10 bg-emerald-500/10 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                    </div>
+                    <h3 class="font-semibold text-gray-100 mb-1">Durable Objects SQLite</h3>
+                    <p class="text-sm text-gray-400">Strongly consistent per-student brain state. Progress never lost, even across restarts.</p>
+                </div>
+                <div class="bg-[#111827] border border-gray-700/50 rounded-xl p-6 hover:border-emerald-500/30 transition">
+                    <div class="w-10 h-10 bg-emerald-500/10 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                    </div>
+                    <h3 class="font-semibold text-gray-100 mb-1">Skeleton AI</h3>
+                    <p class="text-sm text-gray-400">Editable vocabulary backbone. Students adapt the course content to what they actually care about.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="roadmap" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20">
+        <div class="text-center mb-14">
+            <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-gray-50">6-Month Roadmap</h2>
+            <p class="mt-3 text-gray-400 text-lg max-w-xl mx-auto">From A1 to B1 — what the journey looks like month by month.</p>
+        </div>
+        <div class="bg-[#0f1521] rounded-2xl p-6 md:p-8 border border-gray-800/40">
+            <div class="overflow-x-auto">
+                <div style="display:flex;gap:8px;align-items:flex-end;min-width:640px;padding:20px 0;">
+                    <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;">
+                        <div class="roadmap-bar bg-blue-500" style="width:100%;"></div>
+                        <span class="text-xs text-blue-400 font-semibold">A1</span>
+                        <span class="text-xs text-gray-500">Month 1–2</span>
+                    </div>
+                    <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;">
+                        <div class="roadmap-bar bg-blue-500" style="width:100%;"></div>
+                        <span class="text-xs text-blue-400 font-semibold">A2</span>
+                        <span class="text-xs text-gray-500">Month 3</span>
+                    </div>
+                    <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;">
+                        <div class="roadmap-bar bg-amber-500" style="width:100%;"></div>
+                        <span class="text-xs text-amber-400 font-semibold">B1</span>
+                        <span class="text-xs text-gray-500">Month 4–6</span>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 grid md:grid-cols-3 gap-6 text-sm">
+                <div class="bg-[#111827] rounded-xl p-5 border border-gray-700/30">
+                    <h4 class="font-semibold text-blue-400 mb-2">A1 — Foundation</h4>
+                    <p class="text-gray-400 leading-relaxed">500 words, present tense, daily greetings. Build the habit — 15 min/day, fear-free speaking practice from day one.</p>
+                </div>
+                <div class="bg-[#111827] rounded-xl p-5 border border-gray-700/30">
+                    <h4 class="font-semibold text-amber-400 mb-2">A2 — Bridge</h4>
+                    <p class="text-gray-400 leading-relaxed">1,000 words, past/future tense, simple opinions. Real situational dialogues. Confidence grows — 30 min/day focus windows.</p>
+                </div>
+                <div class="bg-[#111827] rounded-xl p-5 border border-gray-700/30">
+                    <h4 class="font-semibold text-emerald-400 mb-2">B1 — Fluency</h4>
+                    <p class="text-gray-400 leading-relaxed">2,000+ words, complex grammar, B1 Cambridge-pass capability. Full conversation flows, work-email ready.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="outcomes" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20">
+        <div class="text-center mb-14">
+            <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-gray-50">Salary Outcomes</h2>
+            <p class="mt-3 text-gray-400 text-lg max-w-xl mx-auto">English is a compounding salary asset. Here is how levels map to real-world outcomes in Vietnam.</p>
+        </div>
+        <div class="overflow-x-auto">
+            <table class="w-full text-left rounded-xl overflow-hidden">
+                <thead>
+                    <tr class="bg-[#0f1521]">
+                        <th class="py-4 px-5 font-semibold text-sm uppercase tracking-wider text-gray-400">Level</th>
+                        <th class="py-4 px-5 font-semibold text-sm uppercase tracking-wider text-gray-400">Expected Monthly (VND)</th>
+                        <th class="py-4 px-5 font-semibold text-sm uppercase tracking-wider text-gray-400">Job Readiness</th>
+                        <th class="py-4 px-5 font-semibold text-sm uppercase tracking-wider text-gray-400">Cambridge</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-800">
+                    <tr class="hover:bg-[#0f1521]/60 transition">
+                        <td class="py-4 px-5 font-semibold text-blue-400">A1 Beginner</td>
+                        <td class="py-4 px-5 text-gray-300">7–12M VND</td>
+                        <td class="py-4 px-5 text-gray-400">Entry-level intern, support</td>
+                        <td class="py-4 px-5 text-gray-500">—</td>
+                    </tr>
+                    <tr class="hover:bg-[#0f1521]/60 transition">
+                        <td class="py-4 px-5 font-semibold text-blue-400">A2 Elementary</td>
+                        <td class="py-4 px-5 text-gray-300">12–20M VND</td>
+                        <td class="py-4 px-5 text-gray-400">Junior admin, basic customer-facing</td>
+                        <td class="py-4 px-5 text-gray-500">—</td>
+                    </tr>
+                    <tr class="hover:bg-[#0f1521]/60 transition">
+                        <td class="py-4 px-5 font-semibold text-amber-400">B1 Intermediate</td>
+                        <td class="py-4 px-5 text-gray-300">20–35M VND</td>
+                        <td class="py-4 px-5 text-gray-400">Team lead, project coordinator</td>
+                        <td class="py-4 px-5 text-gray-500">PET / FCE</td>
+                    </tr>
+                    <tr class="hover:bg-emerald-500/10 transition">
+                        <td class="py-4 px-5 font-semibold text-emerald-400">B2 Upper-Intermediate</td>
+                        <td class="py-4 px-5 text-gray-300">35–60M VND</td>
+                        <td class="py-4 px-5 text-gray-400">Manager, senior specialist</td>
+                        <td class="py-4 px-5 text-gray-500">FCE / CAE</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <footer class="border-t border-gray-800 pt-8 pb-12 text-center text-gray-500">
+        <p>&copy; 2025 Natural English Training. All rights reserved.</p>
+        <p class="text-xs mt-2"><a href="/" class="hover:text-emerald-400 transition">Back to home</a></p>
+    </footer>
+</body>
+</html>

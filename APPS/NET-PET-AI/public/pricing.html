@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pricing - Natural English Training</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .max-w-8xl { max-width: 96rem; margin-left: auto; margin-right: auto; }
+    details {
+      border-bottom: 1px solid #374151;
+      padding: 1rem 0;
+    }
+    summary {
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-weight: 500;
+      color: #f3f4f6;
+    }
+    summary::after {
+      content: '+';
+      font-size: 1.5rem;
+      transition: transform 0.2s;
+    }
+    details[open] summary::after {
+      content: '-';
+    }
+    details p {
+      margin-top: 0.5rem;
+      color: #d1d5db;
+    }
+  </style>
+</head>
+<body class="bg-[#111827] text-[#f3f4f6]">
+  <div class="max-w-8xl px-4 sm:px-6 lg:px-8 py-12">
+    <div class="flex justify-between items-center mb-12">
+      <a href="/" class="text-2xl font-bold text-white">NET PET AI</a>
+    </div>
+
+    <div class="text-center mb-16">
+      <h1 class="text-4xl sm:text-5xl font-extrabold mb-4">Find the right plan for your team</h1>
+      <p class="text-xl text-gray-300 max-w-2xl mx-auto mb-8">Master English with AI-powered tutoring. Start free or take a placement test to unlock your path.</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/signup" class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-8 rounded-lg transition">Get Started Free</a>
+        <a href="/placement" class="inline-block bg-transparent border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white font-semibold py-3 px-8 rounded-lg transition">Take Placement Test</a>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8 mb-16">
+      <div class="bg-gray-800 rounded-xl p-8 flex flex-col">
+        <h3 class="text-xl font-semibold mb-2">FREE</h3>
+        <p class="text-4xl font-bold mb-6">$0<span class="text-lg font-normal text-gray-400">/month</span></p>
+        <ul class="space-y-3 mb-8 flex-1">
+          <li class="flex items-start"><span class="text-blue-500 mr-2">✓</span> 10 words per day</li>
+          <li class="flex items-start"><span class="text-blue-500 mr-2">✓</span> Basic learning stats</li>
+          <li class="flex items-start"><span class="text-blue-500 mr-2">✓</span> Community support</li>
+          <li class="flex items-start text-gray-400"><span class="mr-2">-</span> AI Tutor</li>
+          <li class="flex items-start text-gray-400"><span class="mr-2">-</span> Admin dashboard</li>
+        </ul>
+        <a href="/signup" class="mt-auto bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-6 rounded-lg text-center">Get Started</a>
+      </div>
+
+      <div class="bg-gray-800 rounded-xl p-8 flex flex-col border border-blue-500 relative">
+        <div class="absolute top-0 right-0 bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">POPULAR</div>
+        <h3 class="text-xl font-semibold mb-2">NET</h3>
+        <p class="text-4xl font-bold mb-6">$29<span class="text-lg font-normal text-gray-400">/month</span></p>
+        <ul class="space-y-3 mb-8 flex-1">
+          <li class="flex items-start"><span class="text-blue-500 mr-2">✓</span> Unlimited words</li>
+          <li class="flex items-start"><span class="text-blue-500 mr-2">✓</span> Full admin console</li>
+          <li class="flex items-start"><span class="text-blue-500 mr-2">✓</span> AI tutor (all skills)</li>
+          <li class="flex items-start"><span class="text-blue-500 mr-2">✓</span> Detailed analytics</li>
+          <li class="flex items-start"><span class="text-blue-500 mr-2">✓</span> Priority support</li>
+        </ul>
+        <a href="/signup" class="mt-auto bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-6 rounded-lg text-center">Subscribe Now</a>
+      </div>
+
+      <div class="bg-gray-800 rounded-xl p-8 flex flex-col">
+        <h3 class="text-xl font-semibold mb-2">TEAM</h3>
+        <p class="text-4xl font-bold mb-6">$99<span class="text-lg font-normal text-gray-400">/month</span></p>
+        <ul class="space-y-3 mb-8 flex-1">
+          <li class="flex items-start"><span class="text-blue-500 mr-2">✓</span> 5 seats included</li>
+          <li class="flex items-start"><span class="text-blue-500 mr-2">✓</span> Admin console</li>
+          <li class="flex items-start"><span class="text-blue-500 mr-2">✓</span> Bulk analytics</li>
+          <li class="flex items-start"><span class="text-blue-500 mr-2">✓</span> All NET features</li>
+          <li class="flex items-start"><span class="text-blue-500 mr-2">✓</span> Dedicated support</li>
+        </ul>
+        <a href="/signup" class="mt-auto bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-6 rounded-lg text-center">Start Team Plan</a>
+      </div>
+    </div>
+
+    <div class="mb-16">
+      <h2 class="text-3xl font-bold mb-6">Feature Comparison</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full text-left">
+          <thead>
+            <tr class="border-b border-gray-700">
+              <th class="py-3 pr-4">Feature</th>
+              <th class="py-3 px-4 text-center">FREE</th>
+              <th class="py-3 px-4 text-center">NET</th>
+              <th class="py-3 px-4 text-center">TEAM</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-700">
+            <tr>
+              <td class="py-3 pr-4">Words per day</td>
+              <td class="py-3 px-4 text-center">10</td>
+              <td class="py-3 px-4 text-center">Unlimited</td>
+              <td class="py-3 px-4 text-center">Unlimited</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-4">AI Tutor</td>
+              <td class="py-3 px-4 text-center">-</td>
+              <td class="py-3 px-4 text-center">✓</td>
+              <td class="py-3 px-4 text-center">✓</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-4">Admin Dashboard</td>
+              <td class="py-3 px-4 text-center">-</td>
+              <td class="py-3 px-4 text-center">✓</td>
+              <td class="py-3 px-4 text-center">✓</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-4">Number of seats</td>
+              <td class="py-3 px-4 text-center">1</td>
+              <td class="py-3 px-4 text-center">1</td>
+              <td class="py-3 px-4 text-center">5</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-4">Bulk analytics</td>
+              <td class="py-3 px-4 text-center">-</td>
+              <td class="py-3 px-4 text-center">-</td>
+              <td class="py-3 px-4 text-center">✓</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-4">Basic stats</td>
+              <td class="py-3 px-4 text-center">✓</td>
+              <td class="py-3 px-4 text-center">✓</td>
+              <td class="py-3 px-4 text-center">✓</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-4">Community support</td>
+              <td class="py-3 px-4 text-center">✓</td>
+              <td class="py-3 px-4 text-center">✓</td>
+              <td class="py-3 px-4 text-center">✓</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-4">Priority support</td>
+              <td class="py-3 px-4 text-center">-</td>
+              <td class="py-3 px-4 text-center">✓</td>
+              <td class="py-3 px-4 text-center">✓</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="mb-16">
+      <h2 class="text-3xl font-bold mb-6">Frequently Asked Questions</h2>
+      <div class="space-y-2">
+        <details>
+          <summary>What is the word limit on the free plan?</summary>
+          <p>The free plan includes 10 words per day to practice and learn. You can upgrade to any paid plan for unlimited access.</p>
+        </details>
+        <details>
+          <summary>Can I upgrade or downgrade my plan at any time?</summary>
+          <p>Yes, you can change your plan at any time. When upgrading, you'll get immediate access to new features; downgrading takes effect at the next billing cycle.</p>
+        </details>
+        <details>
+          <summary>Is there a free trial for the paid plans?</summary>
+          <p>We offer a 7-day free trial on the NET plan. After that, you'll be charged monthly unless you cancel.</p>
+        </details>
+        <details>
+          <summary>What does the AI tutor cover?</summary>
+          <p>The AI tutor provides personalized lessons on vocabulary, grammar, pronunciation, and conversation practice, adapting to your level and goals.</p>
+        </details>
+        <details>
+          <summary>How does the TEAM plan work with multiple users?</summary>
+          <p>The TEAM plan includes 5 seats. An admin can invite team members, monitor progress through the admin console, and view aggregated analytics for the entire group.</p>
+        </details>
+      </div>
+    </div>
+
+    <footer class="border-t border-gray-700 pt-8 text-center text-gray-400">
+      <p>&copy; 2025 NET PET AI. All rights reserved.</p>
+    </footer>
+  </div>
+</body>
+</html>
