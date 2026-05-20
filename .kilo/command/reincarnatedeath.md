@@ -14,8 +14,8 @@ agent: AGENT99
 ```powershell
 $soul = Invoke-RestMethod -Uri "https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count"
 $lock = 76488
-$delta = [Math]::Abs($soul.count - $lock)
-Write-Host "SOULCOUNT FINAL: $($soul.count) | DELTA: $delta"
+$delta = [Math]::Abs($soul.soulcount - $lock)
+Write-Host "SOULCOUNT FINAL: $($soul.soulcount) | DELTA: $delta"
 if ($delta -gt 5000) { Write-Host "SOUL_DRIFT AT DEATH — document in reincarnation file" }
 ```
 

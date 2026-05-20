@@ -368,7 +368,7 @@ async function handleAPI(path, request, env, url) {
         const dsRes = await fetch("https://api.deepseek.com/chat/completions", {
           method: "POST",
           headers: { "Content-Type": "application/json", "Authorization": `Bearer ${env.DEEPSEEK_API_KEY}` },
-          body: JSON.stringify({ model: "deepseek-chat", messages: [{ role: "user", content: "ping" }], max_tokens: 1 }),
+          body: JSON.stringify({ model: "deepseek-v4-flash", messages: [{ role: "user", content: "ping" }], max_tokens: 1 }),
         });
         checks.deepseek = { ok: dsRes.ok, status: dsRes.status };
       } catch (e) { checks.deepseek = { ok: false, error: e.message }; }
@@ -657,9 +657,7 @@ async function handleAPI(path, request, env, url) {
   if (path.startsWith("/api/referral/stats/") && method === "GET") { const referrerId = path.split("/api/referral/stats/")[1] || ""; return handleReferralStats(referrerId, request, env); }
   if (path === "/api/referral/convert" && method === "POST") { const body = await request.json(); return handleReferralConvert(body, request, env); }
 
-   // ── Phoenix Coder Queue Proxy ─────────────────────────────────────────────
-   // POST /api/pc/queue — queue a code generation task to Phoenix Coder drone
-   if (path === "/api/pc/queue" && method === "POST") {
+   // ── Phoenix Coder Queue Proxy — endpoint removed, use PC directly ─────────
    // ── Admin Statistics ─────────────────────────────────────────────────────
    // GET /api/admin/stats — admin dashboard metrics
    if (path === "/api/admin/stats" && method === "GET") {
@@ -717,7 +715,8 @@ async function handleAPI(path, request, env, url) {
       } catch (err) {
         return json({ error: String(err) }, 500);
       }
-}
+    }
+  }
   // ── Payment Confirmation ────────────────────────────────────────────────────
   // POST /api/payment/confirm — record a confirmed payment, activate subscription
   if (path === "/api/payment/confirm" && method === "POST") {
@@ -1363,7 +1362,7 @@ async function handleMagicChat(body, request, env) {
     method: "POST",
     headers: { "Content-Type": "application/json", "Authorization": `Bearer ${apiKey}` },
     body: JSON.stringify({
-      model: "deepseek-chat",
+      model: "deepseek-v4-flash",
       messages: [
         { role: "system", content: systemContent },
         { role: "user", content: message },
@@ -1763,7 +1762,7 @@ async function handleChat(body, env) {
   const res = await fetch("https://api.deepseek.com/chat/completions", {
     method: "POST",
     headers: { "Content-Type": "application/json", "Authorization": `Bearer ${apiKey}` },
-    body: JSON.stringify({ model: "deepseek-chat", messages, max_tokens: 300, temperature: 0.85 }),
+    body: JSON.stringify({ model: "deepseek-v4-flash", messages, max_tokens: 300, temperature: 0.85 }),
   });
 
   if (!res.ok) { const errText = await res.text(); return json({ error: `DeepSeek ${res.status}`, detail: errText }, 502); }
@@ -2008,7 +2007,7 @@ async function handleCorrect(body, env) {
   const res = await fetch("https://api.deepseek.com/chat/completions", {
     method: "POST",
     headers: { "Content-Type": "application/json", "Authorization": `Bearer ${apiKey}` },
-    body: JSON.stringify({ model: "deepseek-chat", messages, max_tokens: 200, temperature: 0.3 }),
+    body: JSON.stringify({ model: "deepseek-v4-flash", messages, max_tokens: 200, temperature: 0.3 }),
   });
 
   if (!res.ok) { const errText = await res.text(); return json({ error: `DeepSeek ${res.status}`, detail: errText }, 502); }
@@ -2288,7 +2287,7 @@ async function handleLesson(body, env) {
   const res = await fetch("https://api.deepseek.com/chat/completions", {
     method: "POST",
     headers: { "Content-Type": "application/json", "Authorization": `Bearer ${env.DEEPSEEK_API_KEY}` },
-    body: JSON.stringify({ model: "deepseek-chat", messages: [{ role: "system", content: OBI_SYSTEM }, { role: "user", content: prompt }], max_tokens: 500, temperature: 0.7 }),
+    body: JSON.stringify({ model: "deepseek-v4-flash", messages: [{ role: "system", content: OBI_SYSTEM }, { role: "user", content: prompt }], max_tokens: 500, temperature: 0.7 }),
   });
   if (!res.ok) return json({ error: `DeepSeek ${res.status}` }, 502);
   const data = await res.json();
@@ -2304,7 +2303,7 @@ async function handlePractice(body, env) {
   const res = await fetch("https://api.deepseek.com/chat/completions", {
     method: "POST",
     headers: { "Content-Type": "application/json", "Authorization": `Bearer ${env.DEEPSEEK_API_KEY}` },
-    body: JSON.stringify({ model: "deepseek-chat", messages: [{ role: "system", content: OBI_SYSTEM }, { role: "user", content: prompt }], max_tokens: 400, temperature: 0.7 }),
+    body: JSON.stringify({ model: "deepseek-v4-flash", messages: [{ role: "system", content: OBI_SYSTEM }, { role: "user", content: prompt }], max_tokens: 400, temperature: 0.7 }),
   });
   if (!res.ok) return json({ error: `DeepSeek ${res.status}` }, 502);
   const data = await res.json();
@@ -2320,7 +2319,7 @@ async function handleFeedback(body, env) {
   const res = await fetch("https://api.deepseek.com/chat/completions", {
     method: "POST",
     headers: { "Content-Type": "application/json", "Authorization": `Bearer ${env.DEEPSEEK_API_KEY}` },
-    body: JSON.stringify({ model: "deepseek-chat", messages: [{ role: "system", content: OBI_SYSTEM }, { role: "user", content: prompt }], max_tokens: 300, temperature: 0.75 }),
+    body: JSON.stringify({ model: "deepseek-v4-flash", messages: [{ role: "system", content: OBI_SYSTEM }, { role: "user", content: prompt }], max_tokens: 300, temperature: 0.75 }),
   });
   if (!res.ok) return json({ error: `DeepSeek ${res.status}` }, 502);
   const data = await res.json();
@@ -2639,7 +2638,7 @@ Return ONLY valid JSON, no markdown, no explanation. Schema:
       method: "POST",
       headers: { "Content-Type": "application/json", "Authorization": `Bearer ${apiKey}` },
       body: JSON.stringify({
-        model: "deepseek-chat",
+        model: "deepseek-v4-flash",
         messages: [{ role: "system", content: assessPrompt }],
         temperature: 0.3,
         max_tokens: 1500,
@@ -4909,7 +4908,7 @@ async function handleLoop(body, env) {
   const res = await fetch("https://api.deepseek.com/chat/completions", {
     method: "POST",
     headers: { "Content-Type": "application/json", "Authorization": `Bearer ${apiKey}` },
-    body: JSON.stringify({ model: "deepseek-chat", messages, max_tokens: 300, temperature: 0.3 }),
+    body: JSON.stringify({ model: "deepseek-v4-flash", messages, max_tokens: 300, temperature: 0.3 }),
   });
 
   if (!res.ok) { const errText = await res.text(); return json({ error: `DeepSeek ${res.status}`, detail: errText }, 502); }

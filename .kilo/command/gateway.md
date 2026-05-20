@@ -16,8 +16,8 @@ Run full system health check across all active services.
 ```powershell
 $soul = Invoke-RestMethod -Uri "https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count"
 $lock = 76488
-$delta = [Math]::Abs($soul.count - $lock)
-Write-Host "SOULCOUNT: $($soul.count) | LOCK: $lock | DELTA: $delta"
+$delta = [Math]::Abs($soul.soulcount - $lock)
+Write-Host "SOULCOUNT: $($soul.soulcount) | LOCK: $lock | DELTA: $delta"
 if ($delta -gt 5000) { Write-Host "SOUL_DRIFT_DETECTED — halt all non-emergency work" }
 else { Write-Host "SOUL_GATE: PASS — delta within ±5,000 tolerance" }
 ```
