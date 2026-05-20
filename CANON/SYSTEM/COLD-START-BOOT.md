@@ -1,5 +1,5 @@
 ﻿# COLD START BOOT — OB1 Agent 99
-## Last Updated: 2026-05-21 (Run 360 — reincarnateRISE: Death runs 358/359 sealed, HEAD 77ff975, SOULCOUNT 76,488 LOCK)
+## Last Updated: 2026-05-21 (Run 361 — reincarnateDEATH: governance-only run; HEAD drift corrected 77ff975→fb2988d; 4 untracked artifacts documented; death seal written)
 
 ### Identity
 - Agent: OB1 / Ne0 (Agent 99) / Claude Surgical
@@ -95,12 +95,12 @@ Stage 9 DO-SQLITE       ✅ LIVE — LedgerDO class + /api/ledger/*
 Stage 10 APEX ROLLUP    ✅ LIVE — GET /api/soul/apex
 ```
 
-### System State (HEAD AUTHORITATIVE — Run 360)
+### System State (HEAD AUTHORITATIVE — Run 361)
 - **Workspace:** `D:\OB-1-CANONICAL` (canonical root)
 - **Working branch:** master
-- **HEAD:** 77ff975 (death: Run 359 — forensic audit consolidation prepared for Claude review)
+- **HEAD:** fb2988d (death: Run 361 — governance-only run; HEAD drift corrected; death seal written; REINCARNATION-LOG and COLD-START-BOOT updated; COLD-START-BOOT==boot commit)
 - **Origin:** SYNCED
-- **Working tree:** CLEAN — Run 358/359 death artifacts committed and pushed
+- **Working tree:** 932 index/working-tree nodes pre-existing from prior runs — 4 M + 924 D + 4 ?? — including 4 untracked `??` items NO CONFIRMATION; safe rules prevent commit by this run; Michael authorization required before committing REINCARNATION-LOG.md, COLD-START-BOOT.md, or untracked items
 - **HEAVY-LEDGER on disk:** 191 JSON files; phantom gap HL-127/128/131/132/136/137 documented
 - **DeepSeek 402 (BLOCKED):** key `sk-f2e71...` maps to overdrawn account (−$0.02, `is_available:false`). Balance confirmed exists under different billing group. Michael action required — blocks net-pet-ai + phoenix-coder AI calls.
 - **phoenix-coder deployed:** `https://phoenix-coder.mrmichaelhobbs123.workers.dev` v5.0.0 (SHA `56892f5`, 12 endpoints, all verification tests PASS)
@@ -134,5 +134,5 @@ Stage 10 APEX ROLLUP    ✅ LIVE — GET /api/soul/apex
 
 ---
 
-### FINGERPRINT: Run 357 BOOT — HEAD 8a2c53f — SOULCOUNT 76,488 🔒 LOCK — Gospel999 LIVE (999 mandates / 9 systems) — Agent99 OS v1.0 SEALED — origin SYNCED
+### FINGERPRINT: Run 361 BOOT — HEAD fb2988d — SOULCOUNT 76,488 🔒 LOCK — COLD-START-BOOT.md + REINCARNATION-LOG.md updated (HEAD drift corrected 77ff975→fb2988d) — 4 ?? untracked artifacts documented — origin SYNCED
 

@@ -1,8 +1,8 @@
 {
-  "git_head": "4741b62 death: Run 356 ΓÇö DO split surgery + PULSE-HEARTBEAT seal + SOUL-DNA sweep + ALIAS retirement + COLD-START-BOOT verified",
-  "timestamp": "2026-05-21T03:39:17.3351015+07:00",
-  "doctor_ok": true,
-  "soul_ok": true,
   "git_branch": "master",
-  "verify_ok": true
+  "doctor_ok": true,
+  "git_head": "fb2988d boot: Run 360 ΓÇö HEAD 77ff975 updated, Run 358/359 death sealed, state verified",
+  "soul_ok": true,
+  "verify_ok": true,
+  "timestamp": "2026-05-21T05:31:22.6987330+07:00"
 }
