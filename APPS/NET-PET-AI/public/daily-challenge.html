@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily English Challenge | NET English</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  @keyframes dots { 0%,80%,100% { opacity: 0; } 40% { opacity: 1; } }
+  .dot-anim span { animation: dots 1.4s infinite ease-in-out both; display: inline-block; }
+  .dot-anim span:nth-child(1) { animation-delay: -0.32s; }
+  .dot-anim span:nth-child(2) { animation-delay: -0.16s; }
+  .dot-anim span:nth-child(3) { animation-delay: 0; }
+</style>
+</head>
+<body class="bg-[#111827] text-white min-h-screen flex flex-col items-center py-12 px-4">
+
+<div class="w-full max-w-5xl">
+  <!-- Header -->
+  <h1 class="text-3xl font-bold text-center text-blue-400 mb-2">Daily English Challenge</h1>
+  <p class="text-gray-400 text-center mb-8">One question every day — test your skills!</p>
+
+  <!-- Loading State -->
+  <div id="loadingState" class="flex flex-col items-center justify-center py-24">
+    <div class="dot-anim text-blue-400 text-4xl font-bold tracking-widest">
+      <span>.</span><span>.</span><span>.</span>
+    </div>
+    <p class="text-gray-400 mt-4">Loading today's question...</p>
+  </div>
+
+  <!-- Error State -->
+  <div id="errorState" class="hidden text-center py-24">
+    <svg class="w-16 h-16 mx-auto text-red-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.963-.833-2.732 0L3.34 16.5c-.77.833.192 2.5 1.732 2.5z"/>
+    </svg>
+    <p class="text-red-400 text-lg mb-4">Failed to load today's question.</p>
+    <button id="retryBtn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition">Retry</button>
+  </div>
+
+  <!-- Question Content -->
+  <div id="questionCard" class="hidden">
+    <!-- Category & Difficulty -->
+    <div class="flex items-center gap-3 mb-6">
+      <span id="categoryBadge" class="bg-blue-900/50 text-blue-300 px-3 py-1 rounded-full text-sm border border-blue-700/30"></span>
+      <span id="difficultyBadge" class="bg-gray-800 text-gray-300 px-3 py-1 rounded-full text-sm border border-gray-700"></span>
+    </div>
+
+    <!-- Question -->
+    <h2 id="questionText" class="text-2xl font-bold text-white mb-8 leading-relaxed"></h2>
+
+    <!-- Options -->
+    <div id="optionsGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8"></div>
+
+    <!-- Result Panel -->
+    <div id="resultPanel" class="hidden p-6 rounded-xl mb-8 border">
+      <div class="flex items-center gap-4 mb-4">
+        <div id="resultIcon" class="w-12 h-12 rounded-full flex items-center justify-center text-2xl"></div>
+        <div>
+          <p id="resultTitle" class="text-xl font-bold"></p>
+          <p id="resultSubtitle" class="text-sm opacity-80"></p>
+        </div>
+      </div>
+      <div id="explanationBox" class="bg-black/20 rounded-lg p-4 mt-4">
+        <p class="text-sm font-semibold text-gray-300 mb-1">Explanation</p>
+        <p id="explanationText" class="text-gray-300 text-sm leading-relaxed"></p>
+      </div>
+    </div>
+
+    <!-- Zalo Share -->
+    <div id="shareSection" class="hidden text-center mb-8">
+      <button id="zaloShareBtn" class="flex items-center gap-2 bg-[#0185C9] hover:bg-[#016fa0] text-white px-6 py-3 rounded-xl font-semibold transition mx-auto">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+        Share on Zalo
+      </button>
+      <p class="text-gray-500 text-sm mt-2">Challenge your friends to beat your score!</p>
+    </div>
+
+    <!-- CTA -->
+    <div class="text-center mt-4">
+      <a href="/placement" class="inline-block bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 rounded-xl font-bold text-lg shadow-lg shadow-blue-900/30 transition">
+        Find Your English Level →
+      </a>
+    </div>
+  </div>
+
+  <!-- Idle Intro -->
+  <div id="introCard" class="hidden text-center py-12">
+    <svg class="w-20 h-20 mx-auto text-blue-500 mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+    </svg>
+    <h2 class="text-2xl font-bold text-white mb-3">Ready for your daily challenge?</h2>
+    <p class="text-gray-400 mb-6 max-w-lg mx-auto">Answer today's English question and improve your communication skills with NET English.</p>
+    <button id="startBtn" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-bold text-lg transition">
+      Start Challenge
+    </button>
+  </div>
+</div>
+
+<script>
+const API_BASE = '';
+
+function showEl(id) { document.getElementById(id).classList.remove('hidden'); }
+function hideEl(id) { document.getElementById(id).classList.add('hidden'); }
+
+function setLoading() { showEl('loadingState'); hideEl('errorState'); hideEl('introCard'); hideEl('questionCard'); }
+function setError() { hideEl('loadingState'); showEl('errorState'); hideEl('introCard'); hideEl('questionCard'); }
+
+function getScoreText(score, total) {
+  const words = total === 1
+    ? (score === 1 ? 'point' : 'point')
+    : 'points';
+  return `I scored ${score}/${total} on today's NET English challenge. Can you beat me?`;
+}
+
+function createOptionButton(option, index) {
+  const btn = document.createElement('button');
+  btn.className = 'bg-gray-800 hover:bg-gray-700 border border-gray-600 hover:border-blue-500 text-white text-left p-4 rounded-xl transition disabled:opacity-50 disabled:cursor-not-allowed sm:text-base text-sm';
+  btn.dataset.text = option;
+  btn.innerHTML = `<span class="font-semibold text-blue-400 mr-2 shrink-0 inline-block w-7 h-7 rounded-full bg-blue-900/50 text-center leading-7 text-sm">${String.fromCharCode(65 + index)}</span><span>${option}</span>`;
+  return btn;
+}
+
+async function loadChallenge() {
+  setLoading();
+  try {
+    const res = await fetch(API_BASE + '/api/challenge/today');
+    if (!res.ok) throw new Error('Failed to load');
+    const data = await res.json();
+    renderQuestion(data);
+  } catch (e) {
+    setError();
+  }
+}
+
+function renderQuestion(data) {
+  hideEl('loadingState');
+  hideEl('errorState');
+  showEl('questionCard');
+
+  document.getElementById('categoryBadge').textContent = data.category || 'English';
+  document.getElementById('difficultyBadge').textContent = data.difficulty || 'General';
+  document.getElementById('questionText').textContent = data.question.title;
+
+  const grid = document.getElementById('optionsGrid');
+  grid.innerHTML = '';
+  (data.question.options || []).forEach((opt, i) => {
+    grid.appendChild(createOptionButton(opt, i));
+  });
+
+  hideEl('resultPanel');
+  hideEl('shareSection');
+
+  window._challengeData = data;
+}
+
+async function submitAnswer(clickedText) {
+  const scoreEl = document.getElementById('resultTitle');
+
+  try {
+    const res = await fetch(API_BASE + '/api/challenge/answer', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ studentId: 'guest', answer: clickedText }),
+    });
+    if (!res.ok) throw new Error('Failed to submit');
+    const result = await res.json();
+    showResult(result);
+  } catch (e) {
+    showResult({ correct: false, answer: 'Unknown', explanation: 'Could not verify answer.' });
+  }
+}
+
+function showResult(result) {
+  const isCorrect = result.correct;
+  const panel = document.getElementById('resultPanel');
+  panel.className = `p-6 rounded-xl mb-8 border ${isCorrect ? 'bg-green-900/30 border-green-700' : 'bg-red-900/30 border-red-700'}`;
+
+  document.getElementById('resultIcon').className = `w-12 h-12 rounded-full flex items-center justify-center text-2xl ${isCorrect ? 'bg-green-500 text-white' : 'bg-red-500 text-white'}`;
+  document.getElementById('resultIcon').textContent = isCorrect ? '✓' : '✗';
+  document.getElementById('resultTitle').textContent = isCorrect ? 'Correct!' : 'Incorrect';
+  document.getElementById('resultTitle').className = `text-xl font-bold ${isCorrect ? 'text-green-400' : 'text-red-400'}`;
+  document.getElementById('resultSubtitle').textContent = isCorrect ? 'Great job!' : `The correct answer is: ${result.answer || '(not available)'}`;
+
+  document.getElementById('explanationText').textContent = result.explanation || 'No explanation available.';
+  document.getElementById('shareSection').className = 'text-center mb-8';
+
+  showEl('resultPanel');
+  showEl('shareSection');
+
+  const buttons = document.querySelectorAll('#optionsGrid button');
+  buttons.forEach(btn => btn.disabled = true);
+
+  window._answerScore = isCorrect ? 1 : 0;
+  const d = window._challengeData || {};
+  window._challengeTotal = d.question?.options?.length || 1;
+  window._challengeAnswerScore = isCorrect ? 1 : 0;
+  window._isCorrect = isCorrect;
+}
+
+function doZaloShare() {
+  const score = window._challengeAnswerScore || (window._isCorrect ? 1 : 0);
+  const total = window._challengeTotal || 1;
+  const text = encodeURIComponent(getScoreText(score, total));
+  window.open('zalo://share?text=' + text, '_self');
+}
+
+// Event Listeners
+document.getElementById('retryBtn').addEventListener('click', loadChallenge);
+document.getElementById('startBtn').addEventListener('click', loadChallenge);
+document.getElementById('zaloShareBtn').addEventListener('click', doZaloShare);
+
+document.getElementById('optionsGrid').addEventListener('click', (e) => {
+  const btn = e.target.closest('button[data-text]');
+  if (!btn || btn.disabled) return;
+  submitAnswer(btn.dataset.text);
+});
+
+// Initial render
+setLoading();
+loadChallenge();
+</script>
+</body>
+</html>

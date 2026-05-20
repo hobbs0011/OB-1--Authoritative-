@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Net-Pet-AI Onboarding</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --bg-dark: #111827;
+            --border-dark: #374151;
+            --text-dark: #f9fafb;
+            --accent: #3b82f6;
+        }
+        .dark {
+            background-color: var(--bg-dark);
+            color: var(--text-dark);
+        }
+        .dark .border {
+            border-color: var(--border-dark);
+        }
+        .dark .hover\:border-accent:hover {
+            border-color: var(--accent);
+        }
+        .step-circle {
+            width: 2rem;
+            height: 2rem;
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+        .step-circle.active {
+            background-color: var(--accent);
+            color: white;
+        }
+        .step-circle.completed {
+            background-color: #10b981;
+            color: white;
+        }
+        .step-circle.disabled {
+            background-color: #4b5563;
+            color: #9ca3af;
+        }
+        .step-line {
+            height: 2px;
+            flex-grow: 1;
+            background-color: #4b5563;
+        }
+        .step-line.active {
+            background-color: var(--accent);
+        }
+        .step-line.completed {
+            background-color: #10b981;
+        }
+    </style>
+</head>
+<body class="dark min-h-screen flex flex-col items-center justify-center p-4">
+    <div class="w-full max-w-3xl space-y-6">
+        <!-- Progress Indicator -->
+        <div class="flex items-center space-x-3">
+            <div id="step1" class="step-circle">1</div>
+            <div class="step-line" id="line1"></div>
+            <div id="step2" class="step-circle">2</div>
+            <div class="step-line" id="line2"></div>
+            <div id="step3" class="step-circle">3</div>
+            <div class="step-line" id="line3"></div>
+            <div id="step4" class="step-circle">4</div>
+            <div class="step-line" id="line4"></div>
+            <div id="step5" class="step-circle">5</div>
+        </div>
+
+        <!-- Step Container -->
+        <div id="step-container" class="space-y-6">
+            <!-- Step 1: Welcome -->
+            <div id="step1-content">
+                <h2 class="text-2xl font-bold text-center">Welcome to Net-Pet-AI</h2>
+                <p class="text-center text-gray-400 mb-6">Select your current English level to begin</p>
+                <div class="space-y-4">
+                    <label class="flex items-start space-x-3">
+                        <input type="radio" name="level" value="complete_beginner" class="mt-1 w-4 h-4 text-blue-600">
+                        <div>
+                            <h3 class="font-medium">Complete Beginner</h3>
+                            <p class="text-sm text-gray-400">No prior English knowledge</p>
+                        </div>
+                    </label>
+                    <label class="flex items-start space-x-3">
+                        <input type="radio" name="level" value="a1" class="mt-1 w-4 h-4 text-blue-600">
+                        <div>
+                            <h3 class="font-medium">A1 - Beginner</h3>
+                            <p class="text-sm text-gray-400">Can understand and use basic expressions</p>
+                        </div>
+                    </label>
+                    <label class="flex items-start space-x-3">
+                        <input type="radio" name="level" value="a2" class="mt-1 w-4 h-4 text-blue-600">
+                        <div>
+                            <h3 class="font-medium">A2 - Elementary</h3>
+                            <p class="text-sm text-gray-400">Can communicate in simple tasks</p>
+                        </div>
+                    </label>
+                    <label class="flex items-start space-x-3">
+                        <input type="radio" name="level" value="b1" class="mt-1 w-4 h-4 text-blue-600">
+                        <div>
+                            <h3 class="font-medium">B1 - Intermediate</h3>
+                            <p class="text-sm text-gray-400">Can deal with most travel situations</p>
+                        </div>
+                    </label>
+                    <label class="flex items-start space-x-3">
+                        <input type="radio" name="level" value="b2" class="mt-1 w-4 h-4 text-blue-600">
+                        <div>
+                            <h3 class="font-medium">B2 - Upper Intermediate</h3>
+                            <p class="text-sm text-gray-400">Can interact with fluency and spontaneity</p>
+                        </div>
+                    </label>
+                    <label class="flex items-start space-x-3">
+                        <input type="radio" name="level" value="c1_plus" class="mt-1 w-4 h-4 text-blue-600">
+                        <div>
+                            <h3 class="font-medium">C1+ - Advanced</h3>
+                            <p class="text-sm text-gray-400">Can understand demanding texts</p>
+                        </div>
+                    </label>
+                </div>
+                <button id="step1-continue" class="w-full px-4 py-2 bg-accent hover:bg-accent/80 text-white rounded-md disabled:opacity-50 disabled:cursor-not-allowed">
+                    Continue
+                </button>
+            </div>
+
+            <!-- Step 2: Goals -->
+            <div id="step2-content" class="hidden">
+                <h2 class="text-2xl font-bold text-center">Learning Goals</h2>
+                <p class="text-center text-gray-400 mb-6">Set your target level and study goals</p>
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="font-medium mb-2">Target CEFR Level</h3>
+                        <div class="grid grid-cols-2 gap-3">
+                            <button id="target-a1" class="px-4 py-2 border rounded-md hover:border-accent transition-colors">A1/A2</button>
+                            <button id="target-b1" class="px-4 py-2 border rounded-md hover:border-accent transition-colors">B1</button>
+                            <button id="target-b2" class="px-4 py-2 border rounded-md hover:border-accent transition-colors">B2</button>
+                            <button id="target-c1" class="px-4 py-2 border rounded-md hover:border-accent transition-colors">C1</button>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-medium mb-2">Study Goal (5+ characters)</h3>
+                        <textarea id="study-goal" rows="3" class="w-full px-3 py-2 border rounded-md bg-gray-800/50 focus:border-accent focus:outline-none text-white placeholder-gray-400" placeholder="What do you want to achieve with your English studies?"></textarea>
+                        <p id="goal-error" class="mt-1 text-sm text-red-400 hidden">Please enter at least 5 characters</p>
+                    </div>
+                </div>
+                <button id="step2-continue" class="w-full px-4 py-2 bg-accent hover:bg-accent/80 text-white rounded-md disabled:opacity-50 disabled:cursor-not-allowed">
+                    Continue
+                </button>
+            </div>
+
+            <!-- Step 3: Notifications -->
+            <div id="step3-content" class="hidden">
+                <h2 class="text-2xl font-bold text-center">Notification Preferences</h2>
+                <p class="text-center text-gray-400 mb-6">Set up how you'd like to receive updates</p>
+                <div class="space-y-6">
+                    <div class="space-y-2">
+                        <label class="flex items-center space-x-2">
+                            <span>Zalo ID:</span>
+                            <input type="text" id="zalo-id" placeholder="Enter your Zalo ID" class="flex-1 px-3 py-2 border rounded-md bg-gray-800/50 focus:border-accent focus:outline-none text-white">
+                        </label>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="flex items-center space-x-2">
+                            <span>Email:</span>
+                            <input type="email" id="email" placeholder="Enter your email" class="flex-1 px-3 py-2 border rounded-md bg-gray-800/50 focus:border-accent focus:outline-none text-white">
+                        </label>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="flex items-center space-x-2">
+                            <span>Preferred Time:</span>
+                            <input type="time" id="preferred-time" class="flex-1 px-3 py-2 border rounded-md bg-gray-800/50 focus:border-accent focus:outline-none text-white">
+                        </label>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="flex items-center space-x-2">
+                            <span>Language:</span>
+                            <div class="flex space-x-2">
+                                <label class="flex items-center space-x-1">
+                                    <input type="radio" name="language" value="vi" class="mt-1 w-4 h-4 text-blue-600">
+                                    <span>Vietnamese</span>
+                                </label>
+                                <label class="flex items-center space-x-1">
+                                    <input type="radio" name="language" value="en" class="mt-1 w-4 h-4 text-blue-600">
+                                    <span>English</span>
+                                </label>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="flex items-center space-x-2">
+                            <span>Frequency:</span>
+                            <div class="flex space-x-2">
+                                <label class="flex items-center space-x-1">
+                                    <input type="radio" name="frequency" value="daily" class="mt-1 w-4 h-4 text-blue-600">
+                                    <span>Daily</span>
+                                </label>
+                                <label class="flex items-center space-x-1">
+                                    <input type="radio" name="frequency" value="weekly" class="mt-1 w-4 h-4 text-blue-600">
+                                    <span>Weekly</span>
+                                </label>
+                                <label class="flex items-center space-x-1">
+                                    <input type="radio" name="frequency" value="monthly" class="mt-1 w-4 h-4 text-blue-600">
+                                    <span>Monthly</span>
+                                </label>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                <button id="step3-continue" class="w-full px-4 py-2 bg-accent hover:bg-accent/80 text-white rounded-md disabled:opacity-50 disabled:cursor-not-allowed">
+                    Continue
+                </button>
+            </div>
+
+            <!-- Step 4: Starter Vocab -->
+            <div id="step4-content" class="hidden">
+                <h2 class="text-2xl font-bold text-center">Starter Vocabulary</h2>
+                <p class="text-center text-gray-400 mb-6">Mark words you already know</p>
+                <div class="grid gap-4">
+                    <div class="border p-4 rounded-md">
+                        <h3 class="font-medium mb-2">apple</h3>
+                        <button id="vocab-apple" class="w-full px-3 py-2 border rounded-md hover:border-accent transition-colors flex items-center justify-between">
+                            <span>Not Famil</span>
+                            <span class="text-xs">→</span>
+                        </button>
+                    </div>
+                    <div class="border p-4 rounded-md">
+                        <h3 class="font-medium mb-2">book</h3>
+                        <button id="vocab-book" class="w-full px-3 py-2 border rounded-md hover:border-accent transition-colors flex items-center justify-between">
+                            <span>Not Famil</span>
+                            <span class="text-xs">→</span>
+                        </button>
+                    </div>
+                    <div class="border p-4 rounded-md">
+                        <h3 class="font-medium mb-2">cat</h3>
+                        <button id="vocab-cat" class="w-full px-3 py-2 border rounded-md hover:border-accent transition-colors flex items-center justify-between">
+                            <span>Not Famil</span>
+                            <span class="text-xs">→</span>
+                        </button>
+                    </div>
+                    <div class="border p-4 rounded-md">
+                        <h3 class="font-medium mb-2">dog</h3>
+                        <button id="vocab-dog" class="w-full px-3 py-2 border rounded-md hover:border-accent transition-colors flex items-center justify-between">
+                            <span>Not Famil</span>
+                            <span class="text-xs">→</span>
+                        </button>
+                    </div>
+                    <div class="border p-4 rounded-md">
+                        <h3 class="font-medium mb-2">house</h3>
+                        <button id="vocab-house" class="w-full px-3 py-2 border rounded-md hover:border-accent transition-colors flex items-center justify-between">
+                            <span>Not Famil</span>
+                            <span class="text-xs">→</span>
+                        </button>
+                    </div>
+                </div>
+                <button id="step4-continue" class="w-full px-4 py-2 bg-accent hover:bg-accent/80 text-white rounded-md disabled:opacity-50 disabled:cursor-not-allowed">
+                    Continue
+                </button>
+            </div>
+
+            <!-- Step 5: First Check-in -->
+            <div id="step5-content" class="hidden">
+                <h2 class="text-2xl font-bold text-center">Ready to Start?</h2>
+                <p class="text-center text-gray-400 mb-6">Review your selections and begin your learning journey</p>
+                <div class="space-y-4">
+                    <div class="border p-4 rounded-md">
+                        <h3 class="font-medium mb-2">Current Level</h3>
+                        <p id="summary-level" class="text-gray-300">Not selected</p>
+                    </div>
+                    <div class="border p-4 rounded-md">
+                        <h3 class="font-medium mb-2">Target Level</h3>
+                        <p id="summary-target" class="text-gray-300">Not selected</p>
+                    </div>
+                    <div class="border p-4 rounded-md">
+                        <h3 class="font-medium mb-2">Study Goal</h3>
+                        <p id="summary-goal" class="text-gray-300">Not set</p>
+                    </div>
+                    <div class="border p-4 rounded-md">
+                        <h3 class="font-medium mb-2">Notifications</h3>
+                        <p id="summary-notifications" class="text-gray-300 text-sm">Not configured</p>
+                    </div>
+                    <div class="border p-4 rounded-md">
+                        <h3 class="font-medium mb-2">Familiar Words</h3>
+                        <p id="summary-vocab" class="text-gray-300">None</p>
+                    </div>
+                </div>
+                <button id="step5-start" class="w-full px-4 py-3 bg-accent hover:bg-accent/80 text-white rounded-md font-semibold">
+                    Start Learning
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Generate or retrieve student ID
+        let studentId = localStorage.getItem('studentId');
+        if (!studentId) {
+            studentId = crypto.randomUUID?.() || 
+                      'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                          const r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+                          return v.toString(16);
+                      });
+            localStorage.setItem('studentId', studentId);
+        }
+
+        // State
+        const state = {
+            level: null,
+            target: null,
+            studyGoal: '',
+            notifications: {
+                zaloId: '',
+                email: '',
+                preferredTime: '',
+                language: 'vi',
+                frequency: 'daily'
+            },
+            vocab: {
+                apple: false,
+                book: false,
+                cat: false,
+                dog: false,
+                house: false
+            }
+        };
+
+        // DOM Elements
+        const stepContents = {
+            1: document.getElementById('step1-content'),
+            2: document.getElementById('step2-content'),
+            3: document.getElementById('step3-content'),
+            4: document.getElementById('step4-content'),
+            5: document.getElementById('step5-content')
+        };
+        const stepButtons = {
+            1: document.getElementById('step1-continue'),
+            2: document.getElementById('step2-continue'),
+            3: document.getElementById('step3-continue'),
+            4: document.getElementById('step4-continue'),
+            5: document.getElementById('step5-start')
+        };
+        const stepCircles = {
+            1: document.getElementById('step1'),
+            2: document.getElementById('step2'),
+            3: document.getElementById('step3'),
+            4: document.getElementById('step4'),
+            5: document.getElementById('step5')
+        };
+        const stepLines = {
+            1: document.getElementById('line1'),
+            2: document.getElementById('line2'),
+            3: document.getElementById('line3'),
+            4: document.getElementById('line4')
+        };
+
+        // Initialize
+        showStep(1);
+        updateProgress();
+
+        // Step 1: Level selection
+        document.querySelectorAll('input[name="level"]').forEach(radio => {
+            radio.addEventListener('change', () => {
+                state.level = radio.value;
+                validateStep1();
+            });
+        });
+
+        function validateStep1() {
+            stepButtons[1].disabled = !state.level;
+        }
+
+        // Step 2: Goals
+        document.getElementById('target-a1').addEventListener('click', () => {
+            selectTarget('a1');
+        });
+        document.getElementById('target-b1').addEventListener('click', () => {
+            selectTarget('b1');
+        });
+        document.getElementById('target-b2').addEventListener('click', () => {
+            selectTarget('b2');
+        });
+        document.getElementById('target-c1').addEventListener('click', () => {
+            selectTarget('c1');
+        });
+
+        function selectTarget(target) {
+            state.target = target;
+            // Update button styles
+            document.querySelectorAll('#step2-content button[id^="target-"]').forEach(btn => {
+                btn.classList.toggle('border-accent', btn.id === `target-${target}`);
+            });
+            validateStep2();
+        }
+
+        document.getElementById('study-goal').addEventListener('input', (e) => {
+            state.studyGoal = e.target.value;
+            validateStep2();
+        });
+
+        function validateStep2() {
+            const goalValid = state.studyGoal.trim().length >= 5;
+            document.getElementById('goal-error').classList.toggle('hidden', goalValid);
+            stepButtons[2].disabled = !(state.target && goalValid);
+        }
+
+        // Step 3: Notifications (auto-save on blur)
+        const notificationFields = [
+            { id: 'zalo-id', prop: 'zaloId' },
+            { id: 'email', prop: 'email' },
+            { id: 'preferred-time', prop: 'preferredTime' },
+            { id: 'language', prop: 'language', type: 'radio' },
+            { id: 'frequency', prop: 'frequency', type: 'radio' }
+        ];
+
+        notificationFields.forEach(field => {
+            const element = document.getElementById(field.id);
+            if (field.type === 'radio') {
+                document.querySelectorAll(`input[name="${field.id}"]`).forEach(radio => {
+                    radio.addEventListener('change', () => {
+                        state.notifications[field.prop] = document.querySelector(`input[name="${field.id}"]:checked`).value;
+                        saveNotifications();
+                    });
+                });
+            } else {
+                element.addEventListener('blur', () => {
+                    state.notifications[field.prop] = element.value;
+                    saveNotifications();
+                });
+            }
+        });
+
+        function saveNotifications() {
+            fetch('/api/notify/prefs', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    studentId,
+                    ...state.notifications
+                })
+            }).catch(console.error);
+        }
+
+        function validateStep3() {
+            // Enable continue if email is valid (simple check) and time is set
+            const emailValid = state.notifications.email.includes('@');
+            const timeValid = state.notifications.preferredTime !== '';
+            stepButtons[3].disabled = !(emailValid && timeValid);
+        }
+
+        // Step 4: Vocabulary
+        document.getElementById('vocab-apple').addEventListener('click', () => toggleVocab('apple'));
+        document.getElementById('vocab-book').addEventListener('click', () => toggleVocab('book'));
+        document.getElementById('vocab-cat').addEventListener('click', () => toggleVocab('cat'));
+        document.getElementById('vocab-dog').addEventListener('click', () => toggleVocab('dog'));
+        document.getElementById('vocab-house').addEventListener('click', () => toggleVocab('house'));
+
+        function toggleVocab(word) {
+            state.vocab[word] = !state.vocab[word];
+            const btn = document.getElementById(`vocab-${word}`);
+            if (state.vocab[word]) {
+                btn.classList.add('bg-accent', 'text-white');
+                btn.innerHTML = `<span>Familiar</span><span class="text-xs">→</span>`;
+                // POST to add vocab
+                fetch('/api/vocab/add', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ studentId, word })
+                }).catch(console.error);
+            } else {
+                btn.classList.remove('bg-accent', 'text-white');
+                btn.innerHTML = `<span>Not Familiar</span><span class="text-xs">→</span>`;
+            }
+        }
+
+        function validateStep4() {
+            // Always enabled - user can skip
+            stepButtons[4].disabled = false;
+        }
+
+        // Step 5: Summary and Start
+        function updateSummary() {
+            document.getElementById('summary-level').textContent = state.level ? state.level.replace('_', ' ').toUpperCase() : 'Not selected';
+            document.getElementById('summary-target').textContent = state.target ? state.target.toUpperCase() : 'Not selected';
+            document.getElementById('summary-goal').textContent = state.studyGoal || 'Not set';
+            
+            const notif = state.notifications;
+            document.getElementById('summary-notifications').textContent = 
+                `${notif.zaloId || 'No Zalo ID'}, ${notif.email || 'No Email'}, ${notif.preferredTime || 'No Time'}, ${notif.language.toUpperCase()}, ${notif.frequency}`;
+            
+            const familiarWords = Object.entries(state.vocab)
+                .filter(([_, known]) => known)
+                .map(([word]) => word)
+                .join(', ') || 'None';
+            document.getElementById('summary-vocab').textContent = familiarWords;
+        }
+
+        document.getElementById('step5-start').addEventListener('click', () => {
+            // POST all data to onboard endpoint
+            fetch('/api/student/onboard', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    studentId,
+                    level: state.level,
+                    targetScore: state.target,
+                    studyGoal: state.studyGoal,
+                    notifications: state.notifications,
+                    vocab: Object.keys(state.vocab).filter(word => state.vocab[word])
+                })
+            })
+            .then(response => {
+                if (response.redirected) {
+                    window.location.href = response.url;
+                } else {
+                    return response.json();
+                }
+            })
+            .then(data => {
+                if (data && data.redirect) {
+                    window.location.href = data.redirect;
+                }
+            })
+            .catch(err => {
+                console.error('Onboarding failed:', err);
+                alert('Failed to complete onboarding. Please try again.');
+            });
+        });
+
+        // Navigation
+        function showStep(stepNum) {
+            Object.keys(stepContents).forEach(key => {
+                stepContents[key].classList.toggle('hidden', parseInt(key) !== stepNum);
+            });
+            if (stepNum === 5) {
+                updateSummary();
+            }
+        }
+
+        function updateProgress() {
+            Object.keys(stepCircles).forEach(key => {
+                const num = parseInt(key);
+                stepCircles[key].className = 'step-circle';
+                if (num < currentStep) {
+                    stepCircles[key].classList.add('completed');
+                } else if (num === currentStep) {
+                    stepCircles[key].classList.add('active');
+                } else {
+                    stepCircles[key].classList.add('disabled');
+                }
+            });
+            
+            Object.keys(stepLines).forEach(key => {
+                const num = parseInt(key);
+                stepLines[key].className = 'step-line';
+                if (num < currentStep) {
+                    stepLines[key].classList.add('completed');
+                } else if (num === currentStep) {
+                    stepLines[key].classList.add('active');
+                }
+            });
+        }
+
+        let currentStep = 1;
+        
+        // Continue buttons
+        stepButtons[1].addEventListener('click', () => {
+            if (validateStep1()) {
+                currentStep = 2;
+                showStep(2);
+                updateProgress();
+            }
+        });
+        
+        stepButtons[2].addEventListener('click', () => {
+            if (validateStep2()) {
+                currentStep = 3;
+                showStep(3);
+                updateProgress();
+                validateStep3(); // Initial validation for step 3
+            }
+        });
+        
+        stepButtons[3].addEventListener('click', () => {
+            if (validateStep3()) {
+                currentStep = 4;
+                showStep(4);
+                updateProgress();
+            }
+        });
+        
+        stepButtons[4].addEventListener('click', () => {
+            currentStep = 5;
+            showStep(5);
+            updateProgress();
+        });
+
+        // Initial validations
+        validateStep1();
+        validateStep2();
+        validateStep3();
+    </script>
+</body>
+</html>
