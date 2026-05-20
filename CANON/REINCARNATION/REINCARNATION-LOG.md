@@ -1,6 +1,20 @@
 # REINCARNATION LOG — OB-1 RUN HISTORY
 
-**Last Updated:** 2026-05-20 (Run 348 — SUPERSAIYAN 5-PARALLEL — admin+anticheat+report+signup+mobile)
+**Last Updated:** 2026-05-20 (Run 350 — SUPER SAIYAN WAVES 3–10 — Stages 14–25 — 25/25 COMPLETE)
+
+---
+
+## Run 350 — 2026-05-20 ICT — SUPER SAIYAN WAVES 3–10 — SEALED 5c920cb
+
+- Waves 1–10 executed: all 25 pipeline stages COMPLETE
+- Wave 1: pricing + how-it-works + vocab-admin + referral-admin + analytics-deep (already in prior run)
+- Wave 2 (NEW): 8 API endpoints kill commit — vocab/delete, student/goals, challenge/today+answer, employer/profile, referral/stats, student/achievements, student/onboard, notify/prefs
+- Wave 3: employer-portal SHA-256 PIN + achievements 12-badge grid + daily-challenge public + onboarding-flow 5-step wizard + notification-prefs
+- Waves 4–8: goals widget (3 portals), vocab-admin verification, Wave 3 files restored (were uncommitted), kill commits
+- Deploys: cfcf3bf1 (Wave 3) + 41b8ce30 (Wave 9 final)
+- SOULCOUNT: 76,488 🔒 LOCK
+- HEAD: 5c920cb | origin SYNCED | doctor 8/8 GREEN
+- Open: ZALO_ACCESS_TOKEN, GITHUB_PAT, DEEPGRAM_API_KEY, RL-2026 end-May, MoMo billing, employer seed KV
 
 ---
 

@@ -1,5 +1,5 @@
 # COLD START BOOT — OB1 Agent 99
-## Last Updated: 2026-05-20 (Run 348 — SUPERSAIYAN 5-PARALLEL DEATH SEALED)
+## Last Updated: 2026-05-20 (Run 350 — SUPER SAIYAN WAVES 3–10 — Stages 14–25 — SEALED)
 
 ### Identity
 - Agent: OB1 / Ne0 (Agent 99) / Claude Surgical
@@ -10,7 +10,7 @@
 
 ### Current Vector
 - **Active Mission:** OB-1 POST-MERGE9 CONSOLIDATION + Career Pages Rollout
-- **Last completed:** Run 347 — PC v3 hardwired into obi.ps1 + net-pet-ai proxy; autonomous 09:00 ICT cron active
+- **Last completed:** Run 350 — Waves 1–10 executed; 25/25 pipeline stages COMPLETE; deploy 41b8ce30; SOULCOUNT 76,488 LOCK
 - **S2Pipeline Status:** Stage 3 LINELOCK — **COMPLETE** (soul-logger → LedgerDO wired via HTTP)
 - **HL Ledger real baseline:** 189 Heavy Ledger JSON files on disk (HEAD AUTHORITATIVE: `git log -1` → `8b2053f2`); 6 phantom slots documented (HL-127/HL-128/HL-131/HL-132/HL-136/HL-137); PIPELINE-CURSOR.md gap-labelled NOT CLOSED
 - **Net-PET-AI worker:** v1.5.0+ LIVE at https://net-pet-ai.mrmichaelhobbs123.workers.dev
@@ -28,21 +28,28 @@
 7. L29 NO_ASSUME_HEAD — HEAD SHA from `git log -1` is authoritative; never seed state from prior reincarnation records
 8. L30 BOOT_FILE_AGE_SWEEP — if COLD-START-BOOT shows Run < current minus 10, it must be refreshed before any pipeline change
 
-### Recent Decisions + State (Run 315 → Run 344)
+### Recent Decisions + State (Run 315 → Run 350)
 | Run | Summary |
 |-----|---------|
-| 348 | SUPERSAIYAN 5-PARALLEL — admin-dashboard + anti-cheat + corporate-report + signup/waitlist + mobile CSS; 5 endpoints added; worker fba4bf78 — 98 files; HEAD 15880e1; SOULCOUNT 76,488 LOCK |
-| 347 | PC v3 HARDWIRED DEATH — obi.ps1 phoenix-queue + phoenix-status LIVE (3d8cb5f); /api/pc/queue proxy LIVE (05fb3c0, 7eba791a); autonomous cron 09:00 ICT active; needs GITHUB_PAT; HEAD 3d8cb5f; SOULCOUNT 76,488 LOCK |
-| 346 | SUPERSAIYAN WAVE 2 DEATH — leaderboard + referral + analytics widget + join page LIVE (v5c90f008); 13 pipeline stages; PC v3 dispatched; HEAD 234d52c; SOULCOUNT 75,468 LOCK |
-| 345 | SUPERSAIYAN DEATH — 9-stage pipeline sprint: stages 1+2+4+6+8+9 LIVE (v5a6067ff); stage 7 verified; stage 3 BLOCKED (Zalo); HEAD 461cd95; SOULCOUNT 74,302 LOCK |
-| 344 | Boot-refresh + state-validation super saiyan batch: obi.ps1 doctor 8/8 GREEN; SOULCOUNT 72,944 LOCK; HL 189 disk vs 191 boot — boot anchored to 8b2053f2; REINCARNATION-LOG advanced; wrangler dry-run verified 91 files; CLOUDFLARE_API_TOKEN hard UNSET gate confirmed |
-| 343 | reincarnateDEATH fresh start — 12-section artifact committed; prior unlogged pipeline work (Runs 341-342) sealed in LOG.md; HEAD 8b2053f2 |
-| 342 | P1 connect-the-wires: COACH nav + SRS badge + extension domain fix; 93 vocab seeded (Huong 20 / Mai Tram 45 / Quy 28); 3 ProfileDOs bootstrapped |
-| 341 | Face-Saving Protocol deployed (streak API + badge UI); 307 .html link fix (161 replacements, 18 files); RATELIMIT KV live; SEALED_FILE_AT sealed on soul-logger |
-| 340 | Boot sync — HEAD drift corrected (9a6e7d0→97e7b9b); COLD-START-BOOT advanced to Run 340; RL-2026 confirmed requires Michael |
-| 339 | 3 student career pages created and deployed; Career nav link added to 15 existing pages; CORS origin fixed (workers.dev); stress test 18/18 pass; per-student login messages written |
-| 338 | F-A09 CLOSED (stale COLD-START-BOOT.md duplicate deleted); F-O01 CLOSED (PULSE-OPERATIONS-HISTORY bridged Run 27→337); all Run 337 triage flags CLEAN; SOULCOUNT 71,217 🔒 LOCK |
-| 337 | LANE-336 PHOENIX BETA/DELTA/OMEGA: F-B01/B02/D01/D02/D03/D04/O03/O04 CLOSED; AGENTS.md PHOENIX section added; student portal map documented; NET-MARKETING restored; PlexyNETAPP fixed; HL-COUNT corrected 213→191 |
+| 350 | SUPER SAIYAN Waves 3–10 — Stages 14–25 COMPLETE: pricing, how-it-works, vocab-admin, referral-admin, analytics-deep, employer-portal PIN-gated, achievements +12 badges, daily-challenge public, notification-prefs, onboarding-flow 5-step wizard, goals widget all 3 portals; 8 new API endpoints (vocab/delete, goals, challenge/today+answer, employer/profile, referral/stats, achievements, onboard, notify/prefs); deploy cfcf3bf1+41b8ce30; HEAD 5c920cb |
+| 348 | SUPERSAIYAN 5-PARALLEL — admin-dashboard + anti-cheat + corporate-report + signup/waitlist + mobile CSS; 5 endpoints added; worker fba4bf78 — 98 files; HEAD 15880e1; SOULCOUNT 76,488 🔒 LOCK |
+| 347 | PC v3 HARDWIRED — obi.ps1 phoenix-queue+status LIVE; /api/pc/queue proxy LIVE; autonomous 09:00 ICT cron active; needs GITHUB_PAT; HEAD 3d8cb5f |
+| 346 | SUPERSAIYAN WAVE 2 — leaderboard + referral + analytics widget + join page (v5c90f008); 13 pipeline stages; PC v3 dispatched; HEAD 234d52c |
+| 345 | SUPERSAIYAN — 9-stage sprint (stages 1+2+4+6+8+9 deployed v5a6067ff); stage 3 BLOCKED (Zalo); HEAD 461cd95; SOULCOUNT 74,302 LOCK |
+| 342 | P1 connect-the-wires: COACH nav + SRS streak badge + extension domain fix; 93 vocab terms seeded across 3 ProfileDOs |
+| 341 | Face-Saving Protocol: streak/checkin/saveface endpoints; 307 .html fix; RATELIMIT KV; SEALED_FILE_AT sealed |
+| 338 | F-A09 CLOSED; F-O01 CLOSED; HL 189; PHOENIX BETA/DELTA/OMEGA sweep complete |
+
+---
+
+### Open Flags (remaining)
+- RL-2026 end-May checkpoint — HIGH, OPEN, Michael required
+- ZALO_ACCESS_TOKEN — BLOCKED (Stage 3 + notify live delivery)
+- GITHUB_PAT — PC v3 autonomous (4 secrets needed)
+- DEEPGRAM_API_KEY — voice scoring fallback active
+- MoMo/payment — pricing live, billing unwired
+- Employer seed data — BLUETECH PIN + student codes in KV needed
+- DEATH-LOCKED: HL phantom ×6 (HL-127/128/131/132/136/137) — NOT CLOSED
 
 ### Open Flags (next-next-run only)
 - [RESOLVED Run 344] F-343-01: REINCARNATION-BOOT-CHECKLIST.md stale — Run 343 death sealed prior; LOG now carries full record; checklist not reopened per L29 (NO_ASSUME_HEAD)
@@ -77,10 +84,10 @@ Stage 9 DO-SQLITE       ✅ LIVE — LedgerDO class + /api/ledger/*
 Stage 10 APEX ROLLUP    ✅ LIVE — GET /api/soul/apex
 ```
 
-### System State (HEAD AUTHORITATIVE — Run 346)
+### System State (HEAD AUTHORITATIVE — Run 350)
 - **Workspace:** `D:\OB-1-CANONICAL` (canonical root)
 - **Working branch:** master
-- **HEAD:** `15880e1` (Run 348 death: SUPERSAIYAN 5-parallel — admin+anticheat+corporate+signup+mobile)
+- **HEAD:** `5c920cb` (wave 7+8 kill — goals widget + Wave 3 restored — Run 350)
 - **Origin:** SYNCED
 - **Working tree:** CLEAN
 - **HEAVY-LEDGER on disk:** 189 JSON files (authoritative `Get-ChildItem` count); phantom gap 191-target = -2 drift from prior count; gap slots documented in PIPELINE-CURSOR.md
@@ -112,4 +119,4 @@ Stage 10 APEX ROLLUP    ✅ LIVE — GET /api/soul/apex
 
 ---
 
-### FINGERPRINT: Run 348 DEATH — HEAD 15880e1 — SOULCOUNT 76,488 🔒 LOCK — 5 Kilos parallel — 98 public files — worker fba4bf78 — origin SYNCED
+### FINGERPRINT: Run 350 DEATH — HEAD 5c920cb — SOULCOUNT 76,488 🔒 LOCK — 25/25 stages LIVE — worker 41b8ce30 — origin SYNCED — doctor 8/8 GREEN
