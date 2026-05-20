@@ -1,5 +1,5 @@
 # COLD START BOOT — OB1 Agent 99
-## Last Updated: 2026-05-20 (Run 353 — Agent99 OS Consolidation + Gospel999 Genesis — SEALED)
+## Last Updated: 2026-05-21 (Run 355 — Phoenix Coder v5.0 deploy + DeepSeek 402 diagnosis — SEALED)
 
 ### Identity
 - Agent: OB1 / Ne0 (Agent 99) / Claude Surgical
@@ -95,15 +95,18 @@ Stage 9 DO-SQLITE       ✅ LIVE — LedgerDO class + /api/ledger/*
 Stage 10 APEX ROLLUP    ✅ LIVE — GET /api/soul/apex
 ```
 
-### System State (HEAD AUTHORITATIVE — Run 353)
+### System State (HEAD AUTHORITATIVE — Run 355)
 - **Workspace:** `D:\OB-1-CANONICAL` (canonical root)
 - **Working branch:** master
-- **HEAD:** `634a513` (feat: Agent99 OS consolidation + Gospel999 — Run 353)
+- **HEAD:** `7f6ac25` (fix: Kilo restore — AGENT99 subscription default + SS-Agent99 added — Run 355)
 - **Origin:** SYNCED
-- **Working tree:** CLEAN (2 untracked death artifacts pending commit)
+- **Working tree:** **DIRTY** — 357 modified tracked + 6 untracked (block-artifact sweep + session artifacts; not yet committed)
 - **HEAVY-LEDGER on disk:** 191 JSON files; phantom gap HL-127/128/131/132/136/137 documented
-- **Triggers:** RL2026 end-May; Bavaria Jun 15; reincarnate daily 09:00 ICT
-- **Pre-existing syntax blocker:** `node --check src/index.js` FAILS at line 3630 — `export class LedgerDO` ESM/CJS parser mismatch (Cloudflare parser is tolerant)
+- **DeepSeek 402 (BLOCKED):** key `sk-f2e71...` maps to overdrawn account (−$0.02, `is_available:false`). Balance confirmed exists under different billing group. Michael action required — blocks net-pet-ai + phoenix-coder AI calls.
+- **phoenix-coder deployed:** `https://phoenix-coder.mrmichaelhobbs123.workers.dev` v5.0.0 (SHA `56892f5`, 12 endpoints, all verification tests PASS)
+- **Triggers:** RL2026 end-May; Bavaria Jun 15; 402-DEEPSEEK resolution required before AI-dependent operations
+
+
 
 ### Doctor State (Run 344)
 | Gate | Result |
@@ -131,4 +134,4 @@ Stage 10 APEX ROLLUP    ✅ LIVE — GET /api/soul/apex
 
 ---
 
-### FINGERPRINT: Run 353 BOOT — HEAD 634a513 — SOULCOUNT 76,488 🔒 LOCK — Gospel999 LIVE (999 mandates / 9 systems) — Agent99 OS v1.0 SEALED — origin SYNCED
+### FINGERPRINT: Run 355 BOOT — HEAD 7f6ac25 — SOULCOUNT 76,488 🔒 LOCK — PC v5.0 LIVE — DeepSeek 402 BILLING GROUP MISMATCH BLOCKED — Agent99 OS v1.0 SEALED — origin SYNCED

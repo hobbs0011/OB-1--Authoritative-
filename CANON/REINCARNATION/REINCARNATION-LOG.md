@@ -1,6 +1,17 @@
 # REINCARNATION LOG — OB-1 RUN HISTORY
 
-**Last Updated:** 2026-05-20 (Run 353 — KILO-SOP + SEO + Agent99 OS Consolidation — SEALED)
+**Last Updated:** 2026-05-21 (Run 355 — Phoenix Coder v5.0 deploy + DeepSeek 402 diagnosis — SEALED)
+
+---
+
+## Run 355 — 2026-05-21 — Phoenix Coder v5.0 deploy + DeepSeek 402 diagnosis — SEALED 7f6ac25
+
+- PC5 deploy confirmed: https://phoenix-coder.mrmichaelhobbs123.workers.dev → v5.0.0, 12/12 endpoints, tsc 0 errors, D1/phoenixcoderlog + projectbrain live
+- DeepSeek 402: key mapped to overdrawn account (−$0.02, `is_available: false`). Root cause: account ownership mismatch / billing group not topped up. Key syntax valid, balance confirmed exists on *different* billing group. Agent99 named entity.
+- 402-DEEPSEEK ACTION REQUIRED (Michael): Re-map key to primary billing group or confirm override account before AI calls restore on net-pet-ai + phoenix-coder
+- Agent99 subscription default + SS-Agent99 infra applied in separate D:\PROJECTS\phoenix-coder workspace
+- SOULCOUNT 76,488 LOCK | tree DIRTY | HEAD 7f6ac25
+- Blockers: 402-DEEPSEEK (Michael required) | RL-2026 | HL phantom ×6 | K2 K3 K4 K5 | ZALO | GITHUB_PAT
 
 ---
 
