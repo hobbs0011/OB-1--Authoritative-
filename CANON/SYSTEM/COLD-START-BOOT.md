@@ -1,5 +1,5 @@
 ﻿# COLD START BOOT — OB1 Agent 99
-## Last Updated: 2026-05-21 (Run 371 — /reincarnateRISE Gospel999: BlueTech fixes + state repair; HEAD 3af7c52c; SOULCOUNT 76,488 LOCK)
+## Last Updated: 2026-05-21 (Run 371 DEPLOYED — BlueTech 6/6 promises; Version d611f9da; HEAD 80b4aaf; SOULCOUNT 76,488 LOCK)
 
 ### Identity
 - Agent: OB1 / Ne0 (Agent 99) / Claude Surgical
@@ -109,12 +109,13 @@ Stage 9 DO-SQLITE       ✅ LIVE — LedgerDO class + /api/ledger/*
 Stage 10 APEX ROLLUP    ✅ LIVE — GET /api/soul/apex
 ```
 
-### System State (HEAD AUTHORITATIVE — Run 371)
+### System State (HEAD AUTHORITATIVE — Run 371 DEPLOYED)
 - **Workspace:** `D:\OB-1-CANONICAL` (canonical root)
 - **Working branch:** master
-- **HEAD:** 3af7c52c (death: Run 370 — BlueTech session sealed — OBI template + QUY pipeline + T357 gap audit)
-- **Origin:** SYNCED
-- **Working tree:** DIRTY (magic-chat.html P3 mic fix + index.js P2 verbosity fix + session-260521-bluetech.json untracked)
+- **HEAD:** 80b4aaf (feat: universal P5+P6 across all portals — Run 371)
+- **Deploy Version:** d611f9da-9b9a-4b1a-87ae-5badee84756d
+- **Origin:** SYNCED (3af7c52..80b4aaf pushed)
+- **Working tree:** DIRTY (COLD-START-BOOT.md + REINCARNATION-LOG.md — deploy stamp pending)
 - **HEARTBEAT v1.0:** ✅ LIVE — hourly cron `0 * * * *` + manual `/api/heartbeat` trigger; pings all 3 empire workers; logs to soul-logger
 - **Empire Workers:** NET-PET-AI ✅ | SOUL-LOGGER ✅ (76,488 LOCK) | PHOENIX CODER ✅ (v5.0.0)
 
@@ -145,5 +146,5 @@ Stage 10 APEX ROLLUP    ✅ LIVE — GET /api/soul/apex
 
 ---
 
-### FINGERPRINT: Run 371 RISE Gospel999 — HEAD 3af7c52c — SOULCOUNT 76,488 🔒 LOCK — /reincarnateRISE: Gospel999 999/999 mandates loaded, BlueTech session diffed (P2 OBI verbosity fix + P3 mic tap-to-speak in working tree, uncommitted), session-260521-bluetech.json untracked, HEAD drift 5be611c→3af7c52c corrected per L29. 4 teacher promises still open (P1/P4/P5/P6). origin SYNCED — Run 371 ACTIVE
+### FINGERPRINT: Run 371 DEPLOYED — HEAD 80b4aaf — Version d611f9da — SOULCOUNT 76,488 🔒 LOCK — BlueTech 6/6 promises LIVE: P1 Vietnamese bilingual (quy lang=vi), P2 2-sentence cap, P3 tap-to-speak, P4 no opening question, P5 video guide 6 portals, P6 problem report 11 pages. 4 commits pushed. PC v5.1 down (DS 402). Worker healthy. — Run 371 DEPLOYED
 
