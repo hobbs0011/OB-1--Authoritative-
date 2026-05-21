@@ -18,7 +18,7 @@ export class LedgerDO {
       const payload = typeof body.payload === "string" ? body.payload : JSON.stringify(body.payload); const ts = Date.now();
       const lastRow = this.sql.exec("SELECT entry_hash FROM ledger WHERE student_id = ? ORDER BY id DESC LIMIT 1", studentId).toArray()[0];
       const prevHash = lastRow?.entry_hash || "0000000000000000000000000000000000000000000000000000000000000000";
-      const entryHash = await (typeof computeHash === "function" ? computeHash : (async s => { const { sha256 } = await import('crypto'); return sha256(s) }))(`${studentId}|${eventType}|${payload}|${prevHash}|${ts}`);
+      const entryHash = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(`${studentId}|${eventType}|${payload}|${prevHash}|${ts}`)).then(buf => Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, "0")).join(""));
       this.sql.exec("INSERT INTO ledger (student_id, event_type, payload, prev_hash, entry_hash, ts) VALUES (?,?,?,?,?,?)", studentId, eventType, payload, prevHash, entryHash, ts);
       return j({ ok: true, entryHash, prevHash, ts, eventType });
     }
@@ -41,21 +41,8 @@ export class LedgerDO {
       const v = url.searchParams.get("studentId");
       const r = this.sql.exec(v ? "SELECT COUNT(*) as cnt FROM ledger WHERE student_id = ?" : "SELECT COUNT(*) as cnt FROM ledger", ...(v ? [v] : [])).toArray()[0];
       return j({ count: r?.cnt || 0, studentId: v || null });
+    }
   }
-
-
-    const exclamRatio = (text.match(/[!]/g) || []).length / Math.max(len, 1);
-    const qRatio = (text.match(/\?/g) || []).length / Math.max(words, 1);
-    const mlScore = Math.min(1, len / 500);
-    const vocabScore = Math.min(1, words / 30);
-    const energy = Math.round(Math.max(1, Math.min(10, 3 + mlScore * 3 + exclamRatio * 20 + capsRatio * 10)));
-    const confidence = Math.round(Math.max(1, Math.min(10, 3 + vocabScore * 4 + Math.min(qRatio * 3, 2))));
-    let frustration = Math.round(Math.max(0, Math.min(10, Math.max(0, punct * 0.5 + (len < 5 ? 3 : 0)))));
-    const engagement = Math.round(Math.max(1, Math.min(10, energy * 0.3 + mlScore * 5 + vocabScore * 3)));
-    const sessId = "sess_" + Date.now();
-    return { session_id: sessId, energy, confidence, frustration, engagement, message_length_score: +mlScore.toFixed(3), vocab_complexity_score: +vocabScore.toFixed(3) };
-  }
-
 }
 
 // ── PetDO ─────────────────────────────────────────────────────────────────────
@@ -89,21 +76,7 @@ export class PetDO {
     if (url.pathname === "/state") { const s = this.sql.exec("SELECT * FROM pet_state WHERE id = 1").toArray()[0] || { streak: 0 }; return j({ state: { streak: s.streak, xp: s.xp, mood: s.mood, totalSessions: s.total_sessions, longestStreak: s.longest_streak, tigerScore: s.tiger_score, dayPhase: s.day_phase } }); }
     if (url.pathname === "/score") { const s = this.sql.exec("SELECT * FROM pet_state WHERE id = 1").toArray()[0] || {}; const now = Date.now(); const rc = this.sql.exec("SELECT ts, confidence FROM checkins WHERE ts > ? ORDER BY ts DESC", now - 7 * 86400000).toArray(); const ud = new Set(rc.map(c => Math.floor(c.ts / 86400000))); const ret = Math.min(1, ud.size / 7); const cf2 = this.sql.exec("SELECT confidence FROM checkins ORDER BY id DESC LIMIT 10").toArray(); const avg = cf2.length ? cf2.reduce((a, r) => a + r.confidence, 0) / cf2.length : 5; const er = Math.min(1, avg / 10); const lc = s.last_checkin || 0; const dc = (now - lc) < 86400000 ? 1 : 0; const ts2 = Math.round(ret * 40 + er * 40 + dc * 20); return j({ tigerScore: ts2, breakdown: { retention: Math.round(ret * 100), errorReduction: Math.round(er * 100) }, streak: s.streak || 0, dayPhase: s.day_phase || "E1", status: ts2 < 40 ? "MOUSE_MODE" : ts2 < 70 ? "CAT_MODE" : "TIGER_MODE" }); }
     if (url.pathname === "/daily-check") { const s = this.sql.exec("SELECT * FROM pet_state WHERE id = 1").toArray()[0] || {}; const now = Date.now(); const lc = s.last_checkin || 0; const hi = (now - lc) / 3600000; const ts2 = s.tiger_score || 0; return j({ tigerScore: ts2, hoursInactive: Math.round(hi), streak: s.streak || 0, totalSessions: s.total_sessions || 0, needsAlert: hi >= 24 && ts2 < 40, needsDrill: hi < 48 }); }
-    return j({ error: "Not found" }, 404);
-  }
-   retireMoment(mid) {
-     this.sql.exec("UPDATE moments SET long_term = 1 WHERE id = ?", mid);
-   }
-   _inferArc(text) {
-    const len = text.length; const words = text.split(/\s+/).length;
-    const exclam = (text.match(/[!]/g) || []).length; const capsRatio = (text.match(/[A-Z]/g) || []).length / Math.max(len, 1);
-    const punct = (text.match(/[!?.]/g) || []).length; const qCount = (text.match(/\?/g) || []).length;
-    const ml = Math.min(1, len / 500); const vs = Math.min(1, words / 30);
-    const energy = Math.round(Math.max(1, Math.min(10, 2 + ml * 4 + exclam / Math.max(len, 1) * 40 + capsRatio * 5)));
-    const confidence = Math.round(Math.max(1, Math.min(10, 4 + vs * 3 + Math.min(qCount / Math.max(words, 1) * 3, 2))));
-    const frustration = Math.round(Math.max(0, Math.min(10, punct * 0.5 + (len < 5 ? 2 : 0))));
-    const engagement = Math.round(Math.max(1, Math.min(10, energy * 0.3 + ml * 4 + vs * 3)));
-    return { session_id: "s_" + Date.now(), energy, confidence, frustration, engagement, ml_score: +ml.toFixed(3), vocab_score: +vs.toFixed(3) };
+return j({ error: "Not found" }, 404);
   }
 }
 

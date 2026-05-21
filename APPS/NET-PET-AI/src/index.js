@@ -208,9 +208,10 @@ export default {
         LEDGER:   !!env.LEDGER,
         COMMANDS: !!env.COMMANDS,
         ASSETS:   !!env.ASSETS,
+        MEMORY:   !!env.MEMORY,
       };
       const secretsOk = secrets.DEEPSEEK_API_KEY && secrets.DEEPGRAM_API_KEY;
-      const bindingsOk = Object.values(bindings).every(Boolean);
+      const bindingsOk = [bindings.PETS, bindings.LEDGER, bindings.COMMANDS, bindings.ASSETS, bindings.MEMORY].every(Boolean);
       return addCors(json({
         ok: secretsOk && bindingsOk,
         version: VERSION,
@@ -235,7 +236,7 @@ export default {
         worker: "net-pet-ai",
         version: VERSION,
         runtime: "Cloudflare Workers",
-        durableObjects: ["SessionDO", "ProfileDO", "PetDO", "LedgerDO", "CommandDO"],
+        durableObjects: ["PetDO", "LedgerDO", "MemoryDO", "CommandDO"],
         ts: Date.now(),
         proof: `Phoenix OB-1 alive at ${new Date().toISOString()}`,
       }), request);
@@ -352,30 +353,17 @@ export default {
   // ── Cron triggers ───────────────────────────────────────────────────────
   // Every 6 hours: Zalo escalation sweep + daily loop engine
   // Every 3 hours: Auto Post Engine (content distribution)
-  async scheduled(event, env, ctx) {    ctx.waitUntil(handleHeartbeat(env)); // HB v1.0: every hour    const hour = new Date(event.scheduledTime).getUTCHours();
+  async scheduled(event, env, ctx) {
+    ctx.waitUntil(handleHeartbeat(env)); // HB v1.0: every hour
+    const hour = new Date(event.scheduledTime).getUTCHours();
 
     // Escalation sweep runs every 6 hours (0, 6, 12, 18 UTC)
     if (hour % 6 === 0) {
-      const report = await runEscalationSweep(env);
-      console.log(`[CRON] Escalation sweep: ${JSON.stringify(report)}`);
-
-      // Daily loop: update Tiger Scores for all students
       try {
-        const rosterStub = env.SESSIONS.get(env.SESSIONS.idFromName("system-roster"));
-        const rosterRes = await rosterStub.fetch(new Request("https://do/roster/all"));
-        const rosterData = await rosterRes.json();
-        const students = rosterData.students || [];
-        let updated = 0;
-        for (const student of students) {
-          try {
-            const petStub = env.PETS.get(env.PETS.idFromName(student.student_id));
-            await petStub.fetch(new Request("https://do/daily-check"));
-            updated++;
-          } catch (_) {}
-        }
-        console.log(`[CRON] Daily loop: updated ${updated}/${students.length} Tiger Scores`);
+        const report = await runEscalationSweep(env);
+        console.log(`[CRON] Escalation sweep: ${JSON.stringify(report)}`);
       } catch (err) {
-        console.log(`[CRON] Daily loop error: ${err.message}`);
+        console.log(`[CRON] Escalation sweep error: ${err.message}`);
       }
     }
 

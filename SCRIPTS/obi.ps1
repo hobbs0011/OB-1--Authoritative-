@@ -422,6 +422,7 @@ switch ($Command) {
             $jsFiles = Get-ChildItem $d -Recurse -Include "*.js","*.ts" -File -ErrorAction SilentlyContinue
             foreach ($f in $jsFiles) {
                 $content = Get-Content $f.FullName -Raw -ErrorAction SilentlyContinue
+                if (-not $content) { continue }
                 # Look for environment / feature flags
                 $flagPattern = @"
 (?:FLAG|ENV|ENABLE|DISABLE)\s*[=:]\s*["']?(\w+)["']?

@@ -1,8 +1,8 @@
 {
-  "soul_ok": true,
+  "git_head": "8b3c724 death: Run 365 ΓÇö durable_objects.js FIX + Build Verify ΓÇö orphan code removed, wrangler dry-run PASS, 12 probe artifacts documented | SOULCOUNT 76488 DELTA 0",
   "git_branch": "master",
-  "doctor_ok": true,
   "verify_ok": true,
-  "timestamp": "2026-05-21T10:42:26.071377+07:00",
-  "git_head": "b6825a3 death: Run 364 — PHOENIX-CODER v5 HARDEN 17/17 SSRF/PT/CT/D1/log/queue guards; tsc 0 err; build 34 KB; deploy gap open; SOULCOUNT 76488 DELTA 0"
+  "soul_ok": true,
+  "doctor_ok": true,
+  "timestamp": "2026-05-21T12:38:22.2353479+07:00"
 }

@@ -67,7 +67,8 @@ class_name = "CommandDO"
 # deleted_classes = ["StudentBrainV2"]
 
 [[migrations]]
-tag = "v6-command-station"
+tag = "v7-drop-session-profile"
+deleted_classes = ["SessionDO", "ProfileDO"]
 new_sqlite_classes = []
 
 [vars]
