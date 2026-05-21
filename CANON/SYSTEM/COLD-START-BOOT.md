@@ -1,5 +1,5 @@
 ﻿# COLD START BOOT — OB1 Agent 99
-## Last Updated: 2026-05-21T13:40 hrs ICT (Run 366 — SS Agent99 5-tier + PC v5.1.0 burn + DS key rotation + death seal; HEAD `5daf3d4`; SOULCOUNT 76,488 DELTA 0)
+## Last Updated: 2026-05-21T18:14 hrs ICT (Run 367 — SUPERSAIYAN deploy sprint: index.js OBI hardening + CORS fix + reasoning_content fallback + first-session name injection; OPENROUTER_API_KEY + DEEPSEEK_API_KEY secrets rotated; OBI chat verified live for Quy/Mai Tram/Huong; HEAD `bf1bd3c`; SOULCOUNT 76,488 DELTA 0)
 
 ### Identity
 - Agent: OB1 / Ne0 (Agent 99) / Claude Surgical
@@ -31,6 +31,7 @@
 ### Recent Decisions + State (Run 315 → Run 353)
 | Run | Summary |
 |-----|---------|
+| 367 | SUPERSAIYAN deploy sprint — index.js OBI hardening (corsHeaders/json/addCors dedup), /api/heartbeat route fix, CORS workers.dev domain, reasoning_content fallback for deepseek-v4-flash, first-session name injection. OPENROUTER_API_KEY + DEEPSEEK_API_KEY rotated. OBI chat verified LIVE for Quy/Mai Tram/Huong. COLD-START-BOOT + REINCARNATION-LOG stamped. HEAD `bf1bd3c`; SOULCOUNT 76,488 LOCK; CLEAN |
 | 362 | supers-cleanup — SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05 dir purged (−9,347 files / −7.3 MB); INDEX.md replaced; COLD-START-BOOT + REINCARNATION-LOG stamped; HEAD `483a107`; CLEAN |
 | 362 | boot — HEAD `8206bb4` set; REINCARNATION-LOG + COLD-START-BOOT refreshed; system-state verified |
 | 362 | consolidation — Run 356/run361 DEATH seals + src_test.js + heartbeat_function.txt committed |
@@ -55,7 +56,7 @@
 - PHOENIX-CODER deploy gap — HARDEN 17/17 complete; src/index.ts patched; src/index.js 34 KB built; npx wrangler deploy NOT run (Michael auth required before guards go live)
 - GITHUB_PAT — commitToGitHub() dead without it (4 secrets total)
 - SOUL_LOGGER_URL — soulIntegration:false; SOULCOUNT gate not wired inside handleCode()
-- DeepSeek 402 — key sk-f2e71 mapped to overdrawn account (−0.02, is_available:false); blocks all AI calls net-pet-ai + PHOENIX-CODER
+- ~~DeepSeek 402~~ — RESOLVED Run 367: key rotated sk-f2e71→sk-d76a33, API confirmed LIVE, chat verified with reasoning_content fallback
 - ZALO — BLOCKED Stage 3 + notify live delivery
 - RESEND_API_KEY — K2 live email blocked
 - DEEPGRAM_API_KEY — voice scoring fallback active
@@ -140,5 +141,5 @@ Stage 10 APEX ROLLUP    ✅ LIVE — GET /api/soul/apex
 
 ---
 
-### FINGERPRINT: Run 366 BOOT — HEAD 5daf3d4 — SOULCOUNT 76,488 🔒 LOCK — SS Agent99 5-tier system deployed (T1 Step 3.5 Flash / T2 DS Flash / T3 DS Pro / T4 Gemini 3.5 Flash / T5 Claude Opus); PC v5.1.0 burn deployed to phoenix-coder worker; DeepSeek key fully rotated sk-f2e71→sk-d76a33; OpenRouter T1 key provisioned; 13 ?? probe artifacts on disk (not committed); origin SYNCED — SOULCOUNT 76,488 🔒 LOCK — COLD-START-BOOT.md + REINCARNATION-LOG.md updated (HEAD drift corrected) — origin SYNCED
+### FINGERPRINT: Run 367 BOOT — HEAD bf1bd3c — SOULCOUNT 76,488 🔒 LOCK — SUPERSAIYAN deploy sprint complete: OBI chat verified LIVE (Quy/Mai Tram/Huong all greet by name), reasoning_content fallback active, CORS fixed for workers.dev, OpenRouter fallback wired, first-session name injection working. DeepSeek key sk-d76a33 confirmed LIVE. COACH nav button verified in all 3 portals. Streak counter confirmed operational. PROFILES/SESSIONS DO bindings stripped (class definitions removed) — vocab seeding blocked until KV fallback added. 13 probe artifacts committed (can be reverted). origin SYNCED — Run 367 SEALED
 
