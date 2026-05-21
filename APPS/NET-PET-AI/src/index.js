@@ -757,6 +757,9 @@ async function handleAPI(path, request, env, url) {
   else if (path === "/api/waitlist/list" && method === "GET") { return handleWaitlistList(env); }
   else if (path === "/api/admin/waitlist/toggle" && method === "POST") { const body = await request.json(); return handleWaitlistToggle(body, env); }
   else if (path === "/api/admin/waitlist/status" && method === "GET") { return handleWaitlistStatus(env); }
+  else if (path === "/api/admin/subscriptions" && method === "GET") { return handleAdminSubscriptionsList(env); }
+  else if (path === "/api/admin/subscription" && method === "GET") { return handleAdminSubscriptionGet(url.searchParams.get("studentId") || "", env); }
+  else if (path === "/api/admin/subscription/upsert" && method === "POST") { const body = await request.json(); return handleAdminSubscriptionUpsert(body, env); }
 
   // ── DELETE /api/vocab/delete ──────────────────────────────────────────────
   else if (method === "DELETE" && path.includes("/api/vocab/delete")) {
@@ -831,6 +834,52 @@ async function handlePaymentConfirm(body, env) {
   }));
   const until = new Date(Date.now()+30*86400000).toISOString().slice(0,10);
   return json({ success: true, txnId, activatedUntil: until });
+}
+
+// ── Admin Subscription Handlers ─────────────────────────────────────────────────
+
+// GET /api/admin/subscriptions — list all subscriptions
+async function handleAdminSubscriptionsList(env) {
+  if (!env.NET_PET_KV) return json({ subscriptions: [] });
+  // Scan known students + employer subscriptions
+  const students = ["huong-bluetech","mai-tram-bluetech","quy-bluetech","lam-bluetech","quan-bluetech","quang-bluetech","minh-bluetech"];
+  const subs = await Promise.all(students.map(async sid => {
+    const raw = await env.NET_PET_KV.get(`subscription:${sid}`).catch(() => null);
+    return raw ? { studentId: sid, ...JSON.parse(raw) } : null;
+  }));
+  return json({ subscriptions: subs.filter(Boolean), generatedAt: new Date().toISOString() });
+}
+
+// GET /api/admin/subscription?studentId=XXX — get one subscription
+async function handleAdminSubscriptionGet(studentId, env) {
+  if (!studentId) return json({ error: "studentId required" }, 400);
+  if (!env.NET_PET_KV) return json({ error: "NET_PET_KV not configured" }, 500);
+  const raw = await env.NET_PET_KV.get(`subscription:${studentId}`).catch(() => null);
+  if (!raw) return json({ studentId, plan: "none", status: "no_subscription" });
+  const sub = JSON.parse(raw);
+  const trialDays = sub.trial_end ? Math.max(0, Math.ceil((new Date(sub.trial_end) - Date.now()) / 86400000)) : 0;
+  return json({ studentId, ...sub, trialDaysRemaining: trialDays, status: new Date(sub.paidUntil) > new Date() ? "active" : "expired" });
+}
+
+// POST /api/admin/subscription/upsert — create/update subscription (pin protected)
+async function handleAdminSubscriptionUpsert(body, env) {
+  const { pin, studentId, plan, trial_end, paidUntil, is_founding_member } = body || {};
+  if (pin !== "bluetech2026") return json({ error: "Unauthorized" }, 403);
+  if (!studentId) return json({ error: "studentId required" }, 400);
+  if (!env.NET_PET_KV) return json({ error: "NET_PET_KV not configured" }, 500);
+  
+  const existing = await env.NET_PET_KV.get(`subscription:${studentId}`).catch(() => null);
+  const base = existing ? JSON.parse(existing) : { plan: "trial", activatedAt: new Date().toISOString() };
+  const sub = {
+    ...base,
+    ...(plan ? { plan } : {}),
+    ...(trial_end ? { trial_end } : {}),
+    ...(paidUntil ? { paidUntil } : {}),
+    ...(is_founding_member !== undefined ? { is_founding_member } : {}),
+    updatedAt: new Date().toISOString(),
+  };
+  await env.NET_PET_KV.put(`subscription:${studentId}`, JSON.stringify(sub));
+  return json({ ok: true, studentId, subscription: sub });
 }
 
 // ── Admin Statistics Handler ───────────────────────────────────────────────────

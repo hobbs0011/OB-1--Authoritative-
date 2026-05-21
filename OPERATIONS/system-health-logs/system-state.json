@@ -1,8 +1,8 @@
 {
   "doctor_ok": true,
-  "timestamp": "2026-05-21T23:49:12.3652668+07:00",
-  "git_head": "90b3b31 death: Run 372 Consolidation ΓÇö post-371 state seal, HEAD 1f4f1b7, SOULCOUNT 76,488 LOCK DELTA 0 ΓÇö Run 372",
-  "git_branch": "master",
   "verify_ok": true,
+  "git_head": "bd938fa death: Run 373 seal ΓÇö K3/K4/K5 deferred handoff; concurrent agent reconciliation; HEAD 90b3b31 | SOULCOUNT 76488 LOCK DELTA 0",
+  "timestamp": "2026-05-22T00:18:28.6172944+07:00",
+  "git_branch": "master",
   "soul_ok": true
 }
