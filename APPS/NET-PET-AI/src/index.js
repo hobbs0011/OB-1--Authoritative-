@@ -17,6 +17,33 @@ import { LedgerDO, PetDO, CommandDO, MemoryDO } from './durable_objects.js';
 
 const VERSION = "1.5.0";
 
+// ── Utility functions ───────────────────────────────────────────────────
+function corsHeaders(request) {
+  const origin = request?.headers?.get("Origin") || "*";
+  return {
+    "Access-Control-Allow-Origin": origin,
+    "Access-Control-Allow-Methods": "GET,POST,OPTIONS,DELETE",
+    "Access-Control-Allow-Headers": "Content-Type,Authorization",
+    "Access-Control-Allow-Credentials": "true",
+    Vary: "Origin",
+  };
+}
+
+function json(data, status = 200) {
+  return new Response(JSON.stringify(data), { status, headers: { "Content-Type": "application/json" } });
+}
+
+function addCors(res, request) {
+  const origin = request?.headers?.get("Origin") || "*";
+  const headers = new Headers(res.headers);
+  headers.set("Access-Control-Allow-Origin", origin);
+  headers.set("Access-Control-Allow-Methods", "GET,POST,OPTIONS,DELETE");
+  headers.set("Access-Control-Allow-Headers", "Content-Type,Authorization");
+  headers.set("Access-Control-Allow-Credentials", "true");
+  headers.set("Vary", "Origin");
+  return new Response(res.body, { status: res.status, headers });
+}
+
 // ── Obi System Prompt v2 (Continuity Engine — production-grade) ────────────────
 const OBI_SYSTEM = `You are OBI — a continuity-based learning engine built by Michael Hobbs.
 
@@ -332,22 +359,22 @@ export default {
 
     // ── API routes ────────────────────────────────────────────────────────────
 
-    if (path.startsWith("/api/")) {
-      try {
-        const res = await handleAPI(path, request, env, url);
-        return addCors(res, request);
-      } catch (err) {
-        return addCors(json({ error: "Internal error", version: VERSION }, 500), request);
-      }
-    }
-
      // /api/heartbeat — manual trigger for testing (returns last pulse results)
      if (path === "/api/heartbeat" && request.method === "GET") {
        await handleHeartbeat(env);
        return addCors(json({ triggered: true, ts: new Date().toISOString() }));
      }
 
-     return env.ASSETS.fetch(request);
+     if (path.startsWith("/api/")) {
+       try {
+         const res = await handleAPI(path, request, env, url);
+         return addCors(res, request);
+       } catch (err) {
+         return addCors(json({ error: "Internal error", version: VERSION }, 500), request);
+       }
+     }
+
+      return env.ASSETS.fetch(request);
   },
 
   // ── Cron triggers ───────────────────────────────────────────────────────
