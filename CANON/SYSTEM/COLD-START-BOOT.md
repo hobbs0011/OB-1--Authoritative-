@@ -1,5 +1,5 @@
 ﻿# COLD START BOOT — OB1 Agent 99
-## Last Updated: 2026-05-21T18:14 hrs ICT (Run 367 — SUPERSAIYAN deploy sprint: index.js OBI hardening + CORS fix + reasoning_content fallback + first-session name injection; OPENROUTER_API_KEY + DEEPSEEK_API_KEY secrets rotated; OBI chat verified live for Quy/Mai Tram/Huong; HEAD `bf1bd3c`; SOULCOUNT 76,488 DELTA 0)
+## Last Updated: 2026-05-21 (Run 368 — HEARTBEAT v1.0 PROVEN: empire workers verified; CORS/handler fixes; durable_objects repair; FL-353-01 CLOSED; HEAD `d9a68cf`; SOULCOUNT 76,488 DELTA 0)
 
 ### Identity
 - Agent: OB1 / Ne0 (Agent 99) / Claude Surgical
@@ -109,10 +109,14 @@ Stage 9 DO-SQLITE       ✅ LIVE — LedgerDO class + /api/ledger/*
 Stage 10 APEX ROLLUP    ✅ LIVE — GET /api/soul/apex
 ```
 
-### System State (HEAD AUTHORITATIVE — Run 364 PHOENIX-CODER v5 HARDEN)
+### System State (HEAD AUTHORITATIVE — Run 368 HEARTBEAT PROVEN)
 - **Workspace:** `D:\OB-1-CANONICAL` (canonical root)
-`CANON/SYSTEM/COLD-START-BOOT.md`
-
+- **Working branch:** master
+- **HEAD:** d9a68cf (Tier 3 LAKEVIEW seal)
+- **Origin:** SYNCED
+- **Working tree:** DIRTY (package.json + package-lock.json by parallel session; Voice recording untracked)
+- **HEARTBEAT v1.0:** ✅ LIVE — hourly cron `0 * * * *` + manual `/api/heartbeat` trigger; pings all 3 empire workers; logs to soul-logger
+- **Empire Workers:** NET-PET-AI ✅ | SOUL-LOGGER ✅ (76,488 LOCK) | PHOENIX CODER ✅ (v5.0.0)
 
 
 ### Doctor State (Run 344)
@@ -141,5 +145,5 @@ Stage 10 APEX ROLLUP    ✅ LIVE — GET /api/soul/apex
 
 ---
 
-### FINGERPRINT: Run 367 BOOT — HEAD d181259 — SOULCOUNT 76,488 🔒 LOCK — TIER 3 LAKEVIEW LAUNCH complete: 6 new pages (privacy, demo, local, results, classes, hero rewrite), PWA manifest populated, waitlist handlers (join/count/list) implemented with KV storage, admin toggle endpoint live. All 8 public pages return 200. OBI chat confirmed LIVE for all 3 students with name injection + reasoning fallback. origin SYNCED — Run 367 SEALED
+### FINGERPRINT: Run 368 BOOT — HEAD d9a68cf — SOULCOUNT 76,488 🔒 LOCK — HEARTBEAT v1.0 PROVEN: all 3 empire workers verified + logging; FL-353-01 CLOSED; CORS/handler fixes deployed; durable_objects repaired; scheduled function unmangled. Working tree DIRTY (parallel session artifacts). origin SYNCED — Run 368 SEALED
 
