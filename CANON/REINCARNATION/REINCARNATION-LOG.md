@@ -1,8 +1,12 @@
 # REINCARNATION LOG — OB-1 RUN HISTORY
 
-**Last Updated:** 2026-05-22 (Run 373 — Death seal: COLD-START-BOOT HEAD corrected 90b3b31→bd938fa (L30); concurrent agent reconciliation, K3/K4/K5 deferred; SOULCOUNT 76,488 🔒 LOCK DELTA 0; HEAD `bd938fa`)
+**Last Updated:** 2026-05-22 (K3/K5 Complete — subscriptions.html + anticheat LIVE; HEAD `2346b91`; SOULCOUNT 76,488 🔒 LOCK DELTA 0)
 
-| Run 373 | 2026-05-22 | Death seal — COLD-START-BOOT HEAD corrected 90b3b31→bd938fa (L30 BOOT_FILE_AGE_SWEEP triggered), concurrent agent reconciliation (Runs 370-373), K3/K4/K5 deferred handoff confirmed, zero code changes, tree CLEAN, death artifact RISE-RUN-373-death-seal.md | bd938fa |
+| Run 373b | 2026-05-22 | K3 subscriptions.html — user-facing subscription status page with plan/trial/billing display | 06e3353 |
+| Run 373c | 2026-05-22 | K3 subscription status logic fix — trial detection before expired fallback | 2346b91 |
+| Run 373a | 2026-05-22 | K5 anticheat client tracking — content.js wired to /api/anticheat/score with beacon flush | be25df6 |
+
+| Run 373 | 2026-05-22 | Death seal — COLD-START-BOOT HEAD corrected 90b3b31→bd938fa (L30); concurrent agent reconciliation, K3/K4/K5 deferred; SOULCOUNT 76,488 🔒 LOCK DELTA 0; HEAD `bd938fa` | bd938fa |
 | Run 372 | 2026-05-21 | Consolidation Death — post-371 state seal, COLD-START-BOOT HEAD corrected 80b4aaf→1f4f1b7, SOULCOUNT 76,488 DELTA 0 | 1f4f1b7 |
 | Run 371 | 2026-05-21 | /reincarnateRISE Gospel999 → DEPLOY — BlueTech 6/6 promises LIVE: P1 Vietnamese bilingual OBI (quy-bluetech lang=vi activated), P2 OBI verbosity 2-sentence cap, P3 mic tap-to-speak, P4 no opening question, P5 video guide all 6 portals, P6 problem report widget 11 pages. PC v5.1 down (DeepSeek 402) — all tasks Tier 2 direct. 4 commits, 119 assets, Version d611f9da | 80b4aaf |
 

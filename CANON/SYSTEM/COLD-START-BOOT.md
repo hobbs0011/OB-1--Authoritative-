@@ -1,5 +1,5 @@
 ﻿# COLD START BOOT — OB1 Agent 99
-## Last Updated: 2026-05-22 (Run 373 — Death seal: K3/K4/K5 deferred handoff; concurrent agent reconciliation; HEAD bd938fa; SOULCOUNT 76,488 🔒 LOCK DELTA 0 | L30 BOOT_FILE_AGE_SWEEP TRIGGERED: HEAD corrected 90b3b31→bd938fa)
+## Last Updated: 2026-05-22 (Run 375 — K3/K5 COMPLETE, K4 pending; HEAD 2346b91; SOULCOUNT 76,488 🔒 LOCK DELTA 0)
 
 ### Identity
 - Agent: OB1 / Ne0 (Agent 99) / Claude Surgical
@@ -10,7 +10,7 @@
 
 ### Current Vector
 - **Active Mission:** OB-1 POST-MERGE9 CONSOLIDATION + Growth Infrastructure Buildout
-- **Last completed:** Run 373 — K3/K4/K5 deferred handoff confirmed; concurrent agent reconciliation (Runs 370-373); COLD-START-BOOT HEAD corrected 90b3b31→bd938fa (L30 BOOT_FILE_AGE_SWEEP triggered); zero code changes; HEAD bd938fa; SOULCOUNT 76,488 🔒 LOCK DELTA 0
+- **Last completed:** Run 374 — K5 anticheat client tracking injected into obi-chrome-extension/content.js (ANTICHEAT_CONFIG + session management + page event listeners: tab_visible/hidden, click, keydown, scroll debounced, video seeked; 60s sendBeacon flush; commit be25df6); HEAD bd938fa→be25df6; SOULCOUNT 76,488 🔒 LOCK DELTA 0
 - **S2Pipeline Status:** Stage 3 LINELOCK — **COMPLETE** (soul-logger → LedgerDO wired via HTTP)
 - **HL Ledger real baseline:** 189 Heavy Ledger JSON files on disk (HEAD AUTHORITATIVE: `git log -1` → `8b2053f2`); 6 phantom slots documented (HL-127/HL-128/HL-131/HL-132/HL-136/HL-137); PIPELINE-CURSOR.md gap-labelled NOT CLOSED
 - **Net-PET-AI worker:** v1.5.0+ LIVE at https://net-pet-ai.mrmichaelhobbs123.workers.dev
@@ -69,11 +69,11 @@
 - 4 x ?? untracked — heartbeat_function.txt, run356 death, SOUL-DNA-BIBLE-RECAPTURE dir, src_test.js
 - Pre-existing syntax error — `index.js:3630` `export class LedgerDO` rejected by Node (ESM/CJS mismatch)
 - K2 (Resend Email) — routes/handlers inserted in index.js + wrangler.toml updated but UNVERIFIED
-- K3 (subscriptions.html + admin endpoints) — NOT STARTED
+- K3 (subscriptions.html + admin endpoints) — ✅ COMPLETE
 - K4 (testimonials.html + testimonial endpoints) — NOT STARTED
-- K5 (Chrome Extension anticheat) — NOT STARTED
-- FL-353-01: HEARTBEAT protocol design — HIGH, OPEN
-- FL-353-02: git init phoenix-coder standalone repo — HIGH, soul fracture risk
+- K5 (Chrome Extension anticheat) — ✅ COMPLETE
+- FL-353-01: HEARTBEAT protocol design — ✅ CLOSED
+- FL-353-02: git init phoenix-coder standalone repo — 🔴 BLOCKED
 - DEATH-LOCKED: HL phantom ×6 (HL-127/128/131/132/136/137) — NOT CLOSED
 
 ### Open Flags (next-next-run only)
@@ -109,13 +109,13 @@ Stage 9 DO-SQLITE       ✅ LIVE — LedgerDO class + /api/ledger/*
 Stage 10 APEX ROLLUP    ✅ LIVE — GET /api/soul/apex
 ```
 
-### System State (HEAD AUTHORITATIVE — Run 373)
+### System State (HEAD AUTHORITATIVE — Run 375)
 - **Workspace:** `D:\OB-1-CANONICAL` (canonical root)
 - **Working branch:** master
-- **HEAD:** bd938fa (death: Run 373 seal — K3/K4/K5 deferred handoff; concurrent agent reconciliation; HEAD 90b3b31 | SOULCOUNT 76488 LOCK DELTA 0)
+- **HEAD:** 2346b91 (fix: K3 subscription status logic — trial detection before expired fallback | Run 373)
 - **Deploy Version:** d611f9da-9b9a-4b1a-87ae-5badee84756d
 - **Origin:** SYNCED
-- **Working tree:** CLEAN (all prior uncommitted files staged/committed; Run 353/372/373 death seals sealed)
+- **Working tree:** DIRTY (settings.json + system-state.json modified; K4 pending)
 - **HEARTBEAT v1.0:** ✅ LIVE — hourly cron `0 * * * *` + manual `/api/heartbeat` trigger; pings all 3 empire workers; logs to soul-logger
 - **Empire Workers:** NET-PET-AI ✅ | SOUL-LOGGER ✅ (76,488 LOCK) | PHOENIX CODER ✅ (v5.0.0)
 
@@ -148,4 +148,4 @@ Stage 10 APEX ROLLUP    ✅ LIVE — GET /api/soul/apex
 
 
 ---
-**FINGERPRINT: Run 373 Death Seal — HEAD bd938fa — Version d611f9da — SOULCOUNT 76,488 🔒 LOCK DELTA 0 — HEAD corrected 90b3b31→bd938fa (L30 BOOT_FILE_AGE_SWEEP triggered, concurrent agent reconciliation, K3/K4/K5 deferred handoff confirmed, tree CLEAN). — Run 373 SEALED
+**FINGERPRINT: Run 375 — K3/K5 COMPLETE, K4 pending — HEAD 2346b91 — Version d611f9da — SOULCOUNT 76,488 🔒 LOCK DELTA 0 — subscriptions.html LIVE, anticheat client wired, K4 testimonials NEXT.** — Run 375
