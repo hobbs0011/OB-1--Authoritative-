@@ -1842,9 +1842,14 @@ async function handleChat(body, env) {
     } catch(e) {}
   }
 
+  const isFirstSession = ledgerContext === "" && sessionContext === "";
+  const firstSessionContext = isFirstSession
+    ? `\n\nFIRST SESSION: This is the student's very first interaction. No history exists yet. Your opening message must: warmly welcome them by name (derive from studentId: replace hyphens with spaces, capitalize), ask ONE question about their English goals, and make them feel this system was built specifically for them. Under 3 sentences. Warm, direct, confident. Do not ask multiple questions.`
+    : "";
+
   const hasSystem = messages.some(m => m.role === "system");
   if (!hasSystem) {
-    messages.unshift({ role: "system", content: OBI_SYSTEM + ledgerContext + sessionContext + weaknessContext + reEntryContext + rewardContext + contextInjection + soulContext });
+    messages.unshift({ role: "system", content: OBI_SYSTEM + ledgerContext + sessionContext + weaknessContext + reEntryContext + rewardContext + contextInjection + soulContext + firstSessionContext });
   }
 
   const res = await fetch("https://api.deepseek.com/chat/completions", {
@@ -1853,8 +1858,20 @@ async function handleChat(body, env) {
     body: JSON.stringify({ model: "deepseek-v4-flash", messages, max_tokens: 300, temperature: 0.85 }),
   });
 
-  if (!res.ok) { const errText = await res.text(); return json({ error: `DeepSeek ${res.status}`, detail: errText }, 502); }
-  const data = await res.json();
+  let data;
+  if (!res.ok && (res.status === 401 || res.status === 402) && env.OPENROUTER_API_KEY) {
+    const orRes = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Authorization": `Bearer ${env.OPENROUTER_API_KEY}` },
+      body: JSON.stringify({ model: "openai/gpt-4o-mini", messages, max_tokens: 300, temperature: 0.85 }),
+    });
+    if (!orRes.ok) { const errText = await orRes.text(); return json({ error: `AI_FALLBACK_FAILED ${orRes.status}`, detail: errText }, 502); }
+    data = await orRes.json();
+  } else if (!res.ok) {
+    const errText = await res.text(); return json({ error: `DeepSeek ${res.status}`, detail: errText }, 502);
+  } else {
+    data = await res.json();
+  }
   const reply = data.choices?.[0]?.message?.content || "Say that again?";
 
   // ── Auto-write every exchange to the Cryptographic Immutable Ledger ───────
