@@ -1862,8 +1862,9 @@ async function handleChat(body, env) {
   }
 
   const isFirstSession = ledgerContext === "" && sessionContext === "";
+  const displayName = studentId !== "anonymous" ? studentId.split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ") : "there";
   const firstSessionContext = isFirstSession
-    ? `\n\nFIRST SESSION: This is the student's very first interaction. No history exists yet. Your opening message must: warmly welcome them by name (derive from studentId: replace hyphens with spaces, capitalize), ask ONE question about their English goals, and make them feel this system was built specifically for them. Under 3 sentences. Warm, direct, confident. Do not ask multiple questions.`
+    ? `\n\nFIRST SESSION: This is the student's very first interaction. No history exists yet. The student's name is ${displayName} (derived from their ID: "${studentId}"). Your opening message must: warmly welcome them by name, ask ONE question about their English goals, and make them feel this system was built specifically for them. Under 3 sentences. Warm, direct, confident. Do not ask multiple questions. Do not make up a different name — use exactly "${displayName}".`
     : "";
 
   const hasSystem = messages.some(m => m.role === "system");
@@ -1891,7 +1892,8 @@ async function handleChat(body, env) {
   } else {
     data = await res.json();
   }
-  const reply = data.choices?.[0]?.message?.content || "Say that again?";
+  const choice = data.choices?.[0]?.message;
+  const reply = choice?.content || choice?.reasoning_content || "Say that again?";
 
   // ── Auto-write every exchange to the Cryptographic Immutable Ledger ───────
   const userMsg = messages.filter(m => m.role === "user").pop()?.content || "";
