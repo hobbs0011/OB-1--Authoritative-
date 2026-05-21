@@ -1744,6 +1744,12 @@ async function logSoulEvent(env, studentId, sessionId, role, text) {
 
 // ── Chat (DeepSeek + Obi + Ledger memory injection) ──────────────────────────
 
+// ── Memory Compression: update Soul DNA v1 summary ──────────────────────
+async function updateStudentMemory(studentId, env) {
+  // Stub — full implementation pending: compress recent exchanges into soul summary
+  // Future: POST to soul-logger /api/soul/compress
+}
+
 async function handleChat(body, env) {
   const apiKey = env.DEEPSEEK_API_KEY;
   if (!apiKey) return json({ error: "DEEPSEEK_API_KEY not configured" }, 500);
@@ -1933,7 +1939,7 @@ async function handleChat(body, env) {
 
   // ── Memory Compression: update Soul DNA v1 summary after each interaction ─
   if (studentId !== "anonymous") {
-    updateStudentMemory(studentId, env).catch(() => {});
+    try { await updateStudentMemory(studentId, env); } catch (_) {}
   }
 
   // ── v2 Pipeline: Extract signals → Write session event → Update state ───
