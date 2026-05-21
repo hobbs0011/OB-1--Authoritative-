@@ -858,7 +858,10 @@ async function handleAdminSubscriptionGet(studentId, env) {
   if (!raw) return json({ studentId, plan: "none", status: "no_subscription" });
   const sub = JSON.parse(raw);
   const trialDays = sub.trial_end ? Math.max(0, Math.ceil((new Date(sub.trial_end) - Date.now()) / 86400000)) : 0;
-  return json({ studentId, ...sub, trialDaysRemaining: trialDays, status: new Date(sub.paidUntil) > new Date() ? "active" : "expired" });
+  const isPaid = sub.paidUntil && new Date(sub.paidUntil) > new Date();
+  const isTrial = sub.trial_end && new Date(sub.trial_end) > new Date();
+  const status = isPaid ? "active" : isTrial ? "trial" : sub.plan === "founding-member" && trialDays > 0 ? "trial" : sub.paidUntil ? "expired" : "no_subscription";
+  return json({ studentId, ...sub, trialDaysRemaining: trialDays, status });
 }
 
 // POST /api/admin/subscription/upsert — create/update subscription (pin protected)
