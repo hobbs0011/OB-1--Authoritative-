@@ -19,6 +19,7 @@ const SECURITY = {
     allowedOrigins: [
       'https://naturalenglishtraining.com',
       'https://www.naturalenglishtraining.com',
+      'https://net-pet-ai.mrmichaelhobbs123.workers.dev',
       // Add the specific extension ID here once deployed, e.g. 'chrome-extension://abcdef1234567890abcdef1234567890'
       // Never use 'chrome-extension://*' — it allows every installed extension to make credentialed requests.
     ],
