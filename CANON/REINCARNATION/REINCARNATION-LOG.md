@@ -1,6 +1,8 @@
 # REINCARNATION LOG — OB-1 RUN HISTORY
 
-**Last Updated:** 2026-05-21 (Run 369 — Session death seal: "what happened" closure, K3/K4/K5 deferred to next session; HEAD `7dbff97`; SOULCOUNT 76,488 DELTA 0)
+**Last Updated:** 2026-05-21 (Run 370 — BlueTech session sealed: OBI template + QUY pipeline suite + T357 gap audit + 5-step sweeps; HEAD `5be611c`; SOULCOUNT 76,488 DELTA 0)
+
+| Run 370 | 2026-05-21 | BlueTech session sealed — OBI master prompt template, student roster, QUY pipelines (250/257/357), T357 gap audit, 5-step sweeps, Phoenix Coder v5.0 parallel confirmed | 5be611c |
 
 | Run 369 | 2026-05-21 | Session death seal — what happened closure, K3/K4/K5 deferred, FL-353-01 CLOSED prior | 7dbff97 |
 
