@@ -13,7 +13,7 @@ import { generatePosts, routePost, buildInsightPost } from './growth-engine.js';
 import { calculateVirality, calculateConversion, generateVariants, evaluateExperiment, extractPattern, optimizeHook, mutatePrompt, runLearningLoop } from './virality.js';
 import { getStudentRoute, getModulePrompt, createSnapshot, storeSnapshot, rehydrate } from './star-map.js';
 import { computeNextReview, buildVocabContext, generateVocabId } from './vocab-srs.js';
-import { LedgerDO, SessionDO, ProfileDO, PetDO, CommandDO, MemoryDO } from './durable_objects.js';
+import { LedgerDO, PetDO, CommandDO, MemoryDO } from './durable_objects.js';
 
 const VERSION = "1.5.0";
 
@@ -3698,6 +3698,6 @@ async function handleCommandHistory(limit, env) {
 // ═══════════════════════════════════════════════════════════════════════════════
 // RE-EXPORT BLOCK — Durable Object classes live in durable_objects.js
 // Parsed by wrangler 4.x in translated ESM bundle.
-export { LedgerDO, SessionDO, ProfileDO, PetDO, CommandDO, MemoryDO }
+export { LedgerDO, PetDO, CommandDO, MemoryDO }
 
 

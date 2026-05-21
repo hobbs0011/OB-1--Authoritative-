@@ -1,8 +1,8 @@
 {
+  "soul_ok": true,
   "git_branch": "master",
   "doctor_ok": true,
-  "git_head": "fb2988d boot: Run 360 ΓÇö HEAD 77ff975 updated, Run 358/359 death sealed, state verified",
-  "soul_ok": true,
   "verify_ok": true,
-  "timestamp": "2026-05-21T05:31:22.6987330+07:00"
+  "timestamp": "2026-05-21T10:42:26.071377+07:00",
+  "git_head": "b6825a3 death: Run 364 — PHOENIX-CODER v5 HARDEN 17/17 SSRF/PT/CT/D1/log/queue guards; tsc 0 err; build 34 KB; deploy gap open; SOULCOUNT 76488 DELTA 0"
 }

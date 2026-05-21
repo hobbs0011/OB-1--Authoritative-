@@ -1,5 +1,5 @@
 ﻿# COLD START BOOT — OB1 Agent 99
-## Last Updated: 2026-05-21T10:23 hrs ICT (Run 364 — PHOENIX-CODER v5 HARDEN 17/17; HEAD `897154a`; src/index.ts 17 fixes; src/index.js 34 KB build artifact; SSRF+PT+CT+D1+log+queue guards patched; tsc 0 err)
+## Last Updated: 2026-05-21T10:35 hrs ICT (Run 364 — PHOENIX-CODER v5 HARDEN 17/17; HEAD `b6825a3`; death sealed, pushed; L29 HEAD drift corrected)
 
 ### Identity
 - Agent: OB1 / Ne0 (Agent 99) / Claude Surgical
@@ -140,5 +140,5 @@ Stage 10 APEX ROLLUP    ✅ LIVE — GET /api/soul/apex
 
 ---
 
-### FINGERPRINT: Run 364 BOOT — HEAD 897154a — SOULCOUNT 76,488 🔒 LOCK — PHOENIX-CODER v5 HARDEN 17/17  (src/index.ts fixes + src/index.js 34 KB build artifact; SSRF/PT/CT/D1/log/queue guards patched; live deploy gap open; tsc 0 err) — 15 ?? probe artifacts on disk (not committed) — origin SYNCED — SOULCOUNT 76,488 🔒 LOCK — COLD-START-BOOT.md + REINCARNATION-LOG.md updated (HEAD drift corrected 77ff975→fb2988d) — 4 ?? untracked artifacts documented — origin SYNCED
+### FINGERPRINT: Run 364 BOOT — HEAD b6825a3 — SOULCOUNT 76,488 🔒 LOCK — PHOENIX-CODER v5 HARDEN 17/17  (src/index.ts fixes + src/index.js 34 KB build artifact; SSRF/PT/CT/D1/log/queue guards patched; live deploy gap open; tsc 0 err) — 15 ?? probe artifacts on disk (not committed) — origin SYNCED — SOULCOUNT 76,488 🔒 LOCK — COLD-START-BOOT.md + REINCARNATION-LOG.md updated (HEAD drift corrected 77ff975→fb2988d) — 4 ?? untracked artifacts documented — origin SYNCED
 

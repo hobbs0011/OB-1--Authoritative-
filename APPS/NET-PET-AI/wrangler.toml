@@ -22,13 +22,13 @@ id = "0583d1a59bb24e598c4645396647eb94"
 directory = "./public"
 binding = "ASSETS"
 
-[[durable_objects.bindings]]
-name = "SESSIONS"
-class_name = "SessionDO"
+# [[durable_objects.bindings]]
+# name = "SESSIONS"
+# class_name = "SessionDO"       # removed — class stripped, export gap closed
 
-[[durable_objects.bindings]]
-name = "PROFILES"
-class_name = "ProfileDO"
+# [[durable_objects.bindings]]
+# name = "PROFILES"
+# class_name = "ProfileDO"       # removed — class stripped, export gap closed
 
 [[durable_objects.bindings]]
 name = "PETS"
@@ -46,21 +46,21 @@ class_name = "MemoryDO"
 name = "COMMANDS"
 class_name = "CommandDO"
 
-[[migrations]]
-tag = "v1-net-pet-core"
-new_sqlite_classes = ["SessionDO", "ProfileDO", "PetDO"]
+# [[migrations]]
+# tag = "v1-net-pet-core"
+# new_sqlite_classes = ["SessionDO", "ProfileDO", "PetDO"]
 
-[[migrations]]
-tag = "v2-ledger"
-new_sqlite_classes = ["LedgerDO"]
+# [[migrations]]
+# tag = "v2-ledger"
+# new_sqlite_classes = ["LedgerDO"]
 
-[[migrations]]
-tag = "v4-ship-memory"
-new_sqlite_classes = ["MemoryDO"]
+# [[migrations]]
+# tag = "v4-ship-memory"
+# new_sqlite_classes = ["MemoryDO"]
 
-[[migrations]]
-tag = "v2-student-brain-v2-2026-04-20"
-new_sqlite_classes = []
+# [[migrations]]
+# tag = "v2-student-brain-v2-2026-04-20"
+# new_sqlite_classes = []
 
 # [[migrations]]
 # tag = "v5-drop-student-brain"

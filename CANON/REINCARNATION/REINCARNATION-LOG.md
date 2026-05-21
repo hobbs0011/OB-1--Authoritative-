@@ -5,7 +5,7 @@
 
 ---
 
-| Run 364 | 2026-05-21 | PHOENIX-CODER v5 HARDEN 17/17 — SSRF/PT/CT/D1/log+queueGet guards; tsc 0 err; build 34 KB; deploy gap open | 897154a |
+| Run 364 | 2026-05-21 | PHOENIX-CODER v5 HARDEN 17/17 — SSRF/PT/CT/D1/log+queueGet guards; tsc 0 err; build 34 KB; deploy gap open | b6825a3 |
 | Run 362 | 2026-05-21 | PC v5 TEST/ATTACK/AUDIT/HARDEN/RISE — 12-sweep; 7-sys harden; tsc 0; DeepSeek CT guard | 897154a |
 | Run 361 | 2026-05-21 | Governance-only: SOULCOUNT verify + HEAD drift corrected + death seal | fb2988d |
 | Run 360 | 2026-05-21 | reincarnateRISE: Death runs 358/359 sealed; COLD-START-BOOT updated | fb2988d |
