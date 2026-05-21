@@ -481,7 +481,20 @@ async function handleAPI(path, request, env, url) {
   }
 
   // Chat — Obi + Ledger context injection
-  if (path === "/api/chat" && method === "POST") { const body = await request.json(); return handleChat(body, env); }
+  if (path === "/api/chat" && method === "POST") {
+    try {
+      const body = await request.json();
+      return await handleChat(body, env);
+    } catch (err) {
+      console.error("[CHAT_ERROR]", err.message, err.stack);
+      return json({ error: `Chat failed: ${err.message}`, version: VERSION }, 500);
+    }
+  }
+
+  // Status — lightweight worker status
+  if (path === "/api/status" && method === "GET") {
+    return json({ ok: true, version: VERSION, app: env.APP_NAME || "Natural English Training", coach: env.APP_COACH_NAME || "Obi", ts: Date.now(), readiness: env.DEEPSEEK_API_KEY ? "LIVE" : "NO_KEY" });
+  }
 
   // Speech-to-Learning MVP — core loop
   if (path === "/api/correct" && method === "POST") { const body = await request.json(); return handleCorrect(body, env); }
