@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class Schedule — Natural English Training</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--void:#0a0a12;--card:rgba(22,22,35,0.85);--purple:#a855f7;--gold:#f59e0b;--teal:#14b8a6;--text:#f8fafc;--dim:#94a3b8;--border:rgba(255,255,255,0.08)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:var(--void);color:var(--text);line-height:1.6;min-height:100vh;padding:4rem 1.5rem}
+.container{max-width:680px;margin:0 auto}
+h1{font-family:'Orbitron',monospace;font-size:2rem;margin-bottom:.3rem;background:linear-gradient(to right,var(--purple),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.subtitle{color:var(--dim);margin-bottom:2.5rem}
+.class-card{background:var(--card);border:1px solid var(--border);border-radius:1rem;padding:1.5rem;margin-bottom:1rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;backdrop-filter:blur(12px)}
+.class-info h3{font-size:1.1rem;margin-bottom:.25rem}
+.class-info .time{color:var(--dim);font-size:.85rem}
+.tag{display:inline-block;padding:.25rem .7rem;border-radius:2rem;font-size:.75rem;font-weight:600;letter-spacing:.5px}
+.tag.live{background:rgba(20,184,166,.15);color:var(--teal);border:1px solid rgba(20,184,166,.25)}
+.tag.online{background:rgba(168,85,247,.12);color:var(--purple);border:1px solid rgba(168,85,247,.2)}
+.tag.full{background:rgba(239,68,68,.12);color:#ef4444;border:1px solid rgba(239,68,68,.2)}
+.enroll-btn{padding:.6rem 1.4rem;background:var(--purple);color:#fff;border:none;border-radius:.5rem;font-weight:600;cursor:pointer;font-size:.85rem;text-decoration:none;transition:box-shadow .2s}
+.enroll-btn:hover{box-shadow:0 0 16px rgba(168,85,247,.35)}
+.enroll-btn.disabled{background:rgba(255,255,255,.05);color:var(--dim);cursor:not-allowed;pointer-events:none}
+.note{text-align:center;color:var(--dim);margin-top:2.5rem;font-size:.85rem}
+.note a{color:var(--gold);text-decoration:none}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Live Group Classes</h1>
+<p class="subtitle">Weekly sessions with Michael + OBI reinforcement between classes. Small groups, real conversation.</p>
+
+<div class="class-card">
+<div class="class-info">
+<h3>Financial English — Intermediate</h3>
+<div class="time">Wednesdays · 19:00–20:00 ICT</div>
+</div>
+<div><span class="tag live">3 slots left</span></div>
+<a href="/join" class="enroll-btn">Enroll</a>
+</div>
+
+<div class="class-card">
+<div class="class-info">
+<h3>Workplace Fluency — All Levels</h3>
+<div class="time">Thursdays · 19:00–20:00 ICT</div>
+</div>
+<div><span class="tag live">4 slots left</span></div>
+<a href="/join" class="enroll-btn">Enroll</a>
+</div>
+
+<div class="class-card">
+<div class="class-info">
+<h3>General English — Beginner Friendly</h3>
+<div class="time">Saturdays · 10:00–11:00 ICT</div>
+</div>
+<div><span class="tag full">Full</span></div>
+<span class="enroll-btn disabled">Waitlist</span>
+</div>
+
+<p class="note">Classes held in Lakeview, HCMC. Can't make it? <a href="/demo">Try OBI solo</a> anytime. Every class comes with unlimited OBI follow-up sessions.</p>
+</div>
+</body>
+</html>

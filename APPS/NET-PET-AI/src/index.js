@@ -777,6 +777,8 @@ async function handleAPI(path, request, env, url) {
   if (path === "/api/waitlist" && method === "POST") { const body = await request.json(); return handleWaitlistJoin(body, env); }
   if (path === "/api/waitlist/count" && method === "GET") { return handleWaitlistCount(env); }
   else if (path === "/api/waitlist/list" && method === "GET") { return handleWaitlistList(env); }
+  else if (path === "/api/admin/waitlist/toggle" && method === "POST") { const body = await request.json(); return handleWaitlistToggle(body, env); }
+  else if (path === "/api/admin/waitlist/status" && method === "GET") { return handleWaitlistStatus(env); }
 
   // ── DELETE /api/vocab/delete ──────────────────────────────────────────────
   else if (method === "DELETE" && path.includes("/api/vocab/delete")) {
@@ -900,6 +902,66 @@ async function handleAdminStats(env) {
     challengeAttemptsToday,
     generatedAt: now
   });
+}
+
+// ── Waitlist Handlers ─────────────────────────────────────────────────────────
+
+// POST /api/waitlist — join the waitlist (name, email, why)
+async function handleWaitlistJoin(body, env) {
+  const { name, email, why } = body || {};
+  if (!name || !email) return json({ error: "name and email required" }, 400);
+  if (!env.NET_PET_KV) return json({ error: "NET_PET_KV not configured" }, 500);
+  
+  const entry = {
+    name: String(name).slice(0, 120),
+    email: String(email).slice(0, 200),
+    why: String(why || "").slice(0, 500),
+    ts: new Date().toISOString(),
+    id: `wl-${Date.now()}-${Math.random().toString(36).slice(2,7)}`
+  };
+  
+  // Append to index
+  const idx = await env.NET_PET_KV.get("waitlist:index").then(r => r ? JSON.parse(r) : []).catch(() => []);
+  idx.push(entry.id);
+  // Cap at 100 (Phase 2 free trial funnel)
+  if (idx.length > 100) return json({ ok: false, error: "Waitlist is at capacity (100). Join closed.", position: 100 }, 200);
+  await env.NET_PET_KV.put("waitlist:index", JSON.stringify(idx));
+  await env.NET_PET_KV.put(`waitlist:${entry.id}`, JSON.stringify(entry));
+  
+  return json({ ok: true, entry, position: idx.length, total: idx.length }, 201);
+}
+
+// GET /api/waitlist/count — return current count
+async function handleWaitlistCount(env) {
+  if (!env.NET_PET_KV) return json({ count: 0 });
+  const idx = await env.NET_PET_KV.get("waitlist:index").then(r => r ? JSON.parse(r) : []).catch(() => []);
+  return json({ count: idx.length, cap: 100 });
+}
+
+// GET /api/waitlist/list — return full list (admin use)
+async function handleWaitlistList(env) {
+  if (!env.NET_PET_KV) return json({ entries: [] });
+  const idx = await env.NET_PET_KV.get("waitlist:index").then(r => r ? JSON.parse(r) : []).catch(() => []);
+  const entries = await Promise.all(idx.slice(-50).map(async id => {
+    const raw = await env.NET_PET_KV.get(`waitlist:${id}`).catch(() => null);
+    return raw ? JSON.parse(raw) : null;
+  }));
+  return json({ entries: entries.filter(Boolean), total: idx.length, cap: 100 });
+}
+
+// POST /api/admin/waitlist/toggle — toggle waitlist open/closed (admin pin required)
+async function handleWaitlistToggle(body, env) {
+  const { pin, closed } = body || {};
+  if (pin !== "bluetech2026") return json({ error: "Unauthorized" }, 403);
+  await env.NET_PET_KV.put("waitlist:closed", closed ? "true" : "false");
+  return json({ ok: true, closed: !!closed });
+}
+
+// GET /api/admin/waitlist/status — return current open/closed state
+async function handleWaitlistStatus(env) {
+  if (!env.NET_PET_KV) return json({ closed: false });
+  const val = await env.NET_PET_KV.get("waitlist:closed").catch(() => "false");
+  return json({ closed: val === "true" });
 }
 
 // ── Anti-Cheat Handlers ───────────────────────────────────────────────────────
