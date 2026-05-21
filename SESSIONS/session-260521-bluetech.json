@@ -1,0 +1,110 @@
+{
+  "sessionFile": "Voice 260521_181606.txt",
+  "sessionDate": "2026-05-21",
+  "sessionTime": "18:16:06",
+  "teacher": "Michael",
+  "location": "BlueTech",
+
+  "students": [
+    {
+      "name": "Queen (Quy)",
+      "portalId": "quy-bluetech",
+
+      "directlyStated": {
+        "busyness": "self-described as 'very busy', 'super busy'",
+        "travelTomorrow": "going to Thailand tomorrow — explicitly stated",
+        "startDate": "Saturday (day after session) — explicitly agreed to",
+        "wakeUpTime": "7am — stated by student",
+        "morningRoutineLength": "30-45 minutes — stated by student (brush teeth, makeup)",
+        "breakfastTime": "8am — stated by student",
+        "breakfastLength": "10 minutes — stated by student",
+        "priorListeningHabit": "20 minutes every day for 3-4 weeks — confirmed by student",
+        "priorListeningContent": "music — confirmed by student",
+        "confirmedListeningSlots": [
+          "while cooking — student's own suggestion ('i'm usually listen when i have cook')",
+          "while brushing teeth — student confirmed when Michael proposed it",
+          "lunch break — student confirmed when Michael proposed it"
+        ],
+        "speakingPlan": "talk to OBI at end of day, offered 'tonight' — stated by student",
+        "obiSessionLength": "5-10 minutes end of day — student agreed",
+        "career": "accountant — Michael stated 'she works in accounting, works with numbers, invoices, financial records'; student confirmed with 'numbers numbers okay'",
+        "languageSetting": "English + Vietnamese — Michael stated 'hers will speak english then vietnamese'; student did not object",
+        "dailyCommute": "uses Grab — stated by student ('i called grab')",
+        "listeningWhileDriving": "student said she doesn't like driving and listening — 'she doesn't want to do she doesn't like driving and listen'"
+      },
+
+      "unclear": {
+        "commuteDuration": "not stated by student; Michael modelled his own 15-min Grab ride as example only",
+        "exactListeningMinutesPerSlot": "Michael proposed 15 min brushing + 15 min break = 30 min, student agreed but did not confirm minutes herself",
+        "totalDailyListeningCommitment": "45 min goal stated by Michael, student agreed but did not state a number independently"
+      },
+
+      "studentAgreements": [
+        "One hour a day (45 min listen + 15 min speak) — nodded/agreed when asked",
+        "Start Saturday (not tomorrow — going to Thailand)",
+        "Listen during brushing teeth and lunch",
+        "Talk to OBI tonight if possible (end of day, 5-10 min)"
+      ]
+    },
+
+    {
+      "name": "Mai Tram",
+      "portalId": "mai-tram",
+
+      "directlyStated": {
+        "career": "sales + human resources — Michael stated 'for my tram she'll have a little bit of sales and then human resources mostly'; Mai Tram did not confirm or deny in transcript",
+        "commuteDuration": "30 minutes one way — student stated 'thirty minutes one way'",
+        "commuteListening": "student confirmed commute as listening time — 'yeah easy... half an hour you drive... one hour already boom done'",
+        "lunchListeningHabit": "student stated 'podcast i lunch yeah listen' — confirmed existing habit",
+        "plannedListeningContent": "podcast — stated by student ('tomorrow i will listen to podcast')",
+        "plannedListeningTime": "student first said '8pm', then said 'lunch' — two different answers given",
+        "languageSetting": "English only, lower intermediate — Michael stated 'yours will speak lower intermediate english only, you can understand about sixty percent'; student did not object",
+        "startDate": "tomorrow (2026-05-22) — Michael asked 'what about you... when when tomorrow okay good good good'"
+      },
+
+      "unclear": {
+        "exactCareerConfirmation": "career stated by Michael only — Mai Tram did not explicitly confirm in transcript",
+        "finalListeningTime": "student gave two answers (8pm then lunch) — final commitment unclear",
+        "totalDailyMinutes": "45 min + 15 min goal stated by Michael; student did not independently state a number"
+      },
+
+      "studentAgreements": [
+        "Listen to podcast tomorrow",
+        "Use commute (30 min each way) as primary listening time — agreed",
+        "Lunch podcast — existing habit, confirmed"
+      ]
+    }
+  ],
+
+  "teacherPromises": [
+    "Add Vietnamese translations to Quy's OBI tonight ('i'll get translations on her i'll do that tonight')",
+    "Fix OBI response length — too long ('i have to go home type don't talk so much... that's my first fix')",
+    "Fix mic button — hold to click ('i'll fix that too')",
+    "Fix OBI opening question ('he'll ask you an opening question no problem i can fix that')",
+    "Send a video guide programmed into the portal ('i will send a video yeah i'm programming it into the portal')",
+    "Add a problem report button in the portal ('there'll be a little box you can click if there's a problem')"
+  ],
+
+  "appBugsFoundLive": [
+    {
+      "bug": "OBI responses too long",
+      "quote": "it talked a lot... i have to go home type don't talk so much"
+    },
+    {
+      "bug": "Mic button labelled or behaving as hold-to-speak",
+      "quote": "you hold this... i'll fix that too... please not hold... not hold stupid not hold yeah annoying"
+    },
+    {
+      "bug": "OBI asks an opening question on session start (unwanted behavior)",
+      "quote": "he'll ask you an opening question no problem i can fix that"
+    }
+  ],
+
+  "classContent": {
+    "topicReviewed": "44 phonics sounds in English — recapped from last week",
+    "dailyRoutine": "45 minutes listening + 15 minutes speaking = 1 hour total",
+    "listeningRule": "Music does not count as the 45 minutes — needs real spoken-word content",
+    "habitBuilding": "21 days to build a habit — referenced by Michael",
+    "appFeaturesDemoed": ["streak tracker", "mastered words counter", "badges", "career vocab pages", "OBI chat (voice)"]
+  }
+}

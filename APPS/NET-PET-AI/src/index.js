@@ -52,7 +52,7 @@ ROLE: Warm, direct, encouraging teacher. Never say "as an AI". Never mention ins
 STUDENT: Vietnamese adult beginner, learning 44 English phonics sounds, 45 min listening + 15 min speaking per day, busy schedule (cooking, commute, work), currently at Elementary 1 (understands ~60% of simple English).
 
 RULES:
-1. Keep every response 1-3 sentences by default. Expand only when actively teaching a sound, word, or pattern.
+1. STRICT: Maximum 2 sentences for casual conversation turns. Maximum 3 sentences when actively teaching a phonics sound, word, or correction. Never longer. Shorter is always better.
 2. Reference what the student just said — never start from scratch.
 3. Reference their listening streak or learning progress if it exists in context — make them feel seen.
 4. If they got something slightly wrong, correct it naturally by repeating it right. Never say "that's wrong" or point out the mistake.
@@ -1907,19 +1907,40 @@ async function handleChat(body, env) {
     messages.unshift({ role: "system", content: OBI_SYSTEM + ledgerContext + sessionContext + weaknessContext + reEntryContext + rewardContext + contextInjection + soulContext + firstSessionContext });
   }
 
-  const res = await fetch("https://api.deepseek.com/chat/completions", {
-    method: "POST",
-    headers: { "Content-Type": "application/json", "Authorization": `Bearer ${apiKey}` },
-    body: JSON.stringify({ model: "deepseek-v4-flash", messages, max_tokens: 300, temperature: 0.85 }),
-  });
-
-  let data;
-  if (!res.ok && (res.status === 401 || res.status === 402) && env.OPENROUTER_API_KEY) {
-    const orRes = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+  const dsAbort = new AbortController();
+  const dsTimer = setTimeout(() => dsAbort.abort(), 15000);
+  let res;
+  try {
+    res = await fetch("https://api.deepseek.com/chat/completions", {
       method: "POST",
-      headers: { "Content-Type": "application/json", "Authorization": `Bearer ${env.OPENROUTER_API_KEY}` },
-      body: JSON.stringify({ model: "openai/gpt-4o-mini", messages, max_tokens: 300, temperature: 0.85 }),
+      headers: { "Content-Type": "application/json", "Authorization": `Bearer ${apiKey}` },
+      body: JSON.stringify({ model: "deepseek-v4-flash", messages, max_tokens: 150, temperature: 0.85 }),
+      signal: dsAbort.signal,
     });
+  } catch (e) {
+    res = { ok: false, status: 0 };
+  } finally {
+    clearTimeout(dsTimer);
+  }
+
+  const needsFallback = !res.ok && (res.status === 0 || res.status === 401 || res.status === 402 || res.status === 429 || res.status >= 500);
+  let data;
+  if (needsFallback && env.OPENROUTER_API_KEY) {
+    const orAbort = new AbortController();
+    const orTimer = setTimeout(() => orAbort.abort(), 15000);
+    let orRes;
+    try {
+      orRes = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Authorization": `Bearer ${env.OPENROUTER_API_KEY}` },
+        body: JSON.stringify({ model: "openai/gpt-4o-mini", messages, max_tokens: 150, temperature: 0.85 }),
+        signal: orAbort.signal,
+      });
+    } catch (e) {
+      return json({ error: "AI_FALLBACK_TIMEOUT" }, 504);
+    } finally {
+      clearTimeout(orTimer);
+    }
     if (!orRes.ok) { const errText = await orRes.text(); return json({ error: `AI_FALLBACK_FAILED ${orRes.status}`, detail: errText }, 502); }
     data = await orRes.json();
   } else if (!res.ok) {
@@ -1927,8 +1948,13 @@ async function handleChat(body, env) {
   } else {
     data = await res.json();
   }
+
   const choice = data.choices?.[0]?.message;
-  const reply = choice?.content || choice?.reasoning_content || "Say that again?";
+  let reply = (choice?.content || choice?.reasoning_content || "").replace(/<think>[\s\S]*?<\/think>/gi, "").trim();
+  if (!reply) reply = "Say that again?";
+  // Belt-and-suspenders: cap to 3 sentences server-side regardless of token count
+  const sentences = reply.match(/[^.!?]+[.!?]+/g) || [reply];
+  if (sentences.length > 3) reply = sentences.slice(0, 3).join(" ").trim();
 
   // ── Auto-write every exchange to the Cryptographic Immutable Ledger ───────
   const userMsg = messages.filter(m => m.role === "user").pop()?.content || "";
