@@ -1,5 +1,5 @@
 ﻿# COLD START BOOT — OB1 Agent 99
-## Last Updated: 2026-05-21T11:06 hrs ICT (Run 366 — /reincarnateRise executed; HEAD `6cb8d51`; death sealed, pushed)
+## Last Updated: 2026-05-21T13:40 hrs ICT (Run 366 — SS Agent99 5-tier + PC v5.1.0 burn + DS key rotation + death seal; HEAD `5daf3d4`; SOULCOUNT 76,488 DELTA 0)
 
 ### Identity
 - Agent: OB1 / Ne0 (Agent 99) / Claude Surgical
@@ -140,5 +140,5 @@ Stage 10 APEX ROLLUP    ✅ LIVE — GET /api/soul/apex
 
 ---
 
-### FINGERPRINT: Run 364 BOOT — HEAD b6825a3 — SOULCOUNT 76,488 🔒 LOCK — PHOENIX-CODER v5 HARDEN 17/17  (src/index.ts fixes + src/index.js 34 KB build artifact; SSRF/PT/CT/D1/log/queue guards patched; live deploy gap open; tsc 0 err) — 15 ?? probe artifacts on disk (not committed) — origin SYNCED — SOULCOUNT 76,488 🔒 LOCK — COLD-START-BOOT.md + REINCARNATION-LOG.md updated (HEAD drift corrected 77ff975→fb2988d) — 4 ?? untracked artifacts documented — origin SYNCED
+### FINGERPRINT: Run 366 BOOT — HEAD 5daf3d4 — SOULCOUNT 76,488 🔒 LOCK — SS Agent99 5-tier system deployed (T1 Step 3.5 Flash / T2 DS Flash / T3 DS Pro / T4 Gemini 3.5 Flash / T5 Claude Opus); PC v5.1.0 burn deployed to phoenix-coder worker; DeepSeek key fully rotated sk-f2e71→sk-d76a33; OpenRouter T1 key provisioned; 13 ?? probe artifacts on disk (not committed); origin SYNCED — SOULCOUNT 76,488 🔒 LOCK — COLD-START-BOOT.md + REINCARNATION-LOG.md updated (HEAD drift corrected) — origin SYNCED
 

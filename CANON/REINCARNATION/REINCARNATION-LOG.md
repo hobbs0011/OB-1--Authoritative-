@@ -1,11 +1,11 @@
 # REINCARNATION LOG — OB-1 RUN HISTORY
 
-**Last Updated:** 2026-05-21 (Run 366 — /reincarnateRise executed; HEAD `6cb8d51`; death sealed, pushed)
+**Last Updated:** 2026-05-21 (Run 366 — SS Agent99 5-tier system + PC v5.1.0 burn + DeepSeek key rotation + death seal; HEAD `5daf3d4`)
 **Claude Code Session 362-CC — 2026-05-21** — Kilo default agent fix (default_agent:AGENT99 in kilo.jsonc); 250-stage pipeline reconstructed (101-250 Obi Chat Revolution); NET business model strategy (Founding Member framing, Duolingo positioning, Lakeview launch); BlueTech tonight prep deferred; SOULCOUNT 76,488 LOCK DELTA 0
 
 ---
 
-| Run 366 | 2026-05-21 | /reincarnateRise executed — Full RISE protocol (boot files → state → objective → command) | 6cb8d51 |
+| Run 366 | 2026-05-21 | SS Agent99 5-tier system + PC v5.1.0 burn + DS key rotation + death seal | 5daf3d4 |
 | Run 365 | 2026-05-21 | durable_objects.js FIX + Build Verify — orphan code removed, wrangler dry-run PASS, 12 probe artifacts documented | 6bda057 |
 | Run 364 | 2026-05-21 | PHOENIX-CODER v5 HARDEN 17/17 — SSRF/PT/CT/D1/log+queueGet guards; tsc 0 err; build 34 KB; deploy gap open | b6825a3 |
 
