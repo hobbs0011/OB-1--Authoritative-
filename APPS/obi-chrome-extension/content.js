@@ -6,6 +6,49 @@
 
 const BACKEND_URL = 'https://net-pet-ai.mrmichaelhobbs123.workers.dev/api/chat';
 
+// ── Anti-Cheat Session Tracking ─────────────────────────────────────────────
+const ANTICHEAT_CONFIG = {
+  apiUrl: 'https://net-pet-ai.mrmichaelhobbs123.workers.dev/api/anticheat/score',
+  studentId: 'NET-STUDENT',    // ← replace at runtime with actual student ID
+  flushIntervalMs: 60_000,    // flush every 60 s
+  maxEventsPerSession: 500,   // cap per session
+};
+
+let _acSessionId  = null;
+let _acSessionData = [];
+let _acFlushTimer = null;
+
+function _acMakeSessionId() {
+  return 'ac-' + Math.random().toString(16).slice(2, 10);  // ac-<8randomhex>
+}
+
+function startAntiCheatSession() {
+  _acSessionId  = _acMakeSessionId();
+  _acSessionData = [];
+  if (_acFlushTimer) clearInterval(_acFlushTimer);
+  _acFlushTimer = setInterval(flushAntiCheatSession, ANTICHEAT_CONFIG.flushIntervalMs);
+  window.addEventListener('pagehide', flushAntiCheatSession);
+  window.addEventListener('beforeunload', flushAntiCheatSession);
+}
+
+function queueAnticheatEvent(type) {
+  if (_acSessionData.length >= ANTICHEAT_CONFIG.maxEventsPerSession) return;
+  _acSessionData.push({ type, ts: Date.now() });
+}
+
+function flushAntiCheatSession() {
+  if (!_acSessionId || _acSessionData.length === 0) return;
+  const payload = {
+    studentId: ANTICHEAT_CONFIG.studentId,
+    sessionId: _acSessionId,
+    sessionData: _acSessionData,
+  };
+  _acSessionData = [];
+  navigator.sendBeacon(ANTICHEAT_CONFIG.apiUrl, JSON.stringify(payload));
+}
+
+startAntiCheatSession();
+
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (msg.action === 'askObi' && msg.text) {
     showObiTooltip(msg.text);
@@ -104,3 +147,30 @@ function escapeHtml(str) {
   const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
   return str.replace(/[&<>"']/g, m => map[m]);
 }
+
+// ── Page Event Listeners (Anti-Cheat signals) ─────────────────────────────────
+(function wireAnticheatPageEvents() {
+  // Tab / page visibility
+  document.addEventListener('visibilitychange', () => {
+    queueAnticheatEvent(document.hidden ? 'tab_hidden' : 'tab_visible');
+  });
+
+  // Mouse clicks
+  document.addEventListener('click', () => queueAnticheatEvent('click'), true);
+
+  // Keyboard presses
+  document.addEventListener('keydown', () => queueAnticheatEvent('keypress'), true);
+
+  // Scroll (debounced 500 ms)
+  let _acScrollTimer = null;
+  window.addEventListener('scroll', () => {
+    if (_acScrollTimer) clearTimeout(_acScrollTimer);
+    _acScrollTimer = setTimeout(() => queueAnticheatEvent('scroll'), 500);
+  }, true);
+
+  // HTML5 video seek / play detection
+  document.querySelectorAll ? document.querySelectorAll('video').forEach(v => {
+    v.addEventListener('seeked', () => queueAnticheatEvent('seek'));
+    v.addEventListener('play',  () => queueAnticheatEvent('seek'));
+  }) : null;
+})();
