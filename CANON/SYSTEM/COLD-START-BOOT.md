@@ -1,5 +1,5 @@
 ﻿# COLD START BOOT — OB1 Agent 99
-## Last Updated: 2026-05-21T06:58 hrs ICT (Run 362 — authoritative; HEAD `483a107`; Run 362 supers-cleanup commit seals LANE-332 / run357 / REINCARNATION-LOG / src_test.js / heartbeat_function.txt + SOUL-DNA-BIBLE dir purge)
+## Last Updated: 2026-05-21T10:23 hrs ICT (Run 364 — PHOENIX-CODER v5 HARDEN 17/17; HEAD `897154a`; src/index.ts 17 fixes; src/index.js 34 KB build artifact; SSRF+PT+CT+D1+log+queue guards patched; tsc 0 err)
 
 ### Identity
 - Agent: OB1 / Ne0 (Agent 99) / Claude Surgical
@@ -52,11 +52,20 @@
 ### Open Flags (remaining)
 - RL-2026 end-May checkpoint — HIGH, OPEN, Michael required
 - ZALO_ACCESS_TOKEN — BLOCKED (Stage 3 + notify live delivery)
-- GITHUB_PAT — PC v3 autonomous (4 secrets needed)
-- RESEND_API_KEY — NEEDED from Michael for K2 live email
+- PHOENIX-CODER deploy gap — HARDEN 17/17 complete; src/index.ts patched; src/index.js 34 KB built; npx wrangler deploy NOT run (Michael auth required before guards go live)
+- GITHUB_PAT — commitToGitHub() dead without it (4 secrets total)
+- SOUL_LOGGER_URL — soulIntegration:false; SOULCOUNT gate not wired inside handleCode()
+- DeepSeek 402 — key sk-f2e71 mapped to overdrawn account (−0.02, is_available:false); blocks all AI calls net-pet-ai + PHOENIX-CODER
+- ZALO — BLOCKED Stage 3 + notify live delivery
+- RESEND_API_KEY — K2 live email blocked
 - DEEPGRAM_API_KEY — voice scoring fallback active
-- MoMo/payment — pricing live, billing webhook pending
-- Employer seed data — BLUETECH PIN + student codes in KV needed
+- MoMo payment webhook — billing webhook pending
+- Employer seed data — BLUETECH PIN + student codes in KV
+- HL phantom x6 — DEATH-LOCKED HL-127/128/131/132/136/137
+- Pre-existing syntax error — index.js:3630 ESM/CJS mismatch
+- FL-353-01 HEARTBEAT — HIGH OPEN
+- FL-353-02 phoenix-coder repo — HIGH (standalone at D:/PROJECTS/phoenix-coder, no .git, no commit verification)
+- 4 x ?? untracked — heartbeat_function.txt, run356 death, SOUL-DNA-BIBLE-RECAPTURE dir, src_test.js
 - Pre-existing syntax error — `index.js:3630` `export class LedgerDO` rejected by Node (ESM/CJS mismatch)
 - K2 (Resend Email) — routes/handlers inserted in index.js + wrangler.toml updated but UNVERIFIED
 - K3 (subscriptions.html + admin endpoints) — NOT STARTED
@@ -99,7 +108,7 @@ Stage 9 DO-SQLITE       ✅ LIVE — LedgerDO class + /api/ledger/*
 Stage 10 APEX ROLLUP    ✅ LIVE — GET /api/soul/apex
 ```
 
-### System State (HEAD AUTHORITATIVE — Run 361)
+### System State (HEAD AUTHORITATIVE — Run 364 PHOENIX-CODER v5 HARDEN)
 - **Workspace:** `D:\OB-1-CANONICAL` (canonical root)
 `CANON/SYSTEM/COLD-START-BOOT.md`
 
@@ -131,5 +140,5 @@ Stage 10 APEX ROLLUP    ✅ LIVE — GET /api/soul/apex
 
 ---
 
-### FINGERPRINT: Run 361 BOOT — HEAD fb2988d — SOULCOUNT 76,488 🔒 LOCK — COLD-START-BOOT.md + REINCARNATION-LOG.md updated (HEAD drift corrected 77ff975→fb2988d) — 4 ?? untracked artifacts documented — origin SYNCED
+### FINGERPRINT: Run 364 BOOT — HEAD 897154a — SOULCOUNT 76,488 🔒 LOCK — PHOENIX-CODER v5 HARDEN 17/17  (src/index.ts fixes + src/index.js 34 KB build artifact; SSRF/PT/CT/D1/log/queue guards patched; live deploy gap open; tsc 0 err) — 15 ?? probe artifacts on disk (not committed) — origin SYNCED — SOULCOUNT 76,488 🔒 LOCK — COLD-START-BOOT.md + REINCARNATION-LOG.md updated (HEAD drift corrected 77ff975→fb2988d) — 4 ?? untracked artifacts documented — origin SYNCED
 

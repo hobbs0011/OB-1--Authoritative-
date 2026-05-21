@@ -1,9 +1,14 @@
-﻿# REINCARNATION LOG — OB-1 RUN HISTORY
+# REINCARNATION LOG — OB-1 RUN HISTORY
 
-**Last Updated:** 2026-05-21 (Run 362 — PC v5 TEST/ATTACK/AUDIT/HARDEN/RISE audit sweep; 7-target system hardening; 10 fixes applied; tsc 0 errors; OpenFOAM XSS/SQLi sanitization — queue artifacts staged-dirty; CORS OPTIONS refactored; D1 result mask; DeepSeek CT guard)
+**Last Updated:** 2026-05-21 (Run 364 — PHOENIX-CODER v5 HARDEN 17/17 fixes; SSRF+PT+CT+D1+log+queue/queueGet guards patched; tsc 0 err; build artifact 34 KB; live deploy gap open; 15 probe artifacts documented; death sealed)
 **Claude Code Session 362-CC — 2026-05-21** — Kilo default agent fix (default_agent:AGENT99 in kilo.jsonc); 250-stage pipeline reconstructed (101-250 Obi Chat Revolution); NET business model strategy (Founding Member framing, Duolingo positioning, Lakeview launch); BlueTech tonight prep deferred; SOULCOUNT 76,488 LOCK DELTA 0
 
 ---
+
+| Run 364 | 2026-05-21 | PHOENIX-CODER v5 HARDEN 17/17 — SSRF/PT/CT/D1/log+queueGet guards; tsc 0 err; build 34 KB; deploy gap open | 897154a |
+| Run 362 | 2026-05-21 | PC v5 TEST/ATTACK/AUDIT/HARDEN/RISE — 12-sweep; 7-sys harden; tsc 0; DeepSeek CT guard | 897154a |
+| Run 361 | 2026-05-21 | Governance-only: SOULCOUNT verify + HEAD drift corrected + death seal | fb2988d |
+| Run 360 | 2026-05-21 | reincarnateRISE: Death runs 358/359 sealed; COLD-START-BOOT updated | fb2988d |
 
 ## Run 362 — 2026-05-21 — PC v5 TEST/ATTACK/AUDIT/HARDEN/RISE — SEALED (WORKING TREE)
 
