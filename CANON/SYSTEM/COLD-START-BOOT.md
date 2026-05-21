@@ -141,5 +141,5 @@ Stage 10 APEX ROLLUP    ✅ LIVE — GET /api/soul/apex
 
 ---
 
-### FINGERPRINT: Run 367 BOOT — HEAD bf1bd3c — SOULCOUNT 76,488 🔒 LOCK — SUPERSAIYAN deploy sprint complete: OBI chat verified LIVE (Quy/Mai Tram/Huong all greet by name), reasoning_content fallback active, CORS fixed for workers.dev, OpenRouter fallback wired, first-session name injection working. DeepSeek key sk-d76a33 confirmed LIVE. COACH nav button verified in all 3 portals. Streak counter confirmed operational. PROFILES/SESSIONS DO bindings stripped (class definitions removed) — vocab seeding blocked until KV fallback added. 13 probe artifacts committed (can be reverted). origin SYNCED — Run 367 SEALED
+### FINGERPRINT: Run 367 BOOT — HEAD d181259 — SOULCOUNT 76,488 🔒 LOCK — TIER 3 LAKEVIEW LAUNCH complete: 6 new pages (privacy, demo, local, results, classes, hero rewrite), PWA manifest populated, waitlist handlers (join/count/list) implemented with KV storage, admin toggle endpoint live. All 8 public pages return 200. OBI chat confirmed LIVE for all 3 students with name injection + reasoning fallback. origin SYNCED — Run 367 SEALED
 
