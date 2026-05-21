@@ -681,6 +681,11 @@ async function handleAPI(path, request, env, url) {
   if (path === "/api/assess" && method === "POST") { const body = await request.json(); return handleAssessment(body, env); }
   // GET /api/report — Generate styled HTML report for a student
   if (path === "/api/report" && method === "GET") { return handleReport(url.searchParams.get("studentId") || "", env); }
+  // POST /api/report — Student problem report (from portal report button)
+  if (path === "/api/report" && method === "POST") { const body = await request.json(); return handleReportPost(body, env); }
+  // GET/POST /api/student/lang — Language preference for bilingual OBI support
+  if (path === "/api/student/lang" && method === "GET") { return handleStudentLang(url.searchParams.get("studentId") || "", null, env); }
+  if (path === "/api/student/lang" && method === "POST") { const body = await request.json(); return handleStudentLang(body.studentId || "", body.lang || "", env); }
   // POST /api/lead — Lead capture from assessment landing page
   if (path === "/api/lead" && method === "POST") { const body = await request.json(); return handleLeadCapture(body, env); }
 
@@ -1896,15 +1901,26 @@ async function handleChat(body, env) {
     } catch(e) {}
   }
 
+  // ── Language mode: read student lang preference from KV ──────────
+  let vietnameseContext = "";
+  if (studentId !== "anonymous") {
+    try {
+      const lang = await env.NET_PET_KV.get(`lang:${studentId}`);
+      if (lang === "vi") {
+        vietnameseContext = `\n\nVIETNAMESE MODE: This student is A1 beginner and needs bilingual support. Speak English first, then add Vietnamese translation in parentheses for key words and corrections. If the student seems lost or confused, say the full sentence in Vietnamese to help them understand, then repeat it in English. Use Vietnamese naturally — like a bilingual Vietnamese-English teacher would. Always prioritize understanding over English-only purity.`;
+      }
+    } catch (_) {}
+  }
+
   const isFirstSession = ledgerContext === "" && sessionContext === "";
   const displayName = studentId !== "anonymous" ? studentId.split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ") : "there";
   const firstSessionContext = isFirstSession
-    ? `\n\nFIRST SESSION: This is the student's very first interaction. No history exists yet. The student's name is ${displayName} (derived from their ID: "${studentId}"). Your opening message must: warmly welcome them by name, ask ONE question about their English goals, and make them feel this system was built specifically for them. Under 3 sentences. Warm, direct, confident. Do not ask multiple questions. Do not make up a different name — use exactly "${displayName}".`
+    ? `\n\nFIRST SESSION: This is the student's very first interaction. No history exists yet. The student's name is ${displayName} (derived from their ID: "${studentId}"). Greet them warmly by name, say you are happy they are here, and wait for them to speak first. Do NOT ask an opening question — the student should initiate. Under 2 sentences max. Warm, direct, confident. Do not make up a different name — use exactly "${displayName}".`
     : "";
 
   const hasSystem = messages.some(m => m.role === "system");
   if (!hasSystem) {
-    messages.unshift({ role: "system", content: OBI_SYSTEM + ledgerContext + sessionContext + weaknessContext + reEntryContext + rewardContext + contextInjection + soulContext + firstSessionContext });
+    messages.unshift({ role: "system", content: OBI_SYSTEM + ledgerContext + sessionContext + weaknessContext + reEntryContext + rewardContext + contextInjection + soulContext + vietnameseContext + firstSessionContext });
   }
 
   const dsAbort = new AbortController();
@@ -2863,6 +2879,39 @@ Return ONLY valid JSON, no markdown, no explanation. Schema:
   } catch (err) {
     return json({ error: "Assessment failed", detail: err.message }, 500);
   }
+}
+
+// ── Problem Report (POST /api/report) — P6 BlueTech promise ──────
+async function handleReportPost(body, env) {
+  const { studentId, report, page, time } = body;
+  if (!studentId || !report) return json({ error: "studentId and report required" }, 400);
+  try {
+    const key = `report:${studentId}:${Date.now()}`;
+    await env.NET_PET_KV.put(key, JSON.stringify({
+      studentId,
+      report: report.slice(0, 1000),
+      page: page || "",
+      time: time || new Date().toISOString(),
+    }));
+    return json({ ok: true, key });
+  } catch (e) {
+    return json({ error: "Failed to store report", detail: e.message }, 500);
+  }
+}
+
+// ── Student Language Preference (GET/POST /api/student/lang) — P1 BlueTech ──
+async function handleStudentLang(studentId, lang, env) {
+  if (!studentId) return json({ error: "studentId required" }, 400);
+  const key = `lang:${studentId}`;
+  if (lang) {
+    // POST — set language
+    if (!["vi", "en", "en-vi"].includes(lang)) return json({ error: "lang must be: vi, en, or en-vi" }, 400);
+    await env.NET_PET_KV.put(key, lang);
+    return json({ ok: true, studentId, lang });
+  }
+  // GET — read language
+  const current = await env.NET_PET_KV.get(key);
+  return json({ studentId, lang: current || "en" });
 }
 
 async function handleReport(studentId, env) {
