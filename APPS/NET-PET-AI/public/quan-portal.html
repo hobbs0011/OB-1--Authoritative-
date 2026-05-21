@@ -833,9 +833,18 @@
           <span class="card-title">Methodology</span>
           <span class="card-desc">Understand your learning path</span>
         </a>
-        <a href="/magic-chat.html?student=quan-nguyen" class="quick-card start-session">
-          <span class="card-icon">🔮</span>
-          <span class="card-title">Start Session</span>
+            <!-- Video Guide (P5 BlueTech promise) -->
+    <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:18px 20px;margin-bottom:14px;" id="videoGuide">
+      <div style="font-size:0.7rem;text-transform:uppercase;letter-spacing:1px;color:#a78bfa;font-weight:700;margin-bottom:12px;">📺 Getting Started Guide</div>
+      <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;background:rgba(0,0,0,0.3);">
+        <div id="videoPlaceholder" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#667;font-size:0.9rem;text-align:center;padding:20px;">
+          Michael will add a video guide here.<br>Check back soon!
+        </div>
+        <iframe id="videoFrame" src="" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;display:none;" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <p style="color:#667;font-size:0.78rem;margin-top:8px;text-align:center;">Watch this to learn how to use your portal and OBI chat.</p>
+    </div>
+    </span>
           <span class="card-desc">Jump into the Magic Chat</span>
         </a>
       </div>
@@ -964,5 +973,5 @@
     if (localStorage.getItem(AUTH_KEY) === 'true') loadDashboard();
   </script>
 
-</body>
+<script src="/problem-report.js"></script></body>
 </html>

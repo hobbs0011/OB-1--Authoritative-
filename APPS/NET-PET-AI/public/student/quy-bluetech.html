@@ -155,31 +155,10 @@
       <div class="profile-row"><span class="profile-key">Focus</span><span class="profile-val" id="p-trigger">—</span></div>
     </div>
 
-    <!-- Problem Report Button -->
-    <button id="reportBtn" style="
-      position: fixed; bottom: 20px; right: 20px; z-index: 999;
-      width: 48px; height: 48px; border-radius: 50%;
-      background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.4);
-      color: #f87171; font-size: 20px; cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      backdrop-filter: blur(8px); transition: all 0.2s;
-    " title="Report a Problem" onclick="toggleReport()">!</button>
-
-    <div id="reportModal" style="display:none; position:fixed; inset:0; z-index:1000; background:rgba(0,0,0,0.7); backdrop-filter:blur(4px); align-items:center; justify-content:center;">
-      <div style="background:#1a1a2e; border:1px solid rgba(239,68,68,0.3); border-radius:16px; padding:24px; max-width:380px; width:90%;">
-        <h3 style="color:#f87171; margin-bottom:8px;">Report a Problem</h3>
-        <p style="color:#889; font-size:0.85rem; margin-bottom:14px;">Michael will see this and fix it.</p>
-        <textarea id="reportText" rows="3" placeholder="Describe the issue..." style="width:100%; padding:10px; border-radius:10px; border:1px solid rgba(255,255,255,0.1); background:rgba(255,255,255,0.05); color:#fff; font-size:0.9rem; resize:vertical;"></textarea>
-        <div style="display:flex; gap:8px; margin-top:12px;">
-          <button onclick="submitReport()" style="flex:1; padding:10px; border-radius:10px; background:#ef4444; color:#fff; border:none; font-weight:600; cursor:pointer;">Send</button>
-          <button onclick="toggleReport()" style="flex:1; padding:10px; border-radius:10px; background:rgba(255,255,255,0.08); color:#889; border:1px solid rgba(255,255,255,0.1); cursor:pointer;">Cancel</button>
-        </div>
-      </div>
-    </div>
-
     <a href="/student-portal.html" class="back-link">← All Students</a>
   </div>
 
+  <script src="/problem-report.js"></script>
   <script>
     const studentId = 'quy-bluetech';
     const BASE = 'https://net-pet-ai.mrmichaelhobbs123.workers.dev';
@@ -216,28 +195,6 @@
       } catch (e) { document.getElementById('status-msg').textContent = 'Could not load data — check connection.'; }
     }
     loadAll();
-
-    // ── Problem Report ──────────────────────────────
-    function toggleReport() {
-      const m = document.getElementById('reportModal');
-      m.style.display = m.style.display === 'flex' ? 'none' : 'flex';
-    }
-    async function submitReport() {
-      const text = document.getElementById('reportText').value.trim();
-      if (!text) return;
-      try {
-        await fetch(`${BASE}/api/report`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ studentId, report: text, page: location.href, time: new Date().toISOString() })
-        });
-        document.getElementById('reportText').value = '';
-        toggleReport();
-        alert('Report sent. Michael will check it. Thanks!');
-      } catch (e) {
-        alert('Could not send. Please tell Michael directly.');
-      }
-    }
   </script>
 </body>
 </html>

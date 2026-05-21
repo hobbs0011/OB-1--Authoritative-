@@ -381,106 +381,18 @@
             <a href="huong-career">Career</a>
             <a href="huong-transcripts">Transcripts</a>
             <a href="huong-action-plan">Action Plan</a>
-            <a href="/magic-chat.html?student=huong-bluetech" class="nav-coach">COACH</a>
-            <button class="nav-logout" id="logoutBtn">LOGOUT</button>
+                <!-- Video Guide (P5 BlueTech promise) -->
+    <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:18px 20px;margin-bottom:14px;" id="videoGuide">
+      <div style="font-size:0.7rem;text-transform:uppercase;letter-spacing:1px;color:#a78bfa;font-weight:700;margin-bottom:12px;">📺 Getting Started Guide</div>
+      <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;background:rgba(0,0,0,0.3);">
+        <div id="videoPlaceholder" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#667;font-size:0.9rem;text-align:center;padding:20px;">
+          Michael will add a video guide here.<br>Check back soon!
         </div>
-    </nav>
-
-    <!-- WATERMARK -->
-    <img src="./assets/brand/system-marks/phoenix-dna-crest-mark.png" alt="" class="portal-watermark" onerror="this.style.display='none'">
-
-    <!-- MAIN CONTENT -->
-    <main class="main-container" id="mainContent" style="display:none;">
-
-        <div class="dashboard-header">
-            <h1>HUONG</h1>
-            <p class="subtitle">Marketing Coordinator · BlueTech · CUB · Speed Control</p>
-        </div>
-
-        <!-- Stats Grid (shown when sessions > 0) -->
-        <div class="stats-grid" id="statsGrid" style="display:none;">
-            <div class="stat-card purple">
-                <div class="stat-accent"></div>
-                <div class="stat-label">Tiger Score</div>
-                <div class="stat-value loading" id="tigerScore"><div class="skeleton"></div></div>
-            </div>
-            <div class="stat-card gold">
-                <div class="stat-accent"></div>
-                <div class="stat-label">Streak</div>
-                <div class="stat-value loading" id="streakVal"><div class="skeleton"></div></div>
-            </div>
-            <div class="stat-card teal">
-                <div class="stat-accent"></div>
-                <div class="stat-label">Sessions</div>
-                <div class="stat-value loading" id="sessionsVal"><div class="skeleton"></div></div>
-            </div>
-            <div class="stat-card success">
-                <div class="stat-accent"></div>
-                <div class="stat-label">Next Session</div>
-                <div class="stat-value loading" id="nextSessionVal"><div class="skeleton"></div></div>
-            </div>
-        </div>
-
-        <!-- Day 1 Card (shown when no sessions yet) -->
-        <div class="day1-card" id="day1Card" style="display:none;">
-            <div class="day1-badge">DAY 1 — BLUETECH ENGLISH</div>
-            <h2>Your journey starts today.</h2>
-            <p>Two things, every day. That's the whole system. Show up here after each listening session and tell OBI what you heard.</p>
-            <div class="day1-steps">
-                <div class="day1-step">
-                    <div class="step-num">45 min</div>
-                    <div class="step-label">Listen</div>
-                    <div class="step-sub">YouTube · Podcasts · Netflix</div>
-                </div>
-                <div class="day1-step">
-                    <div class="step-num">15 min</div>
-                    <div class="step-label">Talk to OBI</div>
-                    <div class="step-sub">Tell OBI what you watched</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Teacher Note -->
-        <div class="content-card">
-            <div class="card-label">Coach Note</div>
-            <div class="teacher-note">
-                <p class="note-body">
-                    Huong speaks fast — this is her superpower and her main challenge. Her marketing instinct gives her natural storytelling ability. The SPEED CONTROL designation means we are channelling that energy into clear, intentional delivery. She does not lack confidence. We are building precision.
-                </p>
-                <p class="note-sig">— OBI / NET Coach</p>
-            </div>
-        </div>
-
-        <!-- Milestone -->
-        <div class="content-card">
-            <div class="card-label">Current Level</div>
-            <div class="milestone-row">
-                <span class="milestone-badge">CUB</span>
-                <span class="milestone-track">Speed Control Track · Progress toward Tiger</span>
-            </div>
-            <div class="progress-bar-wrap">
-                <div class="progress-bar-fill" style="width: 18%;"></div>
-            </div>
-            <div class="progress-label">CUB → TIGER: Complete 10 sessions with consistent Speed Control marks</div>
-        </div>
-
-        <!-- Quick Links -->
-        <div class="content-card">
-            <div class="card-label">Quick Access</div>
-            <div class="quick-links-grid">
-                <a href="huong-profile" class="quick-link-card">
-                    <span class="ql-icon">👤</span>
-                    <div class="ql-label">Profile</div>
-                    <div class="ql-sub">Goals &amp; background</div>
-                </a>
-                <a href="huong-methodology" class="quick-link-card">
-                    <span class="ql-icon">📚</span>
-                    <div class="ql-label">Methodology</div>
-                    <div class="ql-sub">The NET system</div>
-                </a>
-                <a href="/magic-chat.html?student=huong-bluetech" class="quick-link-card primary-link">
-                    <span class="ql-icon">🔮</span>
-                    <div class="ql-label">Start Session</div>
+        <iframe id="videoFrame" src="" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;display:none;" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <p style="color:#667;font-size:0.78rem;margin-top:8px;text-align:center;">Watch this to learn how to use your portal and OBI chat.</p>
+    </div>
+    </div>
                     <div class="ql-sub">Chat with OBI now</div>
                 </a>
             </div>
@@ -899,5 +811,5 @@
         if (typeof isAuthed === 'function' && isAuthed()) loadWeeklyWidget();
     </script>
     <script src="./global-brand-shelf.js" defer onerror="void 0"></script>
-</body>
+<script src="/problem-report.js"></script></body>
 </html>
