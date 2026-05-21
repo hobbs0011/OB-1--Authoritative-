@@ -360,11 +360,12 @@ switch ($Command) {
         $reincDir  = Join-Path $canonDir  "REINCARNATION"
 
         $canonFiles  = if (Test-Path $canonDir)  { Get-ChildItem $canonDir  -Recurse -Filter "*.json" -File | Select-Object -ExpandProperty FullName } else { @() }
+        $canonJsonFiles = if (Test-Path $canonDir) { Get-ChildItem $canonDir -Recurse -Filter "*.json" -File } else { @() }
         $ledgerFiles = if (Test-Path $ledgerDir) { Get-ChildItem $ledgerDir -File | Select-Object -ExpandProperty FullName } else { @() }
 
         # Collect all known IDs from CANON files
         $knownIds = @{}
-        foreach ($cf in $canonFiles) {
+        foreach ($cf in $canonJsonFiles) {
             try {
                 $j = Get-Content $cf.FullName -Raw | ConvertFrom-Json
                 $idVal = $j.id
@@ -422,7 +423,10 @@ switch ($Command) {
             foreach ($f in $jsFiles) {
                 $content = Get-Content $f.FullName -Raw -ErrorAction SilentlyContinue
                 # Look for environment / feature flags
-                foreach ($m in [regex]::Matches($content, '(?:FLAG|ENV|ENABLE|DISABLE)\s*[=:]\s*["'\'']?(\w+)["'\'']?')) {
+                $flagPattern = @"
+(?:FLAG|ENV|ENABLE|DISABLE)\s*[=:]\s*["']?(\w+)["']?
+"@
+                foreach ($m in [regex]::Matches($content, $flagPattern)) {
                     $flagHits += [pscustomobject]@{ file=$f.FullName; flag=$m.Groups[1].Value }
                 }
                 # Look for TODO/FIXME/HACK/BUG flags
