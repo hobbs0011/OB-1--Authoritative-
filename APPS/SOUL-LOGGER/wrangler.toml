@@ -16,3 +16,7 @@ APP_NAME = "Soul Logger"
 NET_PET_AI_URL = "https://net-pet-ai.mrmichaelhobbs123.workers.dev"
 SOUL_LOGGER_URL = "https://soul-logger.mrmichaelhobbs123.workers.dev"
 LOG_STATE_URL = ""
+
+# Paid-tier cron — automated soul health pulse every 5 minutes
+[triggers]
+crons = ["*/5 * * * *"]

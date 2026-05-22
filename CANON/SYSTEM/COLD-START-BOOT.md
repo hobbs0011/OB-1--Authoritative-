@@ -63,8 +63,9 @@
  - **HL Ledger real baseline:** 189 Heavy Ledger JSON files on disk (HEAD AUTHORITATIVE: `git log -1` -> `eedf25e`, Run 393 death); 6 phantom slots documented (HL-127/HL-128/HL-131/HL-132/HL-136/HL-137) - UNRESOLVED since Run 337; PIPELINE-CURSOR.md frozen since Run 258 (51 days)
 - **Net-PET-AI worker:** v1.5.0+ LIVE at https://net-pet-ai.mrmichaelhobbs123.workers.dev — SOUL_DB D1 binding active
 - **Student Portals:** 7 total (Huong, Mai Tram, Quy, Lam, Quan, Quang, Minh-parent) — ALL COVERED, backdrop-filter purge deployed
-- **Soul Logger:** v2.1 LIVE with filtered SOULCOUNT endpoint — Run 391 deployed (86892940)
+- **Soul Logger:** v2.2 LIVE with Roman Legion 6-stage pipeline naming — Run 396 deployed (a0c99e4e) — 5-min cron health pulse active (paid tier) — SOULCOUNT 116,383 ANCHOR
 - **Career NAV complete:** Dashboard / Profile / Methodology / Career / Transcripts / Action Plan — all 3 student portals 6/6 nav links
+- **Cloudflare Tier:** PAID — activated 2026-05-23 Run 396 — operator email mrmichaelhobbs123@gmail.com — Account ID 3c7b1766bd8fdc9e01211d2b390315ea — cron triggers unlocked (soul-logger: 5-min health pulse, net-pet-ai: hourly)
 
 ### Active Principles (Top 10)
 1. Platform Death Test — every run must produce a GitHub commit SHA
