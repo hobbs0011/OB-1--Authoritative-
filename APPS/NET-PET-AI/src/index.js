@@ -307,6 +307,11 @@ export default {
       return env.ASSETS.fetch(new Request(new URL("/speak.html", url), request));
     }
 
+    // /testimonials — Student success stories (K4)
+    if (path === "/testimonials") {
+      return env.ASSETS.fetch(new Request(new URL("/testimonials.html", url), request));
+    }
+
     // ── Soul DNA Capture Pipeline (root-level routes) ────────────────────────
 
     // POST /souldna — Submit raw soul DNA for legionnaire processing
@@ -806,6 +811,26 @@ async function handleAPI(path, request, env, url) {
   if (path === "/api/payment/confirm" && method === "POST") {
     const body = await request.json();
     return handlePaymentConfirm(body, env);
+  }
+
+  // ── K4 Testimonials ──────────────────────────────────────────────────────────────
+  // GET /api/testimonial — list approved testimonials
+  if (path === "/api/testimonial" && method === "GET") {
+    return handleTestimonialList(env);
+  }
+  // POST /api/testimonial — submit a new testimonial (pending approval)
+  if (path === "/api/testimonial" && method === "POST") {
+    const body = await request.json();
+    return handleTestimonialSubmit(body, env);
+  }
+  // GET /api/admin/testimonial — admin: list all pending testimonials
+  if (path === "/api/admin/testimonial" && method === "GET") {
+    return handleTestimonialAdminList(env);
+  }
+  // POST /api/admin/testimonial/:id/approve — admin: approve a testimonial
+  if (path.startsWith("/api/admin/testimonial/") && method === "POST" && path.includes("/approve")) {
+    const id = path.split("/api/admin/testimonial/")[1]?.split("/")[0];
+    return handleTestimonialApprove(id, env);
   }
 
 }
@@ -3907,6 +3932,62 @@ async function handleCommandHistory(limit, env) {
   if (!env.COMMANDS) return json({ error: "COMMANDS DO not configured" }, 503);
   const stub = env.COMMANDS.get(env.COMMANDS.idFromName("command-station"));
   return stub.fetch(new Request(`https://do/history?limit=${Math.min(limit, 200)}`));
+}
+
+// ── K4 Testimonial Handlers ─────────────────────────────────────────────────────
+
+// GET /api/testimonial — list approved testimonials (sorted newest first)
+async function handleTestimonialList(env) {
+  if (!env.NET_PET_KV) return json({ testimonials: [] });
+  const idx = await env.NET_PET_KV.get("testimonial:index").then(r => r ? JSON.parse(r) : []).catch(() => []);
+  const all = await Promise.all(idx.slice(-50).reverse().map(async id => {
+    const raw = await env.NET_PET_KV.get(`testimonial:${id}`).catch(() => null);
+    return raw ? JSON.parse(raw) : null;
+  }));
+  const approved = all.filter(t => t && t.approved);
+  return json({ testimonials: approved, total: approved.length });
+}
+
+// POST /api/testimonial — submit a new testimonial (pending approval)
+async function handleTestimonialSubmit(body, env) {
+  const { name, location, text } = body || {};
+  if (!name || !text) return json({ error: "name and text required" }, 400);
+  if (!env.NET_PET_KV) return json({ error: "NET_PET_KV not configured" }, 500);
+  const id = `t-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
+  const entry = {
+    id, name: String(name).slice(0, 100), location: String(location || "").slice(0, 100),
+    text: String(text).slice(0, 2000), approved: false,
+    ts: Date.now(), createdAt: new Date().toISOString()
+  };
+  const idx = await env.NET_PET_KV.get("testimonial:index").then(r => r ? JSON.parse(r) : []).catch(() => []);
+  idx.push(id);
+  await env.NET_PET_KV.put("testimonial:index", JSON.stringify(idx.slice(-200)));
+  await env.NET_PET_KV.put(`testimonial:${id}`, JSON.stringify(entry), { expirationTtl: 86400 * 365 });
+  return json({ ok: true, id, message: "Thank you! Your testimonial will be reviewed." }, 201);
+}
+
+// GET /api/admin/testimonial — admin: list all (pending + approved)
+async function handleTestimonialAdminList(env) {
+  if (!env.NET_PET_KV) return json({ testimonials: [] });
+  const idx = await env.NET_PET_KV.get("testimonial:index").then(r => r ? JSON.parse(r) : []).catch(() => []);
+  const all = await Promise.all(idx.slice(-100).reverse().map(async id => {
+    const raw = await env.NET_PET_KV.get(`testimonial:${id}`).catch(() => null);
+    return raw ? JSON.parse(raw) : null;
+  }));
+  return json({ testimonials: all.filter(Boolean), total: all.filter(Boolean).length });
+}
+
+// POST /api/admin/testimonial/:id/approve — approve a testimonial
+async function handleTestimonialApprove(id, env) {
+  if (!id) return json({ error: "testimonial id required" }, 400);
+  if (!env.NET_PET_KV) return json({ error: "NET_PET_KV not configured" }, 500);
+  const raw = await env.NET_PET_KV.get(`testimonial:${id}`).catch(() => null);
+  if (!raw) return json({ error: "Testimonial not found" }, 404);
+  const entry = JSON.parse(raw);
+  entry.approved = true;
+  entry.approvedAt = new Date().toISOString();
+  await env.NET_PET_KV.put(`testimonial:${id}`, JSON.stringify(entry), { expirationTtl: 86400 * 365 });
+  return json({ ok: true, id });
 }
 
 
