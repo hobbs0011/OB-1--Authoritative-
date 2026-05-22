@@ -2,7 +2,7 @@
 # Run SS Agent99 tier probes against each endpoint after reload
 
 ```
-T1	Step 3.5 Flash (stepfun/step-3.5-flash)	—	SWE-bench 74.4% / LiveCodeBench 86.4% — chosen over Gemini 2.5 Flash
+T1	Step 3.5 Flash (stepfun/step-3.5-flash)	Used as often as possible	SWE-bench 74.4% / LiveCodeBench 86.4% — chosen over Gemini 2.5 Flash
 T2	DeepSeek V4 Flash (deepseek-v4-flash)	$0.14 / $0.28	Same key as Pro, primary workhorse
 T3	DeepSeek V4 Pro (deepseek-v4-pro)	$0.28 / $1.40	Same account
 T4	Gemini 3.5 Flash (gemini-3.5-flash)	$1.50 / $9.00	Needs credits loaded — not live yet
