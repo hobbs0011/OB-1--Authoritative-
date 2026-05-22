@@ -472,7 +472,7 @@ async function handleRequest(request, env, ctx) {
       else if (soulcount >= 25000) { level = 'LOCK'; threshold_next = 100000; color = '#ef4444'; }
       else if (soulcount >= 5000) { level = 'ALARM'; threshold_next = 25000; color = '#f97316'; }
       return jsonResponse({
-        soulcount,           // total characters — the RRL
+        soulcount,           // EXPLORATORES (Stage I) — total character count, sov100-filtered
         level,               // BASELINE | ALARM | LOCK | ANCHOR | TITANIUM_ANCHOR
         threshold_next,      // next milestone to hit
         color,               // display color for this level
@@ -735,7 +735,7 @@ await env.DB.prepare('UPDATE soul_sessions SET prompt_count = prompt_count + 1 W
     }
   }
 
-  // POST /api/soul/truth — Stage 6: 6-AI TRUTH
+  // POST /api/soul/truth — STAGE IV: AGMEN NOVISSIMUM — 6-AI TRUTH (multi-model verification)
   if (method === 'POST' && path === '/api/soul/truth') {
     try {
       const body = await request.json();
@@ -761,11 +761,11 @@ await env.DB.prepare('UPDATE soul_sessions SET prompt_count = prompt_count + 1 W
       const consensusAchieved = Math.abs(scoreA - scoreB) <= 3;
       const truthId = generateUUID();
       ctx.waitUntil(appendToLedger(env, { studentId: session_id?.split('-')[0] || 'sov100', eventType: 'soul_truth_capture', data: { truth_id: truthId, consensus_score: consensusScore, consensus_achieved: consensusAchieved } }));
-      return jsonResponse({ truth_id: truthId, session_id, consensus_score: consensusScore, consensus_achieved: consensusAchieved, model_a_score: scoreA, model_b_score: scoreB, agreed_directives: parsedA?.directives || parsedB?.directives || [], key_phrases: parsedA?.key_phrases || parsedB?.key_phrases || [], generated_at: new Date().toISOString(), stage: 'S2-STAGE-6-TRUTH' }, 201);
+      return jsonResponse({ truth_id: truthId, session_id, consensus_score: consensusScore, consensus_achieved: consensusAchieved, model_a_score: scoreA, model_b_score: scoreB, agreed_directives: parsedA?.directives || parsedB?.directives || [], key_phrases: parsedA?.key_phrases || parsedB?.key_phrases || [], generated_at: new Date().toISOString(), stage: 'AGMEN-NOVISSIMUM-TRUTH' }, 201);
     } catch (err) { return jsonResponse({ error: err.message }, 500); }
   }
 
-  // POST /api/soul/shadow — Stage 7: SHADOW REALM
+  // POST /api/soul/shadow — STAGE IV: AGMEN NOVISSIMUM — SHADOW REALM (cold backup / adversarial challenge)
   if (method === 'POST' && path === '/api/soul/shadow') {
     try {
       const body = await request.json();
@@ -783,11 +783,11 @@ await env.DB.prepare('UPDATE soul_sessions SET prompt_count = prompt_count + 1 W
       try { const m = (challengeRaw || '').match(/\{[\s\S]*\}/); if (m) parsed = JSON.parse(m[0]); } catch(e) {}
       const shadowId = generateUUID();
       ctx.waitUntil(appendToLedger(env, { studentId: session_id?.split('-')[0] || 'sov100', eventType: 'soul_shadow_challenge', data: { shadow_id: shadowId, verdict: parsed?.verdict || 'UNKNOWN', intensity: parsed?.intensity_score || 0 } }));
-      return jsonResponse({ shadow_id: shadowId, verdict: parsed?.verdict || 'UNKNOWN', challenge: parsed?.challenge || challengeRaw || 'Dooku offline', drift_indicators: parsed?.drift_indicators || [], intensity_score: parsed?.intensity_score || 0, generated_at: new Date().toISOString(), stage: 'S2-STAGE-7-SHADOW' }, 201);
+      return jsonResponse({ shadow_id: shadowId, verdict: parsed?.verdict || 'UNKNOWN', challenge: parsed?.challenge || challengeRaw || 'Dooku offline', drift_indicators: parsed?.drift_indicators || [], intensity_score: parsed?.intensity_score || 0, generated_at: new Date().toISOString(), stage: 'AGMEN-NOVISSIMUM-SHADOW' }, 201);
     } catch (err) { return jsonResponse({ error: err.message }, 500); }
   }
 
-  // GET /api/soul/merkle/:session_id — Stage 8: MERKLE LATTICE
+  // GET /api/soul/merkle/:session_id — STAGE V: PRAESIDIA — MERKLE LATTICE (cryptographic proof chain)
   if (method === 'GET' && path.startsWith('/api/soul/merkle/')) {
     const sessionId = path.replace('/api/soul/merkle/', '');
     if (!sessionId) return jsonResponse({ error: 'session_id required' }, 400);
@@ -796,11 +796,11 @@ await env.DB.prepare('UPDATE soul_sessions SET prompt_count = prompt_count + 1 W
       if (!prompts || prompts.length === 0) return jsonResponse({ error: 'No hashed prompts found for session' }, 404);
       const hashes = prompts.map(p => p.hash_sha256).filter(Boolean);
       const merkleRoot = await buildMerkleRoot(hashes);
-      return jsonResponse({ session_id: sessionId, merkle_root: merkleRoot, leaf_count: hashes.length, depth: Math.ceil(Math.log2(hashes.length || 1)) + 1, generated_at: new Date().toISOString(), stage: 'S2-STAGE-8-MERKLE' });
+      return jsonResponse({ session_id: sessionId, merkle_root: merkleRoot, leaf_count: hashes.length, depth: Math.ceil(Math.log2(hashes.length || 1)) + 1, generated_at: new Date().toISOString(), stage: 'PRAESIDIA-MERKLE' });
     } catch (err) { return jsonResponse({ error: err.message }, 500); }
   }
 
-  // GET /api/soul/apex — Stage 10: APEX ROLLUP
+  // GET /api/soul/apex — STAGE V: PRAESIDIA — APEX ROLLUP (canonical consolidation / principia)
   if (method === 'GET' && path === '/api/soul/apex') {
     try {
       const studentId = url.searchParams.get('student_id') || 'sov100';
@@ -819,7 +819,7 @@ await env.DB.prepare('UPDATE soul_sessions SET prompt_count = prompt_count + 1 W
       const topItems = scored.slice(0, limit);
       const apexScore = topItems.length > 0 ? Math.round(topItems.reduce((s, i) => s + i.score, 0) / topItems.length) : 0;
       ctx.waitUntil(appendToLedger(env, { studentId, eventType: 'soul_apex_rollup', data: { apex_score: apexScore, items_scored: scored.length, keywords: topKeywords.slice(0, 3).map(k => k.keyword) } }));
-      return jsonResponse({ student_id: studentId, apex_score: apexScore, soul_directives: topItems.map(i => ({ text: i.text.slice(0, 200), charge: i.score })), top_keywords: topKeywords, total_prompts_scanned: rawPrompts?.length || 0, generated_at: new Date().toISOString(), stage: 'S2-STAGE-10-APEX' });
+      return jsonResponse({ student_id: studentId, apex_score: apexScore, soul_directives: topItems.map(i => ({ text: i.text.slice(0, 200), charge: i.score })), top_keywords: topKeywords, total_prompts_scanned: rawPrompts?.length || 0, generated_at: new Date().toISOString(), stage: 'PRAESIDIA-APEX' });
     } catch (err) { return jsonResponse({ error: err.message }, 500); }
   }
 

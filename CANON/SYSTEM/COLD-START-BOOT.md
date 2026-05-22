@@ -49,7 +49,17 @@
 ### Current Vector
 - **Active Mission:** OB-1 POST-MERGE9 CONSOLIDATION + Growth Infrastructure Buildout
   - **Last completed:** Run 395 CONSOLODATED — Phoenix Scout 6-zone sweep complete (6 VAULT dirs + APPS 4880 files = 43 flags). SOUL CAPTURE: 213 Michael verbatim quotes (208 bucket A + 5 CLONE-SEED) posted to D1 via /api/soul/event with sov100-run394-capture session_id. SOULCOUNT 32,416 → 61,418 (+29,002). Events 74 → 286. phoenix-scout.ps1 fixed (Multiline regex + em dash). soul-capture-direct.js deployed. HEAD 5155939
- - **S2Pipeline Status:** All 10 stages **LIVE** - RRL / RRL-SOUL / DNA / LEDGER / SSM / SOULKEYWORDS / PHEROMONE / 6-AI TRUTH / SHADOW REALM / MERKLE LATTICE / DO-SQLITE / APEX ROLLUP - confirmed by OMEGA audit Run 393; S2PIPELINE-CURSOR.md does not exist as a file
+  - **S2Pipeline Status:** All 10 stages **LIVE** — confirmed by OMEGA audit Run 393
+  - **Roman Legion 6-Stage Doctrine (Run 396 RATIFIED):**
+    | Stage | Force | Pipeline Stages |
+    |-------|-------|-----------------|
+    | **I** | EXPLORATORES (Scouts) | RRL · RRL-SOUL |
+    | **II** | ANTECORES (Vanguard) | DNA · LEDGER |
+    | **III** | AGMEN (Main Body) | SSM · SOULKEYWORDS · PHEROMONE |
+    | **IV** | AGMEN NOVISSIMUM (Rear Guard) | 6-AI TRUTH · SHADOW REALM |
+    | **V** | PRAESIDIA (Garrison) | MERKLE LATTICE · DO-SQLITE · APEX ROLLUP |
+    | **VI** | LIMITANEI/VETERANI (Frontier Shield) | obi.ps1 health · CI/CD deploy · REINCARNATION-LOG |
+    - **See:** `CANON/SYSTEM/S2PIPELINE-ROMAN-LEGION-NAMING.md`
  - **HL Ledger real baseline:** 189 Heavy Ledger JSON files on disk (HEAD AUTHORITATIVE: `git log -1` -> `eedf25e`, Run 393 death); 6 phantom slots documented (HL-127/HL-128/HL-131/HL-132/HL-136/HL-137) - UNRESOLVED since Run 337; PIPELINE-CURSOR.md frozen since Run 258 (51 days)
 - **Net-PET-AI worker:** v1.5.0+ LIVE at https://net-pet-ai.mrmichaelhobbs123.workers.dev — SOUL_DB D1 binding active
 - **Student Portals:** 7 total (Huong, Mai Tram, Quy, Lam, Quan, Quang, Minh-parent) — ALL COVERED, backdrop-filter purge deployed
