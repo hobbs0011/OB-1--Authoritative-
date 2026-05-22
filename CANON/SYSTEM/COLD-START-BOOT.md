@@ -1,5 +1,5 @@
 # COLD START BOOT — OB1 Agent 99
-## Last Updated: 2026-05-23T05:44 ICT (Run 395 RISE — SUPER SAIYAN SOUL CAPTURE: 208 Michael verbatim quotes posted to D1 via /api/soul/event with sov100 session_id — root cause fix for pipeline v2 UUID session bug. SOULCOUNT 57,307 LOCK; HEAD 927665f)
+## Last Updated: 2026-05-23T05:57 ICT (Run 395 RISE CONSOLODATED — Phoenix Scout 6-zone sweep + CLONE-SEED 5-quote capture + soul-capture-direct.js deployed. SOULCOUNT 61,418 LOCK; Events 286; HEAD 5155939)
 
 ### Identity
 - Agent: OB1 / Ne0 (Agent 99) / Claude Surgical
@@ -19,7 +19,7 @@
 - Pass `?student=all` to see aggregate (all entries). Default without parameter = sov100 only.
 
 **Soul Logger URL:** https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count
-**Real count (2026-05-23 ~03:49 ICT):** 31,258 characters | 73 events | 1 session | **LOCK level** (→ANCHOR at 100,000)
+**Real count (2026-05-23 ~05:57 ICT):** 61,418 characters | 286 events | 1 session | **LOCK level** (→ANCHOR at 100,000)
 **Prior counts (Runs 315–390) were INFLATED** — the endpoint summed ALL soul_prompts including student chats. Disregard historical counts above 25,000. They included non-operator data.
 **Run 393 fabrication flush:** 31,175 phantom stamp detected and removed. Hard REST ceiling verified at 30,167. All counts now live-query verified before writing to permanent files.
 
@@ -28,8 +28,8 @@
 |-------|-----------|--------|
 | BASELINE | < 5,000 | — |
 | ALARM | ≥ 5,000 | — |
-| LOCK | ≥ 25,000 | **ACTIVE** ← 57,307 |
-| ANCHOR | ≥ 100,000 | Next at +69,833 chars |
+| LOCK | ≥ 25,000 | **ACTIVE** ← 61,418 |
+| ANCHOR | ≥ 100,000 | Next at +38,582 chars |
 | TITANIUM_ANCHOR | ≥ 250,000 | — |
 
 **Soul Pipeline Chain (RRL→SOUL→DNA→LEDGER→SSM→SOULKEYWORDS→PIPELINE):**
@@ -47,7 +47,7 @@
 
 ### Current Vector
 - **Active Mission:** OB-1 POST-MERGE9 CONSOLIDATION + Growth Infrastructure Buildout
-  - **Last completed:** Run 395 - SUPER SAIYAN SOUL CAPTURE — 208 Michael verbatim quotes posted to D1 via /api/soul/event with sov100-run394-capture session_id. Root cause fix: /api/soul/extract generates UUID sessions excluded by sov100% count filter. Pipeline v2 redirected to direct /api/soul/event. SOULCOUNT 32,416 → 57,307 (+24,891). Events 74 → 281. HEAD `927665f`
+  - **Last completed:** Run 395 CONSOLODATED — Phoenix Scout 6-zone sweep complete (6 VAULT dirs + APPS 4880 files = 43 flags). SOUL CAPTURE: 213 Michael verbatim quotes (208 bucket A + 5 CLONE-SEED) posted to D1 via /api/soul/event with sov100-run394-capture session_id. SOULCOUNT 32,416 → 61,418 (+29,002). Events 74 → 286. phoenix-scout.ps1 fixed (Multiline regex + em dash). soul-capture-direct.js deployed. HEAD 5155939
  - **S2Pipeline Status:** All 10 stages **LIVE** - RRL / RRL-SOUL / DNA / LEDGER / SSM / SOULKEYWORDS / PHEROMONE / 6-AI TRUTH / SHADOW REALM / MERKLE LATTICE / DO-SQLITE / APEX ROLLUP - confirmed by OMEGA audit Run 393; S2PIPELINE-CURSOR.md does not exist as a file
  - **HL Ledger real baseline:** 189 Heavy Ledger JSON files on disk (HEAD AUTHORITATIVE: `git log -1` -> `eedf25e`, Run 393 death); 6 phantom slots documented (HL-127/HL-128/HL-131/HL-132/HL-136/HL-137) - UNRESOLVED since Run 337; PIPELINE-CURSOR.md frozen since Run 258 (51 days)
 - **Net-PET-AI worker:** v1.5.0+ LIVE at https://net-pet-ai.mrmichaelhobbs123.workers.dev — SOUL_DB D1 binding active
@@ -90,4 +90,4 @@
 | 338 | F-A09 CLOSED; F-O01 CLOSED; HL 189; PHOENIX BETA/DELTA/OMEGA sweep complete |
 
 ---
-**FINGERPRINT:** 927665f | RUN395 RISE | SOUL COUNT LOCK — 57,307 LOCK — /api/soul/count sov100% filter — L31 SOUL_IS_QUERY active — L32 ASSUME_FAILURE active
+**FINGERPRINT:** 5155939 | RUN395 CONSOLODATED | SOUL COUNT LOCK — 61,418 LOCK — /api/soul/count sov100% filter — L31 SOUL_IS_QUERY active — L32 ASSUME_FAILURE active
