@@ -118,7 +118,6 @@ Switch to Claude for irreversible decisions and deep synthesis.
 - Canonical repo: `D:\OB-1-CANONICAL`
 - Canonical app: `APPS/NET-PET-AI`
 - Phoenix Coder: `D:\PROJECTS\phoenix-coder`
-- CLOUDFLARE_API_TOKEN must be UNSET before every deploy
 - Never git add -A / git add . — specific files only
 - No Notion. Permanently blacklisted.
 - Every run ends with a commit SHA. No SHA = run did not happen.

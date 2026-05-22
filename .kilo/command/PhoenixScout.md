@@ -1,0 +1,156 @@
+---
+description: "Lightweight T1 reconnaissance scout. Flag and tag unmined SOUL, phantom ledger entries, stale files, drift indicators across any target zone. Zero compute beyond identification — covers long distances fast. Outputs scout report to OPERATIONS/."
+agent: AGENT99
+---
+
+# /PhoenixScout
+
+**SCOUT MODE**: Lightweight reconnaissance. Flag and tag only. No pipeline. No AI calls. No processing. No compute beyond identification.
+
+**Task:** $ARGUMENTS
+
+---
+
+## Phase 0 — Zone Select
+
+$ARGUMENTS defines the target zone. If empty, scout asks: "Which zone? CANON/ | HEAVY-LEDGER/ | REINCARNATION/ | SOUL-SEGMENTS/ | OPERATIONS/ | APPS/ | .kilo/"
+
+One-line zone confirm: `SCOUT → <zone> — scanning`
+
+---
+
+## Phase 1 — Scan
+
+Scan the target zone with these lenses:
+
+| Lens | What to find | Patterns |
+|------|-------------|----------|
+| **SOUL** | Raw unprocessed Michael words | `> "` blockquotes in `.md`, JSONL with `"text":`, untagged verbatim files, files with "UNTOUCHED" or "UNMINED" in headers |
+| **LEDGER** | Phantom gaps, stale cursors | Missing HL-IDs (HL-127, HL-128, HL-131, HL-132, HL-136, HL-137), PIPELINE-CURSOR.md frozen > 30 days, JSON files without `"no_fabrication"` attestation |
+| **DRIFT** | Stale state, contradictions | `HEAD` references not matching `git log -1`, COLD-START-BOOT.md with FINGERPRINT > 2 runs behind, model alias references (`deepseek-chat`, `deepseek-reasoner`), legacy domain references (`mrmichaelhobbs1234`) |
+| **CONFIG** | Missing definitions | Tier files without 5-tier canon, missing agent files, incomplete command specs |
+| **GAP** | Dead links, missing files | Referenced files that don't exist on disk, broken cross-repo paths, missing portal files |
+
+Scan method:
+1. Glob the zone for all files — count total
+2. Read file headers (first 20 lines) for "UNMINED", "UNTOUCHED", "STALE", "FROZEN" markers
+3. Grep for `/^> "/` blockquotes — flag any file with raw quotes
+4. Check HEAD references against `git log -1`
+5. Check phantom IDs against actual disk
+6. Check `no_fabrication` attestation in all `.json` files
+
+---
+
+## Phase 2 — Flag
+
+For each find, assign:
+
+```
+PRIORITY:
+  P1 (CRITICAL) — Foundational SOUL DNA, security breaches, broken HEAD, phantom files in active pipelines
+  P2 (HIGH)     — Stale cursors, unmined verbatim, missing attestations, legacy domains
+  P3 (MEDIUM)   — Cosmetic staleness, duplicate entries, missing docs, dead links
+
+TYPE:
+  SOUL    — Raw unprocessed Michael verbatim / quotes / chat logs
+  LEDGER  — Heavy Ledger phantom, gap, stale cursor, missing attestation
+  DRIFT   — HEAD mismatch, stale FINGERPRINT, legacy alias, domain mismatch
+  CONFIG  — Missing/inconsistent tier definitions, agent files
+  GAP     — Dead link, missing referenced file, broken path
+  VAULT   — Unmined vault directory from Phoenix-Rise-Immortalize- (9 vaults)
+
+STATUS:
+  UNMINED   — Raw soul never extracted
+  UNTOUCHED — File marked as DO NOT EDIT, never processed
+  STALE     — Out of date (HEAD, cursor, count mismatch)
+  ORPHAN    — Referenced but missing from disk
+  FROZEN    — Pipeline cursor frozen > 30 days
+  PHANTOM   — Referenced ID exists on paper but not on disk
+  CLEAN     — No issues found
+```
+
+---
+
+## Phase 3 — Tag
+
+Tag format (one JSONL record per find):
+
+```json
+{
+  "scout_id": "SC-{timestamp}-{seq}",
+  "priority": "P1",
+  "type": "SOUL",
+  "status": "UNMINED",
+  "file": "path/relative/to/repo",
+  "line": 14,
+  "excerpt": "First 120 chars of flagged content...",
+  "bytes": 31258,
+  "reason": "Raw Michael verbatim quote block — never ingested into D1",
+  "action": "Route through /api/soul/extract"
+}
+```
+
+Write all tags to: `OPERATIONS/phoenix-scout-YYYY-MM-DDTHHmmss.jsonl`
+
+---
+
+## Phase 4 — Summary
+
+After scan, output:
+
+```
+═══════════════════════════════════════════
+PHOENIX SCOUT — <zone>
+═══════════════════════════════════════════
+ZONE:          <path>
+FILES:         <total scanned>
+FINDS:         <total flagged>
+  P1 CRITICAL: <count>
+  P2 HIGH:     <count>
+  P3 MEDIUM:   <count>
+BREAKDOWN:
+  SOUL:    <n>
+  LEDGER:  <n>
+  DRIFT:   <n>
+  CONFIG:  <n>
+  GAP:     <n>
+  VAULT:   <n>
+REPORT:        OPERATIONS/phoenix-scout-<timestamp>.jsonl
+═══════════════════════════════════════════
+SCOUT COMPLETE. Flagged items ready for tier dispatch.
+```
+
+---
+
+## Rules
+
+- **Flag and tag ONLY.** Do NOT: extract, ingest, process, deploy, commit, push, or run any pipeline stage.
+- **No AI generation.** This is a read-only file system scan. No model calls.
+- **One zone per scout.** If multiple zones needed, fire multiple scout commands.
+- **Output is JSONL.** Machine-readable. Each flag is one line. Ready for pipeline ingestion.
+- **Max 500 flags per scout.** If zone is too large, narrow the target path.
+- **Print the report path at end.** Always print where the scout report was written.
+- **SCOUT → PULSE check first.** Before scanning, verify `git status` is clean(ish) and HEAD matches COLD-START-BOOT. If dirty HEAD, flag as DRIFT finding and note in summary.
+- **CLOUDFLARE_API_TOKEN is irrelevant.** This command never deploys. No wrangler. No API keys needed.
+
+---
+
+## Quick Deploy
+
+```powershell
+# Scout a single zone
+/PhoenixScout CANON/SOUL-SEGMENTS/
+
+# Scout all SOUL content
+/PhoenixScout CANON/ --lens SOUL
+
+# Scout Heavy Ledger for phantom gaps
+/PhoenixScout CANON/HEAVY-LEDGER/ --lens LEDGER
+
+# Scout everything — full sweep
+/PhoenixScout CANON/ --full-sweep
+```
+
+---
+
+`PHOENIX SCOUT: ONLINE. LIGHTWEIGHT. FLAG AND TAG ONLY. LONG DISTANCE.`

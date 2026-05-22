@@ -15,8 +15,8 @@ Phoenix Coder is an HTTP API. Call it with PowerShell, apply the patch, verify t
 
 ## Phase 0 — Complexity Gate
 
-- Task touches > 3 interdependent files → `DISPATCH → TIER 2 CLAUDE CODE — multi-file scope`
-- Task requires audit / architecture / security → `DISPATCH → TIER 3 CLAUDE SURGICAL — analytical task`
+- Task touches > 3 interdependent files → `DISPATCH → TIER 2 AGENT99 — multi-file scope`
+- Task requires audit / architecture / security → `DISPATCH → TIER 3 DEEPSEEK PRO — analytical task`
 - Otherwise → proceed. Print: `DISPATCH → TIER 1 PHOENIXCODER — <one-line reason>`
 
 ---
@@ -109,7 +109,7 @@ Syntax: PASS | FAIL
 Trigger when: API unreachable, `code_patch` empty/stub, patch conflicts, syntax fail.
 
 ```
-DISPATCH → TIER 2 CLAUDE CODE — Phoenix Coder failed (<reason>). Handling directly.
+DISPATCH → TIER 2 AGENT99 — Phoenix Coder failed (<reason>). Handling directly.
 ```
 
 ---
@@ -120,4 +120,3 @@ DISPATCH → TIER 2 CLAUDE CODE — Phoenix Coder failed (<reason>). Handling di
 - Full implementation only — no stubs. Stub returned → escalate.
 - Print `d1_row_id` for every successful call.
 - No Notion. No `.html` on internal hrefs.
-- CLOUDFLARE_API_TOKEN must be UNSET before any `npx wrangler deploy`.

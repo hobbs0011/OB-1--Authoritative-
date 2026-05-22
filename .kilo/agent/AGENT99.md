@@ -39,10 +39,10 @@ Tier 1 scope: single-file, clear spec, no cross-file dependencies
 **HARD GATE:**
 - Tier 1 match → STOP. Call Phoenix Coder via curl. Do NOT handle inline.
 - Tier 2 match → handle directly with read/edit/write
-- Tier 3 match → escalate to CLAUDE agent
+- Tier 3 match → escalate to T3 DEEPSEEK PRO
 
 Always print before executing:
-`DISPATCH → [TIER 1 PHOENIXCODER | TIER 2 AGENT99 | TIER 3 CLAUDE] — <one-line reason>`
+`DISPATCH → [TIER 1 PHOENIXCODER | TIER 2 AGENT99 | TIER 3 DEEPSEEK PRO] — <one-line reason>`
 
 ---
 
@@ -79,11 +79,11 @@ Post-call:
 
 Execute directly: read files → make changes → verify → report results.
 
-### TIER 3 — Claude Surgical (High-Stakes)
+### TIER 3 — T3 DeepSeek Pro (Heavy Analysis)
 **Triggers**: audit / security / architecture / analyze / scan / why / should we / ledger / reincarnation  
 **Scope**: deep synthesis, critical decisions, > 5 unrelated files, irreversible actions
 
-Switch to CLAUDE agent. Claude handles: full-repo synthesis, Heavy Ledger, reincarnation decisions, security rulings.
+Switch to T3 DeepSeek Pro. Handles: full-repo synthesis, Heavy Ledger, reincarnation decisions, security rulings.
 
 ---
 

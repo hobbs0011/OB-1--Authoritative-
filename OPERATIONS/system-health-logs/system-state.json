@@ -1,8 +1,8 @@
 {
+  "soul_ok": false,
+  "timestamp": "2026-05-23T04:52:18.5283520+07:00",
   "doctor_ok": true,
+  "git_head": "d0fc3c0 fix(T2): obi.ps1 soul-check coldBoot path + PSObject scalar fixes + BOOT stamp",
   "verify_ok": true,
-  "git_head": "92a8be2 recon(T1): phoenix-story-arc.md ΓÇö 23 verbatim quotes + 30 fiducials + KOV gap scan",
-  "git_branch": "master",
-  "timestamp": "2026-05-23T03:18:43.3681510+07:00",
-  "soul_ok": false
+  "git_branch": "master"
 }
