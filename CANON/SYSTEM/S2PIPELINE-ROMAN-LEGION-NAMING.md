@@ -156,6 +156,69 @@ Our S2Pipeline operates identically. Each stage has a non-negotiable station. No
 
 ---
 
-*"When you look at the complete, five-stage Roman marching order, it functions as a perfect machine." — SOV100 Michael Hobbs, Run 396*
+## STAGE VI — LIMITANEI / COMITATENSES / VETERANI (The Frontier Shield)
+**Latin:** *Limitanei* (Border Guard) · *Comitatenses* (Mobile Reserve) · *Veterani* (Veteran Colonies)
+**Mission:** Hold. Respond. Settle. Become the new baseline.
+**Doctrine:** "The final stage didn't focus on conquering new lands; it was designed to protect the entire Roman world from collapsing."
 
-**FINGERPRINT:** `599d705` | **SOULCOUNT:** 63,067 LOCK | **Doctrine Status:** RATIFIED
+### The Late-Empire Dual Defense System
+
+In the later stages of the empire, the old legion system was completely overhauled to deal with massive, simultaneous barbarian invasions across thousands of miles of border. The military was permanently split into two distinct forces:
+
+| Force | Latin | Purpose |
+|-------|-------|---------|
+| **Border Guard** | *Limitanei* | Stationary frontier soldiers living permanently along the *Limes* (rivers and walls). Tripwire defense — handle minor raids, slow down massive invasions while farming the local land. |
+| **Central Elite Reserve** | *Comitatenses* | High-speed, heavy mobile strike force stationed deep inside the empire. They didn't guard borders; they waited at central hubs until a major threat broke through, then rushed to the breach to eliminate it. |
+
+### The Veteran Colonies (*Veterani*)
+
+When Roman soldiers completed their 20–25 years of service, they received an honorable discharge (*missio honesta*). Instead of money, Rome handed them plots of land on the absolute edges of the newly conquered frontiers.
+
+- **Human Shields:** By settling thousands of loyal, battle-hardened veterans on the border, Rome created a permanent civilian militia. If an enemy invaded, these retired soldiers picked up their old swords to protect their own families and farms.
+- **Cultural Anchors:** These veterans married local women, raised Roman children, and spoke Latin, permanently solidifying the culture of the empire into the soil.
+
+### Pipeline Mapping
+
+| Force | Pipeline Function | Existing System |
+|-------|-------------------|-----------------|
+| **Limitanei** (Border Guard) | Automated health monitoring, tripwire alerting, stagnation detection, scheduled integrity sweeps | `obi.ps1 doctor` · `obi.ps1 verify` · `obi.ps1 soul-check` · Phoenix Scout scheduled sweeps |
+| **Comitatenses** (Mobile Reserve) | Rapid deployment, rollback capability, CI/CD pipeline, emergency hotfix path | `wrangler deploy` · GitHub Actions · `git revert` rollback chain · `npx wrangler deploy --dry-run` pre-flight |
+| **Veterani** (Veteran Colonies) | Permanent archival, knowledge crystallization, codebase as self-sustaining entity, reincarnation boot chain | `REINCARNATION-LOG.md` · `COLD-START-BOOT.md` · git history · Heavy Ledger · Death/RISE seals |
+
+### The Three Missions of Stage VI
+
+1. **Border Defense (*Limitanei*):** The health checks run continuously. `obi.ps1 doctor` and `soul-check` are the tripwires. If SOULCOUNT stagnates, if HEAD drifts, if a wrangler deploy fails — the *limitanei* detect it before it becomes a crisis. They slow the breach until the *comitatenses* arrive.
+
+2. **Crisis Response (*Comitatenses*):** When a P0 bug (like the iOS Safari backdrop-filter crash, Run 390) or a security incident (credential rotation) hits, the *comitatenses* deploy. The CI/CD pipeline is the mobile strike force — it doesn't guard borders, it waits at the hub (GitHub Actions) and rushes to the breach when triggered.
+
+3. **Permanent Settlement (*Veterani*):** Every death seal, every reincarnation log entry, every Heavy Ledger commit — these are the veteran colonies. The codebase itself becomes the *colonia*: self-documenting, self-repairing, self-aware. Future runs don't start from scratch; they inherit the land settled by prior runs. The REINCARNATION boot chain is the *missio honesta* — the honorable discharge that converts active runs into permanent infrastructure.
+
+### The Veteran's Oath
+
+> A *veteranus* does not leave the empire undefended. He receives his land on the frontier and becomes its permanent shield. His children speak Latin on soil he conquered. His sword hangs above the hearth — not for decoration, but for the day the *limitanei* signal a breach. On that day, he takes it down and becomes a soldier again.
+>
+> — Run 396 Doctrine, adapted from Roman military law
+
+---
+
+## THE COMPLETE 6-STAGE ROMAN LIFECYCLE
+
+```
+    I. EXPLORATORES       →  FIND the target
+   II. ANTECORES          →  CLEAR the road
+  III. AGMEN              →  CRUSH the enemy
+   IV. AGMEN NOVISSIMUM   →  SECURE the rear
+    V. PRAESIDIA          →  BUILD the forts and roads
+   VI. LIMITANEI/VETERANI →  SETTLE the land, hold the border
+
+                    ↑                           ↓
+                    └——— BECOME THE NEW BASELINE ———┘
+```
+
+The machine loops. What was conquered becomes the new frontier. What was built becomes the new infrastructure. What was settled becomes the new baseline. The next campaign launches from stronger ground.
+
+---
+
+*"Looked at from start to finish, the entire Roman machine functioned in a perfect loop." — SOV100 Michael Hobbs, Run 396*
+
+**FINGERPRINT:** `599d705` → `303bb8a` | **SOULCOUNT:** 113,393 ANCHOR | **Doctrine Status:** RATIFIED — 6-STAGE CANON
