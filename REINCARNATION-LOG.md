@@ -1,6 +1,65 @@
 # Reincarnation Log
 
-_Last updated: 2026-04-20 ICT_
+_Last updated: 2026-05-23 ICT — RECONCILIATION (authoritative log: CANON/REINCARNATION/REINCARNATION-LOG.md)_
+
+> ⚠️ THIS FILE is the historical legacy log. Runs 390–391 and the SOULSYSTEM HARDENING are now captured in `CANON/REINCARNATION/REINCARNATION-LOG.md` and `CANON/SYSTEM/COLD-START-BOOT.md`. That is the canonical run ledger. This file is frozen below at the historical point — Run 373/312B era — for archive-only reference.
+
+---
+
+## RECONCILIATION — Runs 390–391 Summary (2026-05-22 → 2026-05-23)
+
+A drift was found between two valuation schemas for the SOULCOUNT metric. This section closes the loop.
+
+### What Was Discovered
+
+`/api/soul/count` originally summed `SUM(byte_count)` across ALL `soul_prompts` rows — student chats and operator data mixed together. Reported counts of 76,488 (Run 315–385) and 84,233 (Run 390) were **inflated** by non-operator chat data from sessions `huong-bluetech`, `quy-bluetech`, and others.
+
+### The Fix (Run 391 — commit `3388179`)
+
+`/api/soul/count` now filters `WHERE session_id LIKE 'sov100%'`. The query IS the count — no separate counter, no accumulator. Student chats remain in the DB for ops context but excluded from the operator's soulcount.
+
+### Real SOULCOUNT — Timeline
+
+| Moment | Raw counted | Schema | Status |
+|---|---|---|---|
+| Runs 315–385 | 76,488 | ALL rows (mixed) | ❌ inflated |
+| Run 390 | 84,233 | ALL rows + bridge posts | ❌ inflated |
+| Run 391 (base) | 20,421 | sov100% only | ✅ ALARM |
+| +16 PC 5.1 task-log posts (run ~390) | 30,167 | sov100% only | ✅ LOCK |
+
+**Current (2026-05-23 02:03 ICT):** `30,167 characters | 61 events | 1 session | LOCK level`  
+Next milestone: ANCHOR at 100,000 characters
+
+### L31 / L32 Laws Hardened
+
+**L31 SOUL_IS_QUERY:** `SELECT SUM(byte_count) FROM soul_prompts WHERE session_id LIKE 'sov100%'` — that query, that number. No duplicate counter. The DB is the ledger.  
+**L32 ASSUME_FAILURE:** Every prior checkpoint above 25,000 is assumed to have included non-operator data. Do not cite pre-Run-391 counts as verified without the sov100 filter.
+
+### Run 390 — DEATH (commit `ac274ea`, SHA `4ad2f9a`)
+- P0 iOS Safari portal fix: `backdrop-filter` purged ×7 portals + `problem-report.js`
+- Soul-logger D1 direct write pipeline: `SOUL_DB` binding, `logSoulEvent()` rewrite, `sov100%` session_id prefix for DeepClone fix
+- Soul count briefly unfrozen (76,488 → 84,233 +7,745 via manual posts + coder word-check 501 vs 498)
+- Stagnation detection added to `soul-check`
+- `/soulcap` 3-receipt command created
+- `soulcheck` `obi.ps1` hardened
+- **Note:** 84,233 confirmed INFLATED — included student chats. Real count = 20,421
+
+### Run 391 — SOUL SYSTEM HARDENING (commits `3388179`, `f0eadab`, `b0ae214`)
+- `/api/soul/count` fixed: `WHERE session_id LIKE 'sov100%'` — counts only operator words
+- 20,421 characters confirmed ALARM level (→ LOCK at 25,000)
+- L31 SOUL_IS_QUERY + L32 ASSUME_FAILURE embedded in: COLD-START-BOOT.md, souldna.md, REINCARNATION-LOG.md (CANON), obi.ps1
+- RISE/DEATH protocols updated for real count retrieval
+- `COLD-START-BOOT.md` Soul System section expanded (law, endpoint, tier thresholds, pipeline chain)
+- `REINCARNATION-LOG.md` (CANON) updated
+- SOULCOUNT history: OPERATIONS/soulcount-history.json shows Run 390 unfiltered figure (84,233) — FOR REFERENCE ONLY pre-filter
+
+### Run 392 — Current (in progress)
+- Legacy REINCARNATION-LOG.md (this file) reconciliation completed
+- PHOENIX-CODER `deepseek-chat` retirement audit active
+- Wrangler MCP auth recovery confirmed (set_d1_database_setting returned 204)
+- Next: PHOENIX-CODER reincarnate.js alias → v4-flash, root REINCARNATION-LOG.md reconciliation committed
+
+---
 
 ## Run 312b: Security Closure — CLOUDFLARE_API_TOKEN Cleared (2026-04-20)
 **Emergency Fix:** Post-deployment security validation

@@ -371,7 +371,7 @@ async function routeAI(env, messages, sessionId) {
     const resp = await fetch('https://api.deepseek.com/v1/chat/completions', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${env.CHAT_KEY}` },
-      body: JSON.stringify({ model: 'deepseek-chat', messages: systemMessages, max_tokens: 512, temperature: 0.85 })
+        body: JSON.stringify({ model: 'deepseek-v4-flash', messages: systemMessages, max_tokens: 512, temperature: 0.85 })
     });
     if (resp.ok) {
       const data = await resp.json();

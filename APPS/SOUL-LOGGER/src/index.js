@@ -544,7 +544,7 @@ async function handleRequest(request, env, ctx) {
         const r = await fetch('https://api.deepseek.com/v1/chat/completions', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${env.DEEPSEEK_API_KEY}` },
-          body: JSON.stringify({ model: 'deepseek-chat', messages: [{ role: 'system', content: systemPrompt }, { role: 'user', content: fullText }], stream: false })
+          body: JSON.stringify({ model: 'deepseek-v4-flash', messages: [{ role: 'system', content: systemPrompt }, { role: 'user', content: fullText }], stream: false })
         });
         const json = await r.json();
         artifact = json.choices?.[0]?.message?.content || '';

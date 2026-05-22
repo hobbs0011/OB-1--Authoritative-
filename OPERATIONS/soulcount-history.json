@@ -1,8 +1,21 @@
-{
-  "timestamp": "2026-05-22T23:49:29+07:00",
-  "count": 84233,
-  "events": 89,
-  "sessions": 21,
-  "level": "LOCK",
-  "stagnation": false
-}
+[
+  {
+    "timestamp": "2026-05-23T02:03:00+07:00",
+    "count": 30167,
+    "events": 61,
+    "sessions": 1,
+    "level": "LOCK",
+    "stagnation": false,
+    "filter": "sov100%",
+    "previous_inflated_count": 84233,
+    "note": "Run 392 snapshot. 30,167 = real sov100 character count after /api/soul/count sov100% filter deployed at Run 391. Prior counts 76488/84233 were inflated by student chat data (huong-bluetech, quy-bluetech sessions)."
+  },
+  {
+    "timestamp": "2026-05-23T02:07:41+07:00",
+    "count": 30167,
+    "events": 61,
+    "sessions": 1,
+    "level": "LOCK",
+    "stagnation": false
+  }
+]

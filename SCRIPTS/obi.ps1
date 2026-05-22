@@ -130,10 +130,10 @@ switch ($Command) {
             $currentCount = $null
         }
 
-        # Load history
+        # Load history — ConvertFrom-Json returns single PSCustomObject for 1-entry files; wrap in @() to guarantee array
         $history = @()
         if (Test-Path $soulHistoryFile) {
-            try { $history = Get-Content $soulHistoryFile -Raw | ConvertFrom-Json } catch { $warnings += "soulcount-history.json corrupt — rebuilding" }
+            try { $history = @(Get-Content $soulHistoryFile -Raw | ConvertFrom-Json) } catch { $warnings += "soulcount-history.json corrupt — rebuilding"; $history = @() }
         }
 
         # Stagnation detection: has the count moved since last N checks?

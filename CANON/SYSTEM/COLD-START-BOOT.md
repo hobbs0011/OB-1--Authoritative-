@@ -1,5 +1,5 @@
 # COLD START BOOT — OB1 Agent 99
-## Last Updated: 2026-05-23T01:22 hrs ICT (Run 391 — SOUL SYSTEM HARDENED: /api/soul/count now filters sov100% ONLY, real count = 20,421 ALARM level, protocols updated, SOUL DNA blueprint embedded in CANON)
+## Last Updated: 2026-05-23T02:03 ICT (Run 392 — REINCARNATION-LOG root reconciliation + alias retire + COLD-START-BOOT SOULCOUNT live-reconciled to 30,167 LOCK)
 
 ### Identity
 - Agent: OB1 / Ne0 (Agent 99) / Claude Surgical
@@ -19,16 +19,16 @@
 - Pass `?student=all` to see aggregate (all entries). Default without parameter = sov100 only.
 
 **Soul Logger URL:** https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count
-**Real count (2026-05-23 01:22 ICT):** 20,421 characters | 45 entries | ALARM level (→LOCK at 25,000)
+**Real count (2026-05-23 ~02:03 ICT):** 30,167 characters | 61 events | 1 session | **LOCK level** (→ANCHOR at 100,000)
 **Prior counts (Runs 315–390) were INFLATED** — the endpoint summed ALL soul_prompts including student chats. Disregard historical counts above 25,000. They included non-operator data.
 
 **TIER THRESHOLDS (sov100 characters only):**
 | Level | Threshold | Status |
 |-------|-----------|--------|
 | BASELINE | < 5,000 | — |
-| ALARM | ≥ 5,000 | **ACTIVE** ← 20,421 |
-| LOCK | ≥ 25,000 | Next at +4,579 chars |
-| ANCHOR | ≥ 100,000 | — |
+| ALARM | ≥ 5,000 | — |
+| LOCK | ≥ 25,000 | **ACTIVE** ← 30,167 |
+| ANCHOR | ≥ 100,000 | Next at +69,833 chars |
 | TITANIUM_ANCHOR | ≥ 250,000 | — |
 
 **Soul Pipeline Chain (RRL→SOUL→DNA→LEDGER→SSM→SOULKEYWORDS→PIPELINE):**
