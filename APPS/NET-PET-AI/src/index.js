@@ -2238,27 +2238,46 @@ async function handleChat(body, env, ctx) {
   const sessionId = `${studentId}-${new Date().toISOString().slice(0, 10)}`;
   if (studentId !== "anonymous" && env.LEDGER && userMsg) {
     const payload = JSON.stringify({ user: userMsg, obi: reply });
-    if (ctx) {
-      ctx.waitUntil(appendToLedger(studentId, "chat_exchange", payload, env).catch(err => {
-        console.error(`[LEDGER] APPEND FAILED: ${err.message}`);
-      }));
-    } else {
-      appendToLedger(studentId, "chat_exchange", payload, env).catch(() => {});
+    appendToLedger(studentId, "chat_exchange", payload, env).catch(() => {});
+  }
+
+  // ── Soul Logger: push turns (DEBUG: sync + report in response) ──────────
+  let soulStatus = 'skipped';
+  if (studentId !== "anonymous" && userMsg) {
+    try {
+      const soulUrl = (env.SOUL_LOGGER_URL || 'https://soul-logger.mrmichaelhobbs123.workers.dev') + '/api/soul/event';
+      const soulRes = await fetch(soulUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ student_id: studentId, session_id: sessionId, role: 'user', text: userMsg, timestamp: new Date().toISOString() }),
+      });
+      if (soulRes.ok) {
+        soulStatus = 'user-logged-' + soulRes.status;
+      } else {
+        const soulErr = await soulRes.text().catch(() => '');
+        soulStatus = 'user-failed-' + soulRes.status + ':' + soulErr;
+      }
+    } catch (err) {
+      soulStatus = 'user-error-' + err.message;
     }
-  }
 
-  // ── Soul Logger: push user turn (waitUntil — guaranteed delivery) ────────
-  if (studentId !== "anonymous" && userMsg && ctx) {
-    ctx.waitUntil(logSoulEvent(env, studentId, sessionId, 'user', userMsg).catch(err => {
-      console.error(`[SOUL-EVENT] USER TURN FAILED: ${err.message}`);
-    }));
-  }
-
-  // ── Soul Logger: push assistant turn (waitUntil — guaranteed delivery) ──
-  if (studentId !== "anonymous" && ctx) {
-    ctx.waitUntil(logSoulEvent(env, studentId, sessionId, 'assistant', reply).catch(err => {
-      console.error(`[SOUL-EVENT] ASSISTANT TURN FAILED: ${err.message}`);
-    }));
+    // Assistant turn
+    try {
+      const soulUrl2 = (env.SOUL_LOGGER_URL || 'https://soul-logger.mrmichaelhobbs123.workers.dev') + '/api/soul/event';
+      const soulRes2 = await fetch(soulUrl2, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ student_id: studentId, session_id: sessionId, role: 'assistant', text: reply, timestamp: new Date().toISOString() }),
+      });
+      if (soulRes2.ok) {
+        soulStatus += '|assistant-logged-' + soulRes2.status;
+      } else {
+        const soulErr2 = await soulRes2.text().catch(() => '');
+        soulStatus += '|assistant-failed-' + soulRes2.status + ':' + soulErr2;
+      }
+    } catch (err) {
+      soulStatus += '|assistant-error-' + err.message;
+    }
   }
 
   // ── Notion sync: BLACKLISTED — platform usage permanently disabled ────────
@@ -2352,6 +2371,7 @@ async function handleChat(body, env, ctx) {
     nextAction,
     state: structuredCtx?.studentState?.state || null,
     mouseTigerScore: structuredCtx?.studentState?.mouse_tiger_score || null,
+    _soulStatus: soulStatus || 'not-attempted',
   });
 }
 
