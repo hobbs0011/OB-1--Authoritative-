@@ -25,5 +25,21 @@
     "sessions": 1,
     "level": "LOCK",
     "stagnation": true
+  },
+  {
+    "timestamp": "2026-05-23T02:51:55+07:00",
+    "count": 30167,
+    "events": 61,
+    "sessions": 1,
+    "level": "LOCK",
+    "stagnation": true
+  },
+  {
+    "timestamp": "2026-05-23T03:18:42+07:00",
+    "count": 30167,
+    "events": 61,
+    "sessions": 1,
+    "level": "LOCK",
+    "stagnation": true
   }
 ]

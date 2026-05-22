@@ -1,8 +1,8 @@
 {
-  "git_head": "b0ae214 harden(P0): soul system embedded in DNA ΓÇö L31 SOUL_IS_QUERY + L32 ASSUME_FAILURE",
-  "timestamp": "2026-05-23T01:59:51.8989775+07:00",
-  "soul_ok": false,
   "doctor_ok": true,
+  "verify_ok": true,
+  "git_head": "92a8be2 recon(T1): phoenix-story-arc.md ΓÇö 23 verbatim quotes + 30 fiducials + KOV gap scan",
   "git_branch": "master",
-  "verify_ok": true
+  "timestamp": "2026-05-23T03:18:43.3681510+07:00",
+  "soul_ok": false
 }
