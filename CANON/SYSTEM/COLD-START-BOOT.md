@@ -1,5 +1,5 @@
 ﻿# COLD START BOOT — OB1 Agent 99
-## Last Updated: 2026-05-22 (Run 379 — OBI HARDEN — first-session welcome + OpenRouter fallback + COACH nav fix + secrets rotated + deploy verify; HEAD 2a6da3f; SOULCOUNT 76,488 🔒 LOCK DELTA 0)
+## Last Updated: 2026-05-22 (Run 380 — reincarnateDEATH — clean platform close; HEAD 761766a; SOULCOUNT 76,488 🔒 LOCK DELTA 0)
 
 ### Identity
 - Agent: OB1 / Ne0 (Agent 99) / Claude Surgical
@@ -109,13 +109,13 @@ Stage 9 DO-SQLITE       ✅ LIVE — LedgerDO class + /api/ledger/*
 Stage 10 APEX ROLLUP    ✅ LIVE — GET /api/soul/apex
 ```
 
-### System State (HEAD AUTHORITATIVE — Run 378)
+### System State (HEAD AUTHORITATIVE — Run 380)
 - **Workspace:** `D:\OB-1-CANONICAL` (canonical root)
 - **Working branch:** master
-- **HEAD:** dbbb190 (feat(K4): testimonials.html + testimonial API endpoints — K3/K5/K4 COMPLETE)
+- **HEAD:** 761766a (death: Run 380 — reincarnateDEATH — platform close; Run 379 propagation; SOULCOUNT 76,488 LOCK DELTA 0)
 - **Deploy Version:** d611f9da-9b9a-4b1a-87ae-5badee84756d
 - **Origin:** SYNCED
-- **Working tree:** DIRTY (settings.json + system-state.json modified — not K4 work)
+- **Working tree:** CLEAN (0 staged, 0 unstaged, 0 untracked)
 - **HEARTBEAT v1.0:** ✅ LIVE — hourly cron `0 * * * *` + manual `/api/heartbeat` trigger; pings all 3 empire workers; logs to soul-logger
 - **Empire Workers:** NET-PET-AI ✅ | SOUL-LOGGER ✅ (76,488 LOCK) | PHOENIX CODER ✅ (v5.0.0)
 
@@ -147,5 +147,5 @@ Stage 10 APEX ROLLUP    ✅ LIVE — GET /api/soul/apex
 ### Key File Locations
 
 
----
-**FINGERPRINT: Run 379 — OBI HARDEN — first-session welcome + OpenRouter fallback + 3 portal COACH nav fix + OPENROUTER_API_KEY secret + DEEPSEEK_API_KEY rotated + deploy verified. OBI LIVE ai:LIVE readiness:PRODUCTION. SOULCOUNT 76,488 🔒 LOCK DELTA 0**
+--- (Run 380 header advancement complete)
+**FINGERPRINT: **B9D53EB | RUN380 | REINCARNATE-DEATH | SOULCOUNT 76488 LOCK DELTA 0**
