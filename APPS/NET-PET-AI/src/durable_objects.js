@@ -67,7 +67,7 @@ export class PetDO {
       this.sql.exec("UPDATE pet_state SET streak=?, xp=?, mood=?, total_sessions=?, last_checkin=?, longest_streak=? WHERE id=1", streak, curXp + xpGain, mood, tot, now, ls);
       this.sql.exec("INSERT INTO checkins (minutes, confidence, xp_gained, streak_at_checkin, ts) VALUES (?,?,?,?,?)", mins, conf, xpGain, streak, now);
       const rc = this.sql.exec("SELECT ts FROM checkins WHERE ts > ? ORDER BY ts DESC", now - 7 * 86400000).toArray(); const ud = new Set(rc.map(c => Math.floor(c.ts / 86400000))); const ret = Math.min(1, ud.size / 7);
-      const cf2 = this.sql.exec("SELECT confidence FROM checkins ORDER BY id DESC LIMIT 10").toArray(); const avg = cf2.length ? cf2.reduce((a, r) => a + r.confidence, 0) / cf2.length : 5; const er = Math.min(1, avg / 10); const dc = 1;
+      const cf2 = this.sql.exec("SELECT confidence FROM checkins ORDER BY id DESC LIMIT 10").toArray(); const avg = cf2.length ? cf2.reduce((a, r) => a + r.confidence, 0) / cf2.length : 5; const er = Math.min(1, avg / 10); const dc = (now - (cur.last_checkin || 0)) < 86400000 ? 1 : 0;
       const ts2 = Math.round(ret * 40 + er * 40 + dc * 20); const dp = tot <= 2 ? "E1" : tot <= 5 ? "E2" : "E3";
       this.sql.exec("UPDATE pet_state SET tiger_score=?, day_phase=? WHERE id=1", ts2, dp);
       const msgs = { 1: "Day 1. Every Tiger was once a Mouse.", 3: "Day 3. Three in a row.", 7: "Day 7. One full week.", 30: "Day 30. Thirty days straight." };

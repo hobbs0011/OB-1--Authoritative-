@@ -18,6 +18,61 @@ import { LedgerDO, PetDO, CommandDO, MemoryDO } from './durable_objects.js';
 const VERSION = "1.5.0";
 
 // ── Utility functions ───────────────────────────────────────────────────
+
+// ── Obi Response Sanitizer — strips bot-speak, reasoning artifacts, markdown ──
+// Prevents "crazy Obi" incidents. Always call before returning any AI-generated text.
+function sanitizeObiResponse(raw) {
+  let reply = (raw || "").trim();
+  if (!reply) return "Say that again?";
+
+  // 1. Strip reasoning blocks (DeepSeek V4 think tags + any variant)
+  reply = reply.replace(/<think[^>]*>[\s\S]*?<\/think>/gi, "").trim();
+  reply = reply.replace(/^\s*(Okay|Let me think|I think|Let's see|Hmm|Alright|So,)[\s,.]*/i, "").trim();
+
+  // 2. Strip markdown formatting (bold, italic, code, links, headers, blockquotes)
+  reply = reply.replace(/\*\*(.*?)\*\*/g, "$1");              // bold
+  reply = reply.replace(/__(.*?)__/g, "$1");                   // bold alt
+  reply = reply.replace(/\*(.*?)\*/g, "$1");                   // italic
+  reply = reply.replace(/_(.*?)_/g, "$1");                     // italic alt
+  reply = reply.replace(/`{1,3}[^`]*`{1,3}/g, "");            // inline/block code
+  reply = reply.replace(/\[([^\]]*)\]\([^)]*\)/g, "$1");      // links
+  reply = reply.replace(/^#{1,6}\s+/gm, "");                   // headers
+  reply = reply.replace(/^>\s+/gm, "");                        // blockquotes
+  reply = reply.replace(/^\s*[-*+]\s+/gm, "");                 // bullet lists
+
+  // 3. Strip AI-self-reference lead-ins (catches "As an AI...", "I cannot...", etc.)
+  reply = reply.replace(/^(As an AI[^,.]*[,.])/i, "").trim();
+  reply = reply.replace(/^(I (cannot|can't|don't have|do not have)[^,.]*[,.])/i, "").trim();
+  reply = reply.replace(/^(I understand|I see|I hear|I get)[\s,.]*/i, "").trim();
+
+  // 4. Belt-and-suspenders: cap to 3 sentences max
+  const sentences = reply.match(/[^.!?]+[.!?]+/g);
+  if (sentences && sentences.length > 3) {
+    reply = sentences.slice(0, 3).join(" ").trim();
+  }
+  // If after all stripping we have nothing, use safe fallback
+  if (!reply || reply.length < 3) return "Say that again?";
+
+  return reply;
+}
+
+// ── Context Cap — prevents system prompt overload that confuses Obi ──
+function capContextInjection(basePrompt, ...contexts) {
+  const MAX_CONTEXT_CHARS = 1200;
+  let totalContext = "";
+  for (const ctx of contexts) {
+    if (!ctx) continue;
+    const remaining = MAX_CONTEXT_CHARS - totalContext.length;
+    if (remaining <= 0) break;
+    if (ctx.length > remaining) {
+      totalContext += ctx.slice(0, remaining) + "\n[context trimmed]";
+      break;
+    }
+    totalContext += ctx;
+  }
+  return basePrompt + (totalContext ? "\n\n" + totalContext : "");
+}
+
 function corsHeaders(request) {
   const origin = request?.headers?.get("Origin") || "*";
   return {
@@ -313,26 +368,42 @@ export default {
     }
 
     // ── Soul DNA Capture Pipeline (root-level routes) ────────────────────────
+    // NOTE: try/catch wrapper prevents Error 1101 from unhandled exceptions
 
     // POST /souldna — Submit raw soul DNA for legionnaire processing
     if (path === "/souldna" && request.method === "POST") {
-      const body = await request.json();
-      const res = await handleSoulDNASubmit(body, env);
-      return addCors(res, request);
+      try {
+        const body = await request.json();
+        const res = await handleSoulDNASubmit(body, env);
+        return addCors(res, request);
+      } catch (err) {
+        console.error("[SOULDNA_SUBMIT] error:", err.message);
+        return addCors(json({ error: "Internal error", detail: err.message }, 500), request);
+      }
     }
 
     // GET /souldna/{id} — Check submission status
     if (path.startsWith("/souldna/") && request.method === "GET" && !path.includes("pipeline")) {
-      const id = path.split("/")[2];
-      const res = await handleSoulDNAStatus(id, env);
-      return addCors(res, request);
+      try {
+        const id = path.split("/")[2];
+        const res = await handleSoulDNAStatus(id, env);
+        return addCors(res, request);
+      } catch (err) {
+        console.error("[SOULDNA_STATUS] error:", err.message);
+        return addCors(json({ error: "Internal error", detail: err.message }, 500), request);
+      }
     }
 
     // GET /souldna/pipeline — Actionable pipeline steps grouped by tier
     if (path === "/souldna/pipeline" && request.method === "GET") {
-      const tier = url.searchParams.get("tier") || "OPERATIONAL";
-      const res = await handleSoulDNAPipeline(tier, env);
-      return addCors(res, request);
+      try {
+        const tier = url.searchParams.get("tier") || "OPERATIONAL";
+        const res = await handleSoulDNAPipeline(tier, env);
+        return addCors(res, request);
+      } catch (err) {
+        console.error("[SOULDNA_PIPELINE] error:", err.message);
+        return addCors(json({ error: "Internal error", detail: err.message }, 500), request);
+      }
     }
 
     // ── API routes ────────────────────────────────────────────────────────────
@@ -720,6 +791,8 @@ async function handleAPI(path, request, env, url) {
   }
 
   // ── Face-Saving Protocol — Streak + Accountability (Vietnamese culture) ──
+  if (path === "/api/listening/log" && method === "POST") { const body = await request.json(); return handleListeningLog(body, env, request); }
+  if (path === "/api/listening/today" && method === "GET") { return handleListeningToday(url.searchParams.get("studentId") || "", env); }
   if (path === "/api/student/checkin" && method === "POST") { const body = await request.json(); return handleStudentCheckin(body, request, env); }
   if (path.startsWith("/api/student/streak/") && method === "GET") { const studentId = path.split("/api/student/streak/")[1] || ""; return handleStudentStreak(studentId, request, env); }
   if (path === "/api/student/saveface" && method === "POST") { const body = await request.json(); return handleStudentSaveface(body, request, env); }
@@ -785,7 +858,7 @@ async function handleAPI(path, request, env, url) {
   // ── GET/POST /api/student/goals ───────────────────────────────────────────
   else if (path.includes("/api/student/goals")) {
     if (method === "GET") {
-      const studentId = path.split("?studentId=")[1]?.split("&")[0];
+      const studentId = url.searchParams.get("studentId");
       if (!studentId) return json({ error: "studentId query param required" }, 400);
       const raw = await env.NET_PET_KV.get(`goals:${studentId}`);
       if (!raw) return json({ targetScore: null, deadlineDays: null });
@@ -932,7 +1005,7 @@ async function handleAdminStats(env) {
   const empIdx = await env.NET_PET_KV.get("employer:index").then(r => r ? JSON.parse(r) : []).catch(() => []);
 
   // Active students (streak > 0, lastCheckin within 7 days)
-  const students = ["huong-bluetech","mai-tram-bluetech","quy-bluetech"];
+  const students = ["huong-bluetech","mai-tram-bluetech","quy-bluetech","lam-bluetech","quan-bluetech","quang-bluetech","minh-bluetech"];
   let activeStudents = 0;
   const streakChecks = await Promise.all(students.map(s => env.NET_PET_KV.get(`streak:${s}`).catch(() => null)));
   streakChecks.forEach((raw, i) => {
@@ -1143,7 +1216,7 @@ async function handleSessionHintGet(request, env) {
       const ctxData = await ctxResp.json();
       if (ctxData.context_brief) soulContext = ctxData.context_brief;
     }
-  } catch(e) {}
+  } catch(e) { console.log("[SESSION_HINT] soul context fetch failed:", e.message); }
 
   if (!raw) return new Response(JSON.stringify({ videoTitle: null, soul_context: soulContext }), { status: 200, headers: { "Content-Type": "application/json" } });
   let hint = {};
@@ -1151,10 +1224,95 @@ async function handleSessionHintGet(request, env) {
   return new Response(JSON.stringify({ ...hint, soul_context: soulContext }), { status: 200, headers: { "Content-Type": "application/json" } });
 }
 
+// ── Daily Listening Log — 45-min daily practice tracking ─────────────────
+// Students log listening minutes. Stored in KV + Ledger for immutability.
+
+async function handleListeningLog(body, env, request) {
+  const studentId = body.studentId || "";
+  const minutes = parseInt(body.minutes) || 0;
+  const source = (body.source || "other").slice(0, 30); // youtube, podcast, music, video, class, other
+  const description = (body.description || "").slice(0, 200);
+
+  if (!studentId) return addCors(json({ error: "studentId required" }, 400), request);
+  if (minutes < 1 || minutes > 480) return addCors(json({ error: "minutes must be 1-480" }, 400), request);
+  if (!env.NET_PET_KV) return addCors(json({ error: "NET_PET_KV not configured" }, 500), request);
+
+  const todayIct = new Date(Date.now() + 7 * 3600000).toISOString().slice(0, 10);
+  const kvKey = `listen:${studentId}:${todayIct}`;
+
+  // Merge with any existing log for today
+  const existing = await env.NET_PET_KV.get(kvKey).catch(() => null);
+  const existingData = existing ? JSON.parse(existing) : { minutes: 0, sources: [], entries: [] };
+  const newTotal = existingData.minutes + minutes;
+  const newSources = [...new Set([...existingData.sources, source])];
+  const newEntry = { minutes, source, description, ts: Date.now() };
+
+  const log = {
+    studentId,
+    date: todayIct,
+    minutes: newTotal,
+    sources: newSources,
+    entries: [...(existingData.entries || []), newEntry],
+    lastUpdated: Date.now(),
+  };
+
+  await env.NET_PET_KV.put(kvKey, JSON.stringify(log), { expirationTtl: 86400 * 90 });
+
+  // Append to immutable ledger
+  if (env.LEDGER) {
+    const payload = JSON.stringify({ minutes, source, description, date: todayIct });
+    appendToLedger(studentId, "listening_log", payload, env).catch(() => {});
+  }
+
+  // Auto-checkin to streak tracker (listening counts as practice)
+  if (env.PETS) {
+    try {
+      const petStub = env.PETS.get(env.PETS.idFromName(studentId));
+      await petStub.fetch(new Request("https://do/checkin", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ minutes: Math.min(minutes, 60), confidence: 5 }),
+      }));
+    } catch (_) {}
+  }
+
+  return addCors(json({
+    ok: true,
+    studentId,
+    date: todayIct,
+    todayTotal: newTotal,
+    targetMinutes: 45,
+    remaining: Math.max(0, 45 - newTotal),
+    message: newTotal >= 45
+      ? `Done! ${newTotal} min listening today ✓`
+      : `${newTotal} min logged — ${Math.max(0, 45 - newTotal)} min left for today`,
+  }), request);
+}
+
+async function handleListeningToday(studentId, env) {
+  if (!studentId) return json({ error: "studentId required" }, 400);
+  if (!env.NET_PET_KV) return json({ error: "NET_PET_KV not configured" }, 500);
+
+  const todayIct = new Date(Date.now() + 7 * 3600000).toISOString().slice(0, 10);
+  const kvKey = `listen:${studentId}:${todayIct}`;
+  const raw = await env.NET_PET_KV.get(kvKey).catch(() => null);
+  const log = raw ? JSON.parse(raw) : { minutes: 0, sources: [], entries: [] };
+
+  return json({
+    studentId,
+    date: todayIct,
+    todayTotal: log.minutes || 0,
+    targetMinutes: 45,
+    remaining: Math.max(0, 45 - (log.minutes || 0)),
+    done: (log.minutes || 0) >= 45,
+    sources: log.sources || [],
+  });
+}
+
 // ── Face-Saving Protocol — Streak Tracking + Accountability ──────────────────
 // Vietnamese culture: public commitment prevents quitting. Streaks = social contract.
 
-const FACE_SAVING_STUDENTS = ["huong-bluetech", "mai-tram-bluetech", "quy-bluetech"];
+const FACE_SAVING_STUDENTS = ["huong-bluetech", "mai-tram-bluetech", "quy-bluetech", "lam-bluetech", "quan-bluetech", "quang-bluetech", "minh-bluetech"];
 
 // Get today's date string in ICT (UTC+7) as YYYY-MM-DD
 function getICTDateString(offsetMs = 0) {
@@ -1359,6 +1517,10 @@ async function handleLeaderboard(request, env) {
     { id: "huong-bluetech",     displayName: "Huong" },
     { id: "mai-tram-bluetech",  displayName: "Mai Tram" },
     { id: "quy-bluetech",       displayName: "Quy" },
+    { id: "lam-bluetech",       displayName: "Lam" },
+    { id: "quan-bluetech",      displayName: "Quan" },
+    { id: "quang-bluetech",     displayName: "Quang" },
+    { id: "minh-bluetech",      displayName: "Minh" },
   ];
 
   const CEFR_TARGETS = [50, 150, 300, 500, 800];
@@ -1574,6 +1736,18 @@ async function handleMagicChat(body, request, env) {
     } catch (_) {}
   }
 
+  // Read student language preference for bilingual support
+  if (studentId && env.NET_PET_KV) {
+    try {
+      const lang = await env.NET_PET_KV.get(`lang:${studentId}`);
+      if (lang === 'vi') {
+        context = context + '\n\nVIETNAMESE MODE: Student is A1 beginner, needs bilingual support. Speak English first, then add Vietnamese translation in parentheses for key words and corrections. If student seems lost, say full sentence in Vietnamese then repeat in English. Prioritize understanding over English-only purity.';
+      } else if (lang === 'en') {
+        context = context + '\n\nENGLISH-ONLY MODE: Student prefers English only. Keep language simple — elementary level. Use short sentences, common words. No Vietnamese.';
+      }
+    } catch (_) {}
+  }
+
   const systemContent = OBI_SYSTEM + (context ? `\n\n${context}` : "");
 
   const res = await fetch("https://api.deepseek.com/chat/completions", {
@@ -1595,7 +1769,7 @@ async function handleMagicChat(body, request, env) {
     return addCors(json({ error: `DeepSeek ${res.status}`, detail: errText }, 502), request);
   }
   const data = await res.json();
-  const reply = data.choices?.[0]?.message?.content || "Say that again?";
+  const reply = sanitizeObiResponse(data.choices?.[0]?.message?.content || "");
 
   return addCors(json({ reply, studentId: studentId || null, contextInjected: !!context }), request);
 }
@@ -1717,7 +1891,7 @@ async function buildStructuredContext(env, studentId) {
       if (data.entries?.length > 0) {
         ctx.soul = data.entries.map(e => { try { return JSON.parse(e.payload); } catch { return null; } }).filter(Boolean);
       }
-    } catch (_) {}
+    } catch (err) { console.log("[CTX_BUILDER] soul ledger fetch failed:", err.message); }
   }
 
   // Load recent session events (last 10 structured learning events)
@@ -1726,7 +1900,7 @@ async function buildStructuredContext(env, studentId) {
       const stub = env.SESSIONS.get(env.SESSIONS.idFromName(`events-${studentId}`));
       const res = await stub.fetch(new Request("https://do/events/recent?limit=10"));
       ctx.sessionEvents = (await res.json()).events || [];
-    } catch (_) {}
+    } catch (err) { console.log("[CTX_BUILDER] session events fetch failed:", err.message); }
   }
 
   // Load student profile + behavioral state + weakness patterns (parallel)
@@ -1741,7 +1915,7 @@ async function buildStructuredContext(env, studentId) {
       ctx.studentState = (await stateRes.json()).studentState || null;
       ctx.profile = (await profileRes.json()).profile || null;
       ctx.weakPoints = (await wpRes.json()).weakPoints || [];
-    } catch (_) {}
+    } catch (err) { console.log("[CTX_BUILDER] profile DO fetch failed:", err.message); }
   }
 
   // Load pet state (streak, tiger score, mood)
@@ -1749,7 +1923,7 @@ async function buildStructuredContext(env, studentId) {
     try {
       const stub = env.PETS.get(env.PETS.idFromName(studentId));
       ctx.petState = (await stub.fetch(new Request("https://do/state")).then(r => r.json())).state || null;
-    } catch (_) {}
+    } catch (err) { console.log("[CTX_BUILDER] pet DO fetch failed:", err.message); }
   }
 
   return ctx;
@@ -1852,11 +2026,24 @@ function formatContextForPrompt(ctx) {
 
 async function logSoulEvent(env, studentId, sessionId, role, text) {
   const url = (env.SOUL_LOGGER_URL || 'https://soul-logger.mrmichaelhobbs123.workers.dev') + '/api/soul/event';
-  await fetch(url, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ student_id: studentId, session_id: sessionId, role, text, timestamp: new Date().toISOString() })
-  });
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), 5000); // 5s timeout — don't block the worker
+  try {
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ student_id: studentId, session_id: sessionId, role, text, timestamp: new Date().toISOString() }),
+      signal: ctrl.signal,
+    });
+    clearTimeout(timer);
+    if (!res.ok) {
+      const errBody = await res.text().catch(() => '');
+      console.error(`[SOUL-EVENT] FAILED ${res.status} from ${url}: ${errBody}`);
+    }
+  } catch (err) {
+    clearTimeout(timer);
+    console.error(`[SOUL-EVENT] FETCH ERROR: ${err.message} (student=${studentId}, session=${sessionId}, role=${role})`);
+  }
 }
 
 // ── Chat (DeepSeek + Obi + Ledger memory injection) ──────────────────────────
@@ -1907,7 +2094,7 @@ async function handleChat(body, env) {
           ledgerContext = `\n\nSTUDENT LEDGER (${histData.entries.length} total exchanges — this is your unalterable memory of this student):\n${lines.join("\n---\n")}`;
         }
       }
-    } catch (_) {}
+    } catch (err) { console.log("[CHAT] ledger fetch failed:", err.message); }
   }
 
   // Inject Obi system prompt with ledger context + last real-class session appended
@@ -1925,7 +2112,7 @@ async function handleChat(body, env) {
         const vocabList = Array.isArray(s.vocabList) ? s.vocabList.join(", ") : (s.vocabList || "");
         sessionContext = `\n\nLAST REAL CLASS (${dateStr}): Topic: "${s.topic || ""}". Vocab covered: ${vocabList}. Level: ${s.studentLevel || ""}. Teacher notes: "${s.teacherNotes || ""}". Continue from exactly here — your first response should reference this content naturally without announcing it.`;
       }
-    } catch (_) {}
+    } catch (err) { console.log("[CHAT] session context fetch failed:", err.message); }
   }
 
   // ── Memory Brain: Weakness injection + Re-entry detection ─────────────
@@ -1941,7 +2128,7 @@ async function handleChat(body, env) {
       const wpData = await wpRes.json();
       weakPointsData = wpData.weakPoints || [];
       weaknessContext = buildWeaknessPrompt(weakPointsData);
-    } catch (_) {}
+    } catch (err) { console.log("[CHAT] weakness fetch failed:", err.message); }
   }
   if (studentId !== "anonymous" && env.PETS) {
     try {
@@ -1957,12 +2144,12 @@ async function handleChat(body, env) {
       }
       const signals = buildRewardSignals(weakPointsData, streakDays);
       rewardContext = buildRewardPrompt(signals);
-    } catch (_) {}
+    } catch (err) { console.log("[CHAT] pet/reward fetch failed:", err.message); }
   }
 
   // ── v2 Pipeline: Load structured context for continuity engine ────────
   if (studentId !== "anonymous") {
-    try { structuredCtx = await buildStructuredContext(env, studentId); } catch (_) {}
+    try { structuredCtx = await buildStructuredContext(env, studentId); } catch (err) { console.log("[CHAT] structured context failed:", err.message); }
   }
   const contextInjection = structuredCtx ? formatContextForPrompt(structuredCtx) : "";
 
@@ -1975,7 +2162,7 @@ async function handleChat(body, env) {
         const ctxData = await ctxResp.json();
         if (ctxData.context_brief) soulContext = `\n\nSOUL CONTEXT (who this student really is):\n${ctxData.context_brief}`;
       }
-    } catch(e) {}
+    } catch(e) { console.log("[CHAT] soul context fetch failed:", e.message); }
   }
 
   // ── Language mode: read student lang preference from KV ──────────
@@ -1986,7 +2173,7 @@ async function handleChat(body, env) {
       if (lang === "vi") {
         vietnameseContext = `\n\nVIETNAMESE MODE: This student is A1 beginner and needs bilingual support. Speak English first, then add Vietnamese translation in parentheses for key words and corrections. If the student seems lost or confused, say the full sentence in Vietnamese to help them understand, then repeat it in English. Use Vietnamese naturally — like a bilingual Vietnamese-English teacher would. Always prioritize understanding over English-only purity.`;
       }
-    } catch (_) {}
+    } catch (err) { console.log("[CHAT] lang pref fetch failed:", err.message); }
   }
 
   const isFirstSession = ledgerContext === "" && sessionContext === "";
@@ -1997,7 +2184,7 @@ async function handleChat(body, env) {
 
   const hasSystem = messages.some(m => m.role === "system");
   if (!hasSystem) {
-    messages.unshift({ role: "system", content: OBI_SYSTEM + ledgerContext + sessionContext + weaknessContext + reEntryContext + rewardContext + contextInjection + soulContext + vietnameseContext + firstSessionContext });
+    messages.unshift({ role: "system", content: capContextInjection(OBI_SYSTEM, ledgerContext, sessionContext, weaknessContext, reEntryContext, rewardContext, contextInjection, soulContext, vietnameseContext, firstSessionContext) });
   }
 
   const dsAbort = new AbortController();
@@ -2043,11 +2230,7 @@ async function handleChat(body, env) {
   }
 
   const choice = data.choices?.[0]?.message;
-  let reply = (choice?.content || choice?.reasoning_content || "").replace(/<think>[\s\S]*?<\/think>/gi, "").trim();
-  if (!reply) reply = "Say that again?";
-  // Belt-and-suspenders: cap to 3 sentences server-side regardless of token count
-  const sentences = reply.match(/[^.!?]+[.!?]+/g) || [reply];
-  if (sentences.length > 3) reply = sentences.slice(0, 3).join(" ").trim();
+  let reply = sanitizeObiResponse(choice?.content || choice?.reasoning_content || "");
 
   // ── Auto-write every exchange to the Cryptographic Immutable Ledger ───────
   const userMsg = messages.filter(m => m.role === "user").pop()?.content || "";
@@ -2095,7 +2278,7 @@ async function handleChat(body, env) {
 
   // ── Memory Compression: update Soul DNA v1 summary after each interaction ─
   if (studentId !== "anonymous") {
-    try { await updateStudentMemory(studentId, env); } catch (_) {}
+    try { await updateStudentMemory(studentId, env); } catch (err) { console.log("[CHAT] memory compression failed:", err.message); }
   }
 
   // ── v2 Pipeline: Extract signals → Write session event → Update state ───
@@ -2265,7 +2448,7 @@ async function handleCorrect(body, env) {
       if (past.length > 0) {
         mistakeContext = `\n\nSTUDENT'S PAST MISTAKES (they keep getting these wrong — watch for patterns):\n${past.slice(-5).map(m => `- "${m}"`).join("\n")}`;
       }
-    } catch (_) {}
+    } catch (err) { console.log("[CORRECT] ledger fetch failed:", err.message); }
   }
 
   // Load weakness data
@@ -2276,7 +2459,7 @@ async function handleCorrect(body, env) {
       const wpRes = await profileStub.fetch(new Request("https://do/weakness/get"));
       const wpData = await wpRes.json();
       weakContext = buildWeaknessPrompt(wpData.weakPoints || []);
-    } catch (_) {}
+    } catch (err) { console.log("[CORRECT] weakness fetch failed:", err.message); }
   }
 
   const messages = [
@@ -2491,7 +2674,8 @@ async function handleOnboarding(body, env) {
     false,
     ["sign"]
   );
-  const sig = await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(body.studentId));
+  const canonicalId = (body.studentId || "").toLowerCase();
+  const sig = await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(canonicalId));
   const studentToken = Array.from(new Uint8Array(sig)).map(b => b.toString(16).padStart(2, "0")).join("");
 
   const resData = await res.json().catch(() => ({}));
@@ -2504,6 +2688,7 @@ async function handleOnboarding(body, env) {
 // Token = HMAC-SHA256(studentId, SESSION_SECRET). Issued at onboarding, stored client-side.
 async function _verifyStudentToken(studentId, token, env) {
   if (!token) return false;
+  const canonicalId = (studentId || "").toLowerCase();
   const key = await crypto.subtle.importKey(
     "raw",
     new TextEncoder().encode(env.SESSION_SECRET || "phoenix-fallback-dev-key"),
@@ -2511,7 +2696,7 @@ async function _verifyStudentToken(studentId, token, env) {
     false,
     ["sign"]
   );
-  const sig = await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(studentId));
+  const sig = await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(canonicalId));
   const expected = Array.from(new Uint8Array(sig)).map(b => b.toString(16).padStart(2, "0")).join("");
   return expected === token;
 }

@@ -393,8 +393,7 @@
       <p style="color:#667;font-size:0.78rem;margin-top:8px;text-align:center;">Watch this to learn how to use your portal and OBI chat.</p>
     </div>
     </div>
-                    <div class="ql-sub">Chat with OBI now</div>
-                </a>
+                <a href="/magic-chat?studentId=mai-tram-bluetech" class="nav-coach">🗣️ Chat with OBI</a>
             </div>
         </div>
 
@@ -442,7 +441,7 @@
         function showPortal() {
             document.getElementById('loginScreen').classList.add('hidden');
             document.getElementById('topNav').classList.remove('hidden');
-            document.getElementById('mainContent').style.display = '';
+            fetch('/api/student/lang', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({studentId:STUDENT_ID,lang:'en'})}).catch(()=>{});
             loadPortalData();
             document.dispatchEvent(new Event('portalUnlocked'));
         }
@@ -546,7 +545,8 @@
         document.getElementById('setPwSkip').addEventListener('click', () => { document.getElementById('setPwModal').classList.add('hidden'); });
 
         // Logout
-        document.getElementById('logoutBtn').addEventListener('click', () => {
+        const logoutEl = document.getElementById('logoutBtn');
+        if (logoutEl) logoutEl.addEventListener('click', () => {
             localStorage.removeItem(AUTH_KEY);
             window.location.reload();
         });
@@ -564,19 +564,22 @@
                 const sessions = stateRes?.sessions ?? stateRes?.totalSessions ?? stateRes?.pet?.sessions ?? 0;
 
                 if (sessions === 0 && tigerScore === 0) {
-                    document.getElementById('statsGrid').style.display = 'none';
-                    document.getElementById('day1Card').style.display = 'block';
+                    const sg = document.getElementById('statsGrid'); const d1 = document.getElementById('day1Card');
+                    if (sg) sg.style.display = 'none';
+                    if (d1) d1.style.display = 'block';
                 } else {
-                    document.getElementById('statsGrid').style.display = 'grid';
-                    document.getElementById('day1Card').style.display = 'none';
+                    const sg = document.getElementById('statsGrid'); const d1 = document.getElementById('day1Card');
+                    if (sg) sg.style.display = 'grid';
+                    if (d1) d1.style.display = 'none';
                     setVal('tigerScore', tigerScore);
                     setVal('streakVal', streak + (streak === 1 ? ' day' : ' days'));
                     setVal('sessionsVal', sessions);
                     setVal('nextSessionVal', 'Anytime');
                 }
             } catch {
-                document.getElementById('statsGrid').style.display = 'none';
-                document.getElementById('day1Card').style.display = 'block';
+                const sg = document.getElementById('statsGrid'); const d1 = document.getElementById('day1Card');
+                if (sg) sg.style.display = 'none';
+                if (d1) d1.style.display = 'block';
             }
         }
 
