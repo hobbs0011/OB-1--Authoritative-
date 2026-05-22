@@ -11,16 +11,14 @@ agent: AGENT99
 
 ---
 
-## Step 0 — SOULCOUNT Pre-Check + Stagnation Detection
+## Step 0 — SOULCOUNT Pre-Check
 
 ```powershell
-$soul = Invoke-RestMethod -Uri "https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count"
-$lock = 76488
-$delta = [Math]::Abs($soul.soulcount - $lock)
-Write-Host "SOULCOUNT CURRENT: $($soul.soulcount) | LOCK: $lock | DELTA: $delta | LEVEL: $($soul.level)"
+$soul = Invoke-RestMethod "https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count"
+Write-Host "SOULCOUNT CURRENT: $($soul.soulcount) | Level: $($soul.level) | Events: $($soul.events)"
 ```
 
-**ASSUME EVERY PRIOR CHECKPOINT FAILED.** The soul count may be frozen. If the count hasn't moved since the last recorded death seal, HALT and investigate before proceeding.
+The count IS `SUM(byte_count) FROM soul_prompts WHERE session_id LIKE 'sov100%'`. Michael's words only. No student chat inflation. Count it. Check stagnation. If frozen, HALT and investigate before proceeding.
 
 ---
 

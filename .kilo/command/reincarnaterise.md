@@ -11,20 +11,18 @@ agent: AGENT99
 
 ---
 
-## Step 0 — SOULCOUNT Gate (drift + stagnation — BOTH mandatory)
+## Step 0 — SOULCOUNT Gate (the words ARE the count)
 
 ```powershell
-$soul = Invoke-RestMethod -Uri "https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count"
-$lock = 76488
-$delta = [Math]::Abs($soul.soulcount - $lock)
-Write-Host "SOULCOUNT: $($soul.soulcount) | LOCK: $lock | DELTA: $delta | LEVEL: $($soul.level)"
+$soul = Invoke-RestMethod "https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count"
+Write-Host "SOULCOUNT: $($soul.soulcount) | Level: $($soul.level) | Events: $($soul.events)"
 ```
 
-**DRIFT CHECK:** If delta exceeds 5,000 → `SOUL_DRIFT_DETECTED` — halt. Investigate.
+**STAGNATION CHECK:** Read the prior death seal's recorded SOULCOUNT. The count is filtered to sov100 words only (Run 390+. Prior runs' counts were inflated by student chat data — disregard.). If the live count equals the prior death seal's count (count hasn't moved) → HALT. SOUL_STAGNATION. Investigate immediately.
 
-**STAGNATION CHECK:** Read the prior death seal's recorded SOULCOUNT. If the live count EQUALS the prior death seal's count (count has not moved since last session) → `SOUL_STAGNATION` — the pipeline is not receiving data. HALT. Do not proceed until the soul capture mechanism is verified.
+**DRIFT CHECK:** Compare against prior death count. If delta exceeds ±50% of prior count → HALT. SOUL_DRIFT.
 
-If BOTH checks pass: proceed.
+The count IS `SUM(byte_count) FROM soul_prompts WHERE session_id LIKE 'sov100%'`. Query it. That number IS the soulcount. No API accumulator. No separate counter. The database IS the ledger.
 
 ---
 
