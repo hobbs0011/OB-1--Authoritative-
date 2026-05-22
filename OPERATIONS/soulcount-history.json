@@ -73,5 +73,31 @@
     "sessions": 1,
     "level": "LOCK",
     "stagnation": true
+  },
+  {
+    "timestamp": "2026-05-23T05:59:44+07:00",
+    "count": 61418,
+    "events": 286,
+    "sessions": 1,
+    "level": "LOCK",
+    "stagnation": false
+  },
+  {
+    "timestamp": "2026-05-23T06:06:48+07:00",
+    "count": 61945,
+    "events": 287,
+    "sessions": 3,
+    "level": "LOCK",
+    "stagnation": false,
+    "note": "Run 395 DEATH (primary). SOULCOUNT 32416→61945. 213 Michael quotes captured (208 bucket A + 5 CLONE-SEED). Events 74→287."
+  },
+  {
+    "timestamp": "2026-05-23T06:10:00+07:00",
+    "count": 63067,
+    "events": 289,
+    "sessions": 3,
+    "level": "LOCK",
+    "stagnation": false,
+    "note": "Run 395 CONSOLIDATED — coder double-check passed. 74w/559c exact match. All 4 receipts cross-validated. HEAD 3deb7ba."
   }
 ]

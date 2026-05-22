@@ -1,8 +1,13 @@
 {
-  "soul_ok": false,
-  "timestamp": "2026-05-23T04:52:18.5283520+07:00",
-  "doctor_ok": true,
-  "git_head": "d0fc3c0 fix(T2): obi.ps1 soul-check coldBoot path + PSObject scalar fixes + BOOT stamp",
+  "git_branch": "master",
+  "timestamp": "2026-05-23T06:16:59+07:00",
   "verify_ok": true,
-  "git_branch": "master"
+  "git_head": "3deb7ba fix: COLD-START-BOOT FINGERPRINT → f37d816 — final Run 395 death HEAD",
+  "soul_ok": true,
+  "doctor_ok": true,
+  "soulcount": 63067,
+  "events": 289,
+  "level": "LOCK",
+  "run": 396,
+  "mission": "OB-1 POST-MERGE9 CONSOLIDATION + Growth Infrastructure Buildout"
 }

@@ -1,5 +1,5 @@
 # HEAVY LEDGER PIPELINE CURSOR
-## Last Updated: 2026-05-20 (Run 344 boot-refresh / HEAD 8b2053f2)
+## Last Updated: 2026-05-23 (Run 396 RISE — SUPER SAIYAN sweep / HEAD 3deb7ba)
 
 ### Current Position
 - **Next Target:** HL-127 (next gap slot — DATE: UNKNOWN/todo compilation)
@@ -10,6 +10,7 @@
 - **Last Completed ledger:** HL-141 (run305, wave_position: 36, terminal)
 - **Last Commit:** a7cdfda run315: death protocol sync artifact — soul logger verified, workspace sync complete
 - **Last Run:** 315 (2026-05-15)
+- **Last Pipeline Update:** 396 (2026-05-23 — SUPER SAIYAN RISE sweep — .kilo zone CLEAN, SITE zone CLEAN, VAULT-NET-SEEDS confirmed 25 files, KOV 9 gaps + 6 SSA still pending)
 
 ## Wave 8 Manifest (HL-085 → HL-141)
 
