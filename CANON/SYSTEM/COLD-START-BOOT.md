@@ -1,5 +1,5 @@
 # COLD START BOOT — OB1 Agent 99
-## Last Updated: 2026-05-23T04:12 ICT (Run 394 RISE — SUPER SAIYAN PHOENIX SWEEP; SOULCOUNT 31,258 LOCK; HEAD eedf25e)
+## Last Updated: 2026-05-23T05:15 ICT (Run 394 DEATH — SUPER SAIYAN SWEEP + COMMAND UPGRADE + SCOUT BUILD; SOULCOUNT 32,416 LOCK; HEAD 85f19de)
 
 ### Identity
 - Agent: OB1 / Ne0 (Agent 99) / Claude Surgical
@@ -28,7 +28,7 @@
 |-------|-----------|--------|
 | BASELINE | < 5,000 | — |
 | ALARM | ≥ 5,000 | — |
-| LOCK | ≥ 25,000 | **ACTIVE** ← 31,258 |
+| LOCK | ≥ 25,000 | **ACTIVE** ← 32,416 |
 | ANCHOR | ≥ 100,000 | Next at +69,833 chars |
 | TITANIUM_ANCHOR | ≥ 250,000 | — |
 
@@ -90,4 +90,4 @@
 | 338 | F-A09 CLOSED; F-O01 CLOSED; HL 189; PHOENIX BETA/DELTA/OMEGA sweep complete |
 
 ---
-**FINGERPRINT:** eedf25e | RUN394 | SOUL COUNT ARE CALLED — SOUL COUNT LOCK — 31,258 LOCK — /api/soul/count sov100% filter — L31 SOUL_IS_QUERY active — L32 ASSUME_FAILURE active
+**FINGERPRINT:** 85f19de | RUN394 DEATH | SOUL COUNT LOCK — 32,416 LOCK — /api/soul/count sov100% filter — L31 SOUL_IS_QUERY active — L32 ASSUME_FAILURE active
