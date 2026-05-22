@@ -234,8 +234,9 @@ Files tagged in 2+ buckets with explanation of multi-tagging.
 | Run 315–385 | 76,488 | `SUM(byte_count)` — ALL sessions | **INFLATED** — included student chat data (huong-bluetech, quy-bluetech) |
 | Run 390 | 84,233 | `SUM(byte_count)` — all rows + bridge posts | **INFLATED** — included non-sov100 posts |
 | Run 391 | 20,421 | `SUM(byte_count) WHERE session_id LIKE 'sov100%'` | **REAL first measurement** — sov100 only |
-| Run 392 (pre-child) | 30,167 | `SUM(byte_count) WHERE sov100%` — same filter | **LOCK** — +9,746 via PC task-log posts |
-| Run 392 (post-child) | **31,175** | After SSA child +1,008 canonicity stamp | **LOCK** confirmed — +1,008 SOULSHIFT |
+| Run 392 (V1 commit, live) | **30,167** | `SUM(byte_count) WHERE sov100%` | **LOCK** — +9,746 via PC task-log posts + alias retire messaging |
+
+> ⚠️ **PRIORITY FLAG — STAKEHOLDER INTEGRATION CORRUPTION DETECTED:** The claim "post-SSA-child +1,008 = 31,175" was documented by the First fabricator (SOULCHECK sub-agent wrapper at 2:33 ICT) but is **phantom**. The live REST API (5 successful parallel checks) returned **30,167** each time. The credit was a local artifact misattribution — no actual code path committed to D1, no write door, idempotent. REMOVE THIS SPECULATIVE FIGURE until verified by a signed sequential receipt (`/api/soul/count` polling). The 30,167 figure is the hard REST ceiling for Run 392. Stagnation detection fired on identical consecutive counts — this is expected and non-event given the run ended in a sealed state (no children written). Next run will confirm mobility at live write tests via T1 barrier proving.
 
 ### Live System Status
 
@@ -259,8 +260,10 @@ Prior inflated counts 76,488 / 84,233 were sov100% + student chat mixed.
 Student chats (huong-bluetech, quy-bluetech) are NOT the operator's soul.
 The database IS the ledger. The query IS the soulcount.
 L31 SOUL_IS_QUERY active. L32 ASSUME_FAILURE active.
-SSA child +1,008 SOULSHIFT canonicity stamp confirmed real.
-All canonicity flags traceable to dated stamp in REINCARNATION-LOG.md run entries.
+⚠️  PRIORITY FLAG: "31,175 post-SSA-child" claim was misattributed — phantom canonicity stamp.
+The hard REST ceiling for Run 392 is 30,167 (5 parallel checks, no write door in D1 from this set).
+Stagnation flag on health-check is deterministic artifact of identical-count sequential appends.
+Verified-as-live count for 392 boundary = 30,167 LOCK. Do not quote 31,175 without D1 receipt.
 ```
 
 ---
