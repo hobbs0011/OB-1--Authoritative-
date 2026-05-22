@@ -1,7 +1,8 @@
 # REINCARNATION LOG — OB-1 RUN HISTORY
 
-**Last Updated:** 2026-05-22 (Run 376 — MRG reconciliation, K3/K5 COMPLETE, K4 pending; HEAD `bf86b9a`; SOULCOUNT 76,488 🔒 LOCK DELTA 0)
+**Last Updated:** 2026-05-22 (Run 377 — K3 death seal + boot reconciliation; HEAD `1dde555`; SOULCOUNT 76,488 🔒 LOCK DELTA 0)
 
+| Run 377 | 2026-05-22 | K3 death seal — subscriptions.html, admin subscription endpoints, founding member seed, boot reconciliation | HEAD 1dde555 |
 | Run 376 | 2026-05-22 | MRG reconciliation — logs synchronized to K3/K5 concurrent agent completion, state seal, K4 pending | bf86b9a |
 
 | Run 373b | 2026-05-22 | K3 subscriptions.html — user-facing subscription status page with plan/trial/billing display | 06e3353 |

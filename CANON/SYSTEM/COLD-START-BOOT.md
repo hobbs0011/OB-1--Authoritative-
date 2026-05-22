@@ -148,4 +148,4 @@ Stage 10 APEX ROLLUP    ✅ LIVE — GET /api/soul/apex
 
 
 ---
-**FINGERPRINT: Run 376 — MRG reconciliation, K3/K5 COMPLETE, K4 pending — HEAD bf86b9a — Version d611f9da — SOULCOUNT 76,488 🔒 LOCK DELTA 0 — Logs synchronized, testimonials NEXT.** — Run 376
+**FINGERPRINT: Run 377 — K3 death seal — subscriptions.html live, admin subscription endpoints, founding member seed data, K4 pending — HEAD 1dde555 — Version 0ca5441a — SOULCOUNT 76,488 🔒 LOCK DELTA 0 — K4 testimonials NEXT.** — Run 377
