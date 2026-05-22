@@ -3,6 +3,12 @@ main = "src/index.js"
 compatibility_date = "2026-03-16"
 compatibility_flags = ["nodejs_compat"]
 
+# Shared D1 — soul-archive (soul-logger's database for direct event logging)
+[[d1_databases]]
+binding = "SOUL_DB"
+database_name = "soul-archive"
+database_id = "c69a11bc-064b-478f-9b1f-e9b8e2431fb8"
+
 # DNS route - requires naturalenglishtraining.com zone to be on this CF account first
 # [[routes]]
 # pattern = "www.naturalenglishtraining.com/*"

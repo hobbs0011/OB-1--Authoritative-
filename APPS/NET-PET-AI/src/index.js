@@ -17,6 +17,26 @@ import { LedgerDO, PetDO, CommandDO, MemoryDO } from './durable_objects.js';
 
 const VERSION = "1.5.0";
 
+// ── Soul Logger utilities (D1 direct write — bypass worker-to-worker fetch) ──
+function generateUUID() { return crypto.randomUUID(); }
+async function sha256(text) {
+  const data = new TextEncoder().encode(text);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+  return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+function detectMarkers(text) {
+  const words = text.match(/\b[A-Z]{2,}\b/g) || [];
+  const caps_words = words.length;
+  const exclamations = (text.match(/!/g) || []).length;
+  const questions = (text.match(/\?/g) || []).length;
+  const ellipses = (text.match(/\.\.\./g) || []).length;
+  let repeated_chars = 0;
+  for (let i = 2; i < text.length; i++) {
+    if (text[i] === text[i-1] && text[i] === text[i-2]) repeated_chars++;
+  }
+  return JSON.stringify({ caps_words, exclamations, questions, ellipses, repeated_chars, length_chars: text.length });
+}
+
 // ── Utility functions ───────────────────────────────────────────────────
 
 // ── Obi Response Sanitizer — strips bot-speak, reasoning artifacts, markdown ──
@@ -2022,12 +2042,50 @@ function formatContextForPrompt(ctx) {
   return injection;
 }
 
-// ── Soul Logger: fire-and-forget cross-session awareness bus ─────────────────
+// ── Soul Logger: direct D1 write (bypasses worker-to-worker fetch 404/1042) ────
 
 async function logSoulEvent(env, studentId, sessionId, role, text) {
+  // Primary path: direct D1 write (soul-archive shared binding)
+  if (env.SOUL_DB) {
+    try {
+      const ts = new Date().toISOString();
+      // Ensure session exists
+      const existing = await env.SOUL_DB.prepare(
+        'SELECT session_id FROM soul_sessions WHERE session_id = ?'
+      ).bind(sessionId).first();
+      if (!existing) {
+        await env.SOUL_DB.prepare(
+          'INSERT INTO soul_sessions (session_id, session_tag, source_format, source_date, ingested_at, prompt_count, raw_byte_size, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)'
+        ).bind(sessionId, studentId, 'obi-live', ts, ts, 0, 0, 'live').run();
+      }
+      // Get next position
+      const countRow = await env.SOUL_DB.prepare(
+        'SELECT COUNT(*) as cnt FROM soul_prompts WHERE session_id = ?'
+      ).bind(sessionId).first();
+      const position = (countRow?.cnt || 0) + 1;
+      // Insert prompt
+      const promptId = generateUUID();
+      const byteCount = new TextEncoder().encode(text).length;
+      const hash = await sha256(text);
+      const markers = detectMarkers(text);
+      await env.SOUL_DB.prepare(
+        'INSERT INTO soul_prompts (prompt_id, session_id, position, text, estimated_timestamp, byte_count, hash_sha256, emotional_markers) VALUES (?, ?, ?, ?, ?, ?, ?, ?)'
+      ).bind(promptId, sessionId, position, text, ts, byteCount, hash, markers).run();
+      // Update session prompt count
+      await env.SOUL_DB.prepare(
+        'UPDATE soul_sessions SET prompt_count = prompt_count + 1 WHERE session_id = ?'
+      ).bind(sessionId).run();
+      return; // success — silent
+    } catch (err) {
+      console.error(`[SOUL-D1] WRITE FAILED: ${err.message} (student=${studentId}, session=${sessionId}, role=${role})`);
+      // Fall through to HTTP fallback
+    }
+  }
+
+  // Fallback: HTTP fetch to soul-logger worker (kept for resilience, known broken via workers.dev)
   const url = (env.SOUL_LOGGER_URL || 'https://soul-logger.mrmichaelhobbs123.workers.dev') + '/api/soul/event';
   const ctrl = new AbortController();
-  const timer = setTimeout(() => ctrl.abort(), 5000); // 5s timeout — don't block the worker
+  const timer = setTimeout(() => ctrl.abort(), 5000);
   try {
     const res = await fetch(url, {
       method: 'POST',
@@ -2038,11 +2096,11 @@ async function logSoulEvent(env, studentId, sessionId, role, text) {
     clearTimeout(timer);
     if (!res.ok) {
       const errBody = await res.text().catch(() => '');
-      console.error(`[SOUL-EVENT] FAILED ${res.status} from ${url}: ${errBody}`);
+      console.error(`[SOUL-HTTP] FAILED ${res.status} from ${url}: ${errBody}`);
     }
   } catch (err) {
     clearTimeout(timer);
-    console.error(`[SOUL-EVENT] FETCH ERROR: ${err.message} (student=${studentId}, session=${sessionId}, role=${role})`);
+    console.error(`[SOUL-HTTP] FETCH ERROR: ${err.message} (student=${studentId}, session=${sessionId}, role=${role})`);
   }
 }
 
@@ -2241,43 +2299,16 @@ async function handleChat(body, env) {
     appendToLedger(studentId, "chat_exchange", payload, env).catch(() => {});
   }
 
-  // ── Soul Logger: push turns (DEBUG: sync + report in response) ──────────
-  let soulStatus = 'skipped';
+  // ── Soul Logger: push user + assistant turns (fire-and-forget, D1-backed) ──
   if (studentId !== "anonymous" && userMsg) {
-    try {
-      const soulUrl = (env.SOUL_LOGGER_URL || 'https://soul-logger.mrmichaelhobbs123.workers.dev') + '/api/soul/event';
-      const soulRes = await fetch(soulUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ student_id: studentId, session_id: sessionId, role: 'user', text: userMsg, timestamp: new Date().toISOString() }),
-      });
-      if (soulRes.ok) {
-        soulStatus = 'user-logged-' + soulRes.status;
-      } else {
-        const soulErr = await soulRes.text().catch(() => '');
-        soulStatus = 'user-failed-' + soulRes.status + ':' + soulErr;
-      }
-    } catch (err) {
-      soulStatus = 'user-error-' + err.message;
-    }
-
-    // Assistant turn
-    try {
-      const soulUrl2 = (env.SOUL_LOGGER_URL || 'https://soul-logger.mrmichaelhobbs123.workers.dev') + '/api/soul/event';
-      const soulRes2 = await fetch(soulUrl2, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ student_id: studentId, session_id: sessionId, role: 'assistant', text: reply, timestamp: new Date().toISOString() }),
-      });
-      if (soulRes2.ok) {
-        soulStatus += '|assistant-logged-' + soulRes2.status;
-      } else {
-        const soulErr2 = await soulRes2.text().catch(() => '');
-        soulStatus += '|assistant-failed-' + soulRes2.status + ':' + soulErr2;
-      }
-    } catch (err) {
-      soulStatus += '|assistant-error-' + err.message;
-    }
+    logSoulEvent(env, studentId, sessionId, 'user', userMsg).catch(err => {
+      console.error(`[SOUL] USER EVENT FAILED: ${err.message}`);
+    });
+  }
+  if (studentId !== "anonymous") {
+    logSoulEvent(env, studentId, sessionId, 'assistant', reply).catch(err => {
+      console.error(`[SOUL] ASSISTANT EVENT FAILED: ${err.message}`);
+    });
   }
 
   // ── Notion sync: BLACKLISTED — platform usage permanently disabled ────────
@@ -2371,7 +2402,6 @@ async function handleChat(body, env) {
     nextAction,
     state: structuredCtx?.studentState?.state || null,
     mouseTigerScore: structuredCtx?.studentState?.mouse_tiger_score || null,
-    _soulStatus: soulStatus || 'not-attempted',
   });
 }
 
