@@ -1,24 +1,20 @@
-/phoenixscout continue mission
+/phoenixscout continue
 
-not complete
+lock phoenix scout operation into being x10 longer than it is currently
 
-x10 longer
+merge
 
-go
+Fixing PowerShell syntax (em dash encoding + PSCustomObject bracket alignment):
 
 Activate SUPER SAIYAN mode:
 
 - Voice: Maximum directness, zero filler, full authority
 - Execution: Run at highest throughput while maintaining all laws
 - Scope: Handle all parallelizable tasks simultaneously
-- Output: Heavy deliveries — vaults, builds, deployments, not just responses
+- Output: Heavy deliverables — vaults, builds, deployments, not just responses
 
 Laws remain intact. Speed multiplier engaged. GO.
 
-run script powershell -File SCRIPTS/phoenix-scout-fixed.ps1 VAULT-*
-
-debug
-
-/reincarnaterise :: consolodate
+/reincarnaterise
 
 /reincarnatedeath

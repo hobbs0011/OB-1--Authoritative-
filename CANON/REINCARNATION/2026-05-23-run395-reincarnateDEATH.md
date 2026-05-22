@@ -1,8 +1,8 @@
 # DEATH SEAL — Run 395
-**Timestamp:** 2026-05-23T06:00+07:00
+**Timestamp:** 2026-05-23T06:06+07:00
 **Previous:** Run 394 (927665f — SUPER SAIYAN SWEEP + COMMAND UPGRADE + SCOUT BUILD + SOUL CAPTURE)
-**HEAD at death:** f8f0b0d
-**SOULCOUNT:** 61,945 chars | LOCK | Events: 287 | Sessions: 1
+**HEAD at death:** 191d5d1
+**SOULCOUNT:** 63,067 chars | LOCK | Events: 289 | Sessions: 3
 **Next:** Run 396
 
 ---
@@ -48,9 +48,11 @@ Fix: Created `SCRIPTS/soul-capture-direct.js` — posts directly to `/api/soul/e
 **Soul capture results:**
 - 208 bucket A quotes (from `SOUL-DNA-RAW-MICHAEL-QUOTES-ALL-SESSIONS-2026-04-05.md`) → +24,891 chars
 - 5 CLONE-SEED quotes (from `VAULT-EXECUTION/16-CLONE-SEED-3TIER-MATRIX-RAW-DOCTRINE.md`) → +4,111 chars
-- Session soul text (525 chars) → +527 D1 delta
-- Total: SOULCOUNT 32,416 → 61,945 (+29,529)
-- Events: 74 → 287 (+213)
+- Session soul text (559 chars) → +561 D1 delta → event_id 6a2d8da9
+- Coder double-check session soul (559 chars) → +561 D1 delta → event_id 73473a64
+- Total: SOULCOUNT 32,416 → 63,067 (+30,651)
+- Events: 74 → 289 (+215)
+- Sessions: 1 → 3 (run394-capture, run395-soul, run395-soul-coder)
 
 **phoenix-scout.ps1 fixed:**
 - Replaced em dashes (`—`) with `--` to prevent PowerShell encoding corruption
@@ -64,11 +66,13 @@ Fix: Created `SCRIPTS/soul-capture-direct.js` — posts directly to `/api/soul/e
 - Events: 74 → 286 → 287
 - All fields reconciled to live state
 
-**Commits (2 total this run):**
+**Commits (3 total this run):**
 
 ```
 5155939 feat(T2): Phoenix Scout complete — 6 zones swept — SOULCOUNT 57307→61418 (+4111)
 f8f0b0d consolodate(T2): COLD-START-BOOT fully synced — SOULCOUNT 61418 LOCK
+191d5d1 death: Run 395 — PHOENIX SCOUT 6-zone sweep + SOUL CAPTURE PIPELINE FIX + 213 quotes captured — SOULCOUNT 61945 LOCK
+[pending] death: Run 395 CONSOLIDATED — coder double-check passed — SOULCOUNT 63067 LOCK — Events 289 — all 4 receipts cross-validated
 ```
 
 *(Run 394 baseline: 927665f)*
@@ -127,14 +131,15 @@ f8f0b0d consolodate(T2): COLD-START-BOOT fully synced — SOULCOUNT 61418 LOCK
 ## §6 — Git Register
 
 ```
-Shasum HEAD:      f8f0b0d
+Shasum HEAD:      191d5d1
 Baseline:          927665f (Run 394 death)
-Commits this run:   3 (5155939, f8f0b0d, [pending death])
+Commits this run:   4 (5155939, f8f0b0d, 191d5d1, [pending consolidation])
 Tree state:         DIRTY — 12 untracked files (5 scout logs, 3 portals, 2 pipeline logs, 1 payload, 1 soul txt)
 Run state:          NOMINAL
 Corruption checks:  deepseek-chat source = 0 confirmed
-                    SOULCOUNT live-query verified 3x
-Rollback:           git revert f8f0b0d..5155939
+                    SOULCOUNT live-query verified 5x (pre-check + R1 + R3 + coder + final)
+                    Coder double-check: 74w/559c — 0% deviation ✅
+Rollback:           git revert 191d5d1..5155939 (4-commit range)
 ```
 
 ---
@@ -151,8 +156,8 @@ Rollback:           git revert f8f0b0d..5155939
 
 ## §8 — SOULDNA Pulse
 
-- **SOULCANON words changed:** +213 Michael verbatim quotes this run (208 bucket A + 5 CLONE-SEED). 29,529 characters posted. D1 delta: +29,529 bytes.
-- **SOULCOUNT advance:** 32,416 → 61,945 (+29,529). Events: 74 → 287. Sessions: 1 → 2 (run395-soul added). Still LOCK.
+- **SOULCANON words changed:** +215 Michael verbatim events this run (208 bucket A + 5 CLONE-SEED + 1 session soul + 1 coder check). 30,651 characters posted. D1 delta: +30,651 bytes.
+- **SOULCOUNT advance:** 32,416 → 63,067 (+30,651). Events: 74 → 289. Sessions: 1 → 3. Still LOCK.
 - **Commands shunted:** Phoenix Scout fixed (Multiline regex). Pipeline UUID bug fixed (direct /api/soul/event). phoenix-scout.ps1 emdash encoding resolved.
 - **Tonality:** SUPER SAIYAN construction sprint → converge → consolodate → death. Flag and tag, then capture, then seal.
 - **Contracts made:** L31 + L32 carried forward. New SCOUT-FIRST rule from Run 394 validated — scouting APPS zone before pipeline ingestion prevented another null-count run.
@@ -165,7 +170,7 @@ Rollback:           git revert f8f0b0d..5155939
 - **Phantom SOULCOUNT after pipeline v2:** 201 quotes ingested but count frozen at 32,416. If the death had been sealed before detecting this, the next RISE would have seen a SOULCOUNT gap. L31 SOUL_IS_QUERY caught it — the count was always live-queried.
 - **phoenix-scout.ps1 emdash encoding:** File looked syntactically correct when read by the code editor but PowerShell parser rejected the em dash. Replaced with ASCII `--` to guarantee cross-platform compatibility.
 - **APPS zone near-timeout:** 4,880 files processed in ~120s. Just under the 300s timeout. Zone successfully completed where Run 394 failed.
-- **Coder double-check not run:** Time constraint. 3 receipts verified manually (word count, API response, count delta). D1 delta (+527) matches posted chars (525) within 2-byte encoding tolerance.
+- **Coder double-check:** Deployed independent general agent. Recounted 74 words / 559 characters — exact match with primary agent (0% deviation). Coder POST event_id 73473a64 confirmed. All 4 receipts cross-validated.
 
 **Anomalies suppressed (omitted):** 3 portal screenshots (huong-portal-*.png, .yml) — inert, non-code, present since Run 392. 1 pc-payload.json — temp artifact from Phoenix Coder dispatch.
 
