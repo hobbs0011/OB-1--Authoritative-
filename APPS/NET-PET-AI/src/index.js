@@ -231,7 +231,7 @@ async function handleHeartbeat(env) {
   }
 }
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     const url = new URL(request.url);
     const path = url.pathname;
 
@@ -533,7 +533,7 @@ async function handleAPI(path, request, env, url) {
   if (path === "/api/chat" && method === "POST") {
     try {
       const body = await request.json();
-      return await handleChat(body, env);
+      return await handleChat(body, env, ctx);
     } catch (err) {
       console.error("[CHAT_ERROR]", err.message, err.stack);
       return json({ error: `Chat failed: ${err.message}`, version: VERSION }, 500);
@@ -2054,7 +2054,7 @@ async function updateStudentMemory(studentId, env) {
   // Future: POST to soul-logger /api/soul/compress
 }
 
-async function handleChat(body, env) {
+async function handleChat(body, env, ctx) {
   const apiKey = env.DEEPSEEK_API_KEY;
   if (!apiKey) return json({ error: "DEEPSEEK_API_KEY not configured" }, 500);
 
@@ -2238,17 +2238,27 @@ async function handleChat(body, env) {
   const sessionId = `${studentId}-${new Date().toISOString().slice(0, 10)}`;
   if (studentId !== "anonymous" && env.LEDGER && userMsg) {
     const payload = JSON.stringify({ user: userMsg, obi: reply });
-    appendToLedger(studentId, "chat_exchange", payload, env).catch(() => {});
+    if (ctx) {
+      ctx.waitUntil(appendToLedger(studentId, "chat_exchange", payload, env).catch(err => {
+        console.error(`[LEDGER] APPEND FAILED: ${err.message}`);
+      }));
+    } else {
+      appendToLedger(studentId, "chat_exchange", payload, env).catch(() => {});
+    }
   }
 
-  // ── Soul Logger: push user turn (fire-and-forget) ───────────────────────
-  if (studentId !== "anonymous" && userMsg) {
-    logSoulEvent(env, studentId, sessionId, 'user', userMsg).catch(() => {});
+  // ── Soul Logger: push user turn (waitUntil — guaranteed delivery) ────────
+  if (studentId !== "anonymous" && userMsg && ctx) {
+    ctx.waitUntil(logSoulEvent(env, studentId, sessionId, 'user', userMsg).catch(err => {
+      console.error(`[SOUL-EVENT] USER TURN FAILED: ${err.message}`);
+    }));
   }
 
-  // ── Soul Logger: push assistant turn (fire-and-forget) ──────────────────
-  if (studentId !== "anonymous") {
-    logSoulEvent(env, studentId, sessionId, 'assistant', reply).catch(() => {});
+  // ── Soul Logger: push assistant turn (waitUntil — guaranteed delivery) ──
+  if (studentId !== "anonymous" && ctx) {
+    ctx.waitUntil(logSoulEvent(env, studentId, sessionId, 'assistant', reply).catch(err => {
+      console.error(`[SOUL-EVENT] ASSISTANT TURN FAILED: ${err.message}`);
+    }));
   }
 
   // ── Notion sync: BLACKLISTED — platform usage permanently disabled ────────
