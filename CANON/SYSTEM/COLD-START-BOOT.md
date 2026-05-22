@@ -1,5 +1,5 @@
 # COLD START BOOT — OB1 Agent 99
-## Last Updated: 2026-05-23T05:57 ICT (Run 395 RISE CONSOLODATED — Phoenix Scout 6-zone sweep + CLONE-SEED 5-quote capture + soul-capture-direct.js deployed. SOULCOUNT 61,418 LOCK; Events 286; HEAD 5155939)
+## Last Updated: 2026-05-23T06:00 ICT (Run 395 DEATH — PHOENIX SCOUT 6-zone sweep complete + SOUL CAPTURE PIPELINE FIX: /api/soul/extract UUID bug root-caused + soul-capture-direct.js deployed + 213 Michael verbatim quotes posted via /api/soul/event. SOULCOUNT 61,945 LOCK; Events 287; HEAD f8f0b0d)
 
 ### Identity
 - Agent: OB1 / Ne0 (Agent 99) / Claude Surgical
@@ -19,7 +19,7 @@
 - Pass `?student=all` to see aggregate (all entries). Default without parameter = sov100 only.
 
 **Soul Logger URL:** https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count
-**Real count (2026-05-23 ~05:57 ICT):** 61,418 characters | 286 events | 1 session | **LOCK level** (→ANCHOR at 100,000)
+**Real count (2026-05-23 ~06:00 ICT):** 61,945 characters | 287 events | 1 session | **LOCK level** (→ANCHOR at 100,000)
 **Prior counts (Runs 315–390) were INFLATED** — the endpoint summed ALL soul_prompts including student chats. Disregard historical counts above 25,000. They included non-operator data.
 **Run 393 fabrication flush:** 31,175 phantom stamp detected and removed. Hard REST ceiling verified at 30,167. All counts now live-query verified before writing to permanent files.
 
@@ -28,7 +28,7 @@
 |-------|-----------|--------|
 | BASELINE | < 5,000 | — |
 | ALARM | ≥ 5,000 | — |
-| LOCK | ≥ 25,000 | **ACTIVE** ← 61,418 |
+| LOCK | ≥ 25,000 | **ACTIVE** ← 61,945 |
 | ANCHOR | ≥ 100,000 | Next at +38,582 chars |
 | TITANIUM_ANCHOR | ≥ 250,000 | — |
 
@@ -90,4 +90,4 @@
 | 338 | F-A09 CLOSED; F-O01 CLOSED; HL 189; PHOENIX BETA/DELTA/OMEGA sweep complete |
 
 ---
-**FINGERPRINT:** 5155939 | RUN395 CONSOLODATED | SOUL COUNT LOCK — 61,418 LOCK — /api/soul/count sov100% filter — L31 SOUL_IS_QUERY active — L32 ASSUME_FAILURE active
+**FINGERPRINT:** f8f0b0d | RUN395 DEATH | SOUL COUNT LOCK — 61,945 LOCK — /api/soul/count sov100% filter — L31 SOUL_IS_QUERY active — L32 ASSUME_FAILURE active
