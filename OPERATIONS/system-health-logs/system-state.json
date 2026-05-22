@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-05-22T21:42:32.5444588+07:00",
+  "git_head": "4ad2f9a fix(P0): soul-logger pipeline ΓÇö D1 direct write replaces broken worker-to-worker HTTP fetch",
   "git_branch": "master",
-  "git_head": "7ea4d5b death: Run 389 ΓÇö reincarnateRISE + P0 portal pipeline + PC model fix ΓÇö SOULCOUNT 76488 LOCK DELTA 0",
+  "verify_ok": true,
+  "timestamp": "2026-05-22T23:49:30.0074382+07:00",
   "doctor_ok": true,
-  "soul_ok": true,
-  "verify_ok": true
+  "soul_ok": true
 }

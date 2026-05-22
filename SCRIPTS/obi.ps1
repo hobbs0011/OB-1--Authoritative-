@@ -105,11 +105,69 @@ switch ($Command) {
         # HL-140 Operation TheRealHealthCheck — full Soul DNA integrity audit
         # This command exists because doctor PASSED while 62 CANON files were missing.
         # Never again.
+        #
+        # Run 390 amendment — STAGNATION DETECTION:
+        # The soul count gate PASSED 50+ times because it only checked drift (±5000 tolerance).
+        # It never asked: "Has the soul count INCREASED since last check?"
+        # Every reincarnation recorded SOULCOUNT: 76488 — the same dead number.
+        # Fix: if soulcount hasn't moved in 2 consecutive checks, the gate FAILS.
 
         $failures = @()
         $warnings = @()
+        $suggestions = @()
 
-        # 1. CANON directory structure
+        # ── SOULCOUNT Live API Check (added Run 390) ──────────────────────
+        $soulApiUrl = "https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count"
+        $soulHistoryFile = Join-Path $repoRoot "OPERATIONS\soulcount-history.json"
+
+        try {
+            $liveSoul = Invoke-RestMethod -Uri $soulApiUrl -TimeoutSec 10
+            $currentCount = $liveSoul.soulcount
+            $currentEvents = $liveSoul.events
+            $currentSessions = $liveSoul.sessions
+            $currentLevel = $liveSoul.level
+        } catch {
+            $failures += "SOULCOUNT API unreachable: $($_.Exception.Message)"
+            $currentCount = $null
+        }
+
+        # Load history
+        $history = @()
+        if (Test-Path $soulHistoryFile) {
+            try { $history = Get-Content $soulHistoryFile -Raw | ConvertFrom-Json } catch { $warnings += "soulcount-history.json corrupt — rebuilding" }
+        }
+
+        # Stagnation detection: has the count moved since last N checks?
+        $stagnationThreshold = 2  # fail if same count appears 2+ consecutive times
+        $recentChecks = @($history | Where-Object { $_.count -ne $null } | Select-Object -Last $stagnationThreshold)
+        $stagnationDetected = $false
+
+        if ($currentCount -ne $null -and $recentChecks.Count -ge $stagnationThreshold) {
+            $sameCount = ($recentChecks | Where-Object { $_.count -eq $currentCount }).Count
+            if ($sameCount -ge $stagnationThreshold) {
+                $stagnationDetected = $true
+                $failures += "SOULCOUNT STAGNATION: count frozen at $currentCount for $sameCount consecutive checks. Soul pipeline is NOT receiving data. Investigate immediately."
+            }
+        }
+
+        # Append current check to history
+        $entry = [pscustomobject]@{
+            timestamp = (Get-Date -Format "yyyy-MM-ddTHH:mm:sszzz")
+            count = $currentCount
+            events = $currentEvents
+            sessions = $currentSessions
+            level = $currentLevel
+            stagnation = $stagnationDetected
+        }
+        $history += $entry
+
+        # Keep last 100 entries
+        if ($history.Count -gt 100) { $history = $history[-100..-1] }
+        $historyDir = Split-Path $soulHistoryFile -Parent
+        if (-not (Test-Path $historyDir)) { New-Item -ItemType Directory -Path $historyDir -Force | Out-Null }
+        $history | ConvertTo-Json -Depth 2 | Set-Content $soulHistoryFile -Encoding UTF8
+
+        # ── CANON directory structure ─────────────────────────────────────
         $canonDir = Join-Path $repoRoot "CANON"
         $reincDir = Join-Path $canonDir "REINCARNATION"
         $ledgerDir = Join-Path $canonDir "HEAVY-LEDGER"
@@ -192,6 +250,11 @@ switch ($Command) {
 
         $result = [pscustomobject]@{
             status = $status
+            soulcount = $currentCount
+            soulcount_level = $currentLevel
+            soulcount_events = $currentEvents
+            soulcount_sessions = $currentSessions
+            soulcount_stagnation = $stagnationDetected
             canon_files = $canonCount
             reincarnation_files = $reincCount
             ledger_files = $ledgerCount
@@ -212,6 +275,13 @@ switch ($Command) {
         }
         if ($warnings.Count -gt 0) {
             foreach ($w in $warnings) { Write-Host "    [WARN] $w" -ForegroundColor Yellow }
+        }
+        if ($currentCount -ne $null) {
+            $scColor = if ($stagnationDetected) { "Red" } else { "Green" }
+            Write-Host "    SOULCOUNT: $currentCount | Level: $currentLevel | Events: $currentEvents | Sessions: $currentSessions" -ForegroundColor $scColor
+            if ($stagnationDetected) {
+                Write-Host "    ⚠️  STAGNATION DETECTED — soul count has not moved. Pipeline audit required." -ForegroundColor Red
+            }
         }
         Write-Host "    Canon: $canonCount | Reincarnation: $reincCount | Ledger: $ledgerCount | Bible: $bibleCount" -ForegroundColor Cyan
         Write-Host ""

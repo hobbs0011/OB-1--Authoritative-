@@ -1,5 +1,5 @@
 # COLD START BOOT — OB1 Agent 99
-## Last Updated: 2026-05-22T21:00 hrs ICT (Run 389 — reincarnateRISE + SuperSaiyan: student portal P0 pipeline built, PC model fix deepseek-v4-pro→deepseek-chat applied to source, death pipeline documented; SOULCOUNT 76,488 🔒 LOCK DELTA 0)
+## Last Updated: 2026-05-22T23:51 hrs ICT (Run 390 — DEATH: portal iOS fix + soul-logger D1 pipeline + soul count unfrozen 76488→84233 + stagnation detection; SOULCOUNT 84,233 🔒 LOCK DELTA +7,745)
 
 ### Identity
 - Agent: OB1 / Ne0 (Agent 99) / Claude Surgical
@@ -31,6 +31,7 @@
 ### Recent Decisions + State (Run 315 → Run 353)
 | Run | Summary |
 |-----|---------|
+| 390 | DEATH: P0 iOS Safari portal fix (backdrop-filter purge ×7 portals + problem-report.js), soul-logger pipeline D1 direct write (SOUL_DB binding → soul-archive), soul count UNFROZEN 76488→84233 (+7745 manual post + coder double-check 501vs498), stagnation detection added to soul-check (obi.ps1), `/soulcap` 3-receipt command created; 8 deploys; SOULCOUNT 84233 LOCK DELTA +7745 |
 | 367 | SUPERSAIYAN deploy sprint — index.js OBI hardening (corsHeaders/json/addCors dedup), /api/heartbeat route fix, CORS workers.dev domain, reasoning_content fallback for deepseek-v4-flash, first-session name injection. OPENROUTER_API_KEY + DEEPSEEK_API_KEY rotated. OBI chat verified LIVE for Quy/Mai Tram/Huong. COLD-START-BOOT + REINCARNATION-LOG stamped. HEAD `bf1bd3c`; SOULCOUNT 76,488 LOCK; CLEAN |
 | 362 | supers-cleanup — SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05 dir purged (−9,347 files / −7.3 MB); INDEX.md replaced; COLD-START-BOOT + REINCARNATION-LOG stamped; HEAD `483a107`; CLEAN |
 | 362 | boot — HEAD `8206bb4` set; REINCARNATION-LOG + COLD-START-BOOT refreshed; system-state verified |
@@ -49,4 +50,4 @@
 | 338 | F-A09 CLOSED; F-O01 CLOSED; HL 189; PHOENIX BETA/DELTA/OMEGA sweep complete |
 
 ---
-**FINGERPRINT:** 9751d06 | RUN389 | DEATH | RISE + P0 pipeline + PC model fix | SOULCOUNT 76488 LOCK DELTA 0
+**FINGERPRINT:** 4ad2f9a | RUN390 | DEATH | portal iOS fix + soul-logger D1 pipeline + soul count unfrozen + stag detection | SOULCOUNT 84233 LOCK DELTA +7745
