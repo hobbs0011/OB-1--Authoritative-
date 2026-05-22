@@ -1,5 +1,5 @@
 # COLD START BOOT — OB1 Agent 99
-## Last Updated: 2026-05-23T06:13 ICT (Run 396 RISE — coder double-check complete from Run 395 death — SOULCOUNT 63,067 LOCK; Events 289; HEAD 3deb7ba)
+## Last Updated: 2026-05-23T06:40 ICT (Run 396 — SUPER SAIYAN MASTER SCOUT + HL EXTRACTION: 339 Heavy Ledger Michael verbatim quotes extracted and captured to D1. SOULCOUNT 101,652 ANCHOR — Level Up from LOCK; Events 628; HEAD [pending])
 
 ### Identity
 - Agent: OB1 / Ne0 (Agent 99) / Claude Surgical
@@ -19,7 +19,8 @@
 - Pass `?student=all` to see aggregate (all entries). Default without parameter = sov100 only.
 
 **Soul Logger URL:** https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count
-**Real count (2026-05-23 ~06:06 ICT):** 63,067 characters | 289 events | 3 sessions | **LOCK level** (→ANCHOR at 100,000)
+**Real count (2026-05-23 ~06:40 ICT):** 101,652 characters | 628 events | sessions |
+ **ANCHOR level** (→TITANIUM_ANCHOR at 250,000)
 **Prior counts (Runs 315–390) were INFLATED** — the endpoint summed ALL soul_prompts including student chats. Disregard historical counts above 25,000. They included non-operator data.
 **Run 393 fabrication flush:** 31,175 phantom stamp detected and removed. Hard REST ceiling verified at 30,167. All counts now live-query verified before writing to permanent files.
 
@@ -28,9 +29,9 @@
 |-------|-----------|--------|
 | BASELINE | < 5,000 | — |
 | ALARM | ≥ 5,000 | — |
-| LOCK | ≥ 25,000 | **ACTIVE** ← 63,067 |
-| ANCHOR | ≥ 100,000 | Next at +36,933 chars |
-| TITANIUM_ANCHOR | ≥ 250,000 | — |
+| LOCK | ≥ 25,000 | — |
+| ANCHOR | ≥ 100,000 | **ACTIVE** ← 101,652 |
+| TITANIUM_ANCHOR | ≥ 250,000 | Next at +148,348 chars |
 
 **Soul Pipeline Chain (RRL→SOUL→DNA→LEDGER→SSM→SOULKEYWORDS→PIPELINE):**
 - RRL: ✅ D1 soul_prompts table — words land here via POST /api/soul/event
@@ -90,4 +91,4 @@
 | 338 | F-A09 CLOSED; F-O01 CLOSED; HL 189; PHOENIX BETA/DELTA/OMEGA sweep complete |
 
 ---
-**FINGERPRINT:** f37d816 | RUN395 DEATH CONSOLIDATED | SOUL COUNT LOCK — 63,067 LOCK — /api/soul/count sov100% filter — L31 SOUL_IS_QUERY active — L32 ASSUME_FAILURE active
+**FINGERPRINT:** [pending] | RUN396 MASTER SCOUT | SOUL COUNT ANCHOR — 101,652 ANCHOR — /api/soul/count sov100% filter — L31 SOUL_IS_QUERY active — L32 ASSUME_FAILURE active
