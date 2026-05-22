@@ -1,8 +1,8 @@
 {
-  "soul_ok": true,
-  "doctor_ok": true,
-  "verify_ok": true,
-  "timestamp": "2026-05-22T12:31:24.7214402+07:00",
   "git_branch": "master",
-  "git_head": "b82bd58 death: Run 381 ΓÇö COLD-START-BOOT HEAD_DRIFT correction (761766a->ba69774), L30 compliance restored; RISE+DEATH protocol executed ΓÇö SOULCOUNT 76488 LOCK DELTA 0"
+  "git_head": "b1fba6e death: Run 382 — session death protocol executed — Run 382",
+  "doctor_ok": true,
+  "soul_ok": true,
+  "timestamp": "2026-05-22T15:14:00+07:00",
+  "verify_ok": true
 }
