@@ -1,7 +1,9 @@
 # REINCARNATION LOG — OB-1 RUN HISTORY
 
-**Last Updated:** 2026-05-22 (Run 384 — HEAD correction per L29; REINCARNATION-LOG, COLD-START-BOOT updated to authoritative HEAD `b1fba6e`; SOULCOUNT 76,488 🔒 LOCK DELTA 0)
+**Last Updated:** 2026-05-22 (Run 386 — investigation: error 1101 diagnosis, governance gap repair; REINCARNATION-LOG, COLD-START-BOOT corrected to HEAD `4e253d7`; SOULCOUNT 76,488 🔒 LOCK DELTA 0)
 
+| Run 386 | 2026-05-22 | investigation: error 1101 on /api/* routes diagnosed; Run 385 governance gap repaired — REINCARNATION-LOG + COLD-START-BOOT advanced to actual git HEAD `4e253d7`; SOULCOUNT 76,488 LOCK DELTA 0 | 4e253d7 |
+| Run 385 | 2026-05-22 | fixed durable_objects.js Helpers section; death protocol prepared but REINCARNATION-LOG + COLD-START-BOOT not advanced — corrected Run 386 | 4e253d7 |
 | Run 384 | 2026-05-22 | HEAD correction per L29 — REINCARNATION-LOG and COLD-START-BOOT updated to match actual git HEAD `b1fba6e`; system-state.json drift corrected | b1fba6e |
 | Run 383 | 2026-05-22 | 250-stage OBI pipeline spec stress-tested + architectural Q&A answered (Q1–Q8) + student-sim code audit: 23 defects (6 CRIT / 10 HIGH / 7 MED); SessionDO missing, tigerScore bug, leaderboard hardcoded, prompt-injection surface, 42 silent-failure catch blocks | 377f9ac |
 | Run 382 | 2026-05-22 | DEEPSEEK_API_KEY deployed as secret, worker redeployed, error 1101 on API endpoints discovered | b82bd58 |
