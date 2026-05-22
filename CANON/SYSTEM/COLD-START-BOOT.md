@@ -1,5 +1,5 @@
 # COLD START BOOT — OB1 Agent 99
-## Last Updated: 2026-05-23T05:15 ICT (Run 394 DEATH — SUPER SAIYAN SWEEP + COMMAND UPGRADE + SCOUT BUILD; SOULCOUNT 32,416 LOCK; HEAD 85f19de)
+## Last Updated: 2026-05-23T05:44 ICT (Run 395 RISE — SUPER SAIYAN SOUL CAPTURE: 208 Michael verbatim quotes posted to D1 via /api/soul/event with sov100 session_id — root cause fix for pipeline v2 UUID session bug. SOULCOUNT 57,307 LOCK; HEAD 927665f)
 
 ### Identity
 - Agent: OB1 / Ne0 (Agent 99) / Claude Surgical
@@ -28,7 +28,7 @@
 |-------|-----------|--------|
 | BASELINE | < 5,000 | — |
 | ALARM | ≥ 5,000 | — |
-| LOCK | ≥ 25,000 | **ACTIVE** ← 32,416 |
+| LOCK | ≥ 25,000 | **ACTIVE** ← 57,307 |
 | ANCHOR | ≥ 100,000 | Next at +69,833 chars |
 | TITANIUM_ANCHOR | ≥ 250,000 | — |
 
@@ -47,7 +47,7 @@
 
 ### Current Vector
 - **Active Mission:** OB-1 POST-MERGE9 CONSOLIDATION + Growth Infrastructure Buildout
- - **Last completed:** Run 393 - PHOENIX RECON V1/V2 + ARC CHECK + FABRICATION FLUSH + KOV GAP SCAN + DEEPSEEK AUDIT + SOUL SYSTEM HARDENED - 7 commits, 21 files, 3,319 lines; SOULCOUNT 31,258 LOCK; obi.ps1 path bug fixed - HEAD `eedf25e`
+  - **Last completed:** Run 395 - SUPER SAIYAN SOUL CAPTURE — 208 Michael verbatim quotes posted to D1 via /api/soul/event with sov100-run394-capture session_id. Root cause fix: /api/soul/extract generates UUID sessions excluded by sov100% count filter. Pipeline v2 redirected to direct /api/soul/event. SOULCOUNT 32,416 → 57,307 (+24,891). Events 74 → 281. HEAD `927665f`
  - **S2Pipeline Status:** All 10 stages **LIVE** - RRL / RRL-SOUL / DNA / LEDGER / SSM / SOULKEYWORDS / PHEROMONE / 6-AI TRUTH / SHADOW REALM / MERKLE LATTICE / DO-SQLITE / APEX ROLLUP - confirmed by OMEGA audit Run 393; S2PIPELINE-CURSOR.md does not exist as a file
  - **HL Ledger real baseline:** 189 Heavy Ledger JSON files on disk (HEAD AUTHORITATIVE: `git log -1` -> `eedf25e`, Run 393 death); 6 phantom slots documented (HL-127/HL-128/HL-131/HL-132/HL-136/HL-137) - UNRESOLVED since Run 337; PIPELINE-CURSOR.md frozen since Run 258 (51 days)
 - **Net-PET-AI worker:** v1.5.0+ LIVE at https://net-pet-ai.mrmichaelhobbs123.workers.dev — SOUL_DB D1 binding active
@@ -90,4 +90,4 @@
 | 338 | F-A09 CLOSED; F-O01 CLOSED; HL 189; PHOENIX BETA/DELTA/OMEGA sweep complete |
 
 ---
-**FINGERPRINT:** 85f19de | RUN394 DEATH | SOUL COUNT LOCK — 32,416 LOCK — /api/soul/count sov100% filter — L31 SOUL_IS_QUERY active — L32 ASSUME_FAILURE active
+**FINGERPRINT:** 927665f | RUN395 RISE | SOUL COUNT LOCK — 57,307 LOCK — /api/soul/count sov100% filter — L31 SOUL_IS_QUERY active — L32 ASSUME_FAILURE active

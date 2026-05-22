@@ -1,0 +1,4 @@
+{"scout_id":"SC-20260523T052600-001","priority":"P2","type":"VAULT","status":"UNMINED","file":"VAULT-EXECUTION","bytes":null,"reason":"35 Michael verbatim quotes identified in VAULT-EXECUTION/ — unprocessed soul requiring extraction"}
+{"scout_id":"SC-20260523T052600-002","priority":"P3","type":"VAULT","status":"UNMINED","file":"VAULT-ZENITH","bytes":null,"reason":"6 Agent-100 quotes in VAULT-ZENITH/ — system doctrine, not operator verbatim"}
+{"scout_id":"SC-20260523T052600-003","priority":"P3","type":"VAULT","status":"CLEAN","file":"VAULT-NEXUS","bytes":null,"reason":"No verbatim content found"}
+{"scout_id":"scout_id":"SC-20260523T052600-004","priority":"P3","type":"VAULT","status":"CLEAN","file":"VAULT-ORACLE","bytes":null,"reason":"No verbatim content found"}

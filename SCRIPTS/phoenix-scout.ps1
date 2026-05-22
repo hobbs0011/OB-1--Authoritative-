@@ -7,20 +7,25 @@ $report = "D:\OB-1-CANONICAL\OPERATIONS\phoenix-scout-$ts.jsonl"
 $finds = @()
 
 $files = Get-ChildItem $Zone -Recurse -File -ErrorAction SilentlyContinue
-Write-Host "SCOUT -> $Zone — scanning $($files.Count) files"
+Write-Host ("SCOUT -> {0} — scanning {1} files" -f $Zone, $files.Count)
 
 foreach ($f in $files) {
   $rel = $f.FullName.Replace("D:\OB-1-CANONICAL\", "")
   $raw = Get-Content $f.FullName -Raw -ErrorAction SilentlyContinue
   if (-not $raw) { continue }
-  $header = ($raw -split "`n")[0..19] -join "`n"
+  $header = ($raw -split "`n")[0..199] -join "`n"
   $bytes = $f.Length
 
   # SOUL: UNTOUCHED/UNMINED markers
   if ($header -match "UNTOUCHED|UNMINED|DO NOT EDIT") {
     $finds += [pscustomobject]@{
-      scout_id = "SC-$ts-" + $finds.Count; priority = "P2"; type = "SOUL"; status = "UNTOUCHED"
-      file = $rel; line = 1; bytes = $bytes
+      scout_id = ("SC-{0}-{1}" -f $ts, $finds.Count)
+      priority = "P2"
+      type = "SOUL"
+      status = "UNTOUCHED"
+      file = $rel
+      line = 1
+      bytes = $bytes
       excerpt = $header.Substring(0, [Math]::Min(120, $header.Length)).Replace('"',"'")
       reason = "File marked UNTOUCHED/UNMINED — raw soul never processed"
       action = "Route through /api/soul/extract"
@@ -31,10 +36,15 @@ foreach ($f in $files) {
   $quoteCount = ([regex]::Matches($raw, '^> "')).Count
   if ($quoteCount -gt 5) {
     $finds += [pscustomobject]@{
-      scout_id = "SC-$ts-" + $finds.Count; priority = "P1"; type = "SOUL"; status = "UNMINED"
-      file = $rel; line = 1; bytes = $bytes
-      excerpt = "$quoteCount raw blockquote lines found"
-      reason = "$quoteCount verbatim quote lines — never ingested into D1"
+      scout_id = ("SC-{0}-{1}" -f $ts, $finds.Count)
+      priority = "P1"
+      type = "SOUL"
+      status = "UNMINED"
+      file = $rel
+      line = 1
+      bytes = $bytes
+      excerpt = ("{0} raw blockquote lines found" -f $quoteCount)
+      reason = ("{0} verbatim quote lines — never ingested into D1" -f $quoteCount)
       action = "Route all through /api/soul/extract as single session"
     }
   }
@@ -43,10 +53,15 @@ foreach ($f in $files) {
   $textMatches = ([regex]::Matches($raw, '"text":\s*"')).Count
   if ($textMatches -gt 0) {
     $finds += [pscustomobject]@{
-      scout_id = "SC-$ts-" + $finds.Count; priority = "P2"; type = "SOUL"; status = "UNMINED"
-      file = $rel; line = 1; bytes = $bytes
-      excerpt = "$textMatches JSONL text fields found"
-      reason = "$textMatches verbatim text segments in JSONL — can be ingested"
+      scout_id = ("SC-{0}-{1}" -f $ts, $finds.Count)
+      priority = "P2"
+      type = "SOUL"
+      status = "UNMINED"
+      file = $rel
+      line = 1
+      bytes = $bytes
+      excerpt = ("{0} JSONL text fields found" -f $textMatches)
+      reason = ("{0} verbatim text segments in JSONL — can be ingested" -f $textMatches)
       action = "Parse JSONL → POST /api/soul/extract"
     }
   }
@@ -55,9 +70,14 @@ foreach ($f in $files) {
   if ($raw -match "deepseek-chat|deepseek-reasoner") {
     $hit = ($raw -split "`n" | Select-String "deepseek-chat|deepseek-reasoner" | Select-Object -First 1)
     $finds += [pscustomobject]@{
-      scout_id = "SC-$ts-" + $finds.Count; priority = "P1"; type = "DRIFT"; status = "STALE"
-      file = $rel; line = $hit.LineNumber; bytes = $bytes
-      excerpt = "Legacy model alias: $($hit.Line.Trim().Substring(0, [Math]::Min(80, $hit.Line.Trim().Length)))"
+      scout_id = ("SC-{0}-{1}" -f $ts, $finds.Count)
+      priority = "P1"
+      type = "DRIFT"
+      status = "STALE"
+      file = $rel
+      line = $hit.LineNumber
+      bytes = $bytes
+      excerpt = ("Legacy model alias: {0}" -f $hit.Line.Trim().Substring(0, [Math]::Min(80, $hit.Line.Trim().Length)))
       reason = "deepseek-chat or deepseek-reasoner alias — retired in Audit T392"
       action = "Replace with deepseek-v4-flash or deepseek-v4-pro"
     }
@@ -66,8 +86,13 @@ foreach ($f in $files) {
   # DRIFT: legacy domain
   if ($raw -match "mrmichaelhobbs1234") {
     $finds += [pscustomobject]@{
-      scout_id = "SC-$ts-" + $finds.Count; priority = "P2"; type = "DRIFT"; status = "STALE"
-      file = $rel; line = 1; bytes = $bytes
+      scout_id = ("SC-{0}-{1}" -f $ts, $finds.Count)
+      priority = "P2"
+      type = "DRIFT"
+      status = "STALE"
+      file = $rel
+      line = 1
+      bytes = $bytes
       excerpt = "Legacy domain mrmichaelhobbs1234"
       reason = "Legacy operator identity — should use mrmichaelhobbs123"
       action = "Replace domain references"
@@ -91,16 +116,16 @@ $drift = ($finds | Where-Object { $_.type -eq "DRIFT" }).Count
 
 Write-Host ""
 Write-Host "============================================"
-Write-Host "PHOENIX SCOUT — $Zone"
+Write-Host ("PHOENIX SCOUT — {0}" -f $Zone)
 Write-Host "============================================"
-Write-Host "FILES:  $($files.Count)"
-Write-Host "FINDS:  $($finds.Count)"
-Write-Host "  P1 CRITICAL: $p1"
-Write-Host "  P2 HIGH:     $p2"
-Write-Host "  P3 MEDIUM:   $p3"
+Write-Host ("FILES:  {0}" -f $files.Count)
+Write-Host ("FINDS:  {0}" -f $finds.Count)
+Write-Host ("  P1 CRITICAL: {0}" -f $p1)
+Write-Host ("  P2 HIGH:     {0}" -f $p2)
+Write-Host ("  P3 MEDIUM:   {0}" -f $p3)
 Write-Host "BREAKDOWN:"
-Write-Host "  SOUL:  $soul"
-Write-Host "  DRIFT: $drift"
-Write-Host "REPORT: $report"
+Write-Host ("  SOUL:  {0}" -f $soul)
+Write-Host ("  DRIFT: {0}" -f $drift)
+Write-Host ("REPORT: {0}" -f $report)
 Write-Host "============================================"
 Write-Host "SCOUT COMPLETE."
