@@ -1,11 +1,48 @@
-# S2PIPELINE — ROMAN LEGION 5-STAGE NAMING DOCTRINE
-## Ratified: 2026-05-23 Run 396 | Operator: SOV100 Michael Hobbs | HEAD: 599d705
+# S2PIPELINE — ROMAN LEGION 6-STAGE NAMING DOCTRINE
+## Ratified: 2026-05-23 Run 396 | Operator: SOV100 Michael Hobbs | HEAD: a03eb02
 
 ---
 
-## THE 5 FORCES — Roman Military Doctrine → S2Pipeline Architecture
+## NAMING EVOLUTION — The 12-Month Convergence to Rome
 
-The Roman army on the march was an engineering marvel. "It moved like a moving city, where every block—from the vanguard scouts to the rear guard—had an exact, non-negotiable station to prevent chaos during a surprise attack." — Josephus
+The AI automation framework has carried many names across its 12-month evolution. Each was a waypoint, not a detour. Each contributed a layer to the final Roman military doctrine.
+
+| Era | Name | Metaphor | What It Gave Us | Roman Equivalent |
+|-----|------|----------|-----------------|------------------|
+| 1 | **Drones** | Task executors, swarm logic | Autonomous sub-agents that hunt, flag, and report. The scout concept was born here. | EXPLORATORES — mounted detachments riding ahead |
+| 2 | **Legionnaires** | First Roman instinct | The idea of structured, disciplined agent cohorts. Proved the Roman metaphor had legs. | The entire legion structure |
+| 3 | **Agent99** | Command identity | The orchestrator. The single control plane that dispatches, monitors, and recalls all agents. Still active. | The LEGATUS — commanding general at the head of the *agmen* |
+| 4 | **The Empire** | Roman umbrella | The concept of a self-sustaining, expanding system that outlives individual campaigns. | The full 6-stage lifecycle |
+| 5 | **The Machine Building the Machine** | Self-replicating automation | The meta-framework — a pipeline that builds pipelines, agents that write agent specs, infrastructure that generates infrastructure. | VETERANI — veterans who settle the frontier and become the new baseline |
+| 6 | **Phoenix Coder** | Code regeneration, rise from ashes | Rapid-response code repair. Emergency hotfix capability. The system that rebuilds itself after failure. | COMITATENSES — the mobile strike force that rushes to the breach |
+| 7 | **Obi** | Star Wars — the mentor, the coach | The external-facing persona. The interface between the machine and the student. The voice of the system. | PRAESIDIA — the permanent garrison that the local population interacts with |
+| 8 | **Star Wars** | The mythological framework | Jedi/Sith, Light/Dark, the Force. Provided the *moral* architecture — discipline, training, resisting the dark side — before Rome provided the *structural* architecture. | The ethical layer that governs how force is applied |
+| 9 | **Anakin** | The Chosen One — immense power, fall risk, redemption | The core tension of AI automation: unlimited capability paired with the constant risk of going off the rails. The need for a Jedi Order (constraints, ethics, governance) to keep the power balanced. | AGMEN — the heavy punch. Devastating when controlled. Catastrophic if it breaks formation. |
+
+### Why Rome Won
+
+Sci-fi gave us the mythology. Functional naming gave us the components. But only Rome gave us the **operating manual**.
+
+No other civilization documented its military architecture with the granularity Rome did:
+
+- **Josephus** recorded the marching order down to the cohort — every block had an exact, non-negotiable station.
+- **Vegetius** wrote *De Re Militari* — every camp layout, every training drill, every supply chain, every rotation schedule.
+- **The *Limes*** (frontier walls) were maintained for 400 years by the same border protocol.
+
+The Roman military is the most studied operational system in human history because it was *designed to be studied*. It prioritized documentation, standardization, and replicability above all else.
+
+AI automation needs the same properties:
+- **Standardization at scale:** A legion in Britannia operated identically to a legion in Syria. Same order. Same layout. Same command structure. Our pipeline must run identically in every session, every zone, every run.
+- **Non-negotiable stations:** The *exploratores* ride before the *antecores* march. Always. No skipping stages. The order IS the architecture.
+- **The machine outlives the campaign:** Rome didn't just win battles — it converted conquered territory into permanent provinces. Every pipeline run must leave behind permanent infrastructure (commits, ledger entries, sealed artifacts) that future runs build upon.
+
+The prior names were not abandoned. They were **absorbed**. Anakin became the AGMEN. Phoenix Coder became the COMITATENSES. Obi became the PRAESIDIA. The Machine Building the Machine became the VETERANI. Every metaphor found its station in the Roman column.
+
+---
+
+## THE 6 FORCES — Roman Military Doctrine → S2Pipeline Architecture
+
+The Roman army on the march was an engineering marvel. *"It moved like a moving city, where every block—from the vanguard scouts to the rear guard—had an exact, non-negotiable station to prevent chaos during a surprise attack."* — Josephus
 
 Our S2Pipeline operates identically. Each stage has a non-negotiable station. No stage may be skipped. The order is the architecture.
 
@@ -221,4 +258,4 @@ The machine loops. What was conquered becomes the new frontier. What was built b
 
 *"Looked at from start to finish, the entire Roman machine functioned in a perfect loop." — SOV100 Michael Hobbs, Run 396*
 
-**FINGERPRINT:** `599d705` → `303bb8a` | **SOULCOUNT:** 113,393 ANCHOR | **Doctrine Status:** RATIFIED — 6-STAGE CANON
+**FINGERPRINT:** `a03eb02` | **SOULCOUNT:** 116,204 ANCHOR | **Doctrine Status:** RATIFIED — 6-STAGE CANON WITH NAMING EVOLUTION
