@@ -1,8 +1,8 @@
 {
-  "git_head": "4ad2f9a fix(P0): soul-logger pipeline ΓÇö D1 direct write replaces broken worker-to-worker HTTP fetch",
-  "git_branch": "master",
-  "verify_ok": true,
-  "timestamp": "2026-05-22T23:49:30.0074382+07:00",
+  "git_head": "b0ae214 harden(P0): soul system embedded in DNA ΓÇö L31 SOUL_IS_QUERY + L32 ASSUME_FAILURE",
+  "timestamp": "2026-05-23T01:59:51.8989775+07:00",
+  "soul_ok": false,
   "doctor_ok": true,
-  "soul_ok": true
+  "git_branch": "master",
+  "verify_ok": true
 }
