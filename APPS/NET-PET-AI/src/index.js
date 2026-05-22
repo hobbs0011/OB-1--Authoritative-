@@ -231,7 +231,7 @@ async function handleHeartbeat(env) {
   }
 }
 export default {
-  async fetch(request, env, ctx) {
+  async fetch(request, env) {
     const url = new URL(request.url);
     const path = url.pathname;
 
@@ -533,7 +533,7 @@ async function handleAPI(path, request, env, url) {
   if (path === "/api/chat" && method === "POST") {
     try {
       const body = await request.json();
-      return await handleChat(body, env, ctx);
+      return await handleChat(body, env);
     } catch (err) {
       console.error("[CHAT_ERROR]", err.message, err.stack);
       return json({ error: `Chat failed: ${err.message}`, version: VERSION }, 500);
@@ -2054,7 +2054,7 @@ async function updateStudentMemory(studentId, env) {
   // Future: POST to soul-logger /api/soul/compress
 }
 
-async function handleChat(body, env, ctx) {
+async function handleChat(body, env) {
   const apiKey = env.DEEPSEEK_API_KEY;
   if (!apiKey) return json({ error: "DEEPSEEK_API_KEY not configured" }, 500);
 
