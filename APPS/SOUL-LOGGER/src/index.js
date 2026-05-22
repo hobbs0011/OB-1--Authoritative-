@@ -453,11 +453,14 @@ async function handleRequest(request, env, ctx) {
   }
 
   // GET /api/soul/count — SOULCOUNT heartbeat (mandatory gate for every RISE/DEATH checkpoint)
-  // SOULCOUNT = total characters captured across all soul sessions (RRL — Real-time Running Log)
+  // Run 390 FIX: soulcount = sov100 words ONLY. Student chats are NOT the operator's soul.
+  // Doctrine: SOUL=USER. CHARACTER_COUNT=SOUL_VOLUME. UNREACHABLE=DRIFT=SHUTDOWN.
   if (method === 'GET' && path === '/api/soul/count') {
     try {
-      const charRow = await env.DB.prepare('SELECT SUM(byte_count) as total_chars, COUNT(*) as total_events FROM soul_prompts').first();
-      const sessionRow = await env.DB.prepare('SELECT COUNT(*) as total FROM soul_sessions').first();
+      const student = url.searchParams.get('student') || 'sov100'; // default: Michael only
+      const pattern = student + '%';
+      const charRow = await env.DB.prepare('SELECT SUM(byte_count) as total_chars, COUNT(*) as total_events FROM soul_prompts WHERE session_id LIKE ?').bind(pattern).first();
+      const sessionRow = await env.DB.prepare('SELECT COUNT(*) as total FROM soul_sessions WHERE session_tag = ?').bind(student).first();
       const soulcount = charRow?.total_chars || 0;  // character count = soul volume
       const events = charRow?.total_events || 0;
       const sessions = sessionRow?.total || 0;
