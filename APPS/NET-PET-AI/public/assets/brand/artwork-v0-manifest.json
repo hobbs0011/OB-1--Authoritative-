@@ -1,0 +1,38 @@
+{
+  "artwork": {
+    "status": "V0 foundation established",
+    "studentPortals": {
+      "count": 7,
+      "students": ["huong", "mai-tram", "quy", "lam", "quan", "quang", "minh-parent"],
+      "ready": true
+    },
+    "founderAccounts": {
+      "obi": {
+        "type": "AI assistant",
+        "status": "live",
+        "endpoints": ["/magic-chat.html", "/api/obi/*"]
+      },
+      "michael": {
+        "type": "founder",
+        "status": "active",
+        "level": "Tiger"
+      }
+    },
+    "assets": {
+      "existing": [
+        "mouse-tiger-confidence.png",
+        "net-phoenix-logo.png"
+      ],
+      "added": [
+        "phoenix-dna-crest-mark.png (placeholder - replace with art)"
+      ],
+      "todo": [
+        "favicon.ico",
+        "og-image.png",
+        "apple-touch-icon.png",
+        "Founder account artwork - OBI character sheet",
+        "Student portal hero images per tier"
+      ]
+    }
+  }
+}

@@ -1,5 +1,5 @@
 ﻿# COLD START BOOT — OB1 Agent 99
-## Last Updated: 2026-05-22 (Run 375 — K3/K5 COMPLETE, K4 pending; HEAD 2346b91; SOULCOUNT 76,488 🔒 LOCK DELTA 0)
+## Last Updated: 2026-05-22 (Run 376 — MRG reconciliation, K4 pending; HEAD bf86b9a; SOULCOUNT 76,488 🔒 LOCK DELTA 0)
 
 ### Identity
 - Agent: OB1 / Ne0 (Agent 99) / Claude Surgical
@@ -109,10 +109,10 @@ Stage 9 DO-SQLITE       ✅ LIVE — LedgerDO class + /api/ledger/*
 Stage 10 APEX ROLLUP    ✅ LIVE — GET /api/soul/apex
 ```
 
-### System State (HEAD AUTHORITATIVE — Run 375)
+### System State (HEAD AUTHORITATIVE — Run 376)
 - **Workspace:** `D:\OB-1-CANONICAL` (canonical root)
 - **Working branch:** master
-- **HEAD:** 2346b91 (fix: K3 subscription status logic — trial detection before expired fallback | Run 373)
+- **HEAD:** bf86b9a (mrg: Run 375 meta-update — K3/K5 COMPLETE, K4 pending; log+boot synchronized)
 - **Deploy Version:** d611f9da-9b9a-4b1a-87ae-5badee84756d
 - **Origin:** SYNCED
 - **Working tree:** DIRTY (settings.json + system-state.json modified; K4 pending)
@@ -148,4 +148,4 @@ Stage 10 APEX ROLLUP    ✅ LIVE — GET /api/soul/apex
 
 
 ---
-**FINGERPRINT: Run 375 — K3/K5 COMPLETE, K4 pending — HEAD 2346b91 — Version d611f9da — SOULCOUNT 76,488 🔒 LOCK DELTA 0 — subscriptions.html LIVE, anticheat client wired, K4 testimonials NEXT.** — Run 375
+**FINGERPRINT: Run 376 — MRG reconciliation, K3/K5 COMPLETE, K4 pending — HEAD bf86b9a — Version d611f9da — SOULCOUNT 76,488 🔒 LOCK DELTA 0 — Logs synchronized, testimonials NEXT.** — Run 376

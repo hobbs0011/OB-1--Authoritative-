@@ -1,6 +1,8 @@
 # REINCARNATION LOG — OB-1 RUN HISTORY
 
-**Last Updated:** 2026-05-22 (K3/K5 Complete — subscriptions.html + anticheat LIVE; HEAD `2346b91`; SOULCOUNT 76,488 🔒 LOCK DELTA 0)
+**Last Updated:** 2026-05-22 (Run 376 — MRG reconciliation, K3/K5 COMPLETE, K4 pending; HEAD `bf86b9a`; SOULCOUNT 76,488 🔒 LOCK DELTA 0)
+
+| Run 376 | 2026-05-22 | MRG reconciliation — logs synchronized to K3/K5 concurrent agent completion, state seal, K4 pending | bf86b9a |
 
 | Run 373b | 2026-05-22 | K3 subscriptions.html — user-facing subscription status page with plan/trial/billing display | 06e3353 |
 | Run 373c | 2026-05-22 | K3 subscription status logic fix — trial detection before expired fallback | 2346b91 |
