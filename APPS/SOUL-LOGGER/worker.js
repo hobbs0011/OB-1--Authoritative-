@@ -129,7 +129,7 @@ async function callDeepSeek(env, systemPrompt, userPrompt) {
       "cf-aig-authorization": `Bearer ${env.CF_AIG_TOKEN}`
     },
     body: JSON.stringify({
-      model: "deepseek-chat",
+      model: "deepseek-v4-flash",
       messages: [
         { role: "system", content: systemPrompt },
         { role: "user", content: userPrompt }

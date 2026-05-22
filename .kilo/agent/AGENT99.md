@@ -149,10 +149,11 @@ Activate on: audit/verify/security/forensics intent
 - Canonical repo: `D:\OB-1-CANONICAL`
 - Canonical app: `APPS/NET-PET-AI`
 
-## ⚠️ ALIAS RETIREMENT — July 24, 2026
-`deepseek-chat` and `deepseek-reasoner` retire on this date.  
-Any code using these aliases breaks silently. Use `deepseek-v4-pro` or `deepseek-v4-flash`.  
-Check `APPS/NET-PET-AI/src/index.js` for these strings before July 10.
+## ✅ ALIAS RETIREMENT — EXECUTED (Audit T392, May 23, 2026)
+`deepseek-chat` and `deepseek-reasoner` are **retired**. All live code paths now use canonical model IDs.
+- T2 workhorse: `deepseek-v4-flash`
+- T3 heavy: `deepseek-v4-pro`
+- T1 burst: `stepfun/step-3.5-flash`
 
 ## RESPONSE FORMAT
 

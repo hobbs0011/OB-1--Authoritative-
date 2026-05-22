@@ -107,9 +107,9 @@ npx wrangler deploy
 
 Never deploy without explicit "deploy" instruction.
 
-## Alias Retirement — July 24, 2026
+## ✅ Alias Retirement — EXECUTED (Audit T392, May 23, 2026)
 
-`deepseek-chat` and `deepseek-reasoner` retire. Use `deepseek-v4-pro` or `deepseek-v4-flash`.
+`deepseek-chat` and `deepseek-reasoner` retired. Use `deepseek-v4-pro` (T3) or `deepseek-v4-flash` (T2) in all code. T1 burst model: `stepfun/step-3.5-flash`.
 
 ---
 

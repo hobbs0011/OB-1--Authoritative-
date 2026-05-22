@@ -45,14 +45,12 @@ Write-Host "PHOENIX-CODER:  $(if ($pc_status -eq 'UNREACHABLE') {'🔴 DOWN'} el
 
 ---
 
-## Step 2 — Alias Retirement Countdown
+## Step 2 — Alias Retirement Status
+
+✅ **EXECUTED** — Audit T392 complete (May 23, 2026). `deepseek-chat` and `deepseek-reasoner` aliases retired. All live code uses canonical model IDs: `deepseek-v4-flash`, `deepseek-v4-pro`, `stepfun/step-3.5-flash`.
 
 ```powershell
-$retire = [datetime]"2026-07-24"
-$today = Get-Date
-$days = ($retire - $today).Days
-Write-Host "ALIAS RETIREMENT: $days days until deepseek-chat + deepseek-reasoner retire (July 24, 2026)"
-if ($days -lt 30) { Write-Host "⚠️  WARNING: Less than 30 days — audit net-pet-ai/src/index.js NOW" }
+Write-Host "ALIAS RETIREMENT: EXECUTED. All live paths use canonical IDs (deepseek-v4-flash, deepseek-v4-pro, stepfun/step-3.5-flash)."
 ```
 
 ---

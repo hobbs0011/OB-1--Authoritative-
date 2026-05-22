@@ -123,10 +123,12 @@ Switch to Claude for irreversible decisions and deep synthesis.
 - No Notion. Permanently blacklisted.
 - Every run ends with a commit SHA. No SHA = run did not happen.
 
-## ALIAS RETIREMENT — July 24, 2026
+## ✅ ALIAS RETIREMENT — EXECUTED (Audit T392, May 23, 2026)
 
-`deepseek-chat` and `deepseek-reasoner` are dead after this date.  
-Use `deepseek-v4-pro` or `deepseek-v4-flash` in all code.
+`deepseek-chat` and `deepseek-reasoner` are **dead**. All live code paths use canonical model IDs.
+- T2 workhorse: `deepseek-v4-flash`
+- T3 heavy: `deepseek-v4-pro`
+- T1 burst: `stepfun/step-3.5-flash`
 
 ---
 

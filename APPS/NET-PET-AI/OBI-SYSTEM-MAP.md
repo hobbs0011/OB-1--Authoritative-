@@ -414,7 +414,7 @@ export async function callLLM(prompt) {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      model: "deepseek-chat",
+      model: "deepseek-v4-flash",
       messages: [{ role: "user", content: prompt }]
     })
   });
