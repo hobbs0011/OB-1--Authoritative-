@@ -17,5 +17,13 @@
     "sessions": 1,
     "level": "LOCK",
     "stagnation": false
+  },
+  {
+    "timestamp": "2026-05-23T02:33:10+07:00",
+    "count": 30167,
+    "events": 61,
+    "sessions": 1,
+    "level": "LOCK",
+    "stagnation": true
   }
 ]

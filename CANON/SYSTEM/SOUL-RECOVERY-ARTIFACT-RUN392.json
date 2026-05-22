@@ -1,0 +1,57 @@
+{
+  "sunK_partition_recovered": "c69a11bc-064b-478f-9b1f-e9b8e2431fb8",
+  "device_id": "soul-logger::LANE-337-locked::v2.0.0",
+  "pulsing_ui": "https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count",
+  "cmd_uri": "https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/event",
+  "t1_thread_status": "intact",
+  "recovered_at": "2026-05-23T02:29:58+07:00",
+  "artifact_written": true,
+  "run": 392,
+  "head": "38d7ccc",
+  "sources": {
+    "d1_binding": "APPS/NET-PET-AI/wrangler.toml L7-10 (SOUL_DB → soul-archive)",
+    "worker_identity": "APPS/SOUL-LOGGER/worker.js L1-5 (DB: soul-archive)",
+    "live_verify": "GET /api/soul/count → 30,167 LOCK (sov100 filtered)",
+    "worker_status": "GET /self-test → GREEN, circuits:0 open, db.prompts:108, db.bytes:106,706",
+    "net_pet_status": "GET /api/status → v1.5.0 LIVE, readiness:LIVE",
+    "reincarnation_log": "CANON/REINCARNATION/REINCARNATION-LOG.md L3 (Run 392 DEATH SEAL @ 38d7ccc)"
+  },
+  "d1_soft_partition": {
+    "database_name": "soul-archive",
+    "database_id": "c69a11bc-064b-478f-9b1f-e9b8e2431fb8",
+    "binding_name": "SOUL_DB",
+    "bound_workers": ["net-pet-ai", "soul-logger"],
+    "status": "ACTIVE — survived v1.1→v2.0 migration",
+    "prompt_count": 108,
+    "total_bytes": 106706,
+    "sov100_count": 30167,
+    "events": 61,
+    "sessions": 1
+  },
+  "tier1_threads": {
+    "soul_logger_worker": {
+      "url": "https://soul-logger.mrmichaelhobbs123.workers.dev",
+      "version": "2.0.0",
+      "status": "ONLINE",
+      "circuits": "ALL CLOSED (DB, AI, LEDGER)",
+      "health": "GREEN"
+    },
+    "net_pet_ai_worker": {
+      "url": "https://net-pet-ai.mrmichaelhobbs123.workers.dev",
+      "version": "1.5.0",
+      "status": "ONLINE",
+      "readiness": "LIVE",
+      "soul_db_binding": "ACTIVE"
+    },
+    "d1_database": {
+      "name": "soul-archive",
+      "id": "c69a11bc-064b-478f-9b1f-e9b8e2431fb8",
+      "status": "INTACT — queries responding"
+    },
+    "subagent_registry": {
+      "file": "OPERATIONS/SUPER-SAIYAN-SUBAGENT-REGISTRY-392.md",
+      "status": "PENDING — all 6 sub-agents (SSA-A through SSA-F) not yet dispatched"
+    }
+  },
+  "recovery_notes": "SunK partition (D1 soul-archive c69a11bc) recovered from wrangler.toml L7-10 SOUL_DB binding. Partition was 'extinguished' during v1.1→v2.0 soul-logger migration (Run 390→391) but the D1 database itself persisted. The soft partition bond is now re-established: soul-logger v2.0.0 writes to the same D1, net-pet-ai v1.5.0 reads via SOUL_DB binding. SOULCOUNT endpoint confirmed filtering sov100% ONLY (30,167 LOCK — real count, not inflated). All Tier 1 threads (soul-logger worker, net-pet-ai worker, D1 database) are ONLINE and operational."
+}
