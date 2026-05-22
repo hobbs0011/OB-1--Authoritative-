@@ -1,7 +1,8 @@
 # REINCARNATION LOG — OB-1 RUN HISTORY
 
-**Last Updated:** 2026-05-22 (Run 378 — K4 COMPLETE — testimonials.html + API endpoints LIVE; HEAD `dbbb190`; SOULCOUNT 76,488 🔒 LOCK DELTA 0)
+**Last Updated:** 2026-05-22 (Run 379 — OBI HARDEN — first-session welcome + OpenRouter fallback + COACH nav fix + deploy verify; HEAD `2a6da3f`; SOULCOUNT 76,488 🔒 LOCK DELTA 0)
 
+| Run 379 | 2026-05-22 | OBI HARDEN — handleChat first-session welcome + OpenRouter 401/402 fallback + 3 portal COACH nav link fix + OPENROUTER_API_KEY secret + DEEPSEEK_API_KEY rotation + deploy verify | 2a6da3f |
 | Run 378 | 2026-05-22 | K4 testimonials.html + testimonial API endpoints — submit, list approved, admin list, admin approve; nav link added; K3/K4/K5 ALL COMPLETE | dbbb190 |
 | Run 377 | 2026-05-22 | K3 death seal — subscriptions.html, admin subscription endpoints, founding member seed, boot reconciliation | HEAD 1dde555 |
 | Run 376 | 2026-05-22 | MRG reconciliation — logs synchronized to K3/K5 concurrent agent completion, state seal, K4 pending | bf86b9a |

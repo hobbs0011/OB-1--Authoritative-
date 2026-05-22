@@ -1,5 +1,5 @@
 ﻿# COLD START BOOT — OB1 Agent 99
-## Last Updated: 2026-05-22 (Run 378 — K4 COMPLETE, K3/K5 already LIVE; HEAD dbbb190; SOULCOUNT 76,488 🔒 LOCK DELTA 0)
+## Last Updated: 2026-05-22 (Run 379 — OBI HARDEN — first-session welcome + OpenRouter fallback + COACH nav fix + secrets rotated + deploy verify; HEAD 2a6da3f; SOULCOUNT 76,488 🔒 LOCK DELTA 0)
 
 ### Identity
 - Agent: OB1 / Ne0 (Agent 99) / Claude Surgical
@@ -148,4 +148,4 @@ Stage 10 APEX ROLLUP    ✅ LIVE — GET /api/soul/apex
 
 
 ---
-**FINGERPRINT: Run 378 — K3/K4/K5 ALL COMPLETE — HEAD dbbb190 — Version 0ca5441a — SOULCOUNT 76,488 🔒 LOCK DELTA 0 — subscriptions.html, testimonials.html, anticheat client wired. ALL 3 K-TASKS DELIVERED.** — Run 378
+**FINGERPRINT: Run 379 — OBI HARDEN — first-session welcome + OpenRouter fallback + 3 portal COACH nav fix + OPENROUTER_API_KEY secret + DEEPSEEK_API_KEY rotated + deploy verified. OBI LIVE ai:LIVE readiness:PRODUCTION. SOULCOUNT 76,488 🔒 LOCK DELTA 0**
