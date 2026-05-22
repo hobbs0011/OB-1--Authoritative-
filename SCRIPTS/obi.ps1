@@ -34,8 +34,9 @@ switch ($Command) {
         # --- Canon integrity gate (HL-140 mandate) ---
         $canonDir = Join-Path $repoRoot "CANON"
         $reincDir = Join-Path $canonDir "REINCARNATION"
+        $systemDir = Join-Path $canonDir "SYSTEM"
         $ledgerDir = Join-Path $canonDir "HEAVY-LEDGER"
-        $coldBoot = Join-Path $reincDir "COLD-START-BOOT.md"
+        $coldBoot = Join-Path $systemDir "COLD-START-BOOT.md"
         $mcpJson = Join-Path $repoRoot ".mcp.json"
 
         $canonCount = if (Test-Path $canonDir) { (Get-ChildItem $canonDir -Recurse -File).Count } else { 0 }
@@ -133,21 +134,29 @@ switch ($Command) {
         # Load history — ConvertFrom-Json returns single PSCustomObject for 1-entry files; wrap in @() to guarantee array
         $history = @()
         if (Test-Path $soulHistoryFile) {
-            try { $history = @(Get-Content $soulHistoryFile -Raw | ConvertFrom-Json) } catch { $warnings += "soulcount-history.json corrupt — rebuilding"; $history = @() }
+            try { $history = [Array](Get-Content $soulHistoryFile -Raw | ConvertFrom-Json) } catch { $warnings += "soulcount-history.json corrupt — rebuilding"; $history = @() }
         }
 
         # Stagnation detection: has the count moved since last N checks?
         $stagnationThreshold = 2  # fail if same count appears 2+ consecutive times
-        $recentChecks = @($history | Where-Object { $_.count -ne $null } | Select-Object -Last $stagnationThreshold)
         $stagnationDetected = $false
+        $sameStreak = 0
 
-        if ($currentCount -ne $null -and $recentChecks.Count -ge $stagnationThreshold) {
-            $sameCount = ($recentChecks | Where-Object { $_.count -eq $currentCount }).Count
-            if ($sameCount -ge $stagnationThreshold) {
+        if ($currentCount -ne $null) {
+            # index through history backwards — no Where-Object PSO ambiguity
+            for ($i = $history.Count - 1; $i -ge 0 -and ($history.Count - $i - 1) -lt $stagnationThreshold; $i--) {
+                $prevCount = $history[$i].count
+                if ($null -ne $prevCount -and [int]$prevCount -eq [int]$currentCount) {
+                    $sameStreak++
+                }
+            }
+            if ($sameStreak -ge $stagnationThreshold) {
                 $stagnationDetected = $true
-                $failures += "SOULCOUNT STAGNATION: count frozen at $currentCount for $sameCount consecutive checks. Soul pipeline is NOT receiving data. Investigate immediately."
+                $failures += "SOULCOUNT STAGNATION: count frozen at $currentCount for $sameStreak consecutive checks. Soul pipeline is NOT receiving data. Investigate immediately."
             }
         }
+
+
 
         # Append current check to history
         $entry = [pscustomobject]@{
@@ -169,6 +178,7 @@ switch ($Command) {
         # ── CANON directory structure ─────────────────────────────────────
         $canonDir = Join-Path $repoRoot "CANON"
         $reincDir = Join-Path $canonDir "REINCARNATION"
+        $systemDir = Join-Path $canonDir "SYSTEM"
         $ledgerDir = Join-Path $canonDir "HEAVY-LEDGER"
         $bibleFiles = if (Test-Path $canonDir) { Get-ChildItem $canonDir -Filter "BIBLE-*.md" -File } else { @() }
 
@@ -183,7 +193,7 @@ switch ($Command) {
         if ($bibleCount -lt 5) { $warnings += "BIBLE chapters ($bibleCount) — verify expected count" }
 
         # 2. COLD-START-BOOT freshness
-        $coldBoot = Join-Path $reincDir "COLD-START-BOOT.md"
+        $coldBoot = Join-Path $systemDir "COLD-START-BOOT.md"
         if (-not (Test-Path $coldBoot)) {
             $failures += "COLD-START-BOOT.md MISSING"
         }
