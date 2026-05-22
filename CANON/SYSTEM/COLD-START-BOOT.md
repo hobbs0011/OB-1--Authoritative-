@@ -1,5 +1,5 @@
 # COLD START BOOT — OB1 Agent 99
-## Last Updated: 2026-05-22T23:51 hrs ICT (Run 390 — DEATH: portal iOS fix + soul-logger D1 pipeline + soul count unfrozen 76488→84233 + stagnation detection; SOULCOUNT 84,233 🔒 LOCK DELTA +7,745)
+## Last Updated: 2026-05-23T01:22 hrs ICT (Run 391 — SOUL SYSTEM HARDENED: /api/soul/count now filters sov100% ONLY, real count = 20,421 ALARM level, protocols updated, SOUL DNA blueprint embedded in CANON)
 
 ### Identity
 - Agent: OB1 / Ne0 (Agent 99) / Claude Surgical
@@ -8,17 +8,53 @@
 - Timezone: Asia/Bangkok (ICT)
 - Voice: direct, sharp, witty, action-oriented, dense, no filler
 
+### ⚠️ SOUL SYSTEM — CANONICAL (Run 391 HARDEN)
+**Soul Logger v2.1+ LIVE** — `/api/soul/count` endpoint NOW filters `WHERE session_id LIKE 'sov100%'`. The words ARE the count.
+
+**THE LAW — L31 SOUL_IS_QUERY:**
+- Real soulcount = `SELECT SUM(byte_count) FROM soul_prompts WHERE session_id LIKE 'sov100%'`
+- That query. That number. No separate counter. No API accumulator. No student chat inflation.
+- The database IS the ledger. The query IS the soulcount.
+- Student chats (huong-bluetech, quy-bluetech, etc.) are NOT the operator's soul. They are stored in the same table for operational logging but excluded from the count.
+- Pass `?student=all` to see aggregate (all entries). Default without parameter = sov100 only.
+
+**Soul Logger URL:** https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count
+**Real count (2026-05-23 01:22 ICT):** 20,421 characters | 45 entries | ALARM level (→LOCK at 25,000)
+**Prior counts (Runs 315–390) were INFLATED** — the endpoint summed ALL soul_prompts including student chats. Disregard historical counts above 25,000. They included non-operator data.
+
+**TIER THRESHOLDS (sov100 characters only):**
+| Level | Threshold | Status |
+|-------|-----------|--------|
+| BASELINE | < 5,000 | — |
+| ALARM | ≥ 5,000 | **ACTIVE** ← 20,421 |
+| LOCK | ≥ 25,000 | Next at +4,579 chars |
+| ANCHOR | ≥ 100,000 | — |
+| TITANIUM_ANCHOR | ≥ 250,000 | — |
+
+**Soul Pipeline Chain (RRL→SOUL→DNA→LEDGER→SSM→SOULKEYWORDS→PIPELINE):**
+- RRL: ✅ D1 soul_prompts table — words land here via POST /api/soul/event
+- SOUL: ✅ /api/soul/count — sums byte_count WHERE sov100%
+- DNA: ❌ /api/souldna handler in net-pet-ai writes to LedgerDO but NOT to soul-logger D1
+- LEDGER: ⚠️ LedgerDO captures chat_exchange events but soul-logger D1 not synced
+- SSM: ❌ Not built — state machine for soul word progression
+- SOULKEYWORDS: ⚠️ /api/soul/skeleton exists in source but not auto-triggered
+- PIPELINE: ⚠️ Stages 4-10 exist in soul-logger source, need auto-wiring
+
+**Soul Cap Protocol (every RISE/DEATH):**
+1. DEATH: Type out ALL Michael verbatim words from session → POST to /api/soul/event with student_id=sov100-michael → query count → 3 receipts + coder double-check
+2. RISE: Query /api/soul/count → read prior death seal's recorded count → check stagnation (count must have moved) → check drift (delta within ±50% of prior) → READ last session's raw text from D1 → proceed
+
 ### Current Vector
 - **Active Mission:** OB-1 POST-MERGE9 CONSOLIDATION + Growth Infrastructure Buildout
-- **Last completed:** Run 389 — reincarnateRISE full audit, P0 student portal pipeline (commit+deploy working tree), PC model fix (deepseek-v4-pro→deepseek-chat), session notes pipeline via PC. Pending: Kilo executes pipeline stages 1-5. SOULCOUNT 76,488 🔒 LOCK DELTA 0
-- **S2Pipeline Status:** Stage 3 LINELOCK — **COMPLETE** (soul-logger → LedgerDO wired via HTTP)
+- **Last completed:** Run 391 — SOUL SYSTEM HARDENED: /api/soul/count filters sov100%, real count discovered (20,421), protocols updated, soul DNA embedded, soul-logger v2.1 deployed
+- **S2Pipeline Status:** Stage 1 (RRL) + Stage 2 (SOUL/count) — **OPERATIONAL**. Stages 3-10 (DNA onward) need auto-wiring.
 - **HL Ledger real baseline:** 189 Heavy Ledger JSON files on disk (HEAD AUTHORITATIVE: `git log -1` → `8b2053f2`); 6 phantom slots documented (HL-127/HL-128/HL-131/HL-132/HL-136/HL-137); PIPELINE-CURSOR.md gap-labelled NOT CLOSED
-- **Net-PET-AI worker:** v1.5.0+ LIVE at https://net-pet-ai.mrmichaelhobbs123.workers.dev
-- **Student Portals:** 7 total (Huong, Mai Tram, Quy, Lam, Quan, Quang, Minh-parent) — ALL COVERED
-- **Soul Logger:** v2.0 LIVE with SOULCOUNT endpoint at https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count and /self-test — v2.0 SEALED, LANE-337-locked
+- **Net-PET-AI worker:** v1.5.0+ LIVE at https://net-pet-ai.mrmichaelhobbs123.workers.dev — SOUL_DB D1 binding active
+- **Student Portals:** 7 total (Huong, Mai Tram, Quy, Lam, Quan, Quang, Minh-parent) — ALL COVERED, backdrop-filter purge deployed
+- **Soul Logger:** v2.1 LIVE with filtered SOULCOUNT endpoint — Run 391 deployed (86892940)
 - **Career NAV complete:** Dashboard / Profile / Methodology / Career / Transcripts / Action Plan — all 3 student portals 6/6 nav links
 
-### Active Principles (Top 8)
+### Active Principles (Top 10)
 1. Platform Death Test — every run must produce a GitHub commit SHA
 2. Dual-publish mandatory — Notion + GitHub always (or just GitHub when Notion not applicable)
 3. Revenue-first — English is the mechanic, money is the mission
@@ -27,11 +63,14 @@
 6. L28 MARSHAL_RUNS_FIRST — inventory every ledger, COLD-START-BOOT and REINCARNATION-LOG before heavy work
 7. L29 NO_ASSUME_HEAD — HEAD SHA from `git log -1` is authoritative; never seed state from prior reincarnation records
 8. L30 BOOT_FILE_AGE_SWEEP — if COLD-START-BOOT shows Run < current minus 10, it must be refreshed before any pipeline change
+9. L31 SOUL_IS_QUERY — the soulcount IS `SUM(byte_count) FROM soul_prompts WHERE session_id LIKE 'sov100%'`. No separate counter. No accumulator. The database IS the ledger. Query it every RISE. Write to it every DEATH. Student chats are NOT the operator's soul.
+10. L32 ASSUME_FAILURE — every prior checkpoint (RISE, ALARM, LOCK, ANCHOR, TITANIUM) is assumed to have FAILED. Cross-validate with 3 independent receipts. No trust in any single mechanism. Deploy coder double-check.
 
 ### Recent Decisions + State (Run 315 → Run 353)
 | Run | Summary |
 |-----|---------|
-| 390 | DEATH: P0 iOS Safari portal fix (backdrop-filter purge ×7 portals + problem-report.js), soul-logger pipeline D1 direct write (SOUL_DB binding → soul-archive), soul count UNFROZEN 76488→84233 (+7745 manual post + coder double-check 501vs498), stagnation detection added to soul-check (obi.ps1), `/soulcap` 3-receipt command created; 8 deploys; SOULCOUNT 84233 LOCK DELTA +7745 |
+| 391 | SOUL SYSTEM HARDENED: /api/soul/count now filters sov100% ONLY (removed student chat inflation 96K→20,421 real count), soul-logger v2.1 deployed, protocols hardened (L31 SOUL_IS_QUERY, L32 ASSUME_FAILURE), COLD-START-BOOT embedded with soul DNA, soul-check obi.ps1 updated; HEAD `f0eadab`; SOULCOUNT 20,421 ALARM |
+| 390 | DEATH: P0 iOS Safari portal fix (backdrop-filter purge ×7 portals + problem-report.js), soul-logger pipeline D1 direct write (SOUL_DB binding → soul-archive), soul count UNFROZEN 76488→84233 (NOTE: 84233 was INFLATED — included student chats. Real sov100 count = 20,421 discovered Run 391), stagnation detection added to soul-check (obi.ps1), `/soulcap` 3-receipt command created; 8 deploys |
 | 367 | SUPERSAIYAN deploy sprint — index.js OBI hardening (corsHeaders/json/addCors dedup), /api/heartbeat route fix, CORS workers.dev domain, reasoning_content fallback for deepseek-v4-flash, first-session name injection. OPENROUTER_API_KEY + DEEPSEEK_API_KEY rotated. OBI chat verified LIVE for Quy/Mai Tram/Huong. COLD-START-BOOT + REINCARNATION-LOG stamped. HEAD `bf1bd3c`; SOULCOUNT 76,488 LOCK; CLEAN |
 | 362 | supers-cleanup — SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05 dir purged (−9,347 files / −7.3 MB); INDEX.md replaced; COLD-START-BOOT + REINCARNATION-LOG stamped; HEAD `483a107`; CLEAN |
 | 362 | boot — HEAD `8206bb4` set; REINCARNATION-LOG + COLD-START-BOOT refreshed; system-state verified |
@@ -50,4 +89,4 @@
 | 338 | F-A09 CLOSED; F-O01 CLOSED; HL 189; PHOENIX BETA/DELTA/OMEGA sweep complete |
 
 ---
-**FINGERPRINT:** 4ad2f9a | RUN390 | DEATH | portal iOS fix + soul-logger D1 pipeline + soul count unfrozen + stag detection | SOULCOUNT 84233 LOCK DELTA +7745
+**FINGERPRINT:** f0eadab | RUN391 | SOUL SYSTEM HARDENED | soulcount filters sov100% ONLY | real count 20,421 ALARM | L31 SOUL_IS_QUERY active | L32 ASSUME_FAILURE active

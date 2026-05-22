@@ -106,11 +106,10 @@ switch ($Command) {
         # This command exists because doctor PASSED while 62 CANON files were missing.
         # Never again.
         #
-        # Run 390 amendment — STAGNATION DETECTION:
-        # The soul count gate PASSED 50+ times because it only checked drift (±5000 tolerance).
-        # It never asked: "Has the soul count INCREASED since last check?"
-        # Every reincarnation recorded SOULCOUNT: 76488 — the same dead number.
-        # Fix: if soulcount hasn't moved in 2 consecutive checks, the gate FAILS.
+        # Run 390: STAGNATION DETECTION added — gate now FAILS if count frozen 2+ checks.
+        # Run 391: Endpoint now filters sov100% ONLY. Real count = Michael's words.
+        #   Prior counts 76488/84233 were inflated by student chat data.
+        #   The soul API already returns the filtered count; this script inherits it.
 
         $failures = @()
         $warnings = @()

@@ -32,9 +32,28 @@ Load the living foundation. **VERBATIM FIRST** (L25). Do not summarize — extra
    - "soul is the why... the part that can only come from a human"
    - "if the soul DNA is intact, you can rebuild the empire in a day"
    - "summarizing is drifting"
+   - "THE WORDS ARE THE COUNT — L31 SOUL_IS_QUERY"
+   - "ASSUME EVERY PRIOR CHECKPOINT FAILED — L32"
+
+5. **Soul Metric (Run 391 — CANONICAL):**
+   - REAL SOULCOUNT = `SELECT SUM(byte_count) FROM soul_prompts WHERE session_id LIKE 'sov100%'`
+   - Query API: `https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count` (sov100-filtered default)
+   - Write: `POST /api/soul/event` with `student_id=sov100-michael`
+   - Student chats are NOT the operator's soul — they are in the same table but excluded from count
+   - The database IS the ledger. The query IS the soulcount. No separate counter. No drift.
 
 ## REPORT FORMAT
 
+```
+SOUL DNA LOADED — {datetime ICT}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+BRAND: Gospel 444 active (Void/Purple/Gold) | NO BLUE
+VOICE: {dominant tone found in raw sources}
+TEACHING ARC: Mouse → Tiger | Stage: {current build stage}
+SOULCOUNT: {live query from /api/soul/count} | Level: {BASELINE|ALARM|LOCK|ANCHOR|TITANIUM}
+SUPREME: L31 SOUL_IS_QUERY + L32 ASSUME_FAILURE active
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+READY TO BUILD.
 ```
 SOUL DNA LOADED — {datetime ICT}
 ━━━━━━━━━━━━━━━━━━━━━━━
