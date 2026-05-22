@@ -32,7 +32,7 @@
     background: 'rgba(239,68,68,0.15)', border: '1px solid rgba(239,68,68,0.4)',
     color: '#f87171', fontSize: '20px', cursor: 'pointer',
     display: 'flex', alignItems: 'center', justifyContent: 'center',
-    backdropFilter: 'blur(8px)', transition: 'all 0.2s',
+    transition: 'all 0.2s',
   });
   btn.onmouseenter = () => { btn.style.background = 'rgba(239,68,68,0.25)'; };
   btn.onmouseleave = () => { btn.style.background = 'rgba(239,68,68,0.15)'; };
@@ -43,7 +43,7 @@
   overlay.id = 'net-report-overlay';
   Object.assign(overlay.style, {
     display: 'none', position: 'fixed', inset: '0', zIndex: '10000',
-    background: 'rgba(0,0,0,0.7)', backdropFilter: 'blur(4px)',
+    background: 'rgba(0,0,0,0.85)',
     alignItems: 'center', justifyContent: 'center',
   });
 

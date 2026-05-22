@@ -65,9 +65,7 @@
             align-items: center;
             justify-content: center;
             background: rgba(10, 10, 18, 0.97);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            transition: opacity 0.45s ease, visibility 0.45s ease;
+            -webkit-transition: opacity 0.45s ease, visibility 0.45s ease;
         }
         #loginScreen.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
         .login-box {
@@ -78,7 +76,6 @@
             text-align: center;
             max-width: 420px;
             width: 90%;
-            backdrop-filter: blur(20px);
             box-shadow: 0 8px 40px rgba(0,0,0,0.5), 0 0 60px var(--purple-glow);
             animation: fadeIn 0.5s ease;
         }
@@ -106,9 +103,9 @@
         .login-error.visible { opacity: 1; }
 
         /* ── SET PASSWORD MODAL ── */
-        #setPwModal { position: fixed; inset: 0; z-index: 10001; display: flex; align-items: center; justify-content: center; background: rgba(10,10,18,0.97); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); transition: opacity 0.45s ease, visibility 0.45s ease; }
+        #setPwModal { position: fixed; inset: 0; z-index: 10001; display: flex; align-items: center; justify-content: center; background: rgba(10,10,18,0.97); -webkit-transition: opacity 0.45s ease, visibility 0.45s ease; }
         #setPwModal.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-        .setpw-box { background: var(--card); border: 1px solid rgba(245,158,11,0.3); border-radius: 24px; padding: 48px 40px; text-align: center; max-width: 420px; width: 90%; backdrop-filter: blur(20px); box-shadow: 0 8px 40px rgba(0,0,0,0.5), 0 0 60px var(--gold-glow); animation: fadeIn 0.5s ease; }
+        .setpw-box { background: var(--card); border: 1px solid rgba(245,158,11,0.3); border-radius: 24px; padding: 48px 40px; text-align: center; max-width: 420px; width: 90%; box-shadow: 0 8px 40px rgba(0,0,0,0.5), 0 0 60px var(--gold-glow); animation: fadeIn 0.5s ease; }
         .setpw-box h2 { font-family: 'Orbitron', sans-serif; font-size: 1.3rem; font-weight: 700; letter-spacing: 0.06em; margin-bottom: 8px; color: var(--gold); }
         .setpw-box p { font-family: 'Rajdhani', sans-serif; font-size: 0.95rem; color: var(--dim); margin-bottom: 20px; line-height: 1.4; }
         .setpw-box input[type="password"] { width: 100%; padding: 14px 18px; border-radius: 12px; border: 1px solid var(--border); background: rgba(255,255,255,0.04); color: var(--text); font-family: 'Inter', sans-serif; font-size: 1rem; outline: none; transition: border-color 0.3s, box-shadow 0.3s; margin-bottom: 12px; letter-spacing: 0.15em; }
@@ -127,8 +124,7 @@
         /* ── TOP NAV ── */
         #topNav {
             position: fixed; top: 0; left: 0; right: 0; height: 70px; z-index: 9000;
-            background: rgba(10,10,18,0.82); backdrop-filter: blur(18px);
-            border-bottom: 1px solid var(--border);
+            background: rgba(10,10,18,0.82); border-bottom: 1px solid var(--border);
             display: flex; align-items: center; justify-content: space-between;
             padding: 0 28px; transition: opacity 0.4s;
         }
@@ -172,7 +168,7 @@
         @media (max-width: 700px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
         .stat-card {
             background: var(--card); border: 1px solid var(--border); border-radius: 20px;
-            padding: 20px 18px; backdrop-filter: blur(20px); text-align: center;
+            padding: 20px 18px; text-align: center;
             transition: transform 0.2s, box-shadow 0.2s; position: relative; overflow: hidden;
         }
         .stat-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.35); }
@@ -190,7 +186,7 @@
         .day1-card {
             background: var(--card); border: 1px solid rgba(168,85,247,0.25);
             border-radius: 24px; padding: 36px 32px; margin-bottom: 28px;
-            backdrop-filter: blur(20px); animation: fadeIn 0.55s ease; text-align: center;
+            animation: fadeIn 0.55s ease; text-align: center;
             box-shadow: 0 0 40px rgba(168,85,247,0.08);
         }
         .day1-card .day1-badge {
@@ -213,7 +209,7 @@
         /* ── CONTENT CARDS ── */
         .content-card {
             background: var(--card); border: 1px solid var(--border); border-radius: 24px;
-            padding: 28px; backdrop-filter: blur(20px); animation: fadeIn 0.55s ease; margin-bottom: 20px;
+            padding: 28px; animation: fadeIn 0.55s ease; margin-bottom: 20px;
         }
         .card-label { font-family: 'Rajdhani', sans-serif; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; color: var(--dim); text-transform: uppercase; margin-bottom: 10px; }
         .teacher-note { border-left: 4px solid var(--teal); padding-left: 20px; }
@@ -238,7 +234,7 @@
         .quick-link-card {
             display: block; background: var(--card); border: 1px solid var(--border);
             border-radius: 20px; padding: 22px 18px; text-align: center; text-decoration: none;
-            backdrop-filter: blur(20px); transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
         }
         .quick-link-card:hover { transform: translateY(-3px); box-shadow: 0 14px 36px rgba(0,0,0,0.4); border-color: rgba(168,85,247,0.4); }
         .quick-link-card.primary-link { border-color: rgba(168,85,247,0.25); background: rgba(168,85,247,0.06); }
@@ -314,8 +310,7 @@
         }
         .ww-stat {
             flex: 1; min-width: 90px;
-            background: var(--card); backdrop-filter: blur(16px);
-            border: 1px solid var(--border); border-radius: 14px;
+            background: var(--card); border: 1px solid var(--border); border-radius: 14px;
             padding: 14px 12px; text-align: center;
         }
         .ww-label { font-family: 'Rajdhani', sans-serif; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: var(--dim); margin-bottom: 6px; }
@@ -329,7 +324,6 @@
         /* ── GRADUATION FORECAST WIDGET ── */
         #forecast-widget {
             background: var(--card);
-            backdrop-filter: blur(16px);
             border: 1px solid var(--border);
             border-radius: 14px;
             padding: 14px 18px;
