@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-05-22T07:03:25.4833082+07:00",
-  "git_head": "bf86b9a mrg: Run 375 meta-update ΓÇö K3/K5 COMPLETE, K4 pending; HEAD 2346b91; log+boot synchronized; SOULCOUNT 76488 LOCK",
   "soul_ok": true,
+  "doctor_ok": true,
   "verify_ok": true,
+  "timestamp": "2026-05-22T12:31:24.7214402+07:00",
   "git_branch": "master",
-  "doctor_ok": true
+  "git_head": "b82bd58 death: Run 381 ΓÇö COLD-START-BOOT HEAD_DRIFT correction (761766a->ba69774), L30 compliance restored; RISE+DEATH protocol executed ΓÇö SOULCOUNT 76488 LOCK DELTA 0"
 }
