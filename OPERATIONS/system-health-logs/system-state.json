@@ -1,8 +1,8 @@
 {
-  "doctor_ok": true,
+  "timestamp": "2026-05-22T07:03:25.4833082+07:00",
+  "git_head": "bf86b9a mrg: Run 375 meta-update ΓÇö K3/K5 COMPLETE, K4 pending; HEAD 2346b91; log+boot synchronized; SOULCOUNT 76488 LOCK",
+  "soul_ok": true,
   "verify_ok": true,
-  "git_head": "bd938fa death: Run 373 seal ΓÇö K3/K4/K5 deferred handoff; concurrent agent reconciliation; HEAD 90b3b31 | SOULCOUNT 76488 LOCK DELTA 0",
-  "timestamp": "2026-05-22T00:18:28.6172944+07:00",
   "git_branch": "master",
-  "soul_ok": true
+  "doctor_ok": true
 }
