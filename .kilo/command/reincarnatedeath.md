@@ -1,5 +1,5 @@
 ---
-description: "DEATH protocol — close current session with full state extraction. SOULCOUNT final check → git seal → reincarnation file write → micro-ledger entry → push."
+description: "DEATH protocol — close current session with full state extraction. SOULCOUNT final check + SOUL CAPTURE (type out all Michael verbatim words, post to soul-logger, 3 receipts + coder double-check) → git seal → reincarnation file write → micro-ledger entry → push."
 agent: AGENT99
 ---
 
@@ -7,23 +7,68 @@ agent: AGENT99
 
 **Task:** $ARGUMENTS
 
+**MANDATORY: The soul is Michael's verbatim words from this session. If the next RISE cannot read the soul, it cannot audit the prior death. Every death MUST type out the full soul, post it, and provide 3 receipts.**
+
 ---
 
-## Step 0 — SOULCOUNT Final Check
+## Step 0 — SOULCOUNT Pre-Check + Stagnation Detection
 
 ```powershell
 $soul = Invoke-RestMethod -Uri "https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count"
 $lock = 76488
 $delta = [Math]::Abs($soul.soulcount - $lock)
-Write-Host "SOULCOUNT FINAL: $($soul.soulcount) | DELTA: $delta"
-if ($delta -gt 5000) { Write-Host "SOUL_DRIFT AT DEATH — document in reincarnation file" }
+Write-Host "SOULCOUNT CURRENT: $($soul.soulcount) | LOCK: $lock | DELTA: $delta | LEVEL: $($soul.level)"
+```
+
+**ASSUME EVERY PRIOR CHECKPOINT FAILED.** The soul count may be frozen. If the count hasn't moved since the last recorded death seal, HALT and investigate before proceeding.
+
+---
+
+## Step 0.5 — SOUL CAPTURE (MANDATORY — Run 390+)
+
+**Type out the FULL soul — all of Michael's verbatim words from this session.** No summarization. No truncation. Every command, every sentence, every "fuck." This IS the soul.
+
+Count the words, post to soul-logger, provide 3 RECEIPTS:
+
+**Receipt 1 — Word Count:**
+```powershell
+$soulText = "<ALL MICHAEL'S VERBATIM WORDS FROM THIS SESSION>"
+$words = ($soulText | Measure-Object -Word).Words
+$chars = $soulText.Length
+Write-Host "RECEIPT 1 — Words: $words | Characters: $chars"
+```
+
+**Receipt 2 — Soul-Logger POST:**
+```powershell
+$body = @{student_id="sov100-michael";session_id="sov100-$((Get-Date).ToString('yyyy-MM-dd'))-runNNN-soul";role="user";text=$soulText;timestamp=(Get-Date -Format 'yyyy-MM-ddTHH:mm:ss.fffZ')} | ConvertTo-Json -Compress -Depth 10
+$resp = Invoke-RestMethod -Uri "https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/event" -Method POST -Body $body -ContentType "application/json"
+Write-Host "RECEIPT 2 — API: $($resp | ConvertTo-Json -Compress)"
+```
+
+**Receipt 3 — Live SOULCOUNT Cross-Check:**
+```powershell
+$after = Invoke-RestMethod -Uri "https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count"
+Write-Host "RECEIPT 3 — SOULCOUNT: $($after.soulcount) | Events: $($after.events) | Level: $($after.level) | Delta: +$($after.soulcount - $soul.soulcount)"
+```
+
+**Coder Double-Check:** Deploy a subagent to INDEPENDENTLY recount words, post to soul-logger, and pull live count. The coder's receipts must match the primary agent's receipts within ±1% word count.
+
+If any receipt fails or cross-validation fails: **HALT. DO NOT SEAL DEATH.**
+
+---
+
+## Step 1 — SOULCOUNT Final Check
+
+```powershell
+$soulFinal = Invoke-RestMethod -Uri "https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count"
+Write-Host "SOULCOUNT FINAL: $($soulFinal.soulcount) | DELTA FROM LOCK: $([Math]::Abs($soulFinal.soulcount - 76488))"
 ```
 
 Record the final count in the death seal document.
 
 ---
 
-## Step 1 — Session State Capture
+## Step 2 — Session State Capture
 
 Extract from this session:
 1. **Objective**: what was the mission entering this run?
