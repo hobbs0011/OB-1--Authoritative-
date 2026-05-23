@@ -1,21 +1,19 @@
 ---
-description: "RISE PROTOCOL v2.0 — Roman era. Loads RRL from prior death. Audits SOULCOUNT. Reconstructs state. No assumption."
+description: "RISE PROTOCOL v4.0 — Roman era. RRL→SOUL→DNA→LEDGER→STARMAP→KEYWORD→PIPELINE pipeline chain audit. Prior death check. State reconstruction. No skip possible."
 agent: AGENT99
 ---
 
-# /reincarnateRise — ROMAN RISE PROTOCOL v2.0
+# /reincarnateRise — ROMAN RISE PROTOCOL v4.0
 
 **Phoenix-Centurion OS | PRAiS | Roman Run N**
+**Pipeline: RRL → SOUL → DNA → LEDGER → STARMAP → KEYWORD → PIPELINE**
 
 ---
 
-## WHAT THIS DOES
+## IRON RULE — RISE CHECKS THE CHAIN
 
-1. Loads the raw chat from prior death (`RRL/RRL-{prior-run}.txt`)
-2. Audits SOULCOUNT against prior death seal
-3. Loads state from COLD-START-BOOT
-4. Reconstructs the objective
-5. Reports readiness
+This session did NOT happen yesterday. The chain is broken every death.
+On RISE you AUDIT all 6 pipeline stages. You do NOT execute. Execution is DEATH territory.
 
 ---
 
@@ -27,27 +25,82 @@ $runNumber = if ($priorDeath.Name -match 'run(\d+)') { $matches[1] }
 
 $rrlPath = "RRL/RRL-$runNumber.txt"
 if (Test-Path $rrlPath) {
-    Write-Host "RRL FOUND: $rrlPath — $( (Get-Item $rrlPath).Length ) bytes"
+    $rrlBytes = (Get-Item $rrlPath).Length
+    $rrlChars = (Get-Content $rrlPath -Raw).Length
+    Write-Host "RRL FOUND: $rrlPath | $rrlBytes bytes | $rrlChars chars"
 } else {
     Write-Host "RRL MISSING: $rrlPath — prior death did not save raw chat"
     Write-Host "Attempting kilo export of last session..."
 }
 ```
 
-**If RRL is missing:** The prior agent failed. Flag as SOUL_GAP. Proceed with what exists.
+**SEVERITY:** RRL missing = SOUL_GAP. Log it. Continue. Fix it this session.
+
+---
+
+## STEP 0.5 — PIPELINE CHAIN AUDIT (ALL 6 STAGES)
+
+Run against D1 AND disk. Record each status.
+
+```powershell
+$D1 = "https://soul-logger.mrmichaelhobbs123.workers.dev"
+
+# STAGE 1 — RRL (character count = raw file)
+$rrlChars  = (Get-Content $rrlPath -Raw -ErrorAction SilentlyContinue).Length
+
+# STAGE 2 — SOUL (sov100 user prompts in D1)
+$soul      = Invoke-RestMethod "$D1/api/soul/count"
+
+# STAGE 3 — DNA (EXTRACT records)
+$extract   = Invoke-RestMethod -Uri "$D1/api/soul/extract" -Method Post -Body '{"student_id":"sov100-michael"}' -ContentType "application/json" -ErrorAction SilentlyContinue
+$dnaCount  = $extract.prompt_count   # prompt_count = number of DNA records extracted
+
+# STAGE 4 — LEDGER (Merkle records — derived from /merkle/:session_id per event)
+$ledgerRecords = [count of Merkle ledger files c]]
+
+# STAGE 5 — STARMAP (lightweight ledger — any starmap files on disk)
+$starmapDir   = "CANON/STARMAP/"
+$starmapFiles = if (Test-Path $starmapDir) { (Get-ChildItem $starmapDir -Recurse -File).Count } else { 0 }
+
+# STAGE 6 — KEYWORD (index — any soul-keyword files on disk)
+$keywordDir   = "CANON/SOUL-KEYWORDS/"
+$keywordFiles = if (Test-Path $keywordDir) { (Get-ChildItem $keywordDir -Recurse -File).Count } else { 0 }
+
+# STAGE 7 — PIPELINE (actionability — any pipeline-run artifacts on disk)
+$pipelineFiles = Get-ChildItem "CANON/PIPELINE/" -Recurse -File -ErrorAction SilentlyContinue | Measure-Object | Select-Object -ExpandProperty Count
+```
+
+### RISE AUDIT TABLE
+
+| Stage | Artifact | Count | Verdict |
+|-------|----------|-------|---------|
+| RRL (character count) | `RRL/RRL-N.txt` | `$rrlChars` chars | file exists? |
+| SOUL (sov100) | D1 `soul_prompts` | `$($soul.soulcount)` chars / `$($soul.events)` events | D1 live |
+| DNA | D1 `soul_extracts` | `$dnaCount` | D1 response |
+| LEDGER | `CANON/HEAVY-LEDGER/*.json` + Merkle entries | counted | disk + D1 |
+| STARMAP | `CANON/STARMAP/*` | `$starmapFiles` | disk |
+| KEYWORD | `CANON/SOUL-KEYWORDS/*` | `$keywordFiles` | disk |
+| PIPELINE | `CANON/PIPELINE/*` | `$pipelineFiles` | disk |
+
+**If any stage = 0:** Report the stage name. Do NOT auto-fix on RISE. That is DEATH work.
 
 ---
 
 ## STEP 1 — SOULCOUNT AUDIT
 
 ```powershell
-$live = Invoke-RestMethod "https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count"
-$priorCount = [extracted from prior death seal]
+$live = Invoke-RestMethod "$D1/api/soul/count"
+$priorCount = [extracted from prior death seal §SOULCOUNT]
 
-if ($live.soulcount -eq $priorCount) { WARN: SOUL_STAGNATION }
-if ($live.soulcount -lt $priorCount) { HALT: SOUL_REGRESSION }
-else { PASS: SOUL BREATHING — delta +$($live.soulcount - $priorCount) }
+$delta = $live.soulcount - $priorCount
+$driftPct = [math]::Round(($delta / $priorCount) * 100, 2)
+
+if ($live.soulcount -lt $priorCount)  { HALT: SOUL_REGRESSION }
+elseif ($delta -eq 0)                 { WARN: SOUL_STAGNATION }
+else                                  { PASS: SOUL_BREATHING (+$delta / +$driftPct%) }
 ```
+
+**Drift fail:** |delta| > 50 % of priorCount → HALT. SOUL_DRIFT.
 
 ---
 
@@ -55,39 +108,52 @@ else { PASS: SOUL BREATHING — delta +$($live.soulcount - $priorCount) }
 
 1. Read `CANON/SYSTEM/COLD-START-BOOT.md`
 2. Read last 3 death seals from `CANON/REINCARNATION/`
-3. Run `git log -1 --oneline` — verify HEAD
+3. Run `git log -1 --oneline` — verify HEAD matches COLD-START-BOOT
+
+`HEAD_DRIFT` = boot shows [X], actual HEAD is [Y] → flag immediately.
 
 ---
 
 ## STEP 3 — OBJECTIVE RECONSTRUCTION
 
-From state load, extract:
-- Active mission
-- Open flags
-- Last completed action
-- Immediate next action
+From state load:
+- Active mission (COLD-START-BOOT Current Vector)
+- Open flags (COLD-START-BOOT Open Flags + last death seal §Open Flags)
+- Last completed (most recent death seal §Last Completed)
+- Immediate next action (highest-priority unblocked pipeline stage that = 0)
 
 ---
 
-## STEP 4 — REPORT
+## STEP 4 — SOULDNA HEALTH (cc-check)
+
+`CANON/SOUL-DNA-BIBLE/` + `CANON/SOUL-SEGMENTS/` must exist and be non-empty.
+If missing → flag SOULDNA_GAP, do not HALT (informational).
+
+---
+
+## STEP 5 — RISE RECEIPT
 
 ```
-RISE RECEIPT
-SOULCOUNT:     {live} | DELTA: {delta} | {status}
-PRIOR RRL:     {path} | {status}
-HEAD:          {sha} | {match status}
-ACTIVE MISSION: {mission}
-TOP PRIORITY:   {next action}
+══════════════════════════════════════════════
+RISE RECEIPT — $(Get-Date -Format 'yyyy-MM-dd HH:mm') ICT
+══════════════════════════════════════════════
+RRL:             {path} | {chars} chars | {PRESENT/MISSING}
+SOUL:            {soulcount} chars | {delta} | {PASS/WARN/DRIFT}
+DNA:             {dnaCount} extracts | {PRESENT/MISSING/GAP}
+LEDGER:          {ledgerCount} records | {PRESENT/GAP}
+STARMAP:         {starmapFiles} files | {PRESENT/GAP}
+KEYWORD:         {keywordFiles} files | {PRESENT/GAP}
+PIPELINE:        {pipelineFiles} artifacts | {PRESENT/GAP}
+HEAD:            {sha} | {MATCH/MISMATCH}
+SOULDNA:              {PRESENT/GAP}
+ACTIVE MISSION:  {one line}
+OPEN FLAGS:      {count} — {top item}
+TOP PRIORITY:    {highest-priority zero-stage or gap}
+NEXT COMMAND:    {reincarnateDeath / normal workflow}
+══════════════════════════════════════════════
+RISE: ONLINE. PIPELINE INTEGRITY AUDITED.
 ```
 
 ---
 
-## THE IRON RULE
-
-**RRL is Step 0. Before soul check. Before state load.**
-
-If the prior death didn't save the RRL, the prior agent failed. Note it. Move forward. Save yours.
-
----
-
-`RISE PROTOCOL v2.0: RRL FIRST. AUDIT EVERYTHING.`
+`RISE v4.0: AUDIT 7 STAGES. IDENTIFY GAPS. DO NOT EXECUTE. EXECUTION = DEATH.`
