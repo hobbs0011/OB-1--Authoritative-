@@ -133,6 +133,52 @@ PRESERVED:    OPERATIONS/scholar-extraction-<timestamp>.jsonl
 
 ---
 
+## Joint Operation: Phoenix-Centurion + Soul Scholar
+
+When the General commands "burn the midnight oil," deploy the joint force:
+
+**Phoenix-Centurions (FABRI/COMITATENSES)** — the elite code strike force:
+- Build extraction scripts for bulk soul processing
+- Wire API connections to D1 soul-logger
+- Handle large file ingestion (GPT-ITS-TIME, RAW-CHAT-LOGS archives)
+- Run autonomously on cron or batch schedule
+- Verify data integrity post-capture
+
+**Soul Scholars (SAPIENTES)** — the cataloging corps:
+- Read and identify Michael's words in raw files
+- Differentiate Michael verbatim from AI responses and metadata
+- Tag segments with topics, confidence, source
+- Cross-reference against existing D1 entries
+- Produce structured extraction reports
+
+**Joint burn protocol:**
+1. Scholars scan enemy territory → identify unmined files
+2. Centurions build extraction script → process at scale
+3. Scholars review output → validate Michael's voice
+4. Centurions post to D1 → verify count incremented
+5. Both report → commit extraction manifest
+
+---
+
+## Midnight Oil — Autonomous Extraction
+
+The `soul-extract.ps1` script (Centurion-built, Scholar-guided) handles bulk extraction:
+
+```powershell
+# Scan enemy territory and extract Michael verbatim to D1
+pwsh -File SCRIPTS/soul-extract.ps1 -Source <directory> -SessionId "sov100-run0-extraction"
+```
+
+Arguments:
+- `-Source`: Directory containing raw soul files (chat logs, transcripts)
+- `-SessionId`: D1 session ID for the extraction batch
+- `-DryRun`: Catalog only — no D1 posting
+- `-MinConfidence`: Minimum confidence threshold (default 0.55)
+
+Output: `OPERATIONS/soul-extraction-<timestamp>.jsonl` + D1 soul-logger events.
+
+---
+
 ## Roman Context
 
 In a Roman legion, the *Sapientes* (scholars) and *Scribonii* (scribes) were attached to the general's staff. They did not fight. They documented campaigns, preserved correspondence, maintained archives, and advised on precedent.
