@@ -197,10 +197,12 @@ foreach ($f in $files) {
     # ══════════════════════════════════════════════════════════════════════════
     if ($Lens -in "all","GAP") {
         $refs = @{}
-        [regex]::Matches($raw, '`[A-Za-z0-9_\-/\\\.]+`') | ForEach-Object { $refs[$_.Value] = $true }
-        [regex]::Matches($raw, '"[A-Za-z0-9_\-/\\\.]+\.(md|json|ps1|txt|yml|toml|js|csv|yaml)"') | ForEach-Object { $refs[$_.Value] = $true }
+        [regex]::Matches($raw, '`[A-Za-z0-9_\-/\\\.*?]+`') | ForEach-Object { $refs[$_.Value] = $true }
+        [regex]::Matches($raw, '"[A-Za-z0-9_\-/\\\.*?]+\.(md|json|ps1|txt|yml|toml|js|csv|yaml)"') | ForEach-Object { $refs[$_.Value] = $true }
         foreach ($r in $refs.Keys) {
             $c   = ($r.Trim('"').Trim('`').Trim('<').Trim('>').Trim('\').Trim('|').Trim())
+            # Skip glob wildcards — these are patterns, not paths
+            if ($c -match '[\*?]') { continue }
             if ($c -match '\.(md|json|ps1|txt|yml|toml|js|csv|yaml)$') {
                 $fullRef = if ($c.StartsWith("D:\") -or $c.StartsWith("/")) { $c } else { Join-Path $repo $c }
                 if (-not (Test-Path $fullRef -PathType Leaf)) {
@@ -209,70 +211,66 @@ foreach ($f in $files) {
             }
         }
     }
+}
 
-    # ══════════════════════════════════════════════════════════════════════════
-    # KEYWORD LENS
-    # ══════════════════════════════════════════════════════════════════════════
-    if ($Lens -in "all","KEYWORD") {
-        # Check if SOUL-KEYWORDS dir exists at all (disk scan, not just current target)
-        $kwDir = Join-Path $repo "CANON\SOUL-KEYWORDS"
-        if (-not (Test-Path $kwDir -PathType Container)) {
-            [void]$finds.Add([pscustomobject]@{ scout_id="SC-$ts-" + $finds.Count; priority="P1"; type="KEYWORD"; status="PHANTOM"; file="CANON/SOUL-KEYWORDS/"; line=1; bytes=0; excerpt="CANON/SOUL-KEYWORDS/ does not exist"; reason="SOUL-KEYWORDS directory missing — no keyword index"; action="Create CANON/SOUL-KEYWORDS/ and run /api/soul/skeleton" })
+# ══════════════════════════════════════════════════════════════════════════════
+# Post-foreach: KEYWORD scan  (disk-level only — not per-file)
+# ══════════════════════════════════════════════════════════════════════════════
+if ($Lens -in "all","KEYWORD") {
+    $kwDir = Join-Path $repo "CANON\SOUL-KEYWORDS"
+    if (-not (Test-Path $kwDir -PathType Container)) {
+        [void]$finds.Add([pscustomobject]@{ scout_id="SC-$ts-" + $finds.Count; priority="P1"; type="KEYWORD"; status="PHANTOM"; file="CANON/SOUL-KEYWORDS/"; line=1; bytes=0; excerpt="CANON/SOUL-KEYWORDS does not exist"; reason="SOUL-KEYWORDS directory missing — no keyword index"; action="Create CANON/SOUL-KEYWORDS and run /api/soul/skeleton" })
+    } else {
+        $kwFiles = Get-ChildItem $kwDir -Recurse -File -ErrorAction SilentlyContinue
+        if ($kwFiles.Count -eq 0) {
+            [void]$finds.Add([pscustomobject]@{ scout_id="SC-$ts-" + $finds.Count; priority="P1"; type="KEYWORD"; status="PHANTOM"; file="CANON/SOUL-KEYWORDS/"; line=1; bytes=0; excerpt="CANON/SOUL-KEYWORDS exists but empty — no keyword index"; reason="SOUL-KEYWORDS empty — no keyword index"; action="Run /api/soul/skeleton to generate keyword extraction" })
         } else {
-            $kwFiles = Get-ChildItem $kwDir -Recurse -File -ErrorAction SilentlyContinue
-            if ($kwFiles.Count -eq 0) {
-                [void]$finds.Add([pscustomobject]@{ scout_id="SC-$ts-" + $finds.Count; priority="P1"; type="KEYWORD"; status="PHANTOM"; file="CANON/SOUL-KEYWORDS/"; line=1; bytes=0; excerpt="CANON/SOUL-KEYWORDS/ exists but is empty"; reason="SOUL-KEYWORDS directory empty — no keyword index"; action="Run /api/soul/skeleton to generate keyword extraction" })
-            } else {
-                # Check for inverted-index.json
-                $invIdx = Get-ChildItem $kwDir -Filter "inverted-index*" -Recurse -ErrorAction SilentlyContinue
-                if ($invIdx.Count -eq 0) {
-                    [void]$finds.Add([pscustomobject]@{ scout_id="SC-$ts-" + $finds.Count; priority="P2"; type="KEYWORD"; status="STALE"; file="CANON/SOUL-KEYWORDS/"; line=1; bytes=$kwFiles.Count; excerpt="$($kwFiles.Count) files but no inverted-index.json"; reason="SOUL-KEYWORDS has files but no inverted index — keyword lookup not possible"; action="Run /api/soul/skeleton and build inverted-index.json" })
-                }
-                # Check for rfkw files
-                $rfkwFiles = Get-ChildItem $kwDir -Filter "rfkw-*" -Recurse -ErrorAction SilentlyContinue
-                if ($rfkwFiles.Count -eq 0) {
-                    [void]$finds.Add([pscustomobject]@{ scout_id="SC-$ts-" + $finds.Count; priority="P3"; type="KEYWORD"; status="STALE"; file="CANON/SOUL-KEYWORDS/"; line=1; bytes=$kwFiles.Count; excerpt="No rfkw-* (raw frequency keyword) files found"; reason="per-run keyword files missing"; action="Generate rfkw-runN.txt for each completed run" })
-                }
+            $invIdx = Get-ChildItem $kwDir -Filter "inverted-index*" -Recurse -ErrorAction SilentlyContinue
+            if ($invIdx.Count -eq 0) {
+                [void]$finds.Add([pscustomobject]@{ scout_id="SC-$ts-" + $finds.Count; priority="P2"; type="KEYWORD"; status="STALE"; file="CANON/SOUL-KEYWORDS/"; line=1; bytes=$kwFiles.Count; excerpt="$($kwFiles.Count) files but no inverted-index.json"; reason="SOUL-KEYWORDS has files but no inverted index"; action="Run /api/soul/skeleton and build inverted-index.json" })
+            }
+            $rfkwFiles = Get-ChildItem $kwDir -Filter "rfkw-*" -Recurse -ErrorAction SilentlyContinue
+            if ($rfkwFiles.Count -eq 0) {
+                [void]$finds.Add([pscustomobject]@{ scout_id="SC-$ts-" + $finds.Count; priority="P3"; type="KEYWORD"; status="STALE"; file="CANON/SOUL-KEYWORDS/"; line=1; bytes=$kwFiles.Count; excerpt="No rfkw-* files"; reason="per-run keyword files missing"; action="Generate rfkw-runN.txt for each completed run" })
             }
         }
     }
+}
 
-    # ══════════════════════════════════════════════════════════════════════════
-    # PIPELINE LENS
-    # ══════════════════════════════════════════════════════════════════════════
-    if ($Lens -in "all","PIPELINE") {
-        # Check if PIPELINE dir exists
-        $pipeDir = Join-Path $repo "CANON\PIPELINE"
-        if (-not (Test-Path $pipeDir -PathType Container)) {
-            [void]$finds.Add([pscustomobject]@{ scout_id="SC-$ts-" + $finds.Count; priority="P1"; type="PIPELINE"; status="PHANTOM"; file="CANON/PIPELINE/"; line=1; bytes=0; excerpt="CANON/PIPELINE/ does not exist"; reason="Pipeline output directory missing — no pipeline-run artifacts exist"; action="Create CANON/PIPELINE/ and run /reincarnateDeath to produce first pipeline-runN.json" })
+# ══════════════════════════════════════════════════════════════════════════════
+# Post-foreach: PIPELINE scan  (disk-level only — not per-file)
+# ══════════════════════════════════════════════════════════════════════════════
+if ($Lens -in "all","PIPELINE") {
+    $pipeDir = Join-Path $repo "CANON\PIPELINE"
+    if (-not (Test-Path $pipeDir -PathType Container)) {
+        [void]$finds.Add([pscustomobject]@{ scout_id="SC-$ts-" + $finds.Count; priority="P1"; type="PIPELINE"; status="PHANTOM"; file="CANON/PIPELINE/"; line=1; bytes=0; excerpt="CANON/PIPELINE does not exist"; reason="Pipeline directory missing — no pipeline-run artifacts exist"; action="Create CANON/PIPELINE and run /reincarnateDeath Step 7" })
+    } else {
+        $pFiles = Get-ChildItem $pipeDir -Recurse -File -ErrorAction SilentlyContinue
+        if ($pFiles.Count -eq 0) {
+            [void]$finds.Add([pscustomobject]@{ scout_id="SC-$ts-" + $finds.Count; priority="P1"; type="PIPELINE"; status="PHANTOM"; file="CANON/PIPELINE/"; line=1; bytes=0; excerpt="CANON/PIPELINE exists but empty — no pipeline-run artifacts"; reason="No pipeline-run artifacts — chain has never completed"; action="Run /reincarnateDeath Step 7 to produce first pipeline-runN.json" })
         } else {
-            $pFiles = Get-ChildItem $pipeDir -Recurse -File -ErrorAction SilentlyContinue
-            if ($pFiles.Count -eq 0) {
-                [void]$finds.Add([pscustomobject]@{ scout_id="SC-$ts-" + $finds.Count; priority="P1"; type="PIPELINE"; status="PHANTOM"; file="CANON/PIPELINE/"; line=1; bytes=0; excerpt="CANON/PIPELINE/ exists but is empty"; reason="No pipeline-run artifacts — chain has never completed"; action="Run /reincarnateDeath Step 7 to produce pipeline-runN.json" })
-            } else {
-                # Check for incomplete pipeline runs (result != COMPLETE)
-                foreach ($pf in $pFiles) {
-                    if ($pf.Name -match 'pipeline-run.*\.json') {
-                        try {
-                            $pData = Get-Content $pf.FullName -Raw | ConvertFrom-Json -ErrorAction Stop
-                            if ($pData.result -ne "COMPLETE") {
-                                [void]$finds.Add([pscustomobject]@{ scout_id="SC-$ts-" + $finds.Count; priority="P1"; type="PIPELINE"; status="STALE"; file=$pf.FullName.Replace("$repo\", ""); line=1; bytes=$pf.Length; excerpt="result=$($pData.result)"; reason="Pipeline run incomplete — chain broken at this run"; action="Re-run DEATH protocol for run $($pData.run_number) or create correction entry" })
-                            }
-                        } catch {
-                            [void]$finds.Add([pscustomobject]@{ scout_id="SC-$ts-" + $finds.Count; priority="P2"; type="PIPELINE"; status="STALE"; file=$pf.FullName.Replace("$repo\", ""); line=1; bytes=$pf.Length; excerpt="Unreadable pipeline artifact"; reason="Pipeline artifact cannot be parsed — chain provenance unverifiable"; action="Regenerate or validate pipeline-run artifact" })
+            foreach ($pf in $pFiles) {
+                if ($pf.Name -match 'pipeline-run.*\.json') {
+                    try {
+                        $pData = Get-Content $pf.FullName -Raw | ConvertFrom-Json -ErrorAction Stop
+                        if ($pData.result -ne "COMPLETE") {
+                            [void]$finds.Add([pscustomobject]@{ scout_id="SC-$ts-" + $finds.Count; priority="P1"; type="PIPELINE"; status="STALE"; file=$pf.FullName.Replace("$repo\", ""); line=1; bytes=$pf.Length; excerpt="result=$($pData.result)"; reason="Pipeline run incomplete — chain broken"; action="Re-run DEATH for run $($pData.run_number)" })
                         }
+                    } catch {
+                        [void]$finds.Add([pscustomobject]@{ scout_id="SC-$ts-" + $finds.Count; priority="P2"; type="PIPELINE"; status="STALE"; file=$pf.FullName.Replace("$repo\", ""); line=1; bytes=$pf.Length; excerpt="Unreadable pipeline artifact"; reason="Chain provenance unverifiable"; action="Regenerate or validate pipeline artifact" })
                     }
                 }
-                # Check for all required pipeline stages present
-                $hasRRL    = Test-Path (Join-Path $repo "RRL")
-                $hasLedger = Test-Path (Join-Path $repo "CANON\HEAVY-LEDGER")
-                $hasKw     = Test-Path (Join-Path $repo "CANON\SOUL-KEYWORDS")
-                if (-not $hasRRL)    { [void]$finds.Add([pscustomobject]@{ scout_id="SC-$ts-" + $finds.Count; priority="P1"; type="PIPELINE"; status="PHANTOM"; file="RRL/"; line=1; bytes=0; excerpt="RRL/ directory missing"; reason="Stage 1 (RRL) directory absent"; action="Create RRL/ and run DEATH Step 1" }) }
-                if (-not $hasLedger) { [void]$finds.Add([pscustomobject]@{ scout_id="SC-$ts-" + $finds.Count; priority="P1"; type="PIPELINE"; status="PHANTOM"; file="CANON/HEAVY-LEDGER/"; line=1; bytes=0; excerpt="CANON/HEAVY-LEDGER/ missing"; reason="Stage 4 (LEDGER) directory absent"; action="Create CANON/HEAVY-LEDGER/ and run DEATH Step 4" }) }
-                if (-not $hasKw)     { [void]$finds.Add([pscustomobject]@{ scout_id="SC-$ts-" + $finds.Count; priority="P1"; type="PIPELINE"; status="PHANTOM"; file="CANON/SOUL-KEYWORDS/"; line=1; bytes=0; excerpt="CANON/SOUL-KEYWORDS/ missing"; reason="Stage 6 (KEYWORD) directory absent"; action="Create CANON/SOUL-KEYWORDS/ and run DEATH Step 6" }) }
             }
+            $hasRRL    = Test-Path (Join-Path $repo "RRL")
+            $hasLedger = Test-Path (Join-Path $repo "CANON\HEAVY-LEDGER")
+            $hasKw     = Test-Path (Join-Path $repo "CANON\SOUL-KEYWORDS")
+            if (-not $hasRRL)    { [void]$finds.Add([pscustomobject]@{ scout_id="SC-$ts-" + $finds.Count; priority="P1"; type="PIPELINE"; status="PHANTOM"; file="RRL/"; line=1; bytes=0; excerpt="RRL/ missing"; reason="Stage 1 RRL absent"; action="Create RRL/ and run DEATH Step 1" }) }
+            if (-not $hasLedger) { [void]$finds.Add([pscustomobject]@{ scout_id="SC-$ts-" + $finds.Count; priority="P1"; type="PIPELINE"; status="PHANTOM"; file="CANON/HEAVY-LEDGER/"; line=1; bytes=0; excerpt="CANON/HEAVY-LEDGER/ missing"; reason="Stage 4 LEDGER absent"; action="Create CANON/HEAVY-LEDGER and run DEATH Step 4" }) }
+            if (-not $hasKw)     { [void]$finds.Add([pscustomobject]@{ scout_id="SC-$ts-" + $finds.Count; priority="P1"; type="PIPELINE"; status="PHANTOM"; file="CANON/SOUL-KEYWORDS/"; line=1; bytes=0; excerpt="CANON/SOUL-KEYWORDS/ missing"; reason="Stage 6 KEYWORD absent"; action="Create CANON/SOUL-KEYWORDS and run DEATH Step 6" }) }
         }
     }
+}
+
 
 }
 
