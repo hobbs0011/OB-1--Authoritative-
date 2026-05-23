@@ -17,8 +17,9 @@ agent: AGENT99
 
 - Target is a soul file (FROMSCRATCH, SOUL-DNA, chat log, JSONL segment) → proceed.
 - Target is code, config, or live system → wrong mission. Dispatch to `/Centurion-Code` or `/SupplyLines`.
+- **Joint Mission Protocol:** When entering enemy territory (unmined repos, Google Drive backups, external sources), pair SAPIENTES with SPECULATORES. The spies scout. The scholars catalog. Both report.
 
-Print: `SAPIENTES DISPATCHED — studying <target>`
+Print: `SAPIENTES DISPATCHED — studying <target>` or `JOINT MISSION: SAPIENTES + SPECULATORES — <territory>`
 
 ---
 
