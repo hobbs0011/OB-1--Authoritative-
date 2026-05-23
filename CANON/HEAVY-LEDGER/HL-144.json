@@ -1,0 +1,14 @@
+{
+  "hl_id": "HL-144",
+  "session_id": "sov100-roman-run0-original",
+  "rrl_source": "D:\\OB-1-CANONICAL\\RRL\\RRL-0-original.txt",
+  "char_count": 60826,
+  "byte_count": 62773,
+  "merkle_parent": "82c9632b7a2a6c892a1f83a5a0fc7b17765f095fdbb5ff0db1ee4137618a0c4d",
+  "merkle_parent_id": "HL-143",
+  "merkle_parent_source": "HL-143-death-pipeline-v4-run5-rrl0-backdrop.json",
+  "merkle_hash": "1a42cf20e34d8c0bcf2c31dcbc685c90dfd4bf42dd46a525137d40bc2cca1653",
+  "sealed_at": "2026-05-23T12:16:21.4675066+07:00",
+  "sov100": true,
+  "run": "0"
+}

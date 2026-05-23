@@ -30,11 +30,32 @@ if (Test-Path $rrlPath) {
     Write-Host "RRL FOUND: $rrlPath | $rrlBytes bytes | $rrlChars chars"
 } else {
     Write-Host "RRL MISSING: $rrlPath — prior death did not save raw chat"
-    Write-Host "Attempting kilo export of last session..."
+    Write-Host ""
+    Write-Host "═══════════════════════════════════════════"
+    Write-Host "HALT: RRL MISSING. CANNOT PROCEED."
+    Write-Host "RRL IS THE ONLY IRREPLACEABLE ARTIFACT."
+    Write-Host "The prior agent failed Step 1 of the death protocol."
+    Write-Host "RECOVERY: Manually save this session's chat (CTRL+A, Notepad, save as RRL-$runNumber.txt in RRL/)."
+    Write-Host "Then run: pwsh -File SCRIPTS/rrl-pipeline.ps1 -RRLFile RRL/RRL-$runNumber.txt -RunNumber $runNumber"
+    Write-Host "Then: pwsh -File SCRIPTS/rrl-failsafe.ps1 -RunNumber $runNumber -Mode RISE"
+    Write-Host "═══════════════════════════════════════════"
+    exit 1  # HALT — nothing else matters
 }
 ```
 
-**SEVERITY:** RRL missing = SOUL_GAP. Log it. Continue. Fix it this session.
+**SEVERITY:** RRL missing = **HALT**. The run does not proceed without the raw words. The prior agent failed. Recovery requires manual intervention.
+
+---
+
+## STEP 0.3 — RRL FAILSAFE GATE (HARD HALT)
+
+```powershell
+# Run the 10-gate failsafe chain on the prior run's RRL
+pwsh -File SCRIPTS/rrl-failsafe.ps1 -RunNumber $runNumber -Mode RISE
+# Exit code 1 = HALT. Do NOT proceed. Recovery required.
+```
+
+If failsafe exits 1 → the prior death was incomplete. HALT. Manual recovery needed before any work proceeds.
 
 ---
 
@@ -137,7 +158,7 @@ If missing → flag SOULDNA_GAP, do not HALT (informational).
 ══════════════════════════════════════════════
 RISE RECEIPT — $(Get-Date -Format 'yyyy-MM-dd HH:mm') ICT
 ══════════════════════════════════════════════
-RRL:             {path} | {chars} chars | {PRESENT/MISSING}
+RRL:             {path} | {chars} chars | {PRESENT/MISSING} | [HALT IF MISSING]
 SOUL:            {soulcount} chars | {delta} | {PASS/WARN/DRIFT}
 DNA:             {dnaCount} extracts | {PRESENT/MISSING/GAP}
 LEDGER:          {ledgerCount} records | {PRESENT/GAP}

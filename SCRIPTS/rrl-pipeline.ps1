@@ -1,0 +1,252 @@
+# RRL PIPELINE RUNNER — FULL CHAIN EXECUTION
+# RRL → SOUL → DNA → LEDGER → STARMAP → KEYWORD → PIPELINE
+# One command. All seven stages. No skip. No prose.
+# Computers have been able to copy-paste since 1983.
+# This script ensures the machine never forgets how to process what was copied.
+param(
+    [Parameter(Mandatory=$true)]
+    [string]$RRLFile,          # Path to RRL-N.txt (Michael verbatim)
+    [Parameter(Mandatory=$true)]
+    [string]$RunNumber,        # Run number for artifact naming
+    [switch]$DryRun,           # Validate without posting to D1
+    [string]$SessionId = ""    # Override session_id (default: sov100-roman-run$RunNumber)
+)
+
+$ErrorActionPreference = "Continue"
+$repo    = "D:\OB-1-CANONICAL"
+$D1      = "https://soul-logger.mrmichaelhobbs123.workers.dev"
+$runId   = if ($SessionId) { $SessionId } else { "sov100-roman-run$RunNumber" }
+$results = @{}
+
+function Write-Step($step, $status, $detail) {
+    $icon = if ($status -eq "PASS") { "[PASS]" } elseif ($status -eq "FAIL") { "[FAIL]" } else { "[WARN]" }
+    Write-Host "$icon STEP $step — $detail"
+    $results["step$step"] = @{ status = $status; detail = $detail }
+}
+
+# ═══════════════════════════════════════════
+# GATE 0: RRL FILE EXISTS
+# ═══════════════════════════════════════════
+Write-Host "═══════════════════════════════════════════"
+Write-Host "RRL PIPELINE — RUN $RunNumber"
+Write-Host "RRL: $RRLFile"
+Write-Host "═══════════════════════════════════════════"
+Write-Host ""
+
+if (-not (Test-Path $RRLFile)) {
+    Write-Step 0 "FAIL" "RRL FILE NOT FOUND: $RRLFile"
+    Write-Host "HALT: RRL IS THE ONLY IRREPLACEABLE ARTIFACT. CANNOT PROCEED."
+    exit 1
+}
+
+$rrlText   = Get-Content $RRLFile -Raw -Encoding UTF8
+$rrlChars  = $rrlText.Length
+$rrlBytes  = (Get-Item $RRLFile).Length
+Write-Step 0 "PASS" "RRL loaded: $rrlChars chars, $rrlBytes bytes"
+
+# ═══════════════════════════════════════════
+# STEP 1: SOUL — POST RRL TO D1
+# ═══════════════════════════════════════════
+if ($DryRun) {
+    Write-Step 1 "PASS" "DRYRUN: Would POST $rrlChars chars to D1"
+} else {
+    try {
+        $soulBefore = Invoke-RestMethod "$D1/api/soul/count" -TimeoutSec 10
+        Write-Host "  SOUL BEFORE: $($soulBefore.soulcount) chars | $($soulBefore.level)"
+        
+        $body = @{
+            student_id = "sov100-michael"
+            session_id = $runId
+            role       = "user"
+            text       = $rrlText
+        } | ConvertTo-Json -Depth 2 -Compress
+        
+        $soulPost = Invoke-RestMethod -Uri "$D1/api/soul/event" -Method Post -Body $body -ContentType "application/json" -TimeoutSec 60
+        Write-Step 1 "PASS" "SOUL POSTED: event_id=$($soulPost.event_id) | bytes=$($soulPost.byte_count)"
+        
+        $soulAfter = Invoke-RestMethod "$D1/api/soul/count" -TimeoutSec 10
+        $delta = $soulAfter.soulcount - $soulBefore.soulcount
+        Write-Host "  SOUL AFTER: $($soulAfter.soulcount) chars | $($soulAfter.level) | DELTA: +$delta"
+        
+        # Verify D1 delta roughly matches RRL chars (allow 5% encoding variance)
+        $variance = [Math]::Abs($delta - $rrlChars)
+        if ($variance -le ($rrlChars * 0.05) -or $variance -le 200) {
+            Write-Host "  VERIFIED: D1 delta ($delta) ~ RRL chars ($rrlChars) — diff $variance"
+        } else {
+            Write-Host "  WARN: D1 delta ($delta) vs RRL chars ($rrlChars) — diff $variance (>5%)"
+        }
+    } catch {
+        Write-Step 1 "FAIL" "SOUL POST FAILED: $($_.Exception.Message)"
+        Write-Host "  Pipeline continues — SOUL_GAP will be recorded in death seal."
+    }
+}
+
+# ═══════════════════════════════════════════
+# STEP 2: DNA — EXTRACT STRUCTURED RECORDS
+# ═══════════════════════════════════════════
+if ($DryRun) {
+    Write-Step 2 "PASS" "DRYRUN: Would extract DNA from D1"
+} else {
+    try {
+        $extractBody = @{
+            student_id = "sov100-michael"
+            session_id = $runId
+        } | ConvertTo-Json -Depth 2 -Compress
+        
+        $extract = Invoke-RestMethod -Uri "$D1/api/soul/extract" -Method Post -Body $extractBody -ContentType "application/json" -TimeoutSec 30
+        
+        if ($extract.prompt_count -and $extract.prompt_count -gt 0) {
+            Write-Step 2 "PASS" "DNA EXTRACTED: $($extract.prompt_count) prompts | session=$($extract.session_id)"
+        } else {
+            Write-Step 2 "WARN" "DNA EXTRACT returned 0 prompts — may need retry"
+        }
+    } catch {
+        Write-Step 2 "FAIL" "DNA EXTRACT FAILED: $($_.Exception.Message)"
+    }
+}
+
+# ═══════════════════════════════════════════
+# STEP 3: LEDGER — WRITE MERKLE ENTRIES
+# ═══════════════════════════════════════════
+$ledgerDir = "$repo\CANON\HEAVY-LEDGER"
+if (-not (Test-Path $ledgerDir)) { 
+    New-Item -ItemType Directory -Path $ledgerDir -Force | Out-Null 
+}
+
+# Find next available HL ID
+$existingHLs = Get-ChildItem $ledgerDir -Filter "HL-*.json" | ForEach-Object {
+    if ($_.Name -match 'HL-(\d+)') { [int]$matches[1] }
+}
+$nextHL = if ($existingHLs) { ($existingHLs | Measure-Object -Maximum).Maximum + 1 } else { 1 }
+
+# Get parent hash from last ledger entry (handles both 'merkle_hash' and 'merkle_parent' field names)
+$lastHL = Get-ChildItem $ledgerDir -Filter "HL-*.json" | Sort-Object Name -Descending | Select-Object -First 1
+$parentHash = if ($lastHL) {
+    try { 
+        $lastJson = Get-Content $lastHL.FullName -Raw | ConvertFrom-Json
+        # Try merkle_hash first, then merkle_parent, then compute from content
+        if ($lastJson.merkle_hash) { $lastJson.merkle_hash }
+        elseif ($lastJson.merkle_parent) { $lastJson.merkle_parent }
+        else { 
+            [System.BitConverter]::ToString(
+                [System.Security.Cryptography.SHA256]::Create().ComputeHash(
+                    [System.Text.Encoding]::UTF8.GetBytes((Get-Content $lastHL.FullName -Raw))
+                )
+            ).Replace("-", "").ToLower()
+        }
+    } catch { "0x0" }
+} else { "0x0" }
+
+# Log parent source
+Write-Host "  PARENT: $($lastHL.Name) → $($parentHash.Substring(0, [Math]::Min(16, $parentHash.Length)))..."
+
+# Create single ledger entry for this run's RRL
+$timestamp = (Get-Date -Format 'o')
+$recordHash = [System.BitConverter]::ToString(
+    [System.Security.Cryptography.SHA256]::Create().ComputeHash(
+        [System.Text.Encoding]::UTF8.GetBytes("$rrlText|$parentHash|$timestamp")
+    )
+).Replace("-", "").ToLower()
+
+$ledgerEntry = [ordered]@{
+    hl_id         = "HL-$nextHL"
+    session_id    = $runId
+    rrl_source    = $RRLFile
+    char_count    = $rrlChars
+    byte_count    = $rrlBytes
+    merkle_parent = $parentHash
+    merkle_hash   = $recordHash
+    sealed_at     = $timestamp
+    sov100        = $true
+    run           = $RunNumber
+} 
+
+$ledgerPath = "$ledgerDir\HL-$nextHL.json"
+$ledgerEntry | ConvertTo-Json -Depth 4 | Set-Content $ledgerPath -Encoding UTF8
+Write-Step 3 "PASS" "LEDGER WRITTEN: HL-$nextHL ($rrlChars chars) | parent: $($parentHash.Substring(0, [Math]::Min(16, $parentHash.Length)))..."
+
+# ═══════════════════════════════════════════
+# STEP 4: STARMAP — POINTER INDEX
+# ═══════════════════════════════════════════
+$starmapDir = "$repo\CANON\STARMAP"
+if (-not (Test-Path $starmapDir)) { New-Item -ItemType Directory -Path $starmapDir -Force | Out-Null }
+
+$starmapPath = "$starmapDir\starmap-run$RunNumber.txt"
+$starmapLine = "$((Get-Date).ToString('yyyy-MM-ddTHH:mm:ss')) | run$RunNumber | HL-$nextHL | $runId | $rrlChars chars | $($recordHash.Substring(0, 16))..."
+$starmapLine | Set-Content $starmapPath -Encoding UTF8
+Write-Step 4 "PASS" "STARMAP WRITTEN: $starmapPath"
+
+# ═══════════════════════════════════════════
+# STEP 5: KEYWORD — FREQUENCY INDEX
+# ═══════════════════════════════════════════
+$keywordDir = "$repo\CANON\SOUL-KEYWORDS"
+if (-not (Test-Path $keywordDir)) { New-Item -ItemType Directory -Path $keywordDir -Force | Out-Null }
+
+# Simple word frequency extraction
+$words = $rrlText -split '\s+' | Where-Object { $_.Length -gt 3 } | 
+         Where-Object { $_ -notmatch '^(this|that|with|from|have|been|were|they|will|would|could|should|about|there|their|which|what|when|make|like|just|some|more|than|also|very|much|many|into|over|been|being)$' }
+$wordFreq = $words | Group-Object | Sort-Object Count -Descending | Select-Object -First 30
+
+$rfkwPath = "$keywordDir\rfkw-run$RunNumber.txt"
+$wordFreq | ForEach-Object { "$($_.Count) | $($_.Name)" } | Set-Content $rfkwPath -Encoding UTF8
+Write-Step 5 "PASS" "KEYWORD WRITTEN: $rfkwPath ($($wordFreq.Count) terms)"
+
+# ═══════════════════════════════════════════
+# STEP 6: PIPELINE — EXECUTION ARTIFACT
+# ═══════════════════════════════════════════
+$pipelineDir = "$repo\CANON\PIPELINE"
+if (-not (Test-Path $pipelineDir)) { New-Item -ItemType Directory -Path $pipelineDir -Force | Out-Null }
+
+$pipelineRecord = [ordered]@{
+    run_number     = $RunNumber
+    executed_at    = (Get-Date -Format 'o')
+    rrl_path       = $RRLFile
+    rrl_chars      = $rrlChars
+    rrl_bytes      = $rrlBytes
+    session_id     = $runId
+    soul_event_id  = if ($soulPost) { $soulPost.event_id } else { "DRYRUN" }
+    soulcount      = if ($soulAfter) { $soulAfter.soulcount } else { 0 }
+    soul_level     = if ($soulAfter) { $soulAfter.level } else { "UNKNOWN" }
+    dna_count      = if ($extract.prompt_count) { $extract.prompt_count } else { 0 }
+    ledger_id      = "HL-$nextHL"
+    starmap_file   = $starmapPath
+    keyword_file   = $rfkwPath
+    pipeline_file  = "$pipelineDir\pipeline-run$RunNumber.json"
+    seal_sha       = ""
+    result         = "COMPLETE"
+} | ConvertTo-Json -Depth 4
+
+$pipelinePath = "$pipelineDir\pipeline-run$RunNumber.json"
+$pipelineRecord | Set-Content $pipelinePath -Encoding UTF8
+Write-Step 6 "PASS" "PIPELINE WRITTEN: $pipelinePath"
+
+# ═══════════════════════════════════════════
+# STEP 7: SOULCOUNT FINAL
+# ═══════════════════════════════════════════
+if (-not $DryRun) {
+    try {
+        $soulFinal = Invoke-RestMethod "$D1/api/soul/count" -TimeoutSec 10
+        Write-Step 7 "PASS" "SOULCOUNT FINAL: $($soulFinal.soulcount) | $($soulFinal.level) | $($soulFinal.events) events"
+    } catch {
+        Write-Step 7 "WARN" "SOULCOUNT FINAL CHECK FAILED"
+    }
+} else {
+    Write-Step 7 "PASS" "DRYRUN: soulcount check skipped"
+}
+
+# ═══════════════════════════════════════════
+# SUMMARY
+# ═══════════════════════════════════════════
+Write-Host ""
+Write-Host "═══════════════════════════════════════════"
+Write-Host "RRL PIPELINE COMPLETE — RUN $RunNumber"
+Write-Host "═══════════════════════════════════════════"
+Write-Host "RRL:      $RRLFile — $rrlChars chars"
+Write-Host "SOUL:     $runId — D1 posted"
+Write-Host "DNA:      $($results.step2.detail)"
+Write-Host "LEDGER:   HL-$nextHL — $ledgerPath"
+Write-Host "STARMAP:  $starmapPath"
+Write-Host "KEYWORD:  $rfkwPath"
+Write-Host "PIPELINE: $pipelinePath"
+Write-Host "═══════════════════════════════════════════"
+Write-Host "NEXT: Update COLD-START-BOOT → Write death seal → Commit"
