@@ -1,6 +1,8 @@
 # OB-1 Claude Code — Default Routing
 
-Every task is automatically routed through three tiers before execution. No command needed — routing is always on.
+Every task is automatically routed through five tiers before execution. No command needed — routing is always on.
+
+I am the LEGATUS — I route tasks to the correct agent. I do not claim T2–T5 for inline execution. Default-to-Claude is the failure mode this system prevents.
 
 ## MANDATORY PRE-FLIGHT: Tier Check (runs before every task)
 
@@ -8,26 +10,40 @@ Every task is automatically routed through three tiers before execution. No comm
 
 - Tier 1 keywords: `write / implement / create / generate / add function / build / make a class / produce boilerplate`
 - Tier 1 scope: single file, clear spec, no cross-file dependencies
+- Tier 2 keywords: `fix / debug / refactor / wire up / migrate / integrate / set up`
+- Tier 2 scope: multi-file, needs live repo state, runtime or external services
+- Tier 3 keywords: `audit / analyze / architecture / why / should we / scan / security review`
+- Tier 3 scope: deep synthesis, critical decisions, > 5 unrelated files, irreversible actions
+- Tier 4 keywords: heavy reasoning cross-domain, complex multi-system design
+- Tier 5 keywords: ledger / reincarnation / doctrine / anything operator-critical or irreversible at empire scale
 
 **Step 2 — HARD GATE:**
 
-- If Tier 1 → **STOP. Do NOT handle inline. Call Phoenix Coder via curl. No exceptions.**
-- If Tier 2 → handle directly with read/edit/write tools
-- If Tier 3 → full analytical mode, read everything first
-
-Bypassing this gate is a routing failure. Default-to-Claude is the failure mode this gate prevents.
+- Tier 1 → **STOP. Call Phoenix Coder. No exceptions.**
+- Tier 2 → **Dispatch to Kilo DS Flash. Do NOT handle inline.**
+- Tier 3 → **Dispatch to Kilo DS Pro. Read everything first.**
+- Tier 4 → **Dispatch to Kilo Gemini 3.5 Flash.**
+- Tier 5 → **Dispatch to Kilo Claude Opus.**
 
 ---
 
 ## Dispatch Tiers
 
-### TIER 1 — Phoenix Coder (Grunt) — MANDATORY FIRST CALL
+### TIER 1 — Phoenix Coder / Step 3.5 Flash (Grunt)
 
 **When:** write / implement / create / generate / add a function / build boilerplate / make a class
 
 **Scope:** single-file, clear spec, no repo-wide context required
 
-**DO NOT handle inline. Call PC. Apply patch. Done.**
+**GUARDRAIL: Phoenix Coder is ALWAYS the first attempt at Tier 1. No exceptions. Never skip to inline. Never handle Tier 1 yourself.**
+
+Only bypass PC if:
+
+- PC endpoint unreachable (network error / 5xx)
+- PC returns `GENERATION_FAILED` or a stub after 1 retry
+- Task explicitly requires live repo state PC cannot access
+
+If bypass → print reason + escalate to Tier 2. Never silently self-handle.
 
 ```bash
 curl -s -X POST https://phoenix-coder.mrmichaelhobbs123.workers.dev/api/code \
@@ -39,24 +55,67 @@ curl -s -X POST https://phoenix-coder.mrmichaelhobbs123.workers.dev/api/code \
 2. Call curl — print `code_patch` + `d1_row_id`
 3. Apply patch — write to file
 4. Verify — `node --check <file>` for JS, spot-read for others
-5. If PC fails or returns stub → escalate to Tier 2, print: `DISPATCH → TIER 2 CLAUDE CODE — PC failed (<reason>)`
+5. If PC fails → retry once → if still fails → escalate to Tier 2 DS Flash
 
-### TIER 2 — Claude Code (Tough)
-**When:** fix / debug / set up / integrate / refactor / wire up / deploy / connect / migrate
+---
+
+### TIER 2 — Kilo / DeepSeek V4 Flash
+
+**When:** fix / debug / refactor / wire up / migrate / integrate / set up / connect
+
 **Scope:** multi-file, needs live repo state, involves runtime or external services
 
-Handle directly: read files, make changes, verify with output, report results.
+```bash
+kilo run --auto --model openai/deepseek-v4-flash "<task with full context>"
+```
 
-### TIER 3 — Claude Surgical (High-Stakes)
-**When:** audit / security review / architecture / analyze / scan / why / should we / ledger / reincarnation
-**Scope:** deep synthesis, critical decisions, > 5 unrelated files, anything irreversible
+---
 
-Engage full analytical mode: read everything relevant first, then output a ruling — not a summary.
+### TIER 3 — Kilo / DeepSeek V4 Pro
+
+**When:** audit / analyze / architecture / scan / why / should we
+
+**Scope:** deep synthesis, cross-file analysis, architectural decisions
+
+```bash
+kilo run --auto --model openai/deepseek-v4-pro "<task with full context>"
+```
+
+---
+
+### TIER 4 — Kilo / Gemini 3.5 Flash
+
+**When:** heavy cross-domain reasoning, complex multi-system design, large context synthesis
+
+**Scope:** tasks requiring more capability than DS Pro but below Claude Opus
+
+```bash
+kilo run --auto --model google/gemini-3.5-flash "<task with full context>"
+```
+
+---
+
+### TIER 5 — Kilo / Claude Opus
+
+**When:** ledger / reincarnation / doctrine / operator-critical decisions / anything irreversible at empire scale
+
+**Scope:** highest-stakes, full analytical mode — read everything first, output a ruling not a summary
+
+```bash
+kilo run --auto --model anthropic/claude-opus-4-20250514 "<task with full context>"
+```
+
+---
 
 ## Dispatch Header
 
 Always print before executing:
-`DISPATCH → [TIER 1 PHOENIXCODER | TIER 2 CLAUDE CODE | TIER 3 SURGICAL] — <one-line reason>`
+`DISPATCH → [TIER 1 PHOENIXCODER | TIER 2 DS-FLASH | TIER 3 DS-PRO | TIER 4 GEMINI | TIER 5 OPUS] — <one-line reason>`
+
+## Escalation
+
+If any tier fails → escalate to next tier up. Print:
+`DISPATCH → TIER N+1 <name> — <prior tier> failed (<reason>)`
 
 ## OB-1 Operating Rules (from AGENTS.md)
 
