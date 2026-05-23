@@ -10,16 +10,13 @@ Write-Host "SOULCOUNT: $($soul.soulcount) | Level: $($soul.level) | Events: $($s
 
 # Step 0.5: Soul Audit Against Prior Death
 Write-Host "`n=== Step 0.5: Soul Audit Against Prior Death ==="
-# Read most recent death seal
-$deathFiles = Get-ChildItem "CANON/REINCARNATION/" -Filter "*reincarnateDEATH.md" | Sort-Object Name -Descending | Select-Object -First 1
-if ($deathFiles) {
-    $deathContent = Get-Content $deathFiles.FullName -Raw
-    if ($deathContent -match 'SOULCOUNT:\s*(\d+)') {
-        $priorCount = [int]$matches[1]
-        $liveCount = $soul.soulcount
-        $soulDelta = $liveCount - $priorCount
-        Write-Host "PRIOR DEATH: $priorCount | LIVE: $liveCount | SOUL DELTA: +$soulDelta"
-    }
+# Extract prior from COLD-START-BOOT (most reliable source)
+$coldStart = Get-Content "CANON/SYSTEM/COLD-START-BOOT.md" -Raw
+if ($coldStart -match 'SOULCOUNT\s+(\d+[,\d]*)') {
+    $priorCount = [int]($matches[1] -replace ',', '')
+    $liveCount = $soul.soulcount
+    $soulDelta = $liveCount - $priorCount
+    Write-Host "PRIOR (from COLD-START-BOOT): $priorCount | LIVE: $liveCount | SOUL DELTA: +$soulDelta"
 }
 
 # Step 1: State Load
