@@ -1,6 +1,8 @@
 {
-  "timestamp": "2026-05-23T13:07:16.6007206+07:00",
-  "git_head": "43d6444 RRL-0 verbatim extract (v5): 1303 lines / RISE session cleanup + SOUL event audit probe",
+  "timestamp": "2026-05-23T13:52:00+07:00",
+  "git_head": "d77998b",
+  "soulcount": 737644,
+  "events": 655,
   "doctor_ok": true,
   "soul_ok": true,
   "git_branch": "master",
