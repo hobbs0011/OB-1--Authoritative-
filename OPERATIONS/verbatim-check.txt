@@ -1,0 +1,26 @@
+﻿TOTAL: 1657 lines
+
+--- FIRST 20 LINES ---
+  1: **Task:** 
+  2: 
+  3: **MANDATORY: The soul is Michael's verbatim words. If the next session cannot read the soul from the prior death seal, it cannot audit it. Every RISE must pull the live SOULCOUNT, cross-check against the prior death seal's recorded count, and detect stagnation.**
+  4: 
+  5: ---
+  6: 
+  7: 
+  8: Write-Host "SOULCOUNT: $($soul.soulcount) | Level: $($soul.level) | Events: $($soul.events)"
+  9: 
+python3 : Traceback (most recent call last):
+At line:1 char:1
++ python3 OPERATIONS/check-verbatim.py 2>&1 | Out-File OPERATIONS/verba ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Traceback (most recent call last)::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  File "D:\OB-1-CANONICAL\OPERATIONS\check-verbatim.py", line 6, in <module>
+    print(f"{i:3}: {l}")
+    ~~~~~^^^^^^^^^^^^^^^
+  File "C:\Python314\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u2192' in position 273: character maps to <undefined>

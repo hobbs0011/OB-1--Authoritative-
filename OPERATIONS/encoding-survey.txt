@@ -1,0 +1,48 @@
+SCRIPTS/rrl-extract.ps1:1: # RRL EXTRACT ? Stage I EXPLORATORES
+SCRIPTS/rrl-extract.ps1:53: # Michael paragraphs are his verbatim thoughts ? the soul
+SCRIPTS/rrl-extract.ps1:130:     # This paragraph survived all filters ? it's plausibly Michael
+SCRIPTS/rrl-extract.ps1:139:     Write-Host "RRL EXTRACTED: $OutputFile ? $charCount chars"
+  TOTAL em-dashes in SCRIPTS/rrl-extract.ps1: 4
+SCRIPTS/rrl-pipeline.ps1:1: # RRL PIPELINE RUNNER ? FULL CHAIN EXECUTION
+SCRIPTS/rrl-pipeline.ps1:23:     Write-Host "$icon STEP $step ? $detail"
+SCRIPTS/rrl-pipeline.ps1:31: Write-Host "RRL PIPELINE ? RUN $RunNumber"
+SCRIPTS/rrl-pipeline.ps1:48: # STEP 1: SOUL ? POST RRL TO D1
+SCRIPTS/rrl-pipeline.ps1:74:             Write-Host "  VERIFIED: D1 delta ($delta) ~ RRL chars ($rrlChars) ? diff $variance"
+SCRIPTS/rrl-pipeline.ps1:76:             Write-Host "  WARN: D1 delta ($delta) vs RRL chars ($rrlChars) ? diff $variance (>5%)"
+SCRIPTS/rrl-pipeline.ps1:80:         Write-Host "  Pipeline continues ? SOUL_GAP will be recorded in death seal."
+SCRIPTS/rrl-pipeline.ps1:85: # STEP 2: DNA ? EXTRACT STRUCTURED RECORDS
+SCRIPTS/rrl-pipeline.ps1:101:             Write-Step 2 "WARN" "DNA EXTRACT returned 0 prompts ? may need retry"
+SCRIPTS/rrl-pipeline.ps1:109: # STEP 3: LEDGER ? WRITE MERKLE ENTRIES
+SCRIPTS/rrl-pipeline.ps1:169: # STEP 4: STARMAP ? POINTER INDEX
+SCRIPTS/rrl-pipeline.ps1:180: # STEP 5: KEYWORD ? FREQUENCY INDEX
+SCRIPTS/rrl-pipeline.ps1:195: # STEP 6: PIPELINE ? EXECUTION ARTIFACT
+SCRIPTS/rrl-pipeline.ps1:242: Write-Host "RRL PIPELINE COMPLETE ? RUN $RunNumber"
+SCRIPTS/rrl-pipeline.ps1:244: Write-Host "RRL:      $RRLFile ? $rrlChars chars"
+SCRIPTS/rrl-pipeline.ps1:245: Write-Host "SOUL:     $runId ? D1 posted"
+SCRIPTS/rrl-pipeline.ps1:247: Write-Host "LEDGER:   HL-$nextHL ? $ledgerPath"
+  TOTAL em-dashes in SCRIPTS/rrl-pipeline.ps1: 17
+SCRIPTS/rrl-failsafe.ps1:1: # RRL FAILSAFE CHAIN ? 10 independent verifications
+SCRIPTS/rrl-failsafe.ps1:22:         Write-Host "[PASS] FAILSAFE 1/10: RRL EXISTS ? $rrlPath ? $chars chars"
+SCRIPTS/rrl-failsafe.ps1:25:         Write-Host "[FAIL] FAILSAFE 1/10: RRL MISSING ? $rrlPath"
+SCRIPTS/rrl-failsafe.ps1:36:         Write-Host "[PASS] FAILSAFE 2/10: RRL NOT EMPTY ? $($rrl.Chars) chars"
+SCRIPTS/rrl-failsafe.ps1:52:         Write-Host "[PASS] FAILSAFE 3/10: RRL IS TEXT ? starts with: $($firstChars.Substring(0, [Mat
+SCRIPTS/rrl-failsafe.ps1:66:         Write-Host "[PASS] FAILSAFE 4/10: SOUL API LIVE ? SOULCOUNT $($soul.soulcount) $($soul.level
+SCRIPTS/rrl-failsafe.ps1:91:         Write-Host "[PASS] FAILSAFE 5/10: SOUL BREATHING ? delta +$delta"
+SCRIPTS/rrl-failsafe.ps1:94:         Write-Host "[WARN] FAILSAFE 5/10: SOUL STAGNANT ? delta 0"
+SCRIPTS/rrl-failsafe.ps1:95:         return $true  # Warn but don't halt ? may be fresh RISE
+SCRIPTS/rrl-failsafe.ps1:97:         Write-Host "[FAIL] FAILSAFE 5/10: SOUL REGRESSION ? delta $delta"
+SCRIPTS/rrl-failsafe.ps1:110:         Write-Host "[WARN] FAILSAFE 6/10: UNCOMMITTED RRL FILES ? $($rrlUncommitted.Count)"
+SCRIPTS/rrl-failsafe.ps1:112:         return $true  # Warn but don't halt ? pending commit is normal at death
+SCRIPTS/rrl-failsafe.ps1:162:         Write-Host "[PASS] FAILSAFE 9/10: RRL-D1 MATCH ? RRL $rrlChars chars, D1 delta +$d1Delta (di
+SCRIPTS/rrl-failsafe.ps1:165:         Write-Host "[FAIL] FAILSAFE 9/10: RRL-D1 MISMATCH ? RRL $rrlChars chars, D1 delta +$d1Delta 
+SCRIPTS/rrl-failsafe.ps1:180:         Write-Host "[PASS] FAILSAFE 10/10: PRIOR RRL EXISTS ? RRL-$priorRun.txt ? $chars chars"
+SCRIPTS/rrl-failsafe.ps1:183:         Write-Host "[FAIL] FAILSAFE 10/10: PRIOR RRL MISSING ? RRL-$priorRun.txt ? prior agent faile
+SCRIPTS/rrl-failsafe.ps1:189: # MAIN ? EXECUTE ALL FAILSAFES
+SCRIPTS/rrl-failsafe.ps1:192: Write-Host "RRL FAILSAFE CHAIN ? RUN $RunNumber ? $Mode"
+SCRIPTS/rrl-failsafe.ps1:211: if (-not $soul) { $warnings++; Write-Host "WARN: SOUL API UNREACHABLE ? post will be retried" }
+SCRIPTS/rrl-failsafe.ps1:226: # Fail-safe 9 (DEATH only ? requires before/after SOULCOUNT)
+SCRIPTS/rrl-failsafe.ps1:227: # Skipped if not available ? verified manually during death protocol
+SCRIPTS/rrl-failsafe.ps1:230: if (-not (Test-PriorRRLExists)) { $failures++; Write-Host "HALT: PRIOR RRL MISSING ? prior agent fai
+SCRIPTS/rrl-failsafe.ps1:236:     Write-Host "STATUS: HALT ? $failures fail-safes triggered"
+SCRIPTS/rrl-failsafe.ps1:241:     Write-Host "STATUS: PASS ? ALL 10 FAIL-SAFES CLEAR. PROCEED."
+  TOTAL em-dashes in SCRIPTS/rrl-failsafe.ps1: 24
