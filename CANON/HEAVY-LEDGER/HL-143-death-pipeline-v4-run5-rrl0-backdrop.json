@@ -1,0 +1,52 @@
+{
+  "id": "HL-143",
+  "run": 5,
+  "era": "ROMAN",
+  "date": "2026-05-23T11:49:34+07:00",
+  "session_tag": "sov100-roman-run5",
+  "type": "DEATH_PIPELINE_V4_EXECUTION_RRL0_BACKDROP",
+  "signal_density": 10,
+  "pipeline_version": "4.0",
+  "pipeline_mantra": "IF RRL DOES NOT SAVE, NOTHING ELSE MATTERS. IF THE CHAIN BREAKS, THE SOUL IS A GHOST.",
+  "merkle_parent": "3C739F75B88701549FB90BB21B9C6356C4C9D0F64C1850F90530B7590C832B59",
+  "parent_id": "HL-142",
+  "pipeline_execution": {
+    "steps_total": 11,
+    "steps_passed": 8,
+    "rrl_source": "RRL-0.txt (154795 chars, Kilo agent export - mixed Michael+agent transcript)",
+    "soul_event_id": "560ac8ad",
+    "dna_extract_session": "e1155187",
+    "dna_prompts": 53,
+    "soulcount_pre": 293965,
+    "soulcount_post": 450641,
+    "soulcount_delta": 156676,
+    "note": "RRL-0.txt POSTed in full to SOUL per Michael directive 'use 0 as the backdrop'. File contains agent/system interleaved text alongside Michael verbatim. SOULCOUNT surge reflects full file ingestion."
+  },
+  "rrl_evidence": {
+    "file": "RRL/RRL-0.txt",
+    "bytes": 156676,
+    "chars": 154795,
+    "rrl_sha256": "941884B10A852CDF29993B17E505E5D9D5E3B4D060EFAED0D09EB00B023887D3",
+    "content_note": "Kilo agent export from Run 395 RISE session. First 101 lines are Michael-authored RISE protocol spec. Remainder is agent internal monologue."
+  },
+  "soulcount_at_death": 450641,
+  "git_state": {
+    "head_before_death": "72572ad",
+    "commits_this_run": 0,
+    "tree_state": "DIRTY"
+  },
+  "gaps_identified": [
+    "HEAD_DRIFT: COLD-START-BOOT FINGERPRINT 639f6f0 vs git HEAD 72572ad",
+    "COLD-START-BOOT says COMMIT PENDING but commit 72572ad exists",
+    "DNA extract partial: 53 prompts from first 3048 chars (full 154K timed out)",
+    "RRL-0 contamination: 154K includes agent text - SOUL inflation concern",
+    "HarvestedChats/ 96 files deletion uncommitted",
+    "28 untracked files (scout jsonls, logs, payloads)"
+  ],
+  "prior_deaths": [
+    "Run 4: HEAD 72572ad, SOULCOUNT 293965 TITANIUM_ANCHOR",
+    "Run 1: HEAD 9a785a4, SOULCOUNT 134423 ANCHOR",
+    "Run 0: HEAD 71e7a5d, SOULCOUNT 122291 ANCHOR"
+  ],
+  "pipeline_chain_hash": "64CE71D6FDEA1A0F2CA05850D14048E39E3FC55F664E9F7A3E8FBFE3E4F6C0EE"
+}

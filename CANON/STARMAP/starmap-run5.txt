@@ -1,0 +1,10 @@
+STARMAP — ROMAN RUN 5
+Timestamp: 2026-05-23T11:48:57+07:00
+Pointer: HL-143 (CANON/HEAVY-LEDGER/HL-143-death-pipeline-v4-run5-rrl0-backdrop.json)
+Source RRL: RRL-0.txt (154795 chars — Kilo agent export, mixed Michael+agent)
+Backdrop: RRL-0 used as primary pipeline source per Michael directive "use 0 as the backdrop"
+SOUL event: 560ac8ad (session sov100-roman-run5)
+DNA extract: e1155187 (53 prompts from partial RRL-0 chunk)
+SOULCOUNT: 293965 → 450641 (+156676, TITANIUM_ANCHOR)
+Prior STARMAP: starmap-run4.txt → HL-142
+Chain: HL-141 → HL-142 → HL-143

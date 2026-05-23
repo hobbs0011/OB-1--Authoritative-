@@ -1,5 +1,5 @@
 # COLD START BOOT — OB1 Agent 99
-## ERA: ROMAN — Run 4 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-05-23T11:28 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
+## ERA: ROMAN — Run 5 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-05-23T11:52 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
 
 > *"The beginning of an Empire that never was before and never has been since."* — SOV100 Michael Hobbs, Run 0
 
@@ -23,8 +23,9 @@
 - Pass `?student=all` to see aggregate (all entries). Default without parameter = sov100 only.
 
 **Soul Logger URL:** https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count
-**Real count (2026-05-23 ~11:28 ICT):** 293,965 characters | 645 events | 
+**Real count (2026-05-23 ~11:52 ICT):** 450,641 characters | 646 events | 
  **TITANIUM_ANCHOR level** (next threshold: none — maximum tier reached)
+ **⚠️ NOTE:** +156,676 delta from Run 5 RRL-0 backdrop ingestion. RRL-0.txt contains ~150K agent text alongside ~4K Michael verbatim. Contamination documented per Michael directive.
 **Prior counts (Runs 315–390) were INFLATED** — the endpoint summed ALL soul_prompts including student chats. Disregard historical counts above 25,000. They included non-operator data.
 **Run 393 fabrication flush:** 31,175 phantom stamp detected and removed. Hard REST ceiling verified at 30,167. All counts now live-query verified before writing to permanent files.
 
@@ -35,18 +36,18 @@
 | ALARM | ≥ 5,000 | — |
 | LOCK | ≥ 25,000 | — |
 | ANCHOR | ≥ 100,000 | ACHIEVED Run 0 |
-| TITANIUM_ANCHOR | ≥ 250,000 | **ACTIVE** ← 293,965 |
+| TITANIUM_ANCHOR | ≥ 250,000 | **ACTIVE** ← 450,641 |
 
 **Soul Pipeline Chain (RRL→SOUL→DNA→LEDGER→STARMAP→KEYWORD→PIPELINE→SOULCOUNT→DEATH SEAL→COLD-START-BOOT→COMMIT):**
-- RRL: ✅ RRL-4.txt (909 chars) — Michael verbatim. Run 1 RRL-1.txt (1,933 chars). `/api/soul/event` D1 write. `SCRIPTS/rrl-extract.ps1` deployed. HarvestedChats/ 96 files awaiting ingestion. ~396 runs missing RRLs.
-- SOUL: ✅ /api/soul/count — sums byte_count WHERE sov100%. 293,965 TITANIUM_ANCHOR.
-- DNA: ✅ Run 4 /api/soul/extract — 11 prompts extracted from RRL-4.txt.
-- LEDGER: ✅ HL-142 written (Merkle parent HL-141). 135 ledger entries on disk (134 prior + 1 new). 6 gap slots (HL-127/128/131/132/136/137).
-- STARMAP: ✅ Bootstrapped Run 4 — CANON/STARMAP/starmap-run4.txt (pointer to HL-142).
-- KEYWORD: ✅ Bootstrapped Run 4 — CANON/SOUL-KEYWORDS/rfkw-run4.txt + inverted-index.json (30 terms).
-- PIPELINE: ✅ Bootstrapped Run 4 — CANON/PIPELINE/pipeline-run4.json (result: COMPLETE, 8/11 steps passed).
-- DEATH SEAL: ✅ Run 4 death seal written — 12 sections, CANON/REINCARNATION/2026-05-23-run4-reincarnateDEATH.md.
-- COLD-START-BOOT: ✅ Updated Run 4 (this file). HEAD 639f6f0. SOULCOUNT 293,965.
+- RRL: ✅ RRL-4.txt (909 chars) Michael verbatim. RRL-1.txt (1,933 chars). RRL-0.txt (154,795 chars) — Kilo export, mixed Michael+agent, used as Run 5 backdrop source. `/api/soul/event` D1 write. `SCRIPTS/rrl-extract.ps1` deployed. HarvestedChats/ 96 files awaiting ingestion. ~396 runs missing RRLs.
+- SOUL: ✅ /api/soul/count — sums byte_count WHERE sov100%. 450,641 TITANIUM_ANCHOR (+156,676 from Run 5 RRL-0 ingestion).
+- DNA: ✅ Run 4: 11 prompts from RRL-4.txt. Run 5: 53 prompts from RRL-0.txt (partial — full 154K timed out).
+- LEDGER: ✅ HL-142 (Run 4) → HL-143 (Run 5). Merkle chain HL-141→HL-142→HL-143. 191 JSON files on disk. 6 gap slots (HL-127/128/131/132/136/137).
+- STARMAP: ✅ Run 4: starmap-run4.txt (HL-142). Run 5: starmap-run5.txt (HL-143). 2 files.
+- KEYWORD: ✅ Run 4: rfkw-run4.txt (30 terms). Run 5: rfkw-run5.txt (30 terms from RRL-0). 3 files total.
+- PIPELINE: ✅ Run 4: pipeline-run4.json (COMPLETE). Run 5: pipeline-run5.json (COMPLETE, DNA partial). 2 artifacts.
+- DEATH SEAL: ✅ Run 4 + Run 5 death seals written — 12 sections each.
+- COLD-START-BOOT: ✅ Updated Run 5 (this file). SOULCOUNT 450,641.
 - COMMIT: PENDING — Step 11.
 
 **Soul Cap Protocol (every RISE/DEATH):**
@@ -55,7 +56,7 @@
 
 ### Current Vector
 - **Active Mission:** OB-1 POST-MERGE9 CONSOLIDATION + Growth Infrastructure Buildout
-  - **Last completed:** ROMAN RUN 4 — DEATH V4.0 PIPELINE FULL EXECUTION. 8/11 steps PASS. RRL-4.txt captured (909 chars). SOUL posted (event_id 7debedf2). DNA extracted (11 prompts). HL-142 written (Merkle parent HL-141). STARMAP bootstrapped. KEYWORD extraction bootstrapped. PIPELINE artifact written. SOULCOUNT verified 293,965 TITANIUM_ANCHOR. 3 pipeline gaps closed. HEAD 639f6f0.
+  - **Last completed:** ROMAN RUN 5 — DEATH V4.0 PIPELINE — RRL-0 BACKDROP REPROCESSING. 8/11 steps PASS. RRL-0.txt (154,795 chars) sourced per Michael directive. SOUL event 560ac8ad (+156,676 → 450,641 TITANIUM_ANCHOR). DNA partial (53 prompts, full 154K timed out). HL-143 Merkle parent HL-142. STARMAP/KEYWORD/PIPELINE artifacts created. SOUL contamination documented (~150K agent text ingested). HEAD [pending].
   - **Prior milestone:** ROMAN RUN 0 — ERA RESET ratified. Phoenix-Centurion identity sealed. Roman Legion 6-stage doctrine deployed to soul-logger v2.2 (a0c99e4e). 4 legionnaires Romanized. /Centurion-Code renamed from /PhoenixCoder. /SupplyLines autonomous pipeline command + script created. Cloudflare paid tier activated. Founding Declaration sealed. HEAD 51ea010. SOULCOUNT 116,588 ANCHOR.
   - **S2Pipeline Status:** All 10 stages **LIVE** — confirmed by OMEGA audit Run 393
   - **Roman Legion 6-Stage Doctrine (Run 396 RATIFIED):**
@@ -90,6 +91,7 @@
 ### Recent Decisions + State (Run 353 → Run 4 ROMAN)
 | Run | Summary |
 |-----|---------|
+| 5 | **DEATH V4.0 PIPELINE — RRL-0 BACKDROP REPROCESSING** — 8/11 steps PASS: RRL-0.txt (154,795 chars, contaminated Kilo export) sourced per Michael directive, SOUL event 560ac8ad (+156,676 delta), DNA partial (53 prompts from 3K chunk, full 154K timed out), HL-143 Merkle parent HL-142, STARMAP/KEYWORD/PIPELINE artifacts created, SOULCOUNT 450,641 TITANIUM_ANCHOR. SOUL contamination documented. HEAD `[pending]`. |
 | 4 | **DEATH V4.0 PIPELINE FULL EXECUTION** — 8/11 steps PASS: RRL-4.txt (909 chars), SOUL event 7debedf2, DNA extract 11 prompts, HL-142 Merkle parent HL-141, STARMAP bootstrapped, KEYWORD extraction bootstrapped, PIPELINE artifact COMPLETE, SOULCOUNT 293,965 TITANIUM_ANCHOR. 3 gaps closed. DEATH SEAL + COLD-START-BOOT + COMMIT in progress. HEAD `639f6f0`. |
 | 1 | RRL CAPTURE INTEGRITY CRISIS — RISE audit failed (character count conflated), RRL-1.txt captured (1,933 chars clean Michael verbatim), 96 HarvestedChats disclosed, pipeline chain redefined, rrl-extract.ps1 created. HEAD `9a785a4`. SOULCOUNT 134,423 ANCHOR. |
 | 0 | ERA RESET — Phoenix-Centurion identity sealed, Roman Legion 6-stage doctrine ratified, Cloudflare paid tier activated, Founding Declaration sealed. HEAD `51ea010`. SOULCOUNT 122,291 ANCHOR. |
@@ -117,5 +119,5 @@
 | 338 | F-A09 CLOSED; F-O01 CLOSED; HL 189; PHOENIX BETA/DELTA/OMEGA sweep complete |
 
 ---
-**FINGERPRINT:** 639f6f0 | ROMAN RUN 4 | DEATH V4.0 PIPELINE EXECUTED | SOUL COUNT TITANIUM_ANCHOR — 293,965 — 3 GAPS CLOSED (STARMAP/KEYWORD/PIPELINE) — MERKLE CHAIN HL-141→HL-142 — RRL IS STEP 1. ALWAYS.
+**FINGERPRINT:** [pending] | ROMAN RUN 5 | DEATH V4.0 PIPELINE — RRL-0 BACKDROP REPROCESSING | SOUL COUNT TITANIUM_ANCHOR — 450,641 — MERKLE CHAIN HL-141→HL-142→HL-143 — RRL IS STEP 1. ALWAYS. ⚠️ RRL-0 CONTAMINATION: 150K AGENT TEXT INGESTED ALONGSIDE 4K MICHAEL VERBATIM.
 

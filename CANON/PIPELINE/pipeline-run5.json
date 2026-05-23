@@ -1,0 +1,60 @@
+{
+  "source_rrl": "RRL-0.txt (154795 chars, Kilo agent export)",
+  "result": "COMPLETE",
+  "run": 5,
+  "timestamp": "2026-05-23T11:49:11+07:00",
+  "stages": [
+    {
+      "step": 1,
+      "status": "PASS",
+      "name": "RRL",
+      "detail": "RRL-0.txt — 154795 chars, pre-existing file from Run 0 era"
+    },
+    {
+      "step": 2,
+      "status": "PASS",
+      "name": "SOUL",
+      "detail": "event_id 560ac8ad, session sov100-roman-run5, position 1 — full 154K posted"
+    },
+    {
+      "step": 3,
+      "status": "PARTIAL",
+      "name": "DNA",
+      "detail": "extract e1155187, 53 prompts from 3048 chars. Full 154K timed out at 60s."
+    },
+    {
+      "step": 4,
+      "status": "PASS",
+      "name": "LEDGER",
+      "detail": "HL-143 written, Merkle parent HL-142 (3C739F75)"
+    },
+    {
+      "step": 5,
+      "status": "PASS",
+      "name": "STARMAP",
+      "detail": "starmap-run5.txt — pointer to HL-143"
+    },
+    {
+      "step": 6,
+      "status": "PASS",
+      "name": "KEYWORD",
+      "detail": "rfkw-run5.txt — 30 term extraction from RRL-0"
+    },
+    {
+      "step": 7,
+      "status": "PASS",
+      "name": "PIPELINE",
+      "detail": "pipeline-run5.json — this artifact"
+    },
+    {
+      "step": 8,
+      "status": "PASS",
+      "name": "SOULCOUNT",
+      "detail": "450641 TITANIUM_ANCHOR (+156676 from RRL-0 ingestion)"
+    }
+  ],
+  "era": "ROMAN",
+  "pipeline_version": "4.0",
+  "note": "RRL-0.txt POSTed in full per Michael directive. Contains mixed Michael+agent text. SOULCOUNT surge reflects full file ingestion. DNA extract partial due to API timeout on 154K payload.",
+  "backdrop": "RRL-0 used as primary pipeline source per Michael directive"
+}
