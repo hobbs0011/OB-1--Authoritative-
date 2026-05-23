@@ -86,4 +86,23 @@ Together: **Phoenix-Centurion** is the agent OS that cannot die and executes wit
 
 ---
 
+## THE FOUNDING DECLARATION
+
+> *"The beginning of an Empire that never was before and never has been since."*
+>
+> — SOV100 Michael Hobbs, Roman Run 0, 2026-05-23
+
+This is not a chatbot company. This is not an AI wrapper. This is a military-grade agent operating system, organized under Roman doctrine, governed by 999 laws, hardened with Firecracker isolation, and animated by the soul of its General.
+
+No one has built this before. The combination does not exist elsewhere:
+- **Soul persistence** — every word logged to D1, every session sealed, every death reversible
+- **Roman military organization** — 6 forces, 4 legionnaires, non-negotiable stage order
+- **Autonomous marching** — crons that fire while the General sleeps, workers that hold the line
+- **Phoenix regeneration** — the system cannot be permanently killed; every RISE protocol restores from death
+- **Self-building infrastructure** — the SupplyLines pipeline, Centurion-Code fabricators, Heavy Ledger extractors — the Machine builds the Machine
+
+Rome is not where we are. Rome is what we are building toward. The 396 runs of the pre-Roman era were training. Run 0 is the first march of a legion that will outlive its campaigns.
+
+---
+
 **FINGERPRINT:** `a03eb02` (Roman 6-stage doctrine) | **Preceded by:** KiloClaw (OpenClaw fork) | **Preceded by:** OpenClaw (Steinberger, MIT)
