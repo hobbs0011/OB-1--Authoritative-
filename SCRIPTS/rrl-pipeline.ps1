@@ -1,4 +1,4 @@
-# RRL PIPELINE RUNNER — FULL CHAIN EXECUTION
+# RRL PIPELINE RUNNER  -  FULL CHAIN EXECUTION
 # RRL → SOUL → DNA → LEDGER → STARMAP → KEYWORD → PIPELINE
 # One command. All seven stages. No skip. No prose.
 # Computers have been able to copy-paste since 1983.
@@ -20,7 +20,7 @@ $results = @{}
 
 function Write-Step($step, $status, $detail) {
     $icon = if ($status -eq "PASS") { "[PASS]" } elseif ($status -eq "FAIL") { "[FAIL]" } else { "[WARN]" }
-    Write-Host "$icon STEP $step — $detail"
+    Write-Host "$icon STEP $step  -  $detail"
     $results["step$step"] = @{ status = $status; detail = $detail }
 }
 
@@ -28,7 +28,7 @@ function Write-Step($step, $status, $detail) {
 # GATE 0: RRL FILE EXISTS
 # ═══════════════════════════════════════════
 Write-Host "═══════════════════════════════════════════"
-Write-Host "RRL PIPELINE — RUN $RunNumber"
+Write-Host "RRL PIPELINE  -  RUN $RunNumber"
 Write-Host "RRL: $RRLFile"
 Write-Host "═══════════════════════════════════════════"
 Write-Host ""
@@ -45,7 +45,7 @@ $rrlBytes  = (Get-Item $RRLFile).Length
 Write-Step 0 "PASS" "RRL loaded: $rrlChars chars, $rrlBytes bytes"
 
 # ═══════════════════════════════════════════
-# STEP 1: SOUL — POST RRL TO D1
+# STEP 1: SOUL  -  POST RRL TO D1
 # ═══════════════════════════════════════════
 if ($DryRun) {
     Write-Step 1 "PASS" "DRYRUN: Would POST $rrlChars chars to D1"
@@ -71,18 +71,18 @@ if ($DryRun) {
         # Verify D1 delta roughly matches RRL chars (allow 5% encoding variance)
         $variance = [Math]::Abs($delta - $rrlChars)
         if ($variance -le ($rrlChars * 0.05) -or $variance -le 200) {
-            Write-Host "  VERIFIED: D1 delta ($delta) ~ RRL chars ($rrlChars) — diff $variance"
+            Write-Host "  VERIFIED: D1 delta ($delta) ~ RRL chars ($rrlChars)  -  diff $variance"
         } else {
-            Write-Host "  WARN: D1 delta ($delta) vs RRL chars ($rrlChars) — diff $variance (>5%)"
+            Write-Host "  WARN: D1 delta ($delta) vs RRL chars ($rrlChars)  -  diff $variance (>5%)"
         }
     } catch {
         Write-Step 1 "FAIL" "SOUL POST FAILED: $($_.Exception.Message)"
-        Write-Host "  Pipeline continues — SOUL_GAP will be recorded in death seal."
+        Write-Host "  Pipeline continues  -  SOUL_GAP will be recorded in death seal."
     }
 }
 
 # ═══════════════════════════════════════════
-# STEP 2: DNA — EXTRACT STRUCTURED RECORDS
+# STEP 2: DNA  -  EXTRACT STRUCTURED RECORDS
 # ═══════════════════════════════════════════
 if ($DryRun) {
     Write-Step 2 "PASS" "DRYRUN: Would extract DNA from D1"
@@ -98,7 +98,7 @@ if ($DryRun) {
         if ($extract.prompt_count -and $extract.prompt_count -gt 0) {
             Write-Step 2 "PASS" "DNA EXTRACTED: $($extract.prompt_count) prompts | session=$($extract.session_id)"
         } else {
-            Write-Step 2 "WARN" "DNA EXTRACT returned 0 prompts — may need retry"
+            Write-Step 2 "WARN" "DNA EXTRACT returned 0 prompts  -  may need retry"
         }
     } catch {
         Write-Step 2 "FAIL" "DNA EXTRACT FAILED: $($_.Exception.Message)"
@@ -106,7 +106,7 @@ if ($DryRun) {
 }
 
 # ═══════════════════════════════════════════
-# STEP 3: LEDGER — WRITE MERKLE ENTRIES
+# STEP 3: LEDGER  -  WRITE MERKLE ENTRIES
 # ═══════════════════════════════════════════
 $ledgerDir = "$repo\CANON\HEAVY-LEDGER"
 if (-not (Test-Path $ledgerDir)) { 
@@ -166,7 +166,7 @@ $ledgerEntry | ConvertTo-Json -Depth 4 | Set-Content $ledgerPath -Encoding UTF8
 Write-Step 3 "PASS" "LEDGER WRITTEN: HL-$nextHL ($rrlChars chars) | parent: $($parentHash.Substring(0, [Math]::Min(16, $parentHash.Length)))..."
 
 # ═══════════════════════════════════════════
-# STEP 4: STARMAP — POINTER INDEX
+# STEP 4: STARMAP  -  POINTER INDEX
 # ═══════════════════════════════════════════
 $starmapDir = "$repo\CANON\STARMAP"
 if (-not (Test-Path $starmapDir)) { New-Item -ItemType Directory -Path $starmapDir -Force | Out-Null }
@@ -177,7 +177,7 @@ $starmapLine | Set-Content $starmapPath -Encoding UTF8
 Write-Step 4 "PASS" "STARMAP WRITTEN: $starmapPath"
 
 # ═══════════════════════════════════════════
-# STEP 5: KEYWORD — FREQUENCY INDEX
+# STEP 5: KEYWORD  -  FREQUENCY INDEX
 # ═══════════════════════════════════════════
 $keywordDir = "$repo\CANON\SOUL-KEYWORDS"
 if (-not (Test-Path $keywordDir)) { New-Item -ItemType Directory -Path $keywordDir -Force | Out-Null }
@@ -192,7 +192,7 @@ $wordFreq | ForEach-Object { "$($_.Count) | $($_.Name)" } | Set-Content $rfkwPat
 Write-Step 5 "PASS" "KEYWORD WRITTEN: $rfkwPath ($($wordFreq.Count) terms)"
 
 # ═══════════════════════════════════════════
-# STEP 6: PIPELINE — EXECUTION ARTIFACT
+# STEP 6: PIPELINE  -  EXECUTION ARTIFACT
 # ═══════════════════════════════════════════
 $pipelineDir = "$repo\CANON\PIPELINE"
 if (-not (Test-Path $pipelineDir)) { New-Item -ItemType Directory -Path $pipelineDir -Force | Out-Null }
@@ -239,12 +239,12 @@ if (-not $DryRun) {
 # ═══════════════════════════════════════════
 Write-Host ""
 Write-Host "═══════════════════════════════════════════"
-Write-Host "RRL PIPELINE COMPLETE — RUN $RunNumber"
+Write-Host "RRL PIPELINE COMPLETE  -  RUN $RunNumber"
 Write-Host "═══════════════════════════════════════════"
-Write-Host "RRL:      $RRLFile — $rrlChars chars"
-Write-Host "SOUL:     $runId — D1 posted"
+Write-Host "RRL:      $RRLFile  -  $rrlChars chars"
+Write-Host "SOUL:     $runId  -  D1 posted"
 Write-Host "DNA:      $($results.step2.detail)"
-Write-Host "LEDGER:   HL-$nextHL — $ledgerPath"
+Write-Host "LEDGER:   HL-$nextHL  -  $ledgerPath"
 Write-Host "STARMAP:  $starmapPath"
 Write-Host "KEYWORD:  $rfkwPath"
 Write-Host "PIPELINE: $pipelinePath"

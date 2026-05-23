@@ -1,0 +1,15 @@
+{
+  "hl_id": "HL-146",
+  "session_id": "sov100-run0-rise",
+  "rrl_source": "D:\\OB-1-CANONICAL\\RRL\\RRL-0.txt",
+  "char_count": 152786,
+  "byte_count": 154667,
+  "merkle_parent": "a8841d8d643fb04390f94ae91178e5032829ced350c49f6ce8c1ae1fe07bfbc8",
+  "merkle_hash": "a1e36ebe7b141e0c4735ba5f7a3c9da183e74bbec3867772924a24f542c28bc5",
+  "sealed_at": "2026-05-23T05:43:37.433395+00:00",
+  "sov100": true,
+  "run": "0",
+  "dna_status": "WARN_GAP",
+  "soul_event_id": "a51886a5-d649-4cc3-a5c7-1ef62b617ad8",
+  "soul_delta": 154667
+}

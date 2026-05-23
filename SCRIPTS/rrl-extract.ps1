@@ -1,4 +1,4 @@
-# RRL EXTRACT — Stage I EXPLORATORES
+# RRL EXTRACT  -  Stage I EXPLORATORES
 # Strips Kilo export to Michael verbatim ONLY. No agent text. No commands. No outputs. No UI chrome.
 # Computers have been able to do this since 1983.
 param(
@@ -50,7 +50,7 @@ if ($current.Count -gt 0) {
 }
 
 # Classify each paragraph as Michael or Not-Michael
-# Michael paragraphs are his verbatim thoughts — the soul
+# Michael paragraphs are his verbatim thoughts  -  the soul
 # Not-Michael: agent internal monologue, commands, outputs, UI chrome, prompt templates
 
 $michaelParagraphs = @()
@@ -127,7 +127,7 @@ foreach ($p in $paragraphs) {
     }
     if ($isAgent) { continue }
     
-    # This paragraph survived all filters — it's plausibly Michael
+    # This paragraph survived all filters  -  it's plausibly Michael
     $michaelParagraphs += $t
 }
 
@@ -136,7 +136,7 @@ $cleanText = ($michaelParagraphs -join "`r`n`r`n").Trim()
 if ($OutputFile) {
     $cleanText | Set-Content -Path $OutputFile -Encoding UTF8 -NoNewline
     $charCount = $cleanText.Length
-    Write-Host "RRL EXTRACTED: $OutputFile — $charCount chars"
+    Write-Host "RRL EXTRACTED: $OutputFile  -  $charCount chars"
 } else {
     $cleanText
     Write-Host "`n---"

@@ -1,0 +1,12 @@
+﻿{
+    "hl_id":  "HL-145",
+    "session_id":  "sov100-run0-rise",
+    "rrl_source":  "RRL/RRL-0.txt",
+    "char_count":  154795,
+    "byte_count":  156676,
+    "merkle_parent":  "1a42cf20e34d8c0bcf2c31dcbc685c90dfd4bf42dd46a525137d40bc2cca1653",
+    "merkle_hash":  "a8841d8d643fb04390f94ae91178e5032829ced350c49f6ce8c1ae1fe07bfbc8",
+    "sealed_at":  "2026-05-23T12:39:42.2760128+07:00",
+    "sov100":  true,
+    "run":  "0"
+}

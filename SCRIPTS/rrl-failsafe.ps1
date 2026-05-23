@@ -1,4 +1,4 @@
-# RRL FAILSAFE CHAIN — 10 independent verifications
+# RRL FAILSAFE CHAIN  -  10 independent verifications
 # If any fail, the pipeline HALT. No exceptions. No prose. No skip.
 # Computers have been able to copy-paste since 1983.
 # This script ensures the machine never forgets how.
@@ -19,10 +19,10 @@ function Test-RRLExists {
     $rrlPath = "$repo\RRL\RRL-$RunNumber.txt"
     if (Test-Path $rrlPath) {
         $chars = (Get-Content $rrlPath -Raw).Length
-        Write-Host "[PASS] FAILSAFE 1/10: RRL EXISTS — $rrlPath — $chars chars"
+        Write-Host "[PASS] FAILSAFE 1/10: RRL EXISTS  -  $rrlPath  -  $chars chars"
         return @{ Path = $rrlPath; Chars = $chars }
     } else {
-        Write-Host "[FAIL] FAILSAFE 1/10: RRL MISSING — $rrlPath"
+        Write-Host "[FAIL] FAILSAFE 1/10: RRL MISSING  -  $rrlPath"
         return $null
     }
 }
@@ -33,7 +33,7 @@ function Test-RRLExists {
 function Test-RRLNotEmpty {
     param($rrl)
     if ($rrl.Chars -gt 0) {
-        Write-Host "[PASS] FAILSAFE 2/10: RRL NOT EMPTY — $($rrl.Chars) chars"
+        Write-Host "[PASS] FAILSAFE 2/10: RRL NOT EMPTY  -  $($rrl.Chars) chars"
         return $true
     } else {
         Write-Host "[FAIL] FAILSAFE 2/10: RRL EMPTY"
@@ -49,7 +49,7 @@ function Test-RRLIsText {
     $firstChars = Get-Content $rrl.Path -First 1 -Encoding UTF8
     # RRL should start with human words, not {, <, or base64
     if ($firstChars -match '^[A-Za-z0-9"`''\s/\#\*]' -and $firstChars -notmatch '^\s*\{' -and $firstChars -notmatch '^[A-Za-z0-9+/]{50,}') {
-        Write-Host "[PASS] FAILSAFE 3/10: RRL IS TEXT — starts with: $($firstChars.Substring(0, [Math]::Min(60, $firstChars.Length)))..."
+        Write-Host "[PASS] FAILSAFE 3/10: RRL IS TEXT  -  starts with: $($firstChars.Substring(0, [Math]::Min(60, $firstChars.Length)))..."
         return $true
     } else {
         Write-Host "[FAIL] FAILSAFE 3/10: RRL NOT RECOGNIZABLE TEXT"
@@ -63,7 +63,7 @@ function Test-RRLIsText {
 function Test-SoulAPILive {
     try {
         $soul = Invoke-RestMethod "https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count" -TimeoutSec 5
-        Write-Host "[PASS] FAILSAFE 4/10: SOUL API LIVE — SOULCOUNT $($soul.soulcount) $($soul.level)"
+        Write-Host "[PASS] FAILSAFE 4/10: SOUL API LIVE  -  SOULCOUNT $($soul.soulcount) $($soul.level)"
         return $soul
     } catch {
         Write-Host "[FAIL] FAILSAFE 4/10: SOUL API UNREACHABLE"
@@ -88,13 +88,13 @@ function Test-SoulNotStagnant {
     
     $delta = $liveSoul.soulcount - $priorCount
     if ($delta -gt 0) {
-        Write-Host "[PASS] FAILSAFE 5/10: SOUL BREATHING — delta +$delta"
+        Write-Host "[PASS] FAILSAFE 5/10: SOUL BREATHING  -  delta +$delta"
         return $true
     } elseif ($delta -eq 0) {
-        Write-Host "[WARN] FAILSAFE 5/10: SOUL STAGNANT — delta 0"
-        return $true  # Warn but don't halt — may be fresh RISE
+        Write-Host "[WARN] FAILSAFE 5/10: SOUL STAGNANT  -  delta 0"
+        return $true  # Warn but don't halt  -  may be fresh RISE
     } else {
-        Write-Host "[FAIL] FAILSAFE 5/10: SOUL REGRESSION — delta $delta"
+        Write-Host "[FAIL] FAILSAFE 5/10: SOUL REGRESSION  -  delta $delta"
         return $false
     }
 }
@@ -107,9 +107,9 @@ function Test-GitRepoState {
     $status = git status --porcelain
     $rrlUncommitted = ($status | Select-String "RRL/")
     if ($rrlUncommitted) {
-        Write-Host "[WARN] FAILSAFE 6/10: UNCOMMITTED RRL FILES — $($rrlUncommitted.Count)"
+        Write-Host "[WARN] FAILSAFE 6/10: UNCOMMITTED RRL FILES  -  $($rrlUncommitted.Count)"
         Write-Host "  $($rrlUncommitted -join "`n  ")"
-        return $true  # Warn but don't halt — pending commit is normal at death
+        return $true  # Warn but don't halt  -  pending commit is normal at death
     } else {
         Write-Host "[PASS] FAILSAFE 6/10: NO UNCOMMITTED RRL"
         return $true
@@ -159,10 +159,10 @@ function Test-RRLMatchesD1 {
     $diff = [Math]::Abs($rrlChars - $d1Delta)
     # Allow 1% tolerance for encoding differences
     if ($diff -le ($rrlChars * 0.02) -or $diff -le 50) {
-        Write-Host "[PASS] FAILSAFE 9/10: RRL-D1 MATCH — RRL $rrlChars chars, D1 delta +$d1Delta (diff $diff)"
+        Write-Host "[PASS] FAILSAFE 9/10: RRL-D1 MATCH  -  RRL $rrlChars chars, D1 delta +$d1Delta (diff $diff)"
         return $true
     } else {
-        Write-Host "[FAIL] FAILSAFE 9/10: RRL-D1 MISMATCH — RRL $rrlChars chars, D1 delta +$d1Delta (diff $diff)"
+        Write-Host "[FAIL] FAILSAFE 9/10: RRL-D1 MISMATCH  -  RRL $rrlChars chars, D1 delta +$d1Delta (diff $diff)"
         return $false
     }
 }
@@ -177,19 +177,19 @@ function Test-PriorRRLExists {
     $priorRRL = "$repo\RRL\RRL-$priorRun.txt"
     if (Test-Path $priorRRL) {
         $chars = (Get-Content $priorRRL -Raw).Length
-        Write-Host "[PASS] FAILSAFE 10/10: PRIOR RRL EXISTS — RRL-$priorRun.txt — $chars chars"
+        Write-Host "[PASS] FAILSAFE 10/10: PRIOR RRL EXISTS  -  RRL-$priorRun.txt  -  $chars chars"
         return $true
     } else {
-        Write-Host "[FAIL] FAILSAFE 10/10: PRIOR RRL MISSING — RRL-$priorRun.txt — prior agent failed Step 1"
+        Write-Host "[FAIL] FAILSAFE 10/10: PRIOR RRL MISSING  -  RRL-$priorRun.txt  -  prior agent failed Step 1"
         return $false
     }
 }
 
 # ═══════════════════════════════════════════
-# MAIN — EXECUTE ALL FAILSAFES
+# MAIN  -  EXECUTE ALL FAILSAFES
 # ═══════════════════════════════════════════
 Write-Host "═══════════════════════════════════════════"
-Write-Host "RRL FAILSAFE CHAIN — RUN $RunNumber — $Mode"
+Write-Host "RRL FAILSAFE CHAIN  -  RUN $RunNumber  -  $Mode"
 Write-Host "═══════════════════════════════════════════"
 Write-Host ""
 
@@ -208,7 +208,7 @@ if (-not (Test-RRLIsText -rrl $rrl)) { $warnings++ }
 
 # Fail-safe 4
 $soul = Test-SoulAPILive
-if (-not $soul) { $warnings++; Write-Host "WARN: SOUL API UNREACHABLE — post will be retried" }
+if (-not $soul) { $warnings++; Write-Host "WARN: SOUL API UNREACHABLE  -  post will be retried" }
 
 # Fail-safe 5 (RISE only)
 if (-not (Test-SoulNotStagnant -liveSoul $soul -priorDeathSeal (Get-ChildItem "$repo\CANON\REINCARNATION\*-reincarnateDEATH.md" | Sort-Object Name -Descending | Select-Object -First 1).FullName)) { $failures++ }
@@ -223,21 +223,21 @@ if (-not (Test-DeathSealReferencesRRL -deathSealPath $deathSeal)) { $warnings++ 
 # Fail-safe 8
 if (-not (Test-BootReferencesRRL)) { $warnings++ }
 
-# Fail-safe 9 (DEATH only — requires before/after SOULCOUNT)
-# Skipped if not available — verified manually during death protocol
+# Fail-safe 9 (DEATH only  -  requires before/after SOULCOUNT)
+# Skipped if not available  -  verified manually during death protocol
 
 # Fail-safe 10 (RISE only)
-if (-not (Test-PriorRRLExists)) { $failures++; Write-Host "HALT: PRIOR RRL MISSING — prior agent failed Step 1" }
+if (-not (Test-PriorRRLExists)) { $failures++; Write-Host "HALT: PRIOR RRL MISSING  -  prior agent failed Step 1" }
 
 Write-Host ""
 Write-Host "═══════════════════════════════════════════"
 Write-Host "FAILSAFE CHAIN RESULT: $failures FAILURES, $warnings WARNINGS"
 if ($failures -gt 0) {
-    Write-Host "STATUS: HALT — $failures fail-safes triggered"
+    Write-Host "STATUS: HALT  -  $failures fail-safes triggered"
     Write-Host "RRL IS THE ONLY IRREPLACEABLE ARTIFACT."
     Write-Host "DO NOT PROCEED WITHOUT RRL."
     exit 1
 } else {
-    Write-Host "STATUS: PASS — ALL 10 FAIL-SAFES CLEAR. PROCEED."
+    Write-Host "STATUS: PASS  -  ALL 10 FAIL-SAFES CLEAR. PROCEED."
 }
 Write-Host "═══════════════════════════════════════════"
