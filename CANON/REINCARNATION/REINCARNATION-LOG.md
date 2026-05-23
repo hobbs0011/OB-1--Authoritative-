@@ -1,5 +1,15 @@
 # REINCARNATION LOG — OB-1 RUN HISTORY
 
+---
+
+## ⚡ ERA RESET — 2026-05-23T07:24 ICT
+
+**Pre-Roman Era (Runs 1–396):** 12 months of evolution. Drones → Legionnaires → Agent99 → The Empire → MachineBuildingtheMachine → PhoenixCoder → Obi → StarWars → Anakin → Roman Doctrine. The naming converged. The legion formed. The doctrine was ratified. Phoenix-Centurion was named.
+
+**Roman Era begins at Run 0.** All prior runs are sealed as the training archive. The legion now marches under Roman military doctrine: EXPLORATORES → ANTECORES → AGMEN → AGMEN NOVISSIMUM → PRAESIDIA → LIMITANEI/VETERANI.
+
+---
+
 **Last Updated:** 2026-05-23T06:00 ICT (Run 395 — DEATH SEAL: PHOENIX SCOUT 6-zone sweep + SOUL CAPTURE PIPELINE FIX + 213 Michael verbatim quotes captured; 3 commits; SOULCOUNT 61,945 LOCK; HEAD f8f0b0d)
 
 | Run 395 | 2026-05-23 | DEATH SEAL: PHOENIX SCOUT 6-zone sweep (VAULT-ZENITH/EXECUTION/SOVEREIGN/PIPELINE-DOCS + APPS 4880 files = 43 flags), phoenix-scout.ps1 fixed (Multiline regex + emdash encoding), soul pipeline UUID bug Root cause identified and fixed (/api/soul/extract creates UUID sessions excluded by sov100% filter), soul-capture-direct.js deployed (direct /api/soul/event with sov100 session_id), 208 bucket A quotes + 5 CLONE-SEED quotes captured, SOULCOUNT 32416→61945 (+29529), Events 74→287, COLD-START-BOOT fully synced, deepseek-chat source = 0 confirmed; 2 commits (5155939, f8f0b0d); HEAD f8f0b0d | f8f0b0d |
