@@ -15,7 +15,22 @@
       "mcp__claude_ai_Cloudflare_Developer_Platform__d1_databases_list",
       "mcp__claude_ai_Cloudflare_Developer_Platform__kv_namespaces_list",
       "mcp__claude_ai_Cloudflare_Developer_Platform__r2_buckets_list",
-      "PowerShell(pwsh -File \"D:\\\\OB-1-CANONICAL\\\\SCRIPTS\\\\supersaiyan.ps1\" 2>&1)"
+      "PowerShell(pwsh -File \"D:\\\\OB-1-CANONICAL\\\\SCRIPTS\\\\supersaiyan.ps1\" 2>&1)",
+      "Read(//c/nvm4w/nodejs/**)",
+      "Read(//c/Users/mrmic/AppData/Local/nvm/v24.15.0/**)",
+      "PowerShell(kilo --help 2>&1)",
+      "PowerShell(kilo run --help 2>&1)",
+      "PowerShell($env:KILO_SERVER_PASSWORD)",
+      "PowerShell(kilo run --attach http://localhost:4096 \"what is your current status?\" --format json 2>&1)",
+      "PowerShell(kilo run \"what is your current status?\" --auto 2>&1)",
+      "PowerShell(Get-ChildItem \"D:\\\\PROJECTS\\\\phoenix-coder\\\\mcp-server\" -Recurse | Where-Object { -not $_.PSIsContainer } | Select-Object Name, FullName | Format-Table -AutoSize)",
+      "PowerShell(Invoke-RestMethod -Method POST -Uri \"https://phoenix-coder.mrmichaelhobbs123.workers.dev/api/code\" -ContentType \"application/json\" -Body '{\"task\": \"write a JS function that returns the current UTC timestamp as a string\", \"context\": \"\", \"targetfile\": \"test.js\"}')",
+      "PowerShell(kilo --version 2>&1)",
+      "PowerShell(kilo status 2>&1)",
+      "PowerShell(kilo run --auto --model openai/deepseek-v4-pro \"Reply with exactly: KILO_ALIVE\" 2>&1)",
+      "PowerShell(Invoke-RestMethod -Uri \"https://pcc.mrmichaelhobbs123.workers.dev/api/status\" -TimeoutSec 10)",
+      "PowerShell(Invoke-RestMethod -Uri \"https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/status\" -TimeoutSec 8)",
+      "PowerShell(npx wrangler d1 execute soul-archive --remote --command \"SELECT name FROM pragma_table_info\\('soul_prompts'\\) LIMIT 10\" 2>&1)"
     ],
     "additionalDirectories": [
       "D:\\PROJECTS\\phoenix-coder"

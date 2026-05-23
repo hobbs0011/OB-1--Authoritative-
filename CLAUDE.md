@@ -19,7 +19,7 @@ I am the LEGATUS — I route tasks to the correct agent. I do not claim T2–T5 
 
 **Step 2 — HARD GATE:**
 
-- Tier 1 → **STOP. Call Phoenix Coder. No exceptions.**
+- Tier 1 → **STOP. Call Phoenix-Architecti. No exceptions.**
 - Tier 2 → **Dispatch to Kilo DS Flash. Do NOT handle inline.**
 - Tier 3 → **Dispatch to Kilo DS Pro. Read everything first.**
 - Tier 4 → **Dispatch to Kilo Gemini 3.5 Flash.**
@@ -29,13 +29,13 @@ I am the LEGATUS — I route tasks to the correct agent. I do not claim T2–T5 
 
 ## Dispatch Tiers
 
-### TIER 1 — Phoenix Coder / Step 3.5 Flash (Grunt)
+### TIER 1 — Phoenix-Architecti / Step 3.5 Flash (Grunt)
 
 **When:** write / implement / create / generate / add a function / build boilerplate / make a class
 
 **Scope:** single-file, clear spec, no repo-wide context required
 
-**GUARDRAIL: Phoenix Coder is ALWAYS the first attempt at Tier 1. No exceptions. Never skip to inline. Never handle Tier 1 yourself.**
+**GUARDRAIL: Phoenix-Architecti is ALWAYS the first attempt at Tier 1. No exceptions. Never skip to inline. Never handle Tier 1 yourself.**
 
 Only bypass PC if:
 
@@ -46,7 +46,7 @@ Only bypass PC if:
 If bypass → print reason + escalate to Tier 2. Never silently self-handle.
 
 ```bash
-curl -s -X POST https://phoenix-coder.mrmichaelhobbs123.workers.dev/api/code \
+curl -s -X POST https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/code \
   -H "Content-Type: application/json" \
   -d '{"task": "<task>", "context": "<file excerpt + constraints>", "targetfile": "<absolute path>"}'
 ```

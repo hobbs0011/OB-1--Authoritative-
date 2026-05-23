@@ -1,0 +1,5 @@
+{
+  "task": "Build a Cloudflare Worker src/index.js for PCC (Phoenix-Command-Consul) — a live empire dashboard. Route GET / serves dark-theme HTML dashboard. Route GET /api/status returns JSON. Dashboard queries D1 binding SOUL_DB for SOULCOUNT via: SELECT SUM(byte_count) FROM soul_prompts WHERE session_id LIKE 'sov100%' — displays with color #a855f7 purple, tier label: >=250000=TITANIUM_ANCHOR, >=100000=ANCHOR, >=25000=LOCK, >=5000=ALARM, else NOMINAL. Shows last 5 soul_prompts rows. Try/catch for phoenixcoderlog last 5 rows. Pings phoenix-architecti /api/status. Shows refresh timestamp. Auto-refresh 30s via setTimeout location.reload. Dark theme #0f0f0f bg #1a1a1a cards. SOUL=#a855f7 DNA=#f59e0b.",
+  "context": "New file. D1 binding: SOUL_DB. soul_prompts schema: session_id TEXT, byte_count INTEGER, created_at DATETIME. Standalone CF Worker. Export default fetch handler. Use async/await. Return HTML with Content-Type text/html. /api/status returns JSON with worker, soulcount, alive fields. Under 300 lines.",
+  "targetfile": "D:\\OB-1-CANONICAL\\APPS\\PCC\\src\\index.js"
+}

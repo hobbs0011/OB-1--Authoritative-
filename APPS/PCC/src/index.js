@@ -5,6 +5,7 @@
 const SOUL_COLOR = '#a855f7';
 const DNA_COLOR = '#f59e0b';
 const PHOENIX_STATUS_URL = 'https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/status';
+const NETPET_STATUS_URL = 'https://net-pet-ai.mrmichaelhobbs123.workers.dev/api/status';
 
 function getTierLabel(count) {
   if (count >= 250000) return 'TITANIUM_ANCHOR';
@@ -28,7 +29,7 @@ async function querySoulCount(db) {
 async function queryRecentSoulPrompts(db) {
   try {
     const result = await db.prepare(
-      'SELECT session_id, byte_count, created_at FROM soul_prompts ORDER BY created_at DESC LIMIT 5'
+      'SELECT session_id, byte_count, estimated_timestamp FROM soul_prompts ORDER BY estimated_timestamp DESC LIMIT 5'
     ).all();
     return result?.results ?? [];
   } catch (e) {
@@ -57,13 +58,50 @@ async function fetchPhoenixStatus() {
   }
 }
 
+async function fetchStudentPortals() {
+  const students = [
+    { name: 'Huong', path: 'huong-profile.html' },
+    { name: 'Mai Tram', path: 'mai-tram-profile.html' },
+    { name: 'Quy', path: 'quy-profile.html' },
+    { name: 'Minh', path: 'minh-profile.html' },
+  ];
+  const base = 'https://net-pet-ai.mrmichaelhobbs123.workers.dev/';
+  return Promise.all(students.map(async s => {
+    try {
+      const r = await fetch(base + s.path, { signal: AbortSignal.timeout(4000) });
+      return { name: s.name, ok: r.ok, status: r.status };
+    } catch (e) {
+      return { name: s.name, ok: false, status: 0 };
+    }
+  }));
+}
+
+function renderStudentHealth(portals) {
+  return portals.map(p => `
+    <tr>
+      <td style="color:#e0e0e0">${p.name}</td>
+      <td style="color:${p.ok ? '#22c55e' : '#ef4444'};font-weight:bold">${p.ok ? 'LIVE' : 'FAIL'}</td>
+      <td style="color:#555;font-size:11px">${p.status}</td>
+    </tr>`).join('');
+}
+
+async function fetchNetPetStatus() {
+  try {
+    const resp = await fetch(NETPET_STATUS_URL, { signal: AbortSignal.timeout(5000) });
+    if (!resp.ok) return { status: 'DOWN', error: `HTTP ${resp.status}` };
+    return await resp.json();
+  } catch (e) {
+    return { status: 'DOWN', error: e.message };
+  }
+}
+
 function renderSoulPromptRows(rows) {
   if (!rows.length) return '<tr><td colspan="3" style="color:#555;text-align:center">no rows</td></tr>';
   return rows.map(r => `
     <tr>
       <td style="color:#888;font-size:12px">${r.session_id ?? ''}</td>
       <td style="color:${SOUL_COLOR};text-align:right">${(r.byte_count ?? 0).toLocaleString()}</td>
-      <td style="color:#555;font-size:11px">${r.created_at ?? ''}</td>
+      <td style="color:#555;font-size:11px">${r.estimated_timestamp ?? ''}</td>
     </tr>`).join('');
 }
 
@@ -85,14 +123,14 @@ function renderPhoenixStatus(status) {
   if (status.error) {
     return `<span style="color:#ef4444">ERROR: ${status.error}</span>`;
   }
-  const alive = status.alive === true || status.status === 'ok' || status.alive === 'true';
+  const alive = status.alive === true || status.status === 'LIVE' || status.status === 'ok' || status.alive === 'true';
   const color = alive ? '#22c55e' : '#ef4444';
   const label = alive ? 'ALIVE' : 'DOWN';
   return `<span style="color:${color};font-weight:bold">${label}</span>
     <span style="color:#555;font-size:11px;margin-left:12px">${JSON.stringify(status).slice(0, 120)}</span>`;
 }
 
-function buildHTML(soulcount, tierLabel, soulRows, pcRows, phoenixStatus, ts) {
+function buildHTML(soulcount, tierLabel, soulRows, pcRows, phoenixStatus, netpetStatus, studentPortals, ts) {
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -138,6 +176,21 @@ function buildHTML(soulcount, tierLabel, soulRows, pcRows, phoenixStatus, ts) {
   <div class="card phoenix-card">
     <h2>&#9650; Phoenix-Architecti</h2>
     <div style="margin-top:8px">${renderPhoenixStatus(phoenixStatus)}</div>
+  </div>
+
+  <!-- NET-PET-AI STATUS -->
+  <div class="card">
+    <h2>&#9650; NET-PET-AI</h2>
+    <div style="margin-top:8px">${renderPhoenixStatus(netpetStatus)}</div>
+  </div>
+
+  <!-- STUDENT PORTALS -->
+  <div class="card">
+    <h2>&#9650; Student Portals</h2>
+    <table>
+      <thead><tr><th>Student</th><th>Status</th><th>HTTP</th></tr></thead>
+      <tbody>${renderStudentHealth(studentPortals)}</tbody>
+    </table>
   </div>
 
   <!-- SOUL PROMPTS -->
@@ -194,15 +247,17 @@ export default {
     }
 
     if (url.pathname === '/') {
-      const [soulcount, soulRows, pcRows, phoenixStatus] = await Promise.all([
+      const [soulcount, soulRows, pcRows, phoenixStatus, netpetStatus, studentPortals] = await Promise.all([
         querySoulCount(env.DB),
         queryRecentSoulPrompts(env.DB),
         queryPhoenixCoderLog(env.DB),
         fetchPhoenixStatus(),
+        fetchNetPetStatus(),
+        fetchStudentPortals(),
       ]);
 
       const tierLabel = getTierLabel(soulcount);
-      const html = buildHTML(soulcount, tierLabel, soulRows, pcRows, phoenixStatus, ts);
+      const html = buildHTML(soulcount, tierLabel, soulRows, pcRows, phoenixStatus, netpetStatus, studentPortals, ts);
       return new Response(html, {
         headers: { 'Content-Type': 'text/html; charset=utf-8' },
       });
