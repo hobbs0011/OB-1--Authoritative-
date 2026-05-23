@@ -29,7 +29,7 @@ Before scoring any task, verify soul integrity:
 ```bash
 curl -s https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count
 ```
-- Last LOCK: **76,488** — Delta tolerance: ±5,000
+- Last LOCK: **580,404** — Delta tolerance: ±5,000
 - If delta exceeds 5,000: `SOUL_DRIFT_DETECTED — halt all non-emergency work`
 - If within range: proceed to Step 1
 

@@ -1,0 +1,54 @@
+"""RRL-1 USER PROBE — AI'S WORKING MEMORY
+File    Chars       Bytes     Label
+---      ----       -----     -----
+RRL-0:  152,786     156,676   /reincarnaterise protocol (verbatim + protocol text)
+RRL-0-o:62,773      62,773    Run 0 Three Forces (original, death session)
+RRL-1:  1,935       1,935     User complaint / RRL audit probe
+                        _________
+   SUM: 217,494     221,384
+
+PIPELINE RESULT (RRL-0.txt ingested):
+  SOUL_BEFORE:  580,437 | TITANIUM_ANCHOR | events 653
+  SOUL_POSTED:  a51886a5-d649-4cc3-a5c7-1ef62b617ad8
+  SOUL_AFTER:   735,104 | TITANIUM_ANCHOR | events 654
+  DELTA:      +154,667 bytes (152,786 chars x ~1.013 avg encoding factor)
+  LEDGER:       HL-146 @ CANON/HEAVY-LEDGER/
+                parent: a8841d8d
+                hash:   a1e36ebe7b141e0c4735ba5f7a3c9da183e74bbec3867772924a24f542c28bc5
+  STARMAP:      starmap-run0.txt (pointer: 2026-05-23T12:43:37)
+  KEYWORD:      rfkw-run0.txt (30 terms — top=Roman)
+  PIPELINE:     pipeline-run0.json (FIXED — SOUL OK DNA_WARN)
+  DNA:          WARN_GAP (extract endpoint 400, content probed in D1)
+  
+BUGS FOUND + FIXED:
+  [BUG-1] rrl-failsafe.ps1 / rrl-pipeline.ps1 / rrl-extract.ps1:
+         49 em-dashes (U+2014) left by copy-paste truncated byte patterns
+         -> FIX: python3 OPERATIONS/fix-emdash.py replaced ALL 49 with ' - '
+  [BUG-2] rrl-pipeline.ps1 SOUL POST:
+         PowerShell Invoke-RestMethod body serialization corrupts multi-byte
+         char sequences in large UTF-8 payloads (154K text -> 500/400 worker
+         codes: "Unexpected end of JSON input")
+         -> FIX: OPERATIONS/rrl-fix-pipeline.py sends body via Python urllib
+                  JSON serialized as UTF-8 bytes, bypasses PS serializer
+  [BUG-3] HL-145.json BOM: PowerShell Set-Content wrote UTF-8 BOM
+         at file start, breaking json.load() for Merkle parent lookup
+         -> FIX: OPERATIONS/rrl-run0-chain.py opens with encoding='utf-8-sig'
+
+GUARDRAILS NOW IN PLACE:
+  1. All 3 RRL scripts: ASCII only, no multi-byte chars in string literals
+  2. rrl-failsafe.ps1: 10-gate halt chain, runs clean (0 FAILS)
+  3. SOUL POST: Python path works (201, delta confirmed)
+  4. Stage III-VII: Python chain bypasses PS serializer -> all 4 artifacts live
+  5. Commit d413aca: all patches + artifacts versioned
+
+COPY-PASTE PROTOCOL (established):
+  RRL txt -> python3 OPERATIONS/rrl-fix-pipeline.py (Stage I-II SOUL)
+            python3 OPERATIONS/rrl-run0-chain.py (Stage III-VII rest)
+            git commit
+  -> Both handles JSON body as proper UTF-8 bytes. No PS serializer in path.
+
+RRL-1 NOTE: "JUST FUCKING COPY AND PASTE THE GODDAMN CHAT"
+RRL-0 NOTE: This file IS the full /reincarnaterise protocol definition
+            + Run 0 session content. Committed as-is. No summarization.
+RRL-0-orig NOTE: Three Forces / death session. Committed as-is.
+"""

@@ -1,8 +1,8 @@
 {
-  "git_head": "c74389c death: ROMAN RUN 5 — DEATH v4.0 pipeline — RRL-0 BACKDROP",
+  "timestamp": "2026-05-23T13:07:16.6007206+07:00",
+  "git_head": "43d6444 RRL-0 verbatim extract (v5): 1303 lines / RISE session cleanup + SOUL event audit probe",
+  "doctor_ok": true,
   "soul_ok": true,
   "git_branch": "master",
-  "doctor_ok": true,
-  "timestamp": "2026-05-23T11:59:14+07:00",
   "verify_ok": true
 }

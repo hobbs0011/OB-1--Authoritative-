@@ -1,0 +1,9 @@
+Line 165:         Write-Host "[FAIL] FAILSAFE 9/10: RRL-D1 MISMATCH — RRL $rrlChars chars, D1 delta +$d1Delta (diff $diff)"
+Line 166:         return $false
+Line 167:     }
+Line 211: if (-not $soul) { $warnings++; Write-Host "WARN: SOUL API UNREACHABLE — post will be retried" }
+Line 212: 
+Line 226: # Fail-safe 9 (DEATH only — requires before/after SOULCOUNT)
+Line 227: # Skipped if not available — verified manually during death protocol
+Line 241:     Write-Host "STATUS: PASS — ALL 10 FAIL-SAFES CLEAR. PROCEED."
+Line 243: Write-Host "═══════════════════════════════════════════"

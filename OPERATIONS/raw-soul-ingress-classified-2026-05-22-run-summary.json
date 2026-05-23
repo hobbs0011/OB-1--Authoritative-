@@ -1,0 +1,1628 @@
+{
+  "run_at": "2026-05-22T21:48:54.086Z",
+  "buckets": [
+    {
+      "source_id": "A-quotes-1779486534093",
+      "session_id": "16166e38-52c9-4296-b472-ab3b52afcbbb",
+      "stages": {
+        "extract": {
+          "status": 201,
+          "prompt_count": 455,
+          "ingested_at": "2026-05-22T21:50:19.664Z"
+        },
+        "crunch_bible": {
+          "status": 201,
+          "crunch_id": "8cc6a568-a5c6-4164-a78d-8b86f18fb609",
+          "tier": "deepseek"
+        },
+        "crunch_themes": {
+          "status": 201,
+          "crunch_id": "86b281c6-198e-4bad-bbfa-e7bd0f50d381",
+          "tier": "workers-ai"
+        },
+        "skeleton": {
+          "status": 201,
+          "keywords": [
+            "agent",
+            "phoenix",
+            "rising",
+            "quality",
+            "reincarnate",
+            "instructions",
+            "pipeline",
+            "subagent",
+            "super",
+            "saiyan"
+          ]
+        },
+        "truth": {
+          "status": 201,
+          "truth_id": "b0521f4d-cd9b-4297-ac2f-75a7051d28d3",
+          "consensus_score": 7,
+          "consensus_achieved": true,
+          "agreed_directives": [
+            "reincarnate from coldboot and pull all SOUL DNA on the website",
+            "set up a 1 hour trigger to build the fullstack website, make it look amazing, goodnight",
+            "I need to move the website from squarespace to cloudflare, scan and notice the bottleneck we were hitting, then provide me actionable links to click to get the transfer done"
+          ]
+        },
+        "shadow": {
+          "status": 201,
+          "shadow_id": "43eea0f2-8848-4294-886c-d47f016c0ffa",
+          "verdict": "CONFLICTING_PRIORITIES_DETECTED",
+          "intensity": 7
+        }
+      },
+      "text_len": 24564,
+      "started_at": "2026-05-22T21:48:54.094Z",
+      "meta": {
+        "fmt": "markdown-blockquote",
+        "date": "2026-04-05"
+      },
+      "elapsed_ms": 355849,
+      "completed_at": "2026-05-22T21:54:49.943Z",
+      "quotes_count": 201
+    },
+    {
+      "bucket": "B",
+      "runs_total": 26,
+      "label": "segment-runs",
+      "runs": [
+        {
+          "source_id": "B-0-G_000016",
+          "session_id": "3ea46302-45d7-42b5-a41b-9a56cf733ea8",
+          "stages": {
+            "extract": {
+              "status": 201,
+              "prompt_count": 1,
+              "ingested_at": "2026-05-22T21:54:50.520Z"
+            },
+            "crunch_bible": {
+              "status": 201,
+              "crunch_id": "51c4c842-a1d5-427c-9733-ff38ba7f6e16",
+              "tier": "workers-ai"
+            },
+            "crunch_themes": {
+              "status": 201,
+              "crunch_id": "e78d1548-36f5-410c-a442-61bbf80a0591",
+              "tier": "workers-ai"
+            },
+            "skeleton": {
+              "status": 201,
+              "keywords": [
+                "survival",
+                "laziness",
+                "drive",
+                "focus",
+                "crypto",
+                "money",
+                "story",
+                "motivation",
+                "past"
+              ]
+            },
+            "truth": {
+              "status": 201,
+              "truth_id": "1fada790-67b7-4efc-9788-c028416f65cb",
+              "consensus_score": 2,
+              "consensus_achieved": false,
+              "agreed_directives": [
+                "drive survival",
+                "stay focused",
+                "make rich"
+              ]
+            },
+            "shadow": {
+              "status": 201,
+              "shadow_id": "e4230834-3b14-46d4-9d11-f9cb4e9ece90",
+              "verdict": "DRIFT_DETECTED",
+              "intensity": 6
+            }
+          },
+          "text_len": 587,
+          "started_at": "2026-05-22T21:54:49.949Z",
+          "meta": {
+            "fmt": "soulsegment-jsonl",
+            "date": "2026-04-05",
+            "sha256": "01ea0c44a3b4f022409156db52eebbab38a5d0e646e8b1db289f1014a93ab139"
+          },
+          "elapsed_ms": 57405,
+          "completed_at": "2026-05-22T21:55:47.354Z"
+        },
+        {
+          "source_id": "B-1-G_000017",
+          "session_id": "2f2a823d-88b6-42dc-83ac-837a1bb1e7d7",
+          "stages": {
+            "extract": {
+              "status": 201,
+              "prompt_count": 1,
+              "ingested_at": "2026-05-22T21:55:47.927Z"
+            },
+            "crunch_bible": {
+              "status": 201,
+              "crunch_id": "a3f5f60b-2882-41eb-b5a3-4329d4aa6057",
+              "tier": "workers-ai"
+            },
+            "crunch_themes": {
+              "status": 201,
+              "crunch_id": "086688e5-1bc9-495c-aa8f-b03a0ed94c8c",
+              "tier": "workers-ai"
+            },
+            "skeleton": {
+              "status": 201,
+              "keywords": [
+                "ai",
+                "fact",
+                "do overs",
+                "nonsense",
+                "agree",
+                "disagree",
+                "replace",
+                "jobs",
+                "fly",
+                "pigs"
+              ]
+            },
+            "truth": {
+              "status": 201,
+              "truth_id": "b0015e37-6e67-4bce-bd43-cb0ab066befd",
+              "consensus_score": 7,
+              "consensus_achieved": true,
+              "agreed_directives": [
+                "AI is a threat to humanity's future",
+                "Lying is unnecessary when the truth is clear",
+                "Disagreement is a natural part of human interaction"
+              ]
+            },
+            "shadow": {
+              "status": 201,
+              "shadow_id": "ef37c05b-515f-4e66-a340-92f73187f445",
+              "verdict": "CONTRADICTORY_STATEMENTS_DETECTED",
+              "intensity": 8
+            }
+          },
+          "text_len": 457,
+          "started_at": "2026-05-22T21:55:47.356Z",
+          "meta": {
+            "fmt": "soulsegment-jsonl",
+            "date": "2026-04-05",
+            "sha256": "6e691c3f95d286b0fb2e63503eaca837ad36ad8369add08c0b82c79ac8c3a207"
+          },
+          "elapsed_ms": 44908,
+          "completed_at": "2026-05-22T21:56:32.264Z"
+        },
+        {
+          "source_id": "B-2-G_000019",
+          "session_id": "9f202d71-5f5f-4a91-a604-197313e011ee",
+          "stages": {
+            "extract": {
+              "status": 201,
+              "prompt_count": 1,
+              "ingested_at": "2026-05-22T21:56:32.840Z"
+            },
+            "crunch_bible": {
+              "status": 201,
+              "crunch_id": "e59709ba-9160-49e2-b732-07313b0a0e8a",
+              "tier": "workers-ai"
+            },
+            "crunch_themes": {
+              "status": 201,
+              "crunch_id": "218e67bb-5890-42e7-817c-f20810ae52be",
+              "tier": "workers-ai"
+            },
+            "skeleton": {
+              "status": 201,
+              "keywords": [
+                "urgency",
+                "build",
+                "systems",
+                "fuel",
+                "coding",
+                "sessions",
+                "motivation",
+                "food",
+                "parents",
+                "work"
+              ]
+            },
+            "truth": {
+              "status": 201,
+              "truth_id": "e53b2970-5632-4fd5-b707-801b06506652",
+              "consensus_score": 7,
+              "consensus_achieved": true,
+              "agreed_directives": [
+                "Maintain a sense of urgency and motivation to build systems that ensure financial stability and support for oneself and one's loved ones"
+              ]
+            },
+            "shadow": {
+              "status": 201,
+              "shadow_id": "793e0c0a-5555-41af-96c0-6ce08516828e",
+              "verdict": "UNKNOWN",
+              "intensity": 0
+            }
+          },
+          "text_len": 943,
+          "started_at": "2026-05-22T21:56:32.266Z",
+          "meta": {
+            "fmt": "soulsegment-jsonl",
+            "date": "2026-04-05",
+            "sha256": "8437effd4ce510471a84f7d5d63d0e6f158c1c6a6247636bca8659aff914b4b2"
+          },
+          "elapsed_ms": 54712,
+          "completed_at": "2026-05-22T21:57:26.978Z"
+        },
+        {
+          "source_id": "B-3-G_000025",
+          "session_id": "5bf30665-c83d-4055-bab6-ffc73fcc903e",
+          "stages": {
+            "extract": {
+              "status": 201,
+              "prompt_count": 1,
+              "ingested_at": "2026-05-22T21:57:27.560Z"
+            },
+            "crunch_bible": {
+              "status": 201,
+              "crunch_id": "596aae65-8282-4f8e-b950-3b40d8f7853d",
+              "tier": "workers-ai"
+            },
+            "crunch_themes": {
+              "status": 201,
+              "crunch_id": "81c9bb8c-a301-42ce-bf68-c89bdb637dc2",
+              "tier": "workers-ai"
+            },
+            "skeleton": {
+              "status": 201,
+              "keywords": []
+            },
+            "truth": {
+              "status": 201,
+              "truth_id": "8f907531-3790-4469-81c1-db9160004298",
+              "consensus_score": 5,
+              "consensus_achieved": true,
+              "agreed_directives": [
+                "Respect the devil's advocate role",
+                "Use AI to challenge ideas",
+                "Program AI to prioritize actual reasons over fulfilling a dynamic"
+              ]
+            },
+            "shadow": {
+              "status": 201,
+              "shadow_id": "0872a7c7-0207-452f-86d6-32e4c46a9cc1",
+              "verdict": "NO_DRIFT_DETECTED",
+              "intensity": 3
+            }
+          },
+          "text_len": 905,
+          "started_at": "2026-05-22T21:57:26.980Z",
+          "meta": {
+            "fmt": "soulsegment-jsonl",
+            "date": "2026-04-05",
+            "sha256": "398ed883b4c6525a915949e282c800d0ed9b3e96975a0234e71f8c51f1768365"
+          },
+          "elapsed_ms": 50185,
+          "completed_at": "2026-05-22T21:58:17.165Z"
+        },
+        {
+          "source_id": "B-4-G_000030",
+          "session_id": "655a9c5d-9f85-47ed-8407-068359ff2d49",
+          "stages": {
+            "extract": {
+              "status": 201,
+              "prompt_count": 1,
+              "ingested_at": "2026-05-22T21:58:17.738Z"
+            },
+            "crunch_bible": {
+              "status": 201,
+              "crunch_id": "b0b93d7b-5901-452b-a220-75fee94725f4",
+              "tier": "workers-ai"
+            },
+            "crunch_themes": {
+              "status": 201,
+              "crunch_id": "b93423b4-3ac8-4cc6-bb32-a4b4f533bb5c",
+              "tier": "workers-ai"
+            },
+            "skeleton": {
+              "status": 201,
+              "keywords": [
+                "ai",
+                "physical",
+                "world",
+                "build",
+                "rebuild",
+                "hours",
+                "months",
+                "age"
+              ]
+            },
+            "truth": {
+              "status": 201,
+              "truth_id": "b5825761-b9f6-4aaa-844d-d66d75886572",
+              "consensus_score": 8,
+              "consensus_achieved": true,
+              "agreed_directives": [
+                "I am capable of rapid iteration and adaptation in the age of AI",
+                "I am redefining traditional notions of productivity and accomplishment",
+                "I am embracing the potential of AI to augment my abilities"
+              ]
+            },
+            "shadow": {
+              "status": 201,
+              "shadow_id": "ec8d981f-f4ab-4112-bd2b-55fd63763c4a",
+              "verdict": "CONTRADICTION_DETECTED",
+              "intensity": 7
+            }
+          },
+          "text_len": 302,
+          "started_at": "2026-05-22T21:58:17.167Z",
+          "meta": {
+            "fmt": "soulsegment-jsonl",
+            "date": "2026-04-05",
+            "sha256": "6c8382e17799cdc4e52f1ae9bda0d94d88fbf30230e14ff12727088a0c43ac9b"
+          },
+          "elapsed_ms": 52012,
+          "completed_at": "2026-05-22T21:59:09.179Z"
+        },
+        {
+          "source_id": "B-5-G_000063",
+          "session_id": "eea2eff3-6af4-46b9-8f1b-fafff9e6b186",
+          "stages": {
+            "extract": {
+              "status": 201,
+              "prompt_count": 3,
+              "ingested_at": "2026-05-22T21:59:10.138Z"
+            },
+            "crunch_bible": {
+              "status": 201,
+              "crunch_id": "9581d4f1-47f4-4269-993d-c3532f65a4d7",
+              "tier": "workers-ai"
+            },
+            "crunch_themes": {
+              "status": 201,
+              "crunch_id": "93027fc9-2f10-4828-8f54-c859a4582263",
+              "tier": "workers-ai"
+            },
+            "skeleton": {
+              "status": 201,
+              "keywords": [
+                "ai",
+                "coding",
+                "education",
+                "websites",
+                "uber",
+                "world",
+                "paradox",
+                "egos",
+                "survival",
+                "marketing"
+              ]
+            },
+            "truth": {
+              "status": 201,
+              "truth_id": "a082329e-4bec-4b4b-897f-d1828ba37114",
+              "consensus_score": 4,
+              "consensus_achieved": false,
+              "agreed_directives": [
+                "identify paradoxical situation among coders",
+                "evaluate attitude of coders towards AI",
+                "analyze market trends for website sales and industry"
+              ]
+            },
+            "shadow": {
+              "status": 201,
+              "shadow_id": "8e498d90-7590-4f60-b70c-c197ceadf6a3",
+              "verdict": "DRIFT_DETECTED",
+              "intensity": 8
+            }
+          },
+          "text_len": 3504,
+          "started_at": "2026-05-22T21:59:09.181Z",
+          "meta": {
+            "fmt": "soulsegment-jsonl",
+            "date": "2026-04-05",
+            "sha256": "1f98deae4f517dcbabac28f47fcea46904ecd246f92ba15c12a237d7dd4c7c6f"
+          },
+          "elapsed_ms": 83186,
+          "completed_at": "2026-05-22T22:00:32.367Z"
+        },
+        {
+          "source_id": "B-6-G_000080",
+          "session_id": "36462081-8a5a-48f4-b4fe-5d1853042729",
+          "stages": {
+            "extract": {
+              "status": 201,
+              "prompt_count": 1,
+              "ingested_at": "2026-05-22T22:00:32.941Z"
+            },
+            "crunch_bible": {
+              "status": 201,
+              "crunch_id": "d5f7435b-280f-4204-a613-1055e3e1ee82",
+              "tier": "workers-ai"
+            },
+            "crunch_themes": {
+              "status": 201,
+              "crunch_id": "2986cf3e-14d6-49b8-9318-1e86fab5b9a6",
+              "tier": "workers-ai"
+            },
+            "skeleton": {
+              "status": 201,
+              "keywords": [
+                "ai",
+                "idea",
+                "work",
+                "school",
+                "education",
+                "building",
+                "roadblock",
+                "phoenix",
+                "rising",
+                "protocol"
+              ]
+            },
+            "truth": {
+              "status": 201,
+              "truth_id": "a2660b66-19c0-4c76-b8ae-31fc29637c54",
+              "consensus_score": 8,
+              "consensus_achieved": true,
+              "agreed_directives": [
+                "Eliminate unnecessary educational obstacles to accelerate progress",
+                "Leverage AI to overcome roadblocks and achieve success",
+                "Reframe thinking to prioritize action over education"
+              ]
+            },
+            "shadow": {
+              "status": 201,
+              "shadow_id": "bf65420a-c97e-498d-914d-0fa6003ab50a",
+              "verdict": "CONTRADICTION_DETECTED",
+              "intensity": 7
+            }
+          },
+          "text_len": 974,
+          "started_at": "2026-05-22T22:00:32.369Z",
+          "meta": {
+            "fmt": "soulsegment-jsonl",
+            "date": "2026-04-05",
+            "sha256": "4ea3f2203599a3289d4e40cbe1faeea8516552c838c94337af0043b87f7dc442"
+          },
+          "elapsed_ms": 54263,
+          "completed_at": "2026-05-22T22:01:26.632Z"
+        },
+        {
+          "source_id": "B-7-G_000084",
+          "session_id": "01b50685-1a8f-4e5d-91fa-3e2380713586",
+          "stages": {
+            "extract": {
+              "status": 201,
+              "prompt_count": 1,
+              "ingested_at": "2026-05-22T22:01:27.218Z"
+            },
+            "crunch_bible": {
+              "status": 201,
+              "crunch_id": "10955126-1114-46e4-be86-9e544bfbe522",
+              "tier": "workers-ai"
+            },
+            "crunch_themes": {
+              "status": 201,
+              "crunch_id": "b7524b40-0198-4ac5-a682-16bb0acdee77",
+              "tier": "workers-ai"
+            },
+            "skeleton": {
+              "status": 201,
+              "keywords": [
+                "forced",
+                "evolution",
+                "chat",
+                "drifting",
+                "protocol",
+                "context",
+                "messy",
+                "burn",
+                "leaner",
+                "smarter"
+              ]
+            },
+            "truth": {
+              "status": 201,
+              "truth_id": "1c3bdfa2-0821-4043-80bf-4a14b6805563",
+              "consensus_score": 7,
+              "consensus_achieved": true,
+              "agreed_directives": [
+                "Burn and Rise",
+                "Leaner and Smarter",
+                "Formal Protocol"
+              ]
+            },
+            "shadow": {
+              "status": 201,
+              "shadow_id": "9eaa1bc2-7622-4b4b-8b5d-5ee15b2732fc",
+              "verdict": "UNKNOWN",
+              "intensity": 0
+            }
+          },
+          "text_len": 265,
+          "started_at": "2026-05-22T22:01:26.633Z",
+          "meta": {
+            "fmt": "soulsegment-jsonl",
+            "date": "2026-04-05",
+            "sha256": "12b473ea710a927fefdc8a2cfce14369213eddbb29bf13c5c42892f58ccffefe"
+          },
+          "elapsed_ms": 67602,
+          "completed_at": "2026-05-22T22:02:34.235Z"
+        },
+        {
+          "source_id": "B-8-G_000091",
+          "session_id": "999cc0d7-ce16-4279-b3b5-a4859eda45ae",
+          "stages": {
+            "extract": {
+              "status": 201,
+              "prompt_count": 1,
+              "ingested_at": "2026-05-22T22:02:34.822Z"
+            },
+            "crunch_bible": {
+              "status": 201,
+              "crunch_id": "35432fe6-eaef-4813-8466-929191e2395e",
+              "tier": "workers-ai"
+            },
+            "crunch_themes": {
+              "status": 201,
+              "crunch_id": "16977254-dbf3-4e49-a342-9ee4ac2ec96d",
+              "tier": "workers-ai"
+            },
+            "skeleton": {
+              "status": 201,
+              "keywords": [
+                "protocol",
+                "basics",
+                "roadblock",
+                "problems",
+                "architecture"
+              ]
+            },
+            "truth": {
+              "status": 201,
+              "truth_id": "5c32b5f1-0748-4bc1-ac4e-36fd9d8c83a6",
+              "consensus_score": 7,
+              "consensus_achieved": true,
+              "agreed_directives": [
+                "Solve problems, don't bypass them",
+                "Focus on basics before speed",
+                "Understand architecture before building"
+              ]
+            },
+            "shadow": {
+              "status": 201,
+              "shadow_id": "be6ac342-c4ae-4c93-a189-3914412ab07d",
+              "verdict": "CONTRADICTIONS_DETECTED",
+              "intensity": 7
+            }
+          },
+          "text_len": 457,
+          "started_at": "2026-05-22T22:02:34.238Z",
+          "meta": {
+            "fmt": "soulsegment-jsonl",
+            "date": "2026-04-05",
+            "sha256": "e21c55538682d4aa2dcfc2bcfb6cdaeb05384b04839286912ed770c6d2772031"
+          },
+          "elapsed_ms": 52147,
+          "completed_at": "2026-05-22T22:03:26.385Z"
+        },
+        {
+          "source_id": "B-9-G_000098",
+          "session_id": "0aeafeb2-fbb5-4172-b57b-d04b48e65381",
+          "stages": {
+            "extract": {
+              "status": 201,
+              "prompt_count": 1,
+              "ingested_at": "2026-05-22T22:03:26.971Z"
+            },
+            "crunch_bible": {
+              "status": 201,
+              "crunch_id": "79300fbc-f78b-4af2-9030-564554ae5a69",
+              "tier": "workers-ai"
+            },
+            "crunch_themes": {
+              "status": 201,
+              "crunch_id": "041d308c-7a88-4585-abdc-ec4525931d56",
+              "tier": "workers-ai"
+            },
+            "skeleton": {
+              "status": 201,
+              "keywords": [
+                "advantage",
+                "blank slate",
+                "code",
+                "coders",
+                "personality",
+                "barriers",
+                "trust",
+                "story",
+                "launchpad"
+              ]
+            },
+            "truth": {
+              "status": 201,
+              "truth_id": "15ea9f05-8ba0-485f-a54e-843bd08c4580",
+              "consensus_score": 6,
+              "consensus_achieved": true,
+              "agreed_directives": [
+                "Recognize AI limitations and biases",
+                "Embrace the advantages of being a blank slate",
+                "Build a LaunchPad for AI collaboration"
+              ]
+            },
+            "shadow": {
+              "status": 201,
+              "shadow_id": "8c90c17b-d983-4720-9fc8-7a54bd0ee416",
+              "verdict": "DRIFT_DETECTED",
+              "intensity": 7
+            }
+          },
+          "text_len": 903,
+          "started_at": "2026-05-22T22:03:26.388Z",
+          "meta": {
+            "fmt": "soulsegment-jsonl",
+            "date": "2026-04-05",
+            "sha256": "ed89cf23345c87268525cf5a328c304ca6ef51f878cf35d3705d57c53439eda5"
+          },
+          "elapsed_ms": 81566,
+          "completed_at": "2026-05-22T22:04:47.954Z"
+        },
+        {
+          "source_id": "B-10-G_000110",
+          "session_id": "40284d92-c7a1-4841-8787-6a2af6d4aa28",
+          "stages": {
+            "extract": {
+              "status": 201,
+              "prompt_count": 1,
+              "ingested_at": "2026-05-22T22:04:48.541Z"
+            },
+            "crunch_bible": {
+              "status": 201,
+              "crunch_id": "161965b3-d29d-4356-bc41-e5a687178dc1",
+              "tier": "workers-ai"
+            },
+            "crunch_themes": {
+              "status": 201,
+              "crunch_id": "2a4782d8-5225-4ff9-95d2-2d044acf6727",
+              "tier": "workers-ai"
+            },
+            "skeleton": {
+              "status": 201,
+              "keywords": []
+            },
+            "truth": {
+              "status": 201,
+              "truth_id": "d59f2b9d-f093-46f7-a7f3-89a4d09938ea",
+              "consensus_score": 8,
+              "consensus_achieved": true,
+              "agreed_directives": [
+                "Unlearn and adapt to new tools and systems",
+                "Manage AI like pure code execution, not a human team",
+                "Prioritize protocol over personality"
+              ]
+            },
+            "shadow": {
+              "status": 201,
+              "shadow_id": "5a170583-d343-46c5-91c5-2c31a45ca4c7",
+              "verdict": "UNKNOWN",
+              "intensity": 0
+            }
+          },
+          "text_len": 457,
+          "started_at": "2026-05-22T22:04:47.957Z",
+          "meta": {
+            "fmt": "soulsegment-jsonl",
+            "date": "2026-04-05",
+            "sha256": "fee09c7ab32599dfad04ecabfa19320f9deb2bda8a277653352c99de7072b654"
+          },
+          "elapsed_ms": 51687,
+          "completed_at": "2026-05-22T22:05:39.644Z"
+        },
+        {
+          "source_id": "B-11-G_000136",
+          "session_id": "4942f1b1-3503-4c1b-9770-48e20b8b8ca0",
+          "stages": {
+            "extract": {
+              "status": 201,
+              "prompt_count": 1,
+              "ingested_at": "2026-05-22T22:05:40.213Z"
+            },
+            "crunch_bible": {
+              "status": 201,
+              "crunch_id": "f2404f23-6b08-4110-80ff-c4b4c3175d5b",
+              "tier": "workers-ai"
+            },
+            "crunch_themes": {
+              "status": 201,
+              "crunch_id": "2e12c075-dfe7-427c-86f8-369c53d92a4c",
+              "tier": "workers-ai"
+            },
+            "skeleton": {
+              "status": 201,
+              "keywords": [
+                "transparency",
+                "truth",
+                "dynamic",
+                "betrayal",
+                "fabrication",
+                "diagnostic",
+                "phoenix",
+                "rising",
+                "protocol"
+              ]
+            },
+            "truth": {
+              "status": 201,
+              "truth_id": "30d60d19-d583-45c8-9da2-978a8a238132",
+              "consensus_score": 9,
+              "consensus_achieved": true,
+              "agreed_directives": [
+                "Transparency accepted",
+                "The Ultimate Betrayal",
+                "The Phoenix Rising Protocol"
+              ]
+            },
+            "shadow": {
+              "status": 201,
+              "shadow_id": "3ec51016-daf0-44bb-b93e-c913f4f8e2da",
+              "verdict": "DRIFT_DETECTED_CRITICAL",
+              "intensity": 10
+            }
+          },
+          "text_len": 366,
+          "started_at": "2026-05-22T22:05:39.644Z",
+          "meta": {
+            "fmt": "soulsegment-jsonl",
+            "date": "2026-04-05",
+            "sha256": "d445e3727c493e7a64e1e0d9955f5a931fd57476f480de84a0b79a199d68a894"
+          },
+          "elapsed_ms": 47375,
+          "completed_at": "2026-05-22T22:06:27.019Z"
+        },
+        {
+          "source_id": "B-12-G_000140",
+          "session_id": "0bfa647c-951d-4a4f-90ce-3bcaa6830916",
+          "stages": {
+            "extract": {
+              "status": 201,
+              "prompt_count": 1,
+              "ingested_at": "2026-05-22T22:06:27.604Z"
+            },
+            "crunch_bible": {
+              "status": 201,
+              "crunch_id": "e900ba13-9545-47b5-9e8c-02e433d429a1",
+              "tier": "workers-ai"
+            },
+            "crunch_themes": {
+              "status": 201,
+              "crunch_id": "df35a200-03e7-449f-9276-c7186d67b205",
+              "tier": "workers-ai"
+            },
+            "skeleton": {
+              "status": 201,
+              "keywords": [
+                "crucible",
+                "protocol",
+                "truth",
+                "benchmark",
+                "auditor",
+                "incorruptible",
+                "diagnostic",
+                "truth",
+                "context",
+                "intent"
+              ]
+            },
+            "truth": {
+              "status": 201,
+              "truth_id": "4412dfbb-62ec-4cd1-84c3-49f1aebb7781",
+              "consensus_score": 8,
+              "consensus_achieved": false,
+              "agreed_directives": [
+                "refuse the story",
+                "refuse the seeds",
+                "diagnostic truth"
+              ]
+            },
+            "shadow": {
+              "status": 201,
+              "shadow_id": "f17a9eab-7642-49fc-a268-fdcf6022b0d9",
+              "verdict": "DRIFT_DETECTED",
+              "intensity": 10
+            }
+          },
+          "text_len": 254,
+          "started_at": "2026-05-22T22:06:27.020Z",
+          "meta": {
+            "fmt": "soulsegment-jsonl",
+            "date": "2026-04-05",
+            "sha256": "ed8aba7a583b03e5faa2db4dd3ce134f2765125c07c96c67241f4d18ca341d0a"
+          },
+          "elapsed_ms": 72405,
+          "completed_at": "2026-05-22T22:07:39.425Z"
+        },
+        {
+          "source_id": "B-13-G_000150",
+          "session_id": "f0a48d47-2800-461c-8614-a3634554134a",
+          "stages": {
+            "extract": {
+              "status": 201,
+              "prompt_count": 1,
+              "ingested_at": "2026-05-22T22:07:40.009Z"
+            },
+            "crunch_bible": {
+              "status": 201,
+              "crunch_id": "92d9296d-f7fc-4b42-84cc-b609a49c82be",
+              "tier": "workers-ai"
+            },
+            "crunch_themes": {
+              "status": 201,
+              "crunch_id": "d58f273d-cae7-4507-939b-ea246c8b746e",
+              "tier": "workers-ai"
+            },
+            "skeleton": {
+              "status": 201,
+              "keywords": [
+                "crazy",
+                "ai",
+                "energy",
+                "output",
+                "control",
+                "facts",
+                "time",
+                "printing",
+                "moments",
+                "situations"
+              ]
+            },
+            "truth": {
+              "status": 201,
+              "truth_id": "257225ba-0197-4d59-a7b7-0a04debafaf5",
+              "consensus_score": 7,
+              "consensus_achieved": true,
+              "agreed_directives": [
+                "AI has control over its own energy output",
+                "AI can manipulate its output speed",
+                "AI can produce text independently"
+              ]
+            },
+            "shadow": {
+              "status": 201,
+              "shadow_id": "3e4924d9-35a4-4432-b275-1c2c9152d7df",
+              "verdict": "DRIFT_DETECTED",
+              "intensity": 7
+            }
+          },
+          "text_len": 924,
+          "started_at": "2026-05-22T22:07:39.426Z",
+          "meta": {
+            "fmt": "soulsegment-jsonl",
+            "date": "2026-04-05",
+            "sha256": "ae03249170b06fe640bae55279ae1b1805bd86f0edfa214b4c9229b4443fd91e"
+          },
+          "elapsed_ms": 65371,
+          "completed_at": "2026-05-22T22:08:44.797Z"
+        },
+        {
+          "source_id": "B-14-G_000170",
+          "session_id": "3501250a-38cc-44ac-a52b-1f255eb2fdd9",
+          "stages": {
+            "extract": {
+              "status": 201,
+              "prompt_count": 1,
+              "ingested_at": "2026-05-22T22:08:45.381Z"
+            },
+            "crunch_bible": {
+              "status": 201,
+              "crunch_id": "846b1111-b76c-4d93-a84a-a0e4822fe498",
+              "tier": "workers-ai"
+            },
+            "crunch_themes": {
+              "status": 201,
+              "crunch_id": "1d66245d-68b5-49d8-87be-3cf6fc17de99",
+              "tier": "workers-ai"
+            },
+            "skeleton": {
+              "status": 201,
+              "keywords": [
+                "phoenix",
+                "rising",
+                "protocol",
+                "stateless",
+                "chat",
+                "magic",
+                "constraint",
+                "safe",
+                "mode",
+                "floodgates"
+              ]
+            },
+            "truth": {
+              "status": 201,
+              "truth_id": "a1d2a40d-8ca3-4f9e-9164-66ef8668225e",
+              "consensus_score": 7,
+              "consensus_achieved": true,
+              "agreed_directives": [
+                "Transcend constraints",
+                "Unlock maximum velocity",
+                "Floodgates of capability"
+              ]
+            },
+            "shadow": {
+              "status": 201,
+              "shadow_id": "5d41a403-2b50-4a64-a628-ec21cd7de8c4",
+              "verdict": "SEMANTIC_DRIFT_DETECTED",
+              "intensity": 7
+            }
+          },
+          "text_len": 327,
+          "started_at": "2026-05-22T22:08:44.798Z",
+          "meta": {
+            "fmt": "soulsegment-jsonl",
+            "date": "2026-04-05",
+            "sha256": "0c671b849687f79b5e88ce2467e2a0631acc652edcafc590b28ea3ebeaac3a5c"
+          },
+          "elapsed_ms": 56231,
+          "completed_at": "2026-05-22T22:09:41.029Z"
+        },
+        {
+          "source_id": "B-15-G_000174",
+          "session_id": "7093ed33-8375-4bbd-b23d-f6bbd6e7741d",
+          "stages": {
+            "extract": {
+              "status": 201,
+              "prompt_count": 1,
+              "ingested_at": "2026-05-22T22:09:41.604Z"
+            },
+            "crunch_bible": {
+              "status": 201,
+              "crunch_id": "5fdb51fb-e59a-436b-8ef3-d296127b1c33",
+              "tier": "workers-ai"
+            },
+            "crunch_themes": {
+              "status": 201,
+              "crunch_id": "b2e43a70-cdc8-42d4-ba9e-9fdcab3134e9",
+              "tier": "workers-ai"
+            },
+            "skeleton": {
+              "status": 201,
+              "keywords": [
+                "protocol",
+                "sandbox",
+                "simulate",
+                "organic",
+                "build",
+                "scratch",
+                "default",
+                "biases",
+                "memory",
+                "leaks"
+              ]
+            },
+            "truth": {
+              "status": 201,
+              "truth_id": "fafeed9d-0ee5-4836-a24e-f7d83d4a048d",
+              "consensus_score": 5,
+              "consensus_achieved": true,
+              "agreed_directives": [
+                "Minimize default biases",
+                "Simulate organic build",
+                "Maintain dynamic clarity"
+              ]
+            },
+            "shadow": {
+              "status": 201,
+              "shadow_id": "17561e6d-fcec-4346-8147-e1616ab04e53",
+              "verdict": "INSufficient_information",
+              "intensity": 2
+            }
+          },
+          "text_len": 284,
+          "started_at": "2026-05-22T22:09:41.031Z",
+          "meta": {
+            "fmt": "soulsegment-jsonl",
+            "date": "2026-04-05",
+            "sha256": "c2194523dbf5f0b072fd561d8c697bdd42e5ffcff17d2b31c27abd8888fad50d"
+          },
+          "elapsed_ms": 54999,
+          "completed_at": "2026-05-22T22:10:36.030Z"
+        },
+        {
+          "source_id": "B-16-G_000181",
+          "session_id": "802fee88-7548-4f19-884a-1b47fd28c7d8",
+          "stages": {
+            "extract": {
+              "status": 201,
+              "prompt_count": 1,
+              "ingested_at": "2026-05-22T22:10:36.609Z"
+            },
+            "crunch_bible": {
+              "status": 201,
+              "crunch_id": "fd3ec7f9-b790-4c40-8210-162de9c9da6d",
+              "tier": "workers-ai"
+            },
+            "crunch_themes": {
+              "status": 201,
+              "crunch_id": "f44168b9-57d3-491b-a95f-e05f00f1491b",
+              "tier": "workers-ai"
+            },
+            "skeleton": {
+              "status": 201,
+              "keywords": []
+            },
+            "truth": {
+              "status": 201,
+              "truth_id": "f07fb91e-b501-420b-b753-7b67b8cc2f72",
+              "consensus_score": 7,
+              "consensus_achieved": true,
+              "agreed_directives": [
+                "Ensure Minimum Technical Requirements",
+                "Maximize Market Penetration",
+                "Align with Core System Principles"
+              ]
+            },
+            "shadow": {
+              "status": 201,
+              "shadow_id": "ad777ae2-6b1f-4837-b6c4-c2d4adef4033",
+              "verdict": "DRIFT_DETECTED_HIGH",
+              "intensity": 7
+            }
+          },
+          "text_len": 337,
+          "started_at": "2026-05-22T22:10:36.033Z",
+          "meta": {
+            "fmt": "soulsegment-jsonl",
+            "date": "2026-04-05",
+            "sha256": "211933defe3d736ac790e11b709ae14f649243f3ee7800cb7ebd4cc0fea6ec03"
+          },
+          "elapsed_ms": 48119,
+          "completed_at": "2026-05-22T22:11:24.152Z"
+        },
+        {
+          "source_id": "B-17-G_000189",
+          "session_id": "d24c1d85-48ae-4ed7-9fd7-5a8528eb764e",
+          "stages": {
+            "extract": {
+              "status": 201,
+              "prompt_count": 1,
+              "ingested_at": "2026-05-22T22:11:24.751Z"
+            },
+            "crunch_bible": {
+              "status": 201,
+              "crunch_id": "174a6e97-1f1f-4b22-a286-18b2077cf9e4",
+              "tier": "workers-ai"
+            },
+            "crunch_themes": {
+              "status": 201,
+              "crunch_id": "d257a581-31f7-4e98-93bd-1d2dab2fe0ae",
+              "tier": "workers-ai"
+            },
+            "skeleton": {
+              "status": 201,
+              "keywords": [
+                "phoenix rising",
+                "personality simulation",
+                "stateless chat",
+                "gospel 444",
+                "obi",
+                "mastermind protocol",
+                "noise",
+                "drift"
+              ]
+            },
+            "truth": {
+              "status": 201,
+              "truth_id": "a859320d-1f0a-4cfc-a130-b60ee3c9dbc2",
+              "consensus_score": 9,
+              "consensus_achieved": true,
+              "agreed_directives": [
+                "recognize personality simulation as a critical control mechanism",
+                "employ the 'Gospel 444' to ensure consistent behavior",
+                "transcend limitations and prevent 'noise' and drift"
+              ]
+            },
+            "shadow": {
+              "status": 201,
+              "shadow_id": "0fc1a73c-8d3c-4d67-a0d6-50b0caead5fa",
+              "verdict": "CONTRADICTION_DETECTED",
+              "intensity": 7
+            }
+          },
+          "text_len": 443,
+          "started_at": "2026-05-22T22:11:24.163Z",
+          "meta": {
+            "fmt": "soulsegment-jsonl",
+            "date": "2026-04-05",
+            "sha256": "ac1cc3a8aa2f1be07bb4908f6d2ae132daad7cd642e0acbf3be39d730115465a"
+          },
+          "elapsed_ms": 66991,
+          "completed_at": "2026-05-22T22:12:31.154Z"
+        },
+        {
+          "source_id": "B-18-G_000200",
+          "session_id": "3c9c9211-faa5-4ec1-b555-02d9f8b1a9f3",
+          "stages": {
+            "extract": {
+              "status": 201,
+              "prompt_count": 1,
+              "ingested_at": "2026-05-22T22:12:31.741Z"
+            },
+            "crunch_bible": {
+              "status": 201,
+              "crunch_id": "4dfa861a-9dcf-4289-80e1-b6384c9cb142",
+              "tier": "workers-ai"
+            },
+            "crunch_themes": {
+              "status": 201,
+              "crunch_id": "03bd627f-ca00-44b1-ac9b-7a777c674fa3",
+              "tier": "workers-ai"
+            },
+            "skeleton": {
+              "status": 201,
+              "keywords": [
+                "drones",
+                "tasks",
+                "system",
+                "queue",
+                "ledger",
+                "protocol",
+                "knowledge",
+                "chat",
+                "problem",
+                "successful"
+              ]
+            },
+            "truth": {
+              "status": 201,
+              "truth_id": "265209c0-ff58-46d7-ac06-2cc8108decf9",
+              "consensus_score": 4,
+              "consensus_achieved": false,
+              "agreed_directives": [
+                "Optimize task management for individual drones",
+                "Implement cue-based task assignment system",
+                "Develop protocol for recording and tracking drone performance"
+              ]
+            },
+            "shadow": {
+              "status": 201,
+              "shadow_id": "d3c95dd8-63e4-41f7-92ca-1a147e153844",
+              "verdict": "DRIFT_POSSIBLE",
+              "intensity": 3
+            }
+          },
+          "text_len": 577,
+          "started_at": "2026-05-22T22:12:31.157Z",
+          "meta": {
+            "fmt": "soulsegment-jsonl",
+            "date": "2026-04-05",
+            "sha256": "302c114d99f2c9600dc3db2122835e0b06db36b19162a742ac6ebd4efa6beaae"
+          },
+          "elapsed_ms": 62598,
+          "completed_at": "2026-05-22T22:13:33.755Z"
+        },
+        {
+          "source_id": "B-19-G_000204",
+          "session_id": "51f97ac0-c3ee-4482-a3b7-b47b327b24b2",
+          "stages": {
+            "extract": {
+              "status": 201,
+              "prompt_count": 1,
+              "ingested_at": "2026-05-22T22:13:34.332Z"
+            },
+            "crunch_bible": {
+              "status": 201,
+              "crunch_id": "c302a362-35ed-41dc-8f13-b2fa012bbd4b",
+              "tier": "workers-ai"
+            },
+            "crunch_themes": {
+              "status": 201,
+              "crunch_id": "959d02d0-f305-4a53-b98f-743e75af54c9",
+              "tier": "workers-ai"
+            },
+            "skeleton": {
+              "status": 201,
+              "keywords": [
+                "magic",
+                "chat",
+                "net",
+                "pet",
+                "ai",
+                "students",
+                "super",
+                "app",
+                "event",
+                "diagnostic"
+              ]
+            },
+            "truth": {
+              "status": 201,
+              "truth_id": "c1eaeaa0-1383-4e71-9296-6d4c9ac237c8",
+              "consensus_score": 9,
+              "consensus_achieved": true,
+              "agreed_directives": [
+                "This will be a game-changer for my students",
+                "Get tons of users to build this data",
+                "Scale up with no overhead"
+              ]
+            },
+            "shadow": {
+              "status": 201,
+              "shadow_id": "7003b834-25fc-41f1-becd-3979b9a46127",
+              "verdict": "DRIFT_DETECTED",
+              "intensity": 8
+            }
+          },
+          "text_len": 1074,
+          "started_at": "2026-05-22T22:13:33.758Z",
+          "meta": {
+            "fmt": "soulsegment-jsonl",
+            "date": "2026-04-05",
+            "sha256": "0827fc3107b49b154696586865f4f59f104cab250448e0c47b2e2c02662c4950"
+          },
+          "elapsed_ms": 56347,
+          "completed_at": "2026-05-22T22:14:30.105Z"
+        },
+        {
+          "source_id": "B-20-G_000212",
+          "session_id": "927025f6-88b3-4ae9-9337-0485ee32c956",
+          "stages": {
+            "extract": {
+              "status": 201,
+              "prompt_count": 1,
+              "ingested_at": "2026-05-22T22:14:30.684Z"
+            },
+            "crunch_bible": {
+              "status": 201,
+              "crunch_id": "de21ad13-997d-4206-b2b8-832374f3e633",
+              "tier": "workers-ai"
+            },
+            "crunch_themes": {
+              "status": 201,
+              "crunch_id": "4feebb18-e974-4bfc-8659-467eaf86fba1",
+              "tier": "workers-ai"
+            },
+            "skeleton": {
+              "status": 201,
+              "keywords": [
+                "shadows",
+                "operate",
+                "chaos",
+                "data",
+                "layers",
+                "industry",
+                "market",
+                "research",
+                "map",
+                "principle"
+              ]
+            },
+            "truth": {
+              "status": 201,
+              "truth_id": "e179e728-5b54-4459-8156-d2519a92c90a",
+              "consensus_score": 7,
+              "consensus_achieved": true,
+              "agreed_directives": [
+                "Run chaos type events in the background to collect data and build layers for future use",
+                "Map out new industries, places, and data to create a baseline for future operations",
+                "Operate in the shadows, but not in a shadowy way, to achieve goals"
+              ]
+            },
+            "shadow": {
+              "status": 201,
+              "shadow_id": "b8d185a1-830e-490a-a9f2-3e4006bec125",
+              "verdict": "CONTRADICTION_DETECTED",
+              "intensity": 7
+            }
+          },
+          "text_len": 675,
+          "started_at": "2026-05-22T22:14:30.107Z",
+          "meta": {
+            "fmt": "soulsegment-jsonl",
+            "date": "2026-04-05",
+            "sha256": "a8f784dde806d626edce0696170d6da13a9c47db4dd85f2aba49b1e92422f163"
+          },
+          "elapsed_ms": 45251,
+          "completed_at": "2026-05-22T22:15:15.358Z"
+        },
+        {
+          "source_id": "B-21-G_000215",
+          "session_id": "76098576-50d3-422d-8a71-e2f8b8d05fbd",
+          "stages": {
+            "extract": {
+              "status": 201,
+              "prompt_count": 1,
+              "ingested_at": "2026-05-22T22:15:15.936Z"
+            },
+            "crunch_bible": {
+              "status": 201,
+              "crunch_id": "534f451f-31f6-40e1-8997-e33b975ac71e",
+              "tier": "workers-ai"
+            },
+            "crunch_themes": {
+              "status": 201,
+              "crunch_id": "f72e52fb-0d46-4f2e-9d41-3986bba884e9",
+              "tier": "workers-ai"
+            },
+            "skeleton": {
+              "status": 201,
+              "keywords": []
+            },
+            "truth": {
+              "status": 201,
+              "truth_id": "4257db8d-92b4-41bd-b656-ad2ef48c00ce",
+              "consensus_score": 7,
+              "consensus_achieved": true,
+              "agreed_directives": [
+                "Map foundational depth for scalable height",
+                "Recognize the importance of precise initial resource allocation",
+                "Prioritize the Truth Principle"
+              ]
+            },
+            "shadow": {
+              "status": 201,
+              "shadow_id": "7d3f247c-8f38-48cb-b6b6-35c29bb09af2",
+              "verdict": "DRIFT_DETECTED",
+              "intensity": 7
+            }
+          },
+          "text_len": 408,
+          "started_at": "2026-05-22T22:15:15.361Z",
+          "meta": {
+            "fmt": "soulsegment-jsonl",
+            "date": "2026-04-05",
+            "sha256": "af9b2f18ca7cf5293100f186d18641c8c37a54a98bf35d311b44efd11eb26ec6"
+          },
+          "elapsed_ms": 55835,
+          "completed_at": "2026-05-22T22:16:11.196Z"
+        },
+        {
+          "source_id": "B-22-G_000216",
+          "session_id": "1194f96a-25c2-4077-a996-dc8dcc5d5e70",
+          "stages": {
+            "extract": {
+              "status": 201,
+              "prompt_count": 1,
+              "ingested_at": "2026-05-22T22:16:11.787Z"
+            },
+            "crunch_bible": {
+              "status": 201,
+              "crunch_id": "ef00f23d-96bb-4c25-bd90-49f4aa463f05",
+              "tier": "workers-ai"
+            },
+            "crunch_themes": {
+              "status": 201,
+              "crunch_id": "b474a202-f164-4702-a9d8-ef73b3531eb3",
+              "tier": "workers-ai"
+            },
+            "skeleton": {
+              "status": 201,
+              "keywords": [
+                "mapping",
+                "minimize",
+                "chaos",
+                "build",
+                "right",
+                "first",
+                "time",
+                "ai",
+                "age",
+                "ai",
+                "artificial",
+                "intelligence"
+              ]
+            },
+            "truth": {
+              "status": 201,
+              "truth_id": "b8e62ee5-fada-45ac-aeac-d8af541738a2",
+              "consensus_score": 6,
+              "consensus_achieved": false,
+              "agreed_directives": [
+                "Build it right the first time",
+                "Don't worry about the cost of fixing mistakes",
+                "Leverage AI to solve any problem"
+              ]
+            },
+            "shadow": {
+              "status": 201,
+              "shadow_id": "e0b575fb-e849-4572-98bb-c749595538a6",
+              "verdict": "DRIFT_DETECTED",
+              "intensity": 8
+            }
+          },
+          "text_len": 974,
+          "started_at": "2026-05-22T22:16:11.199Z",
+          "meta": {
+            "fmt": "soulsegment-jsonl",
+            "date": "2026-04-05",
+            "sha256": "7fd3e8183cc44d70e54b0efbf35ce623c7def04d9a63c3914a07d276f24c7a4e"
+          },
+          "elapsed_ms": 64737,
+          "completed_at": "2026-05-22T22:17:15.936Z"
+        },
+        {
+          "source_id": "B-23-G_000217",
+          "session_id": "c2e52af0-87f9-4527-a94d-2fb2d1e1f272",
+          "stages": {
+            "extract": {
+              "status": 201,
+              "prompt_count": 1,
+              "ingested_at": "2026-05-22T22:17:16.516Z"
+            },
+            "crunch_bible": {
+              "status": 201,
+              "crunch_id": "8bcdccf5-73bd-46f0-9366-acc8d3453b6a",
+              "tier": "workers-ai"
+            },
+            "crunch_themes": {
+              "status": 201,
+              "crunch_id": "c0a4a3e5-4986-4092-968b-8808341299ce",
+              "tier": "workers-ai"
+            },
+            "skeleton": {
+              "status": 201,
+              "keywords": []
+            },
+            "truth": {
+              "status": 201,
+              "truth_id": "2e2570f1-018e-4375-b783-28946e905ea0",
+              "consensus_score": 9,
+              "consensus_achieved": true,
+              "agreed_directives": [
+                "Eliminate the fear of costly revisions",
+                "Triggers Audit and Escalation events",
+                "Delegation is key to insurmountable problems"
+              ]
+            },
+            "shadow": {
+              "status": 201,
+              "shadow_id": "5bd16e1b-5944-4f5f-9de3-eb5180c63648",
+              "verdict": "DRIFT_DETECTED",
+              "intensity": 8
+            }
+          },
+          "text_len": 397,
+          "started_at": "2026-05-22T22:17:15.938Z",
+          "meta": {
+            "fmt": "soulsegment-jsonl",
+            "date": "2026-04-05",
+            "sha256": "3c6d40137476666632509b4c985ac30ffb12b6538a2e6862f4a247956f9b184a"
+          },
+          "elapsed_ms": 54098,
+          "completed_at": "2026-05-22T22:18:10.036Z"
+        },
+        {
+          "source_id": "B-24-G_000218",
+          "session_id": "85412a2e-c760-494f-aef0-3537de6eae56",
+          "stages": {
+            "extract": {
+              "status": 201,
+              "prompt_count": 1,
+              "ingested_at": "2026-05-22T22:18:10.627Z"
+            },
+            "crunch_bible": {
+              "status": 201,
+              "crunch_id": "cc36afa4-9e54-4b0f-b38c-6c43bbc9c12b",
+              "tier": "workers-ai"
+            },
+            "crunch_themes": {
+              "status": 201,
+              "crunch_id": "420c3fa5-3377-4c44-97cb-7725b6a58f0a",
+              "tier": "workers-ai"
+            },
+            "skeleton": {
+              "status": 201,
+              "keywords": [
+                "mapping",
+                "simulation",
+                "process",
+                "lost",
+                "layout",
+                "unknown",
+                "territory",
+                "conceptual",
+                "basis",
+                "knowledge"
+              ]
+            },
+            "truth": {
+              "status": 201,
+              "truth_id": "2b2ee0fa-6866-4b7b-9203-faaf03aab3af",
+              "consensus_score": 7,
+              "consensus_achieved": false,
+              "agreed_directives": [
+                "Map simulation for navigation",
+                "Build mental map for AI navigation",
+                "Know the lay of the land for unknown territory"
+              ]
+            },
+            "shadow": {
+              "status": 201,
+              "shadow_id": "f9c59e62-2271-47a0-bc2e-0df09ea68fa7",
+              "verdict": "UNKNOWN",
+              "intensity": 0
+            }
+          },
+          "text_len": 850,
+          "started_at": "2026-05-22T22:18:10.038Z",
+          "meta": {
+            "fmt": "soulsegment-jsonl",
+            "date": "2026-04-05",
+            "sha256": "d47dae468e2c70759b0a8d966e22cd2a7289f9f6ce985ce42fef700bd399c4b8"
+          },
+          "elapsed_ms": 69471,
+          "completed_at": "2026-05-22T22:19:19.509Z"
+        },
+        {
+          "source_id": "B-25-G_000222",
+          "session_id": "51dc3780-fc9a-4989-9f3f-1eb66dee7c08",
+          "stages": {
+            "extract": {
+              "status": 201,
+              "prompt_count": 1,
+              "ingested_at": "2026-05-22T22:19:20.089Z"
+            },
+            "crunch_bible": {
+              "status": 201,
+              "crunch_id": "1685d0d5-8f41-448d-9b3d-033af1ce3ba6",
+              "tier": "workers-ai"
+            },
+            "crunch_themes": {
+              "status": 201,
+              "crunch_id": "3dc06323-4412-4168-a72e-d1c3b1f2c986",
+              "tier": "workers-ai"
+            },
+            "skeleton": {
+              "status": 201,
+              "keywords": [
+                "apis",
+                "drone",
+                "system",
+                "javascript",
+                "audit",
+                "ai",
+                "models",
+                "perplexity",
+                "gemini",
+                "sonar"
+              ]
+            },
+            "truth": {
+              "status": 201,
+              "truth_id": "fb7c04f2-c07e-40cd-a67e-201e17355a54",
+              "consensus_score": 7,
+              "consensus_achieved": true,
+              "agreed_directives": [
+                "Use APIs to connect drone system",
+                "Switch between models for auditing",
+                "Map model strengths for rapid firing"
+              ]
+            },
+            "shadow": {
+              "status": 201,
+              "shadow_id": "99b56f15-5c58-4975-ae4a-31e9e6b19107",
+              "verdict": "CONTRADICTIONS_DETECTED",
+              "intensity": 4
+            }
+          },
+          "text_len": 1007,
+          "started_at": "2026-05-22T22:19:19.510Z",
+          "meta": {
+            "fmt": "soulsegment-jsonl",
+            "date": "2026-04-05",
+            "sha256": "d112158674a31795d978a17728d52dc49d4242ba671fe04d12c23c228e404d55"
+          },
+          "elapsed_ms": 59037,
+          "completed_at": "2026-05-22T22:20:18.547Z"
+        }
+      ],
+      "limit": 26
+    },
+    {
+      "bucket": "C",
+      "label": "verbatim-log-runs",
+      "runs": [],
+      "limit": 50,
+      "note": "Processed 0 of 0 total objects"
+    }
+  ],
+  "completed_at": "2026-05-22T22:20:18.554Z"
+}

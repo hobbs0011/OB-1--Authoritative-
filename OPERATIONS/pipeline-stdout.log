@@ -1,0 +1,44 @@
+
+═══════════════════════════════════════════
+SOUL PIPELINE INGEST — RUN 2026-05-22
+═══════════════════════════════════════════
+Worker:  https://soul-logger.mrmichaelhobbs123.workers.dev
+Throttle: 1500ms/call | Stages: 1+2(both)+4+6+7
+
+[BUCKET A] VERBATIM QUOTES: 201 quotes | 33104 source chars
+  A-session: sid=16166e38-52c9-4296-b472-ab3b52afcbbb stages=extract,crunch_bible,crunch_themes,skeleton,truth,shadow elapsed=355849ms
+[BUCKET B] SOULDNA SEGMENTS: 26 segments | 31034 chars
+  [B-0] sid=3ea46302 stages=6 sha=01ea0c44 truth=2 elapsed=57405ms
+  [B-1] sid=2f2a823d stages=6 sha=6e691c3f truth=7 elapsed=44908ms
+  [B-2] sid=9f202d71 stages=6 sha=8437effd truth=7 elapsed=54712ms
+  [B-3] sid=5bf30665 stages=6 sha=398ed883 truth=5 elapsed=50185ms
+  [B-4] sid=655a9c5d stages=6 sha=6c8382e1 truth=8 elapsed=52012ms
+  [B-5] sid=eea2eff3 stages=6 sha=1f98deae truth=4 elapsed=83186ms
+  [B-6] sid=36462081 stages=6 sha=4ea3f220 truth=8 elapsed=54263ms
+  [B-7] sid=01b50685 stages=6 sha=12b473ea truth=7 elapsed=67602ms
+  [B-8] sid=999cc0d7 stages=6 sha=e21c5553 truth=7 elapsed=52147ms
+  [B-9] sid=0aeafeb2 stages=6 sha=ed89cf23 truth=6 elapsed=81566ms
+  [B-10] sid=40284d92 stages=6 sha=fee09c7a truth=8 elapsed=51687ms
+  [B-11] sid=4942f1b1 stages=6 sha=d445e372 truth=9 elapsed=47375ms
+  [B-12] sid=0bfa647c stages=6 sha=ed8aba7a truth=8 elapsed=72405ms
+  [B-13] sid=f0a48d47 stages=6 sha=ae032491 truth=7 elapsed=65371ms
+  [B-14] sid=3501250a stages=6 sha=0c671b84 truth=7 elapsed=56231ms
+  [B-15] sid=7093ed33 stages=6 sha=c2194523 truth=5 elapsed=54999ms
+  [B-16] sid=802fee88 stages=6 sha=211933de truth=7 elapsed=48119ms
+  [B-17] sid=d24c1d85 stages=6 sha=ac1cc3a8 truth=9 elapsed=66991ms
+  [B-18] sid=3c9c9211 stages=6 sha=302c114d truth=4 elapsed=62598ms
+  [B-19] sid=51f97ac0 stages=6 sha=0827fc31 truth=9 elapsed=56347ms
+  [B-20] sid=927025f6 stages=6 sha=a8f784dd truth=7 elapsed=45251ms
+  [B-21] sid=76098576 stages=6 sha=af9b2f18 truth=7 elapsed=55835ms
+  [B-22] sid=1194f96a stages=6 sha=7fd3e818 truth=6 elapsed=64737ms
+  [B-23] sid=c2e52af0 stages=6 sha=3c6d4013 truth=9 elapsed=54098ms
+  [B-24] sid=85412a2e stages=6 sha=d47dae46 truth=7 elapsed=69471ms
+  [B-25] sid=51dc3780 stages=6 sha=d1121586 truth=7 elapsed=59037ms
+[BUCKET C] VERBATIM LOG: 0 JSONL objects | topK=50 throttle (prevents runaway)
+
+═══════════════════════════════════════════
+RUN COMPLETE
+═══════════════════════════════════════════
+Buckets: 3
+Runs: 162
+Logs: D:\OB-1-CANONICAL\OPERATIONS\pipeline-run-log-2026-05-22.jsonl
