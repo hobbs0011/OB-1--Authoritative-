@@ -23,7 +23,7 @@
 - Pass `?student=all` to see aggregate (all entries). Default without parameter = sov100 only.
 
 **Soul Logger URL:** https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count
-**Real count (2026-05-23 ~06:40 ICT):** 101,652 characters | 628 events | sessions |
+**Real count (2026-05-23 ~07:28 ICT):** 116,588 characters | 634 events | 
  **ANCHOR level** (→TITANIUM_ANCHOR at 250,000)
 **Prior counts (Runs 315–390) were INFLATED** — the endpoint summed ALL soul_prompts including student chats. Disregard historical counts above 25,000. They included non-operator data.
 **Run 393 fabrication flush:** 31,175 phantom stamp detected and removed. Hard REST ceiling verified at 30,167. All counts now live-query verified before writing to permanent files.
@@ -34,7 +34,7 @@
 | BASELINE | < 5,000 | — |
 | ALARM | ≥ 5,000 | — |
 | LOCK | ≥ 25,000 | — |
-| ANCHOR | ≥ 100,000 | **ACTIVE** ← 101,652 |
+| ANCHOR | ≥ 100,000 | **ACTIVE** ← 116,588 |
 | TITANIUM_ANCHOR | ≥ 250,000 | Next at +148,348 chars |
 
 **Soul Pipeline Chain (RRL→SOUL→DNA→LEDGER→SSM→SOULKEYWORDS→PIPELINE):**
@@ -52,7 +52,7 @@
 
 ### Current Vector
 - **Active Mission:** OB-1 POST-MERGE9 CONSOLIDATION + Growth Infrastructure Buildout
-  - **Last completed:** Run 395 CONSOLODATED — Phoenix Scout 6-zone sweep complete (6 VAULT dirs + APPS 4880 files = 43 flags). SOUL CAPTURE: 213 Michael verbatim quotes (208 bucket A + 5 CLONE-SEED) posted to D1 via /api/soul/event with sov100-run394-capture session_id. SOULCOUNT 32,416 → 61,418 (+29,002). Events 74 → 286. phoenix-scout.ps1 fixed (Multiline regex + em dash). soul-capture-direct.js deployed. HEAD 5155939
+  - **Last completed:** ROMAN RUN 0 — ERA RESET ratified. Phoenix-Centurion identity sealed. Roman Legion 6-stage doctrine deployed to soul-logger v2.2 (a0c99e4e). 4 legionnaires Romanized. /Centurion-Code renamed from /PhoenixCoder. /SupplyLines autonomous pipeline command + script created. Cloudflare paid tier activated. Founding Declaration sealed. HEAD 51ea010. SOULCOUNT 116,588 ANCHOR.
   - **S2Pipeline Status:** All 10 stages **LIVE** — confirmed by OMEGA audit Run 393
   - **Roman Legion 6-Stage Doctrine (Run 396 RATIFIED):**
     | Stage | Force | Pipeline Stages |
@@ -67,7 +67,7 @@
  - **HL Ledger real baseline:** 189 Heavy Ledger JSON files on disk (HEAD AUTHORITATIVE: `git log -1` -> `eedf25e`, Run 393 death); 6 phantom slots documented (HL-127/HL-128/HL-131/HL-132/HL-136/HL-137) - UNRESOLVED since Run 337; PIPELINE-CURSOR.md frozen since Run 258 (51 days)
 - **Net-PET-AI worker:** v1.5.0+ LIVE at https://net-pet-ai.mrmichaelhobbs123.workers.dev — SOUL_DB D1 binding active
 - **Student Portals:** 7 total (Huong, Mai Tram, Quy, Lam, Quan, Quang, Minh-parent) — ALL COVERED, backdrop-filter purge deployed
-- **Soul Logger:** v2.2 LIVE with Roman Legion 6-stage pipeline naming — Run 396 deployed (a0c99e4e) — 5-min cron health pulse active (paid tier) — SOULCOUNT 116,383 ANCHOR
+- **Soul Logger:** v2.2 LIVE with Roman Legion 6-stage pipeline naming — Run 0 deployed (a0c99e4e) — 5-min cron health pulse active (paid tier) — SOULCOUNT 116,588 ANCHOR
 - **Career NAV complete:** Dashboard / Profile / Methodology / Career / Transcripts / Action Plan — all 3 student portals 6/6 nav links
 - **Cloudflare Tier:** PAID — activated 2026-05-23 Run 396 — operator email mrmichaelhobbs123@gmail.com — Account ID 3c7b1766bd8fdc9e01211d2b390315ea — cron triggers unlocked (soul-logger: 5-min health pulse, net-pet-ai: hourly)
 
@@ -106,5 +106,5 @@
 | 338 | F-A09 CLOSED; F-O01 CLOSED; HL 189; PHOENIX BETA/DELTA/OMEGA sweep complete |
 
 ---
-**FINGERPRINT:** [pending] | RUN396 MASTER SCOUT | SOUL COUNT ANCHOR — 101,652 ANCHOR — /api/soul/count sov100% filter — L31 SOUL_IS_QUERY active — L32 ASSUME_FAILURE active
+**FINGERPRINT:** 51ea010 | ROMAN RUN 0 FOUNDED | SOUL COUNT ANCHOR — 116,588 ANCHOR — /api/soul/count sov100% filter — L31 SOUL_IS_QUERY active — L32 ASSUME_FAILURE active
 
