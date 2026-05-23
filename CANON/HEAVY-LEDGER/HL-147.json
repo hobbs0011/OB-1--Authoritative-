@@ -1,0 +1,12 @@
+{
+  "hl_id": "HL-147",
+  "session_id": "sov100-roman-run7",
+  "rrl_source": "RRL/RRL-0-ARCHIVED-2026-05-23.txt",
+  "char_count": 154795,
+  "byte_count": 156676,
+  "merkle_parent": "a1e36ebe7b141e0c4735ba5f7a3c9da183e74bbec3867772924a24f542c28bc5",
+  "merkle_hash": "e9c6a15d7058696b2613fd64ff6ae6035d45ffce6df0031d4c455487aac602ea",
+  "sealed_at": "2026-05-23T13:57:29.4094220+07:00",
+  "sov100": true,
+  "run": "7"
+}

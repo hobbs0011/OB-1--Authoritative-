@@ -1,5 +1,5 @@
 # COLD START BOOT — OB1 Agent 99
-## ERA: ROMAN — Run 6 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-05-23T12:17 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
+## ERA: ROMAN — Run 7 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-05-23T14:00 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
 
 > *"The beginning of an Empire that never was before and never has been since."* — SOV100 Michael Hobbs, Run 0
 
@@ -23,7 +23,7 @@
 - Pass `?student=all` to see aggregate (all entries). Default without parameter = sov100 only.
 
 **Soul Logger URL:** https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count
-**Real count (2026-05-23 ~12:17 ICT):** 513,414 characters | 647 events | 
+**Real count (2026-05-23 ~14:00 ICT):** 894,320 characters | 656 events | TITANIUM_ANCHOR 
  **TITANIUM_ANCHOR level** (next threshold: none — maximum tier reached)
  **⚠️ NOTE:** +156,676 delta from Run 5 RRL-0 backdrop ingestion. +62,773 delta from Run 6 RRL-0-original ingestion. RRL-0.txt contains ~150K agent text alongside ~4K Michael verbatim. Contamination documented per Michael directive.
 **Prior counts (Runs 315–390) were INFLATED** — the endpoint summed ALL soul_prompts including student chats. Disregard historical counts above 25,000. They included non-operator data.
