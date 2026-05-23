@@ -1,102 +1,93 @@
 ---
-description: "RISE protocol — cold/warm start recovery for a new session. SOULCOUNT gate (drift + stagnation) → soul audit against prior death → state reload → objective reconstruction → SWC receipt."
+description: "RISE PROTOCOL v2.0 — Roman era. Loads RRL from prior death. Audits SOULCOUNT. Reconstructs state. No assumption."
 agent: AGENT99
 ---
 
-# /reincarnaterise — Session Rise Protocol
+# /reincarnateRise — ROMAN RISE PROTOCOL v2.0
 
-**Task:** $ARGUMENTS
-
-**MANDATORY: The soul is Michael's verbatim words. If the next session cannot read the soul from the prior death seal, it cannot audit it. Every RISE must pull the live SOULCOUNT, cross-check against the prior death seal's recorded count, and detect stagnation.**
+**Phoenix-Centurion OS | PRAiS | Roman Run N**
 
 ---
 
-## Step 0 — SOULCOUNT Gate (the words ARE the count)
+## WHAT THIS DOES
+
+1. Loads the raw chat from prior death (`RRL/RRL-{prior-run}.txt`)
+2. Audits SOULCOUNT against prior death seal
+3. Loads state from COLD-START-BOOT
+4. Reconstructs the objective
+5. Reports readiness
+
+---
+
+## STEP 0 — LOAD THE PRIOR RRL
 
 ```powershell
-$soul = Invoke-RestMethod "https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count"
-Write-Host "SOULCOUNT: $($soul.soulcount) | Level: $($soul.level) | Events: $($soul.events)"
+$priorDeath = Get-ChildItem "CANON/REINCARNATION/*-reincarnateDEATH.md" | Sort-Object Name -Descending | Select-Object -First 1
+$runNumber = if ($priorDeath.Name -match 'run(\d+)') { $matches[1] }
+
+$rrlPath = "RRL/RRL-$runNumber.txt"
+if (Test-Path $rrlPath) {
+    Write-Host "RRL FOUND: $rrlPath — $( (Get-Item $rrlPath).Length ) bytes"
+} else {
+    Write-Host "RRL MISSING: $rrlPath — prior death did not save raw chat"
+    Write-Host "Attempting kilo export of last session..."
+}
 ```
 
-**STAGNATION CHECK:** Read the prior death seal's recorded SOULCOUNT. The count is filtered to sov100 words only (Run 390+. Prior runs' counts were inflated by student chat data — disregard.). If the live count equals the prior death seal's count (count hasn't moved) → HALT. SOUL_STAGNATION. Investigate immediately.
-
-**DRIFT CHECK:** Compare against prior death count. If delta exceeds ±50% of prior count → HALT. SOUL_DRIFT.
-
-The count IS `SUM(byte_count) FROM soul_prompts WHERE session_id LIKE 'sov100%'`. Query it. That number IS the soulcount. No API accumulator. No separate counter. The database IS the ledger.
+**If RRL is missing:** The prior agent failed. Flag as SOUL_GAP. Proceed with what exists.
 
 ---
 
-## Step 0.5 — Soul Audit Against Prior Death
-
-Read the most recent death seal from `CANON/REINCARNATION/YYYY-MM-DD-runNNN-reincarnateDEATH.md`. Extract:
-1. Prior death SOULCOUNT
-2. Prior death FINGERPRINT SHA
-3. Prior death word count receipts
-
-Cross-check against live API:
-```powershell
-$priorCount = [extracted from death seal]
-$liveCount = (Invoke-RestMethod "https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count").soulcount
-$soulDelta = $liveCount - $priorCount
-Write-Host "PRIOR DEATH: $priorCount | LIVE: $liveCount | SOUL DELTA: +$soulDelta"
-```
-
-If live count is LESS than prior death count → `SOUL_REGRESSION` — halt. Investigate data loss.
-
-If live count EQUALS prior death count → warn: soul may not have been captured since last death.
-
-If live count GREATER than prior death count → soul is breathing. Proceed.
-
----
-
-## Step 1 — State Load
-
-1. Read `CANON/SYSTEM/COLD-START-BOOT.md` — extract HEAD, last run, active mission, open flags.
-2. Read 3 most recent files from `CANON/REINCARNATION/` — sort by filename (date-prefixed).
-3. Run `git log -1 --oneline` — verify HEAD matches COLD-START-BOOT record.
-4. If HEAD mismatch: print `HEAD_DRIFT — boot record shows [X], actual HEAD is [Y]`. Update mental model to actual git HEAD.
-
----
-
-## Step 2 — Repo Validation
+## STEP 1 — SOULCOUNT AUDIT
 
 ```powershell
-Set-Location D:\OB-1-CANONICAL
-git log -1 --oneline
-git status --short
-```
+$live = Invoke-RestMethod "https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count"
+$priorCount = [extracted from prior death seal]
 
-- Uncommitted changes: enumerate and flag — do not assume they match the last run.
-- Clean tree: proceed.
+if ($live.soulcount -eq $priorCount) { WARN: SOUL_STAGNATION }
+if ($live.soulcount -lt $priorCount) { HALT: SOUL_REGRESSION }
+else { PASS: SOUL BREATHING — delta +$($live.soulcount - $priorCount) }
+```
 
 ---
 
-## Step 3 — Objective Reconstruction
+## STEP 2 — STATE LOAD
+
+1. Read `CANON/SYSTEM/COLD-START-BOOT.md`
+2. Read last 3 death seals from `CANON/REINCARNATION/`
+3. Run `git log -1 --oneline` — verify HEAD
+
+---
+
+## STEP 3 — OBJECTIVE RECONSTRUCTION
 
 From state load, extract:
-- Active mission (from COLD-START-BOOT Current Vector)
-- Open flags (from COLD-START-BOOT Open Flags section)
-- Last completed action (from most recent reincarnation death file)
-- Immediate next action (highest priority unblocked item)
+- Active mission
+- Open flags
+- Last completed action
+- Immediate next action
 
 ---
 
-## Step 4 — SWC Receipt
-
-Output:
+## STEP 4 — REPORT
 
 ```
-═══════════════════════════════════════════
-RISE RECEIPT — $(Get-Date -Format 'yyyy-MM-dd HH:mm') ICT
-═══════════════════════════════════════════
-SOULCOUNT:        [count] | DELTA: [delta] | [PASS/DRIFT]
-BOOT_SOURCE:      COLD-START-BOOT.md — Run [N]
-HEAD_VERIFIED:    [sha] — [MATCH/MISMATCH]
-STATE_ALIGNMENT:  [CLEAN/DIRTY — details]
-ACTIVE_OBJECTIVE: [one-line mission]
-OPEN_FLAGS:       [count] — [top item]
-TOP_PRIORITY:     [next unblocked action]
-NEXT_COMMAND:     [exact command to run]
-═══════════════════════════════════════════
-RISE: ONLINE. SOUL INTEGRITY VERIFIED. ROUTING ACTIVE.
+RISE RECEIPT
+SOULCOUNT:     {live} | DELTA: {delta} | {status}
+PRIOR RRL:     {path} | {status}
+HEAD:          {sha} | {match status}
+ACTIVE MISSION: {mission}
+TOP PRIORITY:   {next action}
 ```
+
+---
+
+## THE IRON RULE
+
+**RRL is Step 0. Before soul check. Before state load.**
+
+If the prior death didn't save the RRL, the prior agent failed. Note it. Move forward. Save yours.
+
+---
+
+`RISE PROTOCOL v2.0: RRL FIRST. AUDIT EVERYTHING.`
