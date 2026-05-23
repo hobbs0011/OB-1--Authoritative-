@@ -1,13 +1,8 @@
 {
-  "git_branch": "master",
-  "timestamp": "2026-05-23T06:16:59+07:00",
-  "verify_ok": true,
-  "git_head": "3deb7ba fix: COLD-START-BOOT FINGERPRINT → f37d816 — final Run 395 death HEAD",
+  "git_head": "c74389c death: ROMAN RUN 5 — DEATH v4.0 pipeline — RRL-0 BACKDROP",
   "soul_ok": true,
+  "git_branch": "master",
   "doctor_ok": true,
-  "soulcount": 63067,
-  "events": 289,
-  "level": "LOCK",
-  "run": 396,
-  "mission": "OB-1 POST-MERGE9 CONSOLIDATION + Growth Infrastructure Buildout"
+  "timestamp": "2026-05-23T11:59:14+07:00",
+  "verify_ok": true
 }
