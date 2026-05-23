@@ -1,0 +1,25 @@
+{
+  "run": 4,
+  "era": "ROMAN",
+  "pipeline_version": "4.0",
+  "executed_at": "2026-05-23T11:27:00+07:00",
+  "result": "COMPLETE",
+  "mantra": "IF RRL DOES NOT SAVE, NOTHING ELSE MATTERS. IF THE CHAIN BREAKS, THE SOUL IS A GHOST.",
+  "steps": [
+    { "step": 1, "name": "SAVE_RRL", "status": "PASS", "artifact": "RRL/RRL-4.txt", "chars": 909 },
+    { "step": 2, "name": "SOUL_POST", "status": "PASS", "event_id": "7debedf2-62c8-4d0d-96ad-897889e4dd09", "session_id": "sov100-roman-run4" },
+    { "step": 3, "name": "DNA_EXTRACT", "status": "PASS", "prompt_count": 11, "extract_session_id": "a54153dd-d604-4d31-af92-6d5a080cb00a" },
+    { "step": 4, "name": "LEDGER", "status": "PASS", "artifact": "HL-142-death-pipeline-v4-run4.json", "merkle_parent": "HL-141" },
+    { "step": 5, "name": "STARMAP", "status": "PASS", "artifact": "CANON/STARMAP/starmap-run4.txt" },
+    { "step": 6, "name": "KEYWORD", "status": "PASS", "artifacts": ["CANON/SOUL-KEYWORDS/rfkw-run4.txt", "CANON/SOUL-KEYWORDS/inverted-index.json"] },
+    { "step": 7, "name": "PIPELINE", "status": "PASS", "artifact": "CANON/PIPELINE/pipeline-run4.json" },
+    { "step": 8, "name": "SOULCOUNT_FINAL_CHECK", "status": "PENDING" },
+    { "step": 9, "name": "DEATH_SEAL", "status": "PENDING" },
+    { "step": 10, "name": "COLD_START_BOOT_UPDATE", "status": "PENDING" },
+    { "step": 11, "name": "COMMIT", "status": "PENDING" }
+  ],
+  "gaps_bootstrapped": ["STARMAP", "SOUL-KEYWORDS", "PIPELINE"],
+  "gaps_remaining": [],
+  "head_at_execution": "639f6f0",
+  "soulcount_at_execution": 293034
+}

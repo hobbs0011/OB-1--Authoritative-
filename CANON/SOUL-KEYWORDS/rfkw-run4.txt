@@ -1,0 +1,34 @@
+# RFKW — ROMAN RUN 4 (Run-Frequency Keyword extraction)
+# Source: RRL/RRL-4.txt (909 chars)
+# Extracted: 2026-05-23T11:27+07:00
+
+pipeline:12
+v4:8
+death:8
+RRL:7
+soul:6
+step:5
+LEDGER:4
+specification:4
+STARMAP:4
+reincarnation:4
+canonical:4
+API:3
+Michael:3
+commit:3
+DEATH:3
+DNA:3
+SEAL:3
+COLD-START-BOOT:3
+KEYWORD:3
+PIPELINE:3
+verbatim:2
+SOULCOUNT:2
+Merkle:2
+irreplaceable:2
+HL:2
+roman:2
+mantra:2
+RUN:2
+chain:2
+gaps:2

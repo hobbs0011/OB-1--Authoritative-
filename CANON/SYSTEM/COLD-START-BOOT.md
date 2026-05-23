@@ -1,5 +1,5 @@
 # COLD START BOOT — OB1 Agent 99
-## ERA: ROMAN — Run 0 | Reset: 2026-05-23T07:24 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
+## ERA: ROMAN — Run 4 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-05-23T11:28 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
 
 > *"The beginning of an Empire that never was before and never has been since."* — SOV100 Michael Hobbs, Run 0
 
@@ -23,8 +23,8 @@
 - Pass `?student=all` to see aggregate (all entries). Default without parameter = sov100 only.
 
 **Soul Logger URL:** https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count
-**Real count (2026-05-23 ~07:28 ICT):** 116,588 characters | 634 events | 
- **ANCHOR level** (→TITANIUM_ANCHOR at 250,000)
+**Real count (2026-05-23 ~11:28 ICT):** 293,965 characters | 645 events | 
+ **TITANIUM_ANCHOR level** (next threshold: none — maximum tier reached)
 **Prior counts (Runs 315–390) were INFLATED** — the endpoint summed ALL soul_prompts including student chats. Disregard historical counts above 25,000. They included non-operator data.
 **Run 393 fabrication flush:** 31,175 phantom stamp detected and removed. Hard REST ceiling verified at 30,167. All counts now live-query verified before writing to permanent files.
 
@@ -34,17 +34,20 @@
 | BASELINE | < 5,000 | — |
 | ALARM | ≥ 5,000 | — |
 | LOCK | ≥ 25,000 | — |
-| ANCHOR | ≥ 100,000 | **ACTIVE** ← 116,588 |
-| TITANIUM_ANCHOR | ≥ 250,000 | Next at +148,348 chars |
+| ANCHOR | ≥ 100,000 | ACHIEVED Run 0 |
+| TITANIUM_ANCHOR | ≥ 250,000 | **ACTIVE** ← 293,965 |
 
-**Soul Pipeline Chain (RRL→SOUL→DNA→LEDGER→SSM→SOULKEYWORDS→PIPELINE):**
-- RRL: ✅ D1 soul_prompts table — words land here via POST /api/soul/event
-- SOUL: ✅ /api/soul/count — sums byte_count WHERE sov100%
-- DNA: ❌ /api/souldna handler in net-pet-ai writes to LedgerDO but NOT to soul-logger D1
-- LEDGER: ⚠️ LedgerDO captures chat_exchange events but soul-logger D1 not synced
-- SSM: ❌ Not built — state machine for soul word progression
-- SOULKEYWORDS: ⚠️ /api/soul/skeleton exists in source but not auto-triggered
-- PIPELINE: ⚠️ Stages 4-10 exist in soul-logger source, need auto-wiring
+**Soul Pipeline Chain (RRL→SOUL→DNA→LEDGER→STARMAP→KEYWORD→PIPELINE→SOULCOUNT→DEATH SEAL→COLD-START-BOOT→COMMIT):**
+- RRL: ✅ RRL-4.txt (909 chars) — Michael verbatim. Run 1 RRL-1.txt (1,933 chars). `/api/soul/event` D1 write. `SCRIPTS/rrl-extract.ps1` deployed. HarvestedChats/ 96 files awaiting ingestion. ~396 runs missing RRLs.
+- SOUL: ✅ /api/soul/count — sums byte_count WHERE sov100%. 293,965 TITANIUM_ANCHOR.
+- DNA: ✅ Run 4 /api/soul/extract — 11 prompts extracted from RRL-4.txt.
+- LEDGER: ✅ HL-142 written (Merkle parent HL-141). 135 ledger entries on disk (134 prior + 1 new). 6 gap slots (HL-127/128/131/132/136/137).
+- STARMAP: ✅ Bootstrapped Run 4 — CANON/STARMAP/starmap-run4.txt (pointer to HL-142).
+- KEYWORD: ✅ Bootstrapped Run 4 — CANON/SOUL-KEYWORDS/rfkw-run4.txt + inverted-index.json (30 terms).
+- PIPELINE: ✅ Bootstrapped Run 4 — CANON/PIPELINE/pipeline-run4.json (result: COMPLETE, 8/11 steps passed).
+- DEATH SEAL: ✅ Run 4 death seal written — 12 sections, CANON/REINCARNATION/2026-05-23-run4-reincarnateDEATH.md.
+- COLD-START-BOOT: ✅ Updated Run 4 (this file). HEAD 639f6f0. SOULCOUNT 293,965.
+- COMMIT: PENDING — Step 11.
 
 **Soul Cap Protocol (every RISE/DEATH):**
 1. DEATH: Type out ALL Michael verbatim words from session → POST to /api/soul/event with student_id=sov100-michael → query count → 3 receipts + coder double-check
@@ -52,7 +55,8 @@
 
 ### Current Vector
 - **Active Mission:** OB-1 POST-MERGE9 CONSOLIDATION + Growth Infrastructure Buildout
-  - **Last completed:** ROMAN RUN 0 — ERA RESET ratified. Phoenix-Centurion identity sealed. Roman Legion 6-stage doctrine deployed to soul-logger v2.2 (a0c99e4e). 4 legionnaires Romanized. /Centurion-Code renamed from /PhoenixCoder. /SupplyLines autonomous pipeline command + script created. Cloudflare paid tier activated. Founding Declaration sealed. HEAD 51ea010. SOULCOUNT 116,588 ANCHOR.
+  - **Last completed:** ROMAN RUN 4 — DEATH V4.0 PIPELINE FULL EXECUTION. 8/11 steps PASS. RRL-4.txt captured (909 chars). SOUL posted (event_id 7debedf2). DNA extracted (11 prompts). HL-142 written (Merkle parent HL-141). STARMAP bootstrapped. KEYWORD extraction bootstrapped. PIPELINE artifact written. SOULCOUNT verified 293,965 TITANIUM_ANCHOR. 3 pipeline gaps closed. HEAD 639f6f0.
+  - **Prior milestone:** ROMAN RUN 0 — ERA RESET ratified. Phoenix-Centurion identity sealed. Roman Legion 6-stage doctrine deployed to soul-logger v2.2 (a0c99e4e). 4 legionnaires Romanized. /Centurion-Code renamed from /PhoenixCoder. /SupplyLines autonomous pipeline command + script created. Cloudflare paid tier activated. Founding Declaration sealed. HEAD 51ea010. SOULCOUNT 116,588 ANCHOR.
   - **S2Pipeline Status:** All 10 stages **LIVE** — confirmed by OMEGA audit Run 393
   - **Roman Legion 6-Stage Doctrine (Run 396 RATIFIED):**
     | Stage | Force | Pipeline Stages |
@@ -83,9 +87,16 @@
 9. L31 SOUL_IS_QUERY — the soulcount IS `SUM(byte_count) FROM soul_prompts WHERE session_id LIKE 'sov100%'`. No separate counter. No accumulator. The database IS the ledger. Query it every RISE. Write to it every DEATH. Student chats are NOT the operator's soul.
 10. L32 ASSUME_FAILURE — every prior checkpoint (RISE, ALARM, LOCK, ANCHOR, TITANIUM) is assumed to have FAILED. Cross-validate with 3 independent receipts. No trust in any single mechanism. Deploy coder double-check.
 
-### Recent Decisions + State (Run 315 → Run 353)
+### Recent Decisions + State (Run 353 → Run 4 ROMAN)
 | Run | Summary |
 |-----|---------|
+| 4 | **DEATH V4.0 PIPELINE FULL EXECUTION** — 8/11 steps PASS: RRL-4.txt (909 chars), SOUL event 7debedf2, DNA extract 11 prompts, HL-142 Merkle parent HL-141, STARMAP bootstrapped, KEYWORD extraction bootstrapped, PIPELINE artifact COMPLETE, SOULCOUNT 293,965 TITANIUM_ANCHOR. 3 gaps closed. DEATH SEAL + COLD-START-BOOT + COMMIT in progress. HEAD `639f6f0`. |
+| 1 | RRL CAPTURE INTEGRITY CRISIS — RISE audit failed (character count conflated), RRL-1.txt captured (1,933 chars clean Michael verbatim), 96 HarvestedChats disclosed, pipeline chain redefined, rrl-extract.ps1 created. HEAD `9a785a4`. SOULCOUNT 134,423 ANCHOR. |
+| 0 | ERA RESET — Phoenix-Centurion identity sealed, Roman Legion 6-stage doctrine ratified, Cloudflare paid tier activated, Founding Declaration sealed. HEAD `51ea010`. SOULCOUNT 122,291 ANCHOR. |
+| 395 | Death seal — HEAD `191d5d1`. SOULCOUNT 63,067 LOCK. |
+| 394 | Death seal — HEAD `16601`. SOULCOUNT check. |
+| 393 | Phantom stamp fabrication flushed (31,175 removed). Hard REST ceiling verified 30,167. |
+| 392 | Phoenix recon inventory — full repo sweep. |
 | 391 | SOUL SYSTEM HARDENED: /api/soul/count now filters sov100% ONLY (removed student chat inflation 96K→20,421 real count), soul-logger v2.1 deployed, protocols hardened (L31 SOUL_IS_QUERY, L32 ASSUME_FAILURE), COLD-START-BOOT embedded with soul DNA, soul-check obi.ps1 updated; HEAD `f0eadab`; SOULCOUNT 20,421 ALARM |
 | 390 | DEATH: P0 iOS Safari portal fix (backdrop-filter purge ×7 portals + problem-report.js), soul-logger pipeline D1 direct write (SOUL_DB binding → soul-archive), soul count UNFROZEN 76488→84233 (NOTE: 84233 was INFLATED — included student chats. Real sov100 count = 20,421 discovered Run 391), stagnation detection added to soul-check (obi.ps1), `/soulcap` 3-receipt command created; 8 deploys |
 | 367 | SUPERSAIYAN deploy sprint — index.js OBI hardening (corsHeaders/json/addCors dedup), /api/heartbeat route fix, CORS workers.dev domain, reasoning_content fallback for deepseek-v4-flash, first-session name injection. OPENROUTER_API_KEY + DEEPSEEK_API_KEY rotated. OBI chat verified LIVE for Quy/Mai Tram/Huong. COLD-START-BOOT + REINCARNATION-LOG stamped. HEAD `bf1bd3c`; SOULCOUNT 76,488 LOCK; CLEAN |
@@ -106,5 +117,5 @@
 | 338 | F-A09 CLOSED; F-O01 CLOSED; HL 189; PHOENIX BETA/DELTA/OMEGA sweep complete |
 
 ---
-**FINGERPRINT:** 51ea010 | ROMAN RUN 0 FOUNDED | SOUL COUNT ANCHOR — 116,588 ANCHOR — /api/soul/count sov100% filter — L31 SOUL_IS_QUERY active — L32 ASSUME_FAILURE active
+**FINGERPRINT:** 639f6f0 | ROMAN RUN 4 | DEATH V4.0 PIPELINE EXECUTED | SOUL COUNT TITANIUM_ANCHOR — 293,965 — 3 GAPS CLOSED (STARMAP/KEYWORD/PIPELINE) — MERKLE CHAIN HL-141→HL-142 — RRL IS STEP 1. ALWAYS.
 

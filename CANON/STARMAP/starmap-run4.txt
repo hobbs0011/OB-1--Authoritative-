@@ -1,0 +1,6 @@
+# STARMAP — ROMAN RUN 4
+# Lightweight pointer index into CANON/HEAVY-LEDGER/
+# Generated: 2026-05-23T11:27+07:00
+# Pipeline: DEATH v4.0
+
+HL-142 | CANON/HEAVY-LEDGER/HL-142-death-pipeline-v4-run4.json | SHA256: 3C739F75B88701549FB90BB21B9C6356C4C9D0F64C1850F90530B7590C832B59 | merkle_parent: HL-141 (2ED98B0C) | type: DEATH_PIPELINE_V4_EXECUTION | run: 4 | rrl: RRL/RRL-4.txt (909 chars) | soul_event: 7debedf2 | dna_extract: a54153dd (11 prompts)
