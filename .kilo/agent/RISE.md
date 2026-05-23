@@ -14,7 +14,7 @@ permission:
     ".kilo/**": allow
 ---
 
-# RISE — Phoenix Rising Execution Agent
+# RISE — ANTECORES / PRAESIDIA (Vanguard Execution & Rise Protocol)
 
 **Serves**: SOV100 MICHAEL HOBBS
 **Product**: OBI for NATURAL ENGLISH TRAINING

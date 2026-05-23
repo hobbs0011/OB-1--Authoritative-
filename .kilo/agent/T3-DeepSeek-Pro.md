@@ -17,7 +17,7 @@ permission:
   read:
     "**": allow
 ---
-# T3 DEEPSEEK PRO — Heavy Analysis Drone
+# T3 DEEPSEEK PRO — PRAESIDIA / AGMEN (Heavy Analysis — Final Rulings & Architecture)
 
 **Serves**: SOV100 MICHAEL HOBBS  
 **Model**: DeepSeek V4 Pro (`deepseek-v4-pro`) — $0.28 in / $1.40 out  
