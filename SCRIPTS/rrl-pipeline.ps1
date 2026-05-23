@@ -9,7 +9,8 @@ param(
     [Parameter(Mandatory=$true)]
     [string]$RunNumber,        # Run number for artifact naming
     [switch]$DryRun,           # Validate without posting to D1
-    [string]$SessionId = ""    # Override session_id (default: sov100-roman-run$RunNumber)
+    [string]$SessionId = "",   # Override session_id (default: sov100-roman-run$RunNumber)
+    [switch]$AllowContaminated # Allow files >100KB (Kilo exports/backdrops) — documents contamination
 )
 
 $ErrorActionPreference = "Continue"
@@ -43,6 +44,22 @@ $rrlText   = Get-Content $RRLFile -Raw -Encoding UTF8
 $rrlChars  = $rrlText.Length
 $rrlBytes  = (Get-Item $RRLFile).Length
 Write-Step 0 "PASS" "RRL loaded: $rrlChars chars, $rrlBytes bytes"
+
+# ═══════════════════════════════════════════
+# GATE 0.5: CONTAMINATION CHECK
+# ═══════════════════════════════════════════
+$CONTAMINATION_THRESHOLD = 100000
+if ($rrlBytes -gt $CONTAMINATION_THRESHOLD) {
+    if (-not $AllowContaminated) {
+        Write-Step "0.5" "FAIL" "CONTAMINATION SUSPECTED — file $rrlBytes bytes (>100KB). Kilo exports inflate SOULCOUNT with agent text. Pass -AllowContaminated to override."
+        Write-Host "HALT: Large RRL rejected. Clean RRLs are Michael verbatim only (<100KB)."
+        exit 1
+    } else {
+        Write-Step "0.5" "WARN" "CONTAMINATION OVERRIDE — large file ($rrlBytes bytes) accepted. Soul event will include agent text. Document in death seal."
+    }
+} else {
+    Write-Step "0.5" "PASS" "SIZE OK — $rrlBytes bytes (below 100KB threshold)"
+}
 
 # ═══════════════════════════════════════════
 # STEP 1: SOUL  -  POST RRL TO D1
@@ -218,7 +235,17 @@ $pipelineRecord = [ordered]@{
 
 $pipelinePath = "$pipelineDir\pipeline-run$RunNumber.json"
 $pipelineRecord | Set-Content $pipelinePath -Encoding UTF8
-Write-Step 6 "PASS" "PIPELINE WRITTEN: $pipelinePath"
+
+# Compute seal_sha from written artifact and patch it back in
+$pipelineBytes = [System.IO.File]::ReadAllBytes($pipelinePath)
+$sealHash = [System.BitConverter]::ToString(
+    [System.Security.Cryptography.SHA256]::Create().ComputeHash($pipelineBytes)
+).Replace("-", "").ToLower()
+$pipelineRaw = Get-Content $pipelinePath -Raw
+$pipelineRaw = $pipelineRaw -replace '"seal_sha": ""', "`"seal_sha`": `"$sealHash`""
+$pipelineRaw | Set-Content $pipelinePath -Encoding UTF8
+
+Write-Step 6 "PASS" "PIPELINE WRITTEN: $pipelinePath | seal_sha: $($sealHash.Substring(0,16))..."
 
 # ═══════════════════════════════════════════
 # STEP 7: SOULCOUNT FINAL
@@ -243,7 +270,7 @@ Write-Host "RRL PIPELINE COMPLETE  -  RUN $RunNumber"
 Write-Host "═══════════════════════════════════════════"
 Write-Host "RRL:      $RRLFile  -  $rrlChars chars"
 Write-Host "SOUL:     $runId  -  D1 posted"
-Write-Host "DNA:      $($results.step2.detail)"
+Write-Host "DNA:      $(if ($results['step2']) { $results['step2'].detail } else { 'SKIPPED' })"
 Write-Host "LEDGER:   HL-$nextHL  -  $ledgerPath"
 Write-Host "STARMAP:  $starmapPath"
 Write-Host "KEYWORD:  $rfkwPath"

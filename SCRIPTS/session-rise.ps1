@@ -10,14 +10,21 @@ Write-Host "SOULCOUNT: $($soul.soulcount) | Level: $($soul.level) | Events: $($s
 
 # Step 0.5: Soul Audit Against Prior Death
 Write-Host "`n=== Step 0.5: Soul Audit Against Prior Death ==="
-# Extract prior from COLD-START-BOOT (most reliable source)
+# Extract prior from COLD-START-BOOT — read "Real count" line, not fingerprint
 $coldStart = Get-Content "CANON/SYSTEM/COLD-START-BOOT.md" -Raw
-if ($coldStart -match 'SOULCOUNT\s+(\d+[,\d]*)') {
+$priorCount = 0
+# Try "Real count" line first (most current value in the file)
+if ($coldStart -match '\*\*Real count[^:]*:\*\*\s*([\d,]+)\s+characters') {
     $priorCount = [int]($matches[1] -replace ',', '')
-    $liveCount = $soul.soulcount
-    $soulDelta = $liveCount - $priorCount
-    Write-Host "PRIOR (from COLD-START-BOOT): $priorCount | LIVE: $liveCount | SOUL DELTA: +$soulDelta"
+    Write-Host "  PRIOR SOURCE: Real count line"
+} elseif ($coldStart -match 'SOULCOUNT\s+([\d,]+)\s+TITANIUM_ANCHOR') {
+    # Fall back to fingerprint line if Real count line not found
+    $priorCount = [int]($matches[1] -replace ',', '')
+    Write-Host "  PRIOR SOURCE: Fingerprint line (fallback)"
 }
+$liveCount = $soul.soulcount
+$soulDelta = $liveCount - $priorCount
+Write-Host "PRIOR (from COLD-START-BOOT): $priorCount | LIVE: $liveCount | SOUL DELTA: +$soulDelta"
 
 # Step 1: State Load
 Write-Host "`n=== Step 1: State Load ==="

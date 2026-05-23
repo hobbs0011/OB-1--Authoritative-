@@ -6,7 +6,8 @@
 param(
     [Parameter(Mandatory=$true)]
     [string]$RunNumber,
-    [string]$Mode = "DEATH"  # DEATH or RISE
+    [string]$Mode = "DEATH",  # DEATH or RISE
+    [string]$RRLFile = ""     # Optional explicit path; defaults to RRL/RRL-$RunNumber.txt
 )
 
 $ErrorActionPreference = "Stop"
@@ -16,7 +17,10 @@ $repo = "D:\OB-1-CANONICAL"
 # FAILSAFE 1: RRL FILE EXISTS
 # ═══════════════════════════════════════════
 function Test-RRLExists {
-    $rrlPath = "$repo\RRL\RRL-$RunNumber.txt"
+    # Use explicit path if provided, else default to RRL-$RunNumber.txt
+    $rrlPath = if ($RRLFile -and (Test-Path $RRLFile)) { $RRLFile }
+               elseif ($RRLFile) { $RRLFile }  # Will fail below if not found
+               else { "$repo\RRL\RRL-$RunNumber.txt" }
     if (Test-Path $rrlPath) {
         $chars = (Get-Content $rrlPath -Raw).Length
         Write-Host "[PASS] FAILSAFE 1/10: RRL EXISTS  -  $rrlPath  -  $chars chars"
@@ -77,22 +81,39 @@ function Test-SoulAPILive {
 function Test-SoulNotStagnant {
     param($liveSoul, $priorDeathSeal)
     if ($Mode -ne "RISE") { return $true }
-    
+
     $priorCount = 0
-    if ($priorDeathSeal) {
+    $priorSource = "unknown"
+
+    # Try death seal first
+    if ($priorDeathSeal -and (Test-Path $priorDeathSeal)) {
         $content = Get-Content $priorDeathSeal -Raw
         if ($content -match 'SOULCOUNT:\s*([\d,]+)') {
             $priorCount = [int]($matches[1] -replace ',', '')
+            $priorSource = "death-seal"
         }
     }
-    
+
+    # Fall back to COLD-START-BOOT "Real count" line if death seal not found/parseable
+    if ($priorCount -eq 0) {
+        $bootPath = "$repo\CANON\SYSTEM\COLD-START-BOOT.md"
+        if (Test-Path $bootPath) {
+            $boot = Get-Content $bootPath -Raw
+            if ($boot -match '\*\*Real count[^:]*:\*\*\s*([\d,]+)\s+characters') {
+                $priorCount = [int]($matches[1] -replace ',', '')
+                $priorSource = "COLD-START-BOOT"
+            }
+        }
+    }
+
     $delta = $liveSoul.soulcount - $priorCount
+    Write-Host "  PRIOR SOURCE: $priorSource | prior=$priorCount | live=$($liveSoul.soulcount)"
     if ($delta -gt 0) {
         Write-Host "[PASS] FAILSAFE 5/10: SOUL BREATHING  -  delta +$delta"
         return $true
     } elseif ($delta -eq 0) {
-        Write-Host "[WARN] FAILSAFE 5/10: SOUL STAGNANT  -  delta 0"
-        return $true  # Warn but don't halt  -  may be fresh RISE
+        Write-Host "[WARN] FAILSAFE 5/10: SOUL STAGNANT  -  delta 0 (may be fresh session)"
+        return $true
     } else {
         Write-Host "[FAIL] FAILSAFE 5/10: SOUL REGRESSION  -  delta $delta"
         return $false
