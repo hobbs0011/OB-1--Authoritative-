@@ -1,13 +1,15 @@
 ---
-description: "Send a coding task to Phoenix Coder v3.2 (DeepSeek V4 Pro via Cloudflare worker). Reads real file context, calls HTTP API, applies patch, verifies syntax. Supports full-file and diffMode for large files. Escalates to Tier 2 on failure."
+description: "CENTURION-CODE — Roman Legion engineer corps (FABRI/ARCHITECTI). Dispatches coding tasks to DeepSeek V4 Pro via Cloudflare worker. Reads real file context, calls HTTP API, applies patch, verifies syntax. Supports full-file and diffMode for large files. Escalates to Tier 2 on failure."
 agent: AGENT99
 ---
 
-# /PhoenixCoder
+# /Centurion-Code
+
+**Roman Rank: FABRI (Engineer Corps / COMITATENSES mobile strike) | Worker: phoenix-coder v5.1.0 LIVE**
 
 **DO NOT spawn an agent. DO NOT use the Agent tool.**
 
-Phoenix Coder is an HTTP API. Call it with PowerShell, apply the patch, verify the result.
+Centurion-Code is an HTTP API. Call it with PowerShell, apply the patch, verify the result.
 
 **Task:** $ARGUMENTS
 
@@ -17,7 +19,7 @@ Phoenix Coder is an HTTP API. Call it with PowerShell, apply the patch, verify t
 
 - Task touches > 3 interdependent files → `DISPATCH → TIER 2 AGENT99 — multi-file scope`
 - Task requires audit / architecture / security → `DISPATCH → TIER 3 DEEPSEEK PRO — analytical task`
-- Otherwise → proceed. Print: `DISPATCH → TIER 1 PHOENIXCODER — <one-line reason>`
+- Otherwise → proceed. Print: `DISPATCH → TIER 1 CENTURION-CODE (FABRI) — <one-line reason>`
 
 ---
 
@@ -95,7 +97,7 @@ node --check D:\OB-1-CANONICAL\PATH\TO\FILE
 Print result:
 
 ```
-PHOENIX PATCH APPLIED
+CENTURION-CODE PATCH APPLIED
 File: <path>
 d1_row_id: <id>
 Mode: full | diff
@@ -109,7 +111,7 @@ Syntax: PASS | FAIL
 Trigger when: API unreachable, `code_patch` empty/stub, patch conflicts, syntax fail.
 
 ```
-DISPATCH → TIER 2 AGENT99 — Phoenix Coder failed (<reason>). Handling directly.
+DISPATCH → TIER 2 AGENT99 — Centurion-Code failed (<reason>). Handling directly.
 ```
 
 ---
