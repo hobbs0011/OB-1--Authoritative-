@@ -84,7 +84,11 @@ async function callTier(env, tier, messages) {
   // T1 — free cascade
   const tried = [];
   let result = null;
-  if (env.CEREBRAS_API_KEY) {
+  if (env.DIALAGRAM_API_KEY) {
+    tried.push('Dialagram-Qwen');
+    result = await callOpenAI('https://dialagram.me/router/v1/chat/completions', env.DIALAGRAM_API_KEY, 'qwen-3.7-max', messages);
+  }
+  if (result === null && env.CEREBRAS_API_KEY) {
     tried.push('Cerebras');
     result = await callOpenAI('https://api.cerebras.ai/v1/chat/completions', env.CEREBRAS_API_KEY, 'llama-3.3-70b', messages);
   }
@@ -174,7 +178,7 @@ async function handleStatus(env) {
   return Response.json({
     drone: 'phoenix-architecti', version: '0.0.1', status: 'LIVE',
     tiers: {
-      t1: 'free — Cerebras→Groq→CF-Qwen',
+      t1: 'free — Dialagram-Qwen→Cerebras→Groq→CF-Qwen',
       t2: env.DEEPSEEK_API_KEY ? 'deepseek-v4-flash ✓' : 'NO KEY',
       t3: env.DEEPSEEK_API_KEY ? 'deepseek-v4-pro ✓' : 'NO KEY',
       t4: env.GEMINI_API_KEY ? 'gemini-3.5-flash ✓' : 'NO KEY',

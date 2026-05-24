@@ -1,8 +1,8 @@
 {
-  "verify_ok": true,
+  "git_head": "8d1a86b death: ROMAN RUN 15 ΓÇö Kilo auto/free dead-end investigation archived (UNKNOWABLE, L46+L47 sealed) ΓÇö SOUL 898066",
   "git_branch": "master",
-  "timestamp": "2026-05-25T03:28:26.0379984+07:00",
   "doctor_ok": true,
-  "soul_ok": false,
-  "git_head": "5d410d6 death: SHA patch e49abf5 ΓÇö Run 14 fingerprints sealed"
+  "timestamp": "2026-05-25T04:04:21.7769626+07:00",
+  "verify_ok": true,
+  "soul_ok": false
 }
