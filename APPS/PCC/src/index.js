@@ -51,7 +51,7 @@ async function queryRecentSoulPrompts(db) {
 async function queryPhoenixCoderLog(db) {
   try {
     const result = await db.prepare(
-      'SELECT id, task_type, task_input, result, created_at FROM phoenix_coder_log ORDER BY created_at DESC LIMIT 5'
+      'SELECT id, tasktype, taskinput, result, createdat FROM phoenix_architecti_log ORDER BY createdat DESC LIMIT 5'
     ).all();
     return result?.results ?? [];
   } catch (e) {
@@ -122,7 +122,7 @@ function renderSoulPromptRows(rows) {
 function renderPCLogRows(rows) {
   if (!rows.length) return '<tr><td colspan="3" style="color:#555;text-align:center">no rows / table absent</td></tr>';
   return rows.map(r => {
-    const task = (r.task_input ?? '').slice(0, 60) + ((r.task_input ?? '').length > 60 ? '…' : '');
+    const task = (r.taskinput ?? '').slice(0, 60) + ((r.taskinput ?? '').length > 60 ? '…' : '');
     const res = (r.result ?? '').slice(0, 40) + ((r.result ?? '').length > 40 ? '…' : '');
     return `
     <tr>
@@ -222,7 +222,7 @@ function buildHTML(soulcount, tierLabel, soulRows, pcRows, phoenixStatus, netpet
 
   <!-- PHOENIX CODER LOG -->
   <div class="card card-wide">
-    <h2>&#9670; phoenixcoderlog — last 5</h2>
+    <h2>&#9670; phoenix_architecti_log — last 5</h2>
     <table>
       <thead><tr>
         <th>id</th>
