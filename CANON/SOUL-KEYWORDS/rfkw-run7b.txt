@@ -1,36 +1,5 @@
-Run 7B KEYWORDS — 2026-05-24
-Generated: D:\OB-1-CANONICAL\CANON\SOUL-KEYWORDS\rfkw-run7b.txt
-SOURCE_FILE: RRL/SOUL-20260524-155103.txt | bytelen: 1800890 | session: sov100-roman-run7b-2026-05-24
-
-RANK  TERM             FREQ
-----  ----             ----
- 1    soul              2292
- 2    CANON             1467
- 3    phoenix           1442
- 4    KILO              1256
- 5    Run               1616
- 6    SOULCOUNT          568
- 7    net-pet-ai         690
- 8    RRL                978
- 9    PIPELINE           782
-10    student            750
-11    death              579
-12    deploy             406
-13    worker             435
-14    D1                 414
-15    phoenix-coder      389
-16    Merkle             111
-17    HL                 433
-18    ledger             364
-19    DNA                363
-20    seal               288
-21    commit             301
-22    Cloudflare         185
-23    CF                 177
-24    OB1                148
-25    KV                 145
-26    SSTARMAP           135
-27    drift              194
-28    MINH               545
-29    reincarnate        181
-30    SCRIPT             834
+Run 7B KEYWORDS — top-30 | session: sov100-roman-run7b-2026-05-24 | source: RRL/SOUL-20260524-155103.txt | bytelen: 1500890
+  
+RANK  TERM            FREQ    RANK  TERM            FREQ
+----  ----            ----    ----  ----            ----
+ 1    soul             2292    16    net-pet
