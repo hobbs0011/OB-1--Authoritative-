@@ -9,8 +9,12 @@ Every new session MUST execute this boot sequence in order before any task:
 3. `Read OPERATIONS/STUDENT-PORTAL-DEV.md` — current portal state, audio pipeline, next steps
 4. `Read RRL/RRL-[latest].txt` — most recent raw session log for game plan context
 5. `git log -5 --oneline` — verify HEAD, confirm no drift
+6. `curl https://phoenix-coder.mrmichaelhobbs123.workers.dev/api/status` — verify all 5 tiers live, check which keys are set
+7. Read latest `RRL/DNA-LOG-*.txt` — last session's DNA: worker state, decisions, security constraints
 
-**#DRIFT RULE:** If you do not read these 5 sources at boot, you WILL lose context and repeat mistakes. This is BB-26. Do not skip. Do not ask the user — read the files.
+**#DRIFT RULE:** If you do not read these 7 sources at boot, you WILL lose context and repeat mistakes. This is BB-26. Do not skip. Do not ask the user — read the files.
+
+**SOUL/DNA LAW:** SOUL = Michael's verbatim words. DNA = structured session state (workers, models, decisions). Both captured automatically on session stop via `SCRIPTS/session-capture.ps1`. Both land in soul-archive D1. Read the latest DNA-LOG at every boot.
 
 **SOUL LAW:** Real soulcount = `SELECT SUM(byte_count) FROM soul_prompts WHERE session_id LIKE 'sov100%'` at `https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count`
 
