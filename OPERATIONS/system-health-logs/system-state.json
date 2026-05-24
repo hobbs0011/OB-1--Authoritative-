@@ -1,8 +1,8 @@
 {
-  "verify_ok": true,
+  "timestamp": "2026-05-25T01:48:12.8589529+07:00",
   "git_branch": "master",
-  "git_head": "2bd8268 death: ROMAN RUN 11 ΓÇö Kilo auto-free diagnosed, both slots dead (MiniMax 429 + StepFun 404), T1 plan Cerebras+Groq keys pending, T2-T5 untouched, kilo.json reverted to original",
-  "timestamp": "2026-05-25T01:33:57.1791079+07:00",
-  "soul_ok": true,
-  "doctor_ok": true
+  "soul_ok": false,
+  "git_head": "62e4f1f death: ROMAN RUN 12 BOOT HARDEN ΓÇö T1 agent files (T1-Free through T5) + kilo.json wired with Cerebras GLM 4.7 + Groq 70B fallback + reasoningEffort passthrough fix ΓÇö COLD-START-BOOT Run 11ΓåÆ12 ΓÇö soulcount 896459 TITANIUM_ANCHOR",
+  "doctor_ok": true,
+  "verify_ok": true
 }
