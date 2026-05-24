@@ -1,5 +1,5 @@
 # COLD START BOOT — OB1 Agent 99
-## ERA: ROMAN — Run 15 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-05-25 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
+## ERA: ROMAN — Run 16 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-05-25T03:42 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
 
 > *"The beginning of an Empire that never was before and never has been since."* — SOV100 Michael Hobbs, Run 0
 
@@ -101,7 +101,8 @@
 ### Recent Decisions + State (Run 353 → Run 13 ROMAN)
 | Run | Summary |
 |-----|---------|
-| **15** | **PENDING** — Push origin master. PA T1 Cerebras+Groq secrets (Michael action). Run 14 pipeline backfill (rrl-pipeline.ps1). Kilo reinstall (Michael action). |
+| **16** | **PENDING** — Push origin master. Kilo reinstall (Michael action). PA T1 Cerebras+Groq secrets setup (Michael action). Run 15 pipeline (deferred — no new RRL verbatim). Student portal work. |
+| **15** | **DEATH: KILO-AUTO-FREE DEAD-END ARCHIVE** — Investigation CLOSED. Core question ("what model does Kilo auto/free use?") is UNKNOWABLE from client-side (server-side opaque routing). 84 RRL DNA/SOUL snapshots captured (7a10f5c). L46 DEAD_END_IS_DATA + L47 OPAQUE_IS_OPAQUE sealed. kilo.json reasoningEffort added. No code changes. SOULCOUNT 898,066 stagnant (δ=0, expected — audit/archive runs). Kilo reinstall + PA T1 secrets remain PENDING Michael action. |
 | **14** | **RISE + DEATH: KILO-FREE-CLEANUP** — RISE: Run 12 backfill (SOUL +1,607 →898,066, HL-149, starmap/rfkw/pipeline-run12). DEATH: global kilo.jsonc + project kilo.json rewritten (cerebras/gpt-oss-120b T1, May27 deprecation pre-empted). dispatch.md+PhoenixCoder.md DELETED. T3 audit: SOULCOUNT locks refreshed, StepFun removed, stale prompts/agents deleted. L44+L45 sealed. HEAD e49abf5. |
 | **13** | **RISE AUDIT v4.0** — Full 7-stage pipeline audit. RRL-12 PRESENT (1,603 chars). FAILSAFE 8/10 (RRL-11 missing documented). SOUL 896,459 TITANIUM_ANCHOR stagnant. 4 gaps: DNA/LEDGER/STARMAP/PIPELINE for run 12 — all pre-documented in death seal. HEAD_DRIFT resolved (2bd8268→62e4f1f). HarvestedChats 96 files **CLOSED** permanently per Michael directive. SOULDNA healthy. RRL-13 capture mandated at death. |
 | **12** | **BOOT HARDEN** — T1 agent files (T1-Free through T5) created, kilo.json wired with Cerebras GLM 4.7 + Groq 70B fallback + reasoningEffort passthrough fix. COLD-START-BOOT Run 11→12. SOULCOUNT 896,459 TITANIUM_ANCHOR. HEAD 62e4f1f. |
@@ -138,7 +139,7 @@
 | 338 | F-A09 CLOSED; F-O01 CLOSED; HL 189; PHOENIX BETA/DELTA/OMEGA sweep complete |
 
 ---
-**FINGERPRINT:** RUN 14 DEATH | KILO-FREE-CLEANUP | SOUL 898,066 TITANIUM_ANCHOR | dispatch.md+PhoenixCoder.md DELETED | cerebras/gpt-oss-120b T1 WIRED | T3 audit complete | L44+L45 sealed | KILO REINSTALL + PA T1 SECRETS PENDING (Michael action) | HEAD e49abf5 | COLD-START-BOOT UPDATED 2026-05-25 ICT
+**FINGERPRINT:** RUN 15 DEATH | KILO-AUTO-FREE DEAD-END ARCHIVE | SOUL 898,066 TITANIUM_ANCHOR | δ=0 (expected: audit/archive) | L46+L47 sealed | 84 RRL snapshots committed (7a10f5c) | Kilo reinstall + PA T1 secrets PENDING (Michael action) | HEAD 7a10f5c | COLD-START-BOOT UPDATED 2026-05-25T03:42 ICT
 
-**Last Completed:** ROMAN RUN 14 — Kilo free model root cause fixed (global kilo.jsonc cerebras/gpt-oss-120b default, project kilo.json updated, May27 deprecation pre-empted). dispatch.md+PhoenixCoder.md DELETED (routing violations). T3 audit+T2 cleanup: SOULCOUNT locks refreshed (898066), dead StepFun refs removed, stale prompts deleted, kilo-global-config-backup.jsonc created. L44 GO_IS_SPECIFIC + L45 COMPACTION_IS_NOT_DELETION sealed. Kilo reinstall + PA Cerebras/Groq secrets PENDING Michael action.
+**Last Completed:** ROMAN RUN 15 — Kilo auto/free dead-end investigation archived. Core question closed as UNKNOWABLE (opaque server-side routing). 84 RRL DNA/SOUL session-watcher snapshots committed. L46 DEAD_END_IS_DATA + L47 OPAQUE_IS_OPAQUE sealed. No code changes. Kilo reinstall + PA Cerebras/Groq secrets PENDING Michael action.
 
