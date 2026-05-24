@@ -580,11 +580,13 @@ async function handleAPI(path, request, env, url) {
     const apiKey = env.DEEPGRAM_API_KEY;
     if (!apiKey) return json({ error: "DEEPGRAM_API_KEY not configured" }, 500);
     const contentType = request.headers.get("content-type") || "audio/webm";
+    const diarize = url.searchParams.get("diarize") === "true";
     const audioBuffer = await request.arrayBuffer();
     if (!audioBuffer.byteLength) return json({ error: "No audio received" }, 400);
     try {
+      const dgParams = `model=nova-3&punctuate=true&smart_format=true&utterances=true${diarize ? "&diarize=true" : ""}`;
       const dgRes = await fetch(
-        "https://api.deepgram.com/v1/listen?model=nova-3&punctuate=true&smart_format=true&utterances=true",
+        `https://api.deepgram.com/v1/listen?${dgParams}`,
         {
           method: "POST",
           headers: { "Authorization": `Token ${apiKey}`, "Content-Type": contentType },
@@ -595,11 +597,21 @@ async function handleAPI(path, request, env, url) {
       const data = await dgRes.json();
       const alt = data?.results?.channels?.[0]?.alternatives?.[0];
       if (!alt) return json({ error: "No transcript returned" }, 422);
-      return addCors(json({
+      const response = {
         transcript: alt.transcript || "",
-        words: (alt.words || []).map(w => ({ word: w.word, confidence: w.confidence, start: w.start, end: w.end })),
+        words: (alt.words || []).map(w => ({ word: w.word, confidence: w.confidence, start: w.start, end: w.end, speaker: w.speaker ?? null })),
         duration: data?.metadata?.duration || 0,
-      }), request);
+      };
+      if (diarize) {
+        response.utterances = (data?.results?.utterances || []).map(u => ({
+          speaker: u.speaker,
+          transcript: u.transcript,
+          start: u.start,
+          end: u.end,
+          confidence: u.confidence,
+        }));
+      }
+      return addCors(json(response), request);
     } catch (err) {
       return json({ error: err.message }, 500);
     }
