@@ -30,6 +30,10 @@ async function callLLM(env, messages) {
   const tried = [];
   let result = null;
 
+  if (result === null && env.DEEPSEEK_API_KEY) {
+    tried.push('DeepSeek');
+    result = await callProvider('https://api.deepseek.com/chat/completions', env.DEEPSEEK_API_KEY, 'deepseek-chat', messages);
+  }
   if (result === null && env.CEREBRAS_API_KEY) {
     tried.push('Cerebras');
     result = await callProvider('https://api.cerebras.ai/v1/chat/completions', env.CEREBRAS_API_KEY, 'llama-3.3-70b', messages);
