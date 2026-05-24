@@ -1,5 +1,5 @@
 # COLD START BOOT — OB1 Agent 99
-## ERA: ROMAN — Run 8 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-05-24T13:00 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
+## ERA: ROMAN — Run 10 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-05-24T22:00 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
 
 > *"The beginning of an Empire that never was before and never has been since."* — SOV100 Michael Hobbs, Run 0
 
@@ -77,7 +77,7 @@
 - **Career NAV complete:** Dashboard / Profile / Methodology / Career / Transcripts / Action Plan — all 3 student portals 6/6 nav links
 - **Cloudflare Tier:** PAID — activated 2026-05-23 Run 396 — operator email mrmichaelhobbs123@gmail.com — Account ID 3c7b1766bd8fdc9e01211d2b390315ea — cron triggers unlocked (soul-logger: 5-min health pulse, net-pet-ai: hourly)
 
-### Active Principles (Top 10)
+### Active Principles (Top 16)
 1. Platform Death Test — every run must produce a GitHub commit SHA
 2. Dual-publish mandatory — Notion + GitHub always (or just GitHub when Notion not applicable)
 3. Revenue-first — English is the mechanic, money is the mission
@@ -88,11 +88,19 @@
 8. L30 BOOT_FILE_AGE_SWEEP — if COLD-START-BOOT shows Run < current minus 10, it must be refreshed before any pipeline change
 9. L31 SOUL_IS_QUERY — the soulcount IS `SUM(byte_count) FROM soul_prompts WHERE session_id LIKE 'sov100%'`. No separate counter. No accumulator. The database IS the ledger. Query it every RISE. Write to it every DEATH. Student chats are NOT the operator's soul.
 10. L32 ASSUME_FAILURE — every prior checkpoint (RISE, ALARM, LOCK, ANCHOR, TITANIUM) is assumed to have FAILED. Cross-validate with 3 independent receipts. No trust in any single mechanism. Deploy coder double-check.
+11. L38 WAIT_FOR_ALL_AGENTS — when N agents are dispatched in parallel, synthesize ONLY after all N return. Never declare a winner mid-flight.
+12. L39 CONFIRM_DONT_FIX — when Michael asks to "confirm" something, confirm it. Do NOT jump to fixing it. He owns the decision of what to do next.
+13. L40 READ_OWN_OUTPUT — before giving the next step, read what you just said. Do not contradict yourself in consecutive messages.
+14. L41 NO_TRAILING_QUESTIONS — never end a response with "What do you want to do?" / "Your call." / "Say the word." Canon or backlog tells the next action.
+15. L42 REASONING_CONTENT_IS_NORMAL — deepseek-v4-flash returns reasoning_content with empty content. EXPECTED. PA run367 has the fallback. NOT BROKEN.
+16. L43 DISPATCH_CHECK_FIRST — before spawning any agent, check DISPATCH.md tier table. T2 = PA with "tier":2 OR Kilo DS Flash. NOT a general-purpose agent.
 
 ### Recent Decisions + State (Run 353 → Run 4 ROMAN)
 | Run | Summary |
 |-----|---------|
-| 8 | **CONTEXT REBUILD** — Phoenix-Architecti v0.0.1 (universal 5-tier drone, T1=free cascade Cerebras→Groq→CF Qwen), soul-watcher.ps1 (real-time SOUL every 15s), session-capture.ps1 upgraded (SOUL+DNA dual), set-pa-secrets.ps1 (gitignored key restore), .kilo/DISPATCH.md (emergency Kilo backup), .claude/commands/ synced from .github/prompts/ originals, PCC phoenix_architecti_log table+column fix, CLAUDE.md 7-step boot, FUCKYOUCLAUDE DeepSeek key propagated. SOULCOUNT 894,852 TITANIUM_ANCHOR. HEAD [PENDING]. |
+| 10 | **OPENCLAW + TELEGRAM SPIRAL** — OpenClaw v2026.5.22 installed locally, Telegram bot @Phoenix_Centurion_Bot wired (token: 8603251036:AAGykOKDjx2KtZYb534oRtRkqt52HIS_88s), gateway daemon installed as Windows startup item (port 18789), 10-agent free model meta-research (Cerebras 1M/day + Groq 500k/day + SambaNova + OpenRouter + LLM7.io ≈ 1.3B tokens/month free), PA T1-T5 secrets restored via set-pa-secrets.ps1, §13 failure loop documented, L38-L43 new principles. KiloClaw dashboard Telegram config pending (Michael action). SOULCOUNT 894,852 TITANIUM_ANCHOR. HEAD [SEALED]. |
+| 9 | **PHOENIX-CENTURION ARCHITECTURE + OPENCLAW MCP INVESTIGATION** — architecture spec, OpenClaw gateway research, RRL-7B death rebase synced to BOOT. HEAD 2c1e91f. SOULCOUNT 894,852 TITANIUM_ANCHOR. |
+| 8 | **CONTEXT REBUILD** — Phoenix-Architecti v0.0.1 (universal 5-tier drone, T1=free cascade Cerebras→Groq→CF Qwen), soul-watcher.ps1 (real-time SOUL every 15s), session-capture.ps1 upgraded (SOUL+DNA dual), set-pa-secrets.ps1 (gitignored key restore), .kilo/DISPATCH.md (emergency Kilo backup), .claude/commands/ synced from .github/prompts/ originals, PCC phoenix_architecti_log table+column fix, CLAUDE.md 7-step boot, FUCKYOUCLAUDE DeepSeek key propagated. SOULCOUNT 894,852 TITANIUM_ANCHOR. HEAD a178980. |
 | 6 | **RRL HARDENING — RUN 0 ORIGINAL TRANSCRIPT PIPELINE** — RRL-0-original.txt (60,826 chars) processed through full pipeline: SOUL event 9897db4d (+62,773 → 513,414 TITANIUM_ANCHOR), LEDGER HL-144 (parent HL-143), STARMAP, KEYWORD (30 terms), PIPELINE artifacts created. DNA extract endpoint returned 400 (DNA_GAP). `rrl-pipeline.ps1` built (single-command 7-stage chain). `rrl-failsafe.ps1` built (10-gate verification). RISE protocol hardened: RRL MISSING = HALT. COLD-START-BOOT synced. HEAD [pending]. |
 | 5 | **DEATH V4.0 PIPELINE — RRL-0 BACKDROP REPROCESSING** — 8/11 steps PASS: RRL-0.txt (154,795 chars, contaminated Kilo export) sourced per Michael directive, SOUL event 560ac8ad (+156,676 delta), DNA partial (53 prompts from 3K chunk, full 154K timed out), HL-143 Merkle parent HL-142, STARMAP/KEYWORD/PIPELINE artifacts created, SOULCOUNT 450,641 TITANIUM_ANCHOR. SOUL contamination documented. HEAD `c74389c`. |
 | 4 | **DEATH V4.0 PIPELINE FULL EXECUTION** — 8/11 steps PASS: RRL-4.txt (909 chars), SOUL event 7debedf2, DNA extract 11 prompts, HL-142 Merkle parent HL-141, STARMAP bootstrapped, KEYWORD extraction bootstrapped, PIPELINE artifact COMPLETE, SOULCOUNT 293,965 TITANIUM_ANCHOR. 3 gaps closed. DEATH SEAL + COLD-START-BOOT + COMMIT in progress. HEAD `639f6f0`. |
@@ -122,7 +130,7 @@
 | 338 | F-A09 CLOSED; F-O01 CLOSED; HL 189; PHOENIX BETA/DELTA/OMEGA sweep complete |
 
 ---
-**FINGERPRINT:** RUN 9 | PHOENIX-CENTURION + OPENCLAW INVESTIGATION + RRL-7B DEATH REBASE — SOULCOUNT TITANIUM_ANCHOR 894,852 | HEAD 2c1e91f | COLD-START-BOOT UPDATED 2026-05-24T20:38 ICT
+**FINGERPRINT:** RUN 10 | OPENCLAW + TELEGRAM SPIRAL + FREE MODEL META-RESEARCH + §13 FAILURE LOOP — SOULCOUNT TITANIUM_ANCHOR 894,852 | HEAD dba7086 → SEALED | COLD-START-BOOT UPDATED 2026-05-24T22:00 ICT
 
-**Last Completed:** ROMAN RUN 7B → sealed in this commit. RRL-7B.txt (7,704 B) → SOUL event b3e77f3a → DNA gap (pre-captured 974,806 B) → HL-148 Merkle parent HL-147 ✓ → STARMAP starmap-run7b.txt ✓ → KEYWORD rfkw-run7b.txt (30 terms) + inverted-index-run7b.json ✓ → PIPELINE pipeline-run7b.json COMPLETE ✓. Run 9 (this session): Phoenix-Centurion architecture + OpenClaw Gateway investigation — 35 SOUL/DNA files committed. HEAD 2c1e91f. SOULCOUNT 894,852 TITANIUM_ANCHOR.
+**Last Completed:** ROMAN RUN 10 — OpenClaw v2026.5.22 installed locally, @Phoenix_Centurion_Bot Telegram created and paired, local gateway running as Windows daemon (port 18789), 10 parallel agents ran full free model meta-research (Cerebras + Groq + SambaNova + OpenRouter + LLM7.io), PA T1-T5 secrets restored (set-pa-secrets.ps1), DeepSeek v4-flash reasoning_content confirmed NOT BROKEN (run367 fallback active), §13 special failures section written, L38-L43 new principles sealed. KiloClaw dashboard Telegram config pending (Michael action). SOULCOUNT 894,852 TITANIUM_ANCHOR.
 

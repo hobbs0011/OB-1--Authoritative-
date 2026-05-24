@@ -39,11 +39,11 @@ I am the LEGATUS — I route tasks to the correct agent. I do not claim T2–T5 
 
 **Step 2 — HARD GATE:**
 
-- Tier 1 → **STOP. Call Phoenix-Architecti. No exceptions.**
-- Tier 2 → **Dispatch to Kilo DS Flash. Do NOT handle inline.**
-- Tier 3 → **Dispatch to Kilo DS Pro. Read everything first.**
-- Tier 4 → **Dispatch to Kilo Gemini 3.5 Flash.**
-- Tier 5 → **Dispatch to Kilo Claude Opus.**
+- Tier 1 → **STOP. Call Phoenix-Architecti (PA). No exceptions.**
+- Tier 2 → **STOP. Call Phoenix-Architecti (PA) with `"tier":2`. NOT Kilo. NOT a general-purpose agent. DeepSeek directly via PA.**
+- Tier 3 → **STOP. Call Phoenix-Architecti (PA) with `"tier":3`. DeepSeek Pro via PA.**
+- Tier 4 → **STOP. Call Phoenix-Architecti (PA) with `"tier":4`. Gemini via PA.**
+- Tier 5 → **STOP. Call Phoenix-Architecti (PA) with `"tier":5`. Claude Opus via PA.**
 
 ---
 
@@ -79,50 +79,60 @@ curl -s -X POST https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/cod
 
 ---
 
-### TIER 2 — Kilo / DeepSeek V4 Flash
+### TIER 2 — PA / DeepSeek V4 Flash
 
 **When:** fix / debug / refactor / wire up / migrate / integrate / set up / connect
 
 **Scope:** multi-file, needs live repo state, involves runtime or external services
 
 ```bash
-kilo run --auto --model openai/deepseek-v4-flash "<task with full context>"
+curl -s -X POST https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/code \
+  -H "Content-Type: application/json" \
+  -d '{"task": "<task>", "context": "<full context>", "targetfile": "<target>", "tier": 2}'
 ```
+
+**L43 RULE:** T2 = DeepSeek via PA tier:2. NOT Kilo. NOT general-purpose agent. NOT web search agent. DISPATCH.md tier table is authoritative.
 
 ---
 
-### TIER 3 — Kilo / DeepSeek V4 Pro
+### TIER 3 — PA / DeepSeek V4 Pro
 
 **When:** audit / analyze / architecture / scan / why / should we
 
 **Scope:** deep synthesis, cross-file analysis, architectural decisions
 
 ```bash
-kilo run --auto --model openai/deepseek-v4-pro "<task with full context>"
+curl -s -X POST https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/code \
+  -H "Content-Type: application/json" \
+  -d '{"task": "<task>", "context": "<full context>", "targetfile": "<target>", "tier": 3}'
 ```
 
 ---
 
-### TIER 4 — Kilo / Gemini 3.5 Flash
+### TIER 4 — PA / Gemini 3.5 Flash
 
 **When:** heavy cross-domain reasoning, complex multi-system design, large context synthesis
 
 **Scope:** tasks requiring more capability than DS Pro but below Claude Opus
 
 ```bash
-kilo run --auto --model google/gemini-3.5-flash "<task with full context>"
+curl -s -X POST https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/code \
+  -H "Content-Type: application/json" \
+  -d '{"task": "<task>", "context": "<full context>", "targetfile": "<target>", "tier": 4}'
 ```
 
 ---
 
-### TIER 5 — Kilo / Claude Opus
+### TIER 5 — PA / Claude Opus
 
 **When:** ledger / reincarnation / doctrine / operator-critical decisions / anything irreversible at empire scale
 
 **Scope:** highest-stakes, full analytical mode — read everything first, output a ruling not a summary
 
 ```bash
-kilo run --auto --model anthropic/claude-opus-4-20250514 "<task with full context>"
+curl -s -X POST https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/code \
+  -H "Content-Type: application/json" \
+  -d '{"task": "<task>", "context": "<full context>", "targetfile": "<target>", "tier": 5}'
 ```
 
 ---
@@ -130,7 +140,7 @@ kilo run --auto --model anthropic/claude-opus-4-20250514 "<task with full contex
 ## Dispatch Header
 
 Always print before executing:
-`DISPATCH → [TIER 1 PHOENIXCODER | TIER 2 DS-FLASH | TIER 3 DS-PRO | TIER 4 GEMINI | TIER 5 OPUS] — <one-line reason>`
+`DISPATCH → [TIER 1 PA-FREE | TIER 2 PA-DEEPSEEK | TIER 3 PA-DEEPSEEK-PRO | TIER 4 PA-GEMINI | TIER 5 PA-OPUS] — <one-line reason>`
 
 ## Escalation
 
