@@ -1,0 +1,56 @@
+RRL-7 — 2026-05-24 — Roman Run 7
+Session ID: sov100-roman-run7-2026-05-24
+HEAD at session start: fd4a862
+
+=== SESSION SUMMARY ===
+
+Michael frustrated — Claude lost 2 months context again. Context compaction wiped everything.
+
+KEY DECISIONS THIS SESSION:
+- DO NOT REMOVE CLOUDFLARE_API_TOKEN before deploy (user override of BB-13)
+- CLAUDE.md updated with mandatory 5-step cold boot sequence (BB-26 #DRIFT fix)
+- PCC fixed: wrong D1 table name (phoenixcoderlog -> phoenix_coder_log), wrong columns, missing 3 students
+- PCC new route: /api/context — dumps all sov100 soul text for context recovery
+- session-capture.ps1 created — Stop hook auto-fires on session end, writes RRL marker + posts to D1
+- Stop hook wired in .claude/settings.json
+
+GAME PLAN (from files read this session):
+- lam-prospect portal: BB-07, OPEN, no files at all. DO NOT build without asking Michael first.
+- Minh portal V1: wire audio to R2/ASSETS, live KV points, add May session cards
+- Chrome extension icons: BB-08, manifest references icons/ dir that does not exist
+- HarvestedChats: 96 files in RRL/HarvestedChats/ unmined, P1 SOUL gap
+- DNA_GAP: soul-logger /api/soul/extract returns 400 on large payloads
+- HL gaps: 6 slots (HL-127/128/131/132/136/137) unresolved since Run 337
+- PIPELINE-CURSOR.md stale since Run 344
+- net-obi-api: stale worker (2026-04-14), needs audit/retirement
+- frosty-bush-c14f: unknown worker from 2025-12-28, needs audit/retirement
+
+CLOUDFLARE LIVE STATE:
+- Workers: net-pet-ai (main), pcc, phoenix-architecti, phoenix-coder, soul-logger all LIVE and deployed today
+- D1: soul-archive (3.2MB, 894,320 sov100 chars, TITANIUM_ANCHOR), net-submissions (49KB)
+- KV: NET_PET_KV, SESSIONS, SOUL_LOGGER_KV, WAITLIST, RATELIMIT, TASK_QUEUE, CACHE
+
+STUDENTS LIVE (7 portals):
+- huong-bluetech, mai-tram-bluetech, quy-bluetech, quan-nguyen, quang-nguyen, minh (parent portal), lam (NO PORTAL)
+
+WHAT MICHAEL SAID THIS SESSION:
+"fuck it, you fucked me"
+"SCAN CLOUDFLARE, FOLLOW THE FUCKING TRAILS"
+"Why are you not reading RRL0"
+"I deleted nothing from Kilo"
+"I dont know.. its all fucked now"
+"like why are you asking me all this shit?"
+"you have not even looked at what PCC is"
+"WHY WOULD YOU DELETE OUR FUCKING KEY CHATS"
+"LOOK YOUR CONTACT WINDOW IS ALMOST FULL AND YOU ARE GOING TO AUTO DELETE AGAIN, SO BUILD THAT FIRST YOU STUPID MONKEY"
+"DO NOT REMOVE TOKEN"
+
+TIER SYSTEM (DO NOT FORGET):
+- T1: phoenix-architecti (free Qwen CF AI) — write/create/generate single file
+- T2: kilo DS Flash — fix/debug/refactor multi-file
+- T3: kilo DS Pro — audit/analyze/architecture
+- T4: kilo Gemini 3.5 Flash — heavy cross-domain
+- T5: kilo Claude Opus — operator-critical/irreversible
+- kilo config: D:\OB-1-CANONICAL\.kilo\kilo.json
+
+SOULCOUNT: 894,320 | TITANIUM_ANCHOR | Run 7 | HEAD fd4a862

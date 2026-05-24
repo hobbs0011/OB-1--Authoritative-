@@ -1,5 +1,21 @@
 # OB-1 Claude Code — Default Routing
 
+## ⚠️ MANDATORY COLD START — READ BEFORE ANYTHING ELSE
+
+Every new session MUST execute this boot sequence in order before any task:
+
+1. `Read CANON/SYSTEM/COLD-START-BOOT.md` — HEAD, run number, active mission, open flags, SOULCOUNT
+2. `Read OPERATIONS/BACKBURNER-PIPELINE-LOG.md` — open BB items, blockers, student roster
+3. `Read OPERATIONS/STUDENT-PORTAL-DEV.md` — current portal state, audio pipeline, next steps
+4. `Read RRL/RRL-[latest].txt` — most recent raw session log for game plan context
+5. `git log -5 --oneline` — verify HEAD, confirm no drift
+
+**#DRIFT RULE:** If you do not read these 5 sources at boot, you WILL lose context and repeat mistakes. This is BB-26. Do not skip. Do not ask the user — read the files.
+
+**SOUL LAW:** Real soulcount = `SELECT SUM(byte_count) FROM soul_prompts WHERE session_id LIKE 'sov100%'` at `https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count`
+
+---
+
 Every task is automatically routed through five tiers before execution. No command needed — routing is always on.
 
 I am the LEGATUS — I route tasks to the correct agent. I do not claim T2–T5 for inline execution. Default-to-Claude is the failure mode this system prevents.

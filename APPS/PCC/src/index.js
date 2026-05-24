@@ -15,6 +15,17 @@ function getTierLabel(count) {
   return 'NOMINAL';
 }
 
+async function querySoulContext(db) {
+  try {
+    const result = await db.prepare(
+      "SELECT session_id, position, text, byte_count FROM soul_prompts WHERE session_id LIKE 'sov100%' ORDER BY rowid ASC"
+    ).all();
+    return result?.results ?? [];
+  } catch (e) {
+    return [];
+  }
+}
+
 async function querySoulCount(db) {
   try {
     const result = await db.prepare(
@@ -29,7 +40,7 @@ async function querySoulCount(db) {
 async function queryRecentSoulPrompts(db) {
   try {
     const result = await db.prepare(
-      'SELECT session_id, byte_count, estimated_timestamp FROM soul_prompts ORDER BY estimated_timestamp DESC LIMIT 5'
+      'SELECT session_id, byte_count, estimated_timestamp FROM soul_prompts ORDER BY rowid DESC LIMIT 5'
     ).all();
     return result?.results ?? [];
   } catch (e) {
@@ -40,7 +51,7 @@ async function queryRecentSoulPrompts(db) {
 async function queryPhoenixCoderLog(db) {
   try {
     const result = await db.prepare(
-      'SELECT id, tasktype, taskinput, result, createdat FROM phoenixcoderlog ORDER BY createdat DESC LIMIT 5'
+      'SELECT id, task_type, task_input, result, created_at FROM phoenix_coder_log ORDER BY created_at DESC LIMIT 5'
     ).all();
     return result?.results ?? [];
   } catch (e) {
@@ -63,7 +74,10 @@ async function fetchStudentPortals() {
     { name: 'Huong', path: 'huong-profile.html' },
     { name: 'Mai Tram', path: 'mai-tram-profile.html' },
     { name: 'Quy', path: 'quy-profile.html' },
-    { name: 'Minh', path: 'minh-profile.html' },
+    { name: 'Minh', path: 'minh-parent-portal.html' },
+    { name: 'Quan', path: 'quan-profile.html' },
+    { name: 'Quang', path: 'quang-profile.html' },
+    { name: 'Lam', path: 'lam-profile.html' },
   ];
   const base = 'https://net-pet-ai.mrmichaelhobbs123.workers.dev/';
   return Promise.all(students.map(async s => {
@@ -108,7 +122,7 @@ function renderSoulPromptRows(rows) {
 function renderPCLogRows(rows) {
   if (!rows.length) return '<tr><td colspan="3" style="color:#555;text-align:center">no rows / table absent</td></tr>';
   return rows.map(r => {
-    const task = (r.taskinput ?? '').slice(0, 60) + ((r.taskinput ?? '').length > 60 ? '…' : '');
+    const task = (r.task_input ?? '').slice(0, 60) + ((r.task_input ?? '').length > 60 ? '…' : '');
     const res = (r.result ?? '').slice(0, 40) + ((r.result ?? '').length > 40 ? '…' : '');
     return `
     <tr>
@@ -244,6 +258,19 @@ export default {
         alive: true,
         ts,
       });
+    }
+
+    if (url.pathname === '/api/context') {
+      const rows = await querySoulContext(env.DB);
+      const text = rows.map(r => `\n\n=== ${r.session_id} (pos ${r.position}, ${r.byte_count} bytes) ===\n${r.text}`).join('');
+      return new Response(text, {
+        headers: { 'Content-Type': 'text/plain; charset=utf-8' },
+      });
+    }
+
+    if (url.pathname === '/api/context.json') {
+      const rows = await querySoulContext(env.DB);
+      return Response.json({ sessions: rows.length, rows });
     }
 
     if (url.pathname === '/') {
