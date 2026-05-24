@@ -10,7 +10,9 @@
 
 ---
 
-**Last Updated:** 2026-05-25T01:40 ICT (Run 13 ROMAN — RISE AUDIT: RRL-12 PRESENT, SOUL stagnant 896,459, 4 pipeline gaps for run 12 documented, HarvestedChats CLOSED per Michael directive)
+**Last Updated:** 2026-05-25 ICT (Run 14 ROMAN — RISE + Run 12 pipeline backfill complete: SOUL 898,066, HL-149, starmap/rfkw/pipeline-run12 created, DNA gap pre-documented)
+
+| Run 14 (ROMAN) | 2026-05-25 | RISE + RUN 12 PIPELINE BACKFILL: Dirty tree (4 files) committed 7a6ef92. rrl-pipeline.ps1 executed — SOUL +1,607 (896,459→898,066 TITANIUM_ANCHOR), HL-149 Merkle parent HL-148, starmap-run12.txt + rfkw-run12.txt (30 terms) + pipeline-run12.json created. DNA FAIL 400 (pre-documented DNA_GAP, consistent with Runs 6+12). 4 gaps → 1 remaining (DNA only). T1 Cerebras+Groq keys still pending Michael action. HEAD d482053. | d482053 |
 
 | Run 13 (ROMAN) | 2026-05-25 | RISE AUDIT v4.0: RRL-12.txt PRESENT (1,603 chars). FAILSAFE 8/10 PASS, 1 FAIL (RRL-11.txt missing — documented gap from run 11 diagnostic). SOUL 896,459 TITANIUM_ANCHOR (δ=0, expected stagnation across runs 9-12 — all diagnostic/infra, no verbatim ingested). DNA: 0 extracts for run 12 (DNA_GAP). LEDGER: 196 files present (HL entry for run 12 missing). STARMAP: 5 files (starmap-run12.txt missing). KEYWORD: 7 files (rfkw-run12.txt missing). PIPELINE: 5 artifacts (pipeline-run12.json missing). 4 GAPS total — all pre-documented in run 12 death seal. SOULDNA: healthy (1 bible + 84 segments). HEAD_DRIFT: boot fingerprint stale (2bd8268 vs actual 62e4f1f). HarvestedChats: CLOSED permanently per Michael directive — not to be raised again. Top priority: backfill run 12 pipeline gaps (DNA→LEDGER→STARMAP→KEYWORD→PIPELINE). | — |
 
