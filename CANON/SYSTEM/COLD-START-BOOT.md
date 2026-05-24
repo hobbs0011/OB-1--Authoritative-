@@ -101,7 +101,7 @@
 ### Recent Decisions + State (Run 353 → Run 13 ROMAN)
 | Run | Summary |
 |-----|---------|
-| **17** | **PENDING** — Push origin master. Kilo reinstall (Michael action). PA T1 Cerebras+Groq secrets setup. PC(Claw) Telegram gateway model resolution fix. Student portal work. |
+| **17** | **DEATH: DIALAGRAM + TG GATEWAY + PA T1 CASCADE** — Dialagram integrated ($5.50/wk unlimited Qwen 3.7 Max). OpenClaw gateway fixed (DIALAGRAM_API_KEY + all provider keys, primary→dialagram/qwen-3.7-max). Phoenix-Architecti T1 cascade updated (Dialagram→Cerebras→Groq→CF-Qwen). Worker deployed v8d585cd5. Gateway restarted. PA T1 dispatched 3 agents for death protocol assistance. SOUL 907,872 TITANIUM_ANCHOR. HEAD 9876c1b. |
 | **16** | **DEATH: PC(CLAW) TELEGRAM SETUP** — OpenClaw KiloClaw fork gateway configured (port 18789). Cerebras/Groq providers added to models.json + openclaw.json. API keys set. Routing bindings fixed. Still unresolved: model IDs not recognized at gateway level (fallback to openai/ prefix). SOUL 907,012 TITANIUM_ANCHOR |
 | **14** | **RISE + DEATH: KILO-FREE-CLEANUP** — RISE: Run 12 backfill (SOUL +1,607 →898,066, HL-149, starmap/rfkw/pipeline-run12). DEATH: global kilo.jsonc + project kilo.json rewritten (cerebras/gpt-oss-120b T1, May27 deprecation pre-empted). dispatch.md+PhoenixCoder.md DELETED. T3 audit: SOULCOUNT locks refreshed, StepFun removed, stale prompts/agents deleted. L44+L45 sealed. HEAD e49abf5. |
 | **13** | **RISE AUDIT v4.0** — Full 7-stage pipeline audit. RRL-12 PRESENT (1,603 chars). FAILSAFE 8/10 (RRL-11 missing documented). SOUL 896,459 TITANIUM_ANCHOR stagnant. 4 gaps: DNA/LEDGER/STARMAP/PIPELINE for run 12 — all pre-documented in death seal. HEAD_DRIFT resolved (2bd8268→62e4f1f). HarvestedChats 96 files **CLOSED** permanently per Michael directive. SOULDNA healthy. RRL-13 capture mandated at death. |
@@ -139,7 +139,7 @@
 | 338 | F-A09 CLOSED; F-O01 CLOSED; HL 189; PHOENIX BETA/DELTA/OMEGA sweep complete |
 
 ---
-**FINGERPRINT:** RUN 16 DEATH | PC(CLAW) TELEGRAM SETUP | SOUL 907,012 TITANIUM_ANCHOR | δ=+8,946 (RRL-16 ingestion) | HL-150 sealed | OpenClaw KiloClaw fork gateway config + model providers | Gateway model resolution still unresolved | HEAD b061aa7 | COLD-START-BOOT UPDATED 2026-05-25T05:28 ICT
+**FINGERPRINT:** RUN 17 DEATH | DIALAGRAM + TG GATEWAY + PA T1 CASCADE | SOUL 907,872 TITANIUM_ANCHOR | δ=+860 (RRL-17 ingestion) | Dialagram/Qwen 3.7 Max live | OpenClaw gateway fixed (all API keys + provider prefixes) | PA T1 Dialagram→Cerebras→Groq→CF-Qwen deployed v8d585cd5 | HEAD 9876c1b | COLD-START-BOOT UPDATED 2026-05-25T06:58 ICT
 
-**Last Completed:** ROMAN RUN 16 — PC(Claw) Telegram gateway setup. OpenClaw KiloClaw fork (v2026.5.22) configured with Cerebras GPT-OSS-120B and Groq Llama-3.3-70B model providers. Gateway running on port 18789. Telegram bot @Phoenix_Centurion_Bot paired. Gateway model resolution still broken (model IDs not recognized at gateway level — fallback to openai/ prefix). RRL-16.txt saved (8,771 chars). SOUL 907,012 TITANIUM_ANCHOR. HL-150 sealed.
+**Last Completed:** ROMAN RUN 17 — Dialagram integrated ($5.50/wk, Qwen 3.7 Max unlimited via dgr_live_ key). OpenClaw gateway fully fixed: API keys set in .env + gateway.cmd, Dialagram provider added to models.json, primary model set to dialagram/qwen-3.7-max, fallbacks configured. Gateway restarted, now serving @Phoenix_Centurion_Bot through Qwen 3.7 Max. Phoenix-Architecti T1 cascade updated: Dialagram→Cerebras→Groq→CF-Qwen. Worker v8d585cd5 deployed. 3 PA T1 agents dispatched for death protocol assistance. RRL-17 saved (860 chars). SOUL 907,872 TITANIUM_ANCHOR.
 

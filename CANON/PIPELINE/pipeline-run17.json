@@ -1,0 +1,25 @@
+{
+  "run_number": 17,
+  "executed_at": "2026-05-25T06:58:15+07:00",
+  "rrl_path": "RRL/RRL-17.txt",
+  "rrl_chars": 860,
+  "soul_event_id": "d8bde21f-26a7-4e69-b572-2e0bb7a476a8",
+  "soulcount": 907872,
+  "dna_count": 0,
+  "ledger_written": 0,
+  "starmap_file": "CANON/STARMAP/starmap-run17.txt",
+  "keyword_file": "CANON/SOUL-KEYWORDS/inverted-index.json",
+  "pipeline_file": "CANON/PIPELINE/pipeline-run17.json",
+  "seal_sha": "",
+  "result": "COMPLETE",
+  "summary": "9/11 stages (RRL→SOUL→LEDGER→STARMAP→KEYWORD→PIPELINE→DEATH SEAL→COLD-START-BOOT→COMMIT)",
+  "notes": "Run 17: Dialagram integration, TG gateway fix, PA T1 cascade update. 3 PA Qwen agents dispatched for parallel death protocol assistance.",
+  "head_sha": "9876c1b",
+  "changes": [
+    "openclaw.json: primary→dialagram/qwen-3.7-max",
+    "gateway.cmd: DIALAGRAM_API_KEY added",
+    "models.json: Dialagram provider with Qwen 3.7 Max/Thinking",
+    "PA src/index.js: T1 Dialagram→Cerebras→Groq→CF-Qwen",
+    "set-pa-secrets.ps1: DIALAGRAM/CEREBRAS/GROQ keys added"
+  ]
+}
