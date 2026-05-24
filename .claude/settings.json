@@ -40,7 +40,9 @@
       "PowerShell(wmic logicaldisk get caption,size,freespace,drivetype)",
       "PowerShell(Get-ChildItem \"D:\\\\OB-1-CANONICAL\\\\minh-clips\" | Select-Object Name, @{N='KB';E={[math]::Round\\($_.Length/1KB,0\\)}})",
       "PowerShell(Get-ChildItem \"$env:APPDATA\\\\kilo\",\"$env:USERPROFILE\\\\.kilo\",\"$env:USERPROFILE\\\\.config\\\\kilo\" -ErrorAction SilentlyContinue | Select-Object FullName)",
-      "PowerShell(pwsh -File \"D:\\\\OB-1-CANONICAL\\\\SCRIPTS\\\\rrl-pipeline.ps1\" -RRLFile \"D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-12.txt\" -RunNumber \"12\")"
+      "PowerShell(pwsh -File \"D:\\\\OB-1-CANONICAL\\\\SCRIPTS\\\\rrl-pipeline.ps1\" -RRLFile \"D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-12.txt\" -RunNumber \"12\")",
+      "PowerShell(New-Item -ItemType Directory -Force \"C:\\\\Users\\\\mrmic\\\\.config\\\\kilo\")",
+      "PowerShell(Copy-Item \"D:\\\\OB-1-CANONICAL\\\\OPERATIONS\\\\kilo-global-config-backup.jsonc\" \"C:\\\\Users\\\\mrmic\\\\.config\\\\kilo\\\\kilo.jsonc\")"
     ],
     "additionalDirectories": [
       "D:\\PROJECTS\\phoenix-coder",
