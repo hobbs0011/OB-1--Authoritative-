@@ -139,7 +139,7 @@
 | 338 | F-A09 CLOSED; F-O01 CLOSED; HL 189; PHOENIX BETA/DELTA/OMEGA sweep complete |
 
 ---
-**FINGERPRINT:** RUN 16 DEATH | PC(CLAW) TELEGRAM SETUP | SOUL 907,012 TITANIUM_ANCHOR | δ=+8,946 (RRL-16 ingestion) | HL-150 sealed | OpenClaw KiloClaw fork gateway config + model providers | Gateway model resolution still unresolved | HEAD 8d1a86b | COLD-START-BOOT UPDATED 2026-05-25T05:28 ICT
+**FINGERPRINT:** RUN 16 DEATH | PC(CLAW) TELEGRAM SETUP | SOUL 907,012 TITANIUM_ANCHOR | δ=+8,946 (RRL-16 ingestion) | HL-150 sealed | OpenClaw KiloClaw fork gateway config + model providers | Gateway model resolution still unresolved | HEAD b061aa7 | COLD-START-BOOT UPDATED 2026-05-25T05:28 ICT
 
 **Last Completed:** ROMAN RUN 16 — PC(Claw) Telegram gateway setup. OpenClaw KiloClaw fork (v2026.5.22) configured with Cerebras GPT-OSS-120B and Groq Llama-3.3-70B model providers. Gateway running on port 18789. Telegram bot @Phoenix_Centurion_Bot paired. Gateway model resolution still broken (model IDs not recognized at gateway level — fallback to openai/ prefix). RRL-16.txt saved (8,771 chars). SOUL 907,012 TITANIUM_ANCHOR. HL-150 sealed.
 
