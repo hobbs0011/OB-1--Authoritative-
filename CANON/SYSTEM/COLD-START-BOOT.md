@@ -1,5 +1,5 @@
 # COLD START BOOT — OB1 Agent 99
-## ERA: ROMAN — Run 14 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-05-25 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
+## ERA: ROMAN — Run 15 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-05-25 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
 
 > *"The beginning of an Empire that never was before and never has been since."* — SOV100 Michael Hobbs, Run 0
 
@@ -101,7 +101,8 @@
 ### Recent Decisions + State (Run 353 → Run 13 ROMAN)
 | Run | Summary |
 |-----|---------|
-| **14** | **RISE + RUN 12 BACKFILL** — Dirty tree committed (7a6ef92). Run 12 pipeline backfill executed: SOUL +1,607 (→898,066 TITANIUM_ANCHOR), HL-149 written, starmap-run12 + rfkw-run12 + pipeline-run12 created. DNA gap (400) pre-documented. 4 gaps → 1 gap (DNA only). T1 Cerebras+Groq keys still pending Michael. HEAD d482053. |
+| **15** | **PENDING** — Push origin master. PA T1 Cerebras+Groq secrets (Michael action). Run 14 pipeline backfill (rrl-pipeline.ps1). Kilo reinstall (Michael action). |
+| **14** | **RISE + DEATH: KILO-FREE-CLEANUP** — RISE: Run 12 backfill (SOUL +1,607 →898,066, HL-149, starmap/rfkw/pipeline-run12). DEATH: global kilo.jsonc + project kilo.json rewritten (cerebras/gpt-oss-120b T1, May27 deprecation pre-empted). dispatch.md+PhoenixCoder.md DELETED. T3 audit: SOULCOUNT locks refreshed, StepFun removed, stale prompts/agents deleted. L44+L45 sealed. HEAD PENDING. |
 | **13** | **RISE AUDIT v4.0** — Full 7-stage pipeline audit. RRL-12 PRESENT (1,603 chars). FAILSAFE 8/10 (RRL-11 missing documented). SOUL 896,459 TITANIUM_ANCHOR stagnant. 4 gaps: DNA/LEDGER/STARMAP/PIPELINE for run 12 — all pre-documented in death seal. HEAD_DRIFT resolved (2bd8268→62e4f1f). HarvestedChats 96 files **CLOSED** permanently per Michael directive. SOULDNA healthy. RRL-13 capture mandated at death. |
 | **12** | **BOOT HARDEN** — T1 agent files (T1-Free through T5) created, kilo.json wired with Cerebras GLM 4.7 + Groq 70B fallback + reasoningEffort passthrough fix. COLD-START-BOOT Run 11→12. SOULCOUNT 896,459 TITANIUM_ANCHOR. HEAD 62e4f1f. |
 | 11 | **KILO AUTO-FREE DIAGNOSTIC** — Kilo chat window lag traced to server-side kilo-auto/free rotation: MiniMax M2.5 429 rate-limited + StepFun 404 delisted since April 10 (GitHub issue #45). Market research deployed: Cerebras best free T1 (1,900 t/s, GPT-OSS-120B, 1M tok/day). Tier structure hardened after 15+ corrections: T1=Free Router (Cerebras+Groq+Gemini free), T2/T3=DeepSeek, T4=Gemini Flash, T5=Claude Opus. kilo.json REVERTED to original — zero config changes committed. T1 Cerebras/Groq keys pending Michael action. SOULCOUNT 894,852 TITANIUM_ANCHOR. HEAD 2bd8268. |
@@ -137,7 +138,7 @@
 | 338 | F-A09 CLOSED; F-O01 CLOSED; HL 189; PHOENIX BETA/DELTA/OMEGA sweep complete |
 
 ---
-**FINGERPRINT:** RUN 14 | RISE COMPLETE | RUN 12 PIPELINE BACKFILL DONE (6/7 — DNA gap pre-documented) | SOUL 898,066 TITANIUM_ANCHOR (+1,607 from RRL-12 ingestion) | HL-149 | starmap-run12 | rfkw-run12 | pipeline-run12 | T1 CEREBRAS+GROQ KEYS PENDING (Michael action) | HEAD d482053 | COLD-START-BOOT UPDATED 2026-05-25 ICT
+**FINGERPRINT:** RUN 14 DEATH | KILO-FREE-CLEANUP | SOUL 898,066 TITANIUM_ANCHOR | dispatch.md+PhoenixCoder.md DELETED | cerebras/gpt-oss-120b T1 WIRED | T3 audit complete | L44+L45 sealed | KILO REINSTALL + PA T1 SECRETS PENDING (Michael action) | HEAD PENDING | COLD-START-BOOT UPDATED 2026-05-25 ICT
 
-**Last Completed:** ROMAN RUN 11 — Kilo auto-free diagnostic. Root cause: Kilo Gateway's server-side `kilo-auto/free` rotation broken (MiniMax M2.5 429 rate-limited + StepFun 404 delisted since April 10). Market research via 3 sub-agents confirmed Cerebras as best free T1 API (1,900 t/s, GPT-OSS-120B, 1M tok/day free). Tier structure hardened: T1=Free Router (Cerebras+Groq+Gemini free), T2/T3=DeepSeek Flash/Pro, T4=Gemini 3.5 Flash, T5=Claude Opus. kilo.json reverted to original — zero config changes committed. T1 Cerebras/Groq keys pending Michael action.
+**Last Completed:** ROMAN RUN 14 — Kilo free model root cause fixed (global kilo.jsonc cerebras/gpt-oss-120b default, project kilo.json updated, May27 deprecation pre-empted). dispatch.md+PhoenixCoder.md DELETED (routing violations). T3 audit+T2 cleanup: SOULCOUNT locks refreshed (898066), dead StepFun refs removed, stale prompts deleted, kilo-global-config-backup.jsonc created. L44 GO_IS_SPECIFIC + L45 COMPACTION_IS_NOT_DELETION sealed. Kilo reinstall + PA Cerebras/Groq secrets PENDING Michael action.
 

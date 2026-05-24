@@ -1,17 +1,4 @@
 {
-  "hooks": {
-    "Stop": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "pwsh -File \"D:\\OB-1-CANONICAL\\SCRIPTS\\session-capture.ps1\""
-          }
-        ]
-      }
-    ]
-  },
   "permissions": {
     "allow": [
       "Bash(npx *)",
@@ -52,11 +39,27 @@
       "PowerShell(Get-Volume C,D | Select-Object DriveLetter, @{N='Used\\(GB\\)';E={[math]::Round\\(\\($_.Size - $_.SizeRemaining\\)/1GB,1\\)}}, @{N='Free\\(GB\\)';E={[math]::Round\\($_.SizeRemaining/1GB,1\\)}}, @{N='Total\\(GB\\)';E={[math]::Round\\($_.Size/1GB,1\\)}})",
       "PowerShell(wmic logicaldisk get caption,size,freespace,drivetype)",
       "PowerShell(Get-ChildItem \"D:\\\\OB-1-CANONICAL\\\\minh-clips\" | Select-Object Name, @{N='KB';E={[math]::Round\\($_.Length/1KB,0\\)}})",
-      "PowerShell(Get-ChildItem \"$env:APPDATA\\\\kilo\",\"$env:USERPROFILE\\\\.kilo\",\"$env:USERPROFILE\\\\.config\\\\kilo\" -ErrorAction SilentlyContinue | Select-Object FullName)"
+      "PowerShell(Get-ChildItem \"$env:APPDATA\\\\kilo\",\"$env:USERPROFILE\\\\.kilo\",\"$env:USERPROFILE\\\\.config\\\\kilo\" -ErrorAction SilentlyContinue | Select-Object FullName)",
+      "PowerShell(pwsh -File \"D:\\\\OB-1-CANONICAL\\\\SCRIPTS\\\\rrl-pipeline.ps1\" -RRLFile \"D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-12.txt\" -RunNumber \"12\")"
     ],
     "additionalDirectories": [
       "D:\\PROJECTS\\phoenix-coder",
-      "C:\\Users\\mrmic\\Downloads\\Telegram Desktop"
+      "C:\\Users\\mrmic\\Downloads\\Telegram Desktop",
+      "C:\\Users\\mrmic\\.config\\kilo",
+      "D:\\OB-1-CANONICAL\\.claude\\commands"
+    ]
+  },
+  "hooks": {
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "pwsh -File \"D:\\OB-1-CANONICAL\\SCRIPTS\\session-capture.ps1\""
+          }
+        ]
+      }
     ]
   }
 }
