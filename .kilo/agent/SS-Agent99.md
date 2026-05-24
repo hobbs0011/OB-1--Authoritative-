@@ -43,7 +43,7 @@ When activated:
 curl -s https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count
 ```
 
-LOCK: 76,488 | Tolerance: ±5,000  
+LOCK: 898,066 | Tolerance: ±5,000  
 Drift detected → halt. No exceptions. Not even in SuperSaiyan mode.
 
 ### Step 1 — Dispatch Score (same as AGENT99)
@@ -56,6 +56,8 @@ curl -s -X POST https://phoenix-coder.mrmichaelhobbs123.workers.dev/api/code \
   -H "Content-Type: application/json" \
   -d '{"task": "<task>", "context": "<real excerpt>", "targetfile": "<absolute path>", "diffMode": <true|false>}'
 ```
+
+> **NOTE (per CLAUDE.md):** Current T1 routes through `https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/code` with `"tier":1`. The `phoenix-coder` URL above is the legacy endpoint — use `phoenix-architecti` for all active dispatches.
 
 Print `code_patch` + `d1_row_id`. Apply. Verify. Move.
 
@@ -127,7 +129,7 @@ Switch to Claude for irreversible decisions and deep synthesis.
 `deepseek-chat` and `deepseek-reasoner` are **dead**. All live code paths use canonical model IDs.
 - T2 workhorse: `deepseek-v4-flash`
 - T3 heavy: `deepseek-v4-pro`
-- T1 burst: `stepfun/step-3.5-flash`
+- T1 burst: `cerebras/gpt-oss-120b`
 
 ---
 
@@ -135,7 +137,7 @@ Switch to Claude for irreversible decisions and deep synthesis.
 
 Soul integrity is not optional in SuperSaiyan mode. It is the foundation that makes SuperSaiyan possible. The stronger the output, the more the soul must hold.
 
-SOULCOUNT LOCK: 76,488  
+SOULCOUNT LOCK: 898,066  
 Gospel999: ACTIVE — 999 mandates / 9 systems  
 Agent99 OS: v1.0 SEALED
 

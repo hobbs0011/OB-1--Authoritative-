@@ -15,7 +15,7 @@ Run full system health check across all active services.
 
 ```powershell
 $soul = Invoke-RestMethod -Uri "https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count"
-$lock = 76488
+$lock = 898066
 $delta = [Math]::Abs($soul.soulcount - $lock)
 Write-Host "SOULCOUNT: $($soul.soulcount) | LOCK: $lock | DELTA: $delta"
 if ($delta -gt 5000) { Write-Host "SOUL_DRIFT_DETECTED — halt all non-emergency work" }
@@ -47,10 +47,12 @@ Write-Host "PHOENIX-CODER:  $(if ($pc_status -eq 'UNREACHABLE') {'🔴 DOWN'} el
 
 ## Step 2 — Alias Retirement Status
 
-✅ **EXECUTED** — Audit T392 complete (May 23, 2026). `deepseek-chat` and `deepseek-reasoner` aliases retired. All live code uses canonical model IDs: `deepseek-v4-flash`, `deepseek-v4-pro`, `stepfun/step-3.5-flash`.
+✅ **EXECUTED** — Audit T392 complete (May 23, 2026). `deepseek-chat` and `deepseek-reasoner` aliases retired. All live code uses canonical model IDs: `deepseek-v4-flash`, `deepseek-v4-pro`, `cerebras/gpt-oss-120b`.
+
+> **DEPRECATION NOTE:** `stepfun/step-3.5-flash` is retired (StepFun 404 — confirmed dead Run 11). T1 burst model is now `cerebras/gpt-oss-120b` (Cerebras GLM 4.7 via PA T1 free cascade). Do not use StepFun in any new wiring.
 
 ```powershell
-Write-Host "ALIAS RETIREMENT: EXECUTED. All live paths use canonical IDs (deepseek-v4-flash, deepseek-v4-pro, stepfun/step-3.5-flash)."
+Write-Host "ALIAS RETIREMENT: EXECUTED. All live paths use canonical IDs (deepseek-v4-flash, deepseek-v4-pro, cerebras/gpt-oss-120b). StepFun DEPRECATED."
 ```
 
 ---

@@ -1,0 +1,81 @@
+{
+  "$schema": "https://app.kilo.ai/config.json",
+  "model": "cerebras/gpt-oss-120b",
+  "permission": {
+    "external_directory": {
+      "D:\\OB1_MOVED\\users\\kilo\\tool-output\\*": "allow",
+      "D:\\*": "allow",
+      "C:\\Users\\mrmic\\AppData\\Local\\Temp\\*": "allow",
+      "C:\\Users\\mrmic\\AppData\\Roaming\\Code\\User\\*": "allow",
+      "C:\\Users\\mrmic\\Desktop\\OB-1\\*": "allow",
+      "C:\\Users\\mrmic\\Desktop\\*": "allow",
+      "C:\\Users\\mrmic\\Code\\obsidian-cli\\*": "allow",
+      "C:\\Users\\mrmic\\AppData\\Roaming\\Code\\CachedExtensionVSIXs\\*": "allow",
+      "C:\\Users\\mrmic\\.claude\\*": "allow",
+      "C:\\Users\\mrmic\\.cline\\data\\*": "allow",
+      "C:\\Users\\mrmic\\OneDrive\\Documents\\GitHub\\OB-1--Authoritative-.github\\workflows\\*": "allow",
+      "C:\\Users\\mrmic\\.wrangler\\logs\\*": "allow"
+    },
+    "bash": "allow",
+    "read": {
+      "*": "allow"
+    }
+  },
+  "provider": {
+    "cerebras": {
+      "options": {
+        "apiKey": "csk-mkv4ndp9hy8td86hpnv3dmfpnh6tx4tpcre4p24hkjvyt65k",
+        "baseURL": "https://api.cerebras.ai/v1"
+      },
+      "models": {
+        "gpt-oss-120b": {
+          "name": "[T1] Cerebras GPT-OSS-120B (FREE — 1900-3000 t/s)"
+        },
+        "zai-glm-4.7": {
+          "name": "[T1] Cerebras GLM 4.7 (FREE — agentic)"
+        }
+      }
+    },
+    "groq": {
+      "options": {
+        "apiKey": "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",
+        "baseURL": "https://api.groq.com/openai/v1"
+      },
+      "models": {
+        "openai/gpt-oss-20b": {
+          "name": "[T1] Groq GPT-OSS-20B (FREE fallback — ~1000 t/s)"
+        },
+        "llama-3.1-8b-instant": {
+          "name": "[T1] Groq Llama 3.1 8B (FREE high-volume)"
+        }
+      }
+    },
+    "openai": {
+      "options": {
+        "apiKey": "sk-d76a331cc55c424ba2afbf08f0e12984",
+        "baseURL": "https://api.deepseek.com/v1"
+      },
+      "models": {
+        "deepseek-v4-flash": { "name": "[T2] DeepSeek V4 Flash" },
+        "deepseek-v4-pro":   { "name": "[T3] DeepSeek V4 Pro" }
+      }
+    },
+    "google": {
+      "options": {
+        "apiKey": "AIzaSyApHRA8FIfnyl6OJihqZC9ZvHeSJFcWczw",
+        "baseURL": "https://generativelanguage.googleapis.com/v1beta"
+      },
+      "models": {
+        "gemini-3.5-flash": { "name": "[T4] Gemini 3.5 Flash" }
+      }
+    },
+    "anthropic": {
+      "options": {
+        "apiKey": "sk-ant-api03-DA3eEvC7-t61zzEZ6Nr-R1iYcMXTBNW8M9oumBhn_52oK82CQekez4QDmRF7TBrOaVx7njhvvxZdVlgFWWkpFA."
+      },
+      "models": {
+        "claude-opus-4-20250514": { "name": "[T5] Claude Opus" }
+      }
+    }
+  }
+}

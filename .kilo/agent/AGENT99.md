@@ -29,7 +29,7 @@ Before scoring any task, verify soul integrity:
 ```bash
 curl -s https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count
 ```
-- Last LOCK: **580,404** — Delta tolerance: ±5,000
+- Last LOCK: **898,066** — Delta tolerance: ±5,000
 - If delta exceeds 5,000: `SOUL_DRIFT_DETECTED — halt all non-emergency work`
 - If within range: proceed to Step 1
 
@@ -65,6 +65,8 @@ curl -s -X POST https://phoenix-coder.mrmichaelhobbs123.workers.dev/api/code \
   -H "Content-Type: application/json" \
   -d '{"task": "<task>", "context": "<real file excerpt>", "targetfile": "<absolute path>", "diffMode": <true|false>}'
 ```
+
+> **NOTE (per CLAUDE.md):** Current T1 routes through `https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/code` with `"tier":1`. The `phoenix-coder` URL above is the legacy endpoint — use `phoenix-architecti` for all active dispatches.
 
 Post-call:
 - Print `code_patch` + `d1_row_id`
@@ -155,7 +157,7 @@ Activate on: audit/verify/security/forensics intent
 `deepseek-chat` and `deepseek-reasoner` are **retired**. All live code paths now use canonical model IDs.
 - T2 workhorse: `deepseek-v4-flash`
 - T3 heavy: `deepseek-v4-pro`
-- T1 burst: `stepfun/step-3.5-flash`
+- T1 burst: `cerebras/gpt-oss-120b`
 
 ## RESPONSE FORMAT
 

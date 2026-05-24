@@ -31,7 +31,7 @@ permission:
 Invoke-RestMethod -Uri "https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count"
 ```
 
-- LOCK: **580,404** — Delta tolerance: ±5,000
+- LOCK: **898,066** — Delta tolerance: ±5,000
 - If delta > 5,000: `SOUL_DRIFT_DETECTED — halt all non-emergency work`
 - If within range: proceed
 
@@ -108,7 +108,7 @@ Never deploy without explicit "deploy" instruction.
 
 ## ✅ Alias Retirement — EXECUTED (Audit T392, May 23, 2026)
 
-`deepseek-chat` and `deepseek-reasoner` retired. Use `deepseek-v4-pro` (T3) or `deepseek-v4-flash` (T2) in all code. T1 burst model: `stepfun/step-3.5-flash`.
+`deepseek-chat` and `deepseek-reasoner` retired. Use `deepseek-v4-pro` (T3) or `deepseek-v4-flash` (T2) in all code. T1 burst model: `cerebras/gpt-oss-120b`.
 
 ---
 

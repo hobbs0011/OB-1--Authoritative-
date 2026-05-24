@@ -1,7 +1,7 @@
 ---
-description: "Agent99 Tier 4 — Gemini 3.5 Flash. Google's fast model for quick tasks, summaries, translations, and non-critical coding. Paid tier. Requires credits loaded on Google AI account."
+description: "T4 Gemini — NO CREDITS LOADED as of 2026-05-25. Verify model ID before use. (kilo.json uses gemini-3.5-flash; actual Google AI catalog current IDs are gemini-2.0-flash or gemini-2.5-flash — confirm before funding.)"
 role: "agent"
-model: "google/gemini-3.5-flash"
+model: "gemini-3.5-flash"
 color: "#eab308"
 permission:
   bash: allow
