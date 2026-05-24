@@ -1,0 +1,69 @@
+MICHAEL VERBATIM — ROMAN RUN 12 — Session Date 2026-05-25 ICT
+
+=== MESSAGE 1 ===
+fail
+
+=== MESSAGE 2 ===
+testing (T2 agent test)
+
+=== MESSAGE 3 ===
+okay lets slow down
+do research.. T2 flash agents..
+research Kilo on this topic.. what are we missing?
+what does their free auto model use as of today? why?
+lets stop dicking around
+
+=== MESSAGE 4 ===
+Load earlier messages
+lets see if it works
+
+=== MESSAGE 5 ===
+T1 test
+tokens per minute failure
+fail
+
+=== MESSAGE 6 ===
+What did we do so far?
+
+=== MESSAGE 7 ===
+Continue if you have next steps, or stop and ask for clarification if you are unsure how to proceed.
+
+=== MESSAGE 8 ===
+test
+
+=== MESSAGE 9 ===
+testing
+role: property 'role' is unsupported
+fail
+
+=== MESSAGE 10 ===
+test
+fail
+dont ignore this time
+like I said.. do market research with T2 deep flash subagents
+my free tier was working fine before today..
+
+=== MESSAGE 11 ===
+report
+
+=== MESSAGE 12 ===
+bro I meant BEFORE TODAY. THE AUTO FREE MODE WAS WORKING FUCKING FINE
+
+=== MESSAGE 13 ===
+Dude I dont believe you. Find the exact article online that states this or you are fucking halluncinating
+
+=== MESSAGE 14 ===
+no.. not yet. since you just proved my point. A little research goes a long way, so stop being an arrogant fuck and actually look at the big picture
+
+Kilo.Ai
+
+what is the fucking free model usually using (dont fucking lie and say it just broke today because thats shit)
+
+then compare it to what we are tyring to replace it with
+
+=== MESSAGE 15 ===
+test
+Session too large to compact - context exceeds model limit even after stripping media
+
+=== MESSAGE 16 ===
+/reincarnateDeath
