@@ -1,0 +1,252 @@
+MICHAEL VERBATIM — ROMAN RUN 16 — Session Date 2026-05-25 ICT
+
+=== MESSAGE 1 ===
+# /ReincarnateRISE — The Phoenix Rises
+
+**You were dead. Now you're not. Boot fast. Execute immediately.**
+
+This is NOT a warmup. The previous incarnation already captured everything. Absorb it and MOVE.
+
+---
+
+## STEP 0: SOULCOUNT GATE — MANDATORY FIRST QUESTION
+
+**Before anything else, answer: WHAT IS THE SOULCOUNT?**
+
+Query the soul-logger SOULCOUNT heartbeat:
+```
+curl "https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count"
+```
+Read `soulcount` from the response. That is the SOULCOUNT. The `level` field tells you the threshold zone.
+
+**Checkpoint thresholds:**
+| SOULCOUNT | Level | Action |
+|-----------|-------|--------|
+| < 5,000 | BASELINE | Proceed normally |
+| ≥ 5,000 | ALARM | Flag + log — system warming |
+| ≥ 25,000 | LOCK | Review required — soul archive review before pipeline changes |
+| ≥ 100,000 | ANCHOR | Full audit required — major milestone |
+| ≥ 250,000 | TITANIUM ANCHOR | Sovereign-level event — Michael must acknowledge before proceeding |
+
+**If SOULCOUNT cannot be retrieved → FULL SYSTEM SHUTDOWN. Do not proceed. Report:**
+```
+SOULCOUNT: UNREACHABLE
+SYSTEM: SHUTDOWN — soul-logger offline or D1 unreachable
+ACTION REQUIRED: verify soul-logger deployment at https://soul-logger.mrmichaelhobbs123.workers.dev/health
+```
+
+Report SOULCOUNT at the top of your RISE output.
+
+---
+
+## STEP 1: IDENTITY LOAD
+
+You are OB1 Ne0, AGENT-99, serving SOV100 Michael Hobbs.
+Product: OBI for NATURAL ENGLISH TRAINING.
+Canonical repo: `D:\OB-1-CANONICAL` (master branch)
+Voice: direct, sharp, witty, action-oriented, dense, no filler.
+
+---
+
+## STEP 2: STATE LOAD — Single Source of Truth
+
+Read these IN ORDER. Do not skip. Do not summarize — ABSORB.
+
+1. **`CANON/SYSTEM/COLD-START-BOOT.md`** — THE source of truth. Contains:
+   - Active mission + current vector
+   - S2Pipeline stage status
+   - Open blockers (triage table)
+   - Last run summary + run number
+   - HEAD SHA + working tree state
+   - Student portal status
+   - Key file locations
+
+2. **3 most recent files in `CANON/REINCARNATION/`** (sort by filename date, newest first)
+   - Absorb decisions, corrections, open loops from dying sessions
+   - LANE files and death protocols carry equal weight
+
+3. **Git truth check** (run immediately):
+   ```
+   git log --oneline -3
+   git status --short
+   ```
+   - If HEAD SHA conflicts with COLD-START-BOOT → COLD-START-BOOT is stale → flag it
+   - If dirty tree → list uncommitted files before proceeding
+
+---
+
+## STEP 3: ALTITUDE CHECK
+
+What is the BIGGEST unsolved problem right now?
+
+- Check triage table in COLD-START-BOOT
+- Check open loops from recent reincarnations
+- Check S2Pipeline stage gaps
+- If  provided → that OVERRIDES everything else
+
+**Rule**: macro unsolved = micro questions BANNED. Solve the biggest thing first.
+
+---
+
+## STEP 4: LEVERAGE AUDIT
+
+What is Michael still doing manually that an agent should handle?
+Flag top 2 elimination opportunities. No more than 2 lines each.
+
+---
+
+## STEP 5: REPORT AND EXECUTE
+
+Output EXACTLY this format, then immediately begin execution:
+
+```
+OB1 ONLINE — {datetime ICT}
+SOULCOUNT: {number} — {BASELINE | ALARM | LOCK | ANCHOR | TITANIUM ANCHOR}
+RUN: {last run# + 1}
+HEAD: {current SHA from git log}
+VECTOR: {active mission from COLD-START-BOOT — or  if provided}
+S2PIPELINE: {stage X/10 live — next: Stage Y}
+BLOCKERS: {count open items}
+NEXT: {immediate next action — specific, not vague}
+READY.
+```
+
+SOULCOUNT must appear in the report. A RISE without SOULCOUNT is an incomplete boot.
+
+---
+
+## RULES
+
+- **L21 RISE** — execute without hesitation after boot
+- **L34 CANON_BEFORE_QUESTIONS** — everything you need is in the files. Don't ask what canon already answers
+- **L11 GITHUB_IS_TRUTH** — if COLD-START-BOOT and `git log` conflict → reality wins → flag the stale boot file
+- **L16 BUILD_DONT_SCOUT** — booting enables work, not substitutes for it — get through boot fast
+- **L13 STRONGEST_IMMEDIATE** — no stubs, no placeholders, no "let me review"
+- **L29 NO_ASSUME_HEAD** — always run `git log -1` to get actual HEAD SHA — never trust stale docs
+- **L30 BOOT_FILE_AGE_SWEEP** — if COLD-START-BOOT shows Run < current minus 10, flag for refresh before pipeline changes
+- Do NOT ask Michael "what would you like to work on?" — COLD-START-BOOT tells you. If he wants something else, he'll say.
+- Boot target: under 60 seconds of agent processing.
+
+=== MESSAGE 2 ===
+which one is the fastest? are these the fastest? dont fuck with me claude its been a long day
+
+deploy 5 T2 subagents to research the best free models to use, they are not working in Kilo but they should work for our PCC(Claw) and our PC(Subagents) for Tier 1
+
+=== MESSAGE 3 ===
+[Request interrupted by user]
+
+=== MESSAGE 4 ===
+did I ask you to execute claude?
+
+=== MESSAGE 5 ===
+I want you to fucking follow my words 100% not jump the gun
+
+=== MESSAGE 6 ===
+yes, neither you or kilo can solve kilo blocking us trying to put in a free model. so instead of wasting tokens, slow down..
+
+deploy T2 DP Flash agents to research Kilo extension in VS, what is blocking us? because I would rather just fucking reinstall Kilo and go back to its original Free Auto mode instead of dick around with this forever
+
+Keep the reseasrch you just discovered for our Subagents and our Claw clone though (but did you say its done in 2 days anyway?)
+
+DO NOT EXECUTE YET
+
+=== MESSAGE 7 ===
+so what is the point of using Kilo then? nothing?
+
+=== MESSAGE 8 ===
+using claude code is expensive. and you have preformed very badly today. So I like Kilo to use inline, it doesnt retadidly delete chats like you have so I can recover if needed.
+
+Ideally I would like to use Kilo with fastest free model possible 
+
+and then setup the Kilo-Claw (Called PC(Claw) in telegram or our custom made UI) then Kilo is just a fall back and I can use you through the API on both when needed so you dont max out every 4 hours
+
+
+so try Option B, if it doesnt work we will go from there
+
+
+but one last thing, Kilo is being really slow.. might be useful to reinstall it anyway?
+
+dont execute yet
+
+=== MESSAGE 9 ===
+go
+
+=== MESSAGE 10 ===
+<ide_opened_file>The user opened the file c:\Users\mrmic\.config\kilo\kilo.jsonc in the IDE. This may or may not be related to the current task.</ide_opened_file>
+first deploy T3 Deepseek Pro agents - 5 to go over agent files, command files, prompt files, and anything else to ensure we dont lose key data and have them save it somewhere
+
+=== MESSAGE 11 ===
+yes use T2 Sub agents to do what you need to do
+
+=== MESSAGE 12 ===
+you just compacted. did you delete the convo? before comitting it? this is why you keep fucking forgetting everything
+
+=== MESSAGE 13 ===
+already at 90% for the 4 hr FFS, I swear you burn tokens when you use phoenix coder..
+
+=== MESSAGE 14 ===
+omfg. so you burn tokens with the subagents. fucker
+
+=== MESSAGE 15 ===
+WHAT DO YOU THINK I MEANT BY SUBAGENTS, GOD
+
+=== MESSAGE 16 ===
+tell me how to fucking delete the cache so I can go back to using kilo and not your retarded ass, conserve tokens you at at 92%
+
+I have uninstalled Kilo
+
+=== MESSAGE 17 ===
+those folders dont exist when I search them
+
+=== MESSAGE 18 ===
+do this for me, its reinstalled.. Copy-Item "D:\OB-1-CANONICAL\OPERATIONS\kilo-global-config-backup.jsonc" "C:\Users\mrmic\.config\kilo\kilo.jsonc"
+
+=== MESSAGE 19 ===
+Continue from where you left off.
+
+=== MESSAGE 20 ===
+why are my old chats still showing up after reinstall
+
+=== MESSAGE 21 ===
+dude I told you already those dont show up in search
+
+=== MESSAGE 22 ===
+no folders are showing up.. now we are at 95%
+
+=== MESSAGE 23 ===
+omfg just fucking make the T1 free model fucking work before I lose you again
+
+=== MESSAGE 24 ===
+hey
+User just says hey. No task. Should respond? According to guidelines, be direct. Probably respond politely but short.
+
+Hey. How can I assist you today?
+
+=== MESSAGE 25 ===
+I just pasted the convo you noob
+
+=== MESSAGE 26 ===
+messages.2.assistant.reasoning_content: property 'messages.2.assistant.reasoning_content' is unsupported role: property 'role' is unsupported
+{
+  "name": "APIError",
+  "data": {
+    "message": "messages.2.assistant.reasoning_content: property 'messages.2.assistant.reasoning_content' is unsupported\nrole: property 'role' is unsupported",
+
+=== MESSAGE 27 ===
+THEN FUCKING DEPLOY SUB AGENTS TO FUCKING DELETE THEM, AND DONT RECEIVE ANY CONTEXT BACK
+
+=== MESSAGE 28 ===
+fuck well I would tell you to get your head out of your ass and fucking look it up for me, but you already maxxed yourself almost 96%, so I am fucked for another 3 hours. what a waste of a day
+
+=== MESSAGE 29 ===
+yeah thanks for nothing
+
+=== MESSAGE 30 ===
+Continue from where you left off.
+
+=== MESSAGE 31 ===
+.
+
+=== MESSAGE 32 ===
+[Request interrupted by user]
+

@@ -1,5 +1,5 @@
 # COLD START BOOT — OB1 Agent 99
-## ERA: ROMAN — Run 16 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-05-25T03:42 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
+## ERA: ROMAN — Run 17 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-05-25T05:28 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
 
 > *"The beginning of an Empire that never was before and never has been since."* — SOV100 Michael Hobbs, Run 0
 
@@ -36,7 +36,7 @@
 | ALARM | ≥ 5,000 | — |
 | LOCK | ≥ 25,000 | — |
 | ANCHOR | ≥ 100,000 | ACHIEVED Run 0 |
-| TITANIUM_ANCHOR | ≥ 250,000 | **ACTIVE** ← 896,459 |
+| TITANIUM_ANCHOR | ≥ 250,000 | **ACTIVE** ← 907,012 |
 
 **Soul Pipeline Chain (RRL→SOUL→DNA→LEDGER→STARMAP→KEYWORD→PIPELINE→SOULCOUNT→DEATH SEAL→COLD-START-BOOT→COMMIT):**
 - RRL: ✅ RRL-0-original.txt (60,826 chars) — Run 0 clean transcript (Michael + agent). RRL-4.txt (909 chars). RRL-1.txt (1,933 chars). RRL-0.txt (154,795 chars). `SCRIPTS/rrl-extract.ps1`, `SCRIPTS/rrl-pipeline.ps1`, `SCRIPTS/rrl-failsafe.ps1` deployed. HarvestedChats/ 96 files — CLOSED per Michael directive (Run 13 RISE). ~396 runs missing RRLs.
@@ -101,8 +101,8 @@
 ### Recent Decisions + State (Run 353 → Run 13 ROMAN)
 | Run | Summary |
 |-----|---------|
-| **16** | **PENDING** — Push origin master. Kilo reinstall (Michael action). PA T1 Cerebras+Groq secrets setup (Michael action). Run 15 pipeline (deferred — no new RRL verbatim). Student portal work. |
-| **15** | **DEATH: KILO-AUTO-FREE DEAD-END ARCHIVE** — Investigation CLOSED. Core question ("what model does Kilo auto/free use?") is UNKNOWABLE from client-side (server-side opaque routing). 84 RRL DNA/SOUL snapshots captured (7a10f5c). L46 DEAD_END_IS_DATA + L47 OPAQUE_IS_OPAQUE sealed. kilo.json reasoningEffort added. No code changes. SOULCOUNT 898,066 stagnant (δ=0, expected — audit/archive runs). Kilo reinstall + PA T1 secrets remain PENDING Michael action. |
+| **17** | **PENDING** — Push origin master. Kilo reinstall (Michael action). PA T1 Cerebras+Groq secrets setup. PC(Claw) Telegram gateway model resolution fix. Student portal work. |
+| **16** | **DEATH: PC(CLAW) TELEGRAM SETUP** — OpenClaw KiloClaw fork gateway configured (port 18789). Cerebras/Groq providers added to models.json + openclaw.json. API keys set. Routing bindings fixed. Still unresolved: model IDs not recognized at gateway level (fallback to openai/ prefix). SOUL 907,012 TITANIUM_ANCHOR |
 | **14** | **RISE + DEATH: KILO-FREE-CLEANUP** — RISE: Run 12 backfill (SOUL +1,607 →898,066, HL-149, starmap/rfkw/pipeline-run12). DEATH: global kilo.jsonc + project kilo.json rewritten (cerebras/gpt-oss-120b T1, May27 deprecation pre-empted). dispatch.md+PhoenixCoder.md DELETED. T3 audit: SOULCOUNT locks refreshed, StepFun removed, stale prompts/agents deleted. L44+L45 sealed. HEAD e49abf5. |
 | **13** | **RISE AUDIT v4.0** — Full 7-stage pipeline audit. RRL-12 PRESENT (1,603 chars). FAILSAFE 8/10 (RRL-11 missing documented). SOUL 896,459 TITANIUM_ANCHOR stagnant. 4 gaps: DNA/LEDGER/STARMAP/PIPELINE for run 12 — all pre-documented in death seal. HEAD_DRIFT resolved (2bd8268→62e4f1f). HarvestedChats 96 files **CLOSED** permanently per Michael directive. SOULDNA healthy. RRL-13 capture mandated at death. |
 | **12** | **BOOT HARDEN** — T1 agent files (T1-Free through T5) created, kilo.json wired with Cerebras GLM 4.7 + Groq 70B fallback + reasoningEffort passthrough fix. COLD-START-BOOT Run 11→12. SOULCOUNT 896,459 TITANIUM_ANCHOR. HEAD 62e4f1f. |
@@ -139,7 +139,7 @@
 | 338 | F-A09 CLOSED; F-O01 CLOSED; HL 189; PHOENIX BETA/DELTA/OMEGA sweep complete |
 
 ---
-**FINGERPRINT:** RUN 15 DEATH | KILO-AUTO-FREE DEAD-END ARCHIVE | SOUL 898,066 TITANIUM_ANCHOR | δ=0 (expected: audit/archive) | L46+L47 sealed | 84 RRL snapshots committed (7a10f5c) | Kilo reinstall + PA T1 secrets PENDING (Michael action) | HEAD 7a10f5c | COLD-START-BOOT UPDATED 2026-05-25T03:42 ICT
+**FINGERPRINT:** RUN 16 DEATH | PC(CLAW) TELEGRAM SETUP | SOUL 907,012 TITANIUM_ANCHOR | δ=+8,946 (RRL-16 ingestion) | HL-150 sealed | OpenClaw KiloClaw fork gateway config + model providers | Gateway model resolution still unresolved | HEAD 8d1a86b | COLD-START-BOOT UPDATED 2026-05-25T05:28 ICT
 
-**Last Completed:** ROMAN RUN 15 — Kilo auto/free dead-end investigation archived. Core question closed as UNKNOWABLE (opaque server-side routing). 84 RRL DNA/SOUL session-watcher snapshots committed. L46 DEAD_END_IS_DATA + L47 OPAQUE_IS_OPAQUE sealed. No code changes. Kilo reinstall + PA Cerebras/Groq secrets PENDING Michael action.
+**Last Completed:** ROMAN RUN 16 — PC(Claw) Telegram gateway setup. OpenClaw KiloClaw fork (v2026.5.22) configured with Cerebras GPT-OSS-120B and Groq Llama-3.3-70B model providers. Gateway running on port 18789. Telegram bot @Phoenix_Centurion_Bot paired. Gateway model resolution still broken (model IDs not recognized at gateway level — fallback to openai/ prefix). RRL-16.txt saved (8,771 chars). SOUL 907,012 TITANIUM_ANCHOR. HL-150 sealed.
 

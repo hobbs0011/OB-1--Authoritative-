@@ -1,0 +1,14 @@
+{
+  "run_number": 16,
+  "executed_at": "2026-05-25T05:28:55.2767427+07:00",
+  "rrl_path": "RRL/RRL-16.txt",
+  "rrl_chars": 8771,
+  "soul_event_id": "e284f173-ea73-456d-92e5-0a09ee84865e",
+  "hl_id": "HL-150",
+  "merkle_hash": "9829357ef6dc1a99bfbd070fb5cfd44fce0f752e1892bd0a741a9a80c51220d1",
+  "dna_status": "GAP — extract timeout",
+  "starmap_file": "CANON/STARMAP/starmap-run16.txt",
+  "keyword_file": "CANON/SOUL-KEYWORDS/rfkw-run16.txt",
+  "pipeline_file": "CANON/PIPELINE/pipeline-run16.json",
+  "result": "COMPLETE"
+}

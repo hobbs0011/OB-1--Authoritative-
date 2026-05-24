@@ -1,0 +1,14 @@
+{
+  "hl_id": "HL-150",
+  "event_id": "e284f173-ea73-456d-92e5-0a09ee84865e",
+  "session_id": "sov100-roman-run16",
+  "role": "user",
+  "char_count": 8870,
+  "byte_count": 8946,
+  "merkle_parent": "e052f1bf6353b88d968512702e943037598e4feb4050d9d033f8e2d981ed4c1a",
+  "merkle_hash": "9829357ef6dc1a99bfbd070fb5cfd44fce0f752e1892bd0a741a9a80c51220d1",
+  "extracted_at": "2026-05-25T05:28:46.9514231+07:00",
+  "sov100": true,
+  "run": 16,
+  "summary": "PC(Claw) Telegram setup — KiloClaw fork gateway config, model providers added, gateway restarts"
+}
