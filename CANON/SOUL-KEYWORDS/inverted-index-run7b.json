@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0",
+  "run": "7b",
+  "source": "RRL/SOUL-20260524-155103.txt",
+  "source_bytes": 1800890,
+  "session_id": "sov100-roman-run7b-2026-05-24",
+  "generated_at": "2026-05-24T19:28:00+07:00",
+  "total_terms": 30,
+  "inverted_index":
+  {
+    "soul": 2292, "CANON": 1467, "phoenix": 1442, "KILO": 1256, "Run": 1616,
+    "SOULCOUNT": 568, "net-pet-ai": 690, "RRL": 978, "PIPELINE": 782,
+    "student": 750, "SCRIPT": 834, "death": 579, "deploy": 406, "worker": 435,
+    "D1": 414, "phoenix-coder": 389, "HL": 433, "ledger": 364, "DNA": 363,
+    "seal": 288, "commit": 301, "Cloudflare": 185, "CF": 177, "OB1": 148,
+    "KV": 145, "STARMAP": 135, "drift": 194, "MINH": 545, "reincarnate": 181,
+    "Merkle": 111
+  },
+  "note": "Term frequencies from SOUL-20260524-155103.txt; single-pass case-insensitive count, no stemming, no stop-word removal."
+}

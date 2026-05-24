@@ -1,0 +1,5 @@
+SESSION MARKER — Auto-captured by session-capture.ps1
+Timestamp: 2026-05-24T07:43:02Z
+Session ID: sov100-claude-session-20260524-144302
+HEAD: a1cf551 feat(run7): PCC fixes, DRIFT boot protocol, stop hook, Run390 conserve
+NOTE: Full conversation must be copy-pasted by operator into this file as RRL.

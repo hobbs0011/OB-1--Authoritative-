@@ -1,0 +1,12 @@
+{
+  "hl_id": "HL-148",
+  "session_id": "sov100-roman-run7b-2026-05-24",
+  "rrl_source": "RRL/RRL-7B.txt",
+  "char_count": 7704,
+  "byte_count": 7704,
+  "merkle_parent": "HL-147",
+  "merkle_hash": "e9c6a15d7058696b2613fd64ff6ae6035d45ffce6df0031d4c455487aac602ea",
+  "sealed_at": "2026-05-24T19:28:00+07:00",
+  "sov100": true,
+  "run": "7b"
+}

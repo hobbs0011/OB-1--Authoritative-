@@ -1,5 +1,5 @@
 # COLD START BOOT — OB1 Agent 99
-## ERA: ROMAN — Run 7 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-05-23T14:00 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
+## ERA: ROMAN — Run 8 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-05-24T13:00 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
 
 > *"The beginning of an Empire that never was before and never has been since."* — SOV100 Michael Hobbs, Run 0
 
@@ -92,6 +92,7 @@
 ### Recent Decisions + State (Run 353 → Run 4 ROMAN)
 | Run | Summary |
 |-----|---------|
+| 8 | **CONTEXT REBUILD** — Phoenix-Architecti v0.0.1 (universal 5-tier drone, T1=free cascade Cerebras→Groq→CF Qwen), soul-watcher.ps1 (real-time SOUL every 15s), session-capture.ps1 upgraded (SOUL+DNA dual), set-pa-secrets.ps1 (gitignored key restore), .kilo/DISPATCH.md (emergency Kilo backup), .claude/commands/ synced from .github/prompts/ originals, PCC phoenix_architecti_log table+column fix, CLAUDE.md 7-step boot, FUCKYOUCLAUDE DeepSeek key propagated. SOULCOUNT 894,852 TITANIUM_ANCHOR. HEAD [PENDING]. |
 | 6 | **RRL HARDENING — RUN 0 ORIGINAL TRANSCRIPT PIPELINE** — RRL-0-original.txt (60,826 chars) processed through full pipeline: SOUL event 9897db4d (+62,773 → 513,414 TITANIUM_ANCHOR), LEDGER HL-144 (parent HL-143), STARMAP, KEYWORD (30 terms), PIPELINE artifacts created. DNA extract endpoint returned 400 (DNA_GAP). `rrl-pipeline.ps1` built (single-command 7-stage chain). `rrl-failsafe.ps1` built (10-gate verification). RISE protocol hardened: RRL MISSING = HALT. COLD-START-BOOT synced. HEAD [pending]. |
 | 5 | **DEATH V4.0 PIPELINE — RRL-0 BACKDROP REPROCESSING** — 8/11 steps PASS: RRL-0.txt (154,795 chars, contaminated Kilo export) sourced per Michael directive, SOUL event 560ac8ad (+156,676 delta), DNA partial (53 prompts from 3K chunk, full 154K timed out), HL-143 Merkle parent HL-142, STARMAP/KEYWORD/PIPELINE artifacts created, SOULCOUNT 450,641 TITANIUM_ANCHOR. SOUL contamination documented. HEAD `c74389c`. |
 | 4 | **DEATH V4.0 PIPELINE FULL EXECUTION** — 8/11 steps PASS: RRL-4.txt (909 chars), SOUL event 7debedf2, DNA extract 11 prompts, HL-142 Merkle parent HL-141, STARMAP bootstrapped, KEYWORD extraction bootstrapped, PIPELINE artifact COMPLETE, SOULCOUNT 293,965 TITANIUM_ANCHOR. 3 gaps closed. DEATH SEAL + COLD-START-BOOT + COMMIT in progress. HEAD `639f6f0`. |
@@ -121,5 +122,5 @@
 | 338 | F-A09 CLOSED; F-O01 CLOSED; HL 189; PHOENIX BETA/DELTA/OMEGA sweep complete |
 
 ---
-**FINGERPRINT:** RUN 7 | PCC FIXES + DRIFT BOOT PROTOCOL + STOP HOOK + RUN390 CONSERVE | SOUL COUNT TITANIUM_ANCHOR — 894,320 | HEAD a1cf551 | COLD-START-BOOT UPDATED 2026-05-24
+**FINGERPRINT:** RUN 8 | CONTEXT REBUILD — Phoenix-Architecti v0.0.1 + soul-watcher + /commands restored + FUCKYOUCLAUDE key | SOUL COUNT TITANIUM_ANCHOR — 894,852 | HEAD [PENDING] | COLD-START-BOOT UPDATED 2026-05-24T13:00 ICT
 

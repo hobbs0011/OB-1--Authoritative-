@@ -1,0 +1,5 @@
+SESSION MARKER — Auto-captured by session-capture.ps1
+Timestamp: 2026-05-24T08:25:38Z
+Session ID: sov100-claude-session-20260524-152538
+HEAD: 74812b9 fix(phoenix-coder): deploy fixed code to existing worker, DeepSeek first in cascade
+NOTE: Full conversation must be copy-pasted by operator into this file as RRL.

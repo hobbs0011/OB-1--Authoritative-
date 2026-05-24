@@ -1,0 +1,5 @@
+SESSION MARKER — Auto-captured by session-capture.ps1
+Timestamp: 2026-05-24T08:04:27Z
+Session ID: sov100-claude-session-20260524-150427
+HEAD: 7ae0d28 context(run7b): full session rebuild ΓÇö all state, open tasks, security constraints, Minh portal, CF live state
+NOTE: Full conversation must be copy-pasted by operator into this file as RRL.

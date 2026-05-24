@@ -1,0 +1,5 @@
+SESSION MARKER — Auto-captured by session-capture.ps1
+Timestamp: 2026-05-24T07:35:42Z
+Session ID: sov100-claude-session-20260524-143542
+HEAD: 1b289d5 feat(minh-portal): V0 complete ΓÇö audio clips, teddy artwork, points 40/100, session timeline, diarize STT; deploy PCC empire dashboard
+NOTE: Full conversation must be copy-pasted by operator into this file as RRL.

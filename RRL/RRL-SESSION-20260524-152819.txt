@@ -1,0 +1,5 @@
+SESSION MARKER — Auto-captured by session-capture.ps1
+Timestamp: 2026-05-24T08:28:19Z
+Session ID: sov100-claude-session-20260524-152819
+HEAD: 432eddf feat(phoenix-architecti): v0 ΓÇö 5-tier universal drone, CF AI Gateway, raw output
+NOTE: Full conversation must be copy-pasted by operator into this file as RRL.

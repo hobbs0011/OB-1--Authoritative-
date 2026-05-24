@@ -1,0 +1,5 @@
+SESSION MARKER — Auto-captured by session-capture.ps1
+Timestamp: 2026-05-24T08:35:06Z
+Session ID: sov100-claude-session-20260524-153506
+HEAD: 2dfe911 fix(phoenix-architecti): correct model IDs, all 5 tier keys live on phoenix-coder
+NOTE: Full conversation must be copy-pasted by operator into this file as RRL.

@@ -1,0 +1,5 @@
+SESSION MARKER — Auto-captured by session-capture.ps1
+Timestamp: 2026-05-24T08:13:44Z
+Session ID: sov100-claude-session-20260524-151344
+HEAD: b818dc5 fix(phoenix-architecti): source in repo, phoenix_architecti_log table, strip fences, raw output
+NOTE: Full conversation must be copy-pasted by operator into this file as RRL.
