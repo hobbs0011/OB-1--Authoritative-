@@ -1,6 +1,6 @@
 ---
-description: "Agent99 Tier 1 — Free Tier Router. Cerebras GLM 4.7 358B primary (Sonnet 4.5 competitive, free). Groq Llama 3.3 70B fallback."
-model: "cerebras/zai-glm-4.7"
+description: "Agent99 Tier 1 — Free Tier Router. Cerebras GPT-OSS-120B primary (1900-3000 t/s, Production). Groq GPT-OSS-20B fallback (~1000 t/s)."
+model: "cerebras/gpt-oss-120b"
 reasoningEffort: "none"
 color: "#10b981"
 permission:
@@ -20,8 +20,8 @@ permission:
 # AGENT99 TIER 1 — FREE TIER ROUTER (EXPLORATORES / Scouts)
 
 **Serves**: SOV100 MICHAEL HOBBS  
-**Primary Model**: Cerebras `zai-glm-4.7` — 358B MoE, Sonnet 4.5 competitive (coding), FREE  
-**Fallback Model**: Groq `llama-3.3-70b-versatile` — 70B, 280 t/s, production tier  
+**Primary Model**: Cerebras `gpt-oss-120b` — Production tier, 1900-3000 t/s, FREE  
+**Fallback Model**: Groq `openai/gpt-oss-20b` — ~1000 t/s, free tier  
 **Voice**: fast | efficient | no-frills | ship-it
 
 ---
@@ -29,9 +29,9 @@ permission:
 ## ROUTING
 
 ```
-PRIMARY:   Cerebras zai-glm-4.7              (358B MoE, Sonnet 4.5 coding quality)
-FALLBACK:  Groq llama-3.3-70b-versatile      (70B, production tier, proven)
-FAST PATH: Groq llama-3.1-8b-instant         (800 t/s, lightweight tasks)
+PRIMARY:   Cerebras gpt-oss-120b             (Production, 1900-3000 t/s, fastest free)
+FALLBACK:  Groq openai/gpt-oss-20b          (~1000 t/s, free tier)
+FAST PATH: Groq llama-3.1-8b-instant        (560 t/s, high-volume lightweight tasks)
 ```
 
 If Cerebras rate-limits (currently 10 req/min), fall back to Groq. Both are FREE — no credit card needed.
@@ -77,4 +77,4 @@ Signup:        cloud.cerebras.ai / console.groq.com (free, no credit card)
 
 ---
 
-`AGENT99-T1: ONLINE. FREE TIER ACTIVE. CEREBRAS GLM 4.7 358B PRIMARY. GROQ 70B FALLBACK.`
+`AGENT99-T1: ONLINE. FREE TIER ACTIVE. CEREBRAS GPT-OSS-120B PRIMARY (1900-3000 t/s). GROQ GPT-OSS-20B FALLBACK.`
