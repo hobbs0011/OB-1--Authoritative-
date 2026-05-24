@@ -1,8 +1,8 @@
 {
-  "git_branch": "master",
-  "soul_ok": false,
-  "timestamp": "2026-05-24T23:54:01.6245751+07:00",
   "verify_ok": true,
-  "git_head": "c378b7e death: Kilo-side seal ΓÇö Run 10 complete, Claude unretarded, cleanup-c-drive.ps1 deleted",
+  "git_branch": "master",
+  "git_head": "2bd8268 death: ROMAN RUN 11 ΓÇö Kilo auto-free diagnosed, both slots dead (MiniMax 429 + StepFun 404), T1 plan Cerebras+Groq keys pending, T2-T5 untouched, kilo.json reverted to original",
+  "timestamp": "2026-05-25T01:33:57.1791079+07:00",
+  "soul_ok": true,
   "doctor_ok": true
 }

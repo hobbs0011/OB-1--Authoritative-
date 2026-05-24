@@ -238,5 +238,85 @@
     "sessions": 1,
     "level": "TITANIUM_ANCHOR",
     "stagnation": true
+  },
+  {
+    "timestamp": "2026-05-25T00:22:02+07:00",
+    "count": 894852,
+    "events": 657,
+    "sessions": 1,
+    "level": "TITANIUM_ANCHOR",
+    "stagnation": true
+  },
+  {
+    "timestamp": "2026-05-25T00:34:34+07:00",
+    "count": 894852,
+    "events": 657,
+    "sessions": 1,
+    "level": "TITANIUM_ANCHOR",
+    "stagnation": true
+  },
+  {
+    "timestamp": "2026-05-25T00:38:34+07:00",
+    "count": 894852,
+    "events": 657,
+    "sessions": 1,
+    "level": "TITANIUM_ANCHOR",
+    "stagnation": true
+  },
+  {
+    "timestamp": "2026-05-25T00:48:51+07:00",
+    "count": 894852,
+    "events": 657,
+    "sessions": 1,
+    "level": "TITANIUM_ANCHOR",
+    "stagnation": true
+  },
+  {
+    "timestamp": "2026-05-25T00:55:59+07:00",
+    "count": 894852,
+    "events": 657,
+    "sessions": 1,
+    "level": "TITANIUM_ANCHOR",
+    "stagnation": true
+  },
+  {
+    "timestamp": "2026-05-25T01:02:13+07:00",
+    "count": 894852,
+    "events": 657,
+    "sessions": 1,
+    "level": "TITANIUM_ANCHOR",
+    "stagnation": true
+  },
+  {
+    "timestamp": "2026-05-25T01:09:52+07:00",
+    "count": 894852,
+    "events": 657,
+    "sessions": 1,
+    "level": "TITANIUM_ANCHOR",
+    "stagnation": true
+  },
+  {
+    "timestamp": "2026-05-25T01:19:27+07:00",
+    "count": 894852,
+    "events": 657,
+    "sessions": 1,
+    "level": "TITANIUM_ANCHOR",
+    "stagnation": true
+  },
+  {
+    "timestamp": "2026-05-25T01:31:55+07:00",
+    "count": 896459,
+    "events": 658,
+    "sessions": 1,
+    "level": "TITANIUM_ANCHOR",
+    "stagnation": false
+  },
+  {
+    "timestamp": "2026-05-25T01:33:56+07:00",
+    "count": 896459,
+    "events": 658,
+    "sessions": 1,
+    "level": "TITANIUM_ANCHOR",
+    "stagnation": false
   }
 ]

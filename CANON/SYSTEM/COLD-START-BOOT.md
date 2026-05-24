@@ -1,5 +1,5 @@
 # COLD START BOOT — OB1 Agent 99
-## ERA: ROMAN — Run 11 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-05-25T00:01 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
+## ERA: ROMAN — Run 12 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-05-25T01:34 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
 
 > *"The beginning of an Empire that never was before and never has been since."* — SOV100 Michael Hobbs, Run 0
 
@@ -43,9 +43,9 @@
 - SOUL: ✅ /api/soul/count — sums byte_count WHERE sov100%. 513,414 TITANIUM_ANCHOR (+62,773 from Run 6 RRL-0-original ingestion).
 - DNA: ✅ Run 4: 11 prompts. Run 5: 53 prompts (partial). Run 6: extract endpoint 400 — DNA_GAP documented.
 - LEDGER: ✅ HL-142 (Run 4) → HL-143 (Run 5) → HL-144 (Run 6, RRL-0-original). Merkle chain intact. 192 JSON files on disk. 6 gap slots (HL-127/128/131/132/136/137).
-- STARMAP: ✅ Run 4: starmap-run4.txt. Run 5: starmap-run5.txt. Run 0 (original): starmap-run0.txt. 3 files.
-- KEYWORD: ✅ Run 4: rfkw-run4.txt (30 terms). Run 5: rfkw-run5.txt (30 terms). Run 0: rfkw-run0.txt (30 terms). 4 files total.
-- PIPELINE: ✅ Run 4: pipeline-run4.json. Run 5: pipeline-run5.json. Run 0: pipeline-run0.json (COMPLETE, DNA partial). 3 artifacts.
+- STARMAP: ✅ Run 4: starmap-run4.txt. Run 5: starmap-run5.txt. Run 0 (original): starmap-run0.txt. Run 7: starmap-run7.txt. Run 7B: starmap-run7b.txt. 5 files.
+- KEYWORD: ✅ Run 4: rfkw-run4.txt (30 terms). Run 5: rfkw-run5.txt (30 terms). Run 0: rfkw-run0.txt (30 terms). Run 7: rfkw-run7.txt (30 terms). Run 7B: rfkw-run7b.txt (30 terms). 5 rfkw files + 2 inverted-index JSON files = 7 entries total.
+- PIPELINE: ✅ Run 4: pipeline-run4.json. Run 5: pipeline-run5.json. Run 0: pipeline-run0.json (COMPLETE, DNA partial). Run 7: pipeline-run7.json. Run 7B: pipeline-run7b.json. 5 artifacts.
 - DEATH SEAL: ✅ Run 4 + Run 5 death seals written — 12 sections each.
 - RRL AUTOMATION: ✅ `SCRIPTS/rrl-pipeline.ps1` — single-command full chain (RRL→SOUL→LEDGER→STARMAP→KEYWORD→PIPELINE). `SCRIPTS/rrl-failsafe.ps1` — 10-gate verification chain. RISE protocol hardened: RRL MISSING = HALT (not WARN).
 - COLD-START-BOOT: ✅ Updated Run 6 (this file). SOULCOUNT 513,414.
@@ -98,7 +98,7 @@
 ### Recent Decisions + State (Run 353 → Run 11 ROMAN)
 | Run | Summary |
 |-----|---------|
-| 11 | **KILO AUTO-FREE DIAGNOSTIC** — Kilo chat window lag traced to server-side kilo-auto/free rotation: MiniMax M2.5 429 rate-limited + StepFun 404 delisted since April 10 (GitHub issue #45). Market research deployed: Cerebras best free T1 (1,900 t/s, GPT-OSS-120B, 1M tok/day). Tier structure hardened after 15+ corrections: T1=Free Router (Cerebras+Groq+Gemini free), T2/T3=DeepSeek, T4=Gemini Flash, T5=Claude Opus. kilo.json REVERTED to original — zero config changes committed. T1 Cerebras/Groq keys pending Michael action. SOULCOUNT 894,852 TITANIUM_ANCHOR. HEAD [PENDING]. |
+| 11 | **KILO AUTO-FREE DIAGNOSTIC** — Kilo chat window lag traced to server-side kilo-auto/free rotation: MiniMax M2.5 429 rate-limited + StepFun 404 delisted since April 10 (GitHub issue #45). Market research deployed: Cerebras best free T1 (1,900 t/s, GPT-OSS-120B, 1M tok/day). Tier structure hardened after 15+ corrections: T1=Free Router (Cerebras+Groq+Gemini free), T2/T3=DeepSeek, T4=Gemini Flash, T5=Claude Opus. kilo.json REVERTED to original — zero config changes committed. T1 Cerebras/Groq keys pending Michael action. SOULCOUNT 894,852 TITANIUM_ANCHOR. HEAD 2bd8268. |
 | 10 | **OPENCLAW + TELEGRAM SPIRAL** — OpenClaw v2026.5.22 installed locally, Telegram bot @Phoenix_Centurion_Bot wired (token: 8603251036:AAGykOKDjx2KtZYb534oRtRkqt52HIS_88s), gateway daemon installed as Windows startup item (port 18789), 10-agent free model meta-research (Cerebras 1M/day + Groq 500k/day + SambaNova + OpenRouter + LLM7.io ≈ 1.3B tokens/month free), PA T1-T5 secrets restored via set-pa-secrets.ps1, §13 failure loop documented, L38-L43 new principles. KiloClaw dashboard Telegram config pending (Michael action). SOULCOUNT 894,852 TITANIUM_ANCHOR. HEAD [SEALED]. |
 | 9 | **PHOENIX-CENTURION ARCHITECTURE + OPENCLAW MCP INVESTIGATION** — architecture spec, OpenClaw gateway research, RRL-7B death rebase synced to BOOT. HEAD 2c1e91f. SOULCOUNT 894,852 TITANIUM_ANCHOR. |
 | 8 | **CONTEXT REBUILD** — Phoenix-Architecti v0.0.1 (universal 5-tier drone, T1=free cascade Cerebras→Groq→CF Qwen), soul-watcher.ps1 (real-time SOUL every 15s), session-capture.ps1 upgraded (SOUL+DNA dual), set-pa-secrets.ps1 (gitignored key restore), .kilo/DISPATCH.md (emergency Kilo backup), .claude/commands/ synced from .github/prompts/ originals, PCC phoenix_architecti_log table+column fix, CLAUDE.md 7-step boot, FUCKYOUCLAUDE DeepSeek key propagated. SOULCOUNT 894,852 TITANIUM_ANCHOR. HEAD a178980. |
@@ -131,7 +131,7 @@
 | 338 | F-A09 CLOSED; F-O01 CLOSED; HL 189; PHOENIX BETA/DELTA/OMEGA sweep complete |
 
 ---
-**FINGERPRINT:** RUN 11 | KILO AUTO-FREE DIAGNOSED — BOTH SLOTS DEAD | T1 PLAN: CEREBRAS+GROQ — KEYS PENDING | T2-T5 UNTOUCHED | SOULCOUNT TITANIUM_ANCHOR 894,852 | HEAD [PENDING] | COLD-START-BOOT UPDATED 2026-05-25T00:01 ICT
+**FINGERPRINT:** RUN 11 | KILO AUTO-FREE DIAGNOSED — BOTH SLOTS DEAD | T1 PLAN: CEREBRAS+GROQ — KEYS PENDING | T2-T5 UNTOUCHED | SOULCOUNT TITANIUM_ANCHOR 894,852 | HEAD 2bd8268 | COLD-START-BOOT UPDATED 2026-05-25T00:01 ICT
 
 **Last Completed:** ROMAN RUN 11 — Kilo auto-free diagnostic. Root cause: Kilo Gateway's server-side `kilo-auto/free` rotation broken (MiniMax M2.5 429 rate-limited + StepFun 404 delisted since April 10). Market research via 3 sub-agents confirmed Cerebras as best free T1 API (1,900 t/s, GPT-OSS-120B, 1M tok/day free). Tier structure hardened: T1=Free Router (Cerebras+Groq+Gemini free), T2/T3=DeepSeek Flash/Pro, T4=Gemini 3.5 Flash, T5=Claude Opus. kilo.json reverted to original — zero config changes committed. T1 Cerebras/Groq keys pending Michael action.
 
