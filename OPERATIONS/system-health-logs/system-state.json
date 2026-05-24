@@ -1,8 +1,8 @@
 {
-  "verify_ok": true,
-  "git_head": "PENDING death: ROMAN RUN 10 — all pending artifacts + Claude memory fixes — SOULCOUNT 894,852 TITANIUM_ANCHOR",
-  "timestamp": "2026-05-24T23:05:00+07:00",
-  "doctor_ok": true,
   "git_branch": "master",
-  "soul_ok": true
+  "soul_ok": false,
+  "timestamp": "2026-05-24T23:54:01.6245751+07:00",
+  "verify_ok": true,
+  "git_head": "c378b7e death: Kilo-side seal ΓÇö Run 10 complete, Claude unretarded, cleanup-c-drive.ps1 deleted",
+  "doctor_ok": true
 }
