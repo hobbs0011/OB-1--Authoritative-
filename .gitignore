@@ -2,6 +2,7 @@
 .claude/settings.local.json
 
 # === SECRETS — NEVER PUSH ===
+SCRIPTS/set-pa-secrets.ps1
 API-SHHHH.txt
 API-SHHHH-2.txt
 API-MASTER.txt

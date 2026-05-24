@@ -41,7 +41,7 @@ async function callAnthropic(env, messages) {
       'anthropic-version': '2023-06-01',
       ...(env.CF_GATEWAY_TOKEN ? { 'cf-aig-authorization': 'Bearer ' + env.CF_GATEWAY_TOKEN } : {})
     },
-    body: JSON.stringify({ model: 'claude-opus-4-7', max_tokens: 8192, system: systemMsg, messages: userMsgs })
+    body: JSON.stringify({ model: 'claude-opus-4-20250514', max_tokens: 8192, system: systemMsg, messages: userMsgs })
   });
   if (!res.ok) throw new Error('Anthropic ' + res.status + ': ' + await res.text());
   const data = await res.json();
@@ -52,8 +52,8 @@ async function callAnthropic(env, messages) {
 async function callGemini(env, messages) {
   const combined = messages.map(m => m.content).join('\n\n');
   const url = env.AIGATEWAYURL
-    ? env.AIGATEWAYURL.replace(/\/$/, '') + '/google-ai-studio/v1/models/gemini-2.5-flash:generateContent?key=' + env.GEMINI_API_KEY
-    : 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=' + env.GEMINI_API_KEY;
+    ? env.AIGATEWAYURL.replace(/\/$/, '') + '/google-ai-studio/v1/models/gemini-3.5-flash:generateContent?key=' + env.GEMINI_API_KEY
+    : 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key=' + env.GEMINI_API_KEY;
   const res = await fetch(url, {
     method: 'POST',
     headers: {
@@ -75,12 +75,10 @@ async function callTier(env, tier, messages) {
   if (tier >= 5 && env.ANTHROPIC_API_KEY) return callAnthropic(env, messages);
   if (tier >= 4 && env.GEMINI_API_KEY) return callGemini(env, messages);
   if (tier >= 3 && env.DEEPSEEK_API_KEY) {
-    const url = gwBase ? gwBase + '/deepseek/chat/completions' : 'https://api.deepseek.com/chat/completions';
-    return callOpenAI(url, env.DEEPSEEK_API_KEY, 'deepseek-reasoner', messages, gwHeaders);
+    return callOpenAI('https://api.deepseek.com/v1/chat/completions', env.DEEPSEEK_API_KEY, 'deepseek-v4-pro', messages);
   }
   if (tier >= 2 && env.DEEPSEEK_API_KEY) {
-    const url = gwBase ? gwBase + '/deepseek/chat/completions' : 'https://api.deepseek.com/chat/completions';
-    return callOpenAI(url, env.DEEPSEEK_API_KEY, 'deepseek-chat', messages, gwHeaders);
+    return callOpenAI('https://api.deepseek.com/v1/chat/completions', env.DEEPSEEK_API_KEY, 'deepseek-v4-flash', messages);
   }
 
   // T1 — free cascade
@@ -177,10 +175,10 @@ async function handleStatus(env) {
     drone: 'phoenix-architecti', version: '0.0.1', status: 'LIVE',
     tiers: {
       t1: 'free — Cerebras→Groq→CF-Qwen',
-      t2: env.DEEPSEEK_API_KEY ? 'deepseek-chat ✓' : 'NO KEY',
-      t3: env.DEEPSEEK_API_KEY ? 'deepseek-reasoner ✓' : 'NO KEY',
-      t4: env.GEMINI_API_KEY ? 'gemini-2.5-flash ✓' : 'NO KEY',
-      t5: env.ANTHROPIC_API_KEY ? 'claude-opus-4-7 ✓' : 'NO KEY'
+      t2: env.DEEPSEEK_API_KEY ? 'deepseek-v4-flash ✓' : 'NO KEY',
+      t3: env.DEEPSEEK_API_KEY ? 'deepseek-v4-pro ✓' : 'NO KEY',
+      t4: env.GEMINI_API_KEY ? 'gemini-3.5-flash ✓' : 'NO KEY',
+      t5: env.ANTHROPIC_API_KEY ? 'claude-opus-4-20250514 ✓' : 'NO KEY'
     },
     gateway: env.AIGATEWAYURL ? 'CF AI Gateway ✓' : 'direct API',
     recenttasks: recent
