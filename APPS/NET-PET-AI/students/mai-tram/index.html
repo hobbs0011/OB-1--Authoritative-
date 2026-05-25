@@ -1,47 +1,103 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mai Tram â Intermediate English Training</title>
-<style>
-:root{--void:#0a0a12;--purple:#a855f7;--gold:#f59e0b;--teal:#14b8a6;--glass:rgba(255,255,255,0.05);--border:rgba(168,85,247,0.3)}
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--void);color:#e2e8f0;font-family:'Inter',sans-serif;min-height:100vh}
-nav{display:flex;gap:0;border-bottom:1px solid var(--border);overflow-x:auto}
-nav button{flex:1;padding:14px 8px;background:transparent;border:none;color:#94a3b8;font-size:13px;font-weight:600;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;transition:all .2s}
-nav button.active{color:var(--purple);border-bottom-color:var(--purple);background:var(--glass)}
-nav button:hover{color:var(--gold)}
-.tab-content{display:none;padding:24px 20px;max-width:800px;margin:0 auto}
-.tab-content.active{display:block}
-h1{font-family:'Orbitron',sans-serif;font-size:28px;color:var(--purple);margin-bottom:8px}
-h2{font-size:20px;color:var(--gold);margin:24px 0 12px}
-p{line-height:1.7;margin-bottom:12px;color:#cbd5e1}
-.card{background:var(--glass);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:16px}
-.card h3{color:var(--teal);margin-bottom:8px;font-size:16px}
-.vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px}
-.vocab-item{background:var(--glass);border:1px solid var(--border);border-radius:8px;padding:14px;text-align:center}
-.vocab-item .word{font-size:18px;font-weight:700;color:var(--purple)}
-.vocab-item .meaning{font-size:12px;color:#94a3b8;margin-top:4px}
-.progress-bar{height:8px;background:rgba(255,255,255,0.1);border-radius:4px;overflow:hidden;margin-top:8px}
-.progress-fill{height:100%;background:linear-gradient(90deg,var(--purple),var(--gold));border-radius:4px}
-.audio-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:var(--glass);border:1px solid var(--border);border-radius:8px;color:var(--purple);cursor:pointer;font-size:14px;margin:8px 0}
-.audio-btn:hover{background:rgba(168,85,247,0.15)}
-.badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:700;text-transform:uppercase}
-.badge-a2{background:rgba(20,184,166,0.2);color:var(--teal)}
-.stat-row{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.05)}
-.stat-label{color:#94a3b8;font-size:14px}
-.stat-value{color:var(--gold);font-weight:700}
-@media(max-width:600px){nav button{padding:12px 6px;font-size:11px}.tab-content{padding:16px 14px}h1{font-size:22px}}
-</style>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
-</head>
-<body>
-
-<nav>
-<button class="active" onclick="showTab('vocab')">Vocabulary</button>
-<button onclick="showTab('listening')">Listening</button>
-<button onclick="showTab('speaking')">Speaking</button>
-<button onclick="showTab('reading')">Reading</button>
-<button onclick="showTab('progress')">Progress</button>
-</nav>
+<div id="vocab" class="tab-content active">
+<h1>Vocabulary</h1>
+<h2>Common Phrases</h2>
+<p>Practice these phrases to improve your daily conversation skills.</p>
+<div class="vocab-grid">
+<div class="vocab-item">
+<div class="word">Hello</div>
+<div class="meaning">Xin chào</div>
+</div>
+<div class="vocab-item">
+<div class="word">Goodbye</div>
+<div class="meaning">Tạm biệt</div>
+</div>
+<div class="vocab-item">
+<div class="word">Thank you</div>
+<div class="meaning">Cảm ơn</div>
+</div>
+<div class="vocab-item">
+<div class="word">Please</div>
+<div class="meaning">Xin vui lòng</div>
+</div>
+<div class="vocab-item">
+<div class="word">Excuse me</div>
+<div class="meaning">Xin lỗi</div>
+</div>
+<div class="vocab-item">
+<div class="word">How are you?</div>
+<div class="meaning">Bạn khỏe không?</div>
+</div>
+<div class="vocab-item">
+<div class="word">I'm fine, thank you.</div>
+<div class="meaning">Tôi ổn, cảm ơn.</div>
+</div>
+<div class="vocab-item">
+<div class="word">What's your name?</div>
+<div class="meaning">Tên bạn là gì?</div>
+</div>
+<div class="vocab-item">
+<div class="word">My name is Mai Tram.</div>
+<div class="meaning">Tên tôi là Mai Tram.</div>
+</div>
+<div class="vocab-item">
+<div class="word">Where are you from?</div>
+<div class="meaning">Bạn đến từ đâu?</div>
+</div>
+<div class="vocab-item">
+<div class="word">I'm from Vietnam.</div>
+<div class="meaning">Tôi đến từ Việt Nam.</div>
+</div>
+<div class="vocab-item">
+<div class="word">Do you speak English?</div>
+<div class="meaning">Bạn nói tiếng Anh không?</div>
+</div>
+<div class="vocab-item">
+<div class="word">Yes, I do.</div>
+<div class="meaning">Vâng, tôi có.</div>
+</div>
+<div class="vocab-item">
+<div class="word">No, I don't.</div>
+<div class="meaning">Không, tôi không.</div>
+</div>
+<div class="vocab-item">
+<div class="word">Can you help me?</div>
+<div class="meaning">Bạn có thể giúp tôi được không?</div>
+</div>
+<div class="vocab-item">
+<div class="word">Of course, how can I assist you?</div>
+<div class="meaning">Tất nhiên, tôi có thể giúp gì cho bạn?</div>
+</div>
+</div>
+</div>
+<div id="listening" class="tab-content">
+<h1>Listening</h1>
+<h2>Short Conversations</h2>
+<p>Listen to these short conversations and answer the questions that follow.</p>
+<div class="card">
+<h3>Conversation 1</h3>
+<audio controls>
+<source src="conversation1.mp3" type="audio/mpeg">
+Your browser does not support the audio element.
+</audio>
+<p><strong>Question:</strong> Where is Mai Tram from?</p>
+<p><strong>Answer:</strong> Mai Tram is from Vietnam.</p>
+</div>
+<div class="card">
+<h3>Conversation 2</h3>
+<audio controls>
+<source src="conversation2.mp3" type="audio/mpeg">
+Your browser does not support the audio element.
+</audio>
+<p><strong>Question:</strong> What language does Mai Tram speak?</p>
+<p><strong>Answer:</strong> Mai Tram speaks Vietnamese and English.</p>
+</div>
+<div class="card">
+<h3>Conversation 3</h3>
+<audio controls>
+<source src="conversation3.mp3" type="audio/mpeg">
+Your browser does not support the audio element.
+</audio>
+<p><strong>Question:</strong> Can Mai Tram help you?</p>
+<p><strong>Answer:</strong> Yes, Mai Tram can help you.</p>
+</div>
+</div>
