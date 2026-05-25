@@ -1,5 +1,5 @@
-// PCC — Phoenix-Command-Consul
-// OB-1 Empire Dashboard — Cloudflare Worker
+// PCC â Phoenix-Command-Consul
+// OB-1 Empire Dashboard â Cloudflare Worker
 // Operator: mrmichaelhobbs123@gmail.com
 
 const SOUL_COLOR = '#a855f7';
@@ -52,6 +52,17 @@ async function queryPhoenixCoderLog(db) {
   try {
     const result = await db.prepare(
       'SELECT id, tasktype, taskinput, result, createdat FROM phoenix_architecti_log ORDER BY createdat DESC LIMIT 5'
+    ).all();
+    return result?.results ?? [];
+  } catch (e) {
+    return [];
+  }
+}
+
+async function queryMissionLogs(db) {
+  try {
+    const result = await db.prepare(
+      'SELECT id, mission_name, start_time, end_time, status FROM mission_logs ORDER BY start_time DESC LIMIT 5'
     ).all();
     return result?.results ?? [];
   } catch (e) {
@@ -122,8 +133,8 @@ function renderSoulPromptRows(rows) {
 function renderPCLogRows(rows) {
   if (!rows.length) return '<tr><td colspan="3" style="color:#555;text-align:center">no rows / table absent</td></tr>';
   return rows.map(r => {
-    const task = (r.taskinput ?? '').slice(0, 60) + ((r.taskinput ?? '').length > 60 ? '…' : '');
-    const res = (r.result ?? '').slice(0, 40) + ((r.result ?? '').length > 40 ? '…' : '');
+    const task = (r.taskinput ?? '').slice(0, 60) + ((r.taskinput ?? '').length > 60 ? 'â¦' : '');
+    const res = (r.result ?? '').slice(0, 40) + ((r.result ?? '').length > 40 ? 'â¦' : '');
     return `
     <tr>
       <td style="color:#888;font-size:11px">${r.id ?? ''}</td>
@@ -131,6 +142,17 @@ function renderPCLogRows(rows) {
       <td style="color:#555;font-size:11px">${res}</td>
     </tr>`;
   }).join('');
+}
+
+function renderMissionLogRows(rows) {
+  if (!rows.length) return '<tr><td colspan="4" style="color:#555;text-align:center">no missions</td></tr>';
+  return rows.map(r => `
+    <tr>
+      <td style="color:#888;font-size:11px">${r.id ?? ''}</td>
+      <td style="color:${DNA_COLOR};font-size:11px">${r.mission_name ?? ''}</td>
+      <td style="color:#555;font-size:11px">${r.start_time ?? ''}</td>
+      <td style="color:${r.end_time ?? '' === 'null' ? '#ef4444' : '#22c55e'};font-size:11px">${r.end_time ?? '' === 'null' ? 'RUNNING' : r.end_time}</td>
+    </tr>`).join('');
 }
 
 function renderPhoenixStatus(status) {
@@ -144,13 +166,13 @@ function renderPhoenixStatus(status) {
     <span style="color:#555;font-size:11px;margin-left:12px">${JSON.stringify(status).slice(0, 120)}</span>`;
 }
 
-function buildHTML(soulcount, tierLabel, soulRows, pcRows, phoenixStatus, netpetStatus, studentPortals, ts) {
+function buildHTML(soulcount, tierLabel, soulRows, pcRows, missionRows, phoenixStatus, netpetStatus, studentPortals, ts) {
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>PCC — Phoenix-Command-Consul</title>
+<title>PCC â Phoenix-Command-Consul</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: #0f0f0f; color: #e0e0e0; font-family: 'Courier New', Courier, monospace; padding: 24px; }
@@ -207,9 +229,23 @@ function buildHTML(soulcount, tierLabel, soulRows, pcRows, phoenixStatus, netpet
     </table>
   </div>
 
+  <!-- MISSION LOGS -->
+  <div class="card card-wide">
+    <h2>&#9670; Mission Logs â last 5</h2>
+    <table>
+      <thead><tr>
+        <th>ID</th>
+        <th>Mission Name</th>
+        <th>Start Time</th>
+        <th>Status</th>
+      </tr></thead>
+      <tbody>${renderMissionLogRows(missionRows)}</tbody>
+    </table>
+  </div>
+
   <!-- SOUL PROMPTS -->
   <div class="card card-wide">
-    <h2>&#9670; soul_prompts — last 5</h2>
+    <h2>&#9670; soul_prompts â last 5</h2>
     <table>
       <thead><tr>
         <th>session_id</th>
@@ -222,7 +258,7 @@ function buildHTML(soulcount, tierLabel, soulRows, pcRows, phoenixStatus, netpet
 
   <!-- PHOENIX CODER LOG -->
   <div class="card card-wide">
-    <h2>&#9670; phoenix_architecti_log — last 5</h2>
+    <h2>&#9670; phoenix_architecti_log â last 5</h2>
     <table>
       <thead><tr>
         <th>id</th>
@@ -274,17 +310,18 @@ export default {
     }
 
     if (url.pathname === '/') {
-      const [soulcount, soulRows, pcRows, phoenixStatus, netpetStatus, studentPortals] = await Promise.all([
+      const [soulcount, soulRows, pcRows, missionRows, phoenixStatus, netpetStatus, studentPortals] = await Promise.all([
         querySoulCount(env.DB),
         queryRecentSoulPrompts(env.DB),
         queryPhoenixCoderLog(env.DB),
+        queryMissionLogs(env.DB),
         fetchPhoenixStatus(),
         fetchNetPetStatus(),
         fetchStudentPortals(),
       ]);
 
       const tierLabel = getTierLabel(soulcount);
-      const html = buildHTML(soulcount, tierLabel, soulRows, pcRows, phoenixStatus, netpetStatus, studentPortals, ts);
+      const html = buildHTML(soulcount, tierLabel, soulRows, pcRows, missionRows, phoenixStatus, netpetStatus, studentPortals, ts);
       return new Response(html, {
         headers: { 'Content-Type': 'text/html; charset=utf-8' },
       });
