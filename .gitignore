@@ -101,3 +101,5 @@ _SORTED/AUDIO-STUDENTS/
 
 # === SYSTEM LOGS (local only) ===
 OPERATIONS/system-health-logs/
+
+.kilo/kilo.json

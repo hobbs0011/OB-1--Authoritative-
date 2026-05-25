@@ -28,11 +28,8 @@ PCC CONTEXT:
 $pccContext
 
 TIER DISPATCH:
-T1 : phoenix-coder tier=1 — Cerebras/Groq/CF-Qwen (FREE)
-T2 : phoenix-coder tier=2 — deepseek-v4-flash
-T3 : phoenix-coder tier=3 — deepseek-v4-pro
-T4 : phoenix-coder tier=4 — gemini-3.5-flash
-T5 : phoenix-coder tier=5 — claude-opus-4-20250514
+T1 : phoenix-architecti tier=1 — Dialagram Qwen 3.7 Max ($5.50/wk unlimited)
+T2 : phoenix-architecti tier=2 — Claude Opus 4.7 (final rulings only)
 Kilo: emergency fallback only
 
 SECURITY CONSTRAINTS:

@@ -57,7 +57,7 @@ CONTEXT:
 §3 DECISIONS
 ---
 1. OpenClaw installed locally (v2026.5.22) — Windows machine, gateway on port 18789 (not 3001 as initially assumed)
-2. Telegram bot @Phoenix_Centurion_Bot created — token: 8603251036:AAGykOKDjx2KtZYb534oRtRkqt52HIS_88s
+2. Telegram bot @Phoenix_Centurion_Bot created — token: [REDACTED-ROTATE-VIA-BOTFATHER]
 3. Phoenix_Centurion_Bot paired with local OpenClaw — approved, Michael set as owner/operator
 4. Local OpenClaw job = MCP bridge only. Telegram gateway should run on KiloClaw dashboard (Phoenix-Centurion VM)
 5. Free model for Telegram: kilo-auto/free (Minimax M2.5) → OpenRouter Kimi K2.5 → Google AI Studio → LLM7.io

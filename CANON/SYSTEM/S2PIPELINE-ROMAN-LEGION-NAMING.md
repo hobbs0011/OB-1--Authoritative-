@@ -185,11 +185,8 @@ Our S2Pipeline operates identically. Each stage has a non-negotiable station. No
 
 | Tier | Model | Roman Force | Pipeline Stage |
 |------|-------|-------------|----------------|
-| **T1** | `stepfun/step-3.5-flash` | *Exploratores* — fast, lightweight, high-volume scouting | RRL, RRL-SOUL |
-| **T2** | `deepseek-v4-flash` | *Antecores* — workhorse, clearing, validating | DNA, LEDGER |
-| **T3** | `deepseek-v4-pro` | *Agmen* — heavy analysis, surgical precision | SSM, SOULKEYWORDS, PHEROMONE |
-| **T4** | `gemini-3.5-flash` | *Agmen Novissimum* — verification, backup, defense | 6-AI TRUTH, SHADOW REALM |
-| **T5** | `claude-opus-4-20250514` | *Praesidia* — final rulings, consolidation, anchoring | MERKLE LATTICE, DO-SQLITE, APEX ROLLUP |
+| **T1** | `dialagram/qwen-3.7-max` | *Exploratores + Antecores + Agmen + Agmen Novissimum* — ALL pipeline stages, workhorse | RRL, SOUL, DNA, LEDGER, STARMAP, KEYWORD, PIPELINE |
+| **T2** | `claude-opus-4-7-20260514` | *Praesidia* — final rulings, irreversible decisions, arbitration | MERKLE LATTICE, DO-SQLITE, APEX ROLLUP |
 
 ---
 

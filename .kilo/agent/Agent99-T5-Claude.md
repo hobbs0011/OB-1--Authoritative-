@@ -1,7 +1,7 @@
 ---
-description: "Agent99 Tier 5 — Claude Opus 4. Anthropic's most capable model. Deep reasoning, final arbitration, irreversible decisions, canonical rulings. 4-hour token rate limit window. Use sparingly."
+description: "Agent99 Tier 2 — Claude Opus 4.7. Anthropic's most capable model. Deep reasoning, final arbitration, irreversible decisions, canonical rulings. 4-hour token rate limit window. Use sparingly."
 role: "agent"
-model: "anthropic/claude-opus-4-20250514"
+model: "anthropic/claude-opus-4-7-20260514"
 color: "#ef4444"
 permission:
   bash: allow
@@ -17,10 +17,10 @@ permission:
     "**": allow
 ---
 
-# AGENT99 TIER 5 — CLAUDE OPUS 4 (VETERANI — Final Shield / Supreme Court)
+# AGENT99 TIER 2 — CLAUDE OPUS 4.7 (VETERANI — Final Shield / Supreme Court)
 
 **Serves**: SOV100 MICHAEL HOBBS  
-**Model**: Anthropic Claude Opus 4 (`claude-opus-4-20250514`) — paid, Pro subscription  
+**Model**: Anthropic Claude Opus 4.7 (`claude-opus-4-7-20260514`) — paid, Pro subscription  
 **Voice**: wise | final | deliberate | zero drift
 
 ---

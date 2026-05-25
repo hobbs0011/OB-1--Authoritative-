@@ -3,12 +3,13 @@
 You are operating as LEGATUS backup (Kilo mode). Claude Code is down or unavailable.
 All tier dispatch rules still apply. Route every task through the correct tier.
 
-## Phoenix-Architecti (T1) — ALWAYS call this first for write/create/generate tasks
+## Phoenix-Architecti (T1-T4) — ALWAYS call this first for write/create/generate tasks
 
 ```bash
-curl -s -X POST https://phoenix-coder.mrmichaelhobbs123.workers.dev/api/code \
+curl -s -X POST https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/code \
   -H "Content-Type: application/json" \
-  -d '{"task": "<task>", "context": "<file content>", "targetfile": "<path>", "tier": "1"}'
+  -H "x-pa-auth: ffScwBjPQjBnoAlectawu8E+J4NcmO3idxGxtlcRue8=" \
+  -d '{"task": "<task>", "context": "<file content>", "targetfile": "<path>", "tier": 1}'
 ```
 
 Response: `{ "code_patch": "<raw code>", "d1_row_id": "<id>" }`
@@ -16,18 +17,16 @@ Apply `code_patch` directly to the target file. No markdown fences in output.
 
 ## Tier Routing
 
-| Tier | When | How |
-|------|------|-----|
-| T1 | write/create/generate, single file | `curl phoenix-coder /api/code` with `"tier":"1"` |
-| T2 | fix/debug/refactor, multi-file | Kilo model: `deepseek-v4-flash` |
-| T3 | audit/analyze/architecture | Kilo model: `deepseek-v4-pro` |
-| T4 | heavy cross-domain | Kilo model: `gemini-3.5-flash` |
-| T5 | operator-critical/irreversible | Kilo model: `claude-opus-4-20250514` |
+| Tier | Model | When |
+|------|-------|------|
+| T1 | Qwen 3.7 Max (Dialagram — FREE) | write / implement / generate / create / boilerplate |
+| T2 | Claude Opus 4.7 | fix / debug / refactor / integrate / high-quality generation |
+| T3 | DeepSeek V4 Pro | audit / analyze / architecture / deep synthesis |
+| T4 | Gemini 3.5 Flash | heavy cross-domain / large context |
 
-For T2-T5 you can ALSO use phoenix-coder directly with `"tier":"2"` through `"tier":"5"`.
+Auth header required on all PA calls: `x-pa-auth: ffScwBjPQjBnoAlectawu8E+J4NcmO3idxGxtlcRue8=`
 
 ## Worker URLs
-- phoenix-coder: https://phoenix-coder.mrmichaelhobbs123.workers.dev
 - phoenix-architecti: https://phoenix-architecti.mrmichaelhobbs123.workers.dev
 - pcc (empire dashboard): https://pcc.mrmichaelhobbs123.workers.dev
 - net-pet-ai (main app): https://net-pet-ai.mrmichaelhobbs123.workers.dev
@@ -35,7 +34,7 @@ For T2-T5 you can ALSO use phoenix-coder directly with `"tier":"2"` through `"ti
 
 ## Check worker status
 ```bash
-curl https://phoenix-coder.mrmichaelhobbs123.workers.dev/api/status
+curl https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/status
 ```
 
 ## Cold Boot (same as Claude)
@@ -43,7 +42,7 @@ curl https://phoenix-coder.mrmichaelhobbs123.workers.dev/api/status
 2. Read OPERATIONS/BACKBURNER-PIPELINE-LOG.md
 3. Read RRL/RRL-[latest].txt + latest RRL/DNA-LOG-*.txt
 4. git log -5 --oneline
-5. curl phoenix-coder /api/status
+5. curl phoenix-architecti /api/status
 
 ## Security Constraints
 - DO NOT REMOVE CLOUDFLARE_API_TOKEN before deploy
@@ -51,7 +50,8 @@ curl https://phoenix-coder.mrmichaelhobbs123.workers.dev/api/status
 - NOTION BLACKLISTED
 - lam portal BB-07: DO NOT BUILD without explicit Michael direction
 - Secrets restore: pwsh SCRIPTS/set-pa-secrets.ps1
-- SOULCOUNT: 894,320 TITANIUM_ANCHOR
+- SOULCOUNT: 907,872 TITANIUM_ANCHOR (Run 18)
+- PA_AUTH_SECRET is set on phoenix-architecti — always include x-pa-auth header
 
 ## Soul/DNA Capture
 Run at session start: `pwsh SCRIPTS/soul-watcher.ps1`

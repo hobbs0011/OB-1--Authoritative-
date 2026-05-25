@@ -420,12 +420,12 @@ switch ($Command) {
         if (-not $Task) { $Task = Read-Host "Task description" }
         if (-not $TargetFile) { $TargetFile = Read-Host "Target file (absolute path)" }
         $body = @{ task = $Task; targetfile = $TargetFile } | ConvertTo-Json
-        $result = Invoke-RestMethod -Uri "https://phoenix-coder.mrmichaelhobbs123.workers.dev/api/queue" -Method POST -Body $body -ContentType "application/json"
+        $result = Invoke-RestMethod -Uri "https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/queue" -Method POST -Body $body -ContentType "application/json"
         Write-Host "Queued: $($result.queueId) — status: $($result.status)"
     }
     "phoenix-status" {
-        $status = Invoke-RestMethod -Uri "https://phoenix-coder.mrmichaelhobbs123.workers.dev/api/status"
-        $queue = Invoke-RestMethod -Uri "https://phoenix-coder.mrmichaelhobbs123.workers.dev/api/queue?status=pending"
+        $status = Invoke-RestMethod -Uri "https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/status"
+        $queue = Invoke-RestMethod -Uri "https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/queue?status=pending"
         Write-Host "PC v$($status.version) — $($status.status) — queue depth: $($status.queueDepth) — cron: $($status.cronSchedule)"
         if ($queue.count -gt 0) {
             Write-Host "Pending tasks:"

@@ -8,7 +8,7 @@
 $projectDir = "C:\Users\mrmic\.claude\projects\d--OB-1-CANONICAL"
 $soulUrl    = "https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/event"
 $stamp      = (Get-Date).ToString('yyyyMMdd-HHmmss')
-$dnaUrl     = "https://phoenix-coder.mrmichaelhobbs123.workers.dev/api/status"
+$dnaUrl     = "https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/status"
 $posted     = @{}  # track posted line hashes to avoid duplicates
 
 Write-Host "SOUL WATCHER ACTIVE — $stamp" -ForegroundColor Cyan

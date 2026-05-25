@@ -1,5 +1,5 @@
-// Phoenix-Architecti — Universal Code Drone, all 5 tiers
-// T1=free, T2=DS-Flash, T3=DS-Reasoner, T4=Gemini, T5=Anthropic direct
+// Phoenix-Architecti — Universal Code Drone, 4 tiers
+// T1=Qwen-Max(free), T2=Opus-4.7, T3=DeepSeek-Pro, T4=Gemini
 
 function stripFences(text) {
   if (!text) return text;
@@ -72,14 +72,11 @@ async function callTier(env, tier, messages) {
   const gwBase = env.AIGATEWAYURL?.replace(/\/$/, '');
   const gwHeaders = env.CF_GATEWAY_TOKEN ? { 'cf-aig-authorization': 'Bearer ' + env.CF_GATEWAY_TOKEN } : {};
 
-  if (tier >= 5 && env.ANTHROPIC_API_KEY) return callAnthropic(env, messages);
   if (tier >= 4 && env.GEMINI_API_KEY) return callGemini(env, messages);
   if (tier >= 3 && env.DEEPSEEK_API_KEY) {
     return callOpenAI('https://api.deepseek.com/v1/chat/completions', env.DEEPSEEK_API_KEY, 'deepseek-v4-pro', messages);
   }
-  if (tier >= 2 && env.DEEPSEEK_API_KEY) {
-    return callOpenAI('https://api.deepseek.com/v1/chat/completions', env.DEEPSEEK_API_KEY, 'deepseek-v4-flash', messages);
-  }
+  if (tier >= 2 && env.ANTHROPIC_API_KEY) return callAnthropic(env, messages);
 
   // T1 — free cascade
   const tried = [];
@@ -130,6 +127,11 @@ async function logToD1(env, task, result, taskType, tier) {
 
 // ── Handlers ──────────────────────────────────────────────────────────────────
 async function handleCode(request, env) {
+  // AUTH GATE — reject unauthenticated requests
+  const authHeader = request.headers.get('x-pa-auth');
+  if (env.PA_AUTH_SECRET && authHeader !== env.PA_AUTH_SECRET) {
+    return Response.json({ error: 'UNAUTHORIZED' }, { status: 401 });
+  }
   const body = await request.json();
   if (!body.task) return Response.json({ error: 'task is required' }, { status: 400 });
 
@@ -178,11 +180,10 @@ async function handleStatus(env) {
   return Response.json({
     drone: 'phoenix-architecti', version: '0.0.1', status: 'LIVE',
     tiers: {
-      t1: (env.DIALAGRAM_API_KEY ? 'Dialagram-Qwen ✓' : 'Dialagram-Qwen NO KEY') + '→' + (env.CEREBRAS_API_KEY ? 'Cerebras ✓' : 'Cerebras NO KEY') + '→' + (env.GROQ_API_KEY ? 'Groq ✓' : 'Groq NO KEY') + '→CF-Qwen',
-      t2: env.DEEPSEEK_API_KEY ? 'deepseek-v4-flash ✓' : 'NO KEY',
+      t1: (env.DIALAGRAM_API_KEY ? 'Dialagram-Qwen3.7Max ✓' : 'Dialagram-Qwen NO KEY') + '→' + (env.CEREBRAS_API_KEY ? 'Cerebras ✓' : 'Cerebras NO KEY') + '→' + (env.GROQ_API_KEY ? 'Groq ✓' : 'Groq NO KEY') + '→CF-Qwen',
+      t2: env.ANTHROPIC_API_KEY ? 'claude-opus-4-7 ✓' : 'NO KEY',
       t3: env.DEEPSEEK_API_KEY ? 'deepseek-v4-pro ✓' : 'NO KEY',
-      t4: env.GEMINI_API_KEY ? 'gemini-3.5-flash ✓' : 'NO KEY',
-      t5: env.ANTHROPIC_API_KEY ? 'claude-opus-4-7-20260514 ✓' : 'NO KEY'
+      t4: env.GEMINI_API_KEY ? 'gemini-3.5-flash ✓' : 'NO KEY'
     },
     gateway: env.AIGATEWAYURL ? 'CF AI Gateway ✓' : 'direct API',
     recenttasks: recent
