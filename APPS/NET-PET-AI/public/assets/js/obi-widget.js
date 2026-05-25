@@ -126,6 +126,30 @@
     'action plan': [
       'Your action plan is in your student portal — it shows your current focus areas and weekly targets.',
       'Ask your teacher for your portal link if you haven\'t seen it yet.'
+    ],
+    'listening': [
+      'The program is 45 minutes of listening per day — content you actually enjoy. K-dramas, YouTube, podcasts, anything where you understand about 60-80% already.',
+      'Start with Vietnamese subtitles, then switch to English subtitles, then try with no subtitles. That progression is the method.'
+    ],
+    'speaking': [
+      'The 15-minute speaking practice is this chat with Obi — plus shadowing what you listen to.',
+      'Volume and confidence beat perfect grammar. Say it loud, say it proud, fix the details later.'
+    ],
+    '45 minutes': [
+      '45 minutes of listening per day — it sounds like a lot but you can do it on your commute, while cooking, getting ready, or at the gym.',
+      'The rule is 60% comprehension: you should understand most of what you hear. If it is too hard, find easier content. If it is too easy, level up.'
+    ],
+    'how long': [
+      'One hour a day total: 45 minutes listening + 15 minutes speaking with Obi.',
+      'The listening fits into your existing routine — commute, cooking, gym. The 15 minutes speaking is this chat. That is the whole program.'
+    ],
+    'subtitles': [
+      'Start with Vietnamese subtitles so you understand the content. Then switch to English subtitles. Then try without any subtitles.',
+      'Do not rush the progression — each stage trains a different skill. Vietnamese subs first, English subs second, no subs third.'
+    ],
+    'what should i watch': [
+      'Watch anything you actually enjoy — K-dramas, YouTube channels about your hobbies, Netflix shows, cooking videos, travel vlogs.',
+      'The key is 60% comprehension. If you understand most of it without trying too hard, it is the right level. Do not force yourself through hard content.'
     ]
   };
 

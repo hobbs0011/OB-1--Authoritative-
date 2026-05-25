@@ -473,6 +473,17 @@ function buildPronunciationTips() {
   return tips.slice(0, 3);
 }
 
+function buildListeningNudge(chatRound, profile) {
+  if (chatRound !== 5) return null;
+  const listeningDone = chatHistory.some(t =>
+    /listen|watch|youtube|podcast|netflix|drama|video|hear|heard|audio/i.test(t)
+  );
+  if (listeningDone) return null;
+  const slots = ["on your commute", "while cooking", "while getting ready", "at the gym", "on your lunch break"];
+  const slot = slots[Math.floor(Math.random() * slots.length)];
+  return `Quick check — did you get your 45 minutes of listening today? If not, try ${slot} tomorrow. Even 20 minutes of something you enjoy counts as a start.`;
+}
+
 // ── Input handler ──────────────────────────────────────────
 
 async function handle(text) {
@@ -581,8 +592,17 @@ async function handle(text) {
           }
         }
 
-        // Every 30 rounds: silent checkin \u2014 no state change, no reset
-        if (chatRound % 30 === 0) {
+      // Round 5: listening accountability nudge if student hasn't mentioned listening
+      if (chatRound === 5) {
+        const nudge = buildListeningNudge(chatRound, profile);
+        if (nudge) {
+          await pause(500);
+          obi(nudge);
+        }
+      }
+
+      // Every 30 rounds: silent checkin \u2014 no state change, no reset
+      if (chatRound % 30 === 0) {
           api("/api/netpet/checkin", "POST", {
             studentId: profile.studentId,
             minutes: 5,
@@ -757,7 +777,7 @@ async function boot() {
     } catch {}
     if (!_usedHint) {
       const _co = _company ? ` — ${_company}` : "";
-      obi(`What did you watch or listen to in English today${_co}? Tell me anything about it — what was the topic?`);
+      obi(`What did you listen to today? Your 45 minutes — what was it?${_co ? " Tell me what you watched or heard." : ""}`);
     }
     state = "chat";
   } else if (saved?.studentId && saved?.fullName) {
@@ -791,7 +811,7 @@ async function boot() {
         }
       } catch {}
       if (!_usedHint2) {
-        obi("What did you watch or listen to in English today? Start from the beginning — what was the topic?");
+        obi("What did you listen to today? Your 45 minutes — let's start there.");
       }
     } else {
       obi(pickStarter());
