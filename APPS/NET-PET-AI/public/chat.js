@@ -195,7 +195,24 @@ function obi(text) {
   speak(text);
 }
 
-function student(text) { bubble("student", text); }
+function student(text, hints) {
+  if (!hints || hints.length === 0) { bubble("student", text); return; }
+  const row = document.createElement("div");
+  row.className = "row row-student";
+  const b = document.createElement("div");
+  b.className = "bubble bubble-student";
+  const words = text.split(/(\s+)/);
+  const hintSet = new Set(hints.map(w => w.toLowerCase()));
+  b.innerHTML = words.map(w => {
+    const clean = w.replace(/[^a-zA-Z]/g, "").toLowerCase();
+    return hintSet.has(clean) && clean.length > 0
+      ? `<span class="pronunciation-flag" title="Obi noticed this sound">${w}</span>`
+      : w;
+  }).join("");
+  row.appendChild(b);
+  feed.appendChild(row);
+  feed.scrollTop = feed.scrollHeight;
+}
 
 // ── API ────────────────────────────────────────────────────
 
@@ -516,7 +533,7 @@ function buildListeningNudge(chatRound, profile) {
 async function handle(text) {
   if (!text.trim() || state === "busy") return;
   input.value = "";
-  student(text.trim());
+  student(text.trim(), profile._phonicsHints || []);
 
   // Safety first — crisis check runs before ANY lesson logic
   if (isCrisisSignal(text)) {

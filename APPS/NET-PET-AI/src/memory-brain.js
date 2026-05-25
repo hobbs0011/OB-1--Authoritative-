@@ -76,9 +76,11 @@ export function buildRewardSignals(weakPoints, streakDays) {
       signals.push(`${w.specific.replace(/_/g, " ")} errors down ${w.improvement_pct}%`);
     }
   }
-  if (streakDays >= 30) signals.push(`${streakDays}-day streak — you are a Tiger now`);
-  else if (streakDays >= 7) signals.push(`${streakDays}-day streak — your brain is rewiring`);
-  else if (streakDays >= 3) signals.push(`${streakDays} days consistent — habit forming`);
+  if (streakDays >= 30) signals.push(`${streakDays}-day streak — Tiger status. Mention it: "Don't break this chain — it took ${streakDays} days to build."`);
+  else if (streakDays >= 7) signals.push(`${streakDays}-day streak — real momentum. Mention it with stakes: "Day ${streakDays}. Your brain is rewiring. Show up tomorrow."`);
+  else if (streakDays >= 3) signals.push(`${streakDays} days in a row — the habit is forming. Mention it: "Day ${streakDays}. Keep the chain alive."`);
+  else if (streakDays === 2) signals.push(`Two days in a row — chain has started. Mention it: "Day 2. Day 3 is where it gets real."`);
+  else if (streakDays === 1) signals.push(`First day back. Mention it: "Day 1. Show up tomorrow — that's all."`);
   return signals;
 }
 
