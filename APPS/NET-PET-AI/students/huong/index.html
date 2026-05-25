@@ -1,47 +1,119 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Huong â Intermediate English Training</title>
-<style>
-:root{--void:#0a0a12;--purple:#a855f7;--gold:#f59e0b;--teal:#14b8a6;--glass:rgba(255,255,255,0.05);--border:rgba(168,85,247,0.3)}
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--void);color:#e2e8f0;font-family:'Inter',sans-serif;min-height:100vh}
-nav{display:flex;gap:0;border-bottom:1px solid var(--border);overflow-x:auto}
-nav button{flex:1;padding:14px 8px;background:transparent;border:none;color:#94a3b8;font-size:13px;font-weight:600;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;transition:all .2s}
-nav button.active{color:var(--purple);border-bottom-color:var(--purple);background:var(--glass)}
-nav button:hover{color:var(--gold)}
-.tab-content{display:none;padding:24px 20px;max-width:800px;margin:0 auto}
-.tab-content.active{display:block}
-h1{font-family:'Orbitron',sans-serif;font-size:28px;color:var(--purple);margin-bottom:8px}
-h2{font-size:20px;color:var(--gold);margin:24px 0 12px}
-p{line-height:1.7;margin-bottom:12px;color:#cbd5e1}
-.card{background:var(--glass);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:16px}
-.card h3{color:var(--teal);margin-bottom:8px;font-size:16px}
-.vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px}
-.vocab-item{background:var(--glass);border:1px solid var(--border);border-radius:8px;padding:14px;text-align:center}
-.vocab-item .word{font-size:18px;font-weight:700;color:var(--purple)}
-.vocab-item .meaning{font-size:12px;color:#94a3b8;margin-top:4px}
-.progress-bar{height:8px;background:rgba(255,255,255,0.1);border-radius:4px;overflow:hidden;margin-top:8px}
-.progress-fill{height:100%;background:linear-gradient(90deg,var(--purple),var(--gold));border-radius:4px}
-.audio-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:var(--glass);border:1px solid var(--border);border-radius:8px;color:var(--purple);cursor:pointer;font-size:14px;margin:8px 0}
-.audio-btn:hover{background:rgba(168,85,247,0.15)}
-.badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:700;text-transform:uppercase}
-.badge-b1{background:rgba(168,85,247,0.2);color:var(--purple)}
-.stat-row{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.05)}
-.stat-label{color:#94a3b8;font-size:14px}
-.stat-value{color:var(--gold);font-weight:700}
-@media(max-width:600px){nav button{padding:12px 6px;font-size:11px}.tab-content{padding:16px 14px}h1{font-size:22px}}
-</style>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
-</head>
-<body>
+<div id="vocab" class="tab-content active">
+    <h1>Vocabulary</h1>
+    <div class="vocab-grid">
+        <div class="vocab-item">
+            <div class="word">Accommodation</div>
+            <div class="meaning">A place where you can stay when you are visiting a place.</div>
+        </div>
+        <div class="vocab-item">
+            <div class="word">Amateur</div>
+            <div class="meaning">Someone who does something as a hobby rather than as their job.</div>
+        </div>
+        <div class="vocab-item">
+            <div class="word">Bureaucracy</div>
+            <div class="meaning">A system in which a lot of official work is done by people who follow fixed rules and procedures.</div>
+        </div>
+        <div class="vocab-item">
+            <div class="word">Conundrum</div>
+            <div class="meaning">A difficult problem that is hard to solve.</div>
+        </div>
+        <div class="vocab-item">
+            <div class="word">Dilemma</div>
+            <div class="meaning">A situation in which you have to choose between two difficult things, each of which could cause problems.</div>
+        </div>
+        <div class="vocab-item">
+            <div class="word">Ephemeral</div>
+            <div class="meaning">Lasting for a very short time.</div>
+        </div>
+        <div class="vocab-item">
+            <div class="word">Futile</div>
+            <div class="meaning">Having no hope of success; useless.</div>
+        </div>
+        <div class="vocab-item">
+            <div class="word">Gregarious</div>
+            <div class="meaning">Enjoying the company of other people.</div>
+        </div>
+        <div class="vocab-item">
+            <div class="word">Hypothetical</div>
+            <div class="meaning">Supposed or imagined but not real.</div>
+        </div>
+        <div class="vocab-item">
+            <div class="word">Intricate</div>
+            <div class="meaning">Having many parts that are complicated and connected in a difficult way.</div>
+        </div>
+    </div>
+</div>
 
-<nav>
-<button class="active" onclick="showTab('vocab')">Vocabulary</button>
-<button onclick="showTab('listening')">Listening</button>
-<button onclick="showTab('speaking')">Speaking</button>
-<button onclick="showTab('reading')">Reading</button>
-<button onclick="showTab('progress')">Progress</button>
-</nav>
+<div id="listening" class="tab-content">
+    <h1>Listening Exercises</h1>
+    <div class="card">
+        <h3>Exercise 1: Short Conversation</h3>
+        <audio controls>
+            <source src="conversation1.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        <p>Listen to the conversation between two friends planning a weekend trip.</p>
+        <p><strong>Questions:</strong></p>
+        <ol>
+            <li>Where are they planning to go?</li>
+            <li>What time do they plan to leave?</li>
+            <li>Who will drive?</li>
+        </ol>
+    </div>
+    <div class="card">
+        <h3>Exercise 2: News Report</h3>
+        <audio controls>
+            <source src="news_report.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        <p>Listen to a news report about a recent scientific discovery.</p>
+        <p><strong>Questions:</strong></p>
+        <ol>
+            <li>What was the discovery?</li>
+            <li>Who made the discovery?</li>
+            <li>What are the implications of this discovery?</li>
+        </ol>
+    </div>
+    <div class="card">
+        <h3>Exercise 3: Podcast Episode</h3>
+        <audio controls>
+            <source src="podcast_episode.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        <p>Listen to a podcast episode discussing the benefits of meditation.</p>
+        <p><strong>Questions:</strong></p>
+        <ol>
+            <li>What are the main benefits of meditation?</li>
+            <li>How long should one meditate?</li>
+            <li>What are some tips for beginners?</li>
+        </ol>
+    </div>
+    <div class="card">
+        <h3>Exercise 4: Customer Service Call</h3>
+        <audio controls>
+            <source src="customer_service_call.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        <p>Listen to a customer service call about a product issue.</p>
+        <p><strong>Questions:</strong></p>
+        <ol>
+            <li>What is the issue with the product?</li>
+            <li>What solution did the customer service representative offer?</li>
+            <li>Was the customer satisfied?</li>
+        </ol>
+    </div>
+    <div class="card">
+        <h3>Exercise 5: Lecture Snippet</h3>
+        <audio controls>
+            <source src="lecture_snippet.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        <p>Listen to a snippet from a university lecture on environmental science.</p>
+        <p><strong>Questions:</strong></p>
+        <ol>
+            <li>What topic was being discussed?</li>
+            <li>What were the key points mentioned?</li>
+            <li>What further reading was suggested?</li>
+        </ol>
+    </div>
+</div>
