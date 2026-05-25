@@ -1,5 +1,5 @@
-// Phoenix-Architecti — Universal Code Drone, 4 tiers
-// T1=Qwen-Max(free), T2=Opus-4.7, T3=DeepSeek-Pro, T4=Gemini
+// Phoenix-Architecti — Universal Code Drone
+// T1=Qwen3.7Max(Dialagram), T2=Opus-4.7 | T3=DeepSeek-Pro, T4=Gemini (fallback infrastructure)
 
 function stripFences(text) {
   if (!text) return text;
@@ -26,7 +26,7 @@ async function callOpenAI(url, key, model, messages, extraHeaders = {}) {
   return data.choices?.[0]?.message?.content ?? null;
 }
 
-// ── Anthropic Messages API (T5) ───────────────────────────────────────────────
+// ── Anthropic Messages API (T2) ───────────────────────────────────────────────
 async function callAnthropic(env, messages) {
   const systemMsg = messages.find(m => m.role === 'system')?.content || SYSTEM_PROMPT;
   const userMsgs = messages.filter(m => m.role !== 'system');

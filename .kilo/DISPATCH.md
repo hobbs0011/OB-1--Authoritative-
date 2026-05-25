@@ -5,11 +5,9 @@ All tier dispatch rules still apply. Route every task through the correct tier.
 
 ## Phoenix-Architecti (T1-T4) — ALWAYS call this first for write/create/generate tasks
 
-```bash
-curl -s -X POST https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/code \
-  -H "Content-Type: application/json" \
-  -H "x-pa-auth: ffScwBjPQjBnoAlectawu8E+J4NcmO3idxGxtlcRue8=" \
-  -d '{"task": "<task>", "context": "<file content>", "targetfile": "<path>", "tier": 1}'
+```powershell
+$body = @{ task="<task>"; context="<file content>"; targetfile="<path>"; tier=1 } | ConvertTo-Json -Compress
+Invoke-RestMethod -Uri "https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/code" -Method POST -ContentType "application/json" -Headers @{"x-pa-auth"="ffScwBjPQjBnoAlectawu8E+J4NcmO3idxGxtlcRue8="} -Body $body
 ```
 
 Response: `{ "code_patch": "<raw code>", "d1_row_id": "<id>" }`
@@ -33,8 +31,8 @@ Auth header required on all PA calls: `x-pa-auth: ffScwBjPQjBnoAlectawu8E+J4NcmO
 - soul-logger: https://soul-logger.mrmichaelhobbs123.workers.dev
 
 ## Check worker status
-```bash
-curl https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/status
+```powershell
+Invoke-RestMethod "https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/status" | ConvertTo-Json
 ```
 
 ## Cold Boot (same as Claude)
