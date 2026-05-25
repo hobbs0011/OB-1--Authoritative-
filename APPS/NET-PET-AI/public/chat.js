@@ -426,9 +426,15 @@ async function reactLLM(text) {
 
 function reactFallback(text, round) {
   const words = text.split(/\s+/).filter(Boolean).length;
-  if (words >= 8) return "Good stuff! Tell me more about that.";
-  if (words < 3) return "Come on, give me a real sentence! Even a short one.";
-  return "OK I hear you — keep going! What happened next?";
+  if (words >= 8) return "I like where this is going. What happened next?";
+  if (words < 3) return "That is a start — now give me the full story. What actually happened?";
+  const mid = [
+    "Keep going — I want the details.",
+    "Say more. What was the best part?",
+    "Okay! And then what?",
+    "Good. Now tell me why.",
+  ];
+  return mid[round % mid.length];
 }
 
 function pickStarter() {
