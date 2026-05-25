@@ -41,7 +41,7 @@ async function callAnthropic(env, messages) {
       'anthropic-version': '2023-06-01',
       ...(env.CF_GATEWAY_TOKEN ? { 'cf-aig-authorization': 'Bearer ' + env.CF_GATEWAY_TOKEN } : {})
     },
-    body: JSON.stringify({ model: 'claude-opus-4-20250514', max_tokens: 8192, system: systemMsg, messages: userMsgs })
+    body: JSON.stringify({ model: 'claude-opus-4-7-20260514', max_tokens: 8192, system: systemMsg, messages: userMsgs })
   });
   if (!res.ok) throw new Error('Anthropic ' + res.status + ': ' + await res.text());
   const data = await res.json();
@@ -178,11 +178,11 @@ async function handleStatus(env) {
   return Response.json({
     drone: 'phoenix-architecti', version: '0.0.1', status: 'LIVE',
     tiers: {
-      t1: 'free — Dialagram-Qwen→Cerebras→Groq→CF-Qwen',
+      t1: (env.DIALAGRAM_API_KEY ? 'Dialagram-Qwen ✓' : 'Dialagram-Qwen NO KEY') + '→' + (env.CEREBRAS_API_KEY ? 'Cerebras ✓' : 'Cerebras NO KEY') + '→' + (env.GROQ_API_KEY ? 'Groq ✓' : 'Groq NO KEY') + '→CF-Qwen',
       t2: env.DEEPSEEK_API_KEY ? 'deepseek-v4-flash ✓' : 'NO KEY',
       t3: env.DEEPSEEK_API_KEY ? 'deepseek-v4-pro ✓' : 'NO KEY',
       t4: env.GEMINI_API_KEY ? 'gemini-3.5-flash ✓' : 'NO KEY',
-      t5: env.ANTHROPIC_API_KEY ? 'claude-opus-4-20250514 ✓' : 'NO KEY'
+      t5: env.ANTHROPIC_API_KEY ? 'claude-opus-4-7-20260514 ✓' : 'NO KEY'
     },
     gateway: env.AIGATEWAYURL ? 'CF AI Gateway ✓' : 'direct API',
     recenttasks: recent
