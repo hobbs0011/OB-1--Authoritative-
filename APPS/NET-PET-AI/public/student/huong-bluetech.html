@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -10,6 +10,17 @@
   <link rel="stylesheet" href="/assets/css/portal.css">
 </head>
 <body>
+  <div id="auth-gate" style="position:fixed;inset:0;background:#0f0f1a;display:flex;align-items:center;justify-content:center;z-index:9999;">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:16px;font-family:Inter,sans-serif;padding:40px;text-align:center;">
+      <div style="font-family:Orbitron,sans-serif;font-weight:900;font-size:1.4rem;background:linear-gradient(135deg,#a855f7,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">NET</div>
+      <div style="font-size:2.5rem;">🌟</div>
+      <div style="font-size:1.1rem;color:#e5e5e5;font-weight:600;letter-spacing:1px;">Huong</div>
+      <input id="gate-pw" type="password" placeholder="Enter password" style="padding:12px 20px;border-radius:12px;border:1px solid #a855f7;background:rgba(168,85,247,0.1);color:#f5f5f5;font-size:1rem;outline:none;width:240px;text-align:center;font-family:Inter,sans-serif;">
+      <button id="gate-btn" style="padding:12px 48px;border-radius:12px;background:linear-gradient(135deg,#a855f7,#7c3aed);color:#fff;font-family:Orbitron,sans-serif;font-weight:700;font-size:0.9rem;border:none;cursor:pointer;letter-spacing:2px;">ENTER</button>
+      <div id="gate-err" style="color:#ef4444;font-size:0.85rem;min-height:20px;"></div>
+      <div style="color:#4b5563;font-size:0.75rem;">DEFAULT: bluetech2026</div>
+    </div>
+  </div>
   <div class="container">
     <div class="hero">
       <div class="avatar">🌟</div>
@@ -92,7 +103,31 @@
         if (prof) { setVal('p-goals', prof.goals || '—'); setVal('p-strength', prof.confidence_areas || '—'); setVal('p-trigger', prof.fear_trigger || '—'); }
       } catch (e) { document.getElementById('status-msg').textContent = 'Could not load data — check connection.'; }
     }
-    loadAll();
+    const _AUTH_KEY = 'net_auth_' + studentId;
+    function _showGate() {
+      document.querySelector('.container').style.display = 'none';
+      const btn = document.getElementById('gate-btn');
+      const pw = document.getElementById('gate-pw');
+      const err = document.getElementById('gate-err');
+      async function _login() {
+        const p = pw.value.trim();
+        if (!p) { err.textContent = 'Enter your password.'; return; }
+        btn.disabled = true; btn.textContent = '...';
+        try {
+          const r = await fetch(BASE + '/api/student/checkpw', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({studentId, pw: p})});
+          const d = await r.json();
+          if (d.ok) {
+            sessionStorage.setItem(_AUTH_KEY, '1');
+            document.getElementById('auth-gate').remove();
+            document.querySelector('.container').style.display = '';
+            loadAll();
+          } else { err.textContent = 'Wrong password. Try again.'; btn.disabled = false; btn.textContent = 'ENTER'; }
+        } catch(e) { err.textContent = 'Connection error.'; btn.disabled = false; btn.textContent = 'ENTER'; }
+      }
+      btn.addEventListener('click', _login);
+      pw.addEventListener('keydown', e => { if (e.key === 'Enter') _login(); });
+    }
+    if (sessionStorage.getItem(_AUTH_KEY) !== '1') { _showGate(); } else { loadAll(); }
   </script>
 </body>
 </html>
