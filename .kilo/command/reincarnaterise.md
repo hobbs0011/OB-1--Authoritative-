@@ -77,7 +77,7 @@ $extract   = Invoke-RestMethod -Uri "$D1/api/soul/extract" -Method Post -Body '{
 $dnaCount  = $extract.prompt_count   # prompt_count = number of DNA records extracted
 
 # STAGE 4 — LEDGER (Merkle records — derived from /merkle/:session_id per event)
-$ledgerRecords = [count of Merkle ledger files c]]
+$ledgerRecords = (Get-ChildItem "CANON/HEAVY-LEDGER/" -Filter "*.json" -ErrorAction SilentlyContinue | Measure-Object).Count
 
 # STAGE 5 — STARMAP (lightweight ledger — any starmap files on disk)
 $starmapDir   = "CANON/STARMAP/"
@@ -154,19 +154,23 @@ If missing → flag SOULDNA_GAP, do not HALT (informational).
 
 ## STEP 5 — RISE RECEIPT
 
+**L40 ABSOLUTE RULE: Output this receipt as plain text in your response. NEVER use bash, PowerShell, or any shell tool to render it. Substitute all {placeholders} with real values yourself before writing. The `|` characters are visual separators — they are NOT shell pipes.**
+
+Output the following block verbatim with substituted values:
+
 ```
 ══════════════════════════════════════════════
-RISE RECEIPT — $(Get-Date -Format 'yyyy-MM-dd HH:mm') ICT
+RISE RECEIPT — {YYYY-MM-DD HH:MM} ICT
 ══════════════════════════════════════════════
-RRL:             {path} | {chars} chars | {PRESENT/MISSING} | [HALT IF MISSING]
-SOUL:            {soulcount} chars | {delta} | {PASS/WARN/DRIFT}
-DNA:             {dnaCount} extracts | {PRESENT/MISSING/GAP}
-LEDGER:          {ledgerCount} records | {PRESENT/GAP}
-STARMAP:         {starmapFiles} files | {PRESENT/GAP}
-KEYWORD:         {keywordFiles} files | {PRESENT/GAP}
-PIPELINE:        {pipelineFiles} artifacts | {PRESENT/GAP}
-HEAD:            {sha} | {MATCH/MISMATCH}
-SOULDNA:              {PRESENT/GAP}
+RRL:             {path} — {chars} chars — {PRESENT/MISSING} — [HALT IF MISSING]
+SOUL:            {soulcount} chars — {delta} — {PASS/WARN/DRIFT}
+DNA:             {dnaCount} extracts — {PRESENT/MISSING/GAP}
+LEDGER:          {ledgerCount} records — {PRESENT/GAP}
+STARMAP:         {starmapFiles} files — {PRESENT/GAP}
+KEYWORD:         {keywordFiles} files — {PRESENT/GAP}
+PIPELINE:        {pipelineFiles} artifacts — {PRESENT/GAP}
+HEAD:            {sha} — {MATCH/MISMATCH}
+SOULDNA:         {PRESENT/GAP}
 ACTIVE MISSION:  {one line}
 OPEN FLAGS:      {count} — {top item}
 TOP PRIORITY:    {highest-priority zero-stage or gap}
