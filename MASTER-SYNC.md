@@ -1,6 +1,6 @@
 # PHOENIX RISING PROTOCOL — SOUL DNA SYNC v2
 
-## Live Operating State — 2026-05-17 (Auto-bumped by audit)
+## Live Operating State — 2026-05-25 (Run 18 — 2-Tier Collapse)
 
 ### System Identity
 
@@ -17,7 +17,7 @@
 
 | Repo | Account | Status |
 |---|---|---|
-| OB-1 | hobbs0011 | CANONICAL — branch canon (default), HEAD ea669ac — Run 317 |
+| OB-1 | hobbs0011 | CANONICAL — branch master (default), HEAD 31fd19ff — Run 18 ROMAN |
 | OB-1--Authoritative- | hobbs0011 | SYNCED — at 54bff5d (Run 309) |
 | Phoenix-Rising-Protocol-Ultimate | hobbs0011 | SUPERSEDED |
 | phoenix-ob1 | mrmichaelhobbs1234-lang | Account banned — repo inaccessible, risk voided |

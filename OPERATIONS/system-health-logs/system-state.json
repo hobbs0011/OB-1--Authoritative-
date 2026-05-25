@@ -1,8 +1,8 @@
 {
-  "git_branch": "master",
-  "verify_ok": true,
   "doctor_ok": true,
-  "timestamp": "2026-05-25T08:16:36.9723016+07:00",
-  "git_head": "677ad20 feat: /PCClaw + /PAA Kilo commands ΓÇö Qwen Max + 5-tier PA dispatch in Kilo chat",
-  "soul_ok": false
+  "git_head": "e43c4391 security: rotate DeepSeek + Dialagram keys, add BFG purge script",
+  "timestamp": "2026-05-25T09:25:33.0740784+07:00",
+  "verify_ok": true,
+  "soul_ok": false,
+  "git_branch": "master"
 }

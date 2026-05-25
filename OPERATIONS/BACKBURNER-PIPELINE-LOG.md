@@ -115,10 +115,10 @@
 - What: Created with real D1 database_id. soul-logger now deployable via standard wrangler deploy.
 
 ### BB-26 !! #DRIFT Root Cause Identified
-- Status: OPEN
+- Status: IN-PROGRESS (Run 18 — CLAUDE.md 7-step boot mandates CANON/SYSTEM/COLD-START-BOOT.md + OPERATIONS/ read at every session start)
 - What: Cold-start agents don't load CANON/ at boot. Every reincarnation rebuilds from scratch.
-- Fix: COLD-START-BOOT.md must mandate loading BIBLE-CH16 + BIBLE-CH02 + SKELETON-STAR-MAP
-- This is the #1 systemic issue causing repeated sessions.
+- Fix: CLAUDE.md Step 1-7 now mandatory. COLD-START-BOOT.md updated Run 18. 2-tier collapse eliminates tier confusion drift.
+- Remaining: Verify all agent profiles inherit boot sequence.
 
 ---
 

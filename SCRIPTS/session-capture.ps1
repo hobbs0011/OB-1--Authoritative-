@@ -13,7 +13,7 @@ $head   = git log -1 --oneline 2>$null
 $branch = git rev-parse --abbrev-ref HEAD 2>$null
 
 # ── DNA — structured state ─────────────────────────────────────────────────────
-$workerStatus = try { (Invoke-RestMethod "https://phoenix-coder.mrmichaelhobbs123.workers.dev/api/status" -TimeoutSec 6) | ConvertTo-Json -Compress } catch { "UNREACHABLE" }
+$workerStatus = try { (Invoke-RestMethod "https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/status" -TimeoutSec 6) | ConvertTo-Json -Compress } catch { "UNREACHABLE" }
 $pccContext   = try { (Invoke-RestMethod "https://pcc.mrmichaelhobbs123.workers.dev/api/context.json" -TimeoutSec 6) | ConvertTo-Json -Compress } catch { "UNREACHABLE" }
 
 $dna = @"
@@ -21,7 +21,7 @@ $dna = @"
 HEAD   : $head
 Branch : $branch
 
-PHOENIX-CODER STATUS:
+PHOENIX-ARCHITECTI STATUS:
 $workerStatus
 
 PCC CONTEXT:
@@ -38,7 +38,7 @@ SECURITY CONSTRAINTS:
 - NOTION BLACKLISTED
 - lam portal BB-07: DO NOT BUILD without explicit direction
 - Secrets restore: pwsh SCRIPTS/set-pa-secrets.ps1
-- SOULCOUNT: 894320 TITANIUM_ANCHOR
+- SOULCOUNT: 907872 TITANIUM_ANCHOR
 "@
 
 # Write DNA log to disk
