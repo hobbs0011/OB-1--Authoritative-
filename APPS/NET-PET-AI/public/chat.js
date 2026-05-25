@@ -1,4 +1,4 @@
-// chat.js — Magic Chat — Phoenix Rising Protocol Command Station
+﻿// chat.js — Magic Chat — Phoenix Rising Protocol Command Station
 // OBI = Michael Hobbs in AI form: high-energy, anti-shame, tough love.
 // Mouse Voice → Tiger Voice. Volume + Velocity > Grammar.
 // "The stateless chat is the constraint. The Magic Chat shall have no constraints."
