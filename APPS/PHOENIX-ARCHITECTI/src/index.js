@@ -72,6 +72,7 @@ async function callTier(env, tier, messages) {
   const gwBase = env.AIGATEWAYURL?.replace(/\/$/, '');
   const gwHeaders = env.CF_GATEWAY_TOKEN ? { 'cf-aig-authorization': 'Bearer ' + env.CF_GATEWAY_TOKEN } : {};
 
+  if (tier === 3 && env.DEEPSEEK_API_KEY) return callOpenAI('https://api.deepseek.com/v1/chat/completions', env.DEEPSEEK_API_KEY, 'deepseek-chat', messages);
   if (tier >= 2 && env.ANTHROPIC_API_KEY) return callAnthropic(env, messages);
 
   // T1 — free cascade
