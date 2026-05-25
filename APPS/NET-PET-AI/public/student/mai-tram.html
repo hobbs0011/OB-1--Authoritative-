@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mai Tram — NET Student Portal</title>
+  <title>Mai Tram â NET Student Portal</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -184,34 +184,34 @@
 <body>
   <div class="container">
     <div class="hero">
-      <div class="avatar">🎓</div>
+      <div class="avatar">ð</div>
       <h1>Mai Tram</h1>
-      <p class="subtitle">HR Professional · BlueTech</p>
-      <span class="level-chip">B1 · CUB LEVEL</span>
+      <p class="subtitle">HR Professional Â· BlueTech</p>
+      <span class="level-chip">B1 Â· CUB LEVEL</span>
     </div>
 
     <div class="stats">
       <div class="stat">
-        <div class="stat-val loading" id="val-score">—</div>
+        <div class="stat-val loading" id="val-score">â</div>
         <div class="stat-label">Tiger Score</div>
       </div>
       <div class="stat">
-        <div class="stat-val loading" id="val-streak">—</div>
+        <div class="stat-val loading" id="val-streak">â</div>
         <div class="stat-label">Streak</div>
       </div>
       <div class="stat">
-        <div class="stat-val loading" id="val-xp">—</div>
+        <div class="stat-val loading" id="val-xp">â</div>
         <div class="stat-label">XP</div>
       </div>
       <div class="stat">
-        <div class="stat-val loading" id="val-sessions">—</div>
+        <div class="stat-val loading" id="val-sessions">â</div>
         <div class="stat-label">Sessions</div>
       </div>
     </div>
 
     <div class="status-card">
       <div class="status-row">
-        <span class="status-badge mouse" id="status-badge">🐭 MOUSE MODE</span>
+        <span class="status-badge mouse" id="status-badge">ð­ MOUSE MODE</span>
         <span class="score-big" id="score-big">0</span>
       </div>
       <div class="progress-track">
@@ -222,33 +222,33 @@
 
     <div class="daily-card">
       <div class="section-label">Today's Mission</div>
-      <div class="task-type-chip" id="task-type">—</div>
+      <div class="task-type-chip" id="task-type">â</div>
       <p class="task-prompt" id="task-prompt">Loading your task...</p>
       <div class="task-meta">
-        <span id="task-focus">—</span>
-        <span id="task-duration">—</span>
+        <span id="task-focus">â</span>
+        <span id="task-duration">â</span>
       </div>
     </div>
 
-    <a href="/magic-chat.html?student=mai-tram" class="cta">Start Session →</a>
+    <a href="/magic-chat.html?student=mai-tram" class="cta">Start Session â</a>
 
     <div class="profile-card">
       <div class="section-label">Profile</div>
       <div class="profile-row">
         <span class="profile-key">Goal</span>
-        <span class="profile-val" id="p-goals">—</span>
+        <span class="profile-val" id="p-goals">â</span>
       </div>
       <div class="profile-row">
         <span class="profile-key">Strength</span>
-        <span class="profile-val" id="p-strength">—</span>
+        <span class="profile-val" id="p-strength">â</span>
       </div>
       <div class="profile-row">
         <span class="profile-key">Focus</span>
-        <span class="profile-val" id="p-trigger">—</span>
+        <span class="profile-val" id="p-trigger">â</span>
       </div>
     </div>
 
-    <a href="/student-portal.html" class="back-link">← All Students</a>
+    <a href="/student-portal.html" class="back-link">â All Students</a>
   </div>
 
   <script>
@@ -262,10 +262,10 @@
       return 'mouse';
     }
     function statusLabel(s) {
-      if (!s) return '🐭 MOUSE MODE';
-      if (s.includes('TIGER')) return '🐯 TIGER MODE';
-      if (s.includes('CUB')) return '🐻 CUB MODE';
-      return '🐭 MOUSE MODE';
+      if (!s) return 'ð­ MOUSE MODE';
+      if (s.includes('TIGER')) return 'ð¯ TIGER MODE';
+      if (s.includes('CUB')) return 'ð» CUB MODE';
+      return 'ð­ MOUSE MODE';
     }
     function setVal(id, val) {
       const el = document.getElementById(id);
@@ -305,21 +305,21 @@
 
         // Daily task
         if (dailyRes.task) {
-          setVal('task-type', dailyRes.task.type || '—');
-          setVal('task-prompt', dailyRes.task.prompt || '—');
-          setVal('task-focus', `Focus: ${dailyRes.focus || '—'}`);
+          setVal('task-type', dailyRes.task.type || 'â');
+          setVal('task-prompt', dailyRes.task.prompt || 'â');
+          setVal('task-focus', `Focus: ${dailyRes.focus || 'â'}`);
           setVal('task-duration', `${dailyRes.task.duration ?? '?'} min`);
         }
 
         // Profile
         const prof = profileRes.profile;
         if (prof) {
-          setVal('p-goals', prof.goals || '—');
-          setVal('p-strength', prof.confidence_areas || '—');
-          setVal('p-trigger', prof.fear_trigger || '—');
+          setVal('p-goals', prof.goals || 'â');
+          setVal('p-strength', prof.confidence_areas || 'â');
+          setVal('p-trigger', prof.fear_trigger || 'â');
         }
       } catch (e) {
-        document.getElementById('status-msg').textContent = 'Could not load data — check connection.';
+        document.getElementById('status-msg').textContent = 'Could not load data â check connection.';
       }
     }
 
