@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lam — Natural English Training</title>
+<style>
+:root{--void:#0a0a12;--purple:#a855f7;--gold:#f59e0b;--teal:#14b8a6;--glass:rgba(255,255,255,0.05);--border:rgba(168,85,247,0.3)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--void);color:#e2e8f0;font-family:'Inter',sans-serif;min-height:100vh}
+nav{display:flex;gap:0;border-bottom:1px solid var(--border);overflow-x:auto}
+nav button{flex:1;padding:14px 8px;background:transparent;border:none;color:#94a3b8;font-size:13px;font-weight:600;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;transition:all .2s}
+nav button.active{color:var(--purple);border-bottom-color:var(--purple);background:var(--glass)}
+nav button:hover{color:var(--gold)}
+.tab-content{display:none;padding:24px 20px;max-width:800px;margin:0 auto}
+.tab-content.active{display:block}
+h1{font-family:'Orbitron',sans-serif;font-size:28px;color:var(--purple);margin-bottom:8px}
+h2{font-size:20px;color:var(--gold);margin:24px 0 12px}
+p{line-height:1.7;margin-bottom:12px;color:#cbd5e1}
+.card{background:var(--glass);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:16px}
+.card h3{color:var(--teal);margin-bottom:8px;font-size:16px}
+.vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px}
+.vocab-item{background:var(--glass);border:1px solid var(--border);border-radius:8px;padding:14px;text-align:center}
+.vocab-item .word{font-size:18px;font-weight:700;color:var(--purple)}
+.vocab-item .meaning{font-size:12px;color:#94a3b8;margin-top:4px}
+.progress-bar{height:8px;background:rgba(255,255,255,0.1);border-radius:4px;overflow:hidden;margin-top:8px}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--purple),var(--gold));border-radius:4px}
+.audio-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:var(--glass);border:1px solid var(--border);border-radius:8px;color:var(--purple);cursor:pointer;font-size:14px;margin:8px 0}
+.audio-btn:hover{background:rgba(168,85,247,0.15)}
+.badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:700;text-transform:uppercase}
+.badge-a1{background:rgba(20,184,166,0.2);color:var(--teal)}
+.stat-row{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.05)}
+.stat-label{color:#94a3b8;font-size:14px}
+.stat-value{color:var(--gold);font-weight:700}
+@media(max-width:600px){nav button{padding:12px 6px;font-size:11px}.tab-content{padding:16px 14px}h1{font-size:22px}}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<nav>
+<button class="active" onclick="showTab('vocab')">Vocabulary</button>
+<button onclick="showTab('listening')">Listening</button>
+<button onclick="showTab('speaking')">Speaking</button>
+<button onclick="showTab('reading')">Reading</button>
+<button onclick="showTab('progress')">Progress</button>
+</nav>
+
+<!-- VOCABULARY TAB -->
+<div id="vocab" class="tab-content active">
+<h1>Lam's Vocabulary</h1>
+<p><span class="badge badge-a1">Level A1</span> &nbsp; Prospect Student &bull; Started May 2026</p>
+
+<h2>Week 1 — Greetings & Introductions</h2>
+<div class="vocab-grid">
+<div class="vocab-item"><div class="word">Hello</div><div class="meaning">Xin chào</div></div>
+<div class="vocab-item"><div class="word">My name is...</div><div class="meaning">Tên tôi là...</div></div>
+<div class="vocab-item"><div class="word">Nice to meet you</div><div class="meaning">Rất vui được gặp bạn</div></div>
+<div class="vocab-item"><div class="word">How are you?</div><div class="meaning">Bạn khỏe không?</div></div>
+<div class="vocab-item"><div class="word">I'm fine</div><div class="meaning">Tôi khỏe</div></div>
+<div class="vocab-item"><div class="word">Thank you</div><div class="meaning">Cảm ơn</div></div>
+<div class="vocab-item"><div class="word">Goodbye</div><div class="meaning">Tạm biệt</div></div>
+<div class="vocab-item"><div class="word">Yes / No</div><div class="meaning">Vâng / Không</div></div>
+</div>
+
+<h2>Week 2 — Daily Activities</h2>
+<div class="vocab-grid">
+<div class="vocab-item"><div class="word">Wake up</div><div class="meaning">Thức dậy</div></div>
+<div class="vocab-item"><div class="word">Eat breakfast</div><div class="meaning">Ăn sáng</div></div>
+<div class="vocab-item"><div class="word">Go to work</div><div class="meaning">Đi làm</div></div>
+<div class="vocab-item"><div class="word">Drink water</div><div class="meaning">Uống nước</div></div>
+<div class="vocab-item"><div class="word">Sleep</div><div class="meaning">Ngủ</div></div>
+<div class="vocab-item"><div class="word">Study English</div><div class="meaning">Học tiếng Anh</div></div>
+</div>
+
+<div class="card" style="margin-top:24px">
+<h3>💡 Study Tip</h3>
+<p>Practice saying each word out loud 3 times. Record yourself and compare with the audio. Focus on sounds that don't exist in Vietnamese: <strong>th</strong>, <strong>r</strong>, final <strong>-t</strong> and <strong>-k</strong>.</p>
+</div>
+</div>
+
+<!-- LISTENING TAB -->
+<div id="listening" class="tab-content">
+<h1>Listening Practice</h1>
+<p><span class="badge badge-a1">Level A1</span> &nbsp; Short dialogues &amp; phrases</p>
+
+<div class="card">
+<h3>🎧 Dialogue 1 — Meeting Someone New</h3>
+<p><em>Listen and answer the questions below.</em></p>
+<div class="audio-btn">▶ Play Audio (coming soon)</div>
+<p style="margin-top:12px"><strong>A:</strong> Hello! My name is Sarah.<br>
+<strong>B:</strong> Hi Sarah! I'm Lam. Nice to meet you.<br>
+<strong>A:</strong> Nice to meet you too, Lam. Where are you from?<br>
+<strong>B:</strong> I'm from Vietnam. And you?<br>
+<strong>A:</strong> I'm from Australia.</p>
+<p style="margin-top:12px;color:var(--gold)"><strong>Questions:</strong></p>
+<ol style="margin-left:20px;color:#cbd5e1">
+<li>What is B's name?</li>
+<li>Where is Lam from?</li>
+<li>Where is Sarah from?</li>
+</ol>
+</div>
+
+<div class="card">
+<h3>🎧 Dialogue 2 — Morning Routine</h3>
+<div class="audio-btn">▶ Play Audio (coming soon)</div>
+<p style="margin-top:12px"><em>I wake up at six o'clock. I eat breakfast at six thirty. I drink coffee and eat bread. I go to work at seven o'clock. I study English at night.</em></p>
+<p style="margin-top:12px;color:var(--gold)"><strong>True or False:</strong></p>
+<ol style="margin-left:20px;color:#cbd5e1">
+<li>I wake up at seven o'clock.</li>
+<li>I drink tea for breakfast.</li>
+<li>I study English at night.</li>
+</ol>
+</div>
+</div>
+
+<!-- SPEAKING TAB -->
+<div id="speaking" class="tab-content">
+<h1>Speaking Practice</h1>
+<p><span class="badge badge-a1">Level A1</span> &nbsp; Record yourself &amp; get feedback</p>
+
+<div class="card">
+<h3>🎤 Task 1 — Introduce Yourself</h3>
+<p>Record yourself answering these questions. Speak slowly and clearly.</p>
+<ol style="margin:12px 0 12px 20px;color:#cbd5e1">
+<li>What is your name?</li>
+<li>Where are you from?</li>
+<li>What do you do?</li>
+<li>Why are you learning English?</li>
+</ol>
+<div class="audio-btn">🎙️ Record (coming soon)</div>
+<p style="font-size:12px;color:#64748b;margin-top:8px">Your recording will be transcribed and scored automatically.</p>
+</div>
+
+<div class="card">
+<h3>🎤 Task 2 — Describe Your Day</h3>
+<p>Tell me about your typical day. Use these sentence starters:</p>
+<ul style="margin:12px 0 12px 20px;color:#cbd5e1">
+<li>I wake up at...</li>
+<li>I eat breakfast at...</li>
+<li>I go to work at...</li>
+<li>In the evening, I...</li>
+</ul>
+<div class="audio-btn">🎙️ Record (coming soon)</div>
+</div>
+
+<div class="card">
+<h3>🗣️ Pronunciation Focus</h3>
+<p>Practice these difficult sounds for Vietnamese speakers:</p>
+<table style="width:100%;margin-top:12px;border-collapse:collapse">
+<tr style="border-bottom:1px solid var(--border)"><td style="padding:8px;color:var(--purple);font-weight:700">/θ/ think, three, thank</td><td style="padding:8px;color:#94a3b8">Tongue between teeth</td></tr>
+<tr style="border-bottom:1px solid var(--border)"><td style="padding:8px;color:var(--purple);font-weight:700">/r/ run, red, right</td><td style="padding:8px;color:#94a3b8">Tongue curls back</td></tr>
+<tr style="border-bottom:1px solid var(--border)"><td style="padding:8px;color:var(--purple);font-weight:700">/ɪ/ sit, big, this</td><td style="padding:8px;color:#94a3b8">Short, relaxed vowel</td></tr>
+<tr><td style="padding:8px;color:var(--purple);font-weight:700">Final -t/-k</td><td style="padding:8px;color:#94a3b8">Don't swallow endings</td></tr>
+</table>
+</div>
+</div>
+
+<!-- READING TAB -->
+<div id="reading" class="tab-content">
+<h1>Reading Practice</h1>
+<p><span class="badge badge-a1">Level A1</span> &nbsp; Short texts &amp; comprehension</p>
+
+<div class="card">
+<h3>📖 Text 1 — My Friend Minh</h3>
+<p>Minh is my friend. He is five years old. He likes superheroes and ice cream. His favorite superhero is Spider-Man. Minh speaks Vietnamese and he is learning English. He is very smart and very funny.</p>
+<p style="margin-top:12px;color:var(--gold)"><strong>Comprehension:</strong></p>
+<ol style="margin-left:20px;color:#cbd5e1">
+<li>How old is Minh?</li>
+<li>What does Minh like?</li>
+<li>What languages does Minh speak?</li>
+</ol>
+</div>
+
+<div class="card">
+<h3>📖 Text 2 — Learning English</h3>
+<p>Learning English is fun but sometimes hard. I practice every day. I listen to songs in English. I watch videos. I read short stories. I speak with my teacher. Mistakes are okay. Every mistake helps me learn. I am getting better every week.</p>
+<p style="margin-top:12px;color:var(--gold)"><strong>Vocabulary Check:</strong></p>
+<p style="color:#cbd5e1">Find these words in the text: <em>practice, listen, mistakes, better</em>. Write one sentence using each word.</p>
+</div>
+
+<div class="card">
+<h3>📖 Text 3 — At the Coffee Shop</h3>
+<p><strong>A:</strong> Hello! Can I have a coffee, please?<br>
+<strong>B:</strong> Sure. Small or large?<br>
+<strong>A:</strong> Large, please. With milk.<br>
+<strong>B:</strong> Anything else?<br>
+<strong>A:</strong> No, thank you. How much is it?<br>
+<strong>B:</strong> That's fifty thousand dong.<br>
+<strong>A:</strong> Here you go. Thank you!<br>
+<strong>B:</strong> You're welcome!</p>
+<p style="margin-top:12px;color:var(--gold)"><strong>Role Play:</strong> Practice this dialogue with a partner. Then try ordering something different.</p>
+</div>
+</div>
+
+<!-- PROGRESS TAB -->
+<div id="progress" class="tab-content">
+<h1>Lam's Progress</h1>
+<p><span class="badge badge-a1">Level A1</span> &nbsp; Prospect Student &bull; Tracking since May 2026</p>
+
+<div class="card">
+<h3>📊 Overall Stats</h3>
+<div class="stat-row"><span class="stat-label">Current Level</span><span class="stat-value">A1 Beginner</span></div>
+<div class="stat-row"><span class="stat-label">Words Learned</span><span class="stat-value">14 / 100</span></div>
+<div class="stat-row"><span class="stat-label">Listening Hours</span><span class="stat-value">0.0 hrs</span></div>
+<div class="stat-row"><span class="stat-label">Speaking Tasks</span><span class="stat-value">0 completed</span></div>
+<div class="stat-row"><span class="stat-label">Reading Passages</span><span class="stat-value">0 / 20</span></div>
+<div class="stat-row"><span class="stat-label">Streak</span><span class="stat-value">Day 1 🔥</span></div>
+</div>
+
+<div class="card">
+<h3>🎯 Weekly Goal</h3>
+<p>Complete 5 vocabulary cards + 1 listening exercise + 1 speaking recording this week.</p>
+<div class="progress-bar"><div class="progress-fill" style="width:10%"></div></div>
+<p style="font-size:12px;color:#64748b;margin-top:4px">10% complete</p>
+</div>
+
+<div class="card">
+<h3>🏆 Achievements</h3>
+<div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:8px">
+<div style="text-align:center;opacity:0.3"><div style="font-size:32px">🌱</div><div style="font-size:11px;color:#94a3b8">First Login</div></div>
+<div style="text-align:center;opacity:0.3"><div style="font-size:32px">📚</div><div style="font-size:11px;color:#94a3b8">10 Words</div></div>
+<div style="text-align:center;opacity:0.3"><div style="font-size:32px">🎤</div><div style="font-size:11px;color:#94a3b8">First Recording</div></div>
+<div style="text-align:center;opacity:0.3"><div style="font-size:32px">🔥</div><div style="font-size:11px;color:#94a3b8">7-Day Streak</div></div>
+<div style="text-align:center;opacity:0.3"><div style="font-size:32px">⭐</div><div style="font-size:11px;color:#94a3b8">Level A2</div></div>
+</div>
+</div>
+
+<div class="card">
+<h3>📝 Teacher Notes</h3>
+<p>Lam is a new prospect student. Portal scaffold created 2026-05-25. First session pending. Focus areas: basic greetings, daily routine vocabulary, pronunciation of th/r/final consonants.</p>
+</div>
+</div>
+
+<script>
+function showTab(id){
+document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+document.getElementById(id).classList.add('active');
+event.target.classList.add('active');
+}
+</script>
+</body>
+</html>
