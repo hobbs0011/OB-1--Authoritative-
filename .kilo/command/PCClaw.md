@@ -10,7 +10,7 @@ Flow:
 3. Call Dialagram/Qwen 3.7 Max:
    - URL: https://dialagram.me/router/v1/chat/completions
    - Model: qwen-3.7-max
-   - Auth: Bearer dgr_live_L4lv48wTGuIQJblOf30Fzgpmso8ohPXQ1Fc9gcIJzmHQjY1MsD
+   - Auth: Bearer dgr_live_th5rbrqKoLWH91C1Hyuj3n52dXyG44uvF3mEfk3PkZecYpBZXL
    - max_tokens: 4096
 4. Apply the result — write to file if code, display if analysis
 5. Verify syntax if JS/TS (node --check) or equivalent

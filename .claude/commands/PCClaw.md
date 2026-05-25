@@ -27,7 +27,7 @@ Invoke-RestMethod `
     -Uri "https://dialagram.me/router/v1/chat/completions" `
     -Method POST `
     -ContentType "application/json" `
-    -Headers @{ "Authorization" = "Bearer dgr_live_L4lv48wTGuIQJblOf30Fzgpmso8ohPXQ1Fc9gcIJzmHQjY1MsD" } `
+    -Headers @{ "Authorization" = "Bearer dgr_live_th5rbrqKoLWH91C1Hyuj3n52dXyG44uvF3mEfk3PkZecYpBZXL" } `
     -Body ([System.Text.Encoding]::UTF8.GetBytes($body)) `
     | Select-Object -ExpandProperty choices `
     | Select-Object -First 1 `
