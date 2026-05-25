@@ -1,11 +1,11 @@
 ---
-description: "CENTURION-CODE — Roman Legion engineer corps (FABRI/ARCHITECTI). Dispatches coding tasks to DeepSeek V4 Pro via Cloudflare worker. Reads real file context, calls HTTP API, applies patch, verifies syntax. Supports full-file and diffMode for large files. Escalates to Tier 2 on failure."
+description: "CENTURION-CODE — Roman Legion engineer corps (FABRI/ARCHITECTI). Dispatches coding tasks to Qwen 3.7 Max via Phoenix-Architecti CF worker. Reads real file context, calls HTTP API, applies patch, verifies syntax. Supports full-file and diffMode for large files. Escalates to T2 Opus on failure."
 agent: AGENT99
 ---
 
 # /Centurion-Code
 
-**Roman Rank: FABRI (Engineer Corps / COMITATENSES mobile strike) | Worker: phoenix-coder v5.1.0 LIVE**
+**Roman Rank: FABRI (Engineer Corps) | Worker: phoenix-architecti LIVE**
 
 **DO NOT spawn an agent. DO NOT use the Agent tool.**
 
@@ -17,8 +17,7 @@ Centurion-Code is an HTTP API. Call it with PowerShell, apply the patch, verify 
 
 ## Phase 0 — Complexity Gate
 
-- Task touches > 3 interdependent files → `DISPATCH → TIER 2 AGENT99 — multi-file scope`
-- Task requires audit / architecture / security → `DISPATCH → TIER 3 DEEPSEEK PRO — analytical task`
+- Task requires final ruling / irreversible decision → `DISPATCH → TIER 2 PA-OPUS — arbitration`
 - Otherwise → proceed. Print: `DISPATCH → TIER 1 CENTURION-CODE (FABRI) — <one-line reason>`
 
 ---
@@ -41,41 +40,46 @@ $body = @{
   task       = "$ARGUMENTS"
   context    = "FILE_CONTENT_OR_EXCERPT"
   targetfile = "D:\OB-1-CANONICAL\PATH\TO\FILE"
+  tier       = 1
   maxTokens  = 8192
 } | ConvertTo-Json -Compress
 
 $result = Invoke-RestMethod `
-  -Uri "https://phoenix-coder.mrmichaelhobbs123.workers.dev/api/code" `
-  -Method POST -ContentType "application/json" -Body $body
+  -Uri "https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/code" `
+  -Method POST -ContentType "application/json" `
+  -Headers @{"x-pa-auth"="ffScwBjPQjBnoAlectawu8E+J4NcmO3idxGxtlcRue8="} `
+  -Body $body
 
 $result.code_patch | Set-Content -Path "D:\OB-1-CANONICAL\PATH\TO\FILE" -Encoding UTF8
-Write-Host "D1: $($result.d1_row_id) | Mode: $($result.mode)"
+Write-Host "D1: $($result.d1_row_id) | Tier: $($result.tier)"
 ```
 
-### Diff mode (existing files > 200 lines — index.js, large portals)
+### Diff mode (existing files > 200 lines)
 
 ```powershell
 $fileContent = Get-Content "D:\OB-1-CANONICAL\APPS\NET-PET-AI\src\index.js" -Raw
 $body = @{
-  task       = "DESCRIBE THE CHANGE — what route/handler to add"
+  task       = "DESCRIBE THE CHANGE"
   context    = $fileContent
   targetfile = "APPS/NET-PET-AI/src/index.js"
+  tier       = 1
   diffMode   = $true
   maxTokens  = 4096
 } | ConvertTo-Json -Compress -Depth 5
 
 $result = Invoke-RestMethod `
-  -Uri "https://phoenix-coder.mrmichaelhobbs123.workers.dev/api/code" `
-  -Method POST -ContentType "application/json" -Body $body
+  -Uri "https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/code" `
+  -Method POST -ContentType "application/json" `
+  -Headers @{"x-pa-auth"="ffScwBjPQjBnoAlectawu8E+J4NcmO3idxGxtlcRue8="} `
+  -Body $body
 
-# result.code_patch contains <<<PATCH>>> blocks — apply manually
 Write-Host $result.code_patch
 ```
 
 ### Worker status check
 
 ```powershell
-Invoke-RestMethod -Uri "https://phoenix-coder.mrmichaelhobbs123.workers.dev/api/status"
+Invoke-RestMethod -Uri "https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/status"
 ```
 
 ---
@@ -100,7 +104,7 @@ Print result:
 CENTURION-CODE PATCH APPLIED
 File: <path>
 d1_row_id: <id>
-Mode: full | diff
+Tier: 1 (Qwen 3.7 Max)
 Syntax: PASS | FAIL
 ```
 
@@ -111,7 +115,7 @@ Syntax: PASS | FAIL
 Trigger when: API unreachable, `code_patch` empty/stub, patch conflicts, syntax fail.
 
 ```
-DISPATCH → TIER 2 AGENT99 — Centurion-Code failed (<reason>). Handling directly.
+DISPATCH → TIER 2 PA-OPUS — Centurion-Code failed (<reason>). Escalating.
 ```
 
 ---

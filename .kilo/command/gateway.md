@@ -1,5 +1,5 @@
 ---
-description: "Full system gateway — SOULCOUNT gate + all workers health check + alias retirement countdown + git state + PC version verification"
+description: "Full system gateway — SOULCOUNT gate + all workers health check + alias retirement status + git state + PA version verification"
 agent: AGENT99
 ---
 
@@ -15,7 +15,7 @@ Run full system health check across all active services.
 
 ```powershell
 $soul = Invoke-RestMethod -Uri "https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count"
-$lock = 898066
+$lock = 907872
 $delta = [Math]::Abs($soul.soulcount - $lock)
 Write-Host "SOULCOUNT: $($soul.soulcount) | LOCK: $lock | DELTA: $delta"
 if ($delta -gt 5000) { Write-Host "SOUL_DRIFT_DETECTED — halt all non-emergency work" }
@@ -26,7 +26,7 @@ else { Write-Host "SOUL_GATE: PASS — delta within ±5,000 tolerance" }
 
 ## Step 1 — Workers Health Check
 
-Ping all three active workers:
+Ping all active workers:
 
 ```powershell
 # NET-PET-AI
@@ -35,24 +35,28 @@ $worker = try { Invoke-RestMethod -Uri "https://net-pet-ai.mrmichaelhobbs123.wor
 # Soul Logger  
 $soul_health = try { Invoke-RestMethod -Uri "https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/self-test" -TimeoutSec 5 } catch { "UNREACHABLE" }
 
-# Phoenix Coder
-$pc_status = try { Invoke-RestMethod -Uri "https://phoenix-coder.mrmichaelhobbs123.workers.dev/api/status" -TimeoutSec 5 } catch { "UNREACHABLE" }
+# Phoenix-Architecti
+$pa_status = try { Invoke-RestMethod -Uri "https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/status" -TimeoutSec 5 } catch { "UNREACHABLE" }
 
-Write-Host "NET-PET-AI:     $(if ($worker -eq 'UNREACHABLE') {'🔴 DOWN'} else {'🟢 UP'})"
-Write-Host "SOUL-LOGGER:    $(if ($soul_health -eq 'UNREACHABLE') {'🔴 DOWN'} else {'🟢 UP'})"
-Write-Host "PHOENIX-CODER:  $(if ($pc_status -eq 'UNREACHABLE') {'🔴 DOWN'} else {'🟢 UP | v' + $pc_status.version})"
+# PCC Dashboard
+$pcc = try { Invoke-RestMethod -Uri "https://pcc.mrmichaelhobbs123.workers.dev/api/status" -TimeoutSec 5 } catch { "UNREACHABLE" }
+
+Write-Host "NET-PET-AI:          $(if ($worker -eq 'UNREACHABLE') {'🔴 DOWN'} else {'🟢 UP'})"
+Write-Host "SOUL-LOGGER:         $(if ($soul_health -eq 'UNREACHABLE') {'🔴 DOWN'} else {'🟢 UP'})"
+Write-Host "PHOENIX-ARCHITECTI:  $(if ($pa_status -eq 'UNREACHABLE') {'🔴 DOWN'} else {'🟢 UP | v' + $pa_status.version})"
+Write-Host "PCC DASHBOARD:       $(if ($pcc -eq 'UNREACHABLE') {'🔴 DOWN'} else {'🟢 UP'})"
 ```
 
 ---
 
 ## Step 2 — Alias Retirement Status
 
-✅ **EXECUTED** — Audit T392 complete (May 23, 2026). `deepseek-chat` and `deepseek-reasoner` aliases retired. All live code uses canonical model IDs: `deepseek-v4-flash`, `deepseek-v4-pro`, `cerebras/gpt-oss-120b`.
+✅ **EXECUTED** — Audit T392 complete (May 23, 2026). `deepseek-chat` and `deepseek-reasoner` aliases retired. All live code uses canonical model IDs.
 
-> **DEPRECATION NOTE:** `stepfun/step-3.5-flash` is retired (StepFun 404 — confirmed dead Run 11). T1 burst model is now `cerebras/gpt-oss-120b` (Cerebras GLM 4.7 via PA T1 free cascade). Do not use StepFun in any new wiring.
+✅ **2-TIER COLLAPSE EXECUTED** — Run 18 (May 25, 2026). T1=Qwen 3.7 Max (Dialagram), T2=Claude Opus 4.7. T3/T4/T5 removed from all active dispatch surfaces.
 
 ```powershell
-Write-Host "ALIAS RETIREMENT: EXECUTED. All live paths use canonical IDs (deepseek-v4-flash, deepseek-v4-pro, cerebras/gpt-oss-120b). StepFun DEPRECATED."
+Write-Host "ALIAS RETIREMENT: EXECUTED. 2-TIER ACTIVE: T1=Qwen 3.7 Max, T2=Opus 4.7."
 ```
 
 ---
@@ -77,13 +81,14 @@ Write-Host "TREE:   $(if ($status) {'DIRTY — ' + $status} else {'CLEAN'})"
 ═══════════════════════════════════════════
 OB-1 GATEWAY — $(Get-Date -Format 'yyyy-MM-dd HH:mm') ICT
 ═══════════════════════════════════════════
-SOULCOUNT:    [count] | DELTA: [delta] | [PASS/DRIFT]
-NET-PET-AI:   [🟢 UP / 🔴 DOWN]
-SOUL-LOGGER:  [🟢 UP / 🔴 DOWN]
-PHOENIX-CODER:[🟢 UP vX.X / 🔴 DOWN]
-ALIAS RETIRE: [N days remaining]
-GIT HEAD:     [sha oneline]
-GIT TREE:     [CLEAN / DIRTY]
+SOULCOUNT:         [count] | DELTA: [delta] | [PASS/DRIFT]
+NET-PET-AI:        [🟢 UP / 🔴 DOWN]
+SOUL-LOGGER:       [🟢 UP / 🔴 DOWN]
+PHOENIX-ARCHITECTI:[🟢 UP vX.X / 🔴 DOWN]
+PCC DASHBOARD:     [🟢 UP / 🔴 DOWN]
+TIERS:             T1=Qwen 3.7 Max | T2=Opus 4.7
+GIT HEAD:          [sha oneline]
+GIT TREE:          [CLEAN / DIRTY]
 ═══════════════════════════════════════════
 ```
 
