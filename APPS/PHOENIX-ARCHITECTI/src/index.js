@@ -112,7 +112,7 @@ async function putFileToGitHub(token, owner, repo, path, content, sha, message) 
   const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`, {
     method: 'PUT',
     headers: { 'Authorization': 'Bearer ' + token, 'Accept': 'application/vnd.github+json', 'User-Agent': 'phoenix-architecti', 'Content-Type': 'application/json' },
-    body: JSON.stringify({ message, content: btoa(unescape(encodeURIComponent(content))), sha })
+    body: JSON.stringify(Object.assign({ message, content: btoa(unescape(encodeURIComponent(content))) }, sha ? { sha } : {}))
   });
   if (!res.ok) throw new Error('GitHub write ' + path + ' ' + res.status + ': ' + await res.text());
   return await res.json();
@@ -134,9 +134,9 @@ async function runMission(env, steps, commitMessage) {
       const aiResult = await env.AI.run('@cf/qwen/qwen2.5-coder-32b-instruct', { messages, max_tokens: 8192 });
       const patch = stripFences(aiResult.response ?? '');
       if (patch && step.write) {
-        const writePath = step.write || step.read;
-        const { sha: writeSha } = await getFileFromGitHub(env.GITHUB_TOKEN, owner, repo, writePath).catch(() => ({ sha }));
-        await putFileToGitHub(env.GITHUB_TOKEN, owner, repo, writePath, patch, writeSha, commitMessage || 'phoenix-runner: ' + step.task.slice(0, 60));
+        const writePath = step.write;
+        const existing = await getFileFromGitHub(env.GITHUB_TOKEN, owner, repo, writePath).catch(() => null);
+        await putFileToGitHub(env.GITHUB_TOKEN, owner, repo, writePath, patch, existing?.sha, commitMessage || 'phoenix-runner: ' + step.task.slice(0, 60));
       }
       results.push({ path: step.read, status: 'ok', chars: patch.length });
     } catch (err) {
