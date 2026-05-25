@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quy â Huấn luyện tiếng Anh Cơ bản</title>
+<style>
+:root{--void:#0a0a12;--purple:#a855f7;--gold:#f59e0b;--teal:#14b8a6;--glass:rgba(255,255,255,0.05);--border:rgba(168,85,247,0.3)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--void);color:#e2e8f0;font-family:'Inter',sans-serif;min-height:100vh}
+nav{display:flex;gap:0;border-bottom:1px solid var(--border);overflow-x:auto}
+nav button{flex:1;padding:14px 8px;background:transparent;border:none;color:#94a3b8;font-size:13px;font-weight:600;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;transition:all .2s}
+nav button.active{color:var(--purple);border-bottom-color:var(--purple);background:var(--glass)}
+nav button:hover{color:var(--gold)}
+.tab-content{display:none;padding:24px 20px;max-width:800px;margin:0 auto}
+.tab-content.active{display:block}
+h1{font-family:'Orbitron',sans-serif;font-size:28px;color:var(--purple);margin-bottom:8px}
+h2{font-size:20px;color:var(--gold);margin:24px 0 12px}
+p{line-height:1.7;margin-bottom:12px;color:#cbd5e1}
+.card{background:var(--glass);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:16px}
+.card h3{color:var(--teal);margin-bottom:8px;font-size:16px}
+.vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px}
+.vocab-item{background:var(--glass);border:1px solid var(--border);border-radius:8px;padding:14px;text-align:center}
+.vocab-item .word{font-size:18px;font-weight:700;color:var(--purple)}
+.vocab-item .meaning{font-size:12px;color:#94a3b8;margin-top:4px}
+.progress-bar{height:8px;background:rgba(255,255,255,0.1);border-radius:4px;overflow:hidden;margin-top:8px}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--purple),var(--gold));border-radius:4px}
+.audio-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:var(--glass);border:1px solid var(--border);border-radius:8px;color:var(--purple);cursor:pointer;font-size:14px;margin:8px 0}
+.audio-btn:hover{background:rgba(168,85,247,0.15)}
+.badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:700;text-transform:uppercase}
+.badge-a1{background:rgba(20,184,166,0.2);color:var(--teal)}
+.stat-row{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.05)}
+.stat-label{color:#94a3b8;font-size:14px}
+.stat-value{color:var(--gold);font-weight:700}
+@media(max-width:600px){nav button{padding:12px 6px;font-size:11px}.tab-content{padding:16px 14px}h1{font-size:22px}}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<nav>
+<button class="active" onclick="showTab('vocab')">Từ vựng</button>
+<button onclick="showTab('phonics')">Phồn thanh</button>
+<button onclick="showTab('listening')">Nghe</button>
+<button onclick="showTab('speaking')">Nói</button>
+<button onclick="showTab('progress')">Tiến trình</button>
+</nav>
+
+<!-- VOCABULARY TAB -->
+<div id="vocab" class="tab-content active">
+<h1>Từ vựng của Quy</h1>
+<p><span class="badge badge-a1">Mức độ A1</span> &nbsp; Học viên tiềm năng &bull; Bắt đầu tháng 5 năm 2026</p>
+
+<h2>Tuần 1 â Greetings &amp; Introductions</h2>
+<div class="vocab-grid">
+<div class="vocab-item"><div class="word">Hello</div><div class="meaning">Xin chào</div></div>
+<div class="vocab-item"><div class="word">My name is...</div><div class="meaning">Tên tôi là...</div></div>
+<div class="vocab-item"><div class="word">Nice to meet you</div><div class="meaning">Rất vui được gặp bạn</div></div>
+<div class="vocab-item"><div class="word">How are you?</div><div class="meaning">Bạn khỏe không?</div></div>
+<div class="vocab-item"><div class="word">I'm fine</div><div class="meaning">Tôi khỏe</div></div>
+<div class="vocab-item"><div class="word">Thank you</div><div class="meaning">Cảm ơn</div></div>
+<div class="vocab-item"><div class="word">Goodbye</div><div class="meaning">Tạm biệt</div></div>
+<div class="vocab-item"><div class="word">Yes / No</div><div class="meaning">Vâng / Không</div></div>
+</div>
+
+<div class="card" style="margin-top:24px">
+<h3>ð¡ Mẹo học tập</h3>
+<p>Hãy đọc mỗi từ ra ngoài 3 lần. Ghi âm và so sánh với âm thanh. Tập trung vào những âm thanh không tồn tại trong tiếng Việt: <strong>th</strong>, <strong>r</strong>, phụ âm cuối <strong>-t</strong> và <strong>-k</strong>.</p>
+</div>
+</div>
+
+<!-- PHONICS TAB -->
+<div id="phonics" class="tab-content">
+<h1>Học Phồn Thanh</h1>
+<p><span class="badge badge-a1">Mức độ A1</span> &nbsp; Phát âm cơ bản</p>
+
+<div class="card">
+<h3>ð§ Bài học 1 â Phụ âm /th/, /r/</h3>
+<p><em>Hãy thử phát âm các từ dưới đây.</em></p>
+<ul style="margin:12px 0 12px 20px;color:#cbd5e1">
+<li>Think</li>
+<li>Run</li>
+<li>Three</li>
+<li>Right</li>
+</ul>
+<div class="audio-btn">â¶ Nghe âm thanh mẫu (sắp tới)</div>
+</div>
+
+<div class="card">
+<h3>ð§ Bài học 2 â Phụ âm cuối -t, -k</h3>
+<p><em>Hãy thử phát âm các từ dưới đây.</em></p>
+<ul style="margin:12px 0 12px 20px;color:#cbd5e1">
+<li>Cat</li>
+<li>Kit</li>
+<li>Bit</li>
+<li>Kick</li>
+</ul>
+<div class="audio-btn">â¶ Nghe âm thanh mẫu (sắp tới)</div>
+</div>
+</div>
+
+<!-- LISTENING TAB -->
+<div id="listening" class="tab-content">
+<h1>Luyện Nghe</h1>
+<p><span class="badge badge-a1">Mức độ A1</span> &nbsp; Đoạn hội thoại ngắn</p>
+
+<div class="card">
+<h3>ð§ Đoạn hội thoại 1 â Gặp người mới</h3>
+<p><em>Nghe và trả lời các câu hỏi dưới đây.</em></p>
+<div class="audio-btn">â¶ Phát âm (sắp tới)</div>
+<p style="margin-top:12px"><strong>A:</strong> Hello! My name is Sarah.<br>
+<strong>B:</strong> Hi Sarah! Tôi là Quy. Rất vui được gặp bạn.<br>
+<strong>A:</strong> Rất vui được gặp bạn, Quy. Bạn đến từ đâu?<br>
+<strong>B:</strong> Tôi đến từ Việt Nam. Còn bạn?<br>
+<strong>A:</strong> Tôi đến từ Úc.</p>
+<p style="margin-top:12px;color:var(--gold)"><strong>Câu hỏi:</strong></p>
+<ol style="margin-left:20px;color:#cbd5e1">
+<li>Tên của B là gì?</li>
+<li>Quy đến từ đâu?</li>
+<li>Sarah đến từ đâu?</li>
+</ol>
+</div>
+</div>
+
+<!-- SPEAKING TAB -->
+<div id="speaking" class="tab-content">
+<h1>Luyện Nói</h1>
+<p><span class="badge badge-a1">Mức độ A1</span> &nbsp; Ghi âm và nhận phản hồi</p>
+
+<div class="card">
+<h3>ð¤ Nhiệm vụ 1 â Giới thiệu bản thân</h3>
+<p>Ghi âm khi trả lời các câu hỏi sau. Hãy nói chậm và rõ ràng.</p>
+<ol style="margin:12px 0 12px 20px;color:#cbd5e1">
+<li>Tên bạn là gì?</li>
+<li>Bạn đến từ đâu?</li>
+<li>Bạn làm gì?</li>
+<li>Tại sao bạn học tiếng Anh?</li>
+</ol>
+<div class="audio-btn">ðï¸ Ghi âm (sắp tới)</div>
+<p style="font-size:12px;color:#64748b;margin-top:8px">Ghi âm của bạn sẽ được chuyển đổi và điểm tự động.</p>
+</div>
+</div>
+
+<!-- PROGRESS TAB -->
+<div id="progress" class="tab-content">
+<h1>Tiến trình của Quy</h1>
+<p><span class="badge badge-a1">Mức độ A1</span> &nbsp; Học viên tiềm năng &bull; Theo dõi từ tháng 5 năm 2026</p>
+
+<div class="card">
+<h3>ð Tổng quan</h3>
+<div class="stat-row"><span class="stat-label">Mức độ hiện tại</span><span class="stat-value">A1 Người mới bắt đầu</span></div>
+<div class="stat-row"><span class="stat-label">Từ đã học</span><span class="stat-value">8 / 100</span></div>
+<div class="stat-row"><span class="stat-label">Giờ nghe</span><span class="stat-value">0.0 giờ</span></div>
+<div class="stat-row"><span class="stat-label">Nhiệm vụ nói</span><span class="stat-value">0 hoàn thành</span></div>
+<div class="stat-row"><span class="stat-label">Đoạn văn đọc</span><span class="stat-value">0 / 20</span></div>
+<div class="stat-row"><span class="stat-label">Dàn trải</span><span class="stat-value">Ngày 1 ð¥</span></div>
+</div>
+
+<div class="card">
+<h3>ð¯ Mục tiêu hàng tuần</h3>
+<p>Hoàn thành 5 thẻ từ vựng + 1 bài tập nghe + 1 ghi âm nói trong tuần này.</p>
+<div class="progress-bar"><div class="progress-fill" style="width:10%"></div></div>
+<p style="font-size:12px;color:#64748b;margin-top:4px">10% hoàn thành</p>
+</div>
+
+<div class="card">
+<h3>ð Thành tích</h3>
+<div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:8px">
+<div style="text-align:center;opacity:0.3"><div style="font-size:32px">ð±</div><div style="font-size:11px;color:#94a3b8">Đăng nhập lần đầu</div></div>
+<div style="text-align:center;opacity:0.3"><div style="font-size:32px">ð</div><div style="font-size:11px;color:#94a3b8">10 Từ</div></div>
+<div style="text-align:center;opacity:0.3"><div style="font-size:32px">ð¤</div><div style="font-size:11px;color:#94a3b8">Ghi âm lần đầu</div></div>
+<div style="text-align:center;opacity:0.3"><div style="font-size:32px">ð¥</div><div style="font-size:11px;color:#94a3b8">Dàn trải 7 ngày</div></div>
+<div style="text-align:center;opacity:0.3"><div style="font-size:32px">â­</div><div style="font-size:11px;color:#94a3b8">Mức độ A2</div></div>
+</div>
+</div>
+
+<div class="card">
+<h3>ð Ghi chú giáo viên</h3>
+<p>Quy là học viên tiềm năng mới. Trang cổng học tập được tạo ra vào 25/05/2026. Phiên họp đầu tiên đang chờ đợi. Các lĩnh vực tập trung: lời chào cơ bản, từ vựng về cuộc sống hàng ngày, phát âm th/r/phụ âm cuối.</p>
+</div>
+</div>
+
+<script>
+function showTab(id){
+document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+document.getElementById(id).classList.add('active');
+event.target.classList.add('active');
+}
+</script>
+</body>
+</html>
