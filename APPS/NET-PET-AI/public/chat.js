@@ -284,6 +284,18 @@ function isGreeting(text) {
   return /^(hi|hey|hello|yo|sup|what'?s up|howdy|hola|good morning|good afternoon|good evening|morning|xin ch[aà]o)\b/i.test(text.trim());
 }
 
+function isMusicOnly(text) {
+  const t = text.toLowerCase();
+  const hasMusic = /\b(music|song|songs|nhạc|spotify|zingmp3|kpop|pop|rap|lofi|lo-fi|playlist)\b/.test(t);
+  const hasRealListening = /\b(podcast|youtube|netflix|drama|show|video|movie|phim|channel|vlog|ted|news|series)\b/.test(t);
+  return hasMusic && !hasRealListening;
+}
+
+function isFrozen(text) {
+  const t = text.toLowerCase().trim();
+  return t.length < 8 || /^(ok|okay|yes|no|yeah|yep|nope|fine|good|sure|idk|maybe|nothing|dunno|hm+|um+|oh|ah|i see|i know|really|wow|nice)$/i.test(t);
+}
+
 // ── Onboarding ─────────────────────────────────────────────
 
 async function submitOnboarding() {
@@ -437,6 +449,21 @@ function reactFallback(text, round) {
   return mid[round % mid.length];
 }
 
+function buildVolumeNudge(text) {
+  const words = text.split(/\s+/).filter(Boolean).length;
+  if (words >= 12) return null; // good length, no nudge needed
+  if (words < 5 && chatRound > 3) {
+    const nudges = [
+      "More! Give me a full sentence — what actually happened?",
+      "That is Mouse Voice. Tiger gives me the whole story.",
+      "Don't stop there. What happened next?",
+      "Full sentence — you can do it.",
+    ];
+    return nudges[chatRound % nudges.length];
+  }
+  return null;
+}
+
 function pickStarter() {
   const g = (profile.goals || "").toLowerCase();
   if (g.includes("friend"))    return "So — what do you and your friends usually talk about?";
@@ -564,6 +591,28 @@ async function handle(text) {
         obi(`${firstName()}! What\u2019s going on? Tell me something!`);
         break;
       }
+
+      // Music-only listening redirect
+      if (chatRound <= 3 && isMusicOnly(t)) {
+        obi("Music is great — but for your 45 minutes, you need something with talking. A show, a YouTube video, a podcast. What is something you already watch or listen to that has people speaking English?");
+        break;
+      }
+
+      // Freeze buster — short vague answer after a substantive exchange
+      if (chatRound > 2 && isFrozen(t) && chatHistory.length > 0) {
+        const busters = [
+          "Why?",
+          "Tell me more — what happened exactly?",
+          "And then what?",
+          "Give me the full story.",
+          "Why do you think that?",
+        ];
+        obi(busters[chatRound % busters.length]);
+        chatHistory.push(t);
+        chatRound++;
+        break;
+      }
+
       if (t.length < 2 || isVague(t)) {
         const n = trackStruggle("chat");
         if (n >= 3) {
@@ -582,6 +631,13 @@ async function handle(text) {
       try {
         const chatReply = await withTyping(() => reactLLM(t));
         obi(chatReply);
+
+        // Volume nudge — if student reply was very short, add a push after Obi's response
+        const volumeNudge = buildVolumeNudge(t);
+        if (volumeNudge && chatRound > 3 && chatRound % 3 === 0) {
+          await pause(400);
+          obi(volumeNudge);
+        }
 
         // Every 10 rounds: one contextual phonics tip mid-conversation
         if (chatRound % 10 === 0) {
