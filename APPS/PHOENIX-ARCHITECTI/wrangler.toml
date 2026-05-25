@@ -13,3 +13,6 @@ id = "ea5c8e99cb584dee9ab4f9ba5ed421c9"
 binding = "DB"
 database_name = "soul-archive"
 database_id = "c69a11bc-064b-478f-9b1f-e9b8e2431fb8"
+
+[triggers]
+crons = ["0 */6 * * *"]

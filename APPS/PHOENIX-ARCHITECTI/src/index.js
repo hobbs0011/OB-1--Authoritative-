@@ -98,6 +98,73 @@ async function callTier(env, tier, messages) {
   return result;
 }
 
+// ── GitHub API helpers ────────────────────────────────────────────────────────
+async function getFileFromGitHub(token, owner, repo, path) {
+  const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`, {
+    headers: { 'Authorization': 'Bearer ' + token, 'Accept': 'application/vnd.github+json', 'User-Agent': 'phoenix-architecti' }
+  });
+  if (!res.ok) throw new Error('GitHub read ' + path + ' ' + res.status);
+  const data = await res.json();
+  return { content: atob(data.content.replace(/\n/g, '')), sha: data.sha };
+}
+
+async function putFileToGitHub(token, owner, repo, path, content, sha, message) {
+  const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`, {
+    method: 'PUT',
+    headers: { 'Authorization': 'Bearer ' + token, 'Accept': 'application/vnd.github+json', 'User-Agent': 'phoenix-architecti', 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message, content: btoa(unescape(encodeURIComponent(content))), sha })
+  });
+  if (!res.ok) throw new Error('GitHub write ' + path + ' ' + res.status + ': ' + await res.text());
+  return await res.json();
+}
+
+// ── Mission runner ────────────────────────────────────────────────────────────
+async function runMission(env, steps, commitMessage) {
+  const missionId = 'MR-' + Date.now() + '-' + Math.random().toString(36).slice(2, 6).toUpperCase();
+  const results = [];
+  const [owner, repo] = ['Phoenix-Rising-Ai-Solutions', 'OB-1--Authoritative-'];
+
+  for (const step of steps) {
+    try {
+      const { content, sha } = await getFileFromGitHub(env.GITHUB_TOKEN, owner, repo, step.read);
+      const messages = [
+        { role: 'system', content: SYSTEM_PROMPT },
+        { role: 'user', content: 'CONTEXT:\n' + content + '\n\nTASK:\n' + step.task }
+      ];
+      const aiResult = await env.AI.run('@cf/qwen/qwen2.5-coder-32b-instruct', { messages, max_tokens: 8192 });
+      const patch = stripFences(aiResult.response ?? '');
+      if (patch && step.write) {
+        const writePath = step.write || step.read;
+        const { sha: writeSha } = await getFileFromGitHub(env.GITHUB_TOKEN, owner, repo, writePath).catch(() => ({ sha }));
+        await putFileToGitHub(env.GITHUB_TOKEN, owner, repo, writePath, patch, writeSha, commitMessage || 'phoenix-runner: ' + step.task.slice(0, 60));
+      }
+      results.push({ path: step.read, status: 'ok', chars: patch.length });
+    } catch (err) {
+      results.push({ path: step.read, status: 'error', error: err.message });
+    }
+  }
+
+  try {
+    await env.DB.prepare(
+      'INSERT INTO phoenix_architecti_log (id, tasktype, taskinput, result, createdat) VALUES (?, ?, ?, ?, datetime(\'now\'))'
+    ).bind(missionId, 'mission', JSON.stringify(steps).slice(0, 2000), JSON.stringify(results).slice(0, 4000)).run();
+  } catch (_) {}
+
+  return { mission_id: missionId, steps: results };
+}
+
+async function handleMission(request, env) {
+  const authHeader = request.headers.get('x-pa-auth');
+  if (env.PA_AUTH_SECRET && authHeader !== env.PA_AUTH_SECRET) {
+    return Response.json({ error: 'UNAUTHORIZED' }, { status: 401 });
+  }
+  if (!env.GITHUB_TOKEN) return Response.json({ error: 'GITHUB_TOKEN not set' }, { status: 500 });
+  const body = await request.json();
+  if (!body.steps?.length) return Response.json({ error: 'steps array required' }, { status: 400 });
+  const result = await runMission(env, body.steps, body.commit_message);
+  return Response.json(result);
+}
+
 // ── Cache ─────────────────────────────────────────────────────────────────────
 async function withCache(env, key, tier, fn) {
   const cacheKey = 'llm-t' + tier + '-' + btoa(encodeURIComponent(key).slice(0, 120));
@@ -204,6 +271,12 @@ async function handleLog(request, env) {
 const CORS = { 'Access-Control-Allow-Origin': 'https://phoenix-architecti.mrmichaelhobbs123.workers.dev', 'Access-Control-Allow-Methods': 'GET, POST, OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type, x-pa-auth' };
 
 export default {
+  async scheduled(event, env, ctx) {
+    const steps = [
+      { read: 'CLAUDE.md', task: 'Verify this file says 2-tier dispatch system (T1=Qwen, T2=Opus). If correct reply: VERIFIED 2-TIER OK. If stale reply: DRIFT DETECTED — [what is wrong].', write: null }
+    ];
+    await runMission(env, steps, 'cron: health check');
+  },
   async fetch(request, env) {
     const url = new URL(request.url);
     const method = request.method;
@@ -212,6 +285,7 @@ export default {
       let response;
       if (method === 'POST' && url.pathname === '/api/code') response = await handleCode(request, env);
       else if (method === 'POST' && url.pathname === '/api/crunch') response = await handleCrunch(request, env);
+      else if (method === 'POST' && url.pathname === '/api/mission') response = await handleMission(request, env);
       else if (method === 'GET' && url.pathname === '/api/status') response = await handleStatus(env);
       else if (method === 'GET' && url.pathname === '/api/log') response = await handleLog(request, env);
       else response = Response.json({ error: 'Not found', drone: 'phoenix-architecti' }, { status: 404 });
