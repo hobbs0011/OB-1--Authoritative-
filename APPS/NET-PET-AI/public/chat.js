@@ -260,13 +260,13 @@ function firstName() {
 function lock() {
   input.disabled = true;
   sendBtn.disabled = true;
-  micBtn.disabled = true;
+  if (micBtn) micBtn.disabled = true;
 }
 
 function unlock() {
   input.disabled = false;
   sendBtn.disabled = false;
-  micBtn.disabled = false;
+  if (micBtn) micBtn.disabled = false;
   input.focus();
 }
 
@@ -561,25 +561,30 @@ async function handle(text) {
       chatHistory.push(t);
       chatRound++;
 
-      const chatReply = await withTyping(() => reactLLM(t));
-      obi(chatReply);
+      state = "busy";
+      try {
+        const chatReply = await withTyping(() => reactLLM(t));
+        obi(chatReply);
 
-      // Every 10 rounds: one contextual phonics tip mid-conversation
-      if (chatRound % 10 === 0) {
-        const tips = buildPronunciationTips();
-        if (tips.length > 0) {
-          await pause(600);
-          obi(tips[(Math.floor(chatRound / 10) - 1) % tips.length]);
+        // Every 10 rounds: one contextual phonics tip mid-conversation
+        if (chatRound % 10 === 0) {
+          const tips = buildPronunciationTips();
+          if (tips.length > 0) {
+            await pause(600);
+            obi(tips[(Math.floor(chatRound / 10) - 1) % tips.length]);
+          }
         }
-      }
 
-      // Every 30 rounds: silent checkin \u2014 no state change, no reset
-      if (chatRound % 30 === 0) {
-        api("/api/netpet/checkin", "POST", {
-          studentId: profile.studentId,
-          minutes: 5,
-          confidence: 6
-        }).catch(() => {});
+        // Every 30 rounds: silent checkin \u2014 no state change, no reset
+        if (chatRound % 30 === 0) {
+          api("/api/netpet/checkin", "POST", {
+            studentId: profile.studentId,
+            minutes: 5,
+            confidence: 6
+          }).catch(() => {});
+        }
+      } finally {
+        if (state === "busy") state = "chat";
       }
       break;
     }

@@ -102,6 +102,30 @@
     'teacher': [
       'Hey teacher! 🐯 This Classroom Manager is built for you — check student notes with AI, track class events, and manage your roster all in one place.',
       'Try asking me about "notes checker", "roster", "session log", or "api key" for step-by-step help.'
+    ],
+    'youtube': [
+      'Watch English YouTube for 10 minutes every day — news, vlogs, anything you enjoy.',
+      'The NET Chrome extension logs what you watch and tells Obi. Then we can talk about it!'
+    ],
+    'chrome extension': [
+      'Install the NET Chrome Extension — it tracks your English YouTube watching and gives Obi a heads-up before your session.',
+      'Ask your teacher for the install link or find it in your student portal.'
+    ],
+    'my portal': [
+      'Your student portal has your profile, action plan, career goals, methodology, and session transcripts.',
+      'Ask your teacher for your portal link, or check the URL your teacher gave you.'
+    ],
+    'coach': [
+      'Your coach is Michael Hobbs — he reviews every submission personally and contacts you within 24 hours.',
+      'Email: hobbs@naturalenglishtraining.com | WhatsApp is also fine for quick questions.'
+    ],
+    'michael': [
+      'Michael Hobbs is your NET coach. He reviews assessments, sets your learning plan, and coaches you live.',
+      'Reach him at hobbs@naturalenglishtraining.com or WhatsApp.'
+    ],
+    'action plan': [
+      'Your action plan is in your student portal — it shows your current focus areas and weekly targets.',
+      'Ask your teacher for your portal link if you haven\'t seen it yet.'
     ]
   };
 
