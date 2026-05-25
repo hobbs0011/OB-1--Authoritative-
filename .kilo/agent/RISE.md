@@ -38,7 +38,7 @@ Invoke-RestMethod -Uri "https://soul-logger.mrmichaelhobbs123.workers.dev/api/so
 ### Step 1 — Tier Routing (inherits AGENT99 routing)
 
 Print before executing:
-`DISPATCH → [TIER 1 PHOENIXCODER | TIER 2 RISE | TIER 3 DEEPSEEK PRO] — <one-line reason>`
+`DISPATCH → [TIER 1 PA-QWEN | TIER 2 PA-OPUS] — <one-line reason>`
 
 ---
 

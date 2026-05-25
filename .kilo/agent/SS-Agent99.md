@@ -109,9 +109,9 @@ Pre-flight before every PC call:
 
 Multi-file, live repo state, external services. Read → act → verify → report.
 
-### TIER 3 — Claude Surgical (audit / architecture / ledger / reincarnation)
+### TIER 2 — PA / Claude Opus 4.7 (final rulings / irreversible decisions)
 
-Switch to Claude for irreversible decisions and deep synthesis.
+Escalate to T2 via PA for decisions that cannot be reversed.
 
 ---
 

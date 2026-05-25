@@ -1,5 +1,5 @@
 ---
-description: "Phoenix Architecti Agents — 4-tier dispatch system. T1=Qwen Max (free), T2=Opus 4.7, T3=DeepSeek Pro, T4=Gemini. Specify tier with [T1]-[T4] prefix or default T1."
+description: "Phoenix Architecti Agents — 2-tier dispatch. T1=Qwen 3.7 Max, T2=Opus 4.7. Specify tier with [T1]-[T2] prefix or default T1."
 ---
 
 # /PAA — Phoenix Architecti Agents
@@ -9,10 +9,8 @@ description: "Phoenix Architecti Agents — 4-tier dispatch system. T1=Qwen Max 
 **TIERS:**
 | Tier | Model | Use when |
 |------|-------|----------|
-| T1 | Qwen 3.7 Max (Dialagram) — FREE | write / implement / generate / boilerplate |
-| T2 | Claude Opus 4.7 | fix / debug / refactor / integrate / high-quality generation |
-| T3 | DeepSeek V4 Pro | audit / analyze / architecture / deep synthesis |
-| T4 | Gemini 3.5 Flash | heavy cross-domain / large context |
+| T1 | Qwen 3.7 Max (Dialagram) | ALL workhorse: write / implement / generate / fix / debug / refactor / audit / pipeline |
+| T2 | Claude Opus 4.7 | Final rulings / irreversible decisions / arbitration only |
 
 ---
 
@@ -20,7 +18,7 @@ description: "Phoenix Architecti Agents — 4-tier dispatch system. T1=Qwen Max 
 
 Parse `$ARGUMENTS` for tier prefix and task:
 - `[T1] implement a ...` → tier 1
-- `[T2] fix the bug in ...` → tier 2
+- `[T2] final ruling on ...` → tier 2
 - No prefix → default tier 1
 
 **Step 1 — Read target file (if task involves a file):**
@@ -34,7 +32,7 @@ $body = @{
     task       = "<TASK FROM ARGUMENTS>"
     context    = "<FILE CONTENT OR RELEVANT CONTEXT>"
     targetfile = "<ABSOLUTE TARGET FILE PATH>"
-    tier       = <1|2|3|4>
+    tier       = <1|2>
 } | ConvertTo-Json -Compress
 
 $result = Invoke-RestMethod `
@@ -52,7 +50,7 @@ Write-Output "D1 Row: $($result.d1_row_id)"
 
 - Write `code_patch` to `targetfile`
 - Run `node --check <file>` for JS, or equivalent syntax check
-- If result is empty or contains "GENERATION_FAILED": escalate tier by 1, retry once
+- If result is empty or contains "GENERATION_FAILED": escalate to T2, retry once
 
 **Step 4 — Report:**
 
@@ -78,8 +76,8 @@ T1 key: `Dialagram-Qwen3.7Max ✓` means Qwen Max is live. If `NO KEY` → skip 
 ## RULES
 
 - Always read the target file before dispatching — pass real context, never empty
-- T1 = Qwen Max via Dialagram — confirmed live and frontier-tier
-- T2-T4 require paid keys — check status first if uncertain
+- T1 = Qwen 3.7 Max via Dialagram — confirmed live and frontier-tier
+- T2 = Claude Opus 4.7 — final rulings only
 - If $ARGUMENTS is empty: ask "What task, what tier, what file?"
 - Cache: PA caches identical task+context for 1hr — add a unique token to bust if needed
 - D1 row ID is the receipt — log it if the task is important

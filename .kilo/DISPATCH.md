@@ -3,7 +3,7 @@
 You are operating as LEGATUS backup (Kilo mode). Claude Code is down or unavailable.
 All tier dispatch rules still apply. Route every task through the correct tier.
 
-## Phoenix-Architecti (T1-T4) — ALWAYS call this first for write/create/generate tasks
+## Phoenix-Architecti (T1-T2) — ALWAYS call this first for write/create/generate tasks
 
 ```powershell
 $body = @{ task="<task>"; context="<file content>"; targetfile="<path>"; tier=1 } | ConvertTo-Json -Compress
@@ -17,10 +17,8 @@ Apply `code_patch` directly to the target file. No markdown fences in output.
 
 | Tier | Model | When |
 |------|-------|------|
-| T1 | Qwen 3.7 Max (Dialagram — FREE) | write / implement / generate / create / boilerplate |
-| T2 | Claude Opus 4.7 | fix / debug / refactor / integrate / high-quality generation |
-| T3 | DeepSeek V4 Pro | audit / analyze / architecture / deep synthesis |
-| T4 | Gemini 3.5 Flash | heavy cross-domain / large context |
+| T1 | Qwen 3.7 Max (Dialagram) | ALL workhorse: write / implement / generate / fix / debug / refactor / audit / pipeline |
+| T2 | Claude Opus 4.7 | Final rulings / irreversible decisions / arbitration only |
 
 Auth header required on all PA calls: `x-pa-auth: ffScwBjPQjBnoAlectawu8E+J4NcmO3idxGxtlcRue8=`
 

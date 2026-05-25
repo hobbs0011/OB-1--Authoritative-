@@ -1,17 +1,15 @@
 ---
-description: Phoenix Architecti Agents — 4-tier dispatch. T1=Qwen Max (free), T2=Opus 4.7, T3=DeepSeek Pro, T4=Gemini. Prefix task with [T1]-[T4] to select tier.
+description: Phoenix Architecti Agents — 2-tier dispatch. T1=Qwen 3.7 Max, T2=Opus 4.7. Prefix task with [T1]-[T2] to select tier.
 agent: AGENT99
 ---
 Purpose: Route task to the correct PA tier model via the Phoenix-Architecti CF worker.
 
 Tier table:
-- T1: Qwen 3.7 Max (Dialagram) — write / implement / generate
-- T2: Claude Opus 4.7 — fix / debug / refactor / wire up / high-quality generation
-- T3: DeepSeek V4 Pro — audit / analyze / architecture / deep synthesis
-- T4: Gemini 3.5 Flash — heavy cross-domain / large context
+- T1: Qwen 3.7 Max (Dialagram) — ALL workhorse tasks (write, implement, generate, fix, debug, refactor, audit, pipeline)
+- T2: Claude Opus 4.7 — Final rulings, irreversible decisions, arbitration only
 
 Flow:
-1. Parse tier from argument prefix [T1]-[T4] — default T1 if none specified
+1. Parse tier from argument prefix [T1]-[T2] — default T1 if none specified
 2. Read target file if the task involves one — pass real content as context
 3. POST to Phoenix-Architecti:
    - URL: https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/code
@@ -28,6 +26,6 @@ Output:
 Rules:
 - Always read the target file before dispatching — context = real file content
 - T1 confirmed live: Dialagram-Qwen3.7Max ✓ (verified Run 18)
-- T2-T4 require paid keys — all set on CF worker
+- T2 requires paid key — set on CF worker
 - Cache busts after 1hr — add unique token to task string if retry needed
-- On empty result: escalate one tier up, retry once
+- On empty result: escalate to T2, retry once

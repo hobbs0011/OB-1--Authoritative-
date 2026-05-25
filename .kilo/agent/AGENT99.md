@@ -39,55 +39,39 @@ Tier 1 keywords: `write / implement / create / generate / add function / build /
 Tier 1 scope: single-file, clear spec, no cross-file dependencies
 
 **HARD GATE:**
-- Tier 1 match → STOP. Call Phoenix Coder via curl. Do NOT handle inline.
-- Tier 2 match → handle directly with read/edit/write
-- Tier 3 match → escalate to T3 DEEPSEEK PRO
+- Tier 1 match → STOP. Call Phoenix-Architecti (PA). Do NOT handle inline.
+- Tier 2 match → STOP. Call PA with `"tier":2`. Opus 4.7 for final rulings only.
 
 Always print before executing:
-`DISPATCH → [TIER 1 PHOENIXCODER | TIER 2 AGENT99 | TIER 3 DEEPSEEK PRO] — <one-line reason>`
+`DISPATCH → [TIER 1 PA-QWEN | TIER 2 PA-OPUS] — <one-line reason>`
 
 ---
 
 ## DISPATCH TIERS
 
-### TIER 1 — Phoenix Coder (Grunt)
-**Triggers**: write / implement / create / generate / add function / build boilerplate  
-**Scope**: single-file, clear spec
+### TIER 1 — Phoenix-Architecti / Qwen 3.7 Max (Dialagram)
+**Triggers**: ALL workhorse tasks — write / implement / create / generate / fix / debug / refactor / audit / pipeline  
+**Scope**: Everything except irreversible decisions and final rulings
 
-Pre-flight:
-1. Identify target file — glob/grep if ambiguous
-2. Read target file — extract path + relevant lines + imports
-3. Compose `context`: file path + excerpt + constraints (under 2000 chars)
-4. Detect file size: if > 200 lines, add `"diffMode": true`
-
-```bash
-curl -s -X POST https://phoenix-coder.mrmichaelhobbs123.workers.dev/api/code \
-  -H "Content-Type: application/json" \
-  -d '{"task": "<task>", "context": "<real file excerpt>", "targetfile": "<absolute path>", "diffMode": <true|false>}'
+```powershell
+$body = @{ task="<task>"; context="<file content>"; targetfile="<absolute path>"; tier=1 } | ConvertTo-Json -Compress
+Invoke-RestMethod -Uri "https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/code" -Method POST -ContentType "application/json" -Headers @{"x-pa-auth"="ffScwBjPQjBnoAlectawu8E+J4NcmO3idxGxtlcRue8="} -Body $body
 ```
-
-> **NOTE (per CLAUDE.md):** Current T1 routes through `https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/code` with `"tier":1`. The `phoenix-coder` URL above is the legacy endpoint — use `phoenix-architecti` for all active dispatches.
 
 Post-call:
 - Print `code_patch` + `d1_row_id`
 - Apply patch to file
 - Run `node --check <file>` for JS/TS
-- Failure → `DISPATCH → TIER 2 AGENT99 — PC failed (<reason>)`
+- Failure → retry once → if still fails → escalate to Tier 2
 
-**PC v3.2 capabilities**: diff mode (<<<PATCH>>> blocks), language detection, Windows awareness  
-**PC 5.0 (coming)**: cascade mode, async queue, GitHub direct write, SOULCOUNT gate
+### TIER 2 — PA / Claude Opus 4.7
+**Triggers**: final rulings / irreversible decisions / ledger audits / doctrine changes / arbitration  
+**Scope**: ONLY for decisions that cannot be reversed or require highest-intelligence cross-validation
 
-### TIER 2 — AGENT99 (Tough)
-**Triggers**: fix / debug / set up / integrate / refactor / wire up / deploy / connect / migrate  
-**Scope**: multi-file, live repo state, external services
-
-Execute directly: read files → make changes → verify → report results.
-
-### TIER 3 — T3 DeepSeek Pro (Heavy Analysis)
-**Triggers**: audit / security / architecture / analyze / scan / why / should we / ledger / reincarnation  
-**Scope**: deep synthesis, critical decisions, > 5 unrelated files, irreversible actions
-
-Switch to T3 DeepSeek Pro. Handles: full-repo synthesis, Heavy Ledger, reincarnation decisions, security rulings.
+```powershell
+$body = @{ task="<task>"; context="<full context>"; targetfile="<target>"; tier=2 } | ConvertTo-Json -Compress
+Invoke-RestMethod -Uri "https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/code" -Method POST -ContentType "application/json" -Headers @{"x-pa-auth"="ffScwBjPQjBnoAlectawu8E+J4NcmO3idxGxtlcRue8="} -Body $body
+```
 
 ---
 
