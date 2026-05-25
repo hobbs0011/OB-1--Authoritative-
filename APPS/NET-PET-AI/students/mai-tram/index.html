@@ -1,103 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mai Trâm â Natural English Training</title>
+<style>
+:root{--void:#0a0a12;--purple:#a855f7;--gold:#f59e0b;--teal:#14b8a6;--glass:rgba(255,255,255,0.05);--border:rgba(168,85,247,0.3)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--void);color:#e2e8f0;font-family:'Inter',sans-serif;min-height:100vh}
+nav{display:flex;gap:0;border-bottom:1px solid var(--border);overflow-x:auto}
+nav button{flex:1;padding:14px 8px;background:transparent;border:none;color:#94a3b8;font-size:13px;font-weight:600;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;transition:all .2s}
+nav button.active{color:var(--purple);border-bottom-color:var(--purple);background:var(--glass)}
+nav button:hover{color:var(--gold)}
+.tab-content{display:none;padding:24px 20px;max-width:800px;margin:0 auto}
+.tab-content.active{display:block}
+h1{font-family:'Orbitron',sans-serif;font-size:28px;color:var(--purple);margin-bottom:8px}
+h2{font-size:20px;color:var(--gold);margin:24px 0 12px}
+p{line-height:1.7;margin-bottom:12px;color:#cbd5e1}
+.card{background:var(--glass);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:16px}
+.card h3{color:var(--teal);margin-bottom:8px;font-size:16px}
+.vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px}
+.vocab-item{background:var(--glass);border:1px solid var(--border);border-radius:8px;padding:14px;text-align:center}
+.vocab-item .word{font-size:18px;font-weight:700;color:var(--purple)}
+.vocab-item .meaning{font-size:12px;color:#94a3b8;margin-top:4px}
+.progress-bar{height:8px;background:rgba(255,255,255,0.1);border-radius:4px;overflow:hidden;margin-top:8px}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--purple),var(--gold));border-radius:4px}
+.audio-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:var(--glass);border:1px solid var(--border);border-radius:8px;color:var(--purple);cursor:pointer;font-size:14px;margin:8px 0}
+.audio-btn:hover{background:rgba(168,85,247,0.15)}
+.badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:700;text-transform:uppercase}
+.badge-a2{background:rgba(168,85,247,0.2);color:var(--purple)}
+.stat-row{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.05)}
+.stat-label{color:#94a3b8;font-size:14px}
+.stat-value{color:var(--gold);font-weight:700}
+@media(max-width:600px){nav button{padding:12px 6px;font-size:11px}.tab-content{padding:16px 14px}h1{font-size:22px}}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<nav>
+<button class="active" onclick="showTab('vocab')">Vocabulary</button>
+<button onclick="showTab('listening')">Listening</button>
+<button onclick="showTab('speaking')">Speaking</button>
+<button onclick="showTab('reading')">Reading</button>
+<button onclick="showTab('progress')">Progress</button>
+</nav>
+
+<!-- VOCABULARY TAB -->
 <div id="vocab" class="tab-content active">
-<h1>Vocabulary</h1>
-<h2>Common Phrases</h2>
-<p>Practice these phrases to improve your daily conversation skills.</p>
+<h1>Mai Trâm's Vocabulary</h1>
+<p><span class="badge badge-a2">Level A2/B1</span> &nbsp; Internal Editor &bull; Started June 2026</p>
+
+<h2>Week 1 â Describing People</h2>
 <div class="vocab-grid">
-<div class="vocab-item">
-<div class="word">Hello</div>
-<div class="meaning">Xin chào</div>
+<div class="vocab-item"><div class="word">Tall</div><div class="meaning">Cao</div></div>
+<div class="vocab-item"><div class="word">Short</div><div class="meaning">Ngán</div></div>
+<div class="vocab-item"><div class="word">Beautiful</div><div class="meaning">Đẹp</div></div>
+<div class="vocab-item"><div class="word">Handsome</div><div class="meaning">Đẹp trai</div></div>
+<div class="vocab-item"><div class="word">Kind</div><div class="meaning">Nhân ái</div></div>
+<div class="vocab-item"><div class="word">Funny</div><div class="meaning">Hài hước</div></div>
+<div class="vocab-item"><div class="word">Serious</div><div class="meaning">Chặt chẽ</div></div>
+<div class="vocab-item"><div class="word">Lazy</div><div class="meaning">Gian lao</div></div>
 </div>
-<div class="vocab-item">
-<div class="word">Goodbye</div>
-<div class="meaning">Tạm biệt</div>
+
+<h2>Week 2 â Describing Places</h2>
+<div class="vocab-grid">
+<div class="vocab-item"><div class="word">Big</div><div class="meaning">To lớn</div></div>
+<div class="vocab-item"><div class="word">Small</div><div class="meaning">Nhỏ</div></div>
+<div class="vocab-item"><div class="word">Clean</div><div class="meaning">Sạch sẽ</div></div>
+<div class="vocab-item"><div class="word">Dirty</div><div class="meaning">Chơm chạc</div></div>
+<div class="vocab-item"><div class="word">Quiet</div><div class="meaning">Im lặng</div></div>
+<div class="vocab-item"><div class="word">Noisy</div><div class="meaning">Tiếng ồn</div></div>
+<div class="vocab-item"><div class="word">Modern</div><div class="meaning">Hiện đại</div></div>
+<div class="vocab-item"><div class="word">Old-fashioned</div><div class="meaning">Quá khứ</div></div>
 </div>
-<div class="vocab-item">
-<div class="word">Thank you</div>
-<div class="meaning">Cảm ơn</div>
-</div>
-<div class="vocab-item">
-<div class="word">Please</div>
-<div class="meaning">Xin vui lòng</div>
-</div>
-<div class="vocab-item">
-<div class="word">Excuse me</div>
-<div class="meaning">Xin lỗi</div>
-</div>
-<div class="vocab-item">
-<div class="word">How are you?</div>
-<div class="meaning">Bạn khỏe không?</div>
-</div>
-<div class="vocab-item">
-<div class="word">I'm fine, thank you.</div>
-<div class="meaning">Tôi ổn, cảm ơn.</div>
-</div>
-<div class="vocab-item">
-<div class="word">What's your name?</div>
-<div class="meaning">Tên bạn là gì?</div>
-</div>
-<div class="vocab-item">
-<div class="word">My name is Mai Tram.</div>
-<div class="meaning">Tên tôi là Mai Tram.</div>
-</div>
-<div class="vocab-item">
-<div class="word">Where are you from?</div>
-<div class="meaning">Bạn đến từ đâu?</div>
-</div>
-<div class="vocab-item">
-<div class="word">I'm from Vietnam.</div>
-<div class="meaning">Tôi đến từ Việt Nam.</div>
-</div>
-<div class="vocab-item">
-<div class="word">Do you speak English?</div>
-<div class="meaning">Bạn nói tiếng Anh không?</div>
-</div>
-<div class="vocab-item">
-<div class="word">Yes, I do.</div>
-<div class="meaning">Vâng, tôi có.</div>
-</div>
-<div class="vocab-item">
-<div class="word">No, I don't.</div>
-<div class="meaning">Không, tôi không.</div>
-</div>
-<div class="vocab-item">
-<div class="word">Can you help me?</div>
-<div class="meaning">Bạn có thể giúp tôi được không?</div>
-</div>
-<div class="vocab-item">
-<div class="word">Of course, how can I assist you?</div>
-<div class="meaning">Tất nhiên, tôi có thể giúp gì cho bạn?</div>
+
+<div class="card" style="margin-top:24px">
+<h3>ð¡ Study Tip</h3>
+<p>Practice describing people and places using adjectives. Focus on fluency rather than perfection. Record yourself and compare with the audio. Pay attention to natural intonation patterns.</p>
 </div>
 </div>
-</div>
+
+<!-- LISTENING TAB -->
 <div id="listening" class="tab-content">
-<h1>Listening</h1>
-<h2>Short Conversations</h2>
-<p>Listen to these short conversations and answer the questions that follow.</p>
+<h1>Listening Practice</h1>
+<p><span class="badge badge-a2">Level A2/B1</span> &nbsp; Conversations &amp; Narratives</p>
+
 <div class="card">
-<h3>Conversation 1</h3>
-<audio controls>
-<source src="conversation1.mp3" type="audio/mpeg">
-Your browser does not support the audio element.
-</audio>
-<p><strong>Question:</strong> Where is Mai Tram from?</p>
-<p><strong>Answer:</strong> Mai Tram is from Vietnam.</p>
+<h3>ð§ Dialogue 1 â Describing a Friend</h3>
+<p><em>Listen and answer the questions below.</em></p>
+<div class="audio-btn">â¶ Play Audio (coming soon)</div>
+<p style="margin-top:12px"><strong>A:</strong> My friend Mai Trâm is very beautiful.<br>
+<strong>B:</strong> Really? What else can you say about her?<br>
+<strong>A:</strong> She is kind and always helps others. She has long black hair.<br>
+<strong>B:</strong> That sounds great. Does she like to travel?<br>
+<strong>A:</strong> Yes, she loves traveling to new places.</p>
+<p style="margin-top:12px;color:var(--gold)"><strong>Questions:</strong></p>
+<ol style="margin-left:20px;color:#cbd5e1">
+<li>What is Mai Trâm's hair color?</li>
+<li>Is Mai Trâm kind?</li>
+<li>Does Mai Trâm like to travel?</li>
+</ol>
 </div>
+
 <div class="card">
-<h3>Conversation 2</h3>
-<audio controls>
-<source src="conversation2.mp3" type="audio/mpeg">
-Your browser does not support the audio element.
-</audio>
-<p><strong>Question:</strong> What language does Mai Tram speak?</p>
-<p><strong>Answer:</strong> Mai Tram speaks Vietnamese and English.</p>
+<h3>ð§ Narrative 2 â Describing a City</h3>
+<div class="audio-btn">â¶ Play Audio (coming soon)</div>
+<p style="margin-top:12px"><em>Hanoi is a big city in Vietnam. It has many old buildings and temples. The streets are busy and noisy. People love to eat street food there.</em></p>
+<p style="margin-top:12px;color:var(--gold)"><strong>True or False:</strong></p>
+<ol style="margin-left:20px;color:#cbd5e1">
+<li>Hanoi is a small city.</li>
+<li>Hanoi has many modern buildings.</li>
+<li>People enjoy eating street food in Hanoi.</li>
+</ol>
 </div>
+</div>
+
+<!-- SPEAKING TAB -->
+<div id="speaking" class="tab-content">
+<h1>Speaking Practice</h1>
+<p><span class="badge badge-a2">Level A2/B1</span> &nbsp; Record yourself &amp; get feedback</p>
+
 <div class="card">
-<h3>Conversation 3</h3>
-<audio controls>
-<source src="conversation3.mp3" type="audio/mpeg">
-Your browser does not support the audio element.
-</audio>
-<p><strong>Question:</strong> Can Mai Tram help you?</p>
-<p><strong>Answer:</strong> Yes, Mai Tram can help you.</p>
+<h3>ð¤ Task 1 â Describe Your Family</h3>
+<p>Record yourself answering these questions. Speak slowly and clearly.</p>
+<ol style="margin:12px 0 12px 20px;color:#cbd5e1">
+<li>Who are your family members?</li>
+<li>What do they look like?</li>
+<li>What do they do?</li>
+<li>What do you like to do together?</li>
+</ol>
+<div class="audio-btn">ðï¸ Record (coming soon)</div>
+<p style="font-size:12px;color:#64748b;margin-top:8px">Your recording will be transcribed and scored automatically.</p>
+</div>
+
+<div class="card">
+<h3>ð¤ Task 2 â Describe Your Favorite Place</h3>
+<p>Tell me about your favorite place. Use these sentence starters:</p>
+<ul style="margin:12px 0 12px 20px;color:#cbd5e1">
+<li>My favorite place is...</li>
+<li>It is located in...</li>
+<li>The place is...</li>
+<li>I like it because...</li>
+</ul>
+<div class="audio-btn">ðï¸ Record (coming soon)</div>
+</div>
+
+<div class="card">
+<h3>ð£ï¸ Fluency Focus</h3>
+<p>Practice speaking fluently without stopping. Focus on natural flow and rhythm. Use fillers like "um" and "so" if needed.</p>
 </div>
 </div>
+
+<!-- READING TAB -->
+<div id="reading" class="tab-content">
+<h1>Reading Practice</h1>
+<p><span class="badge badge-a2">Level A2/B1</span> &nbsp; Short texts &amp; comprehension</p>
+
+<div class="card">
+<h3>ð Text 1 â My Family</h3>
+<p>My family consists of my parents and my younger brother. My father is a doctor. My mother is a teacher. My brother is seven years old. We live in a big house in Hanoi. We like to go on trips together.</p>
+<p style="margin-top:12px;color:var(--gold)"><strong>Comprehension:</strong></p>
+<ol style="margin-left:20px;color:#cbd5e1">
+<li>How many family members does the writer have?</li>
+<li>What does the writer's father do?</li>
+<li>Where do they live?</li>
+</ol>
+</div>
+
+<div class="card">
+<h3>ð Text 2 â My City</h3>
+<p>Hanoi is my city. It has many interesting places to visit. Hoan Kiem Lake is famous for its turtles. Thang Long Water Puppet Theatre is known for its traditional shows. The Old Quarter is full of old houses and street food. I love living here.</p>
+<p style="margin-top:12px;color:var(--gold)"><strong>Vocabulary Check:</strong></p>
+<p style="color:#cbd5e1">Find these words in the text: <em>turtles, traditional, street food</em>. Write one sentence using each word.</p>
+</div>
+
+<div class="card">
+<h3>ð Text 3 â Traveling</h3>
+<p><strong>A:</strong> Have you been to Ha Long Bay?<br>
+<strong>B:</strong> Yes, I have. It was amazing!<br>
+<strong>A:</strong> What did you do there?<br>
+<strong>B:</strong> We went swimming and kayaking. We also visited some caves.<br>
+<strong>A:</strong> That sounds like a lot of fun. Did you take any pictures?<br>
+<strong>B:</strong> Yes, I took many pictures. They were beautiful.</p>
+<p style="margin-top:12px;color:var(--gold)"><strong>Role Play:</strong> Practice this dialogue with a partner. Then try asking about another place you've visited.</p>
+</div>
+</div>
+
+<!-- PROGRESS TAB -->
+<div id="progress" class="tab-content">
+<h1>Mai Trâm's Progress</h1>
+<p><span class="badge badge-a2">Level A2/B1</span> &nbsp; Internal Editor &bull; Tracking since June 2026</p>
+
+<div class="card">
+<h3>ð Overall Stats</h3>
+<div class="stat-row"><span class="stat-label">Current Level</span><span class="stat-value">A2 Intermediate</span></div>
+<div class="stat-row"><span class="stat-label">Words Learned</span><span class="stat-value">25 / 200</span></div>
+<div class="stat-row"><span class="stat-label">Listening Hours</span><span class="stat-value">1.5 hrs</span></div>
+<div class="stat-row"><span class="stat-label">Speaking Tasks</span><span class="stat-value">2 completed</span></div>
+<div class="stat-row"><span class="stat-label">Reading Passages</span><span class="stat-value">3 / 40</span></div>
+<div class="stat-row"><span class="stat-label">Streak</span><span class="stat-value">Day 10 ð¥</span></div>
+</div>
+
+<div class="card">
+<h3>ð¯ Weekly Goal</h3>
+<p>Complete 5 vocabulary cards + 1 listening exercise + 1 speaking recording this week.</p>
+<div class="progress-bar"><div class="progress-fill" style="width:30%"></div></div>
+<p style="font-size:12px;color:#64748b;margin-top:4px">30% complete</p>
+</div>
+
+<div class="card">
+<h3>ð Achievements</h3>
+<div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:8px">
+<div style="text-align:center;opacity:1"><div style="font-size:32px">ð±</div><div style="font-size:11px;color:#94a3b8">First Login</div></div>
+<div style="text-align:center;opacity:1"><div style="font-size:32px">ð</div><div style="font-size:11px;color:#94a3b8">10 Words</div></div>
+<div style="text-align:center;opacity:1"><div style="font-size:32px">ð¤</div><div style="font-size:11px;color:#94a3b8">First Recording</div></div>
+<div style="text-align:center;opacity:1"><div style="font-size:32px">ð¥</div><div style="font-size:11px;color:#94a3b8">7-Day Streak</div></div>
+<div style="text-align:center;opacity:0.3"><div style="font-size:32px">â­</div><div style="font-size:11px;color:#94a3b8">Level B1</div></div>
+</div>
+</div>
+
+<div class="card">
+<h3>ð Teacher Notes</h3>
+<p>Mai Trâm is an internal editor looking to improve her fluency. Focus areas: describing people and places, natural intonation, speaking fluently.</p>
+</div>
+</div>
+
+<script>
+function showTab(id){
+document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+document.getElementById(id).classList.add('active');
+event.target.classList.add('active');
+}
+</script>
+</body>
+</html>
