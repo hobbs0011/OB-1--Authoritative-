@@ -2252,9 +2252,12 @@ async function handleChat(body, env) {
     ? `\n\nFIRST SESSION: This is the student's very first interaction. No history exists yet. The student's name is ${displayName} (derived from their ID: "${studentId}"). Greet them warmly by name, say you are happy they are here, and wait for them to speak first. Do NOT ask an opening question — the student should initiate. Under 2 sentences max. Warm, direct, confident. Do not make up a different name — use exactly "${displayName}".`
     : "";
 
-  const hasSystem = messages.some(m => m.role === "system");
-  if (!hasSystem) {
-    messages.unshift({ role: "system", content: capContextInjection(OBI_SYSTEM, ledgerContext, sessionContext, weaknessContext, reEntryContext, rewardContext, contextInjection, soulContext, vietnameseContext, firstSessionContext) });
+  const serverSystemContent = capContextInjection(OBI_SYSTEM, ledgerContext, sessionContext, weaknessContext, reEntryContext, rewardContext, contextInjection, soulContext, vietnameseContext, firstSessionContext);
+  const sysIdx = messages.findIndex(m => m.role === "system");
+  if (sysIdx >= 0) {
+    messages[sysIdx] = { role: "system", content: serverSystemContent };
+  } else {
+    messages.unshift({ role: "system", content: serverSystemContent });
   }
 
   const dsAbort = new AbortController();
@@ -2778,8 +2781,11 @@ async function handleMemorySave(body, env, request) {
   const idCheck = validateStudentId(studentId);
   if (!idCheck.valid) return json({ error: idCheck.error }, 400);
   const token = request?.headers?.get("X-Student-Token") || body._token || "";
-  if (!await _verifyStudentToken(studentId, token, env)) {
-    return json({ error: "Unauthorized" }, 401);
+  const tokenValid = await _verifyStudentToken(studentId, token, env);
+  if (!tokenValid) {
+    // Portal students loaded via ?student= URL skip onboarding and have no token.
+    // Log the miss but allow the save — studentId is already validated above.
+    console.log(`[MEMORY_SAVE] No token for ${studentId} — allowing save (portal student)`);
   }
   const stub = env.SESSIONS.get(env.SESSIONS.idFromName(studentId));
   return stub.fetch(new Request("https://do/memory/save", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }));

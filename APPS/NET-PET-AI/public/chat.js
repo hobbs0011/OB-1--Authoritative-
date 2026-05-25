@@ -398,9 +398,9 @@ let chatMessages = []; // conversation history for DeepSeek
 async function reactLLM(text) {
   chatMessages.push({ role: "user", content: text });
 
-  // Keep last 20 messages to avoid token bloat
-  if (chatMessages.length > 20) {
-    chatMessages = chatMessages.slice(-20);
+  // Keep last 8 messages — server injects ledger history separately
+  if (chatMessages.length > 8) {
+    chatMessages = chatMessages.slice(-8);
   }
 
   const messages = [
