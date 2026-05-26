@@ -583,7 +583,7 @@ async function handleAPI(path, request, env, url) {
     // Deepgram probe
     if (env.DEEPGRAM_API_KEY) {
       try {
-        const dgRes = await fetch("https://api.deepgram.com/v1/speak?model=aura-asteria-en", {
+        const dgRes = await fetch("https://api.deepgram.com/v1/speak?model=aura-orion-en", {
           method: "POST",
           headers: { "Authorization": `Token ${env.DEEPGRAM_API_KEY}`, "Content-Type": "application/json" },
           body: JSON.stringify({ text: "ok" }),
@@ -1857,6 +1857,45 @@ async function handleMagicChat(body, request, env) {
     } catch (_) {}
   }
 
+  // ── ULTRA MAX: Inject full student profile from KV (teaching focus, fears, breakthroughs) ──
+  if (studentId && env.NET_PET_KV) {
+    try {
+      const profileRaw = await env.NET_PET_KV.get(`student_profile_${studentId}`);
+      if (profileRaw) {
+        const p = JSON.parse(profileRaw);
+        const profileLines = [];
+        if (p.name) profileLines.push(`Name: ${p.name}`);
+        if (p.level) profileLines.push(`Level: ${p.level}`);
+        if (p.teachingFocus) profileLines.push(`TEACHING FOCUS: ${p.teachingFocus}`);
+        if (p.primaryBlock) profileLines.push(`PRIMARY BLOCK: ${p.primaryBlock}`);
+        if (p.fear_trigger) profileLines.push(`FEAR TRIGGER: ${p.fear_trigger}`);
+        if (p.confidence_areas) profileLines.push(`CONFIDENCE AREAS: ${p.confidence_areas}`);
+        if (p.breakthrough) profileLines.push(`LAST BREAKTHROUGH: ${p.breakthrough}`);
+        if (p.goals) profileLines.push(`GOALS: ${p.goals}`);
+        if (p.dailyPractice) profileLines.push(`DAILY PRACTICE: ${p.dailyPractice}`);
+        if (p.parentNotes) profileLines.push(`PARENT NOTES: ${p.parentNotes}`);
+        if (profileLines.length > 0) {
+          context = context + '\n\nSTUDENT PROFILE (use this to personalize every response):\n' + profileLines.join('\n');
+        }
+      }
+    } catch (_) {}
+  }
+
+  // ── ULTRA MAX: Conversation memory — last 6 exchanges for continuity ──
+  if (studentId && env.NET_PET_KV) {
+    try {
+      const memRaw = await env.NET_PET_KV.get(`chat_memory:${studentId}`);
+      if (memRaw) {
+        const mem = JSON.parse(memRaw);
+        const history = (mem.history || []).slice(-6);
+        if (history.length > 0) {
+          const memLines = history.map(h => `${h.role === 'user' ? 'Student' : 'Obi'}: ${h.content}`);
+          context = context + '\n\nRECENT CONVERSATION (maintain continuity, reference past exchanges naturally):\n' + memLines.join('\n');
+        }
+      }
+    } catch (_) {}
+  }
+
   const systemContent = OBI_SYSTEM + (context ? `\n\n${context}` : "");
 
   const res = await fetch("https://api.deepseek.com/chat/completions", {
@@ -1879,6 +1918,23 @@ async function handleMagicChat(body, request, env) {
   }
   const data = await res.json();
   const reply = sanitizeObiResponse(data.choices?.[0]?.message?.content || "");
+
+  // ── ULTRA MAX: Persist conversation memory for continuity across sessions ──
+  if (studentId && reply && env.NET_PET_KV) {
+    try {
+      const memKey = `chat_memory:${studentId}`;
+      const existingRaw = await env.NET_PET_KV.get(memKey);
+      const existing = existingRaw ? JSON.parse(existingRaw) : { history: [], lastActive: 0 };
+      const now = Date.now();
+      existing.history.push({ role: 'user', content: message.slice(0, 500), ts: now });
+      existing.history.push({ role: 'assistant', content: reply.slice(0, 500), ts: now });
+      // Keep last 30 exchanges (60 entries) — rolling window
+      if (existing.history.length > 60) existing.history = existing.history.slice(-60);
+      existing.lastActive = now;
+      // TTL 90 days — auto-expire stale conversations
+      await env.NET_PET_KV.put(memKey, JSON.stringify(existing), { expirationTtl: 86400 * 90 });
+    } catch (_) {}
+  }
 
   return addCors(json({ reply, studentId: studentId || null, contextInjected: !!context }), request);
 }
@@ -2549,7 +2605,8 @@ async function handleTTS(body, env) {
   if (!apiKey) return json({ error: "DEEPGRAM_API_KEY not configured" }, 500);
   const text = sanitizeInput((body.text || "").slice(0, 1000));
   if (!text) return json({ error: "No text provided" }, 400);
-  const res = await fetch("https://api.deepgram.com/v1/speak?model=aura-asteria-en", {
+  // aura-orion-en = best male voice — warm, clear, authoritative coach tone
+  const res = await fetch("https://api.deepgram.com/v1/speak?model=aura-orion-en", {
     method: "POST",
     headers: { "Authorization": `Token ${apiKey}`, "Content-Type": "application/json" },
     body: JSON.stringify({ text }),
