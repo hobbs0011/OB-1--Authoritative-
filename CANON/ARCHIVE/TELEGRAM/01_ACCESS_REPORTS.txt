@@ -1,0 +1,89 @@
+MASTER ACCESS REPORT FOR MICHAEL HOBBS
+Date: January 15, 2026 Prepared by: Operator One Statement: This document summarizes all system access and configuration information I currently hold for Michael Hobbs’ projects.
+
+1. ACCOUNTS AND PLATFORMS
+Primary Management Email: mrmichaelhobbs1234@gmail.com
+
+Cloudflare:
+
+Account: Uses the shared email above.
+
+2FA: Codes are sent to Michael’s phone.
+
+Password: Shared with the email account password.
+
+GitHub:
+
+Account: Created and managed directly using Michael’s email.
+
+Connections: Established with Cloudflare and Make.com.
+
+Make.com:
+
+Account: Uses Michael’s email. Michael has full access.
+
+2. DOMAINS AND DNS
+Status: No individual domains are managed by Operator One outside of the configurations already established within Michael’s Cloudflare account.
+
+3. CODE AND AUTOMATION
+GitHub Repos: Contains source code for Michael’s tasks (requires login for detailed inventory).
+
+Make Scenarios: User data collection system is in its early stages; all platforms have been interconnected.
+
+4. DATA AND HOSTING
+Hosting: No third-party servers (AWS, VPS, etc.) are in use.
+
+Data: Stored directly in tools belonging to Michael’s accounts (e.g., Google Sheets or internal databases).
+
+5. OPEN RISKS AND TO-DOS FOR MICHAEL
+Data on Personal Devices: Operator One currently has documents related to tasks stored on a personal computer and commits to deleting everything completely after this report is handed over.
+
+Security Recommendations for Michael:
+
+Change Passwords: Although every login requires a 2FA code from Michael’s phone, for absolute security, Michael should change the password of the primary Gmail account (which will effectively update access for Cloudflare, GitHub, and Make).
+
+Review Permissions: Michael should review the list of logged-in devices and third-party app permissions within his Google Account.
+
+MASTER ACCESS REPORT FOR MICHAEL HOBBS
+Ngày lập: 15/01/2026 Người thực hiện: Operator One Tuyên bố: Tài liệu này tóm tắt toàn bộ quyền truy cập hệ thống và thông tin cấu hình mà tôi hiện đang nắm giữ cho các dự án của Michael Hobbs.
+
+1. TÀI KHOẢN VÀ NỀN TẢNG (ACCOUNTS & PLATFORMS)
+Email quản lý chính: mrmichaelhobbs1234@gmail.com
+
+Cloudflare:
+
+Tài khoản: Dùng chung email trên.
+
+2FA: Gửi về điện thoại của Michael.
+
+Mật khẩu: Dùng chung với mật khẩu Email.
+
+GitHub: - Tài khoản: Được tạo và quản lý trực tiếp bằng email của Michael.
+
+Kết nối: Đã thiết lập kết nối với Cloudflare và Make.com.
+
+Make.com:
+
+Tài khoản: Dùng email của Michael. Michael có toàn quyền truy cập.
+
+2. TÊN MIỀN VÀ DNS (DOMAINS & DNS)
+Tình trạng: Không có tên miền riêng lẻ nào do Operator One quản lý ngoài các cấu hình đã thiết lập sẵn trong tài khoản Cloudflare của Michael.
+
+3. MÃ NGUỒN VÀ TỰ ĐỘNG HÓA (CODE & AUTOMATION)
+GitHub Repos: Chứa các mã nguồn phục vụ nhiệm vụ của Michael (cần đăng nhập để kiểm kê chi tiết).
+
+Kịch bản Make: Hệ thống thu thập dữ liệu người dùng đang ở giai đoạn sơ khai, đã kết nối các nền tảng với nhau.
+
+4. DỮ LIỆU VÀ LƯU TRỮ (DATA & HOSTING)
+Hosting: Không sử dụng server bên thứ ba (AWS, VPS...).
+
+Dữ liệu: Lưu trữ trực tiếp vào các công cụ thuộc tài khoản của Michael.
+
+5. RỦI RO TỒN ĐỌNG VÀ KHUYẾN NGHỊ (OPEN RISKS & TO-DOS)
+Dữ liệu trên máy cá nhân: Operator One hiện còn lưu trữ các tài liệu liên quan đến nhiệm vụ và cam kết sẽ xóa sạch hoàn toàn sau khi bàn giao báo cáo này.
+
+Khuyến nghị bảo mật cho Michael:
+
+Đổi mật khẩu: Mặc dù mỗi lần đăng nhập đều yêu cầu mã 2FA từ điện thoại Michael, nhưng để đảm bảo an toàn tuyệt đối, Michael nên thay đổi mật khẩu tài khoản Gmail chính (kéo theo thay đổi mật khẩu Cloudflare, GitHub, Make).
+
+Kiểm tra quyền: Michael nên kiểm tra lại danh sách các thiết bị đã đăng nhập và các ứng dụng bên thứ ba có quyền truy cập vào tài khoản Google.

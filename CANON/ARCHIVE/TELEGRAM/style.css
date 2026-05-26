@@ -1,0 +1,44 @@
+body { background: #111; color: white; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; font-family: monospace; }
+.pet-container { border: 2px solid #444; padding: 40px; border-radius: 20px; text-align: center; transition: 0.3s; }
+#statusLabel { font-size: 30px; margin: 20px 0; font-weight: bold; }
+#counterLabel { color: #888; margin-bottom: 20px; }
+button { background: none; color: white; border: 1px solid white; padding: 10px 20px; cursor: pointer; }
+button:hover { background: white; color: black; }/* Thêm vào cuối file style.css */
+.exp-container {
+    width: 100%;
+    height: 10px;
+    background: #222;
+    border-radius: 5px;
+    margin: 15px 0;
+    overflow: hidden;
+    border: 1px solid #444;
+}
+
+#expFill {
+    width: 0%; /* Sẽ tăng dần nhờ JavaScript */
+    height: 100%;
+    background: white; /* Màu mặc định */
+    transition: width 0.3s ease; /* Hiệu ứng thanh chạy mượt mà */
+}/* Thêm vào cuối file style.css */
+#voidLog {
+    margin-top: 20px;
+    height: 80px;
+    background: rgba(0, 0, 0, 0.5);
+    border-top: 1px solid #333;
+    padding: 10px;
+    font-size: 10px;
+    color: #a855f7; /* Màu tím mặc định */
+    overflow-y: hidden;
+    text-align: left;
+    font-family: 'Courier New', monospace;
+}
+
+.log-line {
+    margin-bottom: 4px;
+    opacity: 0;
+    animation: fadeIn 0.3s forwards;
+}
+
+@keyframes fadeIn {
+    to { opacity: 1; }
+}

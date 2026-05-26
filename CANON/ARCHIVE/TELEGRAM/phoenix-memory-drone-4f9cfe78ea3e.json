@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "phoenix-memory-drone",
+  "private_key_id": "4f9cfe78ea3e8d7c64f998318708818efbb44f20",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDKUdSslDDUz/jk\nTo0JDjbh4wGFjl2qLQBchZIhyNoL75JAavT7AaNn1t0GjBLuQnq1W8agbEFSUMYI\nMm1opx1jCuG2zHb7NKjleB5LqEs3YnXKnpQYaSQ5a5p5UAjxJoYfvut8NJ2J1SBh\n1PLsAzL7EG4c/L7O/w1Wmx7xlZ5TxE6xVkJ6N+480KgqrQUSU5Km2NPQWQvQS8Tr\nY3mJ+VaH8TdlQ3UNKGyLi8dtYqLDrepZpdkLDWAA05DM96D2DOP33i4016lPJ8Jq\nJod/afnTTYm9NAj7WfgYboW1uW/Pw66BTJiMQymy/QVTnWpPbu6Ag51Rffeakq+P\nX/6KY6OpAgMBAAECggEACXEH7B1WyYmij3H4fDKS/lfgBW3rQlKrDIZJt2Smg03U\n7QdowxF0oRcKdcCh7gdBb3b21hvzMO6WzUFgMHTzBsEWXzfbuhWfJ6VDQavbBbzF\nKzVbCygV8g2K1gw1fJ57/h2EYwWYD/t3kUU1KG0uSv/daaIkW+fUZSUkTKkbLES8\n2oFOObiNYdzmm1t8zr0Y/5QXlHteYEnX3Cg985Il/lFNH0nHEcCD+DCUYzt+5RGe\nZ1R0pFh5ioKG345NQM9n34AbumtwZZvl8BZTQ7lny8bOrOCHGHi6AA5LCPJBFLvC\nYY98W3oOmV8tSpPANNPslPgTQwepEa8EM9mn4xVAEQKBgQDnDw1gKEW6/JplYEwt\nOaYfJB7XowldNVn9/GMLFz6oVUBVsgYvFLiXgTfDwwE1bEet7aEp1gjjzKoqT4kg\nOTILiU8gB8T6G3Lmj6eCCIPZ36cUF0R2YB33aizeRH1sK+sI290iVwZKi2B82CXa\n2SRhJGmqrjOW63xBllLdZqgwmQKBgQDgKJ4DZEO9oc8I5c34O0oa/SBdCbWwHqVM\n7yO+5Ln8CSC8p0R73P7dYhacS7Bm9sg+9VOWusyPH02aFkBIVRb4yqKqOv7srdE1\ntirTsquyg4JC6GQHaost2NkWx+A4KmotxoKFmi6lYjPWIN/NGppUiIZeJcgyw5vn\n87obJSolkQKBgQDWTha41gF+4eWOG1fsJmkWvxjAJl58DgzOzvVKByA9XvzRvtGP\nf2eKVfZT4p1PYIPHJPzy4arTJjO6FJT5xzLMkmlKKwqeczEJ+bmCmMU6If9EWiRM\nqu+AWAEPknTGDKHtUId030RdhZJTmOLbbcUZOH2tKe99jiJsbrGi2iErGQKBgQDH\nJG6VFstzukADaJ3ezVWduom4/jpSuDckrUO1gOCWP8m8sGGQJRqrtUvfGQMjxlTK\nUgsr2tKGyEmZ/fCoEigxaVywHW+C9zzpGejcYFxXYKwmIu1TBV2WopLiwTm6zDu+\nZSBp7ztHpIHm1xfc0KiRNyUgmTJNnyhwHkCVgyP5cQKBgQDiD8PiPaV/ehOS6DHb\nQIRU+osAEhsS8xD3/6f8PRs40+RW2CyAtmvwOSJkgg57tPRb7eXGyb6Bhcl4DazN\nTlwGljx8P74Gc/e6u1lCBTdwS3zQNDx5tHqHj55YiTKfKdlYQLIJCRVvnDjI5SOS\nQtuBtTyG2xa8WRKtzRj7I9oTOw==\n-----END PRIVATE KEY-----\n",
+  "client_email": "phoenix-rising-solutions@phoenix-memory-drone.iam.gserviceaccount.com",
+  "client_id": "103997780930530716986",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/phoenix-rising-solutions%40phoenix-memory-drone.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

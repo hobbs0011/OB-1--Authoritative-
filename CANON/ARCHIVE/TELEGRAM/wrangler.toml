@@ -1,0 +1,23 @@
+name = "phoenix-cs-edge"
+main = "src/index.js"
+compatibility_date = "2024-01-26"
+node_compat = true
+
+[[d1_databases]]
+binding = "DB"
+database_name = "phoenix-ledger"
+database_id = "REPLACE_WITH_OUTPUT_FROM_WRANGLER_D1_CREATE"
+# After running: wrangler d1 create phoenix-ledger
+# Paste the database_id here
+
+[[kv_namespaces]]
+binding = "KV"
+id = "REPLACE_WITH_OUTPUT_FROM_WRANGLER_KV_CREATE"
+# After running: wrangler kv:namespace create phoenix-state
+# Paste the id here
+
+[vars]
+CHAOS_ENABLED = "0"
+
+# Secrets (set via: wrangler secret put PHOENIXMASTERKEY)
+# PHOENIXMASTERKEY = "your-64-char-key"
