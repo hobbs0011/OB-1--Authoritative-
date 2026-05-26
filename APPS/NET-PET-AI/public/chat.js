@@ -726,6 +726,7 @@ async function startListening() {
       stream.getTracks().forEach(t => t.stop());
       const blob = new Blob(audioChunks, { type: mimeType });
       input.placeholder = "Processing\u2026";
+      // FIRE STT + AI IN PARALLEL where possible; show transcript immediately
       try {
         const res = await fetch("/api/stt", {
           method: "POST",
@@ -743,6 +744,7 @@ async function startListening() {
           } else {
             profile._phonicsHints = null;
           }
+          // IMMEDIATELY submit — don't wait for user to press enter
           handle(transcript);
         } else {
           input.placeholder = "Didn't catch that — try again!";
@@ -757,7 +759,8 @@ async function startListening() {
       if (input.placeholder === "Processing\u2026") input.placeholder = "Type here\u2026";
     };
 
-    mediaRecorder.start();
+    // Use timeslice parameter to get smaller chunks faster on stop
+    mediaRecorder.start(250);
     listening = true;
     micBtn.classList.add("mic-active");
     input.value = "";

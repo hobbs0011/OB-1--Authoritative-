@@ -60,7 +60,7 @@
         #loginScreen {
             position: fixed;
             inset: 0;
-            z-index: 10000;
+            z-index: 99999;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -132,7 +132,7 @@
         .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text); flex-shrink: 0; }
         .nav-brand img { width: 40px; height: 40px; object-fit: contain; }
         .nav-brand span { font-family: 'Orbitron', sans-serif; font-size: 1.05rem; font-weight: 600; letter-spacing: 0.05em; }
-        .nav-links { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+        .nav-links { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; justify-content: flex-end; max-width: 70%; }
         .nav-links a {
             font-family: 'Rajdhani', sans-serif; font-size: 0.9rem; font-weight: 600;
             letter-spacing: 0.04em; color: var(--dim); text-decoration: none;
@@ -154,7 +154,7 @@
         .portal-watermark { position: fixed; bottom: 20px; right: 20px; z-index: 0; pointer-events: none; opacity: 0.055; width: 280px; height: 280px; object-fit: contain; }
 
         /* ── MAIN CONTENT ── */
-        .main-container { max-width: 900px; margin: 0 auto; padding: 110px 40px 60px; position: relative; z-index: 1; }
+        .main-container { max-width: 960px; margin: 0 auto; padding: 100px 32px 60px; position: relative; z-index: 1; }
 
         .dashboard-header { margin-bottom: 36px; animation: fadeIn 0.5s ease; }
         .dashboard-header h1 { font-family: 'Orbitron', sans-serif; font-size: 2.2rem; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 6px; }
@@ -165,7 +165,8 @@
             display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
             margin-bottom: 28px; animation: fadeIn 0.55s ease;
         }
-        @media (max-width: 700px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 900px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 480px) { .stats-grid { grid-template-columns: 1fr; } }
         .stat-card {
             background: var(--card); border: 1px solid var(--border); border-radius: 20px;
             padding: 20px 18px; text-align: center;
@@ -243,14 +244,27 @@
         .ql-label { font-family: 'Orbitron', sans-serif; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.05em; color: var(--text); }
         .ql-sub { font-family: 'Rajdhani', sans-serif; font-size: 0.78rem; color: var(--dim); letter-spacing: 0.03em; margin-top: 3px; }
 
+        /* ── TABLET / LAPTOP RESPONSIVE ──────────────────────────────── */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .main-container { max-width: 100%; padding: 100px 24px 50px; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+            .quick-links-grid { grid-template-columns: repeat(2, 1fr); }
+            .nav-links { gap: 4px; }
+            .nav-links a { padding: 7px 10px; font-size: 0.82rem; }
+            #topNav { padding: 0 16px; }
+            .dashboard-header h1 { font-size: 1.8rem; }
+        }
+
         /* ── MOBILE RESPONSIVE ────────────────────────────────────────────── */
         @media (max-width: 768px) {
             .main-container { padding: 90px 12px 40px; }
             #topNav { padding: 0 16px; }
 
             /* Nav: stack vertically, full width links */
-            .nav-links { flex-direction: column; gap: 4px; }
-            .nav-links a { padding: 10px 16px; font-size: 0.85rem; }
+            .nav-links { flex-direction: row; flex-wrap: wrap; gap: 2px; justify-content: center; max-width: 100%; }
+            .nav-links a { padding: 8px 10px; font-size: 0.78rem; }
+            .nav-brand span { font-size: 0.9rem; }
+            #topNav { height: auto; min-height: 60px; flex-wrap: wrap; padding: 8px 12px; gap: 8px; }
 
             /* Cards: full width, reduced padding */
             .content-card, .stat-card, .day1-card, .quick-link-card,
@@ -377,7 +391,9 @@
             <a href="/mai-tram-action-plan">Action Plan</a>
             <a href="/magic-chat?studentId=mai-tram" class="nav-coach">🗣️ Chat with OBI</a>
         </div>
+    </nav>
 
+    <main class="main-container">
         <!-- Weekly Progress Widget -->
         <div id="weekly-widget" style="display:none;">
             <div class="ww-stat">

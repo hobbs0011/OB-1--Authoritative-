@@ -802,15 +802,42 @@ async function handleAPI(path, request, env, url) {
   }
 
   // ── v2 Pipeline: Student State + Session Events ───────────────────────────
-  // /api/student/state — Full behavioral state (Mouse/Cub/Tiger + scores)
+  // /api/student/state — Full behavioral state from NET_PET_KV student_profile_* keys
   if (path === "/api/student/state" && method === "GET") {
     const studentId = url.searchParams.get("studentId") || "";
-    if (!studentId) return json({ error: "studentId required" }, 400);
+    if (!studentId) return addCors(json({ error: "studentId required" }, 400), request);
     const idCheck = validateStudentId(studentId);
-    if (!idCheck.valid) return json({ error: idCheck.error }, 400);
-    const stub = env.PROFILES.get(env.PROFILES.idFromName(studentId));
-    const res = await stub.fetch(new Request("https://do/state/full"));
-    return res;
+    if (!idCheck.valid) return addCors(json({ error: idCheck.error }, 400), request);
+
+    // Read profile from KV (seeded via wrangler kv key put student_profile_*)
+    let profile = null;
+    try {
+      const raw = await env.NET_PET_KV.get(`student_profile_${studentId}`);
+      if (raw) profile = JSON.parse(raw);
+    } catch (_) {}
+
+    // Read streak data
+    let streak = { currentStreak: 0, longestStreak: 0 };
+    try {
+      const streakRaw = await env.NET_PET_KV.get(`streak:${studentId}`);
+      if (streakRaw) streak = JSON.parse(streakRaw);
+    } catch (_) {}
+
+    // Read language preference
+    let lang = "en";
+    try {
+      const langVal = await env.NET_PET_KV.get(`lang:${studentId}`);
+      if (langVal) lang = langVal;
+    } catch (_) {}
+
+    return addCors(json({
+      ok: true,
+      studentId,
+      profile: profile || null,
+      streak,
+      lang,
+      source: profile ? "kv" : "empty"
+    }), request);
   }
   // /api/session/events — Structured learning event chain
   if (path === "/api/session/events" && method === "GET") {
