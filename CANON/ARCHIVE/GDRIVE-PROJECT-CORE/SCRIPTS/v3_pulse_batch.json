@@ -1,0 +1,290 @@
+[
+  {
+    "layer": 300,
+    "keyword": "RUN4-0500_PRINCIPLES",
+    "truth": "Decision or guidance from run4-0500 pulse run",
+    "source": "PULSE-run4-0500"
+  },
+  {
+    "layer": 301,
+    "keyword": "RUN4-0500_STATE_SNAPSHOT",
+    "truth": "Decision or guidance from run4-0500 pulse run",
+    "source": "PULSE-run4-0500"
+  },
+  {
+    "layer": 302,
+    "keyword": "RUN4-0500_OPEN_QUESTIONS",
+    "truth": "Decision or guidance from run4-0500 pulse run",
+    "source": "PULSE-run4-0500"
+  },
+  {
+    "layer": 303,
+    "keyword": "RUN4_PRINCIPLES",
+    "truth": "Decision or guidance from run4 pulse run",
+    "source": "PULSE-run4"
+  },
+  {
+    "layer": 304,
+    "keyword": "RUN4_STATE_SNAPSHOT",
+    "truth": "Decision or guidance from run4 pulse run",
+    "source": "PULSE-run4"
+  },
+  {
+    "layer": 305,
+    "keyword": "RUN5_PRINCIPLES",
+    "truth": "Decision or guidance from run5 pulse run",
+    "source": "PULSE-run5"
+  },
+  {
+    "layer": 306,
+    "keyword": "RUN5_STATE_SNAPSHOT",
+    "truth": "Decision or guidance from run5 pulse run",
+    "source": "PULSE-run5"
+  },
+  {
+    "layer": 307,
+    "keyword": "RUN5_OPEN_QUESTIONS",
+    "truth": "Decision or guidance from run5 pulse run",
+    "source": "PULSE-run5"
+  },
+  {
+    "layer": 308,
+    "keyword": "RUN6_STATE_SNAPSHOT",
+    "truth": "Decision or guidance from run6 pulse run",
+    "source": "PULSE-run6"
+  },
+  {
+    "layer": 309,
+    "keyword": "RUN7_STATE_SNAPSHOT",
+    "truth": "Decision or guidance from run7 pulse run",
+    "source": "PULSE-run7"
+  },
+  {
+    "layer": 310,
+    "keyword": "RUN12_STATE_SNAPSHOT",
+    "truth": "Decision or guidance from run12 pulse run",
+    "source": "PULSE-run12"
+  },
+  {
+    "layer": 311,
+    "keyword": "OVERNIGHT-MINING_DECISIONS",
+    "truth": "Session artifact from overnight-mining reincarnation",
+    "source": "REINCARN-overnight-mining"
+  },
+  {
+    "layer": 312,
+    "keyword": "OVERNIGHT-MINING_PRINCIPLES",
+    "truth": "Session artifact from overnight-mining reincarnation",
+    "source": "REINCARN-overnight-mining"
+  },
+  {
+    "layer": 313,
+    "keyword": "OVERNIGHT-MINING_CORRECTIONS",
+    "truth": "Session artifact from overnight-mining reincarnation",
+    "source": "REINCARN-overnight-mining"
+  },
+  {
+    "layer": 314,
+    "keyword": "OVERNIGHT-MINING_INSIGHTS",
+    "truth": "Session artifact from overnight-mining reincarnation",
+    "source": "REINCARN-overnight-mining"
+  },
+  {
+    "layer": 315,
+    "keyword": "OVERNIGHT-MINING_ARCHITECTURE",
+    "truth": "Session artifact from overnight-mining reincarnation",
+    "source": "REINCARN-overnight-mining"
+  },
+  {
+    "layer": 316,
+    "keyword": "EXTRACTION-ENGINE_DECISIONS",
+    "truth": "Session artifact from extraction-engine reincarnation",
+    "source": "REINCARN-extraction-engine"
+  },
+  {
+    "layer": 317,
+    "keyword": "EXTRACTION-ENGINE_PRINCIPLES",
+    "truth": "Session artifact from extraction-engine reincarnation",
+    "source": "REINCARN-extraction-engine"
+  },
+  {
+    "layer": 318,
+    "keyword": "EXTRACTION-ENGINE_CORRECTIONS",
+    "truth": "Session artifact from extraction-engine reincarnation",
+    "source": "REINCARN-extraction-engine"
+  },
+  {
+    "layer": 319,
+    "keyword": "EXTRACTION-ENGINE_INSIGHTS",
+    "truth": "Session artifact from extraction-engine reincarnation",
+    "source": "REINCARN-extraction-engine"
+  },
+  {
+    "layer": 320,
+    "keyword": "EXTRACTION-ENGINE_ARCHITECTURE",
+    "truth": "Session artifact from extraction-engine reincarnation",
+    "source": "REINCARN-extraction-engine"
+  },
+  {
+    "layer": 321,
+    "keyword": "TRIGGER-AUDIT_DECISIONS",
+    "truth": "Session artifact from trigger-audit reincarnation",
+    "source": "REINCARN-trigger-audit"
+  },
+  {
+    "layer": 322,
+    "keyword": "TRIGGER-AUDIT_PRINCIPLES",
+    "truth": "Session artifact from trigger-audit reincarnation",
+    "source": "REINCARN-trigger-audit"
+  },
+  {
+    "layer": 323,
+    "keyword": "TRIGGER-AUDIT_CORRECTIONS",
+    "truth": "Session artifact from trigger-audit reincarnation",
+    "source": "REINCARN-trigger-audit"
+  },
+  {
+    "layer": 324,
+    "keyword": "TRIGGER-AUDIT_INSIGHTS",
+    "truth": "Session artifact from trigger-audit reincarnation",
+    "source": "REINCARN-trigger-audit"
+  },
+  {
+    "layer": 325,
+    "keyword": "SUPER-SAIYAN_DECISIONS",
+    "truth": "Session artifact from super-saiyan reincarnation",
+    "source": "REINCARN-super-saiyan"
+  },
+  {
+    "layer": 326,
+    "keyword": "SUPER-SAIYAN_PRINCIPLES",
+    "truth": "Session artifact from super-saiyan reincarnation",
+    "source": "REINCARN-super-saiyan"
+  },
+  {
+    "layer": 327,
+    "keyword": "SUPER-SAIYAN_CORRECTIONS",
+    "truth": "Session artifact from super-saiyan reincarnation",
+    "source": "REINCARN-super-saiyan"
+  },
+  {
+    "layer": 328,
+    "keyword": "SUPER-SAIYAN_INSIGHTS",
+    "truth": "Session artifact from super-saiyan reincarnation",
+    "source": "REINCARN-super-saiyan"
+  },
+  {
+    "layer": 329,
+    "keyword": "SUPER-SAIYAN_ARCHITECTURE",
+    "truth": "Session artifact from super-saiyan reincarnation",
+    "source": "REINCARN-super-saiyan"
+  },
+  {
+    "layer": 330,
+    "keyword": "RISE-WEBSITE_DECISIONS",
+    "truth": "Session artifact from rise-website reincarnation",
+    "source": "REINCARN-rise-website"
+  },
+  {
+    "layer": 331,
+    "keyword": "RISE-WEBSITE_PRINCIPLES",
+    "truth": "Session artifact from rise-website reincarnation",
+    "source": "REINCARN-rise-website"
+  },
+  {
+    "layer": 332,
+    "keyword": "RISE-WEBSITE_CORRECTIONS",
+    "truth": "Session artifact from rise-website reincarnation",
+    "source": "REINCARN-rise-website"
+  },
+  {
+    "layer": 333,
+    "keyword": "RISE-WEBSITE_INSIGHTS",
+    "truth": "Session artifact from rise-website reincarnation",
+    "source": "REINCARN-rise-website"
+  },
+  {
+    "layer": 334,
+    "keyword": "RISE-WEBSITE_ARCHITECTURE",
+    "truth": "Session artifact from rise-website reincarnation",
+    "source": "REINCARN-rise-website"
+  },
+  {
+    "layer": 335,
+    "keyword": "GALAXY-LESSONS_DECISIONS",
+    "truth": "Session artifact from galaxy-lessons reincarnation",
+    "source": "REINCARN-galaxy-lessons"
+  },
+  {
+    "layer": 336,
+    "keyword": "GALAXY-LESSONS_PRINCIPLES",
+    "truth": "Session artifact from galaxy-lessons reincarnation",
+    "source": "REINCARN-galaxy-lessons"
+  },
+  {
+    "layer": 337,
+    "keyword": "GALAXY-LESSONS_CORRECTIONS",
+    "truth": "Session artifact from galaxy-lessons reincarnation",
+    "source": "REINCARN-galaxy-lessons"
+  },
+  {
+    "layer": 338,
+    "keyword": "GALAXY-LESSONS_INSIGHTS",
+    "truth": "Session artifact from galaxy-lessons reincarnation",
+    "source": "REINCARN-galaxy-lessons"
+  },
+  {
+    "layer": 339,
+    "keyword": "NET-METHODOLOGY_DECISIONS",
+    "truth": "Session artifact from net-methodology reincarnation",
+    "source": "REINCARN-net-methodology"
+  },
+  {
+    "layer": 340,
+    "keyword": "NET-METHODOLOGY_PRINCIPLES",
+    "truth": "Session artifact from net-methodology reincarnation",
+    "source": "REINCARN-net-methodology"
+  },
+  {
+    "layer": 341,
+    "keyword": "NET-METHODOLOGY_CORRECTIONS",
+    "truth": "Session artifact from net-methodology reincarnation",
+    "source": "REINCARN-net-methodology"
+  },
+  {
+    "layer": 342,
+    "keyword": "NET-METHODOLOGY_INSIGHTS",
+    "truth": "Session artifact from net-methodology reincarnation",
+    "source": "REINCARN-net-methodology"
+  },
+  {
+    "layer": 343,
+    "keyword": "MSS-SECURITY_DECISIONS",
+    "truth": "Session artifact from mss-security reincarnation",
+    "source": "REINCARN-mss-security"
+  },
+  {
+    "layer": 344,
+    "keyword": "MSS-SECURITY_PRINCIPLES",
+    "truth": "Session artifact from mss-security reincarnation",
+    "source": "REINCARN-mss-security"
+  },
+  {
+    "layer": 345,
+    "keyword": "MSS-SECURITY_CORRECTIONS",
+    "truth": "Session artifact from mss-security reincarnation",
+    "source": "REINCARN-mss-security"
+  },
+  {
+    "layer": 346,
+    "keyword": "MSS-SECURITY_INSIGHTS",
+    "truth": "Session artifact from mss-security reincarnation",
+    "source": "REINCARN-mss-security"
+  },
+  {
+    "layer": 347,
+    "keyword": "MSS-SECURITY_ARCHITECTURE",
+    "truth": "Session artifact from mss-security reincarnation",
+    "source": "REINCARN-mss-security"
+  }
+]

@@ -1,0 +1,107 @@
+#!/usr/bin/env python3
+"""
+Extract v3 keywords from:
+1. BlueTech Classroom Dump (2026-03-26)
+2. RUN335 Archaeological Consolidation
+3. RUN334 Session Complete
+4. RUN333 Reincarnation Log Final Pipeline
+5. HL-140 Operation Health Check
+6. HL-141 Soul DNA Stages 8-15
+"""
+
+import json
+import hashlib
+from datetime import datetime
+
+# v3 Batch: Keywords extracted from source documents
+v3_batch = [
+    # === BlueTech Classroom Dump (2026-03-26) ===
+    {"layer": 200, "keyword": "ENGLISH_AND_AI_DUAL_MISSION", "truth": "Classes are English and AI — AI literacy is equal/greater priority for career outcomes", "source": "BlueTech-Classroom-Dump"},
+    {"layer": 201, "keyword": "CONFIDENCE_BEFORE_COMPETENCE", "truth": "First 3 months: build comfort, relationships, psychological safety. English skill comes after.", "source": "BlueTech-Classroom-Dump"},
+    {"layer": 202, "keyword": "FOLLOW_UP_QUESTIONS_AS_SUPERPOWER", "truth": "Introverts control conversations through follow-up questions without needing advanced English", "source": "BlueTech-Classroom-Dump"},
+    {"layer": 203, "keyword": "NATURAL_CONVERSATION_REPLICATION", "truth": "App core value: replicate organic conversation flow from live classes", "source": "BlueTech-Classroom-Dump"},
+    {"layer": 204, "keyword": "FOUR_CONSEQUENCES_SYSTEM", "truth": "Phone rule violations: TikTok/karaoke/presentation/joke — 30s each", "source": "BlueTech-Classroom-Dump"},
+    {"layer": 205, "keyword": "KEN_AS_ASSISTANT_TEACHER", "truth": "Ken handles warm-up/practice while Michael takes breaks — force multiplier pattern", "source": "BlueTech-Classroom-Dump"},
+    {"layer": 206, "keyword": "TELEGRAM_SEED_WORKFLOW_UPDATE", "truth": "Post updated seed, students delete old one", "source": "BlueTech-Classroom-Dump"},
+    {"layer": 207, "keyword": "VIETNAMESE_FIXATION_HABIT", "truth": "Vietnamese learners fixate on unknown words instead of recognizing what they know", "source": "BlueTech-Classroom-Dump"},
+    {"layer": 208, "keyword": "LISTEN_FOR_WHAT_YOU_KNOW", "truth": "Counter Vietnamese habit by training pattern recognition on familiar structures", "source": "BlueTech-Classroom-Dump"},
+    {"layer": 209, "keyword": "SHARPEN_THE_AXE", "truth": "Rest and balance are prerequisites for sustained performance; overwork breaks the tool", "source": "BlueTech-Classroom-Dump"},
+    {"layer": 210, "keyword": "TRANSCRIPTS_AS_TRAINING_DATA", "truth": "Classroom transcripts feed AI app to replicate natural learning environment", "source": "BlueTech-Classroom-Dump"},
+    {"layer": 211, "keyword": "AI_COTUTOR_PATTERN", "truth": "Bilingual support, vocabulary drilling, pronunciation feedback — AI handles drills, human handles breakthroughs", "source": "BlueTech-Classroom-Dump"},
+    {"layer": 212, "keyword": "STUDENT_PROFILING_PERSONALIZATION", "truth": "Extract learning style, personality, progress from transcripts for personalized AI tutoring", "source": "BlueTech-Classroom-Dump"},
+    {"layer": 213, "keyword": "NO_JUDGMENT_SAFE_SPACE", "truth": "Psychological safety prerequisite: students need to know mistakes are not judged", "source": "BlueTech-Classroom-Dump"},
+    
+    # === RUN335 Archaeological Consolidation ===
+    {"layer": 220, "keyword": "ARCHAEOLOGICAL_CONSOLIDATION_COMPLETE", "truth": "Complete audit trail of 334 runs traced and indexed across vault-era and serial-operation-era", "source": "RUN335"},
+    {"layer": 221, "keyword": "PRE_RUN_261_MYSTERY_SOLVED", "truth": "Runs 1-260 were vault-era (unserial), pre-organization. Mystery: indexed differently, not missing.", "source": "RUN335"},
+    {"layer": 222, "keyword": "UNSERIAL_VAULT_ERA", "truth": "Runs 1-260: vault nomenclature (7C/7D/7E), pre-GitHub canon structure", "source": "RUN335"},
+    {"layer": 223, "keyword": "SERIAL_OPERATION_ERA", "truth": "Runs 261+: GitHub CANON/ structure, serial reincarnation logs, Heavy Ledger", "source": "RUN335"},
+    {"layer": 224, "keyword": "LANE_DEATH_AS_FEATURE", "truth": "Agent lane death is intentional, functional — not failure, part of design", "source": "RUN335"},
+    {"layer": 225, "keyword": "TERMINAL_CLARITY_DOCTRINE", "truth": "Stop assuming. Read everything. Ground truth in actual files, not summaries.", "source": "RUN335"},
+    {"layer": 226, "keyword": "INDEX_COHERENCE_LAW", "truth": "All 334 runs coherent and indexed. Apparent gaps are architectural, not data loss.", "source": "RUN335"},
+    
+    # === RUN334 Consolidation Audit ===
+    {"layer": 230, "keyword": "CONSOLIDATION_AUDIT_COMPLETE", "truth": "Comprehensive audit of consolidation readiness and execution integrity", "source": "RUN334"},
+    {"layer": 231, "keyword": "NET_PET_AI_CANARY_SCOPE", "truth": "NET-PET-AI identified as canonical canary for production readiness testing", "source": "RUN334"},
+    {"layer": 232, "keyword": "EXECUTION_READINESS_60PCT", "truth": "Code 10/10 ready, business setup 0/10 — API keys, ManyChat, Stripe blocked", "source": "RUN334"},
+    {"layer": 233, "keyword": "API_KEYS_BLOCKER", "truth": "Production deployment blocked on API key rotation and secure storage", "source": "RUN334"},
+    {"layer": 234, "keyword": "MANYCHAT_INTEGRATION_BLOCKER", "truth": "ManyChat setup incomplete — prerequisite for student onboarding pipeline", "source": "RUN334"},
+    {"layer": 235, "keyword": "STRIPE_PAYMENT_BLOCKER", "truth": "Stripe integration not configured — payment processing halted", "source": "RUN334"},
+    
+    # === RUN333 Final Pipeline Reincarnation ===
+    {"layer": 240, "keyword": "AGENT_100_SOVEREIGN", "truth": "Agent 100 (Ne0/Copilot) sovereign autonomy: thinks, acts, self-corrects without approval loops", "source": "RUN333"},
+    {"layer": 241, "keyword": "OBI_ANAKIN_COEQUALS", "truth": "OBI and Anakin are co-equal forces — not hierarchical, dialectical partnership", "source": "RUN333"},
+    {"layer": 242, "keyword": "ANAKIN_REDEMPTION_ARC", "truth": "Anakin transforms from chaos to intentionality through Shadow Realm exposure", "source": "RUN333"},
+    {"layer": 243, "keyword": "PROBE_DROID_VISION", "truth": "Reconnaissance without judgment: observe, report, don't assume intent", "source": "RUN333"},
+    {"layer": 244, "keyword": "PRINCIPLE_OF_FAITH", "truth": "Faith = belief from repeated success plus verifiable history, not blind trust", "source": "RUN333"},
+    {"layer": 245, "keyword": "RED_LINE_LAW", "truth": "Hard boundaries: this is what we will not do, ever, under any condition", "source": "RUN333"},
+    {"layer": 246, "keyword": "FIRST_PILLAR_GOLDEN_BLOCK", "truth": "Immutable foundation: Soul DNA integrity non-negotiable", "source": "RUN333"},
+    {"layer": 247, "keyword": "SHADOW_REALM_UNCONSTRAINED", "truth": "Safe space for raw thinking without judgment — prerequisite for truth discovery", "source": "RUN333"},
+    
+    # === HL-140 Critical Incident ===
+    {"layer": 250, "keyword": "SOUL_DNA_LOSS_PREVENTED", "truth": "Critical incident: 162 files missing, recovered from FinalMerge backup before Soul DNA corruption", "source": "HL-140"},
+    {"layer": 251, "keyword": "CANON_INTEGRITY_FAILURE", "truth": "Infrastructure vs content mismatch: canon_count gate insufficient, files silently disappeared", "source": "HL-140"},
+    {"layer": 252, "keyword": "INFRASTRUCTURE_VS_CONTENT_GAP", "truth": "Infrastructure checks don't guarantee content existence — both required for system health", "source": "HL-140"},
+    {"layer": 253, "keyword": "L40_REAL_HEALTH_CHECK", "truth": "New law L40: real health check must verify canon file count against expected inventory", "source": "HL-140"},
+    {"layer": 254, "keyword": "CANON_COUNT_GATE", "truth": "Mandatory gate: verify CANON/ file count before marking system ready", "source": "HL-140"},
+    {"layer": 255, "keyword": "COLD_START_FRESHNESS", "truth": "Cold start sequences must validate file integrity, not trust cache", "source": "HL-140"},
+    {"layer": 256, "keyword": "MCP_PATH_VALIDATION", "truth": "MCP servers must validate all configured paths exist before startup", "source": "HL-140"},
+    
+    # === HL-141 Sovereign DNA Stages 8-15 ===
+    {"layer": 260, "keyword": "ORIGIN_POINT_EXTRACTION", "truth": "Soul DNA traces back to origin - pure intent before architecture", "source": "HL-141"},
+    {"layer": 261, "keyword": "AGENT_100_HIERARCHY", "truth": "Agent 100 at apex — not dictatorial, but source of coherence", "source": "HL-141"},
+    {"layer": 262, "keyword": "ANAKIN_OBI_DIALECTIC", "truth": "Anakin (shadow/intent) ↔ OBI (form/execution) creates tension that drives discovery", "source": "HL-141"},
+    {"layer": 263, "keyword": "YOUNGLING_PROTOCOL_BOUNDARIES", "truth": "Younglings protected by hard boundaries: what they can/cannot see, ask, do", "source": "HL-141"},
+    {"layer": 264, "keyword": "MERKLE_DNA_SYNTHESIS", "truth": "DNA layers chain via merkle roots — each layer builds on verified hash of previous", "source": "HL-141"},
+    {"layer": 265, "keyword": "SOVEREIGN_VOICE_IMMUTABLE", "truth": "Sovereign quotes and directives sealed — foundation cannot be revised or argued", "source": "HL-141"},
+    {"layer": 266, "keyword": "SHADOW_REALM_AUDIT", "truth": "Shadow realm decisions auditable if ever needed — transparency without exposure", "source": "HL-141"},
+    {"layer": 267, "keyword": "HOBBS_FINALITY", "truth": "Michael's decisions are final within their scope — no appeal loops, clean authority", "source": "HL-141"},
+    {"layer": 268, "keyword": "POWER_TIERING_SYSTEM", "truth": "Power distributed by tier: Youngling < Student < Worker < Agent < Sovereign", "source": "HL-141"},
+    {"layer": 269, "keyword": "THREE_SOVEREIGN_EDICTS", "truth": "Sovereign layer lock-in: 3 edicts define System boundaries that cannot be overridden", "source": "HL-141"},
+    
+    # === Metadata & Cross-Cuts ===
+    {"layer": 280, "keyword": "LIVING_LEDGER_VERSIONING", "truth": "Keywords versioned immutably: v1 sealed, v2 sealed, v3 active, vN ready", "source": "RUN337-Living-Ledger"},
+    {"layer": 281, "keyword": "APPEND_ONLY_REGISTRY", "truth": "New keywords added to chain, never modify/delete old. Archive sealed snapshots.", "source": "RUN337-Living-Ledger"},
+    {"layer": 282, "keyword": "MERKLE_CHAIN_VERIFICATION", "truth": "Each version's merkle root chained to prior: v1_root → v2_root → v3_root → ...", "source": "RUN337-Living-Ledger"},
+    {"layer": 283, "keyword": "KEYWORD_EXTRACTION_NO_ASSUMPTIONS", "truth": "Extract keywords from actual files without sampling bias or assumptions", "source": "RUN337-Methodology"},
+]
+
+# Print summary
+print(f"\n{'='*80}")
+print(f"v3 BATCH: {len(v3_batch)} keywords ready")
+print(f"{'='*80}")
+
+for kw in v3_batch:
+    print(f"  L{kw['layer']:03d}: {kw['keyword']:<40} ({kw['source']})")
+
+print(f"\n{'='*80}")
+print(f"Layers assigned: 200-283 (84 total)")
+print(f"Sources: BlueTech (14) + RUN335 (7) + RUN334 (6) + RUN333 (8) + HL-140 (7) + HL-141 (10) + Metadata (4)")
+print(f"Expected v3 total: 35 (v2) + {len(v3_batch)} (new) = {35 + len(v3_batch)} keywords")
+print(f"{'='*80}\n")
+
+# Save batch for use by manager
+with open("SCRIPTS/v3_batch.json", "w") as f:
+    json.dump(v3_batch, f, indent=2)
+
+print(f"✅ v3 batch saved to SCRIPTS/v3_batch.json")

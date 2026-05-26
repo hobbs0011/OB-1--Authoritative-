@@ -1,0 +1,109 @@
+// This is the schema for OBI MVP
+// Use: `npx prisma db push` to sync with Supabase
+// Connection: Add DATABASE_URL to .env.local
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Student {
+  id                String   @id @default(cuid())
+  name              String
+  email             String   @unique
+  phone             String?
+  
+  // Learning profile
+  level             String   @default("A0") // A0, A1, A2, B1, B2, C1
+  xp                Int      @default(0)
+  streakDays        Int      @default(0)
+  lastActiveAt      DateTime @default(now())
+  
+  // Weak points (JSON for flexibility)
+  weakPhonemes      String[] @default(["θ"]) // Common weak sounds
+  weakGrammar       String[] @default([])
+  
+  // Relations
+  sessions          Session[]
+  mistakes          Mistake[]
+  dailyTasks        DailyTask[]
+  
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
+
+model Session {
+  id                String   @id @default(cuid())
+  studentId         String
+  student           Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  
+  // Session data
+  input             String
+  correction        String
+  explanation       String
+  practicePrompt    String?
+  
+  // Classification
+  grammarIssues     String[]
+  phonemeIssues     String[]
+  score             Float    @default(0.8)
+  
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
+
+model Mistake {
+  id                String   @id @default(cuid())
+  studentId         String
+  student           Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  
+  // The error
+  original          String   // what they said
+  corrected         String   // what they should say
+  category          String   // "grammar" | "phoneme" | "fluency"
+  detail            String   // "/th/ sound" or "past tense"
+  
+  // Tracking
+  frequency         Int      @default(1)
+  lastOccurrence    DateTime @default(now())
+  
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
+
+model DailyTask {
+  id                String   @id @default(cuid())
+  studentId         String
+  student           Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  
+  // Task
+  type              String   // "drill" | "conversation" | "assessment"
+  target            String   // "/th/" or "past tense"
+  instructions      String
+  
+  // Completion
+  isCompleted       Boolean  @default(false)
+  completedAt       DateTime?
+  
+  dateAssigned      DateTime @default(now())
+  dateDue           DateTime
+  
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
+
+model LedgerEntry {
+  id                String   @id @default(cuid())
+  
+  // Immutable audit trail
+  action            String   // "session_created" | "mistake_logged" | "streak_updated"
+  studentId         String?
+  metadata          String   // JSON
+  hash              String?  // for chain integrity
+  
+  createdAt         DateTime @default(now())
+}

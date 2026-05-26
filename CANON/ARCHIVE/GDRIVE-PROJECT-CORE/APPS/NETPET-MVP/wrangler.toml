@@ -1,0 +1,41 @@
+# Cloudflare Wrangler Configuration for NET-PET-AI MVP
+
+name = "netpet-ai"
+main = "src/worker.ts"
+compatibility_date = "2024-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Durable Objects Binding
+[[durable_objects.bindings]]
+name = "STUDENT_DO"
+class_name = "StudentDO"
+script_name = "netpet-ai"
+
+# Durable Object Migrations
+[[migrations]]
+tag = "v1"
+new_classes = ["StudentDO"]
+
+# Environment configuration
+[env.production]
+name = "netpet-ai-prod"
+routes = [
+  { pattern = "api.netpetai.com/*", zone_name = "netpetai.com" }
+]
+
+[env.staging]
+name = "netpet-ai-staging"
+
+# Build configuration
+[build]
+command = "npm run build"
+cwd = "."
+
+# Watch directories for development
+[build.upload]
+format = "modules"
+dir = "dist"
+
+# Console logging
+[[tail_consumers]]
+service = "netpet-ai"

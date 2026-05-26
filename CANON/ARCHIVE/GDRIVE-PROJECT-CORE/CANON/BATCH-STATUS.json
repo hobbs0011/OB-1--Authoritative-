@@ -1,0 +1,419 @@
+{
+  "keywords_extracted_total": 810,
+  "in_progress_batch": "BATCH_002",
+  "extraction_phase": "PHASE_1_KEYWORDS",
+  "timestamp_started": "2026-04-20T15:42:31.4620691+07:00",
+  "completed_batches": 1,
+  "total_batches": 81,
+  "blocked_batches": [],
+  "overall_progress": "1.2%",
+  "estimated_completion": "2026-04-23T15:42:31.4652542+07:00",
+  "batches": [
+    {
+      "source": "PROOFS-CHAT",
+      "status": "COMPLETE",
+      "batch_id": "BATCH_001"
+    },
+    {
+      "source": "PROOFS-CHAT",
+      "status": "PENDING",
+      "batch_id": "BATCH_002"
+    },
+    {
+      "source": "PROOFS-CHAT",
+      "status": "PENDING",
+      "batch_id": "BATCH_003"
+    },
+    {
+      "source": "PROOFS-CHAT",
+      "status": "PENDING",
+      "batch_id": "BATCH_004"
+    },
+    {
+      "source": "PROOFS-CHAT",
+      "status": "PENDING",
+      "batch_id": "BATCH_005"
+    },
+    {
+      "source": "PROOFS-CHAT",
+      "status": "PENDING",
+      "batch_id": "BATCH_006"
+    },
+    {
+      "source": "PROOFS-CHAT",
+      "status": "PENDING",
+      "batch_id": "BATCH_007"
+    },
+    {
+      "source": "PROOFS-CHAT",
+      "status": "PENDING",
+      "batch_id": "BATCH_008"
+    },
+    {
+      "source": "PROOFS-CHAT",
+      "status": "PENDING",
+      "batch_id": "BATCH_009"
+    },
+    {
+      "source": "PROOFS-CHAT",
+      "status": "PENDING",
+      "batch_id": "BATCH_010"
+    },
+    {
+      "source": "PROOFS-CHAT",
+      "status": "PENDING",
+      "batch_id": "BATCH_011"
+    },
+    {
+      "source": "PROOFS-CHAT",
+      "status": "PENDING",
+      "batch_id": "BATCH_012"
+    },
+    {
+      "source": "PROOFS-CHAT",
+      "status": "PENDING",
+      "batch_id": "BATCH_013"
+    },
+    {
+      "source": "PROOFS-CHAT",
+      "status": "PENDING",
+      "batch_id": "BATCH_014"
+    },
+    {
+      "source": "PROOFS-CHAT",
+      "status": "PENDING",
+      "batch_id": "BATCH_015"
+    },
+    {
+      "source": "PROOFS-CHAT",
+      "status": "PENDING",
+      "batch_id": "BATCH_016"
+    },
+    {
+      "source": "PROOFS-CHAT",
+      "status": "PENDING",
+      "batch_id": "BATCH_017"
+    },
+    {
+      "source": "PROOFS-CHAT",
+      "status": "PENDING",
+      "batch_id": "BATCH_018"
+    },
+    {
+      "source": "PROOFS-CHAT",
+      "status": "PENDING",
+      "batch_id": "BATCH_019"
+    },
+    {
+      "source": "PROOFS-CHAT",
+      "status": "PENDING",
+      "batch_id": "BATCH_020"
+    },
+    {
+      "source": "PROOFS-CHAT",
+      "status": "PENDING",
+      "batch_id": "BATCH_021"
+    },
+    {
+      "source": "PROOFS-CHAT",
+      "status": "PENDING",
+      "batch_id": "BATCH_022"
+    },
+    {
+      "source": "PROOFS-CHAT",
+      "status": "PENDING",
+      "batch_id": "BATCH_023"
+    },
+    {
+      "source": "PROOFS-CHAT",
+      "status": "PENDING",
+      "batch_id": "BATCH_024"
+    },
+    {
+      "source": "PROOFS-CHAT",
+      "status": "PENDING",
+      "batch_id": "BATCH_025"
+    },
+    {
+      "source": "PROOFS-CHAT",
+      "status": "PENDING",
+      "batch_id": "BATCH_026"
+    },
+    {
+      "source": "PROOFS-CHAT",
+      "status": "PENDING",
+      "batch_id": "BATCH_027"
+    },
+    {
+      "source": "PROOFS-CHAT",
+      "status": "PENDING",
+      "batch_id": "BATCH_028"
+    },
+    {
+      "source": "PROOFS-CHAT",
+      "status": "PENDING",
+      "batch_id": "BATCH_029"
+    },
+    {
+      "source": "PROOFS-CHAT",
+      "status": "PENDING",
+      "batch_id": "BATCH_030"
+    },
+    {
+      "source": "PROOFS-CHAT",
+      "status": "PENDING",
+      "batch_id": "BATCH_031"
+    },
+    {
+      "source": "PROOFS-CHAT",
+      "status": "PENDING",
+      "batch_id": "BATCH_032"
+    },
+    {
+      "source": "PROOFS-CHAT",
+      "status": "PENDING",
+      "batch_id": "BATCH_033"
+    },
+    {
+      "source": "PROOFS-CHAT",
+      "status": "PENDING",
+      "batch_id": "BATCH_034"
+    },
+    {
+      "source": "PROOFS-CHAT",
+      "status": "PENDING",
+      "batch_id": "BATCH_035"
+    },
+    {
+      "source": "PROOFS-CHAT",
+      "status": "PENDING",
+      "batch_id": "BATCH_036"
+    },
+    {
+      "source": "PROOFS-CHAT",
+      "status": "PENDING",
+      "batch_id": "BATCH_037"
+    },
+    {
+      "source": "PROOFS-CHAT",
+      "status": "PENDING",
+      "batch_id": "BATCH_038"
+    },
+    {
+      "source": "PROOFS-CHAT",
+      "status": "PENDING",
+      "batch_id": "BATCH_039"
+    },
+    {
+      "source": "PROOFS-CHAT",
+      "status": "PENDING",
+      "batch_id": "BATCH_040"
+    },
+    {
+      "source": "PROOFS-CHAT",
+      "status": "PENDING",
+      "batch_id": "BATCH_041"
+    },
+    {
+      "source": "PROOFS-CHAT",
+      "status": "PENDING",
+      "batch_id": "BATCH_042"
+    },
+    {
+      "source": "PROOFS-CHAT",
+      "status": "PENDING",
+      "batch_id": "BATCH_043"
+    },
+    {
+      "source": "PROOFS-CHAT",
+      "status": "PENDING",
+      "batch_id": "BATCH_044"
+    },
+    {
+      "source": "SOUL-DNA-BIBLE",
+      "status": "PENDING",
+      "batch_id": "BATCH_045"
+    },
+    {
+      "source": "SOUL-DNA-BIBLE",
+      "status": "PENDING",
+      "batch_id": "BATCH_046"
+    },
+    {
+      "source": "SOUL-DNA-BIBLE",
+      "status": "PENDING",
+      "batch_id": "BATCH_047"
+    },
+    {
+      "source": "SOUL-DNA-BIBLE",
+      "status": "PENDING",
+      "batch_id": "BATCH_048"
+    },
+    {
+      "source": "SOUL-DNA-BIBLE",
+      "status": "PENDING",
+      "batch_id": "BATCH_049"
+    },
+    {
+      "source": "SOUL-DNA-BIBLE",
+      "status": "PENDING",
+      "batch_id": "BATCH_050"
+    },
+    {
+      "source": "SOUL-DNA-BIBLE",
+      "status": "PENDING",
+      "batch_id": "BATCH_051"
+    },
+    {
+      "source": "SOUL-DNA-BIBLE",
+      "status": "PENDING",
+      "batch_id": "BATCH_052"
+    },
+    {
+      "source": "SOUL-DNA-BIBLE",
+      "status": "PENDING",
+      "batch_id": "BATCH_053"
+    },
+    {
+      "source": "SOUL-DNA-BIBLE",
+      "status": "PENDING",
+      "batch_id": "BATCH_054"
+    },
+    {
+      "source": "SOUL-DNA-BIBLE",
+      "status": "PENDING",
+      "batch_id": "BATCH_055"
+    },
+    {
+      "source": "SOUL-DNA-BIBLE",
+      "status": "PENDING",
+      "batch_id": "BATCH_056"
+    },
+    {
+      "source": "SOUL-DNA-BIBLE",
+      "status": "PENDING",
+      "batch_id": "BATCH_057"
+    },
+    {
+      "source": "SOUL-DNA-BIBLE",
+      "status": "PENDING",
+      "batch_id": "BATCH_058"
+    },
+    {
+      "source": "SOUL-DNA-BIBLE",
+      "status": "PENDING",
+      "batch_id": "BATCH_059"
+    },
+    {
+      "source": "SOUL-DNA-BIBLE",
+      "status": "PENDING",
+      "batch_id": "BATCH_060"
+    },
+    {
+      "source": "SOUL-DNA-BIBLE",
+      "status": "PENDING",
+      "batch_id": "BATCH_061"
+    },
+    {
+      "source": "SOUL-DNA-BIBLE",
+      "status": "PENDING",
+      "batch_id": "BATCH_062"
+    },
+    {
+      "source": "SOUL-DNA-BIBLE",
+      "status": "PENDING",
+      "batch_id": "BATCH_063"
+    },
+    {
+      "source": "PROCESSED/PENDING-*",
+      "status": "PENDING",
+      "batch_id": "BATCH_064"
+    },
+    {
+      "source": "PROCESSED/PENDING-*",
+      "status": "PENDING",
+      "batch_id": "BATCH_065"
+    },
+    {
+      "source": "PROCESSED/PENDING-*",
+      "status": "PENDING",
+      "batch_id": "BATCH_066"
+    },
+    {
+      "source": "PROCESSED/PENDING-*",
+      "status": "PENDING",
+      "batch_id": "BATCH_067"
+    },
+    {
+      "source": "PROCESSED/PENDING-*",
+      "status": "PENDING",
+      "batch_id": "BATCH_068"
+    },
+    {
+      "source": "PROCESSED/PENDING-*",
+      "status": "PENDING",
+      "batch_id": "BATCH_069"
+    },
+    {
+      "source": "PROCESSED/PENDING-*",
+      "status": "PENDING",
+      "batch_id": "BATCH_070"
+    },
+    {
+      "source": "PROCESSED/PENDING-*",
+      "status": "PENDING",
+      "batch_id": "BATCH_071"
+    },
+    {
+      "source": "PROCESSED/PENDING-*",
+      "status": "PENDING",
+      "batch_id": "BATCH_072"
+    },
+    {
+      "source": "PROCESSED/PENDING-*",
+      "status": "PENDING",
+      "batch_id": "BATCH_073"
+    },
+    {
+      "source": "PROCESSED/PENDING-*",
+      "status": "PENDING",
+      "batch_id": "BATCH_074"
+    },
+    {
+      "source": "PROCESSED/PENDING-*",
+      "status": "PENDING",
+      "batch_id": "BATCH_075"
+    },
+    {
+      "source": "PROCESSED/PENDING-*",
+      "status": "PENDING",
+      "batch_id": "BATCH_076"
+    },
+    {
+      "source": "PROCESSED/PENDING-*",
+      "status": "PENDING",
+      "batch_id": "BATCH_077"
+    },
+    {
+      "source": "PROCESSED/PENDING-*",
+      "status": "PENDING",
+      "batch_id": "BATCH_078"
+    },
+    {
+      "source": "PROCESSED/PENDING-*",
+      "status": "PENDING",
+      "batch_id": "BATCH_079"
+    },
+    {
+      "source": "PROCESSED/PENDING-*",
+      "status": "PENDING",
+      "batch_id": "BATCH_080"
+    },
+    {
+      "source": "PROCESSED/PENDING-*",
+      "status": "PENDING",
+      "batch_id": "BATCH_081"
+    }
+  ],
+  "quality_failures": []
+}

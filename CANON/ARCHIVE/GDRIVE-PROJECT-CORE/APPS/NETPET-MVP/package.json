@@ -1,0 +1,32 @@
+{
+  "name": "netpet-ai",
+  "version": "0.1.0",
+  "description": "OBI - English Accountability Tutoring System on Cloudflare Workers",
+  "main": "dist/worker.js",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "npm run build && wrangler deploy",
+    "build": "esbuild src/worker.ts --bundle --format=esm --outfile=dist/worker.js && esbuild src/studentDO.ts --bundle --format=esm --outfile=dist/studentDO.js",
+    "test": "jest",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "english",
+    "learning",
+    "cloudflare",
+    "ai",
+    "tutoring"
+  ],
+  "author": "Michael Hobbs",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "esbuild": "^0.19.0",
+    "typescript": "^5.0.0",
+    "wrangler": "^3.40.0",
+    "@cloudflare/workers-types": "^4.20240115.1"
+  },
+  "dependencies": {
+    "node-fetch": "^3.3.0"
+  }
+}

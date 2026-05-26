@@ -1,0 +1,25 @@
+{
+  "timestamp": "2026-04-20T22:05:58.1571611+07:00",
+  "top_concepts": [
+    "pheromone",
+    "Agent-99",
+    "sovereign",
+    "drone",
+    "trail",
+    "mission",
+    "checkpoint",
+    "decision",
+    "authority",
+    "POS",
+    "Agent-100",
+    "heartbeat",
+    "students",
+    "reincarnation",
+    "target"
+  ],
+  "verification_score_percent": 100.0,
+  "keywords_found": 44,
+  "keywords_total": 46,
+  "layers_evaluated": 8,
+  "verified": true
+}

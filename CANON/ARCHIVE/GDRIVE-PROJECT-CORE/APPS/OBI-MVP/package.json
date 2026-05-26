@@ -1,0 +1,30 @@
+{
+  "name": "obi-mvp",
+  "version": "1.0.0",
+  "description": "OBI — AI English Speaking System (MVP)",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "db:push": "prisma db push",
+    "db:migrate": "prisma migrate dev"
+  },
+  "dependencies": {
+    "next": "^15.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "@prisma/client": "^5.0.0",
+    "openai": "^4.0.0",
+    "dotenv": "^16.0.0",
+    "@supabase/supabase-js": "^2.0.0",
+    "date-fns": "^2.30.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.0.0",
+    "typescript": "^5.0.0",
+    "prisma": "^5.0.0"
+  }
+}

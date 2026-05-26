@@ -1,0 +1,117 @@
+// prisma/schema.prisma
+// OBI MVP Database Schema
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Student profile and state
+model Student {
+  id            String   @id @default(cuid())
+  email         String   @unique
+  level         String   @default("A1") // A1, A2, B1, B2, C1, C2
+  
+  // weakness tracking
+  weakPoints    Json     @default("[]") // ["th_sound", "past_tense"]
+  streak        Int      @default(0)
+  
+  // engagement
+  totalSessions Int      @default(0)
+  totalMinutes  Int      @default(0)
+  lastActive    DateTime @default(now())
+  
+  // relationships
+  sessions      Session[]
+  starNodes     StarNode[]
+  
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+// Individual session (one chat session)
+model Session {
+  id            String   @id @default(cuid())
+  studentId     String
+  student       Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  
+  // conversation
+  input         String  // what user said
+  corrected     String  // what they should have said
+  explanation   String  // why it's wrong
+  drill         String  // repetition task
+  
+  // analysis
+  mistakes      Json     // ["th_sound"]
+  mistakeSeverity Float  @default(0.5) // 0-1 scale
+  
+  // metadata
+  duration      Int      @default(0) // seconds
+  successful    Boolean  @default(false) // did they improve?
+  
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  @@index([studentId])
+  @@index([createdAt])
+}
+
+// Star Map Node (semantic weakness cluster)
+model StarNode {
+  id            String   @id @default(cuid())
+  studentId     String
+  student       Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  
+  // what this node represents
+  type          String   // "phoneme", "grammar", "fluency", "vocab"
+  tag           String   // "th_sound", "past_tense"
+  
+  // strength of problem
+  severity      Float    @default(0.5) // 0-1
+  confidence    Float    @default(0.5) // 0-1 how sure are we?
+  
+  // vector embedding (1536 dims for GPT embeddings)
+  embedding     Float[]  @default([])
+  
+  // links to raw evidence
+  linkedSessions Json    @default("[]") // ["session_id_1", "session_id_2"]
+  
+  // repetition tracking
+  timesRepeated Int      @default(0)
+  lastDrilled   DateTime @default(now())
+  
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  @@unique([studentId, tag])
+  @@index([studentId])
+  @@index([severity(sort: Desc)])
+}
+
+// Teacher/admin access (optional)
+model Teacher {
+  id        String    @id @default(cuid())
+  email     String    @unique
+  name      String
+  school    String?
+  
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+// School account (optional)
+model School {
+  id        String    @id @default(cuid())
+  name      String
+  country   String    @default("Vietnam")
+  contactEmail String
+  
+  studentCount Int @default(0)
+  
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
