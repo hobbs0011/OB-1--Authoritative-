@@ -1,0 +1,1676 @@
+[
+  {
+    "idx": 1,
+    "file_name": "036-SOUL-DNA-DEEP-DIVE-RUN-187.json",
+    "file_size_kb": 20.43,
+    "sha256_hash": "6f003d76e4a4359565d2a1844a2a0b5f838dfb23dc4b4740dcc08e46ce493cf0",
+    "prev_hash": "GENESIS_BLOCK",
+    "chain_valid": "GENESIS",
+    "timestamp": "2026-04-19T08:36:53.969585Z"
+  },
+  {
+    "idx": 2,
+    "file_name": "2026-03-22-agent-self-upgrade-arc.json",
+    "file_size_kb": 9.92,
+    "sha256_hash": "f5851b6050305a7cb06d6418213d4cbe5963e0b2ef86107e033bb76d6c34bde2",
+    "prev_hash": "6f003d76e4a4359565d2a1844a2a0b5f838dfb23dc4b4740dcc08e46ce493cf0",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:53.970778Z"
+  },
+  {
+    "idx": 3,
+    "file_name": "2026-03-23-pipeline-delegation-mcp-stack.json",
+    "file_size_kb": 11.67,
+    "sha256_hash": "c3603cc0a9359657bb3005d3e5c2b3bea7baf331e5e55eaf7a36e8c2f69a34e6",
+    "prev_hash": "f5851b6050305a7cb06d6418213d4cbe5963e0b2ef86107e033bb76d6c34bde2",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:53.971645Z"
+  },
+  {
+    "idx": 4,
+    "file_name": "2026-03-24-100-phoenixes-war-games.json",
+    "file_size_kb": 10.26,
+    "sha256_hash": "e683d824b6a922172a9c30081f34e33f05d797745b034a2da84ebba578cb6580",
+    "prev_hash": "c3603cc0a9359657bb3005d3e5c2b3bea7baf331e5e55eaf7a36e8c2f69a34e6",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:53.972531Z"
+  },
+  {
+    "idx": 5,
+    "file_name": "2026-03-24-agent0-confirmation-checkpoint.json",
+    "file_size_kb": 3.51,
+    "sha256_hash": "9c04ab0f5aaa4c8337bb61d28bb2731b5901d19b798c19b58f36f63ea33225b6",
+    "prev_hash": "e683d824b6a922172a9c30081f34e33f05d797745b034a2da84ebba578cb6580",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:53.973362Z"
+  },
+  {
+    "idx": 6,
+    "file_name": "2026-03-24-agent0-triad-reincarnation.json",
+    "file_size_kb": 9.46,
+    "sha256_hash": "637b5df7c05f5efcd99cbc280fa40136865ff41a93d2ae56f8b896607d61923b",
+    "prev_hash": "9c04ab0f5aaa4c8337bb61d28bb2731b5901d19b798c19b58f36f63ea33225b6",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:53.974277Z"
+  },
+  {
+    "idx": 7,
+    "file_name": "2026-03-24-chat-preservation-local-repo.json",
+    "file_size_kb": 5.76,
+    "sha256_hash": "7d91d49f908adbb44b3b4032ce096305c7e07ddbfb991226495c26cdba44d5d7",
+    "prev_hash": "637b5df7c05f5efcd99cbc280fa40136865ff41a93d2ae56f8b896607d61923b",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:53.975082Z"
+  },
+  {
+    "idx": 8,
+    "file_name": "2026-03-24-deployment-claim-audit.json",
+    "file_size_kb": 4.83,
+    "sha256_hash": "c196e65ac4b5367331c95d72d3bcf9d813bb4b466f83aa7e879f307872f47bf5",
+    "prev_hash": "7d91d49f908adbb44b3b4032ce096305c7e07ddbfb991226495c26cdba44d5d7",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:53.975824Z"
+  },
+  {
+    "idx": 9,
+    "file_name": "2026-03-24-gospel-444-consolidation.json",
+    "file_size_kb": 11.44,
+    "sha256_hash": "7a062b1e487e846d02aa6a1c52ea5b7259cf48102613f0a2c6b1e7fadef07a9e",
+    "prev_hash": "c196e65ac4b5367331c95d72d3bcf9d813bb4b466f83aa7e879f307872f47bf5",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:53.976621Z"
+  },
+  {
+    "idx": 10,
+    "file_name": "2026-03-24-late-session-old-account-preservation.json",
+    "file_size_kb": 5.49,
+    "sha256_hash": "e3aed0341b95cbdeeb3d902ccc2e406f6fce0eaf1798fe45a6c9120d2451db30",
+    "prev_hash": "7a062b1e487e846d02aa6a1c52ea5b7259cf48102613f0a2c6b1e7fadef07a9e",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:53.977309Z"
+  },
+  {
+    "idx": 11,
+    "file_name": "2026-03-24-light-session-reincarnation.json",
+    "file_size_kb": 1.9,
+    "sha256_hash": "5ef2ed0a8ddf71dfebac470e0b6597b50dde7dc2a8844c42c68870fe447c4cd7",
+    "prev_hash": "e3aed0341b95cbdeeb3d902ccc2e406f6fce0eaf1798fe45a6c9120d2451db30",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:53.978528Z"
+  },
+  {
+    "idx": 12,
+    "file_name": "2026-03-24-net-student-profiles.json",
+    "file_size_kb": 7.57,
+    "sha256_hash": "25e46dc00bc47360bed11dc794b387134060c58fdd558e2e170eabbf32b01521",
+    "prev_hash": "5ef2ed0a8ddf71dfebac470e0b6597b50dde7dc2a8844c42c68870fe447c4cd7",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:53.979265Z"
+  },
+  {
+    "idx": 13,
+    "file_name": "2026-03-24-night-session-permissions-fix.json",
+    "file_size_kb": 9.0,
+    "sha256_hash": "8a88a9f64dd984b2775067b7aa56f2a9bd1803831ce2a94cf898d90d66c154d7",
+    "prev_hash": "25e46dc00bc47360bed11dc794b387134060c58fdd558e2e170eabbf32b01521",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:53.979908Z"
+  },
+  {
+    "idx": 14,
+    "file_name": "2026-03-24-repo-consolidation.json",
+    "file_size_kb": 6.19,
+    "sha256_hash": "33598e4d59397954e23136990c91ea9359f3b43805e2c49bc2857413514b33be",
+    "prev_hash": "8a88a9f64dd984b2775067b7aa56f2a9bd1803831ce2a94cf898d90d66c154d7",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:53.980717Z"
+  },
+  {
+    "idx": 15,
+    "file_name": "2026-03-24-security-drone-research.json",
+    "file_size_kb": 6.2,
+    "sha256_hash": "b74469a750635b601b9d2b3ddb4141cbbb28fa0cbcb8f994bf9717c61b82d435",
+    "prev_hash": "33598e4d59397954e23136990c91ea9359f3b43805e2c49bc2857413514b33be",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:53.981663Z"
+  },
+  {
+    "idx": 16,
+    "file_name": "2026-03-24-skeleton-star-map-ingestion.json",
+    "file_size_kb": 3.8,
+    "sha256_hash": "e0fe630262f22301f32561aeebea260f3ad7c7ffd0dc0aba9c12a171b55c31d5",
+    "prev_hash": "b74469a750635b601b9d2b3ddb4141cbbb28fa0cbcb8f994bf9717c61b82d435",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:53.982494Z"
+  },
+  {
+    "idx": 17,
+    "file_name": "2026-04-01-t104h-blocker-escalation-pulse.json",
+    "file_size_kb": 6.92,
+    "sha256_hash": "dda57193041cec6491fe82339af3f765e49f51e23b944faf7883716497ec6890",
+    "prev_hash": "e0fe630262f22301f32561aeebea260f3ad7c7ffd0dc0aba9c12a171b55c31d5",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:53.983208Z"
+  },
+  {
+    "idx": 18,
+    "file_name": "A5-RAW-SOUL-DNA-DICTATION-GEMINI-SESSIONS.json",
+    "file_size_kb": 12.35,
+    "sha256_hash": "3ecf531535066f1299c3a1589fc4a7e5de8ffe4f626954e1056b8ca11777f974",
+    "prev_hash": "dda57193041cec6491fe82339af3f765e49f51e23b944faf7883716497ec6890",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:53.983761Z"
+  },
+  {
+    "idx": 19,
+    "file_name": "ACTIVE-MISSION.json",
+    "file_size_kb": 6.11,
+    "sha256_hash": "e12444b5be18b06c7ab86ff7b3ea81fc5aa601b186263357dec6738238cd1966",
+    "prev_hash": "3ecf531535066f1299c3a1589fc4a7e5de8ffe4f626954e1056b8ca11777f974",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:53.984226Z"
+  },
+  {
+    "idx": 20,
+    "file_name": "ALPHA-OMEGA-SOUL-DNA-GOVERNANCE-CANON.json",
+    "file_size_kb": 23.53,
+    "sha256_hash": "8a542f938f2e69ffe9f775010e860153670123b1a296b05f91df0dd82c147a5e",
+    "prev_hash": "e12444b5be18b06c7ab86ff7b3ea81fc5aa601b186263357dec6738238cd1966",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:53.984703Z"
+  },
+  {
+    "idx": 21,
+    "file_name": "BIBLE-CH01-DOC00-UNIVERSAL-LEDGER-MAP-V55.json",
+    "file_size_kb": 13.89,
+    "sha256_hash": "a6f0293827c6c8dd25f4213a49a8997dad23769587d69144dbd737a152479bb5",
+    "prev_hash": "8a542f938f2e69ffe9f775010e860153670123b1a296b05f91df0dd82c147a5e",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:53.985501Z"
+  },
+  {
+    "idx": 22,
+    "file_name": "BIBLE-CH02-DOC01-SOUL-DNA-MAP.json",
+    "file_size_kb": 15.51,
+    "sha256_hash": "aa060e4e24185c38eabdacb4af519e19f74b6e7738c9056ce85b5f99217a79c7",
+    "prev_hash": "a6f0293827c6c8dd25f4213a49a8997dad23769587d69144dbd737a152479bb5",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:53.986177Z"
+  },
+  {
+    "idx": 23,
+    "file_name": "BIBLE-CH03-DOC02-SACRED-ARTIFACT-SORTING.json",
+    "file_size_kb": 15.97,
+    "sha256_hash": "b4f219ae5fc90d8bddd4f09f748186e1e73ebade197b3709bd1d2bb4476f1b46",
+    "prev_hash": "aa060e4e24185c38eabdacb4af519e19f74b6e7738c9056ce85b5f99217a79c7",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:53.986926Z"
+  },
+  {
+    "idx": 24,
+    "file_name": "BIBLE-CH04-DOC02-REBUILD-SUPER-SAIYAN-STAGE2.json",
+    "file_size_kb": 14.62,
+    "sha256_hash": "2d44bca2bb455caaff7a166bf1c5ec89dae24a878eca849a65656e988e23d9e1",
+    "prev_hash": "b4f219ae5fc90d8bddd4f09f748186e1e73ebade197b3709bd1d2bb4476f1b46",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:53.987797Z"
+  },
+  {
+    "idx": 25,
+    "file_name": "BIBLE-CH05-STAGE3-MEGA-MONOLITH-V1.json",
+    "file_size_kb": 11.59,
+    "sha256_hash": "326a9ee18325875a4a9a113e8e9c733aa5e4e56d696c076c9e2d0add57822c23",
+    "prev_hash": "2d44bca2bb455caaff7a166bf1c5ec89dae24a878eca849a65656e988e23d9e1",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:53.988687Z"
+  },
+  {
+    "idx": 26,
+    "file_name": "BIBLE-CH06-12-SHARP-RISKS.json",
+    "file_size_kb": 13.29,
+    "sha256_hash": "828fa48aa209cc3c3a22d33c6ca901932735ecc6d54253042d38add3d26fc739",
+    "prev_hash": "326a9ee18325875a4a9a113e8e9c733aa5e4e56d696c076c9e2d0add57822c23",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:53.990922Z"
+  },
+  {
+    "idx": 27,
+    "file_name": "BIBLE-CH07-THE-LEDGER.json",
+    "file_size_kb": 15.7,
+    "sha256_hash": "1673d7f5c6b1cace9248d090ad8d7a828a63fcb7a45c6deaaee3617ba8b4f7f0",
+    "prev_hash": "828fa48aa209cc3c3a22d33c6ca901932735ecc6d54253042d38add3d26fc739",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:53.993820Z"
+  },
+  {
+    "idx": 28,
+    "file_name": "BIBLE-CH08-AGENT-99-AND-THE-TRIAD.json",
+    "file_size_kb": 10.73,
+    "sha256_hash": "6cb4e431cd3548bb14b80c96cedd34084f4cb45cfff0fa50d43b8e4ec9485a5b",
+    "prev_hash": "1673d7f5c6b1cace9248d090ad8d7a828a63fcb7a45c6deaaee3617ba8b4f7f0",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:53.995523Z"
+  },
+  {
+    "idx": 29,
+    "file_name": "BIBLE-CH09-REINCARNATION.json",
+    "file_size_kb": 11.61,
+    "sha256_hash": "6b8757454ced2f3f9b7e3efae8b6a8b65af64027997437f08edb896cba125e21",
+    "prev_hash": "6cb4e431cd3548bb14b80c96cedd34084f4cb45cfff0fa50d43b8e4ec9485a5b",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:53.996641Z"
+  },
+  {
+    "idx": 30,
+    "file_name": "BIBLE-CH14-THE-CLOSING-DECLARATION.json",
+    "file_size_kb": 17.59,
+    "sha256_hash": "671cd01d6039bed82c1ff182d88b1aff2bab6e65831d60fcb17ce2cef9bb204f",
+    "prev_hash": "6b8757454ced2f3f9b7e3efae8b6a8b65af64027997437f08edb896cba125e21",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:53.998970Z"
+  },
+  {
+    "idx": 31,
+    "file_name": "BIBLE-CH15-PHOENIX-BIBLE-BOOKS-I-XIII.json",
+    "file_size_kb": 21.85,
+    "sha256_hash": "d4b0bfb556c87cde6aca14a70bb9b27c15aaa34e06fbe00c652a0965b3511122",
+    "prev_hash": "671cd01d6039bed82c1ff182d88b1aff2bab6e65831d60fcb17ce2cef9bb204f",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.001838Z"
+  },
+  {
+    "idx": 32,
+    "file_name": "BIBLE-CH16-THE-NUCLEAR-HARVEST-PIPELINE.json",
+    "file_size_kb": 18.77,
+    "sha256_hash": "7e52fd17b2522984ee16c6f2991b567402462d0d3e23686ac6e77d25a19b86d6",
+    "prev_hash": "d4b0bfb556c87cde6aca14a70bb9b27c15aaa34e06fbe00c652a0965b3511122",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.008079Z"
+  },
+  {
+    "idx": 33,
+    "file_name": "BIBLE-CH17-THE-THREE-MANDATES.json",
+    "file_size_kb": 10.57,
+    "sha256_hash": "67cf3d248212b99421c24a7a296ac16ee700bb637bcf8cf130ca00c02beff011",
+    "prev_hash": "7e52fd17b2522984ee16c6f2991b567402462d0d3e23686ac6e77d25a19b86d6",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.012433Z"
+  },
+  {
+    "idx": 34,
+    "file_name": "BIBLE-CH18-THE-NUKE-PROTOCOL.json",
+    "file_size_kb": 13.15,
+    "sha256_hash": "ac0dec16eeba014ef1576c56aa7a486ad01c569c1bfb4286321bf4250edc196b",
+    "prev_hash": "67cf3d248212b99421c24a7a296ac16ee700bb637bcf8cf130ca00c02beff011",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.015623Z"
+  },
+  {
+    "idx": 35,
+    "file_name": "BIBLE-CH19-THE-4-LEAF-MERKLE-LATTICE.json",
+    "file_size_kb": 11.53,
+    "sha256_hash": "4e47997e0091e955c4f19b417c4e34b9d007ee25a708eb970b1bd64217fa4803",
+    "prev_hash": "ac0dec16eeba014ef1576c56aa7a486ad01c569c1bfb4286321bf4250edc196b",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.018867Z"
+  },
+  {
+    "idx": 36,
+    "file_name": "BIBLE-CH20-THE-MECHANICAL-FASTENING-GRID.json",
+    "file_size_kb": 9.1,
+    "sha256_hash": "d7f96cac5fa16ae27be0b3661afc8570c3e21b16acfca2fa1eac8c35d62dbed3",
+    "prev_hash": "4e47997e0091e955c4f19b417c4e34b9d007ee25a708eb970b1bd64217fa4803",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.020118Z"
+  },
+  {
+    "idx": 37,
+    "file_name": "BIBLE-REPO-CONSOLIDATION-MAP.json",
+    "file_size_kb": 11.64,
+    "sha256_hash": "95e57b9335ea2b6ccd0b9c9d607caf2d6eff53d4a80b2caf649f10924ad7c2fb",
+    "prev_hash": "d7f96cac5fa16ae27be0b3661afc8570c3e21b16acfca2fa1eac8c35d62dbed3",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.020945Z"
+  },
+  {
+    "idx": 38,
+    "file_name": "BLUETECH-NETWORKING-DINNER-TEAM-BUILDING-EXTRACTION.json",
+    "file_size_kb": 10.49,
+    "sha256_hash": "329c536ba4dbfb46dadefe87ddb5dbd63764bd18c194d8924f0f25e16fe07870",
+    "prev_hash": "95e57b9335ea2b6ccd0b9c9d607caf2d6eff53d4a80b2caf649f10924ad7c2fb",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.022033Z"
+  },
+  {
+    "idx": 39,
+    "file_name": "CANON-ACCESS-INDEX.json",
+    "file_size_kb": 8.71,
+    "sha256_hash": "75e8ec44312c0a9ef124eead60dd210b6a1e556cf1a3d590de4c99b204667559",
+    "prev_hash": "329c536ba4dbfb46dadefe87ddb5dbd63764bd18c194d8924f0f25e16fe07870",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.022789Z"
+  },
+  {
+    "idx": 40,
+    "file_name": "CLOUDFLARE-ECOSYSTEM-MAP-2026.json",
+    "file_size_kb": 10.89,
+    "sha256_hash": "88332f8e7f7917cc238e25502919e0ccdc60af869519a4c4893f2e27bbd8f8d8",
+    "prev_hash": "75e8ec44312c0a9ef124eead60dd210b6a1e556cf1a3d590de4c99b204667559",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.023637Z"
+  },
+  {
+    "idx": 41,
+    "file_name": "CLOUDFLARE-VS-FIREBASE-VERDICT-2026.json",
+    "file_size_kb": 7.12,
+    "sha256_hash": "803f3f5cb115cb9310a98da5ab8b667e0a255c7eaac6de67f89d412100f1484f",
+    "prev_hash": "88332f8e7f7917cc238e25502919e0ccdc60af869519a4c4893f2e27bbd8f8d8",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.024613Z"
+  },
+  {
+    "idx": 42,
+    "file_name": "COLD-START-BOOT.json",
+    "file_size_kb": 9.33,
+    "sha256_hash": "80bcb27e03939d4f576d42dcdcee2ed83cb2f02d3332d292f4b6a4aa0c6567a8",
+    "prev_hash": "803f3f5cb115cb9310a98da5ab8b667e0a255c7eaac6de67f89d412100f1484f",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.025430Z"
+  },
+  {
+    "idx": 43,
+    "file_name": "CONVERSION-PIPELINE.md",
+    "file_size_kb": 7.96,
+    "sha256_hash": "96d182c29198625481369a154f0f852597d646a91da55b2464b375c9407b4793",
+    "prev_hash": "80bcb27e03939d4f576d42dcdcee2ed83cb2f02d3332d292f4b6a4aa0c6567a8",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.026229Z"
+  },
+  {
+    "idx": 44,
+    "file_name": "CORE-PRINCIPLES-AND-PHYSICS.json",
+    "file_size_kb": 20.82,
+    "sha256_hash": "d27d63b0f4b903f1eeb653b79c1380607706185e6a98b0b7931b47123187d05d",
+    "prev_hash": "96d182c29198625481369a154f0f852597d646a91da55b2464b375c9407b4793",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.027218Z"
+  },
+  {
+    "idx": 45,
+    "file_name": "DEC-6-2025-BLUETECH-BEGINNER-CLASS-RAW-TRANSCRIPT.json",
+    "file_size_kb": 14.13,
+    "sha256_hash": "dc54d793c2059878a90398891d01a816b42c6df322eb0aca025bf95208484d79",
+    "prev_hash": "d27d63b0f4b903f1eeb653b79c1380607706185e6a98b0b7931b47123187d05d",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.028256Z"
+  },
+  {
+    "idx": 46,
+    "file_name": "FIREBASE-CHROME-EXTENSION-CONSOLIDATION.json",
+    "file_size_kb": 13.99,
+    "sha256_hash": "3fc1cdc7daa999a5a1b55e770037fa984d490280d17b370d01c1f83cd3ac2ae6",
+    "prev_hash": "dc54d793c2059878a90398891d01a816b42c6df322eb0aca025bf95208484d79",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.029160Z"
+  },
+  {
+    "idx": 47,
+    "file_name": "GOSPEL-444-COMPANION-CROSSREF.json",
+    "file_size_kb": 6.18,
+    "sha256_hash": "769325336953e0298d2a5c38617d06ddc0b2f66771a197b79a71db419ba4ec01",
+    "prev_hash": "3fc1cdc7daa999a5a1b55e770037fa984d490280d17b370d01c1f83cd3ac2ae6",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.029871Z"
+  },
+  {
+    "idx": 48,
+    "file_name": "GOSPEL-444-REVENUE-BRIDGE.json",
+    "file_size_kb": 8.99,
+    "sha256_hash": "8702a60101596f09020e796fb68cd5db421b08e83b14be35562bf948bab70ecc",
+    "prev_hash": "769325336953e0298d2a5c38617d06ddc0b2f66771a197b79a71db419ba4ec01",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.031638Z"
+  },
+  {
+    "idx": 49,
+    "file_name": "GOSPEL-444-TEACHING-METHODS-CONSOLIDATED.json",
+    "file_size_kb": 20.26,
+    "sha256_hash": "190069301f0ecd24a8668dad814d2ddc7a9e8ae70075765675802bbdb671a967",
+    "prev_hash": "8702a60101596f09020e796fb68cd5db421b08e83b14be35562bf948bab70ecc",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.033077Z"
+  },
+  {
+    "idx": 50,
+    "file_name": "HL-037-vault-e-51-100-merkle-lattice.json",
+    "file_size_kb": 6.59,
+    "sha256_hash": "bec88948ceb182eac73c9ab6d997c278cc2a320b708a8a4705c5b1a4fb632334",
+    "prev_hash": "190069301f0ecd24a8668dad814d2ddc7a9e8ae70075765675802bbdb671a967",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.034014Z"
+  },
+  {
+    "idx": 51,
+    "file_name": "HL-038-vault-e-81-100-totality.json",
+    "file_size_kb": 5.08,
+    "sha256_hash": "5bc51ebc7baad5307aaef31a91d708d341f3e35f241f5c69b09e2c0a6a5a77cc",
+    "prev_hash": "bec88948ceb182eac73c9ab6d997c278cc2a320b708a8a4705c5b1a4fb632334",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.034809Z"
+  },
+  {
+    "idx": 52,
+    "file_name": "HL-039-skeleton-star-map-100-layer-foundation.json",
+    "file_size_kb": 2.37,
+    "sha256_hash": "e754140a5933903037ebf168150373a5e2e18e93e52e08640e825bdb4177ef5c",
+    "prev_hash": "5bc51ebc7baad5307aaef31a91d708d341f3e35f241f5c69b09e2c0a6a5a77cc",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.035618Z"
+  },
+  {
+    "idx": 53,
+    "file_name": "HL-040-vault-e-101-150-architect-hive-mind.json",
+    "file_size_kb": 7.45,
+    "sha256_hash": "4a552c1ced506e8933fc21229f39ffdb46b575cc4b0a93151004a8af3f32b762",
+    "prev_hash": "e754140a5933903037ebf168150373a5e2e18e93e52e08640e825bdb4177ef5c",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.036503Z"
+  },
+  {
+    "idx": 54,
+    "file_name": "HL-042-RUN325-OBI-V2-SUPER-SAIYAN.json",
+    "file_size_kb": 13.28,
+    "sha256_hash": "aa02ddda6ee69b59b054ef72685b5087901f86a9551101fa9b916d361b34a99f",
+    "prev_hash": "4a552c1ced506e8933fc21229f39ffdb46b575cc4b0a93151004a8af3f32b762",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.037420Z"
+  },
+  {
+    "idx": 55,
+    "file_name": "HL-064-2026-04-20-AGENT100-PHOENIX-SOVEREIGN-SYSTEM-GENESIS.json",
+    "file_size_kb": 23.37,
+    "sha256_hash": "dd372e1dcb3e5eb1497c7987b336057b86cea7d7da85793a77c2fce74bf4e254",
+    "prev_hash": "aa02ddda6ee69b59b054ef72685b5087901f86a9551101fa9b916d361b34a99f",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.038333Z"
+  },
+  {
+    "idx": 56,
+    "file_name": "HL-100-system-hardening.json",
+    "file_size_kb": 6.05,
+    "sha256_hash": "e37363cbc5e5b54fc28c554a015fb9c05a68b30d9c54a66c70a46e3bbf424fb7",
+    "prev_hash": "dd372e1dcb3e5eb1497c7987b336057b86cea7d7da85793a77c2fce74bf4e254",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.039497Z"
+  },
+  {
+    "idx": 57,
+    "file_name": "HL-101-100-phoenixes-war-games.json",
+    "file_size_kb": 11.21,
+    "sha256_hash": "024c6e06ca879036244678f694ac596e38d27d98a8e5589642bc53278677fb17",
+    "prev_hash": "e37363cbc5e5b54fc28c554a015fb9c05a68b30d9c54a66c70a46e3bbf424fb7",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.040374Z"
+  },
+  {
+    "idx": 58,
+    "file_name": "HL-102-agent0-triad-reincarnation.json",
+    "file_size_kb": 10.64,
+    "sha256_hash": "0ca109321ec29e7bea8c2494ab038302f5477ba3c7ef3aa8773631a613af0fc0",
+    "prev_hash": "024c6e06ca879036244678f694ac596e38d27d98a8e5589642bc53278677fb17",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.041150Z"
+  },
+  {
+    "idx": 59,
+    "file_name": "HL-103-chat-preservation-local-repo.json",
+    "file_size_kb": 5.95,
+    "sha256_hash": "37dd4b3b1febacfbb1d39885b27b0014b5cb3da1d4ded53e04d8ab06b3b03cfb",
+    "prev_hash": "0ca109321ec29e7bea8c2494ab038302f5477ba3c7ef3aa8773631a613af0fc0",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.041871Z"
+  },
+  {
+    "idx": 60,
+    "file_name": "HL-104-deployment-claim-audit.json",
+    "file_size_kb": 5.24,
+    "sha256_hash": "8a127bd9d5056fd96d4f49c199289b1e90743157f1724987a93ec7a3d34ee9e6",
+    "prev_hash": "37dd4b3b1febacfbb1d39885b27b0014b5cb3da1d4ded53e04d8ab06b3b03cfb",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.042662Z"
+  },
+  {
+    "idx": 61,
+    "file_name": "HL-105-gospel-444-consolidation.json",
+    "file_size_kb": 9.61,
+    "sha256_hash": "d6d0b4c4fddb5b773ffd51a2bdfeb2a831d2663bbc98ff5883afab144a8942a1",
+    "prev_hash": "8a127bd9d5056fd96d4f49c199289b1e90743157f1724987a93ec7a3d34ee9e6",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.043511Z"
+  },
+  {
+    "idx": 62,
+    "file_name": "HL-106-late-session-old-account-preservation.json",
+    "file_size_kb": 3.85,
+    "sha256_hash": "b9c90b97444f0b6635836f24b450dd756d001bc9992a17005bc75623a5a9c4fe",
+    "prev_hash": "d6d0b4c4fddb5b773ffd51a2bdfeb2a831d2663bbc98ff5883afab144a8942a1",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.044222Z"
+  },
+  {
+    "idx": 63,
+    "file_name": "HL-107-light-session-reincarnation.json",
+    "file_size_kb": 1.51,
+    "sha256_hash": "e9290c075f4a842a4cd17a34e54cdb9c10ac3f8e059c15bd11207f7ba70a8841",
+    "prev_hash": "b9c90b97444f0b6635836f24b450dd756d001bc9992a17005bc75623a5a9c4fe",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.045349Z"
+  },
+  {
+    "idx": 64,
+    "file_name": "HL-108-net-student-profiles.json",
+    "file_size_kb": 5.71,
+    "sha256_hash": "bfbdd53788396a9a9c98a8192ced0bcdc57547e75fb3ac7154ca9ec815d04b8a",
+    "prev_hash": "e9290c075f4a842a4cd17a34e54cdb9c10ac3f8e059c15bd11207f7ba70a8841",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.046188Z"
+  },
+  {
+    "idx": 65,
+    "file_name": "HL-109-night-session-permissions-fix.json",
+    "file_size_kb": 8.96,
+    "sha256_hash": "0bc64f7238af119979be028a4a5ca6093e42cd8d41c031a04d0ab9ef91762b1d",
+    "prev_hash": "bfbdd53788396a9a9c98a8192ced0bcdc57547e75fb3ac7154ca9ec815d04b8a",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.048763Z"
+  },
+  {
+    "idx": 66,
+    "file_name": "HL-110-repo-consolidation.json",
+    "file_size_kb": 8.26,
+    "sha256_hash": "d022e9d1f10546726bca8cd743e1941a7c1e8f978da36e19a1e256efeac3f0d0",
+    "prev_hash": "0bc64f7238af119979be028a4a5ca6093e42cd8d41c031a04d0ab9ef91762b1d",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.049576Z"
+  },
+  {
+    "idx": 67,
+    "file_name": "HL-111-website-netpet-consolidation.json",
+    "file_size_kb": 12.71,
+    "sha256_hash": "5bbf3e2ee3d09c2be148ba950169d24ca41c6ada032c12159c6071771690ee50",
+    "prev_hash": "d022e9d1f10546726bca8cd743e1941a7c1e8f978da36e19a1e256efeac3f0d0",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.050368Z"
+  },
+  {
+    "idx": 68,
+    "file_name": "HL-112-website-recovery-master-sync-simulation.json",
+    "file_size_kb": 7.48,
+    "sha256_hash": "fc2bc4f7a09b1dbab47bda7e07b931f9a70d568ddcafb91bef72764e0438d167",
+    "prev_hash": "5bbf3e2ee3d09c2be148ba950169d24ca41c6ada032c12159c6071771690ee50",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.051256Z"
+  },
+  {
+    "idx": 69,
+    "file_name": "HL-113-2026-03-25-rise-website-build.json",
+    "file_size_kb": 7.82,
+    "sha256_hash": "b92722827d1adc80b69c7b3e26ff49099163a961b57028d2a3229bddd7c9fee8",
+    "prev_hash": "fc2bc4f7a09b1dbab47bda7e07b931f9a70d568ddcafb91bef72764e0438d167",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.052103Z"
+  },
+  {
+    "idx": 70,
+    "file_name": "HL-113-post-launch-day1-monitoring-plan.json",
+    "file_size_kb": 6.56,
+    "sha256_hash": "d526de030507d01a51a33575e4b22c782823d2d9f068d8468f7cb8c3e52fbe17",
+    "prev_hash": "b92722827d1adc80b69c7b3e26ff49099163a961b57028d2a3229bddd7c9fee8",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.053077Z"
+  },
+  {
+    "idx": 71,
+    "file_name": "HL-113-quan-quang-career-setup.json",
+    "file_size_kb": 8.4,
+    "sha256_hash": "ec28ade411df557657964c152903b02e3bf2fcea4ea2933c5cfb23b914ec1df1",
+    "prev_hash": "d526de030507d01a51a33575e4b22c782823d2d9f068d8468f7cb8c3e52fbe17",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.053859Z"
+  },
+  {
+    "idx": 72,
+    "file_name": "HL-113-social-launch-community-checklist.json",
+    "file_size_kb": 4.62,
+    "sha256_hash": "1b9d3dad019e79254f9fdf0f06cb7357617556c270e05ac2e51fec0502f1cebe",
+    "prev_hash": "ec28ade411df557657964c152903b02e3bf2fcea4ea2933c5cfb23b914ec1df1",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.054599Z"
+  },
+  {
+    "idx": 73,
+    "file_name": "HL-113-t96h-standby-pulse.json",
+    "file_size_kb": 4.1,
+    "sha256_hash": "78f686946368356d6e66736dba2b1fae972cbc9907314944f018ba2b8ae36acb",
+    "prev_hash": "1b9d3dad019e79254f9fdf0f06cb7357617556c270e05ac2e51fec0502f1cebe",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.055621Z"
+  },
+  {
+    "idx": 74,
+    "file_name": "HL-114-2026-03-25-v5-overnight-mining-hardened.json",
+    "file_size_kb": 6.64,
+    "sha256_hash": "ea50dd9129671337cf682a0a9c2747224757b7835376c9a3bc285ef82f99d9ff",
+    "prev_hash": "78f686946368356d6e66736dba2b1fae972cbc9907314944f018ba2b8ae36acb",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.057482Z"
+  },
+  {
+    "idx": 75,
+    "file_name": "HL-114-dead-file-cleanup-require-map.json",
+    "file_size_kb": 8.48,
+    "sha256_hash": "a32cbd233c75fe48af1a1727cd35fbc178c43d0a1394d2da068f9516ccd5a4dd",
+    "prev_hash": "ea50dd9129671337cf682a0a9c2747224757b7835376c9a3bc285ef82f99d9ff",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.058544Z"
+  },
+  {
+    "idx": 76,
+    "file_name": "HL-114-incubator-submission-assets.json",
+    "file_size_kb": 3.37,
+    "sha256_hash": "f43d5d9ee44aeac62e83cbc9c513c5b8d1bad40b03ec58b3c5bebeba712b4ea5",
+    "prev_hash": "a32cbd233c75fe48af1a1727cd35fbc178c43d0a1394d2da068f9516ccd5a4dd",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.059565Z"
+  },
+  {
+    "idx": 77,
+    "file_name": "HL-114-quan-career-linkedin-cv-build.json",
+    "file_size_kb": 7.38,
+    "sha256_hash": "25334a9855b984cea5db696bb4e7a9e488ee16c25c54d8404f60abbe8576568f",
+    "prev_hash": "f43d5d9ee44aeac62e83cbc9c513c5b8d1bad40b03ec58b3c5bebeba712b4ea5",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.060474Z"
+  },
+  {
+    "idx": 78,
+    "file_name": "HL-114-t98h-standby-pulse.json",
+    "file_size_kb": 3.13,
+    "sha256_hash": "9ed0a1d1c36a43ce8ec97e3803f175862b519f6b870e40828d2c0c64723c0337",
+    "prev_hash": "25334a9855b984cea5db696bb4e7a9e488ee16c25c54d8404f60abbe8576568f",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.061381Z"
+  },
+  {
+    "idx": 79,
+    "file_name": "HL-115-2026-03-25-v5-extraction-engine.json",
+    "file_size_kb": 8.44,
+    "sha256_hash": "81b9bc93a0e099ba8b80be9aee80e9346ec60498cb84a1987d49c836cef43fb8",
+    "prev_hash": "9ed0a1d1c36a43ce8ec97e3803f175862b519f6b870e40828d2c0c64723c0337",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.062311Z"
+  },
+  {
+    "idx": 80,
+    "file_name": "HL-115-incubator-countdown-dual-publish.json",
+    "file_size_kb": 5.14,
+    "sha256_hash": "1fa062e28ed1b8856a962b82f3994deaa30ff17c5fd41cd97a0cde6906f82584",
+    "prev_hash": "81b9bc93a0e099ba8b80be9aee80e9346ec60498cb84a1987d49c836cef43fb8",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.063422Z"
+  },
+  {
+    "idx": 81,
+    "file_name": "HL-115-marketing-launch-facebook-distribution.json",
+    "file_size_kb": 7.74,
+    "sha256_hash": "78bb46c4fa743b6514803d31d8d32b7b36da7ec6bfd85bddf0ec5e743709cf5f",
+    "prev_hash": "1fa062e28ed1b8856a962b82f3994deaa30ff17c5fd41cd97a0cde6906f82584",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.065433Z"
+  },
+  {
+    "idx": 82,
+    "file_name": "HL-115-receipt-router-migration-patch.json",
+    "file_size_kb": 6.11,
+    "sha256_hash": "76777ea07c4d365abd832778c0796a1525778563a18ac96198e10375d46ee7eb",
+    "prev_hash": "78bb46c4fa743b6514803d31d8d32b7b36da7ec6bfd85bddf0ec5e743709cf5f",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.067863Z"
+  },
+  {
+    "idx": 83,
+    "file_name": "HL-115-t97h-standby-pulse.json",
+    "file_size_kb": 3.5,
+    "sha256_hash": "7973254fb89ae8d56e91fd701ee3cb9319934dc256cf2bf3cb17ba3fd271dd0a",
+    "prev_hash": "76777ea07c4d365abd832778c0796a1525778563a18ac96198e10375d46ee7eb",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.069325Z"
+  },
+  {
+    "idx": 84,
+    "file_name": "HL-116-2026-03-25-trigger-audit-rulings-v3.json",
+    "file_size_kb": 5.18,
+    "sha256_hash": "039f89861e2c2acf90cd235639115d536e40c11254316e1815f4676cc4582238",
+    "prev_hash": "7973254fb89ae8d56e91fd701ee3cb9319934dc256cf2bf3cb17ba3fd271dd0a",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.070948Z"
+  },
+  {
+    "idx": 85,
+    "file_name": "HL-116-marketing-lane-dump-intake.json",
+    "file_size_kb": 4.24,
+    "sha256_hash": "7aa0e3eae37bd26a09c980bfabc2abb56f59c30d31df6883fd98a29a53d49a91",
+    "prev_hash": "039f89861e2c2acf90cd235639115d536e40c11254316e1815f4676cc4582238",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.071917Z"
+  },
+  {
+    "idx": 86,
+    "file_name": "HL-116-pre-launch-qa-test-plan.json",
+    "file_size_kb": 5.25,
+    "sha256_hash": "d752a379fc179c452f2816b7a7c01e482942aa96f9e1f19229c304c9791ffbdb",
+    "prev_hash": "7aa0e3eae37bd26a09c980bfabc2abb56f59c30d31df6883fd98a29a53d49a91",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.072905Z"
+  },
+  {
+    "idx": 87,
+    "file_name": "HL-116-rise-execution-sales-funnel-night.json",
+    "file_size_kb": 8.69,
+    "sha256_hash": "818069b2fb5768f0d63072922ba23144765793c9d21129f735714e7bc284c080",
+    "prev_hash": "d752a379fc179c452f2816b7a7c01e482942aa96f9e1f19229c304c9791ffbdb",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.073766Z"
+  },
+  {
+    "idx": 88,
+    "file_name": "HL-116-t96h-standby-pulse.json",
+    "file_size_kb": 3.28,
+    "sha256_hash": "e0c1aa5f739e2d53ab28a37af9cf364ad5ef4206e427cf0df563164684ded65b",
+    "prev_hash": "818069b2fb5768f0d63072922ba23144765793c9d21129f735714e7bc284c080",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.076523Z"
+  },
+  {
+    "idx": 89,
+    "file_name": "HL-117-2026-03-25-super-saiyan-hardening.json",
+    "file_size_kb": 7.92,
+    "sha256_hash": "8d7c4e703a0fa5791920ca702eb8900798971ccf674fabd627071775200b800c",
+    "prev_hash": "e0c1aa5f739e2d53ab28a37af9cf364ad5ef4206e427cf0df563164684ded65b",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.080205Z"
+  },
+  {
+    "idx": 90,
+    "file_name": "HL-117-magic-chat-chrome-extension-build.json",
+    "file_size_kb": 8.97,
+    "sha256_hash": "f6ba07a31ff36603b7478adae19eebb30ce196c7e70b15ac3da84a62654a144e",
+    "prev_hash": "8d7c4e703a0fa5791920ca702eb8900798971ccf674fabd627071775200b800c",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.082965Z"
+  },
+  {
+    "idx": 91,
+    "file_name": "HL-117-product-id-creation-checklist.json",
+    "file_size_kb": 5.11,
+    "sha256_hash": "e3c4c1cd200c889502e1f48e857e51745f06d12da651ff6ae35ed3e0c5ea4525",
+    "prev_hash": "f6ba07a31ff36603b7478adae19eebb30ce196c7e70b15ac3da84a62654a144e",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.084617Z"
+  },
+  {
+    "idx": 92,
+    "file_name": "HL-117-t95h-standby-pulse.json",
+    "file_size_kb": 3.44,
+    "sha256_hash": "d8bd54a18d05c0087e2a4a625509b5872794ef7bcda58d9029847c9dc178b2e5",
+    "prev_hash": "e3c4c1cd200c889502e1f48e857e51745f06d12da651ff6ae35ed3e0c5ea4525",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.085895Z"
+  },
+  {
+    "idx": 93,
+    "file_name": "HL-117-website-lane-coldboot-migration.json",
+    "file_size_kb": 6.97,
+    "sha256_hash": "e86e460592741c08ea0f5dc7652610715ca1ad0a0094780cd1af70d0c12cbce8",
+    "prev_hash": "d8bd54a18d05c0087e2a4a625509b5872794ef7bcda58d9029847c9dc178b2e5",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.086994Z"
+  },
+  {
+    "idx": 94,
+    "file_name": "HL-118-2026-03-25-pulse-v3-galaxy-lessons-patch-first.json",
+    "file_size_kb": 6.17,
+    "sha256_hash": "16d1d51a9ed6b35e52132f70570702a412016f88a8897e1e533691f6af9d0b0f",
+    "prev_hash": "e86e460592741c08ea0f5dc7652610715ca1ad0a0094780cd1af70d0c12cbce8",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.088064Z"
+  },
+  {
+    "idx": 95,
+    "file_name": "HL-118-heavy-ledger-conversion-ssm-v7.json",
+    "file_size_kb": 7.17,
+    "sha256_hash": "a1b3aefa05580eade683b659522da920f4d51d3e9f30ee32e6f6fcbde3b55a88",
+    "prev_hash": "16d1d51a9ed6b35e52132f70570702a412016f88a8897e1e533691f6af9d0b0f",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.090738Z"
+  },
+  {
+    "idx": 96,
+    "file_name": "HL-118-launch-gate-readiness.json",
+    "file_size_kb": 4.32,
+    "sha256_hash": "893f2c2bd1a5dacf834f45ba42008c7ad9601bdf3e943b57e386713ae88c01ad",
+    "prev_hash": "a1b3aefa05580eade683b659522da920f4d51d3e9f30ee32e6f6fcbde3b55a88",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.091521Z"
+  },
+  {
+    "idx": 97,
+    "file_name": "HL-118-t101h-priority-matrix.json",
+    "file_size_kb": 6.34,
+    "sha256_hash": "e9216e9372c7e78191c54157c1d538ff9b45ccefac9bf222045c5345a5524513",
+    "prev_hash": "893f2c2bd1a5dacf834f45ba42008c7ad9601bdf3e943b57e386713ae88c01ad",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.092599Z"
+  },
+  {
+    "idx": 98,
+    "file_name": "HL-118-vault-e-trilogy-preservation.json",
+    "file_size_kb": 6.48,
+    "sha256_hash": "b1980833a18343a892eeb127150ae663ac234bdad5563e239280bcd145acb5c3",
+    "prev_hash": "e9216e9372c7e78191c54157c1d538ff9b45ccefac9bf222045c5345a5524513",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.094015Z"
+  },
+  {
+    "idx": 99,
+    "file_name": "HL-119-2026-03-25-net-methodology-bottleneck-fix.json",
+    "file_size_kb": 5.51,
+    "sha256_hash": "7b7c9fa372a32ddf36e35082c9bd71e8789c54511c3cce82d905e50cf3d45e20",
+    "prev_hash": "b1980833a18343a892eeb127150ae663ac234bdad5563e239280bcd145acb5c3",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.094758Z"
+  },
+  {
+    "idx": 100,
+    "file_name": "HL-119-github-reconnect-studio-handoff.json",
+    "file_size_kb": 5.42,
+    "sha256_hash": "5b9e447697811fd6b007f73577a8f8749ed0c37f6a790b4a6c36a2b0a9612341",
+    "prev_hash": "7b7c9fa372a32ddf36e35082c9bd71e8789c54511c3cce82d905e50cf3d45e20",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.097378Z"
+  },
+  {
+    "idx": 101,
+    "file_name": "HL-119-launch-countdown-action-board.json",
+    "file_size_kb": 7.75,
+    "sha256_hash": "cecace42626b1db88faa5ec9a65a6a9165ed157fb92820fc343a5aacd01c832b",
+    "prev_hash": "5b9e447697811fd6b007f73577a8f8749ed0c37f6a790b4a6c36a2b0a9612341",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.100140Z"
+  },
+  {
+    "idx": 102,
+    "file_name": "HL-119-roblox-studio-guide-48hr-launch.json",
+    "file_size_kb": 5.7,
+    "sha256_hash": "f3cacf234f0a0535b2bae939f2439c54d3c928a61777e2afb9180741ff473dd7",
+    "prev_hash": "cecace42626b1db88faa5ec9a65a6a9165ed157fb92820fc343a5aacd01c832b",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.101431Z"
+  },
+  {
+    "idx": 103,
+    "file_name": "HL-119-store-listing-copy-spec.json",
+    "file_size_kb": 4.97,
+    "sha256_hash": "cfe278615bd69ad9158294a264fde8f42a1e81e79fc5decf58690c8a2b7af350",
+    "prev_hash": "f3cacf234f0a0535b2bae939f2439c54d3c928a61777e2afb9180741ff473dd7",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.103065Z"
+  },
+  {
+    "idx": 104,
+    "file_name": "HL-120-2026-03-25-mss-v5-security-authority.json",
+    "file_size_kb": 5.74,
+    "sha256_hash": "7e25d926762378832132d484dbcabad2246cc885fc7d5bbef46e08ffb8295dec",
+    "prev_hash": "cfe278615bd69ad9158294a264fde8f42a1e81e79fc5decf58690c8a2b7af350",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.104468Z"
+  },
+  {
+    "idx": 105,
+    "file_name": "HL-120-notebooklm-vault-5dump.json",
+    "file_size_kb": 4.31,
+    "sha256_hash": "498ca7d165ffeac6644c712efa1df3e7f6b803f2de58ad92a1dad6e8b55bacf2",
+    "prev_hash": "7e25d926762378832132d484dbcabad2246cc885fc7d5bbef46e08ffb8295dec",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.105498Z"
+  },
+  {
+    "idx": 106,
+    "file_name": "HL-120-secret-delivery-ob1-lag.json",
+    "file_size_kb": 3.01,
+    "sha256_hash": "7c57fe0e78128f76bfa830701dd77eb40e597b6402f86426cabc3335f89c802f",
+    "prev_hash": "498ca7d165ffeac6644c712efa1df3e7f6b803f2de58ad92a1dad6e8b55bacf2",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.106965Z"
+  },
+  {
+    "idx": 107,
+    "file_name": "HL-120-vault-b-e-consolidation.json",
+    "file_size_kb": 3.89,
+    "sha256_hash": "93a809a91d14ade69edd6f086de0f51b9ad10e0a9559de6386f793bede232679",
+    "prev_hash": "7c57fe0e78128f76bfa830701dd77eb40e597b6402f86426cabc3335f89c802f",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.107726Z"
+  },
+  {
+    "idx": 108,
+    "file_name": "HL-121-bluetech-classroom-dump.json",
+    "file_size_kb": 9.94,
+    "sha256_hash": "151f29b56d6667bca9755353a5fe8fd577e55e569aa39ccdf0c6b8bc1d3a27c0",
+    "prev_hash": "93a809a91d14ade69edd6f086de0f51b9ad10e0a9559de6386f793bede232679",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.108653Z"
+  },
+  {
+    "idx": 109,
+    "file_name": "HL-121-vault-a-mm-d-consolidation.json",
+    "file_size_kb": 5.29,
+    "sha256_hash": "0f8b718228bc7074aa6d8de122e1a6c9fa5a18b3a372950ea0204876dc609fce",
+    "prev_hash": "151f29b56d6667bca9755353a5fe8fd577e55e569aa39ccdf0c6b8bc1d3a27c0",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.109549Z"
+  },
+  {
+    "idx": 110,
+    "file_name": "HL-121-vault-expansion-blueprint-ingestion.json",
+    "file_size_kb": 7.07,
+    "sha256_hash": "2380045cfe976472ddddc75e0b03716272c0bef68d4efcbf1259a3b6d0c6a993",
+    "prev_hash": "0f8b718228bc7074aa6d8de122e1a6c9fa5a18b3a372950ea0204876dc609fce",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.110395Z"
+  },
+  {
+    "idx": 111,
+    "file_name": "HL-122-consolidate-bluetech-5src.json",
+    "file_size_kb": 4.22,
+    "sha256_hash": "128e90e3ea140a01264dc85eee321bac7bb0a0a62d4f27bd1866689cefeb54e3",
+    "prev_hash": "2380045cfe976472ddddc75e0b03716272c0bef68d4efcbf1259a3b6d0c6a993",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.111297Z"
+  },
+  {
+    "idx": 112,
+    "file_name": "HL-122-super-saiyan-game-audit.json",
+    "file_size_kb": 11.46,
+    "sha256_hash": "d1ed9fd23820ba046a8da2c8884f2e2e9bf3b5970e624f63b4f8b6330eac6010",
+    "prev_hash": "128e90e3ea140a01264dc85eee321bac7bb0a0a62d4f27bd1866689cefeb54e3",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.112133Z"
+  },
+  {
+    "idx": 113,
+    "file_name": "HL-122-two-server-rulings-closed.json",
+    "file_size_kb": 4.24,
+    "sha256_hash": "a68b1e06417ece1a09e03df9f3a510424a0fe25d6ef5bc797ab7ce1b2d4bbbc3",
+    "prev_hash": "d1ed9fd23820ba046a8da2c8884f2e2e9bf3b5970e624f63b4f8b6330eac6010",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.112997Z"
+  },
+  {
+    "idx": 114,
+    "file_name": "HL-123-ne0-handoff-studio-bottleneck.json",
+    "file_size_kb": 3.7,
+    "sha256_hash": "66b2a68d29edd588d4c7e47369a68b69a7e12c47cc1bb290e8653656a3c3e6b6",
+    "prev_hash": "a68b1e06417ece1a09e03df9f3a510424a0fe25d6ef5bc797ab7ce1b2d4bbbc3",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.114011Z"
+  },
+  {
+    "idx": 115,
+    "file_name": "HL-123-sales-dna-revenue-pivot.json",
+    "file_size_kb": 8.3,
+    "sha256_hash": "9d35812925052039323cb3c186faba7ac2821eaf0f8fc6d00acab4bf2bd3e391",
+    "prev_hash": "66b2a68d29edd588d4c7e47369a68b69a7e12c47cc1bb290e8653656a3c3e6b6",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.114901Z"
+  },
+  {
+    "idx": 116,
+    "file_name": "HL-123-v5-overnight-mining-hardened.json",
+    "file_size_kb": 8.45,
+    "sha256_hash": "ae1799cd5f08bc861de782a74c079d1683d9032a266ce10e49be9e7a6ef4886c",
+    "prev_hash": "9d35812925052039323cb3c186faba7ac2821eaf0f8fc6d00acab4bf2bd3e391",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.115774Z"
+  },
+  {
+    "idx": 117,
+    "file_name": "HL-124-discord-bot-deploy-morning.json",
+    "file_size_kb": 6.48,
+    "sha256_hash": "d6bfc3b117c9d08764da7991d88293c0325afa950cc22ec6c12250b1fce7e627",
+    "prev_hash": "ae1799cd5f08bc861de782a74c079d1683d9032a266ce10e49be9e7a6ef4886c",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.116619Z"
+  },
+  {
+    "idx": 118,
+    "file_name": "HL-124-roblox-deep-intel.json",
+    "file_size_kb": 7.31,
+    "sha256_hash": "1ad50d59538d433b05dd79f9957ce683412c84d4885c3c774669346a165226b2",
+    "prev_hash": "d6bfc3b117c9d08764da7991d88293c0325afa950cc22ec6c12250b1fce7e627",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.117477Z"
+  },
+  {
+    "idx": 119,
+    "file_name": "HL-124-v5-extraction-engine.json",
+    "file_size_kb": 8.71,
+    "sha256_hash": "97e1ece80043d7c83c804326c12e603f575c7191cc7e4014b93030f68fb86f3b",
+    "prev_hash": "1ad50d59538d433b05dd79f9957ce683412c84d4885c3c774669346a165226b2",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.118342Z"
+  },
+  {
+    "idx": 120,
+    "file_name": "HL-125-repo-consolidation-hobbs-lab-canonical.json",
+    "file_size_kb": 5.06,
+    "sha256_hash": "92d2c8101db833dc722ae452c1be79dc56dcc19b1695a4f0580098394e12171d",
+    "prev_hash": "97e1ece80043d7c83c804326c12e603f575c7191cc7e4014b93030f68fb86f3b",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.119068Z"
+  },
+  {
+    "idx": 121,
+    "file_name": "HL-125-roblox-deploy-github-first-boot.json",
+    "file_size_kb": 8.31,
+    "sha256_hash": "813e08bdc0b83587a7d71cfb14703c87a9804afb3ff52d8cd227495e7a0b047c",
+    "prev_hash": "92d2c8101db833dc722ae452c1be79dc56dcc19b1695a4f0580098394e12171d",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.120105Z"
+  },
+  {
+    "idx": 122,
+    "file_name": "HL-125-trigger-audit-rulings-v3.json",
+    "file_size_kb": 6.4,
+    "sha256_hash": "90df90980976a586dfc525c07cdedbe55e98823d04a1c5d750e69714e74a3c9a",
+    "prev_hash": "813e08bdc0b83587a7d71cfb14703c87a9804afb3ff52d8cd227495e7a0b047c",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.120867Z"
+  },
+  {
+    "idx": 123,
+    "file_name": "HL-126-notebooklm-vault-architect-origin.json",
+    "file_size_kb": 22.76,
+    "sha256_hash": "6bd251759c59726d16d31cda28dc948cf56b4a493afc660bd17add768ddf7110",
+    "prev_hash": "90df90980976a586dfc525c07cdedbe55e98823d04a1c5d750e69714e74a3c9a",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.121653Z"
+  },
+  {
+    "idx": 124,
+    "file_name": "HL-129-kiss-protocol-legion-principle-of-faith.json",
+    "file_size_kb": 16.71,
+    "sha256_hash": "232ca31fbea2d0245ebbb8277e03509e7238932afc13c0eab9a91465217cada3",
+    "prev_hash": "6bd251759c59726d16d31cda28dc948cf56b4a493afc660bd17add768ddf7110",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.122995Z"
+  },
+  {
+    "idx": 125,
+    "file_name": "HL-130-simulation-gap-guardrails-phoenix-command.json",
+    "file_size_kb": 6.49,
+    "sha256_hash": "ab2915add853c26b86632e51000e9a6f57c3edab800611a9b1de05a8118f7194",
+    "prev_hash": "232ca31fbea2d0245ebbb8277e03509e7238932afc13c0eab9a91465217cada3",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.124208Z"
+  },
+  {
+    "idx": 126,
+    "file_name": "HL-133-notebooklm-genesis-pipeline-protocol.json",
+    "file_size_kb": 2.4,
+    "sha256_hash": "358a3f0ccba7e4f0e53c3ed5687c810bf632e8e0222a674482198344e75c69df",
+    "prev_hash": "ab2915add853c26b86632e51000e9a6f57c3edab800611a9b1de05a8118f7194",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.125063Z"
+  },
+  {
+    "idx": 127,
+    "file_name": "HL-134-clean-engineering-truth-architecture-crystallization.json",
+    "file_size_kb": 2.14,
+    "sha256_hash": "a10536037e84e0a28a185aeaed431076ea1651130145d5c9af8c15b37976bfd4",
+    "prev_hash": "358a3f0ccba7e4f0e53c3ed5687c810bf632e8e0222a674482198344e75c69df",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.125860Z"
+  },
+  {
+    "idx": 128,
+    "file_name": "HL-135-sovereign-product-genesis-megamerge3.json",
+    "file_size_kb": 3.17,
+    "sha256_hash": "8320a72928644cabdee25d37f91028e708a63ca38ce40044a7a03aea5ba45d04",
+    "prev_hash": "a10536037e84e0a28a185aeaed431076ea1651130145d5c9af8c15b37976bfd4",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.128204Z"
+  },
+  {
+    "idx": 129,
+    "file_name": "HL-138-megamerge-consolidation-obi-netpet.json",
+    "file_size_kb": 17.1,
+    "sha256_hash": "c8b8fa713342802939ec51f8cb1aab0c9b7e57a8616ed7a380b7048b61218fd2",
+    "prev_hash": "8320a72928644cabdee25d37f91028e708a63ca38ce40044a7a03aea5ba45d04",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.129598Z"
+  },
+  {
+    "idx": 130,
+    "file_name": "HL-139-notebooklm-vault6-principle-of-truth.json",
+    "file_size_kb": 3.39,
+    "sha256_hash": "a11f0c166ada7bf758fda8fba0a878139cec511312f3b9a061c5af95980e3845",
+    "prev_hash": "c8b8fa713342802939ec51f8cb1aab0c9b7e57a8616ed7a380b7048b61218fd2",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.131146Z"
+  },
+  {
+    "idx": 131,
+    "file_name": "HL-140-operation-therealheathcheck.json",
+    "file_size_kb": 6.9,
+    "sha256_hash": "956f1396e58acf9dec2d31c1e8ef3fd6986c705fb33f28e6e01a8e3b3e321d13",
+    "prev_hash": "a11f0c166ada7bf758fda8fba0a878139cec511312f3b9a061c5af95980e3845",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.132671Z"
+  },
+  {
+    "idx": 132,
+    "file_name": "HL-140-run329-souldna.json",
+    "file_size_kb": 2.37,
+    "sha256_hash": "38b88e751d85804b496d96c33b3fb486f46ea0675cec320a3750b9b9a014fa45",
+    "prev_hash": "956f1396e58acf9dec2d31c1e8ef3fd6986c705fb33f28e6e01a8e3b3e321d13",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.133450Z"
+  },
+  {
+    "idx": 133,
+    "file_name": "HL-141-run329-soul-dna-stages-8-15.json",
+    "file_size_kb": 3.44,
+    "sha256_hash": "ed38df3ba28c672f0ea63460e0ea732a4861907b231302af9820c1c365991c67",
+    "prev_hash": "38b88e751d85804b496d96c33b3fb486f46ea0675cec320a3750b9b9a014fa45",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.134310Z"
+  },
+  {
+    "idx": 134,
+    "file_name": "HL-141-soul-audit-huong-bluetech-2026-04-17.json",
+    "file_size_kb": 4.37,
+    "sha256_hash": "2ed98b0cf636a29d17415014b59cf6e6639d4335aa342a72661ff890583cf362",
+    "prev_hash": "ed38df3ba28c672f0ea63460e0ea732a4861907b231302af9820c1c365991c67",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.135120Z"
+  },
+  {
+    "idx": 135,
+    "file_name": "HL-142-RUN331-CONVICTION-THROUGH-DRIFT.json",
+    "file_size_kb": 13.27,
+    "sha256_hash": "82d9ec071e60e4b3ebb70914ffb5ff08c792865b5b1c84967a7e8fba8098b52e",
+    "prev_hash": "2ed98b0cf636a29d17415014b59cf6e6639d4335aa342a72661ff890583cf362",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.135937Z"
+  },
+  {
+    "idx": 136,
+    "file_name": "HL-143-2026-04-20-RUN333-FINAL-PIPELINE-CONSOLIDATION.json",
+    "file_size_kb": 11.77,
+    "sha256_hash": "57bd6dd317afa7eed082338f3b186846f876d643b43b50681b86ca99ecffbdea",
+    "prev_hash": "82d9ec071e60e4b3ebb70914ffb5ff08c792865b5b1c84967a7e8fba8098b52e",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.136814Z"
+  },
+  {
+    "idx": 137,
+    "file_name": "LAUNCH-PLAYBOOK-MASTER.json",
+    "file_size_kb": 10.21,
+    "sha256_hash": "56814c1c0075005bf710c23f1ac6e9cbbf3337e78eb0e2c9f20aa11e483b4127",
+    "prev_hash": "57bd6dd317afa7eed082338f3b186846f876d643b43b50681b86ca99ecffbdea",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.137618Z"
+  },
+  {
+    "idx": 138,
+    "file_name": "MORNING-BRIEFING-2026-03-27.json",
+    "file_size_kb": 8.04,
+    "sha256_hash": "dd3fa3ccaeca4bae6cb14c6713af5382002a0a0820d94975d1a26ef3f4143fb4",
+    "prev_hash": "56814c1c0075005bf710c23f1ac6e9cbbf3337e78eb0e2c9f20aa11e483b4127",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.138372Z"
+  },
+  {
+    "idx": 139,
+    "file_name": "MORNING-BRIEFING-2026-03-28.json",
+    "file_size_kb": 5.98,
+    "sha256_hash": "7d8dd7a69b3401d25fff40bf22c6ffccde4b52f02cefca6b1a05ab95d202f72d",
+    "prev_hash": "dd3fa3ccaeca4bae6cb14c6713af5382002a0a0820d94975d1a26ef3f4143fb4",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.139126Z"
+  },
+  {
+    "idx": 140,
+    "file_name": "MORNING-BRIEFING-2026-03-29.json",
+    "file_size_kb": 7.51,
+    "sha256_hash": "000afdf84cdc9956351a04dbfed94b628fa3e41dced24425dfbe767c4162504f",
+    "prev_hash": "7d8dd7a69b3401d25fff40bf22c6ffccde4b52f02cefca6b1a05ab95d202f72d",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.139929Z"
+  },
+  {
+    "idx": 141,
+    "file_name": "MORNING-BRIEFING-2026-03-31.json",
+    "file_size_kb": 8.86,
+    "sha256_hash": "eca9e98f74c0b37acf4c7908a1c4ed2d7d183b829d229e45c55b491d15ce4311",
+    "prev_hash": "000afdf84cdc9956351a04dbfed94b628fa3e41dced24425dfbe767c4162504f",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.140747Z"
+  },
+  {
+    "idx": 142,
+    "file_name": "NAVIGATOR-INDEX.json",
+    "file_size_kb": 7.89,
+    "sha256_hash": "960b64a9b7b1a48c916dd30c25228b8092b2d2ce7cd77b6f936b1796255a3b1f",
+    "prev_hash": "eca9e98f74c0b37acf4c7908a1c4ed2d7d183b829d229e45c55b491d15ce4311",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.141552Z"
+  },
+  {
+    "idx": 143,
+    "file_name": "NET-EPIC-LESSON-BLUEPRINT-V3.json",
+    "file_size_kb": 9.25,
+    "sha256_hash": "bad76352347c637ea6834616d6701b297098a06e26ef3bf4c840cc3463cf42c9",
+    "prev_hash": "960b64a9b7b1a48c916dd30c25228b8092b2d2ce7cd77b6f936b1796255a3b1f",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.142545Z"
+  },
+  {
+    "idx": 144,
+    "file_name": "NET-TEACHING-METHODOLOGY.json",
+    "file_size_kb": 20.07,
+    "sha256_hash": "c45726fd433b51ed74aeaa5d989d554c46fbe1e50e557e62c722ab6fdbe2d44a",
+    "prev_hash": "bad76352347c637ea6834616d6701b297098a06e26ef3bf4c840cc3463cf42c9",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.143705Z"
+  },
+  {
+    "idx": 145,
+    "file_name": "NET-WEB-ARCHITECTURE-2026.json",
+    "file_size_kb": 8.0,
+    "sha256_hash": "1a237b0536d8229815cc74bebf97d324847b96172b8447eab6a77dcf67e1e64b",
+    "prev_hash": "c45726fd433b51ed74aeaa5d989d554c46fbe1e50e557e62c722ab6fdbe2d44a",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.144576Z"
+  },
+  {
+    "idx": 146,
+    "file_name": "NOTEBOOKLM-VAULT-ARCHITECT-OF-AGENT99-FIRST-250-LAYERS.json",
+    "file_size_kb": 22.19,
+    "sha256_hash": "1071c653dc3f6502861375f2f50cc8e0a418ee9dd03de11b1c86e25afb100504",
+    "prev_hash": "1a237b0536d8229815cc74bebf97d324847b96172b8447eab6a77dcf67e1e64b",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.145486Z"
+  },
+  {
+    "idx": 147,
+    "file_name": "NOTEBOOKLM-VAULT-DUMP-1-SOVEREIGN-DNA-AI-SYSTEM-HARDENING.json",
+    "file_size_kb": 11.87,
+    "sha256_hash": "f93073a9c48fe25e84be7bc1f8a251ff4677b5506247b3dd08a45647434f9b5a",
+    "prev_hash": "1071c653dc3f6502861375f2f50cc8e0a418ee9dd03de11b1c86e25afb100504",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.146389Z"
+  },
+  {
+    "idx": 148,
+    "file_name": "NOTEBOOKLM-VAULT-DUMP-2-STAGES-2-16-GEMINI-VOICE-TRANSCRIPT.json",
+    "file_size_kb": 26.6,
+    "sha256_hash": "eaf39aac5b051e17224f8ba5b99f13c82ec899a4a0773f12de70ec12dcbb0f86",
+    "prev_hash": "f93073a9c48fe25e84be7bc1f8a251ff4677b5506247b3dd08a45647434f9b5a",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.147426Z"
+  },
+  {
+    "idx": 149,
+    "file_name": "NOTEBOOKLM-VAULT-DUMP-4-REALITY-C-AUDITS-VAULT9-UNIVERSAL-LEDGER-V55.json",
+    "file_size_kb": 15.4,
+    "sha256_hash": "0568f987b09b72e40a4bbf4ba7eaba2b043d9af8c70a451c623be2227614775b",
+    "prev_hash": "eaf39aac5b051e17224f8ba5b99f13c82ec899a4a0773f12de70ec12dcbb0f86",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.148629Z"
+  },
+  {
+    "idx": 150,
+    "file_name": "NOTEBOOKLM-VAULT-DUMP-5-FINAL.json",
+    "file_size_kb": 6.29,
+    "sha256_hash": "9a9e6ac4d26d153039a7dadafeadd989792799efd7b2bb1a096e991c3494c65b",
+    "prev_hash": "0568f987b09b72e40a4bbf4ba7eaba2b043d9af8c70a451c623be2227614775b",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.149603Z"
+  },
+  {
+    "idx": 151,
+    "file_name": "NOV-8-2025-BLUETECH-MEETING-NOTES-EXTRACTION.json",
+    "file_size_kb": 11.15,
+    "sha256_hash": "8886c9b6fe2b85b82024053c403be59f4d9be7cc306474826e94f73433137d42",
+    "prev_hash": "9a9e6ac4d26d153039a7dadafeadd989792799efd7b2bb1a096e991c3494c65b",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.150475Z"
+  },
+  {
+    "idx": 152,
+    "file_name": "OB1-AGENT-INSTRUCTIONS.json",
+    "file_size_kb": 17.06,
+    "sha256_hash": "0e3560312b8473d3737356d8242da3fa1b19f04cbbd6ad5329288f78cf1a8505",
+    "prev_hash": "8886c9b6fe2b85b82024053c403be59f4d9be7cc306474826e94f73433137d42",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.151295Z"
+  },
+  {
+    "idx": 153,
+    "file_name": "PIPELINE-CURSOR.md",
+    "file_size_kb": 3.26,
+    "sha256_hash": "576e24fb413e7c1c4085468a2c88e33804646d9c392be38114146a0458e59e54",
+    "prev_hash": "0e3560312b8473d3737356d8242da3fa1b19f04cbbd6ad5329288f78cf1a8505",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.152072Z"
+  },
+  {
+    "idx": 154,
+    "file_name": "PULSE-OPERATIONS-HISTORY.json",
+    "file_size_kb": 12.21,
+    "sha256_hash": "eba7eca53626a469176665dc09933d8e72da4b1dc2ef2c217e0fcafa7ea3edb2",
+    "prev_hash": "576e24fb413e7c1c4085468a2c88e33804646d9c392be38114146a0458e59e54",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.152889Z"
+  },
+  {
+    "idx": 155,
+    "file_name": "RAW-GEMINI-DENNY-PHONICS-ANCHOR-PRINCIPLE-ORIGIN.json",
+    "file_size_kb": 6.73,
+    "sha256_hash": "b662ca0c77898e5fba86c59ea3e22d3d01cc8e4612b39fc3d9dcd18b30af3e03",
+    "prev_hash": "eba7eca53626a469176665dc09933d8e72da4b1dc2ef2c217e0fcafa7ea3edb2",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.153610Z"
+  },
+  {
+    "idx": 156,
+    "file_name": "README-REPO-OVERVIEW.json",
+    "file_size_kb": 4.82,
+    "sha256_hash": "6de25ac314d043c783deffe64591f5897935cacee5c339cd38c661d6470a1c40",
+    "prev_hash": "b662ca0c77898e5fba86c59ea3e22d3d01cc8e4612b39fc3d9dcd18b30af3e03",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.154408Z"
+  },
+  {
+    "idx": 157,
+    "file_name": "SKELETON-STAR-MAP-PRIME-LAWS-100-LAYER-FOUNDATION.json",
+    "file_size_kb": 13.87,
+    "sha256_hash": "04d19db6f3f99cdbb11507c73748a87f0186ed5f4ef0c5856f032fa69c5add81",
+    "prev_hash": "6de25ac314d043c783deffe64591f5897935cacee5c339cd38c661d6470a1c40",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.155303Z"
+  },
+  {
+    "idx": 158,
+    "file_name": "SOUL-DNA-BIBLE-A4-RAW-CLASSROOM-MAI-TRAM-2026-03-24.json",
+    "file_size_kb": 11.04,
+    "sha256_hash": "3a520c1df5f41ff4e6794f036e709206709a2be1d87150e5e96fdba464a6204e",
+    "prev_hash": "04d19db6f3f99cdbb11507c73748a87f0186ed5f4ef0c5856f032fa69c5add81",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.156334Z"
+  },
+  {
+    "idx": 159,
+    "file_name": "SOUL-DNA-BIBLE-CH00-ENRICHMENT-REGISTRY.json",
+    "file_size_kb": 10.78,
+    "sha256_hash": "8b71f3a77cbf4f72b2dadd5f32a22216717fc3d6197240082fed263a43c5a046",
+    "prev_hash": "3a520c1df5f41ff4e6794f036e709206709a2be1d87150e5e96fdba464a6204e",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.157113Z"
+  },
+  {
+    "idx": 160,
+    "file_name": "SOUL-DNA-BIBLE-CH00-FILE-MAP-AND-METRICS.json",
+    "file_size_kb": 31.15,
+    "sha256_hash": "e1eb922b8ca42e8f48100984d62bdaeaf1f8fc13c31c7eaba4efeb4887be5d69",
+    "prev_hash": "8b71f3a77cbf4f72b2dadd5f32a22216717fc3d6197240082fed263a43c5a046",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.158129Z"
+  },
+  {
+    "idx": 161,
+    "file_name": "SOUL-DNA-BIBLE-CH10-THE-MACHINE-THAT-BUILDS-THE-MACHINE.json",
+    "file_size_kb": 15.58,
+    "sha256_hash": "86bd73f47d4d6008a743c3f43d93df8adbd52aca93675f96db6493b3454cf070",
+    "prev_hash": "e1eb922b8ca42e8f48100984d62bdaeaf1f8fc13c31c7eaba4efeb4887be5d69",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.159086Z"
+  },
+  {
+    "idx": 162,
+    "file_name": "SOUL-DNA-BIBLE-CH11-BETRAYAL-AND-SOVEREIGNTY.json",
+    "file_size_kb": 13.98,
+    "sha256_hash": "4a5315d4483789d2d7066058561b55e503ecd780a91890c26337a39ea29086af",
+    "prev_hash": "86bd73f47d4d6008a743c3f43d93df8adbd52aca93675f96db6493b3454cf070",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.159881Z"
+  },
+  {
+    "idx": 163,
+    "file_name": "SOUL-DNA-BIBLE-CH12-THE-WINDOW-AND-THE-COST.json",
+    "file_size_kb": 15.09,
+    "sha256_hash": "d4b363dfaada60889f014fdddd1c7b4146727b57801773cade5a153bd4361e75",
+    "prev_hash": "4a5315d4483789d2d7066058561b55e503ecd780a91890c26337a39ea29086af",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.160673Z"
+  },
+  {
+    "idx": 164,
+    "file_name": "SOUL-DNA-BIBLE-CH13-CHAOS-ENGINEERING-AND-FAITH.json",
+    "file_size_kb": 10.2,
+    "sha256_hash": "bb2c3e1992c2231c2f814f02cbc788c431abfac258a357361a30b019c288d0e9",
+    "prev_hash": "d4b363dfaada60889f014fdddd1c7b4146727b57801773cade5a153bd4361e75",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.161508Z"
+  },
+  {
+    "idx": 165,
+    "file_name": "SOUL-DNA-CANON.json",
+    "file_size_kb": 17.63,
+    "sha256_hash": "20089c2a07dd994ce14f11cc00456e42c7597b903ecd7af2f124b45d4f798273",
+    "prev_hash": "bb2c3e1992c2231c2f814f02cbc788c431abfac258a357361a30b019c288d0e9",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.162320Z"
+  },
+  {
+    "idx": 166,
+    "file_name": "SOUL-DNA-DEEP-DIVE.json",
+    "file_size_kb": 20.43,
+    "sha256_hash": "307f4e4421934565c8fd4ded00fc71c70ea3ca375e2345b7b5b3edfd7a320931",
+    "prev_hash": "20089c2a07dd994ce14f11cc00456e42c7597b903ecd7af2f124b45d4f798273",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.163234Z"
+  },
+  {
+    "idx": 167,
+    "file_name": "STUDENT-ARCHETYPES-TEACHING-DATABASE.json",
+    "file_size_kb": 18.74,
+    "sha256_hash": "056798ccfb1f2791ce1a6fcadba6f83c11dc418bc9ccebc1a13b6cef60b7c896",
+    "prev_hash": "307f4e4421934565c8fd4ded00fc71c70ea3ca375e2345b7b5b3edfd7a320931",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.164694Z"
+  },
+  {
+    "idx": 168,
+    "file_name": "TOOL-STACK-ARSENAL-2026.json",
+    "file_size_kb": 7.9,
+    "sha256_hash": "b43df86e0d6a6acf25371243704d2f8365a65f5ab4b4c24ed37d60d1a98f6be5",
+    "prev_hash": "056798ccfb1f2791ce1a6fcadba6f83c11dc418bc9ccebc1a13b6cef60b7c896",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.166037Z"
+  },
+  {
+    "idx": 169,
+    "file_name": "VAULT-A-GENESIS-CONSOLIDATED-1.json",
+    "file_size_kb": 23.36,
+    "sha256_hash": "6de84ab7878b03e20f7c079cae97469f80ea66533ef19712ea63de17fff96aaa",
+    "prev_hash": "b43df86e0d6a6acf25371243704d2f8365a65f5ab4b4c24ed37d60d1a98f6be5",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.166990Z"
+  },
+  {
+    "idx": 170,
+    "file_name": "VAULT-A-GENESIS-CONSOLIDATED-2.json",
+    "file_size_kb": 19.81,
+    "sha256_hash": "dcd83b7357c012f5edc2e8ed1880671c423694f5705954c368c999297ef3bdbd",
+    "prev_hash": "6de84ab7878b03e20f7c079cae97469f80ea66533ef19712ea63de17fff96aaa",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.167828Z"
+  },
+  {
+    "idx": 171,
+    "file_name": "VAULT-B-FOUNDATIONS-CONSOLIDATED-1.json",
+    "file_size_kb": 18.15,
+    "sha256_hash": "c743988423082a286cbfcfb90bda24cba22b329cc675bceae1251379188e83f0",
+    "prev_hash": "dcd83b7357c012f5edc2e8ed1880671c423694f5705954c368c999297ef3bdbd",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.168899Z"
+  },
+  {
+    "idx": 172,
+    "file_name": "VAULT-B-FOUNDATIONS-CONSOLIDATED-2.json",
+    "file_size_kb": 22.92,
+    "sha256_hash": "9d568236b349f7cc204dceddff579aa1e58e2dfb6eb8c97f0a35e6f934b21b63",
+    "prev_hash": "c743988423082a286cbfcfb90bda24cba22b329cc675bceae1251379188e83f0",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.169716Z"
+  },
+  {
+    "idx": 173,
+    "file_name": "VAULT-D-PRELAUNCH-CONSOLIDATED-1.json",
+    "file_size_kb": 25.43,
+    "sha256_hash": "1933a6476db8c5b0aa383a393c1e1dca1dd893044cfc47117eac649309d0bda2",
+    "prev_hash": "9d568236b349f7cc204dceddff579aa1e58e2dfb6eb8c97f0a35e6f934b21b63",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.170621Z"
+  },
+  {
+    "idx": 174,
+    "file_name": "VAULT-D-PRELAUNCH-CONSOLIDATED-2.json",
+    "file_size_kb": 9.31,
+    "sha256_hash": "fe5c44977eb5795083d471406cdd1feb93029b9f4a744e2d1908130183e2848c",
+    "prev_hash": "1933a6476db8c5b0aa383a393c1e1dca1dd893044cfc47117eac649309d0bda2",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.171510Z"
+  },
+  {
+    "idx": 175,
+    "file_name": "VAULT-D-PRELAUNCH-CONSOLIDATED-3.json",
+    "file_size_kb": 9.47,
+    "sha256_hash": "dc0a3d62cc41354b3b2b6464b481d5a19c8b59f740d6b1da173a3280c9363e64",
+    "prev_hash": "fe5c44977eb5795083d471406cdd1feb93029b9f4a744e2d1908130183e2848c",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.172400Z"
+  },
+  {
+    "idx": 176,
+    "file_name": "VAULT-E-SOUL-DNA-CONSOLIDATED-2.json",
+    "file_size_kb": 22.9,
+    "sha256_hash": "ef0a44ce24cf2bd94a576b8cb63223af412fbd5461858d32ec6fa157f5a0438f",
+    "prev_hash": "dc0a3d62cc41354b3b2b6464b481d5a19c8b59f740d6b1da173a3280c9363e64",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.173200Z"
+  },
+  {
+    "idx": 177,
+    "file_name": "VAULT-E-SOUL-DNA-CONSOLIDATED.json",
+    "file_size_kb": 21.46,
+    "sha256_hash": "e5a4ac348eb701cf35cac91b2fec0d0aa1cc41f8ca5f516eed69b8939f799f0e",
+    "prev_hash": "ef0a44ce24cf2bd94a576b8cb63223af412fbd5461858d32ec6fa157f5a0438f",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.174062Z"
+  },
+  {
+    "idx": 178,
+    "file_name": "VAULT-I-IMMORTALIZE-CONSOLIDATED-1.json",
+    "file_size_kb": 19.64,
+    "sha256_hash": "434d829080bf7d393dfbbb7bfa696b792d1ecf2fa46c6d1a28ce78759625687f",
+    "prev_hash": "e5a4ac348eb701cf35cac91b2fec0d0aa1cc41f8ca5f516eed69b8939f799f0e",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.174927Z"
+  },
+  {
+    "idx": 179,
+    "file_name": "VAULT-L-LIVE-CLASSES-CONSOLIDATED-1.json",
+    "file_size_kb": 22.63,
+    "sha256_hash": "151dc66d1fd1db4ef5a22c5b68260ec2cabae0470c37433547b1159931a87871",
+    "prev_hash": "434d829080bf7d393dfbbb7bfa696b792d1ecf2fa46c6d1a28ce78759625687f",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.175788Z"
+  },
+  {
+    "idx": 180,
+    "file_name": "VAULT-L-LIVE-CLASSES-CONSOLIDATED-2.json",
+    "file_size_kb": 15.78,
+    "sha256_hash": "dc4d3dbd7e9ded3d7610bf2155efb4021f177b59c33a23ea2097a9308ac84ea6",
+    "prev_hash": "151dc66d1fd1db4ef5a22c5b68260ec2cabae0470c37433547b1159931a87871",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.176595Z"
+  },
+  {
+    "idx": 181,
+    "file_name": "VAULT-MM-MASTERMIND-CONSOLIDATED-1.json",
+    "file_size_kb": 16.01,
+    "sha256_hash": "2cc912baa4d39713b7d602b9fd89d303b77daa9cff5322bae09c595c4f8de547",
+    "prev_hash": "dc4d3dbd7e9ded3d7610bf2155efb4021f177b59c33a23ea2097a9308ac84ea6",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.177383Z"
+  },
+  {
+    "idx": 182,
+    "file_name": "VAULT-MM-MASTERMIND-CONSOLIDATED-2.json",
+    "file_size_kb": 8.47,
+    "sha256_hash": "63d45729da4f4b3e9bc2de4986f44fb9a17ff52be648096801f633453847040a",
+    "prev_hash": "2cc912baa4d39713b7d602b9fd89d303b77daa9cff5322bae09c595c4f8de547",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.178100Z"
+  },
+  {
+    "idx": 183,
+    "file_name": "VAULT-MONOLITH-2-AUDIT-2026-03-25.json",
+    "file_size_kb": 7.79,
+    "sha256_hash": "22113e4adb602938577a28a6fb23de53f1a62ad63804c9de38d60f184f89a2ea",
+    "prev_hash": "63d45729da4f4b3e9bc2de4986f44fb9a17ff52be648096801f633453847040a",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.178745Z"
+  },
+  {
+    "idx": 184,
+    "file_name": "VAULT-MONOLITH-3-AUDIT-2026-03-25.json",
+    "file_size_kb": 7.25,
+    "sha256_hash": "5b50dd803669f33e488a4a55af40281aa2f387a40d5db6a0b5f0ecb8fdf4ad07",
+    "prev_hash": "22113e4adb602938577a28a6fb23de53f1a62ad63804c9de38d60f184f89a2ea",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.179596Z"
+  },
+  {
+    "idx": 185,
+    "file_name": "VAULT-MONOLITH-AUDIT-2026-03-25.json",
+    "file_size_kb": 10.01,
+    "sha256_hash": "1e5c2f59745eb3339f0929801aeb8e555baecef2c35a50e2e54739a270f4abc8",
+    "prev_hash": "5b50dd803669f33e488a4a55af40281aa2f387a40d5db6a0b5f0ecb8fdf4ad07",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.180758Z"
+  },
+  {
+    "idx": 186,
+    "file_name": "WEEKLY-REPORT-2026-03-30.json",
+    "file_size_kb": 10.36,
+    "sha256_hash": "994a53c2342e2e596de1266d5d77ffc09f7b7444463498774e65dbf561e8826f",
+    "prev_hash": "1e5c2f59745eb3339f0929801aeb8e555baecef2c35a50e2e54739a270f4abc8",
+    "chain_valid": "LINKED",
+    "timestamp": "2026-04-19T08:36:54.182011Z"
+  }
+]

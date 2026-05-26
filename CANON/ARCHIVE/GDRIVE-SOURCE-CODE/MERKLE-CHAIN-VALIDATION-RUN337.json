@@ -1,0 +1,17 @@
+{
+  "run": "RUN337",
+  "phase": "Merkle Chain Validation",
+  "timestamp": "2026-04-19T08:37:24.096436Z",
+  "total_entries": 186,
+  "chain_valid": true,
+  "errors": [],
+  "warnings": [],
+  "statistics": {
+    "genesis_blocks": 1,
+    "valid_links": 185,
+    "broken_links": 0,
+    "total_size_kb": 1856.6500000000008
+  },
+  "merkle_root": "a6d590bfe5a4eb6c92d44fe1accf097ddb0486ab550a2f86de8b440454c9e944",
+  "final_ledger_hash": "994a53c2342e2e596de1266d5d77ffc09f7b7444463498774e65dbf561e8826f"
+}

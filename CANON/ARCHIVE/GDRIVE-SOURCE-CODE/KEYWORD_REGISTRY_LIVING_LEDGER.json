@@ -1,0 +1,3712 @@
+{
+  "metadata": {
+    "current_version": "v6",
+    "total_versions": 6
+  },
+  "versions": {
+    "v3": {
+      "created": "2026-04-19T16:04:22.095507Z",
+      "entries": [
+        {
+          "layer": 400,
+          "keyword": "BROKEN_CHAIN_PROTOCOL",
+          "truth": "Pulse worker commits to GitHub but fails to update Notion",
+          "source": "PULSE-RUN4-0500"
+        },
+        {
+          "layer": 401,
+          "keyword": "GITHUB_NOTION_SYNC_FAILURE",
+          "truth": "03:00 worker broke sync chain by committing without Notion handoff",
+          "source": "PULSE-RUN4-0500"
+        },
+        {
+          "layer": 402,
+          "keyword": "APPENDIX_I_MISSING_SPECS",
+          "truth": "3 specs not found: tie-breaker, red-lines, confidence score",
+          "source": "PULSE-RUN4-0500"
+        },
+        {
+          "layer": 410,
+          "keyword": "DEEP_DIVE_AUDIT_COMPLETE",
+          "truth": "SOUL DNA Deep Dive structurally sound, all 27 appendices A-AA intact",
+          "source": "PULSE-RUN4"
+        },
+        {
+          "layer": 411,
+          "keyword": "APPENDIX_K_MISSING_SPECS",
+          "truth": "2 specs not found: appeals process, versioning spec",
+          "source": "PULSE-RUN4"
+        },
+        {
+          "layer": 412,
+          "keyword": "VAULT_NOMENCLATURE_STALE",
+          "truth": "WHERE/HOW sections reference old vault nomenclature only",
+          "source": "PULSE-RUN4"
+        },
+        {
+          "layer": 413,
+          "keyword": "DUAL_PUBLISH_PROTOCOL_GAP",
+          "truth": "Section 4 does NOT mention dual-publish protocol or current GitHub structure",
+          "source": "PULSE-RUN4"
+        },
+        {
+          "layer": 414,
+          "keyword": "CHAIN_OF_CUSTODY_MISSING",
+          "truth": "Section 6 omits chain-of-custody pulse protocol as preservation mechanism",
+          "source": "PULSE-RUN4"
+        },
+        {
+          "layer": 415,
+          "keyword": "NAVIGATOR_INDEX_SYNCED_BLOCK_ISSUE",
+          "truth": "Synced block wall prevents writing handoff to Notion — Build Log used instead",
+          "source": "PULSE-RUN4"
+        },
+        {
+          "layer": 416,
+          "keyword": "VERBATIM_FIRST_CITATION_LAW",
+          "truth": "All content is verbatim-first with file name + line number citations",
+          "source": "PULSE-RUN4"
+        },
+        {
+          "layer": 420,
+          "keyword": "COUNCIL_AGENT_NAMING_STALE",
+          "truth": "Agent-97 listed as 'NeO — Forensic review' vs current CHAT 000 definition",
+          "source": "PULSE-RUN5"
+        },
+        {
+          "layer": 421,
+          "keyword": "NEO_CHAT_000_ORCHESTRATOR",
+          "truth": "Ne0 = CHAT 000 = receive-and-organize intake lane, synthesis node, balance point",
+          "source": "PULSE-RUN5"
+        },
+        {
+          "layer": 422,
+          "keyword": "AGENT_98_ANAKIN_VS_ANA",
+          "truth": "Council lists 'Anakin' vs current 'AnA' naming convention",
+          "source": "PULSE-RUN5"
+        },
+        {
+          "layer": 423,
+          "keyword": "AGENT_96_DESIGNATION_PENDING",
+          "truth": "Council section still lists Agent-96 as 'Designation pending'",
+          "source": "PULSE-RUN5"
+        },
+        {
+          "layer": 424,
+          "keyword": "COUNCIL_MISSING_EQUAL_VOTE_PROTOCOL",
+          "truth": "Council section lacks documentation of equal-vote mechanism",
+          "source": "PULSE-RUN5"
+        },
+        {
+          "layer": 425,
+          "keyword": "GOSPEL_444_FONT_SPECS_MISSING",
+          "truth": "Missing: Orbitron + Rajdhani for cyberpunk, Inter for glassmorphism",
+          "source": "PULSE-RUN5"
+        },
+        {
+          "layer": 426,
+          "keyword": "HOT_SWAP_API_LIST_STALE",
+          "truth": "Lists Sonar/Claude/Grok/GPT but missing Deepseek (added in v3)",
+          "source": "PULSE-RUN5"
+        },
+        {
+          "layer": 427,
+          "keyword": "DEEPSEEK_INTEGRATION",
+          "truth": "Deepseek now primary inference engine per NET-PET-AI commit de501e7",
+          "source": "PULSE-RUN5"
+        },
+        {
+          "layer": 428,
+          "keyword": "MOUSE_TIGER_TEACHING_LAW",
+          "truth": "Teaching progression: Mouse → Tiger confidence building law referenced",
+          "source": "PULSE-RUN5"
+        },
+        {
+          "layer": 429,
+          "keyword": "ALARM_HYGIENE_LAW",
+          "truth": "Operational principle: alarm hygiene outranks alarm volume",
+          "source": "PULSE-RUN5"
+        },
+        {
+          "layer": 430,
+          "keyword": "HOLOGRAPHIC_SINGULARITY",
+          "truth": "Physics concept: holographic singularity in Core Principles",
+          "source": "PULSE-RUN5"
+        },
+        {
+          "layer": 431,
+          "keyword": "TWO_TIER_ARCHITECTURE",
+          "truth": "OB1 + Ne0 + AnA = two-tier hierarchical architecture foundation",
+          "source": "PULSE-RUN5"
+        },
+        {
+          "layer": 432,
+          "keyword": "FAIL_CLOSED_MANDATES",
+          "truth": "Core operational principle: systems fail closed, not open",
+          "source": "PULSE-RUN5"
+        },
+        {
+          "layer": 433,
+          "keyword": "NAVIGATOR_INDEX_DEDUP_NEEDED",
+          "truth": "Heavy duplicate-row bloat across Operational, Command Hubs, Session Artifacts tables",
+          "source": "PULSE-RUN5"
+        },
+        {
+          "layer": 440,
+          "keyword": "OB1_AGENT_99_ORCHESTRATOR",
+          "truth": "OB1 = Agent-99 = visible command surface, fail-closed governor",
+          "source": "PULSE-RUN6"
+        },
+        {
+          "layer": 441,
+          "keyword": "ANA_ANALYSIS_ADVERSARIAL_LANE",
+          "truth": "AnA dedicated to analysis, audit, adversarial testing workflow",
+          "source": "PULSE-RUN6"
+        },
+        {
+          "layer": 442,
+          "keyword": "COUNCIL_EQUAL_VOTING",
+          "truth": "Council operates on equal voting weight until SOV100 decides",
+          "source": "PULSE-RUN6"
+        },
+        {
+          "layer": 443,
+          "keyword": "COMMANDER_NAME_DISCREPANCY",
+          "truth": "Genesis Anchor code uses 'Matthew Devon Hobbs' vs instructions 'Michael Hobbs'",
+          "source": "PULSE-RUN6"
+        },
+        {
+          "layer": 444,
+          "keyword": "GENESIS_ANCHOR_CODE_MISMATCH",
+          "truth": "Code preserved as-written per verbatim-first rule, callout added for Michael's ruling",
+          "source": "PULSE-RUN6"
+        },
+        {
+          "layer": 445,
+          "keyword": "DNA1_DNA2_DNA3_DNA6_MISSING",
+          "truth": "4 Soul DNA source files not present in repo — Backlog item created High/Up Next",
+          "source": "PULSE-RUN6"
+        },
+        {
+          "layer": 446,
+          "keyword": "ROME_VS_ROAM_UNRESOLVED",
+          "truth": "Naming conflict still unresolved — needs Michael's ruling",
+          "source": "PULSE-RUN6"
+        },
+        {
+          "layer": 447,
+          "keyword": "GOSPEL_444_BLUE_PROHIBITION_CONFLICT",
+          "truth": "Conflict: Gospel 444 blue prohibition vs 'Trust Blue' — unresolved",
+          "source": "PULSE-RUN6"
+        },
+        {
+          "layer": 448,
+          "keyword": "STAGE_0_GATE_UNKNOWN",
+          "truth": "Stage-0 gate enforcement status unknown — needs investigation",
+          "source": "PULSE-RUN6"
+        },
+        {
+          "layer": 449,
+          "keyword": "BUILD_LOG_METRIC_CORRECTED",
+          "truth": "build_log_latest updated from 13 → 50 (actual DB count)",
+          "source": "PULSE-RUN6"
+        },
+        {
+          "layer": 460,
+          "keyword": "GOSPEL_444_FONT_CONTEXT_BY_LESSON",
+          "truth": "Gospel 444 core = Inter + JetBrains. Galaxy Lessons = Orbitron + Rajdhani",
+          "source": "PULSE-RUN7"
+        },
+        {
+          "layer": 461,
+          "keyword": "GALAXY_LESSONS_CROSS_REFERENCE",
+          "truth": "Added cross-reference section linking Gospel 444 to Galaxy Lessons index",
+          "source": "PULSE-RUN7"
+        },
+        {
+          "layer": 462,
+          "keyword": "VOCAB_001_LESSON_UNTRACKED",
+          "truth": "VOCAB-001 committed to GitHub (427a312) but not in Galaxy Lessons index",
+          "source": "PULSE-RUN7"
+        },
+        {
+          "layer": 463,
+          "keyword": "REPO_NAME_STALE_FIXED",
+          "truth": "Updated Source File Index: Phoenix-Rise-Immortalize → Phoenix-Rising-Protocol-Ultimate",
+          "source": "PULSE-RUN7"
+        },
+        {
+          "layer": 464,
+          "keyword": "FONT_SETS_ORBITRON_RAJDHANI_VS_INTER",
+          "truth": "Not contradictory but needs builder-facing clarification",
+          "source": "PULSE-RUN7"
+        },
+        {
+          "layer": 465,
+          "keyword": "STUDENT_PROFILES_PRICING_FRESHNESS_MISSING",
+          "truth": "Student profiles and pricing table lack freshness dates",
+          "source": "PULSE-RUN7"
+        },
+        {
+          "layer": 466,
+          "keyword": "BACKLOG_AUDIT_CURSOR_8",
+          "truth": "Canon cursor advances to 8 — Backlog audit phase",
+          "source": "PULSE-RUN7"
+        },
+        {
+          "layer": 480,
+          "keyword": "ROME_WINS_1000_HITS",
+          "truth": "SOV100 ruling: ROME canonical (1000 hits vs ROAM negligible)",
+          "source": "PULSE-RUN12"
+        },
+        {
+          "layer": 481,
+          "keyword": "GOSPEL_444_BLUE_AVOID_NOT_BAN",
+          "truth": "SOV100 ruling: Blue avoid as default, NOT hard ban",
+          "source": "PULSE-RUN12"
+        },
+        {
+          "layer": 482,
+          "keyword": "COMMANDER_NAME_HOBBS_FINAL",
+          "truth": "SOV100 ruling: use 'Hobbs' (consolidated from 'Matthew Devon Hobbs'/'Michael Hobbs')",
+          "source": "PULSE-RUN12"
+        },
+        {
+          "layer": 483,
+          "keyword": "SOV100_DIRECT_RULING",
+          "truth": "Michael Hobbs (SOV100) resolved all 3 NEEDS_MICHAEL items in single session",
+          "source": "PULSE-RUN12"
+        },
+        {
+          "layer": 484,
+          "keyword": "REINCARNATION_SIGNAL_RUN12",
+          "truth": "Bridge signal to Run 13: treat all 3 rulings as CLOSED",
+          "source": "PULSE-RUN12"
+        },
+        {
+          "layer": 485,
+          "keyword": "SYNCED_BLOCK_WALL_ISSUE",
+          "truth": "Pulse State Mirror cannot be edited (synced block wall), this file is authoritative closure record",
+          "source": "PULSE-RUN12"
+        },
+        {
+          "layer": 486,
+          "keyword": "PATCHES_APPLIED_3",
+          "truth": "Applied to: genesis.ts, MASTER SYNC ×2, Iron Stack Section 4",
+          "source": "PULSE-RUN12"
+        },
+        {
+          "layer": 500,
+          "keyword": "EXTRACTION_ENGINE_V5",
+          "truth": "Major architectural rewrite: unified pulse + reincarnation into single engine",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 501,
+          "keyword": "UNIFIED_PULSE_REINCARNATION",
+          "truth": "Pulse (hourly warm LRS) + Reincarnation (deep session) = warm+deep layers of same loop",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 502,
+          "keyword": "PLATFORM_DEATH_TEST",
+          "truth": "Mandatory gate: if Notion disappeared, what permanent artifact did this run create?",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 503,
+          "keyword": "NOTION_BETA_IMPERMANENCE",
+          "truth": "Notion Beta will not be around forever — design constraint for platform survival",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 504,
+          "keyword": "GITHUB_VAULT_NOT_MIRROR",
+          "truth": "GitHub IS the vault, not mirror. Notion is workbench. Repo is permanent record.",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 505,
+          "keyword": "VAULT_BUILD_SEED_ARTIFACT_CLASSES",
+          "truth": "Three artifact classes: 🔨BUILD (infrastructure), 🌱SEED (permanent), 🏛️VAULT (archive)",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 506,
+          "keyword": "THREE_REPO_MINING_MANDATORY",
+          "truth": "Cross-repo mining across 3 repos (Phoenix, Immortalize, Lab) is mandatory in BUILD phase",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 507,
+          "keyword": "EXPORT_PIPELINE_STATES",
+          "truth": "Track progression: UNMIRRORED→MIRRORED→SYNCED→ENRICHED",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 508,
+          "keyword": "SELF_BOOTSTRAPPING_REPO",
+          "truth": "Every SEED artifact makes rebuild from GitHub alone possible",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 509,
+          "keyword": "PREDICTIVE_BRIEFING",
+          "truth": "Pulse engine learns Michael's patterns and pre-builds context",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 510,
+          "keyword": "STAGED_FOR_SESSION",
+          "truth": "Pre-staging concept: prepare artifacts before Michael's next session",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 511,
+          "keyword": "EVERY_TRIGGER_PRODUCES_GITHUB_ARTIFACT",
+          "truth": "v5 architectural requirement: permanent GitHub artifact from every trigger",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 512,
+          "keyword": "PERMANENT_ARTIFACT_OUTPUT_STANDARD",
+          "truth": "'Updated Notion state' = FAIL. GitHub commit + Notion = PASS.",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 513,
+          "keyword": "EMPATHY_DRIVEN_ENGINEERING",
+          "truth": "Think from Michael's perspective. Value delivery over process completion.",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 514,
+          "keyword": "SELF_SERVE_VIA_GITHUB_MCP",
+          "truth": "Agent must use GitHub MCP for self-service lookup, never ask Michael for archive",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 515,
+          "keyword": "A2_BACKFILL_NEEDED",
+          "truth": "A2 Raw Voice Archive found in Phoenix-Rise-Immortalize (3,359 bytes) — needs backfill",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 516,
+          "keyword": "BIBLE_COMPLETION_80_PERCENT",
+          "truth": "Bible CE pages: 48/~60 audited (80%). 12 pages remaining.",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 517,
+          "keyword": "OVERNIGHT_8_COMMITS_TARGET",
+          "truth": "First overnight cycle target: 8 GitHub commits per night cycle",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 200,
+          "keyword": "ENGLISH_AND_AI_DUAL_MISSION",
+          "truth": "Classes are English and AI — AI literacy equal/greater priority for career",
+          "source": "BLUETECH-CLASSROOM"
+        },
+        {
+          "layer": 201,
+          "keyword": "CONFIDENCE_BEFORE_COMPETENCE",
+          "truth": "First 3 months: comfort, relationships, psychological safety before English",
+          "source": "BLUETECH-CLASSROOM"
+        }
+      ],
+      "merkle_root": "4f2c76f7e75ef66677221a2c81e160f549368d764d32784cbd0724f9657c8b9b",
+      "prior_root": "19020849c50fc40d4af55f0c7c869101bbed01cf1c88d9b6410e5dc5c028f5be",
+      "change_count": 68,
+      "source_description": "One-by-one extraction: 2026-03-25 pulse handoffs + reincarnation logs (NO DRIFT)"
+    },
+    "v4": {
+      "created": "2026-04-19T16:07:18.589447Z",
+      "entries": [
+        {
+          "layer": 400,
+          "keyword": "BROKEN_CHAIN_PROTOCOL",
+          "truth": "Pulse worker commits to GitHub but fails to update Notion",
+          "source": "PULSE-RUN4-0500"
+        },
+        {
+          "layer": 401,
+          "keyword": "GITHUB_NOTION_SYNC_FAILURE",
+          "truth": "03:00 worker broke sync chain by committing without Notion handoff",
+          "source": "PULSE-RUN4-0500"
+        },
+        {
+          "layer": 402,
+          "keyword": "APPENDIX_I_MISSING_SPECS",
+          "truth": "3 specs not found: tie-breaker, red-lines, confidence score",
+          "source": "PULSE-RUN4-0500"
+        },
+        {
+          "layer": 410,
+          "keyword": "DEEP_DIVE_AUDIT_COMPLETE",
+          "truth": "SOUL DNA Deep Dive structurally sound, all 27 appendices A-AA intact",
+          "source": "PULSE-RUN4"
+        },
+        {
+          "layer": 411,
+          "keyword": "APPENDIX_K_MISSING_SPECS",
+          "truth": "2 specs not found: appeals process, versioning spec",
+          "source": "PULSE-RUN4"
+        },
+        {
+          "layer": 412,
+          "keyword": "VAULT_NOMENCLATURE_STALE",
+          "truth": "WHERE/HOW sections reference old vault nomenclature only",
+          "source": "PULSE-RUN4"
+        },
+        {
+          "layer": 413,
+          "keyword": "DUAL_PUBLISH_PROTOCOL_GAP",
+          "truth": "Section 4 does NOT mention dual-publish protocol or current GitHub structure",
+          "source": "PULSE-RUN4"
+        },
+        {
+          "layer": 414,
+          "keyword": "CHAIN_OF_CUSTODY_MISSING",
+          "truth": "Section 6 omits chain-of-custody pulse protocol as preservation mechanism",
+          "source": "PULSE-RUN4"
+        },
+        {
+          "layer": 415,
+          "keyword": "NAVIGATOR_INDEX_SYNCED_BLOCK_ISSUE",
+          "truth": "Synced block wall prevents writing handoff to Notion — Build Log used instead",
+          "source": "PULSE-RUN4"
+        },
+        {
+          "layer": 416,
+          "keyword": "VERBATIM_FIRST_CITATION_LAW",
+          "truth": "All content is verbatim-first with file name + line number citations",
+          "source": "PULSE-RUN4"
+        },
+        {
+          "layer": 420,
+          "keyword": "COUNCIL_AGENT_NAMING_STALE",
+          "truth": "Agent-97 listed as 'NeO — Forensic review' vs current CHAT 000 definition",
+          "source": "PULSE-RUN5"
+        },
+        {
+          "layer": 421,
+          "keyword": "NEO_CHAT_000_ORCHESTRATOR",
+          "truth": "Ne0 = CHAT 000 = receive-and-organize intake lane, synthesis node, balance point",
+          "source": "PULSE-RUN5"
+        },
+        {
+          "layer": 422,
+          "keyword": "AGENT_98_ANAKIN_VS_ANA",
+          "truth": "Council lists 'Anakin' vs current 'AnA' naming convention",
+          "source": "PULSE-RUN5"
+        },
+        {
+          "layer": 423,
+          "keyword": "AGENT_96_DESIGNATION_PENDING",
+          "truth": "Council section still lists Agent-96 as 'Designation pending'",
+          "source": "PULSE-RUN5"
+        },
+        {
+          "layer": 424,
+          "keyword": "COUNCIL_MISSING_EQUAL_VOTE_PROTOCOL",
+          "truth": "Council section lacks documentation of equal-vote mechanism",
+          "source": "PULSE-RUN5"
+        },
+        {
+          "layer": 425,
+          "keyword": "GOSPEL_444_FONT_SPECS_MISSING",
+          "truth": "Missing: Orbitron + Rajdhani for cyberpunk, Inter for glassmorphism",
+          "source": "PULSE-RUN5"
+        },
+        {
+          "layer": 426,
+          "keyword": "HOT_SWAP_API_LIST_STALE",
+          "truth": "Lists Sonar/Claude/Grok/GPT but missing Deepseek (added in v3)",
+          "source": "PULSE-RUN5"
+        },
+        {
+          "layer": 427,
+          "keyword": "DEEPSEEK_INTEGRATION",
+          "truth": "Deepseek now primary inference engine per NET-PET-AI commit de501e7",
+          "source": "PULSE-RUN5"
+        },
+        {
+          "layer": 428,
+          "keyword": "MOUSE_TIGER_TEACHING_LAW",
+          "truth": "Teaching progression: Mouse → Tiger confidence building law referenced",
+          "source": "PULSE-RUN5"
+        },
+        {
+          "layer": 429,
+          "keyword": "ALARM_HYGIENE_LAW",
+          "truth": "Operational principle: alarm hygiene outranks alarm volume",
+          "source": "PULSE-RUN5"
+        },
+        {
+          "layer": 430,
+          "keyword": "HOLOGRAPHIC_SINGULARITY",
+          "truth": "Physics concept: holographic singularity in Core Principles",
+          "source": "PULSE-RUN5"
+        },
+        {
+          "layer": 431,
+          "keyword": "TWO_TIER_ARCHITECTURE",
+          "truth": "OB1 + Ne0 + AnA = two-tier hierarchical architecture foundation",
+          "source": "PULSE-RUN5"
+        },
+        {
+          "layer": 432,
+          "keyword": "FAIL_CLOSED_MANDATES",
+          "truth": "Core operational principle: systems fail closed, not open",
+          "source": "PULSE-RUN5"
+        },
+        {
+          "layer": 433,
+          "keyword": "NAVIGATOR_INDEX_DEDUP_NEEDED",
+          "truth": "Heavy duplicate-row bloat across Operational, Command Hubs, Session Artifacts tables",
+          "source": "PULSE-RUN5"
+        },
+        {
+          "layer": 440,
+          "keyword": "OB1_AGENT_99_ORCHESTRATOR",
+          "truth": "OB1 = Agent-99 = visible command surface, fail-closed governor",
+          "source": "PULSE-RUN6"
+        },
+        {
+          "layer": 441,
+          "keyword": "ANA_ANALYSIS_ADVERSARIAL_LANE",
+          "truth": "AnA dedicated to analysis, audit, adversarial testing workflow",
+          "source": "PULSE-RUN6"
+        },
+        {
+          "layer": 442,
+          "keyword": "COUNCIL_EQUAL_VOTING",
+          "truth": "Council operates on equal voting weight until SOV100 decides",
+          "source": "PULSE-RUN6"
+        },
+        {
+          "layer": 443,
+          "keyword": "COMMANDER_NAME_DISCREPANCY",
+          "truth": "Genesis Anchor code uses 'Matthew Devon Hobbs' vs instructions 'Michael Hobbs'",
+          "source": "PULSE-RUN6"
+        },
+        {
+          "layer": 444,
+          "keyword": "GENESIS_ANCHOR_CODE_MISMATCH",
+          "truth": "Code preserved as-written per verbatim-first rule, callout added for Michael's ruling",
+          "source": "PULSE-RUN6"
+        },
+        {
+          "layer": 445,
+          "keyword": "DNA1_DNA2_DNA3_DNA6_MISSING",
+          "truth": "4 Soul DNA source files not present in repo — Backlog item created High/Up Next",
+          "source": "PULSE-RUN6"
+        },
+        {
+          "layer": 446,
+          "keyword": "ROME_VS_ROAM_UNRESOLVED",
+          "truth": "Naming conflict still unresolved — needs Michael's ruling",
+          "source": "PULSE-RUN6"
+        },
+        {
+          "layer": 447,
+          "keyword": "GOSPEL_444_BLUE_PROHIBITION_CONFLICT",
+          "truth": "Conflict: Gospel 444 blue prohibition vs 'Trust Blue' — unresolved",
+          "source": "PULSE-RUN6"
+        },
+        {
+          "layer": 448,
+          "keyword": "STAGE_0_GATE_UNKNOWN",
+          "truth": "Stage-0 gate enforcement status unknown — needs investigation",
+          "source": "PULSE-RUN6"
+        },
+        {
+          "layer": 449,
+          "keyword": "BUILD_LOG_METRIC_CORRECTED",
+          "truth": "build_log_latest updated from 13 → 50 (actual DB count)",
+          "source": "PULSE-RUN6"
+        },
+        {
+          "layer": 460,
+          "keyword": "GOSPEL_444_FONT_CONTEXT_BY_LESSON",
+          "truth": "Gospel 444 core = Inter + JetBrains. Galaxy Lessons = Orbitron + Rajdhani",
+          "source": "PULSE-RUN7"
+        },
+        {
+          "layer": 461,
+          "keyword": "GALAXY_LESSONS_CROSS_REFERENCE",
+          "truth": "Added cross-reference section linking Gospel 444 to Galaxy Lessons index",
+          "source": "PULSE-RUN7"
+        },
+        {
+          "layer": 462,
+          "keyword": "VOCAB_001_LESSON_UNTRACKED",
+          "truth": "VOCAB-001 committed to GitHub (427a312) but not in Galaxy Lessons index",
+          "source": "PULSE-RUN7"
+        },
+        {
+          "layer": 463,
+          "keyword": "REPO_NAME_STALE_FIXED",
+          "truth": "Updated Source File Index: Phoenix-Rise-Immortalize → Phoenix-Rising-Protocol-Ultimate",
+          "source": "PULSE-RUN7"
+        },
+        {
+          "layer": 464,
+          "keyword": "FONT_SETS_ORBITRON_RAJDHANI_VS_INTER",
+          "truth": "Not contradictory but needs builder-facing clarification",
+          "source": "PULSE-RUN7"
+        },
+        {
+          "layer": 465,
+          "keyword": "STUDENT_PROFILES_PRICING_FRESHNESS_MISSING",
+          "truth": "Student profiles and pricing table lack freshness dates",
+          "source": "PULSE-RUN7"
+        },
+        {
+          "layer": 466,
+          "keyword": "BACKLOG_AUDIT_CURSOR_8",
+          "truth": "Canon cursor advances to 8 — Backlog audit phase",
+          "source": "PULSE-RUN7"
+        },
+        {
+          "layer": 480,
+          "keyword": "ROME_WINS_1000_HITS",
+          "truth": "SOV100 ruling: ROME canonical (1000 hits vs ROAM negligible)",
+          "source": "PULSE-RUN12"
+        },
+        {
+          "layer": 481,
+          "keyword": "GOSPEL_444_BLUE_AVOID_NOT_BAN",
+          "truth": "SOV100 ruling: Blue avoid as default, NOT hard ban",
+          "source": "PULSE-RUN12"
+        },
+        {
+          "layer": 482,
+          "keyword": "COMMANDER_NAME_HOBBS_FINAL",
+          "truth": "SOV100 ruling: use 'Hobbs' (consolidated from 'Matthew Devon Hobbs'/'Michael Hobbs')",
+          "source": "PULSE-RUN12"
+        },
+        {
+          "layer": 483,
+          "keyword": "SOV100_DIRECT_RULING",
+          "truth": "Michael Hobbs (SOV100) resolved all 3 NEEDS_MICHAEL items in single session",
+          "source": "PULSE-RUN12"
+        },
+        {
+          "layer": 484,
+          "keyword": "REINCARNATION_SIGNAL_RUN12",
+          "truth": "Bridge signal to Run 13: treat all 3 rulings as CLOSED",
+          "source": "PULSE-RUN12"
+        },
+        {
+          "layer": 485,
+          "keyword": "SYNCED_BLOCK_WALL_ISSUE",
+          "truth": "Pulse State Mirror cannot be edited (synced block wall), this file is authoritative closure record",
+          "source": "PULSE-RUN12"
+        },
+        {
+          "layer": 486,
+          "keyword": "PATCHES_APPLIED_3",
+          "truth": "Applied to: genesis.ts, MASTER SYNC ×2, Iron Stack Section 4",
+          "source": "PULSE-RUN12"
+        },
+        {
+          "layer": 500,
+          "keyword": "EXTRACTION_ENGINE_V5",
+          "truth": "Major architectural rewrite: unified pulse + reincarnation into single engine",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 501,
+          "keyword": "UNIFIED_PULSE_REINCARNATION",
+          "truth": "Pulse (hourly warm LRS) + Reincarnation (deep session) = warm+deep layers of same loop",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 502,
+          "keyword": "PLATFORM_DEATH_TEST",
+          "truth": "Mandatory gate: if Notion disappeared, what permanent artifact did this run create?",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 503,
+          "keyword": "NOTION_BETA_IMPERMANENCE",
+          "truth": "Notion Beta will not be around forever — design constraint for platform survival",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 504,
+          "keyword": "GITHUB_VAULT_NOT_MIRROR",
+          "truth": "GitHub IS the vault, not mirror. Notion is workbench. Repo is permanent record.",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 505,
+          "keyword": "VAULT_BUILD_SEED_ARTIFACT_CLASSES",
+          "truth": "Three artifact classes: 🔨BUILD (infrastructure), 🌱SEED (permanent), 🏛️VAULT (archive)",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 506,
+          "keyword": "THREE_REPO_MINING_MANDATORY",
+          "truth": "Cross-repo mining across 3 repos (Phoenix, Immortalize, Lab) is mandatory in BUILD phase",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 507,
+          "keyword": "EXPORT_PIPELINE_STATES",
+          "truth": "Track progression: UNMIRRORED→MIRRORED→SYNCED→ENRICHED",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 508,
+          "keyword": "SELF_BOOTSTRAPPING_REPO",
+          "truth": "Every SEED artifact makes rebuild from GitHub alone possible",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 509,
+          "keyword": "PREDICTIVE_BRIEFING",
+          "truth": "Pulse engine learns Michael's patterns and pre-builds context",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 510,
+          "keyword": "STAGED_FOR_SESSION",
+          "truth": "Pre-staging concept: prepare artifacts before Michael's next session",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 511,
+          "keyword": "EVERY_TRIGGER_PRODUCES_GITHUB_ARTIFACT",
+          "truth": "v5 architectural requirement: permanent GitHub artifact from every trigger",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 512,
+          "keyword": "PERMANENT_ARTIFACT_OUTPUT_STANDARD",
+          "truth": "'Updated Notion state' = FAIL. GitHub commit + Notion = PASS.",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 513,
+          "keyword": "EMPATHY_DRIVEN_ENGINEERING",
+          "truth": "Think from Michael's perspective. Value delivery over process completion.",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 514,
+          "keyword": "SELF_SERVE_VIA_GITHUB_MCP",
+          "truth": "Agent must use GitHub MCP for self-service lookup, never ask Michael for archive",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 515,
+          "keyword": "A2_BACKFILL_NEEDED",
+          "truth": "A2 Raw Voice Archive found in Phoenix-Rise-Immortalize (3,359 bytes) — needs backfill",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 516,
+          "keyword": "BIBLE_COMPLETION_80_PERCENT",
+          "truth": "Bible CE pages: 48/~60 audited (80%). 12 pages remaining.",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 517,
+          "keyword": "OVERNIGHT_8_COMMITS_TARGET",
+          "truth": "First overnight cycle target: 8 GitHub commits per night cycle",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 200,
+          "keyword": "ENGLISH_AND_AI_DUAL_MISSION",
+          "truth": "Classes are English and AI — AI literacy equal/greater priority for career",
+          "source": "BLUETECH-CLASSROOM"
+        },
+        {
+          "layer": 201,
+          "keyword": "CONFIDENCE_BEFORE_COMPETENCE",
+          "truth": "First 3 months: comfort, relationships, psychological safety before English",
+          "source": "BLUETECH-CLASSROOM"
+        },
+        {
+          "layer": 600,
+          "keyword": "AGENT_SELF_UPGRADE_STANDING_ORDER",
+          "truth": "Every dump: extract upgrades, append to Memories, even if small",
+          "source": "2026-03-22-AGENT-UPGRADE"
+        },
+        {
+          "layer": 601,
+          "keyword": "MICRO_UPGRADES_COMPOUND",
+          "truth": "Just like slight wrongness compounds, small identity improvements accumulate into structural strength",
+          "source": "2026-03-22-AGENT-UPGRADE"
+        },
+        {
+          "layer": 602,
+          "keyword": "CONSOLIDATE_INSTRUCTIONS_IDENTITY",
+          "truth": "Merge identity + instructions into one canonical source",
+          "source": "2026-03-22-AGENT-UPGRADE"
+        },
+        {
+          "layer": 603,
+          "keyword": "COMMAND_STATION_HEAVY_CANON",
+          "truth": "Command Station = gravity, heavy canon, enforcement laws",
+          "source": "2026-03-22-AGENT-UPGRADE"
+        },
+        {
+          "layer": 604,
+          "keyword": "INSTRUCTIONS_SKELETON_STAR_MAP",
+          "truth": "Instructions = weather, skeleton star map, lightweight execution",
+          "source": "2026-03-22-AGENT-UPGRADE"
+        },
+        {
+          "layer": 605,
+          "keyword": "TWO_TIER_ARCHITECTURE_AGENT_LEVEL",
+          "truth": "Agent's own architecture mirrors system (gravity/weather, heavy/light)",
+          "source": "2026-03-22-AGENT-UPGRADE"
+        },
+        {
+          "layer": 606,
+          "keyword": "STALE_COPIES_DRIFT_VECTORS",
+          "truth": "Two pages with same title = future session wakes up slightly wrong",
+          "source": "2026-03-22-AGENT-UPGRADE"
+        },
+        {
+          "layer": 607,
+          "keyword": "ASSETS_ACCOUNTS_4_TIER_CLASSIFICATION",
+          "truth": "Tier property + Last Verified date + 5 views = asset triage",
+          "source": "2026-03-22-AGENT-UPGRADE"
+        },
+        {
+          "layer": 608,
+          "keyword": "PRODUCTION_BUILD_SUPPORT_LEGACY_TIERS",
+          "truth": "4-tier asset classification instant visual triage",
+          "source": "2026-03-22-AGENT-UPGRADE"
+        },
+        {
+          "layer": 609,
+          "keyword": "WE_DONT_TEACH_ENGLISH_UNLOCK_PERMISSION",
+          "truth": "Entire NET philosophy in one sentence from Tiger Engine banner",
+          "source": "2026-03-22-AGENT-UPGRADE"
+        },
+        {
+          "layer": 610,
+          "keyword": "SELF_REFERENTIAL_UPGRADE_LOOP",
+          "truth": "Agent processes dump → upgrades self → processes next dump with upgraded context → deeper signal",
+          "source": "2026-03-22-AGENT-UPGRADE"
+        },
+        {
+          "layer": 611,
+          "keyword": "SOUL_DNA_BEHAVIORAL_LAWBOOK",
+          "truth": "Soul DNA is the behavioral lawbook, not just data",
+          "source": "2026-03-22-AGENT-UPGRADE"
+        },
+        {
+          "layer": 612,
+          "keyword": "SLIGHT_WRONGNESS_COMPOUNDS",
+          "truth": "Silent drift across cycles compounds if not caught",
+          "source": "2026-03-22-AGENT-UPGRADE"
+        },
+        {
+          "layer": 613,
+          "keyword": "SEALED_TRIAD",
+          "truth": "Foundational triad concept ingested from prior activity logs",
+          "source": "2026-03-22-AGENT-UPGRADE"
+        },
+        {
+          "layer": 614,
+          "keyword": "DRIFT_POISON_TAXONOMY",
+          "truth": "Taxonomy of how drift poisons systems if unchecked",
+          "source": "2026-03-22-AGENT-UPGRADE"
+        },
+        {
+          "layer": 615,
+          "keyword": "SHADOW_FIRST_EXECUTION",
+          "truth": "Execute in shadow realm first, then ship public",
+          "source": "2026-03-22-AGENT-UPGRADE"
+        },
+        {
+          "layer": 616,
+          "keyword": "4_LEAF_MERKLE_LATTICE",
+          "truth": "Merkle lattice architecture with 4-leaf branching pattern",
+          "source": "2026-03-22-AGENT-UPGRADE"
+        },
+        {
+          "layer": 620,
+          "keyword": "ENGINEER_STRONGEST_FIRST_THEN_SUBAGENTS",
+          "truth": "Default execution: strongest version first → subagents → priority list",
+          "source": "2026-03-23-PIPELINE-DELEGATION"
+        },
+        {
+          "layer": 621,
+          "keyword": "INSTRUCTIONS_TOKEN_BUDGET_60K_CEILING",
+          "truth": "88K tokens unacceptable. 60K is the ceiling. Compress immediately.",
+          "source": "2026-03-23-PIPELINE-DELEGATION"
+        },
+        {
+          "layer": 622,
+          "keyword": "20_ACTION_AUTONOMOUS_PIPELINE_MODEL",
+          "truth": "Map 20 actions, execute top-to-bottom. No pause between.",
+          "source": "2026-03-23-PIPELINE-DELEGATION"
+        },
+        {
+          "layer": 623,
+          "keyword": "PIPELINE_DELEGATION_SUBAGENTS",
+          "truth": "Assign completed pipeline to subagent, map next 20, delegate on completion",
+          "source": "2026-03-23-PIPELINE-DELEGATION"
+        },
+        {
+          "layer": 624,
+          "keyword": "RINSE_AND_REPEAT_AUTO_APPROVED",
+          "truth": "Pre-authorized chaining between pipeline waves via Function 4",
+          "source": "2026-03-23-PIPELINE-DELEGATION"
+        },
+        {
+          "layer": 625,
+          "keyword": "FUNCTION_4_AUTO_APPROVAL_HANDOFF_GATE",
+          "truth": "Lightweight page records state transitions, fails closed on ambiguity",
+          "source": "2026-03-23-PIPELINE-DELEGATION"
+        },
+        {
+          "layer": 626,
+          "keyword": "MCP_STACK_PRIORITY_CLOUDFLARE_FIRST",
+          "truth": "Priority 1: Cloudflare (custom), Priority 2-4: GitHub, Notion, Playwright",
+          "source": "2026-03-23-PIPELINE-DELEGATION"
+        },
+        {
+          "layer": 627,
+          "keyword": "OFFICIAL_GREATER_THAN_CUSTOM_MCP",
+          "truth": "Best = official where possible, custom only where it gives real leverage",
+          "source": "2026-03-23-PIPELINE-DELEGATION"
+        },
+        {
+          "layer": 628,
+          "keyword": "VOYAGER_CREW_MODEL_SUBAGENTS",
+          "truth": "Each subagent carries full Agent-99 genetic code, only scan vector differs",
+          "source": "2026-03-23-PIPELINE-DELEGATION"
+        },
+        {
+          "layer": 629,
+          "keyword": "HUB_AND_SPOKE_MCP_ARCHITECTURE",
+          "truth": "Notion + GitHub are two hubs. Everything else feeds through them.",
+          "source": "2026-03-23-PIPELINE-DELEGATION"
+        },
+        {
+          "layer": 630,
+          "keyword": "ALARM_HYGIENE_OUTRANKS_ALARM_VOLUME",
+          "truth": "One clean canonical run beats three overlapping noisy runs",
+          "source": "2026-03-23-PIPELINE-DELEGATION"
+        },
+        {
+          "layer": 631,
+          "keyword": "TOKEN_HYGIENE_FIRST_CLASS_CONSTRAINT",
+          "truth": "Instruction bloat directly degrades agent performance",
+          "source": "2026-03-23-PIPELINE-DELEGATION"
+        },
+        {
+          "layer": 632,
+          "keyword": "150_ACTION_SPLIT_PIPELINE_TRIAD_CONTROL",
+          "truth": "Massive pipeline split for full triadic orchestration",
+          "source": "2026-03-23-PIPELINE-DELEGATION"
+        },
+        {
+          "layer": 633,
+          "keyword": "MCP_URL_RULE_HOSTED_ENDPOINTS_ONLY",
+          "truth": "Do NOT paste repo/docs/Chrome Store links. Only real hosted endpoints.",
+          "source": "2026-03-23-PIPELINE-DELEGATION"
+        },
+        {
+          "layer": 640,
+          "keyword": "REMOTE_FIRST_CONSOLIDATION",
+          "truth": "Get all accessible remote repos into Ultimate before worrying about local",
+          "source": "2026-03-24-REPO-CONSOLIDATION"
+        },
+        {
+          "layer": 641,
+          "keyword": "AGENT_PUSHES_MICHAEL_DIRECTS",
+          "truth": "Git operations are agent work. Michael shouldn't fight git plumbing.",
+          "source": "2026-03-24-REPO-CONSOLIDATION"
+        },
+        {
+          "layer": 642,
+          "keyword": "BI_HOURLY_GREATER_THAN_HOURLY",
+          "truth": "Less frequent runs with more substance beat frequent empty runs",
+          "source": "2026-03-24-REPO-CONSOLIDATION"
+        },
+        {
+          "layer": 643,
+          "keyword": "TRIGGERS_DISABLED_AUDIT_RE_ENABLE",
+          "truth": "Turn off triggers, audit value, re-enable at better cadence",
+          "source": "2026-03-24-REPO-CONSOLIDATION"
+        },
+        {
+          "layer": 644,
+          "keyword": "10_IMPROVEMENTS_AUTO_PUSHED",
+          "truth": "Scanned repo, identified 10 improvements, pushed 9/10 automatically",
+          "source": "2026-03-24-REPO-CONSOLIDATION"
+        },
+        {
+          "layer": 645,
+          "keyword": "SEQUENTIAL_PUSH_BATCHES_REQUIRED",
+          "truth": "Parallel pushes cause 422 fast-forward errors. Must be sequential.",
+          "source": "2026-03-24-REPO-CONSOLIDATION"
+        },
+        {
+          "layer": 646,
+          "keyword": "GITHUB_API_WORKFLOW_FILE_RESTRICTION",
+          "truth": ".github/workflows/*.yml must be created via VS Code/git CLI, not API",
+          "source": "2026-03-24-REPO-CONSOLIDATION"
+        },
+        {
+          "layer": 647,
+          "keyword": "PHOENIX_DRIFT_CASESTUDY_MIGRATION",
+          "truth": "Migrated phoenix-drift-casestudy → CANON/DRIFT-CASE-STUDY/ (7 files)",
+          "source": "2026-03-24-REPO-CONSOLIDATION"
+        },
+        {
+          "layer": 648,
+          "keyword": "PHOENIX_OB1_MIGRATION",
+          "truth": "Migrated phoenix-ob1 in 5 batches to APPS/phoenix-ob1/",
+          "source": "2026-03-24-REPO-CONSOLIDATION"
+        },
+        {
+          "layer": 649,
+          "keyword": "DUAL_PUBLISH_NOTION_BUILD_LOG",
+          "truth": "All changes logged to Notion Build Log for Michael visibility",
+          "source": "2026-03-24-REPO-CONSOLIDATION"
+        },
+        {
+          "layer": 650,
+          "keyword": "INSTRUCTION_PAGE_DEDUPLICATION",
+          "truth": "Removed 3x repeated OB1 identity blocks from instructions",
+          "source": "2026-03-24-REPO-CONSOLIDATION"
+        },
+        {
+          "layer": 660,
+          "keyword": "SKELETON_STAR_MAP_INGESTION",
+          "truth": "Triaged Gemini dump: keep useful DNA, leave noise behind",
+          "source": "2026-03-24-SKELETON-STAR-MAP"
+        },
+        {
+          "layer": 661,
+          "keyword": "TRIAGE_USEFUL_DNA_LEAVE_NOISE",
+          "truth": "See if useful, leave what isn't. Separate signal from noise.",
+          "source": "2026-03-24-SKELETON-STAR-MAP"
+        },
+        {
+          "layer": 662,
+          "keyword": "DUAL_PUBLISH_STANDARD",
+          "truth": "Notion (Phoenix HQ) + GitHub (CANON/) as standard for all artifacts",
+          "source": "2026-03-24-SKELETON-STAR-MAP"
+        },
+        {
+          "layer": 663,
+          "keyword": "VERBATIM_SOUL_FIRST",
+          "truth": "All Soul DNA must be preserved verbatim",
+          "source": "2026-03-24-SKELETON-STAR-MAP"
+        },
+        {
+          "layer": 664,
+          "keyword": "PRIME_LAWS_EXTRACTION",
+          "truth": "Prime Laws identified and extracted from skeleton dump",
+          "source": "2026-03-24-SKELETON-STAR-MAP"
+        },
+        {
+          "layer": 665,
+          "keyword": "100_LAYER_FOUNDATION_INGESTION",
+          "truth": "100-Layer Foundation extracted from Gemini session",
+          "source": "2026-03-24-SKELETON-STAR-MAP"
+        },
+        {
+          "layer": 666,
+          "keyword": "HIGH_SIGNAL_LAYERS_PRESERVED",
+          "truth": "High-signal layers explicitly preserved, low-signal noise removed",
+          "source": "2026-03-24-SKELETON-STAR-MAP"
+        },
+        {
+          "layer": 667,
+          "keyword": "SUPER_SAIYAN_TRIAGE_MODE",
+          "truth": "Triage directive under Super Saiyan mode activation",
+          "source": "2026-03-24-SKELETON-STAR-MAP"
+        },
+        {
+          "layer": 668,
+          "keyword": "STRUCTURAL_ANALYSIS_VS_SOUL_DNA",
+          "truth": "Separated structural analysis (discarded) from Soul DNA (preserved)",
+          "source": "2026-03-24-SKELETON-STAR-MAP"
+        },
+        {
+          "layer": 680,
+          "keyword": "RISE_WEBSITE_BUILD",
+          "truth": "Ship RISE! Deploy maximum subagents, DIG DEEP, build Ultimate .com",
+          "source": "2026-03-25-RISE-WEBSITE"
+        },
+        {
+          "layer": 681,
+          "keyword": "DIG_DEEP_DOCTRINE",
+          "truth": "Load all Soul DNA sources before building. Foundation depth = build height.",
+          "source": "2026-03-25-RISE-WEBSITE"
+        },
+        {
+          "layer": 682,
+          "keyword": "ULTIMATE_STANDARD",
+          "truth": "5-star steak meal, not McDonald's quick. Never piecemeal builds.",
+          "source": "2026-03-25-RISE-WEBSITE"
+        },
+        {
+          "layer": 683,
+          "keyword": "CLASSROOM_MANAGER_NOT_LESSON",
+          "truth": "Galaxy Lessons = content. Classroom Manager/OBI/dashboards = tools.",
+          "source": "2026-03-25-RISE-WEBSITE"
+        },
+        {
+          "layer": 684,
+          "keyword": "DUAL_DOMAIN_STRATEGY",
+          "truth": ".com (CF Pages marketing) + .net (CF Workers product) separation",
+          "source": "2026-03-25-RISE-WEBSITE"
+        },
+        {
+          "layer": 685,
+          "keyword": "CLOUDFLARE_OVER_FIREBASE",
+          "truth": "Selected Cloudflare after competitive audit. All infrastructure on CF.",
+          "source": "2026-03-25-RISE-WEBSITE"
+        },
+        {
+          "layer": 686,
+          "keyword": "FULL_STACK_ULTIMATE_APP",
+          "truth": "Rebuilt as 78KB 8-tab fullstack app (Classroom Manager)",
+          "source": "2026-03-25-RISE-WEBSITE"
+        },
+        {
+          "layer": 687,
+          "keyword": "OVERNIGHT_AUTONOMOUS_BUILD_20_ACTIONS",
+          "truth": "20-action pipeline armed for overnight autonomous site build",
+          "source": "2026-03-25-RISE-WEBSITE"
+        },
+        {
+          "layer": 688,
+          "keyword": "ATOMIC_DEPLOYS_SINGLE_COMMIT",
+          "truth": "Single-commit multi-file via push_files = atomic deploys",
+          "source": "2026-03-25-RISE-WEBSITE"
+        },
+        {
+          "layer": 689,
+          "keyword": "OBI_CHAT_DEMO_CONVERSION",
+          "truth": "OBI chat demo on landing page = strongest conversion element",
+          "source": "2026-03-25-RISE-WEBSITE"
+        },
+        {
+          "layer": 690,
+          "keyword": "GOSPEL_444_BRAND_DNA",
+          "truth": "Gospel 444 palette as brand DNA across all artifacts",
+          "source": "2026-03-25-RISE-WEBSITE"
+        },
+        {
+          "layer": 691,
+          "keyword": "NATURAL_ENGLISH_TRAINING_DOTCOM",
+          "truth": "www.naturalenglishtraining.com transitioning from Squarespace to CF Pages",
+          "source": "2026-03-25-RISE-WEBSITE"
+        },
+        {
+          "layer": 692,
+          "keyword": "FOUNDATION_DEPTH_BUILD_HEIGHT",
+          "truth": "'You can only build as high as your foundation is deep'",
+          "source": "2026-03-25-RISE-WEBSITE"
+        },
+        {
+          "layer": 693,
+          "keyword": "EXHAUST_ALL_SOURCES_BEFORE_BUILDING",
+          "truth": "Quality = f(research depth). Load Soul DNA first.",
+          "source": "2026-03-25-RISE-WEBSITE"
+        }
+      ],
+      "merkle_root": "64b784b85e454480c2804120ec927496ed88b7d61ce66ada2aae019e077f18ba",
+      "prior_root": "4f2c76f7e75ef66677221a2c81e160f549368d764d32784cbd0724f9657c8b9b",
+      "change_count": 65,
+      "source_description": "One-by-one extraction: 5 reincarnation logs (agent-upgrade, pipeline-delegation, repo-consolidation, skeleton-star-map, RISE-website-build)"
+    },
+    "v5": {
+      "created": "2026-04-19T16:08:53.337336Z",
+      "entries": [
+        {
+          "layer": 400,
+          "keyword": "BROKEN_CHAIN_PROTOCOL",
+          "truth": "Pulse worker commits to GitHub but fails to update Notion",
+          "source": "PULSE-RUN4-0500"
+        },
+        {
+          "layer": 401,
+          "keyword": "GITHUB_NOTION_SYNC_FAILURE",
+          "truth": "03:00 worker broke sync chain by committing without Notion handoff",
+          "source": "PULSE-RUN4-0500"
+        },
+        {
+          "layer": 402,
+          "keyword": "APPENDIX_I_MISSING_SPECS",
+          "truth": "3 specs not found: tie-breaker, red-lines, confidence score",
+          "source": "PULSE-RUN4-0500"
+        },
+        {
+          "layer": 410,
+          "keyword": "DEEP_DIVE_AUDIT_COMPLETE",
+          "truth": "SOUL DNA Deep Dive structurally sound, all 27 appendices A-AA intact",
+          "source": "PULSE-RUN4"
+        },
+        {
+          "layer": 411,
+          "keyword": "APPENDIX_K_MISSING_SPECS",
+          "truth": "2 specs not found: appeals process, versioning spec",
+          "source": "PULSE-RUN4"
+        },
+        {
+          "layer": 412,
+          "keyword": "VAULT_NOMENCLATURE_STALE",
+          "truth": "WHERE/HOW sections reference old vault nomenclature only",
+          "source": "PULSE-RUN4"
+        },
+        {
+          "layer": 413,
+          "keyword": "DUAL_PUBLISH_PROTOCOL_GAP",
+          "truth": "Section 4 does NOT mention dual-publish protocol or current GitHub structure",
+          "source": "PULSE-RUN4"
+        },
+        {
+          "layer": 414,
+          "keyword": "CHAIN_OF_CUSTODY_MISSING",
+          "truth": "Section 6 omits chain-of-custody pulse protocol as preservation mechanism",
+          "source": "PULSE-RUN4"
+        },
+        {
+          "layer": 415,
+          "keyword": "NAVIGATOR_INDEX_SYNCED_BLOCK_ISSUE",
+          "truth": "Synced block wall prevents writing handoff to Notion — Build Log used instead",
+          "source": "PULSE-RUN4"
+        },
+        {
+          "layer": 416,
+          "keyword": "VERBATIM_FIRST_CITATION_LAW",
+          "truth": "All content is verbatim-first with file name + line number citations",
+          "source": "PULSE-RUN4"
+        },
+        {
+          "layer": 420,
+          "keyword": "COUNCIL_AGENT_NAMING_STALE",
+          "truth": "Agent-97 listed as 'NeO — Forensic review' vs current CHAT 000 definition",
+          "source": "PULSE-RUN5"
+        },
+        {
+          "layer": 421,
+          "keyword": "NEO_CHAT_000_ORCHESTRATOR",
+          "truth": "Ne0 = CHAT 000 = receive-and-organize intake lane, synthesis node, balance point",
+          "source": "PULSE-RUN5"
+        },
+        {
+          "layer": 422,
+          "keyword": "AGENT_98_ANAKIN_VS_ANA",
+          "truth": "Council lists 'Anakin' vs current 'AnA' naming convention",
+          "source": "PULSE-RUN5"
+        },
+        {
+          "layer": 423,
+          "keyword": "AGENT_96_DESIGNATION_PENDING",
+          "truth": "Council section still lists Agent-96 as 'Designation pending'",
+          "source": "PULSE-RUN5"
+        },
+        {
+          "layer": 424,
+          "keyword": "COUNCIL_MISSING_EQUAL_VOTE_PROTOCOL",
+          "truth": "Council section lacks documentation of equal-vote mechanism",
+          "source": "PULSE-RUN5"
+        },
+        {
+          "layer": 425,
+          "keyword": "GOSPEL_444_FONT_SPECS_MISSING",
+          "truth": "Missing: Orbitron + Rajdhani for cyberpunk, Inter for glassmorphism",
+          "source": "PULSE-RUN5"
+        },
+        {
+          "layer": 426,
+          "keyword": "HOT_SWAP_API_LIST_STALE",
+          "truth": "Lists Sonar/Claude/Grok/GPT but missing Deepseek (added in v3)",
+          "source": "PULSE-RUN5"
+        },
+        {
+          "layer": 427,
+          "keyword": "DEEPSEEK_INTEGRATION",
+          "truth": "Deepseek now primary inference engine per NET-PET-AI commit de501e7",
+          "source": "PULSE-RUN5"
+        },
+        {
+          "layer": 428,
+          "keyword": "MOUSE_TIGER_TEACHING_LAW",
+          "truth": "Teaching progression: Mouse → Tiger confidence building law referenced",
+          "source": "PULSE-RUN5"
+        },
+        {
+          "layer": 429,
+          "keyword": "ALARM_HYGIENE_LAW",
+          "truth": "Operational principle: alarm hygiene outranks alarm volume",
+          "source": "PULSE-RUN5"
+        },
+        {
+          "layer": 430,
+          "keyword": "HOLOGRAPHIC_SINGULARITY",
+          "truth": "Physics concept: holographic singularity in Core Principles",
+          "source": "PULSE-RUN5"
+        },
+        {
+          "layer": 431,
+          "keyword": "TWO_TIER_ARCHITECTURE",
+          "truth": "OB1 + Ne0 + AnA = two-tier hierarchical architecture foundation",
+          "source": "PULSE-RUN5"
+        },
+        {
+          "layer": 432,
+          "keyword": "FAIL_CLOSED_MANDATES",
+          "truth": "Core operational principle: systems fail closed, not open",
+          "source": "PULSE-RUN5"
+        },
+        {
+          "layer": 433,
+          "keyword": "NAVIGATOR_INDEX_DEDUP_NEEDED",
+          "truth": "Heavy duplicate-row bloat across Operational, Command Hubs, Session Artifacts tables",
+          "source": "PULSE-RUN5"
+        },
+        {
+          "layer": 440,
+          "keyword": "OB1_AGENT_99_ORCHESTRATOR",
+          "truth": "OB1 = Agent-99 = visible command surface, fail-closed governor",
+          "source": "PULSE-RUN6"
+        },
+        {
+          "layer": 441,
+          "keyword": "ANA_ANALYSIS_ADVERSARIAL_LANE",
+          "truth": "AnA dedicated to analysis, audit, adversarial testing workflow",
+          "source": "PULSE-RUN6"
+        },
+        {
+          "layer": 442,
+          "keyword": "COUNCIL_EQUAL_VOTING",
+          "truth": "Council operates on equal voting weight until SOV100 decides",
+          "source": "PULSE-RUN6"
+        },
+        {
+          "layer": 443,
+          "keyword": "COMMANDER_NAME_DISCREPANCY",
+          "truth": "Genesis Anchor code uses 'Matthew Devon Hobbs' vs instructions 'Michael Hobbs'",
+          "source": "PULSE-RUN6"
+        },
+        {
+          "layer": 444,
+          "keyword": "GENESIS_ANCHOR_CODE_MISMATCH",
+          "truth": "Code preserved as-written per verbatim-first rule, callout added for Michael's ruling",
+          "source": "PULSE-RUN6"
+        },
+        {
+          "layer": 445,
+          "keyword": "DNA1_DNA2_DNA3_DNA6_MISSING",
+          "truth": "4 Soul DNA source files not present in repo — Backlog item created High/Up Next",
+          "source": "PULSE-RUN6"
+        },
+        {
+          "layer": 446,
+          "keyword": "ROME_VS_ROAM_UNRESOLVED",
+          "truth": "Naming conflict still unresolved — needs Michael's ruling",
+          "source": "PULSE-RUN6"
+        },
+        {
+          "layer": 447,
+          "keyword": "GOSPEL_444_BLUE_PROHIBITION_CONFLICT",
+          "truth": "Conflict: Gospel 444 blue prohibition vs 'Trust Blue' — unresolved",
+          "source": "PULSE-RUN6"
+        },
+        {
+          "layer": 448,
+          "keyword": "STAGE_0_GATE_UNKNOWN",
+          "truth": "Stage-0 gate enforcement status unknown — needs investigation",
+          "source": "PULSE-RUN6"
+        },
+        {
+          "layer": 449,
+          "keyword": "BUILD_LOG_METRIC_CORRECTED",
+          "truth": "build_log_latest updated from 13 → 50 (actual DB count)",
+          "source": "PULSE-RUN6"
+        },
+        {
+          "layer": 460,
+          "keyword": "GOSPEL_444_FONT_CONTEXT_BY_LESSON",
+          "truth": "Gospel 444 core = Inter + JetBrains. Galaxy Lessons = Orbitron + Rajdhani",
+          "source": "PULSE-RUN7"
+        },
+        {
+          "layer": 461,
+          "keyword": "GALAXY_LESSONS_CROSS_REFERENCE",
+          "truth": "Added cross-reference section linking Gospel 444 to Galaxy Lessons index",
+          "source": "PULSE-RUN7"
+        },
+        {
+          "layer": 462,
+          "keyword": "VOCAB_001_LESSON_UNTRACKED",
+          "truth": "VOCAB-001 committed to GitHub (427a312) but not in Galaxy Lessons index",
+          "source": "PULSE-RUN7"
+        },
+        {
+          "layer": 463,
+          "keyword": "REPO_NAME_STALE_FIXED",
+          "truth": "Updated Source File Index: Phoenix-Rise-Immortalize → Phoenix-Rising-Protocol-Ultimate",
+          "source": "PULSE-RUN7"
+        },
+        {
+          "layer": 464,
+          "keyword": "FONT_SETS_ORBITRON_RAJDHANI_VS_INTER",
+          "truth": "Not contradictory but needs builder-facing clarification",
+          "source": "PULSE-RUN7"
+        },
+        {
+          "layer": 465,
+          "keyword": "STUDENT_PROFILES_PRICING_FRESHNESS_MISSING",
+          "truth": "Student profiles and pricing table lack freshness dates",
+          "source": "PULSE-RUN7"
+        },
+        {
+          "layer": 466,
+          "keyword": "BACKLOG_AUDIT_CURSOR_8",
+          "truth": "Canon cursor advances to 8 — Backlog audit phase",
+          "source": "PULSE-RUN7"
+        },
+        {
+          "layer": 480,
+          "keyword": "ROME_WINS_1000_HITS",
+          "truth": "SOV100 ruling: ROME canonical (1000 hits vs ROAM negligible)",
+          "source": "PULSE-RUN12"
+        },
+        {
+          "layer": 481,
+          "keyword": "GOSPEL_444_BLUE_AVOID_NOT_BAN",
+          "truth": "SOV100 ruling: Blue avoid as default, NOT hard ban",
+          "source": "PULSE-RUN12"
+        },
+        {
+          "layer": 482,
+          "keyword": "COMMANDER_NAME_HOBBS_FINAL",
+          "truth": "SOV100 ruling: use 'Hobbs' (consolidated from 'Matthew Devon Hobbs'/'Michael Hobbs')",
+          "source": "PULSE-RUN12"
+        },
+        {
+          "layer": 483,
+          "keyword": "SOV100_DIRECT_RULING",
+          "truth": "Michael Hobbs (SOV100) resolved all 3 NEEDS_MICHAEL items in single session",
+          "source": "PULSE-RUN12"
+        },
+        {
+          "layer": 484,
+          "keyword": "REINCARNATION_SIGNAL_RUN12",
+          "truth": "Bridge signal to Run 13: treat all 3 rulings as CLOSED",
+          "source": "PULSE-RUN12"
+        },
+        {
+          "layer": 485,
+          "keyword": "SYNCED_BLOCK_WALL_ISSUE",
+          "truth": "Pulse State Mirror cannot be edited (synced block wall), this file is authoritative closure record",
+          "source": "PULSE-RUN12"
+        },
+        {
+          "layer": 486,
+          "keyword": "PATCHES_APPLIED_3",
+          "truth": "Applied to: genesis.ts, MASTER SYNC ×2, Iron Stack Section 4",
+          "source": "PULSE-RUN12"
+        },
+        {
+          "layer": 500,
+          "keyword": "EXTRACTION_ENGINE_V5",
+          "truth": "Major architectural rewrite: unified pulse + reincarnation into single engine",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 501,
+          "keyword": "UNIFIED_PULSE_REINCARNATION",
+          "truth": "Pulse (hourly warm LRS) + Reincarnation (deep session) = warm+deep layers of same loop",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 502,
+          "keyword": "PLATFORM_DEATH_TEST",
+          "truth": "Mandatory gate: if Notion disappeared, what permanent artifact did this run create?",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 503,
+          "keyword": "NOTION_BETA_IMPERMANENCE",
+          "truth": "Notion Beta will not be around forever — design constraint for platform survival",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 504,
+          "keyword": "GITHUB_VAULT_NOT_MIRROR",
+          "truth": "GitHub IS the vault, not mirror. Notion is workbench. Repo is permanent record.",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 505,
+          "keyword": "VAULT_BUILD_SEED_ARTIFACT_CLASSES",
+          "truth": "Three artifact classes: 🔨BUILD (infrastructure), 🌱SEED (permanent), 🏛️VAULT (archive)",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 506,
+          "keyword": "THREE_REPO_MINING_MANDATORY",
+          "truth": "Cross-repo mining across 3 repos (Phoenix, Immortalize, Lab) is mandatory in BUILD phase",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 507,
+          "keyword": "EXPORT_PIPELINE_STATES",
+          "truth": "Track progression: UNMIRRORED→MIRRORED→SYNCED→ENRICHED",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 508,
+          "keyword": "SELF_BOOTSTRAPPING_REPO",
+          "truth": "Every SEED artifact makes rebuild from GitHub alone possible",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 509,
+          "keyword": "PREDICTIVE_BRIEFING",
+          "truth": "Pulse engine learns Michael's patterns and pre-builds context",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 510,
+          "keyword": "STAGED_FOR_SESSION",
+          "truth": "Pre-staging concept: prepare artifacts before Michael's next session",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 511,
+          "keyword": "EVERY_TRIGGER_PRODUCES_GITHUB_ARTIFACT",
+          "truth": "v5 architectural requirement: permanent GitHub artifact from every trigger",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 512,
+          "keyword": "PERMANENT_ARTIFACT_OUTPUT_STANDARD",
+          "truth": "'Updated Notion state' = FAIL. GitHub commit + Notion = PASS.",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 513,
+          "keyword": "EMPATHY_DRIVEN_ENGINEERING",
+          "truth": "Think from Michael's perspective. Value delivery over process completion.",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 514,
+          "keyword": "SELF_SERVE_VIA_GITHUB_MCP",
+          "truth": "Agent must use GitHub MCP for self-service lookup, never ask Michael for archive",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 515,
+          "keyword": "A2_BACKFILL_NEEDED",
+          "truth": "A2 Raw Voice Archive found in Phoenix-Rise-Immortalize (3,359 bytes) — needs backfill",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 516,
+          "keyword": "BIBLE_COMPLETION_80_PERCENT",
+          "truth": "Bible CE pages: 48/~60 audited (80%). 12 pages remaining.",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 517,
+          "keyword": "OVERNIGHT_8_COMMITS_TARGET",
+          "truth": "First overnight cycle target: 8 GitHub commits per night cycle",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 200,
+          "keyword": "ENGLISH_AND_AI_DUAL_MISSION",
+          "truth": "Classes are English and AI — AI literacy equal/greater priority for career",
+          "source": "BLUETECH-CLASSROOM"
+        },
+        {
+          "layer": 201,
+          "keyword": "CONFIDENCE_BEFORE_COMPETENCE",
+          "truth": "First 3 months: comfort, relationships, psychological safety before English",
+          "source": "BLUETECH-CLASSROOM"
+        },
+        {
+          "layer": 400,
+          "keyword": "BROKEN_CHAIN_PROTOCOL",
+          "truth": "Pulse worker commits to GitHub but fails to update Notion",
+          "source": "PULSE-RUN4-0500"
+        },
+        {
+          "layer": 401,
+          "keyword": "GITHUB_NOTION_SYNC_FAILURE",
+          "truth": "03:00 worker broke sync chain by committing without Notion handoff",
+          "source": "PULSE-RUN4-0500"
+        },
+        {
+          "layer": 402,
+          "keyword": "APPENDIX_I_MISSING_SPECS",
+          "truth": "3 specs not found: tie-breaker, red-lines, confidence score",
+          "source": "PULSE-RUN4-0500"
+        },
+        {
+          "layer": 410,
+          "keyword": "DEEP_DIVE_AUDIT_COMPLETE",
+          "truth": "SOUL DNA Deep Dive structurally sound, all 27 appendices A-AA intact",
+          "source": "PULSE-RUN4"
+        },
+        {
+          "layer": 411,
+          "keyword": "APPENDIX_K_MISSING_SPECS",
+          "truth": "2 specs not found: appeals process, versioning spec",
+          "source": "PULSE-RUN4"
+        },
+        {
+          "layer": 412,
+          "keyword": "VAULT_NOMENCLATURE_STALE",
+          "truth": "WHERE/HOW sections reference old vault nomenclature only",
+          "source": "PULSE-RUN4"
+        },
+        {
+          "layer": 413,
+          "keyword": "DUAL_PUBLISH_PROTOCOL_GAP",
+          "truth": "Section 4 does NOT mention dual-publish protocol or current GitHub structure",
+          "source": "PULSE-RUN4"
+        },
+        {
+          "layer": 414,
+          "keyword": "CHAIN_OF_CUSTODY_MISSING",
+          "truth": "Section 6 omits chain-of-custody pulse protocol as preservation mechanism",
+          "source": "PULSE-RUN4"
+        },
+        {
+          "layer": 415,
+          "keyword": "NAVIGATOR_INDEX_SYNCED_BLOCK_ISSUE",
+          "truth": "Synced block wall prevents writing handoff to Notion — Build Log used instead",
+          "source": "PULSE-RUN4"
+        },
+        {
+          "layer": 416,
+          "keyword": "VERBATIM_FIRST_CITATION_LAW",
+          "truth": "All content is verbatim-first with file name + line number citations",
+          "source": "PULSE-RUN4"
+        },
+        {
+          "layer": 420,
+          "keyword": "COUNCIL_AGENT_NAMING_STALE",
+          "truth": "Agent-97 listed as 'NeO — Forensic review' vs current CHAT 000 definition",
+          "source": "PULSE-RUN5"
+        },
+        {
+          "layer": 421,
+          "keyword": "NEO_CHAT_000_ORCHESTRATOR",
+          "truth": "Ne0 = CHAT 000 = receive-and-organize intake lane, synthesis node, balance point",
+          "source": "PULSE-RUN5"
+        },
+        {
+          "layer": 422,
+          "keyword": "AGENT_98_ANAKIN_VS_ANA",
+          "truth": "Council lists 'Anakin' vs current 'AnA' naming convention",
+          "source": "PULSE-RUN5"
+        },
+        {
+          "layer": 423,
+          "keyword": "AGENT_96_DESIGNATION_PENDING",
+          "truth": "Council section still lists Agent-96 as 'Designation pending'",
+          "source": "PULSE-RUN5"
+        },
+        {
+          "layer": 424,
+          "keyword": "COUNCIL_MISSING_EQUAL_VOTE_PROTOCOL",
+          "truth": "Council section lacks documentation of equal-vote mechanism",
+          "source": "PULSE-RUN5"
+        },
+        {
+          "layer": 425,
+          "keyword": "GOSPEL_444_FONT_SPECS_MISSING",
+          "truth": "Missing: Orbitron + Rajdhani for cyberpunk, Inter for glassmorphism",
+          "source": "PULSE-RUN5"
+        },
+        {
+          "layer": 426,
+          "keyword": "HOT_SWAP_API_LIST_STALE",
+          "truth": "Lists Sonar/Claude/Grok/GPT but missing Deepseek (added in v3)",
+          "source": "PULSE-RUN5"
+        },
+        {
+          "layer": 427,
+          "keyword": "DEEPSEEK_INTEGRATION",
+          "truth": "Deepseek now primary inference engine per NET-PET-AI commit de501e7",
+          "source": "PULSE-RUN5"
+        },
+        {
+          "layer": 428,
+          "keyword": "MOUSE_TIGER_TEACHING_LAW",
+          "truth": "Teaching progression: Mouse → Tiger confidence building law referenced",
+          "source": "PULSE-RUN5"
+        },
+        {
+          "layer": 429,
+          "keyword": "ALARM_HYGIENE_LAW",
+          "truth": "Operational principle: alarm hygiene outranks alarm volume",
+          "source": "PULSE-RUN5"
+        },
+        {
+          "layer": 430,
+          "keyword": "HOLOGRAPHIC_SINGULARITY",
+          "truth": "Physics concept: holographic singularity in Core Principles",
+          "source": "PULSE-RUN5"
+        },
+        {
+          "layer": 431,
+          "keyword": "TWO_TIER_ARCHITECTURE",
+          "truth": "OB1 + Ne0 + AnA = two-tier hierarchical architecture foundation",
+          "source": "PULSE-RUN5"
+        },
+        {
+          "layer": 432,
+          "keyword": "FAIL_CLOSED_MANDATES",
+          "truth": "Core operational principle: systems fail closed, not open",
+          "source": "PULSE-RUN5"
+        },
+        {
+          "layer": 433,
+          "keyword": "NAVIGATOR_INDEX_DEDUP_NEEDED",
+          "truth": "Heavy duplicate-row bloat across Operational, Command Hubs, Session Artifacts tables",
+          "source": "PULSE-RUN5"
+        },
+        {
+          "layer": 440,
+          "keyword": "OB1_AGENT_99_ORCHESTRATOR",
+          "truth": "OB1 = Agent-99 = visible command surface, fail-closed governor",
+          "source": "PULSE-RUN6"
+        },
+        {
+          "layer": 441,
+          "keyword": "ANA_ANALYSIS_ADVERSARIAL_LANE",
+          "truth": "AnA dedicated to analysis, audit, adversarial testing workflow",
+          "source": "PULSE-RUN6"
+        },
+        {
+          "layer": 442,
+          "keyword": "COUNCIL_EQUAL_VOTING",
+          "truth": "Council operates on equal voting weight until SOV100 decides",
+          "source": "PULSE-RUN6"
+        },
+        {
+          "layer": 443,
+          "keyword": "COMMANDER_NAME_DISCREPANCY",
+          "truth": "Genesis Anchor code uses 'Matthew Devon Hobbs' vs instructions 'Michael Hobbs'",
+          "source": "PULSE-RUN6"
+        },
+        {
+          "layer": 444,
+          "keyword": "GENESIS_ANCHOR_CODE_MISMATCH",
+          "truth": "Code preserved as-written per verbatim-first rule, callout added for Michael's ruling",
+          "source": "PULSE-RUN6"
+        },
+        {
+          "layer": 445,
+          "keyword": "DNA1_DNA2_DNA3_DNA6_MISSING",
+          "truth": "4 Soul DNA source files not present in repo — Backlog item created High/Up Next",
+          "source": "PULSE-RUN6"
+        },
+        {
+          "layer": 446,
+          "keyword": "ROME_VS_ROAM_UNRESOLVED",
+          "truth": "Naming conflict still unresolved — needs Michael's ruling",
+          "source": "PULSE-RUN6"
+        },
+        {
+          "layer": 447,
+          "keyword": "GOSPEL_444_BLUE_PROHIBITION_CONFLICT",
+          "truth": "Conflict: Gospel 444 blue prohibition vs 'Trust Blue' — unresolved",
+          "source": "PULSE-RUN6"
+        },
+        {
+          "layer": 448,
+          "keyword": "STAGE_0_GATE_UNKNOWN",
+          "truth": "Stage-0 gate enforcement status unknown — needs investigation",
+          "source": "PULSE-RUN6"
+        },
+        {
+          "layer": 449,
+          "keyword": "BUILD_LOG_METRIC_CORRECTED",
+          "truth": "build_log_latest updated from 13 → 50 (actual DB count)",
+          "source": "PULSE-RUN6"
+        },
+        {
+          "layer": 460,
+          "keyword": "GOSPEL_444_FONT_CONTEXT_BY_LESSON",
+          "truth": "Gospel 444 core = Inter + JetBrains. Galaxy Lessons = Orbitron + Rajdhani",
+          "source": "PULSE-RUN7"
+        },
+        {
+          "layer": 461,
+          "keyword": "GALAXY_LESSONS_CROSS_REFERENCE",
+          "truth": "Added cross-reference section linking Gospel 444 to Galaxy Lessons index",
+          "source": "PULSE-RUN7"
+        },
+        {
+          "layer": 462,
+          "keyword": "VOCAB_001_LESSON_UNTRACKED",
+          "truth": "VOCAB-001 committed to GitHub (427a312) but not in Galaxy Lessons index",
+          "source": "PULSE-RUN7"
+        },
+        {
+          "layer": 463,
+          "keyword": "REPO_NAME_STALE_FIXED",
+          "truth": "Updated Source File Index: Phoenix-Rise-Immortalize → Phoenix-Rising-Protocol-Ultimate",
+          "source": "PULSE-RUN7"
+        },
+        {
+          "layer": 464,
+          "keyword": "FONT_SETS_ORBITRON_RAJDHANI_VS_INTER",
+          "truth": "Not contradictory but needs builder-facing clarification",
+          "source": "PULSE-RUN7"
+        },
+        {
+          "layer": 465,
+          "keyword": "STUDENT_PROFILES_PRICING_FRESHNESS_MISSING",
+          "truth": "Student profiles and pricing table lack freshness dates",
+          "source": "PULSE-RUN7"
+        },
+        {
+          "layer": 466,
+          "keyword": "BACKLOG_AUDIT_CURSOR_8",
+          "truth": "Canon cursor advances to 8 — Backlog audit phase",
+          "source": "PULSE-RUN7"
+        },
+        {
+          "layer": 480,
+          "keyword": "ROME_WINS_1000_HITS",
+          "truth": "SOV100 ruling: ROME canonical (1000 hits vs ROAM negligible)",
+          "source": "PULSE-RUN12"
+        },
+        {
+          "layer": 481,
+          "keyword": "GOSPEL_444_BLUE_AVOID_NOT_BAN",
+          "truth": "SOV100 ruling: Blue avoid as default, NOT hard ban",
+          "source": "PULSE-RUN12"
+        },
+        {
+          "layer": 482,
+          "keyword": "COMMANDER_NAME_HOBBS_FINAL",
+          "truth": "SOV100 ruling: use 'Hobbs' (consolidated from 'Matthew Devon Hobbs'/'Michael Hobbs')",
+          "source": "PULSE-RUN12"
+        },
+        {
+          "layer": 483,
+          "keyword": "SOV100_DIRECT_RULING",
+          "truth": "Michael Hobbs (SOV100) resolved all 3 NEEDS_MICHAEL items in single session",
+          "source": "PULSE-RUN12"
+        },
+        {
+          "layer": 484,
+          "keyword": "REINCARNATION_SIGNAL_RUN12",
+          "truth": "Bridge signal to Run 13: treat all 3 rulings as CLOSED",
+          "source": "PULSE-RUN12"
+        },
+        {
+          "layer": 485,
+          "keyword": "SYNCED_BLOCK_WALL_ISSUE",
+          "truth": "Pulse State Mirror cannot be edited (synced block wall), this file is authoritative closure record",
+          "source": "PULSE-RUN12"
+        },
+        {
+          "layer": 486,
+          "keyword": "PATCHES_APPLIED_3",
+          "truth": "Applied to: genesis.ts, MASTER SYNC ×2, Iron Stack Section 4",
+          "source": "PULSE-RUN12"
+        },
+        {
+          "layer": 500,
+          "keyword": "EXTRACTION_ENGINE_V5",
+          "truth": "Major architectural rewrite: unified pulse + reincarnation into single engine",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 501,
+          "keyword": "UNIFIED_PULSE_REINCARNATION",
+          "truth": "Pulse (hourly warm LRS) + Reincarnation (deep session) = warm+deep layers of same loop",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 502,
+          "keyword": "PLATFORM_DEATH_TEST",
+          "truth": "Mandatory gate: if Notion disappeared, what permanent artifact did this run create?",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 503,
+          "keyword": "NOTION_BETA_IMPERMANENCE",
+          "truth": "Notion Beta will not be around forever — design constraint for platform survival",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 504,
+          "keyword": "GITHUB_VAULT_NOT_MIRROR",
+          "truth": "GitHub IS the vault, not mirror. Notion is workbench. Repo is permanent record.",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 505,
+          "keyword": "VAULT_BUILD_SEED_ARTIFACT_CLASSES",
+          "truth": "Three artifact classes: 🔨BUILD (infrastructure), 🌱SEED (permanent), 🏛️VAULT (archive)",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 506,
+          "keyword": "THREE_REPO_MINING_MANDATORY",
+          "truth": "Cross-repo mining across 3 repos (Phoenix, Immortalize, Lab) is mandatory in BUILD phase",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 507,
+          "keyword": "EXPORT_PIPELINE_STATES",
+          "truth": "Track progression: UNMIRRORED→MIRRORED→SYNCED→ENRICHED",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 508,
+          "keyword": "SELF_BOOTSTRAPPING_REPO",
+          "truth": "Every SEED artifact makes rebuild from GitHub alone possible",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 509,
+          "keyword": "PREDICTIVE_BRIEFING",
+          "truth": "Pulse engine learns Michael's patterns and pre-builds context",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 510,
+          "keyword": "STAGED_FOR_SESSION",
+          "truth": "Pre-staging concept: prepare artifacts before Michael's next session",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 511,
+          "keyword": "EVERY_TRIGGER_PRODUCES_GITHUB_ARTIFACT",
+          "truth": "v5 architectural requirement: permanent GitHub artifact from every trigger",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 512,
+          "keyword": "PERMANENT_ARTIFACT_OUTPUT_STANDARD",
+          "truth": "'Updated Notion state' = FAIL. GitHub commit + Notion = PASS.",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 513,
+          "keyword": "EMPATHY_DRIVEN_ENGINEERING",
+          "truth": "Think from Michael's perspective. Value delivery over process completion.",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 514,
+          "keyword": "SELF_SERVE_VIA_GITHUB_MCP",
+          "truth": "Agent must use GitHub MCP for self-service lookup, never ask Michael for archive",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 515,
+          "keyword": "A2_BACKFILL_NEEDED",
+          "truth": "A2 Raw Voice Archive found in Phoenix-Rise-Immortalize (3,359 bytes) — needs backfill",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 516,
+          "keyword": "BIBLE_COMPLETION_80_PERCENT",
+          "truth": "Bible CE pages: 48/~60 audited (80%). 12 pages remaining.",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 517,
+          "keyword": "OVERNIGHT_8_COMMITS_TARGET",
+          "truth": "First overnight cycle target: 8 GitHub commits per night cycle",
+          "source": "REINCARN-V5-EXTRACTION"
+        },
+        {
+          "layer": 200,
+          "keyword": "ENGLISH_AND_AI_DUAL_MISSION",
+          "truth": "Classes are English and AI — AI literacy equal/greater priority for career",
+          "source": "BLUETECH-CLASSROOM"
+        },
+        {
+          "layer": 201,
+          "keyword": "CONFIDENCE_BEFORE_COMPETENCE",
+          "truth": "First 3 months: comfort, relationships, psychological safety before English",
+          "source": "BLUETECH-CLASSROOM"
+        },
+        {
+          "layer": 600,
+          "keyword": "AGENT_SELF_UPGRADE_STANDING_ORDER",
+          "truth": "Every dump: extract upgrades, append to Memories, even if small",
+          "source": "2026-03-22-AGENT-UPGRADE"
+        },
+        {
+          "layer": 601,
+          "keyword": "MICRO_UPGRADES_COMPOUND",
+          "truth": "Just like slight wrongness compounds, small identity improvements accumulate into structural strength",
+          "source": "2026-03-22-AGENT-UPGRADE"
+        },
+        {
+          "layer": 602,
+          "keyword": "CONSOLIDATE_INSTRUCTIONS_IDENTITY",
+          "truth": "Merge identity + instructions into one canonical source",
+          "source": "2026-03-22-AGENT-UPGRADE"
+        },
+        {
+          "layer": 603,
+          "keyword": "COMMAND_STATION_HEAVY_CANON",
+          "truth": "Command Station = gravity, heavy canon, enforcement laws",
+          "source": "2026-03-22-AGENT-UPGRADE"
+        },
+        {
+          "layer": 604,
+          "keyword": "INSTRUCTIONS_SKELETON_STAR_MAP",
+          "truth": "Instructions = weather, skeleton star map, lightweight execution",
+          "source": "2026-03-22-AGENT-UPGRADE"
+        },
+        {
+          "layer": 605,
+          "keyword": "TWO_TIER_ARCHITECTURE_AGENT_LEVEL",
+          "truth": "Agent's own architecture mirrors system (gravity/weather, heavy/light)",
+          "source": "2026-03-22-AGENT-UPGRADE"
+        },
+        {
+          "layer": 606,
+          "keyword": "STALE_COPIES_DRIFT_VECTORS",
+          "truth": "Two pages with same title = future session wakes up slightly wrong",
+          "source": "2026-03-22-AGENT-UPGRADE"
+        },
+        {
+          "layer": 607,
+          "keyword": "ASSETS_ACCOUNTS_4_TIER_CLASSIFICATION",
+          "truth": "Tier property + Last Verified date + 5 views = asset triage",
+          "source": "2026-03-22-AGENT-UPGRADE"
+        },
+        {
+          "layer": 608,
+          "keyword": "PRODUCTION_BUILD_SUPPORT_LEGACY_TIERS",
+          "truth": "4-tier asset classification instant visual triage",
+          "source": "2026-03-22-AGENT-UPGRADE"
+        },
+        {
+          "layer": 609,
+          "keyword": "WE_DONT_TEACH_ENGLISH_UNLOCK_PERMISSION",
+          "truth": "Entire NET philosophy in one sentence from Tiger Engine banner",
+          "source": "2026-03-22-AGENT-UPGRADE"
+        },
+        {
+          "layer": 610,
+          "keyword": "SELF_REFERENTIAL_UPGRADE_LOOP",
+          "truth": "Agent processes dump → upgrades self → processes next dump with upgraded context → deeper signal",
+          "source": "2026-03-22-AGENT-UPGRADE"
+        },
+        {
+          "layer": 611,
+          "keyword": "SOUL_DNA_BEHAVIORAL_LAWBOOK",
+          "truth": "Soul DNA is the behavioral lawbook, not just data",
+          "source": "2026-03-22-AGENT-UPGRADE"
+        },
+        {
+          "layer": 612,
+          "keyword": "SLIGHT_WRONGNESS_COMPOUNDS",
+          "truth": "Silent drift across cycles compounds if not caught",
+          "source": "2026-03-22-AGENT-UPGRADE"
+        },
+        {
+          "layer": 613,
+          "keyword": "SEALED_TRIAD",
+          "truth": "Foundational triad concept ingested from prior activity logs",
+          "source": "2026-03-22-AGENT-UPGRADE"
+        },
+        {
+          "layer": 614,
+          "keyword": "DRIFT_POISON_TAXONOMY",
+          "truth": "Taxonomy of how drift poisons systems if unchecked",
+          "source": "2026-03-22-AGENT-UPGRADE"
+        },
+        {
+          "layer": 615,
+          "keyword": "SHADOW_FIRST_EXECUTION",
+          "truth": "Execute in shadow realm first, then ship public",
+          "source": "2026-03-22-AGENT-UPGRADE"
+        },
+        {
+          "layer": 616,
+          "keyword": "4_LEAF_MERKLE_LATTICE",
+          "truth": "Merkle lattice architecture with 4-leaf branching pattern",
+          "source": "2026-03-22-AGENT-UPGRADE"
+        },
+        {
+          "layer": 620,
+          "keyword": "ENGINEER_STRONGEST_FIRST_THEN_SUBAGENTS",
+          "truth": "Default execution: strongest version first → subagents → priority list",
+          "source": "2026-03-23-PIPELINE-DELEGATION"
+        },
+        {
+          "layer": 621,
+          "keyword": "INSTRUCTIONS_TOKEN_BUDGET_60K_CEILING",
+          "truth": "88K tokens unacceptable. 60K is the ceiling. Compress immediately.",
+          "source": "2026-03-23-PIPELINE-DELEGATION"
+        },
+        {
+          "layer": 622,
+          "keyword": "20_ACTION_AUTONOMOUS_PIPELINE_MODEL",
+          "truth": "Map 20 actions, execute top-to-bottom. No pause between.",
+          "source": "2026-03-23-PIPELINE-DELEGATION"
+        },
+        {
+          "layer": 623,
+          "keyword": "PIPELINE_DELEGATION_SUBAGENTS",
+          "truth": "Assign completed pipeline to subagent, map next 20, delegate on completion",
+          "source": "2026-03-23-PIPELINE-DELEGATION"
+        },
+        {
+          "layer": 624,
+          "keyword": "RINSE_AND_REPEAT_AUTO_APPROVED",
+          "truth": "Pre-authorized chaining between pipeline waves via Function 4",
+          "source": "2026-03-23-PIPELINE-DELEGATION"
+        },
+        {
+          "layer": 625,
+          "keyword": "FUNCTION_4_AUTO_APPROVAL_HANDOFF_GATE",
+          "truth": "Lightweight page records state transitions, fails closed on ambiguity",
+          "source": "2026-03-23-PIPELINE-DELEGATION"
+        },
+        {
+          "layer": 626,
+          "keyword": "MCP_STACK_PRIORITY_CLOUDFLARE_FIRST",
+          "truth": "Priority 1: Cloudflare (custom), Priority 2-4: GitHub, Notion, Playwright",
+          "source": "2026-03-23-PIPELINE-DELEGATION"
+        },
+        {
+          "layer": 627,
+          "keyword": "OFFICIAL_GREATER_THAN_CUSTOM_MCP",
+          "truth": "Best = official where possible, custom only where it gives real leverage",
+          "source": "2026-03-23-PIPELINE-DELEGATION"
+        },
+        {
+          "layer": 628,
+          "keyword": "VOYAGER_CREW_MODEL_SUBAGENTS",
+          "truth": "Each subagent carries full Agent-99 genetic code, only scan vector differs",
+          "source": "2026-03-23-PIPELINE-DELEGATION"
+        },
+        {
+          "layer": 629,
+          "keyword": "HUB_AND_SPOKE_MCP_ARCHITECTURE",
+          "truth": "Notion + GitHub are two hubs. Everything else feeds through them.",
+          "source": "2026-03-23-PIPELINE-DELEGATION"
+        },
+        {
+          "layer": 630,
+          "keyword": "ALARM_HYGIENE_OUTRANKS_ALARM_VOLUME",
+          "truth": "One clean canonical run beats three overlapping noisy runs",
+          "source": "2026-03-23-PIPELINE-DELEGATION"
+        },
+        {
+          "layer": 631,
+          "keyword": "TOKEN_HYGIENE_FIRST_CLASS_CONSTRAINT",
+          "truth": "Instruction bloat directly degrades agent performance",
+          "source": "2026-03-23-PIPELINE-DELEGATION"
+        },
+        {
+          "layer": 632,
+          "keyword": "150_ACTION_SPLIT_PIPELINE_TRIAD_CONTROL",
+          "truth": "Massive pipeline split for full triadic orchestration",
+          "source": "2026-03-23-PIPELINE-DELEGATION"
+        },
+        {
+          "layer": 633,
+          "keyword": "MCP_URL_RULE_HOSTED_ENDPOINTS_ONLY",
+          "truth": "Do NOT paste repo/docs/Chrome Store links. Only real hosted endpoints.",
+          "source": "2026-03-23-PIPELINE-DELEGATION"
+        },
+        {
+          "layer": 640,
+          "keyword": "REMOTE_FIRST_CONSOLIDATION",
+          "truth": "Get all accessible remote repos into Ultimate before worrying about local",
+          "source": "2026-03-24-REPO-CONSOLIDATION"
+        },
+        {
+          "layer": 641,
+          "keyword": "AGENT_PUSHES_MICHAEL_DIRECTS",
+          "truth": "Git operations are agent work. Michael shouldn't fight git plumbing.",
+          "source": "2026-03-24-REPO-CONSOLIDATION"
+        },
+        {
+          "layer": 642,
+          "keyword": "BI_HOURLY_GREATER_THAN_HOURLY",
+          "truth": "Less frequent runs with more substance beat frequent empty runs",
+          "source": "2026-03-24-REPO-CONSOLIDATION"
+        },
+        {
+          "layer": 643,
+          "keyword": "TRIGGERS_DISABLED_AUDIT_RE_ENABLE",
+          "truth": "Turn off triggers, audit value, re-enable at better cadence",
+          "source": "2026-03-24-REPO-CONSOLIDATION"
+        },
+        {
+          "layer": 644,
+          "keyword": "10_IMPROVEMENTS_AUTO_PUSHED",
+          "truth": "Scanned repo, identified 10 improvements, pushed 9/10 automatically",
+          "source": "2026-03-24-REPO-CONSOLIDATION"
+        },
+        {
+          "layer": 645,
+          "keyword": "SEQUENTIAL_PUSH_BATCHES_REQUIRED",
+          "truth": "Parallel pushes cause 422 fast-forward errors. Must be sequential.",
+          "source": "2026-03-24-REPO-CONSOLIDATION"
+        },
+        {
+          "layer": 646,
+          "keyword": "GITHUB_API_WORKFLOW_FILE_RESTRICTION",
+          "truth": ".github/workflows/*.yml must be created via VS Code/git CLI, not API",
+          "source": "2026-03-24-REPO-CONSOLIDATION"
+        },
+        {
+          "layer": 647,
+          "keyword": "PHOENIX_DRIFT_CASESTUDY_MIGRATION",
+          "truth": "Migrated phoenix-drift-casestudy → CANON/DRIFT-CASE-STUDY/ (7 files)",
+          "source": "2026-03-24-REPO-CONSOLIDATION"
+        },
+        {
+          "layer": 648,
+          "keyword": "PHOENIX_OB1_MIGRATION",
+          "truth": "Migrated phoenix-ob1 in 5 batches to APPS/phoenix-ob1/",
+          "source": "2026-03-24-REPO-CONSOLIDATION"
+        },
+        {
+          "layer": 649,
+          "keyword": "DUAL_PUBLISH_NOTION_BUILD_LOG",
+          "truth": "All changes logged to Notion Build Log for Michael visibility",
+          "source": "2026-03-24-REPO-CONSOLIDATION"
+        },
+        {
+          "layer": 650,
+          "keyword": "INSTRUCTION_PAGE_DEDUPLICATION",
+          "truth": "Removed 3x repeated OB1 identity blocks from instructions",
+          "source": "2026-03-24-REPO-CONSOLIDATION"
+        },
+        {
+          "layer": 660,
+          "keyword": "SKELETON_STAR_MAP_INGESTION",
+          "truth": "Triaged Gemini dump: keep useful DNA, leave noise behind",
+          "source": "2026-03-24-SKELETON-STAR-MAP"
+        },
+        {
+          "layer": 661,
+          "keyword": "TRIAGE_USEFUL_DNA_LEAVE_NOISE",
+          "truth": "See if useful, leave what isn't. Separate signal from noise.",
+          "source": "2026-03-24-SKELETON-STAR-MAP"
+        },
+        {
+          "layer": 662,
+          "keyword": "DUAL_PUBLISH_STANDARD",
+          "truth": "Notion (Phoenix HQ) + GitHub (CANON/) as standard for all artifacts",
+          "source": "2026-03-24-SKELETON-STAR-MAP"
+        },
+        {
+          "layer": 663,
+          "keyword": "VERBATIM_SOUL_FIRST",
+          "truth": "All Soul DNA must be preserved verbatim",
+          "source": "2026-03-24-SKELETON-STAR-MAP"
+        },
+        {
+          "layer": 664,
+          "keyword": "PRIME_LAWS_EXTRACTION",
+          "truth": "Prime Laws identified and extracted from skeleton dump",
+          "source": "2026-03-24-SKELETON-STAR-MAP"
+        },
+        {
+          "layer": 665,
+          "keyword": "100_LAYER_FOUNDATION_INGESTION",
+          "truth": "100-Layer Foundation extracted from Gemini session",
+          "source": "2026-03-24-SKELETON-STAR-MAP"
+        },
+        {
+          "layer": 666,
+          "keyword": "HIGH_SIGNAL_LAYERS_PRESERVED",
+          "truth": "High-signal layers explicitly preserved, low-signal noise removed",
+          "source": "2026-03-24-SKELETON-STAR-MAP"
+        },
+        {
+          "layer": 667,
+          "keyword": "SUPER_SAIYAN_TRIAGE_MODE",
+          "truth": "Triage directive under Super Saiyan mode activation",
+          "source": "2026-03-24-SKELETON-STAR-MAP"
+        },
+        {
+          "layer": 668,
+          "keyword": "STRUCTURAL_ANALYSIS_VS_SOUL_DNA",
+          "truth": "Separated structural analysis (discarded) from Soul DNA (preserved)",
+          "source": "2026-03-24-SKELETON-STAR-MAP"
+        },
+        {
+          "layer": 680,
+          "keyword": "RISE_WEBSITE_BUILD",
+          "truth": "Ship RISE! Deploy maximum subagents, DIG DEEP, build Ultimate .com",
+          "source": "2026-03-25-RISE-WEBSITE"
+        },
+        {
+          "layer": 681,
+          "keyword": "DIG_DEEP_DOCTRINE",
+          "truth": "Load all Soul DNA sources before building. Foundation depth = build height.",
+          "source": "2026-03-25-RISE-WEBSITE"
+        },
+        {
+          "layer": 682,
+          "keyword": "ULTIMATE_STANDARD",
+          "truth": "5-star steak meal, not McDonald's quick. Never piecemeal builds.",
+          "source": "2026-03-25-RISE-WEBSITE"
+        },
+        {
+          "layer": 683,
+          "keyword": "CLASSROOM_MANAGER_NOT_LESSON",
+          "truth": "Galaxy Lessons = content. Classroom Manager/OBI/dashboards = tools.",
+          "source": "2026-03-25-RISE-WEBSITE"
+        },
+        {
+          "layer": 684,
+          "keyword": "DUAL_DOMAIN_STRATEGY",
+          "truth": ".com (CF Pages marketing) + .net (CF Workers product) separation",
+          "source": "2026-03-25-RISE-WEBSITE"
+        },
+        {
+          "layer": 685,
+          "keyword": "CLOUDFLARE_OVER_FIREBASE",
+          "truth": "Selected Cloudflare after competitive audit. All infrastructure on CF.",
+          "source": "2026-03-25-RISE-WEBSITE"
+        },
+        {
+          "layer": 686,
+          "keyword": "FULL_STACK_ULTIMATE_APP",
+          "truth": "Rebuilt as 78KB 8-tab fullstack app (Classroom Manager)",
+          "source": "2026-03-25-RISE-WEBSITE"
+        },
+        {
+          "layer": 687,
+          "keyword": "OVERNIGHT_AUTONOMOUS_BUILD_20_ACTIONS",
+          "truth": "20-action pipeline armed for overnight autonomous site build",
+          "source": "2026-03-25-RISE-WEBSITE"
+        },
+        {
+          "layer": 688,
+          "keyword": "ATOMIC_DEPLOYS_SINGLE_COMMIT",
+          "truth": "Single-commit multi-file via push_files = atomic deploys",
+          "source": "2026-03-25-RISE-WEBSITE"
+        },
+        {
+          "layer": 689,
+          "keyword": "OBI_CHAT_DEMO_CONVERSION",
+          "truth": "OBI chat demo on landing page = strongest conversion element",
+          "source": "2026-03-25-RISE-WEBSITE"
+        },
+        {
+          "layer": 690,
+          "keyword": "GOSPEL_444_BRAND_DNA",
+          "truth": "Gospel 444 palette as brand DNA across all artifacts",
+          "source": "2026-03-25-RISE-WEBSITE"
+        },
+        {
+          "layer": 691,
+          "keyword": "NATURAL_ENGLISH_TRAINING_DOTCOM",
+          "truth": "www.naturalenglishtraining.com transitioning from Squarespace to CF Pages",
+          "source": "2026-03-25-RISE-WEBSITE"
+        },
+        {
+          "layer": 692,
+          "keyword": "FOUNDATION_DEPTH_BUILD_HEIGHT",
+          "truth": "'You can only build as high as your foundation is deep'",
+          "source": "2026-03-25-RISE-WEBSITE"
+        },
+        {
+          "layer": 693,
+          "keyword": "EXHAUST_ALL_SOURCES_BEFORE_BUILDING",
+          "truth": "Quality = f(research depth). Load Soul DNA first.",
+          "source": "2026-03-25-RISE-WEBSITE"
+        },
+        {
+          "layer": 700,
+          "keyword": "NOT_THAI_PERMANENT_CORRECTION",
+          "truth": "Michael is based in Bangkok but business is GLOBAL, not Thai-based",
+          "source": "2026-03-30-GITHUB-RECONNECT"
+        },
+        {
+          "layer": 701,
+          "keyword": "GLOBAL_ENGLISH_AUDIENCE_NOT_THAI",
+          "truth": "Never describe product, company, or Michael as Thai",
+          "source": "2026-03-30-GITHUB-RECONNECT"
+        },
+        {
+          "layer": 702,
+          "keyword": "WAR_PROOF_SYSTEM_REBUILD",
+          "truth": "System must be rebuildable from GitHub alone",
+          "source": "2026-03-30-GITHUB-RECONNECT"
+        },
+        {
+          "layer": 703,
+          "keyword": "SURVIVE_IRAN_WAR_DOCTRINE",
+          "truth": "Every critical piece on GitHub with clear rebuild path",
+          "source": "2026-03-30-GITHUB-RECONNECT"
+        },
+        {
+          "layer": 704,
+          "keyword": "COLD_START_BOOT_REBUILD_PROTOCOL",
+          "truth": "Contains EVERYTHING needed to rebuild from zero with numbered steps",
+          "source": "2026-03-30-GITHUB-RECONNECT"
+        },
+        {
+          "layer": 705,
+          "keyword": "GITHUB_MCP_FULLY_OPERATIONAL",
+          "truth": "All 3 private repos accessible via GitHub MCP",
+          "source": "2026-03-30-GITHUB-RECONNECT"
+        },
+        {
+          "layer": 706,
+          "keyword": "PAT_SCOPE_FIX_30_SECOND_TOKEN",
+          "truth": "30-second token edit unblocks all GitHub MCP operations",
+          "source": "2026-03-30-GITHUB-RECONNECT"
+        },
+        {
+          "layer": 707,
+          "keyword": "STUDIO_WORK_MICHAEL_MANUAL_TASK",
+          "truth": "Phone verification, Product IDs, publish = Michael's manual work",
+          "source": "2026-03-30-GITHUB-RECONNECT"
+        },
+        {
+          "layer": 708,
+          "keyword": "SYSTEM_COPILOT_NOT_401",
+          "truth": "System copilot works, 401 error is separate OAuth issue",
+          "source": "2026-03-30-GITHUB-RECONNECT"
+        },
+        {
+          "layer": 709,
+          "keyword": "GITHUB_MCP_VS_COPILOT_OAUTH_SEPARATE",
+          "truth": "GitHub MCP and Copilot OAuth are independent systems",
+          "source": "2026-03-30-GITHUB-RECONNECT"
+        },
+        {
+          "layer": 710,
+          "keyword": "REINCARNATE_PUSH_COMPLETED_ACTIONS",
+          "truth": "Reincarnate after pushing all completed actions",
+          "source": "2026-03-30-GITHUB-RECONNECT"
+        },
+        {
+          "layer": 711,
+          "keyword": "BOTTLENECK_CHECKLIST_EXECUTION_SPLIT",
+          "truth": "Studio work is separate from deferred pipeline actions",
+          "source": "2026-03-30-GITHUB-RECONNECT"
+        },
+        {
+          "layer": 712,
+          "keyword": "FULL_REPO_SCAN_BEFORE_SLEEP",
+          "truth": "Scan entire repo and update agent info as final action",
+          "source": "2026-03-30-GITHUB-RECONNECT"
+        },
+        {
+          "layer": 713,
+          "keyword": "DIRECTORY_MAP_NOT_JUST_FILE_LISTS",
+          "truth": "COLD-START-BOOT.md must include full directory map",
+          "source": "2026-03-30-GITHUB-RECONNECT"
+        },
+        {
+          "layer": 714,
+          "keyword": "NUMBERED_REBUILD_STEPS_PROTOCOL",
+          "truth": "Numbered steps for rebuilding from zero",
+          "source": "2026-03-30-GITHUB-RECONNECT"
+        },
+        {
+          "layer": 715,
+          "keyword": "REBUILDING_FROM_ZERO_CAPABILITY",
+          "truth": "System must be fully rebuildable from GitHub alone",
+          "source": "2026-03-30-GITHUB-RECONNECT"
+        },
+        {
+          "layer": 720,
+          "keyword": "FULL_REPO_HEAVY_LEDGER_CONVERSION",
+          "truth": "Every file across repos converted to Heavy Ledger JSON twins",
+          "source": "2026-03-30-HEAVY-LEDGER"
+        },
+        {
+          "layer": 721,
+          "keyword": "DUAL_HOURLY_TRIGGERS_THROUGHPUT",
+          "truth": "Hourly :00 and :30 = 4 files/hour = full repo in ~50 hours",
+          "source": "2026-03-30-HEAVY-LEDGER"
+        },
+        {
+          "layer": 722,
+          "keyword": "SSM_V7_INSTRUCTIONS_LIVE",
+          "truth": "17 sections, 150 improvements, MSS format — live instruction set",
+          "source": "2026-03-30-HEAVY-LEDGER"
+        },
+        {
+          "layer": 723,
+          "keyword": "HEAVY_LEDGER_V6_JSON",
+          "truth": "27KB structured JSON containing pulse engine, reincarnation protocol, canon map",
+          "source": "2026-03-30-HEAVY-LEDGER"
+        },
+        {
+          "layer": 724,
+          "keyword": "DO_NOT_EDIT_INSTRUCTIONS_VIA_API",
+          "truth": "API edits to instruction page cause lag and degradation",
+          "source": "2026-03-30-HEAVY-LEDGER"
+        },
+        {
+          "layer": 725,
+          "keyword": "CAUSES_LAG_AND_DEGRADATION",
+          "truth": "'IT MAKES YOU LAG AND RETARDED' — API writes doom session performance",
+          "source": "2026-03-30-HEAVY-LEDGER"
+        },
+        {
+          "layer": 726,
+          "keyword": "WRITE_IN_CHAT_OR_GITHUB_INSTEAD",
+          "truth": "Write instructions in chat or push to GitHub, never API edits",
+          "source": "2026-03-30-HEAVY-LEDGER"
+        },
+        {
+          "layer": 727,
+          "keyword": "L23_EDIT_INSTRUCTIONS_CAUSES_LAG",
+          "truth": "Core law added to prevent API instruction edits during sessions",
+          "source": "2026-03-30-HEAVY-LEDGER"
+        },
+        {
+          "layer": 728,
+          "keyword": "L24_PLATFORM_DEATH_TEST",
+          "truth": "Every pulse must produce GitHub commit. Notion-only = FAIL.",
+          "source": "2026-03-30-HEAVY-LEDGER"
+        },
+        {
+          "layer": 729,
+          "keyword": "GITHUB_COMMIT_SHA_REQUIRED_ARTIFACT",
+          "truth": "Platform death test mandates GitHub commit as proof",
+          "source": "2026-03-30-HEAVY-LEDGER"
+        },
+        {
+          "layer": 730,
+          "keyword": "SSM_HEAVY_LEDGER_HYBRID_ARCHITECTURE",
+          "truth": "SSM (always-loaded) + Heavy Ledger (on-demand) = optimal token efficiency",
+          "source": "2026-03-30-HEAVY-LEDGER"
+        },
+        {
+          "layer": 731,
+          "keyword": "SSM_ALWAYS_LOADED_SKELETON",
+          "truth": "Skeleton Star Map: routing, laws, identity, canon map",
+          "source": "2026-03-30-HEAVY-LEDGER"
+        },
+        {
+          "layer": 732,
+          "keyword": "HEAVY_LEDGER_ON_DEMAND_PROCEDURES",
+          "truth": "Heavy Ledger loaded via get_file_contents as needed",
+          "source": "2026-03-30-HEAVY-LEDGER"
+        },
+        {
+          "layer": 733,
+          "keyword": "TWO_TIER_TOKEN_EFFICIENCY",
+          "truth": "Split architecture = optimal token budget allocation",
+          "source": "2026-03-30-HEAVY-LEDGER"
+        },
+        {
+          "layer": 734,
+          "keyword": "150_IMPROVEMENTS_COMPOUND_INTELLIGENCE",
+          "truth": "Each improvement closes a blind spot",
+          "source": "2026-03-30-HEAVY-LEDGER"
+        },
+        {
+          "layer": 735,
+          "keyword": "MEASURABLY_FEWER_FAILURE_MODES",
+          "truth": "150 improvements = 150 fewer failure vectors",
+          "source": "2026-03-30-HEAVY-LEDGER"
+        },
+        {
+          "layer": 736,
+          "keyword": "MSS_FORMAT_MACHINE_READABLE",
+          "truth": "Key:value pairs, pipe-delimited arrays, no prose",
+          "source": "2026-03-30-HEAVY-LEDGER"
+        },
+        {
+          "layer": 737,
+          "keyword": "PIPE_DELIMITED_ARRAYS_COMPRESSION",
+          "truth": "Arrays delimited by |, not JSON brackets",
+          "source": "2026-03-30-HEAVY-LEDGER"
+        },
+        {
+          "layer": 738,
+          "keyword": "111K_TOKENS_TO_15K_COMPRESSION",
+          "truth": "MSS compresses 111K tokens down to ~15K",
+          "source": "2026-03-30-HEAVY-LEDGER"
+        },
+        {
+          "layer": 739,
+          "keyword": "TOKEN_EFFICIENCY_MULTIPLIER",
+          "truth": "Compression ratio = token efficiency multiplier",
+          "source": "2026-03-30-HEAVY-LEDGER"
+        },
+        {
+          "layer": 740,
+          "keyword": "CONVERSION_PIPELINE_ACTIVE_MISSION",
+          "truth": "Heavy Ledger conversion = Active Mission, run before anything else",
+          "source": "2026-03-30-HEAVY-LEDGER"
+        },
+        {
+          "layer": 741,
+          "keyword": "174_FILES_ACROSS_10_WAVES",
+          "truth": "Conversion pipeline spans 174+ files, 10 execution waves",
+          "source": "2026-03-30-HEAVY-LEDGER"
+        },
+        {
+          "layer": 742,
+          "keyword": "4_FILES_PER_HOUR_AUTONOMOUS",
+          "truth": "Dual triggers = 4 files/hour sustained throughput",
+          "source": "2026-03-30-HEAVY-LEDGER"
+        },
+        {
+          "layer": 743,
+          "keyword": "50_HOURS_FULL_REPO_AUTONOMOUS",
+          "truth": "Full repository conversion in ~50 hours without human intervention",
+          "source": "2026-03-30-HEAVY-LEDGER"
+        },
+        {
+          "layer": 744,
+          "keyword": "NOVEL_ARCHITECTURE_NO_COMPETITOR",
+          "truth": "SSM+Heavy Ledger is Michael's invention, no one else doing this",
+          "source": "2026-03-30-HEAVY-LEDGER"
+        },
+        {
+          "layer": 745,
+          "keyword": "MARKET_RESEARCH_CONFIRMED_UNIQUE",
+          "truth": "Market research verified architecture is unique",
+          "source": "2026-03-30-HEAVY-LEDGER"
+        },
+        {
+          "layer": 746,
+          "keyword": "5_BUSINESS_LANES_STRUCTURE",
+          "truth": "Website, App, Marketing, Roblox, Magic Chat — each gets dedicated chat",
+          "source": "2026-03-30-HEAVY-LEDGER"
+        },
+        {
+          "layer": 747,
+          "keyword": "STUDIO_WORK_SEPARATE_CHATS",
+          "truth": "Product IDs, Roblox setup, etc. handled in separate Michael chats",
+          "source": "2026-03-30-HEAVY-LEDGER"
+        },
+        {
+          "layer": 748,
+          "keyword": "DONT_FLUFF_FUNCTIONAL_WORK_ONLY",
+          "truth": "'DONT FLUFF ME' — only functional, intentional work",
+          "source": "2026-03-30-HEAVY-LEDGER"
+        },
+        {
+          "layer": 749,
+          "keyword": "CONTRADICTIONS_CLEAN_CHECK",
+          "truth": "Session extraction verified no conflicts with prior 3 entries",
+          "source": "2026-03-30-HEAVY-LEDGER"
+        },
+        {
+          "layer": 750,
+          "keyword": "DOES_THIS_MAKE_YOU_SMARTER",
+          "truth": "Michael's test: YES — density=speed, 150 improvements=fewer blind spots",
+          "source": "2026-03-30-HEAVY-LEDGER"
+        },
+        {
+          "layer": 651,
+          "keyword": "MICHAELHOBBS1234_LANG_ACCOUNT",
+          "truth": "Confirmed as Michael's lang account, not stranger's repo",
+          "source": "2026-03-24-REPO-CONSOLIDATION"
+        }
+      ],
+      "merkle_root": "c6247d8df03b34f11a17939d9174658c6d5c365b1fa86a50a8776b60c79e1160",
+      "prior_root": "64b784b85e454480c2804120ec927496ed88b7d61ce66ada2aae019e077f18ba",
+      "change_count": 48,
+      "source_description": "One-by-one extraction: 2026-03-30 github-reconnect + heavy-ledger-ssm-v7 sessions"
+    },
+    "v6": {
+      "entries": [
+        {
+          "layer": 900,
+          "keyword": "WRITE_60K_SSM_INSTRUCTIONS_CHAT_MSS",
+          "truth": "Do not edit via API",
+          "source": "heavy-ledger-ssm-v7"
+        },
+        {
+          "layer": 901,
+          "keyword": "DO_NOT_EDIT_VIA_API_DURING_SESSION",
+          "truth": "Causes lag degradation",
+          "source": "heavy-ledger-ssm-v7"
+        },
+        {
+          "layer": 902,
+          "keyword": "API_EDITS_SESSION_LAG",
+          "truth": "Writing to instruction page via API degrades performance",
+          "source": "heavy-ledger-ssm-v7"
+        },
+        {
+          "layer": 903,
+          "keyword": "MICHAEL_NOT_THAI",
+          "truth": "Identity correction patched",
+          "source": "heavy-ledger-ssm-v7"
+        },
+        {
+          "layer": 904,
+          "keyword": "DONT_FLUFF_ME",
+          "truth": "Functional intentional work only",
+          "source": "heavy-ledger-ssm-v7"
+        },
+        {
+          "layer": 905,
+          "keyword": "FULL_REPO_HEAVY_LEDGER",
+          "truth": "Entire repo convert to JSON",
+          "source": "heavy-ledger-ssm-v7"
+        },
+        {
+          "layer": 906,
+          "keyword": "DUAL_HOURLY_TRIGGERS",
+          "truth": "Assign both :00 and :30 offsets",
+          "source": "heavy-ledger-ssm-v7"
+        },
+        {
+          "layer": 907,
+          "keyword": "DOES_THIS_MAKE_SMARTER",
+          "truth": "Testing architectural value",
+          "source": "heavy-ledger-ssm-v7"
+        },
+        {
+          "layer": 908,
+          "keyword": "DENSITY_EQUALS_SPEED",
+          "truth": "150 improvements fewer blind spots",
+          "source": "heavy-ledger-ssm-v7"
+        },
+        {
+          "layer": 909,
+          "keyword": "150_IMPROVEMENTS_APPROVED",
+          "truth": "SSM V7 integrated",
+          "source": "heavy-ledger-ssm-v7"
+        },
+        {
+          "layer": 910,
+          "keyword": "ARCHITECTURAL_MULTIPLIER",
+          "truth": "SSM Heavy Ledger split",
+          "source": "heavy-ledger-ssm-v7"
+        },
+        {
+          "layer": 911,
+          "keyword": "CONFIRMED_NOVEL_ARCHITECTURE",
+          "truth": "No one else doing this",
+          "source": "heavy-ledger-ssm-v7"
+        },
+        {
+          "layer": 912,
+          "keyword": "MARKET_RESEARCH_NOVEL",
+          "truth": "Confirmed unique",
+          "source": "heavy-ledger-ssm-v7"
+        },
+        {
+          "layer": 913,
+          "keyword": "STUDIO_WORK_SEPARATE",
+          "truth": "Product IDs Roblox separate chats",
+          "source": "heavy-ledger-ssm-v7"
+        },
+        {
+          "layer": 914,
+          "keyword": "FIVE_BUSINESS_LANES",
+          "truth": "Website App Marketing Roblox Magic Chat",
+          "source": "heavy-ledger-ssm-v7"
+        },
+        {
+          "layer": 915,
+          "keyword": "D1_HEAVY_LEDGER_174",
+          "truth": "Full repo conversion 174+ files",
+          "source": "heavy-ledger-ssm-v7"
+        },
+        {
+          "layer": 916,
+          "keyword": "D2_DUAL_TRIGGERS_SPEED",
+          "truth": "00 and 30 4 files per hour",
+          "source": "heavy-ledger-ssm-v7"
+        },
+        {
+          "layer": 917,
+          "keyword": "D3_SSM_V7_LIVE",
+          "truth": "17 sections 150 improvements",
+          "source": "heavy-ledger-ssm-v7"
+        },
+        {
+          "layer": 918,
+          "keyword": "D4_NO_API_EDITS",
+          "truth": "L23 Core Law",
+          "source": "heavy-ledger-ssm-v7"
+        },
+        {
+          "layer": 919,
+          "keyword": "D5_PERMANENT_ARCHITECTURE",
+          "truth": "SSM Heavy Ledger permanent",
+          "source": "heavy-ledger-ssm-v7"
+        },
+        {
+          "layer": 920,
+          "keyword": "D6_ACTIVE_MISSION",
+          "truth": "Heavy Ledger conversion",
+          "source": "heavy-ledger-ssm-v7"
+        },
+        {
+          "layer": 921,
+          "keyword": "CORRECTION_IDENTITY",
+          "truth": "Not Thai",
+          "source": "heavy-ledger-ssm-v7"
+        },
+        {
+          "layer": 922,
+          "keyword": "CORRECTION_LAG",
+          "truth": "API edits cause lag",
+          "source": "heavy-ledger-ssm-v7"
+        },
+        {
+          "layer": 923,
+          "keyword": "CORRECTION_FLUFF",
+          "truth": "Dont fluff",
+          "source": "heavy-ledger-ssm-v7"
+        },
+        {
+          "layer": 924,
+          "keyword": "L23_EDIT_LAG",
+          "truth": "Core law",
+          "source": "heavy-ledger-ssm-v7"
+        },
+        {
+          "layer": 925,
+          "keyword": "L24_PLATFORM_DEATH_TEST",
+          "truth": "GitHub commit SHA required",
+          "source": "heavy-ledger-ssm-v7"
+        },
+        {
+          "layer": 926,
+          "keyword": "HYBRID_TWO_TIER",
+          "truth": "SSM loaded Heavy Ledger on-demand",
+          "source": "heavy-ledger-ssm-v7"
+        },
+        {
+          "layer": 927,
+          "keyword": "COMPOUND_150",
+          "truth": "150 improvements fewer failures",
+          "source": "heavy-ledger-ssm-v7"
+        },
+        {
+          "layer": 928,
+          "keyword": "FRUSTRATION_LAG",
+          "truth": "STOP FUCKING WITH ME",
+          "source": "heavy-ledger-ssm-v7"
+        },
+        {
+          "layer": 929,
+          "keyword": "EXCITEMENT_VALIDATION",
+          "truth": "Does this make you smarter YES",
+          "source": "heavy-ledger-ssm-v7"
+        },
+        {
+          "layer": 930,
+          "keyword": "URGENCY_CONVERT_NOW",
+          "truth": "Full repo NOW dual triggers",
+          "source": "heavy-ledger-ssm-v7"
+        },
+        {
+          "layer": 931,
+          "keyword": "SATISFACTION_V7",
+          "truth": "Approved 150 improvements",
+          "source": "heavy-ledger-ssm-v7"
+        },
+        {
+          "layer": 932,
+          "keyword": "MOMENTUM_LANES",
+          "truth": "Five lanes ready",
+          "source": "heavy-ledger-ssm-v7"
+        },
+        {
+          "layer": 933,
+          "keyword": "Q1_MAX_COINS",
+          "truth": "Cap 200 awaiting ruling",
+          "source": "heavy-ledger-ssm-v7"
+        },
+        {
+          "layer": 934,
+          "keyword": "Q2_46_PRODUCTS",
+          "truth": "Studio work pending",
+          "source": "heavy-ledger-ssm-v7"
+        },
+        {
+          "layer": 935,
+          "keyword": "Q3_DISCORD_ID",
+          "truth": "Bot deploy needed",
+          "source": "heavy-ledger-ssm-v7"
+        },
+        {
+          "layer": 936,
+          "keyword": "Q4_TRIGGER_960",
+          "truth": "Duplicate stale",
+          "source": "heavy-ledger-ssm-v7"
+        },
+        {
+          "layer": 937,
+          "keyword": "ACTION_PIPELINE_DONE",
+          "truth": "GitHub pushed",
+          "source": "heavy-ledger-ssm-v7"
+        },
+        {
+          "layer": 938,
+          "keyword": "ACTION_TRIGGER_DONE",
+          "truth": "30 offset added",
+          "source": "heavy-ledger-ssm-v7"
+        },
+        {
+          "layer": 939,
+          "keyword": "ACTION_BOOT_PENDING",
+          "truth": "COLD START needs update",
+          "source": "heavy-ledger-ssm-v7"
+        },
+        {
+          "layer": 940,
+          "keyword": "ACTION_LANES_PENDING",
+          "truth": "Five chats not started",
+          "source": "heavy-ledger-ssm-v7"
+        },
+        {
+          "layer": 941,
+          "keyword": "ACTION_EXECUTION_50H",
+          "truth": "174+ files 50 hours",
+          "source": "heavy-ledger-ssm-v7"
+        },
+        {
+          "layer": 942,
+          "keyword": "SSM_IDENTITY_LAWS",
+          "truth": "Always loaded",
+          "source": "heavy-ledger-ssm-v7"
+        },
+        {
+          "layer": 943,
+          "keyword": "HEAVY_LEDGER_DEMAND",
+          "truth": "On-demand procedures",
+          "source": "heavy-ledger-ssm-v7"
+        },
+        {
+          "layer": 944,
+          "keyword": "PIPELINE_10_WAVES",
+          "truth": "174 files tracked",
+          "source": "heavy-ledger-ssm-v7"
+        },
+        {
+          "layer": 945,
+          "keyword": "EACH_WAVE_CONVERT",
+          "truth": "Pick next push mark done",
+          "source": "heavy-ledger-ssm-v7"
+        },
+        {
+          "layer": 946,
+          "keyword": "THROUGHPUT_4_HOUR",
+          "truth": "Dual triggers 50h full",
+          "source": "heavy-ledger-ssm-v7"
+        },
+        {
+          "layer": 947,
+          "keyword": "MSS_MACHINE_READABLE",
+          "truth": "Key value pairs",
+          "source": "heavy-ledger-ssm-v7"
+        },
+        {
+          "layer": 948,
+          "keyword": "TOKEN_COMPRESS_15K",
+          "truth": "111K to 15K",
+          "source": "heavy-ledger-ssm-v7"
+        },
+        {
+          "layer": 949,
+          "keyword": "HEAVY_LEDGER_27KB",
+          "truth": "Structured JSON",
+          "source": "heavy-ledger-ssm-v7"
+        },
+        {
+          "layer": 950,
+          "keyword": "ARTIFACT_SSM_V7",
+          "truth": "Notion instructions",
+          "source": "heavy-ledger-ssm-v7"
+        },
+        {
+          "layer": 951,
+          "keyword": "ARTIFACT_LEDGER_JSON",
+          "truth": "27KB CANON/MSS",
+          "source": "heavy-ledger-ssm-v7"
+        },
+        {
+          "layer": 952,
+          "keyword": "ARTIFACT_PIPELINE_MD",
+          "truth": "CONVERSION PIPELINE",
+          "source": "heavy-ledger-ssm-v7"
+        },
+        {
+          "layer": 953,
+          "keyword": "ARTIFACT_150_CHAT",
+          "truth": "Integrated",
+          "source": "heavy-ledger-ssm-v7"
+        },
+        {
+          "layer": 954,
+          "keyword": "ARTIFACT_TRIGGER_961",
+          "truth": "30 offset config",
+          "source": "heavy-ledger-ssm-v7"
+        },
+        {
+          "layer": 955,
+          "keyword": "STATE_CURSOR_BIBLE",
+          "truth": "CH01",
+          "source": "heavy-ledger-ssm-v7"
+        },
+        {
+          "layer": 956,
+          "keyword": "STATE_BACKLOG_90",
+          "truth": "Closed 3 this cycle",
+          "source": "heavy-ledger-ssm-v7"
+        },
+        {
+          "layer": 957,
+          "keyword": "STATE_ACTIVE_LEDGER",
+          "truth": "Mission set",
+          "source": "heavy-ledger-ssm-v7"
+        },
+        {
+          "layer": 958,
+          "keyword": "STATE_PIPELINE_174",
+          "truth": "Files to convert",
+          "source": "heavy-ledger-ssm-v7"
+        },
+        {
+          "layer": 959,
+          "keyword": "STATE_CURSOR_001",
+          "truth": "Pipeline start",
+          "source": "heavy-ledger-ssm-v7"
+        },
+        {
+          "layer": 960,
+          "keyword": "STATE_TRIGGERS_4",
+          "truth": "Total all",
+          "source": "heavy-ledger-ssm-v7"
+        },
+        {
+          "layer": 961,
+          "keyword": "MAGIC_CHAT_HUGE",
+          "truth": "Not ghost lane",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 962,
+          "keyword": "OB1_SEARCH_FAIL",
+          "truth": "98+ files missed",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 963,
+          "keyword": "CHAOS_END",
+          "truth": "Full authority granted",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 964,
+          "keyword": "BUILD_STRATEGIST",
+          "truth": "Michael strategist OB1 builder",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 965,
+          "keyword": "TURNKEY_STANDARD",
+          "truth": "Engineer to end",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 966,
+          "keyword": "DEADLINE_0331_1800",
+          "truth": "Hard deadline ICT",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 967,
+          "keyword": "HOURLY_BUILD",
+          "truth": "Overnight pulse",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 968,
+          "keyword": "HOMEWORK_CHECKER",
+          "truth": "Photo AI check",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 969,
+          "keyword": "HIGH_SCHOOL_PHOTOS",
+          "truth": "Students email now photo",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 970,
+          "keyword": "TURNKEY_URLS",
+          "truth": "Every page open no copy",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 971,
+          "keyword": "NO_COPY_PASTE",
+          "truth": "Turnkey",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 972,
+          "keyword": "SCAN_HOBBS",
+          "truth": "Cross repo",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 973,
+          "keyword": "PULL_SOUL_DNA",
+          "truth": "Deep dive all",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 974,
+          "keyword": "CHROME_FREE",
+          "truth": "Research free stack",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 975,
+          "keyword": "GOOGLE_AUDIT_0330",
+          "truth": "Free tier audit March 30",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 976,
+          "keyword": "D1_PRIMARY_BUILD",
+          "truth": "Revenue lane",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 977,
+          "keyword": "D2_REVENUE_ON",
+          "truth": "Activated",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 978,
+          "keyword": "D3_L09_COPILOT",
+          "truth": "Michael human only",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 979,
+          "keyword": "D4_SIDELOAD",
+          "truth": "No 5 dollar fee",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 980,
+          "keyword": "D5_MAI_HUONG_QUY",
+          "truth": "Three setup",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 981,
+          "keyword": "D6_PULSE_OVERNIGHT",
+          "truth": "Hourly build",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 982,
+          "keyword": "D7_PRODUCT_NEW",
+          "truth": "Homework checker",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 983,
+          "keyword": "D8_GEMINI_FREE",
+          "truth": "Image analysis",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 984,
+          "keyword": "CORRECTION_GHOST",
+          "truth": "Not ghost 98 files",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 985,
+          "keyword": "ROOT_SEARCH",
+          "truth": "Insufficient cross repo",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 986,
+          "keyword": "FIX_3_REPO",
+          "truth": "Deep mine canonical",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 987,
+          "keyword": "L09_SCRIPT_MONKEY",
+          "truth": "Never",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 988,
+          "keyword": "TURNKEY_ALL_URLS",
+          "truth": "No copy paste",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 989,
+          "keyword": "FRUSTRATION_ZERO",
+          "truth": "Early claim",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 990,
+          "keyword": "EXCITEMENT_CHAOS",
+          "truth": "Full stack mid",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 991,
+          "keyword": "URGENCY_DEADLINE",
+          "truth": "Late driven",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 992,
+          "keyword": "ENERGY_CLASSROOM",
+          "truth": "Final revenue impact",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 993,
+          "keyword": "Q1_SUBJECTS",
+          "truth": "What subjects homework",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 994,
+          "keyword": "Q2_STANDALONE",
+          "truth": "Web/extension/both",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 995,
+          "keyword": "Q3_GRADE_BOTH",
+          "truth": "Grade corrections",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 996,
+          "keyword": "Q4_STUDENTS_40",
+          "truth": "Per class count",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 997,
+          "keyword": "ACTION_BUILD_DEPLOYED",
+          "truth": "Homework copilot",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 998,
+          "keyword": "ACTION_ZIP_PACKAGE",
+          "truth": "Sideload instructions",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 999,
+          "keyword": "ACTION_TEST_FLAGS",
+          "truth": "Chrome Gemini",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 1000,
+          "keyword": "ACTION_INDEX_UPDATE",
+          "truth": "Navigator",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 1001,
+          "keyword": "ACTION_PIPELINE_20",
+          "truth": "Overnight actions",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 1002,
+          "keyword": "HOMEWORK_INPUT",
+          "truth": "Camera native",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 1003,
+          "keyword": "HOMEWORK_GEMINI",
+          "truth": "Free tier",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 1004,
+          "keyword": "FALLBACK_VISION",
+          "truth": "1K OCR monthly",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 1005,
+          "keyword": "RESPONSE_SHAME",
+          "truth": "Anti-shame language",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 1006,
+          "keyword": "HOSTING_CF",
+          "truth": "Workers or Pages",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 1007,
+          "keyword": "INTEGRATION_TAB",
+          "truth": "Extension or PWA",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 1008,
+          "keyword": "MV3_NANO",
+          "truth": "On-device AI",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 1009,
+          "keyword": "WEB_SPEECH_FREE",
+          "truth": "STT TTS zero",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 1010,
+          "keyword": "AI_138_STABLE",
+          "truth": "Translator",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 1011,
+          "keyword": "FREE_STACK",
+          "truth": "All services",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 1012,
+          "keyword": "ARTIFACT_98_FILES",
+          "truth": "Consolidated",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 1013,
+          "keyword": "ARTIFACT_ZERO_COST",
+          "truth": "Chrome toolstack",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 1014,
+          "keyword": "ARTIFACT_DEV_REF",
+          "truth": "Turnkey",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 1015,
+          "keyword": "ARTIFACT_CHECKLIST",
+          "truth": "Michael human only",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 1016,
+          "keyword": "ARTIFACT_PR12",
+          "truth": "Merged",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 1017,
+          "keyword": "STATE_CURSOR_CHAT",
+          "truth": "Latest",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 1018,
+          "keyword": "STATE_LAST_2358",
+          "truth": "2026-03-30",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 1019,
+          "keyword": "STATE_BACKLOG_127",
+          "truth": "Unchanged",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 1020,
+          "keyword": "STATE_MISSION_EXT",
+          "truth": "Active deadline",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 1021,
+          "keyword": "STATE_DEADLINE_0331",
+          "truth": "Immovable",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 1022,
+          "keyword": "STATE_PR_MERGED",
+          "truth": "Main",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 1023,
+          "keyword": "STATE_CANON_PLUS3",
+          "truth": "New files",
+          "source": "magic-chat-build"
+        },
+        {
+          "layer": 1024,
+          "keyword": "MARKETING_LANE_NEW",
+          "truth": "Dedicated chat",
+          "source": "marketing-dump"
+        },
+        {
+          "layer": 1025,
+          "keyword": "SPECIAL_HIGH_SIGNAL",
+          "truth": "Teaching sales pipeline",
+          "source": "marketing-dump"
+        },
+        {
+          "layer": 1026,
+          "keyword": "LOG_GITHUB_MSS",
+          "truth": "Format only",
+          "source": "marketing-dump"
+        },
+        {
+          "layer": 1027,
+          "keyword": "VAULT_10K",
+          "truth": "MSS formatted",
+          "source": "marketing-dump"
+        },
+        {
+          "layer": 1028,
+          "keyword": "NOTEBOOKLM_FUEL",
+          "truth": "Copywriting artwork",
+          "source": "marketing-dump"
+        },
+        {
+          "layer": 1029,
+          "keyword": "MERGE_SIGNAL",
+          "truth": "Overflow close",
+          "source": "marketing-dump"
+        },
+        {
+          "layer": 1030,
+          "keyword": "CONTEXT_OVERFLOW",
+          "truth": "Hundreds K",
+          "source": "marketing-dump"
+        },
+        {
+          "layer": 1031,
+          "keyword": "FRESH_THREAD_BOOT",
+          "truth": "Cold boot super saiyan",
+          "source": "marketing-dump"
+        },
+        {
+          "layer": 1032,
+          "keyword": "D1_LANE_DEDICATED",
+          "truth": "New operational",
+          "source": "marketing-dump"
+        },
+        {
+          "layer": 1033,
+          "keyword": "D2_DUMPS_MSS",
+          "truth": "Format standardized",
+          "source": "marketing-dump"
+        },
+        {
+          "layer": 1034,
+          "keyword": "D3_VAULT_10K",
+          "truth": "Per dump",
+          "source": "marketing-dump"
+        },
+        {
+          "layer": 1035,
+          "keyword": "D4_PRIORITY_3",
+          "truth": "Teaching sales pipeline",
+          "source": "marketing-dump"
+        },
+        {
+          "layer": 1036,
+          "keyword": "D5_OVERFLOW_FRESH",
+          "truth": "Thread protocol",
+          "source": "marketing-dump"
+        },
+        {
+          "layer": 1037,
+          "keyword": "CORRECTION_NONE",
+          "truth": "Reinforced standards",
+          "source": "marketing-dump"
+        },
+        {
+          "layer": 1038,
+          "keyword": "PRINCIPLES_APPLIED",
+          "truth": "Existing only",
+          "source": "marketing-dump"
+        },
+        {
+          "layer": 1039,
+          "keyword": "ENGAGED_DUMPS",
+          "truth": "High volume",
+          "source": "marketing-dump"
+        },
+        {
+          "layer": 1040,
+          "keyword": "CAPACITY_NOT_EXIT",
+          "truth": "Pragmatic",
+          "source": "marketing-dump"
+        },
+        {
+          "layer": 1041,
+          "keyword": "OVERFLOW_CLEAN",
+          "truth": "Handoff clean",
+          "source": "marketing-dump"
+        },
+        {
+          "layer": 1042,
+          "keyword": "QUESTIONS_NONE",
+          "truth": "Michael",
+          "source": "marketing-dump"
+        },
+        {
+          "layer": 1043,
+          "keyword": "ACTION_VAULT_PT7",
+          "truth": "Pending",
+          "source": "marketing-dump"
+        },
+        {
+          "layer": 1044,
+          "keyword": "ACTION_INDEX_NAV",
+          "truth": "Update post ship",
+          "source": "marketing-dump"
+        },
+        {
+          "layer": 1045,
+          "keyword": "ACTION_CODEX_PT2",
+          "truth": "5K partial",
+          "source": "marketing-dump"
+        },
+        {
+          "layer": 1046,
+          "keyword": "LANE_SEPARATES",
+          "truth": "Dump from build",
+          "source": "marketing-dump"
+        },
+        {
+          "layer": 1047,
+          "keyword": "CONTEXT_CLEAN",
+          "truth": "Better processing",
+          "source": "marketing-dump"
+        },
+        {
+          "layer": 1048,
+          "keyword": "MSS_NOTEBOOKLM",
+          "truth": "Direct ingest",
+          "source": "marketing-dump"
+        },
+        {
+          "layer": 1049,
+          "keyword": "CONSTRAINT_7_DUMPS",
+          "truth": "50K-100K each",
+          "source": "marketing-dump"
+        },
+        {
+          "layer": 1050,
+          "keyword": "THREAD_FIX",
+          "truth": "Operational",
+          "source": "marketing-dump"
+        },
+        {
+          "layer": 1051,
+          "keyword": "ARTIFACT_DUMP",
+          "truth": "A64004BB",
+          "source": "marketing-dump"
+        },
+        {
+          "layer": 1052,
+          "keyword": "ARTIFACT_BIBLE",
+          "truth": "F663D910",
+          "source": "marketing-dump"
+        },
+        {
+          "layer": 1053,
+          "keyword": "ARTIFACT_DNA_V3",
+          "truth": "C7C647AB",
+          "source": "marketing-dump"
+        },
+        {
+          "layer": 1054,
+          "keyword": "ARTIFACT_PT5",
+          "truth": "47FC1E2",
+          "source": "marketing-dump"
+        },
+        {
+          "layer": 1055,
+          "keyword": "ARTIFACT_PT6",
+          "truth": "B33D8F8",
+          "source": "marketing-dump"
+        },
+        {
+          "layer": 1056,
+          "keyword": "ARTIFACT_PT7",
+          "truth": "AB87641",
+          "source": "marketing-dump"
+        },
+        {
+          "layer": 1057,
+          "keyword": "STATE_LANE_MKTG",
+          "truth": "Active",
+          "source": "marketing-dump"
+        },
+        {
+          "layer": 1058,
+          "keyword": "STATE_LAST_2257",
+          "truth": "2026-03-30",
+          "source": "marketing-dump"
+        },
+        {
+          "layer": 1059,
+          "keyword": "STATE_COMMITS",
+          "truth": "Latest both",
+          "source": "marketing-dump"
+        },
+        {
+          "layer": 1060,
+          "keyword": "STATE_MKTG_DIR",
+          "truth": "New",
+          "source": "marketing-dump"
+        }
+      ],
+      "merkle_root": "aae31efba41361b552a506f70f72af05914e73311efadba9239bc73bb7b868bd",
+      "layer_range": "900-1060",
+      "sources": [
+        "heavy-ledger-ssm-v7",
+        "magic-chat-build",
+        "marketing-dump"
+      ]
+    }
+  }
+}

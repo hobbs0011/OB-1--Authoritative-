@@ -113,3 +113,7 @@ CANON/GAME-DESIGN/*.png
 APPS/NET-PET-AI/public/assets/artwork/gemini/*.png
 APPS/NET-PET-AI/public/assets/artwork/misc/*.png
 APPS/NET-PET-AI/public/audio/*.m4a
+
+# Allow Vietnamese phrase corpus (critical for pronunciation training)
+!CANON/EVIDENCE/VIETNAMESE-PHRASES/*.aac
+!CANON/EVIDENCE/VIETNAMESE-PHRASES/*.opus
