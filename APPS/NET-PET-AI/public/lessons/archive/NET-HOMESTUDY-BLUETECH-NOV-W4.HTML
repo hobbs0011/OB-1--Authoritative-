@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueTech Week 4 Homework | NET</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* * NET GOSPEL 444 AESTHETIC ENGINE 
+         * Target: BlueTech Corporate
+         */
+        :root {
+            --net-dark: #0f0f1a;
+            --net-panel: #1a1a2e;
+            --net-purple: #a855f7;
+            --net-gold: #f59e0b;
+            --net-text: #e2e8f0;
+            --net-dim: #94a3b8;
+            --glass: rgba(255, 255, 255, 0.05);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--net-dark);
+            color: var(--net-text);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+            background-image: radial-gradient(circle at 10% 10%, rgba(168, 85, 247, 0.1) 0%, transparent 40%);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* HEADER */
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff, var(--net-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--net-gold);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        /* TABS */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .tab-btn {
+            background: var(--glass);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            color: var(--net-dim);
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active {
+            background: var(--net-purple);
+            color: #fff;
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
+            border-color: var(--net-purple);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* CARDS */
+        .card {
+            background: var(--net-panel);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .icon { font-size: 1.5rem; }
+
+        .instruction {
+            color: var(--net-dim);
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+
+        /* SPECIAL ELEMENTS */
+        .highlight-box {
+            background: rgba(245, 158, 11, 0.1);
+            border-left: 3px solid var(--net-gold);
+            padding: 15px;
+            margin: 15px 0;
+            font-style: italic;
+            color: #fff;
+        }
+
+        .footer-note {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 0.8rem;
+            color: var(--net-dim);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+        }
+
+        /* INPUTS (NEW ADDITION) */
+        .net-input {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            border-radius: 8px;
+            padding: 12px;
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            transition: border-color 0.3s ease;
+        }
+
+        .net-input:focus {
+            outline: none;
+            border-color: var(--net-purple);
+            box-shadow: 0 0 10px rgba(168, 85, 247, 0.2);
+        }
+
+        textarea.net-input {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        label {
+            display: block;
+            color: var(--net-purple);
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* ZALO BUTTON */
+        .zalo-btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+            background: linear-gradient(90deg, var(--net-purple), #7e22ce);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            margin-top: 20px;
+            transition: transform 0.2s;
+        }
+        .zalo-btn:hover { transform: translateY(-2px); }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>BlueTech Mission Control</h1>
+            <div class="subtitle">WEEK 4 HOMEWORK PROTOCOL</div>
+        </header>
+
+        <div class="tabs">
+            <button class="tab-btn active" onclick="openTab('E1E2')">Beginner (E1/E2)</button>
+            <button class="tab-btn" onclick="openTab('E3I1')">Intermediate (E3/I1)</button>
+        </div>
+
+        <div id="E1E2" class="tab-content active">
+            <div style="text-align: center; margin-bottom: 20px; color: var(--net-gold);">
+                <small>TARGETS: Quynh, Quy, Denny & Team</small>
+            </div>
+
+            <div class="card">
+                <div class="card-title"><span class="icon">🎤</span> Pronunciation Recording</div>
+                <div class="instruction">
+                    Record a 30–45 second audio reading the paragraph below. Focus on clear <strong>S, T, P, N, H</strong> and ending sounds.
+                </div>
+                <div class="highlight-box">
+                    "Sam and the snake sit on the sand. The sun is hot today, and Sam feels sleepy. He sees a small shell on the shore and picks it up. Later, he hears a song from the sea. Sam smiles because the soft sound makes him feel calm."
+                </div>
+                <div class="instruction">
+                    <small><em>*Send audio directly to Zalo group.</em></small>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title"><span class="icon">📺</span> Daily English Habit</div>
+                <div class="instruction">
+                    Watch 5–7 minutes of ANY English video you like. Write 3 sentences below starting with "I will...":
+                </div>
+                
+                <label>Sentence 1</label>
+                <input type="text" class="net-input" placeholder="I will...">
+                
+                <label>Sentence 2</label>
+                <input type="text" class="net-input" placeholder="I will...">
+                
+                <label>Sentence 3</label>
+                <input type="text" class="net-input" placeholder="I will...">
+            </div>
+
+            <div class="card">
+                <div class="card-title"><span class="icon">🗓️</span> Weekend Prep</div>
+                <div class="instruction">
+                    Prepare your answers for the start of next class. Type them here to practice:
+                </div>
+                
+                <label>1. What did you eat for breakfast?</label>
+                <input type="text" class="net-input" placeholder="I ate...">
+
+                <label>2. What is something new this week?</label>
+                <input type="text" class="net-input" placeholder="This week...">
+
+                <label>3. What are your plans for the weekend?</label>
+                <input type="text" class="net-input" placeholder="I am going to...">
+                
+                <div class="instruction" style="color: var(--net-gold); margin-top: 10px;">
+                    *Denny: Be ready to explain your beer strategy for Dec 5th!
+                </div>
+            </div>
+        </div>
+
+        <div id="E3I1" class="tab-content">
+            <div style="text-align: center; margin-bottom: 20px; color: var(--net-gold);">
+                <small>TARGETS: Linh, Huong, Tien & Team</small>
+            </div>
+
+            <div class="card">
+                <div class="card-title"><span class="icon">😏</span> Sarcasm & Context</div>
+                <div class="instruction">
+                    Write 6 short examples of sarcasm. At least <strong>2 must be workplace related</strong>. Use words like: <em>Context, Tone, Literal, Irony, Exaggerate</em>.
+                </div>
+                <textarea class="net-input" rows="6" placeholder="1. Wow, perfect timing...
+2. ..."></textarea>
+                <div class="instruction"><small><em>Example: "Wow, perfect timing. Another meeting. Exactly what I needed today."</em></small></div>
+            </div>
+
+            <div class="card">
+                <div class="card-title"><span class="icon">🗺️</span> Hometown Description</div>
+                <div class="instruction">
+                    Prepare a 1-minute speech describing your hometown. Draft your notes here:
+                </div>
+                
+                <label>Location & Population:</label>
+                <input type="text" class="net-input" placeholder="North/South, Small/Big...">
+                
+                <label>The Vibe (Peaceful, Busy, etc):</label>
+                <input type="text" class="net-input" placeholder="It feels...">
+                
+                <label>Special Food or Lifestyle:</label>
+                <textarea class="net-input" placeholder="People usually..."></textarea>
+            </div>
+
+            <div class="card">
+                <div class="card-title"><span class="icon">💼</span> "The Office" Analysis</div>
+                <div class="instruction">
+                    Watch 5 mins of <strong>The Office (US) Ep 1</strong>. Prepare your thoughts:
+                </div>
+                <label>Is Michael Scott a good leader? Why?</label>
+                <textarea class="net-input" placeholder="I think..."></textarea>
+                
+                <label>Describe the "Tone" of the office:</label>
+                <input type="text" class="net-input" placeholder="The tone is...">
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-bottom: 20px; color: var(--net-dim); font-size: 0.9rem;">
+            <em>*Take a screenshot of your answers or copy/paste them to Zalo.</em>
+        </div>
+
+        <a href="https://zalo.me" class="zalo-btn">SUBMIT HOMEWORK ON ZALO ➔</a>
+
+        <div class="footer-note">
+            <p>E1/E2 Next Class: <strong>Tuesday 18:00</strong></p>
+            <p>E3/I1 Next Class: <strong>Thursday 18:00</strong></p>
+            <p style="margin-top: 10px; opacity: 0.6;">NET UNIVERSE | GOSPEL 444 COMPLIANT</p>
+        </div>
+    </div>
+
+    <script>
+        function openTab(tabName) {
+            // Hide all content
+            var contents = document.getElementsByClassName("tab-content");
+            for (var i = 0; i < contents.length; i++) {
+                contents[i].classList.remove("active");
+            }
+            
+            // Deactivate buttons
+            var btns = document.getElementsByClassName("tab-btn");
+            for (var i = 0; i < btns.length; i++) {
+                btns[i].classList.remove("active");
+            }
+
+            // Activate specific tab and button
+            document.getElementById(tabName).classList.add("active");
+            
+            // Find the button that was clicked (or matches the ID) and activate it
+            var clickedBtn = Array.from(btns).find(btn => btn.getAttribute('onclick').includes(tabName));
+            if(clickedBtn) clickedBtn.classList.add("active");
+        }
+    </script>
+</body>
+</html>

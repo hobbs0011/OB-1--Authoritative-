@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 11: Technical Docs & Active Listening - TTS BlueTech V2.9 (Vietnamese)</title>
+    <script src="https://cdn.tailwindcss.com/"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* BlueTech Style Palette */
+        :root {
+            --color-primary-teal: #14B8A6; /* Teal 500 */
+            --color-secondary-orange: #F97316; /* Orange 600 */
+            --color-dark-blue: #1E293B; /* Slate 800 */
+            --color-light-bg: #F8FAFC; /* Slate 50 */
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--color-light-bg);
+            color: var(--color-dark-blue);
+        }
+        .header-bg {
+            background-color: var(--color-dark-blue);
+        }
+        .section-card {
+            background-color: white;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        .btn-primary {
+            background-color: var(--color-primary-teal);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #0D9488;
+        }
+        .btn-secondary {
+            background-color: var(--color-secondary-orange);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        .btn-secondary:hover {
+            background-color: #EA580C;
+        }
+        /* Custom Timeline Style */
+        .timeline-container {
+            border-left: 3px solid #E2E8F0;
+            padding-left: 1.5rem;
+            margin-left: 0.5rem;
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.35rem; /* Adjust to align with the border-left line */
+            top: 0;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--color-primary-teal);
+            border: 3px solid white; /* Ensures it stands out from the line */
+        }
+        .tab-btn.active {
+            background-color: var(--color-secondary-orange) !important;
+            color: white !important;
+            border-bottom-color: var(--color-secondary-orange) !important;
+        }
+        /* New Style for Vocabulary Display */
+        .vocab-item {
+            display: block;
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            border: 1px solid #E2E8F0;
+            border-radius: 0.5rem;
+            background-color: #F9FAFB;
+        }
+        .vocab-word {
+            font-weight: 700;
+            color: var(--color-primary-teal);
+            font-size: 1.125rem;
+        }
+        .vocab-definition {
+            font-style: italic;
+            color: #4B5563; /* Gray 600 */
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+        .vocab-sentence {
+            color: #1E293B; /* Slate 800 */
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+            border-left: 3px solid var(--color-secondary-orange);
+            padding-left: 0.5rem;
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-8">
+
+<script>
+    // --- Lesson Data Object (VIETNAMESE CORRECTION APPLIED) ---
+    const lessonData = {
+        lessonNumber: 11,
+        lessonName: 'Technical Docs & Active Listening',
+        communicationTopic: 'Active Listening',
+        industryTopic: 'Technical Documentation',
+        phonicsReview: ['M (Map, Time, Calm)', 'N (Nine, Turn, Know)'],
+        phonicsToday: ['P (Pen, Happy, Stop)', 'B (Big, Rubber, Club)'],
+        // ----------------------------------------------------
+        // CONTENT BLOCKS
+        // ----------------------------------------------------
+        agendaTips: [
+            'TIP 1: Use nonverbal cues like nodding and maintaining eye contact (even virtual) to show engagement.',
+            'TIP 2: Paraphrasing (like "So, you\'re saying...") is the best way to ensure you\'ve correctly understood complex technical instructions.',
+            'TIP 3: Always seek clarification for jargon or ambiguous statements, especially when dealing with safety-critical procedures.'
+        ],
+        warmup: {
+            openingQuestion: 'How do engineers ensure that critical specifications in technical documents are never misinterpreted during execution?',
+            quizQuestions: [
+                'Question 1: What does the idiom "In the black" mean in business?',
+                'Question 2: Which component is responsible for turning the rotor to face the wind on a turbine?',
+                'Question 3: If a company has a lot of debt, which financial term describes its poor position?',
+                'Question 4: What is the primary purpose of a "yaw drive" on a wind turbine?',
+                'Question 5: Which communication skill allows you to control the flow of a conversation?'
+            ],
+            // 5 VIETNAMESE VOCABULARY WORDS (FIXED)
+            vocabGuessing: [
+                { native: 'Thông số kỹ thuật', translation: 'A detailed requirement or standard', target: 'Specification' },
+                { native: 'Bản vẽ chi tiết', translation: 'A detailed plan or design', target: 'Blueprint' },
+                { native: 'Quan hệ công chúng', translation: 'Managing the spread of information to the public', target: 'Public Relations' },
+                { native: 'Đối tượng mục tiêu', translation: 'The intended group for a product or message', target: 'Target Audience' },
+                { native: 'Sự tập trung', translation: 'Focusing all attention on a single thing', target: 'Concentration' }
+            ]
+        },
+        // ----------------------------------------------------
+        // PART 1: COMMUNICATION
+        // ----------------------------------------------------
+        communication: {
+            introText: "Active Listening is foundational, especially when dealing with complex specifications or protocols. It goes beyond just hearing words; it involves deep concentration and using nonverbal cues. Mastering techniques like paraphrase and seeking clarification allows you to fully validate the speaker's message, ensuring zero misinterpretations. This helps you 'Get the picture' quickly, preventing costly errors on a project. Focusing on the speaker helps you avoid missing a key piece of information, or being unable to 'Get a word in edgewise' when you *do* need to speak. (340 characters)",
+            // VOCABULARY ENHANCED WITH DEFINITIONS AND SENTENCES
+            vocab: [
+                { word: 'concentration', definition: 'Giving all your attention to one thing.', sentence: 'Deep **concentration** is needed to read the technical schematic.' },
+                { word: 'nonverbal', definition: 'Communication without words, like nodding or eye contact.', sentence: 'Her **nonverbal** cues showed she was very engaged in the meeting.' },
+                { word: 'paraphrase', definition: 'To restate what someone said using your own words.', sentence: 'Let me **paraphrase** your point to make sure I understand the data sheet.' },
+                { word: 'validate', definition: 'To confirm that something is correct or true.', sentence: 'We must **validate** the measurement before we start installation.' },
+                { word: 'clarification', definition: 'An explanation to make something easier to understand.', sentence: 'I requested **clarification** on the vague procedure in the manual.' }
+            ],
+            phrases: ['Could you elaborate on that?', 'I see where you\'re coming from.', 'Let me summarize.', 'I\'m hearing that...', 'Tell me more about that.'],
+            idioms: ['Read between the lines', 'Get a word in edgewise', 'Get the picture'],
+            readings: [
+                { title: 'The E-Mail Protocol', text: 'A senior engineer sent a specification sheet with vague instructions. Rather than guessing, the junior engineer decided to actively listen to the clarification provided in the follow-up meeting. He used the phrase "I\'m hearing that the torque limit is 250 Newton-meters, not 300, is that correct?" to paraphrase the critical detail. This technique allowed him to validate the figure immediately, saving a potential deployment failure. He also made sure to ask, "Could you elaborate on that?" when the procedure for installation seemed unclear. (335 characters)' },
+                { title: 'The Brand Meeting', text: 'During a presentation about the new marketing campaign, the PR team was speaking quickly. To keep up, she had to employ deep concentration. When the topic turned to the budget, she struggled to get a word in edgewise due to the fast pace. Afterwards, she used "Let me summarize..." to review the main points on the target audience and confirmed she was ready to implement the strategy. Her nonverbal cues (nodding and eye contact) showed the team she was engaged throughout. (338 characters)' },
+                { title: 'Documenting the System', text: 'The team was finalizing the new system manual. They were instructed to read between the lines of the client\'s feedback, which was often indirect. A team member suggested they use active listening to focus on the unspoken needs. When a client mentioned "future scalability," the engineer responded, "Tell me more about that." This showed the client that the engineer was focused and seeking clarification beyond the direct request, demonstrating a strong customer relationship. The engineer quickly "got the picture." (345 characters)' }
+            ]
+        },
+        // ----------------------------------------------------
+        // PART 2: PRONUNCIATION
+        // ----------------------------------------------------
+        pronunciation: {
+            p_b_focus: [
+                { type: 'P', words: ['Pen', 'Happy', 'Stop'] },
+                { type: 'B', words: ['Big', 'Rubber', 'Club'] }
+            ],
+            tongueTwisters: [
+                'Paul baked plenty of baguettes but put butter on the bottom.', 
+                'Purple bags happen to possess plenty of beauty products.', 
+                'Bankers pull plenty of bills into banks.', 
+                'Big pups bark in parks but plenty of breeds bite.', 
+                'Ben\'s brother, Patrick, beat up Ben\'s pal, Bill.',
+                'Peter Piper picked a peck of pickled peppers.',
+                'Betty Botter bought some butter, but the butter was bitter.',
+                'A big black bug bit a big black dog on his big black nose.',
+                'The brave black boy brought a big bag of bright blue balloons.',
+                'Bobby Bubble popped his purple bubble in the pub.'
+            ]
+        },
+        // ----------------------------------------------------
+        // PART 3: BUSINESS & ENGINEERING (TITLE EDIT APPLIED)
+        // ----------------------------------------------------
+        coreVocabulary: {
+            // ENGINEERING VOCABULARY ENHANCED
+            engineering: [
+                { word: 'schematic', definition: 'A technical drawing showing the parts and connections of a system.', sentence: 'We use the **schematic** to trace the electrical fault.' },
+                { word: 'blueprint', definition: 'A detailed plan or design for a building or product.', sentence: 'The final design must follow the **blueprint** exactly.' },
+                { word: 'diagram', definition: 'A simple drawing that explains how something works.', sentence: 'The maintenance **diagram** shows the location of all valves.' },
+                { word: 'technical drawing', definition: 'A precise drawing used in engineering to show measurements and details.', sentence: 'Check the dimensions on the **technical drawing** before cutting the metal.' },
+                { word: 'manual', definition: 'A book of instructions for using a machine or system.', sentence: 'The user **manual** explains how to operate the new turbine.' },
+                { word: 'specification sheet', definition: 'A document listing all detailed requirements for a part or project.', sentence: 'The gearbox **specification sheet** lists its maximum power rating.' },
+                { word: 'data sheet', definition: 'A document summarizing the performance and characteristics of a component.', sentence: 'Always check the sensor **data sheet** for temperature limits.' },
+                { word: 'bill of materials', definition: 'A list of all parts and components needed to build a product.', sentence: 'The project manager reviewed the **bill of materials** to check costs.' },
+                { word: 'protocol', definition: 'A set of official rules or procedures for doing something.', sentence: 'Following the safety **protocol** is the most important step.' },
+                { word: 'procedure', definition: 'A specific way of doing something, especially in a series of steps.', sentence: 'The new repair **procedure** requires two technicians.' }
+            ],
+            // BUSINESS VOCABULARY ENHANCED
+            business: [
+                { word: 'public relations', definition: 'Managing how a company is viewed by the public and media.', sentence: 'The **public relations** team handled the news announcement.' },
+                { word: 'press release', definition: 'An official statement given to the media about a piece of news.', sentence: 'We issued a **press release** about the company\'s new solar farm.' },
+                { word: 'brand', definition: 'The unique image and name of a product or company.', sentence: 'We need a strong marketing campaign to build our company\'s **brand**.' },
+                { word: 'target audience', definition: 'The specific group of people a product or message is aimed at.', sentence: 'Our new product is aimed at a young **target audience**.' },
+                { word: 'marketing campaign', definition: 'A planned series of activities to promote a product or service.', sentence: 'The company launched a **marketing campaign** to increase sales.' },
+                { word: 'advertisement', definition: 'A public notice to promote a product, service, or event.', sentence: 'The new **advertisement** for the wind turbine was very effective.' },
+                { word: 'sales pitch', definition: 'A persuasive talk made by a salesperson to convince someone to buy.', sentence: 'He gave a convincing **sales pitch** about the energy savings.' },
+                { word: 'cold call', definition: 'An unannounced phone call to a potential customer with whom you have no prior contact.', sentence: 'She had to make twenty **cold call**s to potential new clients.' },
+                { word: 'customer relationship', definition: 'The connection and communication between a business and its customers.', sentence: 'Building a good **customer relationship** is key to repeat business.' },
+                { word: 'lead', definition: 'A potential customer who has shown interest in the product.', sentence: 'The conference generated many good sales **lead**s for our team.' }
+            ]
+        },
+        coreReadings: [
+            { title: 'Technical Focus', text: 'Before manufacturing begins, the team must review the <span class="font-semibold text-teal-700">bill of materials</span> and cross-reference it with the <span class="font-semibold text-teal-700">specification sheet</span>. The lead engineer checks the <span class="font-semibold text-teal-700">blueprint</span> against the final <span class="font-semibold text-teal-700">technical drawing</span> to ensure that every component matches the documented <span class="font-semibold text-teal-700">protocol</span>. A complete <span class="font-semibold text-teal-700">manual</span> is generated detailing the system’s operation and its emergency <span class="font-semibold text-teal-700">procedure</span>. (285 characters)' },
+            { title: 'Business Focus', text: 'A successful <span class="font-semibold text-teal-700">marketing campaign</span> requires a clear understanding of the <span class="font-semibold text-teal-700">target audience</span>. The <span class="font-semibold text-teal-700">public relations</span> team issues a <span class="font-semibold text-teal-700">press release</span> to build the company’s <span class="font-semibold text-teal-700">brand</span> identity. They track every new <span class="font-semibold text-teal-700">lead</span> generated by the <span class="font-semibold text-teal-700">advertisement</span> to nurture the <span class="font-semibold text-teal-700">customer relationship</span> using a personalized approach. (290 characters)' },
+            { title: 'Combined Focus', text: 'After reviewing the new <span class="font-semibold text-teal-700">schematic</span> for the industrial component, the salesperson prepared their <span class="font-semibold text-teal-700">sales pitch</span>. They needed to simplify the technical detail for the client while explaining the financial value. They knew they had to read between the lines of the client’s silence to understand the true objection. They used their <span class="font-semibold text-teal-700">customer relationship</span> to ask probing questions based on the technical <span class="font-semibold text-teal-700">data sheet</span>. (310 characters)' }
+        ],
+        // ----------------------------------------------------
+        // PART 4: ROLEPLAY SCRIPTS (TITLE EDIT APPLIED)
+        // ----------------------------------------------------
+        roleplayScripts: [
+            {
+                title: 'Diagnosing the Vague Blueprint',
+                focus: 'Using clarification on a technical document.',
+                lines: [
+                    { speaker: 'A', emotion: 'Concerned', text: 'This blueprint shows a connection point labeled "Aux-7," but the manual doesn\'t define its function.' },
+                    { speaker: 'B', emotion: 'Calm', text: 'I see where you\'re coming from. Are you asking for a clarification on that specific output protocol?' },
+                    { speaker: 'A', emotion: 'Assertive', text: 'Exactly. Without it, we can’t finalize the wiring procedure.' },
+                    { speaker: 'B', emotion: 'Helpful', text: 'Let me summarize: You need the function of Aux-7 and its related wiring steps, correct?' },
+                    { speaker: 'A', emotion: 'Relief', text: 'Yes. That would validate the next step in our installation plan.' },
+                    { speaker: 'B', emotion: 'Detailed', text: 'I\'m hearing that the original specification sheet was unclear. I’ll update it immediately.' },
+                    { speaker: 'A', emotion: 'Grateful', text: 'Thank you. It\'s important we all get the picture on this.' },
+                    { speaker: 'B', emotion: 'Agreeable', text: 'Agreed. Never hesitate to ask for more detail.' }
+                ]
+            },
+            {
+                title: 'Reviewing the PR Strategy',
+                focus: 'Discussing a marketing document and offering feedback.',
+                lines: [
+                    { speaker: 'A', emotion: 'Enthusiastic', text: 'Our press release for the new product has been drafted. I think it will boost our brand.' },
+                    { speaker: 'B', emotion: 'Measured', text: 'I’ve read it. Could you elaborate on that section regarding the target audience?' },
+                    { speaker: 'A', emotion: 'Confident', text: 'It focuses on small businesses—they are our most likely lead.' },
+                    { speaker: 'B', emotion: 'Pensive', text: 'I see where you\'re coming from. But what about the lack of an advertisement budget for this quarter?' },
+                    { speaker: 'A', emotion: 'Focused', text: 'That\'s where the dedicated public relations effort will step in.' },
+                    { speaker: 'B', emotion: 'Validating', text: 'So, you\'re saying the PR is the primary driver of this marketing campaign?' },
+                    { speaker: 'A', emotion: 'Confirming', text: 'Precisely. We can worry about the sales pitch later.' },
+                    { speaker: 'B', emotion: 'Concluding', text: 'I get the picture. Looks like a solid plan.' }
+                ]
+            },
+            {
+                title: 'The Ambiguous Data Sheet',
+                focus: 'Seeking specific clarification on component data.',
+                lines: [
+                    { speaker: 'A', emotion: 'Confused', text: 'The data sheet for this sensor lists three operating modes with very similar names.' },
+                    { speaker: 'B', emotion: 'Attentive', text: 'Tell me more about that. Which specific mode is causing confusion?' },
+                    { speaker: 'A', emotion: 'Technical', text: 'Mode B and C. The diagram shows the same power output for both.' },
+                    { speaker: 'B', emotion: 'Curious', text: 'Did you read between the lines? Perhaps the difference is in the standby mode protocol.' },
+                    { speaker: 'A', emotion: 'Realizing', text: 'Ah, I need to check the full specification sheet not just the summary.' },
+                    { speaker: 'B', emotion: 'Guiding', text: 'Let me summarize: The data sheet is incomplete and you need the full spec to validate the correct operating procedure.' },
+                    { speaker: 'A', emotion: 'Determined', text: 'Correct. This requires deep concentration.' },
+                    { speaker: 'B', emotion: 'Encouraging', text: 'Good. Seeking clarification prevents errors.' }
+                ]
+            },
+            {
+                title: 'Dissecting the Bill of Materials',
+                focus: 'Paraphrasing and validating parts lists.',
+                lines: [
+                    { speaker: 'A', emotion: 'Impatient', text: 'I can\'t seem to get a word in edgewise on the component change for the bill of materials.' },
+                    { speaker: 'B', emotion: 'Patient', text: 'I hear you. You sound frustrated. Let me summarize: You want to propose a change to the BOM list.' },
+                    { speaker: 'A', emotion: 'Detailing', text: 'Yes, the original schematic shows a Grade 5 bolt, but we only have Grade 8 in stock.' },
+                    { speaker: 'B', emotion: 'Asking', text: 'Could you elaborate on that? Is the Grade 8 acceptable by the technical drawing?' },
+                    { speaker: 'A', emotion: 'Justifying', text: 'It is acceptable. I just need your approval to officially update the procedure.' },
+                    { speaker: 'B', emotion: 'Paraphrasing', text: 'I\'m hearing that using the Grade 8 bolt will not violate the specification sheet, so you need approval to update the manual.' },
+                    { speaker: 'A', emotion: 'Pleased', text: 'Perfect. Thank you for validating my request.' },
+                    { speaker: 'B', emotion: 'Actionable', text: 'Approved. Let\'s update the document.' }
+                ]
+            },
+            {
+                title: 'Handling a Customer Lead',
+                focus: 'Building a customer relationship through listening.',
+                lines: [
+                    { speaker: 'A', emotion: 'Wary', text: 'This new lead is interested, but their questions are very technical about the data sheet.' },
+                    { speaker: 'B', emotion: 'Advising', text: 'Use your nonverbal cues to show you\'re listening. Focus on building the customer relationship.' },
+                    { speaker: 'A', emotion: 'Hesitant', text: 'I’ve been asked for a custom technical drawing based on their facility.' },
+                    { speaker: 'B', emotion: 'Directing', text: 'Tell me more about that requirement. What is their primary concern right now?' },
+                    { speaker: 'A', emotion: 'Explaining', text: 'It seems to be about the long-term reliability of the component manual.' },
+                    { speaker: 'B', emotion: 'Validating', text: 'So, you need to validate their needs and reassure them about the product brand quality.' },
+                    { speaker: 'A', emotion: 'Understanding', text: 'I get the picture. I\'ll focus on listening and providing detailed clarification.' },
+                    { speaker: 'B', emotion: 'Supportive', text: 'Excellent. Active listening is key to a good sales pitch.' }
+                ]
+            },
+            {
+                title: 'Interpreting the Sales Pitch',
+                focus: 'Actively listening to find the hidden meaning in a sales pitch.',
+                lines: [
+                    { speaker: 'A', emotion: 'Skeptical', text: 'I just received a cold call with a strong sales pitch, but the numbers seemed inflated.' },
+                    { speaker: 'B', emotion: 'Curious', text: 'Did you read between the lines? What was the true motivation behind the pitch?' },
+                    { speaker: 'A', emotion: 'Analyzing', text: 'It felt like they were trying to divert attention from a known flaw in their specification sheet.' },
+                    { speaker: 'B', emotion: 'Investigating', text: 'I\'m hearing that they avoided direct questions. Could you elaborate on that specific flaw?' },
+                    { speaker: 'A', emotion: 'Recalling', text: 'They kept mentioning their "new protocol" but avoided defining the power output tolerance.' },
+                    { speaker: 'B', emotion: 'Summarizing', text: 'Let me summarize: The sales team is pitching a new system without full clarification on a key technical metric.' },
+                    { speaker: 'A', emotion: 'Confirming', text: 'Exactly. I need to see the full diagram before I consider buying.' },
+                    { speaker: 'B', emotion: 'Actionable', text: 'Good concentration. Let\'s get the tech docs.' }
+            ]
+            },
+            {
+                title: 'Reviewing the Safety Procedure',
+                focus: 'Ensuring clear understanding of a new safety procedure.',
+                lines: [
+                    { speaker: 'A', emotion: 'Serious', text: 'We are implementing a new safety procedure based on the updated maintenance manual.' },
+                    { speaker: 'B', emotion: 'Attentive', text: 'I’m focused. What is the biggest change in the new protocol?' },
+                    { speaker: 'A', emotion: 'Stressing', text: 'It\'s about the lock-out schematic. It now requires two technicians instead of one.' },
+                    { speaker: 'B', emotion: 'Paraphrasing', text: 'I’m hearing that the change in the technical drawing requires a dual sign-off for safety. Is that right?' },
+                    { speaker: 'A', emotion: 'Validating', text: 'That validates the most critical step. We need to avoid misinterpretation.' },
+                    { speaker: 'B', emotion: 'Probing', text: 'Could you elaborate on that? What happens if only one technician is available?' },
+                    { speaker: 'A', emotion: 'Clarifying', text: 'We stop the work. The procedure is absolute. We need total concentration.' },
+                    { speaker: 'B', emotion: 'Acknowledging', text: 'Understood. Nonverbal confirmation for the entire team.' }
+                ]
+            },
+            {
+                title: 'The Confusing Ad Campaign',
+                focus: 'Discussing PR and the need for clarity in advertising.',
+                lines: [
+                    { speaker: 'A', emotion: 'Annoyed', text: 'The new advertisement is confusing. It doesn\'t clearly target our intended market.' },
+                    { speaker: 'B', emotion: 'Empathic', text: 'I see where you\'re coming from. It needs a clear focus for our target audience.' },
+                    { speaker: 'A', emotion: 'Frustrated', text: 'The language in the press release is too vague. We can\'t risk the damage to our brand.' },
+                    { speaker: 'B', emotion: 'Offering', text: 'Tell me more about that. What specific words or phrases are problematic?' },
+                    { speaker: 'A', emotion: 'Specific', text: 'They used "efficient" but didn\'t back it up with the data sheet numbers.' },
+                    { speaker: 'B', emotion: 'Summarizing', text: 'Let me summarize: The current marketing campaign lacks the technical data to validate its claims to the target audience.' },
+                    { speaker: 'A', emotion: 'Agreeing', text: 'You get the picture. We need to re-write the release immediately.' },
+                    { speaker: 'B', emotion: 'Committing', text: 'I\'ll work with public relations to improve the clarification.' }
+                ]
+            },
+            {
+                title: 'Dealing with Vague Feedback',
+                focus: 'Extracting key information from ambiguous client feedback.',
+                lines: [
+                    { speaker: 'A', emotion: 'Exasperated', text: 'The client gave us an hour of feedback, but I couldn\'t get a word in edgewise to ask about the bill of materials.' },
+                    { speaker: 'B', emotion: 'Advising', text: 'Sometimes you have to read between the lines of their complaints to find the actual issue.' },
+                    { speaker: 'A', emotion: 'Reflecting', text: 'I think the core problem is they don\'t trust the durability of the components in the technical drawing.' },
+                    { speaker: 'B', emotion: 'Probing', text: 'I\'m hearing that the client is subtly asking for more expensive components. Could you elaborate on that?' },
+                    { speaker: 'A', emotion: 'Confirming', text: 'Yes. They want to ensure a stronger customer relationship with better quality.' },
+                    { speaker: 'B', emotion: 'Paraphrasing', text: 'So, you need to paraphrase their needs by offering a higher-grade component from the BOM list.' },
+                    { speaker: 'A', emotion: 'Relieved', text: 'Exactly. I need to send them a revised specification sheet.' },
+                    { speaker: 'B', emotion: 'Encouraging', text: 'Great active listening. That\'s how you keep a lead happy.' }
+                ]
+            },
+            {
+                title: 'Presenting a New Design',
+                focus: 'Using active listening to manage Q&A during a presentation.',
+                lines: [
+                    { speaker: 'A', emotion: 'Professional', text: 'My presentation on the new blueprint is complete. I will now take questions.' },
+                    { speaker: 'B', emotion: 'Interested', text: 'The diagram shows a new fluidic path. Could you elaborate on that design protocol?' },
+                    { speaker: 'A', emotion: 'Detailed', text: 'It\'s designed for a 15% increase in throughput, as detailed in the new data sheet.' },
+                    { speaker: 'B', emotion: 'Clarifying', text: 'I see where you\'re coming from. Is that increase covered in the updated specification sheet too?' },
+                    { speaker: 'A', emotion: 'Checking', text: 'Yes, it is. The change is minor, but the manual reflects it.' },
+                    { speaker: 'B', emotion: 'Validating', text: 'Let me summarize: The new schematic is efficient, and the performance is guaranteed by the spec sheet.' },
+                    { speaker: 'A', emotion: 'Concluding', text: 'That is correct. Any more questions that require clarification?' },
+                    { speaker: 'B', emotion: 'Satisfied', text: 'No, thank you. Your explanation was clear and easy to validate.' }
+                ]
+            }
+        ],
+        // ----------------------------------------------------
+        // WRAP-UP
+        // ----------------------------------------------------
+        keyTakeaways: [
+            'Technical documents (schematics, blueprints, manuals) are critical; never execute without full comprehension.',
+            'Active Listening is a professional skill that involves concentration, nonverbal cues, and techniques like paraphrasing to validate information.',
+            'Always seek clarification for technical or business terms to "Get the picture" and avoid costly misinterpretations.'
+        ],
+        nextLesson: 'Lesson 12 will focus on Project Scheduling & Stakeholder Management. We will introduce vocabulary related to project management software, timelines, and business terms for handling complex negotiations and conflict resolution. We will also focus on the communication skill of Negotiation and Compromise.'
+    };
+
+    // --- Utility Function to safely replace bolding markers with HTML classes ---
+    function formatText(text) {
+        // This replaces **text** with <span class="font-semibold text-teal-700">text</span>
+        return text.replace(/(\*\*([^*]+)\*\*)/g, '<span class="font-semibold text-teal-700">$2</span>');
+    }
+
+    // --- Custom rendering function for the new structured vocabulary ---
+    function renderVocab(vocabArray) {
+        return vocabArray.map(item => `
+            <div class="vocab-item">
+                <span class="vocab-word">${item.word}</span>
+                <p class="vocab-definition">${item.definition}</p>
+                <p class="vocab-sentence">Ex: ${item.sentence}</p>
+            </div>
+        `).join('');
+    }
+
+    // --- Custom rendering function for the new structured vocabulary (Badges, for the main communication section) ---
+    function renderCommunicationVocab(vocabArray) {
+        return vocabArray.map(item => `
+            <span class="inline-block bg-teal-100 text-teal-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded" 
+                  title="${item.definition}. Example: ${item.sentence}">
+                ${item.word}
+            </span>
+        `).join(' ');
+    }
+
+
+    // --- Pre-render content for all dynamic sections (THE FIX) ---
+    const preRenderedContent = {
+        // Part 1: Communication Toolkit
+        communicationIntro: formatText(lessonData.communication.introText),
+        // RENDER FIX 1: Communication Vocab is rendered as badges with tooltips
+        communicationVocab: renderCommunicationVocab(lessonData.communication.vocab),
+        communicationPhrases: lessonData.communication.phrases.map(p => `<li>${p}</li>`).join(''),
+        communicationIdioms: lessonData.communication.idioms.map(i => `<span class="inline-block bg-orange-100 text-orange-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">${i}</span>`).join(' '),
+        
+        // Part 2: Pronunciation Focus
+        phonicsReview: lessonData.phonicsReview.join(' / '),
+        phonicsToday: lessonData.phonicsToday.join(' / '),
+        tongueTwisters: lessonData.pronunciation.tongueTwisters.map(t => `<li class="border-b border-dashed pb-1">${t}</li>`).join(''),
+        p_b_description: `Today we focus on the voiceless stop <span class="font-bold text-orange-600">P</span> (as in <span class="font-semibold text-teal-700">${lessonData.pronunciation.p_b_focus[0].words.join('</span>, <span class="font-semibold text-teal-700">')}</span>) vs. the voiced stop <span class="font-bold text-orange-600">B</span> (as in <span class="font-semibold text-teal-700">${lessonData.pronunciation.p_b_focus[1].words.join('</span>, <span class="font-semibold text-teal-700">')}</span>).`,
+
+        // Part 3: Core Vocabulary
+        // RENDER FIX 2 & 3: Engineering and Business Vocab rendered with new structure
+        engVocab: renderVocab(lessonData.coreVocabulary.engineering),
+        bizVocab: renderVocab(lessonData.coreVocabulary.business),
+        
+        // Wrap-Up
+        keyTakeaways: lessonData.keyTakeaways.map(t => `<li class="text-dark-blue">${formatText(t)}</li>`).join(''),
+        nextLesson: lessonData.nextLesson,
+
+        // Warm-up: Vocab Guessing Game (FIXED - VIETNAMESE)
+        vocabGuessingTable: lessonData.warmup.vocabGuessing.map((item, index) => `
+            <tr>
+                <td class="px-3 py-4 whitespace-nowrap font-medium text-gray-900">${item.native}</td>
+                <td id="translation-vocab${index}" class="px-3 py-4 whitespace-nowrap text-gray-500 opacity-0 transition-opacity duration-500">${item.translation}</td>
+                <td id="target-vocab${index}" class="px-3 py-4 whitespace-nowrap font-bold text-primary-teal opacity-0 transition-opacity duration-500">${item.target}</td>
+                <td class="px-3 py-4 whitespace-nowrap text-right">
+                    <button data-target="vocab${index}" class="vocab-reveal-btn btn-secondary text-sm">Reveal</button>
+                </td>
+            </tr>
+        `).join(''),
+
+        // Roleplay Scripts (NEW FIX)
+        roleplayScriptsHtml: lessonData.roleplayScripts.map((script, index) => `
+            <div class="script-card p-4 bg-gray-50 hover:bg-teal-50 border-l-4 border-teal-500 rounded-lg cursor-pointer transition-colors duration-200" data-index="${index}">
+                <p class="font-bold text-lg text-dark-blue">${index + 1}. ${script.title}</p>
+                <p class="text-sm text-gray-500">${script.focus}</p>
+            </div>
+        `).join('')
+    };
+
+    // ----------------------------------------------------
+    // JAVASCRIPT FUNCTIONS (FIXED AND OPTIMIZED)
+    // ----------------------------------------------------
+    const lessonElements = {};
+
+    document.addEventListener('DOMContentLoaded', init);
+
+    function init() {
+        // Cache DOM elements for efficiency
+        ['lesson-content', 'landing-page', 'tips-modal', 'tips-content', 'tips-button', 'start-lesson-btn', 'quiz-container', 'quiz-question', 'next-quiz-btn', 'tongue-twisters', 'twisters-toggle-btn', 'roleplay-modal', 'roleplay-modal-title', 'roleplay-modal-focus', 'roleplay-modal-lines', 'close-roleplay-modal', 'roleplay-scripts-container', 'vocab-guessing-body', 'eng-vocab-display', 'biz-vocab-display'].forEach(id => {
+            lessonElements[id] = document.getElementById(id);
+        });
+        lessonElements.sections = document.querySelectorAll('.lesson-section');
+        lessonElements.navButtons = document.querySelectorAll('.nav-button');
+
+        // Initial setup
+        lessonElements.sections.forEach(section => section.style.display = 'none');
+        if (lessonElements['lesson-content']) lessonElements['lesson-content'].style.display = 'none';
+        
+        // INJECTING ALL PRE-RENDERED CONTENT
+        if (document.getElementById('intro-text-display')) document.getElementById('intro-text-display').innerHTML = preRenderedContent.communicationIntro;
+        if (document.getElementById('vocab-display')) document.getElementById('vocab-display').innerHTML = preRenderedContent.communicationVocab; // UPDATED
+        if (document.getElementById('phrases-display')) document.getElementById('phrases-display').innerHTML = preRenderedContent.communicationPhrases;
+        if (document.getElementById('idioms-display')) document.getElementById('idioms-display').innerHTML = preRenderedContent.communicationIdioms;
+
+        if (document.getElementById('phonics-review-display')) document.getElementById('phonics-review-display').textContent = preRenderedContent.phonicsReview;
+        if (document.getElementById('phonics-today-display')) document.getElementById('phonics-today-display').textContent = preRenderedContent.phonicsToday;
+        if (lessonElements['tongue-twisters']) lessonElements['tongue-twisters'].innerHTML = preRenderedContent.tongueTwisters;
+        if (document.getElementById('p-b-description')) document.getElementById('p-b-description').innerHTML = preRenderedContent.p_b_description;
+
+        if (lessonElements['eng-vocab-display']) lessonElements['eng-vocab-display'].innerHTML = preRenderedContent.engVocab; // UPDATED
+        if (lessonElements['biz-vocab-display']) lessonElements['biz-vocab-display'].innerHTML = preRenderedContent.bizVocab; // UPDATED
+        
+        if (document.getElementById('key-takeaways-display')) document.getElementById('key-takeaways-display').innerHTML = preRenderedContent.keyTakeaways;
+        if (document.getElementById('next-lesson-display')) document.getElementById('next-lesson-display').textContent = preRenderedContent.nextLesson;
+        
+        // Vocab Guessing Table
+        if (lessonElements['vocab-guessing-body']) lessonElements['vocab-guessing-body'].innerHTML = preRenderedContent.vocabGuessingTable;
+        
+        // Roleplay Scripts Container (THE FIX)
+        if (lessonElements['roleplay-scripts-container']) lessonElements['roleplay-scripts-container'].innerHTML = preRenderedContent.roleplayScriptsHtml;
+
+
+        // Event Listeners
+        if (lessonElements['start-lesson-btn']) lessonElements['start-lesson-btn'].addEventListener('click', startLesson);
+        if (lessonElements['tips-button']) lessonElements['tips-button'].addEventListener('click', showTipsModal);
+        if (lessonElements['tips-modal']) lessonElements['tips-modal'].addEventListener('click', closeTipsModal);
+        if (lessonElements['close-roleplay-modal']) lessonElements['close-roleplay-modal'].addEventListener('click', closeRoleplayModal);
+        if (lessonElements['twisters-toggle-btn']) lessonElements['twisters-toggle-btn'].addEventListener('click', toggleTongueTwisters);
+        if (lessonElements['roleplay-scripts-container']) lessonElements['roleplay-scripts-container'].addEventListener('click', handleRoleplayClick);
+
+        // Functional setups
+        setupQuiz();
+        setupVocabReveals();
+        setupReadingTabs('communication-readings', lessonData.communication.readings);
+        setupReadingTabs('core-readings-container', lessonData.coreReadings);
+    }
+
+    function startLesson() {
+        if (lessonElements['landing-page']) lessonElements['landing-page'].style.display = 'none';
+        if (lessonElements['lesson-content']) lessonElements['lesson-content'].style.display = 'block';
+        showSection('agenda-overview');
+    }
+
+    // --- Section Navigation ---
+    window.showSection = (sectionId) => {
+        lessonElements.sections.forEach(section => section.style.display = 'none');
+        const targetSection = document.getElementById(sectionId);
+        if (targetSection) targetSection.style.display = 'block';
+
+        lessonElements.navButtons.forEach(btn => {
+            const isActive = btn.getAttribute('data-target') === sectionId;
+            btn.classList.toggle('bg-orange-600', isActive);
+            btn.classList.toggle('hover:bg-orange-700', isActive);
+            btn.classList.toggle('text-white', isActive);
+            
+            btn.classList.toggle('bg-gray-200', !isActive);
+            btn.classList.toggle('text-gray-700', !isActive);
+            btn.classList.toggle('hover:bg-gray-300', !isActive);
+        });
+    };
+
+    // --- Agenda Tips Modal Logic ---
+    function showTipsModal(e) {
+        e.stopPropagation();
+        if (lessonElements['tips-content']) {
+            lessonElements['tips-content'].innerHTML = lessonData.agendaTips.map(tip => `<li class="p-2 border-l-4 border-yellow-500 bg-yellow-50 rounded-r-md">${formatText(tip)}</li>`).join('');
+        }
+        if (lessonElements['tips-modal']) lessonElements['tips-modal'].classList.remove('hidden');
+    }
+
+    function closeTipsModal() {
+        if (lessonElements['tips-modal']) lessonElements['tips-modal'].classList.add('hidden');
+    }
+
+    // --- Quick Quiz Logic ---
+    let currentQuizIndex = 0;
+    function setupQuiz() {
+        if (!lessonElements['quiz-container'] || !lessonElements['quiz-question'] || !lessonElements['next-quiz-btn']) {
+            console.error("Quiz elements not found. Cannot set up quiz.");
+            return;
+        }
+        
+        const loadQuizQuestion = () => {
+            if (currentQuizIndex < lessonData.warmup.quizQuestions.length) {
+                lessonElements['quiz-question'].textContent = lessonData.warmup.quizQuestions[currentQuizIndex];
+                lessonElements['next-quiz-btn'].textContent = (currentQuizIndex === lessonData.warmup.quizQuestions.length - 1) ? 'Finish Quiz (Show Answers)' : 'Next Question';
+                
+                lessonElements['next-quiz-btn'].onclick = handleNextQuizClick;
+
+            } else {
+                // Quiz is complete 
+                lessonElements['quiz-container'].innerHTML = `<p class="text-xl font-bold text-center text-green-600">Quiz Complete! Discuss answers with your trainer.</p>`;
+            }
+        };
+
+        const handleNextQuizClick = () => {
+            currentQuizIndex++;
+            loadQuizQuestion();
+        };
+
+        lessonElements['next-quiz-btn'].onclick = handleNextQuizClick;
+        loadQuizQuestion(); // Load the first question on setup
+    }
+
+    // --- Vocab Guessing Reveal Logic ---
+    function setupVocabReveals() {
+        document.querySelectorAll('.vocab-reveal-btn').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const targetId = e.target.getAttribute('data-target');
+                document.getElementById(`translation-${targetId}`).classList.remove('opacity-0');
+                document.getElementById(`target-${targetId}`).classList.remove('opacity-0');
+                e.target.classList.add('bg-gray-500');
+                e.target.disabled = true;
+            });
+        });
+    }
+
+    // --- Reading Tabs Logic ---
+    function setupReadingTabs(containerId, readings) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+
+        const tabButtonsHtml = readings.map((r, i) =>
+            `<button class="tab-btn py-2 px-4 rounded-t-lg font-semibold transition-colors duration-200 bg-gray-100 text-gray-700" data-tab="tab-${containerId}-${i}">
+                ${r.title}
+            </button>`
+        ).join('');
+
+        const tabContentHtml = readings.map((r, i) =>
+            `<div id="tab-${containerId}-${i}" class="tab-content p-4 bg-white rounded-b-lg border-t-2 border-primary-teal hidden">
+                <p class="text-gray-700">${formatText(r.text)}</p>
+            </div>`
+        ).join('');
+
+        container.innerHTML = `<div class="flex space-x-2 border-b-2 border-primary-teal">${tabButtonsHtml}</div>${tabContentHtml}`;
+
+        const tabButtons = container.querySelectorAll('.tab-btn');
+        const tabContents = container.querySelectorAll('.tab-content');
+
+        const activateTab = (tabId) => {
+            tabContents.forEach(content => content.classList.add('hidden'));
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+
+            document.getElementById(tabId).classList.remove('hidden');
+            container.querySelector(`[data-tab="${tabId}"]`).classList.add('active');
+        };
+
+        tabButtons.forEach((button) => {
+            button.addEventListener('click', () => activateTab(button.getAttribute('data-tab')));
+        });
+
+        // Activate the first tab by default
+        if (tabButtons.length > 0) {
+            activateTab(tabButtons[0].getAttribute('data-tab'));
+        }
+    }
+    
+    // --- Pronunciation Toggle ---
+    function toggleTongueTwisters(e) {
+        if (!lessonElements['tongue-twisters']) return;
+        const isHidden = lessonElements['tongue-twisters'].classList.toggle('hidden');
+        e.target.textContent = isHidden ? 'Show 10 Tongue Twisters' : 'Hide Tongue Twisters';
+    }
+
+
+    // --- Roleplay Scripts Modal Logic (FIXED) ---
+    function handleRoleplayClick(e) {
+        const target = e.target.closest('.script-card');
+        if (!target) return;
+
+        const scriptIndex = target.getAttribute('data-index');
+        const script = lessonData.roleplayScripts[scriptIndex];
+
+        if (lessonElements['roleplay-modal-title']) lessonElements['roleplay-modal-title'].textContent = script.title;
+        if (lessonElements['roleplay-modal-focus']) lessonElements['roleplay-modal-focus'].textContent = `Focus: ${script.focus}`;
+        
+        if (lessonElements['roleplay-modal-lines']) {
+            lessonElements['roleplay-modal-lines'].innerHTML = script.lines.map(line => 
+                `<div class="flex space-x-4 mb-3 p-2 rounded-lg ${line.speaker === 'A' ? 'bg-indigo-50 border-l-4 border-indigo-500' : 'bg-green-50 border-l-4 border-green-500'}">
+                    <div class="font-bold w-10">${line.speaker}:</div>
+                    <div><span class="italic text-gray-500">(${line.emotion})</span> ${formatText(line.text)}</div>
+                </div>`
+            ).join('');
+        }
+        
+        if (lessonElements['roleplay-modal']) lessonElements['roleplay-modal'].classList.remove('hidden');
+    }
+
+    function closeRoleplayModal() {
+        if (lessonElements['roleplay-modal']) lessonElements['roleplay-modal'].classList.add('hidden');
+    }
+</script>
+
+<header class="header-bg text-white p-6 rounded-t-xl">
+    <h1 class="text-3xl font-extrabold">LESSON 11: TECHNICAL DOCS & ACTIVE LISTENING</h1>
+    <p class="text-teal-300 text-lg mt-1">Specialized English for Renewable Energy</p>
+</header>
+
+<div id="landing-page" class="section-card p-10 mt-6 text-center">
+    <h2 class="text-2xl font-bold mb-4 text-dark-blue">Ready to begin Lesson 11?</h2>
+    <p class="text-gray-600 mb-6">This lesson focuses on mastering the language of <span class="font-semibold text-teal-700">Technical Documentation</span> and developing crucial <span class="font-semibold text-teal-700">Active Listening</span> skills to prevent costly miscommunications.</p>
+    <button id="start-lesson-btn" class="btn-primary text-xl px-8 py-4">START LESSON DASHBOARD</button>
+</div>
+
+<div id="lesson-content" class="mt-6">
+
+    <nav class="sticky top-0 z-10 bg-white p-3 rounded-xl shadow-lg flex flex-wrap justify-center gap-3 mb-6">
+        <button class="nav-button py-2 px-4 rounded-lg text-sm transition-all" data-target="agenda-overview" onclick="showSection('agenda-overview')">🚀 Agenda</button>
+        <button class="nav-button py-2 px-4 rounded-lg text-sm transition-all" data-target="warm-up" onclick="showSection('warm-up')">🔥 Warm-Up</button>
+        <button class="nav-button py-2 px-4 rounded-lg text-sm transition-all" data-target="part-1-communication" onclick="showSection('part-1-communication')">💬 Part 1: Communication</button>
+        <button class="nav-button py-2 px-4 rounded-lg text-sm transition-all" data-target="part-2-pronunciation" onclick="showSection('part-2-pronunciation')">🗣️ Part 2: Pronunciation</button>
+        <button class="nav-button py-2 px-4 rounded-lg text-sm transition-all" data-target="part-3-core-eng" onclick="showSection('part-3-core-eng')">⚙️ Part 3: Business & Engineering</button>
+        <button class="nav-button py-2 px-4 rounded-lg text-sm transition-all" data-target="part-4-roleplay" onclick="showSection('part-4-roleplay')">👥 Part 4: Small Group Training</button>
+        <button class="nav-button py-2 px-4 rounded-lg text-sm transition-all" data-target="wrap-up" onclick="showSection('wrap-up')">✅ Wrap-Up</button>
+    </nav>
+
+    <section id="agenda-overview" class="lesson-section space-y-6">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="section-card p-6 lg:col-span-2">
+                <h2 class="text-2xl font-bold border-b pb-2 mb-4 text-dark-blue">Lesson Agenda</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-lg">
+                    <div class="flex items-center space-x-3 p-3 bg-teal-50 rounded-lg"><span class="text-2xl">🔥</span><span class="font-semibold">Warm-Up & Review:</span> Quiz & Vocab Guessing</div>
+                    <div class="flex items-center space-x-3 p-3 bg-teal-50 rounded-lg"><span class="text-2xl">💬</span><span class="font-semibold">Part 1:</span> Active Listening & Idioms</div>
+                    <div class="flex items-center space-x-3 p-3 bg-teal-50 rounded-lg"><span class="text-2xl">🗣️</span><span class="font-semibold">Part 2:</span> Pronunciation Focus (P / B)</div>
+                    <div class="flex items-center space-x-3 p-3 bg-teal-50 rounded-lg"><span class="text-2xl">⚙️</span><span class="font-semibold">Part 3:</span> Business & Engineering Vocabulary & Reading</div>
+                    <div class="flex items-center space-x-3 p-3 bg-teal-50 rounded-lg"><span class="text-2xl">👥</span><span class="font-semibold">Part 4:</span> Small Group Training: Scenarios & Practice</div>
+                    <div class="flex items-center space-x-3 p-3 bg-teal-50 rounded-lg"><span class="text-2xl">✅</span><span class="font-semibold">Wrap-Up:</span> Key Takeaways & Next Steps</div>
+                </div>
+                <button id="tips-button" class="btn-secondary mt-6 flex items-center space-x-2">
+                    <span class="text-xl">💡</span>
+                    <span>Communication Tips of the Day (3)</span>
+                </button>
+            </div>
+            
+            <div class="section-card p-6">
+                <h2 class="text-2xl font-bold border-b pb-2 mb-4 text-dark-blue">Lesson Time Flow</h2>
+                <div class="timeline-container">
+                    <div class="timeline-item">
+                        <span class="font-bold text-teal-600">3:00 - 3:15 PM</span><br>Warm-Up & Quiz Review
+                    </div>
+                    <div class="timeline-item">
+                        <span class="font-bold text-teal-600">3:15 - 3:40 PM</span><br>Communication Training (Active Listening)
+                    </div>
+                    <div class="timeline-item">
+                        <span class="font-bold text-teal-600">3:40 - 4:00 PM</span><br>Core Vocabulary & Pronunciation (P/B)
+                    </div>
+                    <div class="timeline-item">
+                        <span class="font-bold text-teal-600">4:00 - 4:20 PM</span><br>Reading Comprehension & Discussion
+                    </div>
+                    <div class="timeline-item">
+                        <span class="font-bold text-teal-600">4:20 - 4:50 PM</span><br>Roleplay Practice (Technical & Business Scenarios)
+                    </div>
+                    <div class="timeline-item">
+                        <span class="font-bold text-teal-600">4:50 - 5:00 PM</span><br>Wrap-Up & Next Lesson Overview
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="tips-modal" class="fixed inset-0 bg-gray-900 bg-opacity-75 hidden z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl p-8 w-full max-w-2xl transform transition-all shadow-2xl" onclick="event.stopPropagation()">
+            <h3 class="text-3xl font-extrabold text-orange-600 mb-6 border-b pb-3">💡 Communication Tips for Active Listening</h3>
+            <ul id="tips-content" class="space-y-4 list-disc pl-5">
+                </ul>
+            <button class="mt-6 float-right btn-secondary" onclick="closeTipsModal()">Close</button>
+        </div>
+    </div>
+    
+    <section id="warm-up" class="lesson-section space-y-6">
+        <h2 class="text-3xl font-bold text-dark-blue border-b-2 border-primary-teal pb-2">🔥 Warm-Up: Review & Focus</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="section-card p-6 space-y-4">
+                <h3 class="text-xl font-bold text-orange-600">Ice Breaker: The Misread Instruction</h3>
+                <p class="text-gray-700">The trainer will share a brief, funny story about a time they misread a simple, non-technical instruction (like a recipe or furniture assembly manual) that led to a small, comical disaster.</p>
+                <div class="pt-2">
+                    <h4 class="font-semibold text-dark-blue">Discussion Questions:</h4>
+                    <ul class="list-disc pl-5 text-gray-700 space-y-1">
+                        <li>What is one instruction, written or verbal, you completely misinterpreted recently, and what was the result?</li>
+                        <li>Have you ever worked on a technical document that was so confusing you just gave up and asked for verbal <span class="font-semibold text-teal-700">clarification</span>?</li>
+                        <li>How important is it to ask a clarifying question immediately versus waiting until you are stuck?</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section-card p-6 space-y-4">
+                <h3 class="text-xl font-bold text-orange-600">Video: The Power of Active Listening (5-7 min)</h3>
+                <p class="font-semibold text-gray-700">Video Title: "The Power of Active Listening: 5 Techniques to Engage"</p>
+                <div class="pt-2">
+                    <h4 class="font-semibold text-dark-blue">Post-Video Discussion:</h4>
+                    <ul class="list-disc pl-5 text-gray-700 space-y-1">
+                        <li>The video mentioned 'mirroring' or 'paraphrasing'—how does that one technique specifically help ensure accuracy when discussing technical <span class="font-semibold text-teal-700">specifications</span>?</li>
+                        <li>In a virtual meeting, what <span class="font-semibold text-teal-700">nonverbal</span> cues (like eye contact, nodding, using the chat) can engineers use to show they are actively listening to the project manager?</li>
+                        <li>What is the most common distraction (internal or external) that prevents you from having deep <span class="font-semibold text-teal-700">concentration</span> during a long, complex technical presentation?</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-card p-6">
+            <h3 class="text-xl font-bold text-dark-blue mb-4">Quick Quiz: Review (5 Questions)</h3>
+            <p class="text-gray-600 mb-4">Trainer to initiate. Press "Next Question" to advance. Do not reveal the answer until the student has responded.</p>
+            <div id="quiz-container" class="border border-teal-300 p-4 rounded-lg bg-teal-50">
+                <p id="quiz-question" class="text-lg font-semibold mb-4">The first question loads here...</p>
+                <button id="next-quiz-btn" class="btn-primary">Next Question</button>
+            </div>
+        </div>
+
+        <div class="section-card p-6">
+            <h3 class="text-xl font-bold text-dark-blue mb-4">Vocabulary Guessing Game (5 Words)</h3>
+            <p class="text-gray-600 mb-4">Guess the Target English word from the Native Language Concept (Vietnamese). Reveal only after the student has tried.</p>
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Native Word/Concept</th>
+                        <th class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">English Translation</th>
+                        <th class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Target English Word</th>
+                        <th class="px-3 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Reveal</th>
+                    </tr>
+                </thead>
+                <tbody id="vocab-guessing-body" class="bg-white divide-y divide-gray-200">
+                    </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section id="part-1-communication" class="lesson-section space-y-6">
+        <h2 class="text-3xl font-bold text-dark-blue border-b-2 border-primary-teal pb-2">💬 Part 1: Active Listening & Professional Dialogue</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="section-card p-6 md:col-span-1 space-y-4">
+                <h3 class="text-xl font-bold text-orange-600 border-b pb-2">Communication Toolkit</h3>
+                
+                <div>
+                    <h4 class="font-semibold text-dark-blue mb-2">5 Key Vocabulary (Active Listening):</h4>
+                    <div id="vocab-display" class="mb-2">
+                        <p class="text-sm text-gray-600 italic mb-2">Hover over or tap the words for the definition and sentence!</p>
+                        </div>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-dark-blue mb-2">5 Key Phrases (Clarification/Validation):</h4>
+                    <ul id="phrases-display" class="list-disc pl-5 text-gray-700 space-y-1">
+                        </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-dark-blue mb-2">3 Common Idioms/Sayings:</h4>
+                    <div id="idioms-display">
+                        </div>
+                </div>
+            </div>
+
+            <div class="md:col-span-2 space-y-6">
+                <div class="section-card p-6">
+                    <h3 class="text-xl font-bold text-dark-blue mb-3">Topic Introduction: Active Listening (Why it Matters)</h3>
+                    <p id="intro-text-display" class="text-gray-700 italic">
+                        </p>
+                </div>
+                
+                <div class="section-card p-6">
+                    <h3 class="text-xl font-bold text-dark-blue mb-3">Group Readings (Tabbed Interface)</h3>
+                    <div id="communication-readings" class="mt-4">
+                        </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="part-2-pronunciation" class="lesson-section space-y-6">
+        <h2 class="text-3xl font-bold text-dark-blue border-b-2 border-primary-teal pb-2">🗣️ Part 2: Pronunciation Focus (P / B)</h2>
+        
+        <div class="section-card p-6 space-y-4">
+            <h3 class="text-xl font-bold text-orange-600">Phonics Focus: The P / B Difference</h3>
+            <p id="p-b-description" class="text-gray-700">
+                </p>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="bg-teal-50 p-3 rounded-lg">
+                    <h4 class="font-semibold text-dark-blue">Review from Yesterday (M / N):</h4>
+                    <p id="phonics-review-display" class="text-sm text-gray-600">
+                        </p>
+                </div>
+                <div class="bg-teal-50 p-3 rounded-lg">
+                    <h4 class="font-semibold text-dark-blue">Today's Focus (P / B):</h4>
+                    <p id="phonics-today-display" class="text-sm text-gray-600">
+                        </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-card p-6">
+            <h3 class="text-xl font-bold text-dark-blue mb-3">10 Tongue Twisters (Toggle Display)</h3>
+            <button id="twisters-toggle-btn" class="btn-primary mb-4">Show 10 Tongue Twisters</button>
+            <ul id="tongue-twisters" class="list-disc pl-5 text-lg font-medium text-gray-700 space-y-2 hidden">
+                </ul>
+        </div>
+    </section>
+
+    <section id="part-3-core-eng" class="lesson-section space-y-6">
+        <h2 class="text-3xl font-bold text-dark-blue border-b-2 border-primary-teal pb-2">⚙️ Part 3: Business & Engineering</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="section-card p-6">
+                <h3 class="text-xl font-bold text-orange-600 mb-3">10 Industry Specific Vocabulary (Technical Documentation)</h3>
+                <div id="eng-vocab-display" class="mt-4 max-h-96 overflow-y-auto pr-2">
+                    </div>
+            </div>
+            <div class="section-card p-6">
+                <h3 class="text-xl font-bold text-orange-600 mb-3">10 Business English Vocabulary (Public Relations/Sales)</h3>
+                <div id="biz-vocab-display" class="mt-4 max-h-96 overflow-y-auto pr-2">
+                    </div>
+            </div>
+        </div>
+
+        <div class="section-card p-6">
+            <h3 class="text-xl font-bold text-dark-blue mb-3">Core Readings (Tabbed Interface)</h3>
+            <div id="core-readings-container" class="mt-4">
+                </div>
+        </div>
+    </section>
+
+    <section id="part-4-roleplay" class="lesson-section space-y-6">
+        <h2 class="text-3xl font-bold text-dark-blue border-b-2 border-primary-teal pb-2">👥 Part 4: Small Group Training</h2>
+        
+        <div class="section-card p-6">
+            <h3 class="text-xl font-bold text-orange-600 mb-4">Roleplay Focus: Technical Clarification & Business Diplomacy</h3>
+            <p class="text-gray-700 mb-6">These scenarios integrate the new vocabulary, communication phrases, and active listening techniques. Click a title to view the full 8-line script.</p>
+            
+            <div id="roleplay-scripts-container" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                </div>
+        </div>
+    </section>
+    
+    <div id="roleplay-modal" class="fixed inset-0 bg-gray-900 bg-opacity-75 hidden z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl p-8 w-full max-w-4xl transform transition-all shadow-2xl relative">
+            <button id="close-roleplay-modal" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-3xl font-bold">&times;</button>
+            <h3 id="roleplay-modal-title" class="text-3xl font-extrabold text-teal-600 mb-2 border-b pb-1"></h3>
+            <p id="roleplay-modal-focus" class="text-orange-600 font-semibold mb-6"></p>
+            
+            <div id="roleplay-modal-lines" class="max-h-[70vh] overflow-y-auto pr-4">
+                </div>
+        </div>
+    </div>
+
+
+    <section id="wrap-up" class="lesson-section space-y-6">
+        <h2 class="text-3xl font-bold text-dark-blue border-b-2 border-primary-teal pb-2">✅ Review & Wrap-Up</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="section-card p-6">
+                <h3 class="text-xl font-bold text-orange-600 mb-3">Key Takeaways</h3>
+                <ul id="key-takeaways-display" class="list-disc pl-5 text-lg font-medium text-gray-700 space-y-2">
+                    </ul>
+            </div>
+            
+            <div class="section-card p-6">
+                <h3 class="text-xl font-bold text-orange-600 mb-3">Next Lesson Preview (Lesson 12)</h3>
+                <p id="next-lesson-display" class="text-gray-700">
+                    </p>
+                <p class="mt-4 font-semibold text-dark-blue">Next Communication Focus: <span class="font-semibold text-teal-700">Negotiation and Compromise</span></p>
+                <p class="font-semibold text-dark-blue">Next Industry Focus: <span class="font-semibold text-teal-700">Project Scheduling & Stakeholder Management</span></p>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>NET PET AI Coach — Mobile</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0f0f1a" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --neon-purple: #a855f7;
+      --gold-accent: #f59e0b;
+      --deep-dark: #0f0f1a;
+      --glass-bg: rgba(26, 26, 38, 0.7);
+      --glass-border: rgba(168, 85, 247, 0.3);
+      --text-primary: #f9fafb;
+      --text-dim: rgba(249, 250, 251, 0.65);
+      --danger: #ef4444;
+      --success: #22c55e;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+      width: 100%;
+      background-color: var(--deep-dark);
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text-primary);
+    }
+
+    body {
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+    }
+
+    /* Ambient Background */
+    .ambient {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .ambient-blob {
+      position: absolute;
+      width: 480px;
+      height: 480px;
+      background: radial-gradient(circle, rgba(168,85,247,0.22) 0%, rgba(0,0,0,0) 70%);
+      filter: blur(6px);
+      top: 60%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation: breathe 10s ease-in-out infinite;
+    }
+
+    @keyframes breathe {
+      0%, 100% { opacity: 0.4; transform: translate(-50%, -50%) scale(1); }
+      50% { opacity: 0.85; transform: translate(-50%, -50%) scale(1.06); }
+    }
+
+    /* APP SHELL (phone frame feel) */
+    .app-shell {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 480px;
+      height: 100vh;
+      max-height: 900px;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      padding: 12px;
+    }
+
+    .app-card {
+      flex: 1;
+      background: var(--glass-bg);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-radius: 28px;
+      border: 1px solid var(--glass-border);
+      padding: 16px 16px 8px 16px;
+      display: flex;
+      flex-direction: column;
+      box-shadow:
+        0 18px 40px rgba(0,0,0,0.8),
+        0 0 40px rgba(168,85,247,0.45);
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .header-left {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .app-title {
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--gold-accent);
+      font-family: "JetBrains Mono", monospace;
+    }
+
+    .app-subtitle {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+    }
+
+    .streak-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(245,158,11,0.16);
+      color: var(--gold-accent);
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .streak-pill span {
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Avatar + Today summary row */
+    .top-row {
+      display: grid;
+      grid-template-columns: 1.2fr 1.4fr;
+      gap: 12px;
+      align-items: stretch;
+      margin-bottom: 10px;
+      margin-top: 4px;
+    }
+
+    .avatar-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: 4px;
+    }
+
+    .avatar-orbit {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 2px solid rgba(168,85,247,0.3);
+      animation: spin 12s linear infinite;
+    }
+
+    .avatar-orbit.inner {
+      width: 94px;
+      height: 94px;
+      border-style: dashed;
+      border-color: rgba(245,158,11,0.6);
+      animation-duration: 18s;
+      animation-direction: reverse;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .avatar-core {
+      width: 84px;
+      height: 84px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--neon-purple), #4c1d95);
+      box-shadow: 0 0 26px var(--neon-purple);
+      transition: all 0.45s ease;
+    }
+
+    .avatar-core.happy {
+      background: radial-gradient(circle, var(--gold-accent), #b45309);
+      box-shadow: 0 0 40px var(--gold-accent);
+    }
+
+    .avatar-core.slump {
+      background: radial-gradient(circle, #991b1b, #450a0a);
+      box-shadow: 0 0 18px var(--danger);
+      opacity: 0.8;
+    }
+
+    .today-card {
+      border-radius: 18px;
+      padding: 10px 12px;
+      background: radial-gradient(circle at top left, rgba(168,85,247,0.22), rgba(15,15,26,0.95));
+      border: 1px solid rgba(248,250,252,0.06);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 6px;
+    }
+
+    .today-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-dim);
+    }
+
+    .today-main {
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .today-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 2px;
+    }
+
+    .tag {
+      font-size: 0.65rem;
+      padding: 3px 7px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.8);
+      border: 1px solid rgba(148,163,184,0.4);
+      color: var(--text-dim);
+    }
+
+    .tag-strong {
+      border-color: rgba(245,158,11,0.8);
+      color: var(--gold-accent);
+      background: rgba(245,158,11,0.08);
+    }
+
+    /* Dialogue */
+    .dialogue {
+      margin-top: 8px;
+      margin-bottom: 10px;
+      border-radius: 14px;
+      padding: 10px 12px;
+      background: rgba(0,0,0,0.32);
+      border-left: 3px solid var(--neon-purple);
+      font-size: 0.9rem;
+      line-height: 1.5;
+      min-height: 64px;
+      display: flex;
+      align-items: center;
+    }
+
+    .dialogue em {
+      font-style: italic;
+      color: var(--text-primary);
+    }
+
+    /* Trackers */
+    .trackers {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 10px;
+      margin-top: 4px;
+    }
+
+    .tracker-row {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .tracker-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .tracker-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-dim);
+    }
+
+    .tracker-value {
+      font-size: 0.75rem;
+      font-variant-numeric: tabular-nums;
+      color: var(--text-dim);
+    }
+
+    .progress-bg {
+      width: 100%;
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.9);
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      border-radius: 999px;
+      transition: width 0.45s ease;
+    }
+
+    .fill-listen {
+      background: linear-gradient(90deg, var(--neon-purple), #d8b4fe);
+    }
+
+    .fill-speak {
+      background: linear-gradient(90deg, var(--gold-accent), #facc15);
+    }
+
+    /* Bottom Action Bar */
+    .bottom-bar {
+      margin-top: auto;
+      padding-top: 8px;
+      border-top: 1px solid rgba(148,163,184,0.25);
+    }
+
+    .primary-actions {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+
+    .btn {
+      appearance: none;
+      border: none;
+      border-radius: 999px;
+      padding: 14px 10px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      transition: transform 0.12s ease, box-shadow 0.12s ease;
+      font-family: "Inter", system-ui;
+    }
+
+    .btn:active {
+      transform: scale(0.97);
+      box-shadow: none;
+    }
+
+    .btn-listen {
+      background: var(--neon-purple);
+      color: #f9fafb;
+      box-shadow: 0 8px 16px rgba(168,85,247,0.35);
+    }
+
+    .btn-speak {
+      background: var(--gold-accent);
+      color: var(--deep-dark);
+      box-shadow: 0 8px 16px rgba(245,158,11,0.4);
+    }
+
+    .bottom-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.7rem;
+      color: var(--text-dim);
+    }
+
+    .pill-soft {
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px dashed rgba(148,163,184,0.6);
+      font-size: 0.7rem;
+      font-family: "JetBrains Mono", monospace;
+    }
+
+    .debug-btn {
+      background: transparent;
+      border: 1px solid rgba(148,163,184,0.35);
+      color: var(--text-dim);
+      border-radius: 999px;
+      padding: 4px 8px;
+      font-size: 0.7rem;
+      cursor: pointer;
+    }
+
+    .debug-btn:active {
+      transform: scale(0.97);
+    }
+
+    @media (max-height: 720px) {
+      .avatar-core {
+        width: 72px;
+        height: 72px;
+      }
+      .avatar-orbit {
+        width: 104px;
+        height: 104px;
+      }
+      .avatar-orbit.inner {
+        width: 86px;
+        height: 86px;
+      }
+      .today-card {
+        padding: 8px 10px;
+      }
+      .dialogue {
+        min-height: 56px;
+        font-size: 0.85rem;
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <div class="ambient">
+    <div class="ambient-blob"></div>
+  </div>
+
+  <main class="app-shell">
+    <section class="app-card" aria-label="NET PET AI Coach">
+      <header class="header">
+        <div class="header-left">
+          <div class="app-title">NET PET AI v1.0</div>
+          <div class="app-subtitle">Your daily English discipline coach</div>
+        </div>
+        <div class="streak-pill">
+          🔥 <span id="streak-display">0</span> day streak
+        </div>
+      </header>
+
+      <section class="top-row" aria-label="Avatar and today summary">
+        <div class="avatar-wrap">
+          <div class="avatar-orbit"></div>
+          <div class="avatar-orbit inner"></div>
+          <div class="avatar-core" id="pet-avatar" aria-hidden="true"></div>
+        </div>
+
+        <article class="today-card">
+          <div class="today-label">Today’s Mission</div>
+          <div class="today-main" id="today-main-text">
+            45 minutes listening, 15 minutes speaking.
+          </div>
+          <div class="today-tags" id="today-tags">
+            <span class="tag tag-strong">No grammar prison</span>
+            <span class="tag">Make it fun</span>
+            <span class="tag">Don’t pause</span>
+          </div>
+        </article>
+      </section>
+
+      <section class="dialogue" aria-live="polite">
+        <p id="ai-message"><em>Initializing neural link...</em></p>
+      </section>
+
+      <section class="trackers" aria-label="Daily English progress">
+        <div class="tracker-row">
+          <div class="tracker-info">
+            <span class="tracker-label">Listening Input</span>
+            <span class="tracker-value" id="listen-stats">0 / 45m</span>
+          </div>
+          <div class="progress-bg">
+            <div class="progress-fill fill-listen" id="bar-listen" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <div class="tracker-row">
+          <div class="tracker-info">
+            <span class="tracker-label">Speaking / Mimic</span>
+            <span class="tracker-value" id="speak-stats">0 / 15m</span>
+          </div>
+          <div class="progress-bg">
+            <div class="progress-fill fill-speak" id="bar-speak" style="width: 0%"></div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="bottom-bar">
+        <div class="primary-actions">
+          <button class="btn btn-listen" id="btn-log-listen">
+            +15m Listening
+          </button>
+          <button class="btn btn-speak" id="btn-log-speak">
+            +5m Speaking
+          </button>
+        </div>
+
+        <div class="bottom-meta">
+          <div class="pill-soft">
+            60% Rule · 45/15 Lifestyle
+          </div>
+          <button class="debug-btn" id="btn-reset" type="button">
+            Reset today (debug)
+          </button>
+        </div>
+      </footer>
+    </section>
+  </main>
+
+  <script>
+    /**
+     * NET PET AI COACH — MOBILE VERSION
+     * Phoenix Engine · Gospel 444 · Canon Voice
+     * No inline events. No unsafe HTML. LocalStorage state.
+     */
+
+    const defaultState = {
+      streak: 0,
+      listeningMin: 0,
+      speakingMin: 0,
+      lastLogin: new Date().toDateString(),
+      mood: "NEUTRAL", // NEUTRAL, HAPPY, TOUGH_LOVE, PROUD
+      dailyGoalMet: false
+    };
+
+    let state;
+    try {
+      const saved = localStorage.getItem("netPetState");
+      state = saved ? { ...defaultState, ...JSON.parse(saved) } : { ...defaultState };
+    } catch (e) {
+      state = { ...defaultState };
+    }
+
+    const VOICE_MATRIX = {
+      GREETING: [
+        "Let's get to work. Consistency beats intensity.",
+        "Welcome back. Ready to break the grammar prison?",
+        "The robot voice ends today. Let's speak like humans.",
+        "Don't be a mouse. Be a tiger today."
+      ],
+      TOUGH_LOVE: [
+        "You haven't practiced speaking yet. You can't learn to swim by reading a book.",
+        "Grammar won't save you in a meeting. Confidence will. Speak up.",
+        "I will push your comfort zone because that's the only way to get results.",
+        "Do you want to be fluent, or do you just want to say you're 'studying'?"
+      ],
+      CELEBRATION: [
+        "Boom! That's the Tiger Energy I'm talking about!",
+        "Daily habit unlocked. This is how you win.",
+        "You're not studying English anymore. You're living it.",
+        "Outstanding. Tomorrow, we do it again."
+      ],
+      NUDGE: [
+        "45 minutes of listening isn't hard if you watch something fun.",
+        "Just 5 more minutes of shadowing. Mimic the emotion, not just the words.",
+        "Remember: Understand 60%, ignore the rest. Keep the flow.",
+        "Don't pause. Real life doesn't have a pause button."
+      ]
+    };
+
+    const elements = {
+      streakDisplay: document.getElementById("streak-display"),
+      listenStats: document.getElementById("listen-stats"),
+      speakStats: document.getElementById("speak-stats"),
+      barListen: document.getElementById("bar-listen"),
+      barSpeak: document.getElementById("bar-speak"),
+      aiMessage: document.getElementById("ai-message"),
+      avatar: document.getElementById("pet-avatar"),
+      todayMain: document.getElementById("today-main-text"),
+      btnLogListen: document.getElementById("btn-log-listen"),
+      btnLogSpeak: document.getElementById("btn-log-speak"),
+      btnReset: document.getElementById("btn-reset")
+    };
+
+    function saveState() {
+      try {
+        localStorage.setItem("netPetState", JSON.stringify(state));
+      } catch (e) {
+        console.warn("NET PET AI: Unable to save state", e);
+      }
+      renderUI();
+    }
+
+    function speak(category) {
+      const options = VOICE_MATRIX[category];
+      if (!options || options.length === 0) return;
+      const msg = options[Math.floor(Math.random() * options.length)];
+      elements.aiMessage.textContent = `"${msg}"`;
+    }
+
+    function checkDecay() {
+      const today = new Date().toDateString();
+      if (state.lastLogin !== today) {
+        if (!state.dailyGoalMet && (state.listeningMin > 0 || state.speakingMin > 0)) {
+          state.streak = 0;
+          state.mood = "TOUGH_LOVE";
+        } else if (state.dailyGoalMet) {
+          state.streak += 1;
+          state.mood = "HAPPY";
+        } else {
+          state.mood = "NEUTRAL";
+        }
+        state.listeningMin = 0;
+        state.speakingMin = 0;
+        state.dailyGoalMet = false;
+        state.lastLogin = today;
+        saveState();
+      }
+    }
+
+    function updateAvatar() {
+      const avatar = elements.avatar;
+      avatar.className = "avatar-core";
+
+      if (state.mood === "PROUD") {
+        avatar.classList.add("happy");
+        document.documentElement.style.setProperty("--neon-purple", "#f59e0b");
+      } else if (state.mood === "TOUGH_LOVE") {
+        avatar.classList.add("slump");
+        document.documentElement.style.setProperty("--neon-purple", "#a855f7");
+      } else if (state.mood === "HAPPY") {
+        avatar.classList.add("happy");
+        document.documentElement.style.setProperty("--neon-purple", "#a855f7");
+      } else {
+        document.documentElement.style.setProperty("--neon-purple", "#a855f7");
+      }
+    }
+
+    function updateMoodAndVoice() {
+      const totalListen = state.listeningMin;
+      const totalSpeak = state.speakingMin;
+
+      if (totalListen >= 45 && totalSpeak >= 15) {
+        if (!state.dailyGoalMet) {
+          state.dailyGoalMet = true;
+          state.mood = "PROUD";
+          speak("CELEBRATION");
+        } else {
+          state.mood = "HAPPY";
+        }
+      } else if (totalListen === 0 && totalSpeak === 0) {
+        state.mood = "NEUTRAL";
+      } else if (totalListen > 0 && totalSpeak === 0) {
+        state.mood = "TOUGH_LOVE";
+        speak("TOUGH_LOVE");
+      } else {
+        state.mood = "HAPPY";
+        if (Math.random() > 0.7) speak("NUDGE");
+      }
+
+      updateAvatar();
+      updateTodayText();
+    }
+
+    function updateTodayText() {
+      const l = state.listeningMin;
+      const s = state.speakingMin;
+      const t = elements.todayMain;
+
+      if (l === 0 && s === 0) {
+        t.textContent = "Start small: 15 minutes listening, 5 minutes speaking.";
+        return;
+      }
+      if (l < 45 && s < 15) {
+        t.textContent = "Good start. Keep going until you hit 45 / 15 today.";
+        return;
+      }
+      if (l >= 45 && s < 15) {
+        t.textContent = "Listening done. Now it's time to be a tiger and speak.";
+        return;
+      }
+      if (l < 45 && s >= 15) {
+        t.textContent = "Speaking is strong. Finish the listening mission.";
+        return;
+      }
+      if (l >= 45 && s >= 15) {
+        t.textContent = "Mission complete. Now just live your life in English.";
+      }
+    }
+
+    function renderUI() {
+      elements.streakDisplay.textContent = state.streak.toString();
+
+      const listenPct = Math.min((state.listeningMin / 45) * 100, 100);
+      const speakPct = Math.min((state.speakingMin / 15) * 100, 100);
+
+      elements.barListen.style.width = listenPct + "%";
+      elements.barSpeak.style.width = speakPct + "%";
+
+      elements.listenStats.textContent = `${state.listeningMin} / 45m`;
+      elements.speakStats.textContent = `${state.speakingMin} / 15m`;
+
+      updateAvatar();
+      updateTodayText();
+    }
+
+    elements.btnLogListen.addEventListener("click", () => {
+      state.listeningMin += 15;
+      updateMoodAndVoice();
+      saveState();
+    });
+
+    elements.btnLogSpeak.addEventListener("click", () => {
+      state.speakingMin += 5;
+      updateMoodAndVoice();
+      saveState();
+    });
+
+    elements.btnReset.addEventListener("click", () => {
+      state.listeningMin = 0;
+      state.speakingMin = 0;
+      state.dailyGoalMet = false;
+      state.mood = "NEUTRAL";
+      speak("GREETING");
+      saveState();
+    });
+
+    (function init() {
+      checkDecay();
+      renderUI();
+      if (!state.listeningMin && !state.speakingMin && !state.dailyGoalMet) {
+        speak("GREETING");
+      } else {
+        // Soft nudge on reload if mid-day
+        if (Math.random() > 0.5) {
+          speak("NUDGE");
+        }
+      }
+      console.log("NET PET AI Coach (Mobile) :: ONLINE :: Gospel 444 Compliant");
+    })();
+  </script>
+</body>
+</html>

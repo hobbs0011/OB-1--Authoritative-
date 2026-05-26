@@ -1,0 +1,2686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚂 TRAIN 6-7 — ADVANCED EDITION | Kiet & Nhan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Inter:wght@400;500;600;700&family=Rye&family=Special+Elite&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --purple: #a855f7;
+            --purple-glow: rgba(168, 85, 247, 0.5);
+            --purple-deep: #7c3aed;
+            --gold: #f59e0b;
+            --gold-glow: rgba(245, 158, 11, 0.5);
+            --gold-bright: #fbbf24;
+            --rust: #b45309;
+            --copper: #d97706;
+            --blood: #991b1b;
+            --crimson: #dc2626;
+            --sepia: #92400e;
+            --dark: #0a0806;
+            --darker: #050403;
+            --wood: #78350f;
+            --leather: #451a03;
+            --glass: rgba(18, 12, 8, 0.92);
+            --glass-light: rgba(30, 20, 15, 0.85);
+            --glass-border: rgba(180, 83, 9, 0.4);
+            --text: #fef3c7;
+            --text-dim: #d6d3d1;
+            --cream: #fffbeb;
+            --ember: #f97316;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--darker);
+            color: var(--text);
+            line-height: 1.85;
+            font-size: 17px;
+            overflow-x: hidden;
+            cursor: crosshair;
+        }
+
+        /* === CUSTOM CURSOR === */
+        .cursor-dot {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            background: var(--gold);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 99999;
+            mix-blend-mode: difference;
+            transition: transform 0.1s;
+        }
+
+        .cursor-ring {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 99998;
+            transition: all 0.15s ease-out;
+            opacity: 0.5;
+        }
+
+        /* === PARTICLE SYSTEM === */
+        .particles {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: var(--ember);
+            border-radius: 50%;
+            opacity: 0;
+            animation: particleFloat 8s infinite;
+        }
+
+        @keyframes particleFloat {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100px) rotate(720deg); opacity: 0; }
+        }
+
+        /* === WESTERN TEXTURE === */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: 
+                url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"),
+                radial-gradient(ellipse at 50% 0%, rgba(180, 83, 9, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 0% 100%, rgba(168, 85, 247, 0.08) 0%, transparent 40%),
+                radial-gradient(ellipse at 100% 100%, rgba(245, 158, 11, 0.08) 0%, transparent 40%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* === PARALLAX BACKGROUND === */
+        .parallax-bg {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: -2;
+            overflow: hidden;
+        }
+
+        .parallax-layer {
+            position: absolute;
+            width: 100%; height: 100%;
+        }
+
+        .stars {
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, var(--gold), transparent),
+                radial-gradient(2px 2px at 40px 70px, var(--cream), transparent),
+                radial-gradient(1px 1px at 90px 40px, var(--gold), transparent),
+                radial-gradient(2px 2px at 130px 80px, var(--cream), transparent),
+                radial-gradient(1px 1px at 160px 120px, var(--gold), transparent);
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            animation: twinkle 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.3; }
+            100% { opacity: 0.8; }
+        }
+
+        .mountains {
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 200%;
+            height: 40%;
+            background: 
+                linear-gradient(165deg, transparent 40%, rgba(30, 20, 15, 0.9) 40.5%),
+                linear-gradient(195deg, transparent 45%, rgba(25, 18, 12, 0.85) 45.5%),
+                linear-gradient(175deg, transparent 50%, rgba(20, 15, 10, 0.8) 50.5%);
+            animation: mountainScroll 120s linear infinite;
+        }
+
+        @keyframes mountainScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* === BLOB EFFECTS === */
+        .bg-effects {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.12;
+            animation: blobMorph 20s ease-in-out infinite;
+        }
+
+        .blob-1 { 
+            width: 700px; height: 700px; 
+            background: radial-gradient(circle, var(--purple) 0%, transparent 70%);
+            top: -200px; left: -200px; 
+        }
+        .blob-2 { 
+            width: 600px; height: 600px; 
+            background: radial-gradient(circle, var(--rust) 0%, transparent 70%);
+            bottom: -150px; right: -150px; 
+            animation-delay: -7s; 
+        }
+        .blob-3 { 
+            width: 500px; height: 500px; 
+            background: radial-gradient(circle, var(--gold) 0%, transparent 70%);
+            top: 30%; left: 40%; 
+            animation-delay: -14s; 
+        }
+
+        @keyframes blobMorph {
+            0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); border-radius: 50%; }
+            25% { transform: translate(50px, -50px) scale(1.1) rotate(90deg); border-radius: 40% 60% 60% 40%; }
+            50% { transform: translate(-30px, 30px) scale(0.9) rotate(180deg); border-radius: 60% 40% 40% 60%; }
+            75% { transform: translate(20px, 20px) scale(1.05) rotate(270deg); border-radius: 50% 50% 40% 60%; }
+        }
+
+        /* === TRAIN SYSTEM (ENHANCED) === */
+        .train-track {
+            position: fixed;
+            bottom: 0; left: 0;
+            width: 100%; height: 85px;
+            background: linear-gradient(0deg, rgba(5, 4, 3, 0.99) 0%, rgba(5, 4, 3, 0.95) 60%, transparent 100%);
+            z-index: 9999;
+            border-top: 4px solid var(--rust);
+            box-shadow: 0 -20px 60px rgba(180, 83, 9, 0.2);
+        }
+
+        .track-sparks {
+            position: absolute;
+            bottom: 50px; left: 50%;
+            width: 4px; height: 4px;
+            background: var(--gold);
+            border-radius: 50%;
+            animation: sparkFly 0.5s ease-out infinite;
+            box-shadow: 0 0 10px var(--gold), 0 0 20px var(--ember);
+        }
+
+        @keyframes sparkFly {
+            0% { transform: translate(0, 0) scale(1); opacity: 1; }
+            100% { transform: translate(var(--spark-x, 30px), var(--spark-y, -40px)) scale(0); opacity: 0; }
+        }
+
+        .rails {
+            position: absolute;
+            bottom: 15px; left: 0;
+            width: 200%;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            animation: railsMove 0.6s linear infinite;
+        }
+
+        .rail {
+            height: 6px;
+            background: repeating-linear-gradient(90deg, 
+                var(--rust) 0px, var(--rust) 45px, 
+                transparent 45px, transparent 60px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .rail-ties {
+            position: absolute;
+            bottom: 10px; left: 0;
+            width: 200%;
+            height: 40px;
+            background: repeating-linear-gradient(90deg, 
+                var(--wood) 0px, var(--wood) 10px, 
+                transparent 10px, transparent 60px);
+            opacity: 0.7;
+            animation: railsMove 0.6s linear infinite;
+        }
+
+        @keyframes railsMove {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-60px); }
+        }
+
+        .train-display {
+            position: fixed;
+            bottom: 38px; left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: flex-end;
+            gap: 5px;
+            z-index: 10000;
+            animation: trainBounce 0.25s ease-in-out infinite;
+            filter: drop-shadow(0 10px 30px rgba(0,0,0,0.8));
+        }
+
+        @keyframes trainBounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        .engine {
+            width: 75px; height: 48px;
+            background: linear-gradient(180deg, #3d3530 0%, #252220 50%, #1a1815 100%);
+            border: 3px solid var(--gold);
+            border-radius: 8px 18px 5px 5px;
+            position: relative;
+            box-shadow: 
+                0 0 30px var(--gold-glow),
+                inset 0 5px 15px rgba(255,255,255,0.1),
+                inset 0 -10px 20px rgba(0,0,0,0.6);
+        }
+
+        .engine::before {
+            content: "";
+            position: absolute;
+            top: -12px; left: 10px;
+            width: 22px; height: 14px;
+            background: linear-gradient(180deg, var(--rust), #78350f);
+            border-radius: 4px 4px 0 0;
+            border: 2px solid var(--copper);
+            border-bottom: none;
+        }
+
+        .engine::after {
+            content: "6-7";
+            position: absolute;
+            top: 14px; left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Rye', cursive;
+            font-size: 0.75rem;
+            color: var(--gold);
+            text-shadow: 0 0 10px var(--gold-glow), 0 2px 4px rgba(0,0,0,0.8);
+            letter-spacing: 2px;
+        }
+
+        .headlight {
+            position: absolute;
+            right: -3px; top: 50%;
+            transform: translateY(-50%);
+            width: 8px; height: 12px;
+            background: var(--gold-bright);
+            border-radius: 0 4px 4px 0;
+            box-shadow: 
+                0 0 20px var(--gold),
+                0 0 40px var(--gold),
+                20px 0 60px var(--gold-glow);
+            animation: headlightPulse 1s ease-in-out infinite;
+        }
+
+        @keyframes headlightPulse {
+            0%, 100% { opacity: 1; box-shadow: 0 0 20px var(--gold), 0 0 40px var(--gold), 20px 0 60px var(--gold-glow); }
+            50% { opacity: 0.8; box-shadow: 0 0 15px var(--gold), 0 0 30px var(--gold), 15px 0 40px var(--gold-glow); }
+        }
+
+        .smoke-stack {
+            position: absolute;
+            top: -12px; left: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .smoke {
+            position: absolute;
+            top: -25px; left: 5px;
+            display: flex;
+            gap: 6px;
+        }
+
+        .smoke-puff {
+            width: 12px; height: 12px;
+            background: radial-gradient(circle, rgba(180, 170, 160, 0.7) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: smokeRise 1.2s ease-out infinite;
+        }
+
+        .smoke-puff:nth-child(2) { animation-delay: 0.4s; width: 10px; height: 10px; }
+        .smoke-puff:nth-child(3) { animation-delay: 0.8s; width: 8px; height: 8px; }
+        .smoke-puff:nth-child(4) { animation-delay: 0.2s; width: 6px; height: 6px; left: -5px; }
+
+        @keyframes smokeRise {
+            0% { transform: translateY(0) scale(1); opacity: 0.7; }
+            100% { transform: translateY(-35px) translateX(10px) scale(2); opacity: 0; }
+        }
+
+        .car {
+            width: 48px; height: 32px;
+            background: linear-gradient(180deg, #2d2825 0%, #1f1c1a 50%, #151312 100%);
+            border: 2px solid var(--rust);
+            border-radius: 5px;
+            box-shadow: 
+                inset 0 3px 8px rgba(255,255,255,0.05),
+                inset 0 -8px 15px rgba(0,0,0,0.5),
+                0 5px 15px rgba(0,0,0,0.5);
+            position: relative;
+        }
+
+        .car::before {
+            content: "";
+            position: absolute;
+            top: 6px; left: 6px; right: 6px;
+            height: 8px;
+            background: rgba(0,0,0,0.4);
+            border-radius: 2px;
+        }
+
+        .car.gold { border-color: var(--gold); box-shadow: 0 0 15px var(--gold-glow), inset 0 -8px 15px rgba(0,0,0,0.5); }
+        .car.purple { border-color: var(--purple); box-shadow: 0 0 15px var(--purple-glow), inset 0 -8px 15px rgba(0,0,0,0.5); }
+        .car.ember { border-color: var(--ember); }
+
+        .wheel {
+            position: absolute;
+            bottom: -6px;
+            width: 10px; height: 10px;
+            background: #333;
+            border: 2px solid #555;
+            border-radius: 50%;
+            animation: wheelSpin 0.3s linear infinite;
+        }
+
+        .wheel:nth-child(1) { left: 5px; }
+        .wheel:nth-child(2) { right: 5px; }
+
+        @keyframes wheelSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* === CONTAINER === */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 60px 30px 140px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* === HEADER (SPECTACULAR) === */
+        header {
+            text-align: center;
+            padding: 80px 50px;
+            margin-bottom: 60px;
+            background: var(--glass);
+            backdrop-filter: blur(25px);
+            border: 3px solid var(--rust);
+            border-radius: 25px;
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            animation: headerFloat 6s ease-in-out infinite;
+        }
+
+        @keyframes headerFloat {
+            0%, 100% { transform: translateY(0) rotateX(0deg); }
+            50% { transform: translateY(-8px) rotateX(1deg); }
+        }
+
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: 
+                radial-gradient(ellipse at 20% 20%, rgba(168, 85, 247, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(245, 158, 11, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(180, 83, 9, 0.1) 0%, transparent 60%);
+            pointer-events: none;
+            animation: headerGlow 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes headerGlow {
+            0% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        /* Bullet holes */
+        .bullet-hole {
+            position: absolute;
+            width: 14px; height: 14px;
+            background: radial-gradient(circle, #000 25%, var(--rust) 40%, rgba(80,60,40,0.5) 60%, transparent 70%);
+            border-radius: 50%;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.8);
+        }
+        .bullet-hole:nth-child(1) { top: 20px; left: 30px; }
+        .bullet-hole:nth-child(2) { top: 50px; right: 60px; transform: scale(0.85); }
+        .bullet-hole:nth-child(3) { bottom: 40px; left: 100px; transform: scale(0.7); }
+        .bullet-hole:nth-child(4) { bottom: 25px; right: 120px; transform: scale(0.9); }
+        .bullet-hole:nth-child(5) { top: 80px; left: 200px; transform: scale(0.6); }
+
+        .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--rust), var(--gold), var(--rust));
+            background-size: 200% 200%;
+            animation: badgeShine 3s ease infinite;
+            padding: 10px 28px;
+            border-radius: 5px;
+            font-family: 'Special Elite', cursive;
+            font-size: 0.75rem;
+            letter-spacing: 4px;
+            color: var(--cream);
+            margin-bottom: 30px;
+            border: 2px solid var(--gold);
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+            box-shadow: 0 5px 20px rgba(245, 158, 11, 0.3);
+        }
+
+        @keyframes badgeShine {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .student-names {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            color: var(--purple);
+            letter-spacing: 8px;
+            margin-bottom: 15px;
+            text-shadow: 0 0 20px var(--purple-glow);
+        }
+
+        .title-emoji { 
+            font-size: 4rem; 
+            margin-bottom: 20px; 
+            filter: drop-shadow(0 0 30px var(--gold-glow));
+            animation: trainWobble 2s ease-in-out infinite;
+        }
+
+        @keyframes trainWobble {
+            0%, 100% { transform: rotate(-2deg); }
+            50% { transform: rotate(2deg); }
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 900;
+            letter-spacing: 12px;
+            background: linear-gradient(135deg, var(--cream) 0%, var(--gold) 25%, var(--purple) 50%, var(--gold) 75%, var(--cream) 100%);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: titleShine 5s ease infinite;
+            margin-bottom: 15px;
+            text-shadow: none;
+        }
+
+        @keyframes titleShine {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .subtitle {
+            font-family: 'Rye', cursive;
+            font-size: 1.4rem;
+            color: var(--gold);
+            letter-spacing: 6px;
+            text-shadow: 0 0 30px var(--gold-glow), 0 4px 8px rgba(0,0,0,0.5);
+            margin-bottom: 10px;
+        }
+
+        .tagline {
+            font-family: 'Special Elite', cursive;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            letter-spacing: 3px;
+            margin-top: 20px;
+        }
+
+        .edition-badge {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 8px 20px;
+            background: linear-gradient(135deg, var(--purple-deep), var(--purple));
+            border: 2px solid var(--purple);
+            border-radius: 25px;
+            font-family: 'Special Elite', cursive;
+            font-size: 0.7rem;
+            color: var(--cream);
+            letter-spacing: 3px;
+            box-shadow: 0 0 25px var(--purple-glow);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 25px var(--purple-glow); }
+            50% { box-shadow: 0 0 40px var(--purple-glow), 0 0 60px rgba(168, 85, 247, 0.3); }
+        }
+
+        /* === NAVIGATION (ENHANCED) === */
+        nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 60px;
+            padding: 30px;
+            background: var(--glass);
+            backdrop-filter: blur(25px);
+            border: 2px solid var(--glass-border);
+            border-radius: 20px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+
+        .nav-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 22px;
+            background: rgba(180, 83, 9, 0.15);
+            border: 2px solid var(--glass-border);
+            border-radius: 10px;
+            color: var(--text);
+            font-family: 'Special Elite', cursive;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-btn::before {
+            content: "";
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(245, 158, 11, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .nav-btn:hover::before {
+            left: 100%;
+        }
+
+        .nav-btn:hover {
+            background: rgba(180, 83, 9, 0.35);
+            border-color: var(--rust);
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 10px 30px rgba(180, 83, 9, 0.3);
+        }
+
+        .nav-btn.active {
+            background: linear-gradient(135deg, var(--rust), var(--sepia));
+            border-color: var(--gold);
+            color: var(--cream);
+            box-shadow: 0 0 30px var(--gold-glow), 0 10px 40px rgba(0,0,0,0.4);
+            transform: translateY(-2px);
+        }
+
+        .nav-btn .icon {
+            font-size: 1.2rem;
+            filter: drop-shadow(0 0 5px currentColor);
+        }
+
+        /* === PROGRESS BAR === */
+        .progress-container {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 4px;
+            background: var(--dark);
+            z-index: 10001;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--purple), var(--gold), var(--ember));
+            width: 0%;
+            transition: width 0.1s;
+            box-shadow: 0 0 10px var(--gold);
+        }
+
+        /* === CHAPTERS === */
+        .chapter {
+            display: none;
+            animation: chapterReveal 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .chapter.active { display: block; }
+
+        @keyframes chapterReveal {
+            0% { opacity: 0; transform: translateY(40px) scale(0.95); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* === CONTENT BOX (ENHANCED) === */
+        .content-box {
+            background: var(--glass);
+            backdrop-filter: blur(25px);
+            border: 2px solid var(--glass-border);
+            border-radius: 22px;
+            padding: 50px;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .content-box:hover {
+            border-color: rgba(245, 158, 11, 0.5);
+            box-shadow: 0 25px 80px rgba(0,0,0,0.4);
+        }
+
+        .content-box::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 6px;
+            background: linear-gradient(90deg, var(--rust), var(--gold), var(--purple), var(--gold), var(--rust));
+            background-size: 200% 100%;
+            animation: borderShine 4s linear infinite;
+            border-radius: 22px 22px 0 0;
+        }
+
+        @keyframes borderShine {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 200% 0%; }
+        }
+
+        .content-box::after {
+            content: "";
+            position: absolute;
+            top: 6px; left: 0;
+            width: 100%; height: calc(100% - 6px);
+            background: radial-gradient(ellipse at 50% 0%, rgba(245, 158, 11, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        /* === LANGUAGE TOGGLE (ENHANCED) === */
+        .lang-toggle {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .lang-btn {
+            padding: 12px 22px;
+            background: rgba(180, 83, 9, 0.2);
+            border: 2px solid var(--glass-border);
+            border-radius: 10px;
+            color: var(--text-dim);
+            font-family: 'Special Elite', cursive;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .lang-btn:hover {
+            background: rgba(180, 83, 9, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .lang-btn.active {
+            background: linear-gradient(135deg, var(--rust), var(--copper));
+            color: var(--cream);
+            border-color: var(--gold);
+            box-shadow: 0 5px 20px rgba(180, 83, 9, 0.4);
+        }
+
+        .lang-content { display: none; }
+        .lang-content.active { display: block; animation: fadeIn 0.4s ease; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* === TYPOGRAPHY (ENHANCED) === */
+        h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--cream);
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.6);
+            position: relative;
+        }
+
+        h2::after {
+            content: "";
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(90deg, var(--rust), transparent);
+            margin-left: 20px;
+        }
+
+        h3 {
+            font-family: 'Rye', cursive;
+            font-size: 1.3rem;
+            color: var(--gold);
+            margin: 50px 0 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-shadow: 0 0 20px var(--gold-glow);
+        }
+
+        h4 {
+            font-family: 'Special Elite', cursive;
+            font-size: 0.9rem;
+            color: var(--rust);
+            letter-spacing: 4px;
+            margin: 40px 0 25px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--glass-border);
+            position: relative;
+        }
+
+        h4::before {
+            content: "◆";
+            margin-right: 12px;
+            color: var(--gold);
+        }
+
+        p {
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+            color: var(--text);
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .lead-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            font-style: italic;
+            color: var(--cream);
+            line-height: 2;
+            margin-bottom: 30px;
+            padding-left: 25px;
+            border-left: 4px solid var(--gold);
+        }
+
+        strong { color: var(--cream); font-weight: 700; }
+        .gold { color: var(--gold); text-shadow: 0 0 10px var(--gold-glow); }
+        .purple { color: var(--purple); text-shadow: 0 0 10px var(--purple-glow); }
+        .rust { color: var(--rust); }
+        .danger { color: #fca5a5; text-shadow: 0 0 10px rgba(252, 165, 165, 0.5); }
+        .ember { color: var(--ember); }
+
+        /* === VOCABULARY (ADVANCED) === */
+        .vocab {
+            display: inline;
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.25), rgba(180, 83, 9, 0.15));
+            color: var(--gold);
+            padding: 4px 12px;
+            border-radius: 6px;
+            border-bottom: 2px dashed var(--gold);
+            cursor: help;
+            position: relative;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .vocab:hover {
+            background: rgba(245, 158, 11, 0.45);
+            transform: scale(1.02);
+        }
+
+        .vocab::after {
+            content: attr(data-def);
+            position: absolute;
+            bottom: 150%;
+            left: 50%;
+            transform: translateX(-50%) scale(0.9);
+            background: var(--cream);
+            color: var(--dark);
+            padding: 20px 25px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            width: max-content;
+            max-width: 380px;
+            z-index: 200;
+            box-shadow: 0 25px 80px rgba(0,0,0,0.7), 0 0 0 3px var(--gold);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            line-height: 1.7;
+        }
+
+        .vocab:hover::after {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) scale(1);
+        }
+
+        /* === ADVANCED VOCABULARY BOX === */
+        .vocab-box {
+            background: linear-gradient(135deg, rgba(180, 83, 9, 0.12), rgba(120, 53, 15, 0.08));
+            border: 2px solid var(--rust);
+            border-radius: 18px;
+            padding: 35px;
+            margin: 40px 0;
+            position: relative;
+        }
+
+        .vocab-box::before {
+            content: "📚";
+            position: absolute;
+            top: -15px; left: 25px;
+            font-size: 1.8rem;
+            background: var(--dark);
+            padding: 0 10px;
+        }
+
+        .vocab-box h4 {
+            color: var(--gold);
+            border: none;
+            margin: 0 0 25px 0;
+            padding: 0;
+        }
+
+        .vocab-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 18px;
+        }
+
+        .vocab-item {
+            background: rgba(10, 8, 6, 0.8);
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 5px solid var(--gold);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .vocab-item::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.05), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .vocab-item:hover {
+            transform: translateX(8px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .vocab-item:hover::before {
+            opacity: 1;
+        }
+
+        .vocab-word {
+            font-family: 'Rye', cursive;
+            font-size: 0.95rem;
+            color: var(--gold);
+            margin-bottom: 8px;
+        }
+
+        .vocab-phonetic {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            color: var(--purple);
+            margin-bottom: 8px;
+            font-style: italic;
+        }
+
+        .vocab-def {
+            font-size: 0.9rem;
+            color: var(--text);
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+
+        .vocab-example {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            font-style: italic;
+            padding-left: 15px;
+            border-left: 2px solid var(--glass-border);
+            margin-top: 10px;
+        }
+
+        .vocab-vn {
+            font-size: 0.8rem;
+            color: var(--purple);
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px dashed var(--glass-border);
+        }
+
+        /* === QUOTE BOX (ENHANCED) === */
+        .quote {
+            background: linear-gradient(135deg, rgba(180, 83, 9, 0.15), rgba(0,0,0,0.25));
+            border-left: 6px solid var(--rust);
+            padding: 30px 35px;
+            margin: 35px 0;
+            border-radius: 0 15px 15px 0;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            font-style: italic;
+            color: var(--cream);
+            letter-spacing: 0.5px;
+            line-height: 1.9;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quote::before {
+            content: """;
+            position: absolute;
+            top: 10px; left: 15px;
+            font-size: 4rem;
+            color: var(--rust);
+            opacity: 0.3;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .quote-author {
+            display: block;
+            margin-top: 20px;
+            font-family: 'Special Elite', cursive;
+            font-style: normal;
+            color: var(--gold);
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+        }
+
+        /* === WARNING BOX === */
+        .warning {
+            background: linear-gradient(135deg, rgba(153, 27, 27, 0.25), rgba(0,0,0,0.35));
+            border: 3px solid var(--blood);
+            border-radius: 18px;
+            padding: 30px;
+            margin: 35px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            animation: warningPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes warningPulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(153, 27, 27, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(153, 27, 27, 0.5), 0 0 60px rgba(153, 27, 27, 0.2); }
+        }
+
+        .warning h4 {
+            color: #fca5a5;
+            border: none;
+            margin: 0 0 15px 0;
+            padding: 0;
+            font-size: 1rem;
+        }
+
+        .warning h4::before { content: ""; margin: 0; }
+
+        /* === STATS GRID (ENHANCED) === */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin: 35px 0;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 28px 18px;
+            background: rgba(180, 83, 9, 0.12);
+            border: 2px solid var(--glass-border);
+            border-radius: 15px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat::before {
+            content: "";
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(245, 158, 11, 0.1) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .stat:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: var(--gold);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4), 0 0 30px var(--gold-glow);
+        }
+
+        .stat:hover::before {
+            opacity: 1;
+        }
+
+        .stat-num {
+            display: block;
+            font-family: 'Cinzel', serif;
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: var(--gold);
+            text-shadow: 0 0 25px var(--gold-glow);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-family: 'Special Elite', cursive;
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            letter-spacing: 2px;
+            margin-top: 10px;
+            text-transform: uppercase;
+        }
+
+        /* === CARD GRID (ENHANCED) === */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .card-grid.compact {
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: rgba(10, 8, 6, 0.9);
+            border: 2px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 28px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 4px;
+            background: linear-gradient(90deg, var(--rust), var(--gold));
+        }
+
+        .card::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: radial-gradient(ellipse at top left, rgba(245, 158, 11, 0.05) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.4s;
+            pointer-events: none;
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.01);
+            border-color: var(--gold);
+            box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 0 40px rgba(245, 158, 11, 0.15);
+        }
+
+        .card:hover::after {
+            opacity: 1;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 18px;
+        }
+
+        .card-icon { 
+            font-size: 2.8rem; 
+            filter: drop-shadow(0 0 15px var(--gold-glow));
+            transition: transform 0.3s;
+        }
+
+        .card:hover .card-icon {
+            transform: scale(1.15) rotate(-5deg);
+        }
+
+        .card-meta { text-align: right; }
+
+        .card-role {
+            font-family: 'Special Elite', cursive;
+            font-size: 0.65rem;
+            color: var(--rust);
+            letter-spacing: 3px;
+            background: rgba(180, 83, 9, 0.2);
+            padding: 5px 12px;
+            border-radius: 5px;
+            border: 1px solid rgba(180, 83, 9, 0.3);
+        }
+
+        .card-name {
+            font-family: 'Rye', cursive;
+            font-size: 1.15rem;
+            color: var(--cream);
+            margin-bottom: 12px;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+        }
+
+        .card p {
+            font-size: 0.92rem;
+            color: var(--text-dim);
+            margin-bottom: 18px;
+            line-height: 1.7;
+        }
+
+        .card-lore {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.85rem;
+            font-style: italic;
+            color: var(--text);
+            padding: 12px 15px;
+            background: rgba(180, 83, 9, 0.08);
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 3px solid var(--rust);
+        }
+
+        .card-stats {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            padding-top: 18px;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .card-stat {
+            font-family: 'Special Elite', cursive;
+            font-size: 0.65rem;
+            color: var(--gold);
+            background: rgba(245, 158, 11, 0.15);
+            padding: 6px 12px;
+            border-radius: 5px;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            transition: all 0.3s;
+        }
+
+        .card-stat:hover {
+            background: rgba(245, 158, 11, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* === BOSS CARDS (ENHANCED) === */
+        .boss-card {
+            border-color: rgba(153, 27, 27, 0.5);
+            background: linear-gradient(180deg, rgba(153, 27, 27, 0.15) 0%, rgba(10, 8, 6, 0.95) 100%);
+        }
+
+        .boss-card::before {
+            background: linear-gradient(90deg, var(--blood), var(--crimson), var(--rust), var(--gold));
+        }
+
+        .final-boss {
+            border-width: 3px;
+            border-color: var(--gold);
+            background: linear-gradient(180deg, 
+                rgba(245, 158, 11, 0.18) 0%, 
+                rgba(168, 85, 247, 0.1) 30%,
+                rgba(153, 27, 27, 0.12) 60%, 
+                rgba(10, 8, 6, 0.98) 100%);
+            box-shadow: 0 0 50px rgba(245, 158, 11, 0.2), 0 0 100px rgba(168, 85, 247, 0.1);
+        }
+
+        .final-boss::before {
+            height: 6px;
+            background: linear-gradient(90deg, var(--gold), var(--purple), var(--crimson), var(--purple), var(--gold));
+            animation: bossGlow 2s linear infinite;
+        }
+
+        @keyframes bossGlow {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 200% 0%; }
+        }
+
+        /* === CHARACTER BACKSTORY === */
+        .backstory {
+            background: linear-gradient(135deg, rgba(120, 53, 15, 0.15), rgba(0,0,0,0.2));
+            border: 2px solid var(--wood);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 35px 0;
+            position: relative;
+        }
+
+        .backstory::before {
+            content: "📜 DOSSIER";
+            position: absolute;
+            top: -12px; left: 25px;
+            font-family: 'Special Elite', cursive;
+            font-size: 0.7rem;
+            color: var(--gold);
+            background: var(--dark);
+            padding: 3px 15px;
+            letter-spacing: 3px;
+        }
+
+        .backstory-header {
+            display: flex;
+            gap: 25px;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .backstory-icon {
+            font-size: 3.5rem;
+            filter: drop-shadow(0 0 20px var(--gold-glow));
+        }
+
+        .backstory-info h3 {
+            margin: 0 0 5px 0;
+            font-size: 1.4rem;
+        }
+
+        .backstory-subtitle {
+            font-family: 'Special Elite', cursive;
+            font-size: 0.8rem;
+            color: var(--rust);
+            letter-spacing: 2px;
+        }
+
+        .backstory-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            line-height: 1.9;
+            color: var(--text);
+        }
+
+        .backstory-quote {
+            margin-top: 20px;
+            padding: 15px 20px;
+            background: rgba(0,0,0,0.3);
+            border-left: 4px solid var(--gold);
+            font-style: italic;
+            color: var(--cream);
+        }
+
+        /* === TIMELINE (ENHANCED) === */
+        .timeline {
+            position: relative;
+            padding-left: 45px;
+            margin: 40px 0;
+        }
+
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 12px; top: 0; bottom: 0;
+            width: 5px;
+            background: linear-gradient(180deg, var(--rust), var(--gold), var(--purple), var(--crimson), var(--rust));
+            border-radius: 5px;
+            box-shadow: 0 0 15px rgba(180, 83, 9, 0.3);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 45px;
+            padding-left: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:hover {
+            transform: translateX(10px);
+        }
+
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -40px; top: 8px;
+            width: 18px; height: 18px;
+            background: var(--dark);
+            border: 4px solid var(--gold);
+            border-radius: 50%;
+            box-shadow: 0 0 20px var(--gold-glow), 0 0 40px rgba(245, 158, 11, 0.2);
+            transition: all 0.3s;
+        }
+
+        .timeline-item:hover::before {
+            transform: scale(1.3);
+            box-shadow: 0 0 30px var(--gold-glow), 0 0 60px rgba(245, 158, 11, 0.3);
+        }
+
+        .timeline-day {
+            font-family: 'Special Elite', cursive;
+            font-size: 0.75rem;
+            color: var(--gold);
+            letter-spacing: 4px;
+            text-shadow: 0 0 10px var(--gold-glow);
+        }
+
+        .timeline-title {
+            font-family: 'Rye', cursive;
+            font-size: 1.15rem;
+            color: var(--cream);
+            margin: 10px 0;
+        }
+
+        .timeline-desc {
+            font-size: 0.95rem;
+            color: var(--text-dim);
+            line-height: 1.8;
+        }
+
+        /* === INTERACTIVE QUIZ === */
+        .quiz-container {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.12), rgba(0,0,0,0.25));
+            border: 2px solid var(--purple);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .quiz-container h3 {
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+
+        .quiz-question {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: var(--cream);
+            margin-bottom: 30px;
+            min-height: 60px;
+        }
+
+        .quiz-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .quiz-option {
+            padding: 18px 25px;
+            background: rgba(168, 85, 247, 0.15);
+            border: 2px solid var(--glass-border);
+            border-radius: 12px;
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quiz-option:hover {
+            background: rgba(168, 85, 247, 0.3);
+            border-color: var(--purple);
+            transform: translateY(-3px);
+        }
+
+        .quiz-option.correct {
+            background: rgba(34, 197, 94, 0.3);
+            border-color: #22c55e;
+            color: #86efac;
+        }
+
+        .quiz-option.wrong {
+            background: rgba(239, 68, 68, 0.3);
+            border-color: #ef4444;
+            color: #fca5a5;
+        }
+
+        .quiz-option:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .quiz-score {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: var(--gold);
+            margin-bottom: 15px;
+        }
+
+        .quiz-btn {
+            padding: 15px 35px;
+            background: linear-gradient(135deg, var(--purple-deep), var(--purple));
+            border: 2px solid var(--purple);
+            border-radius: 10px;
+            color: var(--cream);
+            font-family: 'Special Elite', cursive;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .quiz-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px var(--purple-glow);
+        }
+
+        /* === READING TIP === */
+        .reading-tip {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(0,0,0,0.2));
+            border: 2px dashed var(--purple);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 35px 0;
+            position: relative;
+        }
+
+        .reading-tip::before {
+            content: "💡";
+            position: absolute;
+            top: -12px; left: 25px;
+            font-size: 1.5rem;
+            background: var(--dark);
+            padding: 0 8px;
+        }
+
+        .reading-tip-title {
+            font-family: 'Special Elite', cursive;
+            font-size: 0.85rem;
+            color: var(--purple);
+            margin-bottom: 12px;
+            letter-spacing: 2px;
+        }
+
+        .reading-tip p {
+            font-size: 0.95rem;
+            margin: 0;
+            color: var(--text-dim);
+        }
+
+        /* === FOOTER === */
+        footer {
+            text-align: center;
+            padding: 80px 40px;
+            margin-top: 80px;
+            border-top: 4px solid var(--rust);
+            background: linear-gradient(180deg, transparent 0%, rgba(10, 8, 6, 0.5) 100%);
+            position: relative;
+        }
+
+        footer::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 4px;
+            background: linear-gradient(90deg, var(--rust), var(--gold), var(--purple), var(--gold), var(--rust));
+        }
+
+        .footer-train { 
+            font-size: 4rem; 
+            margin-bottom: 20px; 
+            filter: drop-shadow(0 0 30px var(--gold-glow));
+            animation: trainWobble 2s ease-in-out infinite;
+        }
+
+        .footer-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            color: var(--gold);
+            letter-spacing: 8px;
+            text-shadow: 0 0 30px var(--gold-glow);
+        }
+
+        .footer-quote {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: var(--cream);
+            margin-top: 25px;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        footer p {
+            color: var(--text-dim);
+            font-size: 0.85rem;
+            margin-top: 12px;
+        }
+
+        .student-dedication {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(168, 85, 247, 0.1);
+            border: 1px solid var(--purple);
+            border-radius: 10px;
+            display: inline-block;
+        }
+
+        .student-dedication span {
+            font-family: 'Playfair Display', serif;
+            color: var(--purple);
+            font-size: 1rem;
+        }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 768px) {
+            body { font-size: 15px; }
+            .container { padding: 35px 18px 130px; }
+            h1 { font-size: 2rem; letter-spacing: 5px; }
+            h2 { font-size: 1.6rem; }
+            header { padding: 50px 25px; }
+            .content-box { padding: 30px 22px; }
+            nav { position: relative; top: 0; }
+            .nav-btn { width: 100%; justify-content: center; }
+            .card-grid { grid-template-columns: 1fr; }
+            .quiz-options { grid-template-columns: 1fr; }
+            .backstory-header { flex-direction: column; align-items: center; text-align: center; }
+        }
+
+        /* === SCROLLBAR === */
+        ::-webkit-scrollbar { width: 12px; }
+        ::-webkit-scrollbar-track { background: var(--darker); }
+        ::-webkit-scrollbar-thumb { 
+            background: linear-gradient(180deg, var(--rust), var(--gold), var(--purple));
+            border-radius: 12px;
+            border: 2px solid var(--darker);
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, var(--gold), var(--purple), var(--gold));
+        }
+
+        /* === SELECTION === */
+        ::selection {
+            background: var(--gold);
+            color: var(--dark);
+        }
+    </style>
+</head>
+<body>
+
+<!-- Custom Cursor -->
+<div class="cursor-dot"></div>
+<div class="cursor-ring"></div>
+
+<!-- Progress Bar -->
+<div class="progress-container">
+    <div class="progress-bar"></div>
+</div>
+
+<!-- Particle System -->
+<div class="particles" id="particles"></div>
+
+<!-- Parallax Background -->
+<div class="parallax-bg">
+    <div class="parallax-layer stars"></div>
+    <div class="parallax-layer mountains"></div>
+</div>
+
+<!-- Blob Effects -->
+<div class="bg-effects">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+</div>
+
+<!-- Train -->
+<div class="train-track">
+    <div class="track-sparks" style="--spark-x: 25px; --spark-y: -35px;"></div>
+    <div class="track-sparks" style="--spark-x: -30px; --spark-y: -45px; animation-delay: 0.2s;"></div>
+    <div class="track-sparks" style="--spark-x: 40px; --spark-y: -30px; animation-delay: 0.4s;"></div>
+    <div class="rail-ties"></div>
+    <div class="rails">
+        <div class="rail"></div>
+        <div class="rail"></div>
+    </div>
+</div>
+
+<div class="train-display">
+    <div class="engine">
+        <div class="headlight"></div>
+        <div class="smoke-stack">
+            <div class="smoke">
+                <div class="smoke-puff"></div>
+                <div class="smoke-puff"></div>
+                <div class="smoke-puff"></div>
+                <div class="smoke-puff"></div>
+            </div>
+        </div>
+    </div>
+    <div class="car">
+        <div class="wheel"></div>
+        <div class="wheel"></div>
+    </div>
+    <div class="car gold">
+        <div class="wheel"></div>
+        <div class="wheel"></div>
+    </div>
+    <div class="car purple">
+        <div class="wheel"></div>
+        <div class="wheel"></div>
+    </div>
+    <div class="car ember">
+        <div class="wheel"></div>
+        <div class="wheel"></div>
+    </div>
+</div>
+
+<div class="container">
+    <header>
+        <div class="bullet-hole"></div>
+        <div class="bullet-hole"></div>
+        <div class="bullet-hole"></div>
+        <div class="bullet-hole"></div>
+        <div class="bullet-hole"></div>
+        
+        <div class="student-names">★ KIET & NHAN ★</div>
+        <div class="badge">⭐ ADVANCED EDITION • FULL LORE ⭐</div>
+        <div class="title-emoji">🚂</div>
+        <h1>TRAIN 6-7</h1>
+        <div class="subtitle">✦ To Survive a Brainrot ✦</div>
+        <div class="tagline">99 DAYS OF TERROR • 20 CLASSES • 20 WEAPONS • 20 RIZZLORDS</div>
+        <div class="edition-badge">🎓 C1 / B1+ VOCABULARY</div>
+    </header>
+
+    <nav>
+        <button class="nav-btn active" data-chapter="prologue"><span class="icon">📜</span> PROLOGUE</button>
+        <button class="nav-btn" data-chapter="outbreak"><span class="icon">🧟</span> OUTBREAK</button>
+        <button class="nav-btn" data-chapter="survivors"><span class="icon">🤠</span> SURVIVORS</button>
+        <button class="nav-btn" data-chapter="arsenal"><span class="icon">🔫</span> ARSENAL</button>
+        <button class="nav-btn" data-chapter="infected"><span class="icon">💀</span> INFECTED</button>
+        <button class="nav-btn" data-chapter="rizzlords"><span class="icon">👑</span> RIZZLORDS</button>
+        <button class="nav-btn" data-chapter="chronicle"><span class="icon">📖</span> CHRONICLE</button>
+        <button class="nav-btn" data-chapter="lexicon"><span class="icon">📚</span> LEXICON</button>
+        <button class="nav-btn" data-chapter="quiz"><span class="icon">🎯</span> QUIZ</button>
+    </nav>
+
+    <!-- ============ PROLOGUE ============ -->
+    <div id="prologue" class="chapter active">
+        <div class="content-box">
+            <div class="lang-toggle">
+                <button class="lang-btn active" data-lang="en">🇺🇸 English</button>
+                <button class="lang-btn" data-lang="vn">🇻🇳 Tiếng Việt</button>
+            </div>
+
+            <h2>📜 Prologue: The World Before</h2>
+
+            <div class="lang-content active" data-lang="en">
+                <p class="lead-text">In the autumn of 2024, humanity stood at the <span class="vocab" data-def="PRECIPICE /ˈpresəpɪs/: The edge of a cliff; a dangerous situation | Bờ vực thẳm; tình huống nguy hiểm">precipice</span> of its own destruction — and didn't even know it.</p>
+
+                <p>The signs were there for those <span class="vocab" data-def="DISCERNING /dɪˈsɜːnɪŋ/: Having good judgment; perceptive | Sáng suốt; có khả năng nhận định tốt">discerning</span> enough to see them. Attention spans had collapsed to mere seconds. Original thought became increasingly <span class="vocab" data-def="SCARCE /skeərs/: In short supply; rare | Khan hiếm; hiếm có">scarce</span>. People communicated almost exclusively through shared content — memes, clips, viral sounds — as if language itself had become obsolete.</p>
+
+                <p>Social media platforms had evolved into something beyond mere entertainment. They had become the <span class="vocab" data-def="ARBITER /ˈɑːbɪtə/: A judge; someone with power to decide | Người phán xét; người có quyền quyết định">arbiter</span> of reality itself, determining what was true, what was valuable, and increasingly — what was <em>human</em>.</p>
+
+                <div class="quote">
+                    "We didn't see it coming because we were already infected. Every scroll, every like, every share — we were feeding it. The monster was us all along."
+                    <span class="quote-author">— Dr. Elena Vasquez, Chief Neurologist, Ohio State Medical Center (Final Interview)</span>
+                </div>
+
+                <p>The <span class="vocab" data-def="PANDEMIC /pænˈdemɪk/: A disease outbreak affecting the whole world | Đại dịch ảnh hưởng toàn cầu">pandemic</span> didn't arrive with fanfare. There was no meteor, no alien invasion, no nuclear exchange. Just a 19-year-old college student who watched too much content for too long — and became something <span class="vocab" data-def="UNPRECEDENTED /ʌnˈpresɪdentɪd/: Never done or known before | Chưa từng có tiền lệ">unprecedented</span> in human history.</p>
+
+                <p>His name was <strong class="gold">Tyler Chen</strong>.</p>
+
+                <p>And he was <strong class="danger">Patient Zero</strong>.</p>
+
+                <div class="stats">
+                    <div class="stat">
+                        <span class="stat-num">72</span>
+                        <span class="stat-label">Hours to Transformation</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-num">6</span>
+                        <span class="stat-label">Months to Collapse</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-num">4.2B</span>
+                        <span class="stat-label">Lives Lost</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-num">1</span>
+                        <span class="stat-label">Train Remaining</span>
+                    </div>
+                </div>
+
+                <h3>🎯 Your Mandate</h3>
+
+                <p>You are among the <span class="vocab" data-def="REMNANTS /ˈremnənts/: What remains after destruction; survivors | Tàn dư; những gì còn sót lại sau sự hủy diệt">remnants</span> of a fallen civilization. Against <span class="vocab" data-def="INSURMOUNTABLE /ˌɪnsəˈmaʊntəbl/: Impossible to overcome | Không thể vượt qua">insurmountable</span> odds, you discovered <strong>Train 6-7</strong> — the last <span class="vocab" data-def="OPERATIONAL /ˌɒpəˈreɪʃənl/: Functioning; working | Còn hoạt động; đang vận hành">operational</span> locomotive on what survivors call the Dead Rails.</p>
+
+                <p>Your <span class="vocab" data-def="DESTINATION /ˌdestɪˈneɪʃn/: The place you are traveling to | Điểm đến">destination</span>: <strong class="gold">Sanctuary</strong> — a <span class="vocab" data-def="PURPORTED /pəˈpɔːtɪd/: Claimed but not proven | Được tuyên bố nhưng chưa được chứng minh">purported</span> safe zone in the Rocky Mountains where the Brainrot signal cannot reach.</p>
+
+                <p>The journey: <strong>99 days</strong> through <span class="vocab" data-def="HOSTILE /ˈhɒstaɪl/: Unfriendly; dangerous | Thù địch; nguy hiểm">hostile</span> territory <span class="vocab" data-def="TEEMING /ˈtiːmɪŋ/: Full of; swarming with | Đầy ắp; nhan nhản">teeming</span> with the infected.</p>
+
+                <div class="warning">
+                    <h4>⚠️ PRIMARY OBJECTIVES ⚠️</h4>
+                    <p><strong>SURVIVE</strong> the 99-day journey • <strong>DEFEND</strong> the Logic Engine at all costs • <strong>NEUTRALIZE</strong> the Rizzlord threat • <strong>REACH</strong> Sanctuary</p>
+                </div>
+
+                <div class="reading-tip">
+                    <div class="reading-tip-title">VOCABULARY STRATEGY</div>
+                    <p>This document contains <strong>C1/B2 level vocabulary</strong>. Words highlighted in <span class="vocab" data-def="Example tooltip | Ví dụ tooltip">gold</span> have hover definitions. Master these words — they will appear in your comprehension assessment.</p>
+                </div>
+            </div>
+
+            <div class="lang-content" data-lang="vn">
+                <p class="lead-text">Vào mùa thu năm 2024, nhân loại đứng trên <strong>bờ vực</strong> của sự hủy diệt chính mình — và thậm chí không hề hay biết.</p>
+
+                <p>Những dấu hiệu đã có sẵn cho những ai <strong>sáng suốt</strong> đủ để nhận ra. Khả năng tập trung đã sụp đổ chỉ còn vài giây. Suy nghĩ độc đáo ngày càng trở nên <strong>khan hiếm</strong>. Mọi người giao tiếp gần như hoàn toàn qua nội dung chia sẻ — meme, clip, âm thanh viral — như thể ngôn ngữ đã trở nên lỗi thời.</p>
+
+                <p>Các nền tảng mạng xã hội đã tiến hóa thành thứ gì đó vượt xa giải trí đơn thuần. Chúng đã trở thành <strong>người phán xét</strong> của chính thực tại, quyết định điều gì là thật, điều gì có giá trị, và ngày càng — điều gì là <em>con người</em>.</p>
+
+                <div class="quote">
+                    "Chúng tôi không thấy nó đến vì chúng tôi đã bị nhiễm rồi. Mỗi lần lướt, mỗi lượt thích, mỗi lần chia sẻ — chúng tôi đang nuôi dưỡng nó. Con quái vật chính là tất cả chúng ta."
+                    <span class="quote-author">— Dr. Elena Vasquez, Trưởng khoa Thần kinh, Trung tâm Y tế Ohio State (Phỏng vấn cuối cùng)</span>
+                </div>
+
+                <p><strong>Đại dịch</strong> không đến với sự ồn ào. Không có thiên thạch, không có xâm lược ngoài hành tinh, không có trao đổi hạt nhân. Chỉ có một sinh viên đại học 19 tuổi xem quá nhiều nội dung quá lâu — và trở thành thứ <strong>chưa từng có tiền lệ</strong> trong lịch sử loài người.</p>
+
+                <p>Tên anh ta là <strong class="gold">Tyler Chen</strong>.</p>
+
+                <p>Và anh ta là <strong class="danger">Bệnh nhân Số 0</strong>.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ OUTBREAK ============ -->
+    <div id="outbreak" class="chapter">
+        <div class="content-box">
+            <div class="lang-toggle">
+                <button class="lang-btn active" data-lang="en">🇺🇸 English</button>
+                <button class="lang-btn" data-lang="vn">🇻🇳 Tiếng Việt</button>
+            </div>
+
+            <h2>🧟 The Outbreak: Patient Zero</h2>
+
+            <div class="lang-content active" data-lang="en">
+                <div class="backstory">
+                    <div class="backstory-header">
+                        <div class="backstory-icon">👁️</div>
+                        <div class="backstory-info">
+                            <h3>Tyler Chen — Patient Zero</h3>
+                            <div class="backstory-subtitle">THE FIRST TRANSFORMATION</div>
+                        </div>
+                    </div>
+                    <div class="backstory-text">
+                        <p>Tyler was a <span class="vocab" data-def="UNREMARKABLE /ˌʌnrɪˈmɑːkəbl/: Not particularly interesting or unusual | Không đặc biệt; bình thường">unremarkable</span> sophomore at Ohio State University — average grades, few friends, an <span class="vocab" data-def="INSATIABLE /ɪnˈseɪʃəbl/: Impossible to satisfy | Không thể thỏa mãn">insatiable</span> appetite for content. What his roommates dismissed as mere <span class="vocab" data-def="ADDICTION /əˈdɪkʃn/: Being dependent on something harmful | Sự nghiện ngập">addiction</span> was something far more <span class="vocab" data-def="SINISTER /ˈsɪnɪstə/: Evil; threatening | Đáng ngại; đe dọa">sinister</span>.</p>
+                        
+                        <p>On October 12th, 2024, Tyler began what would become known as "The Marathon" — <strong>72 consecutive hours</strong> of content consumption. No sleep. No food. No human contact. Just an endless stream of Skibidi videos, Sigma compilations, and Fanum Tax memes scrolling across his retinas.</p>
+
+                        <p>When campus security finally broke down his door following noise complaints, they found something that <span class="vocab" data-def="DEFIED /dɪˈfaɪd/: Went against; refused to obey | Thách thức; chống lại">defied</span> explanation. Tyler was still alive — but he was no longer human.</p>
+                    </div>
+                    <div class="backstory-quote">
+                        "His eyes had gone completely white. His body moved in <span class="vocab" data-def="ERRATIC /ɪˈrætɪk/: Unpredictable; irregular | Thất thường; không đều">erratic</span>, jerking patterns — like a corrupted video file struggling to buffer. When he opened his mouth, a hundred viral sounds emerged simultaneously. It was the most terrifying thing I've ever witnessed."
+                        <br><br>— Officer James Rodriguez, First Responder (Deceased Day 3)
+                    </div>
+                </div>
+
+                <h3>📅 Chronology of Collapse</h3>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-day">OCTOBER 12-14, 2024</div>
+                        <div class="timeline-title">🎯 The Marathon Incident</div>
+                        <div class="timeline-desc">Tyler Chen <span class="vocab" data-def="UNDERGOES /ˌʌndəˈɡəʊz/: Experiences; goes through | Trải qua">undergoes</span> transformation. First responders infected within minutes. Campus <span class="vocab" data-def="QUARANTINE /ˈkwɒrəntiːn/: Isolation to prevent spread | Cách ly">quarantine</span> fails catastrophically.</div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-day">OCTOBER 15-31, 2024</div>
+                        <div class="timeline-title">🏙️ Ohio Falls</div>
+                        <div class="timeline-desc">Columbus, Cleveland, Cincinnati — all <span class="vocab" data-def="SUCCUMB /səˈkʌm/: Give in to; be defeated by | Đầu hàng; bị đánh bại">succumb</span> within two weeks. The infection spreads through proximity AND digital contact. Anyone watching footage of the infected risks <span class="vocab" data-def="CONTAMINATION /kənˌtæmɪˈneɪʃn/: The act of making something impure | Sự nhiễm bẩn; sự lây lan">contamination</span>.</div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-day">NOVEMBER 2024</div>
+                        <div class="timeline-title">🌍 Global Pandemic</div>
+                        <div class="timeline-desc">The <span class="vocab" data-def="CONTAGION /kənˈteɪdʒən/: Spread of disease; infection | Sự lây lan bệnh">contagion</span> goes worldwide. Internet shutdown attempted — but it's already too late. The Rizzlords emerge — intelligent infected who command the <span class="vocab" data-def="HORDE /hɔːd/: A large, unorganized crowd | Đám đông hỗn loạn">horde</span>.</div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-day">JANUARY 2025</div>
+                        <div class="timeline-title">💀 Civilization Ends</div>
+                        <div class="timeline-desc">Major governments collapse. Military forces <span class="vocab" data-def="DECIMATED /ˈdesɪmeɪtɪd/: Severely damaged or destroyed | Bị tàn phá nặng nề">decimated</span>. 60% of global population infected. Scattered survivors organize <span class="vocab" data-def="MAKESHIFT /ˈmeɪkʃɪft/: Temporary; improvised | Tạm thời; được làm vội">makeshift</span> resistance.</div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-day">FEBRUARY 2025</div>
+                        <div class="timeline-title">🚂 Project Dead Rails</div>
+                        <div class="timeline-desc">Last hope <span class="vocab" data-def="INITIATED /ɪˈnɪʃieɪtɪd/: Started; begun | Được bắt đầu; khởi xướng">initiated</span>. Seventeen armored trains constructed across North America. The premise: keep moving, never stop, outrun the infected. Of seventeen trains, only one survives to March — <strong class="gold">Train 6-7</strong>.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lang-content" data-lang="vn">
+                <h3>Về Tyler Chen — Bệnh nhân Số 0</h3>
+                <p>Tyler là sinh viên năm hai <strong>bình thường</strong> tại Đại học Ohio State — điểm trung bình, ít bạn bè, với <strong>sự thèm khát không thể thỏa mãn</strong> đối với nội dung. Điều mà bạn cùng phòng coi là <strong>nghiện ngập</strong> đơn thuần thực ra là thứ gì đó <strong>đáng ngại</strong> hơn nhiều.</p>
+
+                <p>Ngày 12 tháng 10 năm 2024, Tyler bắt đầu điều sau này được gọi là "Cuộc Marathon" — <strong>72 giờ liên tục</strong> tiêu thụ nội dung. Không ngủ. Không ăn. Không tiếp xúc con người. Chỉ có dòng video Skibidi, tổng hợp Sigma, và meme Fanum Tax vô tận lướt qua võng mạc anh ta.</p>
+
+                <h3>📅 Dòng thời gian sụp đổ</h3>
+                <p><strong>Tháng 10/2024:</strong> Tyler biến đổi. Ohio thất thủ trong 2 tuần.</p>
+                <p><strong>Tháng 11/2024:</strong> Đại dịch toàn cầu. Các Rizzlord xuất hiện.</p>
+                <p><strong>Tháng 1/2025:</strong> Văn minh kết thúc. 60% dân số bị nhiễm.</p>
+                <p><strong>Tháng 2/2025:</strong> Dự án Đường Ray Chết. 17 tàu được chế tạo. Chỉ Tàu 6-7 sống sót.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ SURVIVORS ============ -->
+    <div id="survivors" class="chapter">
+        <div class="content-box">
+            <div class="lang-toggle">
+                <button class="lang-btn active" data-lang="en">🇺🇸 English</button>
+                <button class="lang-btn" data-lang="vn">🇻🇳 Tiếng Việt</button>
+            </div>
+
+            <h2>🤠 The Survivors: 20 Classes</h2>
+
+            <div class="lang-content active" data-lang="en">
+                <p class="lead-text">Each survivor aboard Train 6-7 brings <span class="vocab" data-def="INVALUABLE /ɪnˈvæljuəbl/: Extremely useful; priceless | Vô giá; cực kỳ hữu ích">invaluable</span> skills forged through <span class="vocab" data-def="ADVERSITY /ədˈvɜːsəti/: Difficulty; hardship | Nghịch cảnh; khó khăn">adversity</span>.</p>
+
+                <h4>⚔️ FRONTLINE COMBATANTS</h4>
+                <div class="card-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="card-icon">🚂</span>
+                            <span class="card-role">VANGUARD</span>
+                        </div>
+                        <div class="card-name">Railrunner</div>
+                        <div class="card-lore">"The rails are my home. The train is my blood. I was born to run — and I'll die running."</div>
+                        <p>The <span class="vocab" data-def="QUINTESSENTIAL /ˌkwɪntɪˈsenʃl/: Perfect example of | Điển hình; mẫu mực">quintessential</span> survivor class. Balanced <span class="vocab" data-def="ATTRIBUTES /ˈætrɪbjuːts/: Qualities; characteristics | Thuộc tính; đặc điểm">attributes</span> with enhanced mobility on train surfaces.</p>
+                        <div class="card-stats">
+                            <span class="card-stat">HP: 100</span>
+                            <span class="card-stat">TRAIN SPEED +25%</span>
+                            <span class="card-stat">BALANCED BUILD</span>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="card-icon">💪</span>
+                            <span class="card-role">JUGGERNAUT</span>
+                        </div>
+                        <div class="card-name">Sigma Survivor</div>
+                        <div class="card-lore">"They call me emotionless. I call it efficiency. Fear is a luxury the dead can't afford."</div>
+                        <p>Weaponizes the Sigma mindset against its creators. <span class="vocab" data-def="IMPERVIOUS /ɪmˈpɜːviəs/: Not affected by; immune to | Không bị ảnh hưởng; miễn dịch">Impervious</span> to fear-based attacks and psychological <span class="vocab" data-def="MANIPULATION /məˌnɪpjuˈleɪʃn/: Controlling someone unfairly | Sự thao túng">manipulation</span>.</p>
+                        <div class="card-stats">
+                            <span class="card-stat">HP: 150</span>
+                            <span class="card-stat">FEAR IMMUNITY</span>
+                            <span class="card-stat">KNOCKBACK -50%</span>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="card-icon">🤠</span>
+                            <span class="card-role">MARKSMAN</span>
+                        </div>
+                        <div class="card-name">Crossbow Cowboy</div>
+                        <div class="card-lore">"Seventy-two years I've walked this earth. Haven't missed a shot since '82. Ain't starting now."</div>
+                        <p>A <span class="vocab" data-def="GRIZZLED /ˈɡrɪzld/: Grey-haired and experienced | Bạc đầu và giàu kinh nghiệm">grizzled</span> <span class="vocab" data-def="VETERAN /ˈvetərən/: Someone with long experience | Cựu binh; người có nhiều kinh nghiệm">veteran</span> whose precision has only improved with age. Headshot <span class="vocab" data-def="MULTIPLIER /ˈmʌltɪplaɪə/: Something that increases | Hệ số nhân">multiplier</span> specialist.</p>
+                        <div class="card-stats">
+                            <span class="card-stat">HP: 95</span>
+                            <span class="card-stat">2X HEADSHOT</span>
+                            <span class="card-stat">SILENT KILLS</span>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="card-icon">⭐</span>
+                            <span class="card-role">GUNSLINGER</span>
+                        </div>
+                        <div class="card-name">Sheriff of Nowhere</div>
+                        <div class="card-lore">"My town's gone. My people're gone. But the badge? The badge stays. Justice doesn't die with civilization."</div>
+                        <p>Last lawman of a <span class="vocab" data-def="DECIMATED /ˈdesɪmeɪtɪd/: Severely damaged or destroyed | Bị tàn phá nặng nề">decimated</span> frontier town. <span class="vocab" data-def="RICOCHET /ˈrɪkəʃeɪ/: Bullet bouncing off surface | Đạn bật nảy">Ricochet</span> shots bounce between clustered enemies.</p>
+                        <div class="card-stats">
+                            <span class="card-stat">HP: 100</span>
+                            <span class="card-stat">RICOCHET</span>
+                            <span class="card-stat">QUICK DRAW</span>
+                        </div>
+                    </div>
+                </div>
+
+                <h4>💖 SUPPORT SPECIALISTS</h4>
+                <div class="card-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="card-icon">💖</span>
+                            <span class="card-role">HEALER</span>
+                        </div>
+                        <div class="card-name">Rizz Medic</div>
+                        <div class="card-lore">"Words have power. My confidence heals wounds that medicine can't touch. Believe in me — and I'll believe you back to health."</div>
+                        <p>Their <span class="vocab" data-def="CHARISMA /kəˈrɪzmə/: Personal charm that inspires others | Sức hút cá nhân">charisma</span> has <span class="vocab" data-def="MANIFESTED /ˈmænɪfestɪd/: Become real; shown itself | Biểu hiện; trở thành hiện thực">manifested</span> as healing energy. Area-of-effect restoration through <span class="vocab" data-def="MOTIVATIONAL /ˌməʊtɪˈveɪʃənl/: Encouraging; inspiring action | Khích lệ; truyền cảm hứng">motivational</span> speech.</p>
+                        <div class="card-stats">
+                            <span class="card-stat">HP: 90</span>
+                            <span class="card-stat">HEAL AURA</span>
+                            <span class="card-stat">MORALE BOOST</span>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="card-icon">🔧</span>
+                            <span class="card-role">ENGINEER</span>
+                        </div>
+                        <div class="card-name">Midwest Mechanic</div>
+                        <div class="card-lore">"Machines don't lie. They don't betray. You treat 'em right, they'll never let you down. Same can't be said for people."</div>
+                        <p><span class="vocab" data-def="INDISPENSABLE /ˌɪndɪˈspensəbl/: Absolutely necessary | Không thể thiếu">Indispensable</span> for long-term survival. Repairs train 50% faster at reduced resource cost.</p>
+                        <div class="card-stats">
+                            <span class="card-stat">HP: 100</span>
+                            <span class="card-stat">REPAIR +50%</span>
+                            <span class="card-stat">COST -30%</span>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="card-icon">🌀</span>
+                            <span class="card-role">ANOMALY</span>
+                        </div>
+                        <div class="card-name">Ohio Glitcher</div>
+                        <div class="card-lore">"I was infected for three hours. THREE. I remember everything. The collective consciousness, the hive-mind screaming. I tore myself free. Now I use their power against them."</div>
+                        <p>A survivor who <span class="vocab" data-def="WRESTLED /ˈresld/: Struggled against | Vật lộn với">wrestled</span> free from infection. Retains <span class="vocab" data-def="RESIDUAL /rɪˈzɪdjuəl/: Remaining after most is gone | Còn sót lại">residual</span> abilities — short-range teleportation.</p>
+                        <div class="card-stats">
+                            <span class="card-stat">HP: 90</span>
+                            <span class="card-stat">PHASE DASH</span>
+                            <span class="card-stat">WALL PHASE</span>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="card-icon">🔮</span>
+                            <span class="card-role">MYSTIC</span>
+                        </div>
+                        <div class="card-name">Delulu Prophet</div>
+                        <div class="card-lore">"They say I'm delusional. I say reality is merely a suggestion. Watch closely — I'll make my delusions real."</div>
+                        <p>Belief made <span class="vocab" data-def="TANGIBLE /ˈtændʒəbl/: Able to be touched; real | Có thể chạm được; thực tế">tangible</span>. Random buffs <span class="vocab" data-def="MANIFEST /ˈmænɪfest/: Become visible; appear | Xuất hiện; hiện ra">manifest</span> as reality through sheer conviction.</p>
+                        <div class="card-stats">
+                            <span class="card-stat">HP: 85</span>
+                            <span class="card-stat">RANDOM BUFFS</span>
+                            <span class="card-stat">REALITY WARP</span>
+                        </div>
+                    </div>
+                </div>
+
+                <h4>💥 HEAVY ASSAULT</h4>
+                <div class="card-grid compact">
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="card-icon">🌭</span>
+                            <span class="card-role">BERSERKER</span>
+                        </div>
+                        <div class="card-name">Hotdog Berserker</div>
+                        <p>Former mascot. Rage meter builds with damage. At maximum fury — <span class="vocab" data-def="UNSTOPPABLE /ʌnˈstɒpəbl/: Cannot be stopped | Không thể ngăn cản">unstoppable</span> melee <span class="vocab" data-def="DEVASTATION /ˌdevəˈsteɪʃn/: Severe destruction | Sự tàn phá">devastation</span>.</p>
+                        <div class="card-stats">
+                            <span class="card-stat">HP: 130</span>
+                            <span class="card-stat">RAGE MODE</span>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="card-icon">🛡️</span>
+                            <span class="card-role">DEFENDER</span>
+                        </div>
+                        <div class="card-name">Conductor Warden</div>
+                        <p>The train's last line of defense. Provides bonus armor to the Logic Engine — the heart of Train 6-7.</p>
+                        <div class="card-stats">
+                            <span class="card-stat">HP: 120</span>
+                            <span class="card-stat">ENGINE +ARMOR</span>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="card-icon">🔩</span>
+                            <span class="card-role">SIEGE</span>
+                        </div>
+                        <div class="card-name">Doom Driller</div>
+                        <p><span class="vocab" data-def="DEMOLITION /ˌdeməˈlɪʃn/: Destruction of buildings | Phá hủy công trình">Demolition</span> expert. Breaks through obstacles and creates escape routes at twice normal speed.</p>
+                        <div class="card-stats">
+                            <span class="card-stat">HP: 110</span>
+                            <span class="card-stat">BREACH +100%</span>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="card-icon">👊</span>
+                            <span class="card-role">BRAWLER</span>
+                        </div>
+                        <div class="card-name">Barnstorm Brawler</div>
+                        <p>Former cage fighter. Heavy knockback punches send enemies flying. <span class="vocab" data-def="FEROCIOUS /fəˈrəʊʃəs/: Extremely violent or aggressive | Hung dữ; dữ tợn">Ferocious</span> in close quarters.</p>
+                        <div class="card-stats">
+                            <span class="card-stat">HP: 125</span>
+                            <span class="card-stat">KNOCKBACK+</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lang-content" data-lang="vn">
+                <p class="lead-text">Mỗi người sống sót trên Tàu 6-7 mang đến những kỹ năng <strong>vô giá</strong> được rèn luyện qua <strong>nghịch cảnh</strong>.</p>
+                
+                <h4>⚔️ CHIẾN BINH TIỀN TUYẾN</h4>
+                <p>Railrunner (Cân bằng), Sigma Survivor (Tank), Crossbow Cowboy (Xạ thủ), Sheriff of Nowhere (Tay súng)</p>
+                
+                <h4>💖 CHUYÊN GIA HỖ TRỢ</h4>
+                <p>Rizz Medic (Chữa lành), Midwest Mechanic (Kỹ sư), Ohio Glitcher (Dịch chuyển), Delulu Prophet (Huyền bí)</p>
+                
+                <h4>💥 TẤN CÔNG NẶNG</h4>
+                <p>Hotdog Berserker (Cuồng nộ), Conductor Warden (Phòng thủ), Doom Driller (Công thành), Barnstorm Brawler (Đấm bốc)</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ ARSENAL ============ -->
+    <div id="arsenal" class="chapter">
+        <div class="content-box">
+            <h2>🔫 The Arsenal</h2>
+            <p class="lead-text">Every weapon aboard Train 6-7 has been <span class="vocab" data-def="BATTLE-TESTED /ˈbætl ˈtestɪd/: Proven effective in combat | Đã được thử nghiệm trong chiến đấu">battle-tested</span> against the infected. Choose wisely — ammunition is a <span class="vocab" data-def="FINITE /ˈfaɪnaɪt/: Limited; having an end | Có hạn; hữu hạn">finite</span> resource.</p>
+
+            <h4>🔫 FIREARMS</h4>
+            <div class="card-grid compact">
+                <div class="card">
+                    <div class="card-header"><span class="card-icon">💥</span><span class="card-role">SHOTGUN</span></div>
+                    <div class="card-name">Pump Defender</div>
+                    <p><span class="vocab" data-def="DEVASTATING /ˈdevəsteɪtɪŋ/: Extremely destructive | Tàn khốc; hủy diệt">Devastating</span> close-range stopping power. Military standard issue.</p>
+                    <div class="card-stats"><span class="card-stat">DMG: 32</span><span class="card-stat">MAG: 8</span><span class="card-stat">SHORT</span></div>
+                </div>
+                <div class="card">
+                    <div class="card-header"><span class="card-icon">🎯</span><span class="card-role">RIFLE</span></div>
+                    <div class="card-name">Midwest Lever-Action</div>
+                    <p>Classic western rifle. Fires as fast as you can cycle the lever. <span class="vocab" data-def="ICONIC /aɪˈkɒnɪk/: Widely recognized; symbolic | Mang tính biểu tượng">Iconic</span>.</p>
+                    <div class="card-stats"><span class="card-stat">DMG: 40</span><span class="card-stat">MAG: 10</span><span class="card-stat">LONG</span></div>
+                </div>
+                <div class="card">
+                    <div class="card-header"><span class="card-icon">⭐</span><span class="card-role">REVOLVER</span></div>
+                    <div class="card-name">Railroad Revolver</div>
+                    <p>Six chambers. Each cylinder has a name scratched in — one for each Rizzlord the Sheriff has killed.</p>
+                    <div class="card-stats"><span class="card-stat">DMG: 55</span><span class="card-stat">MAG: 6</span><span class="card-stat">LEGENDARY</span></div>
+                </div>
+                <div class="card">
+                    <div class="card-header"><span class="card-icon">🔭</span><span class="card-role">SNIPER</span></div>
+                    <div class="card-name">Clockwork Sniper</div>
+                    <p>Scavenged from a watchmaker's shop. Shoots so accurately it seems to bend bullets.</p>
+                    <div class="card-stats"><span class="card-stat">DMG: 85</span><span class="card-stat">MAG: 5</span><span class="card-stat">EXTREME</span></div>
+                </div>
+            </div>
+
+            <h4>🏹 SILENT WEAPONS</h4>
+            <div class="card-grid compact">
+                <div class="card">
+                    <div class="card-header"><span class="card-icon">🏹</span><span class="card-role">CROSSBOW</span></div>
+                    <div class="card-name">High-Voltage Crossbow</div>
+                    <p><span class="vocab" data-def="ELECTRIFIED /ɪˈlektrɪfaɪd/: Charged with electricity | Được tích điện">Electrified</span> bolts that <span class="vocab" data-def="PENETRATE /ˈpenɪtreɪt/: Pass through | Xuyên qua">penetrate</span> armor. Silent. Deadly.</p>
+                    <div class="card-stats"><span class="card-stat">DMG: 70</span><span class="card-stat">PIERCE</span><span class="card-stat">SILENT</span></div>
+                </div>
+                <div class="card">
+                    <div class="card-header"><span class="card-icon">🎯</span><span class="card-role">BOW</span></div>
+                    <div class="card-name">Cornfield Bow</div>
+                    <p>Carved from hickory. Piercing arrows pass through multiple enemies. <span class="vocab" data-def="LETHAL /ˈliːθl/: Deadly; capable of killing | Chết người; gây chết">Lethal</span> in skilled hands.</p>
+                    <div class="card-stats"><span class="card-stat">DMG: 48</span><span class="card-stat">PIERCE: 3</span><span class="card-stat">SILENT</span></div>
+                </div>
+            </div>
+
+            <h4>💥 SPECIAL ARMAMENTS</h4>
+            <div class="card-grid compact">
+                <div class="card">
+                    <div class="card-header"><span class="card-icon">🔥</span><span class="card-role">SPECIAL</span></div>
+                    <div class="card-name">Boiler Burst</div>
+                    <p>Fires superheated steam that <span class="vocab" data-def="INCINERATES /ɪnˈsɪnəreɪts/: Burns completely | Thiêu đốt hoàn toàn">incinerates</span> flesh. Made from locomotive parts.</p>
+                    <div class="card-stats"><span class="card-stat">DMG: 45</span><span class="card-stat">BURN</span><span class="card-stat">CONE AOE</span></div>
+                </div>
+                <div class="card">
+                    <div class="card-header"><span class="card-icon">🔨</span><span class="card-role">LEGENDARY</span></div>
+                    <div class="card-name">Ban Hammer</div>
+                    <p><span class="vocab" data-def="EXPERIMENTAL /ɪkˌsperɪˈmentl/: Not yet fully tested | Thử nghiệm; chưa hoàn thiện">Experimental</span> weapon that "BANS" targets from physical space. Origin unknown. Terrifying.</p>
+                    <div class="card-stats"><span class="card-stat">DMG: 150</span><span class="card-stat">DELETE</span><span class="card-stat">CD: 30s</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ INFECTED ============ -->
+    <div id="infected" class="chapter">
+        <div class="content-box">
+            <h2>💀 The Infected</h2>
+            <p class="lead-text">They were human once. Now they are walking <span class="vocab" data-def="MANIFESTATIONS /ˌmænɪfeˈsteɪʃnz/: Physical forms of abstract things | Hiện thân; sự biểu hiện">manifestations</span> of viral culture — corrupted <span class="vocab" data-def="VESSELS /ˈvesəlz/: Containers; here meaning bodies | Thể xác; vật chứa đựng">vessels</span> of the Brainrot <span class="vocab" data-def="PATHOGEN /ˈpæθədʒən/: Disease-causing organism | Mầm bệnh">pathogen</span>.</p>
+
+            <h4>💀 TIER 1 — COMMON INFECTED</h4>
+            <div class="card-grid compact">
+                <div class="card">
+                    <div class="card-header"><span class="card-icon">🚽</span><span class="card-role">SWARM</span></div>
+                    <div class="card-name">Skibidi Shambler</div>
+                    <p>Moves in <span class="vocab" data-def="ERRATIC /ɪˈrætɪk/: Unpredictable; irregular | Thất thường; không đều">erratic</span>, jerking patterns. Their song lowers cognitive function. Weak individually — <span class="vocab" data-def="OVERWHELMING /ˌəʊvəˈwelmɪŋ/: Very great in amount | Áp đảo; quá nhiều">overwhelming</span> in numbers.</p>
+                    <div class="card-stats"><span class="card-stat">HP: 100</span><span class="card-stat">DMG: 10</span><span class="card-stat">SWARM</span></div>
+                </div>
+                <div class="card">
+                    <div class="card-header"><span class="card-icon">💨</span><span class="card-role">RUSH</span></div>
+                    <div class="card-name">Rizz Runner</div>
+                    <p><span class="vocab" data-def="VELOCITY /vəˈlɒsəti/: Speed of movement | Vận tốc">Velocity</span>-focused infected. Still retains fragments of <span class="vocab" data-def="CHARISMA /kəˈrɪzmə/: Personal charm | Sức hút cá nhân">charisma</span> that can disorient targets.</p>
+                    <div class="card-stats"><span class="card-stat">HP: 70</span><span class="card-stat">SPEED: HIGH</span><span class="card-stat">CONFUSE</span></div>
+                </div>
+            </div>
+
+            <h4>⚠️ TIER 2-3 — ELITE THREATS</h4>
+            <div class="card-grid compact">
+                <div class="card">
+                    <div class="card-header"><span class="card-icon">💪</span><span class="card-role">JUGGERNAUT</span></div>
+                    <div class="card-name">Sigma Walker</div>
+                    <p>Silent. Emotionless. <span class="vocab" data-def="RELENTLESS /rɪˈlentləs/: Never stopping; persistent | Không ngừng nghỉ; kiên trì">Relentless</span>. Once they <span class="vocab" data-def="ACQUIRE /əˈkwaɪə/: Obtain; get | Có được; đạt được">acquire</span> a target, they NEVER stop pursuing.</p>
+                    <div class="card-stats"><span class="card-stat">HP: 500</span><span class="card-stat">DMG: 40</span><span class="card-stat">PURSUIT</span></div>
+                </div>
+                <div class="card">
+                    <div class="card-header"><span class="card-icon">🌀</span><span class="card-role">ANOMALY</span></div>
+                    <div class="card-name">Ohio Glitch</div>
+                    <p><span class="vocab" data-def="TELEPORTS /ˈtelɪpɔːts/: Moves instantly from one place to another | Dịch chuyển tức thời">Teleports</span> erratically. Phases through solid matter. Reality bends around their <span class="vocab" data-def="CORRUPTED /kəˈrʌptɪd/: Made bad; damaged | Bị hư hỏng; bị làm hỏng">corrupted</span> form.</p>
+                    <div class="card-stats"><span class="card-stat">HP: 300</span><span class="card-stat">PHASE</span><span class="card-stat">TELEPORT</span></div>
+                </div>
+                <div class="card">
+                    <div class="card-header"><span class="card-icon">🌭</span><span class="card-role">EXTREME</span></div>
+                    <div class="card-name">Glizzy Gladiator</div>
+                    <p>Mutated mascot suit. Charges at <strong class="danger">80 MPH</strong>. Can <span class="vocab" data-def="DERAIL /dɪˈreɪl/: Cause to leave the tracks | Làm trật bánh">derail</span> train cars on impact.</p>
+                    <div class="card-stats"><span class="card-stat">HP: 800</span><span class="card-stat">80 MPH</span><span class="card-stat">DERAIL</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ RIZZLORDS ============ -->
+    <div id="rizzlords" class="chapter">
+        <div class="content-box">
+            <h2>👑 The Rizzlords</h2>
+            <p class="lead-text">They were influencers once — digital <span class="vocab" data-def="ARISTOCRACY /ˌærɪˈstɒkrəsi/: Ruling class; elite | Tầng lớp thống trị; giới tinh hoa">aristocracy</span> who built empires on attention. When Brainrot claimed them, their power was <span class="vocab" data-def="AMPLIFIED /ˈæmplɪfaɪd/: Made much stronger | Được khuếch đại">amplified</span> beyond <span class="vocab" data-def="COMPREHENSION /ˌkɒmprɪˈhenʃn/: Understanding | Sự hiểu biết">comprehension</span>.</p>
+
+            <div class="card-grid">
+                <div class="card boss-card">
+                    <div class="card-header"><span class="card-icon">💋</span><span class="card-role">BOSS #1</span></div>
+                    <div class="card-name">Rizzlord of the Rails</div>
+                    <div class="card-lore">"47 million followers. Every one of them heard my voice. Now they all speak with it."</div>
+                    <p>Former social media <span class="vocab" data-def="MOGUL /ˈməʊɡl/: Powerful person in industry | Ông trùm">mogul</span>. Mass <span class="vocab" data-def="HYPNOSIS /hɪpˈnəʊsɪs/: Mind control through suggestion | Thôi miên">hypnosis</span> through voice. Can turn allies against each other.</p>
+                    <div class="card-stats"><span class="card-stat">HP: 2,500</span><span class="card-stat">MASS CHARM</span><span class="card-stat">BETRAY</span></div>
+                </div>
+
+                <div class="card boss-card">
+                    <div class="card-header"><span class="card-icon">🌭</span><span class="card-role">BOSS #2</span></div>
+                    <div class="card-name">Sigma Hotdog</div>
+                    <div class="card-lore">"..."</div>
+                    <p>A mascot that achieved MEMETIC PERFECTION. Never speaks. Communicates through <span class="vocab" data-def="VISCERAL /ˈvɪsərəl/: Deep, instinctive feeling | Bản năng sâu thẳm">visceral</span> terror alone.</p>
+                    <div class="card-stats"><span class="card-stat">HP: 2,800</span><span class="card-stat">GREASE TRAIL</span><span class="card-stat">SILENT DREAD</span></div>
+                </div>
+
+                <div class="card boss-card">
+                    <div class="card-header"><span class="card-icon">🌾</span><span class="card-role">BOSS #4</span></div>
+                    <div class="card-name">Cornfield Rizz Warden</div>
+                    <div class="card-lore">"I am the land itself. Every stalk, every root, every whisper in the wind — it's all me now."</div>
+                    <p>20-foot <span class="vocab" data-def="AMALGAMATION /əˌmælɡəˈmeɪʃn/: Mixture; combination | Sự kết hợp; hỗn hợp">amalgamation</span> of humans and corn stalks. Commands scarecrow <span class="vocab" data-def="TOTEMS /ˈtəʊtəmz/: Sacred objects with power | Vật tổ; biểu tượng quyền lực">totems</span>.</p>
+                    <div class="card-stats"><span class="card-stat">HP: 3,200</span><span class="card-stat">REGENERATION</span><span class="card-stat">TOTEM NETWORK</span></div>
+                </div>
+
+                <div class="card boss-card">
+                    <div class="card-header"><span class="card-icon">🌀</span><span class="card-role">BOSS #6</span></div>
+                    <div class="card-name">Ohio Overseer</div>
+                    <div class="card-lore">"I exist everywhere and nowhere. Strike me here — I'm already there. Reality is my playground."</div>
+                    <p>Exists in multiple locations <span class="vocab" data-def="SIMULTANEOUSLY /ˌsɪmlˈteɪniəsli/: At the same time | Đồng thời">simultaneously</span>. <span class="vocab" data-def="INFURIATING /ɪnˈfjʊəriˌeɪtɪŋ/: Extremely annoying | Cực kỳ bực bội">Infuriating</span> to combat.</p>
+                    <div class="card-stats"><span class="card-stat">HP: 2,600</span><span class="card-stat">MULTI-LOCATION</span><span class="card-stat">PHASE</span></div>
+                </div>
+            </div>
+
+            <h3>👑 THE FINAL BOSS — DAY 99</h3>
+
+            <div class="card final-boss">
+                <div class="card-header">
+                    <span class="card-icon">👁️</span>
+                    <span class="card-role">⚠️ APEX PREDATOR ⚠️</span>
+                </div>
+                <div class="card-name">THE CONDUCTOR KING</div>
+                <div class="card-lore">"I am Tyler Chen. I am Patient Zero. I am the beginning — and I will be the end. Every meme, every trend, every viral moment — they all live inside me now. Billions of voices. One consciousness. Welcome to the end of the line."</div>
+                <p><strong>Twenty feet tall.</strong> Body covered in screens displaying EVERY viral moment in human history. Speaks with the voice of <strong>billions</strong>. Possesses ALL Rizzlord abilities. Can <span class="vocab" data-def="WARP /wɔːp/: Twist; distort | Làm biến dạng; bóp méo">warp</span> reality itself.</p>
+                <p style="margin-top: 15px;"><strong class="danger">He waits at Sanctuary Station. Day 99. The end of the line.</strong></p>
+                <div class="card-stats">
+                    <span class="card-stat">HP: 5,000+</span>
+                    <span class="card-stat">ALL ABILITIES</span>
+                    <span class="card-stat">REALITY WARP</span>
+                    <span class="card-stat">PHASE IMMUNITY</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ CHRONICLE ============ -->
+    <div id="chronicle" class="chapter">
+        <div class="content-box">
+            <h2>📖 The Chronicle: 99 Days</h2>
+            <p class="lead-text">The <span class="vocab" data-def="HARROWING /ˈhærəʊɪŋ/: Extremely distressing | Cực kỳ đau thương">harrowing</span> journey of Train 6-7, documented by the survivors themselves.</p>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-day">DAY 1-7</div>
+                    <div class="timeline-title">🚂 Genesis</div>
+                    <div class="timeline-desc">Train 6-7 <span class="vocab" data-def="DEPARTS /dɪˈpɑːts/: Leaves | Khởi hành">departs</span> Omaha with a crew of twelve survivors. <span class="vocab" data-def="PROVISIONS /prəˈvɪʒnz/: Supplies; food | Lương thực; vật tư">Provisions</span> for sixty days. Destination: Sanctuary. Distance: 1,400 miles.</div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-day">DAY 23</div>
+                    <div class="timeline-title">👑 First Rizzlord Encounter</div>
+                    <div class="timeline-desc">Marcus Johnson — the Rizzlord of the Rails — attacks the train. Near-<span class="vocab" data-def="CATASTROPHIC /ˌkætəˈstrɒfɪk/: Disastrous | Thảm khốc">catastrophic</span> engagement. He retreats but promises return.</div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-day">DAY 30</div>
+                    <div class="timeline-title">⚡ The Awakening</div>
+                    <div class="timeline-desc">Crew discovers <span class="vocab" data-def="LATENT /ˈleɪtnt/: Hidden; dormant | Tiềm ẩn; ngủ yên">latent</span> abilities — RIZZ MODE and SUPER SAIYAN MODE. The infected aren't the only ones who evolved.</div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-day">DAY 45</div>
+                    <div class="timeline-title">🌾 The Corn King</div>
+                    <div class="timeline-desc">Cornfield Rizz Warden ambush. 20-foot monstrosity rises from the fields. Solution: burn everything. Sheriff Stone loses his deputy, Sarah Chen.</div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-day">DAY 75</div>
+                    <div class="timeline-title">💀 The Convergence</div>
+                    <div class="timeline-desc">SIX Rizzlords attack <span class="vocab" data-def="SIMULTANEOUSLY /ˌsɪmlˈteɪniəsli/: At the same time | Đồng thời">simultaneously</span>. Two crew members fall. Engine at 30% integrity. Darkest hour.</div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-day">DAY 90</div>
+                    <div class="timeline-title">📡 The Revelation</div>
+                    <div class="timeline-desc">Radio <span class="vocab" data-def="INTERCEPT /ˌɪntəˈsept/: Catch; capture | Chặn bắt; thu được">intercept</span> reveals the truth: Brainrot was INTENTIONAL. Sanctuary might be a trap. They proceed anyway — there's nowhere else to go.</div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-day">DAY 99</div>
+                    <div class="timeline-title">👑 THE CONDUCTOR KING</div>
+                    <div class="timeline-desc">Final battle at Sanctuary Station. Tyler Chen awaits. Everything — every sacrifice, every loss, every mile traveled — comes down to this moment.</div>
+                </div>
+            </div>
+
+            <div class="quote">
+                "We didn't just survive ninety-nine days. We became something new. Whatever comes next — we face it together. The train taught us that. Keep moving forward. Never stop. Never surrender."
+                <span class="quote-author">— Sheriff Marcus Stone, Day 100 — First Morning of the New World</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ LEXICON ============ -->
+    <div id="lexicon" class="chapter">
+        <div class="content-box">
+            <h2>📚 The Lexicon</h2>
+
+            <div class="reading-tip">
+                <div class="reading-tip-title">ADVANCED VOCABULARY GUIDE</div>
+                <p>This section contains <strong>C1/B2 vocabulary</strong> organized by category. Master these words — they represent the linguistic foundation of academic and professional English.</p>
+            </div>
+
+            <div class="vocab-box">
+                <h4>📝 ACADEMIC VOCABULARY</h4>
+                <div class="vocab-list">
+                    <div class="vocab-item">
+                        <div class="vocab-word">UNPRECEDENTED</div>
+                        <div class="vocab-phonetic">/ʌnˈpresɪdentɪd/</div>
+                        <div class="vocab-def">Never done or known before</div>
+                        <div class="vocab-example">"The outbreak was unprecedented in human history."</div>
+                        <div class="vocab-vn">🇻🇳 Chưa từng có tiền lệ</div>
+                    </div>
+                    <div class="vocab-item">
+                        <div class="vocab-word">INSURMOUNTABLE</div>
+                        <div class="vocab-phonetic">/ˌɪnsəˈmaʊntəbl/</div>
+                        <div class="vocab-def">Impossible to overcome</div>
+                        <div class="vocab-example">"Against insurmountable odds, they survived."</div>
+                        <div class="vocab-vn">🇻🇳 Không thể vượt qua</div>
+                    </div>
+                    <div class="vocab-item">
+                        <div class="vocab-word">MANIFESTATION</div>
+                        <div class="vocab-phonetic">/ˌmænɪfeˈsteɪʃn/</div>
+                        <div class="vocab-def">Physical form of something abstract</div>
+                        <div class="vocab-example">"The infected were manifestations of viral culture."</div>
+                        <div class="vocab-vn">🇻🇳 Sự biểu hiện; hiện thân</div>
+                    </div>
+                    <div class="vocab-item">
+                        <div class="vocab-word">CATASTROPHIC</div>
+                        <div class="vocab-phonetic">/ˌkætəˈstrɒfɪk/</div>
+                        <div class="vocab-def">Causing sudden great damage</div>
+                        <div class="vocab-example">"The quarantine failure was catastrophic."</div>
+                        <div class="vocab-vn">🇻🇳 Thảm khốc; tai họa</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="vocab-box">
+                <h4>🎭 DESCRIPTIVE VOCABULARY</h4>
+                <div class="vocab-list">
+                    <div class="vocab-item">
+                        <div class="vocab-word">RELENTLESS</div>
+                        <div class="vocab-phonetic">/rɪˈlentləs/</div>
+                        <div class="vocab-def">Never stopping; persistent</div>
+                        <div class="vocab-example">"The Sigma Walker was relentless in pursuit."</div>
+                        <div class="vocab-vn">🇻🇳 Không ngừng nghỉ; kiên trì</div>
+                    </div>
+                    <div class="vocab-item">
+                        <div class="vocab-word">HARROWING</div>
+                        <div class="vocab-phonetic">/ˈhærəʊɪŋ/</div>
+                        <div class="vocab-def">Extremely distressing</div>
+                        <div class="vocab-example">"The 99-day journey was harrowing."</div>
+                        <div class="vocab-vn">🇻🇳 Cực kỳ đau thương</div>
+                    </div>
+                    <div class="vocab-item">
+                        <div class="vocab-word">VISCERAL</div>
+                        <div class="vocab-phonetic">/ˈvɪsərəl/</div>
+                        <div class="vocab-def">Deep, instinctive feeling</div>
+                        <div class="vocab-example">"The fear was visceral and overwhelming."</div>
+                        <div class="vocab-vn">🇻🇳 Bản năng sâu thẳm</div>
+                    </div>
+                    <div class="vocab-item">
+                        <div class="vocab-word">QUINTESSENTIAL</div>
+                        <div class="vocab-phonetic">/ˌkwɪntɪˈsenʃl/</div>
+                        <div class="vocab-def">Perfect example of something</div>
+                        <div class="vocab-example">"The Railrunner is the quintessential survivor."</div>
+                        <div class="vocab-vn">🇻🇳 Điển hình; mẫu mực</div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>😎 INTERNET SLANG GLOSSARY</h3>
+            <div class="vocab-list">
+                <div class="vocab-item">
+                    <div class="vocab-word">BRAINROT</div>
+                    <div class="vocab-def">Mental deterioration from excessive internet content consumption</div>
+                    <div class="vocab-vn">🇻🇳 "Não thối" — suy giảm tinh thần do xem quá nhiều nội dung internet</div>
+                </div>
+                <div class="vocab-item">
+                    <div class="vocab-word">RIZZ</div>
+                    <div class="vocab-def">Charisma; ability to attract or charm others (from "charisma")</div>
+                    <div class="vocab-vn">🇻🇳 Sức hút; khả năng quyến rũ người khác</div>
+                </div>
+                <div class="vocab-item">
+                    <div class="vocab-word">SIGMA</div>
+                    <div class="vocab-def">Independent person who follows their own path; self-sufficient</div>
+                    <div class="vocab-vn">🇻🇳 Người độc lập đi theo con đường riêng</div>
+                </div>
+                <div class="vocab-item">
+                    <div class="vocab-word">SKIBIDI</div>
+                    <div class="vocab-def">From viral video series; used to describe absurd/surreal content</div>
+                    <div class="vocab-vn">🇻🇳 Từ loạt video viral; mô tả nội dung phi lý/siêu thực</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ QUIZ ============ -->
+    <div id="quiz" class="chapter">
+        <div class="content-box">
+            <h2>🎯 Comprehension Assessment</h2>
+            
+            <div class="quiz-container">
+                <h3>📝 VOCABULARY QUIZ</h3>
+                <div class="quiz-score">Score: <span id="score">0</span>/<span id="total">10</span></div>
+                <div class="quiz-question" id="question">Click "Start Quiz" to begin!</div>
+                <div class="quiz-options" id="options"></div>
+                <button class="quiz-btn" id="quiz-btn" onclick="startQuiz()">START QUIZ</button>
+            </div>
+
+            <div class="reading-tip" style="margin-top: 40px;">
+                <div class="reading-tip-title">FOR KIET & NHAN</div>
+                <p>This quiz tests your understanding of the C1/B2 vocabulary used throughout the document. Aim for at least 8/10 to demonstrate mastery. Good luck! 💪</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-train">🚂</div>
+        <div class="footer-title">TRAIN 6-7</div>
+        <div class="footer-quote">"A train doesn't ask permission. It doesn't negotiate. It just keeps moving forward. You want to survive? You become the train."</div>
+        <p style="margin-top: 20px;">To Survive a Brainrot — Advanced Edition</p>
+        
+        <div class="student-dedication">
+            <span>🎓 Created especially for <strong>KIET</strong> & <strong>NHAN</strong> 🎓</span>
+        </div>
+        
+        <p style="margin-top: 25px; font-size: 0.75rem;">NET English Training • Gospel 444 Compliant • C1/B1+ Vocabulary</p>
+    </footer>
+</div>
+
+<script>
+    // === CURSOR EFFECT ===
+    const cursorDot = document.querySelector('.cursor-dot');
+    const cursorRing = document.querySelector('.cursor-ring');
+
+    document.addEventListener('mousemove', (e) => {
+        cursorDot.style.left = e.clientX + 'px';
+        cursorDot.style.top = e.clientY + 'px';
+        cursorRing.style.left = e.clientX - 16 + 'px';
+        cursorRing.style.top = e.clientY - 16 + 'px';
+    });
+
+    document.querySelectorAll('button, .card, .vocab').forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            cursorRing.style.transform = 'scale(1.5)';
+            cursorRing.style.borderColor = 'var(--purple)';
+        });
+        el.addEventListener('mouseleave', () => {
+            cursorRing.style.transform = 'scale(1)';
+            cursorRing.style.borderColor = 'var(--gold)';
+        });
+    });
+
+    // === PARTICLE SYSTEM ===
+    const particlesContainer = document.getElementById('particles');
+    for (let i = 0; i < 30; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 8 + 's';
+        particle.style.animationDuration = (6 + Math.random() * 4) + 's';
+        particlesContainer.appendChild(particle);
+    }
+
+    // === PROGRESS BAR ===
+    const progressBar = document.querySelector('.progress-bar');
+    window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrollPercent = (scrollTop / docHeight) * 100;
+        progressBar.style.width = scrollPercent + '%';
+    });
+
+    // === NAVIGATION ===
+    const navButtons = document.querySelectorAll('.nav-btn');
+    const chapters = document.querySelectorAll('.chapter');
+
+    navButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const targetChapter = button.getAttribute('data-chapter');
+            
+            navButtons.forEach(btn => btn.classList.remove('active'));
+            chapters.forEach(chapter => chapter.classList.remove('active'));
+            
+            button.classList.add('active');
+            document.getElementById(targetChapter).classList.add('active');
+            
+            window.scrollTo({ top: 250, behavior: 'smooth' });
+        });
+    });
+
+    // === LANGUAGE TOGGLE ===
+    document.querySelectorAll('.lang-toggle').forEach(toggle => {
+        const buttons = toggle.querySelectorAll('.lang-btn');
+        const contentBox = toggle.closest('.content-box');
+        const contents = contentBox.querySelectorAll('.lang-content');
+
+        buttons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const lang = btn.getAttribute('data-lang');
+                
+                buttons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                contents.forEach(content => {
+                    content.classList.toggle('active', content.getAttribute('data-lang') === lang);
+                });
+            });
+        });
+    });
+
+    // === KEYBOARD NAVIGATION ===
+    document.addEventListener('keydown', (e) => {
+        const currentIndex = [...navButtons].findIndex(btn => btn.classList.contains('active'));
+        if (e.key === 'ArrowRight' && currentIndex < navButtons.length - 1) {
+            navButtons[currentIndex + 1].click();
+        } else if (e.key === 'ArrowLeft' && currentIndex > 0) {
+            navButtons[currentIndex - 1].click();
+        }
+    });
+
+    // === QUIZ SYSTEM ===
+    const quizQuestions = [
+        {
+            question: "What does 'UNPRECEDENTED' mean?",
+            options: ["Very old", "Never done before", "Expected", "Common"],
+            correct: 1
+        },
+        {
+            question: "What does 'INSURMOUNTABLE' mean?",
+            options: ["Easy to climb", "Impossible to overcome", "Very tall", "Slightly difficult"],
+            correct: 1
+        },
+        {
+            question: "What does 'RELENTLESS' mean?",
+            options: ["Lazy", "Tired", "Never stopping", "Slow"],
+            correct: 2
+        },
+        {
+            question: "What does 'CATASTROPHIC' mean?",
+            options: ["Wonderful", "Causing great damage", "Small", "Helpful"],
+            correct: 1
+        },
+        {
+            question: "What does 'MANIFESTATION' mean?",
+            options: ["Hiding", "Physical form of something", "Disappearance", "Dream"],
+            correct: 1
+        },
+        {
+            question: "What does 'HARROWING' mean?",
+            options: ["Happy", "Boring", "Extremely distressing", "Relaxing"],
+            correct: 2
+        },
+        {
+            question: "What does 'VISCERAL' mean?",
+            options: ["Visible", "Logical", "Deep instinctive feeling", "Quiet"],
+            correct: 2
+        },
+        {
+            question: "What does 'QUINTESSENTIAL' mean?",
+            options: ["Unusual", "Perfect example of", "Fifth in order", "Questionable"],
+            correct: 1
+        },
+        {
+            question: "What does 'SIMULTANEOUSLY' mean?",
+            options: ["One after another", "At the same time", "Never", "Slowly"],
+            correct: 1
+        },
+        {
+            question: "What does 'AMPLIFIED' mean?",
+            options: ["Made quieter", "Made much stronger", "Removed", "Ignored"],
+            correct: 1
+        }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+    let quizStarted = false;
+
+    function startQuiz() {
+        currentQuestion = 0;
+        score = 0;
+        quizStarted = true;
+        document.getElementById('score').textContent = score;
+        document.getElementById('quiz-btn').style.display = 'none';
+        showQuestion();
+    }
+
+    function showQuestion() {
+        if (currentQuestion >= quizQuestions.length) {
+            endQuiz();
+            return;
+        }
+
+        const q = quizQuestions[currentQuestion];
+        document.getElementById('question').textContent = q.question;
+        
+        const optionsHtml = q.options.map((opt, i) => 
+            `<button class="quiz-option" onclick="checkAnswer(${i})">${opt}</button>`
+        ).join('');
+        
+        document.getElementById('options').innerHTML = optionsHtml;
+    }
+
+    function checkAnswer(selected) {
+        const q = quizQuestions[currentQuestion];
+        const options = document.querySelectorAll('.quiz-option');
+        
+        options.forEach((opt, i) => {
+            opt.disabled = true;
+            if (i === q.correct) {
+                opt.classList.add('correct');
+            } else if (i === selected && selected !== q.correct) {
+                opt.classList.add('wrong');
+            }
+        });
+
+        if (selected === q.correct) {
+            score++;
+            document.getElementById('score').textContent = score;
+        }
+
+        setTimeout(() => {
+            currentQuestion++;
+            showQuestion();
+        }, 1500);
+    }
+
+    function endQuiz() {
+        const percentage = (score / quizQuestions.length) * 100;
+        let message = '';
+        
+        if (percentage >= 80) {
+            message = '🎉 Excellent! You have mastered the vocabulary!';
+        } else if (percentage >= 60) {
+            message = '👍 Good job! Review the words you missed.';
+        } else {
+            message = '📚 Keep studying! Review the Lexicon section.';
+        }
+
+        document.getElementById('question').textContent = message;
+        document.getElementById('options').innerHTML = '';
+        document.getElementById('quiz-btn').textContent = 'RESTART QUIZ';
+        document.getElementById('quiz-btn').style.display = 'inline-block';
+    }
+
+    // === CONSOLE EASTER EGG ===
+    console.log('%c🚂 TRAIN 6-7 — ADVANCED EDITION 🚂', 'background: linear-gradient(90deg, #b45309, #f59e0b, #a855f7); color: white; font-size: 24px; padding: 20px 40px; border-radius: 10px; font-family: serif;');
+    console.log('%c★ Created for KIET & NHAN ★', 'color: #a855f7; font-size: 16px; font-style: italic;');
+    console.log('%c"Keep moving forward. Never stop. Never surrender."', 'color: #f59e0b; font-size: 14px;');
+</script>
+</body>
+</html>

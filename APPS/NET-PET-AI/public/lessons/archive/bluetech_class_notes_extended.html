@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NET Class Report: BlueTech E1/E2 - Extended Edition</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ═══════════════════════════════════════════════════════════════
+           GOSPEL 444 AESTHETIC ENGINE (Extended Class Notes Edition)
+           NO BLUE. PURPLE + GOLD + DARK.
+        ═══════════════════════════════════════════════════════════════ */
+        :root {
+            --purple: #a855f7;
+            --gold: #f59e0b;
+            --dark: #0f0f1a;
+            --glass: rgba(20, 20, 30, 0.9);
+            --border: rgba(168, 85, 247, 0.3);
+            --text: #ffffff;
+            --text-dim: rgba(255, 255, 255, 0.7);
+            --radius: 20px;
+            --accent-green: #10b981;
+            --accent-red: #ef4444;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--dark);
+            background-image: 
+                radial-gradient(circle at 0% 0%, rgba(168, 85, 247, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 100% 100%, rgba(245, 158, 11, 0.1) 0%, transparent 50%);
+            background-attachment: fixed;
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            padding-bottom: 100px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* --- TYPOGRAPHY & TRANSLATION --- */
+        .vi {
+            display: block;
+            font-size: 0.9em;
+            color: var(--text-dim);
+            font-weight: 400;
+            margin-top: 4px;
+            font-style: italic;
+            border-left: 2px solid var(--gold);
+            padding-left: 10px;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #fff, var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+            border-bottom: 2px solid rgba(245, 158, 11, 0.3);
+            padding-bottom: 10px;
+            margin-top: 50px;
+        }
+
+        h3 { 
+            font-size: 1.3rem; 
+            color: var(--purple); 
+            margin-bottom: 10px; 
+            margin-top: 25px; 
+        }
+
+        h4 {
+            font-size: 1.1rem;
+            color: #fff;
+            margin-bottom: 8px;
+            margin-top: 15px;
+        }
+
+        p {
+            margin-bottom: 12px;
+            color: var(--text-dim);
+        }
+
+        /* --- CARDS --- */
+        .glass-card {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 30px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            margin-bottom: 25px;
+        }
+
+        /* --- HIGHLIGHTS --- */
+        .highlight-box {
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 3px solid var(--purple);
+        }
+        .highlight-title { 
+            font-weight: 700; 
+            color: var(--purple); 
+            margin-bottom: 8px;
+            font-size: 1.15rem;
+        }
+
+        /* --- DIALOGUE BOXES --- */
+        .dialogue-box {
+            background: rgba(0,0,0,0.3);
+            border-radius: 12px;
+            padding: 15px;
+            margin: 15px 0;
+            border-left: 3px solid var(--gold);
+        }
+
+        .speaker {
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: 5px;
+        }
+
+        .quote {
+            font-style: italic;
+            color: #ddd;
+            padding-left: 15px;
+            border-left: 2px solid rgba(255,255,255,0.2);
+            margin: 8px 0;
+        }
+
+        /* --- CORRECTION GRID --- */
+        .correction-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        .correction-item {
+            background: rgba(0,0,0,0.3);
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid var(--purple);
+        }
+        .wrong { 
+            color: var(--accent-red); 
+            text-decoration: line-through; 
+            font-size: 1em;
+            display: block;
+            margin: 8px 0;
+        }
+        .right { 
+            color: var(--accent-green); 
+            font-weight: 700; 
+            font-size: 1.05em;
+            display: block;
+            margin: 8px 0;
+        }
+
+        .explanation {
+            background: rgba(255,255,255,0.05);
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-size: 0.95em;
+        }
+
+        /* --- TAGS --- */
+        .tag {
+            font-family: 'JetBrains Mono';
+            color: var(--gold);
+            border: 1px solid var(--gold);
+            padding: 3px 10px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-block;
+            margin-bottom: 5px;
+        }
+
+        /* --- STATS BOXES --- */
+        .stat-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .stat-box {
+            background: rgba(168, 85, 247, 0.1);
+            border: 1px solid var(--purple);
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--purple);
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* --- LEARNING POINTS --- */
+        .learning-point {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(245, 158, 11, 0.05));
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid rgba(168, 85, 247, 0.3);
+        }
+
+        .emoji-big {
+            font-size: 2.5rem;
+            display: block;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        /* --- CODE BLOCKS --- */
+        .code-block {
+            font-family: 'JetBrains Mono';
+            background: rgba(0,0,0,0.5);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            color: var(--gold);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            overflow-x: auto;
+        }
+
+        /* --- LISTS --- */
+        ul, ol {
+            padding-left: 30px;
+            margin: 15px 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+            color: var(--text-dim);
+        }
+
+        strong {
+            color: #fff;
+        }
+
+        /* --- TIMELINE --- */
+        .timeline-item {
+            border-left: 3px solid var(--purple);
+            padding-left: 20px;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            width: 12px;
+            height: 12px;
+            background: var(--purple);
+            border-radius: 50%;
+            position: absolute;
+            left: -7.5px;
+            top: 5px;
+        }
+
+        .timeline-time {
+            font-family: 'JetBrains Mono';
+            font-size: 0.8rem;
+            color: var(--gold);
+            margin-bottom: 5px;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .container { padding: 15px; }
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.5rem; }
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- HEADER -->
+    <div style="text-align: center; margin-bottom: 50px;">
+        <span class="tag">Extended NET Report</span>
+        <h1>Class Notes: BlueTech E1/E2</h1>
+        <p style="color: var(--text-dim); font-size: 1.1rem;">Date: November 18, 2025 | Coach: Michael Hobbs</p>
+        <p style="color: var(--text-dim); font-size: 0.9rem; margin-top: 10px;">
+            Extended Edition with Full Dialogue, Context & Learning Points
+        </p>
+    </div>
+
+    <!-- CLASS STATS -->
+    <div class="stat-row">
+        <div class="stat-box">
+            <div class="stat-value">4</div>
+            <div class="stat-label">Participants</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-value">9</div>
+            <div class="stat-label">Blu-Techs?</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-value">6+</div>
+            <div class="stat-label">Beers (Promised)</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-value">5D</div>
+            <div class="stat-label">Movie Dimension</div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         SECTION 1: OPENING & COMPANY STRUCTURE MYSTERY
+    ═══════════════════════════════════════════════════════════ -->
+    <section>
+        <h2>🧩 1. The Great Blu-Tech Mystery</h2>
+        <span class="vi">Bí Ẩn Về Cấu Trúc Công Ty</span>
+        
+        <div class="glass-card">
+            <h3>The Nine Companies Problem</h3>
+            
+            <p>We opened class with what might be the most confusing question in corporate Vietnam: <strong>How many "Blu-Techs" are there, exactly?</strong></p>
+            
+            <div class="highlight-box">
+                <div class="highlight-title">📊 The Investigation</div>
+                <p>Michael discovered what appeared to be <strong>nine different "blues"</strong> when everyone thought there was only one company. The names included variations like:</p>
+                <ul style="margin-top: 10px;">
+                    <li><strong>Blue Technique</strong> (ingredients division?)</li>
+                    <li><strong>Blue Lifestyle</strong> (healthy products sales?)</li>
+                    <li><strong>Blue [???]</strong> (several other variations)</li>
+                </ul>
+                <span class="vi">Có vẻ như có ít nhất 9 công ty/bộ phận khác nhau với tên "Blue" trong một tòa nhà!</span>
+            </div>
+
+            <div class="dialogue-box">
+                <div class="speaker">Michael:</div>
+                <div class="quote">"I thought there was only one Blu-Tech, but I see nine different blues! What is happening here?"</div>
+                
+                <div class="speaker">Quy:</div>
+                <div class="quote">"Blue technique ingredient... and blue lifestyle and sale healthy product..."</div>
+                
+                <div class="speaker">Michael:</div>
+                <div class="quote">"So it's like... different divisions? Or different companies in the same building?"</div>
+            </div>
+
+            <div class="learning-point">
+                <h4 style="color: var(--purple);">🎯 Corporate Structure Vocabulary</h4>
+                <ul>
+                    <li><strong>Division</strong> - A major section of a company (e.g., Sales Division, Marketing Division)</li>
+                    <li><strong>Department</strong> - A smaller unit within a division</li>
+                    <li><strong>Subsidiary</strong> - A separate company owned by a parent company</li>
+                    <li><strong>Branch</strong> - A location of the same company in a different place</li>
+                </ul>
+                <span class="vi">Từ vựng về cấu trúc doanh nghiệp - rất quan trọng khi giải thích công ty của bạn!</span>
+            </div>
+        </div>
+
+        <!-- EMPLOYMENT STATUS CONVERSATION -->
+        <div class="glass-card">
+            <h3>Getting to Know the Team</h3>
+            
+            <div class="timeline-item">
+                <div class="timeline-time">[00:01:28]</div>
+                <h4>Quy's Journey</h4>
+                <p>Michael asked whether Quy was new to the company or new to the department.</p>
+                
+                <div class="highlight-box" style="margin-top: 10px;">
+                    <div class="highlight-title">✅ Professional Response Pattern</div>
+                    <div class="code-block">
+"I am new to [Department], but I am not new to the company.
+I have been an intern here for one year."
+                    </div>
+                    <span class="vi">Cách trả lời chuyên nghiệp khi được hỏi về vị trí trong công ty.</span>
+                </div>
+                
+                <div class="explanation">
+                    <strong>Why This Matters:</strong> This response clearly shows your history and value to the company. It tells people you're experienced with the company culture, even if you're learning a new role.
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-time">[00:03:12]</div>
+                <h4>The Dog vs. Cat Question</h4>
+                <p>In a lighter moment, Michael asked the classic question: "Would you prefer a dog or a cat?"</p>
+                
+                <div class="dialogue-box">
+                    <div class="speaker">Quy:</div>
+                    <div class="quote">"I prefer dog, but I don't have any pet now."</div>
+                    
+                    <div class="speaker">Michael:</div>
+                    <div class="quote">"Dogs are loyal. Cats are... independent. I like that about this answer!"</div>
+                </div>
+                
+                <div class="learning-point">
+                    <h4>🗣️ Small Talk Tip</h4>
+                    <p>Questions like "dog or cat?" are common in English-speaking work culture. They help people connect on a personal level. Other common questions:</p>
+                    <ul>
+                        <li>"Coffee or tea?"</li>
+                        <li>"Beach or mountains?"</li>
+                        <li>"Morning person or night owl?"</li>
+                    </ul>
+                    <p style="margin-top: 10px;"><em>These questions have no wrong answer - they just help start conversations!</em></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         SECTION 2: THE NETWORKING DINNER SAGA
+    ═══════════════════════════════════════════════════════════ -->
+    <section>
+        <h2>🍻 2. The Networking Dinner: A Scheduling Adventure</h2>
+        <span class="vi">Cuộc Phiêu Lưu Sắp Xếp Lịch Ăn Tối</span>
+        
+        <div class="glass-card">
+            <h3>The Mission: Schedule a Team Dinner</h3>
+            <p>What started as a simple question - "When should we have dinner?" - turned into a 40-minute scheduling puzzle involving multiple conflicts, boss schedules, and beer quotas.</p>
+            
+            <div class="timeline-item">
+                <div class="timeline-time">[00:06:16]</div>
+                <h4>Phase 1: The Initial Proposal</h4>
+                <div class="dialogue-box">
+                    <div class="speaker">Michael:</div>
+                    <div class="quote">"I want to try to organize a networking dinner in November. Friday after work, around 6:00 PM?"</div>
+                </div>
+                <p>This seemed simple at first...</p>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-time">[00:08:38]</div>
+                <h4>Phase 2: The Boss Concern</h4>
+                <div class="dialogue-box">
+                    <div class="speaker">Denny:</div>
+                    <div class="quote">"Will the boss be there?"</div>
+                    
+                    <div class="speaker">Michael:</div>
+                    <div class="quote">"No, the bosses are traveling! So you don't have to worry about drinking too much."</div>
+                    
+                    <div class="speaker">Denny:</div>
+                    <div class="quote">"Ah, good! Then I can drink more than six beers!"</div>
+                </div>
+                
+                <div class="highlight-box" style="background: rgba(245, 158, 11, 0.1); border-color: var(--gold);">
+                    <div class="highlight-title">🍺 The Beer Debate</div>
+                    <p>This became a running joke throughout class. Denny had only drunk six beers at the team building event, which Michael found disappointing.</p>
+                    <span class="vi">Trở thành câu chuyện cười xuyên suốt buổi học - Denny chỉ uống 6 chai bia!</span>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-time">[00:47:18]</div>
+                <h4>Phase 3: The Scheduling Nightmare</h4>
+                <p>Attempting to find a date revealed multiple conflicts:</p>
+                <ul>
+                    <li><strong>November 21st:</strong> ❌ Huong has conflict</li>
+                    <li><strong>November 28th:</strong> ❌ Huong has another conflict</li>
+                    <li><strong>Early December:</strong> 🤔 Under consideration</li>
+                </ul>
+                
+                <div class="highlight-box" style="border-color: var(--accent-green);">
+                    <div class="highlight-title">✅ FINAL DECISION: December 5th @ 6:00 PM</div>
+                    <p><strong>Status:</strong> LOCKED AND CONFIRMED 🔒</p>
+                    <p><strong>Location:</strong> TBD (Linh will check with coworkers)</p>
+                    <p><strong>Bosses Present:</strong> NO ✅</p>
+                    <p><strong>Denny's Beer Minimum:</strong> &gt;6 🍺</p>
+                    <span class="vi">Ngày chính thức: 5/12, 18:00. Sếp đi vắng. Denny phải uống hơn 6 chai!</span>
+                </div>
+            </div>
+
+            <div class="learning-point">
+                <h4>📅 Professional Scheduling Language</h4>
+                <div class="code-block">
+✅ "I'm available on Friday evening."
+✅ "I have a conflict on the 21st."
+✅ "Let me check my calendar."
+✅ "Does 6:00 PM work for everyone?"
+✅ "I'll need to confirm with my team."
+
+❌ "Maybe I can come." (too uncertain)
+❌ "I think I'm free." (not definitive)
+                </div>
+                
+                <div class="explanation" style="margin-top: 15px;">
+                    <strong>Pro Tip:</strong> When organizing meetings, be clear about your availability. Use "I have a conflict" instead of making excuses. It's professional and efficient.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         SECTION 3: WEEKEND HIGHLIGHTS - THE ADVENTURES
+    ═══════════════════════════════════════════════════════════ -->
+    <section>
+        <h2>🎢 3. Weekend Adventures: A Team Building Debrief</h2>
+        <span class="vi">Những Cuộc Phiêu Lưu Cuối Tuần</span>
+        
+        <!-- QUỲNH'S WEEKEND -->
+        <div class="glass-card">
+            <h3 style="color: var(--purple);">Quỳnh: The Recovery Weekend</h3>
+            
+            <div class="timeline-item">
+                <div class="timeline-time">[00:09:44]</div>
+                <h4>Doctor's Orders</h4>
+                
+                <div class="dialogue-box">
+                    <div class="speaker">Michael:</div>
+                    <div class="quote">"How are you feeling? What did you do this weekend?"</div>
+                    
+                    <div class="speaker">Quỳnh:</div>
+                    <div class="quote">"I was at home. Nothing special. The doctor said I should stay home to be healthy."</div>
+                    
+                    <div class="speaker">Michael:</div>
+                    <div class="quote">"Ah, so you followed the doctor's advice! That's good. Are you feeling better now?"</div>
+                    
+                    <div class="speaker">Quỳnh:</div>
+                    <div class="quote">"Yes, I have more energy now."</div>
+                </div>
+            </div>
+
+            <div class="learning-point">
+                <h4>🏥 Health-Related Phrases</h4>
+                <div class="code-block">
+✅ "The doctor advised me to rest."
+✅ "I'm following medical advice."
+✅ "I'm feeling better now."
+✅ "I have more energy today."
+✅ "I need to take it easy."
+
+Formal:
+✅ "I've been advised to limit physical activity."
+✅ "My doctor recommended staying home."
+                </div>
+                <span class="vi">Cách nói về sức khỏe một cách chuyên nghiệp.</span>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-time">[00:57:58]</div>
+                <h4>Church Activities</h4>
+                <p>Later in class, Quỳnh mentioned working in a church in "Jen and Jen" (possibly a location name). This shows commitment to community service even while recovering.</p>
+                
+                <div class="highlight-box">
+                    <div class="highlight-title">💡 Cultural Note</div>
+                    <p>Discussing weekend activities is common in English conversation. It helps build rapport and shows you have a life outside of work. Even "I rested at home" is a perfectly good answer!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- HUONG'S WEEKEND -->
+        <div class="glass-card">
+            <h3 style="color: var(--purple);">Huong: The "Flying Boat" Incident</h3>
+            
+            <div class="emoji-big">🎢</div>
+            
+            <div class="timeline-item">
+                <div class="timeline-time">[00:21:12]</div>
+                <h4>The Confusion Begins</h4>
+                
+                <div class="dialogue-box">
+                    <div class="speaker">Michael:</div>
+                    <div class="quote">"What was your favorite part of the team building weekend?"</div>
+                    
+                    <div class="speaker">Huong:</div>
+                    <div class="quote">"I rode a flying boat."</div>
+                    
+                    <div class="speaker">Michael:</div>
+                    <div class="quote">"A... flying boat? Like a boat that flies? Did you go to the sea?"</div>
+                    
+                    <div class="speaker">Huong:</div>
+                    <div class="quote">"No, no... It's like... on a track... it goes up and down..."</div>
+                    
+                    <div class="speaker">Michael:</div>
+                    <div class="quote">"OHHHHH! A ROLLER COASTER! That's called a roller coaster!"</div>
+                </div>
+            </div>
+
+            <div class="highlight-box" style="background: rgba(239, 68, 68, 0.1); border-color: var(--accent-red);">
+                <div class="highlight-title">⚠️ MAJOR VOCABULARY CORRECTION</div>
+                <div class="wrong">❌ "I rode a flying boat."</div>
+                <div class="right">✅ "I rode a roller coaster."</div>
+                <span class="vi">Tàu lượn siêu tốc = Roller Coaster (KHÔNG phải "flying boat"!)</span>
+                
+                <div class="explanation" style="margin-top: 15px;">
+                    <strong>Why the confusion?</strong> The Vietnamese term might translate literally to "flying boat" or "flying train," but in English, we use the specific term "roller coaster" for these amusement park rides.
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-time">[00:27:43]</div>
+                <h4>The Experience</h4>
+                
+                <div class="dialogue-box">
+                    <div class="speaker">Michael:</div>
+                    <div class="quote">"Why was the roller coaster your favorite?"</div>
+                    
+                    <div class="speaker">Huong:</div>
+                    <div class="quote">"Because it was adventurous and exciting! I was scared and screamed a lot, but it was so much fun!"</div>
+                </div>
+                
+                <div class="learning-point">
+                    <h4>🎭 Describing Experiences - Emotional Vocabulary</h4>
+                    <div class="code-block">
+Positive emotions:
+✅ adventurous, exciting, thrilling, exhilarating
+✅ fun, enjoyable, memorable, amazing
+
+Mixed emotions:
+✅ scary but fun
+✅ nervous but excited
+✅ frightening but thrilling
+
+Strong reactions:
+✅ "I screamed!"
+✅ "My heart was racing!"
+✅ "I couldn't stop laughing!"
+                    </div>
+                    <span class="vi">Từ vựng mô tả cảm xúc và trải nghiệm.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- QUY'S WEEKEND -->
+        <div class="glass-card">
+            <h3 style="color: var(--purple);">Quy: The 5D Movie Mystery</h3>
+            
+            <div class="emoji-big">🎬</div>
+            
+            <div class="timeline-item">
+                <div class="timeline-time">[00:29:13]</div>
+                <h4>Beyond 3D</h4>
+                
+                <div class="dialogue-box">
+                    <div class="speaker">Michael:</div>
+                    <div class="quote">"What was your favorite part of the weekend?"</div>
+                    
+                    <div class="speaker">Quy:</div>
+                    <div class="quote">"I saw a 5D film."</div>
+                    
+                    <div class="speaker">Michael:</div>
+                    <div class="quote">"Wait... a 5D film? I've heard of 3D movies, but what is 5D?"</div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-time">[00:34:39]</div>
+                <h4>The Explanation</h4>
+                
+                <div class="dialogue-box">
+                    <div class="speaker">Quy:</div>
+                    <div class="quote">"When watching the 5D movie, I got to see many countries in the world. It was amazing!"</div>
+                    
+                    <div class="speaker">Michael:</div>
+                    <div class="quote">"So it's like a virtual tour? You can see different countries? That sounds incredible!"</div>
+                </div>
+                
+                <div class="highlight-box">
+                    <div class="highlight-title">🎥 Understanding 5D Cinema</div>
+                    <p><strong>3D Movies:</strong> Depth perception with special glasses</p>
+                    <p><strong>4D Movies:</strong> 3D + physical effects (moving seats, water, wind)</p>
+                    <p><strong>5D Movies:</strong> 4D + additional sensory effects (smells, temperature changes, etc.)</p>
+                    <span class="vi">Rạp chiếu 5D = 3D + ghế rung + hiệu ứng vật lý + hiệu ứng giác quan khác!</span>
+                </div>
+            </div>
+
+            <div class="learning-point">
+                <h4>🗺️ Describing Travel & Virtual Experiences</h4>
+                <div class="code-block">
+Virtual experiences:
+✅ "I got to see many countries."
+✅ "It felt like I was traveling around the world."
+✅ "It was like being there in person."
+
+Real experiences:
+✅ "I traveled to [place]."
+✅ "I visited [number] countries."
+✅ "I experienced [culture/activity]."
+                </div>
+            </div>
+        </div>
+
+        <!-- DENNY'S WEEKEND -->
+        <div class="glass-card">
+            <h3 style="color: var(--purple);">Denny: Nature, Seafood & The Great Beer Debate</h3>
+            
+            <div class="emoji-big">🌊</div>
+            
+            <div class="timeline-item">
+                <div class="timeline-time">[00:37:24]</div>
+                <h4>The Beer Count</h4>
+                
+                <div class="dialogue-box">
+                    <div class="speaker">Michael:</div>
+                    <div class="quote">"How many beers did you drink this weekend?"</div>
+                    
+                    <div class="speaker">Denny:</div>
+                    <div class="quote">"Only six."</div>
+                    
+                    <div class="speaker">Michael:</div>
+                    <div class="quote">"ONLY SIX?! That's disappointing, Denny!"</div>
+                </div>
+                
+                <div class="highlight-box" style="background: rgba(245, 158, 11, 0.1); border-color: var(--gold);">
+                    <div class="highlight-title">🍺 The Six-Beer Scandal</div>
+                    <p>This became the class's running joke. Six beers was apparently insufficient for a proper team building weekend!</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-time">[00:39:52]</div>
+                <h4>The Nature Experience</h4>
+                
+                <div class="dialogue-box">
+                    <div class="speaker">Michael:</div>
+                    <div class="quote">"What was your favorite part of the weekend?"</div>
+                    
+                    <div class="speaker">Denny:</div>
+                    <div class="quote">"The nature. I liked seeing the animals and walking on the sea... and eating seafood."</div>
+                    
+                    <div class="speaker">Michael:</div>
+                    <div class="quote">"Wait... walking ON the sea? Like walking on water? Are you Jesus?"</div>
+                </div>
+            </div>
+
+            <div class="highlight-box" style="background: rgba(239, 68, 68, 0.1); border-color: var(--accent-red);">
+                <div class="highlight-title">⚠️ CRITICAL PREPOSITION ERROR</div>
+                <div class="wrong">❌ "I walked ON the sea."</div>
+                <p style="margin: 10px 0; color: var(--text-dim);">
+                    This means you walked <strong>on top of the water</strong> like a miracle! 🚶‍♂️💧
+                </p>
+                
+                <div class="right">✅ "I walked BESIDE the sea."</div>
+                <div class="right">✅ "I walked ALONG the beach."</div>
+                <div class="right">✅ "I walked BY the ocean."</div>
+                
+                <span class="vi">Đi dạo BÊN bờ biển / DỌC bãi biển (KHÔNG phải "trên" biển!)</span>
+                
+                <div class="explanation" style="margin-top: 15px;">
+                    <strong>Why this matters:</strong> Prepositions of place in English are very specific:
+                    <ul style="margin-top: 10px;">
+                        <li><strong>ON</strong> = on the surface (on the table, on the roof, on the water)</li>
+                        <li><strong>BESIDE/BY</strong> = next to something</li>
+                        <li><strong>ALONG</strong> = following a path or edge</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-time">[00:41:48]</div>
+                <h4>The Beer Redemption Promise</h4>
+                
+                <div class="dialogue-box">
+                    <div class="speaker">Denny:</div>
+                    <div class="quote">"I'm sorry I only drank six beers. I promise to drink more at the group meeting on December 5th!"</div>
+                    
+                    <div class="speaker">Michael:</div>
+                    <div class="quote">"That's better! You're forgiven!"</div>
+                </div>
+                
+                <div class="learning-point">
+                    <h4>😄 Understanding Playful English Banter</h4>
+                    <p>This entire exchange was <strong>joking and playful</strong>. Michael wasn't actually disappointed - this is how English speakers often build camaraderie through humor.</p>
+                    
+                    <div class="explanation">
+                        <strong>Cultural Note:</strong> In English-speaking work culture, light teasing among friends is common and shows comfort/closeness. However, know your audience - this only works with people who understand you're joking!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         SECTION 4: LANGUAGE CORRECTIONS & UPGRADES
+    ═══════════════════════════════════════════════════════════ -->
+    <section>
+        <h2>🗣️ 4. Language Upgrades & Corrections</h2>
+        <span class="vi">Sửa Lỗi & Nâng Cấp Ngôn Ngữ</span>
+        
+        <div class="correction-grid">
+            
+            <!-- CORRECTION 1 -->
+            <div class="correction-item">
+                <h4>❌ Error #1: The Flying Boat</h4>
+                
+                <div class="wrong">❌ "I rode a flying boat."</div>
+                <div class="right">✅ "I rode a roller coaster."</div>
+                <span class="vi">Tàu lượn siêu tốc = Roller Coaster</span>
+                
+                <div class="explanation">
+                    <strong>Full Context:</strong>
+                    <ul>
+                        <li><strong>Roller Coaster:</strong> The amusement park ride with tracks that goes up and down</li>
+                        <li><strong>Flying Boat:</strong> An actual vehicle - a seaplane that can land on water</li>
+                    </ul>
+                    
+                    <p style="margin-top: 10px;"><strong>Related vocabulary:</strong></p>
+                    <div class="code-block">
+✅ "thrill ride" - any exciting amusement park ride
+✅ "ferris wheel" - the big circular ride
+✅ "carousel" / "merry-go-round" - the spinning horses
+✅ "bumper cars" - the cars you crash into each other
+                    </div>
+                </div>
+            </div>
+
+            <!-- CORRECTION 2 -->
+            <div class="correction-item">
+                <h4>❌ Error #2: Walking on Water (Jesus Mode)</h4>
+                
+                <div class="wrong">❌ "I walked on the sea."</div>
+                <p style="color: var(--accent-red); margin: 10px 0; font-style: italic;">
+                    This literally means walking on top of the water! 🚶‍♂️💧✨
+                </p>
+                
+                <div class="right">✅ "I walked beside the sea."</div>
+                <div class="right">✅ "I walked along the beach."</div>
+                <div class="right">✅ "I walked by the ocean."</div>
+                <div class="right">✅ "I took a walk near the water."</div>
+                <span class="vi">Đi dạo bên cạnh/dọc theo bờ biển.</span>
+                
+                <div class="explanation">
+                    <strong>Prepositions of Place with Water:</strong>
+                    <div class="code-block">
+✅ ON the water = on the surface (in a boat, surfing)
+✅ IN the water = submerged or swimming
+✅ BY/BESIDE the water = next to it on land
+✅ ALONG the water = following the shoreline
+✅ NEAR the water = close to it
+✅ UNDER the water = beneath the surface (diving)
+                    </div>
+                    
+                    <p style="margin-top: 10px;"><strong>Example sentences:</strong></p>
+                    <ul>
+                        <li>"We sailed <strong>on</strong> the ocean."</li>
+                        <li>"I swam <strong>in</strong> the sea."</li>
+                        <li>"Our hotel is <strong>beside</strong> the beach."</li>
+                        <li>"We walked <strong>along</strong> the coastline."</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- CORRECTION 3 -->
+            <div class="correction-item">
+                <h4>⚠️ Error #3: Greeting Confusion</h4>
+                
+                <div class="wrong">❌ "Nice to meet you." (to someone you already know)</div>
+                <div class="right">✅ "Nice to see you again."</div>
+                <div class="right">✅ "Good to see you."</div>
+                <div class="right">✅ "Great to see you again!"</div>
+                <span class="vi">"Meet" chỉ dùng cho lần đầu gặp. Sau đó phải dùng "See".</span>
+                
+                <div class="explanation">
+                    <strong>The "Meet" vs. "See" Rule:</strong>
+                    
+                    <div class="code-block">
+FIRST TIME meeting someone:
+✅ "Nice to meet you."
+✅ "Pleased to meet you."
+✅ "It's a pleasure to meet you."
+
+SEEING someone AGAIN:
+✅ "Nice to see you again."
+✅ "Good to see you."
+✅ "Great seeing you!"
+✅ "It's been a while!" (if it's been a long time)
+                    </div>
+                    
+                    <p style="margin-top: 10px;"><strong>Why this matters:</strong></p>
+                    <p>Using "meet" with someone you already know suggests you don't remember them! It can be awkward in professional settings.</p>
+                    
+                    <p style="margin-top: 10px;"><strong>Professional alternatives:</strong></p>
+                    <ul>
+                        <li>"Hello again!" (casual)</li>
+                        <li>"Good morning/afternoon." (neutral)</li>
+                        <li>"How have you been?" (friendly)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- CORRECTION 4 -->
+            <div class="correction-item">
+                <h4>✅ Upgrade: Professional Self-Introduction</h4>
+                
+                <div class="right">✅ "I am new to [Department], but I am not new to the company."</div>
+                <div class="right">✅ "I have been an intern here for one year."</div>
+                <div class="right">✅ "I started in [Department] in [Month], but I've been with the company since [Year]."</div>
+                <span class="vi">Cách giới thiệu chuyên nghiệp về vị trí trong công ty.</span>
+                
+                <div class="explanation">
+                    <strong>Why this structure is powerful:</strong>
+                    <p>This response accomplishes multiple things:</p>
+                    <ul>
+                        <li>✅ Shows you're learning but experienced with company culture</li>
+                        <li>✅ Explains your history without being defensive</li>
+                        <li>✅ Sets expectations appropriately (new to role, but not new to company)</li>
+                    </ul>
+                    
+                    <p style="margin-top: 15px;"><strong>Full template for introductions:</strong></p>
+                    <div class="code-block">
+"Hi, I'm [Name]. I'm new to [Department/Position], 
+but I've been with [Company] for [Time Period] as [Previous Role].
+
+I'm excited to learn about [New Area] while bringing 
+my experience in [Previous Area]."
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         SECTION 5: HOMEWORK MISSIONS
+    ═══════════════════════════════════════════════════════════ -->
+    <section>
+        <h2>🏠 5. Homework Missions</h2>
+        <span class="vi">Nhiệm Vụ Bài Tập Về Nhà</span>
+        
+        <!-- MISSION 1 -->
+        <div class="glass-card" style="border-color: var(--purple); border-width: 2px;">
+            <div class="emoji-big">📺</div>
+            <h3 style="color: var(--purple); margin-top: 0;">Mission 1: The Office - Episode 1</h3>
+            <span class="tag">Cultural Learning</span>
+            
+            <div class="highlight-box">
+                <div class="highlight-title">📝 Your Assignment</div>
+                <p><strong>Task:</strong> Watch Episode 1 of "The Office" (US version)</p>
+                <p><strong>Critical Rule:</strong> <span style="color: var(--accent-red); font-weight: bold;">English subtitles ONLY</span> - No Vietnamese allowed!</p>
+                <p><strong>Method:</strong> Don't translate words. Watch the characters' faces, body language, and reactions.</p>
+            </div>
+
+            <div class="learning-point">
+                <h4>🎯 What to Focus On</h4>
+                <ul>
+                    <li><strong>Facial expressions:</strong> How do characters react to what others say?</li>
+                    <li><strong>Tone of voice:</strong> Is someone being serious or sarcastic?</li>
+                    <li><strong>Body language:</strong> What do their gestures tell you?</li>
+                    <li><strong>Awkward moments:</strong> The Office is famous for awkward situations - can you feel the discomfort?</li>
+                </ul>
+            </div>
+
+            <div class="highlight-box" style="border-color: var(--gold);">
+                <div class="highlight-title">💭 Questions to Answer Next Class</div>
+                <div style="background: rgba(0,0,0,0.3); padding: 15px; border-radius: 8px; margin-top: 10px;">
+                    <p style="font-size: 1.1rem; color: #fff;"><strong>Main Questions:</strong></p>
+                    <ol style="margin-top: 10px;">
+                        <li>Is Michael Scott (the boss) smart or stupid?</li>
+                        <li>Do his employees respect him?</li>
+                        <li>What makes the show funny (or uncomfortable)?</li>
+                    </ol>
+                </div>
+                <span class="vi">Hãy chuẩn bị trả lời những câu hỏi này vào buổi học sau!</span>
+            </div>
+
+            <div class="explanation">
+                <h4>📚 Why This Exercise Matters</h4>
+                <p><strong>The Office</strong> is a masterclass in:</p>
+                <ul>
+                    <li><strong>Office culture:</strong> American workplace dynamics and humor</li>
+                    <li><strong>Communication styles:</strong> Professional vs. unprofessional behavior</li>
+                    <li><strong>Social cues:</strong> Reading between the lines, understanding sarcasm</li>
+                    <li><strong>Natural English:</strong> How people really talk (not textbook English)</li>
+                </ul>
+                
+                <p style="margin-top: 15px;"><strong>Bonus Learning:</strong> The show is full of real workplace vocabulary, idioms, and situations you might encounter in an English-speaking office.</p>
+            </div>
+
+            <div class="timeline-item" style="margin-top: 20px;">
+                <div class="timeline-time">[00:52:28] - Class Discussion</div>
+                <div class="dialogue-box">
+                    <div class="speaker">Michael:</div>
+                    <div class="quote">"I'll try to find the first episode for you guys. But remember - English subtitles only! This is about learning to understand context, not translating every word."</div>
+                    
+                    <div class="speaker">Huong:</div>
+                    <div class="quote">"I need to find Episode 1 and do my English homework."</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MISSION 2 -->
+        <div class="glass-card" style="border-color: var(--gold); border-width: 2px;">
+            <div class="emoji-big">✨</div>
+            <h3 style="color: var(--gold); margin-top: 0;">Mission 2: The Highlight Sentence</h3>
+            <span class="tag">Speaking Practice</span>
+            
+            <div class="highlight-box">
+                <div class="highlight-title">📝 Your Assignment</div>
+                <p><strong>Task:</strong> Prepare ONE sentence about your upcoming week</p>
+                <p><strong>Structure to use:</strong></p>
+                <div class="code-block">
+"This week, I am excited to [ACTION] because [REASON]."
+                </div>
+            </div>
+
+            <div class="learning-point">
+                <h4>💡 Examples to Inspire You</h4>
+                <div class="code-block">
+✅ "This week, I am excited to sleep because I am very tired."
+
+✅ "This week, I am excited to finish my project because 
+   I've been working on it for two months."
+
+✅ "This week, I am excited to visit my family because 
+   I haven't seen them in a while."
+
+✅ "This week, I am excited to learn Python because 
+   it will help me automate my work."
+
+✅ "This week, I am excited to try a new restaurant because 
+   my friend recommended it."
+                </div>
+                <span class="vi">Ví dụ về cách sử dụng cấu trúc câu này.</span>
+            </div>
+
+            <div class="explanation">
+                <h4>🎯 Grammar Focus: "Excited to" + Verb</h4>
+                
+                <p><strong>Structure breakdown:</strong></p>
+                <div class="code-block">
+[Subject] + [am/is/are] + excited + to + [base verb] + because + [reason]
+
+Components:
+- Subject: I, We, She, He, They, etc.
+- Excited to: Shows enthusiasm about future action
+- Base verb: sleep, eat, visit, learn, work, etc.
+- Because: Explains your reason (optional but recommended)
+                </div>
+
+                <p style="margin-top: 15px;"><strong>Alternative structures you can practice:</strong></p>
+                <div class="code-block">
+✅ "I'm looking forward to [verb+ing]..."
+✅ "I can't wait to [base verb]..."
+✅ "I'm eager to [base verb]..."
+✅ "I'm thrilled about [noun/verb+ing]..."
+                </div>
+
+                <p style="margin-top: 15px;"><strong>Why practice this?</strong></p>
+                <ul>
+                    <li>Commonly used in professional settings (meetings, emails, presentations)</li>
+                    <li>Shows enthusiasm and positive attitude</li>
+                    <li>Great for small talk and building rapport</li>
+                    <li>Natural way to share plans and goals</li>
+                </ul>
+            </div>
+
+            <div class="highlight-box" style="background: rgba(168, 85, 247, 0.1);">
+                <div class="highlight-title">⚡ Challenge Mode (Optional)</div>
+                <p>Try to think of THREE sentences using this structure about different areas of your life:</p>
+                <ol style="margin-top: 10px; padding-left: 20px;">
+                    <li><strong>Work/Career:</strong> Something professional you're excited about</li>
+                    <li><strong>Personal/Fun:</strong> Something for enjoyment or relaxation</li>
+                    <li><strong>Learning/Growth:</strong> Something new you want to try or learn</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- PLANS BEFORE NEXT CLASS -->
+        <div class="glass-card">
+            <h3>What People Are Planning</h3>
+            <span class="vi">Kế Hoạch Của Mọi Người</span>
+            
+            <div class="timeline-item">
+                <div class="timeline-time">[00:52:28 - 00:57:58]</div>
+                
+                <p><strong>Michael asked everyone about their plans before Thursday's class:</strong></p>
+                
+                <ul style="margin-top: 15px;">
+                    <li>
+                        <strong>Michael:</strong> "I'm going to finish working on my AI"
+                        <span class="vi" style="margin-left: 10px;">Làm việc với AI</span>
+                    </li>
+                    <li>
+                        <strong>Huong:</strong> "I'll do English homework and find The Office Episode 1"
+                        <span class="vi" style="margin-left: 10px;">Làm bài tập tiếng Anh</span>
+                    </li>
+                    <li>
+                        <strong>Quy:</strong> "Mostly relax and watch movies, just chilling"
+                        <span class="vi" style="margin-left: 10px;">Thư giãn và xem phim</span>
+                    </li>
+                    <li>
+                        <strong>Denny:</strong> "Nothing special, just working"
+                        <span class="vi" style="margin-left: 10px;">Chỉ làm việc bình thường</span>
+                    </li>
+                    <li>
+                        <strong>Quỳnh:</strong> "Working in the church"
+                        <span class="vi" style="margin-left: 10px;">Làm việc ở nhà thờ</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="learning-point">
+                <h4>💬 Natural Ways to Talk About Plans</h4>
+                <div class="code-block">
+Casual/Informal:
+✅ "I'm just gonna chill this week."
+✅ "Nothing much, just working."
+✅ "I'll probably watch some movies."
+✅ "Just taking it easy."
+
+More Formal:
+✅ "I plan to complete [project] this week."
+✅ "I'll be focusing on [task]."
+✅ "I have several meetings scheduled."
+✅ "I'm working on [specific goal]."
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         SECTION 6: KEY TAKEAWAYS & SCHEDULE
+    ═══════════════════════════════════════════════════════════ -->
+    <section>
+        <h2>🎯 6. Key Takeaways from This Class</h2>
+        <span class="vi">Điểm Chính Từ Buổi Học</span>
+        
+        <div class="glass-card">
+            <h3>What We Learned Today</h3>
+            
+            <div class="stat-row">
+                <div class="stat-box">
+                    <div class="stat-value">4</div>
+                    <div class="stat-label">Major Corrections</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value">∞</div>
+                    <div class="stat-label">Blu-Techs</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value">100%</div>
+                    <div class="stat-label">Dinner Confirmed</div>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <div class="highlight-title">🏆 Top Learning Points</div>
+                <ol style="padding-left: 20px; margin-top: 10px;">
+                    <li><strong>Prepositions matter!</strong> "On the sea" vs. "beside the sea" completely changes meaning</li>
+                    <li><strong>First impressions count:</strong> "Meet" is only for first time, then use "see"</li>
+                    <li><strong>Specific vocabulary:</strong> "Roller coaster" not "flying boat"</li>
+                    <li><strong>Professional communication:</strong> Be clear about your role and history in the company</li>
+                    <li><strong>Cultural learning:</strong> The Office will teach you real workplace English</li>
+                </ol>
+            </div>
+
+            <div class="learning-point">
+                <h4>💡 Remember These Patterns</h4>
+                <div class="code-block">
+Walking locations:
+✅ beside/along/by the [water/beach/sea]
+
+Greetings:
+✅ "meet" = first time only
+✅ "see" = all subsequent times
+
+Describing excitement:
+✅ "I am excited to [verb] because [reason]"
+
+Professional introductions:
+✅ "I am new to [X], but not new to [Y]"
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SCHEDULE -->
+    <section style="text-align: center; margin-top: 50px;">
+        <div style="font-size: 4rem; margin-bottom: 20px;">🗓️</div>
+        <h2>Tactical Schedule</h2>
+        <span class="vi">Lịch Học Và Sự Kiện</span>
+        
+        <div class="glass-card" style="max-width: 600px; margin: 30px auto;">
+            <div class="timeline-item">
+                <div class="timeline-time">THURSDAY</div>
+                <h4>E1/E2 Class</h4>
+                <p>6:00 PM</p>
+                <p style="color: var(--gold);">⚠️ Be ready to discuss The Office Episode 1!</p>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-time">THURSDAY</div>
+                <h4>Intermediate Group</h4>
+                <p>2:30 PM</p>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-time">SATURDAY</div>
+                <h4>Beginner Group</h4>
+                <p>2:30 PM – 4:00 PM</p>
+            </div>
+
+            <div class="timeline-item" style="border-color: var(--gold);">
+                <div class="timeline-time">DECEMBER 5TH</div>
+                <h4 style="color: var(--gold);">🍻 THE NETWORKING DINNER 🍻</h4>
+                <p><strong>Time:</strong> 6:00 PM</p>
+                <p><strong>Status:</strong> <span style="color: var(--accent-green);">CONFIRMED ✅</span></p>
+                <p><strong>Bosses:</strong> NOT PRESENT ✅</p>
+                <p><strong>Denny's Beer Goal:</strong> &gt; 6 🍺</p>
+                <span class="vi">Sự kiện được mong đợi nhất!</span>
+            </div>
+        </div>
+
+        <div style="margin-top: 50px; padding: 30px; background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(245, 158, 11, 0.1)); border-radius: 20px; border: 1px solid var(--border);">
+            <p style="font-size: 1.3rem; color: #fff; margin-bottom: 10px;">See you Thursday!</p>
+            <p style="font-size: 3rem; margin: 20px 0;">🐯</p>
+            <p style="font-size: 1.2rem; color: var(--gold); font-weight: 700;">Be a Tiger.</p>
+            <span class="vi">Hãy là một con hổ. Dũng cảm và mạnh mẽ!</span>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer style="text-align: center; margin-top: 80px; padding: 30px; border-top: 1px solid rgba(255,255,255,0.1);">
+        <p style="color: var(--text-dim); font-size: 0.9rem;">
+            NET Class Report - Extended Edition<br>
+            Coach: Michael Hobbs | BlueTech E1/E2 Group<br>
+            November 18, 2025
+        </p>
+        <p style="margin-top: 20px; color: var(--text-dim); font-size: 0.8rem; font-style: italic;">
+            "The difference between the right word and the almost right word is the difference between lightning and a lightning bug."<br>
+            — Mark Twain
+        </p>
+    </footer>
+
+</div>
+
+</body>
+</html>

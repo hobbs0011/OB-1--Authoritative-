@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L-034: The Infinite Intern + 12-Week Program | BlueTech</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: #0f0f1a;
+            color: #f1f5f9;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        
+        .glass-card {
+            background: rgba(26, 26, 38, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+        
+        .neon-glow {
+            text-shadow: 0 0 20px rgba(168, 85, 247, 0.6);
+        }
+        
+        .gold-glow {
+            text-shadow: 0 0 20px rgba(245, 158, 11, 0.6);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #a855f7, #9333ea);
+            transition: all 0.3s;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(168, 85, 247, 0.4);
+        }
+        
+        .confetti-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .bounce {
+            animation: bounce 1s infinite;
+        }
+        
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(168, 85, 247, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(168, 85, 247, 0.6); }
+        }
+        
+        .pulse-glow {
+            animation: pulse-glow 2s infinite;
+        }
+        
+        input, textarea, select {
+            background: rgba(15, 15, 26, 0.8);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            color: #f1f5f9;
+            padding: 12px;
+            border-radius: 8px;
+            width: 100%;
+            font-size: 16px;
+        }
+        
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #a855f7;
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
+        }
+        
+        .current-week {
+            border: 3px solid #f59e0b !important;
+            background: rgba(245, 158, 11, 0.1) !important;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+        
+        // ═══════════════════════════════════════════════════════════════
+        // 12-WEEK CURRICULUM
+        // ═══════════════════════════════════════════════════════════════
+        const CURRICULUM = [
+            { week: 1, title: "AI Basics: The Infinite Intern", focus: "Prompting, AI workplace tools" },
+            { week: 2, title: "Phone Survival + AI Scripts", focus: "Phone calls, messages, AI assistance" },
+            { week: 3, title: "Email Writing + AI Help", focus: "Professional emails, AI proofreading" },
+            { week: 4, title: "Problem Reporting + AI", focus: "Technical issues, AI translation" },
+            { week: 5, title: "Meeting Greetings + AI Prep", focus: "Introductions, AI meeting agendas" },
+            { week: 6, title: "Small Talk + AI Practice", focus: "Casual conversation, AI roleplay" },
+            { week: 7, title: "Making Requests + AI Tone", focus: "Polite requests, AI tone check" },
+            { week: 8, title: "Progress Reports + AI", focus: "Status updates, AI summaries" },
+            { week: 9, title: "Presentations + AI Slides", focus: "Public speaking, AI slide creation" },
+            { week: 10, title: "Negotiation + AI Scenarios", focus: "Basic negotiation, AI practice" },
+            { week: 11, title: "Crisis Communication + AI", focus: "Urgent messages, AI support" },
+            { week: 12, title: "Final Mission: The Gauntlet", focus: "All skills test, AI showcase" }
+        ];
+        
+        const STUDENT_LIST = ['Denny', 'Quy', 'Quynh', 'Huy', 'Tien', 'Linh', 'Huong'];
+        
+        // ═══════════════════════════════════════════════════════════════
+        // CONFETTI
+        // ═══════════════════════════════════════════════════════════════
+        function Confetti({ show, onComplete }) {
+            useEffect(() => {
+                if (!show) return;
+                const canvas = document.getElementById('confetti');
+                if (!canvas) return;
+                const ctx = canvas.getContext('2d');
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                const particles = [];
+                const colors = ['#a855f7', '#f59e0b', '#ffffff'];
+                for (let i = 0; i < 100; i++) {
+                    particles.push({
+                        x: Math.random() * canvas.width,
+                        y: -20,
+                        size: Math.random() * 8 + 4,
+                        speedY: Math.random() * 3 + 2,
+                        speedX: Math.random() * 4 - 2,
+                        color: colors[Math.floor(Math.random() * colors.length)]
+                    });
+                }
+                function animate() {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    particles.forEach(p => {
+                        ctx.fillStyle = p.color;
+                        ctx.fillRect(p.x, p.y, p.size, p.size);
+                        p.y += p.speedY;
+                        p.x += p.speedX;
+                    });
+                    if (particles.every(p => p.y > canvas.height)) {
+                        if (onComplete) onComplete();
+                        return;
+                    }
+                    requestAnimationFrame(animate);
+                }
+                animate();
+            }, [show]);
+            return show ? <canvas id="confetti" className="confetti-canvas" /> : null;
+        }
+        
+        // ═══════════════════════════════════════════════════════════════
+        // MAIN APP
+        // ═══════════════════════════════════════════════════════════════
+        function App() {
+            const [currentSlide, setCurrentSlide] = useState(0);
+            const [studentName, setStudentName] = useState('');
+            const [aiJobHelp, setAiJobHelp] = useState('');
+            const [studentData, setStudentData] = useState([]);
+            const [promptInput, setPromptInput] = useState('');
+            const [promptResult, setPromptResult] = useState(null);
+            const [showConfetti, setShowConfetti] = useState(false);
+            const [quizAnswers, setQuizAnswers] = useState({});
+            const [buddyPartner, setBuddyPartner] = useState('');
+            
+            useEffect(() => {
+                const saved = localStorage.getItem('bluetech_ai_data');
+                if (saved) setStudentData(JSON.parse(saved));
+            }, []);
+            
+            const saveStudentData = () => {
+                if (!studentName || !aiJobHelp) {
+                    alert('Please fill in both fields!');
+                    return;
+                }
+                const newData = [...studentData, {
+                    name: studentName,
+                    jobHelp: aiJobHelp,
+                    timestamp: new Date().toISOString()
+                }];
+                setStudentData(newData);
+                localStorage.setItem('bluetech_ai_data', JSON.stringify(newData));
+                setStudentName('');
+                setAiJobHelp('');
+                setCurrentSlide(1);
+            };
+            
+            const checkPrompt = () => {
+                const len = promptInput.length;
+                if (len < 20) {
+                    setPromptResult({ status: 'fail', msg: 'AI Error: Too short. I ordered a pizza instead. 🍕' });
+                } else if (len < 40) {
+                    setPromptResult({ status: 'warn', msg: 'AI Error: I wrote a poem about freedom. Be specific! 📜' });
+                } else {
+                    setPromptResult({ status: 'success', msg: 'Draft Generated: "Dear Boss, I would like to request leave on Friday..."' });
+                    setShowConfetti(true);
+                }
+            };
+            
+            const saveBuddy = () => {
+                if (!buddyPartner) return;
+                localStorage.setItem('bluetech_buddy_week1', JSON.stringify({
+                    name: studentName,
+                    buddy: buddyPartner,
+                    week: 1
+                }));
+                alert(`Buddy saved: ${buddyPartner}`);
+            };
+            
+            // ═══════════════════════════════════════════════════════════════
+            // SLIDE 0: DATA COLLECTION
+            // ═══════════════════════════════════════════════════════════════
+            const Slide0 = () => (
+                <div className="min-h-screen flex items-center justify-center p-4">
+                    <div className="glass-card rounded-3xl p-8 max-w-2xl w-full">
+                        <div className="text-center mb-6">
+                            <div className="text-6xl mb-4">🚀</div>
+                            <h1 className="text-5xl font-black mb-2 neon-glow" style={{color: '#a855f7'}}>
+                                Welcome to NET
+                            </h1>
+                            <h2 className="text-2xl mb-2" style={{color: '#f59e0b'}}>
+                                Business English + AI
+                            </h2>
+                            <p className="text-sm opacity-70">12 Weeks | BlueTech</p>
+                        </div>
+                        
+                        <div className="mb-6">
+                            <label className="block mb-2 text-lg font-semibold">
+                                Student Name:
+                            </label>
+                            <input 
+                                type="text"
+                                value={studentName}
+                                onChange={(e) => setStudentName(e.target.value)}
+                                placeholder="Your name..."
+                            />
+                        </div>
+                        
+                        <div className="mb-6">
+                            <label className="block mb-2 text-lg font-semibold">
+                                What part of your job needs AI help?
+                            </label>
+                            <label className="block mb-4 text-sm opacity-70">
+                                (Công việc bạn cần AI giúp ở phần nào?)
+                            </label>
+                            <textarea 
+                                value={aiJobHelp}
+                                onChange={(e) => setAiJobHelp(e.target.value)}
+                                placeholder="Example: Writing emails, translating documents..."
+                                rows="4"
+                            />
+                        </div>
+                        
+                        <button 
+                            onClick={saveStudentData}
+                            className="btn-primary w-full py-4 rounded-xl text-xl font-bold text-white"
+                        >
+                            Start Week 1 →
+                        </button>
+                        
+                        {studentData.length > 0 && (
+                            <div className="mt-8 p-4 bg-slate-800 rounded-xl">
+                                <h3 className="text-lg font-bold mb-3" style={{color: '#f59e0b'}}>
+                                    📊 Today's Responses ({studentData.length}):
+                                </h3>
+                                {studentData.map((s, i) => (
+                                    <div key={i} className="mb-2 p-3 bg-slate-900 rounded-lg text-sm border-l-2 border-purple-500">
+                                        <strong style={{color: '#a855f7'}}>{s.name}:</strong>
+                                        <p className="mt-1 opacity-80">{s.jobHelp}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                </div>
+            );
+            
+            // ═══════════════════════════════════════════════════════════════
+            // SLIDE 1: 12-WEEK OVERVIEW (PART 1)
+            // ═══════════════════════════════════════════════════════════════
+            const Slide1 = () => (
+                <div className="min-h-screen p-6 flex items-center justify-center">
+                    <div className="glass-card rounded-3xl p-8 max-w-6xl w-full">
+                        <h1 className="text-5xl font-black mb-6 text-center neon-glow" style={{color: '#a855f7'}}>
+                            📅 Your 12-Week Journey
+                        </h1>
+                        <p className="text-center mb-8 text-2xl" style={{color: '#f59e0b'}}>
+                            From Mouse Voice → Tiger Voice
+                        </p>
+                        
+                        <div className="grid md:grid-cols-3 gap-6 mb-8">
+                            <div className="bg-slate-800 p-6 rounded-xl text-center">
+                                <div className="text-4xl mb-3">🎯</div>
+                                <h3 className="text-xl font-bold mb-2" style={{color: '#a855f7'}}>Goal</h3>
+                                <p className="text-sm opacity-80">Operational velocity for work tasks</p>
+                            </div>
+                            <div className="bg-slate-800 p-6 rounded-xl text-center">
+                                <div className="text-4xl mb-3">🤖</div>
+                                <h3 className="text-xl font-bold mb-2" style={{color: '#f59e0b'}}>AI Tools</h3>
+                                <p className="text-sm opacity-80">Use AI for emails, reports, calls</p>
+                            </div>
+                            <div className="bg-slate-800 p-6 rounded-xl text-center">
+                                <div className="text-4xl mb-3">💼</div>
+                                <h3 className="text-xl font-bold mb-2" style={{color: '#a855f7'}}>Business English</h3>
+                                <p className="text-sm opacity-80">Real communication, not textbooks</p>
+                            </div>
+                        </div>
+                        
+                        <div className="grid md:grid-cols-2 gap-4 max-h-[400px] overflow-y-auto pr-2">
+                            {CURRICULUM.slice(0, 6).map((week) => (
+                                <div 
+                                    key={week.week}
+                                    className={`p-4 rounded-xl border-2 ${
+                                        week.week === 1 ? 'current-week pulse-glow' : 'bg-slate-800 border-slate-700'
+                                    }`}
+                                >
+                                    <div className="flex gap-3">
+                                        <div className="text-3xl font-black" style={{color: week.week === 1 ? '#f59e0b' : '#a855f7'}}>
+                                            {week.week}
+                                        </div>
+                                        <div>
+                                            <h3 className="text-lg font-bold mb-1">{week.title}</h3>
+                                            <p className="text-xs opacity-70">{week.focus}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            );
+            
+            // ═══════════════════════════════════════════════════════════════
+            // SLIDE 2: 12-WEEK OVERVIEW (PART 2)
+            // ═══════════════════════════════════════════════════════════════
+            const Slide2 = () => (
+                <div className="min-h-screen p-6 flex items-center justify-center">
+                    <div className="glass-card rounded-3xl p-8 max-w-6xl w-full">
+                        <h1 className="text-4xl font-black mb-8 text-center neon-glow" style={{color: '#a855f7'}}>
+                            📅 Weeks 7-12: Advanced Skills
+                        </h1>
+                        
+                        <div className="grid md:grid-cols-2 gap-4 mb-8">
+                            {CURRICULUM.slice(6).map((week) => (
+                                <div 
+                                    key={week.week}
+                                    className="p-4 bg-slate-800 rounded-xl border-2 border-slate-700"
+                                >
+                                    <div className="flex gap-3">
+                                        <div className="text-3xl font-black" style={{color: '#a855f7'}}>
+                                            {week.week}
+                                        </div>
+                                        <div>
+                                            <h3 className="text-lg font-bold mb-1">{week.title}</h3>
+                                            <p className="text-xs opacity-70">{week.focus}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                        
+                        <div className="bg-gradient-to-r from-purple-900 to-slate-900 p-6 rounded-xl border-2 border-purple-500">
+                            <h3 className="text-2xl font-bold mb-4" style={{color: '#f59e0b'}}>
+                                💪 What You'll Achieve:
+                            </h3>
+                            <div className="grid md:grid-cols-2 gap-4 text-sm">
+                                <div>
+                                    <p className="mb-2">✅ Answer phone without panic (30 sec)</p>
+                                    <p className="mb-2">✅ Write professional emails (5 min)</p>
+                                    <p className="mb-2">✅ Use AI for daily work tasks</p>
+                                </div>
+                                <div>
+                                    <p className="mb-2">✅ Present ideas confidently</p>
+                                    <p className="mb-2">✅ Handle meetings with foreigners</p>
+                                    <p className="mb-2">✅ Tiger Voice activated 🐯</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+            
+            // ═══════════════════════════════════════════════════════════════
+            // SLIDE 3: INTRO
+            // ═══════════════════════════════════════════════════════════════
+            const Slide3 = () => (
+                <div className="min-h-screen flex items-center justify-center p-4">
+                    <div className="glass-card rounded-3xl p-12 max-w-3xl text-center">
+                        <div className="text-9xl mb-6 bounce">🤖</div>
+                        <h1 className="text-6xl font-black mb-4 neon-glow" style={{color: '#a855f7'}}>
+                            Meet Your New Intern
+                        </h1>
+                        <h2 className="text-3xl mb-8" style={{color: '#f59e0b'}}>
+                            He is very fast. He is also very stupid.
+                        </h2>
+                        <p className="text-sm opacity-50">Week 1: AI Basics</p>
+                    </div>
+                </div>
+            );
+            
+            // ═══════════════════════════════════════════════════════════════
+            // SLIDE 4: BS DETECTOR
+            // ═══════════════════════════════════════════════════════════════
+            const Slide4 = () => {
+                const items = [
+                    { q: "AI is a magic brain.", a: "FALSE", detail: "It is a parrot that predicts words." },
+                    { q: "AI lies to you.", a: "TRUE", detail: "We call it 'Hallucination' (Like 10 beers)." },
+                    { q: "AI will take your job.", a: "FALSE", detail: "A HUMAN using AI will take your job." }
+                ];
+                
+                return (
+                    <div className="min-h-screen flex items-center justify-center p-4">
+                        <div className="glass-card rounded-3xl p-8 max-w-3xl w-full">
+                            <h1 className="text-4xl font-black mb-8 text-center neon-glow" style={{color: '#a855f7'}}>
+                                🕵️ The BS Detector
+                            </h1>
+                            <p className="text-center mb-8 text-xl">True or False? (Click to reveal)</p>
+                            
+                            {items.map((item, i) => (
+                                <div key={i} className="mb-4">
+                                    <button
+                                        onClick={() => setQuizAnswers({...quizAnswers, [i]: !quizAnswers[i]})}
+                                        className="w-full text-left p-6 bg-slate-800 hover:bg-slate-700 rounded-xl transition"
+                                    >
+                                        <p className="text-xl font-bold mb-2">{item.q}</p>
+                                        {quizAnswers[i] && (
+                                            <div className="mt-4 border-l-4 border-purple-500 pl-4">
+                                                <p className="font-black text-2xl" style={{color: item.a === 'TRUE' ? '#22c55e' : '#ef4444'}}>
+                                                    {item.a}
+                                                </p>
+                                                <p className="mt-2 opacity-80">{item.detail}</p>
+                                            </div>
+                                        )}
+                                    </button>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                );
+            };
+            
+            // ═══════════════════════════════════════════════════════════════
+            // SLIDE 5: VOCAB
+            // ═══════════════════════════════════════════════════════════════
+            const Slide5 = () => {
+                const cards = [
+                    { en: "PROMPT", type: "(n)", vi: "Lệnh", ex: "The order you give" },
+                    { en: "CONTEXT", type: "(n)", vi: "Bối cảnh", ex: "The situation" },
+                    { en: "GENERATE", type: "(v)", vi: "Tạo ra", ex: "Making from nothing" },
+                    { en: "REFINE", type: "(v)", vi: "Tinh chỉnh", ex: "Polishing mistakes" }
+                ];
+                
+                return (
+                    <div className="min-h-screen flex items-center justify-center p-4">
+                        <div className="glass-card rounded-3xl p-8 max-w-4xl w-full">
+                            <h1 className="text-4xl font-black mb-8 text-center neon-glow" style={{color: '#a855f7'}}>
+                                🧰 The Tool Kit
+                            </h1>
+                            
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                {cards.map((card, i) => (
+                                    <div key={i} className="bg-slate-800 p-6 rounded-xl">
+                                        <h3 className="text-3xl font-black mb-2" style={{color: '#f59e0b'}}>
+                                            {card.en} <span className="text-sm opacity-50">{card.type}</span>
+                                        </h3>
+                                        <p className="text-purple-300 mb-2">{card.vi}</p>
+                                        <p className="text-sm opacity-70 italic">{card.ex}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                );
+            };
+            
+            // ═══════════════════════════════════════════════════════════════
+            // SLIDE 6: PIZZA
+            // ═══════════════════════════════════════════════════════════════
+            const Slide6 = () => (
+                <div className="min-h-screen flex items-center justify-center p-4">
+                    <div className="glass-card rounded-3xl p-8 max-w-3xl w-full">
+                        <h1 className="text-4xl font-black mb-4 text-center neon-glow" style={{color: '#a855f7'}}>
+                            🍕 The Pizza Metaphor
+                        </h1>
+                        <p className="text-center mb-8 text-xl opacity-70">Prompting = Ordering Lunch</p>
+                        
+                        <div className="grid md:grid-cols-2 gap-6">
+                            <div className="p-6 rounded-xl border-4 border-red-500 bg-slate-800">
+                                <h3 className="text-2xl font-bold mb-4 text-red-400">❌ Bad</h3>
+                                <p className="text-xl mb-4">"I want food."</p>
+                                <p className="text-sm opacity-70">Result: Soup with a shoe</p>
+                            </div>
+                            
+                            <div className="p-6 rounded-xl border-4 border-green-500 bg-slate-800">
+                                <h3 className="text-2xl font-bold mb-4 text-green-400">✅ Good</h3>
+                                <p className="text-xl mb-4">"Large pepperoni pizza, thin crust, District 1."</p>
+                                <p className="text-sm opacity-70">Result: Perfect</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+            
+            // ═══════════════════════════════════════════════════════════════
+            // SLIDE 7: PHONICS
+            // ═══════════════════════════════════════════════════════════════
+            const Slide7 = () => (
+                <div className="min-h-screen flex items-center justify-center p-4">
+                    <div className="glass-card rounded-3xl p-8 max-w-3xl w-full text-center">
+                        <h1 className="text-4xl font-black mb-8 neon-glow" style={{color: '#a855f7'}}>
+                            🎭 Don't Be A Robot
+                        </h1>
+                        <p className="text-xl mb-8">Mimic the Intonation</p>
+                        
+                        <div className="space-y-8">
+                            <div className="p-8 bg-red-900 bg-opacity-30 rounded-xl">
+                                <h3 className="text-2xl font-bold mb-4 text-red-400">🤖 ROBOT</h3>
+                                <p className="text-3xl font-mono tracking-wider">
+                                    HELLO. I. AM. FINE. THANK. YOU.
+                                </p>
+                            </div>
+                            
+                            <div className="p-8 bg-green-900 bg-opacity-30 rounded-xl">
+                                <h3 className="text-2xl font-bold mb-4 text-green-400">😊 HUMAN</h3>
+                                <p className="text-3xl font-bold">
+                                    Hello! I'm <span className="text-4xl" style={{color: '#f59e0b'}}>GREAT</span>, thanks!
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+            
+            // ═══════════════════════════════════════════════════════════════
+            // SLIDE 8: GAME
+            // ═══════════════════════════════════════════════════════════════
+            const Slide8 = () => (
+                <div className="min-h-screen flex items-center justify-center p-4">
+                    <div className="glass-card rounded-3xl p-8 max-w-3xl w-full">
+                        <h1 className="text-4xl font-black mb-4 text-center neon-glow" style={{color: '#a855f7'}}>
+                            😴 The Lazy Manager
+                        </h1>
+                        <p className="text-center mb-8 text-lg">
+                            You want a day off next Friday. Write a prompt for AI.
+                        </p>
+                        
+                        <textarea
+                            value={promptInput}
+                            onChange={(e) => setPromptInput(e.target.value)}
+                            placeholder="Type your prompt here..."
+                            rows="5"
+                            className="mb-4"
+                        />
+                        
+                        <button
+                            onClick={checkPrompt}
+                            className="btn-primary w-full py-4 rounded-xl text-xl font-bold text-white mb-4"
+                        >
+                            Send to AI →
+                        </button>
+                        
+                        {promptResult && (
+                            <div className={`p-6 rounded-xl ${
+                                promptResult.status === 'success' ? 'bg-green-900 bg-opacity-30 border-2 border-green-500' :
+                                promptResult.status === 'warn' ? 'bg-yellow-900 bg-opacity-30 border-2 border-yellow-500' :
+                                'bg-red-900 bg-opacity-30 border-2 border-red-500'
+                            }`}>
+                                <p className="text-xl">{promptResult.msg}</p>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            );
+            
+            // ═══════════════════════════════════════════════════════════════
+            // SLIDE 9: MAGIC KEYS
+            // ═══════════════════════════════════════════════════════════════
+            const Slide9 = () => {
+                const steps = [
+                    { num: "1", label: "ROLE", text: "'Act as a BlueTech Manager...'" },
+                    { num: "2", label: "TASK", text: "'Write an email to supplier...'" },
+                    { num: "3", label: "TONE", text: "'Be polite but firm.'" }
+                ];
+                
+                return (
+                    <div className="min-h-screen flex items-center justify-center p-4">
+                        <div className="glass-card rounded-3xl p-8 max-w-3xl w-full">
+                            <h1 className="text-4xl font-black mb-4 text-center neon-glow" style={{color: '#a855f7'}}>
+                                🔑 The 3 Magic Keys
+                            </h1>
+                            <p className="text-center mb-8 text-xl" style={{color: '#f59e0b'}}>
+                                For BlueTech Executives
+                            </p>
+                            
+                            {steps.map((step, i) => (
+                                <div key={i} className="flex items-start mb-6 p-6 bg-slate-800 rounded-xl">
+                                    <div className="text-5xl font-black mr-6" style={{color: '#a855f7'}}>
+                                        {step.num}
+                                    </div>
+                                    <div>
+                                        <h3 className="text-2xl font-bold mb-2" style={{color: '#f59e0b'}}>
+                                            {step.label}
+                                        </h3>
+                                        <p className="text-xl">{step.text}</p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                );
+            };
+            
+            // ═══════════════════════════════════════════════════════════════
+            // SLIDE 10: HOMEWORK & BUDDY
+            // ═══════════════════════════════════════════════════════════════
+            const Slide10 = () => (
+                <div className="min-h-screen flex items-center justify-center p-4">
+                    <div className="glass-card rounded-3xl p-8 max-w-4xl w-full">
+                        <h1 className="text-4xl font-black mb-8 text-center neon-glow" style={{color: '#a855f7'}}>
+                            📝 Week 1 Mission
+                        </h1>
+                        
+                        <div className="grid md:grid-cols-2 gap-6 mb-8">
+                            <div className="bg-slate-800 p-6 rounded-xl">
+                                <h3 className="text-2xl font-bold mb-4" style={{color: '#f59e0b'}}>
+                                    📧 Homework
+                                </h3>
+                                <p className="text-lg mb-4">The Rude Email Challenge</p>
+                                <div className="text-sm opacity-80 space-y-2">
+                                    <p>1. Find a rude email</p>
+                                    <p>2. Use AI to make it polite</p>
+                                    <p>3. Send Before/After to Mr. Hobbs</p>
+                                </div>
+                                <p className="text-xs mt-4 opacity-50">
+                                    (Tìm email thô lỗ → Dùng AI viết lịch sự → Gửi cho thầy)
+                                </p>
+                            </div>
+                            
+                            <div className="bg-slate-800 p-6 rounded-xl">
+                                <h3 className="text-2xl font-bold mb-4" style={{color: '#a855f7'}}>
+                                    👥 Buddy System
+                                </h3>
+                                <p className="text-sm mb-4">Choose your practice partner this week:</p>
+                                <select 
+                                    value={buddyPartner}
+                                    onChange={(e) => setBuddyPartner(e.target.value)}
+                                    className="mb-4"
+                                >
+                                    <option value="">Select buddy...</option>
+                                    {STUDENT_LIST.map(s => (
+                                        <option key={s} value={s}>{s}</option>
+                                    ))}
+                                </select>
+                                <button
+                                    onClick={saveBuddy}
+                                    className="btn-primary w-full py-2 rounded-lg text-sm font-bold text-white"
+                                >
+                                    Save Buddy →
+                                </button>
+                                <p className="text-xs mt-3 opacity-50">
+                                    Practice AI prompts together 15 min/day
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div className="bg-gradient-to-r from-purple-900 to-slate-900 p-6 rounded-xl border-2 border-purple-500 text-center">
+                            <p className="text-2xl font-bold mb-2" style={{color: '#f59e0b'}}>
+                                🎯 Week 1 Goal
+                            </p>
+                            <p className="text-lg">
+                                Master AI prompting for work emails
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            );
+            
+            // ═══════════════════════════════════════════════════════════════
+            // RENDER
+            // ═══════════════════════════════════════════════════════════════
+            const slides = [Slide0, Slide1, Slide2, Slide3, Slide4, Slide5, Slide6, Slide7, Slide8, Slide9, Slide10];
+            const CurrentSlide = slides[currentSlide];
+            
+            return (
+                <div>
+                    <CurrentSlide />
+                    
+                    <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 flex gap-4 z-50">
+                        <button
+                            onClick={() => setCurrentSlide(Math.max(0, currentSlide - 1))}
+                            disabled={currentSlide === 0}
+                            className="bg-purple-600 hover:bg-purple-700 disabled:opacity-30 px-6 py-3 rounded-xl font-bold text-white"
+                        >
+                            ← Back
+                        </button>
+                        
+                        <div className="bg-slate-800 px-6 py-3 rounded-xl font-bold">
+                            {currentSlide + 1} / {slides.length}
+                        </div>
+                        
+                        <button
+                            onClick={() => setCurrentSlide(Math.min(slides.length - 1, currentSlide + 1))}
+                            disabled={currentSlide === slides.length - 1}
+                            className="bg-purple-600 hover:bg-purple-700 disabled:opacity-30 px-6 py-3 rounded-xl font-bold text-white"
+                        >
+                            Next →
+                        </button>
+                    </div>
+                    
+                    <Confetti show={showConfetti} onComplete={() => setShowConfetti(false)} />
+                </div>
+            );
+        }
+        
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>

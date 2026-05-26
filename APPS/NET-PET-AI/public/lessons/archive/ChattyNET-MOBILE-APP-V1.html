@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>NET PET AI Coach — V1</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    /* ===========================================================
+       NET PET AI COACH — V1 (MOBILE FIRST)
+       Gospel 444 Compliant — NO BLUE, Neon Purple + Gold + Deep Dark
+       © Michael Hobbs — Executor
+    ============================================================ */
+
+    :root {
+      --neon-purple: #a855f7;
+      --neon-purple-deep: #7e22ce;
+      --gold: #f59e0b;
+      --gold-deep: #b45309;
+      --deep-dark: #0f0f1a;
+      --card-bg: rgba(15, 15, 26, 0.9);
+      --glass-bg: rgba(26, 26, 38, 0.85);
+      --glass-border: rgba(168, 85, 247, 0.4);
+      --danger: #ef4444;
+      --text-primary: #ffffff;
+      --text-dim: rgba(229, 231, 235, 0.6);
+
+      --radius-lg: 24px;
+      --radius-full: 999px;
+
+      --shadow-main: 0 18px 45px rgba(0, 0, 0, 0.6);
+      --blur-glass: 16px;
+
+      --transition-fast: 0.18s ease-out;
+      --transition-base: 0.3s ease-out;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont,
+        sans-serif;
+      background: radial-gradient(circle at 10% 0%, rgba(168, 85, 247, 0.25) 0%, transparent 60%),
+                  radial-gradient(circle at 90% 100%, rgba(245, 158, 11, 0.25) 0%, transparent 60%),
+                  var(--deep-dark);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .shell {
+      width: 100%;
+      max-width: 430px;
+      height: 90vh;
+      max-height: 820px;
+      background: var(--card-bg);
+      border-radius: 32px;
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--shadow-main);
+      backdrop-filter: blur(var(--blur-glass));
+      -webkit-backdrop-filter: blur(var(--blur-glass));
+      display: flex;
+      flex-direction: column;
+      padding: 18px 18px 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Ambient glow */
+    .shell::before {
+      content: '';
+      position: absolute;
+      inset: -40%;
+      background:
+        radial-gradient(circle at 15% 0%, rgba(168, 85, 247, 0.25) 0%, transparent 50%),
+        radial-gradient(circle at 85% 100%, rgba(245, 158, 11, 0.2) 0%, transparent 50%);
+      opacity: 0.7;
+      z-index: -1;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .brand-block {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .logo-orb {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--neon-purple), var(--neon-purple-deep));
+      box-shadow: 0 0 18px rgba(168, 85, 247, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .brand-text span:first-child {
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .brand-text span:last-child {
+      color: var(--text-dim);
+      font-weight: 400;
+      font-size: 10px;
+    }
+
+    .meta {
+      text-align: right;
+      font-size: 11px;
+    }
+
+    .meta-top {
+      color: var(--text-dim);
+    }
+
+    .streak-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 9px;
+      border-radius: var(--radius-full);
+      background: rgba(245, 158, 11, 0.16);
+      color: var(--gold);
+      font-weight: 700;
+      margin-top: 4px;
+      font-size: 11px;
+    }
+
+    .streak-pill span:first-child {
+      font-size: 13px;
+    }
+
+    /* Main layout: avatar + message + trackers + actions */
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 6px;
+    }
+
+    .avatar-zone {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .energy-wrapper {
+      position: relative;
+      width: 150px;
+      height: 150px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .energy-ring {
+      position: absolute;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      border: 2px solid rgba(168, 85, 247, 0.45);
+      animation: spin 14s linear infinite;
+    }
+
+    .energy-ring.inner {
+      width: 120px;
+      height: 120px;
+      border-style: dashed;
+      border-color: rgba(245, 158, 11, 0.6);
+      animation-duration: 18s;
+      animation-direction: reverse;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .avatar-core {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--neon-purple), var(--neon-purple-deep));
+      box-shadow: 0 0 26px rgba(168, 85, 247, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      transition: all var(--transition-base);
+    }
+
+    .avatar-core.mood-proud {
+      background: radial-gradient(circle, var(--gold), var(--gold-deep));
+      box-shadow: 0 0 32px rgba(245, 158, 11, 0.9);
+      transform: scale(1.08);
+    }
+
+    .avatar-core.mood-slump {
+      background: radial-gradient(circle, #7f1d1d, #450a0a);
+      box-shadow: 0 0 16px rgba(239, 68, 68, 0.7);
+      opacity: 0.8;
+    }
+
+    .avatar-core.mood-tough {
+      background: radial-gradient(circle, var(--neon-purple-deep), #581c87);
+      box-shadow: 0 0 22px rgba(168, 85, 247, 0.8);
+    }
+
+    .energy-label {
+      margin-top: 4px;
+      font-size: 11px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .energy-percent {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: var(--gold);
+    }
+
+    /* Dialogue */
+    .message-box {
+      background: rgba(0, 0, 0, 0.45);
+      border-radius: 14px;
+      border-left: 4px solid var(--neon-purple);
+      padding: 10px 12px;
+      font-size: 13px;
+      color: var(--text-primary);
+      line-height: 1.5;
+      position: relative;
+      margin-top: 2px;
+    }
+
+    .message-box::before {
+      content: '“';
+      position: absolute;
+      left: 8px;
+      top: -8px;
+      font-size: 26px;
+      color: rgba(168, 85, 247, 0.45);
+    }
+
+    .messageTone {
+      font-size: 10px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      margin-bottom: 2px;
+    }
+
+    /* Trackers */
+    .trackers {
+      margin-top: 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .tracker-row {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .tracker-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .tracker-header span:last-child {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--text-primary);
+    }
+
+    .bar-shell {
+      width: 100%;
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.06);
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      width: 0;
+      border-radius: inherit;
+      transition: width var(--transition-base);
+    }
+
+    .bar-fill.listen {
+      background: linear-gradient(90deg, var(--neon-purple), #e9d5ff);
+    }
+
+    .bar-fill.speak {
+      background: linear-gradient(90deg, var(--gold), #fef3c7);
+    }
+
+    /* Actions */
+    .actions {
+      margin-top: 6px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 13px;
+      padding: 10px 8px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      color: var(--text-primary);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), opacity var(--transition-fast);
+    }
+
+    .btn span.label-main {
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn span.label-sub {
+      font-size: 10px;
+      font-weight: 400;
+      opacity: 0.8;
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 0 0, rgba(255, 255, 255, 0.24), transparent 55%);
+      opacity: 0;
+      transition: opacity var(--transition-fast);
+    }
+
+    .btn:hover::before {
+      opacity: 1;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 0 18px rgba(0, 0, 0, 0.45);
+    }
+
+    .btn:active {
+      transform: scale(0.97);
+      opacity: 0.9;
+    }
+
+    .btn-listen {
+      background: linear-gradient(135deg, var(--neon-purple), var(--neon-purple-deep));
+      box-shadow: 0 4px 18px rgba(168, 85, 247, 0.4);
+    }
+
+    .btn-speak {
+      background: linear-gradient(135deg, var(--gold), var(--gold-deep));
+      color: #111827;
+      box-shadow: 0 4px 18px rgba(245, 158, 11, 0.4);
+    }
+
+    .btn-reset {
+      grid-column: span 2;
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      color: var(--text-dim);
+      font-size: 10px;
+      padding: 6px 8px;
+      box-shadow: none;
+    }
+
+    /* Reflection / mood toggles (no text input, just tap) */
+    .reflection {
+      margin-top: 4px;
+      padding: 7px 9px;
+      border-radius: 11px;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(148, 163, 184, 0.3);
+    }
+
+    .reflection-title {
+      font-size: 10px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      margin-bottom: 5px;
+    }
+
+    .reflection-buttons {
+      display: flex;
+      gap: 6px;
+    }
+
+    .chip {
+      border-radius: 999px;
+      padding: 4px 8px;
+      border: none;
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--text-dim);
+      font-size: 11px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      transition: background var(--transition-fast), transform var(--transition-fast), color var(--transition-fast);
+    }
+
+    .chip:hover {
+      background: rgba(55, 65, 81, 0.9);
+      transform: translateY(-1px);
+      color: var(--text-primary);
+    }
+
+    footer {
+      margin-top: 6px;
+      font-size: 10px;
+      color: var(--text-dim);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .tag-pill {
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      padding: 2px 8px;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--gold);
+    }
+
+    @media (max-width: 480px) {
+      .shell {
+        padding: 16px 14px 12px;
+      }
+      .energy-wrapper {
+        width: 140px;
+        height: 140px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header>
+      <div class="brand-block">
+        <div class="logo-orb">🟣</div>
+        <div class="brand-text">
+          <span>NET PET AI</span>
+          <span>daily english coach</span>
+        </div>
+      </div>
+      <div class="meta">
+        <div class="meta-top" id="meta-date">Today</div>
+        <div class="streak-pill">
+          <span>🔥</span>
+          <span><span id="streakCount">0</span>d streak</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="main">
+      <!-- Avatar / Energy -->
+      <section class="avatar-zone">
+        <div class="energy-wrapper">
+          <div class="energy-ring"></div>
+          <div class="energy-ring inner"></div>
+          <div class="avatar-core" id="avatarCore">🐯</div>
+        </div>
+        <div class="energy-label">
+          English Energy: <span class="energy-percent" id="energyPercent">0%</span>
+        </div>
+      </section>
+
+      <!-- Message -->
+      <section class="message-box">
+        <div class="messageTone" id="messageTone">MODE: GREETING</div>
+        <div id="messageText">
+          Initializing neural link... building your daily plan.
+        </div>
+      </section>
+
+      <!-- Trackers -->
+      <section class="trackers">
+        <div class="tracker-row">
+          <div class="tracker-header">
+            <span>Listening Input</span>
+            <span id="listenStats">0 / 45m</span>
+          </div>
+          <div class="bar-shell">
+            <div class="bar-fill listen" id="barListen"></div>
+          </div>
+        </div>
+
+        <div class="tracker-row">
+          <div class="tracker-header">
+            <span>Speaking / Mimic</span>
+            <span id="speakStats">0 / 15m</span>
+          </div>
+          <div class="bar-shell">
+            <div class="bar-fill speak" id="barSpeak"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Actions -->
+      <section class="actions">
+        <button class="btn btn-listen" id="btnListen">
+          <span class="label-main">+15m Listening</span>
+          <span class="label-sub">sitcom / podcast / youtube</span>
+        </button>
+        <button class="btn btn-speak" id="btnSpeak">
+          <span class="label-main">+5m Speaking</span>
+          <span class="label-sub">shadow + record</span>
+        </button>
+        <button class="btn btn-reset" id="btnReset">
+          Reset today (debug) — not for real students 😅
+        </button>
+      </section>
+
+      <!-- Reflection (no free text, just toggles) -->
+      <section class="reflection">
+        <div class="reflection-title">how are you feeling about english today?</div>
+        <div class="reflection-buttons">
+          <button class="chip" id="chipOnFire">🔥 On fire</button>
+          <button class="chip" id="chipTired">😴 Tired</button>
+          <button class="chip" id="chipNoTime">⏰ No time</button>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span class="tag-pill">45 / 15 • 60% rule • tiger voice</span>
+      <span style="opacity: 0.7;">v1.0</span>
+    </footer>
+  </div>
+
+  <script>
+    'use strict';
+
+    /**
+     * NET PET AI COACH — V1
+     * Phoenix Engine Mini-Core
+     * State = streak, mins, dailyGoal, mood, lastLogin
+     */
+
+    const STORAGE_KEY = 'netPetStateV1';
+
+    const defaultState = {
+      streak: 0,
+      listeningMin: 0,
+      speakingMin: 0,
+      dailyGoalMet: false,
+      lastLogin: null, // 'YYYY-MM-DD'
+      mood: 'NEUTRAL'  // NEUTRAL | PROGRESS | TOUGH_LOVE | PROUD | SLUMP
+    };
+
+    let state = loadState();
+
+    // Voice Matrix (Claude-style, your tones)
+    const VOICE_MATRIX = {
+      GREETING: [
+        "Let's get to work. Consistency beats intensity.",
+        "Welcome back. Today we kill the robot voice.",
+        "We learn languages by listening, mimicking, and showing up.",
+        "You don't need perfect grammar. You need daily contact."
+      ],
+      TOUGH_LOVE: [
+        "You can't learn to swim by reading a book. Speak.",
+        "If you avoid mistakes, you avoid progress.",
+        "I will push your comfort zone. That's why I'm here.",
+        "Do you want fluency, or do you want excuses?"
+      ],
+      CELEBRATION: [
+        "Boom. That's Tiger Energy right there.",
+        "This is how fluent people are built — one boring day at a time.",
+        "You're not 'studying' English anymore. You're living with it.",
+        "Proud of you. Tomorrow, we repeat."
+      ],
+      NUDGE: [
+        "Just one more mini session. 5 minutes. You have it.",
+        "Pick one sitcom, episode 1. Press play. No pausing.",
+        "Mimic the emotion, not just the words.",
+        "Remember: 60% understanding is enough. Let the rest slide."
+      ],
+      SLUMP: [
+        "We broke the streak. It hurts. Good. Use that.",
+        "Yesterday is gone. Today is 100% fresh. Start with 15 minutes.",
+        "The prison is in your mind, not in your schedule.",
+        "Don't disappear. Mini session. Right now."
+      ]
+    };
+
+    // Helpers
+    function todayKey() {
+      const d = new Date();
+      const y = d.getFullYear();
+      const m = String(d.getMonth() + 1).padStart(2, '0');
+      const day = String(d.getDate()).padStart(2, '0');
+      return `${y}-${m}-${day}`;
+    }
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) {
+          const fresh = { ...defaultState, lastLogin: todayKey() };
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(fresh));
+          return fresh;
+        }
+        const parsed = JSON.parse(raw);
+
+        // Cheap migration safety
+        return {
+          ...defaultState,
+          ...parsed
+        };
+      } catch (e) {
+        console.warn('NET PET AI: State corrupted. Resetting.', e);
+        const fresh = { ...defaultState, lastLogin: todayKey() };
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(fresh));
+        return fresh;
+      }
+    }
+
+    function saveState() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
+
+    // Mood & message logic
+    function pickRandom(arr) {
+      return arr[Math.floor(Math.random() * arr.length)];
+    }
+
+    function speak(mode) {
+      const messageText = document.getElementById('messageText');
+      const messageTone = document.getElementById('messageTone');
+
+      const upper = mode.toUpperCase();
+      const bank = VOICE_MATRIX[upper];
+      if (!bank) return;
+
+      messageTone.textContent = `MODE: ${upper.replace('_', ' ')}`;
+      messageText.textContent = pickRandom(bank);
+    }
+
+    function updateMoodAndMessage(trigger) {
+      const totalL = state.listeningMin;
+      const totalS = state.speakingMin;
+
+      // Goal check: 45m listen + 15m speak
+      const goalHit = totalL >= 45 && totalS >= 15;
+
+      if (goalHit && !state.dailyGoalMet) {
+        state.dailyGoalMet = true;
+        state.mood = 'PROUD';
+        speak('CELEBRATION');
+      } else if (state.mood === 'SLUMP' && trigger === 'init') {
+        // Keep slump line on init
+        speak('SLUMP');
+      } else if (totalL === 0 && totalS === 0) {
+        state.mood = 'NEUTRAL';
+        if (trigger === 'init') {
+          speak('GREETING');
+        }
+      } else if (totalL > 0 && totalS === 0) {
+        state.mood = 'TOUGH_LOVE';
+        if (trigger !== 'quiet') speak('TOUGH_LOVE');
+      } else {
+        state.mood = 'PROGRESS';
+        if (Math.random() > 0.65 && trigger !== 'quiet') {
+          speak('NUDGE');
+        }
+      }
+
+      updateAvatar();
+      saveState();
+      render();
+    }
+
+    function updateAvatar() {
+      const avatar = document.getElementById('avatarCore');
+      avatar.className = 'avatar-core';
+
+      if (state.mood === 'PROUD') {
+        avatar.classList.add('mood-proud');
+        avatar.textContent = '🏆';
+      } else if (state.mood === 'SLUMP') {
+        avatar.classList.add('mood-slump');
+        avatar.textContent = '💤';
+      } else if (state.mood === 'TOUGH_LOVE') {
+        avatar.classList.add('mood-tough');
+        avatar.textContent = '🗡️';
+      } else if (state.mood === 'PROGRESS') {
+        avatar.textContent = '🐯';
+      } else {
+        avatar.textContent = '🐯';
+      }
+    }
+
+    // Energy calculation
+    function computeEnergyPercent() {
+      const listenRatio = Math.min(state.listeningMin / 45, 1);
+      const speakRatio = Math.min(state.speakingMin / 15, 1);
+      // Weighted slightly toward listening, as per canon
+      const combined = listenRatio * 0.7 + speakRatio * 0.3;
+      return Math.round(combined * 100);
+    }
+
+    function render() {
+      const streakEl = document.getElementById('streakCount');
+      const listenStats = document.getElementById('listenStats');
+      const speakStats = document.getElementById('speakStats');
+      const barListen = document.getElementById('barListen');
+      const barSpeak = document.getElementById('barSpeak');
+      const energyPercentEl = document.getElementById('energyPercent');
+      const metaDate = document.getElementById('meta-date');
+
+      streakEl.textContent = state.streak;
+      listenStats.textContent = `${state.listeningMin} / 45m`;
+      speakStats.textContent = `${state.speakingMin} / 15m`;
+
+      const listenPct = Math.min((state.listeningMin / 45) * 100, 100);
+      const speakPct = Math.min((state.speakingMin / 15) * 100, 100);
+      barListen.style.width = `${listenPct}%`;
+      barSpeak.style.width = `${speakPct}%`;
+
+      const energy = computeEnergyPercent();
+      energyPercentEl.textContent = `${energy}%`;
+
+      const todayLabel = new Date().toLocaleDateString(undefined, {
+        weekday: 'short',
+        month: 'short',
+        day: 'numeric'
+      });
+      metaDate.textContent = todayLabel;
+    }
+
+    // Decay / streak logic
+    function applyDecay() {
+      const today = todayKey();
+      const last = state.lastLogin || today;
+      if (today === last) return;
+
+      const lastDate = new Date(last);
+      const todayDate = new Date(today);
+      const diffMs = todayDate - lastDate;
+      const diffDays = Math.round(diffMs / (1000 * 60 * 60 * 24));
+
+      if (diffDays >= 1) {
+        // If they didn't meet yesterday's goal, streak breaks
+        if (!state.dailyGoalMet) {
+          state.streak = 0;
+          state.mood = 'SLUMP';
+          speak('SLUMP');
+        } else {
+          state.streak += 1;
+          state.mood = 'PROGRESS';
+        }
+
+        // New day: reset counters & daily flag
+        state.listeningMin = 0;
+        state.speakingMin = 0;
+        state.dailyGoalMet = false;
+      }
+
+      state.lastLogin = today;
+      saveState();
+    }
+
+    // Event listeners
+    document.getElementById('btnListen').addEventListener('click', () => {
+      state.listeningMin += 15;
+      if (state.listeningMin > 180) state.listeningMin = 180; // Hard cap for a day
+      updateMoodAndMessage('action');
+    });
+
+    document.getElementById('btnSpeak').addEventListener('click', () => {
+      state.speakingMin += 5;
+      if (state.speakingMin > 90) state.speakingMin = 90;
+      updateMoodAndMessage('action');
+    });
+
+    document.getElementById('btnReset').addEventListener('click', () => {
+      state.listeningMin = 0;
+      state.speakingMin = 0;
+      state.dailyGoalMet = false;
+      state.mood = 'NEUTRAL';
+      saveState();
+      speak('GREETING');
+      render();
+    });
+
+    // Reflection chips (mood / message only, no storage)
+    document.getElementById('chipOnFire').addEventListener('click', () => {
+      // gentle celebration
+      state.mood = 'PROGRESS';
+      speak('CELEBRATION');
+      updateAvatar();
+    });
+
+    document.getElementById('chipTired').addEventListener('click', () => {
+      state.mood = 'TOUGH_LOVE';
+      speak('TOUGH_LOVE');
+      updateAvatar();
+    });
+
+    document.getElementById('chipNoTime').addEventListener('click', () => {
+      state.mood = 'TOUGH_LOVE';
+      speak('SLUMP');
+      updateAvatar();
+    });
+
+    // Init
+    (function init() {
+      applyDecay();
+      updateAvatar();
+      updateMoodAndMessage('init'); // sets initial line
+      render();
+      console.log('NET PET AI v1 — Online • Gospel 444 Compliant • 45/15 Tracker Active');
+    })();
+  </script>
+</body>
+</html>

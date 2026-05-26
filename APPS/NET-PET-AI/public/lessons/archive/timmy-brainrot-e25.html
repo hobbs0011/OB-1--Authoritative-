@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>Timmy's Train Adventure — BrainRot Heroes E2.5</title>
+<style>
+:root{
+--void:#0f0f1a;
+--purple:#a855f7;
+--gold:#f59e0b;
+--ssGold:#ffd700;
+--text:#e5e7eb;
+--dim:#94a3b8;
+--glass:rgba(26,26,38,.85);
+--border:rgba(168,85,247,.35);
+--borderG:rgba(245,158,11,.3);
+--shadow:0 20px 70px rgba(0,0,0,.5);
+--glowP:0 0 30px rgba(168,85,247,.5);
+--glowG:0 0 25px rgba(245,158,11,.4);
+--glowSS:0 0 45px rgba(255,215,0,.75);
+--r:20px;
+--ease:cubic-bezier(.2,.9,.2,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden}
+body{
+font-family:system-ui,-apple-system,sans-serif;
+color:var(--text);
+background:
+radial-gradient(900px 700px at 10% 15%,rgba(168,85,247,.2),transparent 60%),
+radial-gradient(900px 700px at 90% 80%,rgba(245,158,11,.15),transparent 60%),
+var(--void);
+}
+.blob{
+position:fixed;
+border-radius:50%;
+filter:blur(85px);
+opacity:.5;
+pointer-events:none;
+animation:float 20s var(--ease) infinite;
+}
+.blob1{width:500px;height:500px;left:-150px;top:-150px;background:radial-gradient(circle,rgba(168,85,247,.9),transparent 70%)}
+.blob2{width:450px;height:450px;right:-150px;bottom:-150px;background:radial-gradient(circle,rgba(245,158,11,.85),transparent 70%);animation-delay:7s}
+@keyframes float{
+0%,100%{transform:translate(0,0) scale(1)}
+40%{transform:translate(50px,-40px) scale(1.05)}
+75%{transform:translate(-30px,30px) scale(.96)}
+}
+.ss-overlay{
+position:fixed;
+inset:0;
+pointer-events:none;
+z-index:999;
+opacity:0;
+background:radial-gradient(circle,rgba(255,215,0,.25),transparent 75%);
+box-shadow:inset 0 0 120px rgba(255,215,0,.6);
+transition:opacity .3s ease;
+}
+.ss-overlay.active{
+opacity:1;
+animation:ssPulse .5s ease-in-out infinite alternate;
+}
+@keyframes ssPulse{
+from{opacity:.85;transform:scale(1)}
+to{opacity:1;transform:scale(1.02)}
+}
+.app{
+position:relative;
+z-index:1;
+height:100%;
+display:flex;
+flex-direction:column;
+}
+.topbar{
+padding:12px 16px;
+background:rgba(15,15,26,.8);
+backdrop-filter:blur(12px);
+border-bottom:1px solid var(--border);
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:12px;
+flex-wrap:wrap;
+}
+.brand{
+display:flex;
+align-items:center;
+gap:10px;
+min-width:0;
+}
+.orb{
+width:40px;
+height:40px;
+border-radius:50%;
+background:radial-gradient(circle at 35% 30%,var(--gold),var(--purple) 45%,transparent 75%);
+box-shadow:var(--glowP);
+border:1px solid var(--borderG);
+display:grid;
+place-items:center;
+}
+.orb svg{width:20px;height:20px}
+.title{
+min-width:0;
+}
+.t1{
+font-weight:900;
+font-size:15px;
+background:linear-gradient(135deg,var(--purple),var(--gold));
+-webkit-background-clip:text;
+background-clip:text;
+color:transparent;
+white-space:nowrap;
+overflow:hidden;
+text-overflow:ellipsis;
+}
+.t2{
+font-size:11px;
+color:rgba(203,213,225,.9);
+font-family:monospace;
+}
+.controls{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+}
+.pill{
+padding:8px 12px;
+background:rgba(26,26,38,.7);
+border:1px solid var(--border);
+border-radius:999px;
+display:flex;
+align-items:center;
+gap:8px;
+font-size:13px;
+}
+.pill .dot{
+width:8px;
+height:8px;
+border-radius:50%;
+background:var(--gold);
+box-shadow:var(--glowG);
+}
+.btn{
+padding:10px 14px;
+background:rgba(26,26,38,.75);
+border:1px solid var(--border);
+border-radius:999px;
+color:var(--text);
+font-weight:700;
+font-size:13px;
+cursor:pointer;
+display:flex;
+align-items:center;
+gap:8px;
+transition:all .2s var(--ease);
+}
+.btn:hover{
+transform:translateY(-2px);
+box-shadow:var(--glowP);
+border-color:var(--borderG);
+}
+.btn:active{transform:translateY(0)}
+.btn.primary{
+background:linear-gradient(135deg,var(--purple),var(--gold));
+color:var(--void);
+border-color:var(--borderG);
+}
+.btn.ss{
+background:linear-gradient(135deg,var(--ssGold),#ff8c00);
+color:var(--void);
+border-color:rgba(255,215,0,.5);
+box-shadow:var(--glowSS);
+animation:ssBtnPulse 1.5s ease-in-out infinite;
+}
+@keyframes ssBtnPulse{
+0%,100%{transform:scale(1)}
+50%{transform:scale(1.06)}
+}
+.btn svg{width:16px;height:16px}
+.stage{
+flex:1;
+padding:14px;
+overflow:auto;
+}
+.deck{
+max-width:900px;
+margin:0 auto;
+background:var(--glass);
+border:1px solid var(--border);
+border-radius:var(--r);
+backdrop-filter:blur(14px);
+box-shadow:var(--shadow);
+overflow:hidden;
+}
+.deckTop{
+padding:16px;
+background:linear-gradient(135deg,rgba(168,85,247,.12),rgba(245,158,11,.08));
+border-bottom:1px solid rgba(168,85,247,.2);
+}
+.deckTop h2{
+font-size:22px;
+margin-bottom:6px;
+}
+.deckTop .kicker{
+font-size:14px;
+color:var(--dim);
+}
+.deckBody{
+padding:20px;
+}
+.story{
+font-size:16px;
+line-height:1.75;
+margin-bottom:20px;
+}
+.story p{margin-bottom:14px}
+.story strong{color:var(--gold)}
+.story em{color:var(--purple);font-style:normal}
+.card{
+background:rgba(15,15,26,.35);
+border:1px solid rgba(168,85,247,.2);
+border-radius:16px;
+padding:16px;
+margin-bottom:14px;
+}
+.card h3{
+font-size:16px;
+color:var(--gold);
+margin-bottom:10px;
+}
+.card p{
+font-size:14px;
+color:var(--dim);
+line-height:1.6;
+margin-bottom:8px;
+}
+.card p:last-child{margin:0}
+.choice{
+background:rgba(26,26,38,.5);
+border:2px solid var(--border);
+border-radius:16px;
+padding:14px;
+margin-bottom:12px;
+cursor:pointer;
+transition:all .2s var(--ease);
+}
+.choice:hover{
+transform:translateY(-2px);
+border-color:var(--borderG);
+box-shadow:0 0 25px rgba(168,85,247,.2);
+}
+.cTop{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:8px;
+}
+.cName{
+font-weight:900;
+font-size:16px;
+color:var(--gold);
+}
+.cTag{
+font-size:12px;
+font-family:monospace;
+color:var(--gold);
+}
+.cDesc{
+font-size:13px;
+color:var(--dim);
+line-height:1.5;
+}
+.panel{
+margin-top:16px;
+padding:16px;
+background:linear-gradient(135deg,rgba(168,85,247,.1),rgba(245,158,11,.08));
+border:1px solid var(--borderG);
+border-radius:16px;
+}
+.panel .big{
+font-size:16px;
+font-weight:900;
+color:var(--gold);
+margin-bottom:6px;
+}
+.panel .small{
+font-size:13px;
+color:rgba(226,232,240,.9);
+}
+.grid{
+display:grid;
+gap:14px;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+}
+.bottombar{
+padding:12px 16px;
+background:rgba(15,15,26,.6);
+backdrop-filter:blur(12px);
+border-top:1px solid var(--border);
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:12px;
+flex-wrap:wrap;
+}
+.progress{
+display:flex;
+align-items:center;
+gap:10px;
+min-width:200px;
+}
+.bar{
+flex:1;
+height:10px;
+background:rgba(148,163,184,.15);
+border:1px solid var(--border);
+border-radius:999px;
+overflow:hidden;
+}
+.fill{
+height:100%;
+width:0;
+background:linear-gradient(90deg,var(--purple),var(--gold));
+transition:width .4s var(--ease);
+box-shadow:var(--glowP);
+}
+.ptext{
+font-family:monospace;
+font-size:12px;
+color:rgba(226,232,240,.9);
+white-space:nowrap;
+}
+.bbtns{
+display:flex;
+gap:10px;
+}
+.toast{
+position:fixed;
+left:50%;
+bottom:80px;
+transform:translateX(-50%);
+background:rgba(26,26,38,.95);
+border:1px solid var(--borderG);
+border-radius:999px;
+padding:12px 20px;
+box-shadow:0 0 30px rgba(0,0,0,.5),var(--glowP);
+color:var(--text);
+font-weight:700;
+font-size:14px;
+z-index:10;
+opacity:0;
+pointer-events:none;
+transition:opacity .3s ease;
+}
+.toast.show{
+opacity:1;
+animation:pop .3s var(--ease);
+}
+@keyframes pop{
+from{transform:translateX(-50%) translateY(8px) scale(.96)}
+to{transform:translateX(-50%) translateY(0) scale(1)}
+}
+.hidden{display:none!important}
+@media(max-width:600px){
+.topbar{padding:10px 12px}
+.t1{font-size:13px}
+.controls{gap:8px}
+.btn{padding:8px 12px;font-size:12px}
+.stage{padding:10px}
+.deckBody{padding:16px}
+}
+</style>
+</head>
+<body>
+<div class="blob blob1"></div>
+<div class="blob blob2"></div>
+<div class="ss-overlay" id="ssOverlay"></div>
+
+<div class="app">
+<header class="topbar">
+<div class="brand">
+<div class="orb">
+<svg viewBox="0 0 24 24" fill="none">
+<path d="M3 17.5c3.2-6.5 7.2-9.2 12-8 3 .7 5 3 6 6.5" stroke="rgba(229,231,235,.95)" stroke-width="2" stroke-linecap="round"/>
+<path d="M5 17.5h14" stroke="rgba(245,158,11,.95)" stroke-width="2" stroke-linecap="round"/>
+</svg>
+</div>
+<div class="title">
+<div class="t1" data-en="Timmy's Train Adventure" data-vi="Cuộc Phiêu Lưu Tàu Hỏa của Timmy">Timmy's Train Adventure</div>
+<div class="t2">BrainRot Heroes • E2.5 Level</div>
+</div>
+</div>
+<div class="controls">
+<div class="pill">
+<span class="dot"></span>
+<strong>Timmy</strong>
+<span style="opacity:.7">E2.5</span>
+</div>
+<button class="btn" id="langBtn">
+<svg viewBox="0 0 24 24" fill="none">
+<path d="M3 5h7M10 5c0 6-4 11-4 11M14 5c0 6 4 11 4 11M21 5h-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+</svg>
+<span data-en="English" data-vi="Tiếng Việt">English</span>
+</button>
+<button class="btn ss" id="ssBtn">
+<svg viewBox="0 0 24 24" fill="none">
+<path d="M13 2L3 14h8l-2 8 10-12h-8l2-8z" stroke="currentColor" stroke-width="2" fill="rgba(255,215,0,.3)"/>
+</svg>
+<span data-en="SS MODE" data-vi="CHẾ ĐỘ SS">SS MODE</span>
+</button>
+</div>
+</header>
+
+<main class="stage">
+<section class="deck">
+<div class="deckTop">
+<h2 id="slideTitle" data-en="Welcome, Hero Timmy!" data-vi="Chào mừng, Anh hùng Timmy!">Welcome, Hero Timmy!</h2>
+<p class="kicker" id="slideKicker" data-en="Learn English with trains and silly zombies!" data-vi="Học tiếng Anh với tàu hỏa và zombie hài hước!">Learn English with trains and silly zombies!</p>
+</div>
+<div class="deckBody" id="slideBody"></div>
+</section>
+</main>
+
+<footer class="bottombar">
+<div class="progress">
+<div class="bar"><div class="fill" id="fill"></div></div>
+<div class="ptext" id="ptext">1/5</div>
+</div>
+<div class="bbtns">
+<button class="btn" id="prevBtn">
+<svg viewBox="0 0 24 24" fill="none">
+<path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+</svg>
+<span data-en="Back" data-vi="Trước">Back</span>
+</button>
+<button class="btn primary" id="nextBtn">
+<span data-en="Next" data-vi="Tiếp">Next</span>
+<svg viewBox="0 0 24 24" fill="none">
+<path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+</svg>
+</button>
+</div>
+</footer>
+
+<div class="toast" id="toast"></div>
+</div>
+
+<script>
+(function(){
+"use strict";
+const $=s=>document.querySelector(s);
+const $$=s=>Array.from(document.querySelectorAll(s));
+
+let state={
+slideIndex:0,
+lang:'en',
+chosenClass:null,
+ssActive:false
+};
+
+const SLIDES=[
+{
+id:"welcome",
+renderEN(){
+return`
+<div class="story">
+<p><strong>Hello, Timmy!</strong> You are a hero!</p>
+<p>You will ride a big <strong>train</strong>. The train goes across America.</p>
+<p>Silly <em>zombies</em> try to stop the train. You will help defend it!</p>
+<p>Your mission: <strong>Survive 99 days.</strong> Reach Sanctuary!</p>
+</div>
+<div class="card">
+<h3>What You Will Do</h3>
+<p>• Ride the train</p>
+<p>• Stop the zombies</p>
+<p>• Help your friends</p>
+<p>• Be strong and fast!</p>
+</div>
+<div class="panel">
+<p class="big">Ready to Start?</p>
+<p class="small">Next: Pick your hero class!</p>
+</div>
+`;
+},
+renderVI(){
+return`
+<div class="story">
+<p><strong>Xin chào, Timmy!</strong> Bạn là một anh hùng!</p>
+<p>Bạn sẽ đi trên một <strong>tàu hỏa</strong> lớn. Tàu đi qua nước Mỹ.</p>
+<p><em>Zombie</em> hài hước cố ngăn tàu. Bạn sẽ giúp bảo vệ nó!</p>
+<p>Nhiệm vụ của bạn: <strong>Sống sót 99 ngày.</strong> Đến Sanctuary!</p>
+</div>
+<div class="card">
+<h3>Bạn Sẽ Làm Gì</h3>
+<p>• Đi tàu hỏa</p>
+<p>• Chặn zombie</p>
+<p>• Giúp bạn bè</p>
+<p>• Mạnh mẽ và nhanh!</p>
+</div>
+<div class="panel">
+<p class="big">Sẵn sàng bắt đầu?</p>
+<p class="small">Tiếp theo: Chọn lớp anh hùng!</p>
+</div>
+`;
+}
+},
+{
+id:"classes",
+renderEN(){
+return`
+<div class="story">
+<p><strong>Pick Your Hero!</strong></p>
+<p>Each hero is different. Choose one!</p>
+</div>
+<div class="choice" data-class="railrunner">
+<div class="cTop">
+<div class="cName">Railrunner</div>
+<div class="cTag">FAST</div>
+</div>
+<div class="cDesc">You run very fast. You see danger early. You shout the plan!</div>
+</div>
+<div class="choice" data-class="rizzmedic">
+<div class="cTop">
+<div class="cName">Rizz Medic</div>
+<div class="cTag">HELPER</div>
+</div>
+<div class="cDesc">You help friends. You have a bag to fix things. You save the team!</div>
+</div>
+<div class="choice" data-class="skibidihunter">
+<div class="cTop">
+<div class="cName">Skibidi Hunter</div>
+<div class="cTag">TRAP MAKER</div>
+</div>
+<div class="cDesc">You place traps. Zombies walk into them and go BOOM!</div>
+</div>
+<div class="choice" data-class="sigmasurvivor">
+<div class="cTop">
+<div class="cName">Sigma Survivor</div>
+<div class="cTag">STRONG</div>
+</div>
+<div class="cDesc">You are very strong. You stand on the roof and protect the engine!</div>
+</div>
+<div class="panel hidden" id="classChosen">
+<p class="big">Great choice!</p>
+<p class="small">You are now a hero. Let's go to Day 1!</p>
+</div>
+`;
+},
+renderVI(){
+return`
+<div class="story">
+<p><strong>Chọn Anh Hùng Của Bạn!</strong></p>
+<p>Mỗi anh hùng khác nhau. Chọn một người!</p>
+</div>
+<div class="choice" data-class="railrunner">
+<div class="cTop">
+<div class="cName">Railrunner</div>
+<div class="cTag">NHANH</div>
+</div>
+<div class="cDesc">Bạn chạy rất nhanh. Bạn thấy nguy hiểm sớm. Bạn hét kế hoạch!</div>
+</div>
+<div class="choice" data-class="rizzmedic">
+<div class="cTop">
+<div class="cName">Rizz Medic</div>
+<div class="cTag">NGƯỜI GIÚP</div>
+</div>
+<div class="cDesc">Bạn giúp bạn bè. Bạn có túi để sửa đồ. Bạn cứu đội!</div>
+</div>
+<div class="choice" data-class="skibidihunter">
+<div class="cTop">
+<div class="cName">Skibidi Hunter</div>
+<div class="cTag">NGƯỜI ĐẶT BẪY</div>
+</div>
+<div class="cDesc">Bạn đặt bẫy. Zombie đi vào và BÙM!</div>
+</div>
+<div class="choice" data-class="sigmasurvivor">
+<div class="cTop">
+<div class="cName">Sigma Survivor</div>
+<div class="cTag">MẠNH</div>
+</div>
+<div class="cDesc">Bạn rất mạnh. Bạn đứng trên mái và bảo vệ động cơ!</div>
+</div>
+<div class="panel hidden" id="classChosen">
+<p class="big">Lựa chọn tuyệt vời!</p>
+<p class="small">Bạn bây giờ là anh hùng. Đi đến Ngày 1!</p>
+</div>
+`;
+}
+},
+{
+id:"day1",
+renderEN(){
+const c=state.chosenClass||"Hero";
+return`
+<div class="story">
+<p><strong>Day 1: The Train Starts!</strong></p>
+<p>The big train goes <em>choo choo!</em> You are on the roof.</p>
+<p>You look. You see fog. You see trees.</p>
+<p>Then... you hear something. <strong>Stomp, stomp, stomp!</strong></p>
+<p>Silly zombies are walking to the train!</p>
+</div>
+<div class="card">
+<h3>What Do You Do?</h3>
+<p><strong>${c}</strong>, you are ready!</p>
+<p>You shout: <em>"Team! Protect the engine!"</em></p>
+<p>The zombies come closer. They are funny. They trip and fall!</p>
+</div>
+<div class="panel">
+<p class="big">You Win!</p>
+<p class="small">Wave 1 complete. The train is safe!</p>
+</div>
+`;
+},
+renderVI(){
+const c=state.chosenClass||"Anh hùng";
+return`
+<div class="story">
+<p><strong>Ngày 1: Tàu Khởi Hành!</strong></p>
+<p>Tàu lớn đi <em>choo choo!</em> Bạn ở trên mái.</p>
+<p>Bạn nhìn. Bạn thấy sương mù. Bạn thấy cây.</p>
+<p>Rồi... bạn nghe thấy gì đó. <strong>Giậm, giậm, giậm!</strong></p>
+<p>Zombie hài hước đang đi đến tàu!</p>
+</div>
+<div class="card">
+<h3>Bạn Làm Gì?</h3>
+<p><strong>${c}</strong>, bạn sẵn sàng!</p>
+<p>Bạn hét: <em>"Đội! Bảo vệ động cơ!"</em></p>
+<p>Zombie đến gần hơn. Họ buồn cười. Họ vấp và ngã!</p>
+</div>
+<div class="panel">
+<p class="big">Bạn Thắng!</p>
+<p class="small">Làn sóng 1 hoàn thành. Tàu an toàn!</p>
+</div>
+`;
+}
+},
+{
+id:"powers",
+renderEN(){
+return`
+<div class="story">
+<p><strong>Your Powers!</strong></p>
+<p>You have two special powers to help you!</p>
+</div>
+<div class="grid">
+<div class="card">
+<h3>Rizz Mode</h3>
+<p>Press <strong>Q</strong> to go fast!</p>
+<p>• You move faster</p>
+<p>• You hit harder</p>
+<p>• Golden sparkles everywhere!</p>
+</div>
+<div class="card">
+<h3>Super Saiyan Mode</h3>
+<p>Press <strong>E</strong> for super power!</p>
+<p>• Nothing can hurt you</p>
+<p>• You hit VERY hard</p>
+<p>• Golden aura! So cool!</p>
+</div>
+</div>
+<div class="panel">
+<p class="big">Try SS Mode!</p>
+<p class="small">Click the yellow button at the top!</p>
+</div>
+`;
+},
+renderVI(){
+return`
+<div class="story">
+<p><strong>Sức Mạnh Của Bạn!</strong></p>
+<p>Bạn có hai sức mạnh đặc biệt để giúp bạn!</p>
+</div>
+<div class="grid">
+<div class="card">
+<h3>Chế Độ Rizz</h3>
+<p>Nhấn <strong>Q</strong> để đi nhanh!</p>
+<p>• Bạn di chuyển nhanh hơn</p>
+<p>• Bạn đánh mạnh hơn</p>
+<p>• Tia sáng vàng khắp nơi!</p>
+</div>
+<div class="card">
+<h3>Chế Độ Super Saiyan</h3>
+<p>Nhấn <strong>E</strong> cho siêu sức mạnh!</p>
+<p>• Không gì có thể làm bạn bị thương</p>
+<p>• Bạn đánh RẤT mạnh</p>
+<p>• Hào quang vàng! Rất ngầu!</p>
+</div>
+</div>
+<div class="panel">
+<p class="big">Thử Chế Độ SS!</p>
+<p class="small">Nhấp nút vàng ở trên cùng!</p>
+</div>
+`;
+}
+},
+{
+id:"day99",
+renderEN(){
+return`
+<div class="story">
+<p><strong>Day 99: The Final Boss!</strong></p>
+<p>You made it! 99 days of adventure!</p>
+<p>Now you face... <em>The Conductor King!</em></p>
+<p>He wears a crown made of old tickets. He is very big!</p>
+<p>But you are ready. You have friends. You have powers!</p>
+</div>
+<div class="card">
+<h3>The Big Fight</h3>
+<p>You use Super Saiyan Mode!</p>
+<p>BOOM! CRASH! POW!</p>
+<p>The Conductor King falls down.</p>
+<p><strong>You win!</strong> Sanctuary is safe!</p>
+</div>
+<div class="panel">
+<p class="big">🎉 You Are A Hero!</p>
+<p class="small">Great job, Timmy! You saved everyone!</p>
+</div>
+`;
+},
+renderVI(){
+return`
+<div class="story">
+<p><strong>Ngày 99: Trùm Cuối Cùng!</strong></p>
+<p>Bạn làm được rồi! 99 ngày phiêu lưu!</p>
+<p>Bây giờ bạn đối mặt với... <em>Vua Nhạc Trưởng!</em></p>
+<p>Ông ta đội vương miện làm từ vé cũ. Ông ta rất to!</p>
+<p>Nhưng bạn đã sẵn sàng. Bạn có bạn bè. Bạn có sức mạnh!</p>
+</div>
+<div class="card">
+<h3>Trận Chiến Lớn</h3>
+<p>Bạn dùng Chế Độ Super Saiyan!</p>
+<p>BÙM! RẦMM! ÔI!</p>
+<p>Vua Nhạc Trưởng ngã xuống.</p>
+<p><strong>Bạn thắng!</strong> Sanctuary an toàn!</p>
+</div>
+<div class="panel">
+<p class="big">🎉 Bạn Là Anh Hùng!</p>
+<p class="small">Làm tốt lắm, Timmy! Bạn đã cứu mọi người!</p>
+</div>
+`;
+}
+}
+];
+
+function render(){
+const slide=SLIDES[state.slideIndex];
+const content=state.lang==='en'?slide.renderEN():slide.renderVI();
+$('#slideBody').innerHTML=content;
+updateProgress();
+updateLangTexts();
+}
+
+function updateProgress(){
+const pct=((state.slideIndex+1)/SLIDES.length)*100;
+$('#fill').style.width=pct+'%';
+$('#ptext').textContent=`${state.slideIndex+1}/${SLIDES.length}`;
+}
+
+function updateLangTexts(){
+$$('[data-en]').forEach(el=>{
+const key=state.lang==='en'?'en':'vi';
+el.textContent=el.dataset[key];
+});
+}
+
+function showToast(msg){
+const toast=$('#toast');
+toast.textContent=msg;
+toast.classList.add('show');
+setTimeout(()=>toast.classList.remove('show'),2000);
+}
+
+function activateSS(){
+if(state.ssActive)return;
+state.ssActive=true;
+const overlay=$('#ssOverlay');
+overlay.classList.add('active');
+showToast(state.lang==='en'?'⚡ SUPER SAIYAN MODE!':'⚡ CHẾ ĐỘ SUPER SAIYAN!');
+setTimeout(()=>{
+overlay.classList.remove('active');
+state.ssActive=false;
+showToast(state.lang==='en'?'SS Mode ended':'Chế độ SS kết thúc');
+},10000);
+}
+
+document.addEventListener('click',e=>{
+if(e.target.closest('#langBtn')){
+state.lang=state.lang==='en'?'vi':'en';
+render();
+showToast(state.lang==='en'?'Switched to English':'Chuyển sang Tiếng Việt');
+}
+else if(e.target.closest('#ssBtn')){
+activateSS();
+}
+else if(e.target.closest('#nextBtn')){
+if(state.slideIndex<SLIDES.length-1){
+state.slideIndex++;
+render();
+}
+}
+else if(e.target.closest('#prevBtn')){
+if(state.slideIndex>0){
+state.slideIndex--;
+render();
+}
+}
+else if(e.target.closest('[data-class]')){
+const cls=e.target.closest('[data-class]').dataset.class;
+state.chosenClass=cls;
+$('#classChosen')?.classList.remove('hidden');
+showToast(state.lang==='en'?`You chose ${cls}!`:`Bạn chọn ${cls}!`);
+}
+});
+
+render();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>BlueTech E1/E2 — NET Class Report (VI/EN)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    :root {
+      --purple: #a855f7;
+      --purple-deep: #7e22ce;
+      --gold: #f59e0b;
+      --gold-dim: #b45309;
+      --dark: #0f0f1a;
+      --navy: #0d0a14;
+      --white: #ffffff;
+      --text-dim: rgba(255, 255, 255, 0.7);
+      --danger: #ef4444;
+      --success: #10b981;
+      --glass: rgba(26, 26, 38, 0.78);
+      --border: rgba(168, 85, 247, 0.35);
+      --radius-lg: 1.3rem;
+      --radius-xl: 1.6rem;
+      --shadow: 0 22px 50px rgba(0, 0, 0, 0.65);
+      --blur: 14px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+    }
+
+    body {
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(168, 85, 247, 0.14) 0%, transparent 55%),
+        radial-gradient(circle at 85% 80%, rgba(245, 158, 11, 0.10) 0%, transparent 60%),
+        radial-gradient(circle at 50% 50%, rgba(15, 15, 26, 0.9) 0%, #050509 100%);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* Organic blobs ---------------------------------------------------- */
+    .blob {
+      position: fixed;
+      border-radius: 999px;
+      filter: blur(60px);
+      opacity: 0.65;
+      z-index: -2;
+      pointer-events: none;
+      mix-blend-mode: screen;
+    }
+
+    .blob--purple {
+      width: 420px;
+      height: 420px;
+      background: rgba(168, 85, 247, 0.65);
+      top: -120px;
+      left: -80px;
+      animation: blobFloat1 22s ease-in-out infinite alternate;
+    }
+
+    .blob--gold {
+      width: 380px;
+      height: 380px;
+      background: rgba(245, 158, 11, 0.5);
+      bottom: -140px;
+      right: -60px;
+      animation: blobFloat2 26s ease-in-out infinite alternate;
+    }
+
+    .blob--deep {
+      width: 380px;
+      height: 380px;
+      background: rgba(37, 99, 235, 0.05); /* almost invisible, slight depth */
+      top: 40%;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: blobFloat3 32s ease-in-out infinite alternate;
+    }
+
+    @keyframes blobFloat1 {
+      0% { transform: translate3d(0,0,0) scale(1); }
+      100% { transform: translate3d(40px,80px,0) scale(1.1); }
+    }
+    @keyframes blobFloat2 {
+      0% { transform: translate3d(0,0,0) scale(1); }
+      100% { transform: translate3d(-60px,-40px,0) scale(1.08); }
+    }
+    @keyframes blobFloat3 {
+      0% { transform: translate3d(-50%,0,0) scale(1); }
+      100% { transform: translate3d(-48%,-40px,0) scale(1.05); }
+    }
+
+    /* Layout ----------------------------------------------------------- */
+    .page-shell {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 1.5rem 1.25rem 2.5rem;
+      position: relative;
+    }
+
+    /* Sticky header ---------------------------------------------------- */
+    .header {
+      position: sticky;
+      top: 0.75rem;
+      z-index: 5;
+      margin-bottom: 1.5rem;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(15, 15, 26, 0.9), rgba(15, 23, 42, 0.92));
+      backdrop-filter: blur(var(--blur));
+      border: 1px solid rgba(168, 85, 247, 0.8);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85);
+      padding: 0.65rem 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.8rem;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .orb-logo {
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, var(--purple), var(--purple-deep));
+      box-shadow: 0 0 22px rgba(168, 85, 247, 0.9);
+    }
+
+    .header-text-main {
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .header-text-sub {
+      font-size: 0.78rem;
+      color: var(--text-dim);
+    }
+
+    .lang-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.2rem;
+      border-radius: 999px;
+      padding: 0.2rem;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.9);
+    }
+
+    .lang-btn {
+      border: none;
+      outline: none;
+      border-radius: 999px;
+      padding: 0.25rem 0.7rem;
+      font-size: 0.75rem;
+      cursor: pointer;
+      background: transparent;
+      color: var(--text-dim);
+      transition: background 0.12s ease, color 0.12s ease;
+    }
+
+    .lang-btn--active {
+      background: rgba(15, 15, 26, 0.96);
+      color: var(--white);
+    }
+
+    /* Cards ------------------------------------------------------------ */
+    .card {
+      background: var(--glass);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      padding: 1.6rem 1.5rem 1.5rem;
+      margin-bottom: 1.4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(circle at top left, rgba(168, 85, 247, 0.16), transparent 55%);
+      opacity: 0.8;
+      z-index: -1;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.7rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .card-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-shadow: 0 0 14px rgba(245, 158, 11, 0.65);
+    }
+
+    .card-subtitle {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      text-align: right;
+    }
+
+    .divider {
+      height: 1px;
+      width: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, transparent, rgba(148, 163, 184, 0.5), transparent);
+      margin: 0.55rem 0 0.9rem;
+    }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin: 0.4rem 0 0.2rem;
+    }
+
+    .chip {
+      border-radius: 999px;
+      padding: 0.3rem 0.7rem;
+      font-size: 0.78rem;
+      background: rgba(15, 15, 26, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      color: var(--text-dim);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .chip-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--purple);
+    }
+
+    h3 {
+      margin: 0.7rem 0 0.35rem;
+      font-size: 0.98rem;
+      font-weight: 600;
+    }
+
+    h4 {
+      margin: 0.5rem 0 0.2rem;
+      font-size: 0.9rem;
+    }
+
+    p {
+      margin: 0.2rem 0 0.5rem;
+      font-size: 0.9rem;
+      color: var(--white);
+    }
+
+    ul {
+      margin: 0.2rem 0 0.8rem 1.2rem;
+      padding: 0;
+      font-size: 0.88rem;
+    }
+
+    li {
+      margin-bottom: 0.3rem;
+      color: var(--white);
+    }
+
+    strong {
+      color: var(--purple);
+    }
+
+    .sub-note {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+    }
+
+    /* Bilingual sections ----------------------------------------------- */
+    .lang-block {
+      margin-bottom: 0.85rem;
+    }
+
+    .lang-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: var(--text-dim);
+      margin-bottom: 0.25rem;
+    }
+
+    .lang {
+      transition: opacity 0.16s ease;
+    }
+
+    .lang-en { display: block; }
+    .lang-vi { display: none; }
+
+    body.lang-vi .lang-en { display: none; }
+    body.lang-vi .lang-vi { display: block; }
+
+    /* Highlight blocks ------------------------------------------------- */
+    blockquote {
+      margin: 0.6rem 0;
+      padding: 0.6rem 0.9rem;
+      border-left: 3px solid var(--gold);
+      background: rgba(15, 23, 42, 0.8);
+      border-radius: 0.7rem;
+      font-size: 0.88rem;
+      color: var(--white);
+    }
+
+    blockquote span.bad {
+      color: var(--danger);
+      font-weight: 600;
+    }
+    blockquote span.good {
+      color: var(--success);
+      font-weight: 600;
+    }
+
+    /* Homework checklist ---------------------------------------------- */
+    .task-list {
+      list-style: none;
+      margin-left: 0;
+    }
+
+    .task {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.55rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .task input[type="checkbox"] {
+      margin-top: 0.15rem;
+      width: 16px;
+      height: 16px;
+      border-radius: 4px;
+      border: 1px solid rgba(148, 163, 184, 0.85);
+      background: rgba(15, 15, 26, 0.9);
+      appearance: none;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .task input[type="checkbox"]:checked {
+      border-color: var(--success);
+      background: radial-gradient(circle at 30% 30%, var(--purple), var(--gold));
+    }
+
+    .task input[type="checkbox"]:checked::after {
+      content: "✓";
+      position: absolute;
+      color: var(--white);
+      font-size: 0.8rem;
+      top: 50%;
+      left: 50%;
+      transform: translate(-48%, -54%);
+    }
+
+    .task-label {
+      font-size: 0.88rem;
+    }
+
+    /* Footer ----------------------------------------------------------- */
+    .footer-note {
+      font-size: 0.76rem;
+      color: var(--text-dim);
+      margin-top: 0.4rem;
+    }
+
+    /* Hover / micro-interactions ------------------------------------- */
+    .card:hover {
+      box-shadow: 0 24px 55px rgba(0, 0, 0, 0.9);
+      transform: translateY(-1px);
+      transition: box-shadow 0.18s ease, transform 0.18s ease;
+    }
+
+    @media (max-width: 640px) {
+      .header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .card {
+        padding: 1.3rem 1.1rem 1.2rem;
+      }
+    }
+  </style>
+</head>
+
+<body class="lang-en">
+
+  <!-- Organic blobs -->
+  <div class="blob blob--purple"></div>
+  <div class="blob blob--gold"></div>
+  <div class="blob blob--deep"></div>
+
+  <div class="page-shell">
+
+    <!-- Sticky header -->
+    <header class="header">
+      <div class="header-left">
+        <div class="orb-logo"></div>
+        <div>
+          <div class="header-text-main">BlueTech E1/E2 — NET Class Report</div>
+          <div class="header-text-sub">November 18, 2025 · Teacher: Michael Hobbs</div>
+        </div>
+      </div>
+      <div class="lang-toggle" aria-label="Language toggle">
+        <button class="lang-btn lang-btn--active" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="vi">VI</button>
+      </div>
+    </header>
+
+    <!-- Overview card -->
+    <section class="card">
+      <div class="card-header">
+        <div class="card-title">Class Overview</div>
+        <div class="card-subtitle">Past events · Future plans · Clarifying meaning · Social logistics</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="lang-block">
+        <div class="lang-label">EN</div>
+        <div class="lang lang-en">
+          <p>
+            This document is your official <strong>class record</strong> and <strong>study guide</strong> for the session.
+            It captures the story of the lesson, the key language corrections, and your mission for the week.
+          </p>
+        </div>
+      </div>
+
+      <div class="lang-block">
+        <div class="lang-label">VI</div>
+        <div class="lang lang-vi">
+          <p>
+            Tài liệu này là <strong>ghi chú chính thức</strong> và cũng là <strong>tài liệu tự học</strong> cho buổi học hôm nay.
+            Nó tóm tắt câu chuyện của buổi học, những lỗi/ngôn ngữ cần sửa và nhiệm vụ của bạn cho tuần này.
+          </p>
+        </div>
+      </div>
+
+      <div class="meta-row">
+        <div class="chip">
+          <span class="chip-dot"></span>
+          Students: Quỳnh · Quy · Denny · Hương
+        </div>
+        <div class="chip">
+          <span class="chip-dot"></span>
+          Focus: Real work English, not textbook English
+        </div>
+      </div>
+    </section>
+
+    <!-- 1. Session Highlights -->
+    <section class="card">
+      <div class="card-header">
+        <div class="card-title">1. Session Highlights</div>
+        <div class="card-subtitle">The narrative of your class</div>
+      </div>
+      <div class="divider"></div>
+
+      <!-- EN -->
+      <div class="lang-block">
+        <div class="lang-label">EN</div>
+        <div class="lang lang-en">
+          <h3>🔷 The “Blu-Tech” Mystery</h3>
+          <ul>
+            <li>We investigated why there seem to be so many different “BlueTech / Blu-Teek” entities.</li>
+            <li><strong>Quy</strong> explained the distinction between <em>“Blue Technique Ingredient”</em> and <em>“Blue Lifestyle & Healthy Products.”</em></li>
+            <li><strong>Conclusion:</strong> It feels like there are about <strong>nine companies in one building</strong>. Next time, we will draw a map together.</li>
+          </ul>
+
+          <h3>🍻 Networking Dinner (Confirmed)</h3>
+          <ul>
+            <li>We discussed schedules and moved away from Nov 21 & 28 because of conflicts.</li>
+            <li><strong>Date:</strong> Friday, <strong>December 5th</strong>, 2025</li>
+            <li><strong>Time:</strong> 6:00 PM (after work)</li>
+            <li><strong>Important:</strong> The bosses won’t be there → Denny has permission to drink “more than 6 bia” this time.</li>
+          </ul>
+
+          <h3>🎢 Team-Building Highlights (Past Tense Practice)</h3>
+          <ul>
+            <li><strong>Hương:</strong> First said she rode a “flying boat” → we clarified it was a <strong>roller coaster</strong>. Feelings: scary, exciting, a lot of screaming.</li>
+            <li><strong>Quy:</strong> Watched a <strong>5D movie</strong> and “travelled to many countries while sitting in one chair.”</li>
+            <li><strong>Denny:</strong> Said he “walked on the sea” like Jesus → we changed it to walking beside the sea and eating seafood.</li>
+            <li><strong>Quỳnh:</strong> Stayed home on doctor’s orders, rested, and came back with more energy.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- VI -->
+      <div class="lang-block">
+        <div class="lang-label">VI</div>
+        <div class="lang lang-vi">
+          <h3>🔷 Bí ẩn “Blu-Tech”</h3>
+          <ul>
+            <li>Cả lớp cùng cố gắng hiểu tại sao lại có nhiều “BlueTech / Blu-Teek” như vậy.</li>
+            <li><strong>Quy</strong> giải thích sự khác nhau giữa <em>“Blue Technique Ingredient”</em> và <em>“Blue Lifestyle & Healthy Products”.</em></li>
+            <li><strong>Kết luận:</strong> Cảm giác như có khoảng <strong>9 công ty trong 1 tòa nhà</strong>. Buổi sau chúng ta sẽ cùng vẽ sơ đồ.</li>
+          </ul>
+
+          <h3>🍻 Buổi Networking Dinner (Đã chốt lịch)</h3>
+          <ul>
+            <li>Chúng ta bỏ qua thứ 6 ngày 21 và 28 vì trùng lịch.</li>
+            <li><strong>Ngày:</strong> Thứ 6, <strong>05/12/2025</strong></li>
+            <li><strong>Giờ:</strong> 18:00 (sau giờ làm)</li>
+            <li><strong>Quan trọng:</strong> Sếp không đi → Denny chính thức được phép uống “nhiều hơn 6 bia”.</li>
+          </ul>
+
+          <h3>🎢 Team-building (Ôn lại quá khứ)</h3>
+          <ul>
+            <li><strong>Hương:</strong> Ban đầu nói đi “tàu bay” → thực ra là <strong>tàu lượn siêu tốc</strong>. Cảm xúc: sợ, hồi hộp, hét rất nhiều.</li>
+            <li><strong>Quy:</strong> Xem <strong>phim 5D</strong> và “đi du lịch khắp thế giới nhưng vẫn ngồi một chỗ”.</li>
+            <li><strong>Denny:</strong> Nói “đi bộ trên biển như Chúa Jesus” → sửa lại thành đi dọc bờ biển và ăn hải sản.</li>
+            <li><strong>Quỳnh:</strong> Ở nhà theo lời dặn của bác sĩ, nghỉ ngơi để khoẻ lại.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Language Focus -->
+    <section class="card">
+      <div class="card-header">
+        <div class="card-title">2. Language Focus</div>
+        <div class="card-subtitle">Corrections & structures you should remember</div>
+      </div>
+      <div class="divider"></div>
+
+      <!-- EN -->
+      <div class="lang-block">
+        <div class="lang-label">EN</div>
+        <div class="lang lang-en">
+          <h3>🚤 A. Vocabulary — The “Flying Boat” Incident</h3>
+          <blockquote>
+            <span class="bad">❌</span> “I rode a flying boat.”<br/>
+            <span class="good">✅</span> “I rode a <strong>roller coaster</strong>.”
+          </blockquote>
+          <p>Useful words: <em>thrilling, terrifying, adrenaline, loop-the-loop</em>.</p>
+
+          <h3>🌊 B. Prepositions — The “Jesus” Incident</h3>
+          <blockquote>
+            <span class="bad">❌</span> “I walked <strong>on</strong> the sea.” (miracle)<br/>
+            <span class="good">✅</span> “I walked <strong>beside</strong> the sea / <strong>along</strong> the beach / <strong>on</strong> the sand.”
+          </blockquote>
+
+          <h3>👋 C. Greetings in a Professional Environment</h3>
+          <blockquote>
+            <span class="bad">❌</span> “Nice to meet you.” (if you already know the person)<br/>
+            <span class="good">✅</span> “Nice to <strong>see</strong> you again.”
+          </blockquote>
+          <p><strong>Rule:</strong> “meet” = first time only. After that, say “see”.</p>
+
+          <h3>🏢 D. Talking About Your Job History</h3>
+          <p><strong>Structure:</strong> “I am new to the <strong>[department]</strong>, but I am not new to the company.”</p>
+          <p>Good example: “I have been an intern here for one year.”</p>
+
+          <h3>📅 E. Future Plans</h3>
+          <p>Useful structures:</p>
+          <ul>
+            <li>“I <strong>will</strong> relax.”</li>
+            <li>“I <strong>am going to</strong> watch movies.”</li>
+            <li>Natural native phrase: “Nothing special, just working.”</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- VI -->
+      <div class="lang-block">
+        <div class="lang-label">VI</div>
+        <div class="lang lang-vi">
+          <h3>🚤 A. Từ vựng — “Flying Boat”</h3>
+          <blockquote>
+            <span class="bad">❌</span> “I rode a flying boat.” (thuyền bay)<br/>
+            <span class="good">✅</span> “I rode a <strong>roller coaster</strong>.” (tàu lượn siêu tốc)
+          </blockquote>
+          <p>Từ vựng thêm: <em>thrilling</em> (hồi hộp, phấn khích), <em>terrifying</em> (rất sợ), <em>adrenaline</em>, <em>loop-the-loop</em>.</p>
+
+          <h3>🌊 B. Giới từ — “Jesus đi bộ trên nước”</h3>
+          <blockquote>
+            <span class="bad">❌</span> “I walked <strong>on</strong> the sea.” (như phép màu)<br/>
+            <span class="good">✅</span> “I walked <strong>beside</strong> the sea.” / “I walked <strong>along</strong> the beach.” / “I walked <strong>on</strong> the sand.”
+          </blockquote>
+
+          <h3>👋 C. Chào hỏi lịch sự trong môi trường công việc</h3>
+          <blockquote>
+            <span class="bad">❌</span> “Nice to meet you.” (khi đã quen nhau)<br/>
+            <span class="good">✅</span> “Nice to <strong>see</strong> you again.”
+          </blockquote>
+          <p><strong>Quy tắc:</strong> “meet” dùng cho lần đầu; từ lần sau dùng “see”.</p>
+
+          <h3>🏢 D. Nói về kinh nghiệm làm việc</h3>
+          <p><strong>Cấu trúc:</strong> “I am new to the <strong>[department]</strong>, but I am not new to the company.”</p>
+          <p>Ví dụ tốt: “I have been an intern here for one year.”</p>
+
+          <h3>📅 E. Kế hoạch sắp tới</h3>
+          <p>Cấu trúc hữu ích:</p>
+          <ul>
+            <li>“I <strong>will</strong> relax.” (Tôi sẽ nghỉ ngơi.)</li>
+            <li>“I <strong>am going to</strong> watch movies.” (Tôi định xem phim.)</li>
+            <li>Cách nói tự nhiên: “Nothing special, just working.” (Không có gì đặc biệt, chỉ đi làm thôi.)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Homework Mission -->
+    <section class="card">
+      <div class="card-header">
+        <div class="card-title">3. Homework Mission</div>
+        <div class="card-subtitle">Input · Speaking · Confidence</div>
+      </div>
+      <div class="divider"></div>
+
+      <!-- EN -->
+      <div class="lang-block">
+        <div class="lang-label">EN</div>
+        <div class="lang lang-en">
+          <h3>📺 Mission 1 — Watch <em>The Office</em> (Episode 1)</h3>
+          <ul class="task-list">
+            <li class="task">
+              <input type="checkbox" />
+              <div class="task-label">Find and watch Episode 1 of <em>The Office</em> (US version).</div>
+            </li>
+            <li class="task">
+              <input type="checkbox" />
+              <div class="task-label">Use <strong>English subtitles only</strong> (no Vietnamese).</div>
+            </li>
+            <li class="task">
+              <input type="checkbox" />
+              <div class="task-label">Focus on the atmosphere and relationships, not translating every word.</div>
+            </li>
+          </ul>
+          <p><strong>Question for next class:</strong> Is Michael Scott smart or stupid? Do the employees respect him?</p>
+
+          <h3>⭐ Mission 2 — Highlight Sentence</h3>
+          <p>Prepare one sentence about your upcoming week using this structure:</p>
+          <blockquote>
+            “This week, I am excited to <strong>[ACTION]</strong> because <strong>[REASON]</strong>.”
+          </blockquote>
+          <p>Examples:</p>
+          <ul>
+            <li>“This week, I am excited to <strong>sleep</strong> because I am very tired.”</li>
+            <li>“This week, I am excited to <strong>eat seafood</strong> because I love crab.”</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- VI -->
+      <div class="lang-block">
+        <div class="lang-label">VI</div>
+        <div class="lang lang-vi">
+          <h3>📺 Nhiệm vụ 1 — Xem <em>The Office</em> (Tập 1)</h3>
+          <ul class="task-list">
+            <li class="task">
+              <input type="checkbox" />
+              <div class="task-label">Tìm và xem tập 1 của <em>The Office</em> (bản US).</div>
+            </li>
+            <li class="task">
+              <input type="checkbox" />
+              <div class="task-label">Chỉ dùng <strong>phụ đề tiếng Anh</strong>, không dùng phụ đề tiếng Việt.</div>
+            </li>
+            <li class="task">
+              <input type="checkbox" />
+              <div class="task-label">Tập trung vào không khí, mối quan hệ giữa các nhân vật, không dịch từng từ.</div>
+            </li>
+          </ul>
+          <p><strong>Câu hỏi cho buổi sau:</strong> Michael Scott thông minh hay ngu ngốc? Nhân viên có tôn trọng anh ấy không?</p>
+
+          <h3>⭐ Nhiệm vụ 2 — Câu “Highlight” trong tuần</h3>
+          <p>Chuẩn bị 1 câu về tuần tới, dùng mẫu sau:</p>
+          <blockquote>
+            “This week, I am excited to <strong>[ACTION]</strong> because <strong>[REASON]</strong>.”
+          </blockquote>
+          <p>Ví dụ:</p>
+          <ul>
+            <li>“This week, I am excited to <strong>sleep</strong> because I am very tired.”</li>
+            <li>“This week, I am excited to <strong>eat seafood</strong> because I love crab.”</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Schedule -->
+    <section class="card">
+      <div class="card-header">
+        <div class="card-title">4. Schedule</div>
+        <div class="card-subtitle">Next classes & social plans</div>
+      </div>
+      <div class="divider"></div>
+
+      <!-- EN -->
+      <div class="lang-block">
+        <div class="lang-label">EN</div>
+        <div class="lang lang-en">
+          <ul>
+            <li><strong>E1/E2 Class:</strong> Thursday @ 6:00 PM</li>
+            <li><strong>Intermediate Group:</strong> Thursday @ 2:30 PM</li>
+            <li><strong>Beginner Group:</strong> Saturday @ 2:30–4:00 PM</li>
+            <li><strong>Networking Dinner:</strong> Friday, Dec 5th @ 6:00 PM</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- VI -->
+      <div class="lang-block">
+        <div class="lang-label">VI</div>
+        <div class="lang lang-vi">
+          <ul>
+            <li><strong>Lớp E1/E2:</strong> Thứ 5 lúc 18:00</li>
+            <li><strong>Lớp Intermediate:</strong> Thứ 5 lúc 14:30</li>
+            <li><strong>Lớp Beginner:</strong> Thứ 7 lúc 14:30–16:00</li>
+            <li><strong>Networking Dinner:</strong> Thứ 6, ngày 05/12 lúc 18:00</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="footer-note">
+        These notes are designed for direct sharing on Zalo / Email. They keep the jokes (flying boat, 6 bia) to build
+        connection, while still giving you serious language corrections and clear homework.
+      </p>
+    </section>
+
+  </div>
+
+  <script>
+    // Language toggle (no inline events, Phoenix-friendly)
+    (function() {
+      const buttons = document.querySelectorAll('.lang-btn');
+      const body = document.body;
+
+      buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const lang = btn.getAttribute('data-lang');
+          if (lang === 'vi') {
+            body.classList.add('lang-vi');
+          } else {
+            body.classList.remove('lang-vi');
+          }
+          buttons.forEach(b => b.classList.remove('lang-btn--active'));
+          btn.classList.add('lang-btn--active');
+        });
+      });
+    })();
+  </script>
+
+</body>
+</html>

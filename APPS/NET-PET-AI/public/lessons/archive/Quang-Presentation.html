@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NET Presentation Coach: Quang</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- GOSPEL 444 AESTHETICS --- */
+        :root {
+            --neon-purple: #a855f7;
+            --gold-accent: #f59e0b;
+            --deep-dark: #0f0f1a;
+            --glass-bg: rgba(26, 26, 38, 0.8);
+            --glass-border: rgba(168, 85, 247, 0.3);
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --danger: #ef4444; /* Used for overtime warning */
+            --success: #10b981;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--deep-dark);
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(168, 85, 247, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 85% 30%, rgba(245, 158, 11, 0.1) 0%, transparent 50%);
+            font-family: 'Inter', sans-serif;
+            color: var(--text-primary);
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* --- BACKGROUND BLOBS (Gospel Requirement) --- */
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.6;
+            animation: pulse 10s infinite alternate;
+        }
+        .blob-1 { top: -10%; left: -10%; width: 500px; height: 500px; background: var(--neon-purple); }
+        .blob-2 { bottom: -10%; right: -10%; width: 400px; height: 400px; background: var(--gold-accent); animation-delay: 2s; }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.5; }
+            100% { transform: scale(1.1); opacity: 0.7; }
+        }
+
+        /* --- MAIN UI SHELL --- */
+        .app-container {
+            width: 90%;
+            max-width: 1000px;
+            height: 85vh;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* --- HEADER --- */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 10px;
+        }
+        .brand {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            color: var(--neon-purple);
+            text-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
+            font-size: 1.2rem;
+        }
+        .timer-display {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            background: rgba(0,0,0,0.3);
+            padding: 5px 15px;
+            border-radius: 8px;
+            border: 1px solid var(--glass-border);
+        }
+
+        /* --- CARD COMPONENT (Glassmorphism) --- */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* --- SLIDE CONTENT --- */
+        .slide-content {
+            padding: 40px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+        .slide-content.active {
+            opacity: 1;
+        }
+
+        .section-label {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--gold-accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .slide-text {
+            font-size: 2rem;
+            line-height: 1.4;
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+
+        .slide-bullets {
+            list-style: none;
+        }
+        .slide-bullets li {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
+            color: var(--text-secondary);
+            transition: color 0.2s;
+        }
+        .slide-bullets li::before {
+            content: "►";
+            color: var(--neon-purple);
+            position: absolute;
+            left: 0;
+            font-size: 1rem;
+            top: 6px;
+        }
+        .slide-bullets li:hover {
+            color: var(--text-primary);
+            cursor: default;
+        }
+
+        /* --- COACHING TIP BAR --- */
+        .coach-bar {
+            background: rgba(0,0,0,0.4);
+            padding: 15px 40px;
+            border-top: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .tiger-icon {
+            font-size: 1.5rem;
+        }
+        .coach-text {
+            font-size: 1rem;
+            color: var(--gold-accent);
+            font-weight: 600;
+            font-style: italic;
+        }
+
+        /* --- CONTROLS --- */
+        .controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            padding-top: 10px;
+        }
+
+        .btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            color: var(--text-primary);
+            padding: 12px 30px;
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            background: rgba(168, 85, 247, 0.1);
+            border-color: var(--neon-purple);
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.3);
+        }
+
+        .btn-primary {
+            background: var(--neon-purple);
+            border-color: var(--neon-purple);
+            color: white;
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
+        }
+        .btn-primary:hover {
+            background: #9333ea;
+            box-shadow: 0 0 30px rgba(168, 85, 247, 0.6);
+        }
+
+        .progress-dots {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+        }
+        .dot.active {
+            background: var(--gold-accent);
+            box-shadow: 0 0 8px var(--gold-accent);
+        }
+
+        /* Mobile Adjustment */
+        @media (max-width: 768px) {
+            .slide-text { font-size: 1.5rem; }
+            .slide-bullets li { font-size: 1.1rem; }
+            .app-container { width: 95%; height: 90vh; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+
+    <div class="app-container">
+        <!-- Header -->
+        <div class="header">
+            <div class="brand">NET // PRESENTER</div>
+            <div class="timer-display" id="timer">00:00</div>
+        </div>
+
+        <!-- Main Card -->
+        <div class="glass-card">
+            <div id="slide-container">
+                <!-- Slide content injected here -->
+            </div>
+            
+            <div class="coach-bar">
+                <span class="tiger-icon">🐯</span>
+                <span class="coach-text" id="coach-tip">Speak Loudly! Be a Tiger!</span>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="controls">
+            <button class="btn" id="btn-prev">Back</button>
+            <button class="btn btn-primary" id="btn-action">Start Presentation</button>
+            <button class="btn" id="btn-next">Next</button>
+        </div>
+        
+        <div class="progress-dots" id="dots-container"></div>
+    </div>
+
+<script>
+    // --- PRESENTATION DATA ---
+    // Hardcoded based on the script generated for Quang
+    const SLIDES = [
+        {
+            section: "0. INTRODUCTION (30s)",
+            text: "Good morning. Today, I will analyze Vietnam Television (VTV).",
+            bullets: [
+                "VTV is a big part of our lives.",
+                "We will look at its role, style, and challenges.",
+                "Goal: Give a clear overview.",
+                "Please listen closely."
+            ],
+            tip: "Stand tall. Smile. Big voice for the opening!"
+        },
+        {
+            section: "2. OVERVIEW (1 min)",
+            text: "VTV is government-owned and nationally trusted.",
+            bullets: [
+                "It shares news via TV, website, app, and Facebook/YouTube.",
+                "People watch for official announcements.",
+                "It plays a KEY ROLE in public information.",
+                "It is the central source of news."
+            ],
+            tip: "Emphasize keywords like 'GOVERNMENT-OWNED' and 'KEY ROLE'."
+        },
+        {
+            section: "3. REPORTING STYLE (1.5 min)",
+            text: "News reporting is formal and very structured.",
+            bullets: [
+                "Content: Politics, education, culture.",
+                "Tone: Consistent and official.",
+                "Focus: Government activities & national achievements.",
+                "Goal: To show stability and unity.",
+                "Result: News can feel one-sided."
+            ],
+            tip: "Pause after 'STRUCTURED'. Don't rush the list."
+        },
+        {
+            section: "4. EDITORIAL BIAS (1.5 min)",
+            text: "VTV reflects the Party’s official stance.",
+            bullets: [
+                "They avoid dissenting views.",
+                "Prioritizes political stability above all.",
+                "Result: Filtered reporting.",
+                "Decisions are based on political alignment.",
+                "Controversial topics are avoided."
+            ],
+            tip: "Keep a serious, informative tone here. Speak clearly."
+        },
+        {
+            section: "5. CHALLENGES (1 min)",
+            text: "VTV faces two main problems today.",
+            bullets: [
+                "1. Young Audiences: They prefer fast, social media news.",
+                "VTV's style feels too slow for them.",
+                "2. Press Freedom: Strict government rules.",
+                "Cannot investigate deeply.",
+                "Limits critical reporting."
+            ],
+            tip: "Use your fingers to count 'One' and 'Two'. Clear separation."
+        },
+        {
+            section: "6. CONCLUSION (30s)",
+            text: "In summary, VTV is reliable but lacks diversity.",
+            bullets: [
+                "Citizens get state-approved narratives.",
+                "Young people are moving to social media.",
+                "The future is balancing official news vs. new perspectives.",
+                "Thank you. I am ready for questions."
+            ],
+            tip: "Slow down. Finish strong. Look at the audience."
+        }
+    ];
+
+    // --- STATE ---
+    let currentSlideIndex = 0;
+    let isTimerRunning = false;
+    let seconds = 0;
+    let timerInterval = null;
+
+    // --- DOM ELEMENTS ---
+    const slideContainer = document.getElementById('slide-container');
+    const coachTip = document.getElementById('coach-tip');
+    const timerDisplay = document.getElementById('timer');
+    const btnPrev = document.getElementById('btn-prev');
+    const btnNext = document.getElementById('btn-next');
+    const btnAction = document.getElementById('btn-action');
+    const dotsContainer = document.getElementById('dots-container');
+
+    // --- INITIALIZATION ---
+    function init() {
+        createDots();
+        renderSlide(0);
+        btnPrev.disabled = true;
+    }
+
+    // --- RENDER LOGIC ---
+    function renderSlide(index) {
+        // Fade out
+        slideContainer.innerHTML = ''; // Clear immediately for simple redraw in this v0
+        
+        const slide = SLIDES[index];
+        
+        // Build HTML string safely
+        const html = `
+            <div class="slide-content active">
+                <div class="section-label">${slide.section}</div>
+                <div class="slide-text">${slide.text}</div>
+                <ul class="slide-bullets">
+                    ${slide.bullets.map(b => `<li>${b}</li>`).join('')}
+                </ul>
+            </div>
+        `;
+        
+        slideContainer.innerHTML = html;
+        coachTip.textContent = slide.tip;
+
+        // Update Dots
+        document.querySelectorAll('.dot').forEach((d, i) => {
+            d.classList.toggle('active', i === index);
+        });
+
+        // Button States
+        btnPrev.disabled = index === 0;
+        btnNext.disabled = index === SLIDES.length - 1;
+        btnNext.innerText = index === SLIDES.length - 1 ? "Finish" : "Next";
+    }
+
+    function createDots() {
+        dotsContainer.innerHTML = '';
+        SLIDES.forEach((_, i) => {
+            const dot = document.createElement('div');
+            dot.className = 'dot';
+            dotsContainer.appendChild(dot);
+        });
+    }
+
+    // --- TIMER LOGIC ---
+    function toggleTimer() {
+        if (isTimerRunning) {
+            // Stop
+            clearInterval(timerInterval);
+            isTimerRunning = false;
+            btnAction.textContent = "Resume";
+            btnAction.classList.remove('btn-primary'); // Dim it
+        } else {
+            // Start
+            isTimerRunning = true;
+            btnAction.textContent = "Pause";
+            btnAction.classList.add('btn-primary');
+            timerInterval = setInterval(() => {
+                seconds++;
+                updateTimerDisplay();
+            }, 1000);
+        }
+    }
+
+    function updateTimerDisplay() {
+        const m = Math.floor(seconds / 60).toString().padStart(2, '0');
+        const s = (seconds % 60).toString().padStart(2, '0');
+        timerDisplay.textContent = `${m}:${s}`;
+
+        // Tiger Warning if over 6 minutes
+        if (seconds > 360) {
+            timerDisplay.style.color = 'var(--danger)';
+            timerDisplay.style.borderColor = 'var(--danger)';
+        }
+    }
+
+    // --- EVENT LISTENERS ---
+    btnNext.addEventListener('click', () => {
+        if (currentSlideIndex < SLIDES.length - 1) {
+            currentSlideIndex++;
+            renderSlide(currentSlideIndex);
+        }
+    });
+
+    btnPrev.addEventListener('click', () => {
+        if (currentSlideIndex > 0) {
+            currentSlideIndex--;
+            renderSlide(currentSlideIndex);
+        }
+    });
+
+    btnAction.addEventListener('click', toggleTimer);
+
+    // Keyboard Support
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight' || e.key === ' ') {
+            if (currentSlideIndex < SLIDES.length - 1) {
+                currentSlideIndex++;
+                renderSlide(currentSlideIndex);
+            }
+        }
+        if (e.key === 'ArrowLeft') {
+            if (currentSlideIndex > 0) {
+                currentSlideIndex--;
+                renderSlide(currentSlideIndex);
+            }
+        }
+    });
+
+    // Run
+    init();
+
+</script>
+</body>
+</html>

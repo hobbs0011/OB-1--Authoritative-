@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>TRAIN 6-7: DEMO PREVIEW</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            --neon-purple: #a855f7;
+            --neon-turquoise: #00f2ff;
+            --gold: #f59e0b;
+            --deep-dark: #0f0f1a;
+            --rust: #8b4513;
+        }
+
+        body {
+            font-family: 'Space Mono', monospace;
+            background: var(--deep-dark);
+            color: white;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* Animated background blobs */
+        .bg-blob {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .blob-1 {
+            width: 500px;
+            height: 500px;
+            background: var(--neon-purple);
+            top: -100px;
+            left: -100px;
+            animation: float1 20s infinite;
+        }
+
+        .blob-2 {
+            width: 400px;
+            height: 400px;
+            background: var(--gold);
+            bottom: -100px;
+            right: -100px;
+            animation: float2 25s infinite;
+        }
+
+        .blob-3 {
+            width: 350px;
+            height: 350px;
+            background: var(--neon-turquoise);
+            top: 50%;
+            right: 10%;
+            animation: float3 30s infinite;
+        }
+
+        @keyframes float1 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(100px, 100px) scale(1.1); }
+            66% { transform: translate(-50px, 150px) scale(0.9); }
+        }
+
+        @keyframes float2 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(-100px, -100px) scale(1.1); }
+            66% { transform: translate(50px, -150px) scale(0.9); }
+        }
+
+        @keyframes float3 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-100px, 100px) scale(1.2); }
+        }
+
+        /* Container */
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px 20px;
+            background: rgba(15, 15, 26, 0.7);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            border: 2px solid rgba(168, 85, 247, 0.3);
+            box-shadow: 0 8px 32px rgba(168, 85, 247, 0.2);
+        }
+
+        .title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-turquoise));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+            text-shadow: 0 0 30px rgba(168, 85, 247, 0.5);
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--gold);
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .tagline {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-style: italic;
+        }
+
+        /* Language toggle */
+        .lang-toggle {
+            display: inline-flex;
+            gap: 10px;
+            margin-top: 15px;
+            padding: 8px;
+            background: rgba(168, 85, 247, 0.1);
+            border-radius: 50px;
+            border: 1px solid rgba(168, 85, 247, 0.3);
+        }
+
+        .lang-btn {
+            padding: 8px 20px;
+            border: none;
+            background: transparent;
+            color: white;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.9rem;
+            cursor: pointer;
+            border-radius: 50px;
+            transition: all 0.3s;
+        }
+
+        .lang-btn.active {
+            background: var(--neon-purple);
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
+        }
+
+        /* Section */
+        .section {
+            background: rgba(15, 15, 26, 0.7);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 2px solid rgba(168, 85, 247, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s;
+        }
+
+        .section:hover {
+            border-color: rgba(168, 85, 247, 0.5);
+            box-shadow: 0 8px 32px rgba(168, 85, 247, 0.3);
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            color: var(--neon-turquoise);
+            margin-bottom: 20px;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .section-subtitle {
+            font-size: 1rem;
+            color: var(--gold);
+            text-align: center;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+
+        /* Cards */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .card {
+            background: rgba(0, 242, 255, 0.05);
+            border: 2px solid rgba(0, 242, 255, 0.3);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(0, 242, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s;
+        }
+
+        .card:hover::before {
+            transform: rotate(45deg) translate(50%, 50%);
+        }
+
+        .card:hover {
+            border-color: var(--neon-turquoise);
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.4);
+            transform: translateY(-5px);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .card-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: var(--neon-purple);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .card-desc {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.5;
+        }
+
+        .card-vn {
+            font-size: 0.85rem;
+            color: var(--gold);
+            margin-top: 10px;
+            font-style: italic;
+            display: none;
+        }
+
+        .card-vn.show {
+            display: block;
+        }
+
+        /* Legendary showcase */
+        .legendary-box {
+            background: linear-gradient(135deg, rgba(15, 15, 26, 0.95), rgba(168, 85, 247, 0.1));
+            border: 3px solid var(--gold);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 0 50px rgba(245, 158, 11, 0.5);
+            position: relative;
+            overflow: hidden;
+            margin: 30px 0;
+        }
+
+        .legendary-box::before {
+            content: '🔒';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 2rem;
+            opacity: 0.3;
+        }
+
+        .legendary-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            color: var(--gold);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .legendary-item {
+            font-size: 4rem;
+            margin: 20px 0;
+            animation: glow 2s infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 20px var(--gold), 0 0 40px var(--neon-purple); }
+            50% { text-shadow: 0 0 40px var(--gold), 0 0 60px var(--neon-purple); }
+        }
+
+        .legendary-req {
+            font-size: 1.1rem;
+            color: var(--neon-purple);
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        /* Progress bar */
+        .progress-bar {
+            background: rgba(168, 85, 247, 0.1);
+            border-radius: 50px;
+            height: 30px;
+            margin: 20px 0;
+            overflow: hidden;
+            border: 2px solid rgba(168, 85, 247, 0.3);
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, var(--neon-purple), var(--neon-turquoise));
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            transition: width 1s;
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
+        }
+
+        /* Stats grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .stat-box {
+            background: rgba(0, 242, 255, 0.1);
+            border: 1px solid rgba(0, 242, 255, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 5px;
+        }
+
+        .stat-value {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            color: var(--neon-turquoise);
+            font-weight: bold;
+        }
+
+        /* Demo badge */
+        .demo-badge {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--deep-dark);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.8rem;
+            margin-left: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Info box */
+        .info-box {
+            background: rgba(245, 158, 11, 0.1);
+            border-left: 4px solid var(--gold);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .info-box strong {
+            color: var(--gold);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            .title {
+                font-size: 1.8rem;
+            }
+
+            .section-title {
+                font-size: 1.4rem;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            .section {
+                padding: 20px;
+            }
+        }
+
+        /* Click particles */
+        .particle {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: var(--neon-purple);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: particle-float 1s forwards;
+            z-index: 9999;
+        }
+
+        @keyframes particle-float {
+            to {
+                transform: translateY(-100px) scale(0);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background blobs -->
+    <div class="bg-blob blob-1"></div>
+    <div class="bg-blob blob-2"></div>
+    <div class="bg-blob blob-3"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="title">🚂 TRAIN 6-7 🚂</div>
+            <div class="subtitle">To Survive A Brainrot</div>
+            <div class="tagline">Become a Legendary Conductor with Your Crew</div>
+            <div class="tagline" style="margin-top: 10px;">Trở thành Chỉ huy Huyền thoại cùng Đội của Bạn</div>
+            
+            <div class="lang-toggle">
+                <button class="lang-btn active" onclick="setLang('en')">🇺🇸 English</button>
+                <button class="lang-btn" onclick="setLang('vn')">🇻🇳 Tiếng Việt</button>
+            </div>
+        </div>
+
+        <!-- What's in the Demo -->
+        <div class="section">
+            <div class="section-title">⚡ DEMO PREVIEW <span class="demo-badge">This Weekend</span></div>
+            <div class="section-subtitle">
+                <span class="en">8 minutes of pure brainrot conductor action</span>
+                <span class="vn" style="display: none;">8 phút hành động chỉ huy brainrot thuần túy</span>
+            </div>
+
+            <div class="info-box">
+                <strong class="en">The Mission:</strong>
+                <strong class="vn" style="display: none;">Nhiệm vụ:</strong>
+                <span class="en">Board the Rustbucket Express. Survive 2 zombie stops. Defeat Baby Rizzlord. Unlock legendary conductor gear with your squad!</span>
+                <span class="vn" style="display: none;">Lên tàu Rustbucket Express. Sống sót qua 2 trạm zombie. Đánh bại Baby Rizzlord. Mở khóa trang bị chỉ huy huyền thoại cùng đội của bạn!</span>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-label en">Session Length</div>
+                    <div class="stat-label vn" style="display: none;">Thời lượng</div>
+                    <div class="stat-value">6-8 min</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label en">Best With Friends</div>
+                    <div class="stat-label vn" style="display: none;">Tốt nhất với Bạn bè</div>
+                    <div class="stat-value">3-5 👥</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label en">Classes Available</div>
+                    <div class="stat-label vn" style="display: none;">Lớp có sẵn</div>
+                    <div class="stat-value">3</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label en">Weapons</div>
+                    <div class="stat-label vn" style="display: none;">Vũ khí</div>
+                    <div class="stat-value">3</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Choose Your Conductor Class -->
+        <div class="section">
+            <div class="section-title">👤 CONDUCTOR CLASSES</div>
+            <div class="section-subtitle">
+                <span class="en">Pick your identity. Defend your train. Flex your style.</span>
+                <span class="vn" style="display: none;">Chọn danh tính. Bảo vệ tàu. Khoe phong cách.</span>
+            </div>
+
+            <div class="cards">
+                <div class="card" onclick="playSound()">
+                    <div class="card-icon">🛡️</div>
+                    <div class="card-name">Sigma Survivor</div>
+                    <div class="card-desc en">The Tank. You don't die. You protect your squad. Heavy armor, big bonks.</div>
+                    <div class="card-desc vn">Tank. Bạn không chết. Bạn bảo vệ đội. Giáp nặng, đánh mạnh.</div>
+                    <div class="card-vn en">Vietnamese: Người Sống Sót Sigma</div>
+                    <div class="card-vn vn">HP: 150 | Speed: Slow | Style: TANKY</div>
+                </div>
+
+                <div class="card" onclick="playSound()">
+                    <div class="card-icon">⚡</div>
+                    <div class="card-name">Railrunner</div>
+                    <div class="card-desc en">The Hero. Fast, balanced, rooftop master. You rush in and blast everything.</div>
+                    <div class="card-desc vn">Anh hùng. Nhanh, cân bằng, chủ mái tàu. Bạn lao vào và nổ tung mọi thứ.</div>
+                    <div class="card-vn en">Vietnamese: Người Chạy Đường Ray</div>
+                    <div class="card-vn vn">HP: 100 | Speed: Normal | Style: BALANCED</div>
+                </div>
+
+                <div class="card" onclick="playSound()">
+                    <div class="card-icon">🎯</div>
+                    <div class="card-name">Skibidi Hunter</div>
+                    <div class="card-desc en">The Anti-Meme. Delete cringe mobs. Precision strikes. Counter-brainrot specialist.</div>
+                    <div class="card-desc vn">Diệt meme. Xóa đám quái vật hèn. Đòn chính xác. Chuyên gia chống brainrot.</div>
+                    <div class="card-vn en">Vietnamese: Thợ Săn Skibidi</div>
+                    <div class="card-vn vn">HP: 100 | Speed: Normal | Style: SPECIALIST</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Weapons -->
+        <div class="section">
+            <div class="section-title">🔫 CONDUCTOR WEAPONS</div>
+            <div class="section-subtitle">
+                <span class="en">Every shot counts. Every bonk matters. Big feedback guaranteed.</span>
+                <span class="vn" style="display: none;">Mỗi phát đạn quan trọng. Mỗi cú đánh có ý nghĩa. Phản hồi lớn đảm bảo.</span>
+            </div>
+
+            <div class="cards">
+                <div class="card" onclick="playSound()">
+                    <div class="card-icon">💥</div>
+                    <div class="card-name">Pump Shotgun</div>
+                    <div class="card-desc en">Every shot is an EVENT. Heavy boom. Screen shake. Zombie goes flying.</div>
+                    <div class="card-desc vn">Mỗi phát là SỰ KIỆN. Nổ nặng. Màn rung. Zombie bay đi.</div>
+                    <div class="card-vn en">Vietnamese: Súng Ngắn Bơm</div>
+                    <div class="card-vn vn">Damage: HIGH | Fire Rate: SLOW | Feel: POWERFUL</div>
+                </div>
+
+                <div class="card" onclick="playSound()">
+                    <div class="card-icon">🔥</div>
+                    <div class="card-name">Fast SMG</div>
+                    <div class="card-desc en">Dopamine drip. Constant fire. Purple tracers. BRRRRT sound kids love.</div>
+                    <div class="card-desc vn">Giọt dopamine. Bắn liên tục. Vệt tím. Âm thanh BRRRRT trẻ em thích.</div>
+                    <div class="card-vn en">Vietnamese: Súng Tiểu Liên Nhanh</div>
+                    <div class="card-vn vn">Damage: LOW | Fire Rate: VERY HIGH | Feel: SATISFYING</div>
+                </div>
+
+                <div class="card" onclick="playSound()">
+                    <div class="card-icon">🔨</div>
+                    <div class="card-name">Heavy Sledge</div>
+                    <div class="card-desc en">BIG BONK. Comedy gold. Zombies fly backwards. You'll repeat the sound IRL.</div>
+                    <div class="card-desc vn">ĐẬP MẠNH. Hài hước vàng. Zombie bay ngược. Bạn sẽ lặp lại âm thanh ngoài đời.</div>
+                    <div class="card-vn en">Vietnamese: Búa Tạ Nặng</div>
+                    <div class="card-vn vn">Damage: MASSIVE | Speed: SLOW | Feel: COMEDIC</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- The Journey -->
+        <div class="section">
+            <div class="section-title">🛤️ THE 2-STOP DEMO RUN</div>
+            <div class="section-subtitle">
+                <span class="en">Your first taste of the 99-day journey to Sanctuary</span>
+                <span class="vn" style="display: none;">Trải nghiệm đầu tiên về hành trình 99 ngày đến Sanctuary</span>
+            </div>
+
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 22%;" id="demoProgress">
+                    <span class="en">DEMO: 2/9 Stops</span>
+                    <span class="vn" style="display: none;">DEMO: 2/9 Trạm</span>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <strong class="en">Stop 1 - NPC Zone:</strong>
+                <strong class="vn" style="display: none;">Trạm 1 - Khu NPC:</strong>
+                <span class="en">Easy warmup. Slow zombies. Get your first 10 kills. Feel the power.</span>
+                <span class="vn" style="display: none;">Khởi động dễ. Zombie chậm. Giết 10 con đầu tiên. Cảm nhận sức mạnh.</span>
+                <br><br>
+                <strong class="en">Stop 2 - Sigma Suburbs:</strong>
+                <strong class="vn" style="display: none;">Trạm 2 - Vùng ngoại ô Sigma:</strong>
+                <span class="en">Things get real. More zombies. First Skibidi mobs. Baby Rizzlord incoming!</span>
+                <span class="vn" style="display: none;">Mọi thứ nghiêm túc. Nhiều zombie hơn. Đám Skibidi đầu tiên. Baby Rizzlord đang tới!</span>
+            </div>
+        </div>
+
+        <!-- Boss -->
+        <div class="section">
+            <div class="section-title">👑 BABY RIZZLORD</div>
+            <div class="section-subtitle">
+                <span class="en">Your first screenshot moment. The squad memory maker.</span>
+                <span class="vn" style="display: none;">Khoảnh khắc chụp màn hình đầu tiên. Tạo kỷ niệm đội.</span>
+            </div>
+
+            <div class="card" onclick="playSound()" style="max-width: 500px; margin: 0 auto;">
+                <div class="card-icon" style="font-size: 5rem;">🦁</div>
+                <div class="card-name" style="font-size: 1.5rem;">BABY RIZZLORD</div>
+                <div class="card-desc en">Spawns minute 3. Telegraphed charge attack. Ground stomp. Summons adds. Your first epic fight.</div>
+                <div class="card-desc vn">Xuất hiện phút 3. Tấn công lao tới có dấu hiệu. Giậm đất. Triệu hồi quân. Trận chiến hoành tráng đầu tiên.</div>
+                <div class="card-vn en">The moment you'll tell your friends about</div>
+                <div class="card-vn vn">Khoảnh khắc bạn sẽ kể cho bạn bè</div>
+                <div style="margin-top: 15px; padding: 10px; background: rgba(168, 85, 247, 0.1); border-radius: 10px;">
+                    <strong class="en">💎 Drops:</strong>
+                    <strong class="vn" style="display: none;">💎 Rơi:</strong>
+                    <span class="en">XP, Tickets, Conductor Hat Preview (locked)</span>
+                    <span class="vn" style="display: none;">XP, Vé, Xem trước Mũ Chỉ huy (khóa)</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- The Three Pieces (Growth Engine) -->
+        <div class="section">
+            <div class="section-title">🚂 THE FULL TRAIN SYSTEM</div>
+            <div class="section-subtitle">
+                <span class="en">Why squads win. Why friends matter. Why you'll invite them.</span>
+                <span class="vn" style="display: none;">Tại sao đội thắng. Tại sao bạn bè quan trọng. Tại sao bạn sẽ mời họ.</span>
+            </div>
+
+            <div class="info-box">
+                <strong>⚡ PIECE 1: Lobby Display Case</strong>
+                <p class="en">Big glass case. Legendary conductor gear inside. Label: "🔒 FULL TRAIN REQUIRED (3+ Conductors)"</p>
+                <p class="vn" style="display: none;">Tủ kính lớn. Trang bị chỉ huy huyền thoại bên trong. Nhãn: "🔒 YÊU CẦU TÀU ĐẦY (3+ Chỉ huy)"</p>
+            </div>
+
+            <div class="info-box">
+                <strong>⚡ PIECE 2: Squad Counter (Always Visible)</strong>
+                <p class="en">Top-right corner: "🚂 3 CONDUCTORS | ⚡ POWER +20%"</p>
+                <p class="vn" style="display: none;">Góc trên bên phải: "🚂 3 CHỈ HUY | ⚡ SỨC MẠNH +20%"</p>
+            </div>
+
+            <div class="info-box">
+                <strong>⚡ PIECE 3: Full Train Banner (End Screen)</strong>
+                <p class="en">Big celebration when you win with 3+ friends: "⚡ FULL TRAIN BONUS ACTIVE ⚡ Conductor's Collection drop chance increased!"</p>
+                <p class="vn" style="display: none;">Ăn mừng lớn khi thắng với 3+ bạn: "⚡ BONUS TÀU ĐẦY KÍCH HOẠT ⚡ Tỷ lệ rơi Bộ sưu tập Chỉ huy tăng!"</p>
+            </div>
+
+            <div style="margin-top: 20px; padding: 20px; background: rgba(245, 158, 11, 0.1); border-radius: 15px; border: 2px solid var(--gold);">
+                <div style="text-align: center; font-size: 1.3rem; color: var(--gold); margin-bottom: 10px;">
+                    <strong class="en">💡 The Truth:</strong>
+                    <strong class="vn" style="display: none;">💡 Sự thật:</strong>
+                </div>
+                <p class="en" style="text-align: center; font-size: 1.1rem;">Solo is fun. Duo is better. But FULL TRAIN (3-5 players) is where the legendary drops happen.</p>
+                <p class="vn" style="display: none; text-align: center; font-size: 1.1rem;">Chơi đơn vui. Chơi đôi tốt hơn. Nhưng TÀU ĐẦY (3-5 người chơi) là nơi rơi đồ huyền thoại.</p>
+            </div>
+        </div>
+
+        <!-- Legendary Preview -->
+        <div class="legendary-box">
+            <div class="legendary-title en">🏆 CONDUCTOR'S COLLECTION 🏆</div>
+            <div class="legendary-title vn" style="display: none;">🏆 BỘ SƯU TẬP CHỈ HUY 🏆</div>
+            <div class="legendary-item">🎩</div>
+            <div style="font-size: 1.3rem; color: white; margin-bottom: 10px;">
+                <strong>Sigma Conductor Hat</strong>
+            </div>
+            <div style="color: rgba(255, 255, 255, 0.8); margin-bottom: 15px;">
+                <span class="en">Deep dark background. Purple & gold only. Prestige aura.</span>
+                <span class="vn" style="display: none;">Nền tối sâu. Chỉ tím & vàng. Hào quang uy tín.</span>
+            </div>
+            <div class="legendary-req en">
+                UNLOCK: Win with 3+ Conductors | Earn through 30-day squad streak
+            </div>
+            <div class="legendary-req vn" style="display: none;">
+                MỞ KHÓA: Thắng với 3+ Chỉ huy | Kiếm qua chuỗi đội 30 ngày
+            </div>
+            <div style="margin-top: 20px; font-size: 0.9rem; color: rgba(255, 255, 255, 0.6);">
+                <span class="en">This is what Gospel 444 looks like. Dark. Prestigious. Legendary.</span>
+                <span class="vn" style="display: none;">Đây là Gospel 444 trông như thế nào. Tối. Uy tín. Huyền thoại.</span>
+            </div>
+        </div>
+
+        <!-- What Makes This Different -->
+        <div class="section">
+            <div class="section-title">✨ WHY TRAIN 6-7 HITS DIFFERENT</div>
+            <div class="section-subtitle">
+                <span class="en">Not another zombie game. This is a conductor identity game.</span>
+                <span class="vn" style="display: none;">Không phải game zombie khác. Đây là game danh tính chỉ huy.</span>
+            </div>
+
+            <div class="cards">
+                <div class="card">
+                    <div class="card-icon">🎮</div>
+                    <div class="card-name en">Mobile-First Design</div>
+                    <div class="card-name vn" style="display: none;">Thiết kế Di động Đầu tiên</div>
+                    <div class="card-desc en">Plays smooth on cheap phones. Big buttons. Clear UI. No lag.</div>
+                    <div class="card-desc vn">Chơi mượt trên điện thoại rẻ. Nút lớn. UI rõ ràng. Không lag.</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">😂</div>
+                    <div class="card-name en">Brainrot Culture Native</div>
+                    <div class="card-name vn" style="display: none;">Văn hóa Brainrot Bản địa</div>
+                    <div class="card-desc en">Sigma. Skibidi. Ohio. Rizz. The memes ARE the game, not decoration.</div>
+                    <div class="card-desc vn">Sigma. Skibidi. Ohio. Rizz. Meme LÀ game, không phải trang trí.</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">👥</div>
+                    <div class="card-name en">Squad-First, Always</div>
+                    <div class="card-name vn" style="display: none;">Đội Đầu tiên, Luôn luôn</div>
+                    <div class="card-desc en">Solo is tutorial. Real game = bringing your friends. Exclusive rewards prove it.</div>
+                    <div class="card-desc vn">Chơi đơn là hướng dẫn. Game thật = mang bạn bè. Phần thưởng độc quyền chứng minh.</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🎨</div>
+                    <div class="card-name en">Tiered Aesthetic</div>
+                    <div class="card-name vn" style="display: none;">Thẩm mỹ Phân tầng</div>
+                    <div class="card-desc en">Common = neon chaos. Legendary = Gospel 444 prestige. You SEE the value.</div>
+                    <div class="card-desc vn">Thường = hỗn loạn neon. Huyền thoại = uy tín Gospel 444. Bạn THẤY giá trị.</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">⚡</div>
+                    <div class="card-name en">6-8 Minute Sessions</div>
+                    <div class="card-name vn" style="display: none;">Phiên 6-8 Phút</div>
+                    <div class="card-desc en">Perfect for TikTok clips. Fast. Intense. Shareable. No time wasted.</div>
+                    <div class="card-desc vn">Hoàn hảo cho clip TikTok. Nhanh. Căng thẳng. Chia sẻ được. Không lãng phí thời gian.</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">💎</div>
+                    <div class="card-name en">Ethical Monetization</div>
+                    <div class="card-name vn" style="display: none;">Kiếm tiền Đạo đức</div>
+                    <div class="card-desc en">70% earnable. 30% buyable. Never pay-to-win. Always cosmetic flex.</div>
+                    <div class="card-desc vn">70% kiếm được. 30% mua được. Không bao giờ trả để thắng. Luôn khoe cosmetic.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Demo Success = What? -->
+        <div class="section">
+            <div class="section-title">🎯 DEMO SUCCESS LOOKS LIKE...</div>
+            
+            <div style="background: rgba(0, 242, 255, 0.1); padding: 20px; border-radius: 15px; margin-bottom: 15px;">
+                <div style="font-size: 1.2rem; color: var(--neon-turquoise); margin-bottom: 10px;">
+                    <strong class="en">✅ Technical Win:</strong>
+                    <strong class="vn" style="display: none;">✅ Thắng Kỹ thuật:</strong>
+                </div>
+                <p class="en">Game runs 8 minutes without crash. Plays smooth on cheap phone. All three pieces work perfectly.</p>
+                <p class="vn" style="display: none;">Game chạy 8 phút không crash. Chơi mượt trên điện thoại rẻ. Cả ba phần hoạt động hoàn hảo.</p>
+            </div>
+
+            <div style="background: rgba(168, 85, 247, 0.1); padding: 20px; border-radius: 15px; margin-bottom: 15px;">
+                <div style="font-size: 1.2rem; color: var(--neon-purple); margin-bottom: 10px;">
+                    <strong class="en">✅ Comprehension Win:</strong>
+                    <strong class="vn" style="display: none;">✅ Thắng Hiểu biết:</strong>
+                </div>
+                <p class="en">Someone watching explains it back: "It's the brainrot train conductor game where squads unlock legendary gear."</p>
+                <p class="vn" style="display: none;">Ai đó xem giải thích lại: "Đó là game chỉ huy tàu brainrot nơi đội mở khóa trang bị huyền thoại."</p>
+            </div>
+
+            <div style="background: rgba(245, 158, 11, 0.1); padding: 20px; border-radius: 15px;">
+                <div style="font-size: 1.2rem; color: var(--gold); margin-bottom: 10px;">
+                    <strong class="en">✅ Desire Win:</strong>
+                    <strong class="vn" style="display: none;">✅ Thắng Mong muốn:</strong>
+                </div>
+                <p class="en">Someone says: "How do I get that conductor hat?" or "That boss fight would farm on TikTok."</p>
+                <p class="vn" style="display: none;">Ai đó nói: "Làm sao lấy cái mũ chỉ huy đó?" hoặc "Trận boss đó sẽ farm trên TikTok."</p>
+            </div>
+        </div>
+
+        <!-- After Demo -->
+        <div class="section">
+            <div class="section-title">🚀 AFTER THE DEMO</div>
+            <div class="section-subtitle">
+                <span class="en">This is just Stop 1 & 2. The full 99-day journey awaits.</span>
+                <span class="vn" style="display: none;">Đây chỉ là Trạm 1 & 2. Hành trình 99 ngày đầy đủ đang chờ.</span>
+            </div>
+
+            <div class="info-box">
+                <strong class="en">📅 Week 1 After Launch:</strong>
+                <strong class="vn" style="display: none;">📅 Tuần 1 Sau Ra mắt:</strong>
+                <span class="en">Bugfixes. Mobile polish. Daily Brainrot Trials added.</span>
+                <span class="vn" style="display: none;">Sửa lỗi. Đánh bóng di động. Thêm Thử thách Brainrot Hàng ngày.</span>
+            </div>
+
+            <div class="info-box">
+                <strong class="en">📅 Week 2-4:</strong>
+                <strong class="vn" style="display: none;">📅 Tuần 2-4:</strong>
+                <span class="en">Light cosmetic trading. First event (Meme Storm). Squad streaks go live.</span>
+                <span class="vn" style="display: none;">Giao dịch cosmetic nhẹ. Sự kiện đầu tiên (Bão Meme). Chuỗi đội phát trực tiếp.</span>
+            </div>
+
+            <div class="info-box">
+                <strong class="en">📅 Month 2+:</strong>
+                <strong class="vn" style="display: none;">📅 Tháng 2+:</strong>
+                <span class="en">20 full classes. 20 weapons. 20 bosses. Train car ownership. Full 99-day campaign. IF retention looks good.</span>
+                <span class="vn" style="display: none;">20 lớp đầy đủ. 20 vũ khí. 20 boss. Sở hữu toa tàu. Chiến dịch 99 ngày đầy đủ. NẾU giữ chân tốt.</span>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p class="en">🚂 Train 6-7: To Survive a Brainrot 🚂</p>
+            <p class="vn" style="display: none;">🚂 Tàu 6-7: Sống Sót một Brainrot 🚂</p>
+            <p class="en" style="margin-top: 10px;">Demo Weekend | Become a Legendary Conductor</p>
+            <p class="vn" style="display: none; margin-top: 10px;">Cuối tuần Demo | Trở thành Chỉ huy Huyền thoại</p>
+            <p style="margin-top: 20px; font-size: 0.8rem;">
+                <span class="en">Designed with Gospel 444 aesthetics | Mobile-first | Squad-first | Meme-native</span>
+                <span class="vn" style="display: none;">Thiết kế với thẩm mỹ Gospel 444 | Di động đầu tiên | Đội đầu tiên | Meme bản địa</span>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        let currentLang = 'en';
+
+        function setLang(lang) {
+            currentLang = lang;
+            
+            // Update button states
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Show/hide content
+            document.querySelectorAll('.en').forEach(el => {
+                el.style.display = lang === 'en' ? 'block' : 'none';
+            });
+            document.querySelectorAll('.vn').forEach(el => {
+                el.style.display = lang === 'vn' ? 'block' : 'none';
+            });
+            
+            // Update inline elements (spans)
+            document.querySelectorAll('span.en').forEach(el => {
+                el.style.display = lang === 'en' ? 'inline' : 'none';
+            });
+            document.querySelectorAll('span.vn').forEach(el => {
+                el.style.display = lang === 'vn' ? 'inline' : 'none';
+            });
+            
+            createParticles(event);
+        }
+
+        function playSound() {
+            createParticles(event);
+        }
+
+        function createParticles(e) {
+            const x = e.clientX;
+            const y = e.clientY;
+            
+            for (let i = 0; i < 5; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = x + 'px';
+                particle.style.top = y + 'px';
+                particle.style.background = ['#a855f7', '#00f2ff', '#f59e0b'][Math.floor(Math.random() * 3)];
+                document.body.appendChild(particle);
+                
+                setTimeout(() => particle.remove(), 1000);
+            }
+        }
+
+        // Animate progress bar on load
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const progress = document.getElementById('demoProgress');
+                progress.style.width = '22%';
+            }, 500);
+        });
+
+        // Add click particles to whole page
+        document.addEventListener('click', createParticles);
+    </script>
+</body>
+</html>

@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NET Enterprise — Corporate English Training Platform</title>
+  <meta name="description" content="Transform your team's English communication with NET's proven corporate training platform. ROI-positive in 2 months." />
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ═══════════════════════════════════════════════════════════════
+       NET APP V2 — ENTERPRISE PLATFORM
+       © Michael Hobbs — Executor
+       Canon: Blueprint DNA V2 Ultra
+       
+       MULTI-TENANT ARCHITECTURE
+       CORPORATE DASHBOARDS
+       PROFESSIONAL FEATURES
+    ═══════════════════════════════════════════════════════════════ */
+    
+    :root {
+      --purple: #a855f7;
+      --gold: #f59e0b;
+      --dark: #0f0f1a;
+      --dark-2: #1a1a2e;
+      --dark-3: #252541;
+      --text: #e5e7eb;
+      --text-dim: rgba(148, 163, 184, 0.9);
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --glass-bg: rgba(26, 26, 38, 0.9);
+      --glass-border: rgba(168, 85, 247, 0.3);
+      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    
+    /* Dashboard Layout */
+    .dashboard {
+      display: grid;
+      grid-template-columns: 250px 1fr;
+      min-height: 100vh;
+    }
+    
+    /* Sidebar */
+    .sidebar {
+      background: var(--glass-bg);
+      border-right: 1px solid var(--glass-border);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    
+    .sidebar__logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--glass-border);
+    }
+    
+    .sidebar__orb {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--purple), transparent 70%);
+      box-shadow: 0 0 20px rgba(168, 85, 247, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+    
+    .sidebar__nav {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    
+    .nav__item {
+      padding: 0.75rem 1rem;
+      border-radius: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      cursor: pointer;
+      transition: all var(--transition);
+      border: 1px solid transparent;
+      text-decoration: none;
+      color: var(--text-dim);
+    }
+    
+    .nav__item:hover {
+      background: rgba(168, 85, 247, 0.1);
+      border-color: rgba(168, 85, 247, 0.3);
+      color: var(--text);
+    }
+    
+    .nav__item--active {
+      background: rgba(168, 85, 247, 0.2);
+      border-color: var(--purple);
+      color: var(--text);
+      box-shadow: 0 0 15px rgba(168, 85, 247, 0.3);
+    }
+    
+    .nav__icon {
+      font-size: 1.25rem;
+    }
+    
+    .sidebar__footer {
+      margin-top: auto;
+      padding-top: 1rem;
+      border-top: 1px solid var(--glass-border);
+      font-size: 0.8rem;
+      color: var(--text-dim);
+    }
+    
+    /* Main Content */
+    .main {
+      padding: 2rem;
+      overflow-y: auto;
+      max-height: 100vh;
+    }
+    
+    .main__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    
+    .main__title {
+      font-size: 2rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--purple) 0%, var(--gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .main__subtitle {
+      color: var(--text-dim);
+      font-size: 0.95rem;
+    }
+    
+    .main__actions {
+      display: flex;
+      gap: 1rem;
+    }
+    
+    /* Stats Grid */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    
+    .stat-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    
+    .stat-card__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+    
+    .stat-card__title {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .stat-card__icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+    }
+    
+    .stat-card__icon--purple {
+      background: rgba(168, 85, 247, 0.2);
+      color: var(--purple);
+    }
+    
+    .stat-card__icon--gold {
+      background: rgba(245, 158, 11, 0.2);
+      color: var(--gold);
+    }
+    
+    .stat-card__icon--success {
+      background: rgba(16, 185, 129, 0.2);
+      color: var(--success);
+    }
+    
+    .stat-card__value {
+      font-size: 2.5rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+    
+    .stat-card__change {
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+    
+    .stat-card__change--positive {
+      color: var(--success);
+    }
+    
+    .stat-card__change--negative {
+      color: var(--danger);
+    }
+    
+    /* Card */
+    .card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .card__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--glass-border);
+    }
+    
+    .card__title {
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+    
+    .card__actions {
+      display: flex;
+      gap: 0.75rem;
+    }
+    
+    /* Table */
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    .table thead {
+      border-bottom: 1px solid var(--glass-border);
+    }
+    
+    .table th {
+      padding: 1rem;
+      text-align: left;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .table td {
+      padding: 1rem;
+      border-bottom: 1px solid rgba(168, 85, 247, 0.1);
+    }
+    
+    .table tr:hover {
+      background: rgba(168, 85, 247, 0.05);
+    }
+    
+    /* Employee Row */
+    .employee {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    
+    .employee__avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--purple), transparent 70%);
+      border: 2px solid var(--purple);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+    
+    .employee__info h4 {
+      font-size: 0.95rem;
+      margin-bottom: 0.15rem;
+    }
+    
+    .employee__info p {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+    }
+    
+    /* Progress Bar */
+    .progress-bar {
+      width: 120px;
+      height: 8px;
+      background: var(--dark-3);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    
+    .progress-bar__fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--purple), var(--gold));
+      border-radius: 999px;
+      transition: width var(--transition);
+    }
+    
+    /* Badge */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+    
+    .badge--success {
+      background: rgba(16, 185, 129, 0.2);
+      color: var(--success);
+      border: 1px solid var(--success);
+    }
+    
+    .badge--warning {
+      background: rgba(245, 158, 11, 0.2);
+      color: var(--warning);
+      border: 1px solid var(--warning);
+    }
+    
+    .badge--danger {
+      background: rgba(239, 68, 68, 0.2);
+      color: var(--danger);
+      border: 1px solid var(--danger);
+    }
+    
+    /* Button */
+    .btn {
+      padding: 0.65rem 1.5rem;
+      border-radius: 0.5rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: all var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+    }
+    
+    .btn--primary {
+      background: linear-gradient(135deg, var(--purple), var(--gold));
+      color: var(--dark);
+      box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
+    }
+    
+    .btn--primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 30px rgba(168, 85, 247, 0.6);
+    }
+    
+    .btn--secondary {
+      background: var(--dark-3);
+      border: 1px solid var(--glass-border);
+      color: var(--text);
+    }
+    
+    .btn--secondary:hover {
+      background: var(--dark-2);
+      border-color: var(--purple);
+    }
+    
+    .btn--icon {
+      padding: 0.65rem;
+      aspect-ratio: 1;
+    }
+    
+    /* Chart Container */
+    .chart {
+      background: var(--dark-3);
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-dim);
+    }
+    
+    /* Grid */
+    .grid {
+      display: grid;
+      gap: 1.5rem;
+    }
+    
+    .grid--2 {
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    }
+    
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .dashboard {
+        grid-template-columns: 1fr;
+      }
+      
+      .sidebar {
+        position: fixed;
+        top: 0;
+        left: -250px;
+        height: 100vh;
+        z-index: 1000;
+        transition: left var(--transition);
+      }
+      
+      .sidebar--open {
+        left: 0;
+      }
+      
+      .stats {
+        grid-template-columns: 1fr;
+      }
+      
+      .grid--2 {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    /* View States */
+    .view {
+      display: none;
+    }
+    
+    .view--active {
+      display: block;
+      animation: fadeIn 0.3s ease-out;
+    }
+    
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar__logo">
+        <div class="sidebar__orb">NET</div>
+        <div>
+          <div style="font-weight: 700;">NET Enterprise</div>
+          <div style="font-size: 0.75rem; color: var(--text-dim);">Corporate Platform</div>
+        </div>
+      </div>
+      
+      <nav class="sidebar__nav" id="sidebarNav">
+        <!-- Navigation items generated by JS -->
+      </nav>
+      
+      <div class="sidebar__footer">
+        <div><strong>Company:</strong> TTS Engineering</div>
+        <div style="margin-top: 0.25rem;">87 Active Employees</div>
+        <div style="margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px solid var(--glass-border);">
+          <div style="font-size: 0.75rem;">Program: Professional</div>
+        </div>
+      </div>
+    </aside>
+    
+    <!-- Main Content -->
+    <main class="main">
+      <!-- Overview View -->
+      <div class="view view--active" id="view-overview">
+        <div class="main__header">
+          <div>
+            <h1 class="main__title">Company Overview</h1>
+            <p class="main__subtitle">Real-time insights into your team's English training progress</p>
+          </div>
+          <div class="main__actions">
+            <button class="btn btn--secondary btn--icon">📊</button>
+            <button class="btn btn--secondary btn--icon">⚙️</button>
+            <button class="btn btn--primary">Export Report</button>
+          </div>
+        </div>
+        
+        <!-- Stats Grid -->
+        <div class="stats">
+          <div class="stat-card">
+            <div class="stat-card__header">
+              <div>
+                <div class="stat-card__title">Attendance Rate</div>
+                <div class="stat-card__value">87%</div>
+              </div>
+              <div class="stat-card__icon stat-card__icon--success">📈</div>
+            </div>
+            <div class="stat-card__change stat-card__change--positive">
+              ↑ 5% from last month
+            </div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-card__header">
+              <div>
+                <div class="stat-card__title">Daily Practice</div>
+                <div class="stat-card__value">72%</div>
+              </div>
+              <div class="stat-card__icon stat-card__icon--purple">🎯</div>
+            </div>
+            <div class="stat-card__change stat-card__change--positive">
+              ↑ 12% from last month
+            </div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-card__header">
+              <div>
+                <div class="stat-card__title">Avg. Progress</div>
+                <div class="stat-card__value">+1.2</div>
+              </div>
+              <div class="stat-card__icon stat-card__icon--gold">⭐</div>
+            </div>
+            <div class="stat-card__change stat-card__change--positive">
+              Levels improved (6mo avg)
+            </div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-card__header">
+              <div>
+                <div class="stat-card__title">Satisfaction</div>
+                <div class="stat-card__value">4.8</div>
+              </div>
+              <div class="stat-card__icon stat-card__icon--success">😊</div>
+            </div>
+            <div class="stat-card__change stat-card__change--positive">
+              Out of 5.0 (87 responses)
+            </div>
+          </div>
+        </div>
+        
+        <!-- Charts Grid -->
+        <div class="grid grid--2">
+          <div class="card">
+            <div class="card__header">
+              <h3 class="card__title">Progress Over Time</h3>
+              <button class="btn btn--secondary btn--icon">📥</button>
+            </div>
+            <div class="chart">
+              [Progress chart visualization would go here]
+              <div style="text-align: center;">
+                <div style="font-size: 3rem; margin-bottom: 0.5rem;">📈</div>
+                <div>Interactive chart showing proficiency levels over 6 months</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="card">
+            <div class="card__header">
+              <h3 class="card__title">Engagement by Department</h3>
+              <button class="btn btn--secondary btn--icon">📥</button>
+            </div>
+            <div class="chart">
+              [Department chart visualization would go here]
+              <div style="text-align: center;">
+                <div style="font-size: 3rem; margin-bottom: 0.5rem;">📊</div>
+                <div>Engagement metrics across Engineering, Sales, Support teams</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Business Impact -->
+        <div class="card">
+          <div class="card__header">
+            <h3 class="card__title">Business Impact Highlights</h3>
+          </div>
+          <div class="grid grid--2">
+            <div style="padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 0.75rem; border: 1px solid var(--success);">
+              <div style="font-size: 2rem; font-weight: 700; color: var(--success); margin-bottom: 0.5rem;">+40%</div>
+              <div style="font-size: 0.95rem;">Improvement in international client communication quality (manager-rated)</div>
+            </div>
+            
+            <div style="padding: 1rem; background: rgba(245, 158, 11, 0.1); border-radius: 0.75rem; border: 1px solid var(--gold);">
+              <div style="font-size: 2rem; font-weight: 700; color: var(--gold); margin-bottom: 0.5rem;">3x</div>
+              <div style="font-size: 0.95rem;">Increase in successful international contract closures (Q2 vs Q1)</div>
+            </div>
+            
+            <div style="padding: 1rem; background: rgba(168, 85, 247, 0.1); border-radius: 0.75rem; border: 1px solid var(--purple);">
+              <div style="font-size: 2rem; font-weight: 700; color: var(--purple); margin-bottom: 0.5rem;">-65%</div>
+              <div style="font-size: 0.95rem;">Reduction in project delays caused by communication issues</div>
+            </div>
+            
+            <div style="padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 0.75rem; border: 1px solid var(--success);">
+              <div style="font-size: 2rem; font-weight: 700; color: var(--success); margin-bottom: 0.5rem;">ROI: 240%</div>
+              <div style="font-size: 0.95rem;">Return on training investment after 6 months (calculated business value)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Employees View -->
+      <div class="view" id="view-employees">
+        <div class="main__header">
+          <div>
+            <h1 class="main__title">Employee Progress</h1>
+            <p class="main__subtitle">Individual tracking and intervention alerts</p>
+          </div>
+          <div class="main__actions">
+            <button class="btn btn--secondary">Filter by Department</button>
+            <button class="btn btn--primary">Add Employee</button>
+          </div>
+        </div>
+        
+        <div class="card">
+          <div class="card__header">
+            <h3 class="card__title">Active Employees (87)</h3>
+            <div class="card__actions">
+              <button class="btn btn--secondary">Export CSV</button>
+            </div>
+          </div>
+          
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Employee</th>
+                <th>Department</th>
+                <th>Level</th>
+                <th>Attendance</th>
+                <th>Progress</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="employeeTable">
+              <!-- Employee rows generated by JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+      <!-- Reports View -->
+      <div class="view" id="view-reports">
+        <div class="main__header">
+          <div>
+            <h1 class="main__title">Reports & Analytics</h1>
+            <p class="main__subtitle">Comprehensive insights and export options</p>
+          </div>
+        </div>
+        
+        <div class="grid grid--2">
+          <div class="card">
+            <h3 class="card__title" style="margin-bottom: 1rem;">Available Reports</h3>
+            <div style="display: flex; flex-direction: column; gap: 1rem;">
+              <div style="padding: 1rem; background: var(--dark-3); border-radius: 0.75rem; display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                  <div style="font-weight: 600; margin-bottom: 0.25rem;">Monthly Progress Report</div>
+                  <div style="font-size: 0.85rem; color: var(--text-dim);">Detailed progress for all employees</div>
+                </div>
+                <button class="btn btn--primary btn--icon">📥</button>
+              </div>
+              
+              <div style="padding: 1rem; background: var(--dark-3); border-radius: 0.75rem; display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                  <div style="font-weight: 600; margin-bottom: 0.25rem;">ROI Analysis</div>
+                  <div style="font-size: 0.85rem; color: var(--text-dim);">Business impact and ROI calculation</div>
+                </div>
+                <button class="btn btn--primary btn--icon">📥</button>
+              </div>
+              
+              <div style="padding: 1rem; background: var(--dark-3); border-radius: 0.75rem; display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                  <div style="font-weight: 600; margin-bottom: 0.25rem;">Attendance Report</div>
+                  <div style="font-size: 0.85rem; color: var(--text-dim);">Detailed attendance by employee</div>
+                </div>
+                <button class="btn btn--primary btn--icon">📥</button>
+              </div>
+              
+              <div style="padding: 1rem; background: var(--dark-3); border-radius: 0.75rem; display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                  <div style="font-weight: 600; margin-bottom: 0.25rem;">Executive Summary</div>
+                  <div style="font-size: 0.85rem; color: var(--text-dim);">High-level overview for leadership</div>
+                </div>
+                <button class="btn btn--primary btn--icon">📥</button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="card">
+            <h3 class="card__title" style="margin-bottom: 1rem;">Schedule Reports</h3>
+            <div style="padding: 1.5rem; background: var(--dark-3); border-radius: 0.75rem; text-align: center;">
+              <div style="font-size: 3rem; margin-bottom: 1rem;">📧</div>
+              <div style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">Automated Reporting</div>
+              <div style="font-size: 0.9rem; color: var(--text-dim); margin-bottom: 1.5rem;">Set up automatic email delivery of reports to stakeholders</div>
+              <button class="btn btn--primary">Configure Email Reports</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Settings View -->
+      <div class="view" id="view-settings">
+        <div class="main__header">
+          <div>
+            <h1 class="main__title">Company Settings</h1>
+            <p class="main__subtitle">Manage your program configuration</p>
+          </div>
+        </div>
+        
+        <div class="card">
+          <h3 class="card__title" style="margin-bottom: 1.5rem;">Program Configuration</h3>
+          <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+            <div>
+              <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Company Name</label>
+              <input type="text" value="TTS Engineering" style="width: 100%; padding: 0.75rem; background: var(--dark-3); border: 1px solid var(--glass-border); border-radius: 0.5rem; color: var(--text); font-family: inherit;">
+            </div>
+            
+            <div>
+              <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Training Focus</label>
+              <select style="width: 100%; padding: 0.75rem; background: var(--dark-3); border: 1px solid var(--glass-border); border-radius: 0.5rem; color: var(--text); font-family: inherit;">
+                <option>Technology & Software</option>
+                <option>Export/Import Business</option>
+                <option>Customer Service/BPO</option>
+                <option>General Business English</option>
+              </select>
+            </div>
+            
+            <div>
+              <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Class Schedule</label>
+              <div style="display: flex; gap: 1rem;">
+                <input type="text" value="Tuesday 7:00 PM" style="flex: 1; padding: 0.75rem; background: var(--dark-3); border: 1px solid var(--glass-border); border-radius: 0.5rem; color: var(--text); font-family: inherit;">
+                <input type="text" value="Thursday 7:00 PM" style="flex: 1; padding: 0.75rem; background: var(--dark-3); border: 1px solid var(--glass-border); border-radius: 0.5rem; color: var(--text); font-family: inherit;">
+              </div>
+            </div>
+            
+            <div style="padding-top: 1rem; border-top: 1px solid var(--glass-border);">
+              <button class="btn btn--primary">Save Changes</button>
+              <button class="btn btn--secondary" style="margin-left: 1rem;">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+  
+  <script>
+    // ═══════════════════════════════════════════════════════════════
+    // NET APP V2 — ENTERPRISE PLATFORM JAVASCRIPT
+    // © Michael Hobbs — Executor
+    // ═══════════════════════════════════════════════════════════════
+    
+    'use strict';
+    
+    // Navigation Configuration
+    const navItems = [
+      { id: 'overview', icon: '📊', label: 'Overview', view: 'view-overview' },
+      { id: 'employees', icon: '👥', label: 'Employees', view: 'view-employees' },
+      { id: 'reports', icon: '📈', label: 'Reports', view: 'view-reports' },
+      { id: 'settings', icon: '⚙️', label: 'Settings', view: 'view-settings' },
+    ];
+    
+    // Sample Employee Data
+    const employees = [
+      { id: 1, name: 'Nguyen Van A', dept: 'Engineering', level: 'B2', attendance: 92, progress: 85, status: 'excellent' },
+      { id: 2, name: 'Tran Thi B', dept: 'Sales', level: 'B1', attendance: 78, progress: 72, status: 'good' },
+      { id: 3, name: 'Le Van C', dept: 'Support', level: 'B1+', attendance: 65, progress: 58, status: 'needs-attention' },
+      { id: 4, name: 'Pham Thi D', dept: 'Engineering', level: 'B2+', attendance: 88, progress: 81, status: 'good' },
+      { id: 5, name: 'Hoang Van E', dept: 'Sales', level: 'B1', attendance: 95, progress: 89, status: 'excellent' },
+    ];
+    
+    // Render Navigation
+    function renderNav() {
+      const nav = document.getElementById('sidebarNav');
+      nav.innerHTML = '';
+      
+      navItems.forEach(item => {
+        const btn = document.createElement('a');
+        btn.href = '#';
+        btn.className = 'nav__item';
+        if (item.id === 'overview') btn.classList.add('nav__item--active');
+        btn.innerHTML = `
+          <span class="nav__icon">${item.icon}</span>
+          <span>${item.label}</span>
+        `;
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          switchView(item.view);
+          updateActiveNav(btn);
+        });
+        nav.appendChild(btn);
+      });
+    }
+    
+    // Switch View
+    function switchView(viewId) {
+      document.querySelectorAll('.view').forEach(view => {
+        view.classList.remove('view--active');
+      });
+      document.getElementById(viewId).classList.add('view--active');
+    }
+    
+    // Update Active Navigation
+    function updateActiveNav(activeBtn) {
+      document.querySelectorAll('.nav__item').forEach(item => {
+        item.classList.remove('nav__item--active');
+      });
+      activeBtn.classList.add('nav__item--active');
+    }
+    
+    // Render Employee Table
+    function renderEmployees() {
+      const tbody = document.getElementById('employeeTable');
+      tbody.innerHTML = '';
+      
+      employees.forEach(emp => {
+        const statusBadge = emp.status === 'excellent' ? 'badge--success' :
+                           emp.status === 'good' ? 'badge--warning' : 'badge--danger';
+        const statusLabel = emp.status === 'excellent' ? '✓ Excellent' :
+                           emp.status === 'good' ? '○ Good' : '⚠ Needs Attention';
+        
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>
+            <div class="employee">
+              <div class="employee__avatar">${emp.name.charAt(0)}</div>
+              <div class="employee__info">
+                <h4>${emp.name}</h4>
+                <p>ID: ${emp.id.toString().padStart(4, '0')}</p>
+              </div>
+            </div>
+          </td>
+          <td>${emp.dept}</td>
+          <td><strong>${emp.level}</strong></td>
+          <td>${emp.attendance}%</td>
+          <td>
+            <div class="progress-bar">
+              <div class="progress-bar__fill" style="width: ${emp.progress}%"></div>
+            </div>
+            <div style="font-size: 0.8rem; margin-top: 0.25rem;">${emp.progress}%</div>
+          </td>
+          <td>
+            <span class="badge ${statusBadge}">${statusLabel}</span>
+          </td>
+          <td>
+            <button class="btn btn--secondary btn--icon">👁️</button>
+          </td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+    
+    // Initialize
+    renderNav();
+    renderEmployees();
+    
+    console.log('[NET V2 Enterprise] Platform initialized');
+  </script>
+</body>
+</html>

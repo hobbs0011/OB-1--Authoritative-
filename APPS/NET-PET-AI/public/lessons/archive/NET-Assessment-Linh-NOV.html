@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NET Dashboard: Linh (Final)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ═══════════════════════════════════════════════════════════════
+           GOSPEL 444: THE ULTIMATE DASHBOARD
+           FEATURES: FEATURE-RICH | E1 LANGUAGE | HIGH IMPACT
+        ═══════════════════════════════════════════════════════════════ */
+        :root {
+            --purple: #a855f7;
+            --gold: #f59e0b;
+            --dark: #0f0f1a;
+            --glass: rgba(20, 20, 30, 0.95);
+            --border: rgba(168, 85, 247, 0.3);
+            --text: #ffffff;
+            --text-dim: rgba(255, 255, 255, 0.7);
+            --radius: 24px;
+            --danger: #ef4444;
+            --warning: #f97316;
+            --success: #10b981;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--dark);
+            background-image: 
+                radial-gradient(circle at 0% 0%, rgba(168, 85, 247, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 100% 100%, rgba(245, 158, 11, 0.1) 0%, transparent 50%);
+            background-attachment: fixed;
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .dashboard-container {
+            width: 100%;
+            max-width: 1000px;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            backdrop-filter: blur(12px);
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- HEADER --- */
+        header {
+            padding: 35px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            background: linear-gradient(180deg, rgba(168, 85, 247, 0.15), transparent);
+        }
+        
+        h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            margin-bottom: 5px;
+            background: linear-gradient(135deg, #fff, var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .tag {
+            font-family: 'JetBrains Mono';
+            font-size: 0.8rem;
+            color: var(--gold);
+            border: 1px solid var(--gold);
+            padding: 6px 12px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+        }
+
+        /* --- TABS NAVIGATION --- */
+        .tabs {
+            display: flex;
+            overflow-x: auto;
+            background: rgba(0,0,0,0.3);
+            padding: 15px;
+            gap: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .tab-btn {
+            background: transparent;
+            border: 1px solid transparent;
+            color: var(--text-dim);
+            padding: 12px 25px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 700;
+            font-family: 'Inter';
+            font-size: 1rem;
+            white-space: nowrap;
+            transition: 0.3s;
+        }
+        
+        .tab-btn:hover { color: #fff; background: rgba(255,255,255,0.05); }
+        
+        .tab-btn.active {
+            background: var(--purple);
+            color: #fff;
+            box-shadow: 0 0 25px rgba(168, 85, 247, 0.5);
+            border-color: rgba(255,255,255,0.2);
+        }
+
+        /* --- CONTENT AREA --- */
+        .content-area { padding: 40px; min-height: 500px; }
+        .tab-content { display: none; animation: slideUp 0.4s ease; }
+        .tab-content.active { display: block; }
+
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* --- TYPOGRAPHY INSIDE TABS --- */
+        h2 { font-size: 2.2rem; color: #fff; margin-bottom: 5px; font-weight: 900; }
+        h3 { font-size: 1.4rem; color: var(--gold); margin-top: 35px; margin-bottom: 15px; font-weight: 700; display: flex; align-items: center; gap: 10px; }
+        
+        .vi {
+            display: block;
+            color: var(--text-dim);
+            font-style: italic;
+            font-size: 0.95rem;
+            border-left: 3px solid var(--gold);
+            padding-left: 15px;
+            margin-top: 8px;
+            margin-bottom: 25px;
+        }
+
+        /* --- COMPONENTS --- */
+        .box {
+            background: rgba(255,255,255,0.03);
+            padding: 30px;
+            border-radius: 16px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .alert-box {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid var(--danger);
+            padding: 25px;
+            border-radius: 16px;
+            margin-bottom: 30px;
+        }
+
+        .solution-card {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(20, 20, 30, 0.5));
+            border: 1px solid var(--purple);
+            padding: 25px;
+            border-radius: 16px;
+            margin-bottom: 20px;
+            transition: transform 0.2s;
+        }
+        .solution-card:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(168, 85, 247, 0.2); }
+
+        .feature-icon { font-size: 2rem; display: block; margin-bottom: 10px; }
+
+        /* --- METRICS --- */
+        .score-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px; }
+        .score-card { text-align: center; background: rgba(0,0,0,0.3); padding: 25px; border-radius: 16px; }
+        
+        .big-num { font-size: 4rem; font-weight: 900; line-height: 1; margin-bottom: 5px; }
+        .text-red { color: var(--danger); }
+        .text-gold { color: var(--gold); }
+
+        /* --- PRICING & OFFER --- */
+        .total-price { font-size: 3.5rem; font-weight: 900; color: var(--gold); text-shadow: 0 0 30px rgba(245, 158, 11, 0.4); margin: 20px 0; }
+        
+        .cta-btn {
+            display: block; width: 100%; text-align: center;
+            background: linear-gradient(90deg, var(--gold), #fbbf24);
+            color: #000;
+            padding: 22px; border-radius: 12px;
+            font-weight: 900; text-decoration: none; margin-top: 40px;
+            font-size: 1.3rem; letter-spacing: 1px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-transform: uppercase;
+        }
+        .cta-btn:hover { transform: translateY(-3px); box-shadow: 0 15px 50px rgba(245, 158, 11, 0.5); }
+
+    </style>
+</head>
+<body>
+
+<div class="dashboard-container">
+    
+    <header>
+        <span class="tag">OFFICIAL DIAGNOSTIC REPORT</span>
+        <h1>LINH'S PROFILE</h1>
+        <div style="color: var(--text-dim); font-style: italic; margin-top: 10px;">
+            Status: E1 (Beginner) | Archetype: The Sleeping Tiger
+        </div>
+    </header>
+
+    <div class="tabs">
+        <button class="tab-btn active" onclick="openTab('summary')">🏠 Overview</button>
+        <button class="tab-btn" onclick="openTab('listening')">👂 Listening</button>
+        <button class="tab-btn" onclick="openTab('speaking')">🗣️ Speaking</button>
+        <button class="tab-btn" onclick="openTab('readwrite')">📖 Read/Write</button>
+        <button class="tab-btn" onclick="openTab('mindset')">🧠 Mindset</button>
+        <button class="tab-btn" onclick="openTab('plan')">💎 The Plan</button>
+    </div>
+
+    <div class="content-area">
+        
+        <div id="summary" class="tab-content active">
+            <h2>Executive Summary</h2>
+            <span class="vi">Tóm tắt tình trạng</span>
+            
+            <div class="box">
+                <p style="font-size: 1.2rem; margin-bottom: 15px; font-weight: 600;">
+                    The Problem: "Smart Mind, Empty Hands"
+                </p>
+                <p style="margin-bottom: 10px;">
+                    You are an intelligent adult with life experience. But in English, you are currently limited by <strong>basic tools</strong>. You try to translate Vietnamese to English, but it creates broken sentences.
+                </p>
+                <span class="vi">Vấn đề: "Tư duy tốt, Tay trắng". Bạn là người trưởng thành thông minh. Nhưng trong tiếng Anh, công cụ của bạn vẫn còn ở mức cơ bản. Bạn cố dịch từ tiếng Việt sang tiếng Anh, nhưng nó tạo ra những câu gãy gọn.</span>
+            </div>
+
+            <div class="score-grid">
+                <div class="score-card">
+                    <div class="big-num text-red">15%</div>
+                    <div style="font-weight: 700;">Current Ability</div>
+                    <span class="vi" style="border:none; margin:0; font-size:0.8rem;">Khả năng hiện tại</span>
+                </div>
+                <div class="score-card">
+                    <div class="big-num text-gold">90%</div>
+                    <div style="font-weight: 700;">Growth Potential</div>
+                    <span class="vi" style="border:none; margin:0; font-size:0.8rem;">Tiềm năng phát triển</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="listening" class="tab-content">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <h2>Listening Audit</h2>
+                <div class="big-num text-red">2/10</div>
+            </div>
+            <span class="vi">Đánh giá kỹ năng Nghe</span>
+            
+            <div class="alert-box">
+                <strong>The Problem: "The Sound Gap"</strong>
+                <p style="margin-top: 5px;">
+                    English has ending sounds (s, t, k). Vietnamese does not. Your ears are literally "deleting" these sounds because they seem like noise. You only hear keywords.
+                </p>
+                <span class="vi" style="border-color: var(--danger);">Tai bạn đang "xóa" các âm cuối (s, t, k) vì tiếng Việt không có chúng. Bạn chỉ nghe được từ khóa.</span>
+            </div>
+
+            <h3>The NET Solution</h3>
+            
+            <div class="solution-card">
+                <span class="feature-icon">🏠</span>
+                <strong>Customized Home Study Program</strong>
+                <p style="margin-top: 5px; font-size: 0.9rem; color: var(--text-dim);">
+                    You cannot fix this in class alone. We provide a specific <strong>45-minute daily playlist</strong>. No textbooks. Real audio to retrain your ears to hear the "invisible sounds."
+                </p>
+                <span class="vi" style="border:none; padding:0; margin-top:5px;">Chương trình tự học tại nhà: 45 phút mỗi ngày để luyện tai nghe những "âm thanh vô hình".</span>
+            </div>
+        </div>
+
+        <div id="speaking" class="tab-content">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <h2>Speaking Audit</h2>
+                <div class="big-num text-red">1/10</div>
+            </div>
+            <span class="vi">Đánh giá kỹ năng Nói</span>
+
+            <div class="alert-box">
+                <strong>The Problem: "No Muscle Memory"</strong>
+                <p style="margin-top: 5px;">
+                    You speak in single words. You hesitate. Your mouth muscles are not trained to move in English patterns.
+                </p>
+                <span class="vi" style="border-color: var(--danger);">Bạn nói từ đơn lẻ. Ngập ngừng. Cơ miệng chưa quen với chuyển động của tiếng Anh.</span>
+            </div>
+
+            <h3>The NET Solution</h3>
+
+            <div class="solution-card">
+                <span class="feature-icon">🤖</span>
+                <strong>NET-PET-AI (Your Pocket Coach)</strong>
+                <p style="margin-top: 5px; font-size: 0.9rem; color: var(--text-dim);">
+                    You need to practice 24/7, not just in class. Our AI system listens to you and corrects your pronunciation instantly. It is a safe space to fail.
+                </p>
+                <span class="vi" style="border:none; padding:0; margin-top:5px;">Trợ lý ảo NET-PET: Luyện tập 24/7. AI sửa lỗi phát âm ngay lập tức. Không sợ sai.</span>
+            </div>
+
+            <div class="solution-card">
+                <span class="feature-icon">🤝</span>
+                <strong>The Buddy System</strong>
+                <p style="margin-top: 5px; font-size: 0.9rem; color: var(--text-dim);">
+                    We pair you with a partner at your level. You practice weekly together. No teachers. No pressure. Just building confidence.
+                </p>
+                <span class="vi" style="border:none; padding:0; margin-top:5px;">Hệ thống Bạn Học: Luyện tập hàng tuần với bạn cùng trình độ. Không áp lực.</span>
+            </div>
+        </div>
+
+        <div id="readwrite" class="tab-content">
+            <h2>Literacy Audit</h2>
+            <span class="vi">Đánh giá Đọc & Viết</span>
+
+            <div class="score-grid">
+                <div class="score-card">
+                    <div class="big-num text-gold">3/10</div>
+                    <strong>Reading</strong>
+                </div>
+                <div class="score-card">
+                    <div class="big-num text-gold">2/10</div>
+                    <strong>Writing</strong>
+                </div>
+            </div>
+
+            <div class="box">
+                <p><strong>The Problem:</strong> You rely on Google Translate. You write English words using Vietnamese grammar order (Example: "I very like it").</p>
+                <span class="vi">Vấn đề: Phụ thuộc Google Dịch. Viết từ tiếng Anh theo trật tự tiếng Việt.</span>
+            </div>
+
+            <h3>The NET Solution</h3>
+            <div class="solution-card">
+                <span class="feature-icon">🧩</span>
+                <strong>Pattern Recognition Drills</strong>
+                <p style="margin-top: 5px; font-size: 0.9rem; color: var(--text-dim);">
+                    We stop teaching individual words. We teach "Chunks." You learn whole phrases at once so you never have to think about grammar rules.
+                </p>
+                <span class="vi" style="border:none; padding:0; margin-top:5px;">Học theo "Cụm từ". Bạn học cả câu một lúc để không phải nghĩ về ngữ pháp.</span>
+            </div>
+        </div>
+
+        <div id="mindset" class="tab-content">
+            <h2>Psychology Profile</h2>
+            <span class="vi">Hồ sơ Tâm lý học</span>
+            
+            <div class="alert-box">
+                <strong>Confidence Level: LOW</strong>
+                <p>You are paralyzed by "Perfectionism." You think you must speak perfectly, or not speak at all. This fear keeps you silent.</p>
+                <span class="vi" style="border-color: var(--danger);">Tự tin Thấp. Bạn bị tê liệt bởi sự hoàn hảo. Sợ sai nên không dám nói.</span>
+            </div>
+
+            <h3>How We Fix Fear</h3>
+
+            <div class="solution-card">
+                <span class="feature-icon">🌍</span>
+                <strong>The NET Community</strong>
+                <p style="margin-top: 5px; font-size: 0.9rem; color: var(--text-dim);">
+                    You are not alone. You join a family of learners who support each other. We celebrate mistakes because mistakes mean you are trying.
+                </p>
+                <span class="vi" style="border:none; padding:0; margin-top:5px;">Cộng đồng NET: Bạn không đơn độc. Chúng tôi ăn mừng lỗi sai vì sai nghĩa là đang cố gắng.</span>
+            </div>
+
+            <div class="solution-card">
+                <span class="feature-icon">🍽️</span>
+                <strong>Monthly Networking Dinners</strong>
+                <p style="margin-top: 5px; font-size: 0.9rem; color: var(--text-dim);">
+                    We take English out of the classroom. Once a month, we meet for dinner. Real life. Real food. Real conversation. This builds "Social Confidence."
+                </p>
+                <span class="vi" style="border:none; padding:0; margin-top:5px;">Tiệc Tối Kết Nối: Mang tiếng Anh ra đời thực. Xây dựng sự tự tin xã hội.</span>
+            </div>
+        </div>
+
+        <div id="plan" class="tab-content">
+            <div style="text-align: center; margin-bottom: 30px;">
+                <h2 style="color: var(--gold);">The 90-Day Protocol</h2>
+                <span class="vi" style="border:none; padding:0; margin:0;">Lộ trình 90 ngày: Năng lượng nhóm + Tập trung cá nhân</span>
+            </div>
+
+            <div class="box" style="border: 1px solid var(--purple);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <strong style="font-size: 1.2rem; color: #fff;">1. Group Immersion (BlueTech)</strong>
+                    <span style="font-family: 'JetBrains Mono'; color: var(--purple); font-weight: 700; font-size: 1.2rem;">750,000 ₫</span>
+                </div>
+                <div style="color: var(--text-dim);">
+                    • <strong>Tuesday 18:00</strong> (In-Person Energy)<br>
+                    • <strong>Saturday 14:30</strong> (Online Convenience)
+                </div>
+            </div>
+
+            <div class="box" style="border: 1px solid var(--gold);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <strong style="font-size: 1.2rem; color: #fff;">2. Private Mentoring</strong>
+                    <span style="font-family: 'JetBrains Mono'; color: var(--purple); font-weight: 700; font-size: 1.2rem;">600,000 ₫</span>
+                </div>
+                <div style="color: var(--text-dim);">
+                    • <strong>1 Hour / Week</strong> (Flexible Schedule)<br>
+                    • Fix pronunciation & grammar gaps specifically for you.
+                </div>
+            </div>
+
+            <div class="solution-card" style="text-align: center;">
+                <strong style="color: var(--purple);">📊 GUARANTEED PROGRESS</strong>
+                <p style="margin-top: 5px; font-size: 0.9rem;">
+                    We track everything. You receive <strong>Monthly & Quarterly Reports</strong> showing exactly how much you have improved. No guessing.
+                </p>
+                <span class="vi" style="border:none; padding:0;">Báo cáo Hàng tháng & Quý. Theo dõi tiến bộ rõ ràng. Không đoán mò.</span>
+            </div>
+
+            <div style="text-align: center; margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px;">
+                <div style="font-size: 1rem; text-transform: uppercase; letter-spacing: 2px; color: var(--text-dim);">Total Weekly Investment</div>
+                <div class="total-price">1,350,000 ₫</div>
+                <span class="vi" style="border:none; margin:0;">(Cam kết hoàn tiền nếu không hiệu quả)</span>
+                
+                <a href="https://zalo.me" class="cta-btn">ACCEPT PLAN & START</a>
+                <p style="font-size: 0.8rem; color: var(--text-dim); margin-top: 20px;">*Includes Full Ecosystem: NET PET AI, Dinners, Buddy System, Reports</p>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    function openTab(tabName) {
+        var contents = document.getElementsByClassName("tab-content");
+        for (var i = 0; i < contents.length; i++) {
+            contents[i].classList.remove("active");
+        }
+        
+        var btns = document.getElementsByClassName("tab-btn");
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].classList.remove("active");
+        }
+
+        document.getElementById(tabName).classList.add("active");
+        event.currentTarget.classList.add("active");
+    }
+</script>
+
+</body>
+</html>

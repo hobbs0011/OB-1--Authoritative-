@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>NET PET AI Coach — Phoenix Fusion v2.0</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0f0f1a" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --neon-purple: #a855f7;
+      --gold: #f59e0b;
+      --deep-dark: #0f0f1a;
+      --glass-bg: rgba(15,15,26,0.9);
+      --glass-border: rgba(168,85,247,0.45);
+      --text-main: #f9fafb;
+      --text-dim: #c7c7e5;
+      --danger: #ef4444;
+      --success: #22c55e;
+      --radius: 28px;
+      --blur: 18px;
+      --shadow-glass: 0 24px 60px rgba(0,0,0,0.9);
+      --transition: 0.16s cubic-bezier(.8,.23,.29,.87);
+    }
+    * { box-sizing:border-box; margin:0; padding:0; }
+
+    body {
+      min-height:100vh;
+      font-family:'Inter',sans-serif;
+      background:
+        radial-gradient(circle at 8% 15%, #a855f733 0%, transparent 55%),
+        radial-gradient(circle at 92% 90%, #f59e0b33 0%, transparent 60%),
+        var(--deep-dark);
+      color:var(--text-main);
+      display:flex;
+      align-items:stretch;
+      justify-content:center;
+      padding:16px 10px;
+      overflow-x:hidden;
+      position:relative;
+    }
+    body::after {
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      background:
+        radial-gradient(circle at 10% 100%, #a855f744 0%, transparent 55%),
+        radial-gradient(circle at 90% 0%, #f59e0b3a 0%, transparent 60%);
+      mix-blend-mode:screen;
+      opacity:0.6;
+      filter:blur(80px);
+    }
+
+    .app-shell {
+      z-index:1;
+      width:100%;
+      max-width:540px;
+      min-height:90vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .app-inner {
+      width:100%;
+      background:var(--glass-bg);
+      border-radius:36px;
+      border:1.5px solid var(--glass-border);
+      box-shadow:var(--shadow-glass);
+      backdrop-filter:blur(var(--blur));
+      -webkit-backdrop-filter:blur(var(--blur));
+      display:flex;
+      flex-direction:column;
+      max-height:840px;
+      overflow:hidden;
+    }
+    header, .section { padding:18px 20px 12px; }
+
+    header {
+      display:flex;
+      align-items:flex-start;
+      gap:10px;
+      border-bottom:1px solid rgba(255,255,255,0.06);
+    }
+    .brand {
+      font-family:'JetBrains Mono',monospace;
+      font-size:0.8rem;
+      text-transform:uppercase;
+      letter-spacing:0.16em;
+      color:var(--gold);
+      margin-bottom:4px;
+    }
+    .tagline {
+      font-size:0.82rem;
+      color:var(--text-dim);
+      max-width:220px;
+    }
+    .streak-chip {
+      margin-left:auto;
+      display:flex;
+      align-items:center;
+      gap:6px;
+      padding:4px 14px;
+      border-radius:999px;
+      background:radial-gradient(circle,var(--gold) 30%,rgba(0,0,0,0.8) 100%);
+      color:#0b0213;
+      font-size:0.82rem;
+      font-weight:600;
+      box-shadow:0 0 0 1px rgba(249,250,251,0.15), 0 0 16px #f59e0b88 inset;
+    }
+    .streak-dot { width:10px; height:10px; border-radius:999px; background:var(--gold); }
+
+    .section-label {
+      text-transform:uppercase;
+      font-size:0.7rem;
+      color:var(--text-dim);
+      letter-spacing:0.14em;
+      margin-bottom:6px;
+    }
+
+    .hero-card {
+      padding:18px 20px 22px;
+      background:
+        linear-gradient(110deg,#a855f71a,#f59e0b16 65%,transparent 100%),
+        rgba(7,7,14,0.9);
+      margin:10px 16px 4px;
+      border-radius:var(--radius);
+      box-shadow:0 14px 45px rgba(0,0,0,0.7);
+    }
+    .hero-title {
+      font-size:1.5rem;
+      font-weight:800;
+      line-height:1.2;
+    }
+    .hero-accent { color:var(--gold); }
+    .hero-sub {
+      font-size:0.9rem;
+      color:var(--text-dim);
+      margin-top:6px;
+    }
+    .hero-cta-row {
+      margin-top:12px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .btn-pill {
+      appearance:none;
+      border:none;
+      cursor:pointer;
+      font-family:inherit;
+      font-weight:600;
+      font-size:0.9rem;
+      border-radius:999px;
+      padding:10px 20px;
+      background:linear-gradient(90deg,#a855f7,#f59e0b);
+      color:#0c0214;
+      box-shadow:0 8px 22px rgba(168,85,247,0.65);
+      position:relative;
+      overflow:hidden;
+      transform:translateY(0);
+      transition:transform var(--transition), box-shadow var(--transition), opacity var(--transition);
+      white-space:nowrap;
+    }
+    .btn-pill.secondary {
+      background:rgba(249,250,251,0.08);
+      color:var(--text-main);
+      box-shadow:none;
+      border:1px solid rgba(255,255,255,0.14);
+    }
+    .btn-pill:active { transform:translateY(1px) scale(0.98); box-shadow:none; }
+
+    /* Pulse + avatar + mode toggle */
+    .pulse-row {
+      display:flex;
+      padding:10px 16px 6px;
+      gap:12px;
+    }
+    .avatar-block {
+      flex-shrink:0;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:6px;
+    }
+    .avatar-toggle-label {
+      font-size:0.7rem;
+      color:var(--text-dim);
+      text-transform:uppercase;
+      letter-spacing:0.14em;
+    }
+    .avatar-ring {
+      width:84px; height:84px;
+      border-radius:999px;
+      border:3.5px solid rgba(168,85,247,0.7);
+      box-shadow:0 0 18px rgba(168,85,247,0.7);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+      animation:spin 18s linear infinite;
+      cursor:pointer;
+    }
+    .avatar-core {
+      width:54px; height:54px;
+      border-radius:999px;
+      background:radial-gradient(circle,#a855f7 55%,#1a072a);
+      box-shadow:0 0 30px #a855f7;
+      transition:all var(--transition);
+    }
+    .avatar-core.pet {
+      background:radial-gradient(circle,#a855f7 55%,#1f102f);
+    }
+    .avatar-core.prime {
+      background:radial-gradient(circle,#f59e0b 25%,#7e22ce 75%);
+      box-shadow:0 0 30px #f59e0b;
+    }
+    .avatar-core.ultra {
+      background:conic-gradient(from 180deg,#a855f7,#f59e0b,#a855f7);
+      box-shadow:0 0 42px #fbbf24;
+    }
+    .mode-chip {
+      font-size:0.78rem;
+      padding:3px 10px;
+      border-radius:999px;
+      background:rgba(0,0,0,0.7);
+      border:1px solid rgba(255,255,255,0.18);
+      color:var(--text-dim);
+    }
+
+    @keyframes spin {
+      100% { transform:rotate(360deg); }
+    }
+
+    .pulse-meta {
+      flex:1;
+      display:flex;
+      flex-direction:column;
+      gap:4px;
+      justify-content:center;
+    }
+    .chip {
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:2px 10px;
+      border-radius:999px;
+      font-size:0.78rem;
+      background:#20132f;
+      color:var(--text-dim);
+    }
+
+    .tracker-card {
+      padding:8px 16px 14px;
+    }
+    .tracker-label {
+      display:flex;
+      justify-content:space-between;
+      font-size:0.8rem;
+      color:var(--text-dim);
+      margin-bottom:4px;
+    }
+    .progress-shell {
+      width:100%;
+      height:9px;
+      border-radius:999px;
+      background:rgba(255,255,255,0.07);
+      overflow:hidden;
+      margin-bottom:6px;
+    }
+    .progress-fill {
+      height:100%;
+      border-radius:999px;
+      width:0;
+      transition:width 0.3s ease;
+    }
+    .bar-listen {
+      background:linear-gradient(90deg,#a855f7,#e9d5ff);
+    }
+    .bar-speak {
+      background:linear-gradient(90deg,#f59e0b,#fef3c7);
+    }
+
+    .daily-buttons {
+      display:flex;
+      gap:10px;
+      margin-top:8px;
+      flex-wrap:wrap;
+    }
+    .mini-btn {
+      flex:1;
+      border:none;
+      border-radius:999px;
+      padding:8px 10px;
+      font-size:0.78rem;
+      font-weight:600;
+      cursor:pointer;
+      background:#a855f7;
+      color:#fff;
+      box-shadow:0 6px 18px rgba(168,85,247,0.6);
+      transition:var(--transition);
+    }
+    .mini-btn.speak {
+      background:var(--gold);
+      color:#150506;
+      box-shadow:0 6px 18px rgba(245,158,11,0.6);
+    }
+    .mini-btn:active { transform:scale(0.97); box-shadow:none; }
+
+    /* Momentum / XP */
+    .momentum-row {
+      display:flex;
+      padding:0 16px 12px;
+      gap:10px;
+    }
+    .momentum-meter {
+      width:20px;
+      border-radius:999px;
+      background:rgba(255,255,255,0.04);
+      padding:3px;
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-end;
+      align-items:stretch;
+      position:relative;
+      overflow:hidden;
+    }
+    .momentum-fill {
+      width:100%;
+      border-radius:999px;
+      background:linear-gradient(180deg,#f59e0b,#a855f7);
+      height:0;
+      transition:height 0.3s ease;
+      box-shadow:0 0 20px #a855f7aa;
+    }
+    .momentum-level-label {
+      font-size:0.7rem;
+      color:var(--text-dim);
+      text-transform:uppercase;
+    }
+    .xp-card {
+      flex:1;
+      border-radius:var(--radius);
+      background:rgba(0,0,0,0.75);
+      padding:10px 12px;
+    }
+    .xp-row {
+      display:flex;
+      justify-content:space-between;
+      font-size:0.76rem;
+      color:var(--text-dim);
+      margin-bottom:2px;
+    }
+
+    #aiLines {
+      padding:4px 20px 8px;
+      font-size:0.9rem;
+      font-style:italic;
+      color:var(--text-dim);
+      min-height:46px;
+    }
+
+    /* Capabilities & FAQ pills */
+    #capabilities, #faq {
+      padding:4px 18px 10px;
+    }
+    .pill-block {
+      display:grid;
+      gap:8px;
+    }
+    .pill {
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:0.78rem;
+      background:#a855f722;
+      color:var(--text-main);
+    }
+
+    footer {
+      padding:6px 18px 14px;
+      font-size:0.72rem;
+      color:var(--text-dim);
+      text-align:right;
+    }
+
+    @media (max-width:480px) {
+      .hero-card { margin-inline:12px; }
+      header, .section { padding-inline:14px; }
+      .pulse-row, .tracker-card, .momentum-row, #aiLines, #capabilities, #faq, footer { padding-inline:14px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <div class="app-inner">
+      <header>
+        <div>
+          <div class="brand">NET PET AI · PHOENIX FUSION v2.0</div>
+          <div class="tagline">Daily English coach. Tough love plus real care, zero grammar prison.</div>
+        </div>
+        <div class="streak-chip">
+          <span class="streak-dot"></span>
+          <span id="streakNum">0</span> days
+        </div>
+      </header>
+
+      <section class="hero-card">
+        <div class="section-label">Accountability engine</div>
+        <div class="hero-title">
+          Build your <span class="hero-accent">English lifestyle</span><br>45 · 15 · every day.
+        </div>
+        <div class="hero-sub">
+          Listen like a fan, speak like a tiger. NET PET tracks it. You just show up.
+        </div>
+        <div class="hero-cta-row">
+          <button class="btn-pill" id="ctaLog">Log today</button>
+          <button class="btn-pill secondary" id="ctaMore">What can this coach do?</button>
+        </div>
+      </section>
+
+      <section class="pulse-row">
+        <div class="avatar-block">
+          <div class="avatar-toggle-label">Mode</div>
+          <div class="avatar-ring" id="avatarRing">
+            <div class="avatar-core pet" id="avatarCore"></div>
+          </div>
+          <div class="mode-chip" id="modeChip">NET PET · Coach</div>
+        </div>
+        <div class="pulse-meta">
+          <div class="chip" id="chipMood">Mood: Neutral</div>
+          <div class="chip" id="chipGoal" style="background:#f59e0b24;color:#f59e0b;">Goal: Not complete</div>
+          <div id="pulseStatus" style="font-size:0.92rem;margin-top:4px;">
+            Let’s check: tiger or mouse today?
+          </div>
+        </div>
+      </section>
+
+      <section class="tracker-card">
+        <div class="tracker-label">
+          <span>Listening (Fun input)</span>
+          <span id="lblListen">0 / 45m</span>
+        </div>
+        <div class="progress-shell">
+          <div class="progress-fill bar-listen" id="barListen"></div>
+        </div>
+        <div class="tracker-label">
+          <span>Speaking (Shadow / volume)</span>
+          <span id="lblSpeak">0 / 15m</span>
+        </div>
+        <div class="progress-shell">
+          <div class="progress-fill bar-speak" id="barSpeak"></div>
+        </div>
+        <div class="daily-buttons">
+          <button class="mini-btn" id="btnListen">+15m Listening</button>
+          <button class="mini-btn speak" id="btnSpeak">+5m Speaking</button>
+        </div>
+      </section>
+
+      <section class="momentum-row">
+        <div class="momentum-meter">
+          <div class="momentum-fill" id="momentumFill"></div>
+        </div>
+        <div class="xp-card">
+          <div class="momentum-level-label" id="momentumLabel">Level 1 · Struggling Mouse</div>
+          <div class="xp-row"><span>Consistency XP</span><span id="xpConsistency">0</span></div>
+          <div class="xp-row"><span>Growth XP</span><span id="xpGrowth">0</span></div>
+          <div class="xp-row"><span>Courage XP</span><span id="xpCourage">0</span></div>
+          <div class="xp-row"><span>Tiger XP</span><span id="xpTiger">0</span></div>
+        </div>
+      </section>
+
+      <section id="aiLines"></section>
+      <section id="capabilities"></section>
+      <section id="faq"></section>
+
+      <footer>GOSPEL 444 · PHOENIX ENGINE · CHATTTY PRIME × NET PET</footer>
+    </div>
+  </div>
+
+  <script>
+    // ===== EVENT BUS (for future agents / sockets / PWA hooks) =====
+    const Bus = {
+      subs:{},
+      on(ev, fn){ (this.subs[ev] = this.subs[ev] || []).push(fn); },
+      emit(ev, payload){ (this.subs[ev] || []).forEach(fn => fn(payload)); }
+    };
+
+    // ===== STATE ENGINE =====
+    const BASE = {
+      streak: 0,
+      listen: 0,
+      speak: 0,
+      last: today(),
+      mood: "NEUTRAL", // NEUTRAL | HAPPY | TOUGH
+      goal: false,
+      xpConsistency: 0,
+      xpGrowth: 0,
+      xpCourage: 0,
+      xpTiger: 0,
+      mode: "PET" // PET | PRIME | ULTRA
+    };
+
+    function today() {
+      return new Date().toLocaleDateString();
+    }
+
+    let state = loadState();
+    rolloverDay(); // in case they open after midnight
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem("netPet_v2_state");
+        if (!raw) return { ...BASE };
+        const parsed = JSON.parse(raw);
+        return { ...BASE, ...parsed };
+      } catch {
+        return { ...BASE };
+      }
+    }
+
+    function saveState() {
+      localStorage.setItem("netPet_v2_state", JSON.stringify(state));
+      // simple hash snapshot for drift detection / debug
+      localStorage.setItem("netPet_v2_hash", btoa(JSON.stringify({
+        streak: state.streak,
+        listen: state.listen,
+        speak: state.speak,
+        xp: totalXP()
+      })));
+    }
+
+    function rolloverDay() {
+      const todayStr = today();
+      if (state.last !== todayStr) {
+        // streak logic
+        if (state.goal) {
+          state.streak += 1;
+          state.mood = "HAPPY";
+          state.xpConsistency += 10;
+        } else {
+          state.streak = 0;
+          state.mood = "TOUGH";
+          state.xpCourage += 5; // you at least opened the app
+        }
+        state.listen = 0;
+        state.speak = 0;
+        state.goal = false;
+        state.last = todayStr;
+        saveState();
+      }
+    }
+
+    function totalXP() {
+      return state.xpConsistency + state.xpGrowth + state.xpCourage + state.xpTiger;
+    }
+
+    // ===== VOICE MATRICES =====
+    const LINES = {
+      PET: {
+        GREETING: [
+          "Every day is a new chance to build your English lifestyle.",
+          "You don’t need perfection. You need today’s 45·15.",
+          "Listen like a fan, speak like a tiger.",
+          "We’re not studying English. We’re living with it."
+        ],
+        HAPPY: [
+          "Goal done. This is what real learning looks like.",
+          "You’re not a robot. You’re a human speaking English.",
+          "This is momentum. Don’t break it.",
+          "Nice. Tomorrow, same time, same energy."
+        ],
+        TOUGH: [
+          "You can’t learn to swim by looking at the water.",
+          "No speaking yet? Your mouth is the muscle. Use it.",
+          "One small set now is better than a perfect plan later.",
+          "You don’t need motivation. You need 5 nervous minutes."
+        ]
+      },
+      PRIME: {
+        GREETING: [
+          "Status: online. Your behavior is the only bottleneck.",
+          "System check: zero grammar drills required. Only action.",
+          "Audit result: today has no log yet. That is a bug.",
+          "You are the only person who can fix this sprint."
+        ],
+        HAPPY: [
+          "Daily KPIs met. Confidence curve trending upward.",
+          "Streak integrity preserved. Ship again tomorrow.",
+          "Data suggests: this version of you speaks more.",
+          "You are compounding tiny wins. That’s engineering."
+        ],
+        TOUGH: [
+          "No log. No progress. This is not a training run.",
+          "You don’t fix speaking with theory. Only reps.",
+          "Your future self is watching this decision.",
+          "If you want new output, update your behavior."
+        ]
+      },
+      ULTRA: {
+        FUSION: [
+          "Seven days of discipline. You’re not learning English, you’re becoming someone new.",
+          "This is Phoenix Mode: consistent, dangerous, and fluent.",
+          "You broke the cage. Now we build the new world.",
+          "From grammar prison to Phoenix. Keep burning forward."
+        ]
+      }
+    };
+
+    function pickLine(type) {
+      const mode = state.mode === "ULTRA"
+        ? "ULTRA"
+        : (state.mode === "PRIME" ? "PRIME" : "PET");
+
+      if (mode === "ULTRA") {
+        const pool = LINES.ULTRA.FUSION;
+        return pool[Math.floor(Math.random() * pool.length)];
+      }
+
+      const moodKey = type || (state.mood === "HAPPY" ? "HAPPY" : state.mood === "TOUGH" ? "TOUGH" : "GREETING");
+      const pool = LINES[mode][moodKey] || LINES[mode].GREETING;
+      return pool[Math.floor(Math.random() * pool.length)];
+    }
+
+    // ===== XP / LEVEL LOGIC =====
+    function levelInfo() {
+      const xp = totalXP();
+      if (xp >= 400) return { level: 5, label: "Phoenix Mode", momentum: 100 };
+      if (xp >= 250) return { level: 4, label: "Tiger Mode", momentum: 80 };
+      if (xp >= 120) return { level: 3, label: "Consistent", momentum: 60 };
+      if (xp >= 50)  return { level: 2, label: "Waking Up", momentum: 40 };
+      return { level: 1, label: "Struggling Mouse", momentum: 20 };
+    }
+
+    function maybeUnlockUltra() {
+      const info = levelInfo();
+      if (info.level >= 5 && state.mode === "PET") {
+        state.mode = "ULTRA";
+      }
+    }
+
+    // ===== EVALUATION =====
+    function evaluateProgress(logType) {
+      // Basic goal condition
+      const beforeGoal = state.goal;
+      if (state.listen >= 45 && state.speak >= 15) {
+        state.goal = true;
+        state.mood = "HAPPY";
+        if (!beforeGoal) {
+          state.xpGrowth += 10;
+          if (logType === "speak") state.xpTiger += 5;
+        }
+      } else if (state.listen > 0 && state.speak === 0) {
+        state.mood = "TOUGH";
+      } else {
+        state.mood = "NEUTRAL";
+      }
+
+      // Courage XP: first speaking log of the day
+      if (logType === "speak" && state.speak === 5) {
+        state.xpCourage += 3;
+      }
+
+      maybeUnlockUltra();
+    }
+
+    // ===== RENDER =====
+    const els = {
+      streakNum: document.getElementById("streakNum"),
+      lblListen: document.getElementById("lblListen"),
+      lblSpeak: document.getElementById("lblSpeak"),
+      barListen: document.getElementById("barListen"),
+      barSpeak: document.getElementById("barSpeak"),
+      chipMood: document.getElementById("chipMood"),
+      chipGoal: document.getElementById("chipGoal"),
+      pulseStatus: document.getElementById("pulseStatus"),
+      avatarCore: document.getElementById("avatarCore"),
+      modeChip: document.getElementById("modeChip"),
+      aiLines: document.getElementById("aiLines"),
+      momentumFill: document.getElementById("momentumFill"),
+      momentumLabel: document.getElementById("momentumLabel"),
+      xpConsistency: document.getElementById("xpConsistency"),
+      xpGrowth: document.getElementById("xpGrowth"),
+      xpCourage: document.getElementById("xpCourage"),
+      xpTiger: document.getElementById("xpTiger")
+    };
+
+    function render() {
+      els.streakNum.textContent = state.streak;
+      els.lblListen.textContent = `${state.listen} / 45m`;
+      els.lblSpeak.textContent = `${state.speak} / 15m`;
+
+      els.barListen.style.width = Math.min(100, (state.listen / 45) * 100) + "%";
+      els.barSpeak.style.width = Math.min(100, (state.speak / 15) * 100) + "%";
+
+      const moodTxt = state.mood === "HAPPY" ? "Happy"
+                        : state.mood === "TOUGH" ? "Tough Love"
+                        : "Neutral";
+      els.chipMood.textContent = `Mood: ${moodTxt}`;
+      els.chipGoal.textContent = "Goal: " + (state.goal ? "Complete" : "Not complete");
+
+      // mode chip + avatar
+      els.avatarCore.className = "avatar-core " +
+        (state.mode === "ULTRA" ? "ultra" : state.mode === "PRIME" ? "prime" : "pet");
+      els.modeChip.textContent =
+        state.mode === "ULTRA" ? "Phoenix Fusion · Coach+Prime" :
+        state.mode === "PRIME" ? "Chatty Prime · Auditor" :
+        "NET PET · Coach";
+
+      // pulse text
+      if (state.mood === "TOUGH") {
+        els.pulseStatus.textContent = "Slump detected. We fix it with one small rep, not guilt.";
+      } else if (state.mood === "HAPPY") {
+        els.pulseStatus.textContent = "Goal hit. This is how confidence is built, not wished for.";
+      } else {
+        els.pulseStatus.textContent = "Tiny daily actions. Big long-term upgrades.";
+      }
+
+      // XP + level
+      const info = levelInfo();
+      els.momentumFill.style.height = info.momentum + "%";
+      els.momentumLabel.textContent = `Level ${info.level} · ${info.label}`;
+      els.xpConsistency.textContent = state.xpConsistency;
+      els.xpGrowth.textContent = state.xpGrowth;
+      els.xpCourage.textContent = state.xpCourage;
+      els.xpTiger.textContent = state.xpTiger;
+
+      els.aiLines.textContent = pickLine();
+    }
+
+    // ===== CAPABILITIES & FAQ STATIC RENDER =====
+    function renderStaticSections() {
+      const cap = document.getElementById("capabilities");
+      cap.innerHTML = `
+        <div class="section-label">What can this coach do?</div>
+        <div class="pill-block">
+          <div class="pill">🐯 Push your comfort zone when you hide behind silence.</div>
+          <div class="pill">📊 Track your 45·15 habit with streaks, XP, and momentum.</div>
+          <div class="pill">🧠 Switch voices: soft human coach or strict auditor.</div>
+          <div class="pill">🔥 Unlock Phoenix Fusion when you prove you're consistent.</div>
+        </div>
+      `;
+      const faq = document.getElementById("faq");
+      faq.innerHTML = `
+        <div class="section-label">FAQ</div>
+        <div class="pill">❓ What if I miss a day? — Your streak resets. No drama. Just start again today.</div>
+        <div class="pill">❓ Do I need grammar books? — No. Listen, mimic, and speak. Grammar joins later.</div>
+        <div class="pill">❓ Is this a teacher? — This is your daily English coach. Human classes are extra firepower.</div>
+      `;
+    }
+
+    // ===== EVENT LISTENERS =====
+    document.getElementById("btnListen").addEventListener("click", () => {
+      state.listen = Math.min(45, state.listen + 15);
+      evaluateProgress("listen");
+      saveState();
+      render();
+      Bus.emit("log", { type:"listen", state:{...state} });
+    });
+
+    document.getElementById("btnSpeak").addEventListener("click", () => {
+      state.speak = Math.min(15, state.speak + 5);
+      evaluateProgress("speak");
+      saveState();
+      render();
+      Bus.emit("log", { type:"speak", state:{...state} });
+    });
+
+    document.getElementById("ctaLog").addEventListener("click", () => {
+      const target = document.querySelector(".tracker-card");
+      if (!target) return;
+      window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 50, behavior: "smooth" });
+    });
+
+    document.getElementById("ctaMore").addEventListener("click", () => {
+      const target = document.getElementById("capabilities");
+      window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 40, behavior: "smooth" });
+    });
+
+    document.getElementById("avatarRing").addEventListener("click", () => {
+      // cycle modes: PET -> PRIME -> ULTRA (if unlocked) -> PET ...
+      const info = levelInfo();
+      const ultraUnlocked = info.level >= 5;
+      if (state.mode === "PET") {
+        state.mode = "PRIME";
+      } else if (state.mode === "PRIME") {
+        state.mode = ultraUnlocked ? "ULTRA" : "PET";
+      } else {
+        state.mode = "PET";
+      }
+      saveState();
+      render();
+    });
+
+    // Example Bus listener (extendable)
+    Bus.on("log", payload => {
+      // future: sync to backend, show confetti, etc.
+      // console.log("NET PET log event:", payload);
+    });
+
+    // ===== INIT =====
+    renderStaticSections();
+    saveState();
+    render();
+  </script>
+</body>
+</html>

@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NET Proposal: The Future of English</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ═══════════════════════════════════════════════════════════════
+           GOSPEL 444 AESTHETIC ENGINE (Universal Edition)
+           NO BLUE. PURPLE + GOLD + DARK.
+        ═══════════════════════════════════════════════════════════════ */
+        :root {
+            --purple: #a855f7;
+            --gold: #f59e0b;
+            --dark: #0f0f1a;
+            --glass: rgba(20, 20, 30, 0.9);
+            --border: rgba(168, 85, 247, 0.3);
+            --text: #ffffff;
+            --text-dim: rgba(255, 255, 255, 0.7);
+            --radius: 24px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--dark);
+            background-image: 
+                radial-gradient(circle at 0% 0%, rgba(168, 85, 247, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 100% 100%, rgba(245, 158, 11, 0.1) 0%, transparent 50%);
+            background-attachment: fixed;
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            padding-bottom: 100px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* --- TYPOGRAPHY & TRANSLATION --- */
+        .vi {
+            display: block;
+            font-size: 0.9em;
+            color: var(--text-dim);
+            font-weight: 400;
+            margin-top: 6px;
+            font-style: italic;
+            border-left: 2px solid var(--gold);
+            padding-left: 10px;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #fff, var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h2 {
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            color: var(--gold);
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+
+        h3 { font-size: 1.3rem; color: #fff; margin-bottom: 5px; }
+
+        /* --- SECTIONS & CARDS --- */
+        section { margin-bottom: 80px; scroll-margin-top: 20px; }
+        
+        .glass-card {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 30px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        /* --- HERO --- */
+        .hero { text-align: center; padding: 60px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .tag { 
+            font-family: 'JetBrains Mono'; 
+            color: var(--purple); 
+            border: 1px solid var(--purple); 
+            padding: 5px 10px; 
+            border-radius: 4px; 
+            font-size: 0.8rem; 
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        /* --- AI FUTURE BOX --- */
+        .ai-box {
+            background: linear-gradient(90deg, rgba(168, 85, 247, 0.1), rgba(0,0,0,0));
+            border-left: 4px solid var(--gold);
+            padding: 25px;
+            margin-bottom: 40px;
+            border-radius: 0 20px 20px 0;
+        }
+
+        /* --- GRID SYSTEMS --- */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        @media(min-width: 768px) { .grid-2 { grid-template-columns: 1fr 1fr; } }
+
+        /* --- PRICING --- */
+        .price-card {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            transition: transform 0.3s;
+        }
+        .price-card:hover { transform: translateY(-5px); border-color: var(--purple); }
+        
+        .price-card.highlight {
+            border: 2px solid var(--gold);
+            background: linear-gradient(180deg, rgba(245, 158, 11, 0.1), rgba(20, 20, 30, 0.9));
+            box-shadow: 0 0 40px rgba(245, 158, 11, 0.15);
+        }
+
+        .badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gold);
+            color: #000;
+            font-weight: 700;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .price-val { font-size: 2.5rem; font-weight: 900; color: var(--gold); margin: 15px 0; }
+        .price-sub { font-size: 1rem; color: var(--text-dim); font-weight: 400; }
+
+        .features { text-align: left; margin: 30px 0; list-style: none; }
+        .features li {
+            margin-bottom: 12px;
+            padding-left: 25px;
+            position: relative;
+            color: #e0e0e0;
+            font-size: 0.95rem;
+        }
+        .features li::before {
+            content: '✓';
+            color: var(--purple);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        /* --- ASSESSMENT ENGINE --- */
+        .recorder-ui {
+            background: rgba(255,255,255,0.05);
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .rec-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: none;
+            background: #ef4444;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
+            font-size: 1.5rem;
+            transition: transform 0.1s;
+        }
+        .rec-btn:active { transform: scale(0.9); }
+        .rec-btn.recording { animation: pulse-red 1.5s infinite; }
+        
+        @keyframes pulse-red {
+            0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(239, 68, 68, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+        }
+
+        .q-input {
+            width: 100%;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            font-family: 'Inter';
+            font-size: 1rem;
+            margin-top: 10px;
+        }
+        .q-input:focus { outline: none; border-color: var(--purple); }
+
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(90deg, var(--purple), var(--gold));
+            color: #000;
+            font-weight: 800;
+            padding: 20px;
+            border-radius: 50px;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: transform 0.2s;
+            box-shadow: 0 10px 30px rgba(168, 85, 247, 0.3);
+        }
+        .submit-btn:hover { transform: scale(1.02); box-shadow: 0 10px 40px rgba(168, 85, 247, 0.5); }
+
+        /* --- METHOD ICONS --- */
+        .card {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 25px;
+            transition: transform 0.3s;
+        }
+        .card:hover { transform: translateY(-5px); border-color: var(--purple); }
+        .card-icon { font-size: 2.5rem; margin-bottom: 15px; display: block; }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <section class="hero">
+        <span class="tag">NET PROPOSAL</span>
+        <h1>Stop Studying.<br>Start Living.</h1>
+        <span class="vi">Ngừng việc "Học" Tiếng Anh. Bắt đầu "Sống" với nó.</span>
+        <p style="margin-top: 30px; font-size: 1.2rem;">
+            Most students are stuck in "Grammar Prison." We break them out with <strong>Confidence First</strong>.
+            <br><span class="vi">Hầu hết học viên bị kẹt trong "Nhà Tù Ngữ Pháp". Chúng tôi giải phóng bạn bằng Sự Tự Tin.</span>
+        </p>
+    </section>
+
+    <section>
+        <div class="ai-box">
+            <h2 style="margin-bottom: 10px; font-size: 1.8rem;">The 2025 Reality: English + AI</h2>
+            <span class="vi">Thực Tế 2025: Tiếng Anh + Trí Tuệ Nhân Tạo (AI)</span>
+            <p style="color: #fff; margin-top: 20px;">
+                In today's job market, English is not enough. You need <strong>English + AI Literacy</strong>.
+            </p>
+            <p style="color: var(--text-dim);">
+                NET is the only system that combines both. You won't just learn vocabulary; you will use our custom <strong>AI Coach (NET PET)</strong> to accelerate your growth 10x faster than traditional schools.
+            </p>
+            <span class="vi">NET là hệ thống duy nhất kết hợp cả hai. Bạn không chỉ học từ vựng; bạn sẽ sử dụng Trợ Lý AI (NET PET) để tăng tốc độ học nhanh gấp 10 lần trường học truyền thống.</span>
+        </div>
+    </section>
+
+    <section>
+        <h2 style="text-align: center;">How You Will Learn <br><span class="vi" style="font-size: 0.6em; opacity: 0.7; border: none;">Phương Pháp Học</span></h2>
+        <div class="grid-2">
+            <div class="card">
+                <span class="card-icon">👂</span>
+                <h3>Listen & Understand</h3>
+                <span class="vi">Nghe & Hiểu</span>
+                <p style="margin-top: 10px; font-size: 0.9rem; color: var(--text-dim);">
+                    Real content. No boring textbooks. Understanding the message > Translating words.
+                    <br><span class="vi">Nội dung thực tế. Không giáo trình nhàm chán. Hiểu ý nghĩa > Dịch từng từ.</span>
+                </p>
+            </div>
+            <div class="card">
+                <span class="card-icon">🐯</span>
+                <h3>Speak & Mimic</h3>
+                <span class="vi">Nói & Bắt Chước</span>
+                <p style="margin-top: 10px; font-size: 0.9rem; color: var(--text-dim);">
+                    "Tiger Voice" training. Speaking loud and proud from Day 1. No robot voice.
+                    <br><span class="vi">Luyện "Giọng Hổ". Nói to và tự tin ngay ngày đầu. Không nói giọng robot.</span>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="glass-card">
+            <h2 style="margin-bottom: 20px;">The Value Stack <br><span class="vi" style="font-size: 0.6em; opacity: 0.7; border: none;">Giá Trị Bạn Nhận Được</span></h2>
+            <p style="margin-bottom: 30px;">You are not buying a class. You are buying a <strong>Complete Lifestyle System</strong>.</p>
+            
+            <ul class="features" style="font-size: 1.1rem;">
+                <li><strong>NET PET AI Coach:</strong> Your 24/7 pocket companion for tracking & motivation. <span style="color: var(--gold); font-size: 0.8em;">(PRICELESS)</span></li>
+                <li><strong>Home Study Plan:</strong> A personalized 45/15 minute daily routine.</li>
+                <li><strong>Community Events:</strong> Monthly networking nights in Saigon.</li>
+                <li><strong>The Buddy System:</strong> Practice with real partners, not just teachers.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="pricing">
+        <h2 style="text-align: center; margin-bottom: 40px;">Choose Your Path <br><span class="vi" style="font-size: 0.6em; opacity: 0.7; border: none;">Chọn Lộ Trình Của Bạn</span></h2>
+        
+        <div class="pricing-container">
+            
+            <div class="price-card">
+                <div class="badge">RECOMMENDATION 1</div>
+                <div style="text-transform: uppercase; letter-spacing: 1px; color: var(--purple); font-weight: 700; margin-bottom: 5px;">The Social Path</div>
+                <div class="vi" style="margin-bottom: 20px; border: none;">Lộ Trình Xã Hội (Tiết Kiệm Nhất)</div>
+                <div class="price-val">600k <span class="price-sub">/ week</span></div>
+                
+                <ul class="features">
+                    <li><strong>2x Group Classes</strong> (Weekly)</li>
+                    <li>Tue (In-Person) & Sat (Online)</li>
+                    <li>Full AI Ecosystem Access</li>
+                    <li>Daily Home Study Plan</li>
+                    <li>Monthly Networking Events</li>
+                </ul>
+                <p style="font-size: 0.9rem; margin-top: 20px; color: var(--gold);">Best for consistency & fun habit building.</p>
+            </div>
+
+            <div class="price-card highlight">
+                <div class="badge" style="background: var(--gold); color: #000;">FASTEST RESULTS</div>
+                <div style="text-transform: uppercase; letter-spacing: 1px; color: #fff; font-weight: 700; margin-bottom: 5px;">The Accelerator</div>
+                <div class="vi" style="margin-bottom: 20px; border: none;">Lộ Trình Tăng Tốc</div>
+                <div class="price-val">1.2m <span class="price-sub">/ week</span></div>
+                
+                <ul class="features">
+                    <li><strong>EVERYTHING in Social Path</strong></li>
+                    <li><strong>PLUS: 1x Private Session (60m)</strong></li>
+                    <li>Flexible Schedule (I come to you)</li>
+                    <li>Deep pronunciation correction</li>
+                    <li>Personalized roadmap</li>
+                </ul>
+                <p style="font-size: 0.9rem; margin-top: 20px; color: var(--gold);">Best for rapid confidence & safety.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="assessment" class="glass-card" style="border-color: var(--gold);">
+        <h2 style="color: #fff; text-align: center;">Free Level Assessment <br><span class="vi" style="font-size: 0.6em; opacity: 0.7; border: none; display: inline;">Kiểm Tra Trình Độ Miễn Phí</span></h2>
+        <p style="margin-top: 15px; text-align: center;">
+            To build your custom plan, I need a quick sample of your current level. Please complete this simple assessment (No dictionaries, No AI, just your raw ability).
+        </p>
+
+        <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 30px 0;">
+
+        <div style="margin-bottom: 30px;">
+            <label><strong>1. What is your biggest fear when speaking English?</strong></label>
+            <span class="vi">Nỗi sợ lớn nhất của bạn khi nói tiếng Anh là gì?</span>
+            <input type="text" id="q1" class="q-input" placeholder="Type answer here...">
+        </div>
+
+        <div style="margin-bottom: 30px;">
+            <label><strong>2. Why do you need English right now? (Job, Travel, etc)</strong></label>
+            <span class="vi">Tại sao bạn cần tiếng Anh ngay lúc này?</span>
+            <input type="text" id="q2" class="q-input" placeholder="Type answer here...">
+        </div>
+
+        <div style="margin-bottom: 30px;">
+            <label><strong>3. Record Audio: Introduction (1 min)</strong></label>
+            <span class="vi">Ghi âm: Giới thiệu bản thân (Tên, sở thích, công việc).</span>
+            <div class="recorder-ui">
+                <button class="rec-btn" id="rec1" onclick="toggleRecord(1)">🎤</button>
+                <span id="status1" style="font-family: 'JetBrains Mono'; font-size: 0.9rem; color: var(--text-dim);">Tap Mic to Record</span>
+            </div>
+        </div>
+
+        <div style="margin-bottom: 30px;">
+            <label><strong>4. Record Audio: "Describe Your Perfect Weekend"</strong></label>
+            <span class="vi">Ghi âm: Mô tả ngày cuối tuần hoàn hảo của bạn.</span>
+            <div class="recorder-ui">
+                <button class="rec-btn" id="rec2" onclick="toggleRecord(2)">🎤</button>
+                <span id="status2" style="font-family: 'JetBrains Mono'; font-size: 0.9rem; color: var(--text-dim);">Tap Mic to Record</span>
+            </div>
+        </div>
+
+        <button class="submit-btn" onclick="generatePackage()">📦 Download Package & Send to Zalo</button>
+        <p style="text-align: center; margin-top: 15px; font-size: 0.8rem; color: var(--text-dim);">*This will download 3 files. Send them to Michael on Zalo to unlock your Free Report.</p>
+
+    </section>
+
+    <section style="text-align: center; margin-top: 100px;">
+        <div style="font-size: 4rem; margin-bottom: 20px;">🐘</div>
+        <h2>The Promise</h2>
+        <p style="max-width: 600px; margin: 0 auto;">
+            "Many students are like elephants tied to a small stick—strong enough to break free, but mentally chained by fear. My promise isn't just to teach vocabulary. <strong>My promise is to break that chain.</strong>"
+        </p>
+        <p class="vi" style="max-width: 600px; margin: 10px auto;">
+            "Nhiều học viên giống như những chú voi bị cột vào một cái cọc nhỏ—đủ mạnh để phá vỡ, nhưng tâm trí bị trói buộc bởi nỗi sợ. Lời hứa của tôi là phá bỏ xiềng xích đó."
+        </p>
+        
+        <div style="margin-top: 40px;">
+            <a href="https://zalo.me" style="color: var(--gold); text-decoration: none; border-bottom: 1px solid var(--gold);">Message Michael on Zalo</a>
+        </div>
+    </section>
+
+</div>
+
+<script>
+    // --- RECORDING LOGIC ---
+    let recorders = {};
+    let audioChunks = { 1: [], 2: [] };
+    let audioBlobs = {};
+
+    async function toggleRecord(id) {
+        const btn = document.getElementById(`rec${id}`);
+        const status = document.getElementById(`status${id}`);
+
+        if (!recorders[id] || recorders[id].state === "inactive") {
+            // Start Recording
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                recorders[id] = new MediaRecorder(stream);
+                audioChunks[id] = [];
+
+                recorders[id].ondataavailable = e => audioChunks[id].push(e.data);
+                recorders[id].onstop = () => {
+                    const blob = new Blob(audioChunks[id], { type: 'audio/webm' });
+                    audioBlobs[id] = blob;
+                    status.innerText = "✅ Audio Saved!";
+                    status.style.color = "#10b981";
+                    btn.classList.remove("recording");
+                    btn.style.background = "#10b981";
+                    btn.innerText = "↺"; // Retry icon
+                };
+
+                recorders[id].start();
+                btn.classList.add("recording");
+                btn.innerText = "⏹";
+                status.innerText = "Recording... Tap to Stop";
+                status.style.color = "#ef4444";
+
+            } catch (err) {
+                alert("Microphone access needed to record audio! Please enable permissions in your browser settings.");
+            }
+        } else {
+            // Stop Recording
+            recorders[id].stop();
+        }
+    }
+
+    function generatePackage() {
+        // 1. Gather Text Data
+        const q1 = document.getElementById('q1').value;
+        const q2 = document.getElementById('q2').value;
+
+        if(!q1 || !q2) {
+            alert("Please answer the text questions first!");
+            return;
+        }
+
+        const data = {
+            q1: q1,
+            q2: q2,
+            timestamp: new Date().toISOString()
+        };
+
+        // 2. Create JSON Blob
+        const jsonBlob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+        const jsonUrl = URL.createObjectURL(jsonBlob);
+
+        // 3. Trigger Downloads
+        downloadFile(jsonUrl, "NET_Answers.json");
+
+        let audioCount = 0;
+        if(audioBlobs[1]) {
+            const audioUrl1 = URL.createObjectURL(audioBlobs[1]);
+            setTimeout(() => downloadFile(audioUrl1, "Audio_Intro.webm"), 500);
+            audioCount++;
+        }
+        
+        if(audioBlobs[2]) {
+            const audioUrl2 = URL.createObjectURL(audioBlobs[2]);
+            setTimeout(() => downloadFile(audioUrl2, "Audio_Weekend.webm"), 1500);
+            audioCount++;
+        }
+
+        if(audioCount === 0) {
+            alert("Warning: No audio recorded. Please record audio for a complete assessment.");
+        } else {
+            alert("Files downloaded! Please locate them in your phone/computer downloads folder and send them to Michael on Zalo.");
+        }
+    }
+
+    function downloadFile(url, name) {
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = name;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    }
+</script>
+
+</body>
+</html>
+```

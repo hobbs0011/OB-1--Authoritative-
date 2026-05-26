@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Natural English Training Pronunciation Phonics Guide 👑</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* ROYAL PURPLE & SHINY GOLD PALETTE */
+        :root {
+            --primary-bg: #4A148C; /* Deep Royal Purple */
+            --secondary-bg: #121212; /* Dark, near-black Background */
+            --primary-accent: #FFD700; /* Shiny Gold */
+            --secondary-accent: #C0C0C0; /* Silver Accent */
+            --text-color: #FFFFFF; /* White Text */
+            --card-bg: #1F1F1F; /* Dark Gray Card Background */
+            --header-bg: #4A148C; /* Deep Purple */
+            --gold-light: #FADB58; /* Lighter Gold for hover */
+        }
+        body {
+            background-color: var(--secondary-bg);
+            color: var(--text-color);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+        }
+        .header-bg {
+            background-color: var(--header-bg);
+        }
+        .gold-text {
+            color: var(--primary-accent);
+        }
+        .silver-text {
+            color: var(--secondary-accent);
+        }
+        .section-title {
+            border-bottom: 2px solid var(--primary-accent);
+        }
+        .card {
+            background-color: var(--card-bg);
+            border-bottom: 4px solid var(--primary-accent);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+        }
+        .nav-button {
+            background-color: var(--primary-accent);
+            color: var(--primary-bg);
+            transition: all 0.1s;
+            box-shadow: 0 4px 0 0 #A87C00; /* Darker gold for 3D effect */
+        }
+        .nav-button:active {
+            transform: translateY(4px);
+            box-shadow: 0 0 0 0 #A87C00;
+        }
+        .nav-button.active {
+            background-color: var(--gold-light);
+            box-shadow: 0 4px 0 0 #A87C00;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="min-h-screen">
+        <header class="header-bg p-8 shadow-2xl">
+            <div class="max-w-7xl mx-auto">
+                <h1 class="text-4xl md:text-5xl font-extrabold text-white">Natural English Training</h1>
+                <h2 class="text-xl md:text-2xl silver-text mt-1">Pronunciation Phonics Guide 👑</h2>
+            </div>
+        </header>
+
+        <main class="max-w-7xl mx-auto p-6 space-y-12">
+
+            <section id="introduction" class="space-y-4 py-6">
+                <h3 class="text-3xl font-bold section-title pb-2 gold-text">Decoding the 42 Sounds of English</h3>
+                <p class="text-lg silver-text">
+                    This comprehensive guide is based on **Jolly Phonics**, a fun and multi-sensory synthetic phonics method. By learning the 42 main sounds and their corresponding actions, we can master English sound production, significantly improving both **pronunciation** and **reading fluency**.
+                </p>
+                
+                <div class="pt-6">
+                    <h4 class="text-2xl font-bold gold-text pb-2 border-b border-gray-700">The 5 Key Skills of Jolly Phonics</h4>
+                    <p class="silver-text italic mb-4">A holistic approach to literacy and speech mastery.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+                        <div class="bg-gray-800 p-4 rounded-lg shadow-md hover:shadow-xl transition duration-300">
+                            <p class="font-bold gold-text">1. Learning the Sounds</p>
+                            <p class="text-sm silver-text">Mastering the 42 phonemes with actions.</p>
+                        </div>
+                        <div class="bg-gray-800 p-4 rounded-lg shadow-md hover:shadow-xl transition duration-300">
+                            <p class="font-bold gold-text">2. Learning Letter Formation</p>
+                            <p class="text-sm silver-text">Properly writing the letters using guided movements.</p>
+                        </div>
+                        <div class="bg-gray-800 p-4 rounded-lg shadow-md hover:shadow-xl transition duration-300">
+                            <p class="font-bold gold-text">3. Blending</p>
+                            <p class="text-sm silver-text">Pushing sounds together to read new words.</p>
+                        </div>
+                        <div class="bg-gray-800 p-4 rounded-lg shadow-md hover:shadow-xl transition duration-300">
+                            <p class="font-bold gold-text">4. Identifying Sounds in Words</p>
+                            <p class="text-sm silver-text">Segmenting words for accurate spelling and writing.</p>
+                        </div>
+                        <div class="bg-gray-800 p-4 rounded-lg shadow-md hover:shadow-xl transition duration-300">
+                            <p class="font-bold gold-text">5. Learning Tricky Words</p>
+                            <p class="text-sm silver-text">Memorizing high-frequency words with irregular spellings (e.g., 'the', 'said').</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="explorer" class="space-y-6 py-6">
+                <h3 class="text-3xl font-bold section-title pb-2 gold-text">Interactive Phonics Explorer (7 Groups)</h3>
+                
+                <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+                    <div class="w-full md:w-1/3">
+                        <label for="group-select" class="block text-lg font-medium silver-text mb-2">View Sounds by Group:</label>
+                        <select id="group-select" class="w-full p-3 rounded-lg text-lg text-white header-bg border-2 border-primary-accent focus:ring-primary-accent focus:border-primary-accent">
+                            <option value="all">View All Groups</option>
+                            </select>
+                    </div>
+                    <div class="w-full md:w-2/3">
+                        <label class="block text-lg font-medium silver-text mb-2">Filter by Group Type:</label>
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                            <button class="nav-button p-2 rounded-lg text-sm font-semibold uppercase filter-btn" data-type="sound">Initial Single Sounds</button>
+                            <button class="nav-button p-2 rounded-lg text-sm font-semibold uppercase filter-btn" data-type="digraphs">Digraphs / Vowels</button>
+                            <button class="nav-button p-2 rounded-lg text-sm font-semibold uppercase filter-btn" data-type="all">Show All</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="phonics-content" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-4">
+                    </div>
+            </section>
+
+            <section id="visualizations" class="space-y-6 py-6">
+                <h3 class="text-3xl font-bold section-title pb-2 gold-text">Phonics Progression Visualizations</h3>
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <div class="lg:col-span-1 card p-6 shadow-xl space-y-4">
+                        <h4 class="text-xl font-bold gold-text">Group Sound Distribution</h4>
+                        <div class="h-64">
+                            <canvas id="groupDistributionChart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="lg:col-span-2 card p-6 shadow-xl space-y-4">
+                        <h4 class="text-xl font-bold gold-text">Phonemes per Learning Group</h4>
+                        <div class="h-64">
+                            <canvas id="phonemeCountChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card p-6 shadow-xl mt-8">
+                    <h4 class="text-xl font-bold gold-text">Phonics Complexity Progression</h4>
+                    <div class="h-80">
+                        <canvas id="complexityProgressionChart"></canvas>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // 1. BULKED UP JOLLY PHONICS DATA STRUCTURE
+        const phonicsData = [
+            // Group 1: SATPIN (6 sounds)
+            { 
+                group: 1, type: 'sound', title: 'Group 1: SATPIN', 
+                sounds: ['/s/ (Snake)', '/a/ (Ants)', '/t/ (Tennis)', '/i/ (Ink)', '/p/ (Puff)', '/n/ (Airplane)'], 
+                actions: ['Snake motion: weave hand in an S shape.', 'Ants: Wiggle fingers above elbow, saying a, a, a.', 'Tennis: Turn head side-to-side, saying t, t, t.', 'Ink: Wriggle fingers like a mouse, saying i, i, i.', 'Puff: Pretend to puff out candles, saying p, p, p.', 'Airplane: Hold arms out as a plane, saying nnnnnnn.'],
+                example_words: ['sat', 'pin', 'ant', 'tin', 'pat', 'nap'],
+                tongue_twisters: [
+                    'Six silly snakes sit silently in a small pin.', 'Pat sat in a pan, tan, nap.', 'A tiny ant sat on a thin tin cap.', 'Pint-sized pin sits on a satin mat.', 'Ten tiny taps taint the pan.', 
+                    'Snips and snaps, pins and pans.', 'In a tent, a silent ant naps.', 'A fast train passes, past the tin sign.', 'Simple stamps stick to the sad tin.', 'The satchel pin is placed at the top.'
+                ]
+            },
+            // Group 2: CKEHRMD (6 sounds)
+            { 
+                group: 2, type: 'sound', title: 'Group 2: CKEHRMD', 
+                sounds: ['/c/ /k/ (Castanets)', '/e/ (Egg Crack)', '/h/ (Huffing)', '/r/ (Rag Doll)', '/m/ (Tummy Rub)', '/d/ (Drumming)'], 
+                actions: ['Castanets: Raise hands and snap fingers.', 'Egg Crack: Tap an egg on a pan, saying eh, eh, eh.', 'Huffing: Hold hand in front of mouth, panting h, h, h.', 'Rag Doll: Pretend to be a puppy shaking a rag, saying rrrrr.', 'Tummy Rub: Rub tummy as if seeing tasty food, saying mmmmmm.', 'Drumming: Beat hands up and down like a drum, saying d, d, d.'],
+                example_words: ['kid', 'cat', 'hen', 'red', 'mud', 'deck'],
+                tongue_twisters: [
+                    'Red hen\'s head rests on a damp deck.', 'Can a cocky kid kick a cold cup?', 'Hot ham melts on the hand-held drum.', 'He held the hard red mud in his hand.', 'The quick camel climbed the cracked crate.',
+                    'Dreadful dragons dropped deep dimes daily.', 'A happy hen has heavy, damp feathers.', 'The dark clock ticked, keeping correct count.', 'Many mad mice made messy maps.', 'He kept the cranky crab in a cold kettle.'
+                ]
+            },
+            // Group 3: GOULFB (6 sounds)
+            { 
+                group: 3, type: 'sound', title: 'Group 3: GOULFB', 
+                sounds: ['/g/ (Drain)', '/o/ (Switch)', '/u/ (Umbrella)', '/l/ (Licking)', '/f/ (Deflating Fish)', '/b/ (Bat & Ball)'], 
+                actions: ['Drain: Spiral hand down, as if water is going down a drain.', 'Switch: Pretend to turn a light switch on and off.', 'Umbrella: Pretend to put up an umbrella, saying u, u, u.', 'Licking: Pretend to lick a lollipop, saying l, l, l.', 'Deflating Fish: Let hands gently come together, saying ffffff.', 'Bat & Ball: Pretend to hit a ball with a bat, saying b, b, b.'],
+                example_words: ['bag', 'dog', 'fun', 'bell', 'lip', 'rug'],
+                tongue_twisters: [
+                    'Big, brown bugs gulp blue fun fluff.', 'A fluffy fox flew to the fat, flat box.', 'Go find four green grapes in the log.', 'The old dog got up and lugged the rug.', 'Fun blobs float on the full blue lake.',
+                    'Gullible goblins grabbed glittering gold globes.', 'Oliver’s long yellow lollipop looked lovely.', 'Buff black bugs bumped the big blue box.', 'Look for the little lost lamb on the hill.', 'Under the sun, a pup runs up and jumps.'
+                ]
+            },
+            // Group 4: Digraphs (6 sounds)
+            { 
+                group: 4, type: 'digraphs', title: 'Group 4: Basic Digraphs', 
+                sounds: ['/ai/ (Earache)', '/j/ (Jelly)', '/oa/ (Mouth Cover)', '/ie/ (Salute)', '/ee/ (Donkey Ears)', '/or/ (Donkey Ears)'], 
+                actions: ['Earache: Cup hand over ear, saying ai, ai, ai (long A).', 'Jelly: Pretend to wobble on a plate, saying j, j, j.', 'Mouth Cover: Bring hand over mouth in surprise, saying oh! (long O).', 'Salute: Stand to attention and salute, saying ie, ie (long I).', 'Donkey Ears (Long E): Put hands on head like donkey ears, saying ee.', 'Donkey Ears (OR): Put hands on head like donkey ears, saying or.'],
+                example_words: ['rain', 'jet', 'boat', 'tie', 'tree', 'fork'],
+                tongue_twisters: [
+                    'The jet groaned and roared near the deep green tree.', 'I saw eight sailors sailing in the rain.', 'Joan told Joe to soak the whole oak board.', 'The bright green field feels easy on tired feet.', 'Joyfully jumping jelly jars jiggle heavily.',
+                    'We need three green trees in the jeep fleet.', 'The storm warning roared, forcing the boat shoreward.', 'Lie low, tied to the line, by the bright fire.', 'The bee flew free, right past the noisy jet.', 'For four solid weeks, the fork was on the floor.'
+                ]
+            },
+            // Group 5: Vowel Variants & Z (6 sounds)
+            { 
+                group: 5, type: 'digraphs', title: 'Group 5: Vowel Variants & Z', 
+                sounds: ['/z/ (Bee)', '/w/ (Wind)', '/ng/ (Weights)', '/v/ (Van)', '/oo/ (Short-Cook)', '/OO/ (Long-Moon)'], 
+                actions: ['Bee: Put arms out and pretend to be a buzzing bee.', 'Wind: Blow gently onto open hand, as if being the wind.', 'Weights: Imagine being a weightlifter, lifting a heavy weight, saying ng.', 'Van: Pretend to hold a steering wheel, saying vvvvvvv.', 'Short OO: Move head back and forth like a cuckoo clock, saying u, oo (as in book).', 'Long OO: Move head back and forth like a cuckoo clock, saying oo (as in moon).'],
+                example_words: ['buzz', 'wet', 'song', 'vest', 'look', 'pool'],
+                tongue_twisters: [
+                    'A wise, buzzing zealot sang long, loud songs in the room.', 'Zillions of zealous zebras zigzagged vigorously.', 'We wish the wind would whoosh westward quickly.', 'Vast, valuable vases vanished very visibly.', 'The strong young singers sang a long, winding song.',
+                    'Look for a good cook who books a full room.', 'Velvet vests and bright white wigs went well together.', 'Wendy’s new wool wound wonderfully well.', 'Too soon, the groom moved to the cool, blue pool.', 'We sing, we swing, we hang long strong wings.'
+                ]
+            },
+            // Group 6: Consonant Digraphs (6 sounds)
+            { 
+                group: 6, type: 'digraphs', title: 'Group 6: Consonant Digraphs', 
+                sounds: ['/y/ (Yoghurt)', '/x/ (X-Ray)', '/ch/ (Train)', '/sh/ (Quiet)', '/th/ (Unvoiced)', '/TH/ (Voiced)'], 
+                actions: ['Yoghurt: Pretend to be eating a yoghurt, saying y, y, y.', 'X-Ray: Pretend to take an X-ray with a camera, saying ks, ks, ks.', 'Train: Move arms at the sides as a train, saying ch, ch, ch.', 'Quiet: Place index finger over lips, saying sh, sh, sh.', 'Unvoiced TH: Pretend to be a naughty clown sticking out tongue a little.', 'Voiced TH: Repeat the clown action, making a vibrating sound.'],
+                example_words: ['yes', 'mix', 'chip', 'shop', 'thin', 'them'],
+                tongue_twisters: [
+                    'Young yellow foxes chased chubby short sharks.', 'The sixth thin thief thought a thick thought.', 'Charles chose a cheap, chopped cheese sandwich.', 'She sells shells by the shining seashore swiftly.', 'Mix six thick sticks in the wax box quickly.',
+                    'Yesterday, your yellow yolk yielded nothing.', 'The mother then found that their brother was healthy.', 'Chester was chastised for chipping the chair.', 'They thought about the things they threw there.', 'A shy sheep’s shop sells short, shiny sheets.'
+                ]
+            },
+            // Group 7: Advanced Digraphs (6 sounds)
+            { 
+                group: 7, type: 'digraphs', title: 'Group 7: Advanced Digraphs', 
+                sounds: ['/qu/ (Duck)', '/ou/ (Prick Finger)', '/oi/ (Shout Ahoy)', '/ue/ (Point)', '/er/ (Hands Rolling)', '/ar/ (Driving Car)'], 
+                actions: ['Duck: Make a duck’s beak with hands, saying qu, qu, qu.', 'Prick Finger: Pretend your finger is a needle and prick your thumb, saying ou, ou, ou (as in out).', 'Shout Ahoy: Cup hands around mouth and shout to a boat, saying oi!', 'Point: Point to people around you, saying you, you, you (as in blue).', 'Hands Rolling: Use a rolling hand motion to emphasize the soft /er/ sound.', 'Driving Car: Use a car-driving gesture to convey the /ar/ sound.'],
+                example_words: ['queen', 'out', 'coin', 'blue', 'winter', 'car'],
+                tongue_twisters: [
+                    'The quiet queen quickly joined the loud crowd to cheer.', 'Quail quickly quacked when the quarrel quieted.', 'Our proud brown owl flew out of the cold house.', 'A royal coin joint was soiled with oil.', 'The rescue crew threw the blue glue on the flue.',
+                    'The winter worker earned a fair reward.', 'Far from the farm, a large carved star appeared.', 'Avoid all annoying noises, boys and girls.', 'Due to the huge clue, the crew flew home.', 'The sharp-eyed farmer parked his car in the dark.'
+                ]
+            }
+        ];
+
+        // MAPPING FOR CHART COLORS (Adapted for Royal/Gold)
+        const chartColors = {
+            group: ['#8E24AA', '#5E35B1', '#3949AB', '#039BE5', '#00ACC1', '#00897B', '#43A047'], // Shades of purple/blue/green
+            gold: '#FFD700',
+            silver: '#C0C0C0',
+            purple: '#4A148C',
+            darkBackground: 'rgba(255, 255, 255, 0.1)',
+            text: '#FFFFFF',
+            lineColor: '#FFD700' 
+        };
+
+        // 2. RENDERING LOGIC
+        const explorerContainer = document.getElementById('phonics-content');
+        const groupSelect = document.getElementById('group-select');
+        const filterButtons = document.querySelectorAll('.filter-btn');
+
+        function renderContent(groupFilter, typeFilter) {
+            explorerContainer.innerHTML = ''; // Clear previous content
+
+            const filteredData = phonicsData.filter(item => {
+                const groupMatch = groupFilter === 'all' || item.group == groupFilter;
+                const typeMatch = typeFilter === 'all' || item.type === typeFilter;
+                return groupMatch && typeMatch;
+            });
+
+            filteredData.forEach(item => {
+                const soundsList = item.sounds.map((s, index) => `<li class="silver-text font-bold">${s}: <span class="font-normal italic">${item.actions[index]}</span></li>`).join('');
+                const examplesList = item.example_words.map(w => `<span class="inline-block bg-primary-accent text-primary-bg font-bold text-sm px-3 py-1 rounded-full m-1">${w}</span>`).join('');
+                const twistersList = item.tongue_twisters.map(t => `<li class="text-sm italic silver-text">${t}</li>`).join('');
+
+                const html = `
+                    <div class="card p-6 shadow-2xl space-y-4 lg:col-span-1">
+                        <h4 class="text-2xl font-black gold-text">${item.title}</h4>
+                        
+                        <div class="p-4 bg-gray-700 rounded-lg text-center text-sm italic silver-text">
+                            [Image Placeholder: Jolly Phonics Action Visuals for ${item.title}]
+                        </div>
+
+                        <div class="space-y-2 border-t border-gray-700 pt-4">
+                            <p class="text-lg font-semibold text-white">Phonemes and Actions:</p>
+                            <ul class="list-disc list-inside ml-4 space-y-2">
+                                ${soundsList}
+                            </ul>
+                        </div>
+                        
+                        <div class="mt-4 border-t border-gray-700 pt-4">
+                            <p class="text-lg font-semibold text-white mb-2">Example Blending Words:</p>
+                            <div class="flex flex-wrap">
+                                ${examplesList}
+                            </div>
+                        </div>
+
+                        <div class="mt-4 border-t border-gray-700 pt-4">
+                            <p class="text-lg font-semibold text-white mb-2">Tongue Twister Practice (10):</p>
+                            <ul class="list-decimal list-inside ml-4 space-y-1">
+                                ${twistersList}
+                            </ul>
+                        </div>
+
+                    </div>
+                `;
+                explorerContainer.insertAdjacentHTML('beforeend', html);
+            });
+        }
+
+        // 3. INITIALIZATION & EVENT LISTENERS
+
+        // Populate Select Dropdown
+        phonicsData.forEach(item => {
+            const option = document.createElement('option');
+            option.value = item.group;
+            option.textContent = item.title;
+            groupSelect.appendChild(option);
+        });
+
+        // Event Listener for Group Select
+        groupSelect.addEventListener('change', () => {
+            // Reset type filter when group changes
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            filterButtons[2].classList.add('active'); // Re-activate 'Show All'
+            renderContent(groupSelect.value, 'all');
+        });
+
+        // Event Listener for Filter Buttons
+        filterButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                // Toggle active state
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                e.currentTarget.classList.add('active');
+
+                // Get filters
+                const groupFilter = groupSelect.value;
+                const typeFilter = e.currentTarget.dataset.type;
+
+                renderContent(groupFilter, typeFilter);
+            });
+        });
+
+        // Initial Load: Render all content and set default filter button
+        renderContent('all', 'all');
+        filterButtons[2].classList.add('active');
+
+
+        // 4. CHART.JS LOGIC
+
+        // Data for charts
+        const groupLabels = phonicsData.map(d => `Group ${d.group}`);
+        const soundCounts = phonicsData.map(d => d.sounds.length);
+        const complexityData = soundCounts.map((count, index) => ({ x: index + 1, y: 3 + index * 1.0 })); // Increased complexity progression
+
+        // Helper function for tooltips
+        const tooltipTitleCallback = (tooltipItems) => {
+            if (tooltipItems[0].dataset.label === 'Learning Complexity Score') {
+                return `Group ${tooltipItems[0].label.split(' ')[1]}`;
+            }
+            return tooltipItems[0].label;
+        };
+
+        // --- Chart 1: Group Distribution (Doughnut) ---
+        new Chart(document.getElementById('groupDistributionChart').getContext('2d'), {
+            type: 'doughnut',
+            data: {
+                labels: groupLabels,
+                datasets: [{
+                    label: 'Phonemes',
+                    data: soundCounts,
+                    backgroundColor: chartColors.group,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'right',
+                        labels: { color: chartColors.text, padding: 10 }
+                    },
+                    title: { display: false }
+                }
+            }
+        });
+
+        // --- Chart 2: Phoneme Count (Bar) ---
+        new Chart(document.getElementById('phonemeCountChart').getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: groupLabels,
+                datasets: [{
+                    label: 'Phonemes per Group',
+                    data: soundCounts,
+                    backgroundColor: chartColors.gold,
+                    borderColor: chartColors.gold,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                        ticks: { color: chartColors.text, stepSize: 1 }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: { color: chartColors.text }
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { callbacks: { title: tooltipTitleCallback } }
+                }
+            }
+        });
+
+        // --- Chart 3: Complexity Progression (Line) ---
+        new Chart(document.getElementById('complexityProgressionChart').getContext('2d'), {
+            type: 'line',
+            data: {
+                labels: groupLabels,
+                datasets: [{
+                    label: 'Learning Complexity Score',
+                    data: complexityData.map(d => d.y),
+                    borderColor: chartColors.lineColor,
+                    backgroundColor: 'rgba(255, 215, 0, 0.2)', // Light gold fill
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 6,
+                    pointHoverRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 11,
+                        title: { display: true, text: 'Relative Complexity', color: chartColors.text, font: { weight: 'bold' } },
+                        grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                        ticks: { color: chartColors.text }
+                    },
+                    x: {
+                        title: { display: true, text: 'Phonics Groups', color: chartColors.text, font: { weight: 'bold' } },
+                        grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                        ticks: { color: chartColors.text }
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { callbacks: { title: tooltipTitleCallback } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

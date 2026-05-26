@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NET - English Course Proposal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals - A calming and professional palette using beige, slate, and a soft blue accent to create a harmonious and focused user experience. -->
+    <!-- Application Structure Plan: A single-page, top-down narrative flow designed to be persuasive. It starts with an introduction, states the purpose, then presents a direct, side-by-side comparison of the 4-week and 3-month programs. This comparison includes a static, powerful bar chart visualization to immediately highlight the superior value of the 3-month option, followed by detailed textual descriptions and interactive curriculum breakdowns (accordions) for both programs displayed concurrently. A new section is added to present further illustrative data on the financial impact of English, AI, and Networking skills, reinforcing the value proposition. This structure was chosen to guide the client's decision-making process logically and visually, making the benefits of the recommended program immediately apparent and explicitly contrasting the two options, while also providing compelling business justifications. -->
+    <!-- Visualization & Content Choices: 
+        - Goal: Compare Program Value -> Viz: Single Grouped Bar Chart -> Interaction: Static, immediate visual comparison. -> Justification: Directly compares the limited learning outcomes (vocab, idioms, slang) of the 4-week plan against the significantly comprehensive outcomes of the 3-month plan. The visual disparity in the Chart.js bar chart is instantly persuasive and leaves no ambiguity.
+        - Goal: Organize Curriculum -> Viz: Two side-by-side Accordion-style cards for each program's weekly/monthly breakdown -> Interaction: User clicks to expand/collapse individual sections. -> Justification: Keeps the interface clean and prevents information overload while allowing users to explore both curricula details concurrently and at their own pace.
+        - Goal: Inform and Build Trust -> Viz: Structured text sections with clear typography and icons. -> Justification: Establishes professionalism and clearly communicates the purpose and trainer's expertise.
+        - Goal: Quantify ROI of Skills -> Viz: Three new Bar Charts (English, AI, Networking) -> Interaction: Static. -> Justification: Provides compelling, illustrative data points that directly appeal to an engineering firm's focus on tangible results and financial benefits. Each chart focuses on a specific skill's impact on business metrics.
+        - Library/Method: Chart.js for Canvas-based grouped bar chart and new individual bar charts. Tailwind CSS for all layout and styling. Vanilla JS for all interactions (accordion).
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+            background-color: #F8F7F4; /* Warm Beige Background */
+            color: #4A5568; /* Slate Gray Text */
+        }
+        .accent-bg { background-color: #3B82F6; } /* Soft Blue Accent */
+        .accent-text { color: #3B82F6; }
+        .secondary-bg { background-color: #E2E8F0; } /* Light Slate for contrast */
+        .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            transition: all 0.3s ease-in-out;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
+        }
+        .accordion-content.open {
+            max-height: 500px; /* Sufficient height for content */
+        }
+        .chart-container {
+            position: relative;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            min-height: 250px; /* Added min-height for robustness */
+            width: 100%;
+            max-width: 700px; /* Increased max-width for better comparison display */
+        }
+        /* Specific styling for smaller charts within the grid */
+        .chart-container.small-chart {
+            height: 250px;
+            min-height: 200px; /* Added min-height for robustness */
+            max-height: 250px;
+            max-width: none; /* Allow it to fill grid column */
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="container mx-auto p-4 md:p-8 max-w-5xl">
+        
+        <!-- Header -->
+        <header class="text-center mb-12">
+            <h1 class="text-3xl md:text-4xl font-bold text-slate-800">NET - Natural English Training</h1>
+            <p class="text-lg text-slate-500 mt-2 italic">"Learn English Naturally"</p>
+            <h2 class="text-2xl md:text-3xl font-semibold text-slate-700 mt-8">Official Proposal: Business English & Wind Engineering Proficiency</h2>
+        </header>
+
+        <!-- Introduction -->
+        <section id="introduction" class="mb-12">
+             <div class="card p-6 md:p-8">
+                <h3 class="text-2xl font-semibold text-slate-800 mb-4">Your Partner in Natural English Training - Corporate Training</h3>
+                <p class="text-slate-600 leading-relaxed">
+                    This document serves as our official proposal for enhancing your team's English proficiency. At **NET - Natural English Training**, with our slogan "Learn English Naturally," we deeply understand the critical role of effective communication in today's global wind energy sector. Leveraging 15 years in sales and marketing across Canada and England, coupled with 3 years of dedicated English teaching here in Vietnam, our unique expertise positions us as your ideal partner for corporate training. We're dedicated to equipping your engineering professionals with essential Business English, specialized Wind Engineering vocabulary, and practical communication skills for global interactions. Our specialized public speaking training ensures your team can confidently engage with foreign clients, online or in person, guaranteeing their success.
+                    <br><br>
+                    While the 3-month program represents an additional investment of approximately 33% compared to the shorter option, its value is truly tenfold. This extended duration uniquely allows for comprehensive skill development in crucial areas like advanced Business English, AI literacy, and professional Networking. Furthermore, the daily 1-hour self-study component, which is completely free, significantly accelerates learning through essential repetition and natural absorption, leading to profound and lasting proficiency for your team. We are prepared to share full, day-by-day and week-by-week lesson plans upon your request.
+                </p>
+            </div>
+        </section>
+
+        <!-- Course Purpose -->
+        <section id="purpose" class="mb-12">
+            <div class="card p-6 md:p-8">
+                <h3 class="text-2xl font-semibold text-slate-800 mb-4">Course Purpose</h3>
+                <p class="text-slate-600 leading-relaxed">
+                    This program is meticulously designed to empower your employees to confidently perform maintenance, repair, and installation tasks within the wind energy industry, while mastering the Business English and specialized terminology crucial for wind engineering. It aims to cultivate advanced English communication, networking capabilities, and foundational AI understanding, enhancing their professional interactions and operational effectiveness in the global wind energy landscape.
+                </p>
+            </div>
+        </section>
+
+        <!-- Program Comparison Chart -->
+        <section id="program-comparison-chart" class="mb-12">
+            <h3 class="text-3xl font-bold text-center text-slate-800 mb-8">Learning Outcomes Comparison: 4-Week vs. 3-Month Programs</h3>
+            <div class="chart-container card p-4">
+                <canvas id="programComparisonChart" width="600" height="350"></canvas>
+            </div>
+            <p class="text-center text-slate-600 mt-4 text-lg font-semibold">
+                Observe the significant difference in comprehensive learning outcomes.
+            </p>
+        </section>
+
+        <!-- Impact of Skills Section -->
+        <section id="impact-of-skills" class="mb-12">
+            <h3 class="text-3xl font-bold text-center text-slate-800 mb-8">The Tangible Impact of Advanced English Skills</h3>
+            <div class="card p-6 md:p-8 mb-8">
+                <p class="text-slate-600 leading-relaxed mb-6">
+                    Investing in advanced English proficiency, AI literacy, and strong networking skills yields quantifiable benefits. Companies whose teams excel in these areas often report significant increases in project success rates, operational efficiency, and new business opportunities. Below are illustrative statistics highlighting these impacts.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="col-span-1">
+                        <h4 class="text-xl font-semibold text-slate-800 mb-4 text-center">English Proficiency & Revenue Growth</h4>
+                        <div class="chart-container small-chart">
+                            <canvas id="englishRevenueChart" width="400" height="250"></canvas>
+                        </div>
+                        <p class="text-sm text-slate-500 text-center mt-2">Illustrative data: Companies with high English proficiency see greater revenue growth.</p>
+                    </div>
+                    <div class="col-span-1">
+                        <h4 class="text-xl font-semibold text-slate-800 mb-4 text-center">AI Integration & Operational Efficiency</h4>
+                        <div class="chart-container small-chart">
+                            <canvas id="aiEfficiencyChart" width="400" height="250"></canvas>
+                        </div>
+                        <p class="text-sm text-slate-500 text-center mt-2">Illustrative data: AI knowledge can lead to significant efficiency gains.</p>
+                    </div>
+                    <div class="col-span-1">
+                        <h4 class="text-xl font-semibold text-slate-800 mb-4 text-center">Networking & New Business Opportunities</h4>
+                        <div class="chart-container small-chart">
+                            <canvas id="networkingOpportunitiesChart" width="400" height="250"></canvas>
+                        </div>
+                        <p class="text-sm text-slate-500 text-center mt-2">Illustrative data: Strong networking skills correlate with increased new business.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Program Details Side-by-Side -->
+        <section id="program-details" class="mb-12">
+            <h3 class="text-3xl font-bold text-center text-slate-800 mb-8">Proposed Course Structures</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- 4-Week Program Details -->
+                <div class="card p-6 md:p-8">
+                    <h4 class="text-2xl font-bold text-slate-800 mb-2">Option 1: 4-Week Intensive Program <span class="text-red-500">(Limited Scope)</span></h4>
+                    <div class="text-sm font-semibold secondary-bg inline-block px-3 py-1 rounded-full text-slate-600 mb-4">4 weeks (Monday - Friday, 2 hours/day; 40 hours total)</div>
+                    <p class="text-slate-600 leading-relaxed mb-6">
+                        This concentrated program delivers foundational English for immediate operational needs in the wind energy sector. It focuses on core technical vocabulary and basic communication structures, providing a rapid introduction to essential language for maintenance, repair, and installation tasks. <strong>Due to its intense pace, only approximately 200 vocabulary words, 50 idioms, and 20 slang terms can be covered effectively.</strong> This brevity limits deep immersion in advanced business, AI, or networking communication skills.
+                    </p>
+                    <div>
+                        <h5 class="text-xl font-semibold text-slate-800 mb-4">Curriculum Breakdown</h5>
+                        <div class="border border-slate-200 rounded-lg overflow-hidden">
+                            <div class="border-b border-slate-200">
+                                <button class="accordion-toggle w-full text-left p-4 font-semibold text-slate-700 hover:bg-slate-50 flex justify-between items-center" data-index="0">
+                                    <span>Week 1: Introduction to Renewable Energy & Basic Communication</span>
+                                    <span class="transform transition-transform duration-300 text-blue-500 text-xl">+</span>
+                                </button>
+                                <div class="accordion-content px-4 pb-4 text-slate-600 text-sm">
+                                    <strong>Topics:</strong> Core wind energy vocabulary, basic grammar (Present Simple), self-introductions, workplace greetings.<br><strong>Learning Targets:</strong> Approx. 50 vocab, 13 idioms, 5 slang terms.
+                                </div>
+                            </div>
+                            <div class="border-b border-slate-200">
+                                <button class="accordion-toggle w-full text-left p-4 font-semibold text-slate-700 hover:bg-slate-50 flex justify-between items-center" data-index="1">
+                                    <span>Week 2: Wind Turbine Parts, Maintenance and Safety</span>
+                                    <span class="transform transition-transform duration-300 text-blue-500 text-xl">+</span>
+                                </button>
+                                <div class="accordion-content px-4 pb-4 text-slate-600 text-sm">
+                                    <strong>Topics:</strong> Describing parts (Present Continuous), giving/following instructions (imperatives, must/mustn't), environmental impact (Type 1 conditionals), polite requests.<br><strong>Learning Targets:</strong> Approx. 50 vocab, 13 idioms, 5 slang terms.
+                                </div>
+                            </div>
+                            <div class="border-b border-slate-200">
+                                <button class="accordion-toggle w-full text-left p-4 font-semibold text-slate-700 hover:bg-slate-50 flex justify-between items-center" data-index="2">
+                                    <span>Week 3: Wind Farm Operations, Tools and Documentation</span>
+                                    <span class="transform transition-transform duration-300 text-blue-500 text-xl">+</span>
+                                </button>
+                                <div class="accordion-content px-4 pb-4 text-slate-600 text-sm">
+                                    <strong>Topics:</strong> Electricity generation (Past Simple), tools/equipment (countable/uncountable nouns), maintenance reports (Present Perfect), workplace behavior (modal verbs), directions (prepositions).<br><strong>Learning Targets:</strong> Approx. 50 vocab, 12 idioms, 5 slang terms.
+                                </div>
+                            </div>
+                            <div class="border-b border-slate-200">
+                                <button class="accordion-toggle w-full text-left p-4 font-semibold text-slate-700 hover:bg-slate-50 flex justify-between items-center" data-index="3">
+                                    <span>Week 4: Review, Public Speaking and Final Assessment</span>
+                                    <span class="transform transition-transform duration-300 text-blue-500 text-xl">+</span>
+                                </button>
+                                <div class="accordion-content px-4 pb-4 text-slate-600 text-sm">
+                                    <strong>Topics:</strong> Vocabulary/concept review, public questions (indirect questioning), workplace conversations (reported speech), workday summaries (question forms), role-playing.<br><strong>Learning Targets:</strong> Approx. 50 vocab, 12 idioms, 5 slang terms.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3-Month Program Details -->
+                <div class="card p-6 md:p-8">
+                    <h4 class="text-2xl font-bold text-slate-800 mb-2">Option 2: 3-Month Comprehensive Program <span class="text-green-500">(Recommended)</span></h4>
+                    <div class="text-sm font-semibold secondary-bg inline-block px-3 py-1 rounded-full text-slate-600 mb-4">3 months (12 weeks, Mon - Fri, 1hr live instruction + 1hr self-study)</div>
+                    <p class="text-slate-600 leading-relaxed mb-6">
+                        This extended program offers deep immersion, crucial for significant gains in fluency, confidence, and practical application. It provides the necessary time to master high-level Business English, foundational AI concepts, and sophisticated Networking skills, truly preparing your staff for strategic international collaboration. <strong>Crucially, the longer format allows for essential repetition and a more natural absorption of complex language and concepts, leading to lasting proficiency.</strong>
+                    </p>
+                    <div>
+                        <h5 class="text-xl font-semibold text-slate-800 mb-4">Curriculum Breakdown</h5>
+                        <div class="border border-slate-200 rounded-lg overflow-hidden">
+                            <div class="border-b border-slate-200">
+                                <button class="accordion-toggle w-full text-left p-4 font-semibold text-slate-700 hover:bg-slate-50 flex justify-between items-center" data-index="0">
+                                    <span>Month 1: Foundational Wind Energy & General Business Communication</span>
+                                    <span class="transform transition-transform duration-300 text-blue-500 text-xl">+</span>
+                                </button>
+                                <div class="accordion-content px-4 pb-4 text-slate-600 text-sm">
+                                    <strong>Topics:</strong> Core wind energy vocabulary, basic business communication etiquette, essential grammar. Self-study focuses on general English news and simple industry podcasts.<br><strong>Learning Targets:</strong> Approx. 200 vocab, 100 idioms, 50 slang terms.
+                                </div>
+                            </div>
+                            <div class="border-b border-slate-200">
+                                <button class="accordion-toggle w-full text-left p-4 font-semibold text-slate-700 hover:bg-slate-50 flex justify-between items-center" data-index="1">
+                                    <span>Month 2: Technical Deep Dive & Intermediate Business English</span>
+                                    <span class="transform transition-transform duration-300 text-blue-500 text-xl">+</span>
+                                </button>
+                                <div class="accordion-content px-4 pb-4 text-slate-600 text-sm">
+                                    <strong>Topics:</strong> Specific wind turbine systems, complex maintenance procedures, advanced safety protocols, Business English for negotiations and reports. Self-study involves industry-specific documentaries.<br><strong>Learning Targets:</strong> Approx. 200 vocab, 100 idioms, 50 slang terms.
+                                </div>
+                            </div>
+                            <div class="border-b border-slate-200">
+                                <button class="accordion-toggle w-full text-left p-4 font-semibold text-slate-700 hover:bg-slate-50 flex justify-between items-center" data-index="2">
+                                    <span>Month 3: Advanced Communication, Networking, AI & Sales</span>
+                                    <span class="transform transition-transform duration-300 text-blue-500 text-xl">+</span>
+                                </button>
+                                <div class="accordion-content px-4 pb-4 text-slate-600 text-sm">
+                                    <strong>Topics:</strong> High-level communication for client meetings, advanced networking, public speaking, AI concepts, and sales communication. Self-study integrates advanced business and AI-related content.<br><strong>Learning Targets:</strong> Approx. 200 vocab, 100 idioms, 50 slang terms.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+         <!-- Class Customization -->
+        <section id="customization" class="mb-12">
+            <div class="card p-6 md:p-8">
+                <h3 class="text-2xl font-semibold text-slate-800 mb-4">Enhanced Learning: Class Customization</h3>
+                <p class="text-slate-600 leading-relaxed mb-4">
+                    To maximize learning effectiveness and provide a more personalized experience, we propose splitting participants into two distinct groups based on their current English proficiency:
+                </p>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                        <h4 class="font-semibold text-blue-800">Lower Intermediate & Beginner Students</h4>
+                        <p class="text-sm text-blue-700 mt-1">This group will focus on building foundational grammar, vocabulary, and confidence in basic communication.</p>
+                    </div>
+                    <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                        <h4 class="font-semibold text-green-800">Higher Intermediate & Advanced Students</h4>
+                        <p class="text-sm text-green-700 mt-1">This group will engage in more complex discussions, advanced business scenarios, and intensive practice of specialized skills.</p>
+                    </div>
+                </div>
+                 <p class="text-slate-600 leading-relaxed mt-4">
+                    This approach allows for tailored activities, more individualized attention, and fosters a supportive environment within smaller class sizes, ensuring optimal progress for all participants.
+                </p>
+            </div>
+        </section>
+
+        <!-- Conclusion -->
+        <section id="conclusion">
+            <div class="card p-6 md:p-8 bg-slate-700 text-white">
+                <h3 class="text-2xl font-semibold mb-4">Our Recommendation</h3>
+                <p class="leading-relaxed opacity-90">
+                    While the 4-week intensive program offers a rapid foundational overview, **NET - Natural English Training** strongly recommends the **3-month comprehensive program**. This extended duration is crucial for truly embedding the complex Business English, AI, and Networking skills vital for international collaboration and strategic growth. The longer format allows for deeper learning through essential repetition and self-study, ensuring your team develops not just basic competence, but a profound and natural command of English.
+                </p>
+                <p class="font-semibold mt-4">This investment will yield significantly greater and more sustainable results for your company's future.</p>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        const chartComparisonData = {
+            labels: ['Vocabulary Words', 'Idioms', 'Slang Terms'],
+            datasets: [
+                {
+                    label: '4-Week Intensive',
+                    data: [200, 50, 20],
+                    backgroundColor: 'rgba(59, 130, 246, 0.7)', // Blue
+                    borderColor: 'rgba(59, 130, 246, 1)',
+                    borderWidth: 1,
+                    borderRadius: 5,
+                },
+                {
+                    label: '3-Month Comprehensive',
+                    data: [600, 300, 150], // Updated data for 3-month program
+                    backgroundColor: 'rgba(16, 185, 129, 0.7)', // Green
+                    borderColor: 'rgba(16, 185, 129, 1)',
+                    borderWidth: 1,
+                    borderRadius: 5,
+                }
+            ]
+        };
+
+        function initializeComparisonChart() {
+            const ctx = document.getElementById('programComparisonChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: chartComparisonData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: '#E2E8F0'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                            labels: {
+                                font: {
+                                    size: 14,
+                                    weight: 'bold'
+                                },
+                                boxWidth: 20,
+                                padding: 20
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: '#1E293B',
+                            titleFont: { size: 14, weight: 'bold' },
+                            bodyFont: { size: 12 },
+                            padding: 10,
+                            cornerRadius: 6
+                        }
+                    }
+                }
+            });
+        }
+
+        function initializeEnglishRevenueChart() {
+            const ctx = document.getElementById('englishRevenueChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Low English Proficiency', 'High English Proficiency'],
+                    datasets: [{
+                        label: 'Average Annual Revenue Growth',
+                        data: [5, 20], // Illustrative data: 5% vs 20% growth
+                        backgroundColor: ['rgba(249, 115, 22, 0.7)', 'rgba(16, 185, 129, 0.7)'],
+                        borderColor: ['rgba(249, 115, 22, 1)', 'rgba(16, 185, 129, 1)'],
+                        borderWidth: 1,
+                        borderRadius: 5,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Revenue Growth (%)'
+                            },
+                            grid: {
+                                color: '#E2E8F0'
+                            }
+                        },
+                        x: {
+                             grid: {
+                                display: false
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: '#1E293B',
+                            titleFont: { size: 14, weight: 'bold' },
+                            bodyFont: { size: 12 },
+                            padding: 10,
+                            cornerRadius: 6
+                        }
+                    }
+                }
+            });
+        }
+
+        function initializeAIEfficiencyChart() {
+            const ctx = document.getElementById('aiEfficiencyChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['No AI Knowledge', 'AI Knowledgeable Staff'],
+                    datasets: [{
+                        label: 'Operational Efficiency Improvement',
+                        data: [0, 15], // Illustrative data: 0% vs 15% efficiency improvement
+                        backgroundColor: ['rgba(239, 68, 68, 0.7)', 'rgba(59, 130, 246, 0.7)'],
+                        borderColor: ['rgba(239, 68, 68, 1)', 'rgba(59, 130, 246, 1)'],
+                        borderWidth: 1,
+                        borderRadius: 5,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Efficiency Improvement (%)'
+                            },
+                            grid: {
+                                color: '#E2E8F0'
+                            }
+                        },
+                        x: {
+                             grid: {
+                                display: false
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: '#1E293B',
+                            titleFont: { size: 14, weight: 'bold' },
+                            bodyFont: { size: 12 },
+                            padding: 10,
+                            cornerRadius: 6
+                        }
+                    }
+                }
+            });
+        }
+
+        function initializeNetworkingOpportunitiesChart() {
+            const ctx = document.getElementById('networkingOpportunitiesChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Limited Networking', 'Strong Networking Skills'],
+                    datasets: [{
+                        label: 'Increase in New Partnerships',
+                        data: [1, 8], // Illustrative data: 1 vs 8 new partnerships per year
+                        backgroundColor: ['rgba(107, 114, 128, 0.7)', 'rgba(249, 115, 22, 0.7)'],
+                        borderColor: ['rgba(107, 114, 128, 1)', 'rgba(249, 115, 22, 1)'],
+                        borderWidth: 1,
+                        borderRadius: 5,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'New Partnerships (Avg. per year)'
+                            },
+                            grid: {
+                                color: '#E2E8F0'
+                            }
+                        },
+                        x: {
+                             grid: {
+                                display: false
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: '#1E293B',
+                            titleFont: { size: 14, weight: 'bold' },
+                            bodyFont: { size: 12 },
+                            padding: 10,
+                            cornerRadius: 6
+                        }
+                    }
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeComparisonChart();
+            initializeEnglishRevenueChart();
+            initializeAIEfficiencyChart();
+            initializeNetworkingOpportunitiesChart();
+
+            document.querySelectorAll('.accordion-toggle').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    const icon = button.querySelector('span:last-child');
+                    const isOpen = content.classList.contains('open');
+
+                    // Close all other open accordions in the same parent group
+                    const parentAccordionGroup = button.closest('.border.border-slate-200.rounded-lg.overflow-hidden');
+                    if (parentAccordionGroup) {
+                        parentAccordionGroup.querySelectorAll('.accordion-content.open').forEach(openContent => {
+                            if (openContent !== content) { // Don't close the current one if it's already open
+                                openContent.classList.remove('open');
+                                const otherIcon = openContent.previousElementSibling.querySelector('span:last-child');
+                                otherIcon.classList.remove('rotate-45');
+                                otherIcon.innerText = '+';
+                            }
+                        });
+                    }
+
+                    // Toggle the clicked accordion
+                    if (!isOpen) {
+                        content.classList.add('open');
+                        icon.classList.add('rotate-45');
+                        icon.innerText = '−';
+                    } else {
+                        content.classList.remove('open');
+                        icon.classList.remove('rotate-45');
+                        icon.innerText = '+';
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

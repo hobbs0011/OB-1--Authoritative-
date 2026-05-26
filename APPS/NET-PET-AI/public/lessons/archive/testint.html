@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phoenix Protocol - APP SHELL v1.2 (w/ Banner)</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
+
+        body {
+            background-color: #0F111A;
+            font-family: 'Roboto Mono', Consolas, monospace;
+            margin: 0;
+            padding: 0;
+            color: #E6E6E6;
+        }
+
+        .app-shell {
+            display: flex;
+            height: 100vh; /* Full viewport height */
+        }
+
+        /* 1. MAIN NAVIGATION SIDEBAR */
+        .app-sidebar {
+            width: 260px;
+            background-color: #0A0C12;
+            border-right: 2px solid #FF9900;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+        }
+        .app-sidebar .sidebar-logo {
+            color: #FF9900;
+            font-size: 1.5em;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+        }
+        .app-sidebar .nav-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .app-sidebar .nav-link {
+            font-family: 'Roboto Mono', Consolas, monospace;
+            font-size: 1.1em;
+            font-weight: 700;
+            text-decoration: none;
+            color: #AAA;
+            padding: 15px 20px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+        .app-sidebar .nav-link:hover {
+            background-color: #1A1D2A;
+            color: #FFF;
+        }
+        .app-sidebar .nav-link.active {
+            background-color: #00BFFF;
+            color: #0F111A;
+        }
+        .app-sidebar .user-profile {
+            margin-top: auto;
+            border-top: 1px solid #333;
+            padding-top: 20px;
+            font-size: 1.1em;
+            color: #AAA;
+        }
+
+        /* 2. MAIN APPLICATION CONTENT */
+        .app-main {
+            flex-grow: 1;
+            padding: 30px;
+            overflow-y: auto;
+            height: 100vh;
+            box-sizing: border-box;
+        }
+        
+        /* --- NEW: BANNER PLACEHOLDER --- */
+        .app-banner-placeholder {
+            background-color: #1A1D2A;
+            border: 2px dashed #FF9900; /* Use (F) Orange to make it stand out */
+            border-radius: 6px;
+            padding: 20px;
+            text-align: center;
+            color: #FF9900;
+            font-weight: 700;
+            font-size: 1.1em;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+        /* --- END NEW --- */
+        
+        .app-main-header {
+            border-bottom: 1px solid #333;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+        .app-main-header h1 {
+            color: #FFF;
+            margin: 0 0 5px 0;
+            font-size: 1.8em;
+        }
+        .app-main-header p {
+            color: #AAA;
+            font-size: 1.1em;
+            margin: 0;
+        }
+
+        /* 3. TABBED INTERFACE */
+        .tabs-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #333;
+        }
+        .tab-link {
+            font-family: 'Roboto Mono', Consolas, monospace;
+            font-weight: 700;
+            font-size: 1.1em;
+            background-color: transparent;
+            color: #AAA;
+            border: none;
+            padding: 15px 25px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .tab-link:hover { color: #FFF; }
+        .tab-link.active {
+            color: #00BFFF;
+            border-bottom: 3px solid #00BFFF;
+        }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        
+        .lesson-flow-container {
+            background-color: #1A1D2A;
+            border: 1px solid #333;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        
+        .flow-item {
+            font-family: 'Roboto Mono', Consolas, monospace;
+            padding: 20px;
+            border-bottom: 1px solid #333;
+        }
+        .flow-item:last-child {
+            border-bottom: none;
+        }
+        
+        .flow-item.mentor {
+            background-color: #1A1D2A;
+            border-left: 5px solid #FF9900;
+        }
+        .flow-item.mentor .mentor-name {
+            color: #FF9900;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1.1em;
+        }
+        .flow-item.mentor .mentor-text {
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+        
+        .flow-item.scenario-title {
+            background-color: #10121A;
+        }
+        .flow-item.scenario-title h2 {
+            color: #FFFFFF;
+            font-weight: 700;
+            font-size: 1.3em;
+            margin: 0;
+        }
+        
+        .flow-item.dialogue {
+            background-color: #0F111A;
+        }
+        .flow-item.dialogue .char-name {
+            color: #FF007F; /* Hot Pink */
+            font-weight: 700;
+            font-size: 1.1em;
+        }
+        .flow-item.dialogue .dialogue-text {
+            color: #FFF;
+            font-size: 1.2em;
+            font-style: italic;
+            line-height: 1.6;
+        }
+        
+        .flow-item.action h2 {
+            color: #FFF;
+            font-weight: 700;
+            font-size: 1.3em;
+            margin: 0 0 15px 0;
+        }
+        
+        .choice-area { display: grid; gap: 15px; }
+        .btn-choice {
+            font-family: 'Roboto Mono', Consolas, monospace;
+            font-weight: 700;
+            font-size: 1.1em;
+            background-color: #1A1D2A;
+            color: #00BFFF;
+            border: 1px solid #00BFFF;
+            border-radius: 4px;
+            padding: 15px 20px;
+            cursor: pointer;
+            width: 100%;
+            text-align: left;
+            transition: all 0.2s ease;
+            box-sizing: border-box;
+        }
+        .btn-choice:hover { background-color: #00BFFF; color: #0F111A; }
+        .btn-choice .choice-letter { color: #FF9900; margin-right: 10px; }
+        
+        .task-area {
+            background-color: #0A0C12;
+            padding: 20px;
+        }
+        .task-area h2 {
+            color: #FFFF00; /* Yellow for task */
+            font-size: 1.3em;
+            margin: 0 0 15px 0;
+        }
+        .task-area p { font-size: 1.1em; }
+        .task-area textarea {
+            font-family: 'Roboto Mono', Consolas, monospace;
+            width: 98%;
+            height: 120px;
+            background-color: #0F111A;
+            border: 1px solid #555;
+            border-radius: 4px;
+            color: #FFFFFF;
+            font-size: 1.1em;
+            padding: 10px;
+            margin-top: 10px;
+        }
+        .btn-submit {
+            font-family: 'Roboto Mono', Consolas, monospace;
+            font-weight: 700;
+            font-size: 1.2em;
+            background-color: #FFFF00;
+            color: #0F111A;
+            border: none;
+            border-radius: 4px;
+            padding: 12px 20px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 15px;
+            transition: all 0.2s ease;
+        }
+        .btn-submit:hover { background-color: #FFF; }
+        
+        .placeholder-text {
+            font-size: 1.1em;
+            color: #555;
+            font-style: italic;
+            padding: 20px;
+            height: 300px;
+        }
+        .vocab-list {
+            font-size: 1.1em;
+            line-height: 2.0;
+            list-style-type: square;
+            color: #AAA;
+            height: 800px; /* Force scroll */
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="app-shell">
+        
+        <div class="app-sidebar">
+            <div class="sidebar-logo">PHOENIX</div>
+            <div class="nav-menu">
+                <a href="#" class="nav-link">🚀 Dashboard</a>
+                <a href="#" class="nav-link active">📚 All Lessons</a>
+                <a href="#" class="nav-link">📈 My Progress</a>
+                <a href="#" class="nav-link">👥 Buddy System</a>
+                <a href="#" class="nav-link">⚙️ Settings</a>
+            </div>
+            <div class="user-profile">
+                Student: Bin<br>
+                XP: 250
+            </div>
+        </div>
+
+        <div class="app-main">
+            
+            <div class="app-banner-placeholder">
+                [ BANNER_PLACEHOLDER_900x120 ]<br>
+                Space reserved for promotional or announcement banners.
+            </div>
+            <div class="app-main-header">
+                <h1>Lesson 02: Running an Effective Meeting</h1>
+                <p>Learn to control the room, handle interruptions, and keep your agenda on track.</p>
+            </div>
+
+            <div class="tabs-container">
+                <button class="tab-link active" onclick="openTab(event, 'scenario')">🚀 Scenario</button>
+                <button class="tab-link" onclick="openTab(event, 'resources')">📚 Resources</button>
+                <button class="tab-link" onclick="openTab(event, 'notes')">💡 My Notes</button>
+            </div>
+
+            <div id="scenario" class="tab-content active">
+                
+                <div class="lesson-flow-container">
+                    
+                    <div class="flow-item mentor">
+                        <span class="mentor-name">MENTOR (OBI-0):</span>
+                        <div class="mentor-text">"Time for a real test. This is a Pillar II Scenario. Your choices matter. They will affect the narrative. Let's see how you handle the pressure."</div>
+                    </div>
+                    
+                    <div class="flow-item scenario-title">
+                        <h2>👥 PART 1: The Meeting Derailer</h2>
+                    </div>
+
+                    <div class="flow-item dialogue">
+                        <p>You are leading a critical project update meeting. 10 minutes in, a senior colleague (Mark) interrupts you.</p>
+                        <div class="dialogue-box">
+                            <span class="char-name">MARK (Skeptical):</span>
+                            <div class="dialogue-text">"Sorry, but I have to stop you. I just don't see how this new timeline is realistic. Are we sure this is the right plan at all?"</div>
+                        </div>
+                    </div>
+                    
+                    <div class="flow-item action">
+                        <h2>YOUR ACTION:</h2>
+                        <div class="choice-area">
+                            <button class="btn-choice"><span class="choice-letter">[ A ]</span> "Mark, you're right... let's all discuss the Q3 debt."</button>
+                            <button class="btn-choice"><span class="choice-letter">[ B ]</span> "That's an important point, Mark. Let's 'park' that for now..."</button>
+                            <button class="btn-choice"><span class="choice-letter">[ C ]</span> "I disagree. Please let me finish my presentation."</button>
+                        </div>
+                    </div>
+                    
+                    <div class="flow-item task-area">
+                        <h2>🎯 PART 2: YOUR TASK (Writing)</h2>
+                        <p>Imagine you chose **Option [B]**. The meeting is now over. Write a short, professional follow-up email to Mark to address his "parked" concern. (2-3 sentences)</p>
+                        <textarea placeholder="e.g., 'Hi Mark, thanks for raising that point today...'"></textarea>
+                        <button class="btn-submit">SUBMIT LESSON</button>
+                    </div>
+
+                </div> </div>
+
+            <div id="resources" class="tab-content">
+                <div class="lesson-flow-container">
+                    <div class="flow-item scenario-title">
+                        <h2>📚 Resources & Vocabulary</h2>
+                    </div>
+                    <div class="flow-item">
+                        <ul class="vocab-list">
+                            <li><strong>To "derail" (v.):</strong> To stop a process or plan from succeeding.</li>
+                            <li><strong>To "park" an idea (v.):</strong> To set an idea aside to be discussed later.</li>
+                            <li><strong>Agenda (n.):</strong> A list of items to be discussed at a meeting.</li>
+                            <li><strong>Realistic (adj.):</strong> Seeming real or achievable.</li>
+                            <li><strong>Technical Debt (n.):</strong> The long-term cost of choosing an easy (limited) solution instead of a better, more time-consuming one.</li>
+                            <li><strong>Consensus (n.):</strong> A general agreement.</li>
+                            <li><strong>Action Items (n.):</strong> Tasks assigned to someone during a meeting.</li>
+                            <li>... (This content is here to demonstrate that the main panel is scrollable.)</li>
+                            <li style="height: 800px;"></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div id="notes" class="tab-content">
+                <div class="lesson-flow-container">
+                    <div class="flow-item scenario-title">
+                        <h2>💡 My Notes</h2>
+                    </div>
+                    <div class="flow-item">
+                        <p class="placeholder-text">[ A simple text editor for the student to take private notes will appear here. ]</Gdiv>
+                        <div style="height: 1000px;"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tab-link");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+        // Set the default tab to be open
+        document.getElementById("scenario").style.display = "block";
+    </script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phoenix Protocol - APP SHELL v1.2 (w/ Banner)</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
+
+        body {
+            background-color: #0F111A;
+            font-family: 'Roboto Mono', Consolas, monospace;
+            margin: 0;
+            padding: 0;
+            color: #E6E6E6;
+        }
+
+        .app-shell {
+            display: flex;
+            height: 100vh; /* Full viewport height */
+        }
+
+        /* 1. MAIN NAVIGATION SIDEBAR */
+        .app-sidebar {
+            width: 260px;
+            background-color: #0A0C12;
+            border-right: 2px solid #FF9900;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+        }
+        .app-sidebar .sidebar-logo {
+            color: #FF9900;
+            font-size: 1.5em;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+        }
+        .app-sidebar .nav-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .app-sidebar .nav-link {
+            font-family: 'Roboto Mono', Consolas, monospace;
+            font-size: 1.1em;
+            font-weight: 700;
+            text-decoration: none;
+            color: #AAA;
+            padding: 15px 20px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+        .app-sidebar .nav-link:hover {
+            background-color: #1A1D2A;
+            color: #FFF;
+        }
+        .app-sidebar .nav-link.active {
+            background-color: #00BFFF;
+            color: #0F111A;
+        }
+        .app-sidebar .user-profile {
+            margin-top: auto;
+            border-top: 1px solid #333;
+            padding-top: 20px;
+            font-size: 1.1em;
+            color: #AAA;
+        }
+
+        /* 2. MAIN APPLICATION CONTENT */
+        .app-main {
+            flex-grow: 1;
+            padding: 30px;
+            overflow-y: auto;
+            height: 100vh;
+            box-sizing: border-box;
+        }
+        
+        /* --- NEW: BANNER PLACEHOLDER --- */
+        .app-banner-placeholder {
+            background-color: #1A1D2A;
+            border: 2px dashed #FF9900; /* Use (F) Orange to make it stand out */
+            border-radius: 6px;
+            padding: 20px;
+            text-align: center;
+            color: #FF9900;
+            font-weight: 700;
+            font-size: 1.1em;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+        /* --- END NEW --- */
+        
+        .app-main-header {
+            border-bottom: 1px solid #333;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+        .app-main-header h1 {
+            color: #FFF;
+            margin: 0 0 5px 0;
+            font-size: 1.8em;
+        }
+        .app-main-header p {
+            color: #AAA;
+            font-size: 1.1em;
+            margin: 0;
+        }
+
+        /* 3. TABBED INTERFACE */
+        .tabs-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #333;
+        }
+        .tab-link {
+            font-family: 'Roboto Mono', Consolas, monospace;
+            font-weight: 700;
+            font-size: 1.1em;
+            background-color: transparent;
+            color: #AAA;
+            border: none;
+            padding: 15px 25px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .tab-link:hover { color: #FFF; }
+        .tab-link.active {
+            color: #00BFFF;
+            border-bottom: 3px solid #00BFFF;
+        }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        
+        .lesson-flow-container {
+            background-color: #1A1D2A;
+            border: 1px solid #333;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        
+        .flow-item {
+            font-family: 'Roboto Mono', Consolas, monospace;
+            padding: 20px;
+            border-bottom: 1px solid #333;
+        }
+        .flow-item:last-child {
+            border-bottom: none;
+        }
+        
+        .flow-item.mentor {
+            background-color: #1A1D2A;
+            border-left: 5px solid #FF9900;
+        }
+        .flow-item.mentor .mentor-name {
+            color: #FF9900;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1.1em;
+        }
+        .flow-item.mentor .mentor-text {
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+        
+        .flow-item.scenario-title {
+            background-color: #10121A;
+        }
+        .flow-item.scenario-title h2 {
+            color: #FFFFFF;
+            font-weight: 700;
+            font-size: 1.3em;
+            margin: 0;
+        }
+        
+        .flow-item.dialogue {
+            background-color: #0F111A;
+        }
+        .flow-item.dialogue .char-name {
+            color: #FF007F; /* Hot Pink */
+            font-weight: 700;
+            font-size: 1.1em;
+        }
+        .flow-item.dialogue .dialogue-text {
+            color: #FFF;
+            font-size: 1.2em;
+            font-style: italic;
+            line-height: 1.6;
+        }
+        
+        .flow-item.action h2 {
+            color: #FFF;
+            font-weight: 700;
+            font-size: 1.3em;
+            margin: 0 0 15px 0;
+        }
+        
+        .choice-area { display: grid; gap: 15px; }
+        .btn-choice {
+            font-family: 'Roboto Mono', Consolas, monospace;
+            font-weight: 700;
+            font-size: 1.1em;
+            background-color: #1A1D2A;
+            color: #00BFFF;
+            border: 1px solid #00BFFF;
+            border-radius: 4px;
+            padding: 15px 20px;
+            cursor: pointer;
+            width: 100%;
+            text-align: left;
+            transition: all 0.2s ease;
+            box-sizing: border-box;
+        }
+        .btn-choice:hover { background-color: #00BFFF; color: #0F111A; }
+        .btn-choice .choice-letter { color: #FF9900; margin-right: 10px; }
+        
+        .task-area {
+            background-color: #0A0C12;
+            padding: 20px;
+        }
+        .task-area h2 {
+            color: #FFFF00; /* Yellow for task */
+            font-size: 1.3em;
+            margin: 0 0 15px 0;
+        }
+        .task-area p { font-size: 1.1em; }
+        .task-area textarea {
+            font-family: 'Roboto Mono', Consolas, monospace;
+            width: 98%;
+            height: 120px;
+            background-color: #0F111A;
+            border: 1px solid #555;
+            border-radius: 4px;
+            color: #FFFFFF;
+            font-size: 1.1em;
+            padding: 10px;
+            margin-top: 10px;
+        }
+        .btn-submit {
+            font-family: 'Roboto Mono', Consolas, monospace;
+            font-weight: 700;
+            font-size: 1.2em;
+            background-color: #FFFF00;
+            color: #0F111A;
+            border: none;
+            border-radius: 4px;
+            padding: 12px 20px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 15px;
+            transition: all 0.2s ease;
+        }
+        .btn-submit:hover { background-color: #FFF; }
+        
+        .placeholder-text {
+            font-size: 1.1em;
+            color: #555;
+            font-style: italic;
+            padding: 20px;
+            height: 300px;
+        }
+        .vocab-list {
+            font-size: 1.1em;
+            line-height: 2.0;
+            list-style-type: square;
+            color: #AAA;
+            height: 800px; /* Force scroll */
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="app-shell">
+        
+        <div class="app-sidebar">
+            <div class="sidebar-logo">PHOENIX</div>
+            <div class="nav-menu">
+                <a href="#" class="nav-link">🚀 Dashboard</a>
+                <a href="#" class="nav-link active">📚 All Lessons</a>
+                <a href="#" class="nav-link">📈 My Progress</a>
+                <a href="#" class="nav-link">👥 Buddy System</a>
+                <a href="#" class="nav-link">⚙️ Settings</a>
+            </div>
+            <div class="user-profile">
+                Student: Bin<br>
+                XP: 250
+            </div>
+        </div>
+
+        <div class="app-main">
+            
+            <div class="app-banner-placeholder">
+                [ BANNER_PLACEHOLDER_900x120 ]<br>
+                Space reserved for promotional or announcement banners.
+            </div>
+            <div class="app-main-header">
+                <h1>Lesson 02: Running an Effective Meeting</h1>
+                <p>Learn to control the room, handle interruptions, and keep your agenda on track.</p>
+            </div>
+
+            <div class="tabs-container">
+                <button class="tab-link active" onclick="openTab(event, 'scenario')">🚀 Scenario</button>
+                <button class="tab-link" onclick="openTab(event, 'resources')">📚 Resources</button>
+                <button class="tab-link" onclick="openTab(event, 'notes')">💡 My Notes</button>
+            </div>
+
+            <div id="scenario" class="tab-content active">
+                
+                <div class="lesson-flow-container">
+                    
+                    <div class="flow-item mentor">
+                        <span class="mentor-name">MENTOR (OBI-0):</span>
+                        <div class="mentor-text">"Time for a real test. This is a Pillar II Scenario. Your choices matter. They will affect the narrative. Let's see how you handle the pressure."</div>
+                    </div>
+                    
+                    <div class="flow-item scenario-title">
+                        <h2>👥 PART 1: The Meeting Derailer</h2>
+                    </div>
+
+                    <div class="flow-item dialogue">
+                        <p>You are leading a critical project update meeting. 10 minutes in, a senior colleague (Mark) interrupts you.</p>
+                        <div class="dialogue-box">
+                            <span class="char-name">MARK (Skeptical):</span>
+                            <div class="dialogue-text">"Sorry, but I have to stop you. I just don't see how this new timeline is realistic. Are we sure this is the right plan at all?"</div>
+                        </div>
+                    </div>
+                    
+                    <div class="flow-item action">
+                        <h2>YOUR ACTION:</h2>
+                        <div class="choice-area">
+                            <button class="btn-choice"><span class="choice-letter">[ A ]</span> "Mark, you're right... let's all discuss the Q3 debt."</button>
+                            <button class="btn-choice"><span class="choice-letter">[ B ]</span> "That's an important point, Mark. Let's 'park' that for now..."</button>
+                            <button class="btn-choice"><span class="choice-letter">[ C ]</span> "I disagree. Please let me finish my presentation."</button>
+                        </div>
+                    </div>
+                    
+                    <div class="flow-item task-area">
+                        <h2>🎯 PART 2: YOUR TASK (Writing)</h2>
+                        <p>Imagine you chose **Option [B]**. The meeting is now over. Write a short, professional follow-up email to Mark to address his "parked" concern. (2-3 sentences)</p>
+                        <textarea placeholder="e.g., 'Hi Mark, thanks for raising that point today...'"></textarea>
+                        <button class="btn-submit">SUBMIT LESSON</button>
+                    </div>
+
+                </div> </div>
+
+            <div id="resources" class="tab-content">
+                <div class="lesson-flow-container">
+                    <div class="flow-item scenario-title">
+                        <h2>📚 Resources & Vocabulary</h2>
+                    </div>
+                    <div class="flow-item">
+                        <ul class="vocab-list">
+                            <li><strong>To "derail" (v.):</strong> To stop a process or plan from succeeding.</li>
+                            <li><strong>To "park" an idea (v.):</strong> To set an idea aside to be discussed later.</li>
+                            <li><strong>Agenda (n.):</strong> A list of items to be discussed at a meeting.</li>
+                            <li><strong>Realistic (adj.):</strong> Seeming real or achievable.</li>
+                            <li><strong>Technical Debt (n.):</strong> The long-term cost of choosing an easy (limited) solution instead of a better, more time-consuming one.</li>
+                            <li><strong>Consensus (n.):</strong> A general agreement.</li>
+                            <li><strong>Action Items (n.):</strong> Tasks assigned to someone during a meeting.</li>
+                            <li>... (This content is here to demonstrate that the main panel is scrollable.)</li>
+                            <li style="height: 800px;"></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div id="notes" class="tab-content">
+                <div class="lesson-flow-container">
+                    <div class="flow-item scenario-title">
+                        <h2>💡 My Notes</h2>
+                    </div>
+                    <div class="flow-item">
+                        <p class="placeholder-text">[ A simple text editor for the student to take private notes will appear here. ]</Gdiv>
+                        <div style="height: 1000px;"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tab-link");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+        // Set the default tab to be open
+        document.getElementById("scenario").style.display = "block";
+    </script>
+
+</body>
+</html>

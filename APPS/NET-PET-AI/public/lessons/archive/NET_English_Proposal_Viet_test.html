@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NET - Đề Xuất Khóa Học Tiếng Anh</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals - Bảng màu ấm áp, trung tính, sử dụng màu be, xám đá và xanh lam nhẹ để tạo trải nghiệm người dùng hài hòa và chuyên nghiệp. -->
+    <!-- Application Structure Plan: Cấu trúc một trang, trình bày từ trên xuống dưới nhằm mục đích thuyết phục. Bắt đầu với phần giới thiệu, nêu mục đích, sau đó trình bày so sánh trực tiếp hai chương trình 4 tuần và 3 tháng. Phần so sánh này bao gồm biểu đồ cột tĩnh, mạnh mẽ để làm nổi bật ngay lập tức giá trị vượt trội của tùy chọn 3 tháng, tiếp theo là mô tả văn bản chi tiết và phân tích chương trình tương tác (accordion) cho cả hai chương trình được hiển thị đồng thời. Một phần mới được thêm vào để trình bày thêm dữ liệu minh họa về tác động tài chính của các kỹ năng tiếng Anh, AI và Mạng lưới, củng cố đề xuất giá trị. Cấu trúc này được chọn để hướng dẫn quá trình ra quyết định của khách hàng một cách hợp lý và trực quan, làm cho lợi ích của chương trình được đề xuất trở nên rõ ràng và đối chiếu rõ ràng hai lựa chọn, đồng thời cung cấp các lý do kinh doanh thuyết phục. -->
+    <!-- Visualization & Content Choices: 
+        - Mục tiêu: So sánh Giá trị Chương trình -> Trực quan hóa: Biểu đồ cột nhóm đơn -> Tương tác: So sánh trực quan tĩnh, tức thì. -> Giải thích: So sánh trực tiếp kết quả học tập hạn chế (từ vựng, thành ngữ, tiếng lóng) của kế hoạch 4 tuần với kết quả toàn diện hơn đáng kể của kế hoạch 3 tháng. Sự khác biệt trực quan trong biểu đồ cột Chart.js có tính thuyết phục ngay lập tức và không gây mơ hồ.
+        - Mục tiêu: Tổ chức Chương trình học -> Trực quan hóa: Hai thẻ kiểu accordion đặt cạnh nhau cho phân tích hàng tuần/hàng tháng của mỗi chương trình -> Tương tác: Người dùng nhấp để mở rộng/thu gọn các phần riêng lẻ. -> Giải thích: Giữ giao diện gọn gàng và ngăn ngừa quá tải thông tin đồng thời cho phép người dùng khám phá chi tiết cả hai chương trình học đồng thời và theo tốc độ của riêng họ.
+        - Mục tiêu: Thông tin và Xây dựng Niềm tin -> Trực quan hóa: Các phần văn bản có cấu trúc với kiểu chữ rõ ràng và biểu tượng. -> Giải thích: Thiết lập tính chuyên nghiệp và truyền đạt rõ ràng mục đích cũng như chuyên môn của người đào tạo.
+        - Mục tiêu: Định lượng ROI của Kỹ năng -> Trực quan hóa: Ba biểu đồ cột mới (Tiếng Anh, AI, Mạng lưới) -> Tương tác: Tĩnh. -> Giải thích: Cung cấp các điểm dữ liệu minh họa, hấp dẫn trực tiếp đến sự tập trung của một công ty kỹ thuật vào kết quả hữu hình và lợi ích tài chính. Mỗi biểu đồ tập trung vào tác động của một kỹ năng cụ thể đối với các chỉ số kinh doanh.
+        - Thư viện/Phương pháp: Chart.js cho biểu đồ cột nhóm dựa trên Canvas và các biểu đồ cột riêng lẻ mới. Tailwind CSS cho tất cả bố cục và kiểu dáng. Vanilla JS cho tất cả các tương tác (accordion).
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+            background-color: #F8F7F4; /* Nền màu be ấm */
+            color: #4A5568; /* Văn bản màu xám đá */
+        }
+        .accent-bg { background-color: #3B82F6; } /* Màu xanh lam nhẹ làm điểm nhấn */
+        .accent-text { color: #3B82F6; }
+        .secondary-bg { background-color: #E2E8F0; } /* Xám nhạt để tạo độ tương phản */
+        .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            transition: all 0.3s ease-in-out;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
+        }
+        .accordion-content.open {
+            max-height: 500px; /* Chiều cao đủ cho nội dung */
+        }
+        .chart-container {
+            position: relative;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            min-height: 250px; /* Đã thêm min-height để tăng tính ổn định */
+            width: 100%;
+            max-width: 700px; /* Tăng max-width để hiển thị so sánh tốt hơn */
+        }
+        /* Kiểu dáng cụ thể cho các biểu đồ nhỏ hơn trong lưới */
+        .chart-container.small-chart {
+            height: 250px;
+            min-height: 200px; /* Đã thêm min-height để tăng tính ổn định */
+            max-height: 250px;
+            max-width: none; /* Cho phép nó lấp đầy cột lưới */
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="container mx-auto p-4 md:p-8 max-w-5xl">
+        
+        <!-- Header -->
+        <header class="text-center mb-12">
+            <h1 class="text-3xl md:text-4xl font-bold text-slate-800">NET - Natural English Training</h1>
+            <p class="text-lg text-slate-500 mt-2 italic">"Học tiếng Anh tự nhiên"</p>
+            <h2 class="text-2xl md:text-3xl font-semibold text-slate-700 mt-8">Đề Xuất Chính Thức: Tiếng Anh Thương Mại & Nâng Cao Năng Lực Kỹ Thuật Điện Gió</h2>
+        </header>
+
+        <!-- Introduction -->
+        <section id="introduction" class="mb-12">
+             <div class="card p-6 md:p-8">
+                <h3 class="text-2xl font-semibold text-slate-800 mb-4">Đối Tác Đào Tạo Tiếng Anh Tự Nhiên - Đào Tạo Doanh Nghiệp Của Quý Vị</h3>
+                <p class="text-slate-600 leading-relaxed">
+                    Tài liệu này là đề xuất chính thức của chúng tôi nhằm nâng cao trình độ tiếng Anh cho đội ngũ nhân viên của quý công ty. Tại **NET - Natural English Training**, với khẩu hiệu "Học tiếng Anh tự nhiên", chúng tôi thấu hiểu sâu sắc vai trò quan trọng của giao tiếp hiệu quả trong ngành năng lượng gió toàn cầu hiện nay. Với 15 năm kinh nghiệm trong lĩnh vực bán hàng và tiếp thị tại Canada và Anh, cùng với 3 năm kinh nghiệm giảng dạy tiếng Anh tại Việt Nam, chuyên môn độc đáo của chúng tôi định vị chúng tôi là đối tác lý tưởng cho việc đào tạo doanh nghiệp của quý vị. Chúng tôi tận tâm trang bị cho các kỹ sư của quý vị tiếng Anh thương mại thiết yếu, từ vựng chuyên ngành Kỹ thuật Điện gió, và các kỹ năng giao tiếp thực tế cho các tương tác toàn cầu. Chương trình đào tạo nói trước công chúng chuyên biệt của chúng tôi đảm bảo đội ngũ của quý vị có thể tự tin giao tiếp với khách hàng nước ngoài, trực tuyến hoặc trực tiếp, đảm bảo thành công cho họ.
+                    <br><br>
+                    Mặc dù chương trình 3 tháng có chi phí đầu tư cao hơn khoảng 33% so với lựa chọn ngắn hạn, nhưng giá trị mà nó mang lại thực sự gấp mười lần. Thời lượng kéo dài này đặc biệt cho phép phát triển toàn diện các kỹ năng quan trọng như Tiếng Anh Thương mại nâng cao, kiến thức cơ bản về AI và Kỹ năng Mạng lưới chuyên nghiệp. Hơn nữa, thành phần tự học 1 giờ mỗi ngày, hoàn toàn miễn phí, giúp tăng tốc đáng kể quá trình học thông qua việc lặp lại cần thiết và tiếp thu tự nhiên, dẫn đến trình độ thông thạo sâu sắc và bền vững cho đội ngũ của quý vị. Chúng tôi sẵn sàng chia sẻ kế hoạch bài học chi tiết theo từng ngày và từng tuần theo yêu cầu của quý vị.
+                </p>
+            </div>
+        </section>
+
+        <!-- Course Purpose -->
+        <section id="purpose" class="mb-12">
+            <div class="card p-6 md:p-8">
+                <h3 class="text-2xl font-semibold text-slate-800 mb-4">Mục Đích Khóa Học</h3>
+                <p class="text-slate-600 leading-relaxed">
+                    Chương trình này được thiết kế tỉ mỉ để giúp nhân viên của quý vị tự tin thực hiện các công việc bảo trì, sửa chữa và lắp đặt trong ngành năng lượng gió, đồng thời nắm vững tiếng Anh thương mại và thuật ngữ chuyên ngành quan trọng trong kỹ thuật điện gió. Chương trình nhằm mục đích phát triển khả năng giao tiếp tiếng Anh nâng cao, kỹ năng mạng lưới và hiểu biết cơ bản về AI, nâng cao tương tác chuyên nghiệp và hiệu quả hoạt động của họ trong bối cảnh năng lượng gió toàn cầu.
+                </p>
+            </div>
+        </section>
+
+        <!-- Program Comparison Chart -->
+        <section id="program-comparison-chart" class="mb-12">
+            <h3 class="text-3xl font-bold text-center text-slate-800 mb-8">So Sánh Kết Quả Học Tập: Chương Trình 4 Tuần so với 3 Tháng</h3>
+            <div class="chart-container card p-4">
+                <canvas id="programComparisonChart" width="600" height="350"></canvas>
+            </div>
+            <p class="text-center text-slate-600 mt-4 text-lg font-semibold">
+                Quan sát sự khác biệt đáng kể về kết quả học tập toàn diện.
+            </p>
+        </section>
+
+        <!-- Impact of Skills Section -->
+        <section id="impact-of-skills" class="mb-12">
+            <h3 class="text-3xl font-bold text-center text-slate-800 mb-8">Tác Động Hữu Hình Của Kỹ Năng Tiếng Anh Nâng Cao</h3>
+            <div class="card p-6 md:p-8 mb-8">
+                <p class="text-slate-600 leading-relaxed mb-6">
+                    Đầu tư vào trình độ tiếng Anh nâng cao, kiến thức về AI và kỹ năng mạng lưới mạnh mẽ mang lại những lợi ích có thể định lượng được. Các công ty có đội ngũ xuất sắc trong các lĩnh vực này thường báo cáo sự gia tăng đáng kể về tỷ lệ thành công dự án, hiệu quả hoạt động và cơ hội kinh doanh mới. Dưới đây là các số liệu thống kê minh họa nhấn mạnh những tác động này.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="col-span-1">
+                        <h4 class="text-xl font-semibold text-slate-800 mb-4 text-center">Trình Độ Tiếng Anh & Tăng Trưởng Doanh Thu</h4>
+                        <div class="chart-container small-chart">
+                            <canvas id="englishRevenueChart" width="400" height="250"></canvas>
+                        </div>
+                        <p class="text-sm text-slate-500 text-center mt-2">Dữ liệu minh họa: Các công ty có trình độ tiếng Anh cao đạt tăng trưởng doanh thu lớn hơn.</p>
+                    </div>
+                    <div class="col-span-1">
+                        <h4 class="text-xl font-semibold text-slate-800 mb-4 text-center">Tích Hợp AI & Hiệu Quả Hoạt Động</h4>
+                        <div class="chart-container small-chart">
+                            <canvas id="aiEfficiencyChart" width="400" height="250"></canvas>
+                        </div>
+                        <p class="text-sm text-slate-500 text-center mt-2">Dữ liệu minh họa: Kiến thức AI có thể dẫn đến cải thiện hiệu quả đáng kể.</p>
+                    </div>
+                    <div class="col-span-1">
+                        <h4 class="text-xl font-semibold text-slate-800 mb-4 text-center">Mạng Lưới & Cơ Hội Kinh Doanh Mới</h4>
+                        <div class="chart-container small-chart">
+                            <canvas id="networkingOpportunitiesChart" width="400" height="250"></canvas>
+                        </div>
+                        <p class="text-sm text-slate-500 text-center mt-2">Dữ liệu minh họa: Kỹ năng mạng lưới mạnh mẽ tương quan với việc tăng cơ hội kinh doanh mới.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Program Details Side-by-Side -->
+        <section id="program-details" class="mb-12">
+            <h3 class="text-3xl font-bold text-center text-slate-800 mb-8">Cấu Trúc Khóa Học Đề Xuất</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- 4-Week Program Details -->
+                <div class="card p-6 md:p-8">
+                    <h4 class="text-2xl font-bold text-slate-800 mb-2">Lựa Chọn 1: Chương Trình Chuyên Sâu 4 Tuần <span class="text-red-500">(Phạm Vi Hạn Chế)</span></h4>
+                    <div class="text-sm font-semibold secondary-bg inline-block px-3 py-1 rounded-full text-slate-600 mb-4">4 tuần (Thứ Hai - Thứ Sáu, 2 giờ/ngày; Tổng cộng 40 giờ)</div>
+                    <p class="text-slate-600 leading-relaxed mb-6">
+                        Chương trình cô đọng này cung cấp nền tảng tiếng Anh cho các nhu cầu vận hành tức thời trong ngành năng lượng gió. Nó tập trung vào từ vựng kỹ thuật cốt lõi và cấu trúc giao tiếp cơ bản, cung cấp một giới thiệu nhanh chóng về ngôn ngữ cần thiết cho các công việc bảo trì, sửa chữa và lắp đặt. <strong>Do tốc độ học tập cường độ cao, chỉ có thể bao gồm khoảng 200 từ vựng, 50 thành ngữ và 20 tiếng lóng một cách hiệu quả.</strong> Sự ngắn gọn này hạn chế việc tiếp thu sâu các kỹ năng giao tiếp nâng cao về kinh doanh, AI hoặc mạng lưới.
+                    </p>
+                    <div>
+                        <h5 class="text-xl font-semibold text-slate-800 mb-4">Phân Tích Chương Trình Học</h5>
+                        <div class="border border-slate-200 rounded-lg overflow-hidden">
+                            <div class="border-b border-slate-200">
+                                <button class="accordion-toggle w-full text-left p-4 font-semibold text-slate-700 hover:bg-slate-50 flex justify-between items-center" data-index="0">
+                                    <span>Tuần 1: Giới Thiệu Năng Lượng Tái Tạo & Giao Tiếp Cơ Bản</span>
+                                    <span class="transform transition-transform duration-300 text-blue-500 text-xl">+</span>
+                                </button>
+                                <div class="accordion-content px-4 pb-4 text-slate-600 text-sm">
+                                    <strong>Chủ đề:</strong> Từ vựng cốt lõi về năng lượng gió, ngữ pháp cơ bản (Hiện tại Đơn), giới thiệu bản thân, chào hỏi tại nơi làm việc.<br><strong>Mục tiêu học tập:</strong> Khoảng 50 từ vựng, 13 thành ngữ, 5 tiếng lóng.
+                                </div>
+                            </div>
+                            <div class="border-b border-slate-200">
+                                <button class="accordion-toggle w-full text-left p-4 font-semibold text-slate-700 hover:bg-slate-50 flex justify-between items-center" data-index="1">
+                                    <span>Tuần 2: Các Bộ Phận Tua-bin Gió, Bảo Trì và An Toàn</span>
+                                    <span class="transform transition-transform duration-300 text-blue-500 text-xl">+</span>
+                                </button>
+                                <div class="accordion-content px-4 pb-4 text-slate-600 text-sm">
+                                    <strong>Chủ đề:</strong> Mô tả các bộ phận (Hiện tại Tiếp diễn), đưa ra/thực hiện hướng dẫn (mệnh lệnh, must/mustn't), tác động môi trường (câu điều kiện loại 1), yêu cầu lịch sự.<br><strong>Mục tiêu học tập:</strong> Khoảng 50 từ vựng, 13 thành ngữ, 5 tiếng lóng.
+                                </div>
+                            </div>
+                            <div class="border-b border-slate-200">
+                                <button class="accordion-toggle w-full text-left p-4 font-semibold text-slate-700 hover:bg-slate-50 flex justify-between items-center" data-index="2">
+                                    <span>Tuần 3: Vận Hành Trang Trại Gió, Công Cụ và Tài Liệu</span>
+                                    <span class="transform transition-transform duration-300 text-blue-500 text-xl">+</span>
+                                </button>
+                                <div class="accordion-content px-4 pb-4 text-slate-600 text-sm">
+                                    <strong>Chủ đề:</strong> Phát điện (Quá khứ Đơn), công cụ/thiết bị (danh từ đếm được/không đếm được), báo cáo bảo trì (Hiện tại Hoàn thành), hành vi tại nơi làm việc (động từ khuyết thiếu), chỉ đường (giới từ).<br><strong>Mục tiêu học tập:</strong> Khoảng 50 từ vựng, 12 thành ngữ, 5 tiếng lóng.
+                                </div>
+                            </div>
+                            <div class="border-b border-slate-200">
+                                <button class="accordion-toggle w-full text-left p-4 font-semibold text-slate-700 hover:bg-slate-50 flex justify-between items-center" data-index="3">
+                                    <span>Tuần 4: Ôn Tập, Nói Trước Công Chúng và Đánh Giá Cuối Khóa</span>
+                                    <span class="transform transition-transform duration-300 text-blue-500 text-xl">+</span>
+                                </button>
+                                <div class="accordion-content px-4 pb-4 text-slate-600 text-sm">
+                                    <strong>Chủ đề:</strong> Ôn tập từ vựng/khái niệm, câu hỏi công khai (câu hỏi gián tiếp), hội thoại tại nơi làm việc (câu tường thuật), tóm tắt công việc hàng ngày (các dạng câu hỏi), nhập vai.<br><strong>Mục tiêu học tập:</strong> Khoảng 50 từ vựng, 12 thành ngữ, 5 tiếng lóng.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3-Month Program Details -->
+                <div class="card p-6 md:p-8">
+                    <h4 class="text-2xl font-bold text-slate-800 mb-2">Lựa Chọn 2: Chương Trình Toàn Diện 3 Tháng <span class="text-green-500">(Khuyến Nghị)</span></h4>
+                    <div class="text-sm font-semibold secondary-bg inline-block px-3 py-1 rounded-full text-slate-600 mb-4">3 tháng (12 tuần, Thứ Hai - Thứ Sáu, 1 giờ/ngày học trực tiếp + 1 giờ/ngày tự học)</div>
+                    <p class="text-slate-600 leading-relaxed mb-6">
+                        Chương trình kéo dài này mang lại sự đắm chìm sâu sắc, rất quan trọng để đạt được những tiến bộ đáng kể về sự lưu loát, tự tin và ứng dụng thực tế. Nó cung cấp thời gian cần thiết để nắm vững Tiếng Anh Thương mại cấp cao, các khái niệm cơ bản về AI và các kỹ năng Mạng lưới tinh vi, thực sự chuẩn bị cho đội ngũ nhân viên của quý vị cho sự hợp tác quốc tế chiến lược. <strong>Điều quan trọng là, định dạng dài hơn cho phép lặp lại cần thiết và tiếp thu ngôn ngữ và khái niệm phức tạp một cách tự nhiên hơn, dẫn đến trình độ thông thạo bền vững.</strong>
+                    </p>
+                    <div>
+                        <h5 class="text-xl font-semibold text-slate-800 mb-4">Phân Tích Chương Trình Học</h5>
+                        <div class="border border-slate-200 rounded-lg overflow-hidden">
+                            <div class="border-b border-slate-200">
+                                <button class="accordion-toggle w-full text-left p-4 font-semibold text-slate-700 hover:bg-slate-50 flex justify-between items-center" data-index="0">
+                                    <span>Tháng 1: Nền Tảng Kỹ Thuật Điện Gió & Giao Tiếp Kinh Doanh Chung</span>
+                                    <span class="transform transition-transform duration-300 text-blue-500 text-xl">+</span>
+                                </button>
+                                <div class="accordion-content px-4 pb-4 text-slate-600 text-sm">
+                                    <strong>Chủ đề:</strong> Từ vựng cốt lõi về năng lượng gió, nghi thức giao tiếp kinh doanh cơ bản, ngữ pháp thiết yếu. Tự học tập trung vào tin tức tiếng Anh tổng quát và podcast đơn giản về ngành.<br><strong>Mục tiêu học tập:</strong> Khoảng 200 từ vựng, 100 thành ngữ, 50 tiếng lóng.
+                                </div>
+                            </div>
+                            <div class="border-b border-slate-200">
+                                <button class="accordion-toggle w-full text-left p-4 font-semibold text-slate-700 hover:bg-slate-50 flex justify-between items-center" data-index="1">
+                                    <span>Tháng 2: Chuyên Sâu Kỹ Thuật & Tiếng Anh Thương Mại Trung Cấp</span>
+                                    <span class="transform transition-transform duration-300 text-blue-500 text-xl">+</span>
+                                </button>
+                                <div class="accordion-content px-4 pb-4 text-slate-600 text-sm">
+                                    <strong>Chủ đề:</strong> Hệ thống tua-bin gió cụ thể, quy trình bảo trì phức tạp, giao thức an toàn nâng cao, tiếng Anh thương mại cho đàm phán và báo cáo. Tự học bao gồm các phim tài liệu chuyên ngành.<br><strong>Mục tiêu học tập:</strong> Khoảng 200 từ vựng, 100 thành ngữ, 50 tiếng lóng.
+                                </div>
+                            </div>
+                            <div class="border-b border-slate-200">
+                                <button class="accordion-toggle w-full text-left p-4 font-semibold text-slate-700 hover:bg-slate-50 flex justify-between items-center" data-index="2">
+                                    <span>Tháng 3: Giao Tiếp Nâng Cao, Mạng Lưới, AI & Bán Hàng</span>
+                                    <span class="transform transition-transform duration-300 text-blue-500 text-xl">+</span>
+                                </button>
+                                <div class="accordion-content px-4 pb-4 text-slate-600 text-sm">
+                                    <strong>Chủ đề:</strong> Giao tiếp cấp cao cho các cuộc họp khách hàng, mạng lưới nâng cao, nói trước công chúng, các khái niệm AI và giao tiếp bán hàng. Tự học tích hợp nội dung liên quan đến kinh doanh và AI nâng cao.<br><strong>Mục tiêu học tập:</strong> Khoảng 200 từ vựng, 100 thành ngữ, 50 tiếng lóng.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+         <!-- Class Customization -->
+        <section id="customization" class="mb-12">
+            <div class="card p-6 md:p-8">
+                <h3 class="text-2xl font-semibold text-slate-800 mb-4">Nâng Cao Hiệu Quả Học Tập: Tùy Chỉnh Lớp Học</h3>
+                <p class="text-slate-600 leading-relaxed mb-4">
+                    Để tối đa hóa hiệu quả học tập và cung cấp trải nghiệm cá nhân hóa hơn, chúng tôi đề xuất chia người tham gia thành hai nhóm riêng biệt dựa trên trình độ tiếng Anh hiện tại của họ:
+                </p>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                        <h4 class="font-semibold text-blue-800">Học Viên Trình Độ Sơ Cấp & Trung Cấp Thấp</h4>
+                        <p class="text-sm text-blue-700 mt-1">Nhóm này sẽ tập trung vào việc xây dựng nền tảng ngữ pháp, từ vựng và sự tự tin trong giao tiếp cơ bản.</p>
+                    </div>
+                    <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                        <h4 class="font-semibold text-green-800">Học Viên Trình Độ Trung Cấp Cao & Nâng Cao</h4>
+                        <p class="text-sm text-green-700 mt-1">Nhóm này sẽ tham gia vào các cuộc thảo luận phức tạp hơn, các tình huống kinh doanh nâng cao và thực hành chuyên sâu các kỹ năng chuyên biệt.</p>
+                    </div>
+                </div>
+                 <p class="text-slate-600 leading-relaxed mt-4">
+                    Cách tiếp cận này cho phép các hoạt động được điều chỉnh, sự quan tâm cá nhân hóa hơn và thúc đẩy một môi trường hỗ trợ trong các lớp học nhỏ hơn, đảm bảo tiến độ tối ưu cho tất cả người tham gia.
+                </p>
+            </div>
+        </section>
+
+        <!-- Conclusion -->
+        <section id="conclusion">
+            <div class="card p-6 md:p-8 bg-slate-700 text-white">
+                <h3 class="text-2xl font-semibold mb-4">Khuyến Nghị Của Chúng Tôi</h3>
+                <p class="leading-relaxed opacity-90">
+                    Mặc dù chương trình chuyên sâu 4 tuần cung cấp một cái nhìn tổng quan nhanh chóng về nền tảng, **NET - Natural English Training** đặc biệt khuyến nghị **chương trình toàn diện 3 tháng**. Thời lượng kéo dài này rất quan trọng để thực sự củng cố các kỹ năng Tiếng Anh Thương mại, AI và Mạng lưới phức tạp, vốn rất cần thiết cho sự hợp tác quốc tế và tăng trưởng chiến lược. Định dạng dài hơn cho phép học sâu hơn thông qua việc lặp lại cần thiết và tự học, đảm bảo đội ngũ của quý vị không chỉ phát triển năng lực cơ bản mà còn có khả năng sử dụng tiếng Anh một cách sâu sắc và tự nhiên.
+                </p>
+                <p class="font-semibold mt-4">Khoản đầu tư này sẽ mang lại kết quả lớn hơn và bền vững hơn đáng kể cho tương lai của công ty quý vị.</p>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        const chartComparisonData = {
+            labels: ['Từ Vựng', 'Thành Ngữ', 'Tiếng Lóng'],
+            datasets: [
+                {
+                    label: 'Chương Trình Chuyên Sâu 4 Tuần',
+                    data: [200, 50, 20],
+                    backgroundColor: 'rgba(59, 130, 246, 0.7)', /* Blue */
+                    borderColor: 'rgba(59, 130, 246, 1)',
+                    borderWidth: 1,
+                    borderRadius: 5,
+                },
+                {
+                    label: 'Chương Trình Toàn Diện 3 Tháng',
+                    data: [600, 300, 150], /* Dữ liệu cập nhật cho chương trình 3 tháng */
+                    backgroundColor: 'rgba(16, 185, 129, 0.7)', /* Green */
+                    borderColor: 'rgba(16, 185, 129, 1)',
+                    borderWidth: 1,
+                    borderRadius: 5,
+                }
+            ]
+        };
+
+        function initializeComparisonChart() {
+            const ctx = document.getElementById('programComparisonChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: chartComparisonData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: '#E2E8F0'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                            labels: {
+                                font: {
+                                    size: 14,
+                                    weight: 'bold'
+                                },
+                                boxWidth: 20,
+                                padding: 20
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: '#1E293B',
+                            titleFont: { size: 14, weight: 'bold' },
+                            bodyFont: { size: 12 },
+                            padding: 10,
+                            cornerRadius: 6
+                        }
+                    }
+                }
+            });
+        }
+
+        function initializeEnglishRevenueChart() {
+            const ctx = document.getElementById('englishRevenueChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Trình Độ Tiếng Anh Thấp', 'Trình Độ Tiếng Anh Cao'],
+                    datasets: [{
+                        label: 'Tăng Trưởng Doanh Thu Hàng Năm Trung Bình',
+                        data: [5, 20], /* Dữ liệu minh họa: 5% so với 20% tăng trưởng */
+                        backgroundColor: ['rgba(249, 115, 22, 0.7)', 'rgba(16, 185, 129, 0.7)'],
+                        borderColor: ['rgba(249, 115, 22, 1)', 'rgba(16, 185, 129, 1)'],
+                        borderWidth: 1,
+                        borderRadius: 5,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Tăng Trưởng Doanh Thu (%)'
+                            },
+                            grid: {
+                                color: '#E2E8F0'
+                            }
+                        },
+                        x: {
+                             grid: {
+                                display: false
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: '#1E293B',
+                            titleFont: { size: 14, weight: 'bold' },
+                            bodyFont: { size: 12 },
+                            padding: 10,
+                            cornerRadius: 6
+                        }
+                    }
+                }
+            });
+        }
+
+        function initializeAIEfficiencyChart() {
+            const ctx = document.getElementById('aiEfficiencyChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Không Kiến Thức AI', 'Nhân Viên Có Kiến Thức AI'],
+                    datasets: [{
+                        label: 'Cải Thiện Hiệu Quả Hoạt Động',
+                        data: [0, 15], /* Dữ liệu minh họa: 0% so với 15% cải thiện hiệu quả */
+                        backgroundColor: ['rgba(239, 68, 68, 0.7)', 'rgba(59, 130, 246, 0.7)'],
+                        borderColor: ['rgba(239, 68, 68, 1)', 'rgba(59, 130, 246, 1)'],
+                        borderWidth: 1,
+                        borderRadius: 5,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Cải Thiện Hiệu Quả (%)'
+                            },
+                            grid: {
+                                color: '#E2E8F0'
+                            }
+                        },
+                        x: {
+                             grid: {
+                                display: false
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: '#1E293B',
+                            titleFont: { size: 14, weight: 'bold' },
+                            bodyFont: { size: 12 },
+                            padding: 10,
+                            cornerRadius: 6
+                        }
+                    }
+                }
+            });
+        }
+
+        function initializeNetworkingOpportunitiesChart() {
+            const ctx = document.getElementById('networkingOpportunitiesChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Mạng Lưới Hạn Chế', 'Kỹ Năng Mạng Lưới Mạnh Mẽ'],
+                    datasets: [{
+                        label: 'Tăng Số Lượng Đối Tác Mới',
+                        data: [1, 8], /* Dữ liệu minh họa: 1 so với 8 đối tác mới mỗi năm */
+                        backgroundColor: ['rgba(107, 114, 128, 0.7)', 'rgba(249, 115, 22, 0.7)'],
+                        borderColor: ['rgba(107, 114, 128, 1)', 'rgba(249, 115, 22, 1)'],
+                        borderWidth: 1,
+                        borderRadius: 5,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Đối Tác Mới (TB/năm)'
+                            },
+                            grid: {
+                                color: '#E2E8F0'
+                            }
+                        },
+                        x: {
+                             grid: {
+                                display: false
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: '#1E293B',
+                            titleFont: { size: 14, weight: 'bold' },
+                            bodyFont: { size: 12 },
+                            padding: 10,
+                            cornerRadius: 6
+                        }
+                    }
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeComparisonChart();
+            initializeEnglishRevenueChart();
+            initializeAIEfficiencyChart();
+            initializeNetworkingOpportunitiesChart();
+
+            document.querySelectorAll('.accordion-toggle').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    const icon = button.querySelector('span:last-child');
+                    const isOpen = content.classList.contains('open');
+
+                    // Close all other open accordions in the same parent group
+                    const parentAccordionGroup = button.closest('.border.border-slate-200.rounded-lg.overflow-hidden');
+                    if (parentAccordionGroup) {
+                        parentAccordionGroup.querySelectorAll('.accordion-content.open').forEach(openContent => {
+                            if (openContent !== content) { // Không đóng cái hiện tại nếu nó đã mở
+                                openContent.classList.remove('open');
+                                const otherIcon = openContent.previousElementSibling.querySelector('span:last-child');
+                                otherIcon.classList.remove('rotate-45');
+                                otherIcon.innerText = '+';
+                            }
+                        });
+                    }
+
+                    // Toggle the clicked accordion
+                    if (!isOpen) {
+                        content.classList.add('open');
+                        icon.classList.add('rotate-45');
+                        icon.innerText = '−';
+                    } else {
+                        content.classList.remove('open');
+                        icon.classList.remove('rotate-45');
+                        icon.innerText = '+';
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
