@@ -103,3 +103,13 @@ _SORTED/AUDIO-STUDENTS/
 OPERATIONS/system-health-logs/
 
 .kilo/kilo.json
+
+# Large archive folders (too big for GitHub)
+CANON/ARCHIVE/TELEGRAM/*.docx
+CANON/ARCHIVE/TELEGRAM/*.html
+CANON/EVIDENCE/ZALO/*.jpg
+CANON/EVIDENCE/TELEGRAM/*.jpg
+CANON/GAME-DESIGN/*.png
+APPS/NET-PET-AI/public/assets/artwork/gemini/*.png
+APPS/NET-PET-AI/public/assets/artwork/misc/*.png
+APPS/NET-PET-AI/public/audio/*.m4a
