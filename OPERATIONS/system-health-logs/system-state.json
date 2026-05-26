@@ -1,8 +1,8 @@
 {
   "doctor_ok": true,
-  "git_head": "e43c4391 security: rotate DeepSeek + Dialagram keys, add BFG purge script",
-  "timestamp": "2026-05-25T09:25:33.0740784+07:00",
   "verify_ok": true,
+  "git_branch": "master",
   "soul_ok": false,
-  "git_branch": "master"
+  "timestamp": "2026-05-26T08:01:11.7345966+07:00",
+  "git_head": "a3bd7865 feat: ULTRA MAX OBI ΓÇö male voice + student profile injection + conversation memory"
 }

@@ -414,5 +414,37 @@
     "sessions": 1,
     "level": "TITANIUM_ANCHOR",
     "stagnation": true
+  },
+  {
+    "timestamp": "2026-05-25T10:16:31+07:00",
+    "count": 907872,
+    "events": 661,
+    "sessions": 1,
+    "level": "TITANIUM_ANCHOR",
+    "stagnation": true
+  },
+  {
+    "timestamp": "2026-05-25T10:57:51+07:00",
+    "count": 908151,
+    "events": 662,
+    "sessions": 1,
+    "level": "TITANIUM_ANCHOR",
+    "stagnation": false
+  },
+  {
+    "timestamp": "2026-05-25T12:56:45+07:00",
+    "count": 908151,
+    "events": 662,
+    "sessions": 1,
+    "level": "TITANIUM_ANCHOR",
+    "stagnation": false
+  },
+  {
+    "timestamp": "2026-05-26T07:23:21+07:00",
+    "count": 908151,
+    "events": 662,
+    "sessions": 1,
+    "level": "TITANIUM_ANCHOR",
+    "stagnation": true
   }
 ]
