@@ -1,5 +1,7 @@
-// Phoenix-Architecti — Universal Code Drone
+// Phoenix-Architecti — Universal Code Drone v0.0.2
 // T1=Qwen 3.7 Max (Dialagram), T2=Claude Opus 4.7 | Fallback cascade: Cerebras→Groq→CF-Qwen
+// v0.0.2: SSE fix for Dialagram (always streams even when stream:false requested)
+//         + /v1/chat/completions OpenAI-compat proxy so Kilo routes through PA cascade
 
 function stripFences(text) {
   if (!text) return text;
@@ -13,7 +15,37 @@ L03 STRONGEST_VERSION_FIRST — complete, hardened output immediately.
 L04 RAW_OUTPUT — raw file content ONLY. No markdown fences. No backticks. No explanation. First character = first character of the file.
 L06 ZERO_DRIFT — answer the task, nothing else.`;
 
-// ── OpenAI-compatible call (DeepSeek, Groq, Cerebras, OpenRouter) ────────────
+// ── SSE collector — Dialagram always returns text/event-stream regardless of stream param ──
+async function collectSSE(responseBody) {
+  const reader = responseBody.getReader();
+  const dec = new TextDecoder();
+  let text = '';
+  let buf = '';
+  try {
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      buf += dec.decode(value, { stream: true });
+      const lines = buf.split('\n');
+      buf = lines.pop(); // keep incomplete line in buffer
+      for (const line of lines) {
+        if (!line.startsWith('data: ')) continue;
+        const raw = line.slice(6).trim();
+        if (raw === '[DONE]') return text || null;
+        try {
+          const chunk = JSON.parse(raw);
+          const delta = chunk.choices?.[0]?.delta?.content;
+          if (delta) text += delta;
+        } catch (_) {}
+      }
+    }
+  } finally {
+    reader.releaseLock();
+  }
+  return text || null;
+}
+
+// ── OpenAI-compatible call — auto-detects SSE response ───────────────────────
 async function callOpenAI(url, key, model, messages, extraHeaders = {}) {
   const res = await fetch(url, {
     method: 'POST',
@@ -22,6 +54,9 @@ async function callOpenAI(url, key, model, messages, extraHeaders = {}) {
   });
   if (res.status === 429) return null;
   if (!res.ok) throw new Error(url + ' ' + res.status + ': ' + await res.text());
+  // Dialagram always returns SSE even without stream:true — detect and collect
+  const ct = res.headers.get('content-type') || '';
+  if (ct.includes('text/event-stream')) return collectSSE(res.body);
   const data = await res.json();
   return data.choices?.[0]?.message?.content ?? null;
 }
@@ -67,28 +102,37 @@ async function callGemini(env, messages) {
   return data.candidates?.[0]?.content?.parts?.[0]?.text ?? null;
 }
 
+// ── Timeout race — Dialagram hangs indefinitely when its adapter is down ─────
+function withTimeout(promise, ms) {
+  return Promise.race([
+    promise,
+    new Promise((_, reject) => setTimeout(() => reject(new Error('timeout ' + ms + 'ms')), ms))
+  ]);
+}
+
 // ── Tier routing ──────────────────────────────────────────────────────────────
 async function callTier(env, tier, messages) {
-  const gwBase = env.AIGATEWAYURL?.replace(/\/$/, '');
-  const gwHeaders = env.CF_GATEWAY_TOKEN ? { 'cf-aig-authorization': 'Bearer ' + env.CF_GATEWAY_TOKEN } : {};
-
   if (tier === 3 && env.DEEPSEEK_API_KEY) return callOpenAI('https://api.deepseek.com/v1/chat/completions', env.DEEPSEEK_API_KEY, 'deepseek-chat', messages);
   if (tier >= 2 && env.ANTHROPIC_API_KEY) return callAnthropic(env, messages);
 
-  // T1 — free cascade
+  // T1 — free cascade: Dialagram → Cerebras → Groq → CF-Qwen
+  // Dialagram gets 12s hard timeout — if their adapter is down it hangs forever
   const tried = [];
   let result = null;
   if (env.DIALAGRAM_API_KEY) {
     tried.push('Dialagram-Qwen');
-    result = await callOpenAI('https://dialagram.me/router/v1/chat/completions', env.DIALAGRAM_API_KEY, 'qwen-3.7-max', messages);
+    result = await withTimeout(
+      callOpenAI('https://dialagram.me/router/v1/chat/completions', env.DIALAGRAM_API_KEY, 'qwen-3.7-max', messages),
+      12000
+    ).catch(() => null);
   }
   if (result === null && env.CEREBRAS_API_KEY) {
     tried.push('Cerebras');
-    result = await callOpenAI('https://api.cerebras.ai/v1/chat/completions', env.CEREBRAS_API_KEY, 'llama-3.3-70b', messages);
+    result = await callOpenAI('https://api.cerebras.ai/v1/chat/completions', env.CEREBRAS_API_KEY, 'llama-3.3-70b', messages).catch(() => null);
   }
   if (result === null && env.GROQ_API_KEY) {
     tried.push('Groq');
-    result = await callOpenAI('https://api.groq.com/openai/v1/chat/completions', env.GROQ_API_KEY, 'llama-3.3-70b-versatile', messages);
+    result = await callOpenAI('https://api.groq.com/openai/v1/chat/completions', env.GROQ_API_KEY, 'llama-3.3-70b-versatile', messages).catch(() => null);
   }
   if (result === null) {
     tried.push('CF-Qwen');
@@ -166,6 +210,64 @@ async function handleMission(request, env) {
   return Response.json(result);
 }
 
+// ── /v1/chat/completions — OpenAI-compat proxy for Kilo ──────────────────────
+// Kilo points here instead of Dialagram directly. PA handles SSE internally
+// and returns clean JSON or re-streams. Kilo inherits full T1 cascade + fallbacks.
+async function handleOpenAICompat(request, env) {
+  // Accept auth via x-pa-auth OR Authorization: Bearer <PA_AUTH_SECRET>
+  const xAuth = request.headers.get('x-pa-auth');
+  const bearer = (request.headers.get('Authorization') || '').replace(/^Bearer\s+/, '');
+  const validAuth = !env.PA_AUTH_SECRET || (xAuth === env.PA_AUTH_SECRET) || (bearer === env.PA_AUTH_SECRET);
+  if (!validAuth) return Response.json({ error: 'UNAUTHORIZED' }, { status: 401 });
+
+  const body = await request.json();
+  const messages = body.messages || [];
+  const wantsStream = body.stream === true;
+
+  let content;
+  try {
+    content = await callTier(env, 1, messages);
+  } catch (err) {
+    return Response.json({ error: { message: err.message, type: 'server_error', code: 'cascade_failed' } }, { status: 500 });
+  }
+
+  const id = 'chatcmpl-' + Date.now();
+  const created = Math.floor(Date.now() / 1000);
+  const model = body.model || 'qwen-3.7-max';
+
+  if (wantsStream) {
+    // Re-emit as SSE so Kilo gets streaming UX even though we buffered internally
+    const encoder = new TextEncoder();
+    const { readable, writable } = new TransformStream();
+    const writer = writable.getWriter();
+    (async () => {
+      try {
+        // Chunk content into ~20-char pieces for smooth streaming appearance
+        const CHUNK = 20;
+        for (let i = 0; i < content.length; i += CHUNK) {
+          const delta = content.slice(i, i + CHUNK);
+          const evt = JSON.stringify({ id, object: 'chat.completion.chunk', created, model, choices: [{ index: 0, delta: { content: delta }, finish_reason: null }] });
+          await writer.write(encoder.encode('data: ' + evt + '\n\n'));
+        }
+        const done = JSON.stringify({ id, object: 'chat.completion.chunk', created, model, choices: [{ index: 0, delta: {}, finish_reason: 'stop' }] });
+        await writer.write(encoder.encode('data: ' + done + '\n\n'));
+        await writer.write(encoder.encode('data: [DONE]\n\n'));
+      } finally {
+        await writer.close();
+      }
+    })();
+    return new Response(readable, {
+      headers: { 'Content-Type': 'text/event-stream', 'Cache-Control': 'no-cache', 'X-PA-Model': model }
+    });
+  }
+
+  return Response.json({
+    id, object: 'chat.completion', created, model,
+    choices: [{ index: 0, message: { role: 'assistant', content }, finish_reason: 'stop' }],
+    usage: { prompt_tokens: 0, completion_tokens: content?.length || 0, total_tokens: content?.length || 0 }
+  });
+}
+
 // ── Cache ─────────────────────────────────────────────────────────────────────
 async function withCache(env, key, tier, fn) {
   const cacheKey = 'llm-t' + tier + '-' + btoa(encodeURIComponent(key).slice(0, 120));
@@ -191,7 +293,6 @@ async function logToD1(env, task, result, taskType, tier) {
 
 // ── Handlers ──────────────────────────────────────────────────────────────────
 async function handleCode(request, env) {
-  // AUTH GATE — reject unauthenticated requests
   const authHeader = request.headers.get('x-pa-auth');
   if (env.PA_AUTH_SECRET && authHeader !== env.PA_AUTH_SECRET) {
     return Response.json({ error: 'UNAUTHORIZED' }, { status: 401 });
@@ -242,13 +343,14 @@ async function handleStatus(env) {
     recent = rows.results || [];
   } catch (err) {}
   return Response.json({
-    drone: 'phoenix-architecti', version: '0.0.1', status: 'LIVE',
+    drone: 'phoenix-architecti', version: '0.0.2', status: 'LIVE',
     tiers: {
       t1: (env.DIALAGRAM_API_KEY ? 'Dialagram-Qwen3.7Max ✓' : 'Dialagram-Qwen NO KEY') + '→' + (env.CEREBRAS_API_KEY ? 'Cerebras ✓' : 'Cerebras NO KEY') + '→' + (env.GROQ_API_KEY ? 'Groq ✓' : 'Groq NO KEY') + '→CF-Qwen',
       t2: env.ANTHROPIC_API_KEY ? 'claude-opus-4-7 ✓' : 'NO KEY',
       t3: env.DEEPSEEK_API_KEY ? 'deepseek-v4-pro ✓' : 'NO KEY',
       t4: env.GEMINI_API_KEY ? 'gemini-3.5-flash ✓' : 'NO KEY'
     },
+    endpoints: { proxy: '/v1/chat/completions (OpenAI-compat, Kilo-ready)', code: '/api/code', mission: '/api/mission', crunch: '/api/crunch' },
     gateway: env.AIGATEWAYURL ? 'CF AI Gateway ✓' : 'direct API',
     recenttasks: recent
   });
@@ -269,7 +371,11 @@ async function handleLog(request, env) {
   return Response.json({ count: rows.results?.length || 0, logs: rows.results || [] });
 }
 
-const CORS = { 'Access-Control-Allow-Origin': 'https://phoenix-architecti.mrmichaelhobbs123.workers.dev', 'Access-Control-Allow-Methods': 'GET, POST, OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type, x-pa-auth' };
+const CORS = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+  'Access-Control-Allow-Headers': 'Content-Type, x-pa-auth, Authorization'
+};
 
 export default {
   async scheduled(event, env, ctx) {
@@ -287,6 +393,7 @@ export default {
       if (method === 'POST' && url.pathname === '/api/code') response = await handleCode(request, env);
       else if (method === 'POST' && url.pathname === '/api/crunch') response = await handleCrunch(request, env);
       else if (method === 'POST' && url.pathname === '/api/mission') response = await handleMission(request, env);
+      else if (method === 'POST' && url.pathname === '/v1/chat/completions') response = await handleOpenAICompat(request, env);
       else if (method === 'GET' && url.pathname === '/api/status') response = await handleStatus(env);
       else if (method === 'GET' && url.pathname === '/api/log') response = await handleLog(request, env);
       else response = Response.json({ error: 'Not found', drone: 'phoenix-architecti' }, { status: 404 });
