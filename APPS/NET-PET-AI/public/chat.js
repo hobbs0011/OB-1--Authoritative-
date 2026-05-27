@@ -767,6 +767,7 @@ async function startListening() {
       vad_events: "true"
     });
     const wsUrl = `wss://api.deepgram.com/v1/listen?${wsParams}`;
+    // Subprotocol auth — confirmed working with new key
     dgSocket = new WebSocket(wsUrl, ["token", apiKey]);
 
     dgSocket.onopen = async () => {
