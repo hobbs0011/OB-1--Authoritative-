@@ -193,7 +193,8 @@ async function securityMiddleware(request, env) {
   const origin = request.headers.get('Origin') || '';
   const url = new URL(request.url);
   
-  if (!url.pathname.startsWith('/api/health')) {
+  // Bypass rate-limit for STT (chunked uploads need burst capacity) and health
+  if (!url.pathname.startsWith('/api/health') && !url.pathname.startsWith('/api/stt')) {
     const rateCheck = await checkRateLimit(ip, env?.RATELIMIT);
     if (!rateCheck.allowed) {
       return new Response(JSON.stringify({

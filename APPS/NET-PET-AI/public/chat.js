@@ -705,74 +705,87 @@ async function handle(text) {
   }
 }
 
-// ── Voice input (Deepgram Nova-3 STT) ──────────────
+// ── Voice input (Deepgram Nova-3 STT) — LIGHTNING FAST ──────────────
 let mediaRecorder = null;
-let audioChunks   = [];
 let listening     = false;
+let sttAbort      = null;
+
+// MIME priority: opus > webm > wav (Safari)
+const MIME_CANDIDATES = ["audio/webm;codecs=opus", "audio/webm", "audio/mp4", "audio/wav"];
+function pickMime() {
+  for (const m of MIME_CANDIDATES) {
+    if (typeof MediaRecorder !== "undefined" && MediaRecorder.isTypeSupported(m)) return m;
+  }
+  return ""; // browser default
+}
 
 async function startListening() {
   try {
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-    audioChunks  = [];
-    const mimeType = MediaRecorder.isTypeSupported("audio/webm;codecs=opus")
-      ? "audio/webm;codecs=opus" : "audio/webm";
-    mediaRecorder = new MediaRecorder(stream, { mimeType });
+    const mimeType = pickMime();
+    const opts = mimeType ? { mimeType, bitsPerSecond: 128000 } : undefined;
+    mediaRecorder = new MediaRecorder(stream, opts);
+    const effectiveMime = mimeType || mediaRecorder.mimeType;
 
-    mediaRecorder.ondataavailable = (e) => {
-      if (e.data.size > 0) audioChunks.push(e.data);
-    };
-
-    mediaRecorder.onstop = async () => {
-      stream.getTracks().forEach(t => t.stop());
-      const blob = new Blob(audioChunks, { type: mimeType });
-      input.placeholder = "Processing\u2026";
-      // FIRE STT + AI IN PARALLEL where possible; show transcript immediately
+    // STREAMING: send each chunk immediately as it arrives (250ms slices)
+    mediaRecorder.ondataavailable = async (e) => {
+      if (!e.data || e.data.size === 0) return;
+      const controller = new AbortController();
+      sttAbort = controller;
       try {
         const res = await fetch("/api/stt", {
           method: "POST",
-          headers: { "Content-Type": mimeType },
-          body: blob,
+          headers: { "Content-Type": effectiveMime },
+          body: e.data,
+          signal: controller.signal,
         });
         const data = await res.json();
         const transcript = (data.transcript || "").trim();
         if (transcript) {
           input.value = transcript;
-          // Store low-confidence words so OBI can address pronunciation in next reply
           const lowConf = (data.words || []).filter(w => w.confidence < 0.75);
-          if (lowConf.length > 0) {
-            profile._phonicsHints = lowConf.map(w => w.word);
-          } else {
-            profile._phonicsHints = null;
+          profile._phonicsHints = lowConf.length > 0 ? lowConf.map(w => w.word) : null;
+          // Auto-submit on final chunk only (when recorder stopped)
+          if (mediaRecorder.state === "inactive") {
+            handle(transcript);
           }
-          // IMMEDIATELY submit — don't wait for user to press enter
-          handle(transcript);
-        } else {
-          input.placeholder = "Didn't catch that — try again!";
-          setTimeout(() => { input.placeholder = "Type here\u2026"; }, 2500);
         }
-      } catch {
-        input.placeholder = "Voice error — type instead";
-        setTimeout(() => { input.placeholder = "Type here\u2026"; }, 2500);
+      } catch (err) {
+        if (err.name !== "AbortError") console.warn("STT chunk:", err);
       }
-      listening = false;
-      micBtn.classList.remove("mic-active");
-      if (input.placeholder === "Processing\u2026") input.placeholder = "Type here\u2026";
     };
 
-    // Use timeslice parameter to get smaller chunks faster on stop
+    mediaRecorder.onstop = () => {
+      stream.getTracks().forEach(t => t.stop());
+      listening = false;
+      micBtn.classList.remove("mic-active");
+      if (input.placeholder === "Processing…") input.placeholder = "Type here…";
+      // If we got a transcript but haven't submitted yet, do it now
+      const finalText = input.value.trim();
+      if (finalText && !listening) {
+        handle(finalText);
+        input.value = "";
+      }
+    };
+
+    // 250ms timeslice = ~4 chunks/sec, near-realtime
     mediaRecorder.start(250);
     listening = true;
     micBtn.classList.add("mic-active");
     input.value = "";
-    input.placeholder = "Listening\u2026";
+    input.placeholder = "Listening…";
   } catch {
     input.placeholder = "Mic access denied";
-    setTimeout(() => { input.placeholder = "Type here\u2026"; }, 2500);
+    setTimeout(() => { input.placeholder = "Type here…"; }, 2500);
   }
 }
 
 function stopListening() {
-  if (mediaRecorder && mediaRecorder.state !== "inactive") mediaRecorder.stop();
+  if (sttAbort) sttAbort.abort();
+  if (mediaRecorder && mediaRecorder.state !== "inactive") {
+    input.placeholder = "Processing…";
+    mediaRecorder.stop();
+  }
   listening = false;
   micBtn.classList.remove("mic-active");
 }
@@ -802,14 +815,14 @@ async function boot() {
     dot.title = "Offline";
   }
 
-  const urlStudentId = new URLSearchParams(window.location.search).get("student");
+  const urlStudentId = (() => { const params = new URLSearchParams(window.location.search); return params.get("student") || params.get("studentId"); })();
 
   let saved = null;
   try { saved = JSON.parse(localStorage.getItem("net_profile") || "null"); } catch {}
 
   await pause(350);
 
-  // If URL has ?student=id and it matches saved profile, use saved. If different, load by id.
+  // If URL has ?student=id or ?studentId=id and it matches saved profile, use saved. If different, load by id.
   if (urlStudentId && (!saved?.studentId || saved.studentId !== urlStudentId)) {
     profile.studentId = urlStudentId;
     // Derive name from id immediately so firstName() works (e.g. "quan-nguyen" → "Quan")

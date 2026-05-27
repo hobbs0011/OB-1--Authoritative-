@@ -434,7 +434,12 @@ export default {
 
     // /magic-chat, /voice-chat — Canon §4: Magic Chat UI aliases → serve magic-chat.html
     if (path === "/magic-chat" || path === "/voice-chat") {
-      return env.ASSETS.fetch(new Request(new URL("/magic-chat.html", url), request));
+      const assetReq = new Request(new URL("/magic-chat.html", url), request);
+      const assetRes = await env.ASSETS.fetch(assetReq);
+      // HTTP/2 push: preload chat.js so UI renders instantly
+      const headers = new Headers(assetRes.headers);
+      headers.set('Link', '</chat.js>; rel=preload; as=script');
+      return new Response(assetRes.body, { status: assetRes.status, headers });
     }
 
     // /speak — Speech-to-Learning MVP UI
@@ -653,7 +658,9 @@ async function handleAPI(path, request, env, url) {
 
   // STT — Deepgram Nova-3 speech-to-text with word confidence
   if (path === "/api/stt" && method === "POST") {
-    const apiKey = env.DEEPGRAM_API_KEY;
+    // Cache Deepgram key in globalThis to avoid secret lookup per chunk
+    if (!globalThis.__DG_KEY) globalThis.__DG_KEY = env.DEEPGRAM_API_KEY;
+    const apiKey = globalThis.__DG_KEY;
     if (!apiKey) return json({ error: "DEEPGRAM_API_KEY not configured" }, 500);
     const contentType = request.headers.get("content-type") || "audio/webm";
     const diarize = url.searchParams.get("diarize") === "true";
