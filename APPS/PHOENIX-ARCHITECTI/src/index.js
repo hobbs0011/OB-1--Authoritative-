@@ -46,11 +46,11 @@ async function collectSSE(responseBody) {
 }
 
 // ── OpenAI-compatible call — auto-detects SSE response ───────────────────────
-async function callOpenAI(url, key, model, messages, extraHeaders = {}) {
+async function callOpenAI(url, key, model, messages, extraHeaders = {}, extraBody = {}) {
   const res = await fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + key, ...extraHeaders },
-    body: JSON.stringify({ model, messages, max_tokens: 8192 })
+    body: JSON.stringify({ model, messages, max_tokens: 8192, ...extraBody })
   });
   if (res.status === 429) return null;
   if (!res.ok) throw new Error(url + ' ' + res.status + ': ' + await res.text());
@@ -111,14 +111,19 @@ function withTimeout(promise, ms) {
 }
 
 // ── Tier routing ──────────────────────────────────────────────────────────────
+// T1: Qwen Max (Dialagram, 12s) → Cerebras gpt-oss-120b (15s) → Groq → CF-Qwen
+// T2: DeepSeek Flash (deepseek-chat)
+// T3: DeepSeek Pro  (deepseek-reasoner)
+// T4: Claude Opus 4.7 — final rulings only
 async function callTier(env, tier, messages) {
-  if (tier === 3 && env.DEEPSEEK_API_KEY) return callOpenAI('https://api.deepseek.com/v1/chat/completions', env.DEEPSEEK_API_KEY, 'deepseek-chat', messages);
-  if (tier >= 2 && env.ANTHROPIC_API_KEY) return callAnthropic(env, messages);
+  if (tier >= 4 && env.ANTHROPIC_API_KEY) return callAnthropic(env, messages);
+  if (tier >= 3 && env.DEEPSEEK_API_KEY)  return callOpenAI('https://api.deepseek.com/v1/chat/completions', env.DEEPSEEK_API_KEY, 'deepseek-reasoner', messages);
+  if (tier >= 2 && env.DEEPSEEK_API_KEY)  return callOpenAI('https://api.deepseek.com/v1/chat/completions', env.DEEPSEEK_API_KEY, 'deepseek-chat', messages);
 
-  // T1 — free cascade: Dialagram → Cerebras → Groq → CF-Qwen
-  // Dialagram gets 12s hard timeout — if their adapter is down it hangs forever
+  // T1 cascade
   const tried = [];
   let result = null;
+
   if (env.DIALAGRAM_API_KEY) {
     tried.push('Dialagram-Qwen');
     result = await withTimeout(
@@ -128,7 +133,11 @@ async function callTier(env, tier, messages) {
   }
   if (result === null && env.CEREBRAS_API_KEY) {
     tried.push('Cerebras');
-    result = await callOpenAI('https://api.cerebras.ai/v1/chat/completions', env.CEREBRAS_API_KEY, 'llama-3.3-70b', messages).catch(() => null);
+    // reasoning model — reasoning_effort:low required or all tokens go to chain-of-thought with no output
+    result = await withTimeout(
+      callOpenAI('https://api.cerebras.ai/v1/chat/completions', env.CEREBRAS_API_KEY, 'gpt-oss-120b', messages, {}, { reasoning_effort: 'low' }),
+      15000
+    ).catch(() => null);
   }
   if (result === null && env.GROQ_API_KEY) {
     tried.push('Groq');
@@ -139,7 +148,7 @@ async function callTier(env, tier, messages) {
     const aiResult = await env.AI.run('@cf/qwen/qwen2.5-coder-32b-instruct', { messages, max_tokens: 8192 });
     result = aiResult.response ?? null;
   }
-  if (!result) throw new Error('T1 free cascade failed (' + tried.join('→') + ')');
+  if (!result) throw new Error('T1 cascade failed (' + tried.join('→') + ')');
   return result;
 }
 
@@ -345,10 +354,10 @@ async function handleStatus(env) {
   return Response.json({
     drone: 'phoenix-architecti', version: '0.0.2', status: 'LIVE',
     tiers: {
-      t1: (env.DIALAGRAM_API_KEY ? 'Dialagram-Qwen3.7Max ✓' : 'Dialagram-Qwen NO KEY') + '→' + (env.CEREBRAS_API_KEY ? 'Cerebras ✓' : 'Cerebras NO KEY') + '→' + (env.GROQ_API_KEY ? 'Groq ✓' : 'Groq NO KEY') + '→CF-Qwen',
-      t2: env.ANTHROPIC_API_KEY ? 'claude-opus-4-7 ✓' : 'NO KEY',
-      t3: env.DEEPSEEK_API_KEY ? 'deepseek-v4-pro ✓' : 'NO KEY',
-      t4: env.GEMINI_API_KEY ? 'gemini-3.5-flash ✓' : 'NO KEY'
+      t1: (env.DIALAGRAM_API_KEY ? 'Dialagram-QwenMax ✓' : 'Dialagram NO KEY') + '→' + (env.CEREBRAS_API_KEY ? 'Cerebras-120B ✓' : 'Cerebras NO KEY') + '→' + (env.GROQ_API_KEY ? 'Groq ✓' : 'Groq NO KEY') + '→CF-Qwen',
+      t2: env.DEEPSEEK_API_KEY ? 'DeepSeek Flash (deepseek-chat) ✓' : 'DeepSeek NO KEY',
+      t3: env.DEEPSEEK_API_KEY ? 'DeepSeek Pro (deepseek-reasoner) ✓' : 'DeepSeek NO KEY',
+      t4: env.ANTHROPIC_API_KEY ? 'Claude Opus 4.7 ✓' : 'Anthropic NO KEY'
     },
     endpoints: { proxy: '/v1/chat/completions (OpenAI-compat, Kilo-ready)', code: '/api/code', mission: '/api/mission', crunch: '/api/crunch' },
     gateway: env.AIGATEWAYURL ? 'CF AI Gateway ✓' : 'direct API',
