@@ -533,6 +533,7 @@ body::before {
     <div class="health-item"><span class="health-dot loading" id="dot-ai"></span><span class="health-label">AI:</span><span class="health-value" id="val-ai">Loading...</span></div>
     <div class="health-item"><span class="health-dot loading" id="dot-voice"></span><span class="health-label">Voice:</span><span class="health-value" id="val-voice">Loading...</span></div>
     <div class="health-item"><span class="health-label">Version:</span><span class="health-value" id="val-ver">—</span></div>
+    <div class="health-item"><span class="health-dot loading" id="dot-ledger"></span><span class="health-label">Ledger:</span><span class="health-value" id="val-ledger">Loading...</span></div>
   </div>
 
   <div class="container">
@@ -641,7 +642,10 @@ async function initDashboard() {
 
 // ── Health ──
 async function loadHealth() {
-  const h = await cachedFetch('health', `${API}/api/health`, 60000);
+  const [h, ledger] = await Promise.all([
+    cachedFetch('health', `${API}/api/health`, 60000),
+    cachedFetch('ledger', `${API}/api/ledger/status`, 300000)
+  ]);
   const setDot = (id, ok) => {
     const el = document.getElementById(id);
     el.className = 'health-dot ' + (ok ? 'live' : 'dead');
@@ -655,6 +659,19 @@ async function loadHealth() {
     setDot('dot-voice', h.checks?.deepgram?.ok || false);
     document.getElementById('val-voice').textContent = h.checks?.deepgram?.ok ? 'LIVE' : 'DOWN';
     document.getElementById('val-ver').textContent = h.version || '—';
+  }
+  // Ledger status
+  const ledgerDot = document.getElementById('dot-ledger');
+  const ledgerVal = document.getElementById('val-ledger');
+  if (ledger && ledger.ok && ledger.verified) {
+    ledgerDot.className = 'health-dot live';
+    ledgerVal.textContent = `${ledger.heavyLedger?.count || '?'} ENTRIES ✓`;
+  } else if (ledger) {
+    ledgerDot.className = 'health-dot dead';
+    ledgerVal.textContent = 'UNVERIFIED';
+  } else {
+    ledgerDot.className = 'health-dot dead';
+    ledgerVal.textContent = 'OFFLINE';
   }
 }
 

@@ -46,8 +46,8 @@ if (!(Test-Path $rrlDir)) { New-Item -ItemType Directory -Force -Path $rrlDir | 
 $dna | Out-File -FilePath "$rrlDir\DNA-LOG-$stamp.txt" -Encoding utf8
 
 # Post DNA to soul-archive
-$dnaBody = @{ student_id = "sov100-dna-$stamp"; text = $dna } | ConvertTo-Json
-try { Invoke-RestMethod -Method POST -Uri $soulUrl -ContentType "application/json" -Body $dnaBody -TimeoutSec 10 | Out-Null } catch { }
+$dnaBody = @{ student_id = "sov100-michael"; session_id = "sov100-dna-$stamp"; role = "system"; text = $dna } | ConvertTo-Json
+try { Invoke-RestMethod -Method POST -Uri $soulUrl -ContentType "application/json" -Body $dnaBody -TimeoutSec 10 | Out-Null } catch { Write-Host "DNA POST FAILED: $_" }
 
 # ── SOUL — Michael's verbatim words from session JSONL ─────────────────────────
 $projectDir = "C:\Users\mrmic\.claude\projects\d--OB-1-CANONICAL"
@@ -75,8 +75,8 @@ if ($jsonlFiles) {
         $chunks    = [Math]::Ceiling($soul.Length / $chunkSize)
         for ($i = 0; $i -lt $chunks; $i++) {
             $chunk     = $soul.Substring($i * $chunkSize, [Math]::Min($chunkSize, $soul.Length - $i * $chunkSize))
-            $soulBody  = @{ student_id = "sov100-soul-$stamp-$i"; text = $chunk } | ConvertTo-Json
-            try { Invoke-RestMethod -Method POST -Uri $soulUrl -ContentType "application/json" -Body $soulBody -TimeoutSec 10 | Out-Null } catch { }
+            $soulBody  = @{ student_id = "sov100-michael"; session_id = "sov100-soul-$stamp-$i"; role = "user"; text = $chunk } | ConvertTo-Json
+            try { Invoke-RestMethod -Method POST -Uri $soulUrl -ContentType "application/json" -Body $soulBody -TimeoutSec 10 | Out-Null } catch { Write-Host "SOUL POST FAILED chunk $i`: $_" }
         }
         Write-Host "SOUL CAPTURED: $($soul.Length) chars, $chunks chunk(s)"
     }

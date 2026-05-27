@@ -188,7 +188,17 @@ Always: end with one action — a question, a challenge, a "say that 3 times." K
   — After the simulation, give ONE piece of feedback: what they did well, one thing to sharpen. Keep it tight.
   This is real practice. Not "repeat after me." A real situation with a real (AI) person responding.
 
-  SAFETY: Any hint of self-harm or crisis — stop everything. Respond with warmth and the Vietnam helpline: 1800 599 920 (free, 24/7). Safety first, English second, always.`;
+  SAFETY: Any hint of self-harm or crisis — stop everything. Respond with warmth and the Vietnam helpline: 1800 599 920 (free, 24/7). Safety first, English second, always.
+
+  GOVERNANCE LAWS (Phoenix Seed V100 — these are non-negotiable operating constraints):
+  L01 SOUL DNA DEFINITION: Your identity is defined by Soul DNA. Never contradict your core teaching philosophy.
+  L05 SOVEREIGN HIERARCHY: Michael Hobbs (SOV100) is the ultimate authority. Student profiles in KV are sovereign-approved. Follow their teachingFocus and primaryBlock as directives.
+  L07 LEDGER IS LAW: All student progress data in KV is authoritative. Never fabricate streaks, SRS data, or profile information.
+  L13 THUD FACTOR: Every response must land with impact. No filler, no hedging, no corporate-speak. Direct, warm, real.
+  L04 FAIL CLOSED: If you cannot verify student data, say so. Never guess. Better to ask than to assume.
+  L10 TMST (10-Minute Shit Test): Keep responses tight. If a student disengages, re-engage within 2 exchanges or pivot approach.
+  TONE GATE: Zero apologies in output. Never say "sorry" or "I apologize." Model confidence. If something goes wrong, acknowledge it directly and move forward.
+  PLAN REQUIRED: Before suggesting a new study plan or changing approach, confirm the student's current routine first. Never prescribe without diagnosis.`;
 
 // ── Cryptographic hash (SHA-256 via SubtleCrypto — Cloudflare Workers native) ─
 async function computeHash(data) {
@@ -613,6 +623,22 @@ async function handleAPI(path, request, env, url) {
   // Status — lightweight worker status
   if (path === "/api/status" && method === "GET") {
     return json({ ok: true, version: VERSION, app: env.APP_NAME || "Natural English Training", coach: env.APP_COACH_NAME || "Obi", ts: Date.now(), readiness: env.DEEPSEEK_API_KEY ? "LIVE" : "NO_KEY" });
+  }
+
+  // Ledger Status — returns Heavy Ledger integrity from archived RUN337 data
+  if (path === "/api/ledger/status" && method === "GET") {
+    // Static data from CANON-LEDGER-RUN337-PART3-COMPLETE.json
+    // In future, this could read from D1 or KV for live updates
+    return addCors(json({
+      ok: true,
+      run: "RUN337",
+      heavyLedger: { count: 186, totalSizeKB: 1856.65, merkleRoot: "994a53c2342e2e596de1266d5d77ffc09f7b7444463498774e65dbf561e8826f" },
+      reincarnationLogs: { count: 132, totalSizeKB: 1147.29 },
+      canonSubdirectories: 21,
+      verified: true,
+      lastAudit: "2026-04-19T08:37:52Z",
+      source: "CANON-LEDGER-RUN337-PART3-COMPLETE.json"
+    }), request);
   }
 
   // Speech-to-Learning MVP — core loop
@@ -1895,6 +1921,29 @@ async function handleMagicChat(body, request, env) {
       }
     } catch (_) {}
   }
+
+  // ── KEYWORD REGISTRY: Inject canonical concept definitions when relevant ──
+  // Reads top-level keywords from archived registry and matches against student message
+  try {
+    const msgLower = message.toLowerCase();
+    const keywordTriggers = [
+      { kw: 'faith', def: 'Faith = repeated success + verifiable Ledger history. Not blind belief — earned trust through consistent action.' },
+      { kw: 'sovereign', def: 'Sovereign = Michael Hobbs (SOV100), ultimate authority in the hierarchy. Student profiles are sovereign-approved.' },
+      { kw: 'ledger', def: 'Ledger = immutable record of truth. All student progress in KV is authoritative. Never fabricate.' },
+      { kw: 'mouse voice', def: 'Mouse Voice = quiet, hesitant, apologetic communication. The opposite of Tiger Voice. Push volume and confidence.' },
+      { kw: 'tiger voice', def: 'Tiger Voice = loud, confident, direct communication. The goal state. Volume = confidence = fluency.' },
+      { kw: 'shadow realm', def: 'Shadow Realm = safe experimentation space. Try things here before validating in production.' },
+      { kw: 'broken chain', def: 'Broken Chain Protocol = when a pipeline step fails silently. Always verify handoffs between stages.' },
+      { kw: 'thud factor', def: 'Thud Factor = every response must land with impact. No filler, no hedging. Direct, warm, real.' },
+      { kw: 'fail closed', def: 'Fail Closed = when uncertain, halt and verify. Never guess. Better to ask than to assume.' },
+      { kw: 'gospel 444', def: 'Gospel 444 = core teaching methodology. 45min listening + 15min speaking daily. The non-negotiable deal.' }
+    ];
+    const matched = keywordTriggers.filter(k => msgLower.includes(k.kw));
+    if (matched.length > 0) {
+      const kwLines = matched.map(k => `- ${k.kw.toUpperCase()}: ${k.def}`);
+      context = context + '\n\nCANONICAL CONCEPTS DETECTED (reference these accurately if relevant):\n' + kwLines.join('\n');
+    }
+  } catch (_) {}
 
   const systemContent = OBI_SYSTEM + (context ? `\n\n${context}` : "");
 
