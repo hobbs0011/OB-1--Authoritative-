@@ -705,39 +705,49 @@ async function handle(text) {
   }
 }
 
-// ── Voice input (Deepgram Nova-3 STT) — LIGHTNING FAST ──────────────
+// ── Voice input (Deepgram Nova-3 STT) — FAST ──────────────
 let mediaRecorder = null;
 let listening     = false;
-let sttAbort      = null;
+let audioChunks   = [];
 
-// MIME priority: webm (native) > mp4 > wav (Safari). No opus — Deepgram handles raw webm natively.
+// MIME priority: webm > mp4 > wav (Safari fallback)
 const MIME_CANDIDATES = ["audio/webm", "audio/mp4", "audio/wav"];
 function pickMime() {
   for (const m of MIME_CANDIDATES) {
     if (typeof MediaRecorder !== "undefined" && MediaRecorder.isTypeSupported(m)) return m;
   }
-  return ""; // browser default
+  return "";
 }
 
 async function startListening() {
   try {
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    audioChunks = [];
     const mimeType = pickMime();
     const opts = mimeType ? { mimeType, bitsPerSecond: 128000 } : undefined;
     mediaRecorder = new MediaRecorder(stream, opts);
     const effectiveMime = mimeType || mediaRecorder.mimeType;
 
-    // STREAMING: send each chunk immediately as it arrives (250ms slices)
-    mediaRecorder.ondataavailable = async (e) => {
-      if (!e.data || e.data.size === 0) return;
-      const controller = new AbortController();
-      sttAbort = controller;
+    // Buffer chunks — Deepgram REST needs complete audio file
+    mediaRecorder.ondataavailable = (e) => {
+      if (e.data && e.data.size > 0) audioChunks.push(e.data);
+    };
+
+    mediaRecorder.onstop = async () => {
+      stream.getTracks().forEach(t => t.stop());
+      listening = false;
+      micBtn.classList.remove("mic-active");
+      if (!audioChunks.length) { input.placeholder = "Type here…"; return; }
+
+      input.placeholder = "Processing…";
+      const blob = new Blob(audioChunks, { type: effectiveMime });
+      audioChunks = [];
+
       try {
         const res = await fetch("/api/stt", {
           method: "POST",
           headers: { "Content-Type": effectiveMime },
-          body: e.data,
-          signal: controller.signal,
+          body: blob,
         });
         const data = await res.json();
         const transcript = (data.transcript || "").trim();
@@ -745,31 +755,19 @@ async function startListening() {
           input.value = transcript;
           const lowConf = (data.words || []).filter(w => w.confidence < 0.75);
           profile._phonicsHints = lowConf.length > 0 ? lowConf.map(w => w.word) : null;
-          // Auto-submit on final chunk only (when recorder stopped)
-          if (mediaRecorder.state === "inactive") {
-            handle(transcript);
-          }
+          handle(transcript);
+        } else {
+          input.placeholder = "Didn't catch that — try again!";
+          setTimeout(() => { input.placeholder = "Type here…"; }, 2500);
         }
-      } catch (err) {
-        if (err.name !== "AbortError") console.warn("STT chunk:", err);
+      } catch {
+        input.placeholder = "Voice error — type instead";
+        setTimeout(() => { input.placeholder = "Type here…"; }, 2500);
       }
-    };
-
-    mediaRecorder.onstop = () => {
-      stream.getTracks().forEach(t => t.stop());
-      listening = false;
-      micBtn.classList.remove("mic-active");
       if (input.placeholder === "Processing…") input.placeholder = "Type here…";
-      // If we got a transcript but haven't submitted yet, do it now
-      const finalText = input.value.trim();
-      if (finalText && !listening) {
-        handle(finalText);
-        input.value = "";
-      }
     };
 
-    // 250ms timeslice = ~4 chunks/sec, near-realtime
-    mediaRecorder.start(250);
+    mediaRecorder.start();
     listening = true;
     micBtn.classList.add("mic-active");
     input.value = "";
@@ -781,7 +779,6 @@ async function startListening() {
 }
 
 function stopListening() {
-  if (sttAbort) sttAbort.abort();
   if (mediaRecorder && mediaRecorder.state !== "inactive") {
     input.placeholder = "Processing…";
     mediaRecorder.stop();
