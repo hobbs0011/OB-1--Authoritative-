@@ -705,73 +705,101 @@ async function handle(text) {
   }
 }
 
-// ── Voice input (Deepgram Nova-3 STT) — FAST ──────────────
+// ── Voice input (Deepgram Nova-3 WebSocket STT) — REALTIME ──────────────
+let dgSocket      = null;
 let mediaRecorder = null;
 let listening     = false;
-let audioChunks   = [];
+let silenceTimer  = null;
+let lastAudioTime = 0;
+let finalTranscript = "";
 
-// MIME priority: webm > mp4 > wav (Safari fallback)
-const MIME_CANDIDATES = ["audio/webm", "audio/mp4", "audio/wav"];
-function pickMime() {
-  for (const m of MIME_CANDIDATES) {
-    if (typeof MediaRecorder !== "undefined" && MediaRecorder.isTypeSupported(m)) return m;
-  }
-  return "";
+// Get DG key from worker (cached server-side)
+async function getDgKey() {
+  const res = await fetch("/api/stt/key");
+  const data = await res.json();
+  return data.key;
 }
 
 async function startListening() {
   try {
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-    audioChunks = [];
-    const mimeType = pickMime();
-    const opts = mimeType ? { mimeType, bitsPerSecond: 128000 } : undefined;
-    mediaRecorder = new MediaRecorder(stream, opts);
-    const effectiveMime = mimeType || mediaRecorder.mimeType;
+    const apiKey = await getDgKey();
+    if (!apiKey) { input.placeholder = "STT not configured"; return; }
 
-    // Buffer chunks — Deepgram REST needs complete audio file
-    mediaRecorder.ondataavailable = (e) => {
-      if (e.data && e.data.size > 0) audioChunks.push(e.data);
-    };
-
-    mediaRecorder.onstop = async () => {
-      stream.getTracks().forEach(t => t.stop());
-      listening = false;
-      micBtn.classList.remove("mic-active");
-      if (!audioChunks.length) { input.placeholder = "Type here…"; return; }
-
-      input.placeholder = "Processing…";
-      const blob = new Blob(audioChunks, { type: effectiveMime });
-      audioChunks = [];
-
-      try {
-        const res = await fetch("/api/stt", {
-          method: "POST",
-          headers: { "Content-Type": effectiveMime },
-          body: blob,
-        });
-        const data = await res.json();
-        const transcript = (data.transcript || "").trim();
-        if (transcript) {
-          input.value = transcript;
-          const lowConf = (data.words || []).filter(w => w.confidence < 0.75);
-          profile._phonicsHints = lowConf.length > 0 ? lowConf.map(w => w.word) : null;
-          handle(transcript);
-        } else {
-          input.placeholder = "Didn't catch that — try again!";
-          setTimeout(() => { input.placeholder = "Type here…"; }, 2500);
-        }
-      } catch {
-        input.placeholder = "Voice error — type instead";
-        setTimeout(() => { input.placeholder = "Type here…"; }, 2500);
-      }
-      if (input.placeholder === "Processing…") input.placeholder = "Type here…";
-    };
-
-    mediaRecorder.start();
-    listening = true;
-    micBtn.classList.add("mic-active");
+    finalTranscript = "";
     input.value = "";
     input.placeholder = "Listening…";
+    listening = true;
+    micBtn.classList.add("mic-active");
+    lastAudioTime = Date.now();
+
+    // WebSocket to Deepgram for real-time streaming
+    const wsUrl = `wss://api.deepgram.com/v1/listen?model=nova-3&punctuate=true&smart_format=true&interim_results=true&endpointing=800`;
+    dgSocket = new WebSocket(wsUrl, ["token", apiKey]);
+
+    dgSocket.onopen = () => {
+      // Send audio via MediaRecorder → WebSocket
+      const mimeType = MediaRecorder.isTypeSupported("audio/webm") ? "audio/webm" : "audio/wav";
+      mediaRecorder = new MediaRecorder(stream, { mimeType, bitsPerSecond: 128000 });
+
+      mediaRecorder.ondataavailable = (e) => {
+        if (e.data && e.data.size > 0 && dgSocket?.readyState === WebSocket.OPEN) {
+          dgSocket.send(e.data);
+          lastAudioTime = Date.now();
+        }
+      };
+
+      mediaRecorder.onstop = () => {
+        stream.getTracks().forEach(t => t.stop());
+      };
+
+      // 250ms chunks for low latency
+      mediaRecorder.start(250);
+    };
+
+    dgSocket.onmessage = (event) => {
+      const msg = JSON.parse(event.data);
+      const alt = msg?.channel?.alternatives?.[0];
+      if (!alt) return;
+
+      const transcript = (alt.transcript || "").trim();
+      if (!transcript) return;
+
+      if (msg.is_final) {
+        finalTranscript += (finalTranscript ? " " : "") + transcript;
+        input.value = finalTranscript;
+        // Auto-submit after final result + brief pause
+        clearTimeout(silenceTimer);
+        silenceTimer = setTimeout(() => {
+          if (finalTranscript && listening) {
+            stopListening();
+            handle(finalTranscript);
+          }
+        }, 600);
+      } else {
+        // Show interim results in placeholder
+        input.placeholder = transcript + "…";
+      }
+    };
+
+    dgSocket.onerror = () => {
+      input.placeholder = "Voice error — type instead";
+      stopListening();
+    };
+
+    dgSocket.onclose = () => {
+      if (listening) {
+        listening = false;
+        micBtn.classList.remove("mic-active");
+        if (input.placeholder.includes("…")) input.placeholder = "Type here…";
+      }
+    };
+
+    // Safety: auto-stop after 15s max
+    silenceTimer = setTimeout(() => {
+      if (listening) stopListening();
+    }, 15000);
+
   } catch {
     input.placeholder = "Mic access denied";
     setTimeout(() => { input.placeholder = "Type here…"; }, 2500);
@@ -779,12 +807,17 @@ async function startListening() {
 }
 
 function stopListening() {
-  if (mediaRecorder && mediaRecorder.state !== "inactive") {
-    input.placeholder = "Processing…";
-    mediaRecorder.stop();
+  clearTimeout(silenceTimer);
+  if (mediaRecorder && mediaRecorder.state !== "inactive") mediaRecorder.stop();
+  if (dgSocket && dgSocket.readyState === WebSocket.OPEN) {
+    dgSocket.send(JSON.stringify({ type: "CloseStream" }));
+    dgSocket.close();
   }
+  dgSocket = null;
+  mediaRecorder = null;
   listening = false;
   micBtn.classList.remove("mic-active");
+  if (input.placeholder.includes("…")) input.placeholder = "Type here…";
 }
 
 micBtn.addEventListener("click", () => {

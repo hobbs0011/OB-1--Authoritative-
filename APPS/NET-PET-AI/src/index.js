@@ -656,7 +656,13 @@ async function handleAPI(path, request, env, url) {
   // TTS
   if (path === "/api/tts" && method === "POST") { const body = await request.json(); return handleTTS(body, env); }
 
-  // STT — Deepgram Nova-3 speech-to-text with word confidence
+  // STT key endpoint — returns DG key for client-side WebSocket (rate-limit exempt)
+  if (path === "/api/stt/key" && method === "GET") {
+    if (!globalThis.__DG_KEY) globalThis.__DG_KEY = env.DEEPGRAM_API_KEY;
+    return addCors(json({ key: globalThis.__DG_KEY || "" }), request);
+  }
+
+  // STT — Deepgram Nova-3 speech-to-text with word confidence (REST fallback)
   if (path === "/api/stt" && method === "POST") {
     // Cache Deepgram key in globalThis to avoid secret lookup per chunk
     if (!globalThis.__DG_KEY) globalThis.__DG_KEY = env.DEEPGRAM_API_KEY;
