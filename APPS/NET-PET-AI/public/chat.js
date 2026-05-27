@@ -710,8 +710,8 @@ let mediaRecorder = null;
 let listening     = false;
 let sttAbort      = null;
 
-// MIME priority: opus > webm > wav (Safari)
-const MIME_CANDIDATES = ["audio/webm;codecs=opus", "audio/webm", "audio/mp4", "audio/wav"];
+// MIME priority: webm (native) > mp4 > wav (Safari). No opus — Deepgram handles raw webm natively.
+const MIME_CANDIDATES = ["audio/webm", "audio/mp4", "audio/wav"];
 function pickMime() {
   for (const m of MIME_CANDIDATES) {
     if (typeof MediaRecorder !== "undefined" && MediaRecorder.isTypeSupported(m)) return m;
