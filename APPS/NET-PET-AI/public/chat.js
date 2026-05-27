@@ -727,11 +727,13 @@ async function getDgKey() {
   return dgKeyCache;
 }
 
-// Pre-warm mic permission and AudioContext on page load
-async function preWarmMic() {
+// Pre-warm: only fetch the API key (mic + AudioContext require user gesture)
+setTimeout(() => { getDgKey().catch(() => {}); }, 300);
+
+async function startListening() {
   try {
-    // Request mic permission early so browser prompt doesn't block first click
-    micStream = await navigator.mediaDevices.getUserMedia({
+    // Always get fresh mic stream (user gesture required)
+    const stream = await navigator.mediaDevices.getUserMedia({
       audio: {
         channelCount: 1,
         echoCancellation: true,
@@ -739,35 +741,7 @@ async function preWarmMic() {
         autoGainControl: true
       }
     });
-    // Create AudioContext early (must be after user gesture on some browsers, but we try)
-    audioCtx = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: TARGET_SAMPLE_RATE });
-    // Suspend immediately — will resume on actual use
-    await audioCtx.suspend();
-    // Pre-fetch the API key
-    await getDgKey();
-  } catch {
-    // Mic denied or AudioContext failed — will retry on actual startListening
-  }
-}
-
-// Call pre-warm after short delay to avoid blocking page load
-setTimeout(preWarmMic, 500);
-
-async function startListening() {
-  try {
-    // Reuse pre-warmed stream or get new one
-    let stream = micStream;
-    if (!stream || stream.getTracks().some(t => t.readyState !== 'live')) {
-      stream = await navigator.mediaDevices.getUserMedia({
-        audio: {
-          channelCount: 1,
-          echoCancellation: true,
-          noiseSuppression: true,
-          autoGainControl: true
-        }
-      });
-      micStream = stream;
-    }
+    micStream = stream;
 
     const apiKey = await getDgKey();
     if (!apiKey) { input.placeholder = "STT not configured"; return; }
@@ -780,8 +754,6 @@ async function startListening() {
     lastSpeechTime = Date.now();
 
     // Deepgram Nova-3 streaming — optimized for speed
-    // endpointing=100ms for fastest possible turn detection
-    // utterance_end_ms=500ms for quick auto-submit
     const wsParams = new URLSearchParams({
       model: "nova-3",
       punctuate: "true",
@@ -798,13 +770,10 @@ async function startListening() {
     dgSocket = new WebSocket(wsUrl, ["token", apiKey]);
 
     dgSocket.onopen = async () => {
-      // Resume pre-warmed AudioContext or create new one
-      if (!audioCtx || audioCtx.state === 'closed') {
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: TARGET_SAMPLE_RATE });
-      }
-      if (audioCtx.state === 'suspended') {
-        await audioCtx.resume();
-      }
+      // ALWAYS create fresh AudioContext inside user gesture handler
+      // Pre-warmed contexts fail on mobile Safari without gesture
+      if (audioCtx) { try { audioCtx.close(); } catch {} }
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: TARGET_SAMPLE_RATE });
       audioSource = audioCtx.createMediaStreamSource(stream);
 
       try {
@@ -923,16 +892,15 @@ async function startListening() {
 
 function stopListening() {
   clearTimeout(silenceTimer);
-  // Tear down audio pipeline (but keep micStream and audioCtx alive for next use)
-  if (workletNode) { workletNode.disconnect(); workletNode = null; }
-  if (audioSource) { audioSource.disconnect(); audioSource = null; }
-  // Don't close audioCtx — suspend it for reuse
-  if (audioCtx && audioCtx.state === 'running') {
-    audioCtx.suspend().catch(() => {});
-  }
+  // Tear down audio pipeline completely — fresh context created each startListening
+  if (workletNode) { try { workletNode.disconnect(); } catch {} workletNode = null; }
+  if (audioSource) { try { audioSource.disconnect(); } catch {} audioSource = null; }
+  if (audioCtx) { try { audioCtx.close(); } catch {} audioCtx = null; }
+  // Stop all mic tracks to release hardware
+  if (micStream) { micStream.getTracks().forEach(t => t.stop()); micStream = null; }
   // Close WebSocket gracefully
   if (dgSocket && dgSocket.readyState === WebSocket.OPEN) {
-    dgSocket.send(JSON.stringify({ type: "CloseStream" }));
+    try { dgSocket.send(JSON.stringify({ type: "CloseStream" })); } catch {}
     dgSocket.close();
   }
   dgSocket = null;
