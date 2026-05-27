@@ -1,0 +1,13 @@
+{
+  "hl_id": "HL-199",
+  "event_id": "7cb6bd6f-03d3-4038-9dd3-a0f74abaa6a7",
+  "session_id": "sov100-roman-run20",
+  "role": "user",
+  "char_count": 1377,
+  "byte_count": 52,
+  "merkle_parent": "0690e459",
+  "merkle_hash": "07ead1864b24867ba86a36006c04d19260d858350c853a561fcd49bb5217f47a",
+  "extracted_at": "2026-05-28T04:03:36.2052804+07:00",
+  "sov100": true,
+  "run": 20
+}

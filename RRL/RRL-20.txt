@@ -1,0 +1,22 @@
+no THIS IS QWEN MAX
+I thought I told you to keep fixing it and testing it until it works?
+now its cutting off before it hears me, for the love of god, deploy MAX THINKING TO FIX IT SO IT ACTUALLY WORKS, THEN TEST IT YOURSELF
+better, at least it shows loading so student knows its buffering.
+Anyway to make it faster? still 3 second wait
+dude can we actually fucking fix it?
+the mic button still doesnt work.. we cant have a natural conversation with Obi
+bro it doesnt work on my phone or on my fucking laptop browser instead of saying what it likely is, fucking fix it
+it works its just very veyr slow
+ensure it will work on safari as well
+nope we went backwardss, even slower now, still works but the buffering button happens after 4 seconds, and response takes up to 7 seconds
+you fucking test it yourself and if it doesnt work, continue working on it, do an extensive fucxking pipeline instead of using me to go back and forth like this
+can you test it yourself?
+I am not on safari just using chrome on windows
+voice error again
+study the best of what deepgram can offer we have a new key for $200 of deepgram credits ensure its hooked up, spend max time and max compute doing everything you need to make it perfect e52cbfb96b6fd9cbcdd2d6a60c1c46ab8049cdd9
+do not use opus? deepgram and deepseek only..
+commit and deploy
+continue
+fucking stop reading and fucking do it
+go
+go

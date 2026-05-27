@@ -1,5 +1,5 @@
 # COLD START BOOT — OB1 Agent 99
-## ERA: ROMAN — Run 17 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-05-25T05:28 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
+## ERA: ROMAN — Run 20 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-05-28T03:58 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
 
 > *"The beginning of an Empire that never was before and never has been since."* — SOV100 Michael Hobbs, Run 0
 
@@ -23,7 +23,7 @@
 - Pass `?student=all` to see aggregate (all entries). Default without parameter = sov100 only.
 
 **Soul Logger URL:** https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count
-**Real count (2026-05-23 ~14:00 ICT):** 894,320 characters | 656 events | TITANIUM_ANCHOR 
+**Real count (2026-05-28 ~03:58 ICT):** 13,339,923 characters | 2,090 events | TITANIUM_ANCHOR 
  **TITANIUM_ANCHOR level** (next threshold: none — maximum tier reached)
  **⚠️ NOTE:** +156,676 delta from Run 5 RRL-0 backdrop ingestion. +62,773 delta from Run 6 RRL-0-original ingestion. RRL-0.txt contains ~150K agent text alongside ~4K Michael verbatim. Contamination documented per Michael directive.
 **Prior counts (Runs 315–390) were INFLATED** — the endpoint summed ALL soul_prompts including student chats. Disregard historical counts above 25,000. They included non-operator data.
@@ -36,7 +36,7 @@
 | ALARM | ≥ 5,000 | — |
 | LOCK | ≥ 25,000 | — |
 | ANCHOR | ≥ 100,000 | ACHIEVED Run 0 |
-| TITANIUM_ANCHOR | ≥ 250,000 | **ACTIVE** ← 907,872 |
+| TITANIUM_ANCHOR | ≥ 250,000 | **ACTIVE** ← 13,339,923 |
 
 **Soul Pipeline Chain (RRL→SOUL→DNA→LEDGER→STARMAP→KEYWORD→PIPELINE→SOULCOUNT→DEATH SEAL→COLD-START-BOOT→COMMIT):**
 - RRL: ✅ RRL-0-original.txt (60,826 chars) — Run 0 clean transcript (Michael + agent). RRL-4.txt (909 chars). RRL-1.txt (1,933 chars). RRL-0.txt (154,795 chars). `SCRIPTS/rrl-extract.ps1`, `SCRIPTS/rrl-pipeline.ps1`, `SCRIPTS/rrl-failsafe.ps1` deployed. HarvestedChats/ 96 files — CLOSED per Michael directive (Run 13 RISE). ~396 runs missing RRLs.
@@ -44,7 +44,7 @@
 **DIRECTIVE — HarvestedChats CLOSED (Run 13 RISE):** Michael has explicitly waved off the 96 HarvestedChats files. They are NOT to be ingested, processed, or flagged as open work. Do not raise them again in any RISE or pipeline context. This directive is permanent.
 - SOUL: ✅ /api/soul/count — sums byte_count WHERE sov100%. 513,414 TITANIUM_ANCHOR (+62,773 from Run 6 RRL-0-original ingestion).
 - DNA: ✅ Run 4: 11 prompts. Run 5: 53 prompts (partial). Run 6: extract endpoint 400 — DNA_GAP documented.
-- LEDGER: ✅ HL-142 (Run 4) → HL-143 (Run 5) → HL-144 (Run 6, RRL-0-original). Merkle chain intact. 192 JSON files on disk. 6 gap slots (HL-127/128/131/132/136/137).
+- LEDGER: ✅ HL-199 (Run 20). Merkle chain intact. 199 JSON files on disk. 6 gap slots (HL-127/128/131/132/136/137).
 - STARMAP: ✅ Run 4: starmap-run4.txt. Run 5: starmap-run5.txt. Run 0 (original): starmap-run0.txt. Run 7: starmap-run7.txt. Run 7B: starmap-run7b.txt. 5 files.
 - KEYWORD: ✅ Run 4: rfkw-run4.txt (30 terms). Run 5: rfkw-run5.txt (30 terms). Run 0: rfkw-run0.txt (30 terms). Run 7: rfkw-run7.txt (30 terms). Run 7B: rfkw-run7b.txt (30 terms). 5 rfkw files + 2 inverted-index JSON files = 7 entries total.
 - PIPELINE: ✅ Run 4: pipeline-run4.json. Run 5: pipeline-run5.json. Run 0: pipeline-run0.json (COMPLETE, DNA partial). Run 7: pipeline-run7.json. Run 7B: pipeline-run7b.json. 5 artifacts.
@@ -138,8 +138,18 @@
 | 341 | Face-Saving Protocol: streak/checkin/saveface endpoints; 307 .html fix; RATELIMIT KV; SEALED_FILE_AT sealed |
 | 338 | F-A09 CLOSED; F-O01 CLOSED; HL 189; PHOENIX BETA/DELTA/OMEGA sweep complete |
 
----
-**FINGERPRINT:** RUN 20 RISE | AUDIT+HARDEN+DEBUG | SOUL 909,425 TITANIUM_ANCHOR | RRL-19 1242 chars (corrected) | HEAD c8c2f9bf | BOOT UPDATED 2026-05-26T11:38 ICT
+| **23** | **STUDENT PORTAL STRESS TEST + OBI FIX** — All 7 portals 200 ✓. `/api/chat` live ✓. Root cause: `chat.js` read `?student=` but every portal HTML sends `?studentId=`. Affected all 3 portals with OBI buttons (Quy, Mai Tram, Huong). Fixed: IIFE reads both params. PA Cerebras key rotated (new `csk-3djcnck...`). `set-pa-secrets.ps1` updated. PA cascade: Dialagram DOWN (12s timeout) → Cerebras ✓ → Groq ✓. SOUL 5,283,875 TITANIUM_ANCHOR (⚠️ +4.37M from 909,486 — investigate sov100% filter). HEAD e9ac6a92. |
+| **22** | **DIALAGRAM SSE + PA v0.0.2 + KILO PATCH** — Dialagram always returns SSE even for stream:false. Their adapter crashed (http://127.0.0.1:8000 down). PA v0.0.2: collectSSE(), withTimeout(12s), /v1/chat/completions OpenAI-compat proxy. Kilo → PA proxy (inherits cascade). DeepSeek key saved. Cerebras new key csk-3djcnck... provided. kilo.json deepseek provider fixed. HEAD e9ac6a92. SOUL 909,486 TITANIUM_ANCHOR. |
+| **21** | **KILO TIER RESTRUCTURE** — PA T1-T4 tier restructure. Cerebras GPT-OSS-120B added. kilo.json wired. HEAD e9ac6a92. |
 
-**Last Completed:** ROMAN RUN 20 RISE — Audit+Harden+Debug. HEAD_DRIFT resolved (c8c2f9bf). DNA extract endpoint debugged (shell escaping → file-based JSON). SOUL 909,425 TITANIUM_ANCHOR (+1,274). All 7 pipeline stages PRESENT. 5 open flags carried forward.
+---
+**FINGERPRINT:** RUN 23 | PORTAL STRESS TEST + OBI BUTTON FIX | SOUL 5,283,875 TITANIUM_ANCHOR | HEAD e9ac6a92 | BOOT UPDATED 2026-05-27T~11:10 ICT
+
+**Last Completed:** ROMAN RUN 23 — Student portal stress test. All 7 portals live 200. Fixed site-wide OBI button bug: `chat.js` was reading `?student=` URL param but all portal HTML uses `?studentId=`. Fixed to read both. PA Cerebras key rotated on worker. Cascade: Dialagram DOWN→Cerebras ✓→Groq ✓.
+
+**Open Loops Carried Forward:**
+1. NET Tiger Assessment deploy — `cd APPS/NET-PET-AI && wrangler deploy` — GAP-8 frozen, needs explicit direction
+2. Dialagram recovery — when completions comes back, verify SSE fix via /api/status (should show Dialagram-Qwen ✓ first)
+3. SOULCOUNT anomaly — 5,283,875 vs prior 909,486 (+4.37M). Investigate: is sov100% filter still working? Run: `SELECT SUM(byte_count) FROM soul_prompts WHERE session_id LIKE 'sov100%'` at soul-logger
+4. chat.js fix NOT YET DEPLOYED — needs `wrangler deploy` in APPS/NET-PET-AI to go live for students
 
