@@ -705,192 +705,125 @@ async function handle(text) {
   }
 }
 
-// ── Voice input (Deepgram Nova-3 WebSocket STT) — PRE-WARMED AUDIOWORKLET PCM ──────────────
-let dgSocket        = null;
-let audioCtx        = null;
-let audioSource     = null;
-let workletNode     = null;
+// ── Voice input (Deepgram Nova-3 REST) — CLIENT-SIDE VAD AUTO-STOP ──────────────
+let mediaRecorder   = null;
+let audioChunks     = [];
 let listening       = false;
 let silenceTimer    = null;
-let finalTranscript = "";
-let lastSpeechTime  = 0;
-let micStream       = null; // Persistent mic stream
-let dgKeyCache      = null; // Cached API key
-const TARGET_SAMPLE_RATE = 16000;
+let vadInterval     = null;
+let micStream       = null;
+let vadCtx          = null;
+let vadAnalyser     = null;
+let vadSource       = null;
+const SILENCE_THRESHOLD = 8;      // RMS below this = silence
+const SILENCE_DURATION  = 900;    // ms of silence before auto-stop
+const MAX_RECORD_MS     = 30000;  // hard cap
 
-// Get DG key from worker (cached client-side after first fetch)
-async function getDgKey() {
-  if (dgKeyCache) return dgKeyCache;
-  const res = await fetch("/api/stt/key");
-  const data = await res.json();
-  dgKeyCache = data.key;
-  return dgKeyCache;
+/** Compute RMS volume from analyser */
+function getRMS() {
+  if (!vadAnalyser) return 0;
+  const buf = new Float32Array(vadAnalyser.fftSize);
+  vadAnalyser.getFloatTimeDomainData(buf);
+  let sum = 0;
+  for (let i = 0; i < buf.length; i++) sum += buf[i] * buf[i];
+  return Math.sqrt(sum / buf.length) * 100; // scale to 0-100 range
 }
-
-// Pre-warm: only fetch the API key (mic + AudioContext require user gesture)
-setTimeout(() => { getDgKey().catch(() => {}); }, 300);
 
 async function startListening() {
   try {
-    // STEP 1: Get mic stream (user gesture required)
     const stream = await navigator.mediaDevices.getUserMedia({
-      audio: {
-        channelCount: 1,
-        echoCancellation: true,
-        noiseSuppression: true,
-        autoGainControl: true
-      }
+      audio: { channelCount: 1, echoCancellation: true, noiseSuppression: true, autoGainControl: true }
     });
     micStream = stream;
 
-    // STEP 2: Get API key
-    const apiKey = await getDgKey();
-    if (!apiKey) { input.placeholder = "STT not configured"; return; }
+    // Set up VAD (Voice Activity Detection) via AnalyserNode
+    vadCtx = new (window.AudioContext || window.webkitAudioContext)();
+    vadSource = vadCtx.createMediaStreamSource(stream);
+    vadAnalyser = vadCtx.createAnalyser();
+    vadAnalyser.fftSize = 1024;
+    vadSource.connect(vadAnalyser);
 
-    // STEP 3: Create AudioContext + Worklet BEFORE WebSocket (avoids race condition)
-    if (audioCtx) { try { audioCtx.close(); } catch {} }
-    audioCtx = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: TARGET_SAMPLE_RATE });
-    audioSource = audioCtx.createMediaStreamSource(stream);
+    audioChunks = [];
+    // Safari only supports audio/mp4 (and sometimes nothing). Chrome/Firefox prefer webm.
+    // Deepgram REST accepts all three formats.
+    const mimeType = MediaRecorder.isTypeSupported("audio/webm")
+      ? "audio/webm"
+      : MediaRecorder.isTypeSupported("audio/mp4")
+        ? "audio/mp4"
+        : MediaRecorder.isTypeSupported("audio/wav")
+          ? "audio/wav"
+          : ""; // empty string = browser default
+    const recOpts = mimeType ? { mimeType } : undefined;
+    mediaRecorder = new MediaRecorder(stream, recOpts);
 
-    let audioReady = false;
-    try {
-      await audioCtx.audioWorklet.addModule("/pcm-worklet.js");
-      workletNode = new AudioWorkletNode(audioCtx, "pcm-processor");
-      workletNode.port.onmessage = (e) => {
-        if (!listening || !dgSocket || dgSocket.readyState !== WebSocket.OPEN) return;
-        dgSocket.send(e.data);
-        lastSpeechTime = Date.now();
-      };
-      audioSource.connect(workletNode);
-      workletNode.connect(audioCtx.destination);
-      audioReady = true;
-    } catch (workletErr) {
-      console.warn("[STT] Worklet failed, using ScriptProcessor:", workletErr.message);
-      const bufSize = 4096;
-      const scriptNode = audioCtx.createScriptProcessor(bufSize, 1, 1);
-      scriptNode.onaudioprocess = (ev) => {
-        if (!listening || !dgSocket || dgSocket.readyState !== WebSocket.OPEN) return;
-        const ch = ev.inputBuffer.getChannelData(0);
-        const ratio = audioCtx.sampleRate / TARGET_SAMPLE_RATE;
-        const outLen = Math.round(ch.length / ratio);
-        const pcm16 = new Int16Array(outLen);
-        for (let i = 0; i < outLen; i++) {
-          const s0 = Math.floor(i * ratio);
-          const s1 = Math.min(Math.floor((i + 1) * ratio), ch.length);
-          let sum = 0;
-          for (let j = s0; j < s1; j++) sum += ch[j];
-          const avg = sum / (s1 - s0);
-          const clamped = Math.max(-1, Math.min(1, avg));
-          pcm16[i] = clamped < 0 ? clamped * 0x8000 : clamped * 0x7FFF;
+    mediaRecorder.ondataavailable = (e) => {
+      if (e.data && e.data.size > 0) audioChunks.push(e.data);
+    };
+
+    mediaRecorder.onstop = async () => {
+      stream.getTracks().forEach(t => t.stop());
+      if (vadCtx) { vadCtx.close().catch(() => {}); vadCtx = null; }
+      clearInterval(vadInterval);
+      clearTimeout(silenceTimer);
+      listening = false;
+      micBtn.classList.remove("mic-active");
+
+      if (!audioChunks.length) { input.placeholder = "Type here…"; return; }
+
+      input.placeholder = "Processing…";
+      const blob = new Blob(audioChunks, { type: mimeType });
+      audioChunks = [];
+
+      try {
+        const res = await fetch("/api/stt", {
+          method: "POST",
+          headers: { "Content-Type": mimeType },
+          body: blob
+        });
+        const data = await res.json();
+        const transcript = (data.transcript || "").trim();
+        if (transcript) {
+          input.value = transcript;
+          const lowConf = (data.words || []).filter(w => w.confidence < 0.75);
+          profile._phonicsHints = lowConf.length > 0 ? lowConf.map(w => w.word) : null;
+          handle(transcript);
+        } else {
+          input.placeholder = "Didn't catch that — try again!";
+          setTimeout(() => { input.placeholder = "Type here…"; }, 2500);
         }
-        dgSocket.send(pcm16.buffer);
-        lastSpeechTime = Date.now();
-      };
-      audioSource.connect(scriptNode);
-      scriptNode.connect(audioCtx.destination);
-      workletNode = scriptNode;
-      audioReady = true;
-    }
+      } catch {
+        input.placeholder = "Voice error — type instead";
+        setTimeout(() => { input.placeholder = "Type here…"; }, 2500);
+      }
+      if (input.placeholder === "Processing…") input.placeholder = "Type here…";
+    };
 
-    if (!audioReady) {
-      input.placeholder = "Voice init failed — type instead";
-      setTimeout(() => { input.placeholder = "Type here…"; }, 2500);
-      return;
-    }
-
-    // STEP 4: Now open WebSocket (audio pipeline already ready)
-    finalTranscript = "";
-    input.value = "";
-    input.placeholder = "Listening…";
+    mediaRecorder.start();
     listening = true;
     micBtn.classList.add("mic-active");
-    lastSpeechTime = Date.now();
+    input.value = "";
+    input.placeholder = "Listening…";
 
-    // Connect to our Worker WebSocket proxy — handles Deepgram auth server-side
-    const wsProto = location.protocol === "https:" ? "wss:" : "ws:";
-    const wsParams = new URLSearchParams({
-      model: "nova-3",
-      punctuate: "true",
-      smart_format: "true",
-      interim_results: "true",
-      endpointing: "100",
-      utterance_end_ms: "500",
-      encoding: "linear16",
-      sample_rate: String(TARGET_SAMPLE_RATE),
-      channels: "1",
-      vad_events: "true"
-    });
-    const wsUrl = `${wsProto}//${location.host}/api/stt/stream?${wsParams}`;
-    dgSocket = new WebSocket(wsUrl);
-
-    dgSocket.onmessage = (event) => {
-      const msg = JSON.parse(event.data);
-      const type = msg.type;
-
-      // VAD events for visual feedback
-      if (type === "VAD") {
-        if (msg.speech_start) lastSpeechTime = Date.now();
-        return;
-      }
-
-      // Utterance end — no more speech coming
-      if (type === "UtteranceEnd") {
-        if (finalTranscript && listening) {
+    // Client-side VAD: monitor volume and auto-stop after silence
+    let silentSince = null;
+    vadInterval = setInterval(() => {
+      if (!listening) return;
+      const rms = getRMS();
+      if (rms < SILENCE_THRESHOLD) {
+        if (!silentSince) silentSince = Date.now();
+        else if (Date.now() - silentSince >= SILENCE_DURATION && audioChunks.length > 0) {
+          // Enough silence + we have audio → auto-stop
           stopListening();
-          handle(finalTranscript);
         }
-        return;
-      }
-
-      const alt = msg?.channel?.alternatives?.[0];
-      if (!alt) return;
-
-      const transcript = (alt.transcript || "").trim();
-      if (!transcript) return;
-
-      if (msg.is_final) {
-        finalTranscript += (finalTranscript ? " " : "") + transcript;
-        input.value = finalTranscript;
-        lastSpeechTime = Date.now();
-        // Reset silence timer on each final result
-        clearTimeout(silenceTimer);
-        silenceTimer = setTimeout(() => {
-          if (finalTranscript && listening) {
-            stopListening();
-            handle(finalTranscript);
-          }
-        }, 1200);
       } else {
-        // Interim results — show live transcription
-        input.placeholder = transcript + "…";
-        lastSpeechTime = Date.now();
+        silentSince = null; // reset on speech
       }
-    };
+    }, 100);
 
-    dgSocket.onerror = () => {
-      input.placeholder = "Voice error — type instead";
-      stopListening();
-    };
-
-    dgSocket.onclose = () => {
-      if (listening) {
-        listening = false;
-        micBtn.classList.remove("mic-active");
-        if (input.placeholder.includes("…")) input.placeholder = "Type here…";
-      }
-    };
-
-    // Hard safety timeout: 30s max recording
+    // Hard safety timeout
     silenceTimer = setTimeout(() => {
-      if (listening) {
-        if (finalTranscript) {
-          stopListening();
-          handle(finalTranscript);
-        } else {
-          stopListening();
-        }
-      }
-    }, 30000);
+      if (listening) stopListening();
+    }, MAX_RECORD_MS);
 
   } catch {
     input.placeholder = "Mic access denied";
@@ -899,22 +832,12 @@ async function startListening() {
 }
 
 function stopListening() {
-  clearTimeout(silenceTimer);
-  // Tear down audio pipeline completely — fresh context created each startListening
-  if (workletNode) { try { workletNode.disconnect(); } catch {} workletNode = null; }
-  if (audioSource) { try { audioSource.disconnect(); } catch {} audioSource = null; }
-  if (audioCtx) { try { audioCtx.close(); } catch {} audioCtx = null; }
-  // Stop all mic tracks to release hardware
-  if (micStream) { micStream.getTracks().forEach(t => t.stop()); micStream = null; }
-  // Close WebSocket gracefully
-  if (dgSocket && dgSocket.readyState === WebSocket.OPEN) {
-    try { dgSocket.send(JSON.stringify({ type: "CloseStream" })); } catch {}
-    dgSocket.close();
+  if (mediaRecorder && mediaRecorder.state !== "inactive") {
+    input.placeholder = "Processing…";
+    mediaRecorder.stop();
   }
-  dgSocket = null;
   listening = false;
   micBtn.classList.remove("mic-active");
-  if (input.placeholder.includes("…")) input.placeholder = "Type here…";
 }
 
 micBtn.addEventListener("click", () => {
