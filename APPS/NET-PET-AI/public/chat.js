@@ -732,7 +732,7 @@ setTimeout(() => { getDgKey().catch(() => {}); }, 300);
 
 async function startListening() {
   try {
-    // Always get fresh mic stream (user gesture required)
+    // STEP 1: Get mic stream (user gesture required)
     const stream = await navigator.mediaDevices.getUserMedia({
       audio: {
         channelCount: 1,
@@ -743,9 +743,62 @@ async function startListening() {
     });
     micStream = stream;
 
+    // STEP 2: Get API key
     const apiKey = await getDgKey();
     if (!apiKey) { input.placeholder = "STT not configured"; return; }
 
+    // STEP 3: Create AudioContext + Worklet BEFORE WebSocket (avoids race condition)
+    if (audioCtx) { try { audioCtx.close(); } catch {} }
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: TARGET_SAMPLE_RATE });
+    audioSource = audioCtx.createMediaStreamSource(stream);
+
+    let audioReady = false;
+    try {
+      await audioCtx.audioWorklet.addModule("/pcm-worklet.js");
+      workletNode = new AudioWorkletNode(audioCtx, "pcm-processor");
+      workletNode.port.onmessage = (e) => {
+        if (!listening || !dgSocket || dgSocket.readyState !== WebSocket.OPEN) return;
+        dgSocket.send(e.data);
+        lastSpeechTime = Date.now();
+      };
+      audioSource.connect(workletNode);
+      workletNode.connect(audioCtx.destination);
+      audioReady = true;
+    } catch (workletErr) {
+      console.warn("[STT] Worklet failed, using ScriptProcessor:", workletErr.message);
+      const bufSize = 4096;
+      const scriptNode = audioCtx.createScriptProcessor(bufSize, 1, 1);
+      scriptNode.onaudioprocess = (ev) => {
+        if (!listening || !dgSocket || dgSocket.readyState !== WebSocket.OPEN) return;
+        const ch = ev.inputBuffer.getChannelData(0);
+        const ratio = audioCtx.sampleRate / TARGET_SAMPLE_RATE;
+        const outLen = Math.round(ch.length / ratio);
+        const pcm16 = new Int16Array(outLen);
+        for (let i = 0; i < outLen; i++) {
+          const s0 = Math.floor(i * ratio);
+          const s1 = Math.min(Math.floor((i + 1) * ratio), ch.length);
+          let sum = 0;
+          for (let j = s0; j < s1; j++) sum += ch[j];
+          const avg = sum / (s1 - s0);
+          const clamped = Math.max(-1, Math.min(1, avg));
+          pcm16[i] = clamped < 0 ? clamped * 0x8000 : clamped * 0x7FFF;
+        }
+        dgSocket.send(pcm16.buffer);
+        lastSpeechTime = Date.now();
+      };
+      audioSource.connect(scriptNode);
+      scriptNode.connect(audioCtx.destination);
+      workletNode = scriptNode;
+      audioReady = true;
+    }
+
+    if (!audioReady) {
+      input.placeholder = "Voice init failed — type instead";
+      setTimeout(() => { input.placeholder = "Type here…"; }, 2500);
+      return;
+    }
+
+    // STEP 4: Now open WebSocket (audio pipeline already ready)
     finalTranscript = "";
     input.value = "";
     input.placeholder = "Listening…";
@@ -753,7 +806,8 @@ async function startListening() {
     micBtn.classList.add("mic-active");
     lastSpeechTime = Date.now();
 
-    // Deepgram Nova-3 streaming — optimized for speed
+    // Connect to our Worker WebSocket proxy — handles Deepgram auth server-side
+    const wsProto = location.protocol === "https:" ? "wss:" : "ws:";
     const wsParams = new URLSearchParams({
       model: "nova-3",
       punctuate: "true",
@@ -766,55 +820,8 @@ async function startListening() {
       channels: "1",
       vad_events: "true"
     });
-    const wsUrl = `wss://api.deepgram.com/v1/listen?${wsParams}`;
-    // Subprotocol auth — confirmed working with new key
-    dgSocket = new WebSocket(wsUrl, ["token", apiKey]);
-
-    dgSocket.onopen = async () => {
-      // ALWAYS create fresh AudioContext inside user gesture handler
-      // Pre-warmed contexts fail on mobile Safari without gesture
-      if (audioCtx) { try { audioCtx.close(); } catch {} }
-      audioCtx = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: TARGET_SAMPLE_RATE });
-      audioSource = audioCtx.createMediaStreamSource(stream);
-
-      try {
-        await audioCtx.audioWorklet.addModule("/pcm-worklet.js");
-        workletNode = new AudioWorkletNode(audioCtx, "pcm-processor");
-        workletNode.port.onmessage = (e) => {
-          if (!listening || !dgSocket || dgSocket.readyState !== WebSocket.OPEN) return;
-          dgSocket.send(e.data); // ArrayBuffer of Int16 PCM
-          lastSpeechTime = Date.now();
-        };
-        audioSource.connect(workletNode);
-        workletNode.connect(audioCtx.destination);
-      } catch {
-        // Fallback: ScriptProcessor if Worklet fails (older Safari)
-        const bufSize = 4096;
-        const scriptNode = audioCtx.createScriptProcessor(bufSize, 1, 1);
-        scriptNode.onaudioprocess = (ev) => {
-          if (!listening || !dgSocket || dgSocket.readyState !== WebSocket.OPEN) return;
-          const ch = ev.inputBuffer.getChannelData(0);
-          const ratio = audioCtx.sampleRate / TARGET_SAMPLE_RATE;
-          const outLen = Math.round(ch.length / ratio);
-          const pcm16 = new Int16Array(outLen);
-          for (let i = 0; i < outLen; i++) {
-            const s0 = Math.floor(i * ratio);
-            const s1 = Math.min(Math.floor((i + 1) * ratio), ch.length);
-            let sum = 0;
-            for (let j = s0; j < s1; j++) sum += ch[j];
-            const avg = sum / (s1 - s0);
-            const clamped = Math.max(-1, Math.min(1, avg));
-            pcm16[i] = clamped < 0 ? clamped * 0x8000 : clamped * 0x7FFF;
-          }
-          dgSocket.send(pcm16.buffer);
-          lastSpeechTime = Date.now();
-        };
-        audioSource.connect(scriptNode);
-        scriptNode.connect(audioCtx.destination);
-        // Store reference for cleanup
-        workletNode = scriptNode;
-      }
-    };
+    const wsUrl = `${wsProto}//${location.host}/api/stt/stream?${wsParams}`;
+    dgSocket = new WebSocket(wsUrl);
 
     dgSocket.onmessage = (event) => {
       const msg = JSON.parse(event.data);

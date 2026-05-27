@@ -656,7 +656,67 @@ async function handleAPI(path, request, env, url) {
   // TTS
   if (path === "/api/tts" && method === "POST") { const body = await request.json(); return handleTTS(body, env); }
 
-  // STT key endpoint — returns DG key for client-side WebSocket (rate-limit exempt)
+  // STT WebSocket proxy — browser connects here, worker forwards to Deepgram with auth
+  if (path === "/api/stt/stream" && request.headers.get("Upgrade") === "websocket") {
+    const apiKey = env.DEEPGRAM_API_KEY;
+    if (!apiKey) return new Response("DEEPGRAM_API_KEY not configured", { status: 500 });
+
+    // Build Deepgram URL with all params from client query string
+    const dgParams = new URLSearchParams(url.search);
+    dgParams.delete("token"); // strip any client-provided token
+    const dgUrl = `wss://api.deepgram.com/v1/listen?${dgParams}`;
+
+    // Create WebSocket pair: [client-facing, server-facing]
+    const pair = new WebSocketPair();
+    const [client, server] = Object.values(pair);
+
+    // Accept the client WebSocket
+    server.accept();
+
+    // Open authenticated connection to Deepgram
+    const dgWs = new WebSocket(dgUrl, {
+      headers: { "Authorization": `Token ${apiKey}` }
+    });
+
+    // Pipe client → Deepgram (audio)
+    server.addEventListener("message", (event) => {
+      if (dgWs.readyState === WebSocket.OPEN) {
+        dgWs.send(event.data);
+      }
+    });
+
+    // Pipe Deepgram → client (transcripts)
+    dgWs.addEventListener("message", (event) => {
+      if (server.readyState === WebSocket.OPEN) {
+        server.send(event.data);
+      }
+    });
+
+    // Handle close/error in both directions
+    server.addEventListener("close", () => {
+      if (dgWs.readyState === WebSocket.OPEN || dgWs.readyState === WebSocket.CONNECTING) {
+        try { dgWs.close(); } catch {}
+      }
+    });
+    dgWs.addEventListener("close", () => {
+      if (server.readyState === WebSocket.OPEN) {
+        try { server.close(); } catch {}
+      }
+    });
+    dgWs.addEventListener("error", () => {
+      if (server.readyState === WebSocket.OPEN) {
+        try { server.close(1011, "Deepgram error"); } catch {}
+      }
+    });
+
+    return new Response(null, {
+      status: 101,
+      webSocket: client,
+      headers: { "Access-Control-Allow-Origin": "*" }
+    });
+  }
+
+  // STT key endpoint — kept for fallback REST mode
   if (path === "/api/stt/key" && method === "GET") {
     if (!globalThis.__DG_KEY) globalThis.__DG_KEY = env.DEEPGRAM_API_KEY;
     return addCors(json({ key: globalThis.__DG_KEY || "" }), request);
