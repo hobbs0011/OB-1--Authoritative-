@@ -705,7 +705,7 @@ async function handle(text) {
   }
 }
 
-// ── Voice input (Deepgram Nova-3 WebSocket STT) — AUDIOWORKLET PCM REALTIME ──────────────
+// ── Voice input (Deepgram Nova-3 WebSocket STT) — PRE-WARMED AUDIOWORKLET PCM ──────────────
 let dgSocket        = null;
 let audioCtx        = null;
 let audioSource     = null;
@@ -714,26 +714,61 @@ let listening       = false;
 let silenceTimer    = null;
 let finalTranscript = "";
 let lastSpeechTime  = 0;
+let micStream       = null; // Persistent mic stream
+let dgKeyCache      = null; // Cached API key
 const TARGET_SAMPLE_RATE = 16000;
 
-// Get DG key from worker (cached server-side)
+// Get DG key from worker (cached client-side after first fetch)
 async function getDgKey() {
+  if (dgKeyCache) return dgKeyCache;
   const res = await fetch("/api/stt/key");
   const data = await res.json();
-  return data.key;
+  dgKeyCache = data.key;
+  return dgKeyCache;
 }
 
-async function startListening() {
+// Pre-warm mic permission and AudioContext on page load
+async function preWarmMic() {
   try {
-    const stream = await navigator.mediaDevices.getUserMedia({
+    // Request mic permission early so browser prompt doesn't block first click
+    micStream = await navigator.mediaDevices.getUserMedia({
       audio: {
         channelCount: 1,
-        sampleRate: { ideal: TARGET_SAMPLE_RATE },
         echoCancellation: true,
         noiseSuppression: true,
         autoGainControl: true
       }
     });
+    // Create AudioContext early (must be after user gesture on some browsers, but we try)
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: TARGET_SAMPLE_RATE });
+    // Suspend immediately — will resume on actual use
+    await audioCtx.suspend();
+    // Pre-fetch the API key
+    await getDgKey();
+  } catch {
+    // Mic denied or AudioContext failed — will retry on actual startListening
+  }
+}
+
+// Call pre-warm after short delay to avoid blocking page load
+setTimeout(preWarmMic, 500);
+
+async function startListening() {
+  try {
+    // Reuse pre-warmed stream or get new one
+    let stream = micStream;
+    if (!stream || stream.getTracks().some(t => t.readyState !== 'live')) {
+      stream = await navigator.mediaDevices.getUserMedia({
+        audio: {
+          channelCount: 1,
+          echoCancellation: true,
+          noiseSuppression: true,
+          autoGainControl: true
+        }
+      });
+      micStream = stream;
+    }
+
     const apiKey = await getDgKey();
     if (!apiKey) { input.placeholder = "STT not configured"; return; }
 
@@ -744,17 +779,16 @@ async function startListening() {
     micBtn.classList.add("mic-active");
     lastSpeechTime = Date.now();
 
-    // Deepgram Nova-3 streaming with best-practice params
-    // encoding=linear16 matches our raw PCM output from the worklet
-    // endpointing=300ms for fast turn-taking
-    // vad_events=true enables voice activity detection
+    // Deepgram Nova-3 streaming — optimized for speed
+    // endpointing=100ms for fastest possible turn detection
+    // utterance_end_ms=500ms for quick auto-submit
     const wsParams = new URLSearchParams({
       model: "nova-3",
       punctuate: "true",
       smart_format: "true",
       interim_results: "true",
-      endpointing: "300",
-      utterance_end_ms: "1000",
+      endpointing: "100",
+      utterance_end_ms: "500",
       encoding: "linear16",
       sample_rate: String(TARGET_SAMPLE_RATE),
       channels: "1",
@@ -764,8 +798,13 @@ async function startListening() {
     dgSocket = new WebSocket(wsUrl, ["token", apiKey]);
 
     dgSocket.onopen = async () => {
-      // Use AudioWorklet for low-latency PCM capture (replaces deprecated ScriptProcessor)
-      audioCtx = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: TARGET_SAMPLE_RATE });
+      // Resume pre-warmed AudioContext or create new one
+      if (!audioCtx || audioCtx.state === 'closed') {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: TARGET_SAMPLE_RATE });
+      }
+      if (audioCtx.state === 'suspended') {
+        await audioCtx.resume();
+      }
       audioSource = audioCtx.createMediaStreamSource(stream);
 
       try {
@@ -884,10 +923,13 @@ async function startListening() {
 
 function stopListening() {
   clearTimeout(silenceTimer);
-  // Tear down audio pipeline
+  // Tear down audio pipeline (but keep micStream and audioCtx alive for next use)
   if (workletNode) { workletNode.disconnect(); workletNode = null; }
   if (audioSource) { audioSource.disconnect(); audioSource = null; }
-  if (audioCtx) { audioCtx.close().catch(() => {}); audioCtx = null; }
+  // Don't close audioCtx — suspend it for reuse
+  if (audioCtx && audioCtx.state === 'running') {
+    audioCtx.suspend().catch(() => {});
+  }
   // Close WebSocket gracefully
   if (dgSocket && dgSocket.readyState === WebSocket.OPEN) {
     dgSocket.send(JSON.stringify({ type: "CloseStream" }));
