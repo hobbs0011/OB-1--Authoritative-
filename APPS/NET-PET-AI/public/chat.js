@@ -715,9 +715,10 @@ let micStream       = null;
 let vadCtx          = null;
 let vadAnalyser     = null;
 let vadSource       = null;
-const SILENCE_THRESHOLD = 8;      // RMS below this = silence
-const SILENCE_DURATION  = 900;    // ms of silence before auto-stop
+const SILENCE_THRESHOLD = 6;      // RMS below this = silence (lower = more sensitive)
+const SILENCE_DURATION  = 500;    // ms of silence before auto-stop (fast turn-taking)
 const MAX_RECORD_MS     = 30000;  // hard cap
+const VAD_POLL_MS       = 50;     // check volume every 50ms (was 100ms)
 
 /** Compute RMS volume from analyser */
 function getRMS() {
@@ -798,7 +799,8 @@ async function startListening() {
       if (input.placeholder === "Processing…") input.placeholder = "Type here…";
     };
 
-    mediaRecorder.start();
+    // Timeslice 250ms = flush chunks frequently so blob is ready instantly on stop
+    mediaRecorder.start(250);
     listening = true;
     micBtn.classList.add("mic-active");
     input.value = "";
@@ -818,7 +820,7 @@ async function startListening() {
       } else {
         silentSince = null; // reset on speech
       }
-    }, 100);
+    }, VAD_POLL_MS);
 
     // Hard safety timeout
     silenceTimer = setTimeout(() => {
