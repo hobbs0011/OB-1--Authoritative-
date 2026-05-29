@@ -731,7 +731,7 @@ async function handle(text) {
 }
 
 // ── Voice Agent (Deepgram real-time pipeline) ────────────────────────────────
-// browser PCM16 → /api/agent WS proxy → Deepgram Voice Agent (STT+LLM+TTS)
+// browser PCM16 → wss://agent.deepgram.com/v1/agent/converse (direct, token via /api/deepgram-token)
 let agentWs           = null;  // WebSocket to Deepgram (direct)
 let agentWsId         = 0;     // incremented each openVoiceAgent() — zombie handler guard
 let agentReady        = false; // true after SettingsApplied received
@@ -768,8 +768,8 @@ async function openVoiceAgent() {
 
     agentSettings = settings; // stored for Welcome handler
 
-    // Connect directly to Deepgram — token passed via Sec-WebSocket-Protocol header
-    const ws = new WebSocket("wss://agent.deepgram.com/v1/agent/converse", ["token", token]);
+    // Connect directly to Deepgram — JWT first in subprotocol array (required by Deepgram spec)
+    const ws = new WebSocket("wss://agent.deepgram.com/v1/agent/converse", [token, "token"]);
     ws.binaryType = "arraybuffer";
     agentWs = ws; // set immediately — blocks double-open race before onopen fires
 
@@ -825,8 +825,7 @@ function handleAgentMsg(event) {
           const s = JSON.parse(JSON.stringify(agentSettings)); // deep clone
           const history = chatMessages.filter(m => m.role === "user" || m.role === "assistant").slice(-6);
           if (history.length > 0) {
-            s.agent = s.agent || {};
-            s.agent.context = { messages: history };
+            s.context = { messages: history };
           }
           agentWs.send(JSON.stringify(s));
         }

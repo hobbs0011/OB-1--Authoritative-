@@ -729,14 +729,28 @@ async function handleAPI(path, request, env, url) {
     const apiKey = env.DEEPGRAM_API_KEY;
     if (!apiKey) return json({ error: "DEEPGRAM_API_KEY not set" }, 500);
     try {
-      const resp = await fetch("https://agent.deepgram.com/v1/agent/converse", {
-        headers: { "Authorization": `Token ${apiKey}`, "Upgrade": "websocket" }
+      // Test subprotocol auth — capture Sec-WebSocket-Protocol echo from Deepgram
+      const subprotoResp = await fetch("https://agent.deepgram.com/v1/agent/converse", {
+        headers: { "Upgrade": "websocket", "Sec-WebSocket-Protocol": `token, ${apiKey}` }
       });
-      const heads = {};
-      resp.headers.forEach((v, k) => { heads[k] = v; });
-      return json({ status: resp.status, ok: resp.ok, hasWebSocket: !!resp.webSocket, headers: heads });
+      const respHeaders = {};
+      subprotoResp.headers.forEach((v, k) => { respHeaders[k] = v; });
+      // Also try auth/grant with no body to see if format was wrong
+      const grantEmpty = await fetch("https://api.deepgram.com/v1/auth/grant", {
+        method: "POST",
+        headers: { "Authorization": `Token ${apiKey}`, "Content-Type": "application/json" },
+        body: "{}"
+      });
+      const grantEmptyBody = await grantEmpty.text();
+      return json({
+        subproto_status: subprotoResp.status,
+        subproto_hasWS: !!subprotoResp.webSocket,
+        subproto_echo_header: respHeaders["sec-websocket-protocol"] || respHeaders["Sec-WebSocket-Protocol"] || "NOT_ECHOED",
+        grant_empty_status: grantEmpty.status,
+        grant_empty_body: grantEmptyBody.slice(0, 300)
+      });
     } catch (err) {
-      return json({ error: err.message, stack: err.stack?.slice(0, 300) }, 500);
+      return json({ error: err.message }, 500);
     }
   }
 
@@ -747,14 +761,19 @@ async function handleAPI(path, request, env, url) {
     if (!apiKey) return addCors(json({ error: "DEEPGRAM_API_KEY not configured" }, 500), request);
     const studentId = url.searchParams.get("studentId") || "";
     try {
-      const [rawProfile, rawLang, rawVocab, rawArc] = await Promise.all([
+      const [tokenRes, rawProfile, rawLang, rawVocab, rawArc] = await Promise.all([
+        fetch("https://api.deepgram.com/v1/auth/grant", {
+          method: "POST",
+          headers: { "Authorization": `Token ${apiKey}`, "Content-Type": "application/json" },
+          body: JSON.stringify({ ttl_seconds: 120 })
+        }),
         env.NET_PET_KV.get("student_profile_" + studentId),
         env.NET_PET_KV.get("lang:" + studentId),
         env.NET_PET_KV.get("vocab_list_" + studentId),
         env.NET_PET_KV.get("vocab_arc_" + studentId)
       ]);
-      // Return API key as token — key stays in CF secret, never in source JS
-      const access_token = apiKey;
+      if (!tokenRes.ok) return addCors(json({ error: "token grant failed: " + tokenRes.status }, 502), request);
+      const { access_token } = await tokenRes.json();
 
       let agentProfile = null, agentLang = "en", recentVocab = [], arcData = null;
       try { if (rawProfile) agentProfile = JSON.parse(rawProfile); } catch (_) {}
@@ -783,8 +802,7 @@ async function handleAPI(path, request, env, url) {
             functions: [{
               name: "save_vocabulary_word",
               description: "Save an English word the student successfully used in a sentence.",
-              parameters: { type: "object", properties: { word: { type: "string", description: "The English word or phrase" }, meaning_vi: { type: "string", description: "Vietnamese meaning (optional)" } }, required: ["word"] },
-              client_side: true
+              parameters: { type: "object", properties: { word: { type: "string", description: "The English word or phrase" }, meaning_vi: { type: "string", description: "Vietnamese meaning (optional)" } }, required: ["word"] }
             }]
           },
           speak: {
