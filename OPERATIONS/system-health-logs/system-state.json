@@ -1,8 +1,8 @@
 {
+  "doctor_ok": true,
   "verify_ok": true,
   "git_branch": "master",
-  "timestamp": "2026-05-29T05:23:28.1807668+07:00",
-  "doctor_ok": true,
-  "git_head": "67689beb death: ROMAN RUN 20 ΓÇö RRL 1377 ΓåÆ SOUL 13,339,923 TITANIUM_ANCHOR ΓÇö STT pipeline fix + Qwen Max activation + Deepgram key rotation",
-  "soul_ok": false
+  "timestamp": "2026-05-30T06:24:16.7406018+07:00",
+  "soul_ok": false,
+  "git_head": "a53423af fix: ROMAN RUN 24 ΓÇö subprotocol order corrected ([\"token\",jwt] not [jwt,\"token\"])"
 }

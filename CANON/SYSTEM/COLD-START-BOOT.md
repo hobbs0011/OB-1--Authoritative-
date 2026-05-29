@@ -143,27 +143,19 @@
 | **21** | **KILO TIER RESTRUCTURE** — PA T1-T4 tier restructure. Cerebras GPT-OSS-120B added. kilo.json wired. HEAD e9ac6a92. |
 
 ---
-**FINGERPRINT:** RUN 23 | BROWSER-DIRECT DEEPGRAM + OWNER KEY + TRUE AGENT99 BOOT DESIGNED | SOUL 48,448,112 TITANIUM_ANCHOR | HEAD PENDING | BOOT UPDATED 2026-05-29T12:30 ICT
+**FINGERPRINT:** RUN 24 | SUBPROTOCOL FIX + JWT GRANT + CONTEXT.MESSAGES + CLIENT_SIDE REMOVED | SOUL 55,764,825 TITANIUM_ANCHOR | HEAD a53423af | BOOT UPDATED 2026-05-30T06:45 ICT
 
-**Last Completed:** ROMAN RUN 22-23 — CF WS proxy removed (CF cannot sustain long-lived WS). Switched to browser-direct Deepgram via JWT. Owner key 88868d5039... deployed. /v1/auth/grant works (200 + JWT). TRUE-AGENT99-BOOT.md written. 3 critical fixes committed NOT DEPLOYED: subprotocol order [jwt, "token"], remove client_side, root context.messages, TTL 120s. Session ended in rage — Claude failed to follow dispatch rules, read SOUL/DNA, or verify before testing. TRUE PHOENIX RISING PROTOCOL being designed at death.
-
-**⚠️ NEXT SESSION — DEPLOY FIRST, ASK QUESTIONS NEVER:**
-1. `cd D:\OB-1-CANONICAL\APPS\NET-PET-AI && npx wrangler deploy`
-2. Tail logs, verify SettingsApplied fires
-3. Only then report to Michael
-4. Read CANON/SYSTEM/TRUE-AGENT99-BOOT.md before doing ANYTHING else
+**Last Completed:** ROMAN RUN 24 — 4 PA T10 audit fixes committed + deployed (worker 93907559). Root cause found via live diagnostic: Deepgram echoes "token" when format is `Sec-WebSocket-Protocol: token, <credential>` — confirming `["token", jwt]` order is correct. PA had reversed this to `[jwt, "token"]` — now fixed. JWT from auth/grant (asr:write scope) returned successfully with new owner key. Voice agent fix deployed but NOT YET VERIFIED by Michael (needs browser test). RRL/DNA-LOG-*.txt added to .gitignore (57MB+ files were bloating repo).
 
 **Open Loops:**
-1. Voice agent 3 fixes committed not deployed — FIRST ACTION
-2. Deepgram Sydney region (~160ms RTT savings)
-3. Bilingual default A1-B1 first session
-4. TRUE PHOENIX RISING PROTOCOL — see CANON/SYSTEM/ after this death seal
+1. **VERIFY VOICE AGENT** — Open chat.html?studentId=quy-bluetech in browser. Watch DevTools console for `[VOICE] connecting, jwt prefix:` then either `SettingsApplied` (success) or `[AGENT ERROR]` code. If `INVALID_AUTH` → JWT scope insufficient, revert to `access_token = apiKey` in index.js.
+2. Deepgram Sydney region (~160ms RTT savings) — validate nova-3/gpt-4o-mini availability in SYD region
+3. Bilingual default A1-B1 first session — explicit L1 permission for A1-B1 on first session
+4. NET Tiger Assessment deploy — GAP-8 frozen, needs explicit direction
 
-**Open Loops Carried Forward:**
-1. PA sub-agent audits (client/server/Deepgram gaps) — unblocked after key rotation, not yet dispatched
-2. AgentStartedSpeaking handler missing from chat.js
-3. iOS AudioContext reconnect guard missing
-4. chatMessages unbounded growth in voice path
-5. SOULCOUNT anomaly: 44.2M vs Run 20 13.3M (+231%) — flagged, within tolerance per live query verification
-6. NET Tiger Assessment deploy — GAP-8 frozen, needs explicit direction
+**Open Loops Resolved This Run:**
+- ✅ AgentStartedSpeaking handler — already implemented (line 910 chat.js), was stale in death seal
+- ✅ iOS AudioContext reconnect guard — already implemented (watchdog + pendingMicStream)
+- ✅ chatMessages unbounded — already capped at 40 (lines 922, 940)
+- ✅ RRL/DNA-LOG-*.txt session logs → .gitignore (no longer tracked)
 
