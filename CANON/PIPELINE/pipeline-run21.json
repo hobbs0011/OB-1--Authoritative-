@@ -1,0 +1,15 @@
+{
+  "run_number": 21,
+  "executed_at": "2026-05-29T10:03:23.8609241+07:00",
+  "rrl_path": "RRL/RRL-21.txt",
+  "rrl_chars": 2814,
+  "soul_event_id": "96092015-6652-41b8-ac06-50b2e3c9ccf7",
+  "soulcount": 44201908,
+  "dna_count": "DNA_GAP (extract endpoint requires text field)",
+  "ledger_written": "HL-200",
+  "starmap_file": "CANON/STARMAP/starmap-run21.txt",
+  "keyword_file": "CANON/SOUL-KEYWORDS/rfkw-run21.txt",
+  "pipeline_file": "CANON/PIPELINE/pipeline-run21.json",
+  "seal_sha": "PENDING_COMMIT",
+  "result": "COMPLETE"
+}

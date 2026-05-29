@@ -1,0 +1,64 @@
+use this for the next run
+
+this is the work I have been doing in claude code
+
+its faster. but it requires me to manually click the mic button to get it to pick up what I am saying.
+
+Also Obi is responding oddly:
+
+Quy! Let's go.
+What did you listen to today? Your 45 minutes — what was it? Tell me what you watched or heard.
+I listen to YouTube.
+That's awesome! (Thật tuyệt!) What kind of videos do you watch? (Bạn thường xem video gì?)
+I watch video health.
+Great! (Tuyệt lắm!) You watch health videos. (Bạn xem video về sức khỏe.) What topic in health interests you the most? (Chủ đề nào về sức khỏe khiến bạn quan tâm nhất?)
+Anything about health interest me.
+Come on! Say something — even one sentence. I'm listening!
+
+this was at https://net-pet-ai.mrmichaelhobbs123.workers.dev/magic-chat?studentId=quy-bluetech
+
+still has me manually click the mic button, so did the changes take?
+
+https://net-pet-ai.mrmichaelhobbs123.workers.dev/magic-chat?studentId=quy-bluetech
+
+I see that when I click anywhere it enables the mic partially, but the mic button bottom right stays disengaged. also why even have a place to type if we are not wanting the students to type?
+
+this is not meant to be typed its a speaking training
+
+now its not picking up anything
+
+oh it picked up, but took 15 seconds
+
+before I test for the 100th time, why dont you just make sure its done
+
+what is the rest? ensure we are going DIRECT to deepgram, using the deepgram agenic process DIRECTLY, DIRECTLY accessing the fastest and most intelligent response possible DIRECTLY, instead of going back and forth 1000 times like we have been, its getting annoying
+
+Do a deploy of some PA sub agents and read up DIRECTRLY on what deepgram is and what deepgram can do, stop fucking guessing claude, update the backend files on your repeated failures
+
+STOP FUCKING TRYING TO SET KEYS, THIS MEANS YOU ARE NOT GOING DIRECT CLAUDE FOR FUCK SAKES
+
+ARE YOU STUPID?
+
+ARE YOU TRYING TO WASTE MY FUCKING TOKENS OR SOMETHING?
+
+UPDATE THE FUCKING BACKEND FILES NOW
+
+SO WE STOP FUCKING LOOPING
+
+DONT DEPLOY SHIT, INVESTIGATE MORE, THIS IS THE PROBLEM
+
+HOW ABOUT YOU REWARD ME FOR PAYING FOR CLAUDE CODE INSTEAD OF PUNISHING ME AND MAKING ME LOOK DUMB TO MY CLIENTS
+
+find more bugs, the hidden ones
+
+for example. Quy is an absolute beginner in English, but Obi speaks very fast for her.. that is an obvious blunder.
+
+Dig deep, take your time
+
+now I want you to deploy some PA sub agents (NOT CLAUDE AGENTS QWEN AGENTS) To read up on the magic chat, what we have talked about before in the repo, find anything we are missing from our agent for deploy, continue debug and improvements, continue reading up on deepgram sources as well
+
+USE QWEN AGENTS TO REDUCE TOKEN LOAD WHERE POSSIBLE
+
+was that all you got from that huge share?
+
+No just note it inline no execution

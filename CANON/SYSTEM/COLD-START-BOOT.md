@@ -1,5 +1,5 @@
 # COLD START BOOT — OB1 Agent 99
-## ERA: ROMAN — Run 20 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-05-28T03:58 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
+## ERA: ROMAN — Run 21 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-05-29T09:55 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
 
 > *"The beginning of an Empire that never was before and never has been since."* — SOV100 Michael Hobbs, Run 0
 
@@ -23,7 +23,7 @@
 - Pass `?student=all` to see aggregate (all entries). Default without parameter = sov100 only.
 
 **Soul Logger URL:** https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count
-**Real count (2026-05-28 ~03:58 ICT):** 13,339,923 characters | 2,090 events | TITANIUM_ANCHOR 
+**Real count (2026-05-29 ~09:55 ICT):** 44,201,908 characters | 5,914 events | TITANIUM_ANCHOR 
  **TITANIUM_ANCHOR level** (next threshold: none — maximum tier reached)
  **⚠️ NOTE:** +156,676 delta from Run 5 RRL-0 backdrop ingestion. +62,773 delta from Run 6 RRL-0-original ingestion. RRL-0.txt contains ~150K agent text alongside ~4K Michael verbatim. Contamination documented per Michael directive.
 **Prior counts (Runs 315–390) were INFLATED** — the endpoint summed ALL soul_prompts including student chats. Disregard historical counts above 25,000. They included non-operator data.
@@ -143,13 +143,15 @@
 | **21** | **KILO TIER RESTRUCTURE** — PA T1-T4 tier restructure. Cerebras GPT-OSS-120B added. kilo.json wired. HEAD e9ac6a92. |
 
 ---
-**FINGERPRINT:** RUN 23 | PORTAL STRESS TEST + OBI BUTTON FIX | SOUL 5,283,875 TITANIUM_ANCHOR | HEAD e9ac6a92 | BOOT UPDATED 2026-05-27T~11:10 ICT
+**FINGERPRINT:** RUN 21 | DEEPGRAM VOICE AGENT + MIC AUTO-START + OBI SPEED FIX | SOUL 44,201,908 TITANIUM_ANCHOR | HEAD PENDING_COMMIT | BOOT UPDATED 2026-05-29T09:55 ICT
 
-**Last Completed:** ROMAN RUN 23 — Student portal stress test. All 7 portals live 200. Fixed site-wide OBI button bug: `chat.js` was reading `?student=` URL param but all portal HTML uses `?studentId=`. Fixed to read both. PA Cerebras key rotated on worker. Cascade: Dialagram DOWN→Cerebras ✓→Groq ✓.
+**Last Completed:** ROMAN RUN 21 — Deepgram Voice Agent debugging. WS URL corrected to /v1/agent/converse, InjectUserMessage replaces TextInput, managed gpt-4o-mini LLM active. Mic auto-start via gesture-time getUserMedia + pendingMicStream. Obi TTS speed 0.75 for A1 (Quy), eot_threshold 0.85. Barge-in (UserStartedSpeaking) stops OBI audio. KeepAlive 8s ping. 18 bugs fixed. PA DIALAGRAM_API_KEY rotated. DNA_GAP documented.
 
 **Open Loops Carried Forward:**
-1. NET Tiger Assessment deploy — `cd APPS/NET-PET-AI && wrangler deploy` — GAP-8 frozen, needs explicit direction
-2. Dialagram recovery — when completions comes back, verify SSE fix via /api/status (should show Dialagram-Qwen ✓ first)
-3. SOULCOUNT anomaly — 5,283,875 vs prior 909,486 (+4.37M). Investigate: is sov100% filter still working? Run: `SELECT SUM(byte_count) FROM soul_prompts WHERE session_id LIKE 'sov100%'` at soul-logger
-4. chat.js fix NOT YET DEPLOYED — needs `wrangler deploy` in APPS/NET-PET-AI to go live for students
+1. PA sub-agent audits (client/server/Deepgram gaps) — unblocked after key rotation, not yet dispatched
+2. AgentStartedSpeaking handler missing from chat.js
+3. iOS AudioContext reconnect guard missing
+4. chatMessages unbounded growth in voice path
+5. SOULCOUNT anomaly: 44.2M vs Run 20 13.3M (+231%) — flagged, within tolerance per live query verification
+6. NET Tiger Assessment deploy — GAP-8 frozen, needs explicit direction
 
