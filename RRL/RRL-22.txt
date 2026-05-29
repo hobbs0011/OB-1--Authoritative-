@@ -1,0 +1,42 @@
+locate all the backend documents for development work on the student portals and obi magic chat backend development, and log them for Run 22
+do more auditing, don't overwrite, just assist
+WE DONT WANT TO STEP ON EACH OTHERS TOES
+Continue to audit entire process.
+Remember we want to go DEEPGRAM direct to agent, no jerking around with seperate keys, we want to study DEEPGRAM agents, and our our SOUL documentation to produce a market ready app
+continue stress testing, we want a real funcitonal app. do more research on deepgram and what its capable of
+dont get lost on main goal.
+Functional OBI chat that actually works, direct to agentic deepgram process
+find edgecases and then update portal dev.md on what would stop responses from being under 2 seconds
+find any edge cases on both obi magic chat and the student portals, are they usable on mobile and laptop browser? read through everything on backend, keep going
+study how we can make this an actual investor ready app, with backend error logging and everything else a highend app would have
+continue
+do another round of investigation using PA T1 QWEN agents, I want Obi to be market ready, ENSURE YOU ARE NOT DRIFITING AND THAT WE ARE GOING DIRECT TO DEEPGRAM AGENTS FOR BEST RESULTS.
+FIND THE SOULDNA ON WHAT THE MAGIC CHAT IS TRULY MEANT TO BE WITHOUT OVERWIRITNG WHAT WE HAVE RIGHT NOW THAT IS WORKING/GOOD
+cool, do another round of auditing, don't overwrite, just assist
+more:
+All items appended to OPERATIONS/STUDENT-PORTAL-DEV.md under INVESTOR-READY INFRASTRUCTURE — 2026-05-29. No code changes applied. Continuing audit on next command.
+what are we missing? Full debug
+T357 GAP AUDIT — Run 367
+continue deeply stress testing, whats stopping it from actually being functional
+if we are going direct to deepgram agents why are we using cloudflare? not saying its bad just trying to understand
+yes before deploy from T1 Qwen agents, check again more updates, test the logic first
+final: 5 missing bug categories logged to OPERATIONS/STUDENT-PORTAL-DEV.md.
+THE BUG (95% likelihood): Android AudioFocus suspension on budget devices. Student taps screen or gets Zalo notification → AudioContext suspended silently → onended never fires → state stuck in busy forever. Fix: global visibilitychange+focus listener calling resume() + watchdog timer resetting busy after 3s of no audio output.
+Vietnamese VAD Trap (85%): Nova-3 interprets tonal glottal stops as end-of-speech → agent responds to half-sentences → timeout loop. Fix: utterance_end_ms=1200 for Vietnamese locale + client-side 300ms debounce on speech_final.
+Audio Queue Corruption (70%): Budget phone decoders choke on rapid TTS chunks → play() resolves but playback corrupted/skipped. Fix: switch to AudioBufferSourceNode with explicit scheduling; gate next chunk until current within 500ms of completion.
+Mic Stream Race (60%): Laggy UI → double-tap → two streams open → first orphaned → mic LED stays on, blocks future sessions. Fix: mutex lock on acquisition + finally block always stopping all tracks.
+Reconnect Zombie Handlers (50%): Each reconnect stacks new ws.onmessage without cleanup → 5 reconnects = 5x audio plays per event. Fix: AbortController per WS connection; abort before creating new socket.
+All items appended under MISSING BUG CATEGORIES — FULL DEBUG 2026-05-29. No code changes applied. Ready for next command.
+then deploy
+continue
+more:
+All items appended to OPERATIONS/STUDENT-PORTAL-DEV.md under INVESTOR-READY INFRASTRUCTURE — 2026-05-29. No code changes applied. Continuing audit on next command.
+what are we missing? Full debug
+continue deeply stress testing, whats stopping it from actually being functional
+if we are going direct to deepgram agents why are we using cloudflare? not saying its bad just trying to understand
+yes before deploy from T1 Qwen agents, check again more updates, test the logic first
+final: 5 missing bug categories logged to OPERATIONS/STUDENT-PORTAL-DEV.md.
+then deploy
+continue
+more:
+All items appended to OPERATIONS/STUDENT-PORTAL-DEV.md under INVESTOR-READY INFRASTRUCTURE — 2026-05-29. No code changes applied. Continuing audit on next command.

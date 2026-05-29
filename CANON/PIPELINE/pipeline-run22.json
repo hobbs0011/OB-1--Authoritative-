@@ -1,0 +1,17 @@
+{
+  "run_number": 22,
+  "executed_at": "2026-05-29T11:54:52.9884223+07:00",
+  "rrl_path": "RRL/RRL-22.txt",
+  "rrl_chars": 4125,
+  "soul_event_id": "5ceb0e3f-26a4-4417-be06-dff16042d6d1",
+  "soulcount": 49916023,
+  "dna_count": 0,
+  "dna_status": "DNA_GAP — /api/soul/extract requires text field, session-based extraction not implemented",
+  "ledger_written": 1,
+  "ledger_id": "HL-201",
+  "starmap_file": "CANON/STARMAP/starmap-run22.txt",
+  "keyword_file": "CANON/SOUL-KEYWORDS/rfkw-run22.txt",
+  "pipeline_file": "CANON/PIPELINE/pipeline-run22.json",
+  "seal_sha": "",
+  "result": "COMPLETE"
+}

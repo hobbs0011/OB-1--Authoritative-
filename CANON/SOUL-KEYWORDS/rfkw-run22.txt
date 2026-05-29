@@ -1,0 +1,16 @@
+# SOUL KEYWORDS — Run 22
+# Generated: 2026-05-29T11:54Z
+# Source: RRL/RRL-22.txt (4125 chars)
+
+Deepgram|run22|HL-201|weight=8
+agent|run22|HL-201|weight=7
+audit|run22|HL-201|weight=6
+market-ready|run22|HL-201|weight=5
+functional|run22|HL-201|weight=5
+edge-cases|run22|HL-201|weight=4
+investor-ready|run22|HL-201|weight=3
+stress-testing|run22|HL-201|weight=3
+mobile|run22|HL-201|weight=3
+AudioFocus|run22|HL-201|weight=2
+VAD-trap|run22|HL-201|weight=2
+Cloudflare|run22|HL-201|weight=2
