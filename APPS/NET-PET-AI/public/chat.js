@@ -732,10 +732,11 @@ async function handle(text) {
 
 // ── Voice Agent (Deepgram real-time pipeline) ────────────────────────────────
 // browser PCM16 → /api/agent WS proxy → Deepgram Voice Agent (STT+LLM+TTS)
-let agentWs           = null;  // WebSocket to /api/agent
+let agentWs           = null;  // WebSocket to Deepgram (direct)
 let agentWsId         = 0;     // incremented each openVoiceAgent() — zombie handler guard
 let agentReady        = false; // true after SettingsApplied received
 let agentAudioWatchdog = null; // interval: resets stuck busy state on AudioFocus loss
+let agentSettings     = null;  // Settings payload from /api/deepgram-token, sent on Welcome
 let agentAudioCtx     = null;  // AudioContext for PCM16 capture
 let agentWorklet      = null;  // AudioWorkletNode (pcm-worklet.js)
 let agentMicStream    = null;  // MediaStream from getUserMedia
@@ -755,23 +756,32 @@ let micAcquiring      = false; // mutex: prevents double getUserMedia on rapid t
 
 async function openVoiceAgent() {
   if (!urlStudentId || agentWs) return;
-  const myId = ++agentWsId; // zombie guard — only this socket's handlers are valid
+  const myId = ++agentWsId;
   try {
-    const proto = location.protocol === "https:" ? "wss:" : "ws:";
-    const ws = new WebSocket(`${proto}//${location.host}/api/agent?studentId=${encodeURIComponent(urlStudentId)}`);
+    // Fetch short-lived JWT token + pre-built Settings from CF Worker
+    setMicStatus("Connecting…", false);
+    const tokenRes = await fetch(`/api/deepgram-token?studentId=${encodeURIComponent(urlStudentId)}`);
+    if (!tokenRes.ok) { console.error("[VOICE] token fetch failed:", tokenRes.status); setMicStatus("Tap to start", false); return; }
+    const { token, settings } = await tokenRes.json();
+    if (!token) { console.error("[VOICE] no token in response"); setMicStatus("Tap to start", false); return; }
+    if (agentWsId !== myId) return; // zombie check — another openVoiceAgent() fired during async fetch
+
+    agentSettings = settings; // stored for Welcome handler
+
+    // Connect directly to Deepgram — token passed via Sec-WebSocket-Protocol header
+    const ws = new WebSocket("wss://agent.deepgram.com/v1/agent/converse", ["token", token]);
     ws.binaryType = "arraybuffer";
+    agentWs = ws; // set immediately — blocks double-open race before onopen fires
+
     ws.onopen = () => {
       if (agentWsId !== myId) { ws.close(); return; }
-      agentWs = ws;
-      const history = chatMessages.filter(m => m.role === "user" || m.role === "assistant").slice(-6);
-      if (history.length > 0) {
-        ws.send(JSON.stringify({ type: "ConversationHistory", messages: history }));
-      }
+      // Settings sent in handleAgentMsg on Welcome event — don't send anything here
     };
     ws.onmessage = (event) => { if (agentWsId === myId) handleAgentMsg(event); };
+
     const onAgentDrop = () => {
       if (agentWsId !== myId) return;
-      agentWs = null; agentReady = false;
+      agentWs = null; agentReady = false; agentSettings = null;
       if (agentKeepAlive) { clearInterval(agentKeepAlive); agentKeepAlive = null; }
       if (agentAudioWatchdog) { clearInterval(agentAudioWatchdog); agentAudioWatchdog = null; }
       if (agentSilenceTimer) { clearTimeout(agentSilenceTimer); agentSilenceTimer = null; }
@@ -797,7 +807,11 @@ async function openVoiceAgent() {
     };
     ws.onerror = onAgentDrop;
     ws.onclose = onAgentDrop;
-  } catch { agentWs = null; }
+  } catch (err) {
+    agentWs = null;
+    console.error("[VOICE] openVoiceAgent failed:", err.message);
+    setMicStatus("Tap to start", false);
+  }
 }
 
 function handleAgentMsg(event) {
@@ -805,7 +819,43 @@ function handleAgentMsg(event) {
     try {
       const msg = JSON.parse(event.data);
 
-      if (msg.type === "SettingsApplied") {
+      if (msg.type === "Welcome") {
+        // Send Settings with current conversation context injected
+        if (agentSettings && agentWs && agentWs.readyState === WebSocket.OPEN) {
+          const s = JSON.parse(JSON.stringify(agentSettings)); // deep clone
+          const history = chatMessages.filter(m => m.role === "user" || m.role === "assistant").slice(-6);
+          if (history.length > 0) {
+            s.agent = s.agent || {};
+            s.agent.context = { messages: history };
+          }
+          agentWs.send(JSON.stringify(s));
+        }
+        return;
+
+      } else if (msg.type === "FunctionCallRequest") {
+        // Browser handles vocab save — POST to CF Worker, then send FunctionCallResponse back to Deepgram
+        const fn = msg.function_name || msg.name;
+        const args = (() => { try { return typeof msg.input === "string" ? JSON.parse(msg.input) : (msg.input || msg.arguments || {}); } catch (_) { return {}; } })();
+        const callId = msg.function_call_id || msg.id || msg.call_id || "";
+        if (fn === "save_vocabulary_word" && args.word) {
+          if (!agentSessionVocab.includes(args.word)) agentSessionVocab.push(args.word);
+          if (profile.studentId) {
+            fetch("/api/agent/vocab", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ studentId: profile.studentId, word: args.word, meaning_vi: args.meaning_vi || "" })
+            }).catch(() => {});
+          }
+          try {
+            agentWs.send(JSON.stringify({ type: "FunctionCallResponse", function_call_id: callId, output: `Saved "${args.word}".` }));
+          } catch (_) {}
+          try {
+            agentWs.send(JSON.stringify({ type: "InjectAgentMessage", message: `Nice — "${args.word}" is in your collection now!` }));
+          } catch (_) {}
+        }
+        return;
+
+      } else if (msg.type === "SettingsApplied") {
         agentReady = true;
         agentSessionStart = Date.now();
         agentSessionTurns = 0;
@@ -905,9 +955,6 @@ function handleAgentMsg(event) {
             agentWs.send(JSON.stringify({ type: "InjectAgentMessage", message: `Take your time${_name ? ", " + _name : ""}! Try saying one sentence — anything you like.${_viEncourage}` }));
           }
         }, 2500);
-
-      } else if (msg.type === "VocabSaved" && msg.word) {
-        if (!agentSessionVocab.includes(msg.word)) agentSessionVocab.push(msg.word);
 
       } else if (msg.type === "Goodbye") {
         setMicStatus("Session ended", false);

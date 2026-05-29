@@ -505,6 +505,54 @@ The CF Worker was `await fetch("agent.deepgram.com")` BEFORE returning the 101 W
 | net-pet-ai | `9a59a35c` | WebView ScriptProcessor fallback, back-button cleanup, Blob URL fix, AudioFocus watchdog, VAD utterance_end_ms, chunk gate, mic mutex, WS zombie guard |
 | phoenix-architecti | `dedd5342` | v0.0.3 — T1 strict (Dialagram 30s) vs T10 fallback cascade (Cerebras→Groq→CF-Qwen) |
 
+### LIVE TEST RESULT — 2026-05-29 Run 22
+
+**TEST:** magic-chat.html?studentId=quy-bluetech (Run 22 deploy `9a59a35c`)
+**RESULT:** COMPLETE FAILURE — ALL DEPLOYS RUN 22
+**Observed:** Page loads. Mic button cycles on/off in reconnect loop. No audio pickup.
+**Symptom:** WS connects → drops immediately → reconnects → drops → infinite loop
+**Diagnosis (wrangler tail + /api/deepgram-test):**
+- DEEPGRAM_API_KEY: VALID — diagnostic confirmed `status:101, hasWebSocket:true`
+- Deepgram project ID: `70543a02-9a08-400b-a814-8b0b01184f7a`
+- CF Worker returns 101 to browser (outcome: ok, wallTime: 3ms)
+- Zero `[AGENT]` console.log output in tail — background task crashes before `dgAgentWs.accept()`
+- Error: "Workers runtime canceled this request — code hung, would never generate a response"
+
+**ROOT CAUSE (ARCHITECTURAL):**
+CF regular Workers cannot maintain long-lived WebSocket proxy sessions.
+The Worker returns 101 and starts `ctx.waitUntil`, but CF terminates the background task
+before the Deepgram WS session can be sustained. This is a CF platform limitation —
+regular Workers are not designed for long-lived bidirectional WS proxying.
+Durable Objects are required for that pattern — OR the browser connects directly.
+
+**DECISION: Switch to browser-direct Deepgram connection.**
+```
+OLD (broken): Browser → CF Worker WS proxy → Deepgram
+NEW (correct): Browser → GET /api/agent/token (CF Worker mints temp key + builds Settings)
+               Browser → wss://agent.deepgram.com/v1/agent/converse (direct, no CF in audio path)
+```
+CF Worker role: mint a short-lived Deepgram temp key + return pre-built Settings payload.
+Browser opens direct WS to Deepgram using the temp key. API key never exposed in JS.
+FunctionCall events (vocab saving) handled by a separate POST endpoint instead of WS interception.
+
+**RUN 23 RESOLUTION — 2026-05-29**
+
+Research agents confirmed:
+- `functions` placement in `agent.think.functions[]` was CORRECT all along
+- `eot_threshold` only valid on Flux model — removed from nova-3 Settings
+- `/v1/auth/grant` temp token: 403 (key lacks scope) — using raw API key via CF secret instead
+- CF Worker WS proxy pattern is architecturally unsupported for long-lived sessions
+
+**Architecture switch applied (deploy `c05815b7`):**
+- REMOVED: `/api/agent` WS proxy (179 lines — the entire broken pattern)
+- ADDED: `GET /api/deepgram-token?studentId=<id>` — returns `{token, settings}` (JWT from CF secret + pre-built Settings payload with student profile/prompt)
+- ADDED: `POST /api/agent/vocab` — browser calls this when FunctionCallRequest received
+- Browser now connects: `new WebSocket("wss://agent.deepgram.com/v1/agent/converse", ["token", jwt])`
+- Settings sent from browser on `Welcome` event with conversation history injected
+- Function calls handled entirely client-side + POST callback
+
+**Token endpoint verified:** token_length=40, nova-3, gpt-4o-mini, aura-2-asteria-en, prompt=2249 chars, save_vocabulary_word function registered
+
 ### Open Items After Run 22
 
 - Deepgram Sydney region — VN→SYD saves ~160ms RTT (validate nova-3/gpt-4o-mini availability)

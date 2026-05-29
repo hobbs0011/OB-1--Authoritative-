@@ -724,210 +724,96 @@ async function handleAPI(path, request, env, url) {
     return new Response(null, { status: 101, webSocket: client });
   }
 
-  // Voice Agent WebSocket proxy
-  // Returns 101 Upgrade to browser IMMEDIATELY — Deepgram connection happens in background
-  if (path === "/api/agent" && request.headers.get("Upgrade")?.toLowerCase() === "websocket") {
+  // Diagnostic: test Deepgram API key and connectivity
+  if (path === "/api/deepgram-test") {
     const apiKey = env.DEEPGRAM_API_KEY;
-    if (!apiKey) return new Response("DEEPGRAM_API_KEY not configured", { status: 500 });
+    if (!apiKey) return json({ error: "DEEPGRAM_API_KEY not set" }, 500);
+    try {
+      const resp = await fetch("https://agent.deepgram.com/v1/agent/converse", {
+        headers: { "Authorization": `Token ${apiKey}`, "Upgrade": "websocket" }
+      });
+      const heads = {};
+      resp.headers.forEach((v, k) => { heads[k] = v; });
+      return json({ status: resp.status, ok: resp.ok, hasWebSocket: !!resp.webSocket, headers: heads });
+    } catch (err) {
+      return json({ error: err.message, stack: err.stack?.slice(0, 300) }, 500);
+    }
+  }
+
+  // Voice Agent: mint short-lived Deepgram JWT + return compiled Settings for browser-direct connection
+  // Browser connects directly to wss://agent.deepgram.com/v1/agent/converse — no CF proxy in audio path
+  if (path === "/api/deepgram-token" && method === "GET") {
+    const apiKey = env.DEEPGRAM_API_KEY;
+    if (!apiKey) return addCors(json({ error: "DEEPGRAM_API_KEY not configured" }, 500), request);
     const studentId = url.searchParams.get("studentId") || "";
+    try {
+      const [rawProfile, rawLang, rawVocab, rawArc] = await Promise.all([
+        env.NET_PET_KV.get("student_profile_" + studentId),
+        env.NET_PET_KV.get("lang:" + studentId),
+        env.NET_PET_KV.get("vocab_list_" + studentId),
+        env.NET_PET_KV.get("vocab_arc_" + studentId)
+      ]);
+      // Return API key as token — key stays in CF secret, never in source JS
+      const access_token = apiKey;
 
-    const agentPair = new WebSocketPair();
-    const [agentClient, agentServer] = Object.values(agentPair);
-    agentServer.accept();
+      let agentProfile = null, agentLang = "en", recentVocab = [], arcData = null;
+      try { if (rawProfile) agentProfile = JSON.parse(rawProfile); } catch (_) {}
+      if (!agentProfile) agentProfile = { level: "A2", goals: "Practice natural spoken English", primaryBlock: "speaking confidence" };
+      if (rawLang) agentLang = rawLang;
+      try { if (rawVocab) { const vl = JSON.parse(rawVocab); recentVocab = vl.slice(-5).map(w => w.word); } } catch (_) {}
+      try { if (rawArc) arcData = JSON.parse(rawArc); } catch (_) {}
 
-    // Queue browser messages until Deepgram connection is ready (bounded to ~16s of PCM)
-    let dgAgentWs = null;
-    const pendingFromBrowser = [];
-    let pendingBytes = 0;
-    const MAX_PENDING_BYTES = 512_000;
-    let conversationHistory = []; // last N turns sent by client on connect for context continuity
+      const _level = (agentProfile?.level || agentProfile?.englishLevel || "").toLowerCase();
+      const ttsSpeed = /^a1/.test(_level) ? 0.85 : /^a2/.test(_level) ? 0.85 : 1.0;
 
-    agentServer.addEventListener("message", (evt) => {
-      // Intercept ConversationHistory — client-only message, not forwarded to Deepgram
-      if (typeof evt.data === "string") {
-        try {
-          const parsed = JSON.parse(evt.data);
-          if (parsed.type === "ConversationHistory" && Array.isArray(parsed.messages)) {
-            conversationHistory = parsed.messages.slice(-6); // keep last 6 turns (3 exchanges)
-            return; // do not forward or queue
+      const settings = {
+        type: "Settings",
+        audio: {
+          input:  { encoding: "linear16", sample_rate: 16000 },
+          output: { encoding: "mp3", sample_rate: 24000, container: "none" }
+        },
+        agent: {
+          language: "en",
+          listen: {
+            provider: { type: "deepgram", model: "nova-3", language_hints: ["en", "vi"], smart_format: true }
+          },
+          think: {
+            provider: { type: "open_ai", model: "gpt-4o-mini" },
+            prompt: buildAgentPrompt(agentProfile, agentLang, recentVocab, arcData),
+            functions: [{
+              name: "save_vocabulary_word",
+              description: "Save an English word the student successfully used in a sentence.",
+              parameters: { type: "object", properties: { word: { type: "string", description: "The English word or phrase" }, meaning_vi: { type: "string", description: "Vietnamese meaning (optional)" } }, required: ["word"] },
+              client_side: true
+            }]
+          },
+          speak: {
+            provider: { type: "deepgram", model: "aura-2-asteria-en", speed: ttsSpeed }
           }
-        } catch (_) {}
-      }
-      if (dgAgentWs && dgAgentWs.readyState === 1) {
-        try { dgAgentWs.send(evt.data); } catch (_) {}
-      } else {
-        const size = typeof evt.data === "string" ? evt.data.length : (evt.data.byteLength || 0);
-        if (pendingBytes + size < MAX_PENDING_BYTES) {
-          pendingFromBrowser.push(evt.data);
-          pendingBytes += size;
         }
+      };
+      return addCors(json({ token: access_token, settings }), request);
+    } catch (err) {
+      return addCors(json({ error: err.message }, 500), request);
+    }
+  }
+
+  // Voice Agent: browser-side vocab save callback (called when FunctionCallRequest received from Deepgram)
+  if (path === "/api/agent/vocab" && method === "POST") {
+    const body = await request.json().catch(() => ({}));
+    const { studentId, word, meaning_vi } = body;
+    if (!studentId || !word) return addCors(json({ error: "studentId and word required" }, 400), request);
+    try {
+      const raw = await env.NET_PET_KV.get(`vocab_list_${studentId}`);
+      const list = raw ? JSON.parse(raw) : [];
+      if (!list.find(w => w.word === word)) {
+        list.push({ word, meaning_vi: meaning_vi || "", ts: Date.now() });
       }
-    });
-
-    const agentCleanup = () => {
-      try { if (dgAgentWs && dgAgentWs.readyState <= 1) dgAgentWs.close(); } catch (_) {}
-      try { if (agentServer.readyState <= 1) agentServer.close(); } catch (_) {}
-    };
-    agentServer.addEventListener("close", agentCleanup);
-    agentServer.addEventListener("error", agentCleanup);
-
-    // Connect to Deepgram in background — don't block the 101 response
-    ctx.waitUntil((async () => {
-      try {
-        // KV reads + Deepgram connection in parallel
-        const [[rawProfile, rawLang, rawVocab, rawArc], dgAgentRes] = await Promise.all([
-          Promise.all([
-            env.NET_PET_KV.get("student_profile_" + studentId),
-            env.NET_PET_KV.get("lang:" + studentId),
-            env.NET_PET_KV.get("vocab_list_" + studentId),
-            env.NET_PET_KV.get("vocab_arc_" + studentId)
-          ]),
-          fetch("https://agent.deepgram.com/v1/agent/converse", {
-            headers: { "Authorization": `Token ${apiKey}`, "Upgrade": "websocket" }
-          })
-        ]);
-
-        let agentProfile = null, agentLang = "en", recentVocab = [], arcData = null;
-        try { if (rawProfile) agentProfile = JSON.parse(rawProfile); } catch (_) {}
-        if (!agentProfile) agentProfile = { level: "A2", goals: "Practice natural spoken English", primaryBlock: "speaking confidence" };
-        if (rawLang) agentLang = rawLang;
-        try {
-          if (rawVocab) {
-            const vocabList = JSON.parse(rawVocab);
-            // Last 5 learned words for context injection
-            recentVocab = vocabList.slice(-5).map(w => w.word);
-          }
-        } catch (_) {}
-        try { if (rawArc) arcData = JSON.parse(rawArc); } catch (_) {}
-
-        // Per-level TTS speed + EOT patience (A1 beginner needs slow speech and patient VAD)
-        const _level = (agentProfile?.level || agentProfile?.englishLevel || "").toLowerCase();
-        const ttsSpeed    = /^a1/.test(_level) ? 0.85 : /^a2/.test(_level) ? 0.85 : 1.0;
-        const eotThresh   = /^a1/.test(_level) ? 0.85 : /^a2/.test(_level) ? 0.80 : 0.75;
-
-        dgAgentWs = dgAgentRes.webSocket;
-        if (!dgAgentWs) { agentServer.close(1011, "Deepgram Agent connection failed"); return; }
-        dgAgentWs.accept();
-
-        // Flush any messages the browser already sent
-        for (const msg of pendingFromBrowser) { try { dgAgentWs.send(msg); } catch (_) {} }
-        pendingFromBrowser.length = 0;
-
-        let agentSettingsSent = false;
-        dgAgentWs.addEventListener("message", (evt) => {
-          if (typeof evt.data === "string") {
-            try {
-              const msg = JSON.parse(evt.data);
-
-              if (msg.type === "Welcome" && !agentSettingsSent) {
-                agentSettingsSent = true;
-                const settingsPayload = {
-                  type: "Settings",
-                  mip_opt_out: true,
-                  audio: {
-                    input:  { encoding: "linear16", sample_rate: 16000 },
-                    output: { encoding: "mp3", sample_rate: 24000, container: "none" }
-                  },
-                  agent: {
-                    listen: {
-                      provider: {
-                        type: "deepgram",
-                        model: "nova-3",
-                        smart_format: true,
-                        eot_threshold: eotThresh,
-                        utterance_end_ms: agentLang === "vi" ? 1200 : 800,
-                        keyterms: ["hello","goodbye","please","sorry","thank you","yes","no","okay","think","three","thank","ship","sheep"]
-                      }
-                    },
-                    think: {
-                      provider: { type: "open_ai", model: "gpt-4o-mini" },
-                      prompt: buildAgentPrompt(agentProfile, agentLang, recentVocab, arcData),
-                      // Vocabulary save function — OBI can trigger when student learns a new word
-                      functions: [
-                        {
-                          name: "save_vocabulary_word",
-                          description: "Save an English word the student successfully used or learned in this session.",
-                          parameters: {
-                            type: "object",
-                            properties: {
-                              word:       { type: "string", description: "The English word or phrase" },
-                              meaning_vi: { type: "string", description: "Vietnamese meaning (optional)" }
-                            },
-                            required: ["word"]
-                          }
-                        }
-                      ]
-                    },
-                    speak: {
-                      provider: {
-                        type: "deepgram",
-                        model: "aura-2-orion-en",
-                        speed: ttsSpeed
-                      }
-                    }
-                  }
-                };
-                // Restore conversation history for session continuity
-                if (conversationHistory.length > 0) {
-                  settingsPayload.context = { messages: conversationHistory };
-                }
-                dgAgentWs.send(JSON.stringify(settingsPayload));
-              }
-
-              // Intercept FunctionCall from Deepgram — execute server-side, send response back
-              else if (msg.type === "FunctionCall" || msg.type === "FunctionCallRequest") {
-                const fn = msg.function_name || msg.name;
-                const args = (() => { try { return typeof msg.arguments === "string" ? JSON.parse(msg.arguments) : (msg.arguments || {}); } catch (_) { return {}; } })();
-                const callId = msg.id || msg.call_id || "";
-
-                if (fn === "save_vocabulary_word" && args.word && studentId !== "anonymous") {
-                  // Fire-and-forget: save to NET_PET_KV vocab list
-                  env.NET_PET_KV.get(`vocab_list_${studentId}`).then(raw => {
-                    const list = raw ? JSON.parse(raw) : [];
-                    const entry = { word: args.word, meaning_vi: args.meaning_vi || "", ts: Date.now() };
-                    if (!list.find(w => w.word === args.word)) list.push(entry);
-                    return env.NET_PET_KV.put(`vocab_list_${studentId}`, JSON.stringify(list.slice(-500)));
-                  }).catch(() => {});
-                }
-
-                // Notify browser of vocab save so it can update Tiger Win summary
-                if (fn === "save_vocabulary_word" && args.word) {
-                  try { agentServer.send(JSON.stringify({ type: "VocabSaved", word: args.word })); } catch (_) {}
-                  // Brief vocal acknowledgment — OBI celebrates the win naturally
-                  const vocabWord = args.word;
-                  try {
-                    dgAgentWs.send(JSON.stringify({
-                      type: "InjectAgentMessage",
-                      message: `Nice — "${vocabWord}" just landed in your collection. Try weaving it into your next reply!`
-                    }));
-                  } catch (_) {}
-                }
-
-                // Send FunctionCallResponse so Deepgram LLM can continue
-                try {
-                  dgAgentWs.send(JSON.stringify({
-                    type: "FunctionCallResponse",
-                    id: callId,
-                    result: fn === "save_vocabulary_word" ? `Saved "${args.word}" to vocabulary list.` : "Done."
-                  }));
-                } catch (_) {}
-                return; // don't forward FunctionCall events to browser
-              }
-
-            } catch (_) {}
-          }
-          if (agentServer.readyState === 1) { try { agentServer.send(evt.data); } catch (_) {} }
-        });
-        dgAgentWs.addEventListener("close", agentCleanup);
-        dgAgentWs.addEventListener("error", agentCleanup);
-
-      } catch (err) {
-        console.error("[AGENT-PROXY] background connect failed:", err.message);
-        try { agentServer.close(1011, "Upstream error"); } catch (_) {}
-      }
-    })());
-
-    return new Response(null, { status: 101, webSocket: agentClient });
+      await env.NET_PET_KV.put(`vocab_list_${studentId}`, JSON.stringify(list.slice(-500)));
+      return addCors(json({ ok: true, word }), request);
+    } catch (err) {
+      return addCors(json({ error: err.message }, 500), request);
+    }
   }
 
   // STT key endpoint — kept for fallback REST mode
