@@ -1,0 +1,37 @@
+{
+  "student_id": "quy-bluetech",
+  "sessions": [
+    {
+      "date": "2026-05-26",
+      "duration_mins": 50,
+      "level_at_session": "A1",
+      "topic": "Daily routines, past tense, health vocabulary",
+      "vocab_covered": [
+        "bean sprout",
+        "hang out",
+        "healthy",
+        "energy",
+        "appetite",
+        "breakfast",
+        "lunch",
+        "dinner",
+        "cup",
+        "strong",
+        "more",
+        "less",
+        "that sucks"
+      ],
+      "teacher_notes": "Quy remembered 3 vocabulary words she studied on Friday (smart, seller, inside) — that's a breakthrough for A1. Can spell words aloud after instruction. Very limited output but engages when given repetition. Lost fake AirPods — encouraged to replace for commute listening. Church on Sunday, work event selling HapiOS supplements. Listens 10-15 min/day (YouTube, TikTok).",
+      "grammar_focus": null,
+      "listening_content": [
+        "YouTube self-help (skincare routine)",
+        "YouTube coffee health benefits",
+        "Chadwick cartoon (Sunday)"
+      ],
+      "blockers": ["No earphones — cannot listen during 30-min commute", "Cannot recall vocab independently yet"],
+      "wins": ["Remembered 3 words from Friday YouTube session", "Can repeat and spell words after modelling"],
+      "next_session_date": "2026-05-29",
+      "ledgered": true
+    }
+  ]
+}

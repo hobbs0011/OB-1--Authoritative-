@@ -1,6 +1,6 @@
 # Student Portal Development — Session Context
 
-Last updated: 2026-05-27
+Last updated: 2026-05-29 (Run 23)
 
 ---
 
@@ -132,12 +132,23 @@ Displayed in portal as "MINH'S WORLD" section with captions tied to session quot
 2. **buildSystemPrompt enriched** — Now injects `teachingFocus` as `TEACHER INSTRUCTION` block + `lang === 'vi'` triggers BILINGUAL MODE (Vietnamese translations after every sentence).
 3. **KV profile fields mapped** — Boot now maps `teachingFocus`, `primaryBlock`, `breakthrough`, `sessionNotes`, `lang`, `streak` from `/api/student/state` into the client-side profile.
 
-### Voice Agent — Low Latency Pipeline
+### Voice Agent — Architecture (UPDATED Run 23)
 
-**Architecture:** Browser PCM16 → `/api/agent` WS proxy → Deepgram Voice Agent → DeepSeek LLM → Deepgram TTS → streamed MP3 back.
+**Architecture (Run 23 — CURRENT):**
+```
+Browser → GET /api/deepgram-token (CF Worker builds Settings + returns API key)
+Browser → wss://agent.deepgram.com/v1/agent/converse (DIRECT — no CF proxy in audio path)
+```
 
-**Files changed:**
+**DEPRECATED (Run 21-22 — BROKEN):** Browser PCM16 → `/api/agent` WS proxy → Deepgram
+Reason removed: CF regular Workers cannot sustain long-lived WS sessions.
+ctx.waitUntil was terminated by CF runtime every ~1-2s → infinite reconnect loop.
 
+**Files changed (Run 23):**
+- `src/index.js`: REMOVED `/api/agent` proxy. ADDED `GET /api/deepgram-token` (mints JWT + Settings) + `POST /api/agent/vocab` (vocab save callback)
+- `public/chat.js`: `openVoiceAgent()` now fetches token then connects direct to Deepgram. `handleAgentMsg` handles `Welcome` (sends Settings) + `FunctionCallRequest` (browser-side vocab save)
+
+**Run 21-22 files changed:**
 - `src/index.js`: Added `/api/agent` WebSocket proxy handler + `buildAgentPrompt()` helper
 - `public/chat.js`: Added Voice Agent mode (openVoiceAgent, handleAgentMsg, startAgentListening, stopAgentListening, playAgentChunk)
 - REST pipeline kept as fallback when Voice Agent WS unavailable

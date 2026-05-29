@@ -1,0 +1,49 @@
+{
+  "student_id": "mai-tram-bluetech",
+  "sessions": [
+    {
+      "date": "2026-05-26",
+      "duration_mins": 50,
+      "level_at_session": "A2",
+      "topic": "Coffee health benefits, self-help routines, past tense narration, comparatives",
+      "vocab_covered": [
+        "bean sprout",
+        "hang out",
+        "caffeine",
+        "appetite",
+        "energy",
+        "benefit",
+        "healthy",
+        "routine",
+        "skincare",
+        "seller",
+        "gummy",
+        "headphones",
+        "that sucks",
+        "homeless",
+        "monk",
+        "habit",
+        "strong",
+        "stress",
+        "less",
+        "more"
+      ],
+      "grammar_focus": {
+        "past_tense": ["I listened", "I went", "I learned", "I watched"],
+        "comparatives": ["more energy", "less stress", "more strong"],
+        "notes": "Past tense active but sometimes reverts to present when discussing past events. Comparatives are emerging — needs reinforcement."
+      },
+      "teacher_notes": "Mai Tram described 3 health benefits of black coffee unprompted and in sequence — this is exactly the fluency pattern we're building toward. Internal editor still present but weakening. Listens 10-20 min/day. Brother in Thailand/ginger farm. Sells HapiOS gummies at work events. Church Sunday 8AM–3PM. Goes to hometown monthly. Needs earphones for commute.",
+      "listening_content": [
+        "YouTube self-help (skincare routine, shower habits)",
+        "YouTube coffee health benefits (Saturday)",
+        "Chadwick cartoon (Sunday — 15 min)",
+        "Office worker TikTok hangout content (Saturday)"
+      ],
+      "blockers": ["Internal editor still active — pauses before speaking", "Needs earphones for commute listening"],
+      "wins": ["Described 3 health benefits of coffee in sequence — unprompted", "Past tense narration solid on familiar topics", "10-20 min consistent daily listening habit"],
+      "next_session_date": "2026-05-29",
+      "ledgered": true
+    }
+  ]
+}

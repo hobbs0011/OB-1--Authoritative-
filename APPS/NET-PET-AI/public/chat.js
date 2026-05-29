@@ -768,8 +768,9 @@ async function openVoiceAgent() {
 
     agentSettings = settings; // stored for Welcome handler
 
-    // Connect directly to Deepgram — JWT first in subprotocol array (required by Deepgram spec)
-    const ws = new WebSocket("wss://agent.deepgram.com/v1/agent/converse", [token, "token"]);
+    // Connect directly to Deepgram — "token" identifier first, JWT second (confirmed by diagnostic: server echoes "token")
+    console.log("[VOICE] connecting, jwt prefix:", token.substring(0, 20));
+    const ws = new WebSocket("wss://agent.deepgram.com/v1/agent/converse", ["token", token]);
     ws.binaryType = "arraybuffer";
     agentWs = ws; // set immediately — blocks double-open race before onopen fires
 
@@ -961,7 +962,7 @@ function handleAgentMsg(event) {
         showTigerWin();
 
       } else if (msg.type === "Error") {
-        console.error("[AGENT ERROR]", msg.code, msg.description);
+        console.error("[AGENT ERROR]", msg.code, msg.description, JSON.stringify(msg));
         setMicStatus("Error — reconnecting", false);
 
       } else if (msg.type === "Warning") {
