@@ -123,12 +123,23 @@
 
         /* ── TOP NAV ── */
         #topNav {
-            position: fixed; top: 0; left: 0; right: 0; height: 70px; z-index: 9000;
+            position: fixed; top: 0; left: 0; right: 0; min-height: 70px; z-index: 9000;
             background: rgba(10,10,18,0.82); border-bottom: 1px solid var(--border);
             display: flex; align-items: center; justify-content: space-between;
-            padding: 0 28px; transition: opacity 0.4s;
+            padding: 0 28px; transition: opacity 0.4s; flex-wrap: wrap;
         }
         #topNav.hidden { opacity: 0; pointer-events: none; }
+        .nav-hamburger { display:none; background:none; border:1px solid var(--border); border-radius:8px; padding:8px 10px; cursor:pointer; color:var(--dim); font-size:1.1rem; line-height:1; }
+        .nav-hamburger:hover { color:var(--text); border-color:rgba(255,255,255,0.2); }
+        @media (max-width: 768px) {
+            #topNav { padding: 0 16px; align-items: flex-start; padding-top:14px; padding-bottom:10px; }
+            .nav-hamburger { display:flex; align-items:center; justify-content:center; margin-left:auto; }
+            .nav-links { display:none; width:100%; flex-direction:column; gap:2px; padding-bottom:8px; }
+            .nav-links.open { display:flex; }
+            .nav-logout { display:none; }
+            .nav-links.open + .nav-logout { display:flex; margin:0 0 8px; width:100%; }
+            .main-container { padding-top: 70px; }
+        }
         .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text); flex-shrink: 0; }
         .nav-brand img { width: 40px; height: 40px; object-fit: contain; }
         .nav-brand span { font-family: 'Orbitron', sans-serif; font-size: 1.05rem; font-weight: 600; letter-spacing: 0.05em; }
@@ -149,6 +160,8 @@
             cursor: pointer; transition: all 0.25s; white-space: nowrap; margin-left: 4px;
         }
         .nav-logout:hover { background: rgba(248,113,113,0.1); border-color: rgba(248,113,113,0.55); color: #fca5a5; }
+        #navBackdrop { display:none; position:fixed; inset:0; z-index:8999; background:transparent; }
+        #navBackdrop.open { display:block; }
 
         /* ── WATERMARK ── */
         .portal-watermark { position: fixed; bottom: 20px; right: 20px; z-index: 0; pointer-events: none; opacity: 0.055; width: 280px; height: 280px; object-fit: contain; }
@@ -295,6 +308,13 @@
             .dashboard-header h1 { font-size: 1.2rem; }
         }
 
+        /* ── VOCAB PILLS ── */
+        .vocab-grid { display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
+        .vocab-pill { display:inline-flex; flex-direction:column; align-items:center; background:rgba(20,184,166,0.08); border:1px solid rgba(20,184,166,0.2); border-radius:10px; padding:6px 12px; gap:2px; }
+        .vocab-en { color:var(--text); font-weight:600; font-size:0.85rem; }
+        .vocab-vi { color:var(--teal); font-size:0.72rem; }
+        @media (max-width: 480px) { .portal-watermark { width:120px; height:120px; } }
+
         /* Touch-friendly tap targets */
         .nav-links a, .login-btn, .setpw-btn, .setpw-skip,
         .quick-link-card, .sb-btn-checkin, .sb-btn-saveface, .nav-logout {
@@ -362,68 +382,118 @@
         </div>
     </div>
 
+    <div id="navBackdrop"></div>
     <!-- TOP NAV -->
     <nav id="topNav" class="hidden">
         <a class="nav-brand" href="quy-portal">
             <img src="/icons/badge-tiger.svg" alt="Tiger Badge" onerror="this.style.display='none'">
             <span>QUY PORTAL</span>
         </a>
-        <div class="nav-links">
+        <button class="nav-hamburger" id="navToggle" aria-label="Menu">☰</button>
+        <div class="nav-links" id="navLinks">
             <a href="quy-portal" class="active">Dashboard</a>
             <a href="quy-profile">Profile</a>
             <a href="quy-methodology">Methodology</a>
             <a href="quy-career">Career</a>
             <a href="quy-transcripts">Transcripts</a>
             <a href="quy-action-plan">Action Plan</a>
-                <!-- Video Guide (P5 BlueTech promise) -->
-    <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:18px 20px;margin-bottom:14px;" id="videoGuide">
-      <div style="font-size:0.7rem;text-transform:uppercase;letter-spacing:1px;color:#a78bfa;font-weight:700;margin-bottom:12px;">📺 Getting Started Guide</div>
-      <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;background:rgba(0,0,0,0.3);">
-        <div id="videoPlaceholder" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#667;font-size:0.9rem;text-align:center;padding:20px;">
-          Michael will add a video guide here.<br>Check back soon!
+            <a href="/magic-chat?studentId=quy-bluetech" class="nav-coach">🗣️ Chat với OBI</a>
         </div>
-        <iframe id="videoFrame" src="" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;display:none;" allowfullscreen loading="lazy"></iframe>
-      </div>
-      <p style="color:#667;font-size:0.78rem;margin-top:8px;text-align:center;">Watch this to learn how to use your portal and OBI chat.</p>
-    </div>
-    </div>
-                <a href="/magic-chat?studentId=quy-bluetech" class="nav-coach">🗣️ Chat với OBI</a>
+        <button class="nav-logout" id="logoutBtn">Logout</button>
+    </nav>
+
+    <img src="/icons/badge-tiger.svg" class="portal-watermark" alt="">
+
+    <!-- MAIN CONTENT -->
+    <main class="main-container">
+
+        <div class="dashboard-header">
+            <h1>QUY</h1>
+            <p class="subtitle">BlueTech · A1 Beginner · Foundation Track</p>
+        </div>
+
+        <div class="stats-grid" id="statsGrid" style="display:none;">
+            <div class="stat-card purple"><div class="stat-accent"></div><div class="stat-label">Tiger Score</div><div class="stat-value loading" id="tigerScore"><div class="skeleton"></div></div></div>
+            <div class="stat-card gold"><div class="stat-accent"></div><div class="stat-label">Streak</div><div class="stat-value loading" id="streakVal"><div class="skeleton"></div></div></div>
+            <div class="stat-card teal"><div class="stat-accent"></div><div class="stat-label">Sessions</div><div class="stat-value loading" id="sessionsVal"><div class="skeleton"></div></div></div>
+            <div class="stat-card success"><div class="stat-accent"></div><div class="stat-label">Next Session</div><div class="stat-value loading" id="nextSessionVal"><div class="skeleton"></div></div></div>
+        </div>
+
+        <div class="day1-card" id="day1Card">
+            <div class="day1-badge">DAY 1 — BLUETECH ENGLISH</div>
+            <h2>Your journey starts today.</h2>
+            <p>Two things, every day. 45 minutes listening. 15 minutes talking to OBI. That's the whole system.</p>
+            <div class="day1-steps">
+                <div class="day1-step"><div class="step-num">45 min</div><div class="step-label">Listen</div><div class="step-sub">YouTube · Podcasts · Netflix</div></div>
+                <div class="day1-step"><div class="step-num">15 min</div><div class="step-label">Talk to OBI</div><div class="step-sub">Tell OBI what you watched</div></div>
             </div>
         </div>
 
-        <!-- Weekly Progress Widget -->
         <div id="weekly-widget" style="display:none;">
-            <div class="ww-stat">
-                <div class="ww-label">Mastered Words</div>
-                <div class="ww-value" id="ww-mastered">—</div>
-                <div class="ww-sub" id="ww-mastered-sub"></div>
-            </div>
-            <div class="ww-stat">
-                <div class="ww-label">Current Streak</div>
-                <div class="ww-value gold" id="ww-streak">—</div>
-                <div class="ww-sub" id="ww-streak-sub"></div>
-            </div>
-            <div class="ww-stat">
-                <div class="ww-label">Level Progress</div>
-                <div class="ww-value teal" id="ww-level">—</div>
-                <div class="ww-bar-wrap"><div class="ww-bar-fill" id="ww-bar" style="width:0%"></div></div>
-                <div class="ww-sub" id="ww-level-sub"></div>
-            </div>
+            <div class="ww-stat"><div class="ww-label">Mastered Words</div><div class="ww-value" id="ww-mastered">—</div><div class="ww-sub" id="ww-mastered-sub"></div></div>
+            <div class="ww-stat"><div class="ww-label">Current Streak</div><div class="ww-value gold" id="ww-streak">—</div><div class="ww-sub" id="ww-streak-sub"></div></div>
+            <div class="ww-stat"><div class="ww-label">Level Progress</div><div class="ww-value teal" id="ww-level">—</div><div class="ww-bar-wrap"><div class="ww-bar-fill" id="ww-bar" style="width:0%"></div></div><div class="ww-sub" id="ww-level-sub"></div></div>
         </div>
 
-        <!-- Graduation Forecast Widget -->
         <div id="forecast-widget" style="display:none;"></div>
 
-        <!-- Goals Widget -->
-        <div id="goals-widget" class="content-card" style="margin-bottom:16px;display:none">
-            <div class="card-label">MY GOAL</div>
-            <div id="goals-content"></div>
+        <div id="goals-widget" class="content-card" style="margin-bottom:16px;display:none"><div class="card-label">MY GOAL</div><div id="goals-content"></div></div>
+
+        <div class="content-card">
+            <div class="card-label">Coach Note</div>
+            <div class="teacher-note">
+                <p class="note-body">Quy is building from zero — every word she learns is a brick. Vietnamese to English is a long road but she is walking it. Consistency beats intensity. Show up every day.</p>
+                <p class="note-sig">— OBI / NET Coach</p>
+            </div>
         </div>
 
-    <!-- STREAK BADGE -->
-    <div id="streak-badge" style="display:none;"></div>
+        <div class="content-card">
+            <div class="card-label">Current Level</div>
+            <div class="milestone-row"><span class="milestone-badge">A1</span><span class="milestone-track">Foundation Track · Building core vocabulary</span></div>
+            <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:5%;"></div></div>
+            <div class="progress-label">A1 → A2: Master 50 core words and hold a 2-minute conversation</div>
+        </div>
+
+        <div class="content-card" id="lastClassCard">
+            <div class="card-label">Lớp Hôm Qua — Last Class · 26 May 2026</div>
+            <div style="font-family:'Rajdhani',sans-serif;font-size:0.88rem;color:var(--dim);margin-bottom:4px;">Topics: Thói quen hàng ngày · Health vocabulary · Kể chuyện quá khứ</div>
+            <div class="vocab-grid">
+                <div class="vocab-pill"><span class="vocab-en">bean sprout</span><span class="vocab-vi">giá đỗ</span></div>
+                <div class="vocab-pill"><span class="vocab-en">hang out</span><span class="vocab-vi">đi chơi</span></div>
+                <div class="vocab-pill"><span class="vocab-en">healthy</span><span class="vocab-vi">lành mạnh</span></div>
+                <div class="vocab-pill"><span class="vocab-en">energy</span><span class="vocab-vi">năng lượng</span></div>
+                <div class="vocab-pill"><span class="vocab-en">appetite</span><span class="vocab-vi">sự thèm ăn</span></div>
+                <div class="vocab-pill"><span class="vocab-en">breakfast</span><span class="vocab-vi">bữa sáng</span></div>
+                <div class="vocab-pill"><span class="vocab-en">lunch</span><span class="vocab-vi">bữa trưa</span></div>
+                <div class="vocab-pill"><span class="vocab-en">dinner</span><span class="vocab-vi">bữa tối</span></div>
+                <div class="vocab-pill"><span class="vocab-en">cup</span><span class="vocab-vi">cái cốc</span></div>
+                <div class="vocab-pill"><span class="vocab-en">strong</span><span class="vocab-vi">mạnh</span></div>
+                <div class="vocab-pill"><span class="vocab-en">more</span><span class="vocab-vi">nhiều hơn</span></div>
+                <div class="vocab-pill"><span class="vocab-en">less</span><span class="vocab-vi">ít hơn</span></div>
+                <div class="vocab-pill"><span class="vocab-en">that sucks</span><span class="vocab-vi">thật tệ</span></div>
+            </div>
+            <div class="teacher-note" style="margin-top:16px;">
+                <p class="note-body">Quy đã nhớ được 3 từ từ hôm thứ Sáu — đó là tiến bộ rồi. Mua tai nghe trong tuần này và nghe tiếng Anh lúc đi làm (30 phút/ngày = 2.5 giờ mỗi tuần).<br><span style="color:#94a3b8;font-style:normal;font-size:0.85rem;">Quy remembered 3 vocab words from Friday — that's progress. Buy earphones and listen during your 30-min commute. 2.5 free hours of English per week.</span></p>
+                <p class="note-sig">— Teacher Michael</p>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <div class="card-label">Quick Access</div>
+            <div class="quick-links-grid">
+                <a href="/magic-chat?studentId=quy-bluetech" class="quick-link-card primary-link"><span class="ql-icon">🗣️</span><div class="ql-label">Chat with OBI</div><div class="ql-sub">Start speaking now</div></a>
+                <a href="quy-transcripts" class="quick-link-card"><span class="ql-icon">📋</span><div class="ql-label">Transcripts</div><div class="ql-sub">Review past sessions</div></a>
+                <a href="quy-action-plan" class="quick-link-card"><span class="ql-icon">🎯</span><div class="ql-label">Action Plan</div><div class="ql-sub">Your weekly goals</div></a>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <div id="vocabWidget" style="min-height:48px;"></div>
+        </div>
 
     </main>
+
+    <div id="streak-badge" style="display:none;"></div>
 
     <script>
         const AUTH_KEY = 'quy_auth';
@@ -437,6 +507,7 @@
             document.getElementById('topNav').classList.remove('hidden');
             fetch('/api/student/lang', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({studentId:STUDENT_ID,lang:'vi'})}).catch(()=>{});
             loadPortalData();
+            loadVocabWidget(STUDENT_ID);
             document.dispatchEvent(new Event('portalUnlocked'));
         }
 
@@ -545,6 +616,34 @@
             window.location.reload();
         });
 
+        // Vocab widget — shows OBI-saved vocabulary words
+        async function loadVocabWidget(studentId) {
+            const container = document.getElementById('vocabWidget');
+            if (!container) return;
+            if (!document.getElementById('vocabWidgetStyle')) {
+                const s = document.createElement('style'); s.id = 'vocabWidgetStyle';
+                s.textContent = '#vocabWidget{color:var(--text)}.vw-header{font-family:"Orbitron",sans-serif;font-size:.85rem;font-weight:600;letter-spacing:.05em;color:var(--gold);margin-bottom:10px}.vw-list{display:flex;flex-wrap:wrap;gap:8px}.vw-pill{background:rgba(168,85,247,.12);border:1px solid rgba(168,85,247,.25);border-radius:12px;padding:6px 12px;display:flex;flex-direction:column;align-items:center}.vw-word{font-weight:700;font-size:.9rem}.vw-meaning{font-size:.7rem;opacity:.75;margin-top:2px}.vw-empty{font-size:.85rem;color:var(--dim);font-style:italic}';
+                document.head.appendChild(s);
+            }
+            try {
+                const res = await fetch(`/api/vocab/list?studentId=${encodeURIComponent(studentId)}`);
+                if (!res.ok) throw new Error();
+                const data = await res.json();
+                const words = Array.isArray(data.words) ? data.words : [];
+                const total = data.total || words.length;
+                const last10 = words.slice(-10).reverse();
+                let html = `<div class="vw-header">🐯 My Words (${total})</div>`;
+                if (!last10.length) {
+                    html += '<div class="vw-empty">No words yet — practice with OBI to earn your first!</div>';
+                } else {
+                    html += '<div class="vw-list">';
+                    last10.forEach(w => { html += `<div class="vw-pill"><span class="vw-word">${w.word||''}</span><span class="vw-meaning">${w.meaning_vi||''}</span></div>`; });
+                    html += '</div>';
+                }
+                container.innerHTML = html;
+            } catch { container.innerHTML = ''; }
+        }
+
         // Load portal data
         async function loadPortalData() {
             try {
@@ -639,6 +738,8 @@
         }
         .sb-btn-saveface:hover { background: rgba(239,68,68,0.15); border-color: rgba(239,68,68,0.6); }
         .sb-confirm { font-size: 0.75rem; color: var(--success); text-align: center; margin-top: 6px; min-height: 16px; }
+        .sb-dismiss { position:absolute; top:8px; right:10px; background:none; border:none; color:var(--dim); font-size:1rem; cursor:pointer; line-height:1; padding:4px 6px; opacity:0.6; }
+        .sb-dismiss:hover { opacity:1; color:var(--text); }
     </style>
 
     <script>
@@ -670,6 +771,7 @@
                     ? '<span class="sb-status warn">CHECK IN NOW — FACE AT RISK 🚨</span>'
                     : '<span class="sb-status warn">STREAK BROKEN — RESTART TODAY</span>';
                 badge.innerHTML =
+                    '<button class="sb-dismiss" onclick="document.getElementById(\'streak-badge\').style.display=\'none\'" title="Close">✕</button>' +
                     '<div class="sb-fire">🔥</div>' +
                     '<div class="sb-streak-count' + (s !== 'active' ? ' sb-count-danger' : '') + '">' + streak + ' DAY STREAK</div>' +
                     statusText +
@@ -803,5 +905,29 @@
         if (typeof isAuthed === 'function' && isAuthed()) loadWeeklyWidget();
     </script>
     <script src="./global-brand-shelf.js" defer onerror="void 0"></script>
-<script src="/problem-report.js"></script></body>
+    <script src="/problem-report.js"></script>
+    <script>
+        (function() {
+            var toggle = document.getElementById('navToggle');
+            var links = document.getElementById('navLinks');
+            var backdrop = document.getElementById('navBackdrop');
+            function closeNav() {
+                if (links) links.classList.remove('open');
+                if (toggle) toggle.textContent = '☰';
+                if (backdrop) backdrop.classList.remove('open');
+            }
+            if (toggle && links) {
+                toggle.addEventListener('click', function() {
+                    var isOpen = links.classList.toggle('open');
+                    toggle.textContent = isOpen ? '✕' : '☰';
+                    if (backdrop) backdrop.classList.toggle('open', isOpen);
+                });
+                links.querySelectorAll('a').forEach(function(a) {
+                    a.addEventListener('click', closeNav);
+                });
+            }
+            if (backdrop) backdrop.addEventListener('click', closeNav);
+        })();
+    </script>
+</body>
 </html>

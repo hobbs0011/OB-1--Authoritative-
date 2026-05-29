@@ -1,6 +1,12 @@
 {
-  "vault_root": "d:\\OB-1\\OPERATIONS\\NET-STUDENTS\\VAULT\\huong-bluetech",
+  "vault_root": "D:\\OB-1-CANONICAL\\NET-STUDENTS\\VAULT\\huong-bluetech",
   "recordings": [],
   "created": "2026-04-17T01:16:45.4695359+07:00",
-  "student_id": "huong-bluetech"
+  "student_id": "huong-bluetech",
+  "profile": "PROFILE.md",
+  "kv_profile_key": "student_profile_huong-bluetech",
+  "portal_url": "https://net-pet-ai.mrmichaelhobbs123.workers.dev/huong-portal",
+  "obi_url": "https://net-pet-ai.mrmichaelhobbs123.workers.dev/magic-chat?studentId=huong-bluetech",
+  "updated": "2026-05-28",
+  "note": "Not present in May 26 class. Next class Thu 29 May."
 }

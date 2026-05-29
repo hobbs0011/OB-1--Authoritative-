@@ -1,5 +1,11 @@
 {
-  "vault_root": "d:\\OB-1\\OPERATIONS\\NET-STUDENTS\\VAULT\\mai-tram-bluetech",
+  "vault_root": "D:\\OB-1-CANONICAL\\NET-STUDENTS\\VAULT\\mai-tram-bluetech",
+  "profile": "PROFILE.md",
+  "sessions": "SESSIONS.json",
+  "kv_profile_key": "student_profile_mai-tram-bluetech",
+  "portal_url": "https://net-pet-ai.mrmichaelhobbs123.workers.dev/mai-tram-portal",
+  "obi_url": "https://net-pet-ai.mrmichaelhobbs123.workers.dev/magic-chat?studentId=mai-tram-bluetech",
+  "updated": "2026-05-28",
   "recordings": [
     {
       "created": "2026-04-17T01:16:45.3957235+07:00",

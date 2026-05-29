@@ -311,7 +311,7 @@ async function handleHeartbeat(env) {
   }
 }
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     const url = new URL(request.url);
     const path = url.pathname;
 
@@ -319,9 +319,11 @@ export default {
       return new Response(null, { headers: corsHeaders(request) });
     }
 
-    // ── Security middleware (rate limiting, origin validation) ─────────────
-    const secBlock = await securityMiddleware(request, env);
-    if (secBlock) return secBlock;
+    // ── WebSocket upgrades bypass security middleware (handled inline) ────
+    if (request.headers.get("Upgrade")?.toLowerCase() !== "websocket") {
+      const secBlock = await securityMiddleware(request, env);
+      if (secBlock) return secBlock;
+    }
 
     // ── Canon §4 non-API routes ───────────────────────────────────────────────
 
@@ -657,63 +659,275 @@ async function handleAPI(path, request, env, url) {
   if (path === "/api/tts" && method === "POST") { const body = await request.json(); return handleTTS(body, env); }
 
   // STT WebSocket proxy — browser connects here, worker forwards to Deepgram with auth
-  if (path === "/api/stt/stream" && request.headers.get("Upgrade") === "websocket") {
+  // MUST be checked BEFORE security middleware (which blocks non-GET/POST)
+  if (path === "/api/stt/stream" && request.headers.get("Upgrade")?.toLowerCase() === "websocket") {
     const apiKey = env.DEEPGRAM_API_KEY;
     if (!apiKey) return new Response("DEEPGRAM_API_KEY not configured", { status: 500 });
 
     // Build Deepgram URL with all params from client query string
     const dgParams = new URLSearchParams(url.search);
-    dgParams.delete("token"); // strip any client-provided token
-    const dgUrl = `wss://api.deepgram.com/v1/listen?${dgParams}`;
+    dgParams.delete("token");
+    const dgUrl = `https://api.deepgram.com/v1/listen?${dgParams.toString()}`;
 
-    // Create WebSocket pair: [client-facing, server-facing]
+    // Create WebSocket pair for client-facing side
     const pair = new WebSocketPair();
     const [client, server] = Object.values(pair);
-
-    // Accept the client WebSocket
     server.accept();
 
-    // Open authenticated connection to Deepgram
-    const dgWs = new WebSocket(dgUrl, {
-      headers: { "Authorization": `Token ${apiKey}` }
+    // Open authenticated WebSocket to Deepgram using fetch()
+    // CF Workers auto-negotiates WebSocket when response has webSocket property
+    try {
+      const upstreamRes = await fetch(dgUrl, {
+        headers: {
+          "Authorization": `Token ${apiKey}`,
+          "Upgrade": "websocket"
+        }
+      });
+
+      const dgWs = upstreamRes.webSocket;
+      if (!dgWs) {
+        console.error("[STT-PROXY] No webSocket on upstream response, status:", upstreamRes.status);
+        server.close(1011, "Deepgram connection failed");
+        return new Response(null, { status: 101, webSocket: client });
+      }
+      dgWs.accept();
+
+      // Pipe client → Deepgram (audio PCM)
+      server.addEventListener("message", (event) => {
+        if (dgWs.readyState === 1) {
+          try { dgWs.send(event.data); } catch {}
+        }
+      });
+
+      // Pipe Deepgram → client (transcripts)
+      dgWs.addEventListener("message", (event) => {
+        if (server.readyState === 1) {
+          try { server.send(event.data); } catch {}
+        }
+      });
+
+      // Bidirectional close/error handling
+      const cleanup = () => {
+        try { if (dgWs.readyState <= 1) dgWs.close(); } catch {}
+        try { if (server.readyState <= 1) server.close(); } catch {}
+      };
+      server.addEventListener("close", cleanup);
+      server.addEventListener("error", cleanup);
+      dgWs.addEventListener("close", cleanup);
+      dgWs.addEventListener("error", cleanup);
+
+    } catch (err) {
+      console.error("[STT-PROXY] Upstream fetch failed:", err.message);
+      server.close(1011, "Upstream error");
+    }
+
+    return new Response(null, { status: 101, webSocket: client });
+  }
+
+  // Voice Agent WebSocket proxy
+  // Returns 101 Upgrade to browser IMMEDIATELY — Deepgram connection happens in background
+  if (path === "/api/agent" && request.headers.get("Upgrade")?.toLowerCase() === "websocket") {
+    const apiKey = env.DEEPGRAM_API_KEY;
+    if (!apiKey) return new Response("DEEPGRAM_API_KEY not configured", { status: 500 });
+    const studentId = url.searchParams.get("studentId") || "";
+
+    const agentPair = new WebSocketPair();
+    const [agentClient, agentServer] = Object.values(agentPair);
+    agentServer.accept();
+
+    // Queue browser messages until Deepgram connection is ready (bounded to ~16s of PCM)
+    let dgAgentWs = null;
+    const pendingFromBrowser = [];
+    let pendingBytes = 0;
+    const MAX_PENDING_BYTES = 512_000;
+    let conversationHistory = []; // last N turns sent by client on connect for context continuity
+
+    agentServer.addEventListener("message", (evt) => {
+      // Intercept ConversationHistory — client-only message, not forwarded to Deepgram
+      if (typeof evt.data === "string") {
+        try {
+          const parsed = JSON.parse(evt.data);
+          if (parsed.type === "ConversationHistory" && Array.isArray(parsed.messages)) {
+            conversationHistory = parsed.messages.slice(-6); // keep last 6 turns (3 exchanges)
+            return; // do not forward or queue
+          }
+        } catch (_) {}
+      }
+      if (dgAgentWs && dgAgentWs.readyState === 1) {
+        try { dgAgentWs.send(evt.data); } catch (_) {}
+      } else {
+        const size = typeof evt.data === "string" ? evt.data.length : (evt.data.byteLength || 0);
+        if (pendingBytes + size < MAX_PENDING_BYTES) {
+          pendingFromBrowser.push(evt.data);
+          pendingBytes += size;
+        }
+      }
     });
 
-    // Pipe client → Deepgram (audio)
-    server.addEventListener("message", (event) => {
-      if (dgWs.readyState === WebSocket.OPEN) {
-        dgWs.send(event.data);
-      }
-    });
+    const agentCleanup = () => {
+      try { if (dgAgentWs && dgAgentWs.readyState <= 1) dgAgentWs.close(); } catch (_) {}
+      try { if (agentServer.readyState <= 1) agentServer.close(); } catch (_) {}
+    };
+    agentServer.addEventListener("close", agentCleanup);
+    agentServer.addEventListener("error", agentCleanup);
 
-    // Pipe Deepgram → client (transcripts)
-    dgWs.addEventListener("message", (event) => {
-      if (server.readyState === WebSocket.OPEN) {
-        server.send(event.data);
-      }
-    });
+    // Connect to Deepgram in background — don't block the 101 response
+    ctx.waitUntil((async () => {
+      try {
+        // KV reads + Deepgram connection in parallel
+        const [[rawProfile, rawLang, rawVocab, rawArc], dgAgentRes] = await Promise.all([
+          Promise.all([
+            env.NET_PET_KV.get("student_profile_" + studentId),
+            env.NET_PET_KV.get("lang:" + studentId),
+            env.NET_PET_KV.get("vocab_list_" + studentId),
+            env.NET_PET_KV.get("vocab_arc_" + studentId)
+          ]),
+          fetch("https://agent.deepgram.com/v1/agent/converse", {
+            headers: { "Authorization": `Token ${apiKey}`, "Upgrade": "websocket" }
+          })
+        ]);
 
-    // Handle close/error in both directions
-    server.addEventListener("close", () => {
-      if (dgWs.readyState === WebSocket.OPEN || dgWs.readyState === WebSocket.CONNECTING) {
-        try { dgWs.close(); } catch {}
-      }
-    });
-    dgWs.addEventListener("close", () => {
-      if (server.readyState === WebSocket.OPEN) {
-        try { server.close(); } catch {}
-      }
-    });
-    dgWs.addEventListener("error", () => {
-      if (server.readyState === WebSocket.OPEN) {
-        try { server.close(1011, "Deepgram error"); } catch {}
-      }
-    });
+        let agentProfile = null, agentLang = "en", recentVocab = [], arcData = null;
+        try { if (rawProfile) agentProfile = JSON.parse(rawProfile); } catch (_) {}
+        if (!agentProfile) agentProfile = { level: "A2", goals: "Practice natural spoken English", primaryBlock: "speaking confidence" };
+        if (rawLang) agentLang = rawLang;
+        try {
+          if (rawVocab) {
+            const vocabList = JSON.parse(rawVocab);
+            // Last 5 learned words for context injection
+            recentVocab = vocabList.slice(-5).map(w => w.word);
+          }
+        } catch (_) {}
+        try { if (rawArc) arcData = JSON.parse(rawArc); } catch (_) {}
 
-    return new Response(null, {
-      status: 101,
-      webSocket: client,
-      headers: { "Access-Control-Allow-Origin": "*" }
-    });
+        // Per-level TTS speed + EOT patience (A1 beginner needs slow speech and patient VAD)
+        const _level = (agentProfile?.level || agentProfile?.englishLevel || "").toLowerCase();
+        const ttsSpeed    = /^a1/.test(_level) ? 0.85 : /^a2/.test(_level) ? 0.85 : 1.0;
+        const eotThresh   = /^a1/.test(_level) ? 0.85 : /^a2/.test(_level) ? 0.80 : 0.75;
+
+        dgAgentWs = dgAgentRes.webSocket;
+        if (!dgAgentWs) { agentServer.close(1011, "Deepgram Agent connection failed"); return; }
+        dgAgentWs.accept();
+
+        // Flush any messages the browser already sent
+        for (const msg of pendingFromBrowser) { try { dgAgentWs.send(msg); } catch (_) {} }
+        pendingFromBrowser.length = 0;
+
+        let agentSettingsSent = false;
+        dgAgentWs.addEventListener("message", (evt) => {
+          if (typeof evt.data === "string") {
+            try {
+              const msg = JSON.parse(evt.data);
+
+              if (msg.type === "Welcome" && !agentSettingsSent) {
+                agentSettingsSent = true;
+                const settingsPayload = {
+                  type: "Settings",
+                  mip_opt_out: true,
+                  audio: {
+                    input:  { encoding: "linear16", sample_rate: 16000 },
+                    output: { encoding: "mp3", sample_rate: 24000, container: "none" }
+                  },
+                  agent: {
+                    listen: {
+                      provider: {
+                        type: "deepgram",
+                        model: "nova-3",
+                        smart_format: true,
+                        eot_threshold: eotThresh,
+                        utterance_end_ms: agentLang === "vi" ? 1200 : 800,
+                        keyterms: ["hello","goodbye","please","sorry","thank you","yes","no","okay","think","three","thank","ship","sheep"]
+                      }
+                    },
+                    think: {
+                      provider: { type: "open_ai", model: "gpt-4o-mini" },
+                      prompt: buildAgentPrompt(agentProfile, agentLang, recentVocab, arcData),
+                      // Vocabulary save function — OBI can trigger when student learns a new word
+                      functions: [
+                        {
+                          name: "save_vocabulary_word",
+                          description: "Save an English word the student successfully used or learned in this session.",
+                          parameters: {
+                            type: "object",
+                            properties: {
+                              word:       { type: "string", description: "The English word or phrase" },
+                              meaning_vi: { type: "string", description: "Vietnamese meaning (optional)" }
+                            },
+                            required: ["word"]
+                          }
+                        }
+                      ]
+                    },
+                    speak: {
+                      provider: {
+                        type: "deepgram",
+                        model: "aura-2-orion-en",
+                        speed: ttsSpeed
+                      }
+                    }
+                  }
+                };
+                // Restore conversation history for session continuity
+                if (conversationHistory.length > 0) {
+                  settingsPayload.context = { messages: conversationHistory };
+                }
+                dgAgentWs.send(JSON.stringify(settingsPayload));
+              }
+
+              // Intercept FunctionCall from Deepgram — execute server-side, send response back
+              else if (msg.type === "FunctionCall" || msg.type === "FunctionCallRequest") {
+                const fn = msg.function_name || msg.name;
+                const args = (() => { try { return typeof msg.arguments === "string" ? JSON.parse(msg.arguments) : (msg.arguments || {}); } catch (_) { return {}; } })();
+                const callId = msg.id || msg.call_id || "";
+
+                if (fn === "save_vocabulary_word" && args.word && studentId !== "anonymous") {
+                  // Fire-and-forget: save to NET_PET_KV vocab list
+                  env.NET_PET_KV.get(`vocab_list_${studentId}`).then(raw => {
+                    const list = raw ? JSON.parse(raw) : [];
+                    const entry = { word: args.word, meaning_vi: args.meaning_vi || "", ts: Date.now() };
+                    if (!list.find(w => w.word === args.word)) list.push(entry);
+                    return env.NET_PET_KV.put(`vocab_list_${studentId}`, JSON.stringify(list.slice(-500)));
+                  }).catch(() => {});
+                }
+
+                // Notify browser of vocab save so it can update Tiger Win summary
+                if (fn === "save_vocabulary_word" && args.word) {
+                  try { agentServer.send(JSON.stringify({ type: "VocabSaved", word: args.word })); } catch (_) {}
+                  // Brief vocal acknowledgment — OBI celebrates the win naturally
+                  const vocabWord = args.word;
+                  try {
+                    dgAgentWs.send(JSON.stringify({
+                      type: "InjectAgentMessage",
+                      message: `Nice — "${vocabWord}" just landed in your collection. Try weaving it into your next reply!`
+                    }));
+                  } catch (_) {}
+                }
+
+                // Send FunctionCallResponse so Deepgram LLM can continue
+                try {
+                  dgAgentWs.send(JSON.stringify({
+                    type: "FunctionCallResponse",
+                    id: callId,
+                    result: fn === "save_vocabulary_word" ? `Saved "${args.word}" to vocabulary list.` : "Done."
+                  }));
+                } catch (_) {}
+                return; // don't forward FunctionCall events to browser
+              }
+
+            } catch (_) {}
+          }
+          if (agentServer.readyState === 1) { try { agentServer.send(evt.data); } catch (_) {} }
+        });
+        dgAgentWs.addEventListener("close", agentCleanup);
+        dgAgentWs.addEventListener("error", agentCleanup);
+
+      } catch (err) {
+        console.error("[AGENT-PROXY] background connect failed:", err.message);
+        try { agentServer.close(1011, "Upstream error"); } catch (_) {}
+      }
+    })());
+
+    return new Response(null, { status: 101, webSocket: agentClient });
   }
 
   // STT key endpoint — kept for fallback REST mode
@@ -2397,117 +2611,83 @@ async function handleChat(body, env) {
     return m;
   }).filter(m => m.role === "system" || m.role === "user" || m.role === "assistant");
 
-  // ── Pull Ledger context (Obi's unparalleled student memory) ──────────────
+  // ── Fire ALL context fetches in parallel — one wait, not eight ───────────
+  const isKnown = studentId !== "anonymous";
+  const [ledgerR, sessionR, weaknessR, petR, soulR, kvR] = await Promise.allSettled([
+    isKnown && env.LEDGER
+      ? env.LEDGER.get(env.LEDGER.idFromName(studentId)).fetch(new Request("https://do/history?limit=15")).then(r => r.json())
+      : Promise.resolve(null),
+    isKnown && env.LEDGER
+      ? env.LEDGER.get(env.LEDGER.idFromName(studentId)).fetch(new Request("https://do/history?limit=1&eventType=session_log")).then(r => r.json())
+      : Promise.resolve(null),
+    isKnown && env.PROFILES
+      ? env.PROFILES.get(env.PROFILES.idFromName(studentId)).fetch(new Request("https://do/weakness/get")).then(r => r.json())
+      : Promise.resolve(null),
+    isKnown && env.PETS
+      ? env.PETS.get(env.PETS.idFromName(studentId)).fetch(new Request("https://do/state")).then(r => r.json())
+      : Promise.resolve(null),
+    isKnown
+      ? fetch(`${env.SOUL_LOGGER_URL || 'https://soul-logger.mrmichaelhobbs123.workers.dev'}/api/soul/context/${studentId}`).then(r => r.ok ? r.json() : null).catch(() => null)
+      : Promise.resolve(null),
+    isKnown
+      ? Promise.all([env.NET_PET_KV.get(`lang:${studentId}`), env.NET_PET_KV.get(`student_profile_${studentId}`)])
+      : Promise.resolve([null, null]),
+  ]);
+
+  // ── Extract results ───────────────────────────────────────────────────────
   let ledgerContext = "";
-  if (studentId !== "anonymous" && env.LEDGER) {
-    try {
-      const stub = env.LEDGER.get(env.LEDGER.idFromName(studentId));
-      const histRes = await stub.fetch(new Request("https://do/history?limit=15"));
-      const histData = await histRes.json();
-      if (histData.entries && histData.entries.length > 0) {
-        const lines = histData.entries
-          .filter(e => e.event_type === "chat_exchange")
-          .slice(-10)
-          .map(e => {
-            try {
-              const p = JSON.parse(e.payload);
-              return `Student: ${p.user}\nObi: ${p.obi}`;
-            } catch { return ""; }
-          })
-          .filter(Boolean);
-        if (lines.length > 0) {
-          ledgerContext = `\n\nSTUDENT LEDGER (${histData.entries.length} total exchanges — this is your unalterable memory of this student):\n${lines.join("\n---\n")}`;
-        }
-      }
-    } catch (err) { console.log("[CHAT] ledger fetch failed:", err.message); }
+  const ledgerData = ledgerR.status === "fulfilled" ? ledgerR.value : null;
+  if (ledgerData?.entries?.length > 0) {
+    const lines = ledgerData.entries.filter(e => e.event_type === "chat_exchange").slice(-10)
+      .map(e => { try { const p = JSON.parse(e.payload); return `Student: ${p.user}\nObi: ${p.obi}`; } catch { return ""; } }).filter(Boolean);
+    if (lines.length > 0) ledgerContext = `\n\nSTUDENT LEDGER (${ledgerData.entries.length} total exchanges):\n${lines.join("\n---\n")}`;
   }
 
-  // Inject Obi system prompt with ledger context + last real-class session appended
-  // Pull latest session_log so Obi knows exactly where Michael left off
   let sessionContext = "";
-  if (studentId !== "anonymous" && env.LEDGER) {
-    try {
-      const sessionStub = env.LEDGER.get(env.LEDGER.idFromName(studentId));
-      const sessionRes = await sessionStub.fetch(new Request("https://do/history?limit=1&eventType=session_log"));
-      const sessionData = await sessionRes.json();
-      const lastEntry = (sessionData.entries || []).slice(-1)[0];
-      if (lastEntry) {
-        const s = JSON.parse(lastEntry.payload);
-        const dateStr = new Date(lastEntry.ts).toLocaleDateString("en-US", { month: "short", day: "numeric" });
-        const vocabList = Array.isArray(s.vocabList) ? s.vocabList.join(", ") : (s.vocabList || "");
-        sessionContext = `\n\nLAST REAL CLASS (${dateStr}): Topic: "${s.topic || ""}". Vocab covered: ${vocabList}. Level: ${s.studentLevel || ""}. Teacher notes: "${s.teacherNotes || ""}". Continue from exactly here — your first response should reference this content naturally without announcing it.`;
-      }
-    } catch (err) { console.log("[CHAT] session context fetch failed:", err.message); }
+  const sessionData = sessionR.status === "fulfilled" ? sessionR.value : null;
+  if (sessionData?.entries?.length > 0) {
+    const lastEntry = sessionData.entries.slice(-1)[0];
+    if (lastEntry) {
+      const s = JSON.parse(lastEntry.payload);
+      const dateStr = new Date(lastEntry.ts).toLocaleDateString("en-US", { month: "short", day: "numeric" });
+      const vocabList = Array.isArray(s.vocabList) ? s.vocabList.join(", ") : (s.vocabList || "");
+      sessionContext = `\n\nLAST REAL CLASS (${dateStr}): Topic: "${s.topic || ""}". Vocab: ${vocabList}. Level: ${s.studentLevel || ""}. Notes: "${s.teacherNotes || ""}".`;
+    }
   }
 
-  // ── Memory Brain: Weakness injection + Re-entry detection ─────────────
+  let weakPointsData = [];
   let weaknessContext = "";
+  const weakData = weaknessR.status === "fulfilled" ? weaknessR.value : null;
+  if (weakData) { weakPointsData = weakData.weakPoints || []; weaknessContext = buildWeaknessPrompt(weakPointsData); }
+
   let reEntryContext = "";
   let rewardContext = "";
-  let weakPointsData = [];
-  let structuredCtx = null;
-  if (studentId !== "anonymous" && env.PROFILES) {
-    try {
-      const profileStub = env.PROFILES.get(env.PROFILES.idFromName(studentId));
-      const wpRes = await profileStub.fetch(new Request("https://do/weakness/get"));
-      const wpData = await wpRes.json();
-      weakPointsData = wpData.weakPoints || [];
-      weaknessContext = buildWeaknessPrompt(weakPointsData);
-    } catch (err) { console.log("[CHAT] weakness fetch failed:", err.message); }
-  }
-  if (studentId !== "anonymous" && env.PETS) {
-    try {
-      const petStub = env.PETS.get(env.PETS.idFromName(studentId));
-      const petRes = await petStub.fetch(new Request("https://do/state"));
-      const petData = await petRes.json();
-      const lastCheckin = petData.state?.lastCheckin || 0;
-      const streakDays = petData.state?.streak || 0;
-      if (lastCheckin > 0) {
-        const daysSince = Math.floor((Date.now() - lastCheckin) / 86400000);
-        const topWeak = weakPointsData[0]?.specific || null;
-        reEntryContext = buildReEntryPrompt(daysSince, topWeak);
-      }
-      const signals = buildRewardSignals(weakPointsData, streakDays);
-      rewardContext = buildRewardPrompt(signals);
-    } catch (err) { console.log("[CHAT] pet/reward fetch failed:", err.message); }
+  const petData = petR.status === "fulfilled" ? petR.value : null;
+  if (petData) {
+    const lastCheckin = petData.state?.lastCheckin || 0;
+    const streakDays = petData.state?.streak || 0;
+    if (lastCheckin > 0) reEntryContext = buildReEntryPrompt(Math.floor((Date.now() - lastCheckin) / 86400000), weakPointsData[0]?.specific || null);
+    rewardContext = buildRewardPrompt(buildRewardSignals(weakPointsData, streakDays));
   }
 
-  // ── v2 Pipeline: Load structured context for continuity engine ────────
-  if (studentId !== "anonymous") {
-    try { structuredCtx = await buildStructuredContext(env, studentId); } catch (err) { console.log("[CHAT] structured context failed:", err.message); }
-  }
-  const contextInjection = structuredCtx ? formatContextForPrompt(structuredCtx) : "";
+  let soulContext = "";
+  const soulData = soulR.status === "fulfilled" ? soulR.value : null;
+  if (soulData?.context_brief) soulContext = `\n\nSOUL CONTEXT:\n${soulData.context_brief}`;
 
-  // ── Soul context: fetch student soul brief from soul-logger ─────────────
-  let soulContext = '';
-  if (studentId !== "anonymous") {
-    try {
-      const ctxResp = await fetch(`${env.SOUL_LOGGER_URL || 'https://soul-logger.mrmichaelhobbs123.workers.dev'}/api/soul/context/${studentId}`);
-      if (ctxResp.ok) {
-        const ctxData = await ctxResp.json();
-        if (ctxData.context_brief) soulContext = `\n\nSOUL CONTEXT (who this student really is):\n${ctxData.context_brief}`;
-      }
-    } catch(e) { console.log("[CHAT] soul context fetch failed:", e.message); }
-  }
-
-  // ── Language mode: read student lang preference from KV ──────────
   let vietnameseContext = "";
-  if (studentId !== "anonymous") {
-    try {
-      const lang = await env.NET_PET_KV.get(`lang:${studentId}`);
-      if (lang === "vi") {
-        vietnameseContext = `\n\nVIETNAMESE MODE: This student is A1 beginner and needs bilingual support. Speak English first, then add Vietnamese translation in parentheses for key words and corrections. If the student seems lost or confused, say the full sentence in Vietnamese to help them understand, then repeat it in English. Use Vietnamese naturally — like a bilingual Vietnamese-English teacher would. Always prioritize understanding over English-only purity.`;
-      }
-    } catch (err) { console.log("[CHAT] lang pref fetch failed:", err.message); }
-  }
+  let teachingFocusContext = "";
+  const kvData = kvR.status === "fulfilled" ? kvR.value : [null, null];
+  const [lang, rawProfile] = kvData || [null, null];
+  if (lang === "vi") vietnameseContext = `\n\nVIETNAMESE MODE ACTIVE: After EVERY sentence add Vietnamese translation in parentheses. Example: "Nice work! (Làm tốt lắm!) What topic? (Bạn chọn chủ đề gì?)" Every sentence — no exceptions.`;
+  if (rawProfile) { try { const p = JSON.parse(rawProfile); const focus = p.teachingFocus || p.teaching_focus; if (focus) teachingFocusContext = `\n\nTEACHER INSTRUCTION (follow exactly): ${focus}`; } catch {} }
 
   const isFirstSession = ledgerContext === "" && sessionContext === "";
-  const displayName = studentId !== "anonymous" ? studentId.split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ") : "there";
+  const displayName = isKnown ? studentId.split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ") : "there";
   const firstSessionContext = isFirstSession
-    ? `\n\nFIRST SESSION: This is the student's very first interaction. No history exists yet. The student's name is ${displayName} (derived from their ID: "${studentId}"). Greet them warmly by name, say you are happy they are here, and wait for them to speak first. Do NOT ask an opening question — the student should initiate. Under 2 sentences max. Warm, direct, confident. Do not make up a different name — use exactly "${displayName}".`
+    ? `\n\nFIRST SESSION: Student name is ${displayName}. Greet warmly by name. Wait for them to speak first. Under 2 sentences. Do not ask a question.`
     : "";
 
-  const serverSystemContent = capContextInjection(OBI_SYSTEM, ledgerContext, sessionContext, weaknessContext, reEntryContext, rewardContext, contextInjection, soulContext, vietnameseContext, firstSessionContext);
+  const serverSystemContent = capContextInjection(OBI_SYSTEM, vietnameseContext, teachingFocusContext, firstSessionContext, ledgerContext, sessionContext, weaknessContext, reEntryContext, rewardContext, soulContext);
   const sysIdx = messages.findIndex(m => m.role === "system");
   if (sysIdx >= 0) {
     messages[sysIdx] = { role: "system", content: serverSystemContent };
@@ -2596,20 +2776,13 @@ async function handleChat(body, env) {
     }
   }
 
-  // Update roster last_active so digest knows student practiced today
+  // Fire-and-forget: roster update + memory compression (don't block response)
   if (studentId !== "anonymous" && env.SESSIONS) {
-    const rosterStub = env.SESSIONS.get(env.SESSIONS.idFromName("system-roster"));
-    await rosterStub.fetch(new Request("https://do/roster/chat", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ studentId }),
+    env.SESSIONS.get(env.SESSIONS.idFromName("system-roster")).fetch(new Request("https://do/roster/chat", {
+      method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ studentId }),
     })).catch(() => {});
   }
-
-  // ── Memory Compression: update Soul DNA v1 summary after each interaction ─
-  if (studentId !== "anonymous") {
-    try { await updateStudentMemory(studentId, env); } catch (err) { console.log("[CHAT] memory compression failed:", err.message); }
-  }
+  if (studentId !== "anonymous") { updateStudentMemory(studentId, env).catch(() => {}); }
 
   // ── v2 Pipeline: Extract signals → Write session event → Update state ───
   let driftScore = 0;
@@ -2617,13 +2790,13 @@ async function handleChat(body, env) {
   let learningSignals = null;
   if (studentId !== "anonymous" && userMsg) {
     // 1. Compute drift
-    driftScore = structuredCtx ? computeDriftScore(userMsg, structuredCtx) : 0;
+    driftScore = 0;
 
     // 2. Extract learning signals from the exchange
     learningSignals = extractLearningSignals(userMsg, reply);
 
     // 3. Generate next action
-    nextAction = generateNextAction(structuredCtx?.studentState, learningSignals);
+    nextAction = generateNextAction(null, learningSignals);
 
     // 4. Write structured session event (non-blocking)
     if (env.SESSIONS) {
@@ -2670,8 +2843,8 @@ async function handleChat(body, env) {
     reEntryMode: !!reEntryContext,
     driftScore,
     nextAction,
-    state: structuredCtx?.studentState?.state || null,
-    mouseTigerScore: structuredCtx?.studentState?.mouse_tiger_score || null,
+    state: null,
+    mouseTigerScore: null,
   });
 }
 
@@ -2715,9 +2888,91 @@ async function handleVocabList(studentId, env) {
   if (!studentId) return json({ words: [], total: 0 });
   const idCheck = validateStudentId(studentId);
   if (!idCheck.valid) return json({ error: idCheck.error }, 400);
-  const stub = env.PROFILES.get(env.PROFILES.idFromName(studentId));
-  const res = await stub.fetch(new Request("https://do/vocab/list"));
-  return res;
+  // Read OBI voice agent vocab from KV (saved via function calling)
+  try {
+    const raw = await env.NET_PET_KV.get("vocab_list_" + studentId);
+    if (raw) {
+      const words = JSON.parse(raw);
+      return json({ words: words.slice(-50), total: words.length, source: "obi_voice" });
+    }
+  } catch (_) {}
+  // Fallback to PROFILES DO vocab (SRS-based)
+  try {
+    const stub = env.PROFILES.get(env.PROFILES.idFromName(studentId));
+    const res = await stub.fetch(new Request("https://do/vocab/list"));
+    return res;
+  } catch (_) {}
+  return json({ words: [], total: 0 });
+}
+
+// ── Voice Agent system prompt builder ────────────────────────────────────────
+// Used by /api/agent WS proxy — builds OBI persona + student-specific instructions
+// from KV profile. Server-side equivalent of chat.js buildSystemPrompt().
+
+function buildAgentPrompt(profile, lang, recentVocab = [], arc = null) {
+  const _name  = profile?.fullName || profile?.name;
+  const _level = profile?.englishLevel || profile?.level;
+  const lvl = (_level || "").toLowerCase();
+
+  const ctx = [
+    _name  ? `Student: ${_name}.`  : "",
+    _level ? `Level: ${_level}.`   : "",
+    profile?.goals ? `Goal: ${profile.goals}.` : "",
+    profile?.primaryBlock ? `Current struggle: ${profile.primaryBlock}.` : "",
+    profile?.breakthrough ? `Recent breakthrough: ${profile.breakthrough}.` : ""
+  ].filter(Boolean).join(" ");
+
+  const isBeginner = /a1|a2|beginner|elementary|mới|cơ/.test(lvl);
+  const isAdvanced = /b2|c1|advanced|upper/.test(lvl);
+  const levelInstr = isBeginner
+    ? "BEGINNER: Use very simple words and short sentences. Celebrate every sentence they produce — even broken ones. Rephrase mistakes naturally, never directly correct. Build confidence first, accuracy comes later."
+    : isAdvanced
+    ? "ADVANCED: Challenge them. Ask complex follow-ups. Push for nuance. They can handle subtle corrections."
+    : "INTERMEDIATE: Build confidence while pushing limits. Mix encouragement with challenge. Rephrase mistakes naturally.";
+
+  const teachingInstr = profile?.teachingFocus
+    ? `TEACHER INSTRUCTION (follow exactly): ${profile.teachingFocus}`
+    : "";
+
+  const sessionCtx = profile?.sessionNotes
+    ? `LAST SESSION NOTES: ${profile.sessionNotes}`
+    : "";
+
+  const vocabCtx = recentVocab.length > 0
+    ? `RECENTLY LEARNED (weave naturally, don't quiz): ${recentVocab.join(", ")}`
+    : "";
+
+  const arcCtx = arc
+    ? `ACTIVE ARC — Unit: ${arc.unit} | Topic: ${arc.topic} | Drill these words naturally: ${(arc.targets || []).join(", ")}${arc.pronunciation ? ` | Pronunciation focus: ${arc.pronunciation}` : ""}`
+    : "";
+
+  const funcInstr = "FUNCTION: When the student successfully uses a new English word in a sentence — not just repeats it but actually USES it — call save_vocabulary_word with that word. Do this silently, mid-conversation. Max 2 saves per session.";
+
+  const viMode = lang === "vi"
+    ? `BILINGUAL MODE ACTIVE: After each sentence you produce, add Vietnamese translation in parentheses immediately. Example: 'Nice work! (Làm tốt lắm!) What did you listen to today? (Hôm nay bạn nghe gì?)' Every sentence — no exceptions.\nVIETNAMESE HONORIFICS: Address ${isBeginner ? "A1/A2" : "B1+"} learner as "${isBeginner ? "em" : "bạn"}". OBI self-refers as "${isBeginner ? "cô" : "cô/anh"}". Never use flat pronouns "tôi/mày/mình" for OBI. Maintain formal-friendly teaching tone in all Vietnamese sections.`
+    : "";
+
+  const faceSaving = [
+    "FACE-SAVING (Vietnamese culture — non-negotiable):",
+    "- NEVER say 'Wrong', 'No', 'Incorrect'. These cause shame and silence.",
+    "- RECAST: echo correct form naturally in your reply. Student: 'I go store yesterday' → OBI: 'Oh you WENT to the store! What did you buy?'",
+    "- Celebrate volume and attempt. Max 1 correction per 5 turns.",
+    "- 3s+ silence: 'Take your time. Try saying: [simple phrase]'"
+  ].join("\n");
+
+  return [
+    `You are OBI — Michael Hobbs in AI form. High-energy, anti-shame, tough love. Volume and velocity beat grammar. Mouse Voice → Tiger Voice. Coach, not textbook.${_name ? ` Student: ${_name}.` : ""}`,
+    "1-3 sentences MAX. React to what they said. One sharp follow-up question. Never lecture.",
+    ctx,
+    levelInstr,
+    faceSaving,
+    sessionCtx,
+    vocabCtx,
+    arcCtx,
+    funcInstr,
+    teachingInstr,
+    viMode
+  ].filter(Boolean).join("\n");
 }
 
 // ── TTS (Deepgram Aura) ───────────────────────────────────────────────────────

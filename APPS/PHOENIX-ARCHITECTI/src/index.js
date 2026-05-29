@@ -1,7 +1,7 @@
-// Phoenix-Architecti — Universal Code Drone v0.0.2
-// T1=Qwen 3.7 Max (Dialagram), T2=Claude Opus 4.7 | Fallback cascade: Cerebras→Groq→CF-Qwen
-// v0.0.2: SSE fix for Dialagram (always streams even when stream:false requested)
-//         + /v1/chat/completions OpenAI-compat proxy so Kilo routes through PA cascade
+// Phoenix-Architecti — Universal Code Drone v0.0.3
+// T1=Dialagram STRICT (no fallback) | T10=Fallback cascade (Cerebras→Groq→CF-Qwen)
+// T2=DeepSeek Flash | T3=DeepSeek Pro | T4=Opus 4.7
+// v0.0.3: Split T1 strict (Dialagram-only) vs T10 fallback cascade. No silent degradation.
 
 function stripFences(text) {
   if (!text) return text;
@@ -111,29 +111,19 @@ function withTimeout(promise, ms) {
 }
 
 // ── Tier routing ──────────────────────────────────────────────────────────────
-// T1: Qwen Max (Dialagram, 12s) → Cerebras gpt-oss-120b (15s) → Groq → CF-Qwen
-// T2: DeepSeek Flash (deepseek-chat)
-// T3: DeepSeek Pro  (deepseek-reasoner)
-// T4: Claude Opus 4.7 — final rulings only
-async function callTier(env, tier, messages) {
-  if (tier >= 4 && env.ANTHROPIC_API_KEY) return callAnthropic(env, messages);
-  if (tier >= 3 && env.DEEPSEEK_API_KEY)  return callOpenAI('https://api.deepseek.com/v1/chat/completions', env.DEEPSEEK_API_KEY, 'deepseek-reasoner', messages);
-  if (tier >= 2 && env.DEEPSEEK_API_KEY)  return callOpenAI('https://api.deepseek.com/v1/chat/completions', env.DEEPSEEK_API_KEY, 'deepseek-chat', messages);
+// T1:  Dialagram ONLY — strict, 12s timeout, fails loudly if Dialagram is down
+// T10: Fallback cascade — Cerebras→Groq→CF-Qwen (no Dialagram)
+// T2:  DeepSeek Flash (deepseek-chat)
+// T3:  DeepSeek Pro   (deepseek-reasoner)
+// T4:  Claude Opus 4.7 — final rulings only
 
-  // T1 cascade
+// T10: explicit fallback cascade — no Dialagram, no silent degradation from T1
+async function callT1Fallback(env, messages) {
   const tried = [];
   let result = null;
-
-  if (env.DIALAGRAM_API_KEY) {
-    tried.push('Dialagram-Qwen');
-    result = await withTimeout(
-      callOpenAI('https://dialagram.me/router/v1/chat/completions', env.DIALAGRAM_API_KEY, 'qwen-3.7-max', messages),
-      12000
-    ).catch(() => null);
-  }
-  if (result === null && env.CEREBRAS_API_KEY) {
+  if (env.CEREBRAS_API_KEY) {
     tried.push('Cerebras');
-    // reasoning model — reasoning_effort:low required or all tokens go to chain-of-thought with no output
+    // reasoning_effort:low required — without it all tokens go to chain-of-thought with no output content
     result = await withTimeout(
       callOpenAI('https://api.cerebras.ai/v1/chat/completions', env.CEREBRAS_API_KEY, 'gpt-oss-120b', messages, {}, { reasoning_effort: 'low' }),
       15000
@@ -148,7 +138,23 @@ async function callTier(env, tier, messages) {
     const aiResult = await env.AI.run('@cf/qwen/qwen2.5-coder-32b-instruct', { messages, max_tokens: 8192 });
     result = aiResult.response ?? null;
   }
-  if (!result) throw new Error('T1 cascade failed (' + tried.join('→') + ')');
+  if (!result) throw new Error('T10 fallback cascade failed (' + tried.join('→') + ')');
+  return result;
+}
+
+async function callTier(env, tier, messages) {
+  if (tier === 4 && env.ANTHROPIC_API_KEY) return callAnthropic(env, messages);
+  if (tier === 3 && env.DEEPSEEK_API_KEY)  return callOpenAI('https://api.deepseek.com/v1/chat/completions', env.DEEPSEEK_API_KEY, 'deepseek-reasoner', messages);
+  if (tier === 2 && env.DEEPSEEK_API_KEY)  return callOpenAI('https://api.deepseek.com/v1/chat/completions', env.DEEPSEEK_API_KEY, 'deepseek-chat', messages);
+  if (tier === 10) return callT1Fallback(env, messages);
+
+  // T1: Dialagram STRICT — no silent fallback. If it fails, it fails loudly.
+  if (!env.DIALAGRAM_API_KEY) throw new Error('T1 Dialagram: DIALAGRAM_API_KEY not set — use tier:10 for fallback cascade');
+  const result = await withTimeout(
+    callOpenAI('https://dialagram.me/router/v1/chat/completions', env.DIALAGRAM_API_KEY, 'qwen-3.7-max', messages),
+    30000
+  ).catch(err => { throw new Error('T1 Dialagram failed (' + err.message + ') — retry with tier:10 for fallback cascade'); });
+  if (!result) throw new Error('T1 Dialagram returned empty — retry with tier:10 for fallback cascade');
   return result;
 }
 
@@ -354,10 +360,11 @@ async function handleStatus(env) {
   return Response.json({
     drone: 'phoenix-architecti', version: '0.0.2', status: 'LIVE',
     tiers: {
-      t1: (env.DIALAGRAM_API_KEY ? 'Dialagram-QwenMax ✓' : 'Dialagram NO KEY') + '→' + (env.CEREBRAS_API_KEY ? 'Cerebras-120B ✓' : 'Cerebras NO KEY') + '→' + (env.GROQ_API_KEY ? 'Groq ✓' : 'Groq NO KEY') + '→CF-Qwen',
-      t2: env.DEEPSEEK_API_KEY ? 'DeepSeek Flash (deepseek-chat) ✓' : 'DeepSeek NO KEY',
-      t3: env.DEEPSEEK_API_KEY ? 'DeepSeek Pro (deepseek-reasoner) ✓' : 'DeepSeek NO KEY',
-      t4: env.ANTHROPIC_API_KEY ? 'Claude Opus 4.7 ✓' : 'Anthropic NO KEY'
+      t1:  (env.DIALAGRAM_API_KEY ? 'Dialagram-QwenMax ✓ (STRICT — no fallback)' : 'Dialagram NO KEY'),
+      t10: 'Fallback cascade: ' + (env.CEREBRAS_API_KEY ? 'Cerebras-120B ✓' : 'Cerebras NO KEY') + '→' + (env.GROQ_API_KEY ? 'Groq ✓' : 'Groq NO KEY') + '→CF-Qwen',
+      t2:  env.DEEPSEEK_API_KEY ? 'DeepSeek Flash (deepseek-chat) ✓' : 'DeepSeek NO KEY',
+      t3:  env.DEEPSEEK_API_KEY ? 'DeepSeek Pro (deepseek-reasoner) ✓' : 'DeepSeek NO KEY',
+      t4:  env.ANTHROPIC_API_KEY ? 'Claude Opus 4.7 ✓' : 'Anthropic NO KEY'
     },
     endpoints: { proxy: '/v1/chat/completions (OpenAI-compat, Kilo-ready)', code: '/api/code', mission: '/api/mission', crunch: '/api/crunch' },
     gateway: env.AIGATEWAYURL ? 'CF AI Gateway ✓' : 'direct API',

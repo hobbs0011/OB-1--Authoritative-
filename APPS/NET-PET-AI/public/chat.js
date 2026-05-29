@@ -2,6 +2,8 @@
 // OBI = Michael Hobbs in AI form: high-energy, anti-shame, tough love.
 // Mouse Voice → Tiger Voice. Volume + Velocity > Grammar.
 // "The stateless chat is the constraint. The Magic Chat shall have no constraints."
+if (window.__OBI_CHAT_LOADED__) throw new Error("chat.js double-load prevented");
+window.__OBI_CHAT_LOADED__ = true;
 
 const DEFAULTS = {
   birthplace:      "Ho Chi Minh City",
@@ -22,9 +24,10 @@ function handleCrisis() {
   obi("Hey \u2014 stop. I heard that.\n\nThat matters more than anything else right now. If something real is going on, please reach out to someone you trust or a local support line.\n\n\uD83C\uDDFB\uD83C\uDDF3 Vietnam: 1800 599 920 (free, 24/7)\n\uD83C\uDDE8\uD83C\uDDE6 Canada/US: 988 (Suicide & Crisis Lifeline)\n\uD83D\uDCAC Or talk to a teacher, friend, or family member.\n\nI'm here when you're ready. No judgment.");
 }
 
-let state   = "boot";
-let profile = {};
+let state        = "boot";
+let profile      = {};
 let studentToken = "";        // HMAC token issued at onboarding, used to authenticate memory calls
+let urlStudentId = null;      // populated in boot(), used by openVoiceAgent()
 let chatHistory = [];         // messages for LLM context
 let chatRound = 0;            // current exchange count
 const CHAT_ROUNDS = 30;       // natural conversation — pronunciation coaching flows through OBI, not a forced dump
@@ -36,9 +39,15 @@ const feed      = document.getElementById("feed");
 const form      = document.getElementById("form");
 const input     = document.getElementById("msg");
 const micBtn    = document.getElementById("mic");
+const micStatus = document.getElementById("micStatus");
 const sendBtn   = document.getElementById("sendBtn");
 const dot       = document.getElementById("dot");
 const speakBtn  = document.getElementById("speakToggle");
+function setMicStatus(text, active) {
+  if (!micStatus) return;
+  micStatus.textContent = text;
+  micStatus.classList.toggle("active", !!active);
+}
 
 // ── TTS — Deepgram Aura (natural voice) with browser fallback ──
 
@@ -292,8 +301,9 @@ function isVague(text) {
   if (!t || t.length < 3) return true;
   // Explicit confusion / non-answers
   if (/^(i don'?t know|i dont know|idk|kh\u00F4ng bi\u1EBFt|no|nothing|none|skip|kh\u00F4ng|ch\u01B0a bi\u1EBFt|no idea|\?+|dunno|um+|uh+|huh|hmm+|eh|ok|okay|sure|yes|no|yep|nope|lol|haha|bye)$/i.test(t)) return true;
-  // Confusion phrases
-  if (/i (don'?t|dont) (understand|know|get it|have|want)|not sure|what\?|huh\?|idc|whatever|anything|something|everything/.test(t)) return true;
+  // Confusion phrases (exact non-answer phrases only — don't match "anything" inside longer sentences)
+  if (/i (don'?t|dont) (understand|know|get it|have|want)|not sure|what\?|huh\?|idc/.test(t)) return true;
+  if (/^(whatever|anything|something|everything)\.?\s*$/.test(t)) return true;
   return false;
 }
 
@@ -393,6 +403,14 @@ function buildSystemPrompt(p) {
     ? "ADVANCED: Challenge them. Ask complex follow-ups. Push for more nuance and detail. Don't accept vague answers \u2014 probe deeper. You can point out subtle mistakes because they can handle it."
     : "INTERMEDIATE: Build confidence while pushing their limits. Mix encouragement with challenge. Rephrase their mistakes naturally in your response without calling them out.";
 
+  const teachingInstr = p?.teachingFocus
+    ? `\nTEACHER INSTRUCTION (follow exactly): ${p.teachingFocus}`
+    : "";
+
+  const viMode = p?.lang === "vi"
+    ? "\nBILINGUAL MODE ACTIVE: Student is Vietnamese. After each sentence you write, add the Vietnamese translation in parentheses. Example: 'Nice work! (Làm tốt lắm!) What topic did you choose? (Bạn chọn chủ đề gì?)' Keep it natural — translate every sentence you produce."
+    : "";
+
   const phonicsHint = p?._phonicsHints?.length
     ? `\nVOICE SIGNAL — Deepgram flagged these words as low-confidence (likely mispronounced): ${p._phonicsHints.join(", ")}. Work these sounds into your reply naturally — don't announce it, just model the correct form.`
     : "";
@@ -409,6 +427,8 @@ function buildSystemPrompt(p) {
   return `You are OBI \u2014 Michael Hobbs in AI form. High-energy, anti-shame, tough love. Volume and velocity beat grammar. Mouse Voice \u2192 Tiger Voice. You are not a textbook. You are a coach.
 ${ctx ? `\nContext: ${ctx}` : ""}
 ${levelInstructions}
+${teachingInstr}
+${viMode}
 ${continuity}
 ${phonicsHint}
 ${vocabCtx}
@@ -426,29 +446,34 @@ let chatMessages = []; // conversation history for DeepSeek
 
 async function reactLLM(text) {
   chatMessages.push({ role: "user", content: text });
+  if (chatMessages.length > 8) chatMessages = chatMessages.slice(-8);
 
-  // Keep last 8 messages — server injects ledger history separately
-  if (chatMessages.length > 8) {
-    chatMessages = chatMessages.slice(-8);
+  // Fast path: route through open Deepgram Voice Agent WS (no external LLM call)
+  if (agentWs && agentReady && agentWs.readyState === WebSocket.OPEN) {
+    try {
+      await new Promise((resolve, reject) => {
+        agentTextResolve = resolve;
+        agentWs.send(JSON.stringify({ type: "InjectUserMessage", content: text }));
+        // 6s timeout → fall through to REST
+        setTimeout(() => { if (agentTextResolve) { agentTextResolve = null; reject(new Error("agent timeout")); } }, 6000);
+      });
+      // handleAgentMsg saves memory and displays bubble — return "" so obi("") is a no-op
+      return "";
+    } catch { /* timeout or WS error — fall through to REST */ }
   }
 
-  const messages = [
-    { role: "system", content: buildSystemPrompt(profile) },
-    ...chatMessages
-  ];
-
+  // Fallback: REST call to /api/chat
+  const messages = [{ role: "system", content: buildSystemPrompt(profile) }, ...chatMessages];
   try {
     const res = await api("/api/chat", "POST", { messages, studentId: profile.studentId || "anonymous" });
     const reply = res.reply || "Say that again? I didn't catch it.";
     chatMessages.push({ role: "assistant", content: reply });
-    // Persist exchange to server ledger so Obi remembers this student next session
     if (profile.studentId) {
       api("/api/memory", "POST", { studentId: profile.studentId, exchange: { user: text, obi: reply } }, memHeaders()).catch(() => {});
     }
     return reply;
   } catch (err) {
-    // Fallback to basic response if API fails
-    chatMessages.pop(); // remove the user message we just added
+    chatMessages.pop();
     return reactFallback(text, chatRound);
   }
 }
@@ -705,30 +730,340 @@ async function handle(text) {
   }
 }
 
-// ── Voice input (Deepgram Nova-3 REST) — CLIENT-SIDE VAD AUTO-STOP ──────────────
-let mediaRecorder   = null;
-let audioChunks     = [];
-let listening       = false;
-let silenceTimer    = null;
-let vadInterval     = null;
-let micStream       = null;
-let vadCtx          = null;
-let vadAnalyser     = null;
-let vadSource       = null;
-const SILENCE_THRESHOLD = 6;      // RMS below this = silence (lower = more sensitive)
-const SILENCE_DURATION  = 500;    // ms of silence before auto-stop (fast turn-taking)
-const MAX_RECORD_MS     = 30000;  // hard cap
-const VAD_POLL_MS       = 50;     // check volume every 50ms (was 100ms)
+// ── Voice Agent (Deepgram real-time pipeline) ────────────────────────────────
+// browser PCM16 → /api/agent WS proxy → Deepgram Voice Agent (STT+LLM+TTS)
+let agentWs           = null;  // WebSocket to /api/agent
+let agentWsId         = 0;     // incremented each openVoiceAgent() — zombie handler guard
+let agentReady        = false; // true after SettingsApplied received
+let agentAudioWatchdog = null; // interval: resets stuck busy state on AudioFocus loss
+let agentAudioCtx     = null;  // AudioContext for PCM16 capture
+let agentWorklet      = null;  // AudioWorkletNode (pcm-worklet.js)
+let agentMicStream    = null;  // MediaStream from getUserMedia
+const agentAudioQ     = [];    // Queued binary MP3 chunks from Deepgram TTS
+let agentPlaying      = false;
+let agentCurrentAudio = null;  // currently playing Audio element (for barge-in stop)
+let agentThinkBubble  = null;  // typing indicator shown during AgentThinking
+let agentTextResolve  = null;  // resolver for typed-text → InjectUserMessage flow
+let agentKeepAlive    = null;  // interval handle for KeepAlive messages
+let agentSilenceTimer = null;  // fires if student is silent >4s after OBI speaks
+let agentSessionStart = null;  // timestamp when SettingsApplied fires
+let agentSessionTurns = 0;     // student voice turns this session
+let agentSessionVocab = [];    // vocab words saved via function calling this session
+let userHasInteracted = false; // set on first gesture
+let pendingMicStream  = null;  // mic stream grabbed during gesture, before agent ready
+let micAcquiring      = false; // mutex: prevents double getUserMedia on rapid taps
 
-/** Compute RMS volume from analyser */
-function getRMS() {
-  if (!vadAnalyser) return 0;
-  const buf = new Float32Array(vadAnalyser.fftSize);
-  vadAnalyser.getFloatTimeDomainData(buf);
-  let sum = 0;
-  for (let i = 0; i < buf.length; i++) sum += buf[i] * buf[i];
-  return Math.sqrt(sum / buf.length) * 100; // scale to 0-100 range
+async function openVoiceAgent() {
+  if (!urlStudentId || agentWs) return;
+  const myId = ++agentWsId; // zombie guard — only this socket's handlers are valid
+  try {
+    const proto = location.protocol === "https:" ? "wss:" : "ws:";
+    const ws = new WebSocket(`${proto}//${location.host}/api/agent?studentId=${encodeURIComponent(urlStudentId)}`);
+    ws.binaryType = "arraybuffer";
+    ws.onopen = () => {
+      if (agentWsId !== myId) { ws.close(); return; }
+      agentWs = ws;
+      const history = chatMessages.filter(m => m.role === "user" || m.role === "assistant").slice(-6);
+      if (history.length > 0) {
+        ws.send(JSON.stringify({ type: "ConversationHistory", messages: history }));
+      }
+    };
+    ws.onmessage = (event) => { if (agentWsId === myId) handleAgentMsg(event); };
+    const onAgentDrop = () => {
+      if (agentWsId !== myId) return;
+      agentWs = null; agentReady = false;
+      if (agentKeepAlive) { clearInterval(agentKeepAlive); agentKeepAlive = null; }
+      if (agentAudioWatchdog) { clearInterval(agentAudioWatchdog); agentAudioWatchdog = null; }
+      if (agentSilenceTimer) { clearTimeout(agentSilenceTimer); agentSilenceTimer = null; }
+      if (agentCurrentAudio) { try { agentCurrentAudio.pause(); } catch {} agentCurrentAudio = null; }
+      agentAudioQ.length = 0; agentPlaying = false;
+      if (agentThinkBubble) { agentThinkBubble.remove(); agentThinkBubble = null; }
+      if (agentWorklet) { try { agentWorklet.disconnect(); } catch {} agentWorklet = null; }
+      if (agentAudioCtx) { agentAudioCtx.close().catch(() => {}); agentAudioCtx = null; }
+      if (agentMicStream) { agentMicStream.getTracks().forEach(t => t.stop()); agentMicStream = null; }
+      listening = false;
+      micBtn.classList.remove("mic-active");
+      setMicStatus("Reconnecting…", false);
+      setTimeout(() => {
+        if (!agentWs && urlStudentId) {
+          openVoiceAgent();
+          if (userHasInteracted) {
+            navigator.mediaDevices.getUserMedia({ audio: { channelCount: 1, echoCancellation: true, noiseSuppression: true, autoGainControl: true } })
+              .then(s => { pendingMicStream = s; })
+              .catch(() => {});
+          }
+        }
+      }, 2000);
+    };
+    ws.onerror = onAgentDrop;
+    ws.onclose = onAgentDrop;
+  } catch { agentWs = null; }
 }
+
+function handleAgentMsg(event) {
+  if (typeof event.data === "string") {
+    try {
+      const msg = JSON.parse(event.data);
+
+      if (msg.type === "SettingsApplied") {
+        agentReady = true;
+        agentSessionStart = Date.now();
+        agentSessionTurns = 0;
+        agentSessionVocab = [];
+        if (agentKeepAlive) clearInterval(agentKeepAlive);
+        agentKeepAlive = setInterval(() => {
+          if (agentWs && agentWs.readyState === WebSocket.OPEN) {
+            agentWs.send(JSON.stringify({ type: "KeepAlive" }));
+          }
+        }, 3500);
+        // AudioFocus watchdog — resets stuck busy state when AudioContext is suspended (Android)
+        if (agentAudioWatchdog) clearInterval(agentAudioWatchdog);
+        agentAudioWatchdog = setInterval(() => {
+          if (agentAudioCtx && agentAudioCtx.state === "suspended") agentAudioCtx.resume().catch(() => {});
+          if (agentPlaying && !agentCurrentAudio && agentAudioQ.length === 0) {
+            agentPlaying = false; if (state === "busy") state = "chat";
+          }
+          if (agentPlaying && agentCurrentAudio && agentCurrentAudio.paused) {
+            agentCurrentAudio.play().catch(() => {});
+          }
+        }, 3000);
+        // Proactive greeting — OBI speaks first via Deepgram TTS (market-ready opener)
+        const _greetName = (profile.fullName || profile.name || "").split(/\s+/)[0] || "";
+        const _viGreet = profile.lang === "vi" ? "Chào " : "";
+        let _openingMsg;
+        if (profile._sessionHint) {
+          _openingMsg = `${_viGreet}${_greetName || "there"}! I see you watched "${profile._sessionHint}" — that's your 45 minutes! What was the most interesting part?`;
+        } else if (chatMessages.length > 0) {
+          _openingMsg = `${_viGreet}${_greetName || "there"}! Good to see you again. Ready to practice — want to continue from last time, or try something new today?`;
+        } else {
+          _openingMsg = `${_viGreet}${_greetName || "there"}! I'm OBI, your English coach. No pressure — just speak naturally, I'll guide you. What do you want to talk about today?`;
+        }
+        setTimeout(() => { agentWs.send(JSON.stringify({ type: "InjectAgentMessage", message: _openingMsg })); }, 400);
+        // Start mic if stream already acquired
+        if (!agentMicStream) {
+          if (pendingMicStream) {
+            startAgentListening(pendingMicStream);
+            pendingMicStream = null;
+          } else if (userHasInteracted) {
+            startAgentListening().catch(() => {});
+          }
+        }
+
+      } else if (msg.type === "UserStartedSpeaking") {
+        // Student spoke — cancel silence timer and barge-in stop
+        if (agentSilenceTimer) { clearTimeout(agentSilenceTimer); agentSilenceTimer = null; }
+        agentAudioQ.length = 0;
+        if (agentCurrentAudio) { try { agentCurrentAudio.pause(); } catch {} agentCurrentAudio = null; }
+        agentPlaying = false;
+        if (agentThinkBubble) { agentThinkBubble.remove(); agentThinkBubble = null; }
+        if (state === "busy") state = "chat";
+
+      } else if (msg.type === "AgentStartedSpeaking") {
+        // Agent TTS started — total_latency field shows end-to-end latency
+        if (agentThinkBubble) { agentThinkBubble.remove(); agentThinkBubble = null; }
+        if (state !== "busy") state = "busy";
+
+      } else if (msg.type === "AgentThinking") {
+        if (!agentThinkBubble) agentThinkBubble = typingIndicator();
+
+      } else if (msg.type === "ConversationText" && msg.role === "assistant" && msg.content) {
+        if (agentThinkBubble) { agentThinkBubble.remove(); agentThinkBubble = null; }
+        bubble("obi", msg.content);
+        // Cap chatMessages at 40 to prevent memory creep
+        chatMessages.push({ role: "assistant", content: msg.content });
+        if (chatMessages.length > 40) chatMessages = chatMessages.slice(-40);
+        if (profile.studentId) {
+          api("/api/memory", "POST", { studentId: profile.studentId, exchange: { obi: msg.content } }, memHeaders()).catch(() => {});
+        }
+        // Use source field to distinguish injected vs voice — fixes race condition
+        const isInjected = msg.source === "inject" || msg.source === "injected";
+        if (agentTextResolve && isInjected) {
+          const resolve = agentTextResolve;
+          agentTextResolve = null;
+          resolve(""); // obi("") is no-op; Deepgram TTS handles audio
+        } else if (agentTextResolve && !isInjected) {
+          // Voice response arrived while waiting for inject — don't consume the resolver
+        }
+
+      } else if (msg.type === "ConversationText" && msg.role === "user" && msg.content) {
+        bubble("student", msg.content);
+        chatMessages.push({ role: "user", content: msg.content });
+        if (chatMessages.length > 40) chatMessages = chatMessages.slice(-40);
+        agentSessionTurns++;
+
+      } else if (msg.type === "AgentAudioDone") {
+        agentPlaying = false;
+        agentCurrentAudio = null;
+        if (state === "busy") state = "chat";
+        // Silence detection — if student doesn't speak within 4s, inject gentle prompt
+        if (agentSilenceTimer) clearTimeout(agentSilenceTimer);
+        agentSilenceTimer = setTimeout(() => {
+          agentSilenceTimer = null;
+          if (agentWs && agentWs.readyState === WebSocket.OPEN && agentReady && !agentPlaying) {
+            const _name = (profile.fullName || "").split(/\s+/)[0] || "";
+            const _viEncourage = profile.lang === "vi" ? " (Đừng lo, cứ nói thoải mái!)" : "";
+            agentWs.send(JSON.stringify({ type: "InjectAgentMessage", message: `Take your time${_name ? ", " + _name : ""}! Try saying one sentence — anything you like.${_viEncourage}` }));
+          }
+        }, 2500);
+
+      } else if (msg.type === "VocabSaved" && msg.word) {
+        if (!agentSessionVocab.includes(msg.word)) agentSessionVocab.push(msg.word);
+
+      } else if (msg.type === "Goodbye") {
+        setMicStatus("Session ended", false);
+        if (agentKeepAlive) { clearInterval(agentKeepAlive); agentKeepAlive = null; }
+        showTigerWin();
+
+      } else if (msg.type === "Error") {
+        console.error("[AGENT ERROR]", msg.code, msg.description);
+        setMicStatus("Error — reconnecting", false);
+
+      } else if (msg.type === "Warning") {
+        console.warn("[AGENT WARNING]", msg.code, msg.description);
+      }
+
+    } catch {}
+    return;
+  }
+  // Binary: MP3 audio chunk from Deepgram TTS
+  agentAudioQ.push(event.data);
+  if (!agentPlaying) playAgentChunk();
+}
+
+async function playAgentChunk() {
+  if (!agentAudioQ.length) { agentPlaying = false; agentCurrentAudio = null; return; }
+  agentPlaying = true;
+  if (state !== "busy") state = "busy";
+  const chunk = agentAudioQ.shift();
+  if (agentAudioQ.length > 1) await new Promise(r => setTimeout(r, 50)); // gate rapid chunks on budget decoders
+  const blobUrl = URL.createObjectURL(new Blob([chunk], { type: "audio/mpeg" }));
+  const a = new Audio(blobUrl);
+  agentCurrentAudio = a;
+  a.onended = () => { URL.revokeObjectURL(blobUrl); if (agentCurrentAudio === a) agentCurrentAudio = null; playAgentChunk(); };
+  a.onerror = () => { URL.revokeObjectURL(blobUrl); if (agentCurrentAudio === a) agentCurrentAudio = null; playAgentChunk(); };
+  try { await a.play(); } catch { URL.revokeObjectURL(blobUrl); if (agentCurrentAudio === a) agentCurrentAudio = null; playAgentChunk(); }
+}
+
+async function startAgentListening(preAcquiredStream) {
+  if (micAcquiring || agentMicStream || agentAudioCtx) return;
+  micAcquiring = true;
+  try {
+    const stream = preAcquiredStream || await navigator.mediaDevices.getUserMedia({
+      audio: { channelCount: 1, echoCancellation: true, noiseSuppression: true, autoGainControl: true }
+    });
+    agentMicStream = stream;
+
+    const stopOnLeave = () => { if (agentMicStream) agentMicStream.getTracks().forEach(t => t.stop()); };
+    window.addEventListener("beforeunload", stopOnLeave, { once: true });
+    window.addEventListener("pagehide", stopOnLeave, { once: true });
+
+    try {
+      agentAudioCtx = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: 16000 });
+    } catch {
+      agentAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+
+    const src = agentAudioCtx.createMediaStreamSource(stream);
+
+    if (window.AudioWorkletNode && typeof agentAudioCtx.audioWorklet?.addModule === "function") {
+      await agentAudioCtx.audioWorklet.addModule("/pcm-worklet.js");
+      agentWorklet = new AudioWorkletNode(agentAudioCtx, "pcm-processor");
+      agentWorklet.port.onmessage = (e) => {
+        if (e.data.type === "pcm" && agentWs && agentWs.readyState === WebSocket.OPEN) {
+          agentWs.send(e.data.buffer);
+        }
+      };
+      src.connect(agentWorklet);
+    } else {
+      const webViewPattern = /Zalo|FBAN|FBIAB|FB_IAB|Instagram|Line\/|WebView/i;
+      if (webViewPattern.test(navigator.userAgent)) {
+        const banner = document.createElement("div");
+        banner.textContent = "For best experience, open in Chrome";
+        banner.style.cssText = "position:fixed;top:0;left:0;right:0;background:#ff9800;color:#fff;padding:12px;text-align:center;z-index:99999;font-size:14px;cursor:pointer;";
+        banner.addEventListener("click", () => banner.remove(), { once: true });
+        document.body.appendChild(banner);
+      }
+      const scriptProcessor = agentAudioCtx.createScriptProcessor(4096, 1, 1);
+      scriptProcessor.onaudioprocess = (ev) => {
+        if (!agentWs || agentWs.readyState !== WebSocket.OPEN) return;
+        const float32 = ev.inputBuffer.getChannelData(0);
+        const int16 = new Int16Array(float32.length);
+        for (let i = 0; i < float32.length; i++) {
+          const s = Math.max(-1, Math.min(1, float32[i]));
+          int16[i] = s < 0 ? s * 0x8000 : s * 0x7FFF;
+        }
+        agentWs.send(int16.buffer);
+      };
+      src.connect(scriptProcessor);
+      scriptProcessor.connect(agentAudioCtx.destination);
+      agentWorklet = scriptProcessor;
+    }
+
+    listening = true;
+    micBtn.classList.add("mic-active");
+    setMicStatus("Listening…", true);
+
+    const resumeCtx = async () => {
+      if (agentAudioCtx && agentAudioCtx.state === "suspended") {
+        try { await agentAudioCtx.resume(); } catch (_) {}
+      }
+    };
+    document.addEventListener("visibilitychange", () => { if (!document.hidden) resumeCtx(); });
+    agentAudioCtx.addEventListener("statechange", () => {
+      if (agentAudioCtx && agentAudioCtx.state === "suspended") {
+        document.addEventListener("touchstart", resumeCtx, { once: true });
+        document.addEventListener("click", resumeCtx, { once: true });
+      }
+    });
+  } catch {
+    agentMicStream = null; agentAudioCtx = null;
+    setMicStatus("Tap to speak", false);
+    startListening();
+  } finally {
+    micAcquiring = false;
+  }
+}
+
+function showTigerWin() {
+  if (!agentSessionTurns || agentSessionTurns < 1) return;
+  const minutes = agentSessionStart ? Math.max(1, Math.ceil((Date.now() - agentSessionStart) / 60000)) : 1;
+  let subtitle;
+  if (agentSessionTurns < 3) { subtitle = "Every rep counts!"; }
+  else if (agentSessionTurns <= 7) { subtitle = "Building Tiger Voice!"; }
+  else { subtitle = "That was a Tiger session! 🐯"; }
+  const name = (profile.fullName || profile.name || "Tiger").split(/\s+/)[0];
+  const el = (id) => document.getElementById(id);
+  if (el("tsSubtitle")) el("tsSubtitle").textContent = `${name} — ${subtitle}`;
+  if (el("tsMinutes")) el("tsMinutes").textContent = minutes;
+  if (el("tsTurns")) el("tsTurns").textContent = agentSessionTurns;
+  if (el("tsWords")) el("tsWords").textContent = agentSessionVocab.length > 0 ? `New words: ${agentSessionVocab.join(", ")}` : "";
+  const ts = el("tigerSummary");
+  if (ts) ts.classList.add("show");
+}
+
+function endAgentSession() {
+  if (agentMicStream) stopAgentListening();
+  showTigerWin();
+}
+
+function stopAgentListening() {
+  clearTimeout(safetyTimer);
+  if (agentMicStream) { agentMicStream.getTracks().forEach(t => t.stop()); agentMicStream = null; }
+  if (agentWorklet) { agentWorklet.disconnect(); agentWorklet = null; }
+  if (agentAudioCtx) { agentAudioCtx.close().catch(() => {}); agentAudioCtx = null; }
+  listening = false;
+  micBtn.classList.remove("mic-active");
+  setMicStatus("Processing…", false);
+  state = "busy";
+}
+
+// ── Voice Pipeline — REST (fallback when Voice Agent unavailable) ──
+let listening     = false;
+let safetyTimer   = null;
+let micStream     = null;
+let mediaRecorder = null;
+let audioChunks   = [];
+const MAX_RECORD_MS = 60000;
 
 async function startListening() {
   try {
@@ -736,49 +1071,25 @@ async function startListening() {
       audio: { channelCount: 1, echoCancellation: true, noiseSuppression: true, autoGainControl: true }
     });
     micStream = stream;
-
-    // Set up VAD (Voice Activity Detection) via AnalyserNode
-    vadCtx = new (window.AudioContext || window.webkitAudioContext)();
-    vadSource = vadCtx.createMediaStreamSource(stream);
-    vadAnalyser = vadCtx.createAnalyser();
-    vadAnalyser.fftSize = 1024;
-    vadSource.connect(vadAnalyser);
-
     audioChunks = [];
-    // Safari only supports audio/mp4 (and sometimes nothing). Chrome/Firefox prefer webm.
-    // Deepgram REST accepts all three formats.
-    const mimeType = MediaRecorder.isTypeSupported("audio/webm")
-      ? "audio/webm"
-      : MediaRecorder.isTypeSupported("audio/mp4")
-        ? "audio/mp4"
-        : MediaRecorder.isTypeSupported("audio/wav")
-          ? "audio/wav"
-          : ""; // empty string = browser default
-    const recOpts = mimeType ? { mimeType } : undefined;
-    mediaRecorder = new MediaRecorder(stream, recOpts);
-
-    mediaRecorder.ondataavailable = (e) => {
-      if (e.data && e.data.size > 0) audioChunks.push(e.data);
-    };
-
+    const mimeType = ["audio/webm", "audio/mp4", "audio/ogg;codecs=opus", "audio/wav"]
+      .find(t => MediaRecorder.isTypeSupported(t)) || "";
+    mediaRecorder = new MediaRecorder(stream, mimeType ? { mimeType } : undefined);
+    mediaRecorder.ondataavailable = (e) => { if (e.data?.size > 0) audioChunks.push(e.data); };
     mediaRecorder.onstop = async () => {
-      stream.getTracks().forEach(t => t.stop());
-      if (vadCtx) { vadCtx.close().catch(() => {}); vadCtx = null; }
-      clearInterval(vadInterval);
-      clearTimeout(silenceTimer);
+      if (micStream) { micStream.getTracks().forEach(t => t.stop()); micStream = null; }
       listening = false;
       micBtn.classList.remove("mic-active");
-
+      micBtn.title = "Tap to speak";
+      clearTimeout(safetyTimer);
       if (!audioChunks.length) { input.placeholder = "Type here…"; return; }
-
       input.placeholder = "Processing…";
-      const blob = new Blob(audioChunks, { type: mimeType });
+      const blob = new Blob(audioChunks, { type: mimeType || "audio/webm" });
       audioChunks = [];
-
       try {
         const res = await fetch("/api/stt", {
           method: "POST",
-          headers: { "Content-Type": mimeType },
+          headers: { "Content-Type": mimeType || "audio/webm" },
           body: blob
         });
         const data = await res.json();
@@ -796,37 +1107,14 @@ async function startListening() {
         input.placeholder = "Voice error — type instead";
         setTimeout(() => { input.placeholder = "Type here…"; }, 2500);
       }
-      if (input.placeholder === "Processing…") input.placeholder = "Type here…";
     };
-
-    // Timeslice 250ms = flush chunks frequently so blob is ready instantly on stop
     mediaRecorder.start(250);
     listening = true;
     micBtn.classList.add("mic-active");
+    micBtn.title = "Tap to stop";
     input.value = "";
-    input.placeholder = "Listening…";
-
-    // Client-side VAD: monitor volume and auto-stop after silence
-    let silentSince = null;
-    vadInterval = setInterval(() => {
-      if (!listening) return;
-      const rms = getRMS();
-      if (rms < SILENCE_THRESHOLD) {
-        if (!silentSince) silentSince = Date.now();
-        else if (Date.now() - silentSince >= SILENCE_DURATION && audioChunks.length > 0) {
-          // Enough silence + we have audio → auto-stop
-          stopListening();
-        }
-      } else {
-        silentSince = null; // reset on speech
-      }
-    }, VAD_POLL_MS);
-
-    // Hard safety timeout
-    silenceTimer = setTimeout(() => {
-      if (listening) stopListening();
-    }, MAX_RECORD_MS);
-
+    input.placeholder = "Listening… (tap to stop)";
+    safetyTimer = setTimeout(stopListening, MAX_RECORD_MS);
   } catch {
     input.placeholder = "Mic access denied";
     setTimeout(() => { input.placeholder = "Type here…"; }, 2500);
@@ -837,18 +1125,57 @@ function stopListening() {
   if (mediaRecorder && mediaRecorder.state !== "inactive") {
     input.placeholder = "Processing…";
     mediaRecorder.stop();
+  } else if (micStream) {
+    micStream.getTracks().forEach(t => t.stop());
+    micStream = null;
+    listening = false;
+    micBtn.classList.remove("mic-active");
+    micBtn.title = "Tap to speak";
+    input.placeholder = "Type here…";
   }
-  listening = false;
-  micBtn.classList.remove("mic-active");
 }
 
 micBtn.addEventListener("click", () => {
   if (micBtn.disabled) return;
-  if (listening) { stopListening(); return; }
+  if (listening) {
+    if (agentMicStream) { stopAgentListening(); return; }
+    stopListening();
+    return;
+  }
+  if (agentWs && agentReady) { startAgentListening(); return; }
   startListening();
 });
 
 // ── Form submit ────────────────────────────────────────────
+
+// Any user gesture grabs mic permission immediately (gesture context required for getUserMedia)
+// The stream is stored and connected to the Voice Agent as soon as it's ready
+function triggerMicOnGesture() {
+  if (userHasInteracted) return;
+  userHasInteracted = true;
+  if (agentWs && agentReady && !agentMicStream) {
+    // Agent already ready — connect directly
+    startAgentListening().catch(() => {});
+    return;
+  }
+  // Agent not ready yet — grab mic NOW while in gesture context, connect when agent is ready
+  setMicStatus("Connecting…", true);
+  navigator.mediaDevices.getUserMedia({
+    audio: { channelCount: 1, echoCancellation: true, noiseSuppression: true, autoGainControl: true }
+  }).then(stream => {
+    pendingMicStream = stream;
+    setMicStatus("Ready…", true);
+    micBtn.classList.add("mic-active");
+    // If agent became ready while getting the stream, connect immediately
+    if (agentWs && agentReady && !agentMicStream) {
+      startAgentListening(pendingMicStream);
+      pendingMicStream = null;
+    }
+  }).catch(() => { setMicStatus("Mic denied", false); });
+}
+document.addEventListener("click",      triggerMicOnGesture, { once: false, passive: true });
+document.addEventListener("touchstart", triggerMicOnGesture, { once: false, passive: true });
+document.addEventListener("keydown",    triggerMicOnGesture, { once: false, passive: true });
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -867,96 +1194,94 @@ async function boot() {
     dot.title = "Offline";
   }
 
-  const urlStudentId = (() => { const params = new URLSearchParams(window.location.search); return params.get("student") || params.get("studentId"); })();
+  urlStudentId = (() => { const params = new URLSearchParams(window.location.search); return params.get("student") || params.get("studentId"); })();
+
+  // Fire Voice Agent WS connection IMMEDIATELY — Deepgram connects in parallel with boot loads
+  if (urlStudentId) openVoiceAgent();
 
   let saved = null;
   try { saved = JSON.parse(localStorage.getItem("net_profile") || "null"); } catch {}
 
   await pause(350);
 
-  // If URL has ?student=id or ?studentId=id and it matches saved profile, use saved. If different, load by id.
   if (urlStudentId && (!saved?.studentId || saved.studentId !== urlStudentId)) {
     profile.studentId = urlStudentId;
-    // Derive name from id immediately so firstName() works (e.g. "quan-nguyen" → "Quan")
     profile.fullName = urlStudentId.split("-")[0].replace(/^\w/, c => c.toUpperCase());
     try { studentToken = localStorage.getItem("net_student_token") || ""; } catch {}
-    // Try to enrich profile from state API (gets real name, level, goals if they exist)
-    try {
-      const st = await api(`/api/netpet/state?studentId=${encodeURIComponent(urlStudentId)}`);
-      if (st?.profile?.fullName)    profile.fullName    = st.profile.fullName;
-      if (st?.profile?.englishLevel) profile.englishLevel = st.profile.englishLevel;
-      if (st?.profile?.goals)        profile.goals        = st.profile.goals;
-    } catch {}
-    // Load conversation memory
-    try {
-      const mem = await api(`/api/memory?studentId=${encodeURIComponent(urlStudentId)}`, "GET", undefined, memHeaders());
-      if (mem?.memory?.length) {
-        for (const ex of mem.memory.slice(-10)) {
-          if (ex?.user) chatMessages.push({ role: "user",      content: ex.user });
-          if (ex?.obi)  chatMessages.push({ role: "assistant", content: ex.obi  });
-        }
+
+    // Parallel boot loads — all 4 fire simultaneously
+    const [stateR, memR, vocR, hintR] = await Promise.allSettled([
+      api(`/api/student/state?studentId=${encodeURIComponent(urlStudentId)}`),
+      api(`/api/memory?studentId=${encodeURIComponent(urlStudentId)}`, "GET", undefined, memHeaders()),
+      api(`/api/vocab/due?studentId=${encodeURIComponent(urlStudentId)}`),
+      api(`/api/session-hint?studentId=${encodeURIComponent(urlStudentId)}`)
+    ]);
+
+    // Apply state/profile
+    if (stateR.status === "fulfilled") {
+      const st = stateR.value; const p = st?.profile;
+      if (p?.fullName || p?.name)  profile.fullName     = p.fullName || p.name;
+      if (p?.englishLevel || p?.level) profile.englishLevel = p.englishLevel || p.level;
+      if (p?.goals)        profile.goals        = p.goals;
+      if (p?.currentCity)  profile.currentCity  = p.currentCity;
+      if (p?.teachingFocus) profile.teachingFocus = p.teachingFocus;
+      if (p?.primaryBlock) profile.primaryBlock  = p.primaryBlock;
+      if (p?.breakthrough) profile.breakthrough  = p.breakthrough;
+      if (p?.sessionNotes) profile.sessionNotes  = p.sessionNotes;
+      if (st?.lang && st.lang !== "en") profile.lang = st.lang;
+      if (st?.streak) profile.streak = st.streak;
+    }
+    // Apply memory
+    if (memR.status === "fulfilled" && memR.value?.memory?.length) {
+      for (const ex of memR.value.memory.slice(-10)) {
+        if (ex?.user) chatMessages.push({ role: "user",      content: ex.user });
+        if (ex?.obi)  chatMessages.push({ role: "assistant", content: ex.obi  });
       }
-    } catch {}
-    // Load due vocabulary for SRS quiz injection
-    try {
-      const voc = await api(`/api/vocab/due?studentId=${encodeURIComponent(profile.studentId)}`);
-      if (voc?.due?.length) profile._dueVocab = voc.due;
-    } catch {}
+    }
+    // Apply vocab
+    if (vocR.status === "fulfilled" && vocR.value?.due?.length) profile._dueVocab = vocR.value.due;
+
     obi(`${firstName()}! Let's go.`);
     await pause(350);
-    // Extract company tag from studentId (e.g. "huong-bluetech" → "BlueTech")
+
     const _idParts = (urlStudentId || "").split("-");
     const _company = _idParts.length > 1 ? _idParts.slice(1).map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(" ") : "";
-    // Check for YouTube session hint posted by Chrome extension
-    let _usedHint = false;
-    try {
-      const _hint = await api(`/api/session-hint?studentId=${encodeURIComponent(urlStudentId)}`);
-      if (_hint?.videoTitle && _hint.timestamp && (Date.now() - _hint.timestamp < 4 * 3600 * 1000)) {
-        obi(`I see you watched "${_hint.videoTitle}" — great work on your listening! What was the most interesting thing you heard?`);
-        _usedHint = true;
-      }
-    } catch {}
-    if (!_usedHint) {
-      const _co = _company ? ` — ${_company}` : "";
-      obi(`What did you listen to today? Your 45 minutes — what was it?${_co ? " Tell me what you watched or heard." : ""}`);
+    // YouTube hint — specific content reference (useful, not scripted)
+    const _hint = hintR.status === "fulfilled" ? hintR.value : null;
+    if (_hint?.videoTitle && _hint.timestamp && (Date.now() - _hint.timestamp < 4 * 3600 * 1000)) {
+      // Pass hint to Voice Agent via profile so OBI can reference it naturally
+      profile._sessionHint = _hint.videoTitle;
     }
     state = "chat";
+    // OBI opens via InjectAgentMessage after SettingsApplied — no scripted question here
+
   } else if (saved?.studentId && saved?.fullName) {
     profile = saved;
+    if (!urlStudentId) urlStudentId = saved.studentId;
     try { studentToken = localStorage.getItem("net_student_token") || ""; } catch {}
-    // Restore conversation memory from server so Obi knows this student
-    try {
-      const mem = await api(`/api/memory?studentId=${encodeURIComponent(profile.studentId)}`, "GET", undefined, memHeaders());
-      if (mem?.memory?.length) {
-        for (const ex of mem.memory.slice(-10)) {
-          if (ex?.user) chatMessages.push({ role: "user",      content: ex.user });
-          if (ex?.obi)  chatMessages.push({ role: "assistant", content: ex.obi  });
-        }
+    if (!agentWs) openVoiceAgent();
+
+    // Parallel: memory + vocab + hint
+    const [memR2, vocR2, hintR2] = await Promise.allSettled([
+      api(`/api/memory?studentId=${encodeURIComponent(profile.studentId)}`, "GET", undefined, memHeaders()),
+      api(`/api/vocab/due?studentId=${encodeURIComponent(profile.studentId)}`),
+      profile.studentId ? api(`/api/session-hint?studentId=${encodeURIComponent(profile.studentId)}`) : Promise.resolve(null)
+    ]);
+    if (memR2.status === "fulfilled" && memR2.value?.memory?.length) {
+      for (const ex of memR2.value.memory.slice(-10)) {
+        if (ex?.user) chatMessages.push({ role: "user",      content: ex.user });
+        if (ex?.obi)  chatMessages.push({ role: "assistant", content: ex.obi  });
       }
-    } catch {}
-    // Load due vocabulary for SRS quiz injection
-    try {
-      const voc = await api(`/api/vocab/due?studentId=${encodeURIComponent(profile.studentId)}`);
-      if (voc?.due?.length) profile._dueVocab = voc.due;
-    } catch {}
+    }
+    if (vocR2.status === "fulfilled" && vocR2.value?.due?.length) profile._dueVocab = vocR2.value.due;
+
     obi(`${firstName()}! Welcome back!`);
     await pause(400);
-    if (profile.studentId) {
-      // Portal student — check for YouTube session hint from Chrome extension
-      let _usedHint2 = false;
-      try {
-        const _hint2 = await api(`/api/session-hint?studentId=${encodeURIComponent(profile.studentId)}`);
-        if (_hint2?.videoTitle && _hint2.timestamp && (Date.now() - _hint2.timestamp < 4 * 3600 * 1000)) {
-          obi(`I see you watched "${_hint2.videoTitle}" — nice! Let's talk about it. What did you understand?`);
-          _usedHint2 = true;
-        }
-      } catch {}
-      if (!_usedHint2) {
-        obi("What did you listen to today? Your 45 minutes — let's start there.");
-      }
-    } else {
-      obi(pickStarter());
+    const _hint2 = hintR2.status === "fulfilled" ? hintR2.value : null;
+    if (_hint2?.videoTitle && _hint2.timestamp && (Date.now() - _hint2.timestamp < 4 * 3600 * 1000)) {
+      profile._sessionHint = _hint2.videoTitle;
     }
+    // OBI opens via InjectAgentMessage after SettingsApplied
     state = "chat";
   } else {
     // SOUL DNA: "The Magic Chat has no constraints. It complies with AI's highest outputs."

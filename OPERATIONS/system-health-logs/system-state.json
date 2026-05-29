@@ -1,8 +1,8 @@
 {
   "verify_ok": true,
-  "timestamp": "2026-05-27T07:27:40.6947857+07:00",
-  "git_head": "c8c2f9bf death: ROMAN RUN 19 ΓÇö RRL 842 chars ΓåÆ SOUL 908,151 TITANIUM_ANCHOR ΓÇö crash recovery + archive extraction + 3 live integrations",
+  "git_branch": "master",
+  "timestamp": "2026-05-29T05:23:28.1807668+07:00",
   "doctor_ok": true,
-  "soul_ok": false,
-  "git_branch": "master"
+  "git_head": "67689beb death: ROMAN RUN 20 ΓÇö RRL 1377 ΓåÆ SOUL 13,339,923 TITANIUM_ANCHOR ΓÇö STT pipeline fix + Qwen Max activation + Deepgram key rotation",
+  "soul_ok": false
 }

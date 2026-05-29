@@ -1,6 +1,13 @@
 {
-  "vault_root": "d:\\OB-1\\OPERATIONS\\NET-STUDENTS\\VAULT\\quy-bluetech",
+  "vault_root": "D:\\OB-1-CANONICAL\\NET-STUDENTS\\VAULT\\quy-bluetech",
   "recordings": [],
   "created": "2026-04-17T01:16:45.5994643+07:00",
-  "student_id": "quy-bluetech"
+  "student_id": "quy-bluetech",
+  "profile": "PROFILE.md",
+  "sessions": "SESSIONS.json",
+  "kv_profile_key": "student_profile_quy-bluetech",
+  "kv_lang_key": "lang:quy-bluetech",
+  "portal_url": "https://net-pet-ai.mrmichaelhobbs123.workers.dev/quy-portal",
+  "obi_url": "https://net-pet-ai.mrmichaelhobbs123.workers.dev/magic-chat?studentId=quy-bluetech",
+  "updated": "2026-05-28"
 }
