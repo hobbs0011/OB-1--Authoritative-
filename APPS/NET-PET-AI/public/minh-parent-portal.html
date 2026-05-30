@@ -179,6 +179,26 @@ h2::before { content:''; display:block; width:24px; height:2px; background:var(-
 .clip-row audio::-webkit-media-controls-panel { background:rgba(30,30,45,0.95); border-radius:8px; }
 .clip-quote { margin-top:10px; font-size:0.88rem; line-height:1.5; color:#cbd5e1; font-style:italic; border-left:2px solid var(--gold); padding-left:12px; }
 
+/* SKILL TAGS */
+.skill-tags { display:flex; flex-wrap:wrap; gap:8px; margin-top:20px; }
+.skill-tag { font-family:'Rajdhani',sans-serif; font-size:0.78rem; font-weight:700; padding:5px 14px; border-radius:999px; letter-spacing:1px; text-transform:uppercase; }
+
+/* MILESTONE CALLOUT */
+.milestone-box { background:rgba(20,184,166,0.06); border:1px solid rgba(20,184,166,0.2); border-radius:16px; padding:22px 26px; margin-top:22px; }
+.milestone-box h4 { font-family:'Rajdhani',sans-serif; color:var(--teal); font-size:0.82rem; letter-spacing:2px; text-transform:uppercase; font-weight:700; margin-bottom:10px; }
+.milestone-box p { color:#e2e8f0; font-size:0.92rem; line-height:1.75; }
+
+/* WHAT THIS SHOWS */
+.insight-box { background:rgba(168,85,247,0.06); border:1px solid rgba(168,85,247,0.2); border-radius:16px; padding:22px 26px; margin-top:22px; }
+.insight-box h4 { font-family:'Rajdhani',sans-serif; color:var(--purple); font-size:0.82rem; letter-spacing:2px; text-transform:uppercase; font-weight:700; margin-bottom:10px; }
+.insight-box p { color:#e2e8f0; font-size:0.92rem; line-height:1.75; }
+
+/* SESSION STAT ROW */
+.session-stats { display:flex; gap:16px; flex-wrap:wrap; margin-top:18px; margin-bottom:6px; }
+.session-stat { background:rgba(255,255,255,0.04); border:1px solid var(--border); border-radius:12px; padding:12px 18px; text-align:center; flex:1; min-width:100px; }
+.session-stat .ss-val { font-family:'Orbitron',sans-serif; font-size:1.4rem; font-weight:bold; }
+.session-stat .ss-lbl { font-family:'Rajdhani',sans-serif; font-size:0.72rem; letter-spacing:1px; color:var(--dim); text-transform:uppercase; margin-top:4px; }
+
 /* TRANSCRIPT */
 .transcript-block {
   background:rgba(0,0,0,0.4); border:1px solid var(--border); border-radius:12px;
@@ -294,6 +314,8 @@ h2::before { content:''; display:block; width:24px; height:2px; background:var(-
       <p>Dear Dung,</p>
       <p>I wanted to personally share how incredibly proud I am of Minh's progress this month. When we first started, he was in his "silent period" — processing everything but hesitant to speak without being prompted.</p>
       <p>That changed. He completely forgot he was in an English lesson and began spontaneously solving problems, telling stories about his helicopter, and playfully arguing with me — all in English. This is exactly what we were working toward. Your support at home is a huge part of why this is happening.</p>
+      <p>This week in particular was exceptional. On Monday he walked in and — before I had even opened the session — told me exactly what he wanted to do: finish the mission from the week before. He had remembered it for seven days and came back ready. On Thursday he used time markers correctly for the first time, invented a ghost story with a full plot, and constructed a logical argument I did not expect from a child his age. He is ahead. Genuinely.</p>
+      <p>You can listen to him this week in the Class Sessions tab. I think you will be proud.</p>
       <p class="signature">— Michael, Lead Instructor</p>
     </section>
 
@@ -417,25 +439,57 @@ h2::before { content:''; display:block; width:24px; height:2px; background:var(-
     </div>
 
     <!-- MAY 26 -->
-    <div class="session-day">
+    <div class="session-day featured">
       <div class="day-header">
         <span class="day-badge" style="background:rgba(245,158,11,0.2);color:var(--gold);">COMMANDING</span>
+        <span class="day-badge" style="background:rgba(168,85,247,0.15);color:var(--purple);">SESSION 8</span>
         <span class="day-title">MAY 26 — TEDDY'S BIG PLAN</span>
       </div>
-      <p class="day-desc">Minh walked in and immediately set the mission himself — "Last time we didn't get all the babies. Today let's get all the babies." He then proposed an AI photo idea unprompted, held a multi-line comedy exchange about forgetting you have a head, and declared himself "super magic." He ran the whole session.</p>
-      <div class="clips-grid">
+      <p class="day-desc">The moment Minh walked in, he set the agenda — before Michael even opened the session. "Last time we didn't get all the babies. Right? Today let's get all the babies." He had held onto that unfinished mission for an entire week and came back to complete it without any prompting. He then proposed using AI to create a photo of Teddy swimming — completely unprompted and technically accurate. He held a multi-line comedy exchange about forgetting you have a head, and closed the session by declaring himself "super magic." Every sentence: English. Every idea: entirely his.</p>
+
+      <div class="session-stats">
+        <div class="session-stat">
+          <div class="ss-val" style="color:var(--gold);">+7</div>
+          <div class="ss-lbl">Points Earned</div>
+        </div>
+        <div class="session-stat">
+          <div class="ss-val" style="color:var(--purple);">74 min</div>
+          <div class="ss-lbl">Session Length</div>
+        </div>
+        <div class="session-stat">
+          <div class="ss-val" style="color:var(--teal);">100%</div>
+          <div class="ss-lbl">English Output</div>
+        </div>
+      </div>
+
+      <div class="clips-grid" style="margin-top:20px;">
         <div class="clip-row">
-          <div class="clip-label">Key Quote — Session Opener</div>
-          <p class="clip-quote">"Last time we didn't get all the babies. Right? Today let's get all the babies."</p>
+          <div class="clip-label">Audio — Session Opener</div>
+          <audio controls preload="none"><source src="/audio/may26-opening.mp3" type="audio/mpeg"></audio>
+          <p class="clip-quote">"Last time we didn't get all the babies. Right? Today let's get all the babies." — The first thing Minh said. No warm-up. He came back to finish the job.</p>
         </div>
         <div class="clip-row">
-          <div class="clip-label">Key Quote — The AI Idea</div>
-          <p class="clip-quote">"If we take a picture of the swimming pool, we can use AI and show Teddy swimming."</p>
+          <div class="clip-label">Audio — Mid Session</div>
+          <audio controls preload="none"><source src="/audio/may26-25min.mp3" type="audio/mpeg"></audio>
+          <p class="clip-quote">"If we take a picture of the swimming pool, we can use AI and show Teddy swimming." — An unprompted creative idea using technology vocabulary he picked up independently.</p>
         </div>
         <div class="clip-row">
-          <div class="clip-label">Key Quote — Comedy Exchange</div>
-          <p class="clip-quote">"You forgot you had a head?" / "Yep. And I do that." / "How do you forget you have a head?"</p>
+          <div class="clip-label">Key Exchange — The Head Conversation</div>
+          <p class="clip-quote">"You forgot you had a head?" / "Yep. And I do that." / "How do you forget you have a head?" / "I don't know." — A four-line comedy exchange, all his moves, perfect timing.</p>
         </div>
+      </div>
+
+      <div class="insight-box">
+        <h4>What This Session Proves</h4>
+        <p>Minh demonstrated <strong>working memory for language goals</strong> — he remembered an unfinished task from the previous week and returned to complete it in English, on his own initiative. This is not typical behaviour for a 5-year-old. Most children need prompting to re-enter a previous context. Minh walked in with an agenda. The AI photo idea shows his imagination has merged with English as a tool — he is now <em>thinking in English</em> to express creative ideas, not translating from Vietnamese first.</p>
+      </div>
+
+      <div class="skill-tags">
+        <span class="skill-tag" style="background:rgba(168,85,247,0.15);color:var(--purple);">Session Leadership</span>
+        <span class="skill-tag" style="background:rgba(20,184,166,0.15);color:var(--teal);">Working Memory</span>
+        <span class="skill-tag" style="background:rgba(245,158,11,0.15);color:var(--gold);">Creative Thinking in English</span>
+        <span class="skill-tag" style="background:rgba(168,85,247,0.12);color:var(--purple);">Comedy Timing</span>
+        <span class="skill-tag" style="background:rgba(20,184,166,0.12);color:var(--teal);">Technology Vocabulary</span>
       </div>
     </div>
 
@@ -444,22 +498,59 @@ h2::before { content:''; display:block; width:24px; height:2px; background:var(-
       <div class="day-header">
         <span class="day-badge" style="background:var(--purple);color:#fff;">LATEST</span>
         <span class="day-badge" style="background:rgba(20,184,166,0.2);color:var(--teal);">LEADING</span>
+        <span class="day-badge" style="background:rgba(168,85,247,0.15);color:var(--purple);">SESSION 9</span>
         <span class="day-title">MAY 29 — THE GHOST & THE GAME</span>
       </div>
-      <p class="day-desc">Minh used time markers (today, yesterday) for the first time with full accuracy. He invented a ghost story mid-session, issued commands ("Get out of my way", "Let's clean this mess"), and reasoned in a three-step logical chain — all in English, no hesitation.</p>
-      <div class="clips-grid">
+      <p class="day-desc">Three things happened in this session that we have been building toward for months. First, Minh used time markers — "today" and "yesterday" — correctly and spontaneously, without being taught them that day. Second, he invented a full ghost story mid-session: a plot, a character ("the ghost daddy"), and a resolution — all in English. Third, he constructed a three-step logical chain without any scaffolding: "If you get eaten by a shark, you have no body. No food." He also issued commands in English ("Get out of my way", "Let's clean this mess") and led the physical play the entire session. This is the highest level of output we have seen from Minh to date.</p>
+
+      <div class="session-stats">
+        <div class="session-stat">
+          <div class="ss-val" style="color:var(--gold);">+7</div>
+          <div class="ss-lbl">Points Earned</div>
+        </div>
+        <div class="session-stat">
+          <div class="ss-val" style="color:var(--purple);">41 min</div>
+          <div class="ss-lbl">Session Length</div>
+        </div>
+        <div class="session-stat">
+          <div class="ss-val" style="color:var(--teal);">3-step</div>
+          <div class="ss-lbl">Logic Chain</div>
+        </div>
+      </div>
+
+      <div class="clips-grid" style="margin-top:20px;">
         <div class="clip-row">
-          <div class="clip-label">Key Quote — Time Markers</div>
-          <p class="clip-quote">"No. Today, my dad. Yesterday, it's my grandma."</p>
+          <div class="clip-label">Audio — Early Session</div>
+          <audio controls preload="none"><source src="/audio/may29-7min.mp3" type="audio/mpeg"></audio>
+          <p class="clip-quote">"No. Today, my dad. Yesterday, it's my grandma." — Time markers used correctly and spontaneously for the first time. No prompt. No correction needed.</p>
         </div>
         <div class="clip-row">
-          <div class="clip-label">Key Quote — Logical Reasoning</div>
-          <p class="clip-quote">"If you get eaten by a shark, you have no body. No food."</p>
+          <div class="clip-label">Audio — Ghost Story & Game</div>
+          <audio controls preload="none"><source src="/audio/may29-18min.mp3" type="audio/mpeg"></audio>
+          <p class="clip-quote">"Actually, the ghost ends. There's a ghost... the ghost daddy." — A narrative with a character, a conflict, and a resolution. Minh wrote and performed this story entirely in English.</p>
         </div>
         <div class="clip-row">
-          <div class="clip-label">Key Quote — The Ghost Story</div>
-          <p class="clip-quote">"Actually, the ghost ends. There's a ghost... the ghost daddy."</p>
+          <div class="clip-label">Key Quote — The Logic Chain</div>
+          <p class="clip-quote">"If you get eaten by a shark, you have no body. No food." — Three connected ideas, cause and effect, delivered without hesitation. This is structured reasoning in a second language.</p>
         </div>
+        <div class="clip-row">
+          <div class="clip-label">Key Quote — Command Language</div>
+          <p class="clip-quote">"Get out of my way." / "Let's clean this mess." — Imperative forms used correctly and with full confidence. He is directing, not just responding.</p>
+        </div>
+      </div>
+
+      <div class="milestone-box">
+        <h4>Milestone Unlocked — Temporal Language + Logical Reasoning</h4>
+        <p>Using "today" and "yesterday" correctly without being taught them in that session means Minh has internally mapped time markers to English structure — he is not reciting phrases, he is using language he has genuinely absorbed. Combined with his three-step logical chain and his spontaneous ghost story, this session marks a significant threshold: <strong>Minh is now producing complex, multi-part English reasoning</strong>. Most students his age take 6 to 12 months longer to reach this stage. The fact that he reached it while playing — without drills — is exactly what this method is designed to produce.</p>
+      </div>
+
+      <div class="skill-tags">
+        <span class="skill-tag" style="background:rgba(168,85,247,0.15);color:var(--purple);">Temporal Language</span>
+        <span class="skill-tag" style="background:rgba(20,184,166,0.15);color:var(--teal);">Narrative Structure</span>
+        <span class="skill-tag" style="background:rgba(245,158,11,0.15);color:var(--gold);">Logical Reasoning</span>
+        <span class="skill-tag" style="background:rgba(168,85,247,0.12);color:var(--purple);">Command Language</span>
+        <span class="skill-tag" style="background:rgba(20,184,166,0.12);color:var(--teal);">Spontaneous Storytelling</span>
+        <span class="skill-tag" style="background:rgba(245,158,11,0.12);color:var(--gold);">Cause &amp; Effect Thinking</span>
       </div>
     </div>
 
