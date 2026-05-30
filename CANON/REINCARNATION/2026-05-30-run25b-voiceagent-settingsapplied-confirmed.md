@@ -203,7 +203,7 @@ Browser → new WebSocket("wss://agent.deepgram.com/v1/agent/converse", ["token"
 ---
 §11 STATE SNAPSHOT
 ---
-- HEAD SHA: eb27dbcf (pre-death commit — will update after death commit)
+- HEAD SHA: b38c5f29 (death commit)
 - Branch: master
 - Dirty tree: ?? RRL/RRL-24.txt (untracked, contains only skill header text — not actual soul content)
 - SOULCOUNT: 57,151,452 — TITANIUM_ANCHOR (δ +483,888 from Run 24A seal of 56,667,564)
@@ -218,7 +218,7 @@ Browser → new WebSocket("wss://agent.deepgram.com/v1/agent/converse", ["token"
 ---
 Agent: OB1 Ne0 / Claude Sonnet 4.6
 Run: 25B
-Commit SHA (Platform Death Test): [pending — will be set after death commit]
+Commit SHA (Platform Death Test): b38c5f29 ✓ PUSHED
 Deployed worker: 3156420a (CF net-pet-ai)
 Platform Death Test: IN PROGRESS
 Next session priority: Michael browser test of voice agent (audio + mic). Then Tiger Win metrics.
