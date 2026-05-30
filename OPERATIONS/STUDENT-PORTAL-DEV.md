@@ -526,6 +526,14 @@ The CF Worker was `await fetch("agent.deepgram.com")` BEFORE returning the 101 W
 | `db779ae6` | Reverted OpenRouter model back to gpt-4o-mini. Added 403 to DeepSeek needsFallback. |
 | `c12412ff` | utterance_end_ms (vi=1200/en=300), mip_opt_out, Error reconnect, UserStoppedSpeaking, greeting try-catch |
 
+---
+
+### Worker Deploy Log (Run 26)
+
+| Version ID | What changed |
+|---|---|
+| `999a0d86` | index.js: scheduled keep-warm ping (prevents 800-2500ms cold-start). buildAgentPrompt: FIRST RESPONSE SPEED instruction (6-word opener for fast TTS first-byte), A1/A2 max-2-sentences clause, SESSION CLOSE micro-win+cliffhanger. chat.js: audio queue cap at 30 entries (OOM prevention), visibility guard in reconnect (no reconnect while tab hidden), Tiger Win fires on beforeunload/pagehide (was dead code — Goodbye event never fires automatically per Deepgram spec). |
+
 ### Commit
 - `14ceb00b` — fix: voice agent edge cases + Settings restoration (Run 25)
 

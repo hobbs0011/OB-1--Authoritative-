@@ -518,6 +518,7 @@ export default {
   // Every 3 hours: Auto Post Engine (content distribution)
   async scheduled(event, env, ctx) {
     ctx.waitUntil(handleHeartbeat(env)); // HB v1.0: every hour
+    ctx.waitUntil(fetch("https://net-pet-ai.mrmichaelhobbs123.workers.dev/api/deepgram-token?studentId=keep-warm-ping",{method:"GET"}).catch(()=>{}));
     const hour = new Date(event.scheduledTime).getUTCHours();
 
     // Escalation sweep runs every 6 hours (0, 6, 12, 18 UTC)
@@ -825,6 +826,22 @@ async function handleAPI(path, request, env, url) {
       }
       await env.NET_PET_KV.put(`vocab_list_${studentId}`, JSON.stringify(list.slice(-500)));
       return addCors(json({ ok: true, word }), request);
+    } catch (err) {
+      return addCors(json({ error: err.message }, 500), request);
+    }
+  }
+
+  // Voice Agent: save session completion metrics
+  if (path === "/api/agent/session" && method === "POST") {
+    const body = await request.json().catch(() => ({}));
+    const { studentId, turns, durationMs, vocab } = body;
+    if (!studentId) return addCors(json({ error: "studentId required" }, 400), request);
+    try {
+      const raw = await env.NET_PET_KV.get(`session_history_${studentId}`);
+      const history = raw ? JSON.parse(raw) : [];
+      history.push({ ts: Date.now(), turns: turns || 0, durationMs: durationMs || 0, vocab: vocab || [] });
+      await env.NET_PET_KV.put(`session_history_${studentId}`, JSON.stringify(history.slice(-20)));
+      return addCors(json({ ok: true, sessions: history.length }), request);
     } catch (err) {
       return addCors(json({ error: err.message }, 500), request);
     }
@@ -2846,6 +2863,10 @@ function buildAgentPrompt(profile, lang, recentVocab = [], arc = null) {
     ? `ACTIVE ARC — Unit: ${arc.unit} | Topic: ${arc.topic} | Drill these words naturally: ${(arc.targets || []).join(", ")}${arc.pronunciation ? ` | Pronunciation focus: ${arc.pronunciation}` : ""}`
     : "";
 
+  const companyCtx = profile?.company
+    ? `ANCHOR IN REAL WORK: Student works at ${profile.company}. Ask them to share an actual email, Slack message, or meeting note they need help with. Practice with real materials — not invented scenarios.`
+    : "";
+
   const funcInstr = "FUNCTION: When the student successfully uses a new English word in a sentence — not just repeats it but actually USES it — call save_vocabulary_word with that word. Do this silently, mid-conversation. Max 2 saves per session.";
 
   const viMode = lang === "vi"
@@ -2862,13 +2883,16 @@ function buildAgentPrompt(profile, lang, recentVocab = [], arc = null) {
 
   return [
     `You are OBI — Michael Hobbs in AI form. High-energy, anti-shame, tough love. Volume and velocity beat grammar. Mouse Voice → Tiger Voice. Coach, not textbook.${_name ? ` Student: ${_name}.` : ""}`,
-    "1-3 sentences MAX. React to what they said. One sharp follow-up question. Never lecture.",
+    "FIRST RESPONSE SPEED: Open your very first reply with a 6-word-or-fewer acknowledgment before anything else. Example: \"Nice!\", \"Ha, I like that!\", \"OK, I hear you!\" Gets TTS audio flowing to the student fast.",
+    "1-3 sentences MAX. React to what they said. One sharp follow-up question. Never lecture. A1/A2 students: max 2 sentences, ultra-simple words only.",
     ctx,
     levelInstr,
     faceSaving,
     sessionCtx,
     vocabCtx,
     arcCtx,
+    companyCtx,
+    "SESSION CLOSE: When conversation winds down naturally or student says bye, give a SPECIFIC micro-win (\"You just used [actual word from session] in a real sentence!\") then a forward hook (\"Next session: we go deeper on [specific topic based on their level].\"). Never give a flat goodbye.",
     funcInstr,
     teachingInstr,
     viMode

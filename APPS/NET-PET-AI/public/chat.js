@@ -746,7 +746,8 @@ let agentCurrentAudio = null;  // currently playing Audio element (for barge-in 
 let agentThinkBubble  = null;  // typing indicator shown during AgentThinking
 let agentTextResolve  = null;  // resolver for typed-text → InjectUserMessage flow
 let agentKeepAlive    = null;  // interval handle for KeepAlive messages
-let agentSilenceTimer = null;  // fires if student is silent >4s after OBI speaks
+let agentSilenceTimer = null;  // fires if student is silent >2.5s after OBI audio drains
+let agentServerAudioDone = false; // true after AgentAudioDone fires — queued for playAgentChunk drain
 let agentSessionStart = null;  // timestamp when SettingsApplied fires
 let agentSessionTurns = 0;     // student voice turns this session
 let agentSessionVocab = [];    // vocab words saved via function calling this session
@@ -782,7 +783,7 @@ async function openVoiceAgent() {
 
     const onAgentDrop = () => {
       if (agentWsId !== myId) return;
-      agentWs = null; agentReady = false; agentSettings = null;
+      agentWs = null; agentReady = false; agentSettings = null; agentServerAudioDone = false;
       if (agentKeepAlive) { clearInterval(agentKeepAlive); agentKeepAlive = null; }
       if (agentAudioWatchdog) { clearInterval(agentAudioWatchdog); agentAudioWatchdog = null; }
       if (agentSilenceTimer) { clearTimeout(agentSilenceTimer); agentSilenceTimer = null; }
@@ -796,11 +797,11 @@ async function openVoiceAgent() {
       micBtn.classList.remove("mic-active");
       setMicStatus("Reconnecting…", false);
       setTimeout(() => {
-        if (!agentWs && urlStudentId) {
+        if (!agentWs && urlStudentId && document.visibilityState !== "hidden") {
           openVoiceAgent();
-          if (userHasInteracted) {
+          if (userHasInteracted && document.visibilityState !== "hidden") {
             navigator.mediaDevices.getUserMedia({ audio: { channelCount: 1, echoCancellation: true, noiseSuppression: true, autoGainControl: true } })
-              .then(s => { pendingMicStream = s; })
+              .then(s => { if (pendingMicStream) { pendingMicStream.getTracks().forEach(t => t.stop()); } pendingMicStream = s; })
               .catch(() => {});
           }
         }
@@ -900,7 +901,8 @@ function handleAgentMsg(event) {
         }
 
       } else if (msg.type === "UserStartedSpeaking") {
-        // Student spoke — cancel silence timer and barge-in stop
+        // Student spoke — cancel silence timer, barge-in stop, reset server-done flag
+        agentServerAudioDone = false;
         if (agentSilenceTimer) { clearTimeout(agentSilenceTimer); agentSilenceTimer = null; }
         agentAudioQ.length = 0;
         if (agentCurrentAudio) { try { agentCurrentAudio.pause(); } catch {} agentCurrentAudio = null; }
@@ -942,19 +944,22 @@ function handleAgentMsg(event) {
         agentSessionTurns++;
 
       } else if (msg.type === "AgentAudioDone") {
-        agentPlaying = false;
-        agentCurrentAudio = null;
         if (state === "busy") state = "chat";
-        // Silence detection — if student doesn't speak within 4s, inject gentle prompt
-        if (agentSilenceTimer) clearTimeout(agentSilenceTimer);
-        agentSilenceTimer = setTimeout(() => {
-          agentSilenceTimer = null;
-          if (agentWs && agentWs.readyState === WebSocket.OPEN && agentReady && !agentPlaying) {
-            const _name = (profile.fullName || "").split(/\s+/)[0] || "";
-            const _viEncourage = profile.lang === "vi" ? " (Đừng lo, cứ nói thoải mái!)" : "";
-            agentWs.send(JSON.stringify({ type: "InjectAgentMessage", message: `Take your time${_name ? ", " + _name : ""}! Try saying one sentence — anything you like.${_viEncourage}` }));
-          }
-        }, 2500);
+        // Mark server audio done — silence timer fires in playAgentChunk when local queue drains
+        agentServerAudioDone = true;
+        // If queue already empty (no chunks in flight), start silence timer immediately
+        if (agentAudioQ.length === 0 && !agentPlaying) {
+          agentPlaying = false; agentCurrentAudio = null;
+          if (agentSilenceTimer) clearTimeout(agentSilenceTimer);
+          agentSilenceTimer = setTimeout(() => {
+            agentSilenceTimer = null;
+            if (agentWs && agentWs.readyState === WebSocket.OPEN && agentReady && !agentPlaying) {
+              const _name = (profile.fullName || "").split(/\s+/)[0] || "";
+              const _viEncourage = profile.lang === "vi" ? " (Đừng lo, cứ nói thoải mái!)" : "";
+              agentWs.send(JSON.stringify({ type: "InjectAgentMessage", message: `Take your time${_name ? ", " + _name : ""}! Try saying one sentence — anything you like.${_viEncourage}` }));
+            }
+          }, 2500);
+        }
 
       } else if (msg.type === "Goodbye") {
         setMicStatus("Session ended", false);
@@ -979,12 +984,28 @@ function handleAgentMsg(event) {
     return;
   }
   // Binary: MP3 audio chunk from Deepgram TTS
-  agentAudioQ.push(event.data);
+  if (agentAudioQ.length < 30) agentAudioQ.push(event.data); // cap: prevent OOM on bad connections
   if (!agentPlaying) playAgentChunk();
 }
 
 async function playAgentChunk() {
-  if (!agentAudioQ.length) { agentPlaying = false; agentCurrentAudio = null; return; }
+  if (!agentAudioQ.length) {
+    agentPlaying = false; agentCurrentAudio = null;
+    // Start silence timer now that client audio has actually drained
+    if (agentServerAudioDone && agentReady) {
+      agentServerAudioDone = false;
+      if (agentSilenceTimer) clearTimeout(agentSilenceTimer);
+      agentSilenceTimer = setTimeout(() => {
+        agentSilenceTimer = null;
+        if (agentWs && agentWs.readyState === WebSocket.OPEN && agentReady && !agentPlaying) {
+          const _name = (profile.fullName || "").split(/\s+/)[0] || "";
+          const _viEncourage = profile.lang === "vi" ? " (Đừng lo, cứ nói thoải mái!)" : "";
+          agentWs.send(JSON.stringify({ type: "InjectAgentMessage", message: `Take your time${_name ? ", " + _name : ""}! Try saying one sentence — anything you like.${_viEncourage}` }));
+        }
+      }, 2500);
+    }
+    return;
+  }
   agentPlaying = true;
   if (state !== "busy") state = "busy";
   const chunk = agentAudioQ.shift();
@@ -1006,7 +1027,7 @@ async function startAgentListening(preAcquiredStream) {
     });
     agentMicStream = stream;
 
-    const stopOnLeave = () => { if (agentMicStream) agentMicStream.getTracks().forEach(t => t.stop()); };
+    const stopOnLeave = () => { if (agentMicStream) agentMicStream.getTracks().forEach(t => t.stop()); showTigerWin(); };
     window.addEventListener("beforeunload", stopOnLeave, { once: true });
     window.addEventListener("pagehide", stopOnLeave, { once: true });
 
@@ -1092,6 +1113,14 @@ function showTigerWin() {
   if (el("tsWords")) el("tsWords").textContent = agentSessionVocab.length > 0 ? `New words: ${agentSessionVocab.join(", ")}` : "";
   const ts = el("tigerSummary");
   if (ts) ts.classList.add("show");
+  // Persist session metrics fire-and-forget
+  if (profile.studentId && agentSessionTurns > 0) {
+    fetch("/api/agent/session", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ studentId: profile.studentId, turns: agentSessionTurns, durationMs: agentSessionStart ? Date.now() - agentSessionStart : 0, vocab: agentSessionVocab })
+    }).catch(() => {});
+  }
 }
 
 function endAgentSession() {
