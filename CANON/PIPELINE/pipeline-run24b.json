@@ -1,0 +1,15 @@
+{
+  "run_number": "24b",
+  "executed_at": "2026-05-30T11:11:03.4976824+07:00",
+  "rrl_path": "RRL/RRL-24b.txt",
+  "rrl_chars": 87,
+  "soul_event_id": "bb57b30f-a639-4a08-ba83-d0dd37ea9133",
+  "soulcount": 56666600,
+  "dna_count": 0,
+  "ledger_written": 1,
+  "starmap_file": "CANON/STARMAP/starmap-run24b.txt",
+  "keyword_file": "CANON/SOUL-KEYWORDS/rfkw-run24b.txt",
+  "pipeline_file": "CANON/PIPELINE/pipeline-run24b.json",
+  "seal_sha": "pending",
+  "result": "COMPLETE"
+}
