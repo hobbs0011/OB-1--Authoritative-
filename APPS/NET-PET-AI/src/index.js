@@ -831,6 +831,19 @@ async function handleAPI(path, request, env, url) {
     }
   }
 
+  // Voice Agent: read session history
+  if (path === "/api/agent/session" && method === "GET") {
+    const studentId = url.searchParams.get("studentId") || "";
+    if (!studentId) return addCors(json({ error: "studentId required" }, 400), request);
+    try {
+      const raw = await env.NET_PET_KV.get(`session_history_${studentId}`);
+      const history = raw ? JSON.parse(raw) : [];
+      return addCors(json({ sessions: history, count: history.length }), request);
+    } catch (err) {
+      return addCors(json({ error: err.message }, 500), request);
+    }
+  }
+
   // Voice Agent: save session completion metrics
   if (path === "/api/agent/session" && method === "POST") {
     const body = await request.json().catch(() => ({}));

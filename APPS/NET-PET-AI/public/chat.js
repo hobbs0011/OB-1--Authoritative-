@@ -748,6 +748,8 @@ let agentTextResolve  = null;  // resolver for typed-text → InjectUserMessage 
 let agentKeepAlive    = null;  // interval handle for KeepAlive messages
 let agentSilenceTimer = null;  // fires if student is silent >2.5s after OBI audio drains
 let agentServerAudioDone = false; // true after AgentAudioDone fires — queued for playAgentChunk drain
+let agentChunkAccum = [];         // small MP3 chunks accumulating before queue (< 1KB threshold)
+let agentChunkAccumSize = 0;      // byte count of accumulated chunks
 let agentSessionStart = null;  // timestamp when SettingsApplied fires
 let agentSessionTurns = 0;     // student voice turns this session
 let agentSessionVocab = [];    // vocab words saved via function calling this session
@@ -783,7 +785,7 @@ async function openVoiceAgent() {
 
     const onAgentDrop = () => {
       if (agentWsId !== myId) return;
-      agentWs = null; agentReady = false; agentSettings = null; agentServerAudioDone = false;
+      agentWs = null; agentReady = false; agentSettings = null; agentServerAudioDone = false; agentChunkAccum = []; agentChunkAccumSize = 0;
       if (agentKeepAlive) { clearInterval(agentKeepAlive); agentKeepAlive = null; }
       if (agentAudioWatchdog) { clearInterval(agentAudioWatchdog); agentAudioWatchdog = null; }
       if (agentSilenceTimer) { clearTimeout(agentSilenceTimer); agentSilenceTimer = null; }
@@ -903,6 +905,7 @@ function handleAgentMsg(event) {
       } else if (msg.type === "UserStartedSpeaking") {
         // Student spoke — cancel silence timer, barge-in stop, reset server-done flag
         agentServerAudioDone = false;
+        agentChunkAccum = []; agentChunkAccumSize = 0;
         if (agentSilenceTimer) { clearTimeout(agentSilenceTimer); agentSilenceTimer = null; }
         agentAudioQ.length = 0;
         if (agentCurrentAudio) { try { agentCurrentAudio.pause(); } catch {} agentCurrentAudio = null; }
@@ -945,6 +948,14 @@ function handleAgentMsg(event) {
 
       } else if (msg.type === "AgentAudioDone") {
         if (state === "busy") state = "chat";
+        // Flush any remaining small chunks from accumulator
+        if (agentChunkAccum.length > 0) {
+          const merged = new Uint8Array(agentChunkAccumSize);
+          let off = 0; for (const c of agentChunkAccum) { merged.set(new Uint8Array(c), off); off += c.byteLength; }
+          if (agentAudioQ.length < 30) agentAudioQ.push(merged.buffer);
+          agentChunkAccum = []; agentChunkAccumSize = 0;
+          if (!agentPlaying) playAgentChunk();
+        }
         // Mark server audio done — silence timer fires in playAgentChunk when local queue drains
         agentServerAudioDone = true;
         // If queue already empty (no chunks in flight), start silence timer immediately
@@ -983,8 +994,28 @@ function handleAgentMsg(event) {
     } catch {}
     return;
   }
-  // Binary: MP3 audio chunk from Deepgram TTS
-  if (agentAudioQ.length < 30) agentAudioQ.push(event.data); // cap: prevent OOM on bad connections
+  // Binary: MP3 audio chunk from Deepgram TTS — accumulate small chunks to avoid choppy playback
+  const CHUNK_FLUSH_BYTES = 1024; // flush accumulator when ≥ 1KB buffered
+  if (agentAudioQ.length < 30) {
+    if (event.data.byteLength < CHUNK_FLUSH_BYTES) {
+      agentChunkAccum.push(event.data);
+      agentChunkAccumSize += event.data.byteLength;
+      if (agentChunkAccumSize >= CHUNK_FLUSH_BYTES) {
+        const merged = new Uint8Array(agentChunkAccumSize);
+        let off = 0; for (const c of agentChunkAccum) { merged.set(new Uint8Array(c), off); off += c.byteLength; }
+        agentAudioQ.push(merged.buffer);
+        agentChunkAccum = []; agentChunkAccumSize = 0;
+      }
+    } else {
+      if (agentChunkAccum.length > 0) { // flush pending small chunks first
+        const merged = new Uint8Array(agentChunkAccumSize);
+        let off = 0; for (const c of agentChunkAccum) { merged.set(new Uint8Array(c), off); off += c.byteLength; }
+        if (agentAudioQ.length < 30) agentAudioQ.push(merged.buffer);
+        agentChunkAccum = []; agentChunkAccumSize = 0;
+      }
+      agentAudioQ.push(event.data);
+    }
+  }
   if (!agentPlaying) playAgentChunk();
 }
 
