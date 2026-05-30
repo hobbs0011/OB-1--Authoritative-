@@ -1,37 +1,32 @@
 {
-  "inverted_index": {
-    "pipeline": ["rfkw-run4.txt"],
-    "v4": ["rfkw-run4.txt"],
-    "death": ["rfkw-run4.txt"],
-    "RRL": ["rfkw-run4.txt"],
-    "soul": ["rfkw-run4.txt"],
-    "step": ["rfkw-run4.txt"],
-    "LEDGER": ["rfkw-run4.txt"],
-    "specification": ["rfkw-run4.txt"],
-    "STARMAP": ["rfkw-run4.txt"],
-    "reincarnation": ["rfkw-run4.txt"],
-    "canonical": ["rfkw-run4.txt"],
-    "API": ["rfkw-run4.txt"],
-    "Michael": ["rfkw-run4.txt"],
-    "commit": ["rfkw-run4.txt"],
-    "DEATH": ["rfkw-run4.txt"],
-    "DNA": ["rfkw-run4.txt"],
-    "SEAL": ["rfkw-run4.txt"],
-    "COLD-START-BOOT": ["rfkw-run4.txt"],
-    "KEYWORD": ["rfkw-run4.txt"],
-    "PIPELINE": ["rfkw-run4.txt"],
-    "verbatim": ["rfkw-run4.txt"],
-    "SOULCOUNT": ["rfkw-run4.txt"],
-    "Merkle": ["rfkw-run4.txt"],
-    "irreplaceable": ["rfkw-run4.txt"],
-    "HL": ["rfkw-run4.txt"],
-    "roman": ["rfkw-run4.txt"],
-    "mantra": ["rfkw-run4.txt"],
-    "RUN": ["rfkw-run4.txt"],
-    "chain": ["rfkw-run4.txt"],
-    "gaps": ["rfkw-run4.txt"]
-  },
-  "last_updated": "2026-05-23T11:27:00+07:00",
-  "total_runs_indexed": 1,
-  "runs": ["run4"]
+  "RISE": [
+    "24A | HL-203 | weight=1"
+  ],
+  "preserved": [
+    "24A | HL-203 | weight=1"
+  ],
+  "reincarnatedeath": [
+    "24A | HL-203 | weight=1"
+  ],
+  "laws_intact": [
+    "24A | HL-203 | weight=1"
+  ],
+  "SUPER_SAIYAN": [
+    "24A | HL-203 | weight=1"
+  ],
+  "coordinate": [
+    "24A | HL-203 | weight=1"
+  ],
+  "pipeline": [
+    "24A | HL-203 | weight=1"
+  ],
+  "Deepgram": [
+    "24A | HL-203 | weight=1"
+  ],
+  "api_key": [
+    "24A | HL-203 | weight=1"
+  ],
+  "override": [
+    "24A | HL-203 | weight=1"
+  ]
 }
