@@ -1,6 +1,6 @@
 # Student Portal Development — Session Context
 
-Last updated: 2026-05-29 (Run 23)
+Last updated: 2026-05-30 (Run 25)
 
 ---
 
@@ -502,6 +502,46 @@ The CF Worker was `await fetch("agent.deepgram.com")` BEFORE returning the 101 W
 | 3 | Budget phone audio queue corruption — silent/corrupt playback | 70% | ✅ 50ms gate between chunks when queue backlog > 1 |
 | 4 | Mic stream race on double-tap — orphaned stream, mic LED stuck | 60% | ✅ `micAcquiring` mutex + `finally` release in `startAgentListening` |
 | 5 | Reconnect zombie handlers — 5 reconnects = 5x audio per event | 50% | ✅ `agentWsId` counter — all handlers check `myId` before firing |
+
+---
+
+## RUN 25 EDGE CASE AUDIT + FIXES — 2026-05-30
+
+### Edge Cases Found (Run 25 — READ BEFORE TOUCHING voice agent code)
+
+| # | Issue | Severity | Status |
+|---|-------|----------|--------|
+| 1 | `utterance_end_ms` missing from Settings — dropped sometime after Run 22 deploys | HIGH | ✅ FIXED — restored conditional: vi=1200ms / en=300ms |
+| 2 | `mip_opt_out: true` missing from listen provider | MED | ✅ FIXED |
+| 3 | `Error` event sets "Error — reconnecting" status but NEVER actually triggers reconnect — WS not closed, zombie state | HIGH | ✅ FIXED — force `ws.close()` on Error so `onAgentDrop` fires |
+| 4 | `UserStoppedSpeaking` not handled — documented ❌ since Run 22 audit | MED | ✅ FIXED — shows "Processing…" status |
+| 5 | Proactive greeting `agentWs.send()` has no try-catch — silent fail if WS drops in 400ms window | LOW | ✅ FIXED — wrapped in try-catch with readyState guard |
+| 6 | iOS mic after reconnect: gesture-time stream stopped in onAgentDrop, new getUserMedia in setTimeout fails on iOS (outside gesture context) → mic dead after reconnect on iOS | HIGH | ⚠️ OPEN — pendingMicStream set in onAgentDrop setTimeout but iOS blocks non-gesture getUserMedia. Fix: cache the stream before stopping tracks, or accept iOS limitation. |
+| 7 | `api/chat` OpenRouter fallback — `openai/gpt-4o-mini` returns 403 "not available in region" + DeepSeek 403 not in needsFallback conditions | MED | ✅ FIXED — added 403 to DeepSeek needsFallback trigger. OpenRouter model left as gpt-4o-mini (region issue may be transient) |
+
+### Worker Deploy Log (Run 25)
+| Version ID | What changed |
+|---|---|
+| `6069ad7b` | BROKEN — meta-llama fallback (404). Immediately superseded. |
+| `db779ae6` | Reverted OpenRouter model back to gpt-4o-mini. Added 403 to DeepSeek needsFallback. |
+| `c12412ff` | utterance_end_ms (vi=1200/en=300), mip_opt_out, Error reconnect, UserStoppedSpeaking, greeting try-catch |
+
+### Commit
+- `14ceb00b` — fix: voice agent edge cases + Settings restoration (Run 25)
+
+### Architecture Reconfirmed (Run 25)
+- `/api/chat` = text chat ONLY (quy-portal, huong-portal, mai-tram-portal). Uses DeepSeek → OpenRouter fallback.
+- `/api/deepgram-token` = voice agent ONLY. Returns JWT + Settings. No DeepSeek in this path.
+- Voice agent LLM = Deepgram-managed gpt-4o-mini. NO external hop. NO endpoint field in Settings.
+- Audio: browser → agent.deepgram.com DIRECT. Zero CF in audio path.
+- DO NOT test `/api/chat` as a proxy for voice agent health — they are completely separate systems.
+
+### Open After Run 25
+1. **VERIFY VOICE AGENT LIVE** — Michael opens magic-chat.html?studentId=quy-bluetech, DevTools console, clicks mic. Look for `[VOICE] connecting, jwt prefix: eyJ...` then `SettingsApplied`. This is the ONLY remaining blocker.
+2. **JWT scope question** — auth/grant returns `asr:write`. If Voice Agent requires `agent:write`, Settings will be rejected silently. Check Deepgram dashboard key scopes if SettingsApplied does NOT fire.
+3. **iOS reconnect mic** — edge case #6 above, not yet fixed.
+4. **Deepgram Sydney region** — validate nova-3 + gpt-4o-mini in SYD, then add `region: "syd"` to Settings.
+5. **Tiger Win metrics** — post-session summary card is NEXT feature (marked NEXT in TODO list).
 
 ---
 

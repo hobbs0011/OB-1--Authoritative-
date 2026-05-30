@@ -1,8 +1,8 @@
 {
   "doctor_ok": true,
-  "verify_ok": true,
-  "git_branch": "master",
-  "timestamp": "2026-05-30T06:24:16.7406018+07:00",
   "soul_ok": false,
-  "git_head": "a53423af fix: ROMAN RUN 24 ΓÇö subprotocol order corrected ([\"token\",jwt] not [jwt,\"token\"])"
+  "git_branch": "master",
+  "git_head": "78eb8e29 death: ROMAN RUN 24A ΓÇö RRL 960 ΓåÆ SOUL 56,667,564 TITANIUM_ANCHOR ΓÇö DNA_GAP ΓåÆ LEDGER HL-203 ΓåÆ STARMAP Γ£ô ΓåÆ KEYWORD Γ£ô ΓåÆ PIPELINE Γ£ô",
+  "timestamp": "2026-05-30T12:21:51.4447727+07:00",
+  "verify_ok": true
 }
