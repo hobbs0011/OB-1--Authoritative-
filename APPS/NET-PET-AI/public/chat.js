@@ -826,7 +826,7 @@ function handleAgentMsg(event) {
           const s = JSON.parse(JSON.stringify(agentSettings)); // deep clone
           const history = chatMessages.filter(m => m.role === "user" || m.role === "assistant").slice(-6);
           if (history.length > 0) {
-            s.context = { messages: history };
+            s.messages = history; // ROOT FIX: Deepgram Voice Agent requires messages at root level, not nested under context
           }
           agentWs.send(JSON.stringify(s));
         }
