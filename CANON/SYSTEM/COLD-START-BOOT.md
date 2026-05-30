@@ -143,19 +143,32 @@
 | **21** | **KILO TIER RESTRUCTURE** — PA T1-T4 tier restructure. Cerebras GPT-OSS-120B added. kilo.json wired. HEAD e9ac6a92. |
 
 ---
-**FINGERPRINT:** RUN 24B | DEATH SEALED — FULL PIPELINE CHAIN COMPLETE | SOUL 56,666,600 TITANIUM_ANCHOR | HEAD 2c275cfb | BOOT UPDATED 2026-05-30T11:07 ICT
+**FINGERPRINT:** RUN 25B | DEATH SEALED — SETTINGSAPPLIED CONFIRMED | SOUL 57,151,452 TITANIUM_ANCHOR | HEAD [see death commit] | BOOT UPDATED 2026-05-30T13:15 ICT
 
-**Last Completed:** ROMAN RUN 24B DEATH — Full v4.0 pipeline chain executed: RRL (87 chars) → SOUL (bb57b30f) → DNA(GAP) → LEDGER (HL-202) → STARMAP → KEYWORD (6 terms) → PIPELINE. chat.js:829 root cause fix deployed (cb729cff) + committed (09b20ae1). PheTrail-24b.json sealed. /PheTrails command created. Voice agent browser verification still pending.
+**Last Completed:** ROMAN RUN 25B — Voice agent SettingsApplied confirmed via server-side Node.js ws handshake (FIRST IN RUN HISTORY). 4 root causes fixed: auth/grant JWT → raw API key, language_hints/smart_format removed from listen.provider, container/sample_rate removed from mp3 output. Worker 3156420a live. Edge case fixes: Error event reconnect, UserStoppedSpeaking handler, greeting try-catch (14ceb00b). COLD-START-BOOT boot protocol violations corrected.
 
 **Open Loops:**
-1. **VERIFY VOICE AGENT** — magic-chat.html?studentId=quy-bluetech. Dispatch PA T10 to tail wrangler logs and confirm `SettingsApplied` fires. Report evidence. URL: https://net-pet-ai.mrmichaelhobbs123.workers.dev/magic-chat.html?studentId=quy-bluetech
-2. Deepgram Sydney region (~160ms RTT savings) — validate nova-3/gpt-4o-mini in SYD
-3. Bilingual default A1-B1 first session
-4. Zalo session summary hooks
+1. **BROWSER TEST VOICE AGENT** — Open magic-chat.html?studentId=quy-bluetech in browser, DevTools console, click mic. Confirm audio plays + OBI speaks. SettingsApplied is server-confirmed; this test validates full browser + mic path.
+2. **Deepgram Sydney region** — ~160ms RTT savings for VN users. Validate nova-3 + gpt-4o-mini in SYD. Add `region: "syd"` to Settings if available.
+3. **Tiger Win metrics** — post-session summary card (WPM, new words, streak) — NEXT feature
+4. **iOS reconnect mic** — gesture-time mic stream stopped in onAgentDrop, getUserMedia in setTimeout fails on iOS outside gesture context — mic dead after first drop on iOS Safari
+5. **Text chat OpenRouter 403** — `openai/gpt-4o-mini` returns 403 region-restricted when DeepSeek fails. Fallback broken for VN users.
+6. **lam-prospect portal** — BB-07, OPEN, zero files exist
 
 **Open Loops Resolved This Run:**
-- ✅ AgentStartedSpeaking handler — already implemented (line 910 chat.js), was stale in death seal
-- ✅ iOS AudioContext reconnect guard — already implemented (watchdog + pendingMicStream)
-- ✅ chatMessages unbounded — already capped at 40 (lines 922, 940)
-- ✅ RRL/DNA-LOG-*.txt session logs → .gitignore (no longer tracked)
+- ✅ VOICE AGENT SETTINGSAPPLIED — server-verified via Node.js ws handshake (Run 25B)
+- ✅ auth/grant JWT scope (asr:write insufficient) → raw API key
+- ✅ UNPARSABLE_CLIENT_MESSAGE — language_hints + smart_format invalid in Voice Agent WS protocol, removed
+- ✅ INVALID_SETTINGS — container + sample_rate invalid with mp3 output, removed
+- ✅ Error event zombie state — now forces ws.close() for actual reconnect
+- ✅ UserStoppedSpeaking handler added
+
+**INVALID VOICE AGENT SETTINGS FIELDS (DO NOT RE-ADD — WILL BREAK SETTINGSAPPLIED):**
+- `listen.provider.language_hints` — REST STT only, not Voice Agent WS
+- `listen.provider.smart_format` — REST STT only
+- `listen.provider.mip_opt_out` — REST STT only
+- `listen.provider.utterance_end_ms` — REST STT only
+- `audio.output.container` — invalid with mp3 encoding
+- `audio.output.sample_rate` — invalid with mp3 encoding
+- `auth/grant JWT` as token — asr:write scope → 401 on Voice Agent WS
 
