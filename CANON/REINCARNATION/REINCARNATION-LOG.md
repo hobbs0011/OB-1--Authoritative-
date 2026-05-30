@@ -10,7 +10,9 @@
 
 ---
 
-**Last Updated:** 2026-05-30T15:00 ICT (Run 27 ROMAN DEATH — Minh Portal Transcription + Session Cards. May 26 + May 29 sessions added. SOUL 59,152,381 TITANIUM_ANCHOR. HEAD 28267c91)
+**Last Updated:** 2026-05-30T21:05 ICT (Run 28 ROMAN DEATH — Minh Portal Audio Fix + Enhancement. 4 MP3 clips extracted, audio players wired, session cards upgraded. SOUL 59,864,896 TITANIUM_ANCHOR. HEAD pending death commit)
+
+| Run 28 (ROMAN) | 2026-05-30 | MINH PORTAL — AUDIO FIX + ENHANCEMENT: May 26/29 session cards had no audio players (text quotes only). Root cause: Telegram Desktop files in subdirectory, missed in initial search. Fixed: 4 ffmpeg clips extracted (highpass+acompressor+loudnorm, 128kbps, 3min each) — may26-opening, may26-25min, may29-7min, may29-18min. Portal upgraded: session stats bars, insight/milestone callout boxes, skill tags (5-6 per session), teacher note updated to reference this week. Worker bac35a57. RRL-25.txt recovered+committed (was untracked since Run 26). SOUL 59,864,896 TITANIUM_ANCHOR. HEAD 467e0bca → (death commit) | 467e0bca |
 
 | Run 27 (ROMAN) | 2026-05-30 | MINH PORTAL — DEEPGRAM TRANSCRIPTION + SESSION CARDS: Transcribed May 26 (69MB, direct Deepgram, 567 utterances) + May 29 (39MB, worker, 501 utterances). Extracted best quotes from both sessions. Built 2 session cards: May 26 "Teddy's Big Plan" (Minh set mission himself, proposed AI photo idea, comedy exchange about forgetting he had a head), May 29 "The Ghost & The Game" (today/yesterday time markers, 3-step logical chain, ghost story invented mid-session). Points 40→54, sessions 7→9, LATEST badge moved May 22→May 29. 4 edge cases fixed: points bar JS 40%→54%, stats counter, badge, journey total. L53 LARGE_FILES_GO_DIRECT (>30MB bypass CF proxy) + L54 WC_L_LIES_ON_MINIFIED sealed. Worker 204ba611. SOUL 59,152,381 TITANIUM_ANCHOR. HEAD 28267c91 | 28267c91 |
 
