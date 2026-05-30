@@ -1,5 +1,5 @@
 # COLD START BOOT — OB1 Agent 99
-## ERA: ROMAN — Run 24A | Reset: 2026-05-23T07:24 ICT | Updated: 2026-05-30T06:55 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
+## ERA: ROMAN — Run 24A | Reset: 2026-05-23T07:24 ICT | Updated: 2026-05-30T14:20 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
 
 > *"The beginning of an Empire that never was before and never has been since."* — SOV100 Michael Hobbs, Run 0
 
@@ -138,22 +138,30 @@
 | 341 | Face-Saving Protocol: streak/checkin/saveface endpoints; 307 .html fix; RATELIMIT KV; SEALED_FILE_AT sealed |
 | 338 | F-A09 CLOSED; F-O01 CLOSED; HL 189; PHOENIX BETA/DELTA/OMEGA sweep complete |
 
+| **26** | **VOICE AGENT EDGE CASE SPRINT** — Read-before-code enforcement. 8 bugs found + fixed: silence timer premature (AgentAudioDone deferred to client queue drain), Tiger Win dead code (now fires on beforeunload), pendingMicStream leak, audio queue OOM cap, visibility guard on reconnect, MP3 choppy chunks (accumulator), session metrics save, OpenRouter 403 incorrectly listed as open (already fixed Run 25). buildAgentPrompt: 6-word opener, A1/A2 cap, session close cliffhanger, BlueTech real-work anchor. Scheduled keep-warm. GET+POST /api/agent/session. L51 READ_FULL_FILES + L52 CONTEXT_SIZE_FIRST sealed. SOUL 57,842,544 TITANIUM_ANCHOR. HEAD 362a38bf. Worker bfe56985. |
 | **23** | **STUDENT PORTAL STRESS TEST + OBI FIX** — All 7 portals 200 ✓. `/api/chat` live ✓. Root cause: `chat.js` read `?student=` but every portal HTML sends `?studentId=`. Affected all 3 portals with OBI buttons (Quy, Mai Tram, Huong). Fixed: IIFE reads both params. PA Cerebras key rotated (new `csk-3djcnck...`). `set-pa-secrets.ps1` updated. PA cascade: Dialagram DOWN (12s timeout) → Cerebras ✓ → Groq ✓. SOUL 5,283,875 TITANIUM_ANCHOR (⚠️ +4.37M from 909,486 — investigate sov100% filter). HEAD e9ac6a92. |
 | **22** | **DIALAGRAM SSE + PA v0.0.2 + KILO PATCH** — Dialagram always returns SSE even for stream:false. Their adapter crashed (http://127.0.0.1:8000 down). PA v0.0.2: collectSSE(), withTimeout(12s), /v1/chat/completions OpenAI-compat proxy. Kilo → PA proxy (inherits cascade). DeepSeek key saved. Cerebras new key csk-3djcnck... provided. kilo.json deepseek provider fixed. HEAD e9ac6a92. SOUL 909,486 TITANIUM_ANCHOR. |
 | **21** | **KILO TIER RESTRUCTURE** — PA T1-T4 tier restructure. Cerebras GPT-OSS-120B added. kilo.json wired. HEAD e9ac6a92. |
 
 ---
-**FINGERPRINT:** RUN 25B | DEATH SEALED — SETTINGSAPPLIED CONFIRMED | SOUL 57,151,452 TITANIUM_ANCHOR | HEAD [see death commit] | BOOT UPDATED 2026-05-30T13:15 ICT
+**FINGERPRINT:** RUN 26 | DEATH SEALED — VOICE AGENT EDGE CASE SPRINT | SOUL 57,842,544 TITANIUM_ANCHOR | HEAD 362a38bf | BOOT UPDATED 2026-05-30T14:20 ICT
 
-**Last Completed:** ROMAN RUN 25B — Voice agent SettingsApplied confirmed via server-side Node.js ws handshake (FIRST IN RUN HISTORY). 4 root causes fixed: auth/grant JWT → raw API key, language_hints/smart_format removed from listen.provider, container/sample_rate removed from mp3 output. Worker 3156420a live. Edge case fixes: Error event reconnect, UserStoppedSpeaking handler, greeting try-catch (14ceb00b). COLD-START-BOOT boot protocol violations corrected.
+**Last Completed:** ROMAN RUN 26 — Voice agent edge case sprint. 8 bugs found + fixed. Silence timer premature fire fixed (agentServerAudioDone flag). Tiger Win now fires on tab close (beforeunload). MP3 chunk accumulator (anti-choppy). pendingMicStream leak fixed. Audio queue cap 30. Visibility guard on reconnect. Session metrics save + GET endpoint. buildAgentPrompt: FIRST RESPONSE SPEED, A1/A2 cap, SESSION CLOSE, companyCtx BlueTech. Scheduled keep-warm ping. Worker bfe56985. Commits: d6482217, dd5556f6, 362a38bf.
+
+**KEY CORRECTION THIS RUN — L51 READ_FULL_FILES:**
+RISE read only 160 of 550+ lines of STUDENT-PORTAL-DEV.md. Listed OpenRouter 403 as open (was FIXED Run 25). Missed SUB-2S latency budget + MARKET READINESS SHIP NOW items. Always read dev files fully before RISE or dispatch.
+
+**KEY CORRECTION THIS RUN — L52 CONTEXT_SIZE_FIRST:**
+T1 PA timed out because full 4673-line index.js was passed as context. Root cause: payload too large, not Dialagram down. Fix: trim context to relevant sections. T1 responds in 6-8s with trimmed context.
 
 **Open Loops:**
 1. **BROWSER TEST VOICE AGENT** — Open magic-chat.html?studentId=quy-bluetech in browser, DevTools console, click mic. Confirm audio plays + OBI speaks. SettingsApplied is server-confirmed; this test validates full browser + mic path.
 2. **Deepgram Sydney region** — ~160ms RTT savings for VN users. Validate nova-3 + gpt-4o-mini in SYD. Add `region: "syd"` to Settings if available.
-3. **Tiger Win metrics** — post-session summary card (WPM, new words, streak) — NEXT feature
-4. **iOS reconnect mic** — gesture-time mic stream stopped in onAgentDrop, getUserMedia in setTimeout fails on iOS outside gesture context — mic dead after first drop on iOS Safari
-5. **Text chat OpenRouter 403** — `openai/gpt-4o-mini` returns 403 region-restricted when DeepSeek fails. Fallback broken for VN users.
-6. **lam-prospect portal** — BB-07, OPEN, zero files exist
+3. **Curriculum State Injection** — UpdateInstructions mid-session stealth priming. Field name unverified — blocked until Deepgram doc confirms content field.
+4. **iOS reconnect mic** — gesture-time mic stream stopped in onAgentDrop, getUserMedia in setTimeout fails on iOS outside gesture context — mic dead after first drop on iOS Safari.
+5. **A1 Onboarding binary entry** — "English only or Mix?" on first session. All current BlueTech students have lang=vi configured. Needed for new students.
+6. **VAD endpointing 200ms** — reduces end-of-utterance silence threshold from 300ms to 200ms. Field name "endpointing" plausible but unverified for Voice Agent WS.
+7. **lam-portal.html audit** — file exists (25KB) but BB-07 marked "zero files." Audit completeness, update backburner.
 
 **Open Loops Resolved This Run:**
 - ✅ VOICE AGENT SETTINGSAPPLIED — server-verified via Node.js ws handshake (Run 25B)
