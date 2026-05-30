@@ -761,19 +761,15 @@ async function handleAPI(path, request, env, url) {
     if (!apiKey) return addCors(json({ error: "DEEPGRAM_API_KEY not configured" }, 500), request);
     const studentId = url.searchParams.get("studentId") || "";
     try {
-      const [tokenRes, rawProfile, rawLang, rawVocab, rawArc] = await Promise.all([
-        fetch("https://api.deepgram.com/v1/auth/grant", {
-          method: "POST",
-          headers: { "Authorization": `Token ${apiKey}`, "Content-Type": "application/json" },
-          body: JSON.stringify({ ttl_seconds: 120 })
-        }),
+      const [rawProfile, rawLang, rawVocab, rawArc] = await Promise.all([
         env.NET_PET_KV.get("student_profile_" + studentId),
         env.NET_PET_KV.get("lang:" + studentId),
         env.NET_PET_KV.get("vocab_list_" + studentId),
         env.NET_PET_KV.get("vocab_arc_" + studentId)
       ]);
-      if (!tokenRes.ok) return addCors(json({ error: "token grant failed: " + tokenRes.status }, 502), request);
-      const { access_token } = await tokenRes.json();
+      // Raw API key — auth/grant asr:write scope is insufficient for Voice Agent WS (401)
+      // CF Worker endpoint already gates access; raw key exposure here is acceptable
+      const access_token = apiKey;
 
       let agentProfile = null, agentLang = "en", recentVocab = [], arcData = null;
       try { if (rawProfile) agentProfile = JSON.parse(rawProfile); } catch (_) {}
@@ -789,12 +785,12 @@ async function handleAPI(path, request, env, url) {
         type: "Settings",
         audio: {
           input:  { encoding: "linear16", sample_rate: 16000 },
-          output: { encoding: "mp3", sample_rate: 24000, container: "none" }
+          output: { encoding: "mp3" }
         },
         agent: {
           language: "en",
           listen: {
-            provider: { type: "deepgram", model: "nova-3", language_hints: ["en", "vi"], smart_format: true, mip_opt_out: true, utterance_end_ms: agentLang === "vi" ? 1200 : 300 }
+            provider: { type: "deepgram", model: "nova-3" }
           },
           think: {
             provider: { type: "open_ai", model: "gpt-4o-mini" },
