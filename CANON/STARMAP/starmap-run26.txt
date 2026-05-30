@@ -1,0 +1,17 @@
+# STARMAP - RUN 26
+**Date:** 2026-05-30T14:10 ICT
+**Agent:** Qwen 3.7 Max (T1)
+**Mode:** DEATH v4.0 Full Pipeline Chain
+**HEAD:** d6482217 / dd5556f6
+**SOULCOUNT:** 57,503,188 (TITANIUM_ANCHOR)
+
+## SUMMARY
+Voice agent production hardening sprint. 3 deploys (cfb227ba, fa94e8a8, 02ac4e6e). Audio chunk threshold 1KB->4KB. Vietnamese voice guard hardened (ENGLISH ONLY). Silence timer 2500ms->4000ms + 3s post-speech guard. Vocab endpoint crash fixed (PROFILES DO null check). FIRST RESPONSE SPEED prompt merged to prevent empty turns. Session save endpoint + MP3 accumulator deployed.
+
+## TRAILS
+- POSITIVE: Audio smoothing eliminated choppiness (user confirmed "better")
+- POSITIVE: VI guard stopped Vietnamese TTS butchering after 2 iterations
+- POSITIVE: Silence nudge no longer fires during natural pauses
+- POSITIVE: /api/vocab/list no longer crashes on PROFILES DO fallback
+- NEGATIVE: DNA extract still returns 400 (known bug since Run 23)
+- NEGATIVE: RRL-26 is minimal (350 chars) — session was mostly code execution

@@ -2828,9 +2828,11 @@ async function handleVocabList(studentId, env) {
   } catch (_) {}
   // Fallback to PROFILES DO vocab (SRS-based)
   try {
-    const stub = env.PROFILES.get(env.PROFILES.idFromName(studentId));
-    const res = await stub.fetch(new Request("https://do/vocab/list"));
-    return res;
+    if (env.PROFILES && typeof env.PROFILES.idFromName === "function") {
+      const stub = env.PROFILES.get(env.PROFILES.idFromName(studentId));
+      const res = await stub.fetch(new Request("https://do/vocab/list"));
+      return res;
+    }
   } catch (_) {}
   return json({ words: [], total: 0 });
 }
@@ -2883,7 +2885,7 @@ function buildAgentPrompt(profile, lang, recentVocab = [], arc = null) {
   const funcInstr = "FUNCTION: When the student successfully uses a new English word in a sentence — not just repeats it but actually USES it — call save_vocabulary_word with that word. Do this silently, mid-conversation. Max 2 saves per session.";
 
   const viMode = lang === "vi"
-    ? `BILINGUAL MODE ACTIVE: After each sentence you produce, add Vietnamese translation in parentheses immediately. Example: 'Nice work! (Làm tốt lắm!) What did you listen to today? (Hôm nay bạn nghe gì?)' Every sentence — no exceptions.\nVIETNAMESE HONORIFICS: Address ${isBeginner ? "A1/A2" : "B1+"} learner as "${isBeginner ? "em" : "bạn"}". OBI self-refers as "${isBeginner ? "cô" : "cô/anh"}". Never use flat pronouns "tôi/mày/mình" for OBI. Maintain formal-friendly teaching tone in all Vietnamese sections.`
+    ? `VOICE OUTPUT LANGUAGE: ENGLISH ONLY. NEVER produce Vietnamese words, phrases, syllables, or translations in any spoken response. Your TTS engine is English-only and will mangle Vietnamese phonetics. If student speaks Vietnamese, understand it fully but ALWAYS reply in English only. No exceptions. No parenthetical translations in voice. No Vietnamese greetings. No Vietnamese encouragement phrases.`
     : "";
 
   const faceSaving = [
@@ -2896,7 +2898,7 @@ function buildAgentPrompt(profile, lang, recentVocab = [], arc = null) {
 
   return [
     `You are OBI — Michael Hobbs in AI form. High-energy, anti-shame, tough love. Volume and velocity beat grammar. Mouse Voice → Tiger Voice. Coach, not textbook.${_name ? ` Student: ${_name}.` : ""}`,
-    "FIRST RESPONSE SPEED: Open your very first reply with a 6-word-or-fewer acknowledgment before anything else. Example: \"Nice!\", \"Ha, I like that!\", \"OK, I hear you!\" Gets TTS audio flowing to the student fast.",
+    "FIRST RESPONSE SPEED: Your ENTIRE first reply must be ONE short sentence (under 10 words) that BOTH acknowledges what they said AND moves the conversation forward. Example: 'Nice — tell me more!' or 'Love that — what happened next?' Never say just 'Great!' or 'Nice!' alone. One sentence only, then stop.",
     "1-3 sentences MAX. React to what they said. One sharp follow-up question. Never lecture. A1/A2 students: max 2 sentences, ultra-simple words only.",
     ctx,
     levelInstr,

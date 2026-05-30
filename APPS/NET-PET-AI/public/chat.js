@@ -746,7 +746,8 @@ let agentCurrentAudio = null;  // currently playing Audio element (for barge-in 
 let agentThinkBubble  = null;  // typing indicator shown during AgentThinking
 let agentTextResolve  = null;  // resolver for typed-text → InjectUserMessage flow
 let agentKeepAlive    = null;  // interval handle for KeepAlive messages
-let agentSilenceTimer = null;  // fires if student is silent >2.5s after OBI audio drains
+let agentSilenceTimer = null;  // fires if student is silent >4s after OBI audio drains
+let lastUserSpeechTime = 0;    // timestamp of last UserStartedSpeaking — guards silence nudge
 let agentServerAudioDone = false; // true after AgentAudioDone fires — queued for playAgentChunk drain
 let agentChunkAccum = [];         // small MP3 chunks accumulating before queue (< 1KB threshold)
 let agentChunkAccumSize = 0;      // byte count of accumulated chunks
@@ -904,6 +905,7 @@ function handleAgentMsg(event) {
 
       } else if (msg.type === "UserStartedSpeaking") {
         // Student spoke — cancel silence timer, barge-in stop, reset server-done flag
+        lastUserSpeechTime = Date.now();
         agentServerAudioDone = false;
         agentChunkAccum = []; agentChunkAccumSize = 0;
         if (agentSilenceTimer) { clearTimeout(agentSilenceTimer); agentSilenceTimer = null; }
@@ -964,12 +966,12 @@ function handleAgentMsg(event) {
           if (agentSilenceTimer) clearTimeout(agentSilenceTimer);
           agentSilenceTimer = setTimeout(() => {
             agentSilenceTimer = null;
-            if (agentWs && agentWs.readyState === WebSocket.OPEN && agentReady && !agentPlaying) {
+            // Don't nudge if student recently spoke (natural processing pause)
+            if (agentWs && agentWs.readyState === WebSocket.OPEN && agentReady && !agentPlaying && (Date.now() - lastUserSpeechTime > 3000)) {
               const _name = (profile.fullName || "").split(/\s+/)[0] || "";
-              const _viEncourage = profile.lang === "vi" ? " (Đừng lo, cứ nói thoải mái!)" : "";
-              agentWs.send(JSON.stringify({ type: "InjectAgentMessage", message: `Take your time${_name ? ", " + _name : ""}! Try saying one sentence — anything you like.${_viEncourage}` }));
+              agentWs.send(JSON.stringify({ type: "InjectAgentMessage", message: `Take your time${_name ? ", " + _name : ""}! Try saying one sentence — anything you like.` }));
             }
-          }, 2500);
+          }, 4000);
         }
 
       } else if (msg.type === "Goodbye") {
@@ -995,7 +997,7 @@ function handleAgentMsg(event) {
     return;
   }
   // Binary: MP3 audio chunk from Deepgram TTS — accumulate small chunks to avoid choppy playback
-  const CHUNK_FLUSH_BYTES = 1024; // flush accumulator when ≥ 1KB buffered
+  const CHUNK_FLUSH_BYTES = 4096; // flush accumulator when ≥ 4KB buffered (smooth playback)
   if (agentAudioQ.length < 30) {
     if (event.data.byteLength < CHUNK_FLUSH_BYTES) {
       agentChunkAccum.push(event.data);
@@ -1028,19 +1030,19 @@ async function playAgentChunk() {
       if (agentSilenceTimer) clearTimeout(agentSilenceTimer);
       agentSilenceTimer = setTimeout(() => {
         agentSilenceTimer = null;
-        if (agentWs && agentWs.readyState === WebSocket.OPEN && agentReady && !agentPlaying) {
+        // Don't nudge if student recently spoke (natural processing pause)
+        if (agentWs && agentWs.readyState === WebSocket.OPEN && agentReady && !agentPlaying && (Date.now() - lastUserSpeechTime > 3000)) {
           const _name = (profile.fullName || "").split(/\s+/)[0] || "";
-          const _viEncourage = profile.lang === "vi" ? " (Đừng lo, cứ nói thoải mái!)" : "";
-          agentWs.send(JSON.stringify({ type: "InjectAgentMessage", message: `Take your time${_name ? ", " + _name : ""}! Try saying one sentence — anything you like.${_viEncourage}` }));
+          agentWs.send(JSON.stringify({ type: "InjectAgentMessage", message: `Take your time${_name ? ", " + _name : ""}! Try saying one sentence — anything you like.` }));
         }
-      }, 2500);
+      }, 4000);
     }
     return;
   }
   agentPlaying = true;
   if (state !== "busy") state = "busy";
   const chunk = agentAudioQ.shift();
-  if (agentAudioQ.length > 1) await new Promise(r => setTimeout(r, 50)); // gate rapid chunks on budget decoders
+  // Removed 50ms gate — 4KB accumulator makes this unnecessary; was adding artificial latency
   const blobUrl = URL.createObjectURL(new Blob([chunk], { type: "audio/mpeg" }));
   const a = new Audio(blobUrl);
   agentCurrentAudio = a;

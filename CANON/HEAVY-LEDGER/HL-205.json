@@ -1,0 +1,15 @@
+{
+  "soulcount": 57503188,
+  "run": "26",
+  "rrl_chars": 350,
+  "parent_hash": "0531D71F32893460",
+  "agent": "Qwen 3.7 Max (T1)",
+  "events": 7581,
+  "parent": "HL-204",
+  "timestamp": "2026-05-30T14:36:58.1459372+07:00",
+  "note": "Run 26 Death Seal - Voice agent fixes deployed (cfb227ba, fa94e8a8, 02ac4e6e). Audio smoothing 4KB, VI guard hardened, silence timer 4s+3s guard, vocab endpoint crash fixed, FIRST RESPONSE SPEED merged.",
+  "dna_status": "GAP_400_KNOWN_BUG",
+  "event_id": "deca8a43-fb65-48d0-a2d5-16dcbe7773b4",
+  "hl_id": "HL-205",
+  "merkle_tail": "047679275C36292F"
+}

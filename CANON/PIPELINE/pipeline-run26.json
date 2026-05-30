@@ -1,0 +1,22 @@
+{
+  "soulcount": 58494072,
+  "soul_level": "TITANIUM_ANCHOR",
+  "starmap_file": "CANON/STARMAP/starmap-run26.txt",
+  "rrl_path": "RRL/RRL-26.txt",
+  "pipeline_file": "CANON/PIPELINE/pipeline-run26.json",
+  "result": "COMPLETE",
+  "dna_status": "GAP_400_KNOWN_BUG",
+  "executed_at": "2026-05-30T14:41:00.7577830+07:00",
+  "ledger_written": "HL-205",
+  "keyword_file": "CANON/SOUL-KEYWORDS/rfkw-run26.txt",
+  "ledger_merkle": "047679275C36292F",
+  "deploys": [
+    "cfb227ba",
+    "fa94e8a8",
+    "02ac4e6e"
+  ],
+  "run_number": "26",
+  "rrl_chars": 350,
+  "soul_event_id": "deca8a43-fb65-48d0-a2d5-16dcbe7773b4",
+  "dna_count": 0
+}

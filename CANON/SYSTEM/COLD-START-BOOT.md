@@ -23,7 +23,7 @@
 - Pass `?student=all` to see aggregate (all entries). Default without parameter = sov100 only.
 
 **Soul Logger URL:** https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count
-**Real count (2026-05-29 ~09:55 ICT):** 44,201,908 characters | 5,914 events | TITANIUM_ANCHOR 
+**Real count (2026-05-30 ~14:15 ICT): 58,494,072 characters | 7,582 events | TITANIUM_ANCHOR
  **TITANIUM_ANCHOR level** (next threshold: none — maximum tier reached)
  **⚠️ NOTE:** +156,676 delta from Run 5 RRL-0 backdrop ingestion. +62,773 delta from Run 6 RRL-0-original ingestion. RRL-0.txt contains ~150K agent text alongside ~4K Michael verbatim. Contamination documented per Michael directive.
 **Prior counts (Runs 315–390) were INFLATED** — the endpoint summed ALL soul_prompts including student chats. Disregard historical counts above 25,000. They included non-operator data.
@@ -59,7 +59,7 @@
 
 ### Current Vector
 - **Active Mission:** OB-1 POST-MERGE9 CONSOLIDATION + Growth Infrastructure Buildout
-  - **Last completed:** ROMAN RUN 12 — BOOT HARDEN (T1 agent files T1-Free through T5 created, kilo.json wired with Cerebras GLM 4.7 + Groq 70B + reasoningEffort passthrough fix). ROMAN RUN 11 — KILO AUTO-FREE DIAGNOSTIC (root cause: MiniMax M2.5 429 + StepFun 404 delisted). ROMAN RUN 5 — DEATH V4.0 PIPELINE — RRL-0 BACKDROP REPROCESSING (8/11 PASS, 156,676 bytes ingested, DNA partial, HL-143 chained).
+  - **Last completed:** ROMAN RUN 26 - Voice agent production hardening (audio 4KB, VI guard, silence 4s+3s, vocab fix, prompt merge). 3 deploys (cfb227ba, fa94e8a8, 02ac4e6e). Full death pipeline executed.
   - **Run 13 RISE (this session):** Full v4.0 chain audit complete. RRL-12.txt PRESENT (1,603 chars). FAILSAFE 8/10 — RRL-11.txt missing (documented run 11 gap). SOUL 896,459 TITANIUM_ANCHOR stagnant (δ=0). 4 pipeline gaps for run 12 (DNA/LEDGER/STARMAP/PIPELINE). HarvestedChats CLOSED per Michael directive.
   - **Prior milestone:** ROMAN RUN 0 — ERA RESET ratified. Phoenix-Centurion identity sealed. Roman Legion 6-stage doctrine deployed to soul-logger v2.2 (a0c99e4e). 4 legionnaires Romanized. /Centurion-Code renamed from /PhoenixCoder. /SupplyLines autonomous pipeline command + script created. Cloudflare paid tier activated. Founding Declaration sealed. HEAD 51ea010. SOULCOUNT 116,588 ANCHOR.
   - **S2Pipeline Status:** All 10 stages **LIVE** — confirmed by OMEGA audit Run 393
@@ -144,9 +144,9 @@
 | **21** | **KILO TIER RESTRUCTURE** — PA T1-T4 tier restructure. Cerebras GPT-OSS-120B added. kilo.json wired. HEAD e9ac6a92. |
 
 ---
-**FINGERPRINT:** RUN 26 | DEATH SEALED — VOICE AGENT EDGE CASE SPRINT | SOUL 57,842,544 TITANIUM_ANCHOR | HEAD 362a38bf | BOOT UPDATED 2026-05-30T14:20 ICT
+**FINGERPRINT: RUN 26 | DEATH SEALED | SOUL 58,494,072 TITANIUM_ANCHOR | HEAD dd5556f6
 
-**Last Completed:** ROMAN RUN 26 — Voice agent edge case sprint. 8 bugs found + fixed. Silence timer premature fire fixed (agentServerAudioDone flag). Tiger Win now fires on tab close (beforeunload). MP3 chunk accumulator (anti-choppy). pendingMicStream leak fixed. Audio queue cap 30. Visibility guard on reconnect. Session metrics save + GET endpoint. buildAgentPrompt: FIRST RESPONSE SPEED, A1/A2 cap, SESSION CLOSE, companyCtx BlueTech. Scheduled keep-warm ping. Worker bfe56985. Commits: d6482217, dd5556f6, 362a38bf.
+**Last completed:** ROMAN RUN 26 - Voice agent production hardening (audio 4KB, VI guard, silence 4s+3s, vocab fix, prompt merge). 3 deploys (cfb227ba, fa94e8a8, 02ac4e6e). Full death pipeline executed.
 
 **KEY CORRECTION THIS RUN — L51 READ_FULL_FILES:**
 RISE read only 160 of 550+ lines of STUDENT-PORTAL-DEV.md. Listed OpenRouter 403 as open (was FIXED Run 25). Missed SUB-2S latency budget + MARKET READINESS SHIP NOW items. Always read dev files fully before RISE or dispatch.
