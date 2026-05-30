@@ -888,7 +888,7 @@ function handleAgentMsg(event) {
         } else {
           _openingMsg = `${_viGreet}${_greetName || "there"}! I'm OBI, your English coach. No pressure — just speak naturally, I'll guide you. What do you want to talk about today?`;
         }
-        setTimeout(() => { agentWs.send(JSON.stringify({ type: "InjectAgentMessage", message: _openingMsg })); }, 400);
+        setTimeout(() => { try { if (agentWs && agentWs.readyState === WebSocket.OPEN) agentWs.send(JSON.stringify({ type: "InjectAgentMessage", message: _openingMsg })); } catch (_) {} }, 400);
         // Start mic if stream already acquired
         if (!agentMicStream) {
           if (pendingMicStream) {
@@ -961,9 +961,15 @@ function handleAgentMsg(event) {
         if (agentKeepAlive) { clearInterval(agentKeepAlive); agentKeepAlive = null; }
         showTigerWin();
 
+      } else if (msg.type === "UserStoppedSpeaking") {
+        // Student finished speaking — start listening indicator
+        setMicStatus("Processing…", false);
+
       } else if (msg.type === "Error") {
         console.error("[AGENT ERROR]", msg.code, msg.description, JSON.stringify(msg));
         setMicStatus("Error — reconnecting", false);
+        // Force WS close so onAgentDrop fires and actually reconnects
+        if (agentWs) { try { agentWs.close(); } catch (_) {} }
 
       } else if (msg.type === "Warning") {
         console.warn("[AGENT WARNING]", msg.code, msg.description);

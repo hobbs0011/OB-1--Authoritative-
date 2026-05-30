@@ -794,7 +794,7 @@ async function handleAPI(path, request, env, url) {
         agent: {
           language: "en",
           listen: {
-            provider: { type: "deepgram", model: "nova-3", language_hints: ["en", "vi"], smart_format: true }
+            provider: { type: "deepgram", model: "nova-3", language_hints: ["en", "vi"], smart_format: true, mip_opt_out: true, utterance_end_ms: agentLang === "vi" ? 1200 : 300 }
           },
           think: {
             provider: { type: "open_ai", model: "gpt-4o-mini" },
@@ -2615,7 +2615,7 @@ async function handleChat(body, env) {
     clearTimeout(dsTimer);
   }
 
-  const needsFallback = !res.ok && (res.status === 0 || res.status === 401 || res.status === 402 || res.status === 429 || res.status >= 500);
+  const needsFallback = !res.ok && (res.status === 0 || res.status === 401 || res.status === 402 || res.status === 403 || res.status === 429 || res.status >= 500);
   let data;
   if (needsFallback && env.OPENROUTER_API_KEY) {
     const orAbort = new AbortController();
