@@ -1,0 +1,12 @@
+{
+  "merkle_tail": "0531D71F32893460",
+  "agent": "Qwen 3.7 Max (T1)",
+  "parent_hash": null,
+  "parent": "HL-203",
+  "soulcount": 57151452,
+  "timestamp": "2026-05-30T11:07:00+07:00",
+  "run": "25B",
+  "hl_id": "HL-204",
+  "events": 7581,
+  "note": "PARTIAL BACKFILL - no RRL source, metadata from death seal only"
+}

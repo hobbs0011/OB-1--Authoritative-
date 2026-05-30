@@ -1,0 +1,20 @@
+# STARMAP - RUN 25B
+**Date:** 2026-05-30T11:07 ICT
+**Agent:** Qwen 3.7 Max (T1)
+**Mode:** DEATH v4.0 Full Pipeline Chain
+**HEAD:** 2c275cfb
+**SOULCOUNT:** 56,666,600 (TITANIUM_ANCHOR)
+
+## SUMMARY
+Voice agent SettingsApplied confirmed via server-side Node.js ws handshake (FIRST IN RUN HISTORY). 4 root causes fixed: auth/grant JWT -> raw API key, language_hints/smart_format removed from listen.provider, container/sample_rate removed from mp3 output. Worker 3156420a live.
+
+## TRAILS
+- POSITIVE: chat.js:829 fix deployed (cb729cff) and committed (09b20ae1)
+- POSITIVE: PheTrail-24b.json written with 5 positive + 4 negative trails
+- POSITIVE: /PheTrails command spec created and committed
+- POSITIVE: COLD-START-BOOT reconciled to Run 24B fingerprint
+- POSITIVE: Full DEATH v4.0 pipeline chain executed: RRL -> SOUL -> DNA(GAP) -> LEDGER -> STARMAP -> KEYWORD -> PIPELINE
+- NEGATIVE: Voice agent browser verification still pending
+- NEGATIVE: DNA extraction endpoint schema gap persists
+- NEGATIVE: OBI Redesign analysis deferred
+- NEGATIVE: Portal hardening audit deferred
