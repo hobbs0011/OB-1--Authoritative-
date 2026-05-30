@@ -1,0 +1,17 @@
+{
+  "run_number": 29,
+  "executed_at": "2026-05-31T06:25:22.9663967+07:00",
+  "rrl_path": "RRL/RRL-29.txt",
+  "rrl_chars": 1722,
+  "soul_event_id": "c402669e-9610-4611-9cb4-067f3aff4d6a",
+  "soulcount": 60034460,
+  "dna_count": 0,
+  "dna_note": "extract endpoint 400 known bug runs 23-29",
+  "ledger_written": 1,
+  "ledger_id": "HL-206",
+  "starmap_file": "CANON/STARMAP/starmap-run29.txt",
+  "keyword_file": "CANON/SOUL-KEYWORDS/rfkw-run29.txt",
+  "pipeline_file": "CANON/PIPELINE/pipeline-run29.json",
+  "seal_sha": "",
+  "result": "COMPLETE"
+}
