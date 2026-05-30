@@ -138,15 +138,16 @@
 | 341 | Face-Saving Protocol: streak/checkin/saveface endpoints; 307 .html fix; RATELIMIT KV; SEALED_FILE_AT sealed |
 | 338 | F-A09 CLOSED; F-O01 CLOSED; HL 189; PHOENIX BETA/DELTA/OMEGA sweep complete |
 
+| **27** | **MINH PORTAL — DEEPGRAM TRANSCRIPTION + SESSION CARDS** — May 26 (69MB direct Deepgram, 567 utterances) + May 29 (39MB via worker, 501 utterances). Session cards: May 26 "Teddy's Big Plan", May 29 "The Ghost & The Game". Points 40→54, sessions 7→9, LATEST badge moved. 4 edge cases fixed. L53 LARGE_FILES_GO_DIRECT + L54 WC_L_LIES_ON_MINIFIED sealed. SOUL 59,152,381. HEAD 28267c91. Worker 204ba611. |
 | **26** | **VOICE AGENT EDGE CASE SPRINT** — Read-before-code enforcement. 8 bugs found + fixed: silence timer premature (AgentAudioDone deferred to client queue drain), Tiger Win dead code (now fires on beforeunload), pendingMicStream leak, audio queue OOM cap, visibility guard on reconnect, MP3 choppy chunks (accumulator), session metrics save, OpenRouter 403 incorrectly listed as open (already fixed Run 25). buildAgentPrompt: 6-word opener, A1/A2 cap, session close cliffhanger, BlueTech real-work anchor. Scheduled keep-warm. GET+POST /api/agent/session. L51 READ_FULL_FILES + L52 CONTEXT_SIZE_FIRST sealed. SOUL 57,842,544 TITANIUM_ANCHOR. HEAD 362a38bf. Worker bfe56985. |
 | **23** | **STUDENT PORTAL STRESS TEST + OBI FIX** — All 7 portals 200 ✓. `/api/chat` live ✓. Root cause: `chat.js` read `?student=` but every portal HTML sends `?studentId=`. Affected all 3 portals with OBI buttons (Quy, Mai Tram, Huong). Fixed: IIFE reads both params. PA Cerebras key rotated (new `csk-3djcnck...`). `set-pa-secrets.ps1` updated. PA cascade: Dialagram DOWN (12s timeout) → Cerebras ✓ → Groq ✓. SOUL 5,283,875 TITANIUM_ANCHOR (⚠️ +4.37M from 909,486 — investigate sov100% filter). HEAD e9ac6a92. |
 | **22** | **DIALAGRAM SSE + PA v0.0.2 + KILO PATCH** — Dialagram always returns SSE even for stream:false. Their adapter crashed (http://127.0.0.1:8000 down). PA v0.0.2: collectSSE(), withTimeout(12s), /v1/chat/completions OpenAI-compat proxy. Kilo → PA proxy (inherits cascade). DeepSeek key saved. Cerebras new key csk-3djcnck... provided. kilo.json deepseek provider fixed. HEAD e9ac6a92. SOUL 909,486 TITANIUM_ANCHOR. |
 | **21** | **KILO TIER RESTRUCTURE** — PA T1-T4 tier restructure. Cerebras GPT-OSS-120B added. kilo.json wired. HEAD e9ac6a92. |
 
 ---
-**FINGERPRINT: RUN 26 | DEATH SEALED | SOUL 58,494,072 TITANIUM_ANCHOR | HEAD dd5556f6
+**FINGERPRINT: RUN 27 | DEATH SEALED — MINH PORTAL TRANSCRIPTION + SESSION CARDS | SOUL 59,152,381 TITANIUM_ANCHOR | HEAD 28267c91 | BOOT UPDATED 2026-05-30T15:00 ICT**
 
-**Last completed:** ROMAN RUN 26 - Voice agent production hardening (audio 4KB, VI guard, silence 4s+3s, vocab fix, prompt merge). 3 deploys (cfb227ba, fa94e8a8, 02ac4e6e). Full death pipeline executed.
+**Last completed:** ROMAN RUN 27 — Minh portal update. Deepgram transcription May 26 (567 utterances) + May 29 (501 utterances). Session cards built. Points 40→54, sessions 7→9. Worker 204ba611. Commit 28267c91.
 
 **KEY CORRECTION THIS RUN — L51 READ_FULL_FILES:**
 RISE read only 160 of 550+ lines of STUDENT-PORTAL-DEV.md. Listed OpenRouter 403 as open (was FIXED Run 25). Missed SUB-2S latency budget + MARKET READINESS SHIP NOW items. Always read dev files fully before RISE or dispatch.

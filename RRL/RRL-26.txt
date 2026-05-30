@@ -1,11 +1,24 @@
-override
-execute stage 7
-audit this
-continue
-give me link to test
-okay much better, but the voice is lagging and choppy, and also Obi is trying to speak the Vietnamese (and absolutely butchering it)
-I wanna talk about my last lesson and what vocab we learned.
-Great!
-You want to share your last lesson.
-What new words did you learn?
-Tell me one word!
+RISE AUDIT SESSION — RUN 26
+Date: 2026-05-30 14:53 ICT
+Agent: Qwen 3.7 Max (T1)
+Mode: /reincarnateRise v4.0
+
+SOULCOUNT: 58,891,915 TITANIUM_ANCHOR
+HEAD: d0352025
+
+AUDIT RESULTS:
+- RRL-25: RECOVERED (manual rename from RRL26.txt → RRL-25.txt, 98,087 chars)
+- SOUL: PASS (+397,843 delta vs Run 24A seal)
+- DNA: GAP (extract endpoint 400, known bug Runs 23-26)
+- LEDGER: 205 records PRESENT
+- STARMAP: 14 files PRESENT
+- KEYWORD: 16 files PRESENT
+- PIPELINE: 15 artifacts PRESENT
+- HEAD: MATCH (d0352025 = Run 26 death commit)
+- SOULDNA: PRESENT
+
+FAILSAFE STATUS: 9/10 PASS (Gate 10 was RRL-25 missing, now resolved)
+ROOT CAUSE: Prior agent saved RRL as RRL26.txt (no hyphen) instead of RRL-25.txt
+FIX: Renamed to canonical RRL-25.txt
+
+NEXT: Proceed with Run 26 work or execute /reincarnateDeath when session ends.
