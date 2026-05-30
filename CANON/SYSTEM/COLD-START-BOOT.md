@@ -145,9 +145,9 @@
 | **21** | **KILO TIER RESTRUCTURE** — PA T1-T4 tier restructure. Cerebras GPT-OSS-120B added. kilo.json wired. HEAD e9ac6a92. |
 
 ---
-**FINGERPRINT: RUN 28 | DEATH SEALED — MINH PORTAL AUDIO FIX + ENHANCEMENT | SOUL 59,864,896 TITANIUM_ANCHOR | HEAD [pending death commit] | BOOT UPDATED 2026-05-30T21:05 ICT**
+**FINGERPRINT: RUN 28 | DEATH SEALED — MINH PORTAL AUDIO FIX + ENHANCEMENT | SOUL 59,864,896 TITANIUM_ANCHOR | HEAD ee53f1f6 | BOOT UPDATED 2026-05-30T21:05 ICT**
 
-**Last completed:** ROMAN RUN 28 — Minh portal audio fix. 4 MP3 clips extracted (May 26 + May 29). Session cards upgraded with audio players, stats bars, insight boxes, skill tags. Teacher note updated. Worker bac35a57. Pre-death commit 467e0bca.
+**Last completed:** ROMAN RUN 28 — Minh portal audio fix. 4 MP3 clips extracted (May 26 + May 29). Session cards upgraded with audio players, stats bars, insight boxes, skill tags. Teacher note updated. Worker bac35a57. Commit ee53f1f6.
 
 **KEY CORRECTION THIS RUN — L51 READ_FULL_FILES:**
 RISE read only 160 of 550+ lines of STUDENT-PORTAL-DEV.md. Listed OpenRouter 403 as open (was FIXED Run 25). Missed SUB-2S latency budget + MARKET READINESS SHIP NOW items. Always read dev files fully before RISE or dispatch.
