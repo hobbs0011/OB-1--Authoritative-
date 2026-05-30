@@ -143,15 +143,15 @@
 | **21** | **KILO TIER RESTRUCTURE** — PA T1-T4 tier restructure. Cerebras GPT-OSS-120B added. kilo.json wired. HEAD e9ac6a92. |
 
 ---
-**FINGERPRINT:** RUN 24 | SUBPROTOCOL FIX + JWT GRANT + CONTEXT.MESSAGES + CLIENT_SIDE REMOVED | SOUL 55,764,825 TITANIUM_ANCHOR | HEAD a53423af | BOOT UPDATED 2026-05-30T06:45 ICT
+**FINGERPRINT:** RUN 25 | BOOT-VERIFY + VOICE AGENT DEPLOY SYNC | SOUL 55,967,494 TITANIUM_ANCHOR | HEAD 4e977475 | BOOT UPDATED 2026-05-30T03:34 ICT
 
-**Last Completed:** ROMAN RUN 24 — 4 PA T10 audit fixes committed + deployed (worker 93907559). Root cause found via live diagnostic: Deepgram echoes "token" when format is `Sec-WebSocket-Protocol: token, <credential>` — confirming `["token", jwt]` order is correct. PA had reversed this to `[jwt, "token"]` — now fixed. JWT from auth/grant (asr:write scope) returned successfully with new owner key. Voice agent fix deployed but NOT YET VERIFIED by Michael (needs browser test). RRL/DNA-LOG-*.txt added to .gitignore (57MB+ files were bloating repo).
+**Last Completed:** ROMAN RUN 25 — Short session. RISE booted. Synced net-pet-ai deploy (d572e532) to match Run 24 committed subprotocol fix. JWT endpoint confirmed live. Voice agent NOT yet live-tested by Michael.
 
 **Open Loops:**
-1. **VERIFY VOICE AGENT** — Open chat.html?studentId=quy-bluetech in browser. Watch DevTools console for `[VOICE] connecting, jwt prefix:` then either `SettingsApplied` (success) or `[AGENT ERROR]` code. If `INVALID_AUTH` → JWT scope insufficient, revert to `access_token = apiKey` in index.js.
-2. Deepgram Sydney region (~160ms RTT savings) — validate nova-3/gpt-4o-mini availability in SYD region
-3. Bilingual default A1-B1 first session — explicit L1 permission for A1-B1 on first session
-4. NET Tiger Assessment deploy — GAP-8 frozen, needs explicit direction
+1. **VERIFY VOICE AGENT** — magic-chat.html?studentId=quy-bluetech. Dispatch PA T10 to tail wrangler logs and confirm `SettingsApplied` fires. Report evidence. URL: https://net-pet-ai.mrmichaelhobbs123.workers.dev/magic-chat.html?studentId=quy-bluetech
+2. Deepgram Sydney region (~160ms RTT savings) — validate nova-3/gpt-4o-mini in SYD
+3. Bilingual default A1-B1 first session
+4. Zalo session summary hooks
 
 **Open Loops Resolved This Run:**
 - ✅ AgentStartedSpeaking handler — already implemented (line 910 chat.js), was stale in death seal
