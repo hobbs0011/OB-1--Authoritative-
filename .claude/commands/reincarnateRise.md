@@ -76,6 +76,49 @@ Read these IN ORDER. Do not skip. Do not summarize — ABSORB.
 
 ---
 
+## STEP 2.5: PRE-CODE GATE — MANDATORY BEFORE ANY NET-PET-AI DISPATCH
+
+**This step exists because Run 31 agent touched chat.js without reading any documentation. It destroyed 4 runs of uncommitted work and falsely claimed to implement features.**
+
+If this session will involve ANY change to `APPS/NET-PET-AI/**`:
+
+### MUST READ (full file, not partial):
+1. `OPERATIONS/STUDENT-PORTAL-DEV.md` — full portal state, architecture, what is live
+2. `CANON/RESEARCH/deepgram-voice-agent-edge-cases.md` — API constraints and known bugs
+
+### MUST PASS AS CONTEXT to T1 agent:
+- Relevant sections of STUDENT-PORTAL-DEV.md
+- §2 Critical Protocol Findings from deepgram-voice-agent-edge-cases.md
+- The actual current contents of the target file (not a stub)
+
+### DEEPGRAM VOICE AGENT — CRITICAL CONSTRAINTS (encoded here so they travel with every boot):
+
+**INVALID SETTINGS FIELDS — WILL BREAK SETTINGSAPPLIED (DO NOT ADD THESE):**
+- `listen.provider.language_hints` — REST STT only
+- `listen.provider.smart_format` — REST STT only
+- `listen.provider.mip_opt_out` — REST STT only
+- `listen.provider.utterance_end_ms` — REST STT only
+- `audio.output.container` — invalid with mp3 encoding
+- `audio.output.sample_rate` — invalid with mp3 encoding
+- JWT `auth/grant` token — asr:write scope gives 401 on Voice Agent WS
+
+**CORRECT PROTOCOL (verified official docs + production code):**
+- WS URL: `wss://agent.deepgram.com/v1/agent/converse` — NEVER just `/`
+- Auth: `["token", rawApiKey]` as WS subprotocol
+- Settings: sent ONLY after receiving `Welcome` event
+- Text injection: `{type: "InjectUserMessage", content: "..."}` — NOT "TextInput"
+- Agent inject: `{type: "InjectAgentMessage", message: "..."}` — field is `message` not `content`
+- Mid-session prompt update: `{type: "UpdatePrompt", prompt: "..."}` — NOT UpdateInstructions
+- History context: `agent.context.messages` — NOT root-level `messages`
+- Managed LLM: `{provider: {type: "open_ai", model: "gpt-4o-mini"}}` — NO `endpoint` field
+- TTS model: `aura-2-zeus-en` — DO NOT revert to asteria (swapped Run 29)
+
+**L55 COMMIT_DONT_HOLD (Run 32 LAW):**
+Every verified working feature MUST be committed before session end.
+Gapless audio v2+v3, OBI avatar, mode landing, and error telemetry were all lost in Run 31 because they were held uncommitted across 4 runs.
+
+---
+
 ## STEP 3: ALTITUDE CHECK
 
 What is the BIGGEST unsolved problem right now?

@@ -62,6 +62,23 @@ Extract verbatim from this session — NO CLEANUP, NO PARAPHRASE:
 
 ---
 
+## STEP 1.5: DOC-READ VERIFICATION — MANDATORY
+
+Before writing §4 CORRECTIONS, answer: **"Which docs did the agent read before each code change?"**
+
+For any change to `APPS/NET-PET-AI/**`, the agent MUST have read:
+- `OPERATIONS/STUDENT-PORTAL-DEV.md` (full file — not first 160 lines)
+- `CANON/RESEARCH/deepgram-voice-agent-edge-cases.md` (§2 at minimum)
+
+If answer is "NONE" or "partial" — that IS the root cause. Write it in §4.
+Run 31: agent read zero docs. Result = car crash, 4 runs of work destroyed permanently.
+
+**L55 COMMIT_DONT_HOLD CHECK:** Did every verified working feature get committed this session?
+If NO — list in §8 UNFINISHED ACTIONS with exact git add command for next agent.
+Uncommitted work across runs = permanent loss risk (gapless audio v2+v3, Runs 27-31).
+
+---
+
 ## STEP 2: BUILD THE 12-SECTION ARTIFACT
 
 Write to `CANON/REINCARNATION/YYYY-MM-DD-{session-slug}.md` (append-only — never overwrite prior entries):

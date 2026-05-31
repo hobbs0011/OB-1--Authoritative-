@@ -97,6 +97,8 @@
 14. L41 NO_TRAILING_QUESTIONS — never end a response with "What do you want to do?" / "Your call." / "Say the word." Canon or backlog tells the next action.
 15. L42 REASONING_CONTENT_IS_NORMAL — deepseek-v4-flash returns reasoning_content with empty content. EXPECTED. PA run367 has the fallback. NOT BROKEN.
 16. L43 DISPATCH_CHECK_FIRST — before spawning any agent, check DISPATCH.md tier table. T2 = PA with "tier":2 OR Kilo DS Flash. NOT a general-purpose agent.
+17. L55 COMMIT_DONT_HOLD — every verified working feature MUST be committed before session end. Gapless audio v2+v3, OBI avatar, mode landing page, and error telemetry were ALL permanently lost in Run 31 because they ran uncommitted across 4 runs. No exceptions.
+18. L56 PRE_CODE_DOC_GATE — before ANY change to APPS/NET-PET-AI/**, agent MUST read: (1) OPERATIONS/STUDENT-PORTAL-DEV.md FULL FILE, (2) CANON/RESEARCH/deepgram-voice-agent-edge-cases.md §2. Pass both as context to T1 PA dispatch. Agent that skips this = Run 31 = car crash.
 
 ### Recent Decisions + State (Run 353 → Run 13 ROMAN)
 | Run | Summary |

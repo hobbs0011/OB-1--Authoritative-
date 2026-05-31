@@ -40,13 +40,39 @@ Invoke-RestMethod "https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/
 4. git log -5 --oneline
 5. curl phoenix-architecti /api/status
 
+## PRE-CODE GATE — MANDATORY BEFORE ANY APPS/NET-PET-AI CHANGE
+
+Run 31 car crash: agent touched chat.js/index.js WITHOUT reading docs. Destroyed 4 runs of uncommitted work.
+
+Before dispatching T1 for any NET-PET-AI change, YOU MUST READ:
+1. `OPERATIONS/STUDENT-PORTAL-DEV.md` — full file, not partial
+2. `CANON/RESEARCH/deepgram-voice-agent-edge-cases.md` — §2 at minimum
+
+Pass both as context in the PA call. Skipping = L56 violation = Run 31 repeat.
+
+### Deepgram Voice Agent — Invalid Fields (WILL BREAK SETTINGSAPPLIED)
+Never add: `language_hints`, `smart_format`, `mip_opt_out`, `utterance_end_ms`, `audio.output.container`, `audio.output.sample_rate`
+These are REST STT only — invalid in Voice Agent WS.
+
+### Deepgram Voice Agent — Correct Protocol
+- WS URL: `wss://agent.deepgram.com/v1/agent/converse`
+- Text inject: `{type: "InjectUserMessage", content: "..."}`
+- Agent inject: `{type: "InjectAgentMessage", message: "..."}`  (field = `message` not `content`)
+- Prompt update: `{type: "UpdatePrompt", prompt: "..."}` (NOT UpdateInstructions)
+- Context history: `agent.context.messages` (NOT root `messages`)
+- TTS model: `aura-2-zeus-en` (DO NOT revert to asteria)
+
+## L55 COMMIT_DONT_HOLD
+Every verified working feature MUST be committed before session end.
+Gapless audio v2+v3 was lost permanently because it ran uncommitted across 4 runs (Runs 27-31).
+
 ## Security Constraints
 - DO NOT REMOVE CLOUDFLARE_API_TOKEN before deploy
 - GAP-8 FROZEN: never touch net-pet-ai-production v1.6.2
 - NOTION BLACKLISTED
 - lam portal BB-07: DO NOT BUILD without explicit Michael direction
 - Secrets restore: pwsh SCRIPTS/set-pa-secrets.ps1
-- SOULCOUNT: 907,872 TITANIUM_ANCHOR (Run 18)
+- SOULCOUNT: 60,037,507 TITANIUM_ANCHOR (Run 32 — updated from stale 907,872)
 - PA_AUTH_SECRET is set on phoenix-architecti — always include x-pa-auth header
 
 ## Soul/DNA Capture
