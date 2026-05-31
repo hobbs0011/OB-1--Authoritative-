@@ -23,7 +23,7 @@
 - Pass `?student=all` to see aggregate (all entries). Default without parameter = sov100 only.
 
 **Soul Logger URL:** https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count
-**Real count (2026-05-31 ~03:35 ICT): 60,035,603 characters | 7,905 events | TITANIUM_ANCHOR
+**Real count (2026-05-31 ~12:08 ICT): 60,037,507 characters | 7,906 events | TITANIUM_ANCHOR
  **TITANIUM_ANCHOR level** (next threshold: none — maximum tier reached)
  **⚠️ NOTE:** +156,676 delta from Run 5 RRL-0 backdrop ingestion. +62,773 delta from Run 6 RRL-0-original ingestion. RRL-0.txt contains ~150K agent text alongside ~4K Michael verbatim. Contamination documented per Michael directive.
 **Prior counts (Runs 315–390) were INFLATED** — the endpoint summed ALL soul_prompts including student chats. Disregard historical counts above 25,000. They included non-operator data.
@@ -42,12 +42,12 @@
 - RRL: ✅ RRL-0-original.txt (60,826 chars) — Run 0 clean transcript (Michael + agent). RRL-4.txt (909 chars). RRL-1.txt (1,933 chars). RRL-0.txt (154,795 chars). `SCRIPTS/rrl-extract.ps1`, `SCRIPTS/rrl-pipeline.ps1`, `SCRIPTS/rrl-failsafe.ps1` deployed. HarvestedChats/ 96 files — CLOSED per Michael directive (Run 13 RISE). ~396 runs missing RRLs.
 
 **DIRECTIVE — HarvestedChats CLOSED (Run 13 RISE):** Michael has explicitly waved off the 96 HarvestedChats files. They are NOT to be ingested, processed, or flagged as open work. Do not raise them again in any RISE or pipeline context. This directive is permanent.
-- SOUL: ✅ /api/soul/count — sums byte_count WHERE sov100%. 513,414 TITANIUM_ANCHOR (+62,773 from Run 6 RRL-0-original ingestion).
-- DNA: ✅ Run 4: 11 prompts. Run 5: 53 prompts (partial). Run 6: extract endpoint 400 — DNA_GAP documented.
-- LEDGER: ✅ HL-199 (Run 20). Merkle chain intact. 199 JSON files on disk. 6 gap slots (HL-127/128/131/132/136/137).
-- STARMAP: ✅ Run 4: starmap-run4.txt. Run 5: starmap-run5.txt. Run 0 (original): starmap-run0.txt. Run 7: starmap-run7.txt. Run 7B: starmap-run7b.txt. 5 files.
-- KEYWORD: ✅ Run 4: rfkw-run4.txt (30 terms). Run 5: rfkw-run5.txt (30 terms). Run 0: rfkw-run0.txt (30 terms). Run 7: rfkw-run7.txt (30 terms). Run 7B: rfkw-run7b.txt (30 terms). 5 rfkw files + 2 inverted-index JSON files = 7 entries total.
-- PIPELINE: ✅ Run 4: pipeline-run4.json. Run 5: pipeline-run5.json. Run 0: pipeline-run0.json (COMPLETE, DNA partial). Run 7: pipeline-run7.json. Run 7B: pipeline-run7b.json. 5 artifacts.
+- SOUL: ✅ /api/soul/count — sums byte_count WHERE sov100%. 60,037,507 TITANIUM_ANCHOR (Run 30 RISE).
+- DNA: ⚠️ GAP — extract endpoint returns 400 "Missing text field" (runs 6-29). API contract requires `text` payload; count-only query unsupported. Non-blocking.
+- LEDGER: ✅ HL-208 (Run 30). Merkle chain intact. 208 JSON files on disk. 6 gap slots (HL-127/128/131/132/136/137).
+- STARMAP: ✅ 16 files on disk (Run 30 RISE audit).
+- KEYWORD: ✅ 18 files on disk (Run 30 RISE audit).
+- PIPELINE: ✅ 17 artifacts on disk (Run 30 RISE audit).
 - DEATH SEAL: ✅ Run 4 + Run 5 death seals written — 12 sections each.
 - RRL AUTOMATION: ✅ `SCRIPTS/rrl-pipeline.ps1` — single-command full chain (RRL→SOUL→LEDGER→STARMAP→KEYWORD→PIPELINE). `SCRIPTS/rrl-failsafe.ps1` — 10-gate verification chain. RISE protocol hardened: RRL MISSING = HALT (not WARN).
 - COLD-START-BOOT: ✅ Updated Run 6 (this file). SOULCOUNT 513,414.
@@ -145,7 +145,7 @@
 | **21** | **KILO TIER RESTRUCTURE** — PA T1-T4 tier restructure. Cerebras GPT-OSS-120B added. kilo.json wired. HEAD e9ac6a92. |
 
 ---
-**FINGERPRINT: RUN 30 | DEATH SEALED — DEEPGRAM RESEARCH + MEMORY ARCHITECTURE | SOUL 60,037,507 TITANIUM_ANCHOR | HEAD PENDING | BOOT UPDATED 2026-05-31T13:30 ICT**
+**FINGERPRINT: RUN 30 | RISE AUDIT COMPLETE — HARDENED | SOUL 60,037,507 TITANIUM_ANCHOR | HEAD 62d3fca3 | BOOT UPDATED 2026-05-31T12:10 ICT**
 
 **Last completed:** ROMAN RUN 30 — Deepgram Voice Agent exhaustive research (22 ECs, 3 resolved, full error registry). Memory architecture mapping (operator RRL pipeline → student memory). Dreamer Agents concept mapped to OBI world model. Strategic differentiator identified: MEMORY is the moat. Canonical Deepgram doc URLs permanently recorded. Research doc at CANON/RESEARCH/deepgram-voice-agent-edge-cases.md.
 
