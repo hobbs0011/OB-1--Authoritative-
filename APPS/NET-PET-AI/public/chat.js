@@ -756,6 +756,9 @@ let agentMicStream    = null;  // MediaStream from getUserMedia
 const agentAudioQ     = [];    // Queued binary MP3 chunks from Deepgram TTS
 let agentPlaying      = false;
 let agentCurrentAudio = null;  // currently playing Audio element (for barge-in stop)
+let agentCurrentBlobUrl = null; // gapless v2: explicit revoke on barge-in
+let agentChunkAccum = [];       // small MP3 chunks accumulating before queue flush (< 1KB)
+let agentChunkAccumSize = 0;    // byte count of accumulator
 let agentThinkBubble  = null;  // typing indicator shown during AgentThinking
 let agentTextResolve  = null;  // resolver for typed-text → InjectUserMessage flow
 let agentKeepAlive    = null;  // interval handle for KeepAlive messages
@@ -809,15 +812,16 @@ async function openVoiceAgent() {
       if (agentKeepAlive) { clearInterval(agentKeepAlive); agentKeepAlive = null; }
       if (agentAudioWatchdog) { clearInterval(agentAudioWatchdog); agentAudioWatchdog = null; }
       if (agentSilenceTimer) { clearTimeout(agentSilenceTimer); agentSilenceTimer = null; }
+      if (agentCurrentBlobUrl) { URL.revokeObjectURL(agentCurrentBlobUrl); agentCurrentBlobUrl = null; }
       if (agentCurrentAudio) { try { agentCurrentAudio.pause(); } catch {} agentCurrentAudio = null; }
-      agentAudioQ.length = 0; agentPlaying = false;
+      agentAudioQ.length = 0; agentChunkAccum = []; agentChunkAccumSize = 0; agentPlaying = false;
       if (agentThinkBubble) { agentThinkBubble.remove(); agentThinkBubble = null; }
       if (agentWorklet) { try { agentWorklet.disconnect(); } catch {} agentWorklet = null; }
       if (agentAudioCtx) { agentAudioCtx.close().catch(() => {}); agentAudioCtx = null; }
       if (agentMicStream) { agentMicStream.getTracks().forEach(t => t.stop()); agentMicStream = null; }
       listening = false;
       micBtn.classList.remove("mic-active");
-      setMicStatus("Reconnecting…", false);
+      setMicStatus("Tap to reconnect", false);
       setTimeout(() => {
         if (!agentWs && urlStudentId) {
           openVoiceAgent();
@@ -938,7 +942,8 @@ function handleAgentMsg(event) {
       } else if (msg.type === "UserStartedSpeaking") {
         // Student spoke — cancel silence timer and barge-in stop
         if (agentSilenceTimer) { clearTimeout(agentSilenceTimer); agentSilenceTimer = null; }
-        agentAudioQ.length = 0;
+        agentAudioQ.length = 0; agentChunkAccum = []; agentChunkAccumSize = 0;
+        if (agentCurrentBlobUrl) { URL.revokeObjectURL(agentCurrentBlobUrl); agentCurrentBlobUrl = null; }
         if (agentCurrentAudio) { try { agentCurrentAudio.pause(); } catch {} agentCurrentAudio = null; }
         agentPlaying = false;
         if (agentThinkBubble) { agentThinkBubble.remove(); agentThinkBubble = null; }
@@ -978,6 +983,14 @@ function handleAgentMsg(event) {
         agentSessionTurns++;
 
       } else if (msg.type === "AgentAudioDone") {
+        // Flush any remaining accumulated small chunks before signaling done
+        if (agentChunkAccum.length > 0) {
+          const _m = new Uint8Array(agentChunkAccumSize);
+          let _o = 0; for (const _c of agentChunkAccum) { _m.set(new Uint8Array(_c), _o); _o += _c.byteLength; }
+          if (agentAudioQ.length < 30) agentAudioQ.push(_m.buffer);
+          agentChunkAccum = []; agentChunkAccumSize = 0;
+          if (!agentPlaying) playAgentChunk();
+        }
         agentPlaying = false;
         agentCurrentAudio = null;
         if (state === "busy") state = "chat";
@@ -1009,24 +1022,61 @@ function handleAgentMsg(event) {
     } catch {}
     return;
   }
-  // Binary: MP3 audio chunk from Deepgram TTS
-  agentAudioQ.push(event.data);
-  if (!agentPlaying) playAgentChunk();
+  // Binary: MP3 audio chunk — accumulate small frames, then queue merged chunks
+  const CHUNK_FLUSH_BYTES = 1024;
+  if (agentAudioQ.length < 30) {
+    if (event.data.byteLength < CHUNK_FLUSH_BYTES) {
+      agentChunkAccum.push(event.data); agentChunkAccumSize += event.data.byteLength;
+      if (agentChunkAccumSize >= CHUNK_FLUSH_BYTES) {
+        const _m = new Uint8Array(agentChunkAccumSize);
+        let _o = 0; for (const _c of agentChunkAccum) { _m.set(new Uint8Array(_c), _o); _o += _c.byteLength; }
+        agentAudioQ.push(_m.buffer); agentChunkAccum = []; agentChunkAccumSize = 0;
+      }
+    } else {
+      if (agentChunkAccum.length > 0) {
+        const _m = new Uint8Array(agentChunkAccumSize);
+        let _o = 0; for (const _c of agentChunkAccum) { _m.set(new Uint8Array(_c), _o); _o += _c.byteLength; }
+        if (agentAudioQ.length < 30) agentAudioQ.push(_m.buffer);
+        agentChunkAccum = []; agentChunkAccumSize = 0;
+      }
+      agentAudioQ.push(event.data);
+    }
+  }
+  // v3 queue-aware guard: if playing state is stuck (audio ended but flag not reset), force restart
+  if (!agentPlaying) { playAgentChunk(); }
+  else if (agentPlaying && !agentCurrentAudio && agentAudioQ.length > 0) { agentPlaying = false; playAgentChunk(); }
 }
 
 async function playAgentChunk() {
   if (!agentAudioQ.length) { agentPlaying = false; agentCurrentAudio = null; return; }
-  agentFirstAudioReceived = true; // FIX1: legacy TTS/text suppression now safe
+  agentFirstAudioReceived = true;
   agentPlaying = true;
   if (state !== "busy") state = "busy";
-  const chunk = agentAudioQ.shift();
-  if (agentAudioQ.length > 1) await new Promise(r => setTimeout(r, 50)); // gate rapid chunks on budget decoders
-  const blobUrl = URL.createObjectURL(new Blob([chunk], { type: "audio/mpeg" }));
+  // Gapless v2: concatenate ALL queued chunks into a single blob — eliminates N-1 inter-chunk gaps
+  const chunks = agentAudioQ.splice(0);
+  const totalBytes = chunks.reduce((s, c) => s + (c.byteLength || 0), 0);
+  const merged = new Uint8Array(totalBytes);
+  let off = 0;
+  for (const c of chunks) { const arr = new Uint8Array(c); merged.set(arr, off); off += arr.length; }
+  const blobUrl = URL.createObjectURL(new Blob([merged], { type: "audio/mpeg" }));
+  agentCurrentBlobUrl = blobUrl;
   const a = new Audio(blobUrl);
   agentCurrentAudio = a;
-  a.onended = () => { URL.revokeObjectURL(blobUrl); if (agentCurrentAudio === a) agentCurrentAudio = null; playAgentChunk(); };
-  a.onerror = () => { URL.revokeObjectURL(blobUrl); if (agentCurrentAudio === a) agentCurrentAudio = null; playAgentChunk(); };
-  try { await a.play(); } catch { URL.revokeObjectURL(blobUrl); if (agentCurrentAudio === a) agentCurrentAudio = null; playAgentChunk(); }
+  // v3: Watchdog — if onended never fires (corrupted MP3 frame/browser bug), force cleanup + continue
+  const estimatedMs = Math.max(2500, (totalBytes / 16000) * 1000) + 2000;
+  const watchdog = setTimeout(() => {
+    if (agentCurrentBlobUrl === blobUrl) { URL.revokeObjectURL(blobUrl); agentCurrentBlobUrl = null; }
+    if (agentCurrentAudio === a) { agentCurrentAudio = null; agentPlaying = false; }
+    if (agentAudioQ.length) playAgentChunk();
+  }, estimatedMs);
+  const cleanup = () => {
+    clearTimeout(watchdog);
+    if (agentCurrentBlobUrl === blobUrl) { URL.revokeObjectURL(blobUrl); agentCurrentBlobUrl = null; }
+    if (agentCurrentAudio === a) agentCurrentAudio = null;
+  };
+  a.onended = () => { cleanup(); playAgentChunk(); };
+  a.onerror = () => { cleanup(); playAgentChunk(); };
+  try { await a.play(); } catch { cleanup(); agentPlaying = false; }
 }
 
 async function startAgentListening(preAcquiredStream) {
