@@ -220,3 +220,4 @@ DEATH SEAL: INLINE (DEATH_PA_FAILED — context bundle >30s)
 PLATFORM DEATH TEST: PENDING — commit + push = proof
 BOOT COMPLIANCE: PARTIAL (steps 4+7 skipped at RISE — corrected mid-session)
 ```
+
