@@ -69,28 +69,32 @@ A student must understand **at least 60%** of what they're listening to for info
 **Subtitle strategy:** Vietnamese → English → None (progressive removal)  
 **Key rule:** Focus on context, not individual words
 
-### Pillar 3 — Jolly Phonics (44 Sounds)
+### Pillar 3 — NET Phonics (42 Sounds)
 
-We use the proven Jolly Phonics system developed in England — a simplified, systematic approach to the 44 sounds in English. A big part of NET PET AI will focus on building strong foundations in these sounds and correcting bad habits.
+NET uses its own phonics system — the **NET Phonics System** — a purpose-built approach to the 42 sounds of English, designed for Vietnamese adult and teen learners. Full specification: `CANON/NET-PHONICS-SYSTEM.md`.
 
-**The 7 Sound Groups:**
+NET Phonics is **not affiliated with any proprietary phonics curriculum**. The 42 sounds of English belong to no one. The grouping logic, group names, rhymes, and actions are original to Natural English Training and are age-neutral (appropriate for adults, teens, and children).
 
-| Group | Sounds |
-|---|---|
-| 1 | s, a, t, i, p, n |
-| 2 | c/k, e, h, r, m, d |
-| 3 | g, o, u, l, f, b |
-| 4 | ai, j, oa, ie, ee, or |
-| 5 | z, w, ng, v, oo (long/short), y |
-| 6 | x, ch, sh, th (voiced/unvoiced), qu |
-| 7 | ou, oi, ue, er, ar |
+**The 7 NET Phonics Groups:**
 
-**Common Vietnamese Speaker Issues:**
-- /th/ sounds (THis, THat, THink)
-- /r/ vs /l/ confusion
-- /v/ vs /w/ confusion
-- Final consonant deletion
-- Past tense -ed pronunciation
+| Group | Name | Sounds | Teaching priority |
+| --- | --- | --- | --- |
+| 1 | **ANTS** | s, a /æ/, t, n, i /ɪ/, p | Foundation |
+| 2 | **HOLD** | b, e /e/, h, o /ɒ/, l, d | Core consonants + short vowels |
+| 3 | **GRUFF** | g, r, u /ʌ/, f, m, k | /r/ and /f/ = new muscles |
+| 4 | **WING** | w, v, j, z, y, x | Vietnamese orphan consonants |
+| 5 | **CHUNKS** | ch, sh, th /θ/, th /ð/, ng, qu | Hardest group — digraphs |
+| 6 | **SWEET** | ee, ai, oa, ie, oo /uː/, oo /ʊ/ | Vowel length awareness |
+| 7 | **PEARL** | or, ar, er, ou, oi, ue | R-controlled + diphthongs |
+
+**Top Vietnamese L1 interference patterns (addressed across all groups):**
+
+- /θ/ → /t/ or /s/ substitution (CHUNKS)
+- /r/ → /l/ confusion (GRUFF)
+- /w/ vs /v/ — completely different muscles (WING)
+- Final consonant deletion — dropping word endings (ANTS, HOLD, GRUFF)
+- Vowel length — /ɪ/ vs /iː/ are different words (SWEET)
+- Past tense -ed pronunciation (addressed in context across groups)
 
 ### Pillar 4 — Spaced Repetition
 

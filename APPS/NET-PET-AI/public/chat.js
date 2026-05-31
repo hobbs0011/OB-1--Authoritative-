@@ -810,7 +810,7 @@ async function openVoiceAgent() {
   try {
     // Fetch short-lived JWT token + pre-built Settings from CF Worker
     setMicStatus("Connecting…", false);
-    const tokenRes = await fetch(`/api/deepgram-token?studentId=${encodeURIComponent(urlStudentId)}`);
+    const tokenRes = await fetch(`/api/deepgram-token?studentId=${encodeURIComponent(urlStudentId)}&mode=${encodeURIComponent(currentMode)}`);
     if (!tokenRes.ok) { console.error("[VOICE] token fetch failed:", tokenRes.status); setMicStatus("Tap to start", false); return; }
     const { token, settings } = await tokenRes.json();
     if (!token) { console.error("[VOICE] no token in response"); setMicStatus("Tap to start", false); return; }
@@ -1551,11 +1551,14 @@ function selectMode(mode) {
   if (obiName) obiName.style.color = MODE_COLORS[mode] || MODE_COLORS.free;
   updateModeChip();
   closeModeModal();
-  // Reconnect Voice Agent with new mode if active
-  if (agentWs && agentReady) {
-    bubble('obi', `Switched to ${MODE_LABELS[mode]} mode. Reconnecting...`);
-    try { agentWs.close(); } catch (_) {}
-    setTimeout(() => openVoiceAgent(), 500);
+  // Reconnect Voice Agent with new mode
+  if (urlStudentId) {
+    if (agentWs) {
+      bubble('obi', `Switched to ${MODE_LABELS[mode]} mode. Reconnecting...`);
+      try { agentWs.close(); } catch (_) {}
+      agentWs = null; agentReady = false; // clear immediately so openVoiceAgent() won't bail
+    }
+    setTimeout(() => openVoiceAgent(), 300);
   }
 }
 
