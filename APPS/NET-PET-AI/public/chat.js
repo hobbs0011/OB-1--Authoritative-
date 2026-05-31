@@ -83,6 +83,29 @@ if (window.speechSynthesis) {
   speechSynthesis.addEventListener("voiceschanged", () => { obiVoice = pickVoice(); }, { once: true });
 }
 
+// ── Client Error Telemetry (BB-36 — re-added after Run 31 crash) ─────────────
+function reportClientError(tag, message, stack) {
+  try {
+    const payload = {
+      tag, message: String(message || '').slice(0, 500), stack: String(stack || '').slice(0, 1000),
+      studentId: (typeof profile !== 'undefined' && profile?.studentId) ? profile.studentId : 'anonymous',
+      url: window.location.href.slice(0, 300), userAgent: navigator.userAgent.slice(0, 200)
+    };
+    if (navigator.sendBeacon) {
+      navigator.sendBeacon('/api/error-report', JSON.stringify(payload));
+    } else {
+      fetch('/api/error-report', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload), keepalive: true }).catch(() => {});
+    }
+  } catch (_) {}
+}
+window.addEventListener('error', (e) => {
+  reportClientError('WINDOW_ERROR', e.message || 'Unknown error', e.error?.stack || '');
+});
+window.addEventListener('unhandledrejection', (e) => {
+  const r = e.reason;
+  reportClientError('UNHANDLED_REJECTION', r?.message || String(r), r?.stack || '');
+});
+
 // Deepgram Aura TTS — queued playback
 let audioQueue = [];
 let isPlaying  = false;
