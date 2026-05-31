@@ -103,7 +103,7 @@
 ### Recent Decisions + State (Run 353 → Run 13 ROMAN)
 | Run | Summary |
 |-----|---------|
-| **36** | **NET PHONICS SYSTEM + OBI MODE FIX** — Mode selection bug fixed (currentMode not passed to /api/deepgram-token — always sent FreeTalk). selectMode() reconnect guard fixed (null agentWs immediately). NET Phonics 7-group system designed: SATNIP/DRUMBLE/HOGFEZ/WYVEX/CHUSHANG/BEEHIVE/OYSTER locked. JP refs stripped. NET-PHONICS-SYSTEM.md created. phonics-drills.js rewritten (35 drills). NET-TEACHING-METHODOLOGY.md Pillar 3 updated. Per-student phonics tracking pending. SOUL 64,727,297 TITANIUM_ANCHOR. HEAD 7eb4c603. |
+| **36** | **NET PHONICS SYSTEM + OBI MODE FIX** — Mode selection bug fixed (currentMode not passed to /api/deepgram-token — always sent FreeTalk). selectMode() reconnect guard fixed (null agentWs immediately). NET Phonics 7-group system designed: SATNIP/DRUMBLE/HOGFEZ/WYVEX/CHUSHANG/BEEHIVE/OYSTER locked. JP refs stripped. NET-PHONICS-SYSTEM.md created. phonics-drills.js rewritten (35 drills). NET-TEACHING-METHODOLOGY.md Pillar 3 updated. Per-student phonics tracking pending. SOUL 64,727,297 TITANIUM_ANCHOR. HEAD 13a68324. |
 | **35** | **OBI AUDIO UNFUCK + KILO T1 FIX + RRL AUDIT** — Gapless audio v2+v3 re-implemented (lost Run 31 crash, 4-session debt). Landing race condition fixed (openVoiceAgent before mode select). Dual TTS suppressed (BB-38). Mode chip added to header (BB-39). Client error telemetry re-added (BB-36). EC-15 pre-SettingsApplied buffer (BB-37, PA PC-1780240945594-21RCJQ). Kilo global kilo.jsonc fixed (kilo-auto/free → dialagram/qwen-3.7-max). Full RRL 26-35 audit → BB-33→BB-49 backburner. SOUL 63,771,200 TITANIUM_ANCHOR. HEAD 66c912d5. |
 | **34** | **DNA FIX + PA v0.0.3 + KILO FULL UPDATE + REGISTRY CLEANUP** — rrl-pipeline.ps1 Step 2 DNA endpoint fixed (11-run 400 debt). PA v0.0.3: T1 retry-on-5xx, Opus 4.8, mission runner → Qwen 3.7 Max. kilo.json: Cerebras removed, claude-opus-4-8, 8 worktrees synced. MANDATORY-READS registry + context-bundle.ps1 fully consistent (pipeline+student live). Lam deferred (not a client). AGENT99.md+RISE.md stale refs fixed. SOUL 62,345,112 TITANIUM_ANCHOR. Commits: dd4e0b62, 92b8cdaf, e66714e6. HEAD e66714e6. |
 | **17** | **DEATH: DIALAGRAM + TG GATEWAY + PA T1 CASCADE** — Dialagram integrated ($5.50/wk unlimited Qwen 3.7 Max). OpenClaw gateway fixed (DIALAGRAM_API_KEY + all provider keys, primary→dialagram/qwen-3.7-max). Phoenix-Architecti T1 cascade updated (Dialagram→Cerebras→Groq→CF-Qwen). Worker deployed v8d585cd5. Gateway restarted. PA T1 dispatched 3 agents for death protocol assistance. SOUL 907,872 TITANIUM_ANCHOR. HEAD 9876c1b. |
@@ -152,7 +152,7 @@
 | **21** | **KILO TIER RESTRUCTURE** — PA T1-T4 tier restructure. Cerebras GPT-OSS-120B added. kilo.json wired. HEAD e9ac6a92. |
 
 ---
-**FINGERPRINT: RUN 36 | NET PHONICS SYSTEM + OBI MODE FIX | SOUL 64,727,297 TITANIUM_ANCHOR | HEAD 7eb4c603 | BOOT UPDATED 2026-05-31T23:45 ICT**
+**FINGERPRINT: RUN 36 | NET PHONICS SYSTEM + OBI MODE FIX | SOUL 64,727,297 TITANIUM_ANCHOR | HEAD 13a68324 | BOOT UPDATED 2026-05-31T23:45 ICT**
 
 **Last completed:** ROMAN RUN 33 — Registry max upgrade + RRL 0-32 deep audit + supersaiyan PA T1 enforcement. MANDATORY-READS.md upgraded (BACKBURNER+CLASS-PREP to netpetai, pipeline+student task types added). context-bundle.ps1 expanded. supersaiyan.md hard-wired for PA T1. net-pet-ai deployed v7a5168b9. error_log D1 table created. Security flags raised: plaintext API keys in RRL-17 (Dialagram) + RRL-20 (Deepgram). New laws: L59 WAIT_FOR_GO, L60 MEMORY_IS_MOAT, L61 TOKEN_CONSERVATION. SOULCOUNT delta +862,783 (60,482,985→61,345,768).
 
@@ -189,6 +189,7 @@ Never hold working features in the working tree across runs. Commit after EVERY 
 - `audio.output.container` — invalid with mp3 encoding
 - `audio.output.sample_rate` — invalid with mp3 encoding
 - `auth/grant JWT` as token — asr:write scope → 401 on Voice Agent WS
+
 
 
 
