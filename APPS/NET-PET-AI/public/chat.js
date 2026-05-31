@@ -1281,8 +1281,9 @@ async function boot() {
 
   urlStudentId = (() => { const params = new URLSearchParams(window.location.search); return params.get("student") || params.get("studentId"); })();
 
-  // Fire Voice Agent WS connection IMMEDIATELY — Deepgram connects in parallel with boot loads
-  if (urlStudentId) openVoiceAgent();
+  // Fire Voice Agent WS connection IMMEDIATELY — but only if landing page won't be shown.
+  // If landing will show, wait for user to pick a mode before connecting with the right prompt.
+  if (urlStudentId && !landingWillShow) openVoiceAgent();
 
   let saved = null;
   try { saved = JSON.parse(localStorage.getItem("net_profile") || "null"); } catch {}
@@ -1380,6 +1381,7 @@ const MODE_COLORS = { free: 'var(--purple)', study: '#f59e0b', phonics: '#ef4444
 const MODE_LABELS = { free: '💬 Free Talk', study: '📚 Log-Home-Study', phonics: '🗣️ NET Phonics' };
 let currentMode = 'free';
 let pendingLandingMode = null;
+let landingWillShow = false; // set by initModeUI before boot() runs
 
 function selectLandingMode(mode) {
   pendingLandingMode = mode;
@@ -1399,8 +1401,10 @@ function confirmLandingMode() {
   url.searchParams.set('mode', currentMode);
   window.history.replaceState({}, '', url.toString());
   dismissLanding();
-  // I-8: Auto-start Voice Agent after mode selection (EC-9 fix)
-  if (urlStudentId && !agentWs) {
+  // Always connect (or reconnect) Voice Agent with the selected mode.
+  // boot() skipped openVoiceAgent() when landingWillShow=true, so we always start here.
+  if (urlStudentId) {
+    if (agentWs) { try { agentWs.close(); } catch (_) {} }
     setTimeout(() => openVoiceAgent(), 300);
   }
 }
@@ -1410,6 +1414,7 @@ function skipLanding() {
   currentMode = saved;
   localStorage.setItem('obi_landing_seen', 'true');
   dismissLanding();
+  if (urlStudentId) setTimeout(() => openVoiceAgent(), 300);
 }
 
 function dismissLanding() {
@@ -1475,6 +1480,7 @@ function selectMode(mode) {
     // FIX2: Show landing page for first-time users or cleared storage.
     // Previously this branch never explicitly showed the landing element,
     // causing chat to boot before mode selection.
+    landingWillShow = true; // tells boot() not to call openVoiceAgent() prematurely
     currentMode = savedMode || 'free';
     const landing = document.getElementById('modeLanding');
     if (landing) {
