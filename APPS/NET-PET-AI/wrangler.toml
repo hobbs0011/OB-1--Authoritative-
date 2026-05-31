@@ -24,6 +24,11 @@ id = "b27d144f71c44b00a4c87360841e525f"
 binding = "NET_PET_KV"
 id = "0583d1a59bb24e598c4645396647eb94"
 
+# KV namespace for Student Memory Pipeline (world_model, breakthroughs, struggles)
+[[kv_namespaces]]
+binding = "STUDENT_MEMORY"
+id = "807ea30d96844c0dbf561d0ae3a3c1f3"
+
 [assets]
 directory = "./public"
 binding = "ASSETS"

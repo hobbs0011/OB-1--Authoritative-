@@ -645,9 +645,332 @@ Research agents confirmed:
 
 ---
 
+## RUN 30 AUDIO FIX — GAPLESS PLAYBACK v2 (2026-05-31)
+
+### Problem
+Voice agent audio was choppy/stuttering, especially on mobile devices. Root cause: each MP3 chunk from Deepgram created a separate `Audio` element. The `onended → next play()` transition introduced 20-80ms silence gaps per chunk. On budget Android phones with slow `Audio.play()` latency (150-300ms), this compounded into audible stuttering.
+
+### Fix Applied
+**Gapless Playback v2** (`chat.js`):
+1. **Chunk Concatenation:** All queued MP3 chunks merged into single `Uint8Array` before creating `Audio` element. Eliminates N-1 inter-chunk gaps entirely.
+2. **Resource Cleanup:** Barge-in (`UserStartedSpeaking`) and disconnect (`onAgentDrop`) handlers explicitly revoke concatenated blob URLs. No memory leaks from orphaned object URLs.
+3. **Pre-buffer Gate REMOVED:** Initial v2 had a "wait for ≥2 chunks" gate that caused OBI to be cut off entirely on multi-message responses. Gate removed — concatenation alone solves choppiness without holding back audio.
+
+### What Was NOT Changed
+- Accumulator threshold stays at 2KB (`CHUNK_FLUSH_BYTES = 2048`)
+- Queue cap stays at 30 entries
+- Audio format remains MP3 (Deepgram TTS output)
+- No MSE/Web Audio API PCM scheduling (would require full rewrite)
+
+### Testing
+- Confirmed smooth playback on high-end laptop (was already choppy before fix)
+- Multi-message responses no longer cut off
+- Barge-in still works correctly (audio stops immediately)
+- Test sandbox: https://net-pet-ai.mrmichaelhobbs123.workers.dev/magic-test
+
+### Hardening v3 (2026-05-31 post-deploy)
+Additional defensive guards added after initial gapless fix:
+
+1. **Stuck Playback Watchdog:** If `onended` never fires (corrupted MP3 frame, browser bug), a timeout watchdog forces cleanup and restarts playback. Duration estimated from blob size / 16KB/s + 2s buffer.
+2. **Queue-Aware Guard:** Previous guard blocked ALL playback while audio was "playing." New guard checks queue state — if chunks arrive but audio is stuck, forces cleanup and restart instead of silently dropping new audio.
+3. **Comment Accuracy:** Fixed silence timer comment (was "4s", actual is "6s"). Removed stale pre-buffer gate reference.
+
+### Remaining Known Issues
+- iOS mic reconnect after drop still broken (Open Loop #4 from COLD-START-BOOT)
+- Raw Deepgram API key exposed to browser (Edge Case #3 from Run 30 audit)
+- Silence nudge race condition between AgentAudioDone + playAgentChunk drain (Edge Case #2)
+- Deepgram docs URL CHANGED: canonical hub is now `https://developers.deepgram.com/home` (NOT `/docs`). Full AI-readable docs at `https://developers.deepgram.com/llms-full.txt`. MCP server at `https://developers.deepgram.com/_mcp/server`. Old `/docs/voice-agents` paths return 404. Updated 2026-05-31.
+
+---
+
+## RUN 30 SESSION COMPLETE — 2026-05-31 FULL CHANGELOG
+
+### Overview
+Run 30 was a comprehensive hardening + feature sprint covering: audio pipeline fix, full-stack error logging, 3-mode session system, landing page UI, test portal, and edge case remediation. 12 deployments total.
+
+---
+
+### 1. GAPLESS AUDIO PLAYBACK v2+v3
+**Problem:** Voice agent audio choppy/stuttering. Each MP3 chunk created separate Audio element with 20-80ms gaps.
+**Root Cause:** `onended → next play()` transition latency compounded on mobile.
+**Fix (v2):** Concatenate ALL queued MP3 chunks into single Uint8Array before creating Audio element. Eliminates N-1 inter-chunk gaps.
+**Fix (v3):** Added stuck playback watchdog (size-based timeout), queue-aware guard (force restart if chunks arrive while "playing"), fixed stale comments.
+**Pre-buffer gate:** Initially added "wait for ≥2 chunks" gate — REMOVED because it caused OBI to be cut off entirely on multi-message responses.
+**Files:** `chat.js` lines 1056-1121
+**Remaining:** iOS mic reconnect broken, raw API key exposed, silence nudge race condition.
+
+---
+
+### 2. FULL-STACK ERROR LOGGING
+**Server:**
+- Created `src/logger.js` with `logError/logWarn/logInfo` functions
+- D1 table `error_log` created in soul-archive with indexes on ts and tag
+- Replaced 7 critical `console.error` calls in index.js with structured `logError`
+- Added `POST /api/error-report` endpoint for client error ingestion
+- Added `GET /api/error-log?limit=50&tag=X` query endpoint
+
+**Client:**
+- Added `reportClientError()` using sendBeacon (fallback fetch+keepalive)
+- Global `window.addEventListener('error')` and `unhandledrejection` handlers
+- Audio playback errors reported as AUDIO_PLAYBACK_ERROR
+- WebSocket errors/closes reported as WS_ERROR/WS_CLOSE
+- Mic failures reported as MIC_ACQUIRE_FAIL
+- All telemetry silent — never blocks UX
+
+**Test mode bypass:** `handleMemoryGet` and `handleVocabDue` skip auth/DO for `sov100-test-*` IDs.
+**Favicon:** Empty favicon.ico deployed to suppress 404 noise.
+
+---
+
+### 3. THREE-MODE SESSION SYSTEM
+**Modes:** Free Talk | Log-Home-Study | NET Phonics
+**Architecture Decision:** Single Deepgram Voice Agent with mode-switched prompts (NOT separate agents). Reasons: cold start penalty, context continuity, cost efficiency, complexity reduction.
+
+**Server (`index.js`):**
+- `/api/deepgram-token` reads `mode` URL param, passes to `buildAgentPrompt()`
+- `buildAgentPrompt(profile, lang, vocab, arc, mode)` injects mode-specific instructions
+- Phonics mode: Jolly Phonics drilling, articulation feedback, L1 interference awareness
+- Study mode: Homework tracking, streak monitoring, assignment logging
+- Free mode: Default behavior (confidence building, face-saving)
+- Static import of `PHONICS_DRILLS` from phonics-drills.js (dynamic import fails in CF Workers)
+- `/api/phonics/curriculum?group=X` endpoint exposes drill data
+
+**Client (`chat.js`):**
+- Mode selector dropdown in header (later replaced by modal + landing page)
+- Mode persisted to localStorage('obi_session_mode')
+- URL param `?mode=phonics` supported
+- Changing mode mid-session reconnects Voice Agent with new prompt
+- MODE_COLORS and MODE_LABELS constants (single source of truth after refactor)
+
+---
+
+### 4. LANDING PAGE + UI POLISH
+**Landing Page (`magic-chat.html`):**
+- Full-screen overlay on first visit (localStorage 'obi_landing_seen' tracks)
+- Pulsing 🔮 avatar (80px), gold title, subtitle
+- Three large mode cards with icons, descriptions, checkmark selection
+- Hover lift + gradient shimmer effects
+- "Start Session →" button (disabled until mode selected)
+- "Skip — use last mode" link for returning users
+- Fade-out dismiss animation
+
+**Header Polish:**
+- Obi avatar with pulsing ring animation
+- Click avatar or name opens mode selector modal
+- Name color changes per mode: purple (Free), gold (Study), red (Phonics)
+
+**Modal:**
+- Backdrop blur, centered card layout
+- Active mode highlighted with glow border
+- Close via ✕ or backdrop click
+
+---
+
+### 5. TEST PORTAL (`/test-portal`)
+**Purpose:** Standardized end-to-end test environment mirroring real student portal flow.
+**Features:**
+- Red TEST ENVIRONMENT banner (fixed top)
+- Login screen → Dashboard flow
+- Stats row (sessions/minutes/words) with mock data
+- Three mode cards linking to `/magic-chat?studentId=sov100-test-magic&mode=X`
+- Mock session history cards
+- Write blocking: POST/PUT to soul/memory/vocab/session/onboarding/streak intercepted
+- sendBeacon interception
+- Toggleable blocked requests log panel (capped at 100 entries)
+
+**Old `/magic-test` route still works** for quick chat-only tests.
+
+---
+
+### 6. QUY PROFILE RESET
+- Deleted `student_profile_quy-bluetech` and `lang:quy-bluetech` from production KV
+- Session history and vocab lists were already empty
+- Wrangler v3 CLI requires raw UUID for namespace-id (not binding name alias)
+- Must use `--remote` flag for production KV operations
+
+---
+
+### EDGE CASE AUDIT — RUN 30
+
+| # | Issue | Severity | Status |
+|---|-------|----------|--------|
+| 1 | Per-chunk Audio element gaps | CRITICAL | ✅ FIXED — Gapless concatenation v2 |
+| 2 | Pre-buffer gate cuts off multi-message | CRITICAL | ✅ FIXED — Gate removed |
+| 3 | Stuck playback on corrupted MP3 | HIGH | ✅ FIXED — Watchdog timer |
+| 4 | Queue chunks dropped during stuck state | HIGH | ✅ FIXED — Queue-aware guard |
+| 5 | Blob URL memory leak on barge-in | MED | ✅ FIXED — Explicit revoke |
+| 6 | Landing shows without studentId | HIGH | ⚠️ OPEN — needs guard |
+| 7 | Mode color duplication | LOW | ✅ FIXED — MODE_COLORS constant |
+| 8 | Blocked log unbounded growth | LOW | ✅ FIXED — Cap at 100 |
+| 9 | iOS mic reconnect after drop | HIGH | ⚠️ OPEN |
+| 10 | Raw Deepgram API key exposed | MED | ⚠️ OPEN |
+| 11 | Silence nudge race condition | MED | ⚠️ OPEN |
+| 12 | Deepgram docs unavailable | INFO | DOCUMENTED |
+
+---
+
+### DEPLOY LOG — RUN 30
+
+| Version ID | What Changed |
+|---|---|
+| `8130057a` | Gapless audio playback v2 (concatenation) |
+| `4d70d623` | Pre-buffer gate removal + dev docs update |
+| `8bccf551` | Hardening v3 (watchdog, queue-aware guard) |
+| `de82d89d` | Full-stack error logging (logger.js, D1 table, client telemetry) |
+| `3a98d1c1` | Test mode fixes (memory 401, vocab 500, favicon 404) |
+| `1f0ad395` | 3-mode system + phonics API (static import fix) |
+| `ad087711` | UI polish (avatar, modal, mode colors) |
+| `bb29978f` | Landing page mode selector |
+| `f3af84d7` | Test portal (/test-portal route) |
+| `f9d60c92` | Edge case fixes (color dedup, log cap) |
+
+---
+
+### OPEN ITEMS FOR NEXT RUN
+
+1. **iOS mic reconnect** — Gesture context limitation. Fix: cache stream before stopping tracks, or add "Tap to reconnect" button.
+2. **API key exposure** — Replace raw key pass-through with auth/grant JWT or rate-limited proxy.
+3. **Silence nudge race** — Unify dual timer architecture (AgentAudioDone + playAgentChunk drain).
+4. **Landing page studentId guard** — Don't show landing if urlStudentId missing.
+5. **Deepgram docs audit** — Retry when their site recovers from migration.
+6. **Phonics progress tracking** — Add `phonics:${studentId}:mastery` KV key.
+7. **Assessment → OBI feedback loop** — Parse Tiger Assessment phonics recordings into student profile.
+8. **Vietnamese L1 interference map** — Explicit lookup table in star-map.js.
+9. **Vocab save phonics tagging** — Extend save_vocabulary_word schema with phonics_group field.
+10. **PCC deployment** — Still not deployed (error 1042).
+
+---
+
+### DEEPGRAM DOCS — CANONICAL URLS (DISCOVERED 2026-05-31)
+
+**⚠️ CRITICAL: Old `/docs/voice-agents` paths ALL return 404. Docs site restructured.**
+
+| Resource | URL | Notes |
+|----------|-----|-------|
+| **Docs Hub** | `https://developers.deepgram.com/home` | Canonical entry point |
+| **Full AI-Readable Docs** | `https://developers.deepgram.com/llms-full.txt` | Complete API spec + guides in single text file (~2.9MB) |
+| **Docs Index** | `https://developers.deepgram.com/llms.txt` | Lightweight table of contents |
+| **MCP Server** | `https://developers.deepgram.com/_mcp/server` | For Claude Code / Cursor integration |
+| **Voice Agent Guide** | `https://developers.deepgram.com/docs/voice-agent` | Getting started, configure, function calling |
+| **Flux Agent Guide** | `https://developers.deepgram.com/docs/flux/agent` | Flux STT + external LLM + TTS pipeline |
+| **API Reference** | `https://developers.deepgram.com/reference/voice-agent/voice-agent` | WebSocket protocol spec |
+| **Browser Agent SDK** | `https://developers.deepgram.com/docs/browser-agent-overview` | Web app voice integration |
+| **Prompting Guide** | `https://developers.deepgram.com/docs/prompting-voice-agents` | System prompt best practices |
+| **Multi-Agent Architecture** | `https://developers.deepgram.com/docs/multi-agent-architecture` | Orchestrating specialized agents |
+| **Changelog** | `https://developers.deepgram.com/changelog` | ⚠️ Returns 404 as of 2026-05-31 |
+
+### FLUX ARCHITECTURE FINDINGS (from llms-full.txt)
+
+**Flux = Model-integrated end-of-turn detection.** Replaces VAD-based turn detection with model-native signals:
+- `EndOfTurn` — High confidence user finished → send to LLM
+- `EagerEndOfTurn` — Medium confidence → prepare LLM response early (lower latency)
+- `TurnResumed` — User continued speaking → cancel prepared response
+- `StartOfTurn` — User started speaking → interrupt agent if playing
+
+**Two Voice Agent Patterns:**
+1. **EndOfTurn Only** (recommended start): Simpler, fewer LLM calls, higher latency
+2. **EagerEndOfTurn + EndOfTurn**: Lower latency, more LLM calls, needs TurnResumed handling
+
+**Tuning Parameters:** `eot_threshold`, `eager_eot_threshold`, `eot_timeout_ms` — adjustable mid-stream via Configure control message.
+
+**Flux Models:** `flux-general-en` (English), `flux-general-multi` (multilingual with `language_hint`)
+
+**Relevance to OBI:** Current implementation uses Nova-3 STT via Voice Agent API (managed pipeline). Flux would require building custom STT→LLM→TTS pipeline instead of using managed Voice Agent. NOT recommended for current architecture unless latency becomes critical issue. Documented for future evaluation.
+
+### MULTI-AGENT ARCHITECTURE FINDINGS
+
+Deepgram supports orchestrating multiple specialized agents that hand off based on context/intent/domain. **Decision for OBI: Single agent with mode-switched prompts remains correct.** Multi-agent adds cold-start latency, state sync complexity, and cost overhead that outweighs benefits for our 3-mode system. Revisit only if mode-specific models become necessary (e.g., phonics-specialized fine-tuned model).
+
+---
+
 ## PCC (Phoenix-Command-Consul)
 - **Code:** `APPS/PCC/src/index.js`
 - **D1:** soul-archive (`c69a11bc-064b-478f-9b1f-e9b8e2431fb8`)
 - **Status:** Not deployed as of 2026-05-24 (error 1042 — worker not found on CF account)
 - **Function:** Empire dashboard — monitors worker health, soul-count, PhoenixCoder log, student portals
 - **TODO:** Deploy with `cd APPS/PCC && npx wrangler deploy`
+
+---
+
+## RUN 30 FINAL STATE — READY FOR DEATH
+
+**Last Deploy:** `f9d60c92-ef32-448d-9851-c12a229e120c`
+**Total Deploys This Run:** 12
+**Files Modified:** `chat.js`, `magic-chat.html`, `test-portal.html`, `index.js`, `logger.js` (new), `phonics-drills.js` (import added)
+**D1 Schema Change:** `error_log` table created with indexes
+**KV Changes:** Quy profile deleted, test mode bypasses added
+
+### COMPLETE FEATURE LIST SHIPPED
+1. Gapless Audio Playback v2+v3 (concatenation + watchdog + queue-aware guard)
+2. Full-Stack Error Logging (D1 persistence + client telemetry + global handlers)
+3. Three-Mode Session System (Free Talk / Log-Home-Study / NET Phonics)
+4. Mode Landing Page (full-screen selector on first visit)
+5. Obi Avatar + Mode Modal (click header to switch modes mid-session)
+6. Test Portal (/test-portal — mock dashboard + write blocking + blocked log)
+7. Phonics Curriculum API (/api/phonics/curriculum)
+8. Client Error Reporting (/api/error-report + /api/error-log)
+9. Test Mode Bypasses (memory 401 fix, vocab 500 fix, favicon 404 fix)
+10. Edge Case Hardening (mode color dedup, blocked log cap, stale comment fixes)
+
+---
+
+## Run 30 Implementation — EC-15 + Curriculum Injection + Memory Pipeline (2026-05-31)
+
+### Deployed Features
+| Feature | File | Commit | Description |
+|---------|------|--------|-------------|
+| EC-15 Audio Buffering | chat.js | 79fdfce8 | Buffers PCM chunks before SettingsApplied arrives, flushes on ready. 50-chunk cap (~1s). Prevents first 200-500ms student speech loss. |
+| Curriculum State Injection | chat.js | 79fdfce8 | After student's first voice turn, sends `[CURRICULUM CONTEXT]` via InjectAgentMessage with arc targets, teaching focus, breakthrough, primary block. Silent to student. |
+| Student Memory Pipeline (KV) | wrangler.toml | pending | Created STUDENT_MEMORY KV namespace `807ea30d96844c0dbf561d0ae3a3c1f3`. Endpoints GET/POST `/api/memory/:studentId` already existed in index.js. Now bound to real KV. |
+| BOOT Hardening | COLD-START-BOOT.md | 524189f6 | SOUL 60,037,507 TITANIUM_ANCHOR, LEDGER 208, DNA gap documented as API contract issue. |
+
+### Production Deploy
+- **Worker Version:** f753f203-5269-4e78-9f5d-703b834803f4
+- **URL:** https://net-pet-ai.mrmichaelhobbs123.workers.dev
+- **KV Namespaces:** RATELIMIT, NET_PET_KV, STUDENT_MEMORY (new)
+- **Bindings Verified:** All 14 bindings confirmed active post-deploy
+
+### Student Memory Schema (KV key: mem:{studentId})
+```json
+{
+  "world_model": "implicit tone/pacing/topic preferences",
+  "recent_vocab": ["last 20 words learned"],
+  "session_count": 0,
+  "last_topic": "string",
+  "breakthroughs": ["micro-wins array"],
+  "struggles": ["persistent issues array"]
+}
+```
+Max 10KB per student. Non-breaking additive — existing sessions work without memory.
+
+### EC-15 Technical Detail
+- AudioWorklet path: `agentWorklet.port.onmessage` gated behind `!agentReady` check
+- ScriptProcessor fallback: same gating applied
+- Buffer stored in `agentPreSettingsBuffer[]` with byte counter `agentPreSettingsBytes`
+- On SettingsApplied: all buffered chunks flushed via `agentWs.send()` in order, buffer cleared
+- Cap: 50 chunks (~1 second of 16kHz PCM). Oldest dropped if cap hit.
+
+### Curriculum Injection Technical Detail
+- Trigger: First `ConversationText` with `role:user` after SettingsApplied
+- Flag: `agentCurriculumInjected` (reset on each openVoiceAgent)
+- Content sources: `profile._dueVocab`, `profile.teachingFocus`, `profile.breakthrough`, `profile.primaryBlock`
+- Format: `[CURRICULUM CONTEXT] <natural language guidance>. Stay natural — this is background guidance, not a script.`
+- Delivery: `InjectAgentMessage` (silent to student, visible only to OBI's LLM context)
+- Graceful degradation: try/catch wrapped, session continues normally if injection fails
+
+### OPEN ITEMS CARRYING TO RUN 31
+1. iOS mic reconnect after drop (gesture context limitation)
+2. Raw Deepgram API key exposure (needs auth/grant JWT)
+3. Silence nudge race condition (dual timer architecture)
+4. Landing page studentId guard (don't show if missing)
+5. Phonics progress tracking KV key
+6. Assessment → OBI feedback loop
+7. Vietnamese L1 interference map
+8. Vocab save phonics tagging
+9. PCC deployment
+10. Flux evaluation (if latency becomes critical)
+11. Deepgram EC-17 InjectionRefused Handler (not implemented in chat.js)
+12. Deepgram EC-21 behavior:"queue" on injects (not used)
+13. Nova-3 Vietnamese-accented English accuracy test (pending)
+14. Browser SDK migration cost/benefit analysis (pending)
+15. Dreamer World Model KV write path (design complete, implementation deferred)
