@@ -107,8 +107,9 @@ function stopAudio() {
 
 function fallbackSpeak(text) {
   if (!window.speechSynthesis) return;
-  // FIX1: Suppress browser fallback only AFTER first agent audio has played.
-  if (agentWs && agentFirstAudioReceived) return;
+  // BB-38: Suppress browser TTS as soon as Voice Agent WS opens — agent owns all audio from that point.
+  // Old guard (agentFirstAudioReceived) was too late — browser TTS fired during handshake gap = dual voices.
+  if (agentWs) return;
   speechSynthesis.cancel();
   const u = new SpeechSynthesisUtterance(text);
   if (obiVoice) u.voice = obiVoice;
@@ -120,9 +121,8 @@ function fallbackSpeak(text) {
 
 async function speak(text) {
   if (!ttsOn) return;
-  // FIX1: Suppress legacy TTS only AFTER first agent audio has played.
-  // During handshake gap (agentWs exists but no audio yet), allow browser fallback.
-  if (agentWs && agentFirstAudioReceived) return;
+  // BB-38: Suppress legacy TTS as soon as Voice Agent WS opens.
+  if (agentWs) return;
   const clean = text.replace(/\([^)]*\)/g, "").replace(/\s{2,}/g, " ").trim();
   if (!clean) return;
 
