@@ -220,9 +220,102 @@
 
 ---
 
-## SIGNAL: MOST WANTED (NET's Most Wanted — Updated 2026-05-31)
-1. ✅ BB-27 DNA extract FIXED — 11-run debt cleared
-2. ✅ BB-28 BB-29 COLD-START-BOOT + Kilo updated
-3. lam-prospect portal missing (BB-07 / BB-32)
-4. Chrome Extension icons + install guide (BB-08 / BB-09)
-5. BB-30/BB-31 Kilo stale command references
+## RUN 35 ADDITIONS (2026-05-31) — FULL RRL AUDIT CATCH-UP
+
+### BB-33 !! Gapless Audio v2+v3 — FIXED Run 35
+- Status: DONE (2026-05-31, commit 5ca983f6, worker 15e6a70a)
+- What: playAgentChunk() created a separate new Audio() per MP3 chunk — inter-chunk gaps = choppy voice. Lost in Run 31 crash, never re-committed through Runs 32-34.
+- Fix: playAgentChunk() now concatenates ALL queued chunks into one Uint8Array before creating single Audio element (v2). Added watchdog timer if onended never fires (v3). Queue-aware guard restarts stuck playback state.
+
+### BB-34 !! MP3 Chunk Accumulator — FIXED Run 35
+- Status: DONE (2026-05-31, included in 5ca983f6)
+- What: Small MP3 frames < 1KB were queued individually. Lost in Run 31 crash (was in dd5556f6). Re-added: chunks accumulate until >= 1KB threshold, then flushed as merged Uint8Array.
+
+### BB-35 !! Voice Agent Landing Race Condition — FIXED Run 35
+- Status: DONE (2026-05-31, commit b2194ecf, worker 8e1a7ae0)
+- What: openVoiceAgent() fired at boot before user picked mode on landing page. Mode selection silently ignored if agentWs already existed. skipLanding() had no openVoiceAgent() call.
+- Fix: landingWillShow flag defers boot openVoiceAgent(). confirmLandingMode() always connects/reconnects. skipLanding() now triggers connection.
+
+### BB-36 !! Client Error Telemetry — OPEN (lost in Run 31 crash)
+- Status: OPEN — Priority HIGH
+- What: reportClientError(), global window.addEventListener('error'), unhandledrejection handlers. Lost in Run 31 crash. These report browser errors to /api/error-report → D1 error_log table (server side deployed and still live in index.js).
+- Fix: Re-add to chat.js — ~30 lines. Check Run 31 crash commit for template.
+- File: APPS/NET-PET-AI/public/chat.js
+
+### BB-37 !! EC-15 Pre-SettingsApplied Audio Buffer — OPEN (lost in Run 31 crash)
+- Status: OPEN — Priority HIGH
+- What: Buffers PCM mic chunks arriving before SettingsApplied event. Prevents first 200-500ms of student speech from being lost. agentPreSettingsBuffer[] + agentPreSettingsBytes. Lost in Run 31 crash.
+- Fix: Re-add buffer logic to AudioWorklet.port.onmessage and ScriptProcessor.onaudioprocess + flush on SettingsApplied.
+- File: APPS/NET-PET-AI/public/chat.js
+
+### BB-38 ! Dual TTS Bug — OPEN (RRL-29: "old robotic voice in background")
+- Status: OPEN
+- What: Browser SpeechSynthesis TTS fires alongside Deepgram TTS audio. Current suppression (agentFirstAudioReceived flag) fires too late — robotic voice plays during the Deepgram handshake gap. Michael heard both voices simultaneously.
+- Fix: Suppress browser TTS as soon as agentWs opens (not after first audio). Change guard from `agentWs && agentFirstAudioReceived` to `agentWs && agentReady`.
+- File: APPS/NET-PET-AI/public/chat.js — fallbackSpeak() + speak() functions (lines ~111-125)
+
+### BB-39 ! Mode Selection Visibility — OPEN (returning users)
+- Status: OPEN
+- What: Returning users (obi_landing_seen set) have no visible mode indicator. Only way to change mode is clicking the 🔮 avatar in header — but no label/hint shows it's clickable on mobile (title tooltip doesn't show). Michael said "no mode selection."
+- Fix: Add current mode name label next to avatar in header, or show a persistent mode chip in the UI that makes clickability obvious.
+- File: APPS/NET-PET-AI/public/magic-chat.html + chat.js
+
+### BB-40 ! Session History Review by OBI — OPEN (RRL-29: "why isnt obi reviewing last sessions?")
+- Status: OPEN
+- What: OBI doesn't recall or reference prior sessions in its opening. context.messages sends last 6 turns but OBI doesn't explicitly acknowledge or build on prior session themes.
+- Fix: On SettingsApplied, send InjectAgentMessage with a brief session continuity reference: "Last time we talked about [last_topic]. How are you feeling about that today?"
+- File: APPS/NET-PET-AI/public/chat.js (post-SettingsApplied handler) + /api/deepgram-token (include session history in Settings context.messages)
+
+### BB-41 ~ Deepgram Male Voice Option — OPEN (RRL-29: "try a male agentic voice")
+- Status: OPEN
+- What: Current TTS = aura-2-asteria-en (female). Michael requested trying a male voice option. Deepgram has aura-2-orion-en (male) or similar.
+- Fix: Test aura-2-orion-en. If latency and quality acceptable, offer as config option in /api/deepgram-token.
+
+### BB-42 ! iOS Mic Reconnect After Drop — OPEN (persistent across Runs 25-35)
+- Status: OPEN — Known limitation
+- What: After Voice Agent WS drops and reconnects, getUserMedia() fails on iOS outside gesture context. Mic dead after first drop on iOS Safari.
+- Fix: Cache stream before stopping tracks (pendingMicStream approach), or add "Tap to reconnect" button (now in mic status) that triggers gesture-time getUserMedia.
+
+### BB-43 ! Raw Deepgram API Key in Browser — OPEN (security)
+- Status: OPEN
+- What: /api/deepgram-token returns raw API key to browser. Should use auth/grant JWT or short-lived token. Currently: raw key visible in browser DevTools network tab.
+- Fix: Switch to Deepgram auth/grant endpoint for scoped JWT. Requires verifying scope (agent:write needed, not just asr:write).
+
+### BB-44 ~ Deepgram Sydney Region — OPEN
+- Status: OPEN
+- What: VN→US RTT ~280ms. VN→SYD ~120ms. Saves 160ms+ per turn. Validate nova-3 + gpt-4o-mini availability in syd region. Then add `region: "syd"` to Settings in /api/deepgram-token.
+
+### BB-45 ~ Dreamer World Model / Student RRL Pipeline — OPEN (RRL-30)
+- Status: OPEN — Future architecture
+- What: Michael asked: "can we set up cloudflare agents to review the student backend files and can we do RRLs per conversation per student?" — True memory through the memory pipeline. Per-student session journals stored in D1, automatically summarized by CF agent.
+- Fix: Design spec in OPERATIONS/STUDENT-PORTAL-DEV.md, then implement CF cron agent per student.
+
+### BB-46 ! Claude Permission Prompts — OPEN (RRL-32: "can you set it so I dont have to click yes every 10 seconds")
+- Status: OPEN
+- What: Michael is constantly approving basic tool permissions. Settings.json allowlist needs expansion for common read-only tools.
+- Fix: Run /fewer-permission-prompts skill or add common PowerShell/Bash/MCP tools to .claude/settings.json allowlist.
+
+### BB-47 ! PCC Deployment — OPEN (error 1042 persists)
+- Status: OPEN
+- What: Empire dashboard (APPS/PCC/) fails to deploy — error 1042 (worker not found on CF account).
+- Fix: Check CF account for existing worker name conflict, or redeploy with correct account ID. Run: `cd APPS/PCC && npx wrangler deploy`
+
+### BB-48 !! BB-30/31 AGENT99.md + RISE.md stale refs — DONE Run 34
+- Status: DONE (Run 34 confirmed — /PhoenixCoder → /Centurion-Code, phoenix-architecti URL updated)
+
+### BB-49 ! PA T1 Dialagram Timeout — OPEN (Run 35)
+- Status: OPEN — BLOCKING all PA T1 dispatches
+- What: Dialagram API consistently timing out at 30s. Even bare minimum request fails. PA status shows T1 "✓" (key is set) but Dialagram endpoint not responding.
+- Fix: Check Dialagram platform status. Debug with direct curl to dialagram.me/router/v1/chat/completions. If persistent outage, evaluate switching T1 to an alternative provider (Groq Qwen? OpenRouter?) until Dialagram recovers.
+
+---
+
+## SIGNAL: MOST WANTED (NET's Most Wanted — Updated 2026-05-31 Run 35)
+1. ✅ BB-33 Gapless audio v2+v3 FIXED
+2. ✅ BB-35 Landing race condition FIXED
+3. BB-36 Client error telemetry (re-add to chat.js — 30 lines)
+4. BB-37 EC-15 pre-SettingsApplied buffer (re-add to chat.js)
+5. BB-38 Dual TTS bug (suppress robotic voice on agentReady, not agentFirstAudioReceived)
+6. BB-39 Mode selection visibility (returning users can't find mode picker)
+7. BB-49 PA T1 Dialagram down — fix before next dispatch
+8. BB-08/BB-09 Chrome Extension icons + install guide
