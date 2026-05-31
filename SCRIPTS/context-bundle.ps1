@@ -1,6 +1,6 @@
 param(
     [Parameter(Mandatory=$true)]
-    [ValidateSet("netpetai", "general", "death", "rise")]
+    [ValidateSet("netpetai", "general", "death", "rise", "pipeline", "student")]
     [string]$TaskType
 )
 
@@ -101,6 +101,17 @@ switch ($TaskType) {
         $docs["cold_start_boot"] = Get-SafeContent -Path "CANON/SYSTEM/COLD-START-BOOT.md"
         $docs["git_state"] = Get-GitLog -Count 5
         $docs["git_status"] = Get-GitStatusShort
+    }
+    "pipeline" {
+        $docs["backburner"] = Get-SafeContent -Path "OPERATIONS/BACKBURNER-PIPELINE-LOG.md" -MaxChars 8000
+        $docs["cold_start_boot"] = Get-SafeContent -Path "CANON/SYSTEM/COLD-START-BOOT.md" -HeadLines 100
+        $docs["git_state"] = Get-GitLog -Count 5
+        $docs["git_status"] = Get-GitStatusShort
+    }
+    "student" {
+        $docs["student_portal_dev"] = Get-SafeContent -Path "OPERATIONS/STUDENT-PORTAL-DEV.md" -TailLines 200
+        $docs["class_prep"] = Get-SafeContent -Path "OPERATIONS/CLASS-PREP-MAI-TRAM-QUY.md" -MaxChars 5000
+        $docs["cold_start_boot"] = Get-SafeContent -Path "CANON/SYSTEM/COLD-START-BOOT.md" -HeadLines 50
     }
 }
 
