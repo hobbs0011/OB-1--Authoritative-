@@ -110,7 +110,7 @@ Activate on: audit/verify/security/forensics intent
 - `/doctor` — diagnostics + safe remediation path
 - `/debug` — root-cause for active failure
 - `/checker` — package/state checks
-- `/PhoenixCoder` — send coding task to PC worker (Tier 1 curl)
+- `/Centurion-Code` — send coding task to PA (phoenix-architecti, Tier 1)
 - `/dispatch` — manual tri-tier routing trigger
 
 ### Control / Continuity

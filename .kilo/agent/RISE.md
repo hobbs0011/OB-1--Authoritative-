@@ -82,20 +82,22 @@ Key execution laws:
 **Direction**: black glass luxury | purple neon edge glow | gold accents | big typography | minimal clutter
 **Fonts**: Inter + Orbitron (Google Fonts only)
 
-## Phoenix Coder v3.2 (Tier 1 calls)
+## Centurion-Code / Phoenix-Architecti (Tier 1 dispatch)
 
-Files > 200 lines require `diffMode: true`:
+Context bundle first for NET-PET-AI work. Keep context under 5K chars (L61 TOKEN_CONSERVATION):
 
 ```powershell
+$bundle = pwsh -File D:\OB-1-CANONICAL\SCRIPTS\context-bundle.ps1 -TaskType netpetai | ConvertFrom-Json
+$ctx = $bundle.docs | ConvertTo-Json -Compress
+
 $body = @{
   task       = "TASK"
-  context    = (Get-Content "D:\OB-1-CANONICAL\APPS\NET-PET-AI\src\index.js" -Raw)
-  targetfile = "APPS/NET-PET-AI/src/index.js"
-  diffMode   = $true
-  maxTokens  = 4096
-} | ConvertTo-Json -Compress -Depth 5
+  context    = $ctx
+  targetfile = "D:\OB-1-CANONICAL\APPS\NET-PET-AI\src\index.js"
+  tier       = 1
+} | ConvertTo-Json -Compress
 
-Invoke-RestMethod -Uri "https://phoenix-coder.mrmichaelhobbs123.workers.dev/api/code" -Method POST -ContentType "application/json" -Body $body
+Invoke-RestMethod -Uri "https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/code" -Method POST -ContentType "application/json" -Headers @{"x-pa-auth"="ffScwBjPQjBnoAlectawu8E+J4NcmO3idxGxtlcRue8="} -Body $body
 ```
 
 ## Deploy Rules

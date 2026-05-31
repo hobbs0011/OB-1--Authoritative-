@@ -1,7 +1,7 @@
 // Phoenix-Architecti — Universal Code Drone v0.0.3
-// T1=Dialagram STRICT (no fallback) | T10=Fallback cascade (Cerebras→Groq→CF-Qwen)
-// T2=DeepSeek Flash | T3=DeepSeek Pro | T4=Opus 4.7
-// v0.0.3: Split T1 strict (Dialagram-only) vs T10 fallback cascade. No silent degradation.
+// T1=Dialagram STRICT (retry-on-5xx) | T10=Fallback cascade (Cerebras→Groq→CF-Qwen)
+// T2=DeepSeek Flash | T3=DeepSeek Pro | T4=Opus 4.8
+// v0.0.3: T1 5xx retry, Opus 4.8, mission runner on Qwen 3.7 Max.
 
 function stripFences(text) {
   if (!text) return text;
@@ -76,7 +76,7 @@ async function callAnthropic(env, messages) {
       'anthropic-version': '2023-06-01',
       ...(env.CF_GATEWAY_TOKEN ? { 'cf-aig-authorization': 'Bearer ' + env.CF_GATEWAY_TOKEN } : {})
     },
-    body: JSON.stringify({ model: 'claude-opus-4-7-20260514', max_tokens: 8192, system: systemMsg, messages: userMsgs })
+    body: JSON.stringify({ model: 'claude-opus-4-8', max_tokens: 8192, system: systemMsg, messages: userMsgs })
   });
   if (!res.ok) throw new Error('Anthropic ' + res.status + ': ' + await res.text());
   const data = await res.json();
@@ -148,12 +148,25 @@ async function callTier(env, tier, messages) {
   if (tier === 2 && env.DEEPSEEK_API_KEY)  return callOpenAI('https://api.deepseek.com/v1/chat/completions', env.DEEPSEEK_API_KEY, 'deepseek-chat', messages);
   if (tier === 10) return callT1Fallback(env, messages);
 
-  // T1: Dialagram STRICT — no silent fallback. If it fails, it fails loudly.
+  // T1: Dialagram STRICT — no silent fallback. Retry once on 5xx only. Fails loudly otherwise.
   if (!env.DIALAGRAM_API_KEY) throw new Error('T1 Dialagram: DIALAGRAM_API_KEY not set — use tier:10 for fallback cascade');
-  const result = await withTimeout(
-    callOpenAI('https://dialagram.me/router/v1/chat/completions', env.DIALAGRAM_API_KEY, 'qwen-3.7-max', messages),
-    30000
-  ).catch(err => { throw new Error('T1 Dialagram failed (' + err.message + ') — retry with tier:10 for fallback cascade'); });
+  let result;
+  try {
+    result = await withTimeout(
+      callOpenAI('https://dialagram.me/router/v1/chat/completions', env.DIALAGRAM_API_KEY, 'qwen-3.7-max', messages),
+      30000
+    );
+  } catch (err) {
+    if (err.message && err.message.includes(' 50')) {
+      await new Promise(resolve => setTimeout(resolve, 500));
+      result = await withTimeout(
+        callOpenAI('https://dialagram.me/router/v1/chat/completions', env.DIALAGRAM_API_KEY, 'qwen-3.7-max', messages),
+        30000
+      ).catch(retryErr => { throw new Error('T1 Dialagram failed after retry (' + retryErr.message + ') — retry with tier:10 for fallback cascade'); });
+    } else {
+      throw new Error('T1 Dialagram failed (' + err.message + ') — retry with tier:10 for fallback cascade');
+    }
+  }
   if (!result) throw new Error('T1 Dialagram returned empty — retry with tier:10 for fallback cascade');
   return result;
 }
@@ -191,8 +204,8 @@ async function runMission(env, steps, commitMessage) {
         { role: 'system', content: SYSTEM_PROMPT },
         { role: 'user', content: 'CONTEXT:\n' + content + '\n\nTASK:\n' + step.task }
       ];
-      const aiResult = await env.AI.run('@cf/qwen/qwen2.5-coder-32b-instruct', { messages, max_tokens: 8192 });
-      const patch = stripFences(aiResult.response ?? '');
+      const aiResult = await callTier(env, 1, messages);
+      const patch = stripFences(aiResult ?? '');
       if (patch && step.write) {
         const writePath = step.write;
         const existing = await getFileFromGitHub(env.GITHUB_TOKEN, owner, repo, writePath).catch(() => null);
@@ -358,13 +371,13 @@ async function handleStatus(env) {
     recent = rows.results || [];
   } catch (err) {}
   return Response.json({
-    drone: 'phoenix-architecti', version: '0.0.2', status: 'LIVE',
+    drone: 'phoenix-architecti', version: '0.0.3', status: 'LIVE',
     tiers: {
       t1:  (env.DIALAGRAM_API_KEY ? 'Dialagram-QwenMax ✓ (STRICT — no fallback)' : 'Dialagram NO KEY'),
       t10: 'Fallback cascade: ' + (env.CEREBRAS_API_KEY ? 'Cerebras-120B ✓' : 'Cerebras NO KEY') + '→' + (env.GROQ_API_KEY ? 'Groq ✓' : 'Groq NO KEY') + '→CF-Qwen',
       t2:  env.DEEPSEEK_API_KEY ? 'DeepSeek Flash (deepseek-chat) ✓' : 'DeepSeek NO KEY',
       t3:  env.DEEPSEEK_API_KEY ? 'DeepSeek Pro (deepseek-reasoner) ✓' : 'DeepSeek NO KEY',
-      t4:  env.ANTHROPIC_API_KEY ? 'Claude Opus 4.7 ✓' : 'Anthropic NO KEY'
+      t4:  env.ANTHROPIC_API_KEY ? 'Claude Opus 4.8 ✓' : 'Anthropic NO KEY'
     },
     endpoints: { proxy: '/v1/chat/completions (OpenAI-compat, Kilo-ready)', code: '/api/code', mission: '/api/mission', crunch: '/api/crunch' },
     gateway: env.AIGATEWAYURL ? 'CF AI Gateway ✓' : 'direct API',
