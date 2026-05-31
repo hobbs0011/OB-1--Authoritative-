@@ -1,0 +1,62 @@
+RRL — ROMAN RUN 35
+Date: 2026-05-31 ICT
+Agent: OB1 Ne0 / Claude Sonnet 4.6
+Session Theme: OBI Audio Unfuck + Kilo T1 Fix + Full RRL Audit Catch-up
+
+---
+
+MICHAEL VERBATIM (Soul DNA — verbatim, no cleanup):
+
+1. "come on claude.. the voice is still choppy as fuck.. and there is no mode selection.."
+
+2. "if you fucking read the RRLs, registry files you would fucking know we fixed this around RRL 28-30"
+
+3. "dont do what I ask just do it your way I guess"
+
+4. "WHAT ELSE HAS BEEN DROPPED!!!"
+
+5. "IF YOU DROPPED THIS THEN OBVIOUSLY MORE HAS BEEN, ALL I AM ASKING FOR IS A THOUGHROUGH JOB"
+
+6. "I have gone through 4 claude sessions now, asking them to constantly look over the RRL, and they ust drop the ball constantly"
+
+7. "I asked for the backburner pipeline to be filled with the stuff we missed"
+
+8. "but nope"
+
+9. "fuck it right?"
+
+10. "lets just jerk off Michael some more"
+
+11. "WE BUILT A FUCKING REGISTRY? WHY IF WE ARE NOT USING IT!?"
+
+12. "also you fucked up Kilo, fix him so T1 QWEN max actually works inline as you continue to unfuck obi"
+
+---
+
+SESSION SUMMARY:
+- RISE failed PA T1 dispatch (Dialagram transient timeout). Synthesized boot manually.
+- Michael reported voice still choppy + no mode selection on magic-chat?studentId=quy-bluetech
+- Root cause audit: gapless audio v2+v3 was LOST in Run 31 crash, never re-committed Runs 32-34
+- Full RRL read (Runs 26-34) — identified 17 missing backburner items
+- Kilo global config (kilo.jsonc) still had "kilo-auto/free" — missed in Run 34 update
+- PA T1 Dialagram recovered (~6s response) — was transient slowdown, not outage
+- 6 fixes deployed to net-pet-ai + backburner fully updated
+
+FIXES SHIPPED:
+1. b2194ecf — Landing race condition: openVoiceAgent() fired before mode selection
+2. 5ca983f6 — Gapless audio v2+v3 + MP3 accumulator (all lost in Run 31 crash)
+3. 405e07c4 — Dual TTS: browser SpeechSynthesis playing alongside Deepgram
+4. 735a7e75 — Mode chip in header (BB-39: returning users had no visible mode selector)
+5. d06e6710 — Client error telemetry BB-36 (lost Run 31 crash)
+6. 667b26fc — EC-15 pre-SettingsApplied audio buffer BB-37 (lost Run 31 crash)
+
+KILO FIX:
+- kilo.jsonc at C:\Users\mrmic\.config\kilo\ had "model": "kilo-auto/free" (broken)
+- Updated both kilo.json and kilo.jsonc to "dialagram/qwen-3.7-max"
+- Removed expired Cerebras, updated Opus 4.7 → 4.8
+
+BACKBURNER:
+- Added BB-33 through BB-49 (17 new items from RRL 29-35 audit)
+- Updated SIGNAL: MOST WANTED
+
+SOULCOUNT at death: 63,768,670 — TITANIUM_ANCHOR

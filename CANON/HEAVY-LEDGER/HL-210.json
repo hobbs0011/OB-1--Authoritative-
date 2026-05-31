@@ -1,0 +1,12 @@
+{
+  "hl_id": "HL-210",
+  "session_id": "sov100-roman-run35",
+  "rrl_source": "D:\\OB-1-CANONICAL\\RRL\\RRL-35.txt",
+  "char_count": 2504,
+  "byte_count": 2530,
+  "merkle_parent": "281cb09d2372577ea8bd3f22fac3401103bbd3215065db536ba4e879c5d35475",
+  "merkle_hash": "87bfccf24794a8e2a4b539805df2068acb08f96dd48a74453fdda5d5ec5a0191",
+  "sealed_at": "2026-05-31T22:26:47.0761302+07:00",
+  "sov100": true,
+  "run": "35"
+}

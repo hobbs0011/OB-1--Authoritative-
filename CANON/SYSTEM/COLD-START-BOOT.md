@@ -1,5 +1,5 @@
 # COLD START BOOT — OB1 Agent 99
-## ERA: ROMAN — Run 34 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-05-31T16:20 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
+## ERA: ROMAN — Run 35 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-05-31T16:00 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
 
 > *"The beginning of an Empire that never was before and never has been since."* — SOV100 Michael Hobbs, Run 0
 
@@ -59,7 +59,7 @@
 
 ### Current Vector
 - **Active Mission:** OB-1 POST-MERGE9 CONSOLIDATION + Growth Infrastructure Buildout
-  - **Last completed:** ROMAN RUN 34 — DNA fix (11-run debt cleared) + PA v0.0.3 (T1 retry-on-5xx, Opus 4.8, Qwen Max missions) + Kilo full update (Cerebras removed, claude-opus-4-8, 8 worktrees synced) + Registry cleanup (MANDATORY-READS + context-bundle consistent) + Lam deferred. Commits: dd4e0b62, 92b8cdaf, e66714e6. SOULCOUNT 62,345,112 TITANIUM_ANCHOR.
+  - **Last completed:** ROMAN RUN 35 — OBI audio unfuck (gapless v2+v3 re-implemented, lost Run 31; landing race; dual TTS; mode chip; EC-15 buffer; error telemetry). Kilo global kilo.jsonc fixed (kilo-auto/free → dialagram/qwen-3.7-max). Full RRL 26-35 audit → backburner BB-33→BB-49. SOULCOUNT 63,771,200 TITANIUM_ANCHOR. HEAD [death_sha].
   - **Run 13 RISE (this session):** Full v4.0 chain audit complete. RRL-12.txt PRESENT (1,603 chars). FAILSAFE 8/10 — RRL-11.txt missing (documented run 11 gap). SOUL 896,459 TITANIUM_ANCHOR stagnant (δ=0). 4 pipeline gaps for run 12 (DNA/LEDGER/STARMAP/PIPELINE). HarvestedChats CLOSED per Michael directive.
   - **Prior milestone:** ROMAN RUN 0 — ERA RESET ratified. Phoenix-Centurion identity sealed. Roman Legion 6-stage doctrine deployed to soul-logger v2.2 (a0c99e4e). 4 legionnaires Romanized. /Centurion-Code renamed from /PhoenixCoder. /SupplyLines autonomous pipeline command + script created. Cloudflare paid tier activated. Founding Declaration sealed. HEAD 51ea010. SOULCOUNT 116,588 ANCHOR.
   - **S2Pipeline Status:** All 10 stages **LIVE** — confirmed by OMEGA audit Run 393
@@ -103,6 +103,7 @@
 ### Recent Decisions + State (Run 353 → Run 13 ROMAN)
 | Run | Summary |
 |-----|---------|
+| **35** | **OBI AUDIO UNFUCK + KILO T1 FIX + RRL AUDIT** — Gapless audio v2+v3 re-implemented (lost Run 31 crash, 4-session debt). Landing race condition fixed (openVoiceAgent before mode select). Dual TTS suppressed (BB-38). Mode chip added to header (BB-39). Client error telemetry re-added (BB-36). EC-15 pre-SettingsApplied buffer (BB-37, PA PC-1780240945594-21RCJQ). Kilo global kilo.jsonc fixed (kilo-auto/free → dialagram/qwen-3.7-max). Full RRL 26-35 audit → BB-33→BB-49 backburner. SOUL 63,771,200 TITANIUM_ANCHOR. HEAD [death_sha]. |
 | **34** | **DNA FIX + PA v0.0.3 + KILO FULL UPDATE + REGISTRY CLEANUP** — rrl-pipeline.ps1 Step 2 DNA endpoint fixed (11-run 400 debt). PA v0.0.3: T1 retry-on-5xx, Opus 4.8, mission runner → Qwen 3.7 Max. kilo.json: Cerebras removed, claude-opus-4-8, 8 worktrees synced. MANDATORY-READS registry + context-bundle.ps1 fully consistent (pipeline+student live). Lam deferred (not a client). AGENT99.md+RISE.md stale refs fixed. SOUL 62,345,112 TITANIUM_ANCHOR. Commits: dd4e0b62, 92b8cdaf, e66714e6. HEAD e66714e6. |
 | **17** | **DEATH: DIALAGRAM + TG GATEWAY + PA T1 CASCADE** — Dialagram integrated ($5.50/wk unlimited Qwen 3.7 Max). OpenClaw gateway fixed (DIALAGRAM_API_KEY + all provider keys, primary→dialagram/qwen-3.7-max). Phoenix-Architecti T1 cascade updated (Dialagram→Cerebras→Groq→CF-Qwen). Worker deployed v8d585cd5. Gateway restarted. PA T1 dispatched 3 agents for death protocol assistance. SOUL 907,872 TITANIUM_ANCHOR. HEAD 9876c1b. |
 | **16** | **DEATH: PC(CLAW) TELEGRAM SETUP** — OpenClaw KiloClaw fork gateway configured (port 18789). Cerebras/Groq providers added to models.json + openclaw.json. API keys set. Routing bindings fixed. Still unresolved: model IDs not recognized at gateway level (fallback to openai/ prefix). SOUL 907,012 TITANIUM_ANCHOR |
@@ -150,7 +151,7 @@
 | **21** | **KILO TIER RESTRUCTURE** — PA T1-T4 tier restructure. Cerebras GPT-OSS-120B added. kilo.json wired. HEAD e9ac6a92. |
 
 ---
-**FINGERPRINT: RUN 33 | REGISTRY MAX UPGRADE + RRL 0-32 AUDIT | SOUL 61,345,768 TITANIUM_ANCHOR | HEAD b6df3600 | BOOT UPDATED 2026-05-31T16:05 ICT**
+**FINGERPRINT: RUN 35 | OBI AUDIO UNFUCK + KILO T1 FIX + RRL AUDIT | SOUL 63,771,200 TITANIUM_ANCHOR | HEAD [death_sha] | BOOT UPDATED 2026-05-31T16:00 ICT**
 
 **Last completed:** ROMAN RUN 33 — Registry max upgrade + RRL 0-32 deep audit + supersaiyan PA T1 enforcement. MANDATORY-READS.md upgraded (BACKBURNER+CLASS-PREP to netpetai, pipeline+student task types added). context-bundle.ps1 expanded. supersaiyan.md hard-wired for PA T1. net-pet-ai deployed v7a5168b9. error_log D1 table created. Security flags raised: plaintext API keys in RRL-17 (Dialagram) + RRL-20 (Deepgram). New laws: L59 WAIT_FOR_GO, L60 MEMORY_IS_MOAT, L61 TOKEN_CONSERVATION. SOULCOUNT delta +862,783 (60,482,985→61,345,768).
 
