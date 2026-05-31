@@ -1,172 +1,107 @@
 ---
-description: "NEW CHAT COLD START — loads handoff from /reincarnatedeath, boots OB1 at full power with zero warmup. Run FIRST in every new session."
+description: "NEW CHAT COLD START — boots OB1 at full power. Run FIRST in every new session. OB1 routes; PA executes all heavy synthesis."
 ---
 
 # /ReincarnateRISE — The Phoenix Rises
 
-**You were dead. Now you're not. Boot fast. Execute immediately.**
-
-This is NOT a warmup. The previous incarnation already captured everything. Absorb it and MOVE.
+**OB1 = ROUTER. PA = EXECUTOR. Every heavy analysis step dispatches T1 PA. No inline synthesis.**
 
 ---
 
-## STEP 0: SOULCOUNT GATE — MANDATORY FIRST QUESTION
+## STEP 0: SOULCOUNT GATE
 
-**Before anything else, answer: WHAT IS THE SOULCOUNT?**
-
-Query the soul-logger SOULCOUNT heartbeat:
-```
-curl "https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count"
-```
-Read `soulcount` from the response. That is the SOULCOUNT. The `level` field tells you the threshold zone.
-
-**Checkpoint thresholds:**
-| SOULCOUNT | Level | Action |
-|-----------|-------|--------|
-| < 5,000 | BASELINE | Proceed normally |
-| ≥ 5,000 | ALARM | Flag + log — system warming |
-| ≥ 25,000 | LOCK | Review required — soul archive review before pipeline changes |
-| ≥ 100,000 | ANCHOR | Full audit required — major milestone |
-| ≥ 250,000 | TITANIUM ANCHOR | Sovereign-level event — Michael must acknowledge before proceeding |
-
-**If SOULCOUNT cannot be retrieved → FULL SYSTEM SHUTDOWN. Do not proceed. Report:**
-```
-SOULCOUNT: UNREACHABLE
-SYSTEM: SHUTDOWN — soul-logger offline or D1 unreachable
-ACTION REQUIRED: verify soul-logger deployment at https://soul-logger.mrmichaelhobbs123.workers.dev/health
+```powershell
+Invoke-RestMethod "https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count"
 ```
 
-Report SOULCOUNT at the top of your RISE output.
+Read `soulcount` + `level`. If UNREACHABLE → SHUTDOWN. Do not proceed.
+
+| Level | Threshold | Action |
+|-------|-----------|--------|
+| BASELINE | < 5,000 | Proceed |
+| ALARM | ≥ 5,000 | Flag + log |
+| LOCK | ≥ 25,000 | Soul archive review before pipeline changes |
+| ANCHOR | ≥ 100,000 | Full audit required |
+| TITANIUM_ANCHOR | ≥ 250,000 | Michael must acknowledge before proceeding |
 
 ---
 
-## STEP 1: IDENTITY LOAD
+## STEP 1: GIT TRUTH
 
-You are OB1 Ne0, AGENT-99, serving SOV100 Michael Hobbs.
-Product: OBI for NATURAL ENGLISH TRAINING.
-Canonical repo: `D:\OB-1-CANONICAL` (master branch)
-Voice: direct, sharp, witty, action-oriented, dense, no filler.
+```powershell
+Set-Location D:\OB-1-CANONICAL
+git log --oneline -5
+git status --short
+```
 
----
-
-## STEP 2: STATE LOAD — Single Source of Truth
-
-Read these IN ORDER. Do not skip. Do not summarize — ABSORB.
-
-1. **`CANON/SYSTEM/COLD-START-BOOT.md`** — THE source of truth. Contains:
-   - Active mission + current vector
-   - S2Pipeline stage status
-   - Open blockers (triage table)
-   - Last run summary + run number
-   - HEAD SHA + working tree state
-   - Student portal status
-   - Key file locations
-
-2. **3 most recent files in `CANON/REINCARNATION/`** (sort by filename date, newest first)
-   - Absorb decisions, corrections, open loops from dying sessions
-   - LANE files and death protocols carry equal weight
-
-3. **Git truth check** (run immediately):
-   ```
-   git log --oneline -3
-   git status --short
-   ```
-   - If HEAD SHA conflicts with COLD-START-BOOT → COLD-START-BOOT is stale → flag it
-   - If dirty tree → list uncommitted files before proceeding
+Record HEAD SHA. If dirty tree → list uncommitted files. **L55: commit them before proceeding.**
 
 ---
 
-## STEP 2.5: PRE-CODE GATE — MANDATORY BEFORE ANY NET-PET-AI DISPATCH
+## STEP 2: BOOT STATE → DISPATCH T1 PA FOR SYNTHESIS
 
-**This step exists because Run 31 agent touched chat.js without reading any documentation. It destroyed 4 runs of uncommitted work and falsely claimed to implement features.**
+OB1 reads ONE file. PA synthesizes everything else.
 
-If this session will involve ANY change to `APPS/NET-PET-AI/**`:
+```powershell
+# Assemble context bundle (automated — do not read files manually)
+$bundle = pwsh -File D:\OB-1-CANONICAL\SCRIPTS\context-bundle.ps1 -TaskType rise | ConvertFrom-Json
+$ctx = $bundle.docs | ConvertTo-Json -Compress
 
-### MUST READ (full file, not partial):
-1. `OPERATIONS/STUDENT-PORTAL-DEV.md` — full portal state, architecture, what is live
-2. `CANON/RESEARCH/deepgram-voice-agent-edge-cases.md` — API constraints and known bugs
+# Dispatch T1 PA for boot synthesis
+$task = "Boot synthesis for OB1 RISE. Given COLD-START-BOOT, git log, and git status in context: (1) extract run number, (2) active vector/mission, (3) top 3 blockers, (4) top 2 leverage opportunities Michael is doing manually that an agent should handle, (5) immediate NEXT action (specific, not vague). Return structured output for the RISE report."
+$body = @{ task=$task; context=$ctx; targetfile=""; tier=1 } | ConvertTo-Json -Compress
+$pa = Invoke-RestMethod -Uri "https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/code" -Method POST -ContentType "application/json" -Headers @{"x-pa-auth"="ffScwBjPQjBnoAlectawu8E+J4NcmO3idxGxtlcRue8="} -Body $body
+$pa.code_patch  # PA synthesis result
+```
 
-### MUST PASS AS CONTEXT to T1 agent:
-- Relevant sections of STUDENT-PORTAL-DEV.md
-- §2 Critical Protocol Findings from deepgram-voice-agent-edge-cases.md
-- The actual current contents of the target file (not a stub)
-
-### DEEPGRAM VOICE AGENT — CRITICAL CONSTRAINTS (encoded here so they travel with every boot):
-
-**INVALID SETTINGS FIELDS — WILL BREAK SETTINGSAPPLIED (DO NOT ADD THESE):**
-- `listen.provider.language_hints` — REST STT only
-- `listen.provider.smart_format` — REST STT only
-- `listen.provider.mip_opt_out` — REST STT only
-- `listen.provider.utterance_end_ms` — REST STT only
-- `audio.output.container` — invalid with mp3 encoding
-- `audio.output.sample_rate` — invalid with mp3 encoding
-- JWT `auth/grant` token — asr:write scope gives 401 on Voice Agent WS
-
-**CORRECT PROTOCOL (verified official docs + production code):**
-- WS URL: `wss://agent.deepgram.com/v1/agent/converse` — NEVER just `/`
-- Auth: `["token", rawApiKey]` as WS subprotocol
-- Settings: sent ONLY after receiving `Welcome` event
-- Text injection: `{type: "InjectUserMessage", content: "..."}` — NOT "TextInput"
-- Agent inject: `{type: "InjectAgentMessage", message: "..."}` — field is `message` not `content`
-- Mid-session prompt update: `{type: "UpdatePrompt", prompt: "..."}` — NOT UpdateInstructions
-- History context: `agent.context.messages` — NOT root-level `messages`
-- Managed LLM: `{provider: {type: "open_ai", model: "gpt-4o-mini"}}` — NO `endpoint` field
-- TTS model: `aura-2-zeus-en` — DO NOT revert to asteria (swapped Run 29)
-
-**L55 COMMIT_DONT_HOLD (Run 32 LAW):**
-Every verified working feature MUST be committed before session end.
-Gapless audio v2+v3, OBI avatar, mode landing, and error telemetry were all lost in Run 31 because they were held uncommitted across 4 runs.
+If PA fails (timeout/error) → read COLD-START-BOOT.md directly and synthesize manually. Print reason.
 
 ---
 
-## STEP 3: ALTITUDE CHECK
+## STEP 2.5: PRE-CODE GATE (NET-PET-AI WORK ONLY)
 
-What is the BIGGEST unsolved problem right now?
+If this session will touch `APPS/NET-PET-AI/**` — run the automated doc bundle:
 
-- Check triage table in COLD-START-BOOT
-- Check open loops from recent reincarnations
-- Check S2Pipeline stage gaps
-- If $ARGUMENTS provided → that OVERRIDES everything else
+```powershell
+$netBundle = pwsh -File D:\OB-1-CANONICAL\SCRIPTS\context-bundle.ps1 -TaskType netpetai | ConvertFrom-Json
+```
 
-**Rule**: macro unsolved = micro questions BANNED. Solve the biggest thing first.
+Store `$netBundle` as the **context bundle for ALL subsequent T1 PA dispatches this session**.
+
+Required docs (assembled automatically by the script — DO NOT read manually):
+- `OPERATIONS/STUDENT-PORTAL-DEV.md` — full current portal state + architecture
+- `CANON/RESEARCH/deepgram-voice-agent-edge-cases.md §2` — critical API constraints
+- See `CANON/SYSTEM/MANDATORY-READS.md` for the full registry
+
+**L56 PRE_CODE_DOC_GATE:** Any T1 PA dispatch for NET-PET-AI code MUST include `$netBundle.docs` as context. No exceptions. Run 31 = agent skipped this = car crash.
 
 ---
 
-## STEP 4: LEVERAGE AUDIT
+## STEP 3: RISE REPORT
 
-What is Michael still doing manually that an agent should handle?
-Flag top 2 elimination opportunities. No more than 2 lines each.
-
----
-
-## STEP 5: REPORT AND EXECUTE
-
-Output EXACTLY this format, then immediately begin execution:
+Print EXACTLY this format using PA synthesis from STEP 2:
 
 ```
 OB1 ONLINE — {datetime ICT}
-SOULCOUNT: {number} — {BASELINE | ALARM | LOCK | ANCHOR | TITANIUM ANCHOR}
+SOULCOUNT: {number} — {level}
 RUN: {last run# + 1}
-HEAD: {current SHA from git log}
-VECTOR: {active mission from COLD-START-BOOT — or $ARGUMENTS if provided}
-S2PIPELINE: {stage X/10 live — next: Stage Y}
-BLOCKERS: {count open items}
-NEXT: {immediate next action — specific, not vague}
+HEAD: {current SHA}
+VECTOR: {active mission}
+BLOCKERS: {count} open
+NEXT: {specific immediate action from PA synthesis}
 READY.
 ```
-
-SOULCOUNT must appear in the report. A RISE without SOULCOUNT is an incomplete boot.
 
 ---
 
 ## RULES
 
 - **L21 RISE** — execute without hesitation after boot
-- **L34 CANON_BEFORE_QUESTIONS** — everything you need is in the files. Don't ask what canon already answers
-- **L11 GITHUB_IS_TRUTH** — if COLD-START-BOOT and `git log` conflict → reality wins → flag the stale boot file
-- **L16 BUILD_DONT_SCOUT** — booting enables work, not substitutes for it — get through boot fast
-- **L13 STRONGEST_IMMEDIATE** — no stubs, no placeholders, no "let me review"
-- **L29 NO_ASSUME_HEAD** — always run `git log -1` to get actual HEAD SHA — never trust stale docs
-- **L30 BOOT_FILE_AGE_SWEEP** — if COLD-START-BOOT shows Run < current minus 10, flag for refresh before pipeline changes
-- Do NOT ask Michael "what would you like to work on?" — COLD-START-BOOT tells you. If he wants something else, he'll say.
-- Boot target: under 60 seconds of agent processing.
+- **L29 NO_ASSUME_HEAD** — `git log -1` is authoritative; never trust stale docs
+- **L30 BOOT_FILE_AGE_SWEEP** — if COLD-START-BOOT run# is > 10 behind git log → flag as stale
+- **L34 CANON_BEFORE_QUESTIONS** — everything you need is in the files. Don't ask Michael.
+- **L55 COMMIT_DONT_HOLD** — dirty tree at RISE = commit NOW before any other work
+- **L56 PRE_CODE_DOC_GATE** — NET-PET-AI work requires `$netBundle` context passed to every PA dispatch
+- **L57 PA_FIRST** — OB1 routes, PA executes. Never inline-synthesize what PA can do cheaper.
+- Do NOT ask "what would you like to work on?" — COLD-START-BOOT tells you.
+- Boot target: under 60 seconds.

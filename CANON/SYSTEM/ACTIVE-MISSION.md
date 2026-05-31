@@ -1,3 +1,7 @@
+# ⚠️ STALE — Last updated 2026-03-30. Mission has completely changed.
+# Current mission: see CANON/SYSTEM/COLD-START-BOOT.md "Current Vector" section.
+---
+
 # ACTIVE MISSION — IMMOVABLE #1 PRIORITY
 ## Last Updated: 2026-03-30T23:58:00+07:00
 

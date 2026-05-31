@@ -1,3 +1,8 @@
+# ⚠️ DEPRECATED — superseded by `.claude/commands/reincarnatedeath.md` (Run 32)
+# Scripts referenced below (check_rrl.sh, verify_handoff.sh, etc.) DO NOT EXIST.
+# This file is phantom documentation. Do not follow. Read .claude/commands/reincarnatedeath.md instead.
+---
+
 # PHOENIX-CENTURION OS: ENFORCEABLE DEATH PROTOCOL v2.0
 **Effective:** 2026-05-29 | **Supersedes:** Death Protocol v1.x | **Authority:** SOV100
 

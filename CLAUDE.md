@@ -59,15 +59,27 @@ Only bypass PA if:
 If bypass → print reason + escalate to Tier 2. Never silently self-handle.
 
 ```powershell
-$body = @{ task="<task>"; context="<file content>"; targetfile="<absolute path>"; tier=1 } | ConvertTo-Json -Compress
+# Step 0: Assemble context bundle (automated — do NOT read files manually for NET-PET-AI tasks)
+# See CANON/SYSTEM/MANDATORY-READS.md for the full doc registry
+$bundle = pwsh -File D:\OB-1-CANONICAL\SCRIPTS\context-bundle.ps1 -TaskType netpetai | ConvertFrom-Json
+$ctx = $bundle.docs | ConvertTo-Json -Compress
+
+# Step 1: Dispatch T1 PA
+$body = @{ task="<task>"; context=$ctx; targetfile="<absolute path>"; tier=1 } | ConvertTo-Json -Compress
 Invoke-RestMethod -Uri "https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/code" -Method POST -ContentType "application/json" -Headers @{"x-pa-auth"="ffScwBjPQjBnoAlectawu8E+J4NcmO3idxGxtlcRue8="} -Body $body
 ```
 
-1. Read target file first — pass real content as `context`, not a placeholder
+**Context bundle rules (mandatory for NET-PET-AI work):**
+- Always run `context-bundle.ps1 -TaskType netpetai` — it reads STUDENT-PORTAL-DEV.md + deepgram §2 + COLD-START-BOOT automatically
+- For non-NET-PET-AI: `context-bundle.ps1 -TaskType general`
+- Keep `task` field concise — pass large content via `context`, not `task` (L52: large task = Dialagram timeout)
+
+1. Run context-bundle.ps1 → pass `$bundle.docs` as context
 2. Call PA — print `code_patch` + `d1_row_id`
 3. Apply patch — write to file
 4. Verify — `node --check <file>` for JS, spot-read for others
-5. If PA fails → retry once → if still fails → escalate to Tier 2 Opus
+5. **L58 FIX_PA_FIRST:** If PA fails → check `/api/status` → if T1 down try `tier:10` (fallback cascade) → if all tiers down → HALT and fix PA before any other task. Never silently inline.
+6. If T1 + T10 both fail → escalate to Tier 2 Opus via `tier:2`
 
 ---
 
@@ -95,6 +107,13 @@ Always print before executing:
 
 If Tier 1 fails → escalate to Tier 2. Print:
 `DISPATCH → TIER 2 PA-OPUS — TIER 1 failed (<reason>)`
+
+## Active Laws (enforced every task)
+
+- **L57 PA_FIRST** — OB1 routes, PA executes. Never inline-synthesize what PA can do cheaper.
+- **L58 FIX_PA_FIRST** — If PA T1 fails, fixing PA IS the immediate priority. Check `/api/status`. Try `tier:10`. If all tiers down → HALT. Do not proceed with inline work.
+- **L55 COMMIT_DONT_HOLD** — Commit every verified working feature before session end.
+- **L56 PRE_CODE_DOC_GATE** — Any NET-PET-AI dispatch: run `context-bundle.ps1 -TaskType netpetai` first. See `CANON/SYSTEM/MANDATORY-READS.md` for the full registry.
 
 ## OB-1 Operating Rules (from AGENTS.md)
 

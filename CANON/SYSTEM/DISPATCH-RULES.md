@@ -1,3 +1,8 @@
+# ⚠️ DEPRECATED — superseded by CLAUDE.md dispatch tiers (Run 32)
+# Tiers T3-Pro and T5-Claude referenced below DO NOT EXIST in current system.
+# Current system: T1=Qwen via PA, T2=Opus via PA tier:2. See CLAUDE.md.
+---
+
 # PHOENIX-CENTURION OS: DISPATCH ENFORCEMENT RULES v1.0
 **Effective:** 2026-05-29 | **Authority:** SOV100 | **Binding:** ALL AGENTS
 

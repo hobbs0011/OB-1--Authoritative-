@@ -1,3 +1,8 @@
+# ⚠️ DEPRECATED — superseded by `.claude/commands/reincarnateRise.md` (Run 32)
+# Hash-verification infrastructure (SHA-256, DNA.json, SOUL.log checks) referenced below DOES NOT EXIST.
+# This file is phantom documentation. Do not follow. Read .claude/commands/reincarnateRise.md instead.
+---
+
 # PHOENIX RISING PROTOCOL v5.0 — ENFORCEABLE SPECIFICATION
 **Effective:** 2026-05-29 | **Supersedes:** v4.0 | **Authority:** SOV100 MICHAEL HOBBS
 
