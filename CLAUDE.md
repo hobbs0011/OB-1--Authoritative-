@@ -83,7 +83,7 @@ Invoke-RestMethod -Uri "https://phoenix-architecti.mrmichaelhobbs123.workers.dev
 
 ---
 
-### TIER 2 — PA / Claude Opus 4.7
+### TIER 2 — PA / Claude Opus 4.8
 
 **When:** final rulings / irreversible decisions / ledger audits / doctrine changes / arbitration / reincarnation rulings / edge-case death seals
 

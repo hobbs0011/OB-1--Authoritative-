@@ -28,9 +28,10 @@ PCC CONTEXT:
 $pccContext
 
 TIER DISPATCH:
-T1 : phoenix-architecti tier=1 — Dialagram Qwen 3.7 Max ($5.50/wk unlimited)
-T2 : phoenix-architecti tier=2 — Claude Opus 4.7 (final rulings only)
-Kilo: emergency fallback only
+T1 : phoenix-architecti tier=1 — Dialagram Qwen 3.7 Max
+T10: phoenix-architecti tier=10 — Cerebras→Groq→CF-Qwen fallback cascade
+T2 : phoenix-architecti tier=2 — Claude Opus 4.8 (final rulings only)
+Kilo: direct Dialagram/Qwen or PA cascade via kilo.json
 
 SECURITY CONSTRAINTS:
 - DO NOT REMOVE CLOUDFLARE_API_TOKEN before deploy

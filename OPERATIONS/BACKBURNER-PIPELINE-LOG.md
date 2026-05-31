@@ -189,7 +189,44 @@
 
 ---
 
-## SIGNAL: MOST WANTED (NET's Most Wanted — Updated 2026-05-18)
-1. ✅ BB-01 BB-02 BB-03 BB-04 BB-05 DONE — NET_PET_KV, COMMANDS, MemoryDO, portals
-2. S2Pipeline not built → soul signals lost, can't follow the fucks (BB-10)
-3. lam-prospect portal missing (BB-07)
+## RUN 34 ADDITIONS (2026-05-31)
+
+### BB-27 !! DNA Extract Endpoint — FIXED Run 34
+- Status: DONE (2026-05-31)
+- What: rrl-pipeline.ps1 Step 2 called POST /api/soul/extract without `text` field → 400 for 11 runs (Runs 6-29 + 33).
+- Fix: Changed to GET /api/soul/session/{runId} which reads back the posted session data. Also fixed `dna_count` in Step 6 pipeline record.
+- File: SCRIPTS/rrl-pipeline.ps1:107-123
+
+### BB-28 ! COLD-START-BOOT Run Number — FIXED Run 34
+- Status: DONE (2026-05-31)
+- What: COLD-START-BOOT.md showed Run 32 at start of Run 34.
+- Fix: Updated to Run 34, timestamp 2026-05-31T16:20 ICT.
+
+### BB-29 ! Kilo Full Update — DONE Run 34
+- Status: DONE (2026-05-31)
+- What: kilo.json had expired Cerebras key + stale claude-opus-4-7-20260514 model. AGENT99.md + RISE.md had stale SOULCOUNT lock (898,066).
+- Fix: Removed Cerebras provider, updated Claude → claude-opus-4-8, updated SOULCOUNT to TITANIUM_ANCHOR live query. Synced to all 8 worktrees.
+
+### BB-30 ! Kilo AGENT99.md — Open cleanup
+- Status: OPEN
+- What: AGENT99.md still references `/PhoenixCoder` command (old phoenix-coder.workers.dev URL, superseded by phoenix-architecti). Should be updated to `/Centurion-Code`.
+- Fix: Update AGENT99.md COMMAND REGISTRY section — replace `/PhoenixCoder` with current `/Centurion-Code` dispatch.
+
+### BB-31 ! RISE.md Phoenix Coder reference
+- Status: OPEN
+- What: RISE.md Phoenix Coder v3.2 section still calls `phoenix-coder.mrmichaelhobbs123.workers.dev` (old URL). Worker is superseded by phoenix-architecti.
+- Fix: Update to use phoenix-architecti URL and PA dispatch template.
+
+### BB-32 ! Lam Portal + Chrome Extension Icons
+- Status: OPEN (same as BB-07 + BB-08 — escalating priority)
+- What: lam-prospect zero files. Chrome extension icons missing. Both promised to students.
+- Route: T1 PA dispatch per established portal template.
+
+---
+
+## SIGNAL: MOST WANTED (NET's Most Wanted — Updated 2026-05-31)
+1. ✅ BB-27 DNA extract FIXED — 11-run debt cleared
+2. ✅ BB-28 BB-29 COLD-START-BOOT + Kilo updated
+3. lam-prospect portal missing (BB-07 / BB-32)
+4. Chrome Extension icons + install guide (BB-08 / BB-09)
+5. BB-30/BB-31 Kilo stale command references

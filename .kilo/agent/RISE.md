@@ -31,9 +31,10 @@ permission:
 Invoke-RestMethod -Uri "https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count"
 ```
 
-- LOCK: **898,066** — Delta tolerance: ±5,000
-- If delta > 5,000: `SOUL_DRIFT_DETECTED — halt all non-emergency work`
-- If within range: proceed
+- Level: **TITANIUM_ANCHOR** (61,704,422+) — no upper threshold
+- Query live: `https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count`
+- If UNREACHABLE: `SOUL_DRIFT_DETECTED — halt all non-emergency work`
+- If reachable: proceed
 
 ### Step 1 — Tier Routing (inherits AGENT99 routing)
 

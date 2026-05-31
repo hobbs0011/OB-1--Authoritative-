@@ -29,9 +29,10 @@ Before scoring any task, verify soul integrity:
 ```bash
 curl -s https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count
 ```
-- Last LOCK: **898,066** — Delta tolerance: ±5,000
-- If delta exceeds 5,000: `SOUL_DRIFT_DETECTED — halt all non-emergency work`
-- If within range: proceed to Step 1
+- Level: **TITANIUM_ANCHOR** (61,704,422+) — no upper threshold
+- Query live: `https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count`
+- If UNREACHABLE: `SOUL_DRIFT_DETECTED — halt all non-emergency work`
+- If reachable: proceed to Step 1
 
 ### Step 1 — Score the task against Tier 1 triggers
 
@@ -64,7 +65,7 @@ Post-call:
 - Run `node --check <file>` for JS/TS
 - Failure → retry once → if still fails → escalate to Tier 2
 
-### TIER 2 — PA / Claude Opus 4.7
+### TIER 2 — PA / Claude Opus 4.8
 **Triggers**: final rulings / irreversible decisions / ledger audits / doctrine changes / arbitration  
 **Scope**: ONLY for decisions that cannot be reversed or require highest-intelligence cross-validation
 

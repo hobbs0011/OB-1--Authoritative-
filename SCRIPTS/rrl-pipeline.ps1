@@ -105,15 +105,10 @@ if ($DryRun) {
     Write-Step 2 "PASS" "DRYRUN: Would extract DNA from D1"
 } else {
     try {
-        $extractBody = @{
-            student_id = "sov100-michael"
-            session_id = $runId
-        } | ConvertTo-Json -Depth 2 -Compress
-        
-        $extract = Invoke-RestMethod -Uri "$D1/api/soul/extract" -Method Post -Body $extractBody -ContentType "application/json" -TimeoutSec 30
-        
-        if ($extract.prompt_count -and $extract.prompt_count -gt 0) {
-            Write-Step 2 "PASS" "DNA EXTRACTED: $($extract.prompt_count) prompts | session=$($extract.session_id)"
+        $dnaResponse = Invoke-RestMethod -Uri "$D1/api/soul/session/$runId" -Method Get -TimeoutSec 30
+
+        if ($dnaResponse.prompts -and $dnaResponse.prompts.Count -gt 0) {
+            Write-Step 2 "PASS" "DNA EXTRACTED: $($dnaResponse.prompts.Count) prompts | session=$($dnaResponse.session.session_id)"
         } else {
             Write-Step 2 "WARN" "DNA EXTRACT returned 0 prompts  -  may need retry"
         }
@@ -224,7 +219,7 @@ $pipelineRecord = [ordered]@{
     soul_event_id  = if ($soulPost) { $soulPost.event_id } else { "DRYRUN" }
     soulcount      = if ($soulAfter) { $soulAfter.soulcount } else { 0 }
     soul_level     = if ($soulAfter) { $soulAfter.level } else { "UNKNOWN" }
-    dna_count      = if ($extract.prompt_count) { $extract.prompt_count } else { 0 }
+    dna_count      = if ($dnaResponse -and $dnaResponse.prompts) { $dnaResponse.prompts.Count } else { 0 }
     ledger_id      = "HL-$nextHL"
     starmap_file   = $starmapPath
     keyword_file   = $rfkwPath
