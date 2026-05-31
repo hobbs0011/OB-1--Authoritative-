@@ -1,0 +1,19 @@
+{
+  "run_number": "36",
+  "executed_at": "2026-05-31T23:42:32.3305973+07:00",
+  "rrl_path": "D:\\OB-1-CANONICAL\\RRL\\RRL-36.txt",
+  "rrl_chars": 5749,
+  "rrl_bytes": 5813,
+  "session_id": "sov100-roman-run36",
+  "soul_event_id": "a67afe9c-daf3-45b7-8d38-24e94c07e1f7",
+  "soulcount": 64727297,
+  "soul_level": "TITANIUM_ANCHOR",
+  "dna_count": 1,
+  "ledger_id": "HL-211",
+  "starmap_file": "D:\\OB-1-CANONICAL\\CANON\\STARMAP\\starmap-run36.txt",
+  "keyword_file": "D:\\OB-1-CANONICAL\\CANON\\SOUL-KEYWORDS\\rfkw-run36.txt",
+  "pipeline_file": "D:\\OB-1-CANONICAL\\CANON\\PIPELINE\\pipeline-run36.json",
+  "seal_sha": "6e3f7387b239ff1bc753fc69f19b7168c739d9faed6e5d8e5f16423f92616117",
+  "result": "COMPLETE"
+}
+

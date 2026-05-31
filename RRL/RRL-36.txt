@@ -1,0 +1,91 @@
+RRL-36 — ROMAN RUN 36
+Date: 2026-05-31
+Theme: NET PHONICS SYSTEM DESIGN + OBI MODE BUG FIX
+SOULCOUNT START: 64,072,355 (TITANIUM_ANCHOR)
+SOULCOUNT END: 64,721,484 (TITANIUM_ANCHOR)
+
+=== SESSION LOG ===
+
+[RISE]
+- SOULCOUNT: 64,072,355 TITANIUM_ANCHOR
+- HEAD: b8d3d57b (Run 35)
+- T1 PA Dialagram timed out — tier:10 fallback used throughout
+- Clean tree at boot
+
+[ISSUE REPORTED]
+Michael: "the mode selection does not work, when obi is opened, it auto selects freetalk, and then when I try to switch the mode to phonics, it doesnt connect"
+
+[BUG FIX — OBI MODE SELECTION]
+Root cause 1: openVoiceAgent() never passed currentMode to /api/deepgram-token — server always built FreeTalk prompt regardless of mode selected
+Root cause 2: selectMode() reconnect guard was `if (agentWs && agentReady)` — too strict; also agentWs.close() is async so agentWs might still be non-null when setTimeout fires
+Fix 1: Added &mode=${encodeURIComponent(currentMode)} to token fetch URL (chat.js line ~813)
+Fix 2: Changed selectMode() to: if (urlStudentId) { if (agentWs) { close; null immediately }; setTimeout openVoiceAgent 300ms }
+Deployed: b0a5ef6a
+
+[NET PHONICS DESIGN SESSION]
+
+Michael: "dive into the actual agenic coding of these additional modes, for example, phonics, is it based on NET Phonics 42 sounds? (inspired by jolly phonics system) does it actually work? does it track the groups? Group 1 PINSAT"
+
+Assessment of existing phonics code:
+- phonics-drills.js was NOT 42-sound phonics — it was Vietnamese L1 interference correction drills (TH, R/L, V/W, final consonants, SH/CH, clusters, vowels)
+- index.js buildAgentPrompt said "Jolly Phonics System" — plagiarism flag in production
+- Zero per-student group tracking
+- Drills were not progressive
+
+Michael: "I know its a little sus I just reversed Jolly Phonics group 1, but hey they dont own the sounds in the English language, but we should make these changes throughout as to not directly plagarize their system, we wont copy their exact group structure and we also wont copy their songs and other property, design the NET Phonics 6-7 groups now while you're at it"
+
+[NET PHONICS 7-GROUP SYSTEM DESIGNED]
+
+Group naming evolution:
+- Started with PINSAT (Michael's) — reversed JP group 1 SATIPN
+- Michael: "or SATNIP rhymes with CATNIP ;)"
+- Michael: "SAPTIN.. these are examples, to help you redesign the groups"
+- Michael liked WING, CHUNKS, SWEET, PEARL for groups 4-7 (thematic/visual names)
+- Michael: "for 1,2,3 if you can achieve what you did with 4,5,6,7 with common things that are a lot more easier to visually track"
+- Arrived at: ANTS, HOLD, GRUFF for groups 1-3
+
+Michael: "make rhymes, songs and actions for each, mine as well design the whole system this run (try to make them for all ages, one thing I dont like about Jolly is their songs are very childish, and embarrassing to use with adults) alternatively we can make rhyming songs for both age categories, but preferably, just one song/memorizing tactic per group would be ideal if possible"
+
+Michael on "email" in the SWEET rhyme: "no I said I liked groups 4-7, are you saying they dont work now? Pearl, Wing.. these are common things, that can be marketed very visually."
+[OB1 had misread — Michael confirmed ALL 7 names were good, just wanted adult-friendly rhymes]
+
+Michael: "make sure we have backend NET Methadology/Sylabus/whatever files that we are updating as we continue to take what NET is and evolve it, work on that as well .md"
+
+[FILES CREATED/UPDATED]
+- CANON/NET-PHONICS-SYSTEM.md (new — living doctrine)
+- CANON/NET-TEACHING-METHODOLOGY.md (Pillar 3 updated — JP removed)
+- APPS/NET-PET-AI/src/phonics-drills.js (full rewrite — NET Phonics 7 groups)
+- APPS/NET-PET-AI/src/index.js (JP refs stripped, NET Phonics prompt)
+- APPS/NET-PET-AI/public/chat.js (mode bug fix)
+
+Michael on rhymes: "yes but lets not do something like emails, kids dont email. again we want it to be more each age group"
+[Rewrote all 7 rhymes to use universal: sport, nature, movement, food — no office vocabulary]
+
+Michael: "try groups 4-7 best you can, it doesnt need to be a word, just something easy for the brain to remember when said"
+Michael: "PINSAT - A man sitting on a pin- OUCH! (something like that)"
+Michael: "Drumble - A person playing a drum, but stumbling"
+Michael: "Hogfez - a pig meeting a funny many named fez"
+Michael: "now try the same for 4-7"
+
+[FINAL 7 GROUP NAMES LOCKED]
+1. SATNIP — s,a,t,n,i,p — Man sat on a PIN — OUCH
+2. DRUMBLE — d,r,u,m,b,l — Drummer who won't stop stumbling
+3. HOGFEZ — h,o,g,f,e,z — Fat hog meets a funny man named Fez
+4. WYVEX — w,v,j,k,y,x — Wild shape-shifting dragon: whispers, vibrates, jumps, yells, explodes
+5. CHUSHANG — ch,sh,th,th,ng,qu — Kung-fu master shouts CHUSHANG before every chop
+6. BEEHIVE — ee,ai,oa,ie,oo,oo — Beehive full of long-vowel bees each making a different sweet sound
+7. OYSTER — or,ar,er,ou,oi,ue — Oyster holds a pearl: work hard, sail far, outdoor wind, oily shell, errgh, truly pure
+
+[KEY PRINCIPLES ESTABLISHED]
+- Group name = sounds (say it, practice it)
+- Memory story = ridiculous/vivid/specific = sticks (method of loci)
+- JP groups are nonsensical (c/k e h r m d) — NET groups form words or near-words
+- Adult-appropriate rhymes: sport, nature, movement — no nursery rhymes, no emails
+- z in HOGFEZ (group 3) — WYVEX gets k/c instead
+- Per-student phonics tracking still unimplemented — flagged as next-session BB item
+
+[OPEN BB ITEMS FROM THIS SESSION]
+- Phonics group tracking: add phonics_current_group + phonics_mastered to student profile
+- DRUMBLE/HOGFEZ drill sentences: need rewrite to match new sound assignments (was HOLD/GRUFF)
+- Deploy phonics system after drill rewrite
+- All 7 group rhymes and actions need final lock into phonics-drills.js
