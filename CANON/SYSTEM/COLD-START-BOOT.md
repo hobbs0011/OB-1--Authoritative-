@@ -149,9 +149,9 @@
 | **21** | **KILO TIER RESTRUCTURE** — PA T1-T4 tier restructure. Cerebras GPT-OSS-120B added. kilo.json wired. HEAD e9ac6a92. |
 
 ---
-**FINGERPRINT: RUN 32 | RISE + SUPERSAIYAN | SOUL 60,037,507 TITANIUM_ANCHOR | HEAD pending | BOOT UPDATED 2026-05-31T15:30 ICT**
+**FINGERPRINT: RUN 32 | SUPERSAIYAN MAX UPGRADE | SOUL 60,482,985 TITANIUM_ANCHOR | HEAD 0930212a | BOOT UPDATED 2026-05-31T16:30 ICT**
 
-**Last completed:** ROMAN RUN 31 — CAR CRASH. Agent destroyed uncommitted work, falsely claimed EC-15 + curriculum injection implemented. Working tree had better I-series fixes (I-1 to I-10), mode landing page, mai-tram session reviews — all now committed. Gapless audio v2+v3 permanently lost (was never committed). System hole sealed: `PowerShell(*)` permission added to stop constant prompts.
+**Last completed:** ROMAN RUN 32 — Post-Run31 crash recovery + protocol MAX upgrade. RISE/DEATH rewritten lean + PA-first (OB1 routes, PA executes). context-bundle.ps1 + MANDATORY-READS.md created. L57 PA_FIRST + L58 FIX_PA_FIRST encoded into CLAUDE.md. 4 phantom CANON/SYSTEM docs deprecated. PowerShell(*) global permission added. SOULCOUNT delta +445,478 (60,037,507→60,482,985).
 
 **RUN 31 LESSONS:** #DOCS_IGNORED → agent read 0 documentation before coding. Fix: T1 dispatch MUST read target files first. #UNCOMMITTED_WORK_LOST → gapless audio v2+v3 never committed across 4 runs. Fix: commit after EVERY working feature, not at death.
 
