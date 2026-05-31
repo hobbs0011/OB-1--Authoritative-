@@ -793,6 +793,8 @@ let userHasInteracted = false; // set on first gesture
 let pendingMicStream  = null;  // mic stream grabbed during gesture, before agent ready
 let micAcquiring      = false; // mutex: prevents double getUserMedia on rapid taps
 let agentFirstAudioReceived = false; // FIX1: true after first agent audio chunk plays — gates legacy TTS suppression
+let agentPreSettingsBuffer = []; // EC-15: PCM chunks buffered before SettingsApplied
+let agentPreSettingsBytes = 0;   // byte count — cap at 50 chunks (~1s at 16kHz)
 
 // I-5: Stop pendingMicStream when tab hidden to prevent hot mic (EC-4 fix)
 document.addEventListener("visibilitychange", () => {
@@ -837,7 +839,7 @@ async function openVoiceAgent() {
       if (agentSilenceTimer) { clearTimeout(agentSilenceTimer); agentSilenceTimer = null; }
       if (agentCurrentBlobUrl) { URL.revokeObjectURL(agentCurrentBlobUrl); agentCurrentBlobUrl = null; }
       if (agentCurrentAudio) { try { agentCurrentAudio.pause(); } catch {} agentCurrentAudio = null; }
-      agentAudioQ.length = 0; agentChunkAccum = []; agentChunkAccumSize = 0; agentPlaying = false;
+      agentAudioQ.length = 0; agentChunkAccum = []; agentChunkAccumSize = 0; agentPreSettingsBuffer = []; agentPreSettingsBytes = 0; agentPlaying = false;
       if (agentThinkBubble) { agentThinkBubble.remove(); agentThinkBubble = null; }
       if (agentWorklet) { try { agentWorklet.disconnect(); } catch {} agentWorklet = null; }
       if (agentAudioCtx) { agentAudioCtx.close().catch(() => {}); agentAudioCtx = null; }
@@ -920,6 +922,11 @@ function handleAgentMsg(event) {
         agentSessionStart = Date.now();
         agentSessionTurns = 0;
         agentSessionVocab = [];
+        // EC-15: Flush pre-SettingsApplied PCM buffer — prevents first 200-500ms speech loss
+        for (let i = 0; i < agentPreSettingsBuffer.length; i++) {
+          try { if (agentWs && agentWs.readyState === WebSocket.OPEN) agentWs.send(agentPreSettingsBuffer[i]); } catch (_) {}
+        }
+        agentPreSettingsBuffer = []; agentPreSettingsBytes = 0;
         if (agentKeepAlive) clearInterval(agentKeepAlive);
         // I-10: Guard KeepAlive send with readyState check to prevent uncaught error on race (B-10 fix)
         agentKeepAlive = setInterval(() => {
@@ -965,7 +972,7 @@ function handleAgentMsg(event) {
       } else if (msg.type === "UserStartedSpeaking") {
         // Student spoke — cancel silence timer and barge-in stop
         if (agentSilenceTimer) { clearTimeout(agentSilenceTimer); agentSilenceTimer = null; }
-        agentAudioQ.length = 0; agentChunkAccum = []; agentChunkAccumSize = 0;
+        agentAudioQ.length = 0; agentChunkAccum = []; agentChunkAccumSize = 0; agentPreSettingsBuffer = []; agentPreSettingsBytes = 0;
         if (agentCurrentBlobUrl) { URL.revokeObjectURL(agentCurrentBlobUrl); agentCurrentBlobUrl = null; }
         if (agentCurrentAudio) { try { agentCurrentAudio.pause(); } catch {} agentCurrentAudio = null; }
         agentPlaying = false;
@@ -1128,7 +1135,12 @@ async function startAgentListening(preAcquiredStream) {
       agentWorklet = new AudioWorkletNode(agentAudioCtx, "pcm-processor");
       agentWorklet.port.onmessage = (e) => {
         if (e.data.type === "pcm" && agentWs && agentWs.readyState === WebSocket.OPEN) {
-          agentWs.send(e.data.buffer);
+          if (agentReady) {
+            agentWs.send(e.data.buffer);
+          } else if (agentPreSettingsBuffer.length < 50) {
+            agentPreSettingsBuffer.push(e.data.buffer);
+            agentPreSettingsBytes += e.data.buffer.byteLength;
+          }
         }
       };
       src.connect(agentWorklet);
@@ -1150,7 +1162,12 @@ async function startAgentListening(preAcquiredStream) {
           const s = Math.max(-1, Math.min(1, float32[i]));
           int16[i] = s < 0 ? s * 0x8000 : s * 0x7FFF;
         }
-        agentWs.send(int16.buffer);
+        if (agentReady) {
+          agentWs.send(int16.buffer);
+        } else if (agentPreSettingsBuffer.length < 50) {
+          agentPreSettingsBuffer.push(int16.buffer);
+          agentPreSettingsBytes += int16.buffer.byteLength;
+        }
       };
       src.connect(scriptProcessor);
       scriptProcessor.connect(agentAudioCtx.destination);
