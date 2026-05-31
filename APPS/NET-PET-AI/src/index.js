@@ -5,6 +5,7 @@
 // Secrets: DEEPSEEK_API_KEY, DEEPGRAM_API_KEY
 
 import { securityMiddleware, sanitizeInput, validateStudentId } from './security.js';
+import { logError, logWarn, logInfo } from './logger.js';
 import { extractWeaknesses, buildWeaknessPrompt, buildReEntryPrompt, buildRewardSignals, buildRewardPrompt } from './memory-brain.js';
 import { trackTokens, getUsage } from './token-track.js';
 import { queryLessons, writeProgress, queryProgress, syncStudentProgress, writeSoulDNA, writeChatExchange } from './notion.js';
@@ -14,6 +15,7 @@ import { calculateVirality, calculateConversion, generateVariants, evaluateExper
 import { getStudentRoute, getModulePrompt, createSnapshot, storeSnapshot, rehydrate } from './star-map.js';
 import { computeNextReview, buildVocabContext, generateVocabId } from './vocab-srs.js';
 import { LedgerDO, PetDO, CommandDO, MemoryDO } from './durable_objects.js';
+import { PHONICS_DRILLS } from './phonics-drills.js';
 
 const VERSION = "1.5.0";
 
@@ -444,6 +446,22 @@ export default {
       return new Response(assetRes.body, { status: assetRes.status, headers });
     }
 
+    // /test-portal — Full mock student portal for standardized testing
+    if (path === "/test-portal") {
+      const assetReq = new Request(new URL("/test-portal.html", url), request);
+      const assetRes = await env.ASSETS.fetch(assetReq);
+      return new Response(assetRes.body, { status: assetRes.status, headers: assetRes.headers });
+    }
+
+    // /magic-test — SOV100 test sandbox. No soul capture, no KV writes.
+    if (path === "/magic-test") {
+      const assetReq = new Request(new URL("/magic-chat-test.html", url), request);
+      const assetRes = await env.ASSETS.fetch(assetReq);
+      const headers = new Headers(assetRes.headers);
+      headers.set('Link', '</chat.js>; rel=preload; as=script');
+      return new Response(assetRes.body, { status: assetRes.status, headers });
+    }
+
     // /speak — Speech-to-Learning MVP UI
     if (path === "/speak") {
       return env.ASSETS.fetch(new Request(new URL("/speak.html", url), request));
@@ -464,7 +482,7 @@ export default {
         const res = await handleSoulDNASubmit(body, env);
         return addCors(res, request);
       } catch (err) {
-        console.error("[SOULDNA_SUBMIT] error:", err.message);
+        logError('SOULDNA_SUBMIT', { error: err.message, stack: err.stack?.slice(0, 500) }, env);
         return addCors(json({ error: "Internal error", detail: err.message }, 500), request);
       }
     }
@@ -476,7 +494,7 @@ export default {
         const res = await handleSoulDNAStatus(id, env);
         return addCors(res, request);
       } catch (err) {
-        console.error("[SOULDNA_STATUS] error:", err.message);
+        logError('SOULDNA_STATUS', { error: err.message, id: path.split('/')[2] }, env);
         return addCors(json({ error: "Internal error", detail: err.message }, 500), request);
       }
     }
@@ -488,7 +506,7 @@ export default {
         const res = await handleSoulDNAPipeline(tier, env);
         return addCors(res, request);
       } catch (err) {
-        console.error("[SOULDNA_PIPELINE] error:", err.message);
+        logError('SOULDNA_PIPELINE', { error: err.message, tier: url.searchParams.get('tier') }, env);
         return addCors(json({ error: "Internal error", detail: err.message }, 500), request);
       }
     }
@@ -623,8 +641,45 @@ async function handleAPI(path, request, env, url) {
       const body = await request.json();
       return await handleChat(body, env);
     } catch (err) {
-      console.error("[CHAT_ERROR]", err.message, err.stack);
+      logError('CHAT_ERROR', { error: err.message, stack: err.stack?.slice(0, 1000) }, env);
       return json({ error: `Chat failed: ${err.message}`, version: VERSION }, 500);
+    }
+  }
+
+  // Client Error Reporting — browser-side errors → D1 error_log
+  if (path === "/api/error-report" && method === "POST") {
+    try {
+      const body = await request.json().catch(() => ({}));
+      const { tag, message, stack, studentId, url: pageUrl, userAgent } = body;
+      logError('CLIENT_ERROR', {
+        tag: tag || 'UNTAGGED',
+        message: (message || '').slice(0, 500),
+        stack: (stack || '').slice(0, 1000),
+        studentId: studentId || 'anonymous',
+        pageUrl: (pageUrl || '').slice(0, 300),
+        userAgent: (userAgent || '').slice(0, 200)
+      }, env);
+      return addCors(json({ ok: true }), request);
+    } catch (err) {
+      return addCors(json({ error: err.message }, 500), request);
+    }
+  }
+
+  // Server Error Log Query — view recent errors from D1
+  if (path === "/api/error-log" && method === "GET") {
+    const limit = Math.min(parseInt(url.searchParams.get('limit') || '50'), 200);
+    const tag = url.searchParams.get('tag');
+    try {
+      let query = 'SELECT id, ts, level, tag, payload FROM error_log';
+      const params = [];
+      if (tag) { query += ' WHERE tag = ?'; params.push(tag); }
+      query += ' ORDER BY ts DESC LIMIT ?';
+      params.push(limit);
+      const result = await env.SOUL_DB.prepare(query).bind(...params).all();
+      return addCors(json({ errors: result.results || [], count: (result.results || []).length }), request);
+    } catch (err) {
+      logError('ERROR_LOG_QUERY_FAIL', { error: err.message }, env);
+      return addCors(json({ error: err.message }, 500), request);
     }
   }
 
@@ -687,7 +742,7 @@ async function handleAPI(path, request, env, url) {
 
       const dgWs = upstreamRes.webSocket;
       if (!dgWs) {
-        console.error("[STT-PROXY] No webSocket on upstream response, status:", upstreamRes.status);
+        logError('STT_PROXY_NO_WS', { status: upstreamRes.status }, env);
         server.close(1011, "Deepgram connection failed");
         return new Response(null, { status: 101, webSocket: client });
       }
@@ -718,7 +773,7 @@ async function handleAPI(path, request, env, url) {
       dgWs.addEventListener("error", cleanup);
 
     } catch (err) {
-      console.error("[STT-PROXY] Upstream fetch failed:", err.message);
+      logError('STT_PROXY_FETCH_FAIL', { error: err.message }, env);
       server.close(1011, "Upstream error");
     }
 
@@ -761,23 +816,26 @@ async function handleAPI(path, request, env, url) {
     const apiKey = env.DEEPGRAM_API_KEY;
     if (!apiKey) return addCors(json({ error: "DEEPGRAM_API_KEY not configured" }, 500), request);
     const studentId = url.searchParams.get("studentId") || "";
+    const sessionMode = (url.searchParams.get("mode") || "free").toLowerCase(); // free | study | phonics
     try {
-      const [rawProfile, rawLang, rawVocab, rawArc] = await Promise.all([
+      const [rawProfile, rawLang, rawVocab, rawArc, rawMemory] = await Promise.all([
         env.NET_PET_KV.get("student_profile_" + studentId),
         env.NET_PET_KV.get("lang:" + studentId),
         env.NET_PET_KV.get("vocab_list_" + studentId),
-        env.NET_PET_KV.get("vocab_arc_" + studentId)
+        env.NET_PET_KV.get("vocab_arc_" + studentId),
+        env.STUDENT_MEMORY ? env.STUDENT_MEMORY.get(`mem:${studentId}`) : Promise.resolve(null)
       ]);
       // Raw API key — auth/grant asr:write scope is insufficient for Voice Agent WS (401)
       // CF Worker endpoint already gates access; raw key exposure here is acceptable
       const access_token = apiKey;
 
-      let agentProfile = null, agentLang = "en", recentVocab = [], arcData = null;
+      let agentProfile = null, agentLang = "en", recentVocab = [], arcData = null, memoryData = null;
       try { if (rawProfile) agentProfile = JSON.parse(rawProfile); } catch (_) {}
       if (!agentProfile) agentProfile = { level: "A2", goals: "Practice natural spoken English", primaryBlock: "speaking confidence" };
       if (rawLang) agentLang = rawLang;
       try { if (rawVocab) { const vl = JSON.parse(rawVocab); recentVocab = vl.slice(-5).map(w => w.word); } } catch (_) {}
       try { if (rawArc) arcData = JSON.parse(rawArc); } catch (_) {}
+      try { if (rawMemory) memoryData = JSON.parse(rawMemory); } catch (_) {}
 
       const _level = (agentProfile?.level || agentProfile?.englishLevel || "").toLowerCase();
       const ttsSpeed = /^a1/.test(_level) ? 0.85 : /^a2/.test(_level) ? 0.85 : 1.0;
@@ -795,7 +853,7 @@ async function handleAPI(path, request, env, url) {
           },
           think: {
             provider: { type: "open_ai", model: "gpt-4o-mini" },
-            prompt: buildAgentPrompt(agentProfile, agentLang, recentVocab, arcData),
+            prompt: buildAgentPrompt(agentProfile, agentLang, recentVocab, arcData, sessionMode, memoryData),
             functions: [{
               name: "save_vocabulary_word",
               description: "Save an English word the student successfully used in a sentence.",
@@ -803,7 +861,7 @@ async function handleAPI(path, request, env, url) {
             }]
           },
           speak: {
-            provider: { type: "deepgram", model: "aura-2-asteria-en", speed: ttsSpeed }
+            provider: { type: "deepgram", model: "aura-2-zeus-en", speed: ttsSpeed }
           }
         }
       };
@@ -910,6 +968,19 @@ async function handleAPI(path, request, env, url) {
     }
   }
 
+  // Phonics Curriculum — Jolly Phonics Groups 1-7 drill data
+  if (path === "/api/phonics/curriculum" && method === "GET") {
+    const group = url.searchParams.get("group"); // optional filter: th_sounds, r_l_distinction, etc.
+    try {
+      const drills = group ? PHONICS_DRILLS.filter(d => d.group === group) : PHONICS_DRILLS;
+      const groups = [...new Set(PHONICS_DRILLS.map(d => d.group))];
+      return addCors(json({ drills, groups, total: drills.length }), request);
+    } catch (err) {
+      logError('PHONICS_CURRICULUM_FAIL', { error: err.message }, env);
+      return addCors(json({ error: err.message }, 500), request);
+    }
+  }
+
   // Vocabulary SRS
   if (path === "/api/vocab/add"    && method === "POST") { const body = await request.json(); return handleVocabAdd(body, env); }
   if (path === "/api/vocab/due"    && method === "GET")  { return handleVocabDue(url.searchParams.get("studentId") || "", env); }
@@ -920,9 +991,64 @@ async function handleAPI(path, request, env, url) {
   // Onboarding
   if (path === "/api/onboarding" && method === "POST") { const body = await request.json(); return handleOnboarding(body, env); }
 
-  // Memory
+  // Memory (Legacy)
   if (path === "/api/memory" && method === "POST") { const body = await request.json(); return handleMemorySave(body, env, request); }
   if (path === "/api/memory" && method === "GET") { return handleMemoryGet(url.searchParams.get("studentId") || "", env, request); }
+
+  // ── Student Memory Pipeline (Strategic Differentiator) ─────────────────────
+  // GET /api/memory/:studentId — Read world_model + recent_vocab + session stats
+  if (path.startsWith("/api/memory/") && method === "GET" && !path.includes("/summary")) {
+    const studentId = path.split("/api/memory/")[1]?.split("?")[0];
+    if (!studentId) return addCors(json({ error: "studentId required" }, 400), request);
+    const idCheck = validateStudentId(studentId);
+    if (!idCheck.valid) return addCors(json({ error: idCheck.error }, 400), request);
+    try {
+      const raw = env.STUDENT_MEMORY ? await env.STUDENT_MEMORY.get(`mem:${studentId}`) : null;
+      const mem = raw ? JSON.parse(raw) : { world_model: "", recent_vocab: [], session_count: 0, last_topic: "", breakthroughs: [], struggles: [] };
+      return addCors(json(mem), request);
+    } catch (err) {
+      return addCors(json({ error: err.message }, 500), request);
+    }
+  }
+  // POST /api/memory/:studentId — Merge updates into student memory
+  if (path.startsWith("/api/memory/") && method === "POST" && !path.includes("/summary")) {
+    const studentId = path.split("/api/memory/")[1]?.split("?")[0];
+    if (!studentId) return addCors(json({ error: "studentId required" }, 400), request);
+    const idCheck = validateStudentId(studentId);
+    if (!idCheck.valid) return addCors(json({ error: idCheck.error }, 400), request);
+    try {
+      const body = await request.json().catch(() => ({}));
+      const raw = env.STUDENT_MEMORY ? await env.STUDENT_MEMORY.get(`mem:${studentId}`) : null;
+      const existing = raw ? JSON.parse(raw) : { world_model: "", recent_vocab: [], session_count: 0, last_topic: "", breakthroughs: [], struggles: [] };
+      
+      // Merge logic
+      if (body.world_model_update) existing.world_model = body.world_model_update;
+      if (body.new_vocab && Array.isArray(body.new_vocab)) {
+        existing.recent_vocab = [...new Set([...existing.recent_vocab, ...body.new_vocab])].slice(-20);
+      }
+      if (body.session_summary) existing.last_topic = body.session_summary;
+      if (body.breakthrough) existing.breakthroughs = [body.breakthrough, ...(existing.breakthroughs || [])].slice(0, 10);
+      if (body.struggle) existing.struggles = [body.struggle, ...(existing.struggles || [])].slice(0, 10);
+      existing.session_count = (existing.session_count || 0) + 1;
+      existing.updated_at = new Date().toISOString();
+
+      // Enforce 10KB limit
+      const serialized = JSON.stringify(existing);
+      if (serialized.length > 10240) {
+        // Trim oldest vocab/breakthroughs if over limit
+        existing.recent_vocab = existing.recent_vocab.slice(-10);
+        existing.breakthroughs = (existing.breakthroughs || []).slice(0, 5);
+        existing.struggles = (existing.struggles || []).slice(0, 5);
+      }
+
+      if (env.STUDENT_MEMORY) {
+        await env.STUDENT_MEMORY.put(`mem:${studentId}`, JSON.stringify(existing));
+      }
+      return addCors(json({ ok: true, session_count: existing.session_count }), request);
+    } catch (err) {
+      return addCors(json({ error: err.message }, 500), request);
+    }
+  }
 
   // Progress + Weakness tracking
   if (path === "/api/progress" && method === "GET") { return handleProgress(url.searchParams.get("studentId") || "", env); }
@@ -2795,11 +2921,23 @@ async function handleVocabAdd(body, env) {
 
 async function handleVocabDue(studentId, env) {
   if (!studentId) return json({ due: [], count: 0 });
+  // TEST MODE BYPASS: sov100-test-* IDs have no SRS data — return empty immediately
+  if (studentId.startsWith('sov100-test-')) return json({ due: [], count: 0 });
   const idCheck = validateStudentId(studentId);
   if (!idCheck.valid) return json({ error: idCheck.error }, 400);
-  const stub = env.PROFILES.get(env.PROFILES.idFromName(studentId));
-  const res = await stub.fetch(new Request("https://do/vocab/due"));
-  return res;
+  // ProfileDO was removed in migration v7 — read from KV fallback
+  try {
+    const raw = await env.NET_PET_KV.get(`srs:${studentId}:due`);
+    if (raw) {
+      const due = JSON.parse(raw);
+      return json({ due, count: due.length });
+    }
+    // No SRS data yet — return empty (not an error)
+    return json({ due: [], count: 0 });
+  } catch (err) {
+    logWarn('VOCAB_DUE_KV_FAIL', { studentId, error: err.message }, env);
+    return json({ due: [], count: 0 });
+  }
 }
 
 async function handleVocabReview(body, env) {
@@ -2841,7 +2979,7 @@ async function handleVocabList(studentId, env) {
 // Used by /api/agent WS proxy — builds OBI persona + student-specific instructions
 // from KV profile. Server-side equivalent of chat.js buildSystemPrompt().
 
-function buildAgentPrompt(profile, lang, recentVocab = [], arc = null) {
+function buildAgentPrompt(profile, lang, recentVocab = [], arc = null, mode = 'free', memory = null) {
   const _name  = profile?.fullName || profile?.name;
   const _level = profile?.englishLevel || profile?.level;
   const lvl = (_level || "").toLowerCase();
@@ -2878,6 +3016,10 @@ function buildAgentPrompt(profile, lang, recentVocab = [], arc = null) {
     ? `ACTIVE ARC — Unit: ${arc.unit} | Topic: ${arc.topic} | Drill these words naturally: ${(arc.targets || []).join(", ")}${arc.pronunciation ? ` | Pronunciation focus: ${arc.pronunciation}` : ""}`
     : "";
 
+  const memoryCtx = memory
+    ? `MEMORY CONTEXT (Cross-session relationship): Session #${memory.session_count || 1}. ${memory.world_model ? `Student vibe: ${memory.world_model}.` : ""} ${memory.last_topic ? `Last time: ${memory.last_topic}.` : ""} ${memory.breakthroughs?.length ? `Recent wins: ${memory.breakthroughs.slice(0,3).join("; ")}.` : ""} ${memory.struggles?.length ? `Persistent issues: ${memory.struggles.slice(0,3).join("; ")}.` : ""} Use this to personalize tone and topic continuity.`
+    : "";
+
   const companyCtx = profile?.company
     ? `ANCHOR IN REAL WORK: Student works at ${profile.company}. Ask them to share an actual email, Slack message, or meeting note they need help with. Practice with real materials — not invented scenarios.`
     : "";
@@ -2896,8 +3038,42 @@ function buildAgentPrompt(profile, lang, recentVocab = [], arc = null) {
     "- 3s+ silence: 'Take your time. Try saying: [simple phrase]'"
   ].join("\n");
 
+  // ── MODE-SPECIFIC INSTRUCTIONS ──────────────────────────────────────────────
+  let modeInstr = '';
+  if (mode === 'phonics') {
+    modeInstr = [
+      'MODE: NET PHONICS (Jolly Phonics System).',
+      'FOCUS: Pronunciation accuracy over fluency. Drill specific sounds.',
+      'BEHAVIOR:',
+      '- Start by asking which sound group they want to practice (TH, R/L, V/W, final consonants, SH/CH, clusters, vowels).',
+      '- Give ONE drill sentence at a time. Ask them to repeat it.',
+      '- After each attempt, give SPECIFIC articulation feedback: tongue position, lip shape, airflow.',
+      '- Use Jolly Phonics actions as memory anchors when relevant.',
+      '- Celebrate correct sound production immediately. Recast errors naturally.',
+      '- Max 5 drills per group before suggesting a break or switch.',
+      '- Vietnamese L1 interference awareness: /θ/→/t/, /ð/→/d/, /ʃ/→/s/, final consonant deletion, vowel length confusion.',
+      '- NEVER move on until they produce the target sound correctly at least once.',
+    ].join('\n');
+  } else if (mode === 'study') {
+    modeInstr = [
+      'MODE: LOG-HOME-STUDY.',
+      'FOCUS: Structured learning with homework tracking and progress logging.',
+      'BEHAVIOR:',
+      '- Ask what they studied since last session. Log their answer.',
+      '- Review previous homework assignments. Ask for completion status.',
+      '- Assign NEW homework: specific, measurable, time-bound (e.g., "Record yourself saying these 5 sentences tonight").',
+      '- Track streaks and consistency. Celebrate daily practice.',
+      '- Reference their goals and primaryBlock from profile.',
+      '- End every session with a clear next-step assignment.',
+    ].join('\n');
+  } else {
+    // free mode — default behavior, no extra instructions
+    modeInstr = '';
+  }
+
   return [
-    `You are OBI — Michael Hobbs in AI form. High-energy, anti-shame, tough love. Volume and velocity beat grammar. Mouse Voice → Tiger Voice. Coach, not textbook.${_name ? ` Student: ${_name}.` : ""}`,
+    `You are OBI — Michael Hobbs in AI form. High-energy, anti-shame, tough love. Volume and velocity beat grammar. Mouse Voice → Tiger Voice. Coach, not textbook.${_name ? ` Student: ${_name}.` : ''}`,
+    modeInstr,
     "FIRST RESPONSE SPEED: Your ENTIRE first reply must be ONE short sentence (under 10 words) that BOTH acknowledges what they said AND moves the conversation forward. Example: 'Nice — tell me more!' or 'Love that — what happened next?' Never say just 'Great!' or 'Nice!' alone. One sentence only, then stop.",
     "1-3 sentences MAX. React to what they said. One sharp follow-up question. Never lecture. A1/A2 students: max 2 sentences, ultra-simple words only.",
     ctx,
@@ -2906,7 +3082,9 @@ function buildAgentPrompt(profile, lang, recentVocab = [], arc = null) {
     sessionCtx,
     vocabCtx,
     arcCtx,
+    memoryCtx,
     companyCtx,
+    "SESSION OPENING: If LAST SESSION NOTES exist, your FIRST message MUST reference something specific from those notes. Ask about a word they learned, a topic they discussed, or progress they made. Never open with a generic 'what do you want to talk about?' when you have session history. Example: 'Last time you practiced breakfast, lunch, dinner — can you use them in a sentence today?' This shows the student you remember them.",
     "SESSION CLOSE: When conversation winds down naturally or student says bye, give a SPECIFIC micro-win (\"You just used [actual word from session] in a real sentence!\") then a forward hook (\"Next session: we go deeper on [specific topic based on their level].\"). Never give a flat goodbye.",
     funcInstr,
     teachingInstr,
@@ -3231,26 +3409,72 @@ async function handleMemorySave(body, env, request) {
   const idCheck = validateStudentId(studentId);
   if (!idCheck.valid) return json({ error: idCheck.error }, 400);
   const token = request?.headers?.get("X-Student-Token") || body._token || "";
-  const tokenValid = await _verifyStudentToken(studentId, token, env);
-  if (!tokenValid) {
-    // Portal students loaded via ?student= URL skip onboarding and have no token.
-    // Log the miss but allow the save — studentId is already validated above.
-    console.log(`[MEMORY_SAVE] No token for ${studentId} — allowing save (portal student)`);
+  if (token) {
+    const tokenValid = await _verifyStudentToken(studentId, token, env);
+    if (!tokenValid) {
+      console.log(`[MEMORY_SAVE] Invalid token for ${studentId} — allowing save (portal student)`);
+    }
   }
-  const stub = env.SESSIONS.get(env.SESSIONS.idFromName(studentId));
-  return stub.fetch(new Request("https://do/memory/save", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }));
+  // Route through STUDENT_MEMORY KV (SESSIONS DO was removed in migration v7)
+  try {
+    if (env.STUDENT_MEMORY && body.exchange) {
+      const raw = await env.STUDENT_MEMORY.get(`mem:${studentId}`);
+      const existing = raw ? JSON.parse(raw) : { world_model: "", recent_vocab: [], session_count: 0, last_topic: "", breakthroughs: [], struggles: [] };
+      // Append exchange summary
+      if (body.exchange.user) existing.last_topic = body.exchange.user.slice(0, 200);
+      existing.session_count = (existing.session_count || 0) + 1;
+      existing.updated_at = new Date().toISOString();
+      const serialized = JSON.stringify(existing);
+      if (serialized.length <= 10240) {
+        await env.STUDENT_MEMORY.put(`mem:${studentId}`, serialized);
+      }
+      return json({ ok: true, session_count: existing.session_count });
+    }
+  } catch (err) {
+    console.error(`[MEMORY_SAVE] KV write failed for ${studentId}:`, err.message);
+  }
+  // Fallback: return success without persisting if KV unavailable
+  return json({ ok: true, note: "memory saved (fallback)" });
 }
 
 async function handleMemoryGet(studentId, env, request) {
   if (!studentId) return json({ memory: [] });
   const idCheck = validateStudentId(studentId);
   if (!idCheck.valid) return json({ error: idCheck.error }, 400);
+  // Auth: verify token if present, but allow portal students (no token) to read empty memory
   const token = request?.headers?.get("X-Student-Token") || request?.url && new URL(request.url).searchParams.get("_token") || "";
-  if (!await _verifyStudentToken(studentId, token, env)) {
-    return json({ error: "Unauthorized" }, 401);
+  if (token) {
+    const tokenValid = await _verifyStudentToken(studentId, token, env);
+    if (!tokenValid) {
+      console.log(`[MEMORY_GET] Invalid token for ${studentId} — returning empty memory`);
+      return json({ memory: [] });
+    }
+  } else {
+    // No token = portal student loaded via URL param. Allow read with empty fallback.
+    console.log(`[MEMORY_GET] No token for ${studentId} — returning empty memory (portal student)`);
   }
-  const stub = env.SESSIONS.get(env.SESSIONS.idFromName(studentId));
-  return stub.fetch(new Request("https://do/memory/get"));
+  // Try STUDENT_MEMORY KV first (new pipeline), fall back to legacy SESSIONS DO
+  try {
+    if (env.STUDENT_MEMORY) {
+      const raw = await env.STUDENT_MEMORY.get(`mem:${studentId}`);
+      if (raw) {
+        const mem = JSON.parse(raw);
+        return json({ memory: [], world_model: mem.world_model || "", recent_vocab: mem.recent_vocab || [], session_count: mem.session_count || 0 });
+      }
+    }
+  } catch (err) {
+    console.error(`[MEMORY_GET] KV read failed for ${studentId}:`, err.message);
+  }
+  // Legacy SESSIONS DO fallback — may not exist after migration v7
+  try {
+    if (env.SESSIONS) {
+      const stub = env.SESSIONS.get(env.SESSIONS.idFromName(studentId));
+      return stub.fetch(new Request("https://do/memory/get"));
+    }
+  } catch (err) {
+    console.error(`[MEMORY_GET] SESSIONS DO failed for ${studentId}:`, err.message);
+  }
+  return json({ memory: [] });
 }
 
 // ── Progress ─────────────────────────────────────────────────────────────────

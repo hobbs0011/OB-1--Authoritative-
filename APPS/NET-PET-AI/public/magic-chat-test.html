@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Magic Chat TEST — SOV100</title>
+  <style>
+    :root {
+      --void: #0f0f1a;
+      --purple: #a855f7;
+      --gold: #f59e0b;
+      --glass: rgba(168, 85, 247, 0.08);
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --bubble-obi: #1e1b4b;
+      --bubble-student: #312e81;
+      --radius: 16px;
+      --test-red: #ef4444;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--void);
+      color: var(--text);
+      height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      background: rgba(15, 15, 26, 0.95);
+      border-bottom: 2px solid var(--test-red);
+      backdrop-filter: blur(12px);
+      z-index: 10;
+    }
+    header h1 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--test-red);
+      flex: 1;
+    }
+    .test-badge {
+      background: var(--test-red);
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    #dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #ef4444;
+      transition: background 0.3s;
+    }
+    #dot.ok { background: #22c55e; }
+    #speakToggle {
+      background: none;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    #feed {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      scroll-behavior: smooth;
+    }
+    .row { display: flex; }
+    .row-obi { justify-content: flex-start; }
+    .row-student { justify-content: flex-end; }
+    .bubble {
+      max-width: 80%;
+      padding: 10px 14px;
+      border-radius: var(--radius);
+      font-size: 15px;
+      line-height: 1.5;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      animation: fadeIn 0.2s ease;
+    }
+    .bubble-obi {
+      background: var(--bubble-obi);
+      border: 1px solid rgba(168, 85, 247, 0.15);
+      border-bottom-left-radius: 4px;
+    }
+    .bubble-student {
+      background: var(--bubble-student);
+      border: 1px solid rgba(168, 85, 247, 0.1);
+      border-bottom-right-radius: 4px;
+    }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+    .typing span {
+      display: inline-block;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--purple);
+      margin: 0 2px;
+      animation: bounce 1.4s infinite;
+    }
+    .typing span:nth-child(2) { animation-delay: 0.2s; }
+    .typing span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes bounce { 0%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-6px); } }
+    #inputBar {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      padding: 16px 16px 24px;
+      background: rgba(15, 15, 26, 0.95);
+      border-top: 1px solid rgba(168, 85, 247, 0.2);
+      backdrop-filter: blur(10px);
+    }
+    /* Hidden — kept in DOM so JS references don't break */
+    #msg { display: none; }
+    #sendBtn { display: none; }
+    /* Big central mic button */
+    #mic {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      border: 2px solid rgba(239, 68, 68, 0.4);
+      background: rgba(239, 68, 68, 0.12);
+      color: var(--test-red);
+      font-size: 32px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      position: relative;
+    }
+    #mic:hover { background: rgba(239, 68, 68, 0.22); }
+    #mic.mic-active {
+      background: var(--test-red);
+      color: white;
+      border-color: var(--test-red);
+      animation: pulse 1.2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.5); }
+      50%       { box-shadow: 0 0 0 14px rgba(239, 68, 68, 0); }
+    }
+    #micStatus {
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    #micStatus.active { color: var(--test-red); }
+    /* Tiger Win session summary */
+    #tigerSummary {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 15, 26, 0.92);
+      backdrop-filter: blur(16px);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 20px;
+      padding: 24px;
+    }
+    #tigerSummary.show { display: flex; }
+    #tigerSummary .ts-card {
+      background: rgba(239, 68, 68, 0.08);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      border-radius: 20px;
+      padding: 28px 32px;
+      max-width: 360px;
+      width: 100%;
+      text-align: center;
+    }
+    #tigerSummary .ts-title { font-size: 1.4rem; font-weight: 700; color: var(--test-red); margin-bottom: 6px; }
+    #tigerSummary .ts-sub { font-size: 0.85rem; color: var(--muted); margin-bottom: 20px; }
+    #tigerSummary .ts-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+    #tigerSummary .ts-stat { background: rgba(239, 68, 68, 0.06); border-radius: 12px; padding: 12px 8px; }
+    #tigerSummary .ts-stat-n { font-size: 1.6rem; font-weight: 700; color: var(--gold); }
+    #tigerSummary .ts-stat-l { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+    #tigerSummary .ts-words { font-size: 0.85rem; color: var(--muted); margin-bottom: 20px; min-height: 20px; }
+    #tigerSummary .ts-btn {
+      background: var(--test-red); color: white; border: none;
+      border-radius: 12px; padding: 12px 28px; font-size: 0.95rem;
+      font-weight: 600; cursor: pointer; width: 100%;
+    }
+    .pill {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 8px;
+      background: rgba(239, 68, 68, 0.15);
+      font-size: 12px;
+      margin: 2px;
+    }
+    .pronunciation-flag {
+      text-decoration: underline dotted #f59e0b;
+      cursor: help;
+    }
+    .test-warning {
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid var(--test-red);
+      color: var(--test-red);
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      text-align: center;
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <span id="dot" title="Checking..."></span>
+    <h1>🔮 <span class="test-badge">TEST MODE</span> Magic Chat — Obi</h1>
+    <button id="speakToggle" title="Obi voice ON">🔊</button>
+  </header>
+  <!-- Tiger Win Session Summary -->
+  <div id="tigerSummary">
+    <div class="ts-card">
+      <div class="ts-title">🐯 Tiger Win!</div>
+      <div class="ts-sub" id="tsSubtitle">Great session today</div>
+      <div class="ts-stats">
+        <div class="ts-stat">
+          <div class="ts-stat-n" id="tsMinutes">0</div>
+          <div class="ts-stat-l">Minutes</div>
+        </div>
+        <div class="ts-stat">
+          <div class="ts-stat-n" id="tsTurns">0</div>
+          <div class="ts-stat-l">Exchanges</div>
+        </div>
+      </div>
+      <div class="ts-words" id="tsWords"></div>
+      <button class="ts-btn" onclick="document.getElementById('tigerSummary').classList.remove('show')">Continue →</button>
+    </div>
+  </div>
+  <div class="test-warning">⚠️ TEST MODE: No soul capture. No KV writes. Safe for debugging.</div>
+  <div id="feed"></div>
+  <form id="form" autocomplete="off">
+    <div id="inputBar">
+      <input id="msg" type="text" autocomplete="off" tabindex="-1" aria-hidden="true">
+      <button type="button" id="sendBtn" aria-hidden="true"></button>
+      <button type="button" id="mic" title="Tap to speak">🎙️</button>
+      <div id="micStatus">Tap to start</div>
+      <button type="button" id="endSessionBtn" title="End session" onclick="endAgentSession()" style="background:none;border:none;color:var(--muted);font-size:11px;cursor:pointer;letter-spacing:0.05em;text-transform:uppercase;padding:4px 8px;opacity:0.5;">End session</button>
+    </div>
+  </form>
+  <script src="/chat.js"></script>
+  <script>
+    // Override boot to force test mode
+    const originalBoot = window.boot;
+    window.TEST_MODE = true;
+    window.TEST_STUDENT_ID = "sov100-test-magic";
+    
+    // Intercept API calls to block soul/memory writes
+    const originalFetch = window.fetch;
+    window.fetch = async function(...args) {
+      const url = args[0];
+      // Block soul capture
+      if (url.includes('/api/soul/event')) {
+        console.log('[TEST] Blocked soul capture:', args);
+        return new Response(JSON.stringify({ ok: true, test: true }), { status: 200 });
+      }
+      // Block memory writes
+      if (url.includes('/api/memory') && args[1]?.method === 'POST') {
+        console.log('[TEST] Blocked memory write:', args);
+        return new Response(JSON.stringify({ ok: true, test: true }), { status: 200 });
+      }
+      // Block vocab saves
+      if (url.includes('/api/agent/vocab') && args[1]?.method === 'POST') {
+        console.log('[TEST] Blocked vocab save:', args);
+        return new Response(JSON.stringify({ ok: true, test: true }), { status: 200 });
+      }
+      // Block session metrics
+      if (url.includes('/api/agent/session') && args[1]?.method === 'POST') {
+        console.log('[TEST] Blocked session metrics:', args);
+        return new Response(JSON.stringify({ ok: true, test: true }), { status: 200 });
+      }
+      return originalFetch.apply(this, args);
+    };
+    
+    // Force studentId in URL params
+    const urlParams = new URLSearchParams(window.location.search);
+    if (!urlParams.get('studentId') && !urlParams.get('student')) {
+      urlParams.set('studentId', window.TEST_STUDENT_ID);
+      window.history.replaceState({}, '', `${window.location.pathname}?${urlParams.toString()}`);
+    }
+  </script>
+</body>
+</html>

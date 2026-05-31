@@ -1,44 +1,9 @@
-﻿// chat.js — Magic Chat — Phoenix Rising Protocol Command Station
+// chat.js — Magic Chat — Phoenix Rising Protocol Command Station
 // OBI = Michael Hobbs in AI form: high-energy, anti-shame, tough love.
 // Mouse Voice → Tiger Voice. Volume + Velocity > Grammar.
 // "The stateless chat is the constraint. The Magic Chat shall have no constraints."
 if (window.__OBI_CHAT_LOADED__) throw new Error("chat.js double-load prevented");
 window.__OBI_CHAT_LOADED__ = true;
-
-// ── Client Error Telemetry ───────────────────────────────────────────────────
-// Reports browser-side errors to server D1 error_log table.
-// Silent failure — never blocks user experience.
-function reportClientError(tag, message, stack) {
-  try {
-    const payload = {
-      tag,
-      message: String(message || '').slice(0, 500),
-      stack: String(stack || '').slice(0, 1000),
-      studentId: (typeof profile !== 'undefined' && profile?.studentId) ? profile.studentId : 'anonymous',
-      url: window.location.href.slice(0, 300),
-      userAgent: navigator.userAgent.slice(0, 200)
-    };
-    if (navigator.sendBeacon) {
-      navigator.sendBeacon('/api/error-report', JSON.stringify(payload));
-    } else {
-      fetch('/api/error-report', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-        keepalive: true
-      }).catch(() => {});
-    }
-  } catch (_) { /* telemetry must never break UX */ }
-}
-
-// Global error handlers — catch unhandled errors/rejections
-window.addEventListener('error', (e) => {
-  reportClientError('WINDOW_ERROR', e.message || 'Unknown error', e.error?.stack || '');
-});
-window.addEventListener('unhandledrejection', (e) => {
-  const reason = e.reason;
-  reportClientError('UNHANDLED_REJECTION', reason?.message || String(reason), reason?.stack || '');
-});
 
 const DEFAULTS = {
   birthplace:      "Ho Chi Minh City",
@@ -56,7 +21,8 @@ function isCrisisSignal(text) {
 
 function handleCrisis() {
   stopAudio();
-  obi("Hey \u2014 stop. I heard that.\n\nThat matters more than anything else right now. If something real is going on, please reach out to someone you trust or a local support line.\n\n\uD83C\uDDFB\uD83C\uDDF3 Vietnam: 1800 599 920 (free, 24/7)\n\uD83C\uDDE8\uD83C\uDDE6 Canada/US: 988 (Suicide & Crisis Lifeline)\n\uD83D\uDCAC Or talk to a teacher, friend, or family member.\n\nI'm here when you're ready. No judgment.");
+  // I-1: force=true bypasses Voice Agent suppression — crisis ALWAYS visible
+  obi("Hey \u2014 stop. I heard that.\n\nThat matters more than anything else right now. If something real is going on, please reach out to someone you trust or a local support line.\n\n\uD83C\uDDFB\uD83C\uDDF3 Vietnam: 1800 599 920 (free, 24/7)\n\uD83C\uDDE8\uD83C\uDDE6 Canada/US: 988 (Suicide & Crisis Lifeline)\n\uD83D\uDCAC Or talk to a teacher, friend, or family member.\n\nI'm here when you're ready. No judgment.", true);
 }
 
 let state        = "boot";
@@ -141,8 +107,8 @@ function stopAudio() {
 
 function fallbackSpeak(text) {
   if (!window.speechSynthesis) return;
-  // SUPPRESS browser robotic voice when Voice Agent is active
-  if (agentWs && agentReady) return;
+  // FIX1: Suppress browser fallback only AFTER first agent audio has played.
+  if (agentWs && agentFirstAudioReceived) return;
   speechSynthesis.cancel();
   const u = new SpeechSynthesisUtterance(text);
   if (obiVoice) u.voice = obiVoice;
@@ -154,8 +120,9 @@ function fallbackSpeak(text) {
 
 async function speak(text) {
   if (!ttsOn) return;
-  // SUPPRESS legacy TTS when Voice Agent is active — agent handles its own audio
-  if (agentWs && agentReady) return;
+  // FIX1: Suppress legacy TTS only AFTER first agent audio has played.
+  // During handshake gap (agentWs exists but no audio yet), allow browser fallback.
+  if (agentWs && agentFirstAudioReceived) return;
   const clean = text.replace(/\([^)]*\)/g, "").replace(/\s{2,}/g, " ").trim();
   if (!clean) return;
 
@@ -238,11 +205,10 @@ function typingIndicator() {
   return row;
 }
 
-function obi(text) {
-  // When Voice Agent is connecting or active, suppress BOTH text bubble AND audio.
-  // The agent sends its own greeting via InjectAgentMessage after SettingsApplied.
-  // Showing legacy text + agent text = confusing double message for student.
-  if (agentWs) return;
+function obi(text, force) {
+  // I-1: Crisis/safety messages ALWAYS render regardless of Voice Agent state.
+  // force=true bypasses all suppression gates.
+  if (!force && agentWs && agentFirstAudioReceived) return;
   bubble("obi", text);
   speak(text);
 }
@@ -279,7 +245,9 @@ async function api(path, method = "GET", body, extraHeaders = {}) {
 }
 
 function memHeaders() {
-  return studentToken ? { "X-Student-Token": studentToken } : {};
+  // I-9: Handle empty-string tokens correctly (B-8 fix)
+  // Empty string is falsy but still a valid token value
+  return (studentToken != null && studentToken !== undefined) ? { "X-Student-Token": studentToken } : {};
 }
 
 async function withTyping(fn) {
@@ -493,6 +461,8 @@ async function reactLLM(text) {
 
   // Fast path: route through open Deepgram Voice Agent WS (no external LLM call)
   if (agentWs && agentReady && agentWs.readyState === WebSocket.OPEN) {
+    // I-4: Crisis check BEFORE sending to Voice Agent (EC-3 fix)
+    if (isCrisisSignal(text)) { handleCrisis(); return ""; }
     try {
       await new Promise((resolve, reject) => {
         agentTextResolve = resolve;
@@ -789,43 +759,38 @@ let agentCurrentAudio = null;  // currently playing Audio element (for barge-in 
 let agentThinkBubble  = null;  // typing indicator shown during AgentThinking
 let agentTextResolve  = null;  // resolver for typed-text → InjectUserMessage flow
 let agentKeepAlive    = null;  // interval handle for KeepAlive messages
-let agentSilenceTimer = null;  // fires if student is silent >6s after OBI audio drains
-let lastUserSpeechTime = 0;    // timestamp of last UserStartedSpeaking — guards silence nudge
-let lastNudgeTime = 0;         // timestamp of last silence nudge sent — prevents nudge loop
-let agentServerAudioDone = false; // true after AgentAudioDone fires — queued for playAgentChunk drain
-let agentChunkAccum = [];         // small MP3 chunks accumulating before queue (< 1KB threshold)
-let agentChunkAccumSize = 0;      // byte count of accumulated chunks
+let agentSilenceTimer = null;  // fires if student is silent >4s after OBI speaks
 let agentSessionStart = null;  // timestamp when SettingsApplied fires
 let agentSessionTurns = 0;     // student voice turns this session
 let agentSessionVocab = [];    // vocab words saved via function calling this session
-let agentCurriculumInjected = false; // tracks if UpdatePrompt sent this session
-// EC-15: Pre-SettingsApplied audio buffer — prevents first 200-500ms speech drop
-let agentPreSettingsBuffer = [];   // ArrayBuffer chunks queued before SettingsApplied
-let agentPreSettingsBytes = 0;     // byte count of buffered chunks
-const AGENT_PRE_BUFFER_CAP = 50;   // max chunks (~1s audio) — prevents memory blowup
 let userHasInteracted = false; // set on first gesture
 let pendingMicStream  = null;  // mic stream grabbed during gesture, before agent ready
 let micAcquiring      = false; // mutex: prevents double getUserMedia on rapid taps
-let agentRetryCount   = 0;     // reconnect attempt counter — caps infinite retry loops
+let agentFirstAudioReceived = false; // FIX1: true after first agent audio chunk plays — gates legacy TTS suppression
+
+// I-5: Stop pendingMicStream when tab hidden to prevent hot mic (EC-4 fix)
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden && pendingMicStream) {
+    pendingMicStream.getTracks().forEach(t => t.stop());
+    pendingMicStream = null;
+  }
+});
 
 async function openVoiceAgent() {
   if (!urlStudentId || agentWs) return;
   const myId = ++agentWsId;
   try {
     // Fetch short-lived JWT token + pre-built Settings from CF Worker
-    setMicStatus("Setting up… tap mic when ready", false);
-    // Read session mode from URL param or localStorage fallback
-    const sessionMode = new URLSearchParams(window.location.search).get('mode') || localStorage.getItem('obi_session_mode') || 'free';
-    const tokenRes = await fetch(`/api/deepgram-token?studentId=${encodeURIComponent(urlStudentId)}&mode=${encodeURIComponent(sessionMode)}`);
-    if (!tokenRes.ok) { console.error("[VOICE] token fetch failed:", tokenRes.status); setMicStatus("👆 Tap mic to start", false); return; }
+    setMicStatus("Connecting…", false);
+    const tokenRes = await fetch(`/api/deepgram-token?studentId=${encodeURIComponent(urlStudentId)}`);
+    if (!tokenRes.ok) { console.error("[VOICE] token fetch failed:", tokenRes.status); setMicStatus("Tap to start", false); return; }
     const { token, settings } = await tokenRes.json();
-    if (!token) { console.error("[VOICE] no token in response"); setMicStatus("👆 Tap mic to start", false); return; }
+    if (!token) { console.error("[VOICE] no token in response"); setMicStatus("Tap to start", false); return; }
     if (agentWsId !== myId) return; // zombie check — another openVoiceAgent() fired during async fetch
 
     agentSettings = settings; // stored for Welcome handler
 
-    // Connect directly to Deepgram — "token" identifier first, JWT second (confirmed by diagnostic: server echoes "token")
-    console.log("[VOICE] connecting, jwt prefix:", token.substring(0, 20));
+    // Connect directly to Deepgram — JWT via Sec-WebSocket-Protocol (Deepgram echoes "token" back)
     const ws = new WebSocket("wss://agent.deepgram.com/v1/agent/converse", ["token", token]);
     ws.binaryType = "arraybuffer";
     agentWs = ws; // set immediately — blocks double-open race before onopen fires
@@ -838,13 +803,12 @@ async function openVoiceAgent() {
 
     const onAgentDrop = () => {
       if (agentWsId !== myId) return;
-      agentWs = null; agentReady = false; agentSettings = null; agentServerAudioDone = false; agentChunkAccum = []; agentChunkAccumSize = 0;
+      agentWs = null; agentReady = false; agentSettings = null; agentFirstAudioReceived = false;
+      // I-3: Clear stale agentTextResolve on drop to prevent memory leak (EC-1 fix)
+      if (agentTextResolve) { const r = agentTextResolve; agentTextResolve = null; try { r(""); } catch {} }
       if (agentKeepAlive) { clearInterval(agentKeepAlive); agentKeepAlive = null; }
       if (agentAudioWatchdog) { clearInterval(agentAudioWatchdog); agentAudioWatchdog = null; }
       if (agentSilenceTimer) { clearTimeout(agentSilenceTimer); agentSilenceTimer = null; }
-      // Clean up concatenated audio resources (gapless playback v2)
-      if (agentConcatBlobUrl) { try { URL.revokeObjectURL(agentConcatBlobUrl); } catch {} agentConcatBlobUrl = null; }
-      if (agentConcatAudio) { try { agentConcatAudio.pause(); } catch {} agentConcatAudio = null; }
       if (agentCurrentAudio) { try { agentCurrentAudio.pause(); } catch {} agentCurrentAudio = null; }
       agentAudioQ.length = 0; agentPlaying = false;
       if (agentThinkBubble) { agentThinkBubble.remove(); agentThinkBubble = null; }
@@ -853,33 +817,24 @@ async function openVoiceAgent() {
       if (agentMicStream) { agentMicStream.getTracks().forEach(t => t.stop()); agentMicStream = null; }
       listening = false;
       micBtn.classList.remove("mic-active");
-      // Clean up pending mic stream on drop — prevents mic LED staying on
-      if (pendingMicStream) { pendingMicStream.getTracks().forEach(t => t.stop()); pendingMicStream = null; }
-      agentRetryCount++;
-      const maxRetries = 5;
-      const backoffMs = Math.min(2000 * Math.pow(1.5, agentRetryCount - 1), 15000);
-      if (agentRetryCount <= maxRetries) {
-        setMicStatus(`Reconnecting (${agentRetryCount}/${maxRetries})…`, false);
-        setTimeout(() => {
-          if (!agentWs && urlStudentId && document.visibilityState !== "hidden") {
-            openVoiceAgent();
-            if (userHasInteracted && document.visibilityState !== "hidden") {
-              navigator.mediaDevices.getUserMedia({ audio: { channelCount: 1, echoCancellation: true, noiseSuppression: true, autoGainControl: true } })
-                .then(s => { if (pendingMicStream) { pendingMicStream.getTracks().forEach(t => t.stop()); } pendingMicStream = s; })
-                .catch(() => {});
-            }
+      setMicStatus("Reconnecting…", false);
+      setTimeout(() => {
+        if (!agentWs && urlStudentId) {
+          openVoiceAgent();
+          if (userHasInteracted) {
+            navigator.mediaDevices.getUserMedia({ audio: { channelCount: 1, echoCancellation: true, noiseSuppression: true, autoGainControl: true } })
+              .then(s => { pendingMicStream = s; })
+              .catch(() => {});
           }
-        }, backoffMs);
-      } else {
-        setMicStatus("👆 Tap mic to retry", false);
-      }
+        }
+      }, 2000);
     };
-    ws.onerror = (e) => { reportClientError('WS_ERROR', 'Voice Agent WebSocket error', e?.message || ''); onAgentDrop(); };
-    ws.onclose = (e) => { reportClientError('WS_CLOSE', `Voice Agent WS closed: ${e.code} ${e.reason}`, ''); onAgentDrop(); };
+    ws.onerror = onAgentDrop;
+    ws.onclose = onAgentDrop;
   } catch (err) {
     agentWs = null;
     console.error("[VOICE] openVoiceAgent failed:", err.message);
-    setMicStatus("👆 Tap mic to start", false);
+    setMicStatus("Tap to start", false);
   }
 }
 
@@ -894,7 +849,17 @@ function handleAgentMsg(event) {
           const s = JSON.parse(JSON.stringify(agentSettings)); // deep clone
           const history = chatMessages.filter(m => m.role === "user" || m.role === "assistant").slice(-6);
           if (history.length > 0) {
-            s.messages = history; // ROOT FIX: Deepgram Voice Agent requires messages at root level, not nested under context
+            s.agent = s.agent || {};
+            s.agent.context = { messages: history };
+          }
+          // I-7: Inject phonics context into Voice Agent Settings (EC-7 fix)
+          if (profile._phonicsHints?.length) {
+            s.agent = s.agent || {};
+            s.agent.phonics_hints = profile._phonicsHints;
+          }
+          if (profile._dueVocab?.length) {
+            s.agent = s.agent || {};
+            s.agent.due_vocab = profile._dueVocab.slice(0, 5).map(w => w.word);
           }
           agentWs.send(JSON.stringify(s));
         }
@@ -925,25 +890,17 @@ function handleAgentMsg(event) {
 
       } else if (msg.type === "SettingsApplied") {
         agentReady = true;
-        agentRetryCount = 0; // reset retry counter on successful connection
         agentSessionStart = Date.now();
         agentSessionTurns = 0;
         agentSessionVocab = [];
-        agentCurriculumInjected = false;
-        // EC-15: Flush pre-settings audio buffer — prevents first 200-500ms speech drop
-        if (agentPreSettingsBuffer.length > 0 && agentWs && agentWs.readyState === WebSocket.OPEN) {
-          console.log(`[VOICE] Flushing ${agentPreSettingsBuffer.length} pre-settings chunks (${agentPreSettingsBytes} bytes)`);
-          for (const chunk of agentPreSettingsBuffer) {
-            agentWs.send(chunk);
-          }
-          agentPreSettingsBuffer = [];
-          agentPreSettingsBytes = 0;
-        }
         if (agentKeepAlive) clearInterval(agentKeepAlive);
+        // I-10: Guard KeepAlive send with readyState check to prevent uncaught error on race (B-10 fix)
         agentKeepAlive = setInterval(() => {
-          if (agentWs && agentWs.readyState === WebSocket.OPEN) {
-            agentWs.send(JSON.stringify({ type: "KeepAlive" }));
-          }
+          try {
+            if (agentWs && agentWs.readyState === WebSocket.OPEN) {
+              agentWs.send(JSON.stringify({ type: "KeepAlive" }));
+            }
+          } catch (_) { /* WS closed between check and send — safe to ignore */ }
         }, 3500);
         // AudioFocus watchdog — resets stuck busy state when AudioContext is suspended (Android)
         if (agentAudioWatchdog) clearInterval(agentAudioWatchdog);
@@ -962,15 +919,12 @@ function handleAgentMsg(event) {
         let _openingMsg;
         if (profile._sessionHint) {
           _openingMsg = `${_viGreet}${_greetName || "there"}! I see you watched "${profile._sessionHint}" — that's your 45 minutes! What was the most interesting part?`;
-        } else if (profile.sessionNotes) {
-          // Reference last session specifically — shows OBI remembers the student
-          _openingMsg = `${_viGreet}${_greetName || "there"}! Welcome back! Last time we worked on ${profile.sessionNotes.split(/[,.]/)[0].trim().toLowerCase()}. Ready to build on that, or try something new today?`;
         } else if (chatMessages.length > 0) {
           _openingMsg = `${_viGreet}${_greetName || "there"}! Good to see you again. Ready to practice — want to continue from last time, or try something new today?`;
         } else {
           _openingMsg = `${_viGreet}${_greetName || "there"}! I'm OBI, your English coach. No pressure — just speak naturally, I'll guide you. What do you want to talk about today?`;
         }
-        setTimeout(() => { try { if (agentWs && agentWs.readyState === WebSocket.OPEN) agentWs.send(JSON.stringify({ type: "InjectAgentMessage", message: _openingMsg })); } catch (_) {} }, 400);
+        setTimeout(() => { agentWs.send(JSON.stringify({ type: "InjectAgentMessage", message: _openingMsg })); }, 400);
         // Start mic if stream already acquired
         if (!agentMicStream) {
           if (pendingMicStream) {
@@ -982,15 +936,9 @@ function handleAgentMsg(event) {
         }
 
       } else if (msg.type === "UserStartedSpeaking") {
-        // Student spoke — cancel silence timer, barge-in stop, reset server-done flag
-        lastUserSpeechTime = Date.now();
-        agentServerAudioDone = false;
-        agentChunkAccum = []; agentChunkAccumSize = 0;
+        // Student spoke — cancel silence timer and barge-in stop
         if (agentSilenceTimer) { clearTimeout(agentSilenceTimer); agentSilenceTimer = null; }
         agentAudioQ.length = 0;
-        // Clean up concatenated audio resources (gapless playback v2)
-        if (agentConcatBlobUrl) { try { URL.revokeObjectURL(agentConcatBlobUrl); } catch {} agentConcatBlobUrl = null; }
-        if (agentConcatAudio) { try { agentConcatAudio.pause(); } catch {} agentConcatAudio = null; }
         if (agentCurrentAudio) { try { agentCurrentAudio.pause(); } catch {} agentCurrentAudio = null; }
         agentPlaying = false;
         if (agentThinkBubble) { agentThinkBubble.remove(); agentThinkBubble = null; }
@@ -1028,89 +976,31 @@ function handleAgentMsg(event) {
         chatMessages.push({ role: "user", content: msg.content });
         if (chatMessages.length > 40) chatMessages = chatMessages.slice(-40);
         agentSessionTurns++;
-        // Curriculum State Injection — after student's first utterance, prime OBI with arc targets
-        if (!agentCurriculumInjected && agentWs && agentWs.readyState === WebSocket.OPEN) {
-          agentCurriculumInjected = true;
-          const _arcTargets = profile._dueVocab?.length
-            ? `Student has ${profile._dueVocab.length} vocab words due today: ${profile._dueVocab.slice(0,5).map(w=>w.word).join(', ')}. Weave these naturally into conversation — model usage, don't quiz.`
-            : '';
-          const _teachingFocus = profile.teachingFocus
-            ? `Teaching focus this session: ${profile.teachingFocus}.`
-            : '';
-          const _breakthrough = profile.breakthrough
-            ? `Recent breakthrough: ${profile.breakthrough}. Build on this momentum.`
-            : '';
-          const _primaryBlock = profile.primaryBlock
-            ? `Watch for: ${profile.primaryBlock}. Gently redirect if they fall into this pattern.`
-            : '';
-          const _injectionParts = [_teachingFocus, _arcTargets, _breakthrough, _primaryBlock].filter(Boolean);
-          if (_injectionParts.length > 0) {
-            const _injectionMsg = `[CURRICULUM CONTEXT] ${_injectionParts.join(' ')} Stay natural — this is background guidance, not a script.`;
-            try { agentWs.send(JSON.stringify({ type: "InjectAgentMessage", message: _injectionMsg })); } catch (_) {}
-          }
-        }
-
-        // Curriculum State Injection — fires once after first student utterance
-        if (!agentCurriculumInjected && agentWs && agentWs.readyState === WebSocket.OPEN) {
-          agentCurriculumInjected = true;
-          try {
-            const arcTarget = profile.primaryBlock || "general conversation";
-            const vocabList = (profile._dueVocab || []).slice(0, 5).map(w => w.word || w).filter(Boolean);
-            let instruction = `The student is currently focusing on ${arcTarget}.`;
-            if (vocabList.length > 0) {
-              instruction += ` Weave in these vocabulary words naturally: ${vocabList.join(", ")}. Don't quiz — model usage in context.`;
-            } else {
-              instruction += ` Keep the conversation natural and encouraging.`;
-            }
-            agentWs.send(JSON.stringify({ type: "UpdatePrompt", prompt: instruction }));
-            console.log("[VOICE] Curriculum injected:", instruction);
-          } catch (err) {
-            console.warn("[VOICE] Curriculum injection failed:", err);
-          }
-        }
 
       } else if (msg.type === "AgentAudioDone") {
+        agentPlaying = false;
+        agentCurrentAudio = null;
         if (state === "busy") state = "chat";
-        // Flush any remaining small chunks from accumulator
-        if (agentChunkAccum.length > 0) {
-          const merged = new Uint8Array(agentChunkAccumSize);
-          let off = 0; for (const c of agentChunkAccum) { merged.set(new Uint8Array(c), off); off += c.byteLength; }
-          if (agentAudioQ.length < 30) agentAudioQ.push(merged.buffer);
-          agentChunkAccum = []; agentChunkAccumSize = 0;
-          if (!agentPlaying) playAgentChunk();
-        }
-        // Mark server audio done — silence timer fires in playAgentChunk when local queue drains
-        agentServerAudioDone = true;
-        // If queue already empty (no chunks in flight), start silence timer immediately
-        if (agentAudioQ.length === 0 && !agentPlaying) {
-          agentPlaying = false; agentCurrentAudio = null;
-          if (agentSilenceTimer) clearTimeout(agentSilenceTimer);
-          agentSilenceTimer = setTimeout(() => {
-            agentSilenceTimer = null;
-            // Don't nudge if student recently spoke OR if we nudged recently (prevents nudge loop)
-            const now = Date.now();
-            if (agentWs && agentWs.readyState === WebSocket.OPEN && agentReady && !agentPlaying && (now - lastUserSpeechTime > 5000) && (now - lastNudgeTime > 15000)) {
-              const _name = (profile.fullName || "").split(/\s+/)[0] || "";
-              lastNudgeTime = now;
-              agentWs.send(JSON.stringify({ type: "InjectAgentMessage", message: `Take your time${_name ? ", " + _name : ""}! Try saying one sentence — anything you like.` }));
-            }
-          }, 6000);
-        }
+        // Silence detection — if student doesn't speak within 4s, inject gentle prompt
+        if (agentSilenceTimer) clearTimeout(agentSilenceTimer);
+        agentSilenceTimer = setTimeout(() => {
+          agentSilenceTimer = null;
+          // I-6: Double-check playback state — watchdog may have reset agentPlaying mid-speech (EC-5 fix)
+          if (agentWs && agentWs.readyState === WebSocket.OPEN && agentReady && !agentPlaying && agentAudioQ.length === 0 && !agentCurrentAudio) {
+            const _name = (profile.fullName || "").split(/\s+/)[0] || "";
+            const _viEncourage = profile.lang === "vi" ? " (Đừng lo, cứ nói thoải mái!)" : "";
+            agentWs.send(JSON.stringify({ type: "InjectAgentMessage", message: `Take your time${_name ? ", " + _name : ""}! Try saying one sentence — anything you like.${_viEncourage}` }));
+          }
+        }, 2500);
 
       } else if (msg.type === "Goodbye") {
         setMicStatus("Session ended", false);
         if (agentKeepAlive) { clearInterval(agentKeepAlive); agentKeepAlive = null; }
         showTigerWin();
 
-      } else if (msg.type === "UserStoppedSpeaking") {
-        // Student finished speaking — start listening indicator
-        setMicStatus("Processing…", false);
-
       } else if (msg.type === "Error") {
-        console.error("[AGENT ERROR]", msg.code, msg.description, JSON.stringify(msg));
-        setMicStatus("Tap mic to try again", false);
-        // Force WS close so onAgentDrop fires and actually reconnects
-        if (agentWs) { try { agentWs.close(); } catch (_) {} }
+        console.error("[AGENT ERROR]", msg.code, msg.description);
+        setMicStatus("Error — reconnecting", false);
 
       } else if (msg.type === "Warning") {
         console.warn("[AGENT WARNING]", msg.code, msg.description);
@@ -1119,117 +1009,24 @@ function handleAgentMsg(event) {
     } catch {}
     return;
   }
-  // Binary: MP3 audio chunk from Deepgram TTS — accumulate small chunks to avoid choppy playback
-  const CHUNK_FLUSH_BYTES = 2048; // reduced from 4KB — smoother playback on slow connections
-  if (agentAudioQ.length < 30) {
-    if (event.data.byteLength < CHUNK_FLUSH_BYTES) {
-      agentChunkAccum.push(event.data);
-      agentChunkAccumSize += event.data.byteLength;
-      // Flush immediately if queue is empty (no backlog = no reason to buffer)
-      if (agentChunkAccumSize >= CHUNK_FLUSH_BYTES || (!agentPlaying && agentAudioQ.length === 0)) {
-        const merged = new Uint8Array(agentChunkAccumSize);
-        let off = 0; for (const c of agentChunkAccum) { merged.set(new Uint8Array(c), off); off += c.byteLength; }
-        agentAudioQ.push(merged.buffer);
-        agentChunkAccum = []; agentChunkAccumSize = 0;
-      }
-    } else {
-      if (agentChunkAccum.length > 0) { // flush pending small chunks first
-        const merged = new Uint8Array(agentChunkAccumSize);
-        let off = 0; for (const c of agentChunkAccum) { merged.set(new Uint8Array(c), off); off += c.byteLength; }
-        if (agentAudioQ.length < 30) agentAudioQ.push(merged.buffer);
-        agentChunkAccum = []; agentChunkAccumSize = 0;
-      }
-      agentAudioQ.push(event.data);
-    }
-  }
+  // Binary: MP3 audio chunk from Deepgram TTS
+  agentAudioQ.push(event.data);
   if (!agentPlaying) playAgentChunk();
 }
 
-// ── Gapless Agent Audio Playback v2 ──────────────────────────────────────────
-// Concatenates ALL queued MP3 chunks into a single Blob before playing.
-// Eliminates per-chunk Audio element creation + onended→play() gaps (20-80ms each).
-let agentConcatBlobUrl = null;
-let agentConcatAudio   = null;
-
 async function playAgentChunk() {
-  // Guard: don't start new playback if already playing AND queue is empty.
-  // If queue has chunks but audio is "playing" (stuck/onended missed), force cleanup and restart.
-  if (agentPlaying && agentConcatAudio && !agentAudioQ.length) return;
-  if (agentPlaying && agentConcatAudio && agentAudioQ.length > 0) {
-    // Chunks arrived while audio was supposedly playing — likely stuck. Force restart.
-    try { agentConcatAudio.pause(); } catch {}
-    try { URL.revokeObjectURL(agentConcatBlobUrl); } catch {}
-    agentConcatBlobUrl = null; agentConcatAudio = null; agentCurrentAudio = null;
-    agentPlaying = false;
-  }
-
-  if (!agentAudioQ.length) {
-    agentPlaying = false; agentCurrentAudio = null;
-    // Start silence timer now that client audio has actually drained
-    if (agentServerAudioDone && agentReady) {
-      agentServerAudioDone = false;
-      if (agentSilenceTimer) clearTimeout(agentSilenceTimer);
-      agentSilenceTimer = setTimeout(() => {
-        agentSilenceTimer = null;
-        const now = Date.now();
-        if (agentWs && agentWs.readyState === WebSocket.OPEN && agentReady && !agentPlaying && (now - lastUserSpeechTime > 5000) && (now - lastNudgeTime > 15000)) {
-          const _name = (profile.fullName || "").split(/\s+/)[0] || "";
-          lastNudgeTime = now;
-          agentWs.send(JSON.stringify({ type: "InjectAgentMessage", message: `Take your time${_name ? ", " + _name : ""}! Try saying one sentence — anything you like.` }));
-        }
-      }, 6000);
-    }
-    return;
-  }
-
+  if (!agentAudioQ.length) { agentPlaying = false; agentCurrentAudio = null; return; }
+  agentFirstAudioReceived = true; // FIX1: legacy TTS/text suppression now safe
   agentPlaying = true;
   if (state !== "busy") state = "busy";
-
-  // GAPLESS FIX: Merge ALL queued chunks into one contiguous MP3 blob.
-  // MP3 frames are independently decodable — concatenation produces valid playback.
-  // This eliminates N-1 inter-chunk gaps that caused choppiness.
-  let totalBytes = 0;
-  for (const c of agentAudioQ) totalBytes += c.byteLength;
-  const merged = new Uint8Array(totalBytes);
-  let offset = 0;
-  for (const c of agentAudioQ) {
-    merged.set(new Uint8Array(c), offset);
-    offset += c.byteLength;
-  }
-  // Drain queue entirely — all chunks consumed in one play
-  agentAudioQ.length = 0;
-
-  // Cleanup previous concatenated audio
-  if (agentConcatBlobUrl) { try { URL.revokeObjectURL(agentConcatBlobUrl); } catch {} }
-  if (agentConcatAudio) { try { agentConcatAudio.pause(); } catch {} }
-
-  agentConcatBlobUrl = URL.createObjectURL(new Blob([merged], { type: "audio/mpeg" }));
-  const a = new Audio(agentConcatBlobUrl);
-  agentConcatAudio = a;
+  const chunk = agentAudioQ.shift();
+  if (agentAudioQ.length > 1) await new Promise(r => setTimeout(r, 50)); // gate rapid chunks on budget decoders
+  const blobUrl = URL.createObjectURL(new Blob([chunk], { type: "audio/mpeg" }));
+  const a = new Audio(blobUrl);
   agentCurrentAudio = a;
-
-  const cleanup = () => {
-    try { URL.revokeObjectURL(agentConcatBlobUrl); } catch {}
-    agentConcatBlobUrl = null;
-    if (agentConcatAudio === a) agentConcatAudio = null;
-    if (agentCurrentAudio === a) agentCurrentAudio = null;
-  };
-
-  a.onended = () => { cleanup(); playAgentChunk(); };
-  a.onerror = (e) => { reportClientError('AUDIO_PLAYBACK_ERROR', 'Audio element error during playback', e?.message || ''); cleanup(); playAgentChunk(); };
-  // Watchdog: if onended doesn't fire within expected duration + buffer, force cleanup.
-  // Prevents permanent hang on corrupted MP3 frames or browser bugs.
-  const watchDurationMs = (merged.byteLength / 16000) * 1000 + 2000; // estimate + 2s buffer
-  const watchdog = setTimeout(() => {
-    if (agentConcatAudio === a && !a.paused && a.currentTime > 0) {
-      console.warn("[AUDIO] watchdog triggered — forcing cleanup");
-      cleanup();
-      playAgentChunk();
-    }
-  }, Math.max(watchDurationMs, 3000));
-  a.addEventListener('ended', () => clearTimeout(watchdog), { once: true });
-  a.addEventListener('error', () => clearTimeout(watchdog), { once: true });
-  try { await a.play(); } catch { clearTimeout(watchdog); cleanup(); playAgentChunk(); }
+  a.onended = () => { URL.revokeObjectURL(blobUrl); if (agentCurrentAudio === a) agentCurrentAudio = null; playAgentChunk(); };
+  a.onerror = () => { URL.revokeObjectURL(blobUrl); if (agentCurrentAudio === a) agentCurrentAudio = null; playAgentChunk(); };
+  try { await a.play(); } catch { URL.revokeObjectURL(blobUrl); if (agentCurrentAudio === a) agentCurrentAudio = null; playAgentChunk(); }
 }
 
 async function startAgentListening(preAcquiredStream) {
@@ -1241,7 +1038,7 @@ async function startAgentListening(preAcquiredStream) {
     });
     agentMicStream = stream;
 
-    const stopOnLeave = () => { if (agentMicStream) agentMicStream.getTracks().forEach(t => t.stop()); showTigerWin(); };
+    const stopOnLeave = () => { if (agentMicStream) agentMicStream.getTracks().forEach(t => t.stop()); };
     window.addEventListener("beforeunload", stopOnLeave, { once: true });
     window.addEventListener("pagehide", stopOnLeave, { once: true });
 
@@ -1258,21 +1055,7 @@ async function startAgentListening(preAcquiredStream) {
       agentWorklet = new AudioWorkletNode(agentAudioCtx, "pcm-processor");
       agentWorklet.port.onmessage = (e) => {
         if (e.data.type === "pcm" && agentWs && agentWs.readyState === WebSocket.OPEN) {
-          // EC-15: Buffer until SettingsApplied arrives
-          if (!agentReady) {
-            if (agentPreSettingsBuffer.length < AGENT_PRE_BUFFER_CAP) {
-              agentPreSettingsBuffer.push(e.data.buffer);
-              agentPreSettingsBytes += e.data.buffer.byteLength;
-            } else if (agentPreSettingsBuffer.length === AGENT_PRE_BUFFER_CAP) {
-              console.warn("[VOICE] Pre-settings buffer full — dropping oldest chunk");
-              const dropped = agentPreSettingsBuffer.shift();
-              agentPreSettingsBytes -= dropped.byteLength;
-              agentPreSettingsBuffer.push(e.data.buffer);
-              agentPreSettingsBytes += e.data.buffer.byteLength;
-            }
-          } else {
-            agentWs.send(e.data.buffer);
-          }
+          agentWs.send(e.data.buffer);
         }
       };
       src.connect(agentWorklet);
@@ -1294,21 +1077,7 @@ async function startAgentListening(preAcquiredStream) {
           const s = Math.max(-1, Math.min(1, float32[i]));
           int16[i] = s < 0 ? s * 0x8000 : s * 0x7FFF;
         }
-        // EC-15: Buffer until SettingsApplied arrives
-        if (!agentReady) {
-          if (agentPreSettingsBuffer.length < AGENT_PRE_BUFFER_CAP) {
-            agentPreSettingsBuffer.push(int16.buffer);
-            agentPreSettingsBytes += int16.buffer.byteLength;
-          } else if (agentPreSettingsBuffer.length === AGENT_PRE_BUFFER_CAP) {
-            console.warn("[VOICE] Pre-settings buffer full — dropping oldest chunk");
-            const dropped = agentPreSettingsBuffer.shift();
-            agentPreSettingsBytes -= dropped.byteLength;
-            agentPreSettingsBuffer.push(int16.buffer);
-            agentPreSettingsBytes += int16.buffer.byteLength;
-          }
-        } else {
-          agentWs.send(int16.buffer);
-        }
+        agentWs.send(int16.buffer);
       };
       src.connect(scriptProcessor);
       scriptProcessor.connect(agentAudioCtx.destination);
@@ -1331,10 +1100,9 @@ async function startAgentListening(preAcquiredStream) {
         document.addEventListener("click", resumeCtx, { once: true });
       }
     });
-  } catch (err) {
-    reportClientError('MIC_ACQUIRE_FAIL', err.message || 'getUserMedia failed', err.stack || '');
+  } catch {
     agentMicStream = null; agentAudioCtx = null;
-    setMicStatus("👆 Tap mic to speak", false);
+    setMicStatus("Tap to speak", false);
     startListening();
   } finally {
     micAcquiring = false;
@@ -1356,28 +1124,6 @@ function showTigerWin() {
   if (el("tsWords")) el("tsWords").textContent = agentSessionVocab.length > 0 ? `New words: ${agentSessionVocab.join(", ")}` : "";
   const ts = el("tigerSummary");
   if (ts) ts.classList.add("show");
-  // Persist session metrics fire-and-forget
-  if (profile.studentId && agentSessionTurns > 0) {
-    fetch("/api/agent/session", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ studentId: profile.studentId, turns: agentSessionTurns, durationMs: agentSessionStart ? Date.now() - agentSessionStart : 0, vocab: agentSessionVocab })
-    }).catch(() => {});
-
-    // ── Student Memory Pipeline: POST session summary + new vocab ──────────
-    // Fire-and-forget merge into STUDENT_MEMORY KV. Non-breaking if endpoint missing.
-    const _memPayload = {
-      new_vocab: agentSessionVocab.length > 0 ? agentSessionVocab : undefined,
-      session_summary: agentSessionVocab.length > 0
-        ? `Practiced ${agentSessionVocab.length} words (${agentSessionVocab.slice(0,3).join(", ")})`
-        : `Free conversation session (${agentSessionTurns} turns)`
-    };
-    fetch(`/api/memory/${encodeURIComponent(profile.studentId)}`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(_memPayload)
-    }).catch(() => {});
-  }
 }
 
 function endAgentSession() {
@@ -1510,11 +1256,7 @@ function triggerMicOnGesture() {
       startAgentListening(pendingMicStream);
       pendingMicStream = null;
     }
-  }).catch(() => {
-    setMicStatus("👆 Tap mic to allow access", false);
-    // Allow retry — reset userHasInteracted so next tap re-triggers getUserMedia
-    userHasInteracted = false;
-  });
+  }).catch(() => { setMicStatus("Mic denied", false); });
 }
 document.addEventListener("click",      triggerMicOnGesture, { once: false, passive: true });
 document.addEventListener("touchstart", triggerMicOnGesture, { once: false, passive: true });
@@ -1525,124 +1267,6 @@ form.addEventListener("submit", (e) => {
   const t = input.value.trim();
   if (t) handle(t);
 });
-
-// ── Mode Selector Modal ──────────────────────────────────────────────────────
-// Opens when clicking Obi's name or avatar. Persists selection to localStorage.
-let currentMode = 'free';
-
-function openModeModal() {
-  const modal = document.getElementById('modeModal');
-  if (!modal) return;
-  // Highlight current mode
-  modal.querySelectorAll('.mode-option').forEach(opt => {
-    opt.classList.toggle('active', opt.dataset.mode === currentMode);
-  });
-  modal.classList.add('show');
-}
-
-function closeModeModal() {
-  const modal = document.getElementById('modeModal');
-  if (modal) modal.classList.remove('show');
-}
-
-function selectMode(mode) {
-  currentMode = mode;
-  localStorage.setItem('obi_session_mode', mode);
-  // Update URL without reload
-  const url = new URL(window.location.href);
-  url.searchParams.set('mode', mode);
-  window.history.replaceState({}, '', url.toString());
-  // Update header name color based on mode
-  const obiName = document.getElementById('obiName');
-  if (obiName) obiName.style.color = MODE_COLORS[mode] || MODE_COLORS.free;
-  closeModeModal();
-  // Reconnect Voice Agent with new mode if active
-  if (agentWs && agentReady) {
-    const modeLabels = { free: '💬 Free Talk', study: '📚 Log-Home-Study', phonics: '🗣️ NET Phonics' };
-    bubble('obi', `Switched to ${modeLabels[mode]} mode. Reconnecting...`);
-    try { agentWs.close(); } catch (_) {}
-    setTimeout(() => openVoiceAgent(), 500);
-  }
-}
-
-// Wire click handlers
-const obiNameEl = document.getElementById('obiName');
-const obiAvatarEl = document.getElementById('obiAvatar');
-if (obiNameEl) obiNameEl.addEventListener('click', openModeModal);
-if (obiAvatarEl) obiAvatarEl.addEventListener('click', openModeModal);
-// Close modal on backdrop click
-const modalBackdrop = document.querySelector('.modal-backdrop');
-if (modalBackdrop) modalBackdrop.addEventListener('click', closeModeModal);
-
-// ── Mode Color Map (single source of truth) ─────────────────────────────────
-const MODE_COLORS = { free: 'var(--purple)', study: '#f59e0b', phonics: '#ef4444' };
-const MODE_LABELS = { free: '💬 Free Talk', study: '📚 Log-Home-Study', phonics: '🗣️ NET Phonics' };
-
-// ── Landing Page Mode Selection ─────────────────────────────────────────────
-// Shows on first visit or when no mode is set. Full-screen fancy selector.
-let pendingLandingMode = null;
-
-function selectLandingMode(mode) {
-  pendingLandingMode = mode;
-  document.querySelectorAll('.landing-mode-card').forEach(c => {
-    c.classList.toggle('selected', c.dataset.mode === mode);
-  });
-  const btn = document.getElementById('landingStartBtn');
-  if (btn) btn.classList.add('ready');
-}
-
-function confirmLandingMode() {
-  if (!pendingLandingMode) return;
-  currentMode = pendingLandingMode;
-  localStorage.setItem('obi_session_mode', currentMode);
-  localStorage.setItem('obi_landing_seen', 'true');
-  const url = new URL(window.location.href);
-  url.searchParams.set('mode', currentMode);
-  window.history.replaceState({}, '', url.toString());
-  dismissLanding();
-}
-
-function skipLanding() {
-  const saved = localStorage.getItem('obi_session_mode') || 'free';
-  currentMode = saved;
-  localStorage.setItem('obi_landing_seen', 'true');
-  dismissLanding();
-}
-
-function dismissLanding() {
-  const landing = document.getElementById('modeLanding');
-  if (landing) landing.classList.add('hidden');
-  // Update header name color
-  const obiName = document.getElementById('obiName');
-  if (obiName) obiName.style.color = MODE_COLORS[currentMode] || MODE_COLORS.free;
-}
-
-// Initialize mode + decide whether to show landing
-(function initMode() {
-  const urlMode = new URLSearchParams(window.location.search).get('mode');
-  const savedMode = localStorage.getItem('obi_session_mode');
-  const landingSeen = localStorage.getItem('obi_landing_seen');
-
-  // If URL has explicit mode param, use it and skip landing
-  if (urlMode) {
-    currentMode = urlMode;
-    localStorage.setItem('obi_session_mode', currentMode);
-    const landing = document.getElementById('modeLanding');
-    if (landing) landing.classList.add('hidden');
-  } else if (!landingSeen) {
-    // First visit — show landing, pre-select saved mode if exists
-    currentMode = savedMode || 'free';
-    if (savedMode) selectLandingMode(savedMode);
-  } else {
-    // Returning user — skip landing
-    currentMode = savedMode || 'free';
-    const landing = document.getElementById('modeLanding');
-    if (landing) landing.classList.add('hidden');
-  }
-
-  const obiName = document.getElementById('obiName');
-  if (obiName) obiName.style.color = MODE_COLORS[currentMode] || MODE_COLORS.free;
-})();
 
 // ── Boot ───────────────────────────────────────────────────
 
@@ -1658,17 +1282,7 @@ async function boot() {
   urlStudentId = (() => { const params = new URLSearchParams(window.location.search); return params.get("student") || params.get("studentId"); })();
 
   // Fire Voice Agent WS connection IMMEDIATELY — Deepgram connects in parallel with boot loads
-  if (urlStudentId) {
-    openVoiceAgent();
-    // Fallback: if agent hasn't become ready within 8s, show legacy greeting so student isn't stuck
-    // Checks !agentReady (not !agentWs) because WS could be open but SettingsApplied never arrived
-    setTimeout(() => {
-      if (!agentReady) {
-        const _fn = (profile.fullName || profile.name || "").split(/\s+/)[0] || "";
-        bubble("obi", `${_fn ? _fn + ", " : ""}I'm having trouble connecting right now. Try tapping the mic button or refresh the page.`);
-      }
-    }, 8000);
-  }
+  if (urlStudentId) openVoiceAgent();
 
   let saved = null;
   try { saved = JSON.parse(localStorage.getItem("net_profile") || "null"); } catch {}
@@ -1712,8 +1326,7 @@ async function boot() {
     // Apply vocab
     if (vocR.status === "fulfilled" && vocR.value?.due?.length) profile._dueVocab = vocR.value.due;
 
-    // Suppress legacy TTS greeting if Voice Agent is connecting/connected — agent sends its own greeting
-    if (!agentWs) obi(`${firstName()}! Let's go.`);
+    obi(`${firstName()}! Let's go.`);
     await pause(350);
 
     const _idParts = (urlStudentId || "").split("-");
@@ -1747,8 +1360,7 @@ async function boot() {
     }
     if (vocR2.status === "fulfilled" && vocR2.value?.due?.length) profile._dueVocab = vocR2.value.due;
 
-    // Suppress legacy TTS greeting if Voice Agent is connecting/connected
-    if (!agentWs) obi(`${firstName()}! Welcome back!`);
+    obi(`${firstName()}! Welcome back!`);
     await pause(400);
     const _hint2 = hintR2.status === "fulfilled" ? hintR2.value : null;
     if (_hint2?.videoTitle && _hint2.timestamp && (Date.now() - _hint2.timestamp < 4 * 3600 * 1000)) {
@@ -1762,5 +1374,121 @@ async function boot() {
     state = "intro";
   }
 }
+
+// ── Mode Selector System (Free Talk / Log-Home-Study / NET Phonics) ─────────
+const MODE_COLORS = { free: 'var(--purple)', study: '#f59e0b', phonics: '#ef4444' };
+const MODE_LABELS = { free: '💬 Free Talk', study: '📚 Log-Home-Study', phonics: '🗣️ NET Phonics' };
+let currentMode = 'free';
+let pendingLandingMode = null;
+
+function selectLandingMode(mode) {
+  pendingLandingMode = mode;
+  document.querySelectorAll('.landing-mode-card').forEach(c => {
+    c.classList.toggle('selected', c.dataset.mode === mode);
+  });
+  const btn = document.getElementById('landingStartBtn');
+  if (btn) btn.classList.add('ready');
+}
+
+function confirmLandingMode() {
+  if (!pendingLandingMode) return;
+  currentMode = pendingLandingMode;
+  localStorage.setItem('obi_session_mode', currentMode);
+  localStorage.setItem('obi_landing_seen', 'true');
+  const url = new URL(window.location.href);
+  url.searchParams.set('mode', currentMode);
+  window.history.replaceState({}, '', url.toString());
+  dismissLanding();
+  // I-8: Auto-start Voice Agent after mode selection (EC-9 fix)
+  if (urlStudentId && !agentWs) {
+    setTimeout(() => openVoiceAgent(), 300);
+  }
+}
+
+function skipLanding() {
+  const saved = localStorage.getItem('obi_session_mode') || 'free';
+  currentMode = saved;
+  localStorage.setItem('obi_landing_seen', 'true');
+  dismissLanding();
+}
+
+function dismissLanding() {
+  const landing = document.getElementById('modeLanding');
+  if (landing) landing.classList.add('hidden');
+  const obiName = document.getElementById('obiName');
+  if (obiName) obiName.style.color = MODE_COLORS[currentMode] || MODE_COLORS.free;
+}
+
+function openModeModal() {
+  const modal = document.getElementById('modeModal');
+  if (!modal) return;
+  modal.querySelectorAll('.mode-option').forEach(opt => {
+    opt.classList.toggle('active', opt.dataset.mode === currentMode);
+  });
+  modal.classList.add('show');
+  const backdrop = document.querySelector('.modal-backdrop');
+  if (backdrop) backdrop.classList.add('show');
+}
+
+function closeModeModal() {
+  const modal = document.getElementById('modeModal');
+  if (modal) modal.classList.remove('show');
+  const backdrop = document.querySelector('.modal-backdrop');
+  if (backdrop) backdrop.classList.remove('show');
+}
+
+function selectMode(mode) {
+  currentMode = mode;
+  localStorage.setItem('obi_session_mode', mode);
+  const url = new URL(window.location.href);
+  url.searchParams.set('mode', mode);
+  window.history.replaceState({}, '', url.toString());
+  const obiName = document.getElementById('obiName');
+  if (obiName) obiName.style.color = MODE_COLORS[mode] || MODE_COLORS.free;
+  closeModeModal();
+  // Reconnect Voice Agent with new mode if active
+  if (agentWs && agentReady) {
+    bubble('obi', `Switched to ${MODE_LABELS[mode]} mode. Reconnecting...`);
+    try { agentWs.close(); } catch (_) {}
+    setTimeout(() => openVoiceAgent(), 500);
+  }
+}
+
+// Wire avatar click to open mode modal
+(function initModeUI() {
+  const obiAvatar = document.getElementById('obiAvatar');
+  const obiName = document.getElementById('obiName');
+  if (obiAvatar) obiAvatar.addEventListener('click', openModeModal);
+  if (obiName) obiName.addEventListener('click', openModeModal);
+
+  // Initialize mode from URL or localStorage
+  const urlMode = new URLSearchParams(window.location.search).get('mode');
+  const savedMode = localStorage.getItem('obi_session_mode');
+  const landingSeen = localStorage.getItem('obi_landing_seen');
+
+  if (urlMode) {
+    currentMode = urlMode;
+    localStorage.setItem('obi_session_mode', currentMode);
+    const landing = document.getElementById('modeLanding');
+    if (landing) landing.classList.add('hidden');
+  } else if (!landingSeen) {
+    // FIX2: Show landing page for first-time users or cleared storage.
+    // Previously this branch never explicitly showed the landing element,
+    // causing chat to boot before mode selection.
+    currentMode = savedMode || 'free';
+    const landing = document.getElementById('modeLanding');
+    if (landing) {
+      landing.classList.remove('hidden');
+      landing.style.display = 'flex';
+    }
+    if (savedMode) selectLandingMode(savedMode);
+  } else {
+    currentMode = savedMode || 'free';
+    const landing = document.getElementById('modeLanding');
+    if (landing) landing.classList.add('hidden');
+  }
+
+  if (obiName) obiName.style.color = MODE_COLORS[currentMode] || MODE_COLORS.free;
+})();
 
 boot();
