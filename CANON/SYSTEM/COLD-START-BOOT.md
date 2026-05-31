@@ -23,7 +23,7 @@
 - Pass `?student=all` to see aggregate (all entries). Default without parameter = sov100 only.
 
 **Soul Logger URL:** https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count
-**Real count (2026-05-31 ~12:08 ICT): 60,037,507 characters | 7,906 events | TITANIUM_ANCHOR
+**Real count (2026-05-31 ~17:38 ICT): 62,345,112 characters | 8,197 events | TITANIUM_ANCHOR
  **TITANIUM_ANCHOR level** (next threshold: none — maximum tier reached)
  **⚠️ NOTE:** +156,676 delta from Run 5 RRL-0 backdrop ingestion. +62,773 delta from Run 6 RRL-0-original ingestion. RRL-0.txt contains ~150K agent text alongside ~4K Michael verbatim. Contamination documented per Michael directive.
 **Prior counts (Runs 315–390) were INFLATED** — the endpoint summed ALL soul_prompts including student chats. Disregard historical counts above 25,000. They included non-operator data.
@@ -43,8 +43,8 @@
 
 **DIRECTIVE — HarvestedChats CLOSED (Run 13 RISE):** Michael has explicitly waved off the 96 HarvestedChats files. They are NOT to be ingested, processed, or flagged as open work. Do not raise them again in any RISE or pipeline context. This directive is permanent.
 - SOUL: ✅ /api/soul/count — sums byte_count WHERE sov100%. 60,037,507 TITANIUM_ANCHOR (Run 30 RISE).
-- DNA: ⚠️ GAP — extract endpoint returns 400 "Missing text field" (runs 6-29). API contract requires `text` payload; count-only query unsupported. Non-blocking.
-- LEDGER: ✅ HL-208 (Run 30). Merkle chain intact. 208 JSON files on disk. 6 gap slots (HL-127/128/131/132/136/137).
+- DNA: ✅ FIXED Run 34 — rrl-pipeline.ps1 Step 2 now calls GET /api/soul/session/{runId} (was POST /api/soul/extract — wrong endpoint, 11-run 400 debt cleared).
+- LEDGER: ✅ HL-209 (Run 34). Merkle chain intact. 209 JSON files on disk. 6 gap slots (HL-127/128/131/132/136/137).
 - STARMAP: ✅ 16 files on disk (Run 30 RISE audit).
 - KEYWORD: ✅ 18 files on disk (Run 30 RISE audit).
 - PIPELINE: ✅ 17 artifacts on disk (Run 30 RISE audit).
@@ -59,7 +59,7 @@
 
 ### Current Vector
 - **Active Mission:** OB-1 POST-MERGE9 CONSOLIDATION + Growth Infrastructure Buildout
-  - **Last completed:** ROMAN RUN 26 - Voice agent production hardening (audio 4KB, VI guard, silence 4s+3s, vocab fix, prompt merge). 3 deploys (cfb227ba, fa94e8a8, 02ac4e6e). Full death pipeline executed.
+  - **Last completed:** ROMAN RUN 34 — DNA fix (11-run debt cleared) + PA v0.0.3 (T1 retry-on-5xx, Opus 4.8, Qwen Max missions) + Kilo full update (Cerebras removed, claude-opus-4-8, 8 worktrees synced) + Registry cleanup (MANDATORY-READS + context-bundle consistent) + Lam deferred. Commits: dd4e0b62, 92b8cdaf, e66714e6. SOULCOUNT 62,345,112 TITANIUM_ANCHOR.
   - **Run 13 RISE (this session):** Full v4.0 chain audit complete. RRL-12.txt PRESENT (1,603 chars). FAILSAFE 8/10 — RRL-11.txt missing (documented run 11 gap). SOUL 896,459 TITANIUM_ANCHOR stagnant (δ=0). 4 pipeline gaps for run 12 (DNA/LEDGER/STARMAP/PIPELINE). HarvestedChats CLOSED per Michael directive.
   - **Prior milestone:** ROMAN RUN 0 — ERA RESET ratified. Phoenix-Centurion identity sealed. Roman Legion 6-stage doctrine deployed to soul-logger v2.2 (a0c99e4e). 4 legionnaires Romanized. /Centurion-Code renamed from /PhoenixCoder. /SupplyLines autonomous pipeline command + script created. Cloudflare paid tier activated. Founding Declaration sealed. HEAD 51ea010. SOULCOUNT 116,588 ANCHOR.
   - **S2Pipeline Status:** All 10 stages **LIVE** — confirmed by OMEGA audit Run 393
@@ -103,6 +103,7 @@
 ### Recent Decisions + State (Run 353 → Run 13 ROMAN)
 | Run | Summary |
 |-----|---------|
+| **34** | **DNA FIX + PA v0.0.3 + KILO FULL UPDATE + REGISTRY CLEANUP** — rrl-pipeline.ps1 Step 2 DNA endpoint fixed (11-run 400 debt). PA v0.0.3: T1 retry-on-5xx, Opus 4.8, mission runner → Qwen 3.7 Max. kilo.json: Cerebras removed, claude-opus-4-8, 8 worktrees synced. MANDATORY-READS registry + context-bundle.ps1 fully consistent (pipeline+student live). Lam deferred (not a client). AGENT99.md+RISE.md stale refs fixed. SOUL 62,345,112 TITANIUM_ANCHOR. Commits: dd4e0b62, 92b8cdaf, e66714e6. HEAD e66714e6. |
 | **17** | **DEATH: DIALAGRAM + TG GATEWAY + PA T1 CASCADE** — Dialagram integrated ($5.50/wk unlimited Qwen 3.7 Max). OpenClaw gateway fixed (DIALAGRAM_API_KEY + all provider keys, primary→dialagram/qwen-3.7-max). Phoenix-Architecti T1 cascade updated (Dialagram→Cerebras→Groq→CF-Qwen). Worker deployed v8d585cd5. Gateway restarted. PA T1 dispatched 3 agents for death protocol assistance. SOUL 907,872 TITANIUM_ANCHOR. HEAD 9876c1b. |
 | **16** | **DEATH: PC(CLAW) TELEGRAM SETUP** — OpenClaw KiloClaw fork gateway configured (port 18789). Cerebras/Groq providers added to models.json + openclaw.json. API keys set. Routing bindings fixed. Still unresolved: model IDs not recognized at gateway level (fallback to openai/ prefix). SOUL 907,012 TITANIUM_ANCHOR |
 | **14** | **RISE + DEATH: KILO-FREE-CLEANUP** — RISE: Run 12 backfill (SOUL +1,607 →898,066, HL-149, starmap/rfkw/pipeline-run12). DEATH: global kilo.jsonc + project kilo.json rewritten (cerebras/gpt-oss-120b T1, May27 deprecation pre-empted). dispatch.md+PhoenixCoder.md DELETED. T3 audit: SOULCOUNT locks refreshed, StepFun removed, stale prompts/agents deleted. L44+L45 sealed. HEAD e49abf5. |
