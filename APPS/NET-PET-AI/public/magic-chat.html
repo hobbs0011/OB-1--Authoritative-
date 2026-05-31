@@ -206,6 +206,15 @@
       transition: all 0.2s;
     }
     .obi-avatar:hover { border-color: var(--gold); transform: scale(1.1); }
+    #modeChip {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.04em;
+      padding: 3px 10px; border-radius: 20px;
+      border: 1px solid rgba(168,85,247,0.4);
+      background: rgba(168,85,247,0.1);
+      color: var(--purple); cursor: pointer;
+      transition: all 0.2s; white-space: nowrap;
+    }
+    #modeChip:hover { border-color: var(--gold); background: rgba(245,158,11,0.1); color: var(--gold); }
     /* Mode Landing Page */
     #modeLanding {
       position: fixed; inset: 0;
@@ -308,6 +317,7 @@
     <span id="dot" title="Checking..."></span>
     <div id="obiAvatar" class="obi-avatar" title="Click to change mode">🔮</div>
     <h1><span class="gold">Magic Chat</span> — <span id="obiName">Obi</span></h1>
+    <button id="modeChip" onclick="openModeModal()" title="Change session mode">💬 Free Talk</button>
     <button id="speakToggle" title="Obi voice ON">🔊</button>
   </header>
   <!-- Tiger Win Session Summary -->

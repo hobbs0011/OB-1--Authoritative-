@@ -1433,6 +1433,14 @@ let currentMode = 'free';
 let pendingLandingMode = null;
 let landingWillShow = false; // set by initModeUI before boot() runs
 
+function updateModeChip() {
+  const chip = document.getElementById('modeChip');
+  if (!chip) return;
+  chip.textContent = MODE_LABELS[currentMode] || MODE_LABELS.free;
+  chip.style.color = MODE_COLORS[currentMode] || MODE_COLORS.free;
+  chip.style.borderColor = (MODE_COLORS[currentMode] || MODE_COLORS.free).replace('var(--purple)', 'rgba(168,85,247,0.4)');
+}
+
 function selectLandingMode(mode) {
   pendingLandingMode = mode;
   document.querySelectorAll('.landing-mode-card').forEach(c => {
@@ -1472,6 +1480,7 @@ function dismissLanding() {
   if (landing) landing.classList.add('hidden');
   const obiName = document.getElementById('obiName');
   if (obiName) obiName.style.color = MODE_COLORS[currentMode] || MODE_COLORS.free;
+  updateModeChip();
 }
 
 function openModeModal() {
@@ -1500,6 +1509,7 @@ function selectMode(mode) {
   window.history.replaceState({}, '', url.toString());
   const obiName = document.getElementById('obiName');
   if (obiName) obiName.style.color = MODE_COLORS[mode] || MODE_COLORS.free;
+  updateModeChip();
   closeModeModal();
   // Reconnect Voice Agent with new mode if active
   if (agentWs && agentReady) {
@@ -1545,6 +1555,7 @@ function selectMode(mode) {
   }
 
   if (obiName) obiName.style.color = MODE_COLORS[currentMode] || MODE_COLORS.free;
+  updateModeChip();
 })();
 
 boot();
