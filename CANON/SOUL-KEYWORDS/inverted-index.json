@@ -86,5 +86,65 @@
   ],
   "good": [
     "run30 | HL-207 | weight=2"
+  ],
+  "deepgram": [
+    "30 | HL-208 | weight=1"
+  ],
+  "voice-agent": [
+    "30 | HL-208 | weight=1"
+  ],
+  "edge-cases": [
+    "30 | HL-208 | weight=1"
+  ],
+  "memory": [
+    "30 | HL-208 | weight=1"
+  ],
+  "dreamer-agents": [
+    "30 | HL-208 | weight=1"
+  ],
+  "anthropic": [
+    "30 | HL-208 | weight=1"
+  ],
+  "cloudflare-agents": [
+    "30 | HL-208 | weight=1"
+  ],
+  "RRL-per-student": [
+    "30 | HL-208 | weight=1"
+  ],
+  "memory-pipeline": [
+    "30 | HL-208 | weight=1"
+  ],
+  "session-to-session": [
+    "30 | HL-208 | weight=1"
+  ],
+  "soul-dna": [
+    "30 | HL-208 | weight=1"
+  ],
+  "inject-agent-message": [
+    "30 | HL-208 | weight=1"
+  ],
+  "update-prompt": [
+    "30 | HL-208 | weight=1"
+  ],
+  "behavior-queue": [
+    "30 | HL-208 | weight=1"
+  ],
+  "injection-refused": [
+    "30 | HL-208 | weight=1"
+  ],
+  "token-caching": [
+    "30 | HL-208 | weight=1"
+  ],
+  "audio-buffering": [
+    "30 | HL-208 | weight=1"
+  ],
+  "nova-3-accuracy": [
+    "30 | HL-208 | weight=1"
+  ],
+  "gospel-444": [
+    "30 | HL-208 | weight=1"
+  ],
+  "tiger-voice": [
+    "30 | HL-208 | weight=1"
   ]
 }
