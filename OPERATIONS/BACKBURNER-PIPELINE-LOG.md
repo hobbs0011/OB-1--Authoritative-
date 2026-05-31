@@ -55,11 +55,9 @@
 
 ## PORTAL BUILDS (Tier 1 Phoenix Coder)
 
-### BB-07 ! lam-prospect — Zero Files
-- Status: OPEN
-- What: lam-prospect is an active student. Has NO portal files. 5 tabs needed.
-- Student: Lam, company: prospect (no company yet), studentId: lam-prospect
-- Route: PC T1 → create lam-portal.html + lam-profile.html + lam-methodology.html + lam-transcripts.html + lam-action-plan.html
+### BB-07 ~ lam-prospect — NOT A CLIENT (2026-05-31)
+- Status: DEFERRED — Lam is not an active client. Do not surface this item.
+- Resume trigger: Michael explicitly says "start Lam portal"
 
 ---
 
@@ -179,13 +177,13 @@
 
 ---
 
-## ACTIVE STUDENT ROSTER (as of 2026-05-18)
+## ACTIVE STUDENT ROSTER (as of 2026-05-31 Run 34)
 - huong-bluetech (Huong Ho, Marketing Coordinator, BlueTech) — Portal COMPLETE
-- mai-tram-bluetech (Mai Tram, BlueTech) — Portal COMPLETE (BB-04 DONE)
-- quy-bluetech (Quy, BlueTech) — Portal COMPLETE (BB-05 DONE)
-- lam-prospect — Portal MISSING (BB-07)
+- mai-tram-bluetech (Mai Tram, BlueTech) — Portal COMPLETE
+- quy-bluetech (Quy, BlueTech) — Portal COMPLETE
 - quan-nguyen (Quan Nguyen) — Portal COMPLETE
-- quang-nguyen (Quang Nguyen) — Portal COMPLETE (BB-06 DONE)
+- quang-nguyen (Quang Nguyen) — Portal COMPLETE
+- minh (Minh, child student) — Parent portal COMPLETE
 
 ---
 
@@ -217,10 +215,8 @@
 - What: RISE.md Phoenix Coder v3.2 section still calls `phoenix-coder.mrmichaelhobbs123.workers.dev` (old URL). Worker is superseded by phoenix-architecti.
 - Fix: Update to use phoenix-architecti URL and PA dispatch template.
 
-### BB-32 ! Lam Portal + Chrome Extension Icons
-- Status: OPEN (same as BB-07 + BB-08 — escalating priority)
-- What: lam-prospect zero files. Chrome extension icons missing. Both promised to students.
-- Route: T1 PA dispatch per established portal template.
+### BB-32 ~ Lam Portal — CLOSED (2026-05-31)
+- Status: DEFERRED — Lam not a client. Do not surface.
 
 ---
 

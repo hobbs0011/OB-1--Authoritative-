@@ -1,7 +1,7 @@
 # MANDATORY-READS REGISTRY
 # Single source of truth for what every agent MUST read before each task type.
 # Add new docs HERE ONLY — RISE, DEATH, CLAUDE.md, and Kilo all reference this file.
-# Last updated: 2026-05-31 Run 33
+# Last updated: Run 34 2026-05-31
 
 ---
 
@@ -11,8 +11,8 @@ RISE: `pwsh SCRIPTS/context-bundle.ps1 -TaskType rise` assembles this automatica
 DEATH: `pwsh SCRIPTS/context-bundle.ps1 -TaskType death` assembles this automatically.
 NET-PET-AI: `pwsh SCRIPTS/context-bundle.ps1 -TaskType netpetai` assembles this automatically.
 GENERAL: `pwsh SCRIPTS/context-bundle.ps1 -TaskType general` assembles this automatically.
-PIPELINE: Read OPERATIONS/BACKBURNER-PIPELINE-LOG.md + CANON/SYSTEM/COLD-START-BOOT.md manually (task type not yet in script)
-STUDENT: Read OPERATIONS/STUDENT-PORTAL-DEV.md + OPERATIONS/CLASS-PREP-MAI-TRAM-QUY.md manually (task type not yet in script)
+PIPELINE: `pwsh SCRIPTS/context-bundle.ps1 -TaskType pipeline` assembles this automatically.
+STUDENT: `pwsh SCRIPTS/context-bundle.ps1 -TaskType student` assembles this automatically.
 
 Never read these files manually when context-bundle.ps1 covers the task type.
 For task types not covered: read the files listed below directly, pass as PA context.
@@ -82,12 +82,3 @@ Result: destroyed 4 runs of uncommitted work, falsely claimed feature implementa
 
 DO NOT add the doc path to CLAUDE.md, reincarnateRise.md, reincarnatedeath.md, or .kilo/DISPATCH.md separately.
 One registry. One update. Everywhere covered.
-
----
-
-### TASK TYPES NOT YET IN context-bundle.ps1 (TODO — add these)
-The following task types are documented here but missing from context-bundle.ps1 ValidateSet:
-- "pipeline": should read BACKBURNER-PIPELINE-LOG + COLD-START-BOOT + git state
-- "student": should read STUDENT-PORTAL-DEV.md + CLASS-PREP + COLD-START-BOOT
-
-Until added to the script, run these task types manually by reading the docs listed above.
