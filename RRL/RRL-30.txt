@@ -1,0 +1,9 @@
+continue, find edge cases on obi magic char
+its working pretty good, but does it log new words discovered in the session to the student backend files (also any work I am doing on Quys portal should not be counted as its not really her)
+just reset Quys profile (dont reset anything except for Obi sessions thus far), and then make a SOV100 magic test site where we will test from now on
+harden, find edge cases, research deepgram dev site, update our agents. Should we have seperate agents for each mode? or is that not beneficial? update our backend dev .md's extensively in exhaustive detail so we can track all we have done and will do in this session, we will reincarnatedeath shortly
+brother the deepgram is on a different webpage, we had this happen in this session already.. if you kept good backend records youd remember
+yes so they do have active website. Search it extensively, miss nothing, I want to go public with this app soon.
+Apps have backend error logging and robust backends right? do we? document everything
+yes, integrate that and everything else to make this full stack
+upgrade this death and rise process, find edge cases

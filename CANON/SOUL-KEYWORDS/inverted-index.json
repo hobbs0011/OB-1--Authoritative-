@@ -21,12 +21,70 @@
     "24A | HL-203 | weight=1"
   ],
   "Deepgram": [
-    "24A | HL-203 | weight=1"
+    "24A | HL-203 | weight=1",
+    "run30 | HL-207 | weight=2"
   ],
   "api_key": [
     "24A | HL-203 | weight=1"
   ],
   "override": [
     "24A | HL-203 | weight=1"
+  ],
+  "test": [
+    "run30 | HL-207 | weight=2"
+  ],
+  "have": [
+    "run30 | HL-207 | weight=4"
+  ],
+  "edge": [
+    "run30 | HL-207 | weight=3"
+  ],
+  "session": [
+    "run30 | HL-207 | weight=3"
+  ],
+  "backend": [
+    "run30 | HL-207 | weight=4"
+  ],
+  "find": [
+    "run30 | HL-207 | weight=3"
+  ],
+  "update": [
+    "run30 | HL-207 | weight=2"
+  ],
+  "will": [
+    "run30 | HL-207 | weight=3"
+  ],
+  "that": [
+    "run30 | HL-207 | weight=2"
+  ],
+  "site": [
+    "run30 | HL-207 | weight=2"
+  ],
+  "this": [
+    "run30 | HL-207 | weight=6"
+  ],
+  "quys": [
+    "run30 | HL-207 | weight=2"
+  ],
+  "reset": [
+    "run30 | HL-207 | weight=2"
+  ],
+  "agents": [
+    "run30 | HL-207 | weight=2"
+  ],
+  "make": [
+    "run30 | HL-207 | weight=2"
+  ],
+  "everything": [
+    "run30 | HL-207 | weight=2"
+  ],
+  "should": [
+    "run30 | HL-207 | weight=2"
+  ],
+  "cases": [
+    "run30 | HL-207 | weight=3"
+  ],
+  "good": [
+    "run30 | HL-207 | weight=2"
   ]
 }

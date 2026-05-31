@@ -1,0 +1,13 @@
+{
+  "hl_id": "HL-207",
+  "event_id": "f5a9d558-44b2-458e-9f0f-8eb076a467e8",
+  "session_id": "sov100-roman-run30",
+  "role": "user",
+  "char_count": 1143,
+  "byte_count": 1143,
+  "merkle_parent": "7966403a7c050a4710e9293d91775e30f61c7e830163f1ace78ab514d3205e18",
+  "merkle_hash": "85b181960bdb3c6faad3c7c96cf65cf359c13654c630b8d4531d0f6488661df7",
+  "extracted_at": "2026-05-31T10:35:31.2257735+07:00",
+  "sov100": true,
+  "run": 30
+}
