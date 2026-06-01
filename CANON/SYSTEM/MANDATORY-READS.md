@@ -39,6 +39,31 @@ For task types not covered: read the files listed below directly, pass as PA con
 **WHY THIS EXISTS:** Run 31 agent read ZERO of these before touching chat.js.
 Result: destroyed 4 runs of uncommitted work, falsely claimed feature implementation.
 
+### ⚠️ SIMULATION / TESTING LAW — NEVER BREAK (Run 41 FUCKUP — do not repeat)
+
+**THE PRODUCTION SIMULATION PATH IS `/api/deepgram-token`, NOT `/api/chat`.**
+
+| Path | Model | Purpose | Use for simulation? |
+|------|-------|---------|---------------------|
+| `GET /api/deepgram-token?studentId=X&mode=free\|study\|phonics` | gpt-4o-mini via Deepgram think | Production voice agent — what students actually hear | ✅ YES — this is the real test |
+| `POST /api/chat` | DeepSeek-V4-flash (fallback text) | Legacy text chat — NOT the production voice path | ❌ NO — wrong model, wrong path |
+
+**What happened Run 41:** Agent tested all 3 modes via `/api/chat` (DeepSeek). DeepSeek leaked reasoning chains in Chinese. Agent spent 30+ minutes building sanitizer patterns for the wrong model on the wrong path. None of it mattered. Prod is unaffected because prod uses Deepgram voice agent.
+
+**HOW TO SIMULATE MODES CORRECTLY:**
+```powershell
+$DEV = "https://net-pet-ai-dev.mrmichaelhobbs123.workers.dev"
+$SID = "sov100-test-magic"
+# FREE mode — see what OBI loads
+Invoke-RestMethod "$DEV/api/deepgram-token?studentId=$SID&mode=free" | Select-Object -ExpandProperty settings | ConvertTo-Json -Depth 5
+# STUDY mode
+Invoke-RestMethod "$DEV/api/deepgram-token?studentId=$SID&mode=study" | Select-Object -ExpandProperty settings | ConvertTo-Json -Depth 5
+# PHONICS mode — also returns phonicsHint for chat.js
+Invoke-RestMethod "$DEV/api/deepgram-token?studentId=$SID&mode=phonics" | ConvertTo-Json -Depth 5
+```
+
+**RULE: Never add sanitizer patterns to index.js to fix DeepSeek behavior. If the voice agent (Deepgram + gpt-4o-mini) has a problem, fix the Deepgram settings. DeepSeek is the chat fallback. Treat them as separate systems.**
+
 ### DEEPGRAM QUICK-REFERENCE (embedded here — no excuse for getting these wrong)
 
 **FIELDS THAT BREAK SETTINGSAPPLIED — NEVER ADD:**

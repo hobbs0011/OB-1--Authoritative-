@@ -1,0 +1,12 @@
+{
+  "hl_id": "HL-214",
+  "session_id": "sov100-roman-run40",
+  "rrl_source": "RRL\\RRL-40.txt",
+  "char_count": 1210,
+  "byte_count": 1214,
+  "merkle_parent": "0fb1dc51164dee7e3851a072798f0bc1f40f9e33b537a29c401d288d2c4218ec",
+  "merkle_hash": "5546a2c47a4279f844fe500698e0db96ae69ecdb55335181bdbdd27e0528323b",
+  "sealed_at": "2026-06-01T16:25:21.1519509+07:00",
+  "sov100": true,
+  "run": "40"
+}

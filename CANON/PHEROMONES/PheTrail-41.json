@@ -1,0 +1,92 @@
+{
+  "run_number": "41",
+  "extracted_at": "2026-06-01T08:45:00Z",
+  "head_sha": "417f5f60",
+  "soulcount": 69310716,
+  "positive_trails": [
+    {
+      "type": "POSITIVE",
+      "artifact": "GET /api/deepgram-token?studentId=sov100-test-magic&mode=phonics|study|free",
+      "action": "All 3 modes tested via production voice agent path. OBI system prompt verified for each mode.",
+      "verification": "Live HTTP responses from net-pet-ai-dev.mrmichaelhobbs123.workers.dev — all returned 200, full prompts confirmed",
+      "timestamp": "2026-06-01T08:20:00Z"
+    },
+    {
+      "type": "POSITIVE",
+      "artifact": "CANON/STARMAP/ + CANON/HEAVY-LEDGER/",
+      "action": "All 21 starmaps read. Chain HL-210 through HL-213 verified. HL-214 gap identified (Run 40 not yet pipelined).",
+      "verification": "PowerShell dir listing + content read of all starmap files",
+      "timestamp": "2026-06-01T08:40:00Z"
+    },
+    {
+      "type": "POSITIVE",
+      "artifact": "POST /api/phonics/progress + POST /api/phonics/advance (sov100-test-magic)",
+      "action": "Simulated 5 DRUMBLE drills via real KV writes. Advanced group DRUMBLE→HOGFEZ. drill_count 8→14.",
+      "verification": "GET /api/phonics/progress confirmed current_group=3 (HOGFEZ), groups_unlocked=[1,1,1,0,0,0,0], drill_count=14",
+      "timestamp": "2026-06-01T08:22:00Z"
+    },
+    {
+      "type": "POSITIVE",
+      "artifact": "APPS/NET-PET-AI/src/index.js (commit 417f5f60)",
+      "action": "sanitizeObiResponse 3b block added — reasoning leak guard for DeepSeek chat fallback path.",
+      "verification": "node --check SYNTAX OK. Deployed to dev de9e6d72. Targets DeepSeek /api/chat path only.",
+      "timestamp": "2026-06-01T08:30:00Z"
+    },
+    {
+      "type": "POSITIVE",
+      "artifact": "6-layer KV memory chain verified (voice agent path)",
+      "action": "student_profile + vocab_lang + vocab_list + vocab_arc + STUDENT_MEMORY DO + phonics_progress all confirmed flowing into buildAgentPrompt.",
+      "verification": "deepgram-token?mode=phonics returned full OBI prompt with all 6 layers populated — C1 profile, Session #7 memory, Unit 4 arc, 5 vocab words, HOGFEZ drill, th_substitution error tracking",
+      "timestamp": "2026-06-01T08:20:00Z"
+    },
+    {
+      "type": "POSITIVE",
+      "artifact": ".github/skills/phetrails/SKILL.md",
+      "action": "PheTrails skill created as Claude skill per Michael directive.",
+      "verification": "File written to .github/skills/phetrails/SKILL.md",
+      "timestamp": "2026-06-01T08:45:00Z"
+    },
+    {
+      "type": "POSITIVE",
+      "artifact": "CANON/SYSTEM/MANDATORY-READS.md",
+      "action": "Deepgram fuckup doctrine added — simulation path law, table showing /api/chat vs /api/deepgram-token, correct PowerShell commands.",
+      "verification": "File updated. Section: SIMULATION / TESTING LAW added under NET-PET-AI WORK.",
+      "timestamp": "2026-06-01T08:43:00Z"
+    }
+  ],
+  "negative_trails": [
+    {
+      "type": "NEGATIVE",
+      "artifact": "POST /api/chat (DeepSeek) — mode simulation",
+      "failure": "Used /api/chat (DeepSeek-V4-flash text path) to test all 3 voice modes. Model leaked Chinese reasoning chains. Sanitizer thrash followed.",
+      "root_cause": "WRONG PATH. /api/chat is the legacy text fallback. Production voice path is /api/deepgram-token (gpt-4o-mini via Deepgram think). Never test voice behavior via the text chat endpoint.",
+      "decay_days": 180,
+      "timestamp": "2026-06-01T08:25:00Z"
+    },
+    {
+      "type": "NEGATIVE",
+      "artifact": "APPS/NET-PET-AI/src/index.js — sanitizeObiResponse over-engineering",
+      "failure": "Added then thrashed 5+ iterations of reasoning leak patterns (^We\\b, ^We are meeting, ^We need to...) to fix DeepSeek reasoning leaks in /api/chat. Too broad → false positives. Too narrow → misses. 30min wasted.",
+      "root_cause": "Should not have been debugging /api/chat DeepSeek behavior at all. Production path is Deepgram voice agent. Deepgram uses gpt-4o-mini which does not leak reasoning. Fix the model, not the sanitizer.",
+      "decay_days": 180,
+      "timestamp": "2026-06-01T08:30:00Z"
+    },
+    {
+      "type": "NEGATIVE",
+      "artifact": "git checkout -- APPS/NET-PET-AI/src/index.js (mid-session)",
+      "failure": "Had to git checkout to restore index.js to HEAD mid-session after sanitizer churn left file in inconsistent state.",
+      "root_cause": "Multiple back-and-forth edits without committing created drift from HEAD. Lesson: commit good work immediately (L55), don't iterate on bad assumptions.",
+      "decay_days": 90,
+      "timestamp": "2026-06-01T08:35:00Z"
+    }
+  ],
+  "state_markers": {
+    "active_mission": "PHONICS DEV→PROD PROMOTION — Michael browser-tests test-portal, approves, one wrangler deploy promotes to prod",
+    "open_flags_count": 7,
+    "top_priority": "0c PHONICS DEV→PROD PROMOTION",
+    "dev_worker_version": "de9e6d72 (net-pet-ai-dev)",
+    "prod_worker_version": "180f125d (net-pet-ai — UNTOUCHED, firewall intact)",
+    "phonics_state_sov100_test_magic": "group=3 HOGFEZ, drill_count=14, groups_unlocked=[1,1,1,0,0,0,0], dominant_errors=[th_substitution,r_l_confusion,final_consonant_deletion]",
+    "next_phetrail": "CANON/PHEROMONES/PheTrail-42.json"
+  }
+}
