@@ -46,9 +46,8 @@ name = "COMMANDS"
 class_name = "CommandDO"
 
 [[migrations]]
-tag = "v7-drop-session-profile"
-deleted_classes = ["SessionDO", "ProfileDO"]
-new_sqlite_classes = []
+tag = "v1-dev-init"
+new_sqlite_classes = ["PetDO", "LedgerDO", "MemoryDO", "CommandDO"]
 
 [vars]
 APP_NAME = "Natural English Training"
