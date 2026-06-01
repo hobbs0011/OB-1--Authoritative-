@@ -3139,7 +3139,7 @@ function buildAgentPrompt(profile, lang, recentVocab = [], arc = null, mode = 'f
     const drillSentence = phonicsProgress?.next_drill?.sentence || null;
     const drillTip = phonicsProgress?.next_drill?.tip || null;
     const focusError = phonicsProgress?.dominant_errors?.[0] || null;
-    const sessionsPhonicsDone = phonicsProgress?.session_count_phonics || 0;
+    const sessionsPhonicsDone = phonicsProgress?.drill_count || phonicsProgress?.session_count_phonics || 0;
     modeInstr = [
       'MODE: NET PHONICS — Natural English Training sound system (42 sounds, 7 groups).',
       `CURRENT GROUP: ${currentGroupName} — work within this group today.`,
