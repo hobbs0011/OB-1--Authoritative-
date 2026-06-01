@@ -461,6 +461,56 @@
             <div class="progress-label">A1 → A2: Master 50 core words and hold a 2-minute conversation</div>
         </div>
 
+        <div class="content-card" id="phonicsCard" style="display:none">
+            <div class="card-label">🔊 PHONICS TRACK</div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+                <span id="phonicsGroupBadge" style="font-family:'Orbitron',sans-serif;font-size:0.75rem;font-weight:700;letter-spacing:0.08em;padding:5px 14px;border-radius:20px;background:rgba(168,85,247,0.15);border:1px solid rgba(168,85,247,0.4);color:#a855f7;"></span>
+                <span id="phonicsGroupNum" style="font-family:'Rajdhani',sans-serif;font-size:0.8rem;color:var(--dim);"></span>
+            </div>
+            <div class="progress-bar-wrap"><div class="progress-bar-fill" id="phonicsPBar" style="width:0%;"></div></div>
+            <div class="progress-label" id="phonicsPLabel" style="margin-bottom:12px;"></div>
+            <div style="background:rgba(168,85,247,0.06);border:1px solid rgba(168,85,247,0.15);border-radius:14px;padding:14px;margin-bottom:12px;">
+                <div style="font-family:'Rajdhani',sans-serif;font-size:0.72rem;font-weight:700;color:var(--purple);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:6px;">Next Drill</div>
+                <div id="phonicsDrillSentence" style="font-size:0.95rem;font-style:italic;color:var(--text);margin-bottom:6px;"></div>
+                <div id="phonicsDrillTip" style="font-size:0.82rem;color:var(--dim);"></div>
+            </div>
+            <div id="phonicsFocusErr" style="font-size:0.82rem;color:var(--teal);margin-bottom:12px;display:none;"></div>
+            <button id="phonicsAdvBtn" onclick="advancePhonics()" style="display:none;border:1px solid var(--purple);color:var(--purple);background:rgba(168,85,247,0.1);padding:8px 18px;border-radius:14px;cursor:pointer;font-family:'Rajdhani',sans-serif;font-size:0.88rem;font-weight:600;letter-spacing:0.04em;">Group complete! Advance →</button>
+        </div>
+        <script>
+        const PHONICS_COLORS = ['#a855f7','#3b82f6','#22c55e','#eab308','#f97316','#ef4444','#f59e0b'];
+        async function loadPhonics() {
+            try {
+                const r = await fetch('/api/phonics/progress?studentId=quy-bluetech');
+                const d = await r.json();
+                const color = PHONICS_COLORS[d.current_group - 1];
+                const badge = document.getElementById('phonicsGroupBadge');
+                badge.textContent = d.group_name;
+                badge.style.color = color; badge.style.borderColor = color+'66'; badge.style.background = color+'22';
+                document.getElementById('phonicsGroupNum').textContent = 'Group ' + d.current_group + ' of 7';
+                const pbar = document.getElementById('phonicsPBar');
+                pbar.style.width = d.completion_pct + '%'; pbar.style.background = color;
+                document.getElementById('phonicsPLabel').textContent = d.drills_completed.length + '/5 drills · ' + d.completion_pct + '%';
+                if (d.next_drill) {
+                    document.getElementById('phonicsDrillSentence').textContent = '"' + d.next_drill.sentence + '"';
+                    document.getElementById('phonicsDrillTip').textContent = d.next_drill.tip;
+                }
+                if (d.dominant_errors && d.dominant_errors.length > 0) {
+                    const fe = document.getElementById('phonicsFocusErr');
+                    fe.style.display = 'block'; fe.textContent = 'Focus: ' + d.dominant_errors[0].replace(/_/g,' ');
+                }
+                document.getElementById('phonicsAdvBtn').style.display = d.completion_pct >= 80 ? 'inline-block' : 'none';
+                document.getElementById('phonicsCard').style.display = 'block';
+            } catch(e) {}
+        }
+        async function advancePhonics() {
+            const r = await fetch('/api/phonics/advance',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({studentId:'quy-bluetech'})});
+            const d = await r.json();
+            if (d.advanced) loadPhonics();
+        }
+        loadPhonics();
+        </script>
+
         <div class="content-card" id="lastClassCard">
             <div class="card-label">Lớp Hôm Qua — Last Class · 26 May 2026</div>
             <div style="font-family:'Rajdhani',sans-serif;font-size:0.88rem;color:var(--dim);margin-bottom:4px;">Topics: Thói quen hàng ngày · Health vocabulary · Kể chuyện quá khứ</div>
