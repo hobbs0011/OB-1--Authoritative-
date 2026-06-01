@@ -630,10 +630,65 @@ Any EC that breaks memory continuity is effectively P0 regardless of technical s
 
 ---
 
+## §15 SIMULATION LAW — PRODUCTION TEST PATH (Run 41 HARD LESSON)
+
+> **THIS IS NOT A SUGGESTION. THIS IS A LAW. VIOLATING IT COSTS 30+ MINUTES.**
+
+### THE LAW
+**The production simulation path is `/api/deepgram-token`, NOT `/api/chat`.**
+
+| Path | Model | What it tests |
+|------|-------|--------------|
+| `GET /api/deepgram-token?studentId=X&mode=free\|study\|phonics` | gpt-4o-mini via Deepgram think | ✅ REAL — exactly what students hear |
+| `POST /api/chat` | DeepSeek-V4-flash | ❌ WRONG — legacy text fallback, different model, different memory path |
+
+### WHAT HAPPENED (Run 41)
+Agent tested all 3 modes (free, study, phonics) via `POST /api/chat`. DeepSeek-V4-flash leaked reasoning chains in Chinese. Agent spent 30+ minutes building and thrashing sanitizer patterns (`^We\b`, `^We are meeting`, `^We need to`...). None of it mattered for production. The voice agent (Deepgram → gpt-4o-mini) does not have this problem. Eventually had to `git checkout -- index.js` mid-session after leaving it in broken state.
+
+### CORRECT SIMULATION COMMANDS
+```powershell
+$DEV = "https://net-pet-ai-dev.mrmichaelhobbs123.workers.dev"
+$SID = "sov100-test-magic"
+# See full OBI prompt for each mode — this IS what the student hears
+Invoke-RestMethod "$DEV/api/deepgram-token?studentId=$SID&mode=free"    | Select-Object -ExpandProperty settings | ConvertTo-Json -Depth 5
+Invoke-RestMethod "$DEV/api/deepgram-token?studentId=$SID&mode=study"   | Select-Object -ExpandProperty settings | ConvertTo-Json -Depth 5
+Invoke-RestMethod "$DEV/api/deepgram-token?studentId=$SID&mode=phonics" | ConvertTo-Json -Depth 5
+```
+
+### TO ADVANCE SIMULATION STATE (real KV writes)
+```powershell
+# Phonics: advance drill progress
+Invoke-RestMethod "$DEV/api/phonics/progress" -Method POST -ContentType "application/json" -Body (@{studentId=$SID;drill_id="hogfez-01";error_type="th_substitution"} | ConvertTo-Json)
+
+# Free/Study: advance session memory
+Invoke-RestMethod "$DEV/api/memory/$SID" -Method POST -ContentType "application/json" -Body (@{
+  world_model_update="C1 professional. Uses 'on the contrary' naturally. Filler word: 'basically' under pressure.";
+  session_summary="Practiced concise project status updates. 30-second drill.";
+  breakthrough="Cut 5-sentence explanation to 2 without prompting";
+  struggle="Still starts sentences with 'So...' under pressure"
+} | ConvertTo-Json)
+
+# Save vocab
+Invoke-RestMethod "$DEV/api/vocab/save" -Method POST -ContentType "application/json" -Body (@{studentId=$SID;word="articulate";meaning_vi="diễn đạt rõ ràng"} | ConvertTo-Json)
+
+# Log session completion
+Invoke-RestMethod "$DEV/api/agent/session" -Method POST -ContentType "application/json" -Body (@{studentId=$SID;turns=12;durationMs=420000;vocab=@("articulate","concise")} | ConvertTo-Json)
+```
+
+### KEY ARCHITECTURAL FACT
+`/api/chat` (DeepSeek) and `/api/deepgram-token` (gpt-4o-mini) have COMPLETELY DIFFERENT memory architectures:
+- **deepgram-token**: reads KV student_profile + vocab_list + vocab_arc + STUDENT_MEMORY DO + phonics_progress
+- **/api/chat**: reads Ledger DO + Profiles DO + Pets DO + Soul Logger HTTP + KV lang/profile
+
+Debugging DeepSeek behavior to fix voice agent issues = wrong diagnosis, wrong treatment.
+
+---
+
 ## §13 CHANGE LOG
 
 | Date | Run | Change |
 |------|-----|--------|
+| 2026-06-01 | 41 | §15 added: Simulation Law. Run 41 DeepSeek fuckup documented. Correct simulation commands and state-advance commands added. |
 | 2026-05-31 11:15 | 30 | Initial creation. 14 edge cases catalogued. SDK v5.3.0 CHANGELOG analyzed. |
 | 2026-05-31 12:45 | 30 SS | SUPER SAIYAN DEEP DIVE. EC-5 RESOLVED (message not content). EC-10 RESOLVED (updatePrompt). EC-19 RESOLVED (no Sydney endpoint). Added EC-15 through EC-22. Complete error/warning code registry from official docs. Browser Agent SDK gap analysis (9 features missing). Python SDK cross-intelligence (PY-531 UpdatePrompt retry). HN production benchmarks (500ms local vs 1.8s cloud). Competitor landscape (Vapi/Retell/LiveKit/Pipecat/ElevenLabs). Nova-3 accuracy gap documented. All doc URLs corrected and verified. Research queue updated with resolved items checked off. |
 - Run 26 Edge Cases: CANON/REINCARNATION/2026-05-30-run26-voice-agent-edge-cases.md
