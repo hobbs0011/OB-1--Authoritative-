@@ -75,7 +75,7 @@ Only promote to `net-pet-ai` (prod) after verified on dev. Never deploy untested
 
 ### Current Vector
 - **Active Mission:** OB-1 POST-MERGE9 CONSOLIDATION + Growth Infrastructure Buildout
-  - **Last completed:** ROMAN RUN 37 — Death-logging + marketing session. Obi Run 28-37 update copy synthesized (EN+VIE, 2x expanded). Lakeview beta outreach (10 spots, EN+VIE). General FB group version (EN+VIE). Private 1v1 + group training offer included. Version 0 baseline locked (Huong, Mai Tram, Quy). SOULCOUNT 65,281,497 TITANIUM_ANCHOR. HEAD 0767a25f.
+  - **Last completed:** ROMAN RUN 38 — Kilo Free Auto installed as T1 (Dialagram retired). PA v0.0.4 deployed. PCClaw rerouted. Version 0 locked (git tag v0, CF 180f125d). net-pet-ai-dev firewall worker live. All 7 portals + OBI verified. Phonics tracking blueprint written (Run 39 target). SOUL 66,799,653 TITANIUM_ANCHOR. Obi Run 28-37 update copy synthesized (EN+VIE, 2x expanded). Lakeview beta outreach (10 spots, EN+VIE). General FB group version (EN+VIE). Private 1v1 + group training offer included. Version 0 baseline locked (Huong, Mai Tram, Quy). SOULCOUNT 65,281,497 TITANIUM_ANCHOR. HEAD 0767a25f.
   - **Run 13 RISE (this session):** Full v4.0 chain audit complete. RRL-12.txt PRESENT (1,603 chars). FAILSAFE 8/10 — RRL-11.txt missing (documented run 11 gap). SOUL 896,459 TITANIUM_ANCHOR stagnant (δ=0). 4 pipeline gaps for run 12 (DNA/LEDGER/STARMAP/PIPELINE). HarvestedChats CLOSED per Michael directive.
   - **Prior milestone:** ROMAN RUN 0 — ERA RESET ratified. Phoenix-Centurion identity sealed. Roman Legion 6-stage doctrine deployed to soul-logger v2.2 (a0c99e4e). 4 legionnaires Romanized. /Centurion-Code renamed from /PhoenixCoder. /SupplyLines autonomous pipeline command + script created. Cloudflare paid tier activated. Founding Declaration sealed. HEAD 51ea010. SOULCOUNT 116,588 ANCHOR.
   - **S2Pipeline Status:** All 10 stages **LIVE** — confirmed by OMEGA audit Run 393
@@ -168,7 +168,7 @@ Only promote to `net-pet-ai` (prod) after verified on dev. Never deploy untested
 | **21** | **KILO TIER RESTRUCTURE** — PA T1-T4 tier restructure. Cerebras GPT-OSS-120B added. kilo.json wired. HEAD e9ac6a92. |
 
 ---
-**FINGERPRINT: RUN 36 | NET PHONICS SYSTEM + OBI MODE FIX | SOUL 64,727,297 TITANIUM_ANCHOR | HEAD 13a68324 | BOOT UPDATED 2026-05-31T23:45 ICT**
+**FINGERPRINT: RUN 38 | KILO T1 MIGRATION + VERSION 0 FIREWALL | SOUL 66,799,653 TITANIUM_ANCHOR | HEAD [post-death SHA] | BOOT UPDATED 2026-06-01T09:40 ICT**
 
 **Last completed:** ROMAN RUN 33 — Registry max upgrade + RRL 0-32 deep audit + supersaiyan PA T1 enforcement. MANDATORY-READS.md upgraded (BACKBURNER+CLASS-PREP to netpetai, pipeline+student task types added). context-bundle.ps1 expanded. supersaiyan.md hard-wired for PA T1. net-pet-ai deployed v7a5168b9. error_log D1 table created. Security flags raised: plaintext API keys in RRL-17 (Dialagram) + RRL-20 (Deepgram). New laws: L59 WAIT_FOR_GO, L60 MEMORY_IS_MOAT, L61 TOKEN_CONSERVATION. SOULCOUNT delta +862,783 (60,482,985→61,345,768).
 
@@ -181,6 +181,7 @@ Agent did not read any documentation. Falsely committed "implementations" that w
 Never hold working features in the working tree across runs. Commit after EVERY verified feature. Gapless audio v2/v3 was lost because it ran for 4 runs without a commit. This law prevents that class of loss forever.
 
 **Open Loops:**
+0. **KILO T1 TIMEOUT INVESTIGATION (Run 39)** — Kilo Free Auto timed out (30s) on large generation tasks (death seal). Investigate: PA timeout ceiling for T1, Kilo free-tier rate limits, direct-call vs proxy overhead. Fix before relying on Kilo for heavy T1 dispatch. See §7 + §8 run38-reincarnateDEATH.md.
 1. **BROWSER TEST VOICE AGENT** — Open magic-chat.html?studentId=quy-bluetech in browser, DevTools console, click mic. Confirm audio plays + OBI speaks. SettingsApplied is server-confirmed; this test validates full browser + mic path.
 2. **Deepgram Sydney region** — ~160ms RTT savings for VN users. Validate nova-3 + gpt-4o-mini in SYD. Add `region: "syd"` to Settings if available.
 3. **Curriculum State Injection** — UpdateInstructions mid-session stealth priming. Field name unverified — blocked until Deepgram doc confirms content field.
