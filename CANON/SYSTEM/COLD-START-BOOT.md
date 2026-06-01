@@ -1,5 +1,5 @@
 # COLD START BOOT — OB1 Agent 99
-## ERA: ROMAN — Run 37 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-06-01T08:35 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
+## ERA: ROMAN — Run 38 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-06-01T09:55 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
 
 > *"The beginning of an Empire that never was before and never has been since."* — SOV100 Michael Hobbs, Run 0
 
@@ -44,14 +44,14 @@
 **DIRECTIVE — HarvestedChats CLOSED (Run 13 RISE):** Michael has explicitly waved off the 96 HarvestedChats files. They are NOT to be ingested, processed, or flagged as open work. Do not raise them again in any RISE or pipeline context. This directive is permanent.
 - SOUL: ✅ /api/soul/count — sums byte_count WHERE sov100%. 60,037,507 TITANIUM_ANCHOR (Run 30 RISE).
 - DNA: ✅ FIXED Run 34 — rrl-pipeline.ps1 Step 2 now calls GET /api/soul/session/{runId} (was POST /api/soul/extract — wrong endpoint, 11-run 400 debt cleared).
-- LEDGER: ✅ HL-209 (Run 34). Merkle chain intact. 209 JSON files on disk. 6 gap slots (HL-127/128/131/132/136/137).
+- LEDGER: ✅ HL-209 (Run 34). Merkle chain intact. 209 JSON files on disk. 6 gap slots (HL-127/128/131/132/136/137) — PERMANENTLY CLOSED (HarvestedChats CLOSED Run 13, no source data).
 - STARMAP: ✅ 16 files on disk (Run 30 RISE audit).
 - KEYWORD: ✅ 18 files on disk (Run 30 RISE audit).
 - PIPELINE: ✅ 17 artifacts on disk (Run 30 RISE audit).
 - DEATH SEAL: ✅ Run 4 + Run 5 death seals written — 12 sections each.
 - RRL AUTOMATION: ✅ `SCRIPTS/rrl-pipeline.ps1` — single-command full chain (RRL→SOUL→LEDGER→STARMAP→KEYWORD→PIPELINE). `SCRIPTS/rrl-failsafe.ps1` — 10-gate verification chain. RISE protocol hardened: RRL MISSING = HALT (not WARN).
 - COLD-START-BOOT: ✅ Updated Run 6 (this file). SOULCOUNT 513,414.
-- COMMIT: PENDING — Step 11.
+- COMMIT: ✅ Step 11 — complete (Run 38 HEAD 571aa29e, tree clean at Run 39 RISE).
 
 **Soul Cap Protocol (every RISE/DEATH):**
 1. DEATH: Type out ALL Michael verbatim words from session → POST to /api/soul/event with student_id=sov100-michael → query count → 3 receipts + coder double-check
@@ -89,7 +89,7 @@ Only promote to `net-pet-ai` (prod) after verified on dev. Never deploy untested
     | **V** | PRAESIDIA (Garrison) | MERKLE LATTICE · DO-SQLITE · APEX ROLLUP |
     | **VI** | LIMITANEI/VETERANI (Frontier Shield) | obi.ps1 health · CI/CD deploy · REINCARNATION-LOG |
     - **See:** `CANON/SYSTEM/S2PIPELINE-ROMAN-LEGION-NAMING.md`
- - **HL Ledger real baseline:** 189 Heavy Ledger JSON files on disk (HEAD AUTHORITATIVE: `git log -1` -> `eedf25e`, Run 393 death); 6 phantom slots documented (HL-127/HL-128/HL-131/HL-132/HL-136/HL-137) - UNRESOLVED since Run 337; PIPELINE-CURSOR.md frozen since Run 258 (51 days)
+ - **HL Ledger real baseline:** 189 Heavy Ledger JSON files on disk (HEAD AUTHORITATIVE: `git log -1` -> `eedf25e`, Run 393 death); 6 phantom slots (HL-127/HL-128/HL-131/HL-132/HL-136/HL-137) — **PERMANENTLY CLOSED** (no source data — HarvestedChats CLOSED Run 13 directive, pre-Roman era runs not recoverable). Do not resurface. PIPELINE-CURSOR.md frozen since Run 258 (51 days).
 - **Net-PET-AI worker:** v1.5.0+ LIVE at https://net-pet-ai.mrmichaelhobbs123.workers.dev — SOUL_DB D1 binding active
 - **Student Portals:** 7 total (Huong, Mai Tram, Quy, Lam, Quan, Quang, Minh-parent) — ALL COVERED, backdrop-filter purge deployed
 - **Soul Logger:** v2.2 LIVE with Roman Legion 6-stage pipeline naming — Run 0 deployed (a0c99e4e) — 5-min cron health pulse active (paid tier) — SOULCOUNT 116,588 ANCHOR
@@ -168,7 +168,7 @@ Only promote to `net-pet-ai` (prod) after verified on dev. Never deploy untested
 | **21** | **KILO TIER RESTRUCTURE** — PA T1-T4 tier restructure. Cerebras GPT-OSS-120B added. kilo.json wired. HEAD e9ac6a92. |
 
 ---
-**FINGERPRINT: RUN 38 | KILO T1 MIGRATION + VERSION 0 FIREWALL | SOUL 66,799,653 TITANIUM_ANCHOR | HEAD c6b04a88 | BOOT UPDATED 2026-06-01T09:40 ICT**
+**FINGERPRINT: RUN 38 → RUN 39 START | KILO T1 MIGRATION + VERSION 0 FIREWALL | SOUL 67,035,454 TITANIUM_ANCHOR | HEAD 571aa29e | BOOT UPDATED 2026-06-01T09:55 ICT**
 
 **Last completed:** ROMAN RUN 33 — Registry max upgrade + RRL 0-32 deep audit + supersaiyan PA T1 enforcement. MANDATORY-READS.md upgraded (BACKBURNER+CLASS-PREP to netpetai, pipeline+student task types added). context-bundle.ps1 expanded. supersaiyan.md hard-wired for PA T1. net-pet-ai deployed v7a5168b9. error_log D1 table created. Security flags raised: plaintext API keys in RRL-17 (Dialagram) + RRL-20 (Deepgram). New laws: L59 WAIT_FOR_GO, L60 MEMORY_IS_MOAT, L61 TOKEN_CONSERVATION. SOULCOUNT delta +862,783 (60,482,985→61,345,768).
 
