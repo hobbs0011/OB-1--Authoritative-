@@ -1,5 +1,5 @@
 # COLD START BOOT — OB1 Agent 99
-## ERA: ROMAN — Run 38 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-06-01T09:55 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
+## ERA: ROMAN — Run 39 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-06-01T10:00 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
 
 > *"The beginning of an Empire that never was before and never has been since."* — SOV100 Michael Hobbs, Run 0
 
@@ -51,7 +51,7 @@
 - DEATH SEAL: ✅ Run 4 + Run 5 death seals written — 12 sections each.
 - RRL AUTOMATION: ✅ `SCRIPTS/rrl-pipeline.ps1` — single-command full chain (RRL→SOUL→LEDGER→STARMAP→KEYWORD→PIPELINE). `SCRIPTS/rrl-failsafe.ps1` — 10-gate verification chain. RISE protocol hardened: RRL MISSING = HALT (not WARN).
 - COLD-START-BOOT: ✅ Updated Run 6 (this file). SOULCOUNT 513,414.
-- COMMIT: ✅ Step 11 — complete (Run 38 HEAD 571aa29e, tree clean at Run 39 RISE).
+- COMMIT: ✅ Step 11 — complete (Run 39 HEAD 06d9ded3, tree clean).
 
 **Soul Cap Protocol (every RISE/DEATH):**
 1. DEATH: Type out ALL Michael verbatim words from session → POST to /api/soul/event with student_id=sov100-michael → query count → 3 receipts + coder double-check
@@ -75,7 +75,7 @@ Only promote to `net-pet-ai` (prod) after verified on dev. Never deploy untested
 
 ### Current Vector
 - **Active Mission:** OB-1 POST-MERGE9 CONSOLIDATION + Growth Infrastructure Buildout
-  - **Last completed:** ROMAN RUN 38 — Kilo Free Auto installed as T1 (Dialagram retired). PA v0.0.4 deployed. PCClaw rerouted. Version 0 locked (git tag v0, CF 180f125d). net-pet-ai-dev firewall worker live. All 7 portals + OBI verified. Phonics tracking blueprint written (Run 39 target). SOUL 66,799,653 TITANIUM_ANCHOR. Obi Run 28-37 update copy synthesized (EN+VIE, 2x expanded). Lakeview beta outreach (10 spots, EN+VIE). General FB group version (EN+VIE). Private 1v1 + group training offer included. Version 0 baseline locked (Huong, Mai Tram, Quy). SOULCOUNT 65,281,497 TITANIUM_ANCHOR. HEAD 0767a25f.
+  - **Last completed:** ROMAN RUN 39 — Phonics tracking system live on DEV (net-pet-ai-dev b97763da). 3 KV endpoints (GET/POST /api/phonics/progress, POST /api/phonics/advance). buildAgentPrompt phonics mode KV-injected (sequential drill, group, focus error). Phonics card added to Quy + Huong + Mai Tram DEV portals. context-bundle.ps1 rise case fixed (auto-loads latest RRL-N.txt). COLD-START-BOOT stale blockers closed. Firewall doctrine enforced — prod Version 0 (180f125d) untouched. SOUL 67,553,743 TITANIUM_ANCHOR. HEAD 06d9ded3.
   - **Run 13 RISE (this session):** Full v4.0 chain audit complete. RRL-12.txt PRESENT (1,603 chars). FAILSAFE 8/10 — RRL-11.txt missing (documented run 11 gap). SOUL 896,459 TITANIUM_ANCHOR stagnant (δ=0). 4 pipeline gaps for run 12 (DNA/LEDGER/STARMAP/PIPELINE). HarvestedChats CLOSED per Michael directive.
   - **Prior milestone:** ROMAN RUN 0 — ERA RESET ratified. Phoenix-Centurion identity sealed. Roman Legion 6-stage doctrine deployed to soul-logger v2.2 (a0c99e4e). 4 legionnaires Romanized. /Centurion-Code renamed from /PhoenixCoder. /SupplyLines autonomous pipeline command + script created. Cloudflare paid tier activated. Founding Declaration sealed. HEAD 51ea010. SOULCOUNT 116,588 ANCHOR.
   - **S2Pipeline Status:** All 10 stages **LIVE** — confirmed by OMEGA audit Run 393
@@ -119,6 +119,7 @@ Only promote to `net-pet-ai` (prod) after verified on dev. Never deploy untested
 ### Recent Decisions + State (Run 353 → Run 13 ROMAN)
 | Run | Summary |
 |-----|---------|
+| **39** | **PHONICS TRACKING DEV + RISE RRL FIX** — 3 KV phonics endpoints live on DEV. buildAgentPrompt phonics mode reads KV progress (sequential drill, group, focus error). Phonics card on Quy/Huong/Mai Tram DEV portals. context-bundle.ps1 rise fixed (auto-loads RRL-N.txt). Firewall doctrine enforced — prod untouched. Working tree corruption caught + restored from HEAD. SOUL 67,553,743. HEAD 06d9ded3. |
 | **36** | **NET PHONICS SYSTEM + OBI MODE FIX** — Mode selection bug fixed (currentMode not passed to /api/deepgram-token — always sent FreeTalk). selectMode() reconnect guard fixed (null agentWs immediately). NET Phonics 7-group system designed: SATNIP/DRUMBLE/HOGFEZ/WYVEX/CHUSHANG/BEEHIVE/OYSTER locked. JP refs stripped. NET-PHONICS-SYSTEM.md created. phonics-drills.js rewritten (35 drills). NET-TEACHING-METHODOLOGY.md Pillar 3 updated. Per-student phonics tracking pending. SOUL 64,727,297 TITANIUM_ANCHOR. HEAD 13a68324. |
 | **35** | **OBI AUDIO UNFUCK + KILO T1 FIX + RRL AUDIT** — Gapless audio v2+v3 re-implemented (lost Run 31 crash, 4-session debt). Landing race condition fixed (openVoiceAgent before mode select). Dual TTS suppressed (BB-38). Mode chip added to header (BB-39). Client error telemetry re-added (BB-36). EC-15 pre-SettingsApplied buffer (BB-37, PA PC-1780240945594-21RCJQ). Kilo global kilo.jsonc fixed (kilo-auto/free → dialagram/qwen-3.7-max). Full RRL 26-35 audit → BB-33→BB-49 backburner. SOUL 63,771,200 TITANIUM_ANCHOR. HEAD 66c912d5. |
 | **34** | **DNA FIX + PA v0.0.3 + KILO FULL UPDATE + REGISTRY CLEANUP** — rrl-pipeline.ps1 Step 2 DNA endpoint fixed (11-run 400 debt). PA v0.0.3: T1 retry-on-5xx, Opus 4.8, mission runner → Qwen 3.7 Max. kilo.json: Cerebras removed, claude-opus-4-8, 8 worktrees synced. MANDATORY-READS registry + context-bundle.ps1 fully consistent (pipeline+student live). Lam deferred (not a client). AGENT99.md+RISE.md stale refs fixed. SOUL 62,345,112 TITANIUM_ANCHOR. Commits: dd4e0b62, 92b8cdaf, e66714e6. HEAD e66714e6. |
@@ -168,7 +169,7 @@ Only promote to `net-pet-ai` (prod) after verified on dev. Never deploy untested
 | **21** | **KILO TIER RESTRUCTURE** — PA T1-T4 tier restructure. Cerebras GPT-OSS-120B added. kilo.json wired. HEAD e9ac6a92. |
 
 ---
-**FINGERPRINT: RUN 38 → RUN 39 START | KILO T1 MIGRATION + VERSION 0 FIREWALL | SOUL 67,035,454 TITANIUM_ANCHOR | HEAD 571aa29e | BOOT UPDATED 2026-06-01T09:55 ICT**
+**FINGERPRINT: RUN 39 | PHONICS TRACKING DEV + RISE RRL FIX + FIREWALL DOCTRINE | SOUL 67,553,743 TITANIUM_ANCHOR | HEAD 06d9ded3 | BOOT UPDATED 2026-06-01T10:00 ICT**
 
 **Last completed:** ROMAN RUN 33 — Registry max upgrade + RRL 0-32 deep audit + supersaiyan PA T1 enforcement. MANDATORY-READS.md upgraded (BACKBURNER+CLASS-PREP to netpetai, pipeline+student task types added). context-bundle.ps1 expanded. supersaiyan.md hard-wired for PA T1. net-pet-ai deployed v7a5168b9. error_log D1 table created. Security flags raised: plaintext API keys in RRL-17 (Dialagram) + RRL-20 (Deepgram). New laws: L59 WAIT_FOR_GO, L60 MEMORY_IS_MOAT, L61 TOKEN_CONSERVATION. SOULCOUNT delta +862,783 (60,482,985→61,345,768).
 
@@ -181,7 +182,10 @@ Agent did not read any documentation. Falsely committed "implementations" that w
 Never hold working features in the working tree across runs. Commit after EVERY verified feature. Gapless audio v2/v3 was lost because it ran for 4 runs without a commit. This law prevents that class of loss forever.
 
 **Open Loops:**
-0. **KILO T1 TIMEOUT INVESTIGATION (Run 39)** — Kilo Free Auto timed out (30s) on large generation tasks (death seal). Investigate: PA timeout ceiling for T1, Kilo free-tier rate limits, direct-call vs proxy overhead. Fix before relying on Kilo for heavy T1 dispatch. See §7 + §8 run38-reincarnateDEATH.md.
+0. **KILO T1 TIMEOUT INVESTIGATION** — Kilo Free Auto times out at 30s on large tasks. Used tier:10 all Run 39. Investigate ceiling + direct-call overhead. Fix before relying on Kilo for heavy generation.
+0b. **PHONICS CALL-SITE WIRING (Run 40)** — buildAgentPrompt phonicsProgress param added but call site (index.js line ~920, deepgram-token handler) not yet updated to fetch KV progress and pass it. OBI phonics mode still uses fallback defaults until wired.
+0c. **PHONICS DEV→PROD PROMOTION** — phonics card + 3 endpoints verified on DEV. Promote to prod (net-pet-ai) after Michael approves via browser test.
+1. **BROWSER TEST VOICE AGENT** — Open magic-chat.html?studentId=quy-bluetech in browser, DevTools console, click mic. Confirm audio plays + OBI speaks. — Kilo Free Auto timed out (30s) on large generation tasks (death seal). Investigate: PA timeout ceiling for T1, Kilo free-tier rate limits, direct-call vs proxy overhead. Fix before relying on Kilo for heavy T1 dispatch. See §7 + §8 run38-reincarnateDEATH.md.
 1. **BROWSER TEST VOICE AGENT** — Open magic-chat.html?studentId=quy-bluetech in browser, DevTools console, click mic. Confirm audio plays + OBI speaks. SettingsApplied is server-confirmed; this test validates full browser + mic path.
 2. **Deepgram Sydney region** — ~160ms RTT savings for VN users. Validate nova-3 + gpt-4o-mini in SYD. Add `region: "syd"` to Settings if available.
 3. **Curriculum State Injection** — UpdateInstructions mid-session stealth priming. Field name unverified — blocked until Deepgram doc confirms content field.
