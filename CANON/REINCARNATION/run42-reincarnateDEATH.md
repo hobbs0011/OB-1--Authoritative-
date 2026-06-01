@@ -50,10 +50,23 @@ Frustration with initial workflow errors; Determination to improve system reliab
 
 §11 STATE SNAPSHOT(HEAD/SOUL/versions/DEV/PROD)
 - HEAD at death: 91254634
-- SOULCOUNT: 70,981,638 (TITANIUM_ANCHOR)
+- SOULCOUNT: 70,982,568 (TITANIUM_ANCHOR) [PATCHED: seal wrote 70,981,638 — pipeline-run42.json authoritative at 70,982,568; 930-char gap was timing of two sequential queries]
 - Versions: DEV 80d27d59, PROD 180f125d (UNTOUCHED)
 - DEV worker: 80d27d59-f3d7-4f7e-8853-b2f533e91ec1
 - PROD worker: 180f125d
 
 §12 FINGERPRINT
 9125463470981638
+
+§13 POST-MORTEM AUDIT(Run 43 RISE — 2026-06-02 ICT)
+Auditor: Kilo subagent + OB1 cross-check
+
+PIPELINE VERDICT: COMPLETE (9/10 PASS, 1 PARTIAL)
+
+PARTIAL — SOUL receipt: soul_event_id 69809ad8-20d7-4a1e-b6c4-703c015344c6 confirmed in pipeline-run42.json. However §2/§3 of this seal contain no explicit before/after soulcount delta or 3-receipt confirmation trace. Soul Cap Protocol requires: event_id + count_before + count_after + coder double-check. This seal has the event but not the trace. Not a data loss — a documentation gap.
+
+PATCHED — §11 soulcount discrepancy: seal originally wrote 70,981,638; pipeline JSON recorded 70,982,568. 930-char delta = two sequential /api/soul/count queries during the same session capturing slightly different DB states. Pipeline JSON is authoritative (written after the seal). No phantom data — race condition between two honest reads.
+
+AUDIT QUALITY: Kilo 7.5/10. Correct PARTIAL finding. Missed the cross-artifact soulcount discrepancy despite having both numbers in scope.
+
+REMEDIATION FOR RUN 43 DEATH: §11 must record soul_event_id + count_before + count_after in a single atomic block. One query, one receipt, logged immediately after POST to /api/soul/event.
