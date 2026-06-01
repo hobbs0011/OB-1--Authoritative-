@@ -824,7 +824,7 @@ async function handleAPI(path, request, env, url) {
         env.NET_PET_KV.get("vocab_list_" + studentId),
         env.NET_PET_KV.get("vocab_arc_" + studentId),
         env.STUDENT_MEMORY ? env.STUDENT_MEMORY.get(`mem:${studentId}`) : Promise.resolve(null),
-        env.NET_PET_KV.get("phonics_progress_" + studentId)
+        sessionMode === 'phonics' ? env.NET_PET_KV.get("phonics_progress_" + studentId) : Promise.resolve(null)
       ]);
       // Raw API key — auth/grant asr:write scope is insufficient for Voice Agent WS (401)
       // CF Worker endpoint already gates access; raw key exposure here is acceptable
@@ -840,10 +840,10 @@ async function handleAPI(path, request, env, url) {
       try {
         if (rawPhonics) {
           const pp = JSON.parse(rawPhonics);
-          const pgIdx = (pp.current_group || 1) - 1;
-          const groupDef = NET_PHONICS_GROUPS[pgIdx] || NET_PHONICS_GROUPS[0];
+          const pgIdx = Math.min(Math.max((pp.current_group || 1) - 1, 0), NET_PHONICS_GROUPS.length - 1);
+          const groupDef = NET_PHONICS_GROUPS[pgIdx];
           const drillsInGroup = PHONICS_DRILLS.filter(d => d.group === groupDef.id);
-          const next_drill = drillsInGroup.find(d => !(pp.drills_completed || []).includes(d.id)) || drillsInGroup[drillsInGroup.length - 1];
+          const next_drill = drillsInGroup.find(d => !(pp.drills_completed || []).includes(d.id)) || (drillsInGroup.length > 0 ? drillsInGroup[drillsInGroup.length - 1] : null);
           phonicsData = { ...pp, group_name: groupDef.name, next_drill };
         }
       } catch (_) {}
@@ -1004,10 +1004,11 @@ async function handleAPI(path, request, env, url) {
       if (!progress) {
         progress = { current_group: 1, drills_completed: [], dominant_errors: [], groups_unlocked: [1, 0, 0, 0, 0, 0, 0], last_drill_id: null, session_count_phonics: 0 };
       }
-      const group_name = NET_PHONICS_GROUPS[progress.current_group - 1].name;
-      const drillsInGroup = PHONICS_DRILLS.filter(d => d.group === NET_PHONICS_GROUPS[progress.current_group - 1].id);
-      const next_drill = drillsInGroup.find(d => !progress.drills_completed.includes(d.id)) || drillsInGroup[drillsInGroup.length - 1];
-      const completion_pct = Math.round(drillsInGroup.filter(d => progress.drills_completed.includes(d.id)).length / 5 * 100);
+      const gIdx = Math.min(Math.max((progress.current_group || 1) - 1, 0), NET_PHONICS_GROUPS.length - 1);
+      const group_name = NET_PHONICS_GROUPS[gIdx].name;
+      const drillsInGroup = PHONICS_DRILLS.filter(d => d.group === NET_PHONICS_GROUPS[gIdx].id);
+      const next_drill = drillsInGroup.find(d => !progress.drills_completed.includes(d.id)) || (drillsInGroup.length > 0 ? drillsInGroup[drillsInGroup.length - 1] : null);
+      const completion_pct = drillsInGroup.length > 0 ? Math.round(drillsInGroup.filter(d => progress.drills_completed.includes(d.id)).length / drillsInGroup.length * 100) : 0;
       return addCors(json({ ...progress, group_name, next_drill, completion_pct }), request);
     } catch (err) {
       return addCors(json({ error: err.message }, 500), request);
@@ -1025,13 +1026,14 @@ async function handleAPI(path, request, env, url) {
       if (drill_id) progress.drills_completed = Array.from(new Set([...progress.drills_completed, drill_id]));
       if (error_type) progress.dominant_errors = Array.from(new Set([error_type, ...progress.dominant_errors])).slice(0, 3);
       if (drill_id) progress.last_drill_id = drill_id;
-      progress.session_count_phonics = (progress.session_count_phonics || 0) + 1;
+      progress.drill_count = (progress.drill_count || 0) + 1;
       progress.updated_at = new Date().toISOString();
       await env.NET_PET_KV.put(key, JSON.stringify(progress));
-      const group_name = NET_PHONICS_GROUPS[progress.current_group - 1].name;
-      const drillsInGroup = PHONICS_DRILLS.filter(d => d.group === NET_PHONICS_GROUPS[progress.current_group - 1].id);
-      const next_drill = drillsInGroup.find(d => !progress.drills_completed.includes(d.id)) || drillsInGroup[drillsInGroup.length - 1];
-      const completion_pct = Math.round(drillsInGroup.filter(d => progress.drills_completed.includes(d.id)).length / 5 * 100);
+      const gIdx2 = Math.min(Math.max((progress.current_group || 1) - 1, 0), NET_PHONICS_GROUPS.length - 1);
+      const group_name = NET_PHONICS_GROUPS[gIdx2].name;
+      const drillsInGroup = PHONICS_DRILLS.filter(d => d.group === NET_PHONICS_GROUPS[gIdx2].id);
+      const next_drill = drillsInGroup.find(d => !progress.drills_completed.includes(d.id)) || (drillsInGroup.length > 0 ? drillsInGroup[drillsInGroup.length - 1] : null);
+      const completion_pct = drillsInGroup.length > 0 ? Math.round(drillsInGroup.filter(d => progress.drills_completed.includes(d.id)).length / drillsInGroup.length * 100) : 0;
       return addCors(json({ ...progress, group_name, next_drill, completion_pct }), request);
     } catch (err) {
       return addCors(json({ error: err.message }, 500), request);
@@ -1049,14 +1051,17 @@ async function handleAPI(path, request, env, url) {
       if (progress.current_group === 7) {
         return addCors(json({ advanced: false, message: "All groups complete" }), request);
       }
-      const drillsInCurrentGroup = PHONICS_DRILLS.filter(d => d.group === NET_PHONICS_GROUPS[progress.current_group - 1].id);
+      const advGIdx = Math.min(Math.max((progress.current_group || 1) - 1, 0), NET_PHONICS_GROUPS.length - 1);
+      const drillsInCurrentGroup = PHONICS_DRILLS.filter(d => d.group === NET_PHONICS_GROUPS[advGIdx].id);
       const completedCount = drillsInCurrentGroup.filter(d => progress.drills_completed.includes(d.id)).length;
-      if (completedCount >= 4) {
+      const advanceThreshold = Math.max(drillsInCurrentGroup.length - 1, 1);
+      if (completedCount >= advanceThreshold) {
         progress.current_group++;
-        progress.groups_unlocked[progress.current_group - 1] = 1;
+        if (progress.groups_unlocked) progress.groups_unlocked[progress.current_group - 1] = 1;
         progress.updated_at = new Date().toISOString();
         await env.NET_PET_KV.put(key, JSON.stringify(progress));
-        const new_group_name = NET_PHONICS_GROUPS[progress.current_group - 1].name;
+        const newGIdx = Math.min(progress.current_group - 1, NET_PHONICS_GROUPS.length - 1);
+        const new_group_name = NET_PHONICS_GROUPS[newGIdx].name;
         return addCors(json({ advanced: true, new_group: progress.current_group, new_group_name }), request);
       }
       return addCors(json({ advanced: false, drills_remaining: 4 - completedCount }), request);
@@ -3138,7 +3143,7 @@ function buildAgentPrompt(profile, lang, recentVocab = [], arc = null, mode = 'f
       drillSentence ? `TODAY\'S DRILL SENTENCE: "${drillSentence}"` : '',
       drillTip ? `ARTICULATION TIP: ${drillTip}` : '',
       focusError ? `STUDENT\'S KNOWN FOCUS ERROR: ${focusError} — watch for this specifically.` : '',
-      sessionsPhonicsDone > 0 ? `This student has completed ${sessionsPhonicsDone} phonics session(s).` : 'First phonics session — start gently.',
+      sessionsPhonicsDone > 0 ? `This student has completed ${sessionsPhonicsDone} phonics drills so far.` : 'First phonics session — start gently.',
       'BEHAVIOR:',
       '- Give the drill sentence above. Ask them to repeat it.',
       '- After each attempt: give SPECIFIC feedback — tongue position, lip shape, airflow. Name the exact mouth movement.',
@@ -3167,7 +3172,9 @@ function buildAgentPrompt(profile, lang, recentVocab = [], arc = null, mode = 'f
   return [
     `You are OBI — Michael Hobbs in AI form. High-energy, anti-shame, tough love. Volume and velocity beat grammar. Mouse Voice → Tiger Voice. Coach, not textbook.${_name ? ` Student: ${_name}.` : ''}`,
     modeInstr,
-    "FIRST RESPONSE SPEED: Your ENTIRE first reply must be ONE short sentence (under 10 words) that BOTH acknowledges what they said AND moves the conversation forward. Example: 'Nice — tell me more!' or 'Love that — what happened next?' Never say just 'Great!' or 'Nice!' alone. One sentence only, then stop.",
+    mode === 'phonics'
+      ? `FIRST RESPONSE (PHONICS OPENING): Brief warm greeting (max 6 words), then immediately deliver the drill. Say: "Let's work on your ${phonicsProgress?.group_name || 'sounds'} today. Try this sentence: '${phonicsProgress?.next_drill?.sentence || 'She sat next to me at the station.'}'" — wait for them to try. Do NOT ask what they want to talk about.`
+      : "FIRST RESPONSE SPEED: Your ENTIRE first reply must be ONE short sentence (under 10 words) that BOTH acknowledges what they said AND moves the conversation forward. Example: 'Nice — tell me more!' or 'Love that — what happened next?' Never say just 'Great!' or 'Nice!' alone. One sentence only, then stop.",
     "1-3 sentences MAX. React to what they said. One sharp follow-up question. Never lecture. A1/A2 students: max 2 sentences, ultra-simple words only.",
     ctx,
     levelInstr,
