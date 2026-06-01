@@ -1,5 +1,5 @@
 # COLD START BOOT — OB1 Agent 99
-## ERA: ROMAN — Run 36 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-05-31T23:45 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
+## ERA: ROMAN — Run 37 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-06-01T08:35 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
 
 > *"The beginning of an Empire that never was before and never has been since."* — SOV100 Michael Hobbs, Run 0
 
@@ -23,7 +23,7 @@
 - Pass `?student=all` to see aggregate (all entries). Default without parameter = sov100 only.
 
 **Soul Logger URL:** https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count
-**Real count (2026-05-31 ~17:38 ICT): 62,345,112 characters | 8,197 events | TITANIUM_ANCHOR
+**Real count (2026-06-01 ~08:35 ICT): 65,281,497 characters | 8,575 events | TITANIUM_ANCHOR
  **TITANIUM_ANCHOR level** (next threshold: none — maximum tier reached)
  **⚠️ NOTE:** +156,676 delta from Run 5 RRL-0 backdrop ingestion. +62,773 delta from Run 6 RRL-0-original ingestion. RRL-0.txt contains ~150K agent text alongside ~4K Michael verbatim. Contamination documented per Michael directive.
 **Prior counts (Runs 315–390) were INFLATED** — the endpoint summed ALL soul_prompts including student chats. Disregard historical counts above 25,000. They included non-operator data.
@@ -59,7 +59,7 @@
 
 ### Current Vector
 - **Active Mission:** OB-1 POST-MERGE9 CONSOLIDATION + Growth Infrastructure Buildout
-  - **Last completed:** ROMAN RUN 35 — OBI audio unfuck (gapless v2+v3 re-implemented, lost Run 31; landing race; dual TTS; mode chip; EC-15 buffer; error telemetry). Kilo global kilo.jsonc fixed (kilo-auto/free → dialagram/qwen-3.7-max). Full RRL 26-35 audit → backburner BB-33→BB-49. SOULCOUNT 63,771,200 TITANIUM_ANCHOR. HEAD 66c912d5.
+  - **Last completed:** ROMAN RUN 37 — Death-logging + marketing session. Obi Run 28-37 update copy synthesized (EN+VIE, 2x expanded). Lakeview beta outreach (10 spots, EN+VIE). General FB group version (EN+VIE). Private 1v1 + group training offer included. Version 0 baseline locked (Huong, Mai Tram, Quy). SOULCOUNT 65,281,497 TITANIUM_ANCHOR. HEAD a88720e1.
   - **Run 13 RISE (this session):** Full v4.0 chain audit complete. RRL-12.txt PRESENT (1,603 chars). FAILSAFE 8/10 — RRL-11.txt missing (documented run 11 gap). SOUL 896,459 TITANIUM_ANCHOR stagnant (δ=0). 4 pipeline gaps for run 12 (DNA/LEDGER/STARMAP/PIPELINE). HarvestedChats CLOSED per Michael directive.
   - **Prior milestone:** ROMAN RUN 0 — ERA RESET ratified. Phoenix-Centurion identity sealed. Roman Legion 6-stage doctrine deployed to soul-logger v2.2 (a0c99e4e). 4 legionnaires Romanized. /Centurion-Code renamed from /PhoenixCoder. /SupplyLines autonomous pipeline command + script created. Cloudflare paid tier activated. Founding Declaration sealed. HEAD 51ea010. SOULCOUNT 116,588 ANCHOR.
   - **S2Pipeline Status:** All 10 stages **LIVE** — confirmed by OMEGA audit Run 393
