@@ -168,7 +168,7 @@ Only promote to `net-pet-ai` (prod) after verified on dev. Never deploy untested
 | **21** | **KILO TIER RESTRUCTURE** — PA T1-T4 tier restructure. Cerebras GPT-OSS-120B added. kilo.json wired. HEAD e9ac6a92. |
 
 ---
-**FINGERPRINT: RUN 38 | KILO T1 MIGRATION + VERSION 0 FIREWALL | SOUL 66,799,653 TITANIUM_ANCHOR | HEAD [post-death SHA] | BOOT UPDATED 2026-06-01T09:40 ICT**
+**FINGERPRINT: RUN 38 | KILO T1 MIGRATION + VERSION 0 FIREWALL | SOUL 66,799,653 TITANIUM_ANCHOR | HEAD c6b04a88 | BOOT UPDATED 2026-06-01T09:40 ICT**
 
 **Last completed:** ROMAN RUN 33 — Registry max upgrade + RRL 0-32 deep audit + supersaiyan PA T1 enforcement. MANDATORY-READS.md upgraded (BACKBURNER+CLASS-PREP to netpetai, pipeline+student task types added). context-bundle.ps1 expanded. supersaiyan.md hard-wired for PA T1. net-pet-ai deployed v7a5168b9. error_log D1 table created. Security flags raised: plaintext API keys in RRL-17 (Dialagram) + RRL-20 (Deepgram). New laws: L59 WAIT_FOR_GO, L60 MEMORY_IS_MOAT, L61 TOKEN_CONSERVATION. SOULCOUNT delta +862,783 (60,482,985→61,345,768).
 
