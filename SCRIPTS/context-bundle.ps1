@@ -101,6 +101,13 @@ switch ($TaskType) {
         $docs["cold_start_boot"] = Get-SafeContent -Path "CANON/SYSTEM/COLD-START-BOOT.md"
         $docs["git_state"] = Get-GitLog -Count 5
         $docs["git_status"] = Get-GitStatusShort
+        $latestRRL = Get-ChildItem "RRL/RRL-*.txt" |
+            Where-Object { $_.BaseName -match '^RRL-\d+$' } |
+            Sort-Object { [int]($_.BaseName -replace 'RRL-', '') } -Descending |
+            Select-Object -First 1
+        if ($latestRRL) {
+            $docs["last_session_rrl"] = Get-SafeContent -Path $latestRRL.FullName -MaxChars 6000
+        }
     }
     "pipeline" {
         $docs["backburner"] = Get-SafeContent -Path "OPERATIONS/BACKBURNER-PIPELINE-LOG.md" -MaxChars 8000
