@@ -46,7 +46,7 @@
 - DNA: ✅ FIXED Run 34 — rrl-pipeline.ps1 Step 2 now calls GET /api/soul/session/{runId} (was POST /api/soul/extract — wrong endpoint, 11-run 400 debt cleared).
 - LEDGER: ✅ HL-209 (Run 34). Merkle chain intact. 209 JSON files on disk. 6 gap slots (HL-127/128/131/132/136/137) — PERMANENTLY CLOSED (HarvestedChats CLOSED Run 13, no source data).
 - STARMAP: ✅ 16 files on disk (Run 30 RISE audit).
-- KEYWORD: ✅ 18 files on disk (Run 30 RISE audit).
+- KEYWORD: ✅ 41 rfkw-run files on disk (Run 43 recovery). 306 unique terms. Inverted index rebuilt (`CANON/SOUL-KEYWORDS/inverted-index.json`). Search script `SCRIPTS/rfkw-search.ps1` added. 6 data gaps remain: Runs 8, 9, 11, 14, 15, 27 (no RRL/deathseal/pipeline source found). Integration into `context-bundle.ps1` pending.
 - PIPELINE: ✅ 17 artifacts on disk (Run 30 RISE audit).
 - DEATH SEAL: ✅ Run 4 + Run 5 death seals written — 12 sections each.
 - RRL AUTOMATION: ✅ `SCRIPTS/rrl-pipeline.ps1` — single-command full chain (RRL→SOUL→LEDGER→STARMAP→KEYWORD→PIPELINE). `SCRIPTS/rrl-failsafe.ps1` — 10-gate verification chain. RISE protocol hardened: RRL MISSING = HALT (not WARN).

@@ -1,30 +1,20 @@
-4 | your
-3 | fuckup
-3 | "read
-3 | using
-3 | Deepgram
-2 | "DONT
-2 | happen
-2 | next
-2 | runs
-2 | fucking
-2 | doesnt
-1 | operations,
-1 | RISE"
-1 | registry
-1 | real
-1 | question.
-1 | process,
-1 | past
-1 | previous
-1 | ROMAN
-1 | pipeline
-1 | ONLY"
-1 | phetrails
-1 | PROPERLY.
-1 | possible
-1 | Run40
-1 | RRLS"
-1 | WORKING
-1 | VERSIONS
-1 | VERBATIM
+5 | pipeline | run
+5 | core | canon
+5 | system | api
+5 | core | agent
+5 | audio | deepgram
+5 | core | path
+5 | core | json
+5 | pipeline | pipeline
+5 | core | read
+5 | core | deepseek
+5 | core | mode
+5 | core | phetrails
+5 | core | michael
+5 | pipeline | death
+5 | core | simulation
+5 | core | skill
+5 | core | law
+5 | core | txt
+5 | core | fuckup
+5 | audio | deepgram-token

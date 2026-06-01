@@ -1,13 +1,20 @@
-reincarnateDeath | run29 | HL-206 | weight=1
-RRL | run29 | HL-206 | weight=1
-OBI | run29 | HL-206 | weight=1
-voice-agent | run29 | HL-206 | weight=1
-deepgram | run29 | HL-206 | weight=1
-portal | run29 | HL-206 | weight=1
-Quy | run29 | HL-206 | weight=1
-Mai-Tram | run29 | HL-206 | weight=1
-class-review | run29 | HL-206 | weight=1
-audio-clips | run29 | HL-206 | weight=1
-male-voice | run29 | HL-206 | weight=1
-auto-connect | run29 | HL-206 | weight=1
-edge-cases | run29 | HL-206 | weight=1
+5 | core | obi
+5 | audio | voice
+5 | pipeline | rrl
+5 | pipeline | run
+5 | core | txt
+5 | core | status
+5 | core | agent
+5 | pipeline | pipeline
+5 | core | canon
+5 | student | quy
+4 | core | needs
+4 | audio | deepgram
+4 | portal | portal
+4 | core | chars
+4 | audio | session
+4 | core | written
+3 | core | find
+3 | core | reincarnatedeath
+3 | core | last
+3 | core | connect

@@ -1,14 +1,20 @@
-{
-  "keywords": [
-    "STT",
-    "Deepgram",
-    "Qwen-Max",
-    "Mic-Pipeline",
-    "Voice-Error",
-    "Safari-Support",
-    "WebSocket-Proxy",
-    "AudioWorklet"
-  ],
-  "timestamp": "2026-05-28T04:03:39.1403378+07:00",
-  "run": 20
-}
+5 | core | fucking
+4 | core | max
+4 | core | works
+3 | core | fix
+3 | core | test
+3 | core | yourself
+3 | core | doesnt
+3 | audio | deepgram
+3 | core | txt
+3 | core | canon
+2 | core | now
+2 | system | deploy
+2 | core | actually
+2 | core | buffering
+2 | core | button
+2 | core | instead
+2 | core | ensure
+2 | mobile | safari
+2 | core | seconds
+2 | core | continue

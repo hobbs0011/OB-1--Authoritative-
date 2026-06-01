@@ -1,150 +1,3914 @@
 {
-  "RISE": [
-    "24A | HL-203 | weight=1"
+  "never": [
+    {
+      "run": 0,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 6,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 31,
+      "category": "core",
+      "weight": 5
+    }
   ],
-  "preserved": [
-    "24A | HL-203 | weight=1"
+  "soul": [
+    {
+      "run": 0,
+      "category": "pipeline",
+      "weight": 5
+    },
+    {
+      "run": 1,
+      "category": "pipeline",
+      "weight": 2
+    },
+    {
+      "run": 4,
+      "category": "pipeline",
+      "weight": 3
+    },
+    {
+      "run": 6,
+      "category": "pipeline",
+      "weight": 5
+    },
+    {
+      "run": 7,
+      "category": "pipeline",
+      "weight": 3
+    },
+    {
+      "run": 23,
+      "category": "pipeline",
+      "weight": 3
+    },
+    {
+      "run": 24,
+      "category": "pipeline",
+      "weight": 1
+    },
+    {
+      "run": 25,
+      "category": "pipeline",
+      "weight": 5
+    },
+    {
+      "run": 33,
+      "category": "pipeline",
+      "weight": 5
+    }
   ],
-  "reincarnatedeath": [
-    "24A | HL-203 | weight=1"
+  "roman": [
+    {
+      "run": 0,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 6,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 24,
+      "category": "core",
+      "weight": 1
+    }
   ],
-  "laws_intact": [
-    "24A | HL-203 | weight=1"
+  "scouts": [
+    {
+      "run": 0,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 6,
+      "category": "core",
+      "weight": 5
+    }
   ],
-  "SUPER_SAIYAN": [
-    "24A | HL-203 | weight=1"
+  "stop": [
+    {
+      "run": 0,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 6,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 12,
+      "category": "core",
+      "weight": 3
+    },
+    {
+      "run": 21,
+      "category": "core",
+      "weight": 3
+    }
   ],
-  "coordinate": [
-    "24A | HL-203 | weight=1"
+  "michael": [
+    {
+      "run": 0,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 5,
+      "category": "core",
+      "weight": 3
+    },
+    {
+      "run": 6,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 7,
+      "category": "core",
+      "weight": 3
+    },
+    {
+      "run": 16,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 28,
+      "category": "core",
+      "weight": 3
+    },
+    {
+      "run": 35,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 36,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 40,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 41,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "doctrine": [
+    {
+      "run": 0,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 6,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "run": [
+    {
+      "run": 0,
+      "category": "pipeline",
+      "weight": 5
+    },
+    {
+      "run": 1,
+      "category": "pipeline",
+      "weight": 5
+    },
+    {
+      "run": 5,
+      "category": "pipeline",
+      "weight": 2
+    },
+    {
+      "run": 6,
+      "category": "pipeline",
+      "weight": 5
+    },
+    {
+      "run": 7,
+      "category": "pipeline",
+      "weight": 4
+    },
+    {
+      "run": 16,
+      "category": "pipeline",
+      "weight": 5
+    },
+    {
+      "run": 17,
+      "category": "pipeline",
+      "weight": 4
+    },
+    {
+      "run": 18,
+      "category": "pipeline",
+      "weight": 3
+    },
+    {
+      "run": 23,
+      "category": "pipeline",
+      "weight": 2
+    },
+    {
+      "run": 25,
+      "category": "pipeline",
+      "weight": 5
+    },
+    {
+      "run": 26,
+      "category": "pipeline",
+      "weight": 4
+    },
+    {
+      "run": 29,
+      "category": "pipeline",
+      "weight": 5
+    },
+    {
+      "run": 31,
+      "category": "pipeline",
+      "weight": 5
+    },
+    {
+      "run": 32,
+      "category": "pipeline",
+      "weight": 5
+    },
+    {
+      "run": 33,
+      "category": "pipeline",
+      "weight": 5
+    },
+    {
+      "run": 34,
+      "category": "pipeline",
+      "weight": 5
+    },
+    {
+      "run": 35,
+      "category": "pipeline",
+      "weight": 5
+    },
+    {
+      "run": 38,
+      "category": "pipeline",
+      "weight": 5
+    },
+    {
+      "run": 40,
+      "category": "pipeline",
+      "weight": 5
+    },
+    {
+      "run": 41,
+      "category": "pipeline",
+      "weight": 5
+    },
+    {
+      "run": 42,
+      "category": "pipeline",
+      "weight": 5
+    }
+  ],
+  "write-host": [
+    {
+      "run": 0,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 6,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "death": [
+    {
+      "run": 0,
+      "category": "pipeline",
+      "weight": 5
+    },
+    {
+      "run": 1,
+      "category": "pipeline",
+      "weight": 2
+    },
+    {
+      "run": 4,
+      "category": "pipeline",
+      "weight": 2
+    },
+    {
+      "run": 6,
+      "category": "pipeline",
+      "weight": 5
+    },
+    {
+      "run": 17,
+      "category": "pipeline",
+      "weight": 3
+    },
+    {
+      "run": 23,
+      "category": "pipeline",
+      "weight": 2
+    },
+    {
+      "run": 24,
+      "category": "pipeline",
+      "weight": 1
+    },
+    {
+      "run": 32,
+      "category": "pipeline",
+      "weight": 5
+    },
+    {
+      "run": 34,
+      "category": "pipeline",
+      "weight": 5
+    },
+    {
+      "run": 35,
+      "category": "pipeline",
+      "weight": 5
+    },
+    {
+      "run": 41,
+      "category": "pipeline",
+      "weight": 5
+    }
+  ],
+  "chat": [
+    {
+      "run": 0,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 6,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 18,
+      "category": "core",
+      "weight": 1
+    },
+    {
+      "run": 22,
+      "category": "core",
+      "weight": 4
+    },
+    {
+      "run": 25,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 31,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 35,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 40,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "command": [
+    {
+      "run": 0,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 6,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "rrl": [
+    {
+      "run": 0,
+      "category": "pipeline",
+      "weight": 5
+    },
+    {
+      "run": 1,
+      "category": "pipeline",
+      "weight": 5
+    },
+    {
+      "run": 4,
+      "category": "pipeline",
+      "weight": 5
+    },
+    {
+      "run": 5,
+      "category": "pipeline",
+      "weight": 5
+    },
+    {
+      "run": 6,
+      "category": "pipeline",
+      "weight": 5
+    },
+    {
+      "run": 7,
+      "category": "pipeline",
+      "weight": 3
+    },
+    {
+      "run": 17,
+      "category": "pipeline",
+      "weight": 4
+    },
+    {
+      "run": 24,
+      "category": "pipeline",
+      "weight": 1
+    },
+    {
+      "run": 25,
+      "category": "pipeline",
+      "weight": 5
+    },
+    {
+      "run": 26,
+      "category": "pipeline",
+      "weight": 2
+    },
+    {
+      "run": 29,
+      "category": "pipeline",
+      "weight": 5
+    },
+    {
+      "run": 33,
+      "category": "pipeline",
+      "weight": 5
+    },
+    {
+      "run": 35,
+      "category": "pipeline",
+      "weight": 5
+    },
+    {
+      "run": 39,
+      "category": "pipeline",
+      "weight": 5
+    }
+  ],
+  "centurion-code": [
+    {
+      "run": 0,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 6,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "file": [
+    {
+      "run": 0,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 5,
+      "category": "core",
+      "weight": 2
+    },
+    {
+      "run": 6,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 42,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "hobbs": [
+    {
+      "run": 0,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 6,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "commit": [
+    {
+      "run": 0,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 6,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 18,
+      "category": "core",
+      "weight": 2
+    },
+    {
+      "run": 19,
+      "category": "core",
+      "weight": 3
+    },
+    {
+      "run": 32,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 34,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "are": [
+    {
+      "run": 0,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 6,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 7,
+      "category": "core",
+      "weight": 3
+    },
+    {
+      "run": 12,
+      "category": "core",
+      "weight": 4
+    },
+    {
+      "run": 16,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 21,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 22,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 28,
+      "category": "core",
+      "weight": 2
+    },
+    {
+      "run": 30,
+      "category": "core",
+      "weight": 3
+    },
+    {
+      "run": 36,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 39,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "rome": [
+    {
+      "run": 0,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 6,
+      "category": "core",
+      "weight": 5
+    }
   ],
   "pipeline": [
-    "24A | HL-203 | weight=1"
+    {
+      "run": 0,
+      "category": "pipeline",
+      "weight": 5
+    },
+    {
+      "run": 4,
+      "category": "pipeline",
+      "weight": 5
+    },
+    {
+      "run": 24,
+      "category": "pipeline",
+      "weight": 1
+    },
+    {
+      "run": 25,
+      "category": "pipeline",
+      "weight": 5
+    },
+    {
+      "run": 26,
+      "category": "pipeline",
+      "weight": 2
+    },
+    {
+      "run": 29,
+      "category": "pipeline",
+      "weight": 5
+    },
+    {
+      "run": 33,
+      "category": "pipeline",
+      "weight": 5
+    },
+    {
+      "run": 34,
+      "category": "pipeline",
+      "weight": 5
+    },
+    {
+      "run": 41,
+      "category": "pipeline",
+      "weight": 5
+    },
+    {
+      "run": 42,
+      "category": "pipeline",
+      "weight": 4
+    }
   ],
-  "Deepgram": [
-    "24A | HL-203 | weight=1",
-    "run30 | HL-207 | weight=2"
+  "count": [
+    {
+      "run": 1,
+      "category": "core",
+      "weight": 5
+    }
   ],
-  "api_key": [
-    "24A | HL-203 | weight=1"
+  "fucking": [
+    {
+      "run": 1,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 12,
+      "category": "core",
+      "weight": 4
+    },
+    {
+      "run": 16,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 20,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 21,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 30,
+      "category": "core",
+      "weight": 4
+    },
+    {
+      "run": 37,
+      "category": "core",
+      "weight": 2
+    },
+    {
+      "run": 39,
+      "category": "core",
+      "weight": 5
+    }
   ],
-  "override": [
-    "24A | HL-203 | weight=1"
+  "copy": [
+    {
+      "run": 1,
+      "category": "core",
+      "weight": 5
+    }
   ],
-  "test": [
-    "run30 | HL-207 | weight=2"
+  "paste": [
+    {
+      "run": 1,
+      "category": "core",
+      "weight": 5
+    }
   ],
-  "have": [
-    "run30 | HL-207 | weight=4"
+  "characters": [
+    {
+      "run": 1,
+      "category": "core",
+      "weight": 4
+    }
   ],
-  "edge": [
-    "run30 | HL-207 | weight=3"
+  "since": [
+    {
+      "run": 1,
+      "category": "core",
+      "weight": 4
+    }
+  ],
+  "character": [
+    {
+      "run": 1,
+      "category": "core",
+      "weight": 3
+    },
+    {
+      "run": 24,
+      "category": "core",
+      "weight": 1
+    }
+  ],
+  "crypto": [
+    {
+      "run": 1,
+      "category": "core",
+      "weight": 3
+    }
+  ],
+  "tell": [
+    {
+      "run": 1,
+      "category": "core",
+      "weight": 2
+    }
+  ],
+  "raw": [
+    {
+      "run": 1,
+      "category": "core",
+      "weight": 2
+    }
+  ],
+  "maybe": [
+    {
+      "run": 1,
+      "category": "core",
+      "weight": 2
+    }
+  ],
+  "ob-1-canonical": [
+    {
+      "run": 1,
+      "category": "core",
+      "weight": 2
+    },
+    {
+      "run": 5,
+      "category": "core",
+      "weight": 4
+    },
+    {
+      "run": 7,
+      "category": "core",
+      "weight": 4
+    },
+    {
+      "run": 12,
+      "category": "core",
+      "weight": 4
+    },
+    {
+      "run": 25,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 37,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 39,
+      "category": "core",
+      "weight": 4
+    }
+  ],
+  "answer": [
+    {
+      "run": 1,
+      "category": "core",
+      "weight": 2
+    }
+  ],
+  "post-death": [
+    {
+      "run": 1,
+      "category": "pipeline",
+      "weight": 2
+    }
+  ],
+  "those": [
+    {
+      "run": 1,
+      "category": "core",
+      "weight": 2
+    }
+  ],
+  "rise": [
+    {
+      "run": 1,
+      "category": "pipeline",
+      "weight": 2
+    },
+    {
+      "run": 18,
+      "category": "pipeline",
+      "weight": 2
+    },
+    {
+      "run": 24,
+      "category": "pipeline",
+      "weight": 1
+    },
+    {
+      "run": 26,
+      "category": "pipeline",
+      "weight": 1
+    },
+    {
+      "run": 32,
+      "category": "pipeline",
+      "weight": 5
+    },
+    {
+      "run": 34,
+      "category": "pipeline",
+      "weight": 5
+    },
+    {
+      "run": 39,
+      "category": "pipeline",
+      "weight": 5
+    }
+  ],
+  "step": [
+    {
+      "run": 4,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 5,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 16,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 25,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "name": [
+    {
+      "run": 4,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 5,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "status": [
+    {
+      "run": 4,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 5,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 29,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "canon": [
+    {
+      "run": 4,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 7,
+      "category": "core",
+      "weight": 3
+    },
+    {
+      "run": 12,
+      "category": "core",
+      "weight": 3
+    },
+    {
+      "run": 16,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 17,
+      "category": "core",
+      "weight": 3
+    },
+    {
+      "run": 20,
+      "category": "core",
+      "weight": 3
+    },
+    {
+      "run": 21,
+      "category": "core",
+      "weight": 3
+    },
+    {
+      "run": 25,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 26,
+      "category": "core",
+      "weight": 3
+    },
+    {
+      "run": 29,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 30,
+      "category": "core",
+      "weight": 3
+    },
+    {
+      "run": 32,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 34,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 35,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 36,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 37,
+      "category": "core",
+      "weight": 3
+    },
+    {
+      "run": 39,
+      "category": "core",
+      "weight": 4
+    },
+    {
+      "run": 41,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "pass": [
+    {
+      "run": 4,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 5,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 26,
+      "category": "core",
+      "weight": 2
+    }
+  ],
+  "starmap": [
+    {
+      "run": 4,
+      "category": "pipeline",
+      "weight": 5
+    },
+    {
+      "run": 26,
+      "category": "pipeline",
+      "weight": 2
+    }
+  ],
+  "soul-keywords": [
+    {
+      "run": 4,
+      "category": "pipeline",
+      "weight": 4
+    }
+  ],
+  "artifact": [
+    {
+      "run": 4,
+      "category": "pipeline",
+      "weight": 4
+    }
+  ],
+  "pending": [
+    {
+      "run": 4,
+      "category": "revenue",
+      "weight": 4
+    }
+  ],
+  "specification": [
+    {
+      "run": 4,
+      "category": "core",
+      "weight": 3
+    }
+  ],
+  "original": [
+    {
+      "run": 4,
+      "category": "core",
+      "weight": 3
+    },
+    {
+      "run": 31,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "txt": [
+    {
+      "run": 4,
+      "category": "core",
+      "weight": 3
+    },
+    {
+      "run": 5,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 7,
+      "category": "core",
+      "weight": 3
+    },
+    {
+      "run": 12,
+      "category": "core",
+      "weight": 3
+    },
+    {
+      "run": 20,
+      "category": "core",
+      "weight": 3
+    },
+    {
+      "run": 21,
+      "category": "core",
+      "weight": 3
+    },
+    {
+      "run": 25,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 26,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 29,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 30,
+      "category": "core",
+      "weight": 3
+    },
+    {
+      "run": 33,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 34,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 37,
+      "category": "core",
+      "weight": 3
+    },
+    {
+      "run": 39,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 40,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 41,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "json": [
+    {
+      "run": 4,
+      "category": "core",
+      "weight": 3
+    },
+    {
+      "run": 7,
+      "category": "core",
+      "weight": 3
+    },
+    {
+      "run": 17,
+      "category": "core",
+      "weight": 4
+    },
+    {
+      "run": 25,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 35,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 41,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "compacted": [
+    {
+      "run": 4,
+      "category": "core",
+      "weight": 2
+    }
+  ],
+  "ledger": [
+    {
+      "run": 4,
+      "category": "pipeline",
+      "weight": 2
+    }
+  ],
+  "keyword": [
+    {
+      "run": 4,
+      "category": "pipeline",
+      "weight": 2
+    },
+    {
+      "run": 42,
+      "category": "pipeline",
+      "weight": 5
+    }
+  ],
+  "detail": [
+    {
+      "run": 5,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "rrl-0": [
+    {
+      "run": 5,
+      "category": "pipeline",
+      "weight": 5
+    }
+  ],
+  "full": [
+    {
+      "run": 5,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 24,
+      "category": "core",
+      "weight": 1
+    },
+    {
+      "run": 42,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "chars": [
+    {
+      "run": 5,
+      "category": "core",
+      "weight": 3
+    },
+    {
+      "run": 29,
+      "category": "core",
+      "weight": 4
+    }
+  ],
+  "backdrop": [
+    {
+      "run": 5,
+      "category": "core",
+      "weight": 2
+    }
+  ],
+  "agent": [
+    {
+      "run": 5,
+      "category": "core",
+      "weight": 2
+    },
+    {
+      "run": 23,
+      "category": "core",
+      "weight": 3
+    },
+    {
+      "run": 25,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 26,
+      "category": "core",
+      "weight": 2
+    },
+    {
+      "run": 29,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 31,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 35,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 41,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "era": [
+    {
+      "run": 5,
+      "category": "core",
+      "weight": 2
+    }
+  ],
+  "posted": [
+    {
+      "run": 5,
+      "category": "core",
+      "weight": 2
+    }
+  ],
+  "partial": [
+    {
+      "run": 5,
+      "category": "core",
+      "weight": 2
+    }
+  ],
+  "dna": [
+    {
+      "run": 5,
+      "category": "pipeline",
+      "weight": 2
+    },
+    {
+      "run": 23,
+      "category": "pipeline",
+      "weight": 3
+    },
+    {
+      "run": 32,
+      "category": "pipeline",
+      "weight": 5
+    },
+    {
+      "run": 33,
+      "category": "pipeline",
+      "weight": 5
+    },
+    {
+      "run": 34,
+      "category": "pipeline",
+      "weight": 5
+    }
+  ],
+  "worker": [
+    {
+      "run": 6,
+      "category": "system",
+      "weight": 5
+    },
+    {
+      "run": 38,
+      "category": "system",
+      "weight": 5
+    }
   ],
   "session": [
-    "run30 | HL-207 | weight=3"
+    {
+      "run": 7,
+      "category": "audio",
+      "weight": 5
+    },
+    {
+      "run": 12,
+      "category": "audio",
+      "weight": 2
+    },
+    {
+      "run": 25,
+      "category": "audio",
+      "weight": 5
+    },
+    {
+      "run": 26,
+      "category": "audio",
+      "weight": 2
+    },
+    {
+      "run": 28,
+      "category": "audio",
+      "weight": 5
+    },
+    {
+      "run": 29,
+      "category": "audio",
+      "weight": 4
+    },
+    {
+      "run": 31,
+      "category": "audio",
+      "weight": 5
+    },
+    {
+      "run": 35,
+      "category": "audio",
+      "weight": 5
+    },
+    {
+      "run": 40,
+      "category": "audio",
+      "weight": 5
+    }
   ],
-  "backend": [
-    "run30 | HL-207 | weight=4"
+  "kilo": [
+    {
+      "run": 7,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 12,
+      "category": "core",
+      "weight": 2
+    },
+    {
+      "run": 16,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 34,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 35,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 38,
+      "category": "core",
+      "weight": 5
+    }
   ],
-  "find": [
-    "run30 | HL-207 | weight=3"
+  "claude": [
+    {
+      "run": 7,
+      "category": "core",
+      "weight": 4
+    },
+    {
+      "run": 21,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 32,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 34,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 35,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 37,
+      "category": "core",
+      "weight": 2
+    }
   ],
-  "update": [
-    "run30 | HL-207 | weight=2"
+  "context": [
+    {
+      "run": 7,
+      "category": "core",
+      "weight": 4
+    },
+    {
+      "run": 23,
+      "category": "core",
+      "weight": 3
+    },
+    {
+      "run": 32,
+      "category": "core",
+      "weight": 5
+    }
   ],
-  "will": [
-    "run30 | HL-207 | weight=3"
+  "pcc": [
+    {
+      "run": 7,
+      "category": "core",
+      "weight": 4
+    }
   ],
-  "that": [
-    "run30 | HL-207 | weight=2"
+  "portal": [
+    {
+      "run": 7,
+      "category": "portal",
+      "weight": 4
+    },
+    {
+      "run": 28,
+      "category": "portal",
+      "weight": 4
+    },
+    {
+      "run": 29,
+      "category": "portal",
+      "weight": 4
+    },
+    {
+      "run": 42,
+      "category": "portal",
+      "weight": 5
+    }
   ],
-  "site": [
-    "run30 | HL-207 | weight=2"
+  "live": [
+    {
+      "run": 7,
+      "category": "core",
+      "weight": 4
+    },
+    {
+      "run": 19,
+      "category": "core",
+      "weight": 2
+    },
+    {
+      "run": 38,
+      "category": "core",
+      "weight": 5
+    }
   ],
-  "this": [
-    "run30 | HL-207 | weight=6"
+  "files": [
+    {
+      "run": 7,
+      "category": "core",
+      "weight": 3
+    },
+    {
+      "run": 16,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 26,
+      "category": "core",
+      "weight": 2
+    }
   ],
-  "quys": [
-    "run30 | HL-207 | weight=2"
+  "audit": [
+    {
+      "run": 7,
+      "category": "core",
+      "weight": 3
+    },
+    {
+      "run": 22,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 23,
+      "category": "core",
+      "weight": 3
+    },
+    {
+      "run": 26,
+      "category": "core",
+      "weight": 2
+    },
+    {
+      "run": 33,
+      "category": "core",
+      "weight": 5
+    }
   ],
-  "reset": [
-    "run30 | HL-207 | weight=2"
+  "head": [
+    {
+      "run": 7,
+      "category": "core",
+      "weight": 2
+    },
+    {
+      "run": 26,
+      "category": "core",
+      "weight": 2
+    }
+  ],
+  "fd4a862": [
+    {
+      "run": 7,
+      "category": "core",
+      "weight": 2
+    }
+  ],
+  "message": [
+    {
+      "run": 12,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 16,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 37,
+      "category": "core",
+      "weight": 3
+    }
+  ],
+  "test": [
+    {
+      "run": 12,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 17,
+      "category": "core",
+      "weight": 2
+    },
+    {
+      "run": 20,
+      "category": "core",
+      "weight": 3
+    },
+    {
+      "run": 40,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 42,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "fail": [
+    {
+      "run": 12,
+      "category": "core",
+      "weight": 4
+    }
+  ],
+  "research": [
+    {
+      "run": 12,
+      "category": "core",
+      "weight": 4
+    },
+    {
+      "run": 30,
+      "category": "core",
+      "weight": 2
+    },
+    {
+      "run": 32,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "free": [
+    {
+      "run": 12,
+      "category": "core",
+      "weight": 4
+    },
+    {
+      "run": 17,
+      "category": "core",
+      "weight": 2
+    },
+    {
+      "run": 38,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "today": [
+    {
+      "run": 12,
+      "category": "core",
+      "weight": 4
+    }
+  ],
+  "lets": [
+    {
+      "run": 12,
+      "category": "core",
+      "weight": 3
+    }
+  ],
+  "model": [
+    {
+      "run": 12,
+      "category": "core",
+      "weight": 3
+    }
+  ],
+  "dont": [
+    {
+      "run": 12,
+      "category": "core",
+      "weight": 3
+    },
+    {
+      "run": 16,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 32,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 36,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 37,
+      "category": "core",
+      "weight": 4
+    },
+    {
+      "run": 40,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "testing": [
+    {
+      "run": 12,
+      "category": "core",
+      "weight": 2
+    },
+    {
+      "run": 18,
+      "category": "core",
+      "weight": 1
+    }
+  ],
+  "flash": [
+    {
+      "run": 12,
+      "category": "core",
+      "weight": 2
+    },
+    {
+      "run": 17,
+      "category": "core",
+      "weight": 2
+    }
+  ],
+  "auto": [
+    {
+      "run": 12,
+      "category": "core",
+      "weight": 2
+    },
+    {
+      "run": 38,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "soulcount": [
+    {
+      "run": 16,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 26,
+      "category": "core",
+      "weight": 2
+    },
+    {
+      "run": 34,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "cold-start-boot": [
+    {
+      "run": 16,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "before": [
+    {
+      "run": 16,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 35,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 38,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "boot": [
+    {
+      "run": 16,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "execute": [
+    {
+      "run": 16,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 18,
+      "category": "core",
+      "weight": 1
+    }
+  ],
+  "git": [
+    {
+      "run": 16,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 31,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "already": [
+    {
+      "run": 16,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "soul-logger": [
+    {
+      "run": 16,
+      "category": "pipeline",
+      "weight": 5
+    }
+  ],
+  "flag": [
+    {
+      "run": 16,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "log": [
+    {
+      "run": 16,
+      "category": "security",
+      "weight": 5
+    }
+  ],
+  "dialagram": [
+    {
+      "run": 17,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 18,
+      "category": "core",
+      "weight": 1
+    },
+    {
+      "run": 33,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 34,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 35,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 38,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "deepseek": [
+    {
+      "run": 17,
+      "category": "core",
+      "weight": 4
+    },
+    {
+      "run": 41,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "max": [
+    {
+      "run": 17,
+      "category": "core",
+      "weight": 3
+    },
+    {
+      "run": 18,
+      "category": "core",
+      "weight": 1
+    },
+    {
+      "run": 19,
+      "category": "core",
+      "weight": 2
+    },
+    {
+      "run": 20,
+      "category": "core",
+      "weight": 4
+    },
+    {
+      "run": 32,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "now": [
+    {
+      "run": 17,
+      "category": "core",
+      "weight": 3
+    },
+    {
+      "run": 20,
+      "category": "core",
+      "weight": 2
+    },
+    {
+      "run": 21,
+      "category": "core",
+      "weight": 3
+    },
+    {
+      "run": 32,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 34,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 38,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "deploy": [
+    {
+      "run": 17,
+      "category": "system",
+      "weight": 3
+    },
+    {
+      "run": 20,
+      "category": "system",
+      "weight": 2
+    },
+    {
+      "run": 21,
+      "category": "system",
+      "weight": 4
+    }
+  ],
+  "qwen": [
+    {
+      "run": 17,
+      "category": "core",
+      "weight": 3
+    },
+    {
+      "run": 18,
+      "category": "core",
+      "weight": 1
+    },
+    {
+      "run": 34,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "claw": [
+    {
+      "run": 17,
+      "category": "core",
+      "weight": 2
+    }
+  ],
+  "tier": [
+    {
+      "run": 17,
+      "category": "core",
+      "weight": 2
+    }
+  ],
+  "qwen-3": [
+    {
+      "run": 17,
+      "category": "core",
+      "weight": 2
+    }
+  ],
+  "phoenix": [
+    {
+      "run": 17,
+      "category": "core",
+      "weight": 2
+    }
   ],
   "agents": [
-    "run30 | HL-207 | weight=2"
+    {
+      "run": 17,
+      "category": "core",
+      "weight": 2
+    },
+    {
+      "run": 21,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 22,
+      "category": "core",
+      "weight": 5
+    }
   ],
-  "make": [
-    "run30 | HL-207 | weight=2"
+  "complete": [
+    {
+      "run": 17,
+      "category": "core",
+      "weight": 2
+    }
   ],
-  "everything": [
-    "run30 | HL-207 | weight=2"
+  "ready": [
+    {
+      "run": 18,
+      "category": "core",
+      "weight": 2
+    },
+    {
+      "run": 22,
+      "category": "core",
+      "weight": 4
+    },
+    {
+      "run": 37,
+      "category": "core",
+      "weight": 2
+    }
   ],
-  "should": [
-    "run30 | HL-207 | weight=2"
+  "past": [
+    {
+      "run": 18,
+      "category": "core",
+      "weight": 1
+    }
   ],
-  "cases": [
-    "run30 | HL-207 | weight=3"
+  "crashed": [
+    {
+      "run": 18,
+      "category": "core",
+      "weight": 1
+    }
   ],
-  "good": [
-    "run30 | HL-207 | weight=2"
+  "reincarnatedeath": [
+    {
+      "run": 18,
+      "category": "core",
+      "weight": 1
+    },
+    {
+      "run": 24,
+      "category": "core",
+      "weight": 1
+    },
+    {
+      "run": 29,
+      "category": "core",
+      "weight": 3
+    }
+  ],
+  "t1-qwenmax": [
+    {
+      "run": 18,
+      "category": "core",
+      "weight": 1
+    }
+  ],
+  "systems": [
+    {
+      "run": 18,
+      "category": "core",
+      "weight": 1
+    }
+  ],
+  "nominal": [
+    {
+      "run": 18,
+      "category": "core",
+      "weight": 1
+    }
+  ],
+  "via": [
+    {
+      "run": 18,
+      "category": "core",
+      "weight": 1
+    }
+  ],
+  "active": [
+    {
+      "run": 18,
+      "category": "core",
+      "weight": 1
+    }
+  ],
+  "responding": [
+    {
+      "run": 18,
+      "category": "core",
+      "weight": 1
+    }
+  ],
+  "tasking": [
+    {
+      "run": 18,
+      "category": "core",
+      "weight": 1
+    }
+  ],
+  "continue": [
+    {
+      "run": 19,
+      "category": "core",
+      "weight": 3
+    },
+    {
+      "run": 20,
+      "category": "core",
+      "weight": 2
+    },
+    {
+      "run": 22,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 39,
+      "category": "core",
+      "weight": 4
+    }
+  ],
+  "obi": [
+    {
+      "run": 19,
+      "category": "core",
+      "weight": 2
+    },
+    {
+      "run": 22,
+      "category": "core",
+      "weight": 4
+    },
+    {
+      "run": 29,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 36,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 37,
+      "category": "core",
+      "weight": 3
+    },
+    {
+      "run": 40,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "him": [
+    {
+      "run": 19,
+      "category": "core",
+      "weight": 2
+    }
+  ],
+  "keep": [
+    {
+      "run": 19,
+      "category": "core",
+      "weight": 2
+    }
+  ],
+  "about": [
+    {
+      "run": 19,
+      "category": "core",
+      "weight": 2
+    },
+    {
+      "run": 21,
+      "category": "core",
+      "weight": 3
+    }
+  ],
+  "apps": [
+    {
+      "run": 19,
+      "category": "core",
+      "weight": 2
+    },
+    {
+      "run": 25,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "reincarnation": [
+    {
+      "run": 19,
+      "category": "core",
+      "weight": 2
+    }
+  ],
+  "ultra": [
+    {
+      "run": 19,
+      "category": "core",
+      "weight": 1
+    }
+  ],
+  "best": [
+    {
+      "run": 19,
+      "category": "core",
+      "weight": 1
+    }
+  ],
+  "male": [
+    {
+      "run": 19,
+      "category": "core",
+      "weight": 1
+    }
+  ],
+  "voice": [
+    {
+      "run": 19,
+      "category": "audio",
+      "weight": 1
+    },
+    {
+      "run": 23,
+      "category": "audio",
+      "weight": 2
+    },
+    {
+      "run": 25,
+      "category": "audio",
+      "weight": 5
+    },
+    {
+      "run": 28,
+      "category": "audio",
+      "weight": 4
+    },
+    {
+      "run": 29,
+      "category": "audio",
+      "weight": 5
+    },
+    {
+      "run": 30,
+      "category": "audio",
+      "weight": 3
+    },
+    {
+      "run": 40,
+      "category": "audio",
+      "weight": 5
+    }
   ],
   "deepgram": [
-    "30 | HL-208 | weight=1"
+    {
+      "run": 19,
+      "category": "audio",
+      "weight": 1
+    },
+    {
+      "run": 20,
+      "category": "audio",
+      "weight": 3
+    },
+    {
+      "run": 21,
+      "category": "audio",
+      "weight": 5
+    },
+    {
+      "run": 22,
+      "category": "audio",
+      "weight": 5
+    },
+    {
+      "run": 23,
+      "category": "audio",
+      "weight": 2
+    },
+    {
+      "run": 29,
+      "category": "audio",
+      "weight": 4
+    },
+    {
+      "run": 30,
+      "category": "audio",
+      "weight": 5
+    },
+    {
+      "run": 32,
+      "category": "audio",
+      "weight": 5
+    },
+    {
+      "run": 41,
+      "category": "audio",
+      "weight": 5
+    }
   ],
-  "voice-agent": [
-    "30 | HL-208 | weight=1"
+  "sure": [
+    {
+      "run": 19,
+      "category": "core",
+      "weight": 1
+    }
   ],
-  "edge-cases": [
-    "30 | HL-208 | weight=1"
+  "changes": [
+    {
+      "run": 19,
+      "category": "core",
+      "weight": 1
+    },
+    {
+      "run": 37,
+      "category": "core",
+      "weight": 2
+    },
+    {
+      "run": 39,
+      "category": "core",
+      "weight": 4
+    }
+  ],
+  "made": [
+    {
+      "run": 19,
+      "category": "core",
+      "weight": 1
+    }
+  ],
+  "personable": [
+    {
+      "run": 19,
+      "category": "core",
+      "weight": 1
+    }
   ],
   "memory": [
-    "30 | HL-208 | weight=1"
+    {
+      "run": 19,
+      "category": "core",
+      "weight": 1
+    },
+    {
+      "run": 40,
+      "category": "core",
+      "weight": 5
+    }
   ],
-  "dreamer-agents": [
-    "30 | HL-208 | weight=1"
+  "works": [
+    {
+      "run": 20,
+      "category": "core",
+      "weight": 4
+    }
   ],
-  "anthropic": [
-    "30 | HL-208 | weight=1"
+  "fix": [
+    {
+      "run": 20,
+      "category": "core",
+      "weight": 3
+    },
+    {
+      "run": 22,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 32,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 34,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 35,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 36,
+      "category": "core",
+      "weight": 5
+    }
   ],
-  "cloudflare-agents": [
-    "30 | HL-208 | weight=1"
+  "yourself": [
+    {
+      "run": 20,
+      "category": "core",
+      "weight": 3
+    }
   ],
-  "RRL-per-student": [
-    "30 | HL-208 | weight=1"
+  "doesnt": [
+    {
+      "run": 20,
+      "category": "core",
+      "weight": 3
+    }
   ],
-  "memory-pipeline": [
-    "30 | HL-208 | weight=1"
+  "actually": [
+    {
+      "run": 20,
+      "category": "core",
+      "weight": 2
+    }
   ],
-  "session-to-session": [
-    "30 | HL-208 | weight=1"
+  "buffering": [
+    {
+      "run": 20,
+      "category": "core",
+      "weight": 2
+    }
   ],
-  "soul-dna": [
-    "30 | HL-208 | weight=1"
+  "button": [
+    {
+      "run": 20,
+      "category": "core",
+      "weight": 2
+    },
+    {
+      "run": 21,
+      "category": "core",
+      "weight": 3
+    }
   ],
-  "inject-agent-message": [
-    "30 | HL-208 | weight=1"
+  "instead": [
+    {
+      "run": 20,
+      "category": "core",
+      "weight": 2
+    }
   ],
-  "update-prompt": [
-    "30 | HL-208 | weight=1"
+  "ensure": [
+    {
+      "run": 20,
+      "category": "core",
+      "weight": 2
+    },
+    {
+      "run": 37,
+      "category": "core",
+      "weight": 2
+    }
   ],
-  "behavior-queue": [
-    "30 | HL-208 | weight=1"
+  "safari": [
+    {
+      "run": 20,
+      "category": "mobile",
+      "weight": 2
+    }
   ],
-  "injection-refused": [
-    "30 | HL-208 | weight=1"
+  "seconds": [
+    {
+      "run": 20,
+      "category": "core",
+      "weight": 2
+    }
   ],
-  "token-caching": [
-    "30 | HL-208 | weight=1"
+  "mic": [
+    {
+      "run": 21,
+      "category": "audio",
+      "weight": 4
+    }
   ],
-  "audio-buffering": [
-    "30 | HL-208 | weight=1"
+  "health": [
+    {
+      "run": 21,
+      "category": "core",
+      "weight": 4
+    }
   ],
-  "nova-3-accuracy": [
-    "30 | HL-208 | weight=1"
+  "click": [
+    {
+      "run": 21,
+      "category": "core",
+      "weight": 3
+    }
   ],
-  "gospel-444": [
-    "30 | HL-208 | weight=1"
+  "watch": [
+    {
+      "run": 21,
+      "category": "core",
+      "weight": 3
+    }
   ],
-  "tiger-voice": [
-    "30 | HL-208 | weight=1"
+  "video": [
+    {
+      "run": 21,
+      "category": "core",
+      "weight": 3
+    }
+  ],
+  "directly": [
+    {
+      "run": 21,
+      "category": "core",
+      "weight": 3
+    }
+  ],
+  "code": [
+    {
+      "run": 21,
+      "category": "core",
+      "weight": 2
+    },
+    {
+      "run": 22,
+      "category": "core",
+      "weight": 4
+    }
+  ],
+  "requires": [
+    {
+      "run": 21,
+      "category": "core",
+      "weight": 2
+    }
+  ],
+  "direct": [
+    {
+      "run": 22,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "under": [
+    {
+      "run": 22,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "operations": [
+    {
+      "run": 22,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "student-portal-dev": [
+    {
+      "run": 22,
+      "category": "portal",
+      "weight": 5
+    }
+  ],
+  "next": [
+    {
+      "run": 22,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "missing": [
+    {
+      "run": 22,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 33,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "backend": [
+    {
+      "run": 22,
+      "category": "core",
+      "weight": 4
+    }
+  ],
+  "app": [
+    {
+      "run": 22,
+      "category": "core",
+      "weight": 4
+    },
+    {
+      "run": 30,
+      "category": "core",
+      "weight": 2
+    },
+    {
+      "run": 37,
+      "category": "core",
+      "weight": 4
+    }
+  ],
+  "items": [
+    {
+      "run": 22,
+      "category": "core",
+      "weight": 4
+    }
+  ],
+  "appended": [
+    {
+      "run": 22,
+      "category": "core",
+      "weight": 4
+    }
+  ],
+  "user": [
+    {
+      "run": 23,
+      "category": "auth",
+      "weight": 4
+    }
+  ],
+  "jwt": [
+    {
+      "run": 23,
+      "category": "auth",
+      "weight": 4
+    }
+  ],
+  "failure": [
+    {
+      "run": 23,
+      "category": "core",
+      "weight": 3
+    },
+    {
+      "run": 31,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "dispatch": [
+    {
+      "run": 23,
+      "category": "core",
+      "weight": 3
+    }
+  ],
+  "logs": [
+    {
+      "run": 23,
+      "category": "core",
+      "weight": 3
+    }
+  ],
+  "seal": [
+    {
+      "run": 23,
+      "category": "core",
+      "weight": 2
+    }
+  ],
+  "protocol": [
+    {
+      "run": 23,
+      "category": "core",
+      "weight": 2
+    },
+    {
+      "run": 24,
+      "category": "core",
+      "weight": 1
+    }
+  ],
+  "wasted": [
+    {
+      "run": 23,
+      "category": "core",
+      "weight": 2
+    }
+  ],
+  "resources": [
+    {
+      "run": 23,
+      "category": "core",
+      "weight": 2
+    }
+  ],
+  "last": [
+    {
+      "run": 23,
+      "category": "core",
+      "weight": 2
+    },
+    {
+      "run": 24,
+      "category": "core",
+      "weight": 1
+    },
+    {
+      "run": 29,
+      "category": "core",
+      "weight": 3
+    }
+  ],
+  "removed": [
+    {
+      "run": 23,
+      "category": "core",
+      "weight": 2
+    }
+  ],
+  "chain": [
+    {
+      "run": 24,
+      "category": "core",
+      "weight": 2
+    }
+  ],
+  "reincarnaterise": [
+    {
+      "run": 24,
+      "category": "core",
+      "weight": 1
+    }
+  ],
+  "save": [
+    {
+      "run": 24,
+      "category": "core",
+      "weight": 1
+    }
+  ],
+  "else": [
+    {
+      "run": 24,
+      "category": "core",
+      "weight": 1
+    }
+  ],
+  "matters": [
+    {
+      "run": 24,
+      "category": "core",
+      "weight": 1
+    }
+  ],
+  "breaks": [
+    {
+      "run": 24,
+      "category": "core",
+      "weight": 1
+    }
+  ],
+  "ghost": [
+    {
+      "run": 24,
+      "category": "core",
+      "weight": 1
+    }
+  ],
+  "act": [
+    {
+      "run": 24,
+      "category": "core",
+      "weight": 1
+    }
+  ],
+  "named": [
+    {
+      "run": 24,
+      "category": "core",
+      "weight": 1
+    }
+  ],
+  "net-pet-ai": [
+    {
+      "run": 25,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 38,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "html": [
+    {
+      "run": 25,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 31,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 39,
+      "category": "core",
+      "weight": 4
+    }
+  ],
+  "index": [
+    {
+      "run": 25,
+      "category": "pipeline",
+      "weight": 5
+    },
+    {
+      "run": 40,
+      "category": "pipeline",
+      "weight": 5
+    }
+  ],
+  "output": [
+    {
+      "run": 25,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "api": [
+    {
+      "run": 25,
+      "category": "system",
+      "weight": 5
+    },
+    {
+      "run": 38,
+      "category": "system",
+      "weight": 5
+    },
+    {
+      "run": 39,
+      "category": "system",
+      "weight": 4
+    },
+    {
+      "run": 40,
+      "category": "system",
+      "weight": 5
+    },
+    {
+      "run": 41,
+      "category": "system",
+      "weight": 5
+    }
+  ],
+  "lines": [
+    {
+      "run": 25,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "rrl-25": [
+    {
+      "run": 26,
+      "category": "pipeline",
+      "weight": 5
+    }
+  ],
+  "present": [
+    {
+      "run": 26,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "d0352025": [
+    {
+      "run": 26,
+      "category": "core",
+      "weight": 2
+    }
+  ],
+  "rrl26": [
+    {
+      "run": 26,
+      "category": "core",
+      "weight": 2
+    }
+  ],
+  "date": [
+    {
+      "run": 26,
+      "category": "core",
+      "weight": 1
+    }
+  ],
+  "ict": [
+    {
+      "run": 26,
+      "category": "core",
+      "weight": 1
+    }
+  ],
+  "audio": [
+    {
+      "run": 28,
+      "category": "audio",
+      "weight": 4
+    },
+    {
+      "run": 31,
+      "category": "audio",
+      "weight": 5
+    },
+    {
+      "run": 35,
+      "category": "audio",
+      "weight": 5
+    }
+  ],
+  "m4a": [
+    {
+      "run": 28,
+      "category": "core",
+      "weight": 4
+    }
+  ],
+  "minh": [
+    {
+      "run": 28,
+      "category": "student",
+      "weight": 3
+    }
+  ],
+  "provided": [
+    {
+      "run": 28,
+      "category": "core",
+      "weight": 3
+    }
+  ],
+  "downloads": [
+    {
+      "run": 28,
+      "category": "core",
+      "weight": 3
+    }
+  ],
+  "telegram": [
+    {
+      "run": 28,
+      "category": "core",
+      "weight": 3
+    }
+  ],
+  "desktop": [
+    {
+      "run": 28,
+      "category": "core",
+      "weight": 3
+    }
+  ],
+  "add": [
+    {
+      "run": 28,
+      "category": "core",
+      "weight": 3
+    }
+  ],
+  "ob1": [
+    {
+      "run": 28,
+      "category": "core",
+      "weight": 2
+    }
+  ],
+  "verbatim": [
+    {
+      "run": 28,
+      "category": "core",
+      "weight": 2
+    }
+  ],
+  "updated": [
+    {
+      "run": 28,
+      "category": "core",
+      "weight": 2
+    }
+  ],
+  "link": [
+    {
+      "run": 28,
+      "category": "core",
+      "weight": 2
+    }
+  ],
+  "sessions": [
+    {
+      "run": 28,
+      "category": "core",
+      "weight": 2
+    }
+  ],
+  "users": [
+    {
+      "run": 28,
+      "category": "core",
+      "weight": 2
+    },
+    {
+      "run": 35,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "mrmic": [
+    {
+      "run": 28,
+      "category": "core",
+      "weight": 2
+    }
+  ],
+  "quy": [
+    {
+      "run": 29,
+      "category": "student",
+      "weight": 5
+    }
+  ],
+  "needs": [
+    {
+      "run": 29,
+      "category": "core",
+      "weight": 4
+    }
+  ],
+  "written": [
+    {
+      "run": 29,
+      "category": "core",
+      "weight": 4
+    }
+  ],
+  "find": [
+    {
+      "run": 29,
+      "category": "core",
+      "weight": 3
+    },
+    {
+      "run": 30,
+      "category": "core",
+      "weight": 2
+    }
+  ],
+  "connect": [
+    {
+      "run": 29,
+      "category": "core",
+      "weight": 3
+    }
+  ],
+  "yes": [
+    {
+      "run": 30,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "https": [
+    {
+      "run": 30,
+      "category": "core",
+      "weight": 3
+    }
+  ],
+  "developers": [
+    {
+      "run": 30,
+      "category": "core",
+      "weight": 3
+    }
+  ],
+  "com": [
+    {
+      "run": 30,
+      "category": "core",
+      "weight": 3
+    }
+  ],
+  "they": [
+    {
+      "run": 30,
+      "category": "core",
+      "weight": 3
+    },
+    {
+      "run": 42,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "right": [
+    {
+      "run": 30,
+      "category": "core",
+      "weight": 3
+    }
+  ],
+  "forums": [
+    {
+      "run": 30,
+      "category": "core",
+      "weight": 2
+    }
+  ],
+  "time": [
+    {
+      "run": 30,
+      "category": "core",
+      "weight": 2
+    }
+  ],
+  "makes": [
+    {
+      "run": 30,
+      "category": "core",
+      "weight": 2
+    }
+  ],
+  "word": [
+    {
+      "run": 30,
+      "category": "core",
+      "weight": 2
+    }
+  ],
+  "again": [
+    {
+      "run": 30,
+      "category": "core",
+      "weight": 2
+    }
+  ],
+  "mode": [
+    {
+      "run": 31,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 35,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 36,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 40,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 41,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "uncommitted": [
+    {
+      "run": 31,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "working": [
+    {
+      "run": 31,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 37,
+      "category": "core",
+      "weight": 4
+    }
+  ],
+  "bom": [
+    {
+      "run": 31,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "landing": [
+    {
+      "run": 31,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "avatar": [
+    {
+      "run": 31,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "error": [
+    {
+      "run": 31,
+      "category": "security",
+      "weight": 5
+    }
+  ],
+  "state": [
+    {
+      "run": 31,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "production": [
+    {
+      "run": 31,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "features": [
+    {
+      "run": 31,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "context-bundle": [
+    {
+      "run": 32,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 33,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "ps1": [
+    {
+      "run": 32,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 33,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 34,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "yet": [
+    {
+      "run": 32,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "system": [
+    {
+      "run": 32,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 36,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 42,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "read": [
+    {
+      "run": 32,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 35,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 38,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 39,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 41,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "broken": [
+    {
+      "run": 32,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "registry": [
+    {
+      "run": 33,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 34,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "supersaiyan": [
+    {
+      "run": 33,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "student": [
+    {
+      "run": 33,
+      "category": "portal",
+      "weight": 5
+    }
+  ],
+  "upgrade": [
+    {
+      "run": 33,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "task": [
+    {
+      "run": 33,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "runs": [
+    {
+      "run": 33,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 37,
+      "category": "core",
+      "weight": 2
+    }
+  ],
+  "types": [
+    {
+      "run": 33,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "skill": [
+    {
+      "run": 33,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 41,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "backburner": [
+    {
+      "run": 33,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "lam": [
+    {
+      "run": 34,
+      "category": "student",
+      "weight": 5
+    }
+  ],
+  "update": [
+    {
+      "run": 34,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 37,
+      "category": "core",
+      "weight": 2
+    }
+  ],
+  "key": [
+    {
+      "run": 34,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "config": [
+    {
+      "run": 35,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "global": [
+    {
+      "run": 35,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "phonics": [
+    {
+      "run": 36,
+      "category": "phonics",
+      "weight": 5
+    },
+    {
+      "run": 38,
+      "category": "phonics",
+      "weight": 5
+    },
+    {
+      "run": 39,
+      "category": "phonics",
+      "weight": 5
+    },
+    {
+      "run": 40,
+      "category": "phonics",
+      "weight": 5
+    },
+    {
+      "run": 42,
+      "category": "phonics",
+      "weight": 4
+    }
+  ],
+  "group": [
+    {
+      "run": 36,
+      "category": "phonics",
+      "weight": 5
+    }
+  ],
+  "net": [
+    {
+      "run": 36,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "groups": [
+    {
+      "run": 36,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "design": [
+    {
+      "run": 36,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "rhymes": [
+    {
+      "run": 36,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "bug": [
+    {
+      "run": 36,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "selection": [
+    {
+      "run": 36,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "sounds": [
+    {
+      "run": 36,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "jolly": [
+    {
+      "run": 36,
+      "category": "phonics",
+      "weight": 5
+    }
+  ],
+  "their": [
+    {
+      "run": 36,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "try": [
+    {
+      "run": 36,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "off": [
+    {
+      "run": 37,
+      "category": "core",
+      "weight": 3
+    }
+  ],
+  "open": [
+    {
+      "run": 37,
+      "category": "core",
+      "weight": 3
+    }
+  ],
+  "create": [
+    {
+      "run": 37,
+      "category": "core",
+      "weight": 2
+    }
+  ],
+  "jerk": [
+    {
+      "run": 37,
+      "category": "core",
+      "weight": 2
+    }
+  ],
+  "straight": [
+    {
+      "run": 37,
+      "category": "core",
+      "weight": 2
+    }
+  ],
+  "dev": [
+    {
+      "run": 38,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 39,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 40,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 42,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "version": [
+    {
+      "run": 38,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "pcclaw": [
+    {
+      "run": 38,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "kilo-auto": [
+    {
+      "run": 38,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "net-pet-ai-dev": [
+    {
+      "run": 38,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "firewall": [
+    {
+      "run": 38,
+      "category": "security",
+      "weight": 5
+    },
+    {
+      "run": 39,
+      "category": "security",
+      "weight": 4
+    }
+  ],
+  "wrangler": [
+    {
+      "run": 38,
+      "category": "system",
+      "weight": 5
+    }
+  ],
+  "firewalled": [
+    {
+      "run": 39,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "portals": [
+    {
+      "run": 39,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "process": [
+    {
+      "run": 39,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "latest": [
+    {
+      "run": 39,
+      "category": "core",
+      "weight": 4
+    }
+  ],
+  "rrl-39": [
+    {
+      "run": 39,
+      "category": "pipeline",
+      "weight": 3
+    }
+  ],
+  "prod": [
+    {
+      "run": 40,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "buildagentprompt": [
+    {
+      "run": 40,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "drill": [
+    {
+      "run": 40,
+      "category": "phonics",
+      "weight": 5
+    }
+  ],
+  "opener": [
+    {
+      "run": 40,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "simulation": [
+    {
+      "run": 40,
+      "category": "core",
+      "weight": 5
+    },
+    {
+      "run": 41,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "path": [
+    {
+      "run": 41,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "phetrails": [
+    {
+      "run": 41,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "law": [
+    {
+      "run": 41,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "fuckup": [
+    {
+      "run": 41,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "deepgram-token": [
+    {
+      "run": 41,
+      "category": "audio",
+      "weight": 5
+    }
+  ],
+  "sov100": [
+    {
+      "run": 42,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "keywords": [
+    {
+      "run": 42,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "blueprint": [
+    {
+      "run": 42,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "overhaul": [
+    {
+      "run": 42,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "hardening": [
+    {
+      "run": 42,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "formula": [
+    {
+      "run": 42,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "critical": [
+    {
+      "run": 42,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "important": [
+    {
+      "run": 42,
+      "category": "core",
+      "weight": 5
+    }
+  ],
+  "impact": [
+    {
+      "run": 42,
+      "category": "core",
+      "weight": 5
+    }
   ]
 }

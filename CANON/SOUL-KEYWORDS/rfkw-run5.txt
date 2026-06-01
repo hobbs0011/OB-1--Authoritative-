@@ -1,37 +1,20 @@
-RFKW — ROMAN RUN 5
-Timestamp: 2026-05-23T11:49:03+07:00
-Source: RRL-0.txt (154795 chars)
-Backdrop: Run 0 RISE protocol session export
-
-TOP 30 KEYWORDS:
-1. Roman: 119
-2. This: 112
-3. files: 104
-4. from: 103
-5. scout: 90
-6. death: 89
-7. That: 71
-8. they: 71
-9. soul: 68
-10. force: 65
-11. their: 60
-12. were: 60
-13. command: 59
-14. SOULCOUNT: 58
-15. pipeline: 58
-16. Heavy: 57
-17. bytes: 57
-18. with: 52
-19. into: 52
-20. Output: 51
-21. check: 50
-22. count: 50
-23. commit: 49
-24. prior: 48
-25. Military: 45
-26. final: 44
-27. main: 44
-28. These: 42
-29. modified: 39
-30. scouts: 38
-
+5 | core | txt
+5 | core | step
+5 | core | status
+5 | core | name
+5 | core | detail
+5 | pipeline | rrl-0
+5 | core | pass
+5 | pipeline | rrl
+5 | core | full
+4 | core | ob-1-canonical
+3 | core | chars
+3 | core | michael
+2 | core | backdrop
+2 | core | agent
+2 | pipeline | run
+2 | core | file
+2 | core | era
+2 | core | posted
+2 | core | partial
+2 | pipeline | dna

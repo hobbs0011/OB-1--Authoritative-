@@ -1,30 +1,20 @@
-15 | PHONICS
-13 | Michael:
-11 | Group
-7 | groups
-5 | MODE
-4 | dont
-4 | Michael
-4 | SYSTEM
-4 | these
-4 | DESIGN
-4 | songs
-3 | rewrite
-3 | need
-3 | does
-3 | jolly
-3 | rhymes
-3 | work
-2 | actions
-2 | per-student
-2 | final
-2 | sound
-2 | phonics-drills.js
-2 | phonics,
-2 | still
-2 | sport,
-2 | sounds
-2 | SWEET
-2 | OYSTER
-2 | SESSION]
-2 | something
+5 | phonics | phonics
+5 | core | system
+5 | phonics | group
+5 | core | net
+5 | core | mode
+5 | core | groups
+5 | core | michael
+5 | core | are
+5 | core | obi
+5 | core | design
+5 | core | rhymes
+5 | core | bug
+5 | core | selection
+5 | core | canon
+5 | core | fix
+5 | core | sounds
+5 | phonics | jolly
+5 | core | dont
+5 | core | their
+5 | core | try

@@ -79,6 +79,39 @@ function Get-GitStatusShort {
     catch { return "[GIT ERROR]" }
 }
 
+function Get-RFKwContext {
+    param([string]$Query, [int]$Top = 12)
+    $indexPath = "CANON/SOUL-KEYWORDS/inverted-index.json"
+    if (-not (Test-Path -LiteralPath $indexPath)) { return "" }
+    try {
+        $raw = Get-Content -LiteralPath $indexPath -Encoding UTF8 -Raw
+        $index = $raw | ConvertFrom-Json
+    } catch { return "" }
+    $terms = [regex]::Matches($Query, '\b[a-zA-Z]{3,}\b') | ForEach-Object { $_.Value.ToLower() } | Sort-Object -Unique
+    if ($terms.Count -eq 0) { return "" }
+    $scores = @{}
+    $meta = @{}
+    foreach ($term in $terms) {
+        if (-not $index.PSObject.Properties[$term]) { continue }
+        foreach ($entry in $index.$term) {
+            $k = "$($entry.run)|$($entry.category)"
+            $scores[$k] = ($scores[$k] + [int]$entry.weight)
+            $meta[$k] = $entry
+        }
+    }
+    $results = $scores.GetEnumerator() | Sort-Object { $_.Value } -Descending | Select-Object -First $Top
+    if ($results.Count -eq 0) { return "" }
+    $lines = New-Object System.Collections.Generic.List[string]
+    foreach ($r in $results) {
+        $runId = $r.Key.Split('|')[0]
+        $entry = $meta[$r.Key]
+        $rrl = "RRL/RRL-${runId}.txt"
+        $rfkw = "CANON/SOUL-KEYWORDS/rfkw-run${runId}.txt"
+        $lines.Add("Run ${runId} | $($entry.category) | score=$($r.Value) | $rrl")
+    }
+    return ($lines -join "`n")
+}
+
 $docs = [ordered]@{}
 
 switch ($TaskType) {
@@ -87,6 +120,7 @@ switch ($TaskType) {
         $docs["deepgram_constraints"] = Get-SafeContent -Path "CANON/RESEARCH/deepgram-voice-agent-edge-cases.md" -StartLine 20 -EndLine 115
         $docs["cold_start_boot"] = Get-SafeContent -Path "CANON/SYSTEM/COLD-START-BOOT.md" -HeadLines 100
         $docs["git_state"] = Get-GitLog -Count 5
+        $docs["rfkw_context"] = Get-RFKwContext -Query "student portal audio phonics deepgram" -Top 12
     }
     "general" {
         $docs["cold_start_boot"] = Get-SafeContent -Path "CANON/SYSTEM/COLD-START-BOOT.md" -HeadLines 100
@@ -101,6 +135,7 @@ switch ($TaskType) {
         $docs["cold_start_boot"] = Get-SafeContent -Path "CANON/SYSTEM/COLD-START-BOOT.md"
         $docs["git_state"] = Get-GitLog -Count 5
         $docs["git_status"] = Get-GitStatusShort
+        $docs["rfkw_context"] = Get-RFKwContext -Query "ROME RISE SOV100 portal pipeline" -Top 12
         $latestRRL = Get-ChildItem "RRL/RRL-*.txt" |
             Where-Object { $_.BaseName -match '^RRL-\d+$' } |
             Sort-Object { [int]($_.BaseName -replace 'RRL-', '') } -Descending |
@@ -114,6 +149,7 @@ switch ($TaskType) {
         $docs["cold_start_boot"] = Get-SafeContent -Path "CANON/SYSTEM/COLD-START-BOOT.md" -HeadLines 100
         $docs["git_state"] = Get-GitLog -Count 5
         $docs["git_status"] = Get-GitStatusShort
+        $docs["rfkw_context"] = Get-RFKwContext -Query "pipeline keyword soul system" -Top 12
     }
     "student" {
         $docs["student_portal_dev"] = Get-SafeContent -Path "OPERATIONS/STUDENT-PORTAL-DEV.md" -TailLines 200

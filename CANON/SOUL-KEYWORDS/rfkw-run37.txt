@@ -1,30 +1,20 @@
-4 | working
-4 | dont
-3 | message
-3 | open
-3 | want
-2 | ensure
-2 | english
-2 | share
-2 | them,
-2 | create
-2 | runs
-2 | straight
-2 | ready
-2 | jerk
-2 | fucking
-2 | viet
-2 | off?
-1 | sound
-1 | sorry
-1 | nice
-1 | not..
-1 | someone
-1 | smart
-1 | offered
-1 | please
-1 | sessions
-1 | send
-1 | selection,
-1 | seem
-1 | possible..
+5 | core | ob-1-canonical
+4 | core | dont
+4 | core | app
+4 | core | working
+3 | core | off
+3 | core | message
+3 | core | obi
+3 | core | open
+3 | core | txt
+3 | core | canon
+2 | core | claude
+2 | core | create
+2 | core | fucking
+2 | core | jerk
+2 | core | straight
+2 | core | runs
+2 | core | ensure
+2 | core | ready
+2 | core | changes
+2 | core | update

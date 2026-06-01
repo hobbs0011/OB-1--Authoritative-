@@ -1,16 +1,20 @@
-# SOUL KEYWORDS — Run 22
-# Generated: 2026-05-29T11:54Z
-# Source: RRL/RRL-22.txt (4125 chars)
-
-Deepgram|run22|HL-201|weight=8
-agent|run22|HL-201|weight=7
-audit|run22|HL-201|weight=6
-market-ready|run22|HL-201|weight=5
-functional|run22|HL-201|weight=5
-edge-cases|run22|HL-201|weight=4
-investor-ready|run22|HL-201|weight=3
-stress-testing|run22|HL-201|weight=3
-mobile|run22|HL-201|weight=3
-AudioFocus|run22|HL-201|weight=2
-VAD-trap|run22|HL-201|weight=2
-Cloudflare|run22|HL-201|weight=2
+5 | core | are
+5 | core | continue
+5 | audio | deepgram
+5 | core | agents
+5 | core | audit
+5 | core | direct
+5 | core | under
+5 | core | operations
+5 | portal | student-portal-dev
+5 | core | next
+5 | core | missing
+5 | core | fix
+4 | core | backend
+4 | core | obi
+4 | core | chat
+4 | core | ready
+4 | core | app
+4 | core | items
+4 | core | appended
+4 | core | code

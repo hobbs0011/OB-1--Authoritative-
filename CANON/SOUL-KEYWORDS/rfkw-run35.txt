@@ -1,30 +1,20 @@
-5 | mode
-4 | updated
-4 | Audio
-3 | fucking
-3 | backburner
-3 | crash)
-3 | MICHAEL
-3 | still
-3 | Kilo
-2 | ASKING
-2 | Session
-2 | read
-2 | LOST
-2 | kilo.jsonc
-2 | through
-2 | (lost
-2 | selection
-2 | transient
-2 | gapless
-2 | voice
-2 | Full
-2 | choppy
-2 | "kilo-auto/free"
-2 | v2+v3
-2 | items
-2 | Claude
-2 | fixes
-2 | Unfuck
-1 | now,
-1 | pipeline
+5 | core | kilo
+5 | pipeline | run
+5 | core | config
+5 | core | chat
+5 | core | dialagram
+5 | pipeline | rrl
+5 | core | canon
+5 | audio | audio
+5 | core | mode
+5 | core | global
+5 | core | fix
+5 | core | before
+5 | core | read
+5 | audio | session
+5 | core | michael
+5 | core | json
+5 | core | agent
+5 | core | claude
+5 | core | users
+5 | pipeline | death

@@ -1,30 +1,20 @@
-3 | FUCKING
-2 | "READ
-2 | firewalled
-1 | "complete
-1 | making
-1 | MICHAEL
-1 | obi"
-1 | Phonics
-1 | portals
-1 | process"
-1 | properly"
-1 | read
-1 | reincarnateRISE?
-1 | RISE
-1 | ROMAN
-1 | RRL-39
-1 | sakes"
-1 | say?"
-1 | session
-1 | Session:
-1 | SHIT"
-1 | still
-1 | student
-1 | talking
-1 | test
-1 | then
-1 | TOUCH
-1 | link
-1 | last
-1 | implementation
+5 | phonics | phonics
+5 | pipeline | rrl
+5 | core | txt
+5 | core | dev
+5 | pipeline | rise
+5 | core | are
+5 | core | read
+5 | core | fucking
+5 | core | firewalled
+5 | core | portals
+5 | core | process
+4 | core | changes
+4 | core | continue
+4 | system | api
+4 | core | latest
+4 | security | firewall
+4 | core | html
+4 | core | canon
+4 | core | ob-1-canonical
+3 | pipeline | rrl-39

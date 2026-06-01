@@ -1,10 +1,20 @@
-voice-agent
-audio-smoothing
-vietnamese-guard
-silence-timer
-vocab-endpoint
-first-response-speed
-session-save
-mp3-accumulator
-chunk-threshold
-run26-death
+5 | core | txt
+5 | pipeline | rrl-25
+5 | core | present
+4 | pipeline | run
+3 | core | canon
+2 | core | audit
+2 | audio | session
+2 | core | agent
+2 | core | soulcount
+2 | core | head
+2 | core | d0352025
+2 | core | rrl26
+2 | core | pass
+2 | pipeline | starmap
+2 | core | files
+2 | pipeline | pipeline
+2 | pipeline | rrl
+1 | pipeline | rise
+1 | core | date
+1 | core | ict

@@ -1,30 +1,20 @@
-Roman | 114
-files | 99
-death | 75
-Write-Host | 68
-scout | 64
-bytes | 57
-force | 55
-SOULCOUNT | 53
-count | 49
-Command | 49
-Output | 47
-pipeline | 46
-heavy | 44
-soul | 40
-final | 39
-commit | 39
-check | 39
-military | 39
-prior | 38
-HEAD | 37
-.kilo | 37
-RISE | 32
-63,067 | 32
-scouts | 32
-main | 32
-behind | 31
-Step | 30
-5/23/2026 | 30
-modified | 29
-Actually, | 29
+5 | core | never
+5 | pipeline | soul
+5 | core | roman
+5 | core | scouts
+5 | core | stop
+5 | core | michael
+5 | core | doctrine
+5 | pipeline | run
+5 | core | write-host
+5 | pipeline | death
+5 | core | chat
+5 | core | command
+5 | pipeline | rrl
+5 | core | centurion-code
+5 | core | file
+5 | core | hobbs
+5 | core | commit
+5 | core | are
+5 | core | rome
+5 | pipeline | pipeline
