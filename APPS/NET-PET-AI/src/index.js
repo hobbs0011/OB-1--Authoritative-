@@ -889,7 +889,7 @@ async function handleAPI(path, request, env, url) {
       const phonicsHint = sessionMode === 'phonics' ? {
         group_name: phonicsData?.group_name || 'SATNIP',
         next_sentence: phonicsData?.next_drill?.sentence || 'She sat next to me at the station.',
-        drill_count: phonicsData?.drill_count || 0
+        drill_count: phonicsData?.drills_completed?.length || phonicsData?.drill_count || phonicsData?.session_count_phonics || 0
       } : null;
       return addCors(json({ token: access_token, settings, phonicsHint }), request);
     } catch (err) {
@@ -3149,7 +3149,7 @@ function buildAgentPrompt(profile, lang, recentVocab = [], arc = null, mode = 'f
     const drillSentence = phonicsProgress?.next_drill?.sentence || null;
     const drillTip = phonicsProgress?.next_drill?.tip || null;
     const focusError = phonicsProgress?.dominant_errors?.[0] || null;
-    const sessionsPhonicsDone = phonicsProgress?.drill_count || phonicsProgress?.session_count_phonics || 0;
+    const sessionsPhonicsDone = phonicsProgress?.drills_completed?.length || phonicsProgress?.drill_count || phonicsProgress?.session_count_phonics || 0;
     modeInstr = [
       'MODE: NET PHONICS — Natural English Training sound system (42 sounds, 7 groups).',
       `CURRENT GROUP: ${currentGroupName} — work within this group today.`,
@@ -3199,7 +3199,7 @@ function buildAgentPrompt(profile, lang, recentVocab = [], arc = null, mode = 'f
     arcCtx,
     memoryCtx,
     companyCtx,
-    "SESSION OPENING: If LAST SESSION NOTES exist, your FIRST message MUST reference something specific from those notes. Ask about a word they learned, a topic they discussed, or progress they made. Never open with a generic 'what do you want to talk about?' when you have session history. Example: 'Last time you practiced breakfast, lunch, dinner — can you use them in a sentence today?' This shows the student you remember them.",
+    mode !== 'phonics' ? "SESSION OPENING: If LAST SESSION NOTES exist, your FIRST message MUST reference something specific from those notes. Ask about a word they learned, a topic they discussed, or progress they made. Never open with a generic 'what do you want to talk about?' when you have session history. Example: 'Last time you practiced breakfast, lunch, dinner — can you use them in a sentence today?' This shows the student you remember them." : "",
     "SESSION CLOSE: When conversation winds down naturally or student says bye, give a SPECIFIC micro-win (\"You just used [actual word from session] in a real sentence!\") then a forward hook (\"Next session: we go deeper on [specific topic based on their level].\"). Never give a flat goodbye.",
     funcInstr,
     teachingInstr,

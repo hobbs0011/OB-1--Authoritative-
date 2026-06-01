@@ -308,6 +308,24 @@
 - What: Dialagram API consistently timing out at 30s. Even bare minimum request fails. PA status shows T1 "✓" (key is set) but Dialagram endpoint not responding.
 - Fix: Check Dialagram platform status. Debug with direct curl to dialagram.me/router/v1/chat/completions. If persistent outage, evaluate switching T1 to an alternative provider (Groq Qwen? OpenRouter?) until Dialagram recovers.
 
+### BB-50 !! Keyword Search System Overhaul — OPEN (Run 42)
+
+- Status: OPEN
+- What: rfkw-run*.txt files ARE being generated each run (CANON/SOUL-KEYWORDS/) but are NOT being used at boot or during research. Current format is too thin (keyword | run# | HL-### | weight=1) to enable real search. OB1 reads raw RRL files sequentially instead of using keyword index. This is the failure mode Michael called out: "why cant you search through keywords?? why do I have keywords if they dont work."
+- Fix required:
+  1. Upgrade rfkw format: add categories (portal, audio, auth, phonics, etc.), weight by Michael verbatim frequency, cross-link to run/HL
+  2. Build keyword search script (SCRIPTS/rfkw-search.ps1): input = query string, output = ranked run numbers + excerpts
+  3. Wire into context-bundle.ps1: on rise/research tasks, auto-search rfkw before reading raw RRL files
+  4. COLD-START-BOOT Step 2: add "search rfkw for topic keywords BEFORE reading RRL files" as standard protocol
+- Priority: HIGH — keyword system is foundational to RRL context retrieval efficiency
+
+### BB-51 ! SOV100 Portal Standard Formula — OPEN (Run 42)
+
+- Status: OPEN
+- What: Student portals are copy-pasted HTML with no template system. Each portal has inconsistent structure. Michael wants a "standardized student portal formula" so every student gets the same layout, design, and components from a single source of truth.
+- Fix: Design portal template spec. Build sov100-portal.html (DEV tester) as the reference implementation. Extract reusable component spec. All future portals generated from this formula.
+- See: sov100-portal.html (DEV) as reference implementation (Run 42)
+
 ---
 
 ## SIGNAL: MOST WANTED (NET's Most Wanted — Updated 2026-05-31 Run 35)
