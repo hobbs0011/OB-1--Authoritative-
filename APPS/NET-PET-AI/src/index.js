@@ -876,7 +876,12 @@ async function handleAPI(path, request, env, url) {
           }
         }
       };
-      return addCors(json({ token: access_token, settings }), request);
+      const phonicsHint = sessionMode === 'phonics' ? {
+        group_name: phonicsData?.group_name || 'SATNIP',
+        next_sentence: phonicsData?.next_drill?.sentence || 'She sat next to me at the station.',
+        drill_count: phonicsData?.drill_count || 0
+      } : null;
+      return addCors(json({ token: access_token, settings, phonicsHint }), request);
     } catch (err) {
       return addCors(json({ error: err.message }, 500), request);
     }

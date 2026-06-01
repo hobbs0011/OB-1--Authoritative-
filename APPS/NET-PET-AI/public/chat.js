@@ -812,7 +812,8 @@ async function openVoiceAgent() {
     setMicStatus("Connecting…", false);
     const tokenRes = await fetch(`/api/deepgram-token?studentId=${encodeURIComponent(urlStudentId)}&mode=${encodeURIComponent(currentMode)}`);
     if (!tokenRes.ok) { console.error("[VOICE] token fetch failed:", tokenRes.status); setMicStatus("Tap to start", false); return; }
-    const { token, settings } = await tokenRes.json();
+    const { token, settings, phonicsHint } = await tokenRes.json();
+    if (phonicsHint) profile._phonicsHint = phonicsHint;
     if (!token) { console.error("[VOICE] no token in response"); setMicStatus("Tap to start", false); return; }
     if (agentWsId !== myId) return; // zombie check — another openVoiceAgent() fired during async fetch
 
@@ -951,7 +952,11 @@ function handleAgentMsg(event) {
         const _greetName = (profile.fullName || profile.name || "").split(/\s+/)[0] || "";
         const _viGreet = profile.lang === "vi" ? "Chào " : "";
         let _openingMsg;
-        if (profile._sessionHint) {
+        if (currentMode === 'phonics') {
+          const _drill = profile._phonicsHint?.next_sentence || 'She sat next to me at the station.';
+          const _group = profile._phonicsHint?.group_name || 'SATNIP';
+          _openingMsg = `${_greetName ? _greetName + "! " : ""}Let's practice your ${_group} sounds. Try saying this sentence out loud: "${_drill}"`;
+        } else if (profile._sessionHint) {
           _openingMsg = `${_viGreet}${_greetName || "there"}! I see you watched "${profile._sessionHint}" — that's your 45 minutes! What was the most interesting part?`;
         } else if (chatMessages.length > 0) {
           _openingMsg = `${_viGreet}${_greetName || "there"}! Good to see you again. Ready to practice — want to continue from last time, or try something new today?`;
