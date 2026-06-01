@@ -818,24 +818,35 @@ async function handleAPI(path, request, env, url) {
     const studentId = url.searchParams.get("studentId") || "";
     const sessionMode = (url.searchParams.get("mode") || "free").toLowerCase(); // free | study | phonics
     try {
-      const [rawProfile, rawLang, rawVocab, rawArc, rawMemory] = await Promise.all([
+      const [rawProfile, rawLang, rawVocab, rawArc, rawMemory, rawPhonics] = await Promise.all([
         env.NET_PET_KV.get("student_profile_" + studentId),
         env.NET_PET_KV.get("lang:" + studentId),
         env.NET_PET_KV.get("vocab_list_" + studentId),
         env.NET_PET_KV.get("vocab_arc_" + studentId),
-        env.STUDENT_MEMORY ? env.STUDENT_MEMORY.get(`mem:${studentId}`) : Promise.resolve(null)
+        env.STUDENT_MEMORY ? env.STUDENT_MEMORY.get(`mem:${studentId}`) : Promise.resolve(null),
+        env.NET_PET_KV.get("phonics_progress_" + studentId)
       ]);
       // Raw API key — auth/grant asr:write scope is insufficient for Voice Agent WS (401)
       // CF Worker endpoint already gates access; raw key exposure here is acceptable
       const access_token = apiKey;
 
-      let agentProfile = null, agentLang = "en", recentVocab = [], arcData = null, memoryData = null;
+      let agentProfile = null, agentLang = "en", recentVocab = [], arcData = null, memoryData = null, phonicsData = null;
       try { if (rawProfile) agentProfile = JSON.parse(rawProfile); } catch (_) {}
       if (!agentProfile) agentProfile = { level: "A2", goals: "Practice natural spoken English", primaryBlock: "speaking confidence" };
       if (rawLang) agentLang = rawLang;
       try { if (rawVocab) { const vl = JSON.parse(rawVocab); recentVocab = vl.slice(-5).map(w => w.word); } } catch (_) {}
       try { if (rawArc) arcData = JSON.parse(rawArc); } catch (_) {}
       try { if (rawMemory) memoryData = JSON.parse(rawMemory); } catch (_) {}
+      try {
+        if (rawPhonics) {
+          const pp = JSON.parse(rawPhonics);
+          const pgIdx = (pp.current_group || 1) - 1;
+          const groupDef = NET_PHONICS_GROUPS[pgIdx] || NET_PHONICS_GROUPS[0];
+          const drillsInGroup = PHONICS_DRILLS.filter(d => d.group === groupDef.id);
+          const next_drill = drillsInGroup.find(d => !(pp.drills_completed || []).includes(d.id)) || drillsInGroup[drillsInGroup.length - 1];
+          phonicsData = { ...pp, group_name: groupDef.name, next_drill };
+        }
+      } catch (_) {}
 
       const _level = (agentProfile?.level || agentProfile?.englishLevel || "").toLowerCase();
       const ttsSpeed = /^a1/.test(_level) ? 0.85 : /^a2/.test(_level) ? 0.85 : 1.0;
@@ -853,7 +864,7 @@ async function handleAPI(path, request, env, url) {
           },
           think: {
             provider: { type: "open_ai", model: "gpt-4o-mini" },
-            prompt: buildAgentPrompt(agentProfile, agentLang, recentVocab, arcData, sessionMode, memoryData),
+            prompt: buildAgentPrompt(agentProfile, agentLang, recentVocab, arcData, sessionMode, memoryData, phonicsData),
             functions: [{
               name: "save_vocabulary_word",
               description: "Save an English word the student successfully used in a sentence.",
