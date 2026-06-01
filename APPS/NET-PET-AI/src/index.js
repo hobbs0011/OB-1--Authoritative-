@@ -67,6 +67,16 @@ function sanitizeObiResponse(raw) {
   reply = reply.replace(/^(I (cannot|can't|don't have|do not have)[^,.]*[,.])/i, "").trim();
   reply = reply.replace(/^(I understand|I see|I hear|I get)[\s,.]*/i, "").trim();
 
+  // 3b. Reasoning leak detection — model thinking that escaped <think> tags
+  const _reasoningPatterns = [
+    /The instruction says:/i,
+    /So I must\b/i,
+    /^We are meeting\b/i,
+    /Here is my (response|reply|greeting)/i,
+    /I (need to|should) (greet|say|respond)\b/i,
+  ];
+  if (_reasoningPatterns.some(p => p.test(reply.slice(0, 200)))) return "Say that again?";
+
   // 4. Character cap — 400 chars is ~3 natural sentences; sentence regex breaks on abbreviations/emoji
   if (reply.length > 400) {
     const cutoff = reply.lastIndexOf(" ", 400);
