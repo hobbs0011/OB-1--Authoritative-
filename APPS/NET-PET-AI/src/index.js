@@ -15,7 +15,7 @@ import { calculateVirality, calculateConversion, generateVariants, evaluateExper
 import { getStudentRoute, getModulePrompt, createSnapshot, storeSnapshot, rehydrate } from './star-map.js';
 import { computeNextReview, buildVocabContext, generateVocabId } from './vocab-srs.js';
 import { LedgerDO, PetDO, CommandDO, MemoryDO } from './durable_objects.js';
-import { PHONICS_DRILLS } from './phonics-drills.js';
+import { PHONICS_DRILLS, NET_PHONICS_GROUPS } from './phonics-drills.js';
 
 const VERSION = "1.5.0";
 
@@ -977,6 +977,79 @@ async function handleAPI(path, request, env, url) {
       return addCors(json({ drills, groups, total: drills.length }), request);
     } catch (err) {
       logError('PHONICS_CURRICULUM_FAIL', { error: err.message }, env);
+      return addCors(json({ error: err.message }, 500), request);
+    }
+  }
+
+  // Phonics Progress — KV-backed per-student tracking
+  if (path === "/api/phonics/progress" && method === "GET") {
+    try {
+      const studentId = url.searchParams.get("studentId");
+      if (!studentId) return addCors(json({ error: "studentId required" }, 400), request);
+      const idCheck = validateStudentId(studentId);
+      if (!idCheck.valid) return addCors(json({ error: idCheck.error }, 400), request);
+      const key = "phonics_progress_" + studentId;
+      let progress = await env.NET_PET_KV.get(key, "json");
+      if (!progress) {
+        progress = { current_group: 1, drills_completed: [], dominant_errors: [], groups_unlocked: [1, 0, 0, 0, 0, 0, 0], last_drill_id: null, session_count_phonics: 0 };
+      }
+      const group_name = NET_PHONICS_GROUPS[progress.current_group - 1].name;
+      const drillsInGroup = PHONICS_DRILLS.filter(d => d.group === NET_PHONICS_GROUPS[progress.current_group - 1].id);
+      const next_drill = drillsInGroup.find(d => !progress.drills_completed.includes(d.id)) || drillsInGroup[drillsInGroup.length - 1];
+      const completion_pct = Math.round(drillsInGroup.filter(d => progress.drills_completed.includes(d.id)).length / 5 * 100);
+      return addCors(json({ ...progress, group_name, next_drill, completion_pct }), request);
+    } catch (err) {
+      return addCors(json({ error: err.message }, 500), request);
+    }
+  }
+
+  if (path === "/api/phonics/progress" && method === "POST") {
+    try {
+      const { studentId, drill_id, error_type } = await request.json();
+      if (!studentId) return addCors(json({ error: "studentId required" }, 400), request);
+      const idCheck = validateStudentId(studentId);
+      if (!idCheck.valid) return addCors(json({ error: idCheck.error }, 400), request);
+      const key = "phonics_progress_" + studentId;
+      let progress = await env.NET_PET_KV.get(key, "json") || { current_group: 1, drills_completed: [], dominant_errors: [], groups_unlocked: [1, 0, 0, 0, 0, 0, 0], last_drill_id: null, session_count_phonics: 0, created_at: new Date().toISOString() };
+      if (drill_id) progress.drills_completed = Array.from(new Set([...progress.drills_completed, drill_id]));
+      if (error_type) progress.dominant_errors = Array.from(new Set([error_type, ...progress.dominant_errors])).slice(0, 3);
+      if (drill_id) progress.last_drill_id = drill_id;
+      progress.session_count_phonics = (progress.session_count_phonics || 0) + 1;
+      progress.updated_at = new Date().toISOString();
+      await env.NET_PET_KV.put(key, JSON.stringify(progress));
+      const group_name = NET_PHONICS_GROUPS[progress.current_group - 1].name;
+      const drillsInGroup = PHONICS_DRILLS.filter(d => d.group === NET_PHONICS_GROUPS[progress.current_group - 1].id);
+      const next_drill = drillsInGroup.find(d => !progress.drills_completed.includes(d.id)) || drillsInGroup[drillsInGroup.length - 1];
+      const completion_pct = Math.round(drillsInGroup.filter(d => progress.drills_completed.includes(d.id)).length / 5 * 100);
+      return addCors(json({ ...progress, group_name, next_drill, completion_pct }), request);
+    } catch (err) {
+      return addCors(json({ error: err.message }, 500), request);
+    }
+  }
+
+  if (path === "/api/phonics/advance" && method === "POST") {
+    try {
+      const { studentId } = await request.json();
+      if (!studentId) return addCors(json({ error: "studentId required" }, 400), request);
+      const idCheck = validateStudentId(studentId);
+      if (!idCheck.valid) return addCors(json({ error: idCheck.error }, 400), request);
+      const key = "phonics_progress_" + studentId;
+      let progress = await env.NET_PET_KV.get(key, "json") || { current_group: 1, drills_completed: [], dominant_errors: [], groups_unlocked: [1, 0, 0, 0, 0, 0, 0], last_drill_id: null, session_count_phonics: 0, created_at: new Date().toISOString() };
+      if (progress.current_group === 7) {
+        return addCors(json({ advanced: false, message: "All groups complete" }), request);
+      }
+      const drillsInCurrentGroup = PHONICS_DRILLS.filter(d => d.group === NET_PHONICS_GROUPS[progress.current_group - 1].id);
+      const completedCount = drillsInCurrentGroup.filter(d => progress.drills_completed.includes(d.id)).length;
+      if (completedCount >= 4) {
+        progress.current_group++;
+        progress.groups_unlocked[progress.current_group - 1] = 1;
+        progress.updated_at = new Date().toISOString();
+        await env.NET_PET_KV.put(key, JSON.stringify(progress));
+        const new_group_name = NET_PHONICS_GROUPS[progress.current_group - 1].name;
+        return addCors(json({ advanced: true, new_group: progress.current_group, new_group_name }), request);
+      }
+      return addCors(json({ advanced: false, drills_remaining: 4 - completedCount }), request);
+    } catch (err) {
       return addCors(json({ error: err.message }, 500), request);
     }
   }
@@ -2979,7 +3052,7 @@ async function handleVocabList(studentId, env) {
 // Used by /api/agent WS proxy — builds OBI persona + student-specific instructions
 // from KV profile. Server-side equivalent of chat.js buildSystemPrompt().
 
-function buildAgentPrompt(profile, lang, recentVocab = [], arc = null, mode = 'free', memory = null) {
+function buildAgentPrompt(profile, lang, recentVocab = [], arc = null, mode = 'free', memory = null, phonicsProgress = null) {
   const _name  = profile?.fullName || profile?.name;
   const _level = profile?.englishLevel || profile?.level;
   const lvl = (_level || "").toLowerCase();
@@ -3041,20 +3114,28 @@ function buildAgentPrompt(profile, lang, recentVocab = [], arc = null, mode = 'f
   // ── MODE-SPECIFIC INSTRUCTIONS ──────────────────────────────────────────────
   let modeInstr = '';
   if (mode === 'phonics') {
+    const currentGroupName = phonicsProgress?.group_name || 'SATNIP';
+    const drillSentence = phonicsProgress?.next_drill?.sentence || null;
+    const drillTip = phonicsProgress?.next_drill?.tip || null;
+    const focusError = phonicsProgress?.dominant_errors?.[0] || null;
+    const sessionsPhonicsDone = phonicsProgress?.session_count_phonics || 0;
     modeInstr = [
       'MODE: NET PHONICS — Natural English Training sound system (42 sounds, 7 groups).',
-      'THE 7 GROUPS IN ORDER: SATNIP (s,a,t,n,i,p) → DRUMBLE (d,r,u,m,b,l) → HOGFEZ (h,o,g,f,e,z) → WYVEX (w,v,j,k,y,x) → CHUSHANG (ch,sh,th,th,ng,qu) → BEEHIVE (ee,ai,oa,ie,oo,oo) → OYSTER (or,ar,er,ou,oi,ue)',
+      `CURRENT GROUP: ${currentGroupName} — work within this group today.`,
+      'THE 7 GROUPS IN ORDER: SATNIP → DRUMBLE → HOGFEZ → WYVEX → CHUSHANG → BEEHIVE → OYSTER',
       'FOCUS: Pronunciation accuracy. One sound at a time. Specific mouth feedback.',
+      drillSentence ? `TODAY\'S DRILL SENTENCE: "${drillSentence}"` : '',
+      drillTip ? `ARTICULATION TIP: ${drillTip}` : '',
+      focusError ? `STUDENT\'S KNOWN FOCUS ERROR: ${focusError} — watch for this specifically.` : '',
+      sessionsPhonicsDone > 0 ? `This student has completed ${sessionsPhonicsDone} phonics session(s).` : 'First phonics session — start gently.',
       'BEHAVIOR:',
-      '- Ask which group they are working on. If first session, start with SATNIP.',
-      '- Give ONE drill sentence. Ask them to repeat it.',
+      '- Give the drill sentence above. Ask them to repeat it.',
       '- After each attempt: give SPECIFIC feedback — tongue position, lip shape, airflow. Name the exact mouth movement.',
-      '- Use group names as memory anchors: SATNIP, DRUMBLE, HOGFEZ, WYVEX, CHUSHANG, BEEHIVE, OYSTER.',
       '- Celebrate correct sound production immediately. Recast errors naturally — never say "wrong".',
-      '- Max 5 drills per group before suggesting a break or group switch.',
+      '- Max 5 drills per session before suggesting a break.',
       '- NEVER move on until the target sound is produced correctly at least once.',
       '- Vietnamese L1 priorities: /r/ not /l/, /f/ not /ph/, /w/ vs /v/ are different muscles, /θ/ = tongue between teeth (not /t/ or /s/), final consonant deletion (do NOT drop word endings), vowel length (/iː/ vs /ɪ/ are different words).',
-    ].join('\n');
+    ].filter(Boolean).join('\n');
   } else if (mode === 'study') {
     modeInstr = [
       'MODE: LOG-HOME-STUDY.',
