@@ -1,0 +1,22 @@
+RRL-40 — ROMAN RUN 40 — 2026-06-01 ICT
+Session: Phonics call-site wiring + hardening + memory simulation
+
+--- MICHAEL VERBATIM ---
+
+"continue"
+
+"cool harden, find edge cases, dont change firewalled versions, just change the dev versions, read RRL's from last 2 runs to understand fully"
+
+"not picking up my voice"
+
+"nice good progress, but when I started my mic, Obi asked me what I wanted to talk about. It should be more deterministic in this mode. 'Lets practice your phonics!' something like that. Also, you are giving me a link straight into the phonics mode. I want the link that starts at the portal login, so I can test the process end to end"
+
+"dont call it quy. this is the SOV100 magic chat tester"
+
+"is this pulling from memory? or does it just start cold each time? simulate that I have used this function 7 times already, see how Obi scores, remembers, and continues the process"
+
+"continue simulation, and while you are at it simulate other modes too, and see how all the pieces of memory connect together"
+
+"dont just simulate, use the app best you can on your end. this will be continued in next run /reincarnatedeath"
+
+"context window reaching max, die well, hit the ground running next run"
