@@ -1,7 +1,7 @@
-// Phoenix-Architecti — Universal Code Drone v0.0.3
-// T1=Dialagram STRICT (retry-on-5xx) | T10=Fallback cascade (Cerebras→Groq→CF-Qwen)
+// Phoenix-Architecti — Universal Code Drone v0.0.4
+// T1=Kilo Free Auto (kilo-auto/free via api.kilo.ai) | T10=Fallback cascade (Cerebras→Groq→CF-Qwen)
 // T2=DeepSeek Flash | T3=DeepSeek Pro | T4=Opus 4.8
-// v0.0.3: T1 5xx retry, Opus 4.8, mission runner on Qwen 3.7 Max.
+// v0.0.4: T1 migrated from Dialagram → Kilo Free Auto (Dialagram retired Run 38).
 
 function stripFences(text) {
   if (!text) return text;
@@ -15,7 +15,7 @@ L03 STRONGEST_VERSION_FIRST — complete, hardened output immediately.
 L04 RAW_OUTPUT — raw file content ONLY. No markdown fences. No backticks. No explanation. First character = first character of the file.
 L06 ZERO_DRIFT — answer the task, nothing else.`;
 
-// ── SSE collector — Dialagram always returns text/event-stream regardless of stream param ──
+// ── SSE collector — handles providers that return text/event-stream even without stream:true ──
 async function collectSSE(responseBody) {
   const reader = responseBody.getReader();
   const dec = new TextDecoder();
@@ -54,7 +54,7 @@ async function callOpenAI(url, key, model, messages, extraHeaders = {}, extraBod
   });
   if (res.status === 429) return null;
   if (!res.ok) throw new Error(url + ' ' + res.status + ': ' + await res.text());
-  // Dialagram always returns SSE even without stream:true — detect and collect
+  // Some providers return SSE even without stream:true — detect and collect
   const ct = res.headers.get('content-type') || '';
   if (ct.includes('text/event-stream')) return collectSSE(res.body);
   const data = await res.json();
@@ -111,11 +111,11 @@ function withTimeout(promise, ms) {
 }
 
 // ── Tier routing ──────────────────────────────────────────────────────────────
-// T1:  Dialagram ONLY — strict, 12s timeout, fails loudly if Dialagram is down
-// T10: Fallback cascade — Cerebras→Groq→CF-Qwen (no Dialagram)
+// T1:  Kilo Free Auto — kilo-auto/free via api.kilo.ai (STRICT, retry-on-5xx)
+// T10: Fallback cascade — Cerebras→Groq→CF-Qwen
 // T2:  DeepSeek Flash (deepseek-chat)
 // T3:  DeepSeek Pro   (deepseek-reasoner)
-// T4:  Claude Opus 4.7 — final rulings only
+// T4:  Claude Opus 4.8 — final rulings only
 
 // T10: explicit fallback cascade — no Dialagram, no silent degradation from T1
 async function callT1Fallback(env, messages) {
@@ -148,26 +148,26 @@ async function callTier(env, tier, messages) {
   if (tier === 2 && env.DEEPSEEK_API_KEY)  return callOpenAI('https://api.deepseek.com/v1/chat/completions', env.DEEPSEEK_API_KEY, 'deepseek-chat', messages);
   if (tier === 10) return callT1Fallback(env, messages);
 
-  // T1: Dialagram STRICT — no silent fallback. Retry once on 5xx only. Fails loudly otherwise.
-  if (!env.DIALAGRAM_API_KEY) throw new Error('T1 Dialagram: DIALAGRAM_API_KEY not set — use tier:10 for fallback cascade');
+  // T1: Kilo Free Auto — STRICT, retry once on 5xx. Fails loudly otherwise.
+  if (!env.KILO_API_KEY) throw new Error('T1 Kilo: KILO_API_KEY not set — use tier:10 for fallback cascade');
   let result;
   try {
     result = await withTimeout(
-      callOpenAI('https://dialagram.me/router/v1/chat/completions', env.DIALAGRAM_API_KEY, 'qwen-3.7-max', messages),
+      callOpenAI('https://api.kilo.ai/api/gateway/chat/completions', env.KILO_API_KEY, 'kilo-auto/free', messages),
       30000
     );
   } catch (err) {
     if (err.message && err.message.includes(' 50')) {
       await new Promise(resolve => setTimeout(resolve, 500));
       result = await withTimeout(
-        callOpenAI('https://dialagram.me/router/v1/chat/completions', env.DIALAGRAM_API_KEY, 'qwen-3.7-max', messages),
+        callOpenAI('https://api.kilo.ai/api/gateway/chat/completions', env.KILO_API_KEY, 'kilo-auto/free', messages),
         30000
-      ).catch(retryErr => { throw new Error('T1 Dialagram failed after retry (' + retryErr.message + ') — retry with tier:10 for fallback cascade'); });
+      ).catch(retryErr => { throw new Error('T1 Kilo failed after retry (' + retryErr.message + ') — retry with tier:10 for fallback cascade'); });
     } else {
-      throw new Error('T1 Dialagram failed (' + err.message + ') — retry with tier:10 for fallback cascade');
+      throw new Error('T1 Kilo failed (' + err.message + ') — retry with tier:10 for fallback cascade');
     }
   }
-  if (!result) throw new Error('T1 Dialagram returned empty — retry with tier:10 for fallback cascade');
+  if (!result) throw new Error('T1 Kilo returned empty — retry with tier:10 for fallback cascade');
   return result;
 }
 
@@ -373,7 +373,7 @@ async function handleStatus(env) {
   return Response.json({
     drone: 'phoenix-architecti', version: '0.0.3', status: 'LIVE',
     tiers: {
-      t1:  (env.DIALAGRAM_API_KEY ? 'Dialagram-QwenMax ✓ (STRICT — no fallback)' : 'Dialagram NO KEY'),
+      t1:  (env.KILO_API_KEY ? 'Kilo Free Auto (kilo-auto/free) ✓' : 'Kilo NO KEY'),
       t10: 'Fallback cascade: ' + (env.CEREBRAS_API_KEY ? 'Cerebras-120B ✓' : 'Cerebras NO KEY') + '→' + (env.GROQ_API_KEY ? 'Groq ✓' : 'Groq NO KEY') + '→CF-Qwen',
       t2:  env.DEEPSEEK_API_KEY ? 'DeepSeek Flash (deepseek-chat) ✓' : 'DeepSeek NO KEY',
       t3:  env.DEEPSEEK_API_KEY ? 'DeepSeek Pro (deepseek-reasoner) ✓' : 'DeepSeek NO KEY',

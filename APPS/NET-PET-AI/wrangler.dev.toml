@@ -1,0 +1,62 @@
+name = "net-pet-ai-dev"
+main = "src/index.js"
+compatibility_date = "2026-03-16"
+compatibility_flags = ["nodejs_compat"]
+
+# DEV WORKER — all changes go here first, never directly to net-pet-ai (v0)
+# Deploy: npx wrangler deploy --config wrangler.dev.toml
+# Promote to prod: npx wrangler deploy (uses wrangler.toml — only after verification)
+# Rollback prod: npx wrangler rollback --deployment-id 180f125d-f1cd-4e5b-b5bd-bf71a5944ae4
+
+[[d1_databases]]
+binding = "SOUL_DB"
+database_name = "soul-archive"
+database_id = "c69a11bc-064b-478f-9b1f-e9b8e2431fb8"
+
+[[kv_namespaces]]
+binding = "RATELIMIT"
+id = "b27d144f71c44b00a4c87360841e525f"
+
+[[kv_namespaces]]
+binding = "NET_PET_KV"
+id = "0583d1a59bb24e598c4645396647eb94"
+
+[[kv_namespaces]]
+binding = "STUDENT_MEMORY"
+id = "807ea30d96844c0dbf561d0ae3a3c1f3"
+
+[assets]
+directory = "./public"
+binding = "ASSETS"
+
+[[durable_objects.bindings]]
+name = "PETS"
+class_name = "PetDO"
+
+[[durable_objects.bindings]]
+name = "LEDGER"
+class_name = "LedgerDO"
+
+[[durable_objects.bindings]]
+name = "MEMORY"
+class_name = "MemoryDO"
+
+[[durable_objects.bindings]]
+name = "COMMANDS"
+class_name = "CommandDO"
+
+[[migrations]]
+tag = "v7-drop-session-profile"
+deleted_classes = ["SessionDO", "ProfileDO"]
+new_sqlite_classes = []
+
+[vars]
+APP_NAME = "Natural English Training"
+APP_COACH_NAME = "Obi"
+IMAGE_GEN_URL = ""
+SOUL_LOGGER_URL = "https://soul-logger.mrmichaelhobbs123.workers.dev"
+RESEND_API_KEY = ""
+ENV = "dev"
+
+[triggers]
+crons = ["0 * * * *"]

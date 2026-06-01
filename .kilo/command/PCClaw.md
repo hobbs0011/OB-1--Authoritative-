@@ -1,16 +1,16 @@
 ---
-description: Phoenix-Centurion_Claw — dispatch task to Qwen 3.7 Max (Dialagram, frontier-tier, free unlimited). Use for: write / implement / generate / explain.
+description: Phoenix-Centurion_Claw — dispatch task to Kilo Free Auto via PA T1 (kilo-auto/free, subscription free-tier). Use for: write / implement / generate / explain.
 agent: AGENT99
 ---
-Purpose: Direct T1 code generation via Qwen 3.7 Max through Dialagram.
+Purpose: Direct T1 code generation via Kilo Free Auto through PA proxy.
 
 Flow:
 1. Take the user's task from the command arguments
 2. If a target file is mentioned, read it first and include content as context
-3. Call Dialagram/Qwen 3.7 Max:
-   - URL: https://dialagram.me/router/v1/chat/completions
-   - Model: qwen-3.7-max
-   - Auth: Bearer dgr_live_th5rbrqKoLWH91C1Hyuj3n52dXyG44uvF3mEfk3PkZecYpBZXL
+3. Call PA T1 → Kilo Free Auto:
+   - URL: https://phoenix-architecti.mrmichaelhobbs123.workers.dev/v1/chat/completions
+   - Model: kilo-auto/free
+   - Auth: Bearer ffScwBjPQjBnoAlectawu8E+J4NcmO3idxGxtlcRue8=
    - max_tokens: 4096
 4. Apply the result — write to file if code, display if analysis
 5. Verify syntax if JS/TS (node --check) or equivalent
@@ -21,6 +21,6 @@ Output:
 - STATUS: APPLIED | DISPLAYED | FAILED
 
 Rules:
-- This is Qwen 3.7 Max (#3 globally, Alibaba Cloud) — frontier tier, not a free lightweight model
+- This is Kilo Free Auto — routes to best available free frontier model
 - If task needs repo context, read files before dispatching
-- On failure: escalate to /PAA with tier:1 for PA cascade
+- On failure: escalate to /PAA with tier:10 for PA cascade

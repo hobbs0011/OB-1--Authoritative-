@@ -1,11 +1,11 @@
 ---
-description: "Direct dispatch to Phoenix-Centurion_Claw — Qwen 3.7 Max via Dialagram. Free, unlimited, frontier-tier. Use for T1 tasks: write, generate, implement, explain."
+description: "Direct dispatch to Phoenix-Centurion_Claw — Kilo Free Auto via PA T1. Subscription free-tier, frontier models. Use for T1 tasks: write, generate, implement, explain."
 ---
 
 # /PCClaw — Phoenix-Centurion_Claw
 
-**AGENT:** Qwen 3.7 Max via Dialagram ($5.50/wk unlimited, #3 globally, Alibaba Cloud)
-**ROUTE:** Claude Code → Dialagram cloud → Qwen 3.7 Max (direct, no PA proxy)
+**AGENT:** Kilo Free Auto (kilo-auto/free) via PA T1
+**ROUTE:** Claude Code → PA `/v1/chat/completions` → Kilo gateway → kilo-auto/free
 **USE FOR:** T1 tasks — write / implement / generate / explain / boilerplate
 
 ---
@@ -18,16 +18,16 @@ Take the user's request from `$ARGUMENTS` and dispatch it to PCClaw now.
 
 ```powershell
 $body = @{
-    model      = "qwen-3.7-max"
+    model      = "kilo-auto/free"
     max_tokens = 4096
     messages   = @(@{ role = "user"; content = "<TASK>" })
 } | ConvertTo-Json -Depth 5 -Compress
 
 Invoke-RestMethod `
-    -Uri "https://dialagram.me/router/v1/chat/completions" `
+    -Uri "https://phoenix-architecti.mrmichaelhobbs123.workers.dev/v1/chat/completions" `
     -Method POST `
     -ContentType "application/json" `
-    -Headers @{ "Authorization" = "Bearer dgr_live_th5rbrqKoLWH91C1Hyuj3n52dXyG44uvF3mEfk3PkZecYpBZXL" } `
+    -Headers @{ "Authorization" = "Bearer ffScwBjPQjBnoAlectawu8E+J4NcmO3idxGxtlcRue8=" } `
     -Body ([System.Text.Encoding]::UTF8.GetBytes($body)) `
     | Select-Object -ExpandProperty choices `
     | Select-Object -First 1 `
@@ -46,7 +46,7 @@ Replace `<TASK>` with the full request from `$ARGUMENTS`. If the task involves a
 **Step 3 — Report:**
 
 ```
-PCCLAW ✅ — Qwen 3.7 Max
+PCCLAW ✅ — Kilo Free Auto
 TASK: <one-line summary>
 RESULT: <applied / displayed>
 ```
@@ -59,4 +59,3 @@ RESULT: <applied / displayed>
 - If $ARGUMENTS is empty: ask "What should PCClaw do?"
 - Max tokens 4096 by default — increase to 8192 for long generation tasks
 - If the task needs repo context: read relevant files first, inject into the message content
-- Model identity confirmation: response starts with "I am Qwen3.7" or similar — that's correct

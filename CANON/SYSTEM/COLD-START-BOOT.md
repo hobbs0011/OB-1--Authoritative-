@@ -57,6 +57,22 @@
 1. DEATH: Type out ALL Michael verbatim words from session → POST to /api/soul/event with student_id=sov100-michael → query count → 3 receipts + coder double-check
 2. RISE: Query /api/soul/count → read prior death seal's recorded count → check stagnation (count must have moved) → check drift (delta within ±50% of prior) → READ last session's raw text from D1 → proceed
 
+### Version 0 Baseline — LOCKED Run 38 (2026-06-01)
+| Item | Value |
+|------|-------|
+| Git tag | `v0` → HEAD 9819158c |
+| CF worker | `net-pet-ai` — Version ID `180f125d-f1cd-4e5b-b5bd-bf71a5944ae4` |
+| Rollback cmd | `npx wrangler rollback --deployment-id 180f125d-f1cd-4e5b-b5bd-bf71a5944ae4` |
+| Dev worker | `net-pet-ai-dev` — deploy via `wrangler.dev.toml` |
+| Status | All 7 portals 200, OBI deepgram-token live, magic-chat.html live |
+
+**FIREWALL RULE:** All feature development deploys to `net-pet-ai-dev` first.
+Only promote to `net-pet-ai` (prod) after verified on dev. Never deploy untested code directly to prod.
+- Dev URL: `https://net-pet-ai-dev.mrmichaelhobbs123.workers.dev`
+- Prod URL: `https://net-pet-ai.mrmichaelhobbs123.workers.dev` ← students use this, treat as sacred
+
+---
+
 ### Current Vector
 - **Active Mission:** OB-1 POST-MERGE9 CONSOLIDATION + Growth Infrastructure Buildout
   - **Last completed:** ROMAN RUN 37 — Death-logging + marketing session. Obi Run 28-37 update copy synthesized (EN+VIE, 2x expanded). Lakeview beta outreach (10 spots, EN+VIE). General FB group version (EN+VIE). Private 1v1 + group training offer included. Version 0 baseline locked (Huong, Mai Tram, Quy). SOULCOUNT 65,281,497 TITANIUM_ANCHOR. HEAD 0767a25f.
