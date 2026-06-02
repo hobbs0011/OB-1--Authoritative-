@@ -42,10 +42,13 @@
     "count": 1
   },
   "agent": {
+    "weight": 129,
+    "category": "soul+key",
     "term": "agent",
     "runs": [
       null
     ],
+    "run": 48,
     "count": 9
   },
   "agents": {
@@ -127,17 +130,23 @@
     "count": 1
   },
   "audio": {
+    "weight": 118,
+    "category": "soul+key",
     "term": "audio",
     "runs": [
       null
     ],
+    "run": 48,
     "count": 3
   },
   "audit": {
+    "weight": 77,
+    "category": "soul+key",
     "term": "audit",
     "runs": [
       null
     ],
+    "run": 48,
     "count": 5
   },
   "auto": {
@@ -511,10 +520,13 @@
     "run": 47
   },
   "deepgram": {
+    "weight": 100,
+    "category": "soul+key",
     "term": "deepgram",
     "runs": [
       null
     ],
+    "run": 48,
     "count": 9
   },
   "deepgram-token": {
@@ -733,10 +745,13 @@
     "count": 4
   },
   "files": {
+    "weight": 74,
+    "category": "soul+key",
     "term": "files",
     "runs": [
       null
     ],
+    "run": 48,
     "count": 3
   },
   "find": {
@@ -1053,10 +1068,13 @@
     "count": 1
   },
   "landing": {
+    "weight": 67,
+    "category": "soul+key",
     "term": "landing",
     "runs": [
       null
     ],
+    "run": 48,
     "count": 1
   },
   "last": {
@@ -1525,10 +1543,13 @@
     "run": 44
   },
   "portal": {
+    "weight": 66,
+    "category": "soul+key",
     "term": "portal",
     "runs": [
       null
     ],
+    "run": 48,
     "count": 4
   },
   "portals": {
@@ -2051,10 +2072,13 @@
     "count": 1
   },
   "student": {
+    "weight": 86,
+    "category": "soul+key",
     "term": "student",
     "runs": [
       null
     ],
+    "run": 48,
     "count": 1
   },
   "student-portal-dev": {
@@ -2322,10 +2346,13 @@
     "count": 1
   },
   "voice": {
+    "weight": 109,
+    "category": "soul+key",
     "term": "voice",
     "runs": [
       null
     ],
+    "run": 48,
     "count": 7
   },
   "wasted": {
@@ -2350,10 +2377,13 @@
     "count": 1
   },
   "worker": {
+    "weight": 73,
+    "category": "soul+key",
     "term": "worker",
     "runs": [
       null
     ],
+    "run": 48,
     "count": 2
   },
   "working": {
@@ -2507,24 +2537,44 @@
     {
       "run": 47,
       "weight": 284
+    },
+    {
+      "weight": 69,
+      "category": "soul+key",
+      "run": 48
     }
   ],
   "written:": [
     {
       "run": 47,
       "weight": 211
+    },
+    {
+      "weight": 122,
+      "category": "soul+key",
+      "run": 48
     }
   ],
   "status:": [
     {
       "run": 47,
       "weight": 150
+    },
+    {
+      "weight": 112,
+      "category": "soul+key",
+      "run": 48
     }
   ],
   "what:": [
     {
       "run": 47,
       "weight": 127
+    },
+    {
+      "weight": 98,
+      "category": "soul+key",
+      "run": 48
     }
   ],
   "\\u001a": [
@@ -2543,6 +2593,11 @@
     {
       "run": 47,
       "weight": 111
+    },
+    {
+      "weight": 77,
+      "category": "soul+key",
+      "run": 48
     }
   ],
   "write": [
@@ -2561,6 +2616,11 @@
     {
       "run": 47,
       "weight": 95
+    },
+    {
+      "weight": 122,
+      "category": "soul+key",
+      "run": 48
     }
   ],
   "prompts": [
@@ -2597,6 +2657,41 @@
     {
       "run": 47,
       "weight": 84
+    }
+  ],
+  "fixed": [
+    {
+      "weight": 97,
+      "category": "soul+key",
+      "run": 48
+    }
+  ],
+  "after": [
+    {
+      "weight": 90,
+      "category": "soul+key",
+      "run": 48
+    }
+  ],
+  "every": [
+    {
+      "weight": 83,
+      "category": "soul+key",
+      "run": 48
+    }
+  ],
+  "funnel": [
+    {
+      "weight": 78,
+      "category": "soul+key",
+      "run": 48
+    }
+  ],
+  "added": [
+    {
+      "weight": 73,
+      "category": "soul+key",
+      "run": 48
     }
   ]
 }

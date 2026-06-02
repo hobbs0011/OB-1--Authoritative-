@@ -586,7 +586,9 @@
       return `NET-PRO-${stamp}-${rand}`;
     }
 
-    document.getElementById('downloadResultsBtn').addEventListener('click', async () => {
+     const PRO_API = 'https://submission-api.mrmichaelhobbs123.workers.dev/api/submit';
+     const PRO_OBI = 'https://net-pet-ai-dev.mrmichaelhobbs123.workers.dev';
+     document.getElementById('downloadResultsBtn').addEventListener('click', async () => {
       const ref = generateRef();
       const [room3, room4] = await Promise.all([collectRoom3(), collectRoom4()]);
       const data = {
@@ -601,8 +603,21 @@
 
       const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
       const date = new Date().toISOString().slice(0, 10);
-      downloadBlob(blob, `NET-Professional-Submission-${date}-${ref}.json`);
-      showToast(`Pack downloaded. Reference: ${ref}`);
+       downloadBlob(blob, `NET-Professional-Submission-${date}-${ref}.json`);
+       showToast(`Pack downloaded. Reference: ${ref}`);
+       const _name = data.rooms?.room1?.fullName || data.rooms?.room1?.name || data.rooms?.room1?.studentName || 'friend';
+       const _pid  = 'prospect-' + _name.toLowerCase().replace(/[^a-z0-9]/g, '-').slice(0, 20) + '-' + ref.slice(-6).toLowerCase();
+       try {
+         await fetch(PRO_API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+         const _onb = await fetch(PRO_OBI + '/api/onboarding', {
+           method: 'POST', headers: { 'Content-Type': 'application/json' },
+           body: JSON.stringify({ studentId: _pid, fullName: _name, assessmentRef: ref, source: 'assessment', segment: 'professionals' })
+         });
+         const _d = _onb.ok ? await _onb.json() : null;
+         window.location.href = _d?.redirect ? PRO_OBI + _d.redirect : PRO_OBI + '/magic-chat.html?studentId=' + _pid + '&taster=1';
+       } catch {
+         window.location.href = PRO_OBI + '/magic-chat.html?studentId=' + _pid + '&taster=1';
+       }
     });
   </script>
 

@@ -1087,15 +1087,28 @@
           body: JSON.stringify(apiPayload),
         });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        btn.style.display = 'none';
-        stateEl.innerHTML = `
-          <div class="submit-success">
-            <div class="submit-success-icon">✓</div>
-            <div class="submit-success-title">Submitted!</div>
-            <div class="submit-success-ref">${ref}</div>
-            <p>Michael will contact you within 24 hours. — Michael sẽ liên hệ trong 24 giờ.</p>
-          </div>`;
-        showToast(`Submitted. Reference: ${ref}`);
+         btn.style.display = 'none';
+         stateEl.innerHTML = `
+           <div class="submit-success">
+             <div class="submit-success-icon">✓</div>
+             <div class="submit-success-title">Submitted!</div>
+             <div class="submit-success-ref">${ref}</div>
+             <p>Connecting you to OBI… — Đang kết nối với OBI…</p>
+           </div>`;
+         showToast(`Submitted. Reference: ${ref}`);
+         const _name = fullData.rooms?.room1?.fullName || fullData.rooms?.room1?.name || fullData.rooms?.room1?.studentName || 'friend';
+         const _pid  = 'prospect-' + _name.toLowerCase().replace(/[^a-z0-9]/g, '-').slice(0, 20) + '-' + ref.slice(-6).toLowerCase();
+         const _base = 'https://net-pet-ai-dev.mrmichaelhobbs123.workers.dev';
+         try {
+           const _onb = await fetch(_base + '/api/onboarding', {
+             method: 'POST', headers: { 'Content-Type': 'application/json' },
+             body: JSON.stringify({ studentId: _pid, fullName: _name, assessmentRef: ref, source: 'assessment', segment: 'tigers' })
+           });
+           const _d = _onb.ok ? await _onb.json() : null;
+           window.location.href = _d?.redirect ? _base + _d.redirect : _base + '/magic-chat.html?studentId=' + _pid + '&taster=1';
+         } catch {
+           window.location.href = _base + '/magic-chat.html?studentId=' + _pid + '&taster=1';
+         }
       } catch {
         stateEl.innerHTML = `
           <div class="submit-error">
