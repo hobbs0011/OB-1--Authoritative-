@@ -176,11 +176,13 @@
     "count": 1
   },
   "before": {
-    "term": "before",
     "runs": [
       null
     ],
-    "count": 3
+    "weight": 91,
+    "term": "before",
+    "count": 3,
+    "run": 47
   },
   "best": {
     "term": "best",
@@ -312,11 +314,13 @@
     "count": 1
   },
   "chars": {
-    "term": "chars",
     "runs": [
       null
     ],
-    "count": 2
+    "weight": 142,
+    "term": "chars",
+    "count": 2,
+    "run": 47
   },
   "chat": {
     "term": "chat",
@@ -354,11 +358,13 @@
     "count": 2
   },
   "cold-start-boot": {
-    "term": "cold-start-boot",
     "runs": [
       null
     ],
-    "count": 1
+    "weight": 73,
+    "term": "cold-start-boot",
+    "count": 1,
+    "run": 47
   },
   "com": {
     "term": "com",
@@ -389,11 +395,13 @@
     "count": 1
   },
   "complete": {
-    "term": "complete",
     "runs": [
       null
     ],
-    "count": 1
+    "weight": 115,
+    "term": "complete",
+    "count": 1,
+    "run": 47
   },
   "config": {
     "term": "config",
@@ -494,11 +502,13 @@
     "count": 1
   },
   "death": {
-    "term": "death",
     "runs": [
       null
     ],
-    "count": 11
+    "weight": 137,
+    "term": "death",
+    "count": 11,
+    "run": 47
   },
   "deepgram": {
     "term": "deepgram",
@@ -529,11 +539,13 @@
     "count": 4
   },
   "deploy": {
-    "term": "deploy",
     "runs": [
       null
     ],
-    "count": 3
+    "weight": 72,
+    "term": "deploy",
+    "count": 3,
+    "run": 47
   },
   "design": {
     "term": "design",
@@ -1001,11 +1013,13 @@
     "count": 1
   },
   "keyword": {
-    "term": "keyword",
     "runs": [
       null
     ],
-    "count": 3
+    "weight": 73,
+    "term": "keyword",
+    "count": 3,
+    "run": 47
   },
   "keywords": {
     "term": "keywords",
@@ -1198,11 +1212,13 @@
     "count": 1
   },
   "michael": {
-    "term": "michael",
     "runs": [
       null
     ],
-    "count": 10
+    "weight": 117,
+    "term": "michael",
+    "count": 10,
+    "run": 47
   },
   "minh": {
     "term": "minh",
@@ -1285,11 +1301,13 @@
     "count": 1
   },
   "never": {
-    "term": "never",
     "runs": [
       null
     ],
-    "count": 3
+    "weight": 87,
+    "term": "never",
+    "count": 3,
+    "run": 47
   },
   "next": {
     "term": "next",
@@ -1862,11 +1880,13 @@
     "count": 1
   },
   "session": {
-    "term": "session",
     "runs": [
       null
     ],
-    "count": 9
+    "weight": 71,
+    "term": "session",
+    "count": 9,
+    "run": 47
   },
   "sessions": {
     "term": "sessions",
@@ -1935,11 +1955,13 @@
     "count": 1
   },
   "soulcount": {
-    "term": "soulcount",
     "runs": [
       null
     ],
-    "count": 3
+    "weight": 120,
+    "term": "soulcount",
+    "count": 3,
+    "run": 47
   },
   "sounds": {
     "term": "sounds",
@@ -2211,11 +2233,13 @@
     "count": 1
   },
   "update": {
-    "term": "update",
     "runs": [
       null
     ],
-    "count": 2
+    "weight": 71,
+    "term": "update",
+    "count": 2,
+    "run": 47
   },
   "updated": {
     "term": "updated",
@@ -2477,6 +2501,102 @@
       "weight": 8,
       "category": "pipeline",
       "run": 44
+    }
+  ],
+  "const": [
+    {
+      "run": 47,
+      "weight": 284
+    }
+  ],
+  "written:": [
+    {
+      "run": 47,
+      "weight": 211
+    }
+  ],
+  "status:": [
+    {
+      "run": 47,
+      "weight": 150
+    }
+  ],
+  "what:": [
+    {
+      "run": 47,
+      "weight": 127
+    }
+  ],
+  "\\u001a": [
+    {
+      "run": 47,
+      "weight": 126
+    }
+  ],
+  "await": [
+    {
+      "run": 47,
+      "weight": 121
+    }
+  ],
+  "titanium_anchor": [
+    {
+      "run": 47,
+      "weight": 111
+    }
+  ],
+  "write": [
+    {
+      "run": 47,
+      "weight": 99
+    }
+  ],
+  "return": [
+    {
+      "run": 47,
+      "weight": 97
+    }
+  ],
+  "assessment": [
+    {
+      "run": 47,
+      "weight": 95
+    }
+  ],
+  "prompts": [
+    {
+      "run": 47,
+      "weight": 90
+    }
+  ],
+  "blueprints)": [
+    {
+      "run": 47,
+      "weight": 86
+    }
+  ],
+  "extracted:": [
+    {
+      "run": 47,
+      "weight": 84
+    }
+  ],
+  "parent:": [
+    {
+      "run": 47,
+      "weight": 84
+    }
+  ],
+  "turns\\r\\n": [
+    {
+      "run": 47,
+      "weight": 84
+    }
+  ],
+  "d:\\\\ob-1-canonical\\\\rrl\\\\rrl-47.txt": [
+    {
+      "run": 47,
+      "weight": 84
     }
   ]
 }

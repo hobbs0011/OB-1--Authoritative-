@@ -1,7 +1,7 @@
 {
   "generated_at": "2026-06-02T12:05:00+07:00",
-  "head": "1e6b8fdc",
-  "run": 46,
+  "head": "c2dec4a8",
+  "run": 47,
   "prior_run": 45,
   "soulcount": 83788097,
   "level": "TITANIUM_ANCHOR",
@@ -191,3 +191,4 @@
     "override_note": "Gate declared PASS despite S7 FAIL. S7 is a RED finding (not UNKNOWN) — the verdict IS the resolution. Paid keys on PA are a Phase 1 action item, not a blocker to terrain lock."
   }
 }
+

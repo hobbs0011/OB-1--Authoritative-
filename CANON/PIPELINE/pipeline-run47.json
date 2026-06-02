@@ -1,0 +1,16 @@
+{
+  "run_number": 47,
+  "executed_at": "2026-06-02T17:41:15.9556825+07:00",
+  "rrl_chars": 1198419,
+  "rrl_bytes": 1221350,
+  "rrl_fidelity": "REAL",
+  "session_id": "sov100-roman-run47",
+  "soul_event_id": "df760a05-0e50-4be2-951f-2bc772705491",
+  "soulcount": 101642514,
+  "soul_level": "TITANIUM_ANCHOR",
+  "soul_delta": 1221350,
+  "dna_count": 39,
+  "dna_blueprint_count": 6,
+  "ledger_id": "HL-275",
+  "result": "COMPLETE"
+}

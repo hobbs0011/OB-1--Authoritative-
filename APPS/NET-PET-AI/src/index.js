@@ -414,6 +414,7 @@ export default {
         if (!studentId) return addCors(json({ error: "studentId required" }, 400), request);
         const idCheck = validateStudentId(studentId);
         if (!idCheck.valid) return addCors(json({ error: idCheck.error }, 400), request);
+        if (!env.PROFILES) return addCors(json({ error: "Profile store not available" }, 503), request);
         const stub = env.PROFILES.get(env.PROFILES.idFromName(studentId));
         const res = await stub.fetch(new Request("https://do/profile"));
         const data = await res.json();
@@ -430,6 +431,7 @@ export default {
         if (!body.studentId) return addCors(json({ error: "studentId required" }, 400), request);
         const idCheck = validateStudentId(body.studentId);
         if (!idCheck.valid) return addCors(json({ error: idCheck.error }, 400), request);
+        if (!env.PROFILES) return addCors(json({ error: "Profile store not available" }, 503), request);
         const stub = env.PROFILES.get(env.PROFILES.idFromName(body.studentId));
         const res = await stub.fetch(new Request("https://do/onboarding", {
           method: "POST",

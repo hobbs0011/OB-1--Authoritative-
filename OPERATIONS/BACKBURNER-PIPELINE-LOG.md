@@ -236,23 +236,24 @@
 - What: openVoiceAgent() fired at boot before user picked mode on landing page. Mode selection silently ignored if agentWs already existed. skipLanding() had no openVoiceAgent() call.
 - Fix: landingWillShow flag defers boot openVoiceAgent(). confirmLandingMode() always connects/reconnects. skipLanding() now triggers connection.
 
-### BB-36 !! Client Error Telemetry — OPEN (lost in Run 31 crash)
-- Status: OPEN — Priority HIGH
+### BB-36 !! Client Error Telemetry — DONE (Run 47 audit)
+
+- Status: DONE — verified in chat.js L87-106
 - What: reportClientError(), global window.addEventListener('error'), unhandledrejection handlers. Lost in Run 31 crash. These report browser errors to /api/error-report → D1 error_log table (server side deployed and still live in index.js).
 - Fix: Re-add to chat.js — ~30 lines. Check Run 31 crash commit for template.
 - File: APPS/NET-PET-AI/public/chat.js
 
-### BB-37 !! EC-15 Pre-SettingsApplied Audio Buffer — OPEN (lost in Run 31 crash)
-- Status: OPEN — Priority HIGH
+### BB-37 !! EC-15 Pre-SettingsApplied Audio Buffer — DONE (Run 47 audit)
+
+- Status: DONE — verified in chat.js L796-797, L927-930, L1145-1147, L1172-1174
 - What: Buffers PCM mic chunks arriving before SettingsApplied event. Prevents first 200-500ms of student speech from being lost. agentPreSettingsBuffer[] + agentPreSettingsBytes. Lost in Run 31 crash.
-- Fix: Re-add buffer logic to AudioWorklet.port.onmessage and ScriptProcessor.onaudioprocess + flush on SettingsApplied.
 - File: APPS/NET-PET-AI/public/chat.js
 
-### BB-38 ! Dual TTS Bug — OPEN (RRL-29: "old robotic voice in background")
-- Status: OPEN
-- What: Browser SpeechSynthesis TTS fires alongside Deepgram TTS audio. Current suppression (agentFirstAudioReceived flag) fires too late — robotic voice plays during the Deepgram handshake gap. Michael heard both voices simultaneously.
-- Fix: Suppress browser TTS as soon as agentWs opens (not after first audio). Change guard from `agentWs && agentFirstAudioReceived` to `agentWs && agentReady`.
-- File: APPS/NET-PET-AI/public/chat.js — fallbackSpeak() + speak() functions (lines ~111-125)
+### BB-38 ! Dual TTS Bug — DONE (Run 47 audit)
+
+- Status: DONE — verified in chat.js L135: `if (agentWs) return;` in fallbackSpeak()
+- What: Browser SpeechSynthesis TTS fires alongside Deepgram TTS audio. Fix: suppress as soon as agentWs opens.
+- File: APPS/NET-PET-AI/public/chat.js — fallbackSpeak() L131-143
 
 ### BB-39 ! Mode Selection Visibility — OPEN (returning users)
 - Status: OPEN
@@ -346,6 +347,13 @@
 - What: Student portals are copy-pasted HTML with no template system. Each portal has inconsistent structure. Michael wants a "standardized student portal formula" so every student gets the same layout, design, and components from a single source of truth.
 - Fix: Design portal template spec. Build sov100-portal.html (DEV tester) as the reference implementation. Extract reusable component spec. All future portals generated from this formula.
 - See: sov100-portal.html (DEV) as reference implementation (Run 42)
+
+### BB-54 ! RESEND_API_KEY — Set on SUBMISSION-API worker (Run 47)
+
+- Status: OPEN — Michael action required
+- What: `submitAssessmentPayload()` in assessment.js POSTs to SUBMISSION-API. Without RESEND_API_KEY set on the worker, no email fires to Michael on prospect submission. OBI redirect still works regardless (not blocking funnel).
+- Fix: CF dashboard → SUBMISSION-API worker → Settings → Environment Variables → add `RESEND_API_KEY`
+- Priority: Set before marketing push. Not blocking DEV funnel test.
 
 ### BB-53 !! EXPOSED PLAINTEXT API KEY in RRL (Run 46)
 

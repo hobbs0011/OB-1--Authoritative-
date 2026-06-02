@@ -296,6 +296,16 @@ function safeName(name) {
   return name.replace(/[^a-zA-Z0-9\u00C0-\u024F\u1E00-\u1EFF]/g, '_').slice(0, 30);
 }
 
+function makeProspectId(name, hash) {
+  const base = (name || 'prospect')
+    .normalize('NFD').replace(/[\u0300-\u036F]/g, '') // strip Vietnamese diacritics
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .slice(0, 24) || 'prospect';
+  return `prospect-${base}-${hash.slice(0, 8)}`;
+}
+
 function downloadBlob(blob, filename) {
   const url = URL.createObjectURL(blob);
   const link = document.createElement('a');
@@ -416,7 +426,9 @@ async function downloadResults() {
   });
   showToast(`Submission pack downloaded. Reference: ${submissionReference}`);
 
-  submitAssessmentPayload({ ...data, submissionReference });
+  const prospectId = makeProspectId(name, hash);
+  await submitAssessmentPayload({ ...data, submissionReference, studentId: prospectId });
+  await onSubmissionComplete({ studentId: prospectId, fullName: name, submissionReference });
 }
 
 async function submitAssessmentPayload(payload) {
@@ -433,9 +445,31 @@ async function submitAssessmentPayload(payload) {
   }
 }
 
-function onSubmissionComplete(submissionReference) {
-  const next = new URLSearchParams({ submissionReference });
-  location.href = `/magic-chat.html?${next.toString()}`;
+async function onSubmissionComplete({ studentId, fullName, submissionReference }) {
+  const endpoint = (typeof window !== 'undefined' && location.origin)
+    ? `${location.origin}/api/onboarding` : '/api/onboarding';
+  try {
+    const res = await fetch(endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        studentId,
+        fullName,
+        assessmentRef: submissionReference,
+        source: 'assessment',
+        segment: 'prospect'
+      })
+    });
+    if (res.ok) {
+      const data = await res.json();
+      if (data && data.redirect) { location.href = data.redirect; return; }
+    }
+  } catch (error) {
+    console.error('[assessment] onboarding handoff failed', error);
+  }
+  // Fallback: prospect still reaches OBI even if onboarding POST failed (degraded: no KV profile, no name greet)
+  const params = new URLSearchParams({ studentId, taster: '1' });
+  location.href = `/magic-chat.html?${params.toString()}`;
 }
 
 
@@ -460,3 +494,5 @@ document.addEventListener('DOMContentLoaded', () => {
     initAssessmentPage();
   }
 });
+
+
