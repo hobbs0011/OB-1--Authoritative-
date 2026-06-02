@@ -135,6 +135,7 @@ $maxRun = ($results | Measure-Object -Property Run -Maximum).Maximum
 $results | ForEach-Object {
     $recency = 1 + ($_.Run / [Math]::Max(1, $maxRun))
     $_.Rank = [math]::Round($_.Weight * $recency, 2)
+    $_
 } | Sort-Object Rank -Descending | ForEach-Object {
     $icon = if ($_.DnaSnippet -match "\[blueprint\]") { "🔷" } else { "🔎" }
     Write-Output ""

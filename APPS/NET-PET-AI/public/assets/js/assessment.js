@@ -415,7 +415,29 @@ async function downloadResults() {
     downloadBlob(blob, `NET-Submission-Pack-${safeName(name)}-${key}-${submissionReference}.webm`);
   });
   showToast(`Submission pack downloaded. Reference: ${submissionReference}`);
+
+  submitAssessmentPayload({ ...data, submissionReference });
 }
+
+async function submitAssessmentPayload(payload) {
+  const endpoint = (typeof window !== 'undefined' && location.origin) ? `${location.origin}/api/submit` : '/api/submit';
+  try {
+    const response = await fetch(endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    if (!response.ok) throw new Error(`submit ${response.status}`);
+  } catch (error) {
+    console.error('[assessment] submission upload failed', error);
+  }
+}
+
+function onSubmissionComplete(submissionReference) {
+  const next = new URLSearchParams({ submissionReference });
+  location.href = `/magic-chat.html?${next.toString()}`;
+}
+
 
 function wireAssessmentButtons() {
   document.getElementById('requestMicBtn')?.addEventListener('click', requestMic);

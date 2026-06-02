@@ -278,6 +278,32 @@
     }
     .mode-option:hover { background: rgba(168, 85, 247, 0.1); }
     .mode-option.active { border-color: var(--gold); background: rgba(245, 158, 11, 0.08); }
+    /* Prospect taster banner */
+    #tasterBanner {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 9997;
+      background: linear-gradient(90deg,#7c3aed,#a855f7);
+      color: white;
+      padding: 12px 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+    }
+    #tasterBanner.show { display: block; }
+    #tasterBanner .taster-inner { max-width: 960px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    #tasterBanner .taster-title { font-weight: 700; font-size: 14px; }
+    #tasterBanner .taster-sub { font-size: 12px; opacity: 0.9; }
+    #tasterBanner .taster-actions { display: flex; gap: 8px; }
+    #tasterBanner button {
+      background: rgba(255,255,255,0.18);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 10px;
+      padding: 8px 12px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    #tasterBanner button:hover { background: rgba(255,255,255,0.28); }
   </style>
 </head>
 <body>
@@ -320,6 +346,17 @@
     <button id="modeChip" onclick="openModeModal()" title="Change session mode">💬 Free Talk</button>
     <button id="speakToggle" title="Obi voice ON">🔊</button>
   </header>
+  <div id="tasterBanner">
+    <div class="taster-inner">
+      <div>
+        <div class="taster-title" id="tasterTitle">Free taster — let’s try a few minutes together</div>
+        <div class="taster-sub" id="tasterSub">Michael will follow up within 24h to book your full class.</div>
+      </div>
+      <div class="taster-actions">
+        <button id="tasterEndBtn" type="button">End taster</button>
+      </div>
+    </div>
+  </div>
   <!-- Tiger Win Session Summary -->
   <div id="tigerSummary">
     <div class="ts-card">

@@ -1,5 +1,5 @@
 # COLD START BOOT — OB1 Agent 99
-## ERA: ROMAN — Run 44 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-06-02T09:41 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
+## ERA: ROMAN — Run 46 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-06-02T09:41 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
 
 > *"The beginning of an Empire that never was before and never has been since."* — SOV100 Michael Hobbs, Run 0
 
@@ -174,7 +174,7 @@ Only promote to `net-pet-ai` (prod) after verified on dev. Never deploy untested
 | **21** | **KILO TIER RESTRUCTURE** — PA T1-T4 tier restructure. Cerebras GPT-OSS-120B added. kilo.json wired. HEAD e9ac6a92. |
 
 ---
-**FINGERPRINT: RUN 45 | PHASE 0 BATTLEFIELD CENSUS COMPLETE | SOUL 80,577,744 TITANIUM_ANCHOR | HEAD ca3bec40 | BOOT UPDATED 2026-06-02 ICT**
+**FINGERPRINT: RUN 46 | TERRAIN LOCK COMPLETE + PROSPECT FUNNEL FOUNDATION | SOUL 91770172 TITANIUM_ANCHOR | HEAD c2dec4a8 | BOOT UPDATED 2026-06-02 ICT**
 
 ### BATTLEFIELD STATE — Run 045 (Phase 0 Census)
 **Map:** `CANON/SYSTEM/BATTLEFIELD-MAP.md` | **Matrices:** `OPERATIONS/BATTLEFIELD/D{1-9}-matrix.json` | **Machine:** `CANON/SYSTEM/system-map.json`
@@ -237,6 +237,7 @@ Never hold working features in the working tree across runs. Commit after EVERY 
 - `audio.output.container` — invalid with mp3 encoding
 - `audio.output.sample_rate` — invalid with mp3 encoding
 - `auth/grant JWT` as token — asr:write scope → 401 on Voice Agent WS
+
 
 
 

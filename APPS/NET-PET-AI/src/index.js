@@ -640,7 +640,8 @@ async function handleAPI(path, request, env, url) {
     // Notion probe — BLACKLISTED: platform usage permanently disabled; no API calls made
     checks.notion = { ok: false, detail: "BLACKLISTED — future connections permanently disabled" };
     // DO bindings
-    checks.durableObjects = { SESSIONS: !!env.SESSIONS, PROFILES: !!env.PROFILES, PETS: !!env.PETS, LEDGER: !!env.LEDGER, COMMANDS: !!env.COMMANDS };
+    checks.durableObjects = { SESSIONS: !!env.SESSIONS, PETS: !!env.PETS, LEDGER: !!env.LEDGER, COMMANDS: !!env.COMMANDS };
+    checks.kv = { NET_PET_KV: !!env.NET_PET_KV };
     const allOk = checks.deepseek?.ok && checks.deepgram?.ok;
     return json({ ok: allOk, version: VERSION, checks, readiness: allOk ? "ALL_SYSTEMS_GO" : "DEGRADED", ts: Date.now() });
   }
@@ -695,7 +696,8 @@ async function handleAPI(path, request, env, url) {
 
   // Status — lightweight worker status
   if (path === "/api/status" && method === "GET") {
-    return json({ ok: true, version: VERSION, app: env.APP_NAME || "Natural English Training", coach: env.APP_COACH_NAME || "Obi", ts: Date.now(), readiness: env.DEEPSEEK_API_KEY ? "LIVE" : "NO_KEY" });
+    const kvReady = !!env.NET_PET_KV;
+    return json({ ok: true, version: VERSION, app: env.APP_NAME || "Natural English Training", coach: env.APP_COACH_NAME || "Obi", ts: Date.now(), readiness: env.DEEPSEEK_API_KEY && kvReady ? "ALL_SYSTEMS_GO" : "DEGRADED", profileStore: kvReady ? "NET_PET_KV" : "MISSING", onboardingRouted: true });
   }
 
   // Ledger Status — returns Heavy Ledger integrity from archived RUN337 data
@@ -1093,7 +1095,7 @@ async function handleAPI(path, request, env, url) {
   if (path === "/api/voice/score"  && method === "POST") { const body = await request.json(); return handleVoiceScore(body, env); }
 
   // Onboarding
-  if (path === "/api/onboarding" && method === "POST") { const body = await request.json(); return handleOnboarding(body, env); }
+  if ((path === "/api/onboarding" || path === "/api/student/onboard") && method === "POST") { const body = await request.json(); return handleOnboarding(body, env); }
 
   // Memory (Legacy)
   if (path === "/api/memory" && method === "POST") { const body = await request.json(); return handleMemorySave(body, env, request); }
@@ -3015,12 +3017,14 @@ async function handleVocabAdd(body, env) {
   const idCheck = validateStudentId(studentId);
   if (!idCheck.valid) return json({ error: idCheck.error }, 400);
   if (!body.word?.trim()) return json({ error: "word required" }, 400);
-  const stub = env.PROFILES.get(env.PROFILES.idFromName(studentId));
-  const res = await stub.fetch(new Request("https://do/vocab/add", {
-    method: "POST", headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ ...body, studentId }),
-  }));
-  return res;
+  const key = `vocab:${studentId}:${body.word}`;
+  const existing = await env.NET_PET_KV.get(key);
+  if (!existing) await env.NET_PET_KV.put(key, JSON.stringify({ studentId, word: body.word, meaning_vi: body.meaning_vi || "", ts: Date.now() }));
+  const listRaw = await env.NET_PET_KV.get(`vocab_list_${studentId}`);
+  const list = listRaw ? JSON.parse(listRaw) : [];
+  if (!list.find(w => w.word === body.word)) list.push({ word: body.word, meaning_vi: body.meaning_vi || "", ts: Date.now() });
+  await env.NET_PET_KV.put(`vocab_list_${studentId}`, JSON.stringify(list.slice(-500)));
+  return json({ ok: true, word: body.word });
 }
 
 async function handleVocabDue(studentId, env) {
@@ -3048,12 +3052,11 @@ async function handleVocabReview(body, env) {
   const studentId = body.studentId || "anonymous";
   const idCheck = validateStudentId(studentId);
   if (!idCheck.valid) return json({ error: idCheck.error }, 400);
-  const stub = env.PROFILES.get(env.PROFILES.idFromName(studentId));
-  const res = await stub.fetch(new Request("https://do/vocab/review", {
-    method: "POST", headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(body),
-  }));
-  return res;
+  if (!body.word?.trim() && !body.grade) return json({ error: "word and grade required" }, 400);
+  const key = `srs:${studentId}:${body.word}`;
+  const review = { studentId, word: body.word, grade: body.grade, nextDue: Date.now() + Math.max(60000 * Math.pow(2, Math.min(10, Math.max(0, body.grade || 2))), 3600000), reviewedAt: Date.now() };
+  await env.NET_PET_KV.put(key, JSON.stringify(review));
+  return json({ ok: true, word: body.word });
 }
 
 async function handleVocabList(studentId, env) {
@@ -3066,14 +3069,6 @@ async function handleVocabList(studentId, env) {
     if (raw) {
       const words = JSON.parse(raw);
       return json({ words: words.slice(-50), total: words.length, source: "obi_voice" });
-    }
-  } catch (_) {}
-  // Fallback to PROFILES DO vocab (SRS-based)
-  try {
-    if (env.PROFILES && typeof env.PROFILES.idFromName === "function") {
-      const stub = env.PROFILES.get(env.PROFILES.idFromName(studentId));
-      const res = await stub.fetch(new Request("https://do/vocab/list"));
-      return res;
     }
   } catch (_) {}
   return json({ words: [], total: 0 });
@@ -3470,11 +3465,31 @@ async function handleTeacherDashboard(env) {
 // ── Onboarding ────────────────────────────────────────────────────────────────
 
 async function handleOnboarding(body, env) {
-  if (!body.studentId) return json({ error: "studentId required" }, 400);
-  const idCheck = validateStudentId(body.studentId);
-  if (!idCheck.valid) return json({ error: idCheck.error }, 400);
-  const stub = env.PROFILES.get(env.PROFILES.idFromName(body.studentId));
-  const res = await stub.fetch(new Request("https://do/onboarding", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }));
+  if (!body.studentId || typeof body.studentId !== "string") return json({ error: "studentId required" }, 400);
+  const studentId = body.studentId.trim();
+
+  const profile = {
+    fullName: body.fullName || body.studentId,
+    englishLevel: body.englishLevel || body.level || "pending",
+    currentCity: body.currentCity || "",
+    segment: body.segment || "",
+    source: body.source || "onboarding",
+    assessmentRef: body.assessmentRef || "",
+    level_status: "pending_review",
+    studyGoal: body.studyGoal || "",
+    notifications: body.notifications || {},
+    vocab: body.vocab || [],
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  };
+
+  if (env.NET_PET_KV) {
+    try {
+      await env.NET_PET_KV.put(`student_profile_${body.studentId}`, JSON.stringify(profile));
+    } catch (err) {
+      console.error(`[ONBOARDING] KV write failed for ${body.studentId}:`, err.message);
+    }
+  }
 
   // Ledger the onboarding event
   if (env.LEDGER) {
@@ -3496,8 +3511,8 @@ async function handleOnboarding(body, env) {
   const sig = await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(canonicalId));
   const studentToken = Array.from(new Uint8Array(sig)).map(b => b.toString(16).padStart(2, "0")).join("");
 
-  const resData = await res.json().catch(() => ({}));
-  return json({ ...resData, studentToken });
+  const resData = { ok: true };
+  return json({ ...resData, studentId, studentToken, redirect: "/magic-chat.html?studentId=" + encodeURIComponent(studentId) + "&taster=1" });
 }
 
 // ── Memory (mutable scratch — Ledger is the permanent record) ────────────────

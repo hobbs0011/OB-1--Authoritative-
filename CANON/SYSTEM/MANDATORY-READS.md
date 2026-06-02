@@ -97,6 +97,13 @@ Invoke-RestMethod "$DEV/api/deepgram-token?studentId=$SID&mode=phonics" | Conver
 | Student Portal Dev | `OPERATIONS/STUDENT-PORTAL-DEV.md` | Student profiles, portal URLs, passwords |
 | Class Prep | `OPERATIONS/CLASS-PREP-MAI-TRAM-QUY.md` | Lesson context for Mai Tram + Quy |
 
+### MARKETING / PROSPECT FUNNEL WORK
+
+| Doc | Path | Why |
+|-----|------|-----|
+| Marketing Channels | `OPERATIONS/MARKETING-CHANNELS.md` | Channel strategy, risk tiers, copy templates, intent-sweep kit, content calendar |
+| Prospect Funnel Spec | `OPERATIONS/PROSPECT-FUNNEL-SPEC.md` | Technical funnel: assessment→onboard→OBI taster. Bugs, work packets, exec order |
+
 ---
 
 ## HOW TO ADD A NEW MANDATORY DOC

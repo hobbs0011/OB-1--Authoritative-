@@ -1,0 +1,12 @@
+{
+  "hl_id": "HL-245",
+  "session_id": "sov100-roman-run46",
+  "rrl_source": "D:\\OB-1-CANONICAL\\RRL\\RRL-46.txt",
+  "char_count": 987801,
+  "byte_count": 1001461,
+  "merkle_parent": "d0673f970313c81faea33bac2cd6541541d347e7caa274c7715bce0d907628b0",
+  "merkle_hash": "8330120a5ac7ebae964938695d06e822844e76ed963506577f66c5979ecc0802",
+  "sealed_at": "2026-06-02T12:27:57.2757267+07:00",
+  "sov100": true,
+  "run": "46"
+}

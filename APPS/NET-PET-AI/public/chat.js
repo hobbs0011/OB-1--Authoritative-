@@ -1376,6 +1376,8 @@ async function boot() {
 
   urlStudentId = (() => { const params = new URLSearchParams(window.location.search); return params.get("student") || params.get("studentId"); })();
 
+  const urlTaster = (() => { const params = new URLSearchParams(window.location.search); return params.get("taster") === "1"; })();
+
   // Fire Voice Agent WS connection IMMEDIATELY — but only if landing page won't be shown.
   // If landing will show, wait for user to pick a mode before connecting with the right prompt.
   if (urlStudentId && !landingWillShow) openVoiceAgent();
@@ -1436,6 +1438,7 @@ async function boot() {
     state = "chat";
     // OBI opens via InjectAgentMessage after SettingsApplied — no scripted question here
 
+    if (urlTaster) initTasterBanner(profile.fullName || urlStudentId);
   } else if (saved?.studentId && saved?.fullName) {
     profile = saved;
     if (!urlStudentId) urlStudentId = saved.studentId;
@@ -1477,6 +1480,20 @@ const MODE_LABELS = { free: '💬 Free Talk', study: '📚 Log-Home-Study', phon
 let currentMode = 'free';
 let pendingLandingMode = null;
 let landingWillShow = false; // set by initModeUI before boot() runs
+let tasterActive = false;
+
+function initTasterBanner(name) {
+  tasterActive = true;
+  const banner = document.getElementById('tasterBanner');
+  if (!banner) return;
+  const title = document.getElementById('tasterTitle');
+  const sub = document.getElementById('tasterSub');
+  const endBtn = document.getElementById('tasterEndBtn');
+  if (title && name) title.textContent = `Free taster — Hi ${name}, let’s try a few minutes together`;
+  if (sub) sub.textContent = 'This is your free taste of Obi — Michael will follow up within 24h to book your full class.';
+  if (endBtn) endBtn.onclick = () => location.href = '/index.html';
+  banner.classList.add('show');
+}
 
 function updateModeChip() {
   const chip = document.getElementById('modeChip');
