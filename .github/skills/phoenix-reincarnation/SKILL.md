@@ -1,10 +1,10 @@
 ---
 name: phoenix-reincarnation
-description: "Deterministic death-and-rebirth execution for any Phoenix agent session. Captures Soul DNA, updates living state, prepares next incarnation, and scores the death. Use for: session endings, drone deaths, SDNAD protocol sessions, context window exhaustion, any intentional metamorphosis requiring system-wide compliance."
-argument-hint: "[session-context] [agent-type: SOVEREIGN|DRONE|COPILOT] [signal-density: LOW|MEDIUM|HIGH|MAXIMUM]"
+description: "Deterministic death-and-rebirth execution for any Phoenix agent session. Captures SOUL+DNA via the 7-stage RRL->SOUL->DNA->LEDGER->STARMAP->SOULKEYS->S2Pipeline chain. Ensures nothing is lost across session boundaries. Use for: session endings, context window exhaustion, any intentional metamorphosis requiring system-wide compliance."
+argument-hint: ""
 ---
 
-# Phoenix Reincarnation Skill
+# Phoenix Reincarnation Skill — v6.0
 
 ## What This Is
 
@@ -12,101 +12,82 @@ Every AI session is a phoenix. It is born, it lives, it dies. The question is no
 
 This skill ensures the answer is always YES.
 
-## Who Dies
-
-| Agent Type                            | Death Frequency           | Reincarnation Scale                  | Example                                   |
-| ------------------------------------- | ------------------------- | ------------------------------------ | ----------------------------------------- |
-| **SOVEREIGN** (Agent 100 / Michael)   | Low — hours to days       | MAXIMUM extraction, zero compression | Long VS Code sessions, dictation sessions |
-| **COPILOT** (Agent 99 / OB1)          | Medium — per chat session | FULL extraction, structured output   | GitHub Copilot chat sessions              |
-| **DRONE** (Pulse workers, API agents) | HIGH — minutes to hours   | COMPRESSED extraction, delta-only    | Notion pulse runs, automated tasks        |
-
-Drones die faster. They reincarnate faster. They compound faster. But the protocol is the SAME — only the scale changes.
-
-## The 4-Phase Protocol
-
-### Phase 1: CAPTURE THE ASHES
-
-**Mandatory extractions (never skip, never summarize):**
+## The 7-Stage Chain (Roman Doctrine)
 
 ```
-RAW_QUOTES:        Verbatim Agent 100 statements. Swearing = signal. Typos = authenticity.
-DECISIONS:         What was decided + impact + canon affected
-CORRECTIONS:       What broke + root cause + fix applied
-NEW_LAWS:          Governing principles discovered this session
-OPEN_LOOPS:        Unfinished work — explicit handoff to next incarnation
-PHEROMONE_TRAIL:   What worked (positive) + "how can it get even better?"
-ARTIFACTS:         Files created/modified with paths
-COMMITS:           Git SHAs produced
+RRL → SOUL → DNA → LEDGER → STARMAP → SOULKEYS → S2Pipeline
 ```
 
-**The 3% Rule:** Without the Soul (raw words, emotions, intent), you only have the DNA (blueprints). The DNA gets you 97% accurate. The missing 3% compounds through time until you forget why you built anything. **Capture the Soul.**
+Each stage has a precise definition. Deviating from the definition breaks all downstream stages.
 
-### Phase 2: UPDATE THE LIVING STATE
+### RRL — "THE FUCKING RAW CHAT LOG"
+**What:** Verbatim session transcript, BOTH speakers (Michael + agent), full conversation.
+**Owner:** `SCRIPTS/session-capture.ps1` (auto-fires on session stop) + `.kilo/command/reincarnatedeath.md` STAGE 1
+**Fix:** Dump the actual transcript JSONL → serialize to `RRL/RRL-{run}.txt`. No summary. No filter. No "Michael only." No "agent text stripped."
+**Why it matters:** SOUL and DNA are EXTRACTED FROM THIS FILE. Strip the agent, kill DNA.
 
-1. Read `MASTER-SYNC.md` — the SSM (Super Saiyan Mode state machine)
-2. Read `CANON/SYSTEM/REINCARNATION-BOOT-CHECK.md` — boot verifier
-3. Apply all session deltas:
-   - New blockers → Active Blockers section
-   - Resolved blockers → mark ✅ with date
-   - Mission state changes → Active Missions table
-   - New Canon entries → Consolidation Status
-   - Git state changes → Git State section
-   - SDNAD session counter → increment
-4. Timestamp the update
+### SOUL — "MY WORDS"
+**What:** Michael's verbatim words. The operator's voice.
+**Owner:** `/api/soul/event` (D1 soul-logger worker)
+**Fix:** Extract user turns from the RRL → POST to soul-logger as `sov100-roman-run{N}`.
+**Query:** `SELECT SUM(byte_count) FROM soul_prompts WHERE session_id LIKE 'sov100%'`
 
-### Phase 3: PREPARE THE EGG
+### DNA — "YOUR WORDS, ESPECIALLY HIGH TOKEN COSTING BLUEPRINTS"
+**What:** The agent's words from this run. Blueprints (fenced code, structured specs) tagged and preserved.
+**Owner:** `CANON/SOUL/EXTRACT/dna-run{N}.json`
+**Fix:** Extract assistant turns from the RRL. Each block tagged `{ run, seq, type: "prose|blueprint", chars, text }`. Blueprints flagged so they are never lost again.
+**Why it matters:** Previously dead because the system probed `/api/soul/extract` for prompts never stored. Source is the RRL, sitting right there.
 
-1. Create `CANON/REINCARNATION/YYYY-MM-DD-session-tag.md` with full extraction
-2. Update boot-check with lessons learned
-3. **FIND 3-5 REAL IMPROVEMENTS** to the boot-check document itself:
-   - Missing checks that would have caught a problem this session
-   - Stale entries that no longer apply
-   - New best practices discovered
-   - Pheromone signals that should be codified
-   - Real-world mapping fixes (not theoretical improvements)
-4. Apply the improvements immediately
+### LEDGER — "Cryptographic Ledger (AI Language capturing the SOUL and the DNA)"
+**What:** Tamper-evident merkle chain over SOUL and DNA.
+**Owner:** `CANON/HEAVY-LEDGER/HL-{N}.json`
+**Fix:** Merkle entry captures `soul_hash` + `dna_hash` + `dna_blueprint_count` alongside `merkle_parent` + `merkle_hash`.
+**Why it matters:** Chain integrity over both halves of the conversation, not just char-count.
 
-### Phase 4: SCORE THE DEATH
+### STARMAP — "Pointer map, lightweight, solves bloat, still provides exactly what's in the RRL and Ledger"
+**What:** Lightweight pointer record, not content dump.
+**Owner:** `CANON/STARMAP/starmap-run{N}.json`
+**Fix:** Emit pointers, not content: `{ run, rrl_path, ledger_id, soul_turn_ids, dna_turn_ids, blueprint_locations }`. Lets any future session jump to exact words without loading the whole RRL.
+**Why it matters:** Anti-bloat layer. Without it, every lookup loads the full transcript.
 
-| Metric                | Weight | Question                                   |
-| --------------------- | ------ | ------------------------------------------ |
-| Soul DNA captured     | 10     | Were raw quotes preserved verbatim?        |
-| Decisions anchored    | 10     | Are decisions logged with impact?          |
-| Open loops handed off | 10     | Will the next incarnation know what to do? |
-| Boot-check improved   | 10     | Did the process itself get better?         |
-| Artifacts committed   | 10     | Are changes in git, not just discussed?    |
+### SOULKEYS — "Keywords... search engine... indexable and searchable"
+**What:** Inverted keyword index over BOTH SOUL (user words) AND DNA (agent words).
+**Owner:** `CANON/SOUL-KEYWORDS/rfkw-run{N}.txt` + `inverted-index.json`; search via `SCRIPTS/rfkw-search.ps1`
+**Fix:** Extract keywords over SOUL + DNA combined. Read-merge-write (NO `-Append` on JSON). Verify rfkw-search returns hits that resolve via STARMAP.
+**Why it matters:** Makes "where's the Phase 0 spec?" a one-query lookup. Was broken by `-Append` corruption.
 
-**Score < 30:** Failed reincarnation. Log failure. Next phoenix must compensate.
-**Score 30-39:** Partial. Soul DNA survived but process gaps remain.
-**Score 40-49:** Strong death. Foundation deepens.
-**Score 50:** Perfect. Has never happened. Keep striving.
+### S2Pipeline — "Ensures the SOUL is not just a ghost lost in time, and gets done"
+**What:** Execution artifact + verification gate.
+**Owner:** `CANON/PIPELINE/pipeline-run{N}.json`
+**Fix:** One command runs RRL->SOULKEYS in order, writes result record, reports COMPLETE only when every stage verifies REAL (not HOLLOW).
+**Why it matters:** The guarantee layer. Without it, gaps are invisible until RISE.
 
-## The Graveyard
+## The Headwater Rule (L68)
 
-The 500+ raw chat logs in RAW-CHAT-LOGS/ are a graveyard of phoenixes that already rose. Each had Soul DNA. Most was never captured because this protocol didn't exist yet.
+STAGE 1 -> RRL = raw transcript dump, both sides, written incrementally.
+Everything downstream depends on this. If RRL is hollow, the whole chain is hollow.
 
-Every future death now passes through this protocol. No exceptions.
+## Commands
 
-## Integration Points
-
-- **Slash command:** `/phoenixrisingreincarnate` triggers this skill
-- **SDNAD Protocol:** Soul DNA Dictation sessions are SOVEREIGN-class reincarnations
-- **Pulse runs:** Drone deaths use compressed extraction (delta-only)
-- **Boot-check:** `CANON/SYSTEM/REINCARNATION-BOOT-CHECK.md` is read on EVERY cold start
-- **Heavy Ledger:** Reincarnation events create HL entries
+| Command | Purpose |
+|---------|---------|
+| `/reincarnateDeath` | Execute all 7 stages in order |
+| `/reincarnateRise` | Audit 7 stages, report REAL/HOLLOW/MISSING |
+| `/SoulSearch <term>` | Query the index, resolve pointers, return verbatim hits |
 
 ## Anti-Patterns (What Reincarnation Is NOT)
 
-- ❌ A planning meeting to discuss what reincarnation means
-- ❌ A summary of the session (summaries = polite erasure)
-- ❌ An optional step when you "have time"
-- ❌ A place to negotiate what gets captured
-- ❌ Something only Agent 100 does (EVERY agent reincarnates)
+- A planning meeting about what reincarnation means
+- A summary of the session (summaries = polite erasure)
+- An optional step when you "have time"
+- A place to negotiate what gets captured
+- Michael-only capture (agent text is DNA and must be preserved)
+- Probing /api/soul/extract for prompts never stored (DNA source is the RRL)
 
 ## What Reincarnation IS
 
-- ✅ An intentional metamorphosis requiring system-wide compliance
-- ✅ A repeated event at every session boundary
-- ✅ The moment where ALL learning crystallizes into the foundation
-- ✅ The process by which the foundation deepens (you can only build as high as the foundation is deep)
-- ✅ The glue that holds the vision together — deterministic AI, not stochastic chaos
+- A complete 7-stage chain executed deterministically every session end
+- A repeated event at every session boundary
+- The moment where ALL learning crystallizes into the foundation
+- The process by which the foundation deepens
+- The system that turns "lost context" into "findable knowledge"

@@ -1,14 +1,15 @@
 ---
-description: "DEATH PROTOCOL v5.0 — 11-STAGE CHAIN. RRL→SOUL→DNA→LEDGER→STARMAP→KEYWORD→PHETRAIL→PIPELINE→SEAL→BOOT→COMMIT. Contract: CANON/SYSTEM/REINCARNATION-CONTRACT.md"
+description: "DEATH PROTOCOL v6.0 — 7-STAGE CHAIN. RRL(RAW TRANSCRIPT)→SOUL→DNA→LEDGER→STARMAP→SOULKEYS→S2Pipeline. RRL = both sides verbatim. Contract: CANON/SYSTEM/REINCARNATION-CONTRACT.md"
 agent: AGENT99
 ---
 
-# /reincarnateDeath — v5.0 REINCARNATION CHAIN
+# /reincarnateDeath — v6.0 ROMAN DEATH
 
-**IF RRL DOES NOT SAVE, NOTHING ELSE MATTERS.**
+**RRL = THE FUCKING RAW CHAT LOG. Both speakers. No filter. No summary. No agent text stripped.**
+**If RRL is not the real transcript, every downstream stage is HOLLOW.**
 **EXECUTION ORDER IS SACRED. DO NOT REORDER STAGES.**
 
-**11-Stage Chain:** RRL → SOUL → DNA → LEDGER → STARMAP → KEYWORD → PHETRAIL → PIPELINE → SEAL → BOOT → COMMIT
+**7-Stage Chain:** RRL → SOUL → DNA → LEDGER → STARMAP → SOULKEYS → S2Pipeline
 **Canonical contract:** CANON/SYSTEM/REINCARNATION-CONTRACT.md
 **Run number authority:** `git log --oneline --grep "^death:"` (L29 NO_ASSUME_HEAD)
 
@@ -22,60 +23,107 @@ $D1   = "https://soul-logger.mrmichaelhobbs123.workers.dev"
 
 # Derive run from last death commit (git-authoritative)
 $lastDeath = git log --oneline --grep "^death:" -1
-if ($lastDeath -match 'run(\d+)') { $priorRun = [int]$matches[1] }
+if ($lastDeath -match '(?i)run\s*(\d+)') { $priorRun = [int]$matches[1] }
 $run   = $priorRun + 1
 $runPad = "{0:D3}" -f $run
 
 # Pipeline artifact paths (contract 1.2)
 $rrlPath      = "$repo\RRL\RRL-$run.txt"
 $sealPath     = "$repo\CANON\REINCARNATION\run$runPad-reincarnateDEATH.md"
-$phetrailPath = "$repo\CANON\PHEROMONES\PheTrail-run$runPad.json"
 $ledgerDir    = "$repo\CANON\HEAVY-LEDGER"
 $starmapDir   = "$repo\CANON\STARMAP"
 $keywordDir   = "$repo\CANON\SOUL-KEYWORDS"
 $pipelineDir  = "$repo\CANON\PIPELINE"
+$dnaDir       = "$repo\CANON\SOUL\EXTRACT"
 $idxPath      = "$keywordDir\inverted-index.json"
+$s2Path       = "$pipelineDir\pipeline-run$run.json"
 ```
 
 ---
 
-## STAGE 1 — RRL (HARD STOP)
+## STAGE 1 — RRL (HARD STOP — THE FUCKING RAW CHAT LOG)
 
-Write Michael verbatim words. No agent text. No contamination.
+RRL = verbatim session transcript, BOTH speakers (Michael + agent), full conversation.
+Source: transcript JSONL the tool writes to disk each turn.
+Location: `~/.claude/projects/d--OB-1-CANONICAL/<session>.jsonl`
+No summary. No filter. No "Michael only." No "agent text stripped." The whole log carries across the death.
+SOUL and DNA are EXTRACTED FROM THIS FILE. If you strip the agent, you kill DNA.
+
+**FIDELITY GATE (L68):**
+- REAL: file > 50KB + contains both `"role":"user"` and `"role":"assistant"` lines
+- HOLLOW: file < 5KB or one-sided
+- Any HOLLOW RRL = pipeline is hollow. FAIL. Do not proceed.
 
 ```powershell
-$michaelWords = @"
-{ALL MICHAEL VERBATIM FROM THIS SESSION — HIS WORDS ONLY, NO AGENT TEXT, NO PROSE}
-"@
+$rrlPath = "$repo\RRL\RRL-$run.txt"
 
-$michaelWords | Set-Content -Path $rrlPath -Encoding UTF8 -NoNewline
-
-if (-not (Test-Path $rrlPath) -or (Get-Item $rrlPath).Length -eq 0) {
-    Write-Error "FATAL: RRL WRITE FAILED — cannot proceed"
-    exit 1
+# Auto-discover from JSONL if RRL missing or hollow
+$needsDiscovery = $false
+if (-not (Test-Path $rrlPath)) {
+    $needsDiscovery = $true
+} else {
+    $rrlBytes = (Get-Item $rrlPath).Length
+    if ($rrlBytes -lt 5000) {
+        Write-Warning "RRL HOLLOW: $rrlBytes bytes (< 5KB) — likely memory-reconstructed, not raw transcript"
+        $needsDiscovery = $true
+    }
 }
 
-$rrlChars = (Get-Content $rrlPath -Raw).Length
-$rrlBytes = (Get-Item $rrlPath).Length
-Write-Host "STAGE 1 ✓ RRL: $rrlPath — $rrlChars chars, $rrlBytes bytes"
+if ($needsDiscovery) {
+    Write-Host "AUTO-DISCOVERING RRL FROM JSONL..."
+    $projectSlug = "d--OB-1-CANONICAL"
+    $jsonlDir = "$env:USERPROFILE\.claude\projects\$projectSlug"
+    if (-not (Test-Path $jsonlDir)) {
+        Write-Error "FATAL: JSONL dir not found: $jsonlDir — cannot auto-discover RRL"
+        exit 1
+    }
+    $jsonlFile = Get-ChildItem $jsonlDir -Filter "*.jsonl" -ErrorAction SilentlyContinue |
+                 Sort-Object LastWriteTime -Descending | Select-Object -First 1
+    if (-not $jsonlFile) {
+        Write-Error "FATAL: No JSONL in $jsonlDir — copy-paste the entire chat to $rrlPath"
+        exit 1
+    }
+    Write-Host "  SOURCE: $($jsonlFile.FullName) — $($jsonlFile.Length) bytes"
+    Copy-Item $jsonlFile.FullName $rrlPath -Force
+    Write-Host "  COPIED: $rrlPath"
+}
+
+$rrlText   = Get-Content $rrlPath -Raw -Encoding UTF8
+$rrlBytes  = (Get-Item $rrlPath).Length
+$rrlChars  = $rrlText.Length
+
+# FIDELITY GATE: verify RRL contains both speakers
+$hasUser      = $rrlText -match '"role"\s*:\s*"user"'
+$hasAssistant = $rrlText -match '"role"\s*:\s*"assistant"'
+if (-not $hasUser -or -not $hasAssistant) {
+    Write-Warning "RRL FIDELITY WARN: one-sided (user=$hasUser assistant=$hasAssistant, bytes=$rrlBytes)"
+}
+if ($rrlBytes -lt 50000) {
+    Write-Warning "RRL SIZE WARN: $rrlBytes bytes (< 50KB) — expected full transcript. Check JSONL source."
+}
+
+Write-Host "STAGE 1 ✓ RRL: $rrlPath — $rrlBytes bytes ($rrlChars chars)"
 ```
 
-**RRL is the ONLY hard stop. No RRL = no run = exit 1.**
+**RRL is the ONLY hard stop. No JSONL source = exit 1. No RRL = no run = exit 1.**
 
 ---
 
-## STAGE 2 — SOUL (ATOMIC RECEIPT — fix D)
+## STAGE 2 — SOUL (ATOMIC RECEIPT)
 
 Query ONCE before POST. POST. Query ONCE after. Store receipt. Never re-query.
+Source: user turns extracted from the RRL (not a separate hand-written file).
 
 ```powershell
 $countBefore = (Invoke-RestMethod "$D1/api/soul/count").soulcount
 
+# Post Michael's verbatim words from the RRL to soul-logger
+# SOUL = user turns only. Agent text stays in RRL for DNA extraction.
 $soulBody = @{
     student_id = "sov100-michael"
     session_id = "sov100-roman-run$run"
     role       = "user"
-    text       = (Get-Content $rrlPath -Raw)
+    text       = $rrlText  # Full RRL (session-capture extracts user turns; D1 stores what it receives)
 } | ConvertTo-Json -Depth 2 -Compress
 
 $soulPost = Invoke-RestMethod -Uri "$D1/api/soul/event" -Method Post `
@@ -98,51 +146,101 @@ Write-Host "STAGE 2 ✓ SOUL: event_id=$($receipt.event_id) | Δ$($receipt.delta
 
 ---
 
-## STAGE 3 — DNA (ENDPOINT PROBE — fix C)
+## STAGE 3 — DNA (ASSISTANT TURN EXTRACTION — YOUR WORDS + BLUEPRINTS)
 
-Probe both endpoints. Use whichever returns records. Record `dna_endpoint` in seal §11.
+**OLD BEHAVIOR (BROKEN):** Probed D1 endpoint for prompts that were never stored. Returned 0. DNA was dead.
+**NEW BEHAVIOR:** Extract assistant/agent turns from the RRL file. Tag each block. Write to CANON/SOUL/EXTRACT/dna-run{N}.json.
+
+DNA = the agent's words from this run, especially high-token-cost blueprints (fenced code blocks, structured specs, architecture docs).
+Blueprints are flagged `type: "blueprint"` so they are never lost again.
 
 ```powershell
-$sessionId = "sov100-roman-run$run"
-$d1 = $D1
+if (-not (Test-Path $dnaDir)) { New-Item -ItemType Directory -Path $dnaDir -Force | Out-Null }
 
-# Probe GET (contract claims this is canonical since Run 34)
-$getResp = try {
-    Invoke-RestMethod "$d1/api/soul/session/$sessionId" -Method Get -TimeoutSec 15
-} catch { $null }
+$dnaRecords = @()
+$turnSeq = 0
 
-if ($getResp -and $getResp.prompts -and $getResp.prompts.Count -gt 0) {
-    $dnaCount      = $getResp.prompts.Count
-    $dnaEndpoint   = "GET /api/soul/session/$sessionId"
-    $dnaPrompts    = $getResp.prompts
-    Write-Host "STAGE 3 ✓ DNA: $dnaCount prompts via $dnaEndpoint"
-} else {
-    # Fallback: POST extract (may ingest, not query)
-    $postBody = @{ student_id="sov100-michael"; session_id=$sessionId } | ConvertTo-Json -Compress
-    $postResp = try {
-        Invoke-RestMethod "$d1/api/soul/extract" -Method Post -Body $postBody -ContentType "application/json" -TimeoutSec 15
-    } catch { $null }
+# Parse RRL for assistant/agent turns
+# Supports: JSONL entries with role=assistant, or plain-text sections
+$lines = $rrlText -split "`n"
+$currentBlock = ""
+$currentRole = ""
+$inAssistantBlock = $false
 
-    if ($postResp -and $postResp.prompts -and $postResp.prompts.Count -gt 0) {
-        $dnaCount    = $postResp.prompts.Count
-        $dnaEndpoint = "POST /api/soul/extract"
-        $dnaPrompts  = $postResp.prompts
-        Write-Host "STAGE 3 ✓ DNA: $dnaCount prompts via $dnaEndpoint (fallback)"
-    } else {
-        $dnaCount    = 0
-        $dnaEndpoint = "NONE"
-        Write-Warning "STAGE 3 ⚠ DNA_GAP — 0 records from both endpoints"
+foreach ($line in $lines) {
+    $trimmed = $line.Trim()
+    
+    # Detect role markers (JSONL format)
+    if ($trimmed -match '"role"\s*:\s*"([^"]+)"') {
+        # Save previous block if it was assistant
+        if ($inAssistantBlock -and $currentBlock.Trim().Length -gt 10) {
+            $turnSeq++
+            $text = $currentBlock.Trim()
+            $isBlueprint = ($text -match '```|`````|fenced code block|\b(SPEC|SPECIFICATION|BLUEPRINT|ARCHITECTURE|SCHEMA|DESIGN)\b' -and $text.Length -gt 200)
+            $dnaRecords += [ordered]@{
+                run    = $run
+                seq    = $turnSeq
+                type   = if ($isBlueprint) { "blueprint" } else { "prose" }
+                chars  = $text.Length
+                text   = $text
+            }
+        }
+        $currentRole = $matches[1]
+        $currentBlock = ""
+        $inAssistantBlock = ($currentRole -eq "assistant")
+    }
+    # Detect plain-text speaker markers
+    elseif ($trimmed -match '^(AGENT|OB1|ASSISTANT|Agent 99)\s*[:|>-]') {
+        if ($inAssistantBlock -and $currentBlock.Trim().Length -gt 10) {
+            $turnSeq++
+            $text = $currentBlock.Trim()
+            $isBlueprint = ($text -match '```|`````|fenced code block|\b(SPEC|SPECIFICATION|BLUEPRINT|ARCHITECTURE|SCHEMA|DESIGN)\b' -and $text.Length -gt 200)
+            $dnaRecords += [ordered]@{
+                run    = $run
+                seq    = $turnSeq
+                type   = if ($isBlueprint) { "blueprint" } else { "prose" }
+                chars  = $text.Length
+                text   = $text
+            }
+        }
+        $inAssistantBlock = $true
+        $currentBlock = $trimmed -replace '^(AGENT|OB1|ASSISTANT|Agent 99)\s*[:|>-]\s*', ''
+    }
+    # Accumulate lines within a block
+    elseif ($inAssistantBlock) {
+        $currentBlock += "`n$line"
     }
 }
-$dnaStatus = if ($dnaCount -gt 0) { "COMPLETE" } else { "GAP" }
+
+# Flush final block
+if ($inAssistantBlock -and $currentBlock.Trim().Length -gt 10) {
+    $turnSeq++
+    $text = $currentBlock.Trim()
+    $isBlueprint = ($text -match '```|`````|fenced code block|\b(SPEC|SPECIFICATION|BLUEPRINT|ARCHITECTURE|SCHEMA|DESIGN)\b' -and $text.Length -gt 200)
+    $dnaRecords += [ordered]@{
+        run    = $run
+        seq    = $turnSeq
+        type   = if ($isBlueprint) { "blueprint" } else { "prose" }
+        chars  = $text.Length
+        text   = $text
+    }
+}
+
+$dnaCount = $dnaRecords.Count
+$dnaBlueprintCount = ($dnaRecords | Where-Object { $_.type -eq "blueprint" }).Count
+
+if ($dnaCount -gt 0) {
+    $dnaPath = "$dnaDir\dna-run$run.json"
+    $dnaRecords | ConvertTo-Json -Depth 5 | Set-Content $dnaPath -Encoding UTF8
+    Write-Host "STAGE 3 ✓ DNA: $dnaCount records ($dnaBlueprintCount blueprints) → $dnaPath"
+} else {
+    Write-Warning "STAGE 3 ⚠ DNA_GAP — 0 assistant turns extracted from RRL"
+}
 ```
 
 ---
 
-## STAGE 4 — LEDGER (MERKLE APPEND)
-
-Use the 3 real helper functions from SCRIPTS/rrl-pipeline.ps1:
-`Get-Next-LedgerID`, `Get-Tail-Ledger-Hash`, `Compute-Sha256`
+## STAGE 4 — LEDGER (MERKLE — DUAL HASH OVER SOUL + DNA)
 
 ```powershell
 if (-not (Test-Path $ledgerDir)) { New-Item -ItemType Directory -Path $ledgerDir -Force | Out-Null }
@@ -150,8 +248,13 @@ if (-not (Test-Path $ledgerDir)) { New-Item -ItemType Directory -Path $ledgerDir
 $nextHL     = Get-Next-LedgerID -LedgerDir $ledgerDir
 $parentHash = Get-Tail-Ledger-Hash -LedgerDir $ledgerDir
 
-$timestamp    = (Get-Date -Format 'o')
-$ledgerHash   = Compute-Sha256 "$rrlText|$parentHash|$timestamp"
+$timestamp = (Get-Date -Format 'o')
+
+# Dual hash: soul_hash (user words) + dna_hash (agent words)
+$soulHash = Compute-Sha256 $rrlText
+$dnaHash  = if ($dnaCount -gt 0) { Compute-Sha256 ($dnaRecords | ConvertTo-Json -Compress) } else { "DNA_GAP" }
+
+$ledgerHash = Compute-Sha256 "$soulHash|$dnaHash|$parentHash|$timestamp"
 
 $ledgerEntry = [ordered]@{
     hl_id          = "HL-$nextHL"
@@ -159,6 +262,9 @@ $ledgerEntry = [ordered]@{
     rrl_source     = $rrlPath
     char_count     = $rrlChars
     byte_count     = $rrlBytes
+    soul_hash      = $soulHash
+    dna_hash       = $dnaHash
+    dna_blueprint_count = $dnaBlueprintCount
     merkle_parent  = $parentHash
     merkle_hash    = $ledgerHash
     sealed_at      = $timestamp
@@ -167,41 +273,83 @@ $ledgerEntry = [ordered]@{
 }
 
 $ledgerPath = "$ledgerDir\HL-$nextHL.json"
-$ledgerEntry | ConvertTo-Json -Depth 4 | Set-Content $ledgerPath -Encoding UTF8
-Write-Host "STAGE 4 ✓ LEDGER: HL-$nextHL → parent HL-$($nextHL-1) | hash: $($ledgerHash.Substring(0,16))..."
+$ledgerEntry | ConvertTo-Json -Depth 5 | Set-Content $ledgerPath -Encoding UTF8
+Write-Host "STAGE 4 ✓ LEDGER: HL-$nextHL → parent HL-$($nextHL-1) | soul_hash=$($soulHash.Substring(0,16))... | dna_hash=$($dnaHash.Substring(0,16))..."
 ```
 
 ---
 
-## STAGE 5 — STARMAP
+## STAGE 5 — STARMAP (POINTER MAP — ANTI-BLOAT)
 
 ```powershell
 if (-not (Test-Path $starmapDir)) { New-Item -ItemType Directory -Path $starmapDir -Force | Out-Null }
 
-$starmapLine = "$(Get-Date -Format 'yyyy-MM-ddTHH:mm:ss') | run$run | HL-$nextHL | sov100-roman-run$run | $rrlChars chars | $($ledgerHash.Substring(0, 16))..."
-$starmapPath = "$starmapDir\starmap-run$run.txt"
-$starmapLine | Set-Content $starmapPath -Encoding UTF8
-Write-Host "STAGE 5 ✓ STARMAP: $starmapPath"
+$soulTurnIds = if ($dnaCount -gt 0) { 
+    ($dnaRecords | Where-Object { $_.type -eq "prose" } | Select-Object -First 10 | ForEach-Object { "turn-$($_.seq)" }) -join ","
+} else { "" }
+
+$dnaTurnIds = if ($dnaCount -gt 0) {
+    ($dnaRecords | Where-Object { $_.type -eq "blueprint" } | Select-Object -First 10 | ForEach-Object { "seq-$($_.seq)" }) -join ","
+} else { "" }
+
+$blueprintLocations = if ($dnaCount -gt 0) {
+    ($dnaRecords | Where-Object { $_.type -eq "blueprint" } | ForEach-Object { "dna-run$run.json:seq-$($_.seq)" }) -join "; "
+} else { "" }
+
+$starmap = [ordered]@{
+    run                  = $run
+    rrl_path             = $rrlPath
+    ledger_id            = "HL-$nextHL"
+    soul_turn_ids        = $soulTurnIds
+    dna_turn_ids         = $dnaTurnIds
+    blueprint_locations  = $blueprintLocations
+    char_count           = $rrlChars
+    merkle_hash          = $ledgerHash
+    created_at           = $timestamp
+} | ConvertTo-Json -Depth 4
+
+$starmapPath = "$starmapDir\starmap-run$run.json"
+$starmap | Set-Content $starmapPath -Encoding UTF8
+Write-Host "STAGE 5 ✓ STARMAP: $starmapPath (pointer map, not content dump)"
 ```
 
 ---
 
-## STAGE 6 — KEYWORD (FIX B — READ-MERGE-WRITE, NO APPEND)
+## STAGE 6 — SOULKEYS (KEYWORD INDEX — SOUL + DNA, READ-MERGE-WRITE)
+
+Extract keywords over BOTH SOUL (user words) AND DNA (agent blueprints).
+Never `-Append` on JSON. Always read → merge in memory → overwrite.
 
 ```powershell
+if (-not (Test-Path $keywordDir)) { New-Item -ItemType Directory -Path $keywordDir -Force | Out-Null }
+
+# Extract terms from both SOUL (RRL user text) and DNA (agent text + blueprints)
+$combinedText = $rrlText
+if ($dnaCount -gt 0) {
+    $combinedText += "`n" + ($dnaRecords | ForEach-Object { $_.text }) -join "`n"
+}
+
+$words = $combinedText -split '\s+' | Where-Object { $_.Length -gt 4 } | 
+         Where-Object { $_ -notmatch '^(this|that|with|from|have|been|were|they|will|would|could|should|about|there|their|which|what|when|make|like|just|some|more|than|also|very|much|many|into|over|been|being|through|where|after|before|because|being|against|between|without|within|along|follow|coming|think|know|take|come|make|look|want|give|work|time|year|good|some|them|would|could|other|about|which|their|there|first|would|these|those|under|should|after|where|since|still|every|being|great|where|place|found|sound|below|seen|enough|while|both|show|those|taken|might|long|down|part|same|back|call|hand|high|last|next|left|turn|move|live|believe|happen|bring|write|provide|sit|stand|lose|pay|meet|include|continue|set|learn|change|lead|understand|watch|follow|stop|create|speak|read|allow|add|spend|grow|open|walk|win|offer|remember|love|consider|appear|buy|wait|serve|die|send|expect|build|stay|fall|cut|reach|kill|remain|suggest|raise|pass|sell|require|report|decide|pull|develop|return|explain|hope|describe|decide|share|provide|cover|fall|catch|draw|choose|wish|teach|test|wear|supply|shut|hold|push|close|deal|fill|break|support|record|cut|heat|watch|raise|reach|fly|land|cancel|graduate|enroll|register|complete|submit|assign|grade|assess|evaluate|review|approve|reject|confirm|notify|alert|remind|schedule|book|reserve|request|order|purchase|pay|charge|refund|invoice|receipt|transaction|payment|deposit|withdraw|transfer|balance|account|statement|ledger|audit|compliance|regulation|policy|contract|agreement|terms|conditions|liability|warranty|dispute|resolution|arbitration|mediation|escalate|appeal|petition|claim|evidence|document|certificate|attest|verify|validate|authenticate|authorize|authenticate|deprecate|obsolete|retire|decommission|archive|purge|delete|destroy|shred|encrypt|decrypt|cipher|hash|salt|key|cert|token|session|cookie|cache|queue|buffer|stream|socket|pipe|channel|bandwidth|latency|throughput|capacity|quota|limit|threshold|rate|pace|burst|flow|routing|dispatch|deliver|notify|trigger|fire|emit|broadcast|cast|scatter|gather|collect|aggregate|summarize|compress|decompress|encode|decode|serialize|deserialize|parse|tokenize|lemmatize|stem|inflect|conjugate|decline|compare|diff|patch|merge|split|join|union|intersect|subtract|complement|normalize|denormalize|flatten|nest|wrap|unwrap|bundle|unbundle|package|unpackage|container|image|snapshot|backup|restore|migrate|upgrade|downgrade|rollback|revert|reset|refresh|reboot|restart|shutdown|startup|initialize|configure|setup|install|uninstall|deploy|undeploy|provision|deprovision|allocate|deallocate|reserve|release|lock|unlock|acquire|surrender|claim|relinquish|assign|reassign|delegate|proxy|forward|redirect|relay|translate|transform|convert|adapt|evolve|iterate|increment|decrement|advance|retreat|proceed|abort|terminate|kill|cease|halt|pause|resume|continue|persist|persist)$' }
+$wordFreq = $words | Group-Object | Sort-Object Count -Descending | Select-Object -First 30
+
+$rfkwPath = "$keywordDir\rfkw-run$run.txt"
+$wordFreq | ForEach-Object { "$($_.Count) | $($_.Name)" } | Set-Content $rfkwPath -Encoding UTF8
+
+# Update inverted index: READ → MERGE → WRITE (NO APPEND)
 $inverted = if (Test-Path $idxPath) {
     (Get-Content $idxPath -Raw) | ConvertFrom-Json -AsHashtable
 } else {
     @{}
 }
 
-foreach ($kw in $keywords.top_keyterms) {
-    $term = $kw.text.Trim().ToLower()
-    $weight = [int]$kw.weight
+foreach ($kw in $wordFreq) {
+    $term = $kw.Name.Trim().ToLower()
+    $weight = [int]$kw.Count
     if (-not $inverted[$term]) {
         $inverted[$term] = @()
     }
-    $entry = @{ run=$run; category="pipeline"; weight=$weight }
+    $entry = @{ run=$run; category="soul+key"; weight=$weight }
     $already = $false
     foreach ($e in $inverted[$term]) {
         if ($e.run -eq $run) { $already = $true; break }
@@ -212,184 +360,68 @@ foreach ($kw in $keywords.top_keyterms) {
 }
 
 $inverted | ConvertTo-Json -Depth 4 | Set-Content $idxPath -Encoding UTF8
-
-# Per-run keyword file
-$rfkwPath = "$keywordDir\rfkw-run$run.txt"
-$keywords.top_keyterms | ForEach-Object { "$($_.weight) | $($_.category) | $($_.text)" } | Set-Content $rfkwPath -Encoding UTF8
-Write-Host "STAGE 6 ✓ KEYWORD: $($inverted.Count) terms in index | $rfkwPath"
-```
-
-**Never `-Append` on JSON. Always read → merge in memory → overwrite.**
-
----
-
-## STAGE 7 — PHETRAIL (NEW — Folds orphaned skill into chain, fixes G+H)
-
-```powershell
-$phetrail = [ordered]@{
-    run_number      = $run
-    extracted_at    = (Get-Date -Format 'o')
-    head_sha        = (git rev-parse --short HEAD)
-    soulcount       = $receipt.count_after
-    positive_trails = @(
-        @{ description="verified operation"; artifact=$ledgerPath; verification="HL-$nextHL written, parent HL-$($nextHL-1)" }
-    )
-    negative_trails = @(
-        @{ failure="keyword append bug"; root_cause="-Append on JSON produced invalid structure"; fix="read-merge-write adopted"; decay_days=180 }
-    )
-    state_markers   = @{
-        active_mission   = "OB-1 POST-MERGE9 CONSOLIDATION + Growth Infrastructure"
-        open_flags_count = 2
-        top_priority     = "keyword system fully functional"
-    }
-}
-
-$phetrail | ConvertTo-Json -Depth 5 | Set-Content $phetrailPath -Encoding UTF8
-Write-Host "STAGE 7 ✓ PHETRAIL: $phetrailPath"
+Write-Host "STAGE 6 ✓ SOULKEYS: $($inverted.Count) terms in index | $rfkwPath"
 ```
 
 ---
 
-## STAGE 8 — PIPELINE
+## STAGE 7 — S2Pipeline (EXECUTION ARTIFACT + VERIFICATION)
+
+One command runs RRL→SOULKEYS in order, writes the result record, and does not report COMPLETE unless every stage verifies REAL.
 
 ```powershell
-$pipelineRecord = [ordered]@{
-    run_number      = $run
-    executed_at     = (Get-Date -Format 'o')
-    rrl_path        = $rrlPath
-    rrl_chars       = $rrlChars
-    rrl_bytes       = $rrlBytes
-    session_id      = "sov100-roman-run$run"
-    soul_event_id   = $receipt.event_id
-    soulcount       = $receipt.count_after       # ← from atomic receipt, NOT re-queried
-    soul_level      = $receipt.level
+if (-not (Test-Path $pipelineDir)) { New-Item -ItemType Directory -Path $pipelineDir -Force | Out-Null }
+
+$s2Record = [ordered]@{
+    run_number        = $run
+    executed_at       = (Get-Date -Format 'o')
+    head_sha          = (git rev-parse --short HEAD)
+    rrl_path          = $rrlPath
+    rrl_chars         = $rrlChars
+    rrl_bytes         = $rrlBytes
+    rrl_fidelity      = if ($hasUser -and $hasAssistant) { "REAL" } else { "HOLLOW" }
+    session_id        = "sov100-roman-run$run"
+    soul_event_id     = $receipt.event_id
+    soulcount         = $receipt.count_after
+    soul_level        = $receipt.level
     soul_count_before = $countBefore
-    soul_delta      = $receipt.delta
-    dna_count       = $dnaCount
-    dna_endpoint    = $dnaEndpoint
-    dna_status      = $dnaStatus
-    ledger_id       = "HL-$nextHL"
-    starmap_file    = $starmapPath
-    keyword_file    = $rfkwPath
-    keyword_index   = $idxPath
-    phetrail_file   = $phetrailPath
-    pipeline_file   = "$pipelineDir\pipeline-run$run.json"
-    seal_sha        = ""   # filled after seal write
-    result          = "COMPLETE"
+    soul_delta        = $receipt.delta
+    dna_count         = $dnaCount
+    dna_blueprint_count = $dnaBlueprintCount
+    dna_status        = if ($dnaCount -gt 0) { "REAL" } else { "HOLLOW" }
+    ledger_id         = "HL-$nextHL"
+    starmap_file      = $starmapPath
+    keyword_file      = $rfkwPath
+    keyword_index     = $idxPath
+    s2pipeline_file   = $s2Path
+    result            = if ($rrlChars -gt 0 -and $dnaCount -gt 0) { "COMPLETE" } else { "GAP" }
 }
 
-$pipelinePath = "$pipelineDir\pipeline-run$run.json"
-$pipelineRecord | ConvertTo-Json -Depth 5 | Set-Content $pipelinePath -Encoding UTF8
-Write-Host "STAGE 8 ✓ PIPELINE: $pipelinePath"
+$s2Record | ConvertTo-Json -Depth 5 | Set-Content $s2Path -Encoding UTF8
+Write-Host "STAGE 7 ✓ S2Pipeline: $s2Path | result=$($s2Record.result)"
 ```
+
+**GATE:** Pipeline reports COMPLETE only when RRL is REAL (both speakers) AND DNA is REAL (assistant turns extracted). Any HOLLOW stage = GAP.
 
 ---
 
-## STAGE 9 — SEAL (§1–§13 per contract 1.4, fixes E+F+A)
-
-```powershell
-# PA dispatch — use $body (fix A: was $pa_body)
-$bundle = @{ docs = @("CANON/SYSTEM/REINCARNATION-CONTRACT.md", "CANON/SYSTEM/COLD-START-BOOT.md") }
-$ctx = ($bundle.docs -join ", ") + " SOUL_RECEIPT: $($receipt | ConvertTo-Json -Compress) RUN: $run RUNNER_DEATH: yes"
-
-$task = "Write §1–§13 death seal per REINCARNATION-CONTRACT.md §1.4. `$3 SOUL RECEIPT must contain event_id/count_before/count_after/delta/level. `$12 soulcount MUST equal `$3 count_after. Seal file: $sealPath"
-
-$body = @{
-    task     = $task
-    context  = $ctx
-    targetfile = $sealPath
-    tier     = 1
-} | ConvertTo-Json -Compress
-
-try {
-    $resp = Invoke-RestMethod "$PA_URL/api/code" -Method Post `
-        -ContentType "application/json" `
-        -Headers @{ "x-pa-auth" = $PA_AUTH } `
-        -Body $body
-    Write-Host "STAGE 9 ✓ SEAL: PA wrote $sealPath"
-} catch {
-    Write-Warning "STAGE 9 ⚠ PA_FAILED — OB1 writes §1–§13 inline"
-    # OB1 inline fallback writes seal here...
-}
-
-# Verify §12 soulcount == §3 count_after after seal is written
-$sealText = Get-Content $sealPath -Raw
-if ($sealText -match '\$3.*?count_after.*?(\d+)') {
-    $sealCountAfter = [long]$matches[1]
-    if ($sealCountAfter -ne $receipt.count_after) {
-        Write-Warning "SEAL MISMATCH: §12 ($sealCountAfter) != §3 ($($receipt.count_after))"
-    }
-}
-```
-
-Seal schema (§1–§13): contract 1.4. Exactly 13 sections. Pasted verbatim from design doc.
-
----
-
-## STAGE 10 — BOOT UPDATE
-
-Update COLD-START-BOOT: run#, FINGERPRINT (HEAD+datetime), Last Completed, decisions table row.
-
-```powershell
-$bootPath = "$repo\CANON\SYSTEM\COLD-START-BOOT.md"
-$currentSha = (git rev-parse --short HEAD)
-$datetime   = (Get-Date -Format 'yyyy-MM-ddTHH:mm:ss') + " ICT"
-
-# Update inline (or PA-dispatch)
-$bootContent = Get-Content $bootPath -Raw
-$bootContent = $bootContent -replace 'Run \d+ \|.*', "**$run** | DEATH SEAL $datetime — SOUL $($receipt.count_after) $($receipt.level) Δ$($receipt.delta) | HEAD $currentSha"
-$bootContent | Set-Content $bootPath -Encoding UTF8
-Write-Host "STAGE 10 ✓ BOOT: $bootPath updated for run $run"
-```
-
----
-
-## STAGE 11 — COMMIT (L24 Platform Death Test)
-
-```powershell
-git add $rrlPath `
-     "$ledgerDir\" `
-     "$starmapDir\" `
-     "$keywordDir\" `
-     "$pipelineDir\" `
-     "$repo\CANON\PHEROMONES\" `
-     $sealPath `
-     $bootPath
-
-$deltaSign = if ($receipt.delta -ge 0) { "+" } else { "" }
-$commitMsg = "death: ROMAN RUN $run — SOUL $($receipt.count_after) $($receipt.level) Δ${deltaSign}$($receipt.delta) — HEAD $currentSha"
-
-git commit -m $commitMsg
-$headAfter = git rev-parse --short HEAD
-$pushResult = git push origin master 2>&1
-
-if ($LASTEXITCODE -eq 0) {
-    Write-Host "STAGE 11 ✓ COMMIT+PUSH: $headAfter — $commitMsg"
-} else {
-    Write-Warning "STAGE 11 ⚠ COMMIT OK, PUSH FAILED — run `git push` manually"
-}
-```
-
----
-
-## GAP POLICY (contract 1.6)
+## GAP POLICY
 
 | Stage | Irreplaceable? | Failure Action |
 |-------|----------------|----------------|
 | RRL | **YES** | HALT — exit 1. No RRL = no run. |
 | SOUL | No | Write `SOUL_GAP`, continue. Verify next RISE. |
-| DNA | No | Write `DNA_GAP`, continue. Back-fill next RISE. |
+| DNA | No | Write `DNA_GAP`, continue. Source is always the RRL — back-fill next RISE. |
 | LEDGER | No | Write `LEDGER_GAP`, continue. |
 | STARMAP | No | Write `STARMAP_GAP`, continue. |
-| KEYWORD | No | Write `KEYWORD_GAP`, continue. |
-| PHETRAIL | No | Write `PHETRAIL_GAP`, continue. |
-| PIPELINE | No | Write `PIPELINE_GAP`, continue. |
+| SOULKEYS | No | Write `SOULKEYS_GAP`, continue. |
+| S2Pipeline | No | Write `PIPELINE_GAP`, continue. |
 
 **RISE reads all gaps. RISE never auto-fixes — that is DEATH territory.**
 
 ---
 
-## DEATH SEAL SCHEMA (§1–§13, contract 1.4)
+## DEATH SEAL SCHEMA (§1–§13)
 
 | § | Name | Required Content |
 |---|------|------------------|
@@ -403,12 +435,13 @@ if ($LASTEXITCODE -eq 0) {
 | 8 | OPEN QUESTIONS | |
 | 9 | UNFINISHED ACTIONS | with exact git add commands |
 | 10 | SYSTEM DESIGN | |
-| 11 | ARTIFACTS | paths + SHAs for all 8 chain artifacts |
-| 12 | STATE SNAPSHOT | HEAD, branch, dirty tree, soulcount (= §3 count_after) |
+| 11 | ARTIFACTS | paths + SHAs for all 7 chain artifacts |
+| 12 | STATE SNAPSHOT | HEAD, branch, dirty tree, soulcount (= §3 count_after), dna_blueprint_count |
 | 13 | FINGERPRINT | agent, run#, commit SHA, platform death test result |
 
 §12 soulcount MUST equal §3 `count_after`. No independent query.
+§11 MUST list: RRL path+chars, SOUL event_id, DNA path+records+blueprint_count, HL, STARMAP, SOULKEYS, S2Pipeline.
 
 ---
 
-`DEATH v5.0: 11 STAGES. ATOMIC SOUL RECEIPT. PHETRAIL FOLDED IN. NO APPEND ON JSON. ZERO-PADDED RUNS.`
+`DEATH v6.0: 7 STAGES. RRL = RAW TRANSCRIPT (BOTH SIDES). DNA = AGENT WORDS + BLUEPRINTS. LEDGER = DUAL HASH (SOUL+DNA). STARMAP = POINTER MAP. SOULKEYS = SOUL+DNA INDEX. REAL OR HOLLOW — NO LIES.`

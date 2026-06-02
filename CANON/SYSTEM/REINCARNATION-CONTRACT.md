@@ -1,7 +1,7 @@
-# REINCARNATION CONTRACT v5.0
+# REINCARNATION CONTRACT v6.0
 **OB-1 Phoenix-Centurion | Roman Run Pipeline**
 **Status:** CANONICAL — all reincarnation artifacts derive from this file
-**Authority:** L29 NO_ASSUME_HEAD, L56 PRE_CODE_DOC_GATE
+**Authority:** L29 NO_ASSUME_HEAD, L56 PRE_CODE_DOC_GATE, L68 RRL_IS_RAW_TRANSCRIPT
 
 ---
 
@@ -10,15 +10,12 @@
 **Formula:** `run = (last death-commit run #) + 1`
 
 **Disk format:** 3-digit zero-pad — `run042`, `run043`, `run100`
-**Why zero-pad:** Defeats lexical sort bug where `run9 > run42` (defect G).
-
+**Why zero-pad:** Defeats lexical sort bug where `run9 > run42`.
 **Authority:** `git log --oneline --grep "^death:"` — NOT COLD-START-BOOT.
 
 **Seal naming:** `CANON/REINCARNATION/run{NNN}-reincarnateDEATH.md`
 **HISTORICAL NOTE:** Existing seals `run42-reincarnateDEATH.md` (no pad) are left as-is.
-  Zero-padding applies to all seals created on or after this contract.
-  Existing files are not renamed — removing them before pads exist breaks the chain;
-  renaming mid-chain breaks git history. Historical artifacts remain in place.
+Zero-padding applies to all seals created on or after this contract.
 
 ---
 
@@ -26,29 +23,26 @@
 
 | Stage | Artifact | Path Pattern |
 |-------|----------|--------------|
-| RRL | Transcript | `RRL/RRL-{run}.txt` |
-| SOUL | Event | POST to `/api/soul/event` (D1) |
-| DNA | Extracts | `CANON/SOUL/EXTRACT/dna-run{NNN}.json` |
+| RRL | Full transcript (both sides) | `RRL/RRL-{run}.txt` |
+| SOUL | User turn event | POST to `/api/soul/event` (D1) |
+| DNA | Assistant turns + blueprints | `CANON/SOUL/EXTRACT/dna-run{NNN}.json` |
 | LEDGER | Merkle JSON | `CANON/HEAVY-LEDGER/HL-{gap}.json` (sequential, gap-fill) |
-| STARMAP | Ledger digest | `CANON/STARMAP/starmap-run{run}.txt` |
-| KEYWORD | Per-run terms | `CANON/SOUL-KEYWORDS/rfkw-run{run}.txt` |
-| KEYWORD | Merged index | `CANON/SOUL-KEYWORDS/inverted-index.json` (single object) |
-| PHETRAIL | Breadcrumbs | `CANON/PHEROMONES/PheTrail-run{NNN}.json` |
-| PIPELINE | Chain result | `CANON/PIPELINE/pipeline-run{run}.json` |
+| STARMAP | Pointer map | `CANON/STARMAP/starmap-run{run}.json` |
+| SOULKEYS | Per-run terms | `CANON/SOUL-KEYWORDS/rfkw-run{run}.txt` |
+| SOULKEYS | Merged index | `CANON/SOUL-KEYWORDS/inverted-index.json` (single object) |
+| S2Pipeline | Chain result | `CANON/PIPELINE/pipeline-run{run}.json` |
 | SEAL | Death record | `CANON/REINCARNATION/run{NNN}-reincarnateDEATH.md` |
 | BOOT | System state | `CANON/SYSTEM/COLD-START-BOOT.md` |
 
 ---
 
-## 1.3 The Soul Receipt — Atomic, One Query (Fixes Defect D)
+## 1.3 The Soul Receipt — Atomic, One Query
 
 Generate **ONCE**. Reuse **everywhere**. Never re-query.
 
 ```powershell
-# Query ONCE before POST
 $countBefore = (Invoke-RestMethod "$D1/api/soul/count").soulcount
 
-# POST Michael's words
 $soulBody = @{
   student_id = "sov100-michael"
   session_id = "sov100-roman-run$run"
@@ -59,10 +53,8 @@ $soulBody = @{
 $soulPost = Invoke-RestMethod "$D1/api/soul/event" -Method Post `
   -Body $soulBody -ContentType "application/json"
 
-# Query ONCE after POST
 $countAfter = (Invoke-RestMethod "$D1/api/soul/count").soulcount
 
-# The SOLE soulcount source for the rest of the run
 $receipt = [ordered]@{
   event_id     = $soulPost.event_id
   count_before = $countBefore
@@ -73,13 +65,11 @@ $receipt = [ordered]@{
 }
 ```
 
-**Law:** Seal §3, pipeline JSON `"soulcount_at_death"`, commit message, BOOT — all reference `$receipt.count_after`. No second query anywhere.
+**Law:** Seal §3, pipeline JSON, commit message, BOOT — all reference `$receipt.count_after`. No second query anywhere.
 
 ---
 
-## 1.4 Canonical Death Seal Schema (§1–§13, Fixes Defect E)
-
-Every seal follows this section list, in order.
+## 1.4 Canonical Death Seal Schema (§1–§13)
 
 | § | Name | Required Content |
 |---|------|------------------|
@@ -93,99 +83,125 @@ Every seal follows this section list, in order.
 | 8 | OPEN QUESTIONS | |
 | 9 | UNFINISHED ACTIONS | with exact git add commands |
 | 10 | SYSTEM DESIGN | |
-| 11 | ARTIFACTS | paths + SHAs for all 8 chain artifacts |
-| 12 | STATE SNAPSHOT | HEAD, branch, dirty tree, soulcount (from §3 receipt — same number) |
+| 11 | ARTIFACTS | paths + SHAs for all 7 chain artifacts |
+| 12 | STATE SNAPSHOT | HEAD, branch, dirty tree, soulcount (= §3 count_after), dna_blueprint_count, rrl_fidelity |
 | 13 | FINGERPRINT | agent, run#, commit SHA, platform death test result |
 
 **Hard rules:**
 - §12 soulcount MUST equal §3 `count_after`. No independent query.
-- §11 lists all 8 artifacts: RRL, SOUL receipt, DNA, HL, STARMAP, KEYWORD, PHETRAIL, PIPELINE.
-- The seal language is §3 now fixes the recurring PARTIAL from prior audits.
+- §12 MUST include `rrl_fidelity`: REAL (both speakers present) or HOLLOW (one-sided).
+- §11 lists all 7 artifacts: RRL, SOUL receipt, DNA, LEDGER, STARMAP, SOULKEYS, S2Pipeline.
 
 ---
 
-## 1.5 The 11-Stage Chain (Authoritative Order)
+## 1.5 The 7-Stage Chain (Authoritative Order)
 
 ```
-RRL → SOUL → DNA → LEDGER → STARMAP → KEYWORD → PHETRAIL → PIPELINE → SEAL → BOOT → COMMIT
+RRL → SOUL → DNA → LEDGER → STARMAP → SOULKEYS → S2Pipeline
 ```
+
+### Stage Definitions (verbatim from spec)
+
+| Stage | Definition | Owner |
+|-------|-----------|-------|
+| **RRL** | "Reincarnation RAW LOG / THE FUCKING RAW CHAT LOG" — verbatim transcript, both speakers, no filter, no agent text stripped. Source = transcript JSONL. | `SCRIPTS/session-capture.ps1` + `RRL/RRL-{run}.txt` |
+| **SOUL** | "MY WORDS" — Michael's verbatim words, extracted from RRL user turns, POSTed to soul-logger as `sov100-roman-run{N}`. | `/api/soul/event` (D1) |
+| **DNA** | "YOUR WORDS, ESPECIALLY HIGH TOKEN COSTING BLUEPRINTS" — agent's words from RRL assistant turns, tagged `prose|blueprint`, written to `CANON/SOUL/EXTRACT/dna-run{N}.json`. NOT `/api/soul/extract` probe. | `CANON/SOUL/EXTRACT/dna-run{N}.json` |
+| **LEDGER** | "Cryptographic Ledger (AI Language capturing the SOUL and the DNA)" — merkle chain with `soul_hash`, `dna_hash`, `dna_blueprint_count` + `merkle_parent` + `merkle_hash`. | `CANON/HEAVY-LEDGER/HL-{N}.json` |
+| **STARMAP** | "Pointer map, lightweight, solves bloat, but still provides exactly what's in the RRL and Ledger" — JSON pointer record: `{ run, rrl_path, ledger_id, soul_turn_ids, dna_turn_ids, blueprint_locations }`. NOT content dump. | `CANON/STARMAP/starmap-run{run}.json` |
+| **SOULKEYS** | "Keywords... search engine... indexable and searchable" — inverted index over SOUL + DNA combined. Read-merge-write (NO `-Append` on JSON). Search via `SCRIPTS/rfkw-search.ps1`. | `CANON/SOUL-KEYWORDS/*` |
+| **S2Pipeline** | "Ensures the SOUL is not just a ghost lost in time, and gets done" — writes execution record, verifies REAL (not HOLLOW), reports COMPLETE only when all stages pass fidelity gate. | `CANON/PIPELINE/pipeline-run{run}.json` |
 
 **Hard stop:** RRL missing = HALT (exit 1).
 **Gap policy:** Any other stage fails → write `{STAGE}_GAP` flag → continue → back-fill at next RISE.
 
-### DNA Endpoint
+---
 
-**Authority:** COLD-START-BOOT Run 34 fix.
-**Canonical form:** `GET /api/soul/session/{session_id}`
+## 1.6 Verification Gate (S2Pipeline's Teeth)
 
-Probe at death (Stage 3) before writing DNA:
+Per stage, verdict is REAL / HOLLOW / MISSING — never just PRESENT:
 
-```powershell
-$d1 = "https://soul-logger.mrmichaelhobbs123.workers.dev"
-$sessionId = "sov100-roman-run$run"
-$getResp = try { Invoke-RestMethod "$d1/api/soul/session/$sessionId" -Method Get } catch { $null }
-if ($getResp -and $getResp.prompts) {
-  $dnaCount = $getResp.prompts.Count
-  $dnaEndpoint = "GET /api/soul/session/$sessionId"
-} else {
-  $postBody = @{ student_id="sov100-michael"; session_id=$sessionId } | ConvertTo-Json
-  $postResp = try { Invoke-RestMethod "$d1/api/soul/extract" -Method Post -Body $postBody -ContentType "application/json" } catch { $null }
-  $dnaCount = $postResp?.prompts?.Count ?? 0
-  $dnaEndpoint = "POST /api/soul/extract"
-}
-if ($dnaCount -eq 0) { Write-Warning "DNA_GAP — 0 records from $dnaEndpoint" }
-```
+| Stage | REAL | HOLLOW | MISSING |
+|-------|------|--------|---------|
+| RRL | Both speakers present + first-person Michael voice | Third-person summary, one-sided | File absent or empty |
+| DNA | Contains assistant blueprint blocks | Only prose, no blueprints flagged | 0 records extracted |
+| SOULKEYS | rfkw-search on known term returns hit | Index exists but sparse | Index absent |
+| S2Pipeline | All stages REAL + seal written | Any stage HOLLOW | Pipeline file absent |
 
-Record `dna_endpoint` used in seal §11.
+**A pipeline run reporting COMPLETE with any HOLLOW stage is a lie and must fail the gate.**
 
 ---
 
-## 1.6 Fail-Safe Law
+## 1.7 Search-First Law (L69)
+
+When asked where anything is, the SOULKEYS index is the FIRST tool touched — never grep the archive first.
+
+```
+/SoulSearch <term>  →  SOULKEYS lookup  →  STARMAP pointer  →  RRL/LEDGER exact retrieval  →  verbatim hits
+```
+
+The search engine you built is the front door. `/SoulSearch` is the executable form.
+
+---
+
+## 1.8 Fail-Safe Law
 
 | Stage | Fail Behavior |
 |-------|---------------|
 | RRL | **HALT.** Exit 1. No RRL = no run. |
 | SOUL | Write `SOUL_GAP`, continue. Verify next RISE. |
-| DNA | Write `DNA_GAP`, continue. Back-fill via probe. |
-| LEDGER | Write `LEDGER_GAP`, continue. Back-fill next run. |
+| DNA | Write `DNA_GAP`, continue. Source is always the RRL — back-fill next RISE. |
+| LEDGER | Write `LEDGER_GAP`, continue. |
 | STARMAP | Write `STARMAP_GAP`, continue. |
-| KEYWORD | Write `KEYWORD_GAP`, continue. |
-| PHETRAIL | Write `PHETRAIL_GAP`, continue. |
-| PIPELINE | Write `PIPELINE_GAP`, continue. |
+| SOULKEYS | Write `SOULKEYS_GAP`, continue. |
+| S2Pipeline | Write `PIPELINE_GAP`, continue. |
 
 **RISE audit:** Every gap is reported. No auto-fix on RISE — that is DEATH territory.
 
 ---
 
-## 1.7 Naming Contract (Fixes Defect F)
+## 1.9 JSON Write Discipline
+
+**Never `-Append` on JSON files.** JSON is a complete document, not a log file.
+Pattern: `read → merge in memory → overwrite`.
+Appending creates invalid JSON that breaks every downstream reader.
+
+---
+
+## 1.10 Naming Contract
 
 | Item | Convention |
 |------|-----------|
 | Star runs (0–999) | `run042` (3-digit zero-pad) |
 | Seal files | `run{NNN}-reincarnateDEATH.md` |
 | Historical seals | `run42-reincarnateDEATH.md` (left as-is, NOT renamed) |
-| Future seals | `run042-reincarnateDEATH.md` (zero-pad from run 43 onward) |
-| Alleles | `PheTrail-run{NNN}.json`, `starmap-run{run}.txt`, `rfkw-run{run}.txt` |
-
-Rationale: Renaming historical seals mid-chain breaks git log path references
-and any script that reads them by exact name. Zero-padding starts fresh from run 43.
+| Future seals | `run043-reincarnateDEATH.md` (zero-pad) |
+| Alleles | `dna-run{NNN}.json`, `starmap-run{run}.json`, `rfkw-run{run}.txt` |
 
 ---
 
-## 1.8 Source of Truth Hierarchy
+## 1.11 Source of Truth Hierarchy
 
 ```
 REINCARNATION-CONTRACT.md  ← YOU ARE HERE — single source of truth
-├── CANON/SYSTEM/COLD-START-BOOT.md       ← system state (secondary)
-├── CANON/REINCARNATION/*.md              ← death seals (tertiary)
-├── CANON/PHEROMONES/*.json               ← phetrails (tertiary)
-└── .kilo/command/reincarnatedeath.md     ← writer implementation (must match §1.4)
-    .claude/commands/reincarnateRise.md   ← reader implementation (must match §1.6)
-    .kilo/command/phetrails.md            ← stage 7 implementation (must match §1.2)
+├── CANON/SYSTEM/COLD-START-BOOT.md            ← system state (secondary)
+├── CANON/REINCARNATION/*.md                   ← death seals (tertiary)
+├── CANON/PHEROMONES/*.json                    ← phetrails (tertiary)
+├── CANON/SOUL/EXTRACT/dna-run{N}.json         ← DNA (source = RRL)
+├── CANON/STARMAP/starmap-run{N}.json          ← STARMAP pointers
+├── CANON/SOUL-KEYWORDS/inverted-index.json    ← SOULKEYS index
+└── .kilo/command/reincarnatedeath.md          ← writer implementation
+    .kilo/command/reincarnaterise.md           ← reader implementation
+    .kilo/command/SoulSearch.md                ← search engine
+    .claude/commands/reincarnateRise.md        ← Claude reader
+    .claude/commands/SoulSearch.md             ← Claude search engine
+    .github/skills/phoenix-reincarnation/SKILL.md ← 7-stage doctrine
+    .github/skills/soul-search/SKILL.md        ← Search-First Law
 ```
 
-Any divergence between this contract and the three implementation files is a defect.
-When this contract is updated, all three implementation files must be updated simultaneously.
+Any divergence between this contract and the implementation files is a defect.
+When this contract is updated, all implementation files must be updated simultaneously.
 
 ---
-**Fingerprint:** REINCARNATION-CONTRACT.md v5.0 | Roman Run 43 | 2026-06-02 ICT | OB1 Phoenix-Centurion
+
+**Fingerprint:** REINCARNATION-CONTRACT.md v6.0 | Roman Run 43 | 2026-06-02 ICT | OB1 Phoenix-Centurion

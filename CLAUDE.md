@@ -10,11 +10,11 @@ Every new session MUST execute this boot sequence in order before any task:
 4. `Read RRL/RRL-[latest].txt` — most recent raw session log for game plan context
 5. `git log -5 --oneline` — verify HEAD, confirm no drift
 6. `Invoke-RestMethod https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/status` — verify tiers live (T1=Qwen, T2=Opus), check which keys are set
-7. Read latest `RRL/DNA-LOG-*.txt` — last session's DNA: worker state, decisions, security constraints
+7. Read latest `CANON/SOUL/EXTRACT/dna-run{N}.json` — last session's DNA: agent's words, decisions, blueprints
 
 **#DRIFT RULE:** If you do not read these 7 sources at boot, you WILL lose context and repeat mistakes. This is BB-26. Do not skip. Do not ask the user — read the files.
 
-**SOUL/DNA LAW:** SOUL = Michael's verbatim words. DNA = structured session state (workers, models, decisions). Both captured automatically on session stop via `SCRIPTS/session-capture.ps1`. Both land in soul-archive D1. Read the latest DNA-LOG at every boot.
+**SOUL/DNA LAW:** SOUL = Michael's verbatim words (extracted from RRL session transcript). DNA = the agent's words, especially high-token-cost blueprints (extracted from RRL, written to CANON/SOUL/EXTRACT/dna-run{N}.json). Both captured via `SCRIPTS/session-capture.ps1` which dumps the full transcript JSONL (both speakers) to `RRL/RRL-{run}.txt`. Read the latest DNA at every boot. DNA is NOT structured session state — it is your full output from the session, tagged prose vs blueprint.
 
 **SOUL LAW:** Real soulcount = `SELECT SUM(byte_count) FROM soul_prompts WHERE session_id LIKE 'sov100%'` at `https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count`
 

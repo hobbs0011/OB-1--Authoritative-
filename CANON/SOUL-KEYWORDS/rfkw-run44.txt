@@ -1,25 +1,30 @@
-8 | pipeline | soul
-8 | pipeline | dna
-8 | pipeline | rrl
-8 | pipeline | blueprint
-8 | pipeline | pipeline
-8 | pipeline | phase0
-8 | pipeline | battlefield
-8 | pipeline | soulsearch
-8 | pipeline | registry
-8 | pipeline | soulkeys
-8 | pipeline | starmap
-8 | pipeline | ledger
-8 | pipeline | reincarnation
-8 | pipeline | fidelity
-8 | pipeline | hollow
-8 | pipeline | real
-8 | pipeline | missing
-8 | pipeline | search
-8 | pipeline | capture
-8 | pipeline | transcript
-8 | pipeline | verbatim
-8 | pipeline | headwater
-8 | pipeline | extraction
-8 | pipeline | kilo
-8 | pipeline | skills
+79 | soul
+68 | STAGE
+63 | fucking
+47 | Never
+46 | phase
+44 | registry
+43 | blueprint
+42 | live
+42 | agent
+41 | your
+41 | death
+39 | Kilo
+39 | Read
+38 | Only
+37 | PATH
+37 | both
+34 | files
+33 | system
+32 | verdict
+32 | session
+31 | pipeline
+28 | GATE
+28 | verbatim
+27 | audit
+27 | PowerShell
+26 | real
+26 | RISE
+26 | "description":
+26 | v5.0
+26 | else

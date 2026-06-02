@@ -1,21 +1,19 @@
 {
   "run_number": "0",
-  "executed_at": "2026-05-23T05:43:37.463789+00:00",
+  "executed_at": "2026-06-02T10:03:45.3973714+07:00",
   "rrl_path": "D:\\OB-1-CANONICAL\\RRL\\RRL-0.txt",
-  "rrl_chars": 152786,
-  "rrl_bytes": 154667,
-  "session_id": "sov100-run0-rise",
-  "soul_event_id": "a51886a5-d649-4cc3-a5c7-1ef62b617ad8",
-  "soulcount_before": 580437,
-  "soulcount_after": 735104,
-  "soul_delta": 154667,
+  "rrl_chars": 1193049,
+  "rrl_bytes": 1202418,
+  "session_id": "sov100-roman-run0",
+  "soul_event_id": "2be70d3f-e366-4e36-8de8-4c3af3ac8528",
+  "soulcount": 77716423,
   "soul_level": "TITANIUM_ANCHOR",
-  "dna_count": 0,
-  "dna_status": "WARN_GAP - extract 400 (Python batch OK but endpoint 400)",
-  "ledger_id": "HL-146",
+  "dna_count": 12,
+  "ledger_id": "HL-221",
   "starmap_file": "D:\\OB-1-CANONICAL\\CANON\\STARMAP\\starmap-run0.txt",
   "keyword_file": "D:\\OB-1-CANONICAL\\CANON\\SOUL-KEYWORDS\\rfkw-run0.txt",
-  "seal_sha": "",
-  "result": "FIXED - SOUL 201 OK, DNA probe gap, DNA extract 400",
-  "fix_note": "Em-dash encoding flush in all RRL scripts. RRL-0 pipeline: SOUL +154667 bytes (D1 delta), LEDGER HL-146, STARMAP, KEYWORD, PIPELINE - all written. Death seal deferred to COMMIT block."
+  "pipeline_file": "D:\\OB-1-CANONICAL\\CANON\\PIPELINE\\pipeline-run0.json",
+  "seal_sha": "f0d272c76b9702cd39c21026b3b00fbb50d8b5f474c9df7f4309d3647c20ba91",
+  "result": "COMPLETE"
 }
+

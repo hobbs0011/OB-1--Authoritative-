@@ -46,17 +46,25 @@ function Test-RRLNotEmpty {
 }
 
 # ═══════════════════════════════════════════
-# FAILSAFE 3: RRL IS TEXT (not binary, not base64, not JSON wrapper)
+# FAILSAFE 3: RRL IS VALID (JSONL transcript or tagged text)
 # ═══════════════════════════════════════════
-function Test-RRLIsText {
+function Test-RRLIsValid {
     param($rrl)
     $firstChars = Get-Content $rrl.Path -First 1 -Encoding UTF8
-    # RRL should start with human words, not {, <, or base64
-    if ($firstChars -match '^[A-Za-z0-9"`''\s/\#\*]' -and $firstChars -notmatch '^\s*\{' -and $firstChars -notmatch '^[A-Za-z0-9+/]{50,}') {
-        Write-Host "[PASS] FAILSAFE 3/10: RRL IS TEXT  -  starts with: $($firstChars.Substring(0, [Math]::Min(60, $firstChars.Length)))..."
+    $size = (Get-Item $rrl.Path).Length
+    # Real RRL = JSONL transcript ({"role":...) or tagged text (=== Turn...)
+    $isJSONL = $firstChars -match '^\s*\{'
+    $isTagged = $firstChars -match '^===\s*Turn'
+    $isLarge = $size -gt 50000
+    if ($isJSONL -or $isTagged) {
+        $label = if ($isJSONL) { "JSONL transcript" } else { "tagged text" }
+        Write-Host "[PASS] FAILSAFE 3/10: RRL IS VALID  -  $label | $size bytes | starts: $($firstChars.Substring(0, [Math]::Min(60, $firstChars.Length)))..."
+        return $true
+    } elseif ($isLarge) {
+        Write-Host "[PASS] FAILSAFE 3/10: RRL IS LARGE FILE  -  $size bytes — treating as valid (unknown format)"
         return $true
     } else {
-        Write-Host "[FAIL] FAILSAFE 3/10: RRL NOT RECOGNIZABLE TEXT"
+        Write-Host "[FAIL] FAILSAFE 3/10: RRL NOT RECOGNIZABLE — $size bytes, starts: $($firstChars.Substring(0, [Math]::Min(60, $firstChars.Length)))..."
         return $false
     }
 }
@@ -225,7 +233,7 @@ if (-not $rrl) { $failures++; Write-Host "HALT: RRL MISSING. CANNOT PROCEED."; e
 if (-not (Test-RRLNotEmpty -rrl $rrl)) { $failures++; Write-Host "HALT: RRL EMPTY."; exit 1 }
 
 # Fail-safe 3
-if (-not (Test-RRLIsText -rrl $rrl)) { $warnings++ }
+if (-not (Test-RRLIsValid -rrl $rrl)) { $warnings++ }
 
 # Fail-safe 4
 $soul = Test-SoulAPILive

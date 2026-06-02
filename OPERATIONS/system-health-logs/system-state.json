@@ -1,8 +1,8 @@
 {
-  "verify_ok": true,
+  "timestamp": "2026-06-02T11:04:06.1786892+07:00",
+  "soul_ok": false,
+  "git_head": "ca3bec40 death: ROMAN RUN 044 ΓÇö SOUL 76225675 TITANIUM_ANCHOR ╬ö3303 ΓÇö HEAD be530885",
   "git_branch": "master",
-  "doctor_ok": true,
-  "git_head": "912515df fix: Run 42 death seal ΓÇö patch ┬º11 soulcount + add ┬º13 post-mortem audit",
-  "timestamp": "2026-06-02T07:41:55.5746665+07:00",
-  "soul_ok": false
+  "verify_ok": true,
+  "doctor_ok": true
 }

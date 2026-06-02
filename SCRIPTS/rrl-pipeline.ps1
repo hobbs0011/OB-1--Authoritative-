@@ -86,40 +86,81 @@ $rrlBytes  = (Get-Item $RRLFile).Length
 Write-Step 0 "PASS" "RRL loaded: $rrlChars chars, $rrlBytes bytes"
 
 # ═══════════════════════════════════════════
-# GATE 0.5: CONTAMINATION CHECK
+# GATE 0.5: FIDELITY CHECK (v6.0 — RRL = full transcript, both sides)
 # ═══════════════════════════════════════════
-$CONTAMINATION_THRESHOLD = 100000
-if ($rrlBytes -gt $CONTAMINATION_THRESHOLD) {
-    if (-not $AllowContaminated) {
-        Write-Step "0.5" "FAIL" "CONTAMINATION SUSPECTED — file $rrlBytes bytes (>100KB). Kilo exports inflate SOULCOUNT with agent text. Pass -AllowContaminated to override."
-        Write-Host "HALT: Large RRL rejected. Clean RRLs are Michael verbatim only (<100KB)."
+$FIDELITY_MIN_BYTES = 5000
+$FIDELITY_MIN_TURNS = 10
+if ($rrlBytes -lt $FIDELITY_MIN_BYTES) {
+    Write-Step "0.5" "WARN" "RRL SMALL: $rrlBytes bytes (< $FIDELITY_MIN_BYTES) — may be hollow. Checking structure..."
+    $hasRole = $rrlText -match '"role"\s*:\s*"(user|assistant)"'
+    if (-not $hasRole) {
+        Write-Step "0.5" "FAIL" "RRL HAS NO ROLE MARKERS — not a valid transcript JSONL. HALT."
+        Write-Host "HALT: RRL is not a valid transcript. Provide the real JSONL or copy-paste the full chat."
         exit 1
-    } else {
-        Write-Step "0.5" "WARN" "CONTAMINATION OVERRIDE — large file ($rrlBytes bytes) accepted. Soul event will include agent text. Document in death seal."
     }
 } else {
-    Write-Step "0.5" "PASS" "SIZE OK — $rrlBytes bytes (below 100KB threshold)"
+    Write-Step "0.5" "PASS" "SIZE OK — $rrlBytes bytes"
 }
 
 # ═══════════════════════════════════════════
-# STEP 1: SOUL  -  POST RRL TO D1
+# HELPER: Extract user/assistant turns from JSONL
+# ═══════════════════════════════════════════
+function Split-RL {
+    param([string]$Text)
+    $user = @()
+    $assistant = @()
+    $currentRole = $null
+    $currentLines = @()
+    
+    $Text -split "`n" | ForEach-Object {
+        $line = $_
+        if ($line -match '"role"\s*:\s*"([^"]+)"') {
+            if ($currentRole -eq "user" -and $currentLines.Count -gt 0) {
+                $user += ($currentLines -join "`n")
+            }
+            elseif ($currentRole -eq "assistant" -and $currentLines.Count -gt 0) {
+                $assistant += ($currentLines -join "`n")
+            }
+            $currentRole = $matches[1]
+            $currentLines = @($line)
+        }
+        elseif ($currentRole) {
+            $currentLines += $line
+        }
+    }
+    # Flush final block
+    if ($currentRole -eq "user" -and $currentLines.Count -gt 0) { $user += ($currentLines -join "`n") }
+    if ($currentRole -eq "assistant" -and $currentLines.Count -gt 0) { $assistant += ($currentLines -join "`n") }
+    
+    return @{ User=$user; Assistant=$assistant }
+}
+
+$turns = Split-RL -Text $rrlText
+$userTurns = $turns.User
+$agentTurns = $turns.Assistant
+Write-Host "  PARSED: $($userTurns.Count) user turns, $($agentTurns.Count) assistant turns"
+
+# ═══════════════════════════════════════════
+# STEP 1: SOUL  -  POST USER TURNS TO D1
 # ═══════════════════════════════════════════
 if ($DryRun) {
-    Write-Step 1 "PASS" "DRYRUN: Would POST $rrlChars chars to D1"
+    Write-Step 1 "PASS" "DRYRUN: Would POST $($userTurns.Count) user turns to D1"
 } else {
     try {
         $soulBefore = Invoke-RestMethod "$D1/api/soul/count" -TimeoutSec 10
         Write-Host "  SOUL BEFORE: $($soulBefore.soulcount) chars | $($soulBefore.level)"
         
+        # Post ONLY user turns (Michael's words), not the full RRL
+        $soulText = $userTurns -join "`n`n"
         $body = @{
             student_id = "sov100-michael"
             session_id = $runId
             role       = "user"
-            text       = $rrlText
+            text       = $soulText
         } | ConvertTo-Json -Depth 2 -Compress
         
         $soulPost = Invoke-RestMethod -Uri "$D1/api/soul/event" -Method Post -Body $body -ContentType "application/json" -TimeoutSec 60
-        Write-Step 1 "PASS" "SOUL POSTED: event_id=$($soulPost.event_id) | bytes=$($soulPost.byte_count)"
+        Write-Step 1 "PASS" "SOUL POSTED: event_id=$($soulPost.event_id) | bytes=$($soulPost.byte_count) | $($userTurns.Count) user turns"
         
         $soulAfter = Invoke-RestMethod "$D1/api/soul/count" -TimeoutSec 10
         $delta = $soulAfter.soulcount - $soulBefore.soulcount
@@ -139,21 +180,39 @@ if ($DryRun) {
 }
 
 # ═══════════════════════════════════════════
-# STEP 2: DNA  -  EXTRACT STRUCTURED RECORDS
+# STEP 2: DNA  -  LOCAL EXTRACTION FROM RRL (no D1 query)
+# Extract assistant turns from RRL → tag blueprints → write CANON/SOUL/EXTRACT/dna-run{N}.json
 # ═══════════════════════════════════════════
 if ($DryRun) {
-    Write-Step 2 "PASS" "DRYRUN: Would extract DNA from D1"
+    Write-Step 2 "PASS" "DRYRUN: Would extract DNA from $($agentTurns.Count) assistant turns"
 } else {
-    try {
-        $dnaResponse = Invoke-RestMethod -Uri "$D1/api/soul/session/$runId" -Method Get -TimeoutSec 30
-
-        if ($dnaResponse.prompts -and $dnaResponse.prompts.Count -gt 0) {
-            Write-Step 2 "PASS" "DNA EXTRACTED: $($dnaResponse.prompts.Count) prompts | session=$($dnaResponse.session.session_id)"
-        } else {
-            Write-Step 2 "WARN" "DNA EXTRACT returned 0 prompts  -  may need retry"
+    $dnaDir = "$repo\CANON\SOUL\EXTRACT"
+    if (-not (Test-Path $dnaDir)) { New-Item -ItemType Directory -Path $dnaDir -Force | Out-Null }
+    
+    $dnaRecords = @()
+    $seq = 0
+    foreach ($turn in $agentTurns) {
+        $seq++
+        $text = $turn
+        $isBlueprint = ($text -match '```|`````|\b(SPEC|SPECIFICATION|BLUEPRINT|ARCHITECTURE|SCHEMA|DESIGN)\b' -and $text.Length -gt 200)
+        $dnaRecords += [ordered]@{
+            run    = $RunNumber
+            seq    = $seq
+            type   = if ($isBlueprint) { "blueprint" } else { "prose" }
+            chars  = $text.Length
+            text   = $text
         }
-    } catch {
-        Write-Step 2 "FAIL" "DNA EXTRACT FAILED: $($_.Exception.Message)"
+    }
+    
+    $dnaCount = $dnaRecords.Count
+    $dnaBlueprintCount = ($dnaRecords | Where-Object { $_.type -eq "blueprint" }).Count
+    
+    if ($dnaCount -gt 0) {
+        $dnaPath = "$dnaDir\dna-run$RunNumber.json"
+        $dnaRecords | ConvertTo-Json -Depth 5 | Set-Content $dnaPath -Encoding UTF8
+        Write-Step 2 "PASS" "DNA EXTRACTED: $dnaCount prompts ($dnaBlueprintCount blueprints) | session=$runId"
+    } else {
+        Write-Step 2 "WARN" "DNA EXTRACT returned 0 prompts from RRL"
     }
 }
 
@@ -233,7 +292,7 @@ $pipelineRecord = [ordered]@{
     soul_event_id  = if ($soulPost) { $soulPost.event_id } else { "DRYRUN" }
     soulcount      = if ($soulAfter) { $soulAfter.soulcount } else { 0 }
     soul_level     = if ($soulAfter) { $soulAfter.level } else { "UNKNOWN" }
-    dna_count      = if ($dnaResponse -and $dnaResponse.prompts) { $dnaResponse.prompts.Count } else { 0 }
+    dna_count      = if ($dnaCount) { $dnaCount } else { 0 }
     ledger_id      = "HL-$nextHL"
     starmap_file   = $starmapPath
     keyword_file   = $rfkwPath

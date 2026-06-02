@@ -1,87 +1,45 @@
-# session-capture.ps1 — Auto-fires on Claude Stop hook
-# Captures SOUL (Michael's verbatim words) + DNA (structured state) to soul-archive D1
-# DO NOT DELETE — wired in .claude/settings.json Stop hook
+# session-capture.ps1 — Auto-fires on Claude session stop
+# THE FIX: Copy JSONL verbatim. Pipeline handles extraction. No parsing here.
+# DO NOT DELETE — wired in stop hook
 
-$ts        = (Get-Date).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")
-$stamp     = (Get-Date).ToString('yyyyMMdd-HHmmss')
-$rrlDir    = "D:\OB-1-CANONICAL\RRL"
-$soulUrl   = "https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/event"
+$ErrorActionPreference = "Continue"
+$repo      = "D:\OB-1-CANONICAL"
+$rrlDir    = "$repo\RRL"
+$jsonlBase = "$env:USERPROFILE\.claude\projects\d--OB-1-CANONICAL"
 
-Set-Location "D:\OB-1-CANONICAL"
+Set-Location $repo
 
-$head   = git log -1 --oneline 2>$null
-$branch = git rev-parse --abbrev-ref HEAD 2>$null
+# ── Find latest JSONL ────────────────────────────────────────────────────────
+$jsonlFile = Get-ChildItem $jsonlBase -Filter "*.jsonl" -ErrorAction SilentlyContinue |
+             Sort-Object LastWriteTime -Descending | Select-Object -First 1
 
-# ── DNA — structured state ─────────────────────────────────────────────────────
-$workerStatus = try { (Invoke-RestMethod "https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/status" -TimeoutSec 6) | ConvertTo-Json -Compress } catch { "UNREACHABLE" }
-$pccContext   = try { (Invoke-RestMethod "https://pcc.mrmichaelhobbs123.workers.dev/api/context.json" -TimeoutSec 6) | ConvertTo-Json -Compress } catch { "UNREACHABLE" }
-
-$dna = @"
-=== DNA LOG — $ts ===
-HEAD   : $head
-Branch : $branch
-
-PHOENIX-ARCHITECTI STATUS:
-$workerStatus
-
-PCC CONTEXT:
-$pccContext
-
-TIER DISPATCH:
-T1 : phoenix-architecti tier=1 — Dialagram Qwen 3.7 Max
-T10: phoenix-architecti tier=10 — Cerebras→Groq→CF-Qwen fallback cascade
-T2 : phoenix-architecti tier=2 — Claude Opus 4.8 (final rulings only)
-Kilo: direct Dialagram/Qwen or PA cascade via kilo.json
-
-SECURITY CONSTRAINTS:
-- DO NOT REMOVE CLOUDFLARE_API_TOKEN before deploy
-- GAP-8 FROZEN: never touch net-pet-ai-production v1.6.2
-- NOTION BLACKLISTED
-- lam portal BB-07: DO NOT BUILD without explicit direction
-- Secrets restore: pwsh SCRIPTS/set-pa-secrets.ps1
-- SOULCOUNT: 907872 TITANIUM_ANCHOR
-"@
-
-# Write DNA log to disk
-if (!(Test-Path $rrlDir)) { New-Item -ItemType Directory -Force -Path $rrlDir | Out-Null }
-$dna | Out-File -FilePath "$rrlDir\DNA-LOG-$stamp.txt" -Encoding utf8
-
-# Post DNA to soul-archive
-$dnaBody = @{ student_id = "sov100-michael"; session_id = "sov100-dna-$stamp"; role = "system"; text = $dna } | ConvertTo-Json
-try { Invoke-RestMethod -Method POST -Uri $soulUrl -ContentType "application/json" -Body $dnaBody -TimeoutSec 10 | Out-Null } catch { Write-Host "DNA POST FAILED: $_" }
-
-# ── SOUL — Michael's verbatim words from session JSONL ─────────────────────────
-$projectDir = "C:\Users\mrmic\.claude\projects\d--OB-1-CANONICAL"
-$jsonlFiles = Get-ChildItem $projectDir -Filter "*.jsonl" -ErrorAction SilentlyContinue |
-    Sort-Object LastWriteTime -Descending | Select-Object -First 1
-
-if ($jsonlFiles) {
-    $soul = ""
-    Get-Content $jsonlFiles.FullName -ErrorAction SilentlyContinue | ForEach-Object {
-        try {
-            $entry = $_ | ConvertFrom-Json
-            # Extract human/user messages only — that's Michael's SOUL
-            if ($entry.type -eq "user" -or $entry.role -eq "user") {
-                $text = if ($entry.message) { $entry.message | ConvertTo-Json } else { $entry.content }
-                if ($text -and $text.Length -gt 2) { $soul += "$text`n" }
-            }
-        } catch { }
-    }
-
-    if ($soul.Length -gt 10) {
-        $soul | Out-File -FilePath "$rrlDir\SOUL-$stamp.txt" -Encoding utf8
-
-        # Chunk soul into 8KB posts (soul-logger limit)
-        $chunkSize = 8000
-        $chunks    = [Math]::Ceiling($soul.Length / $chunkSize)
-        for ($i = 0; $i -lt $chunks; $i++) {
-            $chunk     = $soul.Substring($i * $chunkSize, [Math]::Min($chunkSize, $soul.Length - $i * $chunkSize))
-            $soulBody  = @{ student_id = "sov100-michael"; session_id = "sov100-soul-$stamp-$i"; role = "user"; text = $chunk } | ConvertTo-Json
-            try { Invoke-RestMethod -Method POST -Uri $soulUrl -ContentType "application/json" -Body $soulBody -TimeoutSec 10 | Out-Null } catch { Write-Host "SOUL POST FAILED chunk $i`: $_" }
-        }
-        Write-Host "SOUL CAPTURED: $($soul.Length) chars, $chunks chunk(s)"
-    }
+if (-not $jsonlFile) {
+    Write-Error "FATAL: No JSONL found in $jsonlBase"
+    exit 1
 }
 
-Write-Host "DNA CAPTURED : $rrlDir\DNA-LOG-$stamp.txt"
-Write-Host "POSTED TO    : soul-archive D1 (sov100-dna-$stamp)"
+Write-Host "SOURCE: $($jsonlFile.Name) — $($jsonlFile.Length) bytes"
+
+# ── Derive run number ────────────────────────────────────────────────────────
+$run = 0
+$lastDeath = git log --oneline --grep "death:" -1 2>$null
+if ($lastDeath -match '(?i)run\s*(\d+)') { $run = [int]$matches[1] + 1 }
+
+$rrlPath = "$rrlDir\RRL-$run.txt"
+
+# ── Copy JSONL VERBATIM. No parsing. No filtering. No reconstruction. ────────
+Copy-Item $jsonlFile.FullName $rrlPath -Force
+$rrlBytes = (Get-Item $rrlPath).Length
+Write-Host "RRL WRITTEN: $rrlPath — $rrlBytes bytes (verbatim JSONL copy)"
+
+# ── Invoke pipeline (SOUL→DNA→LEDGER→STARMAP→SOULKEYS→S2Pipeline) ───────────
+$pipeline = "$repo\SCRIPTS\rrl-pipeline.ps1"
+if (Test-Path $pipeline) {
+    Write-Host "INVOKING PIPELINE..."
+    pwsh -File $pipeline -RRLFile $rrlPath -RunNumber $run
+} else {
+    Write-Host "WARN: $pipeline not found"
+}
+
+Write-Host ""
+Write-Host "SESSION CAPTURE COMPLETE — Run $run"

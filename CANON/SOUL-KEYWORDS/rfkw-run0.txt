@@ -1,20 +1,30 @@
-5 | core | never
-5 | pipeline | soul
-5 | core | roman
-5 | core | scouts
-5 | core | stop
-5 | core | michael
-5 | core | doctrine
-5 | pipeline | run
-5 | core | write-host
-5 | pipeline | death
-5 | core | chat
-5 | core | command
-5 | pipeline | rrl
-5 | core | centurion-code
-5 | core | file
-5 | core | hobbs
-5 | core | commit
-5 | core | are
-5 | core | rome
-5 | pipeline | pipeline
+272 | SOUL
+265 | |\n|
+233 | STAGE
+231 | DEATH
+229 | Agent
+194 | Never
+192 | READ
+189 | PIPELINE
+171 | before
+158 | else
+158 | session
+155 | live
+153 | seal
+151 | SOULCOUNT
+143 | AUDIT
+138 | registry
+138 | only
+138 | Kilo
+137 | files
+133 | RISE
+128 | fucking
+122 | Phase
+120 | path
+117 | prior
+116 | Write-Host
+115 | HEAD
+113 | every
+112 | voice
+112 | after
+105 | DEEPGRAM
