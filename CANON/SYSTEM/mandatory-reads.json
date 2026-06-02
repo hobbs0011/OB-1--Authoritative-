@@ -113,6 +113,13 @@
       "dynamic": {}
     }
   },
+    "phase0_battlefield_spec": {
+      "path": "CANON/SYSTEM/PHASE0-BATTLEFIELD-SPEC.md",
+      "mode": "full",
+      "max_chars": 8000,
+      "why": "7-domain battlefield census spec. Execute Run 44. D1-D7 matrix schema, verdict rubric, seam owners, exit gate."
+    }
+  },
   "meta": {
     "version": "2.0",
     "updated_run": 42,
