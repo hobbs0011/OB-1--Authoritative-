@@ -108,7 +108,7 @@ $autoRefPatterns = @(
     'CANON\TRAIN-67\'
 )
 
-function Matches-Patterns($path, $patterns) {
+function Test-PatternMatch($path, $patterns) {
     foreach ($p in $patterns) {
         if ($path -like "*$p*") { return $true }
     }
@@ -165,10 +165,10 @@ foreach ($f in $allMd) {
     }
 
     # Path-based classification (apply in priority order)
-    if (Matches-Patterns $rel $autoArchivePatterns) { $archive.Add($entry); $processed++; continue }
-    if (Matches-Patterns $rel $autoDuplicatePatterns) { $duplicate.Add($entry); $processed++; continue }
-    if (Matches-Patterns $rel $autoDataPatterns) { $dataArtifact.Add($entry); $processed++; continue }
-    if (Matches-Patterns $rel $autoRefPatterns) { $referenceOnly.Add($entry); $processed++; continue }
+    if (Test-PatternMatch $rel $autoArchivePatterns) { $archive.Add($entry); $processed++; continue }
+    if (Test-PatternMatch $rel $autoDuplicatePatterns) { $duplicate.Add($entry); $processed++; continue }
+    if (Test-PatternMatch $rel $autoDataPatterns) { $dataArtifact.Add($entry); $processed++; continue }
+    if (Test-PatternMatch $rel $autoRefPatterns) { $referenceOnly.Add($entry); $processed++; continue }
 
     # Kilo skills/agents — operational metadata, not registry docs
     if ($rel -match '(^|\\)\.kilo\\(command|agent|worktrees)\\') { $duplicate.Add($entry); $processed++; continue }
