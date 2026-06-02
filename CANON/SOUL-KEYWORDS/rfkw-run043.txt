@@ -1,0 +1,13 @@
+REGISTRY
+REGISTER
+REFERENCE-ONLY
+DUPLICATE
+ARCHIVE
+UNCLEAR
+mandatory-reads
+v2.0
+path-aware
+reincarnateDeath
+Ledger
+PHETRAIL
+PHEROMONES

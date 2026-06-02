@@ -1,107 +1,216 @@
 ---
-description: "NEW CHAT COLD START — boots OB1 at full power. Run FIRST in every new session. OB1 routes; PA executes all heavy synthesis."
+description: "RISE PROTOCOL v5.0 — READS PRIOR DEATH SEAL + PHETRAIL + BOOT. Contract: CANON/SYSTEM/REINCARNATION-CONTRACT.md"
 ---
 
-# /ReincarnateRISE — The Phoenix Rises
+# /reincarnateRise — v5.0 ROMAN RISE
 
-**OB1 = ROUTER. PA = EXECUTOR. Every heavy analysis step dispatches T1 PA. No inline synthesis.**
+**OB1 = AUDITOR. Reads what DEATH wrote. Never auto-fixes. Never executes production code.**
+
+**Canonical contract:** `CANON/SYSTEM/REINCARNATION-CONTRACT.md`
+**Run number authority:** `git log --oneline --grep "^death:"` (L29 NO_ASSUME_HEAD)
 
 ---
 
-## STEP 0: SOULCOUNT GATE
+## STAGE 0 — SOULCOUNT GATE
 
 ```powershell
-Invoke-RestMethod "https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count"
+$D1 = "https://soul-logger.mrmichaelhobbs123.workers.dev"
+$live = Invoke-RestMethod "$D1/api/soul/count"
+$currentSoul = $live.soulcount
+$currentLevel = $live.level
+
+if (-not $currentSoul) {
+    Write-Error "SOUL API UNREACHABLE — HALT"
+    exit 1
+}
+Write-Host "STAGE 0 ✓ SOUL: $currentSoul chars | $currentLevel"
 ```
 
-Read `soulcount` + `level`. If UNREACHABLE → SHUTDOWN. Do not proceed.
-
-| Level | Threshold | Action |
-|-------|-----------|--------|
-| BASELINE | < 5,000 | Proceed |
-| ALARM | ≥ 5,000 | Flag + log |
-| LOCK | ≥ 25,000 | Soul archive review before pipeline changes |
-| ANCHOR | ≥ 100,000 | Full audit required |
-| TITANIUM_ANCHOR | ≥ 250,000 | Michael must acknowledge before proceeding |
+Unreachable = SHUTDOWN. Do not proceed.
 
 ---
 
-## STEP 1: GIT TRUTH
+## STAGE 1 — GIT TRUTH (Authoritative Run Number)
 
 ```powershell
-Set-Location D:\OB-1-CANONICAL
 git log --oneline -5
 git status --short
+
+# Derive run from last death commit (git-authoritative, not BOOT)
+$lastDeathLine = git log --oneline --grep "^death:" -1
+if ($lastDeathLine -match 'run(\d+)') {
+    $priorRun = [int]$matches[1]
+    $run      = $priorRun + 1
+} else {
+    $priorRun = 0
+    $run      = 1
+}
+$runPad = "{0:D3}" -f $run
+
+# Disk artifact paths (contract 1.2)
+$sealPath     = "CANON/REINCARNATION/run$runPad-reincarnateDEATH.md"
+$phetrailPath = "CANON/PHEROMONES/PheTrail-run$runPad.json"
+$bootPath     = "CANON/SYSTEM/COLD-START-BOOT.md"
 ```
 
-Record HEAD SHA. If dirty tree → list uncommitted files. **L55: commit them before proceeding.**
+**L29: `git log -1` is authoritative. Never seed state from prior reincarnation records.**
 
 ---
 
-## STEP 2: BOOT STATE → DISPATCH T1 PA FOR SYNTHESIS
+## STAGE 2 — READ THE PRIOR REINCARNATION TRIPLE (NEW — fixes I)
 
-OB1 reads ONE file. PA synthesizes everything else.
+RISE must read what the last DEATH wrote. All three files, always.
 
 ```powershell
-# Assemble context bundle (automated — do not read files manually)
-$bundle = pwsh -File D:\OB-1-CANONICAL\SCRIPTS\context-bundle.ps1 -TaskType rise | ConvertFrom-Json
-$ctx = $bundle.docs | ConvertTo-Json -Compress
+# Prior seal (previous run — not current)
+$priorSealPath = "CANON/REINCARNATION/run{0:D3}-reincarnateDEATH.md" -f $priorRun
+if (-not (Test-Path $priorSealPath)) {
+    $priorSealPath = Get-ChildItem "CANON/REINCARNATION/*-reincarnateDEATH.md" | Sort-Object Name -Descending | Select-Object -First 1 -ExpandProperty FullName
+}
 
-# Dispatch T1 PA for boot synthesis
-$task = "Boot synthesis for OB1 RISE. Given COLD-START-BOOT, git log, and git status in context: (1) extract run number, (2) active vector/mission, (3) top 3 blockers, (4) top 2 leverage opportunities Michael is doing manually that an agent should handle, (5) immediate NEXT action (specific, not vague). Return structured output for the RISE report."
-$body = @{ task=$task; context=$ctx; targetfile=""; tier=1 } | ConvertTo-Json -Compress
-$pa = Invoke-RestMethod -Uri "https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/code" -Method POST -ContentType "application/json" -Headers @{"x-pa-auth"="ffScwBjPQjBnoAlectawu8E+J4NcmO3idxGxtlcRue8="} -Body $body
-$pa.code_patch  # PA synthesis result
+$priorSeal     = Get-Content $priorSealPath -Raw
+$priorPhetrail = if (Test-Path $phetrailPath) { Get-Content $phetrailPath -Raw } else { "{}" }
+$priorBoot     = Get-Content $bootPath -Raw
+
+# Extract prior soulcount from seal §3 SOUL RECEIPT (contract 1.4)
+if ($priorSeal -match 'count_after.*?(\d+)') {
+    $priorSoulcount = [long]$matches[1]
+} else {
+    $priorSoulcount = 0
+}
+
+Write-Host "STAGE 2 ✓ TRIPLE READ: seal=$priorSealPath | phetrail=$phetrailPath | boot=$bootPath"
+Write-Host "  Prior soulcount (from §3): $priorSoulcount"
 ```
 
-If PA fails (timeout/error) → read COLD-START-BOOT.md directly and synthesize manually. Print reason.
+**From seal §3:** read `count_after`.
+**From phetrail:** read `negative_trails` (dead-end registry = HALT list).
+**From seal §8/§9:** read open flags, unfinished actions.
 
 ---
 
-## STEP 2.5: PRE-CODE GATE (NET-PET-AI WORK ONLY)
-
-If this session will touch `APPS/NET-PET-AI/**` — run the automated doc bundle:
+## STAGE 3 — SOULCOUNT AUDIT (Stagnation + Drift)
 
 ```powershell
-$netBundle = pwsh -File D:\OB-1-CANONICAL\SCRIPTS\context-bundle.ps1 -TaskType netpetai | ConvertFrom-Json
+$delta     = $currentSoul - $priorSoulcount
+$driftPct  = if ($priorSoulcount -gt 0) { [math]::Round(($delta / $priorSoulcount) * 100, 2) } else { 0 }
+
+if ($currentSoul -lt $priorSoulcount) {
+    $soulVerdict = "SOUL_REGRESSION — HALT"
+} elseif ($delta -eq 0) {
+    $soulVerdict = "SOUL_STAGNATION — WARN"
+} elseif ([math]::Abs($driftPct) -gt 50) {
+    $soulVerdict = "SOUL_DRIFT — HALT (|delta| > 50% of prior)"
+} else {
+    $soulVerdict = "SOUL_BREATHING (+$delta / +$driftPct%)"
+}
+
+Write-Host "STAGE 3 ✓ SOUL AUDIT: delta=$delta ($driftPct%) — $soulVerdict"
 ```
 
-Store `$netBundle` as the **context bundle for ALL subsequent T1 PA dispatches this session**.
-
-Required docs (assembled automatically by the script — DO NOT read manually):
-- `OPERATIONS/STUDENT-PORTAL-DEV.md` — full current portal state + architecture
-- `CANON/RESEARCH/deepgram-voice-agent-edge-cases.md §2` — critical API constraints
-- See `CANON/SYSTEM/MANDATORY-READS.md` for the full registry
-
-**L56 PRE_CODE_DOC_GATE:** Any T1 PA dispatch for NET-PET-AI code MUST include `$netBundle.docs` as context. No exceptions. Run 31 = agent skipped this = car crash.
+**L32 ASSUME_FAILURE: cross-validate with 3 independent receipts. No trust in any single mechanism.**
 
 ---
 
-## STEP 3: RISE REPORT
+## STAGE 4 — BOOT SYNTHESIS + STALENESS GUARD
 
-Print EXACTLY this format using PA synthesis from STEP 2:
+```powershell
+# Parse boot for active vector + flags
+if ($priorBoot -match 'Active Mission:\s*(.+)') { $activeMission = $matches[1].Trim() }
+if ($priorBoot -match 'Open Flags:\s*(\d+)') { $openFlagsCount = [int]$matches[1] }
 
+# Staleness guard (L30): boot.run_number must match git.run_number
+# (fires at ANY mismatch, not just >10 behind)
+$bootRunFromGit = if ($lastDeathLine -match 'run(\d+)') { [int]$matches[1] } else { 0 }
+$bootRunFromFile = if ($priorBoot -match 'Run (\d+)') { [int]$matches[1] } else { -1 }
+
+if ($bootRunFromFile -ne $bootRunFromGit -and $bootRunFromFile -gt 0) {
+    Write-Warning "⚠️ BOOT STALE — boot file shows run $bootRunFromFile, git shows run $bootRunFromGit. Trusting git (L29)."
+}
+
+Write-Host "STAGE 4 ✓ BOOT: run=$bootRunFromGit | mission=$activeMission | flags=$openFlagsCount"
 ```
+
+**L30 BOOT_FILE_AGE_SWEEP:** fires at ANY mismatch, not just >10 behind.
+
+---
+
+## STAGE 5 — PIPELINE CHAIN AUDIT (ALL 7 STAGES)
+
+```powershell
+$rrlChars  = if (Test-Path "RRL/RRL-$run.txt") { (Get-Content "RRL/RRL-$run.txt" -Raw).Length } else { 0 }
+$ledgerCount = (Get-ChildItem "CANON/HEAVY-LEDGER/" -Filter "HL-*.json" | Measure-Object).Count
+$starmapFiles = if (Test-Path $starmapDir) { (Get-ChildItem $starmapDir -Recurse -File).Count } else { 0 }
+$keywordFiles = if (Test-Path $keywordDir) { (Get-ChildItem $keywordDir -Recurse -File).Count } else { 0 }
+$pipelineFiles = Get-ChildItem "CANON/PIPELINE/" -Recurse -File -ErrorAction SilentlyContinue | Measure-Object | Select-Object -ExpandProperty Count
+$phetrailPresent = Test-Path $phetrailPath
+
+$stages = @(
+    @{ name="RRL";      artifact="RRL/RRL-$run.txt";              count=$rrlChars;      verdict=if($rrlChars -gt 0){"PRESENT"}else{"MISSING — HALT"} }
+    @{ name="SOUL";     artifact="D1 /api/soul/count";             count=$currentSoul;   verdict=$soulVerdict }
+    @{ name="DNA";      artifact="D1 session extract";             count=$dnaCount;      verdict=if($dnaCount -gt 0){"PRESENT"}else{"GAP"} }
+    @{ name="LEDGER";   artifact="CANON/HEAVY-LEDGER/*.json";      count=$ledgerCount;   verdict=if($ledgerCount -gt 0){"PRESENT"}else{"GAP"} }
+    @{ name="STARMAP";  artifact="CANON/STARMAP/*";                count=$starmapFiles;  verdict=if($starmapFiles -gt 0){"PRESENT"}else{"GAP"} }
+    @{ name="KEYWORD";  artifact="CANON/SOUL-KEYWORDS/*";          count=$keywordFiles;  verdict=if($keywordFiles -gt 0){"PRESENT"}else{"GAP"} }
+    @{ name="PHETRAIL"; artifact=$phetrailPath;                    count=if($phetrailPresent){1}else{0}; verdict=if($phetrailPresent){"PRESENT"}else{"GAP"} }
+    @{ name="PIPELINE"; artifact="CANON/PIPELINE/*";               count=$pipelineFiles; verdict=if($pipelineFiles -gt 0){"PRESENT"}else{"GAP"} }
+)
+
+foreach ($s in $stages) {
+    $status = if ($s.verdict -eq "MISSING — HALT") { "🔴" } elseif ($s.verdict -eq "GAP") { "🟠" } else { "🟢" }
+    Write-Host "  $status $($s.name): $($s.count) — $($s.verdict)"
+}
+```
+
+**If any stage = 0 or MISSING:** Report it. Do NOT auto-fix on RISE.
+
+---
+
+## STAGE 6 — PHETRAIL NEGATIVE TRAILS (Dead-End Registry)
+
+```powershell
+if (Test-Path $phetrailPath) {
+    $phetrail = Get-Content $phetrailPath -Raw | ConvertFrom-Json
+    $negativeCount = $phetrail.negative_trails.Count
+    Write-Host "STAGE 6 ✓ PHETRAIL: $negativeCount negative trails loaded (dead-end registry)"
+} else {
+    $negativeCount = 0
+    Write-Host "STAGE 6 ⚠ PHETRAIL_GAP — no phetrail found for run $priorRun"
+}
+```
+
+Any planned action matching a `negative_trail` → HALT unless overridden (L-PHE-4).
+
+---
+
+## STAGE 7 — RISE REPORT
+
+```text
 OB1 ONLINE — {datetime ICT}
-SOULCOUNT: {number} — {level}
-RUN: {last run# + 1}
-HEAD: {current SHA}
-VECTOR: {active mission}
-BLOCKERS: {count} open
-NEXT: {specific immediate action from PA synthesis}
+SOULCOUNT: {n} — {level}   (Δ {delta} since run {priorRun})
+RUN: {run}  (prior: {priorRun})
+HEAD: {git rev-parse --short HEAD}
+VECTOR: {activeMission}
+BLOCKERS: {openFlagsCount} open
+DEAD-ENDS LOADED: {negativeCount}
+NEXT: {highest-priority zero-stage or gap, or specific action from seal §9}
 READY.
 ```
 
 ---
 
-## RULES
+## RISE LAWS
 
 - **L21 RISE** — execute without hesitation after boot
 - **L29 NO_ASSUME_HEAD** — `git log -1` is authoritative; never trust stale docs
-- **L30 BOOT_FILE_AGE_SWEEP** — if COLD-START-BOOT run# is > 10 behind git log → flag as stale
-- **L34 CANON_BEFORE_QUESTIONS** — everything you need is in the files. Don't ask Michael.
-- **L55 COMMIT_DONT_HOLD** — dirty tree at RISE = commit NOW before any other work
-- **L56 PRE_CODE_DOC_GATE** — NET-PET-AI work requires `$netBundle` context passed to every PA dispatch
-- **L57 PA_FIRST** — OB1 routes, PA executes. Never inline-synthesize what PA can do cheaper.
-- Do NOT ask "what would you like to work on?" — COLD-START-BOOT tells you.
-- Boot target: under 60 seconds.
+- **L30 BOOT_FILE_AGE_SWEEP** — fires at ANY mismatch, not just >10 behind
+- **L31 SOUL_IS_QUERY** — soulcount IS `SUM(byte_count) FROM soul_prompts WHERE session_id LIKE 'sov100%'`. Query it every RISE.
+- **L32 ASSUME_FAILURE** — every prior checkpoint is assumed FAILED. Cross-validate with 3 receipts.
+- **L39 CONFIRM_DONT_FIX** — when asked to "confirm," confirm. Do NOT jump to fixing.
+- **L40 READ_OWN_OUTPUT** — before giving the next step, read what you just said.
+- **L41 NO_TRAILING_QUESTIONS** — never end with "What do you want to do?" Canon tells the next action.
+- **CONFIRM_DONT_EXECUTE** — RISE audits. DEATH executes. Never reverse these roles.
+
+---
+
+`RISE v5.0: READ SEAL + PHETRAIL + BOOT. AUDIT 8 STAGES. IDENTIFY GAPS. DO NOT EXECUTE. EXECUTION = DEATH.`

@@ -1,0 +1,123 @@
+{
+  "docs": {
+    "student_portal_dev": {
+      "path": "OPERATIONS/STUDENT-PORTAL-DEV.md",
+      "mode": "tail",
+      "tail_lines": 300,
+      "max_chars": 5000,
+      "why": "NET-PET-AI architecture + portal state. Required before any portal work (L56)."
+    },
+    "deepgram_constraints": {
+      "path": "CANON/RESEARCH/deepgram-voice-agent-edge-cases.md",
+      "mode": "slice",
+      "start_line": 20,
+      "end_line": 115,
+      "max_chars": 5000,
+      "why": "Critical Deepgram API constraints (Voice Agent WS schema, L64 SIMULATION_PATH_LAW)."
+    },
+    "cold_start_boot": {
+      "path": "CANON/SYSTEM/COLD-START-BOOT.md",
+      "mode": "head",
+      "head_lines": 100,
+      "max_chars": 8000,
+      "why": "System state, run vector, SOULCOUNT, open flags, firewall doctrine."
+    },
+    "backburner": {
+      "path": "OPERATIONS/BACKBURNER-PIPELINE-LOG.md",
+      "mode": "full",
+      "max_chars": 8000,
+      "why": "Deferred work, BB items, pipeline gaps."
+    },
+    "class_prep": {
+      "path": "OPERATIONS/CLASS-PREP-MAI-TRAM-QUY.md",
+      "mode": "full",
+      "max_chars": 5000,
+      "why": "Student-specific class preparation notes."
+    },
+    "reincarnation_contract": {
+      "path": "CANON/SYSTEM/REINCARNATION-CONTRACT.md",
+      "mode": "full",
+      "max_chars": 8000,
+      "why": "v5.0 contract: artifact paths, soul receipt schema, 11-stage chain, fail-safe law."
+    },
+    "prior_seal": {
+      "path": "CANON/REINCARNATION/run{priorPad}-reincarnateDEATH.md",
+      "mode": "dynamic",
+      "max_chars": 8000,
+      "why": "Prior run death seal §3 (soul receipt), §8 (open flags), §9 (unfinished). RISE reads programmatically."
+    },
+    "prior_phetrail": {
+      "path": "CANON/PHEROMONES/PheTrail-run{priorPad}.json",
+      "mode": "dynamic",
+      "max_chars": 5000,
+      "why": "Negative trail dead-end registry. RISE loads before synthesizing next action."
+    }
+  },
+  "task_types": {
+    "netpetai": {
+      "docs": [
+        "student_portal_dev",
+        "deepgram_constraints",
+        "cold_start_boot"
+      ],
+      "dynamic": {
+        "git_state": { "type": "git_log", "count": 5 },
+        "rfkw_context": { "type": "rfkw", "query": "student portal audio phonics deepgram", "top": 12 }
+      }
+    },
+    "general": {
+      "docs": [
+        "cold_start_boot"
+      ],
+      "dynamic": {
+        "git_state": { "type": "git_log", "count": 5 }
+      }
+    },
+    "death": {
+      "docs": [
+        "cold_start_boot"
+      ],
+      "dynamic": {
+        "git_state": { "type": "git_log", "count": 3 },
+        "git_status": { "type": "git_status" }
+      }
+    },
+    "rise": {
+      "docs": [
+        "cold_start_boot"
+      ],
+      "dynamic": {
+        "git_state": { "type": "git_log", "count": 5 },
+        "git_status": { "type": "git_status" },
+        "rfkw_context": { "type": "rfkw", "query": "ROME RISE SOV100 portal pipeline", "top": 12 },
+        "last_session_rrl": { "type": "latest_rrl", "max_chars": 6000 }
+      }
+    },
+    "pipeline": {
+      "docs": [
+        "backburner",
+        "cold_start_boot"
+      ],
+      "dynamic": {
+        "git_state": { "type": "git_log", "count": 5 },
+        "git_status": { "type": "git_status" },
+        "rfkw_context": { "type": "rfkw", "query": "pipeline keyword soul system", "top": 12 }
+      }
+    },
+    "student": {
+      "docs": [
+        "student_portal_dev",
+        "class_prep",
+        "cold_start_boot"
+      ],
+      "dynamic": {}
+    }
+  },
+  "meta": {
+    "version": "2.0",
+    "updated_run": 42,
+    "updated_at": "2026-06-02T06:54:01+07:00",
+    "source": "captured from context-bundle.ps1 switch (lossless baseline)",
+    "contract": "CANON/SYSTEM/REINCARNATION-CONTRACT.md"
+  }
+}

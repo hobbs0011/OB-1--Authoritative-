@@ -112,49 +112,82 @@ function Get-RFKwContext {
     return ($lines -join "`n")
 }
 
+$configPath = "CANON/SYSTEM/mandatory-reads.json"
+if (-not (Test-Path -LiteralPath $configPath)) {
+    Write-Error "MISSING: $configPath — cannot build context bundle without registry"
+    exit 1
+}
+
+$config = Get-Content -LiteralPath $configPath -Raw -Encoding UTF8 | ConvertFrom-Json
+
+if (-not $config.task_types.PSObject.Properties[$TaskType]) {
+    Write-Error "UNKNOWN TaskType: $TaskType — valid: $($config.task_types.PSObject.Properties.Name -join ', ')"
+    exit 1
+}
+
+$taskConfig = $config.task_types.$TaskType
+
+# Resolve prior run for dynamic paths (reincarnation v5.0)
+$lastDeathLine = git log --oneline --grep "^death:" -1 2>&1
+$priorPad = ""
+if ($lastDeathLine -match 'run(\d+)') {
+    $priorRun = [int]$matches[1]
+    $priorPad = "{0:D3}" -f $priorRun
+}
+
 $docs = [ordered]@{}
 
-switch ($TaskType) {
-    "netpetai" {
-        $docs["student_portal_dev"] = Get-SafeContent -Path "OPERATIONS/STUDENT-PORTAL-DEV.md" -TailLines 300
-        $docs["deepgram_constraints"] = Get-SafeContent -Path "CANON/RESEARCH/deepgram-voice-agent-edge-cases.md" -StartLine 20 -EndLine 115
-        $docs["cold_start_boot"] = Get-SafeContent -Path "CANON/SYSTEM/COLD-START-BOOT.md" -HeadLines 100
-        $docs["git_state"] = Get-GitLog -Count 5
-        $docs["rfkw_context"] = Get-RFKwContext -Query "student portal audio phonics deepgram" -Top 12
+foreach ($slug in $taskConfig.docs) {
+    if (-not $config.docs.PSObject.Properties[$slug]) {
+        Write-Warning "DOC SLUG MISSING from registry: $slug (task $TaskType)"
+        continue
     }
-    "general" {
-        $docs["cold_start_boot"] = Get-SafeContent -Path "CANON/SYSTEM/COLD-START-BOOT.md" -HeadLines 100
-        $docs["git_state"] = Get-GitLog -Count 5
-    }
-    "death" {
-        $docs["cold_start_boot"] = Get-SafeContent -Path "CANON/SYSTEM/COLD-START-BOOT.md"
-        $docs["git_state"] = Get-GitLog -Count 3
-        $docs["git_status"] = Get-GitStatusShort
-    }
-    "rise" {
-        $docs["cold_start_boot"] = Get-SafeContent -Path "CANON/SYSTEM/COLD-START-BOOT.md"
-        $docs["git_state"] = Get-GitLog -Count 5
-        $docs["git_status"] = Get-GitStatusShort
-        $docs["rfkw_context"] = Get-RFKwContext -Query "ROME RISE SOV100 portal pipeline" -Top 12
-        $latestRRL = Get-ChildItem "RRL/RRL-*.txt" |
-            Where-Object { $_.BaseName -match '^RRL-\d+$' } |
-            Sort-Object { [int]($_.BaseName -replace 'RRL-', '') } -Descending |
-            Select-Object -First 1
-        if ($latestRRL) {
-            $docs["last_session_rrl"] = Get-SafeContent -Path $latestRRL.FullName -MaxChars 6000
+    $def = $config.docs.$slug
+    $path = $def.path -replace '\{priorPad\}', $priorPad
+
+    switch ($def.mode) {
+        "tail" {
+            $tailLines = if ($def.tail_lines) { $def.tail_lines } else { $def.tailLines }
+            $docs[$slug] = Get-SafeContent -Path $path -TailLines $tailLines -MaxChars $def.max_chars
+        }
+        "slice" {
+            $docs[$slug] = Get-SafeContent -Path $path -StartLine $def.start_line -EndLine $def.end_line -MaxChars $def.max_chars
+        }
+        "head" {
+            $docs[$slug] = Get-SafeContent -Path $path -HeadLines $def.head_lines -MaxChars $def.max_chars
+        }
+        "full" {
+            $docs[$slug] = Get-SafeContent -Path $path -MaxChars $def.max_chars
+        }
+        default {
+            $docs[$slug] = Get-SafeContent -Path $path -MaxChars $def.max_chars
         }
     }
-    "pipeline" {
-        $docs["backburner"] = Get-SafeContent -Path "OPERATIONS/BACKBURNER-PIPELINE-LOG.md" -MaxChars 8000
-        $docs["cold_start_boot"] = Get-SafeContent -Path "CANON/SYSTEM/COLD-START-BOOT.md" -HeadLines 100
-        $docs["git_state"] = Get-GitLog -Count 5
-        $docs["git_status"] = Get-GitStatusShort
-        $docs["rfkw_context"] = Get-RFKwContext -Query "pipeline keyword soul system" -Top 12
-    }
-    "student" {
-        $docs["student_portal_dev"] = Get-SafeContent -Path "OPERATIONS/STUDENT-PORTAL-DEV.md" -TailLines 200
-        $docs["class_prep"] = Get-SafeContent -Path "OPERATIONS/CLASS-PREP-MAI-TRAM-QUY.md" -MaxChars 5000
-        $docs["cold_start_boot"] = Get-SafeContent -Path "CANON/SYSTEM/COLD-START-BOOT.md" -HeadLines 50
+}
+
+foreach ($key in $taskConfig.dynamic.PSObject.Properties.Name) {
+    $dyn = $taskConfig.dynamic.$key
+    switch ($dyn.type) {
+        "git_log" {
+            $docs[$key] = Get-GitLog -Count $dyn.count
+        }
+        "git_status" {
+            $docs[$key] = Get-GitStatusShort
+        }
+        "rfkw" {
+            $docs[$key] = Get-RFKwContext -Query $dyn.query -Top $dyn.top
+        }
+        "latest_rrl" {
+            $latestRRL = Get-ChildItem "RRL/RRL-*.txt" |
+                Where-Object { $_.BaseName -match '^RRL-\d+$' } |
+                Sort-Object { [int]($_.BaseName -replace 'RRL-', '') } -Descending |
+                Select-Object -First 1
+            if ($latestRRL) {
+                $docs[$key] = Get-SafeContent -Path $latestRRL.FullName -MaxChars $dyn.max_chars
+            } else {
+                $docs[$key] = "[NO RRL FILES]"
+            }
+        }
     }
 }
 

@@ -1,0 +1,9 @@
+{
+  "ledger_id": null,
+  "run": 0,
+  "datetime": "2026-06-02T07:48:39.9927854+07:00",
+  "prev_hash": null,
+  "merkle_root": null,
+  "event": "death",
+  "session_id": "sov100-roman-run"
+}

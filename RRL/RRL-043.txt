@@ -1,0 +1,24 @@
+REGISTRY v2.0 correction and build — ROYAL DOCUMENTATION HALTED pending this completion.
+
+Process: reincarnateDeath v5.0 — 11-stage chain.
+Active task at death: REGISTRY-CANDIDATES.md reclassification (TASK 1 complete), UNCLEAR collapse (TASK 2 pending), mandatory-reads.json fold (TASK 3 pending), MANDATORY-READS.md render (TASK 4 pending).
+
+Constraints:
+- Exclude REINCARNATION/, PHEROMONES/, RRL/, HEAVY-LEDGER/, STARMAP/, SOUL-KEYWORDS/ from registry (data artifacts read by path)
+- Do not fold GDRIVE-PROJECT-CORE archive docs
+- Do not triage UNCLEAR manually; apply path rules first
+- Do not modify context-bundle.ps1 during this task
+- Seal naming: zero-pad run042 going forward; historical run42 left as-is
+- Death duplicate: .kilo v5.0 canonical, .claude/reincarnatedeath.md is pointer
+- DEATH-PROTOCOL-v2.md → ARCHIVE (superseded by v5.0)
+
+Discovery sweep: 6967 files, 109 REGISTER, 5 REFERENCE-ONLY, 44 DUPLICATE, 2090 ARCHIVE, 4719 UNCLEAR.
+109 REGISTER was polluted: 46 from CANON\ARCHIVE\GDRIVE-PROJECT-CORE\OPERATIONS\ classified as active without content read.
+DEATH-PROTOCOL-v2.md in REGISTER but is ARCHIVE (superseded v5.0).
+
+TASK 1: Reclassify polluted REGISTER items by path patterns — COMPLETE.
+TASK 2: Collapse UNCLEAR with path rules — PENDING.
+TASK 3: Fold surviving REGISTER/REFERENCE-ONLY into mandatory-reads.json, bump meta.updated_run to 43 — PENDING.
+TASK 4: Render CANON/SYSTEM/MANDATORY-READS.md from JSON — PENDING.
+
+Next RISE will backfill gaps and complete the registry build.

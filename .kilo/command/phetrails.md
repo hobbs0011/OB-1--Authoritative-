@@ -1,146 +1,154 @@
-# /PheTrails — Pheromone Trail Extraction Protocol
+---
+description: "PHETRAILS v2.0 — BREADCRUMB EXTRACTION. Primary invocation is STAGE 7 of /reincarnatedeath. Standalone use is for mid-session breadcrumb dumps only. Contract: CANON/SYSTEM/REINCARNATION-CONTRACT.md"
+---
+
+# /phetrails — Pheromone Trail Extraction v2.0
 ## Roman Legion Stage III: AGMEN (Main Body) — PHEROMONE Broadcast
 
 > **DOCTRINE:** "Leave the data. Do not summarize. Do not interpret. The trail IS the truth."
-> **SOURCE:** Phoenix Flight Plexy V48 | Ledger Physics | Negative Pheromone Decay Law
+> **Laws:** L-PHE-1 (raw data only), L-PHE-2 (negative decay 180d), L-PHE-3 (verification mandatory), L-PHE-4 (trail consumption = read before complex logic)
 
 ---
 
-## PURPOSE
-Extracts the current session's critical operational breadcrumbs (Pheromones) and writes them to `CANON/PHEROMONES/PheTrail-{RunNumber}.json`. This file serves as:
-1. **Immediate Context:** For any agent joining mid-session or post-reincarnation.
-2. **Dead End Registry:** Explicitly marks what FAILED so it is never retried without override.
-3. **Success Reinforcement:** Marks what WORKED so it is repeated.
+## WHEN TO USE
+
+| Context | Invocation |
+|---------|-----------|
+| **During /reincarnatedeath** | STAGE 7 automatically writes the phetrail. Do NOT call this manually. |
+| **Mid-session breadcrumbs** | Call `/phetrails` standalone to dump state without full DEATH. |
+
+If you're at DEATH, the chain handles this. Standalone use is for opportunistic state capture.
 
 ---
 
-## EXECUTION STEPS
+## FIX G — RUN NUMBER FROM GIT, NOT SORT (v2.0 BREAKING CHANGE)
 
-### 1. IDENTIFY RUN NUMBER
+**Old code (buggy):**
 ```powershell
 $priorDeath = Get-ChildItem "CANON/REINCARNATION/*-reincarnateDEATH.md" | Sort-Object Name -Descending | Select-Object -First 1
-$runNumber = if ($priorDeath.Name -match 'run(\d+)') { $matches[1] } else { "UNKNOWN" }
+# BUG: String sort makes run9 > run42 because '9' > '4'.
 ```
 
-### 2. EXTRACT POSITIVE PHEROMONES (Successes)
-Scan the current session's tool outputs and code changes for:
-- **Verified Deploys:** Wrangler tail confirmation, HTTP 200 on critical endpoints.
-- **Fixed Bugs:** Specific file:line changes that resolved an issue.
-- **Validated Configs:** Keys rotated, endpoints confirmed live.
-
-*Format:*
-```json
-{
-  "type": "POSITIVE",
-  "artifact": "file/path or endpoint",
-  "action": "what was done",
-  "verification": "how it was confirmed (e.g., wrangler tail, curl 200)",
-  "timestamp": "ISO8601"
-}
+**New code (git-authoritative + zero-pad):**
+```powershell
+$lastDeathLine = git log --oneline --grep "^death:" -1
+if ($lastDeathLine -match 'run(\d+)') { $priorRun = [int]$matches[1] }
+$run = $priorRun + 1
+$runPad = "{0:D3}" -f $run
 ```
 
-### 3. EXTRACT NEGATIVE PHEROMONES (Dead Ends)
-Scan for:
-- **Failed Architectures:** Approaches tried and rejected (e.g., CF WS proxy).
-- **Wasted Resources:** Token loops, unnecessary deploys, ignored dispatch rules.
-- **Spec Violations:** Code that broke API contracts (e.g., Deepgram Settings schema).
-
-*Format:*
-```json
-{
-  "type": "NEGATIVE",
-  "artifact": "file/path or concept",
-  "failure": "what went wrong",
-  "root_cause": "why it failed",
-  "decay_days": 180,
-  "timestamp": "ISO8601"
-}
-```
-
-### 4. EXTRACT NEUTRAL PHEROMONES (State Markers)
-- **Current HEAD SHA**
-- **SOULCOUNT at extraction**
-- **Open Flags count**
-- **Active Mission string**
-
-### 5. WRITE TRAIL FILE
-Save to `CANON/PHEROMONES/PheTrail-{RunNumber}.json`.
+**Why:** Lexical sort fails past run 9. Git log is the canonical run authority (L29 NO_ASSUME_HEAD). Zero-pad defeats lexical sort forever (`run009 < run042 < run100`).
 
 ---
 
-## OUTPUT FORMAT (JSON)
+## EXECUTION
+
+```powershell
+$D1    = "https://soul-logger.mrmichaelhobbs123.workers.dev"
+$repo  = "D:\OB-1-CANONICAL"
+
+# Run authority: git (L29)
+$lastDeathLine = git log --oneline --grep "^death:" -1
+if ($lastDeathLine -match 'run(\d+)') { $priorRun = [int]$matches[1] }
+$run    = $priorRun + 1
+$runPad = "{0:D3}" -f $run
+
+# Paths (contract 1.2)
+$phetrailPath = "$repo\CANON\PHEROMONES\PheTrail-run$runPad.json"
+$headSha      = (git rev-parse --short HEAD)
+$soulResp     = Invoke-RestMethod "$D1/api/soul/count"
+$soulcount    = $soulResp.soulcount
+```
+
+---
+
+## EXTRACT
+
+### Positive Trails (Successes)
+Scan current session for:
+- Verified deploys (wrangler tail HTTP 200)
+- Fixed bugs (file:line → resolution)
+- Validated configs (keys rotated, endpoints confirmed)
+
+**Required fields:** `artifact`, `action`, `verification`, `timestamp`
+
+### Negative Trails (Dead Ends)
+Scan for:
+- Failed architectures (tried + rejected)
+- Wasted resources (token loops, ignored dispatch)
+- Spec violations (broke API contracts)
+
+**Required fields:** `artifact`, `failure`, `root_cause`, `decay_days=180`, `timestamp`
+
+### Neutral State Markers
+- HEAD SHA
+- SOULCOUNT at extraction
+- Open flags count
+- Active mission (from BOOT)
+
+---
+
+## OUTPUT FORMAT (contract 1.2)
 
 ```json
 {
-  "run_number": "23",
-  "extracted_at": "2026-05-30T15:30:00Z",
-  "head_sha": "d99cc094",
-  "soulcount": 54687961,
+  "run_number": "042",
+  "extracted_at": "2026-06-02T06:45:00+07:00",
+  "head_sha": "912515df",
+  "soulcount": 71732986,
   "positive_trails": [
     {
-      "type": "POSITIVE",
-      "artifact": "APPS/NET-PET-AI/src/index.js",
-      "action": "Browser-direct Deepgram JWT minting deployed",
-      "verification": "Wrangler tail confirmed 200 OK on /api/deepgram-token",
-      "timestamp": "2026-05-29T22:17:00Z"
-    },
-    {
-      "type": "POSITIVE",
-      "artifact": "APPS/NET-PET-AI/public/chat.js",
-      "action": "Subprotocol order fixed to [jwt, 'token']",
-      "verification": "Code review + Deepgram spec alignment",
-      "timestamp": "2026-05-29T22:17:00Z"
+      "artifact": "CANON/SOUL-KEYWORDS/inverted-index.json",
+      "action": "rebuilt from 41 rfkw-run*.txt files",
+      "verification": "319 terms, 60 new entries, valid JSON written",
+      "timestamp": "2026-06-02T06:45:00+07:00"
     }
   ],
   "negative_trails": [
     {
-      "type": "NEGATIVE",
-      "artifact": "CF Worker WebSocket Proxy",
-      "failure": "Connection timeout/reconnect loop due to CF lifetime limits",
-      "root_cause": "Architectural mismatch: CF Workers are not long-lived WS servers",
+      "artifact": "CANON/SOUL-KEYWORDS/inverted-index.json",
+      "failure": "corrupt JSON from -Append after prior runs",
+      "root_cause": "Set-Content -Append on JSON concatenated second root",
       "decay_days": 180,
-      "timestamp": "2026-05-29T22:17:00Z"
-    },
-    {
-      "type": "NEGATIVE",
-      "artifact": "chat.js:828",
-      "failure": "Settings rejection causing reconnect loop",
-      "root_cause": "context.messages nested incorrectly; must be root-level messages",
-      "decay_days": 180,
-      "timestamp": "2026-05-30T15:30:00Z"
+      "timestamp": "2026-06-02T06:45:00+07:00"
     }
   ],
   "state_markers": {
-    "active_mission": "Voice Agent Deploy Verification + TRUE PHOENIX RISING PROTOCOL",
-    "open_flags_count": 6,
-    "top_priority": "Fix chat.js:828 context.messages nesting"
+    "active_mission": "OB-1 REINCARNATION v5.0 unification",
+    "open_flags_count": 8,
+    "top_priority": "finish TASK 3-8 then commit"
   }
 }
 ```
 
 ---
 
-## USAGE IN REINCARNATION
+## WRITE
 
-1. **RISE:** Read `CANON/PHEROMONES/PheTrail-{PriorRun}.json` immediately after COLD-START-BOOT.
-2. **FILTER:** 
-   - If `NEGATIVE` trail exists for a proposed action → **HALT**. Do not proceed unless explicitly overridden in Shadow Mode.
-   - If `POSITIVE` trail exists for a pattern → **REPLICATE**. Use the same verification steps.
-3. **UPDATE:** At DEATH, append new trails to the file or create a new one for the next run.
+```powershell
+$phetrail | ConvertTo-Json -Depth 5 | Set-Content $phetrailPath -Encoding UTF8
+Write-Host "PHETRAIL WRITTEN: $phetrailPath"
+```
+
+**File naming:** `PheTrail-run{NNN}.json` (zero-pad, contract 1.2)
 
 ---
 
 ## LAWS
 
-1. **L-PHE-1: RAW DATA ONLY.** No summaries. No "I think". Only file paths, line numbers, HTTP codes, and error messages.
-2. **L-PHE-2: NEGATIVE DECAY.** Negative pheromones persist for 180 days. They are not deleted; they are archived. A dead end today may be a viable path in 6 months if dependencies change.
-3. **L-PHE-3: VERIFICATION MANDATORY.** A Positive Pheromone is only valid if it includes a `verification` field proving it worked.
-4. **L-PHE-4: TRAIL CONSUMPTION.** Every agent MUST read the latest PheTrail before executing complex logic. Ignoring a Negative Pheromone is a protocol violation.
+| # | Law | Enforcement |
+|---|-----|-------------|
+| L-PHE-1 | RAW DATA ONLY | No summaries. Only file paths, line numbers, HTTP codes, error messages. |
+| L-PHE-2 | NEGATIVE DECAY | Negative trails persist 180 days. Archived, not deleted. Dead ends today may be viable in 6 months. |
+| L-PHE-3 | VERIFICATION MANDATORY | Positive trail MUST include `verification` field. No verification = not a positive trail. |
+| L-PHE-4 | TRAIL CONSUMPTION | Every agent MUST read the latest PheTrail before executing complex logic. Ignoring a Negative Pheromone = protocol violation. |
 
 ---
 
-## IMPLEMENTATION NOTE FOR AGENTS
+## FAILURE HANDLING
 
-When you execute `/PheTrails`, you are not just writing a file. You are **encoding the session's DNA** into a machine-readable format that prevents future agents from making the same mistakes. 
+Write fails → `PHETRAIL_GAP` flag in seal. DEATH continues. RISE back-fills next time.
 
-**IF YOU FAIL TO WRITE THIS FILE, THE NEXT AGENT WILL REPEAT YOUR ERRORS.**
+---
+
+`PHETRAILS v2.0: GIT-DERIVED RUN + ZERO-PAD + CONTRACT PATHS + DEATH STAGE 7 INTEGRATION.`

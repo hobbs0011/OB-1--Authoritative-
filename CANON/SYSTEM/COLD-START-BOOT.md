@@ -1,5 +1,5 @@
 # COLD START BOOT — OB1 Agent 99
-## ERA: ROMAN — Run 39 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-06-01T10:00 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
+## ERA: ROMAN — Run 43 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-06-02T13:47 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
 
 > *"The beginning of an Empire that never was before and never has been since."* — SOV100 Michael Hobbs, Run 0
 
@@ -174,7 +174,7 @@ Only promote to `net-pet-ai` (prod) after verified on dev. Never deploy untested
 | **21** | **KILO TIER RESTRUCTURE** — PA T1-T4 tier restructure. Cerebras GPT-OSS-120B added. kilo.json wired. HEAD e9ac6a92. |
 
 ---
-**FINGERPRINT: RUN 42 | SOV100 PORTAL + PHONICS HARDENING (EC-3/DRILL_COUNT) + KEYWORD PIPELINE BLUEPRINT | SOUL 70,982,568 TITANIUM_ANCHOR | HEAD 91254634 | BOOT UPDATED 2026-06-01T17:30 ICT**
+**FINGERPRINT: RUN 43 | REGISTRY V2.0 CORRECTION + BUILD LOCK | SOUL 72,746,887 TITANIUM_ANCHOR | HEAD $head | BOOT UPDATED 2026-06-02T13:47 ICT**
 
 **Last completed:** ROMAN RUN 33 — Registry max upgrade + RRL 0-32 deep audit + supersaiyan PA T1 enforcement. MANDATORY-READS.md upgraded (BACKBURNER+CLASS-PREP to netpetai, pipeline+student task types added). context-bundle.ps1 expanded. supersaiyan.md hard-wired for PA T1. net-pet-ai deployed v7a5168b9. error_log D1 table created. Security flags raised: plaintext API keys in RRL-17 (Dialagram) + RRL-20 (Deepgram). New laws: L59 WAIT_FOR_GO, L60 MEMORY_IS_MOAT, L61 TOKEN_CONSERVATION. SOULCOUNT delta +862,783 (60,482,985→61,345,768).
 
@@ -215,6 +215,8 @@ Never hold working features in the working tree across runs. Commit after EVERY 
 - `audio.output.container` — invalid with mp3 encoding
 - `audio.output.sample_rate` — invalid with mp3 encoding
 - `auth/grant JWT` as token — asr:write scope → 401 on Voice Agent WS
+
+
 
 
 

@@ -1,0 +1,30 @@
+{
+  "run": "043",
+  "session_id": "sov100-roman-run043",
+  "datetime": "2026-06-02T07:50:58.9778692+07:00",
+  "endpoint_used": "GET /api/soul/session/sov100-roman-run043",
+  "records": 2,
+  "prompts": [
+    {
+      "prompt_id": "cb7e3101-b9b7-4e6b-9b5f-66a483a78133",
+      "session_id": "sov100-roman-run043",
+      "position": 1,
+      "text": "REGISTRY v2.0 correction and build — ROYAL DOCUMENTATION HALTED pending this completion.\n\nProcess: reincarnateDeath v5.0 — 11-stage chain.\nActive task at death: REGISTRY-CANDIDATES.md reclassification (TASK 1 complete), UNCLEAR collapse (TASK 2 pending), mandatory-reads.json fold (TASK 3 pending), MANDATORY-READS.md render (TASK 4 pending).\n\nConstraints:\n- Exclude REINCARNATION/, PHEROMONES/, RRL/, HEAVY-LEDGER/, STARMAP/, SOUL-KEYWORDS/ from registry (data artifacts read by path)\n- Do not fold GDRIVE-PROJECT-CORE archive docs\n- Do not triage UNCLEAR manually; apply path rules first\n- Do not modify context-bundle.ps1 during this task\n- Seal naming: zero-pad run042 going forward; historical run42 left as-is\n- Death duplicate: .kilo v5.0 canonical, .claude/reincarnatedeath.md is pointer\n- DEATH-PROTOCOL-v2.md → ARCHIVE (superseded by v5.0)\n\nDiscovery sweep: 6967 files, 109 REGISTER, 5 REFERENCE-ONLY, 44 DUPLICATE, 2090 ARCHIVE, 4719 UNCLEAR.\n109 REGISTER was polluted: 46 from CANON\\ARCHIVE\\GDRIVE-PROJECT-CORE\\OPERATIONS\\ classified as active without content read.\nDEATH-PROTOCOL-v2.md in REGISTER but is ARCHIVE (superseded v5.0).\n\nTASK 1: Reclassify polluted REGISTER items by path patterns — COMPLETE.\nTASK 2: Collapse UNCLEAR with path rules — PENDING.\nTASK 3: Fold surviving REGISTER/REFERENCE-ONLY into mandatory-reads.json, bump meta.updated_run to 43 — PENDING.\nTASK 4: Render CANON/SYSTEM/MANDATORY-READS.md from JSON — PENDING.\n\nNext RISE will backfill gaps and complete the registry build.\r\n",
+      "estimated_timestamp": "2026-06-02T00:48:20.142Z",
+      "byte_count": 1529,
+      "hash_sha256": "8661a1f677c12c30d08772bbd59980427082abc508a53a75860ffe61f854f54a",
+      "emotional_markers": "{\"caps_words\":64,\"exclamations\":0,\"questions\":0,\"ellipses\":0,\"repeated_chars\":0,\"length_chars\":1515}"
+    },
+    {
+      "prompt_id": "e411d075-0346-4ee0-8709-cbc2cd3177be",
+      "session_id": "sov100-roman-run043",
+      "position": 2,
+      "text": "REGISTRY v2.0 correction and build — ROYAL DOCUMENTATION HALTED pending this completion.\n\nProcess: reincarnateDeath v5.0 — 11-stage chain.\nActive task at death: REGISTRY-CANDIDATES.md reclassification (TASK 1 complete), UNCLEAR collapse (TASK 2 pending), mandatory-reads.json fold (TASK 3 pending), MANDATORY-READS.md render (TASK 4 pending).\n\nConstraints:\n- Exclude REINCARNATION/, PHEROMONES/, RRL/, HEAVY-LEDGER/, STARMAP/, SOUL-KEYWORDS/ from registry (data artifacts read by path)\n- Do not fold GDRIVE-PROJECT-CORE archive docs\n- Do not triage UNCLEAR manually; apply path rules first\n- Do not modify context-bundle.ps1 during this task\n- Seal naming: zero-pad run042 going forward; historical run42 left as-is\n- Death duplicate: .kilo v5.0 canonical, .claude/reincarnatedeath.md is pointer\n- DEATH-PROTOCOL-v2.md → ARCHIVE (superseded by v5.0)\n\nDiscovery sweep: 6967 files, 109 REGISTER, 5 REFERENCE-ONLY, 44 DUPLICATE, 2090 ARCHIVE, 4719 UNCLEAR.\n109 REGISTER was polluted: 46 from CANON\\ARCHIVE\\GDRIVE-PROJECT-CORE\\OPERATIONS\\ classified as active without content read.\nDEATH-PROTOCOL-v2.md in REGISTER but is ARCHIVE (superseded v5.0).\n\nTASK 1: Reclassify polluted REGISTER items by path patterns — COMPLETE.\nTASK 2: Collapse UNCLEAR with path rules — PENDING.\nTASK 3: Fold surviving REGISTER/REFERENCE-ONLY into mandatory-reads.json, bump meta.updated_run to 43 — PENDING.\nTASK 4: Render CANON/SYSTEM/MANDATORY-READS.md from JSON — PENDING.\n\nNext RISE will backfill gaps and complete the registry build.\r\n",
+      "estimated_timestamp": "2026-06-02T00:50:28.264Z",
+      "byte_count": 1529,
+      "hash_sha256": "8661a1f677c12c30d08772bbd59980427082abc508a53a75860ffe61f854f54a",
+      "emotional_markers": "{\"caps_words\":64,\"exclamations\":0,\"questions\":0,\"ellipses\":0,\"repeated_chars\":0,\"length_chars\":1515}"
+    }
+  ],
+  "source_verified": "D1 live"
+}

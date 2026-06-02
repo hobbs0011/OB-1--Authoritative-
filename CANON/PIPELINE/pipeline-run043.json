@@ -1,0 +1,24 @@
+{
+  "run": "043",
+  "datetime": "2026-06-02T07:51:35.5615477+07:00",
+  "session_id": "sov100-roman-run043",
+  "chain": "RRL->SOUL->DNA->LEDGER->STARMAP->KEYWORD->PHETRAIL->PIPELINE",
+  "rrl": "RRL-043.txt",
+  "soul": {
+    "count_after": 72939212,
+    "delta": 1529,
+    "event_id": "e411d075-0346-4ee0-8709-cbc2cd3177be",
+    "count_before": 72937683
+  },
+  "dna": {
+    "endpoint": "GET /api/soul/session/sov100-roman-run043",
+    "records": 2
+  },
+  "ledger": "CANON/HEAVY-LEDGER/HL-218.json",
+  "starmap": "CANON/STARMAP/starmap-run043.txt",
+  "keyword": "CANON/SOUL-KEYWORDS/rfkw-run043.txt",
+  "phetrail": "CANON/PHEROMONES/PheTrail-run043.json",
+  "seal_sha": "",
+  "seal_path": "",
+  "status": "SEAL_PENDING"
+}

@@ -1,0 +1,13 @@
+{
+  "ledger_id": 218,
+  "run": 43,
+  "datetime": "2026-06-02T07:50:49.6480665+07:00",
+  "merkle_parent": "9cb869eaa1e6cb612f735bba8e3762fc40a008f26747392e5a895628c64a67e1",
+  "merkle_hash": "6ccbc652b699f37b2516dc8b562946fb8c132b94e90b133f13709494194617c3",
+  "prev_hl": 217,
+  "next_hl": 219,
+  "event": "death: REGISTRY-v2-correction",
+  "session_id": "sov100-roman-run043",
+  "soulcount": 72939212,
+  "soul_delta": 1529
+}

@@ -19,6 +19,46 @@ $D1      = "https://soul-logger.mrmichaelhobbs123.workers.dev"
 $runId   = if ($SessionId) { $SessionId } else { "sov100-roman-run$RunNumber" }
 $results = @{}
 
+# ═══════════════════════════════════════════
+# LEDGER HELPERS (contract 1.5)
+# ═══════════════════════════════════════════
+function Get-Next-Ledger-ID {
+    param([string]$LedgerDir = "$repo\CANON\HEAVY-LEDGER")
+    if (-not (Test-Path $LedgerDir)) { return 1 }
+    $ids = Get-ChildItem $LedgerDir -Filter "HL-*.json" | ForEach-Object {
+        if ($_.Name -match 'HL-(\d+)') { [int]$matches[1] }
+    }
+    if ($ids) { ($ids | Measure-Object -Maximum).Maximum + 1 } else { 1 }
+}
+
+function Get-Tail-Ledger-Hash {
+    param([string]$LedgerDir = "$repo\CANON\HEAVY-LEDGER")
+    if (-not (Test-Path $LedgerDir)) { return "0x0" }
+    $last = Get-ChildItem $LedgerDir -Filter "HL-*.json" | Sort-Object Name -Descending | Select-Object -First 1
+    if (-not $last) { return "0x0" }
+    try {
+        $json = Get-Content $last.FullName -Raw | ConvertFrom-Json
+        if ($json.merkle_hash) { return $json.merkle_hash }
+        elseif ($json.merkle_parent) { return $json.merkle_parent }
+        else {
+            return [System.BitConverter]::ToString(
+                [System.Security.Cryptography.SHA256]::Create().ComputeHash(
+                    [System.Text.Encoding]::UTF8.GetBytes((Get-Content $last.FullName -Raw))
+                )
+            ).Replace("-", "").ToLower()
+        }
+    } catch { "0x0" }
+}
+
+function Compute-Sha256 {
+    param([string]$InputString)
+    [System.BitConverter]::ToString(
+        [System.Security.Cryptography.SHA256]::Create().ComputeHash(
+            [System.Text.Encoding]::UTF8.GetBytes($InputString)
+        )
+    ).Replace("-", "").ToLower()
+}
+
 function Write-Step($step, $status, $detail) {
     $icon = if ($status -eq "PASS") { "[PASS]" } elseif ($status -eq "FAIL") { "[FAIL]" } else { "[WARN]" }
     Write-Host "$icon STEP $step  -  $detail"
@@ -121,44 +161,18 @@ if ($DryRun) {
 # STEP 3: LEDGER  -  WRITE MERKLE ENTRIES
 # ═══════════════════════════════════════════
 $ledgerDir = "$repo\CANON\HEAVY-LEDGER"
-if (-not (Test-Path $ledgerDir)) { 
-    New-Item -ItemType Directory -Path $ledgerDir -Force | Out-Null 
+if (-not (Test-Path $ledgerDir)) {
+    New-Item -ItemType Directory -Path $ledgerDir -Force | Out-Null
 }
 
-# Find next available HL ID
-$existingHLs = Get-ChildItem $ledgerDir -Filter "HL-*.json" | ForEach-Object {
-    if ($_.Name -match 'HL-(\d+)') { [int]$matches[1] }
-}
-$nextHL = if ($existingHLs) { ($existingHLs | Measure-Object -Maximum).Maximum + 1 } else { 1 }
-
-# Get parent hash from last ledger entry (handles both 'merkle_hash' and 'merkle_parent' field names)
-$lastHL = Get-ChildItem $ledgerDir -Filter "HL-*.json" | Sort-Object Name -Descending | Select-Object -First 1
-$parentHash = if ($lastHL) {
-    try { 
-        $lastJson = Get-Content $lastHL.FullName -Raw | ConvertFrom-Json
-        # Try merkle_hash first, then merkle_parent, then compute from content
-        if ($lastJson.merkle_hash) { $lastJson.merkle_hash }
-        elseif ($lastJson.merkle_parent) { $lastJson.merkle_parent }
-        else { 
-            [System.BitConverter]::ToString(
-                [System.Security.Cryptography.SHA256]::Create().ComputeHash(
-                    [System.Text.Encoding]::UTF8.GetBytes((Get-Content $lastHL.FullName -Raw))
-                )
-            ).Replace("-", "").ToLower()
-        }
-    } catch { "0x0" }
-} else { "0x0" }
+$nextHL = Get-Next-Ledger-ID -LedgerDir $ledgerDir
+$parentHash = Get-Tail-Ledger-Hash -LedgerDir $ledgerDir
 
 # Log parent source
-Write-Host "  PARENT: $($lastHL.Name) → $($parentHash.Substring(0, [Math]::Min(16, $parentHash.Length)))..."
+Write-Host "  PARENT: HL-$($nextHL - 1) → $($parentHash.Substring(0, [Math]::Min(16, $parentHash.Length)))..."
 
-# Create single ledger entry for this run's RRL
 $timestamp = (Get-Date -Format 'o')
-$recordHash = [System.BitConverter]::ToString(
-    [System.Security.Cryptography.SHA256]::Create().ComputeHash(
-        [System.Text.Encoding]::UTF8.GetBytes("$rrlText|$parentHash|$timestamp")
-    )
-).Replace("-", "").ToLower()
+$recordHash = Compute-Sha256 "$rrlText|$parentHash|$timestamp"
 
 $ledgerEntry = [ordered]@{
     hl_id         = "HL-$nextHL"
@@ -171,7 +185,7 @@ $ledgerEntry = [ordered]@{
     sealed_at     = $timestamp
     sov100        = $true
     run           = $RunNumber
-} 
+}
 
 $ledgerPath = "$ledgerDir\HL-$nextHL.json"
 $ledgerEntry | ConvertTo-Json -Depth 4 | Set-Content $ledgerPath -Encoding UTF8

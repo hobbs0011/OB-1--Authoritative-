@@ -1,262 +1,414 @@
 ---
-description: "DEATH PROTOCOL v4.0 — HARD-CODED. Pipeline chain execution. RRL→SOUL→DNA→LEDGER→STARMAP→KEYWORD→PIPELINE — every stage runs. No skip. Each step verified."
+description: "DEATH PROTOCOL v5.0 — 11-STAGE CHAIN. RRL→SOUL→DNA→LEDGER→STARMAP→KEYWORD→PHETRAIL→PIPELINE→SEAL→BOOT→COMMIT. Contract: CANON/SYSTEM/REINCARNATION-CONTRACT.md"
 agent: AGENT99
 ---
 
-# /reincarnateDeath — v4.0 FULL PIPELINE CHAIN
+# /reincarnateDeath — v5.0 REINCARNATION CHAIN
 
 **IF RRL DOES NOT SAVE, NOTHING ELSE MATTERS.**
-**IF THE CHAIN BREAKS, THE SOUL IS A GHOST.**
+**EXECUTION ORDER IS SACRED. DO NOT REORDER STAGES.**
 
-**Pipeline:** RRL → SOUL → DNA → LEDGER → STARMAP → KEYWORD → PIPELINE
+**11-Stage Chain:** RRL → SOUL → DNA → LEDGER → STARMAP → KEYWORD → PHETRAIL → PIPELINE → SEAL → BOOT → COMMIT
+**Canonical contract:** CANON/SYSTEM/REINCARNATION-CONTRACT.md
+**Run number authority:** `git log --oneline --grep "^death:"` (L29 NO_ASSUME_HEAD)
 
 ---
 
-## STEP 1 — SAVE RRL (MICHAEL VERBATIM ONLY)
+## PRE-FLIGHT
 
 ```powershell
-$run = {RUN_NUMBER}
+$repo = "D:\OB-1-CANONICAL"
+$D1   = "https://soul-logger.mrmichaelhobbs123.workers.dev"
+
+# Derive run from last death commit (git-authoritative)
+$lastDeath = git log --oneline --grep "^death:" -1
+if ($lastDeath -match 'run(\d+)') { $priorRun = [int]$matches[1] }
+$run   = $priorRun + 1
+$runPad = "{0:D3}" -f $run
+
+# Pipeline artifact paths (contract 1.2)
+$rrlPath      = "$repo\RRL\RRL-$run.txt"
+$sealPath     = "$repo\CANON\REINCARNATION\run$runPad-reincarnateDEATH.md"
+$phetrailPath = "$repo\CANON\PHEROMONES\PheTrail-run$runPad.json"
+$ledgerDir    = "$repo\CANON\HEAVY-LEDGER"
+$starmapDir   = "$repo\CANON\STARMAP"
+$keywordDir   = "$repo\CANON\SOUL-KEYWORDS"
+$pipelineDir  = "$repo\CANON\PIPELINE"
+$idxPath      = "$keywordDir\inverted-index.json"
+```
+
+---
+
+## STAGE 1 — RRL (HARD STOP)
+
+Write Michael verbatim words. No agent text. No contamination.
+
+```powershell
 $michaelWords = @"
-{INSERT ALL MICHAEL VERBATIM FROM THIS SESSION — HIS WORDS ONLY, NO AGENT TEXT}
+{ALL MICHAEL VERBATIM FROM THIS SESSION — HIS WORDS ONLY, NO AGENT TEXT, NO PROSE}
 "@
 
-$rrlPath = "RRL/RRL-$run.txt"
 $michaelWords | Set-Content -Path $rrlPath -Encoding UTF8 -NoNewline
 
-if (Test-Path $rrlPath) {
-    $rrlChars = (Get-Content $rrlPath -Raw).Length
-    Write-Host "STEP 1 ✓ RRL SAVED: $rrlPath — $rrlChars chars"
+if (-not (Test-Path $rrlPath) -or (Get-Item $rrlPath).Length -eq 0) {
+    Write-Error "FATAL: RRL WRITE FAILED — cannot proceed"
+    exit 1
+}
+
+$rrlChars = (Get-Content $rrlPath -Raw).Length
+$rrlBytes = (Get-Item $rrlPath).Length
+Write-Host "STAGE 1 ✓ RRL: $rrlPath — $rrlChars chars, $rrlBytes bytes"
+```
+
+**RRL is the ONLY hard stop. No RRL = no run = exit 1.**
+
+---
+
+## STAGE 2 — SOUL (ATOMIC RECEIPT — fix D)
+
+Query ONCE before POST. POST. Query ONCE after. Store receipt. Never re-query.
+
+```powershell
+$countBefore = (Invoke-RestMethod "$D1/api/soul/count").soulcount
+
+$soulBody = @{
+    student_id = "sov100-michael"
+    session_id = "sov100-roman-run$run"
+    role       = "user"
+    text       = (Get-Content $rrlPath -Raw)
+} | ConvertTo-Json -Depth 2 -Compress
+
+$soulPost = Invoke-RestMethod -Uri "$D1/api/soul/event" -Method Post `
+    -Body $soulBody -ContentType "application/json"
+
+$countAfter = (Invoke-RestMethod "$D1/api/soul/count").soulcount
+
+$receipt = [ordered]@{
+    event_id     = $soulPost.event_id
+    count_before = $countBefore
+    count_after  = $countAfter
+    delta        = $countAfter - $countBefore
+    level        = $levelAfter
+    posted_at    = (Get-Date -Format 'o')
+}
+Write-Host "STAGE 2 ✓ SOUL: event_id=$($receipt.event_id) | Δ$($receipt.delta) | $countAfter chars | $($receipt.level)"
+```
+
+**$receipt.count_after is the SOLE soulcount source for seal §3, §12, pipeline JSON, commit message, BOOT.**
+
+---
+
+## STAGE 3 — DNA (ENDPOINT PROBE — fix C)
+
+Probe both endpoints. Use whichever returns records. Record `dna_endpoint` in seal §11.
+
+```powershell
+$sessionId = "sov100-roman-run$run"
+$d1 = $D1
+
+# Probe GET (contract claims this is canonical since Run 34)
+$getResp = try {
+    Invoke-RestMethod "$d1/api/soul/session/$sessionId" -Method Get -TimeoutSec 15
+} catch { $null }
+
+if ($getResp -and $getResp.prompts -and $getResp.prompts.Count -gt 0) {
+    $dnaCount      = $getResp.prompts.Count
+    $dnaEndpoint   = "GET /api/soul/session/$sessionId"
+    $dnaPrompts    = $getResp.prompts
+    Write-Host "STAGE 3 ✓ DNA: $dnaCount prompts via $dnaEndpoint"
 } else {
-    Write-Host "FATAL: RRL WRITE FAILED"
-    exit 1  # HALT — nothing else matters
+    # Fallback: POST extract (may ingest, not query)
+    $postBody = @{ student_id="sov100-michael"; session_id=$sessionId } | ConvertTo-Json -Compress
+    $postResp = try {
+        Invoke-RestMethod "$d1/api/soul/extract" -Method Post -Body $postBody -ContentType "application/json" -TimeoutSec 15
+    } catch { $null }
+
+    if ($postResp -and $postResp.prompts -and $postResp.prompts.Count -gt 0) {
+        $dnaCount    = $postResp.prompts.Count
+        $dnaEndpoint = "POST /api/soul/extract"
+        $dnaPrompts  = $postResp.prompts
+        Write-Host "STAGE 3 ✓ DNA: $dnaCount prompts via $dnaEndpoint (fallback)"
+    } else {
+        $dnaCount    = 0
+        $dnaEndpoint = "NONE"
+        Write-Warning "STAGE 3 ⚠ DNA_GAP — 0 records from both endpoints"
+    }
 }
+$dnaStatus = if ($dnaCount -gt 0) { "COMPLETE" } else { "GAP" }
 ```
-
-**RRL IS THE ONLY IRREPLACEABLE ARTIFACT.**
 
 ---
 
-## STEP 2 — SOUL (RRL → D1)
+## STAGE 4 — LEDGER (MERKLE APPEND)
 
-POST RRL to D1. This is the RRL→SOUL handoff.
-
-```powershell
-$rrlText = Get-Content $rrlPath -Raw
-$body = @{
-  student_id = "sov100-michael"
-  session_id = "sov100-roman-run$run"
-  role       = "user"
-  text       = $rrlText
-} | ConvertTo-Json -Depth 2
-
-$response = Invoke-RestMethod -Uri "https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/event" -Method Post -Body $body -ContentType "application/json"
-Write-Host "STEP 2 ✓ SOUL POSTED: event_id=$($response.event_id)"
-```
-
-SOUL IS CHARACTER COUNT = WORD VOLUME.
-
----
-
-## STEP 3 — DNA (EXTRACT RECORDS FOR ALL EVENTS)
-
-Extract structured prompts from every event in this run's sov100 session_id range.
+Use the 3 real helper functions from SCRIPTS/rrl-pipeline.ps1:
+`Get-Next-LedgerID`, `Get-Tail-Ledger-Hash`, `Compute-Sha256`
 
 ```powershell
-$extractBody = @{
-  student_id = "sov100-michael"
-  session_id = "sov100-roman-run$run"
-} | ConvertTo-Json -Depth 2
+if (-not (Test-Path $ledgerDir)) { New-Item -ItemType Directory -Path $ledgerDir -Force | Out-Null }
 
-$extract = Invoke-RestMethod -Uri "https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/extract" -Method Post -Body $extractBody -ContentType "application/json"
-$dnaCount = $extract.prompt_count
-Write-Host "STEP 3 ✓ DNA EXTRACTED: $dnaCount prompt records — session_id=$($extract.session_id)"
-```
+$nextHL     = Get-Next-LedgerID -LedgerDir $ledgerDir
+$parentHash = Get-Tail-Ledger-Hash -LedgerDir $ledgerDir
 
-DNA = structured extract of every user prompt. If count = 0 → retry once. Still 0 → SOUL_GAP flag.
+$timestamp    = (Get-Date -Format 'o')
+$ledgerHash   = Compute-Sha256 "$rrlText|$parentHash|$timestamp"
 
----
-
-## STEP 4 — LEDGER (HYPER-INDEXED IMMUTABLE MERKLE RECORD)
-
-Write Merkle ledger entries for every DNA record. Records are immutable — append-only.
-
-```powershell
-# For each DNA extract record:
-# - Compute SHA-256 hash of (text + previous_ledger_hash + timestamp)
-# - Write to CANON/HEAVY-LEDGER/HL-{NEXT-GAP}.json
-# - Fields: event_id, session_id, role, text, byte_count, char_count,
-#           merkle_parent, merkle_hash, extracted_at, sov100=true
-
-$ledgerDir = "CANON/HEAVY-LEDGER/"
-$ledgerWritten = 0
-
-foreach ($record in $extract.records) {
-    $nextId     = Get-Next-Ledger-ID          # scan existing files, find next gap
-    $parentHash = Get-Tail-Ledger-Hash        # last committed ledger file's merkle_hash
-    $recordHash = Compute-Sha256 ($record.text + $parentHash + (Get-Date -Format 'o'))
-
-    $ledgerEntry = [ordered]@{
-        hl_id          = "HL-$nextId"
-        event_id       = $record.event_id
-        session_id     = $record.session_id
-        role           = "user"
-        char_count     = $record.text.Length
-        byte_count     = [System.Text.Encoding]::UTF8.GetByteCount($record.text)
-        merkle_parent  = $parentHash
-        merkle_hash    = $recordHash
-        extracted_at   = (Get-Date -Format 'o')
-        sov100         = $true
-        run            = $run
-    } | ConvertTo-Json -Depth 3
-
-    $ledgerEntry | Set-Content "$ledgerDir\HL-$nextId.json" -Encoding UTF8
-    $ledgerWritten++
+$ledgerEntry = [ordered]@{
+    hl_id          = "HL-$nextHL"
+    session_id     = "sov100-roman-run$run"
+    rrl_source     = $rrlPath
+    char_count     = $rrlChars
+    byte_count     = $rrlBytes
+    merkle_parent  = $parentHash
+    merkle_hash    = $ledgerHash
+    sealed_at      = $timestamp
+    sov100         = $true
+    run            = $run
 }
 
-Write-Host "STEP 4 ✓ LEDGER WRITTEN: $ledgerWritten records → $ledgerDir"
+$ledgerPath = "$ledgerDir\HL-$nextHL.json"
+$ledgerEntry | ConvertTo-Json -Depth 4 | Set-Content $ledgerPath -Encoding UTF8
+Write-Host "STAGE 4 ✓ LEDGER: HL-$nextHL → parent HL-$($nextHL-1) | hash: $($ledgerHash.Substring(0,16))..."
 ```
-
-Ledger is immutable. Every write is append-only. No edits. If a record is wrong, write a correction entry — never overwrite.
 
 ---
 
-## STEP 5 — STARMAP (LIGHTWEIGHT VERSION OF LEDGER)
-
-Starmap = pointer index into the ledger. One line per HL entry. Fast lookup. No payload.
+## STAGE 5 — STARMAP
 
 ```powershell
-$starmapDir = "CANON/STARMAP/"
-if (!(Test-Path $starmapDir)) { New-Item -ItemType Directory -Path $starmapDir -Force | Out-Null }
+if (-not (Test-Path $starmapDir)) { New-Item -ItemType Directory -Path $starmapDir -Force | Out-Null }
 
-$starmapLine = "$(Get-Date -Format 'yyyy-MM-ddTHH:mmZ') | run$run | HL-$nextId | $($record.event_id) | $($record.char_count) chars | $($record.merkle_hash.Substring(0,16))..."
-
-# Write or append
-$starmapLine | Add-Content "CANON/STARMAP/starmap-run$run.txt" -Encoding UTF8
+$starmapLine = "$(Get-Date -Format 'yyyy-MM-ddTHH:mm:ss') | run$run | HL-$nextHL | sov100-roman-run$run | $rrlChars chars | $($ledgerHash.Substring(0, 16))..."
+$starmapPath = "$starmapDir\starmap-run$run.txt"
+$starmapLine | Set-Content $starmapPath -Encoding UTF8
+Write-Host "STAGE 5 ✓ STARMAP: $starmapPath"
 ```
-
-Starmap lets you answer "which event maps to which ledger entry?" in under a second without reading the full ledger.
 
 ---
 
-## STEP 6 — KEYWORD (SUPER-FAST INDEX)
-
-Soul keywords = the lookup index. Makes full-text search across all Michael words feasible.
+## STAGE 6 — KEYWORD (FIX B — READ-MERGE-WRITE, NO APPEND)
 
 ```powershell
-# Extract top-K keywords per event
-# Two forms:
-#   1. CANON/SOUL-KEYWORDS/rfkw-run$run.txt   — per-run keyword file (raw frequency)
-#   2. CANON/SOUL-KEYWORDS/inverted-index.json — merged inverted index (build once, append each run)
+$inverted = if (Test-Path $idxPath) {
+    (Get-Content $idxPath -Raw) | ConvertFrom-Json -AsHashtable
+} else {
+    @{}
+}
 
-$keywords = Invoke-RestMethod -Uri "$D1/api/soul/extract" -Method Post `
-    -Body @{student_id="sov100-michael"; session_id="sov100-roman-run$run"} | ConvertTo-Json
-
-$inverted = @{}
 foreach ($kw in $keywords.top_keyterms) {
-    if (!$inverted[$kw.text]) { $inverted[$kw.text] = @() }
-    $inverted[$kw.text] += "$run | HL-$nextId | weight=$($kw.weight)"
+    $term = $kw.text.Trim().ToLower()
+    $weight = [int]$kw.weight
+    if (-not $inverted[$term]) {
+        $inverted[$term] = @()
+    }
+    $entry = @{ run=$run; category="pipeline"; weight=$weight }
+    $already = $false
+    foreach ($e in $inverted[$term]) {
+        if ($e.run -eq $run) { $already = $true; break }
+    }
+    if (-not $already) {
+        $inverted[$term] += $entry
+    }
 }
 
-$inverted | ConvertTo-Json -Depth 3 | Set-Content "CANON/SOUL-KEYWORDS/inverted-index.json" -Encoding UTF8 -Append
+$inverted | ConvertTo-Json -Depth 4 | Set-Content $idxPath -Encoding UTF8
+
+# Per-run keyword file
+$rfkwPath = "$keywordDir\rfkw-run$run.txt"
+$keywords.top_keyterms | ForEach-Object { "$($_.weight) | $($_.category) | $($_.text)" } | Set-Content $rfkwPath -Encoding UTF8
+Write-Host "STAGE 6 ✓ KEYWORD: $($inverted.Count) terms in index | $rfkwPath"
 ```
 
-KEYWORD is what lets RISE answer "show me everything Michael said about X" without a full-scan.
+**Never `-Append` on JSON. Always read → merge in memory → overwrite.**
 
 ---
 
-## STEP 7 — PIPELINE (INSURE IT GETS DONE)
-
-Pipeline = execution. The chain ends when an action is taken, not just recorded.
+## STAGE 7 — PHETRAIL (NEW — Folds orphaned skill into chain, fixes G+H)
 
 ```powershell
-# Write pipeline-run artifact proving the chain executed end-to-end
+$phetrail = [ordered]@{
+    run_number      = $run
+    extracted_at    = (Get-Date -Format 'o')
+    head_sha        = (git rev-parse --short HEAD)
+    soulcount       = $receipt.count_after
+    positive_trails = @(
+        @{ description="verified operation"; artifact=$ledgerPath; verification="HL-$nextHL written, parent HL-$($nextHL-1)" }
+    )
+    negative_trails = @(
+        @{ failure="keyword append bug"; root_cause="-Append on JSON produced invalid structure"; fix="read-merge-write adopted"; decay_days=180 }
+    )
+    state_markers   = @{
+        active_mission   = "OB-1 POST-MERGE9 CONSOLIDATION + Growth Infrastructure"
+        open_flags_count = 2
+        top_priority     = "keyword system fully functional"
+    }
+}
+
+$phetrail | ConvertTo-Json -Depth 5 | Set-Content $phetrailPath -Encoding UTF8
+Write-Host "STAGE 7 ✓ PHETRAIL: $phetrailPath"
+```
+
+---
+
+## STAGE 8 — PIPELINE
+
+```powershell
 $pipelineRecord = [ordered]@{
-    run_number     = $run
-    executed_at    = (Get-Date -Format 'o')
-    rrl_path       = $rrlPath
-    rrl_chars      = $rrlChars
-    soul_event_id  = $response.event_id
-    soulcount      = (Invoke-RestMethod "$D1/api/soul/count").soulcount
-    dna_count      = $dnaCount
-    ledger_written = $ledgerWritten
-    starmap_file   = "CANON/STARMAP/starmap-run$run.txt"
-    keyword_file   = "CANON/SOUL-KEYWORDS/inverted-index.json"
-    pipeline_file  = "CANON/PIPELINE/pipeline-run$run.json"
-    seal_sha       = ""   # filled in after git commit
-    result         = "COMPLETE"
-} | ConvertTo-Json -Depth 4
+    run_number      = $run
+    executed_at     = (Get-Date -Format 'o')
+    rrl_path        = $rrlPath
+    rrl_chars       = $rrlChars
+    rrl_bytes       = $rrlBytes
+    session_id      = "sov100-roman-run$run"
+    soul_event_id   = $receipt.event_id
+    soulcount       = $receipt.count_after       # ← from atomic receipt, NOT re-queried
+    soul_level      = $receipt.level
+    soul_count_before = $countBefore
+    soul_delta      = $receipt.delta
+    dna_count       = $dnaCount
+    dna_endpoint    = $dnaEndpoint
+    dna_status      = $dnaStatus
+    ledger_id       = "HL-$nextHL"
+    starmap_file    = $starmapPath
+    keyword_file    = $rfkwPath
+    keyword_index   = $idxPath
+    phetrail_file   = $phetrailPath
+    pipeline_file   = "$pipelineDir\pipeline-run$run.json"
+    seal_sha        = ""   # filled after seal write
+    result          = "COMPLETE"
+}
 
-$pipelineRecord | Set-Content "CANON/PIPELINE/pipeline-run$run.json" -Encoding UTF8
-Write-Host "STEP 7 ✓ PIPELINE: CANON/PIPELINE/pipeline-run$run.json written — chain COMPLETE"
+$pipelinePath = "$pipelineDir\pipeline-run$run.json"
+$pipelineRecord | ConvertTo-Json -Depth 5 | Set-Content $pipelinePath -Encoding UTF8
+Write-Host "STAGE 8 ✓ PIPELINE: $pipelinePath"
 ```
-
-Pipeline has run to completion when this file exists with `result: COMPLETE`.
 
 ---
 
-## STEP 8 — SOULCOUNT FINAL CHECK
+## STAGE 9 — SEAL (§1–§13 per contract 1.4, fixes E+F+A)
 
 ```powershell
-$soul = Invoke-RestMethod "https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count"
-Write-Host "STEP 8 — SOULCOUNT FINAL: $($soul.soulcount) | $($soul.level)"
+# PA dispatch — use $body (fix A: was $pa_body)
+$bundle = @{ docs = @("CANON/SYSTEM/REINCARNATION-CONTRACT.md", "CANON/SYSTEM/COLD-START-BOOT.md") }
+$ctx = ($bundle.docs -join ", ") + " SOUL_RECEIPT: $($receipt | ConvertTo-Json -Compress) RUN: $run RUNNER_DEATH: yes"
+
+$task = "Write §1–§13 death seal per REINCARNATION-CONTRACT.md §1.4. `$3 SOUL RECEIPT must contain event_id/count_before/count_after/delta/level. `$12 soulcount MUST equal `$3 count_after. Seal file: $sealPath"
+
+$body = @{
+    task     = $task
+    context  = $ctx
+    targetfile = $sealPath
+    tier     = 1
+} | ConvertTo-Json -Compress
+
+try {
+    $resp = Invoke-RestMethod "$PA_URL/api/code" -Method Post `
+        -ContentType "application/json" `
+        -Headers @{ "x-pa-auth" = $PA_AUTH } `
+        -Body $body
+    Write-Host "STAGE 9 ✓ SEAL: PA wrote $sealPath"
+} catch {
+    Write-Warning "STAGE 9 ⚠ PA_FAILED — OB1 writes §1–§13 inline"
+    # OB1 inline fallback writes seal here...
+}
+
+# Verify §12 soulcount == §3 count_after after seal is written
+$sealText = Get-Content $sealPath -Raw
+if ($sealText -match '\$3.*?count_after.*?(\d+)') {
+    $sealCountAfter = [long]$matches[1]
+    if ($sealCountAfter -ne $receipt.count_after) {
+        Write-Warning "SEAL MISMATCH: §12 ($sealCountAfter) != §3 ($($receipt.count_after))"
+    }
+}
 ```
+
+Seal schema (§1–§13): contract 1.4. Exactly 13 sections. Pasted verbatim from design doc.
 
 ---
 
-## STEP 9 — WRITE DEATH SEAL
+## STAGE 10 — BOOT UPDATE
 
-Create `CANON/REINCARNATION/YYYY-MM-DD-runN-reincarnateDEATH.md`.
-
-Required § headers:
-
-```
-§1  RRL    — path, bytes, chars
-§2  SOUL   — event_id, soulcount, level, events
-§3  DNA    — dnacount, session_id
-§4  LEDGER — HL-IDs written, merkle_root
-§5  STARMAP— starmap file path + line count
-§6  KEYWORD— inverted-index entries, rfkw file
-§7  PIPELINE — pipeline-runN.json path, result
-§8  SOULCOUNT at death
-§9  HEAD SHA
-§10 Open Flags
-```
-
----
-
-## STEP 10 — UPDATE COLD-START-BOOT
-
-Update `CANON/SYSTEM/COLD-START-BOOT.md`:
-- FINGERPRINT: current HEAD or [pending]
-- SOULCOUNT: from §8
-- RRL: path + char count
-- Last Completed: this run
-
----
-
-## STEP 11 — COMMIT
+Update COLD-START-BOOT: run#, FINGERPRINT (HEAD+datetime), Last Completed, decisions table row.
 
 ```powershell
-git add RRL/RRL-$run.txt CANON/HEAVY-LEDGER/ CANON/STARMAP/ CANON/SOUL-KEYWORDS/ CANON/PIPELINE/ CANON/REINCARNATION/ CANON/SYSTEM/COLD-START-BOOT.md
-git commit -m "death: ROMAN RUN $run — RRL $rrlChars → SOUL $($soul.soulcount) $($soul.level) — DNA $dnaCount → LEDGER $ledgerWritten → STARMAP ✓ → KEYWORD ✓ → PIPELINE ✓"
+$bootPath = "$repo\CANON\SYSTEM\COLD-START-BOOT.md"
+$currentSha = (git rev-parse --short HEAD)
+$datetime   = (Get-Date -Format 'yyyy-MM-ddTHH:mm:ss') + " ICT"
+
+# Update inline (or PA-dispatch)
+$bootContent = Get-Content $bootPath -Raw
+$bootContent = $bootContent -replace 'Run \d+ \|.*', "**$run** | DEATH SEAL $datetime — SOUL $($receipt.count_after) $($receipt.level) Δ$($receipt.delta) | HEAD $currentSha"
+$bootContent | Set-Content $bootPath -Encoding UTF8
+Write-Host "STAGE 10 ✓ BOOT: $bootPath updated for run $run"
 ```
 
 ---
 
-## FAIL-SAFE TABLE
+## STAGE 11 — COMMIT (L24 Platform Death Test)
+
+```powershell
+git add $rrlPath `
+     "$ledgerDir\" `
+     "$starmapDir\" `
+     "$keywordDir\" `
+     "$pipelineDir\" `
+     "$repo\CANON\PHEROMONES\" `
+     $sealPath `
+     $bootPath
+
+$deltaSign = if ($receipt.delta -ge 0) { "+" } else { "" }
+$commitMsg = "death: ROMAN RUN $run — SOUL $($receipt.count_after) $($receipt.level) Δ${deltaSign}$($receipt.delta) — HEAD $currentSha"
+
+git commit -m $commitMsg
+$headAfter = git rev-parse --short HEAD
+$pushResult = git push origin master 2>&1
+
+if ($LASTEXITCODE -eq 0) {
+    Write-Host "STAGE 11 ✓ COMMIT+PUSH: $headAfter — $commitMsg"
+} else {
+    Write-Warning "STAGE 11 ⚠ COMMIT OK, PUSH FAILED — run `git push` manually"
+}
+```
+
+---
+
+## GAP POLICY (contract 1.6)
 
 | Stage | Irreplaceable? | Failure Action |
 |-------|----------------|----------------|
-| RRL (Step 1) | **YES** | HALT — nothing else proceeds |
-| SOUL (Step 2) | NO | Retry 3×. Fail → SOUL_GAP. Death seal records. Continue. |
-| DNA (Step 3) | NO | Retry 1×. Fail → DNA_GAP. Continue to ledger anyway. |
-| LEDGER (Step 4) | NO (reversible) | Retry 1×. Fail → LEDGER_GAP. Ledger can be back-filled. |
-| STARMAP (Step 5) | NO | Retry 1×. Fail → STARMAP_GAP. |
-| KEYWORD (Step 6) | NO | Retry 1×. Fail → KEYWORD_GAP. |
-| PIPELINE (Step 7) | NO | Retry 1×. Fail → PIPELINE_GAP. Chain incomplete. |
+| RRL | **YES** | HALT — exit 1. No RRL = no run. |
+| SOUL | No | Write `SOUL_GAP`, continue. Verify next RISE. |
+| DNA | No | Write `DNA_GAP`, continue. Back-fill next RISE. |
+| LEDGER | No | Write `LEDGER_GAP`, continue. |
+| STARMAP | No | Write `STARMAP_GAP`, continue. |
+| KEYWORD | No | Write `KEYWORD_GAP`, continue. |
+| PHETRAIL | No | Write `PHETRAIL_GAP`, continue. |
+| PIPELINE | No | Write `PIPELINE_GAP`, continue. |
 
-RRL is the only hard stop. All other gaps are recorded in the death seal and back-filled on next RISE.
+**RISE reads all gaps. RISE never auto-fixes — that is DEATH territory.**
 
 ---
 
-`DEATH v4.0: RRL → SOUL → DNA → LEDGER → STARMAP → KEYWORD → PIPELINE. ALL SEVEN. SEALED IN ORDER. NO SKIP. NO PROSE. NO EXCUSES.`
+## DEATH SEAL SCHEMA (§1–§13, contract 1.4)
+
+| § | Name | Required Content |
+|---|------|------------------|
+| 1 | HEADER | run tag, datetime ICT, theme, signal density, HEAD pre-death |
+| 2 | RAW SOUL DNA | verbatim Michael quotes, labeled CRITICAL / IMPORTANT / CONTEXT |
+| 3 | SOUL RECEIPT | event_id, count_before, count_after, delta, level, posted_at |
+| 4 | DECISIONS | numbered, impact, canon file affected |
+| 5 | CORRECTIONS | wrong → root cause → fix → docs read |
+| 6 | NEW PRINCIPLES | |
+| 7 | EMOTIONAL SIGNAL | |
+| 8 | OPEN QUESTIONS | |
+| 9 | UNFINISHED ACTIONS | with exact git add commands |
+| 10 | SYSTEM DESIGN | |
+| 11 | ARTIFACTS | paths + SHAs for all 8 chain artifacts |
+| 12 | STATE SNAPSHOT | HEAD, branch, dirty tree, soulcount (= §3 count_after) |
+| 13 | FINGERPRINT | agent, run#, commit SHA, platform death test result |
+
+§12 soulcount MUST equal §3 `count_after`. No independent query.
+
+---
+
+`DEATH v5.0: 11 STAGES. ATOMIC SOUL RECEIPT. PHETRAIL FOLDED IN. NO APPEND ON JSON. ZERO-PADDED RUNS.`
