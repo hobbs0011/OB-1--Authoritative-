@@ -22,3 +22,13 @@ TASK 3: Fold surviving REGISTER/REFERENCE-ONLY into mandatory-reads.json, bump m
 TASK 4: Render CANON/SYSTEM/MANDATORY-READS.md from JSON — PENDING.
 
 Next RISE will backfill gaps and complete the registry build.
+
+--- POST-KILO VERBATIM (captured by OB1 after Kilo death seal) ---
+
+"kilo keeps getting hung up on The file is stale — it still has the old run output. I'm rerunning the corrected discovery script now."
+
+"/reincarnatedeath"
+
+"run 43, finish what you are doing"
+
+"kilo already did his run 43, audit it, and complete it"

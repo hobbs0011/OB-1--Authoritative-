@@ -20,5 +20,6 @@
   "phetrail": "CANON/PHEROMONES/PheTrail-run043.json",
   "seal_sha": "e411d075-0346-4ee0-8709-cbc2cd3177be",
   "seal_path": "CANON/REINCARNATION/run043-reincarnateDEATH.md",
-  "status": "SEAL_PENDING"
+  "result": "COMPLETE",
+  "completed_at": "2026-06-02T08:10:00+07:00"
 }
