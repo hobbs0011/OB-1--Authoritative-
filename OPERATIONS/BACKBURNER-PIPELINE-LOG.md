@@ -347,6 +347,14 @@
 - Fix: Design portal template spec. Build sov100-portal.html (DEV tester) as the reference implementation. Extract reusable component spec. All future portals generated from this formula.
 - See: sov100-portal.html (DEV) as reference implementation (Run 42)
 
+### BB-53 !! EXPOSED PLAINTEXT API KEY in RRL (Run 46)
+
+- Status: DEFERRED (Michael directive Run 46 — backburner; NOT closed)
+- What: Live `sk-618573…[REDACTED]` API key in plaintext at `RRL/ClaudeTheRetard1.txt:2466`. Repo pushes to GitHub remote (Phoenix-Rising-Ai-Solutions/OB-1--Authoritative-) → the key is in pushed history = must be treated as compromised. Confirmed by OB1 audit + Kilo Phase 0 FINAL D9 sweep.
+- Fix (when resumed): (1) **ROTATE** the key at its provider — assume burned. (2) Purge from history: `git filter-repo --path RRL/ClaudeTheRetard1.txt --invert-paths` (or BFG) + force-push. (3) Add `RRL/ClaudeTheRetard1.txt` + broad key patterns (`sk-*`, `csk-*`, `AIza*`) to `.gitignore`.
+- Priority when resumed: HIGH — exposed credential. Step 1 (rotate) is the only time-sensitive part; purge can follow.
+- Related: D9 plaintext sweep (Run 33 flagged RRL-17/RRL-20); doctrine — never set paid keys on phoenix-architecti.
+
 ---
 
 ## SIGNAL: MOST WANTED (NET's Most Wanted — Updated 2026-05-31 Run 35)

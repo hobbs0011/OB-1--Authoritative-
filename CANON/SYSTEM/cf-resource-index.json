@@ -1,0 +1,131 @@
+{
+  "generated_at": "2026-06-02T12:00:00+07:00",
+  "run": 46,
+  "account": {
+    "email": "mrmichaelhobbs123@gmail.com",
+    "account_id": "3c7b1766bd8fdc9e01211d2b390315ea"
+  },
+  "workers": {
+    "net-pet-ai": {
+      "status": "LIVE",
+      "deployments": 10,
+      "last_deploy": "2026-05-31T18:36:39.574Z",
+      "latest_version": "2bebe0dc-8806-4b9f-b3fa-30096713806c",
+      "triggers": {"crons": ["0 * * * *"]},
+      "bindings": {
+        "D1": ["SOUL_DB → soul-archive (c69a11bc)"],
+        "KV": ["RATELIMIT (b27d144f)", "NET_PET_KV (0583d1a5)", "STUDENT_MEMORY (807ea30d)"],
+        "DO": ["PETS", "LEDGER", "MEMORY", "COMMANDS"]
+      },
+      "evidence": "npx wrangler deployments list --config wrangler.toml"
+    },
+    "soul-logger": {
+      "status": "LIVE",
+      "secrets": ["CF_AIG_TOKEN", "DEEPSEEK_API_KEY", "OPENROUTER_API_KEY", "SEALED_FILE_AT"],
+      "bindings": {
+        "D1": ["soul-archive (c69a11bc)"]
+      },
+      "evidence": "npx wrangler secret list --name soul-logger"
+    },
+    "phoenix-architecti": {
+      "status": "LIVE",
+      "version": "v0.0.3",
+      "secrets": ["ANTHROPIC_API_KEY", "CEREBRAS_API_KEY", "DEEPSEEK_API_KEY", "DIALAGRAM_API_KEY", "GEMINI_API_KEY", "GITHUB_TOKEN", "GROQ_API_KEY", "KILO_API_KEY", "PA_AUTH_SECRET"],
+      "bindings": {
+        "KV": ["CACHE (ea5c8e99)"]
+      },
+      "security_finding": "S7 RED — PA holds ALL paid keys (ANTHROPIC, DEEPSEEK, GEMINI, CEREBRAS, GROQ). Memory law says PA is free-tier router. Recommend: remove paid keys from PA, route through net-pet-ai or dedicated secrets worker.",
+      "evidence": "npx wrangler secret list --name phoenix-architecti"
+    }
+  },
+  "kv_namespaces": {
+    "CACHE": {
+      "id": "ea5c8e99cb584dee9ab4f9ba5ed421c9",
+      "consumer": "phoenix-architecti",
+      "status": "GREEN",
+      "evidence": "PA/wrangler.toml:9-10"
+    },
+    "NET_PET_KV": {
+      "id": "0583d1a59bb24e598c4645396647eb94",
+      "consumer": "net-pet-ai",
+      "status": "GREEN",
+      "refs": 130,
+      "note": "Heavily used — student profiles, vocab, sessions, payments, waitlist, referrals, streaks, SRS",
+      "evidence": "APPS/NET-PET-AI/wrangler.toml:24-25, src/index.js:130+ references"
+    },
+    "RATELIMIT": {
+      "id": "b27d144f71c44b00a4c87360841e525f",
+      "consumer": "net-pet-ai",
+      "status": "GREEN",
+      "evidence": "APPS/NET-PET-AI/wrangler.toml:19-20"
+    },
+    "SESSIONS": {
+      "id": "4adc1924c50b49df8dc260e95efd68bf",
+      "consumer": null,
+      "status": "ORPHAN",
+      "note": "Commented out in net-pet-ai/wrangler.toml:37 (SESSIONS DO deleted via v7 migration). Only referenced in ARCHIVE and dead configs. Deletion candidate.",
+      "evidence": "Zero live toml references; ARCHIVE-only bindings"
+    },
+    "SOUL_LOGGER_KV": {
+      "id": "5ed0e9ab65cc42e6889822266aa7c730",
+      "consumer": null,
+      "status": "ORPHAN",
+      "note": "Only in root-level dead wrangler.toml. Soul-logger worker uses D1 (soul-archive), not KV. Deletion candidate.",
+      "evidence": "No active worker binds this namespace; root wrangler.toml is dead config"
+    },
+    "STUDENT_MEMORY": {
+      "id": "807ea30d96844c0dbf561d0ae3a3c1f3",
+      "consumer": "net-pet-ai",
+      "status": "GREEN",
+      "evidence": "APPS/NET-PET-AI/wrangler.toml:29-30"
+    },
+    "TASK_QUEUE": {
+      "id": "d4676f53477645978415b2cc0e6ec82e",
+      "consumer": null,
+      "status": "ORPHAN",
+      "note": "ZERO references across all wrangler.toml and src/ files in entire repo. Deletion candidate.",
+      "evidence": "rg 'TASK_QUEUE|d4676f' → no matches in any toml or src file"
+    },
+    "WAITLIST": {
+      "id": "a30d57a9da6e4446a536aef7ccf8756f",
+      "consumer": null,
+      "status": "ORPHAN",
+      "note": "Commented out in dead WORKERS/wrangler.toml. Waitlist data is stored in NET_PET_KV (src/index.js:1634-1666). Deletion candidate.",
+      "evidence": "Zero live toml references; waitlist logic uses NET_PET_KV not dedicated namespace"
+    }
+  },
+  "d1_databases": {
+    "soul-archive": {
+      "id": "c69a11bc-064b-478f-9b1f-e9b8e2431fb8",
+      "consumers": ["net-pet-ai", "soul-logger"],
+      "status": "GREEN",
+      "size_bytes": 94171136,
+      "evidence": "npx wrangler d1 list; both workers bind it"
+    },
+    "net-submissions": {
+      "id": "1a7246ce-1227-4205-9234-76cbd036fa48",
+      "consumers": [],
+      "status": "ORPHAN",
+      "size_bytes": 49152,
+      "note": "No active worker binds this D1. Deletion candidate.",
+      "evidence": "rg 'net-submissions|1a7246ce' → no active binding found"
+    }
+  },
+  "pages": {
+    "tigers-selection": {"url": "tigers-selection.pages.dev", "http": 200, "last_modified": "2 weeks ago", "status": "AMBER", "note": "Live, purpose unverified — likely room/selection app"},
+    "university-4room": {"url": "university-4room.pages.dev", "http": 200, "last_modified": "2 weeks ago", "status": "AMBER", "note": "Live, purpose unverified — room booking"},
+    "career-4room": {"url": "career-4room.pages.dev", "http": 200, "last_modified": "2 weeks ago", "status": "AMBER", "note": "Live, purpose unverified — room booking"},
+    "professional-4room": {"url": "professional-4room.pages.dev", "http": 200, "last_modified": "2 weeks ago", "status": "AMBER", "note": "Live, purpose unverified — room booking"},
+    "cubs-4room": {"url": "cubs-4room.pages.dev", "http": 200, "last_modified": "2 weeks ago", "status": "AMBER", "note": "Live, purpose unverified — room booking"},
+    "tigers-4room": {"url": "tigers-4room.pages.dev", "http": 200, "last_modified": "2 weeks ago", "status": "AMBER", "note": "Live, purpose unverified — room booking"},
+    "professional-selection": {"url": "professional-selection.pages.dev", "http": 200, "last_modified": "2 weeks ago", "status": "AMBER", "note": "Live, purpose unverified — selection platform"},
+    "netpetai-presentation": {"url": "netpetai-presentation.pages.dev", "http": 200, "last_modified": "2 weeks ago", "status": "GREEN", "note": "Net Pet AI presentation/marketing site — business asset"},
+    "net-marketing-landing": {"url": "net-marketing-landing.pages.dev", "http": 200, "last_modified": "4 weeks ago", "status": "GREEN", "note": "Marketing landing page — business asset"},
+    "naturalenglishtraining": {"url": "naturalenglishtraining.pages.dev", "http": 200, "last_modified": "1 month ago", "status": "GREEN", "note": "Main domain landing — business asset"},
+    "net-tiger-assessment": {"url": "net-tiger-assessment.pages.dev", "http": 200, "last_modified": "1 month ago", "status": "GREEN", "note": "Tiger assessment product — business asset"}
+  },
+  "other": {
+    "queues": {"status": "EMPTY", "note": "No queues configured"},
+    "r2": {"status": "GHOST", "note": "R2 disabled on this account (error 10042 expected)"}
+  }
+}

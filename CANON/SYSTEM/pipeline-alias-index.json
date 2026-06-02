@@ -1,0 +1,289 @@
+{
+  "0": {
+    "run": 0,
+    "rrl": "RRL\\RRL-Run0-verbatim.txt",
+    "dna": "CANON\\SOUL\\EXTRACT\\dna-run0.json",
+    "starmap": "CANON\\STARMAP\\starmap-run0.txt",
+    "soulkeys": "CANON\\SOUL-KEYWORDS\\rfkw-run0.txt",
+    "pipeline": "CANON\\PIPELINE\\pipeline-run0.json"
+  },
+  "1": {
+    "run": 1,
+    "rrl": "RRL\\RRL-1.txt",
+    "soulkeys": "CANON\\SOUL-KEYWORDS\\rfkw-run1.txt"
+  },
+  "2": {
+    "run": 2,
+    "soulkeys": "CANON\\SOUL-KEYWORDS\\rfkw-run2.txt"
+  },
+  "3": {
+    "run": 3,
+    "soulkeys": "CANON\\SOUL-KEYWORDS\\rfkw-run3.txt"
+  },
+  "4": {
+    "run": 4,
+    "rrl": "RRL\\RRL-4.txt",
+    "starmap": "CANON\\STARMAP\\starmap-run4.txt",
+    "soulkeys": "CANON\\SOUL-KEYWORDS\\rfkw-run4.txt",
+    "pipeline": "CANON\\PIPELINE\\pipeline-run4.json"
+  },
+  "5": {
+    "run": 5,
+    "rrl": "RRL\\RRL-5.txt",
+    "starmap": "CANON\\STARMAP\\starmap-run5.txt",
+    "soulkeys": "CANON\\SOUL-KEYWORDS\\rfkw-run5.txt",
+    "pipeline": "CANON\\PIPELINE\\pipeline-run5.json"
+  },
+  "6": {
+    "run": 6,
+    "rrl": "RRL\\RRL-6.txt",
+    "soulkeys": "CANON\\SOUL-KEYWORDS\\rfkw-run6.txt"
+  },
+  "7": {
+    "run": 7,
+    "rrl": "RRL\\RRL-7.txt",
+    "starmap": "CANON\\STARMAP\\starmap-run7.txt",
+    "soulkeys": "CANON\\SOUL-KEYWORDS\\rfkw-run7.txt",
+    "pipeline": "CANON\\PIPELINE\\pipeline-run7.json",
+    "rrl_variants": [
+      "RRL-7B.txt"
+    ],
+    "pipeline_variants": [
+      "pipeline-run7b.json"
+    ],
+    "soulkeys_variants": [
+      "rfkw-run7b.txt"
+    ]
+  },
+  "10": {
+    "run": 10,
+    "soulkeys": "CANON\\SOUL-KEYWORDS\\rfkw-run10.txt"
+  },
+  "12": {
+    "run": 12,
+    "rrl": "RRL\\RRL-12.txt",
+    "starmap": "CANON\\STARMAP\\starmap-run12.txt",
+    "soulkeys": "CANON\\SOUL-KEYWORDS\\rfkw-run12.txt",
+    "pipeline": "CANON\\PIPELINE\\pipeline-run12.json"
+  },
+  "13": {
+    "run": 13,
+    "soulkeys": "CANON\\SOUL-KEYWORDS\\rfkw-run13.txt"
+  },
+  "16": {
+    "run": 16,
+    "rrl": "RRL\\RRL-16.txt",
+    "starmap": "CANON\\STARMAP\\starmap-run16.txt",
+    "soulkeys": "CANON\\SOUL-KEYWORDS\\rfkw-run16.txt",
+    "pipeline": "CANON\\PIPELINE\\pipeline-run16.json"
+  },
+  "17": {
+    "run": 17,
+    "rrl": "RRL\\RRL-17.txt",
+    "soulkeys": "CANON\\SOUL-KEYWORDS\\rfkw-run17.txt",
+    "pipeline": "CANON\\PIPELINE\\pipeline-run17.json"
+  },
+  "18": {
+    "run": 18,
+    "rrl": "RRL\\RRL-18.txt",
+    "soulkeys": "CANON\\SOUL-KEYWORDS\\rfkw-run18.txt"
+  },
+  "19": {
+    "run": 19,
+    "rrl": "RRL\\RRL-19.txt",
+    "soulkeys": "CANON\\SOUL-KEYWORDS\\rfkw-run19.txt"
+  },
+  "20": {
+    "run": 20,
+    "rrl": "RRL\\RRL-20.txt",
+    "starmap": "CANON\\STARMAP\\starmap-run20.txt",
+    "soulkeys": "CANON\\SOUL-KEYWORDS\\rfkw-run20.txt",
+    "pipeline": "CANON\\PIPELINE\\pipeline-run20.json"
+  },
+  "21": {
+    "run": 21,
+    "rrl": "RRL\\RRL-21.txt",
+    "starmap": "CANON\\STARMAP\\starmap-run21.txt",
+    "soulkeys": "CANON\\SOUL-KEYWORDS\\rfkw-run21.txt",
+    "pipeline": "CANON\\PIPELINE\\pipeline-run21.json"
+  },
+  "22": {
+    "run": 22,
+    "rrl": "RRL\\RRL-22.txt",
+    "starmap": "CANON\\STARMAP\\starmap-run22.txt",
+    "soulkeys": "CANON\\SOUL-KEYWORDS\\rfkw-run22.txt",
+    "pipeline": "CANON\\PIPELINE\\pipeline-run22.json"
+  },
+  "23": {
+    "run": 23,
+    "soulkeys": "CANON\\SOUL-KEYWORDS\\rfkw-run23.txt"
+  },
+  "24": {
+    "run": 24,
+    "rrl": "RRL\\RRL-24.txt",
+    "soulkeys": "CANON\\SOUL-KEYWORDS\\rfkw-run24.txt",
+    "rrl_variants": [
+      "RRL-24A.txt",
+      "RRL-24b.txt"
+    ],
+    "pipeline_variants": [
+      "pipeline-run24A.json",
+      "pipeline-run24b.json"
+    ],
+    "soulkeys_variants": [
+      "rfkw-run24A.txt",
+      "rfkw-run24b.txt"
+    ]
+  },
+  "25": {
+    "run": 25,
+    "rrl": "RRL\\RRL-25.txt",
+    "soulkeys": "CANON\\SOUL-KEYWORDS\\rfkw-run25.txt",
+    "pipeline_variants": [
+      "pipeline-run25b.json"
+    ],
+    "soulkeys_variants": [
+      "rfkw-run25b.txt"
+    ]
+  },
+  "26": {
+    "run": 26,
+    "rrl": "RRL\\RRL-26.txt",
+    "starmap": "CANON\\STARMAP\\starmap-run26.txt",
+    "soulkeys": "CANON\\SOUL-KEYWORDS\\rfkw-run26.txt",
+    "pipeline": "CANON\\PIPELINE\\pipeline-run26.json"
+  },
+  "28": {
+    "run": 28,
+    "rrl": "RRL\\RRL-28.txt",
+    "soulkeys": "CANON\\SOUL-KEYWORDS\\rfkw-run28.txt"
+  },
+  "29": {
+    "run": 29,
+    "rrl": "RRL\\RRL-29.txt",
+    "starmap": "CANON\\STARMAP\\starmap-run29.txt",
+    "soulkeys": "CANON\\SOUL-KEYWORDS\\rfkw-run29.txt",
+    "pipeline": "CANON\\PIPELINE\\pipeline-run29.json"
+  },
+  "30": {
+    "run": 30,
+    "rrl": "RRL\\RRL-30.txt",
+    "starmap": "CANON\\STARMAP\\starmap-run30.txt",
+    "soulkeys": "CANON\\SOUL-KEYWORDS\\rfkw-run30.txt",
+    "pipeline": "CANON\\PIPELINE\\pipeline-run30.json"
+  },
+  "31": {
+    "run": 31,
+    "rrl": "RRL\\RRL-31.txt",
+    "soulkeys": "CANON\\SOUL-KEYWORDS\\rfkw-run31.txt",
+    "rrl_variants": [
+      "RRL-31b.txt"
+    ]
+  },
+  "32": {
+    "run": 32,
+    "rrl": "RRL\\RRL-32.txt",
+    "soulkeys": "CANON\\SOUL-KEYWORDS\\rfkw-run32.txt"
+  },
+  "33": {
+    "run": 33,
+    "rrl": "RRL\\RRL-33.txt",
+    "soulkeys": "CANON\\SOUL-KEYWORDS\\rfkw-run33.txt"
+  },
+  "34": {
+    "run": 34,
+    "rrl": "RRL\\RRL-34.txt",
+    "starmap": "CANON\\STARMAP\\starmap-run34.txt",
+    "soulkeys": "CANON\\SOUL-KEYWORDS\\rfkw-run34.txt",
+    "pipeline": "CANON\\PIPELINE\\pipeline-run34.json"
+  },
+  "35": {
+    "run": 35,
+    "rrl": "RRL\\RRL-35.txt",
+    "starmap": "CANON\\STARMAP\\starmap-run35.txt",
+    "soulkeys": "CANON\\SOUL-KEYWORDS\\rfkw-run35.txt",
+    "pipeline": "CANON\\PIPELINE\\pipeline-run35.json"
+  },
+  "36": {
+    "run": 36,
+    "rrl": "RRL\\RRL-36.txt",
+    "starmap": "CANON\\STARMAP\\starmap-run36.txt",
+    "soulkeys": "CANON\\SOUL-KEYWORDS\\rfkw-run36.txt",
+    "pipeline": "CANON\\PIPELINE\\pipeline-run36.json"
+  },
+  "37": {
+    "run": 37,
+    "rrl": "RRL\\RRL-37.txt",
+    "starmap": "CANON\\STARMAP\\starmap-run37.txt",
+    "soulkeys": "CANON\\SOUL-KEYWORDS\\rfkw-run37.txt",
+    "pipeline": "CANON\\PIPELINE\\pipeline-run37.json"
+  },
+  "38": {
+    "run": 38,
+    "rrl": "RRL\\RRL-38.txt",
+    "soulkeys": "CANON\\SOUL-KEYWORDS\\rfkw-run38.txt"
+  },
+  "39": {
+    "run": 39,
+    "rrl": "RRL\\RRL-39.txt",
+    "starmap": "CANON\\STARMAP\\starmap-run39.txt",
+    "soulkeys": "CANON\\SOUL-KEYWORDS\\rfkw-run39.txt",
+    "pipeline": "CANON\\PIPELINE\\pipeline-run39.json"
+  },
+  "40": {
+    "run": 40,
+    "rrl": "RRL\\RRL-40.txt",
+    "starmap": "CANON\\STARMAP\\starmap-run40.txt",
+    "soulkeys": "CANON\\SOUL-KEYWORDS\\rfkw-run40.txt",
+    "pipeline": "CANON\\PIPELINE\\pipeline-run40.json"
+  },
+  "41": {
+    "run": 41,
+    "rrl": "RRL\\RRL-41.txt",
+    "starmap": "CANON\\STARMAP\\starmap-run41.txt",
+    "soulkeys": "CANON\\SOUL-KEYWORDS\\rfkw-run41.txt",
+    "pipeline": "CANON\\PIPELINE\\pipeline-run41.json",
+    "phetrail": "CANON\\PHEROMONES\\PheTrail-41.json"
+  },
+  "42": {
+    "run": 42,
+    "rrl": "RRL\\RRL-42.txt",
+    "starmap": "CANON\\STARMAP\\starmap-run42.txt",
+    "soulkeys": "CANON\\SOUL-KEYWORDS\\rfkw-run42.txt",
+    "pipeline": "CANON\\PIPELINE\\pipeline-run42.json"
+  },
+  "43": {
+    "run": 43,
+    "dna": "CANON\\SOUL\\EXTRACT\\dna-run043.json",
+    "starmap": "CANON\\STARMAP\\starmap-run043.txt",
+    "soulkeys": "CANON\\SOUL-KEYWORDS\\rfkw-run043.txt",
+    "pipeline": "CANON\\PIPELINE\\pipeline-run043.json",
+    "phetrail": "CANON\\PHEROMONES\\PheTrail-run043.json"
+  },
+  "44": {
+    "run": 44,
+    "rrl": "RRL\\RRL-44.txt",
+    "dna": "CANON\\SOUL\\EXTRACT\\dna-run44.json",
+    "starmap": "CANON\\STARMAP\\starmap-run44.txt",
+    "soulkeys": "CANON\\SOUL-KEYWORDS\\rfkw-run44.txt",
+    "pipeline": "CANON\\PIPELINE\\pipeline-run44.json",
+    "phetrail": "CANON\\PHEROMONES\\PheTrail-run044.json"
+  },
+  "45": {
+    "run": 45,
+    "rrl": "RRL\\RRL-45.txt",
+    "dna": "CANON\\SOUL\\EXTRACT\\dna-run45.json",
+    "starmap": "CANON\\STARMAP\\starmap-run45.txt",
+    "soulkeys": "CANON\\SOUL-KEYWORDS\\rfkw-run45.txt",
+    "pipeline": "CANON\\PIPELINE\\pipeline-run45.json",
+    "phetrail": "CANON\\PHEROMONES\\PheTrail-run045.json"
+  },
+  "46": {
+    "run": 46,
+    "rrl": "RRL\\RRL-46.txt",
+    "dna": "CANON\\SOUL\\EXTRACT\\dna-run46.json",
+    "starmap": "CANON\\STARMAP\\starmap-run46.txt",
+    "soulkeys": "CANON\\SOUL-KEYWORDS\\rfkw-run46.txt",
+    "pipeline": "CANON\\PIPELINE\\pipeline-run46.json"
+  }
+}
