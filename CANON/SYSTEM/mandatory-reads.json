@@ -56,7 +56,13 @@
       "path": "CANON/SYSTEM/PHASE0-BATTLEFIELD-SPEC.md",
       "mode": "full",
       "max_chars": 8000,
-      "why": "7-domain battlefield census spec. D1-D7 matrix schema, verdict rubric, seam owners, exit gate."
+      "why": "7-domain battlefield census spec. D1-D9 matrix schema, verdict rubric, seam owners, exit gate."
+    },
+    "battlefield_map": {
+      "path": "CANON/SYSTEM/BATTLEFIELD-MAP.md",
+      "mode": "full",
+      "max_chars": 8000,
+      "why": "Run 045 Phase 0 census results. 9-domain verdict rollup, ranked fix list, coverage stats, probe corrections. Read before any Phase 0b fix work."
     }
   },
   "task_types": {

@@ -1,0 +1,72 @@
+[{
+  "domain": "D9",
+  "piece": "plaintext key sweep",
+  "type": "artifact",
+  "verdict": "AMBER",
+  "connectivity_test": "grep RRL-17/20 for secret patterns; historical Run 33 flag unresolved",
+  "evidence": ["command: rg -n \"sk-|csk-|key=|bearer|token|secret\" RRL/RRL-20.txt -i", "result: (no matches)", "command: rg -n \"sk-|csk-|key=|bearer|token|secret\" RRL/RRL-17.txt -i", "result: line 9: Deepseek Flash / Quen 3.7 Max (false positive, no key)"],
+  "gap": "Run 33 flagged RRL-17 Dialagram + RRL-20 Deepgram keys; sampled current files show no plaintext secrets but historical flag unresolved",
+  "fix_recommendation": "extend sweep to all RRL files and git history; compare exposed values vs live secrets",
+  "fix_effort": "M",
+  "seam_with": []
+},
+{
+  "domain": "D9",
+  "piece": "secret placement — paid-key policy",
+  "type": "binding",
+  "verdict": "UNKNOWN",
+  "connectivity_test": "per-worker secret list not executed",
+  "evidence": [],
+  "gap": "memory law: never set paid secrets on phoenix-architecti — not verified",
+  "fix_recommendation": "for each named worker: npx wrangler secret list; confirm paid keys absent from phoenix-architecti",
+  "fix_effort": "M",
+  "seam_with": ["D7", "D8"]
+},
+{
+  "domain": "D9",
+  "piece": "git remote health",
+  "type": "artifact",
+  "verdict": "GREEN",
+  "connectivity_test": "remote reachable and push succeeds",
+  "evidence": ["command: git remote -v", "result: origin https://github.com/Phoenix-Rising-Ai-Solutions/OB-1--Authoritative-.git (fetch/push)", "command: git push --dry-run", "result: 05fc53e6..ca3bec40 master -> master"],
+  "gap": "",
+  "fix_recommendation": "",
+  "fix_effort": "S",
+  "seam_with": []
+},
+{
+  "domain": "D9",
+  "piece": "7 student portals live",
+  "type": "page",
+  "verdict": "RED",
+  "connectivity_test": "probe each portal via HTTP; 3 of 7 returning 404",
+  "evidence": ["command: curl https://net-pet-ai.mrmichaelhobbs123.workers.dev/magic-chat.html?studentId=quy-bluetech", "result: 200", "command: curl https://net-pet-ai.mrmichaelhobbs123.workers.dev/sov100-portal.html", "result: 404", "command: curl https://net-pet-ai.mrmichaelhobbs123.workers.dev/huong-bluetech.html", "result: 404", "command: curl https://net-pet-ai.mrmichaelhobbs123.workers.dev/mai-tram.html", "result: 404", "command: curl https://net-pet-ai.mrmichaelhobbs123.workers.dev/quan-portal.html", "result: 200", "command: curl https://net-pet-ai.mrmichaelhobbs123.workers.dev/quang-portal.html", "result: 200", "command: curl https://net-pet-ai.mrmichaelhobbs123.workers.dev/minh-parent-portal.html", "result: 200"],
+  "gap": "sov100-portal.html, huong-bluetech.html, mai-tram.html return 404 — routes missing or misnamed",
+  "fix_recommendation": "audit public/ directory for actual portal filenames and confirm net-pet-ai route mapping for each",
+  "fix_effort": "M",
+  "seam_with": ["D1", "D7"]
+},
+{
+  "domain": "D9",
+  "piece": ".gitignore coverage",
+  "type": "doc",
+  "verdict": "GREEN",
+  "connectivity_test": "key files and secrets have ignore rules",
+  "evidence": ["command: rg -n \"API-SHHHH|API-MASTER|set-pa-secrets|.secret|kilo.json\" .gitignore", "result: 8 matching ignore lines", "command: git ls-files --error-unmatch SCRIPTS/set-pa-secrets.ps1", "result: exit code 1 (not tracked)"],
+  "gap": "",
+  "fix_recommendation": "",
+  "fix_effort": "S",
+  "seam_with": []
+},
+{
+  "domain": "D9",
+  "piece": "MCP server auth state",
+  "type": "binding",
+  "verdict": "UNKNOWN",
+  "connectivity_test": "no MCP auth probe executed",
+  "evidence": [],
+  "gap": "CF/Gmail/Drive/Calendar MCP servers auth state unverified",
+  "fix_recommendation": "probe each MCP server via tool call or environment check",
+  "fix_effort": "S",
+  "seam_with": ["D7"]
+}]

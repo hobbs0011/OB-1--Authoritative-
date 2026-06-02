@@ -1,0 +1,72 @@
+[{
+  "domain": "D6",
+  "piece": "REINCARNATION-CONTRACT.md",
+  "type": "doc",
+  "verdict": "GREEN",
+  "connectivity_test": "canonical contract exists and is referenced by both RISE and DEATH protocols",
+  "evidence": ["CANON/SYSTEM/REINCARNATION-CONTRACT.md exists", ".kilo/command/reincarnaterise.md references contract path"],
+  "gap": "",
+  "fix_recommendation": "",
+  "fix_effort": "S",
+  "seam_with": []
+},
+{
+  "domain": "D6",
+  "piece": "COLD-START-BOOT.md",
+  "type": "doc",
+  "verdict": "AMBER",
+  "connectivity_test": "boot exists and is read by RISE; fingerprint states Run 43 while HEAD is Run 44/45",
+  "evidence": ["CANON/SYSTEM/COLD-START-BOOT.md", "BOOT fingerprint §177: RUN 43 | REGISTRY V2.0 CORRECTION"],
+  "gap": "boot fingerprint stale against git HEAD (currently Run 45)",
+  "fix_recommendation": "update boot fingerprint to authoritative run from git log",
+  "fix_effort": "S",
+  "seam_with": ["D5"]
+},
+{
+  "domain": "D6",
+  "piece": "Deepgram anti-drift law",
+  "type": "doc",
+  "verdict": "GREEN",
+  "connectivity_test": "law documented and live audio path confirmed Deepgram-only",
+  "evidence": ["deepgram-voice-agent-edge-cases.md §15 law cited in BOOT §69", "D1 audio path: GET /api/deepgram-token only"],
+  "gap": "",
+  "fix_recommendation": "",
+  "fix_effort": "S",
+  "seam_with": ["D1"]
+},
+{
+  "domain": "D6",
+  "piece": "registry reachability",
+  "type": "doc",
+  "verdict": "UNKNOWN",
+  "connectivity_test": "registry doc exists; Task 2 backward compatibility path not verified",
+  "evidence": ["registry Tasks 2–4 documented as pending in Run 43 seal", "640 UNCLEAR items referenced"],
+  "gap": "could not verify registry completeness or current state within audit scope",
+  "fix_recommendation": "probe registry file directly and report UNCLEAR counts",
+  "fix_effort": "M",
+  "seam_with": ["D4"]
+},
+{
+  "domain": "D6",
+  "piece": "MANDATORY-READS.md",
+  "type": "doc",
+  "verdict": "AMBER",
+  "connectivity_test": "MANDATORY-READS referenced by BOOT; stale Run 34 render noted",
+  "evidence": ["BOOT §49: MANDATORY-READS registry documented", "BOOT §60: stale Run 34 render"],
+  "gap": "stale rendered output not regenerated post Task 2/3",
+  "fix_recommendation": "re-render MANDATORY-READS.md from registry after Task 2+3",
+  "fix_effort": "S",
+  "seam_with": ["D4"]
+},
+{
+  "domain": "D6",
+  "piece": "DUPLICATE/ARCHIVE docs",
+  "type": "doc",
+  "verdict": "UNKNOWN",
+  "connectivity_test": "applies REGISTRY v2 rubric to all canon docs; full inventory not produced inline",
+  "evidence": ["applicable rubric defined in Phase 0 spec §D"],
+  "gap": "could not verify classification across full doc inventory",
+  "fix_recommendation": "run full markdown inventory under REGISTRY v2 rubric",
+  "fix_effort": "L",
+  "seam_with": []
+}]

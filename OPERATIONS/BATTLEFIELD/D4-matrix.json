@@ -1,0 +1,72 @@
+[{
+  "domain": "D4",
+  "piece": "build-soulkeys.ps1",
+  "type": "script",
+  "verdict": "RED",
+  "connectivity_test": "writer script for SOULKEYS; index file currently missing/null",
+  "evidence": ["CANON/SOUL-KEYWORDS/inverted-index.json → null", "dna-run0.json blueprint warns `-Append` corruption in writer"],
+  "gap": "writer likely uses JSON `-Append`, producing invalid inverted-index.json",
+  "fix_recommendation": "audit and convert writer to read-merge-write valid JSON",
+  "fix_effort": "M",
+  "seam_with": ["D3"]
+},
+{
+  "domain": "D4",
+  "piece": "context-bundle.ps1",
+  "type": "script",
+  "verdict": "AMBER",
+  "connectivity_test": "script exists; registry paths hard-coded versus registry-driven not verified here",
+  "evidence": ["SCRIPTS/context-bundle.ps1 present", "seal §04 D6 + §05 C1 reference registry.json hard-coding risk"],
+  "gap": "no proof this read is registry-driven; likely hard-coded paths",
+  "fix_recommendation": "probe whether context-bundle.ps1 imports registry or uses fixed paths",
+  "fix_effort": "S",
+  "seam_with": ["D6"]
+},
+{
+  "domain": "D4",
+  "piece": "session-capture.ps1",
+  "type": "script",
+  "verdict": "AMBER",
+  "connectivity_test": "file declares auto-fires on session stop; live stop event not re-probed this audit",
+  "evidence": ["SCRIPTS/session-capture.ps1:1 declares session-stop hook"],
+  "gap": "no observed live session capture verification",
+  "fix_recommendation": "manual smoke test: stop session, verify RRL append end-to-end",
+  "fix_effort": "S",
+  "seam_with": ["D2", "D3"]
+},
+{
+  "domain": "D4",
+  "piece": "rrl-pipeline.ps1",
+  "type": "script",
+  "verdict": "AMBER",
+  "connectivity_test": "pipeline runner present; current run path gaps imply runner not invoked for run045",
+  "evidence": ["SCRIPTS/rrl-pipeline.ps1 referenced in COLD-START-BOOT §41", "pipeline-run045.json missing"],
+  "gap": "pipeline not executed for latest run",
+  "fix_recommendation": "execute rrl-pipeline.ps1 for run045 and verify output paths",
+  "fix_effort": "S",
+  "seam_with": ["D3"]
+},
+{
+  "domain": "D4",
+  "piece": "soul-pipeline-ingest.js",
+  "type": "script",
+  "verdict": "UNKNOWN",
+  "connectivity_test": "file present in SCRIPTS/; no live validation",
+  "evidence": ["SCRIPTS/soul-pipeline-ingest.js present in inventory"],
+  "gap": "wired into a protocol or orphaned not verified",
+  "fix_recommendation": "probe references from wrangler cron or other entrypoints",
+  "fix_effort": "S",
+  "seam_with": ["D2"]
+},
+{
+  "domain": "D4",
+  "piece": "registry↔context-bundle seam",
+  "type": "artifact",
+  "verdict": "UNKNOWN",
+  "connectivity_test": "requires explicit read of registry schema plus context-bundle path logic",
+  "evidence": ["seam owner defined in spec §E row 3"],
+  "gap": "could not verify within scope without targeted evidence-read",
+  "fix_recommendation": "diff registry paths versus context-bundle.ps1 defined paths",
+  "fix_effort": "S",
+  "seam_with": ["D6"]
+}]

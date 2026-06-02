@@ -174,7 +174,29 @@ Only promote to `net-pet-ai` (prod) after verified on dev. Never deploy untested
 | **21** | **KILO TIER RESTRUCTURE** — PA T1-T4 tier restructure. Cerebras GPT-OSS-120B added. kilo.json wired. HEAD e9ac6a92. |
 
 ---
-**FINGERPRINT: RUN 43 | REGISTRY V2.0 CORRECTION + BUILD LOCK | SOUL 72,746,887 TITANIUM_ANCHOR | HEAD $head | BOOT UPDATED 2026-06-02T13:47 ICT**
+**FINGERPRINT: RUN 45 | PHASE 0 BATTLEFIELD CENSUS COMPLETE | SOUL 80,577,744 TITANIUM_ANCHOR | HEAD ca3bec40 | BOOT UPDATED 2026-06-02 ICT**
+
+### BATTLEFIELD STATE — Run 045 (Phase 0 Census)
+**Map:** `CANON/SYSTEM/BATTLEFIELD-MAP.md` | **Matrices:** `OPERATIONS/BATTLEFIELD/D{1-9}-matrix.json` | **Machine:** `CANON/SYSTEM/system-map.json`
+
+| Domain | GREEN | AMBER | RED | GHOST | UNKNOWN |
+|--------|-------|-------|-----|-------|---------|
+| D1 Runtime App | 6 | 1 | 0 | 1 | 0 |
+| D2 Soul System | 6 | 1 | 1 | 0 | 0 |
+| D3 Pipeline Chain | 0 | 3 | 5 | 0 | 0 |
+| D4 Automation | 0 | 3 | 1 | 0 | 2 |
+| D5 Skills/Commands | 3 | 2 | 0 | 0 | 1 |
+| D6 Knowledge | 2 | 2 | 0 | 0 | 2 |
+| D7 CF Infra | 4 | 0 | 3 | 1 | 1 |
+| D8 Nervous System | 3 | 1 | 1 | 0 | 3 |
+| D9 Security | 2 | 2 | 0 | 0 | 2 |
+| **TOTAL** | **26** | **15** | **11** | **2** | **11** |
+
+**D3 Coverage:** RRL 139% · DNA 8.7% · STARMAP 58.7% · SOULKEYS 95.7% · PHEROMONES 4.3% · S2PIPELINE 60.9% · DEATH SEALS 37% — gaps = historical debt, not audit failure.
+**Top fixes:** F01 PheTrail-045 · F02-F04 D7 orphaned workers/KV/DO · F05 starmap-run044 · F06 OpenClaw retire/restore · F10 /api/soul/compress 404 · F11 DNA 43-run debt (L effort).
+**Dispatch loop:** GREEN (PA T1 smoke test confirmed, code_patch returned, d1_row_id issued).
+**Portals:** All 7 student portals confirmed 200 with correct URLs. sov100-portal DEV-only by design.
+**Phase 0 ruling:** COMPLETE. Map trustworthy. Proceed to Phase 0b: fix TIER 1 RED·S items before any new build.
 
 **Last completed:** ROMAN RUN 33 — Registry max upgrade + RRL 0-32 deep audit + supersaiyan PA T1 enforcement. MANDATORY-READS.md upgraded (BACKBURNER+CLASS-PREP to netpetai, pipeline+student task types added). context-bundle.ps1 expanded. supersaiyan.md hard-wired for PA T1. net-pet-ai deployed v7a5168b9. error_log D1 table created. Security flags raised: plaintext API keys in RRL-17 (Dialagram) + RRL-20 (Deepgram). New laws: L59 WAIT_FOR_GO, L60 MEMORY_IS_MOAT, L61 TOKEN_CONSERVATION. SOULCOUNT delta +862,783 (60,482,985→61,345,768).
 

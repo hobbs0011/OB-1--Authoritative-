@@ -1,0 +1,72 @@
+[{
+  "domain": "D5",
+  "piece": "reincarnatedeath.md",
+  "type": "skill",
+  "verdict": "GREEN",
+  "connectivity_test": "canonical DEATH command exists and is registered",
+  "evidence": [".kilo/command/reincarnatedeath.md exists", ".claude/commands/reincarnateDeath.md exists"],
+  "gap": "",
+  "fix_recommendation": "",
+  "fix_effort": "S",
+  "seam_with": ["D3"]
+},
+{
+  "domain": "D5",
+  "piece": "reincarnaterise.md",
+  "type": "skill",
+  "verdict": "GREEN",
+  "connectivity_test": "canonical RISE command exists and is registered",
+  "evidence": [".kilo/command/reincarnaterise.md exists", ".claude/commands/reincarnateRise.md exists"],
+  "gap": "",
+  "fix_recommendation": "",
+  "fix_effort": "S",
+  "seam_with": ["D3"]
+},
+{
+  "domain": "D5",
+  "piece": "SoulSearch.md",
+  "type": "skill",
+  "verdict": "AMBER",
+  "connectivity_test": "skill file exists for both Kilo and Claude",
+  "evidence": [".kilo/command/SoulSearch.md exists", ".claude/commands/SoulSearch.md exists", ".github/skills/soul-search/ exists"],
+  "gap": "functional only after DNA extraction and STARMAP pointers are REAL",
+  "fix_recommendation": "verify stub routes map to rfkw-search + STARMAP live hits",
+  "fix_effort": "M",
+  "seam_with": ["D3"]
+},
+{
+  "domain": "D5",
+  "piece": "phetrails.md",
+  "type": "skill",
+  "verdict": "GREEN",
+  "connectivity_test": "skill command documented and registered",
+  "evidence": [".kilo/command/phetrails.md exists", "PheTrail-run043.json and run044.json present"],
+  "gap": "",
+  "fix_recommendation": "",
+  "fix_effort": "S",
+  "seam_with": ["D3"]
+},
+{
+  "domain": "D5",
+  "piece": "reincarnation v5.0/v6.0 seam",
+  "type": "artifact",
+  "verdict": "AMBER",
+  "connectivity_test": "contract is v6.0; some skill files still reference v5.0",
+  "evidence": ["CANON/SYSTEM/REINCARNATION-CONTRACT.md contains v6.0", "dna-run0.json references v5.0 protocol template", "BOOT shows reincarnation references but not explicit version"],
+  "gap": "version divergence between contract and skill files",
+  "fix_recommendation": "bump all reincarnation skill files to v6.0 and unify contract references",
+  "fix_effort": "S",
+  "seam_with": ["D3"]
+},
+{
+  "domain": "D5",
+  "piece": "duplicate command scan",
+  "type": "skill",
+  "verdict": "UNKNOWN",
+  "connectivity_test": "requires full diff of .claude/commands and .kilo/command per name",
+  "evidence": ["sample inventory: 7 claude commands, 31 kilo commands"],
+  "gap": "could not verify duplicates within scope",
+  "fix_recommendation": "run name-level diff between equivalent command sets",
+  "fix_effort": "S",
+  "seam_with": []
+}]
