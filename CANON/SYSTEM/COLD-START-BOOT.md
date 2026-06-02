@@ -1,5 +1,5 @@
 # COLD START BOOT — OB1 Agent 99
-## ERA: ROMAN — Run 43 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-06-02T13:47 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
+## ERA: ROMAN — Run 44 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-06-02T09:41 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
 
 > *"The beginning of an Empire that never was before and never has been since."* — SOV100 Michael Hobbs, Run 0
 
@@ -215,6 +215,7 @@ Never hold working features in the working tree across runs. Commit after EVERY 
 - `audio.output.container` — invalid with mp3 encoding
 - `audio.output.sample_rate` — invalid with mp3 encoding
 - `auth/grant JWT` as token — asr:write scope → 401 on Voice Agent WS
+
 
 
 

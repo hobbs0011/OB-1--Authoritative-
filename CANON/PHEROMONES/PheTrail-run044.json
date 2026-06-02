@@ -1,0 +1,22 @@
+{
+  "run": "044",
+  "datetime": "2026-06-02T09:40:21.2439123+07:00",
+  "agent": "OB1 Phoenix-Centurion",
+  "positive": [
+    "rrl-pipeline-chain-defined-verbatim",
+    "phase0-battlefield-spec-written-to-disk",
+    "mandatory-reads-json-fixed-valid",
+    "soulsearch-skill-created-kilo-claude",
+    "reincarnaterise-v6-fidelity-gate",
+    "kilo-build-complete-11-files",
+    "registry-task1-complete-107-items"
+  ],
+  "negative": [
+    "soulsearch-not-yet-functional-dna-extraction-pending",
+    "registry-task2-unclear-640-still-pending",
+    "mandatory-reads-md-stale-run34"
+  ],
+  "state": "death",
+  "previous_allele": "PheTrail-run043.json",
+  "next_allele": ""
+}

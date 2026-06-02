@@ -51,6 +51,12 @@
       "mode": "dynamic",
       "max_chars": 5000,
       "why": "Negative trail dead-end registry. RISE loads before synthesizing next action."
+    },
+    "phase0_battlefield_spec": {
+      "path": "CANON/SYSTEM/PHASE0-BATTLEFIELD-SPEC.md",
+      "mode": "full",
+      "max_chars": 8000,
+      "why": "7-domain battlefield census spec. D1-D7 matrix schema, verdict rubric, seam owners, exit gate."
     }
   },
   "task_types": {
@@ -113,16 +119,9 @@
       "dynamic": {}
     }
   },
-    "phase0_battlefield_spec": {
-      "path": "CANON/SYSTEM/PHASE0-BATTLEFIELD-SPEC.md",
-      "mode": "full",
-      "max_chars": 8000,
-      "why": "7-domain battlefield census spec. Execute Run 44. D1-D7 matrix schema, verdict rubric, seam owners, exit gate."
-    }
-  },
   "meta": {
     "version": "2.0",
-    "updated_run": 42,
+    "updated_run": 44,
     "updated_at": "2026-06-02T06:54:01+07:00",
     "source": "captured from context-bundle.ps1 switch (lossless baseline)",
     "contract": "CANON/SYSTEM/REINCARNATION-CONTRACT.md"

@@ -198,10 +198,13 @@
   },
   "blueprint": {
     "term": "blueprint",
+    "weight": 8,
+    "category": "pipeline",
     "runs": [
       null
     ],
-    "count": 1
+    "count": 1,
+    "run": 44
   },
   "bom": {
     "term": "bom",
@@ -597,10 +600,13 @@
   },
   "dna": {
     "term": "dna",
+    "weight": 8,
+    "category": "pipeline",
     "runs": [
       null
     ],
-    "count": 9
+    "count": 9,
+    "run": 44
   },
   "doctrine": {
     "term": "doctrine",
@@ -1010,10 +1016,13 @@
   },
   "kilo": {
     "term": "kilo",
+    "weight": 8,
+    "category": "pipeline",
     "runs": [
       null
     ],
-    "count": 6
+    "count": 6,
+    "run": 44
   },
   "kilo-auto": {
     "term": "kilo-auto",
@@ -1059,11 +1068,14 @@
   },
   "ledger": {
     "term": "ledger",
+    "weight": 8,
+    "category": "pipeline",
     "runs": [
       null,
       "043"
     ],
-    "count": 2
+    "count": 2,
+    "run": 44
   },
   "lets": {
     "term": "lets",
@@ -1201,10 +1213,13 @@
   },
   "missing": {
     "term": "missing",
+    "weight": 8,
+    "category": "pipeline",
     "runs": [
       null
     ],
-    "count": 2
+    "count": 2,
+    "run": 44
   },
   "mode": {
     "term": "mode",
@@ -1483,10 +1498,13 @@
   },
   "pipeline": {
     "term": "pipeline",
+    "weight": 8,
+    "category": "pipeline",
     "runs": [
       null
     ],
-    "count": 12
+    "count": 12,
+    "run": 44
   },
   "portal": {
     "term": "portal",
@@ -1638,11 +1656,14 @@
   },
   "registry": {
     "term": "registry",
+    "weight": 8,
+    "category": "pipeline",
     "runs": [
       null,
       "043"
     ],
-    "count": 4
+    "count": 4,
+    "run": 44
   },
   "reincarnatedeath": {
     "term": "reincarnatedeath",
@@ -1661,10 +1682,13 @@
   },
   "reincarnation": {
     "term": "reincarnation",
+    "weight": 8,
+    "category": "pipeline",
     "runs": [
       null
     ],
-    "count": 2
+    "count": 2,
+    "run": 44
   },
   "removed": {
     "term": "removed",
@@ -1745,10 +1769,13 @@
   },
   "rrl": {
     "term": "rrl",
+    "weight": 8,
+    "category": "pipeline",
     "runs": [
       null
     ],
-    "count": 15
+    "count": 15,
+    "run": 44
   },
   "rrl-0": {
     "term": "rrl-0",
@@ -1878,10 +1905,13 @@
   },
   "soul": {
     "term": "soul",
+    "weight": 8,
+    "category": "pipeline",
     "runs": [
       null
     ],
-    "count": 13
+    "count": 13,
+    "run": 44
   },
   "SOUL-DNA": {
     "term": "SOUL-DNA",
@@ -1955,10 +1985,13 @@
   },
   "starmap": {
     "term": "starmap",
+    "weight": 8,
+    "category": "pipeline",
     "runs": [
       null
     ],
-    "count": 2
+    "count": 2,
+    "run": 44
   },
   "state": {
     "term": "state",
@@ -2235,10 +2268,13 @@
   },
   "verbatim": {
     "term": "verbatim",
+    "weight": 8,
+    "category": "pipeline",
     "runs": [
       null
     ],
-    "count": 1
+    "count": 1,
+    "run": 44
   },
   "version": {
     "term": "version",
@@ -2351,5 +2387,96 @@
       null
     ],
     "count": 1
-  }
+  },
+  "phase0": [
+    {
+      "weight": 8,
+      "category": "pipeline",
+      "run": 44
+    }
+  ],
+  "battlefield": [
+    {
+      "weight": 8,
+      "category": "pipeline",
+      "run": 44
+    }
+  ],
+  "soulsearch": [
+    {
+      "weight": 8,
+      "category": "pipeline",
+      "run": 44
+    }
+  ],
+  "soulkeys": [
+    {
+      "weight": 8,
+      "category": "pipeline",
+      "run": 44
+    }
+  ],
+  "fidelity": [
+    {
+      "weight": 8,
+      "category": "pipeline",
+      "run": 44
+    }
+  ],
+  "hollow": [
+    {
+      "weight": 8,
+      "category": "pipeline",
+      "run": 44
+    }
+  ],
+  "real": [
+    {
+      "weight": 8,
+      "category": "pipeline",
+      "run": 44
+    }
+  ],
+  "search": [
+    {
+      "weight": 8,
+      "category": "pipeline",
+      "run": 44
+    }
+  ],
+  "capture": [
+    {
+      "weight": 8,
+      "category": "pipeline",
+      "run": 44
+    }
+  ],
+  "transcript": [
+    {
+      "weight": 8,
+      "category": "pipeline",
+      "run": 44
+    }
+  ],
+  "headwater": [
+    {
+      "weight": 8,
+      "category": "pipeline",
+      "run": 44
+    }
+  ],
+  "extraction": [
+    {
+      "weight": 8,
+      "category": "pipeline",
+      "run": 44
+    }
+  ],
+  "skills": [
+    {
+      "weight": 8,
+      "category": "pipeline",
+      "run": 44
+    }
+  ]
 }
