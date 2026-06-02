@@ -62,7 +62,6 @@ function Get-GitLog {
         $result = git log --oneline -$Count 2>&1
         if ($LASTEXITCODE -ne 0) { return "[GIT ERROR]" }
         $text = ($result | Out-String).Trim()
-        if ($text.Length -gt 2000) { $text = $text.Substring(0, 2000) }
         return $text
     }
     catch { return "[GIT ERROR]" }
@@ -73,14 +72,13 @@ function Get-GitStatusShort {
         $result = git status --short 2>&1
         if ($LASTEXITCODE -ne 0) { return "[GIT ERROR]" }
         $text = ($result | Out-String).Trim()
-        if ($text.Length -gt 2000) { $text = $text.Substring(0, 2000) }
         return $text
     }
     catch { return "[GIT ERROR]" }
 }
 
 function Get-RFKwContext {
-    param([string]$Query, [int]$Top = 12)
+    param([string]$Query, [int]$Top = 30)
     $indexPath = "CANON/SOUL-KEYWORDS/inverted-index.json"
     if (-not (Test-Path -LiteralPath $indexPath)) { return "" }
     try {
