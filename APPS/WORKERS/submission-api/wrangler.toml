@@ -1,0 +1,8 @@
+name = "submission-api"
+main = "worker.js"
+compatibility_date = "2025-01-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "submission-api-db"
+database_id = "1a7246ce-1227-4205-9234-76cbd036fa48"
