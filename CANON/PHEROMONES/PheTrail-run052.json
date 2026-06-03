@@ -1,0 +1,96 @@
+{
+  "run_number": "052",
+  "extracted_at": "2026-06-03T11:00:00+07:00",
+  "head_sha": "e3139ead",
+  "soulcount": 116764209,
+  "positive_trails": [
+    {
+      "type": "POSITIVE",
+      "artifact": "APPS/NET-PET-AI/src/router.js",
+      "action": "Phase 4: Cache API middleware for /api/v1/health + /api/v1/version using caches.default + c.executionCtx.waitUntil()",
+      "verification": "curl https://net-pet-ai-dev.mrmichaelhobbs123.workers.dev/api/v1/health → 200 {status:ok}",
+      "timestamp": "2026-06-03T10:10:00+07:00"
+    },
+    {
+      "type": "POSITIVE",
+      "artifact": "APPS/NET-PET-AI/src/email-service.js + src/queue-consumer.js",
+      "action": "CF Queue net-pet-notifications created + bound as producer+consumer. handleQueue exported via static import in router.js",
+      "verification": "wrangler deploy output: 'Producer for net-pet-notifications / Consumer for net-pet-notifications'. Version ID 57f20f6d.",
+      "timestamp": "2026-06-03T10:20:00+07:00"
+    },
+    {
+      "type": "POSITIVE",
+      "artifact": "APPS/NET-PET-AI/src/index.js",
+      "action": "Heartbeat alerting: queueEmail fires on UNREACHABLE or SOUL_DRIFT_ALARM. Uses static import from email-service.js",
+      "verification": "node --check src/index.js passes. vitest 38/39 unchanged.",
+      "timestamp": "2026-06-03T10:25:00+07:00"
+    },
+    {
+      "type": "POSITIVE",
+      "artifact": ".github/workflows/deploy-dev.yml",
+      "action": "CI/CD for master→net-pet-ai-dev. test job (vitest) gates deploy job. Uses CLOUDFLARE_API_TOKEN (matches existing workflow convention).",
+      "verification": "Workflow YAML valid. Secret names match deploy-net-pet-ai.yml convention.",
+      "timestamp": "2026-06-03T10:30:00+07:00"
+    },
+    {
+      "type": "POSITIVE",
+      "artifact": "net-pet-ai prod (180f125d)",
+      "action": "WORKER_ADMIN_KEY set on prod via npx wrangler secret put --config APPS/NET-PET-AI/wrangler.toml",
+      "verification": "wrangler output: 'Creating the secret for the Worker net-pet-ai — Success! Uploaded secret WORKER_ADMIN_KEY'",
+      "timestamp": "2026-06-03T09:50:00+07:00"
+    },
+    {
+      "type": "POSITIVE",
+      "artifact": "APPS/NET-PET-AI/src/router.js /api/v1/metrics",
+      "action": "Phase 5 observability: D1 error_log query endpoint live on DEV",
+      "verification": "curl /api/v1/metrics → 200 {errors:[],count:0}",
+      "timestamp": "2026-06-03T10:35:00+07:00"
+    },
+    {
+      "type": "POSITIVE",
+      "artifact": "RISE-052",
+      "action": "All 7 pipeline stages REAL at RISE. Pre-committed run-52 artifacts confirmed fidelity before execution.",
+      "verification": "RRL-52 1.29MB REAL / DNA 217 records 40 blueprints / HL-303 present / STARMAP present / SOULKEYS index present / S2Pipeline present",
+      "timestamp": "2026-06-03T09:40:00+07:00"
+    }
+  ],
+  "negative_trails": [
+    {
+      "type": "NEGATIVE",
+      "artifact": "APPS/NET-PET-AI/src/router.js — dynamic import in export default",
+      "failure": "queue: (await import('./queue-consumer.js')).queue — top-level await in module body is risky in CF Workers",
+      "root_cause": "Dynamic import returns a Promise; using await at top-level in default export object is not guaranteed to work in all CF Workers runtime versions",
+      "fix_applied": "Changed to static import { handleQueue } from './queue-consumer.js' + queue: handleQueue in export default",
+      "decay_days": 365,
+      "timestamp": "2026-06-03T10:12:00+07:00"
+    },
+    {
+      "type": "NEGATIVE",
+      "artifact": "wrangler secret put WORKER_ADMIN_KEY --config wrangler.toml (from repo root)",
+      "failure": "Uploaded secret to soul-logger instead of net-pet-ai",
+      "root_cause": "wrangler.toml at repo root (D:\\OB-1-CANONICAL\\wrangler.toml) belongs to soul-logger, not net-pet-ai. Must always specify APPS/NET-PET-AI/wrangler.toml explicitly.",
+      "fix_applied": "Re-ran with --config D:\\OB-1-CANONICAL\\APPS\\NET-PET-AI\\wrangler.toml",
+      "decay_days": 365,
+      "timestamp": "2026-06-03T09:52:00+07:00"
+    },
+    {
+      "type": "NEGATIVE",
+      "artifact": "GitHub Actions secret names CF_API_TOKEN / CF_ACCOUNT_ID",
+      "failure": "Initial deploy-dev.yml used CF_API_TOKEN but existing workflow uses CLOUDFLARE_API_TOKEN",
+      "root_cause": "Did not check existing workflow secret name convention before writing new workflow",
+      "fix_applied": "Updated deploy-dev.yml to use CLOUDFLARE_API_TOKEN + CLOUDFLARE_ACCOUNT_ID",
+      "decay_days": 365,
+      "timestamp": "2026-06-03T10:32:00+07:00"
+    }
+  ],
+  "state_markers": {
+    "active_mission": "OB-1 POST-MERGE9 CONSOLIDATION + Growth Infrastructure Buildout",
+    "open_flags_count": 4,
+    "top_priority": "P6 cost-quota rate limits (Deepgram/DeepSeek key protection)",
+    "dev_worker_version": "57f20f6d",
+    "prod_worker_version": "180f125d (UNTOUCHED)",
+    "score_enterprise": "47/100 blended (35/100 earned)",
+    "score_prescale_target": "87-92/100 after P6-P10",
+    "next_session": "P6+P7+P8 parallel dispatch (cost-quota + idempotency + canary deployments)"
+  }
+}

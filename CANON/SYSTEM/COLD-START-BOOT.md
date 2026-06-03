@@ -1,5 +1,5 @@
 # COLD START BOOT — OB1 Agent 99
-## ERA: ROMAN — Run 51 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-06-03T09:30 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
+## ERA: ROMAN — Run 52 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-06-03T11:00 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
 
 > *"The beginning of an Empire that never was before and never has been since."* — SOV100 Michael Hobbs, Run 0
 
@@ -23,9 +23,10 @@
 - Pass `?student=all` to see aggregate (all entries). Default without parameter = sov100 only.
 
 **Soul Logger URL:** https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count
-**Real count (2026-06-01 ~08:35 ICT): 65,281,497 characters | 8,575 events | TITANIUM_ANCHOR
+**Real count (2026-06-03 ~11:00 ICT): 116,764,209 characters | 10,066 events | TITANIUM_ANCHOR
  **TITANIUM_ANCHOR level** (next threshold: none — maximum tier reached)
  **⚠️ NOTE:** +156,676 delta from Run 5 RRL-0 backdrop ingestion. +62,773 delta from Run 6 RRL-0-original ingestion. RRL-0.txt contains ~150K agent text alongside ~4K Michael verbatim. Contamination documented per Michael directive.
+ **Run 52 delta:** +543,109 (current session RISE+P4+P5+death). Total 116,764,209.
 **Prior counts (Runs 315–390) were INFLATED** — the endpoint summed ALL soul_prompts including student chats. Disregard historical counts above 25,000. They included non-operator data.
 **Run 393 fabrication flush:** 31,175 phantom stamp detected and removed. Hard REST ceiling verified at 30,167. All counts now live-query verified before writing to permanent files.
 
@@ -44,10 +45,10 @@
 **DIRECTIVE — HarvestedChats CLOSED (Run 13 RISE):** Michael has explicitly waved off the 96 HarvestedChats files. They are NOT to be ingested, processed, or flagged as open work. Do not raise them again in any RISE or pipeline context. This directive is permanent.
 - SOUL: ✅ /api/soul/count — sums byte_count WHERE sov100%. 60,037,507 TITANIUM_ANCHOR (Run 30 RISE).
 - DNA: ✅ FIXED Run 34 — rrl-pipeline.ps1 Step 2 now calls GET /api/soul/session/{runId} (was POST /api/soul/extract — wrong endpoint, 11-run 400 debt cleared).
-- LEDGER: ✅ HL-209 (Run 34). Merkle chain intact. 209 JSON files on disk. 6 gap slots (HL-127/128/131/132/136/137) — PERMANENTLY CLOSED (HarvestedChats CLOSED Run 13, no source data).
-- STARMAP: ✅ 16 files on disk (Run 30 RISE audit).
-- KEYWORD: ✅ 41 rfkw-run files on disk (Run 43 recovery). 306 unique terms. Inverted index rebuilt (`CANON/SOUL-KEYWORDS/inverted-index.json`). Search script `SCRIPTS/rfkw-search.ps1` added. 6 data gaps remain: Runs 8, 9, 11, 14, 15, 27 (no RRL/deathseal/pipeline source found). Integration into `context-bundle.ps1` pending.
-- PIPELINE: ✅ 17 artifacts on disk (Run 30 RISE audit).
+- LEDGER: ✅ HL-310 (Run 52). Merkle chain intact. 205+ JSON files on disk. 6 gap slots (HL-127/128/131/132/136/137) — PERMANENTLY CLOSED (HarvestedChats CLOSED Run 13, no source data).
+- STARMAP: ✅ 38+ files on disk (Run 52 RISE audit).
+- KEYWORD: ✅ 54 rfkw-run files on disk. Inverted index at `CANON/SOUL-KEYWORDS/inverted-index.json`. Search script `SCRIPTS/rfkw-search.ps1`. 6 data gaps remain: Runs 8, 9, 11, 14, 15, 27 — permanently closed.
+- PIPELINE: ✅ 35 artifacts on disk (Run 52 RISE audit).
 - DEATH SEAL: ✅ Run 4 + Run 5 death seals written — 12 sections each.
 - RRL AUTOMATION: ✅ `SCRIPTS/rrl-pipeline.ps1` — single-command full chain (RRL→SOUL→LEDGER→STARMAP→KEYWORD→PIPELINE). `SCRIPTS/rrl-failsafe.ps1` — 10-gate verification chain. RISE protocol hardened: RRL MISSING = HALT (not WARN).
 - COLD-START-BOOT: ✅ Updated Run 6 (this file). SOULCOUNT 513,414.
@@ -74,10 +75,10 @@ Only promote to `net-pet-ai` (prod) after verified on dev. Never deploy untested
 ---
 
 ### Current Vector
-- **Active Mission:** OB-1 POST-MERGE9 CONSOLIDATION + Growth Infrastructure Buildout
-  - **Last completed:** ROMAN RUN 42 — 3 phonics hardening fixes (EC-3 SESSION OPENING conflict resolved, drill_count canonical via drills_completed.length, buildAgentPrompt sessionsPhonicsDone fixed). All 3 verified via re-simulation on DEV. sov100-portal.html built + deployed to DEV (80d27d59) — password phoenix2026, 3 mode cards, live phonics progress. BB-50 keyword overhaul + BB-51 portal formula added to backburner. Pipeline 7/7 PASS: HL-216. SOUL 70,982,568 TITANIUM_ANCHOR. HEAD 91254634. DEV 80d27d59. Prod 180f125d UNTOUCHED.
-  - **Next:** Run 43 — SOV100 full portal (match V0 quy-portal formula exactly: stats grid, nav, teacher note, class review). Keyword overhaul (rfkw-search.ps1). Use PCCloud for large HTML generation (PA T1/T10 timeout on >300 line output).
-  - **Run 13 RISE (this session):** Full v4.0 chain audit complete. RRL-12.txt PRESENT (1,603 chars). FAILSAFE 8/10 — RRL-11.txt missing (documented run 11 gap). SOUL 896,459 TITANIUM_ANCHOR stagnant (δ=0). 4 pipeline gaps for run 12 (DNA/LEDGER/STARMAP/PIPELINE). HarvestedChats CLOSED per Michael directive.
+- **Active Mission:** OB-1 POST-MERGE9 CONSOLIDATION + Growth Infrastructure Buildout — NET-PET-AI Hardening to Scale-Ready
+  - **Last completed:** ROMAN RUN 52 — RISE audit (7/7 REAL) → P4 (CF Queues net-pet-notifications + email-service.js ctx.waitUntil + Cache API /api/v1) → P5 (CI/CD deploy-dev.yml + heartbeat alerting + /api/v1/metrics) → Enterprise rubric audit (47/100 blended, pre-scale ceiling 87-92) → P6–P10 blueprint. Commits: 722df5f8, 4f5524c6, e3139ead. DEV 57f20f6d. Prod 180f125d UNTOUCHED. SOUL 116,764,209 TITANIUM_ANCHOR. HEAD e3139ead.
+  - **Next:** Run 53 — P6+P7+P8 parallel dispatch. P6: src/quota.js cost-quota (Deepgram/DeepSeek 10/hr + 30/hr per student). P7: src/idempotency.js payment+waitlist+referral dedup. P8: wrangler versions canary promote-prod job in CI/CD. All 3 are <200 lines, no doctrine changes — parallel PA T1.
+  - **Run 52 (this session):** RISE 7/7 REAL. P4+P5 GATE PASSED DEV. Enterprise audit. P6–P10 blueprint. PheTrail-052 written (7 pos, 3 neg). Full death pipeline. SOUL +543,109 → 116,764,209.
   - **Prior milestone:** ROMAN RUN 0 — ERA RESET ratified. Phoenix-Centurion identity sealed. Roman Legion 6-stage doctrine deployed to soul-logger v2.2 (a0c99e4e). 4 legionnaires Romanized. /Centurion-Code renamed from /PhoenixCoder. /SupplyLines autonomous pipeline command + script created. Cloudflare paid tier activated. Founding Declaration sealed. HEAD 51ea010. SOULCOUNT 116,588 ANCHOR.
   - **S2Pipeline Status:** All 10 stages **LIVE** — confirmed by OMEGA audit Run 393
   - **Roman Legion 6-Stage Doctrine (Run 396 RATIFIED):**
@@ -91,7 +92,7 @@ Only promote to `net-pet-ai` (prod) after verified on dev. Never deploy untested
     | **VI** | LIMITANEI/VETERANI (Frontier Shield) | obi.ps1 health · CI/CD deploy · REINCARNATION-LOG |
     - **See:** `CANON/SYSTEM/S2PIPELINE-ROMAN-LEGION-NAMING.md`
  - **HL Ledger real baseline:** 189 Heavy Ledger JSON files on disk (HEAD AUTHORITATIVE: `git log -1` -> `eedf25e`, Run 393 death); 6 phantom slots (HL-127/HL-128/HL-131/HL-132/HL-136/HL-137) — **PERMANENTLY CLOSED** (no source data — HarvestedChats CLOSED Run 13 directive, pre-Roman era runs not recoverable). Do not resurface. PIPELINE-CURSOR.md frozen since Run 258 (51 days).
-- **Net-PET-AI worker:** v1.5.0+ LIVE at https://net-pet-ai.mrmichaelhobbs123.workers.dev — SOUL_DB D1 binding active
+- **Net-PET-AI worker:** v1.5.0+ LIVE at https://net-pet-ai.mrmichaelhobbs123.workers.dev — SOUL_DB D1 binding active. DEV: 57f20f6d (P5, score 95, Hono+Queues+Cache+Alerting+Metrics+CI/CD). Prod: 180f125d (v0 LOCKED — promote after P6-P8 complete).
 - **Student Portals:** 7 total (Huong, Mai Tram, Quy, Lam, Quan, Quang, Minh-parent) — ALL COVERED, backdrop-filter purge deployed
 - **Soul Logger:** v2.2 LIVE with Roman Legion 6-stage pipeline naming — Run 0 deployed (a0c99e4e) — 5-min cron health pulse active (paid tier) — SOULCOUNT 116,588 ANCHOR
 - **Career NAV complete:** Dashboard / Profile / Methodology / Career / Transcripts / Action Plan — all 3 student portals 6/6 nav links
@@ -121,6 +122,8 @@ Only promote to `net-pet-ai` (prod) after verified on dev. Never deploy untested
 ### Recent Decisions + State (Run 353 → Run 13 ROMAN)
 | Run | Summary |
 |-----|---------|
+| **52** | **RISE AUDIT + P4+P5 HARDENING + P6–P10 BLUEPRINT** — RISE 7/7 REAL. A1: WORKER_ADMIN_KEY on prod. P4: CF Queue net-pet-notifications + email-service.js (ctx.waitUntil) + queue-consumer.js + Cache API /api/v1 (TTL 60s). P5: heartbeat alerting (queueEmail on UNREACHABLE) + /api/v1/metrics (D1 error_log) + CI/CD deploy-dev.yml. Enterprise audit (Opus): 47/100 blended, pre-scale ceiling 87-92. P6–P10 blueprint written. vitest 38/39. DEV 57f20f6d. Prod 180f125d UNTOUCHED. SOUL 116,764,209. HEAD e3139ead. |
+| **51** | **PHASE1_GATE+P2_VITEST+DRIZZLE+P3_HONO** — P1 admin auth gate + HMAC token. P2 vitest 38/39 + Drizzle ORM + D1 migrations. P3 Hono router src/router.js + /api/v1/health + /api/v1/version. WORKER_ADMIN_KEY generated + set on dev. DEV 9a037f75. SOUL 112,930,585. HEAD e47b481b. |
 | **42** | **SOV100 PORTAL + PHONICS HARDENING + KEYWORD PIPELINE BLUEPRINT** — 3 phonics fixes: EC-3 (SESSION OPENING excluded from phonics mode), drill_count canonical (drills_completed.length), sessionsPhonicsDone triple fallback. All verified via /api/deepgram-token simulation. sov100-portal.html DEV deployed (80d27d59) pw=phoenix2026. BB-50 keyword overhaul + BB-51 portal formula logged. Pipeline 7/7 PASS: HL-216. SOUL 70,982,568. HEAD 91254634. DEV 80d27d59. Prod 180f125d UNTOUCHED. |
 | **41** | **PIPELINE RUN40 + PHETRAILS SKILL + SIMULATION LAW** — All 21 starmaps read + synthesized. Run 40 pipeline 7/7 PASS: HL-214, starmap-run40, rfkw-run40, pipeline-run40. SOUL +1,214 → 69,676,569. /phetrails skill created (.github/skills/phetrails/SKILL.md). PheTrail-41.json written (3 positive, 3 negative breadcrumbs). L64 SIMULATION_PATH_LAW added: /api/deepgram-token is the only valid simulation path. deepgram-voice-agent-edge-cases.md §15 written. MANDATORY-READS.md simulation law added. sanitizeObiResponse 3b guard committed (417f5f60 — DeepSeek fallback only). Dev: de9e6d72. Prod: 180f125d UNTOUCHED. SOUL 69,676,569. HEAD b78e8308. |
 | **40** | **PHONICS WIRING + HARDENING + MEMORY SIM** — phonicsProgress KV wired as 7th arg to buildAgentPrompt. 6 edge cases hardened (EC-1 crash, EC-2 null, EC-3 opener override, EC-4 KV waste, EC-5 math, EC-6 label). phonicsHint in token response. chat.js mode-aware opener. DEEPGRAM_API_KEY set on dev. Test ID = sov100-test-magic (L63). Full 6-layer memory chain verified. SATNIP→DRUMBLE advance confirmed. DEV: 180b17ab. Prod: untouched. SOUL 69,062,849. HEAD fce90e3f. |
@@ -175,7 +178,7 @@ Only promote to `net-pet-ai` (prod) after verified on dev. Never deploy untested
 
 ---
 
-### FINGERPRINT: RUN 51 | P1_GATE+P2_VITEST+DRIZZLE+P3_HONO | SOUL 112930585 TITANIUM_ANCHOR | HEAD e47b481b | BOOT UPDATED 2026-06-03 ICT
+### FINGERPRINT: RUN 52 | P4_QUEUES+EMAIL+CACHE+P5_CICD+ALERTING+METRICS+P6_P10_BLUEPRINT | SOUL 116764209 TITANIUM_ANCHOR | HEAD e3139ead | BOOT UPDATED 2026-06-03 ICT
 
 ### BATTLEFIELD STATE — Run 045 (Phase 0 Census)
 **Map:** `CANON/SYSTEM/BATTLEFIELD-MAP.md` | **Matrices:** `OPERATIONS/BATTLEFIELD/D{1-9}-matrix.json` | **Machine:** `CANON/SYSTEM/system-map.json`
@@ -210,17 +213,24 @@ Agent did not read any documentation. Falsely committed "implementations" that w
 Never hold working features in the working tree across runs. Commit after EVERY verified feature. Gapless audio v2/v3 was lost because it ran for 4 runs without a commit. This law prevents that class of loss forever.
 
 **Open Loops:**
-0. **KILO T1 TIMEOUT INVESTIGATION** — Kilo Free Auto times out at 30s on large tasks. Used tier:10 all Run 40. Investigate ceiling + direct-call overhead. Fix before relying on Kilo for heavy generation.
-0b. ✅ **PHONICS CALL-SITE WIRING** — CLOSED Run 40. phonicsProgress wired, 6 edge cases fixed, phonicsHint in token response, deterministic opener.
-0c. **PHONICS DEV→PROD PROMOTION** — DEV (de9e6d72): HOGFEZ group 3, 14 drills, 6-layer memory chain confirmed via deepgram-token. Michael browser-tests test-portal end-to-end, approves, then: `Set-Location APPS/NET-PET-AI && npx wrangler deploy --config wrangler.toml`. ONE COMMAND. ⚠️ READ deepgram-voice-agent-edge-cases.md §15 before touching anything.
-1. **BROWSER TEST VOICE AGENT** — Open magic-chat.html?studentId=quy-bluetech in browser, DevTools console, click mic. Confirm audio plays + OBI speaks. — Kilo Free Auto timed out (30s) on large generation tasks (death seal). Investigate: PA timeout ceiling for T1, Kilo free-tier rate limits, direct-call vs proxy overhead. Fix before relying on Kilo for heavy T1 dispatch. See §7 + §8 run38-reincarnateDEATH.md.
-1. **BROWSER TEST VOICE AGENT** — Open magic-chat.html?studentId=quy-bluetech in browser, DevTools console, click mic. Confirm audio plays + OBI speaks. SettingsApplied is server-confirmed; this test validates full browser + mic path.
-2. **Deepgram Sydney region** — ~160ms RTT savings for VN users. Validate nova-3 + gpt-4o-mini in SYD. Add `region: "syd"` to Settings if available.
-3. **Curriculum State Injection** — UpdateInstructions mid-session stealth priming. Field name unverified — blocked until Deepgram doc confirms content field.
+
+**HARDENING (P6–P10) — Run 53 next:**
+P6. **COST-QUOTA RATE LIMITS** — `src/quota.js`: per-student hourly quota on Deepgram (10/hr) + DeepSeek chat (30/hr). KV-backed. 429 + Retry-After on breach. Blocks cost-DoS via leaked/abused student IDs. DISPATCH: PA T1, <150 lines.
+P7. **PAYMENT IDEMPOTENCY + MUTATION DEDUP** — `src/idempotency.js`: KV-keyed dedup on `/api/payment/confirm` + `/api/waitlist` + `/api/referral/register`. Prevents double-charges on VN mobile retries. DISPATCH: PA T1, <150 lines.
+P8. **CANARY DEPLOYMENTS** — `wrangler versions upload/deploy --percentage 10` promote-prod job in deploy-dev.yml. CF-native gradual rollout. Retires manual dev→prod binary flip. DISPATCH: PA T1, ~80 lines YAML.
+P9. **CLERK AUTH MIGRATION** — Replace hardcoded portal passwords with Clerk free tier (≤10k MAU). Workers middleware. Magic links + session revocation. **BLOCKED: Michael must create Clerk account + application first.** Then PA T1 dispatch.
+P10. **DELETION HOOK + AUDIT LOG + FIELD ENCRYPTION** — `DELETE /api/student/{id}/erase` (D1+KV+DO purge). `audit_log` D1 table. WebCrypto AES-GCM on `employer_profiles.contact_email` + `submissions.payload`. ENCRYPTION_KEY wrangler secret.
+
+**PROD PROMOTION:**
+0c. **P3+P4+P5 DEV→PROD PROMOTION** — DEV (57f20f6d): Hono router + CF Queues + Cache + Alerting + Metrics + CI/CD all verified. Michael browser-tests end-to-end, then: `Set-Location APPS/NET-PET-AI && npx wrangler deploy --config wrangler.toml`. ⚠️ wrangler.toml main is still src/index.js — update to src/router.js first, then deploy. ONE COMMAND after prep.
+
+**VOICE AGENT:**
+1. **BROWSER TEST VOICE AGENT** — Open magic-chat.html?studentId=quy-bluetech in browser, DevTools console, click mic. Confirm audio plays + OBI speaks.
 4. **iOS reconnect mic** — gesture-time mic stream stopped in onAgentDrop, getUserMedia in setTimeout fails on iOS outside gesture context — mic dead after first drop on iOS Safari.
-5. **A1 Onboarding binary entry** — "English only or Mix?" on first session. All current BlueTech students have lang=vi configured. Needed for new students.
-6. **VAD endpointing 200ms** — reduces end-of-utterance silence threshold from 300ms to 200ms. Field name "endpointing" plausible but unverified for Voice Agent WS.
-7. **lam-portal.html audit** — file exists (25KB) but BB-07 marked "zero files." Audit completeness, update backburner.
+
+**DEFERRED:**
+BB-55. **FUNNEL BROWSER TEST** — tigers-4room.pages.dev end-to-end test. Michael action.
+2. **Deepgram Sydney region** — ~160ms RTT savings for VN users. Validate nova-3 + gpt-4o-mini in SYD. Deferred pending scale.
 
 **Open Loops Resolved This Run:**
 - ✅ VOICE AGENT SETTINGSAPPLIED — server-verified via Node.js ws handshake (Run 25B)
