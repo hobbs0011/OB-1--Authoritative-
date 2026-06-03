@@ -33,6 +33,15 @@ function Write-Log($msg) {
 }
 
 function Get-Ready {
+    # Auto-mark AWAITING_APPLY as VERIFIED if target file exists
+    $mos | Where-Object { $state[$_.id] -eq 'AWAITING_APPLY' } | ForEach-Object {
+        $targetPath = "D:\OB-1-CANONICAL\$($_.target)"
+        if (Test-Path $targetPath) {
+            Write-Log "AUTO-VERIFY: $($_.id) — target file created"
+            $state[$_.id] = 'VERIFIED'
+        }
+    }
+
     $mos | Where-Object {
         $state[$_.id] -eq 'PENDING' -and
         $_.rung -ge $StartRung -and
@@ -58,11 +67,12 @@ function Invoke-Order($mo) {
         task    = $mo.task
         context = $ctx
         target  = $mo.target ?? ''
-        model   = $mo.model ?? '@cf/qwen/qwen2.5-coder-32b-instruct'
+        tier    = if ($mo.model -match 'llama-3.3-70b') { 1 } else { 1 }
     } | ConvertTo-Json -Compress
 
     try {
-        $r = Invoke-RestMethod "$PA/api/execute" -Method POST `
+        # LAMBO: call PA /api/code (T1→T5 cascade) not seed /api/execute (CF-Qwen only)
+        $r = Invoke-RestMethod "$PA/api/code" -Method POST `
              -ContentType 'application/json' `
              -Headers @{'x-pa-auth' = $AUTH} `
              -Body $body `
@@ -112,10 +122,11 @@ while ($true) {
         foreach ($dep in ($mo.depends_on ?? @())) {
             if ($ctx_map[$dep]) { $ctx = "RESULT OF $dep`:`n$($ctx_map[$dep])`n`n$ctx" }
         }
-        $body = @{ task=$mo.task; context=$ctx; target=($mo.target??''); model=($mo.model??'@cf/qwen/qwen2.5-coder-32b-instruct') } | ConvertTo-Json -Compress
+        $body = @{ task=$mo.task; context=$ctx; target=($mo.target??''); tier=1 } | ConvertTo-Json -Compress
         try {
-            $r = Invoke-RestMethod "$pa/api/execute" -Method POST -ContentType 'application/json' -Headers @{'x-pa-auth'=$auth} -Body $body -TimeoutSec 60
-            @{ id=$mo.id; patch=$r.patch; verified=$r.verified; model=$r.model; ok=$true }
+            # LAMBO: 10 subagents of PA /api/code (T1→T5 cascade)
+            $r = Invoke-RestMethod "$pa/api/code" -Method POST -ContentType 'application/json' -Headers @{'x-pa-auth'=$auth} -Body $body -TimeoutSec 60
+            @{ id=$mo.id; patch=$r.code_patch; verified=$false; model=$r.tier; ok=$true }
         } catch {
             @{ id=$mo.id; patch=''; verified=$false; ok=$false; error=$_.Exception.Message }
         }
@@ -133,7 +144,7 @@ while ($true) {
             $state[$res.id] = 'FAILED'
         } else {
             $patches[$res.id] = $res.patch
-            Write-Log "PATCH READY $($res.id) — $($res.patch.Length) chars — awaiting Sonnet apply+deploy"
+            Write-Log "PATCH READY $($res.id) — $($res.patch.Length) chars (via PA lambo cascade) — awaiting apply+deploy"
 
             # Write patch to a staging file for Sonnet to apply
             $stagingPath = "D:\OB-1-CANONICAL\OPERATIONS\patches\$($res.id)-patch.js"

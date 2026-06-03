@@ -14,27 +14,18 @@
     {
       "id": "MO-00",
       "rung": 0,
-      "label": "SEED DEPLOY",
-      "built_by": "HAND (Sonnet bootstrap — the spark)",
+      "label": "LAMBO CHECK — v0.0.4 is already the coder",
+      "built_by": "ALREADY LIVE — v0.0.4 is deployed. DO NOT overwrite with seed.",
       "depends_on": [],
-      "action": "deploy",
-      "files": {
-        "main": "APPS/PHOENIX-ARCHITECTI/src/index-seed.js → copy to src/index.js",
-        "security": "APPS/PHOENIX-ARCHITECTI/src/security.js (already written)",
-        "wrangler": "APPS/PHOENIX-ARCHITECTI/wrangler.toml (add RATELIMIT KV + bump main=src/index.js)"
-      },
+      "action": "verify_only",
+      "note": "ARCHITECTURE CHANGE run062: v0.0.4 IS the lambo (T1 Kilo Free Auto + T10 fallback cascade). Seed (honda) is obsolete. The operator calls /api/code on v0.0.4 for all generation. Token cost = next to none (Kilo subscription + free tier cascade). Skip seed deploy entirely.",
       "commands": [
-        "cd D:\\OB-1-CANONICAL\\APPS\\PHOENIX-ARCHITECTI",
-        "Copy-Item src/index-seed.js src/index.js -Force",
-        "node --check src/index.js",
-        "node --check src/security.js",
-        "npx wrangler kv namespace create RATELIMIT",
-        "# Add RATELIMIT KV id from output to wrangler.toml",
-        "npx wrangler deploy"
+        "# Verify v0.0.4 is live",
+        "$r = Invoke-RestMethod 'https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/status'; Write-Host $r.version $r.status"
       ],
-      "verify": "node --check src/index.js + deploy success",
-      "on_fail": "halt",
-      "status": "PENDING"
+      "verify": "/api/status returns version=0.0.3+ and status=LIVE",
+      "on_fail": "halt — PA must be live before any generation",
+      "status": "VERIFIED"
     },
     {
       "id": "MO-01",
@@ -43,7 +34,7 @@
       "built_by": "TEST ONLY — no code built",
       "depends_on": ["MO-00"],
       "action": "test",
-      "haiku_command": "$r = Invoke-RestMethod -Uri 'https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/execute' -Method POST -ContentType 'application/json' -Headers @{'x-pa-auth'=$env:PA_AUTH} -Body ('{\"task\":\"write a JS function add(a, b) that returns a + b\",\"model\":\"@cf/qwen/qwen2.5-coder-32b-instruct\"}' | ConvertTo-Json -Compress); Write-Host $r.patch",
+      "haiku_command": "$r = Invoke-RestMethod -Uri 'https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/execute' -Method POST -ContentType 'application/json' -Headers @{'x-pa-auth'=$env:PA_AUTH_SECRET} -Body '{\"task\":\"write a JS function add(a, b) that returns a + b\"}'; Write-Host $r.patch",
       "pass_condition": "$r.patch contains 'function' AND $r.patch.length > 20 AND $r.verified -eq $false",
       "note": "verified=false is CORRECT at rung 1 — the seed has no verifier yet",
       "verify": "manual: patch contains valid JS function body",
@@ -67,11 +58,11 @@
         "cd D:\\OB-1-CANONICAL\\APPS\\PHOENIX-ARCHITECTI",
         "npm install acorn --save",
         "node --check src/verify.js",
-        "node -e \"import('./src/verify.js').then(m => { const r1 = m.verify('function add(a,b){return a+b}'); const r2 = m.verify('function {{{'); console.log('good:', JSON.stringify(r1), 'bad:', JSON.stringify(r2)); if (!r1.ok || r2.ok) process.exit(1); })\"",
-        "npx wrangler deploy"
+        "node -e \"import('./src/verify.js').then(m => { const r1 = m.verify('function add(a,b){return a+b}'); const r2 = m.verify('function {{{'); console.log('good:', JSON.stringify(r1), 'bad:', JSON.stringify(r2)); if (!r1.ok || r2.ok) process.exit(1); })\""
       ],
+      "deploy_note": "NO intermediate deploy — seed index.js does not import verify.js. Module assembles at MO-09.",
       "verify": "node --check + smoke test: good→{ok:true}, bad→{ok:false}",
-      "on_fail": "escalate:opus — log to CANON/PHEROMONES/PheTrail-run61.json as 'qwen-coder cannot write acorn verifier'",
+      "on_fail": "escalate:opus — log to CANON/PHEROMONES/PheTrail-run062.json as 'coder cannot write acorn verifier'",
       "max_retries": 2,
       "status": "PENDING"
     },
@@ -89,9 +80,9 @@
       "target": "APPS/PHOENIX-ARCHITECTI/src/mission.js",
       "apply": "write patch to APPS/PHOENIX-ARCHITECTI/src/mission.js",
       "post_apply_commands": [
-        "node --check src/mission.js",
-        "npx wrangler deploy"
+        "node --check src/mission.js"
       ],
+      "deploy_note": "NO intermediate deploy — module assembles at MO-09.",
       "smoke_test": {
         "description": "POST /api/mission with 2-step blueprint — step 2 should receive step 1 output as context",
         "body": "{\"steps\":[{\"task\":\"write JS function double(n){return n*2}\"},{\"task\":\"now write a test function testDouble() that calls double(5) and throws if result is not 10\"}]}",
@@ -117,9 +108,9 @@
       "target": "APPS/PHOENIX-ARCHITECTI/src/swarm.js",
       "apply": "write patch to APPS/PHOENIX-ARCHITECTI/src/swarm.js",
       "post_apply_commands": [
-        "node --check src/swarm.js",
-        "npx wrangler deploy"
+        "node --check src/swarm.js"
       ],
+      "deploy_note": "NO intermediate deploy — module assembles at MO-09.",
       "smoke_test": {
         "description": "POST /api/swarm with 3-order DAG (MO-A → MO-C, MO-B → MO-C) — should run in 2 waves",
         "body": "{\"blueprint\":[{\"id\":\"A\",\"task\":\"write function greet(name){return 'Hello '+name}\",\"depends_on\":[]},{\"id\":\"B\",\"task\":\"write function farewell(name){return 'Bye '+name}\",\"depends_on\":[]},{\"id\":\"C\",\"task\":\"write function greetAndFarewell(name) that calls greet and farewell and returns both\",\"depends_on\":[\"A\",\"B\"]}],\"drones\":10}",
@@ -211,7 +202,7 @@
       "action": "execute",
       "endpoint": "/api/execute",
       "model": "@cf/meta/llama-3.3-70b-instruct",
-      "task": "Write the complete final src/index.js for Phoenix-Architecti v1.0.0. It must import and wire all modules: import { securityMiddleware, getCorsHeaders } from './security.js'; import { handleExecute } from './execute.js'; import { handleMission } from './mission.js'; import { handleSwarm } from './swarm.js'; import { handleBlueprint } from './blueprint.js'; import { handleStatus } from './status.js'. The export default fetch handler must: (1) handle OPTIONS with CORS headers from getCorsHeaders; (2) run securityMiddleware(request, env) on all routes — if it returns a Response, return it (with CORS headers appended); (3) route: POST /api/execute → handleExecute; POST /api/code → handleExecute (back-compat alias); POST /api/mission → handleMission; POST /api/swarm → handleSwarm; POST /api/blueprint → handleBlueprint; GET /api/status → handleStatus; all others → 404. (4) wrap each handler in try/catch → 500 with { error, version:'1.0.0' }; (5) append CORS headers from getCorsHeaders(origin) to every response. Also include the scheduled handler (cron): export const scheduled = async (event, env, ctx) => { await handleExecute({json:()=>Promise.resolve({task:'ping'}),headers:{get:()=>''}}, env) }. Version constant at top: const VERSION = '1.0.0';",
+      "task": "Write the complete final src/index.js for Phoenix-Architecti v1.0.0. It must import and wire all modules: import { securityMiddleware, getCorsHeaders } from './security.js'; import { handleExecute } from './execute.js'; import { handleMission } from './mission.js'; import { handleSwarm } from './swarm.js'; import { handleBlueprint } from './blueprint.js'; import { handleStatus } from './status.js'. The export default fetch handler must: (1) handle OPTIONS with CORS headers from getCorsHeaders; (2) run securityMiddleware(request, env) on all routes — if it returns a Response, return it (with CORS headers appended); (3) route: POST /api/execute → handleExecute; POST /api/code → handleExecute (back-compat alias); POST /api/mission → handleMission; POST /api/swarm → handleSwarm; POST /api/blueprint → handleBlueprint; GET /api/status → handleStatus; all others → 404. (4) wrap each handler in try/catch → 500 with { error, version:'1.0.0' }; (5) append CORS headers from getCorsHeaders(origin) to every response. Version constant at top: const VERSION = '1.0.0'; DO NOT include a scheduled/cron handler — auth gate makes any mock request return 401 silently.",
       "context": "CORS note: getCorsHeaders() from security.js returns headers object. To append: const h = new Headers(resp.headers); Object.entries(getCorsHeaders(origin)).forEach(([k,v]) => h.set(k,v)); return new Response(resp.body, { status:resp.status, headers:h }).",
       "target": "APPS/PHOENIX-ARCHITECTI/src/index.js",
       "apply": "OVERWRITE src/index.js with this patch — this is the final assembly",
@@ -263,7 +254,7 @@
         "pass": "response.waves === 1 AND response.all_verified === true AND response.results.length === 10"
       },
       "verify": "10/10 verified, waves=1, all_verified=true — the rite of passage is complete",
-      "on_fail": "log capability boundary to CANON/PHEROMONES/PheTrail-run61.json, report to Michael",
+      "on_fail": "log capability boundary to CANON/PHEROMONES/PheTrail-run062.json, report to Michael",
       "status": "PENDING"
     }
   ],
