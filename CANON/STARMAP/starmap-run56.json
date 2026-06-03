@@ -1,0 +1,16 @@
+{
+  "run": "56",
+  "rrl_path": "D:\\OB-1-CANONICAL\\RRL\\RRL-56.txt",
+  "ledger_id": "HL-338",
+  "session_id": "sov100-roman-run56",
+  "rrl_chars": 1277013,
+  "rrl_bytes": 1302687,
+  "soul_delta": 755563,
+  "soul_event_id": "9466248d-34f1-482d-8d2e-cff8b12e15a2",
+  "dna_count": 151,
+  "blueprint_count": 27,
+  "session_type": "RISE_ONLY",
+  "sealed_at": "2026-06-03T16:04:59+07:00",
+  "merkle_hash": "811daeb7325140ce903d337ea22a8cf833739ea488f69e21a1d53fbd89b9245b",
+  "note": "Back-filled at RISE-056. Original starmap-run56.txt was hollow (1-line text, missing JSON structure). This JSON replaces it per contract §1.2."
+}
