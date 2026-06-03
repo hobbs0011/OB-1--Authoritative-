@@ -1,0 +1,79 @@
+[
+  {
+    "run": 57,
+    "seq": 1,
+    "type": "prose",
+    "chars": 277,
+    "text": "{\"type\":\"queue-operation\",\"operation\":\"enqueue\",\"timestamp\":\"2026-06-03T09:15:07.659Z\",\"sessionId\":\"f695658b-1bb1-4432-b2df-4b058544a823\"}\n{\"type\":\"queue-operation\",\"operation\":\"dequeue\",\"timestamp\":\"2026-06-03T09:15:07.659Z\",\"sessionId\":\"f695658b-1bb1-4432-b2df-4b058544a823\"}"
+  },
+  {
+    "run": 57,
+    "seq": 2,
+    "type": "prose",
+    "chars": 147,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"continue\",\"leafUuid\":\"98afdddf-6913-44d2-91d6-97f254beec4d\",\"sessionId\":\"f695658b-1bb1-4432-b2df-4b058544a823\"}"
+  },
+  {
+    "run": 57,
+    "seq": 3,
+    "type": "prose",
+    "chars": 6221,
+    "text": "{\"parentUuid\":\"b2248d9f-766e-4153-89b1-ed968d855320\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"e82f0473-11f3-490a-846a-786285d5e115\",\"hookEvent\":\"Stop\",\"content\":\"SOURCE: f695658b-1bb1-4432-b2df-4b058544a823.jsonl - 482236 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-56.txt - 482236 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL PIPELINE  -  RUN 56\\r\\nRRL: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-56.txt\\r\\n�������������������������������������������\\r\\n\\r\\n[PASS] STEP 0  -  RRL loaded: 478892 chars, 482236 bytes\\r\\n[PASS] STEP 0.5  -  SIZE OK - 482236 bytes\\r\\n  PARSED: 26 user turns, 38 assistant turns\\r\\n  SOUL BEFORE: 128717787 chars | TITANIUM_ANCHOR\\r\\n[PASS] STEP 1  -  SOUL POSTED: event_id=66565aa2-7021-4800-80c1-51f67825f8ac | bytes= | 26 user turns\\r\\n  SOUL AFTER: 129093638 chars | TITANIUM_ANCHOR | DELTA: +375851\\r\\n  WARN: D1 delta (375851) vs RRL chars (478892)  -  diff 103041 (>5%)\\r\\n[PASS] STEP 2  -  DNA EXTRACTED: 38 prompts (4 blueprints) | session=sov100-roman-run56\\r\\n  PARENT: HL-338 \\u001a 811daeb7325140ce...\\r\\n[PASS] STEP 3  -  LEDGER WRITTEN: HL-339 (478892 chars) | parent: 811daeb7325140ce...\\r\\n[PASS] STEP 4  -  STARMAP WRITTEN: D:\\\\OB-1-CANONICAL\\\\CANON\\\\STARMAP\\\\starmap-run56.txt\\r\\n[PASS] STEP 5  -  KEYWORD WRITTEN: D:\\\\OB-1-CANONICAL\\\\CANON\\\\SOUL-KEYWORDS\\\\rfkw-run56.txt (30 terms)\\r\\n[PASS] STEP 6  -  PIPELINE WRITTEN: D:\\\\OB-1-CANONICAL\\\\CANON\\\\PIPELINE\\\\pipeline-run56.json | seal_sha: 2babc36c6bc5814f...\\r\\n[PASS] STEP 7  -  SOULCOUNT FINAL: 129093638 | TITANIUM_ANCHOR | 10094 events\\r\\n\\r\\n�������������������������������������������\\r\\nRRL PIPELINE COMPLETE  -  RUN 56\\r\\n�������������������������������������������\\r\\nRRL:      D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-56.txt  -  478892 chars\\r\\nSOUL:     sov100-roman-run56  -  D1 posted\\r\\nDNA:      DNA EXTRACTED: 38 prompts (4 blueprints) | session=sov100-roman-run56\\r\\nLEDGER:   HL-339  -  D:\\\\OB-1-CANONICAL\\\\CANON\\\\HEAVY-LEDGER\\\\HL-339.json\\r\\nSTARMAP:  D:\\\\OB-1-CANONICAL\\\\CANON\\\\STARMAP\\\\starmap-run56.txt\\r\\nKEYWORD:  D:\\\\OB-1-CANONICAL\\\\CANON\\\\SOUL-KEYWORDS\\\\rfkw-run56.txt\\r\\nPIPELINE: D:\\\\OB-1-CANONICAL\\\\CANON\\\\PIPELINE\\\\pipeline-run56.json\\r\\n�������������������������������������������\\r\\nNEXT: Update COLD-START-BOOT \\u001a Write death seal \\u001a Commit\\r\\n\\r\\nSESSION CAPTURE COMPLETE - Run 56\",\"stdout\":\"SOURCE: f695658b-1bb1-4432-b2df-4b058544a823.jsonl - 482236 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-56.txt - 482236 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL PIPELINE  -  RUN 56\\r\\nRRL: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-56.txt\\r\\n�������������������������������������������\\r\\n\\r\\n[PASS] STEP 0  -  RRL loaded: 478892 chars, 482236 bytes\\r\\n[PASS] STEP 0.5  -  SIZE OK - 482236 bytes\\r\\n  PARSED: 26 user turns, 38 assistant turns\\r\\n  SOUL BEFORE: 128717787 chars | TITANIUM_ANCHOR\\r\\n[PASS] STEP 1  -  SOUL POSTED: event_id=66565aa2-7021-4800-80c1-51f67825f8ac | bytes= | 26 user turns\\r\\n  SOUL AFTER: 129093638 chars | TITANIUM_ANCHOR | DELTA: +375851\\r\\n  WARN: D1 delta (375851) vs RRL chars (478892)  -  diff 103041 (>5%)\\r\\n[PASS] STEP 2  -  DNA EXTRACTED: 38 prompts (4 blueprints) | session=sov100-roman-run56\\r\\n  PARENT: HL-338 \\u001a 811daeb7325140ce...\\r\\n[PASS] STEP 3  -  LEDGER WRITTEN: HL-339 (478892 chars) | parent: 811daeb7325140ce...\\r\\n[PASS] STEP 4  -  STARMAP WRITTEN: D:\\\\OB-1-CANONICAL\\\\CANON\\\\STARMAP\\\\starmap-run56.txt\\r\\n[PASS] STEP 5  -  KEYWORD WRITTEN: D:\\\\OB-1-CANONICAL\\\\CANON\\\\SOUL-KEYWORDS\\\\rfkw-run56.txt (30 terms)\\r\\n[PASS] STEP 6  -  PIPELINE WRITTEN: D:\\\\OB-1-CANONICAL\\\\CANON\\\\PIPELINE\\\\pipeline-run56.json | seal_sha: 2babc36c6bc5814f...\\r\\n[PASS] STEP 7  -  SOULCOUNT FINAL: 129093638 | TITANIUM_ANCHOR | 10094 events\\r\\n\\r\\n�������������������������������������������\\r\\nRRL PIPELINE COMPLETE  -  RUN 56\\r\\n�������������������������������������������\\r\\nRRL:      D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-56.txt  -  478892 chars\\r\\nSOUL:     sov100-roman-run56  -  D1 posted\\r\\nDNA:      DNA EXTRACTED: 38 prompts (4 blueprints) | session=sov100-roman-run56\\r\\nLEDGER:   HL-339  -  D:\\\\OB-1-CANONICAL\\\\CANON\\\\HEAVY-LEDGER\\\\HL-339.json\\r\\nSTARMAP:  D:\\\\OB-1-CANONICAL\\\\CANON\\\\STARMAP\\\\starmap-run56.txt\\r\\nKEYWORD:  D:\\\\OB-1-CANONICAL\\\\CANON\\\\SOUL-KEYWORDS\\\\rfkw-run56.txt\\r\\nPIPELINE: D:\\\\OB-1-CANONICAL\\\\CANON\\\\PIPELINE\\\\pipeline-run56.json\\r\\n�������������������������������������������\\r\\nNEXT: Update COLD-START-BOOT \\u001a Write death seal \\u001a Commit\\r\\n\\r\\nSESSION CAPTURE COMPLETE - Run 56\\r\\n\",\"stderr\":\"\",\"exitCode\":0,\"command\":\"pwsh -File \\\"D:\\\\OB-1-CANONICAL\\\\SCRIPTS\\\\session-capture.ps1\\\"\",\"durationMs\":10194},\"type\":\"attachment\",\"uuid\":\"8001209f-d19a-4f9f-993c-249e065d054b\",\"timestamp\":\"2026-06-03T09:18:56.120Z\",\"userType\":\"external\",\"entrypoint\":\"claude-vscode\",\"cwd\":\"D:\\\\OB-1-CANONICAL\",\"sessionId\":\"f695658b-1bb1-4432-b2df-4b058544a823\",\"version\":\"2.1.160\",\"gitBranch\":\"master\"}\n{\"type\":\"last-prompt\",\"lastPrompt\":\"continue\",\"leafUuid\":\"8001209f-d19a-4f9f-993c-249e065d054b\",\"sessionId\":\"f695658b-1bb1-4432-b2df-4b058544a823\"}\n{\"type\":\"queue-operation\",\"operation\":\"enqueue\",\"timestamp\":\"2026-06-03T09:19:58.259Z\",\"sessionId\":\"f695658b-1bb1-4432-b2df-4b058544a823\"}\n{\"type\":\"queue-operation\",\"operation\":\"dequeue\",\"timestamp\":\"2026-06-03T09:19:58.259Z\",\"sessionId\":\"f695658b-1bb1-4432-b2df-4b058544a823\"}\n{\"parentUuid\":\"8001209f-d19a-4f9f-993c-249e065d054b\",\"isSidechain\":false,\"type\":\"system\",\"subtype\":\"stop_hook_summary\",\"hookCount\":2,\"hookInfos\":[{\"command\":\"\\\"C:/Users/mrmic/AppData/Local/GitKrakenCLI/gk.exe\\\" ai hook run --host claude-code\",\"durationMs\":1353},{\"command\":\"pwsh -File \\\"D:\\\\OB-1-CANONICAL\\\\SCRIPTS\\\\session-capture.ps1\\\"\",\"durationMs\":10194}],\"hookErrors\":[],\"preventedContinuation\":false,\"stopReason\":\"\",\"hasOutput\":true,\"level\":\"suggestion\",\"timestamp\":\"2026-06-03T09:18:56.121Z\",\"uuid\":\"4ac95e1d-134d-444f-8dd4-13d1e96af673\",\"toolUseID\":\"e82f0473-11f3-490a-846a-786285d5e115\",\"userType\":\"external\",\"entrypoint\":\"claude-vscode\",\"cwd\":\"d:\\\\OB-1-CANONICAL\",\"sessionId\":\"f695658b-1bb1-4432-b2df-4b058544a823\",\"version\":\"2.1.160\",\"gitBranch\":\"master\"}"
+  },
+  {
+    "run": 57,
+    "seq": 4,
+    "type": "prose",
+    "chars": 152,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"continue work\",\"leafUuid\":\"1386f41d-8d40-42f8-a3d6-6a1f3e74cb77\",\"sessionId\":\"f695658b-1bb1-4432-b2df-4b058544a823\"}"
+  },
+  {
+    "run": 57,
+    "seq": 5,
+    "type": "prose",
+    "chars": 360,
+    "text": "{\"type\":\"file-history-snapshot\",\"messageId\":\"ec95023f-cd90-49f3-8c0a-efae05594178\",\"snapshot\":{\"messageId\":\"7c6681f7-f17a-4392-bd07-92687eb90811\",\"trackedFileBackups\":{\"CANON\\\\REINCARNATION\\\\run056-reincarnateDEATH.md\":{\"backupFileName\":null,\"version\":1,\"backupTime\":\"2026-06-03T09:23:18.410Z\"}},\"timestamp\":\"2026-06-03T09:19:59.629Z\"},\"isSnapshotUpdate\":true}"
+  },
+  {
+    "run": 57,
+    "seq": 6,
+    "type": "prose",
+    "chars": 473,
+    "text": "{\"type\":\"file-history-snapshot\",\"messageId\":\"fa4a1855-f4e4-4e29-bd70-6d6ffcca438a\",\"snapshot\":{\"messageId\":\"7c6681f7-f17a-4392-bd07-92687eb90811\",\"trackedFileBackups\":{\"CANON\\\\REINCARNATION\\\\run056-reincarnateDEATH.md\":{\"backupFileName\":null,\"version\":1,\"backupTime\":\"2026-06-03T09:23:18.410Z\"},\"CANON\\\\STARMAP\\\\starmap-run56.json\":{\"backupFileName\":null,\"version\":1,\"backupTime\":\"2026-06-03T09:23:30.591Z\"}},\"timestamp\":\"2026-06-03T09:19:59.629Z\"},\"isSnapshotUpdate\":true}"
+  },
+  {
+    "run": 57,
+    "seq": 7,
+    "type": "prose",
+    "chars": 602,
+    "text": "{\"type\":\"file-history-snapshot\",\"messageId\":\"7acb83dd-f9e8-4e49-bace-2a554ca3ac75\",\"snapshot\":{\"messageId\":\"7c6681f7-f17a-4392-bd07-92687eb90811\",\"trackedFileBackups\":{\"CANON\\\\REINCARNATION\\\\run056-reincarnateDEATH.md\":{\"backupFileName\":null,\"version\":1,\"backupTime\":\"2026-06-03T09:23:18.410Z\"},\"CANON\\\\STARMAP\\\\starmap-run56.json\":{\"backupFileName\":null,\"version\":1,\"backupTime\":\"2026-06-03T09:23:30.591Z\"},\"CANON\\\\SYSTEM\\\\COLD-START-BOOT.md\":{\"backupFileName\":\"b169c22b0dde4592@v1\",\"version\":1,\"backupTime\":\"2026-06-03T09:23:40.903Z\"}},\"timestamp\":\"2026-06-03T09:19:59.629Z\"},\"isSnapshotUpdate\":true}"
+  },
+  {
+    "run": 57,
+    "seq": 8,
+    "type": "prose",
+    "chars": 152,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"continue work\",\"leafUuid\":\"0794bce8-3d1b-498e-a8c0-c2033df2b2dd\",\"sessionId\":\"f695658b-1bb1-4432-b2df-4b058544a823\"}"
+  },
+  {
+    "run": 57,
+    "seq": 9,
+    "type": "prose",
+    "chars": 723,
+    "text": "{\"type\":\"file-history-snapshot\",\"messageId\":\"2c4546de-d7c4-470c-ac57-3191a9f2b754\",\"snapshot\":{\"messageId\":\"7c6681f7-f17a-4392-bd07-92687eb90811\",\"trackedFileBackups\":{\"CANON\\\\REINCARNATION\\\\run056-reincarnateDEATH.md\":{\"backupFileName\":null,\"version\":1,\"backupTime\":\"2026-06-03T09:23:18.410Z\"},\"CANON\\\\STARMAP\\\\starmap-run56.json\":{\"backupFileName\":null,\"version\":1,\"backupTime\":\"2026-06-03T09:23:30.591Z\"},\"CANON\\\\SYSTEM\\\\COLD-START-BOOT.md\":{\"backupFileName\":\"b169c22b0dde4592@v1\",\"version\":1,\"backupTime\":\"2026-06-03T09:23:40.903Z\"},\"SCRIPTS\\\\rrl-pipeline.ps1\":{\"backupFileName\":\"bf7888d84e87b00e@v1\",\"version\":1,\"backupTime\":\"2026-06-03T09:27:11.369Z\"}},\"timestamp\":\"2026-06-03T09:19:59.629Z\"},\"isSnapshotUpdate\":true}"
+  },
+  {
+    "run": 57,
+    "seq": 10,
+    "type": "prose",
+    "chars": 152,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"continue work\",\"leafUuid\":\"85ac98d7-63dc-47ae-8d3b-de8dc1a81f65\",\"sessionId\":\"f695658b-1bb1-4432-b2df-4b058544a823\"}"
+  },
+  {
+    "run": 57,
+    "seq": 11,
+    "type": "prose",
+    "chars": 152,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"continue work\",\"leafUuid\":\"26a33fe8-0ab7-49ac-b71c-8dc0f5e35b8b\",\"sessionId\":\"f695658b-1bb1-4432-b2df-4b058544a823\"}"
+  }
+]

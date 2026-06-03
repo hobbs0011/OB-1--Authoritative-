@@ -1,0 +1,69 @@
+{
+  "run_number": "057",
+  "extracted_at": "2026-06-03T17:30:00+07:00",
+  "head_sha": "2bbf5b24",
+  "soulcount": 130105464,
+  "positive_trails": [
+    {
+      "artifact": "CANON/REINCARNATION/run056-reincarnateDEATH.md + death commit cfb9f628",
+      "action": "Closed CRITICAL gaps G1+G2 from RISE-056 audit. Death seal written (13 sections). Death commit made. Platform Death Test restored. BOOT updated to Run 56. STARMAP back-filled as proper JSON. HL-339 (second ledger, pipeline re-run) also committed.",
+      "verification": "git log shows cfb9f628 death: ROMAN RUN 056. CANON/REINCARNATION/run056-reincarnateDEATH.md present. Platform Death Test PASS.",
+      "timestamp": "2026-06-03T17:15:00+07:00"
+    },
+    {
+      "artifact": "SCRIPTS/rrl-pipeline.ps1 — STARMAP step fix",
+      "action": "Fixed STARMAP step: .txt → .json extension, single-line text → ConvertTo-Json with full JSON structure (run, rrl_path, ledger_id, session_id, rrl_chars, rrl_bytes, soul_delta, soul_event_id, dna_count, blueprint_count, sealed_at, merkle_hash). Prevents hollow STARMAPs in future pipeline runs.",
+      "verification": "rrl-pipeline.ps1 line 259 now writes starmap-run{N}.json with ConvertTo-Json. Committed in 2bbf5b24.",
+      "timestamp": "2026-06-03T17:20:00+07:00"
+    },
+    {
+      "artifact": "APPS/NET-PET-AI/public/portal.css + quy/huong/mai-tram portals",
+      "action": "Front 2 portal facelift complete. Extracted shared portal.css (23KB) from quy/huong/mai-tram portal files (CSS superset was identical across all 3). Replaced inline <style> blocks (-22KB per portal) with <link rel='stylesheet' href='/portal.css'>. 0 student-specific refs in CSS. Safari-safe (backdrop-filter already purged in Run 390).",
+      "verification": "5 files changed, 1468 deletions in commit 2bbf5b24. portal.css 23037 bytes. quy/huong/mai-tram: style_removed=True link_added=True.",
+      "timestamp": "2026-06-03T17:25:00+07:00"
+    },
+    {
+      "artifact": "RISE-056 audit — 7/7 REAL, 1 HOLLOW (STARMAP)",
+      "action": "Full RISE-056 executed. All 7 stages audited. Gaps documented: STARMAP hollow (txt not json), PheTrail naming off-by-one, HL-339 anomaly (second ledger from re-run). SOUL breathing (+755,563). All critical findings documented in run056-reincarnateDEATH.md.",
+      "verification": "RISE-056 report delivered. 8 gaps identified and documented. All CRITICAL gaps (G1+G2) closed this session.",
+      "timestamp": "2026-06-03T17:00:00+07:00"
+    }
+  ],
+  "negative_trails": [
+    {
+      "artifact": "PA T1 Kilo free auto — portal.css extraction task",
+      "failure": "30s timeout on portal.css CSS extraction dispatch (complex HTML → CSS synthesis). Third occurrence: run054 C1, run055 C1, run057.",
+      "root_cause": "Kilo free auto (kilo-auto/free) has a hard 30s wall timeout on any task requiring multi-file synthesis or large output. CSS extraction from 4 portal files (~22KB each) exceeds the complexity ceiling.",
+      "decay_days": 180,
+      "timestamp": "2026-06-03T17:22:00+07:00"
+    },
+    {
+      "artifact": "PA T10 — portal.css stub response",
+      "failure": "T10 (Cerebras/Groq) returned 343-char stub: 'files not provided, cannot extract CSS'. No file access at inference time.",
+      "root_cause": "PA T10 has no file system access. Task description referenced file paths without providing content. For file-reading tasks, contents must be included in the context bundle or the task must be handled inline.",
+      "decay_days": 180,
+      "timestamp": "2026-06-03T17:22:30+07:00"
+    },
+    {
+      "artifact": "Stage 6 SOULKEYS — ConvertFrom-Json -AsHashtable duplicate key error",
+      "failure": "PowerShell throws 'Item has already been added. Key in dictionary: run' when appending @{run=...; category=...; weight=...} to hashtable values. Non-fatal — index written with 443 terms.",
+      "root_cause": "ConvertFrom-Json -AsHashtable returns case-sensitive ordered hashtables. When inner objects have 'run' key and you += @{run=...}, PowerShell's hashtable merge treats it as duplicate. Use [PSCustomObject]@{} or PSCustomObject array instead.",
+      "decay_days": 180,
+      "timestamp": "2026-06-03T17:30:00+07:00"
+    },
+    {
+      "artifact": "DNA run057 — 0 blueprints",
+      "failure": "DNA extracted 11 records but 0 blueprints. RISE+tooling sessions produce prose-only DNA.",
+      "root_cause": "Expected behavior for RISE+tooling runs. Blueprint detection requires fenced code blocks >200 chars or SPEC/BLUEPRINT keywords in agent output. Tool call results and RISE reports are prose. Not a bug.",
+      "decay_days": 30,
+      "timestamp": "2026-06-03T17:30:00+07:00"
+    }
+  ],
+  "state_markers": {
+    "active_mission": "NET-PET-AI Scale-Ready + Gateway Fronts 2 DONE / Front 3 pending",
+    "open_flags_count": 4,
+    "top_priority": "BB-55 browser test (Michael action) → scale-ready declaration",
+    "pending_fronts": "Front 3 (OBI 3 modes: purple/gold/teal mode cards, modeChip fix, lion avatar)",
+    "pipeline_fix_applied": "rrl-pipeline.ps1 STARMAP .txt→.json fixed in commit 2bbf5b24"
+  }
+}

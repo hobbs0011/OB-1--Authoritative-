@@ -301,11 +301,14 @@
     "count": 2
   },
   "chain": {
+    "count": 1,
+    "run": 57,
+    "weight": 61,
     "term": "chain",
+    "category": "soul+key",
     "runs": [
       null
-    ],
-    "count": 1
+    ]
   },
   "changes": {
     "term": "changes",
@@ -481,11 +484,14 @@
     "count": 1
   },
   "create": {
+    "count": 1,
+    "run": 57,
+    "weight": 56,
     "term": "create",
+    "category": "soul+key",
     "runs": [
       null
-    ],
-    "count": 1
+    ]
   },
   "critical": {
     "term": "critical",
@@ -2061,11 +2067,14 @@
     "run": 44
   },
   "state": {
+    "count": 1,
+    "run": 57,
+    "weight": 60,
     "term": "state",
+    "category": "soul+key",
     "runs": [
       null
-    ],
-    "count": 1
+    ]
   },
   "status": {
     "run": 50,
@@ -2657,6 +2666,11 @@
       "weight": 70,
       "run": 51,
       "category": "soul+key"
+    },
+    {
+      "run": 57,
+      "weight": 105,
+      "category": "soul+key"
     }
   ],
   "write": [
@@ -2667,6 +2681,11 @@
     {
       "weight": 83,
       "run": 54,
+      "category": "soul+key"
+    },
+    {
+      "run": 57,
+      "weight": 69,
       "category": "soul+key"
     }
   ],
@@ -3187,6 +3206,11 @@
       "weight": 118,
       "run": 54,
       "category": "soul+key"
+    },
+    {
+      "run": 57,
+      "weight": 151,
+      "category": "soul+key"
     }
   ],
   "phase": [
@@ -3270,6 +3294,11 @@
     {
       "weight": 94,
       "run": 54,
+      "category": "soul+key"
+    },
+    {
+      "run": 57,
+      "weight": 58,
       "category": "soul+key"
     }
   ],
@@ -3390,6 +3419,55 @@
       "run": 55,
       "category": "soul+key",
       "weight": 227
+    }
+  ],
+  "front": [
+    {
+      "run": 57,
+      "weight": 98,
+      "category": "soul+key"
+    }
+  ],
+  "current": [
+    {
+      "run": 57,
+      "weight": 79,
+      "category": "soul+key"
+    }
+  ],
+  "death:": [
+    {
+      "run": 57,
+      "weight": 72,
+      "category": "soul+key"
+    }
+  ],
+  "(test-path": [
+    {
+      "run": 57,
+      "weight": 70,
+      "category": "soul+key"
+    }
+  ],
+  "-match": [
+    {
+      "run": 57,
+      "weight": 62,
+      "category": "soul+key"
+    }
+  ],
+  "facelift": [
+    {
+      "run": 57,
+      "weight": 57,
+      "category": "soul+key"
+    }
+  ],
+  "phetrail": [
+    {
+      "run": 57,
+      "weight": 55,
+      "category": "soul+key"
     }
   ]
 }
