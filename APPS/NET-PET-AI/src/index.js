@@ -899,6 +899,7 @@ async function handleAPI(path, request, env, url) {
           },
           think: {
             provider: { type: "open_ai", model: "gpt-4o-mini" },
+            fallback: { providers: [{ type: "open_ai", model: "gpt-4o" }] },
             prompt: buildAgentPrompt(agentProfile, agentLang, recentVocab, arcData, sessionMode, memoryData, phonicsData),
             functions: [{
               name: "save_vocabulary_word",
@@ -907,10 +908,15 @@ async function handleAPI(path, request, env, url) {
             }]
           },
           speak: {
-            provider: { type: "deepgram", model: "aura-2-zeus-en", speed: ttsSpeed }
+            provider: { type: "deepgram", model: "aura-2-zeus-en", speed: ttsSpeed },
+            fallback: { providers: [{ type: "deepgram", model: "aura-2-orion-en" }] }
           }
         }
       };
+      const MAX_PROMPT = 24000;
+      if (settings.agent.think.prompt.length > MAX_PROMPT) {
+        settings.agent.think.prompt = settings.agent.think.prompt.slice(0, MAX_PROMPT) + "\n[context trimmed]";
+      }
       const phonicsHint = sessionMode === 'phonics' ? {
         group_name: phonicsData?.group_name || 'SATNIP',
         next_sentence: phonicsData?.next_drill?.sentence || 'She sat next to me at the station.',

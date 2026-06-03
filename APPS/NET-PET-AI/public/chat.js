@@ -767,6 +767,12 @@ async function handle(text) {
 }
 
 // ── Voice Agent (Deepgram real-time pipeline) ────────────────────────────────
+// B5: module-level visibilitychange — one listener, never leaks across reconnects
+function resumeAgentCtx() {
+  if (agentAudioCtx && agentAudioCtx.state === "suspended") agentAudioCtx.resume().catch(() => {});
+}
+document.addEventListener("visibilitychange", () => { if (!document.hidden) resumeAgentCtx(); });
+
 // browser PCM16 → wss://agent.deepgram.com/v1/agent/converse (direct, token via /api/deepgram-token)
 let agentWs           = null;  // WebSocket to Deepgram (direct)
 let agentWsId         = 0;     // incremented each openVoiceAgent() — zombie handler guard
@@ -785,8 +791,11 @@ let agentChunkAccumSize = 0;    // byte count of accumulator
 let agentThinkBubble  = null;  // typing indicator shown during AgentThinking
 let agentTextResolve  = null;  // resolver for typed-text → InjectUserMessage flow
 let agentKeepAlive    = null;  // interval handle for KeepAlive messages
-let agentSilenceTimer = null;  // fires if student is silent >4s after OBI speaks
+let agentSilenceTimer = null;  // fires if student is silent >2.5s after OBI speaks
 let agentSessionStart = null;  // timestamp when SettingsApplied fires
+let agentReconnectCount = 0;   // backoff counter: resets on clean SettingsApplied
+let agentReconnectTimer = null;// active reconnect timeout handle
+const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 let agentSessionTurns = 0;     // student voice turns this session
 let agentSessionVocab = [];    // vocab words saved via function calling this session
 let userHasInteracted = false; // set on first gesture
@@ -848,16 +857,23 @@ async function openVoiceAgent() {
       listening = false;
       micBtn.classList.remove("mic-active");
       setMicStatus("Tap to reconnect", false);
-      setTimeout(() => {
-        if (!agentWs && urlStudentId) {
-          openVoiceAgent();
-          if (userHasInteracted) {
-            navigator.mediaDevices.getUserMedia({ audio: { channelCount: 1, echoCancellation: true, noiseSuppression: true, autoGainControl: true } })
-              .then(s => { pendingMicStream = s; })
-              .catch(() => {});
+      if (agentReconnectTimer) { clearTimeout(agentReconnectTimer); agentReconnectTimer = null; }
+      if (agentReconnectCount < 5) {
+        const delay = Math.min(2000 * Math.pow(2, agentReconnectCount), 30000);
+        agentReconnectCount++;
+        agentReconnectTimer = setTimeout(() => {
+          agentReconnectTimer = null;
+          if (!agentWs && urlStudentId) {
+            openVoiceAgent();
+            // B6: iOS Safari denies getUserMedia outside a user gesture — skip pre-acquire on iOS
+            if (userHasInteracted && !isIOS) {
+              navigator.mediaDevices.getUserMedia({ audio: { channelCount: 1, echoCancellation: true, noiseSuppression: true, autoGainControl: true } })
+                .then(s => { pendingMicStream = s; })
+                .catch(() => {});
+            }
           }
-        }
-      }, 2000);
+        }, delay);
+      }
     };
     ws.onerror = onAgentDrop;
     ws.onclose = onAgentDrop;
@@ -920,6 +936,7 @@ function handleAgentMsg(event) {
 
       } else if (msg.type === "SettingsApplied") {
         agentReady = true;
+        agentReconnectCount = 0; // B2: clean connect — reset backoff
         agentSessionStart = Date.now();
         agentSessionTurns = 0;
         agentSessionVocab = [];
@@ -1029,7 +1046,7 @@ function handleAgentMsg(event) {
         agentPlaying = false;
         agentCurrentAudio = null;
         if (state === "busy") state = "chat";
-        // Silence detection — if student doesn't speak within 4s, inject gentle prompt
+        // Silence detection — if student doesn't speak within 2.5s, inject gentle prompt
         if (agentSilenceTimer) clearTimeout(agentSilenceTimer);
         agentSilenceTimer = setTimeout(() => {
           agentSilenceTimer = null;
@@ -1183,16 +1200,10 @@ async function startAgentListening(preAcquiredStream) {
     micBtn.classList.add("mic-active");
     setMicStatus("Listening…", true);
 
-    const resumeCtx = async () => {
-      if (agentAudioCtx && agentAudioCtx.state === "suspended") {
-        try { await agentAudioCtx.resume(); } catch (_) {}
-      }
-    };
-    document.addEventListener("visibilitychange", () => { if (!document.hidden) resumeCtx(); });
     agentAudioCtx.addEventListener("statechange", () => {
       if (agentAudioCtx && agentAudioCtx.state === "suspended") {
-        document.addEventListener("touchstart", resumeCtx, { once: true });
-        document.addEventListener("click", resumeCtx, { once: true });
+        document.addEventListener("touchstart", resumeAgentCtx, { once: true });
+        document.addEventListener("click", resumeAgentCtx, { once: true });
       }
     });
   } catch {
@@ -1475,8 +1486,8 @@ async function boot() {
 }
 
 // ── Mode Selector System (Free Talk / Log-Home-Study / NET Phonics) ─────────
-const MODE_COLORS = { free: 'var(--purple)', study: '#f59e0b', phonics: '#ef4444' };
-const MODE_LABELS = { free: '💬 Free Talk', study: '📚 Log-Home-Study', phonics: '🗣️ NET Phonics' };
+const MODE_COLORS = { free: 'var(--purple)', study: '#f59e0b', phonics: '#14b8a6' };
+const MODE_LABELS = { free: 'Free Talk', study: 'Log-Home-Study', phonics: 'NET Phonics' };
 let currentMode = 'free';
 let pendingLandingMode = null;
 let landingWillShow = false; // set by initModeUI before boot() runs
@@ -1508,13 +1519,17 @@ function selectLandingMode(mode) {
   document.querySelectorAll('.landing-mode-card').forEach(c => {
     c.classList.toggle('selected', c.dataset.mode === mode);
   });
+  const color = MODE_COLORS[mode] || MODE_COLORS.free;
   const btn = document.getElementById('landingStartBtn');
-  if (btn) btn.classList.add('ready');
+  if (btn) { btn.classList.add('ready'); btn.style.background = color; }
+  const h2 = document.querySelector('#modeLanding h2');
+  if (h2) h2.style.color = color;
 }
 
 function confirmLandingMode() {
   if (!pendingLandingMode) return;
   currentMode = pendingLandingMode;
+  document.body.dataset.mode = currentMode; // A4: drive room color
   localStorage.setItem('obi_session_mode', currentMode);
   localStorage.setItem('obi_landing_seen', 'true');
   const url = new URL(window.location.href);
@@ -1565,6 +1580,7 @@ function closeModeModal() {
 
 function selectMode(mode) {
   currentMode = mode;
+  document.body.dataset.mode = mode; // A4: drive room color
   localStorage.setItem('obi_session_mode', mode);
   const url = new URL(window.location.href);
   url.searchParams.set('mode', mode);
@@ -1619,6 +1635,7 @@ function selectMode(mode) {
     if (landing) landing.classList.add('hidden');
   }
 
+  document.body.dataset.mode = currentMode; // A4: drive room color on init
   if (obiName) obiName.style.color = MODE_COLORS[currentMode] || MODE_COLORS.free;
   updateModeChip();
 })();
