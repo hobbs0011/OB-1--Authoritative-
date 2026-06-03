@@ -42,7 +42,12 @@
       "PowerShell(Get-ChildItem \"$env:APPDATA\\\\kilo\",\"$env:USERPROFILE\\\\.kilo\",\"$env:USERPROFILE\\\\.config\\\\kilo\" -ErrorAction SilentlyContinue | Select-Object FullName)",
       "PowerShell(pwsh -File \"D:\\\\OB-1-CANONICAL\\\\SCRIPTS\\\\rrl-pipeline.ps1\" -RRLFile \"D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-12.txt\" -RunNumber \"12\")",
       "PowerShell(New-Item -ItemType Directory -Force \"C:\\\\Users\\\\mrmic\\\\.config\\\\kilo\")",
-      "PowerShell(Copy-Item \"D:\\\\OB-1-CANONICAL\\\\OPERATIONS\\\\kilo-global-config-backup.jsonc\" \"C:\\\\Users\\\\mrmic\\\\.config\\\\kilo\\\\kilo.jsonc\")"
+      "PowerShell(Copy-Item \"D:\\\\OB-1-CANONICAL\\\\OPERATIONS\\\\kilo-global-config-backup.jsonc\" \"C:\\\\Users\\\\mrmic\\\\.config\\\\kilo\\\\kilo.jsonc\")",
+      "PowerShell(Invoke-RestMethod \"https://soul-logger.mrmichaelhobbs123.workers.dev*)",
+      "Bash(curl \"https://soul-logger.mrmichaelhobbs123.workers.dev*)",
+      "PowerShell(Invoke-RestMethod \"https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/status*)",
+      "PowerShell(Get-ChildItem -Path \"D:\\\\OB-1-CANONICAL\\\\*)",
+      "PowerShell(Get-ChildItem \"D:\\\\OB-1-CANONICAL\\\\*)"
     ],
     "additionalDirectories": [
       "D:\\PROJECTS\\phoenix-coder",

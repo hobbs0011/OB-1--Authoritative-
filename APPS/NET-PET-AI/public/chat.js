@@ -804,6 +804,7 @@ let micAcquiring      = false; // mutex: prevents double getUserMedia on rapid t
 let agentFirstAudioReceived = false; // FIX1: true after first agent audio chunk plays — gates legacy TTS suppression
 let agentPreSettingsBuffer = []; // EC-15: PCM chunks buffered before SettingsApplied
 let agentPreSettingsBytes = 0;   // byte count — cap at 50 chunks (~1s at 16kHz)
+let lastSessionVocabGlobal = []; // last session vocab words from token response
 
 // I-5: Stop pendingMicStream when tab hidden to prevent hot mic (EC-4 fix)
 document.addEventListener("visibilitychange", () => {
@@ -821,12 +822,13 @@ async function openVoiceAgent() {
     setMicStatus("Connecting…", false);
     const tokenRes = await fetch(`/api/deepgram-token?studentId=${encodeURIComponent(urlStudentId)}&mode=${encodeURIComponent(currentMode)}`);
     if (!tokenRes.ok) { console.error("[VOICE] token fetch failed:", tokenRes.status); setMicStatus("Tap to start", false); return; }
-    const { token, settings, phonicsHint } = await tokenRes.json();
+    const { token, settings, phonicsHint, lastSessionVocab } = await tokenRes.json();
     if (phonicsHint) profile._phonicsHint = phonicsHint;
     if (!token) { console.error("[VOICE] no token in response"); setMicStatus("Tap to start", false); return; }
     if (agentWsId !== myId) return; // zombie check — another openVoiceAgent() fired during async fetch
 
     agentSettings = settings; // stored for Welcome handler
+    lastSessionVocabGlobal = lastSessionVocab || [];
 
     // Connect directly to Deepgram — JWT via Sec-WebSocket-Protocol (Deepgram echoes "token" back)
     const ws = new WebSocket("wss://agent.deepgram.com/v1/agent/converse", ["token", token]);
@@ -976,7 +978,11 @@ function handleAgentMsg(event) {
         } else if (profile._sessionHint) {
           _openingMsg = `${_viGreet}${_greetName || "there"}! I see you watched "${profile._sessionHint}" — that's your 45 minutes! What was the most interesting part?`;
         } else if (chatMessages.length > 0) {
-          _openingMsg = `${_viGreet}${_greetName || "there"}! Good to see you again. Ready to practice — want to continue from last time, or try something new today?`;
+          if (lastSessionVocabGlobal?.length > 0) {
+            _openingMsg = `${_viGreet}${_greetName || "there"}! Good to see you again. Last time you practiced "${lastSessionVocabGlobal[0]}" — want to use it in a sentence today?`;
+          } else {
+            _openingMsg = `${_viGreet}${_greetName || "there"}! Good to see you again. Ready to practice — want to continue from last time, or try something new today?`;
+          }
         } else {
           _openingMsg = `${_viGreet}${_greetName || "there"}! I'm OBI, your English coach. No pressure — just speak naturally, I'll guide you. What do you want to talk about today?`;
         }

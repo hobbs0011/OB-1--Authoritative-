@@ -1,0 +1,114 @@
+[
+  {
+    "run": 59,
+    "seq": 1,
+    "type": "prose",
+    "chars": 123,
+    "text": "{\"type\":\"last-prompt\",\"leafUuid\":\"d18c802e-6a28-4491-b8df-22e83a14e112\",\"sessionId\":\"0ea7ca3a-069b-40c4-b651-384325184ee5\"}"
+  },
+  {
+    "run": 59,
+    "seq": 2,
+    "type": "prose",
+    "chars": 123,
+    "text": "{\"type\":\"last-prompt\",\"leafUuid\":\"6f3b4ce8-605a-47a7-9892-5504e0364c86\",\"sessionId\":\"0ea7ca3a-069b-40c4-b651-384325184ee5\"}"
+  },
+  {
+    "run": 59,
+    "seq": 3,
+    "type": "prose",
+    "chars": 6075,
+    "text": "{\"parentUuid\":\"6e04daaf-9c8a-43df-b316-c0112913dcd9\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"d5e4e66e-e33a-440b-be04-e2ee89b8ff00\",\"hookEvent\":\"Stop\",\"content\":\"SOURCE: 0ea7ca3a-069b-40c4-b651-384325184ee5.jsonl - 362845 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-59.txt - 362845 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL PIPELINE  -  RUN 59\\r\\nRRL: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-59.txt\\r\\n�������������������������������������������\\r\\n\\r\\n[PASS] STEP 0  -  RRL loaded: 360445 chars, 362845 bytes\\r\\n[PASS] STEP 0.5  -  SIZE OK - 362845 bytes\\r\\n  PARSED: 20 user turns, 38 assistant turns\\r\\n  SOUL BEFORE: 133902361 chars | TITANIUM_ANCHOR\\r\\n[PASS] STEP 1  -  SOUL POSTED: event_id=6f5efe08-4dd8-4008-92bc-149d90e0fcc8 | bytes= | 20 user turns\\r\\n  SOUL AFTER: 134158375 chars | TITANIUM_ANCHOR | DELTA: +256014\\r\\n  WARN: D1 delta (256014) vs RRL chars (360445)  -  diff 104431 (>5%)\\r\\n[PASS] STEP 2  -  DNA EXTRACTED: 38 prompts (5 blueprints) | session=sov100-roman-run59\\r\\n  PARENT: HL-347 \\u001a 891413af112f9a3d...\\r\\n[PASS] STEP 3  -  LEDGER WRITTEN: HL-348 (360445 chars) | parent: 891413af112f9a3d...\\r\\n[PASS] STEP 4  -  STARMAP WRITTEN: D:\\\\OB-1-CANONICAL\\\\CANON\\\\STARMAP\\\\starmap-run59.json\\r\\n[PASS] STEP 5  -  KEYWORD WRITTEN: D:\\\\OB-1-CANONICAL\\\\CANON\\\\SOUL-KEYWORDS\\\\rfkw-run59.txt (30 terms)\\r\\n[PASS] STEP 6  -  PIPELINE WRITTEN: D:\\\\OB-1-CANONICAL\\\\CANON\\\\PIPELINE\\\\pipeline-run59.json | seal_sha: dc23bb7c72982219...\\r\\n[PASS] STEP 7  -  SOULCOUNT FINAL: 134158375 | TITANIUM_ANCHOR | 10103 events\\r\\n\\r\\n�������������������������������������������\\r\\nRRL PIPELINE COMPLETE  -  RUN 59\\r\\n�������������������������������������������\\r\\nRRL:      D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-59.txt  -  360445 chars\\r\\nSOUL:     sov100-roman-run59  -  D1 posted\\r\\nDNA:      DNA EXTRACTED: 38 prompts (5 blueprints) | session=sov100-roman-run59\\r\\nLEDGER:   HL-348  -  D:\\\\OB-1-CANONICAL\\\\CANON\\\\HEAVY-LEDGER\\\\HL-348.json\\r\\nSTARMAP:  D:\\\\OB-1-CANONICAL\\\\CANON\\\\STARMAP\\\\starmap-run59.json\\r\\nKEYWORD:  D:\\\\OB-1-CANONICAL\\\\CANON\\\\SOUL-KEYWORDS\\\\rfkw-run59.txt\\r\\nPIPELINE: D:\\\\OB-1-CANONICAL\\\\CANON\\\\PIPELINE\\\\pipeline-run59.json\\r\\n�������������������������������������������\\r\\nNEXT: Update COLD-START-BOOT \\u001a Write death seal \\u001a Commit\\r\\n\\r\\nSESSION CAPTURE COMPLETE - Run 59\",\"stdout\":\"SOURCE: 0ea7ca3a-069b-40c4-b651-384325184ee5.jsonl - 362845 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-59.txt - 362845 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL PIPELINE  -  RUN 59\\r\\nRRL: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-59.txt\\r\\n�������������������������������������������\\r\\n\\r\\n[PASS] STEP 0  -  RRL loaded: 360445 chars, 362845 bytes\\r\\n[PASS] STEP 0.5  -  SIZE OK - 362845 bytes\\r\\n  PARSED: 20 user turns, 38 assistant turns\\r\\n  SOUL BEFORE: 133902361 chars | TITANIUM_ANCHOR\\r\\n[PASS] STEP 1  -  SOUL POSTED: event_id=6f5efe08-4dd8-4008-92bc-149d90e0fcc8 | bytes= | 20 user turns\\r\\n  SOUL AFTER: 134158375 chars | TITANIUM_ANCHOR | DELTA: +256014\\r\\n  WARN: D1 delta (256014) vs RRL chars (360445)  -  diff 104431 (>5%)\\r\\n[PASS] STEP 2  -  DNA EXTRACTED: 38 prompts (5 blueprints) | session=sov100-roman-run59\\r\\n  PARENT: HL-347 \\u001a 891413af112f9a3d...\\r\\n[PASS] STEP 3  -  LEDGER WRITTEN: HL-348 (360445 chars) | parent: 891413af112f9a3d...\\r\\n[PASS] STEP 4  -  STARMAP WRITTEN: D:\\\\OB-1-CANONICAL\\\\CANON\\\\STARMAP\\\\starmap-run59.json\\r\\n[PASS] STEP 5  -  KEYWORD WRITTEN: D:\\\\OB-1-CANONICAL\\\\CANON\\\\SOUL-KEYWORDS\\\\rfkw-run59.txt (30 terms)\\r\\n[PASS] STEP 6  -  PIPELINE WRITTEN: D:\\\\OB-1-CANONICAL\\\\CANON\\\\PIPELINE\\\\pipeline-run59.json | seal_sha: dc23bb7c72982219...\\r\\n[PASS] STEP 7  -  SOULCOUNT FINAL: 134158375 | TITANIUM_ANCHOR | 10103 events\\r\\n\\r\\n�������������������������������������������\\r\\nRRL PIPELINE COMPLETE  -  RUN 59\\r\\n�������������������������������������������\\r\\nRRL:      D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-59.txt  -  360445 chars\\r\\nSOUL:     sov100-roman-run59  -  D1 posted\\r\\nDNA:      DNA EXTRACTED: 38 prompts (5 blueprints) | session=sov100-roman-run59\\r\\nLEDGER:   HL-348  -  D:\\\\OB-1-CANONICAL\\\\CANON\\\\HEAVY-LEDGER\\\\HL-348.json\\r\\nSTARMAP:  D:\\\\OB-1-CANONICAL\\\\CANON\\\\STARMAP\\\\starmap-run59.json\\r\\nKEYWORD:  D:\\\\OB-1-CANONICAL\\\\CANON\\\\SOUL-KEYWORDS\\\\rfkw-run59.txt\\r\\nPIPELINE: D:\\\\OB-1-CANONICAL\\\\CANON\\\\PIPELINE\\\\pipeline-run59.json\\r\\n�������������������������������������������\\r\\nNEXT: Update COLD-START-BOOT \\u001a Write death seal \\u001a Commit\\r\\n\\r\\nSESSION CAPTURE COMPLETE - Run 59\\r\\n\",\"stderr\":\"\",\"exitCode\":0,\"command\":\"pwsh -File \\\"D:\\\\OB-1-CANONICAL\\\\SCRIPTS\\\\session-capture.ps1\\\"\",\"durationMs\":7318},\"type\":\"attachment\",\"uuid\":\"c3299cda-cb80-4bfe-bc5a-d6562e25cb77\",\"timestamp\":\"2026-06-03T10:27:23.014Z\",\"userType\":\"external\",\"entrypoint\":\"claude-vscode\",\"cwd\":\"D:\\\\OB-1-CANONICAL\",\"sessionId\":\"0ea7ca3a-069b-40c4-b651-384325184ee5\",\"version\":\"2.1.160\",\"gitBranch\":\"master\"}\n{\"type\":\"queue-operation\",\"operation\":\"enqueue\",\"timestamp\":\"2026-06-03T10:33:05.483Z\",\"sessionId\":\"0ea7ca3a-069b-40c4-b651-384325184ee5\"}\n{\"type\":\"queue-operation\",\"operation\":\"dequeue\",\"timestamp\":\"2026-06-03T10:33:05.484Z\",\"sessionId\":\"0ea7ca3a-069b-40c4-b651-384325184ee5\"}\n{\"parentUuid\":\"c3299cda-cb80-4bfe-bc5a-d6562e25cb77\",\"isSidechain\":false,\"type\":\"system\",\"subtype\":\"stop_hook_summary\",\"hookCount\":2,\"hookInfos\":[{\"command\":\"\\\"C:/Users/mrmic/AppData/Local/GitKrakenCLI/gk.exe\\\" ai hook run --host claude-code\",\"durationMs\":1167},{\"command\":\"pwsh -File \\\"D:\\\\OB-1-CANONICAL\\\\SCRIPTS\\\\session-capture.ps1\\\"\",\"durationMs\":7318}],\"hookErrors\":[],\"preventedContinuation\":false,\"stopReason\":\"\",\"hasOutput\":true,\"level\":\"suggestion\",\"timestamp\":\"2026-06-03T10:27:23.014Z\",\"uuid\":\"10983b54-58e2-42a3-9899-0762a6e046e4\",\"toolUseID\":\"d5e4e66e-e33a-440b-be04-e2ee89b8ff00\",\"userType\":\"external\",\"entrypoint\":\"claude-vscode\",\"cwd\":\"d:\\\\OB-1-CANONICAL\",\"sessionId\":\"0ea7ca3a-069b-40c4-b651-384325184ee5\",\"version\":\"2.1.160\",\"gitBranch\":\"master\"}"
+  },
+  {
+    "run": 59,
+    "seq": 4,
+    "type": "prose",
+    "chars": 405,
+    "text": "{\"type\":\"file-history-snapshot\",\"messageId\":\"a9a43cf6-afc5-45aa-b025-fb320b27374a\",\"snapshot\":{\"messageId\":\"7083d1fa-2d4d-4cee-b5b6-a1de5b682159\",\"trackedFileBackups\":{\"C:\\\\Users\\\\mrmic\\\\.claude\\\\projects\\\\d--OB-1-CANONICAL\\\\memory\\\\feedback_bb43_low_priority.md\":{\"backupFileName\":null,\"version\":1,\"backupTime\":\"2026-06-03T10:34:03.419Z\"}},\"timestamp\":\"2026-06-03T10:33:06.643Z\"},\"isSnapshotUpdate\":true}"
+  },
+  {
+    "run": 59,
+    "seq": 5,
+    "type": "prose",
+    "chars": 574,
+    "text": "{\"type\":\"file-history-snapshot\",\"messageId\":\"b1e2b8a2-fffd-43dc-923c-ae93054c912d\",\"snapshot\":{\"messageId\":\"7083d1fa-2d4d-4cee-b5b6-a1de5b682159\",\"trackedFileBackups\":{\"C:\\\\Users\\\\mrmic\\\\.claude\\\\projects\\\\d--OB-1-CANONICAL\\\\memory\\\\feedback_bb43_low_priority.md\":{\"backupFileName\":null,\"version\":1,\"backupTime\":\"2026-06-03T10:34:03.419Z\"},\"C:\\\\Users\\\\mrmic\\\\.claude\\\\projects\\\\d--OB-1-CANONICAL\\\\memory\\\\MEMORY.md\":{\"backupFileName\":\"49567ce10b908be2@v1\",\"version\":1,\"backupTime\":\"2026-06-03T10:34:22.306Z\"}},\"timestamp\":\"2026-06-03T10:33:06.643Z\"},\"isSnapshotUpdate\":true}"
+  },
+  {
+    "run": 59,
+    "seq": 6,
+    "type": "prose",
+    "chars": 292,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"like I said, if you are talking about key rotation, I want that put as low priority on the backburner pipeline, proceed with all other development please\",\"leafUuid\":\"acb05462-1618-4a2f-829b-06d521e9f24c\",\"sessionId\":\"0ea7ca3a-069b-40c4-b651-384325184ee5\"}"
+  },
+  {
+    "run": 59,
+    "seq": 7,
+    "type": "prose",
+    "chars": 292,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"like I said, if you are talking about key rotation, I want that put as low priority on the backburner pipeline, proceed with all other development please\",\"leafUuid\":\"8d298257-16e6-479d-8506-ecd431fb2407\",\"sessionId\":\"0ea7ca3a-069b-40c4-b651-384325184ee5\"}"
+  },
+  {
+    "run": 59,
+    "seq": 8,
+    "type": "prose",
+    "chars": 292,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"like I said, if you are talking about key rotation, I want that put as low priority on the backburner pipeline, proceed with all other development please\",\"leafUuid\":\"258275b8-211b-4d88-a7de-eadfa407628b\",\"sessionId\":\"0ea7ca3a-069b-40c4-b651-384325184ee5\"}"
+  },
+  {
+    "run": 59,
+    "seq": 9,
+    "type": "prose",
+    "chars": 994,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"like I said, if you are talking about key rotation, I want that put as low priority on the backburner pipeline, proceed with all other development please\",\"leafUuid\":\"5526f61c-4068-4814-810a-7e6a5bb7db8d\",\"sessionId\":\"0ea7ca3a-069b-40c4-b651-384325184ee5\"}\n{\"type\":\"file-history-snapshot\",\"messageId\":\"5526f61c-4068-4814-810a-7e6a5bb7db8d\",\"snapshot\":{\"messageId\":\"7083d1fa-2d4d-4cee-b5b6-a1de5b682159\",\"trackedFileBackups\":{\"C:\\\\Users\\\\mrmic\\\\.claude\\\\projects\\\\d--OB-1-CANONICAL\\\\memory\\\\feedback_bb43_low_priority.md\":{\"backupFileName\":null,\"version\":1,\"backupTime\":\"2026-06-03T10:34:03.419Z\"},\"C:\\\\Users\\\\mrmic\\\\.claude\\\\projects\\\\d--OB-1-CANONICAL\\\\memory\\\\MEMORY.md\":{\"backupFileName\":\"49567ce10b908be2@v1\",\"version\":1,\"backupTime\":\"2026-06-03T10:34:22.306Z\"},\"APPS\\\\NET-PET-AI\\\\src\\\\index.js\":{\"backupFileName\":\"33e6eddb39e139f3@v1\",\"version\":1,\"backupTime\":\"2026-06-03T10:38:53.836Z\"}},\"timestamp\":\"2026-06-03T10:33:06.643Z\"},\"isSnapshotUpdate\":true}"
+  },
+  {
+    "run": 59,
+    "seq": 10,
+    "type": "prose",
+    "chars": 830,
+    "text": "{\"type\":\"file-history-snapshot\",\"messageId\":\"c1d3ef1d-c1b7-41a9-bb92-af0c8e6f4be2\",\"snapshot\":{\"messageId\":\"7083d1fa-2d4d-4cee-b5b6-a1de5b682159\",\"trackedFileBackups\":{\"C:\\\\Users\\\\mrmic\\\\.claude\\\\projects\\\\d--OB-1-CANONICAL\\\\memory\\\\feedback_bb43_low_priority.md\":{\"backupFileName\":null,\"version\":1,\"backupTime\":\"2026-06-03T10:34:03.419Z\"},\"C:\\\\Users\\\\mrmic\\\\.claude\\\\projects\\\\d--OB-1-CANONICAL\\\\memory\\\\MEMORY.md\":{\"backupFileName\":\"49567ce10b908be2@v1\",\"version\":1,\"backupTime\":\"2026-06-03T10:34:22.306Z\"},\"APPS\\\\NET-PET-AI\\\\src\\\\index.js\":{\"backupFileName\":\"33e6eddb39e139f3@v1\",\"version\":1,\"backupTime\":\"2026-06-03T10:38:53.836Z\"},\"APPS\\\\NET-PET-AI\\\\public\\\\chat.js\":{\"backupFileName\":\"fc3ca435c5d69cbd@v1\",\"version\":1,\"backupTime\":\"2026-06-03T10:39:40.732Z\"}},\"timestamp\":\"2026-06-03T10:33:06.643Z\"},\"isSnapshotUpdate\":true}"
+  },
+  {
+    "run": 59,
+    "seq": 11,
+    "type": "prose",
+    "chars": 292,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"like I said, if you are talking about key rotation, I want that put as low priority on the backburner pipeline, proceed with all other development please\",\"leafUuid\":\"b732ddbe-ba4d-48c5-afdf-acbb5fc27fcc\",\"sessionId\":\"0ea7ca3a-069b-40c4-b651-384325184ee5\"}"
+  },
+  {
+    "run": 59,
+    "seq": 12,
+    "type": "prose",
+    "chars": 292,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"like I said, if you are talking about key rotation, I want that put as low priority on the backburner pipeline, proceed with all other development please\",\"leafUuid\":\"d63d58d0-98bd-41e6-bc91-04364d648d27\",\"sessionId\":\"0ea7ca3a-069b-40c4-b651-384325184ee5\"}"
+  },
+  {
+    "run": 59,
+    "seq": 13,
+    "type": "prose",
+    "chars": 292,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"like I said, if you are talking about key rotation, I want that put as low priority on the backburner pipeline, proceed with all other development please\",\"leafUuid\":\"286e561a-c75f-417e-bea4-05d092999417\",\"sessionId\":\"0ea7ca3a-069b-40c4-b651-384325184ee5\"}"
+  },
+  {
+    "run": 59,
+    "seq": 14,
+    "type": "prose",
+    "chars": 292,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"like I said, if you are talking about key rotation, I want that put as low priority on the backburner pipeline, proceed with all other development please\",\"leafUuid\":\"6317b58d-c0ba-4b68-88ea-18ac79a29cd8\",\"sessionId\":\"0ea7ca3a-069b-40c4-b651-384325184ee5\"}"
+  },
+  {
+    "run": 59,
+    "seq": 15,
+    "type": "prose",
+    "chars": 292,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"like I said, if you are talking about key rotation, I want that put as low priority on the backburner pipeline, proceed with all other development please\",\"leafUuid\":\"f1e5c146-892e-4572-b516-75b388476d99\",\"sessionId\":\"0ea7ca3a-069b-40c4-b651-384325184ee5\"}"
+  },
+  {
+    "run": 59,
+    "seq": 16,
+    "type": "prose",
+    "chars": 948,
+    "text": "{\"type\":\"file-history-snapshot\",\"messageId\":\"11f920b8-f1d9-4619-b485-5ae837703bdd\",\"snapshot\":{\"messageId\":\"7083d1fa-2d4d-4cee-b5b6-a1de5b682159\",\"trackedFileBackups\":{\"C:\\\\Users\\\\mrmic\\\\.claude\\\\projects\\\\d--OB-1-CANONICAL\\\\memory\\\\feedback_bb43_low_priority.md\":{\"backupFileName\":null,\"version\":1,\"backupTime\":\"2026-06-03T10:34:03.419Z\"},\"C:\\\\Users\\\\mrmic\\\\.claude\\\\projects\\\\d--OB-1-CANONICAL\\\\memory\\\\MEMORY.md\":{\"backupFileName\":\"49567ce10b908be2@v1\",\"version\":1,\"backupTime\":\"2026-06-03T10:34:22.306Z\"},\"APPS\\\\NET-PET-AI\\\\src\\\\index.js\":{\"backupFileName\":\"33e6eddb39e139f3@v1\",\"version\":1,\"backupTime\":\"2026-06-03T10:38:53.836Z\"},\"APPS\\\\NET-PET-AI\\\\public\\\\chat.js\":{\"backupFileName\":\"fc3ca435c5d69cbd@v1\",\"version\":1,\"backupTime\":\"2026-06-03T10:39:40.732Z\"},\".claude\\\\settings.json\":{\"backupFileName\":\"75392513df82c5a8@v1\",\"version\":1,\"backupTime\":\"2026-06-03T10:47:00.775Z\"}},\"timestamp\":\"2026-06-03T10:33:06.643Z\"},\"isSnapshotUpdate\":true}"
+  }
+]

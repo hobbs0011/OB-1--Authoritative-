@@ -442,11 +442,14 @@
     "count": 1
   },
   "context": {
-    "term": "context",
+    "category": "soul+key",
     "runs": [
       null
     ],
-    "count": 3
+    "run": 59,
+    "term": "context",
+    "count": 3,
+    "weight": 67
   },
   "context-bundle": {
     "term": "context-bundle",
@@ -634,11 +637,14 @@
     "count": 1
   },
   "dispatch": {
-    "term": "dispatch",
+    "category": "soul+key",
     "runs": [
       null
     ],
-    "count": 1
+    "run": 59,
+    "term": "dispatch",
+    "count": 1,
+    "weight": 64
   },
   "dna": {
     "term": "dna",
@@ -2605,6 +2611,11 @@
       "run": 58,
       "category": "soul+key",
       "weight": 237
+    },
+    {
+      "weight": 205,
+      "category": "soul+key",
+      "run": 59
     }
   ],
   "written:": [
@@ -3199,6 +3210,11 @@
       "weight": 195,
       "category": "soul+key",
       "run": 50
+    },
+    {
+      "weight": 114,
+      "category": "soul+key",
+      "run": 59
     }
   ],
   "stage": [
@@ -3221,6 +3237,11 @@
       "run": 58,
       "category": "soul+key",
       "weight": 67
+    },
+    {
+      "weight": 89,
+      "category": "soul+key",
+      "run": 59
     }
   ],
   "phase": [
@@ -3268,6 +3289,11 @@
       "run": 58,
       "category": "soul+key",
       "weight": 71
+    },
+    {
+      "weight": 75,
+      "category": "soul+key",
+      "run": 59
     }
   ],
   "async": [
@@ -3315,6 +3341,11 @@
       "run": 57,
       "weight": 58,
       "category": "soul+key"
+    },
+    {
+      "weight": 78,
+      "category": "soul+key",
+      "run": 59
     }
   ],
   "bytes": [
@@ -3473,6 +3504,11 @@
       "run": 58,
       "category": "soul+key",
       "weight": 69
+    },
+    {
+      "weight": 96,
+      "category": "soul+key",
+      "run": 59
     }
   ],
   "death:": [
@@ -3550,6 +3586,34 @@
       "run": 58,
       "category": "soul+key",
       "weight": 65
+    }
+  ],
+  "selectobject": [
+    {
+      "weight": 97,
+      "category": "soul+key",
+      "run": 59
+    }
+  ],
+  "browser": [
+    {
+      "weight": 74,
+      "category": "soul+key",
+      "run": 59
+    }
+  ],
+  "settings": [
+    {
+      "weight": 74,
+      "category": "soul+key",
+      "run": 59
+    }
+  ],
+  "getchilditem": [
+    {
+      "weight": 63,
+      "category": "soul+key",
+      "run": 59
     }
   ]
 }

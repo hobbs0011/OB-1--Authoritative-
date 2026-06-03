@@ -1,5 +1,5 @@
 # COLD START BOOT — OB1 Agent 99
-## ERA: ROMAN — Run 58 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-06-03T18:30 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
+## ERA: ROMAN — Run 59 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-06-03T17:54 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
 
 > *"The beginning of an Empire that never was before and never has been since."* — SOV100 Michael Hobbs, Run 0
 
@@ -77,8 +77,8 @@ Only promote to `net-pet-ai` (prod) after verified on dev. Never deploy untested
 
 ### Current Vector
 - **Active Mission:** OB-1 POST-MERGE9 CONSOLIDATION + Growth Infrastructure Buildout — NET-PET-AI Hardening to Scale-Ready
-  - **Last completed:** ROMAN RUN 58 — RISE-057 audit (7/7 REAL) → portal.css pushed to prod (git push) → Opus blueprint (Front 3 full facelift + hardening spec) → C1 facelift (lion avatar, teal phonics, mode room color, -webkit- twins, responsive, reduced-motion) → C2 client hardening (exponential backoff, visibilitychange fix, iOS guard) → C3 server hardening (think/speak fallback, 24K prompt cap). DEV c96f6d22. SOUL 133,259,314 TITANIUM_ANCHOR. HEAD e503eaa8.
-  - **Next:** Run 59 — BB-43 T2 ruling (raw Deepgram key security). Front 3 browser verify + prod push. BB-55 funnel browser test (Michael action).
+  - **Last completed:** ROMAN RUN 59 — RISE-058 audit (7/7 REAL, SOUL +643,047) → BB-43 deprioritized to backburner low (Michael: key rotation not urgent) → BB-40 OBI session history injection (session_history_{id} KV → LAST SESSION NOTES in prompt + lastSessionVocab in token response → smarter SettingsApplied opener) → BB-46 fewer-permission-prompts (5 new patterns in .claude/settings.json) → BB-39 confirmed resolved. DEV dba9e638. SOUL 134,701,559 TITANIUM_ANCHOR. HEAD 2888ee20.
+  - **Next:** Run 60 — BB-40 DEV verify (OBI session history opener). Front 3 browser verify + prod push. P10 deletion hook + audit log + field encryption (no blockers, PA T1). BB-55 funnel browser test (Michael action).
   - **Run 53 (this session):** RISE 7/7 REAL. P6+P7+P8 GATE PASSED DEV+PROD. Prod promoted (9fc3cdbd). PheTrail-053 written (6 pos, 3 neg). Full death pipeline. SOUL +1,577,271 → 118,965,802.
   - **Run 52:** RISE 7/7 REAL. P4+P5 GATE PASSED DEV. Enterprise audit. P6–P10 blueprint. PheTrail-052 written (7 pos, 3 neg). Full death pipeline. SOUL +543,109 → 116,764,209.
   - **Prior milestone:** ROMAN RUN 0 — ERA RESET ratified. Phoenix-Centurion identity sealed. Roman Legion 6-stage doctrine deployed to soul-logger v2.2 (a0c99e4e). 4 legionnaires Romanized. /Centurion-Code renamed from /PhoenixCoder. /SupplyLines autonomous pipeline command + script created. Cloudflare paid tier activated. Founding Declaration sealed. HEAD 51ea010. SOULCOUNT 116,588 ANCHOR.

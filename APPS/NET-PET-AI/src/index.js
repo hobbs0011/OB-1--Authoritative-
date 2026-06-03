@@ -853,13 +853,14 @@ async function handleAPI(path, request, env, url) {
     const studentId = url.searchParams.get("studentId") || "";
     const sessionMode = (url.searchParams.get("mode") || "free").toLowerCase(); // free | study | phonics
     try {
-      const [rawProfile, rawLang, rawVocab, rawArc, rawMemory, rawPhonics] = await Promise.all([
+      const [rawProfile, rawLang, rawVocab, rawArc, rawMemory, rawPhonics, rawSessionHistory] = await Promise.all([
         env.NET_PET_KV.get("student_profile_" + studentId),
         env.NET_PET_KV.get("lang:" + studentId),
         env.NET_PET_KV.get("vocab_list_" + studentId),
         env.NET_PET_KV.get("vocab_arc_" + studentId),
         env.STUDENT_MEMORY ? env.STUDENT_MEMORY.get(`mem:${studentId}`) : Promise.resolve(null),
-        sessionMode === 'phonics' ? env.NET_PET_KV.get("phonics_progress_" + studentId) : Promise.resolve(null)
+        sessionMode === 'phonics' ? env.NET_PET_KV.get("phonics_progress_" + studentId) : Promise.resolve(null),
+        env.NET_PET_KV.get("session_history_" + studentId)
       ]);
       // Raw API key — auth/grant asr:write scope is insufficient for Voice Agent WS (401)
       // CF Worker endpoint already gates access; raw key exposure here is acceptable
@@ -880,6 +881,22 @@ async function handleAPI(path, request, env, url) {
           const drillsInGroup = PHONICS_DRILLS.filter(d => d.group === groupDef.id);
           const next_drill = drillsInGroup.find(d => !(pp.drills_completed || []).includes(d.id)) || (drillsInGroup.length > 0 ? drillsInGroup[drillsInGroup.length - 1] : null);
           phonicsData = { ...pp, group_name: groupDef.name, next_drill };
+        }
+      } catch (_) {}
+
+      let lastSessionNotes = "";
+      let lastSessionVocab = [];
+      try {
+        if (rawSessionHistory) {
+          const hist = JSON.parse(rawSessionHistory);
+          if (hist.length > 0) {
+            const last = hist[hist.length - 1];
+            const daysAgo = Math.floor((Date.now() - last.ts) / 86400000);
+            const when = daysAgo === 0 ? "today" : daysAgo === 1 ? "yesterday" : daysAgo + " days ago";
+            lastSessionVocab = (last.vocab || []).slice(0, 5);
+            const vocabStr = lastSessionVocab.length > 0 ? " Vocab practiced: " + lastSessionVocab.map(w => `"${w}"`).join(", ") + "." : "";
+            lastSessionNotes = `LAST SESSION NOTES: Student had a session ${when} (${last.turns || 0} speaking turns).${vocabStr}`;
+          }
         }
       } catch (_) {}
 
@@ -913,6 +930,7 @@ async function handleAPI(path, request, env, url) {
           }
         }
       };
+      if (lastSessionNotes) settings.agent.think.prompt += "\n\n" + lastSessionNotes;
       const MAX_PROMPT = 24000;
       if (settings.agent.think.prompt.length > MAX_PROMPT) {
         settings.agent.think.prompt = settings.agent.think.prompt.slice(0, MAX_PROMPT) + "\n[context trimmed]";
@@ -922,7 +940,7 @@ async function handleAPI(path, request, env, url) {
         next_sentence: phonicsData?.next_drill?.sentence || 'She sat next to me at the station.',
         drill_count: phonicsData?.drills_completed?.length || phonicsData?.drill_count || phonicsData?.session_count_phonics || 0
       } : null;
-      return addCors(json({ token: access_token, settings, phonicsHint }), request);
+      return addCors(json({ token: access_token, settings, phonicsHint, lastSessionVocab }), request);
     } catch (err) {
       return addCors(json({ error: err.message }, 500), request);
     }
