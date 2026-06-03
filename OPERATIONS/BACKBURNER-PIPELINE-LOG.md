@@ -255,7 +255,7 @@
 - What: Browser SpeechSynthesis TTS fires alongside Deepgram TTS audio. Fix: suppress as soon as agentWs opens.
 - File: APPS/NET-PET-AI/public/chat.js — fallbackSpeak() L131-143
 
-### BB-39 ! Mode Selection Visibility — OPEN (returning users)
+### BB-39 ! Mode Selection Visibility — DONE (audited Run 054)
 - Status: OPEN
 - What: Returning users (obi_landing_seen set) have no visible mode indicator. Only way to change mode is clicking the 🔮 avatar in header — but no label/hint shows it's clickable on mobile (title tooltip doesn't show). Michael said "no mode selection."
 - Fix: Add current mode name label next to avatar in header, or show a persistent mode chip in the UI that makes clickability obvious.
@@ -411,8 +411,8 @@
 - Score trajectory: 68 → 74 → 80 → 90 → 93 → 94-96
 - Canonical ceiling for CF Workers edge app: ~94-96 (GraphQL/Kafka are arch mismatches, not deficiencies)
 
-### BB-60 !! P9 — Clerk Auth Migration (BLOCKED — Michael human action required)
-- Status: BLOCKED — human action
+### BB-60 !! P9 — Clerk Auth Migration (DONE — Run 054)
+- Status: DONE (2026-06-03)
 - What: Replace hardcoded portal passwords with Clerk free tier (≤10k MAU). Workers middleware. Magic links + session revocation.
 - Michael action required:
   1. Sign up at clerk.com
