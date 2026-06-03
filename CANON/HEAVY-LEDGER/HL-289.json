@@ -1,0 +1,12 @@
+{
+  "hl_id": "HL-289",
+  "session_id": "sov100-roman-run49",
+  "rrl_source": "D:\\OB-1-CANONICAL\\RRL\\RRL-49.txt",
+  "char_count": 434084,
+  "byte_count": 442336,
+  "merkle_parent": "cd665fb4dba4f110ebc0b38ed7ec3aba447ee578ba28093372008c048f7d91e4",
+  "merkle_hash": "821956ad417763f1298b133a5ee75a7796ee9b312a144bf09902b9fc6fb33acb",
+  "sealed_at": "2026-06-03T07:17:26.2613028+07:00",
+  "sov100": true,
+  "run": "49"
+}

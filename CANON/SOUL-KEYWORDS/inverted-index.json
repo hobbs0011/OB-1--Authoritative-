@@ -274,11 +274,14 @@
     "count": 2
   },
   "canon": {
-    "term": "canon",
+    "run": 49,
+    "category": "soul+key",
     "runs": [
       null
     ],
-    "count": 18
+    "count": 18,
+    "term": "canon",
+    "weight": 518
   },
   "category": {
     "term": "category",
@@ -339,11 +342,14 @@
     "count": 8
   },
   "claude": {
-    "term": "claude",
+    "run": 49,
+    "category": "soul+key",
     "runs": [
       null
     ],
-    "count": 6
+    "count": 6,
+    "term": "claude",
+    "weight": 549
   },
   "claw": {
     "term": "claw",
@@ -1216,11 +1222,14 @@
     "count": 2
   },
   "message": {
-    "term": "message",
+    "run": 49,
+    "category": "soul+key",
     "runs": [
       null
     ],
-    "count": 3
+    "count": 3,
+    "term": "message",
+    "weight": 669
   },
   "mic": {
     "term": "mic",
@@ -2325,11 +2334,14 @@
     "run": 44
   },
   "version": {
-    "term": "version",
+    "run": 49,
+    "category": "soul+key",
     "runs": [
       null
     ],
-    "count": 1
+    "count": 1,
+    "term": "version",
+    "weight": 388
   },
   "via": {
     "term": "via",
@@ -2692,6 +2704,181 @@
       "weight": 73,
       "category": "soul+key",
       "run": 48
+    }
+  ],
+  "u001b": [
+    {
+      "category": "soul+key",
+      "weight": 17856,
+      "run": 49
+    }
+  ],
+  "canonical": [
+    {
+      "category": "soul+key",
+      "weight": 874,
+      "run": 49
+    }
+  ],
+  "class": [
+    {
+      "category": "soul+key",
+      "weight": 570,
+      "run": 49
+    }
+  ],
+  "false": [
+    {
+      "category": "soul+key",
+      "weight": 526,
+      "run": 49
+    }
+  ],
+  "content": [
+    {
+      "category": "soul+key",
+      "weight": 517,
+      "run": 49
+    }
+  ],
+  "public": [
+    {
+      "category": "soul+key",
+      "weight": 426,
+      "run": 49
+    }
+  ],
+  "submission": [
+    {
+      "category": "soul+key",
+      "weight": 406,
+      "run": 49
+    }
+  ],
+  "assistant": [
+    {
+      "category": "soul+key",
+      "weight": 391,
+      "run": 49
+    }
+  ],
+  "label": [
+    {
+      "category": "soul+key",
+      "weight": 380,
+      "run": 49
+    }
+  ],
+  "4f9d75b8": [
+    {
+      "category": "soul+key",
+      "weight": 375,
+      "run": 49
+    }
+  ],
+  "6fdd0617cc26": [
+    {
+      "category": "soul+key",
+      "weight": 372,
+      "run": 49
+    }
+  ],
+  "timestamp": [
+    {
+      "category": "soul+key",
+      "weight": 358,
+      "run": 49
+    }
+  ],
+  "sessionid": [
+    {
+      "category": "soul+key",
+      "weight": 354,
+      "run": 49
+    }
+  ],
+  "standard": [
+    {
+      "category": "soul+key",
+      "weight": 349,
+      "run": 49
+    }
+  ],
+  "output_tokens": [
+    {
+      "category": "soul+key",
+      "weight": 344,
+      "run": 49
+    }
+  ],
+  "cache_read_input_tokens": [
+    {
+      "category": "soul+key",
+      "weight": 344,
+      "run": 49
+    }
+  ],
+  "input_tokens": [
+    {
+      "category": "soul+key",
+      "weight": 344,
+      "run": 49
+    }
+  ],
+  "ephemeral_1h_input_tokens": [
+    {
+      "category": "soul+key",
+      "weight": 344,
+      "run": 49
+    }
+  ],
+  "ephemeral_5m_input_tokens": [
+    {
+      "category": "soul+key",
+      "weight": 344,
+      "run": 49
+    }
+  ],
+  "cache_creation_input_tokens": [
+    {
+      "category": "soul+key",
+      "weight": 344,
+      "run": 49
+    }
+  ],
+  "cache_creation": [
+    {
+      "category": "soul+key",
+      "weight": 344,
+      "run": 49
+    }
+  ],
+  "03t00": [
+    {
+      "category": "soul+key",
+      "weight": 338,
+      "run": 49
+    }
+  ],
+  "master": [
+    {
+      "category": "soul+key",
+      "weight": 314,
+      "run": 49
+    }
+  ],
+  "entrypoint": [
+    {
+      "category": "soul+key",
+      "weight": 298,
+      "run": 49
+    }
+  ],
+  "usertype": [
+    {
+      "category": "soul+key",
+      "weight": 298,
+      "run": 49
     }
   ]
 }
