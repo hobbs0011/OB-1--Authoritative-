@@ -309,7 +309,7 @@
 - What: Dialagram API consistently timing out at 30s. Even bare minimum request fails. PA status shows T1 "✓" (key is set) but Dialagram endpoint not responding.
 - Fix: Check Dialagram platform status. Debug with direct curl to dialagram.me/router/v1/chat/completions. If persistent outage, evaluate switching T1 to an alternative provider (Groq Qwen? OpenRouter?) until Dialagram recovers.
 
-### BB-50 !! Keyword Search System Overhaul — OPEN (Run 42)
+### BB-50 !! Keyword Search System Overhaul — DONE (audited Run 054)
 
 - Status: OPEN
 - What: rfkw-run*.txt files ARE being generated each run (CANON/SOUL-KEYWORDS/) but are NOT being used at boot or during research. Current format is too thin (keyword | run# | HL-### | weight=1) to enable real search. OB1 reads raw RRL files sequentially instead of using keyword index. This is the failure mode Michael called out: "why cant you search through keywords?? why do I have keywords if they dont work."
@@ -326,7 +326,7 @@
 - What: Run 43 recovery produced 33 rfkw files from 43-run target. 6 runs missing source artifacts (no RRL/deathseal/pipeline found): 8, 9, 11, 14, 15, 27. Need to either recover from alternate source or tag as permanent gap.
 - Fix: Search alternate RRL variants (RRL-8A, RRL-9b, etc.) + LEDGER cross-reference. If no source found, mark as permanent GAP and document.
 
-- Status: RECOVERY DONE, INTEGRATION IN PROGRESS
+- Status: DONE — Run 054 audit confirmed rfkw-search.ps1 + inverted-index.json + context-bundle wiring all complete
 - **Recovery Complete:**
   - 33 rfkw-run files rebuilt (Runs 0-42, with 6 data gaps: 8, 9, 11, 14, 15, 27)
   - 750 keyword lines total, 306 unique terms
