@@ -1,0 +1,11 @@
+{
+  "run": 55,
+  "rrl_path": "D:\\OB-1-CANONICAL\\RRL\\RRL-55.txt",
+  "ledger_id": "HL-337",
+  "soul_turn_ids": "turn-1,turn-2,turn-4,turn-7,turn-9,turn-15,turn-16,turn-17,turn-18,turn-19",
+  "dna_turn_ids": "seq-3,seq-5,seq-6,seq-8,seq-10,seq-11,seq-12,seq-13,seq-14",
+  "blueprint_locations": "dna-run55.json:seq-3; dna-run55.json:seq-5; dna-run55.json:seq-6; dna-run55.json:seq-8; dna-run55.json:seq-10; dna-run55.json:seq-11; dna-run55.json:seq-12; dna-run55.json:seq-13; dna-run55.json:seq-14",
+  "char_count": 1010060,
+  "merkle_hash": "6bca4d81abe91415ad727048ff87cbf7e4b576316073703d9e050e9c8c9e7cdc",
+  "created_at": "2026-06-03T15:59:26.6676200+07:00"
+}

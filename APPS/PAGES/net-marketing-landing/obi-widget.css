@@ -1,0 +1,292 @@
+/* ═══════════════════════════════════════════════════════════════
+   OBI Widget — NET Gateway Routing Concierge
+   Gospel 444 glass aesthetic
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── FAB ── */
+#obi-fab {
+  position: fixed;
+  width: 64px;
+  height: 64px;
+  bottom: 28px;
+  right: 28px;
+  z-index: 9000;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+  background: #0f0f1a;
+  box-shadow: 0 0 24px rgba(168,85,247,.5);
+  overflow: visible;
+  padding: 0;
+  animation: obi-float 3s ease-in-out infinite;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Rotating conic ring via mask technique */
+#obi-fab::before {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: conic-gradient(#a855f7, #f59e0b, #a855f7);
+  animation: obi-spin 6s linear infinite;
+  z-index: -1;
+}
+
+.obi-fab-avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+
+.obi-badge {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 18px;
+  height: 18px;
+  background: #ef4444;
+  color: #fff;
+  font-size: .65rem;
+  font-family: Inter, sans-serif;
+  font-weight: 700;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  border: 2px solid #0a0a0f;
+}
+
+/* ── Panel ── */
+#obi-panel {
+  position: fixed;
+  bottom: 108px;
+  right: 24px;
+  width: 360px;
+  max-height: 520px;
+  background: rgba(14,14,25,.94);
+  border: 1px solid rgba(168,85,247,.28);
+  border-radius: 20px;
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 8px 48px rgba(0,0,0,.6), 0 0 32px rgba(168,85,247,.2);
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  transform: translateY(12px) scale(.97);
+  pointer-events: none;
+  transition: opacity .25s ease, transform .25s ease;
+  z-index: 8999;
+}
+
+#obi-panel.obi-panel--open {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+/* ── Panel Header ── */
+.obi-panel-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  border-bottom: 1px solid rgba(168,85,247,.15);
+  flex-shrink: 0;
+}
+
+.obi-header-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.obi-header-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.obi-header-title {
+  font-family: Orbitron, sans-serif;
+  font-weight: 700;
+  font-size: .78rem;
+  color: #a855f7;
+  display: block;
+}
+
+.obi-header-status {
+  font-family: Rajdhani, sans-serif;
+  font-size: .72rem;
+  color: #22c55e;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.obi-header-status::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  background: #22c55e;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.obi-close {
+  background: none;
+  border: none;
+  color: rgba(255,255,255,.4);
+  font-size: .9rem;
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 6px;
+  transition: color .15s;
+  line-height: 1;
+}
+
+.obi-close:hover { color: rgba(255,255,255,.8); }
+
+/* ── Messages ── */
+.obi-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 240px;
+}
+
+.obi-messages::-webkit-scrollbar { width: 4px; }
+.obi-messages::-webkit-scrollbar-track { background: transparent; }
+.obi-messages::-webkit-scrollbar-thumb { background: rgba(168,85,247,.4); border-radius: 4px; }
+
+.obi-msg { display: flex; }
+
+.obi-bubble {
+  padding: 10px 14px;
+  border-radius: 14px;
+  font-family: Rajdhani, sans-serif;
+  font-size: .92rem;
+  line-height: 1.5;
+  max-width: 88%;
+  color: #f8f5ff;
+}
+
+.obi-msg.agent .obi-bubble {
+  background: rgba(168,85,247,.12);
+  border: 1px solid rgba(168,85,247,.22);
+  border-bottom-left-radius: 4px;
+}
+
+.obi-msg.user .obi-bubble {
+  background: rgba(245,158,11,.1);
+  border: 1px solid rgba(245,158,11,.22);
+  margin-left: auto;
+  border-bottom-right-radius: 4px;
+}
+
+/* ── Quick-reply chips ── */
+.obi-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 8px 14px;
+  flex-shrink: 0;
+}
+
+.obi-chip {
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(168,85,247,.3);
+  background: rgba(168,85,247,.06);
+  color: rgba(255,255,255,.75);
+  font-family: Rajdhani, sans-serif;
+  font-size: .82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color .16s, color .16s, background .16s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.obi-chip:hover,
+.obi-chip:focus-visible {
+  border-color: #a855f7;
+  color: #fff;
+  background: rgba(168,85,247,.12);
+}
+
+/* ── Input row ── */
+.obi-input-row {
+  display: flex;
+  gap: 8px;
+  padding: 10px 14px;
+  border-top: 1px solid rgba(255,255,255,.07);
+  flex-shrink: 0;
+}
+
+.obi-input {
+  flex: 1;
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(168,85,247,.22);
+  border-radius: 10px;
+  padding: 10px 14px;
+  color: #f8f5ff;
+  font-family: Rajdhani, sans-serif;
+  font-size: .9rem;
+  outline: none;
+  transition: border-color .2s;
+}
+
+.obi-input::placeholder { color: rgba(255,255,255,.35); }
+.obi-input:focus { border-color: #a855f7; }
+
+.obi-send {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border: none;
+  background: linear-gradient(135deg, #a855f7, #f59e0b);
+  border-radius: 50%;
+  cursor: pointer;
+  color: #0a0a0f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform .2s, box-shadow .2s;
+}
+
+.obi-send:hover { transform: scale(1.08); box-shadow: 0 0 14px rgba(168,85,247,.5); }
+
+/* ── Animations ── */
+@keyframes obi-spin  { to { transform: rotate(360deg); } }
+@keyframes obi-float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-6px); }
+}
+
+/* ── Mobile ── */
+@media (max-width: 599px) {
+  #obi-panel {
+    width: calc(100vw - 32px);
+    right: 16px;
+    bottom: 100px;
+    max-height: 72dvh;
+  }
+  #obi-fab { bottom: 24px; right: 20px; }
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  #obi-fab,
+  #obi-fab::before { animation: none !important; }
+}
