@@ -396,11 +396,14 @@
     "count": 2
   },
   "commit": {
-    "term": "commit",
     "runs": [
       null
     ],
-    "count": 6
+    "run": 51,
+    "count": 6,
+    "category": "soul+key",
+    "term": "commit",
+    "weight": 49
   },
   "compacted": {
     "term": "compacted",
@@ -1538,11 +1541,14 @@
     "count": 1
   },
   "phonics": {
-    "term": "phonics",
     "runs": [
       null
     ],
-    "count": 5
+    "run": 51,
+    "count": 5,
+    "category": "soul+key",
+    "term": "phonics",
+    "weight": 36
   },
   "pipeline": {
     "term": "pipeline",
@@ -1798,11 +1804,14 @@
     "count": 7
   },
   "roman": {
-    "term": "roman",
     "runs": [
       null
     ],
-    "count": 3
+    "run": 51,
+    "count": 3,
+    "category": "soul+key",
+    "term": "roman",
+    "weight": 39
   },
   "roman-run": {
     "term": "roman-run",
@@ -2281,11 +2290,14 @@
     "run": 47
   },
   "updated": {
-    "term": "updated",
     "runs": [
       null
     ],
-    "count": 1
+    "run": 51,
+    "count": 1,
+    "category": "soul+key",
+    "term": "updated",
+    "weight": 50
   },
   "upgrade": {
     "term": "upgrade",
@@ -2419,11 +2431,14 @@
     "count": 1
   },
   "wrangler": {
-    "term": "wrangler",
     "runs": [
       null
     ],
-    "count": 1
+    "run": 51,
+    "count": 1,
+    "category": "soul+key",
+    "term": "wrangler",
+    "weight": 42
   },
   "write-host": {
     "term": "write-host",
@@ -2616,6 +2631,11 @@
       "weight": 77,
       "category": "soul+key",
       "run": 48
+    },
+    {
+      "weight": 70,
+      "run": 51,
+      "category": "soul+key"
     }
   ],
   "write": [
@@ -2682,6 +2702,11 @@
       "weight": 97,
       "category": "soul+key",
       "run": 48
+    },
+    {
+      "weight": 55,
+      "run": 51,
+      "category": "soul+key"
     }
   ],
   "after": [
@@ -2710,6 +2735,11 @@
       "weight": 73,
       "category": "soul+key",
       "run": 48
+    },
+    {
+      "weight": 48,
+      "run": 51,
+      "category": "soul+key"
     }
   ],
   "u001b": [
@@ -3054,6 +3084,34 @@
       "weight": 195,
       "category": "soul+key",
       "run": 50
+    }
+  ],
+  "stage": [
+    {
+      "weight": 64,
+      "run": 51,
+      "category": "soul+key"
+    }
+  ],
+  "phase": [
+    {
+      "weight": 53,
+      "run": 51,
+      "category": "soul+key"
+    }
+  ],
+  "deployed": [
+    {
+      "weight": 43,
+      "run": 51,
+      "category": "soul+key"
+    }
+  ],
+  "committed": [
+    {
+      "weight": 41,
+      "run": 51,
+      "category": "soul+key"
     }
   ]
 }

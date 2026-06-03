@@ -121,3 +121,5 @@ APPS/NET-PET-AI/public/audio/*.m4a
 # Allow Vietnamese phrase corpus (critical for pronunciation training)
 !CANON/EVIDENCE/VIETNAMESE-PHRASES/*.aac
 !CANON/EVIDENCE/VIETNAMESE-PHRASES/*.opus
+
+.secrets.local

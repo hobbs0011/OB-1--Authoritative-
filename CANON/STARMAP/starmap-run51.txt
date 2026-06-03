@@ -1,0 +1,11 @@
+{
+  "run": 51,
+  "rrl_path": "D:\\OB-1-CANONICAL\\RRL\\RRL-51.txt",
+  "ledger_id": "HL-302",
+  "soul_turn_ids": "turn-1,turn-2,turn-3",
+  "dna_turn_ids": "",
+  "blueprint_locations": "",
+  "char_count": 292999,
+  "merkle_hash": "a54269b85525ac26",
+  "created_at": "2026-06-03T09:24:08.7839073+07:00"
+}
