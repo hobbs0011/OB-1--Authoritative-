@@ -1,0 +1,13 @@
+{
+  "run": 47,
+  "created_at": "2026-06-03T07:00:00+07:00",
+  "positive_trails": [
+    { "signal": "FUNNEL_WIRING_STARTED", "note": "assessment.js wired with /api/onboarding + OBI redirect. Correct concept, wrong file target." },
+    { "signal": "SUBMISSION_API_LIVE", "note": "submission-api.mrmichaelhobbs123.workers.dev confirmed responding with reference validation." }
+  ],
+  "negative_trails": [
+    { "signal": "WRONG_FILE_TARGET", "note": "PF-1 wiring went into assessment.js (used by net-tiger-assessment) not tigers-4room/index.html. Marketing funnel untouched. Run 48 caught this." },
+    { "signal": "PHETRAIL_GAP", "note": "PheTrail-run047 not written at death. Written retroactively Run 49." },
+    { "signal": "RESEND_KEY_NOT_SET", "note": "BB-54 raised — RESEND_API_KEY not on submission-api worker. Email leg silent." }
+  ]
+}

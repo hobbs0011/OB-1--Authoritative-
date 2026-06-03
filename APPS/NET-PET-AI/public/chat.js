@@ -1498,7 +1498,7 @@ function initTasterBanner(name) {
 function updateModeChip() {
   const chip = document.getElementById('modeChip');
   if (!chip) return;
-  chip.textContent = MODE_LABELS[currentMode] || MODE_LABELS.free;
+  chip.textContent = (MODE_LABELS[currentMode] || MODE_LABELS.free) + ' ▾';
   chip.style.color = MODE_COLORS[currentMode] || MODE_COLORS.free;
   chip.style.borderColor = (MODE_COLORS[currentMode] || MODE_COLORS.free).replace('var(--purple)', 'rgba(168,85,247,0.4)');
 }
