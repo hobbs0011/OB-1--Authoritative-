@@ -1,0 +1,276 @@
+{
+  "_meta": {
+    "version": "1.0.0",
+    "run": 61,
+    "date": "2026-06-03",
+    "author": "Sonnet crunch pass",
+    "soul": "I built the coder to code the coders — a workhorse that carries out systematic blueprints",
+    "rite_of_passage": "RUNG 0 + 0.5 are hand-written (the spark). Every rung 2+ is BUILT BY THE CODER ITSELF. Sonnet applies the patch and deploys. If the coder chokes, log it as a capability boundary. Never rescue with hand-written code above rung 0.5.",
+    "pa_endpoint": "https://phoenix-architecti.mrmichaelhobbs123.workers.dev",
+    "pa_auth_header": "x-pa-auth",
+    "haiku_operator_loop": "while (orders_remain) { ready = orders.filter(o => o.depends_on.every(d => dag[d].status === 'VERIFIED')); fire_wave(ready, drones=10); for each result: if verified → mark DONE, unlock dependents; else if retries_left → requeue; else → apply on_fail }"
+  },
+  "dag": [
+    {
+      "id": "MO-00",
+      "rung": 0,
+      "label": "SEED DEPLOY",
+      "built_by": "HAND (Sonnet bootstrap — the spark)",
+      "depends_on": [],
+      "action": "deploy",
+      "files": {
+        "main": "APPS/PHOENIX-ARCHITECTI/src/index-seed.js → copy to src/index.js",
+        "security": "APPS/PHOENIX-ARCHITECTI/src/security.js (already written)",
+        "wrangler": "APPS/PHOENIX-ARCHITECTI/wrangler.toml (add RATELIMIT KV + bump main=src/index.js)"
+      },
+      "commands": [
+        "cd D:\\OB-1-CANONICAL\\APPS\\PHOENIX-ARCHITECTI",
+        "Copy-Item src/index-seed.js src/index.js -Force",
+        "node --check src/index.js",
+        "node --check src/security.js",
+        "npx wrangler kv namespace create RATELIMIT",
+        "# Add RATELIMIT KV id from output to wrangler.toml",
+        "npx wrangler deploy"
+      ],
+      "verify": "node --check src/index.js + deploy success",
+      "on_fail": "halt",
+      "status": "PENDING"
+    },
+    {
+      "id": "MO-01",
+      "rung": 1,
+      "label": "PROOF OF LIFE",
+      "built_by": "TEST ONLY — no code built",
+      "depends_on": ["MO-00"],
+      "action": "test",
+      "haiku_command": "$r = Invoke-RestMethod -Uri 'https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/execute' -Method POST -ContentType 'application/json' -Headers @{'x-pa-auth'=$env:PA_AUTH} -Body ('{\"task\":\"write a JS function add(a, b) that returns a + b\",\"model\":\"@cf/qwen/qwen2.5-coder-32b-instruct\"}' | ConvertTo-Json -Compress); Write-Host $r.patch",
+      "pass_condition": "$r.patch contains 'function' AND $r.patch.length > 20 AND $r.verified -eq $false",
+      "note": "verified=false is CORRECT at rung 1 — the seed has no verifier yet",
+      "verify": "manual: patch contains valid JS function body",
+      "on_fail": "halt — free CF path is dead, do not proceed",
+      "status": "PENDING"
+    },
+    {
+      "id": "MO-02",
+      "rung": 2,
+      "label": "SELF-VERIFY — the coder builds its own verifier",
+      "built_by": "CODER (via MO-01's live seed)",
+      "depends_on": ["MO-01"],
+      "action": "execute",
+      "endpoint": "/api/execute",
+      "model": "@cf/qwen/qwen2.5-coder-32b-instruct",
+      "task": "Write a complete ES module file: src/verify.js. Export one function: export function verify(code) { ... }. It must: (1) use the 'acorn' npm package (import * as acorn from 'acorn') to parse the code string with { ecmaVersion: 2022, sourceType: 'module' }; (2) catch parse errors and return { ok: false, error: err.message }; (3) return { ok: true } on success. No other exports. No stubs. Full implementation.",
+      "context": "This is a Cloudflare Worker module. acorn will be bundled by wrangler/esbuild from package.json. The function must handle both valid JS and invalid JS. Known-good test: 'function add(a,b){return a+b}' → {ok:true}. Known-bad test: 'function {{{' → {ok:false, error: <message>}.",
+      "target": "APPS/PHOENIX-ARCHITECTI/src/verify.js",
+      "apply": "write patch to APPS/PHOENIX-ARCHITECTI/src/verify.js",
+      "post_apply_commands": [
+        "cd D:\\OB-1-CANONICAL\\APPS\\PHOENIX-ARCHITECTI",
+        "npm install acorn --save",
+        "node --check src/verify.js",
+        "node -e \"import('./src/verify.js').then(m => { const r1 = m.verify('function add(a,b){return a+b}'); const r2 = m.verify('function {{{'); console.log('good:', JSON.stringify(r1), 'bad:', JSON.stringify(r2)); if (!r1.ok || r2.ok) process.exit(1); })\"",
+        "npx wrangler deploy"
+      ],
+      "verify": "node --check + smoke test: good→{ok:true}, bad→{ok:false}",
+      "on_fail": "escalate:opus — log to CANON/PHEROMONES/PheTrail-run61.json as 'qwen-coder cannot write acorn verifier'",
+      "max_retries": 2,
+      "status": "PENDING"
+    },
+    {
+      "id": "MO-03",
+      "rung": 3,
+      "label": "SINGLE HEART — /api/mission (sequential blueprint executor)",
+      "built_by": "CODER (via updated worker with verify.js)",
+      "depends_on": ["MO-02"],
+      "action": "execute",
+      "endpoint": "/api/execute",
+      "model": "@cf/qwen/qwen2.5-coder-32b-instruct",
+      "task": "Write a complete handleMission(request, env) async function for a Cloudflare Worker. It must: (1) parse body as { steps: [{task, context?, target?}], model? }; (2) loop steps sequentially; (3) for each step, call env.AI.run(model || '@cf/qwen/qwen2.5-coder-32b-instruct', { messages: [{role:'system', content: SYSTEM_PROMPT}, {role:'user', content: buildUserMsg(step)}], max_tokens:8192 }) where buildUserMsg concatenates context + target + task; (4) strip markdown fences from result.response; (5) call verify(patch) imported from './verify.js'; (6) carry patch forward as context for next step (prepend 'PREVIOUS STEP RESULT:\\n' + patch); (7) collect {step_index, task, patch, verified, ms} per step; (8) return Response.json({ mission_id: 'MR-'+Date.now(), steps: results, all_verified: results.every(r=>r.verified) }). Export the function as named export. No auth check inside — auth is handled by caller. Imports: import { verify } from './verify.js'; SYSTEM_PROMPT is a const string at top of file with the 6 laws (L01-L06 as in current index.js).",
+      "context": "Current SYSTEM_PROMPT (exact): 'You are Phoenix-Architecti — elite code drone for the OB-1 empire.\\nL01 NO_FABRICATION — never guess. State what is missing.\\nL02 NO_STUBS — full implementation only. No TODO, no placeholders.\\nL03 STRONGEST_VERSION_FIRST — complete, hardened output immediately.\\nL04 RAW_OUTPUT — raw file content ONLY. No markdown fences. No backticks. No explanation. First character = first character of the file.\\nL06 ZERO_DRIFT — answer the task, nothing else.'",
+      "target": "APPS/PHOENIX-ARCHITECTI/src/mission.js",
+      "apply": "write patch to APPS/PHOENIX-ARCHITECTI/src/mission.js",
+      "post_apply_commands": [
+        "node --check src/mission.js",
+        "npx wrangler deploy"
+      ],
+      "smoke_test": {
+        "description": "POST /api/mission with 2-step blueprint — step 2 should receive step 1 output as context",
+        "body": "{\"steps\":[{\"task\":\"write JS function double(n){return n*2}\"},{\"task\":\"now write a test function testDouble() that calls double(5) and throws if result is not 10\"}]}",
+        "pass": "response.all_verified === true AND response.steps[1].patch contains 'double(5)'"
+      },
+      "verify": "node --check + 2-step mission smoke test passes",
+      "on_fail": "escalate:opus",
+      "max_retries": 2,
+      "status": "PENDING"
+    },
+    {
+      "id": "MO-04",
+      "rung": 4,
+      "label": "SWARM — /api/swarm (DAG wave-scheduler, 10 drones)",
+      "built_by": "CODER (via worker with verify + mission)",
+      "depends_on": ["MO-03"],
+      "action": "execute",
+      "endpoint": "/api/execute",
+      "model": "@cf/meta/llama-3.3-70b-instruct",
+      "note": "Using llama-70b for this rung — it is the most complex logic in the build",
+      "task": "Write a complete handleSwarm(request, env) async function for a Cloudflare Worker. It must implement a topological wave-scheduler over a blueprint DAG. Spec: (1) parse body as { blueprint: MarchingOrder[], drones?: number } where MarchingOrder = { id, task, context?, target?, model?, depends_on?: string[], verify?: 'acorn'|'none', on_fail?: string, max_retries?: number }; (2) default drones=10; (3) build a results map: Map<id, {status:'PENDING'|'VERIFIED'|'FAILED', patch:string}>; (4) WAVE LOOP: while any PENDING orders: find wave = orders where status===PENDING AND all depends_on are VERIFIED; if wave empty but PENDING orders remain → return error 'circular dependency or blocked DAG'; cap wave to drones; fire wave with Promise.all: for each order in wave, call env.AI.run(order.model || '@cf/qwen/qwen2.5-coder-32b-instruct', { messages: build_messages(order, results), max_tokens:8192 }); strip fences; run verify(patch) if order.verify==='acorn' else {ok:true}; mark VERIFIED or FAILED; (5) carry context: build_messages resolves depends_on by prepending patches from results map; (6) return { mission_id:'SW-'+Date.now(), waves: waveCount, drones_used: max_wave_size, results: [{id, verified, patch, ms, drone_index}], all_verified: bool }. Import verify from './verify.js'. Export as named export handleSwarm.",
+      "context": "This runs inside a Cloudflare Worker. Promise.all with up to 10 env.AI.run calls is safe on Paid CF (Workers AI neuron allocation). Each env.AI.run call returns { response: string }. The DAG is acyclic — the wave loop terminates. depends_on = [] means no dependencies (fire immediately in wave 1).",
+      "target": "APPS/PHOENIX-ARCHITECTI/src/swarm.js",
+      "apply": "write patch to APPS/PHOENIX-ARCHITECTI/src/swarm.js",
+      "post_apply_commands": [
+        "node --check src/swarm.js",
+        "npx wrangler deploy"
+      ],
+      "smoke_test": {
+        "description": "POST /api/swarm with 3-order DAG (MO-A → MO-C, MO-B → MO-C) — should run in 2 waves",
+        "body": "{\"blueprint\":[{\"id\":\"A\",\"task\":\"write function greet(name){return 'Hello '+name}\",\"depends_on\":[]},{\"id\":\"B\",\"task\":\"write function farewell(name){return 'Bye '+name}\",\"depends_on\":[]},{\"id\":\"C\",\"task\":\"write function greetAndFarewell(name) that calls greet and farewell and returns both\",\"depends_on\":[\"A\",\"B\"]}],\"drones\":10}",
+        "pass": "response.waves === 2 AND response.all_verified === true"
+      },
+      "verify": "node --check + 3-order 2-wave smoke test passes",
+      "on_fail": "escalate:opus",
+      "max_retries": 2,
+      "status": "PENDING"
+    },
+    {
+      "id": "MO-05",
+      "rung": 5,
+      "label": "CORPS — /api/blueprint (Opus gate, paid path)",
+      "built_by": "CODER (swarm fans this out in parallel with MO-06 through MO-09)",
+      "depends_on": ["MO-04"],
+      "action": "execute",
+      "endpoint": "/api/execute",
+      "model": "@cf/qwen/qwen2.5-coder-32b-instruct",
+      "task": "Write a complete handleBlueprint(request, env) async function. It must: (1) call checkAdminKey(request, env) — if non-null return it (401 guard on paid path); (2) parse body as { goal: string, context?: string }; (3) call Anthropic API (env.ANTHROPIC_API_KEY) with model 'claude-opus-4-8' and system prompt 'You are Phoenix-Architecti ARCHITECT. Decompose the goal into an ordered JSON array of marching orders. Each order: { id, task, depends_on, verify, on_fail, max_retries }. Output raw JSON array only. No markdown. No explanation.'; user message = goal + context; (4) parse response as JSON array; (5) return Response.json({ blueprint: parsed, goal, mission_id: 'BP-'+Date.now() }). If ANTHROPIC_API_KEY not set: return 503 { error: 'blueprint requires ANTHROPIC_API_KEY — paid path' }. Import checkAdminKey from './security.js'. Export as named export handleBlueprint.",
+      "target": "APPS/PHOENIX-ARCHITECTI/src/blueprint.js",
+      "apply": "write patch to APPS/PHOENIX-ARCHITECTI/src/blueprint.js",
+      "post_apply_commands": ["node --check src/blueprint.js"],
+      "verify": "node --check",
+      "on_fail": "escalate:opus",
+      "max_retries": 2,
+      "status": "PENDING"
+    },
+    {
+      "id": "MO-06",
+      "rung": 5,
+      "label": "CORPS — /api/status (real health, not key-exists guesses)",
+      "built_by": "CODER (parallel with MO-05, MO-07, MO-08, MO-09)",
+      "depends_on": ["MO-04"],
+      "action": "execute",
+      "endpoint": "/api/execute",
+      "model": "@cf/qwen/qwen2.5-coder-32b-instruct",
+      "task": "Write a complete handleStatus(env) async function for a Cloudflare Worker. It must: (1) probe env.AI.run('@cf/qwen/qwen2.5-coder-32b-instruct', { messages:[{role:'user',content:'ping'}], max_tokens:5 }) with a 5s timeout — record { ok: true/false, ms: latency }; (2) probe env.AI.run('@cf/meta/llama-3.3-70b-instruct', same) with 5s timeout — record same; (3) check env.DB: try a SELECT 1 on phoenix_architecti_log, record { ok, rows }; (4) return Response.json({ version:'1.0.0', rung: 'ASSEMBLED', status:'LIVE', ai: { qwen_coder: {ok,ms}, llama_70b: {ok,ms} }, db: {ok}, bindings: { AI:!!env.AI, DB:!!env.DB, RATELIMIT:!!env.RATELIMIT, CACHE:!!env.CACHE }, drone_capacity: 10 }). withTimeout helper: (promise, ms) => Promise.race([promise, new Promise((_,r)=>setTimeout(()=>r(new Error('timeout')),ms))]). Export as named export handleStatus.",
+      "target": "APPS/PHOENIX-ARCHITECTI/src/status.js",
+      "apply": "write patch to APPS/PHOENIX-ARCHITECTI/src/status.js",
+      "post_apply_commands": ["node --check src/status.js"],
+      "verify": "node --check",
+      "on_fail": "retry",
+      "max_retries": 2,
+      "status": "PENDING"
+    },
+    {
+      "id": "MO-07",
+      "rung": 5,
+      "label": "CORPS — logToD1 (D1 dispatch logging)",
+      "built_by": "CODER (parallel)",
+      "depends_on": ["MO-04"],
+      "action": "execute",
+      "endpoint": "/api/execute",
+      "model": "@cf/qwen/qwen2.5-coder-32b-instruct",
+      "task": "Write a complete ES module: src/logger.js. Export one async function logToD1(env, { action, task, result, tier, ip }). It must: (1) auto-create the phoenix_architecti_log table if not exists (id TEXT PK, tasktype TEXT, taskinput TEXT, result TEXT, createdat TEXT, ip TEXT); (2) INSERT a row with id='PC-'+Date.now()+'-'+random6chars, tasktype=action, taskinput=task.slice(0,2000), result=(result||'').slice(0,4000), createdat=new Date().toISOString(), ip; (3) return the id string; (4) catch all errors, log to console.warn, return null on failure. Import nothing. Export only logToD1.",
+      "target": "APPS/PHOENIX-ARCHITECTI/src/logger.js",
+      "apply": "write patch to APPS/PHOENIX-ARCHITECTI/src/logger.js",
+      "post_apply_commands": ["node --check src/logger.js"],
+      "verify": "node --check",
+      "on_fail": "retry",
+      "max_retries": 2,
+      "status": "PENDING"
+    },
+    {
+      "id": "MO-08",
+      "rung": 5,
+      "label": "CORPS — /api/execute final (with security wiring)",
+      "built_by": "CODER (parallel)",
+      "depends_on": ["MO-04"],
+      "action": "execute",
+      "endpoint": "/api/execute",
+      "model": "@cf/qwen/qwen2.5-coder-32b-instruct",
+      "task": "Write a complete handleExecute(request, env) async function. It must: (1) call checkAdminKey(request, env) — if non-null return it; (2) parse body as { task, context?, target?, model? }; (3) sanitize task with sanitizeInput(task, 10000) and context with sanitizeInput(context, 50000); (4) if sanitized task empty return 400; (5) build messages array with SYSTEM_PROMPT + user content (context + target + task); (6) call env.AI.run(model || '@cf/qwen/qwen2.5-coder-32b-instruct', { messages, max_tokens:8192 }); (7) strip fences from result.response; (8) import and call verify(patch) from './verify.js'; (9) call logToD1(env, { action:'execute', task, result:patch, tier:1, ip }); (10) return Response.json({ patch, verified: verifyResult.ok, verify_error: verifyResult.error||null, model, d1_id, version:'1.0.0' }). Import: checkAdminKey, sanitizeInput from './security.js'; verify from './verify.js'; logToD1 from './logger.js'. SYSTEM_PROMPT const same as before (6 laws). Export handleExecute as named export.",
+      "target": "APPS/PHOENIX-ARCHITECTI/src/execute.js",
+      "apply": "write patch to APPS/PHOENIX-ARCHITECTI/src/execute.js",
+      "post_apply_commands": ["node --check src/execute.js"],
+      "verify": "node --check",
+      "on_fail": "escalate:opus",
+      "max_retries": 2,
+      "status": "PENDING"
+    },
+    {
+      "id": "MO-09",
+      "rung": 5,
+      "label": "CORPS — main index.js assembler (wires all modules + security front gate)",
+      "built_by": "CODER (parallel, but apply AFTER MO-05-08 all VERIFIED)",
+      "depends_on": ["MO-05", "MO-06", "MO-07", "MO-08"],
+      "action": "execute",
+      "endpoint": "/api/execute",
+      "model": "@cf/meta/llama-3.3-70b-instruct",
+      "task": "Write the complete final src/index.js for Phoenix-Architecti v1.0.0. It must import and wire all modules: import { securityMiddleware, getCorsHeaders } from './security.js'; import { handleExecute } from './execute.js'; import { handleMission } from './mission.js'; import { handleSwarm } from './swarm.js'; import { handleBlueprint } from './blueprint.js'; import { handleStatus } from './status.js'. The export default fetch handler must: (1) handle OPTIONS with CORS headers from getCorsHeaders; (2) run securityMiddleware(request, env) on all routes — if it returns a Response, return it (with CORS headers appended); (3) route: POST /api/execute → handleExecute; POST /api/code → handleExecute (back-compat alias); POST /api/mission → handleMission; POST /api/swarm → handleSwarm; POST /api/blueprint → handleBlueprint; GET /api/status → handleStatus; all others → 404. (4) wrap each handler in try/catch → 500 with { error, version:'1.0.0' }; (5) append CORS headers from getCorsHeaders(origin) to every response. Also include the scheduled handler (cron): export const scheduled = async (event, env, ctx) => { await handleExecute({json:()=>Promise.resolve({task:'ping'}),headers:{get:()=>''}}, env) }. Version constant at top: const VERSION = '1.0.0';",
+      "context": "CORS note: getCorsHeaders() from security.js returns headers object. To append: const h = new Headers(resp.headers); Object.entries(getCorsHeaders(origin)).forEach(([k,v]) => h.set(k,v)); return new Response(resp.body, { status:resp.status, headers:h }).",
+      "target": "APPS/PHOENIX-ARCHITECTI/src/index.js",
+      "apply": "OVERWRITE src/index.js with this patch — this is the final assembly",
+      "post_apply_commands": [
+        "node --check src/index.js",
+        "node --check src/execute.js",
+        "node --check src/mission.js",
+        "node --check src/swarm.js",
+        "node --check src/blueprint.js",
+        "node --check src/status.js",
+        "node --check src/verify.js",
+        "node --check src/logger.js",
+        "node --check src/security.js"
+      ],
+      "verify": "ALL 9 node --check PASS",
+      "on_fail": "escalate:opus",
+      "max_retries": 2,
+      "status": "PENDING"
+    },
+    {
+      "id": "MO-10",
+      "rung": 6,
+      "label": "SELF-HOST + 10-DRONE PROOF — the final rite of passage",
+      "built_by": "CODER proves itself — run a 10-order blueprint through the assembled worker",
+      "depends_on": ["MO-09"],
+      "action": "deploy_and_prove",
+      "commands": [
+        "cd D:\\OB-1-CANONICAL\\APPS\\PHOENIX-ARCHITECTI",
+        "npx wrangler deploy",
+        "# PAUSE: confirm with Michael before this deploy"
+      ],
+      "smoke_test_10_drone": {
+        "description": "POST /api/swarm with exactly 10 independent orders (no dependencies — all fire in wave 1). Each writes a small JS utility function. Pass = all 10 verified, waves=1, all_verified=true.",
+        "body_template": {
+          "blueprint": [
+            {"id":"D1","task":"write function add(a,b){return a+b}","depends_on":[]},
+            {"id":"D2","task":"write function subtract(a,b){return a-b}","depends_on":[]},
+            {"id":"D3","task":"write function multiply(a,b){return a*b}","depends_on":[]},
+            {"id":"D4","task":"write function divide(a,b){if(!b)throw new Error('div0');return a/b}","depends_on":[]},
+            {"id":"D5","task":"write function clamp(n,min,max){return Math.min(Math.max(n,min),max)}","depends_on":[]},
+            {"id":"D6","task":"write function capitalize(s){return s?s[0].toUpperCase()+s.slice(1):''}","depends_on":[]},
+            {"id":"D7","task":"write function slugify(s){return s.toLowerCase().replace(/\\s+/g,'-').replace(/[^a-z0-9-]/g,'')}","depends_on":[]},
+            {"id":"D8","task":"write function debounce(fn,ms){let t;return function(...a){clearTimeout(t);t=setTimeout(()=>fn(...a),ms)}}","depends_on":[]},
+            {"id":"D9","task":"write function deepClone(obj){return JSON.parse(JSON.stringify(obj))}","depends_on":[]},
+            {"id":"D10","task":"write function sleep(ms){return new Promise(r=>setTimeout(r,ms))}","depends_on":[]}
+          ],
+          "drones": 10
+        },
+        "pass": "response.waves === 1 AND response.all_verified === true AND response.results.length === 10"
+      },
+      "verify": "10/10 verified, waves=1, all_verified=true — the rite of passage is complete",
+      "on_fail": "log capability boundary to CANON/PHEROMONES/PheTrail-run61.json, report to Michael",
+      "status": "PENDING"
+    }
+  ],
+  "phetrail_on_failure": {
+    "file": "CANON/PHEROMONES/PheTrail-run61.json",
+    "format": "{ label: <MO-id>, summary: <what the coder failed to build>, rung: N, model: <which model was used>, retries: N }"
+  },
+  "deploy_confirmation_required": ["MO-10"],
+  "haiku_operator_script": "OPERATIONS/PHOENIX-CODER-HAIKU-OPERATOR-run61.ps1"
+}
