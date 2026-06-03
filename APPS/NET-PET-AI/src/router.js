@@ -35,7 +35,7 @@ app.get('/api/v1/health', (c) => {
 });
 
 app.get('/api/v1/version', (c) => {
-  return c.json({ worker: 'net-pet-ai', phase: 'P4', score: 93 }, 200, {
+  return c.json({ worker: 'net-pet-ai', phase: 'P5', score: 95 }, 200, {
     'Cache-Control': 'public, max-age=60',
   });
 });
