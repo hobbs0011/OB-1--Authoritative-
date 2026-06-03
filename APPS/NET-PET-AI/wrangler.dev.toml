@@ -49,6 +49,15 @@ class_name = "CommandDO"
 tag = "v1-dev-init"
 new_sqlite_classes = ["PetDO", "LedgerDO", "MemoryDO", "CommandDO"]
 
+[[queues.producers]]
+queue = "net-pet-notifications"
+binding = "net_pet_notifications"
+
+[[queues.consumers]]
+queue = "net-pet-notifications"
+max_batch_size = 10
+max_batch_timeout = 30
+
 [vars]
 APP_NAME = "Natural English Training"
 APP_COACH_NAME = "Obi"

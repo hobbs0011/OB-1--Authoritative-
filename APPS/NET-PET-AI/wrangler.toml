@@ -82,6 +82,10 @@ tag = "v7-drop-session-profile"
 deleted_classes = ["SessionDO", "ProfileDO"]
 new_sqlite_classes = []
 
+[[queues.producers]]
+queue = "net-pet-notifications"
+binding = "net_pet_notifications"
+
 [vars]
 APP_NAME = "Natural English Training"
 APP_COACH_NAME = "Obi"

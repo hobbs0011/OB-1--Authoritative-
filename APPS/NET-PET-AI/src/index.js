@@ -16,6 +16,7 @@ import { getStudentRoute, getModulePrompt, createSnapshot, storeSnapshot, rehydr
 import { computeNextReview, buildVocabContext, generateVocabId } from './vocab-srs.js';
 import { LedgerDO, PetDO, CommandDO, MemoryDO } from './durable_objects.js';
 import { PHONICS_DRILLS, NET_PHONICS_GROUPS } from './phonics-drills.js';
+import { queueEmail } from './email-service.js';
 
 const VERSION = "1.5.0";
 
@@ -320,6 +321,14 @@ async function handleHeartbeat(env) {
   console.log("[HEARTBEAT] " + ts + " | SOUL:" + results.soulGate + "(" + results.soulcount + ") | PC:" + results.pcStatus + " | SELF:" + results.selfStatus);
   if (results.soulGate === "SOUL_DRIFT_ALARM") {
     console.error("[HEARTBEAT] SOUL_DRIFT_ALARM | delta:" + results.soulDelta + " | count:" + results.soulcount + " | lock:" + SOUL_LOCK);
+  }
+  // Alerting — fire-and-forget email on any service failure
+  const anyDown = results.soulGate === "UNREACHABLE" || results.soulGate === "SOUL_DRIFT_ALARM"
+    || results.pcStatus === "UNREACHABLE" || results.selfStatus === "UNREACHABLE";
+  if (anyDown) {
+    const subject = "[NET-PET-AI ALERT] Heartbeat failure " + ts;
+    const html = "<pre>" + JSON.stringify(results, null, 2) + "</pre>";
+    queueEmail(env, { to: "mrmichaelhobbs123@gmail.com", subject, html }).catch(() => {});
   }
 }
 export default {
