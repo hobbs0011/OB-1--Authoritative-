@@ -72,9 +72,9 @@ export default {
 
       // Resend email
       if (env.RESEND_API_KEY) {
-        const magicLink = `https://net-pet-ai-dev.mrmichaelhobbs123.workers.dev/magic-chat.html?studentId=prospect-${studentName.toLowerCase().replace(/[^a-z0-9]/g, '-').slice(0, 20)}-${ref.slice(-6).toLowerCase()}&taster=1`;
+        const magicLink = `https://net-pet-ai.mrmichaelhobbs123.workers.dev/magic-chat.html?studentId=prospect-${studentName.toLowerCase().replace(/[^a-z0-9]/g, '-').slice(0, 20)}-${ref.slice(-6).toLowerCase()}&taster=1`;
         const emailBody = {
-          from: 'OBI <noreply@naturalenglishtraining.com>',
+          from: 'OBI <onboarding@resend.dev>',
           to: ['mrmichaelhobbs123@gmail.com'],
           subject: `New ${assessment} Assessment — ${studentName} (${ref})`,
           html: `
