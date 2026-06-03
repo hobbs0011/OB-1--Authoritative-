@@ -4,6 +4,7 @@ import { handleMission } from './mission.js';
 import { handleSwarm } from './swarm.js';
 import { handleBlueprint } from './blueprint.js';
 import { handleStatus } from './status.js';
+import { handleArt } from './art.js';
 
 const VERSION = '1.0.0';
 
@@ -41,6 +42,8 @@ export default {
         response = await handleBlueprint(request, env);
       } else if (method === 'GET' && pathname === '/api/status') {
         response = await handleStatus(env);
+      } else if (pathname.startsWith('/api/art')) {
+        response = await handleArt(request, env);
       } else {
         response = Response.json({ error: 'Not found', version: VERSION }, { status: 404 });
       }
