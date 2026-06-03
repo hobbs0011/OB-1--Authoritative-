@@ -34,3 +34,11 @@ export const employer_profiles = sqliteTable('employer_profiles', {
   contact_email: text('contact_email'),
   created_at: text('created_at'),
 });
+
+export const audit_log = sqliteTable('audit_log', {
+  id: integer('id').primaryKey({ autoIncrement: true }),
+  ts: integer('ts').notNull(),
+  action: text('action').notNull(),
+  actor: text('actor').notNull(),
+  target: text('target').notNull(),
+});

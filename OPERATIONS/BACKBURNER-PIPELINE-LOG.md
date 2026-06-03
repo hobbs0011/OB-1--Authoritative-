@@ -411,9 +411,21 @@
 - Score trajectory: 68 → 74 → 80 → 90 → 93 → 94-96
 - Canonical ceiling for CF Workers edge app: ~94-96 (GraphQL/Kafka are arch mismatches, not deficiencies)
 
+### BB-60 !! P9 — Clerk Auth Migration (BLOCKED — Michael human action required)
+- Status: BLOCKED — human action
+- What: Replace hardcoded portal passwords with Clerk free tier (≤10k MAU). Workers middleware. Magic links + session revocation.
+- Michael action required:
+  1. Sign up at clerk.com
+  2. Create application "Natural English Training"
+  3. Get publishable key (pk_live_...) + secret key (sk_live_...)
+  4. Provide both keys → PA T1 dispatch P9
+- Resume trigger: Michael provides Clerk publishable key + secret key
+- Added: Run 054 — 2026-06-03 (RISE audit identified as GAP-1)
+
 ---
 
 ## SIGNAL: MOST WANTED (NET's Most Wanted — Updated 2026-05-31 Run 35)
+
 1. ✅ BB-33 Gapless audio v2+v3 FIXED
 2. ✅ BB-35 Landing race condition FIXED
 3. BB-36 Client error telemetry (re-add to chat.js — 30 lines)

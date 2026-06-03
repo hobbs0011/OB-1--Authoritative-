@@ -3,6 +3,8 @@ import legacyWorker, { LedgerDO, PetDO, CommandDO, MemoryDO } from './index.js';
 import { handleQueue } from './queue-consumer.js';
 import { checkQuota } from './quota.js';
 import { withIdempotency } from './idempotency.js';
+import { handleStudentErase } from './deletion.js';
+import { checkAdminKey } from './security.js';
 
 const app = new Hono();
 
@@ -80,6 +82,17 @@ app.post('/api/referral/register', (c) =>
   )
 );
 
+// ── P10: Student data erasure ─────────────────────────────────────────────────
+
+app.delete('/api/student/:id/erase', async (c) => {
+  const authFail = await checkAdminKey(c.req.raw, c.env);
+  if (authFail) return authFail;
+  const studentId = c.req.param('id');
+  if (!studentId) return c.json({ error: 'student id required' }, 400);
+  const result = await handleStudentErase(studentId, c.env);
+  return c.json(result);
+});
+
 // ── /api/v1 routes ───────────────────────────────────────────────────────────
 
 app.get('/api/v1/health', (c) => {
@@ -89,7 +102,7 @@ app.get('/api/v1/health', (c) => {
 });
 
 app.get('/api/v1/version', (c) => {
-  return c.json({ worker: 'net-pet-ai', phase: 'P6+P7', score: 97 }, 200, {
+  return c.json({ worker: 'net-pet-ai', phase: 'P6+P7+P10', score: 97 }, 200, {
     'Cache-Control': 'public, max-age=60',
   });
 });
