@@ -66,11 +66,14 @@
     "count": 3
   },
   "already": {
-    "term": "already",
+    "category": "soul+key",
     "runs": [
       null
     ],
-    "count": 1
+    "count": 1,
+    "weight": 94,
+    "run": 54,
+    "term": "already"
   },
   "answer": {
     "term": "answer",
@@ -2448,11 +2451,14 @@
     "count": 2
   },
   "written": {
-    "term": "written",
+    "category": "soul+key",
     "runs": [
       null
     ],
-    "count": 1
+    "count": 1,
+    "weight": 188,
+    "run": 54,
+    "term": "written"
   },
   "yes": {
     "term": "yes",
@@ -2575,6 +2581,11 @@
       "weight": 69,
       "category": "soul+key",
       "run": 48
+    },
+    {
+      "weight": 379,
+      "run": 54,
+      "category": "soul+key"
     }
   ],
   "written:": [
@@ -2620,6 +2631,11 @@
     {
       "run": 47,
       "weight": 121
+    },
+    {
+      "weight": 190,
+      "run": 54,
+      "category": "soul+key"
     }
   ],
   "titanium_anchor": [
@@ -2642,12 +2658,22 @@
     {
       "run": 47,
       "weight": 99
+    },
+    {
+      "weight": 83,
+      "run": 54,
+      "category": "soul+key"
     }
   ],
   "return": [
     {
       "run": 47,
       "weight": 97
+    },
+    {
+      "weight": 329,
+      "run": 54,
+      "category": "soul+key"
     }
   ],
   "assessment": [
@@ -3021,6 +3047,11 @@
       "weight": 344,
       "category": "soul+key",
       "run": 50
+    },
+    {
+      "weight": 193,
+      "run": 54,
+      "category": "soul+key"
     }
   ],
   "method": [
@@ -3091,6 +3122,11 @@
       "weight": 64,
       "run": 51,
       "category": "soul+key"
+    },
+    {
+      "weight": 118,
+      "run": 54,
+      "category": "soul+key"
     }
   ],
   "phase": [
@@ -3111,6 +3147,104 @@
     {
       "weight": 41,
       "run": 51,
+      "category": "soul+key"
+    }
+  ],
+  "clerk": [
+    {
+      "weight": 134,
+      "run": 54,
+      "category": "soul+key"
+    }
+  ],
+  "secret": [
+    {
+      "weight": 129,
+      "run": 54,
+      "category": "soul+key"
+    }
+  ],
+  "titaniumanchor": [
+    {
+      "weight": 129,
+      "run": 54,
+      "category": "soul+key"
+    }
+  ],
+  "async": [
+    {
+      "weight": 125,
+      "run": 54,
+      "category": "soul+key"
+    }
+  ],
+  "netpetai": [
+    {
+      "weight": 120,
+      "run": 54,
+      "category": "soul+key"
+    }
+  ],
+  "action": [
+    {
+      "weight": 102,
+      "run": 54,
+      "category": "soul+key"
+    }
+  ],
+  "delta": [
+    {
+      "weight": 99,
+      "run": 54,
+      "category": "soul+key"
+    }
+  ],
+  "auditlog": [
+    {
+      "weight": 95,
+      "run": 54,
+      "category": "soul+key"
+    }
+  ],
+  "check": [
+    {
+      "weight": 94,
+      "run": 54,
+      "category": "soul+key"
+    }
+  ],
+  "bytes": [
+    {
+      "weight": 92,
+      "run": 54,
+      "category": "soul+key"
+    }
+  ],
+  "score": [
+    {
+      "weight": 85,
+      "run": 54,
+      "category": "soul+key"
+    }
+  ],
+  "table": [
+    {
+      "weight": 85,
+      "run": 54,
+      "category": "soul+key"
+    }
+  ],
+  "cjson": [
+    {
+      "weight": 85,
+      "run": 54,
+      "category": "soul+key"
+    }
+  ],
+  "routes": [
+    {
+      "weight": 81,
+      "run": 54,
       "category": "soul+key"
     }
   ]
