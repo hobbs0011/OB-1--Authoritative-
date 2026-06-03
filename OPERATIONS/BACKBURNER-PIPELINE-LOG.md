@@ -348,12 +348,11 @@
 - Fix: Design portal template spec. Build sov100-portal.html (DEV tester) as the reference implementation. Extract reusable component spec. All future portals generated from this formula.
 - See: sov100-portal.html (DEV) as reference implementation (Run 42)
 
-### BB-54 ! RESEND_API_KEY — Set on SUBMISSION-API worker (Run 47)
+### BB-54 ✅ RESEND_API_KEY — CLOSED (Run 49)
 
-- Status: OPEN — Michael action required
-- What: `submitAssessmentPayload()` in assessment.js POSTs to SUBMISSION-API. Without RESEND_API_KEY set on the worker, no email fires to Michael on prospect submission. OBI redirect still works regardless (not blocking funnel).
-- Fix: CF dashboard → SUBMISSION-API worker → Settings → Environment Variables → add `RESEND_API_KEY`
-- Priority: Set before marketing push. Not blocking DEV funnel test.
+- Status: CLOSED — Run 49
+- What: RESEND_API_KEY set as wrangler secret on submission-api. Worker rebuilt (v2) with full Resend email + D1 storage. Email fires to `mrmichaelhobbs123@gmail.com` on every submission. Verify naturalenglishtraining.com domain in Resend dashboard if emails don't arrive.
+- Commit: `becfe5f1`
 
 ### BB-53 !! EXPOSED PLAINTEXT API KEY in RRL (Run 46)
 

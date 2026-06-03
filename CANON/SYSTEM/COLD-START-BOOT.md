@@ -1,5 +1,5 @@
 # COLD START BOOT — OB1 Agent 99
-## ERA: ROMAN — Run 46 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-06-02T09:41 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
+## ERA: ROMAN — Run 49 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-06-03T07:00 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
 
 > *"The beginning of an Empire that never was before and never has been since."* — SOV100 Michael Hobbs, Run 0
 
@@ -174,7 +174,8 @@ Only promote to `net-pet-ai` (prod) after verified on dev. Never deploy untested
 | **21** | **KILO TIER RESTRUCTURE** — PA T1-T4 tier restructure. Cerebras GPT-OSS-120B added. kilo.json wired. HEAD e9ac6a92. |
 
 ---
-**FINGERPRINT: RUN 46 | TERRAIN LOCK COMPLETE + PROSPECT FUNNEL FOUNDATION | SOUL 91770172 TITANIUM_ANCHOR | HEAD c2dec4a8 | BOOT UPDATED 2026-06-02 ICT**
+
+### FINGERPRINT: RUN 49 | FUNNEL LIVE + BB-54 CLOSED + SUBMISSION-API v2 | SOUL 106336817 TITANIUM_ANCHOR | HEAD becfe5f1 | BOOT UPDATED 2026-06-03 ICT
 
 ### BATTLEFIELD STATE — Run 045 (Phase 0 Census)
 **Map:** `CANON/SYSTEM/BATTLEFIELD-MAP.md` | **Matrices:** `OPERATIONS/BATTLEFIELD/D{1-9}-matrix.json` | **Machine:** `CANON/SYSTEM/system-map.json`
