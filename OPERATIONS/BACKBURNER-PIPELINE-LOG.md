@@ -396,8 +396,8 @@
 - Fix applied: Flipped enforcement in `handleMemorySave` — present+invalid token → 401 (TOKEN_INVALID). Absent token → allow (backward-compat for portal students without token). No regression for existing students: their stored HMAC tokens remain valid (deterministic, based on studentId + SESSION_SECRET).
 - File: `APPS/NET-PET-AI/src/index.js` at `handleMemorySave` (~line 3544)
 
-### BB-58 ! P1-03 — Secret Hygiene + Gitleaks (OPEN)
-- Status: OPEN
+### BB-58 ! P1-03 — Secret Hygiene + Gitleaks (DONE — Run 054)
+- Status: DONE (2026-06-03)
 - What: Plaintext API keys confirmed in RRL history (BB-53 covers one instance, Run 049 death seal §02 shows Resend key). Two actions:
   1. Add gitleaks pre-commit hook — blocks commits containing key-shaped strings (sk-*, re_*, Bearer tokens)
   2. Rotate any keys that appeared in RRL plaintext (Resend key priority — already set as secret but was shown verbatim in death seal)
