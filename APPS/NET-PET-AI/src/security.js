@@ -246,4 +246,27 @@ async function checkAdminKey(request, env) {
   return null;
 }
 
-export { VERSION, SECURITY, securityMiddleware, sanitizeInput, validateStudentId, checkRateLimit, getCorsHeaders, validateOrigin, checkAdminKey };
+async function logAudit(env, { action, actor = 'system', target = '', ip = '', meta = {} }) {
+  if (!env.SOUL_DB) return;
+  try {
+    await env.SOUL_DB.prepare(
+      `CREATE TABLE IF NOT EXISTS audit_log (
+        id TEXT PRIMARY KEY,
+        ts INTEGER NOT NULL,
+        action TEXT NOT NULL,
+        actor TEXT,
+        target TEXT,
+        ip TEXT,
+        meta TEXT
+      )`
+    ).run();
+    const id = `aud-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+    await env.SOUL_DB.prepare(
+      `INSERT INTO audit_log (id, ts, action, actor, target, ip, meta) VALUES (?, ?, ?, ?, ?, ?, ?)`
+    ).bind(id, Date.now(), action, actor, target, ip, JSON.stringify(meta)).run();
+  } catch (e) {
+    console.warn('AUDIT_LOG_FAIL:', e.message);
+  }
+}
+
+export { VERSION, SECURITY, securityMiddleware, sanitizeInput, validateStudentId, checkRateLimit, getCorsHeaders, validateOrigin, checkAdminKey, logAudit };

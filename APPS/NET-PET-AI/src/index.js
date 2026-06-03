@@ -4,7 +4,7 @@
 // Bindings: SESSIONS (SessionDO), PROFILES (ProfileDO), PETS (PetDO), LEDGER (LedgerDO), ASSETS
 // Secrets: DEEPSEEK_API_KEY, DEEPGRAM_API_KEY
 
-import { securityMiddleware, sanitizeInput, validateStudentId, checkAdminKey } from './security.js';
+import { securityMiddleware, sanitizeInput, validateStudentId, checkAdminKey, logAudit } from './security.js';
 import { logError, logWarn, logInfo } from './logger.js';
 import { extractWeaknesses, buildWeaknessPrompt, buildReEntryPrompt, buildRewardSignals, buildRewardPrompt } from './memory-brain.js';
 import { trackTokens, getUsage } from './token-track.js';
@@ -1321,6 +1321,31 @@ async function handleAPI(path, request, env, url) {
     const newHash = await computeHash(newPw);
     await env.NET_PET_KV.put(`student_pw_${studentId}`, newHash);
     return addCors(json({ ok: true }), request);
+  }
+
+  // ── P10: Student Data Deletion (admin-gated) ────────────────────────────
+  if (path === "/api/admin/student/delete" && method === "DELETE") {
+    const adminBlock = await checkAdminKey(request, env);
+    if (adminBlock) return addCors(adminBlock, request);
+    const studentId = url.searchParams.get("studentId") || "";
+    if (!studentId) return addCors(json({ error: "studentId required" }, 400), request);
+    const idCheck = validateStudentId(studentId);
+    if (!idCheck.valid) return addCors(json({ error: idCheck.error }, 400), request);
+    const kvKeys = [
+      `student_profile_${studentId}`, `lang:${studentId}`, `vocab_list_${studentId}`,
+      `vocab_arc_${studentId}`, `session_history_${studentId}`, `phonics_progress_${studentId}`,
+      `student_pw_${studentId}`, `streak:${studentId}`, `goals:${studentId}`, `subscription:${studentId}`,
+    ];
+    let kvDeleted = 0;
+    for (const k of kvKeys) { try { await env.NET_PET_KV.delete(k); kvDeleted++; } catch (_) {} }
+    let d1Deleted = 0;
+    try {
+      const r = await env.SOUL_DB.prepare(`DELETE FROM soul_prompts WHERE session_id LIKE ?`).bind(`${studentId}%`).run();
+      d1Deleted = r.meta?.changes ?? 0;
+    } catch (_) {}
+    const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
+    await logAudit(env, { action: 'student_delete', actor: 'admin', target: studentId, ip, meta: { kvDeleted, d1Deleted } });
+    return addCors(json({ deleted: true, studentId, kvDeleted, d1Deleted }), request);
   }
 
   // ── v2 Pipeline: Student State + Session Events ───────────────────────────
