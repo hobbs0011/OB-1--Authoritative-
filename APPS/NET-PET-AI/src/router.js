@@ -5,6 +5,7 @@ import { checkQuota } from './quota.js';
 import { withIdempotency } from './idempotency.js';
 import { handleStudentErase } from './deletion.js';
 import { checkAdminKey } from './security.js';
+import { verifyClerkSession } from './auth.js';
 
 const app = new Hono();
 
@@ -82,6 +83,14 @@ app.post('/api/referral/register', (c) =>
   )
 );
 
+// ── P9: Clerk session middleware (soft enforcement — logs userId, does not block) ──
+
+app.use('/api/*', async (c, next) => {
+  const session = await verifyClerkSession(c.req.raw, c.env);
+  if (session) c.set('clerkUserId', session.userId);
+  return next();
+});
+
 // ── P10: Student data erasure ─────────────────────────────────────────────────
 
 app.delete('/api/student/:id/erase', async (c) => {
@@ -102,7 +111,7 @@ app.get('/api/v1/health', (c) => {
 });
 
 app.get('/api/v1/version', (c) => {
-  return c.json({ worker: 'net-pet-ai', phase: 'P6+P7+P10', score: 97 }, 200, {
+  return c.json({ worker: 'net-pet-ai', phase: 'P6+P7+P9+P10', score: 97 }, 200, {
     'Cache-Control': 'public, max-age=60',
   });
 });
