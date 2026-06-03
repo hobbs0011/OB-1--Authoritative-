@@ -364,6 +364,55 @@
 
 ---
 
+---
+
+## HARDENING PIPELINE (Run 050 — 2026-06-03)
+
+### BB-55 ! P0-02 — Funnel Browser Test (DEFERRED — Michael action, end of pipeline)
+- Status: OPEN — deferred per Michael directive (human tests at end, not beginning)
+- What: Open tigers-4room.pages.dev, fill test name, submit form. Confirm:
+  1. Email arrives at mrmichaelhobbs123@gmail.com from onboarding@resend.dev
+  2. Email contains correct student name + magic link
+  3. Magic link opens prod OBI chat (net-pet-ai.mrmichaelhobbs123.workers.dev)
+  4. OBI greets student by name via taster=1 mode
+- Gate: All 4 checks pass = P0-02 DONE = Phase 0 CLOSED
+- Block: Do NOT mark Phase 0 complete until this test is run
+- Related: P0-01 DONE (Run 050) — Resend from-address fixed, magic link points to prod, deployed v2c1c4532
+
+### BB-56 !! P1-01 — Admin Auth Gate (DONE — Run 050)
+- Status: DONE (2026-06-03)
+- What: Admin routes were fully open — anyone with the URL could read error logs, teacher dashboard, all admin stats.
+- Fix applied:
+  - Added `checkAdminKey(request, env)` to `src/security.js` — constant-time comparison, returns 401 on fail, null on pass
+  - Added blanket guard to ALL `/api/admin/*` routes at top of `handleAPI()` in `src/index.js`
+  - Added individual guards to `/api/error-log` (GET) and `/api/teacher/dashboard` (GET)
+  - Imported `checkAdminKey` into index.js
+- Requires: `WORKER_ADMIN_KEY` wrangler secret set on net-pet-ai-dev before deploy (`npx wrangler secret put WORKER_ADMIN_KEY`)
+- Gate: curl /api/error-log → 401 (no key) | curl -H "X-Admin-Key: <key>" /api/error-log → 200
+
+### BB-57 !! P1-02 — HMAC Student Token Enforcement (DONE — Run 050)
+- Status: DONE (2026-06-03)
+- What: Token issuance at onboarding and `_verifyStudentToken()` both existed, but `handleMemorySave` was checking the token and then ALLOWING the write even on invalid — "allowing save (portal student)" log message was masking the gap.
+- Fix applied: Flipped enforcement in `handleMemorySave` — present+invalid token → 401 (TOKEN_INVALID). Absent token → allow (backward-compat for portal students without token). No regression for existing students: their stored HMAC tokens remain valid (deterministic, based on studentId + SESSION_SECRET).
+- File: `APPS/NET-PET-AI/src/index.js` at `handleMemorySave` (~line 3544)
+
+### BB-58 ! P1-03 — Secret Hygiene + Gitleaks (OPEN)
+- Status: OPEN
+- What: Plaintext API keys confirmed in RRL history (BB-53 covers one instance, Run 049 death seal §02 shows Resend key). Two actions:
+  1. Add gitleaks pre-commit hook — blocks commits containing key-shaped strings (sk-*, re_*, Bearer tokens)
+  2. Rotate any keys that appeared in RRL plaintext (Resend key priority — already set as secret but was shown verbatim in death seal)
+- Fix: Create `.git/hooks/pre-commit` with gitleaks detect or simple regex scan; rotate Resend key via `npx wrangler secret put RESEND_API_KEY` on submission-api
+- Gate: Commit containing a fake API key pattern is blocked by hook
+
+### BB-59 !! Hardening Pipeline Registry (DONE — Run 050)
+- Status: DONE (2026-06-03)
+- What: Phase 0-5 full scored roadmap registered as permanent artifact.
+- File: `OPERATIONS/HARDENING-PIPELINE.md`
+- Score trajectory: 68 → 74 → 80 → 90 → 93 → 94-96
+- Canonical ceiling for CF Workers edge app: ~94-96 (GraphQL/Kafka are arch mismatches, not deficiencies)
+
+---
+
 ## SIGNAL: MOST WANTED (NET's Most Wanted — Updated 2026-05-31 Run 35)
 1. ✅ BB-33 Gapless audio v2+v3 FIXED
 2. ✅ BB-35 Landing race condition FIXED

@@ -224,4 +224,26 @@ async function securityMiddleware(request, env) {
   return null;
 }
 
-export { VERSION, SECURITY, securityMiddleware, sanitizeInput, validateStudentId, checkRateLimit, getCorsHeaders, validateOrigin };
+// Constant-time admin key check — guards teacher/admin/internal routes.
+// Set WORKER_ADMIN_KEY wrangler secret. Absent secret = open in dev (safe for local).
+// Returns a 401 Response if auth fails, null if OK (mirrors securityMiddleware pattern).
+async function checkAdminKey(request, env) {
+  const expected = env.WORKER_ADMIN_KEY || '';
+  if (!expected) return null; // dev: no secret configured = allow
+  const provided = request.headers.get('X-Admin-Key') || '';
+  const enc = new TextEncoder();
+  const a = enc.encode(provided.padEnd(128, '\0'));
+  const b = enc.encode(expected.padEnd(128, '\0'));
+  let diff = 0;
+  for (let i = 0; i < a.length; i++) diff |= a[i] ^ b[i];
+  if (diff !== 0) {
+    const origin = request.headers.get('Origin') || '';
+    return new Response(JSON.stringify({ error: 'Unauthorized', hint: 'X-Admin-Key header required' }), {
+      status: 401,
+      headers: { 'Content-Type': 'application/json', ...getCorsHeaders(origin) },
+    });
+  }
+  return null;
+}
+
+export { VERSION, SECURITY, securityMiddleware, sanitizeInput, validateStudentId, checkRateLimit, getCorsHeaders, validateOrigin, checkAdminKey };

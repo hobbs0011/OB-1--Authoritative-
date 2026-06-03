@@ -4,7 +4,7 @@
 // Bindings: SESSIONS (SessionDO), PROFILES (ProfileDO), PETS (PetDO), LEDGER (LedgerDO), ASSETS
 // Secrets: DEEPSEEK_API_KEY, DEEPGRAM_API_KEY
 
-import { securityMiddleware, sanitizeInput, validateStudentId } from './security.js';
+import { securityMiddleware, sanitizeInput, validateStudentId, checkAdminKey } from './security.js';
 import { logError, logWarn, logInfo } from './logger.js';
 import { extractWeaknesses, buildWeaknessPrompt, buildReEntryPrompt, buildRewardSignals, buildRewardPrompt } from './memory-brain.js';
 import { trackTokens, getUsage } from './token-track.js';
@@ -583,7 +583,13 @@ export default {
 
 async function handleAPI(path, request, env, url) {
   const method = request.method;
-  
+
+  // ── P1-01 Admin Auth Gate — all /api/admin/* routes require X-Admin-Key header ──
+  if (path.startsWith('/api/admin/')) {
+    const adminBlock = await checkAdminKey(request, env);
+    if (adminBlock) return addCors(adminBlock, request);
+  }
+
   // Image Generation Proxy — forwards to configured Image Gen URL (Vast.ai, RunPod, or local)
     if (path === "/api/image" && method === "POST") {
       try {
@@ -678,8 +684,10 @@ async function handleAPI(path, request, env, url) {
     }
   }
 
-  // Server Error Log Query — view recent errors from D1
+  // Server Error Log Query — view recent errors from D1 (admin-gated)
   if (path === "/api/error-log" && method === "GET") {
+    const adminBlock = await checkAdminKey(request, env);
+    if (adminBlock) return addCors(adminBlock, request);
     const limit = Math.min(parseInt(url.searchParams.get('limit') || '50'), 200);
     const tag = url.searchParams.get('tag');
     try {
@@ -723,7 +731,11 @@ async function handleAPI(path, request, env, url) {
   if (path === "/api/repeat" && method === "POST") { const body = await request.json(); return handleRepeat(body, env); }
   if (path === "/api/mistakes" && method === "GET") { return handleMistakes(url.searchParams.get("studentId") || "", env); }
   if (path === "/api/parent/report" && method === "GET") { return handleParentReport(url.searchParams.get("studentId") || "", env); }
-  if (path === "/api/teacher/dashboard" && method === "GET") { return handleTeacherDashboard(env); }
+  if (path === "/api/teacher/dashboard" && method === "GET") {
+    const adminBlock = await checkAdminKey(request, env);
+    if (adminBlock) return addCors(adminBlock, request);
+    return handleTeacherDashboard(env);
+  }
 
   // TTS
   if (path === "/api/tts" && method === "POST") { const body = await request.json(); return handleTTS(body, env); }
@@ -3544,7 +3556,8 @@ async function handleMemorySave(body, env, request) {
   if (token) {
     const tokenValid = await _verifyStudentToken(studentId, token, env);
     if (!tokenValid) {
-      console.log(`[MEMORY_SAVE] Invalid token for ${studentId} — allowing save (portal student)`);
+      logWarn('MEMORY_SAVE_TOKEN_INVALID', { studentId }, env);
+      return json({ error: 'Invalid student token', code: 'TOKEN_INVALID' }, 401);
     }
   }
   // Route through STUDENT_MEMORY KV (SESSIONS DO was removed in migration v7)
