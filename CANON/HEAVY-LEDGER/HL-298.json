@@ -1,0 +1,15 @@
+{
+  "hl_id": "HL-298",
+  "session_id": "sov100-roman-run50",
+  "rrl_source": "D:\\OB-1-CANONICAL\\RRL\\RRL-50.txt",
+  "char_count": 1050783,
+  "byte_count": 1064831,
+  "soul_hash": "34bfbf608db68733d93b7cced8973d71fb374a551339a7c9b67bfcc726a37cde",
+  "dna_hash": "b7cf68a956378eefeb698634666bd970a0de17ca0c6a74262e6471c4fce8ba25",
+  "dna_blueprint_count": 1,
+  "merkle_parent": "2724bdd1e86e9f64882a54aa47e58c1db435142f65b6f2ed5f18a8085344cec5",
+  "merkle_hash": "aa344803c1213145f11d1213133d8a7abcd98e312e84638e00965f5b93a3918b",
+  "sealed_at": "2026-06-03T08:20:28.9750099+07:00",
+  "sov100": true,
+  "run": 50
+}
