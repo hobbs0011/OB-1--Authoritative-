@@ -1,5 +1,5 @@
 # COLD START BOOT — OB1 Agent 99
-## ERA: ROMAN — Run 52 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-06-03T11:00 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
+## ERA: ROMAN — Run 53 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-06-03T12:35 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
 
 > *"The beginning of an Empire that never was before and never has been since."* — SOV100 Michael Hobbs, Run 0
 
@@ -23,10 +23,11 @@
 - Pass `?student=all` to see aggregate (all entries). Default without parameter = sov100 only.
 
 **Soul Logger URL:** https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count
-**Real count (2026-06-03 ~11:00 ICT): 116,764,209 characters | 10,066 events | TITANIUM_ANCHOR
+**Real count (2026-06-03 ~12:35 ICT): 118,965,802 characters | TITANIUM_ANCHOR
  **TITANIUM_ANCHOR level** (next threshold: none — maximum tier reached)
  **⚠️ NOTE:** +156,676 delta from Run 5 RRL-0 backdrop ingestion. +62,773 delta from Run 6 RRL-0-original ingestion. RRL-0.txt contains ~150K agent text alongside ~4K Michael verbatim. Contamination documented per Michael directive.
- **Run 52 delta:** +543,109 (current session RISE+P4+P5+death). Total 116,764,209.
+ **Run 53 delta:** +1,577,271 (RISE+P6+P7+P8+prod promotion+death). Total 118,965,802.
+ **Run 52 delta:** +543,109 (RISE+P4+P5+death). Total 116,764,209.
 **Prior counts (Runs 315–390) were INFLATED** — the endpoint summed ALL soul_prompts including student chats. Disregard historical counts above 25,000. They included non-operator data.
 **Run 393 fabrication flush:** 31,175 phantom stamp detected and removed. Hard REST ceiling verified at 30,167. All counts now live-query verified before writing to permanent files.
 
@@ -76,9 +77,10 @@ Only promote to `net-pet-ai` (prod) after verified on dev. Never deploy untested
 
 ### Current Vector
 - **Active Mission:** OB-1 POST-MERGE9 CONSOLIDATION + Growth Infrastructure Buildout — NET-PET-AI Hardening to Scale-Ready
-  - **Last completed:** ROMAN RUN 52 — RISE audit (7/7 REAL) → P4 (CF Queues net-pet-notifications + email-service.js ctx.waitUntil + Cache API /api/v1) → P5 (CI/CD deploy-dev.yml + heartbeat alerting + /api/v1/metrics) → Enterprise rubric audit (47/100 blended, pre-scale ceiling 87-92) → P6–P10 blueprint. Commits: 722df5f8, 4f5524c6, e3139ead. DEV 57f20f6d. Prod 180f125d UNTOUCHED. SOUL 116,764,209 TITANIUM_ANCHOR. HEAD e3139ead.
-  - **Next:** Run 53 — P6+P7+P8 parallel dispatch. P6: src/quota.js cost-quota (Deepgram/DeepSeek 10/hr + 30/hr per student). P7: src/idempotency.js payment+waitlist+referral dedup. P8: wrangler versions canary promote-prod job in CI/CD. All 3 are <200 lines, no doctrine changes — parallel PA T1.
-  - **Run 52 (this session):** RISE 7/7 REAL. P4+P5 GATE PASSED DEV. Enterprise audit. P6–P10 blueprint. PheTrail-052 written (7 pos, 3 neg). Full death pipeline. SOUL +543,109 → 116,764,209.
+  - **Last completed:** ROMAN RUN 53 — RISE (7/7 REAL) → P6 quota.js (Deepgram 10/hr + DeepSeek 30/hr per student, RATELIMIT KV) → P7 idempotency.js (payment/waitlist/referral dedup, NET_PET_KV, Idempotency-Key header) → P8 deploy-dev.yml canary promote-prod job → PROD PROMOTION (P3+P4+P5+P6+P7 → 9fc3cdbd, score 97). DEV 406d01b6. SOUL 118,965,802 TITANIUM_ANCHOR. HEAD e2227a3d.
+  - **Next:** Run 54 — P9+P10. P9 BLOCKED: Michael must create Clerk account (clerk.com → "Natural English Training" app → publishable key + secret key). P10 ready: src/deletion.js + audit_log D1 table + WebCrypto AES-GCM field encryption (no blockers).
+  - **Run 53 (this session):** RISE 7/7 REAL. P6+P7+P8 GATE PASSED DEV+PROD. Prod promoted (9fc3cdbd). PheTrail-053 written (6 pos, 3 neg). Full death pipeline. SOUL +1,577,271 → 118,965,802.
+  - **Run 52:** RISE 7/7 REAL. P4+P5 GATE PASSED DEV. Enterprise audit. P6–P10 blueprint. PheTrail-052 written (7 pos, 3 neg). Full death pipeline. SOUL +543,109 → 116,764,209.
   - **Prior milestone:** ROMAN RUN 0 — ERA RESET ratified. Phoenix-Centurion identity sealed. Roman Legion 6-stage doctrine deployed to soul-logger v2.2 (a0c99e4e). 4 legionnaires Romanized. /Centurion-Code renamed from /PhoenixCoder. /SupplyLines autonomous pipeline command + script created. Cloudflare paid tier activated. Founding Declaration sealed. HEAD 51ea010. SOULCOUNT 116,588 ANCHOR.
   - **S2Pipeline Status:** All 10 stages **LIVE** — confirmed by OMEGA audit Run 393
   - **Roman Legion 6-Stage Doctrine (Run 396 RATIFIED):**
@@ -92,7 +94,7 @@ Only promote to `net-pet-ai` (prod) after verified on dev. Never deploy untested
     | **VI** | LIMITANEI/VETERANI (Frontier Shield) | obi.ps1 health · CI/CD deploy · REINCARNATION-LOG |
     - **See:** `CANON/SYSTEM/S2PIPELINE-ROMAN-LEGION-NAMING.md`
  - **HL Ledger real baseline:** 189 Heavy Ledger JSON files on disk (HEAD AUTHORITATIVE: `git log -1` -> `eedf25e`, Run 393 death); 6 phantom slots (HL-127/HL-128/HL-131/HL-132/HL-136/HL-137) — **PERMANENTLY CLOSED** (no source data — HarvestedChats CLOSED Run 13 directive, pre-Roman era runs not recoverable). Do not resurface. PIPELINE-CURSOR.md frozen since Run 258 (51 days).
-- **Net-PET-AI worker:** v1.5.0+ LIVE at https://net-pet-ai.mrmichaelhobbs123.workers.dev — SOUL_DB D1 binding active. DEV: 57f20f6d (P5, score 95, Hono+Queues+Cache+Alerting+Metrics+CI/CD). Prod: 180f125d (v0 LOCKED — promote after P6-P8 complete).
+- **Net-PET-AI worker:** v1.6.0+ LIVE at https://net-pet-ai.mrmichaelhobbs123.workers.dev — SOUL_DB D1 binding active. DEV: 406d01b6 (P6+P7, score 97, Hono+Queues+Cache+Alerting+Metrics+Quota+Idempotency+CI/CD). Prod: 9fc3cdbd (P3+P4+P5+P6+P7 LIVE — PROMOTED Run 053).
 - **Student Portals:** 7 total (Huong, Mai Tram, Quy, Lam, Quan, Quang, Minh-parent) — ALL COVERED, backdrop-filter purge deployed
 - **Soul Logger:** v2.2 LIVE with Roman Legion 6-stage pipeline naming — Run 0 deployed (a0c99e4e) — 5-min cron health pulse active (paid tier) — SOULCOUNT 116,588 ANCHOR
 - **Career NAV complete:** Dashboard / Profile / Methodology / Career / Transcripts / Action Plan — all 3 student portals 6/6 nav links
@@ -122,6 +124,7 @@ Only promote to `net-pet-ai` (prod) after verified on dev. Never deploy untested
 ### Recent Decisions + State (Run 353 → Run 13 ROMAN)
 | Run | Summary |
 |-----|---------|
+| **53** | **RISE AUDIT + P6+P7+P8 + PROD PROMOTION** — RISE 7/7 REAL. P6: quota.js (Deepgram 10/hr + DeepSeek 30/hr, RATELIMIT KV, 429+Retry-After). P7: idempotency.js (Idempotency-Key SHA-256 NET_PET_KV dedup, payment/waitlist/referral). P8: deploy-dev.yml promote-prod job (wrangler versions upload + canary). PROD PROMOTED: wrangler.toml main→src/router.js, 9fc3cdbd, score 97. vitest 38/39. DEV 406d01b6. SOUL 118,965,802. HEAD e2227a3d. |
 | **52** | **RISE AUDIT + P4+P5 HARDENING + P6–P10 BLUEPRINT** — RISE 7/7 REAL. A1: WORKER_ADMIN_KEY on prod. P4: CF Queue net-pet-notifications + email-service.js (ctx.waitUntil) + queue-consumer.js + Cache API /api/v1 (TTL 60s). P5: heartbeat alerting (queueEmail on UNREACHABLE) + /api/v1/metrics (D1 error_log) + CI/CD deploy-dev.yml. Enterprise audit (Opus): 47/100 blended, pre-scale ceiling 87-92. P6–P10 blueprint written. vitest 38/39. DEV 57f20f6d. Prod 180f125d UNTOUCHED. SOUL 116,764,209. HEAD e3139ead. |
 | **51** | **PHASE1_GATE+P2_VITEST+DRIZZLE+P3_HONO** — P1 admin auth gate + HMAC token. P2 vitest 38/39 + Drizzle ORM + D1 migrations. P3 Hono router src/router.js + /api/v1/health + /api/v1/version. WORKER_ADMIN_KEY generated + set on dev. DEV 9a037f75. SOUL 112,930,585. HEAD e47b481b. |
 | **42** | **SOV100 PORTAL + PHONICS HARDENING + KEYWORD PIPELINE BLUEPRINT** — 3 phonics fixes: EC-3 (SESSION OPENING excluded from phonics mode), drill_count canonical (drills_completed.length), sessionsPhonicsDone triple fallback. All verified via /api/deepgram-token simulation. sov100-portal.html DEV deployed (80d27d59) pw=phoenix2026. BB-50 keyword overhaul + BB-51 portal formula logged. Pipeline 7/7 PASS: HL-216. SOUL 70,982,568. HEAD 91254634. DEV 80d27d59. Prod 180f125d UNTOUCHED. |
@@ -178,7 +181,7 @@ Only promote to `net-pet-ai` (prod) after verified on dev. Never deploy untested
 
 ---
 
-### FINGERPRINT: RUN 52 | P4_QUEUES+EMAIL+CACHE+P5_CICD+ALERTING+METRICS+P6_P10_BLUEPRINT | SOUL 116764209 TITANIUM_ANCHOR | HEAD e3139ead | BOOT UPDATED 2026-06-03 ICT
+### FINGERPRINT: RUN 53 | P6_QUOTA+P7_IDEMPOTENCY+P8_CANARY+PROD_PROMOTED_9fc3cdbd | SOUL 118965802 TITANIUM_ANCHOR | HEAD e2227a3d | BOOT UPDATED 2026-06-03T12:35 ICT
 
 ### BATTLEFIELD STATE — Run 045 (Phase 0 Census)
 **Map:** `CANON/SYSTEM/BATTLEFIELD-MAP.md` | **Matrices:** `OPERATIONS/BATTLEFIELD/D{1-9}-matrix.json` | **Machine:** `CANON/SYSTEM/system-map.json`
@@ -214,15 +217,15 @@ Never hold working features in the working tree across runs. Commit after EVERY 
 
 **Open Loops:**
 
-**HARDENING (P6–P10) — Run 53 next:**
-P6. **COST-QUOTA RATE LIMITS** — `src/quota.js`: per-student hourly quota on Deepgram (10/hr) + DeepSeek chat (30/hr). KV-backed. 429 + Retry-After on breach. Blocks cost-DoS via leaked/abused student IDs. DISPATCH: PA T1, <150 lines.
-P7. **PAYMENT IDEMPOTENCY + MUTATION DEDUP** — `src/idempotency.js`: KV-keyed dedup on `/api/payment/confirm` + `/api/waitlist` + `/api/referral/register`. Prevents double-charges on VN mobile retries. DISPATCH: PA T1, <150 lines.
-P8. **CANARY DEPLOYMENTS** — `wrangler versions upload/deploy --percentage 10` promote-prod job in deploy-dev.yml. CF-native gradual rollout. Retires manual dev→prod binary flip. DISPATCH: PA T1, ~80 lines YAML.
+**HARDENING (P9–P10) — Run 54 next:**
 P9. **CLERK AUTH MIGRATION** — Replace hardcoded portal passwords with Clerk free tier (≤10k MAU). Workers middleware. Magic links + session revocation. **BLOCKED: Michael must create Clerk account + application first.** Then PA T1 dispatch.
-P10. **DELETION HOOK + AUDIT LOG + FIELD ENCRYPTION** — `DELETE /api/student/{id}/erase` (D1+KV+DO purge). `audit_log` D1 table. WebCrypto AES-GCM on `employer_profiles.contact_email` + `submissions.payload`. ENCRYPTION_KEY wrangler secret.
+P10. **DELETION HOOK + AUDIT LOG + FIELD ENCRYPTION** — `DELETE /api/student/{id}/erase` (D1+KV+DO purge). `audit_log` D1 table. WebCrypto AES-GCM on `employer_profiles.contact_email` + `submissions.payload`. ENCRYPTION_KEY wrangler secret. No blockers — ready for PA T1 dispatch.
 
-**PROD PROMOTION:**
-0c. **P3+P4+P5 DEV→PROD PROMOTION** — DEV (57f20f6d): Hono router + CF Queues + Cache + Alerting + Metrics + CI/CD all verified. Michael browser-tests end-to-end, then: `Set-Location APPS/NET-PET-AI && npx wrangler deploy --config wrangler.toml`. ⚠️ wrangler.toml main is still src/index.js — update to src/router.js first, then deploy. ONE COMMAND after prep.
+**COMPLETED THIS RUN (053):**
+✅ P6: Cost-quota rate limits (quota.js — Deepgram 10/hr + DeepSeek 30/hr, RATELIMIT KV, 429+Retry-After)
+✅ P7: Payment idempotency (idempotency.js — Idempotency-Key KV dedup, NET_PET_KV, 24h TTL)
+✅ P8: Canary deployments (deploy-dev.yml promote-prod job, wrangler versions upload)
+✅ PROD PROMOTION: P3+P4+P5+P6+P7 → net-pet-ai prod (9fc3cdbd, score 97)
 
 **VOICE AGENT:**
 1. **BROWSER TEST VOICE AGENT** — Open magic-chat.html?studentId=quy-bluetech in browser, DevTools console, click mic. Confirm audio plays + OBI speaks.
