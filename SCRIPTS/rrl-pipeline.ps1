@@ -256,9 +256,22 @@ Write-Step 3 "PASS" "LEDGER WRITTEN: HL-$nextHL ($rrlChars chars) | parent: $($p
 $starmapDir = "$repo\CANON\STARMAP"
 if (-not (Test-Path $starmapDir)) { New-Item -ItemType Directory -Path $starmapDir -Force | Out-Null }
 
-$starmapPath = "$starmapDir\starmap-run$RunNumber.txt"
-$starmapLine = "$((Get-Date).ToString('yyyy-MM-ddTHH:mm:ss')) | run$RunNumber | HL-$nextHL | $runId | $rrlChars chars | $($recordHash.Substring(0, 16))..."
-$starmapLine | Set-Content $starmapPath -Encoding UTF8
+$starmapPath = "$starmapDir\starmap-run$RunNumber.json"
+$starmapRecord = [ordered]@{
+    run          = $RunNumber
+    rrl_path     = $RRLFile
+    ledger_id    = "HL-$nextHL"
+    session_id   = $runId
+    rrl_chars    = $rrlChars
+    rrl_bytes    = $rrlBytes
+    soul_delta   = if ($delta) { $delta } else { 0 }
+    soul_event_id = if ($soulPost) { $soulPost.event_id } else { "DRYRUN" }
+    dna_count    = if ($dnaCount) { $dnaCount } else { 0 }
+    blueprint_count = if ($dnaBlueprintCount) { $dnaBlueprintCount } else { 0 }
+    sealed_at    = $timestamp
+    merkle_hash  = $recordHash
+}
+$starmapRecord | ConvertTo-Json -Depth 3 | Set-Content $starmapPath -Encoding UTF8
 Write-Step 4 "PASS" "STARMAP WRITTEN: $starmapPath"
 
 # ═══════════════════════════════════════════
