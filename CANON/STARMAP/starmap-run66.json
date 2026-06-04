@@ -1,11 +1,14 @@
 {
-  "run": 66,
-  "rrl_path": "RRL/RRL-66.txt",
-  "ledger_id": "HL-424",
-  "soul_turn_ids": "turn-1,turn-2,turn-3,turn-4,turn-5,turn-6,turn-7,turn-8,turn-9,turn-10",
-  "dna_turn_ids": "",
-  "blueprint_locations": "",
-  "char_count": 19824746,
-  "merkle_hash": "4dbeb30366cf3120470e628193f2f27c899978cbb7de2a815d33029422e7c00b",
-  "created_at": "2026-06-04T11:58:50.9829779+07:00"
+  "run": "66",
+  "rrl_path": "D:\\OB-1-CANONICAL\\RRL\\RRL-66.txt",
+  "ledger_id": "HL-425",
+  "session_id": "sov100-roman-run66",
+  "rrl_chars": 19914931,
+  "rrl_bytes": 19933805,
+  "soul_delta": 0,
+  "soul_event_id": "DRYRUN",
+  "dna_count": 355,
+  "blueprint_count": 60,
+  "sealed_at": "2026-06-04T12:03:39.3131316+07:00",
+  "merkle_hash": "d25c3c41070f070e0bab9309ebff4a5f3b1c4e8d857eb1e96808c1f8ab426a88"
 }
