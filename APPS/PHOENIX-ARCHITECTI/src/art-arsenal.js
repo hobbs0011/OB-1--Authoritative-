@@ -20,13 +20,17 @@ export async function handleArtArsenal(request, env) {
   .clear-btn { padding: 5px 11px; background: transparent; color: rgba(255,255,255,0.35); border: 1px solid rgba(255,255,255,0.15); border-radius: 20px; font-size: 0.75em; cursor: pointer; }
   .clear-btn:hover { color: #fff; border-color: rgba(255,255,255,0.4); }
   .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; padding: 20px; }
-  .card { background: #111120; border: 1px solid rgba(168,85,247,0.25); border-radius: 8px; padding: 14px; cursor: pointer; transition: border-color 0.15s, transform 0.1s; }
+  .card { background: #111120; border: 1px solid rgba(168,85,247,0.25); border-radius: 8px; overflow: hidden; cursor: pointer; transition: border-color 0.15s, transform 0.1s; }
   .card:hover { border-color: rgba(168,85,247,0.6); transform: translateY(-2px); }
-  .card-title { color: #f59e0b; font-size: 0.95em; font-weight: 700; margin-bottom: 4px; line-height: 1.3; }
-  .card-style { color: #a855f7; font-style: italic; font-size: 0.78em; margin-bottom: 8px; opacity: 0.85; }
-  .tag-list { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 8px; }
+  .card-img { width: 100%; aspect-ratio: 16/9; object-fit: cover; background: #0a0a1a; display: block; }
+  .card-img.no-img { aspect-ratio: 3/1; background: linear-gradient(135deg, #0f0f1a, #1a1a2e); display: flex; align-items: center; justify-content: center; color: rgba(168,85,247,0.3); font-size: 2em; }
+  .card-body { padding: 12px 14px 14px; }
+  .card-title { color: #f59e0b; font-size: 0.92em; font-weight: 700; margin-bottom: 3px; line-height: 1.3; }
+  .card-style { color: #a855f7; font-style: italic; font-size: 0.75em; margin-bottom: 7px; opacity: 0.85; }
+  .tag-list { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 7px; }
   .tag { background: rgba(168,85,247,0.18); color: #c084fc; padding: 2px 7px; border-radius: 12px; font-size: 0.68em; font-weight: 600; }
-  .card-notes { font-size: 0.78em; color: rgba(255,255,255,0.45); line-height: 1.4; }
+  .card-notes { font-size: 0.75em; color: rgba(255,255,255,0.4); line-height: 1.4; }
+  .modal-img { width: 100%; border-radius: 6px; margin-bottom: 16px; display: block; background: #0a0a1a; }
   .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 100; justify-content: center; align-items: center; padding: 20px; }
   .modal-overlay.open { display: flex; }
   .modal-box { background: #111120; border: 1px solid rgba(168,85,247,0.4); border-radius: 10px; padding: 28px; max-width: 680px; width: 100%; max-height: 85vh; overflow-y: auto; position: relative; }
@@ -60,6 +64,7 @@ export async function handleArtArsenal(request, env) {
 <div class="modal-overlay" id="modal">
   <div class="modal-box">
     <button class="modal-close" id="modal-close">&times;</button>
+    <img class="modal-img" id="modal-img" style="display:none">
     <div class="modal-title" id="modal-title"></div>
     <div class="modal-style" id="modal-style"></div>
     <div class="modal-field"><strong>Artist</strong><span id="modal-artist"></span></div>
@@ -81,16 +86,36 @@ export async function handleArtArsenal(request, env) {
     return (piece.tags || '').split(',').map(t => t.trim()).filter(Boolean);
   }
 
+  const CDN = 'https://net-art-arsenal.pages.dev';
+  function imgUrl(url) {
+    if (!url) return null;
+    if (url.startsWith('http')) return url;
+    const u = url.replace(/\\\\/g, '/');
+    if (u.startsWith('CANON/ARTWORK/')) return CDN + '/artwork/' + u.slice(14);
+    if (u.startsWith('CANON/GAME-DESIGN/')) return CDN + '/game-design/' + u.slice(18).trim();
+    if (u.startsWith('ASSETS/')) return CDN + '/assets/' + u.slice(7);
+    if (u.startsWith('codex_preview/')) return CDN + '/codex/' + u.slice(14);
+    return null;
+  }
+
   function render(pieces) {
     if (!pieces.length) { gallery.innerHTML = '<div class="no-results">No pieces match your filter.</div>'; badge.textContent = '0 PIECES'; return; }
     badge.textContent = pieces.length + ' PIECES';
-    gallery.innerHTML = pieces.map((p, i) => \`
-      <div class="card" data-i="\${i}" onclick="open_modal(filtered[this.dataset.i])">
-        <div class="card-title">\${esc(p.title)}</div>
-        <div class="card-style">\${esc(p.style || '')}</div>
-        <div class="tag-list">\${tags(p).map(t => \`<span class="tag">\${esc(t)}</span>\`).join('')}</div>
-        <div class="card-notes">\${esc((p.notes || '').substring(0,90))}</div>
-      </div>\`).join('');
+    gallery.innerHTML = pieces.map((p) => {
+      const img = imgUrl(p.url);
+      const imgHtml = img
+        ? \`<img class="card-img" src="\${img}" loading="lazy" onerror="this.style.display='none'">\`
+        : \`<div class="card-img no-img">🐯</div>\`;
+      return \`<div class="card">
+        \${imgHtml}
+        <div class="card-body">
+          <div class="card-title">\${esc(p.title)}</div>
+          <div class="card-style">\${esc(p.style || '')}</div>
+          <div class="tag-list">\${tags(p).map(t => \`<span class="tag">\${esc(t)}</span>\`).join('')}</div>
+          <div class="card-notes">\${esc((p.notes || '').substring(0,80))}</div>
+        </div>
+      </div>\`;
+    }).join('');
     document.querySelectorAll('.card').forEach((el, i) => el.onclick = () => open_modal(pieces[i]));
   }
 
@@ -122,6 +147,9 @@ export async function handleArtArsenal(request, env) {
   function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
   function open_modal(p) {
+    const img = imgUrl(p.url);
+    const mimg = document.getElementById('modal-img');
+    if (img) { mimg.src = img; mimg.style.display = 'block'; } else { mimg.style.display = 'none'; }
     document.getElementById('modal-title').textContent = p.title || '';
     document.getElementById('modal-style').textContent = p.style || '';
     document.getElementById('modal-artist').textContent = p.artist || '';
