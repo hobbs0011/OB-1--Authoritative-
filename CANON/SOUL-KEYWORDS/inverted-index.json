@@ -276,16 +276,23 @@
     ],
     "count": 2
   },
-  "canon": {
-    "run": 49,
-    "category": "soul+key",
-    "runs": [
-      null
-    ],
-    "count": 18,
-    "term": "canon",
-    "weight": 518
-  },
+  "canon": [
+    {
+      "run": 49,
+      "category": "soul+key",
+      "runs": [
+        null
+      ],
+      "count": 18,
+      "term": "canon",
+      "weight": 518
+    },
+    {
+      "run": 64,
+      "category": "soul+key",
+      "weight": 745
+    }
+  ],
   "category": {
     "term": "category",
     "runs": [
@@ -347,16 +354,23 @@
     ],
     "count": 8
   },
-  "claude": {
-    "run": 49,
-    "category": "soul+key",
-    "runs": [
-      null
-    ],
-    "count": 6,
-    "term": "claude",
-    "weight": 549
-  },
+  "claude": [
+    {
+      "run": 49,
+      "category": "soul+key",
+      "runs": [
+        null
+      ],
+      "count": 6,
+      "term": "claude",
+      "weight": 549
+    },
+    {
+      "run": 64,
+      "category": "soul+key",
+      "weight": 1302
+    }
+  ],
   "claw": {
     "term": "claw",
     "runs": [
@@ -1245,16 +1259,23 @@
     ],
     "count": 2
   },
-  "message": {
-    "run": 49,
-    "category": "soul+key",
-    "runs": [
-      null
-    ],
-    "count": 3,
-    "term": "message",
-    "weight": 669
-  },
+  "message": [
+    {
+      "run": 49,
+      "category": "soul+key",
+      "runs": [
+        null
+      ],
+      "count": 3,
+      "term": "message",
+      "weight": 669
+    },
+    {
+      "run": 64,
+      "category": "soul+key",
+      "weight": 1388
+    }
+  ],
   "mic": {
     "term": "mic",
     "runs": [
@@ -1557,16 +1578,23 @@
     ],
     "count": 1
   },
-  "phoenix": {
-    "count": 1,
-    "runs": [
-      null
-    ],
-    "term": "phoenix",
-    "run": 61,
-    "category": "soul+key",
-    "weight": 570
-  },
+  "phoenix": [
+    {
+      "count": 1,
+      "runs": [
+        null
+      ],
+      "term": "phoenix",
+      "run": 61,
+      "category": "soul+key",
+      "weight": 570
+    },
+    {
+      "run": 64,
+      "category": "soul+key",
+      "weight": 603
+    }
+  ],
   "phonics": {
     "runs": [
       null
@@ -1577,16 +1605,23 @@
     "term": "phonics",
     "weight": 36
   },
-  "pipeline": {
-    "term": "pipeline",
-    "weight": 8,
-    "category": "pipeline",
-    "runs": [
-      null
-    ],
-    "count": 12,
-    "run": 44
-  },
+  "pipeline": [
+    {
+      "term": "pipeline",
+      "weight": 8,
+      "category": "pipeline",
+      "runs": [
+        null
+      ],
+      "count": 12,
+      "run": 44
+    },
+    {
+      "run": 64,
+      "category": "soul+key",
+      "weight": 565
+    }
+  ],
   "portal": {
     "weight": 66,
     "category": "soul+key",
@@ -2384,16 +2419,23 @@
     "count": 1,
     "run": 44
   },
-  "version": {
-    "run": 49,
-    "category": "soul+key",
-    "runs": [
-      null
-    ],
-    "count": 1,
-    "term": "version",
-    "weight": 388
-  },
+  "version": [
+    {
+      "run": 49,
+      "category": "soul+key",
+      "runs": [
+        null
+      ],
+      "count": 1,
+      "term": "version",
+      "weight": 388
+    },
+    {
+      "run": 64,
+      "category": "soul+key",
+      "weight": 721
+    }
+  ],
   "via": {
     "term": "via",
     "runs": [
@@ -2843,6 +2885,11 @@
       "weight": 1663,
       "run": 63,
       "category": "soul+key"
+    },
+    {
+      "run": 64,
+      "category": "soul+key",
+      "weight": 2533
     }
   ],
   "canonical": [
@@ -2870,6 +2917,11 @@
       "weight": 990,
       "run": 63,
       "category": "soul+key"
+    },
+    {
+      "run": 64,
+      "category": "soul+key",
+      "weight": 1220
     }
   ],
   "class": [
@@ -2904,6 +2956,11 @@
       "weight": 809,
       "run": 63,
       "category": "soul+key"
+    },
+    {
+      "run": 64,
+      "category": "soul+key",
+      "weight": 964
     }
   ],
   "content": [
@@ -2931,6 +2988,11 @@
       "weight": 870,
       "run": 63,
       "category": "soul+key"
+    },
+    {
+      "run": 64,
+      "category": "soul+key",
+      "weight": 1059
     }
   ],
   "public": [
@@ -2982,6 +3044,11 @@
       "weight": 694,
       "run": 63,
       "category": "soul+key"
+    },
+    {
+      "run": 64,
+      "category": "soul+key",
+      "weight": 817
     }
   ],
   "label": [
@@ -3035,6 +3102,11 @@
       "weight": 665,
       "run": 63,
       "category": "soul+key"
+    },
+    {
+      "run": 64,
+      "category": "soul+key",
+      "weight": 782
     }
   ],
   "sessionid": [
@@ -3062,6 +3134,11 @@
       "weight": 818,
       "run": 63,
       "category": "soul+key"
+    },
+    {
+      "run": 64,
+      "category": "soul+key",
+      "weight": 948
     }
   ],
   "standard": [
@@ -3084,6 +3161,11 @@
       "weight": 622,
       "run": 63,
       "category": "soul+key"
+    },
+    {
+      "run": 64,
+      "category": "soul+key",
+      "weight": 732
     }
   ],
   "output_tokens": [
@@ -3101,6 +3183,11 @@
       "weight": 604,
       "run": 63,
       "category": "soul+key"
+    },
+    {
+      "run": 64,
+      "category": "soul+key",
+      "weight": 712
     }
   ],
   "cache_read_input_tokens": [
@@ -3118,6 +3205,11 @@
       "weight": 604,
       "run": 63,
       "category": "soul+key"
+    },
+    {
+      "run": 64,
+      "category": "soul+key",
+      "weight": 712
     }
   ],
   "input_tokens": [
@@ -3135,6 +3227,11 @@
       "weight": 604,
       "run": 63,
       "category": "soul+key"
+    },
+    {
+      "run": 64,
+      "category": "soul+key",
+      "weight": 712
     }
   ],
   "ephemeral_1h_input_tokens": [
@@ -3152,6 +3249,11 @@
       "weight": 604,
       "run": 63,
       "category": "soul+key"
+    },
+    {
+      "run": 64,
+      "category": "soul+key",
+      "weight": 712
     }
   ],
   "ephemeral_5m_input_tokens": [
@@ -3169,6 +3271,11 @@
       "weight": 604,
       "run": 63,
       "category": "soul+key"
+    },
+    {
+      "run": 64,
+      "category": "soul+key",
+      "weight": 712
     }
   ],
   "cache_creation_input_tokens": [
@@ -3186,6 +3293,11 @@
       "weight": 604,
       "run": 63,
       "category": "soul+key"
+    },
+    {
+      "run": 64,
+      "category": "soul+key",
+      "weight": 712
     }
   ],
   "cache_creation": [
@@ -3208,6 +3320,11 @@
       "weight": 604,
       "run": 63,
       "category": "soul+key"
+    },
+    {
+      "run": 64,
+      "category": "soul+key",
+      "weight": 712
     }
   ],
   "03t00": [
@@ -3242,6 +3359,11 @@
       "weight": 592,
       "run": 63,
       "category": "soul+key"
+    },
+    {
+      "run": 64,
+      "category": "soul+key",
+      "weight": 703
     }
   ],
   "entrypoint": [
@@ -3259,6 +3381,11 @@
       "weight": 571,
       "run": 63,
       "category": "soul+key"
+    },
+    {
+      "run": 64,
+      "category": "soul+key",
+      "weight": 669
     }
   ],
   "usertype": [
@@ -3276,6 +3403,11 @@
       "weight": 571,
       "run": 63,
       "category": "soul+key"
+    },
+    {
+      "run": 64,
+      "category": "soul+key",
+      "weight": 669
     }
   ],
   "request": [
@@ -3326,6 +3458,11 @@
       "weight": 571,
       "run": 63,
       "category": "soul+key"
+    },
+    {
+      "run": 64,
+      "category": "soul+key",
+      "weight": 669
     }
   ],
   "gitbranch": [
@@ -3338,6 +3475,11 @@
       "weight": 571,
       "run": 63,
       "category": "soul+key"
+    },
+    {
+      "run": 64,
+      "category": "soul+key",
+      "weight": 669
     }
   ],
   "issidechain": [
@@ -3350,6 +3492,11 @@
       "weight": 571,
       "run": 63,
       "category": "soul+key"
+    },
+    {
+      "run": 64,
+      "category": "soul+key",
+      "weight": 671
     }
   ],
   "parentuuid": [
@@ -3362,6 +3509,11 @@
       "weight": 571,
       "run": 63,
       "category": "soul+key"
+    },
+    {
+      "run": 64,
+      "category": "soul+key",
+      "weight": 671
     }
   ],
   "vscode": [
@@ -3379,6 +3531,11 @@
       "weight": 599,
       "run": 63,
       "category": "soul+key"
+    },
+    {
+      "run": 64,
+      "category": "soul+key",
+      "weight": 703
     }
   ],
   "tool_use": [
@@ -3391,6 +3548,11 @@
       "weight": 474,
       "run": 63,
       "category": "soul+key"
+    },
+    {
+      "run": 64,
+      "category": "soul+key",
+      "weight": 553
     }
   ],
   "run50": [

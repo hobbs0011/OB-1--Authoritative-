@@ -1,0 +1,21 @@
+{
+  "run_number": 64,
+  "executed_at": "2026-06-04T08:10:24.5512577+07:00",
+  "head_sha": "ae95fab2",
+  "rrl_path": "D:\\OB-1-CANONICAL\\RRL\\RRL-64.txt",
+  "rrl_chars": 16077374,
+  "rrl_bytes": 16100966,
+  "rrl_fidelity": "REAL",
+  "session_id": "sov100-roman-run64",
+  "soul_event_id": "f2fb07fb-e8d0-44e8-bf41-8e8f44958d6b",
+  "soulcount": 156349973,
+  "soul_level": "TITANIUM_ANCHOR",
+  "soul_count_before": 156342233,
+  "soul_delta": 7740,
+  "dna_count": 78,
+  "dna_blueprint_count": 18,
+  "dna_status": "REAL",
+  "ledger_id": "HL-398",
+  "result": "COMPLETE",
+  "notes": "Run 064 = short bridging death run. Kilo 5 days remaining. Art Arsenal P0 next."
+}
