@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Phoenix rising — wings spread -->
+  <path d="M32 62C16 62 4 50 4 34c0-12 7-22 17-27"/>
+  <path d="M32 62c16 0 28-12 28-28 0-12-7-22-17-27"/>
+  <path d="M32 34c0-8 4-16 10-22"/>
+  <path d="M32 34c0-8-4-16-10-22"/>
+  <path d="M32 62V34"/>
+  <path d="M10 20c4-6 10-10 16-12"/>
+  <path d="M54 20c-4-6-10-10-16-12"/>
+  <circle cx="32" cy="30" r="3" fill="#f59e0b" stroke="none" opacity="0.6"/>
+</svg>
