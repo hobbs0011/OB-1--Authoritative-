@@ -37,7 +37,47 @@ export async function handleExecute(request, env) {
     { role: 'user', content: parts.join('\n\n') },
   ];
 
-  const aiResult = await env.AI.run(model || '@cf/qwen/qwen2.5-coder-32b-instruct', { messages, max_tokens: 8192 });
+  let aiResult;
+  let usedModel = model || '@cf/qwen/qwen2.5-coder-32b-instruct';
+  let tierUsed = 10; // Default to CF-Qwen tier
+
+  // Try Kilo T1 first if DIALAGRAM_API_KEY is available
+  if (env.DIALAGRAM_API_KEY) {
+    try {
+      const kiloResponse = await fetch(`https://phoenix-architecti.mrmichaelhobbs123.workers.dev/v1/chat/completions`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${env.DIALAGRAM_API_KEY}`
+        },
+        body: JSON.stringify({
+          model: 'kilo-auto/free',
+          messages: messages,
+          max_tokens: 8192
+        })
+      });
+
+      if (kiloResponse.ok) {
+        const kiloJson = await kiloResponse.json();
+        if (kiloJson.choices && kiloJson.choices[0] && kiloJson.choices[0].message && kiloJson.choices[0].message.content) {
+          aiResult = {
+            response: kiloJson.choices[0].message.content
+          };
+          usedModel = 'kilo-auto/free';
+          tierUsed = 1; // Kilo tier
+        }
+      }
+    } catch (error) {
+      // Fall through to CF-Qwen if Kilo fails
+    }
+  }
+
+  // Fallback to CF-Qwen if Kilo not available or failed
+  if (!aiResult) {
+    aiResult = await env.AI.run(usedModel, { messages, max_tokens: 8192 });
+    // tierUsed remains 10 for CF-Qwen
+  }
+
   const patch = stripFences(aiResult.response ?? '');
   const verifyResult = verify(patch);
 
@@ -45,7 +85,7 @@ export async function handleExecute(request, env) {
     action: 'execute',
     task,
     result: patch,
-    tier: 1,
+    tier: tierUsed,
     ip: request.headers.get('CF-Connecting-IP') || '',
   });
 
@@ -53,7 +93,7 @@ export async function handleExecute(request, env) {
     patch,
     verified: verifyResult.ok,
     verify_error: verifyResult.error || null,
-    model: model || '@cf/qwen/qwen2.5-coder-32b-instruct',
+    model: usedModel,
     d1_id,
     version: '1.0.0',
   });

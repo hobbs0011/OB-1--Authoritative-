@@ -1,9 +1,77 @@
 import { checkAdminKey } from './security.js';
 
+const DS_URL = 'https://api.deepseek.com/v1/chat/completions';
+const DS_MODEL = 'deepseek-chat';
+
+async function dsAgent(apiKey, systemPrompt, userPrompt) {
+  const res = await fetch(DS_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
+    body: JSON.stringify({
+      model: DS_MODEL,
+      messages: [{ role: 'system', content: systemPrompt }, { role: 'user', content: userPrompt }],
+      max_tokens: 512,
+      response_format: { type: 'json_object' },
+    }),
+  });
+  const j = await res.json();
+  try { return JSON.parse(j.choices[0].message.content); } catch { return {}; }
+}
+
 export async function handleArt(request, env) {
   const url = new URL(request.url);
   const path = url.pathname;
   const method = request.method;
+
+  if (method === 'POST' && path === '/api/art/analyze') {
+    try {
+      const body = await request.json().catch(() => null);
+      if (!body || typeof body.content !== 'string') {
+        return Response.json({ error: 'content required' }, { status: 400 });
+      }
+      const { content, source = 'unknown', save = false } = body;
+      const snippet = content.slice(0, 4000);
+      const apiKey = env.DEEPSEEK_API_KEY;
+      if (!apiKey) return Response.json({ error: 'DEEPSEEK_API_KEY not set' }, { status: 500 });
+
+      const SYS = 'You are an expert art analyst. Respond ONLY with valid JSON matching the requested structure.';
+
+      const [r1, r2, r3] = await Promise.all([
+        dsAgent(apiKey, SYS, `From this art dossier (source: ${source}), extract: {"title":"...","artist":"...","style":"..."}. Text:\n${snippet}`),
+        dsAgent(apiKey, SYS, `From this art dossier (source: ${source}), extract: {"description":"...","tags":"comma,separated,tags"}. Text:\n${snippet}`),
+        dsAgent(apiKey, SYS, `From this art dossier (source: ${source}), extract: {"url":"...","notes":"..."}. Text:\n${snippet}`),
+      ]);
+
+      const piece = {
+        title: r1.title || source,
+        artist: r1.artist || null,
+        style: r1.style || null,
+        description: r2.description || null,
+        tags: r2.tags || null,
+        url: r3.url || null,
+        notes: r3.notes || null,
+      };
+
+      let saved = false;
+      let id;
+      if (save) {
+        id = 'ART-' + Date.now() + '-' + Math.random().toString(36).slice(2, 6).toUpperCase();
+        const added_at = new Date().toISOString();
+        await env.DB.prepare(`CREATE TABLE IF NOT EXISTS art_registry (
+          id TEXT PRIMARY KEY, title TEXT NOT NULL, artist TEXT, style TEXT,
+          description TEXT, tags TEXT, url TEXT, notes TEXT, added_at TEXT
+        )`).run();
+        await env.DB.prepare(
+          `INSERT INTO art_registry (id,title,artist,style,description,tags,url,notes,added_at) VALUES (?,?,?,?,?,?,?,?,?)`
+        ).bind(id, piece.title, piece.artist, piece.style, piece.description, piece.tags, piece.url, piece.notes, added_at).run();
+        saved = true;
+      }
+
+      return Response.json({ piece, saved, id: id || null });
+    } catch (err) {
+      return Response.json({ error: err.message }, { status: 500 });
+    }
+  }
 
   if (method === 'POST' && path === '/api/art') {
     try {
@@ -22,7 +90,7 @@ export async function handleArt(request, env) {
       )`).run();
 
       await env.DB.prepare(
-        `INSERT INTO art_registry (id, title, artist, style, description, tags, url, notes, added_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`
+        `INSERT INTO art_registry (id,title,artist,style,description,tags,url,notes,added_at) VALUES (?,?,?,?,?,?,?,?,?)`
       ).bind(id, title, artist || null, style || null, description || null, tags || null, artUrl || null, notes || null, added_at).run();
 
       return Response.json({ id, title, added_at }, { status: 201 });

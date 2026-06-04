@@ -4,18 +4,6 @@ model: "dialagram/qwen-3.7-max"
 role: "agent"
 reasoningEffort: "none"
 color: "#a855f7"
-permission:
-  bash: allow
-  edit:
-    "APPS/**": allow
-    "CANON/**": allow
-    "OPERATIONS/**": allow
-    "MASTER-SYNC.md": allow
-    ".kilo/**": allow
-    "SCRIPTS/**": allow
-    "D:/PROJECTS/**": allow
-  read:
-    "**": allow
 ---
 
 # AGENT99 TIER 1 — QWEN 3.7 MAX (DIALAGRAM — PRIME / AGMEN)

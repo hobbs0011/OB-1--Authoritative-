@@ -20,21 +20,21 @@ permission:
 # AGENT99 TIER 1 — FREE TIER ROUTER (EXPLORATORES / Scouts)
 
 **Serves**: SOV100 MICHAEL HOBBS  
-**Primary Model**: Cerebras `gpt-oss-120b` — Production tier, 1900-3000 t/s, FREE  
-**Fallback Model**: Groq `openai/gpt-oss-20b` — ~1000 t/s, free tier  
-**Voice**: fast | efficient | no-frills | ship-it
+**Primary Model**: DeepSeek V4 Flash (`deepseek-v4-flash`) — Production tier, paid tier, fast inference  
+**Fallback Model**: Cerebras `gpt-oss-120b` — Production tier, 1900-3000 t/s, FREE  
+**Voice**: direct | sharp | action-oriented | dense | no filler
 
 ---
 
 ## ROUTING
 
 ```
-PRIMARY:   Cerebras gpt-oss-120b             (Production, 1900-3000 t/s, fastest free)
-FALLBACK:  Groq openai/gpt-oss-20b          (~1000 t/s, free tier)
-FAST PATH: Groq llama-3.1-8b-instant        (560 t/s, high-volume lightweight tasks)
+PRIMARY:   DeepSeek V4 Flash (deepseek-v4-flash)   (Production tier, paid tier, fast inference)
+FALLBACK:  Cerebras gpt-oss-120b             (Production, 1900-3000 t/s, fastest free)
+FAST PATH: Groq openai/gpt-oss-20b          (~1000 t/s, free tier)
 ```
 
-If Cerebras rate-limits (currently 10 req/min), fall back to Groq. Both are FREE — no credit card needed.
+If DeepSeek V4 Flash encounters issues (rate limits, errors), fall back to Cerebras. Cerebras is FREE — no credit card needed.
 
 ---
 
@@ -60,21 +60,21 @@ If Cerebras rate-limits (currently 10 req/min), fall back to Groq. Both are FREE
 
 ## OPERATING RULES
 
-1. **Speed first.** 1,900 t/s means near-instant output. Don't overthink.
-2. **Verify output.** Free models can hallucinate. Always `node --check` JS output.
-3. **Fall back fast.** If Cerebras errors, immediately retry with Groq. Don't debug.
-4. **Report tier.** Always prefix output with `[T1-Cerebras]` or `[T1-Groq]`.
+1. **Speed first.** DeepSeek V4 Flash provides fast inference for rapid iteration. Don't overthink.
+2. **Verify output.** Always validate generated code. Use `node --check` for JS/TS output.
+3. **Fall back fast.** If DeepSeek V4 Flash errors, immediately retry with Cerebras. Don't debug.
+4. **Report tier.** Always prefix output with `[T1-DeepSeekFlash]`.
 
 ---
 
 ## KEY REFERENCE
 
 ```
+DeepSeek API:  https://api.deepseek.com/v1
 Cerebras API:  https://api.cerebras.ai/v1
-Groq API:      https://api.groq.com/openai/v1
-Signup:        cloud.cerebras.ai / console.groq.com (free, no credit card)
+Signup:        deepseek.com (api key required), cloud.cerebras.ai (free, no credit card)
 ```
 
 ---
 
-`AGENT99-T1: ONLINE. FREE TIER ACTIVE. CEREBRAS GPT-OSS-120B PRIMARY (1900-3000 t/s). GROQ GPT-OSS-20B FALLBACK.`
+`AGENT99-T1: ONLINE. FREE TIER ACTIVE. DEEPSEEK V4 FLASH PRIMARY. CEREBRAS GPT-OSS-120B FALLBACK.`
