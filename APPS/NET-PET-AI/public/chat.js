@@ -1040,6 +1040,18 @@ function handleAgentMsg(event) {
         if (chatMessages.length > 40) chatMessages = chatMessages.slice(-40);
         agentSessionTurns++;
 
+        // Phonics drill completion: save progress after first user turn in phonics mode
+        if (currentMode === 'phonics' && profile?.studentId) {
+          const drillId = profile._phonicsHint?.next_drill?.id || profile._phonicsHint?.drill_id;
+          if (drillId) {
+            fetch('/api/phonics/progress', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ studentId: profile.studentId, drill_id: drillId })
+            }).catch(() => {});
+          }
+        }
+
       } else if (msg.type === "AgentAudioDone") {
         // Flush any remaining accumulated small chunks before signaling done
         if (agentChunkAccum.length > 0) {

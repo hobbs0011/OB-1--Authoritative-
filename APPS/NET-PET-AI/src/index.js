@@ -917,14 +917,14 @@ async function handleAPI(path, request, env, url) {
             provider: { type: "deepgram", model: "nova-3" }
           },
           think: {
-            provider: { type: "open_ai", model: "deepseek-chat" },
+            provider: { type: "open_ai", model: "gpt-4o-mini" },
             prompt: buildAgentPrompt(agentProfile, agentLang, recentVocab, arcData, sessionMode, memoryData, phonicsData),
             functions: [{
               name: "save_vocabulary_word",
               description: "Save an English word the student successfully used in a sentence.",
               parameters: { type: "object", properties: { word: { type: "string", description: "The English word or phrase" }, meaning_vi: { type: "string", description: "Vietnamese meaning (optional)" } }, required: ["word"] }
             }],
-            fallback: { provider: { type: "open_ai", model: "gpt-4o-mini" } }
+            fallback: { provider: { type: "open_ai", model: "deepseek-chat" } }
           },
           speak: {
             provider: { type: "deepgram", model: "aura-2-zeus-en", speed: ttsSpeed },
