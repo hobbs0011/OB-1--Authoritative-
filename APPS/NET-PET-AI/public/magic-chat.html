@@ -357,17 +357,17 @@
     <p>Select how you want to practice English today.</p>
     <div class="landing-modes">
       <button class="landing-mode-card" data-mode="free" onclick="selectLandingMode('free')">
-        <div class="lmc-icon">💬</div>
+        <div class="lmc-icon"><img src="https://net-art-arsenal.pages.dev/icons/audio-waveform-64.png" alt="" width="36" height="36"></div>
         <div class="lmc-label">Free Talk</div>
         <div class="lmc-desc">Casual conversation</div>
       </button>
       <button class="landing-mode-card" data-mode="study" onclick="selectLandingMode('study')">
-        <div class="lmc-icon">📚</div>
+        <div class="lmc-icon"><img src="https://net-art-arsenal.pages.dev/icons/ring-45-15-64.png" alt="" width="36" height="36"></div>
         <div class="lmc-label">Log-Home-Study</div>
         <div class="lmc-desc">Structured learning</div>
       </button>
       <button class="landing-mode-card" data-mode="phonics" onclick="selectLandingMode('phonics')">
-        <div class="lmc-icon">🗣️</div>
+        <div class="lmc-icon"><img src="https://net-art-arsenal.pages.dev/icons/brain-circuit-64.png" alt="" width="36" height="36"></div>
         <div class="lmc-label">NET Phonics</div>
         <div class="lmc-desc">Pronunciation drills</div>
       </button>
@@ -379,9 +379,9 @@
   <!-- Mode Switch Modal -->
   <div id="modeModal">
     <h3>Switch Mode</h3>
-    <div class="mode-option" data-mode="free" onclick="selectMode('free')">💬 Free Talk</div>
-    <div class="mode-option" data-mode="study" onclick="selectMode('study')">📚 Log-Home-Study</div>
-    <div class="mode-option" data-mode="phonics" onclick="selectMode('phonics')">🗣️ NET Phonics</div>
+    <div class="mode-option" data-mode="free" onclick="selectMode('free')"><img class="icon-replace" src="https://net-art-arsenal.pages.dev/icons/audio-waveform-64.png" alt="" width="20" height="20"> Free Talk</div>
+    <div class="mode-option" data-mode="study" onclick="selectMode('study')"><img class="icon-replace" src="https://net-art-arsenal.pages.dev/icons/ring-45-15-64.png" alt="" width="20" height="20"> Log-Home-Study</div>
+    <div class="mode-option" data-mode="phonics" onclick="selectMode('phonics')"><img class="icon-replace" src="https://net-art-arsenal.pages.dev/icons/brain-circuit-64.png" alt="" width="20" height="20"> NET Phonics</div>
   </div>
   <header>
     <span id="dot" title="Checking..."></span>
@@ -389,7 +389,7 @@
     
     <h1><span class="gold">Magic Chat</span> — <span id="obiName">Obi</span></h1>
     <span id="modeChip" style="font-size:0.7rem;border:1px solid;border-radius:4px;padding:2px 7px;vertical-align:middle;margin-left:6px;opacity:0.85" onclick="openModeModal()" title="Change session mode">Free Talk ▾</span>
-    <button id="speakToggle" title="Obi voice ON">🔊</button>
+    <button id="speakToggle" title="Obi voice ON"><svg class="speak-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 8.5v7a4.5 4.5 0 0 0 2.5-3.5zM14 3.23v2.06a7.5 7.5 0 0 1 0 13.42v2.06A9.5 9.5 0 0 0 14 3.23z"/></svg></button>
   </header>
   <div id="tasterBanner">
     <div class="taster-inner">
@@ -405,7 +405,7 @@
   <!-- Tiger Win Session Summary -->
   <div id="tigerSummary">
     <div class="ts-card">
-      <div class="ts-title">🐯 Tiger Win!</div>
+      <div class="ts-title"><img class="ts-icon" src="https://net-art-arsenal.pages.dev/icons/tiger-portrait-64.png" alt="" width="40" height="40"> Tiger Win!</div>
       <div class="ts-sub" id="tsSubtitle">Great session today</div>
       <div class="ts-stats">
         <div class="ts-stat">
@@ -426,7 +426,7 @@
     <div id="inputBar">
       <input id="msg" type="text" autocomplete="off" tabindex="-1" aria-hidden="true">
       <button type="button" id="sendBtn" aria-hidden="true"></button>
-      <button type="button" id="mic" title="Tap to speak">🎙️</button>
+      <button type="button" id="mic" title="Tap to speak"><img class="mic-icon" src="https://net-art-arsenal.pages.dev/icons/tiger-face-neon-64.png" alt="" width="36" height="36"></button>
       <div id="micStatus">Tap to start</div>
       <button type="button" id="endSessionBtn" title="End session" onclick="endAgentSession()" style="background:none;border:none;color:var(--muted);font-size:11px;cursor:pointer;letter-spacing:0.05em;text-transform:uppercase;padding:4px 8px;opacity:0.5;">End session</button>
     </div>

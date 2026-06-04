@@ -916,7 +916,6 @@ async function handleAPI(path, request, env, url) {
           },
           think: {
             provider: { type: "open_ai", model: "gpt-4o-mini" },
-            fallback: { providers: [{ type: "open_ai", model: "gpt-4o" }] },
             prompt: buildAgentPrompt(agentProfile, agentLang, recentVocab, arcData, sessionMode, memoryData, phonicsData),
             functions: [{
               name: "save_vocabulary_word",
@@ -925,8 +924,7 @@ async function handleAPI(path, request, env, url) {
             }]
           },
           speak: {
-            provider: { type: "deepgram", model: "aura-2-zeus-en", speed: ttsSpeed },
-            fallback: { providers: [{ type: "deepgram", model: "aura-2-orion-en" }] }
+            provider: { type: "deepgram", model: "aura-2-zeus-en", speed: ttsSpeed }
           }
         }
       };
