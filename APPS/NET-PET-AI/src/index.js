@@ -923,10 +923,12 @@ async function handleAPI(path, request, env, url) {
               name: "save_vocabulary_word",
               description: "Save an English word the student successfully used in a sentence.",
               parameters: { type: "object", properties: { word: { type: "string", description: "The English word or phrase" }, meaning_vi: { type: "string", description: "Vietnamese meaning (optional)" } }, required: ["word"] }
-            }]
+            }],
+            fallback: { provider: { type: "open_ai", model: "gpt-4o-mini" } }
           },
           speak: {
-            provider: { type: "deepgram", model: "aura-2-zeus-en", speed: ttsSpeed }
+            provider: { type: "deepgram", model: "aura-2-zeus-en", speed: ttsSpeed },
+            fallback: { provider: { type: "deepgram", model: "aura-asteria-en" } }
           },
           on_thought: {
             conversation_log: {}

@@ -347,6 +347,21 @@
         .forecast-level { font-size: 0.75rem; color: var(--dim); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px; }
         .forecast-date { font-size: 1.1rem; color: var(--gold); font-weight: 600; }
         .forecast-sub { font-size: 0.78rem; color: var(--dim); margin-top: 4px; }
+
+        /* Art Arsenal mode icons */
+        .ql-icon-img {
+            display: block;
+            margin: 0 auto 8px;
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 6px rgba(168,85,247,0.25));
+            transition: filter 0.2s, transform 0.2s;
+        }
+        .quick-link-card:hover .ql-icon-img {
+            filter: drop-shadow(0 0 10px rgba(168,85,247,0.5));
+            transform: scale(1.08);
+        }
     </style>
 </head>
 <body>
@@ -395,6 +410,12 @@
     </nav>
 
     <main class="main-container">
+        <!-- Dashboard Header -->
+        <div class="dashboard-header">
+            <h1>HUONG <span style="font-size:0.5em;color:var(--gold);font-family:'Rajdhani',sans-serif;font-weight:600;margin-left:8px;">B1 · Speaking</span></h1>
+            <div class="subtitle">BlueTech English · Speaking Track · Volume &amp; Velocity</div>
+        </div>
+
         <!-- Stats Grid (shown when sessions > 0) -->
         <div class="stats-grid" id="statsGrid" style="display:none;">
             <div class="stat-card purple">
@@ -446,19 +467,19 @@
         <!-- Mode Cards -->
         <div class="quick-links-grid" style="margin-bottom:20px;">
             <a href="/magic-chat?studentId=huong-bluetech&amp;mode=free" class="quick-link-card primary-link">
-                <span class="ql-icon">🎤</span>
+                <img class="ql-icon-img" src="https://net-art-arsenal.pages.dev/icons/audio-waveform-64.png" alt="" width="40" height="40" loading="lazy">
                 <div class="ql-label">Free Talk</div>
-                <div class="ql-sub">Casual conversation with OBI</div>
+                <div class="ql-sub">Mouse Voice → Tiger Voice</div>
             </a>
             <a href="/magic-chat?studentId=huong-bluetech&amp;mode=study" class="quick-link-card primary-link">
-                <span class="ql-icon">📖</span>
+                <img class="ql-icon-img" src="https://net-art-arsenal.pages.dev/icons/ring-45-15-64.png" alt="" width="40" height="40" loading="lazy">
                 <div class="ql-label">Study Mode</div>
-                <div class="ql-sub">Homework &amp; assignments</div>
+                <div class="ql-sub">Log listening · homework</div>
             </a>
             <a href="/magic-chat?studentId=huong-bluetech&amp;mode=phonics" class="quick-link-card primary-link">
-                <span class="ql-icon">🧠</span>
+                <img class="ql-icon-img" src="https://net-art-arsenal.pages.dev/icons/brain-circuit-64.png" alt="" width="40" height="40" loading="lazy">
                 <div class="ql-label">Phonics</div>
-                <div class="ql-sub">Pronunciation training</div>
+                <div class="ql-sub">Precision pronunciation</div>
             </a>
         </div>
 
