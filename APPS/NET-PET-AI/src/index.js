@@ -2839,6 +2839,27 @@ async function handleChat(body, env) {
   if (!apiKey) return json({ error: "DEEPSEEK_API_KEY not configured" }, 500);
 
   const studentId = body.studentId || "anonymous";
+
+  // C1: _translateOnly = quick Vi translation, skip all context/memory/soul
+  if (body._translateOnly) {
+    const lastMsg = Array.isArray(body.messages) ? body.messages[body.messages.length - 1] : null;
+    const textToTranslate = (lastMsg?.content || "").replace(/^Translate[^:]*:\s*/i, '').replace(/^"[^"]*"\s*/, '').trim();
+    if (textToTranslate.length > 3) {
+      try {
+        const tr = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+          method: "POST", headers: { "Authorization": "Bearer " + (env.OPENROUTER_API_KEY || ""), "Content-Type": "application/json" },
+          body: JSON.stringify({ model: "openai/gpt-4o-mini", messages: [{ role: "user", content: `Translate to natural Vietnamese (1 sentence max, no quotes): ${textToTranslate}` }], max_tokens: 100, temperature: 0.3 })
+        });
+        if (tr.ok) {
+          const td = await tr.json();
+          const reply = (td.choices?.[0]?.message?.content || "").trim();
+          if (reply) return json({ reply });
+        }
+      } catch (_) {}
+    }
+    return json({ reply: "" });
+  }
+
   if (studentId !== "anonymous") {
     const idCheck = validateStudentId(studentId);
     if (!idCheck.valid) return json({ error: idCheck.error }, 400);

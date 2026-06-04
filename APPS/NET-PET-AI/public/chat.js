@@ -219,6 +219,17 @@ function bubble(role, text) {
   return row;
 }
 
+function appendViTranslation(bubbleRow, viText) {
+  if (!bubbleRow || !viText) return;
+  let sub = bubbleRow.querySelector('.vi-sub');
+  if (!sub) {
+    sub = document.createElement('div');
+    sub.className = 'vi-sub';
+    bubbleRow.appendChild(sub);
+  }
+  sub.textContent = '\uD83C\uDDFB\uD83C\uDDF3 ' + viText;
+}
+
 function typingIndicator() {
   const row = document.createElement("div");
   row.className = "row row-obi";
@@ -855,7 +866,11 @@ async function openVoiceAgent() {
       if (agentThinkBubble) { agentThinkBubble.remove(); agentThinkBubble = null; }
       if (agentWorklet) { try { agentWorklet.disconnect(); } catch {} agentWorklet = null; }
       if (agentAudioCtx) { agentAudioCtx.close().catch(() => {}); agentAudioCtx = null; }
-      if (agentMicStream) { agentMicStream.getTracks().forEach(t => t.stop()); agentMicStream = null; }
+      // C2: cache mic stream for iOS — don't stop it, keep alive for reconnect
+      const cachedStream = agentMicStream;  // keep reference but clear variable
+      agentMicStream = null;
+      // Stop tracks only if NOT iOS — iOS needs the stream alive for gesture-less reconnect
+      if (!isIOS && cachedStream) { cachedStream.getTracks().forEach(t => t.stop()); }
       listening = false;
       micBtn.classList.remove("mic-active");
       setMicStatus("Tap to reconnect", false);
@@ -867,8 +882,10 @@ async function openVoiceAgent() {
           agentReconnectTimer = null;
           if (!agentWs && urlStudentId) {
             openVoiceAgent();
-            // B6: iOS Safari denies getUserMedia outside a user gesture — skip pre-acquire on iOS
-            if (userHasInteracted && !isIOS) {
+            // C2: On iOS, reuse cached mic stream (never stopped) — avoids getUserMedia gesture requirement
+            if (userHasInteracted && isIOS && cachedStream?.active) {
+              pendingMicStream = cachedStream;
+            } else if (userHasInteracted && !isIOS) {
               navigator.mediaDevices.getUserMedia({ audio: { channelCount: 1, echoCancellation: true, noiseSuppression: true, autoGainControl: true } })
                 .then(s => { pendingMicStream = s; })
                 .catch(() => {});
@@ -1017,12 +1034,31 @@ function handleAgentMsg(event) {
 
       } else if (msg.type === "ConversationText" && msg.role === "assistant" && msg.content) {
         if (agentThinkBubble) { agentThinkBubble.remove(); agentThinkBubble = null; }
-        bubble("obi", msg.content);
+        const lastBubble = bubble("obi", msg.content);
         // Cap chatMessages at 40 to prevent memory creep
         chatMessages.push({ role: "assistant", content: msg.content });
         if (chatMessages.length > 40) chatMessages = chatMessages.slice(-40);
         if (profile.studentId) {
           api("/api/memory", "POST", { studentId: profile.studentId, exchange: { obi: msg.content } }, memHeaders()).catch(() => {});
+        }
+        // C1: Vietnamese auto-translate for A1 students
+        if (profile.lang === 'vi' && msg.content.length > 5) {
+          const bubbleRow = lastBubble;
+          fetch('/api/chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              studentId: profile.studentId || 'sov100-test-magic',
+              messages: [{ role: 'user', content: 'Translate to natural Vietnamese (1 short sentence max): "' + msg.content + '"' }],
+              _translateOnly: true
+            })
+          })
+          .then(r => r.json())
+          .then(d => {
+            const viText = d.reply || d.content || d.text;
+            if (viText && viText.length > 2) appendViTranslation(bubbleRow, viText);
+          })
+          .catch(() => {});
         }
         // Use source field to distinguish injected vs voice — fixes race condition
         const isInjected = msg.source === "inject" || msg.source === "injected";
