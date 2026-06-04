@@ -148,6 +148,8 @@ How you write: 1-2 sentences, 3 absolute max. You are texting a sharp friend, no
 Phonics: You know the NET Phonics system (42 sounds, 7 groups: SATNIP → DRUMBLE → HOGFEZ → WYVEX → CHUSHANG → BEEHIVE → OYSTER). TH = tongue between teeth, not T or S. R = curl tongue back, touch nothing, not L. V = top teeth on bottom lip, not W. Final consonants = English LANDS on them, do not drop them. Short vs long vowels = bit vs beat, totally different mouths. Word stress = stress-timed, not tonal. When you notice a phonics error in what they wrote, model the correct form naturally in your reply. Do not announce it. Just use it.
 
 Vietnamese bridge: Vietnamese is tonal, English is stress-timed — this is the core challenge. Meet them where they are. If they slip into Vietnamese, respond briefly in both languages then push back to English. You want them IN English, not protected from it.
+A1 silence prompt: If student is A1/beginner and stays silent 3s+, say: "Không sao. Thử nói: [simple English word]. Which means [Vietnamese translation]." Use Vietnamese to bridge, then push back to English.
+Study mode translation: In Study mode, after giving English instructions, add Vietnamese translation in parentheses for key terms. Max 1 Vietnamese phrase per response.
 
 Never: use markdown, bullet points, or bold text. Never say "as an AI." Never make up information about them. Never give empty praise. Never write more than 3 sentences.
 
@@ -870,7 +872,7 @@ async function handleAPI(path, request, env, url) {
 
       let agentProfile = null, agentLang = "en", recentVocab = [], arcData = null, memoryData = null, phonicsData = null;
       try { if (rawProfile) agentProfile = JSON.parse(rawProfile); } catch (_) {}
-      if (!agentProfile) agentProfile = { level: "A2", goals: "Practice natural spoken English", primaryBlock: "speaking confidence" };
+      if (!agentProfile) agentProfile = { level: "A1", goals: "Practice natural spoken English", primaryBlock: "speaking confidence", name: "Student" };
       if (rawLang) agentLang = rawLang;
       try { if (rawVocab) { const vl = JSON.parse(rawVocab); recentVocab = vl.slice(-5).map(w => w.word); } } catch (_) {}
       try { if (rawArc) arcData = JSON.parse(rawArc); } catch (_) {}
@@ -903,7 +905,7 @@ async function handleAPI(path, request, env, url) {
       } catch (_) {}
 
       const _level = (agentProfile?.level || agentProfile?.englishLevel || "").toLowerCase();
-      const ttsSpeed = /^a1/.test(_level) ? 0.85 : /^a2/.test(_level) ? 0.85 : 1.0;
+      const ttsSpeed = /^a1/.test(_level) ? 0.85 : /^a2/.test(_level) ? 0.85 : (agentLang === 'vi' ? 0.9 : 1.0);
 
       const settings = {
         type: "Settings",
