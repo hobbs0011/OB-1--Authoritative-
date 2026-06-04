@@ -1,17 +1,23 @@
 import { checkAdminKey } from './security.js';
 
-const PA_URL = 'https://phoenix-architecti.mrmichaelhobbs123.workers.dev';
-
-async function paT2(env, task, context) {
-  const body = JSON.stringify({ task, context, tier: 2 });
-  const auth = env.WORKER_ADMIN_KEY || env.PA_AUTH_SECRET || '';
-  const resp = await fetch(`${PA_URL}/api/code`, {
+// T2 = DeepSeek Flash. Direct call — worker cannot subrequest its own URL (CF 1042).
+async function dsT2(env, task) {
+  if (!env.DEEPSEEK_API_KEY) return {};
+  const resp = await fetch('https://api.deepseek.com/v1/chat/completions', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'x-pa-auth': auth },
-    body,
+    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${env.DEEPSEEK_API_KEY}` },
+    body: JSON.stringify({
+      model: 'deepseek-chat',
+      messages: [
+        { role: 'system', content: 'You are an expert art analyst. Respond ONLY with valid JSON. No markdown. No explanation.' },
+        { role: 'user', content: task },
+      ],
+      max_tokens: 512,
+      response_format: { type: 'json_object' },
+    }),
   });
   const j = await resp.json();
-  try { return JSON.parse(j.patch); } catch { return {}; }
+  try { return JSON.parse(j.choices[0].message.content); } catch { return {}; }
 }
 
 export async function handleArt(request, env) {
@@ -27,12 +33,10 @@ export async function handleArt(request, env) {
       }
       const { content, source = 'unknown', save = false } = body;
       const snippet = content.slice(0, 4000);
-      const SYS = 'You are an expert art analyst. Respond ONLY with valid JSON matching the requested structure. No explanation. No markdown.';
-
       const [r1, r2, r3] = await Promise.all([
-        paT2(env, `From this art dossier (source: ${source}), extract ONLY: {"title":"...","artist":"...","style":"..."}. Text:\n${snippet}`, SYS),
-        paT2(env, `From this art dossier (source: ${source}), extract ONLY: {"description":"...","tags":"comma,separated,tags"}. Text:\n${snippet}`, SYS),
-        paT2(env, `From this art dossier (source: ${source}), extract ONLY: {"url":"...","notes":"..."}. Text:\n${snippet}`, SYS),
+        dsT2(env, `From this art dossier (source: ${source}), extract ONLY: {"title":"...","artist":"...","style":"..."}. Text:\n${snippet}`),
+        dsT2(env, `From this art dossier (source: ${source}), extract ONLY: {"description":"...","tags":"comma,separated,tags"}. Text:\n${snippet}`),
+        dsT2(env, `From this art dossier (source: ${source}), extract ONLY: {"url":"...","notes":"..."}. Text:\n${snippet}`),
       ]);
 
       const piece = {
