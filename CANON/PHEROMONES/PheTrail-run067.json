@@ -1,0 +1,41 @@
+{
+  "run": 67,
+  "session_id": "sov100-roman-run67",
+  "created_at": "2026-06-04T12:15:00+07:00",
+  "positive_trails": [
+    {
+      "label": "20 corrupted portal files restored from git",
+      "summary": "Blanket emoji-to-icon replacement with PS script corrupted 20 HTML files (UTF-8 surrogate double-encoding). git checkout restored all files cleanly. L75 ICON_SURGICAL added: never blanket-replace emoji, only mode cards."
+    },
+    {
+      "label": "Mode card art applied surgically with Python",
+      "summary": "Free Talk → audio-waveform, Study → ring-45-15 (habit ring), Phonics → brain-circuit. Mic → tiger-face-neon, Speak toggle → SVG waveform, Tiger Win → tiger-portrait. C2 documented: sound icon for talking, curriculum icon for study, brain icon for learning."
+    },
+    {
+      "label": "Deepgram Voice Agent UNPARSABLE_CLIENT_MESSAGE fixed",
+      "summary": "Removed deprecated `fallback.providers[]` from `agent.think` and `agent.speak` in Voice Agent Settings. Deepgram API no longer accepts this key. OBI now connects and speaks without Settings rejection. L76 DEEPGRAM_SETTINGS_CLEAN added."
+    },
+    {
+      "label": "Stress-test portal audit completed (Run 68 RISE)",
+      "summary": "Full 7-portal audit found and fixed 17+ issues: broken image paths, dead DOM references, malformed HTML, missing logout buttons, missing mode cards, missing CSS classes, encoding bugs. Deepgram Voice Agent: added agent.on_thought, studentId/mode validation guards."
+    }
+  ],
+  "negative_trails": [
+    {
+      "label": "Deepgram Voice Agent missing agent.on_thought (CRITICAL)",
+      "summary": "The settings object had no `agent.on_thought` block. Deepgram Voice Agent API requires either `swm` or `conversation_log`. Missing this causes silent WS failures. Fixed in Run 68."
+    },
+    {
+      "label": "think.provider uses open_ai with Deepgram API key",
+      "summary": "The `think.provider` set to `{ type: 'open_ai', model: 'gpt-4o-mini' }` but the access_token IS the Deepgram API key. Deepgram's server tries OpenAI with a Deepgram key → 401. Switched to `deepseek-chat` model (OpenAI-compatible via Deepgram's proxy)."
+    },
+    {
+      "label": "PheTrail gap: runs 060-067 missing phetrails",
+      "summary": "8 consecutive runs without PheTrail files. Negative trail history lost. This file (run067) restores the chain."
+    },
+    {
+      "label": "Soul stage was DRYRUN in pipeline-run67.json",
+      "summary": "Run 067's soul_event_id is 'DRYRUN' and soulcount is 0 -- the 20M-char RRL was never posted to /api/soul/event. Soul pipeline stage was skipped."
+    }
+  ]
+}
