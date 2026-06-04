@@ -410,6 +410,26 @@
         .tw-stat { background: rgba(255,255,255,0.04); border-radius: 14px; padding: 14px 8px; }
         .tw-stat-val { font-family: 'Orbitron', sans-serif; font-size: 1.3rem; font-weight: 700; color: var(--gold); }
         .tw-stat-lbl { font-family: 'Rajdhani', sans-serif; font-size: 0.72rem; color: var(--dim); letter-spacing: 0.06em; text-transform: uppercase; margin-top: 4px; }
+        /* Wake Up The Tiger slogan (portal art hero) */
+        .tiger-slogan {
+          text-align: center;
+          font-size: clamp(1.1rem, 3vw, 1.6rem);
+          font-weight: 800;
+          letter-spacing: 0.15em;
+          text-transform: uppercase;
+          color: var(--gold);
+          margin: 0.5rem 0 1rem;
+        }
+        .tiger-slogan .vi-sub {
+          display: block;
+          font-size: 0.7em;
+          font-weight: 400;
+          letter-spacing: 0.05em;
+          color: var(--purple);
+          text-transform: none;
+          margin-top: 0.2em;
+        }
+
         .tiger-win-btn {
           display: block; width: 100%; padding: 14px; border-radius: 12px;
           border: none; background: linear-gradient(135deg, var(--gold), #d97706);
