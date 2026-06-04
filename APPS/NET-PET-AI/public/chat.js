@@ -265,6 +265,20 @@ function showTigerWin() {
   if (currentMode === 'phonics' && typeof refreshPhonicsCard === 'function') {
     refreshPhonicsCard();
   }
+  // Block S: Fire-and-forget session writeback
+  const patchBody = {
+    studentId: urlStudentId,
+    patch: {
+      lastSession: {
+        date: new Date().toISOString(),
+        turns: agentSessionTurns || 0,
+        vocabSaved: sessionWordsSaved,
+        mode: currentMode
+      },
+      streak: { currentStreak: streak, lastSessionDate: Date.now() }
+    }
+  };
+  fetch('/api/student/state', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(patchBody) }).catch(() => {});
 }
 
 // Trigger Tiger Win on conversation-end signals

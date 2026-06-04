@@ -1397,6 +1397,32 @@ async function handleAPI(path, request, env, url) {
       source: profile ? "kv" : "empty"
     }), request);
   }
+  // Block S: PATCH /api/student/state — Write session stats back to KV
+  if (path === "/api/student/state" && method === "PATCH") {
+    try {
+      const body = await request.json();
+      const studentId = body.studentId || "";
+      if (!studentId) return addCors(json({ error: "studentId required" }, 400), request);
+      const idCheck = validateStudentId(studentId);
+      if (!idCheck.valid) return addCors(json({ error: idCheck.error }, 400), request);
+      const patch = body.patch || {};
+      if (Object.keys(patch).length === 0) return addCors(json({ error: "patch required" }, 400), request);
+      // Read existing profile, merge patch, write back
+      let profile = {};
+      try {
+        const raw = await env.NET_PET_KV.get(`student_profile_${studentId}`);
+        if (raw) profile = JSON.parse(raw);
+      } catch (_) {}
+      // Shallow merge — patch fields overwrite top-level keys only
+      for (const [key, val] of Object.entries(patch)) {
+        profile[key] = val;
+      }
+      await env.NET_PET_KV.put(`student_profile_${studentId}`, JSON.stringify(profile));
+      return addCors(json({ ok: true, studentId }), request);
+    } catch (err) {
+      return addCors(json({ error: err.message }, 500), request);
+    }
+  }
   // /api/session/events — Structured learning event chain
   if (path === "/api/session/events" && method === "GET") {
     const studentId = url.searchParams.get("studentId") || "";
