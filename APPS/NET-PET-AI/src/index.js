@@ -601,6 +601,15 @@ async function handleAPI(path, request, env, url) {
     if (adminBlock) return addCors(adminBlock, request);
   }
 
+  // Block T: GET /api/admin/roster — full student roster (admin-key gated)
+  if (path === "/api/admin/roster" && method === "GET") {
+    return handleAdminRoster(env);
+  }
+  // Block U: GET /api/admin/audit — recent audit log entries
+  if (path === "/api/admin/audit" && method === "GET") {
+    return handleAdminAudit(env, url);
+  }
+
   // Image Generation Proxy — forwards to configured Image Gen URL (Vast.ai, RunPod, or local)
     if (path === "/api/image" && method === "POST") {
       try {
@@ -951,7 +960,9 @@ async function handleAPI(path, request, env, url) {
         next_sentence: phonicsData?.next_drill?.sentence || 'She sat next to me at the station.',
         drill_count: phonicsData?.drills_completed?.length || phonicsData?.drill_count || phonicsData?.session_count_phonics || 0
       } : null;
-      return addCors(json({ token: access_token, settings, phonicsHint, lastSessionVocab }), request);
+      // Block W: Sydney region routing hint for VN students
+      const ws_url = agentLang === 'vi' ? "wss://agent.deepgram.com/v1/agent/converse?region=syd" : null;
+      return addCors(json({ token: access_token, settings, phonicsHint, lastSessionVocab, ws_url }), request);
     } catch (err) {
       return addCors(json({ error: err.message }, 500), request);
     }
@@ -1679,6 +1690,57 @@ async function handleAdminSubscriptionUpsert(body, env) {
 // ── Admin Statistics Handler ───────────────────────────────────────────────────
 
 // GET /api/admin/stats — admin dashboard metrics
+// Block T: GET /api/admin/roster — list all students with current state
+// Block U: GET /api/admin/audit — recent audit log entries
+async function handleAdminAudit(env, url) {
+  if (!env.SOUL_DB) return json({ entries: [], error: "SOUL_DB not configured" });
+  const limit = parseInt(url.searchParams.get("limit") || "50");
+  try {
+    const r = await env.SOUL_DB.prepare(
+      "SELECT id, ts, actor, action, target, metadata FROM audit_log ORDER BY ts DESC LIMIT ?"
+    ).bind(limit).all();
+    return json({ entries: r.results || [], total: (r.results || []).length });
+  } catch (err) {
+    return json({ error: err.message, entries: [] }, 500);
+  }
+}
+
+async function handleAdminRoster(env) {
+  if (!env.NET_PET_KV) return json({ students: [], error: "KV not configured" });
+  try {
+    const list = await env.NET_PET_KV.list({ prefix: "student_profile_" });
+    const students = await Promise.all(list.keys.map(async k => {
+      const studentId = k.name.replace("student_profile_", "");
+      const raw = await env.NET_PET_KV.get(k.name).catch(() => null);
+      const profile = raw ? JSON.parse(raw) : { studentId };
+      // Fetch streak + phonics data
+      let streak = { currentStreak: 0, longestStreak: 0 };
+      const streakRaw = await env.NET_PET_KV.get(`streak:${studentId}`).catch(() => null);
+      if (streakRaw) streak = JSON.parse(streakRaw);
+      let phonics = null;
+      const phonicsRaw = await env.NET_PET_KV.get(`phonics_progress_${studentId}`).catch(() => null);
+      if (phonicsRaw) phonics = JSON.parse(phonicsRaw);
+      return {
+        studentId,
+        fullName: profile.fullName || profile.name || studentId,
+        level: profile.level || profile.englishLevel || "A1",
+        lastSession: profile.lastSession || null,
+        streak,
+        phonicsGroup: phonics?.group_name || phonics?.current_group || null,
+        lang: profile.lang || "en"
+      };
+    }));
+    // Sort by lastSession.date desc, nulls last
+    students.sort((a, b) => {
+      const da = a.lastSession?.date || ""; const db = b.lastSession?.date || "";
+      return db.localeCompare(da);
+    });
+    return json({ students, total: students.length });
+  } catch (err) {
+    return json({ error: err.message, students: [] }, 500);
+  }
+}
+
 async function handleAdminStats(env) {
   const now = new Date(Date.now() + 7*3600000).toISOString();
   const today = now.slice(0,10);
@@ -3641,7 +3703,18 @@ async function handleOnboarding(body, env) {
   const sig = await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(canonicalId));
   const studentToken = Array.from(new Uint8Array(sig)).map(b => b.toString(16).padStart(2, "0")).join("");
 
-  const resData = { ok: true };
+  // Block V: Known student portal map — return portal_url for direct redirect after onboarding
+  const portalMap = {
+    'quy-bluetech': '/student/quy-bluetech',
+    'huong-bluetech': '/student/huong-bluetech',
+    'mai-tram': '/student/mai-tram',
+    'lam-bluetech': '/lam-portal.html?studentId=lam-bluetech',
+    'quan-nguyen': '/quan-portal.html?studentId=quan-nguyen',
+    'quang-nguyen': '/quang-portal.html?studentId=quang-nguyen',
+    'minh-private': '/student/minh-private'
+  };
+  const portal_url = portalMap[studentId] || null;
+  const resData = { ok: true, portal_url };
   return json({ ...resData, studentId, studentToken, redirect: "/magic-chat.html?studentId=" + encodeURIComponent(studentId) + "&taster=1" });
 }
 

@@ -518,8 +518,19 @@
                 }
             })
             .then(data => {
-                if (data && data.redirect) {
+                if (data && data.portal_url) {
+                    window.location.href = data.portal_url;
+                } else if (data && data.redirect) {
                     window.location.href = data.redirect;
+                } else if (data && data.ok) {
+                    document.getElementById('step5-content').innerHTML = `
+                        <div style="text-align:center;padding:40px 20px;">
+                            <h2 style="color:var(--gold);margin-bottom:12px;">You're in! 🎉</h2>
+                            <p style="color:var(--dim);font-size:1rem;line-height:1.6;max-width:400px;margin:0 auto;">
+                                Your coach will send your personal portal link within 24 hours.
+                            </p>
+                            <p style="color:var(--teal);font-size:0.85rem;margin-top:20px;">Bạn đã đăng ký! Huấn luyện viên sẽ gửi link cá nhân cho bạn trong vòng 24 giờ.</p>
+                        </div>`;
                 }
             })
             .catch(err => {

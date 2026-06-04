@@ -899,7 +899,7 @@ async function openVoiceAgent() {
     setMicStatus("Connecting…", false);
     const tokenRes = await fetch(`/api/deepgram-token?studentId=${encodeURIComponent(urlStudentId)}&mode=${encodeURIComponent(currentMode)}`);
     if (!tokenRes.ok) { console.error("[VOICE] token fetch failed:", tokenRes.status); setMicStatus("Tap to start", false); return; }
-    const { token, settings, phonicsHint, lastSessionVocab } = await tokenRes.json();
+    const { token, settings, phonicsHint, lastSessionVocab, ws_url } = await tokenRes.json();
     if (phonicsHint) profile._phonicsHint = phonicsHint;
     if (!token) { console.error("[VOICE] no token in response"); setMicStatus("Tap to start", false); return; }
     if (agentWsId !== myId) return; // zombie check — another openVoiceAgent() fired during async fetch
@@ -923,7 +923,9 @@ async function openVoiceAgent() {
     lastSessionVocabGlobal = lastSessionVocab || [];
 
     // Connect directly to Deepgram — JWT via Sec-WebSocket-Protocol (Deepgram echoes "token" back)
-    const ws = new WebSocket("wss://agent.deepgram.com/v1/agent/converse", ["token", tokenToUse]);
+    // Block W: Use Sydney region if provided (lower latency for VN students)
+    const dgUrl = ws_url || "wss://agent.deepgram.com/v1/agent/converse";
+    const ws = new WebSocket(dgUrl, ["token", tokenToUse]);
     ws.binaryType = "arraybuffer";
     agentWs = ws; // set immediately — blocks double-open race before onopen fires
     const wsOpenTs = Date.now();

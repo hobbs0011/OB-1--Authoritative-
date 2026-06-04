@@ -498,6 +498,12 @@ body::before {
   .card-actions { flex-direction: column; }
   .card-btn { width: 100%; justify-content: center; }
 }
+/* Block T: Roster table */
+.roster-table { width:100%; border-collapse:collapse; font-size:0.82rem; }
+.roster-table th { text-align:left; padding:10px 8px; border-bottom:1px solid var(--border); font-family:'Rajdhani',sans-serif; font-weight:600; letter-spacing:0.06em; color:var(--dim); text-transform:uppercase; font-size:0.72rem; }
+.roster-table td { padding:8px; border-bottom:1px solid rgba(255,255,255,0.04); vertical-align:middle; }
+.roster-table tr:hover td { background:rgba(168,85,247,0.04); }
+#rosterTable { overflow-x:auto; margin-bottom:20px; }
 </style>
 </head>
 <body>
@@ -542,8 +548,12 @@ body::before {
     <div class="compliance-bar" id="complianceBar"></div>
 
     <!-- Student Cards -->
-    <div class="section-title">STUDENT PROFILES</div>
+    <div class="section-title">STUDENT PROFILES <span style="color:var(--dim);font-size:0.7rem;font-weight:400;letter-spacing:0.03em;text-transform:none;"> — from session writeback</span></div>
     <div class="students-grid" id="studentsGrid"></div>
+
+    <!-- Block T: Roster Table -->
+    <div class="section-title" style="margin-top:32px;">ROSTER (ALL)</div>
+    <div id="rosterTable"></div>
 
     <!-- Adaptive Insights -->
     <div class="section-title">ADAPTIVE INSIGHTS</div>
@@ -636,8 +646,8 @@ async function cachedFetch(key, url, ttlMs = 300000) {
 // ── Init ──
 async function initDashboard() {
   loadHealth();
-  await loadAllStudents();
-  setInterval(() => { loadHealth(); loadAllStudents(); }, 300000);
+  await Promise.all([loadAllStudents(), loadRoster()]);
+  setInterval(() => { loadHealth(); loadAllStudents(); loadRoster(); }, 300000);
 }
 
 // ── Health ──
@@ -779,6 +789,36 @@ function renderStudentCards() {
   container.innerHTML = html;
 }
 
+// ── Block T: Roster from /api/admin/roster ──
+let rosterData = null;
+async function loadRoster() {
+  const data = await cachedFetch('roster', `${API}/api/admin/roster`, 120000);
+  rosterData = data?.students || null;
+  renderRosterTable();
+}
+function renderRosterTable() {
+  const container = document.getElementById('rosterTable');
+  if (!container || !rosterData) return;
+  let html = `<table class="roster-table"><thead><tr>
+    <th>Name</th><th>Level</th><th>Last Session</th><th>Streak</th><th>Phonics</th><th>Lang</th><th>Actions</th>
+  </tr></thead><tbody>`;
+  for (const s of rosterData) {
+    const ls = s.lastSession;
+    const lastDate = ls?.date ? new Date(ls.date).toLocaleDateString('en-US', { month:'short', day:'numeric' }) : '—';
+    const active = s.streak?.currentStreak > 0 ? '🟢' : '⭕';
+    html += `<tr>
+      <td><strong>${esc(s.fullName)}</strong><br><small style="color:var(--dim)">${s.studentId}</small></td>
+      <td><span class="level-badge ${getLevelClass(s.level)}">${esc(s.level)}</span></td>
+      <td>${lastDate}${ls?.turns ? ` (${ls.turns} turns, ${ls.vocabSaved||0} words)` : ''}</td>
+      <td>${active} ${s.streak?.currentStreak || 0}d</td>
+      <td>${esc(s.phonicsGroup || '—')}</td>
+      <td>${s.lang === 'vi' ? '🇻🇳' : '🇬🇧'}</td>
+      <td><a href="/student/${s.studentId}" target="_blank" class="card-btn" style="font-size:0.7rem">Open</a></td>
+    </tr>`;
+  }
+  html += `</tbody></table><p style="color:var(--dim);font-size:0.8rem;margin-top:8px;">${rosterData.length} students total</p>`;
+  container.innerHTML = html;
+}
 // ── Interests Extraction ──
 function extractInterests(p) {
   const interests = [];

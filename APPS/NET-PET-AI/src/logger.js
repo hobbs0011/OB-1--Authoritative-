@@ -39,3 +39,25 @@ async function writeLog(level, tag, data, env) {
 export function logError(tag, data, env) { return writeLog('ERROR', tag, data || {}, env); }
 export function logWarn(tag, data, env)  { return writeLog('WARN', tag, data || {}, env); }
 export function logInfo(tag, data, env)  { return writeLog('INFO', tag, data || {}, env); }
+
+// Block U: Audit log — admin action tracking
+export async function logAudit(env, actor, action, target, metadata = {}) {
+  if (!env?.SOUL_DB) {
+    console.log(`[AUDIT] ${actor} ${action} ${target} ${JSON.stringify(metadata)}`);
+    return;
+  }
+  try {
+    await env.SOUL_DB.prepare(
+      "INSERT INTO audit_log (id, ts, actor, action, target, metadata) VALUES (?, ?, ?, ?, ?, ?)"
+    ).bind(
+      crypto.randomUUID(),
+      Date.now(),
+      actor,
+      action,
+      target,
+      JSON.stringify(metadata)
+    ).run();
+  } catch (e) {
+    console.error(`[AUDIT] D1 write failed: ${e.message}`);
+  }
+}
