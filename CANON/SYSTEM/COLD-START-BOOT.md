@@ -1,5 +1,5 @@
 # COLD START BOOT — OB1 Agent 99
-## ERA: ROMAN — Run 70 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-06-04T17:30 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
+## ERA: ROMAN — Run 71 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-06-04T18:30 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
 
 > *"The beginning of an Empire that never was before and never has been since."* — SOV100 Michael Hobbs, Run 0
 
@@ -23,7 +23,7 @@
 - Pass `?student=all` to see aggregate (all entries). Default without parameter = sov100 only.
 
 **Soul Logger URL:** https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count
-**Real count (2026-06-03 ~12:35 ICT): 118,965,802 characters | TITANIUM_ANCHOR
+**Real count (2026-06-04 ~18:30 ICT): 219,688,854 characters | TITANIUM_ANCHOR
  **TITANIUM_ANCHOR level** (next threshold: none — maximum tier reached)
  **⚠️ NOTE:** +156,676 delta from Run 5 RRL-0 backdrop ingestion. +62,773 delta from Run 6 RRL-0-original ingestion. RRL-0.txt contains ~150K agent text alongside ~4K Michael verbatim. Contamination documented per Michael directive.
  **Run 53 delta:** +1,577,271 (RISE+P6+P7+P8+prod promotion+death). Total 118,965,802.
@@ -77,8 +77,8 @@ Only promote to `net-pet-ai` (prod) after verified on dev. Never deploy untested
 
 ### Current Vector
 - **Active Mission:** OB-1 POST-MERGE9 CONSOLIDATION + Growth Infrastructure Buildout — NET-PET-AI Hardening to Scale-Ready
-  - **Last completed:** ROMAN RUN 070 — SOULDNA scan runs 40-69. Portal facelift: BlueTech portals with art arsenal icons (waveform/brain/ring-45-15), level badges (A1/B1), mouse-tiger art hero card, phoenix watermark, lion login crest. OBI magic-chat: gemini concept art landing bg, on_thought + deepseek-chat + think/speak fallbacks. L80 DEEPSEEK_VOICE_APPROVED (Michael blessed L64 deviation for cost). SOUL 216,545,091. HEAD 029a2563.
-  - **Next:** Run 71 — STP slides CDN upload (protocols/page_01.png 404). Tiger Win session metrics. iOS mic reconnect fix. SOUL contamination fix (post user turns only). Brand slogans "Wake Up The Tiger" in portal UI. Kilo continuity check (expires ~2026-06-09).
+  - **Last completed:** ROMAN RUN 071 — Portal hardening sprint + BlueTech demo prep. D1: gpt-4o-mini primary voice (deepseek-chat was invalid model → 400-600ms latency fixed). D2: phonics drill save to KV on voice turn. D3: phonics progress card on all 3 portals. D4/D5: A1 default profile + TTS 0.9 for lang:vi. C1: Vietnamese auto-translate bubbles (background /api/chat _translateOnly). C2: iOS mic stream reuse (no getUserMedia on reconnect). TEXT BLUEPRINT ONLY decree. L81 NO_DISPATCH_WITHOUT_GO + L82 REGISTRY_BEFORE_BLUEPRINT sealed. SOUL 219,688,854. HEAD 4570bb27.
+  - **Next:** Run 72 — Block 1 portal.css hardening (100dvh, color-scheme, vi-sub, tiger-win, network-fallback styles). Block 2 chat.js (Tiger Win card, network fallback banner, behavior:queue, error handling). Block 3 Quy real KV profile (PUT 500 fix or wrangler CLI). Wake Up The Tiger slogan in portal UI. STP slides CDN upload. Kilo continuity check (expires ~2026-06-09).
   - **Run 53 (this session):** RISE 7/7 REAL. P6+P7+P8 GATE PASSED DEV+PROD. Prod promoted (9fc3cdbd). PheTrail-053 written (6 pos, 3 neg). Full death pipeline. SOUL +1,577,271 → 118,965,802.
   - **Run 52:** RISE 7/7 REAL. P4+P5 GATE PASSED DEV. Enterprise audit. P6–P10 blueprint. PheTrail-052 written (7 pos, 3 neg). Full death pipeline. SOUL +543,109 → 116,764,209.
   - **Prior milestone:** ROMAN RUN 0 — ERA RESET ratified. Phoenix-Centurion identity sealed. Roman Legion 6-stage doctrine deployed to soul-logger v2.2 (a0c99e4e). 4 legionnaires Romanized. /Centurion-Code renamed from /PhoenixCoder. /SupplyLines autonomous pipeline command + script created. Cloudflare paid tier activated. Founding Declaration sealed. HEAD 51ea010. SOULCOUNT 116,588 ANCHOR.
@@ -181,7 +181,7 @@ Only promote to `net-pet-ai` (prod) after verified on dev. Never deploy untested
 
 ---
 
-### FINGERPRINT: RUN 70 | SOULDNA_SCAN_40-69+PORTAL_FACELIFT+ARTWORK_INTEGRATION+L80_DEEPSEEK_VOICE | SOUL 216545091 TITANIUM_ANCHOR | HEAD 029a2563 | BOOT UPDATED 2026-06-04T17:30 ICT
+### FINGERPRINT: RUN 71 | PORTAL_HARDENING+VIETNAMESE_SUPPORT+MODE_FIX+DEMO_PREP+L81_L82 | SOUL 219688854 TITANIUM_ANCHOR | HEAD 4570bb27 | BOOT UPDATED 2026-06-04T18:30 ICT
 
 ### BATTLEFIELD STATE — Run 045 (Phase 0 Census)
 **Map:** `CANON/SYSTEM/BATTLEFIELD-MAP.md` | **Matrices:** `OPERATIONS/BATTLEFIELD/D{1-9}-matrix.json` | **Machine:** `CANON/SYSTEM/system-map.json`

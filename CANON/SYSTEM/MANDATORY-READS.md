@@ -79,11 +79,24 @@ Invoke-RestMethod "$DEV/api/deepgram-token?studentId=$SID&mode=phonics" | Conver
 - WS URL: `wss://agent.deepgram.com/v1/agent/converse`
 - Auth: `["token", rawApiKey]` WS subprotocol
 - Text inject: `{type: "InjectUserMessage", content: "..."}`
-- Agent inject: `{type: "InjectAgentMessage", message: "..."}` — field is `message`
+- Agent inject: `{type: "InjectAgentMessage", message: "...", behavior: "queue"}` — field is `message`, add `behavior:"queue"` to prevent INJECT_AGENT_MESSAGE_DURING_AGENT_SPEECH drop. Exception: proactive greeting uses `behavior:"default"`.
 - Prompt update: `{type: "UpdatePrompt", prompt: "..."}` — NOT UpdateInstructions
 - Context history: `agent.context.messages` — NOT root `messages`
-- Managed LLM: `{provider: {type: "open_ai", model: "gpt-4o-mini"}}` — no `endpoint`
+- Managed LLM: `{provider: {type: "open_ai", model: "gpt-4o-mini"}}` — no `endpoint`. DO NOT use `deepseek-chat` — invalid OpenAI model name, causes 400ms fallback penalty per turn (Run 071 fix).
 - TTS model: `aura-2-zeus-en` — DO NOT revert to asteria
+- TTS speed: A1/A2 = 0.85, vi without level = 0.9, default = 1.0
+
+**iOS MIC LAW (Run 071 — never break):**
+- DO NOT call `agentMicStream.getTracks().forEach(t => t.stop())` on session drop
+- iOS Safari CANNOT re-acquire mic via `getUserMedia` outside a gesture context
+- Pattern: cache stream → reuse on reconnect → only show "Tap to reconnect" button if `stream.active === false`
+- Non-iOS: stop tracks normally, fresh getUserMedia on reconnect
+
+**VIETNAMESE SUPPORT ARCHITECTURE:**
+- Track 1 (voice): ENGLISH ONLY — TTS mangles Vietnamese, no exceptions
+- Track 2 (text bubble): Background `/api/chat` with `_translateOnly: true` → appends `.vi-sub` div below OBI bubble
+- Track 3 (phonics prompt): Inject group `viet_notes` from `NET_PHONICS_GROUPS` for current student group
+- `_translateOnly: true` gate in `/api/chat`: skips memory writes, soul logging, context fetches — translation only
 
 ### PIPELINE / SOUL / LEDGER WORK
 | Doc | Path | Why |
