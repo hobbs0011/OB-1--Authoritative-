@@ -526,6 +526,47 @@
       gap: 0.4rem;
     }
 
+    .links-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+    }
+    @media (max-width: 600px) { .links-grid { grid-template-columns: 1fr; } }
+
+    .quick-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 20px 16px;
+      text-decoration: none;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+      color: var(--text);
+      min-height: 120px;
+    }
+    .quick-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.35);
+      border-color: rgba(168,85,247,0.4);
+    }
+    .card-icon { font-size: 1.5rem; }
+    .card-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+    .card-desc {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.75rem;
+      color: var(--dim);
+    }
+
     .quick-link:hover {
       border-color: var(--purple);
       box-shadow: 0 8px 25px var(--purple-glow);
@@ -670,15 +711,35 @@
 
     <!-- Quick Links -->
     <section class="quick-links">
-      <a href="quang-profile.html" class="quick-link">
-        <span class="link-icon">👤</span>
-        <span class="link-text">Profile</span>
-      </a>
-      <a href="quang-methodology.html" class="quick-link">
-        <span class="link-icon">📘</span>
-        <span class="link-text">Methodology</span>
-      </a>
-          <!-- Video Guide (P5 BlueTech promise) -->
+      <div class="links-grid">
+        <a href="quang-profile.html" class="quick-card">
+          <span class="card-icon">👤</span>
+          <span class="card-title">Profile</span>
+          <span class="card-desc">View and update your details</span>
+        </a>
+        <a href="quang-methodology.html" class="quick-card">
+          <span class="card-icon">📘</span>
+          <span class="card-title">Methodology</span>
+          <span class="card-desc">The NET system</span>
+        </a>
+        <a href="/magic-chat?studentId=quang-nguyen&amp;mode=free" class="quick-card">
+          <span class="card-icon">🎤</span>
+          <span class="card-title">Free Talk</span>
+          <span class="card-desc">Casual conversation with OBI</span>
+        </a>
+        <a href="/magic-chat?studentId=quang-nguyen&amp;mode=study" class="quick-card">
+          <span class="card-icon">📖</span>
+          <span class="card-title">Study Mode</span>
+          <span class="card-desc">Homework &amp; assignments</span>
+        </a>
+        <a href="/magic-chat?studentId=quang-nguyen&amp;mode=phonics" class="quick-card">
+          <span class="card-icon">🧠</span>
+          <span class="card-title">Phonics</span>
+          <span class="card-desc">Pronunciation training</span>
+        </a>
+      </div>
+    </section>
+    <!-- Video Guide (P5 BlueTech promise) -->
     <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:18px 20px;margin-bottom:14px;" id="videoGuide">
       <div style="font-size:0.7rem;text-transform:uppercase;letter-spacing:1px;color:#a78bfa;font-weight:700;margin-bottom:12px;">📺 Getting Started Guide</div>
       <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;background:rgba(0,0,0,0.3);">
@@ -689,9 +750,6 @@
       </div>
       <p style="color:#667;font-size:0.78rem;margin-top:8px;text-align:center;">Watch this to learn how to use your portal and OBI chat.</p>
     </div>
-    </span>
-      </a>
-    </section>
   </main>
 
   <script>

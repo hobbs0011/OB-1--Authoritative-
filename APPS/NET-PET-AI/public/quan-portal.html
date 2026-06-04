@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QUAN PORTAL â€” Dashboard</title>
+    <title>QUAN PORTAL — Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Orbitron:wght@400;500;600;700;800&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -712,6 +712,177 @@
             letter-spacing: 0.03em;
             margin-top: 2px;
         }
+
+        /* ── WELCOME / HERO ── */
+        .welcome-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 32px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            animation: fadeIn 0.5s ease;
+        }
+        .welcome-text { flex: 1; }
+        .welcome-text h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            margin-bottom: 8px;
+        }
+        .tagline {
+            font-size: 0.95rem;
+            color: var(--dim);
+            line-height: 1.6;
+            max-width: 500px;
+        }
+        .welcome-avatar {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: rgba(168,85,247,0.12);
+            border: 2px solid rgba(168,85,247,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .avatar-initials {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--purple);
+        }
+
+        /* ── QUICK LINKS (unique to this portal) ── */
+        .quick-links { margin-bottom: 20px; }
+        .quick-links h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            margin-bottom: 14px;
+            color: var(--text);
+        }
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+        @media (max-width: 600px) { .links-grid { grid-template-columns: 1fr; } }
+        .quick-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 20px 16px;
+            text-decoration: none;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+            min-height: 120px;
+        }
+        .quick-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.35);
+            border-color: rgba(168,85,247,0.4);
+        }
+        .card-icon { font-size: 1.5rem; margin-bottom: 8px; }
+        .card-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+        .card-desc {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.75rem;
+            color: var(--dim);
+            letter-spacing: 0.03em;
+        }
+
+        /* ── MILESTONE ── */
+        .milestone {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 24px;
+            margin-bottom: 20px;
+            animation: fadeIn 0.55s ease;
+        }
+        .milestone-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; gap: 12px; flex-wrap: wrap; }
+        .badge { display: flex; align-items: center; gap: 8px; }
+        .badge-level {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            color: var(--gold);
+        }
+        .badge-label {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            color: var(--dim);
+            text-transform: uppercase;
+        }
+        .progress-info { text-align: right; }
+        .progress-text {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.78rem;
+            color: var(--dim);
+            letter-spacing: 0.03em;
+        }
+        .progress-percent {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--purple);
+        }
+        .milestone-bar {
+            position: relative;
+            height: 8px;
+            background: rgba(255,255,255,0.06);
+            border-radius: 10px;
+            overflow: visible;
+        }
+        .bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--purple), var(--gold));
+            border-radius: 10px;
+            transition: width 0.6s ease;
+        }
+        .bar-marker {
+            position: absolute;
+            top: -6px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--gold);
+            border: 3px solid var(--void);
+            box-shadow: 0 0 12px rgba(245,158,11,0.4);
+            transform: translateX(-50%);
+        }
+        .tiger-marker { background: var(--gold); }
+
+        /* ── NOTE HEADER ── */
+        .note-header { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+        .note-icon { font-size: 1.4rem; }
+        .note-header h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+        }
     </style>
 </head>
 <body>
@@ -760,6 +931,7 @@
         <a href="quan-methodology.html">Methodology</a>
         <a href="quan-transcripts.html">Transcripts</a>
         <a href="quan-action-plan.html">Action Plan</a>
+        <button class="nav-logout" id="logoutBtn">LOGOUT</button>
       </div>
     </nav>
   </header>
@@ -821,7 +993,25 @@
           <span class="card-title">Methodology</span>
           <span class="card-desc">Understand your learning path</span>
         </a>
-            <!-- Video Guide (P5 BlueTech promise) -->
+        <a href="/magic-chat?studentId=quan-nguyen&amp;mode=free" class="quick-card">
+          <span class="card-icon">🎤</span>
+          <span class="card-title">Free Talk</span>
+          <span class="card-desc">Casual conversation with OBI</span>
+        </a>
+        <a href="/magic-chat?studentId=quan-nguyen&amp;mode=study" class="quick-card">
+          <span class="card-icon">📖</span>
+          <span class="card-title">Study Mode</span>
+          <span class="card-desc">Homework &amp; assignments</span>
+        </a>
+        <a href="/magic-chat?studentId=quan-nguyen&amp;mode=phonics" class="quick-card">
+          <span class="card-icon">🧠</span>
+          <span class="card-title">Phonics</span>
+          <span class="card-desc">Pronunciation training</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Video Guide (P5 BlueTech promise) -->
     <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:18px 20px;margin-bottom:14px;" id="videoGuide">
       <div style="font-size:0.7rem;text-transform:uppercase;letter-spacing:1px;color:#a78bfa;font-weight:700;margin-bottom:12px;">📺 Getting Started Guide</div>
       <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;background:rgba(0,0,0,0.3);">
@@ -832,11 +1022,6 @@
       </div>
       <p style="color:#667;font-size:0.78rem;margin-top:8px;text-align:center;">Watch this to learn how to use your portal and OBI chat.</p>
     </div>
-    </span>
-          <span class="card-desc">Jump into the Magic Chat</span>
-        </a>
-      </div>
-    </section>
 
     <!-- Stats Grid (shown when sessions > 0) -->
     <div class="stats-grid" id="statsGrid" style="display:none;">

@@ -851,7 +851,9 @@ async function handleAPI(path, request, env, url) {
     const apiKey = env.DEEPGRAM_API_KEY;
     if (!apiKey) return addCors(json({ error: "DEEPGRAM_API_KEY not configured" }, 500), request);
     const studentId = url.searchParams.get("studentId") || "";
-    const sessionMode = (url.searchParams.get("mode") || "free").toLowerCase(); // free | study | phonics
+    if (!studentId) return addCors(json({ error: "studentId query parameter is required" }, 400), request);
+    const sessionMode = (url.searchParams.get("mode") || "free").toLowerCase();
+    if (!["free","study","phonics"].includes(sessionMode)) return addCors(json({ error: "mode must be one of: free, study, phonics" }, 400), request);
     try {
       const [rawProfile, rawLang, rawVocab, rawArc, rawMemory, rawPhonics, rawSessionHistory] = await Promise.all([
         env.NET_PET_KV.get("student_profile_" + studentId),
@@ -915,7 +917,7 @@ async function handleAPI(path, request, env, url) {
             provider: { type: "deepgram", model: "nova-3" }
           },
           think: {
-            provider: { type: "open_ai", model: "gpt-4o-mini" },
+            provider: { type: "open_ai", model: "deepseek-chat" },
             prompt: buildAgentPrompt(agentProfile, agentLang, recentVocab, arcData, sessionMode, memoryData, phonicsData),
             functions: [{
               name: "save_vocabulary_word",
@@ -925,6 +927,9 @@ async function handleAPI(path, request, env, url) {
           },
           speak: {
             provider: { type: "deepgram", model: "aura-2-zeus-en", speed: ttsSpeed }
+          },
+          on_thought: {
+            conversation_log: {}
           }
         }
       };

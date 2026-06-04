@@ -390,10 +390,78 @@
             <a href="/mai-tram-transcripts">Transcripts</a>
             <a href="/mai-tram-action-plan">Action Plan</a>
             <a href="/magic-chat?studentId=mai-tram" class="nav-coach">🗣️ Chat with OBI</a>
+            <button class="nav-logout" id="logoutBtn">LOGOUT</button>
         </div>
     </nav>
 
     <main class="main-container">
+        <!-- Stats Grid (shown when sessions > 0) -->
+        <div class="stats-grid" id="statsGrid" style="display:none;">
+            <div class="stat-card purple">
+                <div class="stat-accent"></div>
+                <div class="stat-label">Tiger Score</div>
+                <div class="stat-value loading" id="tigerScore">—</div>
+            </div>
+            <div class="stat-card gold">
+                <div class="stat-accent"></div>
+                <div class="stat-label">Streak</div>
+                <div class="stat-value loading" id="streakVal">—</div>
+            </div>
+            <div class="stat-card teal">
+                <div class="stat-accent"></div>
+                <div class="stat-label">Sessions</div>
+                <div class="stat-value loading" id="sessionsVal">—</div>
+            </div>
+            <div class="stat-card success">
+                <div class="stat-accent"></div>
+                <div class="stat-label">Next Session</div>
+                <div class="stat-value loading" id="nextSessionVal">—</div>
+            </div>
+        </div>
+
+        <!-- Day 1 Card (shown when sessions === 0) -->
+        <div class="day1-card" id="day1Card" style="display:none;">
+            <div class="day1-badge">🚀 FIRST DAY</div>
+            <h2>Welcome to Your Portal!</h2>
+            <p>You haven't started your English training yet. Click below to begin your first session with OBI.</p>
+            <div class="day1-steps">
+                <div class="day1-step">
+                    <div class="step-num">1</div>
+                    <div class="step-label">Free Talk</div>
+                    <div class="step-sub">Casual conversation practice</div>
+                </div>
+                <div class="day1-step">
+                    <div class="step-num">2</div>
+                    <div class="step-label">Study Mode</div>
+                    <div class="step-sub">Homework &amp; assignments</div>
+                </div>
+                <div class="day1-step">
+                    <div class="step-num">3</div>
+                    <div class="step-label">Phonics</div>
+                    <div class="step-sub">Pronunciation training</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mode Cards -->
+        <div class="quick-links-grid" style="margin-bottom:20px;">
+            <a href="/magic-chat?studentId=mai-tram&amp;mode=free" class="quick-link-card primary-link">
+                <span class="ql-icon">🎤</span>
+                <div class="ql-label">Free Talk</div>
+                <div class="ql-sub">Casual conversation with OBI</div>
+            </a>
+            <a href="/magic-chat?studentId=mai-tram&amp;mode=study" class="quick-link-card primary-link">
+                <span class="ql-icon">📖</span>
+                <div class="ql-label">Study Mode</div>
+                <div class="ql-sub">Homework &amp; assignments</div>
+            </a>
+            <a href="/magic-chat?studentId=mai-tram&amp;mode=phonics" class="quick-link-card primary-link">
+                <span class="ql-icon">🧠</span>
+                <div class="ql-label">Phonics</div>
+                <div class="ql-sub">Pronunciation training</div>
+            </a>
+        </div>
+
         <!-- Weekly Progress Widget -->
         <div id="weekly-widget" style="display:none;">
             <div class="ww-stat">
