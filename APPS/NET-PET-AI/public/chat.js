@@ -31,6 +31,8 @@ let studentToken = "";        // HMAC token issued at onboarding, used to authen
 let urlStudentId = null;      // populated in boot(), used by openVoiceAgent()
 let chatHistory = [];         // messages for LLM context
 let chatRound = 0;            // current exchange count
+let sessionStartTs = 0;       // for Tiger Win session duration
+let sessionWordsSaved = 0;    // for Tiger Win words count
 const CHAT_ROUNDS = 30;       // natural conversation — pronunciation coaching flows through OBI, not a forced dump
 let ttsOn   = true;
 let obiVoice = null;          // best available SpeechSynthesis voice
@@ -238,6 +240,31 @@ function typingIndicator() {
   feed.scrollTop = feed.scrollHeight;
   return row;
 }
+
+function showTigerWin() {
+  if (document.getElementById('tigerWinOverlay')) return;
+  const dur = sessionStartTs ? Math.round((Date.now() - sessionStartTs) / 60000) : 0;
+  const name = (profile.name || profile.fullName || '').split(' ')[0] || 'Tiger';
+  const streak = profile.streak?.currentStreak || 1;
+  const el = document.createElement('div');
+  el.id = 'tigerWinOverlay';
+  el.className = 'tiger-win-overlay';
+  el.innerHTML = `
+    <div class="tiger-win-card">
+      <div class="tiger-win-title">SESSION COMPLETE 🔥</div>
+      <div class="tiger-win-sub">Great work, ${name}!</div>
+      <div class="tiger-win-stats">
+        <div class="tw-stat"><div class="tw-stat-val">${sessionWordsSaved}</div><div class="tw-stat-lbl">Words</div></div>
+        <div class="tw-stat"><div class="tw-stat-val">${dur}m</div><div class="tw-stat-lbl">Session</div></div>
+        <div class="tw-stat"><div class="tw-stat-val">${streak}🔥</div><div class="tw-stat-lbl">Streak</div></div>
+      </div>
+      <button class="tiger-win-btn" onclick="document.getElementById('tigerWinOverlay').remove()">Done — See you tomorrow!</button>
+    </div>`;
+  document.body.appendChild(el);
+}
+
+// Trigger Tiger Win on conversation-end signals
+document.addEventListener('beforeunload', () => { if (sessionStartTs) showTigerWin(); });
 
 function obi(text, force) {
   // I-1: Crisis/safety messages ALWAYS render regardless of Voice Agent state.
@@ -828,6 +855,8 @@ document.addEventListener("visibilitychange", () => {
 async function openVoiceAgent() {
   if (!urlStudentId || agentWs) return;
   const myId = ++agentWsId;
+  sessionStartTs = Date.now();
+  sessionWordsSaved = 0;
   try {
     // Fetch short-lived JWT token + pre-built Settings from CF Worker
     setMicStatus("Connecting…", false);
@@ -845,6 +874,7 @@ async function openVoiceAgent() {
     const ws = new WebSocket("wss://agent.deepgram.com/v1/agent/converse", ["token", token]);
     ws.binaryType = "arraybuffer";
     agentWs = ws; // set immediately — blocks double-open race before onopen fires
+    const wsOpenTs = Date.now();
 
     ws.onopen = () => {
       if (agentWsId !== myId) { ws.close(); return; }
@@ -854,6 +884,16 @@ async function openVoiceAgent() {
 
     const onAgentDrop = () => {
       if (agentWsId !== myId) return;
+      // 2B: Network fallback — if drop within 5s of connect, show banner
+      if (Date.now() - wsOpenTs < 5000) {
+        const banner = document.getElementById('networkFallbackBanner');
+        if (banner) banner.classList.add('visible');
+        // Re-show text input as fallback
+        const msg = document.getElementById('msg');
+        const sendBtn = document.getElementById('sendBtn');
+        if (msg) msg.style.display = '';
+        if (sendBtn) sendBtn.style.display = '';
+      }
       agentWs = null; agentReady = false; agentSettings = null; agentFirstAudioReceived = false;
       // I-3: Clear stale agentTextResolve on drop to prevent memory leak (EC-1 fix)
       if (agentTextResolve) { const r = agentTextResolve; agentTextResolve = null; try { r(""); } catch {} }
@@ -937,6 +977,7 @@ function handleAgentMsg(event) {
         const callId = msg.function_call_id || msg.id || msg.call_id || "";
         if (fn === "save_vocabulary_word" && args.word) {
           if (!agentSessionVocab.includes(args.word)) agentSessionVocab.push(args.word);
+          sessionWordsSaved++;
           if (profile.studentId) {
             fetch("/api/agent/vocab", {
               method: "POST",
@@ -948,7 +989,7 @@ function handleAgentMsg(event) {
             agentWs.send(JSON.stringify({ type: "FunctionCallResponse", function_call_id: callId, output: `Saved "${args.word}".` }));
           } catch (_) {}
           try {
-            agentWs.send(JSON.stringify({ type: "InjectAgentMessage", message: `Nice — "${args.word}" is in your collection now!` }));
+            agentWs.send(JSON.stringify({ type: "InjectAgentMessage", behavior: "queue", message: `Nice — "${args.word}" is in your collection now!` }));
           } catch (_) {}
         }
         return;
@@ -1070,6 +1111,11 @@ function handleAgentMsg(event) {
           // Voice response arrived while waiting for inject — don't consume the resolver
         }
 
+        // Tiger Win: trigger on goodbye phrases
+        if (sessionStartTs && /\b(see you|goodbye|take care|bye|see you later|good night|see you tomorrow)\b/i.test(msg.content)) {
+          setTimeout(showTigerWin, 2000);
+        }
+
       } else if (msg.type === "ConversationText" && msg.role === "user" && msg.content) {
         bubble("student", msg.content);
         chatMessages.push({ role: "user", content: msg.content });
@@ -1108,7 +1154,7 @@ function handleAgentMsg(event) {
           if (agentWs && agentWs.readyState === WebSocket.OPEN && agentReady && !agentPlaying && agentAudioQ.length === 0 && !agentCurrentAudio) {
             const _name = (profile.fullName || "").split(/\s+/)[0] || "";
             const _viEncourage = profile.lang === "vi" ? " (Đừng lo, cứ nói thoải mái!)" : "";
-            agentWs.send(JSON.stringify({ type: "InjectAgentMessage", message: `Take your time${_name ? ", " + _name : ""}! Try saying one sentence — anything you like.${_viEncourage}` }));
+            agentWs.send(JSON.stringify({ type: "InjectAgentMessage", behavior: "queue", message: `Take your time${_name ? ", " + _name : ""}! Try saying one sentence — anything you like.${_viEncourage}` }));
           }
         }, 2500);
 
@@ -1120,6 +1166,13 @@ function handleAgentMsg(event) {
       } else if (msg.type === "Error") {
         console.error("[AGENT ERROR]", msg.code, msg.description);
         setMicStatus("Error — reconnecting", false);
+        if (msg.code === 'FAILED_TO_SPEAK' || msg.code === 'FAILED_TO_THINK') {
+          bubble('obi', '[Connection issue — please refresh if OBI stops responding]');
+        }
+        // Report to client error telemetry if available
+        if (typeof reportClientError === 'function') {
+          reportClientError('DEEPGRAM_ERROR', { code: msg.code, description: msg.description });
+        }
 
       } else if (msg.type === "Warning") {
         console.warn("[AGENT WARNING]", msg.code, msg.description);

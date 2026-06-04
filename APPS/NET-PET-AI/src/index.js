@@ -939,6 +939,10 @@ async function handleAPI(path, request, env, url) {
       };
       if (lastSessionNotes) settings.agent.think.prompt += "\n\n" + lastSessionNotes;
       const MAX_PROMPT = 24000;
+      const PROMPT_WARN = 20000;
+      if (settings.agent.think.prompt.length > PROMPT_WARN) {
+        console.warn(`PROMPT_NEAR_CAP: ${settings.agent.think.prompt.length} chars (cap ${MAX_PROMPT}, Deepgram limit 25000) — mode=${sessionMode} student=${studentId}`);
+      }
       if (settings.agent.think.prompt.length > MAX_PROMPT) {
         settings.agent.think.prompt = settings.agent.think.prompt.slice(0, MAX_PROMPT) + "\n[context trimmed]";
       }

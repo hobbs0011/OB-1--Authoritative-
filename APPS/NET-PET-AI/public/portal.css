@@ -5,6 +5,7 @@
  */
 
         :root {
+            color-scheme: dark;
             --void: #0a0a12;
             --card: rgba(22, 22, 35, 0.85);
             --purple: #a855f7;
@@ -26,6 +27,7 @@
             background-color: var(--void);
             color: var(--text);
             min-height: 100vh;
+            min-height: 100dvh;
             position: relative;
             overflow-x: hidden;
             line-height: 1.6;
@@ -77,10 +79,13 @@
         .login-crest { width: 80px; height: 80px; margin: 0 auto 20px; display: block; object-fit: contain; }
         .login-box h1 { font-family: 'Orbitron', sans-serif; font-size: 1.6rem; font-weight: 700; letter-spacing: 0.06em; margin-bottom: 6px; }
         .login-subtitle { font-family: 'Rajdhani', sans-serif; font-size: 1rem; font-weight: 500; color: var(--dim); letter-spacing: 0.04em; margin-bottom: 28px; }
+        input {
+            font-size: 16px !important;
+        }
         .login-box input[type="password"] {
             width: 100%; padding: 14px 18px; border-radius: 12px; border: 1px solid var(--border);
             background: rgba(255,255,255,0.04); color: var(--text); font-family: 'Inter', sans-serif;
-            font-size: 1rem; outline: none; transition: border-color 0.3s, box-shadow 0.3s;
+            outline: none; transition: border-color 0.3s, box-shadow 0.3s;
             margin-bottom: 16px; letter-spacing: 0.15em;
         }
         .login-box input[type="password"]:focus { border-color: var(--purple); box-shadow: 0 0 0 3px rgba(168,85,247,0.15); }
@@ -311,7 +316,7 @@
 
         /* Touch-friendly tap targets */
         .nav-links a, .login-btn, .setpw-btn, .setpw-skip,
-        .quick-link-card, .sb-btn-checkin, .sb-btn-saveface, .nav-logout {
+        .quick-link-card, .sb-btn-checkin, .sb-btn-saveface, .nav-logout, .nav-hamburger {
             min-height: 44px;
             display: inline-flex;
             align-items: center;
@@ -347,4 +352,69 @@
         .forecast-level { font-size: 0.75rem; color: var(--dim); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px; }
         .forecast-date { font-size: 1.1rem; color: var(--gold); font-weight: 600; }
         .forecast-sub { font-size: 0.78rem; color: var(--dim); margin-top: 4px; }
+
+        /* Vietnamese translation bubble (chat.js) */
+        .vi-sub {
+          display: block;
+          color: var(--teal);
+          font-size: 12px;
+          font-style: italic;
+          margin-top: 4px;
+          opacity: 0.82;
+          line-height: 1.4;
+        }
+
+        /* Network fallback banner (magic-chat.html) */
+        .network-fallback-banner {
+          display: none;
+          position: fixed; top: 0; left: 0; right: 0;
+          z-index: 15000;
+          background: rgba(239,68,68,0.12);
+          border-bottom: 1px solid rgba(239,68,68,0.3);
+          padding: 10px 20px;
+          text-align: center;
+          font-family: 'Rajdhani', sans-serif;
+          font-size: 0.9rem;
+          color: #fca5a5;
+          letter-spacing: 0.03em;
+        }
+        .network-fallback-banner.visible { display: block; }
+
+        /* Tiger Win overlay (chat.js) */
+        .tiger-win-overlay {
+          position: fixed; inset: 0; z-index: 20000;
+          display: flex; align-items: center; justify-content: center;
+          background: rgba(10,10,18,0.92);
+          animation: fadeIn 0.4s ease;
+        }
+        .tiger-win-card {
+          background: rgba(22,22,35,0.98);
+          border: 1px solid rgba(245,158,11,0.4);
+          border-radius: 28px; padding: 48px 40px;
+          text-align: center; max-width: 400px; width: 90%;
+          box-shadow: 0 0 80px rgba(245,158,11,0.15);
+        }
+        .tiger-win-title {
+          font-family: 'Orbitron', sans-serif; font-size: 1.4rem;
+          font-weight: 700; color: var(--gold);
+          letter-spacing: 0.06em; margin-bottom: 8px;
+        }
+        .tiger-win-sub {
+          font-family: 'Rajdhani', sans-serif; font-size: 0.9rem;
+          color: var(--dim); margin-bottom: 28px; letter-spacing: 0.04em;
+        }
+        .tiger-win-stats {
+          display: grid; grid-template-columns: repeat(3, 1fr);
+          gap: 12px; margin-bottom: 28px;
+        }
+        .tw-stat { background: rgba(255,255,255,0.04); border-radius: 14px; padding: 14px 8px; }
+        .tw-stat-val { font-family: 'Orbitron', sans-serif; font-size: 1.3rem; font-weight: 700; color: var(--gold); }
+        .tw-stat-lbl { font-family: 'Rajdhani', sans-serif; font-size: 0.72rem; color: var(--dim); letter-spacing: 0.06em; text-transform: uppercase; margin-top: 4px; }
+        .tiger-win-btn {
+          display: block; width: 100%; padding: 14px; border-radius: 12px;
+          border: none; background: linear-gradient(135deg, var(--gold), #d97706);
+          color: #0a0a12; font-family: 'Orbitron', sans-serif; font-size: 0.9rem;
+          font-weight: 700; letter-spacing: 0.06em; cursor: pointer;
+          transition: all 0.3s; box-shadow: 0 4px 16px rgba(245,158,11,0.3);
+        }
     
