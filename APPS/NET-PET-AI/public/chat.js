@@ -261,6 +261,10 @@ function showTigerWin() {
       <button class="tiger-win-btn" onclick="document.getElementById('tigerWinOverlay').remove()">Done — See you tomorrow!</button>
     </div>`;
   document.body.appendChild(el);
+  // Block R/L: Refresh phonics card on portal if this was a phonics session
+  if (currentMode === 'phonics' && typeof refreshPhonicsCard === 'function') {
+    refreshPhonicsCard();
+  }
 }
 
 // Trigger Tiger Win on conversation-end signals
@@ -836,6 +840,15 @@ let agentSessionStart = null;  // timestamp when SettingsApplied fires
 let agentReconnectCount = 0;   // backoff counter: resets on clean SettingsApplied
 let agentReconnectTimer = null;// active reconnect timeout handle
 const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+// Block R/J: Multi-tab mic coordination via BroadcastChannel
+const MIC_LOCK_CHANNEL = 'obi_mic_lock';
+const TAB_ID = Date.now() + '-' + Math.random().toString(36).slice(2, 8);
+let micChannel = null;
+try { micChannel = new BroadcastChannel(MIC_LOCK_CHANNEL); } catch (_) {}
+function notifyMicChannel(action) {
+  if (!micChannel) return;
+  try { micChannel.postMessage({ tabId: TAB_ID, action, ts: Date.now() }); } catch (_) {}
+}
 let agentSessionTurns = 0;     // student voice turns this session
 let agentSessionVocab = [];    // vocab words saved via function calling this session
 let userHasInteracted = false; // set on first gesture
@@ -1049,6 +1062,17 @@ function handleAgentMsg(event) {
             }
           } catch (_) { /* WS closed between check and send — safe to ignore */ }
         }, 3500);
+        // Block R/K: Battery saver — stop KeepAlive when tab hidden; restart when visible
+        const keepAliveHandler = () => {
+          if (document.hidden) {
+            if (agentKeepAlive) { clearInterval(agentKeepAlive); agentKeepAlive = null; }
+          } else if (!agentKeepAlive && agentWs && agentWs.readyState === WebSocket.OPEN) {
+            agentKeepAlive = setInterval(() => {
+              try { if (agentWs && agentWs.readyState === WebSocket.OPEN) agentWs.send(JSON.stringify({ type: "KeepAlive" })); } catch (_) {}
+            }, 3500);
+          }
+        };
+        document.addEventListener("visibilitychange", keepAliveHandler);
         // AudioFocus watchdog — resets stuck busy state when AudioContext is suspended (Android)
         if (agentAudioWatchdog) clearInterval(agentAudioWatchdog);
         agentAudioWatchdog = setInterval(() => {
@@ -1286,6 +1310,24 @@ function handleAgentMsg(event) {
           bubble('obi', '[Connection issue — please refresh if OBI stops responding]');
           return;
         }
+
+      } else if (msg.type === "InjectionRefused") {
+        // Block R/I: retry curriculum injection once, drop cosmetic injects silently
+        if (!window._injectionRetried) {
+          window._injectionRetried = true;
+          setTimeout(() => {
+            if (agentWs && agentReady) {
+              // Retry the curriculum injection that was refused
+              if (window._pendingCurriculumInject) {
+                agentWs.send(JSON.stringify({ type: "InjectAgentMessage", behavior: "queue", message: window._pendingCurriculumInject }));
+                window._pendingCurriculumInject = null;
+              }
+            }
+          }, 1500);
+        }
+        // Clear flag so next ConversationText triggers re-inject naturally
+        window._agentCurriculumInjected = false;
+        window._injectionRetried = false;
 
       } else if (msg.type === "Warning") {
         console.warn("[AGENT WARNING]", msg.code, msg.description);
@@ -1880,5 +1922,31 @@ function selectMode(mode) {
   if (obiName) obiName.style.color = MODE_COLORS[currentMode] || MODE_COLORS.free;
   updateModeChip();
 })();
+
+// Block R/L: Refresh phonics progress card data (called from Tiger Win or portal)
+window.refreshPhonicsCard = async function() {
+  if (!urlStudentId) return;
+  try {
+    const r = await fetch(`/api/phonics/progress?studentId=${urlStudentId}`);
+    if (!r.ok) return;
+    const d = await r.json();
+    if (!d.current_group) return;
+    // Update in-page elements if they exist
+    const bar = document.getElementById('phonicsBar');
+    const label = document.getElementById('phonicsLabel');
+    const group = document.getElementById('phonicsGroup');
+    const status = document.getElementById('phonicsStatus');
+    if (bar) {
+      const done = (d.drills_completed || []).length;
+      const total = d.total_drills || 5;
+      const pct = Math.min(100, Math.round((done / total) * 100));
+      bar.style.width = pct + '%';
+      bar.style.transition = 'width 0.4s ease';
+    }
+    if (label) { const done = (d.drills_completed || []).length; const total = d.total_drills || 5; label.textContent = `${done} of ${total} drills complete`; }
+    if (group) group.textContent = d.group_name || d.current_group;
+    if (status) status.textContent = `Group ${d.group_index || 1} of ${d.total_groups || 7}`;
+  } catch (_) {}
+};
 
 boot();

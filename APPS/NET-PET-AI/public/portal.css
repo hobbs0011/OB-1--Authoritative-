@@ -423,6 +423,30 @@
         .tw-stat { background: rgba(255,255,255,0.04); border-radius: 14px; padding: 14px 8px; }
         .tw-stat-val { font-family: 'Orbitron', sans-serif; font-size: 1.3rem; font-weight: 700; color: var(--gold); }
         .tw-stat-lbl { font-family: 'Rajdhani', sans-serif; font-size: 0.72rem; color: var(--dim); letter-spacing: 0.06em; text-transform: uppercase; margin-top: 4px; }
+        /* Transformation hero — dual badge display (Block Q) */
+        .hero-badges {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 12px;
+          padding: 16px 0 8px;
+        }
+        .hero-badges .badge-mark {
+          width: 72px;
+          height: 72px;
+          display: block;
+        }
+        .hero-badges .badge-arrow {
+          font-size: 1.5rem;
+          color: var(--gold);
+          opacity: 0.7;
+          font-weight: 700;
+        }
+        @media (max-width: 480px) {
+          .hero-badges .badge-mark { width: 56px; height: 56px; }
+          .hero-badges .badge-arrow { font-size: 1.2rem; }
+        }
+
         /* Wake Up The Tiger slogan (portal art hero) */
         .tiger-slogan {
           text-align: center;
