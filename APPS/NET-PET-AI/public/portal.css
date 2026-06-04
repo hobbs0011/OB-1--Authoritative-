@@ -447,6 +447,32 @@
           .hero-badges .badge-arrow { font-size: 1.2rem; }
         }
 
+        /* Last session card (mode-specific) */
+        .last-session-card {
+          background: var(--card); border: 1px solid var(--border); border-radius: 20px;
+          padding: 20px; margin-bottom: 20px; animation: fadeIn 0.5s ease;
+        }
+        .last-session-card .ls-header {
+          font-family: 'Rajdhani', sans-serif; font-size: 0.75rem; font-weight: 700;
+          letter-spacing: 0.08em; color: var(--dim); text-transform: uppercase; margin-bottom: 8px;
+        }
+        .last-session-card .ls-body {
+          display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+        }
+        .last-session-card .ls-mode-tag {
+          font-family: 'Orbitron', sans-serif; font-size: 0.7rem; font-weight: 700;
+          letter-spacing: 0.06em; padding: 4px 10px; border-radius: 6px;
+          background: rgba(168,85,247,0.12); color: var(--purple);
+        }
+        .last-session-card .ls-mode-tag.mode-study { background: rgba(245,158,11,0.12); color: var(--gold); }
+        .last-session-card .ls-mode-tag.mode-phonics { background: rgba(20,184,166,0.12); color: var(--teal); }
+        .last-session-card .ls-detail {
+          font-family: 'Rajdhani', sans-serif; font-size: 0.9rem; color: var(--text);
+        }
+        .last-session-card .ls-date {
+          font-size: 0.78rem; color: var(--dim); margin-left: auto;
+        }
+
         /* Wake Up The Tiger slogan (portal art hero) */
         .tiger-slogan {
           text-align: center;

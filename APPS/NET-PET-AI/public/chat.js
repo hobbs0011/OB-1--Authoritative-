@@ -33,6 +33,9 @@ let chatHistory = [];         // messages for LLM context
 let chatRound = 0;            // current exchange count
 let sessionStartTs = 0;       // for Tiger Win session duration
 let sessionWordsSaved = 0;    // for Tiger Win words count
+let phonicsDrillsThisSession = 0; // mode-specific: increment on each drill save
+let longestTurn = 0;              // mode-specific: max word count in any user turn
+let firstStudyReport = null;      // mode-specific: first user turn in study mode
 const CHAT_ROUNDS = 30;       // natural conversation — pronunciation coaching flows through OBI, not a forced dump
 let ttsOn   = true;
 let obiVoice = null;          // best available SpeechSynthesis voice
@@ -246,13 +249,26 @@ function showTigerWin() {
   const dur = sessionStartTs ? Math.round((Date.now() - sessionStartTs) / 60000) : 0;
   const name = (profile.name || profile.fullName || '').split(' ')[0] || 'Tiger';
   const streak = profile.streak?.currentStreak || 1;
+  // Mode-specific stat display
+  let modeStatRow = '';
+  if (currentMode === 'phonics') {
+    const groupName = profile?._phonicsHint?.group_name || 'NET';
+    modeStatRow = `<div class="tw-stat"><div class="tw-stat-val">${groupName}</div><div class="tw-stat-lbl">Group</div></div><div class="tw-stat"><div class="tw-stat-val">${phonicsDrillsThisSession}</div><div class="tw-stat-lbl">Drills</div></div>`;
+  } else if (currentMode === 'study') {
+    modeStatRow = `<div class="tw-stat" style="grid-column:span 2"><div class="tw-stat-val" style="font-size:0.9rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${firstStudyReport ? firstStudyReport.slice(0,30) + '…' : 'Study'}</div><div class="tw-stat-lbl">Topic</div></div>`;
+  } else if (currentMode === 'free' && longestTurn > 0) {
+    modeStatRow = `<div class="tw-stat"><div class="tw-stat-val">${longestTurn}</div><div class="tw-stat-lbl">Longest turn</div></div><div class="tw-stat"><div class="tw-stat-val">${agentSessionTurns||0}</div><div class="tw-stat-lbl">Exchanges</div></div>`;
+  }
   const el = document.createElement('div');
   el.id = 'tigerWinOverlay';
   el.className = 'tiger-win-overlay';
   el.innerHTML = `
     <div class="tiger-win-card">
-      <div class="tiger-win-title">SESSION COMPLETE 🔥</div>
+      <div class="tiger-win-title">${currentMode === 'phonics' ? 'PHONICS DRILL COMPLETE 🔊' : 'SESSION COMPLETE 🔥'}</div>
       <div class="tiger-win-sub">Great work, ${name}!</div>
+      <div class="tiger-win-stats">
+        ${modeStatRow}
+      </div>
       <div class="tiger-win-stats">
         <div class="tw-stat"><div class="tw-stat-val">${sessionWordsSaved}</div><div class="tw-stat-lbl">Words</div></div>
         <div class="tw-stat"><div class="tw-stat-val">${dur}m</div><div class="tw-stat-lbl">Session</div></div>
@@ -265,7 +281,7 @@ function showTigerWin() {
   if (currentMode === 'phonics' && typeof refreshPhonicsCard === 'function') {
     refreshPhonicsCard();
   }
-  // Block S: Fire-and-forget session writeback
+  // Block S: Fire-and-forget session writeback — mode-specific fields
   const patchBody = {
     studentId: urlStudentId,
     patch: {
@@ -273,9 +289,19 @@ function showTigerWin() {
         date: new Date().toISOString(),
         turns: agentSessionTurns || 0,
         vocabSaved: sessionWordsSaved,
-        mode: currentMode
+        mode: currentMode,
+        duration: dur,
+        ...(currentMode === 'phonics' && profile?._phonicsHint?.group_name ? { phonicsGroup: profile._phonicsHint.group_name } : {}),
+        ...(currentMode === 'phonics' ? { drillsCompleted: phonicsDrillsThisSession } : {}),
+        ...(currentMode === 'study' && firstStudyReport ? { studyTopic: firstStudyReport } : {}),
+        ...(currentMode === 'study' ? { studyMinutes: dur } : {}),
+        ...(currentMode === 'free' && longestTurn > 0 ? { longestTurn } : {})
       },
-      streak: { currentStreak: streak, lastSessionDate: Date.now() }
+      streak: { currentStreak: streak, lastSessionDate: Date.now() },
+      progression: {
+        ...(currentMode === 'phonics' ? { drillsCompleted: phonicsDrillsThisSession } : {}),
+        ...(currentMode === 'free' ? { longestTurn } : {})
+      }
     }
   };
   fetch('/api/student/state', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(patchBody) }).catch(() => {});
@@ -894,6 +920,9 @@ async function openVoiceAgent() {
   const myId = ++agentWsId;
   sessionStartTs = Date.now();
   sessionWordsSaved = 0;
+  phonicsDrillsThisSession = 0;
+  longestTurn = 0;
+  firstStudyReport = null;
   try {
     // Fetch short-lived JWT token + pre-built Settings from CF Worker
     setMicStatus("Connecting…", false);
@@ -1197,10 +1226,18 @@ function handleAgentMsg(event) {
         if (chatMessages.length > 40) chatMessages = chatMessages.slice(-40);
         agentSessionTurns++;
 
+        // Mode-specific tracking
+        const wordCount = msg.content.split(/\s+/).length;
+        if (wordCount > longestTurn) longestTurn = wordCount;
+        if (currentMode === 'study' && !firstStudyReport) {
+          firstStudyReport = msg.content.slice(0, 100);
+        }
+
         // Phonics drill completion: save progress after first user turn in phonics mode
         if (currentMode === 'phonics' && profile?.studentId) {
           const drillId = profile._phonicsHint?.next_drill?.id || profile._phonicsHint?.drill_id;
           if (drillId) {
+            phonicsDrillsThisSession++;
             fetch('/api/phonics/progress', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },

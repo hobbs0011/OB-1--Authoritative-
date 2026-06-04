@@ -570,6 +570,16 @@
             <span class="vi-sub">Đánh thức con hổ trong bạn</span>
         </div>
 
+        <!-- Last Session Card (from session writeback) -->
+        <div class="last-session-card" id="lastSessionCard" style="display:none;">
+            <div class="ls-header">Last Session</div>
+            <div class="ls-body">
+                <span class="ls-mode-tag" id="lsModeTag">Free Talk</span>
+                <span class="ls-detail" id="lsDetail">—</span>
+                <span class="ls-date" id="lsDate">—</span>
+            </div>
+        </div>
+
         <!-- Weekly Progress Widget -->
         <div id="weekly-widget" style="display:none;">
             <div class="ww-stat">
@@ -762,6 +772,40 @@
                 if (d1) d1.style.display = 'block';
             }
             loadPhonicsProgress();
+            loadLastSession();
+        }
+
+        function formatModeDetail(ls) {
+            const mode = ls.mode || 'free';
+            const tagMap = { free:'Free Talk', study:'Study', phonics:'Phonics' };
+            const tag = tagMap[mode] || 'Free Talk';
+            if (mode === 'phonics' && ls.drillsCompleted > 0) {
+                const grp = ls.phonicsGroup || 'NET';
+                return { tag, cls: 'mode-phonics', detail: `${grp} · ${ls.drillsCompleted} drill${ls.drillsCompleted > 1 ? 's' : ''}` };
+            }
+            if (mode === 'study' && ls.studyTopic) {
+                return { tag, cls: 'mode-study', detail: `"${ls.studyTopic.slice(0,50)}${ls.studyTopic.length > 50 ? '…' : ''}"` };
+            }
+            if (mode === 'free' && ls.longestTurn) {
+                return { tag, cls: '', detail: `${ls.turns || 0} exchanges · ${ls.longestTurn}w longest` };
+            }
+            return { tag, cls: '', detail: `${ls.turns || 0} exchanges · ${ls.vocabSaved || 0} words` };
+        }
+
+        async function loadLastSession() {
+            try {
+                const r = await fetch(`${API}/api/student/state?studentId=${STUDENT_ID}`);
+                const d = await r.json();
+                const profile = d.profile;
+                if (!profile || !profile.lastSession) return;
+                const ls = profile.lastSession;
+                const fmt = formatModeDetail(ls);
+                document.getElementById('lsModeTag').textContent = fmt.tag;
+                document.getElementById('lsModeTag').className = 'ls-mode-tag ' + fmt.cls;
+                document.getElementById('lsDetail').textContent = fmt.detail;
+                document.getElementById('lsDate').textContent = new Date(ls.date).toLocaleDateString('en-US', { month:'short', day:'numeric' });
+                document.getElementById('lastSessionCard').style.display = 'block';
+            } catch(e) {}
         }
 
         async function loadPhonicsProgress() {
