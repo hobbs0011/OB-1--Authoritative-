@@ -821,6 +821,8 @@ let agentAudioCtx     = null;  // AudioContext for PCM16 capture
 let agentWorklet      = null;  // AudioWorkletNode (pcm-worklet.js)
 let agentMicStream    = null;  // MediaStream from getUserMedia
 const agentAudioQ     = [];    // Queued binary MP3 chunks from Deepgram TTS
+let agentTokenPrefetched = null; // Block H: prefetched token for proactive refresh
+let agentTokenRefreshTimer = null; // Block H: setTimeout handle for token refresh
 let agentPlaying      = false;
 let agentCurrentAudio = null;  // currently playing Audio element (for barge-in stop)
 let agentCurrentBlobUrl = null; // gapless v2: explicit revoke on barge-in
@@ -852,6 +854,14 @@ document.addEventListener("visibilitychange", () => {
   }
 });
 
+// EC-7: Orientation change — re-layout chat box height (Samsung Android)
+window.addEventListener('orientationchange', () => {
+  setTimeout(() => {
+    const feed = document.getElementById('feed');
+    if (feed) feed.style.maxHeight = (window.innerHeight * 0.55) + 'px';
+  }, 300);
+});
+
 async function openVoiceAgent() {
   if (!urlStudentId || agentWs) return;
   const myId = ++agentWsId;
@@ -867,11 +877,26 @@ async function openVoiceAgent() {
     if (!token) { console.error("[VOICE] no token in response"); setMicStatus("Tap to start", false); return; }
     if (agentWsId !== myId) return; // zombie check — another openVoiceAgent() fired during async fetch
 
+    // Block H: Use prefetched token if available, else use fresh one
+    const tokenToUse = agentTokenPrefetched || token;
+    if (agentTokenPrefetched) agentTokenPrefetched = null; // consume prefetch
+
+    // Block H: Proactive token refresh — pre-fetch new token before current one expires
+    if (agentTokenRefreshTimer) clearTimeout(agentTokenRefreshTimer);
+    const TOKEN_REFRESH_MS = 25 * 60 * 1000; // 25 minutes
+    agentTokenRefreshTimer = setTimeout(async () => {
+      try {
+        const res = await fetch(`/api/deepgram-token?studentId=${encodeURIComponent(urlStudentId)}&mode=${encodeURIComponent(currentMode)}`);
+        const data = await res.json();
+        if (data.token) agentTokenPrefetched = data.token;
+      } catch (_) {}
+    }, TOKEN_REFRESH_MS);
+
     agentSettings = settings; // stored for Welcome handler
     lastSessionVocabGlobal = lastSessionVocab || [];
 
     // Connect directly to Deepgram — JWT via Sec-WebSocket-Protocol (Deepgram echoes "token" back)
-    const ws = new WebSocket("wss://agent.deepgram.com/v1/agent/converse", ["token", token]);
+    const ws = new WebSocket("wss://agent.deepgram.com/v1/agent/converse", ["token", tokenToUse]);
     ws.binaryType = "arraybuffer";
     agentWs = ws; // set immediately — blocks double-open race before onopen fires
     const wsOpenTs = Date.now();
@@ -904,13 +929,24 @@ async function openVoiceAgent() {
       if (agentCurrentAudio) { try { agentCurrentAudio.pause(); } catch {} agentCurrentAudio = null; }
       agentAudioQ.length = 0; agentChunkAccum = []; agentChunkAccumSize = 0; agentPreSettingsBuffer = []; agentPreSettingsBytes = 0; agentPlaying = false;
       if (agentThinkBubble) { agentThinkBubble.remove(); agentThinkBubble = null; }
-      if (agentWorklet) { try { agentWorklet.disconnect(); } catch {} agentWorklet = null; }
-      if (agentAudioCtx) { agentAudioCtx.close().catch(() => {}); agentAudioCtx = null; }
-      // C2: cache mic stream for iOS — don't stop it, keep alive for reconnect
-      const cachedStream = agentMicStream;  // keep reference but clear variable
+      // Block E: On iOS, don't disconnect worklet or close AudioContext — keep them alive for gesture-less reconnect
+      if (isIOS) {
+        if (agentWorklet) { try { agentWorklet.disconnect(); } catch {} }  // disconnect but don't null
+        // Keep agentAudioCtx alive — closing it kills iOS audio until next gesture
+        if (agentAudioCtx && agentAudioCtx.state === 'running') {
+          try { agentAudioCtx.suspend(); } catch {}  // suspend instead of close
+        }
+      } else {
+        if (agentWorklet) { try { agentWorklet.disconnect(); } catch {} agentWorklet = null; }
+        if (agentAudioCtx) { agentAudioCtx.close().catch(() => {}); agentAudioCtx = null; }
+      }
+      // Block E: Never stop mic tracks on iOS — stream stays alive for reconnect
+      const cachedStream = agentMicStream;
       agentMicStream = null;
-      // Stop tracks only if NOT iOS — iOS needs the stream alive for gesture-less reconnect
       if (!isIOS && cachedStream) { cachedStream.getTracks().forEach(t => t.stop()); }
+      if (isIOS && cachedStream?.active) {
+        pendingMicStream = cachedStream;  // immediately available for reconnect
+      }
       listening = false;
       micBtn.classList.remove("mic-active");
       setMicStatus("Tap to reconnect", false);
@@ -921,11 +957,10 @@ async function openVoiceAgent() {
         agentReconnectTimer = setTimeout(() => {
           agentReconnectTimer = null;
           if (!agentWs && urlStudentId) {
+            // Block E: On reconnect, pendingMicStream is already set from the cached stream
+            // startAgentListening() will check pendingMicStream first
             openVoiceAgent();
-            // C2: On iOS, reuse cached mic stream (never stopped) — avoids getUserMedia gesture requirement
-            if (userHasInteracted && isIOS && cachedStream?.active) {
-              pendingMicStream = cachedStream;
-            } else if (userHasInteracted && !isIOS) {
+            if (!isIOS && userHasInteracted && !pendingMicStream) {
               navigator.mediaDevices.getUserMedia({ audio: { channelCount: 1, echoCancellation: true, noiseSuppression: true, autoGainControl: true } })
                 .then(s => { pendingMicStream = s; })
                 .catch(() => {});
@@ -1146,17 +1181,11 @@ function handleAgentMsg(event) {
         agentPlaying = false;
         agentCurrentAudio = null;
         if (state === "busy") state = "chat";
-        // Silence detection — if student doesn't speak within 2.5s, inject gentle prompt
-        if (agentSilenceTimer) clearTimeout(agentSilenceTimer);
-        agentSilenceTimer = setTimeout(() => {
-          agentSilenceTimer = null;
-          // I-6: Double-check playback state — watchdog may have reset agentPlaying mid-speech (EC-5 fix)
-          if (agentWs && agentWs.readyState === WebSocket.OPEN && agentReady && !agentPlaying && agentAudioQ.length === 0 && !agentCurrentAudio) {
-            const _name = (profile.fullName || "").split(/\s+/)[0] || "";
-            const _viEncourage = profile.lang === "vi" ? " (Đừng lo, cứ nói thoải mái!)" : "";
-            agentWs.send(JSON.stringify({ type: "InjectAgentMessage", behavior: "queue", message: `Take your time${_name ? ", " + _name : ""}! Try saying one sentence — anything you like.${_viEncourage}` }));
-          }
-        }, 2500);
+        // Block F: Canonical silence timer — only set if audio queue is already empty
+        if (agentAudioQ.length === 0) {
+          resetSilenceTimer();
+        }
+        // else: playAgentChunk drain will call resetSilenceTimer when queue empties
 
       } else if (msg.type === "Goodbye") {
         setMicStatus("Session ended", false);
@@ -1290,8 +1319,21 @@ function handleAgentMsg(event) {
   else if (agentPlaying && !agentCurrentAudio && agentAudioQ.length > 0) { agentPlaying = false; playAgentChunk(); }
 }
 
+// Block F: Single canonical silence timer — collapses two timer-setting paths into one
+function resetSilenceTimer() {
+  if (agentSilenceTimer) clearTimeout(agentSilenceTimer);
+  agentSilenceTimer = setTimeout(() => {
+    agentSilenceTimer = null;
+    if (agentWs && agentWs.readyState === WebSocket.OPEN && agentReady && !agentPlaying && agentAudioQ.length === 0 && !agentCurrentAudio) {
+      const _name = (profile.fullName || "").split(/\s+/)[0] || "";
+      const _viEncourage = profile.lang === "vi" ? " (Đừng lo, cứ nói thoải mái!)" : "";
+      agentWs.send(JSON.stringify({ type: "InjectAgentMessage", behavior: "queue", message: `Take your time${_name ? ", " + _name : ""}! Try saying one sentence — anything you like.${_viEncourage}` }));
+    }
+  }, 2500);
+}
+
 async function playAgentChunk() {
-  if (!agentAudioQ.length) { agentPlaying = false; agentCurrentAudio = null; return; }
+  if (!agentAudioQ.length) { agentPlaying = false; agentCurrentAudio = null; resetSilenceTimer(); return; }
   agentFirstAudioReceived = true;
   agentPlaying = true;
   if (state !== "busy") state = "busy";
@@ -1335,11 +1377,19 @@ async function startAgentListening(preAcquiredStream) {
     window.addEventListener("beforeunload", stopOnLeave, { once: true });
     window.addEventListener("pagehide", stopOnLeave, { once: true });
 
-    try {
-      agentAudioCtx = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: 16000 });
-    } catch {
-      agentAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    // Block E: On iOS reconnect, agentAudioCtx was suspended (not closed) — resume it
+    if (agentAudioCtx && agentAudioCtx.state === 'suspended') {
+      await agentAudioCtx.resume();
+    } else {
+      if (agentAudioCtx) { agentAudioCtx.close().catch(() => {}); }
+      try {
+        agentAudioCtx = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: 16000 });
+      } catch {
+        agentAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
     }
+    // Clear stale worklet — a fresh one will be created below
+    if (agentWorklet) { try { agentWorklet.disconnect(); } catch {} agentWorklet = null; }
 
     const src = agentAudioCtx.createMediaStreamSource(stream);
 

@@ -307,6 +307,19 @@
             .dashboard-header h1 { font-size: 1.2rem; }
         }
 
+        /* EC-16: 320px width (iPhone SE 1st gen) */
+        @media (max-width: 340px) {
+            .nav-brand { font-size: 0.85rem; }
+            .nav-brand img { width: 28px; height: 28px; }
+            #navToggle { padding: 6px; }
+        }
+
+        /* EC-7: Orientation change on mobile — landscape chat height */
+        @media (orientation: landscape) and (max-height: 500px) {
+            .main-container { padding-top: 75px; }
+            .mode-cards { display: none; }
+        }
+
         /* ── VOCAB PILLS ── */
         .vocab-grid { display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
         .vocab-pill { display:inline-flex; flex-direction:column; align-items:center; background:rgba(20,184,166,0.08); border:1px solid rgba(20,184,166,0.2); border-radius:10px; padding:6px 12px; gap:2px; }
