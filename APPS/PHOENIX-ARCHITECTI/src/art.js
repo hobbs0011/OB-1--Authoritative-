@@ -1,21 +1,17 @@
 import { checkAdminKey } from './security.js';
 
-const DS_URL = 'https://api.deepseek.com/v1/chat/completions';
-const DS_MODEL = 'deepseek-chat';
+const PA_URL = 'https://phoenix-architecti.mrmichaelhobbs123.workers.dev';
 
-async function dsAgent(apiKey, systemPrompt, userPrompt) {
-  const res = await fetch(DS_URL, {
+async function paT2(env, task, context) {
+  const body = JSON.stringify({ task, context, tier: 2 });
+  const auth = env.WORKER_ADMIN_KEY || env.PA_AUTH_SECRET || '';
+  const resp = await fetch(`${PA_URL}/api/code`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
-    body: JSON.stringify({
-      model: DS_MODEL,
-      messages: [{ role: 'system', content: systemPrompt }, { role: 'user', content: userPrompt }],
-      max_tokens: 512,
-      response_format: { type: 'json_object' },
-    }),
+    headers: { 'Content-Type': 'application/json', 'x-pa-auth': auth },
+    body,
   });
-  const j = await res.json();
-  try { return JSON.parse(j.choices[0].message.content); } catch { return {}; }
+  const j = await resp.json();
+  try { return JSON.parse(j.patch); } catch { return {}; }
 }
 
 export async function handleArt(request, env) {
@@ -31,15 +27,12 @@ export async function handleArt(request, env) {
       }
       const { content, source = 'unknown', save = false } = body;
       const snippet = content.slice(0, 4000);
-      const apiKey = env.DEEPSEEK_API_KEY;
-      if (!apiKey) return Response.json({ error: 'DEEPSEEK_API_KEY not set' }, { status: 500 });
-
-      const SYS = 'You are an expert art analyst. Respond ONLY with valid JSON matching the requested structure.';
+      const SYS = 'You are an expert art analyst. Respond ONLY with valid JSON matching the requested structure. No explanation. No markdown.';
 
       const [r1, r2, r3] = await Promise.all([
-        dsAgent(apiKey, SYS, `From this art dossier (source: ${source}), extract: {"title":"...","artist":"...","style":"..."}. Text:\n${snippet}`),
-        dsAgent(apiKey, SYS, `From this art dossier (source: ${source}), extract: {"description":"...","tags":"comma,separated,tags"}. Text:\n${snippet}`),
-        dsAgent(apiKey, SYS, `From this art dossier (source: ${source}), extract: {"url":"...","notes":"..."}. Text:\n${snippet}`),
+        paT2(env, `From this art dossier (source: ${source}), extract ONLY: {"title":"...","artist":"...","style":"..."}. Text:\n${snippet}`, SYS),
+        paT2(env, `From this art dossier (source: ${source}), extract ONLY: {"description":"...","tags":"comma,separated,tags"}. Text:\n${snippet}`, SYS),
+        paT2(env, `From this art dossier (source: ${source}), extract ONLY: {"url":"...","notes":"..."}. Text:\n${snippet}`, SYS),
       ]);
 
       const piece = {

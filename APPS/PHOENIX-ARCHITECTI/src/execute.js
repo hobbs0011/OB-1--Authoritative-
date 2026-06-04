@@ -24,6 +24,7 @@ export async function handleExecute(request, env) {
   const task = sanitizeInput(body.task, 10000);
   const context = sanitizeInput(body.context, 50000);
   const { target, model } = body;
+  const tier = parseInt(body.tier) || 10;
 
   if (!task) return Response.json({ error: 'task required' }, { status: 400 });
 
@@ -39,10 +40,29 @@ export async function handleExecute(request, env) {
 
   let aiResult;
   let usedModel = model || '@cf/qwen/qwen2.5-coder-32b-instruct';
-  let tierUsed = 10; // Default to CF-Qwen tier
+  let tierUsed = 10;
 
-  // Try Kilo T1 first if DIALAGRAM_API_KEY is available
-  if (env.DIALAGRAM_API_KEY) {
+  // T2: DeepSeek Flash (deepseek-chat via api.deepseek.com)
+  if (tier === 2 && env.DEEPSEEK_API_KEY) {
+    try {
+      const dsResp = await fetch('https://api.deepseek.com/v1/chat/completions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${env.DEEPSEEK_API_KEY}` },
+        body: JSON.stringify({ model: 'deepseek-chat', messages, max_tokens: 4096 }),
+      });
+      if (dsResp.ok) {
+        const dsJson = await dsResp.json();
+        if (dsJson.choices?.[0]?.message?.content) {
+          aiResult = { response: dsJson.choices[0].message.content };
+          usedModel = 'deepseek-chat';
+          tierUsed = 2;
+        }
+      }
+    } catch (_) {}
+  }
+
+  // T1: Kilo → CF-Qwen cascade
+  if (!aiResult && env.DIALAGRAM_API_KEY) {
     try {
       const kiloResponse = await fetch(`https://phoenix-architecti.mrmichaelhobbs123.workers.dev/v1/chat/completions`, {
         method: 'POST',
@@ -72,7 +92,7 @@ export async function handleExecute(request, env) {
     }
   }
 
-  // Fallback to CF-Qwen if Kilo not available or failed
+  // T10: CF-Qwen fallback
   if (!aiResult) {
     aiResult = await env.AI.run(usedModel, { messages, max_tokens: 8192 });
     // tierUsed remains 10 for CF-Qwen
