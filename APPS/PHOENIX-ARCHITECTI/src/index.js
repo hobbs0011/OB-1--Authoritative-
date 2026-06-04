@@ -43,6 +43,8 @@ export default {
         response = await handleBlueprint(request, env);
       } else if (method === 'GET' && pathname === '/api/status') {
         response = await handleStatus(env);
+      } else if (pathname === '/art-arsenal') {
+        response = await handleArtArsenal(request, env);
       } else if (pathname.startsWith('/api/art')) {
         response = await handleArt(request, env);
       } else {
