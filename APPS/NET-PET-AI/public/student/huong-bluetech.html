@@ -348,6 +348,48 @@
         .forecast-date { font-size: 1.1rem; color: var(--gold); font-weight: 600; }
         .forecast-sub { font-size: 0.78rem; color: var(--dim); margin-top: 4px; }
 
+        /* Transformation art card */
+        .art-hero-card {
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(245,158,11,0.18);
+            margin-bottom: 20px;
+            background: var(--card);
+            animation: fadeIn 0.7s ease;
+        }
+        .art-hero-img {
+            width: 100%;
+            display: block;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+            object-position: center 30%;
+            opacity: 0.88;
+            transition: opacity 0.3s;
+        }
+        .art-hero-card:hover .art-hero-img { opacity: 1; }
+        .art-hero-caption {
+            padding: 14px 20px;
+            text-align: center;
+            border-top: 1px solid rgba(245,158,11,0.12);
+        }
+        .art-hero-caption .caption-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            color: var(--gold);
+            text-transform: uppercase;
+        }
+        .art-hero-caption .caption-sub {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.82rem;
+            color: var(--dim);
+            margin-top: 3px;
+        }
+        @media (max-width: 480px) {
+            .art-hero-img { aspect-ratio: 4/3; }
+        }
+
         /* Art Arsenal mode icons */
         .ql-icon-img {
             display: block;
@@ -369,7 +411,9 @@
     <!-- LOGIN OVERLAY -->
     <div id="loginScreen">
         <div class="login-box" id="loginBox">
-            <img src="/icons/badge-tiger.svg" alt="Phoenix" class="login-crest" onerror="this.style.display='none'">
+            <img src="/assessment-assets/brand/NET-LION-VOICE-4.png" alt="OBI" class="login-crest"
+                 onerror="this.src='/icons/badge-tiger.svg'"
+                 style="border-radius:50%;border:2px solid rgba(168,85,247,0.35);box-shadow:0 0 20px rgba(168,85,247,0.2);">
             <h1>HUONG PORTAL</h1>
             <p class="login-subtitle">Natural English Training</p>
             <input type="password" id="portalPw" placeholder="Enter portal password" autocomplete="off">
@@ -483,6 +527,19 @@
             </a>
         </div>
 
+        <!-- Transformation Art Hero -->
+        <div class="art-hero-card">
+            <img class="art-hero-img"
+                 src="https://net-art-arsenal.pages.dev/thumbs/artwork/mouse-tiger-confidence.webp"
+                 alt="Mouse Voice to Tiger Voice"
+                 loading="lazy"
+                 onerror="this.src='https://net-art-arsenal.pages.dev/artwork/mouse-tiger-confidence.png'">
+            <div class="art-hero-caption">
+                <div class="caption-title">Mouse Voice → Tiger Voice</div>
+                <div class="caption-sub">Your transformation. Every session counts.</div>
+            </div>
+        </div>
+
         <!-- Weekly Progress Widget -->
         <div id="weekly-widget" style="display:none;">
             <div class="ww-stat">
@@ -514,6 +571,13 @@
 
     <!-- STREAK BADGE -->
     <div id="streak-badge" style="display:none;"></div>
+
+    <!-- Portal Watermark -->
+    <img class="portal-watermark"
+         src="/assessment-assets/brand/NET-PHXRISING-LOGO.webp"
+         onerror="this.style.display='none'"
+         alt=""
+         aria-hidden="true">
 
     </main>
 

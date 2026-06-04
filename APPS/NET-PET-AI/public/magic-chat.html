@@ -224,12 +224,24 @@
     #modeLanding {
       position: fixed; inset: 0;
       background: var(--void);
+      background-image: url('https://net-art-arsenal.pages.dev/thumbs/artwork/gemini-concept-art-07.webp');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
       z-index: 10000;
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
       gap: 24px; padding: 24px;
     }
+    #modeLanding::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(10, 10, 18, 0.82);
+      z-index: 0;
+    }
     #modeLanding.hidden { display: none; }
+    #modeLanding > * { position: relative; z-index: 1; }
     #modeLanding h2 { font-size: 1.5rem; color: var(--purple); margin-bottom: 8px; }
     #modeLanding p { color: var(--muted); font-size: 0.9rem; max-width: 400px; text-align: center; }
     .landing-modes { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; margin-top: 16px; }
@@ -421,7 +433,8 @@
       <button class="ts-btn" onclick="document.getElementById('tigerSummary').classList.remove('show')">Continue →</button>
     </div>
   </div>
-  <div id="feed"></div>
+  <div id="feed" style="position:relative;"></div>
+  <div style="position:fixed;bottom:60px;right:16px;opacity:0.04;width:200px;height:200px;pointer-events:none;z-index:0;background:url('/assessment-assets/brand/NET-PHXRISING-LOGO.webp') center/contain no-repeat;" aria-hidden="true"></div>
   <form id="form" autocomplete="off">
     <div id="inputBar">
       <input id="msg" type="text" autocomplete="off" tabindex="-1" aria-hidden="true">
