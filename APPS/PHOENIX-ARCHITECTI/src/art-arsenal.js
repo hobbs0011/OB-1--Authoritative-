@@ -95,6 +95,7 @@ export async function handleArtArsenal(request, env) {
     if (u.startsWith('CANON/GAME-DESIGN/')) return CDN + '/game-design/' + u.slice(18).trim();
     if (u.startsWith('ASSETS/')) return CDN + '/assets/' + u.slice(7);
     if (u.startsWith('codex_preview/')) return CDN + '/codex/' + u.slice(14);
+    if (u.startsWith('protocols/')) return CDN + '/' + u;
     return null;
   }
 
