@@ -5,6 +5,7 @@ import { handleSwarm } from './swarm.js';
 import { handleBlueprint } from './blueprint.js';
 import { handleStatus } from './status.js';
 import { handleArt } from './art.js';
+import { handleArtArsenal } from './art-arsenal.js';
 
 const VERSION = '1.0.0';
 

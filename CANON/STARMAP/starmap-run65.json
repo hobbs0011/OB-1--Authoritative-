@@ -1,0 +1,14 @@
+{
+  "run": "65",
+  "rrl_path": "D:\\OB-1-CANONICAL\\RRL\\RRL-65.txt",
+  "ledger_id": "HL-406",
+  "session_id": "sov100-roman-run65",
+  "rrl_chars": 2092148,
+  "rrl_bytes": 2105296,
+  "soul_delta": 1747329,
+  "soul_event_id": "fcb63cab-88bf-4c3f-b55c-0bb713d404cd",
+  "dna_count": 131,
+  "blueprint_count": 10,
+  "sealed_at": "2026-06-04T09:08:12.2382188+07:00",
+  "merkle_hash": "d95c47f0f9041a1f0af30fdecb63cb2f2aab611e2432e49832636b97139225fe"
+}
