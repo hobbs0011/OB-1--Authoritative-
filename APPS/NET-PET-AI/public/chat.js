@@ -1166,12 +1166,96 @@ function handleAgentMsg(event) {
       } else if (msg.type === "Error") {
         console.error("[AGENT ERROR]", msg.code, msg.description);
         setMicStatus("Error — reconnecting", false);
-        if (msg.code === 'FAILED_TO_SPEAK' || msg.code === 'FAILED_TO_THINK') {
-          bubble('obi', '[Connection issue — please refresh if OBI stops responding]');
-        }
-        // Report to client error telemetry if available
+        const errCode = msg.code || '';
+        const errDesc = msg.description || '';
+
+        // Report to client error telemetry
         if (typeof reportClientError === 'function') {
-          reportClientError('DEEPGRAM_ERROR', { code: msg.code, description: msg.description });
+          reportClientError('DEEPGRAM_ERROR', { code: errCode, description: errDesc });
+        }
+
+        // ── INVALID_AUTH: re-fetch token silently ───────────────────────────
+        if (errCode === 'INVALID_AUTH') {
+          setMicStatus("Reconnecting...", false);
+          // Close the stale WS if still alive
+          try { if (agentWs) agentWs.close(); } catch (_) {}
+          agentWs = null;
+          // Retry once: re-fetch token and reconnect
+          openVoiceAgent();
+          return;
+        }
+
+        // ── RATE_LIMIT_EXCEEDED: show text fallback, retry later ────────────
+        if (errCode === 'RATE_LIMIT_EXCEEDED') {
+          const banner = document.getElementById('networkFallbackBanner');
+          if (banner) { banner.textContent = 'Voice busy — use text below'; banner.classList.add('visible'); }
+          const msgEl = document.getElementById('msg');
+          const sendEl = document.getElementById('sendBtn');
+          if (msgEl) msgEl.style.display = '';
+          if (sendEl) sendEl.style.display = '';
+          setTimeout(() => openVoiceAgent(), 30000);
+          return;
+        }
+
+        // ── INVALID_SETTINGS: retry with minimal Settings ───────────────────
+        if (errCode === 'INVALID_SETTINGS') {
+          console.error("[INVALID_SETTINGS full payload]", JSON.stringify(msg));
+          // Try stripped-down settings: gpt-4o-mini only, no extras
+          if (agentWs && agentSettings) {
+            const minimalSettings = {
+              type: "Settings", audio: { input: { encoding: "linear16", sample_rate: 16000 }, output: { encoding: "mp3" } },
+              agent: { listen: { provider: { type: "deepgram", model: "nova-3" } },
+                       think: { provider: { type: "open_ai", model: "gpt-4o-mini" }, prompt: "You are OBI." },
+                       speak: { provider: { type: "deepgram", model: "aura-2-zeus-en" } } }
+            };
+            try { agentWs.send(JSON.stringify(minimalSettings)); } catch (_) {}
+          } else {
+            bubble('obi', '[Voice configuration issue — switching to text mode]');
+            document.getElementById('msg').style.display = '';
+            document.getElementById('sendBtn').style.display = '';
+          }
+          return;
+        }
+
+        // ── MODEL_NOT_FOUND: fall back to REST /api/chat ────────────────────
+        if (errCode === 'MODEL_NOT_FOUND') {
+          bubble('obi', '[OBI voice unavailable — text mode active]');
+          document.getElementById('msg').style.display = '';
+          document.getElementById('sendBtn').style.display = '';
+          return;
+        }
+
+        // ── AUDIO_TIMEOUT: re-inject silence prompt ─────────────────────────
+        if (errCode === 'AUDIO_TIMEOUT') {
+          if (agentWs && agentReady) {
+            try { agentWs.send(JSON.stringify({ type: "InjectAgentMessage", behavior: "queue", message: "Xin lỗi! Let's try again." })); } catch (_) {}
+          }
+          if (agentSilenceTimer) { clearTimeout(agentSilenceTimer); agentSilenceTimer = null; }
+          return;
+        }
+
+        // ── LLM_PROVIDER_ERROR: single retry, then REST fallback ────────────
+        if (errCode === 'LLM_PROVIDER_ERROR') {
+          if (!window._llmRetried) {
+            window._llmRetried = true;
+            setMicStatus("Thinking harder...", true);
+            setTimeout(() => {
+              if (agentWs) { try { agentWs.close(); } catch {} agentWs = null; }
+              openVoiceAgent();
+            }, 1500);
+          } else {
+            bubble('obi', '[OBI voice unavailable — text mode active]');
+            document.getElementById('msg').style.display = '';
+            document.getElementById('sendBtn').style.display = '';
+            window._llmRetried = false;
+          }
+          return;
+        }
+
+        // ── FAILED_TO_SPEAK / FAILED_TO_THINK (generic recovery) ────────────
+        if (errCode === 'FAILED_TO_SPEAK' || errCode === 'FAILED_TO_THINK') {
+          bubble('obi', '[Connection issue — please refresh if OBI stops responding]');
+          return;
         }
 
       } else if (msg.type === "Warning") {
