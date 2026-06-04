@@ -678,11 +678,14 @@
     "count": 6
   },
   "downloads": {
+    "category": "soul+key",
     "term": "downloads",
+    "count": 1,
+    "run": 63,
+    "weight": 408,
     "runs": [
       null
-    ],
-    "count": 1
+    ]
   },
   "drill": {
     "term": "drill",
@@ -2835,6 +2838,11 @@
       "category": "soul+key",
       "weight": 17856,
       "run": 49
+    },
+    {
+      "weight": 1663,
+      "run": 63,
+      "category": "soul+key"
     }
   ],
   "canonical": [
@@ -2857,6 +2865,11 @@
       "weight": 1378,
       "category": "soul+key",
       "run": 61
+    },
+    {
+      "weight": 990,
+      "run": 63,
+      "category": "soul+key"
     }
   ],
   "class": [
@@ -2886,6 +2899,11 @@
       "weight": 476,
       "category": "soul+key",
       "run": 61
+    },
+    {
+      "weight": 809,
+      "run": 63,
+      "category": "soul+key"
     }
   ],
   "content": [
@@ -2908,6 +2926,11 @@
       "weight": 566,
       "category": "soul+key",
       "run": 61
+    },
+    {
+      "weight": 870,
+      "run": 63,
+      "category": "soul+key"
     }
   ],
   "public": [
@@ -2954,6 +2977,11 @@
       "weight": 323,
       "category": "soul+key",
       "run": 61
+    },
+    {
+      "weight": 694,
+      "run": 63,
+      "category": "soul+key"
     }
   ],
   "label": [
@@ -3002,6 +3030,11 @@
       "weight": 368,
       "category": "soul+key",
       "run": 61
+    },
+    {
+      "weight": 665,
+      "run": 63,
+      "category": "soul+key"
     }
   ],
   "sessionid": [
@@ -3024,6 +3057,11 @@
       "weight": 385,
       "category": "soul+key",
       "run": 61
+    },
+    {
+      "weight": 818,
+      "run": 63,
+      "category": "soul+key"
     }
   ],
   "standard": [
@@ -3041,6 +3079,11 @@
       "weight": 305,
       "category": "soul+key",
       "run": 61
+    },
+    {
+      "weight": 622,
+      "run": 63,
+      "category": "soul+key"
     }
   ],
   "output_tokens": [
@@ -3053,6 +3096,11 @@
       "weight": 288,
       "category": "soul+key",
       "run": 50
+    },
+    {
+      "weight": 604,
+      "run": 63,
+      "category": "soul+key"
     }
   ],
   "cache_read_input_tokens": [
@@ -3065,6 +3113,11 @@
       "weight": 288,
       "category": "soul+key",
       "run": 50
+    },
+    {
+      "weight": 604,
+      "run": 63,
+      "category": "soul+key"
     }
   ],
   "input_tokens": [
@@ -3077,6 +3130,11 @@
       "weight": 288,
       "category": "soul+key",
       "run": 50
+    },
+    {
+      "weight": 604,
+      "run": 63,
+      "category": "soul+key"
     }
   ],
   "ephemeral_1h_input_tokens": [
@@ -3089,6 +3147,11 @@
       "weight": 288,
       "category": "soul+key",
       "run": 50
+    },
+    {
+      "weight": 604,
+      "run": 63,
+      "category": "soul+key"
     }
   ],
   "ephemeral_5m_input_tokens": [
@@ -3101,6 +3164,11 @@
       "weight": 288,
       "category": "soul+key",
       "run": 50
+    },
+    {
+      "weight": 604,
+      "run": 63,
+      "category": "soul+key"
     }
   ],
   "cache_creation_input_tokens": [
@@ -3113,6 +3181,11 @@
       "weight": 288,
       "category": "soul+key",
       "run": 50
+    },
+    {
+      "weight": 604,
+      "run": 63,
+      "category": "soul+key"
     }
   ],
   "cache_creation": [
@@ -3130,6 +3203,11 @@
       "weight": 285,
       "category": "soul+key",
       "run": 61
+    },
+    {
+      "weight": 604,
+      "run": 63,
+      "category": "soul+key"
     }
   ],
   "03t00": [
@@ -3159,6 +3237,11 @@
       "weight": 298,
       "category": "soul+key",
       "run": 61
+    },
+    {
+      "weight": 592,
+      "run": 63,
+      "category": "soul+key"
     }
   ],
   "entrypoint": [
@@ -3171,6 +3254,11 @@
       "weight": 274,
       "category": "soul+key",
       "run": 50
+    },
+    {
+      "weight": 571,
+      "run": 63,
+      "category": "soul+key"
     }
   ],
   "usertype": [
@@ -3183,6 +3271,11 @@
       "weight": 274,
       "category": "soul+key",
       "run": 50
+    },
+    {
+      "weight": 571,
+      "run": 63,
+      "category": "soul+key"
     }
   ],
   "request": [
@@ -3228,6 +3321,11 @@
       "weight": 309,
       "category": "soul+key",
       "run": 61
+    },
+    {
+      "weight": 571,
+      "run": 63,
+      "category": "soul+key"
     }
   ],
   "gitbranch": [
@@ -3235,6 +3333,11 @@
       "weight": 274,
       "category": "soul+key",
       "run": 50
+    },
+    {
+      "weight": 571,
+      "run": 63,
+      "category": "soul+key"
     }
   ],
   "issidechain": [
@@ -3242,6 +3345,11 @@
       "weight": 274,
       "category": "soul+key",
       "run": 50
+    },
+    {
+      "weight": 571,
+      "run": 63,
+      "category": "soul+key"
     }
   ],
   "parentuuid": [
@@ -3249,6 +3357,11 @@
       "weight": 274,
       "category": "soul+key",
       "run": 50
+    },
+    {
+      "weight": 571,
+      "run": 63,
+      "category": "soul+key"
     }
   ],
   "vscode": [
@@ -3261,6 +3374,11 @@
       "weight": 285,
       "category": "soul+key",
       "run": 61
+    },
+    {
+      "weight": 599,
+      "run": 63,
+      "category": "soul+key"
     }
   ],
   "tool_use": [
@@ -3268,6 +3386,11 @@
       "weight": 221,
       "category": "soul+key",
       "run": 50
+    },
+    {
+      "weight": 474,
+      "run": 63,
+      "category": "soul+key"
     }
   ],
   "run50": [
@@ -3742,6 +3865,55 @@
       "weight": 323,
       "category": "soul+key",
       "run": 61
+    }
+  ],
+  "image": [
+    {
+      "weight": 385,
+      "run": 63,
+      "category": "soul+key"
+    }
+  ],
+  "usage": [
+    {
+      "weight": 356,
+      "run": 63,
+      "category": "soul+key"
+    }
+  ],
+  "title": [
+    {
+      "weight": 342,
+      "run": 63,
+      "category": "soul+key"
+    }
+  ],
+  "speed": [
+    {
+      "weight": 321,
+      "run": 63,
+      "category": "soul+key"
+    }
+  ],
+  "train": [
+    {
+      "weight": 311,
+      "run": 63,
+      "category": "soul+key"
+    }
+  ],
+  "iterations": [
+    {
+      "weight": 304,
+      "run": 63,
+      "category": "soul+key"
+    }
+  ],
+  "service_tier": [
+    {
+      "weight": 302,
+      "run": 63,
+      "category": "soul+key"
     }
   ]
 }

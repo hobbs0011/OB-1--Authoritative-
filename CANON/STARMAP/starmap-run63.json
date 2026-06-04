@@ -1,0 +1,11 @@
+{
+  "run": 63,
+  "rrl_path": "D:\\OB-1-CANONICAL\\RRL\\RRL-63.txt",
+  "ledger_id": "HL-394",
+  "soul_turn_ids": "turn-1,turn-3,turn-4,turn-5,turn-6,turn-8,turn-9,turn-10,turn-11,turn-12",
+  "dna_turn_ids": "seq-2,seq-7,seq-19,seq-30,seq-34,seq-35,seq-37,seq-45,seq-47,seq-55",
+  "blueprint_locations": "dna-run63.json:seq-2; dna-run63.json:seq-7; dna-run63.json:seq-19; dna-run63.json:seq-30; dna-run63.json:seq-34; dna-run63.json:seq-35; dna-run63.json:seq-37; dna-run63.json:seq-45; dna-run63.json:seq-47; dna-run63.json:seq-55; dna-run63.json:seq-62",
+  "char_count": 15765138,
+  "merkle_hash": "9149f3553b70d8286ed9cb35a25eee0c9809168fb3d0d20dcfd0e336ee0066e7",
+  "created_at": "2026-06-04T07:35:56.4693405+07:00"
+}
