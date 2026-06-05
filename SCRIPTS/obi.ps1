@@ -60,6 +60,29 @@ switch ($Command) {
             }
         }
 
+        # STATE-SNAPSHOT gate (Run 74 memory system — fail if missing or stale)
+        $stateSnapshotPath = Join-Path $ledgerDir "STATE-SNAPSHOT.json"
+        $stateOk = $false
+        $stateStaleness = $null
+        if (Test-Path $stateSnapshotPath) {
+            try {
+                $stateSnapshot = Get-Content $stateSnapshotPath -Raw | ConvertFrom-Json
+                $snapshotRun = [int]$stateSnapshot.run.current
+                $snapshotUpdated = [datetime]$stateSnapshot.updated_at
+                $now = Get-Date
+                $stateStaleness = ($now - $snapshotUpdated).TotalHours
+                # Snapshot must be fromRun 74+ and updated within last 24 hours
+                $stateOk = ($snapshotRun -ge 74) -and ($stateStaleness -lt 24)
+                if (-not $stateOk) {
+                    $failures += "STATE-SNAPSHOT STALE: Run $snapshotRun, age ${stateStaleness}h. Must be Run 74+ and <24h old."
+                }
+            } catch {
+                $failures += "STATE-SNAPSHOT.json corrupt: $($_.Exception.Message)"
+            }
+        } else {
+            $failures += "STATE-SNAPSHOT.json MISSING at $stateSnapshotPath"
+        }
+
         # Minimum thresholds (HL-140: CANON_COUNT_GATE)
         $canonMinimum = 50
         $reincMinimum = 10
@@ -67,7 +90,7 @@ switch ($Command) {
         $canonOk = $canonCount -ge $canonMinimum
         $reincOk = $reincCount -ge $reincMinimum
         $ledgerOk = $ledgerCount -ge $ledgerMinimum
-        $soulOk = $canonOk -and $reincOk -and $ledgerOk -and $coldBootExists -and $mcpPathsValid
+        $soulOk = $canonOk -and $reincOk -and $ledgerOk -and $coldBootExists -and $mcpPathsValid -and $stateOk
 
         [pscustomobject]@{
             repo_root = $repoRoot
@@ -85,6 +108,9 @@ switch ($Command) {
             ledger_files = $ledgerCount
             ledger_ok = $ledgerOk
             cold_start_boot = $coldBootExists
+            state_snapshot_exists = (Test-Path $stateSnapshotPath)
+            state_snapshot_run = if ($stateOk) { $snapshotRun } else { $null }
+            state_snapshot_age_hours = if ($stateStaleness) { [math]::Round($stateStaleness, 1) } else { $null }
             mcp_paths_valid = $mcpPathsValid
             soul_integrity = $soulOk
         } | ConvertTo-Json -Depth 3
