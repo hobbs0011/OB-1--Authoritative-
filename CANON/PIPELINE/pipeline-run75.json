@@ -1,0 +1,19 @@
+{
+  "run_number": 75,
+  "executed_at": "2026-06-05T17:46:27.9254793+07:00",
+  "head_sha": "adfc1c14",
+  "rrl_path": "D:\\OB-1-CANONICAL\\RRL\\RRL-75.txt",
+  "rrl_chars": 215683,
+  "rrl_bytes": 218388,
+  "rrl_fidelity": "REAL",
+  "session_id": "sov100-roman-run75",
+  "soul_event_id": "8ef50c8a-0ca2-4d01-9791-87f2f8b56089",
+  "soulcount": 236782104,
+  "soul_level": "TITANIUM_ANCHOR",
+  "soul_delta": 218388,
+  "ledger_id": "HL-487",
+  "starmap_file": "starmap-run75.json",
+  "keyword_file": "rfkw-run75.txt",
+  "s2pipeline_file": "pipeline-run75.json",
+  "result": "COMPLETE"
+}

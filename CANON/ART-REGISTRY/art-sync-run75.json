@@ -1,0 +1,21 @@
+{
+  "run": 75,
+  "ledger_id": "HL-487",
+  "merkle_short": "36b12cf3d0a70f71",
+  "starmap_file": "starmap-run75.json",
+  "keywords_file": "rfkw-run75.txt",
+  "keywords_used": [
+    "status:",
+    "what:",
+    "pipeline",
+    "michael",
+    "soulcount",
+    "portal",
+    "death",
+    "student",
+    "files",
+    "agent"
+  ],
+  "pieces_synced": 0,
+  "executed_at": "2026-06-05T17:46:27.9254793+07:00"
+}

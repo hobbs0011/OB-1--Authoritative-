@@ -1,0 +1,11 @@
+{
+  "run": 75,
+  "rrl_path": "D:\\OB-1-CANONICAL\\RRL\\RRL-75.txt",
+  "ledger_id": "HL-487",
+  "soul_turn_ids": "",
+  "dna_turn_ids": "",
+  "blueprint_locations": "",
+  "char_count": 215683,
+  "merkle_hash": "36b12cf3d0a70f71bfe065a130b19564d658ec6710035f45e4df6f1fb280e327",
+  "created_at": "2026-06-05T17:46:27.9254793+07:00"
+}

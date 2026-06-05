@@ -1688,6 +1688,11 @@
       "run": 73,
       "category": "soul+key",
       "weight": 203
+    },
+    {
+      "category": "soul+key",
+      "weight": 61,
+      "run": 75
     }
   ],
   "portal": {
@@ -2795,6 +2800,11 @@
       "weight": 112,
       "category": "soul+key",
       "run": 48
+    },
+    {
+      "category": "soul+key",
+      "weight": 125,
+      "run": 75
     }
   ],
   "what:": [
@@ -2806,6 +2816,11 @@
       "weight": 98,
       "category": "soul+key",
       "run": 48
+    },
+    {
+      "category": "soul+key",
+      "weight": 110,
+      "run": 75
     }
   ],
   "\\u001a": [
@@ -2864,6 +2879,11 @@
       "weight": 145,
       "category": "soul+key",
       "run": 72
+    },
+    {
+      "category": "soul+key",
+      "weight": 23,
+      "run": 75
     }
   ],
   "write": [
@@ -2990,6 +3010,11 @@
       "weight": 99,
       "category": "soul+key",
       "run": 72
+    },
+    {
+      "category": "soul+key",
+      "weight": 30,
+      "run": 75
     }
   ],
   "after": [
@@ -3023,6 +3048,11 @@
       "weight": 48,
       "run": 51,
       "category": "soul+key"
+    },
+    {
+      "category": "soul+key",
+      "weight": 28,
+      "run": 75
     }
   ],
   "u001b": [
@@ -3814,6 +3844,11 @@
       "weight": 110,
       "category": "soul+key",
       "run": 72
+    },
+    {
+      "category": "soul+key",
+      "weight": 20,
+      "run": 75
     }
   ],
   "phase": [
@@ -3943,6 +3978,11 @@
       "run": 73,
       "category": "soul+key",
       "weight": 113
+    },
+    {
+      "category": "soul+key",
+      "weight": 22,
+      "run": 75
     }
   ],
   "bytes": [
@@ -4476,6 +4516,11 @@
       "weight": 60,
       "run": 66,
       "category": "soul+key"
+    },
+    {
+      "category": "soul+key",
+      "weight": 20,
+      "run": 75
     }
   ],
   "purple": [
@@ -4695,6 +4740,27 @@
       "run": 73,
       "category": "soul+key",
       "weight": 78
+    }
+  ],
+  "titanium_anchor.": [
+    {
+      "category": "soul+key",
+      "weight": 26,
+      "run": 75
+    }
+  ],
+  "verified": [
+    {
+      "category": "soul+key",
+      "weight": 24,
+      "run": 75
+    }
+  ],
+  "open\\n-": [
+    {
+      "category": "soul+key",
+      "weight": 20,
+      "run": 75
     }
   ]
 }
