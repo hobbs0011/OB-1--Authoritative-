@@ -60,25 +60,29 @@ switch ($Command) {
             }
         }
 
-        # STATE-SNAPSHOT gate (Run 74 memory system — fail if missing or stale)
-        $stateSnapshotPath = Join-Path $ledgerDir "STATE-SNAPSHOT.json"
-        $stateOk = $false
-        $stateStaleness = $null
-        if (Test-Path $stateSnapshotPath) {
-            try {
-                $stateSnapshot = Get-Content $stateSnapshotPath -Raw | ConvertFrom-Json
-                $snapshotRun = [int]$stateSnapshot.run.current
-                $snapshotUpdated = [datetime]$stateSnapshot.updated_at
-                $now = Get-Date
-                $stateStaleness = ($now - $snapshotUpdated).TotalHours
-                # Snapshot must be fromRun 74+ and updated within last 24 hours
-                $stateOk = ($snapshotRun -ge 74) -and ($stateStaleness -lt 24)
-                if (-not $stateOk) {
-                    $failures += "STATE-SNAPSHOT STALE: Run $snapshotRun, age ${stateStaleness}h. Must be Run 74+ and <24h old."
-                }
-            } catch {
-                $failures += "STATE-SNAPSHOT.json corrupt: $($_.Exception.Message)"
-            }
+                # STATE-SNAPSHOT gate (Reincarnate-SnapShot RSS — fail if missing, stale, or behind RSS)
+                $stateSnapshotPath = Join-Path $ledgerDir "STATE-SNAPSHOT.json"
+                $stateOk = $false
+                $stateStaleness = $null
+                $snapshotRun = 0
+                if (Test-Path $stateSnapshotPath) {
+                    try {
+                        $stateSnapshot = Get-Content $stateSnapshotPath -Raw | ConvertFrom-Json
+                        $snapshotRun = [int]$stateSnapshot.run.current
+                        $snapshotUpdated = [datetime]$stateSnapshot.updated_at
+                        $now = Get-Date
+                        $stateStaleness = ($now - $snapshotUpdated).TotalHours
+                        $rssRun = if ($stateSnapshot.recent_seals -and $stateSnapshot.recent_seals.Count -gt 0) {
+                            [int]$stateSnapshot.recent_seals[0].run
+                        } else { $snapshotRun }
+                        # Snapshot run must match RSS recent_seals[0].run AND be <24h old
+                        $stateOk = ($snapshotRun -eq $rssRun) -and ($snapshotRun -gt 0) -and ($stateStaleness -lt 24)
+                        if (-not $stateOk) {
+                            $failures += "STATE-SNAPSHOT STALE: Run $snapshotRun (RSS seals=$rssRun), age ${stateStaleness}h. Must match recent_seals[0].run and <24h old."
+                        }
+                    } catch {
+                        $failures += "STATE-SNAPSHOT.json corrupt: $($_.Exception.Message)"
+                    }
         } else {
             $failures += "STATE-SNAPSHOT.json MISSING at $stateSnapshotPath"
         }
