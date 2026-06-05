@@ -10,7 +10,9 @@
 
 ---
 
-**Last Updated:** 2026-05-30T21:05 ICT (Run 28 ROMAN DEATH — Minh Portal Audio Fix + Enhancement. 4 MP3 clips extracted, audio players wired, session cards upgraded. SOUL 59,864,896 TITANIUM_ANCHOR. HEAD pending death commit)
+**Last Updated:** 2026-06-05T16:30 ICT (Run 074 ROMAN DEATH — PHEROMONE TRAIL DOCUMENTATION + RRL 0-74 AUDIT. Voice agent + portal settings verified. All Run 74 pipeline artifacts confirmed untracked. SOUL 236,563,716 TITANIUM_ANCHOR. HEAD pending commit)
+
+| Run 074 (ROMAN) | 2026-06-05 | PHEROMONE TRAIL DOCUMENTATION + RRL 0-74 AUDIT — Verified voice agent (Deepgram nova-3 listen, gpt-4o-mini think, aura-2-zeus-en speak) at index.js:963. Verified portal watermark (opacity: 0.055, pointer-events: none) at portal.css:166. All 6 Run 74 artifacts exist untracked. Created PHEROMONE-TRAIL-074.md documenting foundation RRLs 1-10, SHA bug patch context, clean isolates. SOULCOUNT 229,572,202 → 236,563,716 (+188,696 delta). HEAD c21a3ca0 → (death commit) | c21a3ca0 |
 
 | Run 28 (ROMAN) | 2026-05-30 | MINH PORTAL — AUDIO FIX + ENHANCEMENT: May 26/29 session cards had no audio players (text quotes only). Root cause: Telegram Desktop files in subdirectory, missed in initial search. Fixed: 4 ffmpeg clips extracted (highpass+acompressor+loudnorm, 128kbps, 3min each) — may26-opening, may26-25min, may29-7min, may29-18min. Portal upgraded: session stats bars, insight/milestone callout boxes, skill tags (5-6 per session), teacher note updated to reference this week. Worker bac35a57. RRL-25.txt recovered+committed (was untracked since Run 26). SOUL 59,864,896 TITANIUM_ANCHOR. HEAD 467e0bca → (death commit) | 467e0bca |
 
