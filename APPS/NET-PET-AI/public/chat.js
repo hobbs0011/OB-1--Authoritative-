@@ -408,6 +408,7 @@ function looksLikeLevel(s) {
 }
 
 function firstName() {
+  if (profile.name) return profile.name.split(/\s+/)[0];
   return (profile.fullName || "").split(/\s+/)[0] || "you";
 }
 
@@ -1142,7 +1143,7 @@ function handleAgentMsg(event) {
           }
         }, 3000);
         // Proactive greeting — OBI speaks first via Deepgram TTS (market-ready opener)
-        const _greetName = (profile.fullName || profile.name || "").split(/\s+/)[0] || "";
+        const _greetName = profile.name ? profile.name.split(/\s+/)[0] : (profile.fullName || "").split(/\s+/)[0] || "";
         const _viGreet = profile.lang === "vi" ? "Chào " : "";
         let _openingMsg;
         if (currentMode === 'phonics') {
@@ -1682,6 +1683,8 @@ micBtn.addEventListener("click", () => {
     return;
   }
   if (agentWs && agentReady) { startAgentListening(); return; }
+  if (agentWs && !agentReady) { setMicStatus("Connecting…", false); return; }
+  if (urlStudentId) { openVoiceAgent(); return; }
   startListening();
 });
 
@@ -1692,6 +1695,7 @@ micBtn.addEventListener("click", () => {
 function triggerMicOnGesture() {
   if (userHasInteracted) return;
   userHasInteracted = true;
+  try { const s = new Audio('data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAECcAACBOAAACABAAZGF0YQAAAAA='); s.volume=0; s.play().catch(()=>{}); } catch(_) {}
   if (agentWs && agentReady && !agentMicStream) {
     // Agent already ready — connect directly
     startAgentListening().catch(() => {});
@@ -1763,6 +1767,7 @@ async function boot() {
     if (stateR.status === "fulfilled") {
       const st = stateR.value; const p = st?.profile;
       if (p?.fullName || p?.name)  profile.fullName     = p.fullName || p.name;
+      if (p?.name) profile.name = p.name;
       if (p?.englishLevel || p?.level) profile.englishLevel = p.englishLevel || p.level;
       if (p?.goals)        profile.goals        = p.goals;
       if (p?.currentCity)  profile.currentCity  = p.currentCity;

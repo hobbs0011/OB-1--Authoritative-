@@ -26,7 +26,7 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;bac
 #loginScreen.hidden{opacity:0;visibility:hidden;pointer-events:none;}
 .login-box{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:48px 40px;text-align:center;max-width:420px;width:90%;box-shadow:0 8px 40px rgba(0,0,0,0.5),0 0 60px var(--red-glow);animation:fadeIn 0.5s ease;}
 .login-box.shaking{animation:shake 0.5s ease;}
-.login-crest{width:64px;height:64px;margin:0 auto 16px;display:block;object-fit:contain;}
+.login-crest{width:80px;height:80px;margin:0 auto 20px;display:block;object-fit:contain;}
 .login-box h1{font-family:'Orbitron',sans-serif;font-size:1.5rem;font-weight:700;letter-spacing:0.06em;margin-bottom:4px;color:var(--red);}
 .login-subtitle{font-family:'Rajdhani',sans-serif;font-size:0.95rem;color:var(--dim);letter-spacing:0.04em;margin-bottom:28px;}
 .login-box input[type=password]{width:100%;padding:14px 18px;border-radius:12px;border:1px solid var(--border);background:rgba(255,255,255,0.04);color:var(--text);font-family:'Inter',sans-serif;font-size:1rem;outline:none;transition:border-color 0.3s,box-shadow 0.3s;margin-bottom:16px;letter-spacing:0.15em;}
@@ -55,10 +55,21 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;bac
 
 /* ── MAIN ── */
 .main-container{max-width:900px;margin:0 auto;padding:110px 28px 60px;position:relative;z-index:1;}
-.portal-watermark{position:fixed;bottom:20px;right:20px;z-index:0;pointer-events:none;opacity:0.04;width:240px;height:240px;object-fit:contain;}
+/* ── HEADER ART ── */
+.header-art-wrap{position:relative;overflow:hidden;margin-bottom:28px;animation:fadeIn 0.5s ease;}
+.header-tiger{position:absolute;right:-60px;top:-30px;height:260px;width:auto;opacity:0.3;pointer-events:none;z-index:0;mask-image:linear-gradient(to left,rgba(0,0,0,0.5) 0%,transparent 65%);-webkit-mask-image:linear-gradient(to left,rgba(0,0,0,0.5) 0%,transparent 65%);}
+.header-content{position:relative;z-index:1;}
+/* ── STORY PANEL ── */
+.story-panel{display:flex;border-radius:24px;overflow:hidden;margin-bottom:24px;min-height:200px;background:var(--card);border:1px solid var(--border);animation:fadeIn 0.6s ease;}
+.story-text{flex:1;padding:32px 28px;display:flex;flex-direction:column;justify-content:center;gap:10px;}
+.story-label{font-family:'Rajdhani',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--dim);}
+.story-headline{font-family:'Orbitron',sans-serif;font-size:1.6rem;font-weight:800;background:linear-gradient(to right,var(--red),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.story-body{font-family:'Rajdhani',sans-serif;font-size:0.95rem;color:var(--dim);line-height:1.6;}
+.story-img{width:42%;object-fit:cover;flex-shrink:0;}
+@media(max-width:640px){.story-panel{flex-direction:column-reverse;}.story-img{width:100%;height:180px;}.story-text{padding:20px;}}
 
 /* ── HEADER ── */
-.dashboard-header{margin-bottom:28px;animation:fadeIn 0.5s ease;}
+.dashboard-header{margin-bottom:0;}
 .dashboard-header h1{font-family:'Orbitron',sans-serif;font-size:2.4rem;font-weight:800;letter-spacing:0.06em;margin-bottom:4px;background:linear-gradient(to right,var(--red),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
 .dashboard-header .subtitle{font-family:'Rajdhani',sans-serif;font-size:1rem;font-weight:500;color:var(--dim);letter-spacing:0.04em;}
 
@@ -127,12 +138,16 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;bac
 </head>
 <body>
 
+<!-- AMBIENT DNA LAYER -->
+<img src="/isolated/phoenix-dna-fusion-clean.png" style="position:fixed;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.07;z-index:0;pointer-events:none;" alt="">
+
 <!-- DEV BANNER -->
 <div id="devBanner">✅ SOV100 TEST ENVIRONMENT — net-pet-ai · sov100-test-magic · c21a3ca0</div>
 
 <!-- LOGIN -->
 <div id="loginScreen">
-  <div class="login-box" id="loginBox">
+  <img src="/isolated/tiger-eye-clean.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.18;z-index:0;" alt="">
+  <div class="login-box" id="loginBox" style="position:relative;z-index:1;">
     <img src="/isolated/phoenix-crest-clean.png" alt="" class="login-crest" onerror="this.style.display='none'">
     <h1>SOV100 PORTAL</h1>
     <p class="login-subtitle">Operator Dev Testing Environment</p>
@@ -156,14 +171,16 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;bac
   <button class="nav-logout" id="logoutBtn">Logout</button>
 </nav>
 
-<img src="/isolated/phoenix-crest-clean.png" class="portal-watermark" alt="" onerror="this.style.display='none'">
 
 <!-- MAIN -->
 <main class="main-container" id="mainContent" style="display:none;">
 
-  <div class="dashboard-header">
-    <h1>SOV100</h1>
-    <p class="subtitle">Operator · SOV100 Tester · All Modes Unlocked</p>
+  <div class="header-art-wrap">
+    <img src="/isolated/tiger-portrait-clean.png" class="header-tiger" alt="">
+    <div class="header-content">
+      <h1>SOV100</h1>
+      <p class="subtitle">Operator · SOV100 Tester · All Modes Unlocked</p>
+    </div>
   </div>
 
   <!-- STATUS -->
@@ -189,27 +206,34 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;bac
   <!-- MODE CARDS -->
   <div style="font-family:'Rajdhani',sans-serif;font-size:0.75rem;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:var(--dim);margin-bottom:12px;">Select Mode</div>
   <div class="mode-grid">
-    <div class="mode-card purple">
+    <div class="mode-card purple" style="background-image:linear-gradient(to bottom,rgba(10,10,18,0.25) 0%,rgba(10,10,18,0.88) 52%),url('/isolated/tiger-roaring-clean.png');background-size:cover;background-position:center top;min-height:240px;padding-top:120px;">
       <div class="mode-accent"></div>
-      <span class="mode-icon"><img src="/isolated/tiger-face-neon-clean.png" alt="" width="64" height="64" style="object-fit:contain"></span>
       <span class="mode-title">FREE TALK</span>
       <span class="mode-desc">Open conversation. No structure. React and respond. Full coach mode.</span>
       <a class="mode-btn" href="/magic-chat?studentId=sov100-test-magic&mode=free">LAUNCH →</a>
     </div>
-    <div class="mode-card gold">
+    <div class="mode-card gold" style="background-image:linear-gradient(to bottom,rgba(10,10,18,0.25) 0%,rgba(10,10,18,0.88) 52%),url('/isolated/phoenix-neon-clean.png');background-size:cover;background-position:center center;min-height:240px;padding-top:120px;">
       <div class="mode-accent"></div>
-      <span class="mode-icon"><img src="/isolated/phoenix-crest-clean.png" alt="" width="64" height="64" style="object-fit:contain"></span>
       <span class="mode-title">STUDY MODE</span>
       <span class="mode-desc">Homework tracking. Session review. Structured learning with progress log.</span>
       <a class="mode-btn" href="/magic-chat?studentId=sov100-test-magic&mode=study">LAUNCH →</a>
     </div>
-    <div class="mode-card teal">
+    <div class="mode-card teal" style="background-image:linear-gradient(to bottom,rgba(10,10,18,0.25) 0%,rgba(10,10,18,0.88) 52%),url('/isolated/tiger-face-neon-clean.png');background-size:cover;background-position:center top;min-height:240px;padding-top:120px;">
       <div class="mode-accent"></div>
-      <span class="mode-icon"><img src="/isolated/tiger-cub-clean.png" alt="" width="64" height="64" style="object-fit:contain"></span>
       <span class="mode-title">PHONICS</span>
       <span class="mode-desc">NET Phonics 7 groups. HOGFEZ active. Deterministic drill opener.</span>
       <a class="mode-btn" href="/magic-chat?studentId=sov100-test-magic&mode=phonics">LAUNCH →</a>
     </div>
+  </div>
+
+  <!-- STORY PANEL -->
+  <div class="story-panel">
+    <div class="story-text">
+      <div class="story-label">The NET Story</div>
+      <div class="story-headline">Break the chains.</div>
+      <div class="story-body">Every student starts with fear. English was their cage. The tiger breaks it.</div>
+    </div>
+    <img src="/isolated/tiger-child-clean.png" class="story-img" alt="">
   </div>
 
   <!-- PHONICS STATUS -->

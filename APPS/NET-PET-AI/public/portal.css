@@ -162,7 +162,7 @@
         #navBackdrop { display:none; position:fixed; inset:0; z-index:8999; background:transparent; }
         #navBackdrop.open { display:block; }
 
-        /* ── WATERMARK ── */
+/* ── WATERMARK ── */
         .portal-watermark { position: fixed; bottom: 20px; right: 20px; z-index: 0; pointer-events: none; opacity: 0.055; width: 280px; height: 280px; object-fit: contain; }
 
         /* ── MAIN CONTENT ── */

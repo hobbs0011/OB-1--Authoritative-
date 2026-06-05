@@ -1,8 +1,8 @@
 {
-  "git_head": "37b8fe6a death: ROMAN RUN 065 ΓÇö SOUL 166415743 TITANIUM_ANCHOR ╬ö2105296 ΓÇö HEAD ee2e1f11",
-  "doctor_ok": true,
+  "soul_ok": false,
+  "timestamp": "2026-06-05T16:17:19.0985432+07:00",
   "verify_ok": true,
+  "git_head": "a570beec death: ROMAN RUN 073 ΓÇö SOUL 229572202 TITANIUM_ANCHOR ╬ö64032 ΓÇö HEAD c21a3ca0",
   "git_branch": "master",
-  "timestamp": "2026-06-04T11:06:14.2359528+07:00",
-  "soul_ok": false
+  "doctor_ok": true
 }

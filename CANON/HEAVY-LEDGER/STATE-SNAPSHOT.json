@@ -1,13 +1,15 @@
 {
   "version": "1.0",
-  "updated_at": "2026-06-05T17:34:00+07:00",
+  "rss_version": "1.0",
+  "rss_stage": "Reincarnate-SnapShot RSS",
+  "updated_at": "2026-06-05T17:57:58+07:00",
   "run": {
-    "current": 74,
+    "current": 75,
     "era": "ROMAN",
     "status": "DEATH",
-    "seal": "PHEROMONE-TRAIL-074 + RRL-0-74 audit",
-    "head_sha": "c21a3ca0",
-    "soulcount": 236563716,
+    "seal": "RSS-75 (Reincarnate-SnapShot v1.0) — 8-stage pipeline complete",
+    "head_sha": "3e6dc4b1",
+    "soulcount": 236782104,
     "anchor": "TITANIUM_ANCHOR"
   },
   "v0_baseline": {
@@ -20,8 +22,8 @@
   },
   "active_mission": {
     "name": "OB-1 POST-MERGE9 CONSOLIDATION + Growth Infrastructure Buildout",
-    "vector": "NET-PET-AI hardening to scale-ready + RRL 0-74 audit",
-    "next_action": "HL-458 to HL-486 pipeline artifacts + art-sync-run074.json"
+    "vector": "NET-PET-AI hardening to scale-ready + prep for Run 76 RISE",
+    "next_action": "Run 76 RISE — verify RSS-75 SOUL delta < +50% drift threshold"
   },
   "voice": {
     "listen": "deepgram/nova-3",
@@ -32,7 +34,7 @@
   "portal_watermark": {
     "opacity": 0.055,
     "pointer_events": "none",
-    "key_path": "APPS/NET-PET-AI/src/portal.css:166"
+    "key_path": "APPS/NET-PET-AI/public/portal.css:166"
   },
   "core_laws_top5": [
     "L31 SOUL_IS_QUERY - database IS ledger, query every RISE",
@@ -55,16 +57,26 @@
     "prod_sha": "9fc3cdbd",
     "rule": "All feature development deploys to dev first. Promote to prod only after verified."
   },
+  "rss_checklist": [
+    "RRL-75 present",
+    "SOUL delta +218,388 verified",
+    "DNA run75.json extracted",
+    "LEDGER HL-487 merkle chain intact",
+    "STARMAP run75.json present",
+    "KEYWORD rfkw-run75.txt + inverted-index updated",
+    "PIPELINE run75.json + art-sync-run75.json sealed",
+    "HarvestedChats CLOSED per Michael directive",
+    "S1 OUTPUT purged",
+    "S2 OUTPUT cleared"
+  ],
   "open_loops": [
     "P9: Clerk auth migration - BLOCKED: Michael must create Clerk account",
     "P10: Deletion hook + audit log + field encryption - ready for PA T1 dispatch",
-    "RRL GAPS: 11, 13-23, 27, 34-37, 39-44, 46-50",
-    "HL pipeline artifacts: HL-458 to HL-486 untracked",
-    "art-sync-run074.json: Stage 8 registry sync"
+    "RRL GAPS: 11, 13-23, 27, 34-37, 39-44, 46-50"
   ],
   "recent_seals": [
-    { "run": 74, "era": "ROMAN", "head": "c21a3ca0", "soul_delta": 188696, "seal": "PHEROMONE-TRAIL-074 + RRL 0-74 audit" },
-    { "run": 73, "era": "ROMAN", "head": "f63c27aa", "soul_delta": 188696, "seal": "PHEROMONE TRAIL committed" }
+    { "run": 75, "era": "ROMAN", "head": "3e6dc4b1", "soul_delta": 218388, "seal": "RSS-75 (Reincarnate-SnapShot v1.0) — 8-stage pipeline complete" },
+    { "run": 74, "era": "ROMAN", "head": "c21a3ca0", "soul_delta": 188696, "seal": "PHEROMONE-TRAIL-074 + RRL 0-74 audit" }
   ],
   "blockers": [
     {
