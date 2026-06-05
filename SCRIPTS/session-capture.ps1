@@ -1,38 +1,79 @@
-# session-capture.ps1 — Auto-fires on Claude session stop
+# session-capture.ps1 - Auto-fires on Claude session stop
 # THE FIX: Copy JSONL verbatim. Pipeline handles extraction. No parsing here.
-# DO NOT DELETE — wired in stop hook
+# DO NOT DELETE - wired in stop hook
+#
+# CRITICAL CHANGE (2026-06-05): Use ACTIVE SESSION UUID as source of truth.
+# Previous behavior: Sort JSONL files by LastWriteTime descending, pick first.
+# PROBLEM: Wrong file picked when multiple sessions recently active.
+# NEW behavior: Read active session UUID from history.jsonl, match exact UUID.
+# This ensures ONLY the current session's transcript is captured.
 
 $ErrorActionPreference = "Continue"
 $repo      = "D:\OB-1-CANONICAL"
 $rrlDir    = "$repo\RRL"
 $jsonlBase = "$env:USERPROFILE\.claude\projects\d--OB-1-CANONICAL"
+$historyPath = "$env:USERPROFILE\.claude\history.jsonl"
 
 Set-Location $repo
 
-# ── Find latest JSONL ────────────────────────────────────────────────────────
-$jsonlFile = Get-ChildItem $jsonlBase -Filter "*.jsonl" -ErrorAction SilentlyContinue |
-             Sort-Object LastWriteTime -Descending | Select-Object -First 1
+# 1. Read ACTIVE session UUID from history.jsonl (last line = current session)
+$activeSessionId = $null
+if (Test-Path $historyPath) {
+    try {
+        $historyLines = [System.IO.File]::ReadAllLines($historyPath, [System.Text.Encoding]::UTF8)
+        $lastLine = $historyLines[-1]
+        if ($lastLine -match '"sessionId"\s*:\s*"([^"]+)"') {
+            $activeSessionId = $matches[1]
+        }
+    } catch {
+        Write-Warning "Could not read history.jsonl: $($_.Exception.Message)"
+    }
+}
 
-if (-not $jsonlFile) {
-    Write-Error "FATAL: No JSONL found in $jsonlBase"
+if (-not $activeSessionId) {
+    Write-Error "FATAL: Could not determine active session UUID from history.jsonl"
     exit 1
 }
 
-Write-Host "SOURCE: $($jsonlFile.Name) — $($jsonlFile.Length) bytes"
+Write-Host "ACTIVE SESSION: $activeSessionId"
 
-# ── Derive run number ────────────────────────────────────────────────────────
+# 2. Find JSONL matching ACTIVE session UUID (exact match, no timestamp guesswork)
+$jsonlFile = Get-ChildItem $jsonlBase -Filter "*.jsonl" -ErrorAction SilentlyContinue |
+             Where-Object { $_.BaseName -eq $activeSessionId } |
+             Select-Object -First 1
+
+# Fallback: search broader paths if not in projects dir
+if (-not $jsonlFile) {
+    $jsonlFile = Get-ChildItem "$env:USERPROFILE\.claude" -Filter "$activeSessionId.jsonl" -ErrorAction SilentlyContinue |
+                 Select-Object -First 1
+}
+
+# Last resort: history.jsonl itself IS the source
+if (-not $jsonlFile) {
+    Write-Warning "JSONL file not found by UUID, copying history.jsonl as RRL"
+    $jsonlFile = Get-Item $historyPath
+}
+
+if (-not (Test-Path $jsonlFile.FullName)) {
+    Write-Error "FATAL: JSONL source not found for session $activeSessionId"
+    exit 1
+}
+
+Write-Host "SOURCE: $($jsonlFile.Name) - $($jsonlFile.Length) bytes"
+
+# 3. Derive run number
 $run = 0
 $lastDeath = git log --oneline --grep "death:" -1 2>$null
 if ($lastDeath -match '(?i)run\s*(\d+)') { $run = [int]$matches[1] + 1 }
 
 $rrlPath = "$rrlDir\RRL-$run.txt"
 
-# ── Copy JSONL VERBATIM. No parsing. No filtering. No reconstruction. ────────
+# 4. Copy JSONL VERBATIM. No parsing. No filtering. No reconstruction.
 Copy-Item $jsonlFile.FullName $rrlPath -Force
 $rrlBytes = (Get-Item $rrlPath).Length
-Write-Host "RRL WRITTEN: $rrlPath — $rrlBytes bytes (verbatim JSONL copy)"
+Write-Host "RRL WRITTEN: $rrlPath - $rrlBytes bytes (verbatim JSONL copy)"
 
-# ── Invoke pipeline (SOUL→DNA→LEDGER→STARMAP→SOULKEYS→S2Pipeline) ───────────
+# 5. Invoke pipeline (SOUL->DNA->LEDGER->STARMAP->SOULKEYS->S2Pipeline)
 $pipeline = "$repo\SCRIPTS\rrl-pipeline.ps1"
 if (Test-Path $pipeline) {
     Write-Host "INVOKING PIPELINE..."
@@ -42,4 +83,4 @@ if (Test-Path $pipeline) {
 }
 
 Write-Host ""
-Write-Host "SESSION CAPTURE COMPLETE — Run $run"
+Write-Host "SESSION CAPTURE COMPLETE - Run $run"
