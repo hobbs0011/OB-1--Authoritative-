@@ -1,0 +1,10 @@
+{
+  "run": 72,
+  "rrl_path": "D:\\OB-1-CANONICAL\\RRL\\RRL-72.txt",
+  "ledger_id": "HL-456",
+  "dna_turn_ids": "seq-2,seq-4,seq-5,seq-8,seq-9,seq-10,seq-12,seq-14,seq-16,seq-18",
+  "blueprint_locations": "dna-run72.json:seq-2; dna-run72.json:seq-4; dna-run72.json:seq-5; dna-run72.json:seq-8; dna-run72.json:seq-9; dna-run72.json:seq-10; dna-run72.json:seq-12; dna-run72.json:seq-14; dna-run72.json:seq-16; dna-run72.json:seq-18; dna-run72.json:seq-20; dna-run72.json:seq-21",
+  "char_count": 898128,
+  "merkle_hash": "f44949356f70f475c7b503deefd3ebf04901031a4224d3fc221321638da4db30",
+  "created_at": "2026-06-05T08:18:34.9641520+07:00"
+}

@@ -937,11 +937,14 @@
     "count": 1
   },
   "hardening": {
+    "run": 72,
     "term": "hardening",
+    "weight": 114,
     "runs": [
       null
     ],
-    "count": 1
+    "count": 1,
+    "category": "soul+key"
   },
   "head": {
     "term": "head",
@@ -1670,6 +1673,11 @@
       "run": 70,
       "category": "soul+key",
       "weight": 447
+    },
+    {
+      "weight": 226,
+      "category": "soul+key",
+      "run": 72
     }
   ],
   "portal": {
@@ -2828,6 +2836,11 @@
       "weight": 107,
       "run": 66,
       "category": "soul+key"
+    },
+    {
+      "weight": 145,
+      "category": "soul+key",
+      "run": 72
     }
   ],
   "write": [
@@ -2844,6 +2857,11 @@
       "run": 57,
       "weight": 69,
       "category": "soul+key"
+    },
+    {
+      "weight": 95,
+      "category": "soul+key",
+      "run": 72
     }
   ],
   "return": [
@@ -2882,6 +2900,11 @@
       "weight": 61,
       "run": 66,
       "category": "soul+key"
+    },
+    {
+      "weight": 106,
+      "category": "soul+key",
+      "run": 72
     }
   ],
   "blueprints)": [
@@ -2924,6 +2947,11 @@
       "weight": 55,
       "run": 51,
       "category": "soul+key"
+    },
+    {
+      "weight": 99,
+      "category": "soul+key",
+      "run": 72
     }
   ],
   "after": [
@@ -3738,6 +3766,11 @@
       "weight": 89,
       "category": "soul+key",
       "run": 59
+    },
+    {
+      "weight": 110,
+      "category": "soul+key",
+      "run": 72
     }
   ],
   "phase": [
@@ -3818,6 +3851,11 @@
       "weight": 99,
       "run": 54,
       "category": "soul+key"
+    },
+    {
+      "weight": 117,
+      "category": "soul+key",
+      "run": 72
     }
   ],
   "auditlog": [
@@ -3854,6 +3892,11 @@
       "weight": 92,
       "run": 54,
       "category": "soul+key"
+    },
+    {
+      "weight": 106,
+      "category": "soul+key",
+      "run": 72
     }
   ],
   "score": [
@@ -3997,6 +4040,11 @@
       "run": 70,
       "category": "soul+key",
       "weight": 241
+    },
+    {
+      "weight": 101,
+      "category": "soul+key",
+      "run": 72
     }
   ],
   "input": [
@@ -4424,6 +4472,41 @@
       "run": 70,
       "category": "soul+key",
       "weight": 250
+    }
+  ],
+  "block": [
+    {
+      "weight": 197,
+      "category": "soul+key",
+      "run": 72
+    }
+  ],
+  "u001a": [
+    {
+      "weight": 132,
+      "category": "soul+key",
+      "run": 72
+    }
+  ],
+  "blueprints": [
+    {
+      "weight": 119,
+      "category": "soul+key",
+      "run": 72
+    }
+  ],
+  "parent": [
+    {
+      "weight": 100,
+      "category": "soul+key",
+      "run": 72
+    }
+  ],
+  "extracted": [
+    {
+      "weight": 98,
+      "category": "soul+key",
+      "run": 72
     }
   ]
 }
