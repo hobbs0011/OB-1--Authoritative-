@@ -124,6 +124,26 @@ export async function handleArt(request, env) {
     }
   }
 
+  if (method === 'PATCH' && path.startsWith('/api/art/')) {
+    try {
+      const id = path.split('/').pop();
+      const body = await request.json().catch(() => null);
+      if (!body) return Response.json({ error: 'invalid JSON' }, { status: 400 });
+      const fields = [];
+      const vals = [];
+      if (body.url   !== undefined) { fields.push('url = ?');   vals.push(body.url); }
+      if (body.title !== undefined) { fields.push('title = ?'); vals.push(body.title); }
+      if (body.tags  !== undefined) { fields.push('tags = ?');  vals.push(body.tags); }
+      if (body.notes !== undefined) { fields.push('notes = ?'); vals.push(body.notes); }
+      if (!fields.length) return Response.json({ error: 'nothing to update' }, { status: 400 });
+      vals.push(id);
+      await env.DB.prepare(`UPDATE art_registry SET ${fields.join(', ')} WHERE id = ?`).bind(...vals).run();
+      return Response.json({ ok: true, id, updated: Object.keys(body) });
+    } catch (err) {
+      return Response.json({ error: err.message }, { status: 500 });
+    }
+  }
+
   if (method === 'DELETE' && path.startsWith('/api/art/')) {
     try {
       const authResp = await checkAdminKey(request, env);

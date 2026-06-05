@@ -273,6 +273,7 @@
             .result-level { font-size: 2.2rem; }
         }
     </style>
+<script src="/assets/net-emoji.js" defer></script>
 </head>
 <body>
 
@@ -619,7 +620,8 @@
             const studentId = studentIdInput.value.trim() || getStudentId();
             if (studentId) localStorage.setItem('net_student_id', studentId);
             const dashId = studentId.replace(/\s+/g, '-').toLowerCase();
-            const dashLink = '/' + dashId + '-portal';
+            const dashLink = dashId === 'sov100-test-magic' ? '/sov100-portal.html'
+              : '/' + dashId + '-portal';
 
             // Populate results
             document.getElementById('resultEmoji').textContent = emoji;

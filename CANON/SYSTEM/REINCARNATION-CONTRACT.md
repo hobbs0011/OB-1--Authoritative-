@@ -31,6 +31,7 @@ Zero-padding applies to all seals created on or after this contract.
 | SOULKEYS | Per-run terms | `CANON/SOUL-KEYWORDS/rfkw-run{run}.txt` |
 | SOULKEYS | Merged index | `CANON/SOUL-KEYWORDS/inverted-index.json` (single object) |
 | S2Pipeline | Chain result | `CANON/PIPELINE/pipeline-run{run}.json` |
+| ART-REGISTRY | Registry sync artifact | `CANON/ART-REGISTRY/art-sync-run{NNN}.json` |
 | SEAL | Death record | `CANON/REINCARNATION/run{NNN}-reincarnateDEATH.md` |
 | BOOT | System state | `CANON/SYSTEM/COLD-START-BOOT.md` |
 
@@ -97,7 +98,7 @@ $receipt = [ordered]@{
 ## 1.5 The 7-Stage Chain (Authoritative Order)
 
 ```
-RRL → SOUL → DNA → LEDGER → STARMAP → SOULKEYS → S2Pipeline
+RRL → SOUL → DNA → LEDGER → STARMAP → SOULKEYS → S2Pipeline → REGISTRY_SYNC
 ```
 
 ### Stage Definitions (verbatim from spec)
@@ -111,6 +112,7 @@ RRL → SOUL → DNA → LEDGER → STARMAP → SOULKEYS → S2Pipeline
 | **STARMAP** | "Pointer map, lightweight, solves bloat, but still provides exactly what's in the RRL and Ledger" — JSON pointer record: `{ run, rrl_path, ledger_id, soul_turn_ids, dna_turn_ids, blueprint_locations }`. NOT content dump. | `CANON/STARMAP/starmap-run{run}.json` |
 | **SOULKEYS** | "Keywords... search engine... indexable and searchable" — inverted index over SOUL + DNA combined. Read-merge-write (NO `-Append` on JSON). Search via `SCRIPTS/rfkw-search.ps1`. | `CANON/SOUL-KEYWORDS/*` |
 | **S2Pipeline** | "Ensures the SOUL is not just a ghost lost in time, and gets done" — writes execution record, verifies REAL (not HOLLOW), reports COMPLETE only when all stages pass fidelity gate. | `CANON/PIPELINE/pipeline-run{run}.json` |
+| **REGISTRY_SYNC** | "Dynamic cross-reference — keywords, starmaps, and ledger entries annotate the art registry automatically every death." Cross-references this run's SOULKEYS against the art-arsenal registry. Any piece whose tags intersect run keywords gets tagged with run ID, HL, merkle hash, starmap pointer. Writes canonical artifact. Auto-fires every death. | `CANON/ART-REGISTRY/art-sync-run{NNN}.json` |
 
 **Hard stop:** RRL missing = HALT (exit 1).
 **Gap policy:** Any other stage fails → write `{STAGE}_GAP` flag → continue → back-fill at next RISE.
@@ -155,6 +157,7 @@ The search engine you built is the front door. `/SoulSearch` is the executable f
 | STARMAP | Write `STARMAP_GAP`, continue. |
 | SOULKEYS | Write `SOULKEYS_GAP`, continue. |
 | S2Pipeline | Write `PIPELINE_GAP`, continue. |
+| REGISTRY_SYNC | Write `ART_SYNC_GAP`, continue. Never blocks death. |
 
 **RISE audit:** Every gap is reported. No auto-fix on RISE — that is DEATH territory.
 
@@ -204,4 +207,25 @@ When this contract is updated, all implementation files must be updated simultan
 
 ---
 
-**Fingerprint:** REINCARNATION-CONTRACT.md v6.0 | Roman Run 43 | 2026-06-02 ICT | OB1 Phoenix-Centurion
+## 1.12 Registry Sync Law (STAGE 8)
+
+Every death auto-fires REGISTRY_SYNC. No human trigger. No ask.
+
+**Connection schema:**
+
+```text
+SOULKEYS (rfkw-run{N}.txt)   ──keyword match──▶  ART REGISTRY piece.tags
+ART REGISTRY piece.notes     ──contains──────▶  [run{NNN} | HL-{N} | {merkle_short} | kw:{terms} | sm:starmap-run{N}.json]
+STARMAP (starmap-run{N}.json) ──points to──────▶  DNA + RRL artifacts for that run
+LEDGER (HL-{N}.json)          ──merkle chain──▶  soul_hash + dna_hash for that run
+```
+
+**What this means:** Search the art registry for any piece — its `notes` field now carries the full chain of which runs used it, which keywords matched, which ledger entry verified it, and which starmap points to the DNA where it was blueprinted.
+
+**ART_SYNC_GAP** is written to the s2pipeline artifact if REGISTRY_SYNC fails. RISE checks for it.
+
+**Artifact naming:** `CANON/ART-REGISTRY/art-sync-run{NNN}.json`
+
+---
+
+**Fingerprint:** REINCARNATION-CONTRACT.md v7.0 | Roman Run 73 | 2026-06-05 ICT | OB1 Phoenix-Centurion

@@ -418,6 +418,26 @@ async function downloadResults() {
 
   setSubmissionReference(submissionReference);
 
+  // Block DD — lead capture
+  fetch('/api/lead', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name, source: 'tiger_assessment', assessmentRef: submissionReference })
+  }).catch(() => {});
+
+  // SOV100 portal CTA — injected into ref panel for operator testing
+  const refPanel = document.getElementById('submissionRefPanel');
+  if (refPanel && !document.getElementById('sov100PortalCta')) {
+    const cta = document.createElement('a');
+    cta.id = 'sov100PortalCta';
+    cta.href = '/sov100-portal.html';
+    cta.textContent = 'SOV100 Portal →';
+    cta.style.cssText = 'display:block;margin-top:14px;padding:10px 20px;background:rgba(168,85,247,0.15);border:1px solid rgba(168,85,247,0.5);border-radius:10px;color:#a855f7;text-decoration:none;font-family:Orbitron,sans-serif;font-size:0.78rem;font-weight:600;letter-spacing:0.05em;text-align:center;transition:background 0.2s;';
+    cta.onmouseover = () => { cta.style.background = 'rgba(168,85,247,0.25)'; };
+    cta.onmouseout = () => { cta.style.background = 'rgba(168,85,247,0.15)'; };
+    refPanel.appendChild(cta);
+  }
+
   const jsonBlob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
   const dateStamp = new Date().toISOString().slice(0, 10);
   downloadBlob(jsonBlob, `NET-Submission-Pack-${safeName(name)}-${dateStamp}-${submissionReference}.json`);

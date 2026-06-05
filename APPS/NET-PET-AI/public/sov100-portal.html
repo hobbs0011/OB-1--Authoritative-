@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="theme-color" content="#0a0a12">
-<title>SOV100 — DEV PORTAL</title>
+<title>SOV100 — TEST PORTAL</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Orbitron:wght@400;500;600;700;800&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -123,16 +123,17 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;bac
   .status-card{flex-direction:column;align-items:flex-start;}
 }
 .icon-replace{width:20px;height:20px;vertical-align:middle;object-fit:contain;margin-right:4px}.speak-icon{width:20px;height:20px;vertical-align:middle;object-fit:contain}.mic-icon{width:36px;height:36px;object-fit:contain;filter:brightness(0)invert(1)sepia(1)saturate(5)hue-rotate(240deg)}#mic.mic-active .mic-icon{filter:none}.ts-icon{width:40px;height:40px;object-fit:contain;display:block;margin:0 auto 8px}</style>
+<script src="/assets/net-emoji.js" defer></script>
 </head>
 <body>
 
 <!-- DEV BANNER -->
-<div id="devBanner">⚠️ DEV ENVIRONMENT — net-pet-ai-dev · sov100-test-magic · v0d4c3bd2</div>
+<div id="devBanner">✅ SOV100 TEST ENVIRONMENT — net-pet-ai · sov100-test-magic · c21a3ca0</div>
 
 <!-- LOGIN -->
 <div id="loginScreen">
   <div class="login-box" id="loginBox">
-    <img src="/icons/badge-tiger.svg" alt="" class="login-crest" onerror="this.style.display='none'">
+    <img src="/isolated/phoenix-crest-clean.png" alt="" class="login-crest" onerror="this.style.display='none'">
     <h1>SOV100 PORTAL</h1>
     <p class="login-subtitle">Operator Dev Testing Environment</p>
     <input type="password" id="portalPw" placeholder="Enter portal password" autocomplete="off">
@@ -144,9 +145,9 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;bac
 <!-- NAV -->
 <nav id="topNav" class="hidden">
   <a class="nav-brand" href="sov100-portal">
-    <img src="/icons/badge-tiger.svg" alt="" onerror="this.style.display='none'">
+    <img src="/isolated/phoenix-crest-clean.png" alt="" onerror="this.style.display='none'">
     <span>SOV100</span>
-    <span class="dev-pill">DEV</span>
+    <span class="dev-pill">PROD</span>
   </a>
   <div class="nav-links">
     <a href="sov100-portal" class="active">Dashboard</a>
@@ -155,25 +156,25 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;bac
   <button class="nav-logout" id="logoutBtn">Logout</button>
 </nav>
 
-<img src="/icons/badge-tiger.svg" class="portal-watermark" alt="" onerror="this.style.display='none'">
+<img src="/isolated/phoenix-crest-clean.png" class="portal-watermark" alt="" onerror="this.style.display='none'">
 
 <!-- MAIN -->
 <main class="main-container" id="mainContent" style="display:none;">
 
   <div class="dashboard-header">
     <h1>SOV100</h1>
-    <p class="subtitle">Operator · DEV Tester · All Modes Unlocked</p>
+    <p class="subtitle">Operator · SOV100 Tester · All Modes Unlocked</p>
   </div>
 
   <!-- STATUS -->
   <div class="status-card">
     <div class="status-item">
       <span class="status-label">Version</span>
-      <span class="status-value">0d4c3bd2</span>
+      <span class="status-value">c21a3ca0</span>
     </div>
     <div class="status-item">
       <span class="status-label">Worker</span>
-      <span class="status-value" style="font-size:0.72rem;">net-pet-ai-dev</span>
+      <span class="status-value" style="font-size:0.72rem;">net-pet-ai</span>
     </div>
     <div class="status-item">
       <span class="status-label">Student ID</span>
@@ -190,21 +191,21 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;bac
   <div class="mode-grid">
     <div class="mode-card purple">
       <div class="mode-accent"></div>
-      <span class="mode-icon"><img src="https://net-art-arsenal.pages.dev/icons/audio-waveform-64.png" alt="" width="32" height="32" style="object-fit:contain"></span>
+      <span class="mode-icon"><img src="/isolated/tiger-face-neon-clean.png" alt="" width="64" height="64" style="object-fit:contain"></span>
       <span class="mode-title">FREE TALK</span>
       <span class="mode-desc">Open conversation. No structure. React and respond. Full coach mode.</span>
       <a class="mode-btn" href="/magic-chat?studentId=sov100-test-magic&mode=free">LAUNCH →</a>
     </div>
     <div class="mode-card gold">
       <div class="mode-accent"></div>
-      <span class="mode-icon"><img src="https://net-art-arsenal.pages.dev/icons/ring-45-15-64.png" alt="" width="32" height="32" style="object-fit:contain"></span>
+      <span class="mode-icon"><img src="/isolated/phoenix-crest-clean.png" alt="" width="64" height="64" style="object-fit:contain"></span>
       <span class="mode-title">STUDY MODE</span>
       <span class="mode-desc">Homework tracking. Session review. Structured learning with progress log.</span>
       <a class="mode-btn" href="/magic-chat?studentId=sov100-test-magic&mode=study">LAUNCH →</a>
     </div>
     <div class="mode-card teal">
       <div class="mode-accent"></div>
-      <span class="mode-icon"><img src="https://net-art-arsenal.pages.dev/icons/brain-circuit-64.png" alt="" width="32" height="32" style="object-fit:contain"></span>
+      <span class="mode-icon"><img src="/isolated/tiger-cub-clean.png" alt="" width="64" height="64" style="object-fit:contain"></span>
       <span class="mode-title">PHONICS</span>
       <span class="mode-desc">NET Phonics 7 groups. HOGFEZ active. Deterministic drill opener.</span>
       <a class="mode-btn" href="/magic-chat?studentId=sov100-test-magic&mode=phonics">LAUNCH →</a>

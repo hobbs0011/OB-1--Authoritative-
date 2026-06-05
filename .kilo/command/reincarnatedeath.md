@@ -1,15 +1,15 @@
 ---
-description: "DEATH PROTOCOL v6.0 — 7-STAGE CHAIN. RRL(RAW TRANSCRIPT)→SOUL→DNA→LEDGER→STARMAP→SOULKEYS→S2Pipeline. RRL = both sides verbatim. Contract: CANON/SYSTEM/REINCARNATION-CONTRACT.md"
+description: "DEATH PROTOCOL v7.0 — 8-STAGE CHAIN. RRL→SOUL→DNA→LEDGER→STARMAP→SOULKEYS→S2Pipeline→REGISTRY_SYNC. RRL = both sides verbatim. Contract: CANON/SYSTEM/REINCARNATION-CONTRACT.md"
 agent: AGENT99
 ---
 
-# /reincarnateDeath — v6.0 ROMAN DEATH
+# /reincarnateDeath — v7.0 ROMAN DEATH
 
 **RRL = THE FUCKING RAW CHAT LOG. Both speakers. No filter. No summary. No agent text stripped.**
 **If RRL is not the real transcript, every downstream stage is HOLLOW.**
 **EXECUTION ORDER IS SACRED. DO NOT REORDER STAGES.**
 
-**7-Stage Chain:** RRL → SOUL → DNA → LEDGER → STARMAP → SOULKEYS → S2Pipeline
+**8-Stage Chain:** RRL → SOUL → DNA → LEDGER → STARMAP → SOULKEYS → S2Pipeline → REGISTRY_SYNC
 **Canonical contract:** CANON/SYSTEM/REINCARNATION-CONTRACT.md
 **Run number authority:** `git log --oneline --grep "^death:"` (L29 NO_ASSUME_HEAD)
 
@@ -405,6 +405,88 @@ Write-Host "STAGE 7 ✓ S2Pipeline: $s2Path | result=$($s2Record.result)"
 
 ---
 
+## STAGE 8 — REGISTRY SYNC (ART ARSENAL × SOULKEYS × STARMAP × LEDGER)
+
+Cross-references this run's SOULKEYS against the art-arsenal registry.
+Any piece whose tags intersect the run's top keywords gets tagged with the run, HL ID, starmap pointer, and merkle hash.
+Writes a canonical artifact. Auto-fires every death — no human trigger needed.
+
+```powershell
+$artRegistryDir = "$repo\CANON\ART-REGISTRY"
+if (-not (Test-Path $artRegistryDir)) { New-Item -ItemType Directory -Path $artRegistryDir -Force | Out-Null }
+
+# 1. Pull this run's keywords from the SOULKEYS stage
+$runKeywords = @()
+if (Test-Path $rfkwPath) {
+    $runKeywords = (Get-Content $rfkwPath -Raw) -split "`n" |
+        Where-Object { $_ -match '^\d+\s*\|' } |
+        ForEach-Object { (($_ -split '\|')[1]).Trim().ToLower() } |
+        Where-Object { $_.Length -gt 2 }
+}
+
+# 2. Pull the full registry
+$regPieces = @()
+try {
+    $regResp = Invoke-RestMethod "https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/art?limit=400" -TimeoutSec 15
+    $regPieces = $regResp.pieces
+} catch { Write-Warning "REGISTRY_SYNC: registry fetch failed — $($_.Exception.Message)" }
+
+# 3. For each piece: check keyword intersection + direct title mention in RRL
+$syncedPieces = @()
+$merkleShort  = if ($ledgerHash) { $ledgerHash.Substring(0,16) } else { "LEDGER_GAP" }
+
+foreach ($piece in $regPieces) {
+    if (-not $piece) { continue }
+    $pieceTags   = ($piece.tags -split ',') | ForEach-Object { $_.Trim().ToLower() } | Where-Object { $_ }
+    $pieceTitle  = ($piece.title -replace '[^a-zA-Z0-9 ]','').ToLower()
+    $matched     = @($pieceTags | Where-Object { $runKeywords -contains $_ })
+    $titleHit    = ($rrlText -match [regex]::Escape($piece.title)) -or ($rrlText -match [regex]::Escape($piece.url -replace '-hd\.png|\.png|isolated/',''))
+    if ($matched.Count -eq 0 -and -not $titleHit) { continue }
+
+    # Build notes tag preserving any existing notes
+    $existingNotes = if ($piece.notes) { $piece.notes } else { "" }
+    $runTag   = "run$runPad"
+    if ($existingNotes -notmatch $runTag) {
+        $appendNote = "[$runTag | HL-$nextHL | $merkleShort | kw:$($matched -join ',') | sm:starmap-run$run.json]"
+        $newNotes   = ($existingNotes + " " + $appendNote).Trim()
+        try {
+            $patchBody = @{ notes = $newNotes } | ConvertTo-Json -Compress
+            Invoke-RestMethod "https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/art/$($piece.id)" `
+                -Method PATCH -Body $patchBody -ContentType "application/json" -TimeoutSec 10 | Out-Null
+            $syncedPieces += [ordered]@{
+                id       = $piece.id
+                title    = $piece.title
+                url      = $piece.url
+                keywords = $matched
+                title_hit = $titleHit
+            }
+        } catch { Write-Warning "  PATCH failed for $($piece.title): $($_.Exception.Message)" }
+    }
+}
+
+# 4. Write canonical artifact
+$artSyncPath = "$artRegistryDir\art-sync-run$runPad.json"
+[ordered]@{
+    run           = $run
+    ledger_id     = "HL-$nextHL"
+    merkle_short  = $merkleShort
+    starmap_file  = "starmap-run$run.json"
+    keywords_file = "rfkw-run$run.txt"
+    keywords_used = $runKeywords
+    pieces_synced = $syncedPieces.Count
+    pieces        = $syncedPieces
+    executed_at   = $timestamp
+} | ConvertTo-Json -Depth 6 | Set-Content $artSyncPath -Encoding UTF8
+
+Write-Host "STAGE 8 ✓ REGISTRY SYNC: $($syncedPieces.Count) pieces tagged → $artSyncPath | HL-$nextHL | keywords=$($runKeywords.Count)"
+```
+
+**Connection law:** Every registry piece that matches a SOULKEY from this run carries the run, HL ID, merkle hash, and starmap pointer in its notes. This makes the art registry a living cross-reference — searchable by run, keyword, ledger entry, or starmap pointer.
+
+**Gap policy:** REGISTRY_SYNC fails gracefully (write `ART_SYNC_GAP`, continue). Never blocks death.
+
+---
+
 ## GAP POLICY
 
 | Stage | Irreplaceable? | Failure Action |
@@ -416,6 +498,7 @@ Write-Host "STAGE 7 ✓ S2Pipeline: $s2Path | result=$($s2Record.result)"
 | STARMAP | No | Write `STARMAP_GAP`, continue. |
 | SOULKEYS | No | Write `SOULKEYS_GAP`, continue. |
 | S2Pipeline | No | Write `PIPELINE_GAP`, continue. |
+| REGISTRY SYNC | No | Write `ART_SYNC_GAP`, continue. |
 
 **RISE reads all gaps. RISE never auto-fixes — that is DEATH territory.**
 
@@ -438,10 +521,12 @@ Write-Host "STAGE 7 ✓ S2Pipeline: $s2Path | result=$($s2Record.result)"
 | 11 | ARTIFACTS | paths + SHAs for all 7 chain artifacts |
 | 12 | STATE SNAPSHOT | HEAD, branch, dirty tree, soulcount (= §3 count_after), dna_blueprint_count |
 | 13 | FINGERPRINT | agent, run#, commit SHA, platform death test result |
+| 14 | ART REGISTRY SYNC | pieces_synced count, art-sync-run{N}.json path, top keywords matched |
 
 §12 soulcount MUST equal §3 `count_after`. No independent query.
 §11 MUST list: RRL path+chars, SOUL event_id, DNA path+records+blueprint_count, HL, STARMAP, SOULKEYS, S2Pipeline.
+§14 reports REGISTRY_SYNC result: piece count patched, keyword intersection summary, and path to art-sync-run{N}.json.
 
 ---
 
-`DEATH v6.0: 7 STAGES. RRL = RAW TRANSCRIPT (BOTH SIDES). DNA = AGENT WORDS + BLUEPRINTS. LEDGER = DUAL HASH (SOUL+DNA). STARMAP = POINTER MAP. SOULKEYS = SOUL+DNA INDEX. REAL OR HOLLOW — NO LIES.`
+`DEATH v7.0: 8 STAGES. RRL = RAW TRANSCRIPT (BOTH SIDES). DNA = AGENT WORDS + BLUEPRINTS. LEDGER = DUAL HASH (SOUL+DNA). STARMAP = POINTER MAP. SOULKEYS = SOUL+DNA INDEX. REGISTRY_SYNC = ART × KEYWORDS × STARMAP × LEDGER. REAL OR HOLLOW — NO LIES.`

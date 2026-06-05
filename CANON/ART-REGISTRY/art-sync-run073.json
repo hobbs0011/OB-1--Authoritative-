@@ -1,0 +1,1041 @@
+{
+  "run": 73,
+  "ledger_id": "HL-468",
+  "merkle_short": "e3b0c44298fc1c14",
+  "starmap_file": "starmap-run73.json",
+  "keywords_file": "rfkw-run73.txt",
+  "keywords_used": [
+    "const",
+    "assessment",
+    "chars",
+    "return",
+    "michael",
+    "portal",
+    "written",
+    "matching",
+    "pipeline",
+    "death",
+    "tiger",
+    "linenrrlrrltxtomitted",
+    "method",
+    "complete",
+    "titaniumanchor",
+    "mbsubmrnubm",
+    "student",
+    "english",
+    "source",
+    "brand",
+    "check",
+    "delta",
+    "soulcount",
+    "phoenix",
+    "update",
+    "solid",
+    "error",
+    "section",
+    "session",
+    "phonics",
+    "project",
+    "registry",
+    "blueprints",
+    "await",
+    "current",
+    "parent",
+    "function",
+    "notes",
+    "bytes",
+    "title",
+    "typeaititleaititlereincarnate",
+    "setupsessionidfdbeebfadecbfb",
+    "block",
+    "local",
+    "prompts",
+    "chain",
+    "agent",
+    "clean",
+    "status",
+    "extracted"
+  ],
+  "pieces_synced": 117,
+  "pieces": [
+    {
+      "id": "ART-1780552973434-C5NK",
+      "title": "Phoenix DNA Fusion (icon)",
+      "url": "icons/phoenix-dna-fusion-64.png",
+      "keywords": [
+        "phoenix"
+      ],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780552957214-QOXQ",
+      "title": "Merkle Ledger Lock (icon)",
+      "url": "icons/merkle-lock-64.png",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780552955981-617U",
+      "title": "45/15 Protocol Ring (icon)",
+      "url": "icons/ring-45-15-64.png",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780552954776-0T98",
+      "title": "Audio Waveform (icon)",
+      "url": "icons/audio-waveform-64.png",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780552953575-XMY6",
+      "title": "Cognitive Gear Chain (icon)",
+      "url": "icons/gear-chain-64.png",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780552952348-9MV2",
+      "title": "404 Brain Circuit (icon)",
+      "url": "icons/brain-circuit-64.png",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780552951125-4J6I",
+      "title": "Thief Class (icon)",
+      "url": "icons/class-thief-64.png",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780552949852-LK1E",
+      "title": "Medic Class (icon)",
+      "url": "icons/class-medic-64.png",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780552948638-AV8O",
+      "title": "Sniper Class (icon)",
+      "url": "icons/class-sniper-64.png",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780552947329-429K",
+      "title": "Railrunner Class (icon)",
+      "url": "icons/class-railrunner-64.png",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780552946124-JUTX",
+      "title": "Sigma Walker (icon)",
+      "url": "icons/sigma-walker-64.png",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780552944882-JDKL",
+      "title": "Skibidi Shambler (icon)",
+      "url": "icons/shambler-enemy-64.png",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780552943665-2SC5",
+      "title": "Baron Skibidi (icon)",
+      "url": "icons/baron-skibidi-64.png",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780552942397-465D",
+      "title": "Train Engine (The Locomotive) (icon)",
+      "url": "icons/train-engine-64.png",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780552941166-TT49",
+      "title": "Broken Chain (icon)",
+      "url": "icons/broken-chain-64.png",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780552939880-KIN3",
+      "title": "Phoenix Low-Poly Geometric (icon)",
+      "url": "icons/phoenix-lowpoly-64.png",
+      "keywords": [
+        "phoenix"
+      ],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780552937696-E9KQ",
+      "title": "Data Sovereignty Shield (icon)",
+      "url": "icons/data-shield-64.png",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780552936476-GTJS",
+      "title": "University Crest (icon)",
+      "url": "icons/university-crest-64.png",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780552935272-GN57",
+      "title": "Elephant Chain (icon)",
+      "url": "icons/elephant-chain-64.png",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780552934055-8H8Z",
+      "title": "Mouse Gold Wireframe (icon)",
+      "url": "icons/mouse-wireframe-64.png",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780552932780-QJ0Q",
+      "title": "Tiger Cub (icon)",
+      "url": "icons/tiger-cub-64.png",
+      "keywords": [
+        "tiger"
+      ],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780552931560-7QQ7",
+      "title": "Tiger Breaking Chains + Child (icon)",
+      "url": "icons/tiger-child-64.png",
+      "keywords": [
+        "tiger"
+      ],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780552930351-1L1R",
+      "title": "Tiger Eye Close-up (icon)",
+      "url": "icons/tiger-eye-64.png",
+      "keywords": [
+        "tiger"
+      ],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780552928790-8AXU",
+      "title": "NET Wordmark (icon)",
+      "url": "icons/net-wordmark-64.png",
+      "keywords": [
+        "brand"
+      ],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780552927560-ELKC",
+      "title": "Tesseract Core Medallion (icon)",
+      "url": "icons/tesseract-core-64.png",
+      "keywords": [
+        "phoenix"
+      ],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780552926340-95AR",
+      "title": "DNA Helix (icon)",
+      "url": "icons/dna-helix-64.png",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780552925125-ZKYV",
+      "title": "Mouse Caged (icon)",
+      "url": "icons/mouse-caged-64.png",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780552923891-XKQT",
+      "title": "Tiger Roaring Profile (icon)",
+      "url": "icons/tiger-roaring-64.png",
+      "keywords": [
+        "tiger"
+      ],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780552922611-MY3O",
+      "title": "Tiger Portrait (icon)",
+      "url": "icons/tiger-portrait-64.png",
+      "keywords": [
+        "tiger"
+      ],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780552921323-9TKN",
+      "title": "Tiger Face Neon (icon)",
+      "url": "icons/tiger-face-neon-64.png",
+      "keywords": [
+        "tiger"
+      ],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780552920117-7ITS",
+      "title": "Phoenix Neon (icon)",
+      "url": "icons/phoenix-neon-64.png",
+      "keywords": [
+        "phoenix"
+      ],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780552918779-O2MG",
+      "title": "Phoenix Crest (icon)",
+      "url": "icons/phoenix-crest-64.png",
+      "keywords": [
+        "phoenix"
+      ],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780551602717-CNV5",
+      "title": "Phoenix DNA Fusion",
+      "url": "isolated/phoenix-dna-fusion-clean.png",
+      "keywords": [
+        "phoenix"
+      ],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780551594710-7R1I",
+      "title": "Merkle Ledger Lock",
+      "url": "isolated/merkle-lock-hd.png",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780551593464-1C9U",
+      "title": "45/15 Protocol Ring",
+      "url": "isolated/ring-45-15-hd.png",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780551592165-3U0M",
+      "title": "Audio Waveform",
+      "url": "isolated/audio-waveform-hd.png",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780551590833-D9Q3",
+      "title": "Cognitive Gear Chain",
+      "url": "isolated/gear-chain-hd.png",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780551589603-AAPM",
+      "title": "404 Brain Circuit",
+      "url": "isolated/brain-circuit-hd.png",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780551588352-EFPS",
+      "title": "Thief Class",
+      "url": "isolated/class-thief-hd.png",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780551587145-IT9A",
+      "title": "Medic Class",
+      "url": "isolated/class-medic-hd.png",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780551585788-EHG7",
+      "title": "Sniper Class",
+      "url": "isolated/class-sniper-hd.png",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780551584593-SORX",
+      "title": "Railrunner Class",
+      "url": "isolated/class-railrunner-hd.png",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780551583339-6Q1Y",
+      "title": "Sigma Walker",
+      "url": "isolated/sigma-walker-hd.png",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780551582100-5OS3",
+      "title": "Skibidi Shambler",
+      "url": "isolated/shambler-enemy-hd.png",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780551580723-7PO2",
+      "title": "Baron Skibidi",
+      "url": "isolated/baron-skibidi-hd.png",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780551579454-BGHD",
+      "title": "Train Engine (The Locomotive)",
+      "url": "isolated/train-engine-hd.png",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780551576913-78VN",
+      "title": "Phoenix Low-Poly Geometric",
+      "url": "isolated/phoenix-lowpoly-hd.png",
+      "keywords": [
+        "phoenix"
+      ],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780551574847-KRCV",
+      "title": "Data Sovereignty Shield",
+      "url": "isolated/data-shield-hd.png",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780551573633-QZR3",
+      "title": "University Crest",
+      "url": "isolated/university-crest-hd.png",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780551572418-7DU0",
+      "title": "Elephant Chain",
+      "url": "isolated/elephant-chain-hd.png",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780551571116-6Q83",
+      "title": "Mouse Gold Wireframe",
+      "url": "isolated/mouse-clean.png",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780551569713-11BL",
+      "title": "Tiger Cub",
+      "url": "isolated/tiger-cub-clean.png",
+      "keywords": [
+        "tiger"
+      ],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780551568344-OPV3",
+      "title": "Tiger Breaking Chains + Child",
+      "url": "isolated/tiger-child-clean.png",
+      "keywords": [
+        "tiger"
+      ],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780551567038-AA5B",
+      "title": "Tiger Eye Close-up",
+      "url": "isolated/tiger-eye-hd.png",
+      "keywords": [
+        "tiger"
+      ],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780551565735-O4U9",
+      "title": "NET Wordmark",
+      "url": "isolated/net-wordmark-hd.png",
+      "keywords": [
+        "brand"
+      ],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780551564461-MD51",
+      "title": "Tesseract Core Medallion",
+      "url": "isolated/tesseract-core-hd.png",
+      "keywords": [
+        "phoenix"
+      ],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780551563201-UU91",
+      "title": "DNA Helix",
+      "url": "isolated/dna-helix-hd.png",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780551561920-CAWN",
+      "title": "Mouse Caged",
+      "url": "isolated/mouse-caged-hd.png",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780551560592-B99F",
+      "title": "Tiger Roaring Profile",
+      "url": "isolated/tiger-roaring-clean.png",
+      "keywords": [
+        "tiger"
+      ],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780551559335-ONZS",
+      "title": "Tiger Portrait",
+      "url": "isolated/tiger-portrait-clean.png",
+      "keywords": [
+        "tiger"
+      ],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780551558015-1TSK",
+      "title": "Tiger Face Neon",
+      "url": "isolated/tiger-face-neon-clean.png",
+      "keywords": [
+        "tiger"
+      ],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780551556529-ZVR0",
+      "title": "Phoenix Neon",
+      "url": "isolated/phoenix-neon-clean.png",
+      "keywords": [
+        "phoenix"
+      ],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780551554850-GNEZ",
+      "title": "Phoenix Crest",
+      "url": "isolated/phoenix-crest-clean.png",
+      "keywords": [
+        "phoenix"
+      ],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780549303316-L9EO",
+      "title": "Sovereign Tiger Protocol — Page 15",
+      "url": "protocols/sovereign-tiger-protocol/page-15.png",
+      "keywords": [
+        "tiger"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780549301890-1LHV",
+      "title": "Sovereign Tiger Protocol — Page 14",
+      "url": "protocols/sovereign-tiger-protocol/page-14.png",
+      "keywords": [
+        "tiger"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780549300524-U408",
+      "title": "Sovereign Tiger Protocol — Page 13",
+      "url": "protocols/sovereign-tiger-protocol/page-13.png",
+      "keywords": [
+        "tiger"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780549299146-7C97",
+      "title": "Sovereign Tiger Protocol — Page 12",
+      "url": "protocols/sovereign-tiger-protocol/page-12.png",
+      "keywords": [
+        "tiger"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780549297806-IYG8",
+      "title": "Sovereign Tiger Protocol — Page 11",
+      "url": "protocols/sovereign-tiger-protocol/page-11.png",
+      "keywords": [
+        "tiger"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780549296402-W2WM",
+      "title": "Sovereign Tiger Protocol — Page 10",
+      "url": "protocols/sovereign-tiger-protocol/page-10.png",
+      "keywords": [
+        "tiger"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780549294987-7C05",
+      "title": "Sovereign Tiger Protocol — Page 09",
+      "url": "protocols/sovereign-tiger-protocol/page-09.png",
+      "keywords": [
+        "tiger"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780549293659-MCQ0",
+      "title": "Sovereign Tiger Protocol — Page 08",
+      "url": "protocols/sovereign-tiger-protocol/page-08.png",
+      "keywords": [
+        "tiger"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780549292206-JZ0T",
+      "title": "Sovereign Tiger Protocol — Page 07",
+      "url": "protocols/sovereign-tiger-protocol/page-07.png",
+      "keywords": [
+        "tiger"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780549290849-DJOK",
+      "title": "Sovereign Tiger Protocol — Page 06",
+      "url": "protocols/sovereign-tiger-protocol/page-06.png",
+      "keywords": [
+        "tiger"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780549289470-J3NI",
+      "title": "Sovereign Tiger Protocol — Page 05",
+      "url": "protocols/sovereign-tiger-protocol/page-05.png",
+      "keywords": [
+        "tiger"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780549288082-S5S4",
+      "title": "Sovereign Tiger Protocol — Page 04",
+      "url": "protocols/sovereign-tiger-protocol/page-04.png",
+      "keywords": [
+        "tiger"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780549286703-LYHO",
+      "title": "Sovereign Tiger Protocol — Page 03",
+      "url": "protocols/sovereign-tiger-protocol/page-03.png",
+      "keywords": [
+        "tiger"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780549285319-XSQ0",
+      "title": "Sovereign Tiger Protocol — Page 02",
+      "url": "protocols/sovereign-tiger-protocol/page-02.png",
+      "keywords": [
+        "tiger"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780549284007-EP4T",
+      "title": "Sovereign Tiger Protocol — Page 01",
+      "url": "protocols/sovereign-tiger-protocol/page-01.png",
+      "keywords": [
+        "tiger"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780548333953-MXB7",
+      "title": "Codex — Drift as a Diagnostic Event",
+      "url": "codex_preview/page-10.png",
+      "keywords": [
+        "phoenix"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780548094120-O10U",
+      "title": "Natural English Training — Wide Banner Logo",
+      "url": "ASSETS/brand/Natural-English-Training-Banner.png",
+      "keywords": [
+        "brand",
+        "phoenix"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780548090137-P6CG",
+      "title": "Tiger Dossier Slide 05 — Lợi Thế Cạnh Tranh Tuyệt Đối 2026 (Unbeatable Advantage)",
+      "url": "ASSETS/dossier/tiger-dossier/slide-05.webp",
+      "keywords": [
+        "english"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780547873014-NYBN",
+      "title": "Phoenix Rising Protocol — Neon Logo",
+      "url": "APPS/NET-PET-AI/public/assessment-assets/brand/NET-PHXRISING-LOGO.webp",
+      "keywords": [
+        "phoenix",
+        "brand"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780547871661-Q634",
+      "title": "Child Watching Tiger — Break the Chains",
+      "url": "APPS/PAGES/tigers-4room/CHILD_WATCHING_TIGER.png",
+      "keywords": [
+        "tiger"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780547760624-T3R1",
+      "title": "NET Lion Voice — Wide Banner",
+      "url": "ASSETS/brand/NET-LION-VOICE-4.png",
+      "keywords": [
+        "brand",
+        "tiger"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780547632725-6R1Q",
+      "title": "Phoenix Reality-C: The Final Immutable OS",
+      "url": "CANON/ARTWORK/unnamed-art-09.png",
+      "keywords": [
+        "phoenix"
+      ],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780547631405-UHYI",
+      "title": "Anatomy of the Prais Apex: Gospel 444 Visual Identity",
+      "url": "CANON/ARTWORK/unnamed-art-08.png",
+      "keywords": [
+        "phoenix"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780547628696-L7IE",
+      "title": "Wake Up the Tiger: Blueprint for English & AI Mastery",
+      "url": "CANON/ARTWORK/unnamed-art-06.png",
+      "keywords": [
+        "english"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780547624521-V2TL",
+      "title": "The Phoenix Rising Protocol: Transmuting Mice into Tigers",
+      "url": "CANON/ARTWORK/unnamed-art-02.png",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780547610671-CVIO",
+      "title": "Choose Your Path — Dual Gate",
+      "url": "CANON/ARTWORK/gemini-concept-art-05.png",
+      "keywords": [
+        "assessment"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780547609275-NJ4P",
+      "title": "Prioritizing Confidence Over Grammar",
+      "url": "CANON/ARTWORK/gemini-concept-art-04.png",
+      "keywords": [
+        "tiger"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780547607951-RT74",
+      "title": "NET Phoenix Logo",
+      "url": "CANON/ARTWORK/gemini-concept-art-03.png",
+      "keywords": [
+        "phoenix",
+        "brand"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780547606279-NOGU",
+      "title": "NET DNA Helix",
+      "url": "CANON/ARTWORK/gemini-concept-art-02.png",
+      "keywords": [
+        "phoenix"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780547604639-95CF",
+      "title": "Phoenix Crest — Line Art",
+      "url": "CANON/ARTWORK/gemini-concept-art-01.png",
+      "keywords": [
+        "phoenix"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780547160670-TBAE",
+      "title": "WAKE UP THE TIGER",
+      "url": null,
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780547001008-30ZF",
+      "title": "The Obsolete Model",
+      "url": null,
+      "keywords": [
+        "english"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780546997183-THXJ",
+      "title": "The Tiger Protocol",
+      "url": "The_Tiger_Protocol (3).pdf",
+      "keywords": [
+        "english"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780546345401-NKEC",
+      "title": "The Tiger Protocol: 2026 Unfair Advantage",
+      "url": "CANON/PROTOCOLS/The_Tiger_Protocol.pdf",
+      "keywords": [
+        "tiger",
+        "english"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780546342705-3MMY",
+      "title": "Wake Up the Tiger",
+      "url": "CANON/PROTOCOLS/Sovereign_Tiger_Protocol.pdf",
+      "keywords": [
+        "tiger"
+      ],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780546341377-VLBX",
+      "title": "The Phoenix Rising Operational Codex",
+      "url": "CANON/PROTOCOLS/PHOENIX_RISING_CODEX.pdf",
+      "keywords": [
+        "phoenix"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780546338597-YN8N",
+      "title": "The Ultimate Edge",
+      "url": "CANON/PROTOCOLS/GOSPEL_444_PROTOCOL.pdf",
+      "keywords": [
+        "phoenix"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780538363957-LNWV",
+      "title": "STP p03 — The Translate-in-Head Delay (Snowman Freeze)",
+      "url": "local:d:/OB-1-CANONICAL/CANON/PROTOCOLS/Sovereign_Tiger_Protocol.pdf#page=3",
+      "keywords": [
+        "pipeline"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780538361836-VTUX",
+      "title": "STP p01 — Wake Up The Tiger (Title Slide)",
+      "url": "local:d:/OB-1-CANONICAL/CANON/PROTOCOLS/Sovereign_Tiger_Protocol.pdf#page=1",
+      "keywords": [
+        "tiger",
+        "title"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780530764090-TSQF",
+      "title": "Gospel 444 Protocol p01 — The Ultimate Edge (Cover)",
+      "url": "local:D:/Downloads/gospel-pages/page-01.png",
+      "keywords": [
+        "phoenix"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780530118048-7JB6",
+      "title": "NET Dossier p09 — 2026 Unfair Advantage (Venn)",
+      "url": "local:D:/Downloads/dossier-pages/page-09.png",
+      "keywords": [
+        "english"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780530099910-XM96",
+      "title": "NET Dossier p03 — Cognitive Bottleneck / Snowman Freeze",
+      "url": "local:D:/Downloads/dossier-pages/page-03.png",
+      "keywords": [
+        "pipeline"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780528373998-RS6P",
+      "title": "Train 6-7 — Gold 3D Title Logo",
+      "url": "local:D:/Downloads/Telegram Desktop/1765077054337.jpg",
+      "keywords": [
+        "title"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780528187918-SJ0Q",
+      "title": "Train 6-7 — Alternate Title Card",
+      "url": "local:D:/Downloads/Telegram Desktop/Train 6-7- Survive.BrainRot.TitlePage2.png",
+      "keywords": [
+        "title"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780528186594-YSYM",
+      "title": "Train 6-7 — Main Title Card (Phoenix Rising Protocol)",
+      "url": "local:D:/Downloads/Telegram Desktop/Train 6-7- Survive.BrainRot.TitlePage.png",
+      "keywords": [
+        "title"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780528185104-3LCB",
+      "title": "Train 6-7 — Demo Promo Banner",
+      "url": "local:D:/Downloads/Telegram Desktop/Train 6-7- Survive.BrainRot.TitlePage(DEMO).png",
+      "keywords": [
+        "title"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780527419422-NUFN",
+      "title": "Michael Hobbs Headshot — Wide",
+      "url": "local:D:/Downloads/Telegram Desktop/output_9gmjtb.png",
+      "keywords": [
+        "michael"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780527418015-4GUT",
+      "title": "Michael Hobbs Headshot — Square",
+      "url": "local:D:/Downloads/Telegram Desktop/output_5pbeb1.png",
+      "keywords": [
+        "michael"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780527307457-Q3WY",
+      "title": "Cosmic Phoenix Glyph",
+      "url": "local:D:/Downloads/Gemini_Generated_Image_u1oa6cu1oa6cu1oa.png",
+      "keywords": [
+        "phoenix"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780527306197-ZP2Z",
+      "title": "Tiger Badge - Ages 3-7",
+      "url": "local:D:/Downloads/Gemini_Generated_Image_qt81u5qt81u5qt81 (1).png",
+      "keywords": [
+        "tiger"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780527304666-L3MB",
+      "title": "NET Phoenix Sigil (Grayscale)",
+      "url": "local:D:/Downloads/Gemini_Generated_Image_p6pgiwp6pgiwp6pg.png",
+      "keywords": [
+        "phoenix"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780527301511-NG4S",
+      "title": "University Age Crest",
+      "url": "local:D:/Downloads/Gemini_Generated_Image_dq691mdq691mdq69.png",
+      "keywords": [
+        "brand"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780527141405-ZY9G",
+      "title": "NET Phoenix Sigil",
+      "url": "local:C:/Users/mrmic/OneDrive/Pictures/Screenshots/Screenshot 2026-05-11 215537.png",
+      "keywords": [
+        "phoenix",
+        "brand"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780502471217-V612",
+      "title": "The Empire Blueprint",
+      "url": null,
+      "keywords": [
+        "phoenix"
+      ],
+      "title_hit": false
+    }
+  ],
+  "executed_at": "2026-06-05T11:35:33.9231425+07:00"
+}
