@@ -605,6 +605,29 @@ async function handleAPI(path, request, env, url) {
   if (path === "/api/admin/roster" && method === "GET") {
     return handleAdminRoster(env);
   }
+  // Block CC: PATCH /api/admin/student/:studentId — coach update (admin-key gated)
+  const adminStudentMatch = path.match(/^\/api\/admin\/student\/([^/]+)$/);
+  if (adminStudentMatch && method === "PATCH") {
+    try {
+      const studentId = adminStudentMatch[1];
+      const body = await request.json();
+      // Read existing profile
+      const key = `student_profile_${studentId}`;
+      let profile = await env.NET_PET_KV.get(key, "json") || {};
+      // Whitelist of allowed coach fields
+      const allowed = ['level','englishLevel','teachingFocus','sessionNotes','milestone','breakthrough','primaryBlock','lang','goals','confidenceAreas','dailyPractice','fear_trigger'];
+      const updated = [];
+      for (const f of allowed) {
+        if (body[f] !== undefined) { profile[f] = body[f]; updated.push(f); }
+      }
+      if (updated.length === 0) return addCors(json({ error: "No valid fields to update — allowed: " + allowed.join(', ') }, 400), request);
+      await env.NET_PET_KV.put(key, JSON.stringify(profile));
+      await logAudit(env, { action: 'UPDATE_STUDENT', actor: 'admin', target: studentId, meta: { fields: updated } });
+      return addCors(json({ ok: true, updatedFields: updated, studentId }), request);
+    } catch (err) {
+      return addCors(json({ error: err.message }, 500), request);
+    }
+  }
   // Block U: GET /api/admin/audit — recent audit log entries
   if (path === "/api/admin/audit" && method === "GET") {
     return handleAdminAudit(env, url);

@@ -816,13 +816,16 @@
                 if (!d.current_group) return;
                 const card = document.getElementById('phonicsCard');
                 if (!card) return;
-                document.getElementById('phonicsGroup').textContent = d.group_name || d.current_group;
+                const isComplete = d.current_group > 7 || d.current_group === 'COMPLETE';
+                document.getElementById('phonicsGroup').textContent = isComplete ? '✅ COMPLETE' : (d.group_name || d.current_group);
+                document.getElementById('phonicsGroup').style.color = isComplete ? 'var(--teal)' : '';
                 const done = (d.drills_completed || []).length;
                 const total = d.total_drills || 5;
                 const pct = Math.min(100, Math.round((done / total) * 100));
                 document.getElementById('phonicsBar').style.width = pct + '%';
-                document.getElementById('phonicsLabel').textContent = `${done} of ${total} drills complete`;
-                document.getElementById('phonicsStatus').textContent = `Group ${d.group_index || 1} of ${d.total_groups || 7}`;
+                document.getElementById('phonicsBar').style.background = isComplete ? 'var(--teal)' : '';
+                document.getElementById('phonicsLabel').textContent = isComplete ? 'All 7 groups mastered! 🎉' : `${done} of ${total} drills complete`;
+                document.getElementById('phonicsStatus').textContent = isComplete ? 'Phonics foundation complete' : `Group ${d.group_index || 1} of ${d.total_groups || 7}`;
                 card.style.display = 'block';
             } catch(e) {}
         }

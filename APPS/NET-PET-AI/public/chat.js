@@ -248,7 +248,19 @@ function showTigerWin() {
   if (document.getElementById('tigerWinOverlay')) return;
   const dur = sessionStartTs ? Math.round((Date.now() - sessionStartTs) / 60000) : 0;
   const name = (profile.name || profile.fullName || '').split(' ')[0] || 'Tiger';
-  const streak = profile.streak?.currentStreak || 1;
+  // Block AA: Streak increment logic — never reads same stale value
+  const prevStreak = profile.streak?.currentStreak || 0;
+  const lastSessionTs = profile.streak?.lastSessionDate || null;
+  const daysSinceLast = lastSessionTs ? Math.floor((Date.now() - lastSessionTs) / 86400000) : null;
+  let newStreak;
+  if (daysSinceLast === null || daysSinceLast > 1) {
+    newStreak = 1;                    // first session or gap > 1 day → reset
+  } else if (daysSinceLast === 1) {
+    newStreak = prevStreak + 1;       // consecutive day → increment
+  } else {
+    newStreak = prevStreak;           // same day → hold
+  }
+  const streak = newStreak;
   // Mode-specific stat display
   let modeStatRow = '';
   if (currentMode === 'phonics') {
@@ -1997,8 +2009,16 @@ window.refreshPhonicsCard = async function() {
       bar.style.transition = 'width 0.4s ease';
     }
     if (label) { const done = (d.drills_completed || []).length; const total = d.total_drills || 5; label.textContent = `${done} of ${total} drills complete`; }
-    if (group) group.textContent = d.group_name || d.current_group;
-    if (status) status.textContent = `Group ${d.group_index || 1} of ${d.total_groups || 7}`;
+    if (group) {
+      // Block BB: Detect phonics completion — current_group > 7 means all 7 groups done
+      const isComplete = d.current_group > 7 || d.current_group === 'COMPLETE';
+      group.textContent = isComplete ? '✅ COMPLETE' : (d.group_name || d.current_group);
+      group.style.color = isComplete ? 'var(--teal)' : '';
+    }
+    if (status) {
+      const isComplete = d.current_group > 7 || d.current_group === 'COMPLETE';
+      status.textContent = isComplete ? 'All 7 groups mastered! 🎉' : `Group ${d.group_index || 1} of ${d.total_groups || 7}`;
+    }
   } catch (_) {}
 };
 

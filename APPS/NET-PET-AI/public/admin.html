@@ -504,6 +504,7 @@ body::before {
 .roster-table td { padding:8px; border-bottom:1px solid rgba(255,255,255,0.04); vertical-align:middle; }
 .roster-table tr:hover td { background:rgba(168,85,247,0.04); }
 #rosterTable { overflow-x:auto; margin-bottom:20px; }
+.roster-table .card-btn { font-size:0.7rem; padding:4px 10px; white-space:nowrap; }
 </style>
 </head>
 <body>
@@ -813,11 +814,77 @@ function renderRosterTable() {
       <td>${active} ${s.streak?.currentStreak || 0}d</td>
       <td>${esc(s.phonicsGroup || '—')}</td>
       <td>${s.lang === 'vi' ? '🇻🇳' : '🇬🇧'}</td>
-      <td><a href="/student/${s.studentId}" target="_blank" class="card-btn" style="font-size:0.7rem">Open</a></td>
+      <td>
+        <a href="/student/${s.studentId}" target="_blank" class="card-btn" style="font-size:0.7rem;display:inline-block;margin-bottom:3px;">Open</a>
+        <button class="card-btn" style="font-size:0.7rem;display:inline-block;" onclick="showEditStudent('${s.studentId}','${esc(s.fullName)}','${esc(s.level)}','${esc(s.lang)}')">Edit</button>
+      </td>
     </tr>`;
   }
   html += `</tbody></table><p style="color:var(--dim);font-size:0.8rem;margin-top:8px;">${rosterData.length} students total</p>`;
   container.innerHTML = html;
+}
+
+// Block CC: Inline edit form for student fields
+function showEditStudent(sid, name, level, lang) {
+  const row = document.querySelector(`#rosterTable tr:has(a[href*="${sid}"])`) || document.getElementById('rosterTable');
+  if (!row) return;
+  const existingForm = document.getElementById('editForm-' + sid);
+  if (existingForm) { existingForm.remove(); return; }
+  const div = document.createElement('div');
+  div.id = 'editForm-' + sid;
+  div.style.cssText = 'background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;margin:8px 0;grid-column:1/-1;';
+  div.innerHTML = `
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+      <div><label style="font-size:0.72rem;color:var(--dim);display:block;margin-bottom:4px;">Level</label>
+        <select id="edit-lvl-${sid}" class="card-btn" style="width:100%;background:rgba(255,255,255,0.04);color:var(--text);">
+          ${['A0','A1','A2','B1','B2','C1'].map(l => `<option value="${l}" ${l===level?'selected':''}>${l}</option>`).join('')}
+        </select></div>
+      <div><label style="font-size:0.72rem;color:var(--dim);display:block;margin-bottom:4px;">Language</label>
+        <select id="edit-lang-${sid}" class="card-btn" style="width:100%;background:rgba(255,255,255,0.04);color:var(--text);">
+          ${['en','vi'].map(l => `<option value="${l}" ${l===lang?'selected':''}>${l}</option>`).join('')}
+        </select></div>
+      <div style="grid-column:1/-1;"><label style="font-size:0.72rem;color:var(--dim);display:block;margin-bottom:4px;">Teaching Focus</label>
+        <textarea id="edit-focus-${sid}" class="card-btn" style="width:100%;min-height:50px;background:rgba(255,255,255,0.04);color:var(--text);resize:vertical;" maxlength="200"></textarea></div>
+      <div style="grid-column:1/-1;"><label style="font-size:0.72rem;color:var(--dim);display:block;margin-bottom:4px;">Session Notes</label>
+        <textarea id="edit-notes-${sid}" class="card-btn" style="width:100%;min-height:50px;background:rgba(255,255,255,0.04);color:var(--text);resize:vertical;" maxlength="200"></textarea></div>
+    </div>
+    <div style="display:flex;gap:8px;">
+      <button class="card-btn primary" onclick="saveEditStudent('${sid}')">Save</button>
+      <button class="card-btn" onclick="document.getElementById('editForm-${sid}').remove()">Cancel</button>
+    </div>`;
+  row.parentNode.insertBefore(div, row.nextSibling);
+}
+
+async function saveEditStudent(sid) {
+  const body = {};
+  const lvl = document.getElementById('edit-lvl-' + sid)?.value;
+  const lang = document.getElementById('edit-lang-' + sid)?.value;
+  const focus = document.getElementById('edit-focus-' + sid)?.value;
+  const notes = document.getElementById('edit-notes-' + sid)?.value;
+  if (lvl) body.level = lvl;
+  if (lang) body.lang = lang;
+  if (focus) body.teachingFocus = focus;
+  if (notes) body.sessionNotes = notes;
+  if (Object.keys(body).length === 0) return;
+  const adminKey = localStorage.getItem('adminKey') || '';
+  try {
+    const r = await fetch(`${API}/api/admin/student/${sid}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json', 'X-Admin-Key': adminKey },
+      body: JSON.stringify(body)
+    });
+    const d = await r.json();
+    if (d.ok) {
+      const form = document.getElementById('editForm-' + sid);
+      if (form) form.innerHTML = '<div style="padding:8px;color:var(--teal);font-size:0.85rem;">✅ Saved — ' + d.updatedFields.join(', ') + '</div>';
+      setTimeout(() => { if (form) form.remove(); }, 2000);
+      loadRoster(); // refresh data
+    } else {
+      alert('Save failed: ' + (d.error || 'unknown'));
+    }
+  } catch (err) {
+    alert('Network error: ' + err.message);
+  }
 }
 // ── Interests Extraction ──
 function extractInterests(p) {
