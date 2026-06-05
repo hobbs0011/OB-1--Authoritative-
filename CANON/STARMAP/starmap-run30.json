@@ -1,0 +1,11 @@
+{
+  "pointers": [
+    {
+      "seq": 1,
+      "chars": 1904,
+      "preview": "alright find edge cases, by research deepgram docu"
+    }
+  ],
+  "source": "RRL-30.txt",
+  "run": 30
+}

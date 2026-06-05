@@ -1,0 +1,86 @@
+{
+  "source": "RRL-52.txt",
+  "run": 52,
+  "pointers": [
+    {
+      "chars": 4629,
+      "seq": 1,
+      "preview": "switched to opus for audit\n\nout of 100 with the ch"
+    },
+    {
+      "chars": 902,
+      "seq": 2,
+      "preview": "# /reincarnateRise — v6.0 ROMAN RISE\n\n**OB1 = AUDI"
+    },
+    {
+      "chars": 545,
+      "seq": 3,
+      "preview": "# /reincarnateDeath\n\n**CANONICAL IMPLEMENTATION:**"
+    },
+    {
+      "chars": 445,
+      "seq": 4,
+      "preview": "<task-notification>\n<task-id>b6239z2zy</task-id>\n<"
+    },
+    {
+      "chars": 402,
+      "seq": 5,
+      "preview": "<task-notification>\n<task-id>b67551l6a</task-id>\n<"
+    },
+    {
+      "chars": 245,
+      "seq": 6,
+      "preview": "<local-command-caveat>Caveat: The messages below w"
+    },
+    {
+      "chars": 245,
+      "seq": 7,
+      "preview": "<local-command-caveat>Caveat: The messages below w"
+    },
+    {
+      "chars": 147,
+      "seq": 8,
+      "preview": "nope, locked to text.\n\nhow close can we get to 95-"
+    },
+    {
+      "chars": 137,
+      "seq": 9,
+      "preview": "<command-name>/model</command-name>\n            <c"
+    },
+    {
+      "chars": 134,
+      "seq": 10,
+      "preview": "<command-name>/model</command-name>\n            <c"
+    },
+    {
+      "chars": 133,
+      "seq": 11,
+      "preview": "okay make the final phases of what is useful from "
+    },
+    {
+      "chars": 96,
+      "seq": 12,
+      "preview": "<command-message>reincarnateRise</command-message>"
+    },
+    {
+      "chars": 88,
+      "seq": 13,
+      "preview": "update the registry extensively as part of the ful"
+    },
+    {
+      "chars": 75,
+      "seq": 14,
+      "preview": "<local-command-stdout>Set model to claude-sonnet-4"
+    },
+    {
+      "chars": 73,
+      "seq": 15,
+      "preview": "<local-command-stdout>Set model to claude-opus-4-8"
+    },
+    {
+      "chars": 8,
+      "seq": 16,
+      "preview": "continue"
+    }
+  ]
+}

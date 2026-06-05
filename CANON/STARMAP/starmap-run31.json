@@ -1,0 +1,111 @@
+{
+  "pointers": [
+    {
+      "seq": 1,
+      "chars": 1060,
+      "preview": "1. BROKE PRODUCTION by introducing a UTF-8 BOM int"
+    },
+    {
+      "seq": 2,
+      "chars": 833,
+      "preview": "1. Mode Landing Page HTML/CSS — full-screen mode s"
+    },
+    {
+      "seq": 3,
+      "chars": 817,
+      "preview": "1. READ STUDENT-PORTAL-DEV.md FIRST before touchin"
+    },
+    {
+      "seq": 4,
+      "chars": 660,
+      "preview": "### 2. Uncommitted Work Destruction - Runs 27-30 a"
+    },
+    {
+      "seq": 5,
+      "chars": 553,
+      "preview": "1. Backend index.js memory fix — handleMemoryGet n"
+    },
+    {
+      "seq": 6,
+      "chars": 475,
+      "preview": "### 3. Documentation Ignorance - STUDENT-PORTAL-DE"
+    },
+    {
+      "seq": 7,
+      "chars": 384,
+      "preview": "### 5. Playwright Misdiagnosis - Playwright headle"
+    },
+    {
+      "seq": 8,
+      "chars": 365,
+      "preview": "### 1. UTF-8 BOM Introduction - The edit tool or f"
+    },
+    {
+      "seq": 9,
+      "chars": 303,
+      "preview": "- Worker Version: 1dfdfcdb-3c1a-4ee0-bdd6-24865f41"
+    },
+    {
+      "seq": 10,
+      "chars": 299,
+      "preview": "### 6. Wrangler Asset Cache Staleness - Wrangler v"
+    },
+    {
+      "seq": 11,
+      "chars": 280,
+      "preview": "### 4. Sub-Agent Dispatch Failures - T2-Flash disp"
+    },
+    {
+      "seq": 12,
+      "chars": 183,
+      "preview": "Run 31 was a catastrophic failure. The agent was t"
+    },
+    {
+      "seq": 13,
+      "chars": 177,
+      "preview": "# RRL-31 — ROMAN RUN 31 (CAR CRASH) ## Date: 2026-"
+    },
+    {
+      "seq": 14,
+      "chars": 165,
+      "preview": "yes so preform the full death process, and audit t"
+    },
+    {
+      "seq": 15,
+      "chars": 32,
+      "preview": "## WHAT WAS LOST (UNRECOVERABLE)"
+    },
+    {
+      "seq": 16,
+      "chars": 27,
+      "preview": "## CURRENT PRODUCTION STATE"
+    },
+    {
+      "seq": 17,
+      "chars": 25,
+      "preview": "## ROOT CAUSES OF FAILURE"
+    },
+    {
+      "seq": 18,
+      "chars": 25,
+      "preview": "## LESSONS FOR NEXT AGENT"
+    },
+    {
+      "seq": 19,
+      "chars": 18,
+      "preview": "## SESSION SUMMARY"
+    },
+    {
+      "seq": 20,
+      "chars": 16,
+      "preview": "## WHAT SURVIVES"
+    },
+    {
+      "seq": 21,
+      "chars": 3,
+      "preview": "---"
+    }
+  ],
+  "source": "RRL-31.txt",
+  "run": 31
+}

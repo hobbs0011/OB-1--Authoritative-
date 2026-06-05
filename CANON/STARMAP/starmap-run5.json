@@ -1,0 +1,16 @@
+{
+  "source": "RRL-5.txt",
+  "pointers": [
+    {
+      "chars": 183,
+      "preview": "D:\\OB-1-CANONICAL\\RRL\\RLL-2-2026-05-23-110023ICT-O",
+      "seq": 1
+    },
+    {
+      "chars": 55,
+      "preview": "do the full legion process again, use 0 as the bac",
+      "seq": 2
+    }
+  ],
+  "run": 5
+}

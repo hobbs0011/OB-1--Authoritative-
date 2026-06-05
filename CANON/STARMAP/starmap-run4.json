@@ -1,0 +1,31 @@
+{
+  "source": "RRL-4.txt",
+  "run": 4,
+  "pointers": [
+    {
+      "chars": 546,
+      "seq": 1,
+      "preview": "Specification summary: - 11-step pipeline: RRL → S"
+    },
+    {
+      "chars": 199,
+      "seq": 2,
+      "preview": "NOTE: The original, uncompacted specification was "
+    },
+    {
+      "chars": 127,
+      "seq": 3,
+      "preview": "[USER-PROVIDED SPECIFICATION: /reincarnateDeath v4"
+    },
+    {
+      "chars": 22,
+      "seq": 4,
+      "preview": "What did we do so far?"
+    },
+    {
+      "chars": 5,
+      "seq": 5,
+      "preview": "RRL 4"
+    }
+  ]
+}

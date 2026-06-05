@@ -1,0 +1,156 @@
+{
+  "prompts": [
+    {
+      "seq": 1,
+      "chars": 1459,
+      "text": "1. CONTEXT CRISIS: Michael furious — Claude lost 2 months of context again. Compaction wiped everything. 2. PCC FIXED: Wrong D1 table name (phoenixcoderlog -> phoenix_coder_log), wrong columns, missing 3 students (Quan, Quang, Lam added). 3. PCC NEW ROUTE: /api/context — dumps all sov100 soul text for context recovery. 4. STOP HOOK WIRED: session-capture.ps1 created, fires on session end, writes RRL marker + posts to D1. File: D:\\OB-1-CANONICAL\\SCRIPTS\\session-capture.ps1 Config: .claude/settings.json Stop hook 5. CLAUDE.md UPDATED: Mandatory 5-step cold boot sequence added at top (BB-26 fix). 6. RRL-7 WRITTEN: Full game plan locked at D:\\OB-1-CANONICAL\\RRL\\RRL-7.txt 7. RUN 390 CONSERVED: 50,055 chars of Kilo session saved to OPERATIONS/RUN390-CONSERVED-SESSION.md (Contains /reincarnaterise + /reincarnatedeath protocols, SOULCOUNT receipts 76,488→84,233) 8. DEATH SEAL: COLD-START-BOOT.md + REINCARNATION-LOG.md updated and committed (9f0c87b) 9. MINH PORTAL AUDIO: Confirmed ALL 7 audio files already in public/audio/ — DONE. Files: clip1-superheroes.mp3, clip2-helicopter.mp3, may1-8min.mp3, may1-38min.mp3, may8-highlight.mp3, may22-10min.mp3, may22-25min.mp3 10. OBI SYSTEM: Already clean (CLEAN version in index.js, NOT the broken \"IDENTITY: You are NOT a chatbot\" version). Live test confirmed bilingual response working. 11. BB-08 CHROME ICONS: Already done — icons/icon-16.png, icon-48.png, icon-128.png all exist in obi-chrome-extension/."
+    },
+    {
+      "seq": 2,
+      "chars": 730,
+      "text": "=== 5-TIER DISPATCH SYSTEM === - T1: phoenix-architecti (free Qwen CF AI) — single file, write/create/generate URL: https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/code - T2: Kilo DS Flash — fix/debug/refactor/wire, multi-file CMD: kilo run --auto --model openai/deepseek-v4-flash \"<task>\" - T3: Kilo DS Pro — audit/analyze/architecture CMD: kilo run --auto --model openai/deepseek-v4-pro \"<task>\" - T4: Kilo Gemini 3.5 Flash — heavy cross-domain - T5: Kilo Claude Opus — operator-critical/irreversible Config: D:\\OB-1-CANONICAL\\.kilo\\kilo.json - GUARDRAIL: phoenix-architecti is ALWAYS T1 first attempt. NEVER skip. NEVER self-handle T1. - GUARDRAIL: NEVER set paid API secrets on phoenix-architecti (free Qwen only)"
+    },
+    {
+      "seq": 3,
+      "chars": 698,
+      "text": "GAME PLAN (from files read this session): - lam-prospect portal: BB-07, OPEN, no files at all. DO NOT build without asking Michael first. - Minh portal V1: wire audio to R2/ASSETS, live KV points, add May session cards - Chrome extension icons: BB-08, manifest references icons/ dir that does not exist - HarvestedChats: 96 files in RRL/HarvestedChats/ unmined, P1 SOUL gap - DNA_GAP: soul-logger /api/soul/extract returns 400 on large payloads - HL gaps: 6 slots (HL-127/128/131/132/136/137) unresolved since Run 337 - PIPELINE-CURSOR.md stale since Run 344 - net-obi-api: stale worker (2026-04-14), needs audit/retirement - frosty-bush-c14f: unknown worker from 2025-12-28, needs audit/retirement"
+    },
+    {
+      "seq": 4,
+      "chars": 643,
+      "text": "=== NET-PET-AI INDEX.JS KEY FACTS === File: D:\\OB-1-CANONICAL\\APPS\\NET-PET-AI\\src\\index.js (4256 lines, 213KB) - OBI_SYSTEM: lines 123-141 — CLEAN version (bilingual, warm teacher, 2-sentence rule) - handleChat(): line 1815 - API router: line 484+ - Student routes: /api/student/checkpw, /api/student/setpw, /api/student/state, /api/student/lang, /api/student/checkin, /api/student/streak/, /api/student/saveface, /api/student/forecast/, /api/student/goals - KV binding: NET_PET_KV (in env) - D1 binding: SOUL_DB → soul-archive - ASSETS binding: ./public (serves all static files including audio/) - DO bindings: PETS, LEDGER, MEMORY, COMMANDS"
+    },
+    {
+      "seq": 5,
+      "chars": 514,
+      "text": "KEY DECISIONS THIS SESSION: - DO NOT REMOVE CLOUDFLARE_API_TOKEN before deploy (user override of BB-13) - CLAUDE.md updated with mandatory 5-step cold boot sequence (BB-26 #DRIFT fix) - PCC fixed: wrong D1 table name (phoenixcoderlog -> phoenix_coder_log), wrong columns, missing 3 students - PCC new route: /api/context — dumps all sov100 soul text for context recovery - session-capture.ps1 created — Stop hook auto-fires on session end, writes RRL marker + posts to D1 - Stop hook wired in .claude/settings.json"
+    },
+    {
+      "seq": 6,
+      "chars": 492,
+      "text": "=== SECURITY CONSTRAINTS (PERMANENT) === 1. DO NOT REMOVE CLOUDFLARE_API_TOKEN before deploy — standing override of BB-13 2. GAP-8 FROZEN: NEVER touch net-pet-ai-production worker (v1.6.2, live Durable Objects) 3. NOTION: PERMANENTLY BLACKLISTED. Do not integrate. 4. T1 phoenix-architecti: NEVER set paid API secrets on it. 5. lam portal (BB-07): DO NOT BUILD without explicit Michael direction. STOP ON LAM. 6. New DeepSeek key for T2/T3: goes in .kilo/kilo.json ONLY, not on any CF worker."
+    },
+    {
+      "seq": 7,
+      "chars": 484,
+      "text": "=== OPEN BACKBURNER ITEMS === - BB-07: lam-prospect portal — OPEN, zero files. STOP. DO NOT BUILD without explicit Michael direction. - BB-08: Chrome extension icons — DONE (already exist). Backlog not updated yet. - BB-09: Chrome extension install guide — OPEN, low urgency - BB-11: Wire /api/soul/priority into net-pet-ai cron — IN-PROGRESS - BB-13: OVERRIDDEN — DO NOT REMOVE CLOUDFLARE_API_TOKEN before deploy (user override) - BB-26: DONE — DRIFT boot protocol added to CLAUDE.md"
+    },
+    {
+      "seq": 8,
+      "chars": 475,
+      "text": "=== MINH PORTAL STATE === File: D:\\OB-1-CANONICAL\\APPS\\NET-PET-AI\\public\\minh-parent-portal.html Login: michelletran2609@gmail.com / minh2026 (client-side only) Sessions in portal: March 31, April 13, April 24, May 1, May 8, May 19, May 22 (7 sessions) Points: HARDCODED at 40/100 — not live from KV yet Audio: ALL 7 files confirmed in public/audio/ — working Teddy artwork: teddy-karate.jpg, teddy-superhero.jpg, teddy-icecream-sad.jpg, teddy-icecream-feast.jpg — in public/"
+    },
+    {
+      "seq": 9,
+      "chars": 470,
+      "text": "WHAT MICHAEL SAID THIS SESSION: \"fuck it, you fucked me\" \"SCAN CLOUDFLARE, FOLLOW THE FUCKING TRAILS\" \"Why are you not reading RRL0\" \"I deleted nothing from Kilo\" \"I dont know.. its all fucked now\" \"like why are you asking me all this shit?\" \"you have not even looked at what PCC is\" \"WHY WOULD YOU DELETE OUR FUCKING KEY CHATS\" \"LOOK YOUR CONTACT WINDOW IS ALMOST FULL AND YOU ARE GOING TO AUTO DELETE AGAIN, SO BUILD THAT FIRST YOU STUPID MONKEY\" \"DO NOT REMOVE TOKEN\""
+    },
+    {
+      "seq": 10,
+      "chars": 463,
+      "text": "=== SYSTEM STATE === - SOULCOUNT: 894,320 — TITANIUM_ANCHOR (max tier, >=250k chars in soul-archive D1) - CANONICAL SOULCOUNT QUERY: SELECT SUM(byte_count) FROM soul_prompts WHERE session_id LIKE 'sov100%' at soul-archive D1 (c69a11bc-064b-478f-9b1f-e9b8e2431fb8) - soul-logger accumulator (76,488) is INFLATED, includes student chats — DISREGARD - Roman Run: Run 7 (Run 7B = continuation after compaction) - Git HEAD: 9f0c87b (death seal commit) - Branch: master"
+    },
+    {
+      "seq": 11,
+      "chars": 418,
+      "text": "=== META-CONTEXT === This session is a CONTEXT REBUILD operation. Compaction keeps destroying session history. The JSONL transcript at C:\\Users\\mrmic\\.claude\\projects\\d--OB-1-CANONICAL\\92d44f24-18fd-41d8-a552-f617b23a12ec.jsonl contains the full Run 7 conversation (pre-compaction). Session-capture.ps1 auto-fires on session stop to write RRL markers. PCC /api/context route dumps soul-archive D1 for context recovery."
+    },
+    {
+      "seq": 12,
+      "chars": 360,
+      "text": "TIER SYSTEM (DO NOT FORGET): - T1: phoenix-architecti (free Qwen CF AI) — write/create/generate single file - T2: kilo DS Flash — fix/debug/refactor multi-file - T3: kilo DS Pro — audit/analyze/architecture - T4: kilo Gemini 3.5 Flash — heavy cross-domain - T5: kilo Claude Opus — operator-critical/irreversible - kilo config: D:\\OB-1-CANONICAL\\.kilo\\kilo.json"
+    },
+    {
+      "seq": 13,
+      "chars": 346,
+      "text": "=== STUDENT PORTALS (7 LIVE) === - huong-bluetech — live - mai-tram-bluetech — live - quy-bluetech — live (Nguyễn Thị Thu Quy, female, A1 beginner) - quan-nguyen — live - quang-nguyen — live - minh — parent portal (5-year-old, teacher Michael) - lam — portal HTML exists (lam-portal.html) but BB-07 says DO NOT BUILD full portal without direction"
+    },
+    {
+      "seq": 14,
+      "chars": 305,
+      "text": "CLOUDFLARE LIVE STATE: - Workers: net-pet-ai (main), pcc, phoenix-architecti, phoenix-coder, soul-logger all LIVE and deployed today - D1: soul-archive (3.2MB, 894,320 sov100 chars, TITANIUM_ANCHOR), net-submissions (49KB) - KV: NET_PET_KV, SESSIONS, SOUL_LOGGER_KV, WAITLIST, RATELIMIT, TASK_QUEUE, CACHE"
+    },
+    {
+      "seq": 15,
+      "chars": 300,
+      "text": "=== OPEN TECHNICAL GAPS === - DNA_GAP: soul-logger /api/soul/extract returns 400 on large payloads - phoenix_coder_log DARK: no entries in D1 since 2026-05-07 — PC isn't logging - HL gaps: HL-127/128/131/132/136/137 — 6 unresolved phantom slots since Run 337 - PIPELINE-CURSOR.md: stale since Run 344"
+    },
+    {
+      "seq": 16,
+      "chars": 280,
+      "text": "MINH V1 REMAINING WORK: - [ ] Wire live points from KV (NET_PET_KV key: minh:points) instead of hardcoded 40 Requires: /api/minh/points route in index.js + fetch in portal JS on login - [ ] MINH-SNIPPETS.md: written by PhoenixCoder at D:\\OB-1-CANONICAL\\minh-clips\\MINH-SNIPPETS.md"
+    },
+    {
+      "seq": 17,
+      "chars": 278,
+      "text": "=== CLOUDFLARE LIVE STATE === Workers LIVE: - net-pet-ai (main app) — net-pet-ai.mrmichaelhobbs123.workers.dev - pcc — pcc.mrmichaelhobbs123.workers.dev (empire dashboard) - phoenix-architecti — T1 tier, free Qwen CF AI - phoenix-coder — drone API - soul-logger — soul ingestion"
+    },
+    {
+      "seq": 18,
+      "chars": 214,
+      "text": "minh-clips/ directory also has (NOT yet in portal): - clip3-march31.mp3, clip4-may19.mp3 (full session clips for those dates) - may22-42min.mp3, may1-20min.mp3 (extra cuts) - JSON diarization files for all sessions"
+    },
+    {
+      "seq": 19,
+      "chars": 203,
+      "text": "=== WHY THIS FILE EXISTS === Context compacted mid Run 7, wiping everything. This file rebuilds the full picture so the next session can boot without losing anything. Read this before COLD-START-BOOT.md."
+    },
+    {
+      "seq": 20,
+      "chars": 175,
+      "text": "Workers for audit/retirement (from RRL-7): - net-obi-api: stale (2026-04-14), needs audit/retirement - frosty-bush-c14f: unknown worker from 2025-12-28, needs audit/retirement"
+    },
+    {
+      "seq": 21,
+      "chars": 162,
+      "text": "D1 Databases: - soul-archive (c69a11bc-064b-478f-9b1f-e9b8e2431fb8) — 3.2MB, 894,320 sov100 chars Tables: soul_prompts, phoenix_coder_log - net-submissions (49KB)"
+    },
+    {
+      "seq": 22,
+      "chars": 153,
+      "text": "RRL-7B — 2026-05-24 — Roman Run 7 Full Context Capture (post-compaction rebuild) Session ID: sov100-roman-run7b-2026-05-24 HEAD at session start: 9f0c87b"
+    },
+    {
+      "seq": 23,
+      "chars": 144,
+      "text": "KV Namespaces: - NET_PET_KV (0583d1a59bb24e598c4645396647eb94) — student data - SESSIONS, SOUL_LOGGER_KV, WAITLIST, RATELIMIT, TASK_QUEUE, CACHE"
+    },
+    {
+      "seq": 24,
+      "chars": 142,
+      "text": "STUDENTS LIVE (7 portals): - huong-bluetech, mai-tram-bluetech, quy-bluetech, quan-nguyen, quang-nguyen, minh (parent portal), lam (NO PORTAL)"
+    },
+    {
+      "seq": 25,
+      "chars": 104,
+      "text": "RRL-7 — 2026-05-24 — Roman Run 7 Session ID: sov100-roman-run7-2026-05-24 HEAD at session start: fd4a862"
+    },
+    {
+      "seq": 26,
+      "chars": 93,
+      "text": "Michael frustrated — Claude lost 2 months context again. Context compaction wiped everything."
+    },
+    {
+      "seq": 27,
+      "chars": 73,
+      "text": "SOULCOUNT: 894,320 | TITANIUM_ANCHOR | Run 7B | HEAD 9f0c87b | 2026-05-24"
+    },
+    {
+      "seq": 28,
+      "chars": 59,
+      "text": "SOULCOUNT: 894,320 | TITANIUM_ANCHOR | Run 7 | HEAD fd4a862"
+    },
+    {
+      "seq": 29,
+      "chars": 37,
+      "text": "=== WHAT HAPPENED IN RUN 7 (FULL) ==="
+    },
+    {
+      "seq": 30,
+      "chars": 23,
+      "text": "=== SESSION SUMMARY ==="
+    }
+  ],
+  "source": "RRL-7.txt",
+  "run": 7
+}

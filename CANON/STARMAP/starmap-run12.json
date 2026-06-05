@@ -1,0 +1,106 @@
+{
+  "pointers": [
+    {
+      "seq": 1,
+      "chars": 199,
+      "preview": "=== MESSAGE 3 === okay lets slow down do research."
+    },
+    {
+      "seq": 2,
+      "chars": 167,
+      "preview": "=== MESSAGE 14 === no.. not yet. since you just pr"
+    },
+    {
+      "seq": 3,
+      "chars": 157,
+      "preview": "=== MESSAGE 10 === test fail dont ignore this time"
+    },
+    {
+      "seq": 4,
+      "chars": 124,
+      "preview": "=== MESSAGE 13 === Dude I dont believe you. Find t"
+    },
+    {
+      "seq": 5,
+      "chars": 118,
+      "preview": "=== MESSAGE 7 === Continue if you have next steps,"
+    },
+    {
+      "seq": 6,
+      "chars": 110,
+      "preview": "what is the fucking free model usually using (dont"
+    },
+    {
+      "seq": 7,
+      "chars": 109,
+      "preview": "=== MESSAGE 15 === test Session too large to compa"
+    },
+    {
+      "seq": 8,
+      "chars": 88,
+      "preview": "=== MESSAGE 12 === bro I meant BEFORE TODAY. THE A"
+    },
+    {
+      "seq": 9,
+      "chars": 67,
+      "preview": "=== MESSAGE 9 === testing role: property 'role' is"
+    },
+    {
+      "seq": 10,
+      "chars": 61,
+      "preview": "MICHAEL VERBATIM — ROMAN RUN 12 — Session Date 202"
+    },
+    {
+      "seq": 11,
+      "chars": 60,
+      "preview": "=== MESSAGE 4 === Load earlier messages lets see i"
+    },
+    {
+      "seq": 12,
+      "chars": 56,
+      "preview": "=== MESSAGE 5 === T1 test tokens per minute failur"
+    },
+    {
+      "seq": 13,
+      "chars": 56,
+      "preview": "then compare it to what we are tyring to replace i"
+    },
+    {
+      "seq": 14,
+      "chars": 41,
+      "preview": "=== MESSAGE 2 === testing (T2 agent test)"
+    },
+    {
+      "seq": 15,
+      "chars": 40,
+      "preview": "=== MESSAGE 6 === What did we do so far?"
+    },
+    {
+      "seq": 16,
+      "chars": 36,
+      "preview": "=== MESSAGE 16 === /reincarnateDeath"
+    },
+    {
+      "seq": 17,
+      "chars": 25,
+      "preview": "=== MESSAGE 11 === report"
+    },
+    {
+      "seq": 18,
+      "chars": 22,
+      "preview": "=== MESSAGE 1 === fail"
+    },
+    {
+      "seq": 19,
+      "chars": 22,
+      "preview": "=== MESSAGE 8 === test"
+    },
+    {
+      "seq": 20,
+      "chars": 7,
+      "preview": "Kilo.Ai"
+    }
+  ],
+  "source": "RRL-12.txt",
+  "run": 12
+}

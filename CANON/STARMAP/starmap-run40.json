@@ -1,0 +1,61 @@
+{
+  "pointers": [
+    {
+      "seq": 1,
+      "chars": 336,
+      "preview": "\"nice good progress, but when I started my mic, Ob"
+    },
+    {
+      "seq": 2,
+      "chars": 182,
+      "preview": "\"is this pulling from memory? or does it just star"
+    },
+    {
+      "seq": 3,
+      "chars": 142,
+      "preview": "\"cool harden, find edge cases, dont change firewal"
+    },
+    {
+      "seq": 4,
+      "chars": 126,
+      "preview": "\"continue simulation, and while you are at it simu"
+    },
+    {
+      "seq": 5,
+      "chars": 112,
+      "preview": "\"dont just simulate, use the app best you can on y"
+    },
+    {
+      "seq": 6,
+      "chars": 104,
+      "preview": "RRL-40 — ROMAN RUN 40 — 2026-06-01 ICT Session: Ph"
+    },
+    {
+      "seq": 7,
+      "chars": 72,
+      "preview": "\"context window reaching max, die well, hit the gr"
+    },
+    {
+      "seq": 8,
+      "chars": 56,
+      "preview": "\"dont call it quy. this is the SOV100 magic chat t"
+    },
+    {
+      "seq": 9,
+      "chars": 25,
+      "preview": "\"not picking up my voice\""
+    },
+    {
+      "seq": 10,
+      "chars": 24,
+      "preview": "--- MICHAEL VERBATIM ---"
+    },
+    {
+      "seq": 11,
+      "chars": 10,
+      "preview": "\"continue\""
+    }
+  ],
+  "source": "RRL-40.txt",
+  "run": 40
+}

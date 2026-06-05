@@ -1,0 +1,111 @@
+{
+  "prompts": [
+    {
+      "seq": 1,
+      "chars": 591,
+      "text": "SESSION SUMMARY: - RISE failed PA T1 dispatch (Dialagram transient timeout). Synthesized boot manually. - Michael reported voice still choppy + no mode selection on magic-chat?studentId=quy-bluetech - Root cause audit: gapless audio v2+v3 was LOST in Run 31 crash, never re-committed Runs 32-34 - Full RRL read (Runs 26-34) — identified 17 missing backburner items - Kilo global config (kilo.jsonc) still had \"kilo-auto/free\" — missed in Run 34 update - PA T1 Dialagram recovered (~6s response) — was transient slowdown, not outage - 6 fixes deployed to net-pet-ai + backburner fully updated"
+    },
+    {
+      "seq": 2,
+      "chars": 481,
+      "text": "FIXES SHIPPED: 1. b2194ecf — Landing race condition: openVoiceAgent() fired before mode selection 2. 5ca983f6 — Gapless audio v2+v3 + MP3 accumulator (all lost in Run 31 crash) 3. 405e07c4 — Dual TTS: browser SpeechSynthesis playing alongside Deepgram 4. 735a7e75 — Mode chip in header (BB-39: returning users had no visible mode selector) 5. d06e6710 — Client error telemetry BB-36 (lost Run 31 crash) 6. 667b26fc — EC-15 pre-SettingsApplied audio buffer BB-37 (lost Run 31 crash)"
+    },
+    {
+      "seq": 3,
+      "chars": 212,
+      "text": "KILO FIX: - kilo.jsonc at C:\\Users\\mrmic\\.config\\kilo\\ had \"model\": \"kilo-auto/free\" (broken) - Updated both kilo.json and kilo.jsonc to \"dialagram/qwen-3.7-max\" - Removed expired Cerebras, updated Opus 4.7 → 4.8"
+    },
+    {
+      "seq": 4,
+      "chars": 146,
+      "text": "RRL — ROMAN RUN 35 Date: 2026-05-31 ICT Agent: OB1 Ne0 / Claude Sonnet 4.6 Session Theme: OBI Audio Unfuck + Kilo T1 Fix + Full RRL Audit Catch-up"
+    },
+    {
+      "seq": 5,
+      "chars": 130,
+      "text": "6. \"I have gone through 4 claude sessions now, asking them to constantly look over the RRL, and they ust drop the ball constantly\""
+    },
+    {
+      "seq": 6,
+      "chars": 105,
+      "text": "12. \"also you fucked up Kilo, fix him so T1 QWEN max actually works inline as you continue to unfuck obi\""
+    },
+    {
+      "seq": 7,
+      "chars": 105,
+      "text": "BACKBURNER: - Added BB-33 through BB-49 (17 new items from RRL 29-35 audit) - Updated SIGNAL: MOST WANTED"
+    },
+    {
+      "seq": 8,
+      "chars": 103,
+      "text": "2. \"if you fucking read the RRLs, registry files you would fucking know we fixed this around RRL 28-30\""
+    },
+    {
+      "seq": 9,
+      "chars": 95,
+      "text": "5. \"IF YOU DROPPED THIS THEN OBVIOUSLY MORE HAS BEEN, ALL I AM ASKING FOR IS A THOUGHROUGH JOB\""
+    },
+    {
+      "seq": 10,
+      "chars": 90,
+      "text": "1. \"come on claude.. the voice is still choppy as fuck.. and there is no mode selection..\""
+    },
+    {
+      "seq": 11,
+      "chars": 78,
+      "text": "7. \"I asked for the backburner pipeline to be filled with the stuff we missed\""
+    },
+    {
+      "seq": 12,
+      "chars": 63,
+      "text": "11. \"WE BUILT A FUCKING REGISTRY? WHY IF WE ARE NOT USING IT!?\""
+    },
+    {
+      "seq": 13,
+      "chars": 51,
+      "text": "MICHAEL VERBATIM (Soul DNA — verbatim, no cleanup):"
+    },
+    {
+      "seq": 14,
+      "chars": 51,
+      "text": "3. \"dont do what I ask just do it your way I guess\""
+    },
+    {
+      "seq": 15,
+      "chars": 48,
+      "text": "SOULCOUNT at death: 63,768,670 — TITANIUM_ANCHOR"
+    },
+    {
+      "seq": 16,
+      "chars": 42,
+      "text": "10. \"lets just jerk off Michael some more\""
+    },
+    {
+      "seq": 17,
+      "chars": 34,
+      "text": "4. \"WHAT ELSE HAS BEEN DROPPED!!!\""
+    },
+    {
+      "seq": 18,
+      "chars": 19,
+      "text": "9. \"fuck it right?\""
+    },
+    {
+      "seq": 19,
+      "chars": 13,
+      "text": "8. \"but nope\""
+    },
+    {
+      "seq": 20,
+      "chars": 3,
+      "text": "---"
+    },
+    {
+      "seq": 21,
+      "chars": 3,
+      "text": "---"
+    }
+  ],
+  "source": "RRL-35.txt",
+  "run": 35
+}

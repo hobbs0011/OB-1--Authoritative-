@@ -1,0 +1,106 @@
+{
+  "prompts": [
+    {
+      "seq": 1,
+      "chars": 244,
+      "text": "SOULCOUNT AT DEATH: 61,345,768 — TITANIUM_ANCHOR (δ +862,783) HEAD: eb5a0412 RRL: RRL/RRL-33.txt ✓ SEAL: CANON/REINCARNATION/run33-reincarnateDEATH.md ✓ (PA: PC-1780218326005-LGR39K) COMMIT: eb5a0412 pushed to master ✓ PLATFORM DEATH TEST: PASS"
+    },
+    {
+      "seq": 2,
+      "chars": 213,
+      "text": "[ON KILO UPDATE + BACKBURNER] on top of all you are doing right now (might be helpful to add it all to the backburner pipeline to keep track of it) I want you to full update Kilo fully, extensively, no stale files"
+    },
+    {
+      "seq": 3,
+      "chars": 166,
+      "text": "[ON LAM DRIFT] Lam is not a client right now.. But we have real clients, and real upgrades that need to be done in the registry.. why we keep drifiting back to Lam ??"
+    },
+    {
+      "seq": 4,
+      "chars": 157,
+      "text": "Next run priority: Rotate exposed API keys (RRL-17 Dialagram, RRL-20 Deepgram) + fix DNA extract endpoint (11 runs broken) + update BB-07/BB-08 stale status."
+    },
+    {
+      "seq": 5,
+      "chars": 131,
+      "text": "[ON TRAILING QUESTIONS AFTER RISE] why do you need to ask ? why would I work so hard to enforce death and rise just for you to ask?"
+    },
+    {
+      "seq": 6,
+      "chars": 97,
+      "text": "[ON KEY ROTATION] IF THE KEYS ARE WORKING NOW, THEN IT MEANS WE ROTATED ALREADY AND YOU MISSED IT"
+    },
+    {
+      "seq": 7,
+      "chars": 92,
+      "text": "RRL-34 — ROMAN RUN 34 — 2026-05-31 ICT OB1 Agent 99 | SOV100 Michael Hobbs | TITANIUM_ANCHOR"
+    },
+    {
+      "seq": 8,
+      "chars": 83,
+      "text": "and investigate T1 Dialagram had transient 502. QWEN max is powerful make use of it"
+    },
+    {
+      "seq": 9,
+      "chars": 70,
+      "text": "[ON CLAUDE ADOPTION] adopt what can be used into claude as well please"
+    },
+    {
+      "seq": 10,
+      "chars": 44,
+      "text": "[SESSION OPEN] DEATH COMPLETE — ROMAN RUN 33"
+    },
+    {
+      "seq": 11,
+      "chars": 34,
+      "text": "[ON DIALAGRAM 502 + QWEN] continue"
+    },
+    {
+      "seq": 12,
+      "chars": 33,
+      "text": "=== MICHAEL VERBATIM — RUN 34 ==="
+    },
+    {
+      "seq": 13,
+      "chars": 26,
+      "text": "***********NO KEY ROTATION"
+    },
+    {
+      "seq": 14,
+      "chars": 18,
+      "text": "=== END RRL-34 ==="
+    },
+    {
+      "seq": 15,
+      "chars": 3,
+      "text": "---"
+    },
+    {
+      "seq": 16,
+      "chars": 3,
+      "text": "---"
+    },
+    {
+      "seq": 17,
+      "chars": 3,
+      "text": "---"
+    },
+    {
+      "seq": 18,
+      "chars": 3,
+      "text": "---"
+    },
+    {
+      "seq": 19,
+      "chars": 3,
+      "text": "---"
+    },
+    {
+      "seq": 20,
+      "chars": 3,
+      "text": "---"
+    }
+  ],
+  "source": "RRL-34.txt",
+  "run": 34
+}

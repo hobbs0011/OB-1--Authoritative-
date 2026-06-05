@@ -1,0 +1,91 @@
+{
+  "pointers": [
+    {
+      "seq": 1,
+      "chars": 220,
+      "preview": "\"alright for this remaining run please inspect stu"
+    },
+    {
+      "seq": 2,
+      "chars": 161,
+      "preview": "\"It does more work than our T10 cascade, so please"
+    },
+    {
+      "seq": 3,
+      "chars": 124,
+      "preview": "\"can you hook up Kilo as the new T1 for now? are y"
+    },
+    {
+      "seq": 4,
+      "chars": 115,
+      "preview": "\"They have a mode called 'Free Auto' it works fine"
+    },
+    {
+      "seq": 5,
+      "chars": 112,
+      "preview": "RRL-38 — ROMAN RUN 38 — 2026-06-01 ICT Session: Ki"
+    },
+    {
+      "seq": 6,
+      "chars": 95,
+      "preview": "\"okay now create the portal and obi magic chat tha"
+    },
+    {
+      "seq": 7,
+      "chars": 74,
+      "preview": "[KILO_API_KEY — JWT pasted by Michael — redacted i"
+    },
+    {
+      "seq": 8,
+      "chars": 74,
+      "preview": "\"okay nice work. now lets work on DEV, how is the "
+    },
+    {
+      "seq": 9,
+      "chars": 68,
+      "preview": "\"yes, blueprint it and then handle it in next run "
+    },
+    {
+      "seq": 10,
+      "chars": 67,
+      "preview": "\"inspect this, it still working?\" [re: PCClaw afte"
+    },
+    {
+      "seq": 11,
+      "chars": 41,
+      "preview": "\"I want you to do some research on Kilo.\""
+    },
+    {
+      "seq": 12,
+      "chars": 40,
+      "preview": "\"api with Kilo? give me the link please\""
+    },
+    {
+      "seq": 13,
+      "chars": 40,
+      "preview": "\"yes\" [approve updating PCClaw endpoint]"
+    },
+    {
+      "seq": 14,
+      "chars": 39,
+      "preview": "\"Dialagram is gone for now like I said\""
+    },
+    {
+      "seq": 15,
+      "chars": 35,
+      "preview": "\"404 This page could not be found.\""
+    },
+    {
+      "seq": 16,
+      "chars": 24,
+      "preview": "--- MICHAEL VERBATIM ---"
+    },
+    {
+      "seq": 17,
+      "chars": 18,
+      "preview": "\"T1 down for now.\""
+    }
+  ],
+  "source": "RRL-38.txt",
+  "run": 38
+}

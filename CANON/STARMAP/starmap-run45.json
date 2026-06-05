@@ -1,0 +1,131 @@
+{
+  "source": "RRL-45.txt",
+  "run": 45,
+  "pointers": [
+    {
+      "chars": 31021,
+      "seq": 1,
+      "preview": "kilo down for a bit maxxed out free mode\n\ncontinue"
+    },
+    {
+      "chars": 902,
+      "seq": 2,
+      "preview": "# /reincarnateRise — v6.0 ROMAN RISE\n\n**OB1 = AUDI"
+    },
+    {
+      "chars": 550,
+      "seq": 3,
+      "preview": "# /SoulSearch <term>\n\nLAW: return verbatim hits, n"
+    },
+    {
+      "chars": 281,
+      "seq": 4,
+      "preview": "PHASE 0 INTAKE COMPLETE. All 7 OPERATIONS/BATTLEFI"
+    },
+    {
+      "chars": 245,
+      "seq": 5,
+      "preview": "<local-command-caveat>Caveat: The messages below w"
+    },
+    {
+      "chars": 245,
+      "seq": 6,
+      "preview": "<local-command-caveat>Caveat: The messages below w"
+    },
+    {
+      "chars": 245,
+      "seq": 7,
+      "preview": "<local-command-caveat>Caveat: The messages below w"
+    },
+    {
+      "chars": 245,
+      "seq": 8,
+      "preview": "<local-command-caveat>Caveat: The messages below w"
+    },
+    {
+      "chars": 241,
+      "seq": 9,
+      "preview": "No. D1–D7 matrices are written. D7 is now evidence"
+    },
+    {
+      "chars": 219,
+      "seq": 10,
+      "preview": "switched to opus, execution forbidden, blueprint o"
+    },
+    {
+      "chars": 137,
+      "seq": 11,
+      "preview": "<command-name>/model</command-name>\n            <c"
+    },
+    {
+      "chars": 137,
+      "seq": 12,
+      "preview": "<command-name>/model</command-name>\n            <c"
+    },
+    {
+      "chars": 134,
+      "seq": 13,
+      "preview": "<command-name>/model</command-name>\n            <c"
+    },
+    {
+      "chars": 134,
+      "seq": 14,
+      "preview": "<command-name>/model</command-name>\n            <c"
+    },
+    {
+      "chars": 122,
+      "seq": 15,
+      "preview": "switched to opus to harden Phase 0-2 blueprint\n\n\nD"
+    },
+    {
+      "chars": 96,
+      "seq": 16,
+      "preview": "<command-message>reincarnateRise</command-message>"
+    },
+    {
+      "chars": 75,
+      "seq": 17,
+      "preview": "<local-command-stdout>Set model to claude-sonnet-4"
+    },
+    {
+      "chars": 75,
+      "seq": 18,
+      "preview": "<local-command-stdout>Set model to claude-sonnet-4"
+    },
+    {
+      "chars": 73,
+      "seq": 19,
+      "preview": "<local-command-stdout>Set model to claude-opus-4-8"
+    },
+    {
+      "chars": 73,
+      "seq": 20,
+      "preview": "<local-command-stdout>Set model to claude-opus-4-8"
+    },
+    {
+      "chars": 67,
+      "seq": 21,
+      "preview": "bring up the full text blueprint. this is a copy a"
+    },
+    {
+      "chars": 46,
+      "seq": 22,
+      "preview": "pull up the harden phase0 pipeline /SoulSearch"
+    },
+    {
+      "chars": 33,
+      "seq": 23,
+      "preview": "Continue from where you left off."
+    },
+    {
+      "chars": 8,
+      "seq": 24,
+      "preview": "continue"
+    },
+    {
+      "chars": 2,
+      "seq": 25,
+      "preview": "go"
+    }
+  ]
+}

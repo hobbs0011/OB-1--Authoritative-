@@ -1,0 +1,66 @@
+{
+  "prompts": [
+    {
+      "seq": 1,
+      "chars": 634,
+      "text": "SESSION SUMMARY: - Michael requested Minh portal link - Discovered May 26 and May 29 session cards had NO audio players (text quotes only) - OB1 diagnosed: audio files existed in Telegram Desktop, not in Downloads root - Michael confirmed files: Voice 260526_165025.m4a (72MB/74min) + Voice 260529_172127.m4a (41MB/41min) - ffmpeg extracted 4 clips (3 min each, highpass+acompressor+loudnorm, 128kbps) - Portal HTML enhanced: session stats bars, insight boxes, skill tags, 2 audio players per session - Teacher note updated to reference this week's sessions - Deployed: worker bac35a57 — 5 new CF assets uploaded - Committed: 467e0bca"
+    },
+    {
+      "seq": 2,
+      "chars": 161,
+      "text": "4. [File paths provided]: \"C:\\Users\\mrmic\\Downloads\\Telegram Desktop\\Voice 260526_165025.m4a\" \"C:\\Users\\mrmic\\Downloads\\Telegram Desktop\\Voice 260529_172127.m4a\""
+    },
+    {
+      "seq": 3,
+      "chars": 140,
+      "text": "RRL — ROMAN RUN 28 Date: 2026-05-30 ICT Agent: OB1 Ne0 / Claude Sonnet 4.6 Session Theme: Minh Portal — Audio Fix + Session Card Enhancement"
+    },
+    {
+      "seq": 4,
+      "chars": 94,
+      "text": "5. \"while you are at it, make it look more substaintial for the updates, add more, puff it up\""
+    },
+    {
+      "seq": 5,
+      "chars": 88,
+      "text": "6. \"add more text. add more bells and whistles, make the classes look more substaintial\""
+    },
+    {
+      "seq": 6,
+      "chars": 71,
+      "text": "2. \"there are no audios provided for this weeks sessions, look into it\""
+    },
+    {
+      "seq": 7,
+      "chars": 51,
+      "text": "MICHAEL VERBATIM (Soul DNA — verbatim, no cleanup):"
+    },
+    {
+      "seq": 8,
+      "chars": 48,
+      "text": "SOULCOUNT at death: 59,864,896 — TITANIUM_ANCHOR"
+    },
+    {
+      "seq": 9,
+      "chars": 37,
+      "text": "1. \"give me updated minh portal link\""
+    },
+    {
+      "seq": 10,
+      "chars": 26,
+      "text": "3. \"bro I provided them..\""
+    },
+    {
+      "seq": 11,
+      "chars": 3,
+      "text": "---"
+    },
+    {
+      "seq": 12,
+      "chars": 3,
+      "text": "---"
+    }
+  ],
+  "source": "RRL-28.txt",
+  "run": 28
+}

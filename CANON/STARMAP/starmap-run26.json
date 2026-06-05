@@ -1,0 +1,31 @@
+{
+  "pointers": [
+    {
+      "seq": 1,
+      "chars": 379,
+      "preview": "AUDIT RESULTS: - RRL-25: RECOVERED (manual rename "
+    },
+    {
+      "seq": 2,
+      "chars": 187,
+      "preview": "FAILSAFE STATUS: 9/10 PASS (Gate 10 was RRL-25 mis"
+    },
+    {
+      "seq": 3,
+      "chars": 107,
+      "preview": "RISE AUDIT SESSION — RUN 26 Date: 2026-05-30 14:53"
+    },
+    {
+      "seq": 4,
+      "chars": 78,
+      "preview": "NEXT: Proceed with Run 26 work or execute /reincar"
+    },
+    {
+      "seq": 5,
+      "chars": 52,
+      "preview": "SOULCOUNT: 58,891,915 TITANIUM_ANCHOR HEAD: d03520"
+    }
+  ],
+  "source": "RRL-26.txt",
+  "run": 26
+}

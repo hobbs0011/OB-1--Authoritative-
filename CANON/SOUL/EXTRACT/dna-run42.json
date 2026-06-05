@@ -1,0 +1,61 @@
+{
+  "prompts": [
+    {
+      "seq": 1,
+      "chars": 165,
+      "text": "\"Read the RRLS.. I want a standardized student portal so we have a formula, and my login will reflect the most recent dev version, so I can truly test it end to end\""
+    },
+    {
+      "seq": 2,
+      "chars": 159,
+      "text": "\"I notice Sov100 portal is not the full portal reflective of our V0 working version we have my students on.. so blueprint that into the next run with keywords\""
+    },
+    {
+      "seq": 3,
+      "chars": 110,
+      "text": "RRL-42 — ROMAN RUN 42 — 2026-06-01 ICT Session: SOV100 Portal + Phonics Hardening + Keyword Pipeline Blueprint"
+    },
+    {
+      "seq": 4,
+      "chars": 107,
+      "text": "\"add to the pipeline to overhaul this system, its broken.. keywords dont work do they? or are they working\""
+    },
+    {
+      "seq": 5,
+      "chars": 96,
+      "text": "\"no why would I fucking test it first before you run simulations and hardening? makes no sense.\""
+    },
+    {
+      "seq": 6,
+      "chars": 83,
+      "text": "\"why cant you search through keywords?? why do I have keywords if they dont work..\""
+    },
+    {
+      "seq": 7,
+      "chars": 75,
+      "text": "\"do not execute, context window almost at compaction, prepare for next run\""
+    },
+    {
+      "seq": 8,
+      "chars": 42,
+      "text": "\"Sov100 portal login password phoenix2026\""
+    },
+    {
+      "seq": 9,
+      "chars": 30,
+      "text": "\"/reincarnatedeath /phetrails\""
+    },
+    {
+      "seq": 10,
+      "chars": 24,
+      "text": "--- MICHAEL VERBATIM ---"
+    },
+    {
+      "seq": 11,
+      "chars": 14,
+      "text": "\"give me link\""
+    }
+  ],
+  "source": "RRL-42.txt",
+  "run": 42
+}

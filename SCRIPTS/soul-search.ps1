@@ -27,14 +27,18 @@ $hits = @()
 if (Test-Path $idxPath) {
     $index = Get-Content $idxPath -Raw | ConvertFrom-Json -AsHashtable
     if ($index[$term]) {
-        foreach ($entry in $index[$term]) {
+foreach ($entry in $index[$term]) {
+        # Handle both {run: N} and {runs: [N]} formats
+        $runNum = if ($entry.run) { $entry.run } elseif ($entry.runs -and $entry.runs[0]) { $entry.runs[0] } else { $null }
+        if ($runNum) {
             $hits += [ordered]@{
                 Source = "SOULKEYS"
-                Run    = $entry.run
+                Run    = $runNum
                 Weight = $entry.weight
                 Category = $entry.category
             }
         }
+    }
     }
 }
 

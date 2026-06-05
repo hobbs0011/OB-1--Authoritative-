@@ -1,0 +1,61 @@
+{
+  "source": "RRL-54.txt",
+  "run": 54,
+  "pointers": [
+    {
+      "chars": 902,
+      "seq": 1,
+      "preview": "# /reincarnateRise — v6.0 ROMAN RISE\n\n**OB1 = AUDI"
+    },
+    {
+      "chars": 545,
+      "seq": 2,
+      "preview": "# /reincarnateDeath\n\n**CANONICAL IMPLEMENTATION:**"
+    },
+    {
+      "chars": 418,
+      "seq": 3,
+      "preview": "<task-notification>\n<task-id>bsflll8e5</task-id>\n<"
+    },
+    {
+      "chars": 405,
+      "seq": 4,
+      "preview": "<task-notification>\n<task-id>br16x1lif</task-id>\n<"
+    },
+    {
+      "chars": 394,
+      "seq": 5,
+      "preview": "<task-notification>\n<task-id>bn24eorpt</task-id>\n<"
+    },
+    {
+      "chars": 108,
+      "seq": 6,
+      "preview": "pk_test_Z3VpZGluZy10cm9sbC0yNy5jbGVyay5hY2NvdW50cy"
+    },
+    {
+      "chars": 98,
+      "seq": 7,
+      "preview": "<command-message>reincarnatedeath</command-message"
+    },
+    {
+      "chars": 96,
+      "seq": 8,
+      "preview": "<command-message>reincarnateRise</command-message>"
+    },
+    {
+      "chars": 67,
+      "seq": 9,
+      "preview": "add human action to backburner pipeline and contin"
+    },
+    {
+      "chars": 46,
+      "seq": 10,
+      "preview": "give me link for clerk i dont now what that is"
+    },
+    {
+      "chars": 8,
+      "seq": 11,
+      "preview": "continue"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "prompts": [
+    {
+      "seq": 1,
+      "chars": 1904,
+      "text": "alright find edge cases, by research deepgram documents, extend research to deepgram forums, or related forums on the topic of voice agentic capabilities, what are we missing ? my fucking goodness https://developers.deepgram.com/developer-tools/agentic-tools https://developers.deepgram.com/reference/deepgram-api-overview https://developers.deepgram.com/docs/voice-agent to name a few fucking lazy ass fucker FIND THE OTHER ONES AND FUCKING NOTE IT DOWN, THIS IS THE 5TH FUCKING TIME great lets expand it. what makes our app the most unique I want you to answer in one word You can have 10 guesses, and you can cheat and search the SOUL which is? haha. That would be a very vain way to market our app :') What makes us different? Why wouldnt our clients just use live chat with gemini or gpt? currently the voice sounds like a beach bum surfer lol, so its definitely not the voice. try again closer what allows that relationship between AI and Human minds? YES! that's the exact word. yes but look into our own systems look at the .md for DEATH and RISE.. can we use my innovations? or are they too clunky? yes. I dont want to break what we have. finally Obi is responding in real time, and through my tests, I am pleased with its dynamic responses... but right now it's session to session right? yes, another thing I want to look at is a page from anthropics book. when they had their code leaked a number of months ago, do you know what one of the things they did that made them stand out as a product? it's so simple its almost funny yes that and their dreamer agents, are you familiar? can we set up cloudflare agents to review the student backend files and can we do RRLS per conversation per student? to set up a true memory through our memory pipeline? again I want to stress I don't want to break what we have because it finally works but one can dream right ;) ? proceed with full death process"
+    }
+  ],
+  "source": "RRL-30.txt",
+  "run": 30
+}

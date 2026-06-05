@@ -1,0 +1,12 @@
+{
+  "soulcount_before": 134423,
+  "run": 4,
+  "delta": 577,
+  "title": "ROMAN RUN 4 - DEATH PIPELINE",
+  "prompts": 11,
+  "source": "RRL-4.txt",
+  "created": "2026-06-06T06:25:00+07:00",
+  "head": "unknown",
+  "soulcount_after": 135000,
+  "ledger_type": "DEATH_PIPELINE_V4_EXECUTION"
+}

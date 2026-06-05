@@ -1,0 +1,91 @@
+{
+  "prompts": [
+    {
+      "seq": 1,
+      "chars": 220,
+      "text": "\"alright for this remaining run please inspect student portals and obi make sure its work, I want to make this Version 0, and I want you to firewall it off, so when we make changes it does not effect the working version\""
+    },
+    {
+      "seq": 2,
+      "chars": 161,
+      "text": "\"It does more work than our T10 cascade, so please restore that mode for me this run, I am paying monthly for Kilo FYI so this is a tier under that payment plan\""
+    },
+    {
+      "seq": 3,
+      "chars": 124,
+      "text": "\"can you hook up Kilo as the new T1 for now? are you able to make calls through the free auto model to save on your tokens?\""
+    },
+    {
+      "seq": 4,
+      "chars": 115,
+      "text": "\"They have a mode called 'Free Auto' it works fine, but we reformatted Kilo and lost it, I want you to restore it.\""
+    },
+    {
+      "seq": 5,
+      "chars": 112,
+      "text": "RRL-38 — ROMAN RUN 38 — 2026-06-01 ICT Session: Kilo Free Auto T1 migration + Version 0 firewall + phonics audit"
+    },
+    {
+      "seq": 6,
+      "chars": 95,
+      "text": "\"okay now create the portal and obi magic chat that we will make edits on outside the firewall\""
+    },
+    {
+      "seq": 7,
+      "chars": 74,
+      "text": "[KILO_API_KEY — JWT pasted by Michael — redacted in RRL, set as CF secret]"
+    },
+    {
+      "seq": 8,
+      "chars": 74,
+      "text": "\"okay nice work. now lets work on DEV, how is the phonics training doing?\""
+    },
+    {
+      "seq": 9,
+      "chars": 68,
+      "text": "\"yes, blueprint it and then handle it in next run /reincarnatedeath\""
+    },
+    {
+      "seq": 10,
+      "chars": 67,
+      "text": "\"inspect this, it still working?\" [re: PCClaw after Dialagram died]"
+    },
+    {
+      "seq": 11,
+      "chars": 41,
+      "text": "\"I want you to do some research on Kilo.\""
+    },
+    {
+      "seq": 12,
+      "chars": 40,
+      "text": "\"api with Kilo? give me the link please\""
+    },
+    {
+      "seq": 13,
+      "chars": 40,
+      "text": "\"yes\" [approve updating PCClaw endpoint]"
+    },
+    {
+      "seq": 14,
+      "chars": 39,
+      "text": "\"Dialagram is gone for now like I said\""
+    },
+    {
+      "seq": 15,
+      "chars": 35,
+      "text": "\"404 This page could not be found.\""
+    },
+    {
+      "seq": 16,
+      "chars": 24,
+      "text": "--- MICHAEL VERBATIM ---"
+    },
+    {
+      "seq": 17,
+      "chars": 18,
+      "text": "\"T1 down for now.\""
+    }
+  ],
+  "source": "RRL-38.txt",
+  "run": 38
+}

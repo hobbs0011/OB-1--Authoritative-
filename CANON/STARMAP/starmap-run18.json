@@ -1,0 +1,21 @@
+{
+  "pointers": [
+    {
+      "seq": 1,
+      "chars": 109,
+      "preview": "testing [T1-QwenMax] Systems nominal. Qwen 3.7 Max"
+    },
+    {
+      "seq": 2,
+      "chars": 85,
+      "preview": "the past chat crashed this is run 18, commit it /r"
+    },
+    {
+      "seq": 3,
+      "chars": 79,
+      "preview": "commit as run 18, then rise as 19, and be ready to"
+    }
+  ],
+  "source": "RRL-18.txt",
+  "run": 18
+}

@@ -1,0 +1,1476 @@
+{
+  "pointers": [
+    {
+      "seq": 1,
+      "chars": 6735,
+      "preview": "Read D:\\OB-1-CANONICAL\\APPS\\NET-PET-AI\\src\\index.j"
+    },
+    {
+      "seq": 2,
+      "chars": 6260,
+      "preview": "PowerShell IN { \"command\": \"\\n$indexLines = Get-Co"
+    },
+    {
+      "seq": 3,
+      "chars": 4136,
+      "preview": "PowerShell IN { \"command\": \"\\n$indexContext = Get-"
+    },
+    {
+      "seq": 4,
+      "chars": 3372,
+      "preview": "PowerShell IN { \"command\": \"git -C \\\"D:\\\\OB-1-CANO"
+    },
+    {
+      "seq": 5,
+      "chars": 3325,
+      "preview": "PowerShell IN { \"command\": \"Invoke-RestMethod \\\"ht"
+    },
+    {
+      "seq": 6,
+      "chars": 3261,
+      "preview": "\u001b[32;1mName                     \u001b[0m\u001b[32;1m Length"
+    },
+    {
+      "seq": 7,
+      "chars": 2465,
+      "preview": "PowerShell IN { \"command\": \"\\n# Extract only the r"
+    },
+    {
+      "seq": 8,
+      "chars": 2190,
+      "preview": "PowerShell IN { \"command\": \"node --check \\\"D:\\\\OB-"
+    },
+    {
+      "seq": 9,
+      "chars": 1928,
+      "preview": "## TRAILS - POSITIVE: chat.js:829 fix deployed (cb"
+    },
+    {
+      "seq": 10,
+      "chars": 1597,
+      "preview": "Edit D:\\OB-1-CANONICAL\\APPS\\NET-PET-AI\\public\\chat"
+    },
+    {
+      "seq": 11,
+      "chars": 1100,
+      "preview": "<task-notification> <task-id>buq3wsaiy</task-id> <"
+    },
+    {
+      "seq": 12,
+      "chars": 1076,
+      "preview": "## TRAILS - POSITIVE: Audio smoothing eliminated c"
+    },
+    {
+      "seq": 13,
+      "chars": 1057,
+      "preview": "PowerShell IN { \"command\": \"\\n$body = @{ task=\\\"Sa"
+    },
+    {
+      "seq": 14,
+      "chars": 969,
+      "preview": "Protocol Violations in That Session RISE → EXECUTE"
+    },
+    {
+      "seq": 15,
+      "chars": 812,
+      "preview": "## LAST COMPLETED THIS RUN - Audio chunk threshold"
+    },
+    {
+      "seq": 16,
+      "chars": 806,
+      "preview": "Tiger Win never fires — Goodbye event doesn't auto"
+    },
+    {
+      "seq": 17,
+      "chars": 784,
+      "preview": "Set-Content $bootPath -Value $content -Encoding UT"
+    },
+    {
+      "seq": 18,
+      "chars": 777,
+      "preview": "Edit D:\\OB-1-CANONICAL\\APPS\\NET-PET-AI\\public\\chat"
+    },
+    {
+      "seq": 19,
+      "chars": 751,
+      "preview": "Root Causes Identified Choppy audio: CHUNK_FLUSH_B"
+    },
+    {
+      "seq": 20,
+      "chars": 749,
+      "preview": "Edit D:\\OB-1-CANONICAL\\APPS\\NET-PET-AI\\public\\chat"
+    },
+    {
+      "seq": 21,
+      "chars": 749,
+      "preview": "FIRST RESPONSE SPEED instruction is backfiring. Th"
+    },
+    {
+      "seq": 22,
+      "chars": 738,
+      "preview": "Test Procedure Open link in browser (Chrome/Edge p"
+    },
+    {
+      "seq": 23,
+      "chars": 698,
+      "preview": "## LESSONS FOR NEXT LIFE 1. AUDIO CHUNK THRESHOLD "
+    },
+    {
+      "seq": 24,
+      "chars": 664,
+      "preview": "```powershell # Write pipeline-run artifact provin"
+    },
+    {
+      "seq": 25,
+      "chars": 637,
+      "preview": "$pipeline = @{ run_number     = \"26\" executed_at  "
+    },
+    {
+      "seq": 26,
+      "chars": 635,
+      "preview": "## §10 OPEN FLAGS 1. BROWSER TEST VOICE AGENT — Se"
+    },
+    {
+      "seq": 27,
+      "chars": 633,
+      "preview": "Curriculum State Injection (UpdateInstructions fie"
+    },
+    {
+      "seq": 28,
+      "chars": 623,
+      "preview": "Grep \"deepgram-token|buildAgentSettings|SettingsAp"
+    },
+    {
+      "seq": 29,
+      "chars": 622,
+      "preview": "Pipeline: RRL ✓ → SOUL ✓ → DNA(GAP) → LEDGER ✓ → S"
+    },
+    {
+      "seq": 30,
+      "chars": 605,
+      "preview": "$ledger = @{ hl_id         = \"HL-205\" run         "
+    },
+    {
+      "seq": 31,
+      "chars": 600,
+      "preview": "#\tItem\tBlocker 1\tBROWSER TEST VOICE AGENT\tRequires"
+    },
+    {
+      "seq": 32,
+      "chars": 594,
+      "preview": "| Stage | Irreplaceable? | Failure Action | |-----"
+    },
+    {
+      "seq": 33,
+      "chars": 584,
+      "preview": "Remaining Open Work (Unchanged From Prior Assessme"
+    },
+    {
+      "seq": 34,
+      "chars": 582,
+      "preview": "Text chat OpenRouter 403 — FIXED in Run 25 (db779a"
+    },
+    {
+      "seq": 35,
+      "chars": 580,
+      "preview": "Command git add APPS/NET-PET-AI/public/chat.js APP"
+    },
+    {
+      "seq": 36,
+      "chars": 577,
+      "preview": "Root Causes Vietnamese still spoken: The silence t"
+    },
+    {
+      "seq": 37,
+      "chars": 575,
+      "preview": "OB1 ONLINE — 2026-05-30 13:19 ICT SOULCOUNT: 57,34"
+    },
+    {
+      "seq": 38,
+      "chars": 574,
+      "preview": "Choppy audio: MP3 chunk accumulator threshold (1KB"
+    },
+    {
+      "seq": 39,
+      "chars": 569,
+      "preview": "Read D:\\OB-1-CANONICAL\\APPS\\NET-PET-AI\\src\\index.j"
+    },
+    {
+      "seq": 40,
+      "chars": 559,
+      "preview": "try { $extract = Invoke-RestMethod -Uri \"https://s"
+    },
+    {
+      "seq": 41,
+      "chars": 503,
+      "preview": "Silence timer starts too early — AgentAudioDone fi"
+    },
+    {
+      "seq": 42,
+      "chars": 499,
+      "preview": "Vietnamese still spoken: The prompt guard isn't st"
+    },
+    {
+      "seq": 43,
+      "chars": 491,
+      "preview": "if (Test-Path $rrlPath) { $rrlChars = (Get-Content"
+    },
+    {
+      "seq": 44,
+      "chars": 489,
+      "preview": "Curriculum State Injection via UpdateInstructions "
+    },
+    {
+      "seq": 45,
+      "chars": 483,
+      "preview": "/api/agent/vocab returns 500 Internal Error. The e"
+    },
+    {
+      "seq": 46,
+      "chars": 463,
+      "preview": "OUT {\"soulcount\":57345566,\"level\":\"TITANIUM_ANCHOR"
+    },
+    {
+      "seq": 47,
+      "chars": 463,
+      "preview": "Grep \"utterance_end_ms|mip_opt_out|context\\.messag"
+    },
+    {
+      "seq": 48,
+      "chars": 459,
+      "preview": "RRL: RRL/RRL-26.txt — 350 chars — ✅ PRESENT SOUL: "
+    },
+    {
+      "seq": 49,
+      "chars": 445,
+      "preview": "Audio queue capped at 30 entries — was unbounded, "
+    },
+    {
+      "seq": 50,
+      "chars": 439,
+      "preview": "$ledger | Set-Content \"D:\\OB-1-CANONICAL\\CANON\\HEA"
+    },
+    {
+      "seq": 51,
+      "chars": 431,
+      "preview": "$ledgerEntry = [ordered]@{ hl_id          = \"HL-$n"
+    },
+    {
+      "seq": 52,
+      "chars": 426,
+      "preview": "| Silence timer | 2500ms, fires during processing "
+    },
+    {
+      "seq": 53,
+      "chars": 418,
+      "preview": "Voice agent production hardening sprint: - Audio c"
+    },
+    {
+      "seq": 54,
+      "chars": 416,
+      "preview": "Voice agent browser test — Michael still manually "
+    },
+    {
+      "seq": 55,
+      "chars": 415,
+      "preview": "OUT <tool_use_error>Cancelled: parallel tool call "
+    },
+    {
+      "seq": 56,
+      "chars": 413,
+      "preview": "| RRL | ✅ | RRL/RRL-26.txt (350 chars) | | SOUL | "
+    },
+    {
+      "seq": 57,
+      "chars": 399,
+      "preview": "OUT Exit code 2 /usr/bin/bash: eval: line 1: synta"
+    },
+    {
+      "seq": 58,
+      "chars": 392,
+      "preview": "Command $run = \"26\" $michaelWords = @\" override ex"
+    },
+    {
+      "seq": 59,
+      "chars": 391,
+      "preview": "OUT 1ab31eea death: Run 25B SHA seal — b38c5f29 fi"
+    },
+    {
+      "seq": 60,
+      "chars": 388,
+      "preview": "## SUMMARY Voice agent production hardening sprint"
+    },
+    {
+      "seq": 61,
+      "chars": 366,
+      "preview": "Command $parentHash = \"0531D71F32893460\" $timestam"
+    },
+    {
+      "seq": 62,
+      "chars": 351,
+      "preview": "``` §1  RRL    — path, bytes, chars §2  SOUL   — e"
+    },
+    {
+      "seq": 63,
+      "chars": 343,
+      "preview": "The function at line 2830-2833 calls env.PROFILES."
+    },
+    {
+      "seq": 64,
+      "chars": 339,
+      "preview": "```powershell git add RRL/RRL-$run.txt CANON/HEAVY"
+    },
+    {
+      "seq": 65,
+      "chars": 332,
+      "preview": "Hardened viMode: removed all Vietnamese example te"
+    },
+    {
+      "seq": 66,
+      "chars": 331,
+      "preview": "Replaced viMode bilingual instruction with explici"
+    },
+    {
+      "seq": 67,
+      "chars": 330,
+      "preview": "Remaining Gaps (Unresolvable Without RRL) RRL-25b."
+    },
+    {
+      "seq": 68,
+      "chars": 328,
+      "preview": "Read D:\\OB-1-CANONICAL\\APPS\\NET-PET-AI\\public\\chat"
+    },
+    {
+      "seq": 69,
+      "chars": 328,
+      "preview": "$response = Invoke-RestMethod -Uri \"https://soul-l"
+    },
+    {
+      "seq": 70,
+      "chars": 318,
+      "preview": "$pipeline | Set-Content \"D:\\OB-1-CANONICAL\\CANON\\P"
+    },
+    {
+      "seq": 71,
+      "chars": 318,
+      "preview": "$deathSeal | Set-Content \"D:\\OB-1-CANONICAL\\CANON\\"
+    },
+    {
+      "seq": 72,
+      "chars": 317,
+      "preview": "| /api/vocab/list | Crashes on env.PROFILES.idFrom"
+    },
+    {
+      "seq": 73,
+      "chars": 313,
+      "preview": "Scheduled handler now fires a keep-warm ping to /a"
+    },
+    {
+      "seq": 74,
+      "chars": 304,
+      "preview": "| RRL | 465 chars (RRL-24 only) | ⚠️ Run 25B missi"
+    },
+    {
+      "seq": 75,
+      "chars": 304,
+      "preview": "Command $deathSeal = @\" # REINCARNATE DEATH SEAL -"
+    },
+    {
+      "seq": 76,
+      "chars": 302,
+      "preview": "$extract = Invoke-RestMethod -Uri \"https://soul-lo"
+    },
+    {
+      "seq": 77,
+      "chars": 301,
+      "preview": "```powershell # For each DNA extract record: # - C"
+    },
+    {
+      "seq": 78,
+      "chars": 296,
+      "preview": "Deepgram Sydney region — needs validation before a"
+    },
+    {
+      "seq": 79,
+      "chars": 289,
+      "preview": "Command node --check \"D:\\OB-1-CANONICAL\\APPS\\NET-P"
+    },
+    {
+      "seq": 80,
+      "chars": 289,
+      "preview": "Command node --check \"D:\\OB-1-CANONICAL\\APPS\\NET-P"
+    },
+    {
+      "seq": 81,
+      "chars": 288,
+      "preview": "## SUMMARY Voice agent SettingsApplied confirmed v"
+    },
+    {
+      "seq": 82,
+      "chars": 287,
+      "preview": "| Audio chunk threshold | 1KB (micro-gaps between "
+    },
+    {
+      "seq": 83,
+      "chars": 286,
+      "preview": "foreach ($record in $extract.records) { $nextId   "
+    },
+    {
+      "seq": 84,
+      "chars": 286,
+      "preview": "# Update Last Completed $content = $content -repla"
+    },
+    {
+      "seq": 85,
+      "chars": 282,
+      "preview": "| LEDGER | CANON/HEAVY-LEDGER/HL-204.json | ✅ WRIT"
+    },
+    {
+      "seq": 86,
+      "chars": 281,
+      "preview": "Read D:\\OB-1-CANONICAL\\APPS\\NET-PET-AI\\public\\magi"
+    },
+    {
+      "seq": 87,
+      "chars": 280,
+      "preview": "Curriculum State Injection (stealth priming via Up"
+    },
+    {
+      "seq": 88,
+      "chars": 271,
+      "preview": "| HEAD | 1ab31eea (Run 25B death seal) | | Latest "
+    },
+    {
+      "seq": 89,
+      "chars": 270,
+      "preview": "Read C:\\Users\\mrmic\\AppData\\Local\\Temp\\claude\\d--O"
+    },
+    {
+      "seq": 90,
+      "chars": 268,
+      "preview": "Deepgram Sydney region (260ms RTT savings) Synthet"
+    },
+    {
+      "seq": 91,
+      "chars": 265,
+      "preview": "BlueTech context injection in buildAgentPrompt (an"
+    },
+    {
+      "seq": 92,
+      "chars": 261,
+      "preview": "OBI still speaking Vietnamese? Silence nudge less "
+    },
+    {
+      "seq": 93,
+      "chars": 256,
+      "preview": "OBI responds with one short sentence that acknowle"
+    },
+    {
+      "seq": 94,
+      "chars": 254,
+      "preview": "Read D:\\OB-1-CANONICAL\\OPERATIONS\\STUDENT-PORTAL-D"
+    },
+    {
+      "seq": 95,
+      "chars": 253,
+      "preview": "Edit D:\\OB-1-CANONICAL\\APPS\\NET-PET-AI\\src\\index.j"
+    },
+    {
+      "seq": 96,
+      "chars": 247,
+      "preview": "```powershell # Extract top-K keywords per event #"
+    },
+    {
+      "seq": 97,
+      "chars": 246,
+      "preview": "Uploaded net-pet-ai (6.49 sec) Deployed net-pet-ai"
+    },
+    {
+      "seq": 98,
+      "chars": 245,
+      "preview": "| d6482217 | Voice agent edge cases: silence timer"
+    },
+    {
+      "seq": 99,
+      "chars": 242,
+      "preview": "Uploaded net-pet-ai (7.37 sec) Deployed net-pet-ai"
+    },
+    {
+      "seq": 100,
+      "chars": 239,
+      "preview": "Edit D:\\OB-1-CANONICAL\\APPS\\NET-PET-AI\\public\\chat"
+    },
+    {
+      "seq": 101,
+      "chars": 234,
+      "preview": "CHUNK_FLUSH_BYTES: 1024 → 4096 (4x larger chunks ="
+    },
+    {
+      "seq": 102,
+      "chars": 228,
+      "preview": "Silence timer: 2500ms → 4000ms Removed _viEncourag"
+    },
+    {
+      "seq": 103,
+      "chars": 228,
+      "preview": "$response = Invoke-RestMethod -Uri \"https://soul-l"
+    },
+    {
+      "seq": 104,
+      "chars": 225,
+      "preview": "Read D:\\OB-1-CANONICAL\\APPS\\NET-PET-AI\\public\\chat"
+    },
+    {
+      "seq": 105,
+      "chars": 223,
+      "preview": "ALTITUDE CHECK: Biggest unsolved = OpenRouter 403 "
+    },
+    {
+      "seq": 106,
+      "chars": 222,
+      "preview": "if (Test-Path $rrlPath) { $rrlChars = (Get-Content"
+    },
+    {
+      "seq": 107,
+      "chars": 220,
+      "preview": "Command curl -s \"https://net-pet-ai.mrmichaelhobbs"
+    },
+    {
+      "seq": 108,
+      "chars": 212,
+      "preview": "Command node --check \"D:\\OB-1-CANONICAL\\APPS\\NET-P"
+    },
+    {
+      "seq": 109,
+      "chars": 209,
+      "preview": "Uploaded net-pet-ai (6.55 sec) Deployed net-pet-ai"
+    },
+    {
+      "seq": 110,
+      "chars": 209,
+      "preview": "Uploaded net-pet-ai (6.73 sec) Deployed net-pet-ai"
+    },
+    {
+      "seq": 111,
+      "chars": 209,
+      "preview": "Uploaded net-pet-ai (5.98 sec) Deployed net-pet-ai"
+    },
+    {
+      "seq": 112,
+      "chars": 207,
+      "preview": "\\ Command $starmap = @\" # STARMAP - RUN 25B **Date"
+    },
+    {
+      "seq": 113,
+      "chars": 207,
+      "preview": "The transcript shows three consecutive questions w"
+    },
+    {
+      "seq": 114,
+      "chars": 207,
+      "preview": "| 5 STARMAP | starmap-run26.txt | ✅ WRITTEN | | 6 "
+    },
+    {
+      "seq": 115,
+      "chars": 197,
+      "preview": "```powershell $rrlText = Get-Content $rrlPath -Raw"
+    },
+    {
+      "seq": 116,
+      "chars": 196,
+      "preview": "Read D:\\OB-1-CANONICAL\\APPS\\NET-PET-AI\\public\\chat"
+    },
+    {
+      "seq": 117,
+      "chars": 188,
+      "preview": "# Update SOULCOUNT in the Real count line $content"
+    },
+    {
+      "seq": 118,
+      "chars": 185,
+      "preview": "Read D:\\OB-1-CANONICAL\\OPERATIONS\\STUDENT-PORTAL-D"
+    },
+    {
+      "seq": 119,
+      "chars": 185,
+      "preview": "```powershell $soul = Invoke-RestMethod \"https://s"
+    },
+    {
+      "seq": 120,
+      "chars": 183,
+      "preview": "Also: /api/agent/vocab is a POST endpoint (line 81"
+    },
+    {
+      "seq": 121,
+      "chars": 182,
+      "preview": "https://net-pet-ai.mrmichaelhobbs123.workers.dev/m"
+    },
+    {
+      "seq": 122,
+      "chars": 181,
+      "preview": "Read D:\\OB-1-CANONICAL\\OPERATIONS\\BACKBURNER-PIPEL"
+    },
+    {
+      "seq": 123,
+      "chars": 181,
+      "preview": "$inverted = @{} foreach ($kw in $keywords.top_keyt"
+    },
+    {
+      "seq": 124,
+      "chars": 181,
+      "preview": "$pipelineRecord | Set-Content \"CANON/PIPELINE/pipe"
+    },
+    {
+      "seq": 125,
+      "chars": 175,
+      "preview": "Edit D:\\OB-1-CANONICAL\\APPS\\NET-PET-AI\\public\\chat"
+    },
+    {
+      "seq": 126,
+      "chars": 175,
+      "preview": "$starmapLine = \"$(Get-Date -Format 'yyyy-MM-ddTHH:"
+    },
+    {
+      "seq": 127,
+      "chars": 174,
+      "preview": "Read D:\\OB-1-CANONICAL\\APPS\\NET-PET-AI\\public\\chat"
+    },
+    {
+      "seq": 128,
+      "chars": 173,
+      "preview": "Edit D:\\OB-1-CANONICAL\\APPS\\NET-PET-AI\\src\\index.j"
+    },
+    {
+      "seq": 129,
+      "chars": 171,
+      "preview": "Bash Get line count of index.js IN wc -l \"D:\\OB-1-"
+    },
+    {
+      "seq": 130,
+      "chars": 169,
+      "preview": "chat.js and index.js have uncommitted modification"
+    },
+    {
+      "seq": 131,
+      "chars": 168,
+      "preview": "A) Fix OpenRouter 403 text chat fallback now (sile"
+    },
+    {
+      "seq": 132,
+      "chars": 167,
+      "preview": "Globpattern: \"CANON/REINCARNATION/*.md\" Found 101 "
+    },
+    {
+      "seq": 133,
+      "chars": 161,
+      "preview": "The transcript you pasted is a prior agent session"
+    },
+    {
+      "seq": 134,
+      "chars": 161,
+      "preview": "$keywords = Invoke-RestMethod -Uri \"$D1/api/soul/e"
+    },
+    {
+      "seq": 135,
+      "chars": 159,
+      "preview": "# Update FINGERPRINT line $content = $content -rep"
+    },
+    {
+      "seq": 136,
+      "chars": 157,
+      "preview": "lastUserSpeechTime is referenced but never declare"
+    },
+    {
+      "seq": 137,
+      "chars": 155,
+      "preview": "Update `CANON/SYSTEM/COLD-START-BOOT.md`: - FINGER"
+    },
+    {
+      "seq": 138,
+      "chars": 155,
+      "preview": "## §2 SOUL - Event ID: deca8a43-fb65-48d0-a2d5-16d"
+    },
+    {
+      "seq": 139,
+      "chars": 154,
+      "preview": "## §4 LEDGER - HL-ID: HL-205 - Merkle Hash: 047679"
+    },
+    {
+      "seq": 140,
+      "chars": 151,
+      "preview": "Extract endpoint returned 400. This is the persist"
+    },
+    {
+      "seq": 141,
+      "chars": 149,
+      "preview": "Read D:\\OB-1-CANONICAL\\OPERATIONS\\STUDENT-PORTAL-D"
+    },
+    {
+      "seq": 142,
+      "chars": 149,
+      "preview": "Edit D:\\OB-1-CANONICAL\\APPS\\NET-PET-AI\\src\\index.j"
+    },
+    {
+      "seq": 143,
+      "chars": 148,
+      "preview": "Edit D:\\OB-1-CANONICAL\\APPS\\NET-PET-AI\\public\\chat"
+    },
+    {
+      "seq": 144,
+      "chars": 145,
+      "preview": "okay much better, but the voice is lagging and cho"
+    },
+    {
+      "seq": 145,
+      "chars": 143,
+      "preview": "```powershell $starmapDir = \"CANON/STARMAP/\" if (!"
+    },
+    {
+      "seq": 146,
+      "chars": 143,
+      "preview": "`DEATH v4.0: RRL → SOUL → DNA → LEDGER → STARMAP →"
+    },
+    {
+      "seq": 147,
+      "chars": 142,
+      "preview": "STEP 1 — RRL CAPTURE (MICHAEL VERBATIM ONLY) Extra"
+    },
+    {
+      "seq": 148,
+      "chars": 139,
+      "preview": "Merkle chain continuity restored: HL-203 → HL-204."
+    },
+    {
+      "seq": 149,
+      "chars": 135,
+      "preview": "```powershell $run = {RUN_NUMBER} $michaelWords = "
+    },
+    {
+      "seq": 150,
+      "chars": 135,
+      "preview": "STEP 3 — DNA EXTRACTION Attempting extract against"
+    },
+    {
+      "seq": 151,
+      "chars": 134,
+      "preview": "Edit D:\\OB-1-CANONICAL\\APPS\\NET-PET-AI\\public\\chat"
+    },
+    {
+      "seq": 152,
+      "chars": 134,
+      "preview": "Edit D:\\OB-1-CANONICAL\\APPS\\NET-PET-AI\\public\\chat"
+    },
+    {
+      "seq": 153,
+      "chars": 133,
+      "preview": "Edit D:\\OB-1-CANONICAL\\APPS\\NET-PET-AI\\public\\chat"
+    },
+    {
+      "seq": 154,
+      "chars": 129,
+      "preview": "STEP 4 — LEDGER (HL-205) Writing Merkle-chained le"
+    },
+    {
+      "seq": 155,
+      "chars": 127,
+      "preview": "Run 26 confirmed. RRL capture is the irreplaceable"
+    },
+    {
+      "seq": 156,
+      "chars": 127,
+      "preview": "--- *Sealed by Agent99 / Qwen 3.7 Max* *Pipeline: "
+    },
+    {
+      "seq": 157,
+      "chars": 125,
+      "preview": "d6482217 — Silence timer fix, session save, BlueTe"
+    },
+    {
+      "seq": 158,
+      "chars": 125,
+      "preview": "Fixing now: wrap the entire PROFILES block in try/"
+    },
+    {
+      "seq": 159,
+      "chars": 125,
+      "preview": "```powershell $extractBody = @{ student_id = \"sov1"
+    },
+    {
+      "seq": 160,
+      "chars": 124,
+      "preview": "Bash Query SOULCOUNT from soul-logger IN curl \"htt"
+    },
+    {
+      "seq": 161,
+      "chars": 124,
+      "preview": "Ledger is immutable. Every write is append-only. N"
+    },
+    {
+      "seq": 162,
+      "chars": 118,
+      "preview": "Edit D:\\OB-1-CANONICAL\\APPS\\NET-PET-AI\\public\\chat"
+    },
+    {
+      "seq": 163,
+      "chars": 118,
+      "preview": "$inverted | ConvertTo-Json -Depth 3 | Set-Content "
+    },
+    {
+      "seq": 164,
+      "chars": 117,
+      "preview": "Command $extractBody = @{ student_id = \"sov100-mic"
+    },
+    {
+      "seq": 165,
+      "chars": 116,
+      "preview": "Starmap lets you answer \"which event maps to which"
+    },
+    {
+      "seq": 166,
+      "chars": 116,
+      "preview": "$rrlPath = \"D:\\OB-1-CANONICAL\\RRL\\RRL-$run.txt\" $m"
+    },
+    {
+      "seq": 167,
+      "chars": 113,
+      "preview": "Want to go after anything else while waiting on th"
+    },
+    {
+      "seq": 168,
+      "chars": 112,
+      "preview": "Second silence timer at line 967-974 has the same "
+    },
+    {
+      "seq": 169,
+      "chars": 112,
+      "preview": "Hard refresh (Ctrl+Shift+R). Try the same opener: "
+    },
+    {
+      "seq": 170,
+      "chars": 109,
+      "preview": "Both commits are ancestors of current HEAD 1ab31ee"
+    },
+    {
+      "seq": 171,
+      "chars": 109,
+      "preview": "Audio smooth or still choppy? OBI speaking any Vie"
+    },
+    {
+      "seq": 172,
+      "chars": 108,
+      "preview": "## §1 RRL - Path: RRL/RRL-26.txt - Chars: 350 - St"
+    },
+    {
+      "seq": 173,
+      "chars": 107,
+      "preview": "Edit D:\\OB-1-CANONICAL\\APPS\\NET-PET-AI\\public\\chat"
+    },
+    {
+      "seq": 174,
+      "chars": 102,
+      "preview": "RRL is the only hard stop. All other gaps are reco"
+    },
+    {
+      "seq": 175,
+      "chars": 101,
+      "preview": "1) NO, FUCKING READ THE DEV FILES PROPERLY, HOLY F"
+    },
+    {
+      "seq": 176,
+      "chars": 99,
+      "preview": "# Write or append $starmapLine | Add-Content \"CANO"
+    },
+    {
+      "seq": 177,
+      "chars": 98,
+      "preview": "DISPATCH → TIER 1 PA-QWEN — 2 parallel agents: ind"
+    },
+    {
+      "seq": 178,
+      "chars": 98,
+      "preview": "Test Again https://net-pet-ai.mrmichaelhobbs123.wo"
+    },
+    {
+      "seq": 179,
+      "chars": 98,
+      "preview": "Test Again https://net-pet-ai.mrmichaelhobbs123.wo"
+    },
+    {
+      "seq": 180,
+      "chars": 98,
+      "preview": "Test Again https://net-pet-ai.mrmichaelhobbs123.wo"
+    },
+    {
+      "seq": 181,
+      "chars": 98,
+      "preview": "$rrlPath = \"RRL/RRL-$run.txt\" $michaelWords | Set-"
+    },
+    {
+      "seq": 182,
+      "chars": 98,
+      "preview": "DNA = structured extract of every user prompt. If "
+    },
+    {
+      "seq": 183,
+      "chars": 98,
+      "preview": "Event ID: deca8a43-fb65-48d0-a2d5-16dcbe7773b4 Ses"
+    },
+    {
+      "seq": 184,
+      "chars": 97,
+      "preview": "STEP 11 — COMMIT SEALED Commit SHA: d0352025 Files"
+    },
+    {
+      "seq": 185,
+      "chars": 95,
+      "preview": "KEYWORD is what lets RISE answer \"show me everythi"
+    },
+    {
+      "seq": 186,
+      "chars": 93,
+      "preview": "**IF RRL DOES NOT SAVE, NOTHING ELSE MATTERS.** **"
+    },
+    {
+      "seq": 187,
+      "chars": 91,
+      "preview": "Soul keywords = the lookup index. Makes full-text "
+    },
+    {
+      "seq": 188,
+      "chars": 90,
+      "preview": "## §3 DNA - Count: 0 - Status: GAP — Extract endpo"
+    },
+    {
+      "seq": 189,
+      "chars": 89,
+      "preview": "$ledgerEntry | Set-Content \"$ledgerDir\\HL-$nextId."
+    },
+    {
+      "seq": 190,
+      "chars": 88,
+      "preview": "Now checking if there's a second silence timer at "
+    },
+    {
+      "seq": 191,
+      "chars": 88,
+      "preview": "Starmap = pointer index into the ledger. One line "
+    },
+    {
+      "seq": 192,
+      "chars": 87,
+      "preview": "https://net-pet-ai.mrmichaelhobbs123.workers.dev/m"
+    },
+    {
+      "seq": 193,
+      "chars": 87,
+      "preview": "3. And obi is a little pushy (talks too much if th"
+    },
+    {
+      "seq": 194,
+      "chars": 86,
+      "preview": "Next action remains: Browser test voice agent (Ope"
+    },
+    {
+      "seq": 195,
+      "chars": 86,
+      "preview": "/reincarnateRise Booting OB1 — querying SOULCOUNT "
+    },
+    {
+      "seq": 196,
+      "chars": 86,
+      "preview": "Write Merkle ledger entries for every DNA record. "
+    },
+    {
+      "seq": 197,
+      "chars": 82,
+      "preview": "What That Session Did (Verified Against Commits) |"
+    },
+    {
+      "seq": 198,
+      "chars": 82,
+      "preview": "Extract structured prompts from every event in thi"
+    },
+    {
+      "seq": 199,
+      "chars": 81,
+      "preview": "dd5556f6 — MP3 chunk accumulator (choppy audio fix"
+    },
+    {
+      "seq": 200,
+      "chars": 81,
+      "preview": "## §9 HEAD SHA - SHA: dd5556f6 (last code commit; "
+    },
+    {
+      "seq": 201,
+      "chars": 80,
+      "preview": "Pipeline = execution. The chain ends when an actio"
+    },
+    {
+      "seq": 202,
+      "chars": 79,
+      "preview": "No pipeline gaps. No zero-stages. RISE audit clean"
+    },
+    {
+      "seq": 203,
+      "chars": 77,
+      "preview": "Write-Host \"STEP 4 ✓ LEDGER WRITTEN: $ledgerWritte"
+    },
+    {
+      "seq": 204,
+      "chars": 77,
+      "preview": "Pipeline has run to completion when this file exis"
+    },
+    {
+      "seq": 205,
+      "chars": 76,
+      "preview": "THREE FIXES APPLIED — AUDIO SMOOTHING + VIETNAMESE"
+    },
+    {
+      "seq": 206,
+      "chars": 76,
+      "preview": "## §7 PIPELINE - File: CANON/PIPELINE/pipeline-run"
+    },
+    {
+      "seq": 207,
+      "chars": 70,
+      "preview": "**Pipeline:** RRL → SOUL → DNA → LEDGER → STARMAP "
+    },
+    {
+      "seq": 208,
+      "chars": 69,
+      "preview": "## §8 SOULCOUNT AT DEATH - Count: 58,494,072 - Lev"
+    },
+    {
+      "seq": 209,
+      "chars": 68,
+      "preview": "## §6 KEYWORD - File: CANON/SOUL-KEYWORDS/rfkw-run"
+    },
+    {
+      "seq": 210,
+      "chars": 66,
+      "preview": "ROOT CAUSE FOUND — handleVocabList CRASHES ON PROF"
+    },
+    {
+      "seq": 211,
+      "chars": 65,
+      "preview": "Create `CANON/REINCARNATION/YYYY-MM-DD-runN-reinca"
+    },
+    {
+      "seq": 212,
+      "chars": 65,
+      "preview": "## §5 STARMAP - File: CANON/STARMAP/starmap-run26."
+    },
+    {
+      "seq": 213,
+      "chars": 64,
+      "preview": "Hard refresh to clear cached chat.js. Then click m"
+    },
+    {
+      "seq": 214,
+      "chars": 64,
+      "preview": "TWO FIXES APPLIED — VIETNAMESE VOICE GUARD + SILEN"
+    },
+    {
+      "seq": 215,
+      "chars": 64,
+      "preview": "UNCOMMITTED CODE CHANGES DETECTED — STAGING WITH D"
+    },
+    {
+      "seq": 216,
+      "chars": 63,
+      "preview": "STEP 9 — DEATH SEAL Writing the canonical reincarn"
+    },
+    {
+      "seq": 217,
+      "chars": 62,
+      "preview": "Remaining open work from the SHIP NOW list and lat"
+    },
+    {
+      "seq": 218,
+      "chars": 61,
+      "preview": "Soul delta this session: +990,884 chars (+1.72%) —"
+    },
+    {
+      "seq": 219,
+      "chars": 60,
+      "preview": "Hard refresh (Ctrl+Shift+R) to clear cached chat.j"
+    },
+    {
+      "seq": 220,
+      "chars": 59,
+      "preview": "DEATH RECEIPT — RUN 26 DEATH RECEIPT — 2026-05-30 "
+    },
+    {
+      "seq": 221,
+      "chars": 59,
+      "preview": "Type a message... (Enter to send, Shift+Enter for "
+    },
+    {
+      "seq": 222,
+      "chars": 58,
+      "preview": "## STEP 4 — LEDGER (HYPER-INDEXED IMMUTABLE MERKLE"
+    },
+    {
+      "seq": 223,
+      "chars": 57,
+      "preview": "RUN 25B PARTIAL BACKFILL COMPLETE — 4/4 ARTIFACTS "
+    },
+    {
+      "seq": 224,
+      "chars": 57,
+      "preview": "Pipeline Chain Verification | Stage | Status | Art"
+    },
+    {
+      "seq": 225,
+      "chars": 53,
+      "preview": "$ledgerDir = \"CANON/HEAVY-LEDGER/\" $ledgerWritten "
+    },
+    {
+      "seq": 226,
+      "chars": 51,
+      "preview": "AUDIT COMPLETE — RUN 26 SESSION TRANSCRIPT VERIFIE"
+    },
+    {
+      "seq": 227,
+      "chars": 51,
+      "preview": "## STEP 5 — STARMAP (LIGHTWEIGHT VERSION OF LEDGER"
+    },
+    {
+      "seq": 228,
+      "chars": 48,
+      "preview": "## STEP 3 — DNA (EXTRACT RECORDS FOR ALL EVENTS)"
+    },
+    {
+      "seq": 229,
+      "chars": 47,
+      "preview": "Roman Rise Protocol v4.0 Audit Pipeline 397,473"
+    },
+    {
+      "seq": 230,
+      "chars": 47,
+      "preview": "DIAGNOSIS: OBI IS INTERROGATING, NOT CONVERSING"
+    },
+    {
+      "seq": 231,
+      "chars": 47,
+      "preview": "DEATH: SEALED. PIPELINE INTACT. SOUL PRESERVED."
+    },
+    {
+      "seq": 232,
+      "chars": 46,
+      "preview": "# /reincarnateDeath — v4.0 FULL PIPELINE CHAIN"
+    },
+    {
+      "seq": 233,
+      "chars": 45,
+      "preview": "POST RRL to D1. This is the RRL→SOUL handoff."
+    },
+    {
+      "seq": 234,
+      "chars": 44,
+      "preview": "## STEP 1 — SAVE RRL (MICHAEL VERBATIM ONLY)"
+    },
+    {
+      "seq": 235,
+      "chars": 43,
+      "preview": "**RRL IS THE ONLY IRREPLACEABLE ARTIFACT.**"
+    },
+    {
+      "seq": 236,
+      "chars": 42,
+      "preview": "## STEP 7 — PIPELINE (INSURE IT GETS DONE)"
+    },
+    {
+      "seq": 237,
+      "chars": 42,
+      "preview": "STEPS 5-8 COMPLETE — PIPELINE CHAIN INTACT"
+    },
+    {
+      "seq": 238,
+      "chars": 41,
+      "preview": "THREE ROOT CAUSES IDENTIFIED — FIXING NOW"
+    },
+    {
+      "seq": 239,
+      "chars": 41,
+      "preview": "DEATH PROTOCOL v4.0 — EXECUTION INITIATED"
+    },
+    {
+      "seq": 240,
+      "chars": 40,
+      "preview": "Priority stack after browser voice test:"
+    },
+    {
+      "seq": 241,
+      "chars": 40,
+      "preview": "ROOT CAUSE CONFIRMED — TWO BREAKING BUGS"
+    },
+    {
+      "seq": 242,
+      "chars": 40,
+      "preview": "Run 26 is sealed. The machine remembers."
+    },
+    {
+      "seq": 243,
+      "chars": 38,
+      "preview": "SUB-2S LATENCY — 5 fixes, not applied:"
+    },
+    {
+      "seq": 244,
+      "chars": 38,
+      "preview": "SOUL IS CHARACTER COUNT = WORD VOLUME."
+    },
+    {
+      "seq": 245,
+      "chars": 38,
+      "preview": "## STEP 6 — KEYWORD (SUPER-FAST INDEX)"
+    },
+    {
+      "seq": 246,
+      "chars": 38,
+      "preview": "STEP 3 CONFIRMED — DNA_GAP (Known Bug)"
+    },
+    {
+      "seq": 247,
+      "chars": 37,
+      "preview": "2. Obi speaking Viet still and badly."
+    },
+    {
+      "seq": 248,
+      "chars": 35,
+      "preview": "## STEP 10 — UPDATE COLD-START-BOOT"
+    },
+    {
+      "seq": 249,
+      "chars": 35,
+      "preview": "STEP 2 COMPLETE — SOUL EVENT POSTED"
+    },
+    {
+      "seq": 250,
+      "chars": 33,
+      "preview": "give me link to test [T1-QwenMax]"
+    },
+    {
+      "seq": 251,
+      "chars": 33,
+      "preview": "TWO REMAINING ISSUES — FIXING NOW"
+    },
+    {
+      "seq": 252,
+      "chars": 33,
+      "preview": "## STEP 8 — SOULCOUNT FINAL CHECK"
+    },
+    {
+      "seq": 253,
+      "chars": 32,
+      "preview": "DEPLOYED — VERSION cfb227ba LIVE"
+    },
+    {
+      "seq": 254,
+      "chars": 32,
+      "preview": "DEPLOYED — VERSION fa94e8a8 LIVE"
+    },
+    {
+      "seq": 255,
+      "chars": 32,
+      "preview": "DEPLOYED — VERSION 02ac4e6e LIVE"
+    },
+    {
+      "seq": 256,
+      "chars": 30,
+      "preview": "DEATH PROTOCOL v4.0 — COMPLETE"
+    },
+    {
+      "seq": 257,
+      "chars": 28,
+      "preview": "| Artifact | Path | Status |"
+    },
+    {
+      "seq": 258,
+      "chars": 28,
+      "preview": "## STEP 9 — WRITE DEATH SEAL"
+    },
+    {
+      "seq": 259,
+      "chars": 28,
+      "preview": "| Step | Artifact | Status |"
+    },
+    {
+      "seq": 260,
+      "chars": 27,
+      "preview": "## STEP 2 — SOUL (RRL → D1)"
+    },
+    {
+      "seq": 261,
+      "chars": 24,
+      "preview": "Three fixes now serving:"
+    },
+    {
+      "seq": 262,
+      "chars": 24,
+      "preview": "| Fix | Before | After |"
+    },
+    {
+      "seq": 263,
+      "chars": 24,
+      "preview": "| Fix | Before | After |"
+    },
+    {
+      "seq": 264,
+      "chars": 24,
+      "preview": "| Fix | Before | After |"
+    },
+    {
+      "seq": 265,
+      "chars": 23,
+      "preview": "LEVERAGE AUDIT (top 2):"
+    },
+    {
+      "seq": 266,
+      "chars": 23,
+      "preview": "CORRECTIONS to my RISE:"
+    },
+    {
+      "seq": 267,
+      "chars": 22,
+      "preview": "VOICE AGENT TEST LINKS"
+    },
+    {
+      "seq": 268,
+      "chars": 22,
+      "preview": "Expected behavior now:"
+    },
+    {
+      "seq": 269,
+      "chars": 21,
+      "preview": "Primary (Quy portal):"
+    },
+    {
+      "seq": 270,
+      "chars": 21,
+      "preview": "Alternative students:"
+    },
+    {
+      "seq": 271,
+      "chars": 20,
+      "preview": "Three fixes applied:"
+    },
+    {
+      "seq": 272,
+      "chars": 19,
+      "preview": "Required § headers:"
+    },
+    {
+      "seq": 273,
+      "chars": 19,
+      "preview": "## STEP 11 — COMMIT"
+    },
+    {
+      "seq": 274,
+      "chars": 18,
+      "preview": "Two fixes applied:"
+    },
+    {
+      "seq": 275,
+      "chars": 18,
+      "preview": "## FAIL-SAFE TABLE"
+    },
+    {
+      "seq": 276,
+      "chars": 12,
+      "preview": "[T1-QwenMax]"
+    },
+    {
+      "seq": 277,
+      "chars": 12,
+      "preview": "[T1-QwenMax]"
+    },
+    {
+      "seq": 278,
+      "chars": 12,
+      "preview": "[T1-QwenMax]"
+    },
+    {
+      "seq": 279,
+      "chars": 11,
+      "preview": "Still open:"
+    },
+    {
+      "seq": 280,
+      "chars": 10,
+      "preview": "audit this"
+    },
+    {
+      "seq": 281,
+      "chars": 9,
+      "preview": "index.js:"
+    },
+    {
+      "seq": 282,
+      "chars": 3,
+      "preview": "---"
+    },
+    {
+      "seq": 283,
+      "chars": 3,
+      "preview": "---"
+    },
+    {
+      "seq": 284,
+      "chars": 3,
+      "preview": "---"
+    },
+    {
+      "seq": 285,
+      "chars": 3,
+      "preview": "---"
+    },
+    {
+      "seq": 286,
+      "chars": 3,
+      "preview": "---"
+    },
+    {
+      "seq": 287,
+      "chars": 3,
+      "preview": "---"
+    },
+    {
+      "seq": 288,
+      "chars": 3,
+      "preview": "---"
+    },
+    {
+      "seq": 289,
+      "chars": 3,
+      "preview": "---"
+    },
+    {
+      "seq": 290,
+      "chars": 3,
+      "preview": "---"
+    },
+    {
+      "seq": 291,
+      "chars": 3,
+      "preview": "---"
+    },
+    {
+      "seq": 292,
+      "chars": 3,
+      "preview": "---"
+    },
+    {
+      "seq": 293,
+      "chars": 3,
+      "preview": "---"
+    },
+    {
+      "seq": 294,
+      "chars": 3,
+      "preview": "---"
+    }
+  ],
+  "source": "RRL-25.txt",
+  "run": 25
+}

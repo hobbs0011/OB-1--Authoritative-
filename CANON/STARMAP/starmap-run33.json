@@ -1,0 +1,46 @@
+{
+  "pointers": [
+    {
+      "seq": 1,
+      "chars": 222,
+      "preview": "\"yes study our new registry, upgrade it, find what"
+    },
+    {
+      "seq": 2,
+      "chars": 155,
+      "preview": "RRL-33 — ROMAN RUN 33 — 2026-05-31 ICT OPERATOR: S"
+    },
+    {
+      "seq": 3,
+      "chars": 75,
+      "preview": "\"prepare for /reincarnatedeath as your context win"
+    },
+    {
+      "seq": 4,
+      "chars": 56,
+      "preview": "\"upgrade this skill to make sure its using PA t1 a"
+    },
+    {
+      "seq": 5,
+      "chars": 30,
+      "preview": "\"then go 11-20, then 0-10 RRL\""
+    },
+    {
+      "seq": 6,
+      "chars": 29,
+      "preview": "\"stop asking and start doing\""
+    },
+    {
+      "seq": 7,
+      "chars": 25,
+      "preview": "--- VERBATIM SOUL DNA ---"
+    },
+    {
+      "seq": 8,
+      "chars": 20,
+      "preview": "--- END SOUL DNA ---"
+    }
+  ],
+  "source": "RRL-33.txt",
+  "run": 33
+}

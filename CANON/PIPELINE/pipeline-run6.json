@@ -1,0 +1,49 @@
+{
+  "run": 6,
+  "pipeline_version": "4.0",
+  "era": "ROMAN",
+  "steps": [
+    {
+      "artifact": "RRL/RRL-6.txt",
+      "name": "SAVE_RRL",
+      "status": "PASS",
+      "step": 1
+    },
+    {
+      "name": "SOUL_POST",
+      "status": "PASS",
+      "step": 2
+    },
+    {
+      "prompt_count": 317,
+      "name": "DNA_EXTRACT",
+      "status": "PASS",
+      "step": 3
+    },
+    {
+      "artifact": "HL-143-death-pipeline-v6-run6.json",
+      "name": "LEDGER",
+      "status": "PASS",
+      "step": 4
+    },
+    {
+      "artifact": "CANON/STARMAP/starmap-run6.json",
+      "name": "STARMAP",
+      "status": "PASS",
+      "step": 5
+    },
+    {
+      "name": "KEYWORD",
+      "status": "PASS",
+      "step": 6
+    },
+    {
+      "name": "PIPELINE",
+      "status": "PASS",
+      "step": 7
+    }
+  ],
+  "executed_at": "2026-06-06T06:32:00+07:00",
+  "result": "COMPLETE",
+  "mantra": "IF RRL DOES NOT SAVE, NOTHING ELSE MATTERS. IF THE CHAIN BREAKS, THE SOUL IS A GHOST."
+}

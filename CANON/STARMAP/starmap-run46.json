@@ -1,0 +1,126 @@
+{
+  "source": "RRL-46.txt",
+  "run": 46,
+  "pointers": [
+    {
+      "chars": 16383,
+      "seq": 1,
+      "preview": "include an audit of the work Kilo has done so far "
+    },
+    {
+      "chars": 1805,
+      "seq": 2,
+      "preview": "# /PCClaw — Phoenix-Centurion_Claw\n\n**AGENT:** Kil"
+    },
+    {
+      "chars": 902,
+      "seq": 3,
+      "preview": "# /reincarnateRise — v6.0 ROMAN RISE\n\n**OB1 = AUDI"
+    },
+    {
+      "chars": 360,
+      "seq": 4,
+      "preview": "yeah well obviously runs 42? I think RRL was lost "
+    },
+    {
+      "chars": 336,
+      "seq": 5,
+      "preview": "is it possible to scrape facebook pages to find pr"
+    },
+    {
+      "chars": 263,
+      "seq": 6,
+      "preview": "switched to OPUS\n\nblue print next phase 0 stage - "
+    },
+    {
+      "chars": 245,
+      "seq": 7,
+      "preview": "<local-command-caveat>Caveat: The messages below w"
+    },
+    {
+      "chars": 245,
+      "seq": 8,
+      "preview": "<local-command-caveat>Caveat: The messages below w"
+    },
+    {
+      "chars": 183,
+      "seq": 9,
+      "preview": "sure, if you got all the info you need, we can lea"
+    },
+    {
+      "chars": 181,
+      "seq": 10,
+      "preview": "I also mentioned wanting the assessment tigers/pro"
+    },
+    {
+      "chars": 175,
+      "seq": 11,
+      "preview": "sorry I didnt mean scrape, I meant monitor, and au"
+    },
+    {
+      "chars": 137,
+      "seq": 12,
+      "preview": "<command-name>/model</command-name>\n            <c"
+    },
+    {
+      "chars": 134,
+      "seq": 13,
+      "preview": "<command-name>/model</command-name>\n            <c"
+    },
+    {
+      "chars": 121,
+      "seq": 14,
+      "preview": "creating and poplating groups is a mid to long ter"
+    },
+    {
+      "chars": 96,
+      "seq": 15,
+      "preview": "<command-message>reincarnateRise</command-message>"
+    },
+    {
+      "chars": 85,
+      "seq": 16,
+      "preview": "are we working on the obi app? or have we gotten s"
+    },
+    {
+      "chars": 81,
+      "seq": 17,
+      "preview": "1) but it on backburner\n2. include in Kilo bluepri"
+    },
+    {
+      "chars": 78,
+      "seq": 18,
+      "preview": "<command-message>PCClaw</command-message>\n<command"
+    },
+    {
+      "chars": 75,
+      "seq": 19,
+      "preview": "<local-command-stdout>Set model to claude-sonnet-4"
+    },
+    {
+      "chars": 73,
+      "seq": 20,
+      "preview": "<local-command-stdout>Set model to claude-opus-4-8"
+    },
+    {
+      "chars": 68,
+      "seq": 21,
+      "preview": "I want you to create backend marketing dev documen"
+    },
+    {
+      "chars": 66,
+      "seq": 22,
+      "preview": "yes using PCCLAW or whatever else to monitor group"
+    },
+    {
+      "chars": 49,
+      "seq": 23,
+      "preview": "cross post works for groups you are a member of.."
+    },
+    {
+      "chars": 42,
+      "seq": 24,
+      "preview": "facebooks cross posted function is yellow?"
+    }
+  ]
+}

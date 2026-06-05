@@ -1,0 +1,111 @@
+{
+  "pointers": [
+    {
+      "seq": 1,
+      "chars": 591,
+      "preview": "SESSION SUMMARY: - RISE failed PA T1 dispatch (Dia"
+    },
+    {
+      "seq": 2,
+      "chars": 481,
+      "preview": "FIXES SHIPPED: 1. b2194ecf — Landing race conditio"
+    },
+    {
+      "seq": 3,
+      "chars": 212,
+      "preview": "KILO FIX: - kilo.jsonc at C:\\Users\\mrmic\\.config\\k"
+    },
+    {
+      "seq": 4,
+      "chars": 146,
+      "preview": "RRL — ROMAN RUN 35 Date: 2026-05-31 ICT Agent: OB1"
+    },
+    {
+      "seq": 5,
+      "chars": 130,
+      "preview": "6. \"I have gone through 4 claude sessions now, ask"
+    },
+    {
+      "seq": 6,
+      "chars": 105,
+      "preview": "12. \"also you fucked up Kilo, fix him so T1 QWEN m"
+    },
+    {
+      "seq": 7,
+      "chars": 105,
+      "preview": "BACKBURNER: - Added BB-33 through BB-49 (17 new it"
+    },
+    {
+      "seq": 8,
+      "chars": 103,
+      "preview": "2. \"if you fucking read the RRLs, registry files y"
+    },
+    {
+      "seq": 9,
+      "chars": 95,
+      "preview": "5. \"IF YOU DROPPED THIS THEN OBVIOUSLY MORE HAS BE"
+    },
+    {
+      "seq": 10,
+      "chars": 90,
+      "preview": "1. \"come on claude.. the voice is still choppy as "
+    },
+    {
+      "seq": 11,
+      "chars": 78,
+      "preview": "7. \"I asked for the backburner pipeline to be fill"
+    },
+    {
+      "seq": 12,
+      "chars": 63,
+      "preview": "11. \"WE BUILT A FUCKING REGISTRY? WHY IF WE ARE NO"
+    },
+    {
+      "seq": 13,
+      "chars": 51,
+      "preview": "MICHAEL VERBATIM (Soul DNA — verbatim, no cleanup)"
+    },
+    {
+      "seq": 14,
+      "chars": 51,
+      "preview": "3. \"dont do what I ask just do it your way I guess"
+    },
+    {
+      "seq": 15,
+      "chars": 48,
+      "preview": "SOULCOUNT at death: 63,768,670 — TITANIUM_ANCHOR"
+    },
+    {
+      "seq": 16,
+      "chars": 42,
+      "preview": "10. \"lets just jerk off Michael some more\""
+    },
+    {
+      "seq": 17,
+      "chars": 34,
+      "preview": "4. \"WHAT ELSE HAS BEEN DROPPED!!!\""
+    },
+    {
+      "seq": 18,
+      "chars": 19,
+      "preview": "9. \"fuck it right?\""
+    },
+    {
+      "seq": 19,
+      "chars": 13,
+      "preview": "8. \"but nope\""
+    },
+    {
+      "seq": 20,
+      "chars": 3,
+      "preview": "---"
+    },
+    {
+      "seq": 21,
+      "chars": 3,
+      "preview": "---"
+    }
+  ],
+  "source": "RRL-35.txt",
+  "run": 35
+}

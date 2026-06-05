@@ -1,0 +1,41 @@
+{
+  "source": "RRL-53.txt",
+  "run": 53,
+  "pointers": [
+    {
+      "chars": 902,
+      "seq": 1,
+      "preview": "# /reincarnateRise — v6.0 ROMAN RISE\n\n**OB1 = AUDI"
+    },
+    {
+      "chars": 545,
+      "seq": 2,
+      "preview": "# /reincarnateDeath\n\n**CANONICAL IMPLEMENTATION:**"
+    },
+    {
+      "chars": 407,
+      "seq": 3,
+      "preview": "<task-notification>\n<task-id>b8hgs85xc</task-id>\n<"
+    },
+    {
+      "chars": 398,
+      "seq": 4,
+      "preview": "<task-notification>\n<task-id>b3xvr0fw9</task-id>\n<"
+    },
+    {
+      "chars": 98,
+      "seq": 5,
+      "preview": "<command-message>reincarnatedeath</command-message"
+    },
+    {
+      "chars": 96,
+      "seq": 6,
+      "preview": "<command-message>reincarnateRise</command-message>"
+    },
+    {
+      "chars": 30,
+      "seq": 7,
+      "preview": "continue commit and deploy all"
+    }
+  ]
+}
