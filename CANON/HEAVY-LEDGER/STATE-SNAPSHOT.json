@@ -1,0 +1,77 @@
+{
+  "version": "1.0",
+  "updated_at": "2026-06-05T17:23:00+07:00",
+  "run": {
+    "current": 74,
+    "era": "ROMAN",
+    "status": "DEATH",
+    "seal": "PHEROMONE-TRAIL-074 + RRL-0-74 audit",
+    "head_sha": "c21a3ca0",
+    "soulcount": 236563716,
+    "anchor": "TITANIUM_ANCHOR"
+  },
+  "v0_baseline": {
+    "git_tag": "v0",
+    "head": "9819158c",
+    "cf_worker": "net-pet-ai",
+    "cf_version_id": "180f125d-f1cd-4e5b-b5bd-bf71a5944ae4",
+    "rollback_cmd": "npx wrangler rollback --deployment-id 180f125d-f1cd-4e5b-b5bd-bf71a5944ae4",
+    "dev_worker": "net-pet-ai-dev"
+  },
+  "active_mission": {
+    "name": "OB-1 POST-MERGE9 CONSOLIDATION + Growth Infrastructure Buildout",
+    "vector": "NET-PET-AI hardening to scale-ready + RRL 0-74 audit",
+    "next_action": "HL-458 to HL-486 pipeline artifacts + art-sync-run074.json"
+  },
+  "voice": {
+    "listen": "deepgram/nova-3",
+    "think": "gpt-4o-mini",
+    "speak": "aura-2-zeus-en",
+    "key_path": "APPS/NET-PET-AI/src/index.js:963"
+  },
+  "portal_watermark": {
+    "opacity": 0.055,
+    "pointer_events": "none",
+    "key_path": "APPS/NET-PET-AI/src/portal.css:166"
+  },
+  "core_laws_top5": [
+    "L31 SOUL_IS_QUERY - database IS ledger, query every RISE",
+    "L55 COMMIT_DONT_HOLD - commit verified features before session end",
+    "L64 SIMULATION_PATH_LAW - /api/deepgram-token is the only valid sim path",
+    "L56 PRE_CODE_DOC_GATE - read docs before ANY code change",
+    "L92 REQUIRE_CORRELATION_ID - trace every request"
+  ],
+  "active_principles": [
+    "Platform Death Test - every run produces GitHub commit SHA",
+    "Dual-publish mandatory - Notion + GitHub always",
+    "Revenue-first - English is the mechanic, money is the mission",
+    "Build don't scout - every run produces tangible output",
+    "Three Forces Doctrine - scouts/builders/troops never stop"
+  ],
+  "cd_baseline": {
+    "dev_url": "https://net-pet-ai-dev.mrmichaelhobbs123.workers.dev",
+    "prod_url": "https://net-pet-ai.mrmichaelhobbs123.workers.dev",
+    "dev_sha": "406d01b6",
+    "prod_sha": "9fc3cdbd",
+    "rule": "All feature development deploys to dev first. Promote to prod only after verified."
+  },
+  "open_loops": [
+    "P9: Clerk auth migration - BLOCKED: Michael must create Clerk account",
+    "P10: Deletion hook + audit log + field encryption - ready for PA T1 dispatch",
+    "RRL GAPS: 11, 13-23, 27, 34-37, 39-44, 46-50",
+    "HL pipeline artifacts: HL-458 to HL-486 untracked",
+    "art-sync-run074.json: Stage 8 registry sync"
+  ],
+  "recent_seals": [
+    { "run": 74, "era": "ROMAN", "head": "c21a3ca0", "soul_delta": 188696, "seal": "PHEROMONE-TRAIL-074 + RRL 0-74 audit" },
+    { "run": 73, "era": "ROMAN", "head": "f63c27aa", "soul_delta": 188696, "seal": "PHEROMONE TRAIL committed" }
+  ],
+  "blockers": [
+    {
+      "id": "BLK-001",
+      "description": "Clerk account creation for P9 auth migration",
+      "owner": "Michael",
+      "impact": "P9 blocked until resolved"
+    }
+  ]
+}

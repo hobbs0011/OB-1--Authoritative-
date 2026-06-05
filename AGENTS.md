@@ -30,7 +30,7 @@ Legacy `mrmichaelhobbs1234*` references are historical and should not be treated
 
 1. `pwsh -File SCRIPTS/obi.ps1 doctor`
 2. `pwsh -File SCRIPTS/obi.ps1 verify`
-3. Read `README.md`
+3. Read `CANON/HEAVY-LEDGER/STATE-SNAPSHOT.json` — compact operational state
 4. Read `REINCARNATION-BOOT-CHECKLIST.md` for restart context
 5. Inspect `APPS/NET-PET-AI/wrangler.toml`, `APPS/NET-PET-AI/package.json`, and `APPS/NET-PET-AI/src/index.js`
 
