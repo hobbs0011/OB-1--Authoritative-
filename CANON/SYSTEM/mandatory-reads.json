@@ -58,12 +58,24 @@
       "max_chars": 8000,
       "why": "7-domain battlefield census spec. D1-D9 matrix schema, verdict rubric, seam owners, exit gate."
     },
-    "battlefield_map": {
-      "path": "CANON/SYSTEM/BATTLEFIELD-MAP.md",
+    "state_snapshot": {
+      "path": "CANON/HEAVY-LEDGER/STATE-SNAPSHOT.json",
       "mode": "full",
-      "max_chars": 8000,
-      "why": "Run 045 Phase 0 census results. 9-domain verdict rollup, ranked fix list, coverage stats, probe corrections. Read before any Phase 0b fix work."
-    }
+      "max_chars": 3000,
+      "why": "Compact operational state: voice agent settings, portal watermark, core laws, active mission, CD baseline. Load FIRST before ANY work."
+    },
+    "art_registry_api": {
+      "path": "OPERATIONS/REGISTRY-CANDIDATES.md",
+      "mode": "full",
+      "max_chars": 5000,
+      "why": "Catalog of registry entries including DEV docs for student portals, Phoenix Coder, Magic Chat, Art Arsenal."
+    },
+    "pheromone_trail_latest": {
+      "path": "CANON/SYSTEM/PHEROMONE-TRAIL-074.md",
+      "mode": "full",
+      "max_chars": 5000,
+      "why": "Latest RRL + registry cross-link context for brand decisions and keyword lineage."
+    },
   },
   "task_types": {
     "netpetai": {
@@ -120,9 +132,20 @@
       "docs": [
         "student_portal_dev",
         "class_prep",
-        "cold_start_boot"
+        "state_snapshot"
       ],
       "dynamic": {}
+    },
+    "brand": {
+      "docs": [
+        "state_snapshot",
+        "art_registry_api",
+        "pheromone_trail_latest"
+      ],
+      "dynamic": {
+        "git_state": { "type": "git_log", "count": 3 },
+        "rfkw_context": { "type": "rfkw", "query": "voice art brand watermark portal registry", "top": 10 }
+      }
     }
   },
   "meta": {

@@ -119,6 +119,27 @@ Invoke-RestMethod "$DEV/api/deepgram-token?studentId=$SID&mode=phonics" | Conver
 
 ---
 
+### ART / BRAND / VOICE STACK WORK (any branding, art, voice settings, watermark change)
+
+| Doc | Path | Why |
+|-----|------|-----|
+| STATE-SNAPSHOT | `CANON/HEAVY-LEDGER/STATE-SNAPSHOT.json` | Operational state: voice agent settings, portal watermark, core laws, active mission |
+| PHEROMONE TRAIL | `CANON/SYSTEM/PHEROMONE-TRAIL-074.md` | Latest RRL + registry cross-link context for brand decisions |
+| REGISTRY CANDIDATES | `OPERATIONS/REGISTRY-CANDIDATES.md` | Catalog of registry entries, DEV docs for student portals, Phoenix Coder, Magic Chat, Art Arsenal |
+| COLD-START-BOOT | `CANON/SYSTEM/COLD-START-BOOT.md` | V0 baseline, voice agent settings, portal URLs, SOULCOUNT, active laws |
+
+**WHY THIS EXISTS:** Brand/voice changes broke across runs because agents had no registry path to check prior decisions. STATE-SNAPSHOT.json captures the compact runtime state (voice settings, watermark values, laws). Reading it before any brand work prevents breaking the voice agent stack or portal styling.
+
+### PHOENIX-ARCHITECTI / ART ARSENAL WORK
+
+| Doc | Path | Why |
+|-----|------|-----|
+| ART REGISTRY API | Phoenix-Architecti `/api/art` | Live registry of all brand artwork, icons, protocol assets |
+| ART SYNC ARTIFACTS | `CANON/ART-REGISTRY/art-sync-run{NNN}.json` | Registry cross-link snapshots (SOULKEYS × Starmap × Ledger) |
+| PHEROMONE TRAIL | `CANON/SYSTEM/PHEROMONE-TRAIL-*.md` | Keyword/starmap pointers for how art decisions connect to Soul DNA |
+
+---
+
 ## HOW TO ADD A NEW MANDATORY DOC
 
 1. Add a row to the relevant section above
