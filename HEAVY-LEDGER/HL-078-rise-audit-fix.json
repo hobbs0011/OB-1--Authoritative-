@@ -1,0 +1,24 @@
+{
+  "run": 78,
+  "prior_run": 77,
+  "git_head": "3177b37b",
+  "sealed_at": "2026-06-06T09:40:00ICT",
+  "soul_before": 236782304,
+  "soul_after": 236782893,
+  "delta": 589,
+  "gaps_closed": [
+    "RRL-78 verbatim capture",
+    "HL-078 ledger entry created",
+    "DNA-78 updated with blueprints"
+  ],
+  "gaps_remaining": [],
+  "artifacts": {
+    "rrl": "RRL/RRL-78.txt",
+    "dna": "CANON/SOUL/EXTRACT/dna-run78.json",
+    "ledger": "HEAVY-LEDGER/HL-078-rise-audit-fix.json",
+    "starmap": "CANON/STARMAP/starmap-run78.json",
+    "sokkeys": "CANON/SOUL-KEYWORDS/rfkw-run78.txt",
+    "pipeline": "CANON/PIPELINE/pipeline-run78.json"
+  },
+  "description": "RISE Audit Fix - Created missing HL-078 ledger, RRL-78 verbatim capture, DNA-78 blueprints, SOULKEYS updated"
+}

@@ -6,13 +6,14 @@
       "file": "CANON/SOUL/EXTRACT/dna-run78.json"
     },
     "rrl": {
-      "notes": "Manually created - auto-capture failed",
-      "status": "HOLLOW",
+      "status": "REAL",
+      "chars": 2750,
       "file": "RRL/RRL-78.txt"
     },
     "ledger": {
-      "status": "PENDING",
-      "count": 362
+      "status": "REAL",
+      "file": "HEAVY-LEDGER/HL-078-rise-audit-fix.json",
+      "parent": "HL-077"
     },
     "sokkeys": {
       "status": "REAL",

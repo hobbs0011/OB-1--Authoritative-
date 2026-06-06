@@ -1,9 +1,10 @@
 # RRL-78 — Session Transcript (Michael Hobbs SOV100)
 Date: 2026-06-06
-Time: 06:30 - 07:21 ICT
+Time: 07:21 - 09:38 ICT
 Session Type: RISE Audit + Pipeline Fix
+Actor: CLINE SOV100 (Claude Sonnet 4.5 via Kilo)
 
-## User Prompts
+## User Prompts (Verbatim)
 
 1. "What did we do so far?" — requesting status update
 2. "execute pipeline /recincarnatedeath" — trigger death protocol
