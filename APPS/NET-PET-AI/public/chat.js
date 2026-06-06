@@ -980,11 +980,12 @@ async function openVoiceAgent() {
 
     const onAgentDrop = () => {
       if (agentWsId !== myId) return;
-      // 2B: Network fallback — if drop within 5s of connect, show banner
+      // 2B: Network fallback — if drop within 5s of connect, show banner (firewall/WSS block)
       if (Date.now() - wsOpenTs < 5000) {
         const banner = document.getElementById('networkFallbackBanner');
         if (banner) banner.classList.add('visible');
-        // Re-show text input as fallback
+        // Hide mic, show text input as fallback
+        if (micBtn) micBtn.style.display = 'none';
         const msg = document.getElementById('msg');
         const sendBtn = document.getElementById('sendBtn');
         if (msg) msg.style.display = '';
@@ -1428,6 +1429,14 @@ function handleAgentMsg(event) {
 }
 
 // Block F: Single canonical silence timer — collapses two timer-setting paths into one
+function retryVoiceAgent() {
+  const banner = document.getElementById('networkFallbackBanner');
+  if (banner) banner.classList.remove('visible');
+  if (micBtn) micBtn.style.display = '';
+  agentReconnectCount = 0;
+  openVoiceAgent();
+}
+
 function resetSilenceTimer() {
   if (agentSilenceTimer) clearTimeout(agentSilenceTimer);
   agentSilenceTimer = setTimeout(() => {
@@ -1738,6 +1747,12 @@ async function boot() {
   }
 
   urlStudentId = (() => { const params = new URLSearchParams(window.location.search); return params.get("student") || params.get("studentId"); })();
+
+  // Guard: missing studentId = show error, not landing (prevents blank session)
+  if (!urlStudentId) {
+    document.body.innerHTML = '<div style="text-align:center;padding:60px 20px;font-family:sans-serif;color:#333"><h2 style="font-size:1.4rem">Missing Student ID</h2><p style="color:#666;margin-top:8px">Contact your NET coach to get your portal link.</p></div>';
+    return;
+  }
 
   const urlTaster = (() => { const params = new URLSearchParams(window.location.search); return params.get("taster") === "1"; })();
 

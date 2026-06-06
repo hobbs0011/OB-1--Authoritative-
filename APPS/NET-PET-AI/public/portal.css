@@ -392,6 +392,8 @@
           letter-spacing: 0.03em;
         }
         .network-fallback-banner.visible { display: block; }
+        .nfb-retry { background: none; border: 1px solid #fca5a5; color: #fca5a5; border-radius: 4px; padding: 2px 10px; font-size: 0.85rem; cursor: pointer; margin-left: 6px; }
+        .nfb-retry:hover { background: rgba(239,68,68,0.2); }
 
         /* Tiger Win overlay (chat.js) */
         .tiger-win-overlay {

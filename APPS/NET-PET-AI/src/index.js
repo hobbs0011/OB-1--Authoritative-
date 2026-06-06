@@ -342,6 +342,11 @@ export default {
       return new Response(null, { headers: corsHeaders(request) });
     }
 
+    // ── Block sensitive credential files from public serving ─────────────────
+    if (/^\/(PORTAL-CREDENTIALS\.txt|login-[^/]+\.txt)$/.test(path)) {
+      return new Response('Not Found', { status: 404 });
+    }
+
     // ── WebSocket upgrades bypass security middleware (handled inline) ────
     if (request.headers.get("Upgrade")?.toLowerCase() !== "websocket") {
       const secBlock = await securityMiddleware(request, env);
