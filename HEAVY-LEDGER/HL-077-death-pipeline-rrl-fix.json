@@ -1,0 +1,24 @@
+{
+  "gaps_remaining": [
+    "RRL-78.txt for next session",
+    "BIBLE entries beyond Run 7"
+  ],
+  "git_head": "6eaf2c6c",
+  "artifacts": {
+    "sokkeys": "CANON/SOUL-KEYWORDS/rfkw-run77.txt",
+    "starmap": "CANON/STARMAP/starmap-run77.json",
+    "dna": "CANON/SOUL/EXTRACT/dna-run77.json",
+    "pipeline": "CANON/PIPELINE/pipeline-run77.json",
+    "rrl": "RRL/RRL-77.txt"
+  },
+  "prior_run": 76,
+  "run": 77,
+  "gaps_closed": [
+    "RRL capture for Run 77 session",
+    "DNA extraction for SOUL→DNA transition",
+    "LEDGER entry for Run 77"
+  ],
+  "soul_after": 0,
+  "sealed_at": "2026-06-06T07:03:30ICT",
+  "soul_before": 236782304
+}

@@ -1654,6 +1654,7 @@
     "weight": 36
   },
   "pipeline": [
+    77,
     {
       "term": "pipeline",
       "weight": 8,
@@ -1663,36 +1664,6 @@
       ],
       "count": 12,
       "run": 44
-    },
-    {
-      "run": 64,
-      "category": "soul+key",
-      "weight": 565
-    },
-    {
-      "weight": 205,
-      "run": 66,
-      "category": "soul+key"
-    },
-    {
-      "run": 70,
-      "category": "soul+key",
-      "weight": 447
-    },
-    {
-      "weight": 226,
-      "category": "soul+key",
-      "run": 72
-    },
-    {
-      "run": 73,
-      "category": "soul+key",
-      "weight": 203
-    },
-    {
-      "category": "soul+key",
-      "weight": 61,
-      "run": 75
     }
   ],
   "portal": {
@@ -7581,5 +7552,16 @@
     ],
     "count": 1,
     "category": "core"
-  }
+  },
+  "death-seal": 77,
+  "rrl-capture": 77,
+  "dna-extraction": 77,
+  "ledger-entry": 77,
+  "sokkeys": 77,
+  "stagnation": 77,
+  "drift": 77,
+  "bootstrap": 77,
+  "run-77": 77,
+  "run-78": 77,
+  "phetails": 77
 }
