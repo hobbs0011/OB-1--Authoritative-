@@ -1,5 +1,0 @@
-Run 7B KEYWORDS — top-30 | session: sov100-roman-run7b-2026-05-24 | source: RRL/SOUL-20260524-155103.txt | bytelen: 1500890
-  
-RANK  TERM            FREQ    RANK  TERM            FREQ
-----  ----            ----    ----  ----            ----
- 1    soul             2292    16    net-pet

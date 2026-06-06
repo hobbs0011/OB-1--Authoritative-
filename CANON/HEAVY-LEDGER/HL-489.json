@@ -1,0 +1,15 @@
+{
+  "hl_id": "HL-489",
+  "session_id": "sov100-roman-run79",
+  "rrl_source": "D:\\OB-1-CANONICAL\\RRL\\RRL-079.txt",
+  "char_count": 1108008,
+  "byte_count": 1114895,
+  "soul_hash": "EE087DBD8A1B2AAC",
+  "dna_hash": "DCF5305C9990CB33",
+  "dna_blueprint_count": 0,
+  "merkle_parent": "HL-078",
+  "merkle_hash": "A86D5EE199DDE41B",
+  "sealed_at": "2026-06-06T12:41:47.2845426+07:00",
+  "sov100": true,
+  "run": 79
+}

@@ -1,0 +1,17 @@
+{
+  "run": 79,
+  "artifact_file": "D:\\OB-1-CANONICAL\\CANON\\ART-REGISTRY\\art-sync-run079.json",
+  "paths": {
+    "rrl": "D:\\OB-1-CANONICAL\\RRL\\RRL-079.txt",
+    "starmap": "D:\\OB-1-CANONICAL\\CANON\\STARMAP\\starmap-run079.json",
+    "ledger": "D:\\OB-1-CANONICAL\\CANON\\HEAVY-LEDGER\\HL-489.json",
+    "pipeline": "D:\\OB-1-CANONICAL\\CANON\\PIPELINE\\pipeline-run079.json",
+    "dna": "D:\\OB-1-CANONICAL\\CANON\\SOUL\\EXTRACT\\dna-run079.json",
+    "keywords": "D:\\OB-1-CANONICAL\\CANON\\SOUL-KEYWORDS\\rfkw-run079.json",
+    "seal": null,
+    "phetrail": null
+  },
+  "all_artifacts_exist": true,
+  "missing": [],
+  "timestamp": "2026-06-06T12:43:15.5626728+07:00"
+}
