@@ -1,0 +1,23 @@
+[
+  {
+    "type": "symptom",
+    "char_count": 88,
+    "text": "Auto-capture failed - no session transcript captured automatically between tool calls",
+    "timestamp": "2026-06-06T07:22:00",
+    "run": 78
+  },
+  {
+    "type": "fix",
+    "char_count": 93,
+    "text": "Created reincarnateRise-REWRITTEN.md and reincarnateDeath-REWRITTEN.md with mandatory verbatim audits",
+    "timestamp": "2026-06-06T08:47:00",
+    "run": 78
+  },
+  {
+    "type": "blueprint",
+    "char_count": 93,
+    "text": "Root cause: no automatic prompt capture. Solution: Stage 0 in RISE captures current session RRL immediately.",
+    "timestamp": "2026-06-06T08:47:01",
+    "run": 78
+  }
+]

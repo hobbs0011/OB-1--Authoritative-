@@ -1,0 +1,8 @@
+rrl-78
+soul-capture
+death-seal
+pipeline-gaps
+auto-capture-fail
+verbatim
+broken-system
+fix-required

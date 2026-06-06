@@ -1,0 +1,23 @@
+{
+  "run": 78,
+  "negative": [
+    {
+      "trail": "auto-capture-fail",
+      "note": "No automatic RRL capture for session"
+    },
+    {
+      "trail": "prompt-loss-risk",
+      "note": "User prompts not captured until manual fix"
+    },
+    {
+      "trail": "trust-breach",
+      "note": "User explicitly stated 'DONE TRUSTING AI'"
+    }
+  ],
+  "positive": [
+    {
+      "trail": "rrl-78-created",
+      "note": "Manual capture after auto-capture failed"
+    }
+  ]
+}

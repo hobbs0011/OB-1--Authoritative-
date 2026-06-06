@@ -1,0 +1,35 @@
+{
+  "run": 78,
+  "stages": {
+    "dna": {
+      "status": "REAL",
+      "file": "CANON/SOUL/EXTRACT/dna-run78.json"
+    },
+    "rrl": {
+      "notes": "Manually created - auto-capture failed",
+      "status": "HOLLOW",
+      "file": "RRL/RRL-78.txt"
+    },
+    "ledger": {
+      "status": "PENDING",
+      "count": 362
+    },
+    "sokkeys": {
+      "status": "REAL",
+      "file": "CANON/SOUL-KEYWORDS/rfkw-run78.txt"
+    },
+    "starmap": {
+      "status": "REAL",
+      "file": "CANON/STARMAP/starmap-run78.json"
+    },
+    "soul": {
+      "status": "REAL",
+      "endpoint": "/api/soul/count"
+    },
+    "s2pipeline": {
+      "status": "REAL",
+      "file": "CANON/PIPELINE/pipeline-run78.json"
+    }
+  },
+  "total_chars": 2450
+}
