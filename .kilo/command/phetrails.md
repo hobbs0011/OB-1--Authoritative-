@@ -32,7 +32,7 @@ $priorDeath = Get-ChildItem "CANON/REINCARNATION/*-reincarnateDEATH.md" | Sort-O
 **New code (git-authoritative + zero-pad):**
 ```powershell
 $lastDeathLine = git log --oneline --grep "^death:" -1
-if ($lastDeathLine -match 'run(\d+)') { $priorRun = [int]$matches[1] }
+if ($lastDeathLine -match 'run\s*(\d+)') { $priorRun = [int]$matches[1] }
 $run = $priorRun + 1
 $runPad = "{0:D3}" -f $run
 ```
@@ -49,7 +49,7 @@ $repo  = "D:\OB-1-CANONICAL"
 
 # Run authority: git (L29)
 $lastDeathLine = git log --oneline --grep "^death:" -1
-if ($lastDeathLine -match 'run(\d+)') { $priorRun = [int]$matches[1] }
+if ($lastDeathLine -match 'run\s*(\d+)') { $priorRun = [int]$matches[1] }
 $run    = $priorRun + 1
 $runPad = "{0:D3}" -f $run
 
@@ -69,6 +69,7 @@ Scan current session for:
 - Verified deploys (wrangler tail HTTP 200)
 - Fixed bugs (file:line → resolution)
 - Validated configs (keys rotated, endpoints confirmed)
+- Registry entries created/updated
 
 **Required fields:** `artifact`, `action`, `verification`, `timestamp`
 
@@ -77,6 +78,7 @@ Scan for:
 - Failed architectures (tried + rejected)
 - Wasted resources (token loops, ignored dispatch)
 - Spec violations (broke API contracts)
+- phetrail gaps (write failed, corrupt JSON, missing)
 
 **Required fields:** `artifact`, `failure`, `root_cause`, `decay_days=180`, `timestamp`
 
@@ -85,6 +87,7 @@ Scan for:
 - SOULCOUNT at extraction
 - Open flags count
 - Active mission (from BOOT)
+- Registry entries count (from dnaREGISTRY)
 
 ---
 
@@ -92,10 +95,12 @@ Scan for:
 
 ```json
 {
+  "schema_version": "2.0",
   "run_number": "042",
   "extracted_at": "2026-06-02T06:45:00+07:00",
   "head_sha": "912515df",
   "soulcount": 71732986,
+  "registry_entries": 142,
   "positive_trails": [
     {
       "artifact": "CANON/SOUL-KEYWORDS/inverted-index.json",
@@ -126,11 +131,28 @@ Scan for:
 ## WRITE
 
 ```powershell
-$phetrail | ConvertTo-Json -Depth 5 | Set-Content $phetrailPath -Encoding UTF8
-Write-Host "PHETRAIL WRITTEN: $phetrailPath"
+try {
+    $jsonTest = $phetrail | ConvertTo-Json -Depth 5 | ConvertFrom-Json
+    $phetrail | ConvertTo-Json -Depth 5 | Set-Content $phetrailPath -Encoding UTF8
+    Write-Host "PHETRAIL WRITTEN: $phetrailPath"
+} catch {
+    Write-Error "PHETRAIL_WRITE_FAILED — $($_.Exception.Message)"
+    Write-Host "  → DEATH should seal with PHETRAIL_WRITE_GAP; RISE back-fills next time"
+}
 ```
 
 **File naming:** `PheTrail-run{NNN}.json` (zero-pad, contract 1.2)
+
+---
+
+## SAFE FALLBACK (if /phetrails called mid-session before death commit)
+
+If called with no death commit in git yet (e.g., during an active DEATH run):
+```powershell
+$runNum = $priorRun + 1  # mirrors the pending death run number
+$runPad = "{0:D3}" -f $runNum
+```
+Do NOT use the standalone run derivation if a death seal is already staged but not committed.
 
 ---
 
@@ -142,13 +164,16 @@ Write-Host "PHETRAIL WRITTEN: $phetrailPath"
 | L-PHE-2 | NEGATIVE DECAY | Negative trails persist 180 days. Archived, not deleted. Dead ends today may be viable in 6 months. |
 | L-PHE-3 | VERIFICATION MANDATORY | Positive trail MUST include `verification` field. No verification = not a positive trail. |
 | L-PHE-4 | TRAIL CONSUMPTION | Every agent MUST read the latest PheTrail before executing complex logic. Ignoring a Negative Pheromone = protocol violation. |
+| L-PHE-5 | SCHEMA_VERSION | All phetrails MUST include `schema_version`. RISE parser rejects v1.0 or missing version. |
 
 ---
 
 ## FAILURE HANDLING
 
-Write fails → `PHETRAIL_GAP` flag in seal. DEATH continues. RISE back-fills next time.
+Write fails → `PHETRAIL_WRITE_GAP` flag in seal (DEATH) or console warning (standalone). DEATH continues. RISE back-fills next time.
+
+Corrupt JSON on read → `PHETRAIL_CORRUPT` flag. Treat as gap. Do not crash.
 
 ---
 
-`PHETRAILS v2.0: GIT-DERIVED RUN + ZERO-PAD + CONTRACT PATHS + DEATH STAGE 7 INTEGRATION.`
+`PHETRAILS v2.1: GIT-DERIVED RUN + ZERO-PAD + CONTRACT PATHS + SCHEMA_VERSION + DEATH STAGE 7 INTEGRATION + SAFE FALLBACK.`

@@ -71,16 +71,21 @@ if (-not (Test-Path $rrlPath)) {
 
 if ($needsDiscovery) {
     Write-Host "AUTO-DISCOVERING RRL FROM JSONL..."
-    $projectSlug = "d--OB-1-CANONICAL"
-    $jsonlDir = "$env:USERPROFILE\.claude\projects\$projectSlug"
-    if (-not (Test-Path $jsonlDir)) {
-        Write-Error "FATAL: JSONL dir not found: $jsonlDir — cannot auto-discover RRL"
-        exit 1
+    $jsonlDirs = @(
+        "$env:USERPROFILE\.claude\projects\d--OB-1-CANONICAL",
+        "$env:APPDATA\Code\User\globalStorage\saoudrizwan.claude-dev",
+        "$env:LOCALAPPDATA\kilo"
+    )
+    $jsonlFile = $null
+    foreach ($d in $jsonlDirs) {
+        if (Test-Path $d) {
+            $jsonlFile = Get-ChildItem $d -Recurse -Filter "*.jsonl" -ErrorAction SilentlyContinue |
+                         Sort-Object LastWriteTime -Descending | Select-Object -First 1
+            if ($jsonlFile) { break }
+        }
     }
-    $jsonlFile = Get-ChildItem $jsonlDir -Filter "*.jsonl" -ErrorAction SilentlyContinue |
-                 Sort-Object LastWriteTime -Descending | Select-Object -First 1
     if (-not $jsonlFile) {
-        Write-Error "FATAL: No JSONL in $jsonlDir — copy-paste the entire chat to $rrlPath"
+        Write-Error "FATAL: No JSONL found in any known Kilo/Claude project dir — set RRL_SOURCE env or copy-paste chat to $rrlPath"
         exit 1
     }
     Write-Host "  SOURCE: $($jsonlFile.FullName) — $($jsonlFile.Length) bytes"
@@ -119,11 +124,22 @@ $countBefore = (Invoke-RestMethod "$D1/api/soul/count").soulcount
 
 # Post Michael's verbatim words from the RRL to soul-logger
 # SOUL = user turns only. Agent text stays in RRL for DNA extraction.
+# Extract user turns from JSONL or plain-text speaker markers
+$userTexts = @()
+if ($rrlText -match '"role"\s*:\s*"user"') {
+    $userTexts = $rrlText -split "`n" | Where-Object { $_ -match '"role"\s*:\s*"user"', '"text"\s*:\s*"([^"]+)"' } | ForEach-Object { $matches[1] }
+}
+if (-not $userTexts) {
+    $userTexts = $rrlText -split "`n" | Where-Object { $_ -match '^(MR HOBBS|MICHAEL|SOV100|USER)\s*[:|>-]' } | ForEach-Object { $_ -replace '^(MR HOBBS|MICHAEL|SOV100|USER)\s*[:|>-]\s*', '' }
+}
+$soulText = ($userTexts -join "`n").Trim()
+if (-not $soulText) { $soulText = $rrlText }
+
 $soulBody = @{
     student_id = "sov100-michael"
     session_id = "sov100-roman-run$run"
     role       = "user"
-    text       = $rrlText  # Full RRL (session-capture extracts user turns; D1 stores what it receives)
+    text       = $soulText
 } | ConvertTo-Json -Depth 2 -Compress
 
 $soulPost = Invoke-RestMethod -Uri "$D1/api/soul/event" -Method Post `
@@ -370,8 +386,6 @@ Write-Host "STAGE 6 ✓ SOULKEYS: $($inverted.Count) terms in index | $rfkwPath"
 One command runs RRL→SOULKEYS in order, writes the result record, and does not report COMPLETE unless every stage verifies REAL.
 
 ```powershell
-if (-not (Test-Path $pipelineDir)) { New-Item -ItemType Directory -Path $pipelineDir -Force | Out-Null }
-
 $s2Record = [ordered]@{
     run_number        = $run
     executed_at       = (Get-Date -Format 'o')
@@ -381,20 +395,22 @@ $s2Record = [ordered]@{
     rrl_bytes         = $rrlBytes
     rrl_fidelity      = if ($hasUser -and $hasAssistant) { "REAL" } else { "HOLLOW" }
     session_id        = "sov100-roman-run$run"
-    soul_event_id     = $receipt.event_id
-    soulcount         = $receipt.count_after
-    soul_level        = $receipt.level
-    soul_count_before = $countBefore
-    soul_delta        = $receipt.delta
+    soul_event_id     = if ($receipt) { $receipt.event_id } else { "SOUL_GAP" }
+    soulcount         = if ($receipt -and $receipt.count_after) { $receipt.count_after } else { 0 }
+    soul_level        = if ($receipt) { $receipt.level } else { "UNKNOWN" }
+    soul_count_before = if ($receipt) { $receipt.count_before } else { 0 }
+    soul_delta        = if ($receipt) { $receipt.delta } else { 0 }
     dna_count         = $dnaCount
     dna_blueprint_count = $dnaBlueprintCount
-    dna_status        = if ($dnaCount -gt 0) { "REAL" } else { "HOLLOW" }
+    dna_status        = if ($dnaCount -gt 0) { if ($dnaBlueprintCount -gt 0) { "REAL" } else { "HOLLOW" } } else { "MISSING" }
     ledger_id         = "HL-$nextHL"
     starmap_file      = $starmapPath
     keyword_file      = $rfkwPath
     keyword_index     = $idxPath
     s2pipeline_file   = $s2Path
-    result            = if ($rrlChars -gt 0 -and $dnaCount -gt 0) { "COMPLETE" } else { "GAP" }
+    registry_file     = if (Test-Path "$artRegistryDir\art-sync-run$runPad.json") { "$artRegistryDir\art-sync-run$runPad.json" } else { "REGISTRY_SYNC_GAP" }
+    registry_synced   = $syncedPieces.Count
+    result            = if ($rrlFidelity -eq "REAL" -and $dnaBlueprintCount -gt 0) { "COMPLETE" } else { "GAP" }
 }
 
 $s2Record | ConvertTo-Json -Depth 5 | Set-Content $s2Path -Encoding UTF8
@@ -435,6 +451,7 @@ try {
 $syncedPieces = @()
 $merkleShort  = if ($ledgerHash) { $ledgerHash.Substring(0,16) } else { "LEDGER_GAP" }
 
+$artSyncGap = $false
 foreach ($piece in $regPieces) {
     if (-not $piece) { continue }
     $pieceTags   = ($piece.tags -split ',') | ForEach-Object { $_.Trim().ToLower() } | Where-Object { $_ }
@@ -460,9 +477,10 @@ foreach ($piece in $regPieces) {
                 keywords = $matched
                 title_hit = $titleHit
             }
-        } catch { Write-Warning "  PATCH failed for $($piece.title): $($_.Exception.Message)" }
+        } catch { $artSyncGap = $true; Write-Warning "  PATCH failed for $($piece.title): $($_.Exception.Message)" }
     }
 }
+if ($artSyncGap) { Write-Host "  ⚠ REGISTRY_SYNC_GAP — one or more PATCH calls failed; see seal §14" }
 
 # 4. Write canonical artifact
 $artSyncPath = "$artRegistryDir\art-sync-run$runPad.json"
@@ -518,13 +536,14 @@ Write-Host "STAGE 8 ✓ REGISTRY SYNC: $($syncedPieces.Count) pieces tagged → 
 | 8 | OPEN QUESTIONS | |
 | 9 | UNFINISHED ACTIONS | with exact git add commands |
 | 10 | SYSTEM DESIGN | |
-| 11 | ARTIFACTS | paths + SHAs for all 7 chain artifacts |
+| 11 | ARTIFACTS | paths + SHAs for all 7 chain artifacts + registry sync + dnaREGISTRY digest |
 | 12 | STATE SNAPSHOT | HEAD, branch, dirty tree, soulcount (= §3 count_after), dna_blueprint_count |
 | 13 | FINGERPRINT | agent, run#, commit SHA, platform death test result |
 | 14 | ART REGISTRY SYNC | pieces_synced count, art-sync-run{N}.json path, top keywords matched |
+| 15 | REGISTRY | CANON/REGISTRY/dna-registry-run{N}.json path, entry count, stale flag |
 
 §12 soulcount MUST equal §3 `count_after`. No independent query.
-§11 MUST list: RRL path+chars, SOUL event_id, DNA path+records+blueprint_count, HL, STARMAP, SOULKEYS, S2Pipeline.
+§11 MUST list: RRL path+chars, SOUL event_id, DNA path+records+blueprint_count, HL, STARMAP, SOULKEYS, S2Pipeline, dnaREGISTRY path.
 §14 reports REGISTRY_SYNC result: piece count patched, keyword intersection summary, and path to art-sync-run{N}.json.
 
 ---

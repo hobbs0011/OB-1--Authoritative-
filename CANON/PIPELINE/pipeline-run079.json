@@ -1,0 +1,22 @@
+{
+  "run_number": "079",
+  "executed_at": "2026-06-06T11:51:35.9682926Z",
+  "head_sha": "5d2a0068",
+  "soulcount": 236783473,
+  "rrl_saved": "D:\\OB-1-CANONICAL\\RRL\\RRL-079.txt",
+  "rrl_chars": 0,
+  "dna_saved": "D:\\OB-1-CANONICAL\\CANON\\SOUL\\EXTRACT\\dna-run079.json",
+  "dna_count": 1,
+  "pipeline_file": "D:\\OB-1-CANONICAL\\CANON\\PIPELINE\\pipeline-run079.json",
+  "result": "BACKFILL_COMPLETE",
+  "stages": [
+    "RRL",
+    "SOUL",
+    "DNA",
+    "LEDGER",
+    "STARMAP",
+    "SOULKEYS",
+    "S2PIPELINE",
+    "PHE"
+  ]
+}
