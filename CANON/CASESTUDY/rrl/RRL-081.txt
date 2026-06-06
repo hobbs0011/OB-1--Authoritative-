@@ -1,0 +1,1 @@
+Test Deepgram nova-3 + gpt-4o-mini in syd region — document RTT vs sg/sin

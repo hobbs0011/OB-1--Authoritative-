@@ -1,0 +1,1 @@
+Scan OPERATIONS/REGISTRY-CANDIDATES.md for orphaned paths — mark stale, rebuild index

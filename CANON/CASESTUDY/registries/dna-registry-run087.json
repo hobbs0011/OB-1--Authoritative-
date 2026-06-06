@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0",
+  "run_reference": "CASE-087",
+  "case_study": "SIMULATION",
+  "generated_at": "2026-06-06T12:35:29.0718213Z",
+  "context": "CI/CD CANARY",
+  "soulcount": 236784226,
+  "counts": {
+    "heavy_ledger": 363,
+    "starmap": 104,
+    "inverted_index_keywords": 838
+  },
+  "canonical_paths": [
+    ".kilo/command/reincarnaterise.md",
+    ".kilo/command/reincarnatedeath.md",
+    ".kilo/command/phetrails.md",
+    ".kilo/command/dnaREGISTRY.md",
+    "CANON/CASESTUDY/README.md"
+  ]
+}

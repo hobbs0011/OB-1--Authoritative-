@@ -1,0 +1,1 @@
+Write Phase 0 hardening spec — kill worktrees, evidence-or-unknown gate, domain ownership

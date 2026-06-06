@@ -1,0 +1,1 @@
+Huong portal sidebar off-screen on iPhone SE — check viewport meta + CSS grid

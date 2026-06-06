@@ -1,0 +1,5 @@
+# CASESTUDY RUN 084 — T1 QWEN TOKENS
+**Sealed:** 2026-06-06T12:35+07:00
+**Delta:** +83
+**Event:** 2b69549b-b2b6-4e7d-8d7f-1340b73dc42b
+

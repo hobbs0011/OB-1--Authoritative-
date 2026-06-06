@@ -1,0 +1,1 @@
+Formalize L70 REGISTRY_FIRST — add to RISE/DEATH/PHE command files

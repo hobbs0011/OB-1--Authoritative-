@@ -1,0 +1,5 @@
+# CASESTUDY RUN 079 — VOICE AGENT RACE
+**Sealed:** 2026-06-06T12:35+07:00
+**Delta:** +89
+**Event:** a0088bb8-8b6d-47ed-9292-49b5a8727fdf
+

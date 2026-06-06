@@ -1,0 +1,5 @@
+# CASESTUDY RUN 087 — CI/CD CANARY
+**Sealed:** 2026-06-06T12:35+07:00
+**Delta:** +83
+**Event:** 6832dcd9-007c-4836-9b7e-a5479f9921f8
+
