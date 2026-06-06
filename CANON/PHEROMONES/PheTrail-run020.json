@@ -1,0 +1,14 @@
+{
+  "run": 20,
+  "created_at": "2026-06-06T10:00:00+07:00",
+  "positive_trails": [
+    { "trail": "pipeline-executed", "note": "117 pieces tagged in art registry, SOULKEYS × STARMAP × LEDGER cross-linked" },
+    { "trail": "dna-extracted", "note": "22 prompts extracted to dna-run20.json" },
+    { "trail": "ledger-written", "note": "HL-199.json created with merkle hash" }
+  ],
+  "negative_trails": [
+    { "trail": "phermone-missing", "note": "PheTrail file was never created at death time" },
+    { "trail": "pipeline-latency", "note": "STT pipeline latency ~3-7s (REST fallback active)" },
+    { "trail": "ws-proxy-error", "note": "WebSocket proxy CF Workers outbound WS auth unresolved (400/500)" }
+  ]
+}

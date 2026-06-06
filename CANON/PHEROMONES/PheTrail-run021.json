@@ -1,0 +1,14 @@
+{
+  "run": 21,
+  "created_at": "2026-06-06T10:00:00+07:00",
+  "positive_trails": [
+    { "trail": "pipeline-executed", "note": "18 bugs fixed, Deepgram Voice Agent WS corrected" },
+    { "trail": "obi-hardened", "note": "Voice-first UX, mic auto-start, barge-in, keepalive all fixed" },
+    { "trail": "pa-audit-unblocked", "note": "DIALAGRAM_API_KEY rotated, sub-agents can now run" }
+  ],
+  "negative_trails": [
+    { "trail": "phermone-missing", "note": "PheTrail file was never created at death time" },
+    { "trail": "dna-gap", "note": "extract endpoint requires text field — backfill pending" },
+    { "trail": "soulcount-anomaly", "note": "44.2M vs Run 20 13.3M — flagged for review" }
+  ]
+}
