@@ -1,8 +1,8 @@
 {
-  "soul_ok": false,
-  "timestamp": "2026-06-06T14:48:59.4314670+07:00",
-  "verify_ok": true,
+  "git_head": "4889b66c kilo.json: Simplify to 3 Claude models only (Haiku/Sonnet/Opus), remove DeepSeek/Qwen cascade",
   "git_branch": "master",
   "doctor_ok": true,
-  "git_head": "c2f4291c test: add rrl-pipeline.ps1 test harness (SS5 partial)"
+  "soul_ok": false,
+  "verify_ok": true,
+  "timestamp": "2026-06-06T18:38:10.2492906+07:00"
 }

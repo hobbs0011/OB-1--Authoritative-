@@ -2320,7 +2320,9 @@
   "run-78": {
     "term": "run-78",
     "weight": 5,
-    "runs": [78],
+    "runs": [
+      78
+    ],
     "count": 1,
     "category": "core"
   },
@@ -6198,14 +6200,18 @@
   "run-76": {
     "term": "run-76",
     "weight": 5,
-    "runs": [76],
+    "runs": [
+      76
+    ],
     "count": 1,
     "category": "core"
   },
   "run-77": {
     "term": "run-77",
     "weight": 5,
-    "runs": [77],
+    "runs": [
+      77
+    ],
     "count": 1,
     "category": "core"
   },
@@ -6911,8 +6917,66 @@
   "run-79": {
     "term": "run-79",
     "weight": 5,
-    "runs": [79],
+    "runs": [
+      79
+    ],
     "count": 1,
     "category": "core"
-  }
+  },
+  "string": [
+    {
+      "run": 79,
+      "weight": 567,
+      "category": "soul+key"
+    }
+  ],
+  "node_modules": [
+    {
+      "run": 79,
+      "weight": 406,
+      "category": "soul+key"
+    }
+  ],
+  "throwonerror": [
+    {
+      "run": 79,
+      "weight": 170,
+      "category": "soul+key"
+    }
+  ],
+  "kilocode": [
+    {
+      "run": 79,
+      "weight": 163,
+      "category": "soul+key"
+    }
+  ],
+  "boolean": [
+    {
+      "run": 79,
+      "weight": 161,
+      "category": "soul+key"
+    }
+  ],
+  "options": [
+    {
+      "run": 79,
+      "weight": 152,
+      "category": "soul+key"
+    }
+  ],
+  "6c52fe2a30ef": [
+    {
+      "run": 79,
+      "weight": 146,
+      "category": "soul+key"
+    }
+  ],
+  "546cc484": [
+    {
+      "run": 79,
+      "weight": 146,
+      "category": "soul+key"
+    }
+  ]
 }
