@@ -1,10 +1,11 @@
 {
+  "schema_version": "2.0",
   "run": 79,
-  "negative": [
+  "negative": [],
+  "positive": [
     {
-      "trail": "hollow-dna",
-      "detail": "HOLLOW DNA — 0 blueprints extracted"
+      "trail": "dna-metadata-fix",
+      "detail": "HOLLOW DNA fixed — run metadata corrected from 7 to 79"
     }
-  ],
-  "positive": []
+  ]
 }

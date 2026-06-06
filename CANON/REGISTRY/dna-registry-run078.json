@@ -1,0 +1,12 @@
+{
+  "run": 78,
+  "artifact_file": "CANON/SOUL/EXTRACT/dna-run78.json",
+  "ledger_id": "HL-490",
+  "rrl_path": "RRL/RRL-78.txt",
+  "blueprint_count": 3,
+  "total_records": 3,
+  "fingerprint": "dna-run78.json",
+  "stale": false,
+  "created_at": "2026-06-06T07:22:00+07:00",
+  "note": "3 blueprints extracted from summary-format RRL-78.txt. PheTrail-run078.json has schema_version."
+}

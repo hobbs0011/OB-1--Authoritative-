@@ -1,0 +1,12 @@
+{
+  "run": 76,
+  "artifact_file": "CANON/SOUL/EXTRACT/dna-run76.json",
+  "ledger_id": "MISSING",
+  "rrl_path": "RRL/RRL-76.txt",
+  "blueprint_count": 0,
+  "total_records": 0,
+  "fingerprint": "dna-run76.json",
+  "stale": true,
+  "created_at": "2026-06-06T07:00:00+07:00",
+  "note": "RRL-76.txt is summary format, not JSONL. No DNA extraction performed. PheTrail-076 created."
+}

@@ -6,8 +6,8 @@
     "starmap": "D:\\OB-1-CANONICAL\\CANON\\STARMAP\\starmap-run079.json",
     "ledger": "D:\\OB-1-CANONICAL\\CANON\\HEAVY-LEDGER\\HL-489.json",
     "pipeline": "D:\\OB-1-CANONICAL\\CANON\\PIPELINE\\pipeline-run079.json",
-    "dna": "D:\\OB-1-CANONICAL\\CANON\\SOUL\\EXTRACT\\dna-run079.json",
-    "keywords": "D:\\OB-1-CANONICAL\\CANON\\SOUL-KEYWORDS\\rfkw-run079.json",
+    "dna": "CANON/SOUL/EXTRACT/dna-run79.json",
+    "keywords": "CANON/SOUL-KEYWORDS/rfkw-run079.txt",
     "seal": null,
     "phetrail": null
   },

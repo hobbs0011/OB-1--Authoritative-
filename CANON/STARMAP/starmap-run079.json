@@ -1,12 +1,11 @@
 {
   "run": 79,
   "rrl_path": "D:\\OB-1-CANONICAL\\RRL\\RRL-079.txt",
-  "ledger_id": "HL-489",
-  "soul_turn_ids": [],
-  "dna_turn_ids": [],
-  "blueprint_locations": "",
+  "ledger_id": "HL-491",
+  "soul_turn_ids": "turn-3,turn-4,turn-5,turn-7",
+  "dna_turn_ids": "seq-1,seq-2,seq-6",
+  "blueprint_locations": "dna-run79.json:seq-1; dna-run79.json:seq-2; dna-run79.json:seq-6",
   "char_count": 1108008,
-  "merkle_hash": "0250B1C9608A44F7",
-  "created_at": "2026-06-06T12:42:03.1743222+07:00",
-  "_placeholder_replacement_note": "soul_turn_ids and dna_turn_ids were placeholder strings ('user-1', 'agent-1'). Replaced with empty arrays [] on 2026-06-06 — no actual turn ID data available for run 079. If RRL-079 turn data is later recovered, populate these arrays from the source."
+  "merkle_hash": "FA68218B985187FF0B6B71E7C22046BB77FDBF9B3E969BB023383FF374D04DFC",
+  "created_at": "2026-06-06T15:02:20.5603358+07:00"
 }

@@ -27,6 +27,7 @@ function Invoke-InApp {
 
 switch ($Command) {
     "doctor" {
+        $failures = @()
         $email = [Environment]::GetEnvironmentVariable("CLOUDFLARE_EMAIL", "User")
         $githubToken = [Environment]::GetEnvironmentVariable("GITHUB_TOKEN", "User")
         $cfKey = [Environment]::GetEnvironmentVariable("CLOUDFLARE_API_KEY", "User")

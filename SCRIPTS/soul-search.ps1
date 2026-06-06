@@ -121,6 +121,15 @@ foreach ($hit in ($hits | Sort-Object Weight -Descending | Select-Object -First 
                 $dnaSnippet = "[no assistant turn contains exact term]"
             }
         } catch { $dnaSnippet = "[DNA parse error]" }
+    } else {
+        # EC-028 DNA GAP HANDLER — verify run number mismatch (e.g., run=7 in wrong file)
+        $wrongRunPath = "$dnaDir\dna-run$run.json"
+        if (Test-Path $wrongRunPath) {
+            $altRunMatch = $rrlText -match "RRL-$run\."
+            if ($altRunMatch) {
+                $dnaSnippet = "[DNA_GAP: dna-run$run.json missing or run metadata mismatch — may reference different run]"
+            }
+        }
     }
 
     $results += [ordered]@{

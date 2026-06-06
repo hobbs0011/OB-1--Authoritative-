@@ -127,6 +127,7 @@ Save to `CANON/PHEROMONES/PheTrail-{RunNumber}.json`.
 2. **L-PHE-2: NEGATIVE DECAY.** Negative pheromones persist for 180 days. They are not deleted; they are archived. A dead end today may be a viable path in 6 months if dependencies change.
 3. **L-PHE-3: VERIFICATION MANDATORY.** A Positive Pheromone is only valid if it includes a `verification` field proving it worked.
 4. **L-PHE-4: TRAIL CONSUMPTION.** Every agent MUST read the latest PheTrail before executing complex logic. Ignoring a Negative Pheromone is a protocol violation.
+5. **L-PHE-5: REGISTRY_INTEGRITY.** Every phetrail MUST cross-check dna-registry entry. Missing registry = REGISTRY_GAP flag.
 
 ---
 

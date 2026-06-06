@@ -1,4 +1,6 @@
 {
+  "schema_version": "2.0",
+  "run": 77,
   "negative": [
     {
       "trail": "boot-stale",
@@ -13,12 +15,11 @@
       "detail": "RRL/DNA/Pipeline were MISSING before fix"
     }
   ],
-  "created": "2026-06-06T07:04:10ICT",
-  "run": 77,
   "positive": [
     {
       "trail": "rrl-77-created",
       "detail": "Captured user prompts for session"
     }
-  ]
+  ],
+  "created": "2026-06-06T07:04:10ICT"
 }

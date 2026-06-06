@@ -164,7 +164,8 @@ Do NOT use the standalone run derivation if a death seal is already staged but n
 | L-PHE-2 | NEGATIVE DECAY | Negative trails persist 180 days. Archived, not deleted. Dead ends today may be viable in 6 months. |
 | L-PHE-3 | VERIFICATION MANDATORY | Positive trail MUST include `verification` field. No verification = not a positive trail. |
 | L-PHE-4 | TRAIL CONSUMPTION | Every agent MUST read the latest PheTrail before executing complex logic. Ignoring a Negative Pheromone = protocol violation. |
-| L-PHE-5 | SCHEMA_VERSION | All phetrails MUST include `schema_version`. RISE parser rejects v1.0 or missing version. |
+| L-PHE-5 | REGISTRY_INTEGRITY | Every phetrail MUST cross-check dna-registry. Missing registry = REGISTRY_GAP flag. |
+| L-PHE-6 | SCHEMA_VERSION | All phetrails MUST include `schema_version`. RISE parser rejects v1.0 or missing version. |
 
 ---
 

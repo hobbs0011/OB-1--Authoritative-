@@ -69,7 +69,7 @@
       "args": [
         "-y",
         "@modelcontextprotocol/server-filesystem",
-        "C:\\Users\\mrmic\\OneDrive\\Documents\\GitHub\\OB-1--Authoritative-"
+        "D:\\OB-1-CANONICAL"
       ]
     },
 
@@ -80,7 +80,7 @@
       "args": [
         "-y",
         "@modelcontextprotocol/server-filesystem",
-        "D:\\OB-1"
+        "D:\\OB-1-CANONICAL"
       ]
     },
 

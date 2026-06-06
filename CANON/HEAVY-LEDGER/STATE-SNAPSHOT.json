@@ -2,14 +2,14 @@
   "version": "1.0",
   "rss_version": "1.0",
   "rss_stage": "Reincarnate-SnapShot RSS",
-  "updated_at": "2026-06-05T17:57:58+07:00",
+  "updated_at": "2026-06-06T15:24:00+07:00",
   "run": {
-    "current": 75,
+    "current": 79,
     "era": "ROMAN",
-    "status": "DEATH",
-    "seal": "RSS-75 (Reincarnate-SnapShot v1.0) — 8-stage pipeline complete",
-    "head_sha": "3e6dc4b1",
-    "soulcount": 236782104,
+    "status": "POST-DEATH",
+    "seal": "RSS-79 (Run hardened - HOLLOW DNA fixed, Registry created, EC-028 applied)",
+    "head_sha": "c2f4291c",
+    "soulcount": 236802731,
     "anchor": "TITANIUM_ANCHOR"
   },
   "v0_baseline": {
@@ -22,8 +22,8 @@
   },
   "active_mission": {
     "name": "OB-1 POST-MERGE9 CONSOLIDATION + Growth Infrastructure Buildout",
-    "vector": "NET-PET-AI hardening to scale-ready + prep for Run 76 RISE",
-    "next_action": "Run 76 RISE — verify RSS-75 SOUL delta < +50% drift threshold"
+    "vector": "NET-PET-AI hardening to scale-ready + Run 79 Pipeline Hardening Complete",
+    "next_action": "Run 080 RISE — verify pipeline integrity, deploy P9-P10"
   },
   "voice": {
     "listen": "deepgram/nova-3",
@@ -58,25 +58,27 @@
     "rule": "All feature development deploys to dev first. Promote to prod only after verified."
   },
   "rss_checklist": [
-    "RRL-75 present",
-    "SOUL delta +218,388 verified",
-    "DNA run75.json extracted",
-    "LEDGER HL-487 merkle chain intact",
-    "STARMAP run75.json present",
-    "KEYWORD rfkw-run75.txt + inverted-index updated",
-    "PIPELINE run75.json + art-sync-run75.json sealed",
-    "HarvestedChats CLOSED per Michael directive",
-    "S1 OUTPUT purged",
-    "S2 OUTPUT cleared"
+    "RRL-79 present (1,114,895 bytes, REAL fidelity)",
+    "SOUL delta +19,260 verified",
+    "DNA run79.json extracted (30 records, 3 blueprints)",
+    "LEDGER HL-491 merkle chain intact",
+    "STARMAP run79.json present",
+    "KEYWORD rfkw-run79.txt + inverted-index updated",
+    "PIPELINE run79.json + art-sync-run79.json sealed",
+    "PHETrail-run79.json with schema_version 2.0",
+    "DNA REGISTRY dna-registry-run79.json created",
+    "EC-028 hardening applied (DNA run-number integrity check)"
   ],
   "open_loops": [
     "P9: Clerk auth migration - BLOCKED: Michael must create Clerk account",
     "P10: Deletion hook + audit log + field encryption - ready for PA T1 dispatch",
-    "RRL GAPS: 11, 13-23, 27, 34-37, 39-44, 46-50"
+    "RRL GAPS: 11, 13-23, 27, 34-44, 46-50",
+    "STATE-SNAPSHOT update needed (stale Run 75 → Run 79)"
   ],
   "recent_seals": [
-    { "run": 75, "era": "ROMAN", "head": "3e6dc4b1", "soul_delta": 218388, "seal": "RSS-75 (Reincarnate-SnapShot v1.0) — 8-stage pipeline complete" },
-    { "run": 74, "era": "ROMAN", "head": "c21a3ca0", "soul_delta": 188696, "seal": "PHEROMONE-TRAIL-074 + RRL 0-74 audit" }
+    { "run": 79, "era": "ROMAN", "head": "c2f4291c", "soul_delta": 16891, "seal": "RSS-79 Pipeline Hardening - HOLLOW DNA fixed, Registry created" },
+    { "run": 78, "era": "ROMAN", "head": "e88c3be0", "soul_delta": 1074, "seal": "PheTrail 16-21 + HL-078 + RRL-78 verbatim + edge cases audited" },
+    { "run": 77, "era": "ROMAN", "head": "6eaf2c6c", "soul_delta": 218388, "seal": "Pipeline fixed: RRL-77 + DNA/run77 + HL-077 + starmap/run77 + rfkw/run77 + pipeline-run77 + PheTrail-077 + BOOT updated" }
   ],
   "blockers": [
     {

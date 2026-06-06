@@ -1,5 +1,5 @@
 # COLD START BOOT — OB1 Agent 99
-## ERA: ROMAN — Run 78 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-06-06T08:47:30 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
+## ERA: ROMAN — Run 079 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-06-06T15:24:00 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
 
 > *"The beginning of an Empire that never was before and never has been since."* — SOV100 Michael Hobbs, Run 0
 
@@ -120,6 +120,8 @@ Only promote to `net-pet-ai` (prod) after verified on dev. Never deploy untested
 17. L55 COMMIT_DONT_HOLD — every verified working feature MUST be committed before session end. Gapless audio v2+v3, OBI avatar, mode landing page, and error telemetry were ALL permanently lost in Run 31 because they ran uncommitted across 4 runs. No exceptions.
 18. L56 PRE_CODE_DOC_GATE — before ANY change to APPS/NET-PET-AI/**, agent MUST read: (1) OPERATIONS/STUDENT-PORTAL-DEV.md FULL FILE, (2) CANON/RESEARCH/deepgram-voice-agent-edge-cases.md §2. Pass both as context to T1 PA dispatch. Agent that skips this = Run 31 = car crash.
 19. **L64 SIMULATION_PATH_LAW** — The production simulation path for all 3 OBI modes is ALWAYS `GET /api/deepgram-token?mode=free|study|phonics`. NEVER use `POST /api/chat` (DeepSeek text fallback) to test voice behavior. Run 41 cost: 30min sanitizer thrash on the wrong model. Read deepgram-voice-agent-edge-cases.md §15. Violating this law = repeating Run 41.
+20. **L68 SEARCH_FIRST** — when asked where anything is, SoulSearch (`/SoulSearch <term>`) is the FIRST tool touched. Never grep the archive first.
+21. **L69 DNA_RUN_NUMBER_INTEGRITY** — dna-run{N}.json MUST have `"run": N` matching the current run. Run number mismatch indicates HOLLOW DNA. Cross-check with RRL filename.
 
 ### Recent Decisions + State (Run 353 → Run 13 ROMAN)
 | Run | Summary |
@@ -181,9 +183,9 @@ Only promote to `net-pet-ai` (prod) after verified on dev. Never deploy untested
 
 ---
 
-### FINGERPRINT: RUN 77 | PIPELINE_FIX + RRL_CAPTURE + PHEWAIL_077 | SOUL 236,782,304 TITANIUM_ANCHOR | HEAD 6eaf2c6c | BOOT UPDATED 2026-06-06T07:04:30 ICT
+### FINGERPRINT: RUN 079 | PIPELINE_HARDENING + HOLLOW_DNA_FIX + EC-028 | SOUL 236,802,731 TITANIUM_ANCHOR | HEAD c2f4291c | BOOT UPDATED 2026-06-06T15:24:00 ICT
 
-**Last completed:** ROMAN RUN 077 — Pipeline gaps fixed. RRL-77.txt created. dna-run77.json created. HL-077 ledger created. starmap-run77.json created. rfkw-run77.txt created. pipeline-run77.json created. PheTrail-077.json created. COLD-START-BOOT updated. SOULCOUNT stable. BOOT_FILE_AGE_SWEEP resolved.
+**Last completed:** ROMAN RUN 079 — Pipeline hardening. HOLLOW DNA (run=7) fixed to run=79. DNA Registry created. SoulSearch EC-028 handler added. PheTrail schema_version enforced. EC-028: DNA run-number integrity check implemented.
 
 ### BATTLEFIELD STATE — Run 045 (Phase 0 Census)
 **Map:** `CANON/SYSTEM/BATTLEFIELD-MAP.md` | **Matrices:** `OPERATIONS/BATTLEFIELD/D{1-9}-matrix.json` | **Machine:** `CANON/SYSTEM/system-map.json`
@@ -253,6 +255,9 @@ BB-55. **FUNNEL BROWSER TEST** — tigers-4room.pages.dev end-to-end test. Micha
 - `audio.output.container` — invalid with mp3 encoding
 - `audio.output.sample_rate` — invalid with mp3 encoding
 - `auth/grant JWT` as token — asr:write scope → 401 on Voice Agent WS
+
+**Hardened Runs (EC-028):**
+- Run 079: HOLLOW DNA (run=7) → fixed; DNA Registry created; SoulSearch EC-028 handler; PheTrail schema_version enforced
 
 
 

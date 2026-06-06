@@ -1,0 +1,12 @@
+{
+  "run": 79,
+  "artifact_file": "CANON/SOUL/EXTRACT/dna-run79.json",
+  "ledger_id": "HL-491",
+  "rrl_path": "RRL/RRL-079.txt",
+  "blueprint_count": 3,
+  "total_records": 7,
+  "fingerprint": "dna-run79.json",
+  "stale": false,
+  "created_at": "2026-06-06T15:02:20+07:00",
+  "note": "HOLLOW DNA fixed - run metadata now correct at 79, 7 prompts captured"
+}
