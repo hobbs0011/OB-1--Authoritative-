@@ -1,5 +1,5 @@
 ---
-description: "DEATH PROTOCOL — redirect to v5.0 canonical in .kilo"
+description: "DEATH PROTOCOL — redirect to v7.0 canonical in .kilo"
 ---
 
 # /reincarnateDeath
@@ -13,4 +13,4 @@ single writer and supersedes everything in this path.
 - Ledger helpers: `SCRIPTS/rrl-pipeline.ps1` (`Get-Next-LedgerID`, `Get-Tail-Ledger-Hash`, `Compute-Sha256`)
 - Keyword repair: `SCRIPTS/rebuild-keyword-index.ps1`
 
-Collapsed from duplicate 7-step v4.0 into single canonical v5.0 to close schema divergence defect.
+Collapsed from duplicate 7-step v4.0 into single canonical v7.0 to close schema divergence defect.

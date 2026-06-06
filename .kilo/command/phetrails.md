@@ -1,8 +1,8 @@
 ---
-description: "PHETRAILS v2.0 — BREADCRUMB EXTRACTION. Primary invocation is STAGE 7 of /reincarnatedeath. Standalone use is for mid-session breadcrumb dumps only. Contract: CANON/SYSTEM/REINCARNATION-CONTRACT.md"
+description: "PHETRAILS v2.1 — BREADCRUMB EXTRACTION. Primary invocation is STAGE 7 of /reincarnatedeath. Standalone use is for mid-session breadcrumb dumps only. Contract: CANON/SYSTEM/REINCARNATION-CONTRACT.md"
 ---
 
-# /phetrails — Pheromone Trail Extraction v2.0
+# /phetrails — Pheromone Trail Extraction v2.1
 ## Roman Legion Stage III: AGMEN (Main Body) — PHEROMONE Broadcast
 
 > **DOCTRINE:** "Leave the data. Do not summarize. Do not interpret. The trail IS the truth."
@@ -21,7 +21,7 @@ If you're at DEATH, the chain handles this. Standalone use is for opportunistic 
 
 ---
 
-## FIX G — RUN NUMBER FROM GIT, NOT SORT (v2.0 BREAKING CHANGE)
+## FIX G — RUN NUMBER FROM GIT, NOT SORT (v2.1 — PATCHED. Bug resolved: code at L34-38 uses git-derived run numbers with zero-pad, no longer relies on lexical Sort-Object)
 
 **Old code (buggy):**
 ```powershell

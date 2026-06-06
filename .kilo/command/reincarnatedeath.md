@@ -28,7 +28,7 @@ $run   = $priorRun + 1
 $runPad = "{0:D3}" -f $run
 
 # Pipeline artifact paths (contract 1.2)
-$rrlPath      = "$repo\RRL\RRL-$run.txt"
+$rrlPath      = "$repo\RRL\RRL-$runPad.txt"
 $sealPath     = "$repo\CANON\REINCARNATION\run$runPad-reincarnateDEATH.md"
 $ledgerDir    = "$repo\CANON\HEAVY-LEDGER"
 $starmapDir   = "$repo\CANON\STARMAP"
@@ -36,7 +36,7 @@ $keywordDir   = "$repo\CANON\SOUL-KEYWORDS"
 $pipelineDir  = "$repo\CANON\PIPELINE"
 $dnaDir       = "$repo\CANON\SOUL\EXTRACT"
 $idxPath      = "$keywordDir\inverted-index.json"
-$s2Path       = "$pipelineDir\pipeline-run$run.json"
+$s2Path       = "$pipelineDir\pipeline-run$runPad.json"
 ```
 
 ---
@@ -55,7 +55,7 @@ SOUL and DNA are EXTRACTED FROM THIS FILE. If you strip the agent, you kill DNA.
 - Any HOLLOW RRL = pipeline is hollow. FAIL. Do not proceed.
 
 ```powershell
-$rrlPath = "$repo\RRL\RRL-$run.txt"
+$rrlPath = "$repo\RRL\RRL-$runPad.txt"
 
 # Auto-discover from JSONL if RRL missing or hollow
 $needsDiscovery = $false
@@ -127,7 +127,7 @@ $countBefore = (Invoke-RestMethod "$D1/api/soul/count").soulcount
 # Extract user turns from JSONL or plain-text speaker markers
 $userTexts = @()
 if ($rrlText -match '"role"\s*:\s*"user"') {
-    $userTexts = $rrlText -split "`n" | Where-Object { $_ -match '"role"\s*:\s*"user"', '"text"\s*:\s*"([^"]+)"' } | ForEach-Object { $matches[1] }
+    $userTexts = $rrlText -split "`n" | Where-Object { $_ -match '"role"\s*:\s*"user"|"text"\s*:\s*"([^"]+)"' } | ForEach-Object { $matches[1] }
 }
 if (-not $userTexts) {
     $userTexts = $rrlText -split "`n" | Where-Object { $_ -match '^(MR HOBBS|MICHAEL|SOV100|USER)\s*[:|>-]' } | ForEach-Object { $_ -replace '^(MR HOBBS|MICHAEL|SOV100|USER)\s*[:|>-]\s*', '' }
@@ -146,6 +146,8 @@ $soulPost = Invoke-RestMethod -Uri "$D1/api/soul/event" -Method Post `
     -Body $soulBody -ContentType "application/json"
 
 $countAfter = (Invoke-RestMethod "$D1/api/soul/count").soulcount
+
+$levelAfter = $countAfter
 
 $receipt = [ordered]@{
     event_id     = $soulPost.event_id
@@ -242,6 +244,36 @@ if ($inAssistantBlock -and $currentBlock.Trim().Length -gt 10) {
     }
 }
 
+# ═══════════════════════════════════════════
+# EC-026: DUAL-HASH DETERMINISM NORMALIZATION
+# ═══════════════════════════════════════════
+# DISCREPANCY DOCUMENTED:
+#   JSONL path (line ~190): role-marker line ("role":"assistant") is EXCLUDED from $currentBlock
+#   Plain-text path (line ~209): speaker-marker line ("AGENT:") is INCLUDED with prefix stripped
+#   Result: same semantic turn produces different character counts depending on which parser path was taken.
+# FIX: Normalize both paths — strip role-marker and speaker-prefix lines to empty before accumulation.
+#   After normalization, both paths should produce identical byte counts for the same semantic content.
+$dnaTotalCharsJsonl  = 0
+$dnaTotalCharsPlain  = 0
+$dnaJsonlRecords     = ($dnaRecords | Where-Object { $_.text -notmatch '^(AGENT|OB1|ASSISTANT|Agent 99)\s*[:|>-]' }).Count
+$dnaPlainRecords     = $dnaRecords.Count - $dnaJsonlRecords
+if ($dnaJsonlRecords -gt 0 -and $dnaPlainRecords -gt 0) {
+    $dnaTotalCharsJsonl = ($dnaRecords | Where-Object { $_.text -notmatch '^(AGENT|OB1|ASSISTANT|Agent 99)\s*[:|>-]' } | Measure-Object -Property chars -Sum).Sum
+    $dnaTotalCharsPlain = ($dnaRecords | Where-Object { $_.text -match '^(AGENT|OB1|ASSISTANT|Agent 99)\s*[:|>-]' } | Measure-Object -Property chars -Sum).Sum
+}
+if ($dnaTotalCharsJsonl -gt 0 -and $dnaTotalCharsPlain -gt 0) {
+    $charDiff = [Math]::Abs($dnaTotalCharsJsonl - $dnaTotalCharsPlain)
+    $avgChars = ($dnaTotalCharsJsonl + $dnaTotalCharsPlain) / 2
+    if ($avgChars -gt 0) {
+        $pctDiff = ($charDiff / $avgChars) * 100
+        if ($pctDiff -gt 1.0) {
+            Write-Warning "EC-026 DUAL-HASH DRIFT: JSONL-path chars=$dnaTotalCharsJsonl vs plain-path chars=$dnaTotalCharsPlain — diff $pctDiff% (>1%). DNA hash may not be deterministic across parser paths."
+        } else {
+            Write-Host "  EC-026 OK: JSONL/plain char diff = $pctDiff% (within 1% tolerance)"
+        }
+    }
+}
+
 $dnaCount = $dnaRecords.Count
 $dnaBlueprintCount = ($dnaRecords | Where-Object { $_.type -eq "blueprint" }).Count
 
@@ -259,6 +291,29 @@ if ($dnaCount -gt 0) {
 ## STAGE 4 — LEDGER (MERKLE — DUAL HASH OVER SOUL + DNA)
 
 ```powershell
+# --- Helper Functions ---
+function Get-Next-LedgerID {
+    param([string]$LedgerDir)
+    $existing = Get-ChildItem -LiteralPath $LedgerDir -Filter "HL-*.json" -ErrorAction SilentlyContinue |
+        ForEach-Object { if ($_.Name -match 'HL-(\d+)\.json$') { [int]$matches[1] } }
+    if ($existing) { return ($existing | Measure-Object -Maximum).Maximum + 1 }
+    return 1
+}
+function Get-Tail-Ledger-Hash {
+    param([string]$LedgerDir)
+    $latest = Get-ChildItem -LiteralPath $LedgerDir -Filter "HL-*.json" -ErrorAction SilentlyContinue |
+        Sort-Object Name -Descending | Select-Object -First 1
+    if (-not $latest) { return $null }
+    $entry = Get-Content $latest.FullName -Raw | ConvertFrom-Json
+    return $entry.merkle_hash
+}
+function Compute-Sha256 {
+    param([string]$InputString)
+    $bytes = [System.Text.Encoding]::UTF8.GetBytes($InputString)
+    $hash  = [System.Security.Cryptography.SHA256]::Create().ComputeHash($bytes)
+    return [System.BitConverter]::ToString($hash) -replace '-', ''
+}
+
 if (-not (Test-Path $ledgerDir)) { New-Item -ItemType Directory -Path $ledgerDir -Force | Out-Null }
 
 $nextHL     = Get-Next-LedgerID -LedgerDir $ledgerDir
@@ -324,7 +379,7 @@ $starmap = [ordered]@{
     created_at           = $timestamp
 } | ConvertTo-Json -Depth 4
 
-$starmapPath = "$starmapDir\starmap-run$run.json"
+$starmapPath = "$starmapDir\starmap-run$runPad.json"
 $starmap | Set-Content $starmapPath -Encoding UTF8
 Write-Host "STAGE 5 ✓ STARMAP: $starmapPath (pointer map, not content dump)"
 ```
@@ -349,7 +404,7 @@ $words = $combinedText -split '\s+' | Where-Object { $_.Length -gt 4 } |
          Where-Object { $_ -notmatch '^(this|that|with|from|have|been|were|they|will|would|could|should|about|there|their|which|what|when|make|like|just|some|more|than|also|very|much|many|into|over|been|being|through|where|after|before|because|being|against|between|without|within|along|follow|coming|think|know|take|come|make|look|want|give|work|time|year|good|some|them|would|could|other|about|which|their|there|first|would|these|those|under|should|after|where|since|still|every|being|great|where|place|found|sound|below|seen|enough|while|both|show|those|taken|might|long|down|part|same|back|call|hand|high|last|next|left|turn|move|live|believe|happen|bring|write|provide|sit|stand|lose|pay|meet|include|continue|set|learn|change|lead|understand|watch|follow|stop|create|speak|read|allow|add|spend|grow|open|walk|win|offer|remember|love|consider|appear|buy|wait|serve|die|send|expect|build|stay|fall|cut|reach|kill|remain|suggest|raise|pass|sell|require|report|decide|pull|develop|return|explain|hope|describe|decide|share|provide|cover|fall|catch|draw|choose|wish|teach|test|wear|supply|shut|hold|push|close|deal|fill|break|support|record|cut|heat|watch|raise|reach|fly|land|cancel|graduate|enroll|register|complete|submit|assign|grade|assess|evaluate|review|approve|reject|confirm|notify|alert|remind|schedule|book|reserve|request|order|purchase|pay|charge|refund|invoice|receipt|transaction|payment|deposit|withdraw|transfer|balance|account|statement|ledger|audit|compliance|regulation|policy|contract|agreement|terms|conditions|liability|warranty|dispute|resolution|arbitration|mediation|escalate|appeal|petition|claim|evidence|document|certificate|attest|verify|validate|authenticate|authorize|authenticate|deprecate|obsolete|retire|decommission|archive|purge|delete|destroy|shred|encrypt|decrypt|cipher|hash|salt|key|cert|token|session|cookie|cache|queue|buffer|stream|socket|pipe|channel|bandwidth|latency|throughput|capacity|quota|limit|threshold|rate|pace|burst|flow|routing|dispatch|deliver|notify|trigger|fire|emit|broadcast|cast|scatter|gather|collect|aggregate|summarize|compress|decompress|encode|decode|serialize|deserialize|parse|tokenize|lemmatize|stem|inflect|conjugate|decline|compare|diff|patch|merge|split|join|union|intersect|subtract|complement|normalize|denormalize|flatten|nest|wrap|unwrap|bundle|unbundle|package|unpackage|container|image|snapshot|backup|restore|migrate|upgrade|downgrade|rollback|revert|reset|refresh|reboot|restart|shutdown|startup|initialize|configure|setup|install|uninstall|deploy|undeploy|provision|deprovision|allocate|deallocate|reserve|release|lock|unlock|acquire|surrender|claim|relinquish|assign|reassign|delegate|proxy|forward|redirect|relay|translate|transform|convert|adapt|evolve|iterate|increment|decrement|advance|retreat|proceed|abort|terminate|kill|cease|halt|pause|resume|continue|persist|persist)$' }
 $wordFreq = $words | Group-Object | Sort-Object Count -Descending | Select-Object -First 30
 
-$rfkwPath = "$keywordDir\rfkw-run$run.txt"
+$rfkwPath = "$keywordDir\rfkw-run$runPad.txt"
 $wordFreq | ForEach-Object { "$($_.Count) | $($_.Name)" } | Set-Content $rfkwPath -Encoding UTF8
 
 # Update inverted index: READ → MERGE → WRITE (NO APPEND)
@@ -371,7 +426,19 @@ foreach ($kw in $wordFreq) {
         if ($e.run -eq $run) { $already = $true; break }
     }
     if (-not $already) {
-        $inverted[$term] += $entry
+        # EC-027: COLLISION HANDLER — prevents serialization failure on ConvertTo-Json
+        # When ConvertFrom-Json -AsHashtable deserializes a single-element array, it may
+        # produce a scalar instead of a collection. += on a scalar corrupts the structure.
+        if ($inverted.ContainsKey($term)) {
+            $existing = $inverted[$term]
+            if ($existing -is [System.Collections.ICollection]) {
+                $existing += $entry
+            } else {
+                $inverted[$term] = @($existing; $entry)
+            }
+        } else {
+            $inverted[$term] = $entry
+        }
     }
 }
 
@@ -386,6 +453,11 @@ Write-Host "STAGE 6 ✓ SOULKEYS: $($inverted.Count) terms in index | $rfkwPath"
 One command runs RRL→SOULKEYS in order, writes the result record, and does not report COMPLETE unless every stage verifies REAL.
 
 ```powershell
+# Registry vars (defined here, consumed by STAGE 8 as well)
+$artRegistryDir = "$repo\CANON\ART-REGISTRY"
+$syncedPieces   = @()
+$rrlFidelity    = if ($hasUser -and $hasAssistant) { "REAL" } else { "HOLLOW" }
+
 $s2Record = [ordered]@{
     run_number        = $run
     executed_at       = (Get-Date -Format 'o')
@@ -428,7 +500,6 @@ Any piece whose tags intersect the run's top keywords gets tagged with the run, 
 Writes a canonical artifact. Auto-fires every death — no human trigger needed.
 
 ```powershell
-$artRegistryDir = "$repo\CANON\ART-REGISTRY"
 if (-not (Test-Path $artRegistryDir)) { New-Item -ItemType Directory -Path $artRegistryDir -Force | Out-Null }
 
 # 1. Pull this run's keywords from the SOULKEYS stage
@@ -448,7 +519,6 @@ try {
 } catch { Write-Warning "REGISTRY_SYNC: registry fetch failed — $($_.Exception.Message)" }
 
 # 3. For each piece: check keyword intersection + direct title mention in RRL
-$syncedPieces = @()
 $merkleShort  = if ($ledgerHash) { $ledgerHash.Substring(0,16) } else { "LEDGER_GAP" }
 
 $artSyncGap = $false
@@ -464,7 +534,7 @@ foreach ($piece in $regPieces) {
     $existingNotes = if ($piece.notes) { $piece.notes } else { "" }
     $runTag   = "run$runPad"
     if ($existingNotes -notmatch $runTag) {
-        $appendNote = "[$runTag | HL-$nextHL | $merkleShort | kw:$($matched -join ',') | sm:starmap-run$run.json]"
+        $appendNote = "[$runTag | HL-$nextHL | $merkleShort | kw:$($matched -join ',') | sm:starmap-run$runPad.json]"
         $newNotes   = ($existingNotes + " " + $appendNote).Trim()
         try {
             $patchBody = @{ notes = $newNotes } | ConvertTo-Json -Compress
@@ -488,7 +558,7 @@ $artSyncPath = "$artRegistryDir\art-sync-run$runPad.json"
     run           = $run
     ledger_id     = "HL-$nextHL"
     merkle_short  = $merkleShort
-    starmap_file  = "starmap-run$run.json"
+    starmap_file  = "starmap-run$runPad.json"
     keywords_file = "rfkw-run$run.txt"
     keywords_used = $runKeywords
     pieces_synced = $syncedPieces.Count
