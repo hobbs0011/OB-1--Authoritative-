@@ -425,6 +425,23 @@
 
 ---
 
+## RUN 082-083 ADDITIONS (2026-06-07)
+
+### BB-61 ! AgentWs Double-Reconnect Race Fix — DEPLOY TO PROD
+- Status: OPEN — deployed to dev only (version 6c37b0ef-bd0c-453a-8291-90e6750087b8)
+- What: confirmLandingMode() and mode-switch close() called agentWs.close() without incrementing agentWsId first. Zombie onAgentDrop handler passed the `agentWsId !== myId` guard and fired its own reconnect, creating a double-reconnect race.
+- Fix: `agentWsId++; const _old = agentWs; agentWs = null;` before close at both locations (~line 1910 + ~line 1964 in chat.js). Committed in 4889b66c area.
+- Next: `npx wrangler deploy --env prod` after smoke-test on dev URL.
+- File: APPS/NET-PET-AI/public/chat.js
+
+### BB-62 ! Kilo Free Auto Mode — MISSING (Run 082 RRL audit)
+- Status: OPEN — identified as missed promise in RRL-38, no BB entry existed before now
+- What: Kilo should have a "free auto" mode that routes cheaply without manual model selection. RRL-38 reference was never actioned.
+- Fix: Audit kilo.json for --auto flag behavior. If model routing is not free-tier-first, configure default auto model = cheapest free provider. Verify kilo.json providers list.
+- File: .kilo/kilo.json
+
+---
+
 ## SIGNAL: MOST WANTED (NET's Most Wanted — Updated 2026-05-31 Run 35)
 
 1. ✅ BB-33 Gapless audio v2+v3 FIXED

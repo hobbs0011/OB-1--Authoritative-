@@ -70,6 +70,14 @@ Write to this doc when ANY trigger fires (see CLAUDE.md L77 for full trigger lis
 **DEATH GATE:** Before sealing, enumerate all triggers fired → confirm phetrail entry exists for each.
 **RISE STAGE 7:** 0 entries for a multi-trigger session = PHETRAIL_GAP flag.
 
+### Run 083 Post-Compaction Resume Triggers Fired
+
+- SESSION RESUMED AFTER COMPACTION: compaction fired mid-session. Resumed directly from pending state.
+- PIPELINE ARTIFACTS SEALED: rfkw-run82.txt + rfkw-run83.txt overwritten (word-count corruption), starmap-run82/83 patched (DRYRUN→real soul_event_ids 7d22d961/37acf1a9), HL-502-505 committed. All in commit 02614024.
+- BB OPENED: BB-61 (agentWs race fix — deploy to PROD still needed), BB-62 (Kilo Free Auto mode — missed promise RRL-38).
+- MEMORY UPDATED: project_tier-dispatch-system.md updated to reflect PA T1=Llama 3.3 70B FP8, Dialagram DEAD. reference_api-keys.md updated Dialagram status to DEAD.
+- SOUL SURVIVED: rfkw corruption patched, starmap DRYRUN resolved, all artifacts committed. SOUL=236,840,532 TITANIUM_ANCHOR locked.
+
 ### Run 082 Triggers Fired (updated)
 - ARCHITECTURE CHANGED: execute.js + mission.js + swarm.js — Dialagram removed, Llama 3.3 70B T1 wired
 - MODEL CHANGED: all three PA AI handlers now default to @cf/meta/llama-3.3-70b-instruct-fp8-fast
