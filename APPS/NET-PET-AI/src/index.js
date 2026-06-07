@@ -942,14 +942,15 @@ async function handleAPI(path, request, env, url) {
     }
 
     try {
-      const [rawProfile, rawLang, rawVocab, rawArc, rawMemory, rawPhonics, rawSessionHistory] = await Promise.all([
+      const [rawProfile, rawLang, rawVocab, rawArc, rawMemory, rawPhonics, rawSessionHistory, rawSrsData] = await Promise.all([
         env.NET_PET_KV.get("student_profile_" + studentId),
         env.NET_PET_KV.get("lang:" + studentId),
         env.NET_PET_KV.get("vocab_list_" + studentId),
         env.NET_PET_KV.get("vocab_arc_" + studentId),
         env.STUDENT_MEMORY ? env.STUDENT_MEMORY.get(`mem:${studentId}`) : Promise.resolve(null),
         sessionMode === 'phonics' ? env.NET_PET_KV.get("phonics_progress_" + studentId) : Promise.resolve(null),
-        env.NET_PET_KV.get("session_history_" + studentId)
+        env.NET_PET_KV.get("session_history_" + studentId),
+        env.NET_PET_KV.get("srs_data_" + studentId)
       ]);
       // Raw API key — auth/grant asr:write scope is insufficient for Voice Agent WS (401)
       // Mint a short-lived Deepgram key via Keys API with usage:write scope (30s TTL)
@@ -999,6 +1000,19 @@ async function handleAPI(path, request, env, url) {
           const vocabStr = lastSessionVocab.length > 0 ? " Vocab practiced: " + lastSessionVocab.map(w => `"${w}"`).join(", ") + "." : "";
           lastSessionNotes = `LAST SESSION NOTES: Student had a session ${when} (${last.turns || 0} speaking turns).${vocabStr}`;
         }
+      }
+    } catch (_) {}
+
+    // SRS: compute which vocab words are due for review this session
+    let dueVocab = [];
+    try {
+      if (rawSrsData) {
+        const srsMap = JSON.parse(rawSrsData);
+        const now = Date.now();
+        dueVocab = Object.values(srsMap)
+          .filter(w => (w.next_review ?? 0) <= now)
+          .sort((a, b) => (a.next_review ?? 0) - (b.next_review ?? 0))
+          .slice(0, 5);
       }
     } catch (_) {}
 
@@ -1072,6 +1086,8 @@ speak: {
         }
       };
       if (lastSessionNotes) settings.agent.think.prompt += "\n\n" + lastSessionNotes;
+      const vocabDueCtx = buildVocabContext(dueVocab);
+      if (vocabDueCtx) settings.agent.think.prompt += "\n\n" + vocabDueCtx;
       const MAX_PROMPT = 24000;
       const PROMPT_WARN = 20000;
       if (settings.agent.think.prompt.length > PROMPT_WARN) {
@@ -1101,13 +1117,23 @@ speak: {
     const { studentId, word, meaning_vi } = body;
     if (!studentId || !word) return addCors(json({ error: "studentId and word required" }, 400), request);
     try {
-      const raw = await env.NET_PET_KV.get(`vocab_list_${studentId}`);
+      const [raw, rawSrs] = await Promise.all([
+        env.NET_PET_KV.get(`vocab_list_${studentId}`),
+        env.NET_PET_KV.get(`srs_data_${studentId}`)
+      ]);
       const list = raw ? JSON.parse(raw) : [];
       if (!list.find(w => w.word === word)) {
         list.push({ word, meaning_vi: meaning_vi || "", ts: Date.now() });
       }
-      await env.NET_PET_KV.put(`vocab_list_${studentId}`, JSON.stringify(list.slice(-500)));
-      return addCors(json({ ok: true, word }), request);
+      // SRS write-back: student used this word successfully → grade 4 (good recall)
+      const srsMap = rawSrs ? JSON.parse(rawSrs) : {};
+      const existing = srsMap[word] || { word, interval: 1, repetitions: 0, ease_factor: 2.5, next_review: 0 };
+      srsMap[word] = { ...existing, ...computeNextReview(existing, 4), word };
+      await Promise.all([
+        env.NET_PET_KV.put(`vocab_list_${studentId}`, JSON.stringify(list.slice(-500))),
+        env.NET_PET_KV.put(`srs_data_${studentId}`, JSON.stringify(srsMap))
+      ]);
+      return addCors(json({ ok: true, word, nextReview: srsMap[word].next_review }), request);
     } catch (err) {
       return addCors(json({ error: err.message }, 500), request);
     }
