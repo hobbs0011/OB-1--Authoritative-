@@ -304,10 +304,11 @@
 ### BB-48 !! BB-30/31 AGENT99.md + RISE.md stale refs — DONE Run 34
 - Status: DONE (Run 34 confirmed — /PhoenixCoder → /Centurion-Code, phoenix-architecti URL updated)
 
-### BB-49 ! PA T1 Dialagram Timeout — OPEN (Run 35)
-- Status: OPEN — BLOCKING all PA T1 dispatches
-- What: Dialagram API consistently timing out at 30s. Even bare minimum request fails. PA status shows T1 "✓" (key is set) but Dialagram endpoint not responding.
-- Fix: Check Dialagram platform status. Debug with direct curl to dialagram.me/router/v1/chat/completions. If persistent outage, evaluate switching T1 to an alternative provider (Groq Qwen? OpenRouter?) until Dialagram recovers.
+### BB-49 ! PA T1 Dialagram Timeout — DONE (Run 082)
+- Status: DONE — Dialagram is dead. Resolved by removing Dialagram branch entirely.
+- T1 is now @cf/meta/llama-3.3-70b-instruct-fp8-fast (CF Workers AI, free, 160ms, verified).
+- execute.js + mission.js + swarm.js all upgraded. D1 audit trail restored (ip col fix).
+- Deployed: version 3640354e live.
 
 ### BB-50 !! Keyword Search System Overhaul — DONE (audited Run 054)
 
