@@ -116,6 +116,13 @@ If Tier 1 fails → escalate to Tier 2. Print:
 - **L56 PRE_CODE_DOC_GATE** — Any NET-PET-AI dispatch: run `context-bundle.ps1 -TaskType netpetai` first. See `CANON/SYSTEM/MANDATORY-READS.md` for the full registry.
 - **L78 PA_DO_ALL** — Anything and everything that can be handed off to PA, must be. OB-1 routes only — PA executes. If PA cannot handle a task, UPDATE PA first (fix execute.js, improve system prompt, add context) before executing inline. Inline execution is the failure mode. Token conservation is doctrine. This is a SOUL DIRECTIVE (Run 082).
 
+  **Edge cases — when PA truly cannot be used (document in phetrail, do not silently inline):**
+  - PA empty patch: log DISPATCH_EMPTY trigger → escalate to Kilo T3 (Opus) via kilo chat, NOT inline
+  - PA down: check /api/status → if CF Workers AI down → HALT, fix PA first (L58)
+  - Context >40k chars: split into /api/mission steps, not inline
+  - Architecture judgment call: escalate to Kilo T3 Opus, document why PA couldn't handle
+  - PA produces buggy code: note in phetrail as negative trail → fix in next dispatch
+
 - **L77 MID_SESSION_PHETRAIL** — Leave pheromone trail hints as you go. Do NOT wait for DEATH. The trail is the truth that survives compaction.
 
   **Triggers (any of these fires = write phetrail NOW):**
@@ -140,7 +147,14 @@ If Tier 1 fails → escalate to Tier 2. Print:
   **Enforcement:**
   - **DEATH GATE (§7):** Before DEATH seals, enumerate every trigger that fired this session. Confirm a phetrail entry exists for each one. Missing entries = write them inline before proceeding.
   - **RISE STAGE 7:** Audit phetrail entry count vs triggers fired. If phetrail has 0 entries for a multi-trigger session = PHETRAIL_GAP flag, escalate to Michael.
-  - **Mid-session:** After every major tool sequence, ask: "did a trigger fire?" If yes, write to `phetrail-execute.md` or relevant domain phetrail doc immediately. Do not batch.
+  - **Mid-session:** After every major tool sequence, ask: "did a trigger fire?" If yes, write to `phetrail-execute.md` (PA work) or `OPERATIONS/phetrail-{domain}.md` immediately. Do not batch.
+
+  **Edge cases — where L77 enforcement breaks (harden against these):**
+  - Compaction fires DURING a trigger write → trail is lost. Mitigation: write trail BEFORE tool call, not after.
+  - Multiple triggers fire simultaneously → write ALL of them in one Edit call, not sequentially.
+  - Domain phetrail file missing → fallback: write to `OPERATIONS/phetrail-emergency.md`, create domain file next.
+  - Edit tool fails silently → commit what was written, note the gap in the death seal §4.
+  - Context too short to write trail before DEATH → §7 takes priority: write compressed trail in death seal itself.
 
 ## OB-1 Operating Rules (from AGENTS.md)
 
