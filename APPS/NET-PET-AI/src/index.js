@@ -1436,12 +1436,20 @@ speak: {
       if (langVal) lang = langVal;
     } catch (_) {}
 
+    // Read homework notes
+    let homeworkNotes = "";
+    try {
+      const hwRaw = await env.NET_PET_KV.get(`student:${studentId}:homework_notes`);
+      if (hwRaw) homeworkNotes = hwRaw;
+    } catch (_) {}
+
     return addCors(json({
       ok: true,
       studentId,
       profile: profile || null,
       streak,
       lang,
+      homework_notes: homeworkNotes,
       source: profile ? "kv" : "empty"
     }), request);
   }
@@ -1455,6 +1463,10 @@ speak: {
       if (!idCheck.valid) return addCors(json({ error: idCheck.error }, 400), request);
       const patch = body.patch || {};
       if (Object.keys(patch).length === 0) return addCors(json({ error: "patch required" }, 400), request);
+      // Persist homework_notes separately if provided
+      if (body.homework_notes !== undefined) {
+        await env.NET_PET_KV.put(`student:${studentId}:homework_notes`, String(body.homework_notes).slice(0, 5000));
+      }
       // Read existing profile, merge patch, write back
       let profile = {};
       try {
@@ -4503,9 +4515,14 @@ async function handleLeadCapture(body, env) {
   if (!name && !email && !phone) return json({ error: "At least one contact field required (name, email, or phone)" }, 400);
 
   const leadId = `lead-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+  let emailHash = "";
+  if (email) {
+    const hashBuffer = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(email));
+    emailHash = Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, "0")).join("");
+  }
 
   if (env.LEDGER) {
-    const payload = JSON.stringify({ name, email, phone, source: "assessment_landing", ts: Date.now() });
+    const payload = JSON.stringify({ name, email_hash: emailHash, phone, source: "assessment_landing", ts: Date.now() });
     appendToLedger(leadId, "lead_capture", payload, env).catch(() => {});
   }
 

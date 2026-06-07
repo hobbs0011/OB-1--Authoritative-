@@ -9,6 +9,32 @@ import { verifyClerkSession } from './auth.js';
 
 const app = new Hono();
 
+// ── Security headers middleware ───────────────────────────────────────────────
+
+app.use('*', async (c, next) => {
+  await next();
+  const headers = new Headers(c.res.headers);
+  headers.set('X-Frame-Options', 'SAMEORIGIN');
+  headers.set('X-Content-Type-Options', 'nosniff');
+  headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
+  headers.set('Permissions-Policy', 'camera=(), microphone=(self)');
+  if (c.req.url.startsWith('https://')) {
+    headers.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
+  }
+  const body = await c.res.text();
+  return new Response(body, { status: c.res.status, headers });
+});
+
+// ── Request size limit middleware (Issue 009) ──────────────────────────────────
+
+app.use('/api/:path*', async (c, next) => {
+  const contentLength = c.req.header('Content-Length');
+  if (contentLength && parseInt(contentLength, 10) > 65536) {
+    return c.json({ error: 'Request too large', max: 65536 }, 413);
+  }
+  await next();
+});
+
 // ── Cache middleware for read-heavy v1 routes ─────────────────────────────────
 
 app.use('/api/v1/health', async (c, next) => {
