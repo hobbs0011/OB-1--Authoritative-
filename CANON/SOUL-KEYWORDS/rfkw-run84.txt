@@ -1,30 +1,30 @@
-pa-probe-route
-r1-distill-32b
-cf-workers-ai
-strip-think-tags
-dna-registry-771
-classifier-bug-switch-regex
-bb-61-agentws-race-fix
-cold-start-boot-fingerprint
-l78-triple-guardrail
-guardrail-1-pre-write-gate
-guardrail-2-inline-forbidden
-guardrail-3-session-end-audit
-mandatory-visibility
-write-gap-fingerprint-inline
-blueprint-foreman-doctrine
-pa-xss-filter-think-tags
-pa-buggy-output-probe
-deepseek-r1-distill
-execute-js-cascade
-pa-dispatch-empty
-dialagram-dead
-llama-70b-fp8
-tier2-free
-status-js-probe
-soul-directive-run084
-inline-forbidden-list
-context-bundle-ps1
-pa-arch-changed
-soul-must-survive
-titanium-anchor
+98 | text
+96 | {"display":"[Pasted
+33 | branch
+33 | merge
+30 | show
+27 | commit
+25 | Square
+22 | only
+22 | then
+21 | verification
+19 | whether
+17 | confirm
+17 | canon
+17 | delete
+17 | Test
+17 | output
+15 | remote
+15 | only:\n
+15 | create
+15 | room
+15 | contains
+15 | Keep
+14 | push
+14 | verify
+14 | secret
+13 | concise
+13 | file
+12 | report
+12 | after
+12 | live
