@@ -656,17 +656,24 @@ async function handleAPI(path, request, env, url) {
   if (path === "/api/admin/student-activity" && method === "GET") {
     const students = ["quy-bluetech", "mai-tram-bluetech", "huong-bluetech"];
     const results = await Promise.all(students.map(async (sid) => {
-      const raw = await env.NET_PET_KV.get("student_profile_" + sid);
+      const [raw, histRaw] = await Promise.all([
+        env.NET_PET_KV.get("student_profile_" + sid),
+        env.NET_PET_KV.get("session_history_" + sid),
+      ]);
       const profile = raw ? JSON.parse(raw) : {};
-      const streakRaw = await env.NET_PET_KV.get("student_streak_" + sid);
-      const streak = streakRaw ? JSON.parse(streakRaw) : {};
+      const history = histRaw ? JSON.parse(histRaw) : [];
+      const hist = Array.isArray(history) ? history : [];
+      const weekAgo = Date.now() - 7 * 24 * 60 * 60 * 1000;
+      const weeklyCount = hist.filter(s => s.ts > weekAgo).length;
+      const lastSession = hist.length ? new Date(hist[hist.length - 1].ts).toISOString() : null;
       return {
         studentId: sid,
         name: profile.name || profile.fullName || sid,
         level: profile.level || "A1",
-        currentStreak: streak.currentStreak || profile.streak?.currentStreak || 0,
-        lastSession: streak.lastSessionDate || profile.streak?.lastSessionDate || null,
-        totalSessions: streak.totalSessions || profile.totalSessions || 0,
+        currentStreak: profile.streak?.currentStreak || 0,
+        lastSession,
+        totalSessions: hist.length,
+        weeklyCount,
       };
     }));
     return addCors(json({ students: results, generatedAt: new Date().toISOString() }), request);

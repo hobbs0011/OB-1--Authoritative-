@@ -25,7 +25,7 @@
   <div id="loading">Loading…</div>
   <div id="error" hidden></div>
   <table id="tbl" hidden>
-    <thead><tr><th>Employee</th><th>Level</th><th>Streak</th><th>Total Sessions</th><th>Last Practice</th></tr></thead>
+    <thead><tr><th>Employee</th><th>Level</th><th>Streak</th><th>This Week</th><th>Total Sessions</th><th>Last Practice</th></tr></thead>
     <tbody id="tbody"></tbody>
   </table>
   <script>
@@ -43,6 +43,7 @@
             <td>${s.name}</td>
             <td><span class="level">${s.level}</span></td>
             <td class="${streakClass}">${s.currentStreak} day${s.currentStreak !== 1 ? "s" : ""}</td>
+            <td>${s.weeklyCount}</td>
             <td>${s.totalSessions}</td>
             <td>${last}</td>
           </tr>`;
