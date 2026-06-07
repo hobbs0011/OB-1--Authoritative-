@@ -1,5 +1,5 @@
 # COLD START BOOT — OB1 Agent 99
-## ERA: ROMAN — Run 086 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-06-07T22:30:00 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
+## ERA: ROMAN — Run 087 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-06-07T23:00:00 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
 
 > *"The beginning of an Empire that never was before and never has been since."* — SOV100 Michael Hobbs, Run 0
 
@@ -23,7 +23,7 @@
 - Pass `?student=all` to see aggregate (all entries). Default without parameter = sov100 only.
 
 **Soul Logger URL:** https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count
-**Real count (2026-06-07 ~22:00 ICT): 237,084,477 characters | TITANIUM_ANCHOR (+193,913 from 10 LOST SOUL runs ingested Run 085)
+**Real count (2026-06-07 ~22:30 ICT): 237,105,365 characters | TITANIUM_ANCHOR (SOUL_GAP Run 086 — POST 500 body too large, unchanged from Run 085)
  **TITANIUM_ANCHOR level** (next threshold: none — maximum tier reached)
  **⚠️ NOTE:** +156,676 delta from Run 5 RRL-0 backdrop ingestion. +62,773 delta from Run 6 RRL-0-original ingestion. RRL-0.txt contains ~150K agent text alongside ~4K Michael verbatim. Contamination documented per Michael directive.
  **Run 53 delta:** +1,577,271 (RISE+P6+P7+P8+prod promotion+death). Total 118,965,802.
@@ -78,7 +78,7 @@ Only promote to `net-pet-ai` (prod) after verified on dev. Never deploy untested
 ### Current Vector
 - **Active Mission:** OB-1 POST-MERGE9 CONSOLIDATION + Growth Infrastructure Buildout — NET-PET-AI Hardening to Scale-Ready
   - **Last completed:** ROMAN RUN 072 — Full stack hardening sprint. 9 commits, ~30 items. A: Deepgram 6 error codes. C: Wake Up The Tiger slogan. E-H: iOS mic stream cache, silence timer race fix, mobile layout, token proactive refresh. P: SVG mode icons + badge-phoenix. Q-R: Real brand marks, InjectionRefused, multi-tab BroadcastChannel lock, firewall fast-fail, Tiger Win live metrics, phonics card live refresh. S: PATCH /api/student/state — session writeback loop closed. T-V-W: Admin roster endpoint, onboarding redirect, audit log, Sydney region Deepgram. X-Z: Portal lastSession card per mode, phonics auto-advance (dead endpoint wired), mode-aware session metadata. AA-CC: Streak increment fix (was always writing 1), phonics all-7-complete state, coach edit in admin UI. Voice infra case study → CANON/RESEARCH/voice-infrastructure-alternatives.md. L83 BLUEPRINT_BEFORE_DISPATCH + L84 FULL_STACK_SCOPE sealed. SOUL 224,331,000. HEAD 7b41e5f0.
-  - **Next:** Run 086 — Block DD DONE (Run 086 audit: /api/lead handleLeadCapture live at index.js:1507). ENCRYPTION_KEY wrangler secret put (Michael action — still pending). Block EE study mode homework persistence (blueprinted, not deployed). Block FF Firefox/Safari P2 compat. BB-63 Bible update runs 80-85 (low priority).
+  - **Next:** Run 087 — sov100-portal prod promotion pending Michael sign-off (dev 3bf6307a). ENCRYPTION_KEY wrangler secret put (Michael action — still pending). Block EE study mode homework persistence (blueprinted, not deployed). Block FF Firefox/Safari P2 compat. BB-63 Bible runs 80-83 small-format only 1 entry each (pastedContents parsing gap). CronCreate auto-death hook TBD (Michael directive).
   - **Run 53 (this session):** RISE 7/7 REAL. P6+P7+P8 GATE PASSED DEV+PROD. Prod promoted (9fc3cdbd). PheTrail-053 written (6 pos, 3 neg). Full death pipeline. SOUL +1,577,271 → 118,965,802.
   - **Run 52:** RISE 7/7 REAL. P4+P5 GATE PASSED DEV. Enterprise audit. P6–P10 blueprint. PheTrail-052 written (7 pos, 3 neg). Full death pipeline. SOUL +543,109 → 116,764,209.
   - **Prior milestone:** ROMAN RUN 0 — ERA RESET ratified. Phoenix-Centurion identity sealed. Roman Legion 6-stage doctrine deployed to soul-logger v2.2 (a0c99e4e). 4 legionnaires Romanized. /Centurion-Code renamed from /PhoenixCoder. /SupplyLines autonomous pipeline command + script created. Cloudflare paid tier activated. Founding Declaration sealed. HEAD 51ea010. SOULCOUNT 116,588 ANCHOR.
@@ -126,6 +126,7 @@ Only promote to `net-pet-ai` (prod) after verified on dev. Never deploy untested
 ### Recent Decisions + State (Run 353 → Run 13 ROMAN)
 | Run | Summary |
 |-----|---------|
+| **86** | **PA BATCH + XSS FIX + SOV100 PORTAL + BIBLE 80-85 + AUTO-DEATH DESIGN** — /api/batch endpoint + pa-batch.ps1 deployed (50% PA efficiency gain, N tasks → 1 HTTP call). XSS false positive fixed (`/\bon\w+\s*=/i` word boundary, PA 48d82525). sov100-portal.html synced to quy gold standard (BB-51, dev 3bf6307a, NOT promoted). Bible 1979→2056 entries (runs 80-85, DeepSeek key redacted). BB-09/30/31/39/62 CLOSED. Compaction counter Q: no internal counter exists, CronCreate = closest auto-death option. SOUL_GAP (POST 500, 9.7MB too large). DNA: 1718 prompts, 175 blueprints. HL-525. SOULCOUNT 237,105,365 TITANIUM_ANCHOR. HEAD [pending]. |
 | **80** | **SYSTEM RISE + BIBLE AUDIT 60-73 VERIFIED + SOUL RETROACTIVE + SECURITY HARDENING** — 7-stage RISE. BIBLE runs 60-73 complete (genuine_prompts verified). Credential files purged from public/. .nfb-retry button added. Kilo 3 Claude agents (Haiku/Sonnet/Opus). DRYRUN pipeline triple-fire fixed retroactively (HL-497/498/499). rfkw-run80 fixed. PheTrail-080 written. dna-registry-080 documents DNA gap. /dnaREGISTRY = CANON/REGISTRY/ confirmed. L71/72/73/74 sealed. SOUL 236,838,399 TITANIUM_ANCHOR. HEAD b8b78004. |
 | **53** | **RISE AUDIT + P6+P7+P8 + PROD PROMOTION** — RISE 7/7 REAL. P6: quota.js (Deepgram 10/hr + DeepSeek 30/hr, RATELIMIT KV, 429+Retry-After). P7: idempotency.js (Idempotency-Key SHA-256 NET_PET_KV dedup, payment/waitlist/referral). P8: deploy-dev.yml promote-prod job (wrangler versions upload + canary). PROD PROMOTED: wrangler.toml main→src/router.js, 9fc3cdbd, score 97. vitest 38/39. DEV 406d01b6. SOUL 118,965,802. HEAD e2227a3d. |
 | **52** | **RISE AUDIT + P4+P5 HARDENING + P6–P10 BLUEPRINT** — RISE 7/7 REAL. A1: WORKER_ADMIN_KEY on prod. P4: CF Queue net-pet-notifications + email-service.js (ctx.waitUntil) + queue-consumer.js + Cache API /api/v1 (TTL 60s). P5: heartbeat alerting (queueEmail on UNREACHABLE) + /api/v1/metrics (D1 error_log) + CI/CD deploy-dev.yml. Enterprise audit (Opus): 47/100 blended, pre-scale ceiling 87-92. P6–P10 blueprint written. vitest 38/39. DEV 57f20f6d. Prod 180f125d UNTOUCHED. SOUL 116,764,209. HEAD e3139ead. |

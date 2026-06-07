@@ -76,6 +76,8 @@ Write to this doc when ANY trigger fires (see CLAUDE.md L77 for full trigger lis
 - ARCHITECTURE CHANGED: pa-batch.ps1 created at SCRIPTS/pa-batch.ps1 — PowerShell helper wrapping /api/batch endpoint. Accepts Tasks array, dispatches in single HTTP call, returns results array. Smoke test BR-1780818782067: 4 tasks, 2383ms total. Efficiency: 4 PA dispatches → 1 HTTP call.
 - BUG ROOT-CAUSED + DEPLOY VERIFIED: PA XSS filter false positive — `/on\w+\s*=/i` matched `response =` via `onse =` substring. Fixed: `/\bon\w+\s*=/i` (word boundary). PA version 48d82525. `const response = await fetch(url)` confirmed unblocked. Negative trail from Run 085 CLOSED.
 - DEPLOY VERIFIED: sov100-portal.html synced to quy-portal gold standard (BB-51). Added setPwModal, navBackdrop, navToggle, statsGrid(tigerScore+streakVal+sessionCount). Linked portal.css. addNavToggleHandler()+loadStats() wired in showDashboard(). Dev 3bf6307a — smoke test 200 OK, all 5 elements present. BB-51 gap closed.
+- BB OPENED OR CLOSED: BB-63 OPENED Run 086 — Bible update runs 80-85. append-bible.ps1 created. Runs 84-85: +36/+37 entries from real JSONL. Runs 80-83: +1 each (small format limitation). Bible 1979→2056 entries. DeepSeek key redacted to sk-REDACTED-DEEPSEEK (found in run 80 entry from SHHH paste). Committed 84be8737.
+- SESSION RESUMED AFTER COMPACTION (Run 086 post-compaction): Context compacted mid-session. Lean DEATH initiated via session-capture.ps1. Compaction counter question answered: no internal counter exists in Claude Code runtime. CronCreate recommended as closest "auto-death" — OB-1 can create a cron that runs rrl-pipeline.ps1 headlessly. Michael must invoke the cron setup once.
 
 ### Run 085 Triggers Fired (Session resumed post-compaction)
 

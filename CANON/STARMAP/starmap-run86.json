@@ -1,0 +1,14 @@
+{
+  "run": "86",
+  "rrl_path": "RRL\\RRL-86.txt",
+  "ledger_id": "HL-525",
+  "session_id": "sov100-roman-run86",
+  "rrl_chars": 9667114,
+  "rrl_bytes": 9741277,
+  "soul_delta": 0,
+  "soul_event_id": "DRYRUN",
+  "dna_count": 1718,
+  "blueprint_count": 175,
+  "sealed_at": "2026-06-07T15:37:18.1299787+07:00",
+  "merkle_hash": "1463bd62288f4484cf951b2442b19df46dd5545193aa8bbb5d023805fafe6d84"
+}
