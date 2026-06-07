@@ -104,6 +104,13 @@
         <div id="goals-widget" class="content-card" style="margin-bottom:16px;display:none"><div class="card-label">MY GOAL</div><div id="goals-content"></div></div>
 
         <div class="content-card">
+            <div class="card-label">Homework Notes</div>
+            <textarea id="homeworkNotes" placeholder="Write your homework or notes here..." style="width:100%;min-height:100px;background:rgba(22,22,35,0.6);border:1px solid rgba(255,255,255,0.08);border-radius:8px;color:#f8fafc;padding:12px;font-family:inherit;resize:vertical;"></textarea>
+            <button id="saveNotesBtn" style="margin-top:8px;padding:8px 16px;background:#a855f7;color:white;border:none;border-radius:6px;cursor:pointer;">Save Notes</button>
+            <p id="notesStatus" style="margin-top:6px;font-size:0.85rem;color:#94a3b8;"></p>
+        </div>
+
+        <div class="content-card">
             <div class="card-label">Coach Note</div>
             <div class="teacher-note">
                 <p class="note-body">Quy is building from zero — every word she learns is a brick. Vietnamese to English is a long road but she is walking it. Consistency beats intensity. Show up every day.</p>
@@ -594,6 +601,32 @@
                 el.style.display = 'block';
             } catch(e) {}
         }
+        async function initHomeworkNotes() {
+            const notesEl = document.getElementById('homeworkNotes');
+            const saveBtn = document.getElementById('saveNotesBtn');
+            const status = document.getElementById('notesStatus');
+            if (!notesEl) return;
+            try {
+                const r = await fetch('/api/student/state?studentId=' + (getStudentId ? getStudentId() : 'quy-bluetech'));
+                const d = await r.json();
+                if (d.profile && d.profile.homework_notes) notesEl.value = d.profile.homework_notes;
+            } catch (e) { console.warn('homework notes load failed', e); }
+            if (saveBtn) {
+                saveBtn.addEventListener('click', async () => {
+                    try {
+                        status.textContent = 'Saving...';
+                        const r = await fetch('/api/student/state', {
+                            method: 'PATCH',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ homework_notes: notesEl.value })
+                        });
+                        if (r.ok) { status.textContent = 'Saved'; status.style.color = '#22c55e'; }
+                        else { status.textContent = 'Save failed'; status.style.color = '#ef4444'; }
+                    } catch (e) { status.textContent = 'Network error'; status.style.color = '#ef4444'; }
+                });
+            }
+        }
+        document.addEventListener('DOMContentLoaded', initHomeworkNotes);
         document.addEventListener('DOMContentLoaded', loadGoals);
         document.addEventListener('DOMContentLoaded', loadForecast);
 
@@ -749,5 +782,6 @@
     </script>
 </body>
 </html>
+
 
 

@@ -124,6 +124,16 @@ function Split-RL {
             $currentRole = $matches[1]
             $currentLines = @($line)
         }
+        elseif ($line -match '"display"\s*:\s*"([^"]+)"') {
+            if ($currentRole -eq "user" -and $currentLines.Count -gt 0) {
+                $user += ($currentLines -join "`n")
+            }
+            elseif ($currentRole -eq "assistant" -and $currentLines.Count -gt 0) {
+                $assistant += ($currentLines -join "`n")
+            }
+            $currentRole = "user"
+            $currentLines = @($line)
+        }
         elseif ($currentRole) {
             $currentLines += $line
         }

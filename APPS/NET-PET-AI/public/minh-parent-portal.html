@@ -1,806 +1,756 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Minh's Learning Journey | Parent Portal</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<style>
-:root {
-  --void: #0a0a12;
-  --card: rgba(22,22,35,0.9);
-  --purple: #a855f7;
-  --purple-glow: rgba(168,85,247,0.25);
-  --gold: #f59e0b;
-  --gold-glow: rgba(245,158,11,0.25);
-  --teal: #14b8a6;
-  --teal-glow: rgba(20,184,166,0.25);
-  --text: #f8fafc;
-  --dim: #94a3b8;
-  --success: #22c55e;
-  --danger: #ef4444;
-  --border: rgba(255,255,255,0.08);
-}
-* { margin:0; padding:0; box-sizing:border-box; }
-body {
-  background: var(--void);
-  color: var(--text);
-  font-family: 'Inter', sans-serif;
-  min-height: 100vh;
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-}
-body::before {
-  content:'';
-  position:fixed;
-  inset:0;
-  background:
-    radial-gradient(circle at 15% 30%, var(--purple-glow) 0%, transparent 50%),
-    radial-gradient(circle at 85% 70%, var(--gold-glow) 0%, transparent 50%),
-    radial-gradient(circle at 50% 10%, rgba(20,184,166,0.08) 0%, transparent 40%);
-  pointer-events:none;
-  z-index:-1;
-}
-h1,h2,h3,h4 { font-family:'Orbitron',sans-serif; line-height:1.2; }
-
-/* LOGIN */
-#loginScreen {
-  position:fixed; inset:0; z-index:9999;
-  background:#050508;
-  display:flex; flex-direction:column; align-items:center; justify-content:center; padding:20px;
-  transition:opacity 0.6s cubic-bezier(0.4,0,0.2,1);
-}
-.brand-mark { font-size:3rem; margin-bottom:30px; animation:float 4s ease-in-out infinite; }
-@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
-.login-box {
-  background:rgba(20,20,30,0.6);
-  border:1px solid rgba(255,255,255,0.05);
-  border-radius:20px; padding:40px; width:100%; max-width:400px;
-}
-.login-title { font-size:1.5rem; margin-bottom:8px; color:#fff; font-family:Orbitron; text-align:center; }
-.login-subtitle { color:var(--dim); margin-bottom:30px; font-size:0.95rem; text-align:center; }
-.login-box input {
-  width:100%; padding:16px; margin-bottom:16px;
-  background:rgba(0,0,0,0.5); border:1px solid rgba(255,255,255,0.1);
-  color:white; border-radius:12px; font-family:'Inter',sans-serif; font-size:1rem; transition:all 0.3s;
-}
-.login-box input:focus { outline:none; border-color:var(--purple); box-shadow:0 0 0 3px rgba(168,85,247,0.15); background:rgba(0,0,0,0.8); }
-.login-box button {
-  width:100%; padding:16px;
-  background:var(--text); border:none; border-radius:12px; color:var(--void);
-  font-family:'Inter',sans-serif; font-size:1.05rem; cursor:pointer; font-weight:600; transition:all 0.3s;
-}
-.login-box button:hover { background:var(--purple); color:white; transform:translateY(-2px); box-shadow:0 10px 20px rgba(168,85,247,0.3); }
-.hidden { opacity:0; pointer-events:none; visibility:hidden; }
-
-/* MAIN PORTAL */
-#mainPortal { display:none; min-height:100vh; }
-
-/* HERO */
-.portal-hero {
-  background:linear-gradient(135deg, rgba(168,85,247,0.12) 0%, rgba(245,158,11,0.08) 50%, rgba(20,184,166,0.08) 100%);
-  border-bottom:1px solid var(--border);
-  padding:48px 40px 0;
-  text-align:center;
-}
-.portal-hero h1 {
-  font-size:clamp(2.2rem,5vw,3.8rem);
-  background:linear-gradient(to right,#fff,#cbd5e1);
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-  margin-bottom:6px; letter-spacing:1px;
-}
-.hero-sub {
-  color:var(--gold); font-family:'Rajdhani',sans-serif; font-size:1.2rem;
-  letter-spacing:3px; text-transform:uppercase; margin-bottom:32px; font-weight:600;
-}
-
-/* ROOM NAV */
-.room-nav {
-  display:flex; gap:0; border-top:1px solid var(--border); margin-top:0;
-  overflow-x:auto; scrollbar-width:none;
-}
-.room-nav::-webkit-scrollbar { display:none; }
-.room-tab {
-  flex:1; min-width:120px; padding:16px 20px;
-  background:transparent; border:none; border-bottom:3px solid transparent;
-  color:var(--dim); font-family:'Rajdhani',sans-serif; font-weight:700;
-  font-size:0.9rem; letter-spacing:1.5px; text-transform:uppercase;
-  cursor:pointer; transition:all 0.25s; white-space:nowrap; text-align:center;
-}
-.room-tab:hover { color:var(--text); background:rgba(255,255,255,0.03); }
-.room-tab.active { color:var(--purple); border-bottom-color:var(--purple); background:rgba(168,85,247,0.06); }
-
-/* ROOMS */
-.room { display:none; max-width:1100px; margin:0 auto; padding:48px 32px 80px; }
-.room.active { display:block; }
-@keyframes roomIn { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
-.room.active { animation:roomIn 0.4s ease forwards; }
-
-/* CARDS */
-.card {
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:24px;
-  padding:clamp(28px,5vw,52px);
-  margin-bottom:36px;
-  box-shadow:0 20px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.08);
-  transition:border-color 0.3s, box-shadow 0.3s;
-}
-.card:hover { border-color:rgba(255,255,255,0.15); box-shadow:0 30px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.12); }
-h2 {
-  font-size:clamp(1.2rem,3vw,1.6rem); color:var(--text); margin-bottom:24px;
-  letter-spacing:0.5px; display:flex; align-items:center; gap:12px;
-}
-h2::before { content:''; display:block; width:24px; height:2px; background:var(--purple); box-shadow:0 0 10px var(--purple-glow); flex-shrink:0; }
-
-/* STATS */
-.stats-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:20px; margin-bottom:36px; }
-.stat-box {
-  background:rgba(255,255,255,0.03); border:1px solid var(--border); border-radius:16px;
-  padding:28px; text-align:center; transition:transform 0.3s, background 0.3s;
-}
-.stat-box:hover { transform:translateY(-5px); background:rgba(255,255,255,0.05); }
-.stat-box[data-color="purple"] h3 { color:var(--purple); text-shadow:0 0 15px var(--purple-glow); }
-.stat-box[data-color="gold"] h3 { color:var(--gold); text-shadow:0 0 15px var(--gold-glow); }
-.stat-box[data-color="teal"] h3 { color:var(--teal); text-shadow:0 0 15px var(--teal-glow); }
-.stat-box h3 { font-size:2.8rem; margin-bottom:8px; }
-.stat-box p { color:var(--dim); font-size:0.9rem; font-family:'Rajdhani',sans-serif; text-transform:uppercase; letter-spacing:1px; font-weight:600; }
-
-/* TEACHER NOTE */
-.teacher-note { border-left:4px solid var(--teal); background:linear-gradient(90deg,rgba(20,184,166,0.05),transparent); }
-.teacher-note p { font-size:1.1rem; line-height:1.8; color:#e2e8f0; margin-bottom:16px; }
-.teacher-note .signature { margin-top:24px; font-family:'Rajdhani',sans-serif; font-size:1.2rem; color:var(--teal); font-weight:600; }
-
-/* SESSION DAY */
-.session-day {
-  background:rgba(255,255,255,0.02); border:1px solid var(--border); border-radius:20px;
-  padding:28px; margin-bottom:28px; transition:border-color 0.3s;
-}
-.session-day:hover { border-color:rgba(255,255,255,0.12); }
-.session-day.featured { background:rgba(168,85,247,0.06); border-color:rgba(168,85,247,0.25); }
-.day-header { display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:20px; }
-.day-badge {
-  font-family:'Rajdhani',sans-serif; font-size:0.75rem; font-weight:700;
-  padding:4px 12px; border-radius:999px; letter-spacing:1px;
-}
-.day-title { font-family:'Rajdhani',sans-serif; font-weight:700; font-size:1.15rem; letter-spacing:1px; color:var(--text); }
-.day-desc { color:var(--dim); font-size:0.9rem; line-height:1.6; margin-bottom:18px; }
-
-/* AUDIO CLIPS */
-.clips-grid { display:grid; gap:14px; }
-.clip-row { background:rgba(0,0,0,0.3); border:1px solid var(--border); border-radius:14px; padding:16px 20px; }
-.clip-label { font-family:'Rajdhani',sans-serif; font-weight:700; font-size:0.8rem; letter-spacing:1px; color:var(--purple); text-transform:uppercase; margin-bottom:10px; }
-.clip-row audio {
-  width:100%; height:36px;
-  filter:invert(0);
-}
-/* Chrome audio styling */
-.clip-row audio::-webkit-media-controls-panel { background:rgba(30,30,45,0.95); border-radius:8px; }
-.clip-quote { margin-top:10px; font-size:0.88rem; line-height:1.5; color:#cbd5e1; font-style:italic; border-left:2px solid var(--gold); padding-left:12px; }
-
-/* SKILL TAGS */
-.skill-tags { display:flex; flex-wrap:wrap; gap:8px; margin-top:20px; }
-.skill-tag { font-family:'Rajdhani',sans-serif; font-size:0.78rem; font-weight:700; padding:5px 14px; border-radius:999px; letter-spacing:1px; text-transform:uppercase; }
-
-/* MILESTONE CALLOUT */
-.milestone-box { background:rgba(20,184,166,0.06); border:1px solid rgba(20,184,166,0.2); border-radius:16px; padding:22px 26px; margin-top:22px; }
-.milestone-box h4 { font-family:'Rajdhani',sans-serif; color:var(--teal); font-size:0.82rem; letter-spacing:2px; text-transform:uppercase; font-weight:700; margin-bottom:10px; }
-.milestone-box p { color:#e2e8f0; font-size:0.92rem; line-height:1.75; }
-
-/* WHAT THIS SHOWS */
-.insight-box { background:rgba(168,85,247,0.06); border:1px solid rgba(168,85,247,0.2); border-radius:16px; padding:22px 26px; margin-top:22px; }
-.insight-box h4 { font-family:'Rajdhani',sans-serif; color:var(--purple); font-size:0.82rem; letter-spacing:2px; text-transform:uppercase; font-weight:700; margin-bottom:10px; }
-.insight-box p { color:#e2e8f0; font-size:0.92rem; line-height:1.75; }
-
-/* SESSION STAT ROW */
-.session-stats { display:flex; gap:16px; flex-wrap:wrap; margin-top:18px; margin-bottom:6px; }
-.session-stat { background:rgba(255,255,255,0.04); border:1px solid var(--border); border-radius:12px; padding:12px 18px; text-align:center; flex:1; min-width:100px; }
-.session-stat .ss-val { font-family:'Orbitron',sans-serif; font-size:1.4rem; font-weight:bold; }
-.session-stat .ss-lbl { font-family:'Rajdhani',sans-serif; font-size:0.72rem; letter-spacing:1px; color:var(--dim); text-transform:uppercase; margin-top:4px; }
-
-/* TRANSCRIPT */
-.transcript-block {
-  background:rgba(0,0,0,0.4); border:1px solid var(--border); border-radius:12px;
-  padding:24px; font-size:1rem; line-height:1.8; color:#cbd5e1; margin:20px 0;
-  box-shadow:inset 0 2px 15px rgba(0,0,0,0.5);
-}
-.transcript-line { margin-bottom:12px; display:flex; gap:12px; }
-.speaker-teacher { color:var(--dim); font-weight:600; min-width:70px; text-align:right; flex-shrink:0; }
-.speaker-minh { color:var(--gold); font-weight:600; min-width:70px; text-align:right; flex-shrink:0; }
-
-/* JOURNEY TIMELINE */
-.timeline { position:relative; padding-left:28px; }
-.timeline::before { content:''; position:absolute; left:9px; top:8px; bottom:8px; width:2px; background:linear-gradient(to bottom,var(--teal),var(--purple)); opacity:0.3; border-radius:2px; }
-.tl-item { position:relative; margin-bottom:24px; display:flex; gap:18px; align-items:flex-start; }
-.tl-dot { position:absolute; left:-28px; top:4px; width:20px; height:20px; border-radius:50%; flex-shrink:0; }
-.tl-body { flex:1; background:rgba(255,255,255,0.03); border-radius:12px; padding:16px 20px; border:1px solid var(--border); }
-.tl-body.featured { background:rgba(168,85,247,0.08); border-color:rgba(168,85,247,0.3); box-shadow:0 0 20px rgba(168,85,247,0.08); }
-.tl-meta { display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:6px; }
-.tl-date { font-family:'Rajdhani',sans-serif; color:var(--dim); font-weight:700; font-size:0.82rem; letter-spacing:1px; }
-.tl-badge { font-family:'Rajdhani',sans-serif; font-size:0.75rem; font-weight:700; padding:2px 10px; border-radius:999px; letter-spacing:1px; }
-.tl-pts { margin-left:auto; font-family:'Orbitron',sans-serif; font-size:0.85rem; }
-.tl-name { color:var(--text); font-weight:600; font-size:0.97rem; margin-bottom:4px; }
-.tl-desc { color:var(--dim); font-size:0.88rem; line-height:1.5; }
-
-/* POINTS BAR */
-.points-bar-wrap { background:rgba(255,255,255,0.06); border-radius:999px; height:16px; overflow:hidden; border:1px solid rgba(255,255,255,0.1); }
-.points-bar-fill { height:100%; border-radius:999px; transition:width 1.2s cubic-bezier(0.4,0,0.2,1); }
-
-/* GALLERY */
-.gallery-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:20px; }
-.gallery-card { position:relative; border-radius:18px; overflow:hidden; border:1px solid rgba(255,255,255,0.08); box-shadow:0 12px 32px rgba(0,0,0,0.5); cursor:pointer; }
-.gallery-card img { width:100%; display:block; transition:transform 0.5s ease; }
-.gallery-card:hover img { transform:scale(1.06); }
-.gallery-caption { position:absolute; bottom:0; left:0; right:0; background:linear-gradient(transparent,rgba(0,0,0,0.88)); padding:16px; }
-.gallery-caption strong { display:block; color:white; font-family:'Rajdhani',sans-serif; font-weight:700; font-size:0.95rem; letter-spacing:1px; margin-bottom:2px; }
-.gallery-caption span { color:var(--dim); font-size:0.8rem; }
-
-/* ACTION LIST */
-.action-list { list-style:none; margin-top:20px; }
-.action-list li { padding:18px; background:rgba(255,255,255,0.03); margin-bottom:12px; border-radius:12px; border-left:3px solid var(--gold); display:flex; align-items:flex-start; gap:15px; line-height:1.6; }
-.action-list li::before { content:'✓'; color:var(--gold); font-weight:bold; flex-shrink:0; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0a0a12">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>MINH PORTAL — Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Orbitron:wght@400;500;600;700;800&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/portal.css">
+<script src="/assets/net-emoji.js" defer></script>
 </head>
 <body>
 
-<!-- LOGIN -->
-<div id="loginScreen" role="dialog" aria-labelledby="loginTitle" aria-modal="true">
-  <div class="brand-mark" aria-hidden="true">🐯</div>
-  <form class="login-box" onsubmit="handleLogin(event)">
-    <h1 id="loginTitle" class="login-title">PARENT PORTAL</h1>
-    <p class="login-subtitle">Secure access for Minh's family</p>
-    <input type="email" id="email" placeholder="Email address" required autocomplete="email" />
-    <input type="password" id="password" placeholder="Password" required autocomplete="current-password" />
-    <button type="submit" id="authBtn">Sign In</button>
-    <p id="errorMsg" style="color:var(--danger);margin-top:20px;display:none;font-size:0.9rem;text-align:center;" role="alert">Incorrect email or password.</p>
-  </form>
-  <p style="color:#475569;font-size:0.8rem;margin-top:30px;">Protected by NET-PET-AI Enterprise Security</p>
-</div>
+    <!-- LOGIN OVERLAY -->
+    <div id="loginScreen">
+        <div class="login-box" id="loginBox">
+            <img src="/isolated/phoenix-crest-clean.png" alt="Tiger Badge" class="login-crest" onerror="this.style.display='none'">
+            <h1>MINH PORTAL</h1>
+            <p class="login-subtitle">Natural English Training</p>
+            <input type="password" id="portalPw" placeholder="Enter portal password" autocomplete="off">
+            <button class="login-btn" id="loginBtn">UNLOCK PORTAL</button>
+            <p class="login-error" id="loginErr"></p>
+        </div>
+    </div>
 
-<!-- MAIN PORTAL -->
-<div id="mainPortal">
+    <!-- SET PASSWORD MODAL -->
+    <div id="setPwModal" class="hidden">
+        <div class="setpw-box">
+            <h2>SET YOUR PASSWORD</h2>
+            <p>You're using the default password.<br>Set a personal password to secure your portal.</p>
+            <input type="password" id="newPw1" placeholder="New password (min 6 characters)" autocomplete="new-password">
+            <input type="password" id="newPw2" placeholder="Confirm new password" autocomplete="new-password">
+            <button class="setpw-btn" id="setPwBtn">SAVE PASSWORD</button>
+            <p class="setpw-msg" id="setPwMsg"></p>
+            <button class="setpw-skip" id="setPwSkip">Skip for now</button>
+        </div>
+    </div>
 
-  <!-- HERO -->
-  <div class="portal-hero">
-    <h1>MINH'S LEARNING JOURNEY</h1>
-    <p class="hero-sub">Welcome back, Dung</p>
-
-    <!-- ROOM NAV -->
-    <nav class="room-nav" role="tablist" aria-label="Portal rooms">
-      <button class="room-tab active" onclick="switchRoom('home',this)" role="tab" aria-selected="true">Home</button>
-      <button class="room-tab" onclick="switchRoom('sessions',this)" role="tab" aria-selected="false">Class Sessions</button>
-      <button class="room-tab" onclick="switchRoom('journey',this)" role="tab" aria-selected="false">Journey</button>
-      <button class="room-tab" onclick="switchRoom('world',this)" role="tab" aria-selected="false">Minh's World</button>
-      <button class="room-tab" onclick="switchRoom('guide',this)" role="tab" aria-selected="false">Parent Guide</button>
+    <div id="navBackdrop"></div>
+    <!-- TOP NAV -->
+    <nav id="topNav" class="hidden">
+        <a class="nav-brand" href="MINH-portal">
+            <img src="/isolated/phoenix-crest-clean.png" alt="Tiger Badge" onerror="this.style.display='none'">
+            <span>MINH PORTAL</span>
+        </a>
+        <button class="nav-hamburger" id="navToggle" aria-label="Menu">☰</button>
+        <div class="nav-links" id="navLinks">
+            <a href="MINH-portal" class="active">Dashboard</a>
+            <a href="MINH-profile">Profile</a>
+            <a href="MINH-methodology">Methodology</a>
+            <a href="MINH-career">Career</a>
+            <a href="MINH-transcripts">Transcripts</a>
+            <a href="MINH-action-plan">Action Plan</a>
+            <a href="/magic-chat?studentId=MINH-bluetech" class="nav-coach">🗣️ Chat với OBI</a>
+        </div>
+        <button class="nav-logout" id="logoutBtn">Logout</button>
     </nav>
-  </div>
 
-  <!-- ROOM: HOME -->
-  <div class="room active" id="room-home" role="tabpanel">
+    <img src="/isolated/phoenix-crest-clean.png" class="portal-watermark" alt="">
 
-    <div class="stats-grid">
-      <article class="stat-box" data-color="purple">
-        <h3>340%</h3>
-        <p>Increase in Spontaneous Speech</p>
-      </article>
-      <article class="stat-box" data-color="gold">
-        <h3>High</h3>
-        <p>Confidence & Engagement</p>
-      </article>
-      <article class="stat-box" data-color="teal">
-        <h3>9</h3>
-        <p>Sessions Completed</p>
-      </article>
-    </div>
+    <!-- MAIN CONTENT -->
+    <main class="main-container">
 
-    <!-- POINTS -->
-    <section class="card" style="border-color:rgba(245,158,11,0.3);">
-      <h2 style="color:var(--gold);">MINH'S POINTS</h2>
-      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px;">
-        <span style="font-family:'Orbitron',sans-serif;font-size:3.2rem;font-weight:bold;color:var(--gold);">54</span>
-        <span style="color:var(--dim);font-family:'Rajdhani',sans-serif;font-size:1.2rem;letter-spacing:2px;">/ 100 POINTS</span>
-      </div>
-      <div class="points-bar-wrap">
-        <div class="points-bar-fill" id="pointsBar" style="background:linear-gradient(90deg,var(--gold),#fbbf24);width:0%;box-shadow:0 0 12px rgba(245,158,11,0.4);"></div>
-      </div>
-      <p style="color:var(--gold);font-family:'Rajdhani',sans-serif;font-size:1.1rem;font-weight:600;letter-spacing:1px;margin-top:16px;">54% of the way there — Minh is getting close!</p>
-      <p style="color:var(--dim);font-size:0.92rem;margin-top:8px;line-height:1.6;">Points are earned each class for speaking English, solving problems, and showing confidence. When Minh reaches 100, he picks his own reward.</p>
-    </section>
-
-    <!-- TEACHER NOTE -->
-    <section class="card teacher-note">
-      <h2>A PERSONAL NOTE</h2>
-      <p>Dear Dung,</p>
-      <p>I wanted to personally share how incredibly proud I am of Minh's progress this month. When we first started, he was in his "silent period" — processing everything but hesitant to speak without being prompted.</p>
-      <p>That changed. He completely forgot he was in an English lesson and began spontaneously solving problems, telling stories about his helicopter, and playfully arguing with me — all in English. This is exactly what we were working toward. Your support at home is a huge part of why this is happening.</p>
-      <p>This week in particular was exceptional. On Monday he walked in and — before I had even opened the session — told me exactly what he wanted to do: finish the mission from the week before. He had remembered it for seven days and came back ready. On Thursday he used time markers correctly for the first time, invented a ghost story with a full plot, and constructed a logical argument I did not expect from a child his age. He is ahead. Genuinely.</p>
-      <p>You can listen to him this week in the Class Sessions tab. I think you will be proud.</p>
-      <p class="signature">— Michael, Lead Instructor</p>
-    </section>
-
-    <!-- BREAKTHROUGH -->
-    <section class="card">
-      <h2>THE BREAKTHROUGH MOMENT</h2>
-      <p style="color:var(--dim);line-height:1.7;font-size:1.05rem;margin-bottom:24px;">Instead of drills, we use Minh's real interests to create situations where he <em>wants</em> to communicate. Listen to how he takes charge:</p>
-      <div class="clip-row" style="margin-bottom:20px;">
-        <div class="clip-label">May 22 — Lego Problem Solving</div>
-        <audio controls preload="none">
-          <source src="/audio/may22-10min.mp3" type="audio/mpeg">
-        </audio>
-      </div>
-      <article class="transcript-block">
-        <div class="transcript-line"><span class="speaker-teacher">Michael:</span><span>I had a genius idea. I blocked it. Pretty smart.</span></div>
-        <div class="transcript-line"><span class="speaker-minh">Minh:</span><span>Now we gotta go block it! I'm standing up. Look! I gotta go up here.</span></div>
-        <div class="transcript-line"><span class="speaker-teacher">Michael:</span><span>That's not a very good idea. You don't have any hands.</span></div>
-        <div class="transcript-line"><span class="speaker-minh">Minh:</span><span>It doesn't fit. So we don't have to break on that.</span></div>
-        <div class="transcript-line"><span class="speaker-minh">Minh:</span><span>"I'm a genius now. Super genius, Min."</span></div>
-      </article>
-      <p style="color:var(--dim);line-height:1.7;font-size:1.05rem;margin-top:24px;border-left:2px solid var(--purple);padding-left:16px;"><em><strong>Why this matters:</strong> He is no longer translating Vietnamese to English in his head. He is thinking structurally in English to solve a real problem in front of him.</em></p>
-    </section>
-
-  </div><!-- /room-home -->
-
-  <!-- ROOM: SESSIONS -->
-  <div class="room" id="room-sessions" role="tabpanel">
-    <div class="card">
-      <h2>CLASS SESSIONS</h2>
-      <p style="color:var(--dim);font-size:0.95rem;line-height:1.6;margin-bottom:8px;">Short clips from each class — Minh's voice only. Deepgram AI separates the speakers so you hear him, not the teacher.</p>
-    </div>
-
-    <!-- APRIL 13 -->
-    <div class="session-day featured">
-      <div class="day-header">
-        <span class="day-badge" style="background:rgba(168,85,247,0.2);color:var(--purple);">BREAKTHROUGH</span>
-        <span class="day-title">APRIL 13 — SUPERHEROES</span>
-      </div>
-      <p class="day-desc">The session where Minh stopped being shy. He invented a world-saving mission and explained why nobody should blow up the planet. Very compelling argument.</p>
-      <div class="clips-grid">
-        <div class="clip-row">
-          <div class="clip-label">Clip 1 — Saving the World</div>
-          <audio controls preload="none"><source src="/audio/clip1-superheroes.mp3" type="audio/mpeg"></audio>
-          <p class="clip-quote">"If you blow up the whole world, nobody will have chocolate."</p>
+        <div class="dashboard-header">
+            <h1>MINH</h1>
+            <p class="subtitle">BlueTech · A1 Beginner · Foundation Track</p>
         </div>
-      </div>
-    </div>
 
-    <!-- APRIL 24 -->
-    <div class="session-day">
-      <div class="day-header">
-        <span class="day-badge" style="background:rgba(168,85,247,0.15);color:var(--purple);">STORYTELLING</span>
-        <span class="day-title">APRIL 24 — THE HELICOPTER</span>
-      </div>
-      <p class="day-desc">Minh initiated a three-minute story about his broken helicopter — unprompted, entirely in English. He also negotiated where they should fly the new one ("in the library?").</p>
-      <div class="clips-grid">
-        <div class="clip-row">
-          <div class="clip-label">Clip 1 — Helicopter Story</div>
-          <audio controls preload="none"><source src="/audio/clip2-helicopter.mp3" type="audio/mpeg"></audio>
-          <p class="clip-quote">"It broke by itself. It broke by itself? ... You drove it into a wall. No. Many times."</p>
+        <div class="stats-grid" id="statsGrid" style="display:none;">
+            <div class="stat-card purple"><div class="stat-accent"></div><div class="stat-label">Tiger Score</div><div class="stat-value loading" id="tigerScore"><div class="skeleton"></div></div></div>
+            <div class="stat-card gold"><div class="stat-accent"></div><div class="stat-label">Streak</div><div class="stat-value loading" id="streakVal"><div class="skeleton"></div></div></div>
+            <div class="stat-card teal"><div class="stat-accent"></div><div class="stat-label">Sessions</div><div class="stat-value loading" id="sessionsVal"><div class="skeleton"></div></div></div>
+            <div class="stat-card success"><div class="stat-accent"></div><div class="stat-label">Next Session</div><div class="stat-value loading" id="nextSessionVal"><div class="skeleton"></div></div></div>
         </div>
-      </div>
-    </div>
 
-    <!-- MAY 1 -->
-    <div class="session-day">
-      <div class="day-header">
-        <span class="day-badge" style="background:rgba(245,158,11,0.2);color:var(--gold);">IMAGINATION</span>
-        <span class="day-title">MAY 1 — GAME DESIGNER</span>
-      </div>
-      <p class="day-desc">Minh invented a hide-and-seek game with sharks, counting to 1000, and a dramatic reveal. By the end of the session he was designing games with rules and hazards entirely in English.</p>
-      <div class="clips-grid">
-        <div class="clip-row">
-          <div class="clip-label">Clip 1 — The Shark Game</div>
-          <audio controls preload="none"><source src="/audio/may1-8min.mp3" type="audio/mpeg"></audio>
-          <p class="clip-quote">"I'm a shark. I'm friendly. I never hit people."</p>
-        </div>
-        <div class="clip-row">
-          <div class="clip-label">Clip 2 — Magic Toys & Invisible Dragon</div>
-          <audio controls preload="none"><source src="/audio/may1-38min.mp3" type="audio/mpeg"></audio>
-          <p class="clip-quote">"I wish I had a teddy that cleaned my room. Boring."</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- MAY 8 -->
-    <div class="session-day">
-      <div class="day-header">
-        <span class="day-badge" style="background:rgba(245,158,11,0.15);color:var(--gold);">PLAYFUL</span>
-        <span class="day-title">MAY 8 — ABCs & JOKES</span>
-      </div>
-      <p class="day-desc">Alphabet practice turned into comedy. When asked what sound H makes, Minh answered "How are you?" — technically correct and very funny. He is associating letters with phrases he knows, which is exactly right.</p>
-      <div class="clips-grid">
-        <div class="clip-row">
-          <div class="clip-label">Clip 1 — Alphabet Highlight</div>
-          <audio controls preload="none"><source src="/audio/may8-highlight.mp3" type="audio/mpeg"></audio>
-          <p class="clip-quote">"H... How are you?"</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- MAY 22 -->
-    <div class="session-day featured">
-      <div class="day-header">
-        <span class="day-badge" style="background:rgba(20,184,166,0.2);color:var(--teal);">LEADING</span>
-        <span class="day-title">MAY 22 — LEGO MASTER</span>
-      </div>
-      <p class="day-desc">Minh took complete control of building a lego bus station. He directed Michael, corrected him twice, sorted the pieces, and declared himself a genius. All in English the entire time.</p>
-      <div class="clips-grid">
-        <div class="clip-row">
-          <div class="clip-label">Clip 1 — Bus Station Build</div>
-          <audio controls preload="none"><source src="/audio/may22-10min.mp3" type="audio/mpeg"></audio>
-          <p class="clip-quote">"It's a place to put the bicycle. Right? Yeah. That's cool."</p>
-        </div>
-        <div class="clip-row">
-          <div class="clip-label">Clip 2 — Problem Solving</div>
-          <audio controls preload="none"><source src="/audio/may22-25min.mp3" type="audio/mpeg"></audio>
-          <p class="clip-quote">"I'm a genius now. Super genius, Min."</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- MAY 26 -->
-    <div class="session-day featured">
-      <div class="day-header">
-        <span class="day-badge" style="background:rgba(245,158,11,0.2);color:var(--gold);">COMMANDING</span>
-        <span class="day-badge" style="background:rgba(168,85,247,0.15);color:var(--purple);">SESSION 8</span>
-        <span class="day-title">MAY 26 — TEDDY'S BIG PLAN</span>
-      </div>
-      <p class="day-desc">The moment Minh walked in, he set the agenda — before Michael even opened the session. "Last time we didn't get all the babies. Right? Today let's get all the babies." He had held onto that unfinished mission for an entire week and came back to complete it without any prompting. He then proposed using AI to create a photo of Teddy swimming — completely unprompted and technically accurate. He held a multi-line comedy exchange about forgetting you have a head, and closed the session by declaring himself "super magic." Every sentence: English. Every idea: entirely his.</p>
-
-      <div class="session-stats">
-        <div class="session-stat">
-          <div class="ss-val" style="color:var(--gold);">+7</div>
-          <div class="ss-lbl">Points Earned</div>
-        </div>
-        <div class="session-stat">
-          <div class="ss-val" style="color:var(--purple);">74 min</div>
-          <div class="ss-lbl">Session Length</div>
-        </div>
-        <div class="session-stat">
-          <div class="ss-val" style="color:var(--teal);">100%</div>
-          <div class="ss-lbl">English Output</div>
-        </div>
-      </div>
-
-      <div class="clips-grid" style="margin-top:20px;">
-        <div class="clip-row">
-          <div class="clip-label">Audio — Session Opener</div>
-          <audio controls preload="none"><source src="/audio/may26-opening.mp3" type="audio/mpeg"></audio>
-          <p class="clip-quote">"Last time we didn't get all the babies. Right? Today let's get all the babies." — The first thing Minh said. No warm-up. He came back to finish the job.</p>
-        </div>
-        <div class="clip-row">
-          <div class="clip-label">Audio — Mid Session</div>
-          <audio controls preload="none"><source src="/audio/may26-25min.mp3" type="audio/mpeg"></audio>
-          <p class="clip-quote">"If we take a picture of the swimming pool, we can use AI and show Teddy swimming." — An unprompted creative idea using technology vocabulary he picked up independently.</p>
-        </div>
-        <div class="clip-row">
-          <div class="clip-label">Key Exchange — The Head Conversation</div>
-          <p class="clip-quote">"You forgot you had a head?" / "Yep. And I do that." / "How do you forget you have a head?" / "I don't know." — A four-line comedy exchange, all his moves, perfect timing.</p>
-        </div>
-      </div>
-
-      <div class="insight-box">
-        <h4>What This Session Proves</h4>
-        <p>Minh demonstrated <strong>working memory for language goals</strong> — he remembered an unfinished task from the previous week and returned to complete it in English, on his own initiative. This is not typical behaviour for a 5-year-old. Most children need prompting to re-enter a previous context. Minh walked in with an agenda. The AI photo idea shows his imagination has merged with English as a tool — he is now <em>thinking in English</em> to express creative ideas, not translating from Vietnamese first.</p>
-      </div>
-
-      <div class="skill-tags">
-        <span class="skill-tag" style="background:rgba(168,85,247,0.15);color:var(--purple);">Session Leadership</span>
-        <span class="skill-tag" style="background:rgba(20,184,166,0.15);color:var(--teal);">Working Memory</span>
-        <span class="skill-tag" style="background:rgba(245,158,11,0.15);color:var(--gold);">Creative Thinking in English</span>
-        <span class="skill-tag" style="background:rgba(168,85,247,0.12);color:var(--purple);">Comedy Timing</span>
-        <span class="skill-tag" style="background:rgba(20,184,166,0.12);color:var(--teal);">Technology Vocabulary</span>
-      </div>
-    </div>
-
-    <!-- MAY 29 -->
-    <div class="session-day featured">
-      <div class="day-header">
-        <span class="day-badge" style="background:var(--purple);color:#fff;">LATEST</span>
-        <span class="day-badge" style="background:rgba(20,184,166,0.2);color:var(--teal);">LEADING</span>
-        <span class="day-badge" style="background:rgba(168,85,247,0.15);color:var(--purple);">SESSION 9</span>
-        <span class="day-title">MAY 29 — THE GHOST & THE GAME</span>
-      </div>
-      <p class="day-desc">Three things happened in this session that we have been building toward for months. First, Minh used time markers — "today" and "yesterday" — correctly and spontaneously, without being taught them that day. Second, he invented a full ghost story mid-session: a plot, a character ("the ghost daddy"), and a resolution — all in English. Third, he constructed a three-step logical chain without any scaffolding: "If you get eaten by a shark, you have no body. No food." He also issued commands in English ("Get out of my way", "Let's clean this mess") and led the physical play the entire session. This is the highest level of output we have seen from Minh to date.</p>
-
-      <div class="session-stats">
-        <div class="session-stat">
-          <div class="ss-val" style="color:var(--gold);">+7</div>
-          <div class="ss-lbl">Points Earned</div>
-        </div>
-        <div class="session-stat">
-          <div class="ss-val" style="color:var(--purple);">41 min</div>
-          <div class="ss-lbl">Session Length</div>
-        </div>
-        <div class="session-stat">
-          <div class="ss-val" style="color:var(--teal);">3-step</div>
-          <div class="ss-lbl">Logic Chain</div>
-        </div>
-      </div>
-
-      <div class="clips-grid" style="margin-top:20px;">
-        <div class="clip-row">
-          <div class="clip-label">Audio — Early Session</div>
-          <audio controls preload="none"><source src="/audio/may29-7min.mp3" type="audio/mpeg"></audio>
-          <p class="clip-quote">"No. Today, my dad. Yesterday, it's my grandma." — Time markers used correctly and spontaneously for the first time. No prompt. No correction needed.</p>
-        </div>
-        <div class="clip-row">
-          <div class="clip-label">Audio — Ghost Story & Game</div>
-          <audio controls preload="none"><source src="/audio/may29-18min.mp3" type="audio/mpeg"></audio>
-          <p class="clip-quote">"Actually, the ghost ends. There's a ghost... the ghost daddy." — A narrative with a character, a conflict, and a resolution. Minh wrote and performed this story entirely in English.</p>
-        </div>
-        <div class="clip-row">
-          <div class="clip-label">Key Quote — The Logic Chain</div>
-          <p class="clip-quote">"If you get eaten by a shark, you have no body. No food." — Three connected ideas, cause and effect, delivered without hesitation. This is structured reasoning in a second language.</p>
-        </div>
-        <div class="clip-row">
-          <div class="clip-label">Key Quote — Command Language</div>
-          <p class="clip-quote">"Get out of my way." / "Let's clean this mess." — Imperative forms used correctly and with full confidence. He is directing, not just responding.</p>
-        </div>
-      </div>
-
-      <div class="milestone-box">
-        <h4>Milestone Unlocked — Temporal Language + Logical Reasoning</h4>
-        <p>Using "today" and "yesterday" correctly without being taught them in that session means Minh has internally mapped time markers to English structure — he is not reciting phrases, he is using language he has genuinely absorbed. Combined with his three-step logical chain and his spontaneous ghost story, this session marks a significant threshold: <strong>Minh is now producing complex, multi-part English reasoning</strong>. Most students his age take 6 to 12 months longer to reach this stage. The fact that he reached it while playing — without drills — is exactly what this method is designed to produce.</p>
-      </div>
-
-      <div class="skill-tags">
-        <span class="skill-tag" style="background:rgba(168,85,247,0.15);color:var(--purple);">Temporal Language</span>
-        <span class="skill-tag" style="background:rgba(20,184,166,0.15);color:var(--teal);">Narrative Structure</span>
-        <span class="skill-tag" style="background:rgba(245,158,11,0.15);color:var(--gold);">Logical Reasoning</span>
-        <span class="skill-tag" style="background:rgba(168,85,247,0.12);color:var(--purple);">Command Language</span>
-        <span class="skill-tag" style="background:rgba(20,184,166,0.12);color:var(--teal);">Spontaneous Storytelling</span>
-        <span class="skill-tag" style="background:rgba(245,158,11,0.12);color:var(--gold);">Cause &amp; Effect Thinking</span>
-      </div>
-    </div>
-
-  </div><!-- /room-sessions -->
-
-  <!-- ROOM: JOURNEY -->
-  <div class="room" id="room-journey" role="tabpanel">
-    <section class="card" style="border-color:rgba(20,184,166,0.3);">
-      <h2 style="color:var(--teal);">MINH'S JOURNEY SO FAR</h2>
-      <p style="color:var(--dim);font-size:0.95rem;line-height:1.6;margin-bottom:32px;">Every session, Minh earns points for speaking, problem-solving, and showing courage. Here is the full arc.</p>
-
-      <div class="timeline">
-
-        <div class="tl-item">
-          <div class="tl-dot" style="background:rgba(20,184,166,0.15);border:2px solid var(--teal);"></div>
-          <div class="tl-body">
-            <div class="tl-meta">
-              <span class="tl-date">MARCH 31</span>
-              <span class="tl-badge" style="background:rgba(148,163,184,0.15);color:var(--dim);">WARMING UP</span>
-              <span class="tl-pts" style="color:var(--dim);">+3 pts</span>
+        <div class="day1-card" id="day1Card">
+            <div class="day1-badge">DAY 1 — BLUETECH ENGLISH</div>
+            <h2>Your journey starts today.</h2>
+            <p>Two things, every day. 45 minutes listening. 15 minutes talking to OBI. That's the whole system.</p>
+            <div class="day1-steps">
+                <div class="day1-step"><div class="step-num">45 min</div><div class="step-label">Listen</div><div class="step-sub">YouTube · Podcasts · Netflix</div></div>
+                <div class="day1-step"><div class="step-num">15 min</div><div class="step-label">Talk to OBI</div><div class="step-sub">Tell OBI what you watched</div></div>
             </div>
-            <p class="tl-name">First Steps</p>
-            <p class="tl-desc">Quiet but curious. Responded with nods and single words. You could see him watching and processing everything — gears turning.</p>
-          </div>
         </div>
 
-        <div class="tl-item">
-          <div class="tl-dot" style="background:rgba(168,85,247,0.15);border:2px solid var(--purple);"></div>
-          <div class="tl-body" style="background:rgba(168,85,247,0.04);border-color:rgba(168,85,247,0.15);">
-            <div class="tl-meta">
-              <span class="tl-date">APRIL 13</span>
-              <span class="tl-badge" style="background:rgba(168,85,247,0.2);color:var(--purple);">BREAKTHROUGH</span>
-              <span class="tl-pts" style="color:var(--purple);">+6 pts</span>
+        <div id="weekly-widget" style="display:none;">
+            <div class="ww-stat"><div class="ww-label">Mastered Words</div><div class="ww-value" id="ww-mastered">—</div><div class="ww-sub" id="ww-mastered-sub"></div></div>
+            <div class="ww-stat"><div class="ww-label">Current Streak</div><div class="ww-value gold" id="ww-streak">—</div><div class="ww-sub" id="ww-streak-sub"></div></div>
+            <div class="ww-stat"><div class="ww-label">Level Progress</div><div class="ww-value teal" id="ww-level">—</div><div class="ww-bar-wrap"><div class="ww-bar-fill" id="ww-bar" style="width:0%"></div></div><div class="ww-sub" id="ww-level-sub"></div></div>
+        </div>
+
+        <div id="forecast-widget" style="display:none;"></div>
+
+        <!-- TODAY'S MISSION -->
+        <div class="mission-card" id="missionCard">
+            <div class="mission-label">🎯 TODAY'S MISSION</div>
+            <div class="mission-text" id="missionText">Loading your mission...</div>
+            <a href="/magic-chat?studentId=MINH-bluetech" class="mission-btn" id="missionBtn">🗣️ Talk to OBI Now</a>
+        </div>
+
+        <div id="goals-widget" class="content-card" style="margin-bottom:16px;display:none"><div class="card-label">MY GOAL</div><div id="goals-content"></div></div>`r`n        `r`n        <div class="content-card">`r`n            <div class="card-label">Homework Notes</div>`r`n            <textarea id="homeworkNotes" placeholder="Write your homework or notes here..." style="width:100%;min-height:100px;background:rgba(22,22,35,0.6);border:1px solid rgba(255,255,255,0.08);border-radius:8px;color:#f8fafc;padding:12px;font-family:inherit;resize:vertical;"></textarea>`r`n            <button id="saveNotesBtn" style="margin-top:8px;padding:8px 16px;background:#a855f7;color:white;border:none;border-radius:6px;cursor:pointer;">Save Notes</button>`r`n            <p id="notesStatus" style="margin-top:6px;font-size:0.85rem;color:#94a3b8;"></p>`r`n        </div>
+
+        <div class="content-card">
+            <div class="card-label">Coach Note</div>
+            <div class="teacher-note">
+                <p class="note-body">MINH is building from zero — every word she learns is a brick. Vietnamese to English is a long road but she is walking it. Consistency beats intensity. Show up every day.</p>
+                <p class="note-sig">— OBI / NET Coach</p>
             </div>
-            <p class="tl-name">Superheroes!</p>
-            <p class="tl-desc">The superhero game changed everything. Minh started speaking in full sentences on his own — and argued brilliantly against blowing up the world: "Nobody will have chocolate."</p>
-          </div>
         </div>
 
-        <div class="tl-item">
-          <div class="tl-dot" style="background:rgba(168,85,247,0.15);border:2px solid var(--purple);"></div>
-          <div class="tl-body">
-            <div class="tl-meta">
-              <span class="tl-date">APRIL 24</span>
-              <span class="tl-badge" style="background:rgba(168,85,247,0.2);color:var(--purple);">STORYTELLING</span>
-              <span class="tl-pts" style="color:var(--purple);">+6 pts</span>
+        <div class="content-card">
+            <div class="card-label">Current Level</div>
+            <div class="milestone-row"><span class="milestone-badge">A1</span><span class="milestone-track">Foundation Track · Building core vocabulary</span></div>
+            <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:5%;"></div></div>
+            <div class="progress-label">A1 → A2: Master 50 core words and hold a 2-minute conversation</div>
+        </div>
+
+        <div class="content-card" id="phonicsCard" style="display:none">
+            <div class="card-label">🔊 PHONICS TRACK</div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+                <span id="phonicsGroupBadge" style="font-family:'Orbitron',sans-serif;font-size:0.75rem;font-weight:700;letter-spacing:0.08em;padding:5px 14px;border-radius:20px;background:rgba(168,85,247,0.15);border:1px solid rgba(168,85,247,0.4);color:#a855f7;"></span>
+                <span id="phonicsGroupNum" style="font-family:'Rajdhani',sans-serif;font-size:0.8rem;color:var(--dim);"></span>
             </div>
-            <p class="tl-name">The Helicopter</p>
-            <p class="tl-desc">Unprompted, Minh told a full story about his toy helicopter — how it works, where he flies it, and why it is now broken. Three minutes of spontaneous English narration.</p>
-          </div>
-        </div>
-
-        <div class="tl-item">
-          <div class="tl-dot" style="background:rgba(245,158,11,0.15);border:2px solid var(--gold);"></div>
-          <div class="tl-body" style="background:rgba(245,158,11,0.04);border-color:rgba(245,158,11,0.15);">
-            <div class="tl-meta">
-              <span class="tl-date">MAY 1</span>
-              <span class="tl-badge" style="background:rgba(245,158,11,0.2);color:var(--gold);">IMAGINATION</span>
-              <span class="tl-pts" style="color:var(--gold);">+7 pts</span>
+            <div class="progress-bar-wrap"><div class="progress-bar-fill" id="phonicsPBar" style="width:0%;"></div></div>
+            <div class="progress-label" id="phonicsPLabel" style="margin-bottom:12px;"></div>
+            <div style="background:rgba(168,85,247,0.06);border:1px solid rgba(168,85,247,0.15);border-radius:14px;padding:14px;margin-bottom:12px;">
+                <div style="font-family:'Rajdhani',sans-serif;font-size:0.72rem;font-weight:700;color:var(--purple);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:6px;">Next Drill</div>
+                <div id="phonicsDrillSentence" style="font-size:0.95rem;font-style:italic;color:var(--text);margin-bottom:6px;"></div>
+                <div id="phonicsDrillTip" style="font-size:0.82rem;color:var(--dim);"></div>
             </div>
-            <p class="tl-name">Game Designer</p>
-            <p class="tl-desc">Invented a lava bridge game — rules, hazards (bears on one side, lava on the other), scoring. Explained every detail in English. Counted to 10, then jumped straight to 1000.</p>
-          </div>
+            <div id="phonicsFocusErr" style="font-size:0.82rem;color:var(--teal);margin-bottom:12px;display:none;"></div>
+            <button id="phonicsAdvBtn" onclick="advancePhonics()" style="display:none;border:1px solid var(--purple);color:var(--purple);background:rgba(168,85,247,0.1);padding:8px 18px;border-radius:14px;cursor:pointer;font-family:'Rajdhani',sans-serif;font-size:0.88rem;font-weight:600;letter-spacing:0.04em;">Group complete! Advance →</button>
         </div>
+        <script>
+        const PHONICS_COLORS = ['#a855f7','#3b82f6','#22c55e','#eab308','#f97316','#ef4444','#f59e0b'];
+        async function loadPhonics() {
+            try {
+                const r = await fetch('/api/phonics/progress?studentId=MINH-bluetech');
+                const d = await r.json();
+                const color = PHONICS_COLORS[d.current_group - 1];
+                const badge = document.getElementById('phonicsGroupBadge');
+                badge.textContent = d.group_name;
+                badge.style.color = color; badge.style.borderColor = color+'66'; badge.style.background = color+'22';
+                document.getElementById('phonicsGroupNum').textContent = 'Group ' + d.current_group + ' of 7';
+                const pbar = document.getElementById('phonicsPBar');
+                pbar.style.width = d.completion_pct + '%'; pbar.style.background = color;
+                document.getElementById('phonicsPLabel').textContent = d.drills_completed.length + '/5 drills · ' + d.completion_pct + '%';
+                if (d.next_drill) {
+                    document.getElementById('phonicsDrillSentence').textContent = '"' + d.next_drill.sentence + '"';
+                    document.getElementById('phonicsDrillTip').textContent = d.next_drill.tip;
+                }
+                if (d.dominant_errors && d.dominant_errors.length > 0) {
+                    const fe = document.getElementById('phonicsFocusErr');
+                    fe.style.display = 'block'; fe.textContent = 'Focus: ' + d.dominant_errors[0].replace(/_/g,' ');
+                }
+                document.getElementById('phonicsAdvBtn').style.display = d.completion_pct >= 80 ? 'inline-block' : 'none';
+                document.getElementById('phonicsCard').style.display = 'block';
+            } catch(e) {}
+        }
+        async function advancePhonics() {
+            const r = await fetch('/api/phonics/advance',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({studentId:'MINH-bluetech'})});
+            const d = await r.json();
+            if (d.advanced) loadPhonics();
+        }
+        loadPhonics();
+        </script>
 
-        <div class="tl-item">
-          <div class="tl-dot" style="background:rgba(245,158,11,0.15);border:2px solid var(--gold);"></div>
-          <div class="tl-body">
-            <div class="tl-meta">
-              <span class="tl-date">MAY 8</span>
-              <span class="tl-badge" style="background:rgba(245,158,11,0.2);color:var(--gold);">PLAYFUL</span>
-              <span class="tl-pts" style="color:var(--gold);">+7 pts</span>
+        <div class="content-card" id="lastClassCard">
+            <div class="card-label">Lớp Hôm Qua — Last Class · 26 May 2026</div>
+            <div style="font-family:'Rajdhani',sans-serif;font-size:0.88rem;color:var(--dim);margin-bottom:4px;">Topics: Thói quen hàng ngày · Health vocabulary · Kể chuyện quá khứ</div>
+            <div class="vocab-grid">
+                <div class="vocab-pill"><span class="vocab-en">bean sprout</span><span class="vocab-vi">giá đỗ</span></div>
+                <div class="vocab-pill"><span class="vocab-en">hang out</span><span class="vocab-vi">đi chơi</span></div>
+                <div class="vocab-pill"><span class="vocab-en">healthy</span><span class="vocab-vi">lành mạnh</span></div>
+                <div class="vocab-pill"><span class="vocab-en">energy</span><span class="vocab-vi">năng lượng</span></div>
+                <div class="vocab-pill"><span class="vocab-en">appetite</span><span class="vocab-vi">sự thèm ăn</span></div>
+                <div class="vocab-pill"><span class="vocab-en">breakfast</span><span class="vocab-vi">bữa sáng</span></div>
+                <div class="vocab-pill"><span class="vocab-en">lunch</span><span class="vocab-vi">bữa trưa</span></div>
+                <div class="vocab-pill"><span class="vocab-en">dinner</span><span class="vocab-vi">bữa tối</span></div>
+                <div class="vocab-pill"><span class="vocab-en">cup</span><span class="vocab-vi">cái cốc</span></div>
+                <div class="vocab-pill"><span class="vocab-en">strong</span><span class="vocab-vi">mạnh</span></div>
+                <div class="vocab-pill"><span class="vocab-en">more</span><span class="vocab-vi">nhiều hơn</span></div>
+                <div class="vocab-pill"><span class="vocab-en">less</span><span class="vocab-vi">ít hơn</span></div>
+                <div class="vocab-pill"><span class="vocab-en">that sucks</span><span class="vocab-vi">thật tệ</span></div>
             </div>
-            <p class="tl-name">ABCs & Jokes</p>
-            <p class="tl-desc">Worked through the full alphabet. When asked what H sounds like, Minh answered "How are you?" — technically correct, very funny. Thinking in English, not translating.</p>
-          </div>
-        </div>
-
-        <div class="tl-item">
-          <div class="tl-dot" style="background:rgba(20,184,166,0.2);border:2px solid var(--teal);"></div>
-          <div class="tl-body" style="background:rgba(20,184,166,0.04);border-color:rgba(20,184,166,0.2);">
-            <div class="tl-meta">
-              <span class="tl-date">MAY 19</span>
-              <span class="tl-badge" style="background:rgba(20,184,166,0.2);color:var(--teal);">CONFIDENCE</span>
-              <span class="tl-pts" style="color:var(--teal);">+7 pts</span>
+            <div class="teacher-note" style="margin-top:16px;">
+                <p class="note-body">MINH đã nhớ được 3 từ từ hôm thứ Sáu — đó là tiến bộ rồi. Mua tai nghe trong tuần này và nghe tiếng Anh lúc đi làm (30 phút/ngày = 2.5 giờ mỗi tuần).<br><span style="color:#94a3b8;font-style:normal;font-size:0.85rem;">MINH remembered 3 vocab words from Friday — that's progress. Buy earphones and listen during your 30-min commute. 2.5 free hours of English per week.</span></p>
+                <p class="note-sig">— Teacher Michael</p>
             </div>
-            <p class="tl-name">Problem Solver</p>
-            <p class="tl-desc">Negotiated, argued, and laughed the entire session — all English, no hesitation. Warned Michael not to put his socks in water. Tried to feed them to him. A very good day.</p>
-          </div>
         </div>
 
-        <div class="tl-item">
-          <div class="tl-dot" style="background:rgba(168,85,247,0.15);border:2px solid var(--purple);"></div>
-          <div class="tl-body" style="background:rgba(168,85,247,0.04);border-color:rgba(168,85,247,0.15);">
-            <div class="tl-meta">
-              <span class="tl-date">MAY 22</span>
-              <span class="tl-badge" style="background:rgba(20,184,166,0.2);color:var(--teal);">LEADING</span>
-              <span class="tl-pts" style="color:var(--purple);">+4 pts</span>
+        <!-- CLASS REVIEW SECTION -->
+        <div class="content-card" style="border-color:rgba(168,85,247,0.3);box-shadow:0 0 30px rgba(168,85,247,0.08);">
+            <div class="card-label" style="color:var(--purple);font-size:1rem;">📚 CLASS REVIEW — THIS WEEK</div>
+            <p style="color:var(--dim);font-size:0.9rem;line-height:1.6;margin-bottom:20px;">Listen to your own voice from class. Each clip is a moment where you used English. Tap play, hear yourself, and remember: every word counts.</p>
+
+            <!-- MAY 26 SESSION -->
+            <div style="margin-bottom:32px;">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+                    <span style="background:rgba(245,158,11,0.2);color:var(--gold);padding:4px 12px;border-radius:8px;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:0.8rem;letter-spacing:0.05em;">SESSION 1</span>
+                    <span style="font-family:'Orbitron',sans-serif;font-size:1.1rem;color:var(--text);">MAY 26 — FOOD & WEEKEND</span>
+                </div>
+                <p style="color:var(--dim);font-size:0.88rem;line-height:1.6;margin-bottom:16px;">MINH practiced food vocabulary (bean sprout), talked about her weekend routine (church, hanging out with friends), and listened to self-help content on YouTube. She correctly identified Friday, Saturday, and Sunday — showing growing time awareness in English.</p>
+
+                <div style="margin-bottom:16px;">
+                    <div style="font-family:'Rajdhani',sans-serif;font-size:0.78rem;font-weight:700;color:var(--teal);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:8px;">🎧 Listen to Your Class</div>
+                    <div class="custom-audio" data-audio-id="q26p0"><button class="ca-play">▶</button><div class="ca-info"><div class="ca-title">Part 1 — Bean Sprout & Food Words</div><div class="ca-progress-wrap"><div class="ca-progress-fill"></div></div></div><div class="ca-time">0:00</div><button class="ca-speed">1x</button><audio preload="none"><source src="/audio/MINH-may26-part0.mp3" type="audio/mpeg"></audio></div>
+                    <div class="custom-audio" data-audio-id="q26p1"><button class="ca-play">▶</button><div class="ca-info"><div class="ca-title">Part 2 — Weekend Routine</div><div class="ca-progress-wrap"><div class="ca-progress-fill"></div></div></div><div class="ca-time">0:00</div><button class="ca-speed">1x</button><audio preload="none"><source src="/audio/MINH-may26-part1.mp3" type="audio/mpeg"></audio></div>
+                    <div class="custom-audio" data-audio-id="q26p2"><button class="ca-play">▶</button><div class="ca-info"><div class="ca-title">Part 3 — YouTube & Self-Help</div><div class="ca-progress-wrap"><div class="ca-progress-fill"></div></div></div><div class="ca-time">0:00</div><button class="ca-speed">1x</button><audio preload="none"><source src="/audio/MINH-may26-part2.mp3" type="audio/mpeg"></audio></div>
+                    <div class="custom-audio" data-audio-id="q26p3"><button class="ca-play">▶</button><div class="ca-info"><div class="ca-title">Part 4 — Skincare & Daily Habits</div><div class="ca-progress-wrap"><div class="ca-progress-fill"></div></div></div><div class="ca-time">0:00</div><button class="ca-speed">1x</button><audio preload="none"><source src="/audio/MINH-may26-part3.mp3" type="audio/mpeg"></audio></div>
+                    <div class="custom-audio" data-audio-id="q26p4"><button class="ca-play">▶</button><div class="ca-info"><div class="ca-title">Part 5 — Conversation Practice</div><div class="ca-progress-wrap"><div class="ca-progress-fill"></div></div></div><div class="ca-time">0:00</div><button class="ca-speed">1x</button><audio preload="none"><source src="/audio/MINH-may26-part4.mp3" type="audio/mpeg"></audio></div>
+                </div>
+
+                <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:12px;">
+                    <div style="font-family:'Rajdhani',sans-serif;font-size:0.78rem;font-weight:700;color:var(--gold);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:8px;">💬 Key Moments From This Class</div>
+                    <div style="font-size:0.88rem;color:var(--dim);line-height:1.7;">
+                        <div style="margin-bottom:8px;"><span style="color:var(--text);font-weight:500;">"Bean sprout. S-p-r-o-u-t."</span> <button class="ts-jump" data-target="q26p0" data-time="0:45">▶ 0:45</button> — Spelling practice. You broke down the word sound by sound.</div>
+                        <div style="margin-bottom:8px;"><span style="color:var(--text);font-weight:500;">"On Friday, I listened to the communication in YouTube about self-help."</span> <button class="ts-jump" data-target="q26p2" data-time="2:30">▶ 22:30</button> — Full sentence with past tense + topic + platform.</div>
+                        <div><span style="color:var(--text);font-weight:500;">"Friday and Saturday, I come to Queen's house and sleep here."</span> <button class="ts-jump" data-target="q26p1" data-time="4:15">▶ 14:15</button> — Weekend routine in English with time markers.</div>
+                    </div>
+                </div>
+
+                <div style="display:flex;flex-wrap:wrap;gap:6px;">
+                    <span style="background:rgba(168,85,247,0.12);border:1px solid rgba(168,85,247,0.25);border-radius:10px;padding:4px 10px;font-size:0.78rem;color:var(--purple);">Food Vocabulary</span>
+                    <span style="background:rgba(20,184,166,0.12);border:1px solid rgba(20,184,166,0.25);border-radius:10px;padding:4px 10px;font-size:0.78rem;color:var(--teal);">Days of the Week</span>
+                    <span style="background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.25);border-radius:10px;padding:4px 10px;font-size:0.78rem;color:var(--gold);">Past Tense Listening</span>
+                    <span style="background:rgba(168,85,247,0.12);border:1px solid rgba(168,85,247,0.25);border-radius:10px;padding:4px 10px;font-size:0.78rem;color:var(--purple);">Weekend Routine</span>
+                </div>
             </div>
-            <p class="tl-name">Lego Master</p>
-            <p class="tl-desc">Took complete control of the lego bus station build. Directed Michael on pieces, corrected him twice, and called himself a genius. He was right.</p>
-          </div>
-        </div>
 
-        <div class="tl-item">
-          <div class="tl-dot" style="background:rgba(245,158,11,0.2);border:2px solid var(--gold);"></div>
-          <div class="tl-body">
-            <div class="tl-meta">
-              <span class="tl-date">MAY 26</span>
-              <span class="tl-badge" style="background:rgba(245,158,11,0.2);color:var(--gold);">COMMANDING</span>
-              <span class="tl-pts" style="color:var(--gold);">+7 pts</span>
+            <!-- MAY 28 SESSION -->
+            <div>
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+                    <span style="background:rgba(20,184,166,0.2);color:var(--teal);padding:4px 12px;border-radius:8px;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:0.8rem;letter-spacing:0.05em;">SESSION 2</span>
+                    <span style="font-family:'Orbitron',sans-serif;font-size:1.1rem;color:var(--text);">MAY 28 — HEALTH & HABITS</span>
+                </div>
+                <p style="color:var(--dim);font-size:0.88rem;line-height:1.6;margin-bottom:16px;">MINH reviewed vocabulary from the previous class (hang out, healthy, energy), practiced meal names (breakfast, lunch, dinner), learned the idiom "that sucks", and worked with more/less comparisons. She also started using the OBI voice agent for review.</p>
+
+                <div style="margin-bottom:16px;">
+                    <div style="font-family:'Rajdhani',sans-serif;font-size:0.78rem;font-weight:700;color:var(--teal);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:8px;">🎧 Listen to Your Class</div>
+                    <div class="custom-audio" data-audio-id="q28p0"><button class="ca-play">▶</button><div class="ca-info"><div class="ca-title">Part 1 — Vocab Review: Hang Out, Healthy, Energy</div><div class="ca-progress-wrap"><div class="ca-progress-fill"></div></div></div><div class="ca-time">0:00</div><button class="ca-speed">1x</button><audio preload="none"><source src="/audio/mai-tram-may28-part0.mp3" type="audio/mpeg"></audio></div>
+                    <div class="custom-audio" data-audio-id="q28p1"><button class="ca-play">▶</button><div class="ca-info"><div class="ca-title">Part 2 — Coffee Benefits & Appetite</div><div class="ca-progress-wrap"><div class="ca-progress-fill"></div></div></div><div class="ca-time">0:00</div><button class="ca-speed">1x</button><audio preload="none"><source src="/audio/mai-tram-may28-part1.mp3" type="audio/mpeg"></audio></div>
+                    <div class="custom-audio" data-audio-id="q28p2"><button class="ca-play">▶</button><div class="ca-info"><div class="ca-title">Part 3 — Meals & More/Less</div><div class="ca-progress-wrap"><div class="ca-progress-fill"></div></div></div><div class="ca-time">0:00</div><button class="ca-speed">1x</button><audio preload="none"><source src="/audio/mai-tram-may28-part2.mp3" type="audio/mpeg"></audio></div>
+                    <div class="custom-audio" data-audio-id="q28p3"><button class="ca-play">▶</button><div class="ca-info"><div class="ca-title">Part 4 — "That Sucks" & Idioms</div><div class="ca-progress-wrap"><div class="ca-progress-fill"></div></div></div><div class="ca-time">0:00</div><button class="ca-speed">1x</button><audio preload="none"><source src="/audio/mai-tram-may28-part3.mp3" type="audio/mpeg"></audio></div>
+                    <div class="custom-audio" data-audio-id="q28p4"><button class="ca-play">▶</button><div class="ca-info"><div class="ca-title">Part 5 — OBI Voice Agent Practice</div><div class="ca-progress-wrap"><div class="ca-progress-fill"></div></div></div><div class="ca-time">0:00</div><button class="ca-speed">1x</button><audio preload="none"><source src="/audio/mai-tram-may28-part4.mp3" type="audio/mpeg"></audio></div>
+                </div>
+
+                <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:12px;">
+                    <div style="font-family:'Rajdhani',sans-serif;font-size:0.78rem;font-weight:700;color:var(--gold);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:8px;">💬 Key Moments From This Class</div>
+                    <div style="font-size:0.88rem;color:var(--dim);line-height:1.7;">
+                        <div style="margin-bottom:8px;"><span style="color:var(--text);font-weight:500;">"Breakfast, lunch, dinner."</span> <button class="ts-jump" data-target="q28p2" data-time="1:20">▶ 21:20</button> — Three meal names recalled correctly. Foundation words you now own.</div>
+                        <div style="margin-bottom:8px;"><span style="color:var(--text);font-weight:500;">"More. Less."</span> <button class="ts-jump" data-target="q28p2" data-time="3:45">▶ 23:45</button> — Comparatives without hesitation. Both words produced on cue.</div>
+                        <div><span style="color:var(--text);font-weight:500;">"That sucks."</span> <button class="ts-jump" data-target="q28p3" data-time="2:10">▶ 32:10</button> — Your first English idiom! The laugh that followed locked it in memory.</div>
+                    </div>
+                </div>
+
+                <div style="display:flex;flex-wrap:wrap;gap:6px;">
+                    <span style="background:rgba(168,85,247,0.12);border:1px solid rgba(168,85,247,0.25);border-radius:10px;padding:4px 10px;font-size:0.78rem;color:var(--purple);">Vocab Recall</span>
+                    <span style="background:rgba(20,184,166,0.12);border:1px solid rgba(20,184,166,0.25);border-radius:10px;padding:4px 10px;font-size:0.78rem;color:var(--teal);">Meal Names</span>
+                    <span style="background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.25);border-radius:10px;padding:4px 10px;font-size:0.78rem;color:var(--gold);">Comparatives</span>
+                    <span style="background:rgba(168,85,247,0.12);border:1px solid rgba(168,85,247,0.25);border-radius:10px;padding:4px 10px;font-size:0.78rem;color:var(--purple);">First Idiom</span>
+                    <span style="background:rgba(20,184,166,0.12);border:1px solid rgba(20,184,166,0.25);border-radius:10px;padding:4px 10px;font-size:0.78rem;color:var(--teal);">OBI Practice</span>
+                </div>
             </div>
-            <p class="tl-name">Teddy's Big Plan</p>
-            <p class="tl-desc">Opened the session by setting the mission himself. Proposed an AI photo idea unprompted. Held a multi-line comedy exchange in English. Declared himself "super magic" and meant it.</p>
-          </div>
         </div>
 
-        <div class="tl-item" style="margin-bottom:0;">
-          <div class="tl-dot" style="background:rgba(168,85,247,0.3);border:2px solid var(--purple);box-shadow:0 0 12px rgba(168,85,247,0.4);"></div>
-          <div class="tl-body featured">
-            <div class="tl-meta">
-              <span class="tl-date">MAY 29</span>
-              <span class="tl-badge" style="background:var(--purple);color:#fff;">LATEST</span>
-              <span class="tl-badge" style="background:rgba(20,184,166,0.2);color:var(--teal);">LEADING</span>
-              <span class="tl-pts" style="color:var(--purple);">+7 pts</span>
+        <div class="content-card">
+            <div class="card-label">Quick Access</div>
+            <div class="quick-links-grid">
+                <a href="/magic-chat?studentId=MINH-bluetech" class="quick-link-card primary-link"><span class="ql-icon">🗣️</span><div class="ql-label">Chat with OBI</div><div class="ql-sub">Start speaking now</div></a>
+                <a href="MINH-transcripts" class="quick-link-card"><span class="ql-icon">📋</span><div class="ql-label">Transcripts</div><div class="ql-sub">Review past sessions</div></a>
+                <a href="MINH-action-plan" class="quick-link-card"><span class="ql-icon">🎯</span><div class="ql-label">Action Plan</div><div class="ql-sub">Your weekly goals</div></a>
             </div>
-            <p class="tl-name">The Ghost & The Game</p>
-            <p class="tl-desc">Used today/yesterday time markers correctly. Invented a ghost story mid-session. Issued commands in English. Reasoned in a three-step logical chain: "If you get eaten by a shark, you have no body. No food."</p>
-          </div>
         </div>
 
-      </div>
-
-      <div style="margin-top:32px;padding-top:24px;border-top:1px solid var(--border);">
-        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px;">
-          <span style="font-family:'Rajdhani',sans-serif;font-weight:700;color:var(--teal);font-size:1rem;letter-spacing:1px;">TOTAL EARNED</span>
-          <span style="font-family:'Orbitron',sans-serif;font-size:1.6rem;font-weight:bold;color:var(--gold);">54 <span style="color:var(--dim);font-size:0.9rem;">/ 100 pts</span></span>
+        <div class="content-card">
+            <div id="vocabWidget" style="min-height:48px;"></div>
         </div>
-        <div class="points-bar-wrap">
-          <div style="background:linear-gradient(90deg,var(--teal),var(--purple),var(--gold));width:54%;height:100%;border-radius:999px;box-shadow:0 0 10px rgba(168,85,247,0.3);"></div>
-        </div>
-        <p style="color:var(--dim);font-size:0.85rem;margin-top:10px;">9 sessions completed. Every class earns points — at 100, the reward is Minh's choice.</p>
-      </div>
-    </section>
-  </div><!-- /room-journey -->
 
-  <!-- ROOM: MINH'S WORLD -->
-  <div class="room" id="room-world" role="tabpanel">
-    <section class="card" style="border-color:rgba(168,85,247,0.3);">
-      <h2 style="color:var(--purple);">MINH'S WORLD</h2>
-      <p style="color:var(--dim);line-height:1.6;margin-bottom:28px;">We made these for Minh — each one inspired by something he said or did in class. His bear, his adventures.</p>
-      <div class="gallery-grid">
-        <div class="gallery-card">
-          <img src="/teddy-karate.jpg" alt="Minh's bear doing karate" loading="lazy">
-          <div class="gallery-caption">
-            <strong>BEAR SENSEI</strong>
-            <span>"I can do karate on anyone!"</span>
-          </div>
-        </div>
-        <div class="gallery-card">
-          <img src="/teddy-superhero.jpg" alt="Minh's bear in superhero suit" loading="lazy">
-          <div class="gallery-caption">
-            <strong>SUPERHERO BEAR</strong>
-            <span>"We're superheroes — we gotta save the world!"</span>
-          </div>
-        </div>
-        <div class="gallery-card">
-          <img src="/teddy-icecream-sad.jpg" alt="Bear ate too much ice cream" loading="lazy">
-          <div class="gallery-caption">
-            <strong>TOO MUCH ICE CREAM</strong>
-            <span>"If you blow up the world, nobody will have chocolate!"</span>
-          </div>
-        </div>
-        <div class="gallery-card">
-          <img src="/teddy-icecream-feast.jpg" alt="Bear surrounded by ice cream" loading="lazy">
-          <div class="gallery-caption">
-            <strong>THE FEAST</strong>
-            <span>Mini Scoops. All of them. No regrets.</span>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div><!-- /room-world -->
+    </main>
 
-  <!-- ROOM: PARENT GUIDE -->
-  <div class="room" id="room-guide" role="tabpanel">
-    <section class="card" style="border-color:rgba(245,158,11,0.3);">
-      <h2 style="color:var(--gold);">HOW YOU CAN SUPPORT HIM AT HOME</h2>
-      <p style="color:var(--dim);line-height:1.6;margin-bottom:8px;">Minh's confidence is growing fast. Three simple ways to keep the momentum going — no pressure, no homework:</p>
-      <ul class="action-list">
-        <li><strong>Ask about his creations:</strong> When he builds something with Legos or toys, ask "What's the problem?" and "How do we solve it?" — the same way we do in class.</li>
-        <li><strong>Celebrate the attempts:</strong> If he uses an English word or phrase at home, praise the confidence — not the grammar. Correction comes later; right now confidence is everything.</li>
-        <li><strong>Follow his interests:</strong> Talk about the helicopter on Shopee. Ask what kind of shark he would be. When the topic is his choice, the English flows by itself.</li>
-      </ul>
-    </section>
+    <div id="streak-badge" style="display:none;"></div>
 
-    <section class="card teacher-note">
-      <h2>WHAT'S NEXT</h2>
-      <p>Our next sessions will focus on building Minh's storytelling into longer, more structured narratives — keeping the game-based approach that clearly works best for him. We will also begin introducing simple reading with words from his existing vocabulary.</p>
-      <p>He is ahead of where most 5-year-olds are at this stage. The silent period broke early and completely. Keep doing what you are doing at home — it is working.</p>
-      <p class="signature">— Michael</p>
-    </section>
-  </div><!-- /room-guide -->
+    <script>
+        const AUTH_KEY = 'MINH_auth';
+        const STUDENT_ID = 'MINH-bluetech';
+        const API = 'https://net-pet-ai.mrmichaelhobbs123.workers.dev';
 
-</div><!-- /mainPortal -->
+        function isAuthed() { return localStorage.getItem(AUTH_KEY) === 'true'; }
 
-<script>
-function handleLogin(e) {
-  e.preventDefault();
-  const email = document.getElementById('email').value.trim().toLowerCase();
-  const pwd = document.getElementById('password').value.trim();
-  const errMsg = document.getElementById('errorMsg');
-  const submitBtn = document.getElementById('authBtn');
-  submitBtn.innerText = 'Authenticating...';
-  submitBtn.style.opacity = '0.7';
-  setTimeout(() => {
-    if (email === 'michelletran2609@gmail.com' && pwd === 'minh2026') {
-      const ls = document.getElementById('loginScreen');
-      const mp = document.getElementById('mainPortal');
-      ls.classList.add('hidden');
-      ls.setAttribute('aria-hidden', 'true');
-      setTimeout(() => {
-        ls.style.display = 'none';
-        mp.style.display = 'block';
-        mp.setAttribute('aria-hidden', 'false');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        setTimeout(() => {
-          const bar = document.getElementById('pointsBar');
-          if (bar) bar.style.width = '54%';
-        }, 400);
-      }, 600);
-    } else {
-      errMsg.style.display = 'block';
-      submitBtn.innerText = 'Sign In';
-      submitBtn.style.opacity = '1';
-      const lb = document.querySelector('.login-box');
-      [8, -8, 8, 0].forEach((x, i) => setTimeout(() => lb.style.transform = `translateX(${x}px)`, i * 100));
-    }
-  }, 600);
-}
+        function showPortal() {
+            document.getElementById('loginScreen').classList.add('hidden');
+            document.getElementById('topNav').classList.remove('hidden');
+            fetch('/api/student/lang', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({studentId:STUDENT_ID,lang:'vi'})}).catch(()=>{});
+            loadPortalData();
+            loadVocabWidget(STUDENT_ID);
+            document.dispatchEvent(new Event('portalUnlocked'));
+        }
 
-function switchRoom(id, tab) {
-  document.querySelectorAll('.room').forEach(r => r.classList.remove('active'));
-  document.querySelectorAll('.room-tab').forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
-  document.getElementById('room-' + id).classList.add('active');
-  tab.classList.add('active');
-  tab.setAttribute('aria-selected', 'true');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-</script>
+        // Auth check on load
+        if (isAuthed()) {
+            showPortal();
+        }
+
+        // Login
+        async function attemptLogin() {
+            const pw = document.getElementById('portalPw').value.trim();
+            const err = document.getElementById('loginErr');
+            const box = document.getElementById('loginBox');
+            const btn = document.getElementById('loginBtn');
+            if (!pw) return;
+            btn.disabled = true;
+            btn.textContent = 'CHECKING…';
+            err.classList.remove('visible');
+            try {
+                const res = await fetch('/api/student/checkpw', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ studentId: STUDENT_ID, pw })
+                });
+                const data = await res.json();
+                if (data.ok) {
+                    localStorage.setItem(AUTH_KEY, 'true');
+                    showPortal();
+                    if (data.isDefault) showSetPasswordModal();
+                } else {
+                    showLoginError(err, box);
+                }
+            } catch {
+                if (pw === 'bluetech2026') {
+                    localStorage.setItem(AUTH_KEY, 'true');
+                    showPortal();
+                    showSetPasswordModal();
+                } else {
+                    showLoginError(err, box);
+                }
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'UNLOCK PORTAL';
+            }
+        }
+
+        function showLoginError(err, box) {
+            err.textContent = 'Incorrect password.';
+            err.classList.add('visible');
+            box.classList.remove('shaking');
+            void box.offsetWidth;
+            box.classList.add('shaking');
+            setTimeout(() => box.classList.remove('shaking'), 600);
+        }
+
+        function showSetPasswordModal() {
+            document.getElementById('setPwModal').classList.remove('hidden');
+            document.getElementById('newPw1').focus();
+        }
+
+        async function submitNewPassword() {
+            const pw1 = document.getElementById('newPw1').value.trim();
+            const pw2 = document.getElementById('newPw2').value.trim();
+            const msg = document.getElementById('setPwMsg');
+            const btn = document.getElementById('setPwBtn');
+            msg.className = 'setpw-msg';
+            if (pw1.length < 6) { msg.textContent = 'Password must be at least 6 characters.'; msg.classList.add('err', 'visible'); return; }
+            if (pw1 !== pw2) { msg.textContent = 'Passwords do not match.'; msg.classList.add('err', 'visible'); return; }
+            btn.disabled = true;
+            btn.textContent = 'SAVING…';
+            try {
+                const res = await fetch('/api/student/setpw', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ studentId: STUDENT_ID, currentPw: 'bluetech2026', newPw: pw1 })
+                });
+                const data = await res.json();
+                if (data.ok) {
+                    msg.textContent = 'Password saved! ✓';
+                    msg.classList.add('ok', 'visible');
+                    setTimeout(() => document.getElementById('setPwModal').classList.add('hidden'), 1800);
+                } else {
+                    msg.textContent = data.error || 'Could not save password.';
+                    msg.classList.add('err', 'visible');
+                    btn.disabled = false;
+                    btn.textContent = 'SAVE PASSWORD';
+                }
+            } catch {
+                msg.textContent = 'Network error — try again.';
+                msg.classList.add('err', 'visible');
+                btn.disabled = false;
+                btn.textContent = 'SAVE PASSWORD';
+            }
+        }
+
+        document.getElementById('loginBtn').addEventListener('click', attemptLogin);
+        document.getElementById('portalPw').addEventListener('keydown', e => { if (e.key === 'Enter') attemptLogin(); });
+        document.getElementById('setPwBtn').addEventListener('click', submitNewPassword);
+        document.getElementById('newPw2').addEventListener('keydown', e => { if (e.key === 'Enter') submitNewPassword(); });
+        document.getElementById('setPwSkip').addEventListener('click', () => { document.getElementById('setPwModal').classList.add('hidden'); });
+
+        // Logout
+        const logoutEl = document.getElementById('logoutBtn');
+        if (logoutEl) logoutEl.addEventListener('click', () => {
+            localStorage.removeItem(AUTH_KEY);
+            window.location.reload();
+        });
+
+        // Vocab widget — shows OBI-saved vocabulary words
+        async function loadVocabWidget(studentId) {
+            const container = document.getElementById('vocabWidget');
+            if (!container) return;
+            if (!document.getElementById('vocabWidgetStyle')) {
+                const s = document.createElement('style'); s.id = 'vocabWidgetStyle';
+                s.textContent = '#vocabWidget{color:var(--text)}.vw-header{font-family:"Orbitron",sans-serif;font-size:.85rem;font-weight:600;letter-spacing:.05em;color:var(--gold);margin-bottom:10px}.vw-list{display:flex;flex-wrap:wrap;gap:8px}.vw-pill{background:rgba(168,85,247,.12);border:1px solid rgba(168,85,247,.25);border-radius:12px;padding:6px 12px;display:flex;flex-direction:column;align-items:center}.vw-word{font-weight:700;font-size:.9rem}.vw-meaning{font-size:.7rem;opacity:.75;margin-top:2px}.vw-empty{font-size:.85rem;color:var(--dim);font-style:italic}';
+                document.head.appendChild(s);
+            }
+            try {
+                const res = await fetch(`/api/vocab/list?studentId=${encodeURIComponent(studentId)}`);
+                if (!res.ok) throw new Error();
+                const data = await res.json();
+                const words = Array.isArray(data.words) ? data.words : [];
+                const total = data.total || words.length;
+                const last10 = words.slice(-10).reverse();
+                let html = `<div class="vw-header">🐯 My Words (${total})</div>`;
+                if (!last10.length) {
+                    html += '<div class="vw-empty">No words yet — practice with OBI to earn your first!</div>';
+                } else {
+                    html += '<div class="vw-list">';
+                    last10.forEach(w => { html += `<div class="vw-pill"><span class="vw-word">${w.word||''}</span><span class="vw-meaning">${w.meaning_vi||''}</span></div>`; });
+                    html += '</div>';
+                }
+                container.innerHTML = html;
+            } catch { container.innerHTML = ''; }
+        }
+
+        // Load portal data
+        async function loadPortalData() {
+            try {
+                const [scoreRes, stateRes] = await Promise.all([
+                    fetch(`${API}/api/tiger-score?studentId=${STUDENT_ID}`).then(r => r.ok ? r.json() : {}).catch(() => ({})),
+                    fetch(`${API}/api/netpet/state?studentId=${STUDENT_ID}`).then(r => r.ok ? r.json() : {}).catch(() => ({}))
+                ]);
+
+                const tigerScore = scoreRes?.score ?? 0;
+                const streak = stateRes?.streak ?? stateRes?.pet?.streak ?? 0;
+                const sessions = stateRes?.sessions ?? stateRes?.totalSessions ?? stateRes?.pet?.sessions ?? 0;
+
+                if (sessions === 0 && tigerScore === 0) {
+                    const sg = document.getElementById('statsGrid'); const d1 = document.getElementById('day1Card');
+                    if (sg) sg.style.display = 'none';
+                    if (d1) d1.style.display = 'block';
+                } else {
+                    const sg = document.getElementById('statsGrid'); const d1 = document.getElementById('day1Card');
+                    if (sg) sg.style.display = 'grid';
+                    if (d1) d1.style.display = 'none';
+                    setVal('tigerScore', tigerScore);
+                    setVal('streakVal', streak + (streak === 1 ? ' day' : ' days'));
+                    setVal('sessionsVal', sessions);
+                    setVal('nextSessionVal', 'Anytime');
+                }
+            } catch {
+                const sg = document.getElementById('statsGrid'); const d1 = document.getElementById('day1Card');
+                if (sg) sg.style.display = 'none';
+                if (d1) d1.style.display = 'block';
+            }
+        }
+
+        function setVal(id, val) {
+            const el = document.getElementById(id);
+            if (el) { el.textContent = val; el.classList.remove('loading'); }
+        }
+    </script>
+
+        <link rel="stylesheet" href="/portal.css">
+
+    <script>
+        (function() {
+            var SB_STUDENT_ID = 'MINH-bluetech';
+            var SB_API = 'https://net-pet-ai.mrmichaelhobbs123.workers.dev';
+
+            function sbRender(data, due) {
+                var badge = document.getElementById('streak-badge');
+                if (!badge) return;
+                var s = data.todayStatus || 'active';
+                var streak = data.currentStreak || 0;
+                var total = data.totalDays || 0;
+                var longest = data.longestStreak || 0;
+                var dueCount = (due && typeof due.count === 'number') ? due.count : null;
+                var dueHtml = dueCount === null ? '' :
+                    dueCount > 0
+                        ? '<div class="sb-srs-due" style="font-size:0.78rem;font-weight:700;letter-spacing:0.04em;color:#f59e0b;margin-bottom:6px;">📚 ' + dueCount + ' WORDS DUE</div>'
+                        : '<div class="sb-srs-due" style="font-size:0.78rem;font-weight:700;letter-spacing:0.04em;color:#22c55e;margin-bottom:6px;">📚 ALL CAUGHT UP</div>';
+                badge.className = '';
+                if (s === 'active') badge.classList.add('sb-active');
+                else if (s === 'at_risk') badge.classList.add('sb-at-risk');
+                else if (s === 'broken') badge.classList.add('sb-broken');
+                var saveFaceHtml = (s === 'at_risk' || s === 'broken')
+                    ? '<button class="sb-btn-saveface" id="sbSaveFaceBtn">🙏 Save Face</button>' : '';
+                var statusText = s === 'active'
+                    ? '<span class="sb-status ok">TODAY: DONE ✓</span>'
+                    : s === 'at_risk'
+                    ? '<span class="sb-status warn">CHECK IN NOW — FACE AT RISK 🚨</span>'
+                    : '<span class="sb-status warn">STREAK BROKEN — RESTART TODAY</span>';
+                badge.innerHTML =
+                    '<button class="sb-dismiss" onclick="document.getElementById(\'streak-badge\').style.display=\'none\'" title="Close">✕</button>' +
+                    '<div class="sb-fire">🔥</div>' +
+                    '<div class="sb-streak-count' + (s !== 'active' ? ' sb-count-danger' : '') + '">' + streak + ' DAY STREAK</div>' +
+                    statusText +
+                    '<div class="sb-total-days">' + total + ' total active days &nbsp;&bull;&nbsp; best: ' + longest + '</div>' +
+                    dueHtml +
+                    '<button class="sb-btn-checkin" id="sbCheckinBtn">CHECK IN</button>' +
+                    saveFaceHtml +
+                    '<div class="sb-confirm" id="sbConfirm"></div>';
+                badge.style.display = '';
+                document.getElementById('sbCheckinBtn').addEventListener('click', function() {
+                    var btn = this; btn.disabled = true; btn.textContent = 'CHECKING IN…';
+                    fetch(SB_API + '/api/student/checkin', {
+                        method: 'POST', headers: {'Content-Type':'application/json'},
+                        body: JSON.stringify({studentId: SB_STUDENT_ID})
+                    }).then(function(r){ return r.json(); }).then(function(){
+                        sbFetch();
+                    }).catch(function(){
+                        btn.disabled = false; btn.textContent = 'CHECK IN';
+                    });
+                });
+                var sfBtn = document.getElementById('sbSaveFaceBtn');
+                if (sfBtn) {
+                    sfBtn.addEventListener('click', function() {
+                        var b = this; b.disabled = true;
+                        fetch(SB_API + '/api/student/saveface', {
+                            method: 'POST', headers: {'Content-Type':'application/json'},
+                            body: JSON.stringify({studentId: SB_STUDENT_ID})
+                        }).then(function(){
+                            var c = document.getElementById('sbConfirm');
+                            if (c) { c.textContent = 'Save face logged ✓'; }
+                        }).catch(function(){ b.disabled = false; });
+                    });
+                }
+            }
+
+            function sbFetch() {
+                fetch(SB_API + '/api/student/streak/' + SB_STUDENT_ID)
+                    .then(function(r){ return r.ok ? r.json() : null; })
+                    .then(function(d){
+                        if (!d) return;
+                        fetch(SB_API + '/api/vocab/due?studentId=' + SB_STUDENT_ID)
+                            .then(function(r){ return r.ok ? r.json() : null; })
+                            .then(function(due){ sbRender(d, due); })
+                            .catch(function(){ sbRender(d, null); });
+                    })
+                    .catch(function(){});
+            }
+
+            if (typeof isAuthed === 'function' && isAuthed()) {
+                sbFetch();
+            } else {
+                document.addEventListener('portalUnlocked', sbFetch);
+            }
+        })();
+
+        async function loadGoals() {
+            try {
+                const r = await fetch('/api/student/goals?studentId=MINH-bluetech');
+                const d = await r.json();
+                if (!d.goalsSet) return;
+                const el = document.getElementById('goals-widget');
+                const content = document.getElementById('goals-content');
+                if (!el || !content) return;
+                const badge = document.getElementById('goals-badge');
+                if (badge) badge.remove();
+                content.innerHTML = `
+                    <div id="goals-badge" style="font-size:12px;color:#888;margin-bottom:6px">
+                        🎯 ${d.targetLevel || 'Target'} · ${d.daysLeft || '?'} days left
+                        ${d.onTrack ? '<span style="color:#4ade80">● on track</span>' : '<span style="color:#f97316">● review needed</span>'}
+                    </div>`;
+                el.style.display = 'block';
+            } catch(e) {}
+        }
+
+        async function loadForecast() {
+            try {
+                const r = await fetch(`/api/student/forecast/MINH-bluetech`);
+                const d = await r.json();
+                if (!d.graduationDate) return;
+                const el = document.getElementById('forecast-widget');
+                if (!el) return;
+                const days = d.projectedDays;
+                const conf = { low: '~', medium: '', high: '' }[d.confidence] || '';
+                el.innerHTML = `
+                    <div class="forecast-level">${d.currentLevel} → ${d.targetLevel}</div>
+                    <div class="forecast-date">🎓 ${conf}${d.graduationDate}</div>
+                    <div class="forecast-sub">${d.masteredWords}/${d.totalWords} words · ${days}d to next level</div>
+                `;
+                el.style.display = 'block';
+            } catch(e) {}
+        }
+        document.addEventListener('DOMContentLoaded', loadGoals);
+        document.addEventListener('DOMContentLoaded', loadForecast);
+
+        async function loadWeeklyWidget() {
+            try {
+                const [fRes, sRes] = await Promise.all([
+                    fetch(`/api/student/forecast/MINH-bluetech`).then(r => r.ok ? r.json() : null).catch(() => null),
+                    fetch(`/api/student/streak/MINH-bluetech`).then(r => r.ok ? r.json() : null).catch(() => null),
+                ]);
+                if (!fRes && !sRes) return;
+                const widget = document.getElementById('weekly-widget');
+                if (!widget) return;
+
+                const mastered = fRes?.masteredWords ?? 0;
+                const total = fRes?.totalWords ?? 0;
+                document.getElementById('ww-mastered').textContent = mastered;
+                document.getElementById('ww-mastered-sub').textContent = total > 0 ? `of ${total} studied` : 'keep reviewing!';
+
+                const streak = sRes?.currentStreak ?? 0;
+                const best = sRes?.longestStreak ?? 0;
+                document.getElementById('ww-streak').textContent = streak + (streak === 1 ? ' day' : ' days');
+                document.getElementById('ww-streak-sub').textContent = streak >= 7 ? '🔥 on fire!' : `best: ${best}d`;
+
+                const CEFR = [{l:'A1',t:50},{l:'A2',t:150},{l:'B1',t:300},{l:'B2',t:500},{l:'C1',t:800}];
+                const cur = fRes?.currentLevel || 'A1';
+                const tgt = fRes?.targetLevel || 'A2';
+                const nextTarget = CEFR.find(c => c.l === tgt);
+                const prevTarget = CEFR[CEFR.findIndex(c => c.l === tgt) - 1];
+                const prevWords = prevTarget ? prevTarget.t : 0;
+                const nextWords = nextTarget ? nextTarget.t : 50;
+                const pct = Math.min(100, Math.round(((mastered - prevWords) / (nextWords - prevWords)) * 100)) || 0;
+                document.getElementById('ww-level').textContent = cur;
+                document.getElementById('ww-bar').style.width = pct + '%';
+                document.getElementById('ww-level-sub').textContent = `${pct}% to ${tgt}`;
+
+                widget.style.display = 'flex';
+            } catch(e) {}
+        }
+        document.addEventListener('portalUnlocked', loadWeeklyWidget);
+        if (typeof isAuthed === 'function' && isAuthed()) loadWeeklyWidget();
+    </script>
+    <script src="./global-brand-shelf.js" defer onerror="void 0"></script>
+    <script src="/problem-report.js"></script>
+    <script>
+        (function() {
+            var toggle = document.getElementById('navToggle');
+            var links = document.getElementById('navLinks');
+            var backdrop = document.getElementById('navBackdrop');
+            function closeNav() {
+                if (links) links.classList.remove('open');
+                if (toggle) toggle.textContent = '☰';
+                if (backdrop) backdrop.classList.remove('open');
+            }
+            if (toggle && links) {
+                toggle.addEventListener('click', function() {
+                    var isOpen = links.classList.toggle('open');
+                    toggle.textContent = isOpen ? '✕' : '☰';
+                    if (backdrop) backdrop.classList.toggle('open', isOpen);
+                });
+                links.querySelectorAll('a').forEach(function(a) {
+                    a.addEventListener('click', closeNav);
+                });
+            }
+            if (backdrop) backdrop.addEventListener('click', closeNav);
+        })();
+
+        // ── TODAY'S MISSION (dynamic) ──
+        (async function() {
+            const el = document.getElementById('missionText');
+            const btn = document.getElementById('missionBtn');
+            if (!el) return;
+            try {
+                const [streakRes, vocabRes] = await Promise.all([
+                    fetch('https://net-pet-ai.mrmichaelhobbs123.workers.dev/api/student/streak/MINH-bluetech').then(r => r.ok ? r.json() : null).catch(() => null),
+                    fetch('https://net-pet-ai.mrmichaelhobbs123.workers.dev/api/vocab/due?studentId=MINH-bluetech').then(r => r.ok ? r.json() : null).catch(() => null)
+                ]);
+                const status = streakRes?.todayStatus || 'unknown';
+                const dueCount = vocabRes?.count || 0;
+                if (status === 'at_risk' || status === 'broken') {
+                    el.innerHTML = '🔥 <strong>Your streak is at risk!</strong> Talk to OBI for just 5 minutes to save it. Every day counts.';
+                    btn.textContent = '🔥 Save My Streak';
+                } else if (dueCount > 0) {
+                    el.innerHTML = `📚 <strong>${dueCount} words</strong> are due for review. Practice them with OBI before your next class!`;
+                    btn.textContent = '📚 Review Words';
+                } else {
+                    el.innerHTML = '✅ You\'re all caught up! Listen to this week\'s class clips below or chat with OBI to keep building momentum.';
+                    btn.textContent = '🗣️ Keep Practicing';
+                }
+            } catch {
+                el.textContent = 'Listen to this week\'s class clips below or chat with OBI to keep building momentum.';
+            }
+        })();
+
+        // ── CUSTOM AUDIO PLAYERS ──
+        (function() {
+            document.querySelectorAll('.custom-audio').forEach(function(wrapper) {
+                var audio = wrapper.querySelector('audio');
+                var playBtn = wrapper.querySelector('.ca-play');
+                var progressWrap = wrapper.querySelector('.ca-progress-wrap');
+                var progressFill = wrapper.querySelector('.ca-progress-fill');
+                var timeEl = wrapper.querySelector('.ca-time');
+                var speedBtn = wrapper.querySelector('.ca-speed');
+                if (!audio || !playBtn) return;
+                var speeds = [1, 1.25, 1.5];
+                var speedIdx = 0;
+                function fmt(s) { var m = Math.floor(s/60); var sec = Math.floor(s%60); return m + ':' + (sec<10?'0':'') + sec; }
+                playBtn.addEventListener('click', function() {
+                    if (audio.paused) { audio.play().catch(function(){}); playBtn.textContent = '⏸'; playBtn.classList.add('playing'); }
+                    else { audio.pause(); playBtn.textContent = '▶'; playBtn.classList.remove('playing'); }
+                });
+                audio.addEventListener('timeupdate', function() {
+                    if (audio.duration) {
+                        progressFill.style.width = (audio.currentTime / audio.duration * 100) + '%';
+                        timeEl.textContent = fmt(audio.currentTime) + ' / ' + fmt(audio.duration);
+                    }
+                });
+                audio.addEventListener('ended', function() { playBtn.textContent = '▶'; playBtn.classList.remove('playing'); });
+                progressWrap.addEventListener('click', function(e) {
+                    if (audio.duration) { var rect = progressWrap.getBoundingClientRect(); audio.currentTime = ((e.clientX - rect.left) / rect.width) * audio.duration; }
+                });
+                if (speedBtn) {
+                    speedBtn.addEventListener('click', function() {
+                        speedIdx = (speedIdx + 1) % speeds.length;
+                        audio.playbackRate = speeds[speedIdx];
+                        speedBtn.textContent = speeds[speedIdx] + 'x';
+                    });
+                }
+            });
+        })();
+
+        // ── TIMESTAMP JUMP BUTTONS ──
+        (function() {
+            document.querySelectorAll('.ts-jump').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    var target = this.getAttribute('data-target');
+                    var timeStr = this.getAttribute('data-time');
+                    if (!target || !timeStr) return;
+                    var parts = timeStr.split(':');
+                    var seconds = parseInt(parts[0]) * 60 + parseInt(parts[1]);
+                    var wrapper = document.querySelector('[data-audio-id="' + target + '"]');
+                    if (wrapper) {
+                        var audio = wrapper.querySelector('audio');
+                        var playBtn = wrapper.querySelector('.ca-play');
+                        if (audio) {
+                            audio.currentTime = seconds;
+                            audio.play().catch(function(){});
+                            if (playBtn) { playBtn.textContent = '⏸'; playBtn.classList.add('playing'); }
+                        }
+                    }
+                });
+            });
+        })();
+    </script>
 </body>
 </html>
+
+
+
+
 
