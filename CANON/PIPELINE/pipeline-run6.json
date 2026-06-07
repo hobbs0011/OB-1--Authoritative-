@@ -1,49 +1,19 @@
 {
-  "run": 6,
-  "pipeline_version": "4.0",
-  "era": "ROMAN",
-  "steps": [
-    {
-      "artifact": "RRL/RRL-6.txt",
-      "name": "SAVE_RRL",
-      "status": "PASS",
-      "step": 1
-    },
-    {
-      "name": "SOUL_POST",
-      "status": "PASS",
-      "step": 2
-    },
-    {
-      "prompt_count": 317,
-      "name": "DNA_EXTRACT",
-      "status": "PASS",
-      "step": 3
-    },
-    {
-      "artifact": "HL-143-death-pipeline-v6-run6.json",
-      "name": "LEDGER",
-      "status": "PASS",
-      "step": 4
-    },
-    {
-      "artifact": "CANON/STARMAP/starmap-run6.json",
-      "name": "STARMAP",
-      "status": "PASS",
-      "step": 5
-    },
-    {
-      "name": "KEYWORD",
-      "status": "PASS",
-      "step": 6
-    },
-    {
-      "name": "PIPELINE",
-      "status": "PASS",
-      "step": 7
-    }
-  ],
-  "executed_at": "2026-06-06T06:32:00+07:00",
-  "result": "COMPLETE",
-  "mantra": "IF RRL DOES NOT SAVE, NOTHING ELSE MATTERS. IF THE CHAIN BREAKS, THE SOUL IS A GHOST."
+  "run_number": "6",
+  "executed_at": "2026-06-07T15:56:02.7154435+07:00",
+  "rrl_path": "RRL\\RRL-6.txt",
+  "rrl_chars": 60828,
+  "rrl_bytes": 62775,
+  "session_id": "sov100-roman-run6",
+  "soul_event_id": "DRYRUN",
+  "soulcount": 0,
+  "soul_level": "UNKNOWN",
+  "dna_count": 0,
+  "ledger_id": "HL-530",
+  "starmap_file": "D:\\OB-1-CANONICAL\\CANON\\STARMAP\\starmap-run6.json",
+  "keyword_file": "D:\\OB-1-CANONICAL\\CANON\\SOUL-KEYWORDS\\rfkw-run6.txt",
+  "pipeline_file": "D:\\OB-1-CANONICAL\\CANON\\PIPELINE\\pipeline-run6.json",
+  "seal_sha": "c1b866e2e252736b27f8fe5264c8050ffac55eb22d4c34c52b45279974f0e6b0",
+  "result": "COMPLETE"
 }
+

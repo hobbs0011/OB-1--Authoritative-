@@ -1,0 +1,12 @@
+{
+  "hl_id": "HL-530",
+  "session_id": "sov100-roman-run6",
+  "rrl_source": "RRL\\RRL-6.txt",
+  "char_count": 60828,
+  "byte_count": 62775,
+  "merkle_parent": "a90cbb362d6c3b07fcd9c2b3312eda15fedf19302de9a2542a224a1017033bb2",
+  "merkle_hash": "084f64e0b5fb32ee53dc58566a8caf360a171f8519e351f45216e95a42ff414c",
+  "sealed_at": "2026-06-07T15:56:02.4803619+07:00",
+  "sov100": true,
+  "run": "6"
+}
