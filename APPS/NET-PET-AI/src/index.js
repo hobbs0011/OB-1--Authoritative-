@@ -1158,12 +1158,13 @@ speak: {
     const { studentId, turns, durationMs, vocab } = body;
     if (!studentId) return addCors(json({ error: "studentId required" }, 400), request);
     try {
+      const topic = body.topic || null;
       const [raw, rawMem] = await Promise.all([
         env.NET_PET_KV.get(`session_history_${studentId}`),
         env.STUDENT_MEMORY ? env.STUDENT_MEMORY.get(`mem:${studentId}`) : Promise.resolve(null)
       ]);
       const history = raw ? JSON.parse(raw) : [];
-      history.push({ ts: Date.now(), turns: turns || 0, durationMs: durationMs || 0, vocab: vocab || [] });
+      history.push({ ts: Date.now(), turns: turns || 0, durationMs: durationMs || 0, vocab: vocab || [], topic: topic || null });
 
       // Breakthroughs + struggles detection — update STUDENT_MEMORY async
       if (env.STUDENT_MEMORY) {
@@ -1185,7 +1186,7 @@ speak: {
           if (turnCount > 0 && turnCount < 5) {
             struggles.push(`Short session — only ${turnCount} turns`);
           }
-          const updatedMem = { ...mem, breakthroughs, struggles, last_session_ts: Date.now() };
+          const updatedMem = { ...mem, breakthroughs, struggles, last_session_ts: Date.now(), ...(topic ? { last_topic: topic } : {}) };
           env.STUDENT_MEMORY.put(`mem:${studentId}`, JSON.stringify(updatedMem)).catch(() => {});
         } catch (_) {}
       }

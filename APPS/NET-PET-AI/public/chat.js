@@ -317,6 +317,16 @@ function showTigerWin() {
     }
   };
   fetch('/api/student/state', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(patchBody) }).catch(() => {});
+  // Save to session_history — keepalive so it fires even on page unload
+  const sessionTopic = firstStudyReport || (agentSessionVocab.length > 0 ? agentSessionVocab.slice(0,3).join(', ') : null);
+  if (urlStudentId && agentSessionTurns > 0) {
+    fetch('/api/agent/session', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      keepalive: true,
+      body: JSON.stringify({ studentId: urlStudentId, turns: agentSessionTurns, durationMs: dur * 60000, vocab: agentSessionVocab, topic: sessionTopic })
+    }).catch(() => {});
+  }
 }
 
 // Trigger Tiger Win on conversation-end signals
