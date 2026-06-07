@@ -1040,6 +1040,16 @@ async function handleAPI(path, request, env, url) {
           const avgTurns = Math.round(totalTurns / totalSessions);
           const engagement = avgTurns > 15 ? "chatty and engaged" : avgTurns > 8 ? "moderately talkative" : "still warming up";
           const world_model = `${totalSessions} sessions. ${freq}. ${engagement} (~${avgTurns} turns/session). Vocab covered: ${allVocab.slice(0, 10).join(", ") || "building vocabulary"}.`;
+          // Cross-session struggle detection: words in 3+ sessions with SRS interval ≤ 6 = still not graduating
+          const vocabSessionCount = {};
+          for (const s of hist) { for (const w of (s.vocab || [])) { vocabSessionCount[w] = (vocabSessionCount[w] || 0) + 1; } }
+          const persistentWords = Object.entries(vocabSessionCount)
+            .filter(([w, count]) => count >= 3 && (!srsData[w] || (srsData[w]?.interval || 1) <= 6))
+            .map(([w]) => w).slice(0, 5);
+          const existingStruggles = (memoryData?.struggles || []).filter(s => !s.startsWith("Still building:"));
+          const crossSessionStruggles = persistentWords.length > 0
+            ? [...existingStruggles, `Still building: ${persistentWords.join(", ")}`]
+            : existingStruggles;
           const updatedMem = {
             ...(memoryData || {}),
             world_model,
@@ -1047,7 +1057,7 @@ async function handleAPI(path, request, env, url) {
             session_count: totalSessions,
             last_topic: memoryData?.last_topic || "",
             breakthroughs: memoryData?.breakthroughs || [],
-            struggles: memoryData?.struggles || [],
+            struggles: crossSessionStruggles.slice(-10),
             synthesized_at: new Date().toISOString()
           };
           if (env.STUDENT_MEMORY) env.STUDENT_MEMORY.put(`mem:${studentId}`, JSON.stringify(updatedMem)).catch(() => {});
