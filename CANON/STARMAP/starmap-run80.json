@@ -1,14 +1,14 @@
 {
   "run": "80",
   "rrl_path": "D:\\OB-1-CANONICAL\\RRL\\RRL-80.txt",
-  "ledger_id": "HL-496",
+  "ledger_id": "HL-498",
   "session_id": "sov100-roman-run80",
   "rrl_chars": 65304,
   "rrl_bytes": 65778,
-  "soul_delta": 0,
-  "soul_event_id": "DRYRUN",
+  "soul_delta": 33893,
+  "soul_event_id": "e192dfa5-4d91-49c1-8a4a-f64b4eb486ed",
   "dna_count": 0,
   "blueprint_count": 0,
-  "sealed_at": "2026-06-06T19:23:29.9413883+07:00",
-  "merkle_hash": "0f0074919742504734a27db0929198033860d4b752607f7bccd610abf9789557"
+  "sealed_at": "2026-06-07T08:40:02.0328130+07:00",
+  "merkle_hash": "24c6b270f6496ee703a0060d74eae1cc1e17f4a02ce5f5dddd7c0a4ef89a74d4"
 }

@@ -1,19 +1,19 @@
 {
   "run_number": "80",
-  "executed_at": "2026-06-06T19:23:30.1040185+07:00",
+  "executed_at": "2026-06-07T08:40:02.3715841+07:00",
   "rrl_path": "D:\\OB-1-CANONICAL\\RRL\\RRL-80.txt",
   "rrl_chars": 65304,
   "rrl_bytes": 65778,
   "session_id": "sov100-roman-run80",
-  "soul_event_id": "DRYRUN",
-  "soulcount": 0,
-  "soul_level": "UNKNOWN",
+  "soul_event_id": "e192dfa5-4d91-49c1-8a4a-f64b4eb486ed",
+  "soulcount": 33893,
+  "soul_level": "TITANIUM_ANCHOR",
   "dna_count": 0,
-  "ledger_id": "HL-496",
+  "ledger_id": "HL-498",
   "starmap_file": "D:\\OB-1-CANONICAL\\CANON\\STARMAP\\starmap-run80.json",
   "keyword_file": "D:\\OB-1-CANONICAL\\CANON\\SOUL-KEYWORDS\\rfkw-run80.txt",
   "pipeline_file": "D:\\OB-1-CANONICAL\\CANON\\PIPELINE\\pipeline-run80.json",
-  "seal_sha": "61658189d7202be03b46c28aeb460f7cbdab55e7adc4fbbc11260dbc0b1d05f5",
+  "seal_sha": "78daeaaad69d3e8b7d52451fc0b3f12841dd334e2847bb8dcbc70b12b5b2e43e",
   "result": "COMPLETE"
 }
 

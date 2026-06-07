@@ -1,0 +1,12 @@
+{
+  "run": 80,
+  "artifact_file": "CANON/SOUL/EXTRACT/dna-run80.json",
+  "ledger_id": "HL-498",
+  "rrl_path": "RRL/RRL-80.txt",
+  "blueprint_count": 0,
+  "total_records": 0,
+  "fingerprint": "dna-run80-MISSING",
+  "stale": true,
+  "created_at": "2026-06-07T09:00:00+07:00",
+  "note": "DNA extraction not possible — RRL-80.txt is Kilo JSONL format (display/pastedContents), not Claude Code JSONL (role/user/assistant). Split-RL extracts 0 agent turns. dna-run80.json does not exist. Gap documented."
+}
