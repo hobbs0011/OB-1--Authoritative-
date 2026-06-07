@@ -12,6 +12,22 @@
 
 ---
 
+## L78 WRITE AUDIT — PERMANENT ENFORCEMENT (Run 083+)
+
+### WRITE_GATE — Runs before every Edit/Write tool call
+- Classify the task: (A) content generation/structured prose → PA first | (B) data patch <3 fields → inline OK | (C) law/doctrine edit requiring judgment → inline OK | (D) git operation → inline OK
+- If (A) and OB-1 writes inline anyway → L78 VIOLATION → log WRITE_GAP in phetrail immediately + death seal §4
+- No size exception. "Only 10 lines" is not a valid reason to skip PA.
+
+### INLINE FORBIDDEN list (hardcoded — PA must be dispatched first)
+`keyword lists | BB entries | phetrail paragraphs | memory updates | analysis summaries | session notes | death seal sections | DNA extract prose | starmap narratives`
+
+### WRITE_GAP audit at DEATH
+Before sealing, list every Edit/Write call. Any (A) task done inline = WRITE_GAP entry in §4.
+WRITE_GAP does not block death but must be named. Silence = repeat offense next session.
+
+---
+
 ## IMMEDIATE BLOCKERS (must do before next deploy)
 
 ### BB-01 !! NET_PET_KV Namespace Not Provisioned

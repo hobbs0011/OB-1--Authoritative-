@@ -118,6 +118,40 @@ If Tier 1 fails → escalate to Tier 2. Print:
 - **L56 PRE_CODE_DOC_GATE** — Any NET-PET-AI dispatch: run `context-bundle.ps1 -TaskType netpetai` first. See `CANON/SYSTEM/MANDATORY-READS.md` for the full registry.
 - **L78 PA_DO_ALL** — Anything and everything that can be handed off to PA, must be. OB-1 routes only — PA executes. If PA cannot handle a task, UPDATE PA first (fix execute.js, improve system prompt, add context) before executing inline. Inline execution is the failure mode. Token conservation is doctrine. This is a SOUL DIRECTIVE (Run 082).
 
+  **ALWAYS PA (no exceptions, no "too small" rationalisation):**
+  - Keyword lists (rfkw-run*.txt)
+  - Backburner entries (BB-### prose)
+  - Pheromone trail paragraphs
+  - Memory file updates
+  - Analysis summaries / research writeups
+  - Any structured prose > 3 lines
+  - Any file write where content is generated, not copied verbatim from an existing source
+
+  **INLINE ALLOWED (and ONLY these):**
+  - Single-value data patches (UUID swap, timestamp, field rename — <3 fields changed)
+  - Law/doctrine edits to CLAUDE.md, AGENTS.md (require OB-1 judgment — PA cannot make these)
+  - Git operations (add, commit, status — not content generation)
+  - File reads and routing decisions
+
+  **⚠️ GUARDRAIL 1 — PRE-WRITE GATE (fires before EVERY Edit/Write tool call):**
+  Before touching Edit or Write, answer: "Is this content generation or structured prose?"
+  - YES → STOP. Dispatch to PA. Do not write a single line inline first.
+  - NO (data patch / law edit / git) → proceed inline, note why in output.
+  Failure to run this gate = L78 violation. Log it in phetrail immediately (L77 MISTAKES MADE trigger).
+
+  **⚠️ GUARDRAIL 2 — INLINE FORBIDDEN LIST (hardcoded, no override):**
+  If OB-1 is about to call Edit or Write on ANY of these task types, it MUST dispatch to PA instead:
+  `keyword list | BB entry | phetrail paragraph | memory update | analysis summary | session notes | commit message prose | death seal sections | starmap narrative | DNA extract`
+  Rationalisations that are NOT valid: "it's only 10 lines", "I already know the content", "PA might return empty", "faster to do inline". None of these override L78.
+
+  **⚠️ GUARDRAIL 3 — SESSION-END WRITE AUDIT (fires at DEATH, alongside §7 phetrail gate):**
+  Before sealing DEATH, enumerate every Edit/Write call made this session. For each one, classify:
+  - (A) Dispatched to PA first → patch applied ✓
+  - (B) Data patch inline (UUID, timestamp, <3 fields) → permitted ✓
+  - (C) Law/doctrine edit requiring judgment → permitted ✓
+  - (D) Content generation done inline → L78 VIOLATION → flag as WRITE_GAP in death seal §4
+  If any (D) entries exist → note which tasks, why PA wasn't used, what to fix next session. WRITE_GAP is not a blocker (can't undo) but MUST be documented.
+
   **Edge cases — when PA truly cannot be used (document in phetrail, do not silently inline):**
   - PA empty patch: log DISPATCH_EMPTY trigger → escalate to Kilo T3 (Opus) via kilo chat, NOT inline
   - PA down: check /api/status → if CF Workers AI down → HALT, fix PA first (L58)
