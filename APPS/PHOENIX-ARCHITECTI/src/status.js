@@ -38,8 +38,8 @@ export async function handleStatus(env) {
   try {
     const start = Date.now();
     await withTimeout(
-      env.AI.run('@cf/meta/llama-3.3-70b-instruct', { messages: [{ role: 'user', content: 'ping' }], max_tokens: 5 }),
-      5000
+      env.AI.run('@cf/meta/llama-3.3-70b-instruct-fp8-fast', { messages: [{ role: 'user', content: 'ping' }], max_tokens: 5 }),
+      15000
     );
     result.ai.llama_70b = { ok: true, ms: Date.now() - start };
   } catch {
