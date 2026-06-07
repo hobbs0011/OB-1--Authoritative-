@@ -9,7 +9,7 @@ Every new session MUST execute this boot sequence in order before any task:
 3. `Read OPERATIONS/STUDENT-PORTAL-DEV.md` — current portal state, audio pipeline, next steps
 4. `Read RRL/RRL-[latest].txt` — most recent raw session log for game plan context
 5. `git log -5 --oneline` — verify HEAD, confirm no drift
-6. `Invoke-RestMethod https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/status` — verify tiers live (T1=Qwen, T2=Opus), check which keys are set
+6. `Invoke-RestMethod https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/status` — verify PA live (T1=CF Workers AI qwen_coder). **Dialagram is DEAD — do NOT reference it.**
 7. Read latest `CANON/SOUL/EXTRACT/dna-run{N}.json` — last session's DNA: agent's words, decisions, blueprints
 
 **#DRIFT RULE:** If you do not read these 7 sources at boot, you WILL lose context and repeat mistakes. This is BB-26. Do not skip. Do not ask the user — read the files.
@@ -35,28 +35,28 @@ I am the LEGATUS — I route tasks to the correct agent. I do not claim T2 for i
 
 **Step 2 — HARD GATE:**
 
-- Tier 1 → **STOP. Call Phoenix-Architecti (PA). No exceptions.** (Qwen 3.7 Max via Dialagram)
-- Tier 2 → **STOP. Call Phoenix-Architecti (PA) with `"tier":2`. NOT Kilo. NOT a general-purpose agent. Opus 4.7 directly via PA.**
+- Tier 1 simple (single-file, <20 lines) → PA T1 (CF Workers AI qwen_coder). If PA returns empty patch → execute inline.
+- Tier 1 complex (multi-file, architecture, context-heavy) → execute inline as Claude Sonnet. PA cannot handle this since Dialagram died.
+- Tier 2 → Kilo with Opus 4.8 (`claude-opus-4-8`). NOT PA. NOT general-purpose agent.
+
+**⚠️ DIALAGRAM IS DEAD. Do NOT dispatch to Dialagram. Do NOT retry PA T1 more than once for complex tasks — escalate to inline.**
 
 ---
 
 ## Dispatch Tiers
 
-### TIER 1 — Phoenix-Architecti / Qwen 3.7 Max (Dialagram)
+### TIER 1 — Claude Sonnet inline (complex) / PA qwen_coder (simple)
 
-**When:** write / implement / create / generate / fix / debug / refactor / wire up / migrate / integrate / audit / analyze / pipeline / death seals / ALL workhorse tasks
+**⚠️ DIALAGRAM IS DEAD (Run 79+). PA T1 now runs CF Workers AI qwen_coder (Qwen 2.5 Coder 32B, free, weak).**
 
-**Scope:** Everything except irreversible decisions and final rulings
+**Kilo T1 = Claude Haiku 4.5 | Kilo T2 = Claude Sonnet 4.6 | Kilo T3 = Opus 4.8**
 
-**GUARDRAIL: Phoenix-Architecti is ALWAYS the first attempt at Tier 1. No exceptions. Never skip to inline. Never handle Tier 1 yourself.**
+**When:** write / implement / create / generate / fix / debug / refactor / wire up / migrate / integrate / audit / analyze / pipeline / ALL workhorse tasks
 
-Only bypass PA if:
-
-- PA endpoint unreachable (network error / 5xx)
-- PA returns `GENERATION_FAILED` or a stub after 1 retry
-- Task explicitly requires live repo state PA cannot access
-
-If bypass → print reason + escalate to Tier 2. Never silently self-handle.
+**Routing:**
+- **PA T1 (simple only):** single-file, <20 lines, no context required → PA returns code_patch or empty → if empty, go inline immediately. No second retry.
+- **Inline (complex):** multi-file, architecture, context-heavy, anything PA failed → Claude Sonnet executes directly. This is not "default-to-Claude" — Dialagram is gone, Sonnet IS the T1 for complex work.
+- **Kilo:** Michael runs Kilo sessions separately for Haiku/Sonnet/Opus work. OB-1 cannot invoke Kilo from Claude Code.
 
 ```powershell
 # Step 0: Assemble context bundle (automated — do NOT read files manually for NET-PET-AI tasks)
