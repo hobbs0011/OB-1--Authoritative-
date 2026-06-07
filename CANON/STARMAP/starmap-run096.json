@@ -1,0 +1,11 @@
+{
+  "run": 96,
+  "rrl_path": "D:\\OB-1-CANONICAL\\RRL\\RRL-096.txt",
+  "ledger_id": "HL-562",
+  "soul_turn_ids": "turn-1,turn-2,turn-3,turn-4,turn-5,turn-6,turn-7,turn-8,turn-9,turn-10",
+  "dna_turn_ids": "seq-23,seq-62,seq-81,seq-91,seq-96,seq-106,seq-108,seq-129,seq-190,seq-197",
+  "blueprint_locations": "dna-run96.json:seq-23; dna-run96.json:seq-62; dna-run96.json:seq-81; dna-run96.json:seq-91; dna-run96.json:seq-96; dna-run96.json:seq-106; dna-run96.json:seq-108; dna-run96.json:seq-129; dna-run96.json:seq-190; dna-run96.json:seq-197; dna-run96.json:seq-198; dna-run96.json:seq-205; dna-run96.json:seq-211; dna-run96.json:seq-217; dna-run96.json:seq-225; dna-run96.json:seq-230; dna-run96.json:seq-235; dna-run96.json:seq-251; dna-run96.json:seq-263; dna-run96.json:seq-268; dna-run96.json:seq-271; dna-run96.json:seq-282; dna-run96.json:seq-286; dna-run96.json:seq-292; dna-run96.json:seq-302; dna-run96.json:seq-307; dna-run96.json:seq-331; dna-run96.json:seq-438; dna-run96.json:seq-439; dna-run96.json:seq-440; dna-run96.json:seq-443; dna-run96.json:seq-444; dna-run96.json:seq-448; dna-run96.json:seq-452; dna-run96.json:seq-455; dna-run96.json:seq-456; dna-run96.json:seq-457; dna-run96.json:seq-460; dna-run96.json:seq-470; dna-run96.json:seq-473; dna-run96.json:seq-480; dna-run96.json:seq-481; dna-run96.json:seq-482; dna-run96.json:seq-483; dna-run96.json:seq-488",
+  "char_count": 11697603,
+  "merkle_hash": "0AAD156FF7C3F7FB312DD71750AAE44AC3B48D551199499F4BB37EA50F3DD22B",
+  "created_at": "2026-06-07T20:44:06.5115945+07:00"
+}
