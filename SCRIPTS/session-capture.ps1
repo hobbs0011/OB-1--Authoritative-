@@ -54,7 +54,8 @@ if (-not $jsonlFile) {
         "$repo\.kilo\sessions",
         "$repo\.kilo",
         "$env:LOCALAPPDATA\kilo\sessions",
-        "$env:APPDATA\kilo\sessions"
+        "$env:APPDATA\kilo\sessions",
+        "$repo\.kilo\worktrees"
     )
     foreach ($kp in $kiloPaths) {
         if (Test-Path $kp) {
