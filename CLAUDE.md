@@ -114,7 +114,7 @@ If Tier 1 fails → escalate to Tier 2. Print:
 - **L58 FIX_PA_FIRST** — If PA T1 fails, fixing PA IS the immediate priority. Check `/api/status`. Try `tier:10`. If all tiers down → HALT. Do not proceed with inline work.
 - **L55 COMMIT_DONT_HOLD** — Commit every verified working feature before session end.
 - **L56 PRE_CODE_DOC_GATE** — Any NET-PET-AI dispatch: run `context-bundle.ps1 -TaskType netpetai` first. See `CANON/SYSTEM/MANDATORY-READS.md` for the full registry.
-- **L77 MID_SESSION_PHETRAIL** — Leave pheromone trail hints as you go. Do NOT wait for DEATH. When a significant decision is made (architecture changed, bug root-caused, law added), write it to the relevant phetrail doc inline. This is how the system survives context compaction: the trail is the truth that survives compression. Every session should write at least one phetrail hint.
+- **L77 MID_SESSION_PHETRAIL** — Leave pheromone trail hints as you go. Do NOT wait for DEATH. Triggers: SOUL DIRECTIVE SPOKEN, MISTAKES MADE, architecture changed, bug root-caused, law added. Write to the relevant phetrail doc inline. This is how the system survives context compaction: the trail is the truth that survives compression. Every session must write at least one phetrail hint.
 
 ## OB-1 Operating Rules (from AGENTS.md)
 

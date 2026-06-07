@@ -66,4 +66,6 @@ Llama 3.3 70B FP8 is the strongest CF Workers AI model available without externa
 ---
 
 ## L77 MID_SESSION_PHETRAIL
-Leave inline pheromone hints as you work. Do NOT wait for DEATH. Update this file when the execute cascade changes.
+Leave inline pheromone hints as you work. Do NOT wait for DEATH.
+**Triggers:** SOUL DIRECTIVE SPOKEN · MISTAKES MADE · architecture changed · bug root-caused · law added
+Update this file whenever the PA execute cascade changes. This file IS the phetrail for PA dev work.
