@@ -15,6 +15,11 @@ function stripFences(text) {
   return text.replace(/^```[a-zA-Z0-9]*\n?/m, '').replace(/\n?```\s*$/m, '').trim();
 }
 
+function stripThinkTags(text) {
+  if (!text) return '';
+  return text.replace(/<think>[\s\S]*?<\/think>/gi, '').trim();
+}
+
 export async function handleExecute(request, env) {
   const adminResponse = await checkAdminKey(request, env);
   if (adminResponse !== null) return adminResponse;
@@ -58,6 +63,18 @@ export async function handleExecute(request, env) {
           usedModel = 'deepseek-chat';
           tierUsed = 2;
         }
+      }
+    } catch (_) {}
+  }
+
+  // T2-FREE: DeepSeek R1 Distill 32B via CF Workers AI (free reasoning T2, no key required)
+  if (tier === 2 && !aiResult) {
+    try {
+      const r1Result = await env.AI.run('@cf/deepseek-ai/deepseek-r1-distill-qwen-32b', { messages, max_tokens: 8192 });
+      if (r1Result?.response) {
+        aiResult = { response: stripThinkTags(r1Result.response) };
+        usedModel = '@cf/deepseek-ai/deepseek-r1-distill-qwen-32b';
+        tierUsed = 2;
       }
     } catch (_) {}
   }
