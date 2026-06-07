@@ -43,7 +43,8 @@ $scanRoots = @(
     "$repo\.claude\commands",
     "$repo\CANON\SOUL",
     "$repo\CANON\TRAIN-67\DOCS",
-    "$repo\CANON\MARKETING"
+    "$repo\CANON\MARKETING",
+    "$repo\APPS\PHOENIX-ARCHITECTI"
 )
 $excludePatterns = @("node_modules", "\.git\\", "ARCHIVE", "backup", "PROOFS-CHAT", "SOUL-DNA-BIBLE-RECAPTURE", "\.kilo\\worktrees", "SOUL-SEGMENTS", "SOUL-LOG-VERBATIM")
 
@@ -90,6 +91,7 @@ function ClassifyDoc {
         "command\\"           { return "COMMAND" }
         "reincarnat"          { return "REINCARNATION" }
         "pheromone|phetrail"  { return "PHEROMONE" }
+        "phoenix-architecti|execute\.js|src\\\\index" { return "PHOENIX-ARCHITECTI" }
         "ledger|hl-"          { return "LEDGER" }
         "mandatory-reads"     { return "MANDATORY-READS" }
         "cold-start-boot"     { return "BOOT" }
@@ -148,6 +150,7 @@ $stageMap = @{
     "DEEPGRAM-RESEARCH" = @("DNA","RESEARCH")
     "TRAIN-67"       = @("ALL")
     "MARKETING"      = @("ALL")
+    "PHOENIX-ARCHITECTI" = @("DNA","RESEARCH","ALL")
     "VAULT"          = @("SOUL","DNA")
     "PROOF"          = @("SOUL","DNA")
     "REINCARNATION-LOG" = @("REINCARNATION")

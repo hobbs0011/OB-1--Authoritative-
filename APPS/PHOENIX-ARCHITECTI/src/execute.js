@@ -39,8 +39,8 @@ export async function handleExecute(request, env) {
   ];
 
   let aiResult;
-  let usedModel = model || '@cf/qwen/qwen2.5-coder-32b-instruct';
-  let tierUsed = 10;
+  let usedModel = '@cf/meta/llama-3.3-70b-instruct-fp8-fast';
+  let tierUsed = 1;
 
   // T2: DeepSeek Flash (deepseek-chat via api.deepseek.com)
   if (tier === 2 && env.DEEPSEEK_API_KEY) {
@@ -61,41 +61,20 @@ export async function handleExecute(request, env) {
     } catch (_) {}
   }
 
-  // T1: Kilo → CF-Qwen cascade
-  if (!aiResult && env.DIALAGRAM_API_KEY) {
+  // T1: Llama 3.3 70B via CF Workers AI (primary — strong, free, no external key)
+  if (!aiResult) {
     try {
-      const kiloResponse = await fetch(`https://phoenix-architecti.mrmichaelhobbs123.workers.dev/v1/chat/completions`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${env.DIALAGRAM_API_KEY}`
-        },
-        body: JSON.stringify({
-          model: 'kilo-auto/free',
-          messages: messages,
-          max_tokens: 8192
-        })
-      });
-
-      if (kiloResponse.ok) {
-        const kiloJson = await kiloResponse.json();
-        if (kiloJson.choices && kiloJson.choices[0] && kiloJson.choices[0].message && kiloJson.choices[0].message.content) {
-          aiResult = {
-            response: kiloJson.choices[0].message.content
-          };
-          usedModel = 'kilo-auto/free';
-          tierUsed = 1; // Kilo tier
-        }
-      }
-    } catch (error) {
-      // Fall through to CF-Qwen if Kilo fails
-    }
+      aiResult = await env.AI.run('@cf/meta/llama-3.3-70b-instruct-fp8-fast', { messages, max_tokens: 8192 });
+      usedModel = '@cf/meta/llama-3.3-70b-instruct-fp8-fast';
+      tierUsed = 1;
+    } catch (_) {}
   }
 
-  // T10: CF-Qwen fallback
+  // T10: Qwen 2.5 Coder — fallback if Llama unavailable
   if (!aiResult) {
-    aiResult = await env.AI.run(usedModel, { messages, max_tokens: 8192 });
-    // tierUsed remains 10 for CF-Qwen
+    aiResult = await env.AI.run('@cf/qwen/qwen2.5-coder-32b-instruct', { messages, max_tokens: 8192 });
+    usedModel = '@cf/qwen/qwen2.5-coder-32b-instruct';
+    tierUsed = 10;
   }
 
   const patch = stripFences(aiResult.response ?? '');
