@@ -75,4 +75,4 @@ Write to this doc when ANY trigger fires (see CLAUDE.md L77 for full trigger lis
 - MODEL CHANGED: all three PA AI handlers now default to @cf/meta/llama-3.3-70b-instruct-fp8-fast
 - DEPLOY VERIFIED: 3640354e live, llama_70b ok=true 160ms, qwen_coder ok=true 378ms
 - LAW ADDED: L77 MID_SESSION_PHETRAIL sealed with full trigger list + enforcement gates
-- BUG ROOT-CAUSED: D1 logging returns null — logger.js CREATE TABLE + INSERT fails silently (pre-existing, non-blocking)
+- BUG ROOT-CAUSED + FIXED: D1 logging — live table missing `ip` column (5 cols vs 6 in logger schema). ALTER TABLE ADD COLUMN ip TEXT fixed it. D1_ID now returns real IDs (e.g. PC-1780801246129-JCRZPT). Full audit trail restored.
