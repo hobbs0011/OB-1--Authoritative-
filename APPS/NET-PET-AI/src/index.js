@@ -652,6 +652,26 @@ async function handleAPI(path, request, env, url) {
     return handleAdminAudit(env, url);
   }
 
+  // B2B: GET /api/admin/student-activity — employer-facing practice frequency
+  if (path === "/api/admin/student-activity" && method === "GET") {
+    const students = ["quy-bluetech", "mai-tram-bluetech", "huong-bluetech"];
+    const results = await Promise.all(students.map(async (sid) => {
+      const raw = await env.NET_PET_KV.get("student_profile_" + sid);
+      const profile = raw ? JSON.parse(raw) : {};
+      const streakRaw = await env.NET_PET_KV.get("student_streak_" + sid);
+      const streak = streakRaw ? JSON.parse(streakRaw) : {};
+      return {
+        studentId: sid,
+        name: profile.name || profile.fullName || sid,
+        level: profile.level || "A1",
+        currentStreak: streak.currentStreak || profile.streak?.currentStreak || 0,
+        lastSession: streak.lastSessionDate || profile.streak?.lastSessionDate || null,
+        totalSessions: streak.totalSessions || profile.totalSessions || 0,
+      };
+    }));
+    return addCors(json({ students: results, generatedAt: new Date().toISOString() }), request);
+  }
+
   // Image Generation Proxy — forwards to configured Image Gen URL (Vast.ai, RunPod, or local)
     if (path === "/api/image" && method === "POST") {
       try {

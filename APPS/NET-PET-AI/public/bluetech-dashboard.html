@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BlueTech — Staff English Practice</title>
+  <style>
+    body { font-family: sans-serif; max-width: 700px; margin: 40px auto; padding: 0 16px; background: #f9f9f9; }
+    h1 { color: #1e293b; font-size: 1.4rem; }
+    .subtitle { color: #64748b; margin-bottom: 24px; font-size: 0.9rem; }
+    table { width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,.08); }
+    th { background: #1e293b; color: white; padding: 12px 16px; text-align: left; font-size: 0.85rem; }
+    td { padding: 12px 16px; border-bottom: 1px solid #f1f5f9; font-size: 0.9rem; }
+    tr:last-child td { border-bottom: none; }
+    .streak-active { color: #16a34a; font-weight: 600; }
+    .streak-dead { color: #dc2626; }
+    .level { background: #e0f2fe; color: #0369a1; padding: 2px 8px; border-radius: 10px; font-size: 0.78rem; }
+    #error { color: #dc2626; margin-top: 16px; }
+    #loading { color: #64748b; }
+  </style>
+</head>
+<body>
+  <h1>BlueTech — English Practice Tracker</h1>
+  <p class="subtitle">Live data · Updated each session</p>
+  <div id="loading">Loading…</div>
+  <div id="error" hidden></div>
+  <table id="tbl" hidden>
+    <thead><tr><th>Employee</th><th>Level</th><th>Streak</th><th>Total Sessions</th><th>Last Practice</th></tr></thead>
+    <tbody id="tbody"></tbody>
+  </table>
+  <script>
+    const KEY = new URLSearchParams(location.search).get("key") || "";
+    fetch("/api/admin/student-activity", { headers: { "x-admin-key": KEY } })
+      .then(r => r.json())
+      .then(data => {
+        document.getElementById("loading").hidden = true;
+        if (data.error) { document.getElementById("error").textContent = data.error; document.getElementById("error").hidden = false; return; }
+        const tbody = document.getElementById("tbody");
+        data.students.forEach(s => {
+          const last = s.lastSession ? new Date(s.lastSession).toLocaleDateString("en-GB") : "Never";
+          const streakClass = s.currentStreak > 0 ? "streak-active" : "streak-dead";
+          tbody.innerHTML += `<tr>
+            <td>${s.name}</td>
+            <td><span class="level">${s.level}</span></td>
+            <td class="${streakClass}">${s.currentStreak} day${s.currentStreak !== 1 ? "s" : ""}</td>
+            <td>${s.totalSessions}</td>
+            <td>${last}</td>
+          </tr>`;
+        });
+        document.getElementById("tbl").hidden = false;
+      })
+      .catch(() => { document.getElementById("loading").hidden = true; document.getElementById("error").textContent = "Failed to load."; document.getElementById("error").hidden = false; });
+  </script>
+</body>
+</html>
