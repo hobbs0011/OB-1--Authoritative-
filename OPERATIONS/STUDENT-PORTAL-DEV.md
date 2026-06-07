@@ -974,3 +974,48 @@ Max 10KB per student. Non-breaking additive — existing sessions work without m
 13. Nova-3 Vietnamese-accented English accuracy test (pending)
 14. Browser SDK migration cost/benefit analysis (pending)
 15. Dreamer World Model KV write path (design complete, implementation deferred)
+
+---
+
+## BB-51 — SOV100 Portal Standard Formula (Run 085)
+
+### Required Sections
+- setPwModal
+- topNav with navBackdrop and navToggle
+- statsGrid with tigerScore and streakVal
+- phonicsCard with phonicsDrillBox
+- OBI chat launch button
+
+### Required JS Config Vars
+- `STUDENT_ID` — hardcoded per portal file
+- `PORTAL_PASSWORD` — compared against KV `student_pw_{STUDENT_ID}`
+
+### Required CSS Vars (:root)
+```css
+:root {
+  --void: #0a0a12;
+  --card: rgba(22,22,35,0.85);
+  --purple: #a855f7;
+  --purple-glow: rgba(168,85,247,0.25);
+  --gold: #f59e0b;
+  --teal: #14b8a6;
+  --red: #ef4444;
+  --text: #f8fafc;
+  --dim: #94a3b8;
+  --border: rgba(255,255,255,0.08);
+}
+```
+
+### Portal Generation Checklist (new student)
+1. Copy `quy-portal.html` (gold standard — most feature-complete)
+2. Set `STUDENT_ID = '{new-id}'` (line ~1)
+3. Update `<title>` and all student name display strings
+4. Set accent color (var on login-box, nav, tigerScore glow)
+5. Update `/public/{new-id}-portal.html` path in wrangler
+6. Deploy to `net-pet-ai-dev` first — verify login + OBI launch + phonics load
+7. Write student KV profile (`student_profile_{id}`, `student_pw_{id}`)
+8. Promote to prod after smoke test
+
+### Gap: sov100-portal.html needs sync
+sov100-portal.html (DEV reference) is missing: setPwModal, statsGrid, tigerScore, streakVal, navToggle, navBackdrop.
+Action: sync from quy-portal structure on next portal sprint (Run 086+).
