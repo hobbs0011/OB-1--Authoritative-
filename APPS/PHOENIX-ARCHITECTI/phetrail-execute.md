@@ -70,6 +70,14 @@ Write to this doc when ANY trigger fires (see CLAUDE.md L77 for full trigger lis
 **DEATH GATE:** Before sealing, enumerate all triggers fired → confirm phetrail entry exists for each.
 **RISE STAGE 7:** 0 entries for a multi-trigger session = PHETRAIL_GAP flag.
 
+### Run 085 Triggers Fired (Session resumed post-compaction)
+
+- SESSION RESUMED AFTER COMPACTION: context compacted between Run 084 and this turn. Resumed directly into BB-40 (/supersaiyan).
+- BB OPENED OR CLOSED: BB-40 CLOSED — OBI session continuity greeting wired. memoryData.last_topic returned as lastSessionTopic from /api/deepgram-token. chat.js stores as lastSessionTopicGlobal, greeting logic restructured to check topic (cross-session KV) ABOVE chatMessages.length gate (in-session only). commit 842ff108, prod dc1fb5ba.
+- DEPLOY VERIFIED: net-pet-ai prod dc1fb5ba live. lastSessionTopic verified for sov100-test-magic: "30-second project status updates — BlueTech meeting prep".
+- DISPATCH EMPTY (negative trail): PA dispatched for BB-40 greeting prose. Returned wrong variable names (viGreet/greetName instead of _viGreet/_greetName) + truncated strings. Applied corrected version using PA's structure. Tight blueprint fix: always show exact variable names and full string content in task spec — PA hallucinates shorthand.
+- BUG ROOT-CAUSED: Initial greeting logic placed lastSessionTopicGlobal INSIDE chatMessages.length > 0 gate — that gate is false at fresh session start (chatMessages = []). Cross-session KV data (topic + vocab) must be checked ABOVE the in-session gate, not inside it.
+
 ### Run 084 Triggers Fired
 
 - ARCHITECTURE CHANGED: src/status.js + src/index.js — /api/probe route added. handleProbe(request, env) exported from status.js. Accepts ?model= param, times env.AI.run(), returns {model, ok, ms, preview, error}. Deployed version 0fabc73a.

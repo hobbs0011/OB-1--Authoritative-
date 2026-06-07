@@ -277,11 +277,12 @@ WRITE_GAP does not block death but must be named. Silence = repeat offense next 
 - Fix: Add current mode name label next to avatar in header, or show a persistent mode chip in the UI that makes clickability obvious.
 - File: APPS/NET-PET-AI/public/magic-chat.html + chat.js
 
-### BB-40 ! Session History Review by OBI — OPEN (RRL-29: "why isnt obi reviewing last sessions?")
-- Status: OPEN
-- What: OBI doesn't recall or reference prior sessions in its opening. context.messages sends last 6 turns but OBI doesn't explicitly acknowledge or build on prior session themes.
-- Fix: On SettingsApplied, send InjectAgentMessage with a brief session continuity reference: "Last time we talked about [last_topic]. How are you feeling about that today?"
-- File: APPS/NET-PET-AI/public/chat.js (post-SettingsApplied handler) + /api/deepgram-token (include session history in Settings context.messages)
+### BB-40 ! Session History Review by OBI — DONE (2026-06-07, commit 842ff108, prod dc1fb5ba)
+
+- Status: DONE
+- What: OBI now references prior session topic in opening greeting via lastSessionTopicGlobal
+- How: /api/deepgram-token returns lastSessionTopic from memoryData.last_topic. chat.js stores as lastSessionTopicGlobal and checks it in SettingsApplied greeting BEFORE chatMessages gate (cross-session KV). Priority: topic → vocab → in-session → new-user.
+- Verified: sov100-test-magic returns "30-second project status updates — BlueTech meeting prep"
 
 ### BB-41 ~ Deepgram Male Voice Option — OPEN (RRL-29: "try a male agentic voice")
 - Status: OPEN
