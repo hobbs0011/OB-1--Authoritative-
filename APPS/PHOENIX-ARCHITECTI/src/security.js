@@ -108,7 +108,7 @@ function sanitizeInput(input, maxLength) {
     }
   }
   if (SECURITY.SANITIZE.blockXss) {
-    const xssPatterns = [/<script\b/i, /javascript:/i, /on\w+\s*=/i, /<iframe/i, /<object/i, /<embed/i, /eval\s*\(/i];
+    const xssPatterns = [/<script\b/i, /javascript:/i, /\bon\w+\s*=/i, /<iframe/i, /<object/i, /<embed/i, /eval\s*\(/i];
     for (const p of xssPatterns) {
       if (p.test(output)) {
         console.warn('XSS_ATTEMPT:', output.slice(0, 50));
