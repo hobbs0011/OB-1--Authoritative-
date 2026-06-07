@@ -987,15 +987,17 @@ async function handleAPI(path, request, env, url) {
     } catch (_) {}
 
     let lastSessionNotes = "";
+    let lastSessionVocab = [];
     try {
-      const rawHistory = await env.NET_PET_KV.get("session_history_" + studentId);
-      if (rawHistory) {
-        const history = JSON.parse(rawHistory);
-        const last = history[0];
-        if (last) {
+      if (rawSessionHistory) {                    // reuse top-level fetch — NO second KV.get
+        const hist = JSON.parse(rawSessionHistory);
+        if (hist.length > 0) {
+          const last = hist[hist.length - 1];     // MOST RECENT (chronological ascending)
           const daysAgo = Math.floor((Date.now() - (last.ts || Date.now())) / 86400000);
           const when = daysAgo === 0 ? "today" : daysAgo === 1 ? "yesterday" : daysAgo + " days ago";
-          lastSessionNotes = `LAST SESSION NOTES: Student had a session ${when} (${last.turns || 0} speaking turns).`;
+          lastSessionVocab = (last.vocab || []).slice(0, 5);
+          const vocabStr = lastSessionVocab.length > 0 ? " Vocab practiced: " + lastSessionVocab.map(w => `"${w}"`).join(", ") + "." : "";
+          lastSessionNotes = `LAST SESSION NOTES: Student had a session ${when} (${last.turns || 0} speaking turns).${vocabStr}`;
         }
       }
     } catch (_) {}
@@ -1047,7 +1049,7 @@ speak: {
       // Block W: Sydney region routing hint for VN students
       const ws_url = agentLang === 'vi' ? "wss://agent.deepgram.com/v1/agent/converse?region=syd" : null;
       await env.NET_PET_KV.put('circuit:deepgram:state', 'closed');
-      return addCors(json({ token: access_token, settings, phonicsHint, lastSessionTopic: memoryData?.last_topic || null, ws_url }), request);
+      return addCors(json({ token: access_token, settings, phonicsHint, lastSessionVocab, lastSessionTopic: memoryData?.last_topic || null, ws_url }), request);
     } catch (err) {
       await env.NET_PET_KV.put('circuit:deepgram:state', 'open', { expirationTtl: 60 });
       return addCors(json({ error: err.message }, 500), request);
