@@ -48,6 +48,24 @@ if (-not $jsonlFile) {
                  Select-Object -First 1
 }
 
+# Kilo-specific paths (Kilo stores JSONL separately from Claude Code projects)
+if (-not $jsonlFile) {
+    $kiloPaths = @(
+        "$repo\.kilo\sessions",
+        "$repo\.kilo",
+        "$env:LOCALAPPDATA\kilo\sessions",
+        "$env:APPDATA\kilo\sessions"
+    )
+    foreach ($kp in $kiloPaths) {
+        if (Test-Path $kp) {
+            $jsonlFile = Get-ChildItem $kp -Recurse -Filter "*.jsonl" -ErrorAction SilentlyContinue |
+                         Sort-Object LastWriteTime -Descending |
+                         Select-Object -First 1
+            if ($jsonlFile) { break }
+        }
+    }
+}
+
 # Last resort: history.jsonl itself IS the source
 if (-not $jsonlFile) {
     Write-Warning "JSONL file not found by UUID, copying history.jsonl as RRL"
