@@ -609,7 +609,7 @@
             try {
                 const r = await fetch('/api/student/state?studentId=' + (getStudentId ? getStudentId() : 'quy-bluetech'));
                 const d = await r.json();
-                if (d.profile && d.profile.homework_notes) notesEl.value = d.profile.homework_notes;
+                if (d.homework_notes) notesEl.value = d.homework_notes;
             } catch (e) { console.warn('homework notes load failed', e); }
             if (saveBtn) {
                 saveBtn.addEventListener('click', async () => {
@@ -618,7 +618,7 @@
                         const r = await fetch('/api/student/state', {
                             method: 'PATCH',
                             headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ homework_notes: notesEl.value })
+                            body: JSON.stringify({ studentId: getStudentId ? getStudentId() : 'quy-bluetech', homework_notes: notesEl.value })
                         });
                         if (r.ok) { status.textContent = 'Saved'; status.style.color = '#22c55e'; }
                         else { status.textContent = 'Save failed'; status.style.color = '#ef4444'; }
