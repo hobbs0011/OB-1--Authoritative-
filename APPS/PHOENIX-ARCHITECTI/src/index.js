@@ -1,5 +1,6 @@
 import { securityMiddleware, getCorsHeaders } from './security.js';
 import { handleExecute } from './execute.js';
+import { handleBatch } from './batch.js';
 import { handleMission } from './mission.js';
 import { handleSwarm } from './swarm.js';
 import { handleBlueprint } from './blueprint.js';
@@ -33,7 +34,9 @@ export default {
 
     let response;
     try {
-      if (method === 'POST' && (pathname === '/api/execute' || pathname === '/api/code')) {
+      if (method === 'POST' && pathname === '/api/batch') {
+        response = await handleBatch(request, env);
+      } else if (method === 'POST' && (pathname === '/api/execute' || pathname === '/api/code')) {
         response = await handleExecute(request, env);
       } else if (method === 'POST' && pathname === '/api/mission') {
         response = await handleMission(request, env);
