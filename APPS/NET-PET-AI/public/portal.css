@@ -14,8 +14,8 @@
             --gold-glow: rgba(245, 158, 11, 0.25);
             --teal: #14b8a6;
             --teal-glow: rgba(20, 184, 166, 0.25);
-            --text: #f8fafc;
-            --dim: #94a3b8;
+            --text: var(--text);
+            --dim: var(--dim);
             --success: #22c55e;
             --danger: #ef4444;
             --border: rgba(255, 255, 255, 0.08);
@@ -92,13 +92,13 @@
         .login-box input::placeholder { color: var(--dim); letter-spacing: 0.04em; opacity: 0.6; }
         .login-btn {
             width: 100%; padding: 14px; border-radius: 12px; border: none;
-            background: linear-gradient(135deg, var(--purple), #9333ea); color: #fff;
+            background: linear-gradient(135deg, var(--purple), var(--purple)); color: #fff;
             font-family: 'Orbitron', sans-serif; font-size: 0.95rem; font-weight: 600;
             letter-spacing: 0.06em; cursor: pointer; transition: all 0.3s;
             box-shadow: 0 4px 16px rgba(168,85,247,0.3);
         }
-        .login-btn:hover { background: linear-gradient(135deg, #b86ef8, #a855f7); box-shadow: 0 6px 24px rgba(168,85,247,0.45); transform: translateY(-1px); }
-        .login-error { color: #f87171; font-size: 0.85rem; margin-top: 10px; min-height: 20px; opacity: 0; transition: opacity 0.3s; }
+        .login-btn:hover { background: linear-gradient(135deg, var(--purple), #a855f7); box-shadow: 0 6px 24px rgba(168,85,247,0.45); transform: translateY(-1px); }
+        .login-error { color: var(--red); font-size: 0.85rem; margin-top: 10px; min-height: 20px; opacity: 0; transition: opacity 0.3s; }
         .login-error.visible { opacity: 1; }
 
         /* ── SET PASSWORD MODAL ── */
@@ -116,7 +116,7 @@
         .setpw-skip { background: none; border: none; color: var(--dim); font-family: 'Rajdhani', sans-serif; font-size: 0.85rem; cursor: pointer; padding: 4px; text-decoration: underline; opacity: 0.7; transition: opacity 0.2s; }
         .setpw-skip:hover { opacity: 1; }
         .setpw-msg { font-size: 0.85rem; margin-top: 6px; min-height: 20px; opacity: 0; transition: opacity 0.3s; }
-        .setpw-msg.err { color: #f87171; }
+        .setpw-msg.err { color: var(--red); }
         .setpw-msg.ok { color: #22c55e; }
         .setpw-msg.visible { opacity: 1; }
 
@@ -151,10 +151,10 @@
         .nav-links a:hover { color: var(--text); background: rgba(255,255,255,0.04); }
         .nav-links a.active { color: var(--gold); background: rgba(245,158,11,0.08); box-shadow: 0 0 0 1px rgba(245,158,11,0.2); }
         .nav-links a.nav-coach { color: var(--purple); background: rgba(168,85,247,0.08); box-shadow: 0 0 0 1px rgba(168,85,247,0.25), 0 0 12px rgba(168,85,247,0.15); }
-        .nav-links a.nav-coach:hover { color: #d8b4fe; background: rgba(168,85,247,0.14); box-shadow: 0 0 0 1px rgba(168,85,247,0.45), 0 0 20px rgba(168,85,247,0.3); }
+        .nav-links a.nav-coach:hover { color: var(--purple); background: rgba(168,85,247,0.14); box-shadow: 0 0 0 1px rgba(168,85,247,0.45), 0 0 20px rgba(168,85,247,0.3); }
         .nav-logout {
             font-family: 'Rajdhani', sans-serif; font-size: 0.85rem; font-weight: 600;
-            letter-spacing: 0.04em; color: #f87171; background: transparent;
+            letter-spacing: 0.04em; color: var(--red); background: transparent;
             border: 1px solid rgba(248,113,113,0.3); padding: 7px 14px; border-radius: 8px;
             cursor: pointer; transition: all 0.25s; white-space: nowrap; margin-left: 4px;
         }
@@ -225,7 +225,7 @@
         }
         .card-label { font-family: 'Rajdhani', sans-serif; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; color: var(--dim); text-transform: uppercase; margin-bottom: 10px; }
         .teacher-note { border-left: 4px solid var(--teal); padding-left: 20px; }
-        .teacher-note .note-body { font-size: 0.95rem; line-height: 1.75; color: #d1d5db; font-style: italic; margin-bottom: 12px; }
+        .teacher-note .note-body { font-size: 0.95rem; line-height: 1.75; color: var(--dim); font-style: italic; margin-bottom: 12px; }
         .teacher-note .note-sig { font-family: 'Rajdhani', sans-serif; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.05em; color: var(--teal); }
 
         /* ── MILESTONE ── */
@@ -528,3 +528,4 @@
           transition: all 0.3s; box-shadow: 0 4px 16px rgba(245,158,11,0.3);
         }
     
+

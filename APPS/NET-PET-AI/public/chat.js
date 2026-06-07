@@ -890,7 +890,7 @@ let agentTextResolve  = null;  // resolver for typed-text → InjectUserMessage 
 let agentKeepAlive    = null;  // interval handle for KeepAlive messages
 let agentSilenceTimer = null;  // fires if student is silent >2.5s after OBI speaks
 let agentSessionStart = null;  // timestamp when SettingsApplied fires
-let agentReconnectCount = 0;   // backoff counter: resets on clean SettingsApplied
+let agentReconnectCount = 0; const MAX_RECONNECT = 5;   // backoff counter: resets on clean SettingsApplied
 let agentReconnectTimer = null;// active reconnect timeout handle
 const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 // Block R/J: Multi-tab mic coordination via BroadcastChannel
@@ -1025,7 +1025,7 @@ async function openVoiceAgent() {
       micBtn.classList.remove("mic-active");
       setMicStatus("Tap to reconnect", false);
       if (agentReconnectTimer) { clearTimeout(agentReconnectTimer); agentReconnectTimer = null; }
-      if (agentReconnectCount < 5) {
+      if (agentReconnectCount < MAX_RECONNECT) {
         const delay = Math.min(2000 * Math.pow(2, agentReconnectCount), 30000);
         agentReconnectCount++;
         agentReconnectTimer = setTimeout(() => {
@@ -2044,3 +2044,5 @@ window.refreshPhonicsCard = async function() {
 };
 
 boot();
+
+
