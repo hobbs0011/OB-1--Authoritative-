@@ -137,6 +137,7 @@ If Tier 1 fails → escalate to Tier 2. Print:
   Before touching Edit or Write, answer: "Is this content generation or structured prose?"
   - YES → STOP. Dispatch to PA. Do not write a single line inline first.
   - NO (data patch / law edit / git) → proceed inline, note why in output.
+  MANDATORY VISIBILITY: Before any PA dispatch, print the full dispatch `$body` command in the response first. If you cannot construct the dispatch command, state the reason explicitly — bypasses must be VISIBLE TO MICHAEL, not silent rationalisations.
   Failure to run this gate = L78 violation. Log it in phetrail immediately (L77 MISTAKES MADE trigger).
 
   **⚠️ GUARDRAIL 2 — INLINE FORBIDDEN LIST (hardcoded, no override):**
