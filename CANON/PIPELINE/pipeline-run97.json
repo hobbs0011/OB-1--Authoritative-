@@ -1,6 +1,6 @@
 {
   "run_number": "97",
-  "executed_at": "2026-06-07T21:48:41.9276098+07:00",
+  "executed_at": "2026-06-08T00:28:05.3563072+07:00",
   "rrl_path": "D:\\OB-1-CANONICAL\\RRL\\RRL-97.txt",
   "rrl_chars": 1263068,
   "rrl_bytes": 1266404,
@@ -9,11 +9,11 @@
   "soulcount": 0,
   "soul_level": "UNKNOWN",
   "dna_count": 0,
-  "ledger_id": "HL-575",
+  "ledger_id": "HL-616",
   "starmap_file": "D:\\OB-1-CANONICAL\\CANON\\STARMAP\\starmap-run97.json",
   "keyword_file": "D:\\OB-1-CANONICAL\\CANON\\SOUL-KEYWORDS\\rfkw-run97.txt",
   "pipeline_file": "D:\\OB-1-CANONICAL\\CANON\\PIPELINE\\pipeline-run97.json",
-  "seal_sha": "7858b31bcdcebc53d59a21e43ca4a3e20574c7ec7bfee267b3f7a3f6f3ee07c2",
+  "seal_sha": "ff09b3dfe239ae49efba547428190605a52ef3a7af28a008e17821ca256b81ca",
   "result": "COMPLETE"
 }
 

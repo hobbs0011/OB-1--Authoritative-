@@ -1002,6 +1002,38 @@ async function handleAPI(path, request, env, url) {
       }
     } catch (_) {}
 
+    // Dreamer World Model synthesis — build cross-session profile from full session_history.
+    // world_model was always empty (deferred since Run 30) → Obi always started cold → this fixes it.
+    // Runs at every token request; KV write is fire-and-forget (non-blocking).
+    try {
+      if (rawSessionHistory) {
+        const hist = JSON.parse(rawSessionHistory);
+        if (hist.length > 0 && (!memoryData?.world_model || hist.length !== memoryData?.session_count)) {
+          const allVocab = [...new Set(hist.flatMap(s => s.vocab || []))].slice(0, 20);
+          const totalSessions = hist.length;
+          const weekAgo = Date.now() - 7 * 24 * 60 * 60 * 1000;
+          const recentCount = hist.filter(s => s.ts > weekAgo).length;
+          const freq = recentCount >= 3 ? "practices regularly" : recentCount >= 1 ? "practices occasionally" : "has been away for a while";
+          const totalTurns = hist.reduce((sum, s) => sum + (s.turns || 0), 0);
+          const avgTurns = Math.round(totalTurns / totalSessions);
+          const engagement = avgTurns > 15 ? "chatty and engaged" : avgTurns > 8 ? "moderately talkative" : "still warming up";
+          const world_model = `${totalSessions} sessions. ${freq}. ${engagement} (~${avgTurns} turns/session). Vocab covered: ${allVocab.slice(0, 10).join(", ") || "building vocabulary"}.`;
+          const updatedMem = {
+            ...(memoryData || {}),
+            world_model,
+            recent_vocab: allVocab,
+            session_count: totalSessions,
+            last_topic: memoryData?.last_topic || "",
+            breakthroughs: memoryData?.breakthroughs || [],
+            struggles: memoryData?.struggles || [],
+            synthesized_at: new Date().toISOString()
+          };
+          if (env.STUDENT_MEMORY) env.STUDENT_MEMORY.put(`mem:${studentId}`, JSON.stringify(updatedMem)).catch(() => {});
+          memoryData = updatedMem;
+        }
+      }
+    } catch (_) {}
+
     const _level = (agentProfile?.level || agentProfile?.englishLevel || "").toLowerCase();
     const ttsSpeed = /^a1/.test(_level) ? 0.85 : /^a2/.test(_level) ? 0.85 : (agentLang === 'vi' ? 0.9 : 1.0);
 
@@ -1019,7 +1051,14 @@ async function handleAPI(path, request, env, url) {
           endpointing: sessionMode === "free" ? 700 : 1100
         },
         think: {
-          provider: { type: "google", model: "gemini-2.5-flash" }, // LOCKED: Deepgram-managed Google. DO NOT revert to open_ai/gpt-4o-mini - Michael has asked for this repeatedly.
+          // ⛔ LOCKED — DO NOT CHANGE THIS LINE. ⛔
+          // "open_ai" here does NOT mean external OpenAI. With no `endpoint`, Deepgram runs gpt-4o-mini
+          // IN-HOUSE inside its own agentic pipeline (no key, no account, no bill, no network hop out).
+          // This is Michael's ORIGINAL plan and the ONLY config that is fast. Any other provider
+          // (google/gemini/etc) routes OUTSIDE Deepgram's pipeline = +several seconds latency = app feels
+          // inferior to Gemini. If you think this is "external routing" you are WRONG — read this comment.
+          // Broken & relitigated 3+ times. Confirmed Run 097. Guarded by test/voice-brain-lock.test.mjs.
+          provider: { type: "open_ai", model: "gpt-4o-mini" },
           prompt: buildAgentPrompt(agentProfile, agentLang, recentVocab, arcData, sessionMode, memoryData, phonicsData),
             functions: [{
               name: "save_vocabulary_word",

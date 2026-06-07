@@ -131,6 +131,11 @@
       "category": "soul+key",
       "run": 79,
       "weight": 550
+    },
+    {
+      "run": 96,
+      "weight": 1549,
+      "category": "soul+key"
     }
   ],
   "alright": {
@@ -926,16 +931,23 @@
     "weight": 306,
     "category": "soul+key"
   },
-  "block": {
-    "term": "block",
-    "runs": [
-      72,
-      73
-    ],
-    "count": 2,
-    "weight": 277,
-    "category": "soul+key"
-  },
+  "block": [
+    {
+      "term": "block",
+      "runs": [
+        72,
+        73
+      ],
+      "count": 2,
+      "weight": 277,
+      "category": "soul+key"
+    },
+    {
+      "run": 96,
+      "weight": 629,
+      "category": "soul+key"
+    }
+  ],
   "191d5d1": {
     "term": "191d5d1",
     "weight": 5,
@@ -1023,6 +1035,11 @@
       "category": "soul+key",
       "run": 79,
       "weight": 289
+    },
+    {
+      "run": 96,
+      "weight": 950,
+      "category": "soul+key"
     }
   ],
   "studentid": {
@@ -1513,14 +1530,21 @@
     "weight": 302,
     "category": "soul+key"
   },
-  "dispatch": {
-    "category": "soul+key",
-    "runs": [],
-    "run": 59,
-    "term": "dispatch",
-    "count": 1,
-    "weight": 64
-  },
+  "dispatch": [
+    {
+      "category": "soul+key",
+      "runs": [],
+      "run": 59,
+      "term": "dispatch",
+      "count": 1,
+      "weight": 64
+    },
+    {
+      "run": 96,
+      "weight": 630,
+      "category": "soul+key"
+    }
+  ],
   "047679275c36292f": {
     "term": "047679275c36292f",
     "weight": 5,
@@ -1548,14 +1572,26 @@
     "count": 1,
     "category": "core"
   },
-  "portal": {
-    "weight": 66,
-    "category": "soul+key",
-    "term": "portal",
-    "runs": [],
-    "run": 48,
-    "count": 4
-  },
+  "portal": [
+    {
+      "weight": 66,
+      "category": "soul+key",
+      "term": "portal",
+      "runs": [],
+      "run": 48,
+      "count": 4
+    },
+    {
+      "run": 96,
+      "weight": 664,
+      "category": "soul+key"
+    },
+    {
+      "category": "soul+key",
+      "run": 97,
+      "weight": 136
+    }
+  ],
   "message": {
     "term": "message",
     "runs": [
@@ -1647,17 +1683,24 @@
     "weight": 134,
     "category": "soul+key"
   },
-  "what:": {
-    "term": "what:",
-    "runs": [
-      47,
-      48,
-      75
-    ],
-    "count": 3,
-    "weight": 335,
-    "category": "soul+key"
-  },
+  "what:": [
+    {
+      "term": "what:",
+      "runs": [
+        47,
+        48,
+        75
+      ],
+      "count": 3,
+      "weight": 335,
+      "category": "soul+key"
+    },
+    {
+      "run": 96,
+      "weight": 679,
+      "category": "soul+key"
+    }
+  ],
   "simulation": {
     "term": "simulation",
     "runs": [],
@@ -2094,18 +2137,25 @@
     "runs": [],
     "count": 1
   },
-  "write": {
-    "term": "write",
-    "runs": [
-      47,
-      54,
-      57,
-      72
-    ],
-    "count": 4,
-    "weight": 346,
-    "category": "soul+key"
-  },
+  "write": [
+    {
+      "term": "write",
+      "runs": [
+        47,
+        54,
+        57,
+        72
+      ],
+      "count": 4,
+      "weight": 346,
+      "category": "soul+key"
+    },
+    {
+      "run": 96,
+      "weight": 792,
+      "category": "soul+key"
+    }
+  ],
   "drill": {
     "term": "drill",
     "runs": [],
@@ -2204,14 +2254,21 @@
     "count": 1,
     "category": "core"
   },
-  "commit": {
-    "runs": [],
-    "run": 51,
-    "count": 6,
-    "category": "soul+key",
-    "term": "commit",
-    "weight": 49
-  },
+  "commit": [
+    {
+      "runs": [],
+      "run": 51,
+      "count": 6,
+      "category": "soul+key",
+      "term": "commit",
+      "weight": 49
+    },
+    {
+      "run": 96,
+      "weight": 660,
+      "category": "soul+key"
+    }
+  ],
   "records": {
     "term": "records",
     "weight": 5,
@@ -2281,28 +2338,59 @@
     "runs": [],
     "count": 2
   },
-  "session": {
-    "runs": [],
-    "weight": 71,
-    "term": "session",
-    "count": 9,
-    "run": 47
-  },
-  "deploy": {
-    "runs": [],
-    "weight": 72,
-    "term": "deploy",
-    "count": 3,
-    "run": 47
-  },
-  "state": {
-    "count": 1,
-    "run": 57,
-    "weight": 60,
-    "term": "state",
-    "category": "soul+key",
-    "runs": []
-  },
+  "session": [
+    {
+      "runs": [],
+      "weight": 71,
+      "term": "session",
+      "count": 9,
+      "run": 47
+    },
+    {
+      "run": 96,
+      "weight": 1471,
+      "category": "soul+key"
+    },
+    {
+      "category": "soul+key",
+      "run": 97,
+      "weight": 268
+    }
+  ],
+  "deploy": [
+    {
+      "runs": [],
+      "weight": 72,
+      "term": "deploy",
+      "count": 3,
+      "run": 47
+    },
+    {
+      "run": 96,
+      "weight": 746,
+      "category": "soul+key"
+    },
+    {
+      "category": "soul+key",
+      "run": 97,
+      "weight": 93
+    }
+  ],
+  "state": [
+    {
+      "count": 1,
+      "run": 57,
+      "weight": 60,
+      "term": "state",
+      "category": "soul+key",
+      "runs": []
+    },
+    {
+      "run": 96,
+      "weight": 629,
+      "category": "soul+key"
+    }
+  ],
   "full": {
     "term": "full",
     "runs": [],
@@ -2547,17 +2635,29 @@
     "weight": 20,
     "category": "soul+key"
   },
-  "claude": {
-    "term": "claude",
-    "runs": [
-      49,
-      64,
-      70
-    ],
-    "count": 6,
-    "weight": 2306,
-    "category": "soul+key"
-  },
+  "claude": [
+    {
+      "term": "claude",
+      "runs": [
+        49,
+        64,
+        70
+      ],
+      "count": 6,
+      "weight": 2306,
+      "category": "soul+key"
+    },
+    {
+      "run": 96,
+      "weight": 629,
+      "category": "soul+key"
+    },
+    {
+      "category": "soul+key",
+      "run": 97,
+      "weight": 178
+    }
+  ],
   "code": {
     "term": "code",
     "runs": [],
@@ -2906,14 +3006,26 @@
     "count": 1,
     "category": "core"
   },
-  "student": {
-    "weight": 86,
-    "category": "soul+key",
-    "term": "student",
-    "runs": [],
-    "run": 48,
-    "count": 1
-  },
+  "student": [
+    {
+      "weight": 86,
+      "category": "soul+key",
+      "term": "student",
+      "runs": [],
+      "run": 48,
+      "count": 1
+    },
+    {
+      "run": 96,
+      "weight": 740,
+      "category": "soul+key"
+    },
+    {
+      "category": "soul+key",
+      "run": 97,
+      "weight": 203
+    }
+  ],
   "tiger": {
     "term": "tiger",
     "runs": [
@@ -2927,14 +3039,21 @@
     "weight": 847,
     "category": "soul+key"
   },
-  "context": {
-    "category": "soul+key",
-    "runs": [],
-    "run": 59,
-    "term": "context",
-    "count": 3,
-    "weight": 67
-  },
+  "context": [
+    {
+      "category": "soul+key",
+      "runs": [],
+      "run": 59,
+      "term": "context",
+      "count": 3,
+      "weight": 67
+    },
+    {
+      "run": 96,
+      "weight": 660,
+      "category": "soul+key"
+    }
+  ],
   "continue": {
     "term": "continue",
     "runs": [],
@@ -3362,14 +3481,26 @@
     "count": 1,
     "category": "core"
   },
-  "status": {
-    "run": 50,
-    "count": 3,
-    "runs": [],
-    "weight": 350,
-    "term": "status",
-    "category": "soul+key"
-  },
+  "status": [
+    {
+      "run": 50,
+      "count": 3,
+      "runs": [],
+      "weight": 350,
+      "term": "status",
+      "category": "soul+key"
+    },
+    {
+      "run": 96,
+      "weight": 643,
+      "category": "soul+key"
+    },
+    {
+      "category": "soul+key",
+      "run": 97,
+      "weight": 100
+    }
+  ],
   "tasking": {
     "term": "tasking",
     "runs": [],
@@ -3589,13 +3720,25 @@
     "category": "soul+key",
     "run": 66
   },
-  "update": {
-    "runs": [],
-    "weight": 71,
-    "term": "update",
-    "count": 2,
-    "run": 47
-  },
+  "update": [
+    {
+      "runs": [],
+      "weight": 71,
+      "term": "update",
+      "count": 2,
+      "run": 47
+    },
+    {
+      "run": 96,
+      "weight": 702,
+      "category": "soul+key"
+    },
+    {
+      "category": "soul+key",
+      "run": 97,
+      "weight": 102
+    }
+  ],
   "era": {
     "term": "era",
     "runs": [],
@@ -3688,11 +3831,18 @@
     "count": 1,
     "category": "core"
   },
-  "bible": {
-    "term": "bible",
-    "runs": [],
-    "count": 4
-  },
+  "bible": [
+    {
+      "term": "bible",
+      "runs": [],
+      "count": 4
+    },
+    {
+      "run": 96,
+      "weight": 614,
+      "category": "soul+key"
+    }
+  ],
   "works": {
     "term": "works",
     "runs": [],
@@ -3858,6 +4008,16 @@
       "category": "soul+key",
       "run": 79,
       "weight": 565
+    },
+    {
+      "run": 96,
+      "weight": 1241,
+      "category": "soul+key"
+    },
+    {
+      "category": "soul+key",
+      "run": 97,
+      "weight": 141
     }
   ],
   "92d44f24": {
@@ -4063,15 +4223,22 @@
     "weight": 326,
     "category": "soul+key"
   },
-  "after": {
-    "term": "after",
-    "runs": [
-      48
-    ],
-    "count": 1,
-    "weight": 90,
-    "category": "soul+key"
-  },
+  "after": [
+    {
+      "term": "after",
+      "runs": [
+        48
+      ],
+      "count": 1,
+      "weight": 90,
+      "category": "soul+key"
+    },
+    {
+      "run": 96,
+      "weight": 718,
+      "category": "soul+key"
+    }
+  ],
   "deployed": {
     "term": "deployed",
     "runs": [
@@ -4259,6 +4426,11 @@
       "category": "soul+key",
       "run": 79,
       "weight": 567
+    },
+    {
+      "run": 96,
+      "weight": 951,
+      "category": "soul+key"
     }
   ],
   "link": {
@@ -4487,14 +4659,21 @@
     "runs": [],
     "count": 1
   },
-  "audit": {
-    "weight": 77,
-    "category": "soul+key",
-    "term": "audit",
-    "runs": [],
-    "run": 48,
-    "count": 5
-  },
+  "audit": [
+    {
+      "weight": 77,
+      "category": "soul+key",
+      "term": "audit",
+      "runs": [],
+      "run": 48,
+      "count": 5
+    },
+    {
+      "run": 96,
+      "weight": 689,
+      "category": "soul+key"
+    }
+  ],
   "soulcount": {
     "runs": [],
     "weight": 120,
@@ -4574,6 +4753,11 @@
       "category": "soul+key",
       "run": 79,
       "weight": 342
+    },
+    {
+      "run": 96,
+      "weight": 741,
+      "category": "soul+key"
     }
   ],
   "detail": {
@@ -4723,17 +4907,29 @@
     "count": 1,
     "category": "core"
   },
-  "return": {
-    "term": "return",
-    "runs": [
-      47,
-      54,
-      73
-    ],
-    "count": 3,
-    "weight": 649,
-    "category": "soul+key"
-  },
+  "return": [
+    {
+      "term": "return",
+      "runs": [
+        47,
+        54,
+        73
+      ],
+      "count": 3,
+      "weight": 649,
+      "category": "soul+key"
+    },
+    {
+      "run": 96,
+      "weight": 1477,
+      "category": "soul+key"
+    },
+    {
+      "category": "soul+key",
+      "run": 97,
+      "weight": 260
+    }
+  ],
   "copy": {
     "term": "copy",
     "runs": [],
@@ -5363,8 +5559,11 @@
   },
   "portals": {
     "term": "portals",
+    "count": 1,
+    "weight": 90,
+    "category": "soul+key",
     "runs": [],
-    "count": 1
+    "run": 97
   },
   "character": {
     "term": "character",
@@ -5635,13 +5834,25 @@
     "weight": 80,
     "category": "soul+key"
   },
-  "before": {
-    "runs": [],
-    "weight": 91,
-    "term": "before",
-    "count": 3,
-    "run": 47
-  },
+  "before": [
+    {
+      "runs": [],
+      "weight": 91,
+      "term": "before",
+      "count": 3,
+      "run": 47
+    },
+    {
+      "run": 96,
+      "weight": 1409,
+      "category": "soul+key"
+    },
+    {
+      "category": "soul+key",
+      "run": 97,
+      "weight": 227
+    }
+  ],
   "tier": {
     "term": "tier",
     "runs": [],
@@ -5690,20 +5901,27 @@
     "runs": [],
     "count": 1
   },
-  "check": {
-    "term": "check",
-    "runs": [
-      54,
-      57,
-      59,
-      66,
-      73,
-      75
-    ],
-    "count": 6,
-    "weight": 450,
-    "category": "soul+key"
-  },
+  "check": [
+    {
+      "term": "check",
+      "runs": [
+        54,
+        57,
+        59,
+        66,
+        73,
+        75
+      ],
+      "count": 6,
+      "weight": 450,
+      "category": "soul+key"
+    },
+    {
+      "run": 96,
+      "weight": 1003,
+      "category": "soul+key"
+    }
+  ],
   "approve": {
     "term": "approve",
     "weight": 5,
@@ -6158,6 +6376,11 @@
       "category": "soul+key",
       "run": 79,
       "weight": 508
+    },
+    {
+      "run": 96,
+      "weight": 1306,
+      "category": "soul+key"
     }
   ],
   "important": {
@@ -6433,6 +6656,16 @@
       "category": "soul+key",
       "run": 79,
       "weight": 261
+    },
+    {
+      "run": 96,
+      "weight": 897,
+      "category": "soul+key"
+    },
+    {
+      "category": "soul+key",
+      "run": 97,
+      "weight": 152
     }
   ],
   "usage": {
@@ -6582,6 +6815,16 @@
       "category": "soul+key",
       "run": 79,
       "weight": 345
+    },
+    {
+      "run": 96,
+      "weight": 1649,
+      "category": "soul+key"
+    },
+    {
+      "category": "soul+key",
+      "run": 97,
+      "weight": 334
     }
   ],
   "attempt": {
@@ -6755,19 +6998,31 @@
     "weight": 85,
     "category": "soul+key"
   },
-  "current": {
-    "term": "current",
-    "runs": [
-      57,
-      58,
-      59,
-      66,
-      73
-    ],
-    "count": 5,
-    "weight": 376,
-    "category": "soul+key"
-  },
+  "current": [
+    {
+      "term": "current",
+      "runs": [
+        57,
+        58,
+        59,
+        66,
+        73
+      ],
+      "count": 5,
+      "weight": 376,
+      "category": "soul+key"
+    },
+    {
+      "run": 96,
+      "weight": 723,
+      "category": "soul+key"
+    },
+    {
+      "category": "soul+key",
+      "run": 97,
+      "weight": 134
+    }
+  ],
   "quote": {
     "term": "quote",
     "runs": [],
@@ -6991,6 +7246,34 @@
       "category": "soul+key",
       "weight": 569,
       "run": 84
+    }
+  ],
+  "patch": [
+    {
+      "run": 96,
+      "weight": 614,
+      "category": "soul+key"
+    }
+  ],
+  "entries": [
+    {
+      "category": "soul+key",
+      "run": 97,
+      "weight": 119
+    }
+  ],
+  "fallback": [
+    {
+      "category": "soul+key",
+      "run": 97,
+      "weight": 116
+    }
+  ],
+  "string]:": [
+    {
+      "category": "soul+key",
+      "run": 97,
+      "weight": 99
     }
   ]
 }
