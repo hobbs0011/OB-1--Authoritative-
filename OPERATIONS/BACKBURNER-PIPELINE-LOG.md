@@ -284,8 +284,9 @@ WRITE_GAP does not block death but must be named. Silence = repeat offense next 
 - How: /api/deepgram-token returns lastSessionTopic from memoryData.last_topic. chat.js stores as lastSessionTopicGlobal and checks it in SettingsApplied greeting BEFORE chatMessages gate (cross-session KV). Priority: topic → vocab → in-session → new-user.
 - Verified: sov100-test-magic returns "30-second project status updates — BlueTech meeting prep"
 
-### BB-41 ~ Deepgram Male Voice Option — OPEN (RRL-29: "try a male agentic voice")
-- Status: OPEN
+### BB-41 ~ Deepgram Male Voice Option — DONE (Run 072)
+
+- Status: DONE (Run 072) — aura-2-zeus-en male voice already live in prod
 - What: Current TTS = aura-2-asteria-en (female). Michael requested trying a male voice option. Deepgram has aura-2-orion-en (male) or similar.
 - Fix: Test aura-2-orion-en. If latency and quality acceptable, offer as config option in /api/deepgram-token.
 
@@ -299,8 +300,9 @@ WRITE_GAP does not block death but must be named. Silence = repeat offense next 
 - What: /api/deepgram-token returns raw API key to browser. Should use auth/grant JWT or short-lived token. Currently: raw key visible in browser DevTools network tab.
 - Fix: Switch to Deepgram auth/grant endpoint for scoped JWT. Requires verifying scope (agent:write needed, not just asr:write).
 
-### BB-44 ~ Deepgram Sydney Region — OPEN
-- Status: OPEN
+### BB-44 ~ Deepgram Sydney Region — DONE (Run 072)
+
+- Status: DONE (Run 072) — ws_url = wss://agent.deepgram.com/v1/agent/converse?region=syd wired for Vietnamese students (Block W, index.js)
 - What: VN→US RTT ~280ms. VN→SYD ~120ms. Saves 160ms+ per turn. Validate nova-3 + gpt-4o-mini availability in syd region. Then add `region: "syd"` to Settings in /api/deepgram-token.
 
 ### BB-45 ~ Dreamer World Model / Student RRL Pipeline — OPEN (RRL-30)
