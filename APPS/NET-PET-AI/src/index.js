@@ -982,43 +982,43 @@ async function handleAPI(path, request, env, url) {
           const groupDef = NET_PHONICS_GROUPS[pgIdx];
           const drillsInGroup = PHONICS_DRILLS.filter(d => d.group === groupDef.id);
           const next_drill = drillsInGroup.find(d => !(pp.drills_completed || []).includes(d.id)) || (drillsInGroup.length > 0 ? drillsInGroup[drillsInGroup.length - 1] : null);
-          phonicsData = { ...pp, group_name: groupDef.name, next_drill };
+      phonicsData = { ...pp, group_name: groupDef.name, next_drill };
+      }
+    } catch (_) {}
+
+    let lastSessionNotes = "";
+    try {
+      const rawHistory = await env.NET_PET_KV.get("session_history_" + studentId);
+      if (rawHistory) {
+        const history = JSON.parse(rawHistory);
+        const last = history[0];
+        if (last) {
+          const daysAgo = Math.floor((Date.now() - (last.ts || Date.now())) / 86400000);
+          const when = daysAgo === 0 ? "today" : daysAgo === 1 ? "yesterday" : daysAgo + " days ago";
+          lastSessionNotes = `LAST SESSION NOTES: Student had a session ${when} (${last.turns || 0} speaking turns).`;
         }
-      } catch (_) {}
+      }
+    } catch (_) {}
 
-      let lastSessionNotes = "";
-      let lastSessionVocab = [];
-      try {
-        if (rawSessionHistory) {
-          const hist = JSON.parse(rawSessionHistory);
-          if (hist.length > 0) {
-            const last = hist[hist.length - 1];
-            const daysAgo = Math.floor((Date.now() - last.ts) / 86400000);
-            const when = daysAgo === 0 ? "today" : daysAgo === 1 ? "yesterday" : daysAgo + " days ago";
-            lastSessionVocab = (last.vocab || []).slice(0, 5);
-            const vocabStr = lastSessionVocab.length > 0 ? " Vocab practiced: " + lastSessionVocab.map(w => `"${w}"`).join(", ") + "." : "";
-            lastSessionNotes = `LAST SESSION NOTES: Student had a session ${when} (${last.turns || 0} speaking turns).${vocabStr}`;
-          }
-        }
-      } catch (_) {}
+    const _level = (agentProfile?.level || agentProfile?.englishLevel || "").toLowerCase();
+    const ttsSpeed = /^a1/.test(_level) ? 0.85 : /^a2/.test(_level) ? 0.85 : (agentLang === 'vi' ? 0.9 : 1.0);
 
-      const _level = (agentProfile?.level || agentProfile?.englishLevel || "").toLowerCase();
-      const ttsSpeed = /^a1/.test(_level) ? 0.85 : /^a2/.test(_level) ? 0.85 : (agentLang === 'vi' ? 0.9 : 1.0);
-
-      const settings = {
-        type: "Settings",
-        audio: {
-          input:  { encoding: "linear16", sample_rate: 16000 },
-          output: { encoding: "mp3" }
+    const settings = {
+      type: "Settings",
+      audio: {
+        input:  { encoding: "linear16", sample_rate: 16000 },
+        output: { encoding: "mp3" }
+      },
+      agent: {
+        language: "en",
+        greeting: buildGreeting(agentProfile, sessionMode, memoryData?.last_topic || null),
+        listen: {
+          provider: { type: "deepgram", model: "nova-3" },
+          endpointing: sessionMode === "free" ? 700 : 1100
         },
-        agent: {
-          language: "en",
-          listen: {
-            provider: { type: "deepgram", model: "nova-3" }
-          },
-          think: {
-            provider: { type: "google", model: "gemini-2.5-flash" }, // LOCKED: Deepgram-managed Google. DO NOT revert to open_ai/gpt-4o-mini — Michael has asked for this repeatedly.
-            prompt: buildAgentPrompt(agentProfile, agentLang, recentVocab, arcData, sessionMode, memoryData, phonicsData),
+        think: {
+          provider: { type: "google", model: "gemini-2.5-flash" }, // LOCKED: Deepgram-managed Google. DO NOT revert to open_ai/gpt-4o-mini - Michael has asked for this repeatedly.
+          prompt: buildAgentPrompt(agentProfile, agentLang, recentVocab, arcData, sessionMode, memoryData, phonicsData),
             functions: [{
               name: "save_vocabulary_word",
               description: "Save an English word the student successfully used in a sentence.",
@@ -1047,7 +1047,7 @@ speak: {
       // Block W: Sydney region routing hint for VN students
       const ws_url = agentLang === 'vi' ? "wss://agent.deepgram.com/v1/agent/converse?region=syd" : null;
       await env.NET_PET_KV.put('circuit:deepgram:state', 'closed');
-      return addCors(json({ token: access_token, settings, phonicsHint, lastSessionVocab, lastSessionTopic: memoryData?.last_topic || null, ws_url }), request);
+      return addCors(json({ token: access_token, settings, phonicsHint, lastSessionTopic: memoryData?.last_topic || null, ws_url }), request);
     } catch (err) {
       await env.NET_PET_KV.put('circuit:deepgram:state', 'open', { expirationTtl: 60 });
       return addCors(json({ error: err.message }, 500), request);
@@ -3370,6 +3370,15 @@ async function handleVocabList(studentId, env) {
 // ── Voice Agent system prompt builder ────────────────────────────────────────
 // Used by /api/agent WS proxy — builds OBI persona + student-specific instructions
 // from KV profile. Server-side equivalent of chat.js buildSystemPrompt().
+
+function buildGreeting(profile, mode, lastTopic) {
+  const name = (profile?.name || "").split(" ")[0] || "";
+  const hi = name ? `Hey ${name}!` : "Hey!";
+  if (mode === "phonics") return `${hi} Ready to drill some sounds? Let's warm up.`;
+  if (mode === "study")   return `${hi} What are we studying today?`;
+  if (lastTopic)          return `${hi} Last time we talked about ${lastTopic}. Want to keep going, or something new?`;
+  return `${hi} I'm Obi. What's on your mind today? Just talk — no need to be perfect.`;
+}
 
 function buildAgentPrompt(profile, lang, recentVocab = [], arc = null, mode = 'free', memory = null, phonicsProgress = null) {
   const _name  = profile?.fullName || profile?.name;
