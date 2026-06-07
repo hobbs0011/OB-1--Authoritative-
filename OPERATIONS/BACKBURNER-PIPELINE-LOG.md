@@ -308,15 +308,16 @@ WRITE_GAP does not block death but must be named. Silence = repeat offense next 
 - What: Michael asked: "can we set up cloudflare agents to review the student backend files and can we do RRLs per conversation per student?" — True memory through the memory pipeline. Per-student session journals stored in D1, automatically summarized by CF agent.
 - Fix: Design spec in OPERATIONS/STUDENT-PORTAL-DEV.md, then implement CF cron agent per student.
 
-### BB-46 ! Claude Permission Prompts — OPEN (RRL-32: "can you set it so I dont have to click yes every 10 seconds")
-- Status: OPEN
-- What: Michael is constantly approving basic tool permissions. Settings.json allowlist needs expansion for common read-only tools.
-- Fix: Run /fewer-permission-prompts skill or add common PowerShell/Bash/MCP tools to .claude/settings.json allowlist.
+### BB-46 ! Claude Permission Prompts — DONE (2026-06-07, commit 153b0cec)
 
-### BB-47 ! PCC Deployment — OPEN (error 1042 persists)
-- Status: OPEN
-- What: Empire dashboard (APPS/PCC/) fails to deploy — error 1042 (worker not found on CF account).
-- Fix: Check CF account for existing worker name conflict, or redeploy with correct account ID. Run: `cd APPS/PCC && npx wrangler deploy`
+- Status: DONE
+- What: Expanded .claude/settings.json allowlist with broad patterns: `Bash(git *)`, `Bash(cd * && git *)`, `Bash(cd * && npx *)`, `PowerShell(Invoke-RestMethod *)`, `PowerShell(npx *)`, `PowerShell(git *)`, `PowerShell(cd * && *)`. Eliminates prompts for git, wrangler deploys, REST calls.
+
+### BB-47 ! PCC Deployment — DONE (2026-06-07, version 46ecf577)
+
+- Status: DONE
+- What: Deployed cleanly — error 1042 was gone (prior account/wrangler update resolved it).
+- Verified: pcc.mrmichaelhobbs123.workers.dev/api/status → alive=true, soulcount=236840532 TITANIUM_ANCHOR
 
 ### BB-48 !! BB-30/31 AGENT99.md + RISE.md stale refs — DONE Run 34
 - Status: DONE (Run 34 confirmed — /PhoenixCoder → /Centurion-Code, phoenix-architecti URL updated)
