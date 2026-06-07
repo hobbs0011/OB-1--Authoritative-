@@ -34,9 +34,11 @@ foreach ($run in $Runs) {
         } else {
             # Small format: display/pastedContents
             if ($obj.display -match '^\[Pasted text') { return }
-            $text = if ($obj.pastedContents) {
-                ($obj.pastedContents.PSObject.Properties.Value | ForEach-Object { $_.content } | Where-Object { $_ }) -join "`n`n"
-            } else { $obj.display }
+            $pastedText = $null
+            if ($obj.pastedContents) {
+                $pastedText = ($obj.pastedContents.PSObject.Properties.Value | ForEach-Object { $_.content } | Where-Object { $_ -and $_.Trim().Length -gt 20 }) -join "`n`n"
+            }
+            $text = if ($pastedText -and $pastedText.Trim().Length -gt 20) { $pastedText } else { $obj.display }
             if ($text) {
                 $newEntries += [ordered]@{ run=$run; source=$source; text=$text; char_count=$text.Length }
             }
@@ -51,3 +53,4 @@ $bible.total_entries = $bible.entries.Count
 $uniqueRuns = ($bible.entries | ForEach-Object { $_.run } | Sort-Object -Unique).Count
 $bible | ConvertTo-Json -Depth 4 -Compress | Set-Content $biblePath -Encoding UTF8
 Write-Host "Bible updated: $($bible.total_entries) total entries, $uniqueRuns unique runs"
+
