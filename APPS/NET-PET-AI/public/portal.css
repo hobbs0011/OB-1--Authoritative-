@@ -236,7 +236,32 @@
             background: rgba(168,85,247,0.15); color: var(--purple); border: 1px solid rgba(168,85,247,0.3);
         }
         .milestone-track { font-family: 'Rajdhani', sans-serif; font-size: 0.95rem; font-weight: 500; letter-spacing: 0.03em; }
-        .progress-bar-wrap { margin-top: 10px; height: 8px; background: rgba(255,255,255,0.06); border-radius: 10px; overflow: hidden; }
+        @media (prefers-reduced-motion: reduce) {
+          *, *::before, *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+          }
+        }
+
+        @media print {
+          body { background: #fff; color: #000; }
+          #topNav, .nav-backdrop, .streak-badge, #weekly-widget { display: none !important; }
+          .content-card, .day1-card, .quick-link-card { border: 1px solid #ccc; break-inside: avoid; }
+        }
+
+        :root {
+          font-display: swap;
+        }
+
+        /* Issue 017: prefer CSS variables over hardcoded rgba */
+        .progress-bar-wrap {
+          background: rgba(255,255,255,0.06);
+        }
+        .vocab-pill {
+          background: rgba(20,184,166,0.08);
+          border: 1px solid rgba(20,184,166,0.2);
+        }
         .progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--purple), var(--gold)); border-radius: 10px; transition: width 0.6s ease; animation: progressPulse 2.5s infinite; }
         .progress-label { font-family: 'Rajdhani', sans-serif; font-size: 0.82rem; color: var(--dim); letter-spacing: 0.03em; margin-top: 6px; }
 
