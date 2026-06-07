@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Orbitron:wght@400;500;600;700;800&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/portal.css">
 <style>
 :root{--void:#0a0a12;--card:rgba(22,22,35,0.85);--purple:#a855f7;--purple-glow:rgba(168,85,247,0.25);--gold:#f59e0b;--gold-glow:rgba(245,158,11,0.25);--teal:#14b8a6;--teal-glow:rgba(20,184,166,0.25);--red:#ef4444;--red-glow:rgba(239,68,68,0.25);--text:#f8fafc;--dim:#94a3b8;--border:rgba(255,255,255,0.08);}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -157,6 +158,20 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;bac
   </div>
 </div>
 
+<!-- SET PASSWORD MODAL -->
+<div id="setPwModal" class="hidden">
+  <div class="setpw-box">
+    <h2>SET YOUR PASSWORD</h2>
+    <p>You're using the default password.<br>Set a personal password to secure your portal.</p>
+    <input type="password" id="newPw1" placeholder="New password (min 6 characters)" autocomplete="new-password">
+    <input type="password" id="newPw2" placeholder="Confirm new password" autocomplete="new-password">
+    <button class="setpw-btn" id="setPwBtn">SAVE PASSWORD</button>
+    <p class="setpw-msg" id="setPwMsg"></p>
+    <button class="setpw-skip" id="setPwSkip">Skip for now</button>
+  </div>
+</div>
+
+<div id="navBackdrop"></div>
 <!-- NAV -->
 <nav id="topNav" class="hidden">
   <a class="nav-brand" href="sov100-portal">
@@ -164,7 +179,8 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;bac
     <span>SOV100</span>
     <span class="dev-pill">PROD</span>
   </a>
-  <div class="nav-links">
+  <button class="nav-hamburger" id="navToggle" aria-label="Menu">☰</button>
+  <div class="nav-links" id="navLinks">
     <a href="sov100-portal" class="active">Dashboard</a>
     <a href="/magic-chat?studentId=sov100-test-magic" class="nav-coach">🗣️ COACH</a>
   </div>
@@ -201,6 +217,13 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;bac
       <span class="status-label">Worker Status</span>
       <span class="status-badge checking" id="workerStatus">Checking...</span>
     </div>
+  </div>
+
+  <!-- STATS GRID -->
+  <div class="stats-grid" id="statsGrid" style="display:none;">
+    <div class="stat-card purple"><div class="stat-accent"></div><div class="stat-label">Tiger Score</div><div class="stat-value loading" id="tigerScore"><div class="skeleton"></div></div></div>
+    <div class="stat-card gold"><div class="stat-accent"></div><div class="stat-label">Streak</div><div class="stat-value loading" id="streakVal"><div class="skeleton"></div></div></div>
+    <div class="stat-card teal"><div class="stat-accent"></div><div class="stat-label">Sessions</div><div class="stat-value loading" id="sessionCount"><div class="skeleton"></div></div></div>
   </div>
 
   <!-- MODE CARDS -->
@@ -281,10 +304,37 @@ async function doLogin(pw) {
   return inputHash === correctHash;
 }
 
+function addNavToggleHandler() {
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  const navBackdrop = document.getElementById('navBackdrop');
+  navToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('open');
+    navBackdrop.classList.toggle('active');
+  });
+  navBackdrop.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    navBackdrop.classList.remove('active');
+  });
+}
+
+async function loadStats() {
+  try {
+    const resp = await fetch('/api/student/state?studentId='+STUDENT_ID);
+    const data = await resp.json();
+    document.getElementById('tigerScore').textContent = data.tiger_score||0;
+    document.getElementById('streakVal').textContent = data.streak_days||0;
+    document.getElementById('sessionCount').textContent = data.sessions_completed||0;
+    document.getElementById('statsGrid').style.display='';
+  } catch (e) {}
+}
+
 function showDashboard() {
   document.getElementById('loginScreen').classList.add('hidden');
   document.getElementById('topNav').classList.remove('hidden');
   document.getElementById('mainContent').style.display = '';
+  addNavToggleHandler();
+  loadStats();
   checkWorkerHealth();
   loadPhonics();
 }
