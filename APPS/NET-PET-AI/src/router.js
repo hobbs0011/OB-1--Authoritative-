@@ -13,16 +13,17 @@ const app = new Hono();
 
 app.use('*', async (c, next) => {
   await next();
-  const headers = new Headers(c.res.headers);
-  headers.set('X-Frame-Options', 'SAMEORIGIN');
-  headers.set('X-Content-Type-Options', 'nosniff');
-  headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
-  headers.set('Permissions-Policy', 'camera=(), microphone=(self)');
-  if (c.req.url.startsWith('https://')) {
-    headers.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
-  }
-  const body = await c.res.text();
-  return new Response(body, { status: c.res.status, headers });
+  c.res = new Response(c.res.body, {
+    status: c.res.status,
+    headers: {
+      ...Object.fromEntries(c.res.headers),
+      'X-Frame-Options': 'SAMEORIGIN',
+      'X-Content-Type-Options': 'nosniff',
+      'Referrer-Policy': 'strict-origin-when-cross-origin',
+      'Permissions-Policy': 'camera=(), microphone=(self)',
+      ...(c.req.url.startsWith('https://') ? { 'Strict-Transport-Security': 'max-age=31536000; includeSubDomains' } : {}),
+    },
+  });
 });
 
 // ── Request size limit middleware (Issue 009) ──────────────────────────────────

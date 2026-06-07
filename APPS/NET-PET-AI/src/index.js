@@ -1461,11 +1461,14 @@ speak: {
       if (!studentId) return addCors(json({ error: "studentId required" }, 400), request);
       const idCheck = validateStudentId(studentId);
       if (!idCheck.valid) return addCors(json({ error: idCheck.error }, 400), request);
-      const patch = body.patch || {};
-      if (Object.keys(patch).length === 0) return addCors(json({ error: "patch required" }, 400), request);
-      // Persist homework_notes separately if provided
+      // Persist homework_notes separately if provided (must run before patch guard)
       if (body.homework_notes !== undefined) {
         await env.NET_PET_KV.put(`student:${studentId}:homework_notes`, String(body.homework_notes).slice(0, 5000));
+      }
+      const patch = body.patch || {};
+      if (Object.keys(patch).length === 0) {
+        if (body.homework_notes === undefined) return addCors(json({ error: "patch or homework_notes required" }, 400), request);
+        return addCors(json({ ok: true, studentId }), request);
       }
       // Read existing profile, merge patch, write back
       let profile = {};
