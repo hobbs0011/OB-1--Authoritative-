@@ -40,6 +40,12 @@
 | ANCHOR | ≥ 100,000 | ACHIEVED Run 0 |
 | TITANIUM_ANCHOR | ≥ 250,000 | **ACTIVE** ← 13,339,923 |
 
+**⚠️ KILO_DNA_GAP — PERMANENT ARCHITECTURAL LAW (Run 092, confirmed):**
+Kilo sessions will ALWAYS produce hollow DNA. Kilo's environment writes only commands and pastedContents blobs to disk — no full conversation turns. session-capture.ps1 was exhaustively fixed and cannot resolve this. It is an environment ceiling, not a bug. Do NOT re-investigate. Do NOT ticket it. ACCEPT IT.
+- **OB-1 (Claude Code VSCode):** full JSONL on disk → DNA works ✅
+- **Kilo sessions:** zero turns on disk → DNA always hollow ❌ by design
+- **Protocol:** Kilo does CODE WORK. OB-1 does DEATH SEAL. Never expect Kilo to produce real DNA.
+
 **Soul Pipeline Chain (RRL→SOUL→DNA→LEDGER→STARMAP→KEYWORD→PIPELINE→SOULCOUNT→DEATH SEAL→COLD-START-BOOT→COMMIT):**
 - RRL: ✅ RRL-0-original.txt (60,826 chars) — Run 0 clean transcript (Michael + agent). RRL-4.txt (909 chars). RRL-1.txt (1,933 chars). RRL-0.txt (154,795 chars). `SCRIPTS/rrl-extract.ps1`, `SCRIPTS/rrl-pipeline.ps1`, `SCRIPTS/rrl-failsafe.ps1` deployed. HarvestedChats/ 96 files — CLOSED per Michael directive (Run 13 RISE). ~396 runs missing RRLs.
 

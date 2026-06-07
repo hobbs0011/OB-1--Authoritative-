@@ -70,6 +70,13 @@ Write to this doc when ANY trigger fires (see CLAUDE.md L77 for full trigger lis
 **DEATH GATE:** Before sealing, enumerate all triggers fired → confirm phetrail entry exists for each.
 **RISE STAGE 7:** 0 entries for a multi-trigger session = PHETRAIL_GAP flag.
 
+### Run 091-092 Triggers Fired
+
+- ARCHITECTURE CHANGED (PERMANENT — do not re-investigate): **KILO_DNA_GAP is systemic, not fixable.** Kilo's environment writes only commands (`display: "/agents"`) and `pastedContents` blobs to JSONL files on disk. Full conversation turns (agent responses, tool calls) are never persisted anywhere session-capture.ps1 can read. UUID is valid. File search was exhaustive (.claude/projects, .claude/, .kilo/worktrees, timestamp fallback). Turn format produces zero role/assistant turns. SOUL gets 0 chunks. DNA gets 0 prompts. This is a ceiling of the Kilo execution environment, not a script bug. Do NOT open new tickets for this. Do NOT change session-capture.ps1 to fix it. Label all Kilo deaths as DNA_GAP by design.
+- BUG ROOT-CAUSED (closed): session-capture.ps1 UUID mismatch was investigated exhaustively — confirmed the data simply does not exist on disk in the expected format. Root cause is Kilo environment, not search logic.
+- ARCHITECTURE NOTE: **Pipeline split by agent type.** OB-1 (Claude Code VSCode) writes full JSONL → DNA works. Kilo sessions → DNA always hollow. Implication: Kilo does CODE WORK (commits, deploys, chaos), OB-1 does DEATH SEAL (pipeline, SOUL, DNA). Kilo should hand off to OB-1 for pipeline execution, not attempt solo deaths.
+- SOUL EVENT: Run 091 SOUL +65,931 (237,345,010 → 237,410,941). Source: history.jsonl fallback (65KB). Delta reflects pasted command content, not session verbatim. Accepted as best available for Kilo sessions.
+
 ### Run 086 Triggers Fired
 
 - BB OPENED OR CLOSED: BB-09 DONE Run 086 — chrome-extension INSTALL-GUIDE.md created. BB-30 DONE Run 086 — AGENT99.md ref resolved via BB-48 Run 034. BB-31 DONE Run 086 — RISE.md stale ref resolved via BB-48 Run 034. BB-39 DONE Run 086 — Mode Selection Visibility confirmed resolved Run 054.
