@@ -652,7 +652,7 @@ async function handleAPI(path, request, env, url) {
     return handleAdminAudit(env, url);
   }
 
-  // B2B: GET /api/admin/student-activity — employer-facing practice frequency
+  // B2B: GET /api/admin/student-activity — employer-facing practice frequency (gated by upstream /api/admin/* checkAdminKey)
   if (path === "/api/admin/student-activity" && method === "GET") {
     const students = ["quy-bluetech", "mai-tram-bluetech", "huong-bluetech"];
     const results = await Promise.all(students.map(async (sid) => {
