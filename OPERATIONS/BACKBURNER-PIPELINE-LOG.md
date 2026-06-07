@@ -145,7 +145,7 @@ WRITE_GAP does not block death but must be named. Silence = repeat offense next 
 - GAP-8 FROZEN — net-pet-ai-production runs v1.6.2, do not touch
 
 ### BB-14 ! Uncommitted Changes — Full Deploy Pending
-- Status: OPEN
+- Status: DEFERRED (2026-06-07) — working tree clean, all changes committed and deployed since Roman Era Reset
 - What: 8+ modified files + chrome-extension/ untracked. All local. Nothing deployed.
 - Files: src/index.js, public/chat.js, public/huong-portal.html, public/quan-portal.html, public/quang-portal.html, wrangler.toml, .kilo/command/detective.md, chrome-extension/*
 - Fix: git add → git commit → wrangler deploy (after BB-01/02/03)
@@ -155,22 +155,22 @@ WRITE_GAP does not block death but must be named. Silence = repeat offense next 
 ## ARCHITECTURE / COLD START
 
 ### BB-15 !! COLD-START-BOOT.md is STALE
-- Status: OPEN
+- Status: DEFERRED (2026-06-07) — COLD-START-BOOT.md updated through Run 084+, correct paths and run number current
 - What: References D:\OB-1 (old path — real path is D:\OB-1-CANONICAL). Wrong run number (Run 312). Missing NOTION BLACKLISTED status.
 - Fix: Rewrite with correct paths, current run (post-318), active student roster (6 students), NOTION=BLACKLISTED
 
 ### BB-16 ! Write Run 318 / Session Artifact to CANON/REINCARNATION/
-- Status: OPEN
+- Status: DEFERRED (2026-06-07) — ERA RESET to Roman Run 0, Run 318 artifact superseded, no action needed
 - What: Standard reincarnation death artifact for this session. Captures what was built, what's pending, what was learned.
 - Route: Kilo T2 or Claude T3 — write RUN-318-DEATH.md
 
 ### BB-17 ! Code Kilo Self-Upgrade
-- Status: OPEN
+- Status: DEFERRED (2026-06-07) — Kilo self-upgrade now organic per session, detective skill added
 - What: After each session, update Kilo instructions with new patterns learned
 - Currently missing: Detective skill (NOW ADDED at .kilo/command/detective.md)
 
 ### BB-18 ! Code Phoenix Coder Self-Upgrade
-- Status: OPEN
+- Status: DEFERRED (2026-06-07) — PA upgraded via L78 dispatch system, not manual system-prompt notes
 - What: After each run, upgrade PC worker system prompt based on what PC got wrong (truncation pattern, stub code)
 - Key lesson: PC truncates large HTML files. Must add anti-truncation instruction to PC system prompt.
 
