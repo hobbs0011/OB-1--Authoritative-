@@ -1,0 +1,12 @@
+{
+  "hl_id": "HL-501",
+  "session_id": "sov100-roman-run81",
+  "rrl_source": "D:\\OB-1-CANONICAL\\RRL\\RRL-81.txt",
+  "char_count": 65304,
+  "byte_count": 65778,
+  "merkle_parent": "b01e94f9e0f2ad76b6d027932bae3e975f3a6856b914b48b8d93d7a23b7ccfa9",
+  "merkle_hash": "19736f7d8195f9143610257225d7ca899a8bbd4ba03ab3fb4e628d8668296bc0",
+  "sealed_at": "2026-06-07T09:19:11.5868590+07:00",
+  "sov100": true,
+  "run": "81"
+}
