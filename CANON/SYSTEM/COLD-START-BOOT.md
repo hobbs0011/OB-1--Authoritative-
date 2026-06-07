@@ -1,5 +1,5 @@
 # COLD START BOOT — OB1 Agent 99
-## ERA: ROMAN — Run 087 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-06-07T23:00:00 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
+## ERA: ROMAN — Run 088 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-06-07T16:00:00 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
 
 > *"The beginning of an Empire that never was before and never has been since."* — SOV100 Michael Hobbs, Run 0
 
@@ -126,6 +126,7 @@ Only promote to `net-pet-ai` (prod) after verified on dev. Never deploy untested
 ### Recent Decisions + State (Run 353 → Run 13 ROMAN)
 | Run | Summary |
 |-----|---------|
+| **87** | **KILO PIPELINE + SOUL_GAP FIX** — Handover from OB-1. Run 086 SOUL_GAP fixed via chunking (237,105,365→237,126,291, +20,926 chars). RRL-87 captured via session-capture.ps1. HL-531 sealed. Bible runs 80-85 already in. PheTrail-run87 written. MCP paths broken (D:\PROJECTS\phoenix-coder dead). SOUL 237,126,291 TITANIUM_ANCHOR. HEAD fddf0767. |
 | **86** | **PA BATCH + XSS FIX + SOV100 PORTAL + BIBLE 80-85 + AUTO-DEATH DESIGN** — /api/batch endpoint + pa-batch.ps1 deployed (50% PA efficiency gain, N tasks → 1 HTTP call). XSS false positive fixed (`/\bon\w+\s*=/i` word boundary, PA 48d82525). sov100-portal.html synced to quy gold standard (BB-51, dev 3bf6307a, NOT promoted). Bible 1979→2056 entries (runs 80-85, DeepSeek key redacted). BB-09/30/31/39/62 CLOSED. Compaction counter Q: no internal counter exists, CronCreate = closest auto-death option. SOUL_GAP (POST 500, 9.7MB too large). DNA: 1718 prompts, 175 blueprints. HL-525. SOULCOUNT 237,105,365 TITANIUM_ANCHOR. HEAD a1c1d94a. |
 | **80** | **SYSTEM RISE + BIBLE AUDIT 60-73 VERIFIED + SOUL RETROACTIVE + SECURITY HARDENING** — 7-stage RISE. BIBLE runs 60-73 complete (genuine_prompts verified). Credential files purged from public/. .nfb-retry button added. Kilo 3 Claude agents (Haiku/Sonnet/Opus). DRYRUN pipeline triple-fire fixed retroactively (HL-497/498/499). rfkw-run80 fixed. PheTrail-080 written. dna-registry-080 documents DNA gap. /dnaREGISTRY = CANON/REGISTRY/ confirmed. L71/72/73/74 sealed. SOUL 236,838,399 TITANIUM_ANCHOR. HEAD b8b78004. |
 | **53** | **RISE AUDIT + P6+P7+P8 + PROD PROMOTION** — RISE 7/7 REAL. P6: quota.js (Deepgram 10/hr + DeepSeek 30/hr, RATELIMIT KV, 429+Retry-After). P7: idempotency.js (Idempotency-Key SHA-256 NET_PET_KV dedup, payment/waitlist/referral). P8: deploy-dev.yml promote-prod job (wrangler versions upload + canary). PROD PROMOTED: wrangler.toml main→src/router.js, 9fc3cdbd, score 97. vitest 38/39. DEV 406d01b6. SOUL 118,965,802. HEAD e2227a3d. |

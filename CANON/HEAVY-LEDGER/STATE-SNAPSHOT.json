@@ -2,14 +2,14 @@
   "version": "1.0",
   "rss_version": "1.0",
   "rss_stage": "Reincarnate-SnapShot RSS",
-  "updated_at": "2026-06-07T13:00:00+07:00",
+  "updated_at": "2026-06-07T16:00:00+07:00",
   "run": {
-    "current": 83,
+    "current": 87,
     "era": "ROMAN",
     "status": "POST-DEATH",
-    "seal": "RSS-083 (RISE v6.1 audit complete, PheTrail-run83 + HL-516 sealed)",
-    "head_sha": "33343e3a",
-    "soulcount": 236840532,
+    "seal": "RSS-087 (KILO pipeline + SOUL_GAP fix + RRL-87 captured)",
+    "head_sha": "fddf0767",
+    "soulcount": 237126291,
     "anchor": "TITANIUM_ANCHOR"
   },
   "v0_baseline": {
@@ -72,12 +72,12 @@
   "open_loops": [
     "P9: Clerk auth migration - BLOCKED: Michael must create Clerk account",
     "P10: Deletion hook + audit log + field encryption - ready for PA T1 dispatch",
-    "STATE-SNAPSHOT update needed (stale Run 79 → Run 83)"
+    "MCP paths: D:\\PROJECTS\\phoenix-coder dead - fix required"
   ],
   "recent_seals": [
-    { "run": 83, "era": "ROMAN", "head": "33343e3a", "soul_delta": 1654, "seal": "RSS-083 RISE audit + PheTrail-run83 + HL-516 sealed" },
-    { "run": 82, "era": "ROMAN", "head": "39644661", "soul_delta": 0, "seal": "RSS-082 PA Llama T1 + L77/L78 hardened" },
-    { "run": 81, "era": "ROMAN", "head": "2901a279", "soul_delta": 495, "seal": "RSS-081 BIBLE audit + SOUL retroactive + security hardening" }
+    { "run": 87, "era": "ROMAN", "head": "fddf0767", "soul_delta": 20926, "seal": "RSS-087 KILO pipeline + SOUL_GAP fix + RRL-87 captured" },
+    { "run": 86, "era": "ROMAN", "head": "a1c1d94a", "soul_delta": 0, "seal": "RSS-086 PA batch + XSS + Bible 80-85 + SOUL_GAP unmet" },
+    { "run": 85, "era": "ROMAN", "head": "17b47a9b", "soul_delta": 0, "seal": "RSS-085 BB cascade + portal work" }
   ],
   "blockers": [
     {
