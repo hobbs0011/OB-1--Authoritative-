@@ -328,37 +328,16 @@ WRITE_GAP does not block death but must be named. Silence = repeat offense next 
 - execute.js + mission.js + swarm.js all upgraded. D1 audit trail restored (ip col fix).
 - Deployed: version 3640354e live.
 
-### BB-50 !! Keyword Search System Overhaul — DONE (audited Run 054)
+### BB-50 !! Keyword Search System Overhaul — DONE (2026-06-07 verified)
 
-- Status: OPEN
-- What: rfkw-run*.txt files ARE being generated each run (CANON/SOUL-KEYWORDS/) but are NOT being used at boot or during research. Current format is too thin (keyword | run# | HL-### | weight=1) to enable real search. OB1 reads raw RRL files sequentially instead of using keyword index. This is the failure mode Michael called out: "why cant you search through keywords?? why do I have keywords if they dont work."
-- Fix required:
-  1. Upgrade rfkw format: add categories (portal, audio, auth, phonics, etc.), weight by Michael verbatim frequency, cross-link to run/HL
-  2. Build keyword search script (SCRIPTS/rfkw-search.ps1): input = query string, output = ranked run numbers + excerpts
-  3. Wire into context-bundle.ps1: on rise/research tasks, auto-search rfkw before reading raw RRL files
-  4. COLD-START-BOOT Step 2: add "search rfkw for topic keywords BEFORE reading RRL files" as standard protocol
-- Priority: HIGH — keyword system is foundational to RRL context retrieval efficiency
+- Status: DONE
+- All 4 TODOs confirmed complete: `rfkw-search.ps1` live, `mandatory-reads.json` wired `rfkw_context` for `netpetai`/`rise`/`pipeline` task types, `COLD-START-BOOT.md` references inverted-index.json, `inverted-index.json` 110,502 bytes on disk.
 
-### BB-52 ~ SOULKEYS Recovery — DATA_GAP (Run 43)
+### BB-52 ~ SOULKEYS Recovery — DONE (Run 054 + 2026-06-07 verified)
 
-- Status: OPEN
-- What: Run 43 recovery produced 33 rfkw files from 43-run target. 6 runs missing source artifacts (no RRL/deathseal/pipeline found): 8, 9, 11, 14, 15, 27. Need to either recover from alternate source or tag as permanent gap.
-- Fix: Search alternate RRL variants (RRL-8A, RRL-9b, etc.) + LEDGER cross-reference. If no source found, mark as permanent GAP and document.
-
-- Status: DONE — Run 054 audit confirmed rfkw-search.ps1 + inverted-index.json + context-bundle wiring all complete
-- **Recovery Complete:**
-  - 33 rfkw-run files rebuilt (Runs 0-42, with 6 data gaps: 8, 9, 11, 14, 15, 27)
-  - 750 keyword lines total, 306 unique terms
-  - Format: `weight | category | term` (categories: portal, audio, auth, phonics, pipeline, system, student, revenue, security, chrome, mobile, curriculum, core)
-  - Inverted index rebuilt: CANON/SOUL-KEYWORDS/inverted-index.json
-  - Manifest: CANON/SOUL-KEYWORDS/soulkeys-manifest.json
-  - Search script: SCRIPTS/rfkw-search.ps1
-- Fix required (complete checklist):
-  1. `rfkw-search.ps1` added (`SCRIPTS/rfkw-search.ps1`). Query = ranked runs + categories. Run-block search available.
-  2. **TODO: Rewire Context-Bundle.** `context-bundle.ps1` already loaded, but needs a `rfkw_overview` token block per run so on `rise`/`pipeline`/`netpetai` bundle types the query hits the keyword index before raw RRL.
-  3. **TODO: Cold Start Boot metadata.** `COLD-START-BOOT` currently says KEYWORD exists by count; update to assert `searchable inverted-index.json exists`.
-  4. Verify Ledger Manifest (`CANON/HEAVY-LEDGER/soulkeys-manifest.json` + `inverted-index.json`) is copied into build/deploy pipeline if cold-start is used on a fresh system.
-- Priority: HIGH — keyword system is foundational to RRL context retrieval efficiency
+- Status: DONE
+- Recovery complete: 33 rfkw-run files (Runs 0-42), 750 keywords, 306 unique terms. 6 data gap runs (8,9,11,14,15,27) permanently closed — no source artifacts exist.
+- Inverted index: `CANON/SOUL-KEYWORDS/inverted-index.json` (110,502 bytes). Search: `SCRIPTS/rfkw-search.ps1`.
 
 ### BB-51 ! SOV100 Portal Standard Formula — OPEN (Run 42)
 
