@@ -983,7 +983,15 @@ async function handleAPI(path, request, env, url) {
           const groupDef = NET_PHONICS_GROUPS[pgIdx];
           const drillsInGroup = PHONICS_DRILLS.filter(d => d.group === groupDef.id);
           const next_drill = drillsInGroup.find(d => !(pp.drills_completed || []).includes(d.id)) || (drillsInGroup.length > 0 ? drillsInGroup[drillsInGroup.length - 1] : null);
-      phonicsData = { ...pp, group_name: groupDef.name, next_drill };
+          const pPhTotal = {}, pPhDone = {};
+          for (const drill of drillsInGroup) {
+            for (const ph of (drill.phonemes || [])) {
+              pPhTotal[ph] = (pPhTotal[ph] || 0) + 1;
+              if ((pp.drills_completed || []).includes(drill.id)) pPhDone[ph] = (pPhDone[ph] || 0) + 1;
+            }
+          }
+          const weak_phonemes = Object.keys(pPhTotal).filter(ph => Math.round((pPhDone[ph]||0)/pPhTotal[ph]*100) < 50);
+          phonicsData = { ...pp, group_name: groupDef.name, next_drill, weak_phonemes };
       }
     } catch (_) {}
 
@@ -1276,7 +1284,20 @@ speak: {
       const drillsInGroup = PHONICS_DRILLS.filter(d => d.group === NET_PHONICS_GROUPS[gIdx].id);
       const next_drill = drillsInGroup.find(d => !progress.drills_completed.includes(d.id)) || (drillsInGroup.length > 0 ? drillsInGroup[drillsInGroup.length - 1] : null);
       const completion_pct = drillsInGroup.length > 0 ? Math.round(drillsInGroup.filter(d => progress.drills_completed.includes(d.id)).length / drillsInGroup.length * 100) : 0;
-      return addCors(json({ ...progress, group_name, next_drill, completion_pct }), request);
+      // Per-phoneme mastery: count drill appearances vs completions for each phoneme
+      const phonemeTotal = {}, phonemeDone = {};
+      for (const drill of drillsInGroup) {
+        for (const ph of (drill.phonemes || [])) {
+          phonemeTotal[ph] = (phonemeTotal[ph] || 0) + 1;
+          if (progress.drills_completed.includes(drill.id)) phonemeDone[ph] = (phonemeDone[ph] || 0) + 1;
+        }
+      }
+      const phoneme_mastery = {};
+      for (const ph of Object.keys(phonemeTotal)) {
+        phoneme_mastery[ph] = Math.round((phonemeDone[ph] || 0) / phonemeTotal[ph] * 100);
+      }
+      const weak_phonemes = Object.entries(phoneme_mastery).filter(([,v]) => v < 50).map(([k]) => k);
+      return addCors(json({ ...progress, group_name, next_drill, completion_pct, phoneme_mastery, weak_phonemes }), request);
     } catch (err) {
       return addCors(json({ error: err.message }, 500), request);
     }
@@ -3555,6 +3576,7 @@ function buildAgentPrompt(profile, lang, recentVocab = [], arc = null, mode = 'f
       drillSentence ? `TODAY\'S DRILL SENTENCE: "${drillSentence}"` : '',
       drillTip ? `ARTICULATION TIP: ${drillTip}` : '',
       focusError ? `STUDENT\'S KNOWN FOCUS ERROR: ${focusError} — watch for this specifically.` : '',
+      phonicsProgress?.weak_phonemes?.length ? `WEAK PHONEMES (< 50% mastery): /${phonicsProgress.weak_phonemes.join('/, /')}/ — prioritise these over already-strong sounds.` : '',
       sessionsPhonicsDone > 0 ? `This student has completed ${sessionsPhonicsDone} phonics drills so far.` : 'First phonics session — start gently.',
       'BEHAVIOR:',
       '- Give the drill sentence above. Ask them to repeat it.',
