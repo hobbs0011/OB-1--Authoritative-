@@ -23,7 +23,7 @@
 - Pass `?student=all` to see aggregate (all entries). Default without parameter = sov100 only.
 
 **Soul Logger URL:** https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count
-**Real count (2026-06-07 ~21:25 ICT): 236,890,564 characters | TITANIUM_ANCHOR
+**Real count (2026-06-07 ~22:00 ICT): 237,084,477 characters | TITANIUM_ANCHOR (+193,913 from 10 LOST SOUL runs ingested Run 085)
  **TITANIUM_ANCHOR level** (next threshold: none — maximum tier reached)
  **⚠️ NOTE:** +156,676 delta from Run 5 RRL-0 backdrop ingestion. +62,773 delta from Run 6 RRL-0-original ingestion. RRL-0.txt contains ~150K agent text alongside ~4K Michael verbatim. Contamination documented per Michael directive.
  **Run 53 delta:** +1,577,271 (RISE+P6+P7+P8+prod promotion+death). Total 118,965,802.
