@@ -102,7 +102,7 @@ WRITE_GAP does not block death but must be named. Silence = repeat offense next 
 - Algorithm: score words by charge (profanity=10, CAPS=8, !! markers=7, urgency words=6), aggregate by context window, return ranked list
 
 ### BB-11 ! S2Pipeline — Wire /api/soul/priority into net-pet-ai Cron
-- Status: IN-PROGRESS (soul events wiring deployed, cron pending)
+- Status: DONE (2026-06-07, prod 969ff375) — daily cron at UTC midnight fetches soul/priority top 5 items from last 24h. soul-logger fixed: detectProfanity null guard + SUBSTR text 500 chars + LIMIT 100 prevents CPU timeout. soul-logger 3e36257a.
 - What: net-pet-ai scheduled cron should pull soul/priority and update student coaching contexts
 - File: APPS/NET-PET-AI/src/index.js (scheduled handler)
 
