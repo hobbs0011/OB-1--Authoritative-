@@ -1,0 +1,12 @@
+{
+  "hl_id": "HL-523",
+  "session_id": "sov100-roman-run85",
+  "run": 85,
+  "soul_hash": "87F7ACDEDC54095B2DA3774E593733968C27240996460BD78708E09EF956FBFD",
+  "dna_hash": "LEAN_DEATH",
+  "merkle_parent": "464125f07bba663e083a2f882d7d3cf7099e5dd5bb93047c9645ca0315f87751",
+  "merkle_hash": "E0DF88A29FB31224F479E291BF9EE9808527E3D7987A5AFA3E44BCE5DC0EDA9B",
+  "byte_count": 8084868,
+  "sealed_at": "2026-06-07T14:42:46.4065540+07:00",
+  "sov100": true
+}
