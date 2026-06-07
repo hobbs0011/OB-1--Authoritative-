@@ -938,8 +938,8 @@ async function handleAPI(path, request, env, url) {
           time_to_live_in_seconds: 30
         })
       });
-      const tokenJson = await tokenResp.json();
-      const access_token = tokenJson.key ?? apiKey;
+      let access_token = apiKey;
+      try { const tokenJson = await tokenResp.json(); access_token = tokenJson.key ?? apiKey; } catch (_) {}
 
       let agentProfile = null, agentLang = "en", recentVocab = [], arcData = null, memoryData = null, phonicsData = null;
       try { if (rawProfile) agentProfile = JSON.parse(rawProfile); } catch (_) {}
@@ -990,7 +990,7 @@ async function handleAPI(path, request, env, url) {
             provider: { type: "deepgram", model: "nova-3" }
           },
           think: {
-            provider: { type: "open_ai", model: "gpt-4o-mini" },
+            provider: { type: "google", model: "gemini-2.5-flash" }, // LOCKED: Deepgram-managed Google. DO NOT revert to open_ai/gpt-4o-mini — Michael has asked for this repeatedly.
             prompt: buildAgentPrompt(agentProfile, agentLang, recentVocab, arcData, sessionMode, memoryData, phonicsData),
             functions: [{
               name: "save_vocabulary_word",
