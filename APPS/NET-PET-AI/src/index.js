@@ -925,8 +925,21 @@ async function handleAPI(path, request, env, url) {
         env.NET_PET_KV.get("session_history_" + studentId)
       ]);
       // Raw API key — auth/grant asr:write scope is insufficient for Voice Agent WS (401)
-      // CF Worker endpoint already gates access; raw key exposure here is acceptable
-      const access_token = apiKey;
+      // Mint a short-lived Deepgram key via Keys API with usage:write scope (30s TTL)
+      const tokenResp = await fetch("https://api.deepgram.com/v1/keys", {
+        method: "POST",
+        headers: {
+          "Authorization": "Token " + apiKey,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          comment: "temp-agent",
+          scopes: ["usage:write"],
+          time_to_live_in_seconds: 30
+        })
+      });
+      const tokenJson = await tokenResp.json();
+      const access_token = tokenJson.key ?? apiKey;
 
       let agentProfile = null, agentLang = "en", recentVocab = [], arcData = null, memoryData = null, phonicsData = null;
       try { if (rawProfile) agentProfile = JSON.parse(rawProfile); } catch (_) {}
