@@ -2,14 +2,14 @@
   "version": "1.0",
   "rss_version": "1.0",
   "rss_stage": "Reincarnate-SnapShot RSS",
-  "updated_at": "2026-06-06T15:24:00+07:00",
+  "updated_at": "2026-06-07T13:00:00+07:00",
   "run": {
-    "current": 79,
+    "current": 83,
     "era": "ROMAN",
     "status": "POST-DEATH",
-    "seal": "RSS-79 (Run hardened - HOLLOW DNA fixed, Registry created, EC-028 applied)",
-    "head_sha": "c2f4291c",
-    "soulcount": 236802731,
+    "seal": "RSS-083 (RISE v6.1 audit complete, PheTrail-run83 + HL-516 sealed)",
+    "head_sha": "33343e3a",
+    "soulcount": 236840532,
     "anchor": "TITANIUM_ANCHOR"
   },
   "v0_baseline": {
@@ -72,13 +72,12 @@
   "open_loops": [
     "P9: Clerk auth migration - BLOCKED: Michael must create Clerk account",
     "P10: Deletion hook + audit log + field encryption - ready for PA T1 dispatch",
-    "RRL GAPS: 11, 13-23, 27, 34-44, 46-50",
-    "STATE-SNAPSHOT update needed (stale Run 75 → Run 79)"
+    "STATE-SNAPSHOT update needed (stale Run 79 → Run 83)"
   ],
   "recent_seals": [
-    { "run": 79, "era": "ROMAN", "head": "c2f4291c", "soul_delta": 16891, "seal": "RSS-79 Pipeline Hardening - HOLLOW DNA fixed, Registry created" },
-    { "run": 78, "era": "ROMAN", "head": "e88c3be0", "soul_delta": 1074, "seal": "PheTrail 16-21 + HL-078 + RRL-78 verbatim + edge cases audited" },
-    { "run": 77, "era": "ROMAN", "head": "6eaf2c6c", "soul_delta": 218388, "seal": "Pipeline fixed: RRL-77 + DNA/run77 + HL-077 + starmap/run77 + rfkw/run77 + pipeline-run77 + PheTrail-077 + BOOT updated" }
+    { "run": 83, "era": "ROMAN", "head": "33343e3a", "soul_delta": 1654, "seal": "RSS-083 RISE audit + PheTrail-run83 + HL-516 sealed" },
+    { "run": 82, "era": "ROMAN", "head": "39644661", "soul_delta": 0, "seal": "RSS-082 PA Llama T1 + L77/L78 hardened" },
+    { "run": 81, "era": "ROMAN", "head": "2901a279", "soul_delta": 495, "seal": "RSS-081 BIBLE audit + SOUL retroactive + security hardening" }
   ],
   "blockers": [
     {

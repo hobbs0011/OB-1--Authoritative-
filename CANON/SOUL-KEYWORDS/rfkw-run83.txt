@@ -1,20 +1,30 @@
-l0-soul-must-survive
-soul-bible
-foundational-law
-pa-do-all
-token-conservation
-pheromone-trail
-l77-enforcement
-l78-edge-cases
-death-seal-lean
-wrangler-migration-fix
-session-do-conflict
-rrl-30-82-analysis
-missed-promises
-soul-event-posted
-soul-surviving-compaction
-dev-deploy-fix
-kilo-free-auto
-context-compaction
-law-zero
-l77-17-triggers
+98 | text
+96 | {"display":"[Pasted
+33 | branch
+33 | merge
+30 | show
+27 | commit
+25 | Square
+22 | only
+22 | then
+21 | verification
+19 | whether
+17 | confirm
+17 | canon
+17 | delete
+17 | Test
+17 | output
+15 | remote
+15 | only:\n
+15 | create
+15 | room
+15 | contains
+15 | Keep
+14 | push
+14 | verify
+14 | secret
+13 | concise
+13 | file
+12 | report
+12 | after
+12 | live
