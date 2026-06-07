@@ -65,7 +65,14 @@ Llama 3.3 70B FP8 is the strongest CF Workers AI model available without externa
 
 ---
 
-## L77 MID_SESSION_PHETRAIL
-Leave inline pheromone hints as you work. Do NOT wait for DEATH.
-**Triggers:** SOUL DIRECTIVE SPOKEN · MISTAKES MADE · architecture changed · bug root-caused · law added
-Update this file whenever the PA execute cascade changes. This file IS the phetrail for PA dev work.
+## L77 MID_SESSION_PHETRAIL — Enforcement
+Write to this doc when ANY trigger fires (see CLAUDE.md L77 for full trigger list).
+**DEATH GATE:** Before sealing, enumerate all triggers fired → confirm phetrail entry exists for each.
+**RISE STAGE 7:** 0 entries for a multi-trigger session = PHETRAIL_GAP flag.
+
+### Run 082 Triggers Fired
+- ARCHITECTURE CHANGED: execute.js + mission.js + swarm.js — Dialagram removed, Llama 3.3 70B T1 wired
+- MODEL CHANGED: all three PA AI handlers now default to @cf/meta/llama-3.3-70b-instruct-fp8-fast
+- DEPLOY VERIFIED: 3640354e live, llama_70b ok=true 160ms, qwen_coder ok=true 378ms
+- LAW ADDED: L77 MID_SESSION_PHETRAIL sealed with full trigger list + enforcement gates
+- BUG ROOT-CAUSED: D1 logging returns null — logger.js CREATE TABLE + INSERT fails silently (pre-existing, non-blocking)

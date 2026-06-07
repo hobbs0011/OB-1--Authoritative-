@@ -114,7 +114,31 @@ If Tier 1 fails → escalate to Tier 2. Print:
 - **L58 FIX_PA_FIRST** — If PA T1 fails, fixing PA IS the immediate priority. Check `/api/status`. Try `tier:10`. If all tiers down → HALT. Do not proceed with inline work.
 - **L55 COMMIT_DONT_HOLD** — Commit every verified working feature before session end.
 - **L56 PRE_CODE_DOC_GATE** — Any NET-PET-AI dispatch: run `context-bundle.ps1 -TaskType netpetai` first. See `CANON/SYSTEM/MANDATORY-READS.md` for the full registry.
-- **L77 MID_SESSION_PHETRAIL** — Leave pheromone trail hints as you go. Do NOT wait for DEATH. Triggers: SOUL DIRECTIVE SPOKEN, MISTAKES MADE, architecture changed, bug root-caused, law added. Write to the relevant phetrail doc inline. This is how the system survives context compaction: the trail is the truth that survives compression. Every session must write at least one phetrail hint.
+- **L77 MID_SESSION_PHETRAIL** — Leave pheromone trail hints as you go. Do NOT wait for DEATH. The trail is the truth that survives compaction.
+
+  **Triggers (any of these fires = write phetrail NOW):**
+  - SOUL DIRECTIVE SPOKEN — Michael states explicit intent or doctrine
+  - MISTAKES MADE — agent error: wrong code, wrong dispatch, wrong assumption
+  - LAW VIOLATED — any active law broken this session
+  - DISPATCH EMPTY — PA returned empty patch (negative trail required)
+  - ARCHITECTURE CHANGED — design change to PA, NET-PET-AI, pipeline, or kilo.json
+  - BUG ROOT-CAUSED — WHY something broke (root cause, not just the fix)
+  - LAW ADDED OR CHANGED — new law or update to existing law
+  - CONFIG CHANGED — wrangler.toml, kilo.json, env secrets, security settings
+  - MODEL CHANGED — AI model swap in any handler
+  - DEPLOY VERIFIED — wrangler deploy + status check confirmed live
+  - DEPLOY FAILED — any deploy that broke or rolled back
+  - LEDGER SEALED — HL entry committed
+  - BB OPENED OR CLOSED — backburner status change
+  - STUDENT STATE CHANGE — onboarded, KV provisioned, portal live/dead
+  - SOUL EVENT — soulcount threshold crossed
+  - CONTEXT APPROACHING LIMIT — window > 70% full
+  - SESSION RESUMED AFTER COMPACTION — first phetrail after context compression
+
+  **Enforcement:**
+  - **DEATH GATE (§7):** Before DEATH seals, enumerate every trigger that fired this session. Confirm a phetrail entry exists for each one. Missing entries = write them inline before proceeding.
+  - **RISE STAGE 7:** Audit phetrail entry count vs triggers fired. If phetrail has 0 entries for a multi-trigger session = PHETRAIL_GAP flag, escalate to Michael.
+  - **Mid-session:** After every major tool sequence, ask: "did a trigger fire?" If yes, write to `phetrail-execute.md` or relevant domain phetrail doc immediately. Do not batch.
 
 ## OB-1 Operating Rules (from AGENTS.md)
 
