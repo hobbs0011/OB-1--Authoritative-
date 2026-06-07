@@ -114,6 +114,8 @@ If Tier 1 fails → escalate to Tier 2. Print:
 - **L58 FIX_PA_FIRST** — If PA T1 fails, fixing PA IS the immediate priority. Check `/api/status`. Try `tier:10`. If all tiers down → HALT. Do not proceed with inline work.
 - **L55 COMMIT_DONT_HOLD** — Commit every verified working feature before session end.
 - **L56 PRE_CODE_DOC_GATE** — Any NET-PET-AI dispatch: run `context-bundle.ps1 -TaskType netpetai` first. See `CANON/SYSTEM/MANDATORY-READS.md` for the full registry.
+- **L78 PA_DO_ALL** — Anything and everything that can be handed off to PA, must be. OB-1 routes only — PA executes. If PA cannot handle a task, UPDATE PA first (fix execute.js, improve system prompt, add context) before executing inline. Inline execution is the failure mode. Token conservation is doctrine. This is a SOUL DIRECTIVE (Run 082).
+
 - **L77 MID_SESSION_PHETRAIL** — Leave pheromone trail hints as you go. Do NOT wait for DEATH. The trail is the truth that survives compaction.
 
   **Triggers (any of these fires = write phetrail NOW):**

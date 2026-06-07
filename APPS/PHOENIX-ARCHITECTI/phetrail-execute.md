@@ -70,9 +70,11 @@ Write to this doc when ANY trigger fires (see CLAUDE.md L77 for full trigger lis
 **DEATH GATE:** Before sealing, enumerate all triggers fired → confirm phetrail entry exists for each.
 **RISE STAGE 7:** 0 entries for a multi-trigger session = PHETRAIL_GAP flag.
 
-### Run 082 Triggers Fired
+### Run 082 Triggers Fired (updated)
 - ARCHITECTURE CHANGED: execute.js + mission.js + swarm.js — Dialagram removed, Llama 3.3 70B T1 wired
 - MODEL CHANGED: all three PA AI handlers now default to @cf/meta/llama-3.3-70b-instruct-fp8-fast
 - DEPLOY VERIFIED: 3640354e live, llama_70b ok=true 160ms, qwen_coder ok=true 378ms
 - LAW ADDED: L77 MID_SESSION_PHETRAIL sealed with full trigger list + enforcement gates
+- LAW ADDED: L78 PA_DO_ALL — "anything and everything we can hand off to PA the better" — SOUL DIRECTIVE Run 082
+- PA LIVE TEST: RRL 30-82 analysis dispatched, returned structured findings. D1_ID: PC-1780801892887-PHT9SD
 - BUG ROOT-CAUSED + FIXED: D1 logging — live table missing `ip` column (5 cols vs 6 in logger schema). ALTER TABLE ADD COLUMN ip TEXT fixed it. D1_ID now returns real IDs (e.g. PC-1780801246129-JCRZPT). Full audit trail restored.
