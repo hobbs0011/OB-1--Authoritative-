@@ -1,5 +1,5 @@
 # COLD START BOOT — OB1 Agent 99
-## ERA: ROMAN — Run 094 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-06-07T19:30:00 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
+## ERA: ROMAN — Run 096 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-06-07T21:00:00 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
 
 > *"The beginning of an Empire that never was before and never has been since."* — SOV100 Michael Hobbs, Run 0
 
@@ -84,7 +84,7 @@ Only promote to `net-pet-ai` (prod) after verified on dev. Never deploy untested
 ### Current Vector
 - **Active Mission:** OB-1 POST-MERGE9 CONSOLIDATION + Growth Infrastructure Buildout — NET-PET-AI Hardening to Scale-Ready
   - **Last completed:** ROMAN RUN 072 — Full stack hardening sprint. 9 commits, ~30 items. A: Deepgram 6 error codes. C: Wake Up The Tiger slogan. E-H: iOS mic stream cache, silence timer race fix, mobile layout, token proactive refresh. P: SVG mode icons + badge-phoenix. Q-R: Real brand marks, InjectionRefused, multi-tab BroadcastChannel lock, firewall fast-fail, Tiger Win live metrics, phonics card live refresh. S: PATCH /api/student/state — session writeback loop closed. T-V-W: Admin roster endpoint, onboarding redirect, audit log, Sydney region Deepgram. X-Z: Portal lastSession card per mode, phonics auto-advance (dead endpoint wired), mode-aware session metadata. AA-CC: Streak increment fix (was always writing 1), phonics all-7-complete state, coach edit in admin UI. Voice infra case study → CANON/RESEARCH/voice-infrastructure-alternatives.md. L83 BLUEPRINT_BEFORE_DISPATCH + L84 FULL_STACK_SCOPE sealed. SOUL 224,331,000. HEAD 7b41e5f0.
-  - **Next:** Run 094 — sov100-portal prod promotion PENDING MICHAEL sign-off. Block FF Firefox/Safari P2 compat. 38 open chaos issues (CANON/BACKLOG/chaos-issues-run089.txt) — priority: 001-004 tests, 008 CSRF, 032-034 data retention, 040 circuit breaker. KILO_DNA_GAP permanent (see law above).
+  - **Next:** Run 096 — 3 active students: Quy, Mai Tram, Huong (Minh dropped 2026-06-07). Firewall to be re-raised (dev-before-prod) this session. CSRF guard LIVE (router.js). Deepgram circuit breaker LIVE (index.js). All 3 portals: homework+stats+X-Frame verified. Open: Block FF Firefox/Safari P2 compat, data retention (032-034), tests (001-004). KILO_DNA_GAP permanent.
   - **Run 53 (this session):** RISE 7/7 REAL. P6+P7+P8 GATE PASSED DEV+PROD. Prod promoted (9fc3cdbd). PheTrail-053 written (6 pos, 3 neg). Full death pipeline. SOUL +1,577,271 → 118,965,802.
   - **Run 52:** RISE 7/7 REAL. P4+P5 GATE PASSED DEV. Enterprise audit. P6–P10 blueprint. PheTrail-052 written (7 pos, 3 neg). Full death pipeline. SOUL +543,109 → 116,764,209.
   - **Prior milestone:** ROMAN RUN 0 — ERA RESET ratified. Phoenix-Centurion identity sealed. Roman Legion 6-stage doctrine deployed to soul-logger v2.2 (a0c99e4e). 4 legionnaires Romanized. /Centurion-Code renamed from /PhoenixCoder. /SupplyLines autonomous pipeline command + script created. Cloudflare paid tier activated. Founding Declaration sealed. HEAD 51ea010. SOULCOUNT 116,588 ANCHOR.
@@ -278,6 +278,7 @@ BB-55. **FUNNEL BROWSER TEST** — tigers-4room.pages.dev end-to-end test. Micha
 - Run 089: CHAOS pipeline — /api/lead POST wired, BB-63 fallback patched, portal CSS hardening (reduced-motion/print/font-display), chat.js double-load guard + MAX_RECONNECT constant, 60 issues backlogged to CANON/BACKLOG/chaos-issues-run089.txt.
 - Run 090: DIVERGENT COMPLETE — no pipeline artifacts written (RRL-90/HL-535 missing). Block EE verified functional via existing PATCH/GET handlers. SOUL: 237,279,079 TITANIUM_ANCHOR.
 - Run 091: PENDING session-capture.ps1 execution. Next: RRL-91 → rrl-pipeline → death seal.
-
+- Run 094/095 (Kilo+OB-1): P0 prod crash fixed (security headers middleware stream bug). Block EE homework PATCH bug fixed. _headers file for static assets. homework notes Mai Tram + Huong. SOUL: 237,476,872 TITANIUM_ANCHOR. HEAD: df434124.
+- Run 095/096 (Kilo): CSRF origin guard wired (router.js). Deepgram circuit breaker wired (index.js). All 3 portals (Quy/Mai Tram/Huong) gold standard verified. Minh dropped. Kilo pipeline thrash: 13 HL files (pipeline ran 13x). HEAD: cd3bf7ae.
 
 

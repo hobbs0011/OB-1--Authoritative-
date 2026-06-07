@@ -1,0 +1,12 @@
+{
+  "hl_id": "HL-546",
+  "session_id": "sov100-roman-run93",
+  "rrl_source": "D:\\OB-1-CANONICAL\\RRL\\RRL-93.txt",
+  "char_count": 1263068,
+  "byte_count": 1266404,
+  "merkle_parent": "a9fbb107e05b0c8b5fb3170bcb5b17c0687c97b9961805d2a7e3e76928b03af6",
+  "merkle_hash": "e7af7c586398be73c00db8143aaf4f35089ae13aca2fbae0a3d3b4d7bb37289a",
+  "sealed_at": "2026-06-07T19:09:32.6544862+07:00",
+  "sov100": true,
+  "run": "93"
+}
