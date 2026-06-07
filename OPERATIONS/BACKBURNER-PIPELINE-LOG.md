@@ -80,7 +80,7 @@ WRITE_GAP does not block death but must be named. Silence = repeat offense next 
 ## CHROME EXTENSION (Tier 1/2)
 
 ### BB-08 ! Chrome Extension Icons Missing
-- Status: OPEN
+- Status: DONE (2026-06-07 Run 085) — icons/icon48.png + icons/icon128.png created (.NET Drawing, purple OBI ring design). manifest.json wired: icons field + action.default_icon. No wrangler deploy needed (static assets in extension zip).
 - What: manifest.json references icons but no icons/ directory exists in chrome-extension/
 - Fix: Create icons/icon48.png + icons/icon128.png (OBI purple logo, 48x48 and 128x128)
 - Route: PC T1 or manual asset
@@ -343,7 +343,7 @@ WRITE_GAP does not block death but must be named. Silence = repeat offense next 
 
 ### BB-51 ! SOV100 Portal Standard Formula — OPEN (Run 42)
 
-- Status: OPEN
+- Status: DONE (2026-06-07 Run 085, commit b3322515) — spec written to OPERATIONS/STUDENT-PORTAL-DEV.md §BB-51. quy-portal.html designated gold standard. 8-step checklist for new portals. sov100-portal.html sync gap flagged (Run 086+).
 - What: Student portals are copy-pasted HTML with no template system. Each portal has inconsistent structure. Michael wants a "standardized student portal formula" so every student gets the same layout, design, and components from a single source of truth.
 - Fix: Design portal template spec. Build sov100-portal.html (DEV tester) as the reference implementation. Extract reusable component spec. All future portals generated from this formula.
 - See: sov100-portal.html (DEV) as reference implementation (Run 42)

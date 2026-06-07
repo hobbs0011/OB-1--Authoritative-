@@ -8,9 +8,17 @@
     "https://www.youtube.com/*",
     "https://net-pet-ai.mrmichaelhobbs123.workers.dev/*"
   ],
+  "icons": {
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
   "action": {
     "default_popup": "popup.html",
-    "default_title": "OBI NET Companion"
+    "default_title": "OBI NET Companion",
+    "default_icon": {
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
   },
   "content_scripts": [
     {
