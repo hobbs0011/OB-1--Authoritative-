@@ -55,3 +55,20 @@ export async function handleStatus(env) {
 
   return Response.json(result);
 }
+
+export async function handleProbe(request, env) {
+  const urlParams = new URL(request.url).searchParams;
+  const model = urlParams.get('model') || '@cf/deepseek-ai/deepseek-r1-distill-qwen-32b';
+  const start = Date.now();
+  try {
+    const res = await withTimeout(
+      env.AI.run(model, { messages: [{ role: 'user', content: 'ping' }], max_tokens: 5 }),
+      30000
+    );
+    const ms = Date.now() - start;
+    const preview = (res?.response || JSON.stringify(res)).substring(0, 80);
+    return Response.json({ model, ok: true, ms, preview, error: null });
+  } catch (err) {
+    return Response.json({ model, ok: false, ms: Date.now() - start, preview: '', error: err.message });
+  }
+}

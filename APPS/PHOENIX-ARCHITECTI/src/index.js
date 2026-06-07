@@ -3,7 +3,7 @@ import { handleExecute } from './execute.js';
 import { handleMission } from './mission.js';
 import { handleSwarm } from './swarm.js';
 import { handleBlueprint } from './blueprint.js';
-import { handleStatus } from './status.js';
+import { handleStatus, handleProbe } from './status.js';
 import { handleArt } from './art.js';
 import { handleArtArsenal } from './art-arsenal.js';
 
@@ -43,6 +43,8 @@ export default {
         response = await handleBlueprint(request, env);
       } else if (method === 'GET' && pathname === '/api/status') {
         response = await handleStatus(env);
+      } else if (method === 'GET' && pathname === '/api/probe') {
+        response = await handleProbe(request, env);
       } else if (pathname === '/art-arsenal') {
         response = await handleArtArsenal(request, env);
       } else if (pathname.startsWith('/api/art')) {
