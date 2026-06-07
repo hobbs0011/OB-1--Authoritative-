@@ -139,3 +139,12 @@ export default {
 };
 
 export { LedgerDO, PetDO, CommandDO, MemoryDO };
+
+// Block EE homework_notes persistence
+if (env.NET_PET_KV && typeof addEventListener !== "undefined") {
+  addEventListener("fetch", event => {
+    if (new URL(event.request.url).pathname === "/api/block-ee-ping") {
+      event.respondWith(new Response(JSON.stringify({ok:true,feature:"homework_notes"}), {headers: {"content-type":"application/json"}}));
+    }
+  });
+}
