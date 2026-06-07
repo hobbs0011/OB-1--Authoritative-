@@ -35,6 +35,8 @@ let sessionStartTs = 0;       // for Tiger Win session duration
 let sessionWordsSaved = 0;    // for Tiger Win words count
 let phonicsDrillsThisSession = 0; // mode-specific: increment on each drill save
 let longestTurn = 0;              // mode-specific: max word count in any user turn
+let totalTurnWords = 0;           // Tiger Index: accumulate for avg_turn_length
+let bargeInCount = 0;             // Tiger Index: student interrupted Obi mid-speech
 let firstStudyReport = null;      // mode-specific: first user turn in study mode
 const CHAT_ROUNDS = 30;       // natural conversation — pronunciation coaching flows through OBI, not a forced dump
 let ttsOn   = true;
@@ -324,7 +326,7 @@ function showTigerWin() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       keepalive: true,
-      body: JSON.stringify({ studentId: urlStudentId, turns: agentSessionTurns, durationMs: dur * 60000, vocab: agentSessionVocab, topic: sessionTopic })
+      body: JSON.stringify({ studentId: urlStudentId, turns: agentSessionTurns, durationMs: dur * 60000, vocab: agentSessionVocab, topic: sessionTopic, avg_turn_length: agentSessionTurns > 0 ? Math.round(totalTurnWords / agentSessionTurns) : 0, barge_in_count: bargeInCount })
     }).catch(() => {});
   }
 }
@@ -1119,6 +1121,8 @@ function handleAgentMsg(event) {
         agentSessionStart = Date.now();
         agentSessionTurns = 0;
         agentSessionVocab = [];
+        totalTurnWords = 0;
+        bargeInCount = 0;
         // EC-15: Flush pre-SettingsApplied PCM buffer — prevents first 200-500ms speech loss
         for (let i = 0; i < agentPreSettingsBuffer.length; i++) {
           try { if (agentWs && agentWs.readyState === WebSocket.OPEN) agentWs.send(agentPreSettingsBuffer[i]); } catch (_) {}
@@ -1188,6 +1192,7 @@ function handleAgentMsg(event) {
       } else if (msg.type === "UserStartedSpeaking") {
         // Student spoke — cancel silence timer and barge-in stop
         if (agentSilenceTimer) { clearTimeout(agentSilenceTimer); agentSilenceTimer = null; }
+        if (agentPlaying) bargeInCount++;  // Tiger Index: student interrupted Obi
         agentAudioQ.length = 0; agentChunkAccum = []; agentChunkAccumSize = 0; agentPreSettingsBuffer = []; agentPreSettingsBytes = 0;
         if (agentCurrentBlobUrl) { URL.revokeObjectURL(agentCurrentBlobUrl); agentCurrentBlobUrl = null; }
         if (agentCurrentAudio) { try { agentCurrentAudio.pause(); } catch {} agentCurrentAudio = null; }
@@ -1255,6 +1260,7 @@ function handleAgentMsg(event) {
         // Mode-specific tracking
         const wordCount = msg.content.split(/\s+/).length;
         if (wordCount > longestTurn) longestTurn = wordCount;
+        totalTurnWords += wordCount;
         if (currentMode === 'study' && !firstStudyReport) {
           firstStudyReport = msg.content.slice(0, 100);
         }

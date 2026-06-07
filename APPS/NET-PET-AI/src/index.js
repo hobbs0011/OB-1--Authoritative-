@@ -1039,7 +1039,12 @@ async function handleAPI(path, request, env, url) {
           const totalTurns = hist.reduce((sum, s) => sum + (s.turns || 0), 0);
           const avgTurns = Math.round(totalTurns / totalSessions);
           const engagement = avgTurns > 15 ? "chatty and engaged" : avgTurns > 8 ? "moderately talkative" : "still warming up";
-          const world_model = `${totalSessions} sessions. ${freq}. ${engagement} (~${avgTurns} turns/session). Vocab covered: ${allVocab.slice(0, 10).join(", ") || "building vocabulary"}.`;
+          const recentSessions = hist.slice(-5);
+          const avgTurnLen = recentSessions.filter(s => s.avg_turn_length > 0).length > 0
+            ? Math.round(recentSessions.reduce((sum, s) => sum + (s.avg_turn_length || 0), 0) / recentSessions.filter(s => s.avg_turn_length > 0).length)
+            : 0;
+          const turnLenNote = avgTurnLen > 8 ? "speaks in full sentences" : avgTurnLen > 3 ? "uses short phrases" : avgTurnLen > 0 ? "still building sentence length" : "";
+          const world_model = `${totalSessions} sessions. ${freq}. ${engagement} (~${avgTurns} turns/session).${turnLenNote ? ` ${turnLenNote} (~${avgTurnLen} words/turn).` : ""} Vocab covered: ${allVocab.slice(0, 10).join(", ") || "building vocabulary"}.`;
           // Cross-session struggle detection: words in 3+ sessions with SRS interval ≤ 6 = still not graduating
           const vocabSessionCount = {};
           for (const s of hist) { for (const w of (s.vocab || [])) { vocabSessionCount[w] = (vocabSessionCount[w] || 0) + 1; } }
@@ -1175,12 +1180,14 @@ speak: {
     if (!studentId) return addCors(json({ error: "studentId required" }, 400), request);
     try {
       const topic = body.topic || null;
+      const avg_turn_length = body.avg_turn_length || 0;
+      const barge_in_count = body.barge_in_count || 0;
       const [raw, rawMem] = await Promise.all([
         env.NET_PET_KV.get(`session_history_${studentId}`),
         env.STUDENT_MEMORY ? env.STUDENT_MEMORY.get(`mem:${studentId}`) : Promise.resolve(null)
       ]);
       const history = raw ? JSON.parse(raw) : [];
-      history.push({ ts: Date.now(), turns: turns || 0, durationMs: durationMs || 0, vocab: vocab || [], topic: topic || null });
+      history.push({ ts: Date.now(), turns: turns || 0, durationMs: durationMs || 0, vocab: vocab || [], topic: topic || null, avg_turn_length, barge_in_count });
 
       // Breakthroughs + struggles detection — update STUDENT_MEMORY async
       if (env.STUDENT_MEMORY) {
