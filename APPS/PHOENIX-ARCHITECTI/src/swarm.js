@@ -77,7 +77,7 @@ export async function handleSwarm(request, env) {
 
     await Promise.all(waveSlice.map(async order => {
       const startTime = Date.now();
-      const model = order.model || '@cf/qwen/qwen2.5-coder-32b-instruct';
+      const model = order.model || '@cf/meta/llama-3.3-70b-instruct-fp8-fast';
       const messages = buildMessages(order, results);
       const maxRetries = order.max_retries ?? 0;
 

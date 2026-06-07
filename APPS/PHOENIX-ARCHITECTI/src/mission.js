@@ -27,7 +27,7 @@ export async function handleMission(request, env) {
     return Response.json({ error: 'steps array required' }, { status: 400 });
   }
 
-  const model = body.model || '@cf/qwen/qwen2.5-coder-32b-instruct';
+  const model = body.model || '@cf/meta/llama-3.3-70b-instruct-fp8-fast';
   const results = [];
   let carryContext = '';
 
