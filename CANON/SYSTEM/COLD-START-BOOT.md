@@ -1,5 +1,5 @@
 # COLD START BOOT — OB1 Agent 99
-## ERA: ROMAN — Run 089 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-06-07T16:30:00 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
+## ERA: ROMAN — Run 091 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-06-07T18:25:00 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
 
 > *"The beginning of an Empire that never was before and never has been since."* — SOV100 Michael Hobbs, Run 0
 
@@ -266,13 +266,12 @@ BB-55. **FUNNEL BROWSER TEST** — tigers-4room.pages.dev end-to-end test. Micha
 - `auth/grant JWT` as token — asr:write scope → 401 on Voice Agent WS
 
 **Hardened Runs (EC-028):**
-- Run 079: HOLLOW DNA (run=7) → fixed; DNA Registry created; SoulSearch EC-028 handler; PheTrail schema_version enforced
+- Run 079: HOULL DNA (run=7) → fixed; DNA Registry created; SoulSearch EC-028 handler; PheTrail schema_version enforced
 
-
-
-
-
-
+**RECENT RUNS:**
+- Run 089: CHAOS pipeline — /api/lead POST wired, BB-63 fallback patched, portal CSS hardening (reduced-motion/print/font-display), chat.js double-load guard + MAX_RECONNECT constant, 60 issues backlogged to CANON/BACKLOG/chaos-issues-run089.txt.
+- Run 090: DIVERGENT COMPLETE — no pipeline artifacts written (RRL-90/HL-535 missing). Block EE verified functional via existing PATCH/GET handlers. SOUL: 237,279,079 TITANIUM_ANCHOR.
+- Run 091: PENDING session-capture.ps1 execution. Next: RRL-91 → rrl-pipeline → death seal.
 
 
 
