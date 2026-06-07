@@ -87,13 +87,20 @@
     "runs": [],
     "count": 1
   },
-  "complete": {
-    "runs": [],
-    "weight": 115,
-    "term": "complete",
-    "count": 1,
-    "run": 47
-  },
+  "complete": [
+    {
+      "runs": [],
+      "weight": 115,
+      "term": "complete",
+      "count": 1,
+      "run": 47
+    },
+    {
+      "run": 98,
+      "category": "soul+key",
+      "weight": 1256
+    }
+  ],
   "effect": {
     "term": "effect",
     "weight": 5,
@@ -136,6 +143,11 @@
       "run": 96,
       "weight": 1549,
       "category": "soul+key"
+    },
+    {
+      "run": 98,
+      "category": "soul+key",
+      "weight": 3097
     }
   ],
   "alright": {
@@ -882,14 +894,21 @@
       "weight": 756
     }
   ],
-  "\\u001a": {
-    "term": "\\u001a",
-    "runs": [
-      47
-    ],
-    "count": 1,
-    "weight": 126
-  },
+  "\\u001a": [
+    {
+      "term": "\\u001a",
+      "runs": [
+        47
+      ],
+      "count": 1,
+      "weight": 126
+    },
+    {
+      "run": 98,
+      "category": "soul+key",
+      "weight": 1356
+    }
+  ],
   "specification": {
     "term": "specification",
     "runs": [],
@@ -1040,6 +1059,11 @@
       "run": 96,
       "weight": 950,
       "category": "soul+key"
+    },
+    {
+      "run": 98,
+      "category": "soul+key",
+      "weight": 1026
     }
   ],
   "studentid": {
@@ -2355,6 +2379,11 @@
       "category": "soul+key",
       "run": 97,
       "weight": 268
+    },
+    {
+      "run": 98,
+      "category": "soul+key",
+      "weight": 1902
     }
   ],
   "deploy": [
@@ -2374,6 +2403,11 @@
       "category": "soul+key",
       "run": 97,
       "weight": 93
+    },
+    {
+      "run": 98,
+      "category": "soul+key",
+      "weight": 798
     }
   ],
   "state": [
@@ -2668,14 +2702,21 @@
     "runs": [],
     "count": 1
   },
-  "parent:": {
-    "term": "parent:",
-    "runs": [
-      47
-    ],
-    "count": 1,
-    "weight": 84
-  },
+  "parent:": [
+    {
+      "term": "parent:",
+      "runs": [
+        47
+      ],
+      "count": 1,
+      "weight": 84
+    },
+    {
+      "run": 98,
+      "category": "soul+key",
+      "weight": 912
+    }
+  ],
   "death:": {
     "term": "death:",
     "runs": [
@@ -2808,15 +2849,22 @@
     "weight": 137,
     "category": "soul+key"
   },
-  "extract": {
-    "term": "extract",
-    "runs": [
-      66
-    ],
-    "count": 1,
-    "weight": 66,
-    "category": "soul+key"
-  },
+  "extract": [
+    {
+      "term": "extract",
+      "runs": [
+        66
+      ],
+      "count": 1,
+      "weight": 66,
+      "category": "soul+key"
+    },
+    {
+      "run": 98,
+      "category": "soul+key",
+      "weight": 1133
+    }
+  ],
   "canonical": {
     "term": "canonical",
     "runs": [
@@ -3024,6 +3072,11 @@
       "category": "soul+key",
       "run": 97,
       "weight": 203
+    },
+    {
+      "run": 98,
+      "category": "soul+key",
+      "weight": 1093
     }
   ],
   "tiger": {
@@ -3052,6 +3105,11 @@
       "run": 96,
       "weight": 660,
       "category": "soul+key"
+    },
+    {
+      "run": 98,
+      "category": "soul+key",
+      "weight": 783
     }
   ],
   "continue": {
@@ -3087,18 +3145,25 @@
     "count": 1,
     "category": "core"
   },
-  "prompts": {
-    "term": "prompts",
-    "runs": [
-      47,
-      66,
-      72,
-      73
-    ],
-    "count": 4,
-    "weight": 337,
-    "category": "soul+key"
-  },
+  "prompts": [
+    {
+      "term": "prompts",
+      "runs": [
+        47,
+        66,
+        72,
+        73
+      ],
+      "count": 4,
+      "weight": 337,
+      "category": "soul+key"
+    },
+    {
+      "run": 98,
+      "category": "soul+key",
+      "weight": 1121
+    }
+  ],
   "sessions": {
     "term": "sessions",
     "runs": [],
@@ -3499,6 +3564,11 @@
       "category": "soul+key",
       "run": 97,
       "weight": 100
+    },
+    {
+      "run": 98,
+      "category": "soul+key",
+      "weight": 996
     }
   ],
   "tasking": {
@@ -3737,6 +3807,11 @@
       "category": "soul+key",
       "run": 97,
       "weight": 102
+    },
+    {
+      "run": 98,
+      "category": "soul+key",
+      "weight": 1072
     }
   ],
   "era": {
@@ -3966,16 +4041,23 @@
     "count": 1,
     "category": "core"
   },
-  "written:": {
-    "term": "written:",
-    "runs": [
-      47,
-      48
-    ],
-    "count": 2,
-    "weight": 333,
-    "category": "soul+key"
-  },
+  "written:": [
+    {
+      "term": "written:",
+      "runs": [
+        47,
+        48
+      ],
+      "count": 2,
+      "weight": 333,
+      "category": "soul+key"
+    },
+    {
+      "run": 98,
+      "category": "soul+key",
+      "weight": 2305
+    }
+  ],
   "sessionid": {
     "term": "sessionid",
     "runs": [
@@ -4018,6 +4100,11 @@
       "category": "soul+key",
       "run": 97,
       "weight": 141
+    },
+    {
+      "run": 98,
+      "category": "soul+key",
+      "weight": 1301
     }
   ],
   "92d44f24": {
@@ -4092,15 +4179,22 @@
     "count": 1,
     "category": "core"
   },
-  "response": {
-    "term": "response",
-    "runs": [
-      66
-    ],
-    "count": 1,
-    "weight": 94,
-    "category": "soul+key"
-  },
+  "response": [
+    {
+      "term": "response",
+      "runs": [
+        66
+      ],
+      "count": 1,
+      "weight": 94,
+      "category": "soul+key"
+    },
+    {
+      "run": 98,
+      "category": "soul+key",
+      "weight": 892
+    }
+  ],
   "method": {
     "term": "method",
     "runs": [
@@ -4431,6 +4525,11 @@
       "run": 96,
       "weight": 951,
       "category": "soul+key"
+    },
+    {
+      "run": 98,
+      "category": "soul+key",
+      "weight": 1346
     }
   ],
   "link": {
@@ -4674,13 +4773,20 @@
       "category": "soul+key"
     }
   ],
-  "soulcount": {
-    "runs": [],
-    "weight": 120,
-    "term": "soulcount",
-    "count": 3,
-    "run": 47
-  },
+  "soulcount": [
+    {
+      "runs": [],
+      "weight": 120,
+      "term": "soulcount",
+      "count": 3,
+      "run": 47
+    },
+    {
+      "run": 98,
+      "category": "soul+key",
+      "weight": 922
+    }
+  ],
   "educationsystemsdevelopment": {
     "term": "educationsystemsdevelopment",
     "weight": 5,
@@ -4758,6 +4864,11 @@
       "run": 96,
       "weight": 741,
       "category": "soul+key"
+    },
+    {
+      "run": 98,
+      "category": "soul+key",
+      "weight": 1116
     }
   ],
   "detail": {
@@ -5064,14 +5175,21 @@
     "runs": [],
     "count": 1
   },
-  "deepgram": {
-    "weight": 100,
-    "category": "soul+key",
-    "term": "deepgram",
-    "runs": [],
-    "run": 48,
-    "count": 9
-  },
+  "deepgram": [
+    {
+      "weight": 100,
+      "category": "soul+key",
+      "term": "deepgram",
+      "runs": [],
+      "run": 48,
+      "count": 9
+    },
+    {
+      "run": 98,
+      "category": "soul+key",
+      "weight": 1049
+    }
+  ],
   "0massembled": {
     "term": "0massembled",
     "weight": 5,
@@ -5811,14 +5929,21 @@
     "runs": [],
     "count": 2
   },
-  "voice": {
-    "weight": 109,
-    "category": "soul+key",
-    "term": "voice",
-    "runs": [],
-    "run": 48,
-    "count": 7
-  },
+  "voice": [
+    {
+      "weight": 109,
+      "category": "soul+key",
+      "term": "voice",
+      "runs": [],
+      "run": 48,
+      "count": 7
+    },
+    {
+      "run": 98,
+      "category": "soul+key",
+      "weight": 1034
+    }
+  ],
   "t1-qwenmax": {
     "term": "t1-qwenmax",
     "runs": [],
@@ -5920,6 +6045,11 @@
       "run": 96,
       "weight": 1003,
       "category": "soul+key"
+    },
+    {
+      "run": 98,
+      "category": "soul+key",
+      "weight": 1133
     }
   ],
   "approve": {
@@ -5967,6 +6097,11 @@
       "category": "soul+key",
       "run": 79,
       "weight": 363
+    },
+    {
+      "run": 98,
+      "category": "soul+key",
+      "weight": 990
     }
   ],
   "85105c82": {
@@ -6381,6 +6516,11 @@
       "run": 96,
       "weight": 1306,
       "category": "soul+key"
+    },
+    {
+      "run": 98,
+      "category": "soul+key",
+      "weight": 2110
     }
   ],
   "important": {
@@ -6666,6 +6806,11 @@
       "category": "soul+key",
       "run": 97,
       "weight": 152
+    },
+    {
+      "run": 98,
+      "category": "soul+key",
+      "weight": 1118
     }
   ],
   "usage": {
@@ -6825,6 +6970,11 @@
       "category": "soul+key",
       "run": 97,
       "weight": 334
+    },
+    {
+      "run": 98,
+      "category": "soul+key",
+      "weight": 3181
     }
   ],
   "attempt": {
@@ -7021,6 +7171,11 @@
       "category": "soul+key",
       "run": 97,
       "weight": 134
+    },
+    {
+      "run": 98,
+      "category": "soul+key",
+      "weight": 844
     }
   ],
   "quote": {
@@ -7274,6 +7429,27 @@
       "category": "soul+key",
       "run": 97,
       "weight": 99
+    }
+  ],
+  "1266404": [
+    {
+      "run": 98,
+      "category": "soul+key",
+      "weight": 1250
+    }
+  ],
+  "returned": [
+    {
+      "run": 98,
+      "category": "soul+key",
+      "weight": 1144
+    }
+  ],
+  "jsonl": [
+    {
+      "run": 98,
+      "category": "soul+key",
+      "weight": 934
     }
   ]
 }

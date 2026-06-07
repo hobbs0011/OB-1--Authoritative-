@@ -1,5 +1,5 @@
 # COLD START BOOT — OB1 Agent 99
-## ERA: ROMAN — Run 097 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-06-08T23:30:00 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
+## ERA: ROMAN — Run 098 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-06-08T ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
 
 > *"The beginning of an Empire that never was before and never has been since."* — SOV100 Michael Hobbs, Run 0
 
@@ -23,7 +23,7 @@
 - Pass `?student=all` to see aggregate (all entries). Default without parameter = sov100 only.
 
 **Soul Logger URL:** https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count
-**Real count (2026-06-08 ~23:30 ICT): 237,582,134 characters | TITANIUM_ANCHOR
+**Real count (2026-06-08 ICT): 237,752,634 characters | TITANIUM_ANCHOR
  **TITANIUM_ANCHOR level** (next threshold: none — maximum tier reached)
  **⚠️ NOTE:** +156,676 delta from Run 5 RRL-0 backdrop ingestion. +62,773 delta from Run 6 RRL-0-original ingestion. RRL-0.txt contains ~150K agent text alongside ~4K Michael verbatim. Contamination documented per Michael directive.
  **Run 53 delta:** +1,577,271 (RISE+P6+P7+P8+prod promotion+death). Total 118,965,802.
@@ -85,7 +85,8 @@ Only promote to `net-pet-ai` (prod) after verified on dev. Never deploy untested
 - **Active Mission:** OB-1 POST-MERGE9 CONSOLIDATION + Growth Infrastructure Buildout — NET-PET-AI Hardening to Scale-Ready
   - **Last completed:** ROMAN RUN 072 — Full stack hardening sprint. 9 commits, ~30 items. A: Deepgram 6 error codes. C: Wake Up The Tiger slogan. E-H: iOS mic stream cache, silence timer race fix, mobile layout, token proactive refresh. P: SVG mode icons + badge-phoenix. Q-R: Real brand marks, InjectionRefused, multi-tab BroadcastChannel lock, firewall fast-fail, Tiger Win live metrics, phonics card live refresh. S: PATCH /api/student/state — session writeback loop closed. T-V-W: Admin roster endpoint, onboarding redirect, audit log, Sydney region Deepgram. X-Z: Portal lastSession card per mode, phonics auto-advance (dead endpoint wired), mode-aware session metadata. AA-CC: Streak increment fix (was always writing 1), phonics all-7-complete state, coach edit in admin UI. Voice infra case study → CANON/RESEARCH/voice-infrastructure-alternatives.md. L83 BLUEPRINT_BEFORE_DISPATCH + L84 FULL_STACK_SCOPE sealed. SOUL 224,331,000. HEAD 7b41e5f0.
   - **Last completed:** ROMAN RUN 097 — Dreamer World Model wired (world_model synthesis at every token request, prod 841c8b72). voice-brain-lock.test.mjs created (hard guard: gpt-4o-mini think, never change). feedback_voice_stack_locked.md corrected (was gemini-2.5-flash — WRONG). Full product blueprint from BIBLE-OF-THE-SYSTEM.json (6 layers: Memory/SRS/Tiger/Personability/Accountability/Phonics). phetrail-run097.md written (7 failures + 4 wins). DNA_GAP (JSONL parsing). HL-576→617 committed. SOUL 237,582,134 TITANIUM_ANCHOR. HEAD faeab48a.
-  - **Next:** Run 098 — SRS review write-back (computeNextReview exists, write-back NOT wired from live session); Breakthroughs/struggles detection; Tiger Win wiring (beforeunload); pre-commit hook for voice-brain-lock; phonics mastery scoring. dnaREGISTRY at RISE start.
+  - **Last completed:** ROMAN RUN 098 — SRS loop closed end-to-end (due-word injection at token-time + SM-2 grade-4 write-back). MEMORY complete (breakthroughs/struggles/last_topic + cross-session struggle detection). Tiger Index wired (avg_turn_length + barge_in_count tracked in chat.js, persisted to session_history, used by Dreamer). Phonics per-phoneme mastery scoring (weak_phonemes injected into Obi phonics prompt). Voice brain lock test fixed + pre-commit hook installed. Session history write path fixed (was never called from client). Portal sessions count fixed. HL-618→621 sealed. SOUL 237,752,634 TITANIUM_ANCHOR. HEAD bf23d617.
+  - **Next:** Run 099 — P0: BlueTech dashboard Tiger Index (avg_turn_length + barge_in_count + last_topic columns at /api/admin/student-activity index.js:656 + bluetech-dashboard.html). P1: ACCOUNT-GAP-2 Zalo hooks (needs Michael's Zalo OA key). P2: /dnaREGISTRY at RISE start.
   - **Run 53 (this session):** RISE 7/7 REAL. P6+P7+P8 GATE PASSED DEV+PROD. Prod promoted (9fc3cdbd). PheTrail-053 written (6 pos, 3 neg). Full death pipeline. SOUL +1,577,271 → 118,965,802.
   - **Run 52:** RISE 7/7 REAL. P4+P5 GATE PASSED DEV. Enterprise audit. P6–P10 blueprint. PheTrail-052 written (7 pos, 3 neg). Full death pipeline. SOUL +543,109 → 116,764,209.
   - **Prior milestone:** ROMAN RUN 0 — ERA RESET ratified. Phoenix-Centurion identity sealed. Roman Legion 6-stage doctrine deployed to soul-logger v2.2 (a0c99e4e). 4 legionnaires Romanized. /Centurion-Code renamed from /PhoenixCoder. /SupplyLines autonomous pipeline command + script created. Cloudflare paid tier activated. Founding Declaration sealed. HEAD 51ea010. SOULCOUNT 116,588 ANCHOR.

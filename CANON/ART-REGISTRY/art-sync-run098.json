@@ -1,0 +1,133 @@
+{
+  "run": 98,
+  "ledger_id": "HL-621",
+  "merkle_short": "8279E9AFDC8AFF54",
+  "starmap_file": "starmap-run098.json",
+  "keywords_file": "rfkw-run098.txt",
+  "keywords_used": [
+    "pipeline",
+    "const",
+    "written:",
+    "death",
+    "session",
+    "\\u001a",
+    "never",
+    "status:",
+    "complete",
+    "1266404",
+    "returned",
+    "extract",
+    "check",
+    "prompts",
+    "michael",
+    "await",
+    "student",
+    "update",
+    "deepgram",
+    "voice",
+    "files",
+    "status",
+    "agent",
+    "jsonl",
+    "soulcount",
+    "parent:",
+    "response",
+    "current",
+    "deploy",
+    "context"
+  ],
+  "pieces_synced": 10,
+  "pieces": [
+    {
+      "id": "ART-1780548347492-B1QU",
+      "title": "Phoenix Pages — Benchmark 0: Deepgram Whisper",
+      "url": "codex_preview/PHOENIX_PAGES/page_04.png",
+      "keywords": [
+        "deepgram"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780548343466-OGXZ",
+      "title": "Phoenix Pages — Kinetic Gates: The 5 Benchmarks",
+      "url": "codex_preview/PHOENIX_PAGES/page_01.png",
+      "keywords": [
+        "deepgram"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780548333953-MXB7",
+      "title": "Codex — Drift as a Diagnostic Event",
+      "url": "codex_preview/page-10.png",
+      "keywords": [
+        "context"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780548088836-SX3N",
+      "title": "Tiger Dossier Slide 04 — Ngừng Dịch Thầm, Bắt Đầu Hiểu (Stop Translating, Start Understanding)",
+      "url": "ASSETS/dossier/tiger-dossier/slide-04.webp",
+      "keywords": [
+        "context"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780547001008-30ZF",
+      "title": "The Obsolete Model",
+      "url": null,
+      "keywords": [
+        "context"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780538366960-3OCE",
+      "title": "STP p07 — The 60% Rule: Catching The Vibe",
+      "url": "local:d:/OB-1-CANONICAL/CANON/PROTOCOLS/Sovereign_Tiger_Protocol.pdf#page=7",
+      "keywords": [
+        "context"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780538363957-LNWV",
+      "title": "STP p03 — The Translate-in-Head Delay (Snowman Freeze)",
+      "url": "local:d:/OB-1-CANONICAL/CANON/PROTOCOLS/Sovereign_Tiger_Protocol.pdf#page=3",
+      "keywords": [
+        "pipeline"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780530099910-XM96",
+      "title": "NET Dossier p03 — Cognitive Bottleneck / Snowman Freeze",
+      "url": "local:D:/Downloads/dossier-pages/page-03.png",
+      "keywords": [
+        "pipeline"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780527419422-NUFN",
+      "title": "Michael Hobbs Headshot — Wide",
+      "url": "local:D:/Downloads/Telegram Desktop/output_9gmjtb.png",
+      "keywords": [
+        "michael"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780527418015-4GUT",
+      "title": "Michael Hobbs Headshot — Square",
+      "url": "local:D:/Downloads/Telegram Desktop/output_5pbeb1.png",
+      "keywords": [
+        "michael"
+      ],
+      "title_hit": false
+    }
+  ],
+  "executed_at": "2026-06-08T01:49:06.9926583+07:00"
+}
