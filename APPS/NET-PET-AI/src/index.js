@@ -1552,11 +1552,15 @@ speak: {
       if (langVal) lang = langVal;
     } catch (_) {}
 
-    // Read homework notes
-    let homeworkNotes = "";
+    // Read homework notes + session history count in parallel
+    let homeworkNotes = "", sessions = 0;
     try {
-      const hwRaw = await env.NET_PET_KV.get(`student:${studentId}:homework_notes`);
+      const [hwRaw, histRaw] = await Promise.all([
+        env.NET_PET_KV.get(`student:${studentId}:homework_notes`),
+        env.NET_PET_KV.get(`session_history_${studentId}`)
+      ]);
       if (hwRaw) homeworkNotes = hwRaw;
+      if (histRaw) { const h = JSON.parse(histRaw); sessions = Array.isArray(h) ? h.length : 0; }
     } catch (_) {}
 
     return addCors(json({
@@ -1566,6 +1570,7 @@ speak: {
       streak,
       lang,
       homework_notes: homeworkNotes,
+      sessions,
       source: profile ? "kv" : "empty"
     }), request);
   }
