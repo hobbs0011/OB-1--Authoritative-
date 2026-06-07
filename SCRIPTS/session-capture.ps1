@@ -72,6 +72,18 @@ if (-not $jsonlFile) {
     $jsonlFile = Get-Item $historyPath
 }
 
+# RECOVERY: if we fell back to history.jsonl, try to find the actual session JSONL
+# by LastWriteTime (most recently modified jsonl in known dirs)
+if ($jsonlFile.Name -eq "history.jsonl") {
+    $candidate = Get-ChildItem @("$jsonlBase", "$env:USERPROFILE\.claude", "$repo\.kilo") -Recurse -Filter "*.jsonl" -ErrorAction SilentlyContinue |
+                 Sort-Object LastWriteTime -Descending |
+                 Select-Object -First 1
+    if ($candidate -and $candidate.Length -gt 1000) {
+        Write-Host "RECOVERY: using most-recent JSONL by timestamp: $($candidate.FullName)"
+        $jsonlFile = $candidate
+    }
+}
+
 if (-not (Test-Path $jsonlFile.FullName)) {
     Write-Error "FATAL: JSONL source not found for session $activeSessionId"
     exit 1
