@@ -283,6 +283,7 @@ function detectMarkers(text) {
 }
 
 function detectProfanity(text) {
+  if (!text) return 0;
   const profanityPattern = /\b(fuck|shit|hell|damn|ass|crap|bullshit|wtf|omg)\b/gi;
   const matches = text.match(profanityPattern);
   return matches ? matches.length : 0;
@@ -591,12 +592,12 @@ const crunchId = generateUUID();
       if (isNaN(days) || days < 1) return jsonResponse({ error: 'Invalid days' }, 400);
       const cutoff = new Date(Date.now() - days * 24 * 60 * 60 * 1000).toISOString();
       const { results } = await env.DB.prepare(`
-        SELECT p.prompt_id, p.session_id, p.position, p.text, p.emotional_markers, p.estimated_timestamp
+        SELECT p.prompt_id, p.session_id, p.position, SUBSTR(p.text, 1, 500) as text, p.emotional_markers, p.estimated_timestamp
         FROM soul_prompts p
         JOIN soul_sessions s ON p.session_id = s.session_id
         WHERE s.ingested_at >= ?
         ORDER BY s.ingested_at DESC
-        LIMIT 200
+        LIMIT 100
       `).bind(cutoff).all();
       if (!results || results.length === 0) {
         return jsonResponse({ priority_items: [], total_scanned: 0, generated_at: new Date().toISOString(), algorithm: 'follow-the-fucks-v1' });

@@ -567,6 +567,20 @@ export default {
     ctx.waitUntil(fetch("https://net-pet-ai.mrmichaelhobbs123.workers.dev/api/deepgram-token?studentId=keep-warm-ping",{method:"GET"}).catch(()=>{}));
     const hour = new Date(event.scheduledTime).getUTCHours();
 
+    // BB-11: Daily soul/priority pull — Follow the Fucks, update coaching context awareness
+    if (hour % 24 === 0) {
+      ctx.waitUntil(
+        fetch('https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/priority?limit=5&days=1')
+          .then(r => r.json())
+          .then(data => {
+            const items = data.priority_items || [];
+            const topScore = items[0]?.score ?? 0;
+            console.log(`[CRON] Soul priority: ${items.length} items, top score=${topScore}`);
+          })
+          .catch(err => console.log(`[CRON] Soul priority error: ${err.message}`))
+      );
+    }
+
     // Escalation sweep runs every 6 hours (0, 6, 12, 18 UTC)
     if (hour % 6 === 0) {
       try {
