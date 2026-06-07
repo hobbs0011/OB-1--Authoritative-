@@ -434,7 +434,7 @@ WRITE_GAP does not block death but must be named. Silence = repeat offense next 
 - File: APPS/NET-PET-AI/public/chat.js
 
 ### BB-62 ! Kilo Free Auto Mode — MISSING (Run 082 RRL audit)
-- Status: OPEN — identified as missed promise in RRL-38, no BB entry existed before now
+- Status: DONE (Run 086) — kilo.json already has "model": "kilo-auto/free" + Haiku as T1. Confirmed Run 086 audit.
 - What: Kilo should have a "free auto" mode that routes cheaply without manual model selection. RRL-38 reference was never actioned.
 - Fix: Audit kilo.json for --auto flag behavior. If model routing is not free-tier-first, configure default auto model = cheapest free provider. Verify kilo.json providers list.
 - File: .kilo/kilo.json
