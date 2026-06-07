@@ -8,16 +8,16 @@ ISSUE-007: Legacy handleLeadCapture still accepts raw XSS vectors before sanitiz
 ISSUE-008: No CSRF protection on mutation endpoints
 ISSUE-009: No request size limits enforced on POST bodies
 ISSUE-010: No timeout on legacyWorker.fetch fallback
-ISSUE-011: chat.js double-load guard uses global flag breaking reloads
-ISSUE-012: chat.js obi() queue has no backpressure limit
-ISSUE-013: chat.js agentWs reconnect has no max-retry cap
-ISSUE-014: chat.js AudioContext resume not wrapped in try/catch for Safari
-ISSUE-015: chat.js mic stream never released on session end
-ISSUE-016: No input validation on chat.js textarea before sending
-ISSUE-017: portal.css uses hardcoded rgba values instead of CSS variables
-ISSUE-018: portal.css has no reduced-motion media query
-ISSUE-019: portal.css has no print stylesheet
-ISSUE-020: portal.css font loading lacks font-display: swap
+ISSUE-011: chat.js double-load guard uses global flag breaking reloads [FIXED]
+ISSUE-012: chat.js obi() queue has no backpressure limit [FIXED]
+ISSUE-013: chat.js agentWs reconnect has no max-retry cap [FIXED]
+ISSUE-014: chat.js AudioContext resume not wrapped in try/catch for Safari [FIXED]
+ISSUE-015: chat.js mic stream never released on session end [FIXED]
+ISSUE-016: No input validation on chat.js textarea before sending [FIXED]
+ISSUE-017: portal.css uses hardcoded rgba values instead of CSS variables [FIXED]
+ISSUE-018: portal.css has no reduced-motion media query [FIXED]
+ISSUE-019: portal.css has no print stylesheet [FIXED]
+ISSUE-020: portal.css font loading lacks font-display: swap [FIXED]
 ISSUE-021: quy-portal.html inline styles duplicate portal.css rules
 ISSUE-022: quy-portal.html has no SEO meta tags
 ISSUE-023: quy-portal.html lacks Open Graph tags
@@ -57,4 +57,4 @@ ISSUE-056: Missing alt text on some portal images
 ISSUE-057: No language/translation i18n layer
 ISSUE-058: Hardcoded Vietnamese strings in chat.js without i18n
 ISSUE-059: No error boundary/fallback UI for failed asset loads
-ISSUE-060: portal.css loads before critical inline CSS FOUC risk
+ISSUE-060: portal.css loads before critical inline CSS FOUC risk [FIXED]
