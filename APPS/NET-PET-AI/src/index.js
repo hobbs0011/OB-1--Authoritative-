@@ -985,7 +985,7 @@ speak: {
       } : null;
       // Block W: Sydney region routing hint for VN students
       const ws_url = agentLang === 'vi' ? "wss://agent.deepgram.com/v1/agent/converse?region=syd" : null;
-      return addCors(json({ token: access_token, settings, phonicsHint, lastSessionVocab, ws_url }), request);
+      return addCors(json({ token: access_token, settings, phonicsHint, lastSessionVocab, lastSessionTopic: memoryData?.last_topic || null, ws_url }), request);
     } catch (err) {
       return addCors(json({ error: err.message }, 500), request);
     }

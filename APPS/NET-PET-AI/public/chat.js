@@ -911,6 +911,7 @@ let agentFirstAudioReceived = false; // FIX1: true after first agent audio chunk
 let agentPreSettingsBuffer = []; // EC-15: PCM chunks buffered before SettingsApplied
 let agentPreSettingsBytes = 0;   // byte count — cap at 50 chunks (~1s at 16kHz)
 let lastSessionVocabGlobal = []; // last session vocab words from token response
+let lastSessionTopicGlobal = null; // last session topic from memory (for session continuity greeting)
 
 // I-5: Stop pendingMicStream when tab hidden to prevent hot mic (EC-4 fix)
 document.addEventListener("visibilitychange", () => {
@@ -941,7 +942,7 @@ async function openVoiceAgent() {
     setMicStatus("Connecting…", false);
     const tokenRes = await fetch(`/api/deepgram-token?studentId=${encodeURIComponent(urlStudentId)}&mode=${encodeURIComponent(currentMode)}`);
     if (!tokenRes.ok) { console.error("[VOICE] token fetch failed:", tokenRes.status); setMicStatus("Tap to start", false); return; }
-    const { token, settings, phonicsHint, lastSessionVocab, ws_url } = await tokenRes.json();
+    const { token, settings, phonicsHint, lastSessionVocab, lastSessionTopic, ws_url } = await tokenRes.json();
     if (phonicsHint) profile._phonicsHint = phonicsHint;
     if (!token) { console.error("[VOICE] no token in response"); setMicStatus("Tap to start", false); return; }
     if (agentWsId !== myId) return; // zombie check — another openVoiceAgent() fired during async fetch
@@ -963,6 +964,7 @@ async function openVoiceAgent() {
 
     agentSettings = settings; // stored for Welcome handler
     lastSessionVocabGlobal = lastSessionVocab || [];
+    lastSessionTopicGlobal = lastSessionTopic || null;
 
     // Connect directly to Deepgram — JWT via Sec-WebSocket-Protocol (Deepgram echoes "token" back)
     // Block W: Use Sydney region if provided (lower latency for VN students)
@@ -1153,12 +1155,12 @@ function handleAgentMsg(event) {
           _openingMsg = `${_greetName ? _greetName + "! " : ""}Let's practice your ${_group} sounds. Try saying this sentence out loud: "${_drill}"`;
         } else if (profile._sessionHint) {
           _openingMsg = `${_viGreet}${_greetName || "there"}! I see you watched "${profile._sessionHint}" — that's your 45 minutes! What was the most interesting part?`;
+        } else if (lastSessionTopicGlobal) {
+          _openingMsg = `${_viGreet}${_greetName || "there"}! Good to see you again. Last time we talked about ${lastSessionTopicGlobal} — how are you feeling about that today?`;
+        } else if (lastSessionVocabGlobal?.length > 0) {
+          _openingMsg = `${_viGreet}${_greetName || "there"}! Good to see you again. Last time you practiced "${lastSessionVocabGlobal[0]}" — want to use it in a sentence today?`;
         } else if (chatMessages.length > 0) {
-          if (lastSessionVocabGlobal?.length > 0) {
-            _openingMsg = `${_viGreet}${_greetName || "there"}! Good to see you again. Last time you practiced "${lastSessionVocabGlobal[0]}" — want to use it in a sentence today?`;
-          } else {
-            _openingMsg = `${_viGreet}${_greetName || "there"}! Good to see you again. Ready to practice — want to continue from last time, or try something new today?`;
-          }
+          _openingMsg = `${_viGreet}${_greetName || "there"}! Good to see you again. Ready to practice — want to continue from last time, or try something new today?`;
         } else {
           _openingMsg = `${_viGreet}${_greetName || "there"}! I'm OBI, your English coach. No pressure — just speak naturally, I'll guide you. What do you want to talk about today?`;
         }
