@@ -26,6 +26,24 @@ app.use('*', async (c, next) => {
   });
 });
 
+// ── CSRF origin guard ─────────────────────────────────────────────────────────
+const TRUSTED_ORIGINS = new Set([
+  'https://net-pet-ai.mrmichaelhobbs123.workers.dev',
+  'https://net-pet-ai-dev.mrmichaelhobbs123.workers.dev',
+  'https://tigers-4room.pages.dev',
+]);
+
+app.use('/api/*', async (c, next) => {
+  if (c.req.method === 'GET' || c.req.method === 'HEAD') return next();
+  if (c.req.header('x-pa-auth')) return next();
+  const origin = c.req.header('Origin');
+  if (!origin) return next();
+  if (!TRUSTED_ORIGINS.has(origin)) {
+    return c.json({ error: 'CSRF: origin not allowed' }, 403);
+  }
+  return next();
+});
+
 // ── Request size limit middleware (Issue 009) ──────────────────────────────────
 
 app.use('/api/:path*', async (c, next) => {

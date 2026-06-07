@@ -907,6 +907,13 @@ async function handleAPI(path, request, env, url) {
     if (!studentId) return addCors(json({ error: "studentId query parameter is required" }, 400), request);
     const sessionMode = (url.searchParams.get("mode") || "free").toLowerCase();
     if (!["free","study","phonics"].includes(sessionMode)) return addCors(json({ error: "mode must be one of: free, study, phonics" }, 400), request);
+
+    // Circuit breaker — check KV before processing
+    const cbState = await env.NET_PET_KV.get('circuit:deepgram:state');
+    if (cbState === 'open') {
+      return addCors(json({ error: 'voice_unavailable', retryAfter: 60 }, 503), request);
+    }
+
     try {
       const [rawProfile, rawLang, rawVocab, rawArc, rawMemory, rawPhonics, rawSessionHistory] = await Promise.all([
         env.NET_PET_KV.get("student_profile_" + studentId),
@@ -999,8 +1006,10 @@ speak: {
       } : null;
       // Block W: Sydney region routing hint for VN students
       const ws_url = agentLang === 'vi' ? "wss://agent.deepgram.com/v1/agent/converse?region=syd" : null;
+      await env.NET_PET_KV.put('circuit:deepgram:state', 'closed');
       return addCors(json({ token: access_token, settings, phonicsHint, lastSessionVocab, lastSessionTopic: memoryData?.last_topic || null, ws_url }), request);
     } catch (err) {
+      await env.NET_PET_KV.put('circuit:deepgram:state', 'open', { expirationTtl: 60 });
       return addCors(json({ error: err.message }, 500), request);
     }
   }
