@@ -1907,7 +1907,7 @@ function confirmLandingMode() {
   // Always connect (or reconnect) Voice Agent with the selected mode.
   // boot() skipped openVoiceAgent() when landingWillShow=true, so we always start here.
   if (urlStudentId) {
-    if (agentWs) { try { agentWs.close(); } catch (_) {} }
+    if (agentWs) { agentWsId++; const _old = agentWs; agentWs = null; agentReady = false; agentSettings = null; try { _old.close(); } catch (_) {} }
     setTimeout(() => openVoiceAgent(), 300);
   }
 }
@@ -1961,8 +1961,7 @@ function selectMode(mode) {
   if (urlStudentId) {
     if (agentWs) {
       bubble('obi', `Switched to ${MODE_LABELS[mode]} mode. Reconnecting...`);
-      try { agentWs.close(); } catch (_) {}
-      agentWs = null; agentReady = false; // clear immediately so openVoiceAgent() won't bail
+      agentWsId++; const _old = agentWs; agentWs = null; agentReady = false; agentSettings = null; try { _old.close(); } catch (_) {}
     }
     setTimeout(() => openVoiceAgent(), 300);
   }
