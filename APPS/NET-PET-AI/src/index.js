@@ -1158,9 +1158,38 @@ speak: {
     const { studentId, turns, durationMs, vocab } = body;
     if (!studentId) return addCors(json({ error: "studentId required" }, 400), request);
     try {
-      const raw = await env.NET_PET_KV.get(`session_history_${studentId}`);
+      const [raw, rawMem] = await Promise.all([
+        env.NET_PET_KV.get(`session_history_${studentId}`),
+        env.STUDENT_MEMORY ? env.STUDENT_MEMORY.get(`mem:${studentId}`) : Promise.resolve(null)
+      ]);
       const history = raw ? JSON.parse(raw) : [];
       history.push({ ts: Date.now(), turns: turns || 0, durationMs: durationMs || 0, vocab: vocab || [] });
+
+      // Breakthroughs + struggles detection — update STUDENT_MEMORY async
+      if (env.STUDENT_MEMORY) {
+        try {
+          const mem = rawMem ? JSON.parse(rawMem) : {};
+          const breakthroughs = (mem.breakthroughs || []).slice(-10);
+          const struggles = (mem.struggles || []).slice(-10);
+          const vocabArr = vocab || [];
+          const turnCount = turns || 0;
+          if (vocabArr.length >= 2) {
+            breakthroughs.push(`Used ${vocabArr.length} new words: ${vocabArr.slice(0,3).join(", ")}`);
+          }
+          if (turnCount >= 20) {
+            breakthroughs.push(`Highly engaged session (${turnCount} turns)`);
+          }
+          if (vocabArr.length === 0 && turnCount > 0) {
+            struggles.push(`Session with no new vocabulary (${turnCount} turns)`);
+          }
+          if (turnCount > 0 && turnCount < 5) {
+            struggles.push(`Short session — only ${turnCount} turns`);
+          }
+          const updatedMem = { ...mem, breakthroughs, struggles, last_session_ts: Date.now() };
+          env.STUDENT_MEMORY.put(`mem:${studentId}`, JSON.stringify(updatedMem)).catch(() => {});
+        } catch (_) {}
+      }
+
       await env.NET_PET_KV.put(`session_history_${studentId}`, JSON.stringify(history.slice(-20)));
       return addCors(json({ ok: true, sessions: history.length }), request);
     } catch (err) {
