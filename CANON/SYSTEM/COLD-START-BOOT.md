@@ -1,5 +1,5 @@
 # COLD START BOOT — OB1 Agent 99
-## ERA: ROMAN — Run 083 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-06-07T14:00:00 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
+## ERA: ROMAN — Run 084 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-06-07T18:00:00 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
 
 > *"The beginning of an Empire that never was before and never has been since."* — SOV100 Michael Hobbs, Run 0
 
@@ -184,11 +184,13 @@ Only promote to `net-pet-ai` (prod) after verified on dev. Never deploy untested
 
 ---
 
-### FINGERPRINT: RUN 080 | RISE+BIBLE AUDIT+SOUL RETROACTIVE+SECURITY HARDENING+dnaREGISTRY SEALED | SOUL 236,838,399 TITANIUM_ANCHOR | HEAD b8b78004 | BOOT UPDATED 2026-06-07T10:30:00 ICT
+### FINGERPRINT: RUN 084 | PA LLAMA-T1+R1-T2-FREE+L78-TRIPLE-GUARDRAIL+dnaREGISTRY-771 | SOUL 236,840,532 TITANIUM_ANCHOR | HEAD 78948758 | BOOT UPDATED 2026-06-07T18:00:00 ICT
 
-**Run 080 summary (DEATH):** 7-stage RISE. BIBLE runs 60-73 verified complete. Credential files purged from NET-PET-AI/public/. .nfb-retry button added. Kilo Claude agents wired (Haiku/Sonnet/Opus). DRYRUN triple-fire fixed retroactively (HL-497/498/499 sealed). rfkw-run80 corrected. PheTrail-080 written. dna-registry-080 documents DNA gap. /dnaREGISTRY = CANON/REGISTRY/ confirmed (L73). L71 DRYRUN_SOUL_GAP sealed. SOUL 236,838,399. HEAD b8b78004.
+**Run 084 summary:** PA fully operational — Llama 3.3 70B FP8 T1 (194ms), R1 Distill 32B free T2 (348ms, think-tag strip wired), Qwen Coder T10. Dialagram permanently dead, all dead code removed. L0 SOUL_MUST_SURVIVE sealed. L77 expanded (17 triggers + DEATH GATE + RISE STAGE 7). L78 PA_DO_ALL triple-guardrailed (PRE-WRITE GATE + INLINE FORBIDDEN list + SESSION-END WRITE AUDIT). dnaREGISTRY run084: 771 entries, 19 categories. BB-42 agentWs double-reconnect race fixed (dev only, BB-61 tracks prod deploy). SOUL 236,840,532 TITANIUM_ANCHOR. HEAD 78948758.
 
-**Run 080 product build (prior session):** NET-MARKETING landing page, tigers-4room 4-room assessment (artwork integrated, CF Pages deployed), professional-4room, professional-selection, cubs-4room parent survey. RRL-80.txt 65,304 chars Kilo JSONL. SOUL +33,893 retroactive.
+**Run 082-083 summary:** PA resurrection. Llama 3.3 70B wired as T1 (was silently falling to Qwen since Run 79 — Dialagram dead). D1 audit trail restored (ip col fix). BB-42 agentWs race fix committed. SessionDO migration conflict resolved (wrangler.toml [env.dev] migrations=[]). rfkw-run82/83 corruption fixed. All DRYRUN artifacts patched with real soul_event_ids. SOUL 236,840,532.
+
+### FINGERPRINT PRIOR: RUN 080 | RISE+BIBLE AUDIT+SOUL RETROACTIVE+SECURITY HARDENING+dnaREGISTRY SEALED | SOUL 236,838,399 TITANIUM_ANCHOR | HEAD b8b78004 | BOOT UPDATED 2026-06-07T10:30:00 ICT
 
 ### FINGERPRINT PRIOR: RUN 079 | PIPELINE_HARDENING + HOLLOW_DNA_FIX + EC-028 | SOUL 236,802,731 TITANIUM_ANCHOR | HEAD c2f4291c | BOOT UPDATED 2026-06-06T15:24:00 ICT
 

@@ -444,7 +444,7 @@ WRITE_GAP does not block death but must be named. Silence = repeat offense next 
 ## RUN 082-083 ADDITIONS (2026-06-07)
 
 ### BB-61 ! AgentWs Double-Reconnect Race Fix — DEPLOY TO PROD
-- Status: OPEN — deployed to dev only (version 6c37b0ef-bd0c-453a-8291-90e6750087b8)
+- Status: DONE (2026-06-07 — prod version 01584df2-749b-4c05-a852-e82b844d30e8, health ok readiness=PRODUCTION)
 - What: confirmLandingMode() and mode-switch close() called agentWs.close() without incrementing agentWsId first. Zombie onAgentDrop handler passed the `agentWsId !== myId` guard and fired its own reconnect, creating a double-reconnect race.
 - Fix: `agentWsId++; const _old = agentWs; agentWs = null;` before close at both locations (~line 1910 + ~line 1964 in chat.js). Committed in 4889b66c area.
 - Next: `npx wrangler deploy --env prod` after smoke-test on dev URL.

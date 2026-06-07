@@ -9,7 +9,7 @@ Every new session MUST execute this boot sequence in order before any task:
 3. `Read OPERATIONS/STUDENT-PORTAL-DEV.md` — current portal state, audio pipeline, next steps
 4. `Read RRL/RRL-[latest].txt` — most recent raw session log for game plan context
 5. `git log -5 --oneline` — verify HEAD, confirm no drift
-6. `Invoke-RestMethod https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/status` — verify PA live (T1=CF Workers AI qwen_coder). **Dialagram is DEAD — do NOT reference it.**
+6. `Invoke-RestMethod https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/status` — verify PA live (T1=Llama 3.3 70B FP8, T2-FREE=R1 Distill 32B, T10=Qwen Coder). **Dialagram is DEAD — do NOT reference it.**
 7. Read latest `CANON/SOUL/EXTRACT/dna-run{N}.json` — last session's DNA: agent's words, decisions, blueprints
 
 **#DRIFT RULE:** If you do not read these 7 sources at boot, you WILL lose context and repeat mistakes. This is BB-26. Do not skip. Do not ask the user — read the files.
