@@ -126,16 +126,7 @@ app.get('/api/v1/metrics', async (c) => {
   return c.json({ errors: rows.results ?? [], count: rows.results?.length ?? 0 });
 });
 
-app.post('/api/lead', async (c) => {
-  const body = await c.req.raw.clone().text().catch(() => '{}');
-  const parsed = (() => { try { return JSON.parse(body); } catch { return {}; } })();
-  if (!parsed?.email) return c.json({ error: 'email required' }, 400);
-  if (!c.env?.SOUL_DB) return c.json({ error: 'DB unavailable' }, 503);
-  const ok = await c.env.SOUL_DB.prepare(
-    "INSERT INTO leads (email, name, source, ts) VALUES (?, ?, ?, ?)"
-  ).bind(parsed.email ?? '', parsed.name ?? '', parsed.source ?? 'chaos', Date.now()).run();
-  return c.json({ ok: true, id: ok.meta?.last_row_id ?? null });
-});
+app.get('/api/lead', (c) => c.json({ error: 'POST required' }, 405));
 
 // ── Legacy fallback — all unmigrated routes pass through to existing handler ──
 
@@ -151,11 +142,3 @@ export default {
 
 export { LedgerDO, PetDO, CommandDO, MemoryDO };
 
-// Block EE homework_notes persistence
-if (env.NET_PET_KV && typeof addEventListener !== "undefined") {
-  addEventListener("fetch", event => {
-    if (new URL(event.request.url).pathname === "/api/block-ee-ping") {
-      event.respondWith(new Response(JSON.stringify({ok:true,feature:"homework_notes"}), {headers: {"content-type":"application/json"}}));
-    }
-  });
-}
