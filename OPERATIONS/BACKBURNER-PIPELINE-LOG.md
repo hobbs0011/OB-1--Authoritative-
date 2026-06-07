@@ -86,7 +86,7 @@ WRITE_GAP does not block death but must be named. Silence = repeat offense next 
 - Route: PC T1 or manual asset
 
 ### BB-09 ~ Chrome Extension — Install Guide
-- Status: OPEN
+- Status: DONE (Run 086) — INSTALL-GUIDE.md created at APPS/NET-PET-AI/chrome-extension/INSTALL-GUIDE.md
 - What: Students need instructions to install unpacked extension
 - Fix: Add install-guide.md or popup "how to install" link
 
@@ -222,12 +222,12 @@ WRITE_GAP does not block death but must be named. Silence = repeat offense next 
 - Fix: Removed Cerebras provider, updated Claude → claude-opus-4-8, updated SOULCOUNT to TITANIUM_ANCHOR live query. Synced to all 8 worktrees.
 
 ### BB-30 ! Kilo AGENT99.md — Open cleanup
-- Status: OPEN
+- Status: DONE (Run 086) — AGENT99.md /PhoenixCoder ref already replaced via BB-48 Run 034
 - What: AGENT99.md still references `/PhoenixCoder` command (old phoenix-coder.workers.dev URL, superseded by phoenix-architecti). Should be updated to `/Centurion-Code`.
 - Fix: Update AGENT99.md COMMAND REGISTRY section — replace `/PhoenixCoder` with current `/Centurion-Code` dispatch.
 
 ### BB-31 ! RISE.md Phoenix Coder reference
-- Status: OPEN
+- Status: DONE (Run 086) — RISE.md Phoenix Coder stale ref resolved via BB-48 Run 034
 - What: RISE.md Phoenix Coder v3.2 section still calls `phoenix-coder.mrmichaelhobbs123.workers.dev` (old URL). Worker is superseded by phoenix-architecti.
 - Fix: Update to use phoenix-architecti URL and PA dispatch template.
 
@@ -272,7 +272,7 @@ WRITE_GAP does not block death but must be named. Silence = repeat offense next 
 - File: APPS/NET-PET-AI/public/chat.js — fallbackSpeak() L131-143
 
 ### BB-39 ! Mode Selection Visibility — DONE (audited Run 054)
-- Status: OPEN
+- Status: DONE (Run 054 audited, confirmed Run 086) — Mode Selection Visibility resolved
 - What: Returning users (obi_landing_seen set) have no visible mode indicator. Only way to change mode is clicking the 🔮 avatar in header — but no label/hint shows it's clickable on mobile (title tooltip doesn't show). Michael said "no mode selection."
 - Fix: Add current mode name label next to avatar in header, or show a persistent mode chip in the UI that makes clickability obvious.
 - File: APPS/NET-PET-AI/public/magic-chat.html + chat.js

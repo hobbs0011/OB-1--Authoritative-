@@ -70,6 +70,11 @@ Write to this doc when ANY trigger fires (see CLAUDE.md L77 for full trigger lis
 **DEATH GATE:** Before sealing, enumerate all triggers fired → confirm phetrail entry exists for each.
 **RISE STAGE 7:** 0 entries for a multi-trigger session = PHETRAIL_GAP flag.
 
+### Run 086 Triggers Fired
+
+- BB OPENED OR CLOSED: BB-09 DONE Run 086 — chrome-extension INSTALL-GUIDE.md created. BB-30 DONE Run 086 — AGENT99.md ref resolved via BB-48 Run 034. BB-31 DONE Run 086 — RISE.md stale ref resolved via BB-48 Run 034. BB-39 DONE Run 086 — Mode Selection Visibility confirmed resolved Run 054.
+- ARCHITECTURE CHANGED: pa-batch.ps1 created at SCRIPTS/pa-batch.ps1 — PowerShell helper wrapping /api/batch endpoint. Accepts Tasks array, dispatches in single HTTP call, returns results array. Smoke test BR-1780818782067: 4 tasks, 2383ms total. Efficiency: 4 PA dispatches → 1 HTTP call.
+
 ### Run 085 Triggers Fired (Session resumed post-compaction)
 
 - SESSION RESUMED AFTER COMPACTION: context compacted between Run 084 and this turn. Resumed directly into BB-40 (/supersaiyan).
