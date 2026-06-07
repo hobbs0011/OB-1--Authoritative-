@@ -1065,14 +1065,12 @@ async function handleAPI(path, request, env, url) {
           endpointing: sessionMode === "free" ? 700 : 1100
         },
         think: {
-          // ⛔ LOCKED — DO NOT CHANGE THIS LINE. ⛔
+          provider: { type: "open_ai", model: "gpt-4o-mini" },
+          // ⛔ LOCKED — DO NOT CHANGE THE LINE ABOVE. ⛔
           // "open_ai" here does NOT mean external OpenAI. With no `endpoint`, Deepgram runs gpt-4o-mini
           // IN-HOUSE inside its own agentic pipeline (no key, no account, no bill, no network hop out).
-          // This is Michael's ORIGINAL plan and the ONLY config that is fast. Any other provider
-          // (google/gemini/etc) routes OUTSIDE Deepgram's pipeline = +several seconds latency = app feels
-          // inferior to Gemini. If you think this is "external routing" you are WRONG — read this comment.
+          // Any other provider (google/gemini/etc) routes OUTSIDE Deepgram = +seconds latency = inferior.
           // Broken & relitigated 3+ times. Confirmed Run 097. Guarded by test/voice-brain-lock.test.mjs.
-          provider: { type: "open_ai", model: "gpt-4o-mini" },
           prompt: buildAgentPrompt(agentProfile, agentLang, recentVocab, arcData, sessionMode, memoryData, phonicsData),
             functions: [{
               name: "save_vocabulary_word",
