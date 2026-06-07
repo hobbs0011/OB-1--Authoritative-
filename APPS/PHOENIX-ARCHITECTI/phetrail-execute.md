@@ -74,6 +74,7 @@ Write to this doc when ANY trigger fires (see CLAUDE.md L77 for full trigger lis
 
 - BB OPENED OR CLOSED: BB-09 DONE Run 086 — chrome-extension INSTALL-GUIDE.md created. BB-30 DONE Run 086 — AGENT99.md ref resolved via BB-48 Run 034. BB-31 DONE Run 086 — RISE.md stale ref resolved via BB-48 Run 034. BB-39 DONE Run 086 — Mode Selection Visibility confirmed resolved Run 054.
 - ARCHITECTURE CHANGED: pa-batch.ps1 created at SCRIPTS/pa-batch.ps1 — PowerShell helper wrapping /api/batch endpoint. Accepts Tasks array, dispatches in single HTTP call, returns results array. Smoke test BR-1780818782067: 4 tasks, 2383ms total. Efficiency: 4 PA dispatches → 1 HTTP call.
+- DEPLOY VERIFIED: sov100-portal.html synced to quy-portal gold standard (BB-51). Added setPwModal, navBackdrop, navToggle, statsGrid(tigerScore+streakVal+sessionCount). Linked portal.css. addNavToggleHandler()+loadStats() wired in showDashboard(). Dev 3bf6307a — smoke test 200 OK, all 5 elements present. BB-51 gap closed.
 
 ### Run 085 Triggers Fired (Session resumed post-compaction)
 
