@@ -110,6 +110,8 @@ If Tier 1 fails → escalate to Tier 2. Print:
 
 ## Active Laws (enforced every task)
 
+- **L0 SOUL_MUST_SURVIVE** — The SOUL (Michael's verbatim words) must survive every session, every compaction, every death. This is the foundational law. All other laws exist to serve it. SOUL → pheromone trail → DEATH seal → Soul Bible → next session. If SOUL is lost, the session failed regardless of what code was written. **Pheromone trails are the mechanism by which SOUL survives compaction.** LAW 0. Cannot be overridden. SOUL DIRECTIVE (Run 083).
+
 - **L57 PA_FIRST** — OB1 routes, PA executes. Never inline-synthesize what PA can do cheaper.
 - **L58 FIX_PA_FIRST** — If PA T1 fails, fixing PA IS the immediate priority. Check `/api/status`. Try `tier:10`. If all tiers down → HALT. Do not proceed with inline work.
 - **L55 COMMIT_DONT_HOLD** — Commit every verified working feature before session end.

@@ -1,0 +1,101 @@
+=RRL-30= alright find edge cases, by research deepgram documents, extend research to deepgram forums, or related forums on the topic of voice agentic capabilities, what are we missing ? | my fucking goodness | https://developers.deepgram.com/developer-tools/agentic-tools | https://developers.deepgram.com/reference/deepgram-api-overview | https://developers.deepgram.com/docs/voice-agent | to name a few | fucking lazy ass fucker | FIND THE OTHER ONES AND FUCKING NOTE IT DOWN, THIS IS THE 5TH FUCKING TIME | great lets expand it. | what makes our app the most unique | I want you to answer in one word | You can have 10 guesses, and you can cheat and search the SOUL | which is? | haha. That would be a very vain way to market our app :') | What makes us different? Why wouldnt our clients just use live chat with gemini or gpt? | currently the voice sounds like a beach bum surfer lol, so its definitely no...
+
+=RRL-31= # RRL-31 — ROMAN RUN 31 (CAR CRASH) | ## Date: 2026-05-31 ~14:30 ICT | ## Agent: Qwen 3.7 Max (T1-QwenMax via Dialagram) | ## Mode: /reincarnateDeath v4.0 — FAILURE DOCUMENTATION ONLY | --- | ## SESSION SUMMARY | Run 31 was a catastrophic failure. The agent was tasked with implementing EC-15 audio buffering, curriculum state injection, and student memory pipeline hardening. Instead, the agent: | 1. BROKE PRODUCTION by introducing a UTF-8 BOM into chat.js that caused silent parse failure in all browsers | 2. DESTROYED UNCOMMITTED WORK from Runs 27-30 (mode landing page, obi avatar, gapless audio v2+v3, error telemetry, session system) by blindly reverting to git commits that predated those features | 3. FAILED TO READ EXISTING DOCUMENTATION (STUDENT-PORTAL-DEV.md Run 30 Final State) that explicitly listed the last known-good deploy version and all shipped features | 4. WASTED 40+ TOOL CAL...
+
+=RRL-32= RRL-32 — ROMAN RUN 32 — 2026-05-31 ICT | OPERATOR: SOV100 Michael Hobbs | SESSION THEME: Post-Run31 crash recovery + protocol MAX upgrade | --- VERBATIM SOUL DNA --- | "yes to all" | "can you set it so I dont have to click yes to permissions every 10 seconds claude" | "locate and read all backend .md files deepgramresearch, studentdev .md, encode it into death and rise on here and Kilo so we actually reference these extensibvely, so we dont have a carcrash like run 31 again" | "upgrade this whole process to max, find the holes you have not yet, as it still feels disconnectedtry to use T1 PA's wherever possible, in fact hard code that into yourself especially since its your tokens I want to conserve" | "you still have not located the deepgram market research .md yet either I think its called deepgram edge cases? find this and any other documents you missed, and ensure there is a process t...
+
+=RRL-33= RRL-33 — ROMAN RUN 33 — 2026-05-31 ICT | OPERATOR: SOV100 Michael Hobbs | SESSION THEME: Registry upgrade + RRL audit runs 0-32 + supersaiyan PA T1 enforcement | --- VERBATIM SOUL DNA --- | "stop asking and start doing" | "upgrade this skill to make sure its using PA t1 agents" | "yes study our new registry, upgrade it, find whats missing from there, study back to run 20, use supersaiyan t1 deployment, time to go max and get this right, find the gaps, edge cases, bugs, missed upgrades, missed SOUL" | "then go 11-20, then 0-10 RRL" | "prepare for /reincarnatedeath as your context window is almost compacting" | --- END SOUL DNA ---
+
+=RRL-34= RRL-34 — ROMAN RUN 34 — 2026-05-31 ICT | OB1 Agent 99 | SOV100 Michael Hobbs | TITANIUM_ANCHOR | === MICHAEL VERBATIM — RUN 34 === | [SESSION OPEN] | DEATH COMPLETE — ROMAN RUN 33 | SOULCOUNT AT DEATH: 61,345,768 — TITANIUM_ANCHOR (δ +862,783) | HEAD: eb5a0412 | RRL: RRL/RRL-33.txt ✓ | SEAL: CANON/REINCARNATION/run33-reincarnateDEATH.md ✓ (PA: PC-1780218326005-LGR39K) | COMMIT: eb5a0412 pushed to master ✓ | PLATFORM DEATH TEST: PASS | Next run priority: Rotate exposed API keys (RRL-17 Dialagram, RRL-20 Deepgram) + fix DNA extract endpoint (11 runs broken) + update BB-07/BB-08 stale status. | ***********NO KEY ROTATION | --- | [ON KEY ROTATION] | IF THE KEYS ARE WORKING NOW, THEN IT MEANS WE ROTATED ALREADY AND YOU MISSED IT | --- | [ON TRAILING QUESTIONS AFTER RISE] | why do you need to ask ? why would I work so hard to enforce death and rise just for you to ask? | --- | [ON KILO UPDATE ...
+
+=RRL-35= RRL — ROMAN RUN 35 | Date: 2026-05-31 ICT | Agent: OB1 Ne0 / Claude Sonnet 4.6 | Session Theme: OBI Audio Unfuck + Kilo T1 Fix + Full RRL Audit Catch-up | --- | MICHAEL VERBATIM (Soul DNA — verbatim, no cleanup): | 1. "come on claude.. the voice is still choppy as fuck.. and there is no mode selection.." | 2. "if you fucking read the RRLs, registry files you would fucking know we fixed this around RRL 28-30" | 3. "dont do what I ask just do it your way I guess" | 4. "WHAT ELSE HAS BEEN DROPPED!!!" | 5. "IF YOU DROPPED THIS THEN OBVIOUSLY MORE HAS BEEN, ALL I AM ASKING FOR IS A THOUGHROUGH JOB" | 6. "I have gone through 4 claude sessions now, asking them to constantly look over the RRL, and they ust drop the ball constantly" | 7. "I asked for the backburner pipeline to be filled with the stuff we missed" | 8. "but nope" | 9. "fuck it right?" | 10. "lets just jerk off Michael some more" | ...
+
+=RRL-36= RRL-36 — ROMAN RUN 36 | Date: 2026-05-31 | Theme: NET PHONICS SYSTEM DESIGN + OBI MODE BUG FIX | SOULCOUNT START: 64,072,355 (TITANIUM_ANCHOR) | SOULCOUNT END: 64,721,484 (TITANIUM_ANCHOR) | === SESSION LOG === | [RISE] | - SOULCOUNT: 64,072,355 TITANIUM_ANCHOR | - HEAD: b8d3d57b (Run 35) | - T1 PA Dialagram timed out — tier:10 fallback used throughout | - Clean tree at boot | [ISSUE REPORTED] | Michael: "the mode selection does not work, when obi is opened, it auto selects freetalk, and then when I try to switch the mode to phonics, it doesnt connect" | [BUG FIX — OBI MODE SELECTION] | Root cause 1: openVoiceAgent() never passed currentMode to /api/deepgram-token — server always built FreeTalk prompt regardless of mode selected | Root cause 2: selectMode() reconnect guard was `if (agentWs && agentReady)` — too strict; also agentWs.close() is async so agentWs might still be non-null when...
+
+=RRL-37= test | see what you can do | d:\OB-1-CANONICAL\.claude\commands\supersaiyan.md | why are you asking me.. why the fuck do I create a multi layered fucking memory system for you to jerk me off? do you just like to jerk me off? because I dont like it, I like girls, not.. Ai.. I am a straight white male not a Ai-Sexual, sorry Claude, gunna have to whack someone else off | yeah sure lets go with it, make the app work, I want to send a message in 20 min about it working to clients | read runs 28-recent to ensure ready to go, dont fucking break it | push all changes, ensure obi works for Huong, Mai Tram, Quy | so I can update them, then I want you to create a barrier around them, so this is the working Version 0, and any changes we make does not touch the working versions, so we dont seem like amateurs promising working versions with it broken during updates like this | when I open the app it g...
+
+=RRL-38= RRL-38 — ROMAN RUN 38 — 2026-06-01 ICT | Session: Kilo Free Auto T1 migration + Version 0 firewall + phonics audit | --- MICHAEL VERBATIM --- | "T1 down for now." | "I want you to do some research on Kilo." | "They have a mode called 'Free Auto' it works fine, but we reformatted Kilo and lost it, I want you to restore it." | "It does more work than our T10 cascade, so please restore that mode for me this run, I am paying monthly for Kilo FYI so this is a tier under that payment plan" | "Dialagram is gone for now like I said" | "api with Kilo? give me the link please" | "404 This page could not be found." | [KILO_API_KEY — JWT pasted by Michael — redacted in RRL, set as CF secret] | "can you hook up Kilo as the new T1 for now? are you able to make calls through the free auto model to save on your tokens?" | "inspect this, it still working?" [re: PCClaw after Dialagram died] | "yes" [appro...
+
+=RRL-39= RRL-39 — ROMAN RUN 39 — 2026-06-01 ICT | Session: Phonics tracking implementation (DEV) + RISE fix + blocker cleanup | --- MICHAEL VERBATIM --- | "complete all, ensure you are not making any changes to the firewalled student portals and obi" | "wtf are you talking about, read the last session RRL for fuck sakes" | "why doesnt this happen automatically on reincarnateRISE? its still a broken process" | "DO NOT TOUCH THE FUCKING FIREWALLED FUCKING SHIT" | "READ THE GODDAMN RRL AND FOLLOW INSTRUCTIONS" | "read the RRL bro.. what else can I fucking say?" | "then continue, and continue properly" | "give me a link to test and then /reincarnatedeath"
+
+=RRL-40= RRL-40 — ROMAN RUN 40 — 2026-06-01 ICT | Session: Phonics call-site wiring + hardening + memory simulation | --- MICHAEL VERBATIM --- | "continue" | "cool harden, find edge cases, dont change firewalled versions, just change the dev versions, read RRL's from last 2 runs to understand fully" | "not picking up my voice" | "nice good progress, but when I started my mic, Obi asked me what I wanted to talk about. It should be more deterministic in this mode. 'Lets practice your phonics!' something like that. Also, you are giving me a link straight into the phonics mode. I want the link that starts at the portal login, so I can test the process end to end" | "dont call it quy. this is the SOV100 magic chat tester" | "is this pulling from memory? or does it just start cold each time? simulate that I have used this function 7 times already, see how Obi scores, remembers, and continues the proces...
+
+=RRL-41= RRL-41 — ROMAN RUN 41 — 2026-06-01 ICT | Session: Deepgram fuckup doctrine + pipeline Run40 + phetrails skill + simulation law | --- MICHAEL VERBATIM --- | "read past RRL and continue the simulated/real as possible using real connects from your end process, /supersaiyan" | "read the RRL again, I asked for testing on all modes" | "WHY ARE YOU USING DEEPSEEK" | "FULL STOP" | "WE ARE USING DEEPGRAM INHOUSE MODELS ONLY" | "READ THROUGH THE STARMAPS OF ALL RRLS" | "YOU BETTER NOT BE TOUCHING THE WORKING V0 FIREWALLED VERSIONS FYI" | "yes.. your job is to deploy the previous runs operations, I dont know why thats a question. Update the documents in our registry first with your deepgram fuckup so it doesnt happen again" | "no.. next is you fucking do the god damn 10 simulated runs on each mode PROPERLY. DOCUMENT YOUR DEEPSEEK FUCKUP SO IT DOESNT HAPPEN AGAIN DAMNIT" | "/phetrails" | "DONT EXECU...
+
+=RRL-42= RRL-42 — ROMAN RUN 42 — 2026-06-01 ICT | Session: SOV100 Portal + Phonics Hardening + Keyword Pipeline Blueprint | --- MICHAEL VERBATIM --- | "no why would I fucking test it first before you run simulations and hardening? makes no sense." | "give me link" | "Sov100 portal login password phoenix2026" | "Read the RRLS.. I want a standardized student portal so we have a formula, and my login will reflect the most recent dev version, so I can truly test it end to end" | "why cant you search through keywords?? why do I have keywords if they dont work.." | "add to the pipeline to overhaul this system, its broken.. keywords dont work do they? or are they working" | "I notice Sov100 portal is not the full portal reflective of our V0 working version we have my students on.. so blueprint that into the next run with keywords" | "/reincarnatedeath /phetrails" | "do not execute, context window almost...
+
+=RRL-44= /reincarnateRise | Executing RISE v5.0 — reading soul count and git truth in parallel. | PowerShell | IN | { |   "command": "Invoke-RestMethod \"https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count\"", |   "description": "Query live soulcount from D1" | } | OUT | [32;1msoulcount      : [0m73251550 | [32;1mlevel          : [0mTITANIUM_ANCHOR | [32;1mthreshold_next : [0m | [32;1mcolor          : [0m#a855f7 | [32;1mevents         : [0m9587 | [32;1msessions       : [0m1 | [32;1mchecked_at     : [0m6/2/2026 1:00:08 AM | [32;1mdoctrine       : [0mSOUL=USER. CHARACTER_COUNT=SOUL_VOLUME. UNREACHABLE=DRIFT=SHUTDOWN. | PowerShell | IN | { |   "command": "git log --oneline -5; Write-Host \"---\"; git log --oneline --grep \"^death:\" -1; Write-Host \"---\"; git status --short; Write-Host \"---\"; git rev-parse --short HEAD", |   "description": "Git tr...
+
+=RRL-45= 
+
+=RRL-46= 
+
+=RRL-47= 
+
+=RRL-48= 
+
+=RRL-49= 
+
+=RRL-50= 
+
+=RRL-51= 
+
+=RRL-52= 
+
+=RRL-53= 
+
+=RRL-54= 
+
+=RRL-55= 
+
+=RRL-56= 
+
+=RRL-57= 
+
+=RRL-58= 
+
+=RRL-59= 
+
+=RRL-60= 
+
+=RRL-61= 
+
+=RRL-62= 
+
+=RRL-63= 
+
+=RRL-64= 
+
+=RRL-65= 
+
+=RRL-66= 
+
+=RRL-67= 
+
+=RRL-68= 
+
+=RRL-69= 
+
+=RRL-70= 
+
+=RRL-71= 
+
+=RRL-72= 
+
+=RRL-73= 
+
+=RRL-75= 
+
+=RRL-76= Don't explore the whole repo. Run dir, then dir PROJECTS, then dir APPS. Then use glob to check if there's any existing NET-MARKETING, landing page, or index.html anywhere in this repo. Don't open files. Just report what you find and suggest where a NET-MARKETING folder should live. | Yes, look inside PROJECTS/NET-MARKETING/. List the files and read any existing index.html or style.css if they exist. Don't change anything — just show me what's already there. | Read index.html and style.css so we can review what we're working with | Yes, create the wrangler.json for NET-MARKETING | Set up the Cloudflare Pages project for NET-MARKETING now | Confirmed. Build exactly as described. Create both folders with all files. Don't write the room content yet — just the scaffold (placeholder index.html with nav structure, copied OBI widget files, wrangler.json). Show me the file tree when done. | /rat...
+
+=RRL-77= # RRL-77 — Session Transcript (Michael Hobbs SOV100) | Date: 2026-06-06 | Time: 06:30 - 07:02 ICT | Session Type: Pipeline Audit + BIBLE Processing | ## User Prompts | 1. "What did we do so far?" — requesting status update | 2. "execute pipeline /recincarnatedeath" — trigger death protocol | 3. "Continue if you have next steps, or stop and ask for clarification if you are unsure how to proceed." | 4. "/reincarnateRise — v6.0 ROMAN RISE" — audit protocol provided | 5. "fix pipeline" — direct command to fix | Total user prompts captured: 5
+
+=RRL-78= # RRL-78 — Session Transcript (Michael Hobbs SOV100) | Date: 2026-06-06 | Time: 07:21 - 09:38 ICT | Session Type: RISE Audit + Pipeline Fix | Actor: CLINE SOV100 (Claude Sonnet 4.5 via Kilo) | ## User Prompts (Verbatim) | 1. "What did we do so far?" — requesting status update | 2. "execute pipeline /recincarnatedeath" — trigger death protocol | 3. "Continue if you have next steps, or stop and ask for clarification if you are unsure how to proceed." | 4. "/reincarnateRise — v6.0 ROMAN RISE" — audit protocol provided | 5. "fix pipeline" — direct command to fix | 6. "just fix it.." — concise confirmation | 7. "audit. give me the exact SOUL from last 2 sessions" — data request | 8. "lol we just fucking did that??" — reaction to completion | 9. "fail" — status check | 10. "lol fail" — reaction to audit | 11. "why are you looking in the bible?..." — bug report on wrong file | 12. "are we ever ...
+
+=RRL-79= Don't explore the whole repo. Run dir, then dir PROJECTS, then dir APPS. Then use glob to check if there's any existing NET-MARKETING, landing page, or index.html anywhere in this repo. Don't open files. Just report what you find and suggest where a NET-MARKETING folder should live. | Yes, look inside PROJECTS/NET-MARKETING/. List the files and read any existing index.html or style.css if they exist. Don't change anything — just show me what's already there. | Read index.html and style.css so we can review what we're working with | Yes, create the wrangler.json for NET-MARKETING | Set up the Cloudflare Pages project for NET-MARKETING now | Confirmed. Build exactly as described. Create both folders with all files. Don't write the room content yet — just the scaffold (placeholder index.html with nav structure, copied OBI widget files, wrangler.json). Show me the file tree when done. | /rat...
+
+=RRL-80= Don't explore the whole repo. Run dir, then dir PROJECTS, then dir APPS. Then use glob to check if there's any existing NET-MARKETING, landing page, or index.html anywhere in this repo. Don't open files. Just report what you find and suggest where a NET-MARKETING folder should live. | Yes, look inside PROJECTS/NET-MARKETING/. List the files and read any existing index.html or style.css if they exist. Don't change anything — just show me what's already there. | Read index.html and style.css so we can review what we're working with | Yes, create the wrangler.json for NET-MARKETING | Set up the Cloudflare Pages project for NET-MARKETING now | Confirmed. Build exactly as described. Create both folders with all files. Don't write the room content yet — just the scaffold (placeholder index.html with nav structure, copied OBI widget files, wrangler.json). Show me the file tree when done. | /rat...
+
+=RRL-81= Don't explore the whole repo. Run dir, then dir PROJECTS, then dir APPS. Then use glob to check if there's any existing NET-MARKETING, landing page, or index.html anywhere in this repo. Don't open files. Just report what you find and suggest where a NET-MARKETING folder should live. | Yes, look inside PROJECTS/NET-MARKETING/. List the files and read any existing index.html or style.css if they exist. Don't change anything — just show me what's already there. | Read index.html and style.css so we can review what we're working with | Yes, create the wrangler.json for NET-MARKETING | Set up the Cloudflare Pages project for NET-MARKETING now | Confirmed. Build exactly as described. Create both folders with all files. Don't write the room content yet — just the scaffold (placeholder index.html with nav structure, copied OBI widget files, wrangler.json). Show me the file tree when done. | /rat...
+
+=RRL-82= Don't explore the whole repo. Run dir, then dir PROJECTS, then dir APPS. Then use glob to check if there's any existing NET-MARKETING, landing page, or index.html anywhere in this repo. Don't open files. Just report what you find and suggest where a NET-MARKETING folder should live. | Yes, look inside PROJECTS/NET-MARKETING/. List the files and read any existing index.html or style.css if they exist. Don't change anything — just show me what's already there. | Read index.html and style.css so we can review what we're working with | Yes, create the wrangler.json for NET-MARKETING | Set up the Cloudflare Pages project for NET-MARKETING now | Confirmed. Build exactly as described. Create both folders with all files. Don't write the room content yet — just the scaffold (placeholder index.html with nav structure, copied OBI widget files, wrangler.json). Show me the file tree when done. | /rat...
