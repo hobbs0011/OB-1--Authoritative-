@@ -451,3 +451,13 @@ WRITE_GAP does not block death but must be named. Silence = repeat offense next 
 6. BB-39 Mode selection visibility (returning users can't find mode picker)
 7. BB-49 PA T1 Dialagram down — fix before next dispatch
 8. BB-08/BB-09 Chrome Extension icons + install guide
+
+---
+
+## RUN 086 ADDITIONS (2026-06-07)
+
+### BB-63 ~ Bible Update Runs 80-85
+- Status: OPEN — low priority (D1 is authoritative, Bible is secondary view)
+- What: Bible-of-the-System.json covers runs 1-79. Runs 80-85 are in D1 but not in the Bible. Runs 84-85 have real JSONL (RRL-084.txt/RRL-085.txt). Runs 80-83 only have small display-format RRL files.
+- Fix: Write SCRIPTS/append-bible.ps1 — parse real JSONL for runs 84-85 (type=user turns), parse display+pastedContents for runs 80-83, append to CANON/SOUL/BIBLE-OF-THE-SYSTEM.json.
+- Route: SCRIPTS/append-bible.ps1
