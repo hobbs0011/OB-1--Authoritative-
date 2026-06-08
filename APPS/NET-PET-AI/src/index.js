@@ -666,6 +666,13 @@ async function handleAPI(path, request, env, url) {
       const weekAgo = Date.now() - 7 * 24 * 60 * 60 * 1000;
       const weeklyCount = hist.filter(s => s.ts > weekAgo).length;
       const lastSession = hist.length ? new Date(hist[hist.length - 1].ts).toISOString() : null;
+      const recentFive = hist.slice(-5);
+      const turnLenSessions = recentFive.filter(s => (s.avg_turn_length || 0) > 0);
+      const avgTurnLength = turnLenSessions.length > 0
+        ? Math.round(turnLenSessions.reduce((sum, s) => sum + s.avg_turn_length, 0) / turnLenSessions.length)
+        : 0;
+      const lastTopic = hist.length ? (hist[hist.length - 1].topic || null) : null;
+      const bargeInLast = hist.length ? (hist[hist.length - 1].barge_in_count || 0) : 0;
       return {
         studentId: sid,
         name: profile.name || profile.fullName || sid,
@@ -674,6 +681,9 @@ async function handleAPI(path, request, env, url) {
         lastSession,
         totalSessions: hist.length,
         weeklyCount,
+        avgTurnLength,
+        lastTopic,
+        bargeInLast,
       };
     }));
     return addCors(json({ students: results, generatedAt: new Date().toISOString() }), request);
