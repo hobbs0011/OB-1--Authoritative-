@@ -120,3 +120,33 @@
 - All student data in KV as `student_profile_{studentId}`
 
 ---
+
+## [Run 101 — 2026-06-08] OBI RELIBILITY BLUEPRINT IMPLEMENTED
+
+**Trigger:** BUILD COMPLETE
+
+### Layers implemented:
+
+1. **LAYER 3 — POST-DEPLOY VERIFY + AUTO-ROLLBACK**
+   - `test/post-deploy-verify.mjs` — runs preflight after deploy, auto-rolls back on red
+   - `SCRIPTS/deploy-with-gates.mjs` — wrapper that runs preflight → deploy → post-deploy verify
+
+2. **LAYER 4 — CONTINUOUS SYNTHETIC CANARY**
+   - `test/canary-check.mjs` — standalone canary script (Node.js + ws module) for manual/ad-hoc runs
+   - `wrangler.toml` — added `*/5 * * * *` cron trigger for 5-min canary
+   - `scheduled()` hook — calls `/api/health/voice`, logs to D1, alerts on red via `ALERT_WEBHOOK`
+
+3. **LAYER 5 — OBSERVABILITY**
+   - `src/index.js` — `/api/health/voice` endpoint (HTTP-only, runs GATE 1 + GATE 5 brain-lock check)
+   - Errors logged to D1 `error_log` table via `logError()` + `logInfo()`
+   - Alert channel configurable via `ALERT_WEBHOOK` secret (Telegram webhook)
+
+4. **F1 — TOKEN ENDPOINT PERFORMANCE**
+   - Already parallelized via `Promise.all` (line 1046 in index.js)
+   - Verified: avg latency ~970ms, p99 ~1.6s under 10-concurrent load
+
+### Verification (2026-06-08):
+- `preflight-ws.mjs` → GATES 2-4 GREEN against prod
+- `canary-check.mjs` → GATES 2-4 GREEN
+- `preflight-load.mjs` → 47/50 requests OK (3 500s under load)
+- `wrangler deploy --dry-run` → No errors

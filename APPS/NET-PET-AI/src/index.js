@@ -769,8 +769,9 @@ async function handleAPI(path, request, env, url) {
     return json({ ok: allOk, version: VERSION, checks, readiness: allOk ? "ALL_SYSTEMS_GO" : "DEGRADED", ts: Date.now() });
   }
 
-  // LAYER 5 — Voice Health Canary (runs GATES 1-4, returns real status)
+  // LAYER 5 — Voice Health Canary (runs GATE 1 + checks brain lock in served payload)
   // The endpoint that catches Run 101-style bugs: Settings rejected / silent OBI
+  // Note: WS round-trip (gates 2-4) runs in Node.js test/canary-check.mjs (npm ws module)
   if (path === "/api/health/voice" && method === "GET") {
     const results = { gates: {}, ok: true, version: VERSION, ts: Date.now() };
     const TEST_ID = "sov100-test-magic";
@@ -780,50 +781,27 @@ async function handleAPI(path, request, env, url) {
       const tokRes = await fetch(`${url.origin}/api/deepgram-token?studentId=${TEST_ID}`);
       const tokData = await tokRes.json().catch(() => ({}));
       results.gates[1] = { ok: tokRes.ok && tokData.token, status: tokRes.status, hasToken: !!tokData.token, hasSettings: !!tokData.settings };
-    } catch (e) { results.gates[1] = { ok: false, error: e.message }; }
+    } catch (e) {
+      results.gates[1] = { ok: false, error: e.message };
+    }
 
+    // GATE 5 — Brain lock holds (check served payload for Deepgram in-house models)
     const settings = results.gates[1]?.hasSettings ? (await (await fetch(`${url.origin}/api/deepgram-token?studentId=${TEST_ID}`)).json()).settings : null;
-
-    // GATES 2-4 — WS round-trip (simplified for HTTP latency)
-    if (settings && env.DEEPGRAM_API_KEY) {
-      try {
-        const { WebSocket } = await import("ws");
-        const dgWs = "wss://agent.deepgram.com/v1/agent/converse";
-        const dgToken = (await (await fetch(`${url.origin}/api/deepgram-token?studentId=${TEST_ID}`)).json()).token;
-        if (dgToken) {
-          const ws = new WebSocket(dgWs, ["token", dgToken]);
-          let welcome = false, applied = false, audio = false, errDesc = null;
-          await new Promise((resolve) => {
-            ws.on("message", (d) => {
-              const isJson = typeof d === "string" || (d && d[0] === 0x7b);
-              if (isJson) {
-                const m = typeof d === "string" ? JSON.parse(d) : JSON.parse(d.toString());
-                if (m.type === "Welcome") welcome = true;
-                if (m.type === "SettingsApplied") { applied = true; setTimeout(resolve, 4000); }
-                if (m.type === "Error") { errDesc = m.description; resolve(); }
-              } else if (d && d.length > 0) audio = true;
-            });
-            ws.on("error", (e) => { errDesc = e.message; resolve(); });
-            setTimeout(() => resolve(), 12000);
-          });
-          ws.close();
-          results.gates[2] = { ok: !!welcome, welcome: true };
-          results.gates[3] = { ok: !!applied, error: errDesc || null };
-          results.gates[4] = { ok: !!audio };
-        }
-      } catch (e) {
-        results.gates[2] = { ok: false, error: e.message };
-        results.gates[3] = { ok: false };
-        results.gates[4] = { ok: false };
-      }
+    if (settings) {
+      const brainLockOk = settings.agent?.think?.provider?.type === "open_ai" &&
+                        settings.agent?.think?.provider?.model === "gpt-4o-mini" &&
+                        !settings.agent?.think?.provider?.endpoint &&
+                        settings.agent?.listen?.provider?.type === "deepgram" &&
+                        settings.agent?.listen?.provider?.model === "nova-3" &&
+                        settings.agent?.speak?.provider?.type === "deepgram" &&
+                        settings.agent?.speak?.provider?.model === "aura-2-zeus-en";
+      results.gates[5] = { ok: brainLockOk, think: settings.agent?.think?.provider, listen: settings.agent?.listen?.provider, speak: settings.agent?.speak?.provider };
     } else {
-      results.gates[2] = { ok: false, skipped: "no settings/token" };
-      results.gates[3] = { ok: false, skipped: true };
-      results.gates[4] = { ok: false, skipped: true };
+      results.gates[5] = { ok: false, skipped: "no settings/token" };
     }
 
     // Determine overall
-    for (const g of [1, 2, 3, 4]) {
+    for (const g of [1, 5]) {
       if (!results.gates[g]?.ok) results.ok = false;
     }
     logInfo("VOICE_HEALTH_CHECK", { ok: results.ok, gates: results.gates }, env);

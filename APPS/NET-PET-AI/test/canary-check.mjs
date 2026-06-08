@@ -27,18 +27,22 @@ async function runCanary() {
     return { ok: false, error: errDesc };
   }
   const { token, settings } = await tokRes.json();
+  if (!token || !settings) {
+    errDesc = "GATE 1 RED — missing token/settings";
+    return { ok: false, error: errDesc };
+  }
 
   // GATES 2-4 — WS round-trip
   const ws = new WebSocket(DG_WS, ["token", token]);
   await new Promise((resolve) => {
     ws.on("message", (d) => {
-      const isJson = typeof d === "string" || d[0] === 0x7b;
+      const isJson = typeof d === "string" || (d && d[0] === 0x7b);
       if (isJson) {
-        const m = JSON.parse(d.toString());
-        if (m.type === "Welcome") gate2 = true;
+        const m = typeof d === "string" ? JSON.parse(d) : JSON.parse(d.toString());
+        if (m.type === "Welcome") { gate2 = true; ws.send(JSON.stringify(settings)); }
         if (m.type === "SettingsApplied") { gate3 = true; setTimeout(resolve, 4000); }
         if (m.type === "Error") { errDesc = m.description; resolve(); }
-      } else if (d.length > 0) gate4 = true;
+      } else if (d && d.length > 0) { gate4 = true; }
     });
     ws.on("error", (e) => { errDesc = e.message; resolve(); });
     setTimeout(() => resolve(), 12000);
@@ -59,9 +63,10 @@ function sendAlert(msg) {
 
 (async () => {
   const result = await runCanary();
+  console.log(`Gate results: 2=${result.gate2} 3=${result.gate3} 4=${result.gate4}`);
   if (!result.ok) {
     console.error("CANARY RED — OBI voice path broken:", result.error);
-    sendAlert(`🔴 OBI CANARY RED: ${result.error}`);
+    sendAlert(`🔴 OBI CANARY RED: ${result.error || 'gates 2-4 failed'}`);
     process.exit(1);
   }
   console.log("CANARY GREEN — gates 2-4 passed");
