@@ -15,7 +15,9 @@
     "test": "node node_modules/vitest/vitest.mjs run",
     "test:watch": "node node_modules/vitest/vitest.mjs",
     "test:browser": "playwright test test/voice-agent-browser.test.mjs --config=playwright.config.mjs",
-    "test:browser:report": "playwright test test/voice-agent-browser.test.mjs --config=playwright.config.mjs && playwright show-report test/playwright-report"
+    "test:browser:report": "playwright test test/voice-agent-browser.test.mjs --config=playwright.config.mjs && playwright show-report test/playwright-report",
+    "preflight": "node test/preflight-ws.mjs",
+    "preflight:dev": "node test/preflight-ws.mjs https://net-pet-ai-dev.mrmichaelhobbs123.workers.dev"
   },
   "devDependencies": {
     "@anthropic-ai/tokenizer": "^0.0.4",
