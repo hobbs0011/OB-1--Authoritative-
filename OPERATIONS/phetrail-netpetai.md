@@ -5,6 +5,30 @@
 
 ---
 
+## [Run 101 — 2026-06-08] NET-PET-AI HARDENING COMPLETE + PROD DEPLOY VERIFIED
+
+**Trigger:** DEPLOY VERIFIED + ARCHITECTURE CHANGED
+
+### Changes deployed to prod (a7db7e42):
+1. **`src/index.js`** — `validateStudentId` + `validateActiveStudent` added to `/api/agent/vocab` POST, `/api/agent/session` GET, `/api/agent/session` POST. All 3 voice agent data endpoints now gated.
+2. **`src/index.js`** — Stale roster arrays pruned at 3 locations (`handleAdminSubscriptionsList`, `handleAdminStats`, `FACE_SAVING_STUDENTS`). Active roster = quy/mai-tram/huong only. lam/quan/quang/minh-bluetech removed.
+3. **`public/quy-portal.html`** — XSS fixed: `escHtml()` applied to `w.word` + `w.meaning_vi` before innerHTML insert.
+
+### Verified on dev before prod:
+- `lam-bluetech` → 403 Forbidden (roster gate ✓)
+- `minh-bluetech` on `/api/agent/vocab` → 403 Forbidden (vocab gate ✓)
+- `quy-bluetech` → passes roster (legitimate student ✓)
+
+### Security posture post-Run 101:
+- All 4 voice endpoints (deepgram-token + vocab POST + session GET/POST) now gated by format + roster check
+- Runtime voice brain lock (assertVoiceBrainLock) + test-time guard + pre-commit hook
+- quy-portal.html vocab XSS closed (escHtml added)
+- ACTIVE_STUDENT_ROSTER = {quy-bluetech, mai-tram-bluetech, huong-bluetech, sov100-*, keep-warm-ping}
+
+### Commits: c7739ffa (Run 100 death + partial hardening) → 72d0d951 (hardening complete + prod deploy)
+
+---
+
 ## [Run 099/100 — 2026-06-08] VOICE BRAIN LOCK REINFORCED + ACTIVE ROSTER WHITELIST
 
 **Trigger:** ARCHITECTURE CHANGED + SOUL DIRECTIVE SPOKEN + CONTEXT APPROACHING LIMIT
