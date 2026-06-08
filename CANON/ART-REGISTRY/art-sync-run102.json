@@ -1,0 +1,218 @@
+{
+  "run": 102,
+  "ledger_id": "HL-657",
+  "merkle_short": "34C71A3E61E80104",
+  "starmap_file": "starmap-run102.json",
+  "keywords_file": "rfkw-run102.txt",
+  "keywords_used": [
+    "const",
+    "pipeline",
+    "session",
+    "voice",
+    "death",
+    "deepgram",
+    "never",
+    "await",
+    "agent",
+    "student",
+    "check",
+    "written:",
+    "stage",
+    "michael",
+    "files",
+    "status:",
+    "english",
+    "complete",
+    "update",
+    "context",
+    "block",
+    "current",
+    "deploy",
+    "already",
+    "catch",
+    "status",
+    "portal",
+    "token",
+    "state",
+    "extract"
+  ],
+  "pieces_synced": 24,
+  "pieces": [
+    {
+      "id": "ART-1780551592165-3U0M",
+      "title": "Audio Waveform",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780551572418-7DU0",
+      "title": "Elephant Chain",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780551554850-GNEZ",
+      "title": "Phoenix Crest",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780548347492-B1QU",
+      "title": "Phoenix Pages — Benchmark 0: Deepgram Whisper",
+      "keywords": [
+        "deepgram"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780548343466-OGXZ",
+      "title": "Phoenix Pages — Kinetic Gates: The 5 Benchmarks",
+      "keywords": [
+        "deepgram"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780548333953-MXB7",
+      "title": "Codex — Drift as a Diagnostic Event",
+      "keywords": [
+        "context"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780548090137-P6CG",
+      "title": "Tiger Dossier Slide 05 — Lợi Thế Cạnh Tranh Tuyệt Đối 2026 (Unbeatable Advantage)",
+      "keywords": [
+        "english"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780548088836-SX3N",
+      "title": "Tiger Dossier Slide 04 — Ngừng Dịch Thầm, Bắt Đầu Hiểu (Stop Translating, Start Understanding)",
+      "keywords": [
+        "context"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780547628696-L7IE",
+      "title": "Wake Up the Tiger: Blueprint for English & AI Mastery",
+      "keywords": [
+        "english"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780547160670-TBAE",
+      "title": "WAKE UP THE TIGER",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780547001008-30ZF",
+      "title": "The Obsolete Model",
+      "keywords": [
+        "english",
+        "context"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780546997183-THXJ",
+      "title": "The Tiger Protocol",
+      "keywords": [
+        "english"
+      ],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780546993683-AS0F",
+      "title": "The Engine",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780546346776-ZRKH",
+      "title": "In 2026, Knowing Only English Is a Flip-Phone",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780546345401-NKEC",
+      "title": "The Tiger Protocol: 2026 Unfair Advantage",
+      "keywords": [
+        "english"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780546342705-3MMY",
+      "title": "Wake Up the Tiger",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780546341377-VLBX",
+      "title": "The Phoenix Rising Operational Codex",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780546339980-FU64",
+      "title": "We Don't Teach English. We Unlock Permission.",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780538366960-3OCE",
+      "title": "STP p07 — The 60% Rule: Catching The Vibe",
+      "keywords": [
+        "context"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780538363957-LNWV",
+      "title": "STP p03 — The Translate-in-Head Delay (Snowman Freeze)",
+      "keywords": [
+        "pipeline"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780530118048-7JB6",
+      "title": "NET Dossier p09 — 2026 Unfair Advantage (Venn)",
+      "keywords": [
+        "english"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780530099910-XM96",
+      "title": "NET Dossier p03 — Cognitive Bottleneck / Snowman Freeze",
+      "keywords": [
+        "pipeline"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780527419422-NUFN",
+      "title": "Michael Hobbs Headshot — Wide",
+      "keywords": [
+        "michael"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780527418015-4GUT",
+      "title": "Michael Hobbs Headshot — Square",
+      "keywords": [
+        "michael"
+      ],
+      "title_hit": false
+    }
+  ],
+  "executed_at": "2026-06-08T22:35:01.8452431+07:00"
+}
