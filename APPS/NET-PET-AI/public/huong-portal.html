@@ -65,13 +65,14 @@
     <main class="main-container">
 
         <div class="dashboard-header">
-            <h1>HUONG</h1>
-            <p class="subtitle">BlueTech · Intermediate · Speaking Track</p>
+            <div class="dh-row"><h1>HUONG</h1><span class="dh-level-badge">B1</span></div>
+            <p class="subtitle">BlueTech · Speaking Track</p>
+            <div class="tiger-slogan">Wake Up The Tiger<span class="vi-sub">Đánh Thức Con Hổ</span></div>
         </div>
 
         <div class="stats-grid" id="statsGrid" style="display:none;">
-            <div class="stat-card purple"><div class="stat-accent"></div><div class="stat-label">Tiger Score</div><div class="stat-value loading" id="tigerScore"><div class="skeleton"></div></div></div>
-            <div class="stat-card gold"><div class="stat-accent"></div><div class="stat-label">Streak</div><div class="stat-value loading" id="streakVal"><div class="skeleton"></div></div></div>
+            <div class="stat-card purple"><div class="stat-accent"></div><div class="stat-label">Tiger Score</div><div class="score-ring-wrap"><svg width="72" height="72" viewBox="0 0 72 72"><circle class="score-ring-bg" cx="36" cy="36" r="30"/><circle class="score-ring-fill" id="scoreRingFill" cx="36" cy="36" r="30"/></svg><div class="score-ring-text" id="tigerScore">—</div></div></div>
+            <div class="stat-card gold"><div class="stat-accent"></div><div class="stat-label">Streak</div><div class="stat-value loading" id="streakVal"><div class="skeleton"></div></div><div class="streak-dots" id="streakDots"></div></div>
             <div class="stat-card teal"><div class="stat-accent"></div><div class="stat-label">Sessions</div><div class="stat-value loading" id="sessionsVal"><div class="skeleton"></div></div></div>
             <div class="stat-card success"><div class="stat-accent"></div><div class="stat-label">Next Session</div><div class="stat-value loading" id="nextSessionVal"><div class="skeleton"></div></div></div>
         </div>
@@ -112,8 +113,18 @@
         </div>
 
         <div class="content-card">
-            <div class="card-label">Current Level</div>
-            <div class="milestone-row"><span class="milestone-badge">B1</span><span class="milestone-track">Speaking Track · Building fluency and confidence</span></div>
+            <div class="card-label">Level Journey</div>
+            <div class="level-journey">
+                <div class="lj-node"><div class="lj-badge done">A1</div><div class="lj-sub">Foundation</div></div>
+                <div class="lj-line done"></div>
+                <div class="lj-node"><div class="lj-badge done">A2</div><div class="lj-sub">Elementary</div></div>
+                <div class="lj-line done"></div>
+                <div class="lj-node"><div class="lj-badge current">B1</div><div class="lj-sub">Intermediate</div></div>
+                <div class="lj-line"></div>
+                <div class="lj-node"><div class="lj-badge target">B2</div><div class="lj-sub">Upper Int.</div></div>
+                <div class="lj-line"></div>
+                <div class="lj-node"><div class="lj-badge">C1</div><div class="lj-sub">Advanced</div></div>
+            </div>
             <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:35%;"></div></div>
             <div class="progress-label">B1 → B2: Speak for 5 minutes on any topic without stopping</div>
         </div>
@@ -338,6 +349,7 @@
                     if (sg) sg.style.display = 'grid';
                     if (d1) d1.style.display = 'none';
                     setVal('tigerScore', tigerScore);
+                    updateScoreRing(tigerScore);
                     setVal('streakVal', streak + (streak === 1 ? ' day' : ' days'));
                     setVal('sessionsVal', sessions);
                     setVal('nextSessionVal', 'Anytime');
@@ -352,6 +364,43 @@
         function setVal(id, val) {
             const el = document.getElementById(id);
             if (el) { el.textContent = val; el.classList.remove('loading'); }
+        }
+
+        function updateScoreRing(score) {
+            const fill = document.getElementById('scoreRingFill');
+            const txt = document.getElementById('tigerScore');
+            if (!fill) return;
+            const r = 30, c = 2 * Math.PI * r;
+            fill.style.strokeDasharray = c;
+            fill.style.strokeDashoffset = c - (Math.min(100, Math.max(0, score)) / 100) * c;
+            const color = score >= 70 ? 'var(--gold)' : score >= 40 ? 'var(--teal)' : 'var(--purple)';
+            fill.style.stroke = color;
+            if (txt) txt.style.color = color;
+        }
+
+        function renderStreakDots(streakData) {
+            const el = document.getElementById('streakDots');
+            if (!el) return;
+            const ictNow = Date.now() + 7 * 3600000;
+            const checkins = Array.isArray(streakData?.checkinDates) ? streakData.checkinDates : [];
+            const streak = streakData?.currentStreak || 0;
+            const todayDone = streakData?.todayStatus === 'active';
+            const dots = [];
+            for (let i = 6; i >= 0; i--) {
+                const d = new Date(ictNow - i * 86400000);
+                const key = d.toISOString().slice(0, 10);
+                const isToday = i === 0;
+                let cls = 'streak-dot';
+                if (checkins.length > 0) {
+                    if (checkins.includes(key)) cls += isToday ? ' today-done' : ' done';
+                    else if (!isToday) cls += ' missed';
+                    else cls += todayDone ? ' today-done' : ' today-pending';
+                } else {
+                    cls += i < streak ? ' done' : (isToday && !todayDone ? ' today-pending' : '');
+                }
+                dots.push(`<div class="${cls.trim()}" title="${key}"></div>`);
+            }
+            el.innerHTML = dots.join('');
         }
     </script>
 
@@ -528,6 +577,7 @@
                 const best = sRes?.longestStreak ?? 0;
                 document.getElementById('ww-streak').textContent = streak + (streak === 1 ? ' day' : ' days');
                 document.getElementById('ww-streak-sub').textContent = streak >= 7 ? '🔥 on fire!' : `best: ${best}d`;
+                renderStreakDots(sRes);
 
                 // Level progress bar
                 const CEFR = [{l:'A1',t:50},{l:'A2',t:150},{l:'B1',t:300},{l:'B2',t:500},{l:'C1',t:800}];
