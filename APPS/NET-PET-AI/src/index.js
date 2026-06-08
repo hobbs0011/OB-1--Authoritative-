@@ -1177,6 +1177,10 @@ speak: {
     const body = await request.json().catch(() => ({}));
     const { studentId, word, meaning_vi } = body;
     if (!studentId || !word) return addCors(json({ error: "studentId and word required" }, 400), request);
+    const _vocabIdCheck = validateStudentId(studentId);
+    if (!_vocabIdCheck.valid) return addCors(json({ error: _vocabIdCheck.error }, 400), request);
+    const _vocabRosterCheck = validateActiveStudent(studentId);
+    if (!_vocabRosterCheck.valid) return addCors(json({ error: 'student not authorized', code: 'NOT_IN_ROSTER' }, 403), request);
     try {
       const [raw, rawSrs] = await Promise.all([
         env.NET_PET_KV.get(`vocab_list_${studentId}`),
@@ -1204,6 +1208,10 @@ speak: {
   if (path === "/api/agent/session" && method === "GET") {
     const studentId = url.searchParams.get("studentId") || "";
     if (!studentId) return addCors(json({ error: "studentId required" }, 400), request);
+    const _sessGetIdCheck = validateStudentId(studentId);
+    if (!_sessGetIdCheck.valid) return addCors(json({ error: _sessGetIdCheck.error }, 400), request);
+    const _sessGetRosterCheck = validateActiveStudent(studentId);
+    if (!_sessGetRosterCheck.valid) return addCors(json({ error: 'student not authorized', code: 'NOT_IN_ROSTER' }, 403), request);
     try {
       const raw = await env.NET_PET_KV.get(`session_history_${studentId}`);
       const history = raw ? JSON.parse(raw) : [];
@@ -1218,6 +1226,10 @@ speak: {
     const body = await request.json().catch(() => ({}));
     const { studentId, turns, durationMs, vocab } = body;
     if (!studentId) return addCors(json({ error: "studentId required" }, 400), request);
+    const _sessPostIdCheck = validateStudentId(studentId);
+    if (!_sessPostIdCheck.valid) return addCors(json({ error: _sessPostIdCheck.error }, 400), request);
+    const _sessPostRosterCheck = validateActiveStudent(studentId);
+    if (!_sessPostRosterCheck.valid) return addCors(json({ error: 'student not authorized', code: 'NOT_IN_ROSTER' }, 403), request);
     try {
       const topic = body.topic || null;
       const avg_turn_length = body.avg_turn_length || 0;
@@ -1923,7 +1935,7 @@ async function handlePaymentConfirm(body, env) {
 async function handleAdminSubscriptionsList(env) {
   if (!env.NET_PET_KV) return json({ subscriptions: [] });
   // Scan known students + employer subscriptions
-  const students = ["huong-bluetech","mai-tram-bluetech","quy-bluetech","lam-bluetech","quan-bluetech","quang-bluetech","minh-bluetech"];
+  const students = ["huong-bluetech","mai-tram-bluetech","quy-bluetech"];
   const subs = await Promise.all(students.map(async sid => {
     const raw = await env.NET_PET_KV.get(`subscription:${sid}`).catch(() => null);
     return raw ? { studentId: sid, ...JSON.parse(raw) } : null;
@@ -2039,7 +2051,7 @@ async function handleAdminStats(env) {
   const empIdx = await env.NET_PET_KV.get("employer:index").then(r => r ? JSON.parse(r) : []).catch(() => []);
 
   // Active students (streak > 0, lastCheckin within 7 days)
-  const students = ["huong-bluetech","mai-tram-bluetech","quy-bluetech","lam-bluetech","quan-bluetech","quang-bluetech","minh-bluetech"];
+  const students = ["huong-bluetech","mai-tram-bluetech","quy-bluetech"];
   let activeStudents = 0;
   const streakChecks = await Promise.all(students.map(s => env.NET_PET_KV.get(`streak:${s}`).catch(() => null)));
   streakChecks.forEach((raw, i) => {
@@ -2346,7 +2358,7 @@ async function handleListeningToday(studentId, env) {
 // ── Face-Saving Protocol — Streak Tracking + Accountability ──────────────────
 // Vietnamese culture: public commitment prevents quitting. Streaks = social contract.
 
-const FACE_SAVING_STUDENTS = ["huong-bluetech", "mai-tram-bluetech", "quy-bluetech", "lam-bluetech", "quan-bluetech", "quang-bluetech", "minh-bluetech"];
+const FACE_SAVING_STUDENTS = ["huong-bluetech", "mai-tram-bluetech", "quy-bluetech"];
 
 // Get today's date string in ICT (UTC+7) as YYYY-MM-DD
 function getICTDateString(offsetMs = 0) {

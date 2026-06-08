@@ -428,12 +428,13 @@
                 const words = Array.isArray(data.words) ? data.words : [];
                 const total = data.total || words.length;
                 const last10 = words.slice(-10).reverse();
+                const escHtml = s => String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
                 let html = `<div class="vw-header">🐯 My Words (${total})</div>`;
                 if (!last10.length) {
                     html += '<div class="vw-empty">No words yet — practice with OBI to earn your first!</div>';
                 } else {
                     html += '<div class="vw-list">';
-                    last10.forEach(w => { html += `<div class="vw-pill"><span class="vw-word">${w.word||''}</span><span class="vw-meaning">${w.meaning_vi||''}</span></div>`; });
+                    last10.forEach(w => { html += `<div class="vw-pill"><span class="vw-word">${escHtml(w.word)}</span><span class="vw-meaning">${escHtml(w.meaning_vi)}</span></div>`; });
                     html += '</div>';
                 }
                 container.innerHTML = html;
