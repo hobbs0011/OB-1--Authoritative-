@@ -5,6 +5,31 @@
 
 ---
 
+## [Run 101 — 2026-06-08] OBI ROBOT VOICE — ROOT CAUSE + FIX DEPLOYED
+
+**Trigger:** BUG ROOT-CAUSED + DEPLOY VERIFIED
+
+### Root cause: Deepgram JWT minting used wrong endpoint — OBI NEVER had Voice Agent
+
+**The bug:** `POST /v1/keys` was used to mint short-lived Deepgram tokens. This endpoint creates PERSISTENT API keys and requires `keys:write` scope. The `DEEPGRAM_API_KEY` does NOT have `keys:write` — so the mint silently failed (response had no `key` field), and the raw API key was returned as fallback. The raw key has `asr:write` scope only, which is INSUFFICIENT for Voice Agent WebSocket auth. Result: WebSocket opens → auth fails → drops → `agentWs = null` → browser `speechSynthesis` fires = robot voice. OBI has NEVER used Deepgram Voice Agent from day one.
+
+**Diagnostic:** both prod API calls to `/api/deepgram-token` returned IDENTICAL tokens (`910707f04834888ef19ad0011baebd792aa87dba` = raw API key, 40-char hex). A properly minted JWT returns a DIFFERENT `eyJ...` value each call.
+
+**Fix:** Changed to `POST /v1/auth/grant` — the correct Deepgram endpoint for temporary Voice Agent tokens (30s TTL, `usage:write` scope for voice APIs, returns JWT). Source-verified from `deepgram/deepgram-node-sdk` `examples/02-authentication-access-token.ts` and `src/api/resources/auth/resources/v1/resources/tokens/client/Client.ts`.
+
+**Verified post-fix prod:** tokens now unique JWTs (`eyJ...`), speak model = `aura-2-zeus-en`. Commit `003021ab`. Prod deploy `15eee7df`.
+
+**Side fix:** guarded `env.NET_PET_KV` null checks in circuit-breaker + catch block so dev environment (no KV binding) returns proper error instead of crashing to top-level `{"error":"Internal error"}` handler.
+
+**Negative trail (do NOT repeat):**
+
+- NEVER use `POST /v1/keys` for Voice Agent token minting — requires `keys:write`, creates persistent keys
+- ALWAYS use `POST /v1/auth/grant` → extract `access_token` field (not `key`)
+- Raw API key fallback masks the error — add explicit error logging if grant fails
+- Dev environment has no `NET_PET_KV` binding — all KV calls in deepgram-token must be guarded with `if (env.NET_PET_KV)`
+
+---
+
 ## [Run 101 — 2026-06-08] NET-PET-AI HARDENING COMPLETE + PROD DEPLOY VERIFIED
 
 **Trigger:** DEPLOY VERIFIED + ARCHITECTURE CHANGED
