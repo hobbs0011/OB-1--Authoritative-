@@ -104,6 +104,10 @@
       "category": "soul+key",
       "run": 99,
       "weight": 1170
+    },
+    {
+      "weight": 1394,
+      "run": 101
     }
   ],
   "effect": {
@@ -1086,16 +1090,22 @@
       "weight": 1415
     }
   ],
-  "studentid": {
-    "term": "studentid",
-    "runs": [
-      50,
-      54
-    ],
-    "count": 2,
-    "weight": 537,
-    "category": "soul+key"
-  },
+  "studentid": [
+    {
+      "term": "studentid",
+      "runs": [
+        50,
+        54
+      ],
+      "count": 2,
+      "weight": 537,
+      "category": "soul+key"
+    },
+    {
+      "weight": 1158,
+      "run": 101
+    }
+  ],
   "uncommitted": {
     "term": "uncommitted",
     "runs": [],
@@ -1238,14 +1248,20 @@
     "count": 1,
     "category": "core"
   },
-  "blueprint": {
-    "term": "blueprint",
-    "weight": 8,
-    "category": "pipeline",
-    "runs": [],
-    "count": 1,
-    "run": 44
-  },
+  "blueprint": [
+    {
+      "term": "blueprint",
+      "weight": 8,
+      "category": "pipeline",
+      "runs": [],
+      "count": 1,
+      "run": 44
+    },
+    {
+      "weight": 1003,
+      "run": 101
+    }
+  ],
   "rise": {
     "term": "rise",
     "runs": [],
@@ -1452,6 +1468,10 @@
       "category": "soul+key",
       "run": 99,
       "weight": 1142
+    },
+    {
+      "weight": 1195,
+      "run": 101
     }
   ],
   "count": {
@@ -1641,19 +1661,29 @@
       "category": "soul+key",
       "run": 97,
       "weight": 136
+    },
+    {
+      "weight": 1121,
+      "run": 101
     }
   ],
-  "message": {
-    "term": "message",
-    "runs": [
-      49,
-      64,
-      70
-    ],
-    "count": 3,
-    "weight": 2614,
-    "category": "soul+key"
-  },
+  "message": [
+    {
+      "term": "message",
+      "runs": [
+        49,
+        64,
+        70
+      ],
+      "count": 3,
+      "weight": 2614,
+      "category": "soul+key"
+    },
+    {
+      "weight": 1100,
+      "run": 101
+    }
+  ],
   "dossier": {
     "term": "dossier",
     "runs": [
@@ -1844,6 +1874,10 @@
       "category": "soul+key",
       "run": 99,
       "weight": 1801
+    },
+    {
+      "weight": 2023,
+      "run": 101
     }
   ],
   "altitude": {
@@ -2022,14 +2056,20 @@
     "count": 1,
     "category": "core"
   },
-  "updated": {
-    "runs": [],
-    "run": 51,
-    "count": 1,
-    "category": "soul+key",
-    "term": "updated",
-    "weight": 50
-  },
+  "updated": [
+    {
+      "runs": [],
+      "run": 51,
+      "count": 1,
+      "category": "soul+key",
+      "term": "updated",
+      "weight": 50
+    },
+    {
+      "weight": 1003,
+      "run": 101
+    }
+  ],
   "roman-run": {
     "term": "roman-run",
     "runs": [],
@@ -2129,6 +2169,10 @@
       "category": "soul+key",
       "run": 99,
       "weight": 1515
+    },
+    {
+      "weight": 1716,
+      "run": 101
     }
   ],
   "answer": {
@@ -2437,6 +2481,10 @@
       "category": "soul+key",
       "run": 99,
       "weight": 2944
+    },
+    {
+      "weight": 3251,
+      "run": 101
     }
   ],
   "deploy": [
@@ -2461,6 +2509,10 @@
       "run": 98,
       "category": "soul+key",
       "weight": 798
+    },
+    {
+      "weight": 1106,
+      "run": 101
     }
   ],
   "state": [
@@ -2539,16 +2591,22 @@
     "runs": [],
     "count": 6
   },
-  "registry": {
-    "term": "registry",
-    "weight": 8,
-    "category": "pipeline",
-    "runs": [
-      "043"
-    ],
-    "count": 4,
-    "run": 44
-  },
+  "registry": [
+    {
+      "term": "registry",
+      "weight": 8,
+      "category": "pipeline",
+      "runs": [
+        "043"
+      ],
+      "count": 4,
+      "run": 44
+    },
+    {
+      "weight": 985,
+      "run": 101
+    }
+  ],
   "u001b": {
     "term": "u001b",
     "runs": [
@@ -2806,14 +2864,20 @@
     "weight": 66,
     "category": "soul+key"
   },
-  "already": {
-    "category": "soul+key",
-    "runs": [],
-    "count": 1,
-    "weight": 94,
-    "run": 54,
-    "term": "already"
-  },
+  "already": [
+    {
+      "category": "soul+key",
+      "runs": [],
+      "count": 1,
+      "weight": 94,
+      "run": 54,
+      "term": "already"
+    },
+    {
+      "weight": 1017,
+      "run": 101
+    }
+  ],
   "deepgram-token": {
     "term": "deepgram-token",
     "runs": [],
@@ -3135,6 +3199,10 @@
       "category": "soul+key",
       "run": 99,
       "weight": 1429
+    },
+    {
+      "weight": 1797,
+      "run": 101
     }
   ],
   "tiger": {
@@ -3173,6 +3241,10 @@
       "category": "soul+key",
       "run": 99,
       "weight": 1292
+    },
+    {
+      "weight": 1527,
+      "run": 101
     }
   ],
   "continue": {
@@ -3225,6 +3297,10 @@
       "run": 98,
       "category": "soul+key",
       "weight": 1121
+    },
+    {
+      "weight": 995,
+      "run": 101
     }
   ],
   "sessions": {
@@ -3332,6 +3408,10 @@
       "category": "soul+key",
       "run": 99,
       "weight": 1033
+    },
+    {
+      "weight": 1182,
+      "run": 101
     }
   ],
   "backdrop": {
@@ -3651,6 +3731,10 @@
       "category": "soul+key",
       "run": 99,
       "weight": 2371
+    },
+    {
+      "weight": 2564,
+      "run": 101
     }
   ],
   "tasking": {
@@ -3901,6 +3985,10 @@
       "run": 98,
       "category": "soul+key",
       "weight": 1072
+    },
+    {
+      "weight": 1129,
+      "run": 101
     }
   ],
   "era": {
@@ -4287,6 +4375,10 @@
       "category": "soul+key",
       "run": 99,
       "weight": 1011
+    },
+    {
+      "weight": 1201,
+      "run": 101
     }
   ],
   "method": {
@@ -4889,6 +4981,10 @@
       "run": 98,
       "category": "soul+key",
       "weight": 922
+    },
+    {
+      "weight": 1026,
+      "run": 101
     }
   ],
   "educationsystemsdevelopment": {
@@ -5160,6 +5256,10 @@
       "category": "soul+key",
       "run": 99,
       "weight": 2357
+    },
+    {
+      "weight": 3353,
+      "run": 101
     }
   ],
   "copy": {
@@ -5314,6 +5414,10 @@
       "category": "soul+key",
       "run": 99,
       "weight": 1391
+    },
+    {
+      "weight": 2225,
+      "run": 101
     }
   ],
   "0massembled": {
@@ -6080,16 +6184,22 @@
     "runs": [],
     "count": 1
   },
-  "endpoint": {
-    "term": "endpoint",
-    "runs": [
-      66,
-      75
-    ],
-    "count": 2,
-    "weight": 80,
-    "category": "soul+key"
-  },
+  "endpoint": [
+    {
+      "term": "endpoint",
+      "runs": [
+        66,
+        75
+      ],
+      "count": 2,
+      "weight": 80,
+      "category": "soul+key"
+    },
+    {
+      "weight": 1041,
+      "run": 101
+    }
+  ],
   "before": [
     {
       "runs": [],
@@ -6107,6 +6217,10 @@
       "category": "soul+key",
       "run": 97,
       "weight": 227
+    },
+    {
+      "weight": 2481,
+      "run": 101
     }
   ],
   "tier": {
@@ -6962,6 +7076,10 @@
       "category": "soul+key",
       "run": 99,
       "weight": 1511
+    },
+    {
+      "weight": 1665,
+      "run": 101
     }
   ],
   "usage": {
@@ -7131,6 +7249,10 @@
       "category": "soul+key",
       "run": 99,
       "weight": 3102
+    },
+    {
+      "weight": 3408,
+      "run": 101
     }
   ],
   "attempt": {
@@ -7337,6 +7459,10 @@
       "category": "soul+key",
       "run": 99,
       "weight": 934
+    },
+    {
+      "weight": 1083,
+      "run": 101
     }
   ],
   "quote": {
@@ -7581,6 +7707,10 @@
       "category": "soul+key",
       "run": 97,
       "weight": 119
+    },
+    {
+      "weight": 1010,
+      "run": 101
     }
   ],
   "fallback": [
@@ -7616,6 +7746,12 @@
       "run": 98,
       "category": "soul+key",
       "weight": 934
+    }
+  ],
+  "should": [
+    {
+      "weight": 1474,
+      "run": 101
     }
   ]
 }

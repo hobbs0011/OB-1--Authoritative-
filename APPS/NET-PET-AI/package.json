@@ -6,27 +6,35 @@
   "engines": {
     "node": ">=20.0.0"
   },
-  "scripts": {
+"scripts": {
     "dev": "set BROWSER=none&& wrangler dev --port 8788",
     "dev:safe": "set BROWSER=none&& wrangler dev --port 8788",
     "deploy": "wrangler deploy",
     "deploy:safe": "node -e \"if(!process.env.CLOUDFLARE_API_TOKEN){console.error('Missing CLOUDFLARE_API_TOKEN');process.exit(1)}\" && wrangler deploy",
+    "deploy:auto": "node SCRIPTS/deploy-with-gates.mjs prod",
+    "deploy:dev:auto": "node SCRIPTS/deploy-with-gates.mjs dev https://net-pet-ai-dev.mrmichaelhobbs123.workers.dev",
     "verify:wrangler": "npx wrangler deploy --dry-run --outdir dist/dry-run",
     "test": "node node_modules/vitest/vitest.mjs run",
     "test:watch": "node node_modules/vitest/vitest.mjs",
     "test:browser": "playwright test test/voice-agent-browser.test.mjs --config=playwright.config.mjs",
     "test:browser:report": "playwright test test/voice-agent-browser.test.mjs --config=playwright.config.mjs && playwright show-report test/playwright-report",
     "preflight": "node test/preflight-ws.mjs",
-    "preflight:dev": "node test/preflight-ws.mjs https://net-pet-ai-dev.mrmichaelhobbs123.workers.dev"
+    "preflight:dev": "node test/preflight-ws.mjs https://net-pet-ai-dev.mrmichaelhobbs123.workers.dev",
+    "preflight:all": "node test/preflight-ws.mjs && node test/preflight-load.mjs && node test/preflight-lighthouse.mjs",
+    "canary": "node test/canary-check.mjs",
+    "post-deploy": "node test/post-deploy-verify.mjs prod"
   },
   "devDependencies": {
     "@anthropic-ai/tokenizer": "^0.0.4",
+    "@axe-core/playwright": "^4.11.3",
     "@cloudflare/vitest-pool-workers": "^0.8.0",
     "@cloudflare/workers-types": "^4.20260601.0",
     "@playwright/test": "^1.60.0",
+    "autocannon": "^8.0.0",
     "drizzle-kit": "^0.30.6",
     "drizzle-orm": "^0.44.7",
     "js-tiktoken": "^1.0.21",
+    "lighthouse": "^13.3.0",
     "openai": "^6.38.0",
     "vitest": "^3.2.0",
     "wrangler": "^4.83.0"

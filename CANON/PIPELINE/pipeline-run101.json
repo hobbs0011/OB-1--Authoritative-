@@ -1,0 +1,20 @@
+{
+  "run_number": 101,
+  "executed_at": null,
+  "head_sha": "4a4df5f1",
+  "rrl_path": "D:\\OB-1-CANONICAL\\RRL\\RRL-101.txt",
+  "rrl_chars": 23105422,
+  "rrl_bytes": 23396613,
+  "rrl_fidelity": "REAL",
+  "session_id": "sov100-roman-run101",
+  "soul_event_id": "9943fda9-bf3b-4bd9-b355-4ea029731ec5",
+  "soulcount": 237954363,
+  "soul_delta": 165095,
+  "dna_count": 431,
+  "dna_blueprint_count": 36,
+  "dna_status": "REAL",
+  "ledger_id": "HL-",
+  "starmap_file": "D:\\OB-1-CANONICAL\\CANON\\STARMAP\\starmap-run101.json",
+  "keyword_file": "D:\\OB-1-CANONICAL\\CANON\\SOUL-KEYWORDS\\rfkw-run101.txt",
+  "result": "COMPLETE"
+}

@@ -560,11 +560,27 @@ export default {
   },
 
   // ── Cron triggers ───────────────────────────────────────────────────────
+  // Every hour: HB v1.0 + voice health canary (Layer 4)
   // Every 6 hours: Zalo escalation sweep + daily loop engine
   // Every 3 hours: Auto Post Engine (content distribution)
   async scheduled(event, env, ctx) {
+    const PROD_URL = "https://net-pet-ai.mrmichaelhobbs123.workers.dev";
     ctx.waitUntil(handleHeartbeat(env)); // HB v1.0: every hour
-    ctx.waitUntil(fetch("https://net-pet-ai.mrmichaelhobbs123.workers.dev/api/deepgram-token?studentId=keep-warm-ping",{method:"GET"}).catch(()=>{}));
+    // Layer 4 Canary — every 5-min cron hits voice health endpoint
+    ctx.waitUntil((async () => {
+      try {
+        const r = await fetch(`${PROD_URL}/api/health/voice`);
+        const d = await r.json().catch(() => ({}));
+        if (d.ok === false) {
+          logError('CANARY_RED', { url: PROD_URL, error: d.error, gates: d.gates }, env);
+          if (env.ALERT_WEBHOOK) {
+            fetch(env.ALERT_WEBHOOK, { method: 'POST', body: JSON.stringify({ text: `🔴 OBI CANARY RED: ${d.error || 'gates failed'}` }) }).catch(() => {});
+          }
+        }
+      } catch (e) {
+        logError('CANARY_FAIL', { error: e.message }, env);
+      }
+    })());
     const hour = new Date(event.scheduledTime).getUTCHours();
 
     // BB-11: Daily soul/priority pull — Follow the Fucks, update coaching context awareness
@@ -751,6 +767,67 @@ async function handleAPI(path, request, env, url) {
     checks.kv = { NET_PET_KV: !!env.NET_PET_KV };
     const allOk = checks.deepseek?.ok && checks.deepgram?.ok;
     return json({ ok: allOk, version: VERSION, checks, readiness: allOk ? "ALL_SYSTEMS_GO" : "DEGRADED", ts: Date.now() });
+  }
+
+  // LAYER 5 — Voice Health Canary (runs GATES 1-4, returns real status)
+  // The endpoint that catches Run 101-style bugs: Settings rejected / silent OBI
+  if (path === "/api/health/voice" && method === "GET") {
+    const results = { gates: {}, ok: true, version: VERSION, ts: Date.now() };
+    const TEST_ID = "sov100-test-magic";
+
+    // GATE 1 — token endpoint serves
+    try {
+      const tokRes = await fetch(`${url.origin}/api/deepgram-token?studentId=${TEST_ID}`);
+      const tokData = await tokRes.json().catch(() => ({}));
+      results.gates[1] = { ok: tokRes.ok && tokData.token, status: tokRes.status, hasToken: !!tokData.token, hasSettings: !!tokData.settings };
+    } catch (e) { results.gates[1] = { ok: false, error: e.message }; }
+
+    const settings = results.gates[1]?.hasSettings ? (await (await fetch(`${url.origin}/api/deepgram-token?studentId=${TEST_ID}`)).json()).settings : null;
+
+    // GATES 2-4 — WS round-trip (simplified for HTTP latency)
+    if (settings && env.DEEPGRAM_API_KEY) {
+      try {
+        const { WebSocket } = await import("ws");
+        const dgWs = "wss://agent.deepgram.com/v1/agent/converse";
+        const dgToken = (await (await fetch(`${url.origin}/api/deepgram-token?studentId=${TEST_ID}`)).json()).token;
+        if (dgToken) {
+          const ws = new WebSocket(dgWs, ["token", dgToken]);
+          let welcome = false, applied = false, audio = false, errDesc = null;
+          await new Promise((resolve) => {
+            ws.on("message", (d) => {
+              const isJson = typeof d === "string" || (d && d[0] === 0x7b);
+              if (isJson) {
+                const m = typeof d === "string" ? JSON.parse(d) : JSON.parse(d.toString());
+                if (m.type === "Welcome") welcome = true;
+                if (m.type === "SettingsApplied") { applied = true; setTimeout(resolve, 4000); }
+                if (m.type === "Error") { errDesc = m.description; resolve(); }
+              } else if (d && d.length > 0) audio = true;
+            });
+            ws.on("error", (e) => { errDesc = e.message; resolve(); });
+            setTimeout(() => resolve(), 12000);
+          });
+          ws.close();
+          results.gates[2] = { ok: !!welcome, welcome: true };
+          results.gates[3] = { ok: !!applied, error: errDesc || null };
+          results.gates[4] = { ok: !!audio };
+        }
+      } catch (e) {
+        results.gates[2] = { ok: false, error: e.message };
+        results.gates[3] = { ok: false };
+        results.gates[4] = { ok: false };
+      }
+    } else {
+      results.gates[2] = { ok: false, skipped: "no settings/token" };
+      results.gates[3] = { ok: false, skipped: true };
+      results.gates[4] = { ok: false, skipped: true };
+    }
+
+    // Determine overall
+    for (const g of [1, 2, 3, 4]) {
+      if (!results.gates[g]?.ok) results.ok = false;
+    }
+    logInfo("VOICE_HEALTH_CHECK", { ok: results.ok, gates: results.gates }, env);
+    return json(results, results.ok ? 200 : 503);
   }
 
   // Chat — Obi + Ledger context injection
