@@ -973,10 +973,12 @@ async function handleAPI(path, request, env, url) {
     const sessionMode = (url.searchParams.get("mode") || "free").toLowerCase();
     if (!["free","study","phonics"].includes(sessionMode)) return addCors(json({ error: "mode must be one of: free, study, phonics" }, 400), request);
 
-    // Circuit breaker — check KV before processing
-    const cbState = await env.NET_PET_KV.get('circuit:deepgram:state');
-    if (cbState === 'open') {
-      return addCors(json({ error: 'voice_unavailable', retryAfter: 60 }, 503), request);
+    // Circuit breaker — check KV before processing (guard: dev may lack KV binding)
+    if (env.NET_PET_KV) {
+      const cbState = await env.NET_PET_KV.get('circuit:deepgram:state');
+      if (cbState === 'open') {
+        return addCors(json({ error: 'voice_unavailable', retryAfter: 60 }, 503), request);
+      }
     }
 
     try {
@@ -990,22 +992,23 @@ async function handleAPI(path, request, env, url) {
         env.NET_PET_KV.get("session_history_" + studentId),
         env.NET_PET_KV.get("srs_data_" + studentId)
       ]);
-      // Raw API key — auth/grant asr:write scope is insufficient for Voice Agent WS (401)
-      // Mint a short-lived Deepgram key via Keys API with usage:write scope (30s TTL)
-      const tokenResp = await fetch("https://api.deepgram.com/v1/keys", {
+      // Mint a short-lived JWT via /v1/auth/grant (30s TTL, usage:write scope for voice APIs)
+      // /v1/keys requires keys:write scope and creates persistent keys — WRONG endpoint for VA
+      // /v1/auth/grant returns a JWT access_token accepted by Voice Agent WS Sec-WebSocket-Protocol auth
+      const tokenResp = await fetch("https://api.deepgram.com/v1/auth/grant", {
         method: "POST",
         headers: {
           "Authorization": "Token " + apiKey,
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({
-          comment: "temp-agent",
-          scopes: ["usage:write"],
-          time_to_live_in_seconds: 30
-        })
+        body: JSON.stringify({})
       });
       let access_token = apiKey;
-      try { const tokenJson = await tokenResp.json(); access_token = tokenJson.key ?? apiKey; } catch (_) {}
+      if (tokenResp.ok) {
+        try { const tokenJson = await tokenResp.json(); access_token = tokenJson.access_token ?? apiKey; } catch (_) {}
+      } else {
+        console.error("[DEEPGRAM_TOKEN_MINT_FAIL]", tokenResp.status, await tokenResp.text().catch(() => ''));
+      }
 
       let agentProfile = null, agentLang = "en", recentVocab = [], arcData = null, memoryData = null, phonicsData = null;
       try { if (rawProfile) agentProfile = JSON.parse(rawProfile); } catch (_) {}
@@ -1164,10 +1167,10 @@ speak: {
       const ws_url = agentLang === 'vi' ? "wss://agent.deepgram.com/v1/agent/converse?region=syd" : null;
       // ⛔ VOICE BRAIN LOCK — runtime assertion (throws if provider mutated; caught by catch → 500)
       assertVoiceBrainLock(settings);
-      await env.NET_PET_KV.put('circuit:deepgram:state', 'closed');
+      if (env.NET_PET_KV) await env.NET_PET_KV.put('circuit:deepgram:state', 'closed');
       return addCors(json({ token: access_token, settings, phonicsHint, lastSessionVocab, lastSessionTopic: memoryData?.last_topic || null, ws_url }), request);
     } catch (err) {
-      await env.NET_PET_KV.put('circuit:deepgram:state', 'open', { expirationTtl: 60 });
+      if (env.NET_PET_KV) await env.NET_PET_KV.put('circuit:deepgram:state', 'open', { expirationTtl: 60 });
       return addCors(json({ error: err.message }, 500), request);
     }
   }
