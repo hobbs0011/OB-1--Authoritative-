@@ -4,7 +4,7 @@
 // Bindings: SESSIONS (SessionDO), PROFILES (ProfileDO), PETS (PetDO), LEDGER (LedgerDO), ASSETS
 // Secrets: DEEPSEEK_API_KEY, DEEPGRAM_API_KEY
 
-import { securityMiddleware, sanitizeInput, validateStudentId, checkAdminKey, logAudit } from './security.js';
+import { securityMiddleware, sanitizeInput, validateStudentId, validateActiveStudent, checkAdminKey, logAudit } from './security.js';
 import { logError, logWarn, logInfo } from './logger.js';
 import { extractWeaknesses, buildWeaknessPrompt, buildReEntryPrompt, buildRewardSignals, buildRewardPrompt } from './memory-brain.js';
 import { trackTokens, getUsage } from './token-track.js';
@@ -937,11 +937,39 @@ async function handleAPI(path, request, env, url) {
 
   // Voice Agent: mint short-lived Deepgram JWT + return compiled Settings for browser-direct connection
   // Browser connects directly to wss://agent.deepgram.com/v1/agent/converse — no CF proxy in audio path
+  // ⛔ VOICE BRAIN LOCK — RUNTIME ASSERTION (mirrors test/voice-brain-lock.test.mjs)
+  // Validates the voice agent settings object before it reaches the client.
+  // If someone mutates the think provider in this file, this throws before the token returns.
+  // DO NOT weaken or remove. Broken 3+ times — Run 097 confirmed and firewalled.
+  function assertVoiceBrainLock(settings) {
+    const provider = settings?.agent?.think?.provider;
+    if (!provider || provider.type !== 'open_ai' || provider.model !== 'gpt-4o-mini') {
+      throw new Error('VOICE_BRAIN_LOCK: think.provider must be { type: "open_ai", model: "gpt-4o-mini" } — Deepgram in-house, no external hop');
+    }
+    if (provider.endpoint) {
+      throw new Error('VOICE_BRAIN_LOCK: think.provider must NOT have endpoint (in-house only, endpoint = external routing = slow)');
+    }
+    const listen = settings?.agent?.listen?.provider;
+    if (!listen || listen.type !== 'deepgram' || listen.model !== 'nova-3') {
+      throw new Error('VOICE_BRAIN_LOCK: listen.provider must be { type: "deepgram", model: "nova-3" }');
+    }
+    const speak = settings?.agent?.speak?.provider;
+    if (!speak || speak.type !== 'deepgram' || speak.model !== 'aura-2-zeus-en') {
+      throw new Error('VOICE_BRAIN_LOCK: speak.provider must be { type: "deepgram", model: "aura-2-zeus-en" }');
+    }
+  }
+
   if (path === "/api/deepgram-token" && method === "GET") {
     const apiKey = env.DEEPGRAM_API_KEY;
     if (!apiKey) return addCors(json({ error: "DEEPGRAM_API_KEY not configured" }, 500), request);
     const studentId = url.searchParams.get("studentId") || "";
     if (!studentId) return addCors(json({ error: "studentId query parameter is required" }, 400), request);
+    // Format validation — block injection chars before any KV lookup
+    const formatCheck = validateStudentId(studentId);
+    if (!formatCheck.valid) return addCors(json({ error: formatCheck.error }, 400), request);
+    // Roster check — only active students and operator IDs may mint voice tokens
+    const rosterCheck = validateActiveStudent(studentId);
+    if (!rosterCheck.valid) return addCors(json({ error: 'student not authorized', code: 'NOT_IN_ROSTER' }, 403), request);
     const sessionMode = (url.searchParams.get("mode") || "free").toLowerCase();
     if (!["free","study","phonics"].includes(sessionMode)) return addCors(json({ error: "mode must be one of: free, study, phonics" }, 400), request);
 
@@ -1134,6 +1162,8 @@ speak: {
       } : null;
       // Block W: Sydney region routing hint for VN students
       const ws_url = agentLang === 'vi' ? "wss://agent.deepgram.com/v1/agent/converse?region=syd" : null;
+      // ⛔ VOICE BRAIN LOCK — runtime assertion (throws if provider mutated; caught by catch → 500)
+      assertVoiceBrainLock(settings);
       await env.NET_PET_KV.put('circuit:deepgram:state', 'closed');
       return addCors(json({ token: access_token, settings, phonicsHint, lastSessionVocab, lastSessionTopic: memoryData?.last_topic || null, ws_url }), request);
     } catch (err) {

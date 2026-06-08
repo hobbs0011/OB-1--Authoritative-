@@ -150,8 +150,27 @@ function validateStudentId(studentId) {
   if (!/^[a-zA-Z0-9._-]+$/.test(studentId)) {
     return { valid: false, error: 'studentId contains invalid characters' };
   }
-  
   return { valid: true };
+}
+
+// Active student roster — only these IDs may consume voice tokens and mutate student KV.
+// Operator (sov100-*) and test IDs are always allowed.
+// ⚠️ UPDATE THIS LIST when onboarding or offboarding students.
+const ACTIVE_STUDENT_ROSTER = new Set([
+  'quy-bluetech',
+  'mai-tram-bluetech',
+  'huong-bluetech',
+  // test / warm-up IDs
+  'sov100-test-magic',
+  'keep-warm-ping',
+]);
+
+function validateActiveStudent(studentId) {
+  if (!studentId || typeof studentId !== 'string') return { valid: false, error: 'studentId required' };
+  // Operator IDs always pass
+  if (studentId.startsWith('sov100-')) return { valid: true };
+  if (ACTIVE_STUDENT_ROSTER.has(studentId)) return { valid: true };
+  return { valid: false, error: 'student not in active roster' };
 }
 
 function getCorsHeaders(origin = '') {
@@ -269,4 +288,4 @@ async function logAudit(env, { action, actor = 'system', target = '', ip = '', m
   }
 }
 
-export { VERSION, SECURITY, securityMiddleware, sanitizeInput, validateStudentId, checkRateLimit, getCorsHeaders, validateOrigin, checkAdminKey, logAudit };
+export { VERSION, SECURITY, securityMiddleware, sanitizeInput, validateStudentId, validateActiveStudent, checkRateLimit, getCorsHeaders, validateOrigin, checkAdminKey, logAudit };
