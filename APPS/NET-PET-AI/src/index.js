@@ -992,23 +992,9 @@ async function handleAPI(path, request, env, url) {
         env.NET_PET_KV.get("session_history_" + studentId),
         env.NET_PET_KV.get("srs_data_" + studentId)
       ]);
-      // Mint a short-lived JWT via /v1/auth/grant (30s TTL, usage:write scope for voice APIs)
-      // /v1/keys requires keys:write scope and creates persistent keys — WRONG endpoint for VA
-      // /v1/auth/grant returns a JWT access_token accepted by Voice Agent WS Sec-WebSocket-Protocol auth
-      const tokenResp = await fetch("https://api.deepgram.com/v1/auth/grant", {
-        method: "POST",
-        headers: {
-          "Authorization": "Token " + apiKey,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({})
-      });
-      let access_token = apiKey;
-      if (tokenResp.ok) {
-        try { const tokenJson = await tokenResp.json(); access_token = tokenJson.access_token ?? apiKey; } catch (_) {}
-      } else {
-        console.error("[DEEPGRAM_TOKEN_MINT_FAIL]", tokenResp.status, await tokenResp.text().catch(() => ''));
-      }
+      // Raw API key passed directly — Deepgram Voice Agent WS uses Sec-WebSocket-Protocol: token, <key>
+      // No minting needed. Key minting was broken complexity that caused the robot voice bug.
+      const access_token = apiKey;
 
       let agentProfile = null, agentLang = "en", recentVocab = [], arcData = null, memoryData = null, phonicsData = null;
       try { if (rawProfile) agentProfile = JSON.parse(rawProfile); } catch (_) {}
@@ -1125,8 +1111,7 @@ async function handleAPI(path, request, env, url) {
         language: "en",
         greeting: buildGreeting(agentProfile, sessionMode, memoryData?.last_topic || null),
         listen: {
-          provider: { type: "deepgram", model: "nova-3" },
-          endpointing: sessionMode === "free" ? 700 : 1100
+          provider: { type: "deepgram", model: "nova-3" }
         },
         think: {
           provider: { type: "open_ai", model: "gpt-4o-mini" },

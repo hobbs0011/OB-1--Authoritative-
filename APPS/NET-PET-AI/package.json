@@ -13,12 +13,15 @@
     "deploy:safe": "node -e \"if(!process.env.CLOUDFLARE_API_TOKEN){console.error('Missing CLOUDFLARE_API_TOKEN');process.exit(1)}\" && wrangler deploy",
     "verify:wrangler": "npx wrangler deploy --dry-run --outdir dist/dry-run",
     "test": "node node_modules/vitest/vitest.mjs run",
-    "test:watch": "node node_modules/vitest/vitest.mjs"
+    "test:watch": "node node_modules/vitest/vitest.mjs",
+    "test:browser": "playwright test test/voice-agent-browser.test.mjs --config=playwright.config.mjs",
+    "test:browser:report": "playwright test test/voice-agent-browser.test.mjs --config=playwright.config.mjs && playwright show-report test/playwright-report"
   },
   "devDependencies": {
     "@anthropic-ai/tokenizer": "^0.0.4",
     "@cloudflare/vitest-pool-workers": "^0.8.0",
     "@cloudflare/workers-types": "^4.20260601.0",
+    "@playwright/test": "^1.60.0",
     "drizzle-kit": "^0.30.6",
     "drizzle-orm": "^0.44.7",
     "js-tiktoken": "^1.0.21",
