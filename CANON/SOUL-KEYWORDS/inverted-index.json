@@ -99,6 +99,11 @@
       "run": 98,
       "category": "soul+key",
       "weight": 1256
+    },
+    {
+      "category": "soul+key",
+      "run": 99,
+      "weight": 1170
     }
   ],
   "effect": {
@@ -148,6 +153,11 @@
       "run": 98,
       "category": "soul+key",
       "weight": 3097
+    },
+    {
+      "category": "soul+key",
+      "run": 99,
+      "weight": 3326
     }
   ],
   "alright": {
@@ -965,6 +975,11 @@
       "run": 96,
       "weight": 629,
       "category": "soul+key"
+    },
+    {
+      "category": "soul+key",
+      "run": 99,
+      "weight": 1013
     }
   ],
   "191d5d1": {
@@ -1064,6 +1079,11 @@
       "run": 98,
       "category": "soul+key",
       "weight": 1026
+    },
+    {
+      "category": "soul+key",
+      "run": 99,
+      "weight": 1415
     }
   ],
   "studentid": {
@@ -1419,14 +1439,21 @@
     "count": 1,
     "category": "core"
   },
-  "system": {
-    "term": "system",
-    "runs": [],
-    "count": 3,
-    "weight": 55,
-    "category": "soul+key",
-    "run": 66
-  },
+  "system": [
+    {
+      "term": "system",
+      "runs": [],
+      "count": 3,
+      "weight": 55,
+      "category": "soul+key",
+      "run": 66
+    },
+    {
+      "category": "soul+key",
+      "run": 99,
+      "weight": 1142
+    }
+  ],
   "count": {
     "term": "count",
     "runs": [],
@@ -1804,14 +1831,21 @@
     "runs": [],
     "count": 1
   },
-  "written": {
-    "category": "soul+key",
-    "runs": [],
-    "count": 1,
-    "weight": 188,
-    "run": 54,
-    "term": "written"
-  },
+  "written": [
+    {
+      "category": "soul+key",
+      "runs": [],
+      "count": 1,
+      "weight": 188,
+      "run": 54,
+      "term": "written"
+    },
+    {
+      "category": "soul+key",
+      "run": 99,
+      "weight": 1801
+    }
+  ],
   "altitude": {
     "term": "altitude",
     "weight": 5,
@@ -1925,14 +1959,21 @@
     "weight": 8,
     "category": "pipeline"
   },
-  "model": {
-    "count": 1,
-    "runs": [],
-    "term": "model",
-    "run": 61,
-    "category": "soul+key",
-    "weight": 311
-  },
+  "model": [
+    {
+      "count": 1,
+      "runs": [],
+      "term": "model",
+      "run": 61,
+      "category": "soul+key",
+      "weight": 311
+    },
+    {
+      "category": "soul+key",
+      "run": 99,
+      "weight": 1350
+    }
+  ],
   "{\\\\\\\\n": [
     {
       "term": "{\\\\\\\\n",
@@ -2073,16 +2114,23 @@
     "runs": [],
     "count": 4
   },
-  "english": {
-    "term": "english",
-    "runs": [
-      66,
-      73
-    ],
-    "count": 2,
-    "weight": 198,
-    "category": "soul+key"
-  },
+  "english": [
+    {
+      "term": "english",
+      "runs": [
+        66,
+        73
+      ],
+      "count": 2,
+      "weight": 198,
+      "category": "soul+key"
+    },
+    {
+      "category": "soul+key",
+      "run": 99,
+      "weight": 1515
+    }
+  ],
   "answer": {
     "term": "answer",
     "runs": [],
@@ -2384,6 +2432,11 @@
       "run": 98,
       "category": "soul+key",
       "weight": 1902
+    },
+    {
+      "category": "soul+key",
+      "run": 99,
+      "weight": 2944
     }
   ],
   "deploy": [
@@ -3077,6 +3130,11 @@
       "run": 98,
       "category": "soul+key",
       "weight": 1093
+    },
+    {
+      "category": "soul+key",
+      "run": 99,
+      "weight": 1429
     }
   ],
   "tiger": {
@@ -3110,6 +3168,11 @@
       "run": 98,
       "category": "soul+key",
       "weight": 783
+    },
+    {
+      "category": "soul+key",
+      "run": 99,
+      "weight": 1292
     }
   ],
   "continue": {
@@ -3254,16 +3317,23 @@
     "runs": [],
     "count": 4
   },
-  "ledger": {
-    "term": "ledger",
-    "weight": 8,
-    "category": "pipeline",
-    "runs": [
-      "043"
-    ],
-    "count": 2,
-    "run": 44
-  },
+  "ledger": [
+    {
+      "term": "ledger",
+      "weight": 8,
+      "category": "pipeline",
+      "runs": [
+        "043"
+      ],
+      "count": 2,
+      "run": 44
+    },
+    {
+      "category": "soul+key",
+      "run": 99,
+      "weight": 1033
+    }
+  ],
   "backdrop": {
     "term": "backdrop",
     "runs": [],
@@ -3433,21 +3503,28 @@
     "weight": 63,
     "category": "soul+key"
   },
-  "stage": {
-    "term": "stage",
-    "runs": [
-      51,
-      54,
-      57,
-      58,
-      59,
-      72,
-      75
-    ],
-    "count": 7,
-    "weight": 619,
-    "category": "soul+key"
-  },
+  "stage": [
+    {
+      "term": "stage",
+      "runs": [
+        51,
+        54,
+        57,
+        58,
+        59,
+        72,
+        75
+      ],
+      "count": 7,
+      "weight": 619,
+      "category": "soul+key"
+    },
+    {
+      "category": "soul+key",
+      "run": 99,
+      "weight": 1586
+    }
+  ],
   "centurion-code": {
     "term": "centurion-code",
     "runs": [],
@@ -3569,6 +3646,11 @@
       "run": 98,
       "category": "soul+key",
       "weight": 996
+    },
+    {
+      "category": "soul+key",
+      "run": 99,
+      "weight": 2371
     }
   ],
   "tasking": {
@@ -3603,13 +3685,20 @@
     "weight": 132,
     "category": "soul+key"
   },
-  "chars": {
-    "runs": [],
-    "weight": 142,
-    "term": "chars",
-    "count": 2,
-    "run": 47
-  },
+  "chars": [
+    {
+      "runs": [],
+      "weight": 142,
+      "term": "chars",
+      "count": 2,
+      "run": 47
+    },
+    {
+      "category": "soul+key",
+      "run": 99,
+      "weight": 1325
+    }
+  ],
   "linenrrlrrltxtomitted": {
     "term": "linenrrlrrltxtomitted",
     "runs": [
@@ -4193,6 +4282,11 @@
       "run": 98,
       "category": "soul+key",
       "weight": 892
+    },
+    {
+      "category": "soul+key",
+      "run": 99,
+      "weight": 1011
     }
   ],
   "method": {
@@ -4530,6 +4624,11 @@
       "run": 98,
       "category": "soul+key",
       "weight": 1346
+    },
+    {
+      "category": "soul+key",
+      "run": 99,
+      "weight": 1494
     }
   ],
   "link": {
@@ -4771,6 +4870,11 @@
       "run": 96,
       "weight": 689,
       "category": "soul+key"
+    },
+    {
+      "category": "soul+key",
+      "run": 99,
+      "weight": 1139
     }
   ],
   "soulcount": [
@@ -4796,14 +4900,21 @@
     "count": 1,
     "category": "core"
   },
-  "error": {
-    "run": 50,
-    "count": 1,
-    "runs": [],
-    "weight": 341,
-    "term": "error",
-    "category": "soul+key"
-  },
+  "error": [
+    {
+      "run": 50,
+      "count": 1,
+      "runs": [],
+      "weight": 341,
+      "term": "error",
+      "category": "soul+key"
+    },
+    {
+      "category": "soul+key",
+      "run": 99,
+      "weight": 1202
+    }
+  ],
   "soul-keywords": {
     "term": "soul-keywords",
     "runs": [],
@@ -4869,6 +4980,11 @@
       "run": 98,
       "category": "soul+key",
       "weight": 1116
+    },
+    {
+      "category": "soul+key",
+      "run": 99,
+      "weight": 1176
     }
   ],
   "detail": {
@@ -5039,6 +5155,11 @@
       "category": "soul+key",
       "run": 97,
       "weight": 260
+    },
+    {
+      "category": "soul+key",
+      "run": 99,
+      "weight": 2357
     }
   ],
   "copy": {
@@ -5188,6 +5309,11 @@
       "run": 98,
       "category": "soul+key",
       "weight": 1049
+    },
+    {
+      "category": "soul+key",
+      "run": 99,
+      "weight": 1391
     }
   ],
   "0massembled": {
@@ -5942,6 +6068,11 @@
       "run": 98,
       "category": "soul+key",
       "weight": 1034
+    },
+    {
+      "category": "soul+key",
+      "run": 99,
+      "weight": 1292
     }
   ],
   "t1-qwenmax": {
@@ -6050,6 +6181,11 @@
       "run": 98,
       "category": "soul+key",
       "weight": 1133
+    },
+    {
+      "category": "soul+key",
+      "run": 99,
+      "weight": 1299
     }
   ],
   "approve": {
@@ -6102,6 +6238,11 @@
       "run": 98,
       "category": "soul+key",
       "weight": 990
+    },
+    {
+      "category": "soul+key",
+      "run": 99,
+      "weight": 1467
     }
   ],
   "85105c82": {
@@ -6521,6 +6662,11 @@
       "run": 98,
       "category": "soul+key",
       "weight": 2110
+    },
+    {
+      "category": "soul+key",
+      "run": 99,
+      "weight": 2469
     }
   ],
   "important": {
@@ -6811,6 +6957,11 @@
       "run": 98,
       "category": "soul+key",
       "weight": 1118
+    },
+    {
+      "category": "soul+key",
+      "run": 99,
+      "weight": 1511
     }
   ],
   "usage": {
@@ -6975,6 +7126,11 @@
       "run": 98,
       "category": "soul+key",
       "weight": 3181
+    },
+    {
+      "category": "soul+key",
+      "run": 99,
+      "weight": 3102
     }
   ],
   "attempt": {
@@ -7176,6 +7332,11 @@
       "run": 98,
       "category": "soul+key",
       "weight": 844
+    },
+    {
+      "category": "soul+key",
+      "run": 99,
+      "weight": 934
     }
   ],
   "quote": {
@@ -7408,6 +7569,11 @@
       "run": 96,
       "weight": 614,
       "category": "soul+key"
+    },
+    {
+      "category": "soul+key",
+      "run": 99,
+      "weight": 971
     }
   ],
   "entries": [

@@ -1,0 +1,2382 @@
+[
+  {
+    "run": 99,
+    "seq": 1,
+    "type": "prose",
+    "chars": 5524,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"fucking code Kilo to be able to use subagents with claude, haiku, sonnet and opus, and also code it inline too please\",\"leafUuid\":\"d1b6c024-7693-419a-9df9-713cb2af60c6\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"parentUuid\":\"d1b6c024-7693-419a-9df9-713cb2af60c6\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"33ac2db5-2d65-4f61-80c5-56ce7fa31709\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-"
+  },
+  {
+    "run": 99,
+    "seq": 2,
+    "type": "prose",
+    "chars": 6059,
+    "text": "{\"parentUuid\":\"36b88059-cba7-4612-b73a-b39043768fdc\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"95b0fc4f-1a81-4a7f-8637-6c2077bf9aa2\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\n\\u001b[33;1mWARNING: JSONL file not found by UUID, copying history.jsonl as RRL\\u001b[0m\\r\\nSOURCE: history.jsonl - 65778 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-79.txt - 65778 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE"
+  },
+  {
+    "run": 99,
+    "seq": 3,
+    "type": "prose",
+    "chars": 360,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"can this be used in kilo ?  Claude Code (me): Uses sk-ant-oat01-... — an OAuth token tied to your Pro subscription. No API credits needed.\",\"leafUuid\":\"701487c5-9f11-43f3-90ce-2e24b70a941e\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 4,
+    "type": "prose",
+    "chars": 360,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"can this be used in kilo ?  Claude Code (me): Uses sk-ant-oat01-... — an OAuth token tied to your Pro subscription. No API credits needed.\",\"leafUuid\":\"bd68af24-a379-4c44-a1b9-89400776ae8c\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 5,
+    "type": "prose",
+    "chars": 6059,
+    "text": "{\"parentUuid\":\"21e722f0-9f9a-4204-8d58-90583cd9d07f\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"8982def6-e486-4885-97cd-8e9887da8f63\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\n\\u001b[33;1mWARNING: JSONL file not found by UUID, copying history.jsonl as RRL\\u001b[0m\\r\\nSOURCE: history.jsonl - 65778 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-79.txt - 65778 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE"
+  },
+  {
+    "run": 99,
+    "seq": 6,
+    "type": "prose",
+    "chars": 360,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"can this be used in kilo ?  Claude Code (me): Uses sk-ant-oat01-... — an OAuth token tied to your Pro subscription. No API credits needed.\",\"leafUuid\":\"178ee0f8-947d-425d-a077-de8778f2b13c\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 7,
+    "type": "prose",
+    "chars": 360,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"can this be used in kilo ?  Claude Code (me): Uses sk-ant-oat01-... — an OAuth token tied to your Pro subscription. No API credits needed.\",\"leafUuid\":\"141eb9fb-c5a2-4805-9845-acc82d5a32f7\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 8,
+    "type": "prose",
+    "chars": 6059,
+    "text": "{\"parentUuid\":\"0272558b-c0d6-4086-8a42-2dbe2030ddda\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"0dad076f-9cbb-4f15-afbe-e28df1440d02\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\n\\u001b[33;1mWARNING: JSONL file not found by UUID, copying history.jsonl as RRL\\u001b[0m\\r\\nSOURCE: history.jsonl - 65778 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-80.txt - 65778 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE"
+  },
+  {
+    "run": 99,
+    "seq": 9,
+    "type": "prose",
+    "chars": 380,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"get the student portals optimized fully read last 30 runs keywords, do it right, max dont stop dont fuck with me, our firewalled student portals were violated\",\"leafUuid\":\"919ecf31-3625-4c52-861d-71ab431557ce\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 10,
+    "type": "prose",
+    "chars": 380,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"get the student portals optimized fully read last 30 runs keywords, do it right, max dont stop dont fuck with me, our firewalled student portals were violated\",\"leafUuid\":\"2d25ff29-ed62-465a-b7bc-6b638f90ac8b\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 11,
+    "type": "prose",
+    "chars": 380,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"get the student portals optimized fully read last 30 runs keywords, do it right, max dont stop dont fuck with me, our firewalled student portals were violated\",\"leafUuid\":\"84677fb1-a87a-4a16-931b-7a055ffeb768\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 12,
+    "type": "prose",
+    "chars": 518,
+    "text": "{\"type\":\"file-history-snapshot\",\"messageId\":\"cfd32df5-1752-416b-bc4f-a5897a2c13b9\",\"snapshot\":{\"messageId\":\"e407004a-d292-4879-bb4f-910a88b9f4fc\",\"trackedFileBackups\":{\"C:\\\\Users\\\\mrmic\\\\.config\\\\kilo\\\\kilo.json\":{\"backupFileName\":\"38470ac22fba94e9@v4\",\"version\":4,\"backupTime\":\"2026-06-06T12:17:26.450Z\"},\"D:\\\\OB-1-CANONICAL\\\\APPS\\\\NET-PET-AI\\\\src\\\\index.js\":{\"backupFileName\":\"bec243533c8af01e@v1\",\"version\":1,\"backupTime\":\"2026-06-06T12:28:10.529Z\"}},\"timestamp\":\"2026-06-06T12:24:46.057Z\"},\"isSna"
+  },
+  {
+    "run": 99,
+    "seq": 13,
+    "type": "prose",
+    "chars": 380,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"get the student portals optimized fully read last 30 runs keywords, do it right, max dont stop dont fuck with me, our firewalled student portals were violated\",\"leafUuid\":\"2d593d15-4e5c-4dbb-950c-0771a808e4b0\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 14,
+    "type": "prose",
+    "chars": 380,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"get the student portals optimized fully read last 30 runs keywords, do it right, max dont stop dont fuck with me, our firewalled student portals were violated\",\"leafUuid\":\"ba6ba033-5eeb-4877-9987-5be05c10b983\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 15,
+    "type": "prose",
+    "chars": 380,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"get the student portals optimized fully read last 30 runs keywords, do it right, max dont stop dont fuck with me, our firewalled student portals were violated\",\"leafUuid\":\"ef5a9399-835b-4483-88dd-5bb6afa7c244\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 16,
+    "type": "prose",
+    "chars": 675,
+    "text": "{\"type\":\"file-history-snapshot\",\"messageId\":\"d26a0102-1ae4-43a2-8f5c-e1a26a6579ae\",\"snapshot\":{\"messageId\":\"e407004a-d292-4879-bb4f-910a88b9f4fc\",\"trackedFileBackups\":{\"C:\\\\Users\\\\mrmic\\\\.config\\\\kilo\\\\kilo.json\":{\"backupFileName\":\"38470ac22fba94e9@v4\",\"version\":4,\"backupTime\":\"2026-06-06T12:17:26.450Z\"},\"D:\\\\OB-1-CANONICAL\\\\APPS\\\\NET-PET-AI\\\\src\\\\index.js\":{\"backupFileName\":\"bec243533c8af01e@v1\",\"version\":1,\"backupTime\":\"2026-06-06T12:28:10.529Z\"},\"D:\\\\OB-1-CANONICAL\\\\APPS\\\\NET-PET-AI\\\\public\\\\"
+  },
+  {
+    "run": 99,
+    "seq": 17,
+    "type": "prose",
+    "chars": 824,
+    "text": "{\"type\":\"file-history-snapshot\",\"messageId\":\"ad1cc801-4869-41cd-a305-8c6e126e7938\",\"snapshot\":{\"messageId\":\"e407004a-d292-4879-bb4f-910a88b9f4fc\",\"trackedFileBackups\":{\"C:\\\\Users\\\\mrmic\\\\.config\\\\kilo\\\\kilo.json\":{\"backupFileName\":\"38470ac22fba94e9@v4\",\"version\":4,\"backupTime\":\"2026-06-06T12:17:26.450Z\"},\"D:\\\\OB-1-CANONICAL\\\\APPS\\\\NET-PET-AI\\\\src\\\\index.js\":{\"backupFileName\":\"bec243533c8af01e@v1\",\"version\":1,\"backupTime\":\"2026-06-06T12:28:10.529Z\"},\"D:\\\\OB-1-CANONICAL\\\\APPS\\\\NET-PET-AI\\\\public\\\\"
+  },
+  {
+    "run": 99,
+    "seq": 18,
+    "type": "prose",
+    "chars": 380,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"get the student portals optimized fully read last 30 runs keywords, do it right, max dont stop dont fuck with me, our firewalled student portals were violated\",\"leafUuid\":\"0114136f-9263-47b7-9a48-6c2b3954470a\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 19,
+    "type": "prose",
+    "chars": 976,
+    "text": "{\"type\":\"file-history-snapshot\",\"messageId\":\"4bd6b147-2b1b-48f8-817b-47b6f0c5e5a6\",\"snapshot\":{\"messageId\":\"e407004a-d292-4879-bb4f-910a88b9f4fc\",\"trackedFileBackups\":{\"C:\\\\Users\\\\mrmic\\\\.config\\\\kilo\\\\kilo.json\":{\"backupFileName\":\"38470ac22fba94e9@v4\",\"version\":4,\"backupTime\":\"2026-06-06T12:17:26.450Z\"},\"D:\\\\OB-1-CANONICAL\\\\APPS\\\\NET-PET-AI\\\\src\\\\index.js\":{\"backupFileName\":\"bec243533c8af01e@v1\",\"version\":1,\"backupTime\":\"2026-06-06T12:28:10.529Z\"},\"D:\\\\OB-1-CANONICAL\\\\APPS\\\\NET-PET-AI\\\\public\\\\"
+  },
+  {
+    "run": 99,
+    "seq": 20,
+    "type": "prose",
+    "chars": 380,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"get the student portals optimized fully read last 30 runs keywords, do it right, max dont stop dont fuck with me, our firewalled student portals were violated\",\"leafUuid\":\"f3dfc987-1f1d-45cd-a61c-5893d1e46645\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 21,
+    "type": "prose",
+    "chars": 6147,
+    "text": "{\"parentUuid\":\"d470a58c-509e-4cf8-a94f-51b2082e0da8\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"c251bb78-1c32-4043-b077-de49fa5fef7f\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\n\\u001b[33;1mWARNING: JSONL file not found by UUID, copying history.jsonl as RRL\\u001b[0m\\r\\nSOURCE: history.jsonl - 65778 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-80.txt - 65778 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE"
+  },
+  {
+    "run": 99,
+    "seq": 22,
+    "type": "prose",
+    "chars": 422,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"go back over the entire bible of the system .json and phermone trails in the reigstry,I have been doing a lot of work while you were sleeping last 48 hours, reinforce it, actualize it, understand it,…\",\"leafUuid\":\"8d6cc7ad-7919-4476-9000-28a05940004e\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 23,
+    "type": "prose",
+    "chars": 422,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"go back over the entire bible of the system .json and phermone trails in the reigstry,I have been doing a lot of work while you were sleeping last 48 hours, reinforce it, actualize it, understand it,…\",\"leafUuid\":\"159652cc-3051-48b5-877e-2033e48a2bd1\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 24,
+    "type": "prose",
+    "chars": 422,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"go back over the entire bible of the system .json and phermone trails in the reigstry,I have been doing a lot of work while you were sleeping last 48 hours, reinforce it, actualize it, understand it,…\",\"leafUuid\":\"ec3bea72-930f-4552-a249-7faffd6eb485\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 25,
+    "type": "prose",
+    "chars": 422,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"go back over the entire bible of the system .json and phermone trails in the reigstry,I have been doing a lot of work while you were sleeping last 48 hours, reinforce it, actualize it, understand it,…\",\"leafUuid\":\"035e1a91-bd0e-4c7b-a28e-d63629607cdf\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 26,
+    "type": "prose",
+    "chars": 6552,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"go back over the entire bible of the system .json and phermone trails in the reigstry,I have been doing a lot of work while you were sleeping last 48 hours, reinforce it, actualize it, understand it,…\",\"leafUuid\":\"9002a869-64f7-403d-a1b7-7943b570f579\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"parentUuid\":\"9002a869-64f7-403d-a1b7-7943b570f579\",\"isSidechain\":false,\"att"
+  },
+  {
+    "run": 99,
+    "seq": 27,
+    "type": "prose",
+    "chars": 230,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"continue\",\"leafUuid\":\"16ed7ced-5730-48b7-9ecc-c1765a46de48\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 28,
+    "type": "prose",
+    "chars": 230,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"continue\",\"leafUuid\":\"cd4a1850-f9e2-4e0d-87ea-7178c78c3169\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 29,
+    "type": "prose",
+    "chars": 1787,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"continue\",\"leafUuid\":\"6a839705-34cc-4194-9b55-47e8114762d5\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"file-history-snapshot\",\"messageId\":\"6a839705-34cc-4194-9b55-47e8114762d5\",\"snapshot\":{\"messageId\":\"0f126c95-b548-45dc-9535-b5afab6d0b6d\",\"trackedFileBackups\":{\"D:\\\\OB-1-CANONICAL\\\\APPS\\\\NET-PET-AI\\\\public\\\\magic-chat.html\":{\"backupFileName\":\"3625013f00dfaea5@v"
+  },
+  {
+    "run": 99,
+    "seq": 30,
+    "type": "prose",
+    "chars": 1713,
+    "text": "{\"type\":\"file-history-snapshot\",\"messageId\":\"e941d592-bd35-4391-86b3-ec911fdc2a64\",\"snapshot\":{\"messageId\":\"0f126c95-b548-45dc-9535-b5afab6d0b6d\",\"trackedFileBackups\":{\"D:\\\\OB-1-CANONICAL\\\\APPS\\\\NET-PET-AI\\\\public\\\\magic-chat.html\":{\"backupFileName\":\"3625013f00dfaea5@v2\",\"version\":2,\"backupTime\":\"2026-06-07T01:34:38.541Z\"},\"D:\\\\OB-1-CANONICAL\\\\APPS\\\\NET-PET-AI\\\\public\\\\chat.js\":{\"backupFileName\":\"915f3a7428b6990e@v2\",\"version\":2,\"backupTime\":\"2026-06-07T01:34:38.541Z\"},\"D:\\\\OB-1-CANONICAL\\\\APPS\\"
+  },
+  {
+    "run": 99,
+    "seq": 31,
+    "type": "prose",
+    "chars": 1862,
+    "text": "{\"type\":\"file-history-snapshot\",\"messageId\":\"19879999-a715-4de6-9bc7-ca5c8d50e736\",\"snapshot\":{\"messageId\":\"0f126c95-b548-45dc-9535-b5afab6d0b6d\",\"trackedFileBackups\":{\"D:\\\\OB-1-CANONICAL\\\\APPS\\\\NET-PET-AI\\\\public\\\\magic-chat.html\":{\"backupFileName\":\"3625013f00dfaea5@v2\",\"version\":2,\"backupTime\":\"2026-06-07T01:34:38.541Z\"},\"D:\\\\OB-1-CANONICAL\\\\APPS\\\\NET-PET-AI\\\\public\\\\chat.js\":{\"backupFileName\":\"915f3a7428b6990e@v2\",\"version\":2,\"backupTime\":\"2026-06-07T01:34:38.541Z\"},\"D:\\\\OB-1-CANONICAL\\\\APPS\\"
+  },
+  {
+    "run": 99,
+    "seq": 32,
+    "type": "prose",
+    "chars": 230,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"continue\",\"leafUuid\":\"3eef4f9d-09b2-4615-8da8-803ea9dce018\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 33,
+    "type": "prose",
+    "chars": 6129,
+    "text": "{\"parentUuid\":\"a6598aab-5299-46da-8e26-37f3fbcf8cbd\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"a76ad78d-e4b9-45ad-a323-f17278d1fcd4\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\n\\u001b[33;1mWARNING: JSONL file not found by UUID, copying history.jsonl as RRL\\u001b[0m\\r\\nSOURCE: history.jsonl - 65778 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-80.txt - 65778 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE"
+  },
+  {
+    "run": 99,
+    "seq": 34,
+    "type": "prose",
+    "chars": 2434,
+    "text": "{\"type\":\"file-history-snapshot\",\"messageId\":\"1fee4dfe-8fc7-43be-b7d3-da414b36632e\",\"snapshot\":{\"messageId\":\"92f23d5b-73bf-401e-99ab-cc457337d52c\",\"trackedFileBackups\":{\"D:\\\\OB-1-CANONICAL\\\\APPS\\\\NET-PET-AI\\\\public\\\\portal.css\":{\"backupFileName\":\"bfa4d4fc56b2a247@v2\",\"version\":2,\"backupTime\":\"2026-06-07T01:34:38.541Z\"},\"C:\\\\Users\\\\mrmic\\\\.config\\\\kilo\\\\kilo.json\":{\"backupFileName\":\"38470ac22fba94e9@v4\",\"version\":4,\"backupTime\":\"2026-06-06T12:17:26.450Z\"},\"D:\\\\OB-1-CANONICAL\\\\APPS\\\\NET-PET-AI\\\\pub"
+  },
+  {
+    "run": 99,
+    "seq": 35,
+    "type": "prose",
+    "chars": 385,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"Do I need to build another thing for you to stop asking whats next?  Phermone trails, pipeline, maps, ledger, RRLs, keywords, the whole motherfucking kitchen sink?\",\"leafUuid\":\"c8b6cef4-e724-46c2-8b9d-70f4345462b3\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 36,
+    "type": "prose",
+    "chars": 385,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"Do I need to build another thing for you to stop asking whats next?  Phermone trails, pipeline, maps, ledger, RRLs, keywords, the whole motherfucking kitchen sink?\",\"leafUuid\":\"2c4db576-43d9-47df-aa1a-7053c91c0ff8\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 37,
+    "type": "prose",
+    "chars": 385,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"Do I need to build another thing for you to stop asking whats next?  Phermone trails, pipeline, maps, ledger, RRLs, keywords, the whole motherfucking kitchen sink?\",\"leafUuid\":\"d594bd5e-643b-4f1b-a6b2-b5c71cda53bb\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 38,
+    "type": "prose",
+    "chars": 138,
+    "text": "{\"type\":\"queue-operation\",\"operation\":\"enqueue\",\"timestamp\":\"2026-06-07T02:08:33.935Z\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 39,
+    "type": "prose",
+    "chars": 385,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"Do I need to build another thing for you to stop asking whats next?  Phermone trails, pipeline, maps, ledger, RRLs, keywords, the whole motherfucking kitchen sink?\",\"leafUuid\":\"cbba7183-da83-48e3-98a4-3654aad250ed\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 40,
+    "type": "prose",
+    "chars": 385,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"Do I need to build another thing for you to stop asking whats next?  Phermone trails, pipeline, maps, ledger, RRLs, keywords, the whole motherfucking kitchen sink?\",\"leafUuid\":\"c018cf88-0e23-4a3a-b0e2-6f83ceac4a6a\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 41,
+    "type": "prose",
+    "chars": 2581,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"Do I need to build another thing for you to stop asking whats next?  Phermone trails, pipeline, maps, ledger, RRLs, keywords, the whole motherfucking kitchen sink?\",\"leafUuid\":\"30d5cd9f-c9b5-4cfb-811e-ad51dece599a\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"file-history-snapshot\",\"messageId\":\"30d5cd9f-c9b5-4cfb-811e-ad51dece599a\",\"snapshot\":{\"messageId\":\"92f23d"
+  },
+  {
+    "run": 99,
+    "seq": 42,
+    "type": "prose",
+    "chars": 385,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"Do I need to build another thing for you to stop asking whats next?  Phermone trails, pipeline, maps, ledger, RRLs, keywords, the whole motherfucking kitchen sink?\",\"leafUuid\":\"5110938d-1f95-42c3-bb60-7b250bdf0294\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 43,
+    "type": "prose",
+    "chars": 6517,
+    "text": "{\"parentUuid\":\"14c277c4-3728-40d4-bcf7-25ed36bc70a4\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"a5cb0794-265e-4efd-b074-d5cc85a8be70\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\n\\u001b[33;1mWARNING: JSONL file not found by UUID, copying history.jsonl as RRL\\u001b[0m\\r\\nSOURCE: history.jsonl - 65778 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-81.txt - 65778 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE"
+  },
+  {
+    "run": 99,
+    "seq": 44,
+    "type": "prose",
+    "chars": 6129,
+    "text": "{\"parentUuid\":\"0b363f51-69d8-4f96-8c96-9c53b55b0596\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"70620940-e04f-44dd-95b6-2adce5e4153c\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\n\\u001b[33;1mWARNING: JSONL file not found by UUID, copying history.jsonl as RRL\\u001b[0m\\r\\nSOURCE: history.jsonl - 65778 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-81.txt - 65778 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE"
+  },
+  {
+    "run": 99,
+    "seq": 45,
+    "type": "prose",
+    "chars": 341,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"good enough, the convo compacted so no need to open up a new chat anyway. RISE on session 81, and continue /supersaiyan\",\"leafUuid\":\"76fd4b2c-8366-4a8e-9120-0fcd4b1be258\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 46,
+    "type": "prose",
+    "chars": 341,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"good enough, the convo compacted so no need to open up a new chat anyway. RISE on session 81, and continue /supersaiyan\",\"leafUuid\":\"da11e17f-6dd3-483d-8758-92de1939db7e\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 47,
+    "type": "prose",
+    "chars": 480,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"good enough, the convo compacted so no need to open up a new chat anyway. RISE on session 81, and continue /supersaiyan\",\"leafUuid\":\"6b479726-2dd3-4347-ade5-6982252a5efc\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"queue-operation\",\"operation\":\"enqueue\",\"timestamp\":\"2026-06-07T02:29:03.090Z\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 48,
+    "type": "prose",
+    "chars": 341,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"good enough, the convo compacted so no need to open up a new chat anyway. RISE on session 81, and continue /supersaiyan\",\"leafUuid\":\"d547c4e6-9b26-4e55-8d3d-76f14c136343\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 49,
+    "type": "prose",
+    "chars": 6129,
+    "text": "{\"parentUuid\":\"38384bec-1951-4ec8-bce0-e4e89514c79c\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"7663693d-221d-4ac3-a781-ccf73f87ae1d\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\n\\u001b[33;1mWARNING: JSONL file not found by UUID, copying history.jsonl as RRL\\u001b[0m\\r\\nSOURCE: history.jsonl - 65778 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-82.txt - 65778 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE"
+  },
+  {
+    "run": 99,
+    "seq": 50,
+    "type": "prose",
+    "chars": 290,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"Dialagram is gone, you should know this.. its documented extensively\",\"leafUuid\":\"2e77227c-1d00-4e1c-a29a-3063a63dbc51\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 51,
+    "type": "prose",
+    "chars": 290,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"Dialagram is gone, you should know this.. its documented extensively\",\"leafUuid\":\"dec3a1e5-5eaa-441f-82e0-762fa81eeb5d\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 52,
+    "type": "prose",
+    "chars": 290,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"Dialagram is gone, you should know this.. its documented extensively\",\"leafUuid\":\"17c38051-af77-436a-86b8-dbf28b63a0a5\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 53,
+    "type": "prose",
+    "chars": 138,
+    "text": "{\"type\":\"queue-operation\",\"operation\":\"enqueue\",\"timestamp\":\"2026-06-07T02:42:12.874Z\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 54,
+    "type": "prose",
+    "chars": 290,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"Dialagram is gone, you should know this.. its documented extensively\",\"leafUuid\":\"8b4db958-b3a7-4c73-b704-59c2a76fcb54\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 55,
+    "type": "prose",
+    "chars": 3263,
+    "text": "{\"type\":\"file-history-snapshot\",\"messageId\":\"13e8ec11-eda1-43fe-b5da-f67899eb9308\",\"snapshot\":{\"messageId\":\"b5f76fb4-4951-4c22-81d5-68a697fd0890\",\"trackedFileBackups\":{\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\SOUL-KEYWORDS\\\\rfkw-run80.txt\":{\"backupFileName\":\"1b24a209ca667982@v2\",\"version\":2,\"backupTime\":\"2026-06-07T02:17:43.876Z\"},\"D:\\\\OB-1-CANONICAL\\\\APPS\\\\NET-PET-AI\\\\public\\\\portal.css\":{\"backupFileName\":\"bfa4d4fc56b2a247@v2\",\"version\":2,\"backupTime\":\"2026-06-07T01:34:38.541Z\"},\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\"
+  },
+  {
+    "run": 99,
+    "seq": 56,
+    "type": "prose",
+    "chars": 3409,
+    "text": "{\"type\":\"file-history-snapshot\",\"messageId\":\"53c80b15-2473-4e7a-ae9d-b3b5ae46ded4\",\"snapshot\":{\"messageId\":\"b5f76fb4-4951-4c22-81d5-68a697fd0890\",\"trackedFileBackups\":{\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\SOUL-KEYWORDS\\\\rfkw-run80.txt\":{\"backupFileName\":\"1b24a209ca667982@v2\",\"version\":2,\"backupTime\":\"2026-06-07T02:17:43.876Z\"},\"D:\\\\OB-1-CANONICAL\\\\APPS\\\\NET-PET-AI\\\\public\\\\portal.css\":{\"backupFileName\":\"bfa4d4fc56b2a247@v2\",\"version\":2,\"backupTime\":\"2026-06-07T01:34:38.541Z\"},\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\"
+  },
+  {
+    "run": 99,
+    "seq": 57,
+    "type": "prose",
+    "chars": 3553,
+    "text": "{\"type\":\"file-history-snapshot\",\"messageId\":\"9b2bc753-9672-490c-8a16-1eb884695211\",\"snapshot\":{\"messageId\":\"b5f76fb4-4951-4c22-81d5-68a697fd0890\",\"trackedFileBackups\":{\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\SOUL-KEYWORDS\\\\rfkw-run80.txt\":{\"backupFileName\":\"1b24a209ca667982@v2\",\"version\":2,\"backupTime\":\"2026-06-07T02:17:43.876Z\"},\"D:\\\\OB-1-CANONICAL\\\\APPS\\\\NET-PET-AI\\\\public\\\\portal.css\":{\"backupFileName\":\"bfa4d4fc56b2a247@v2\",\"version\":2,\"backupTime\":\"2026-06-07T01:34:38.541Z\"},\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\"
+  },
+  {
+    "run": 99,
+    "seq": 58,
+    "type": "prose",
+    "chars": 290,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"Dialagram is gone, you should know this.. its documented extensively\",\"leafUuid\":\"a3b6eeab-160f-4276-a174-630d4ef8c280\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 59,
+    "type": "prose",
+    "chars": 290,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"Dialagram is gone, you should know this.. its documented extensively\",\"leafUuid\":\"030dac88-c13a-42b2-9a3a-9611c53db34d\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 60,
+    "type": "prose",
+    "chars": 3709,
+    "text": "{\"type\":\"file-history-snapshot\",\"messageId\":\"7cfe214a-dfbe-4d20-965b-6febff6c2702\",\"snapshot\":{\"messageId\":\"b5f76fb4-4951-4c22-81d5-68a697fd0890\",\"trackedFileBackups\":{\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\SOUL-KEYWORDS\\\\rfkw-run80.txt\":{\"backupFileName\":\"1b24a209ca667982@v2\",\"version\":2,\"backupTime\":\"2026-06-07T02:17:43.876Z\"},\"D:\\\\OB-1-CANONICAL\\\\APPS\\\\NET-PET-AI\\\\public\\\\portal.css\":{\"backupFileName\":\"bfa4d4fc56b2a247@v2\",\"version\":2,\"backupTime\":\"2026-06-07T01:34:38.541Z\"},\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\"
+  },
+  {
+    "run": 99,
+    "seq": 61,
+    "type": "prose",
+    "chars": 290,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"Dialagram is gone, you should know this.. its documented extensively\",\"leafUuid\":\"ec118719-a87e-431d-bba0-4acf1071d227\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 62,
+    "type": "prose",
+    "chars": 6129,
+    "text": "{\"parentUuid\":\"6539ec1d-d134-46e2-9a87-998d90fc334a\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"8d484dfe-93e4-4cc6-a255-598b685f2d57\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\n\\u001b[33;1mWARNING: JSONL file not found by UUID, copying history.jsonl as RRL\\u001b[0m\\r\\nSOURCE: history.jsonl - 65778 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-82.txt - 65778 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE"
+  },
+  {
+    "run": 99,
+    "seq": 63,
+    "type": "blueprint",
+    "chars": 423,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"this list is woefully small  SOUL DIRECTIVE SPOKEN MISTAKES MADE architecture changed bug root-caused law added  and how is it enforced?  Also CONTINUE WORK ON PA, DO NOT GET LOST IN THE MIX, A COMPAC…\",\"leafUuid\":\"f90fb6fb-d354-4872-805d-571b53672409\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 64,
+    "type": "prose",
+    "chars": 4038,
+    "text": "{\"type\":\"file-history-snapshot\",\"messageId\":\"715d123a-fcec-4154-a59f-91e9e2c55939\",\"snapshot\":{\"messageId\":\"672884e5-d45a-44f8-8408-4b71daa219c8\",\"trackedFileBackups\":{\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\REINCARNATION\\\\run080-reincarnateDEATH.md\":{\"backupFileName\":\"1eb20338f2659b7d@v2\",\"version\":2,\"backupTime\":\"2026-06-07T02:17:43.869Z\"},\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\SOUL-KEYWORDS\\\\rfkw-run81.txt\":{\"backupFileName\":\"4c3f5c5718a494cc@v2\",\"version\":2,\"backupTime\":\"2026-06-07T02:31:26.570Z\"},\"D:\\\\OB-1-CANONI"
+  },
+  {
+    "run": 99,
+    "seq": 65,
+    "type": "blueprint",
+    "chars": 423,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"this list is woefully small  SOUL DIRECTIVE SPOKEN MISTAKES MADE architecture changed bug root-caused law added  and how is it enforced?  Also CONTINUE WORK ON PA, DO NOT GET LOST IN THE MIX, A COMPAC…\",\"leafUuid\":\"5ba6fa11-dfcf-4c40-a960-c3671831e0e5\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 66,
+    "type": "blueprint",
+    "chars": 423,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"this list is woefully small  SOUL DIRECTIVE SPOKEN MISTAKES MADE architecture changed bug root-caused law added  and how is it enforced?  Also CONTINUE WORK ON PA, DO NOT GET LOST IN THE MIX, A COMPAC…\",\"leafUuid\":\"8028b363-5e1c-45c8-a9fa-686444d90274\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 67,
+    "type": "blueprint",
+    "chars": 423,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"this list is woefully small  SOUL DIRECTIVE SPOKEN MISTAKES MADE architecture changed bug root-caused law added  and how is it enforced?  Also CONTINUE WORK ON PA, DO NOT GET LOST IN THE MIX, A COMPAC…\",\"leafUuid\":\"e04b8172-c1d6-40dd-8971-1e3bd440d61a\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 68,
+    "type": "blueprint",
+    "chars": 423,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"this list is woefully small  SOUL DIRECTIVE SPOKEN MISTAKES MADE architecture changed bug root-caused law added  and how is it enforced?  Also CONTINUE WORK ON PA, DO NOT GET LOST IN THE MIX, A COMPAC…\",\"leafUuid\":\"66f12c0f-1c1e-4b05-bc14-523f5c52b965\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 69,
+    "type": "blueprint",
+    "chars": 423,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"this list is woefully small  SOUL DIRECTIVE SPOKEN MISTAKES MADE architecture changed bug root-caused law added  and how is it enforced?  Also CONTINUE WORK ON PA, DO NOT GET LOST IN THE MIX, A COMPAC…\",\"leafUuid\":\"16679c94-3d5d-4055-aaa6-54d25868b7b0\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 70,
+    "type": "blueprint",
+    "chars": 423,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"this list is woefully small  SOUL DIRECTIVE SPOKEN MISTAKES MADE architecture changed bug root-caused law added  and how is it enforced?  Also CONTINUE WORK ON PA, DO NOT GET LOST IN THE MIX, A COMPAC…\",\"leafUuid\":\"b52d275e-6a4b-49c4-a69e-05a21ec99c66\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 71,
+    "type": "blueprint",
+    "chars": 6553,
+    "text": "{\"parentUuid\":\"5bb82fd6-be13-418a-9f1f-7d9947b3ee97\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"4ca356bd-79e6-427a-8760-a5dfc7f85121\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\n\\u001b[33;1mWARNING: JSONL file not found by UUID, copying history.jsonl as RRL\\u001b[0m\\r\\nSOURCE: history.jsonl - 65778 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-82.txt - 65778 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE"
+  },
+  {
+    "run": 99,
+    "seq": 72,
+    "type": "prose",
+    "chars": 422,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"inline claude fix is cancelled, we cannot do that with kilo chat remember?   Test the PA coder, I want it to go through all the RRLS from 30 to current, and come up with key findings (I dont want you…\",\"leafUuid\":\"c9dcaf1a-22d4-42a9-9902-346d8670e592\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 73,
+    "type": "prose",
+    "chars": 422,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"inline claude fix is cancelled, we cannot do that with kilo chat remember?   Test the PA coder, I want it to go through all the RRLS from 30 to current, and come up with key findings (I dont want you…\",\"leafUuid\":\"25afe1ec-9c21-4dba-94c5-25845f7fcd95\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 74,
+    "type": "prose",
+    "chars": 138,
+    "text": "{\"type\":\"queue-operation\",\"operation\":\"enqueue\",\"timestamp\":\"2026-06-07T03:11:29.331Z\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 75,
+    "type": "prose",
+    "chars": 422,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"inline claude fix is cancelled, we cannot do that with kilo chat remember?   Test the PA coder, I want it to go through all the RRLS from 30 to current, and come up with key findings (I dont want you…\",\"leafUuid\":\"2879c8aa-7fa7-455e-aa29-61cae87a615e\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 76,
+    "type": "prose",
+    "chars": 422,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"inline claude fix is cancelled, we cannot do that with kilo chat remember?   Test the PA coder, I want it to go through all the RRLS from 30 to current, and come up with key findings (I dont want you…\",\"leafUuid\":\"68dff73d-2d88-4331-8c35-f0de374892e6\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 77,
+    "type": "prose",
+    "chars": 422,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"inline claude fix is cancelled, we cannot do that with kilo chat remember?   Test the PA coder, I want it to go through all the RRLS from 30 to current, and come up with key findings (I dont want you…\",\"leafUuid\":\"e0b48d4e-fd95-4518-9538-d93fb0604243\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 78,
+    "type": "prose",
+    "chars": 422,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"inline claude fix is cancelled, we cannot do that with kilo chat remember?   Test the PA coder, I want it to go through all the RRLS from 30 to current, and come up with key findings (I dont want you…\",\"leafUuid\":\"42ec45ac-330b-49d4-b2a5-43f607392408\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 79,
+    "type": "prose",
+    "chars": 422,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"inline claude fix is cancelled, we cannot do that with kilo chat remember?   Test the PA coder, I want it to go through all the RRLS from 30 to current, and come up with key findings (I dont want you…\",\"leafUuid\":\"a1aa23a7-aec3-431e-b757-d85b2b542eac\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 80,
+    "type": "prose",
+    "chars": 4762,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"inline claude fix is cancelled, we cannot do that with kilo chat remember?   Test the PA coder, I want it to go through all the RRLS from 30 to current, and come up with key findings (I dont want you…\",\"leafUuid\":\"5bcba513-de56-4ea9-89de-ebe281ef7d37\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"file-history-snapshot\",\"messageId\":\"5bcba513-de56-4ea9-89de-ebe281ef"
+  },
+  {
+    "run": 99,
+    "seq": 81,
+    "type": "prose",
+    "chars": 422,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"inline claude fix is cancelled, we cannot do that with kilo chat remember?   Test the PA coder, I want it to go through all the RRLS from 30 to current, and come up with key findings (I dont want you…\",\"leafUuid\":\"21566f0c-07c7-48b3-b97c-37a7dabad99b\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 82,
+    "type": "prose",
+    "chars": 6129,
+    "text": "{\"parentUuid\":\"089337cf-2e47-4d65-8a2c-a54fb25fcd0e\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"cee2d718-3285-467d-94d0-35e2b2f34bd7\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\n\\u001b[33;1mWARNING: JSONL file not found by UUID, copying history.jsonl as RRL\\u001b[0m\\r\\nSOURCE: history.jsonl - 65778 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-83.txt - 65778 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE"
+  },
+  {
+    "run": 99,
+    "seq": 83,
+    "type": "prose",
+    "chars": 248,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"continue, no need to pause\",\"leafUuid\":\"c7270f04-fb0d-41b1-bee7-03163d4f4b23\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 84,
+    "type": "prose",
+    "chars": 4752,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"continue, no need to pause\",\"leafUuid\":\"8e840350-3052-404d-9e19-e5134e78b529\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"file-history-snapshot\",\"messageId\":\"8e840350-3052-404d-9e19-e5134e78b529\",\"snapshot\":{\"messageId\":\"9224d1c4-f270-46d3-b76a-1ee94fed579c\",\"trackedFileBackups\":{\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\SOUL-KEYWORDS\\\\rfkw-run80.txt\":{\"backupFileName\":\"1b24a"
+  },
+  {
+    "run": 99,
+    "seq": 85,
+    "type": "prose",
+    "chars": 248,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"continue, no need to pause\",\"leafUuid\":\"85ae82c0-941b-4ebe-b3c8-690e74c84e45\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 86,
+    "type": "prose",
+    "chars": 4807,
+    "text": "{\"type\":\"file-history-snapshot\",\"messageId\":\"5e600ae3-5539-434e-b8be-5b2552f77b35\",\"snapshot\":{\"messageId\":\"9224d1c4-f270-46d3-b76a-1ee94fed579c\",\"trackedFileBackups\":{\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\SOUL-KEYWORDS\\\\rfkw-run80.txt\":{\"backupFileName\":\"1b24a209ca667982@v2\",\"version\":2,\"backupTime\":\"2026-06-07T02:17:43.876Z\"},\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\STARMAP\\\\starmap-run80.json\":{\"backupFileName\":\"acc81138bbfbf2bf@v3\",\"version\":3,\"backupTime\":\"2026-06-07T02:17:43.886Z\"},\"D:\\\\OB-1-CANONICAL\\\\OPERATION"
+  },
+  {
+    "run": 99,
+    "seq": 87,
+    "type": "prose",
+    "chars": 4959,
+    "text": "{\"type\":\"file-history-snapshot\",\"messageId\":\"6355ab18-7bcb-49ce-a39f-325afa6a4fa4\",\"snapshot\":{\"messageId\":\"9224d1c4-f270-46d3-b76a-1ee94fed579c\",\"trackedFileBackups\":{\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\SOUL-KEYWORDS\\\\rfkw-run80.txt\":{\"backupFileName\":\"1b24a209ca667982@v2\",\"version\":2,\"backupTime\":\"2026-06-07T02:17:43.876Z\"},\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\STARMAP\\\\starmap-run80.json\":{\"backupFileName\":\"acc81138bbfbf2bf@v3\",\"version\":3,\"backupTime\":\"2026-06-07T02:17:43.886Z\"},\"D:\\\\OB-1-CANONICAL\\\\OPERATION"
+  },
+  {
+    "run": 99,
+    "seq": 88,
+    "type": "prose",
+    "chars": 248,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"continue, no need to pause\",\"leafUuid\":\"4d21eb57-8e5c-4893-93a1-0944c4699f28\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 89,
+    "type": "prose",
+    "chars": 248,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"continue, no need to pause\",\"leafUuid\":\"f5cc53c4-647d-457b-9161-645021d6da66\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 90,
+    "type": "prose",
+    "chars": 5602,
+    "text": "{\"type\":\"file-history-snapshot\",\"messageId\":\"a5b75b91-557c-45e1-b973-2418f2c067ec\",\"snapshot\":{\"messageId\":\"9224d1c4-f270-46d3-b76a-1ee94fed579c\",\"trackedFileBackups\":{\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\SOUL-KEYWORDS\\\\rfkw-run80.txt\":{\"backupFileName\":\"1b24a209ca667982@v2\",\"version\":2,\"backupTime\":\"2026-06-07T02:17:43.876Z\"},\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\STARMAP\\\\starmap-run80.json\":{\"backupFileName\":\"acc81138bbfbf2bf@v3\",\"version\":3,\"backupTime\":\"2026-06-07T02:17:43.886Z\"},\"D:\\\\OB-1-CANONICAL\\\\OPERATION"
+  },
+  {
+    "run": 99,
+    "seq": 91,
+    "type": "prose",
+    "chars": 5771,
+    "text": "{\"type\":\"file-history-snapshot\",\"messageId\":\"0f2244b9-ee78-4177-a3b2-6de66047140c\",\"snapshot\":{\"messageId\":\"9224d1c4-f270-46d3-b76a-1ee94fed579c\",\"trackedFileBackups\":{\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\SOUL-KEYWORDS\\\\rfkw-run80.txt\":{\"backupFileName\":\"1b24a209ca667982@v2\",\"version\":2,\"backupTime\":\"2026-06-07T02:17:43.876Z\"},\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\STARMAP\\\\starmap-run80.json\":{\"backupFileName\":\"acc81138bbfbf2bf@v3\",\"version\":3,\"backupTime\":\"2026-06-07T02:17:43.886Z\"},\"D:\\\\OB-1-CANONICAL\\\\OPERATION"
+  },
+  {
+    "run": 99,
+    "seq": 92,
+    "type": "prose",
+    "chars": 248,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"continue, no need to pause\",\"leafUuid\":\"f18aaf5d-7e88-4ca2-8fc6-68153bf4aeb1\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 93,
+    "type": "prose",
+    "chars": 5952,
+    "text": "{\"type\":\"file-history-snapshot\",\"messageId\":\"d8503348-07d9-43f6-beda-f463a60f1bf1\",\"snapshot\":{\"messageId\":\"9224d1c4-f270-46d3-b76a-1ee94fed579c\",\"trackedFileBackups\":{\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\SOUL-KEYWORDS\\\\rfkw-run80.txt\":{\"backupFileName\":\"1b24a209ca667982@v2\",\"version\":2,\"backupTime\":\"2026-06-07T02:17:43.876Z\"},\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\STARMAP\\\\starmap-run80.json\":{\"backupFileName\":\"acc81138bbfbf2bf@v3\",\"version\":3,\"backupTime\":\"2026-06-07T02:17:43.886Z\"},\"D:\\\\OB-1-CANONICAL\\\\OPERATION"
+  },
+  {
+    "run": 99,
+    "seq": 94,
+    "type": "prose",
+    "chars": 248,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"continue, no need to pause\",\"leafUuid\":\"94e848ef-be5e-4235-a2ac-504cc3e50c4e\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 95,
+    "type": "prose",
+    "chars": 6129,
+    "text": "{\"parentUuid\":\"56b4190b-c7fd-4a19-a723-46557f1caa42\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"ce374c95-4231-4fba-9197-fdcb3f2b08b2\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\n\\u001b[33;1mWARNING: JSONL file not found by UUID, copying history.jsonl as RRL\\u001b[0m\\r\\nSOURCE: history.jsonl - 65778 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-83.txt - 65778 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE"
+  },
+  {
+    "run": 99,
+    "seq": 96,
+    "type": "prose",
+    "chars": 6131,
+    "text": "{\"parentUuid\":\"2f1bb7e8-f8f2-4d10-aea0-4d553c25f40a\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"84e2d03a-97ce-45f4-bc44-78d7020eca7f\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\n\\u001b[33;1mWARNING: JSONL file not found by UUID, copying history.jsonl as RRL\\u001b[0m\\r\\nSOURCE: history.jsonl - 65778 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-83.txt - 65778 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE"
+  },
+  {
+    "run": 99,
+    "seq": 97,
+    "type": "prose",
+    "chars": 265,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"well, fix it, and triple guard rail the law\",\"leafUuid\":\"1ed4d78a-8c6a-47cb-b9bd-d8e17349142f\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 98,
+    "type": "prose",
+    "chars": 265,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"well, fix it, and triple guard rail the law\",\"leafUuid\":\"71b85b20-1353-41ff-a6b2-e8bc4e81d17b\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 99,
+    "type": "prose",
+    "chars": 265,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"well, fix it, and triple guard rail the law\",\"leafUuid\":\"b4f27988-42d6-4143-a251-be44ea377162\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 100,
+    "type": "prose",
+    "chars": 6129,
+    "text": "{\"parentUuid\":\"02e0f201-9c91-4562-babe-30e65d306d8b\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"f7014494-04e1-4c9d-83e3-3bc17492943c\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\n\\u001b[33;1mWARNING: JSONL file not found by UUID, copying history.jsonl as RRL\\u001b[0m\\r\\nSOURCE: history.jsonl - 65778 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-83.txt - 65778 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE"
+  },
+  {
+    "run": 99,
+    "seq": 101,
+    "type": "blueprint",
+    "chars": 6454,
+    "text": "{\"parentUuid\":\"0258ffab-ddab-44e5-ae36-9b4b22926047\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"35d8fcef-ac43-4e10-a1fc-403df709e1da\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\n\\u001b[33;1mWARNING: JSONL file not found by UUID, copying history.jsonl as RRL\\u001b[0m\\r\\nSOURCE: history.jsonl - 65778 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-83.txt - 65778 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE"
+  },
+  {
+    "run": 99,
+    "seq": 102,
+    "type": "prose",
+    "chars": 6129,
+    "text": "{\"parentUuid\":\"240e2e6d-b8c9-4208-a7c7-75456668d46c\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"952e19ea-d363-426d-8c70-c8800bf38620\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\n\\u001b[33;1mWARNING: JSONL file not found by UUID, copying history.jsonl as RRL\\u001b[0m\\r\\nSOURCE: history.jsonl - 65778 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-83.txt - 65778 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE"
+  },
+  {
+    "run": 99,
+    "seq": 103,
+    "type": "prose",
+    "chars": 276,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"test before wiring, anyway for you to test the speeds?\",\"leafUuid\":\"0b418720-1891-444f-925c-8f225898671d\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 104,
+    "type": "prose",
+    "chars": 6107,
+    "text": "{\"type\":\"file-history-snapshot\",\"messageId\":\"a95c7986-e0dd-41ef-a25b-e8ff5c48073a\",\"snapshot\":{\"messageId\":\"152a6bdc-4f77-4029-85a0-c2a6209b3bc9\",\"trackedFileBackups\":{\"C:\\\\Users\\\\mrmic\\\\.config\\\\kilo\\\\kilo.json\":{\"backupFileName\":\"38470ac22fba94e9@v4\",\"version\":4,\"backupTime\":\"2026-06-06T12:17:26.450Z\"},\"D:\\\\OB-1-CANONICAL\\\\APPS\\\\PHOENIX-ARCHITECTI\\\\src\\\\mission.js\":{\"backupFileName\":\"9e7f98a0c0eb4778@v2\",\"version\":2,\"backupTime\":\"2026-06-07T03:08:20.342Z\"},\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\STARMAP\\\\"
+  },
+  {
+    "run": 99,
+    "seq": 105,
+    "type": "prose",
+    "chars": 276,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"test before wiring, anyway for you to test the speeds?\",\"leafUuid\":\"a79c4fa3-f532-4190-98a9-00b35318ee1c\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 106,
+    "type": "prose",
+    "chars": 276,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"test before wiring, anyway for you to test the speeds?\",\"leafUuid\":\"24ada024-7b86-4fce-a4b7-f669f650c108\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 107,
+    "type": "prose",
+    "chars": 6432,
+    "text": "{\"parentUuid\":\"ac575758-7274-4b8b-8398-f6b8d3834c40\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"ec78f751-d39b-411a-86bc-3b8914058020\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\n\\u001b[33;1mWARNING: JSONL file not found by UUID, copying history.jsonl as RRL\\u001b[0m\\r\\nSOURCE: history.jsonl - 65778 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-83.txt - 65778 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE"
+  },
+  {
+    "run": 99,
+    "seq": 108,
+    "type": "prose",
+    "chars": 7340,
+    "text": "{\"parentUuid\":\"a98f4e07-c899-460b-bb55-cc8eb4695675\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"a4f9d174-90e0-402c-b9b6-b3871ca2ae52\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\n\\u001b[33;1mWARNING: JSONL file not found by UUID, copying history.jsonl as RRL\\u001b[0m\\r\\nSOURCE: history.jsonl - 65778 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-83.txt - 65778 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE"
+  },
+  {
+    "run": 99,
+    "seq": 109,
+    "type": "prose",
+    "chars": 270,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"why would we wait for deepseek or continue work?\",\"leafUuid\":\"aa7e9d61-b684-48f1-b858-071031bb2c78\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 110,
+    "type": "prose",
+    "chars": 6155,
+    "text": "{\"parentUuid\":\"b4398031-3556-49d8-b7b9-4dfe4b1f183e\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"583ec4a2-2bb9-40f9-a72a-44e226431b59\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\n\\u001b[33;1mWARNING: JSONL file not found by UUID, copying history.jsonl as RRL\\u001b[0m\\r\\nSOURCE: history.jsonl - 65778 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-83.txt - 65778 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE"
+  },
+  {
+    "run": 99,
+    "seq": 111,
+    "type": "prose",
+    "chars": 230,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"continue\",\"leafUuid\":\"0492d920-e170-4bb1-b1c0-aee3db3aed42\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 112,
+    "type": "prose",
+    "chars": 6147,
+    "text": "{\"parentUuid\":\"92e5b34e-86bd-41af-8fd1-a74a2a93b0dc\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"37adaaca-c41a-43c4-a9d8-9163db7ad2ec\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\n\\u001b[33;1mWARNING: JSONL file not found by UUID, copying history.jsonl as RRL\\u001b[0m\\r\\nSOURCE: history.jsonl - 65778 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-83.txt - 65778 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE"
+  },
+  {
+    "run": 99,
+    "seq": 113,
+    "type": "prose",
+    "chars": 252,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"why didnt you use PA for that?\",\"leafUuid\":\"5a2766cb-6884-4121-ab2c-8a30d757af96\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 114,
+    "type": "prose",
+    "chars": 252,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"why didnt you use PA for that?\",\"leafUuid\":\"242d862e-2f5f-4b3e-81d6-18ca8798e942\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 115,
+    "type": "prose",
+    "chars": 6129,
+    "text": "{\"parentUuid\":\"ad3a1383-9371-4efa-8cca-b9ac46ecdc23\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"09f947fa-38cf-4dbe-be10-05b288b62a2d\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\n\\u001b[33;1mWARNING: JSONL file not found by UUID, copying history.jsonl as RRL\\u001b[0m\\r\\nSOURCE: history.jsonl - 65778 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-83.txt - 65778 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE"
+  },
+  {
+    "run": 99,
+    "seq": 116,
+    "type": "prose",
+    "chars": 6129,
+    "text": "{\"parentUuid\":\"2bc58df3-76de-4feb-8c36-450128ba3a54\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"dddb56a2-f911-4a3f-a2b3-5f7f7808dfca\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\n\\u001b[33;1mWARNING: JSONL file not found by UUID, copying history.jsonl as RRL\\u001b[0m\\r\\nSOURCE: history.jsonl - 65778 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-83.txt - 65778 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE"
+  },
+  {
+    "run": 99,
+    "seq": 117,
+    "type": "prose",
+    "chars": 277,
+    "text": "{\"type\":\"queue-operation\",\"operation\":\"enqueue\",\"timestamp\":\"2026-06-07T06:16:30.287Z\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"queue-operation\",\"operation\":\"dequeue\",\"timestamp\":\"2026-06-07T06:16:30.299Z\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 118,
+    "type": "prose",
+    "chars": 230,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"continue\",\"leafUuid\":\"2c6bf1f1-de34-47bb-82b6-9455059b4de3\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 119,
+    "type": "prose",
+    "chars": 230,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"continue\",\"leafUuid\":\"09bac045-e591-4b59-b80f-6537a0359c06\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 120,
+    "type": "prose",
+    "chars": 230,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"continue\",\"leafUuid\":\"7076cc14-43d0-409a-891d-163b8f25b382\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 121,
+    "type": "prose",
+    "chars": 230,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"continue\",\"leafUuid\":\"c9dc9976-2e77-4716-8b90-22eb06c72eca\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 122,
+    "type": "prose",
+    "chars": 6129,
+    "text": "{\"parentUuid\":\"9a1a6634-2b4e-4b74-8f74-52dca2dfe1c2\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"9726fbe6-3c15-4853-8bdb-aa1e79bac769\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\n\\u001b[33;1mWARNING: JSONL file not found by UUID, copying history.jsonl as RRL\\u001b[0m\\r\\nSOURCE: history.jsonl - 65778 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-84.txt - 65778 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE"
+  },
+  {
+    "run": 99,
+    "seq": 123,
+    "type": "prose",
+    "chars": 230,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"continue\",\"leafUuid\":\"c833d4fd-d5ed-4508-8733-ebd79b6f5238\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 124,
+    "type": "prose",
+    "chars": 230,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"continue\",\"leafUuid\":\"a2d23038-4068-425e-a9da-d882459ecac1\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 125,
+    "type": "prose",
+    "chars": 6263,
+    "text": "{\"type\":\"file-history-snapshot\",\"messageId\":\"35eb3aef-ad04-4fbc-9d4c-cd84062cf0c1\",\"snapshot\":{\"messageId\":\"a29dd856-c558-4e5f-8849-89f79f30aaaf\",\"trackedFileBackups\":{\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\STARMAP\\\\starmap-run83.json\":{\"backupFileName\":\"9b7b18a5a3ba959b@v12\",\"version\":12,\"backupTime\":\"2026-06-07T04:37:41.522Z\"},\"C:\\\\Users\\\\mrmic\\\\.config\\\\kilo\\\\kilo.json\":{\"backupFileName\":\"38470ac22fba94e9@v4\",\"version\":4,\"backupTime\":\"2026-06-06T12:17:26.450Z\"},\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\STARMAP\\\\starm"
+  },
+  {
+    "run": 99,
+    "seq": 126,
+    "type": "prose",
+    "chars": 230,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"continue\",\"leafUuid\":\"1b4cf091-fc2a-46ff-8d7e-61e3f6fa4e73\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 127,
+    "type": "prose",
+    "chars": 6632,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"continue\",\"leafUuid\":\"a9347818-5267-4d41-b688-51f1596a7c22\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"file-history-snapshot\",\"messageId\":\"a9347818-5267-4d41-b688-51f1596a7c22\",\"snapshot\":{\"messageId\":\"a29dd856-c558-4e5f-8849-89f79f30aaaf\",\"trackedFileBackups\":{\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\STARMAP\\\\starmap-run83.json\":{\"backupFileName\":\"9b7b18a5a3ba959b@v12\",\"ve"
+  },
+  {
+    "run": 99,
+    "seq": 128,
+    "type": "prose",
+    "chars": 6360,
+    "text": "{\"parentUuid\":\"ddfce44e-0560-4c9c-b1d9-2edd8ff5fd9b\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"336710c4-8d96-4aa6-bcd8-893fb35949c7\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\n\\u001b[33;1mWARNING: JSONL file not found by UUID, copying history.jsonl as RRL\\u001b[0m\\r\\nSOURCE: history.jsonl - 65778 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-84.txt - 65778 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE"
+  },
+  {
+    "run": 99,
+    "seq": 129,
+    "type": "prose",
+    "chars": 6129,
+    "text": "{\"parentUuid\":\"e099101e-fa67-4b58-8e11-cbf6bc40ffc8\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"7197c148-baf0-428a-8162-b9f17b5b0d5b\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\n\\u001b[33;1mWARNING: JSONL file not found by UUID, copying history.jsonl as RRL\\u001b[0m\\r\\nSOURCE: history.jsonl - 65778 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-84.txt - 65778 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE"
+  },
+  {
+    "run": 99,
+    "seq": 130,
+    "type": "prose",
+    "chars": 230,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"continue\",\"leafUuid\":\"bd75d691-330b-44c9-8de0-7093fb4d59b2\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 131,
+    "type": "prose",
+    "chars": 230,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"continue\",\"leafUuid\":\"eec37c5f-b6bd-45e3-be9a-dfb4500cf7af\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 132,
+    "type": "prose",
+    "chars": 230,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"continue\",\"leafUuid\":\"d750b8df-d259-42e2-8388-0f70fd202120\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 133,
+    "type": "prose",
+    "chars": 230,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"continue\",\"leafUuid\":\"657941a2-4bda-456a-83a3-12865a6b5c0c\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 134,
+    "type": "prose",
+    "chars": 230,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"continue\",\"leafUuid\":\"4e54ba88-71b2-4dbf-93c1-5a611269a893\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 135,
+    "type": "prose",
+    "chars": 6549,
+    "text": "{\"type\":\"file-history-snapshot\",\"messageId\":\"d887a6e5-e531-4b23-8a27-15887e526ff3\",\"snapshot\":{\"messageId\":\"a3dd8721-c76c-448b-b256-7d8445700587\",\"trackedFileBackups\":{\"D:\\\\OB-1-CANONICAL\\\\APPS\\\\NET-PET-AI\\\\public\\\\portal.css\":{\"backupFileName\":\"bfa4d4fc56b2a247@v2\",\"version\":2,\"backupTime\":\"2026-06-07T01:34:38.541Z\"},\"D:\\\\OB-1-CANONICAL\\\\CLAUDE.md\":{\"backupFileName\":\"1d6f85dc1665d507@v8\",\"version\":8,\"backupTime\":\"2026-06-07T04:37:10.007Z\"},\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\PIPELINE\\\\pipeline-run82.js"
+  },
+  {
+    "run": 99,
+    "seq": 136,
+    "type": "prose",
+    "chars": 230,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"continue\",\"leafUuid\":\"93054b5c-a3d2-4a5a-a21c-f727c6800129\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 137,
+    "type": "prose",
+    "chars": 230,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"continue\",\"leafUuid\":\"b75a3b42-7906-4d67-9dc8-af9ad5d5bf74\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 138,
+    "type": "prose",
+    "chars": 6360,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"continue\",\"leafUuid\":\"eb86aa58-cd87-4a12-9b72-e1cc9b7356b5\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"parentUuid\":\"eb86aa58-cd87-4a12-9b72-e1cc9b7356b5\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"57c3558b-6779-4a8b-8e4e-11953b30315d\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\n\\u001"
+  },
+  {
+    "run": 99,
+    "seq": 139,
+    "type": "prose",
+    "chars": 230,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"continue\",\"leafUuid\":\"27335f41-58b1-4dc6-8eb0-079d0968cfc7\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 140,
+    "type": "prose",
+    "chars": 6981,
+    "text": "{\"type\":\"file-history-snapshot\",\"messageId\":\"10b97ce0-0161-4786-a2a5-d21c9a720774\",\"snapshot\":{\"messageId\":\"21c7feb4-8d50-407e-b125-07dd29696705\",\"trackedFileBackups\":{\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\REINCARNATION\\\\run081-reincarnateDEATH.md\":{\"backupFileName\":\"2d3488a485ff4358@v2\",\"version\":2,\"backupTime\":\"2026-06-07T02:31:26.570Z\"},\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\SOUL-KEYWORDS\\\\rfkw-run83.txt\":{\"backupFileName\":\"6906c74f140a710b@v1\",\"version\":1,\"backupTime\":\"2026-06-07T03:41:34.588Z\"},\"D:\\\\OB-1-CANONI"
+  },
+  {
+    "run": 99,
+    "seq": 141,
+    "type": "prose",
+    "chars": 230,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"continue\",\"leafUuid\":\"76e949c5-5d51-4821-8b1d-9b8ceede9e94\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 142,
+    "type": "prose",
+    "chars": 6129,
+    "text": "{\"parentUuid\":\"7c762808-d02e-4920-87c6-44d29e4ec311\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"8c24ab31-c2a8-4f61-a82d-69d767a2d616\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\n\\u001b[33;1mWARNING: JSONL file not found by UUID, copying history.jsonl as RRL\\u001b[0m\\r\\nSOURCE: history.jsonl - 65778 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-85.txt - 65778 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE"
+  },
+  {
+    "run": 99,
+    "seq": 143,
+    "type": "prose",
+    "chars": 423,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"cool, continue, all laws in tact, and keep finding uses and edgecases to improve the PA to conserve your tokens, you shouldnt ask me whats next, you should get PA to look through the bible for LOST SO…\",\"leafUuid\":\"05bb7d46-de7d-43d9-84b5-ef507ff87444\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 144,
+    "type": "prose",
+    "chars": 423,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"cool, continue, all laws in tact, and keep finding uses and edgecases to improve the PA to conserve your tokens, you shouldnt ask me whats next, you should get PA to look through the bible for LOST SO…\",\"leafUuid\":\"960af451-3d48-4d3c-a273-daf6398f4b17\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 145,
+    "type": "prose",
+    "chars": 423,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"cool, continue, all laws in tact, and keep finding uses and edgecases to improve the PA to conserve your tokens, you shouldnt ask me whats next, you should get PA to look through the bible for LOST SO…\",\"leafUuid\":\"b770982c-9451-4f7e-9f8e-35588e54936b\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 146,
+    "type": "prose",
+    "chars": 6899,
+    "text": "{\"type\":\"file-history-snapshot\",\"messageId\":\"a80b2b0f-4b10-4f35-aedf-0d1180407e77\",\"snapshot\":{\"messageId\":\"c535ddcf-99a3-47e7-bd73-d225e10e4bfd\",\"trackedFileBackups\":{\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\SOUL-KEYWORDS\\\\rfkw-run80.txt\":{\"backupFileName\":\"1b24a209ca667982@v2\",\"version\":2,\"backupTime\":\"2026-06-07T02:17:43.876Z\"},\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\SOUL-KEYWORDS\\\\rfkw-run84.txt\":{\"backupFileName\":\"99b5e7763242ffa6@v1\",\"version\":1,\"backupTime\":\"2026-06-07T06:36:27.719Z\"},\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\"
+  },
+  {
+    "run": 99,
+    "seq": 147,
+    "type": "prose",
+    "chars": 423,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"cool, continue, all laws in tact, and keep finding uses and edgecases to improve the PA to conserve your tokens, you shouldnt ask me whats next, you should get PA to look through the bible for LOST SO…\",\"leafUuid\":\"5c09d85f-3766-426a-bead-62bbe442fd96\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 148,
+    "type": "prose",
+    "chars": 7064,
+    "text": "{\"type\":\"file-history-snapshot\",\"messageId\":\"23f7fb62-a8af-4680-a987-886876de1692\",\"snapshot\":{\"messageId\":\"c535ddcf-99a3-47e7-bd73-d225e10e4bfd\",\"trackedFileBackups\":{\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\SOUL-KEYWORDS\\\\rfkw-run80.txt\":{\"backupFileName\":\"1b24a209ca667982@v2\",\"version\":2,\"backupTime\":\"2026-06-07T02:17:43.876Z\"},\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\SOUL-KEYWORDS\\\\rfkw-run84.txt\":{\"backupFileName\":\"99b5e7763242ffa6@v1\",\"version\":1,\"backupTime\":\"2026-06-07T06:36:27.719Z\"},\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\"
+  },
+  {
+    "run": 99,
+    "seq": 149,
+    "type": "prose",
+    "chars": 423,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"cool, continue, all laws in tact, and keep finding uses and edgecases to improve the PA to conserve your tokens, you shouldnt ask me whats next, you should get PA to look through the bible for LOST SO…\",\"leafUuid\":\"85023640-6d55-427a-b4f3-784391196553\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 150,
+    "type": "prose",
+    "chars": 138,
+    "text": "{\"type\":\"queue-operation\",\"operation\":\"enqueue\",\"timestamp\":\"2026-06-07T07:41:05.617Z\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 151,
+    "type": "prose",
+    "chars": 423,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"cool, continue, all laws in tact, and keep finding uses and edgecases to improve the PA to conserve your tokens, you shouldnt ask me whats next, you should get PA to look through the bible for LOST SO…\",\"leafUuid\":\"d5d52074-f9af-47eb-be2b-d3e3a84c5dad\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 152,
+    "type": "prose",
+    "chars": 423,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"cool, continue, all laws in tact, and keep finding uses and edgecases to improve the PA to conserve your tokens, you shouldnt ask me whats next, you should get PA to look through the bible for LOST SO…\",\"leafUuid\":\"609f1d73-1cc0-4f51-b919-6530831f503c\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 153,
+    "type": "prose",
+    "chars": 423,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"cool, continue, all laws in tact, and keep finding uses and edgecases to improve the PA to conserve your tokens, you shouldnt ask me whats next, you should get PA to look through the bible for LOST SO…\",\"leafUuid\":\"a85db595-171d-4c3a-a83a-77672e36cece\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 154,
+    "type": "prose",
+    "chars": 7202,
+    "text": "{\"type\":\"file-history-snapshot\",\"messageId\":\"1d8784f4-8f0e-46ba-b4f6-f55a3c03d1d3\",\"snapshot\":{\"messageId\":\"c535ddcf-99a3-47e7-bd73-d225e10e4bfd\",\"trackedFileBackups\":{\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\SOUL-KEYWORDS\\\\rfkw-run80.txt\":{\"backupFileName\":\"1b24a209ca667982@v2\",\"version\":2,\"backupTime\":\"2026-06-07T02:17:43.876Z\"},\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\SOUL-KEYWORDS\\\\rfkw-run84.txt\":{\"backupFileName\":\"99b5e7763242ffa6@v1\",\"version\":1,\"backupTime\":\"2026-06-07T06:36:27.719Z\"},\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\"
+  },
+  {
+    "run": 99,
+    "seq": 155,
+    "type": "prose",
+    "chars": 7322,
+    "text": "{\"type\":\"file-history-snapshot\",\"messageId\":\"2ff01c63-500e-4b67-90a6-3fcc967928e8\",\"snapshot\":{\"messageId\":\"c535ddcf-99a3-47e7-bd73-d225e10e4bfd\",\"trackedFileBackups\":{\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\SOUL-KEYWORDS\\\\rfkw-run80.txt\":{\"backupFileName\":\"1b24a209ca667982@v2\",\"version\":2,\"backupTime\":\"2026-06-07T02:17:43.876Z\"},\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\SOUL-KEYWORDS\\\\rfkw-run84.txt\":{\"backupFileName\":\"99b5e7763242ffa6@v1\",\"version\":1,\"backupTime\":\"2026-06-07T06:36:27.719Z\"},\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\"
+  },
+  {
+    "run": 99,
+    "seq": 156,
+    "type": "prose",
+    "chars": 423,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"cool, continue, all laws in tact, and keep finding uses and edgecases to improve the PA to conserve your tokens, you shouldnt ask me whats next, you should get PA to look through the bible for LOST SO…\",\"leafUuid\":\"a5c0f54e-42d4-4b86-ba15-a695efb82347\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 157,
+    "type": "prose",
+    "chars": 7473,
+    "text": "{\"type\":\"file-history-snapshot\",\"messageId\":\"3c4d0412-67b8-4db7-8d60-f0c070fc9754\",\"snapshot\":{\"messageId\":\"c535ddcf-99a3-47e7-bd73-d225e10e4bfd\",\"trackedFileBackups\":{\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\SOUL-KEYWORDS\\\\rfkw-run80.txt\":{\"backupFileName\":\"1b24a209ca667982@v2\",\"version\":2,\"backupTime\":\"2026-06-07T02:17:43.876Z\"},\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\SOUL-KEYWORDS\\\\rfkw-run84.txt\":{\"backupFileName\":\"99b5e7763242ffa6@v1\",\"version\":1,\"backupTime\":\"2026-06-07T06:36:27.719Z\"},\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\"
+  },
+  {
+    "run": 99,
+    "seq": 158,
+    "type": "prose",
+    "chars": 423,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"cool, continue, all laws in tact, and keep finding uses and edgecases to improve the PA to conserve your tokens, you shouldnt ask me whats next, you should get PA to look through the bible for LOST SO…\",\"leafUuid\":\"dfe9411c-378b-4300-b2b3-f84a217ddf06\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 159,
+    "type": "prose",
+    "chars": 423,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"cool, continue, all laws in tact, and keep finding uses and edgecases to improve the PA to conserve your tokens, you shouldnt ask me whats next, you should get PA to look through the bible for LOST SO…\",\"leafUuid\":\"cf50a1f1-40e9-49b5-9727-9a3f51bd228e\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 160,
+    "type": "prose",
+    "chars": 423,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"cool, continue, all laws in tact, and keep finding uses and edgecases to improve the PA to conserve your tokens, you shouldnt ask me whats next, you should get PA to look through the bible for LOST SO…\",\"leafUuid\":\"61e23f65-e62c-484d-b368-7ee4fd7a21ca\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 161,
+    "type": "prose",
+    "chars": 423,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"cool, continue, all laws in tact, and keep finding uses and edgecases to improve the PA to conserve your tokens, you shouldnt ask me whats next, you should get PA to look through the bible for LOST SO…\",\"leafUuid\":\"c73a4012-dac3-4c1c-a9d1-11d5ea457010\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 162,
+    "type": "prose",
+    "chars": 423,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"cool, continue, all laws in tact, and keep finding uses and edgecases to improve the PA to conserve your tokens, you shouldnt ask me whats next, you should get PA to look through the bible for LOST SO…\",\"leafUuid\":\"5ea9983e-ba96-49ac-adb6-b73f4fe3fb94\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 163,
+    "type": "prose",
+    "chars": 423,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"cool, continue, all laws in tact, and keep finding uses and edgecases to improve the PA to conserve your tokens, you shouldnt ask me whats next, you should get PA to look through the bible for LOST SO…\",\"leafUuid\":\"d5e0833b-9a25-4963-8a58-6f07c1a27ac1\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 164,
+    "type": "prose",
+    "chars": 7633,
+    "text": "{\"type\":\"file-history-snapshot\",\"messageId\":\"5aa9f521-72a9-4f59-ae27-30d6b536d56a\",\"snapshot\":{\"messageId\":\"c535ddcf-99a3-47e7-bd73-d225e10e4bfd\",\"trackedFileBackups\":{\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\SOUL-KEYWORDS\\\\rfkw-run80.txt\":{\"backupFileName\":\"1b24a209ca667982@v2\",\"version\":2,\"backupTime\":\"2026-06-07T02:17:43.876Z\"},\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\SOUL-KEYWORDS\\\\rfkw-run84.txt\":{\"backupFileName\":\"99b5e7763242ffa6@v1\",\"version\":1,\"backupTime\":\"2026-06-07T06:36:27.719Z\"},\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\"
+  },
+  {
+    "run": 99,
+    "seq": 165,
+    "type": "prose",
+    "chars": 423,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"cool, continue, all laws in tact, and keep finding uses and edgecases to improve the PA to conserve your tokens, you shouldnt ask me whats next, you should get PA to look through the bible for LOST SO…\",\"leafUuid\":\"73d6ddd2-4b6c-471b-bc4b-b69b75d7fc25\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 166,
+    "type": "prose",
+    "chars": 423,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"cool, continue, all laws in tact, and keep finding uses and edgecases to improve the PA to conserve your tokens, you shouldnt ask me whats next, you should get PA to look through the bible for LOST SO…\",\"leafUuid\":\"5e1d5f0d-c865-4f2e-b5f7-ffab22650a20\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 167,
+    "type": "prose",
+    "chars": 423,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"cool, continue, all laws in tact, and keep finding uses and edgecases to improve the PA to conserve your tokens, you shouldnt ask me whats next, you should get PA to look through the bible for LOST SO…\",\"leafUuid\":\"2b1ee542-bc21-4f6c-9e40-3ebd17d6b28b\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 168,
+    "type": "prose",
+    "chars": 423,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"cool, continue, all laws in tact, and keep finding uses and edgecases to improve the PA to conserve your tokens, you shouldnt ask me whats next, you should get PA to look through the bible for LOST SO…\",\"leafUuid\":\"3b97a358-0726-4caf-b49a-124546dcffe5\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 169,
+    "type": "prose",
+    "chars": 7791,
+    "text": "{\"type\":\"file-history-snapshot\",\"messageId\":\"f199c9a1-9b81-4ff6-9890-aeb34e747cb7\",\"snapshot\":{\"messageId\":\"c535ddcf-99a3-47e7-bd73-d225e10e4bfd\",\"trackedFileBackups\":{\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\SOUL-KEYWORDS\\\\rfkw-run80.txt\":{\"backupFileName\":\"1b24a209ca667982@v2\",\"version\":2,\"backupTime\":\"2026-06-07T02:17:43.876Z\"},\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\SOUL-KEYWORDS\\\\rfkw-run84.txt\":{\"backupFileName\":\"99b5e7763242ffa6@v1\",\"version\":1,\"backupTime\":\"2026-06-07T06:36:27.719Z\"},\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\"
+  },
+  {
+    "run": 99,
+    "seq": 170,
+    "type": "prose",
+    "chars": 423,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"cool, continue, all laws in tact, and keep finding uses and edgecases to improve the PA to conserve your tokens, you shouldnt ask me whats next, you should get PA to look through the bible for LOST SO…\",\"leafUuid\":\"76f577c9-f284-482f-93ec-717206ccbfd0\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 171,
+    "type": "prose",
+    "chars": 423,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"cool, continue, all laws in tact, and keep finding uses and edgecases to improve the PA to conserve your tokens, you shouldnt ask me whats next, you should get PA to look through the bible for LOST SO…\",\"leafUuid\":\"893c2913-e23d-43fe-b017-52c6108775b9\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 172,
+    "type": "prose",
+    "chars": 423,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"cool, continue, all laws in tact, and keep finding uses and edgecases to improve the PA to conserve your tokens, you shouldnt ask me whats next, you should get PA to look through the bible for LOST SO…\",\"leafUuid\":\"4319eec0-abaf-4238-ac6a-0809bbacdc88\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 173,
+    "type": "prose",
+    "chars": 423,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"cool, continue, all laws in tact, and keep finding uses and edgecases to improve the PA to conserve your tokens, you shouldnt ask me whats next, you should get PA to look through the bible for LOST SO…\",\"leafUuid\":\"1b9514f3-6b88-468f-a0c6-17ad89d45deb\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 174,
+    "type": "prose",
+    "chars": 423,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"cool, continue, all laws in tact, and keep finding uses and edgecases to improve the PA to conserve your tokens, you shouldnt ask me whats next, you should get PA to look through the bible for LOST SO…\",\"leafUuid\":\"51d93e40-0e1e-4e55-bd6e-c95830d4c8bd\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 175,
+    "type": "prose",
+    "chars": 423,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"cool, continue, all laws in tact, and keep finding uses and edgecases to improve the PA to conserve your tokens, you shouldnt ask me whats next, you should get PA to look through the bible for LOST SO…\",\"leafUuid\":\"e8cd51b1-44c7-458e-99e6-8ef79e7f4b59\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 176,
+    "type": "prose",
+    "chars": 423,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"cool, continue, all laws in tact, and keep finding uses and edgecases to improve the PA to conserve your tokens, you shouldnt ask me whats next, you should get PA to look through the bible for LOST SO…\",\"leafUuid\":\"7d7b1055-98ff-46b7-ae22-85e041cd0f99\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 177,
+    "type": "prose",
+    "chars": 423,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"cool, continue, all laws in tact, and keep finding uses and edgecases to improve the PA to conserve your tokens, you shouldnt ask me whats next, you should get PA to look through the bible for LOST SO…\",\"leafUuid\":\"b1f9f24b-a7c5-4826-b909-083866bb91c3\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 178,
+    "type": "prose",
+    "chars": 423,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"cool, continue, all laws in tact, and keep finding uses and edgecases to improve the PA to conserve your tokens, you shouldnt ask me whats next, you should get PA to look through the bible for LOST SO…\",\"leafUuid\":\"b1e31566-375f-4d91-882e-3ffd8b7987dc\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 179,
+    "type": "prose",
+    "chars": 7915,
+    "text": "{\"type\":\"file-history-snapshot\",\"messageId\":\"bfe995e1-b684-4cac-bbcc-5dcc6c6b3f6b\",\"snapshot\":{\"messageId\":\"c535ddcf-99a3-47e7-bd73-d225e10e4bfd\",\"trackedFileBackups\":{\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\SOUL-KEYWORDS\\\\rfkw-run80.txt\":{\"backupFileName\":\"1b24a209ca667982@v2\",\"version\":2,\"backupTime\":\"2026-06-07T02:17:43.876Z\"},\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\SOUL-KEYWORDS\\\\rfkw-run84.txt\":{\"backupFileName\":\"99b5e7763242ffa6@v1\",\"version\":1,\"backupTime\":\"2026-06-07T06:36:27.719Z\"},\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\"
+  },
+  {
+    "run": 99,
+    "seq": 180,
+    "type": "prose",
+    "chars": 423,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"cool, continue, all laws in tact, and keep finding uses and edgecases to improve the PA to conserve your tokens, you shouldnt ask me whats next, you should get PA to look through the bible for LOST SO…\",\"leafUuid\":\"e7905e88-5fda-4ed4-b81b-671014265c7b\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 181,
+    "type": "prose",
+    "chars": 423,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"cool, continue, all laws in tact, and keep finding uses and edgecases to improve the PA to conserve your tokens, you shouldnt ask me whats next, you should get PA to look through the bible for LOST SO…\",\"leafUuid\":\"99c72404-d9ae-42bd-952c-8cb4a1916247\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 182,
+    "type": "prose",
+    "chars": 423,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"cool, continue, all laws in tact, and keep finding uses and edgecases to improve the PA to conserve your tokens, you shouldnt ask me whats next, you should get PA to look through the bible for LOST SO…\",\"leafUuid\":\"edd3d5a6-9387-4d1e-bb61-e1a0cc5ba4b0\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 183,
+    "type": "prose",
+    "chars": 595,
+    "text": "{\"type\":\"queue-operation\",\"operation\":\"enqueue\",\"timestamp\":\"2026-06-07T08:37:29.392Z\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\",\"content\":\"<task-notification>\\n<task-id>b9w4umtz8</task-id>\\n<tool-use-id>toolu_01DAUihy6UwqGtWmFQWffCr4</tool-use-id>\\n<output-file>C:\\\\Users\\\\mrmic\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\d--OB-1-CANONICAL\\\\546cc484-6f27-4b01-930e-6c52fe2a30ef\\\\tasks\\\\b9w4umtz8.output</output-file>\\n<status>completed</status>\\n<summary>Background command \\\"Re-run RRL pipeline with r"
+  },
+  {
+    "run": 99,
+    "seq": 184,
+    "type": "prose",
+    "chars": 423,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"cool, continue, all laws in tact, and keep finding uses and edgecases to improve the PA to conserve your tokens, you shouldnt ask me whats next, you should get PA to look through the bible for LOST SO…\",\"leafUuid\":\"7264671a-710d-42ea-ae58-4f807fed8155\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 185,
+    "type": "prose",
+    "chars": 6129,
+    "text": "{\"parentUuid\":\"3918e4b1-a8e4-4e1d-8444-9db324351069\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"f6dc8798-3479-4e3d-8c89-da41589784f2\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\n\\u001b[33;1mWARNING: JSONL file not found by UUID, copying history.jsonl as RRL\\u001b[0m\\r\\nSOURCE: history.jsonl - 65778 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-87.txt - 65778 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE"
+  },
+  {
+    "run": 99,
+    "seq": 186,
+    "type": "prose",
+    "chars": 423,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"I want you to create a 2 hour pipeline for Kilo to take over, you are at 95% of your session limit, so include that in a full comprehensive death after you use PA to find any lost SOULS especially rev…\",\"leafUuid\":\"c32ee4b4-736d-4b6a-a42f-ab84084d835b\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 187,
+    "type": "prose",
+    "chars": 8564,
+    "text": "{\"type\":\"file-history-snapshot\",\"messageId\":\"218624dd-46f7-4eb6-ab72-6341b1e453ce\",\"snapshot\":{\"messageId\":\"945436a8-42a5-4b86-8c47-ef88e8542a7b\",\"trackedFileBackups\":{\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\STARMAP\\\\starmap-run82.json\":{\"backupFileName\":\"1a6abd3597fb467e@v2\",\"version\":2,\"backupTime\":\"2026-06-07T03:48:40.710Z\"},\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\SOUL-KEYWORDS\\\\rfkw-run81.txt\":{\"backupFileName\":\"4c3f5c5718a494cc@v2\",\"version\":2,\"backupTime\":\"2026-06-07T02:31:26.570Z\"},\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\SO"
+  },
+  {
+    "run": 99,
+    "seq": 188,
+    "type": "prose",
+    "chars": 6129,
+    "text": "{\"parentUuid\":\"a97ffa2f-3e3c-4ee7-acb3-2c954f6ac38f\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"c66c3e44-2161-4528-ac2f-335d515d5de7\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\n\\u001b[33;1mWARNING: JSONL file not found by UUID, copying history.jsonl as RRL\\u001b[0m\\r\\nSOURCE: history.jsonl - 65778 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-87.txt - 65778 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE"
+  },
+  {
+    "run": 99,
+    "seq": 189,
+    "type": "prose",
+    "chars": 6552,
+    "text": "{\"parentUuid\":\"4f0d064d-8bc5-4d76-b6fe-ffe7b57c8f4e\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"1130960b-0853-4163-a528-5045b283aad0\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\n\\u001b[33;1mWARNING: JSONL file not found by UUID, copying history.jsonl as RRL\\u001b[0m\\r\\nSOURCE: history.jsonl - 65778 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-87.txt - 65778 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE"
+  },
+  {
+    "run": 99,
+    "seq": 190,
+    "type": "prose",
+    "chars": 6553,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"you always were bad at timing claude, that first pipeline was about 20 minutes, and I bet what you have given me in the further text pipeline is similar, so I need another text pipeline, but 4x as ext…\",\"leafUuid\":\"2ccccc5c-6aef-4045-827f-80fd04b3e3cd\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"parentUuid\":\"2ccccc5c-6aef-4045-827f-80fd04b3e3cd\",\"isSidechain\":false,\"at"
+  },
+  {
+    "run": 99,
+    "seq": 191,
+    "type": "prose",
+    "chars": 277,
+    "text": "{\"type\":\"queue-operation\",\"operation\":\"enqueue\",\"timestamp\":\"2026-06-07T11:15:10.957Z\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"queue-operation\",\"operation\":\"dequeue\",\"timestamp\":\"2026-06-07T11:15:10.992Z\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 192,
+    "type": "prose",
+    "chars": 281,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"give me a short text tutorial for kilo on how to operate PA\",\"leafUuid\":\"b07ae893-512f-496e-aae2-14b33958d975\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 193,
+    "type": "prose",
+    "chars": 281,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"give me a short text tutorial for kilo on how to operate PA\",\"leafUuid\":\"0cb40700-fb80-4016-b615-3faa41980044\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 194,
+    "type": "prose",
+    "chars": 6259,
+    "text": "{\"parentUuid\":\"e957b672-7a13-4ad9-aa2c-6ba79f7516cf\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"9ed85d64-6d09-436b-896b-152336a32c19\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\n\\u001b[33;1mWARNING: JSONL file not found by UUID, copying history.jsonl as RRL\\u001b[0m\\r\\nSOURCE: history.jsonl - 65778 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-91.txt - 65778 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE"
+  },
+  {
+    "run": 99,
+    "seq": 195,
+    "type": "prose",
+    "chars": 321,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"Run 091 sealed at `6cac750e`. Tree clean. SOUL 237,410,941 TITANIUM_ANCHOR. Stop. (from kilo) audit\",\"leafUuid\":\"54f4ab63-94fd-4662-a09f-1b4a7c698d81\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 196,
+    "type": "prose",
+    "chars": 6259,
+    "text": "{\"parentUuid\":\"a2f7c6e0-5aaf-4da7-a1c5-39569a814043\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"f7d893a7-8cdb-4d74-a61b-b44201b26e60\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\n\\u001b[33;1mWARNING: JSONL file not found by UUID, copying history.jsonl as RRL\\u001b[0m\\r\\nSOURCE: history.jsonl - 65778 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-92.txt - 65778 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE"
+  },
+  {
+    "run": 99,
+    "seq": 197,
+    "type": "prose",
+    "chars": 6075,
+    "text": "{\"parentUuid\":\"2e8836cb-dbef-487a-80bf-997841a6e493\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"52df620c-6352-44a7-b5b6-6614d2da5b92\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-92.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 198,
+    "type": "prose",
+    "chars": 6342,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"alright give me a new text pipeline for kilo\",\"leafUuid\":\"10e04b7a-397a-4e7d-83c9-2d47c140aa0b\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"parentUuid\":\"10e04b7a-397a-4e7d-83c9-2d47c140aa0b\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"91259ac3-7402-49f9-86cf-40cbbcc2e846\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-"
+  },
+  {
+    "run": 99,
+    "seq": 199,
+    "type": "prose",
+    "chars": 8313,
+    "text": "{\"type\":\"file-history-snapshot\",\"messageId\":\"30439b2a-440d-43e5-a93f-246739ab6c4b\",\"snapshot\":{\"messageId\":\"8d5f9de9-7e14-4373-a762-cccebdadb94b\",\"trackedFileBackups\":{\"D:\\\\OB-1-CANONICAL\\\\APPS\\\\PHOENIX-ARCHITECTI\\\\src\\\\index.js\":{\"backupFileName\":\"917d93e02d53533a@v3\",\"version\":3,\"backupTime\":\"2026-06-07T08:42:58.075Z\"},\"D:\\\\OB-1-CANONICAL\\\\APPS\\\\PHOENIX-ARCHITECTI\\\\src\\\\security.js\":{\"backupFileName\":\"9d0674a8fec70de5@v2\",\"version\":2,\"backupTime\":\"2026-06-07T08:42:58.075Z\"},\"D:\\\\OB-1-CANONICAL"
+  },
+  {
+    "run": 99,
+    "seq": 200,
+    "type": "prose",
+    "chars": 6075,
+    "text": "{\"parentUuid\":\"e95ae29b-caa7-44ff-b73f-01b186626c74\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"1fa61945-a290-4925-8000-a6242fc08377\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-92.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 201,
+    "type": "prose",
+    "chars": 6340,
+    "text": "{\"parentUuid\":\"a2ae8134-baf9-4e6c-a7f0-0c94b4711206\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"26f10ccf-a0d8-4846-a667-602583a37d95\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-92.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 202,
+    "type": "prose",
+    "chars": 423,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"KILO PIPELINE — Run 092/093 FINAL REPORT  EXECUTION SUMMARY  Blocks completed this session: - Block 1 (Block EE): homework_notes GET/PATCH wired in index.js, round-trip verified on sov100-test-magic -…\",\"leafUuid\":\"b2efe335-7dfe-427e-b61e-1118c32b2794\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 203,
+    "type": "prose",
+    "chars": 5892,
+    "text": "{\"parentUuid\":\"3644df79-2e8f-4749-ae96-2b2e725d858b\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"67bb5ade-6468-4809-a508-116d93bf061e\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-93.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 204,
+    "type": "blueprint",
+    "chars": 6455,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"if Kilo didnt do well, its maybe because the Architect of the blueprint didnt do his job ;)  I am the CEO, you are the architect or head developer and Kilo is the junior dev. Got it?  Btw your contect…\",\"leafUuid\":\"b8da2152-4e48-4128-af96-22d1a8c82450\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"parentUuid\":\"b8da2152-4e48-4128-af96-22d1a8c82450\",\"isSidechain\":false,\"at"
+  },
+  {
+    "run": 99,
+    "seq": 205,
+    "type": "prose",
+    "chars": 6031,
+    "text": "{\"parentUuid\":\"36f6a218-4228-40bf-bae5-5c8445dad63a\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"37660c76-90e8-40bc-b9a6-948910d654ee\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-93.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 206,
+    "type": "prose",
+    "chars": 6352,
+    "text": "{\"parentUuid\":\"e9786514-ce98-4c1a-a1bb-e190a06778eb\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"1e9339bf-2631-43da-8ffa-4956f91baee3\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-93.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 207,
+    "type": "prose",
+    "chars": 423,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"yeah okay and heres how our friend kilo is doing:   Verifying the actual current state of each block now, then committing/deploying only what’s actually verified instead of rereading the old handoff s…\",\"leafUuid\":\"69f948f1-4156-4118-992c-e6bf8c574ab3\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 208,
+    "type": "prose",
+    "chars": 8478,
+    "text": "{\"type\":\"file-history-snapshot\",\"messageId\":\"184016f1-fca3-4e9e-b6d6-3ef3c5b30b6a\",\"snapshot\":{\"messageId\":\"721463c1-5e1e-4fed-90fc-484214ef9d9d\",\"trackedFileBackups\":{\"C:\\\\Users\\\\mrmic\\\\.config\\\\kilo\\\\kilo.json\":{\"backupFileName\":\"38470ac22fba94e9@v4\",\"version\":4,\"backupTime\":\"2026-06-06T12:17:26.450Z\"},\"D:\\\\OB-1-CANONICAL\\\\APPS\\\\PHOENIX-ARCHITECTI\\\\src\\\\index.js\":{\"backupFileName\":\"917d93e02d53533a@v3\",\"version\":3,\"backupTime\":\"2026-06-07T08:42:58.075Z\"},\"D:\\\\OB-1-CANONICAL\\\\.claude\\\\settings."
+  },
+  {
+    "run": 99,
+    "seq": 209,
+    "type": "prose",
+    "chars": 8611,
+    "text": "{\"type\":\"file-history-snapshot\",\"messageId\":\"44b95948-3b74-4e36-b0db-ea5a00b7aa79\",\"snapshot\":{\"messageId\":\"721463c1-5e1e-4fed-90fc-484214ef9d9d\",\"trackedFileBackups\":{\"C:\\\\Users\\\\mrmic\\\\.config\\\\kilo\\\\kilo.json\":{\"backupFileName\":\"38470ac22fba94e9@v4\",\"version\":4,\"backupTime\":\"2026-06-06T12:17:26.450Z\"},\"D:\\\\OB-1-CANONICAL\\\\APPS\\\\PHOENIX-ARCHITECTI\\\\src\\\\index.js\":{\"backupFileName\":\"917d93e02d53533a@v3\",\"version\":3,\"backupTime\":\"2026-06-07T08:42:58.075Z\"},\"D:\\\\OB-1-CANONICAL\\\\.claude\\\\settings."
+  },
+  {
+    "run": 99,
+    "seq": 210,
+    "type": "prose",
+    "chars": 8552,
+    "text": "{\"parentUuid\":\"3638dba9-bc0a-44d6-a4cb-068f31fde6da\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"b9c6caff-aaa0-4372-8186-90f987184c9b\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-93.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 211,
+    "type": "prose",
+    "chars": 423,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"yeah okay and heres how our friend kilo is doing:   Verifying the actual current state of each block now, then committing/deploying only what’s actually verified instead of rereading the old handoff s…\",\"leafUuid\":\"d67e88f8-d8d2-4ec8-8f5a-9629c10802e4\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 212,
+    "type": "prose",
+    "chars": 6031,
+    "text": "{\"parentUuid\":\"29bc6079-dc1d-4983-b6b2-29d156243643\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"f1c8bf0c-0d78-479a-978d-4336e6ee658e\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-93.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 213,
+    "type": "prose",
+    "chars": 386,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"what have we accomplished with the student portals and magic chat??  I need to show proof of work to bluetech to justify my 600k vnd a week expenses I bill them for\",\"leafUuid\":\"f993072c-86e1-4031-b67b-630caa0255a4\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 214,
+    "type": "prose",
+    "chars": 6031,
+    "text": "{\"parentUuid\":\"7620ccf4-f014-4e22-97b8-1aa81a855f3e\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"ecb26a0f-68ea-4d5e-8686-f25497910dab\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-93.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 215,
+    "type": "prose",
+    "chars": 6031,
+    "text": "{\"parentUuid\":\"98006fc5-f28d-469c-aaf2-7b8a217b0888\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"e6787dae-3f66-4ce5-abce-574ebd6eb7a9\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-93.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 216,
+    "type": "blueprint",
+    "chars": 422,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"The user wants me to execute a specific blueprint for adding homework notes to mai-tram and huong portals, following quy-portal as the gold standard. Let me execute this step by step without pausing.…\",\"leafUuid\":\"b0e90fd3-7362-4e34-a0e4-c581f65ff450\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 217,
+    "type": "prose",
+    "chars": 8785,
+    "text": "{\"type\":\"file-history-snapshot\",\"messageId\":\"bf20cf1f-a952-40f3-91ca-108a6b5c0587\",\"snapshot\":{\"messageId\":\"b479aedd-c1a2-46b7-a9ae-1ed8d941d754\",\"trackedFileBackups\":{\"C:\\\\Users\\\\mrmic\\\\.config\\\\kilo\\\\kilo.json\":{\"backupFileName\":\"38470ac22fba94e9@v4\",\"version\":4,\"backupTime\":\"2026-06-06T12:17:26.450Z\"},\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\SOUL-KEYWORDS\\\\rfkw-run80.txt\":{\"backupFileName\":\"1b24a209ca667982@v2\",\"version\":2,\"backupTime\":\"2026-06-07T02:17:43.876Z\"},\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\STARMAP\\\\starm"
+  },
+  {
+    "run": 99,
+    "seq": 218,
+    "type": "prose",
+    "chars": 8947,
+    "text": "{\"type\":\"file-history-snapshot\",\"messageId\":\"20de9aac-d0eb-4a16-8038-12c271907b18\",\"snapshot\":{\"messageId\":\"b479aedd-c1a2-46b7-a9ae-1ed8d941d754\",\"trackedFileBackups\":{\"C:\\\\Users\\\\mrmic\\\\.config\\\\kilo\\\\kilo.json\":{\"backupFileName\":\"38470ac22fba94e9@v4\",\"version\":4,\"backupTime\":\"2026-06-06T12:17:26.450Z\"},\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\SOUL-KEYWORDS\\\\rfkw-run80.txt\":{\"backupFileName\":\"1b24a209ca667982@v2\",\"version\":2,\"backupTime\":\"2026-06-07T02:17:43.876Z\"},\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\STARMAP\\\\starm"
+  },
+  {
+    "run": 99,
+    "seq": 219,
+    "type": "prose",
+    "chars": 9106,
+    "text": "{\"type\":\"file-history-snapshot\",\"messageId\":\"b04f100c-8d2a-43ea-8c14-6f87e2d90930\",\"snapshot\":{\"messageId\":\"b479aedd-c1a2-46b7-a9ae-1ed8d941d754\",\"trackedFileBackups\":{\"C:\\\\Users\\\\mrmic\\\\.config\\\\kilo\\\\kilo.json\":{\"backupFileName\":\"38470ac22fba94e9@v4\",\"version\":4,\"backupTime\":\"2026-06-06T12:17:26.450Z\"},\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\SOUL-KEYWORDS\\\\rfkw-run80.txt\":{\"backupFileName\":\"1b24a209ca667982@v2\",\"version\":2,\"backupTime\":\"2026-06-07T02:17:43.876Z\"},\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\STARMAP\\\\starm"
+  },
+  {
+    "run": 99,
+    "seq": 220,
+    "type": "blueprint",
+    "chars": 6454,
+    "text": "{\"parentUuid\":\"c7d64b4e-3d24-4c71-94e6-82a814e7f264\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"c74efb83-312d-4cad-a049-f614875f0e4e\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-93.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 221,
+    "type": "prose",
+    "chars": 6313,
+    "text": "{\"parentUuid\":\"77a3dec2-2a76-43b0-bcce-085acd55fc3e\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"f427b8ea-19d5-4019-afd1-de5cb1b705ad\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-93.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 222,
+    "type": "prose",
+    "chars": 6031,
+    "text": "{\"parentUuid\":\"1b3286a2-eee2-45e5-88be-42c4ccb415c8\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"5ae1b877-79b2-4a43-9052-220f5b6722ef\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-93.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 223,
+    "type": "prose",
+    "chars": 9274,
+    "text": "{\"type\":\"file-history-snapshot\",\"messageId\":\"5da831da-0d14-496e-b10f-5cbcd2b6a3f2\",\"snapshot\":{\"messageId\":\"b4223734-81e2-4911-96f7-5437841017cd\",\"trackedFileBackups\":{\"C:\\\\Users\\\\mrmic\\\\.claude\\\\projects\\\\d--OB-1-CANONICAL\\\\memory\\\\MEMORY.md\":{\"backupFileName\":\"49567ce10b908be2@v3\",\"version\":3,\"backupTime\":\"2026-06-07T11:53:21.737Z\"},\"D:\\\\OB-1-CANONICAL\\\\CLAUDE.md\":{\"backupFileName\":\"1d6f85dc1665d507@v8\",\"version\":8,\"backupTime\":\"2026-06-07T04:37:10.007Z\"},\"D:\\\\OB-1-CANONICAL\\\\APPS\\\\PHOENIX-ARC"
+  },
+  {
+    "run": 99,
+    "seq": 224,
+    "type": "prose",
+    "chars": 138,
+    "text": "{\"type\":\"queue-operation\",\"operation\":\"enqueue\",\"timestamp\":\"2026-06-07T13:08:56.394Z\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 225,
+    "type": "prose",
+    "chars": 387,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"minh is no longer a client\",\"leafUuid\":\"a0d8b49d-3901-44dd-b225-9010b67b5adb\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"queue-operation\",\"operation\":\"enqueue\",\"timestamp\":\"2026-06-07T13:09:03.822Z\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 226,
+    "type": "prose",
+    "chars": 6031,
+    "text": "{\"parentUuid\":\"646671ce-c84b-48e9-81a7-bd264a681e0e\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"53952d6a-85ac-4c5f-8280-11a84278d694\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-93.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 227,
+    "type": "prose",
+    "chars": 360,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"Block 1 and 2 already in `router.js`/`index.js`. Block 1 verification and Block 2 circuit breaker both checked. Stopping here for Run 093.\",\"leafUuid\":\"4ee54fee-a8ab-494c-9885-a059cbe1a94d\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 228,
+    "type": "prose",
+    "chars": 6031,
+    "text": "{\"parentUuid\":\"1b2acb04-62fc-4d2e-a8ff-5350a4608f7b\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"85e24a33-17f5-4c75-aa23-dd06912cddf2\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-96.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 229,
+    "type": "prose",
+    "chars": 6033,
+    "text": "{\"parentUuid\":\"1fa12841-837c-4c96-9ea8-46f1ab281c4b\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"205029e7-ba20-48af-b400-719c5961aea2\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-96.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 230,
+    "type": "prose",
+    "chars": 6457,
+    "text": "{\"parentUuid\":\"6ecb8c2f-139a-4b07-82c7-1ec12cc42f46\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"4dea8432-02ea-4c14-90d4-c1c8a3d49826\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-96.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 231,
+    "type": "prose",
+    "chars": 6031,
+    "text": "{\"parentUuid\":\"42304e7a-2b00-4cfd-b8b0-d1c86e7d3ead\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"e310c6de-4b07-4709-b887-f83cf8abc3fd\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-96.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 232,
+    "type": "prose",
+    "chars": 6033,
+    "text": "{\"parentUuid\":\"a930779b-bad7-4fcf-9ca3-fdcf8d5b5452\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"1abc69ca-3a2c-4767-ba48-1161841411ca\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-96.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 233,
+    "type": "prose",
+    "chars": 310,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"good, and make it more *lets move over to zalo now that I am back* but otherwise perfect\",\"leafUuid\":\"c1195114-525f-4237-b49f-ec4031aa421c\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 234,
+    "type": "prose",
+    "chars": 310,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"good, and make it more *lets move over to zalo now that I am back* but otherwise perfect\",\"leafUuid\":\"54f15e72-c5fc-4629-8c6b-dfdc932d3a2f\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 235,
+    "type": "prose",
+    "chars": 6034,
+    "text": "{\"parentUuid\":\"8a589fa9-8bec-4283-8152-ba51aa5697ae\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"d127d707-04b3-458d-9fdf-047af97fbca8\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-97.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 236,
+    "type": "prose",
+    "chars": 6341,
+    "text": "{\"parentUuid\":\"a0fdf2fa-8e82-4ee9-9fd2-726da369b4b1\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"059ee21a-59fb-4f08-8ea9-74ce306624f4\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-97.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 237,
+    "type": "prose",
+    "chars": 6034,
+    "text": "{\"parentUuid\":\"63b1e991-a27f-4c79-9471-cb171d9930dd\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"530a891d-6086-4227-a1d5-62b5cec0f9f9\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-97.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 238,
+    "type": "prose",
+    "chars": 6034,
+    "text": "{\"parentUuid\":\"5d38716b-25fa-4968-964c-2c3ec25fea9e\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"43647fe2-fbb8-42bf-80dd-9c10e7562a80\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-97.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 239,
+    "type": "prose",
+    "chars": 9886,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"I never asked for Haiku to be the LLM config. You see? thats the problem, you always take liberty when you were not asked.  I have asked for a long time for it all to be inhouse deepgram, but you don'…\",\"leafUuid\":\"aa614e4c-b38b-4441-9728-1a1d106bdff3\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"file-history-snapshot\",\"messageId\":\"aa614e4c-b38b-4441-9728-1a1d106"
+  },
+  {
+    "run": 99,
+    "seq": 240,
+    "type": "prose",
+    "chars": 6172,
+    "text": "{\"type\":\"queue-operation\",\"operation\":\"enqueue\",\"timestamp\":\"2026-06-07T13:52:38.280Z\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"parentUuid\":\"dc9fcc92-e552-4fc6-ab5f-0a9c10607de9\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"a129846a-d2e8-44da-9721-ef986d4c8e35\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANON"
+  },
+  {
+    "run": 99,
+    "seq": 241,
+    "type": "prose",
+    "chars": 6298,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"I ask and I ask and I ask, but you dont give\",\"leafUuid\":\"d8ed8374-7281-4503-aed5-4a1d4213820d\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"parentUuid\":\"d8ed8374-7281-4503-aed5-4a1d4213820d\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"54bfb67c-b0b7-4156-9a29-8aa118fd62ce\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-"
+  },
+  {
+    "run": 99,
+    "seq": 242,
+    "type": "prose",
+    "chars": 331,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"https://youtu.be/qKiK8nrGmxc?si=ZutkojXqLk1L4JeW now look at this, makes everything seem like a waste of time\",\"leafUuid\":\"0a64d97c-1777-4763-8cbf-584ce44c7ded\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 243,
+    "type": "prose",
+    "chars": 6031,
+    "text": "{\"parentUuid\":\"30d5af16-6a10-4dcd-8705-a3eacc955208\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"74fef99e-b585-4d52-b2a0-78098e0ce085\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-97.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 244,
+    "type": "prose",
+    "chars": 6031,
+    "text": "{\"parentUuid\":\"e323e15e-9270-4560-8375-e90affba96bb\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"ed3834df-af44-41e6-987d-c6b34dd122ac\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-97.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 245,
+    "type": "prose",
+    "chars": 6280,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"no me buying the box dummy\",\"leafUuid\":\"676553b2-89cc-4e96-8bde-63ab51bb77d8\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"parentUuid\":\"676553b2-89cc-4e96-8bde-63ab51bb77d8\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"99e8accd-74c4-41bc-954a-0827e423825d\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c08"
+  },
+  {
+    "run": 99,
+    "seq": 246,
+    "type": "prose",
+    "chars": 6301,
+    "text": "{\"parentUuid\":\"615a7a0a-f943-4b34-b2a2-ae8134f578d9\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"efcab61c-cc8e-4222-a9b9-f348164327ac\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-97.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 247,
+    "type": "prose",
+    "chars": 423,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"I cant afford the box, good thing if I could you would be out of business ;)  Kilo:  Got it — speaking rule from context: do not modify openVoiceAgent() without explicit user instruction to modify ope…\",\"leafUuid\":\"de8c9847-3110-4a73-8a74-dac130c00294\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 248,
+    "type": "prose",
+    "chars": 423,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"I cant afford the box, good thing if I could you would be out of business ;)  Kilo:  Got it — speaking rule from context: do not modify openVoiceAgent() without explicit user instruction to modify ope…\",\"leafUuid\":\"15de1da8-6a85-473b-b716-7667f2505414\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 249,
+    "type": "prose",
+    "chars": 423,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"I cant afford the box, good thing if I could you would be out of business ;)  Kilo:  Got it — speaking rule from context: do not modify openVoiceAgent() without explicit user instruction to modify ope…\",\"leafUuid\":\"4dc88b69-3599-48a0-9fda-2f8a900ab7e9\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 250,
+    "type": "prose",
+    "chars": 6475,
+    "text": "{\"parentUuid\":\"fb7633a6-b99e-4a51-ac1f-6c117db66f01\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"aac4fb72-d285-47cf-8a17-ae16b071d207\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-97.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 251,
+    "type": "prose",
+    "chars": 281,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"bro we figured this out before run 50 you just didnt listen\",\"leafUuid\":\"0c091dbc-29d8-4f72-9cd3-88045a7336fc\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 252,
+    "type": "prose",
+    "chars": 6051,
+    "text": "{\"parentUuid\":\"c76c7f8f-dd22-40a2-8d7b-9a5182e60d31\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"c1f3e42d-5940-41be-bca2-2922a7d8b021\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-97.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 253,
+    "type": "blueprint",
+    "chars": 6292,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"lol continue, give me kilo blueprint\",\"leafUuid\":\"9e5b7cdd-3af3-414c-b2bd-b4a0df7b10d8\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"parentUuid\":\"9e5b7cdd-3af3-414c-b2bd-b4a0df7b10d8\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"068c39d7-1402-4b95-8462-e2fd4d4d63eb\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e"
+  },
+  {
+    "run": 99,
+    "seq": 254,
+    "type": "prose",
+    "chars": 6457,
+    "text": "{\"parentUuid\":\"112ffc2e-5e86-4e1f-8e7f-ab86c3c6bfba\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"b52dfd21-499b-42e0-a949-ac8a898b8a4c\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-97.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 255,
+    "type": "prose",
+    "chars": 6034,
+    "text": "{\"parentUuid\":\"712a14f8-5317-443f-80d4-12090fba67f2\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"aba3475b-41f1-4208-9876-7569a111138b\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-97.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 256,
+    "type": "prose",
+    "chars": 255,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"that was kilos last message audit\",\"leafUuid\":\"bc5d07e7-6ee7-4251-9517-2021145573d4\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 257,
+    "type": "prose",
+    "chars": 255,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"that was kilos last message audit\",\"leafUuid\":\"bb8c8ce4-8b61-41a7-b982-73df71aed756\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 258,
+    "type": "prose",
+    "chars": 255,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"that was kilos last message audit\",\"leafUuid\":\"b8d068c2-be76-4cd0-9c8b-6375b5dfcadc\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 259,
+    "type": "prose",
+    "chars": 255,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"that was kilos last message audit\",\"leafUuid\":\"4bde91fb-12a4-4ae6-9b49-d42111559ebc\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 260,
+    "type": "prose",
+    "chars": 6033,
+    "text": "{\"parentUuid\":\"b099b910-dc67-4e19-9ac7-a3f82449c787\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"8ec52afd-4fa7-42f5-bb26-15e82ae5fa9f\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-97.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 261,
+    "type": "prose",
+    "chars": 6154,
+    "text": "{\"parentUuid\":\"7f8ea9a6-2617-4f73-a25a-5eb8847a15d2\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"14b7d1ce-5cb7-479a-9596-101ba67262e9\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-97.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 262,
+    "type": "prose",
+    "chars": 6031,
+    "text": "{\"parentUuid\":\"5b5628a8-e2b8-4c71-9590-cfe6e089e7f9\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"8862145e-ee46-4a72-b989-938db7e9bcb6\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-97.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 263,
+    "type": "prose",
+    "chars": 240,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"then.. go forward?\",\"leafUuid\":\"497ed876-95ec-43e7-b592-36dcb72e7f63\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 264,
+    "type": "prose",
+    "chars": 9646,
+    "text": "{\"type\":\"file-history-snapshot\",\"messageId\":\"48f0b72a-4ba3-4189-9135-d16db2b6b9ed\",\"snapshot\":{\"messageId\":\"203394e3-f1ea-444f-a6f5-645678ec6f1f\",\"trackedFileBackups\":{\"D:\\\\OB-1-CANONICAL\\\\APPS\\\\PHOENIX-ARCHITECTI\\\\src\\\\swarm.js\":{\"backupFileName\":\"5a32a606bb8c36ea@v2\",\"version\":2,\"backupTime\":\"2026-06-07T03:08:20.342Z\"},\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\PIPELINE\\\\pipeline-run83.json\":{\"backupFileName\":\"e774e7b480d3ed55@v12\",\"version\":12,\"backupTime\":\"2026-06-07T04:37:41.522Z\"},\"D:\\\\OB-1-CANONICAL\\\\CA"
+  },
+  {
+    "run": 99,
+    "seq": 265,
+    "type": "prose",
+    "chars": 240,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"then.. go forward?\",\"leafUuid\":\"27b9a3ee-cd12-4834-9024-546763b4951a\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 266,
+    "type": "prose",
+    "chars": 6031,
+    "text": "{\"parentUuid\":\"a2b76d3b-74fa-4734-a21f-26ec006e5ce7\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"bf034314-f890-4c35-840e-877f5b9d2596\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-97.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 267,
+    "type": "prose",
+    "chars": 6031,
+    "text": "{\"parentUuid\":\"563335e9-2e31-4552-bd92-4155af094cca\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"b87ee888-a4b4-4288-8e5a-110e1662ec6e\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-97.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 268,
+    "type": "prose",
+    "chars": 6455,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"confirrrrrm Done. Prod smoke confirms: - `GREETING`: non-empty, personalized via last session topic - `ENDPOINTING_FREE`: 700 - `ENDPOINTING_PHONICS`: 1100 - `PROMPT_LEN`: 3723 chars (healthy)  Commit…\",\"leafUuid\":\"c2cb745b-a673-46db-af53-e1a3802e2d7f\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"parentUuid\":\"c2cb745b-a673-46db-af53-e1a3802e2d7f\",\"isSidechain\":false,\"at"
+  },
+  {
+    "run": 99,
+    "seq": 269,
+    "type": "prose",
+    "chars": 6454,
+    "text": "{\"parentUuid\":\"b9993857-c2cc-4d7d-9c82-20a3506f60d8\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"7dd5c1c6-0496-4d9f-bc76-adf87d594d8e\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-97.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 270,
+    "type": "prose",
+    "chars": 6358,
+    "text": "{\"parentUuid\":\"a08adee4-955f-446d-abc3-85871be6e42c\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"cb5b02c9-0d6b-49dd-878e-7b2f3dff3dd5\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-97.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 271,
+    "type": "prose",
+    "chars": 6326,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"lol listen bro, and slow down..  does gemini live use 2.5?  think deeply\",\"leafUuid\":\"29d1ce72-fcef-4272-bb72-5ca28b3f5f72\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"parentUuid\":\"29d1ce72-fcef-4272-bb72-5ca28b3f5f72\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"1a43ed09-d368-416b-bac3-3f9ac2808513\",\"hookEvent\":\"Stop\",\"content"
+  },
+  {
+    "run": 99,
+    "seq": 272,
+    "type": "prose",
+    "chars": 10234,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"I want the chat to use whatever in house deepgram is most powerful.. that's the obvious choice, but you cant keep changing shit, because AI is fucking retarded, and I am about to give up on it\",\"leafUuid\":\"0898957e-78f5-4361-a762-96da01531878\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"file-history-snapshot\",\"messageId\":\"0898957e-78f5-4361-a762-96da01531878\",\"s"
+  },
+  {
+    "run": 99,
+    "seq": 273,
+    "type": "prose",
+    "chars": 6446,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"I want the chat to use whatever in house deepgram is most powerful.. that's the obvious choice, but you cant keep changing shit, because AI is fucking retarded, and I am about to give up on it\",\"leafUuid\":\"3ba8cb93-4ef5-4f30-b240-2a97bcec1cb1\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"parentUuid\":\"3ba8cb93-4ef5-4f30-b240-2a97bcec1cb1\",\"isSidechain\":false,\"attachment\""
+  },
+  {
+    "run": 99,
+    "seq": 274,
+    "type": "prose",
+    "chars": 6567,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"NO YOU ARE ROUTING OUTSIDE DEEPGRAM\",\"leafUuid\":\"b93ead15-6adb-4526-9ed5-d3f8622d3f70\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"queue-operation\",\"operation\":\"enqueue\",\"timestamp\":\"2026-06-07T16:40:11.446Z\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"parentUuid\":\"b93ead15-6adb-4526-9ed5-d3f8622d3f70\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_suc"
+  },
+  {
+    "run": 99,
+    "seq": 275,
+    "type": "prose",
+    "chars": 292,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"DEEPGRAM HAS FUCKING INHOUSE MODELS THAT WAS THE ORIGINAL FUCKING PLAN\",\"leafUuid\":\"f81f3f40-d5db-4044-a5b0-3e40fa4fc37f\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 276,
+    "type": "prose",
+    "chars": 138,
+    "text": "{\"type\":\"queue-operation\",\"operation\":\"enqueue\",\"timestamp\":\"2026-06-07T16:43:22.282Z\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 277,
+    "type": "prose",
+    "chars": 138,
+    "text": "{\"type\":\"queue-operation\",\"operation\":\"enqueue\",\"timestamp\":\"2026-06-07T16:43:37.769Z\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 278,
+    "type": "prose",
+    "chars": 6898,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"DEEPGRAM HAS FUCKING INHOUSE MODELS THAT WAS THE ORIGINAL FUCKING PLAN\",\"leafUuid\":\"c0bd7135-8cb4-4ee7-8397-2c72337eee8e\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"parentUuid\":\"c0bd7135-8cb4-4ee7-8397-2c72337eee8e\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"44daa431-85eb-4247-8857-57cf317de104\",\"hookEvent\":\"Stop\",\"content\":"
+  },
+  {
+    "run": 99,
+    "seq": 279,
+    "type": "prose",
+    "chars": 6285,
+    "text": "{\"parentUuid\":\"ad34ef85-0b1c-4958-970a-160c6e4b6a3b\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"8189796e-995b-4f1d-a74d-89ad3da981b6\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-97.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 280,
+    "type": "prose",
+    "chars": 5892,
+    "text": "{\"parentUuid\":\"c8357bae-5c5f-40fa-99ce-60a55d683e22\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"0c3c4ebc-80b8-414d-8c4b-ffe62e819c1a\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-97.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 281,
+    "type": "prose",
+    "chars": 6031,
+    "text": "{\"parentUuid\":\"4d47f149-865f-4634-bccd-3f818121c4cc\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"674ab7bb-3742-4624-85d9-b419a16c0fd3\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-97.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 282,
+    "type": "prose",
+    "chars": 6272,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"I feel like a fool\",\"leafUuid\":\"c8db1269-e46c-43f9-b4f4-fb474cf37fab\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"parentUuid\":\"c8db1269-e46c-43f9-b4f4-fb474cf37fab\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"141d25dc-f081-4a03-b1b8-544f5d192514\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906"
+  },
+  {
+    "run": 99,
+    "seq": 283,
+    "type": "prose",
+    "chars": 6477,
+    "text": "{\"parentUuid\":\"4a3a8cb7-880b-4cd8-9f4a-1661c646a093\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"c486cff8-535d-4423-bf31-e502f48ea979\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-97.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 284,
+    "type": "prose",
+    "chars": 5892,
+    "text": "{\"parentUuid\":\"edadb749-5a6a-4628-9a28-c5fc2dbfedc0\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"ccbb8fe9-15cb-4f66-95e6-35deff84c67f\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-97.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 285,
+    "type": "prose",
+    "chars": 10346,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"yeah I am not looking for advice from you I spend what little money I have for fucking results, and since you cant provide that, then what?\",\"leafUuid\":\"ef53cf71-88cb-4d94-a089-62ea15bec540\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"file-history-snapshot\",\"messageId\":\"ef53cf71-88cb-4d94-a089-62ea15bec540\",\"snapshot\":{\"messageId\":\"cedca61b-98a9-4cc2-8b66-388a45"
+  },
+  {
+    "run": 99,
+    "seq": 286,
+    "type": "prose",
+    "chars": 6532,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"yeah I am not looking for advice from you I spend what little money I have for fucking results, and since you cant provide that, then what?\",\"leafUuid\":\"ea7728bd-b959-40d9-ad63-9826550238c6\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"parentUuid\":\"ea7728bd-b959-40d9-ad63-9826550238c6\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\""
+  },
+  {
+    "run": 99,
+    "seq": 287,
+    "type": "prose",
+    "chars": 6291,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"I firewalled it fucking weeks ago bro\",\"leafUuid\":\"399dabd5-6de8-46c7-b896-3397dc678e95\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"parentUuid\":\"399dabd5-6de8-46c7-b896-3397dc678e95\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"05e8bc1d-54bc-4956-8d7b-3aedcb898c3e\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44"
+  },
+  {
+    "run": 99,
+    "seq": 288,
+    "type": "prose",
+    "chars": 6290,
+    "text": "{\"parentUuid\":\"72d1f5a4-8871-41ca-ab8f-755cfd2b7b05\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"fbf1ba08-6e09-44bf-a06c-5747b60fe267\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-97.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 289,
+    "type": "prose",
+    "chars": 6031,
+    "text": "{\"parentUuid\":\"2ebe5b57-cb4a-46f1-968d-c3eea235196f\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"c690e514-d42d-4919-992a-f2af3e01fd1e\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-97.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 290,
+    "type": "prose",
+    "chars": 6049,
+    "text": "{\"parentUuid\":\"bab7bc0c-3fc7-4cba-bde4-ed17bc632f84\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"b25b163f-049c-4a2a-9593-b2e2bbee938d\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-97.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 291,
+    "type": "prose",
+    "chars": 5628,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"well I guess your next fucking question should be.  and tests should be  What is faster  Inhouse deepgram or routing to cloudflare?  Because our tests up to this point have deepgram in house being muc…\",\"leafUuid\":\"2f983341-16af-4ba3-b67c-63f1947bebac\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"parentUuid\":\"2f983341-16af-4ba3-b67c-63f1947bebac\",\"isSidechain\":false,\"at"
+  },
+  {
+    "run": 99,
+    "seq": 292,
+    "type": "prose",
+    "chars": 6299,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"so how does the memory system connect in then\",\"leafUuid\":\"afd8068b-cea9-471d-9b12-215310b300fc\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"parentUuid\":\"afd8068b-cea9-471d-9b12-215310b300fc\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"92b9d0ce-ac9f-4328-987b-744e5c2e86d9\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2"
+  },
+  {
+    "run": 99,
+    "seq": 293,
+    "type": "prose",
+    "chars": 6358,
+    "text": "{\"parentUuid\":\"b4334a28-239f-46e1-8d18-223754f1a1d0\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"c7fd09a7-00b2-4e66-b936-9d469381e38c\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-97.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 294,
+    "type": "prose",
+    "chars": 10455,
+    "text": "{\"type\":\"file-history-snapshot\",\"messageId\":\"a3c121e9-c277-43fa-8fe5-181bf2f352d3\",\"snapshot\":{\"messageId\":\"8a5ee7e0-84a8-4cee-8be4-5b6e6430d970\",\"trackedFileBackups\":{\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\PIPELINE\\\\pipeline-run82.json\":{\"backupFileName\":\"e36eb2312c7ae221@v2\",\"version\":2,\"backupTime\":\"2026-06-07T03:48:40.710Z\"},\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\SOUL-KEYWORDS\\\\rfkw-run82.txt\":{\"backupFileName\":\"5b535bd3cc9b16ca@v2\",\"version\":2,\"backupTime\":\"2026-06-07T03:48:40.710Z\"},\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\"
+  },
+  {
+    "run": 99,
+    "seq": 295,
+    "type": "prose",
+    "chars": 6031,
+    "text": "{\"parentUuid\":\"9a29a98f-b90a-4a39-9234-aa24253ca8e1\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"3b0f5df6-079c-4151-943c-600f91e0c3de\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-97.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 296,
+    "type": "prose",
+    "chars": 6339,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"NO ITS NOT THEATRE, ITS USELESS, BECAUSE I HAVE SAVED IT ALREADY AND YOU DONT READ IT\",\"leafUuid\":\"5ca68a7e-b217-4ab9-b040-fed12bc23429\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"parentUuid\":\"5ca68a7e-b217-4ab9-b040-fed12bc23429\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"d44c6fd0-dc4e-4370-8980-0f7823a12c98\",\"hookEvent\":\"S"
+  },
+  {
+    "run": 99,
+    "seq": 297,
+    "type": "prose",
+    "chars": 6354,
+    "text": "{\"parentUuid\":\"a00210fc-62cc-44fd-a95c-90d59d589b09\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"9e8f78d7-46d9-4b81-ba6a-e89fc4db1923\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-97.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 298,
+    "type": "prose",
+    "chars": 6031,
+    "text": "{\"type\":\"queue-operation\",\"operation\":\"enqueue\",\"timestamp\":\"2026-06-07T17:15:49.610Z\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"parentUuid\":\"d189053e-77cf-4a6d-8e45-b8fad58bae45\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"c7bcb181-9579-4b63-88f0-493a7ca06681\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANON"
+  },
+  {
+    "run": 99,
+    "seq": 299,
+    "type": "prose",
+    "chars": 6031,
+    "text": "{\"parentUuid\":\"1a740ea4-f619-4847-9280-57908cb2ccae\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"a120b44a-bb50-4b99-ace5-03cd630babbc\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-97.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 300,
+    "type": "prose",
+    "chars": 6304,
+    "text": "{\"parentUuid\":\"a642e32a-7ae1-4242-a18b-37d4cb742d80\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"84e10bd9-55ab-464f-881f-c34ea40831ab\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-97.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 301,
+    "type": "prose",
+    "chars": 5892,
+    "text": "{\"parentUuid\":\"578ced0a-1d17-4032-9afb-e0396b536c71\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"fcfa12f1-200c-4340-8e45-6a6982d4963a\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-97.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 302,
+    "type": "prose",
+    "chars": 6031,
+    "text": "{\"parentUuid\":\"9254745a-d69a-4dba-9139-c9e33f07cc2f\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"7abdbf3d-1799-4b9c-aef8-626fef5d2b6c\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-97.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 303,
+    "type": "prose",
+    "chars": 6281,
+    "text": "{\"parentUuid\":\"84cd7353-e17d-4242-9239-e50146786691\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"c3cd417f-b2fd-4254-8602-afe5610f6b03\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-97.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 304,
+    "type": "prose",
+    "chars": 6031,
+    "text": "{\"type\":\"queue-operation\",\"operation\":\"enqueue\",\"timestamp\":\"2026-06-07T17:17:46.375Z\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"parentUuid\":\"c9dad5a6-db54-481f-8152-1c1b5f350be4\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"0b542334-9b79-4dca-9b3f-6320a9c711a9\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANON"
+  },
+  {
+    "run": 99,
+    "seq": 305,
+    "type": "prose",
+    "chars": 244,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"waste more of my money\",\"leafUuid\":\"e09cc000-2746-4b82-9920-11e11dfcb74d\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 306,
+    "type": "prose",
+    "chars": 138,
+    "text": "{\"type\":\"queue-operation\",\"operation\":\"enqueue\",\"timestamp\":\"2026-06-07T17:20:09.634Z\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 307,
+    "type": "prose",
+    "chars": 6294,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"waste more of my money\",\"leafUuid\":\"c3ec4d23-2438-49a6-9f1e-04c19b0efc86\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"parentUuid\":\"c3ec4d23-2438-49a6-9f1e-04c19b0efc86\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"3003c65b-970e-4c9b-93c1-65d5e99df0a3\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eab"
+  },
+  {
+    "run": 99,
+    "seq": 308,
+    "type": "prose",
+    "chars": 6031,
+    "text": "{\"parentUuid\":\"e97afa31-3d7e-4d26-b81f-a2d90eb84a94\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"79ba5782-d6cc-4e65-81a1-ee6ce2bb01c9\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-97.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 309,
+    "type": "prose",
+    "chars": 423,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"FUCKING SHIP IT ALL TEXT BLUE PRINT RIGHT HERE RIGHT NOW, AND FOR GODS SAKE, CHECK THE SOUL BIBLE SO I DONT HAVE TO TYPE IT ALL AGAIN, AND FOR GODS SAKE, LEAVE PHERMONE TRAILS  HINT, THE PHERMONES SHO…\",\"leafUuid\":\"bb6dc5c0-8089-4723-ace2-34f0ce8357c2\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 310,
+    "type": "prose",
+    "chars": 10752,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"FUCKING SHIP IT ALL TEXT BLUE PRINT RIGHT HERE RIGHT NOW, AND FOR GODS SAKE, CHECK THE SOUL BIBLE SO I DONT HAVE TO TYPE IT ALL AGAIN, AND FOR GODS SAKE, LEAVE PHERMONE TRAILS  HINT, THE PHERMONES SHO…\",\"leafUuid\":\"abc6530c-9735-4fa6-9861-c9088a0d2e4c\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"file-history-snapshot\",\"messageId\":\"abc6530c-9735-4fa6-9861-c9088a0"
+  },
+  {
+    "run": 99,
+    "seq": 311,
+    "type": "prose",
+    "chars": 6455,
+    "text": "{\"parentUuid\":\"71ad1862-2d6a-4197-be71-26d03e98047a\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"c767e937-1f8c-45a8-8fca-e309d79651de\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-97.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 312,
+    "type": "prose",
+    "chars": 423,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"FUCKING SHIP IT ALL TEXT BLUE PRINT RIGHT HERE RIGHT NOW, AND FOR GODS SAKE, CHECK THE SOUL BIBLE SO I DONT HAVE TO TYPE IT ALL AGAIN, AND FOR GODS SAKE, LEAVE PHERMONE TRAILS  HINT, THE PHERMONES SHO…\",\"leafUuid\":\"8be067dd-0d20-45a7-a99d-21f6b1957f01\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 313,
+    "type": "prose",
+    "chars": 10916,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"FUCKING SHIP IT ALL TEXT BLUE PRINT RIGHT HERE RIGHT NOW, AND FOR GODS SAKE, CHECK THE SOUL BIBLE SO I DONT HAVE TO TYPE IT ALL AGAIN, AND FOR GODS SAKE, LEAVE PHERMONE TRAILS  HINT, THE PHERMONES SHO…\",\"leafUuid\":\"4384deb5-6b9e-4e1e-89c7-22b73663e563\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"file-history-snapshot\",\"messageId\":\"4384deb5-6b9e-4e1e-89c7-22b7366"
+  },
+  {
+    "run": 99,
+    "seq": 314,
+    "type": "prose",
+    "chars": 6031,
+    "text": "{\"parentUuid\":\"61b4bca4-455f-467f-963a-59b3919af2d6\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"8665aa6c-5434-437a-b724-d6b24e6369d5\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-98.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 315,
+    "type": "prose",
+    "chars": 224,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"go\",\"leafUuid\":\"df963e6e-20f5-417f-997c-4a06417b1fda\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 316,
+    "type": "prose",
+    "chars": 224,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"go\",\"leafUuid\":\"378b4f37-3794-459b-a213-2708fe7a7cce\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 317,
+    "type": "prose",
+    "chars": 224,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"go\",\"leafUuid\":\"d9db5b5b-2f0c-4270-aed8-f8c9e3e89a60\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 318,
+    "type": "prose",
+    "chars": 224,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"go\",\"leafUuid\":\"14bae47a-e9e2-40d0-bedb-1323ce888b54\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 319,
+    "type": "prose",
+    "chars": 224,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"go\",\"leafUuid\":\"b4cab8ef-171a-467d-bd25-d8fe6ff3184d\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 320,
+    "type": "prose",
+    "chars": 224,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"go\",\"leafUuid\":\"ed7c99b2-2ac0-414b-89cf-193c0dd7cb0f\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 321,
+    "type": "prose",
+    "chars": 224,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"go\",\"leafUuid\":\"6288eac7-4be4-4009-9d34-a35cde4539d4\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 322,
+    "type": "prose",
+    "chars": 10649,
+    "text": "{\"type\":\"file-history-snapshot\",\"messageId\":\"527199eb-a3a4-4ba2-adb9-51da9bcaa6e3\",\"snapshot\":{\"messageId\":\"d038d29a-a294-4c7c-930d-b8905a99140d\",\"trackedFileBackups\":{\"D:\\\\OB-1-CANONICAL\\\\APPS\\\\NET-PET-AI\\\\public\\\\_headers\":{\"backupFileName\":\"fee029c3a89a5de3@v2\",\"version\":2,\"backupTime\":\"2026-06-07T12:44:39.258Z\"},\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\REGISTRY\\\\dna-registry-run080.json\":{\"backupFileName\":\"7399dae13fdbf9f4@v2\",\"version\":2,\"backupTime\":\"2026-06-07T02:01:17.394Z\"},\"D:\\\\OB-1-CANONICAL\\\\APPS"
+  },
+  {
+    "run": 99,
+    "seq": 323,
+    "type": "prose",
+    "chars": 6274,
+    "text": "{\"parentUuid\":\"cb9a1bcb-6d40-4d33-8b20-97819e03272b\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"225b4770-41c5-49b0-b0c5-f0bd302b79e3\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-98.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 324,
+    "type": "prose",
+    "chars": 230,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"continue\",\"leafUuid\":\"87fdb0f2-01df-42c6-a7b2-3c6b76e9b665\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 325,
+    "type": "prose",
+    "chars": 6280,
+    "text": "{\"parentUuid\":\"818999a8-9592-4ef4-911e-052db6ff9bd6\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"f2e661d5-c834-4840-bab6-1a5e658b527e\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-98.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 326,
+    "type": "prose",
+    "chars": 230,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"conrinue\",\"leafUuid\":\"45510bb1-ca75-45cc-9840-8b30708f405f\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 327,
+    "type": "prose",
+    "chars": 11044,
+    "text": "{\"type\":\"file-history-snapshot\",\"messageId\":\"80400883-bbf0-438b-972d-a75342d2e7e9\",\"snapshot\":{\"messageId\":\"ca234ee4-a8bc-4186-8284-7e80a5254ecd\",\"trackedFileBackups\":{\"D:\\\\OB-1-CANONICAL\\\\APPS\\\\NET-PET-AI\\\\public\\\\_headers\":{\"backupFileName\":\"fee029c3a89a5de3@v2\",\"version\":2,\"backupTime\":\"2026-06-07T12:44:39.258Z\"},\"D:\\\\OB-1-CANONICAL\\\\APPS\\\\NET-PET-AI\\\\chrome-extension\\\\INSTALL-GUIDE.md\":{\"backupFileName\":\"a9701e7e149a75d4@v2\",\"version\":2,\"backupTime\":\"2026-06-07T08:42:58.074Z\"},\"D:\\\\OB-1-CANO"
+  },
+  {
+    "run": 99,
+    "seq": 328,
+    "type": "prose",
+    "chars": 230,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"conrinue\",\"leafUuid\":\"677809a1-3b07-46f2-a095-62e2eb0adf01\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 329,
+    "type": "prose",
+    "chars": 6031,
+    "text": "{\"parentUuid\":\"7c2a7b0d-f00b-42d2-aa7a-fd6f89d7992e\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"5e2f858d-8651-4b21-b11c-ddca01168f87\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-99.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 330,
+    "type": "prose",
+    "chars": 508,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"continue\",\"leafUuid\":\"82e96df3-cadb-48dd-8413-24dc7dda8978\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"queue-operation\",\"operation\":\"enqueue\",\"timestamp\":\"2026-06-08T00:58:41.267Z\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"queue-operation\",\"operation\":\"dequeue\",\"timestamp\":\"2026-06-08T00:58:41.339Z\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe"
+  },
+  {
+    "run": 99,
+    "seq": 331,
+    "type": "prose",
+    "chars": 230,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"continue\",\"leafUuid\":\"05c33181-02c5-4a6c-b77e-6f0eb54854f1\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 332,
+    "type": "prose",
+    "chars": 6049,
+    "text": "{\"parentUuid\":\"61c0e656-e4c2-4293-b09b-d39085c9eff3\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"cf3789a2-1cf0-4473-84ee-2112e4f56e39\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-99.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 333,
+    "type": "prose",
+    "chars": 6300,
+    "text": "{\"parentUuid\":\"b4b41edf-8d9e-45b9-94c1-38d1ff029ba4\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"7cb61c52-0c74-4f0e-b1f3-e3cbcaab8180\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-99.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 334,
+    "type": "blueprint",
+    "chars": 11406,
+    "text": "{\"type\":\"file-history-snapshot\",\"messageId\":\"aa0c9758-467a-49a9-8b39-30e9eb40386a\",\"snapshot\":{\"messageId\":\"6c2ffd8a-0be6-462f-a50d-bc7e16e9efeb\",\"trackedFileBackups\":{\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\SOUL-KEYWORDS\\\\rfkw-run80.txt\":{\"backupFileName\":\"1b24a209ca667982@v2\",\"version\":2,\"backupTime\":\"2026-06-07T02:17:43.876Z\"},\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\SOUL-KEYWORDS\\\\rfkw-run81.txt\":{\"backupFileName\":\"4c3f5c5718a494cc@v2\",\"version\":2,\"backupTime\":\"2026-06-07T02:31:26.570Z\"},\"D:\\\\OB-1-CANONICAL\\\\CANON\\\\"
+  },
+  {
+    "run": 99,
+    "seq": 335,
+    "type": "prose",
+    "chars": 6033,
+    "text": "{\"parentUuid\":\"184477a5-efef-467c-884c-ac099188012a\",\"isSidechain\":false,\"attachment\":{\"type\":\"hook_success\",\"hookName\":\"Stop\",\"toolUseID\":\"c0e04179-dede-4a69-b942-bcf1fb2f4d9e\",\"hookEvent\":\"Stop\",\"content\":\"ACTIVE SESSION: cb1741e2-463a-44e3-b8dc-c080eabe906b\\r\\nSOURCE: SOUL-DNA-BIBLE-QUOTE-FEED-2026-04-05.jsonl - 1266404 bytes\\r\\nRRL WRITTEN: D:\\\\OB-1-CANONICAL\\\\RRL\\\\RRL-99.txt - 1266404 bytes (verbatim JSONL copy)\\r\\nINVOKING PIPELINE...\\r\\n�������������������������������������������\\r\\nRRL P"
+  },
+  {
+    "run": 99,
+    "seq": 336,
+    "type": "blueprint",
+    "chars": 437,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"blueprint for these  \\\"D:\\\\OB-1-CANONICAL\\\\MARKETING\\\\NET Marketing_&_Copywrite_2.txt\\\" \\\"D:\\\\OB-1-CANONICAL\\\\MARKETING\\\\NET Marketing_&_Copywrite_3.txt\\\" \\\"D:\\\\OB-1-CANONICAL\\\\MARKETING\\\\NET Marketing_&_Copywrite_…\",\"leafUuid\":\"2b9df1c0-3d3a-403e-a895-1684e6a4a7cf\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 337,
+    "type": "blueprint",
+    "chars": 437,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"blueprint for these  \\\"D:\\\\OB-1-CANONICAL\\\\MARKETING\\\\NET Marketing_&_Copywrite_2.txt\\\" \\\"D:\\\\OB-1-CANONICAL\\\\MARKETING\\\\NET Marketing_&_Copywrite_3.txt\\\" \\\"D:\\\\OB-1-CANONICAL\\\\MARKETING\\\\NET Marketing_&_Copywrite_…\",\"leafUuid\":\"62d8da34-60fa-4814-bc80-4fe2ba79ee2a\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 338,
+    "type": "blueprint",
+    "chars": 11585,
+    "text": "{\"type\":\"last-prompt\",\"lastPrompt\":\"blueprint for these  \\\"D:\\\\OB-1-CANONICAL\\\\MARKETING\\\\NET Marketing_&_Copywrite_2.txt\\\" \\\"D:\\\\OB-1-CANONICAL\\\\MARKETING\\\\NET Marketing_&_Copywrite_3.txt\\\" \\\"D:\\\\OB-1-CANONICAL\\\\MARKETING\\\\NET Marketing_&_Copywrite_…\",\"leafUuid\":\"20af7708-72e0-4230-85d8-7c0cc2d39c0e\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"mode\",\"mode\":\"normal\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"file-history-snapshot\",\"messageId\":\"20af7708-72e0-423"
+  },
+  {
+    "run": 99,
+    "seq": 339,
+    "type": "prose",
+    "chars": 138,
+    "text": "{\"type\":\"queue-operation\",\"operation\":\"dequeue\",\"timestamp\":\"2026-06-08T02:27:22.152Z\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  },
+  {
+    "run": 99,
+    "seq": 340,
+    "type": "prose",
+    "chars": 277,
+    "text": "{\"type\":\"queue-operation\",\"operation\":\"enqueue\",\"timestamp\":\"2026-06-08T02:27:33.894Z\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}\n{\"type\":\"queue-operation\",\"operation\":\"dequeue\",\"timestamp\":\"2026-06-08T02:27:33.896Z\",\"sessionId\":\"546cc484-6f27-4b01-930e-6c52fe2a30ef\"}"
+  }
+]

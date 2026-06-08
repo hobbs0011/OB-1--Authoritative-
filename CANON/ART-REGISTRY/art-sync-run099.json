@@ -1,0 +1,236 @@
+{
+  "run": 99,
+  "ledger_id": "HL-626",
+  "merkle_short": "4B0851131A0487AE",
+  "starmap_file": "starmap-run099.json",
+  "keywords_file": "rfkw-run099.txt",
+  "keywords_used": [
+    "const",
+    "pipeline",
+    "session",
+    "death",
+    "status",
+    "return",
+    "written",
+    "stage",
+    "english",
+    "michael",
+    "never",
+    "agent",
+    "student",
+    "files",
+    "deepgram",
+    "model",
+    "chars",
+    "check",
+    "context",
+    "voice",
+    "error",
+    "await",
+    "complete",
+    "system",
+    "audit",
+    "ledger",
+    "block",
+    "response",
+    "patch",
+    "current"
+  ],
+  "pieces_synced": 23,
+  "pieces": [
+    {
+      "id": "ART-1780551592165-3U0M",
+      "title": "Audio Waveform",
+      "url": "isolated/audio-waveform-hd.png",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780551572418-7DU0",
+      "title": "Elephant Chain",
+      "url": "isolated/elephant-chain-hd.png",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780548347492-B1QU",
+      "title": "Phoenix Pages — Benchmark 0: Deepgram Whisper",
+      "url": "codex_preview/PHOENIX_PAGES/page_04.png",
+      "keywords": [
+        "deepgram"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780548343466-OGXZ",
+      "title": "Phoenix Pages — Kinetic Gates: The 5 Benchmarks",
+      "url": "codex_preview/PHOENIX_PAGES/page_01.png",
+      "keywords": [
+        "deepgram",
+        "ledger"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780548333953-MXB7",
+      "title": "Codex — Drift as a Diagnostic Event",
+      "url": "codex_preview/page-10.png",
+      "keywords": [
+        "context"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780548090137-P6CG",
+      "title": "Tiger Dossier Slide 05 — Lợi Thế Cạnh Tranh Tuyệt Đối 2026 (Unbeatable Advantage)",
+      "url": "ASSETS/dossier/tiger-dossier/slide-05.webp",
+      "keywords": [
+        "english"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780548088836-SX3N",
+      "title": "Tiger Dossier Slide 04 — Ngừng Dịch Thầm, Bắt Đầu Hiểu (Stop Translating, Start Understanding)",
+      "url": "ASSETS/dossier/tiger-dossier/slide-04.webp",
+      "keywords": [
+        "context"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780547628696-L7IE",
+      "title": "Wake Up the Tiger: Blueprint for English & AI Mastery",
+      "url": "CANON/ARTWORK/unnamed-art-06.png",
+      "keywords": [
+        "english"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780547160670-TBAE",
+      "title": "WAKE UP THE TIGER",
+      "url": null,
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780547001008-30ZF",
+      "title": "The Obsolete Model",
+      "url": null,
+      "keywords": [
+        "english",
+        "context"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780546997183-THXJ",
+      "title": "The Tiger Protocol",
+      "url": "The_Tiger_Protocol (3).pdf",
+      "keywords": [
+        "english"
+      ],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780546993683-AS0F",
+      "title": "The Engine",
+      "url": "THE_TIGER_ENGINE.pdf",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780546346776-ZRKH",
+      "title": "In 2026, Knowing Only English Is a Flip-Phone",
+      "url": "CANON/PROTOCOLS/Tiger_Engine_Protocol.pdf",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780546345401-NKEC",
+      "title": "The Tiger Protocol: 2026 Unfair Advantage",
+      "url": "CANON/PROTOCOLS/The_Tiger_Protocol.pdf",
+      "keywords": [
+        "english"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780546342705-3MMY",
+      "title": "Wake Up the Tiger",
+      "url": "CANON/PROTOCOLS/Sovereign_Tiger_Protocol.pdf",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780546341377-VLBX",
+      "title": "The Phoenix Rising Operational Codex",
+      "url": "CANON/PROTOCOLS/PHOENIX_RISING_CODEX.pdf",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780546339980-FU64",
+      "title": "We Don't Teach English. We Unlock Permission.",
+      "url": "CANON/PROTOCOLS/GOSPEL_444_TIGER_MODE.pdf",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780538366960-3OCE",
+      "title": "STP p07 — The 60% Rule: Catching The Vibe",
+      "url": "local:d:/OB-1-CANONICAL/CANON/PROTOCOLS/Sovereign_Tiger_Protocol.pdf#page=7",
+      "keywords": [
+        "context"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780538363957-LNWV",
+      "title": "STP p03 — The Translate-in-Head Delay (Snowman Freeze)",
+      "url": "local:d:/OB-1-CANONICAL/CANON/PROTOCOLS/Sovereign_Tiger_Protocol.pdf#page=3",
+      "keywords": [
+        "pipeline"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780530118048-7JB6",
+      "title": "NET Dossier p09 — 2026 Unfair Advantage (Venn)",
+      "url": "local:D:/Downloads/dossier-pages/page-09.png",
+      "keywords": [
+        "english"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780530099910-XM96",
+      "title": "NET Dossier p03 — Cognitive Bottleneck / Snowman Freeze",
+      "url": "local:D:/Downloads/dossier-pages/page-03.png",
+      "keywords": [
+        "pipeline"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780527419422-NUFN",
+      "title": "Michael Hobbs Headshot — Wide",
+      "url": "local:D:/Downloads/Telegram Desktop/output_9gmjtb.png",
+      "keywords": [
+        "michael"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780527418015-4GUT",
+      "title": "Michael Hobbs Headshot — Square",
+      "url": "local:D:/Downloads/Telegram Desktop/output_5pbeb1.png",
+      "keywords": [
+        "michael"
+      ],
+      "title_hit": false
+    }
+  ],
+  "executed_at": "2026-06-08T09:33:08.4358494+07:00"
+}
