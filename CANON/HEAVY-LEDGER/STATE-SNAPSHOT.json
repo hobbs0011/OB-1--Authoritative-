@@ -4,11 +4,11 @@
   "rss_stage": "Reincarnate-SnapShot RSS",
   "updated_at": "2026-06-09T12:45:00+07:00",
   "run": {
-    "current": 105,
+    "current": 106,
     "era": "ROMAN",
     "status": "COMPLETE",
-    "seal": "RSS-105 (6 lock tests + F1-B CLOSED + Registry refresh + Phoenix Rising Protocol)",
-    "head_sha": "7bf8dd8f",
+    "seal": "RSS-106 (P10 Defect D/C closed + audit_log_v2 + 6 lock tests green)",
+    "head_sha": "c9eee8eb",
     "soulcount": 238196268,
     "anchor": "TITANIUM_ANCHOR"
   },
@@ -67,12 +67,13 @@
   ],
   "open_loops": [
     "P9: Clerk auth migration - BLOCKED: Michael must create Clerk account",
-    "P10: Deletion hook + audit log + field encryption - ready for PA T1 dispatch",
+    "P10: Deletion hook + audit_log_v2 + field encryption - erasure hardened, audit_log_v2 deployed (awaiting PROD merge)",
     "MCP paths: D:\\PROJECTS\\phoenix-coder dead - fix required",
     "6-AI TRUTH: multi-model cross-review flagged for Michael to run (billed/user-triggered)",
     "Demo runbook + pre-warm + break-glass scripts (see run105-pipeline.md)"
   ],
   "recent_seals": [
+    { "run": 106, "era": "ROMAN", "head": "c9eee8eb", "soul_delta": 0, "seal": "Run 106 - P10 Defect D/C closed + audit_log_v2 + all 6 lock tests green" },
     { "run": 105, "era": "ROMAN", "head": "7bf8dd8f", "soul_delta": 0, "seal": "Run 105 - F1-B CLOSED + lock tests + Phoenix Rising Protocol" },
     { "run": 104, "era": "ROMAN", "head": "03a3bc98", "soul_delta": 80635, "seal": "RSS-104 Layer 6 perf fix + deploy wrapper + canary endpoints" }
   ],
