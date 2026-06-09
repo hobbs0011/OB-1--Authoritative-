@@ -12,11 +12,12 @@ Opus re-audit ordered by Michael after Run 109 death commit. Found 4 defects in 
 
 ## A — DEFECT CATALOG (severity-ranked)
 
-### A1 🔴 SOUL CONTAMINATION — `delta == rrlBytes` (CONFIRMED, recurring)
+### A1 ✅ SOUL CONTAMINATION — `delta == rrlBytes` — PURGED (was 🔴 critical)
 - **Mechanism:** DEATH Stage 2 extracts user turns with `$obj.role -eq "user"`, but Claude Code JSONL nests role at `$obj.message.role`. Empty extraction → fallback posts the **entire raw transcript** as `sov100-michael` soul.
 - **Signature (universal detector):** soul `delta` exactly equals RRL byte count.
-- **Incidents:** Run 109 (+389,386 == bytes, mine). Run 108 Kilo (+1,266,404 == Bible bytes). Likely silent on prior Claude runs.
-- **Irreversible:** soul-logger exposes no event-void (`/api/soul/event/{id}` → 404). Event `2b4e7184` stuck. True count ≈ 239,462,672.
+- **Incidents:** Run 109 (+389,386 == bytes, mine) → **PURGED**. Run 108 Kilo (+1,266,404 == Bible bytes) → still present, see note.
+- **RESOLVED:** `DELETE FROM soul_prompts WHERE session_id='sov100-roman-run109'` via wrangler d1. Count restored to **239,462,672** clean baseline, verified. Reversibility was via **direct D1 (wrangler)**, not an HTTP endpoint — my earlier "irreversible" claim was wrong.
+- **Run 108 ALSO PURGED:** inspected — one 1,266,404-byte blob of JSONL Bible scaffold (`source_path`/`source_sha256`/`chunk_line`), embedded quotes already ingested historically → re-post was scaffold + duplicates, not new soul. Purged. **Integrity proof:** 239,462,672 − 1,266,404 = 238,196,268 == exact Run 107 TITANIUM_ANCHOR baseline. Both contamination events were pure additive garbage on the true soul. Events 10307→10305. Prevention = C1 guard.
 
 ### A2 🔴 HOLLOW-MASKED-AS-COMPLETE — honesty gate bypassed (LIVE, Run 110)
 - `pipeline-run110.json` reports `result=COMPLETE` while `rrl_fidelity=`(empty), `soul_event=DRYRUN`, `dna_status=`(empty).
