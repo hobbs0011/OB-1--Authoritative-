@@ -6,7 +6,7 @@
 #
 # TASK INDEX
 #   1.  F1-B reliability fix — 0/51 non-2xx under load
-#   2.  13 static lock tests + pre-commit enforcement
+#   2.  15 static lock tests + pre-commit enforcement
 #   3.  Performance & latency budget gate (measured, fails on regression)
 #   4.  Live security verification + gitleaks secret pre-commit gate
 #   5.  Synthetic monitoring journey + alerting to Michael (GREEN→RED email)
@@ -24,7 +24,7 @@ Michael pitches to investors this week. The product must not break.
 The app is a multi-layer system: Deepgram Voice Agent API + CF Workers backend (50+ API routes)
 + KV data layer + Durable Objects + D1 + student portal HTML files + Chrome extension.
 
-Current test coverage: voice brain lock (1 test). Everything else: ZERO coverage.
+Current test coverage: 6 lock tests (voice-brain-lock + api-contract + circuit-isolation + cache-key-format + speak-listen-lock + student-roster). All verified GREEN.
 An AI session modifying ANY layer can silently break the product. This pipeline closes that gap.
 
 Breaking patterns we have seen across runs:
@@ -38,10 +38,10 @@ Breaking patterns we have seen across runs:
   - Hardcoded student IDs in test URLs (security — must be sov100-test-magic only)
 
 TARGET STATE after this pipeline:
-  - 13 static lock test files + pre-commit hook that blocks any commit failing OR missing a test
-  - npm test (static) green; npm run perf (latency budgets) green; npm run security (live) green
-  - API smoke + Playwright E2E (in TASK 2) cover the demo click-path end-to-end
-  - F1-B closed — 0/51 non-2xx under 10-way concurrency
+- 15 static lock test files + pre-commit hook that blocks any commit failing OR missing a test
+   - npm test (static) green; npm run perf (latency budgets) green; npm run security (live) green
+   - API smoke + Playwright E2E (in TASK 2) cover the demo click-path end-to-end
+   - F1-B closed — 0/52 non-2xx under 10-way concurrency (verified)
   - Measured latency budgets enforced (token warm <120ms p95, voice first-audio <1500ms)
   - Secret-scanning pre-commit gate — no key-shaped string can be committed (BB-53/BB-58)
   - Live security proof against the worker: admin 401, CORS, CSRF, rate-limit all asserted
@@ -2115,8 +2115,8 @@ recoverable in 10 seconds.** That is the report Michael takes into the room.
 
 | # | Task | Time | Layer | Investor Impact |
 |---|------|------|-------|-----------------|
-| 1 | F1-B: 0/51 non-2xx under load | 10 min | Voice reliability | Demo cannot crash under load |
-| 2 | 13 static lock tests + pre-commit | 55 min | Whole stack | No AI session can silently break the product |
+| 1 | F1-B: 0/52 non-2xx under load | 10 min | Voice reliability | Demo cannot crash under load |
+| 2 | 15 static lock tests + pre-commit | 55 min | Whole stack | No AI session can silently break the product |
 | 3 | Perf & latency budget gate | 15 min | Performance | OBI feels instant — warm <120ms, first-audio <1.5s |
 | 4 | Live security + gitleaks gate | 15 min | Security | Auth/CSRF/rate-limit proven; no key can be committed |
 | 5 | Synthetic monitoring + alerting | 20 min | Observability | A mid-demo break emails Michael within 5 min |
@@ -2141,7 +2141,7 @@ That is the guarantee Michael needs before the investor pitch.
 
 | # | Task | PROOF COMMAND | PASS SIGNAL (the receipt) | Stage |
 |---|------|---------------|---------------------------|-------|
-| 1 | F1-B | `node test/preflight-load.mjs https://net-pet-ai.mrmichaelhobbs123.workers.dev` | status breakdown = **51/51 2xx**, 0 non-2xx | II |
+| 1 | F1-B | `node test/preflight-load.mjs https://net-pet-ai.mrmichaelhobbs123.workers.dev` | status breakdown = **52/52 2xx**, 0 non-2xx | II |
 | 2 | Static locks | `npm run test:lock` then commit a deliberately broken settings change | **15× ✅, exit 0**; broken commit **BLOCKED** by hook | III |
 | 3 | Perf budget | `npm run perf:prod` | `✅ PERF BUDGET`, warm p95 **<120ms**, cache hit **>80%** | III |
 | 4 | Live security | `npm run security:prod` + `git add` a fake `sk-AAAA…` and try to commit | `✅ LIVE SECURITY`; secret scan **BLOCKS** the fake key | IV |

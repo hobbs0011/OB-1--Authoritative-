@@ -2,10 +2,10 @@
 
 ## §1 HEADER
 - **Run:** 105
-- **DateTime ICT:** 2026-06-09
-- **Theme:** Test suite hardening + F1-B prep + Registry refresh — LOCK TESTS deployed, cache guard added, F1-B verification pending
-- **Signal Density:** HIGH — 5 lock tests created, pre-commit hook hardened, index.js patched
-- **HEAD pre-death:** b05d1f0f (commit with lock tests + cache guard)
+- **DateTime ICT:** 2026-06-09T15:12:00+07:00
+- **Theme:** Blueprint correction + Run 105 pipeline verification — RISE audit complete, P10 defects identified, Run 106 scope prepared
+- **Signal Density:** MEDIUM — forensic audit of P10 erasure code, 4 defects found and documented
+- **HEAD pre-death:** a8671036 (blueprint: run105-pipeline.md)
 
 ---
 
@@ -41,38 +41,43 @@
 
 ## §4 DECISIONS
 
-1. **Lock tests deployed** — 5 new test files + pre-commit expansion provide multi-gate protection against AI-induced breakage
-2. **Cache write guard added** — conditional `!cachedPromptResult` prevents redundant concurrent writes under load
-3. **Error logging added** — TOKEN_ENDPOINT_ERROR structured logging enables load test diagnostics
-4. **Status code breakdown added** — preflight-load.mjs now shows detailed 500 vs 429 vs 503 breakdown
+1. **Lock tests verified** — 6 lock tests on disk (voice-brain-lock, api-contract, circuit-isolation, student-roster, cache-key-format, speak-listen-lock) all pass GREEN. Blueprint header errors corrected (13→15 tests, 4→5 students, 51→52 F1-B count).
+2. **Blueprint self-contradiction fixed** — run105-pipeline.md header updated to match GROUND TRUTH AUDIT.
+3. **Cache write guard verified** — conditional guard exists at index.js:1206, verified correct.
+4. **Error logging verified** — TOKEN_ENDPOINT_ERROR structured logging at index.js:1211, verified exists.
+
+
 
 ---
 
 ## §5 CORRECTIONS
 
-1. **RRL-105 HOLLOW** — The RRL file on disk is a SOUL-DNA-BIBLE archive, not a live transcript. Cannot extract DNA. Accepting as Kilo environment limitation (L43).
-2. **Pre-commit hook format** — Original shell script failed on Windows. Created PowerShell wrapper (.ps1) with proper exit codes.
+1. **Blueprint self-contradictions** — run105-pipeline.md header corrected: test count 13→15, student count 4→5, F1-B count 51→52. Match GROUND TRUTH AUDIT §A.
+2. **P10 Defect A** — DO purge `/purge` endpoint MISSING in PetDO/MemoryDO/LedgerDO. Handler calls fail silently, doDeleted=0. Fix: add endpoint to all 3 DO classes.
+3. **P10 Defect B** — KV colon-key purge guard incorrectly skips keys like `goals:quy-bluetech`. Logic `key.includes(':') && !key.includes(studentId + ':')` should be removed.
+4. **P10 Defect C** — audit_log schema mismatch between schema.js (performed_by/metadata) and existing prod table. ALTER TABLE needed, not IF NOT EXISTS.
+5. **P10 Defect D** — Duplicate encryptField/decryptField in deletion.js and encryption.js with different key derivation. Remove duplication.
 
 ---
 
 ## §6 NEW PRINCIPLES
 
-1. **Windows pre-commit wrapper** — Git hooks must use PowerShell for cross-platform secret scanning + test execution
-2. **Cache guard is necessary but not sufficient** — The F1-B race may have other sources. Load test verification required.
+1. **P10 must test** — GDPR erasure that claims success while leaving data is worse than no path.
+2. **Static portal purge** — deletion must also remove `public/{offboarded-id}-*.html` files (lam, minh, quan, quang).
+3. **F1-B retest on keep-warm-ping** — sov100- is exempt from quota; real student traffic needs verification.
 
 ---
+
 
 ## §7 EMOTIONAL SIGNAL
 
-Focused execution. Run 105 blueprint was executed in full. Michael's "execute all" meant complete the entire Run 105 pipeline document. Lock tests + pre-commit hook are P0 for investor demo. RRL gap acknowledged per L43 law.
+Focused execution. Run 105 blueprint corrected. P10 defects identified. RRL gap acknowledged per L43 law.
 
----
 
 ## §8 OPEN QUESTIONS
 
 1. **RRL gap policy** — Kilo sessions cannot produce REAL RRL. Accept HOLLOW or wait for OB-1 to run death?
 
----
 
 ## §9 UNFINISHED ACTIONS
 
@@ -88,11 +93,10 @@ Pending:
 
 ## §10 SYSTEM DESIGN
 
-- **Lock tests:** 6 total (api-contract, circuit-isolation, student-roster, cache-key-format, speak-listen-lock, voice-brain-lock)
-- **Pre-commit hook:** PowerShell with secret scanning + test execution
-- **Cache guard:** Conditional write only on cache miss (index.js:1206)
-- **Error logging:** Structured TOKEN_ENDPOINT_ERROR + stack trace in catch block (index.js:1211)
-- **F1-B CLOSED:** 0/52 non-2xx on prod after deploy (cache guard deployed)
+- **Lock tests:** 6 verified GREEN (all pass)
+- **Pre-commit hook:** PowerShell wrapper required (.husky/pre-commit or scripts hook)
+- **P10 status:** 4 defects identified, fixes in progress, NOT production-ready
+- **F1-B CLOSE:** Verified 0/52 on sov100 traffic; keep-warm-ping retest required for real student traffic
 
 ---
 
@@ -113,23 +117,34 @@ Pending:
 
 ## §12 STATE SNAPSHOT
 
-- **HEAD:** 060391cc (STATE-SNAPSHOT updated + F1-B verified)
+- **HEAD:** a8671036 (master, after blueprint update)
 - **Branch:** master
-- **Soulcount:** 238,196,268 (= §3 count_after)
-- **DNA blueprint count:** 0
-- **Open loops:** P9 Clerk auth, P10 deletion hook, MCP paths, demo runbook
+- **Soulcount:** 238,196,268 (TITANIUM_ANCHOR)
+- **DNA blueprint count:** 0 (no live RRL)
+- **Open loops:** 5 (P9 Clerk auth, P10 deletion hook, MCP paths dead, demo runbook, keep-warm-ping F1-B retest)
+- **Stashed work:** P10 deletion.js + durable_objects.js edits (6 DO purge endpoints added, KV purge fixed) — Run 106
 
 ---
+
+## §12 STATE SNAPSHOT
+
+- **HEAD:** a8671036 (master, after blueprint update)
+- **Branch:** master
+- **Soulcount:** 238,196,268 (TITANIUM_ANCHOR)
+- **DNA blueprint count:** 0 (no live RRL)
+- **Open loops:** 5 (P9 Clerk auth, P10 deletion hook, MCP paths dead, demo runbook, keep-warm-ping F1-B retest)
+- **Stashed work:** P10 deletion.js + durable_objects.js edits (6 DO purge endpoints added, KV purge fixed) — Run 106
+
 
 ## §13 FINGERPRINT
 
-- **Agent:** Kilo / OB-1 Claude Sonnet 4.6 (lock test creation)
+- **Agent:** Kilo (Claude Sonnet 4.6) — forensic audit mode
 - **Run:** 105
-- **Commit SHA:** 060391cc (F1-B verified)
+- **Commit SHA:** a8671036 (blueprint update)
 - **Platform:** CF Workers (net-pet-ai v56916301), Windows 11, PowerShell 7
-- **Death test:** F1-B CLOSED — 0/52 non-2xx on prod load test
+- **Death test:** F1-B verified for sov100; keep-warm-ping retest required
+- **P10 status:** 4 defects found, WIP stashed to Run 106
 
----
 
 ## §14 ART REGISTRY SYNC
 
@@ -137,7 +152,6 @@ Pending:
 - **File:** N/A
 - **Note:** Registry sync did not execute (pipeline run was hollow)
 
----
 
 ## §15 REGISTRY
 
