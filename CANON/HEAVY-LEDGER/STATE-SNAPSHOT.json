@@ -2,14 +2,14 @@
   "version": "1.0",
   "rss_version": "1.0",
   "rss_stage": "Reincarnate-SnapShot RSS",
-  "updated_at": "2026-06-07T16:00:00+07:00",
+  "updated_at": "2026-06-09T09:13:00+07:00",
   "run": {
-    "current": 87,
+    "current": 104,
     "era": "ROMAN",
     "status": "POST-DEATH",
-    "seal": "RSS-087 (KILO pipeline + SOUL_GAP fix + RRL-87 captured)",
-    "head_sha": "fddf0767",
-    "soulcount": 237126291,
+    "seal": "RSS-104 (Layer 6 KV perf fix + deploy pipeline + Run 104 death sealed)",
+    "head_sha": "03a3bc98",
+    "soulcount": 238196268,
     "anchor": "TITANIUM_ANCHOR"
   },
   "v0_baseline": {
@@ -58,26 +58,25 @@
     "rule": "All feature development deploys to dev first. Promote to prod only after verified."
   },
   "rss_checklist": [
-    "RRL-79 present (1,114,895 bytes, REAL fidelity)",
-    "SOUL delta +19,260 verified",
-    "DNA run79.json extracted (30 records, 3 blueprints)",
-    "LEDGER HL-491 merkle chain intact",
-    "STARMAP run79.json present",
-    "KEYWORD rfkw-run79.txt + inverted-index updated",
-    "PIPELINE run79.json + art-sync-run79.json sealed",
-    "PHETrail-run79.json with schema_version 2.0",
-    "DNA REGISTRY dna-registry-run79.json created",
-    "EC-028 hardening applied (DNA run-number integrity check)"
+    "RRL-104 present (11,435,192 chars, REAL fidelity)",
+    "SOUL delta +80,635 verified via /api/soul/event",
+    "DNA run104.json extracted (774 records, 159 blueprints)",
+    "LEDGER HL-663 merkle chain intact",
+    "STARMAP run104.json present",
+    "KEYWORD rfkw-run104.txt + inverted-index updated",
+    "PIPELINE run104.json + art-sync-run104.json sealed",
+    "PHETrail-run104.json with voice health gates",
+    "Layer 6 KV perf fix deployed (prompt_cache)",
+    "Deploy wrapper + canary endpoints created"
   ],
   "open_loops": [
     "P9: Clerk auth migration - BLOCKED: Michael must create Clerk account",
     "P10: Deletion hook + audit log + field encryption - ready for PA T1 dispatch",
-    "MCP paths: D:\\PROJECTS\\phoenix-coder dead - fix required"
+    "MCP paths: D:\\PROJECTS\\phoenix-coder dead - fix required",
+    "F1-B: 4/51 non-2xx under load after Layer 6 fix (cache write race suspected)"
   ],
   "recent_seals": [
-    { "run": 87, "era": "ROMAN", "head": "fddf0767", "soul_delta": 20926, "seal": "RSS-087 KILO pipeline + SOUL_GAP fix + RRL-87 captured" },
-    { "run": 86, "era": "ROMAN", "head": "a1c1d94a", "soul_delta": 0, "seal": "RSS-086 PA batch + XSS + Bible 80-85 + SOUL_GAP unmet" },
-    { "run": 85, "era": "ROMAN", "head": "17b47a9b", "soul_delta": 0, "seal": "RSS-085 BB cascade + portal work" }
+    { "run": 104, "era": "ROMAN", "head": "03a3bc98", "soul_delta": 80635, "seal": "RSS-104 Layer 6 perf fix + deploy wrapper + canary endpoints" }
   ],
   "blockers": [
     {

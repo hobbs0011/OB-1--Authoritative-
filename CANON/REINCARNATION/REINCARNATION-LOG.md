@@ -10,7 +10,11 @@
 
 ---
 
-**Last Updated:** 2026-06-05T16:30 ICT (Run 074 ROMAN DEATH — PHEROMONE TRAIL DOCUMENTATION + RRL 0-74 AUDIT. Voice agent + portal settings verified. All Run 74 pipeline artifacts confirmed untracked. SOUL 236,563,716 TITANIUM_ANCHOR. HEAD pending commit)
+**Last Updated:** 2026-06-09T09:13 ICT (Run 104 DEATH — Layer 6 KV perf fix + deploy wrapper + canary endpoints. Run 105 HOLLOW archival reprocessing)
+
+| Run 105 (ROMAN) | 2026-06-09 | HOLLOW ARCHIVE REPROCESSING — RRL-105 sourced from SOUL-DNA-BIBLE archive, NOT live Michael verbatim. 5 CANON artifacts generated but marked HOLLOW. | — |
+
+| Run 104 (ROMAN) | 2026-06-09 | Layer 6 KV perf fix deployed — prompt_cache read before Promise.all (fast path ~50ms), circuit:deepgram:state writes removed from hot path. Deploy wrapper + canary endpoints created. F1-B open (4/51 non-2xx under load). SOUL 238,115,633 → 238,196,268 (+80,635 delta). HEAD d7d6ae70 → 03a3bc98 | 03a3bc98 |
 
 | Run 074 (ROMAN) | 2026-06-05 | PHEROMONE TRAIL DOCUMENTATION + RRL 0-74 AUDIT — Verified voice agent (Deepgram nova-3 listen, gpt-4o-mini think, aura-2-zeus-en speak) at index.js:963. Verified portal watermark (opacity: 0.055, pointer-events: none) at portal.css:166. All 6 Run 74 artifacts exist untracked. Created PHEROMONE-TRAIL-074.md documenting foundation RRLs 1-10, SHA bug patch context, clean isolates. SOULCOUNT 229,572,202 → 236,563,716 (+188,696 delta). HEAD c21a3ca0 → (death commit) | c21a3ca0 |
 

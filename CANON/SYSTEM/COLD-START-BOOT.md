@@ -277,6 +277,7 @@ BB-55. **FUNNEL BROWSER TEST** — tigers-4room.pages.dev end-to-end test. Micha
 - Run 079: HOULL DNA (run=7) → fixed; DNA Registry created; SoulSearch EC-028 handler; PheTrail schema_version enforced
 
 **RECENT RUNS:**
+- Run 104 (Claude/OB-1): Layer 6 KV perf fix — prompt_cache read before Promise.all (fast path ~50ms), circuit:deepgram:state writes removed from hot path. Deploy wrapper (SCRIPTS/deploy-with-gates.mjs) + canary endpoints (test/canary-check.mjs, /api/health/voice) created. F1-B open (4/51 non-2xx under 10-way load). SOUL 238,115,633 → 238,196,268 (+80,635 delta). HEAD d7d6ae70 → 03a3bc98. Prod version ea8ab523-2f3e-402e-b4b4-17c1c7fc7d50.
 - Run 089: CHAOS pipeline — /api/lead POST wired, BB-63 fallback patched, portal CSS hardening (reduced-motion/print/font-display), chat.js double-load guard + MAX_RECONNECT constant, 60 issues backlogged to CANON/BACKLOG/chaos-issues-run089.txt.
 - Run 090: DIVERGENT COMPLETE — no pipeline artifacts written (RRL-90/HL-535 missing). Block EE verified functional via existing PATCH/GET handlers. SOUL: 237,279,079 TITANIUM_ANCHOR.
 - Run 091: PENDING session-capture.ps1 execution. Next: RRL-91 → rrl-pipeline → death seal.
