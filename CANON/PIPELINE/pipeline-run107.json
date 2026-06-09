@@ -1,0 +1,19 @@
+{
+  "run_number": "107",
+  "executed_at": "2026-06-09T19:15:51.8508418+07:00",
+  "rrl_path": "D:\\OB-1-CANONICAL\\RRL\\RRL-107.txt",
+  "rrl_chars": 1263068,
+  "rrl_bytes": 1266404,
+  "session_id": "sov100-roman-run107",
+  "soul_event_id": "DRYRUN",
+  "soulcount": 0,
+  "soul_level": "UNKNOWN",
+  "dna_count": 0,
+  "ledger_id": "HL-676",
+  "starmap_file": "D:\\OB-1-CANONICAL\\CANON\\STARMAP\\starmap-run107.json",
+  "keyword_file": "D:\\OB-1-CANONICAL\\CANON\\SOUL-KEYWORDS\\rfkw-run107.txt",
+  "pipeline_file": "D:\\OB-1-CANONICAL\\CANON\\PIPELINE\\pipeline-run107.json",
+  "seal_sha": "1f0553850ffa6edc7bd2e018a58a0a76f9c1278f0340ffdf23615d94dbd9468d",
+  "result": "COMPLETE"
+}
+
