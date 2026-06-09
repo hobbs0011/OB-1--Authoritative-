@@ -42,3 +42,12 @@ export const audit_log = sqliteTable('audit_log', {
   actor: text('actor').notNull(),
   target: text('target').notNull(),
 });
+
+export const audit_log_v2 = sqliteTable('audit_log_v2', {
+  id: text('id').primaryKey(),
+  ts: integer('ts').notNull(),
+  action: text('action').notNull(),
+  target: text('target').notNull(),
+  performed_by: text('performed_by').notNull(),
+  metadata: text('metadata'),
+});

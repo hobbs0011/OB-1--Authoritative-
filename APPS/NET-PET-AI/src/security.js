@@ -157,7 +157,6 @@ function validateStudentId(studentId) {
 // Operator (sov100-*) and test IDs are always allowed.
 // ⚠️ UPDATE THIS LIST when onboarding or offboarding students.
 const ACTIVE_STUDENT_ROSTER = new Set([
-  'quy-bluetech',
   'mai-tram-bluetech',
   'huong-bluetech',
   // test / warm-up IDs
@@ -269,20 +268,19 @@ async function logAudit(env, { action, actor = 'system', target = '', ip = '', m
   if (!env.SOUL_DB) return;
   try {
     await env.SOUL_DB.prepare(
-      `CREATE TABLE IF NOT EXISTS audit_log (
+      `CREATE TABLE IF NOT EXISTS audit_log_v2 (
         id TEXT PRIMARY KEY,
         ts INTEGER NOT NULL,
         action TEXT NOT NULL,
-        actor TEXT,
-        target TEXT,
-        ip TEXT,
-        meta TEXT
+        target TEXT NOT NULL,
+        performed_by TEXT NOT NULL,
+        metadata TEXT
       )`
     ).run();
     const id = `aud-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
     await env.SOUL_DB.prepare(
-      `INSERT INTO audit_log (id, ts, action, actor, target, ip, meta) VALUES (?, ?, ?, ?, ?, ?, ?)`
-    ).bind(id, Date.now(), action, actor, target, ip, JSON.stringify(meta)).run();
+      `INSERT INTO audit_log_v2 (id, ts, action, target, performed_by, metadata) VALUES (?, ?, ?, ?, ?, ?)`
+    ).bind(id, Math.floor(Date.now() / 1000), action, target, actor, JSON.stringify({ ...meta, ip })).run();
   } catch (e) {
     console.warn('AUDIT_LOG_FAIL:', e.message);
   }

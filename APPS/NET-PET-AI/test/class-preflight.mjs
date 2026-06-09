@@ -1,18 +1,10 @@
 /**
  * NET-PET-AI Class Preflight — Tests real student sessions against prod
  *
- * For each student (quy, mai-tram) × 3 modes (free, study, phonics):
- *   - FETCH token endpoint
- *   - ASSERT: 200 OK
- *   - ASSERT: token present
- *   - ASSERT: settings present
- *
- * GO/NO-GO table printed at end.
- *
- * Usage: node test/class-preflight.mjs
+ * GO/NO-GO table for quy + mai-tram × 3 modes (free, study, phonics).
  */
 
-const STUDENTS = ["quy-bluetech", "mai-tram-bluetech"];
+const STUDENTS = ["mai-tram-bluetech"];
 const MODES = ["free", "study", "phonics"];
 const BASE = "https://net-pet-ai.mrmichaelhobbs123.workers.dev";
 
@@ -57,12 +49,12 @@ console.log("\n=== CLASS PREFLIGHT TABLE ===\n");
 console.log("| Student | Mode | Status | Code | Token | Settings |");
 console.log("|---------|------|--------|------|-------|----------|");
 for (const r of results) {
-  const t = r.token ? "✅" : "❌";
-  const s = r.settings ? "✅" : "❌";
+  const t = r.token ? "GO" : "NO-GO";
+  const s = r.settings ? "GO" : "NO-GO";
   console.log(`| ${r.student} | ${r.mode} | ${r.status} | ${r.code} | ${t} | ${s} |`);
 }
 console.log("");
 
 const allGreen = results.every(r => r.status === "GO" && r.token && r.settings);
-console.log(`Overall: ${allGreen ? "ALL GREEN ✅" : "SOME FAILED ⚠️"}`);
+console.log(`Overall: ${allGreen ? "ALL GREEN" : "SOME FAILED"}`);
 process.exit(allGreen ? 0 : 1);

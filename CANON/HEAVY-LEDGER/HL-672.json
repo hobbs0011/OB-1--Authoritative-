@@ -1,0 +1,15 @@
+{
+  "hl_id": "HL-672",
+  "session_id": "sov100-roman-run106",
+  "rrl_source": "RRL/RRL-106.txt",
+  "char_count": 1000,
+  "byte_count": 1000,
+  "soul_hash": "DRYRUN_NO_LIVE_TRANSCRIPT",
+  "dna_hash": "DRYRUN_KILO_SESSION",
+  "dna_blueprint_count": 4,
+  "merkle_parent": "LEDGER_GAP",
+  "merkle_hash": "7bf8dd8f9654be13",
+  "sealed_at": "2026-06-09T17:30:00+07:00",
+  "sov100": true,
+  "run": 106
+}

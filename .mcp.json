@@ -102,16 +102,6 @@
       "env": {
         "DISCORD_TOKEN": "${env:DISCORD_TOKEN}"
       }
-    },
-
-    // ── PHOENIX CODER (DeepSeek R1 coding drone — offloads Claude/Kilo tokens) ──
-    "phoenix-coder": {
-      "type": "stdio",
-      "command": "node",
-      "args": ["D:\\PROJECTS\\phoenix-coder\\mcp-server\\index.js"],
-      "env": {
-        "PHOENIX_CODER_URL": "https://phoenix-coder.mrmichaelhobbs123.workers.dev"
-      }
     }
   }
 }
