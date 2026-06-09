@@ -1017,6 +1017,20 @@ async function handleAPI(path, request, env, url) {
     }
 
     try {
+      // ── LAYER 6: Prompt cache check (returns ~50ms on hit) ──
+      const promptCacheKey = `prompt_cache:${studentId}:${sessionMode}`;
+      if (env.NET_PET_KV) {
+        try {
+          const cached = await env.NET_PET_KV.get(promptCacheKey, { cacheTtl: 300 });
+          if (cached) {
+            const { settings, phonicsHint, lastSessionVocab, lastSessionTopic, ws_url } = JSON.parse(cached);
+            logInfo("PROMPT_CACHE_HIT", { studentId, sessionMode }, env);
+            assertVoiceBrainLock(settings);
+            return addCors(json({ token: apiKey, settings, phonicsHint, lastSessionVocab, lastSessionTopic, ws_url }), request);
+          }
+        } catch (_) {}
+      }
+
       const [rawProfile, rawLang, rawVocab, rawArc, rawMemory, rawPhonics, rawSessionHistory, rawSrsData] = await Promise.all([
         env.NET_PET_KV.get("student_profile_" + studentId),
         env.NET_PET_KV.get("lang:" + studentId),
@@ -1187,10 +1201,13 @@ speak: {
       const ws_url = agentLang === 'vi' ? "wss://agent.deepgram.com/v1/agent/converse?region=syd" : null;
       // ⛔ VOICE BRAIN LOCK — runtime assertion (throws if provider mutated; caught by catch → 500)
       assertVoiceBrainLock(settings);
-      if (env.NET_PET_KV) await env.NET_PET_KV.put('circuit:deepgram:state', 'closed');
+      // ── LAYER 6: Prompt cache write (fire-and-forget) ──
+      if (env.NET_PET_KV) {
+        const cachePayload = { settings, phonicsHint, lastSessionVocab, lastSessionTopic: memoryData?.last_topic || null, ws_url };
+        env.NET_PET_KV.put(promptCacheKey, JSON.stringify(cachePayload), { expirationTtl: 300 }).catch(() => {});
+      }
       return addCors(json({ token: access_token, settings, phonicsHint, lastSessionVocab, lastSessionTopic: memoryData?.last_topic || null, ws_url }), request);
     } catch (err) {
-      if (env.NET_PET_KV) await env.NET_PET_KV.put('circuit:deepgram:state', 'open', { expirationTtl: 60 });
       return addCors(json({ error: err.message }, 500), request);
     }
   }

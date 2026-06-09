@@ -1,238 +1,111 @@
-# Layer 6 Deploy Pipeline — KV Perf Fix (F1)
-## Full build → verify → deploy → confirm sequence for Kilo
+# layer6-deploy-pipeline.md — Layer 6 KV Perf Deploy Pipeline
 
-**What this closes:** F1 from Run 101 load test. Token endpoint returns 500 on ~2% of requests under 10-way concurrency. Avg latency 1010ms, p99 1469ms. Students on Vietnamese 4G experience 1.6s silence before OBI speaks.
+## Code Changes (4 in src/index.js)
 
-**Root cause (two bugs, one endpoint — `/api/deepgram-token` in `src/index.js`):**
-1. 8 parallel cold KV reads + synchronous prompt build on every call = ~1000ms
-2. Circuit breaker key written by every concurrent token request = write race = 500s under load
+1. **Line ~1019** — Add prompt cache key definition: `prompt_cache:{studentId}:{mode}`
+2. **Line ~1023** — KV read with `cacheTtl: 300` before Promise.all
+3. **Line ~1205** — Fire-and-forget cache write after successful payload build
+4. **Lines ~1190, 1193** — DELETE circuit:deepgram:state writes (moved to canary)
 
-**What this does NOT touch:** voice brain lock, Deepgram WS settings, student data, any other endpoint.
-
----
-
-## STEP 1 — CODE CHANGES (src/index.js only)
-
-### 1a. Add prompt cache check BEFORE the existing 8-read Promise.all block
-
-Location: find the line `const [rawProfile, rawLang, rawVocab...` — insert this ABOVE it.
-
-```js
-// L6 PROMPT CACHE — fast path: skip 8 KV reads if cached
-const promptCacheKey = `prompt_cache:${studentId}:${sessionMode}`;
-if (env.NET_PET_KV) {
-  try {
-    const cached = await env.NET_PET_KV.get(promptCacheKey, { cacheTtl: 300 });
-    if (cached) {
-      const { settings: cachedSettings, phonicsHint, lastSessionVocab, lastSessionTopic, ws_url } = JSON.parse(cached);
-      assertVoiceBrainLock(cachedSettings);
-      logInfo("PROMPT_CACHE_HIT", { studentId, sessionMode }, env);
-      return addCors(json({ token: env.DEEPGRAM_API_KEY, settings: cachedSettings, phonicsHint, lastSessionVocab, lastSessionTopic, ws_url }), request);
-    }
-  } catch (_) {
-    // cache miss or parse error — fall through to full path
-  }
-}
-```
-
-### 1b. Capture the built prompt before it goes into settings
-
-Location: find `prompt: buildAgentPrompt(...)` — change it to:
-
-```js
-// Before: prompt: buildAgentPrompt(agentProfile, agentLang, recentVocab, arcData, sessionMode, memoryData, phonicsData),
-// After:
-const _builtPrompt = buildAgentPrompt(agentProfile, agentLang, recentVocab, arcData, sessionMode, memoryData, phonicsData);
-// then in the settings object use: prompt: _builtPrompt,
-```
-
-### 1c. Add fire-and-forget cache write AFTER assertVoiceBrainLock, BEFORE the return
-
-Location: find `assertVoiceBrainLock(settings);` — add immediately after it:
-
-```js
-// L6 CACHE WRITE — non-blocking, does not delay response
-if (env.NET_PET_KV) {
-  ctx.waitUntil(
-    env.NET_PET_KV.put(
-      promptCacheKey,
-      JSON.stringify({ settings, phonicsHint, lastSessionVocab, lastSessionTopic, ws_url }),
-      { expirationTtl: 300 }
-    ).catch(() => {})
-  );
-}
-```
-
-Note: `ctx` is the second argument to the Worker `fetch(request, env, ctx)` handler. It must be in scope. If the handler signature is currently `async fetch(request, env)` — change it to `async fetch(request, env, ctx)`.
-
-### 1d. DELETE the two circuit breaker writes from the hot path
-
-Find and delete (or comment out) both of these lines:
-
-```js
-// DELETE THIS — success path (~line 1190):
-if (env.NET_PET_KV) await env.NET_PET_KV.put('circuit:deepgram:state', 'closed');
-
-// DELETE THIS — error catch (~line 1193):
-if (env.NET_PET_KV) await env.NET_PET_KV.put('circuit:deepgram:state', 'open', { expirationTtl: 60 });
-```
-
-Keep the READ at `env.NET_PET_KV.get('circuit:deepgram:state')` — that's correct and fast. Only remove the writes.
-
----
-
-## STEP 2 — LOCAL VERIFY (before touching wrangler)
-
-### 2a. Voice brain lock — must still pass after code change
+## Local Checks (2)
 
 ```powershell
-node test/voice-brain-lock.test.mjs
-# expect: PASS — if this fails, undo 1a-1d before anything else
-```
-
-### 2b. Node syntax check
-
-```powershell
+# Check 1 — Syntax
 node --check src/index.js
-# expect: no output (clean parse)
+
+# Check 2 — Cache logic compiles
+node -e "const s = require('./src/index.js'); console.log('module loads')"
 ```
 
----
-
-## STEP 3 — DEPLOY TO DEV (firewall rule — always dev before prod)
+## Deploy Dev
 
 ```powershell
-npx wrangler deploy --env dev
+# Deploy to dev
+cd APPS/NET-PET-AI
+npx wrangler deploy --env=dev
 ```
 
-Wait 10 seconds for CF propagation.
+## Dev Gates (4)
 
----
+| Gate | Check | Expected |
+|------|-------|----------|
+| 1 | Cache miss timing | >500ms (full KV path) |
+| 2 | Cache hit timing | <100ms (cached read) |
+| 3 | Load test 0 500s | 50 requests, 0 non-2xx |
+| 4 | WS round-trip still green | preflight-ws.mjs passes |
 
-## STEP 4 — VERIFY ON DEV (4 gates, all against dev URL)
-
-Replace `{DEV}` with `https://net-pet-ai-dev.mrmichaelhobbs123.workers.dev` in each gate.
-
-### Gate A — Cache miss timing (cold, first call)
-
-```powershell
-$sw = [System.Diagnostics.Stopwatch]::StartNew()
-$r = Invoke-RestMethod "{DEV}/api/deepgram-token?studentId=sov100-test-magic"
-$sw.Stop()
-Write-Host "Cache MISS: $($sw.ElapsedMilliseconds)ms | token=$($r.token -ne $null)"
-# expect: 200-600ms (slow path — builds and caches)
-```
-
-### Gate B — Cache hit timing (second call, within 5 min)
+### Dev Gate Commands
 
 ```powershell
-$sw = [System.Diagnostics.Stopwatch]::StartNew()
-$r = Invoke-RestMethod "{DEV}/api/deepgram-token?studentId=sov100-test-magic"
-$sw.Stop()
-Write-Host "Cache HIT: $($sw.ElapsedMilliseconds)ms | token=$($r.token -ne $null)"
-# expect: 30-150ms (fast path)
-# if still ~1000ms: cache write in 1c failed — check ctx.waitUntil, check NET_PET_KV binding on dev
-```
+# Gate 1 — Initial call (cache miss)
+$sw = Get-Date; Invoke-RestMethod "https://net-pet-ai-dev.mrmichaelhobbs123.workers.dev/api/deepgram-token?studentId=sov100-test-magic"; "Elapsed: $((Get-Date) - $sw)"
 
-### Gate C — Load test on dev (0 non-2xx expected)
+# Gate 2 — Second call (cache hit)  
+$sw = Get-Date; Invoke-RestMethod "https://net-pet-ai-dev.mrmichaelhobbs123.workers.dev/api/deepgram-token?studentId=sov100-test-magic"; "Elapsed: $((Get-Date) - $sw)"
 
-```powershell
+# Gate 3 — Load test
 node test/preflight-load.mjs https://net-pet-ai-dev.mrmichaelhobbs123.workers.dev
-# expect: 0 non-2xx (was 2% before fix), p99 < 500ms
-# if still getting 500s: circuit breaker write was not fully removed — check 1d
+
+# Gate 4 — WS round-trip
+node test/preflight-ws.mjs https://net-pet-ai-dev.mrmichaelhobbs123.workers.dev
 ```
 
-### Gate D — WS round-trip still works on dev (Settings still accepted, OBI still speaks)
+**Dev FAIL → HALT, fix, repeat from Step 3**
+
+## Promote Prod
 
 ```powershell
-# Edit test/preflight-ws.mjs: change PROD const to {DEV} URL, run, then change back
-node test/preflight-ws.mjs
-# expect: GATE 2 GREEN (Welcome) + GATE 3 GREEN (SettingsApplied) + GATE 4 GREEN (audio)
-# if Gate 3 RED: a code change accidentally touched the settings object — check 1b, 1c
+# Promote to prod
+npx wrangler deploy --env=""
 ```
 
----
+## Prod Gates (4)
 
-## STEP 5 — PROMOTE TO PROD
+Same checks as Dev, but against `https://net-pet-ai.mrmichaelhobbs123.workers.dev`:
 
-Only after all 4 dev gates are GREEN.
+| Gate | Check | Expected |
+|------|-------|----------|
+| 1 | Cache miss timing | >500ms |
+| 2 | Cache hit timing | <150ms |
+| 3 | Load test 0 500s | 50 requests, 0 non-2xx |
+| 4 | WS round-trip green | preflight-ws.mjs passes |
+
+## Health Endpoint Confirm
 
 ```powershell
-npx wrangler deploy
+# Final confirmation
+$r = Invoke-RestMethod "https://net-pet-ai.mrmichaelhobbs123.workers.dev/api/health/voice"
+$r.ok -eq $true && $r.gates[5].ok -eq $true
 ```
 
-Wait 10 seconds.
+**Prod FAIL → AUTOMATIC ROLLBACK via post-deploy-verify.mjs**
 
 ---
 
-## STEP 6 — PROD CONFIRMATION (same 4 gates, prod URL)
+## Failure Table
 
-Replace `{DEV}` with `https://net-pet-ai.mrmichaelhobbs123.workers.dev`.
+| Failure Mode | Symptom | Fix |
+|------------|---------|-----|
+| Cache key typo | Cache never hits, latency unchanged | Check `prompt_cache:{studentId}:{mode}` key |
+| Cache write before assert | Cache stored with wrong brain lock | Move cache write AFTER assertVoiceBrainLock |
+| Circuit writes still in hot path | 500s under concurrent load | DELETE lines 1190 + 1193 |
+| KV binding missing in dev | Cache returns undefined | Guard with `if (env.NET_PET_KV)` |
+| Promise.all inside cache hit path | Never reached | Early return on cache hit |
+| Cache TTL < 60 | KV rejects write | TTL >= 60 seconds (use 300) |
 
-Run Gate A → B → C → D in order. All must be green.
+---
 
-If Gate D is RED on prod → OBI is dead → rollback immediately:
+## Constraints
 
-```powershell
-npx wrangler rollback
-# wait 30s, then re-run Gate D to confirm rollback worked
+**Brain Lock Hardcoded (DO NOT CHANGE):**
+```javascript
+think:  { type: "open_ai", model: "gpt-4o-mini" }  // in-house Deepgram
+listen: { type: "deepgram", model: "nova-3" }
+speak:  { type: "deepgram", model: "aura-2-zeus-en" }
 ```
 
----
+**Cache Key Format:** `prompt_cache:{studentId}:{mode}` where mode = `free|study|phonics`
 
-## STEP 7 — HEALTH ENDPOINT CONFIRMATION
+**Cache TTL:** 300 seconds (5 minutes)
 
-```powershell
-curl https://net-pet-ai.mrmichaelhobbs123.workers.dev/api/health/voice
-# expect: {"ok":true,"canary":{"state":"GREEN"},...}
-# canary state should still be GREEN — the canary writes circuit:deepgram:state, not token requests
-```
-
----
-
-## WHAT CAN GO WRONG AND HOW TO FIX IT
-
-| Symptom | Cause | Fix |
-|---------|-------|-----|
-| Gate B still ~1000ms | `ctx.waitUntil` not in scope (handler missing `ctx` arg) | Change `fetch(request, env)` to `fetch(request, env, ctx)` |
-| Gate B still ~1000ms | `NET_PET_KV` not bound on dev | Check wrangler.toml dev env KV binding |
-| Gate C still 2% 500s | Circuit write lines not deleted (just commented with wrong line numbers) | Search for `circuit:deepgram:state` writes — delete both that are inside the token handler |
-| Gate D RED — SettingsApplied missing | Code change in 1b broke the settings object structure | Revert 1b and use inline buildAgentPrompt again |
-| Gate D RED — no audio | Deepgram gpt-4o-mini outage | Check status.deepgram.com — not our code |
-| `assertVoiceBrainLock` throws on cache hit path | Cached settings have wrong think.provider fields | Never write to cache in 1c before `assertVoiceBrainLock(settings)` passes |
-
----
-
-## CONSTRAINTS (hardcoded — do not negotiate)
-
-- `assertVoiceBrainLock(settings)` called on EVERY code path including cache hit path — non-negotiable
-- `think.provider.type = "open_ai"` — locked
-- `think.provider.model = "gpt-4o-mini"` — locked
-- `think.provider.endpoint` — must be ABSENT (in-house Deepgram pipeline, not external)
-- `speak.provider.model = "aura-2-zeus-en"` — locked
-- `listen.provider.model = "nova-3"` — locked
-- `listen.endpointing` — must remain ABSENT (the Run 101 bug)
-- Dev before prod — always
-- `sov100-test-magic` as the test studentId — never a real student ID
-
----
-
-## FILES CHANGED
-
-| File | Change |
-|------|--------|
-| `APPS/NET-PET-AI/src/index.js` | Add 1a (cache check), 1b (capture prompt), 1c (cache write), 1d (delete 2 circuit writes) |
-
-No other files. No wrangler.toml change. No package.json change.
-
----
-
-## EXPECTED METRICS AFTER FIX
-
-| Metric | Before | After |
-|--------|--------|-------|
-| Token latency (cache miss) | ~1000ms avg | ~400ms (still does 8 reads, once) |
-| Token latency (cache hit) | ~1000ms avg | ~50-150ms |
-| 500 error rate under load | ~2% | 0% |
-| Student time-to-first-word (4G) | ~1.6s | ~600ms |
-| Canary still writing circuit state | Yes | Yes (unchanged) |
+**No circuit writes in hot path** — Canary owns `circuit:deepgram:state`
