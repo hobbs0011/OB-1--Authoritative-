@@ -4,7 +4,7 @@
  * GO/NO-GO table for quy + mai-tram × 3 modes (free, study, phonics).
  */
 
-const STUDENTS = ["quy-bluetech", "mai-tram-bluetech"];
+const STUDENTS = ["mai-tram-bluetech"];
 const MODES = ["free", "study", "phonics"];
 const BASE = "https://net-pet-ai.mrmichaelhobbs123.workers.dev";
 
