@@ -297,3 +297,46 @@ Fix in Run 110: repair Stage 3 parser → dna-run110.json should be REAL.
 ---
 
 `DEATH v7.0 RUN 109: RISE AUDITED (7/7). DEATH EXECUTED (8/8). SOUL +389K TITANIUM_ANCHOR. PHASE 0 = 4/6 DONE. CLASS-PREFLIGHT.MJS MISSING. PHASE I FORTRESS BLUEPRINTED. FOUNDATION LAW HOLDS. TWO VOWS INTACT.`
+
+---
+
+## §16 — CORRECTION ADDENDUM (Opus post-death audit, same session)
+
+Michael switched to Opus 4.8 and ordered a re-audit immediately after the death commit (82191e53). Cross-validating my own seal against the filesystem surfaced **4 defects in this seal**. Recording them honestly — the seal above is NOT retracted (commit is immutable), it is corrected here. SOUL_MUST_SURVIVE includes the truth about its own errors.
+
+### DEFECT 1 — SOUL CONTAMINATION (CRITICAL, irreversible via current API)
+- **Claim (seal §3):** "+389,386 chars of Michael's verbatim soul."
+- **Reality:** Stage 2 parser checked `$obj.role -eq "user"`, but Claude Code JSONL nests role at **`$obj.message.role`**. `$obj.role` was empty for every line → `$userTexts` empty → fallback fired and posted the **entire raw transcript** (my agent text, tool-call JSON, thinking blocks, command stdout) to soul-logger as `sov100-michael`.
+- **Proof:** delta `389,386` == full RRL byte count **exactly**. Soul = whole file, not user turns.
+- **Class:** Same contamination as RRL-0 (documented/accepted) and Run 108 (Kilo delta +1,266,404 == full Bible byte count — also contamination). This is a **recurring DEATH-pipeline defect**, not a one-off.
+- **Reversibility:** soul-logger exposes no event-void/delete endpoint (probed: `/api/soul/event/{id}` 404, `/api/soul/events` 404). Event `2b4e7184` cannot be cleanly purged via API. Session `sov100-roman-run109` IS queryable.
+- **Decision required (Michael):** (a) accept + document like RRL-0, or (b) build a void endpoint on soul-logger to subtract event `2b4e7184` (389,386 chars). Real count without it ≈ 239,462,672.
+
+### DEFECT 2 — DNA_GAP ROOT CAUSE MISDIAGNOSED
+- **Seal said:** parser failed on "content array with type:text" (L_DNA_PARSER_CLAUDE_JSONL).
+- **Real cause:** role lives at `message.role`; `content[0].type` is often `"thinking"` then `"text"`. The principle named the wrong layer. Correct fix: read `$obj.message.role` and walk `$obj.message.content | ? {$_.type -eq 'text'}`.
+
+### DEFECT 3 — class-preflight.mjs FALSELY REPORTED MISSING
+- **Seal §4/§5/§10/§12 said:** "MISSING — URGENT P0 build it."
+- **Reality:** Exists at `APPS/NET-PET-AI/test/class-preflight.mjs` (1,730 chars). I searched `APPS/NET-PET-AI/` not `APPS/NET-PET-AI/test/`.
+- **The REAL (narrower) gap:** `STUDENTS = ["mai-tram-bluetech"]` — **huong-bluetech is MISSING** from the preflight (she is an active student). Stale `quy` mention in header comment. No voice-lock assertion. No `mode=banana → 400` negative test. So it's an EDIT, not a build.
+
+### DEFECT 4 — LOCK COUNT WRONG
+- **Seal said:** "15-lock suite."
+- **Reality:** `test:lock` runs **17** test invocations; all 17 `.test.mjs` files present on disk. Undercount inherited from Run 108 seal without counting.
+
+### COMMON ROOT CAUSE
+All four = **L32 ASSUME_FAILURE violated during DEATH execution.** RISE (read-only) was clean; DEATH (execution) trusted Run 108's seal and my own untested parser without cross-validation. The fix is procedural: DEATH Stage 2/3 must assert `userTexts.Count > 0` and `delta != rrlBytes` before accepting the SOUL post, and verify file existence by `Test-Path` not memory.
+
+### RUN 110 CORRECTED PRIORITY STACK
+```
+P0  DNA+SOUL parser fix in DEATH pipeline (message.role envelope) — STOP the contamination
+    + add guard: if (delta == rrlBytes) → ABORT soul post, it's raw-transcript contamination
+P1  class-preflight.mjs EDIT (not build): add huong, voice-lock assert, mode=banana→400, drop quy comment
+P2  Phase I-A PII encryption at rest (encryption.js → PETS.put student_state/phonics)
+P3  Phase I-B GDPR export endpoint
+P4  SOUL contamination decision: accept-and-document vs build void endpoint (Michael's call)
+DEFER  Clerk hard-fail (BLK-001), password rotation (Phase 0.5)
+```
+
+`§16: FOUR DEFECTS IN OWN SEAL. SOUL CONTAMINATED (+389K raw transcript, irreversible via API). DNA cause misdiagnosed. CLASS-PREFLIGHT EXISTS (huong missing). 17 LOCKS NOT 15. L32 VIOLATED IN DEATH. TRUTH PRESERVED.`
