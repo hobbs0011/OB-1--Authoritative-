@@ -1,0 +1,137 @@
+{
+  "run": 104,
+  "ledger_id": "HL-663",
+  "merkle_short": "CB776CECA5B9B9AB",
+  "keywords_used": [
+    "const",
+    "pipeline",
+    "session",
+    "voice",
+    "death",
+    "deepgram",
+    "await",
+    "never",
+    "agent",
+    "check",
+    "student",
+    "written:",
+    "stage",
+    "michael",
+    "files",
+    "status:",
+    "english",
+    "complete",
+    "update",
+    "deploy",
+    "context",
+    "block",
+    "current",
+    "already",
+    "catch",
+    "status",
+    "token",
+    "portal",
+    "state",
+    "extract"
+  ],
+  "pieces_synced": 24,
+  "pieces": [
+    {
+      "title": "Audio Waveform",
+      "id": "ART-1780551592165-3U0M"
+    },
+    {
+      "title": "Elephant Chain",
+      "id": "ART-1780551572418-7DU0"
+    },
+    {
+      "title": "Phoenix Crest",
+      "id": "ART-1780551554850-GNEZ"
+    },
+    {
+      "title": "Phoenix Pages — Benchmark 0: Deepgram Whisper",
+      "id": "ART-1780548347492-B1QU"
+    },
+    {
+      "title": "Phoenix Pages — Kinetic Gates: The 5 Benchmarks",
+      "id": "ART-1780548343466-OGXZ"
+    },
+    {
+      "title": "Codex — Drift as a Diagnostic Event",
+      "id": "ART-1780548333953-MXB7"
+    },
+    {
+      "title": "Tiger Dossier Slide 05 — Lợi Thế Cạnh Tranh Tuyệt Đối 2026 (Unbeatable Advantage)",
+      "id": "ART-1780548090137-P6CG"
+    },
+    {
+      "title": "Tiger Dossier Slide 04 — Ngừng Dịch Thầm, Bắt Đầu Hiểu (Stop Translating, Start Understanding)",
+      "id": "ART-1780548088836-SX3N"
+    },
+    {
+      "title": "Wake Up the Tiger: Blueprint for English & AI Mastery",
+      "id": "ART-1780547628696-L7IE"
+    },
+    {
+      "title": "WAKE UP THE TIGER",
+      "id": "ART-1780547160670-TBAE"
+    },
+    {
+      "title": "The Obsolete Model",
+      "id": "ART-1780547001008-30ZF"
+    },
+    {
+      "title": "The Tiger Protocol",
+      "id": "ART-1780546997183-THXJ"
+    },
+    {
+      "title": "The Engine",
+      "id": "ART-1780546993683-AS0F"
+    },
+    {
+      "title": "In 2026, Knowing Only English Is a Flip-Phone",
+      "id": "ART-1780546346776-ZRKH"
+    },
+    {
+      "title": "The Tiger Protocol: 2026 Unfair Advantage",
+      "id": "ART-1780546345401-NKEC"
+    },
+    {
+      "title": "Wake Up the Tiger",
+      "id": "ART-1780546342705-3MMY"
+    },
+    {
+      "title": "The Phoenix Rising Operational Codex",
+      "id": "ART-1780546341377-VLBX"
+    },
+    {
+      "title": "We Don't Teach English. We Unlock Permission.",
+      "id": "ART-1780546339980-FU64"
+    },
+    {
+      "title": "STP p07 — The 60% Rule: Catching The Vibe",
+      "id": "ART-1780538366960-3OCE"
+    },
+    {
+      "title": "STP p03 — The Translate-in-Head Delay (Snowman Freeze)",
+      "id": "ART-1780538363957-LNWV"
+    },
+    {
+      "title": "NET Dossier p09 — 2026 Unfair Advantage (Venn)",
+      "id": "ART-1780530118048-7JB6"
+    },
+    {
+      "title": "NET Dossier p03 — Cognitive Bottleneck / Snowman Freeze",
+      "id": "ART-1780530099910-XM96"
+    },
+    {
+      "title": "Michael Hobbs Headshot — Wide",
+      "id": "ART-1780527419422-NUFN"
+    },
+    {
+      "title": "Michael Hobbs Headshot — Square",
+      "id": "ART-1780527418015-4GUT"
+    }
+  ],
+  "executed_at": "2026-06-09T09:09:24.4986255+07:00"
+}
