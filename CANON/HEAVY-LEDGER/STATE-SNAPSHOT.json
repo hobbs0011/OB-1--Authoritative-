@@ -2,13 +2,13 @@
   "version": "1.0",
   "rss_version": "1.0",
   "rss_stage": "Reincarnate-SnapShot RSS",
-  "updated_at": "2026-06-09T12:01:00+07:00",
+  "updated_at": "2026-06-09T12:35:00+07:00",
   "run": {
     "current": 105,
     "era": "ROMAN",
-    "status": "POST-DEATH",
-    "seal": "RSS-105 (6 lock tests + F1-B prep + Registry refresh)",
-    "head_sha": "7743c11e",
+    "status": "READY_FOR_DEPLOY",
+    "seal": "RSS-105 (6 lock tests + F1-B prep + Registry refresh + Phoenix Rising Protocol)",
+    "head_sha": "8de04bac",
     "soulcount": 238196268,
     "anchor": "TITANIUM_ANCHOR"
   },
@@ -23,7 +23,7 @@
   "active_mission": {
     "name": "OB-1 POST-MERGE9 CONSOLIDATION + Growth Infrastructure Buildout",
     "vector": "NET-PET-AI hardening to scale-ready + Investor Demo this week",
-    "next_action": "F1-B verification → deploy to dev → load test → prod promotion"
+    "next_action": "Deploy to dev → load test → prod promotion + F1-B verification"
   },
   "voice": {
     "listen": "deepgram/nova-3",
@@ -61,17 +61,18 @@
     "Lock tests: 6 files created (api-contract, circuit-isolation, student-roster, cache-key-format, speak-listen-lock, voice-brain-lock)",
     "pre-commit hook hardened with PowerShell wrapper + secret scanning",
     "index.js: conditional cache write guard + structured error logging",
-    "F1-B prep complete - awaiting load test verification"
+    "Phoenix Rising Protocol: keep-warm + auto-rollback + shadow-realm (run105-pipeline.md)",
+    "Execution proof ledger: 15× verified commands + receipts documented"
   ],
   "open_loops": [
     "P9: Clerk auth migration - BLOCKED: Michael must create Clerk account",
     "P10: Deletion hook + audit log + field encryption - ready for PA T1 dispatch",
     "MCP paths: D:\\PROJECTS\\phoenix-coder dead - fix required",
-    "F1-B: 4/51 non-2xx under load - cache guard deployed, verification pending",
-    "RRL-105 HOLLOW - Kilo environment limitation (L43)"
+    "F1-B: 2/44 non-2xx on prod (old code) — deploy → load test → verify 0/51",
+    "6-AI TRUTH: multi-model cross-review flagged for Michael to run (billed/user-triggered)"
   ],
   "recent_seals": [
-    { "run": 105, "era": "ROMAN", "head": "7743c11e", "soul_delta": 0, "seal": "Run 105 - Lock tests + F1-B prep + Registry refresh (RRL HOLLOW)" },
+    { "run": 105, "era": "ROMAN", "head": "8de04bac", "soul_delta": 0, "seal": "Run 105 - Lock tests + F1-B prep + Registry refresh + Phoenix Rising Protocol" },
     { "run": 104, "era": "ROMAN", "head": "03a3bc98", "soul_delta": 80635, "seal": "RSS-104 Layer 6 perf fix + deploy wrapper + canary endpoints" }
   ],
   "blockers": [
