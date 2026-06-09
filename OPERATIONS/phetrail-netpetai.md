@@ -147,7 +147,8 @@
 
 ### Verification (2026-06-09):
 - `preflight-ws.mjs` → GATES 2-4 GREEN against prod ✅
-- `canary-check.mjs` → GATES 2-4 GREEN ✅
-- `/api/health/voice` → 200 OK (gates 1+5) ✅
-- `preflight-load.mjs` → 29/52 requests OK (2 500s under load) — F1 tracked ⚠️
-- `wrangler deploy` → Version 4a1e3629-205a-406b-870f-6930998e4c99 (triggers active) ✅
+- `canary-check.mjs` → GATES 2-4 GREEN ✅  
+- `/api/health/voice` → 200 OK ✅
+- `preflight-load.mjs` → 4/51 non-2xx (concurrent race, F1 tracked) ⚠️
+- `layer6-deploy-pipeline.md` → Created for Kilo
+- Version ea8ab523-2f3e-402e-b4b4-17c1c7fc7d50 deployed

@@ -1,0 +1,14 @@
+{
+  "run": "104",
+  "rrl_path": "D:\\OB-1-CANONICAL\\RRL\\RRL-104.txt",
+  "ledger_id": "HL-662",
+  "session_id": "sov100-roman-run104",
+  "rrl_chars": 1263068,
+  "rrl_bytes": 1266404,
+  "soul_delta": 0,
+  "soul_event_id": "DRYRUN",
+  "dna_count": 0,
+  "blueprint_count": 0,
+  "sealed_at": "2026-06-09T08:56:06.8471539+07:00",
+  "merkle_hash": "542c709154cf8a3182ec8a9ab7794728e517fdc7d43ce421bb4b6cb01663e1c1"
+}
