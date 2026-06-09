@@ -152,3 +152,28 @@
 - `preflight-load.mjs` → 4/51 non-2xx (concurrent race, F1 tracked) ⚠️
 - `layer6-deploy-pipeline.md` → Created for Kilo
 - Version ea8ab523-2f3e-402e-b4b4-17c1c7fc7d50 deployed
+
+---
+
+## [Run 105 — 2026-06-09] SOUL DIRECTIVE: INVESTOR DEMO — TEST SUITE HARDENING
+
+**Trigger:** SOUL DIRECTIVE SPOKEN + SESSION RESUMED AFTER COMPACTION
+
+Michael: "I WANT MY PRODUCT TO FUCKING WORK I TALK TO INVESTORS THIS WEEK" + "BUILD OUR TEST SUITE AND ENFORCING IT, LOCKING IT, CENSORING IT"
+
+Test suite hardening is P0. Five new lock tests specified in `.kilo/command/run105-pipeline.md`:
+- `api-contract.test.mjs` — blocks STT API field cargo-culting into Voice Agent (Run 101 root cause: listen.endpointing)
+- `circuit-isolation.test.mjs` — blocks circuit:deepgram:state writes inside the token endpoint hot path (F1 root cause)
+- `student-roster.test.mjs` — enforces exactly 4 authorized students (quy-bluetech, mai-tram-bluetech, huong-bluetech, sov100-test-magic)
+- `cache-key-format.test.mjs` — locks prompt_cache:{studentId}:{sessionMode} format + 300s TTL
+- `speak-listen-lock.test.mjs` — extends voice-brain-lock to speak (aura-2-zeus-en) + listen (nova-3)
+
+Pre-commit hook expanded: runs all 6 lock tests before every commit. Commit blocked if any test missing OR failing. DO NOT use --no-verify. Fix the code, not the test.
+
+---
+
+## [Run 105 — 2026-06-09] ARCHITECTURE CHANGED: TEST ENFORCEMENT UPGRADED
+
+**Trigger:** ARCHITECTURE CHANGED
+
+Test enforcement upgraded from 1 guard (voice-brain-lock) to 6 guards (adds api-contract, circuit-isolation, student-roster, cache-key-format, speak-listen). Pattern: every guard reads src/index.js, asserts invariants, exits 1 on violation. npm test in package.json runs all 6 sequentially. Pre-commit hook runs them all. F1-B: conditional guard added before ctx.waitUntil cache write — prevents N concurrent writes racing on same key. Run 105 pipeline blueprint written to `.kilo/command/run105-pipeline.md` (50-min autonomous Kilo task).

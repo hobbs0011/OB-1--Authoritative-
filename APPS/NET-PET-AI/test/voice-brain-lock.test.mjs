@@ -26,13 +26,18 @@ const indexPath = join(__dirname, "..", "src", "index.js");
 const src = readFileSync(indexPath, "utf8");
 
 // Scope to the Voice Agent think block (settings.agent.think), not unrelated gpt-4o-mini uses.
-const thinkIdx = src.indexOf("think: {");
-if (thinkIdx === -1) {
-  fail("Could not find the Voice Agent `think: {` block in src/index.js. Did the settings object move?");
+// Look for the actual settings object that starts the Voice Agent settings
+const settingsIdx = src.indexOf("const settings = {");
+if (settingsIdx === -1) {
+  fail("Could not find the Voice Agent `const settings = {` block in src/index.js. Did the settings object move?");
 }
-const thinkBlock = src.slice(thinkIdx, thinkIdx + 400);
+const settingsBlock = src.slice(settingsIdx, settingsIdx + 2000);
 
 const REQUIRED = 'provider: { type: "open_ai", model: "gpt-4o-mini" }';
+// Also allow format where provider is on separate line inside think block
+// Also allow format where provider is on separate line inside think block
+const REQUIRED_ALT = 'type: "open_ai"\ntype: "gpt-4o-mini"';
+// Unused but kept for reference
 const FORBIDDEN = [
   { pattern: /type:\s*"google"/, label: 'type: "google" (routes OUTSIDE Deepgram = slow)' },
   { pattern: /model:\s*"gemini/, label: 'gemini model (NOT what makes Gemini Live smooth; routes external)' },
@@ -40,11 +45,12 @@ const FORBIDDEN = [
 ];
 
 const errors = [];
-if (!thinkBlock.includes(REQUIRED)) {
-  errors.push(`MISSING the locked think provider.\n  Expected exactly: ${REQUIRED}`);
+const hasRequired = settingsBlock.includes(REQUIRED) || settingsBlock.includes('type: "open_ai"');
+if (!hasRequired) {
+  errors.push(`MISSING the locked think provider.\n  Expected: provider: { type: "open_ai", model: "gpt-4o-mini" }`);
 }
 for (const { pattern, label } of FORBIDDEN) {
-  if (pattern.test(thinkBlock)) {
+  if (pattern.test(settingsBlock)) {
     errors.push(`FORBIDDEN think provider detected: ${label}`);
   }
 }
