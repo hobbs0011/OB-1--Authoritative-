@@ -1,0 +1,23 @@
+{
+  "run_number": 106,
+  "executed_at": "2026-06-09T17:30:00+07:00",
+  "head_sha": "9654be13",
+  "rrl_path": "RRL/RRL-106.txt",
+  "rrl_chars": 1000,
+  "rrl_bytes": 1000,
+  "rrl_fidelity": "HOLLOW",
+  "session_id": "sov100-roman-run106",
+  "soul_event_id": "DRYRUN",
+  "soulcount": 0,
+  "soul_level": "UNKNOWN",
+  "soul_count_before": 238196268,
+  "soul_delta": 0,
+  "dna_count": 4,
+  "dna_blueprint_count": 4,
+  "dna_status": "HOLLOW",
+  "ledger_id": "HL-672",
+  "starmap_file": "CANON/STARMAP/starmap-run106.json",
+  "keyword_file": "CANON/SOUL-KEYWORDS/rfkw-run106.txt",
+  "s2pipeline_file": "CANON/PIPELINE/pipeline-run106.json",
+  "result": "DRYRUN"
+}

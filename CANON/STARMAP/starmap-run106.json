@@ -1,0 +1,10 @@
+{
+  "run": 106,
+  "rrl_path": "RRL/RRL-106.txt",
+  "ledger_id": "HL-672",
+  "dna_turn_ids": "seq-1,seq-2,seq-3,seq-4",
+  "blueprint_locations": "dna-run106.json:seq-1; dna-run106.json:seq-2; dna-run106.json:seq-3; dna-run106.json:seq-4",
+  "char_count": 1000,
+  "merkle_hash": "7bf8dd8f9654be13",
+  "created_at": "2026-06-09T17:30:00+07:00"
+}

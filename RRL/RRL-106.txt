@@ -1,0 +1,27 @@
+# RRL-106 — DRYRUN (Kilo session, no live JSONL)
+# Session artifacts created from forensic analysis, not full transcript
+# Per L43: Kilo sessions ALWAYS produce HOLLOW DNA
+
+## VERBATIM WORK DONE THIS SESSION:
+
+### PRIORITY 1 — Syntax fix (2 paren errors in index.js)
+- Line 1948: `}), 500),` → `}, 500)` — fixed
+- Line 2000: `}), 500),` → `}, 500)` — fixed
+- `node --check src/index.js` → exit 0
+
+### PRIORITY 2 — Prod verification
+- `/api/status` = v1.5.0 ALL_SYSTEMS_GO — verified
+
+### PRIORITY 3 — Class preflight
+- Created test/class-preflight.mjs
+- Tests quy + mai-tram × 3 modes (free, study, phonics)
+- all 6/6 = GO
+
+### PRIORITY 4 — P10 Erasure Hardening
+- Defect A: Added /purge endpoint to LedgerDO, PetDO, MemoryDO
+- Defect B: Removed faulty colon-key purge guard
+- Defect C: Schema already aligned
+- Defect D: Preserved duplicate crypto (different derivation paths)
+
+---
+RUN 106 DRYRUN SEAL — P10 WORK IN PROGRESS

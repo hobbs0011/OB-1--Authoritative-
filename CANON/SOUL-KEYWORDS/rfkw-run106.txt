@@ -1,0 +1,15 @@
+p10  |  erasure
+purge |  endpoint
+do    |  durable
+ledger |  merkle
+kv    |  durable_objects
+syntax |  fix
+preflight |  class
+quy |  student
+mai-tram |  student
+all |  green
+dryrun |  kilo
+defect |  a
+defect |  b
+defect |  c
+defect |  d
