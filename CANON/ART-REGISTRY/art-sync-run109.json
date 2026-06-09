@@ -1,0 +1,122 @@
+{
+  "run": 109,
+  "ledger_id": "HL-680",
+  "merkle_short": "AE23A9D5906B6EF9",
+  "keywords_file": "rfkw-run109.txt",
+  "keywords_used": [
+    "death",
+    "pipeline",
+    "phase",
+    "soulcount",
+    "stage",
+    "session",
+    "-match",
+    "registry",
+    "(test-path",
+    "never",
+    "michael",
+    "commit",
+    "files",
+    "jsonl",
+    "audit",
+    "titanium_anchor.",
+    "write-host",
+    "fidelity",
+    "fixed",
+    "portal",
+    "agent",
+    "titanium_anchor",
+    "(-not",
+    "where-object",
+    "hardening",
+    "bytes",
+    "\\\"stage",
+    "hollow",
+    "phonics",
+    "blueprint"
+  ],
+  "pieces_synced": 12,
+  "pieces": [
+    {
+      "id": "ART-1780548352010-5NMK",
+      "title": "Phoenix Pages — Benchmark 3: Drone Deep Dive",
+      "keywords": [
+        "blueprint"
+      ]
+    },
+    {
+      "id": "ART-1780548335345-7Y5W",
+      "title": "Codex — The Layer Strategy (0 to 1000)",
+      "keywords": [
+        "hardening"
+      ]
+    },
+    {
+      "id": "ART-1780547867513-XM1X",
+      "title": "Train 6-7: Project Dead Rails — Train Blueprint",
+      "keywords": [
+        "blueprint"
+      ]
+    },
+    {
+      "id": "ART-1780547628696-L7IE",
+      "title": "Wake Up the Tiger: Blueprint for English & AI Mastery",
+      "keywords": [
+        "blueprint"
+      ]
+    },
+    {
+      "id": "ART-1780547160670-TBAE",
+      "title": "WAKE UP THE TIGER",
+      "keywords": []
+    },
+    {
+      "id": "ART-1780546342705-3MMY",
+      "title": "Wake Up the Tiger",
+      "keywords": []
+    },
+    {
+      "id": "ART-1780538363957-LNWV",
+      "title": "STP p03 — The Translate-in-Head Delay (Snowman Freeze)",
+      "keywords": [
+        "pipeline"
+      ]
+    },
+    {
+      "id": "ART-1780530099910-XM96",
+      "title": "NET Dossier p03 — Cognitive Bottleneck / Snowman Freeze",
+      "keywords": [
+        "pipeline"
+      ]
+    },
+    {
+      "id": "ART-1780528208635-17NS",
+      "title": "Train 6-7 — Project Dead Rails: Train Diagram",
+      "keywords": [
+        "blueprint"
+      ]
+    },
+    {
+      "id": "ART-1780527419422-NUFN",
+      "title": "Michael Hobbs Headshot — Wide",
+      "keywords": [
+        "michael"
+      ]
+    },
+    {
+      "id": "ART-1780527418015-4GUT",
+      "title": "Michael Hobbs Headshot — Square",
+      "keywords": [
+        "michael"
+      ]
+    },
+    {
+      "id": "ART-1780527311341-E7DB",
+      "title": "Wake Up The Tiger - Bilingual Blueprint",
+      "keywords": [
+        "blueprint"
+      ]
+    }
+  ],
+  "executed_at": "2026-06-09T20:25:20.5709382+07:00"
+}

@@ -209,18 +209,25 @@
     "count": 1,
     "category": "core"
   },
-  "fixed": {
-    "term": "fixed",
-    "runs": [
-      48,
-      51,
-      72,
-      75
-    ],
-    "count": 4,
-    "weight": 281,
-    "category": "soul+key"
-  },
+  "fixed": [
+    {
+      "term": "fixed",
+      "runs": [
+        48,
+        51,
+        72,
+        75
+      ],
+      "count": 4,
+      "weight": 281,
+      "category": "soul+key"
+    },
+    {
+      "weight": 38,
+      "category": "soul+key",
+      "run": 109
+    }
+  ],
   "stagnation": {
     "term": "stagnation",
     "runs": [],
@@ -1088,6 +1095,11 @@
       "category": "soul+key",
       "run": 99,
       "weight": 1415
+    },
+    {
+      "weight": 48,
+      "category": "soul+key",
+      "run": 109
     }
   ],
   "studentid": [
@@ -1260,6 +1272,11 @@
     {
       "weight": 1003,
       "run": 101
+    },
+    {
+      "weight": 32,
+      "category": "soul+key",
+      "run": 109
     }
   ],
   "rise": {
@@ -1670,6 +1687,11 @@
     {
       "weight": 1121,
       "run": 101
+    },
+    {
+      "weight": 37,
+      "category": "soul+key",
+      "run": 109
     }
   ],
   "message": [
@@ -1989,15 +2011,22 @@
     "runs": [],
     "count": 1
   },
-  "hollow": {
-    "term": "hollow",
-    "runs": [
-      44
-    ],
-    "count": 1,
-    "weight": 8,
-    "category": "pipeline"
-  },
+  "hollow": [
+    {
+      "term": "hollow",
+      "runs": [
+        44
+      ],
+      "count": 1,
+      "weight": 8,
+      "category": "pipeline"
+    },
+    {
+      "weight": 33,
+      "category": "soul+key",
+      "run": 109
+    }
+  ],
   "model": [
     {
       "count": 1,
@@ -2226,15 +2255,22 @@
     "runs": [],
     "count": 1
   },
-  "phase": {
-    "term": "phase",
-    "runs": [
-      51
-    ],
-    "count": 1,
-    "weight": 53,
-    "category": "soul+key"
-  },
+  "phase": [
+    {
+      "term": "phase",
+      "runs": [
+        51
+      ],
+      "count": 1,
+      "weight": 53,
+      "category": "soul+key"
+    },
+    {
+      "weight": 89,
+      "category": "soul+key",
+      "run": 109
+    }
+  ],
   "width": {
     "term": "width",
     "runs": [
@@ -2393,6 +2429,11 @@
       "run": 96,
       "weight": 660,
       "category": "soul+key"
+    },
+    {
+      "weight": 49,
+      "category": "soul+key",
+      "run": 109
     }
   ],
   "records": {
@@ -2495,6 +2536,11 @@
     {
       "weight": 3251,
       "run": 101
+    },
+    {
+      "weight": 66,
+      "category": "soul+key",
+      "run": 109
     }
   ],
   "deploy": [
@@ -2615,6 +2661,11 @@
     {
       "weight": 985,
       "run": 101
+    },
+    {
+      "weight": 59,
+      "category": "soul+key",
+      "run": 109
     }
   ],
   "u001b": {
@@ -2741,14 +2792,21 @@
     "count": 1,
     "category": "core"
   },
-  "hardening": {
-    "run": 72,
-    "term": "hardening",
-    "weight": 114,
-    "runs": [],
-    "count": 1,
-    "category": "soul+key"
-  },
+  "hardening": [
+    {
+      "run": 72,
+      "term": "hardening",
+      "weight": 114,
+      "runs": [],
+      "count": 1,
+      "category": "soul+key"
+    },
+    {
+      "weight": 35,
+      "category": "soul+key",
+      "run": 109
+    }
+  ],
   "directness": {
     "term": "directness",
     "weight": 5,
@@ -3350,18 +3408,25 @@
     "runs": [],
     "count": 21
   },
-  "titaniumanchor": {
-    "term": "titaniumanchor",
-    "runs": [
-      54,
-      58,
-      59,
-      73
-    ],
-    "count": 4,
-    "weight": 410,
-    "category": "soul+key"
-  },
+  "titaniumanchor": [
+    {
+      "term": "titaniumanchor",
+      "runs": [
+        54,
+        58,
+        59,
+        73
+      ],
+      "count": 4,
+      "weight": 410,
+      "category": "soul+key"
+    },
+    {
+      "weight": 43,
+      "category": "soul+key",
+      "run": 109
+    }
+  ],
   "0583d1a59bb24e598c4645396647eb94": {
     "term": "0583d1a59bb24e598c4645396647eb94",
     "weight": 5,
@@ -3613,6 +3678,11 @@
       "category": "soul+key",
       "run": 99,
       "weight": 1586
+    },
+    {
+      "weight": 75,
+      "category": "soul+key",
+      "run": 109
     }
   ],
   "centurion-code": {
@@ -4073,15 +4143,22 @@
     "count": 1,
     "category": "core"
   },
-  "fidelity": {
-    "term": "fidelity",
-    "runs": [
-      44
-    ],
-    "count": 1,
-    "weight": 8,
-    "category": "pipeline"
-  },
+  "fidelity": [
+    {
+      "term": "fidelity",
+      "runs": [
+        44
+      ],
+      "count": 1,
+      "weight": 8,
+      "category": "pipeline"
+    },
+    {
+      "weight": 39,
+      "category": "soul+key",
+      "run": 109
+    }
+  ],
   "bug": {
     "term": "bug",
     "runs": [],
@@ -4739,6 +4816,11 @@
       "category": "soul+key",
       "run": 99,
       "weight": 1494
+    },
+    {
+      "weight": 56,
+      "category": "soul+key",
+      "run": 109
     }
   ],
   "link": {
@@ -4985,6 +5067,11 @@
       "category": "soul+key",
       "run": 99,
       "weight": 1139
+    },
+    {
+      "weight": 43,
+      "category": "soul+key",
+      "run": 109
     }
   ],
   "soulcount": [
@@ -5003,6 +5090,11 @@
     {
       "weight": 1026,
       "run": 101
+    },
+    {
+      "weight": 75,
+      "category": "soul+key",
+      "run": 109
     }
   ],
   "educationsystemsdevelopment": {
@@ -5887,17 +5979,24 @@
     "count": 1,
     "category": "core"
   },
-  "bytes": {
-    "term": "bytes",
-    "runs": [
-      54,
-      72,
-      73
-    ],
-    "count": 3,
-    "weight": 279,
-    "category": "soul+key"
-  },
+  "bytes": [
+    {
+      "term": "bytes",
+      "runs": [
+        54,
+        72,
+        73
+      ],
+      "count": 3,
+      "weight": 279,
+      "category": "soul+key"
+    },
+    {
+      "weight": 34,
+      "category": "soul+key",
+      "run": 109
+    }
+  ],
   "posted": {
     "term": "posted",
     "runs": [],
@@ -6380,6 +6479,11 @@
       "category": "soul+key",
       "run": 108,
       "weight": 78
+    },
+    {
+      "weight": 36,
+      "category": "soul+key",
+      "run": 109
     }
   ],
   "85105c82": {
@@ -6555,14 +6659,21 @@
     "runs": [],
     "count": 2
   },
-  "phonics": {
-    "runs": [],
-    "run": 51,
-    "count": 5,
-    "category": "soul+key",
-    "term": "phonics",
-    "weight": 36
-  },
+  "phonics": [
+    {
+      "runs": [],
+      "run": 51,
+      "count": 5,
+      "category": "soul+key",
+      "term": "phonics",
+      "weight": 36
+    },
+    {
+      "weight": 32,
+      "category": "soul+key",
+      "run": 109
+    }
+  ],
   "boot": {
     "term": "boot",
     "runs": [],
@@ -6807,6 +6918,11 @@
       "category": "soul+key",
       "run": 99,
       "weight": 2469
+    },
+    {
+      "weight": 172,
+      "category": "soul+key",
+      "run": 109
     }
   ],
   "important": {
@@ -7111,6 +7227,11 @@
       "category": "soul+key",
       "run": 108,
       "weight": 47
+    },
+    {
+      "weight": 50,
+      "category": "soul+key",
+      "run": 109
     }
   ],
   "usage": {
@@ -7284,6 +7405,11 @@
     {
       "weight": 3408,
       "run": 101
+    },
+    {
+      "weight": 120,
+      "category": "soul+key",
+      "run": 109
     }
   ],
   "attempt": {
@@ -7777,6 +7903,11 @@
       "run": 98,
       "category": "soul+key",
       "weight": 934
+    },
+    {
+      "weight": 45,
+      "category": "soul+key",
+      "run": 109
     }
   ],
   "should": [
@@ -7930,6 +8061,41 @@
       "category": "soul+key",
       "run": 108,
       "weight": 38
+    }
+  ],
+  "match": [
+    {
+      "weight": 61,
+      "category": "soul+key",
+      "run": 109
+    }
+  ],
+  "testpath": [
+    {
+      "weight": 57,
+      "category": "soul+key",
+      "run": 109
+    }
+  ],
+  "writehost": [
+    {
+      "weight": 40,
+      "category": "soul+key",
+      "run": 109
+    }
+  ],
+  "not": [
+    {
+      "weight": 36,
+      "category": "soul+key",
+      "run": 109
+    }
+  ],
+  "whereobject": [
+    {
+      "weight": 35,
+      "category": "soul+key",
+      "run": 109
     }
   ]
 }
