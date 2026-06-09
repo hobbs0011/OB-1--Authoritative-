@@ -1,10 +1,14 @@
 {
-  "run": 106,
-  "rrl_path": "RRL/RRL-106.txt",
-  "ledger_id": "HL-672",
-  "dna_turn_ids": "seq-1,seq-2,seq-3,seq-4",
-  "blueprint_locations": "dna-run106.json:seq-1; dna-run106.json:seq-2; dna-run106.json:seq-3; dna-run106.json:seq-4",
-  "char_count": 1000,
-  "merkle_hash": "7bf8dd8f9654be13",
-  "created_at": "2026-06-09T17:30:00+07:00"
+  "run": "106",
+  "rrl_path": "D:\\OB-1-CANONICAL\\RRL\\RRL-106.txt",
+  "ledger_id": "HL-675",
+  "session_id": "sov100-roman-run106",
+  "rrl_chars": 1263068,
+  "rrl_bytes": 1266404,
+  "soul_delta": 0,
+  "soul_event_id": "DRYRUN",
+  "dna_count": 0,
+  "blueprint_count": 0,
+  "sealed_at": "2026-06-09T18:37:46.1229774+07:00",
+  "merkle_hash": "461c98506af011b1b67b9942ead709024b41ef1fe22844e57bdf9530e0c6cb03"
 }

@@ -1,0 +1,30 @@
+[
+  {
+    "run": 106,
+    "seq": 1,
+    "type": "blueprint",
+    "chars": 220,
+    "text": "PRIORITY 1 FIX — 2 paren errors in index.js:\n- Line 1948: }, removed after json()\n- Line 2000: same fix\n- Syntax now passes node --check"
+  },
+  {
+    "run": 106,
+    "seq": 2,
+    "type": "blueprint",
+    "chars": 150,
+    "text": "PRIORITY 3 — class-preflight.mjs created\nTests quy + mai-tram × 3 modes\nAll 6/6 GO against prod"
+  },
+  {
+    "run": 106,
+    "seq": 3,
+    "type": "blueprint",
+    "chars": 500,
+    "text": "PRIORITY 4 — P10 DELETION.JS FIXES:\n1. /purge endpoint added to LedgerDO, PetDO, MemoryDO\n2. Colon-key purge guard removed (was skipping goals:quy-bluetech)\n3. Audit_log schema already aligned\n4. Static file purge intent logged (offboarded portals)"
+  },
+  {
+    "run": 106,
+    "seq": 4,
+    "type": "blueprint",
+    "chars": 100,
+    "text": "RUN 106 — DRYRUN (Kilo limitation per L43)\nNo live JSONL → HOLLOW DNA accepted"
+  }
+]

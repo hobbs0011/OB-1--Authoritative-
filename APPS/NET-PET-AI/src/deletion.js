@@ -1,40 +1,8 @@
 // src/deletion.js — P10: Student data erasure (GDPR-style)
-// Purges all data for a student from D1 + KV + DO, logs to audit_log.
+// Purges all data for a student from D1 + KV + DO, logs to audit_log_v2.
 // Tables with student_id: soul_prompts, error_log.
 
-async function encryptField(plaintext, key) {
-  if (!plaintext || typeof plaintext !== 'string') return plaintext;
-  if (!key) throw new Error('ENCRYPTION_KEY required for encryption');
-  const enc = new TextEncoder();
-  const keyBytes = new Uint8Array(32);
-  const keyMaterial = enc.encode(key);
-  keyBytes.set(keyMaterial.slice(0, 32));
-  const cryptoKey = await crypto.subtle.importKey('raw', keyBytes, { name: 'AES-GCM' }, false, ['encrypt']);
-  const iv = crypto.getRandomValues(new Uint8Array(12));
-  const encrypted = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, cryptoKey, enc.encode(plaintext));
-  const combined = new Uint8Array(iv.length + encrypted.byteLength);
-  combined.set(iv);
-  combined.set(new Uint8Array(encrypted), iv.length);
-  return btoa(String.fromCharCode(...combined));
-}
-
-async function decryptField(encrypted, key) {
-  if (!encrypted || typeof encrypted !== 'string') return encrypted;
-  if (!key) throw new Error('ENCRYPTION_KEY required for decryption');
-  try {
-    const combined = new Uint8Array(atob(encrypted).split('').map(c => c.charCodeAt(0)));
-    const iv = combined.slice(0, 12);
-    const data = combined.slice(12);
-    const keyBytes = new Uint8Array(32);
-    const keyMaterial = new TextEncoder().encode(key);
-    keyBytes.set(keyMaterial.slice(0, 32));
-    const cryptoKey = await crypto.subtle.importKey('raw', keyBytes, { name: 'AES-GCM' }, false, ['decrypt']);
-    const decrypted = await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, cryptoKey, data);
-    return new TextDecoder().decode(decrypted);
-  } catch {
-    return encrypted;
-  }
-}
+import { encryptField, decryptField } from './encryption.js';
 
 export async function handleStudentErase(studentId, env, performedBy = 'admin') {
   const ts = Math.floor(Date.now() / 1000);
@@ -88,7 +56,7 @@ export async function handleStudentErase(studentId, env, performedBy = 'admin') 
   // Audit log — record the erasure
   try {
     await env.SOUL_DB.prepare(
-      'INSERT INTO audit_log (id, ts, action, target, performed_by, metadata) VALUES (?, ?, ?, ?, ?, ?)'
+      'INSERT INTO audit_log_v2 (id, ts, action, target, performed_by, metadata) VALUES (?, ?, ?, ?, ?, ?)'
     ).bind(
       `aud-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
       ts,
@@ -158,5 +126,3 @@ export async function handleStudentErase(studentId, env, performedBy = 'admin') 
 
   return { ok: true, purged: { d1_rows: d1Rows, kv_keys: kvKeys, do_deleted: doDeleted, student_id: studentId, timestamp: ts } };
 }
-
-export { encryptField, decryptField };

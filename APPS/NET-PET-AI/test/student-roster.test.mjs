@@ -14,7 +14,6 @@ const sec = readFileSync(join(__dirname, "..", "src", "security.js"), "utf8");
 const combined = src + "\n" + sec;
 
 const AUTHORIZED_STUDENTS = new Set([
-  "quy-bluetech",
   "mai-tram-bluetech",
   "huong-bluetech",
   "sov100-test-magic",
@@ -52,6 +51,6 @@ process.exit(0);
 
 function fail(msg) {
   console.error("\n⛔ STUDENT ROSTER VIOLATED ⛔\n" + msg);
-  console.error("Authorized roster: quy-bluetech, mai-tram-bluetech, huong-bluetech, sov100-test-magic");
+  console.error("Authorized roster: mai-tram-bluetech, huong-bluetech, sov100-test-magic, keep-warm-ping");
   process.exit(1);
 }

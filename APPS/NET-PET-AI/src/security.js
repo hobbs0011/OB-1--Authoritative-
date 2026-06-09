@@ -268,7 +268,7 @@ async function logAudit(env, { action, actor = 'system', target = '', ip = '', m
   if (!env.SOUL_DB) return;
   try {
     await env.SOUL_DB.prepare(
-      `CREATE TABLE IF NOT EXISTS audit_log (
+      `CREATE TABLE IF NOT EXISTS audit_log_v2 (
         id TEXT PRIMARY KEY,
         ts INTEGER NOT NULL,
         action TEXT NOT NULL,
@@ -279,7 +279,7 @@ async function logAudit(env, { action, actor = 'system', target = '', ip = '', m
     ).run();
     const id = `aud-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
     await env.SOUL_DB.prepare(
-      `INSERT INTO audit_log (id, ts, action, target, performed_by, metadata) VALUES (?, ?, ?, ?, ?, ?)`
+      `INSERT INTO audit_log_v2 (id, ts, action, target, performed_by, metadata) VALUES (?, ?, ?, ?, ?, ?)`
     ).bind(id, Math.floor(Date.now() / 1000), action, target, actor, JSON.stringify({ ...meta, ip })).run();
   } catch (e) {
     console.warn('AUDIT_LOG_FAIL:', e.message);
