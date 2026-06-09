@@ -1,14 +1,9 @@
 {
-  "run": "103",
+  "run": 103,
   "rrl_path": "D:\\OB-1-CANONICAL\\RRL\\RRL-103.txt",
-  "ledger_id": "HL-658",
-  "session_id": "sov100-roman-run103",
-  "rrl_chars": 1263068,
-  "rrl_bytes": 1266404,
-  "soul_delta": 0,
-  "soul_event_id": "DRYRUN",
-  "dna_count": 0,
-  "blueprint_count": 0,
-  "sealed_at": "2026-06-08T22:38:00.3908687+07:00",
-  "merkle_hash": "ed5cf7fbcad947ecd92371170ca3a1d9947a3ee3f47f060b428c0c12c35442ae"
+  "ledger_id": "HL-659",
+  "blueprint_locations": "dna-run103.json:seq-15; dna-run103.json:seq-18; dna-run103.json:seq-52; dna-run103.json:seq-71; dna-run103.json:seq-78; dna-run103.json:seq-80; dna-run103.json:seq-83; dna-run103.json:seq-90; dna-run103.json:seq-92; dna-run103.json:seq-93; dna-run103.json:seq-113; dna-run103.json:seq-170; dna-run103.json:seq-177; dna-run103.json:seq-178; dna-run103.json:seq-184; dna-run103.json:seq-190; dna-run103.json:seq-195; dna-run103.json:seq-201; dna-run103.json:seq-206; dna-run103.json:seq-211; dna-run103.json:seq-222; dna-run103.json:seq-227; dna-run103.json:seq-232; dna-run103.json:seq-237; dna-run103.json:seq-240; dna-run103.json:seq-250; dna-run103.json:seq-253; dna-run103.json:seq-256; dna-run103.json:seq-258; dna-run103.json:seq-266; dna-run103.json:seq-269; dna-run103.json:seq-270; dna-run103.json:seq-290; dna-run103.json:seq-292; dna-run103.json:seq-373; dna-run103.json:seq-378; dna-run103.json:seq-384; dna-run103.json:seq-385; dna-run103.json:seq-386; dna-run103.json:seq-389; dna-run103.json:seq-390; dna-run103.json:seq-394; dna-run103.json:seq-398; dna-run103.json:seq-401; dna-run103.json:seq-402; dna-run103.json:seq-403; dna-run103.json:seq-406; dna-run103.json:seq-412; dna-run103.json:seq-415; dna-run103.json:seq-420; dna-run103.json:seq-421; dna-run103.json:seq-422; dna-run103.json:seq-423; dna-run103.json:seq-428; dna-run103.json:seq-437; dna-run103.json:seq-439; dna-run103.json:seq-443; dna-run103.json:seq-447; dna-run103.json:seq-448; dna-run103.json:seq-450; dna-run103.json:seq-464; dna-run103.json:seq-465; dna-run103.json:seq-475; dna-run103.json:seq-476; dna-run103.json:seq-482; dna-run103.json:seq-484; dna-run103.json:seq-485; dna-run103.json:seq-490; dna-run103.json:seq-491; dna-run103.json:seq-492; dna-run103.json:seq-499; dna-run103.json:seq-504; dna-run103.json:seq-516; dna-run103.json:seq-521; dna-run103.json:seq-523; dna-run103.json:seq-532; dna-run103.json:seq-534; dna-run103.json:seq-535; dna-run103.json:seq-540; dna-run103.json:seq-550; dna-run103.json:seq-556; dna-run103.json:seq-561; dna-run103.json:seq-564; dna-run103.json:seq-572; dna-run103.json:seq-589; dna-run103.json:seq-595; dna-run103.json:seq-596; dna-run103.json:seq-598; dna-run103.json:seq-599; dna-run103.json:seq-603; dna-run103.json:seq-611; dna-run103.json:seq-612; dna-run103.json:seq-620; dna-run103.json:seq-649; dna-run103.json:seq-694; dna-run103.json:seq-709; dna-run103.json:seq-712; dna-run103.json:seq-713; dna-run103.json:seq-727; dna-run103.json:seq-734; dna-run103.json:seq-735; dna-run103.json:seq-736; dna-run103.json:seq-737; dna-run103.json:seq-740; dna-run103.json:seq-743; dna-run103.json:seq-747; dna-run103.json:seq-752; dna-run103.json:seq-755",
+  "char_count": 23730588,
+  "merkle_hash": "77139A80DD91071531B3AE6BC12C5F34095BA9288B460B248294061C969F8318",
+  "created_at": "2026-06-09T08:45:24.4768537+07:00"
 }
