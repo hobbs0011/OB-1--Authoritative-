@@ -1472,6 +1472,11 @@
     {
       "weight": 1195,
       "run": 101
+    },
+    {
+      "category": "soul+key",
+      "run": 108,
+      "weight": 161
     }
   ],
   "count": {
@@ -2290,6 +2295,11 @@
       "category": "soul+key",
       "run": 79,
       "weight": 390
+    },
+    {
+      "category": "soul+key",
+      "run": 108,
+      "weight": 55
     }
   ],
   "anything": {
@@ -3839,9 +3849,12 @@
     "category": "core"
   },
   "actually": {
-    "term": "actually",
+    "category": "soul+key",
+    "count": 1,
     "runs": [],
-    "count": 1
+    "term": "actually",
+    "run": 108,
+    "weight": 63
   },
   "calculation": {
     "term": "calculation",
@@ -4093,6 +4106,11 @@
       "run": 96,
       "weight": 614,
       "category": "soul+key"
+    },
+    {
+      "category": "soul+key",
+      "run": 108,
+      "weight": 56
     }
   ],
   "works": {
@@ -6357,6 +6375,11 @@
       "category": "soul+key",
       "run": 99,
       "weight": 1467
+    },
+    {
+      "category": "soul+key",
+      "run": 108,
+      "weight": 78
     }
   ],
   "85105c82": {
@@ -6377,9 +6400,12 @@
     "count": 2
   },
   "drift": {
-    "term": "drift",
+    "category": "soul+key",
+    "count": 0,
     "runs": [],
-    "count": 0
+    "term": "drift",
+    "run": 108,
+    "weight": 64
   },
   "735a7e75": {
     "term": "735a7e75",
@@ -7080,6 +7106,11 @@
     {
       "weight": 1665,
       "run": 101
+    },
+    {
+      "category": "soul+key",
+      "run": 108,
+      "weight": 47
     }
   ],
   "usage": {
@@ -7752,6 +7783,153 @@
     {
       "weight": 1474,
       "run": 101
+    }
+  ],
+  "soul-bible-true-v1-raw": [
+    {
+      "category": "soul+key",
+      "run": 108,
+      "weight": 294
+    }
+  ],
+  "*\\\"the": [
+    {
+      "category": "soul+key",
+      "run": 108,
+      "weight": 120
+    }
+  ],
+  "don't": [
+    {
+      "category": "soul+key",
+      "run": 108,
+      "weight": 111
+    }
+  ],
+  "\\\"the": [
+    {
+      "category": "soul+key",
+      "run": 108,
+      "weight": 109
+    }
+  ],
+  "going": [
+    {
+      "category": "soul+key",
+      "run": 108,
+      "weight": 79
+    }
+  ],
+  "something": [
+    {
+      "category": "soul+key",
+      "run": 108,
+      "weight": 64
+    }
+  ],
+  "that's": [
+    {
+      "category": "soul+key",
+      "run": 108,
+      "weight": 62
+    }
+  ],
+  "thing": [
+    {
+      "category": "soul+key",
+      "run": 108,
+      "weight": 59
+    }
+  ],
+  "months": [
+    {
+      "category": "soul+key",
+      "run": 108,
+      "weight": 58
+    }
+  ],
+  "whole": [
+    {
+      "category": "soul+key",
+      "run": 108,
+      "weight": 58
+    }
+  ],
+  "soul-dna-bible-v1-2026-03-15.md,": [
+    {
+      "category": "soul+key",
+      "run": 108,
+      "weight": 52
+    }
+  ],
+  "alpha-omega-dna5.txt\",\"quote_sha256\":\"a09e35c1b58ffc5dc5a516ec6af22ff8cf0adf80895b3d5b1ed37ceada29e03f\"}": [
+    {
+      "category": "soul+key",
+      "run": 108,
+      "weight": 51
+    }
+  ],
+  "op(zen)-1000-layers-10.txt,": [
+    {
+      "category": "soul+key",
+      "run": 108,
+      "weight": 49
+    }
+  ],
+  "gemini": [
+    {
+      "category": "soul+key",
+      "run": 108,
+      "weight": 48
+    }
+  ],
+  "entire": [
+    {
+      "category": "soul+key",
+      "run": 108,
+      "weight": 46
+    }
+  ],
+  "alpha-omega-cla-5(mastermind).txt\",\"quote_sha256\":\"5c7d7bd72a3128dc1570972398ee6d08bf602bed4eab0add12771cb36be8081d\"}": [
+    {
+      "category": "soul+key",
+      "run": 108,
+      "weight": 46
+    }
+  ],
+  "human": [
+    {
+      "category": "soul+key",
+      "run": 108,
+      "weight": 44
+    }
+  ],
+  "truth": [
+    {
+      "category": "soul+key",
+      "run": 108,
+      "weight": 44
+    }
+  ],
+  "you're": [
+    {
+      "category": "soul+key",
+      "run": 108,
+      "weight": 43
+    }
+  ],
+  "§xi\",\"quote_sha256\":\"2451e1484d9c1e4be40766ece6dafe11d1460c1029e1952645605f25675df535\"}": [
+    {
+      "category": "soul+key",
+      "run": 108,
+      "weight": 38
+    }
+  ],
+  "*\\\"it": [
+    {
+      "category": "soul+key",
+      "run": 108,
+      "weight": 38
     }
   ]
 }
