@@ -1,0 +1,93 @@
+[
+  {
+    "run": 106,
+    "seq": 1,
+    "type": "blueprint",
+    "chars": 312,
+    "text": "FOUNDATION LAW SOUL DIRECTIVE: 'You can only build up as high as your foundation is deep.' Depth gauge: Phase III Living Memory requires Fortress bedrock (encrypted PII + hard auth + erasure that erases). Phase IV Scale requires behavioral tests + roster-as-data. Phase II Monolith kill requires 15-lock net under every route before migration."
+  },
+  {
+    "run": 106,
+    "seq": 2,
+    "type": "blueprint",
+    "chars": 298,
+    "text": "TWO VOWS SOUL DIRECTIVE: (1) WORK CANNOT BE LOST — commit every verified step immediately, seal phetrail+soulcount+HL at every phase boundary. (2) APP CANNOT BREAK — dev→gates→prod never direct; red test blocks commit never --no-verify; strangler-fig not big-bang; rollback pre-verified before every prod push."
+  },
+  {
+    "run": 106,
+    "seq": 3,
+    "type": "blueprint",
+    "chars": 445,
+    "text": "ROME PROTOCOL 6 STATIONS for Run 106: (1) Non-negotiable order: Phase 0 FREEZE GATE absolute, FORTRESS before LIVING MEMORY, MONOLITH-voice domain before voice change in III. (2) SPECULATORES: enumerate every caller before migrating any domain (grep router.js+index.js+public+extension). (3) AGMEN NOVISSIMUM: 6-AI TRUTH + verified rollback target before EACH prod promotion. (4) PRAESIDIA: APEX Heavy Ledger seal at close of EACH phase. (5) IMPEDIMENTA: soulcount checkpoint + phetrail at every phase boundary. (6) VETERANI: negative trail ledger seeded from day one."
+  },
+  {
+    "run": 106,
+    "seq": 4,
+    "type": "blueprint",
+    "chars": 389,
+    "text": "P10 DEFECT STATUS: A=FIXED (durable_objects.js :46/:68/:136 /purge endpoints added). B=VERIFY (colon-key guard — seed lang:/goals:/subscription:/streak:/chat_memory: for sov100-test-magic → erase → assert 0). C=VERIFY (audit_log CREATE TABLE IF NOT EXISTS silent failure on existing prod table — real ALTER migration needed). D=OPEN (3-copy crypto: encryption.js hex, deletion.js UTF-8, index.js inline — incompatible derivation, consolidate to encryption.js only)."
+  },
+  {
+    "run": 106,
+    "seq": 5,
+    "type": "blueprint",
+    "chars": 267,
+    "text": "APP-KILLING SYNTAX ERROR CAUGHT: Kilo's /api/encrypt handlers had extra paren: return addCors(json({...}), 500), request) — SyntaxError kills entire Worker build. Caught by rear-guard audit before deploy. Fixed (index.js :1948+:2000 confirmed clean). Prevention: node --check src/*.js as Stage 0 gate blocks this class permanently."
+  },
+  {
+    "run": 106,
+    "seq": 6,
+    "type": "blueprint",
+    "chars": 341,
+    "text": "ROUTING BLIND SPOT: cors-auth-lock.test.mjs and route-completeness.test.mjs were aimed at index.js. WRONG. ALL CORS/CSRF/security headers/quota enforcement lives in router.js (Hono entry point). A cors-auth test reading index.js false-passes vacuously. FIX: cors-auth MUST read router.js. route-completeness reads BOTH router.js AND index.js. Corrected in run105-audit-addendum.md."
+  },
+  {
+    "run": 106,
+    "seq": 7,
+    "type": "blueprint",
+    "chars": 298,
+    "text": "F1-B PROOF INCOMPLETE: Load test used sov100-test-magic which router.js:83 exempts from checkQuota(). Real students (quy-bluetech etc) hit RATELIMIT.get+.put on EVERY token request. The KV round-trip was never tested. FIX: run load test against keep-warm-ping (ACTIVE_STUDENT_ROSTER member, non-sov100-, traverses real quota). Until then: state 'F1-B = sov100 path only'."
+  },
+  {
+    "run": 106,
+    "seq": 8,
+    "type": "blueprint",
+    "chars": 312,
+    "text": "CLASS PREFLIGHT IS SHALLOW: test/class-preflight.mjs checks 200 + !!data.token + !!data.settings only. Robot-voice regression (wrong think provider) returns truthy settings → false GO. HARDEN: assert settings.agent.think.provider ~ gpt-4o-mini, listen ~ nova-3, speak ~ aura-2-zeus-en, ws_url present (syd for vi), phonicsHint for phonics mode, mode=banana → 400 negative. See class-preflight-6pm.md."
+  },
+  {
+    "run": 106,
+    "seq": 9,
+    "type": "blueprint",
+    "chars": 356,
+    "text": "HL-660-663 DELETED ON BRANCH: run106-p10-erasure-hardening branch shows HL-660 through HL-663 deleted. Ledger is APPEND-ONLY by law. Restoring: git checkout master -- CANON/HEAVY-LEDGER/HL-660.json HL-661.json HL-662.json HL-663.json. Never commit branch with them deleted. New entries = HL-664+ only. This is a ledger-integrity violation caught before commit — Rome garrison standing."
+  },
+  {
+    "run": 106,
+    "seq": 10,
+    "type": "blueprint",
+    "chars": 489,
+    "text": "RUN 106 MASTERWORK — 5 PHASES: Phase 0 (Truth Lock): P10 defects A-D closed, 15 locks corrected + wired, real F1-B proof, offboarded PII purge, password hardening, behavioral test foundation. Phase I (Fortress): encryption at rest, hard Clerk auth, GDPR export, audit integrity. Phase II (Kill Monolith): strangler-fig index.js → src/routes/ voice-first, behavioral equivalence tests. Phase III (Living Memory): buildLongitudinalContext for all sessions, student DNA pipeline. Phase IV (Scale Engine): roster-as-data, portal template, provision-student.mjs. Phase V (Apex): APEX seal per phase, COLD-START-BOOT reconcile."
+  },
+  {
+    "run": 106,
+    "seq": 11,
+    "type": "blueprint",
+    "chars": 412,
+    "text": "THE GAUNTLET 7 STAGES: Stage 0 = node --check + 15 locks + gitleaks (pre-commit, blocks bad commits physically). Stage 1 = vitest-pool-workers behavioral (already installed, UNUSED — biggest depth upgrade available). Stage 2 = fast-check property fuzzing. Stage 3 = route-completeness + api-smoke on dev. Stage 4 = Playwright 3-mode + a11y. Stage 5 = load test BOTH sov100-test-magic AND keep-warm-ping. Stage 6 = live prod canary full voice journey, 2 RED → auto-rollback. Stage 7 = Stryker mutation (weekly, grades the suite)."
+  },
+  {
+    "run": 106,
+    "seq": 12,
+    "type": "blueprint",
+    "chars": 398,
+    "text": "FULLSTACK ARCHITECTURE MAP: Chrome Extension → /api/deepgram-token (router.js quota gate) → index.js handler (assertVoiceBrainLock×2, cache hit/miss, phonicsHint, ws_url syd for vi) → returns {token=rawKey, settings={think=gpt-4o-mini,listen=nova-3,speak=aura-2-zeus-en}, ws_url, greeting, phonicsHint}. Extension opens ws_url with raw token (VOICE-EC-3 never JWT). Settings applied via UpdateSettings. Student memory in STUDENT_MEMORY mem:<id> (Dreamer). Operator soul in SOUL_DB soul_prompts."
+  },
+  {
+    "run": 106,
+    "seq": 13,
+    "type": "prose",
+    "chars": 187,
+    "text": "OB-1 NEVER SELF-CERTIFIES. OB-1 specifies the receipt (exact command + exact pass signal). Kilo runs it and pastes. 'Should pass' is not a receipt. This is the structural fix for the ghost-closure failure mode from Run 105."
+  }
+]
