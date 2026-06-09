@@ -8,7 +8,7 @@
     "era": "ROMAN",
     "status": "COMPLETE",
     "seal": "RSS-106 (P10 Defect D/C closed + audit_log_v2 + 6 lock tests green)",
-    "head_sha": "c9eee8eb",
+    "head_sha": "8d3b65a8",
     "soulcount": 238196268,
     "anchor": "TITANIUM_ANCHOR"
   },
@@ -73,7 +73,7 @@
     "Demo runbook + pre-warm + break-glass scripts (see run105-pipeline.md)"
   ],
   "recent_seals": [
-    { "run": 106, "era": "ROMAN", "head": "c9eee8eb", "soul_delta": 0, "seal": "Run 106 - P10 Defect D/C closed + audit_log_v2 + all 6 lock tests green" },
+    { "run": 106, "era": "ROMAN", "head": "8d3b65a8", "soul_delta": 0, "seal": "Run 106 - P10 Defects A-D CLOSED + audit_log_v2 + 6 lock tests green + merged master" },
     { "run": 105, "era": "ROMAN", "head": "7bf8dd8f", "soul_delta": 0, "seal": "Run 105 - F1-B CLOSED + lock tests + Phoenix Rising Protocol" },
     { "run": 104, "era": "ROMAN", "head": "03a3bc98", "soul_delta": 80635, "seal": "RSS-104 Layer 6 perf fix + deploy wrapper + canary endpoints" }
   ],
