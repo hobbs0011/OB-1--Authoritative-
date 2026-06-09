@@ -1,0 +1,12 @@
+{
+  "hl_id": "HL-639",
+  "session_id": "sov100-roman-run101",
+  "rrl_source": "D:\\OB-1-CANONICAL\\RRL\\RRL-101.txt",
+  "char_count": 1263068,
+  "byte_count": 1266404,
+  "merkle_parent": "d959464ff60479493fb43dda58cc66e8c77fc589693af04f6f052589609bd4a2",
+  "merkle_hash": "8c9c08cccf56988f4fa175cce492ac72a29d888b8269e1524f23ff26cda4e406",
+  "sealed_at": "2026-06-08T16:39:41.7028699+07:00",
+  "sov100": true,
+  "run": "101"
+}

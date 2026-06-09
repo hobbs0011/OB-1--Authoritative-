@@ -145,8 +145,9 @@
    - Already parallelized via `Promise.all` (line 1046 in index.js)
    - Verified: avg latency ~970ms, p99 ~1.6s under 10-concurrent load
 
-### Verification (2026-06-08):
-- `preflight-ws.mjs` → GATES 2-4 GREEN against prod
-- `canary-check.mjs` → GATES 2-4 GREEN
-- `preflight-load.mjs` → 47/50 requests OK (3 500s under load)
-- `wrangler deploy --dry-run` → No errors
+### Verification (2026-06-09):
+- `preflight-ws.mjs` → GATES 2-4 GREEN against prod ✅
+- `canary-check.mjs` → GATES 2-4 GREEN ✅
+- `/api/health/voice` → 200 OK (gates 1+5) ✅
+- `preflight-load.mjs` → 29/52 requests OK (2 500s under load) — F1 tracked ⚠️
+- `wrangler deploy` → Version 4a1e3629-205a-406b-870f-6930998e4c99 (triggers active) ✅
