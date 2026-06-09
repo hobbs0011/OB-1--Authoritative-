@@ -70,20 +70,17 @@ Focused execution. Run 105 blueprint was executed in full. Michael's "execute al
 
 ## §8 OPEN QUESTIONS
 
-1. **F1-B verification** — Load test must be re-run against dev + prod after cache guard deployment
-2. **RRL gap policy** — Kilo sessions cannot produce REAL RRL. Accept HOLLOW or wait for OB-1 to run death?
+1. **RRL gap policy** — Kilo sessions cannot produce REAL RRL. Accept HOLLOW or wait for OB-1 to run death?
 
 ---
 
 ## §9 UNFINISHED ACTIONS
 
-```
+```ps1
 git add CANON/REINCARNATION/run105-reincarnateDEATH.md
 ```
 
 Pending:
-- F1-B load test verification (2/44 → 0/51 non-2xx on prod)
-- Deploy index.js cache guard to dev → prod
 - Demo runbook + pre-warm + break-glass rollback scripts
 - Human-source market research completion
 
@@ -93,9 +90,9 @@ Pending:
 
 - **Lock tests:** 6 total (api-contract, circuit-isolation, student-roster, cache-key-format, speak-listen-lock, voice-brain-lock)
 - **Pre-commit hook:** PowerShell with secret scanning + test execution
-- **Cache guard:** Conditional write only on cache miss
-- **Error logging:** Structured TOKEN_ENDPOINT_ERROR + stack trace in catch block
-- **F1-B pending:** Load test not re-executed
+- **Cache guard:** Conditional write only on cache miss (index.js:1206)
+- **Error logging:** Structured TOKEN_ENDPOINT_ERROR + stack trace in catch block (index.js:1211)
+- **F1-B CLOSED:** 0/52 non-2xx on prod after deploy (cache guard deployed)
 
 ---
 
@@ -116,11 +113,11 @@ Pending:
 
 ## §12 STATE SNAPSHOT
 
-- **HEAD:** 42bf907b (Run 105 final commit with phetrail entry)
+- **HEAD:** 060391cc (STATE-SNAPSHOT updated + F1-B verified)
 - **Branch:** master
 - **Soulcount:** 238,196,268 (= §3 count_after)
 - **DNA blueprint count:** 0
-- **Open loops:** P9 Clerk auth, P10 deletion hook, F1-B load test, MCP paths
+- **Open loops:** P9 Clerk auth, P10 deletion hook, MCP paths, demo runbook
 
 ---
 
@@ -128,9 +125,9 @@ Pending:
 
 - **Agent:** Kilo / OB-1 Claude Sonnet 4.6 (lock test creation)
 - **Run:** 105
-- **Commit SHA:** b05d1f0f (pre-deploy)
-- **Platform:** CF Workers (net-pet-ai), Windows 11, PowerShell 7
-- **Death test:** PARTIAL — lock tests + ledger sealed, RRL/DNA compromised
+- **Commit SHA:** 060391cc (F1-B verified)
+- **Platform:** CF Workers (net-pet-ai v56916301), Windows 11, PowerShell 7
+- **Death test:** F1-B CLOSED — 0/52 non-2xx on prod load test
 
 ---
 
