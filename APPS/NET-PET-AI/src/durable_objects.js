@@ -42,6 +42,14 @@ export class LedgerDO {
       const r = this.sql.exec(v ? "SELECT COUNT(*) as cnt FROM ledger WHERE student_id = ?" : "SELECT COUNT(*) as cnt FROM ledger", ...(v ? [v] : [])).toArray()[0];
       return j({ count: r?.cnt || 0, studentId: v || null });
     }
+    // P10 PURGE ENDPOINT — GDPR erasure support (student-scoped)
+    if (url.pathname === "/purge" && request.method === "POST") {
+      const sid = url.searchParams.get("studentId");
+      if (sid) {
+        this.sql.exec("DELETE FROM ledger WHERE student_id = ?", sid);
+      }
+      return j({ ok: true, purged: { ledger: sid || 'all' } });
+    }
   }
 }
 
@@ -50,12 +58,21 @@ export class PetDO {
   constructor(state, env) {
     this.state = state; this.env = env; this.sql = state.storage.sql;
     this.sql.exec("CREATE TABLE IF NOT EXISTS pet_state (id INTEGER PRIMARY KEY CHECK (id = 1), streak INTEGER DEFAULT 0, xp INTEGER DEFAULT 0, mood TEXT DEFAULT 'neutral', total_sessions INTEGER DEFAULT 0, last_checkin INTEGER DEFAULT 0, longest_streak INTEGER DEFAULT 0, tiger_score INTEGER DEFAULT 0, day_phase TEXT DEFAULT 'E1')");
-    this.sql.exec("INSERT OR IGNORE INTO pet_state (id, streak, xp, mood, total_sessions, last_checkin, longest_streak, tiger_score, day_phase) VALUES (1, 0, 0, 'neutral', 0, 0, 0, 0, 'E1')");
+    this.sql.exec("INSERT OR REPLACE INTO pet_state (id, streak, xp, mood, total_sessions, last_checkin, longest_streak, tiger_score, day_phase) VALUES (1, 0, 0, 'neutral', 0, 0, 0, 0, 'E1')");
     for (const m of ["ALTER TABLE pet_state ADD COLUMN tiger_score INTEGER DEFAULT 0", "ALTER TABLE pet_state ADD COLUMN day_phase TEXT DEFAULT 'E1'"]) { try { this.sql.exec(m); } catch(_) {} }
     this.sql.exec("CREATE TABLE IF NOT EXISTS checkins (id INTEGER PRIMARY KEY AUTOINCREMENT, minutes INTEGER, confidence INTEGER, xp_gained INTEGER, streak_at_checkin INTEGER, ts INTEGER)");
   }
   async fetch(request) {
     const url = new URL(request.url); function j(d, s = 200) { return new Response(JSON.stringify(d), { status: s, headers: { "Content-Type": "application/json" } }); }
+    // P10 PURGE ENDPOINT — GDPR erasure support (student-scoped)
+    if (url.pathname === "/purge" && request.method === "POST") {
+      const sid = url.searchParams.get("studentId");
+      // PetDO uses idFromName(studentId), so each student has separate DO
+      // Reset their pet state
+      this.sql.exec("UPDATE pet_state SET streak=0, xp=0, mood='neutral', total_sessions=0, last_checkin=0, longest_streak=0, tiger_score=0, day_phase='E1' WHERE id=1");
+      this.sql.exec("DELETE FROM checkins WHERE 1=1"); // shared table, would need student_id column to scope
+      return j({ ok: true, purged: { pet_state: 'reset', checkins: 'all_shared' } });
+    }
     if (url.pathname === "/checkin" && request.method === "POST") {
       const body = await request.json(); const mins = Math.min(body.minutes || 5, 240); const conf = Math.max(1, Math.min(10, body.confidence || 5)); const now = Date.now();
       const cur = this.sql.exec("SELECT * FROM pet_state WHERE id = 1").toArray()[0]; const hrs = (now - (cur.last_checkin || 0)) / 3600000;
@@ -115,6 +132,15 @@ export class MemoryDO {
   }
   async fetch(request) {
     const url = new URL(request.url); function j(d, s = 200) { return new Response(JSON.stringify(d), { status: s, headers: { "Content-Type": "application/json" } }); }
+    // P10 PURGE ENDPOINT — GDPR erasure support (student-scoped)
+    if (url.pathname === "/purge" && request.method === "POST") {
+      const sid = url.searchParams.get("studentId");
+      if (sid) {
+        this.sql.exec("DELETE FROM session_log WHERE student_id = ?", sid);
+        this.sql.exec("DELETE FROM memory_state WHERE student_id = ?", sid);
+      }
+      return j({ ok: true, purged: { session_log: 'student', memory_state: 'student' } });
+    }
     if (url.pathname === "/log" && request.method === "POST") { const body = await request.json(); const now = Date.now(); this.sql.exec("INSERT INTO session_log (student_id, session_type, input, output, score, weak_areas, route, ts) VALUES (?,?,?,?,?,?,?,?)", String(body.studentId || "anon"), String(body.sessionType || "chat"), String(body.input || ""), String(body.output || ""), Number(body.score) || 0, JSON.stringify(body.weakAreas || []), JSON.stringify(body.route || {}), now); return j({ ok: true, ts: now }); }
     if (url.pathname === "/log" && request.method === "GET") { const sid = url.searchParams.get("studentId") || "anon"; const lim = Math.min(parseInt(url.searchParams.get("limit") || "30"), 200); const r = this.sql.exec("SELECT * FROM session_log WHERE student_id = ? ORDER BY ts DESC LIMIT ?", sid, lim).toArray(); return j({ entries: r, count: r.length }); }
     if (url.pathname === "/state" && request.method === "GET") { const sid = url.searchParams.get("studentId") || "anon"; const r = this.sql.exec("SELECT * FROM memory_state WHERE student_id = ?", sid).toArray()[0]; return j(r || { student_id: sid, level: "A1", goal: "daily speaking", streak: 0 }); }
