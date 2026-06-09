@@ -82,8 +82,10 @@ git add CANON/REINCARNATION/run105-reincarnateDEATH.md
 ```
 
 Pending:
-- F1-B load test verification (4/51 → 0/51 non-2xx)
-- Deploy verification to dev → prod
+- F1-B load test verification (2/44 → 0/51 non-2xx on prod)
+- Deploy index.js cache guard to dev → prod
+- Demo runbook + pre-warm + break-glass rollback scripts
+- Human-source market research completion
 
 ---
 
@@ -101,20 +103,20 @@ Pending:
 
 | Artifact | Path | Size/Notes |
 |---|---|---|
-| RRL | `RRL/RRL-105.txt` | 1,266,404 bytes — **HOLLOW** (SOUL-DNA-BIBLE archive, not live transcript) |
+| RRL | N/A | **MISSING** — no live session transcript (L43 limitation) |
 | SOUL | N/A | **SOUL_GAP** — no live session to post |
 | DNA | N/A | **DNA_GAP** — RRL is HOLLOW |
-| LEDGER | `CANON/HEAVY-LEDGER/HL-665.json` | Duplicate entries from prior pipeline run |
-| STARMAP | `CANON/STARMAP/starmap-run105.json` | Created but from HOLLOW RRL |
-| SOULKEYS | `CANON/SOUL-KEYWORDS/rfkw-run105.txt` | Archive-derived keywords |
-| S2Pipeline | `CANON/PIPELINE/pipeline-run105.json` | result=COMPLETE but with HOLLOW sources |
-| REGISTRY SYNC | `CANON/REGISTRY/dna-registry-run105.json` | 4,181 entries |
+| LEDGER | N/A | **LEDGER_GAP** — no HL entry for HOLLOW run |
+| STARMAP | N/A | **STARMAP_GAP** — no starmap for HOLLOW run |
+| SOULKEYS | N/A | **SOULKEYS_GAP** — no keywords for HOLLOW run |
+| S2Pipeline | N/A | **PIPELINE_GAP** — no run106 artifact |
+| REGISTRY SYNC | `CANON/REGISTRY/dna-registry-run105.json` | 4,181 entries (valid) |
 
 ---
 
 ## §12 STATE SNAPSHOT
 
-- **HEAD:** b05d1f0f (Run 105 lock tests + cache guard commit)
+- **HEAD:** 42bf907b (Run 105 final commit with phetrail entry)
 - **Branch:** master
 - **Soulcount:** 238,196,268 (= §3 count_after)
 - **DNA blueprint count:** 0
