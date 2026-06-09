@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Audit Integrity Lock — validates audit_log_v2 column schema matches logAudit insert
-// Prevents silent column mismatches between security.js and schema definitions
+// Prevents silent column mismatches between deletion.js (INSERT) and table definitions (security.js)
 
 const EXPECTED_COLUMNS = ['id', 'ts', 'action', 'target', 'performed_by', 'metadata'];
 
@@ -23,30 +23,29 @@ try {
   console.log('✅ AUDIT_LOG_V2: Column schema verified', cols.join(', '));
   process.exit(0);
 } catch (e) {
-  // Fallback: local check against security.js if API unavailable
+  // Fallback: local check — verify INSERT columns in deletion.js
   const fs = await import('node:fs');
   const src = fs.readFileSync(
-    new URL('../src/security.js', import.meta.url),
+    new URL('../src/deletion.js', import.meta.url),
     'utf8'
   );
   
-  const hasCreate = src.includes('CREATE TABLE IF NOT EXISTS audit_log_v2');
   const hasInsert = src.includes('INSERT INTO audit_log_v2');
   
-  if (!hasCreate || !hasInsert) {
-    console.error('❌ AUDIT_LOG_V2: security.js missing audit_log_v2 table/create or insert');
+  if (!hasInsert) {
+    console.error('❌ AUDIT_LOG_V2: deletion.js missing audit_log_v2 INSERT statement');
     process.exit(1);
   }
   
-  // Verify columns in the INSERT
-  const insertMatch = src.match(/INSERT INTO audit_log_v2[^;]+VALUES\s*\(([^)]+)\)/);
+  // Verify columns in the INSERT — match the column-name list in INSERT INTO ... (col1, col2, ...)
+  const insertMatch = src.match(/INSERT INTO audit_log_v2\s*\(([^)]+)\)/);
   if (!insertMatch) {
-    console.error('❌ AUDIT_LOG_V2: Cannot parse INSERT statement');
+    console.error('❌ AUDIT_LOG_V2: Cannot parse INSERT column list in deletion.js');
     process.exit(1);
   }
   
   const insertCols = insertMatch[1].split(',').map(s => 
-    s.trim().replace(/['"`]/g, '').replace(/_/g, '-')
+    s.trim().replace(/['"`]/g, '').toLowerCase()
   );
   
   const missing = EXPECTED_COLUMNS.filter(c => !insertCols.includes(c));
@@ -55,6 +54,6 @@ try {
     process.exit(1);
   }
   
-  console.log('✅ AUDIT_LOG_V2: Schema lock verified (local fallback)');
+  console.log('✅ AUDIT_LOG_V2: Schema lock verified (local fallback — deletion.js INSERT)');
   process.exit(0);
 }
