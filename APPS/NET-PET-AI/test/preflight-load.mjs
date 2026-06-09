@@ -34,6 +34,20 @@ const p99 = result.latency.p99;
 console.log(`  requests: ${result.requests.total} | non-2xx: ${non2xx} | p99: ${p99}ms | avg: ${result.latency.average}ms`);
 console.log(`  status codes: ${JSON.stringify(codes)}`);
 
+// Status code breakdown table
+console.log('\nStatus code breakdown:');
+if (result.statusCodeStats) {
+  for (const [code, count] of Object.entries(result.statusCodeStats)) {
+    const emoji = code.startsWith('2') ? '✅' : '❌';
+    console.log(`  ${emoji} ${code}: ${count} requests`);
+  }
+}
+const non2xxDetailed = Object.entries(result.statusCodeStats || {})
+  .filter(([code]) => !code.startsWith('2'))
+  .reduce((sum, [, count]) => sum + count, 0);
+console.log(`\nNon-2xx total: ${non2xxDetailed} / ${result.requests.total}`);
+if (non2xxDetailed > 0) process.exitCode = 1;
+
 // Post-burst: confirm circuit breaker did NOT trip (endpoint still serves a token)
 const after = await fetch(URL);
 const afterOk = after.status === 200 && (await after.json()).token;
