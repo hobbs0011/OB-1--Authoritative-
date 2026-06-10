@@ -2,6 +2,8 @@ export async function checkQuota(env, studentId, type) {
   if (!studentId || studentId.startsWith('sov100-')) {
     return { allowed: true };
   }
+  // EC-quotanull: guard missing RATELIMIT binding (dev environment)
+  if (!env.RATELIMIT) return { allowed: true };
 
   const limits = { deepgram: 10, chat: 30 };
   const limit = limits[type];

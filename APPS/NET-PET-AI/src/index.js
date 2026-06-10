@@ -752,14 +752,19 @@ async function handleAPI(path, request, env, url) {
 
   // B2B: GET /api/admin/student-activity — employer-facing practice frequency (gated by upstream /api/admin/* checkAdminKey)
   if (path === "/api/admin/student-activity" && method === "GET") {
-    const students = ["quy-bluetech", "mai-tram-bluetech", "huong-bluetech"];
+    // EC-quyb2b: removed stale quy-bluetech (offboarded Run 107); EC-b2bdecrypt: decrypt session_history (AES-GCM v1: prefix)
+    const students = ["mai-tram-bluetech", "huong-bluetech"];
     const results = await Promise.all(students.map(async (sid) => {
       const [raw, histRaw] = await Promise.all([
         env.NET_PET_KV.get("student_profile_" + sid),
         env.NET_PET_KV.get("session_history_" + sid),
       ]);
       const profile = raw ? JSON.parse(raw) : {};
-      const history = histRaw ? JSON.parse(histRaw) : [];
+      let histDecrypted = histRaw;
+      if (env.ENCRYPTION_KEY && histRaw?.startsWith('v1:')) {
+        try { histDecrypted = await decryptField(histRaw.slice(3), env.ENCRYPTION_KEY); } catch { histDecrypted = null; }
+      }
+      const history = histDecrypted ? JSON.parse(histDecrypted) : [];
       const hist = Array.isArray(history) ? history : [];
       const weekAgo = Date.now() - 7 * 24 * 60 * 60 * 1000;
       const weeklyCount = hist.filter(s => s.ts > weekAgo).length;
@@ -970,6 +975,12 @@ async function handleAPI(path, request, env, url) {
   // STT WebSocket proxy — browser connects here, worker forwards to Deepgram with auth
   // MUST be checked BEFORE security middleware (which blocks non-GET/POST)
   if (path === "/api/stt/stream" && request.headers.get("Upgrade")?.toLowerCase() === "websocket") {
+    // EC-sttauth: validate student is in active roster before proxying to Deepgram
+    const sttStudentId = url.searchParams.get("studentId") || "";
+    if (sttStudentId) {
+      const rosterCheck = validateActiveStudent(sttStudentId);
+      if (!rosterCheck.valid) return new Response(JSON.stringify({ error: "student not authorized" }), { status: 403, headers: { "Content-Type": "application/json" } });
+    }
     const apiKey = env.DEEPGRAM_API_KEY;
     if (!apiKey) return new Response("DEEPGRAM_API_KEY not configured", { status: 500 });
 

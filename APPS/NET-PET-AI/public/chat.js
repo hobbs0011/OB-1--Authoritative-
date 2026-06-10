@@ -87,7 +87,7 @@ function initVoices() {
 
 if (window.speechSynthesis) {
   initVoices();
-  speechSynthesis.addEventListener("voiceschanged", () => { obiVoice = pickVoice(); }, { once: true });
+  // EC-doublevch: removed duplicate module-level voiceschanged listener — initVoices() already registers it when needed
 }
 
 // ── Client Error Telemetry (BB-36 — re-added after Run 31 crash) ─────────────
@@ -246,7 +246,8 @@ function typingIndicator() {
   return row;
 }
 
-function showTigerWin() {
+// EC-showtigerwin: renamed from showTigerWin to avoid silent overwrite by voice-mode definition at bottom of file
+function showChatTigerWin() {
   if (document.getElementById('tigerWinOverlay')) return;
   const dur = sessionStartTs ? Math.round((Date.now() - sessionStartTs) / 60000) : 0;
   const name = (profile.name || profile.fullName || '').split(' ')[0] || 'Tiger';
@@ -332,7 +333,7 @@ function showTigerWin() {
 }
 
 // Trigger Tiger Win on conversation-end signals
-document.addEventListener('beforeunload', () => { if (sessionStartTs) showTigerWin(); });
+document.addEventListener('beforeunload', () => { if (sessionStartTs) showChatTigerWin(); });
 
 function obi(text, force) {
   // I-1: Crisis/safety messages ALWAYS render regardless of Voice Agent state.
@@ -586,10 +587,8 @@ Rules:
 let chatMessages = []; // conversation history for DeepSeek
 
 async function reactLLM(text) {
-  chatMessages.push({ role: "user", content: text });
-  if (chatMessages.length > 8) chatMessages = chatMessages.slice(-8);
-
   // Fast path: route through open Deepgram Voice Agent WS (no external LLM call)
+  // EC-doublepush: do NOT push to chatMessages here — ConversationText user handler pushes for voice path
   if (agentWs && agentReady && agentWs.readyState === WebSocket.OPEN) {
     // I-4: Crisis check BEFORE sending to Voice Agent (EC-3 fix)
     if (isCrisisSignal(text)) { handleCrisis(); return ""; }
@@ -604,6 +603,11 @@ async function reactLLM(text) {
       return "";
     } catch { /* timeout or WS error — fall through to REST */ }
   }
+
+  // REST fallback path — push user message only here (voice path pushes via ConversationText)
+  chatMessages.push({ role: "user", content: text });
+  // EC-chatcap: standardized to 20 (was 8 here vs 40 in voice path — same array, consistent cap)
+  if (chatMessages.length > 20) chatMessages = chatMessages.slice(-20);
 
   // Fallback: REST call to /api/chat
   const messages = [{ role: "system", content: buildSystemPrompt(profile) }, ...chatMessages];
@@ -1264,7 +1268,8 @@ function handleAgentMsg(event) {
         clearSilenceFired(); // reset one-shot silence flag on user speech
         bubble("student", msg.content);
         chatMessages.push({ role: "user", content: msg.content });
-        if (chatMessages.length > 40) chatMessages = chatMessages.slice(-40);
+        // EC-chatcap: standardized to 20 (was 40 — consistent with REST path)
+        if (chatMessages.length > 20) chatMessages = chatMessages.slice(-20);
         agentSessionTurns++;
 
         // Mode-specific tracking
@@ -1479,7 +1484,8 @@ function resetSilenceTimer() {
       if (agentInjectWatchdog) clearTimeout(agentInjectWatchdog);
       agentInjectWatchdog = setTimeout(() => {
         agentInjectWatchdog = null;
-        if (agentSilenceFired && agentWs && agentReady) obi(_nudgeMsg);
+        // EC-22: obi() is suppressed when voice agent active — call bubble() directly
+        if (agentSilenceFired && agentWs && agentReady) bubble("obi", _nudgeMsg);
       }, 5000);
     }
   }, 3000);

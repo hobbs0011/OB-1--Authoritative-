@@ -113,14 +113,17 @@ export async function handleStudentErase(studentId, env, performedBy = 'admin') 
     classCursor = listed.list_complete ? undefined : listed.cursor;
   } while (classCursor);
 
-  // KV purge — RATELIMIT
-  let cursor = undefined;
-  do {
-    const listed = await env.RATELIMIT.list({ prefix: studentId + ':', cursor });
-    await Promise.all(listed.keys.map(k => env.RATELIMIT.delete(k.name)));
-    kvKeys += listed.keys.length;
-    cursor = listed.list_complete ? undefined : listed.cursor;
-  } while (cursor);
+  // KV purge — RATELIMIT quota keys (format: quota:{studentId}:{type}:{hourBucket})
+  // EC-deleteguard + EC-deleteprefix: guard missing binding; correct prefix was studentId: (wrong), now quota:{studentId}
+  if (env.RATELIMIT) {
+    let cursor = undefined;
+    do {
+      const listed = await env.RATELIMIT.list({ prefix: `quota:${studentId}:`, cursor });
+      await Promise.all(listed.keys.map(k => env.RATELIMIT.delete(k.name)));
+      kvKeys += listed.keys.length;
+      cursor = listed.list_complete ? undefined : listed.cursor;
+    } while (cursor);
+  }
 
   // STUDENT_MEMORY purge
   if (env.STUDENT_MEMORY) {
