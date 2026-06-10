@@ -2007,26 +2007,22 @@ function selectMode(mode) {
   const landingSeen = localStorage.getItem('obi_landing_seen');
 
   if (urlMode) {
+    // Explicit mode in URL — skip landing, go straight in
     currentMode = urlMode;
     localStorage.setItem('obi_session_mode', currentMode);
     const landing = document.getElementById('modeLanding');
     if (landing) landing.classList.add('hidden');
-  } else if (!landingSeen) {
-    // FIX2: Show landing page for first-time users or cleared storage.
-    // Previously this branch never explicitly showed the landing element,
-    // causing chat to boot before mode selection.
-    landingWillShow = true; // tells boot() not to call openVoiceAgent() prematurely
+  } else {
+    // Always show mode landing so student can pick their mode each session.
+    // Pre-select the last-used mode so it's one tap to continue.
+    landingWillShow = true;
     currentMode = savedMode || 'free';
     const landing = document.getElementById('modeLanding');
     if (landing) {
       landing.classList.remove('hidden');
       landing.style.display = 'flex';
     }
-    if (savedMode) selectLandingMode(savedMode);
-  } else {
-    currentMode = savedMode || 'free';
-    const landing = document.getElementById('modeLanding');
-    if (landing) landing.classList.add('hidden');
+    selectLandingMode(savedMode || 'free');
   }
 
   document.body.dataset.mode = currentMode; // A4: drive room color on init
