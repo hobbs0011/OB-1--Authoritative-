@@ -19,7 +19,41 @@ import { PHONICS_DRILLS, NET_PHONICS_GROUPS } from './phonics-drills.js';
 import { queueEmail } from './email-service.js';
 import { encryptField, decryptField } from './encryption.js';
 
-const VERSION = "1.5.0";
+const VERSION = "1.6.0";
+
+async function seedVocabBatch(studentId, words, env) {
+  if (!words || words.length === 0) return [];
+  const [listRaw, srsRaw] = await Promise.all([
+    env.NET_PET_KV.get(`vocab_list_${studentId}`),
+    env.NET_PET_KV.get(`srs_data_${studentId}`)
+  ]);
+  const list = listRaw ? JSON.parse(listRaw) : [];
+  const srsMap = srsRaw ? JSON.parse(srsRaw) : {};
+  const now = Date.now();
+  const results = [];
+  for (const w of words) {
+    const word = (w.word || "").trim();
+    if (!word) { results.push({ ok: false }); continue; }
+    const grade = w.used_by_student ? 3 : 0;
+    if (!srsMap[word]) {
+      srsMap[word] = { word, translation: w.meaning_vi || "", interval: 0, repetitions: 0,
+                       ease_factor: 2.5, next_review: 0, last_grade: null,
+                       source: "class_audio", first_seen: now, times_seen: 1 };
+      srsMap[word] = { ...srsMap[word], ...computeNextReview(srsMap[word], grade), word };
+    } else {
+      srsMap[word].times_seen = (srsMap[word].times_seen || 1) + 1;
+      if (w.meaning_vi && !srsMap[word].translation) srsMap[word].translation = w.meaning_vi;
+      srsMap[word] = { ...srsMap[word], ...computeNextReview(srsMap[word], grade), word };
+    }
+    if (!list.find(e => e.word === word)) list.push({ word, meaning_vi: w.meaning_vi || "", source: "class_audio", ts: now });
+    results.push({ ok: true, word, next_review: srsMap[word].next_review });
+  }
+  await Promise.all([
+    env.NET_PET_KV.put(`vocab_list_${studentId}`, JSON.stringify(list.slice(-500))),
+    env.NET_PET_KV.put(`srs_data_${studentId}`, JSON.stringify(srsMap))
+  ]);
+  return results;
+}
 
 async function seedVocab(studentId, word, meaning_vi, source, env, grade = null) {
   word = (word || "").trim();
@@ -2033,7 +2067,7 @@ speak: {
     return handleTestimonialApprove(id, env);
   }
 
-  // POST /api/class/ingest — batch transcribe 1hr class audio + extract vocab via gpt-4o-mini
+  // POST /api/class/ingest — batch transcribe 1hr class audio + extract vocab via PA T1
   if (path === "/api/class/ingest" && method === "POST") {
     const authFail = checkAdminKey(request, env);
     if (authFail) return addCors(authFail, request);
@@ -2042,10 +2076,12 @@ speak: {
     if (!studentId || !audioUrl) return addCors(json({ error: "studentId and audioUrl required" }, 400), request);
     const idCheck = validateStudentId(studentId);
     if (!idCheck.valid) return addCors(json({ error: idCheck.error }, 400), request);
+    const rosterCheck = validateActiveStudent(studentId);
+    if (!rosterCheck.valid) return addCors(json({ error: 'student not in active roster', code: 'NOT_IN_ROSTER' }, 403), request);
     const date = classDate || new Date().toISOString().slice(0, 10);
 
     const dgRes = await fetch(
-      "https://api.deepgram.com/v1/listen?model=nova-3&diarize=true&smart_format=true&punctuate=true",
+      "https://api.deepgram.com/v1/listen?model=nova-3&diarize=true&smart_format=true&punctuate=true&utterances=true",
       {
         method: "POST",
         headers: { "Authorization": `Token ${env.DEEPGRAM_API_KEY}`, "Content-Type": "application/json" },
@@ -2060,28 +2096,25 @@ speak: {
     const fullTranscript = utterances.map(u => `[S${u.speaker}] ${u.transcript}`).join("\n");
     const studentText = utterances.filter(u => u.speaker === 1).map(u => u.transcript).join("\n");
 
-    const openaiRes = await fetch("https://api.openai.com/v1/chat/completions", {
-      method: "POST",
-      headers: { "Authorization": `Bearer ${env.OPENAI_API_KEY}`, "Content-Type": "application/json" },
-      body: JSON.stringify({
-        model: "gpt-4o-mini",
-        response_format: { type: "json_object" },
-        messages: [
-          { role: "system", content: "You are an English teacher extracting vocabulary from a class transcript." },
-          { role: "user", content: `Extract 15-30 A2/B1 English vocabulary words or phrases from this class.\nExclude basic function words (the, is, and, etc).\nReturn JSON: { "words": [{ "word": string, "meaning_vi": string, "used_by_student": boolean }] }\nPrioritize words the student (S1) actually attempted.\n\nFULL TRANSCRIPT:\n${fullTranscript.slice(0, 15000)}\n\nSTUDENT ONLY:\n${studentText.slice(0, 5000)}` }
-        ],
-        max_tokens: 1500
-      })
-    });
-    if (!openaiRes.ok) return addCors(json({ error: "vocab extraction failed", status: openaiRes.status }, 502), request);
-    const oaiData = await openaiRes.json();
+    const paTask = `Extract 15-30 A2/B1 English vocabulary words or phrases from this ESL class transcript. Return ONLY valid JSON in this exact format: {"words":[{"word":"string","meaning_vi":"string","used_by_student":boolean}]}. Exclude basic function words (the, is, and, etc). Prioritize words the student (S1) attempted. FULL TRANSCRIPT:\n${fullTranscript.slice(0, 15000)}\nSTUDENT ONLY:\n${studentText.slice(0, 5000)}`;
     let extracted = [];
-    try { extracted = JSON.parse(oaiData.choices[0].message.content).words ?? []; } catch {}
+    try {
+      const paBody = JSON.stringify({ task: paTask, context: "", targetfile: "", tier: 1 });
+      const paRes = await fetch("https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/code", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "x-pa-auth": env.PA_AUTH_KEY || "" },
+        body: paBody
+      });
+      if (paRes.ok) {
+        const paData = await paRes.json();
+        const patch = paData.patch || "";
+        const jsonMatch = patch.match(/\{[\s\S]*"words"[\s\S]*\}/);
+        if (jsonMatch) extracted = JSON.parse(jsonMatch[0]).words ?? [];
+      }
+    } catch (_) {}
 
-    const results = await Promise.all(
-      extracted.map(w => seedVocab(studentId, w.word, w.meaning_vi, "class_audio", env, w.used_by_student ? 3 : 0))
-    );
-    const added = results.filter(r => r.ok).length;
+    const batchResults = await seedVocabBatch(studentId, extracted, env);
+    const added = batchResults.filter(r => r.ok).length;
 
     await env.NET_PET_KV.put(`class_transcript_${studentId}_${date}`, fullTranscript, { expirationTtl: 60 * 60 * 24 * 365 });
 
@@ -2122,7 +2155,7 @@ async function handlePaymentConfirm(body, env) {
 async function handleAdminSubscriptionsList(env) {
   if (!env.NET_PET_KV) return json({ subscriptions: [] });
   // Scan known students + employer subscriptions
-  const students = ["huong-bluetech","mai-tram-bluetech","quy-bluetech"];
+  const students = ["huong-bluetech","mai-tram-bluetech"];
   const subs = await Promise.all(students.map(async sid => {
     const raw = await env.NET_PET_KV.get(`subscription:${sid}`).catch(() => null);
     return raw ? { studentId: sid, ...JSON.parse(raw) } : null;

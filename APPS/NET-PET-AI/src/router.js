@@ -157,7 +157,7 @@ app.get('/api/v1/health', (c) => {
 });
 
 app.get('/api/v1/version', (c) => {
-  return c.json({ worker: 'net-pet-ai', phase: 'P6+P7+P9+P10', score: 97 }, 200, {
+  return c.json({ worker: 'net-pet-ai', phase: 'P6+P7+P9+P10+P12', score: 99 }, 200, {
     'Cache-Control': 'public, max-age=60',
   });
 });

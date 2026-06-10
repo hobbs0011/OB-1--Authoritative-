@@ -104,6 +104,15 @@ export async function handleStudentErase(studentId, env, performedBy = 'admin') 
     } while (cursor);
   }
 
+  // Scan class transcripts (one per class date)
+  let classCursor;
+  do {
+    const listed = await env.NET_PET_KV.list({ prefix: `class_transcript_${studentId}_`, cursor: classCursor });
+    await Promise.all(listed.keys.map(k => env.NET_PET_KV.delete(k.name)));
+    kvKeys += listed.keys.length;
+    classCursor = listed.list_complete ? undefined : listed.cursor;
+  } while (classCursor);
+
   // KV purge — RATELIMIT
   let cursor = undefined;
   do {
