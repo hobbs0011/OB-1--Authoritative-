@@ -23,9 +23,9 @@ for (const student of STUDENTS) {
         hasToken = !!data.token;
         hasSettings = !!data.settings;
         // Voice-lock: prod must use gpt-4o-mini think, nova-3 listen, aura-2-zeus-en speak
-        const think = data.settings?.agent?.think?.model ?? "";
-        const listen = data.settings?.agent?.listen?.model ?? "";
-        const speak = data.settings?.agent?.speak?.model ?? "";
+        const think = data.settings?.agent?.think?.provider?.model ?? "";
+        const listen = data.settings?.agent?.listen?.provider?.model ?? "";
+        const speak = data.settings?.agent?.speak?.provider?.model ?? "";
         voiceLocked = think.includes("gpt-4o-mini") && listen.includes("nova-3") && speak.includes("aura-2-zeus-en");
       }
       results.push({
