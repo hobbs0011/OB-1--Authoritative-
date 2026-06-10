@@ -116,6 +116,19 @@ If Tier 1 fails → escalate to Tier 2. Print:
 - **L58 FIX_PA_FIRST** — If PA T1 fails, fixing PA IS the immediate priority. Check `/api/status`. Try `tier:10`. If all tiers down → HALT. Do not proceed with inline work.
 - **L55 COMMIT_DONT_HOLD** — Commit every verified working feature before session end.
 - **L56 PRE_CODE_DOC_GATE** — Any NET-PET-AI dispatch: run `context-bundle.ps1 -TaskType netpetai` first. See `CANON/SYSTEM/MANDATORY-READS.md` for the full registry.
+
+  **⚠️ NET-PET-AI PRE-CODE GATE (mandatory, visible in every response):**
+  Before prescribing ANY code, blueprint, or fix for APPS/NET-PET-AI/**, the agent MUST print this block in its response BEFORE any code appears:
+  ```
+  PRE-CODE-GATE L56:
+  ✓ STUDENT-PORTAL-DEV.md: [evidence — what the doc says about relevant feature]
+  ✓ deepgram-voice-agent-edge-cases.md §2: [evidence — relevant edge cases checked]
+  ✓ Voice lock: think=gpt-4o-mini (no endpoint), listen=nova-3, speak=aura-2-zeus-en — UNCHANGED
+  ✓ No new external API keys introduced: [confirm]
+  ✓ Extraction/generation → PA T1, not inline: [confirm]
+  ```
+  If the agent cannot print this block with actual evidence (not placeholders), it MUST stop and read both files before proceeding. Placeholders like "[check]" or "[TBD]" = gate NOT passed.
+
 - **L78 PA_DO_ALL** — Anything and everything that can be handed off to PA, must be. OB-1 routes only — PA executes. If PA cannot handle a task, UPDATE PA first (fix execute.js, improve system prompt, add context) before executing inline. Inline execution is the failure mode. Token conservation is doctrine. This is a SOUL DIRECTIVE (Run 082).
 
   **ALWAYS PA (no exceptions, no "too small" rationalisation):**
