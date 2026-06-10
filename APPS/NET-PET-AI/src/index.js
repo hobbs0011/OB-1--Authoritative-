@@ -1,8 +1,8 @@
-// src/index.js — NET-PET-AI Cloudflare Worker v1.4
+// src/index.js — NET-PET-AI Cloudflare Worker v1.5
 // Phoenix Rising Protocol — OBI Command Station
 // Architecture: Agent100 → Magic Chat → Agent99 (Obi) → Cryptographic Immutable Ledger
 // Bindings: SESSIONS (SessionDO), PROFILES (ProfileDO), PETS (PetDO), LEDGER (LedgerDO), ASSETS
-// Secrets: DEEPSEEK_API_KEY, DEEPGRAM_API_KEY
+// Secrets: DEEPSEEK_API_KEY, DEEPGRAM_API_KEY, OPENAI_API_KEY
 
 import { securityMiddleware, sanitizeInput, validateStudentId, validateActiveStudent, checkAdminKey, logAudit } from './security.js';
 import { logError, logWarn, logInfo } from './logger.js';
@@ -20,6 +20,34 @@ import { queueEmail } from './email-service.js';
 import { encryptField, decryptField } from './encryption.js';
 
 const VERSION = "1.5.0";
+
+async function seedVocab(studentId, word, meaning_vi, source, env, grade = null) {
+  word = (word || "").trim();
+  if (!word) return { ok: false };
+  const [listRaw, srsRaw] = await Promise.all([
+    env.NET_PET_KV.get(`vocab_list_${studentId}`),
+    env.NET_PET_KV.get(`srs_data_${studentId}`)
+  ]);
+  const list = listRaw ? JSON.parse(listRaw) : [];
+  const srsMap = srsRaw ? JSON.parse(srsRaw) : {};
+  const now = Date.now();
+  if (!srsMap[word]) {
+    srsMap[word] = { word, translation: meaning_vi || "", interval: 0, repetitions: 0,
+                     ease_factor: 2.5, next_review: 0, last_grade: null,
+                     source, first_seen: now, times_seen: 1 };
+    if (grade != null) srsMap[word] = { ...srsMap[word], ...computeNextReview(srsMap[word], grade), word };
+  } else {
+    srsMap[word].times_seen = (srsMap[word].times_seen || 1) + 1;
+    if (meaning_vi && !srsMap[word].translation) srsMap[word].translation = meaning_vi;
+    if (grade != null) srsMap[word] = { ...srsMap[word], ...computeNextReview(srsMap[word], grade), word };
+  }
+  if (!list.find(w => w.word === word)) list.push({ word, meaning_vi: meaning_vi || "", source, ts: now });
+  await Promise.all([
+    env.NET_PET_KV.put(`vocab_list_${studentId}`, JSON.stringify(list.slice(-500))),
+    env.NET_PET_KV.put(`srs_data_${studentId}`, JSON.stringify(srsMap))
+  ]);
+  return { ok: true, word, next_review: srsMap[word].next_review, source };
+}
 
 // ── Soul Logger utilities (D1 direct write — bypass worker-to-worker fetch) ──
 function generateUUID() { return crypto.randomUUID(); }
@@ -380,10 +408,11 @@ export default {
 
     // /health — REAL dependency validation (not cosmetic)
     if (path === "/health" && request.method === "GET") {
-      const secrets = {
-        DEEPSEEK_API_KEY:  !!env.DEEPSEEK_API_KEY,
-        DEEPGRAM_API_KEY:  !!env.DEEPGRAM_API_KEY,
-      };
+    const secrets = {
+      DEEPSEEK_API_KEY:  !!env.DEEPSEEK_API_KEY,
+      DEEPGRAM_API_KEY:  !!env.DEEPGRAM_API_KEY,
+      OPENAI_API_KEY:    !!env.OPENAI_API_KEY,
+    };
       const bindings = {
         SESSIONS: !!env.SESSIONS,
         PROFILES: !!env.PROFILES,
@@ -405,11 +434,12 @@ export default {
           ai:      secrets.DEEPSEEK_API_KEY  ? "LIVE" : "DEAD",
           voice:   secrets.DEEPGRAM_API_KEY   ? "LIVE" : "DEAD",
           notion:  "BLACKLISTED — platform usage permanently disabled",
+          openai:  secrets.OPENAI_API_KEY    ? "CONFIGURED" : "MISSING",
           compute: bindingsOk                 ? "LIVE" : "DEAD",
         },
         secrets,
         bindings,
-        readiness: secretsOk && bindingsOk ? "PRODUCTION" : "NEEDS_SECRETS",
+        readiness: secretsOk && bindingsOk && secrets.OPENAI_API_KEY ? "PRODUCTION" : "NEEDS_SECRETS",
       }), request);
     }
 
@@ -750,7 +780,7 @@ async function handleAPI(path, request, env, url) {
 
     // Health — lightweight
   if (path === "/api/health" && method === "GET") {
-    return json({ ok: !!env.DEEPSEEK_API_KEY, version: VERSION, app: env.APP_NAME || "Natural English Training", coach: env.APP_COACH_NAME || "Obi", ts: Date.now(), routes: 40, ai: env.DEEPSEEK_API_KEY ? "LIVE" : "DEAD", voice: env.DEEPGRAM_API_KEY ? "LIVE" : "DEAD", notion: "BLACKLISTED — platform usage permanently disabled", imagegen: env.IMAGE_GEN_URL ? "CONFIGURED" : "NOT_SET", readiness: (env.DEEPSEEK_API_KEY && env.DEEPGRAM_API_KEY) ? "PRODUCTION" : "NEEDS_SECRETS" });
+    return json({ ok: !!env.DEEPSEEK_API_KEY, version: VERSION, app: env.APP_NAME || "Natural English Training", coach: env.APP_COACH_NAME || "Obi", ts: Date.now(), routes: 40, ai: env.DEEPSEEK_API_KEY ? "LIVE" : "DEAD", voice: env.DEEPGRAM_API_KEY ? "LIVE" : "DEAD", notion: "BLACKLISTED — platform usage permanently disabled", imagegen: env.IMAGE_GEN_URL ? "CONFIGURED" : "NOT_SET", openai: env.OPENAI_API_KEY ? "CONFIGURED" : "NOT_SET", readiness: (env.DEEPSEEK_API_KEY && env.DEEPGRAM_API_KEY && env.OPENAI_API_KEY) ? "PRODUCTION" : "NEEDS_SECRETS" });
   }
 
   // Deep health — full dependency probe (hit each external service)
@@ -778,6 +808,17 @@ async function handleAPI(path, request, env, url) {
         checks.deepgram = { ok: dgRes.ok, status: dgRes.status };
       } catch (e) { checks.deepgram = { ok: false, error: e.message }; }
     } else { checks.deepgram = { ok: false, error: "SECRET_MISSING" }; }
+    // OpenAI probe
+    if (env.OPENAI_API_KEY) {
+      try {
+        const oaRes = await fetch("https://api.openai.com/v1/chat/completions", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "Authorization": `Bearer ${env.OPENAI_API_KEY}` },
+          body: JSON.stringify({ model: "gpt-4o-mini", messages: [{ role: "user", content: "ping" }], max_tokens: 1 }),
+        });
+        checks.openai = { ok: oaRes.ok, status: oaRes.status };
+      } catch (e) { checks.openai = { ok: false, error: e.message }; }
+    } else { checks.openai = { ok: false, error: "SECRET_MISSING" }; }
     // Notion probe — BLACKLISTED: platform usage permanently disabled; no API calls made
     checks.notion = { ok: false, detail: "BLACKLISTED — future connections permanently disabled" };
     // DO bindings
@@ -1094,16 +1135,16 @@ try {
           }
           const weak_phonemes = Object.keys(pPhTotal).filter(ph => Math.round((pPhDone[ph]||0)/pPhTotal[ph]*100) < 50);
           phonicsData = { ...pp, group_name: groupDef.name, next_drill, weak_phonemes };
-      }
-    } catch (_) {}
+        }
+      } catch (_) {}
 
     let lastSessionNotes = "";
     let lastSessionVocab = [];
     try {
-      if (sessionHistRaw) {                    // reuse top-level fetch — NO second KV.get
+      if (sessionHistRaw) {
         const hist = JSON.parse(sessionHistRaw);
         if (hist.length > 0) {
-          const last = hist[hist.length - 1];     // MOST RECENT (chronological ascending)
+          const last = hist[hist.length - 1];
           const daysAgo = Math.floor((Date.now() - (last.ts || Date.now())) / 86400000);
           const when = daysAgo === 0 ? "today" : daysAgo === 1 ? "yesterday" : daysAgo + " days ago";
           lastSessionVocab = (last.vocab || []).slice(0, 5);
@@ -1113,7 +1154,6 @@ try {
       }
     } catch (_) {}
 
-    // SRS: compute which vocab words are due for review this session
     let dueVocab = [];
     try {
       if (rawSrsData) {
@@ -1126,9 +1166,6 @@ try {
       }
     } catch (_) {}
 
-    // Dreamer World Model synthesis — build cross-session profile from full session_history.
-    // world_model was always empty (deferred since Run 30) → Obi always started cold → this fixes it.
-    // Runs at every token request; KV write is fire-and-forget (non-blocking).
     try {
       if (sessionHistRaw) {
         const hist = JSON.parse(sessionHistRaw);
@@ -1147,7 +1184,6 @@ try {
             : 0;
           const turnLenNote = avgTurnLen > 8 ? "speaks in full sentences" : avgTurnLen > 3 ? "uses short phrases" : avgTurnLen > 0 ? "still building sentence length" : "";
           const world_model = `${totalSessions} sessions. ${freq}. ${engagement} (~${avgTurns} turns/session).${turnLenNote ? ` ${turnLenNote} (~${avgTurnLen} words/turn).` : ""} Vocab covered: ${allVocab.slice(0, 10).join(", ") || "building vocabulary"}.`;
-          // Cross-session struggle detection: words in 3+ sessions with SRS interval ≤ 6 = still not graduating
           const vocabSessionCount = {};
           for (const s of hist) { for (const w of (s.vocab || [])) { vocabSessionCount[w] = (vocabSessionCount[w] || 0) + 1; } }
           const persistentWords = Object.entries(vocabSessionCount)
@@ -1253,27 +1289,8 @@ speak: {
     if (!_vocabIdCheck.valid) return addCors(json({ error: _vocabIdCheck.error }, 400), request);
     const _vocabRosterCheck = validateActiveStudent(studentId);
     if (!_vocabRosterCheck.valid) return addCors(json({ error: 'student not authorized', code: 'NOT_IN_ROSTER' }, 403), request);
-    try {
-      const [raw, rawSrs] = await Promise.all([
-        env.NET_PET_KV.get(`vocab_list_${studentId}`),
-        env.NET_PET_KV.get(`srs_data_${studentId}`)
-      ]);
-      const list = raw ? JSON.parse(raw) : [];
-      if (!list.find(w => w.word === word)) {
-        list.push({ word, meaning_vi: meaning_vi || "", ts: Date.now() });
-      }
-      // SRS write-back: student used this word successfully → grade 4 (good recall)
-      const srsMap = rawSrs ? JSON.parse(rawSrs) : {};
-      const existing = srsMap[word] || { word, interval: 1, repetitions: 0, ease_factor: 2.5, next_review: 0 };
-      srsMap[word] = { ...existing, ...computeNextReview(existing, 4), word };
-      await Promise.all([
-        env.NET_PET_KV.put(`vocab_list_${studentId}`, JSON.stringify(list.slice(-500))),
-        env.NET_PET_KV.put(`srs_data_${studentId}`, JSON.stringify(srsMap))
-      ]);
-      return addCors(json({ ok: true, word, nextReview: srsMap[word].next_review }), request);
-    } catch (err) {
-      return addCors(json({ error: err.message }, 500), request);
-    }
+    const result = await seedVocab(studentId, word, meaning_vi, "obi_chat", env, 4);
+    return addCors(json(result.ok ? { saved: true, word } : { error: "empty word" }, result.ok ? 200 : 400), request);
   }
 
   // Voice Agent: read session history
@@ -1498,9 +1515,53 @@ speak: {
   }
 
   // Vocabulary SRS
-  if (path === "/api/vocab/add"    && method === "POST") { const body = await request.json(); return handleVocabAdd(body, env); }
-  if (path === "/api/vocab/due"    && method === "GET")  { return handleVocabDue(url.searchParams.get("studentId") || "", env); }
-  if (path === "/api/vocab/review" && method === "POST") { const body = await request.json(); return handleVocabReview(body, env); }
+  if (path === "/api/vocab/add"    && method === "POST") {
+    const body = await request.json().catch(() => ({}));
+    const { studentId, word, meaning_vi } = body;
+    if (!studentId || !word) return addCors(json({ error: "studentId and word required" }, 400), request);
+    const idCheck = validateStudentId(studentId);
+    if (!idCheck.valid) return addCors(json({ error: idCheck.error }, 400), request);
+    const rosterCheck = validateActiveStudent(studentId);
+    if (!rosterCheck.valid) return addCors(json({ error: 'student not authorized', code: 'NOT_IN_ROSTER' }, 403), request);
+    const result = await seedVocab(studentId, word, meaning_vi, "manual", env);
+    return addCors(json(result.ok ? { added: true, word } : { error: "empty word" }, result.ok ? 200 : 400), request);
+  }
+  if (path === "/api/vocab/due"    && method === "GET") {
+    const studentId = url.searchParams.get("studentId") || "";
+    if (!studentId || studentId.startsWith('sov100-test-')) return addCors(json({ due: [], count: 0 }), request);
+    const idCheck = validateStudentId(studentId);
+    if (!idCheck.valid) return addCors(json({ error: idCheck.error }, 400), request);
+    try {
+      const [srsRaw, listRaw] = await Promise.all([
+        env.NET_PET_KV.get(`srs_data_${studentId}`),
+        env.NET_PET_KV.get(`vocab_list_${studentId}`)
+      ]);
+      if (!srsRaw) return addCors(json({ due: [], count: 0 }), request);
+      const srsMap = JSON.parse(srsRaw);
+      const meanings = {};
+      if (listRaw) for (const w of JSON.parse(listRaw)) meanings[w.word] = w.meaning_vi || "";
+      const now = Date.now();
+      const due = Object.values(srsMap)
+        .filter(w => (w.next_review ?? 0) <= now)
+        .sort((a, b) => (a.next_review ?? 0) - (b.next_review ?? 0))
+        .map(w => ({ word: w.word, translation: w.translation || meanings[w.word] || "", source: w.source }));
+      return addCors(json({ due, count: due.length }), request);
+    } catch (err) {
+      logWarn('VOCAB_DUE_KV_FAIL', { studentId, error: err.message }, env);
+      return addCors(json({ due: [], count: 0 }), request);
+    }
+  }
+  if (path === "/api/vocab/review" && method === "POST") {
+    const body = await request.json().catch(() => ({}));
+    const { studentId, word, grade } = body;
+    if (!studentId || !word || grade == null) return addCors(json({ error: "studentId, word, grade required" }, 400), request);
+    const idCheck = validateStudentId(studentId);
+    if (!idCheck.valid) return addCors(json({ error: idCheck.error }, 400), request);
+    const rosterCheck = validateActiveStudent(studentId);
+    if (!rosterCheck.valid) return addCors(json({ error: 'student not authorized', code: 'NOT_IN_ROSTER' }, 403), request);
+    const result = await seedVocab(studentId, word, "", "manual", env, grade);
+    return addCors(json(result.ok ? { reviewed: true, next_review: result.next_review } : { error: "empty word" }, result.ok ? 200 : 400), request);
+  }
   if (path === "/api/vocab/list"   && method === "GET")  { return handleVocabList(url.searchParams.get("studentId") || "", env); }
   if (path === "/api/voice/score"  && method === "POST") { const body = await request.json(); return handleVoiceScore(body, env); }
 
@@ -1698,6 +1759,7 @@ speak: {
       `student_profile_${studentId}`, `lang:${studentId}`, `vocab_list_${studentId}`,
       `vocab_arc_${studentId}`, `session_history_${studentId}`, `phonics_progress_${studentId}`,
       `student_pw_${studentId}`, `streak:${studentId}`, `goals:${studentId}`, `subscription:${studentId}`,
+      `srs_data_${studentId}`
     ];
     let kvDeleted = 0;
     for (const k of kvKeys) { try { await env.NET_PET_KV.delete(k); kvDeleted++; } catch (_) {} }
@@ -1969,6 +2031,61 @@ speak: {
   if (path.startsWith("/api/admin/testimonial/") && method === "POST" && path.includes("/approve")) {
     const id = path.split("/api/admin/testimonial/")[1]?.split("/")[0];
     return handleTestimonialApprove(id, env);
+  }
+
+  // POST /api/class/ingest — batch transcribe 1hr class audio + extract vocab via gpt-4o-mini
+  if (path === "/api/class/ingest" && method === "POST") {
+    const authFail = checkAdminKey(request, env);
+    if (authFail) return addCors(authFail, request);
+    const body = await request.json().catch(() => ({}));
+    const { studentId, audioUrl, classDate } = body;
+    if (!studentId || !audioUrl) return addCors(json({ error: "studentId and audioUrl required" }, 400), request);
+    const idCheck = validateStudentId(studentId);
+    if (!idCheck.valid) return addCors(json({ error: idCheck.error }, 400), request);
+    const date = classDate || new Date().toISOString().slice(0, 10);
+
+    const dgRes = await fetch(
+      "https://api.deepgram.com/v1/listen?model=nova-3&diarize=true&smart_format=true&punctuate=true",
+      {
+        method: "POST",
+        headers: { "Authorization": `Token ${env.DEEPGRAM_API_KEY}`, "Content-Type": "application/json" },
+        body: JSON.stringify({ url: audioUrl })
+      }
+    );
+    if (!dgRes.ok) return addCors(json({ error: "Deepgram transcription failed", status: dgRes.status }, 502), request);
+    const dgData = await dgRes.json();
+    const words = dgData?.results?.channels?.[0]?.alternatives?.[0]?.words ?? [];
+    const utterances = dgData?.results?.utterances ?? [];
+
+    const fullTranscript = utterances.map(u => `[S${u.speaker}] ${u.transcript}`).join("\n");
+    const studentText = utterances.filter(u => u.speaker === 1).map(u => u.transcript).join("\n");
+
+    const openaiRes = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: { "Authorization": `Bearer ${env.OPENAI_API_KEY}`, "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "gpt-4o-mini",
+        response_format: { type: "json_object" },
+        messages: [
+          { role: "system", content: "You are an English teacher extracting vocabulary from a class transcript." },
+          { role: "user", content: `Extract 15-30 A2/B1 English vocabulary words or phrases from this class.\nExclude basic function words (the, is, and, etc).\nReturn JSON: { "words": [{ "word": string, "meaning_vi": string, "used_by_student": boolean }] }\nPrioritize words the student (S1) actually attempted.\n\nFULL TRANSCRIPT:\n${fullTranscript.slice(0, 15000)}\n\nSTUDENT ONLY:\n${studentText.slice(0, 5000)}` }
+        ],
+        max_tokens: 1500
+      })
+    });
+    if (!openaiRes.ok) return addCors(json({ error: "vocab extraction failed", status: openaiRes.status }, 502), request);
+    const oaiData = await openaiRes.json();
+    let extracted = [];
+    try { extracted = JSON.parse(oaiData.choices[0].message.content).words ?? []; } catch {}
+
+    const results = await Promise.all(
+      extracted.map(w => seedVocab(studentId, w.word, w.meaning_vi, "class_audio", env, w.used_by_student ? 3 : 0))
+    );
+    const added = results.filter(r => r.ok).length;
+
+    await env.NET_PET_KV.put(`class_transcript_${studentId}_${date}`, fullTranscript, { expirationTtl: 60 * 60 * 24 * 365 });
+
+    return addCors(json({ added, date, words: extracted, transcriptStored: true }), request);
   }
 
 }
@@ -2580,20 +2697,21 @@ async function handleStudentSaveface(body, request, env) {
 async function handleStudentForecast(studentId, env) {
   if (!studentId) return json({ error: "studentId required" }, 400);
 
-  const [streakRaw, srsKeys] = await Promise.all([
+  const [streakRaw, srsRaw] = await Promise.all([
     env.NET_PET_KV.get(`streak:${studentId}`),
-    env.NET_PET_KV.list({ prefix: `srs:${studentId}:` })
+    env.NET_PET_KV.get(`srs_data_${studentId}`)
   ]);
 
   const streak = streakRaw ? JSON.parse(streakRaw) : { currentStreak: 0, totalDays: 0 };
-  const totalWords = srsKeys.keys.length;
-
-  // Fetch all SRS words to count mastered (repetitions >= 3)
-  const wordData = await Promise.all(
-    srsKeys.keys.slice(0, 200).map(k => env.NET_PET_KV.get(k.name))
-  );
-  const words = wordData.map(w => w ? JSON.parse(w) : null).filter(Boolean);
-  const masteredWords = words.filter(w => (w.repetitions || 0) >= 3).length;
+  let totalWords = 0;
+  let masteredWords = 0;
+  if (srsRaw) {
+    try {
+      const srsMap = JSON.parse(srsRaw);
+      totalWords = Object.keys(srsMap).length;
+      masteredWords = Object.values(srsMap).filter(w => (w.repetitions || 0) >= 3).length;
+    } catch (_) {}
+  }
 
   // Velocity: mastered per active day
   const activeDays = Math.max(streak.totalDays || 1, 1);
@@ -2648,21 +2766,20 @@ async function handleLeaderboard(request, env) {
   }
 
   const rankings = await Promise.all(STUDENTS.map(async (s) => {
-    const [streakRaw, srsKeys] = await Promise.all([
+    const [streakRaw, srsRaw] = await Promise.all([
       env.NET_PET_KV.get(`streak:${s.id}`).catch(() => null),
-      env.NET_PET_KV.list({ prefix: `srs:${s.id}:` }).catch(() => ({ keys: [] })),
+      env.NET_PET_KV.get(`srs_data_${s.id}`).catch(() => null),
     ]);
     const streak = streakRaw ? JSON.parse(streakRaw) : { currentStreak: 0, totalDays: 0, longestStreak: 0 };
-    const totalWords = srsKeys.keys.length;
-
-    // Count mastered words (repetitions >= 3)
-    const wordData = await Promise.all(
-      srsKeys.keys.slice(0, 300).map(k => env.NET_PET_KV.get(k.name).catch(() => null))
-    );
-    const masteredWords = wordData.filter(w => {
-      if (!w) return false;
-      try { return (JSON.parse(w).repetitions || 0) >= 3; } catch { return false; }
-    }).length;
+    let totalWords = 0;
+    let masteredWords = 0;
+    if (srsRaw) {
+      try {
+        const srsMap = JSON.parse(srsRaw);
+        totalWords = Object.keys(srsMap).length;
+        masteredWords = Object.values(srsMap).filter(w => (w.repetitions || 0) >= 3).length;
+      } catch (_) {}
+    }
 
     return {
       studentId: s.id,
@@ -2795,19 +2912,14 @@ async function handleVoiceScore(body, env) {
     else score = 1;
   }
 
-  // Load existing SRS word and update via computeNextReview
-  const vocabId = `${studentId}:${word.toLowerCase().trim().replace(/\s+/g, "-")}`;
-  const kvKey = `srs:${studentId}:${vocabId}`;
-  const existing = await env.NET_PET_KV.get(kvKey);
-  const wordData = existing ? JSON.parse(existing) : { word, interval: 1, repetitions: 0, ease_factor: 2.5, next_review: 0 };
-
-  const updated = computeNextReview(wordData, score);
-  await env.NET_PET_KV.put(kvKey, JSON.stringify({ ...wordData, ...updated }), { expirationTtl: 86400 * 365 });
+  // Load existing SRS word and update via seedVocab
+  const result = await seedVocab(studentId, word, "", "voice_score", env, score);
+  if (!result.ok) return json({ error: "empty word" }, 400);
 
   return json({
     word, transcript: transcript ?? "[voice unavailable]",
     score, fallback,
-    nextReview: updated.next_review,
+    nextReview: result.next_review,
     message: score >= 4 ? "Great job! 🔥" : score >= 3 ? "Good — keep practicing!" : "Keep trying! 💪"
   });
 }
@@ -2829,24 +2941,22 @@ async function handleMagicChat(body, request, env) {
   // Auto-inject student context if studentId is present and no context was passed
   if (studentId && !context && env.NET_PET_KV) {
     try {
-      const [streakRaw, srsKeys] = await Promise.all([
+      const [streakRaw, srsRaw] = await Promise.all([
         env.NET_PET_KV.get(`streak:${studentId}`),
-        env.NET_PET_KV.list({ prefix: `srs:${studentId}:` })
+        env.NET_PET_KV.get(`srs_data_${studentId}`)
       ]);
 
       const streak = streakRaw ? JSON.parse(streakRaw) : { currentStreak: 0 };
       const now = Date.now();
-
-      // Fetch SRS entries to find due words
-      const wordEntries = await Promise.all(
-        srsKeys.keys.slice(0, 50).map(k => env.NET_PET_KV.get(k.name))
-      );
-      const dueWords = wordEntries
-        .map(w => { try { return w ? JSON.parse(w) : null; } catch { return null; } })
-        .filter(w => w && (w.next_review || 0) <= now)
-        .slice(0, 5)
-        .map(w => w.word)
-        .filter(Boolean);
+      let dueWords = [];
+      if (srsRaw) {
+        const srsMap = JSON.parse(srsRaw);
+        dueWords = Object.values(srsMap)
+          .filter(w => (w.next_review || 0) <= now)
+          .slice(0, 5)
+          .map(w => w.word)
+          .filter(Boolean);
+      }
 
       context = `Student: ${studentId} | Streak: ${streak.currentStreak || 0} days${(streak.currentStreak || 0) >= 7 ? " 🔥" : ""}\nDue vocabulary: ${dueWords.join(", ") || "none"}\nTeaching note: Weave due vocabulary into your response naturally. Acknowledge the streak if >= 7 days.`;
     } catch (_) {}
@@ -3564,53 +3674,6 @@ async function handleChat(body, env) {
 }
 
 // ── Vocab SRS API handlers ────────────────────────────────────────────────────
-
-async function handleVocabAdd(body, env) {
-  const studentId = body.studentId || "anonymous";
-  const idCheck = validateStudentId(studentId);
-  if (!idCheck.valid) return json({ error: idCheck.error }, 400);
-  if (!body.word?.trim()) return json({ error: "word required" }, 400);
-  const key = `vocab:${studentId}:${body.word}`;
-  const existing = await env.NET_PET_KV.get(key);
-  if (!existing) await env.NET_PET_KV.put(key, JSON.stringify({ studentId, word: body.word, meaning_vi: body.meaning_vi || "", ts: Date.now() }));
-  const listRaw = await env.NET_PET_KV.get(`vocab_list_${studentId}`);
-  const list = listRaw ? JSON.parse(listRaw) : [];
-  if (!list.find(w => w.word === body.word)) list.push({ word: body.word, meaning_vi: body.meaning_vi || "", ts: Date.now() });
-  await env.NET_PET_KV.put(`vocab_list_${studentId}`, JSON.stringify(list.slice(-500)));
-  return json({ ok: true, word: body.word });
-}
-
-async function handleVocabDue(studentId, env) {
-  if (!studentId) return json({ due: [], count: 0 });
-  // TEST MODE BYPASS: sov100-test-* IDs have no SRS data — return empty immediately
-  if (studentId.startsWith('sov100-test-')) return json({ due: [], count: 0 });
-  const idCheck = validateStudentId(studentId);
-  if (!idCheck.valid) return json({ error: idCheck.error }, 400);
-  // ProfileDO was removed in migration v7 — read from KV fallback
-  try {
-    const raw = await env.NET_PET_KV.get(`srs:${studentId}:due`);
-    if (raw) {
-      const due = JSON.parse(raw);
-      return json({ due, count: due.length });
-    }
-    // No SRS data yet — return empty (not an error)
-    return json({ due: [], count: 0 });
-  } catch (err) {
-    logWarn('VOCAB_DUE_KV_FAIL', { studentId, error: err.message }, env);
-    return json({ due: [], count: 0 });
-  }
-}
-
-async function handleVocabReview(body, env) {
-  const studentId = body.studentId || "anonymous";
-  const idCheck = validateStudentId(studentId);
-  if (!idCheck.valid) return json({ error: idCheck.error }, 400);
-  if (!body.word?.trim() && !body.grade) return json({ error: "word and grade required" }, 400);
-  const key = `srs:${studentId}:${body.word}`;
-  const review = { studentId, word: body.word, grade: body.grade, nextDue: Date.now() + Math.max(60000 * Math.pow(2, Math.min(10, Math.max(0, body.grade || 2))), 3600000), reviewedAt: Date.now() };
-  await env.NET_PET_KV.put(key, JSON.stringify(review));
-  return json({ ok: true, word: body.word });
-}
 
 async function handleVocabList(studentId, env) {
   if (!studentId) return json({ words: [], total: 0 });
