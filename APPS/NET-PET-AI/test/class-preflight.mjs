@@ -7,13 +7,17 @@
 
 const STUDENTS = ["mai-tram-bluetech", "huong-bluetech"];
 const MODES = ["free", "study", "phonics"];
-const BASE = "https://net-pet-ai.mrmichaelhobbs123.workers.dev";
+const BASE = (process.env.BASE && process.env.BASE.includes('dev'))
+  ? "https://net-pet-ai-dev.mrmichaelhobbs123.workers.dev"
+  : "https://net-pet-ai.mrmichaelhobbs123.workers.dev";
+const PREFLIGHT_DELAY_MS = 12000; // stay under deepgram quota bucket
 
 const results = [];
 
 for (const student of STUDENTS) {
   for (const mode of MODES) {
     const url = `${BASE}/api/deepgram-token?studentId=${student}&mode=${mode}`;
+    await new Promise(r => setTimeout(r, PREFLIGHT_DELAY_MS));
     try {
       const res = await fetch(url);
       const ok = res.ok;

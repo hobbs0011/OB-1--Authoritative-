@@ -18,8 +18,9 @@ const ROUTER_REQUIRED = [
   { pattern: '/api/chat',           label: "/api/chat (student chat)" },
   { pattern: '/api/payment/confirm', label: "/api/payment/confirm (P7 idempotent)" },
   { pattern: '/api/waitlist',       label: "/api/waitlist (P7 idempotent)" },
-  { pattern: '/api/student/:id/erase', label: "/api/student/:id/erase (P10 erasure)" },
-  { pattern: '/api/referral/register', label: "/api/referral/register (P7 idempotent)" },
+  { pattern: '/api/student/:id/erase',   label: "/api/student/:id/erase (P10 erasure)" },
+  { pattern: '/api/student/:id/export',  label: "/api/student/:id/export (P10 GDPR export)" },
+  { pattern: '/api/referral/register',   label: "/api/referral/register (P7 idempotent)" },
   { pattern: '/api/v1/health',      label: "/api/v1/health" },
   { pattern: '/api/v1/version',     label: "/api/v1/version" },
 ];
@@ -43,11 +44,11 @@ for (const { pattern, label } of LEGACY_REQUIRED) {
 }
 
 if (errors.length) fail(errors.join("\n"));
-console.log("✅ ROUTE COMPLETENESS: 5 native routes in router.js + legacy fallbacks in index.js.");
+console.log("✅ ROUTE COMPLETENESS: 6 native routes in router.js + legacy fallbacks in index.js.");
 process.exit(0);
 
 function fail(msg) {
   console.error("\n⛔ ROUTE COMPLETENESS VIOLATED ⛔\n" + msg);
-  console.error("\nRequired: /api/deepgram-token, /api/chat, /api/payment/confirm, /api/waitlist, /api/referral/register, /api/student/:id/erase, /api/v1/health, /api/v1/version");
+  console.error("\nRequired: /api/deepgram-token, /api/chat, /api/payment/confirm, /api/waitlist, /api/referral/register, /api/student/:id/erase, /api/student/:id/export, /api/v1/health, /api/v1/version");
   process.exit(1);
 }
