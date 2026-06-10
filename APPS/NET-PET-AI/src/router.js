@@ -5,6 +5,7 @@ import { checkQuota } from './quota.js';
 import { withIdempotency } from './idempotency.js';
 import { handleStudentErase } from './deletion.js';
 import { checkAdminKey } from './security.js';
+import { decryptField } from './encryption.js';
 import { verifyClerkSession } from './auth.js';
 
 const app = new Hono();
@@ -172,6 +173,61 @@ app.get('/api/v1/metrics', async (c) => {
 });
 
 app.get('/api/lead', (c) => c.json({ error: 'POST required' }, 405));
+
+// ── P10: Student data export (GDPR) ──────────────────────────────────────────
+
+app.get('/api/student/:id/export', async (c) => {
+  const authFail = await checkAdminKey(c.req.raw, c.env);
+  if (authFail) return authFail;
+  const studentId = c.req.param('id');
+  if (!studentId) return c.json({ error: 'student id required' }, 400);
+
+  const kv = c.env.NET_PET_KV;
+  const hexKey = c.env.ENCRYPTION_KEY;
+
+  async function readKv(key) {
+    try { return await kv.get(key); } catch { return null; }
+  }
+  async function readDecrypted(key) {
+    const raw = await readKv(key);
+    if (!raw) return null;
+    if (hexKey && raw.startsWith('v1:')) {
+      try {
+        const plain = await decryptField(raw.slice(3), hexKey);
+        return JSON.parse(plain);
+      } catch { /* plaintext migration fallback */ }
+    }
+    try { return JSON.parse(raw); } catch { return raw; }
+  }
+
+  const [profile, sessionHistory, phonicsProgress, srsData, vocabList, vocabArc, lang, goals, subscription, streak] = await Promise.all([
+    readDecrypted(`student_profile_${studentId}`),
+    readDecrypted(`session_history_${studentId}`),
+    readDecrypted(`phonics_progress_${studentId}`),
+    readDecrypted(`srs_data_${studentId}`),
+    readDecrypted(`vocab_list_${studentId}`),
+    readDecrypted(`vocab_arc_${studentId}`),
+    readKv(`lang:${studentId}`),
+    readKv(`goals:${studentId}`),
+    readKv(`subscription:${studentId}`),
+    readKv(`streak:${studentId}`),
+  ]);
+
+  return c.json({
+    student_id: studentId,
+    exported_at: new Date().toISOString(),
+    profile,
+    session_history: sessionHistory,
+    phonics_progress: phonicsProgress,
+    srs_data: srsData,
+    vocab_list: vocabList,
+    vocab_arc: vocabArc,
+    lang,
+    goals,
+    subscription,
+    streak,
+  });
+});
 
 // ── Legacy fallback — all unmigrated routes pass through to existing handler ──
 

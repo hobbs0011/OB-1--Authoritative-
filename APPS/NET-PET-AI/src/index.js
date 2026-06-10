@@ -17,6 +17,7 @@ import { computeNextReview, buildVocabContext, generateVocabId } from './vocab-s
 import { LedgerDO, PetDO, CommandDO, MemoryDO } from './durable_objects.js';
 import { PHONICS_DRILLS, NET_PHONICS_GROUPS } from './phonics-drills.js';
 import { queueEmail } from './email-service.js';
+import { encryptField, decryptField } from './encryption.js';
 
 const VERSION = "1.5.0";
 
@@ -26,6 +27,23 @@ async function sha256(text) {
   const data = new TextEncoder().encode(text);
   const hashBuffer = await crypto.subtle.digest('SHA-256', data);
   return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+async function kvEncryptPut(kv, key, value, hexKey) {
+  const plain = JSON.stringify(value);
+  if (!hexKey) { await kv.put(key, plain); return; }
+  const cipher = await encryptField(plain, hexKey);
+  await kv.put(key, 'v1:' + cipher);
+}
+async function kvDecryptGet(kv, key, hexKey) {
+  const raw = await kv.get(key);
+  if (!raw) return null;
+  if (hexKey && raw.startsWith('v1:')) {
+    try {
+      const plain = await decryptField(raw.slice(3), hexKey);
+      return JSON.parse(plain);
+    } catch { /* plaintext migration fallback */ }
+  }
+  try { return JSON.parse(raw); } catch { return null; }
 }
 function detectMarkers(text) {
   const words = text.match(/\b[A-Z]{2,}\b/g) || [];
@@ -1042,6 +1060,13 @@ try {
         env.NET_PET_KV.get("session_history_" + studentId),
         env.NET_PET_KV.get("srs_data_" + studentId)
       ]);
+      // Decrypt at-rest encrypted fields (phonics_progress, session_history use AES-GCM v1: prefix)
+      const phonicsRaw = env.ENCRYPTION_KEY && rawPhonics?.startsWith('v1:')
+        ? await decryptField(rawPhonics.slice(3), env.ENCRYPTION_KEY).catch(() => null)
+        : rawPhonics;
+      const sessionHistRaw = env.ENCRYPTION_KEY && rawSessionHistory?.startsWith('v1:')
+        ? await decryptField(rawSessionHistory.slice(3), env.ENCRYPTION_KEY).catch(() => null)
+        : rawSessionHistory;
       // Raw API key passed directly — Deepgram Voice Agent WS uses Sec-WebSocket-Protocol: token, <key>
       // No minting needed. Key minting was broken complexity that caused the robot voice bug.
       const access_token = apiKey;
@@ -1054,8 +1079,8 @@ try {
       try { if (rawArc) arcData = JSON.parse(rawArc); } catch (_) {}
       try { if (rawMemory) memoryData = JSON.parse(rawMemory); } catch (_) {}
       try {
-        if (rawPhonics) {
-          const pp = JSON.parse(rawPhonics);
+        if (phonicsRaw) {
+          const pp = JSON.parse(phonicsRaw);
           const pgIdx = Math.min(Math.max((pp.current_group || 1) - 1, 0), NET_PHONICS_GROUPS.length - 1);
           const groupDef = NET_PHONICS_GROUPS[pgIdx];
           const drillsInGroup = PHONICS_DRILLS.filter(d => d.group === groupDef.id);
@@ -1075,8 +1100,8 @@ try {
     let lastSessionNotes = "";
     let lastSessionVocab = [];
     try {
-      if (rawSessionHistory) {                    // reuse top-level fetch — NO second KV.get
-        const hist = JSON.parse(rawSessionHistory);
+      if (sessionHistRaw) {                    // reuse top-level fetch — NO second KV.get
+        const hist = JSON.parse(sessionHistRaw);
         if (hist.length > 0) {
           const last = hist[hist.length - 1];     // MOST RECENT (chronological ascending)
           const daysAgo = Math.floor((Date.now() - (last.ts || Date.now())) / 86400000);
@@ -1105,8 +1130,8 @@ try {
     // world_model was always empty (deferred since Run 30) → Obi always started cold → this fixes it.
     // Runs at every token request; KV write is fire-and-forget (non-blocking).
     try {
-      if (rawSessionHistory) {
-        const hist = JSON.parse(rawSessionHistory);
+      if (sessionHistRaw) {
+        const hist = JSON.parse(sessionHistRaw);
         if (hist.length > 0 && (!memoryData?.world_model || hist.length !== memoryData?.session_count)) {
           const allVocab = [...new Set(hist.flatMap(s => s.vocab || []))].slice(0, 20);
           const totalSessions = hist.length;
@@ -1260,8 +1285,7 @@ speak: {
     const _sessGetRosterCheck = validateActiveStudent(studentId);
     if (!_sessGetRosterCheck.valid) return addCors(json({ error: 'student not authorized', code: 'NOT_IN_ROSTER' }, 403), request);
     try {
-      const raw = await env.NET_PET_KV.get(`session_history_${studentId}`);
-      const history = raw ? JSON.parse(raw) : [];
+      const history = await kvDecryptGet(env.NET_PET_KV, `session_history_${studentId}`, env.ENCRYPTION_KEY) ?? [];
       return addCors(json({ sessions: history, count: history.length }), request);
     } catch (err) {
       return addCors(json({ error: err.message }, 500), request);
@@ -1281,11 +1305,10 @@ speak: {
       const topic = body.topic || null;
       const avg_turn_length = body.avg_turn_length || 0;
       const barge_in_count = body.barge_in_count || 0;
-      const [raw, rawMem] = await Promise.all([
-        env.NET_PET_KV.get(`session_history_${studentId}`),
+      const [history, rawMem] = await Promise.all([
+        kvDecryptGet(env.NET_PET_KV, `session_history_${studentId}`, env.ENCRYPTION_KEY).then(v => v ?? []),
         env.STUDENT_MEMORY ? env.STUDENT_MEMORY.get(`mem:${studentId}`) : Promise.resolve(null)
       ]);
-      const history = raw ? JSON.parse(raw) : [];
       history.push({ ts: Date.now(), turns: turns || 0, durationMs: durationMs || 0, vocab: vocab || [], topic: topic || null, avg_turn_length, barge_in_count });
 
       // Breakthroughs + struggles detection — update STUDENT_MEMORY async
@@ -1313,7 +1336,7 @@ speak: {
         } catch (_) {}
       }
 
-      await env.NET_PET_KV.put(`session_history_${studentId}`, JSON.stringify(history.slice(-20)));
+      await kvEncryptPut(env.NET_PET_KV, `session_history_${studentId}`, history.slice(-20), env.ENCRYPTION_KEY);
       return addCors(json({ ok: true, sessions: history.length }), request);
     } catch (err) {
       return addCors(json({ error: err.message }, 500), request);
@@ -1391,7 +1414,7 @@ speak: {
       const idCheck = validateStudentId(studentId);
       if (!idCheck.valid) return addCors(json({ error: idCheck.error }, 400), request);
       const key = "phonics_progress_" + studentId;
-      let progress = await env.NET_PET_KV.get(key, "json");
+      let progress = await kvDecryptGet(env.NET_PET_KV, key, env.ENCRYPTION_KEY);
       if (!progress) {
         progress = { current_group: 1, drills_completed: [], dominant_errors: [], groups_unlocked: [1, 0, 0, 0, 0, 0, 0], last_drill_id: null, session_count_phonics: 0 };
       }
@@ -1426,13 +1449,13 @@ speak: {
       const idCheck = validateStudentId(studentId);
       if (!idCheck.valid) return addCors(json({ error: idCheck.error }, 400), request);
       const key = "phonics_progress_" + studentId;
-      let progress = await env.NET_PET_KV.get(key, "json") || { current_group: 1, drills_completed: [], dominant_errors: [], groups_unlocked: [1, 0, 0, 0, 0, 0, 0], last_drill_id: null, session_count_phonics: 0, created_at: new Date().toISOString() };
+      let progress = await kvDecryptGet(env.NET_PET_KV, key, env.ENCRYPTION_KEY) || { current_group: 1, drills_completed: [], dominant_errors: [], groups_unlocked: [1, 0, 0, 0, 0, 0, 0], last_drill_id: null, session_count_phonics: 0, created_at: new Date().toISOString() };
       if (drill_id) progress.drills_completed = Array.from(new Set([...progress.drills_completed, drill_id]));
       if (error_type) progress.dominant_errors = Array.from(new Set([error_type, ...progress.dominant_errors])).slice(0, 3);
       if (drill_id) progress.last_drill_id = drill_id;
       progress.drill_count = (progress.drill_count || 0) + 1;
       progress.updated_at = new Date().toISOString();
-      await env.NET_PET_KV.put(key, JSON.stringify(progress));
+      await kvEncryptPut(env.NET_PET_KV, key, progress, env.ENCRYPTION_KEY);
       const gIdx2 = Math.min(Math.max((progress.current_group || 1) - 1, 0), NET_PHONICS_GROUPS.length - 1);
       const group_name = NET_PHONICS_GROUPS[gIdx2].name;
       const drillsInGroup = PHONICS_DRILLS.filter(d => d.group === NET_PHONICS_GROUPS[gIdx2].id);
@@ -1451,7 +1474,7 @@ speak: {
       const idCheck = validateStudentId(studentId);
       if (!idCheck.valid) return addCors(json({ error: idCheck.error }, 400), request);
       const key = "phonics_progress_" + studentId;
-      let progress = await env.NET_PET_KV.get(key, "json") || { current_group: 1, drills_completed: [], dominant_errors: [], groups_unlocked: [1, 0, 0, 0, 0, 0, 0], last_drill_id: null, session_count_phonics: 0, created_at: new Date().toISOString() };
+      let progress = await kvDecryptGet(env.NET_PET_KV, key, env.ENCRYPTION_KEY) || { current_group: 1, drills_completed: [], dominant_errors: [], groups_unlocked: [1, 0, 0, 0, 0, 0, 0], last_drill_id: null, session_count_phonics: 0, created_at: new Date().toISOString() };
       if (progress.current_group === 7) {
         return addCors(json({ advanced: false, message: "All groups complete" }), request);
       }
@@ -1463,7 +1486,7 @@ speak: {
         progress.current_group++;
         if (progress.groups_unlocked) progress.groups_unlocked[progress.current_group - 1] = 1;
         progress.updated_at = new Date().toISOString();
-        await env.NET_PET_KV.put(key, JSON.stringify(progress));
+        await kvEncryptPut(env.NET_PET_KV, key, progress, env.ENCRYPTION_KEY);
         const newGIdx = Math.min(progress.current_group - 1, NET_PHONICS_GROUPS.length - 1);
         const new_group_name = NET_PHONICS_GROUPS[newGIdx].name;
         return addCors(json({ advanced: true, new_group: progress.current_group, new_group_name }), request);
