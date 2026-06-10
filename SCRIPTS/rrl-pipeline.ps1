@@ -34,16 +34,19 @@ function Get-Next-Ledger-ID {
 function Get-Tail-Ledger-Hash {
     param([string]$LedgerDir = "$repo\CANON\HEAVY-LEDGER")
     if (-not (Test-Path $LedgerDir)) { return "0x0" }
-    $last = Get-ChildItem $LedgerDir -Filter "HL-*.json" | Sort-Object Name -Descending | Select-Object -First 1
+    # Numeric sort — prevents HL-999 > HL-1000 string-sort time-bomb at HL-1000
+    $last = Get-ChildItem $LedgerDir -Filter "HL-*.json" -ErrorAction SilentlyContinue |
+        ForEach-Object { [PSCustomObject]@{ N=[int]([regex]::Match($_.Name,'HL-(\d+)').Groups[1].Value); F=$_.FullName } } |
+        Sort-Object N -Descending | Select-Object -First 1
     if (-not $last) { return "0x0" }
     try {
-        $json = Get-Content $last.FullName -Raw | ConvertFrom-Json
+        $json = Get-Content $last.F -Raw | ConvertFrom-Json
         if ($json.merkle_hash) { return $json.merkle_hash }
         elseif ($json.merkle_parent) { return $json.merkle_parent }
         else {
             return [System.BitConverter]::ToString(
                 [System.Security.Cryptography.SHA256]::Create().ComputeHash(
-                    [System.Text.Encoding]::UTF8.GetBytes((Get-Content $last.FullName -Raw))
+                    [System.Text.Encoding]::UTF8.GetBytes((Get-Content $last.F -Raw))
                 )
             ).Replace("-", "").ToLower()
         }
@@ -104,84 +107,77 @@ if ($rrlBytes -lt $FIDELITY_MIN_BYTES) {
 
 # ═══════════════════════════════════════════
 # HELPER: Extract user/assistant turns from JSONL
+# Claude Code JSONL envelope: role at $obj.message.role, content at $obj.message.content[].text
 # ═══════════════════════════════════════════
 function Split-RL {
     param([string]$Text)
     $user = @()
     $assistant = @()
-    $currentRole = $null
-    $currentLines = @()
-    
+
     $Text -split "`n" | ForEach-Object {
-        $line = $_
-        if ($line -match '"role"\s*:\s*"([^"]+)"') {
-            if ($currentRole -eq "user" -and $currentLines.Count -gt 0) {
-                $user += ($currentLines -join "`n")
-            }
-            elseif ($currentRole -eq "assistant" -and $currentLines.Count -gt 0) {
-                $assistant += ($currentLines -join "`n")
-            }
-            $currentRole = $matches[1]
-            $currentLines = @($line)
-        }
-        elseif ($line -match '"display"\s*:\s*"([^"]+)"') {
-            if ($currentRole -eq "user" -and $currentLines.Count -gt 0) {
-                $user += ($currentLines -join "`n")
-            }
-            elseif ($currentRole -eq "assistant" -and $currentLines.Count -gt 0) {
-                $assistant += ($currentLines -join "`n")
-            }
-            $currentRole = "user"
-            $currentLines = @($line)
-        }
-        elseif ($currentRole) {
-            $currentLines += $line
-        }
+        $line = $_.Trim()
+        if (-not $line) { return }
+        $o = $line | ConvertFrom-Json -ErrorAction SilentlyContinue
+        if (-not $o) { return }
+        $role = if ($o.message) { $o.message.role } else { $o.role }
+        if (-not $role) { return }
+        $content = if ($o.message) { $o.message.content } else { $o.content }
+        $text = if ($content -is [string]) { $content }
+                elseif ($content -is [array]) {
+                    ($content | Where-Object { $_.type -eq 'text' } | ForEach-Object { $_.text }) -join "`n"
+                }
+        if (-not $text) { return }
+        $text = $text.Trim()
+        if ($text.Length -lt 2) { return }
+        if ($role -eq 'user') { $user += $text }
+        elseif ($role -eq 'assistant') { $assistant += $text }
     }
-    # Flush final block
-    if ($currentRole -eq "user" -and $currentLines.Count -gt 0) { $user += ($currentLines -join "`n") }
-    if ($currentRole -eq "assistant" -and $currentLines.Count -gt 0) { $assistant += ($currentLines -join "`n") }
-    
+
     return @{ User=$user; Assistant=$assistant }
 }
 
 $turns = Split-RL -Text $rrlText
 $userTurns = $turns.User
 $agentTurns = $turns.Assistant
+$hasUser      = $userTurns.Count -gt 0
+$hasAssistant = $agentTurns.Count -gt 0
 Write-Host "  PARSED: $($userTurns.Count) user turns, $($agentTurns.Count) assistant turns"
 
 # ═══════════════════════════════════════════
 # STEP 1: SOUL  -  POST USER TURNS TO D1
 # ═══════════════════════════════════════════
+$soulPost = $null
+$delta = 0
+$soulAfter = $null
 if ($DryRun) {
     Write-Step 1 "PASS" "DRYRUN: Would POST $($userTurns.Count) user turns to D1"
 } else {
     try {
         $soulBefore = Invoke-RestMethod "$D1/api/soul/count" -TimeoutSec 10
         Write-Host "  SOUL BEFORE: $($soulBefore.soulcount) chars | $($soulBefore.level)"
-        
-        # Post ONLY user turns (Michael's words), not the full RRL
-        $soulText = $userTurns -join "`n`n"
-        $body = @{
-            student_id = "sov100-michael"
-            session_id = $runId
-            role       = "user"
-            text       = $soulText
-        } | ConvertTo-Json -Depth 2 -Compress
-        
-        $soulPost = Invoke-RestMethod -Uri "$D1/api/soul/event" -Method Post -Body $body -ContentType "application/json" -TimeoutSec 60
-        Write-Step 1 "PASS" "SOUL POSTED: event_id=$($soulPost.event_id) | bytes=$($soulPost.byte_count) | $($userTurns.Count) user turns"
-        
-        $soulAfter = Invoke-RestMethod "$D1/api/soul/count" -TimeoutSec 10
-        $delta = $soulAfter.soulcount - $soulBefore.soulcount
-        Write-Host "  SOUL AFTER: $($soulAfter.soulcount) chars | $($soulAfter.level) | DELTA: +$delta"
-        
-        # Verify D1 delta roughly matches RRL chars (allow 5% encoding variance)
-        $variance = [Math]::Abs($delta - $rrlChars)
-        if ($variance -le ($rrlChars * 0.05) -or $variance -le 200) {
-            Write-Host "  VERIFIED: D1 delta ($delta) ~ RRL chars ($rrlChars)  -  diff $variance"
+
+        $soulText  = $userTurns -join "`n`n"
+        $soulBytes = [System.Text.Encoding]::UTF8.GetByteCount($soulText)
+
+        # Contamination guard: soul payload must not approximate full RRL size
+        if ($soulBytes -ge ($rrlBytes * 0.95)) {
+            Write-Step 1 "FAIL" "CONTAMINATION GUARD — soul ($soulBytes bytes) ~= RRL ($rrlBytes bytes). Extraction returned full transcript. SOUL POST aborted."
+        } elseif (-not $hasUser) {
+            Write-Step 1 "WARN" "SOUL_GAP — 0 user turns extracted. SOUL POST skipped."
         } else {
-            Write-Host "  WARN: D1 delta ($delta) vs RRL chars ($rrlChars)  -  diff $variance (>5%)"
+            $body = @{
+                student_id = "sov100-michael"
+                session_id = $runId
+                role       = "user"
+                text       = $soulText
+            } | ConvertTo-Json -Depth 2 -Compress
+
+            $soulPost = Invoke-RestMethod -Uri "$D1/api/soul/event" -Method Post -Body $body -ContentType "application/json" -TimeoutSec 60
+            Write-Step 1 "PASS" "SOUL POSTED: event_id=$($soulPost.event_id) | bytes=$($soulPost.byte_count) | $($userTurns.Count) user turns"
+
+            $soulAfter = Invoke-RestMethod "$D1/api/soul/count" -TimeoutSec 10
+            $delta = $soulAfter.soulcount - $soulBefore.soulcount
+            Write-Host "  SOUL AFTER: $($soulAfter.soulcount) chars | $($soulAfter.level) | DELTA: +$delta"
         }
     } catch {
         Write-Step 1 "FAIL" "SOUL POST FAILED: $($_.Exception.Message)"
@@ -232,6 +228,14 @@ if ($DryRun) {
 $ledgerDir = "$repo\CANON\HEAVY-LEDGER"
 if (-not (Test-Path $ledgerDir)) {
     New-Item -ItemType Directory -Path $ledgerDir -Force | Out-Null
+}
+
+# Idempotency: abort if this run already has a sealed HL
+$dupe = Get-ChildItem $ledgerDir -Filter "HL-*.json" -ErrorAction SilentlyContinue |
+    Where-Object { try { (Get-Content $_.FullName -Raw | ConvertFrom-Json).run -eq [int]$RunNumber } catch { $false } }
+if ($dupe) {
+    Write-Step 3 "FAIL" "IDEMPOTENCY ABORT — run $RunNumber already sealed as $($dupe.Name). One run = one HL. Re-run DEATH to read existing output."
+    exit 1
 }
 
 $nextHL = Get-Next-Ledger-ID -LedgerDir $ledgerDir
@@ -305,23 +309,31 @@ Write-Step 5 "PASS" "KEYWORD WRITTEN: $rfkwPath ($($wordFreq.Count) terms)"
 $pipelineDir = "$repo\CANON\PIPELINE"
 if (-not (Test-Path $pipelineDir)) { New-Item -ItemType Directory -Path $pipelineDir -Force | Out-Null }
 
+$rrlFidelity  = if ($hasUser -and $hasAssistant) { "REAL" } else { "HOLLOW" }
+$soulIsReal   = ($soulPost -and $soulPost.event_id -and $soulPost.event_id -ne "DRYRUN" -and [int]$delta -gt 0)
+$dnaIsReal    = ($dnaCount -gt 0)
+$pipelineResult = if ($rrlFidelity -eq "REAL" -and $soulIsReal -and $dnaIsReal) { "COMPLETE" } else { "GAP" }
+
 $pipelineRecord = [ordered]@{
-    run_number     = $RunNumber
-    executed_at    = (Get-Date -Format 'o')
-    rrl_path       = $RRLFile
-    rrl_chars      = $rrlChars
-    rrl_bytes      = $rrlBytes
-    session_id     = $runId
-    soul_event_id  = if ($soulPost) { $soulPost.event_id } else { "DRYRUN" }
-    soulcount      = if ($soulAfter) { $soulAfter.soulcount } else { 0 }
-    soul_level     = if ($soulAfter) { $soulAfter.level } else { "UNKNOWN" }
-    dna_count      = if ($dnaCount) { $dnaCount } else { 0 }
-    ledger_id      = "HL-$nextHL"
-    starmap_file   = $starmapPath
-    keyword_file   = $rfkwPath
-    pipeline_file  = "$pipelineDir\pipeline-run$RunNumber.json"
-    seal_sha       = ""
-    result         = "COMPLETE"
+    run_number        = $RunNumber
+    executed_at       = (Get-Date -Format 'o')
+    rrl_path          = $RRLFile
+    rrl_chars         = $rrlChars
+    rrl_bytes         = $rrlBytes
+    rrl_fidelity      = $rrlFidelity
+    session_id        = $runId
+    soul_event_id     = if ($soulPost) { $soulPost.event_id } else { "SOUL_GAP" }
+    soulcount         = if ($soulAfter) { $soulAfter.soulcount } else { 0 }
+    soul_level        = if ($soulAfter) { $soulAfter.level } else { "UNKNOWN" }
+    soul_delta        = $delta
+    dna_count         = if ($dnaCount) { $dnaCount } else { 0 }
+    dna_blueprint_count = if ($dnaBlueprintCount) { $dnaBlueprintCount } else { 0 }
+    ledger_id         = "HL-$nextHL"
+    starmap_file      = $starmapPath
+    keyword_file      = $rfkwPath
+    pipeline_file     = "$pipelineDir\pipeline-run$RunNumber.json"
+    seal_sha          = ""
+    result            = $pipelineResult
 } | ConvertTo-Json -Depth 4
 
 $pipelinePath = "$pipelineDir\pipeline-run$RunNumber.json"

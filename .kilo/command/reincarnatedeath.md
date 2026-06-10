@@ -41,6 +41,64 @@ $s2Path       = "$pipelineDir\pipeline-run$runPad.json"
 
 ---
 
+## STAGE 0 — SESSION TYPE DETECTION (Kilo guard)
+
+**Run before Stage 1.** Kilo sessions have no Claude Code session JSONL on disk. Without this
+gate, Stage 1 enters an infinite discovery loop, grabs a recycled Bible, extracts 0 turns,
+and triple-fires LEDGER writes. This stage detects the session type and sets `$kiloSession`
+so every downstream stage can take the correct path without looping.
+
+**KILO SESSION INDICATORS (any one = Kilo):**
+1. No `~/.claude/projects/d--OB-1-CANONICAL/{activeUUID}.jsonl` matching history.jsonl
+2. `RRL-{N}.txt` exists but is byte-identical to `RRL-{N-1}.txt` (recycled Bible)
+
+**When `$kiloSession = $true`:** Stage 1 skips discovery. Stage 2 = DRYRUN. Stage 3 = DNA_GAP.
+Stages 4/5/6/8 run normally for chain integrity. Stage 7 result = KILO_GAP (not an error).
+
+```powershell
+$historyPath = "$env:USERPROFILE\.claude\history.jsonl"
+$claudeDir   = "$env:USERPROFILE\.claude\projects\d--OB-1-CANONICAL"
+$kiloSession = $false
+
+# Primary check: find active session UUID and verify its JSONL exists
+$activeUUID = $null
+if (Test-Path $historyPath) {
+    try {
+        $lastLine = [System.IO.File]::ReadAllLines($historyPath)[-1]
+        if ($lastLine -match '"sessionId"\s*:\s*"([^"]+)"') { $activeUUID = $matches[1] }
+    } catch {}
+}
+
+if ($activeUUID) {
+    if (-not (Test-Path "$claudeDir\$activeUUID.jsonl")) {
+        Write-Host "STAGE 0 ⚠ No Claude Code JSONL for session $activeUUID → KILO SESSION"
+        $kiloSession = $true
+    }
+} else {
+    Write-Host "STAGE 0 ⚠ Cannot read history.jsonl — assuming KILO SESSION (fail-safe)"
+    $kiloSession = $true
+}
+
+# Recycle guard: RRL-{N}.txt byte-identical to RRL-{N-1}.txt = recycled Bible
+if (-not $kiloSession -and (Test-Path $rrlPath)) {
+    $priorPad = "{0:D3}" -f ($run - 1)
+    $priorRrl = "$repo\RRL\RRL-$priorPad.txt"
+    if ((Test-Path $priorRrl)) {
+        $h1 = (Get-FileHash $rrlPath     -Algorithm SHA256).Hash
+        $h2 = (Get-FileHash $priorRrl    -Algorithm SHA256).Hash
+        if ($h1 -eq $h2) {
+            Write-Host "STAGE 0 ⚠ RRL-$runPad == RRL-$priorPad (byte-identical) → recycled file → KILO SESSION"
+            $kiloSession = $true
+        }
+    }
+}
+
+$sessionType = if ($kiloSession) { "KILO_HOLLOW" } else { "CLAUDE_REAL" }
+Write-Host "STAGE 0 ✓ SESSION: $sessionType | run=$run | uuid=$activeUUID"
+```
+
+---
+
 ## STAGE 1 — RRL (HARD STOP — THE FUCKING RAW CHAT LOG)
 
 RRL = verbatim session transcript, BOTH speakers (Michael + agent), full conversation.
@@ -69,7 +127,7 @@ if (-not (Test-Path $rrlPath)) {
     }
 }
 
-if ($needsDiscovery) {
+if ($needsDiscovery -and -not $kiloSession) {
     Write-Host "AUTO-DISCOVERING RRL FROM JSONL..."
     $jsonlDirs = @(
         "$env:USERPROFILE\.claude\projects\d--OB-1-CANONICAL",
@@ -120,44 +178,58 @@ Query ONCE before POST. POST. Query ONCE after. Store receipt. Never re-query.
 Source: user turns extracted from the RRL (not a separate hand-written file).
 
 ```powershell
+if ($kiloSession) {
+    Write-Host "STAGE 2 ⚠ KILO_HOLLOW — SOUL POST skipped (no real transcript)"
+    $countBefore = (Invoke-RestMethod "$D1/api/soul/count").soulcount
+    $receipt = [ordered]@{ event_id="DRYRUN"; count_before=$countBefore; count_after=$countBefore; delta=0; level="KILO_HOLLOW"; posted_at=(Get-Date -Format 'o') }
+    Write-Host "STAGE 2 ✓ SOUL: DRYRUN | soulcount=$countBefore (unchanged)"
+} else {
+
 $countBefore = (Invoke-RestMethod "$D1/api/soul/count").soulcount
 
-# Post Michael's verbatim words from the RRL to soul-logger
-# SOUL = user turns only. Agent text stays in RRL for DNA extraction.
-# Extract user turns from JSONL or plain-text speaker markers
-$userTexts = @()
-if ($rrlText -match '"role"\s*:\s*"user"') {
-    $userTexts = $rrlText -split "`n" | Where-Object { $_ -match '"role"\s*:\s*"user"|"text"\s*:\s*"([^"]+)"' } | ForEach-Object { $matches[1] }
+# Extract user turns — Claude Code JSONL envelope: role at $obj.message.role, content at $obj.message.content[].text
+$userTexts = $rrlText -split "`n" | ForEach-Object {
+    $o = $_.Trim() | ConvertFrom-Json -ErrorAction SilentlyContinue
+    if (-not $o) { return }
+    $role = if ($o.message) { $o.message.role } else { $o.role }
+    if ($role -ne 'user') { return }
+    $content = if ($o.message) { $o.message.content } else { $o.content }
+    if ($content -is [string]) { $content }
+    elseif ($content -is [array]) { ($content | Where-Object { $_.type -eq 'text' } | ForEach-Object { $_.text }) -join "`n" }
+} | Where-Object { $_ }
+$soulText  = ($userTexts -join "`n").Trim()
+
+# Contamination guard: abort if soul payload ≈ full RRL (extraction failure → raw transcript)
+$soulBytes = [System.Text.Encoding]::UTF8.GetByteCount($soulText)
+if ($soulBytes -ge ($rrlBytes * 0.95)) {
+    Write-Error "STAGE 2 ABORT — soul ($soulBytes bytes) ~= RRL ($rrlBytes bytes). Raw-transcript contamination. Fix extractor."
+    $receipt = [ordered]@{ event_id="SOUL_GAP_CONTAMINATION_GUARD"; count_before=$countBefore; count_after=$countBefore; delta=0; level="(unchanged)"; posted_at=(Get-Date -Format 'o') }
+} elseif (-not $soulText) {
+    Write-Warning "STAGE 2 SOUL_GAP — 0 user turns extracted."
+    $receipt = [ordered]@{ event_id="SOUL_GAP"; count_before=$countBefore; count_after=$countBefore; delta=0; level="(unchanged)"; posted_at=(Get-Date -Format 'o') }
+} else {
+    $soulBody = @{
+        student_id = "sov100-michael"
+        session_id = "sov100-roman-run$run"
+        role       = "user"
+        text       = $soulText
+    } | ConvertTo-Json -Depth 2 -Compress
+
+    $soulPost   = Invoke-RestMethod -Uri "$D1/api/soul/event" -Method Post `
+        -Body $soulBody -ContentType "application/json"
+    $countAfter = (Invoke-RestMethod "$D1/api/soul/count").soulcount
+
+    $receipt = [ordered]@{
+        event_id     = $soulPost.event_id
+        count_before = $countBefore
+        count_after  = $countAfter
+        delta        = $countAfter - $countBefore
+        level        = $countAfter
+        posted_at    = (Get-Date -Format 'o')
+    }
 }
-if (-not $userTexts) {
-    $userTexts = $rrlText -split "`n" | Where-Object { $_ -match '^(MR HOBBS|MICHAEL|SOV100|USER)\s*[:|>-]' } | ForEach-Object { $_ -replace '^(MR HOBBS|MICHAEL|SOV100|USER)\s*[:|>-]\s*', '' }
-}
-$soulText = ($userTexts -join "`n").Trim()
-if (-not $soulText) { $soulText = $rrlText }
-
-$soulBody = @{
-    student_id = "sov100-michael"
-    session_id = "sov100-roman-run$run"
-    role       = "user"
-    text       = $soulText
-} | ConvertTo-Json -Depth 2 -Compress
-
-$soulPost = Invoke-RestMethod -Uri "$D1/api/soul/event" -Method Post `
-    -Body $soulBody -ContentType "application/json"
-
-$countAfter = (Invoke-RestMethod "$D1/api/soul/count").soulcount
-
-$levelAfter = $countAfter
-
-$receipt = [ordered]@{
-    event_id     = $soulPost.event_id
-    count_before = $countBefore
-    count_after  = $countAfter
-    delta        = $countAfter - $countBefore
-    level        = $levelAfter
-    posted_at    = (Get-Date -Format 'o')
-}
-Write-Host "STAGE 2 ✓ SOUL: event_id=$($receipt.event_id) | Δ$($receipt.delta) | $countAfter chars | $($receipt.level)"
+Write-Host "STAGE 2 ✓ SOUL: event_id=$($receipt.event_id) | Δ$($receipt.delta) | $($receipt.count_after) chars"
+} # end else ($kiloSession)
 ```
 
 **$receipt.count_after is the SOLE soulcount source for seal §3, §12, pipeline JSON, commit message, BOOT.**
@@ -175,67 +247,32 @@ Blueprints are flagged `type: "blueprint"` so they are never lost again.
 ```powershell
 if (-not (Test-Path $dnaDir)) { New-Item -ItemType Directory -Path $dnaDir -Force | Out-Null }
 
-$dnaRecords = @()
-$turnSeq = 0
+$dnaCount = 0; $dnaBlueprintCount = 0; $dnaRecords = @()
 
-# Parse RRL for assistant/agent turns
-# Supports: JSONL entries with role=assistant, or plain-text sections
-$lines = $rrlText -split "`n"
-$currentBlock = ""
-$currentRole = ""
-$inAssistantBlock = $false
+if ($kiloSession) {
+    Write-Host "STAGE 3 ⚠ KILO_HOLLOW — DNA extraction skipped (no real transcript)"
+} else {
 
-foreach ($line in $lines) {
-    $trimmed = $line.Trim()
-    
-    # Detect role markers (JSONL format)
-    if ($trimmed -match '"role"\s*:\s*"([^"]+)"') {
-        # Save previous block if it was assistant
-        if ($inAssistantBlock -and $currentBlock.Trim().Length -gt 10) {
-            $turnSeq++
-            $text = $currentBlock.Trim()
-            $isBlueprint = ($text -match '```|`````|fenced code block|\b(SPEC|SPECIFICATION|BLUEPRINT|ARCHITECTURE|SCHEMA|DESIGN)\b' -and $text.Length -gt 200)
-            $dnaRecords += [ordered]@{
-                run    = $run
-                seq    = $turnSeq
-                type   = if ($isBlueprint) { "blueprint" } else { "prose" }
-                chars  = $text.Length
-                text   = $text
-            }
-        }
-        $currentRole = $matches[1]
-        $currentBlock = ""
-        $inAssistantBlock = ($currentRole -eq "assistant")
-    }
-    # Detect plain-text speaker markers
-    elseif ($trimmed -match '^(AGENT|OB1|ASSISTANT|Agent 99)\s*[:|>-]') {
-        if ($inAssistantBlock -and $currentBlock.Trim().Length -gt 10) {
-            $turnSeq++
-            $text = $currentBlock.Trim()
-            $isBlueprint = ($text -match '```|`````|fenced code block|\b(SPEC|SPECIFICATION|BLUEPRINT|ARCHITECTURE|SCHEMA|DESIGN)\b' -and $text.Length -gt 200)
-            $dnaRecords += [ordered]@{
-                run    = $run
-                seq    = $turnSeq
-                type   = if ($isBlueprint) { "blueprint" } else { "prose" }
-                chars  = $text.Length
-                text   = $text
-            }
-        }
-        $inAssistantBlock = $true
-        $currentBlock = $trimmed -replace '^(AGENT|OB1|ASSISTANT|Agent 99)\s*[:|>-]\s*', ''
-    }
-    # Accumulate lines within a block
-    elseif ($inAssistantBlock) {
-        $currentBlock += "`n$line"
-    }
-}
+$turnSeq    = 0
+$lines      = $rrlText -split "`n"
 
-# Flush final block
-if ($inAssistantBlock -and $currentBlock.Trim().Length -gt 10) {
+# Parse assistant turns — Claude Code JSONL envelope: role at $obj.message.role
+# Walk content[].type=='text' only — explicitly skip 'thinking' blocks
+$lines | ForEach-Object {
+    $o = $_.Trim() | ConvertFrom-Json -ErrorAction SilentlyContinue
+    if (-not $o) { return }
+    $role = if ($o.message) { $o.message.role } else { $o.role }
+    if ($role -ne 'assistant') { return }
+    $content = if ($o.message) { $o.message.content } else { $o.content }
+    $text = if ($content -is [string]) { $content }
+             elseif ($content -is [array]) {
+                 ($content | Where-Object { $_.type -eq 'text' } | ForEach-Object { $_.text }) -join "`n"
+             }
+    $text = if ($text) { $text.Trim() } else { "" }
+    if ($text.Length -lt 10) { return }
     $turnSeq++
-    $text = $currentBlock.Trim()
-    $isBlueprint = ($text -match '```|`````|fenced code block|\b(SPEC|SPECIFICATION|BLUEPRINT|ARCHITECTURE|SCHEMA|DESIGN)\b' -and $text.Length -gt 200)
-    $dnaRecords += [ordered]@{
+    $isBlueprint = ($text -match '```|\b(SPEC|SPECIFICATION|BLUEPRINT|ARCHITECTURE|SCHEMA|DESIGN)\b' -and $text.Length -gt 200)
+    $script:dnaRecords += [ordered]@{
         run    = $run
         seq    = $turnSeq
         type   = if ($isBlueprint) { "blueprint" } else { "prose" }
@@ -244,37 +281,7 @@ if ($inAssistantBlock -and $currentBlock.Trim().Length -gt 10) {
     }
 }
 
-# ═══════════════════════════════════════════
-# EC-026: DUAL-HASH DETERMINISM NORMALIZATION
-# ═══════════════════════════════════════════
-# DISCREPANCY DOCUMENTED:
-#   JSONL path (line ~190): role-marker line ("role":"assistant") is EXCLUDED from $currentBlock
-#   Plain-text path (line ~209): speaker-marker line ("AGENT:") is INCLUDED with prefix stripped
-#   Result: same semantic turn produces different character counts depending on which parser path was taken.
-# FIX: Normalize both paths — strip role-marker and speaker-prefix lines to empty before accumulation.
-#   After normalization, both paths should produce identical byte counts for the same semantic content.
-$dnaTotalCharsJsonl  = 0
-$dnaTotalCharsPlain  = 0
-$dnaJsonlRecords     = ($dnaRecords | Where-Object { $_.text -notmatch '^(AGENT|OB1|ASSISTANT|Agent 99)\s*[:|>-]' }).Count
-$dnaPlainRecords     = $dnaRecords.Count - $dnaJsonlRecords
-if ($dnaJsonlRecords -gt 0 -and $dnaPlainRecords -gt 0) {
-    $dnaTotalCharsJsonl = ($dnaRecords | Where-Object { $_.text -notmatch '^(AGENT|OB1|ASSISTANT|Agent 99)\s*[:|>-]' } | Measure-Object -Property chars -Sum).Sum
-    $dnaTotalCharsPlain = ($dnaRecords | Where-Object { $_.text -match '^(AGENT|OB1|ASSISTANT|Agent 99)\s*[:|>-]' } | Measure-Object -Property chars -Sum).Sum
-}
-if ($dnaTotalCharsJsonl -gt 0 -and $dnaTotalCharsPlain -gt 0) {
-    $charDiff = [Math]::Abs($dnaTotalCharsJsonl - $dnaTotalCharsPlain)
-    $avgChars = ($dnaTotalCharsJsonl + $dnaTotalCharsPlain) / 2
-    if ($avgChars -gt 0) {
-        $pctDiff = ($charDiff / $avgChars) * 100
-        if ($pctDiff -gt 1.0) {
-            Write-Warning "EC-026 DUAL-HASH DRIFT: JSONL-path chars=$dnaTotalCharsJsonl vs plain-path chars=$dnaTotalCharsPlain — diff $pctDiff% (>1%). DNA hash may not be deterministic across parser paths."
-        } else {
-            Write-Host "  EC-026 OK: JSONL/plain char diff = $pctDiff% (within 1% tolerance)"
-        }
-    }
-}
-
-$dnaCount = $dnaRecords.Count
+$dnaCount          = $dnaRecords.Count
 $dnaBlueprintCount = ($dnaRecords | Where-Object { $_.type -eq "blueprint" }).Count
 
 if ($dnaCount -gt 0) {
@@ -284,6 +291,8 @@ if ($dnaCount -gt 0) {
 } else {
     Write-Warning "STAGE 3 ⚠ DNA_GAP — 0 assistant turns extracted from RRL"
 }
+
+} # end else ($kiloSession)
 ```
 
 ---
@@ -301,11 +310,12 @@ function Get-Next-LedgerID {
 }
 function Get-Tail-Ledger-Hash {
     param([string]$LedgerDir)
+    # Numeric sort — prevents HL-999 > HL-1000 string-sort time-bomb at HL-1000
     $latest = Get-ChildItem -LiteralPath $LedgerDir -Filter "HL-*.json" -ErrorAction SilentlyContinue |
-        Sort-Object Name -Descending | Select-Object -First 1
+        ForEach-Object { [PSCustomObject]@{ N=[int]([regex]::Match($_.Name,'HL-(\d+)').Groups[1].Value); F=$_.FullName } } |
+        Sort-Object N -Descending | Select-Object -First 1
     if (-not $latest) { return $null }
-    $entry = Get-Content $latest.FullName -Raw | ConvertFrom-Json
-    return $entry.merkle_hash
+    (Get-Content $latest.F -Raw | ConvertFrom-Json).merkle_hash
 }
 function Compute-Sha256 {
     param([string]$InputString)
@@ -315,6 +325,14 @@ function Compute-Sha256 {
 }
 
 if (-not (Test-Path $ledgerDir)) { New-Item -ItemType Directory -Path $ledgerDir -Force | Out-Null }
+
+# Idempotency: abort if this run already has a sealed HL
+$dupe = Get-ChildItem $ledgerDir -Filter "HL-*.json" -ErrorAction SilentlyContinue |
+    Where-Object { try { (Get-Content $_.FullName -Raw | ConvertFrom-Json).run -eq $run } catch { $false } }
+if ($dupe) {
+    Write-Error "IDEMPOTENCY ABORT — run $run already sealed as $($dupe.Name). One run = one HL."
+    exit 1
+}
 
 $nextHL     = Get-Next-LedgerID -LedgerDir $ledgerDir
 $parentHash = Get-Tail-Ledger-Hash -LedgerDir $ledgerDir
@@ -482,7 +500,13 @@ $s2Record = [ordered]@{
     s2pipeline_file   = $s2Path
     registry_file     = if (Test-Path "$artRegistryDir\art-sync-run$runPad.json") { "$artRegistryDir\art-sync-run$runPad.json" } else { "REGISTRY_SYNC_GAP" }
     registry_synced   = $syncedPieces.Count
-    result            = if ($rrlFidelity -eq "REAL" -and $dnaBlueprintCount -gt 0) { "COMPLETE" } else { "GAP" }
+    result            = if ($kiloSession) { "KILO_GAP" }
+                        elseif ($rrlFidelity -eq "REAL" -and $dnaBlueprintCount -gt 0 -and
+                            $receipt.event_id -ne "DRYRUN" -and
+                            $receipt.event_id -ne "SOUL_GAP" -and
+                            $receipt.event_id -ne "SOUL_GAP_CONTAMINATION_GUARD" -and
+                            [int]$receipt.delta -gt 0) { "COMPLETE" }
+                        else { "GAP" }
 }
 
 $s2Record | ConvertTo-Json -Depth 5 | Set-Content $s2Path -Encoding UTF8
