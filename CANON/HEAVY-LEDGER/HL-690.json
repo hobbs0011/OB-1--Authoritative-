@@ -1,0 +1,15 @@
+{
+  "hl_id": "HL-690",
+  "session_id": "111",
+  "rrl_source": "D:\\OB-1-CANONICAL\\RRL\\RRL-111.txt",
+  "char_count": 0,
+  "byte_count": 0,
+  "soul_hash": "KILO_HOLLOW",
+  "dna_hash": "DNA_GAP",
+  "dna_blueprint_count": 0,
+  "merkle_parent": null,
+  "merkle_hash": "KILO_GAP",
+  "sealed_at": "2026-06-10T13:19:22+07:00",
+  "sov100": true,
+  "run": 111
+}
