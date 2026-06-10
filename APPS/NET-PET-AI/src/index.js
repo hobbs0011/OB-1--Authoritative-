@@ -1,8 +1,8 @@
-// src/index.js — NET-PET-AI Cloudflare Worker v1.5
+// src/index.js — NET-PET-AI Cloudflare Worker v1.6
 // Phoenix Rising Protocol — OBI Command Station
 // Architecture: Agent100 → Magic Chat → Agent99 (Obi) → Cryptographic Immutable Ledger
 // Bindings: SESSIONS (SessionDO), PROFILES (ProfileDO), PETS (PetDO), LEDGER (LedgerDO), ASSETS
-// Secrets: DEEPSEEK_API_KEY, DEEPGRAM_API_KEY, OPENAI_API_KEY
+// Secrets: DEEPSEEK_API_KEY, DEEPGRAM_API_KEY, DEEPGRAM_API_KEY, PA_AUTH_KEY, WORKER_ADMIN_KEY, ENCRYPTION_KEY
 
 import { securityMiddleware, sanitizeInput, validateStudentId, validateActiveStudent, checkAdminKey, logAudit } from './security.js';
 import { logError, logWarn, logInfo } from './logger.js';
@@ -1994,11 +1994,11 @@ speak: {
   if (path === "/api/waitlist" && method === "POST") { const body = await request.json(); return handleWaitlistJoin(body, env); }
   if (path === "/api/waitlist/count" && method === "GET") { return handleWaitlistCount(env); }
   else if (path === "/api/waitlist/list" && method === "GET") { return handleWaitlistList(env); }
-  else if (path === "/api/admin/waitlist/toggle" && method === "POST") { const body = await request.json(); return handleWaitlistToggle(body, env); }
+  else if (path === "/api/admin/waitlist/toggle" && method === "POST") { const authFail = await checkAdminKey(request, env); if (authFail) return authFail; const body = await request.json(); return handleWaitlistToggle(body, env); }
   else if (path === "/api/admin/waitlist/status" && method === "GET") { return handleWaitlistStatus(env); }
   else if (path === "/api/admin/subscriptions" && method === "GET") { return handleAdminSubscriptionsList(env); }
   else if (path === "/api/admin/subscription" && method === "GET") { return handleAdminSubscriptionGet(url.searchParams.get("studentId") || "", env); }
-  else if (path === "/api/admin/subscription/upsert" && method === "POST") { const body = await request.json(); return handleAdminSubscriptionUpsert(body, env); }
+  else if (path === "/api/admin/subscription/upsert" && method === "POST") { const authFail = await checkAdminKey(request, env); if (authFail) return authFail; const body = await request.json(); return handleAdminSubscriptionUpsert(body, env); }
 
   // ── DELETE /api/vocab/delete ──────────────────────────────────────────────
   else if (method === "DELETE" && path.includes("/api/vocab/delete")) {
@@ -2116,7 +2116,7 @@ speak: {
     const batchResults = await seedVocabBatch(studentId, extracted, env);
     const added = batchResults.filter(r => r.ok).length;
 
-    await env.NET_PET_KV.put(`class_transcript_${studentId}_${date}`, fullTranscript, { expirationTtl: 60 * 60 * 24 * 365 });
+    await kvEncryptPut(env.NET_PET_KV, `class_transcript_${studentId}_${date}`, fullTranscript, env.ENCRYPTION_KEY);
 
     return addCors(json({ added, date, words: extracted, transcriptStored: true }), request);
   }
@@ -2151,11 +2151,16 @@ async function handlePaymentConfirm(body, env) {
 
 // ── Admin Subscription Handlers ─────────────────────────────────────────────────
 
-// GET /api/admin/subscriptions — list all subscriptions
+// GET /api/admin/subscriptions — list all subscriptions (KV-scan driven, not hardcoded)
 async function handleAdminSubscriptionsList(env) {
   if (!env.NET_PET_KV) return json({ subscriptions: [] });
-  // Scan known students + employer subscriptions
-  const students = ["huong-bluetech","mai-tram-bluetech"];
+  const keys = []; let cursor;
+  do {
+    const listed = await env.NET_PET_KV.list({ prefix: 'subscription:', cursor }).catch(() => ({ keys: [], list_complete: true }));
+    listed.keys.forEach(k => keys.push(k.name.replace('subscription:', '')));
+    cursor = listed.list_complete ? undefined : listed.cursor;
+  } while (cursor);
+  const students = keys.filter(sid => !sid.startsWith('sov100-') && sid !== 'keep-warm-ping');
   const subs = await Promise.all(students.map(async sid => {
     const raw = await env.NET_PET_KV.get(`subscription:${sid}`).catch(() => null);
     return raw ? { studentId: sid, ...JSON.parse(raw) } : null;
@@ -2177,10 +2182,9 @@ async function handleAdminSubscriptionGet(studentId, env) {
   return json({ studentId, ...sub, trialDaysRemaining: trialDays, status });
 }
 
-// POST /api/admin/subscription/upsert — create/update subscription (pin protected)
+// POST /api/admin/subscription/upsert — create/update subscription (admin key required, checked at route level)
 async function handleAdminSubscriptionUpsert(body, env) {
-  const { pin, studentId, plan, trial_end, paidUntil, is_founding_member } = body || {};
-  if (pin !== "bluetech2026") return json({ error: "Unauthorized" }, 403);
+  const { studentId, plan, trial_end, paidUntil, is_founding_member } = body || {};
   if (!studentId) return json({ error: "studentId required" }, 400);
   if (!env.NET_PET_KV) return json({ error: "NET_PET_KV not configured" }, 500);
   
@@ -2343,10 +2347,9 @@ async function handleWaitlistList(env) {
   return json({ entries: entries.filter(Boolean), total: idx.length, cap: 100 });
 }
 
-// POST /api/admin/waitlist/toggle — toggle waitlist open/closed (admin pin required)
+// POST /api/admin/waitlist/toggle — toggle waitlist open/closed (admin key required, checked at route level)
 async function handleWaitlistToggle(body, env) {
-  const { pin, closed } = body || {};
-  if (pin !== "bluetech2026") return json({ error: "Unauthorized" }, 403);
+  const { closed } = body || {};
   await env.NET_PET_KV.put("waitlist:closed", closed ? "true" : "false");
   return json({ ok: true, closed: !!closed });
 }

@@ -176,6 +176,12 @@ if ($DryRun) {
             Write-Step 1 "PASS" "SOUL POSTED: event_id=$($soulPost.event_id) | bytes=$($soulPost.byte_count) | $($userTurns.Count) user turns"
 
             $soulAfter = Invoke-RestMethod "$D1/api/soul/count" -TimeoutSec 10
+            # EC-44: soulcount=0 no retry — if zero, wait 3s and retry once before accepting
+            if ($soulAfter.soulcount -eq 0) {
+                Write-Host "  SOUL AFTER: 0 — retrying in 3s (EC-44 guard)..."
+                Start-Sleep -Seconds 3
+                $soulAfter = Invoke-RestMethod "$D1/api/soul/count" -TimeoutSec 10
+            }
             $delta = $soulAfter.soulcount - $soulBefore.soulcount
             Write-Host "  SOUL AFTER: $($soulAfter.soulcount) chars | $($soulAfter.level) | DELTA: +$delta"
         }

@@ -881,6 +881,26 @@ function resumeAgentCtx() {
 }
 document.addEventListener("visibilitychange", () => { if (!document.hidden) resumeAgentCtx(); });
 
+// EC-21: send JSON keepalive + silent PCM16 frame during agent speech to prevent CLIENT_MESSAGE_TIMEOUT
+function sendKeepAlive() {
+  if (!agentWs || agentWs.readyState !== WebSocket.OPEN) return;
+  try {
+    agentWs.send(JSON.stringify({ type: "KeepAlive" }));
+    if (agentPlaying) agentWs.send(new Int16Array(160).buffer); // 10ms silence — satisfies binary frame requirement
+  } catch (_) {}
+}
+
+// EC-15: module-level keepAliveHandler — single reference, never accumulates across reconnects
+function keepAliveHandler() {
+  if (document.hidden) {
+    if (agentKeepAlive) { clearInterval(agentKeepAlive); agentKeepAlive = null; }
+  } else if (agentWs && agentWs.readyState === WebSocket.OPEN) {
+    sendKeepAlive(); // immediate pulse on tab-return (iOS reconnect recovery)
+    if (!agentKeepAlive) agentKeepAlive = setInterval(sendKeepAlive, 3500);
+  }
+}
+document.addEventListener("visibilitychange", keepAliveHandler);
+
 // browser PCM16 → wss://agent.deepgram.com/v1/agent/converse (direct, token via /api/deepgram-token)
 let agentWs           = null;  // WebSocket to Deepgram (direct)
 let agentWsId         = 0;     // incremented each openVoiceAgent() — zombie handler guard
@@ -903,6 +923,7 @@ let agentTextResolve  = null;  // resolver for typed-text → InjectUserMessage 
 let agentKeepAlive    = null;  // interval handle for KeepAlive messages
 let agentSilenceTimer = null;  // fires if student is silent >2.5s after OBI speaks
 let agentSilenceFired = false;     // one-shot: only inject once per silence period
+let agentInjectWatchdog = null;    // EC-22: fires if inject is silently dropped (GitHub #463)
 let agentSessionStart = null;  // timestamp when SettingsApplied fires
 let agentReconnectCount = 0; const MAX_RECONNECT = 5;   // backoff counter: resets on clean SettingsApplied
 let agentReconnectTimer = null;// active reconnect timeout handle
@@ -1013,6 +1034,7 @@ async function openVoiceAgent() {
       if (agentKeepAlive) { clearInterval(agentKeepAlive); agentKeepAlive = null; }
       if (agentAudioWatchdog) { clearInterval(agentAudioWatchdog); agentAudioWatchdog = null; }
       if (agentSilenceTimer) { clearTimeout(agentSilenceTimer); agentSilenceTimer = null; }
+      if (agentInjectWatchdog) { clearTimeout(agentInjectWatchdog); agentInjectWatchdog = null; }
       if (agentCurrentBlobUrl) { URL.revokeObjectURL(agentCurrentBlobUrl); agentCurrentBlobUrl = null; }
       if (agentCurrentAudio) { try { agentCurrentAudio.pause(); } catch {} agentCurrentAudio = null; }
       agentAudioQ.length = 0; agentChunkAccum = []; agentChunkAccumSize = 0; agentPreSettingsBuffer = []; agentPreSettingsBytes = 0; agentPlaying = false;
@@ -1131,25 +1153,8 @@ function handleAgentMsg(event) {
         }
         agentPreSettingsBuffer = []; agentPreSettingsBytes = 0;
         if (agentKeepAlive) clearInterval(agentKeepAlive);
-        // I-10: Guard KeepAlive send with readyState check to prevent uncaught error on race (B-10 fix)
-        agentKeepAlive = setInterval(() => {
-          try {
-            if (agentWs && agentWs.readyState === WebSocket.OPEN) {
-              agentWs.send(JSON.stringify({ type: "KeepAlive" }));
-            }
-          } catch (_) { /* WS closed between check and send — safe to ignore */ }
-        }, 3500);
-        // Block R/K: Battery saver — stop KeepAlive when tab hidden; restart when visible
-        const keepAliveHandler = () => {
-          if (document.hidden) {
-            if (agentKeepAlive) { clearInterval(agentKeepAlive); agentKeepAlive = null; }
-          } else if (!agentKeepAlive && agentWs && agentWs.readyState === WebSocket.OPEN) {
-            agentKeepAlive = setInterval(() => {
-              try { if (agentWs && agentWs.readyState === WebSocket.OPEN) agentWs.send(JSON.stringify({ type: "KeepAlive" })); } catch (_) {}
-            }, 3500);
-          }
-        };
-        document.addEventListener("visibilitychange", keepAliveHandler);
+        // EC-15/EC-21: use module-level sendKeepAlive (JSON + silent PCM16) and module-level keepAliveHandler
+        agentKeepAlive = setInterval(sendKeepAlive, 3500);
         // AudioFocus watchdog — resets stuck busy state when AudioContext is suspended (Android)
         if (agentAudioWatchdog) clearInterval(agentAudioWatchdog);
         agentAudioWatchdog = setInterval(() => {
@@ -1192,8 +1197,9 @@ function handleAgentMsg(event) {
         }
 
       } else if (msg.type === "UserStartedSpeaking") {
-        // Student spoke — cancel silence timer and barge-in stop
+        // Student spoke — cancel silence timer, inject watchdog, and barge-in stop
         if (agentSilenceTimer) { clearTimeout(agentSilenceTimer); agentSilenceTimer = null; }
+        if (agentInjectWatchdog) { clearTimeout(agentInjectWatchdog); agentInjectWatchdog = null; }
         if (agentPlaying) bargeInCount++;  // Tiger Index: student interrupted Obi
         agentAudioQ.length = 0; agentChunkAccum = []; agentChunkAccumSize = 0; agentPreSettingsBuffer = []; agentPreSettingsBytes = 0;
         if (agentCurrentBlobUrl) { URL.revokeObjectURL(agentCurrentBlobUrl); agentCurrentBlobUrl = null; }
@@ -1212,6 +1218,7 @@ function handleAgentMsg(event) {
 
       } else if (msg.type === "ConversationText" && msg.role === "assistant" && msg.content) {
         if (agentThinkBubble) { agentThinkBubble.remove(); agentThinkBubble = null; }
+        if (agentInjectWatchdog) { clearTimeout(agentInjectWatchdog); agentInjectWatchdog = null; }
         const lastBubble = bubble("obi", msg.content);
         // Cap chatMessages at 40 to prevent memory creep
         chatMessages.push({ role: "assistant", content: msg.content });
@@ -1466,7 +1473,14 @@ function resetSilenceTimer() {
       agentSilenceFired = true;
       const _name = (profile.fullName || "").split(/\s+/)[0] || "";
       const _viEncourage = profile.lang === "vi" ? " (Đừng lo, cứ nói thoải mái!)" : "";
-      agentWs.send(JSON.stringify({ type: "InjectAgentMessage", behavior: "queue", message: `Take your time${_name ? ", " + _name : ""}! Try saying one sentence — anything you like.${_viEncourage}` }));
+      const _nudgeMsg = `Take your time${_name ? ", " + _name : ""}! Try saying one sentence — anything you like.${_viEncourage}`;
+      agentWs.send(JSON.stringify({ type: "InjectAgentMessage", behavior: "queue", message: _nudgeMsg }));
+      // EC-22: watchdog — if Deepgram drops the inject (GitHub #463), show text bubble fallback
+      if (agentInjectWatchdog) clearTimeout(agentInjectWatchdog);
+      agentInjectWatchdog = setTimeout(() => {
+        agentInjectWatchdog = null;
+        if (agentSilenceFired && agentWs && agentReady) obi(_nudgeMsg);
+      }, 5000);
     }
   }, 3000);
 }
@@ -1926,10 +1940,6 @@ function confirmLandingMode() {
   currentMode = pendingLandingMode;
   document.body.dataset.mode = currentMode; // A4: drive room color
   localStorage.setItem('obi_session_mode', currentMode);
-  localStorage.setItem('obi_landing_seen', 'true');
-  const url = new URL(window.location.href);
-  url.searchParams.set('mode', currentMode);
-  window.history.replaceState({}, '', url.toString());
   dismissLanding();
   // Always connect (or reconnect) Voice Agent with the selected mode.
   // boot() skipped openVoiceAgent() when landingWillShow=true, so we always start here.
@@ -1942,7 +1952,6 @@ function confirmLandingMode() {
 function skipLanding() {
   const saved = localStorage.getItem('obi_session_mode') || 'free';
   currentMode = saved;
-  localStorage.setItem('obi_landing_seen', 'true');
   dismissLanding();
   if (urlStudentId) setTimeout(() => openVoiceAgent(), 300);
 }
@@ -2004,7 +2013,6 @@ function selectMode(mode) {
   // Initialize mode from URL or localStorage
   const urlMode = new URLSearchParams(window.location.search).get('mode');
   const savedMode = localStorage.getItem('obi_session_mode');
-  const landingSeen = localStorage.getItem('obi_landing_seen');
 
   if (urlMode) {
     // Explicit mode in URL — skip landing, go straight in

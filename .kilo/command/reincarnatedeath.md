@@ -135,11 +135,18 @@ if ($needsDiscovery -and -not $kiloSession) {
         "$env:LOCALAPPDATA\kilo"
     )
     $jsonlFile = $null
-    foreach ($d in $jsonlDirs) {
-        if (Test-Path $d) {
-            $jsonlFile = Get-ChildItem $d -Recurse -Filter "*.jsonl" -ErrorAction SilentlyContinue |
-                         Sort-Object LastWriteTime -Descending | Select-Object -First 1
-            if ($jsonlFile) { break }
+    # EC-43: use activeUUID when known — prevents grabbing archive/Bible chunks from subdirs
+    if ($activeUUID -and (Test-Path "$claudeDir\$activeUUID.jsonl")) {
+        $jsonlFile = Get-Item "$claudeDir\$activeUUID.jsonl"
+    }
+    if (-not $jsonlFile) {
+        foreach ($d in $jsonlDirs) {
+            if (Test-Path $d) {
+                # EC-43: no -Recurse — only top-level files to avoid archive contamination
+                $jsonlFile = Get-ChildItem $d -Filter "*.jsonl" -ErrorAction SilentlyContinue |
+                             Sort-Object LastWriteTime -Descending | Select-Object -First 1
+                if ($jsonlFile) { break }
+            }
         }
     }
     if (-not $jsonlFile) {

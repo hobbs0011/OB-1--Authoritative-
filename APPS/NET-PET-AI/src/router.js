@@ -32,11 +32,13 @@ const TRUSTED_ORIGINS = new Set([
   'https://net-pet-ai.mrmichaelhobbs123.workers.dev',
   'https://net-pet-ai-dev.mrmichaelhobbs123.workers.dev',
   'https://tigers-4room.pages.dev',
+  'https://naturalenglishtraining.com',
+  'https://www.naturalenglishtraining.com',
 ]);
 
 app.use('/api/*', async (c, next) => {
   if (c.req.method === 'GET' || c.req.method === 'HEAD') return next();
-  if (c.req.header('x-pa-auth')) return next();
+  if (c.req.header('x-pa-auth') && c.req.header('x-pa-auth') === c.env?.PA_AUTH_KEY) return next();
   const origin = c.req.header('Origin');
   if (!origin) return next();
   if (!TRUSTED_ORIGINS.has(origin)) {
@@ -213,6 +215,18 @@ app.get('/api/student/:id/export', async (c) => {
     readKv(`streak:${studentId}`),
   ]);
 
+  // Collect class transcripts (PII — student's verbatim speech from class sessions)
+  const classTranscripts = {};
+  let ctCursor;
+  do {
+    const listed = await kv.list({ prefix: `class_transcript_${studentId}_`, cursor: ctCursor });
+    await Promise.all(listed.keys.map(async k => {
+      const v = await readDecrypted(k.name);
+      if (v !== null && v !== undefined) classTranscripts[k.name] = v;
+    }));
+    ctCursor = listed.list_complete ? undefined : listed.cursor;
+  } while (ctCursor);
+
   return c.json({
     student_id: studentId,
     exported_at: new Date().toISOString(),
@@ -226,6 +240,7 @@ app.get('/api/student/:id/export', async (c) => {
     goals,
     subscription,
     streak,
+    class_transcripts: classTranscripts,
   });
 });
 
