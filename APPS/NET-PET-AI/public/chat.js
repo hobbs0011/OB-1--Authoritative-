@@ -700,6 +700,7 @@ function buildListeningNudge(chatRound, profile) {
 
 async function handle(text) {
   if (!text.trim() || state === "busy") return;
+  clearSilenceFired(); // reset silence prompt flag on user input
   input.value = "";
   student(text.trim(), profile._phonicsHints || []);
 
@@ -901,6 +902,7 @@ let agentThinkBubble  = null;  // typing indicator shown during AgentThinking
 let agentTextResolve  = null;  // resolver for typed-text → InjectUserMessage flow
 let agentKeepAlive    = null;  // interval handle for KeepAlive messages
 let agentSilenceTimer = null;  // fires if student is silent >2.5s after OBI speaks
+let agentSilenceFired = false;     // one-shot: only inject once per silence period
 let agentSessionStart = null;  // timestamp when SettingsApplied fires
 let agentReconnectCount = 0; const MAX_RECONNECT = 5;   // backoff counter: resets on clean SettingsApplied
 let agentReconnectTimer = null;// active reconnect timeout handle
@@ -1252,6 +1254,7 @@ function handleAgentMsg(event) {
         }
 
       } else if (msg.type === "ConversationText" && msg.role === "user" && msg.content) {
+        clearSilenceFired(); // reset one-shot silence flag on user speech
         bubble("student", msg.content);
         chatMessages.push({ role: "user", content: msg.content });
         if (chatMessages.length > 40) chatMessages = chatMessages.slice(-40);
@@ -1459,12 +1462,18 @@ function resetSilenceTimer() {
   if (agentSilenceTimer) clearTimeout(agentSilenceTimer);
   agentSilenceTimer = setTimeout(() => {
     agentSilenceTimer = null;
-    if (agentWs && agentWs.readyState === WebSocket.OPEN && agentReady && !agentPlaying && agentAudioQ.length === 0 && !agentCurrentAudio) {
+    if (agentWs && agentWs.readyState === WebSocket.OPEN && agentReady && !agentPlaying && agentAudioQ.length === 0 && !agentCurrentAudio && !agentSilenceFired) {
+      agentSilenceFired = true;
       const _name = (profile.fullName || "").split(/\s+/)[0] || "";
       const _viEncourage = profile.lang === "vi" ? " (Đừng lo, cứ nói thoải mái!)" : "";
       agentWs.send(JSON.stringify({ type: "InjectAgentMessage", behavior: "queue", message: `Take your time${_name ? ", " + _name : ""}! Try saying one sentence — anything you like.${_viEncourage}` }));
     }
-  }, 2500);
+  }, 3000);
+}
+
+// Reset silence-fired flag on user speech activity
+function clearSilenceFired() {
+  agentSilenceFired = false;
 }
 
 async function playAgentChunk() {
