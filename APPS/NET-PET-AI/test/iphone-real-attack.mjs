@@ -19,7 +19,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 import { webkit } from 'playwright';
 
-const BASE = 'https://net-pet-ai.mrmichaelhobbs123.workers.dev';
+const BASE = process.env.SUITE_BASE || 'https://net-pet-ai.mrmichaelhobbs123.workers.dev';
 const STUDENT = 'sov100-test-magic';                  // never a real student id
 const URL = `${BASE}/magic-chat?studentId=${STUDENT}`;
 const IOS_UA = 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Mobile/15E148 Safari/604.1';

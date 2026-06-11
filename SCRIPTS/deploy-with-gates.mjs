@@ -43,8 +43,20 @@ try {
 console.log("\nPOST-DEPLOY VERIFY...");
 try {
   execSync(`node test/post-deploy-verify.mjs ${ENV || "prod"}`, { stdio: "inherit", timeout: 60000, cwd: APP_DIR });
-  console.log("\nALL GREEN — deploy successful");
 } catch (e) {
   console.error("\nPOST-DEPLOY RED — rolled back");
+  process.exit(1);
+}
+
+// 4. DADDY SHARK — full tiered suite against the JUST-DEPLOYED build. Thumb-fidelity
+//    E2E + failure-mode (no silent dead-ends) + mutation gauntlet (every guard proven
+//    to have teeth). A broken thumb path, a new silent dead-end, or a tautology here
+//    blocks the deploy from being declared good.
+console.log("\nDADDY SHARK — full suite vs deployed build...");
+try {
+  execSync(`node test/daddyshark.mjs`, { stdio: "inherit", timeout: 300000, cwd: APP_DIR, env: { ...process.env, SUITE_BASE: BASE } });
+  console.log("\nALL GREEN — deploy successful + every guard proven");
+} catch (e) {
+  console.error("\nDADDY SHARK BIT — deploy is NOT good (thumb path / silent dead-end / tautology). Investigate before trusting this build.");
   process.exit(1);
 }

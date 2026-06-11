@@ -18,7 +18,7 @@ import { readFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
-const BASE = 'https://net-pet-ai.mrmichaelhobbs123.workers.dev';
+const BASE = process.env.SUITE_BASE || 'https://net-pet-ai.mrmichaelhobbs123.workers.dev';
 const URL = `${BASE}/magic-chat?studentId=sov100-test-magic`;
 const IOS_UA = 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Mobile/15E148 Safari/604.1';
 const VP = { width: 375, height: 553 };               // worst realistic iPhone usable height
