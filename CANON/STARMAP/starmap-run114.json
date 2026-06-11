@@ -1,0 +1,11 @@
+{
+  "run": 114,
+  "rrl_path": "D:\\OB-1-CANONICAL\\RRL\\RRL-114.txt",
+  "ledger_id": "HL-693",
+  "soul_turn_ids": "turn-1,turn-2,turn-3,turn-5,turn-6,turn-7,turn-8,turn-9,turn-10,turn-11",
+  "dna_turn_ids": "seq-4,seq-13,seq-29,seq-42,seq-45,seq-47,seq-61,seq-88,seq-89,seq-91",
+  "blueprint_locations": "dna-run114.json:seq-4; dna-run114.json:seq-13; dna-run114.json:seq-29; dna-run114.json:seq-42; dna-run114.json:seq-45; dna-run114.json:seq-47; dna-run114.json:seq-61; dna-run114.json:seq-88; dna-run114.json:seq-89; dna-run114.json:seq-91; dna-run114.json:seq-94; dna-run114.json:seq-101; dna-run114.json:seq-102; dna-run114.json:seq-103; dna-run114.json:seq-104; dna-run114.json:seq-107; dna-run114.json:seq-109; dna-run114.json:seq-118; dna-run114.json:seq-121; dna-run114.json:seq-122; dna-run114.json:seq-123; dna-run114.json:seq-126; dna-run114.json:seq-137; dna-run114.json:seq-155; dna-run114.json:seq-173; dna-run114.json:seq-206; dna-run114.json:seq-231; dna-run114.json:seq-267; dna-run114.json:seq-269; dna-run114.json:seq-279",
+  "char_count": 9330102,
+  "merkle_hash": "490486544D8A5B80E15BF52CDC0E17965CA0E6C2152AC597F8BDEEF13A9D56A6",
+  "created_at": "2026-06-11T16:27:15.4865679+07:00"
+}

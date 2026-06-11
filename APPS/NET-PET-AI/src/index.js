@@ -1136,16 +1136,17 @@ try {
          } catch (_) {}
        }
 
-      const [rawProfile, rawLang, rawVocab, rawArc, rawMemory, rawPhonics, rawSessionHistory, rawSrsData] = await Promise.all([
-        env.NET_PET_KV.get("student_profile_" + studentId),
-        env.NET_PET_KV.get("lang:" + studentId),
-        env.NET_PET_KV.get("vocab_list_" + studentId),
-        env.NET_PET_KV.get("vocab_arc_" + studentId),
-        env.STUDENT_MEMORY ? env.STUDENT_MEMORY.get(`mem:${studentId}`) : Promise.resolve(null),
-        sessionMode === 'phonics' ? env.NET_PET_KV.get("phonics_progress_" + studentId) : Promise.resolve(null),
-        env.NET_PET_KV.get("session_history_" + studentId),
-        env.NET_PET_KV.get("srs_data_" + studentId)
-      ]);
+const [rawProfile, rawLang, rawVocab, rawArc, rawMemory, rawPhonics, rawSessionHistory, rawSrsData, rawTranscriptIndex] = await Promise.all([
+         env.NET_PET_KV.get("student_profile_" + studentId),
+         env.NET_PET_KV.get("lang:" + studentId),
+         env.NET_PET_KV.get("vocab_list_" + studentId),
+         env.NET_PET_KV.get("vocab_arc_" + studentId),
+         env.STUDENT_MEMORY ? env.STUDENT_MEMORY.get(`mem:${studentId}`) : Promise.resolve(null),
+         sessionMode === 'phonics' ? env.NET_PET_KV.get("phonics_progress_" + studentId) : Promise.resolve(null),
+         env.NET_PET_KV.get("session_history_" + studentId),
+         env.NET_PET_KV.get("srs_data_" + studentId),
+         env.STUDENT_MEMORY ? env.STUDENT_MEMORY.get(`transcript_index:${studentId}`) : Promise.resolve(null)
+       ]);
       // Decrypt at-rest encrypted fields (phonics_progress, session_history use AES-GCM v1: prefix)
       const phonicsRaw = env.ENCRYPTION_KEY && rawPhonics?.startsWith('v1:')
         ? await decryptField(rawPhonics.slice(3), env.ENCRYPTION_KEY).catch(() => null)
@@ -1182,6 +1183,25 @@ try {
           phonicsData = { ...pp, group_name: groupDef.name, next_drill, weak_phonemes };
         }
       } catch (_) {}
+
+    // Transcript index for context injection
+    let lastTranscriptNote = "";
+    try {
+      if (rawTranscriptIndex) {
+        const txRaw = env.ENCRYPTION_KEY && rawTranscriptIndex.startsWith('v1:')
+          ? await decryptField(rawTranscriptIndex.slice(3), env.ENCRYPTION_KEY).catch(() => null)
+          : rawTranscriptIndex;
+        if (txRaw) {
+          const txIdx = JSON.parse(txRaw);
+          if (Array.isArray(txIdx) && txIdx.length > 0) {
+            const last = txIdx[txIdx.length - 1];
+            const d = last.date ? new Date(last.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : "";
+            const txVocab = last.vocab?.length ? ` Words from that session: ${last.vocab.slice(0,3).join(", ")}.` : "";
+            lastTranscriptNote = `LAST SESSION TRANSCRIPT (${d}, ${last.mode || "free"} mode, ${last.turns || 0} turns): Obi opened with: "${(last.headline || "").slice(0, 80)}".${txVocab} Reference this to show the student you remember them.`;
+          }
+        }
+      }
+    } catch (_) {}
 
     let lastSessionNotes = "";
     let lastSessionVocab = [];
@@ -1288,8 +1308,9 @@ speak: {
           }
         }
       };
-      if (lastSessionNotes) settings.agent.think.prompt += "\n\n" + lastSessionNotes;
-      const vocabDueCtx = buildVocabContext(dueVocab);
+if (lastSessionNotes) settings.agent.think.prompt += "\n\n" + lastSessionNotes;
+       if (lastTranscriptNote) settings.agent.think.prompt += "\n\n" + lastTranscriptNote;
+       const vocabDueCtx = buildVocabContext(dueVocab);
       if (vocabDueCtx) settings.agent.think.prompt += "\n\n" + vocabDueCtx;
       const MAX_PROMPT = 24000;
       const PROMPT_WARN = 20000;

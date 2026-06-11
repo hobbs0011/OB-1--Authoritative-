@@ -55,6 +55,9 @@ function setMicStatus(text, active) {
   if (!micStatus) return;
   micStatus.textContent = text;
   micStatus.classList.toggle("active", !!active);
+  // Sync to orb status display
+  const os = document.getElementById('orbStatus');
+  if (os) { os.textContent = text; os.classList.toggle('active', !!active); }
 }
 
 // ── TTS — Deepgram Aura (natural voice) with browser fallback ──
@@ -329,6 +332,15 @@ function showChatTigerWin() {
       keepalive: true,
       body: JSON.stringify({ studentId: urlStudentId, turns: agentSessionTurns, durationMs: dur * 60000, vocab: agentSessionVocab, topic: sessionTopic, avg_turn_length: agentSessionTurns > 0 ? Math.round(totalTurnWords / agentSessionTurns) : 0, barge_in_count: bargeInCount })
     }).catch(() => {});
+    // Save full conversation transcript for student registry
+    if (chatMessages.length >= 2) {
+      fetch('/api/transcript', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        keepalive: true,
+        body: JSON.stringify({ studentId: urlStudentId, messages: chatMessages.slice(-20), mode: currentMode, turns: agentSessionTurns, durationMs: dur * 60000, vocab: agentSessionVocab })
+      }).catch(() => {});
+    }
   }
 }
 
@@ -901,6 +913,15 @@ function keepAliveHandler() {
   } else if (agentWs && agentWs.readyState === WebSocket.OPEN) {
     sendKeepAlive(); // immediate pulse on tab-return (iOS reconnect recovery)
     if (!agentKeepAlive) agentKeepAlive = setInterval(sendKeepAlive, 3500);
+  } else if (urlStudentId && (!agentWs || agentWs.readyState === WebSocket.CLOSED)) {
+    // EC-ios-reconnect: tab returned with dead WS — but ONLY reconnect if the mode landing is not showing
+    // (if landing is showing, user hasn't picked a mode yet; confirmLandingMode() will open the agent)
+    const landing = document.getElementById('modeLanding');
+    const landingVisible = landing && !landing.classList.contains('hidden');
+    if (!landingVisible) {
+      agentReconnectCount = 0;
+      openVoiceAgent();
+    }
   }
 }
 document.addEventListener("visibilitychange", keepAliveHandler);
@@ -1224,9 +1245,8 @@ function handleAgentMsg(event) {
         if (agentThinkBubble) { agentThinkBubble.remove(); agentThinkBubble = null; }
         if (agentInjectWatchdog) { clearTimeout(agentInjectWatchdog); agentInjectWatchdog = null; }
         const lastBubble = bubble("obi", msg.content);
-        // Cap chatMessages at 40 to prevent memory creep
         chatMessages.push({ role: "assistant", content: msg.content });
-        if (chatMessages.length > 40) chatMessages = chatMessages.slice(-40);
+        if (chatMessages.length > 20) chatMessages = chatMessages.slice(-20);
         if (profile.studentId) {
           api("/api/memory", "POST", { studentId: profile.studentId, exchange: { obi: msg.content } }, memHeaders()).catch(() => {});
         }
@@ -1511,6 +1531,7 @@ async function playAgentChunk() {
   agentCurrentBlobUrl = blobUrl;
   const a = new Audio(blobUrl);
   agentCurrentAudio = a;
+  hookOrbAudio(a);  // wire into AnalyserNode for orb visualizer
   // v3: Watchdog — if onended never fires (corrupted MP3 frame/browser bug), force cleanup + continue
   const estimatedMs = Math.max(2500, (totalBytes / 16000) * 1000) + 2000;
   const watchdog = setTimeout(() => {
@@ -1751,7 +1772,9 @@ micBtn.addEventListener("click", () => {
 function triggerMicOnGesture() {
   if (userHasInteracted) return;
   userHasInteracted = true;
-  try { const s = new Audio('data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAECcAACBOAAACABAAZGF0YQAAAAA='); s.volume=0; s.play().catch(()=>{}); } catch(_) {}
+  // Init orb audio context on first gesture (required by iOS AudioContext policy)
+  initOrbAudio();
+  try { const s = new Audio('data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAECcAACBOAAACABAAZGF0YQAAAAA='); s.volume=0.001; s.play().catch(()=>{}); } catch(_) {}
   if (agentWs && agentReady && !agentMicStream) {
     // Agent already ready — connect directly
     startAgentListening().catch(() => {});
@@ -1924,9 +1947,14 @@ function initTasterBanner(name) {
 function updateModeChip() {
   const chip = document.getElementById('modeChip');
   if (!chip) return;
-  chip.textContent = (MODE_LABELS[currentMode] || MODE_LABELS.free) + ' ▾';
-  chip.style.color = MODE_COLORS[currentMode] || MODE_COLORS.free;
-  chip.style.borderColor = (MODE_COLORS[currentMode] || MODE_COLORS.free).replace('var(--purple)', 'rgba(168,85,247,0.4)');
+  const label = (MODE_LABELS[currentMode] || MODE_LABELS.free) + ' ▾';
+  const color = MODE_COLORS[currentMode] || MODE_COLORS.free;
+  chip.textContent = label;
+  chip.style.color = color;
+  chip.style.borderColor = color.replace('var(--purple)', 'rgba(168,85,247,0.4)');
+  // Sync to orb mode chip
+  const oc = document.getElementById('orbModeChip');
+  if (oc) { oc.textContent = label; oc.style.color = color; oc.style.borderColor = chip.style.borderColor; }
 }
 
 function selectLandingMode(mode) {
@@ -2080,4 +2108,120 @@ window.refreshPhonicsCard = async function() {
 
 boot();
 
+// ─────────────────────────────────────────────────────────────────
+// ORB AUDIO VISUALIZER — drives orb scale/state from Obi's voice
+// ─────────────────────────────────────────────────────────────────
+let _orbAudioCtx  = null;
+let _orbAnalyser  = null;
+let _orbAnimId    = null;
+let _orbSpeakLast = 0;   // last time amplitude was above threshold
 
+function initOrbAudio() {
+  if (_orbAudioCtx) {
+    if (_orbAudioCtx.state === 'suspended') _orbAudioCtx.resume().catch(() => {});
+    return;
+  }
+  try {
+    _orbAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    _orbAnalyser = _orbAudioCtx.createAnalyser();
+    _orbAnalyser.fftSize = 256;
+    _orbAnalyser.smoothingTimeConstant = 0.72;
+    _orbAnalyser.connect(_orbAudioCtx.destination);
+    _startOrbAnim();
+  } catch (e) { console.warn('[ORB] AudioContext unavailable:', e); }
+}
+
+// Called in playAgentChunk() for each new Audio element playing Obi's voice
+function hookOrbAudio(audioEl) {
+  if (!_orbAudioCtx || !_orbAnalyser) return;
+  if (_orbAudioCtx.state === 'suspended') _orbAudioCtx.resume().catch(() => {});
+  try {
+    const src = _orbAudioCtx.createMediaElementSource(audioEl);
+    src.connect(_orbAnalyser);
+  } catch (_) {}  // element already connected or context closed
+}
+
+function _startOrbAnim() {
+  if (_orbAnimId) return;
+  const buf = new Uint8Array(_orbAnalyser ? _orbAnalyser.frequencyBinCount : 128);
+  const orbEl = document.getElementById('orb');
+  const stageEl = document.getElementById('orbStage');
+
+  function frame() {
+    _orbAnimId = requestAnimationFrame(frame);
+    if (!orbEl || !_orbAnalyser) return;
+
+    _orbAnalyser.getByteTimeDomainData(buf);
+    let sum = 0;
+    for (let i = 0; i < buf.length; i++) { const v = (buf[i] / 128) - 1; sum += v * v; }
+    const rms = Math.sqrt(sum / buf.length);
+    const isSpeaking = rms > 0.012;
+
+    if (isSpeaking) {
+      _orbSpeakLast = Date.now();
+      const scale = 1 + Math.min(rms * 2.8, 0.48);
+      const bright = 1 + Math.min(rms * 1.5, 0.35);
+      orbEl.style.transform = `scale(${scale.toFixed(3)})`;
+      orbEl.style.filter    = `brightness(${bright.toFixed(3)})`;
+      if (!orbEl.classList.contains('state-speaking')) {
+        orbEl.classList.remove('state-listening', 'state-thinking');
+        orbEl.classList.add('state-speaking');
+        _spawnOrbRipple(stageEl);
+      }
+    } else {
+      const sinceSilent = Date.now() - _orbSpeakLast;
+      if (orbEl.classList.contains('state-speaking') && sinceSilent > 180) {
+        orbEl.classList.remove('state-speaking');
+        orbEl.style.transform = '';
+        orbEl.style.filter    = '';
+        // Return to listening state if mic is active
+        const mb = document.getElementById('mic');
+        if (mb && mb.classList.contains('mic-active')) {
+          orbEl.classList.add('state-listening');
+        }
+      }
+    }
+  }
+  frame();
+}
+
+let _rippleCooldown = 0;
+function _spawnOrbRipple(stageEl) {
+  if (!stageEl) return;
+  const now = Date.now();
+  if (now - _rippleCooldown < 900) return;  // max 1 ripple per 900ms
+  _rippleCooldown = now;
+  const r = document.createElement('div');
+  r.className = 'orb-ripple';
+  const mc = getComputedStyle(document.body).getPropertyValue('--mode-color').trim() || '#a855f7';
+  r.style.borderColor = mc;
+  stageEl.appendChild(r);
+  setTimeout(() => r.remove(), 1700);
+}
+
+// Sync #dot → #orbDot via MutationObserver (no changes to dot logic in chat.js)
+(function syncOrbDot() {
+  const src = document.getElementById('dot');
+  const dst = document.getElementById('orbDot');
+  if (!src || !dst) return;
+  const obs = new MutationObserver(() => { dst.className = 'orb-dot' + (src.classList.contains('ok') ? ' ok' : ''); });
+  obs.observe(src, { attributes: true, attributeFilter: ['class'] });
+  dst.className = 'orb-dot' + (src.classList.contains('ok') ? ' ok' : '');
+})();
+
+// Sync mic-active → orb state-listening via MutationObserver
+(function syncOrbMicState() {
+  const mb = document.getElementById('mic');
+  const orbEl = document.getElementById('orb');
+  if (!mb || !orbEl) return;
+  const obs = new MutationObserver(() => {
+    const active = mb.classList.contains('mic-active');
+    if (active && !orbEl.classList.contains('state-speaking')) {
+      orbEl.classList.remove('state-thinking');
+      orbEl.classList.add('state-listening');
+    } else if (!active) {
+      orbEl.classList.remove('state-listening');
+    }
+  });
+  obs.observe(mb, { attributes: true, attributeFilter: ['class'] });
+})();

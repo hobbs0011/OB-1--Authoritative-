@@ -2,41 +2,738 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NET by OBI — Your English Transformation</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0a0a12">
+<title>NET by OBI — Lesson 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Orbitron:wght@400;500;600;700;800&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,sans-serif}
-body{background:#030f1a;color:#fff;overflow-x:hidden}
-.slide{height:100vh;width:100vw;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:40px 20px;position:relative}
-.slide:nth-child(even){background:#0a1724}
-h1{font-size:2rem;margin-bottom:30px;line-height:1.3}
-h2{font-size:1.5rem;margin:20px 0 15px}
-p{font-size:1.1rem;max-width:500px;line-height:1.5;color:#ccc}
-.btn{display:inline-block;margin-top:30px;padding:15px 30px;background:#a48537;color:#000;font-weight:bold;border-radius:8px;text-decoration:none;font-size:1.2rem}
-.timeline{flex-direction:column;align-items:flex-start;text-align:left;max-width:400px}
-.timeline div{margin:10px 0;padding-left:20px;border-left:2px solid #a48537}
-.timeline h3{margin:0;color:#f5c60d}
-.icon-row{display:flex;gap:40px;margin:20px 0}
-.icon-row div{text-align:center}
+:root {
+  --void: #0a0a12;
+  --card: rgba(22,22,35,0.85);
+  --purple: #a855f7;
+  --purple-glow: rgba(168,85,247,0.25);
+  --gold: #f59e0b;
+  --gold-glow: rgba(245,158,11,0.25);
+  --teal: #14b8a6;
+  --teal-glow: rgba(20,184,166,0.25);
+  --text: #f8fafc;
+  --dim: #94a3b8;
+  --border: rgba(255,255,255,0.08);
+}
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+  background: var(--void);
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  height: 100%;
+}
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--void);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── BACK BAR ─────────────────────────────────────────────────── */
+#backBar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 9999;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  background: rgba(10,10,18,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+#backBar a {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--dim);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+#backBar a:hover { color: var(--text); }
+#backBar a.cta-nav {
+  color: var(--purple);
+  background: rgba(168,85,247,0.1);
+  border: 1px solid rgba(168,85,247,0.3);
+  padding: 5px 14px;
+  border-radius: 20px;
+}
+#slideCounter {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.7rem;
+  color: var(--dim);
+  letter-spacing: 0.1em;
+}
+
+/* ── SLIDE BASE ────────────────────────────────────────────────── */
+.slide {
+  scroll-snap-align: start;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 64px 28px 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── GLOW BACKGROUNDS ──────────────────────────────────────────── */
+.slide::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+.slide-hero::before    { background: radial-gradient(ellipse at 60% 30%, rgba(168,85,247,0.2) 0%, transparent 60%), radial-gradient(ellipse at 20% 80%, rgba(245,158,11,0.12) 0%, transparent 55%); }
+.slide-problem::before { background: radial-gradient(ellipse at 30% 50%, rgba(20,184,166,0.15) 0%, transparent 60%); }
+.slide-method::before  { background: radial-gradient(ellipse at 70% 40%, rgba(245,158,11,0.18) 0%, transparent 55%); }
+.slide-how::before     { background: radial-gradient(ellipse at 50% 60%, rgba(168,85,247,0.18) 0%, transparent 60%); }
+.slide-vocab::before   { background: radial-gradient(ellipse at 40% 30%, rgba(20,184,166,0.15) 0%, transparent 55%); }
+.slide-track::before   { background: radial-gradient(ellipse at 60% 50%, rgba(168,85,247,0.2) 0%, transparent 60%); }
+.slide-timeline::before{ background: radial-gradient(ellipse at 30% 60%, rgba(245,158,11,0.15) 0%, transparent 55%); }
+.slide-who::before     { background: radial-gradient(ellipse at 70% 40%, rgba(20,184,166,0.15) 0%, transparent 55%); }
+.slide-cta::before     { background: radial-gradient(ellipse at 50% 50%, rgba(168,85,247,0.25) 0%, transparent 55%), radial-gradient(ellipse at 80% 80%, rgba(245,158,11,0.1) 0%, transparent 50%); }
+
+.slide > * { position: relative; z-index: 1; }
+
+/* ── TYPOGRAPHY ────────────────────────────────────────────────── */
+.label {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-bottom: 12px;
+}
+.headline {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(1.6rem, 5vw, 2.6rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: 0.03em;
+  margin-bottom: 16px;
+}
+.headline.purple { background: linear-gradient(135deg, var(--purple), #d8b4fe); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.headline.gold   { background: linear-gradient(135deg, var(--gold), #fde68a); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.headline.teal   { background: linear-gradient(135deg, var(--teal), #5eead4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.headline.mixed  { background: linear-gradient(135deg, var(--purple), var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.body-text {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: var(--dim);
+  max-width: 460px;
+}
+.vi-note {
+  font-size: 0.88rem;
+  color: var(--gold);
+  margin-top: 10px;
+  opacity: 0.85;
+}
+
+/* ── ART ───────────────────────────────────────────────────────── */
+.art {
+  width: 160px;
+  height: 160px;
+  object-fit: contain;
+  margin-bottom: 24px;
+  filter: drop-shadow(0 0 24px var(--purple-glow));
+}
+.art.tiger  { filter: drop-shadow(0 0 28px rgba(245,158,11,0.35)); width: 180px; height: 180px; }
+.art.phoenix{ filter: drop-shadow(0 0 28px rgba(168,85,247,0.4)); }
+.art.mouse  { filter: drop-shadow(0 0 20px rgba(20,184,166,0.3)); width: 120px; height: 120px; }
+
+/* ── GLASS CARD ────────────────────────────────────────────────── */
+.glass {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 24px 28px;
+  width: 100%;
+  max-width: 480px;
+  margin-top: 16px;
+  text-align: left;
+}
+.glass.purple-border { border-color: rgba(168,85,247,0.3); box-shadow: 0 0 30px rgba(168,85,247,0.06); }
+.glass.gold-border   { border-color: rgba(245,158,11,0.3); box-shadow: 0 0 30px rgba(245,158,11,0.06); }
+.glass.teal-border   { border-color: rgba(20,184,166,0.3); box-shadow: 0 0 30px rgba(20,184,166,0.06); }
+
+/* ── METHOD NUMBERS ────────────────────────────────────────────── */
+.method-row {
+  display: flex;
+  gap: 20px;
+  margin-top: 24px;
+  width: 100%;
+  max-width: 480px;
+  justify-content: center;
+}
+.method-block {
+  flex: 1;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 20px 12px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.method-block.purple-b { border-color: rgba(168,85,247,0.35); }
+.method-block.gold-b   { border-color: rgba(245,158,11,0.35); }
+.method-num {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--gold);
+}
+.method-unit {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+.method-desc {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.9rem;
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* ── HOW IT WORKS ──────────────────────────────────────────────── */
+.flow-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 24px 0;
+  width: 100%;
+  max-width: 420px;
+  justify-content: center;
+}
+.flow-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.flow-icon {
+  width: 52px; height: 52px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  border: 1px solid var(--border);
+}
+.flow-icon.purple { background: rgba(168,85,247,0.15); border-color: rgba(168,85,247,0.35); }
+.flow-icon.gold   { background: rgba(245,158,11,0.15); border-color: rgba(245,158,11,0.35); }
+.flow-icon.teal   { background: rgba(20,184,166,0.15); border-color: rgba(20,184,166,0.35); }
+.flow-label {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--dim);
+  text-transform: uppercase;
+}
+.flow-arrow { font-size: 1rem; color: var(--dim); opacity: 0.5; }
+
+/* ── VOCAB LIST ────────────────────────────────────────────────── */
+.vocab-section { margin-bottom: 14px; }
+.vocab-section-label {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.vocab-section-label.purple { color: var(--purple); }
+.vocab-section-label.gold   { color: var(--gold); }
+.vocab-section-label.teal   { color: var(--teal); }
+.vocab-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+.chip {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 20px;
+  letter-spacing: 0.03em;
+}
+.chip.purple { background: rgba(168,85,247,0.12); border: 1px solid rgba(168,85,247,0.3); color: #d8b4fe; }
+.chip.gold   { background: rgba(245,158,11,0.12); border: 1px solid rgba(245,158,11,0.3); color: #fde68a; }
+.chip.teal   { background: rgba(20,184,166,0.12); border: 1px solid rgba(20,184,166,0.3); color: #5eead4; }
+.idiom-row {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.88rem;
+  color: var(--dim);
+  line-height: 1.7;
+}
+.idiom-row strong { color: var(--text); }
+
+/* ── TIMELINE ──────────────────────────────────────────────────── */
+.timeline {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: 20px;
+  text-align: left;
+}
+.tl-item {
+  display: flex;
+  gap: 16px;
+  padding: 16px 0;
+  border-left: 2px solid var(--border);
+  padding-left: 20px;
+  position: relative;
+}
+.tl-item::before {
+  content: '';
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--gold);
+  position: absolute;
+  left: -6px; top: 20px;
+}
+.tl-item:nth-child(1)::before { background: var(--teal); box-shadow: 0 0 10px var(--teal-glow); }
+.tl-item:nth-child(2)::before { background: var(--purple); box-shadow: 0 0 10px var(--purple-glow); }
+.tl-item:nth-child(3)::before { background: var(--gold); box-shadow: 0 0 10px var(--gold-glow); }
+.tl-month {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  margin-bottom: 3px;
+}
+.tl-item:nth-child(1) .tl-month { color: var(--teal); }
+.tl-item:nth-child(2) .tl-month { color: var(--purple); }
+.tl-item:nth-child(3) .tl-month { color: var(--gold); }
+.tl-desc {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.4;
+}
+
+/* ── WHO LIST ──────────────────────────────────────────────────── */
+.who-list {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+  text-align: left;
+}
+.who-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 16px;
+}
+.who-check {
+  color: var(--teal);
+  font-size: 1rem;
+  margin-top: 1px;
+  flex-shrink: 0;
+}
+.who-text {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.4;
+}
+
+/* ── CTA BUTTON ────────────────────────────────────────────────── */
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 28px;
+  padding: 16px 32px;
+  background: linear-gradient(135deg, var(--purple), #9333ea);
+  color: #fff;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  border-radius: 12px;
+  text-decoration: none;
+  box-shadow: 0 4px 24px rgba(168,85,247,0.4);
+  transition: box-shadow 0.3s, transform 0.2s;
+}
+.cta-btn:hover { box-shadow: 0 6px 36px rgba(168,85,247,0.6); transform: translateY(-2px); }
+.back-link {
+  display: block;
+  margin-top: 16px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--dim);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  transition: color 0.2s;
+}
+.back-link:hover { color: var(--text); }
+
+/* ── PROGRESS BADGE ────────────────────────────────────────────── */
+.progress-badge {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.pb-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 16px;
+  min-width: 90px;
+}
+.pb-icon { font-size: 1.4rem; }
+.pb-label {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  color: var(--dim);
+  text-transform: uppercase;
+}
+
+/* ── SCROLL INDICATOR ──────────────────────────────────────────── */
+.scroll-hint {
+  position: absolute;
+  bottom: max(28px, env(safe-area-inset-bottom, 20px));
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  animation: bounce 2s infinite;
+  opacity: 0.4;
+  pointer-events: none;
+}
+.scroll-hint span {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+@keyframes bounce {
+  0%,100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(6px); }
+}
+
+/* ── TIGER BADGE ────────────────────────────────────────────────── */
+.tier-row {
+  display: flex;
+  gap: 14px;
+  margin-top: 20px;
+  justify-content: center;
+}
+.tier-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  min-width: 80px;
+}
+.tier-badge img { width: 40px; height: 40px; object-fit: contain; }
+.tier-name {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  color: var(--dim);
+}
 </style>
 </head>
 <body>
-<div class="slide" style="background:linear-gradient(135deg,#030f1a,#1a0a2e)">
-<h1>Your English is already inside you.<br>OBI just unlocks it.</h1>
-<img src="/teddy-superhero.jpg" style="width:120px;margin-top:20px;border-radius:50%">
+
+<!-- FIXED TOP BAR -->
+<div id="backBar">
+  <a href="/mai-tram-portal.html">← Portal</a>
+  <span id="slideCounter">1 / 9</span>
+  <a href="/magic-chat?studentId=mai-tram-bluetech" class="cta-nav">🗣️ Talk to OBI</a>
 </div>
-<div class="slide"><h2>The Problem</h2><p>Most English courses teach grammar. You already know grammar. You freeze because you've never had a safe place to speak every day.</p></div>
-<div class="slide" style="background:linear-gradient(135deg,#0a1724,#051220)"><h2>The Method: 45/10</h2><p>45 minutes watching native content in English.<br>10 minutes speaking with OBI.<br>Every day. That's it.</p><p style="margin-top:10px;font-size:.9rem;color:#aaa">Not homework. Not a class. A daily rep — like the gym for your voice.</p></div>
-<div class="slide"><h2>How OBI Works</h2><div class="icon-row"><div>🎤<br>Mic</div><div>🧠<br>Brain</div><div>💬<br>Reply</div></div><p>You speak. OBI listens. OBI corrects gently, in context, in the moment.</p><p style="font-size:.85rem;margin-top:15px;color:#aaa">Powered by the same AI as ChatGPT. Built for Vietnamese professionals.</p></div>
-<div class="slide" style="background:linear-gradient(135deg,#0a1724,#051220)"><h2>Lesson 1 Vocabulary — Your Arsenal</h2><p style="text-align:left;font-size:.95rem;line-height:1.8"><strong>10 Core Words:</strong><br>persist • articulate • delegate • prioritize • benchmark • streamline • resilient • proactive • collaborate • outcome<br><br><strong>3 Idioms:</strong><br>• "Hit the ground running" — start working immediately<br>• "Get the ball rolling" — start a process<br>• "Touch base" — have a quick chat/update<br><br><strong>3 Slang:</strong><br>• "crush it" — do extremely well<br>• "on the same page" — agree/understand each other<br>• "low-hanging fruit" — easy targets to start with</p></div>
-<div class="slide" style="background:linear-gradient(135deg,#0a1724,#051220)"><h2>Your Progress is Tracked</h2><p>Every word you use gets saved.<br>OBI remembers what you forget.<br>Vocabulary grows session by session.</p></div>
-<div class="slide"><h2>3-Month Transformation</h2><div class="timeline">
-<div><h3>Month 1</h3><p>Speak without freezing</p></div>
-<div><h3>Month 2</h3><p>Say what you mean in meetings</p></div>
-<div><h3>Month 3</h3><p>Lead conversations — don't just follow</p></div>
-</div></div>
-<div class="slide" style="background:linear-gradient(135deg,#0a1724,#051220)"><h2>Your Daily Ritual</h2><p>Morning or evening.<br>45 min YouTube video →<br>10 min OBI chat.</p><p style="margin-top:10px;font-size:.9rem;color:#aaa">A daily rep — like the gym for your voice.</p></div>
-<div class="slide"><h2>The Tiger Win</h2><p>After every session, OBI shows your Tiger Score<br>How many turns you took.<br>How many words you saved.</p><p style="margin-top:15px;color:#f5c60d;font-weight:bold">You compete against yesterday's you.</p><p style="margin-top:20px;font-size:.85rem;color:#aaa">Try: "I will persist and hit the ground running on my next project." Say it with OBI.</p></div>
-<div class="slide" style="background:linear-gradient(135deg,#0a1724,#051220)"><h2>Who This Is For</h2><p>BlueTech professionals who:<br>• Work with international partners<br>• Write in English<br>• Present to global teams</p><p style="margin-top:15px;color:#aaa">A1 to B2 level. The method works regardless.</p><p style="margin-top:10px;font-size:.85rem;color:#f5c60d">Bạn cần hỗ trợ tiếng Việt? OBI hiểu bạn. Confidence > Grammar.</p></div>
-<div class="slide"><h2>How to Start</h2><p>Your portal is already live.<br>Tap the link your coach sent.<br>Choose a mode. Speak.</p><a href="https://net-pet-ai.mrmichaelhobbs123.workers.dev" class="btn">Visit Portal</a><p style="margin-top:20px;font-size:.85rem;color:#aaa">No app to download. Works on any phone.</p></div>
-</body></html>
+
+<!-- ── SLIDE 1: HERO ─────────────────────────────────────────── -->
+<section class="slide slide-hero" id="s1">
+  <div class="label">NATURAL ENGLISH TRAINING — LESSON 1</div>
+  <img src="/isolated/phoenix-neon-clean.png" alt="NET Phoenix" class="art phoenix"
+       onerror="this.src='/isolated/phoenix-crest-clean.png'">
+  <h1 class="headline mixed">Your English is already<br>inside you.</h1>
+  <p class="body-text">OBI doesn't teach you grammar. OBI unlocks the voice that's been waiting to come out.</p>
+  <p class="vi-note">Tiếng Anh của bạn đã ở đó rồi — OBI chỉ mở khóa nó.</p>
+  <div class="scroll-hint">
+    <span>scroll</span>
+    <svg width="16" height="10" viewBox="0 0 16 10"><path d="M1 1l7 7 7-7" stroke="#94a3b8" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+  </div>
+</section>
+
+<!-- ── SLIDE 2: THE PROBLEM ──────────────────────────────────── -->
+<section class="slide slide-problem" id="s2">
+  <img src="/isolated/mouse-clean.png" alt="Mouse" class="art mouse"
+       onerror="this.style.display='none'">
+  <div class="label">The Problem</div>
+  <h2 class="headline teal">You know more<br>than you speak.</h2>
+  <p class="body-text">You understand English. You've studied. But when it's time to speak — you freeze. That's not a knowledge problem. That's a practice problem.</p>
+  <div class="glass teal-border" style="margin-top:20px;">
+    <p style="font-family:'Rajdhani',sans-serif;font-size:0.95rem;color:var(--dim);line-height:1.6;">
+      Most English courses teach grammar.<br>
+      You already <em style="color:var(--text);">know</em> grammar.<br>
+      What you've never had: a safe place to speak every day.
+    </p>
+  </div>
+</section>
+
+<!-- ── SLIDE 3: THE METHOD ───────────────────────────────────── -->
+<section class="slide slide-method" id="s3">
+  <div class="label">The Method</div>
+  <h2 class="headline gold">45 / 10.<br>Every day.</h2>
+  <div class="method-row">
+    <div class="method-block gold-b">
+      <div class="method-num">45</div>
+      <div class="method-unit">min</div>
+      <div class="method-desc">Listen</div>
+      <p style="font-family:'Rajdhani',sans-serif;font-size:0.8rem;color:var(--dim);margin-top:4px;">YouTube · Podcast · Netflix</p>
+    </div>
+    <div class="method-block purple-b">
+      <div class="method-num">10</div>
+      <div class="method-unit">min</div>
+      <div class="method-desc">Talk to OBI</div>
+      <p style="font-family:'Rajdhani',sans-serif;font-size:0.8rem;color:var(--dim);margin-top:4px;">Tell OBI what you watched</p>
+    </div>
+  </div>
+  <p class="body-text" style="margin-top:20px;">Not homework. Not a class. A daily rep — like the gym for your voice.</p>
+  <p class="vi-note">Tập mỗi ngày — như tập gym cho giọng nói của bạn.</p>
+</section>
+
+<!-- ── SLIDE 4: HOW OBI WORKS ────────────────────────────────── -->
+<section class="slide slide-how" id="s4">
+  <img src="/isolated/phoenix-crest-clean.png" alt="OBI" class="art"
+       onerror="this.style.display='none'">
+  <div class="label">How OBI Works</div>
+  <h2 class="headline purple">You speak.<br>OBI listens. Responds.</h2>
+  <div class="flow-row">
+    <div class="flow-node">
+      <div class="flow-icon purple">🎤</div>
+      <div class="flow-label">You</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">
+      <div class="flow-icon gold">🧠</div>
+      <div class="flow-label">OBI</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node">
+      <div class="flow-icon teal">💬</div>
+      <div class="flow-label">You grow</div>
+    </div>
+  </div>
+  <div class="glass purple-border">
+    <p style="font-family:'Rajdhani',sans-serif;font-size:0.92rem;color:var(--dim);line-height:1.65;">
+      OBI gently corrects in context — not like a teacher, like a <strong style="color:var(--text);">training partner</strong>.<br><br>
+      Powered by the same AI as ChatGPT. Built for Vietnamese professionals at BlueTech.
+    </p>
+  </div>
+</section>
+
+<!-- ── SLIDE 5: LESSON 1 VOCAB ───────────────────────────────── -->
+<section class="slide slide-vocab" id="s5">
+  <div class="label">Lesson 1 — Your Arsenal</div>
+  <h2 class="headline teal">10 words.<br>3 idioms. 3 slang.</h2>
+  <div class="glass teal-border" style="max-width:480px;width:100%;">
+    <div class="vocab-section">
+      <div class="vocab-section-label purple">Core Words</div>
+      <div class="vocab-chips">
+        <span class="chip purple">persist</span>
+        <span class="chip purple">articulate</span>
+        <span class="chip purple">delegate</span>
+        <span class="chip purple">prioritize</span>
+        <span class="chip purple">benchmark</span>
+        <span class="chip purple">streamline</span>
+        <span class="chip purple">resilient</span>
+        <span class="chip purple">proactive</span>
+        <span class="chip purple">collaborate</span>
+        <span class="chip purple">outcome</span>
+      </div>
+    </div>
+    <div class="vocab-section" style="margin-top:14px;">
+      <div class="vocab-section-label gold">Idioms</div>
+      <div class="idiom-row">
+        <strong>"Hit the ground running"</strong> — start immediately<br>
+        <strong>"Get the ball rolling"</strong> — start a process<br>
+        <strong>"Touch base"</strong> — quick check-in
+      </div>
+    </div>
+    <div class="vocab-section" style="margin-top:14px;">
+      <div class="vocab-section-label teal">Slang</div>
+      <div class="vocab-chips">
+        <span class="chip teal">crush it</span>
+        <span class="chip teal">on the same page</span>
+        <span class="chip teal">low-hanging fruit</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SLIDE 6: PROGRESS TRACKED ────────────────────────────── -->
+<section class="slide slide-track" id="s6">
+  <img src="/isolated/tiger-cub-clean.png" alt="Tiger Cub" class="art tiger"
+       onerror="this.src='/icons/badge-tiger.svg'">
+  <div class="label">Your Progress</div>
+  <h2 class="headline purple">Every word saved.<br>Every session counted.</h2>
+  <div class="progress-badge">
+    <div class="pb-item">
+      <div class="pb-icon">🗣️</div>
+      <div class="pb-label">Sessions</div>
+    </div>
+    <div class="pb-item">
+      <div class="pb-icon">📚</div>
+      <div class="pb-label">Vocab</div>
+    </div>
+    <div class="pb-item">
+      <div class="pb-icon">🔥</div>
+      <div class="pb-label">Streak</div>
+    </div>
+    <div class="pb-item">
+      <div class="pb-icon">🐯</div>
+      <div class="pb-label">Tiger Score</div>
+    </div>
+  </div>
+  <p class="body-text" style="margin-top:20px;">OBI remembers what you forget. Vocabulary grows session by session. You compete against yesterday's you.</p>
+</section>
+
+<!-- ── SLIDE 7: TRANSFORMATION ───────────────────────────────── -->
+<section class="slide slide-timeline" id="s7">
+  <div class="label">3-Month Transformation</div>
+  <h2 class="headline gold">Mouse → Tiger</h2>
+  <div class="tier-row">
+    <div class="tier-badge">
+      <img src="/icons/badge-mouse.svg" alt="Mouse" onerror="this.style.display='none'">
+      <div class="tier-name">Now</div>
+    </div>
+    <div style="color:var(--dim);font-size:1.2rem;align-self:center;">→</div>
+    <div class="tier-badge" style="border-color:rgba(168,85,247,0.35);">
+      <img src="/icons/badge-cat.svg" alt="Cat" onerror="this.style.display='none'">
+      <div class="tier-name">Month 2</div>
+    </div>
+    <div style="color:var(--dim);font-size:1.2rem;align-self:center;">→</div>
+    <div class="tier-badge" style="border-color:rgba(245,158,11,0.45);">
+      <img src="/icons/badge-tiger.svg" alt="Tiger" onerror="this.style.display='none'">
+      <div class="tier-name">Month 3</div>
+    </div>
+  </div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div>
+        <div class="tl-month">Month 1</div>
+        <div class="tl-desc">Speak without freezing. Remove the silence.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div>
+        <div class="tl-month">Month 2</div>
+        <div class="tl-desc">Say exactly what you mean in meetings and emails.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div>
+        <div class="tl-month">Month 3</div>
+        <div class="tl-desc">Lead conversations. Don't just follow.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SLIDE 8: WHO IT'S FOR ─────────────────────────────────── -->
+<section class="slide slide-who" id="s8">
+  <div class="label">Built for BlueTech</div>
+  <h2 class="headline teal">You work with<br>the world.</h2>
+  <div class="who-list">
+    <div class="who-item">
+      <div class="who-check">✓</div>
+      <div class="who-text">You write emails in English — but second-guess every sentence</div>
+    </div>
+    <div class="who-item">
+      <div class="who-check">✓</div>
+      <div class="who-text">You present to international partners — but freeze on vocabulary</div>
+    </div>
+    <div class="who-item">
+      <div class="who-check">✓</div>
+      <div class="who-text">You understand 80% of meetings — but only speak 20%</div>
+    </div>
+    <div class="who-item">
+      <div class="who-check">✓</div>
+      <div class="who-text">You know your English can earn you more — you just need to unlock it</div>
+    </div>
+  </div>
+  <p class="vi-note" style="margin-top:16px;">Bạn cần hỗ trợ tiếng Việt? OBI hiểu. Confidence > Grammar.</p>
+</section>
+
+<!-- ── SLIDE 9: CTA ──────────────────────────────────────────── -->
+<section class="slide slide-cta" id="s9">
+  <img src="/isolated/tiger-roaring-clean.png" alt="Tiger" class="art tiger"
+       onerror="this.src='/icons/badge-tiger.svg'">
+  <div class="label">Day 1 Starts Now</div>
+  <h2 class="headline mixed">Wake Up<br>The Tiger</h2>
+  <p class="body-text">Your portal is live. Your coach is ready. One conversation today — that's all it takes to start.</p>
+  <a href="/magic-chat?studentId=mai-tram-bluetech" class="cta-btn">🗣️ Talk to OBI Now</a>
+  <a href="/mai-tram-portal.html" class="back-link">← Back to your portal</a>
+</section>
+
+<script>
+// Slide counter update on scroll
+const slides = document.querySelectorAll('.slide');
+const counter = document.getElementById('slideCounter');
+const total = slides.length;
+
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const idx = Array.from(slides).indexOf(e.target) + 1;
+      counter.textContent = idx + ' / ' + total;
+    }
+  });
+}, { threshold: 0.5 });
+
+slides.forEach(s => obs.observe(s));
+</script>
+</body>
+</html>
