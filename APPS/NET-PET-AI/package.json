@@ -19,6 +19,7 @@
     "test:watch": "node node_modules/vitest/vitest.mjs",
     "test:daddyshark": "node test/daddyshark.mjs",
     "test:daddyshark:quick": "node test/daddyshark.mjs --quick",
+    "test:grandpashark": "node test/grandpashark.mjs",
     "test:e2e": "node test/iphone-real-attack.mjs",
     "test:failmodes": "node test/failure-mode-attack.mjs",
     "test:gauntlet": "node test/mutation-gauntlet.mjs",

@@ -45,6 +45,7 @@ const LOCK_TESTS = [
   'erasure-completeness', 'preflight-mode-guard', 'audit-integrity', 'cors-origin-guard',
   'heartbeat-route', 'class-ingest-lock', 'safari-compat', 'injection-hardening',
   'ws-auth-lock', 'kv-encryption-roundtrip', 'quota-enforcement', 'audio-playback-attack',
+  'route-404-lock',   // Grandpa corpus: 47c1c054 — unmatched /api/* must 404, not mask as 500
 ];
 
 const TIERS = [
