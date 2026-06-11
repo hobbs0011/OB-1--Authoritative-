@@ -2133,12 +2133,12 @@ function initOrbAudio() {
 
 // Called in playAgentChunk() for each new Audio element playing Obi's voice
 function hookOrbAudio(audioEl) {
-  if (!_orbAudioCtx || !_orbAnalyser) return;
-  if (_orbAudioCtx.state === 'suspended') _orbAudioCtx.resume().catch(() => {});
-  try {
-    const src = _orbAudioCtx.createMediaElementSource(audioEl);
-    src.connect(_orbAnalyser);
-  } catch (_) {}  // element already connected or context closed
+  // INTENTIONAL NO-OP on the playback element.
+  // createMediaElementSource() silences HTMLMediaElement audio on iOS Safari
+  // (the student's browser) and makes Obi's audibility hostage to the orb's
+  // AudioContext state. The orb is driven from playback STATE instead — see
+  // _startOrbAnim(). Obi's `new Audio().play()` goes straight to the speaker.
+  void audioEl;
 }
 
 function _startOrbAnim() {
@@ -2149,13 +2149,18 @@ function _startOrbAnim() {
 
   function frame() {
     _orbAnimId = requestAnimationFrame(frame);
-    if (!orbEl || !_orbAnalyser) return;
+    if (!orbEl) return;
 
-    _orbAnalyser.getByteTimeDomainData(buf);
-    let sum = 0;
-    for (let i = 0; i < buf.length; i++) { const v = (buf[i] / 128) - 1; sum += v * v; }
-    const rms = Math.sqrt(sum / buf.length);
-    const isSpeaking = rms > 0.012;
+    // Amplitude is SYNTHESIZED from Obi's playback state, never tapped from a
+    // MediaElementSource (which silences audio on iOS Safari). The orb breathes
+    // when Obi speaks; Obi's audio path is untouched and bulletproof.
+    const obiSpeaking = !!(agentCurrentAudio && !agentCurrentAudio.paused && !agentCurrentAudio.ended);
+    let rms = 0;
+    if (obiSpeaking) {
+      const t = performance.now() / 1000;
+      rms = 0.20 + 0.14 * Math.abs(Math.sin(t * 9.0)) + 0.07 * Math.abs(Math.sin(t * 23.0 + 1.3));
+    }
+    const isSpeaking = obiSpeaking;
 
     if (isSpeaking) {
       _orbSpeakLast = Date.now();
