@@ -177,3 +177,44 @@ Pre-commit hook expanded: runs all 6 lock tests before every commit. Commit bloc
 **Trigger:** ARCHITECTURE CHANGED
 
 Test enforcement upgraded from 1 guard (voice-brain-lock) to 6 guards (adds api-contract, circuit-isolation, student-roster, cache-key-format, speak-listen). Pattern: every guard reads src/index.js, asserts invariants, exits 1 on violation. npm test in package.json runs all 6 sequentially. Pre-commit hook runs them all. F1-B: conditional guard added before ctx.waitUntil cache write — prevents N concurrent writes racing on same key. Run 105 pipeline blueprint written to `.kilo/command/run105-pipeline.md` (50-min autonomous Kilo task).
+
+---
+
+## [Run 114-115 — 2026-06-11/12] SOUL DIRECTIVE + BUG ROOT-CAUSED ×6 + ARCHITECTURE + TEST DISCIPLINE
+
+**Trigger:** SOUL DIRECTIVE SPOKEN, BUG ROOT-CAUSED, ARCHITECTURE CHANGED, MISTAKES MADE, CONFIG CHANGED, DEPLOY VERIFIED, LAW ADDED
+
+**SOUL DIRECTIVES (Michael, verbatim):**
+- "if our test suite cant handle this, then fucking attack the test suite"
+- "how did we fail to test the test suite? Sounds like some retard shit to me"
+- "I dont use apple they are shit" — Michael has NO Apple device. The STUDENT (Huong/Mai) is on iPhone+Safari, not Michael. He cannot self-test the iPhone path; only the student can confirm hardware (speaker). Test the Safari ENGINE via Playwright WebKit, never expect Michael to hold an iPhone. See [[demo-setup]].
+- "just get a working version for her to chat with" — ship-to-student urgency > perfection.
+
+**ARCHITECTURE DISCOVERY (critical, was invisible all session):** `wrangler.toml: main = "src/router.js"`, NOT index.js. The deployed worker is router.js (Hono); it gates /api/deepgram-token via checkQuota then `legacyWorker.fetch()` delegates everything else to index.js. I edited index.js all session and my fixes only worked because of that delegation — I never knew the real entry point. Lesson: read wrangler.toml `main` before assuming the entry file.
+
+**BUGS ROOT-CAUSED + FIXED this session (all real, all shipped to prod):**
+1. MODE-SELECT DEAD-END (the original "modes dont work"): `#modeLanding` was `position:fixed; justify-content:center` with NO `overflow` → on short iPhone viewport the "Start Session" button was stranded below the fold, unreachable. Fix cf9f32f7: `overflow-y:auto` + `-webkit-overflow-scrolling:touch` + `justify-content:flex-start` + `scrollIntoView` on mode-select. This was the actual cause of Mai/Huong dead-ends.
+2. ORB SILENCED OBI ON iOS (561b038a): hookOrbAudio routed Obi's playback `<audio>` through `createMediaElementSource` → silences audio on iOS Safari + made Obi audibility hostage to orb AudioContext. Fix: never tap the playback element; synthesize orb amplitude from `agentCurrentAudio` playback state.
+3. UNMATCHED /api/* → 500 (de6cf7f7): handleAPI fell off its end returning undefined → addCors(undefined) threw → generic 500 that MASKED real errors. Fix: explicit 404 fallback. Now 500 means "something actually threw."
+4. IN-APP BROWSER CRASH (b12303fc): `navigator.mediaDevices.getUserMedia` unguarded → Zalo/FB/IG in-app browsers (no mediaDevices) crash on the start gesture. Fix: guard + "open in Safari/Chrome" banner (id micUnavailableBanner).
+5. DEEPGRAM QUOTA STARVATION (c2e7bab9): quota.js `deepgram:10`/student/hour. Every WS reconnect mints a token; mobile Safari reconnects constantly → a real 1-hour class self-exhausts 10 and gets 429 mid-class. Raised to 60/hour. sov100 exempt. CONFIG CHANGED.
+6. TOKEN-FAILURE SILENT DEAD-END (9263b2a8): openVoiceAgent reset status to "Tap to start" on ANY token failure (429/500/no-token) — IDENTICAL to normal idle. Student taps forever, no clue. THE likely cause of "Obi didnt work, didnt specify." Fix: 429→"Obi is busy right now — wait a minute, then tap to try again"; other→"Connection problem — tap to try again".
+
+**MISTAKES MADE (the test suite lied — meta-lesson):** Every "green" this session was initially false. Root cause: tests cheated in ways a real thumb cannot.
+- Playwright `.click()` AUTO-SCROLLS off-screen elements into view → hid the mode-select dead-end. A human thumb cannot auto-scroll.
+- `agent-websocket-opened` guard checked the `websocket` event (fires on ATTEMPT, not open) → would report "Obi connected" even with Deepgram down. Tautology. Fixed to assert FRAMES received.
+- `deepgram-token-fetched` checked only that a request was MADE → green on a 500. Tautology. Fixed to assert response.ok.
+- failure-mode test's banner detection text-scanned divs → false-positive made every failure case wrongly PASS. Fixed to id-based detection.
+- My OWN self-proof was first written to match my own fix (answer-key grading) and its first version was wrong.
+
+**NEW PRINCIPLE / LAW (test discipline — enforce going forward):**
+- THUMB-FIDELITY: a test may only touch an element the way a finger can — in viewport NOW, on top, tapped at real coords with NO auto-scroll. Off-screen = FAIL. (`test/iphone-real-attack.mjs`, thumbTap()).
+- A TEST NEVER OBSERVED FAILING IS WORTHLESS. Every guard must be proven to go RED on its real failure mode before its green is trusted. (`test/mutation-gauntlet.mjs` — mutation #1 serves the REAL pre-fix git code cf9f32f7~1, not a synthetic injection; 5/5 guards PROVEN to discriminate broken-vs-fixed).
+- GROUND TRUTH OVER SYNTHETIC: the canonical regression mutation is the literal git commit that broke, not a recreation the author writes.
+- New harnesses: iphone-real-attack.mjs (thumb-fidelity happy path, self-proof), mutation-gauntlet.mjs (tests the tests), failure-mode-attack.mjs (429/500/mic-denied/in-app silent-dead-end detection). Realistic USABLE iPhone heights (375x553/360x560), NOT full logical viewport.
+
+**STILL OPEN (test correctly RED, documented):** mic-denied shows "Tap to speak" (UX gap, not full dead-end — Obi still greets); in-app simulation needs non-configurable-mediaDevices workaround in the harness. Both lower-priority than the token bug.
+
+**DEPLOY VERIFIED:** final prod = e9fd3271 (token-failure fix). Earlier: cf9f32f7/be337462 (dead-end), b12303fc (in-app), c2e7bab9 (quota), de6cf7f7 (404), 561b038a (orb). Backend healthy: Mai/Huong tokens 200, version 1.6.0 ALL_SYSTEMS_GO.
+
+**BACKUP PLAN:** Gemini copy-paste Obi blueprint delivered to Michael for Mai's nightly 10-min practice when Obi bugs out — tuned to A2/B1 + Vietnamese scaffolding + ends with a NET SESSION SUMMARY block re-ingestable into her app vocab. Friday-only update cadence agreed (Michael does hard changes Fridays, students use stable build all week).
