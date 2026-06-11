@@ -1977,7 +1977,12 @@ function selectLandingMode(mode) {
   });
   const color = MODE_COLORS[mode] || MODE_COLORS.free;
   const btn = document.getElementById('landingStartBtn');
-  if (btn) { btn.classList.add('ready'); btn.style.background = color; }
+  if (btn) {
+    btn.classList.add('ready'); btn.style.background = color;
+    // On short iPhone screens the Start button can sit below the fold. The moment
+    // a mode is picked, bring it into view so the student can't miss/strand on it.
+    try { btn.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (_) {}
+  }
   const h2 = document.querySelector('#modeLanding h2');
   if (h2) h2.style.color = color;
 }
