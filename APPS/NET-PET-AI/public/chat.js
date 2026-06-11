@@ -1001,10 +1001,19 @@ async function openVoiceAgent() {
     // Fetch short-lived JWT token + pre-built Settings from CF Worker
     setMicStatus("Connecting…", false);
     const tokenRes = await fetch(`/api/deepgram-token?studentId=${encodeURIComponent(urlStudentId)}&mode=${encodeURIComponent(currentMode)}`);
-    if (!tokenRes.ok) { console.error("[VOICE] token fetch failed:", tokenRes.status); setMicStatus("Tap to start", false); return; }
+    if (!tokenRes.ok) {
+      console.error("[VOICE] token fetch failed:", tokenRes.status);
+      // DO NOT reset to "Tap to start" — that looks identical to normal idle and
+      // produces a SILENT dead-end (student taps forever, no idea what's wrong).
+      // 429 = quota exhausted (wait); anything else = connection problem (retry).
+      setMicStatus(tokenRes.status === 429
+        ? "Obi is busy right now — wait a minute, then tap to try again"
+        : "Connection problem — tap to try again", false);
+      return;
+    }
     const { token, settings, phonicsHint, lastSessionVocab, lastSessionTopic, ws_url } = await tokenRes.json();
     if (phonicsHint) profile._phonicsHint = phonicsHint;
-    if (!token) { console.error("[VOICE] no token in response"); setMicStatus("Tap to start", false); return; }
+    if (!token) { console.error("[VOICE] no token in response"); setMicStatus("Connection problem — tap to try again", false); return; }
     if (agentWsId !== myId) return; // zombie check — another openVoiceAgent() fired during async fetch
 
     // Block H: Use prefetched token if available, else use fresh one
@@ -1788,6 +1797,7 @@ function triggerMicOnGesture() {
   // synchronously and crashes this gesture handler. Degrade gracefully instead.
   if (!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)) {
     const b = document.createElement("div");
+    b.id = "micUnavailableBanner";
     b.textContent = "Open this link in Safari or Chrome to talk to Obi";
     b.style.cssText = "position:fixed;top:0;left:0;right:0;background:#ff9800;color:#fff;padding:14px;text-align:center;z-index:99999;font-size:15px;cursor:pointer;";
     b.addEventListener("click", () => b.remove(), { once: true });
