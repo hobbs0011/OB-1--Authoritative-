@@ -73,10 +73,20 @@ async function runDevice(dev) {
   const page = await ctx.newPage();
   const pageErrors = [];
   page.on('pageerror', e => pageErrors.push(e.message));
-  const tokenCalls = [];
-  const wss = [];
-  page.on('request', r => { if (r.url().includes('/api/deepgram-token')) tokenCalls.push(r.url()); });
-  page.on('websocket', ws => wss.push(ws.url()));
+  // Token: track whether the RESPONSE SUCCEEDED, not merely that a request was made.
+  // (The gauntlet proved a "request was made" check is a tautology — green on a 500.)
+  let tokenOk = null;
+  page.on('response', r => { if (r.url().includes('/api/deepgram-token')) tokenOk = r.ok(); });
+  // WebSocket: the 'websocket' event fires on ATTEMPT, not on open — so counting it
+  // is a lie (the gauntlet proved it stays green even when the socket is aborted).
+  // A genuinely-open, working agent socket RECEIVES frames (SettingsApplied etc).
+  // We assert liveness by frames received, and watch for socket errors.
+  let wsFrames = 0, wsErr = null;
+  page.on('websocket', ws => {
+    if (!ws.url().includes('deepgram')) return;
+    ws.on('framereceived', () => { wsFrames++; });
+    ws.on('socketerror', e => { wsErr = String(e); });
+  });
 
   const resp = await page.goto(URL, { waitUntil: 'domcontentloaded', timeout: 20000 });
   log(dev.name, 'page-load-200', resp && resp.status() === 200, `status ${resp && resp.status()}`);
@@ -107,10 +117,10 @@ async function runDevice(dev) {
   log(dev.name, 'landing-dismissed-on-start', dismissed);
   log(dev.name, 'orb-screen-shown', orb);
 
-  // 4. Obi handshake: token fetched + Deepgram agent WS opened.
-  await page.waitForTimeout(3500);
-  log(dev.name, 'deepgram-token-fetched', tokenCalls.length > 0, `${tokenCalls.length} calls`);
-  log(dev.name, 'agent-websocket-opened', wss.some(u => u.includes('deepgram')), wss[0] || 'none');
+  // 4. Obi handshake: token RESPONSE ok + Deepgram agent WS genuinely LIVE (frames).
+  await page.waitForTimeout(4500);
+  log(dev.name, 'deepgram-token-ok', tokenOk === true, `response.ok=${tokenOk}`);
+  log(dev.name, 'agent-ws-live-frames', wsFrames > 0, `frames=${wsFrames} err=${wsErr || 'none'}`);
 
   // 5. Audio path must NOT tap the playback element (iOS silence trap).
   const taps = await page.evaluate(() =>
