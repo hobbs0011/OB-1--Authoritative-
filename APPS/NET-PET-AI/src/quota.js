@@ -5,7 +5,11 @@ export async function checkQuota(env, studentId, type) {
   // EC-quotanull: guard missing RATELIMIT binding (dev environment)
   if (!env.RATELIMIT) return { allowed: true };
 
-  const limits = { deepgram: 10, chat: 30 };
+  // deepgram = token mints/student/hour. Each WS (re)connect mints one token, and
+  // mobile Safari reconnects often (backgrounding, visibilitychange, wifi blips) —
+  // a real 1-hour class can legitimately need far more than 10. 60 gives a class
+  // comfortable headroom while still capping a runaway reconnect loop. sov100 exempt.
+  const limits = { deepgram: 60, chat: 30 };
   const limit = limits[type];
   if (limit === undefined) throw new Error(`Unsupported quota type: ${type}`);
 
