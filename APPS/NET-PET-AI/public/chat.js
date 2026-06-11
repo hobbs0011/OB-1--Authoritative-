@@ -1095,7 +1095,8 @@ async function openVoiceAgent() {
             // Block E: On reconnect, pendingMicStream is already set from the cached stream
             // startAgentListening() will check pendingMicStream first
             openVoiceAgent();
-            if (!isIOS && userHasInteracted && !pendingMicStream) {
+            if (!isIOS && userHasInteracted && !pendingMicStream &&
+                navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
               navigator.mediaDevices.getUserMedia({ audio: { channelCount: 1, echoCancellation: true, noiseSuppression: true, autoGainControl: true } })
                 .then(s => { pendingMicStream = s; })
                 .catch(() => {});
@@ -1782,6 +1783,18 @@ function triggerMicOnGesture() {
   }
   // Agent not ready yet — grab mic NOW while in gesture context, connect when agent is ready
   setMicStatus("Connecting…", true);
+  // In-app browsers (Zalo / Facebook / Instagram / Line) and insecure contexts
+  // expose NO navigator.mediaDevices. Accessing .getUserMedia on it throws
+  // synchronously and crashes this gesture handler. Degrade gracefully instead.
+  if (!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)) {
+    const b = document.createElement("div");
+    b.textContent = "Open this link in Safari or Chrome to talk to Obi";
+    b.style.cssText = "position:fixed;top:0;left:0;right:0;background:#ff9800;color:#fff;padding:14px;text-align:center;z-index:99999;font-size:15px;cursor:pointer;";
+    b.addEventListener("click", () => b.remove(), { once: true });
+    document.body.appendChild(b);
+    setMicStatus("Open in Safari or Chrome", false);
+    return;
+  }
   navigator.mediaDevices.getUserMedia({
     audio: { channelCount: 1, echoCancellation: true, noiseSuppression: true, autoGainControl: true }
   }).then(stream => {
