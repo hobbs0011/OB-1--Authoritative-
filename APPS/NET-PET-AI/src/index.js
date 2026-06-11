@@ -2153,6 +2153,11 @@ if (lastSessionNotes) settings.agent.think.prompt += "\n\n" + lastSessionNotes;
     return addCors(json({ added, date, words: extracted, transcriptStored: true }), request);
   }
 
+  // Unmatched /api/* route → explicit 404. Without this, handleAPI falls off the
+  // end and returns undefined → addCors(undefined) throws → generic 500, which
+  // MASKS real errors (a thrown bug and a typo'd path look identical). A clean
+  // 404 here restores the invariant: a 500 means something actually threw.
+  return json({ error: "Not Found", path }, 404);
 }
 
 // ── Payment Handler ─────────────────────────────────────────────────────────────
