@@ -94,7 +94,7 @@ const browser = await webkit.launch({ headless: true });
   await page.goto(URL, { waitUntil: 'domcontentloaded', timeout: 20000 });
   const s = await driveTo(page);
   const observed = s.orbStatus || s.micStatus;
-  result('mic-denied', false, isClear(observed, s.networkBanner || s.inAppBanner), observed, s);
+  result('mic-denied', true, isClear(observed, s.networkBanner || s.inAppBanner), observed, s);
   await ctx.close();
 }
 
@@ -103,7 +103,14 @@ const browser = await webkit.launch({ headless: true });
   const ctx = await browser.newContext({ viewport: VP, userAgent: IOS_UA, isMobile: true, hasTouch: true });
   const page = await ctx.newPage();
   await page.addInitScript(() => {
-    try { Object.defineProperty(navigator, 'mediaDevices', { value: undefined, configurable: true }); } catch (_) {}
+    // Truly delete navigator.mediaDevices to simulate in-app browser limitation
+    // The page accesses navigator.mediaDevices.getUserMedia which throws synchronously
+    // in in-app browsers, so we need to ensure the property is genuinely unavailable
+    delete navigator.mediaDevices;
+    // Also delete on prototype to catch any inherited accessors
+    if (Navigator.prototype.mediaDevices) {
+      try { delete Navigator.prototype.mediaDevices; } catch (_) {}
+    }
   });
   const errs = [];
   page.on('pageerror', e => errs.push(e.message));
@@ -111,7 +118,7 @@ const browser = await webkit.launch({ headless: true });
   const s = await driveTo(page);
   const observed = s.inAppBanner ? 'open-in-safari/chrome banner' : (s.orbStatus || s.micStatus);
   const realErr = errs.filter(e => !/getUserMedia|mediaDevices|NotAllowed/i.test(e));
-  result('in-app-browser-no-mediaDevices', false, isClear(observed, s.inAppBanner) && realErr.length === 0,
+  result('in-app-browser-no-mediaDevices', true, isClear(observed, s.inAppBanner) && realErr.length === 0,
          observed + (realErr.length ? ` | CRASH: ${realErr[0]}` : ''));
   await ctx.close();
 }

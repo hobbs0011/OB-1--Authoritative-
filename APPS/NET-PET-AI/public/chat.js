@@ -493,11 +493,19 @@ async function submitOnboarding() {
     learningHistory: DEFAULTS.learningHistory,
     motivationNow:   profile.goals
   }));
-  if (res?.studentToken) {
+if (res?.studentToken) {
     studentToken = res.studentToken;
-    try { localStorage.setItem("net_student_token", studentToken); } catch {}
+    try {
+      if (window.localStorage) {
+        localStorage.setItem("net_student_token", studentToken);
+      }
+    } catch {}
   }
-  try { localStorage.setItem("net_profile", JSON.stringify(profile)); } catch {}
+  try {
+    if (window.localStorage) {
+      localStorage.setItem("net_profile", JSON.stringify(profile));
+    }
+  } catch {}
 }
 
 // ── Natural Chat Engine ─────────────────────────────────────
@@ -973,6 +981,9 @@ let agentPreSettingsBytes = 0;   // byte count — cap at 50 chunks (~1s at 16kH
 let lastSessionVocabGlobal = []; // last session vocab words from token response
 let lastSessionTopicGlobal = null; // last session topic from memory (for session continuity greeting)
 
+// Token cache for reconnects — keyed by studentId+mode, stores token and expiry
+const tokenCache = new Map(); // key: "studentId:mode" → { token, expiresAt }
+
 // I-5: Stop pendingMicStream when tab hidden to prevent hot mic (EC-4 fix)
 document.addEventListener("visibilitychange", () => {
   if (document.hidden && pendingMicStream) {
@@ -1000,36 +1011,54 @@ async function openVoiceAgent() {
   try {
     // Fetch short-lived JWT token + pre-built Settings from CF Worker
     setMicStatus("Connecting…", false);
-    const tokenRes = await fetch(`/api/deepgram-token?studentId=${encodeURIComponent(urlStudentId)}&mode=${encodeURIComponent(currentMode)}`);
-    if (!tokenRes.ok) {
-      console.error("[VOICE] token fetch failed:", tokenRes.status);
-      // DO NOT reset to "Tap to start" — that looks identical to normal idle and
-      // produces a SILENT dead-end (student taps forever, no idea what's wrong).
-      // 429 = quota exhausted (wait); anything else = connection problem (retry).
-      setMicStatus(tokenRes.status === 429
-        ? "Obi is busy right now — wait a minute, then tap to try again"
-        : "Connection problem — tap to try again", false);
-      return;
+    
+    // Token cache — reuse within the window to avoid re-minting /api/deepgram-token
+    // on every reconnect (mobile Safari reconnects constantly; each mint burns
+    // quota). The "token" is the Deepgram API-key path (non-expiring, BB-43), so
+    // reuse is expiry-safe; the window only bounds how stale the per-session
+    // greeting context (lastSessionVocab/Topic) may get. We cache the FULL token
+    // response and ALWAYS destructure from it — the previous build cached only
+    // .settings and destructured the top-level fields out of it, which made
+    // agentSettings undefined and silently broke the voice agent.
+    const cacheKey = `${urlStudentId}:${currentMode}`;
+    const cached = tokenCache.get(cacheKey);
+    let data;
+    if (cached && cached.expiresAt - Date.now() > 60000) {
+      data = cached.data; // reuse — no new token request
+    } else {
+      const tokenRes = await fetch(`/api/deepgram-token?studentId=${encodeURIComponent(urlStudentId)}&mode=${encodeURIComponent(currentMode)}`);
+      if (!tokenRes.ok) {
+        console.error("[VOICE] token fetch failed:", tokenRes.status);
+        // DO NOT reset to "Tap to start" — that looks identical to normal idle and
+        // produces a SILENT dead-end. 429 = quota (wait); else = connection problem.
+        setMicStatus(tokenRes.status === 429
+          ? "Obi is busy right now — wait a minute, then tap to try again"
+          : "Connection problem — tap to try again", false);
+        return;
+      }
+      data = await tokenRes.json();
+      if (!data.token) { console.error("[VOICE] no token in response"); setMicStatus("Connection problem — tap to try again", false); return; }
+      tokenCache.set(cacheKey, { data, expiresAt: Date.now() + 30 * 60 * 1000 });
     }
-    const { token, settings, phonicsHint, lastSessionVocab, lastSessionTopic, ws_url } = await tokenRes.json();
-    if (phonicsHint) profile._phonicsHint = phonicsHint;
-    if (!token) { console.error("[VOICE] no token in response"); setMicStatus("Connection problem — tap to try again", false); return; }
-    if (agentWsId !== myId) return; // zombie check — another openVoiceAgent() fired during async fetch
 
-    // Block H: Use prefetched token if available, else use fresh one
-    const tokenToUse = agentTokenPrefetched || token;
-    if (agentTokenPrefetched) agentTokenPrefetched = null; // consume prefetch
-
-    // Block H: Proactive token refresh — pre-fetch new token before current one expires
+    // Block H: Proactive token refresh — refresh the cache before the window lapses
     if (agentTokenRefreshTimer) clearTimeout(agentTokenRefreshTimer);
     const TOKEN_REFRESH_MS = 25 * 60 * 1000; // 25 minutes
     agentTokenRefreshTimer = setTimeout(async () => {
       try {
         const res = await fetch(`/api/deepgram-token?studentId=${encodeURIComponent(urlStudentId)}&mode=${encodeURIComponent(currentMode)}`);
-        const data = await res.json();
-        if (data.token) agentTokenPrefetched = data.token;
+        const fresh = await res.json();
+        if (fresh.token && urlStudentId) {
+          tokenCache.set(`${urlStudentId}:${currentMode}`, { data: fresh, expiresAt: Date.now() + 30 * 60 * 1000 });
+        }
       } catch (_) {}
     }, TOKEN_REFRESH_MS);
+
+    // Destructure from the FULL response (top-level fields), never from data.settings.
+    const { token, settings, phonicsHint, lastSessionVocab, lastSessionTopic, ws_url } = data;
+    const tokenToUse = token;
+    if (phonicsHint) profile._phonicsHint = phonicsHint;
+    if (agentWsId !== myId) return; // zombie check — another openVoiceAgent() fired during async fetch
 
     agentSettings = settings; // stored for Welcome handler
     lastSessionVocabGlobal = lastSessionVocab || [];
@@ -1611,6 +1640,8 @@ async function startAgentListening(preAcquiredStream) {
         banner.addEventListener("click", () => banner.remove(), { once: true });
         document.body.appendChild(banner);
       }
+      // Guard: agentAudioCtx may be null in restricted browsers
+      if (!agentAudioCtx) { micAcquiring = false; return; }
       const scriptProcessor = agentAudioCtx.createScriptProcessor(4096, 1, 1);
       scriptProcessor.onaudioprocess = (ev) => {
         if (!agentWs || agentWs.readyState !== WebSocket.OPEN) return;
@@ -1642,9 +1673,12 @@ async function startAgentListening(preAcquiredStream) {
         document.addEventListener("click", resumeAgentCtx, { once: true });
       }
     });
-  } catch {
+  } catch (err) {
     agentMicStream = null; agentAudioCtx = null;
-    setMicStatus("Tap to speak", false);
+    const isDenied = err?.name === 'NotAllowedError' || /Permission denied/i.test(err?.message || '');
+    setMicStatus(isDenied
+      ? "Mic blocked — allow microphone in Safari settings, then tap to retry"
+      : "Tap to start", false);
     startListening();
   } finally {
     micAcquiring = false;
@@ -1742,8 +1776,11 @@ async function startListening() {
     input.value = "";
     input.placeholder = "Listening… (tap to stop)";
     safetyTimer = setTimeout(stopListening, MAX_RECORD_MS);
-  } catch {
-    input.placeholder = "Mic access denied";
+  } catch (err) {
+    const isDenied = err?.name === 'NotAllowedError' || /Permission denied/i.test(err?.message || '');
+    input.placeholder = isDenied
+      ? "Mic blocked — allow in Safari settings, then tap to retry"
+      : "Mic access denied";
     setTimeout(() => { input.placeholder = "Type here…"; }, 2500);
   }
 }
@@ -1805,18 +1842,23 @@ function triggerMicOnGesture() {
     setMicStatus("Open in Safari or Chrome", false);
     return;
   }
-  navigator.mediaDevices.getUserMedia({
-    audio: { channelCount: 1, echoCancellation: true, noiseSuppression: true, autoGainControl: true }
-  }).then(stream => {
-    pendingMicStream = stream;
-    setMicStatus("Ready…", true);
-    micBtn.classList.add("mic-active");
-    // If agent became ready while getting the stream, connect immediately
-    if (agentWs && agentReady && !agentMicStream) {
-      startAgentListening(pendingMicStream);
-      pendingMicStream = null;
-    }
-  }).catch(() => { setMicStatus("Mic denied", false); });
+navigator.mediaDevices.getUserMedia({
+     audio: { channelCount: 1, echoCancellation: true, noiseSuppression: true, autoGainControl: true }
+   }).then(stream => {
+     pendingMicStream = stream;
+     setMicStatus("Ready…", true);
+     micBtn.classList.add("mic-active");
+     // If agent became ready while getting the stream, connect immediately
+     if (agentWs && agentReady && !agentMicStream) {
+       startAgentListening(pendingMicStream);
+       pendingMicStream = null;
+     }
+   }).catch(err => {
+     const isDenied = err?.name === 'NotAllowedError' || /Permission denied/i.test(err?.message || '');
+     setMicStatus(isDenied
+       ? "Mic blocked — allow microphone in Safari settings, then tap to retry"
+       : "Tap to start", false);
+   });
 }
 document.addEventListener("click",      triggerMicOnGesture, { once: false, passive: true });
 document.addEventListener("touchstart", triggerMicOnGesture, { once: false, passive: true });
@@ -1854,7 +1896,7 @@ async function boot() {
   if (urlStudentId && !landingWillShow) openVoiceAgent();
 
   let saved = null;
-  try { saved = JSON.parse(localStorage.getItem("net_profile") || "null"); } catch {}
+  try { saved = JSON.parse((window.localStorage ? localStorage.getItem("net_profile") : null) || "null"); } catch {}
 
   await pause(350);
 
@@ -1914,7 +1956,7 @@ async function boot() {
   } else if (saved?.studentId && saved?.fullName) {
     profile = saved;
     if (!urlStudentId) urlStudentId = saved.studentId;
-    try { studentToken = localStorage.getItem("net_student_token") || ""; } catch {}
+    try { studentToken = (window.localStorage ? localStorage.getItem("net_student_token") : null) || ""; } catch {}
     if (!agentWs) openVoiceAgent();
 
     // Parallel: memory + vocab + hint
@@ -2001,7 +2043,7 @@ function confirmLandingMode() {
   if (!pendingLandingMode) return;
   currentMode = pendingLandingMode;
   document.body.dataset.mode = currentMode; // A4: drive room color
-  localStorage.setItem('obi_session_mode', currentMode);
+  try { window.localStorage && localStorage.setItem('obi_session_mode', currentMode); } catch {}
   dismissLanding();
   // Always connect (or reconnect) Voice Agent with the selected mode.
   // boot() skipped openVoiceAgent() when landingWillShow=true, so we always start here.
@@ -2012,7 +2054,8 @@ function confirmLandingMode() {
 }
 
 function skipLanding() {
-  const saved = localStorage.getItem('obi_session_mode') || 'free';
+  let saved = 'free';
+  try { saved = localStorage.getItem('obi_session_mode') || 'free'; } catch {}
   currentMode = saved;
   dismissLanding();
   if (urlStudentId) setTimeout(() => openVoiceAgent(), 300);
@@ -2047,7 +2090,7 @@ function closeModeModal() {
 function selectMode(mode) {
   currentMode = mode;
   document.body.dataset.mode = mode; // A4: drive room color
-  localStorage.setItem('obi_session_mode', mode);
+  try { window.localStorage && localStorage.setItem('obi_session_mode', mode); } catch {}
   const url = new URL(window.location.href);
   url.searchParams.set('mode', mode);
   window.history.replaceState({}, '', url.toString());
@@ -2072,14 +2115,15 @@ function selectMode(mode) {
   if (obiAvatar) obiAvatar.addEventListener('click', openModeModal);
   if (obiName) obiName.addEventListener('click', openModeModal);
 
-  // Initialize mode from URL or localStorage
+  // Initialize mode from URL or localStorage (guarded for restricted browsers)
   const urlMode = new URLSearchParams(window.location.search).get('mode');
-  const savedMode = localStorage.getItem('obi_session_mode');
+  let savedMode = null;
+  try { savedMode = window.localStorage ? window.localStorage.getItem('obi_session_mode') : null; } catch {}
 
   if (urlMode) {
     // Explicit mode in URL — skip landing, go straight in
     currentMode = urlMode;
-    localStorage.setItem('obi_session_mode', currentMode);
+    try { window.localStorage && localStorage.setItem('obi_session_mode', currentMode); } catch {}
     const landing = document.getElementById('modeLanding');
     if (landing) landing.classList.add('hidden');
   } else {
@@ -2149,6 +2193,9 @@ function initOrbAudio() {
     if (_orbAudioCtx.state === 'suspended') _orbAudioCtx.resume().catch(() => {});
     return;
   }
+  if (typeof window.AudioContext !== 'function' && typeof window.webkitAudioContext !== 'function') {
+    return; // No AudioContext available in this environment
+  }
   try {
     _orbAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
     _orbAnalyser = _orbAudioCtx.createAnalyser();
@@ -2171,7 +2218,8 @@ function hookOrbAudio(audioEl) {
 
 function _startOrbAnim() {
   if (_orbAnimId) return;
-  const buf = new Uint8Array(_orbAnalyser ? _orbAnalyser.frequencyBinCount : 128);
+  const analyser = _orbAnalyser || null;
+  const buf = new Uint8Array(analyser ? analyser.frequencyBinCount : 128);
   const orbEl = document.getElementById('orb');
   const stageEl = document.getElementById('orbStage');
 
