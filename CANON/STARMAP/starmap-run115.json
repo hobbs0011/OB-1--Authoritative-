@@ -1,0 +1,10 @@
+{
+  "run": 115,
+  "rrl_path": "D:\\OB-1-CANONICAL\\RRL\\RRL-115.txt",
+  "ledger_id": "HL-695",
+  "dna_turn_ids": "seq-4,seq-13,seq-29,seq-42,seq-45,seq-47,seq-61,seq-88,seq-89,seq-91",
+  "blueprint_locations": "dna-run115.json:seq-4; dna-run115.json:seq-13; dna-run115.json:seq-29; dna-run115.json:seq-42; dna-run115.json:seq-45; dna-run115.json:seq-47; dna-run115.json:seq-61; dna-run115.json:seq-88; dna-run115.json:seq-89; dna-run115.json:seq-91; dna-run115.json:seq-94; dna-run115.json:seq-101; dna-run115.json:seq-102; dna-run115.json:seq-103; dna-run115.json:seq-104; dna-run115.json:seq-107; dna-run115.json:seq-109; dna-run115.json:seq-118; dna-run115.json:seq-121; dna-run115.json:seq-122; dna-run115.json:seq-123; dna-run115.json:seq-126; dna-run115.json:seq-137; dna-run115.json:seq-155; dna-run115.json:seq-173; dna-run115.json:seq-206; dna-run115.json:seq-231; dna-run115.json:seq-267; dna-run115.json:seq-269; dna-run115.json:seq-279; dna-run115.json:seq-300; dna-run115.json:seq-309; dna-run115.json:seq-313; dna-run115.json:seq-319; dna-run115.json:seq-323; dna-run115.json:seq-332; dna-run115.json:seq-336; dna-run115.json:seq-344; dna-run115.json:seq-350; dna-run115.json:seq-362; dna-run115.json:seq-370; dna-run115.json:seq-385; dna-run115.json:seq-387; dna-run115.json:seq-402; dna-run115.json:seq-418; dna-run115.json:seq-422; dna-run115.json:seq-428; dna-run115.json:seq-429; dna-run115.json:seq-430; dna-run115.json:seq-431; dna-run115.json:seq-433",
+  "char_count": 11993512,
+  "merkle_hash": "6C5A9B22F6B7F06F4E4B46950BDB1C18CCAEBB8E1B8D66737AE28A2C43BB58EC",
+  "created_at": "2026-06-12T04:44:12.9920215+07:00"
+}

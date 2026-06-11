@@ -1,0 +1,18 @@
+{
+  "run_number": 115,
+  "executed_at": "2026-06-12T04:44:12.9920215+07:00",
+  "head_sha": "1b8641cc",
+  "rrl_path": "D:\\OB-1-CANONICAL\\RRL\\RRL-115.txt",
+  "rrl_chars": 11993512,
+  "rrl_bytes": 12132700,
+  "rrl_fidelity": "REAL",
+  "session_id": "sov100-roman-run115",
+  "soul_event_id": "a0705552-f14a-441c-98aa-346213e556fb",
+  "soulcount": 238632515,
+  "soul_delta": 240023,
+  "dna_count": 440,
+  "dna_blueprint_count": 51,
+  "dna_status": "REAL",
+  "ledger_id": "HL-695",
+  "result": "COMPLETE"
+}
