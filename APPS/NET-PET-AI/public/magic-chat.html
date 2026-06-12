@@ -26,6 +26,15 @@
       height: 100dvh;
       overflow: hidden;
     }
+    #micUnavailableBanner {
+      top: max(58px, env(safe-area-inset-top, 58px)) !important;
+      z-index: 90 !important;
+    }
+    #modeLanding.hidden ~ #orbScreen { z-index: 10001; }
+    #modeLanding.hidden ~ #orbScreen #orbTopBar,
+    #modeLanding.hidden ~ #orbScreen #orbEndBtn { z-index: 10003; }
+    #modeLanding.hidden ~ #orbScreen #orbStage,
+    #modeLanding.hidden ~ #orbScreen #orb { z-index: 10002; }
 
     /* ── Mode color system ── */
     :root { --mode-color: #a855f7; --mode-glow: rgba(168,85,247,0.22); --mode-bg: rgba(168,85,247,0.12); }

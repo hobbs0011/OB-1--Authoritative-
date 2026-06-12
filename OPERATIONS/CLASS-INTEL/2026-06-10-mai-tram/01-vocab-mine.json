@@ -1,0 +1,164 @@
+[
+  {
+    "word": "persist",
+    "meaning_vi": "kiên trì, bền bỉ",
+    "used_by_student": true,
+    "student_attempted": true,
+    "context": "First is persist. Mhmm.",
+    "first_ts": "09:55",
+    "priority": "P0"
+  },
+  {
+    "word": "accumulate",
+    "meaning_vi": "tích tụ, tích lũy",
+    "used_by_student": true,
+    "student_attempted": true,
+    "context": "And then is accumulate. Articulate.",
+    "first_ts": "10:14",
+    "priority": "P0"
+  },
+  {
+    "word": "articulate",
+    "meaning_vi": "nói rõ ràng, biểu đạt tốt",
+    "used_by_student": true,
+    "student_attempted": true,
+    "context": "Articulate. Mhmm. Yeah.",
+    "first_ts": "10:17",
+    "priority": "P0"
+  },
+  {
+    "word": "delegate",
+    "meaning_vi": "phân công, ủy thác",
+    "used_by_student": true,
+    "student_attempted": true,
+    "context": "And the third is do we Delegate.",
+    "first_ts": "10:44",
+    "priority": "P0"
+  },
+  {
+    "word": "prioritize",
+    "meaning_vi": "xếp ưu tiên, ưu tiên",
+    "used_by_student": true,
+    "student_attempted": true,
+    "context": "And then? is prioritize.",
+    "first_ts": "10:52",
+    "priority": "P0"
+  },
+  {
+    "word": "benchmark",
+    "meaning_vi": "chỉ số chuẩn, tiêu chuẩn đo lường",
+    "used_by_student": true,
+    "student_attempted": true,
+    "context": "Moving on to the fifth word. Is? Is benchmark.",
+    "first_ts": "10:58",
+    "priority": "P0"
+  },
+  {
+    "word": "streamline",
+    "meaning_vi": "tinh giản, tối ưu hoá",
+    "used_by_student": false,
+    "student_attempted": false,
+    "context": "And then we have streamline and resilient.",
+    "first_ts": "31:07",
+    "priority": "P2"
+  },
+  {
+    "word": "resilient",
+    "meaning_vi": "bền bỉ, kiên cường",
+    "used_by_student": false,
+    "student_attempted": false,
+    "context": "And then we have streamline and resilient.",
+    "first_ts": "31:07",
+    "priority": "P2"
+  },
+  {
+    "word": "proactive",
+    "meaning_vi": "chủ động, tiên phong",
+    "used_by_student": false,
+    "student_attempted": false,
+    "context": "And then is proactive.",
+    "first_ts": "31:09",
+    "priority": "P2"
+  },
+  {
+    "word": "collaborate",
+    "meaning_vi": "hợp tác, cộng tác",
+    "used_by_student": false,
+    "student_attempted": false,
+    "context": "And then is collaborate.",
+    "first_ts": "31:11",
+    "priority": "P2"
+  },
+  {
+    "word": "outcome",
+    "meaning_vi": "kết quả, kết quả cuối cùng",
+    "used_by_student": false,
+    "student_attempted": false,
+    "context": "And the end is the outcome.",
+    "first_ts": "31:13",
+    "priority": "P2"
+  },
+  {
+    "word": "suck",
+    "meaning_vi": "tệ hại, kém (slang)",
+    "used_by_student": true,
+    "student_attempted": true,
+    "context": "They suck. They suck. They suck. Right?",
+    "first_ts": "01:20",
+    "priority": "P0"
+  },
+  {
+    "word": "contract",
+    "meaning_vi": "hợp đồng",
+    "used_by_student": true,
+    "student_attempted": true,
+    "context": "Because you are HR. Right? You are HR?",
+    "first_ts": "00:26",
+    "priority": "P0"
+  },
+  {
+    "word": "half pause",
+    "meaning_vi": "dừng ngữ nửa (khi nói - comma)",
+    "used_by_student": false,
+    "student_attempted": false,
+    "context": "Comma is the hey. Half pause. Half pause. It's not called a half stop, but you can remember a period",
+    "first_ts": "40:10",
+    "priority": "P2"
+  },
+  {
+    "word": "full stop",
+    "meaning_vi": "dừng ngữ hoàn toàn (khi nói - period)",
+    "used_by_student": false,
+    "student_attempted": false,
+    "context": "A period is to end a sentence. The end. The end of a sentence. Right? Yeah. So when you're speaking, a period means full pause.",
+    "first_ts": "38:56",
+    "priority": "P2"
+  },
+  {
+    "word": "connector words",
+    "meaning_vi": "từ nối ý (and, but, so, because...)",
+    "used_by_student": true,
+    "student_attempted": true,
+    "context": "They're called connector words or connector phrases.",
+    "first_ts": "10:24",
+    "priority": "P1"
+  },
+  {
+    "word": "freeze",
+    "meaning_vi": "đóng băng, giống hệt - trong ngữ cảnh: 'bị đình trệ' khi sợ hãi",
+    "used_by_student": false,
+    "student_attempted": false,
+    "context": "But when it's time to speak, you freeze. Yeah.",
+    "first_ts": "30:26",
+    "priority": "P0"
+  },
+  {
+    "word": "dash",
+    "meaning_vi": "dấu gạch ngang - dừng ngữ tạm thời",
+    "used_by_student": false,
+    "student_attempted": false,
+    "context": "That's when you have a question mark or a question, what do you do with your voice?",
+    "first_ts": "46:50",
+    "priority": "P2"
+  }
+]

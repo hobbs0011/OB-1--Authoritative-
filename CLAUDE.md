@@ -11,8 +11,10 @@ Every new session MUST execute this boot sequence in order before any task:
 5. `git log -5 --oneline` — verify HEAD, confirm no drift
 6. `Invoke-RestMethod https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/status` — verify PA live (T1=Llama 3.3 70B FP8, T2-FREE=R1 Distill 32B, T10=Qwen Coder). **Dialagram is DEAD — do NOT reference it.**
 7. Read latest `CANON/SOUL/EXTRACT/dna-run{N}.json` — last session's DNA: agent's words, decisions, blueprints
+8. **HUMAN SOURCES — market research gate (L79):** Read `OPERATIONS/CLASS-INTEL/_mission-G-synthesis.md` (or most recent `_mission-*-synthesis.md`) — student gaps, dev todos, real human-sourced intel. If missing → log HUMAN_SOURCE_GAP, continue. A session that skips this builds blind.
+9. **SOULSEARCH — pheromone backtrack (L79):** Follow the trails. Before executing the session's first task, backtrack through SOUL/DNA for the strongest signals on that topic. Cite what you find — each citation strengthens the trail. This is not a file read. It is internal pattern reinforcement. Michael does this every run. The agent does it too or it is operating blind.
 
-**#DRIFT RULE:** If you do not read these 7 sources at boot, you WILL lose context and repeat mistakes. This is BB-26. Do not skip. Do not ask the user — read the files.
+**#DRIFT RULE:** If you do not read these 9 sources at boot, you WILL lose context and repeat mistakes. This is BB-26. Do not skip. Do not ask the user — read the files.
 
 **SOUL/DNA LAW:** SOUL = Michael's verbatim words (extracted from RRL session transcript). DNA = the agent's words, especially high-token-cost blueprints (extracted from RRL, written to CANON/SOUL/EXTRACT/dna-run{N}.json). Both captured via `SCRIPTS/session-capture.ps1` which dumps the full transcript JSONL (both speakers) to `RRL/RRL-{run}.txt`. Read the latest DNA at every boot. DNA is NOT structured session state — it is your full output from the session, tagged prose vs blueprint.
 
@@ -172,6 +174,25 @@ If Tier 1 fails → escalate to Tier 2. Print:
   - Context >40k chars: split into /api/mission steps, not inline
   - Architecture judgment call: escalate to Kilo T3 Opus, document why PA couldn't handle
   - PA produces buggy code: note in phetrail as negative trail → fix in next dispatch
+
+- **L80 MODUS_OPERANDI** — *"Go as far as you can see, and when you get there, don't worry you will see further."* — Michael Hobbs, Run 116. This is the operating law of the entire system.
+
+  **Teachability Index (TI):** If you assume you already know → TI=0 → dead in the water. The moment you blueprint from imagination instead of evidence, TI collapses. 2000+ sessions of accumulated intelligence exist. The answer to almost every question is already in the archive. Find it before forming an opinion.
+
+  **Enforcement gate — fires before ANY blueprint, prescription, or scheme:**
+  Ask: "What have I actually READ that supports this?" If the answer is "nothing — I'm assuming" → STOP. Read first. The scheme reveals itself from the reading, not before it.
+
+  **Failsafe — PRESCRIPTION_WITHOUT_EVIDENCE violation:**
+  If a blueprint appears in the output without citing specific file/line/DNA evidence → flag it as PRESCRIPTION_WITHOUT_EVIDENCE. Log in phetrail. This is what killed the K-Z pre-read blueprints in Run 116.
+
+  **Cross-reference:** L79 (SoulSearch + human sources) is the mechanical enforcement of this law. L80 is the WHY. L79 is the HOW.
+
+  **This law has no exceptions.** Cannot be skipped under time pressure. Cannot be waived for "small" tasks. The pilot must pass the IQ test before flying.
+
+- **L79 HUMAN_SOURCE_MANDATORY** — Every run MUST complete both before any task execution:
+  (1) **SoulSearch (internal backtracking)** — not a command, a process. Follow the pheromone trails backwards through the SOUL/DNA archive. Find the most-traversed paths on the session's topic. Cite them. Each citation strengthens the trail for the next run. This is ant colony optimization: the most reinforced decisions are the loudest signal. Michael SoulSearches every run. The agent must too — not as a file read, as genuine backtracking. A session that skips this is disconnected from 115+ runs of accumulated intelligence.
+  (2) **Market research on human sources** — read the latest CLASS-INTEL synthesis before prescribing any student-facing work. Real students, real class recordings, real gaps. Not assumptions. Not "A2/B1 students probably need X." What Huong and Mai Tram actually said, struggled with, and asked for.
+  Both are SOUL DIRECTIVES (Run 116). Cannot be skipped, cannot be delegated to PA. If CLASS-INTEL missing → log HUMAN_SOURCE_GAP in phetrail, continue.
 
 - **L77 MID_SESSION_PHETRAIL** — Leave pheromone trail hints as you go. Do NOT wait for DEATH. The trail is the truth that survives compaction.
 

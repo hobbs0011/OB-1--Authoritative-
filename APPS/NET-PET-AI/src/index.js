@@ -718,6 +718,20 @@ async function handleAPI(path, request, env, url) {
     if (adminBlock) return addCors(adminBlock, request);
   }
 
+  // GET /api/admin/transcripts — admin transcript index by studentId
+  if (path === "/api/admin/transcripts" && method === "GET") {
+    try {
+      const studentId = url.searchParams.get("studentId");
+      const idCheck = validateStudentId(studentId);
+      if (!idCheck.valid) return addCors(json({ ok: false, error: idCheck.error }, 400), request);
+      const rawIndex = await env.STUDENT_MEMORY.get(`transcript_index:${studentId}`);
+      const index = rawIndex ? JSON.parse(rawIndex) : [];
+      return addCors(json({ ok: true, studentId, transcripts: Array.isArray(index) ? index : [] }), request);
+    } catch (err) {
+      return addCors(json({ ok: false, error: err.message }, 500), request);
+    }
+  }
+
   // Block T: GET /api/admin/roster — full student roster (admin-key gated)
   if (path === "/api/admin/roster" && method === "GET") {
     return handleAdminRoster(env);
@@ -820,6 +834,34 @@ async function handleAPI(path, request, env, url) {
     // Health — lightweight
   if (path === "/api/health" && method === "GET") {
     return json({ ok: !!env.DEEPSEEK_API_KEY, version: VERSION, app: env.APP_NAME || "Natural English Training", coach: env.APP_COACH_NAME || "Obi", ts: Date.now(), routes: 40, ai: env.DEEPSEEK_API_KEY ? "LIVE" : "DEAD", voice: env.DEEPGRAM_API_KEY ? "LIVE" : "DEAD", notion: "BLACKLISTED — platform usage permanently disabled", imagegen: env.IMAGE_GEN_URL ? "CONFIGURED" : "NOT_SET", openai: env.OPENAI_API_KEY ? "CONFIGURED" : "NOT_SET", readiness: (env.DEEPSEEK_API_KEY && env.DEEPGRAM_API_KEY && env.OPENAI_API_KEY) ? "PRODUCTION" : "NEEDS_SECRETS" });
+  }
+
+  // POST /api/transcript — plaintext STUDENT_MEMORY transcript append + bounded index
+  if (path === "/api/transcript" && method === "POST") {
+    try {
+      const body = await request.json().catch(() => ({}));
+      const { studentId, transcript, mode, ts } = body;
+      const idCheck = validateStudentId(studentId);
+      if (!idCheck.valid) return addCors(json({ ok: false, error: idCheck.error }, 500), request);
+      const rosterCheck = validateActiveStudent(studentId);
+      if (!rosterCheck.valid) return addCors(json({ ok: false, error: rosterCheck.error }, 500), request);
+      if (typeof transcript !== 'string' || transcript.length > 50000) return addCors(json({ ok: false, error: 'transcript must be a string <= 50000 chars' }, 500), request);
+      if (!mode || typeof mode !== 'string') return addCors(json({ ok: false, error: 'mode required' }, 500), request);
+      const transcriptTs = Number(ts);
+      if (!Number.isFinite(transcriptTs) || transcriptTs <= 0) return addCors(json({ ok: false, error: 'ts must be a positive epoch ms value' }, 500), request);
+
+      const headline = transcript.slice(0, 120);
+      await env.STUDENT_MEMORY.put(`transcript:${studentId}:${transcriptTs}`, JSON.stringify({ transcript, mode, ts: transcriptTs }));
+      const rawIndex = await env.STUDENT_MEMORY.get(`transcript_index:${studentId}`);
+      const index = rawIndex ? JSON.parse(rawIndex) : [];
+      const cleanIndex = Array.isArray(index) ? index.filter(item => item && typeof item.ts !== 'undefined') : [];
+      cleanIndex.push({ ts: transcriptTs, mode, headline });
+      cleanIndex.sort((a, b) => Number(a.ts) - Number(b.ts));
+      await env.STUDENT_MEMORY.put(`transcript_index:${studentId}`, JSON.stringify(cleanIndex.slice(-50)));
+      return addCors(json({ ok: true, ts: transcriptTs }), request);
+    } catch (err) {
+      return addCors(json({ ok: false, error: err.message }, 500), request);
+    }
   }
 
   // Deep health — full dependency probe (hit each external service)

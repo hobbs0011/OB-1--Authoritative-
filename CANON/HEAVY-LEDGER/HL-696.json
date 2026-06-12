@@ -1,0 +1,16 @@
+{
+  "hl_id": "HL-696",
+  "session_id": "sov100-roman-run116",
+  "rrl_source": "D:\\OB-1-CANONICAL\\RRL\\RRL-116.txt",
+  "char_count": 15024479,
+  "byte_count": 15198447,
+  "soul_hash": "9326C373C6E64951CFF5C48CBB1ECC9718612ADC8FE46DBF1E95D984B0A6BE63",
+  "dna_hash": "8DD68157837D84B8021507A519A045703310DDA6F47E84647F4E41FB30C99304",
+  "dna_blueprint_count": 75,
+  "merkle_parent": "6C5A9B22F6B7F06F4E4B46950BDB1C18CCAEBB8E1B8D66737AE28A2C43BB58EC",
+  "merkle_hash": "437ED3A078B9D07073CF3716716B44322B46087C77DB08BB123AB4D84713842E",
+  "sealed_at": "2026-06-12T11:56:04.8898532+07:00",
+  "sov100": true,
+  "run": 116,
+  "correction_note": "HL-696 v1 was hollow (wrong RRL 1.2MB). Corrected with real RRL 15MB dual-hash."
+}

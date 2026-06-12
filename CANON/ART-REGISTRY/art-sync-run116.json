@@ -1,0 +1,248 @@
+{
+  "run": 116,
+  "ledger_id": "HL-696",
+  "merkle_short": "437ED3A078B9D070",
+  "starmap_file": "starmap-run116.json",
+  "keywords_file": "rfkw-run116.txt",
+  "keywords_used": [
+    "const",
+    "return",
+    "await",
+    "session",
+    "death",
+    "student",
+    "stage",
+    "error",
+    "catch",
+    "pipeline",
+    "studentid",
+    "never",
+    "guard",
+    "voice",
+    "1266404",
+    "agent",
+    "already",
+    "deepgram",
+    "check",
+    "function",
+    "status",
+    "class",
+    "turns",
+    "complete",
+    "jsonl",
+    "token",
+    "audit",
+    "chars",
+    "content",
+    "michael",
+    "context",
+    "blueprint",
+    "audio",
+    "state",
+    "transcript",
+    "method",
+    "files",
+    "words",
+    "false",
+    "addcorsjson",
+    "missing",
+    "background",
+    "fixed",
+    "start",
+    "portal",
+    "current",
+    "fucking",
+    "written",
+    "system",
+    "count"
+  ],
+  "pieces_synced": 25,
+  "pieces": [
+    {
+      "id": "ART-1780551578212-ATLV",
+      "title": "Broken Chain",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780551569713-11BL",
+      "title": "Tiger Cub",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780551556529-ZVR0",
+      "title": "Phoenix Neon",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780551554850-GNEZ",
+      "title": "Phoenix Crest",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780548352010-5NMK",
+      "title": "Phoenix Pages — Benchmark 3: Drone Deep Dive",
+      "keywords": [
+        "blueprint"
+      ],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780548347492-B1QU",
+      "title": "Phoenix Pages — Benchmark 0: Deepgram Whisper",
+      "keywords": [
+        "deepgram",
+        "audio"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780548343466-OGXZ",
+      "title": "Phoenix Pages — Kinetic Gates: The 5 Benchmarks",
+      "keywords": [
+        "deepgram"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780548335345-7Y5W",
+      "title": "Codex — The Layer Strategy (0 to 1000)",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780548333953-MXB7",
+      "title": "Codex — Drift as a Diagnostic Event",
+      "keywords": [
+        "context"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780548088836-SX3N",
+      "title": "Tiger Dossier Slide 04 — Ngừng Dịch Thầm, Bắt Đầu Hiểu (Stop Translating, Start Understanding)",
+      "keywords": [
+        "context"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780547867513-XM1X",
+      "title": "Train 6-7: Project Dead Rails — Train Blueprint",
+      "keywords": [
+        "blueprint"
+      ],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780547751064-ECFD",
+      "title": "Train 6-7: Classes — Support & Utility (Medic + Thief)",
+      "keywords": [
+        "class"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780547749746-V1O2",
+      "title": "Train 6-7: Classes — Damage Dealers (Railrunner + Sniper)",
+      "keywords": [
+        "class"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780547628696-L7IE",
+      "title": "Wake Up the Tiger: Blueprint for English & AI Mastery",
+      "keywords": [
+        "blueprint"
+      ],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780547160670-TBAE",
+      "title": "WAKE UP THE TIGER",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780547001008-30ZF",
+      "title": "The Obsolete Model",
+      "keywords": [
+        "context"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780546993683-AS0F",
+      "title": "The Engine",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780546342705-3MMY",
+      "title": "Wake Up the Tiger",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780538366960-3OCE",
+      "title": "STP p07 — The 60% Rule: Catching The Vibe",
+      "keywords": [
+        "context"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780538363957-LNWV",
+      "title": "STP p03 — The Translate-in-Head Delay (Snowman Freeze)",
+      "keywords": [
+        "pipeline"
+      ],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780530099910-XM96",
+      "title": "NET Dossier p03 — Cognitive Bottleneck / Snowman Freeze",
+      "keywords": [
+        "pipeline"
+      ],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780528208635-17NS",
+      "title": "Train 6-7 — Project Dead Rails: Train Diagram",
+      "keywords": [
+        "blueprint"
+      ],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780527419422-NUFN",
+      "title": "Michael Hobbs Headshot — Wide",
+      "keywords": [
+        "michael"
+      ],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780527418015-4GUT",
+      "title": "Michael Hobbs Headshot — Square",
+      "keywords": [
+        "michael"
+      ],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780527311341-E7DB",
+      "title": "Wake Up The Tiger - Bilingual Blueprint",
+      "keywords": [
+        "blueprint"
+      ],
+      "title_hit": true
+    }
+  ],
+  "executed_at": "2026-06-12T11:57:36.0753198+07:00"
+}

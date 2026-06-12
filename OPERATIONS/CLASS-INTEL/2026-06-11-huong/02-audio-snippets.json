@@ -1,0 +1,114 @@
+[
+  {
+    "start_s": 15.545,
+    "end_s": 23.785,
+    "speaker": "TEACHER",
+    "text": "wonderful student, who we appreciate very much, has a couple concerns about Obi. So, you tell Obi. Okay.",
+    "tag": "explanation",
+    "why": "Teacher sets up the session context - student concerns about Obi app"
+  },
+  {
+    "start_s": 28.025,
+    "end_s": 34.67,
+    "speaker": "STUDENT",
+    "text": "many drift in my stream. It hide the content in design. Yeah. Yeah. Yeah. So I",
+    "tag": "pronunciation",
+    "why": "Student attempts to explain app issue, uses 'drift' possibly incorrectly"
+  },
+  {
+    "start_s": 35.63,
+    "end_s": 40.11,
+    "speaker": "TEACHER",
+    "text": "Hey, Obi. I told you to do that already, stupid. We fixed that already.",
+    "tag": "correction",
+    "why": "Teacher models correction tone - 'stupid' used for emphasis, not insult"
+  },
+  {
+    "start_s": 67.49,
+    "end_s": 71.49,
+    "speaker": "TEACHER",
+    "text": "You guys have any time in the next couple weeks to meet up?",
+    "tag": "key-phrase",
+    "why": "Social arrangement phrase - useful for business/scheduling context"
+  },
+  {
+    "start_s": 144.875,
+    "end_s": 152.195,
+    "speaker": "TEACHER",
+    "text": "Hey. You don't need to be afraid to make mistakes. Right? You make mistakes here, get more comfortable with it.",
+    "tag": "face-saving reframe",
+    "why": "Core teaching philosophy - makes mistakes safe, builds confidence"
+  },
+  {
+    "start_s": 179.41,
+    "end_s": 185.25,
+    "speaker": "STUDENT",
+    "text": "That's real. You're fucking crazy. That's you're quite emotional.",
+    "tag": "student-win",
+    "why": "Student uses natural English expression, shows attitude breakthrough"
+  },
+  {
+    "start_s": 248.745,
+    "end_s": 254.765,
+    "speaker": "TEACHER",
+    "text": "I could sell ice to Eskimos. Yeah. I wasn't good at football. I wasn't good at piano. But I am good at sales.",
+    "tag": "idiom",
+    "why": "Key idiom - 'sell ice to Eskimos' = very persuasive salesperson"
+  },
+  {
+    "start_s": 317.295,
+    "end_s": 325.28,
+    "speaker": "TEACHER",
+    "text": "And if they like you, they do business with you. Right? So, like, laugh having that connection of humor is very, very powerful.",
+    "tag": "key-phrase",
+    "why": "Business wisdom - humor builds business relationships"
+  },
+  {
+    "start_s": 373.215,
+    "end_s": 380.2,
+    "speaker": "TEACHER",
+    "text": "Yeah. Like, answer that. We tell a joke sometimes and the Vietnamese are just like",
+    "tag": "explanation",
+    "why": "Teacher explains Vietnamese difficulty with Western humor"
+  },
+  {
+    "start_s": 587.295,
+    "end_s": 610.96,
+    "speaker": "TEACHER",
+    "text": "I'm gonna teach you one of the secrets to presenting in English. Basically, you're just gonna read what's up there. Right? So it's not in what you say as much as it's in how you say it.",
+    "tag": "explanation",
+    "why": "Core presentation skill - delivery over content for nervous speakers"
+  },
+  {
+    "start_s": 665.715,
+    "end_s": 674.675,
+    "speaker": "TEACHER",
+    "text": "Your English is already inside you. Obi doesn't teach you grammar. Obi unlocks the voice that's been waiting to come out.",
+    "tag": "key-phrase",
+    "why": "Core lesson philosophy - confidence over correctness"
+  },
+  {
+    "start_s": 696.515,
+    "end_s": 704.935,
+    "speaker": "TEACHER",
+    "text": "Period goes at the end of a sentence. Why? Why do you put a dot or a period at the end of a sentence?",
+    "tag": "explanation",
+    "why": "Teacher uses 'why' question technique to check understanding"
+  },
+  {
+    "start_s": 716.415,
+    "end_s": 725.985,
+    "speaker": "TEACHER",
+    "text": "These are keys keys to your success. Active listening. So those are two, I think it's about five keys with net keys that you need to master English.",
+    "tag": "key-phrase",
+    "why": "Student should shadow - 'keys to your success' phrase"
+  },
+  {
+    "start_s": 818.395,
+    "end_s": 828.045,
+    "speaker": "TEACHER",
+    "text": "You are going to give the presentation. Surprise. For the last fifteen minutes, you will be giving the presentation.",
+    "tag": "student-win",
+    "why": "Student breakthrough - surprise presentation challenge"
+  }
+]

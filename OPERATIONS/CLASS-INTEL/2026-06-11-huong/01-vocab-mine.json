@@ -1,0 +1,263 @@
+[
+  {
+    "word": "drift",
+    "meaning_vi": "trôi, lệch (xác định hướng chuyển động)",
+    "used_by_student": true,
+    "student_attempted": true,
+    "context": "I see the many drift in my stream. It hide the content in design.",
+    "first_ts": "00:28",
+    "priority": "P0"
+  },
+  {
+    "word": "conservation",
+    "meaning_vi": "bảo tồn (số nhầm 'conversation' - hội thoại)",
+    "used_by_student": true,
+    "student_attempted": true,
+    "context": "I can access the the conservation with Obi in the app?",
+    "first_ts": "01:03",
+    "priority": "P0"
+  },
+  {
+    "word": "spaced repetition",
+    "meaning_vi": "lặp lại theo khoảng thời gian (phương pháp học từ vựng)",
+    "used_by_student": true,
+    "student_attempted": true,
+    "context": "You know spaced repetition? Remember that?",
+    "first_ts": "05:43",
+    "priority": "P1"
+  },
+  {
+    "word": "repetition",
+    "meaning_vi": "sự lặp lại",
+    "used_by_student": true,
+    "student_attempted": true,
+    "context": "Spaced repetition. No. I think I don't know.",
+    "first_ts": "05:44",
+    "priority": "P0"
+  },
+  {
+    "word": "pronunciation",
+    "meaning_vi": "cách phát âm",
+    "used_by_student": false,
+    "student_attempted": false,
+    "context": "I think, your biggest need is pronunciation because you're you have, like, very advanced listening skills.",
+    "first_ts": "57:40",
+    "priority": "P0"
+  },
+  {
+    "word": "presentation",
+    "meaning_vi": "buổi thuyết trình, bài trình bày",
+    "used_by_student": true,
+    "student_attempted": true,
+    "context": "For the last fifteen minutes, you will be given the presentation.",
+    "first_ts": "30:05",
+    "priority": "P1"
+  },
+  {
+    "word": "pitch deck",
+    "meaning_vi": "bộ slide trình bày ý tưởng kinh doanh",
+    "used_by_student": true,
+    "student_attempted": true,
+    "context": "What's a pitch deck? What is a pitch deck?",
+    "first_ts": "24:54",
+    "priority": "P1"
+  },
+  {
+    "word": "pitch",
+    "meaning_vi": "đưa ra ý tưởng, đề xuất",
+    "used_by_student": true,
+    "student_attempted": true,
+    "context": "When I pitch somebody, you're pitching them an idea.",
+    "first_ts": "26:38",
+    "priority": "P1"
+  },
+  {
+    "word": "shadow",
+    "meaning_vi": "bắt chước (phương pháp học - shadow me)",
+    "used_by_student": true,
+    "student_attempted": true,
+    "context": "Shadow me. What's what's a shadow? Follow you. Yeah. What's a shadow?",
+    "first_ts": "19:31",
+    "priority": "P1"
+  },
+  {
+    "word": "active listening",
+    "meaning_vi": "lắng nghe tích cực",
+    "used_by_student": true,
+    "student_attempted": true,
+    "context": "Active listening. Write it down. These are keys keys to your success. Active listening.",
+    "first_ts": "08:19",
+    "priority": "P1"
+  },
+  {
+    "word": "full pause",
+    "meaning_vi": "dừng ngữ hoàn toàn (khi nói - period)",
+    "used_by_student": false,
+    "student_attempted": false,
+    "context": "Period is to end a sentence. The end. The end of a sentence. Right? Yeah. So when you're speaking, a period means full pause.",
+    "first_ts": "38:56",
+    "priority": "P2"
+  },
+  {
+    "word": "half pause",
+    "meaning_vi": "dừng ngữ một nửa (khi nói - comma)",
+    "used_by_student": false,
+    "student_attempted": false,
+    "context": "Comma is the hey. Half pause. Half pause. It's not called a half stop, but you can remember a period, long pause",
+    "first_ts": "40:10",
+    "priority": "P2"
+  },
+  {
+    "word": "connector words",
+    "meaning_vi": "từ nối ý (and, but, so, however...)",
+    "used_by_student": true,
+    "student_attempted": true,
+    "context": "And what's other one called? Law. Laws. Laws. Break the law. Go to jail.",
+    "first_ts": "18:13",
+    "priority": "P1"
+  },
+  {
+    "word": "delegate",
+    "meaning_vi": "phân công, ủy thác",
+    "used_by_student": true,
+    "student_attempted": true,
+    "context": "And the third is do we Delegate. Delegate. Mhmm. Yeah.",
+    "first_ts": "31:53",
+    "priority": "P1"
+  },
+  {
+    "word": "prioritize",
+    "meaning_vi": "ưu tiên, xếp mức độ quan trọng",
+    "used_by_student": true,
+    "student_attempted": true,
+    "context": "And then? is prioritize. Prioritize. Mhmm.",
+    "first_ts": "31:27",
+    "priority": "P1"
+  },
+  {
+    "word": "streamline",
+    "meaning_vi": "tinh giản, làm loại bỏ để hiệu quả hơn",
+    "used_by_student": true,
+    "student_attempted": true,
+    "context": "And then we have streamline and resilient.",
+    "first_ts": "30:57",
+    "priority": "P1"
+  },
+  {
+    "word": "resilient",
+    "meaning_vi": "bền bỉ, kiên cường (chịu đựng áp lực)",
+    "used_by_student": true,
+    "student_attempted": true,
+    "context": "And then is proactive. And then is collaborate. And the end is the outcome.",
+    "first_ts": "31:07",
+    "priority": "P1"
+  },
+  {
+    "word": "persist",
+    "meaning_vi": "kiên trì, bền bỉ (tiếp tục làm gì đó)",
+    "used_by_student": true,
+    "student_attempted": true,
+    "context": "First is persist. Next Next is accumulate.",
+    "first_ts": "30:57",
+    "priority": "P1"
+  },
+  {
+    "word": "accumulate",
+    "meaning_vi": "tích lũy, tích tụ",
+    "used_by_student": true,
+    "student_attempted": true,
+    "context": "Next Next is accumulate. Articulate. Mhmm. Yeah.",
+    "first_ts": "30:57",
+    "priority": "P1"
+  },
+  {
+    "word": "articulate",
+    "meaning_vi": "nói rõ ràng, biểu đạt tốt",
+    "used_by_student": true,
+    "student_attempted": true,
+    "context": "Articulate. Mhmm. Yeah.",
+    "first_ts": "30:59",
+    "priority": "P1"
+  },
+  {
+    "word": "proactive",
+    "meaning_vi": "chủ động, tiên phong",
+    "used_by_student": true,
+    "student_attempted": true,
+    "context": "And then we have? And then we have streamline and resilient. Then the next is proactive.",
+    "first_ts": "31:09",
+    "priority": "P1"
+  },
+  {
+    "word": "collaborate",
+    "meaning_vi": "hợp tác, cộng tác",
+    "used_by_student": true,
+    "student_attempted": true,
+    "context": "And then is collaborate. And the end is the outcome.",
+    "first_ts": "31:11",
+    "priority": "P1"
+  },
+  {
+    "word": "outcome",
+    "meaning_vi": "kết quả, kết quả cuối cùng",
+    "used_by_student": true,
+    "student_attempted": true,
+    "context": "And the end is the outcome.",
+    "first_ts": "31:13",
+    "priority": "P1"
+  },
+  {
+    "word": "benchmark",
+    "meaning_vi": "chuẩn mực, tiêu chuẩn đo lường",
+    "used_by_student": true,
+    "student_attempted": true,
+    "context": "Moving on to the fifth word. Is? Is benchmark.",
+    "first_ts": "31:29",
+    "priority": "P1"
+  },
+  {
+    "word": "freeze",
+    "meaning_vi": "đóng băng, giống hệt - trong ngữ cảnh: 'bị khóa lại' (khi sợ hãi)",
+    "used_by_student": true,
+    "student_attempted": true,
+    "context": "But when it's time to speak, you freeze. Yeah. So that that's called a dash.",
+    "first_ts": "30:59",
+    "priority": "P0"
+  },
+  {
+    "word": "rush",
+    "meaning_vi": "vội vã, đẩy nhanh",
+    "used_by_student": false,
+    "student_attempted": false,
+    "context": "So it's like Obi doesn't teach you grammar. Obi unlocks the voice that's been waiting to come out. Now if that was a comma, it'd be like, Obi doesn't teach you grammar. Obi unlocks the voice that's been waiting to come out.",
+    "first_ts": "40:24",
+    "priority": "P2"
+  },
+  {
+    "word": "crap",
+    "meaning_vi": "tàn bạo, xấu, xúc phạm (từ slang - cặn, bã)",
+    "used_by_student": false,
+    "student_attempted": false,
+    "context": "Yeah. If you don't wanna swear, you don't wanna say the s word, but you also don't wanna say poop because you're angry. Oh. It's like crap.",
+    "first_ts": "03:03",
+    "priority": "P2"
+  },
+  {
+    "word": "suck",
+    "meaning_vi": "tệ hại, kém (từ slang - 'that sucks' = tệ quá)",
+    "used_by_student": true,
+    "student_attempted": true,
+    "context": "Sucks. Yeah. You know what that mean? Yeah. Yeah. S u c k. Yeah. You do know what's up. Yes.",
+    "first_ts": "01:22",
+    "priority": "P1"
+  },
+  {
+    "word": "slang",
+    "meaning_vi": "từ lóng, từ ngữ nói đùa",
+    "used_by_student": false,
+    "student_attempted": false,
+    "context": "So another day. So we'll see if China warms up. Otherwise, you can just come sit here.",
+    "first_ts": "07:28",
+    "priority": "P2"
+  }
+]

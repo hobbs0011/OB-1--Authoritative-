@@ -1,0 +1,122 @@
+[
+  {
+    "start_s": 2.52,
+    "end_s": 5.62,
+    "speaker": "STUDENT",
+    "text": "This year, what? This year and next year, what?",
+    "tag": "key-phrase",
+    "why": "Student asking for clarification - natural question formation"
+  },
+  {
+    "start_s": 17.30,
+    "end_s": 21.56,
+    "speaker": "STUDENT",
+    "text": "So they work contracts for their employment. Yeah? Yes. Contract for them to work here.",
+    "tag": "student-win",
+    "why": "Student explains HR concept clearly - understands work context"
+  },
+  {
+    "start_s": 28.04,
+    "end_s": 34.54,
+    "speaker": "STUDENT",
+    "text": "They suck. They suck at their job. They suck. Yes. Yeah.",
+    "tag": "student-win",
+    "why": "Student confidently uses slang 'suck' with correct context and emotion"
+  },
+  {
+    "start_s": 35.30,
+    "end_s": 40.2,
+    "speaker": "STUDENT",
+    "text": "So, oh, it's very yummy. We work very hard on it, and you eat it, and it tastes like it sucks.",
+    "tag": "key-phrase",
+    "why": "Student uses full sentence with idiom - 'it sucks' in context"
+  },
+  {
+    "start_s": 56.32,
+    "end_s": 58.30,
+    "speaker": "TEACHER",
+    "text": "Sarcasm. Sarcasm. Don't look at the screen. Don't look at the screen. Sarcasm. What's sarcasm?",
+    "tag": "explanation",
+    "why": "Teacher introduces sarcasm concept - important for business communication"
+  },
+  {
+    "start_s": 119.48,
+    "end_s": 125.36,
+    "speaker": "TEACHER",
+    "text": "Cool. Cool. Mhmm. Yeah? Cool? Yes. Yeah. When I say cool, you say cool. Cool. Cool. Cool",
+    "tag": "repeat-drill",
+    "why": "Student echo practice for slang word 'cool'"
+  },
+  {
+    "start_s": 141.6,
+    "end_s": 145.36,
+    "speaker": "TEACHER",
+    "text": "That sucks. That sucks. Mhmm. Yeah? Those are the two slang you learn first. Yeah? Cool Cool. Cool. And suck.",
+    "tag": "key-phrase",
+    "why": "Essential slang for emotional expression in business context"
+  },
+  {
+    "start_s": 221.46,
+    "end_s": 228.30,
+    "speaker": "TEACHER",
+    "text": "So have you seen Agents? Oh, you used Are you used Glad?",
+    "tag": "explanation",
+    "why": "Teacher asks about app familiarity - student needs reassurance on tools"
+  },
+  {
+    "start_s": 268.28,
+    "end_s": 279.16,
+    "speaker": "TEACHER",
+    "text": "Pitch deck. Deck. That me. That is a what you show to, like, investors, clients.",
+    "tag": "key-phrase",
+    "why": "Business English foundation - pitch deck explanation for sales context"
+  },
+  {
+    "start_s": 287.31,
+    "end_s": 294.94,
+    "speaker": "TEACHER",
+    "text": "And then I will actually, a good for your home study because I also went through a good amount of it with, MyTram.",
+    "tag": "correction",
+    "why": "Teacher references previous student - shows cross-student lesson sharing"
+  },
+  {
+    "start_s": 348.33,
+    "end_s": 354.30,
+    "speaker": "STUDENT",
+    "text": "So we have the main words, so you put it in the this app. It's at 10 words.",
+    "tag": "student-win",
+    "why": "Student understands app lesson structure - good retention"
+  },
+  {
+    "start_s": 368.72,
+    "end_s": 376.49,
+    "speaker": "STUDENT",
+    "text": "Because I. Never say me. Just say hi. Hi. Good. And when you are talking about another person Mhmm. Like, example, you're talking about you you say and I.",
+    "tag": "correction",
+    "why": "Student self-corrects - 'never say me' - important grammar point"
+  },
+  {
+    "start_s": 406.3,
+    "end_s": 412.6,
+    "speaker": "TEACHER",
+    "text": "Comma is the hey. Half pause. Half pause. It's not called a half stop, but you can remember a period, long pause",
+    "tag": "pronunciation",
+    "why": "Key pronunciation marker - comma = half pause when speaking"
+  },
+  {
+    "start_s": 455.5,
+    "end_s": 464.94,
+    "speaker": "STUDENT",
+    "text": "I really like cats and also dogs. I am an animal lover.",
+    "tag": "repeat-drill",
+    "why": "Student reads with full stop pauses - mimic for presentation skills"
+  },
+  {
+    "start_s": 485.0,
+    "end_s": 494.94,
+    "speaker": "TEACHER",
+    "text": "Right? It's not it's not a knowledge problem. It's a practice problem.",
+    "tag": "explanation",
+    "why": "Key insight - Vietnamese know English but need speaking practice"
+  }
+]
