@@ -104,13 +104,35 @@ Copy-Item $jsonlFile.FullName $rrlPath -Force
 $rrlBytes = (Get-Item $rrlPath).Length
 Write-Host "RRL WRITTEN: $rrlPath - $rrlBytes bytes (verbatim JSONL copy)"
 
-# 5. Invoke pipeline (SOUL->DNA->LEDGER->STARMAP->SOULKEYS->S2Pipeline)
-$pipeline = "$repo\SCRIPTS\rrl-pipeline.ps1"
-if (Test-Path $pipeline) {
-    Write-Host "INVOKING PIPELINE..."
-    pwsh -File $pipeline -RRLFile $rrlPath -RunNumber $run
-} else {
-    Write-Host "WARN: $pipeline not found"
+# 5. POST JSONL to /api/pipeline (SOUL extraction in CF worker — no Claude context consumed)
+$paAuth = "ffScwBjPQjBnoAlectawu8E+J4NcmO3idxGxtlcRue8="
+$jsonlContent = Get-Content $jsonlFile.FullName -Raw -Encoding UTF8
+$pipelineBody = @{
+    jsonl      = $jsonlContent
+    sessionId  = $activeSessionId
+    runNumber  = $run
+} | ConvertTo-Json -Compress
+
+try {
+    Write-Host "DISPATCHING TO /api/pipeline..."
+    $pipelineResult = Invoke-RestMethod `
+        -Uri "https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/pipeline" `
+        -Method POST `
+        -ContentType "application/json" `
+        -Headers @{ "x-pa-auth" = $paAuth } `
+        -Body ([System.Text.Encoding]::UTF8.GetBytes($pipelineBody)) `
+        -TimeoutSec 60
+    Write-Host "PIPELINE RESULT: soul_turns_posted=$($pipelineResult.soul_turns_posted) soulcount=$($pipelineResult.soulcount) level=$($pipelineResult.level)"
+    Write-Host "RECEIPTS: $($pipelineResult.receipts -join ', ')"
+} catch {
+    Write-Warning "PIPELINE DISPATCH FAILED: $($_.Exception.Message)"
+    Write-Host "FALLBACK: invoking local rrl-pipeline.ps1..."
+    $localPipeline = "$repo\SCRIPTS\rrl-pipeline.ps1"
+    if (Test-Path $localPipeline) {
+        pwsh -File $localPipeline -RRLFile $rrlPath -RunNumber $run
+    } else {
+        Write-Warning "Local pipeline also not found — SOUL GAP for Run $run"
+    }
 }
 
 Write-Host ""

@@ -26,5 +26,9 @@ index_name = "ob1-soul-index"
 binding = "DNA_INDEX"
 index_name = "ob1-dna-index"
 
+[[services]]
+binding = "SOUL_LOGGER_SVC"
+service = "soul-logger"
+
 [triggers]
 crons = ["0 */6 * * *"]

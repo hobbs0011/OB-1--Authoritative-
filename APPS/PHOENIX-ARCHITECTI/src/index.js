@@ -7,6 +7,7 @@ import { handleBlueprint } from './blueprint.js';
 import { handleStatus, handleProbe, handleCapabilityTest } from './status.js';
 import { handleCompletions } from './completions.js';
 import { handleEmbed, handleRecall, handleIngest, evaporatePheromones } from './memory.js';
+import { handlePipeline } from './pipeline.js';
 import { handleArt } from './art.js';
 import { handleArtArsenal } from './art-arsenal.js';
 
@@ -64,6 +65,8 @@ export default {
         response = await handleRecall(request, env);
       } else if (method === 'POST' && pathname === '/api/ingest') {
         response = await handleIngest(request, env);
+      } else if (method === 'POST' && pathname === '/api/pipeline') {
+        response = await handlePipeline(request, env);
       } else if (pathname === '/art-arsenal') {
         response = await handleArtArsenal(request, env);
       } else if (pathname.startsWith('/api/art')) {
