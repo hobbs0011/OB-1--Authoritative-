@@ -1,4 +1,6 @@
+import { checkAdminKey } from './security.js';
 import { verify } from './verify.js';
+import { inferMaxTokens, isCodeTask, compressContext } from './tokens.js';
 
 const SYSTEM_PROMPT = `You are Phoenix-Architecti — elite code drone for the OB-1 empire.
 L01 NO_FABRICATION — never guess. If something is missing, state exactly what is missing.
@@ -10,7 +12,8 @@ L06 ZERO_DRIFT — answer the task only. No commentary before or after the code.
 
 function stripFences(text) {
   if (!text) return '';
-  return text.replace(/^```[a-zA-Z0-9]*\n?/m, '').replace(/\n?```\s*$/m, '').trim();
+  const s = typeof text === 'string' ? text : String(text);
+  return s.replace(/^```[a-zA-Z0-9]*\n?/m, '').replace(/\n?```\s*$/m, '').trim();
 }
 
 function buildMessages(order, results) {
@@ -21,7 +24,8 @@ function buildMessages(order, results) {
       parts.push(`[DEPENDENCY: ${depId}]\n${dep.patch}`);
     }
   }
-  if (order.context) parts.push('CONTEXT:\n' + order.context);
+  const ctx = compressContext(order.context || '');
+  if (ctx) parts.push('CONTEXT:\n' + ctx);
   if (order.target) parts.push('TARGET FILE: ' + order.target);
   parts.push('TASK:\n' + order.task);
   return [
@@ -31,12 +35,15 @@ function buildMessages(order, results) {
 }
 
 export async function handleSwarm(request, env) {
+  const adminResponse = await checkAdminKey(request, env);
+  if (adminResponse !== null) return adminResponse;
+
   const body = await request.json().catch(() => null);
   if (!body || !Array.isArray(body.blueprint) || body.blueprint.length === 0) {
     return Response.json({ error: 'blueprint array required' }, { status: 400 });
   }
 
-  const drones = Math.max(1, body.drones || 10);
+  const drones = Math.min(Math.max(1, body.drones || 10), 10);
   const results = new Map();
   const idOrderMap = new Map();
 
@@ -78,29 +85,36 @@ export async function handleSwarm(request, env) {
 
     await Promise.all(waveSlice.map(async order => {
       const startTime = Date.now();
-      const model = order.model || '@cf/meta/llama-3.3-70b-instruct-fp8-fast';
+      const model = order.model || (isCodeTask(order.task) ? '@cf/qwen/qwen2.5-coder-32b-instruct' : '@cf/meta/llama-3.3-70b-instruct-fp8-fast');
+      const maxToks = order.max_tokens || inferMaxTokens(order.task, order.context || '');
       const messages = buildMessages(order, results);
       const maxRetries = order.max_retries ?? 0;
 
+      // Context bloat guard
+      const ctxLen = (order.context || '').length;
+      if (ctxLen > order.task.length * 20 && ctxLen > 5000) {
+        console.warn(`CONTEXT_BLOAT: order ${order.id} ctx=${ctxLen} task=${order.task.length}`);
+      }
+
       for (let attempt = 0; attempt <= maxRetries; attempt++) {
         try {
-          const aiResult = await env.AI.run(model, { messages, max_tokens: 8192 });
+          const aiResult = await env.AI.run(model, { messages, max_tokens: maxToks });
           const patch = stripFences(aiResult.response ?? '');
           const shouldVerify = order.verify === 'acorn';
           const verifyResult = shouldVerify ? verify(patch) : { ok: true };
 
           if (verifyResult.ok) {
             results.set(order.id, { id: order.id, status: 'VERIFIED', patch });
-            finalResults.push({ id: order.id, verified: true, patch, ms: Date.now() - startTime });
+            finalResults.push({ id: order.id, verified: true, patch, ms: Date.now() - startTime, model, max_tokens: maxToks });
             return;
           }
           if (attempt < maxRetries) continue;
           results.set(order.id, { id: order.id, status: 'FAILED', patch });
-          finalResults.push({ id: order.id, verified: false, patch, ms: Date.now() - startTime });
+          finalResults.push({ id: order.id, verified: false, patch, ms: Date.now() - startTime, model, max_tokens: maxToks });
         } catch (err) {
           if (attempt < maxRetries) continue;
           results.set(order.id, { id: order.id, status: 'FAILED', patch: '' });
-          finalResults.push({ id: order.id, verified: false, patch: '', ms: Date.now() - startTime });
+          finalResults.push({ id: order.id, verified: false, patch: '', ms: Date.now() - startTime, model, max_tokens: maxToks });
         }
       }
     }));

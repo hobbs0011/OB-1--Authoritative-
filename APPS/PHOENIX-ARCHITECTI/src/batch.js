@@ -1,6 +1,7 @@
 import { checkAdminKey, sanitizeInput } from './security.js';
 import { verify } from './verify.js';
 import { logToD1 } from './logger.js';
+import { inferMaxTokens, isCodeTask, compressContext } from './tokens.js';
 
 const SYSTEM_PROMPT = `You are Phoenix-Architecti — elite code drone for the OB-1 empire.
 L01 NO_FABRICATION — never guess. If something is missing, state exactly what is missing.
@@ -12,7 +13,8 @@ L06 ZERO_DRIFT — answer the task only. No commentary before or after the code.
 
 function stripFences(text) {
   if (!text) return '';
-  return text.replace(/^```[a-zA-Z0-9]*\n?/m, '').replace(/\n?```\s*$/m, '').trim();
+  const s = typeof text === 'string' ? text : String(text);
+  return s.replace(/^```[a-zA-Z0-9]*\n?/m, '').replace(/\n?```\s*$/m, '').trim();
 }
 
 function stripThinkTags(text) {
@@ -20,14 +22,14 @@ function stripThinkTags(text) {
   return text.replace(/<think>[\s\S]*?<\/think>/gi, '').trim();
 }
 
-async function runTier(env, messages, tier) {
-  // T2: DeepSeek Flash paid
+async function runTier(env, messages, tier, maxToks, codeTask) {
+  // T2 paid: DeepSeek Flash
   if (tier === 2 && env.DEEPSEEK_API_KEY) {
     try {
       const r = await fetch('https://api.deepseek.com/v1/chat/completions', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${env.DEEPSEEK_API_KEY}` },
-        body: JSON.stringify({ model: 'deepseek-chat', messages, max_tokens: 4096 }),
+        body: JSON.stringify({ model: 'deepseek-chat', messages, max_tokens: Math.max(maxToks, 2048) }),
       });
       if (r.ok) {
         const j = await r.json();
@@ -38,17 +40,24 @@ async function runTier(env, messages, tier) {
   // T2-FREE: R1 Distill
   if (tier === 2) {
     try {
-      const r = await env.AI.run('@cf/deepseek-ai/deepseek-r1-distill-qwen-32b', { messages, max_tokens: 8192 });
+      const r = await env.AI.run('@cf/deepseek-ai/deepseek-r1-distill-qwen-32b', { messages, max_tokens: maxToks });
       if (r?.response) return { text: stripThinkTags(r.response), model: '@cf/deepseek-ai/deepseek-r1-distill-qwen-32b' };
+    } catch (_) {}
+  }
+  // T10 first for code tasks
+  if (codeTask) {
+    try {
+      const r = await env.AI.run('@cf/qwen/qwen2.5-coder-32b-instruct', { messages, max_tokens: maxToks });
+      if (r?.response) return { text: r.response, model: '@cf/qwen/qwen2.5-coder-32b-instruct' };
     } catch (_) {}
   }
   // T1: Llama 70B
   try {
-    const r = await env.AI.run('@cf/meta/llama-3.3-70b-instruct-fp8-fast', { messages, max_tokens: 8192 });
+    const r = await env.AI.run('@cf/meta/llama-3.3-70b-instruct-fp8-fast', { messages, max_tokens: maxToks });
     if (r?.response) return { text: r.response, model: '@cf/meta/llama-3.3-70b-instruct-fp8-fast' };
   } catch (_) {}
-  // T10: Qwen fallback
-  const r = await env.AI.run('@cf/qwen/qwen2.5-coder-32b-instruct', { messages, max_tokens: 8192 });
+  // T10 fallback
+  const r = await env.AI.run('@cf/qwen/qwen2.5-coder-32b-instruct', { messages, max_tokens: maxToks });
   return { text: r?.response ?? '', model: '@cf/qwen/qwen2.5-coder-32b-instruct' };
 }
 
@@ -68,11 +77,14 @@ export async function handleBatch(request, env) {
     const t = body.tasks[i];
     const tier = parseInt(t.tier) || globalTier;
     const task = sanitizeInput(t.task, 10000);
-    const context = sanitizeInput(t.context, 40000);
+    const context = compressContext(sanitizeInput(t.context, 40000));
     const target = t.targetfile || '';
     const stepStart = Date.now();
 
     if (!task) { results.push({ index: i, error: 'task required', patch: '', verified: false }); continue; }
+
+    const maxToks = t.max_tokens || inferMaxTokens(task, context);
+    const codeTask = isCodeTask(task);
 
     const parts = [];
     if (context) parts.push('CONTEXT:\n' + context);
@@ -84,11 +96,11 @@ export async function handleBatch(request, env) {
       { role: 'user', content: parts.join('\n\n') },
     ];
 
-    const { text, model } = await runTier(env, messages, tier);
+    const { text, model } = await runTier(env, messages, tier, maxToks, codeTask);
     const patch = stripFences(text);
     const verifyResult = verify(patch);
 
-    results.push({ index: i, task, patch, verified: verifyResult.ok, model, ms: Date.now() - stepStart });
+    results.push({ index: i, task, patch, verified: verifyResult.ok, model, ms: Date.now() - stepStart, max_tokens: maxToks });
   }
 
   await logToD1(env, {

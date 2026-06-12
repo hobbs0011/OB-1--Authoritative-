@@ -18,5 +18,13 @@ binding = "DB"
 database_name = "soul-archive"
 database_id = "c69a11bc-064b-478f-9b1f-e9b8e2431fb8"
 
+[[vectorize]]
+binding = "SOUL_INDEX"
+index_name = "ob1-soul-index"
+
+[[vectorize]]
+binding = "DNA_INDEX"
+index_name = "ob1-dna-index"
+
 [triggers]
 crons = ["0 */6 * * *"]

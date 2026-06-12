@@ -4,7 +4,9 @@ import { handleBatch } from './batch.js';
 import { handleMission } from './mission.js';
 import { handleSwarm } from './swarm.js';
 import { handleBlueprint } from './blueprint.js';
-import { handleStatus, handleProbe } from './status.js';
+import { handleStatus, handleProbe, handleCapabilityTest } from './status.js';
+import { handleCompletions } from './completions.js';
+import { handleEmbed, handleRecall, handleIngest, evaporatePheromones } from './memory.js';
 import { handleArt } from './art.js';
 import { handleArtArsenal } from './art-arsenal.js';
 
@@ -18,6 +20,10 @@ function addCors(response, origin) {
 }
 
 export default {
+  async scheduled(event, env) {
+    await evaporatePheromones(env);
+  },
+
   async fetch(request, env) {
     const url = new URL(request.url);
     const origin = request.headers.get('Origin') || '';
@@ -48,6 +54,16 @@ export default {
         response = await handleStatus(env);
       } else if (method === 'GET' && pathname === '/api/probe') {
         response = await handleProbe(request, env);
+      } else if (method === 'GET' && pathname === '/api/capabilities') {
+        response = await handleCapabilityTest(env);
+      } else if (method === 'POST' && pathname === '/v1/chat/completions') {
+        response = await handleCompletions(request, env);
+      } else if (method === 'POST' && pathname === '/api/embed') {
+        response = await handleEmbed(request, env);
+      } else if (method === 'GET' && pathname === '/api/recall') {
+        response = await handleRecall(request, env);
+      } else if (method === 'POST' && pathname === '/api/ingest') {
+        response = await handleIngest(request, env);
       } else if (pathname === '/art-arsenal') {
         response = await handleArtArsenal(request, env);
       } else if (pathname.startsWith('/api/art')) {

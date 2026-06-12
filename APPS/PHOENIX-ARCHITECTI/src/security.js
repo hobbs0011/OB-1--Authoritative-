@@ -143,7 +143,9 @@ function validateOrigin(origin) {
 async function checkAdminKey(request, env) {
   const expected = env.WORKER_ADMIN_KEY || env.PA_AUTH_SECRET || '';
   if (!expected) return null; // dev: no secret = allow
-  const provided = request.headers.get('x-pa-auth') || request.headers.get('X-Admin-Key') || '';
+  const bearerHeader = request.headers.get('Authorization') || '';
+  const bearerToken = bearerHeader.startsWith('Bearer ') ? bearerHeader.slice(7) : '';
+  const provided = request.headers.get('x-pa-auth') || request.headers.get('X-Admin-Key') || bearerToken;
   const enc = new TextEncoder();
   const a = enc.encode(provided.padEnd(128, '\0'));
   const b = enc.encode(expected.padEnd(128, '\0'));

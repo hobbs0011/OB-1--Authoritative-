@@ -72,3 +72,52 @@ export async function handleProbe(request, env) {
     return Response.json({ model, ok: false, ms: Date.now() - start, preview: '', error: err.message });
   }
 }
+
+export async function handleCapabilityTest(env) {
+  const results = {};
+
+  // Test 1: BGE-base embedding
+  try {
+    const start = Date.now();
+    const res = await withTimeout(
+      env.AI.run('@cf/baai/bge-base-en-v1.5', { text: 'student pronunciation final consonants' }),
+      15000
+    );
+    const vec = res?.data?.[0] || res?.result?.data?.[0] || res;
+    const dims = Array.isArray(vec) ? vec.length : (vec?.length || 0);
+    results.bge_base = { ok: dims > 0, dims, ms: Date.now() - start, sample: Array.isArray(vec) ? vec.slice(0,3) : null };
+  } catch (err) {
+    results.bge_base = { ok: false, error: err.message };
+  }
+
+  // Test 2: BGE-m3 (multilingual — Vietnamese+English)
+  try {
+    const start = Date.now();
+    const res = await withTimeout(
+      env.AI.run('@cf/baai/bge-m3', { text: 'student pronunciation' }),
+      15000
+    );
+    const vec = res?.data?.[0] || res?.result?.data?.[0] || res;
+    const dims = Array.isArray(vec) ? vec.length : 0;
+    results.bge_m3 = { ok: dims > 0, dims, ms: Date.now() - start };
+  } catch (err) {
+    results.bge_m3 = { ok: false, error: err.message };
+  }
+
+  // Test 3: Whisper tiny — does it accept audio? (structure test only, no real audio)
+  try {
+    const start = Date.now();
+    const res = await withTimeout(
+      env.AI.run('@cf/openai/whisper-tiny-en', { audio: [] }),
+      10000
+    );
+    results.whisper_tiny = { ok: true, ms: Date.now() - start, response: JSON.stringify(res).slice(0,100) };
+  } catch (err) {
+    results.whisper_tiny = { ok: false, error: err.message };
+  }
+
+  // Test 4: Vectorize binding present?
+  results.vectorize = { bound: !!env.VECTORIZE, note: env.VECTORIZE ? 'index bound' : 'no index created yet — needs wrangler vectorize create' };
+
+  return Response.json({ capability_test: results, tested_at: new Date().toISOString() });
+}
