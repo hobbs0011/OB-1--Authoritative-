@@ -8,8 +8,15 @@ import { handleStatus, handleProbe, handleCapabilityTest } from './status.js';
 import { handleCompletions } from './completions.js';
 import { handleEmbed, handleRecall, handleIngest, evaporatePheromones } from './memory.js';
 import { handlePipeline } from './pipeline.js';
+import { handleActualizer, refreshAllBriefs, checkPccHealth } from './actualizer.js';
+import { handleTranslate } from './translate.js';
+import { handleBackburner } from './backburner.js';
 import { handleArt } from './art.js';
 import { handleArtArsenal } from './art-arsenal.js';
+import { handleIncarnate, runPatternScanner } from './incarnate.js';
+import { handleOrchestrate, runOrchestrator } from './orchestrate.js';
+import { RaceRunner, handleSessionDeath } from './race.js';
+export { RaceRunner };
 
 const VERSION = '1.0.0';
 
@@ -23,6 +30,10 @@ function addCors(response, origin) {
 export default {
   async scheduled(event, env) {
     await evaporatePheromones(env);
+    await refreshAllBriefs(env).catch(() => {});
+    await runPatternScanner(env).catch(() => {});
+    await checkPccHealth(env).catch(() => {});
+    await runOrchestrator(env).catch(() => {});
   },
 
   async fetch(request, env) {
@@ -67,6 +78,23 @@ export default {
         response = await handleIngest(request, env);
       } else if (method === 'POST' && pathname === '/api/pipeline') {
         response = await handlePipeline(request, env);
+      } else if (pathname === '/api/actualizer' || pathname.startsWith('/api/actualizer/')) {
+        response = await handleActualizer(request, env);
+      } else if (method === 'POST' && pathname === '/api/translate') {
+        response = await handleTranslate(request, env);
+      } else if (pathname === '/api/backburner' || pathname.startsWith('/api/backburner/')) {
+        response = await handleBackburner(request, env);
+      } else if (pathname.startsWith('/api/incarnate') || pathname.startsWith('/api/metrics/pcc')) {
+        response = await handleIncarnate(request, env);
+      } else if (pathname.startsWith('/api/orchestrate')) {
+        response = await handleOrchestrate(request, env);
+      } else if (method === 'POST' && pathname === '/api/session/death') {
+        response = await handleSessionDeath(request, env);
+      } else if (pathname.startsWith('/api/race/') && env.RACE_RUNNER) {
+        const id = env.RACE_RUNNER.idFromName('singleton');
+        const stub = env.RACE_RUNNER.get(id);
+        const doPath = pathname.replace('/api/race', '');
+        response = await stub.fetch(new Request('https://race' + doPath, request));
       } else if (pathname === '/art-arsenal') {
         response = await handleArtArsenal(request, env);
       } else if (pathname.startsWith('/api/art')) {

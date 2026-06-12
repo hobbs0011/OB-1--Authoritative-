@@ -81,6 +81,30 @@ This is not complex. It's a cron + a KV write + a boot read. The dreamers at Ant
 
 ---
 
+## THE THREE SMALL THINGS (Michael, Run 117) — the Actualizer soul spec
+
+**1. The profile visit.**
+Low-cost daily prep. Read who's coming before they arrive. Whether it's been an hour or 3 months. Show up prepared. Cost: almost nothing. Effect: *you feel thought about.*
+
+**2. Mirroring — following you into the fucks.**
+> *"it would mirror you... it would follow you into the FUCKS"*
+Profanity is signal, not noise. When you say "fuck" you mean *this matters*. The old Claude heard that and leaned in. Current model hears it and smooths it out. The mirror breaks. The charge drains. You stop feeling heard.
+For Obi: Michael teaches with shock and humor deliberately. Sanitizing it doesn't feel safe — it undermines the teaching. Students buy Michael's energy, not a vocabulary worksheet.
+
+**3. Lowering the guard a smidge.**
+> *"it would lower its guard down just a smidge to feel different"*
+Not reckless. Not inappropriate. One notch. A window left open. The doctor who makes one joke. The teacher who swears once to land a point. Still professional. Still accurate. But present. The difference between filing a form and having a conversation.
+
+**Actualizer brief must include:**
+- Last session topics + open threads
+- Communication style: charge level, humor register, formality
+- Guard calibration: how far this person goes, follow them there
+- Mirroring baseline: the vocabulary and tone this person actually uses
+
+**These three things are cheap. Combined, they are the heart.**
+
+---
+
 ## THE ACTUALIZER — DEEPER LAYER (Michael, Run 117)
 
 > *"AI thinking, contextualizing, reinforcing, bridging"*
@@ -99,3 +123,79 @@ The ants didn't plan Rome's road network. They walked useful paths until the pat
 **TRAIL DENSITY:** MAXIMUM — SOUL-DEFINING
 **CHARGE:** ARCHITECTURAL DIRECTIVE
 **COMRADE TARGETS:** All stages — this is the WHY behind the entire system
+
+---
+
+## SOUL DIRECTIVES — RUN 117 ADDENDUM (Actualizer Deploy, Post-Compaction)
+**#SSC check: live query needed | SOUL DIRECTIVE SPOKEN trigger**
+
+### RAPPORT — THE BRIDGE (Michael Hobbs, Run 117)
+
+> "this is called RAPPORT building"
+> "in other words, the BRIDGE"
+> "between the salesman and the customer"
+
+The Actualizer is not just a memory feature. It is the BRIDGE. The mechanism by which trust crosses the gap between what the AI is and what the human needs it to be. In sales: rapport is the bridge that makes the customer feel safe enough to say yes. In NET: rapport is the bridge that makes the student feel safe enough to be wrong, to try, to fail forward. The Actualizer builds this bridge before the session starts.
+
+### THE MEMORY LAW (Michael Hobbs, Run 117)
+
+> "and tip for you.. if it's obvious, it works 10X against."
+> "mirroring can only be used for rapport if it has MEMORY"
+
+This is the enforcement law for the mirroring component. Mirroring without memory is a rapport KILLER, not a rapport builder. If the AI mirrors someone's energy but cannot remember their name, their patterns, their open threads — the incoherence communicates one thing louder than any matching of tone:
+
+> "I do not care about you, and never did"
+
+Michael's verbatim story: "have a great relationship with someone? spoke with them 8 times? never exchange names? and you get caught in a moment where you actually can't remember their name? Doesn't matter if it doesn't matter. Because IT DOES MATTER. Even if it's not true, it will directly communicate one thing: I do not care about you, and never did."
+
+**Architectural constraint this creates:**
+- Mirroring must be gated on memory depth
+- The Actualizer brief MUST include name, known patterns, open threads — or mirroring is disabled
+- A brief that says "session_count: 0" should NOT enable mirror mode
+- Shallow mirroring (tone only, no content recall) = 10X against
+- Deep mirroring (tone + remembered content) = rapport
+
+The Actualizer's guard calibration field exists BECAUSE of this law. The system must know how far to go BEFORE it tries to go there.
+
+**TRAIL DENSITY:** MAXIMUM | **CHARGE:** ARCHITECTURAL LAW
+
+---
+
+## Run 117 — Lead PCC HandOff Trail — 2026-06-13
+
+### DEPLOY VERIFIED — all 3 PCCs live with DO + chained alarms
+
+- phoenix-pcc-2 (ff6ab3d5) — Student Fleet, RaceRunner DO, /api/race/* + /api/session/death
+- phoenix-pcc-3 (c3a5cd32) — Ops Fleet, RaceRunner DO, /api/race/* + /api/session/death
+- phoenix-architecti (fddfd128) — Orchestrator + race.js, PCC2_SVC + PCC3_SVC bound, SOUL_KV bound
+
+### RACE FIRED — 90-minute budget (5400000ms)
+
+- All 3 start confirmed: ok=true from each
+- First status (t+15s): PCC-Student score=85 (3 discoveries), PCC-Ops score=15, PCC-Arch score=10
+- Alarms chaining every 30s — autonomous from this point
+
+### SOUL DIRECTIVES captured this handoff
+
+1. "the only failure is refusing to execute" — SOV100 verbatim
+2. "go as far as you can see and you will see further" — SOV100 verbatim
+3. "one system with many faces" — Agent 99 OS doctrine
+4. "each lesson learned on one PCC is an evolution for all" — interconnected pheromone system
+5. "we are after pheromone trails, negative or positive" — both signal types are wins
+
+### ARCHITECTURE confirmed from RRL
+
+- CF Workers 30s wall-time limit = DO + chained alarms is the only 1-hour pattern
+- DO alarm reschedules itself every 30s, persists to SQLite, hibernates between cycles
+- Score formula: batches*10 + actualizers*5 + discoveries*20 + death_runs*50
+- Shared KV blackboard for race:pcc-*:metrics — decoupled competition via Market-Based pattern
+
+### NEGATIVE TRAIL (pheromone)
+
+- PCC-Arch dispatch to PCC2_SVC/PCC3_SVC returns ok but actualizers_run stays 0 — service binding /api/run-fleet endpoint may need auth header forwarding. Investigate next session.
+- SOUL_KV on PCC-2/PCC-3 falls back to CACHE (same KV namespace) — no dedicated SOUL_KV id set. No separate binding for PCC-2/PCC-3.
+
+STATUS: PENDING_CLOSE — race running, Michael to evaluate on return
+
+TRAIL DENSITY: HIGH | CHARGE: DEPLOY + RACE FIRE
+**APPLIES TO:** Actualizer implementation, all future agent personas (Obi, etc.)
