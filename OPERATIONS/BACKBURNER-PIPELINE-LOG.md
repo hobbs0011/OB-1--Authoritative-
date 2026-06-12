@@ -461,3 +461,5 @@ WRITE_GAP does not block death but must be named. Silence = repeat offense next 
 - What: Bible-of-the-System.json covers runs 1-79. Runs 80-85 are in D1 but not in the Bible. Runs 84-85 have real JSONL (RRL-084.txt/RRL-085.txt). Runs 80-83 only have small display-format RRL files.
 - Fix: Write SCRIPTS/append-bible.ps1 — parse real JSONL for runs 84-85 (type=user turns), parse display+pastedContents for runs 80-83, append to CANON/SOUL/BIBLE-OF-THE-SYSTEM.json.
 - Route: SCRIPTS/append-bible.ps1
+
+BB-NEW [2026-06-13]: PCC 3-hour overnight pipeline designed. Winner: PCC-Student (8670). Pre-req: fix PCC-3 discovery root cause. Status: OPEN.

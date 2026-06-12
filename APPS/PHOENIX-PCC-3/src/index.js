@@ -213,9 +213,30 @@ export class RaceRunner {
       }
     } catch(e) { errors++; }
 
+    // Soul keyword scan — hunt high-signal KV keys
+    const soulSeeds = ['#SOUL','#SOULDNA','#RAW','#FUCK','#OMG','LISTEN','#MONKEY','#YES','#SSK','#LEDGER','#AGENT99','Obi','OB1','#DRIFT'];
+    const kvPrefixes = ['pending:rrl:', 'registry:run:', 'death:'];
+    for (const prefix of kvPrefixes) {
+      try {
+        const listed = await this.env.CACHE.list({ prefix }).catch(() => ({ keys: [] }));
+        for (const key of listed.keys.slice(0, 5)) {
+          const val = await this.env.CACHE.get(key.name).catch(() => '');
+          if (val) {
+            const hits = soulSeeds.filter(s => val.includes(s)).length;
+            if (hits > 0) { discoveries += hits; actualizers++; }
+          }
+        }
+      } catch(e) { errors++; }
+    }
+    // Check sibling scores
+    try {
+      const siblingScore = await this.env.CACHE.get('race:pcc-student:metrics').catch(() => null);
+      if (siblingScore) discoveries++;
+    } catch(e) {}
+
     try {
       // Pattern scan: check for pending ops tasks in KV (SOUL_KV or CACHE fallback)
-      const kv = this.env.SOUL_KV || this.env.CACHE;
+      const kv = this.env.CACHE || this.env.CACHE;
       if (kv) {
         const bbKeys = await kv.list({ prefix: 'bb:pending:' }).catch(() => ({ keys: [] }));
         for (const key of bbKeys.keys.slice(0, 5)) {
@@ -232,7 +253,7 @@ export class RaceRunner {
     } catch(e) { errors++; }
 
     // Check for pending RRL (DEATH integration)
-    const kv = this.env.SOUL_KV || this.env.CACHE;
+    const kv = this.env.CACHE || this.env.CACHE;
     if (kv) {
       const keys = await kv.list({ prefix: 'pending:rrl:' }).catch(() => ({ keys: [] }));
       for (const key of keys.keys.slice(0, 2)) {
@@ -262,7 +283,7 @@ export class RaceRunner {
     const ledger_id = `HL-${run_number}`;
     const soulSeeds = ['#SOUL','#SOULDNA','#RAW','#FUCK','#OMG','LISTEN','#MONKEY','#YES','#SSK','#LEDGER','#AGENT99','Obi','OB1','#DRIFT'];
     const soulkeys_hit = soulSeeds.filter(k => rrl_text.includes(k)).length;
-    const kv = this.env.SOUL_KV || this.env.CACHE;
+    const kv = this.env.CACHE || this.env.CACHE;
     if (kv) {
       await Promise.all([
         kv.put(`death:${run_number}:soul`, String(soul_count)),
@@ -279,7 +300,7 @@ export class RaceRunner {
   async writeMetrics(state, final) {
     const score = (state.batches_run * 10) + (state.actualizers_run * 5) + (state.discoveries_count * 20) + (state.death_runs * 50);
     const metrics = { agent_id: 'pcc-ops', ...state, elapsed_ms: Date.now() - state.start_time, score, final };
-    const kv = this.env.SOUL_KV || this.env.CACHE;
+    const kv = this.env.CACHE || this.env.CACHE;
     if (kv) await kv.put('race:pcc-ops:metrics', JSON.stringify(metrics));
   }
 

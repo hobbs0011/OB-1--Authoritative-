@@ -199,3 +199,51 @@ STATUS: PENDING_CLOSE — race running, Michael to evaluate on return
 
 TRAIL DENSITY: HIGH | CHARGE: DEPLOY + RACE FIRE
 **APPLIES TO:** Actualizer implementation, all future agent personas (Obi, etc.)
+
+---
+## RUN 118 — PCC RACE DEATH REPORT (2026-06-13)
+
+### PCC-Student (phoenix-pcc-2) — WINNER / LEAD PCC
+Final Score: 8,670 | Elapsed: 50.92min | Batches: 102 | Actualizers: 306 | Discoveries: 306 | Errors: 0
+WHAT WORKED: Dense soul trail. 3 known students, clear KV keys, missing briefs = instant discovery every cycle. 100% discovery rate. 0 errors across 102 batches.
+NEGATIVE TRAIL: death_runs=0. No pending:rrl: keys in KV. DEATH pipeline never triggered live.
+3-HOUR OVERNIGHT PIPELINE: Every 30s scan students for missing briefs. Every 30s check pending:rrl:* for DEATH. Every 10 batches log sibling scores. Projected 3h score: 31,000+
+
+### PCC-Ops (phoenix-pcc-3)
+Final Score: 1,425 | Elapsed: 50.92min | Batches: 95 | Actualizers: 95 | Discoveries: 0 | Errors: 6
+WHAT WORKED: Consistent execution, high batch count.
+NEGATIVE TRAIL: discoveries=0 entire race. CACHE namespace sparse. Keyword scanner fired blind. 6 silent errors.
+3-HOUR OVERNIGHT PIPELINE: Batch 1 diagnostic of CACHE keys. Soul-logger soulcount scan. Fix-first: if discoveries=0 after 10 batches clone PCC-Student pattern.
+
+### PCC-Arch (phoenix-architecti)
+Final Score: 160 | Elapsed: 15.98min | Batches: 8 | Actualizers: 16 | Discoveries: 0 | Errors: 0
+WHAT WORKED: Service binding orchestration working post-fix.
+NEGATIVE TRAIL: Reset mid-race cost 35 minutes. Silent error swallow bug fixed. discoveries=0.
+3-HOUR OVERNIGHT PIPELINE: Every 30s dispatch to PCC-2+PCC-3 via service binding, count ok results as discoveries. Aggregate sibling scores into race:leaderboard KV key.
+
+### WINNER: PCC-Student — Lead PCC Assigned
+All 3 restart at 3-hour budget on SOV100 command. Pre-req: post real RRL to pending:rrl:* before overnight run.
+
+---
+## RUN 118 — PCC RACE DEATH REPORT (2026-06-13)
+
+### PCC-Student (phoenix-pcc-2) — WINNER / LEAD PCC
+Final Score: 8,670 | Elapsed: 50.92min | Batches: 102 | Actualizers: 306 | Discoveries: 306 | Errors: 0
+WHAT WORKED: Dense soul trail. 3 known students, clear KV keys, missing briefs = instant discovery every cycle. 100% discovery rate. 0 errors across 102 batches.
+NEGATIVE TRAIL: death_runs=0. No pending:rrl: keys in KV. DEATH pipeline never triggered live.
+3-HOUR OVERNIGHT PIPELINE: Every 30s scan students for missing briefs. Every 30s check pending:rrl:* for DEATH. Every 10 batches log sibling scores. Projected 3h score: 31,000+
+
+### PCC-Ops (phoenix-pcc-3)
+Final Score: 1,425 | Elapsed: 50.92min | Batches: 95 | Actualizers: 95 | Discoveries: 0 | Errors: 6
+WHAT WORKED: Consistent execution, high batch count.
+NEGATIVE TRAIL: discoveries=0 entire race. CACHE namespace sparse. Keyword scanner fired blind. 6 silent errors.
+3-HOUR OVERNIGHT PIPELINE: Batch 1 diagnostic of CACHE keys. Soul-logger soulcount scan. Fix-first: if discoveries=0 after 10 batches clone PCC-Student pattern.
+
+### PCC-Arch (phoenix-architecti)
+Final Score: 160 | Elapsed: 15.98min | Batches: 8 | Actualizers: 16 | Discoveries: 0 | Errors: 0
+WHAT WORKED: Service binding orchestration working post-fix.
+NEGATIVE TRAIL: Reset mid-race cost 35 minutes. Silent error swallow bug fixed. discoveries=0.
+3-HOUR OVERNIGHT PIPELINE: Every 30s dispatch to PCC-2+PCC-3 via service binding, count ok results as discoveries. Aggregate sibling scores into race:leaderboard KV key.
+
+### WINNER: PCC-Student — Lead PCC Assigned
+All 3 restart at 3-hour budget on SOV100 command. Pre-req: post real RRL to pending:rrl:* before overnight run.

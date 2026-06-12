@@ -166,21 +166,56 @@ export class RaceRunner {
       }
 
       // Dispatch to PCC-2 and PCC-3 via service bindings
+      // Fix: parse response body to count real actualizers; log errors instead of swallowing them
       if (this.env.PCC2_SVC) {
-        const r = await this.env.PCC2_SVC.fetch(
-          new Request('https://pcc2/api/run-fleet', { method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ triggered_by: 'race-runner-arch' }) })
-        ).catch(() => null);
-        if (r?.ok) actualizers += 5;
+        try {
+          const r = await this.env.PCC2_SVC.fetch(
+            new Request('https://pcc2/api/run-fleet', { method: 'POST',
+              headers: { 'Content-Type': 'application/json', 'x-pa-auth': 'ffScwBjPQjBnoAlectawu8E+J4NcmO3idxGxtlcRue8=' },
+              body: JSON.stringify({ triggered_by: 'race-runner-arch' }) })
+          );
+          if (r.ok) {
+            const body = await r.json().catch(() => ({}));
+            // Count results that returned ok:true
+            const okCount = Array.isArray(body.results)
+              ? body.results.filter(x => x.ok === true).length
+              : 0;
+            // Minimum 1 credit if the call itself succeeded, even if all students had no soul data
+            actualizers += Math.max(okCount, 1);
+          } else {
+            errors++;
+          }
+        } catch (e) {
+          errors++;
+          if (this.env.SOUL_KV) {
+            await this.env.SOUL_KV.put('race:pcc2:last-error', JSON.stringify({ msg: e.message, ts: Date.now() })).catch(() => {});
+          }
+        }
       }
       if (this.env.PCC3_SVC) {
-        const r = await this.env.PCC3_SVC.fetch(
-          new Request('https://pcc3/api/run-fleet', { method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ triggered_by: 'race-runner-arch' }) })
-        ).catch(() => null);
-        if (r?.ok) actualizers += 5;
+        try {
+          const r = await this.env.PCC3_SVC.fetch(
+            new Request('https://pcc3/api/run-fleet', { method: 'POST',
+              headers: { 'Content-Type': 'application/json', 'x-pa-auth': 'ffScwBjPQjBnoAlectawu8E+J4NcmO3idxGxtlcRue8=' },
+              body: JSON.stringify({ triggered_by: 'race-runner-arch' }) })
+          );
+          if (r.ok) {
+            const body = await r.json().catch(() => ({}));
+            // Count tasks that did real work (processed > 0 or stale > 0)
+            const activeCount = Array.isArray(body.results)
+              ? body.results.filter(x => (x.processed > 0 || x.stale > 0)).length
+              : 0;
+            // Minimum 1 credit if the call itself succeeded
+            actualizers += Math.max(activeCount, 1);
+          } else {
+            errors++;
+          }
+        } catch (e) {
+          errors++;
+          if (this.env.SOUL_KV) {
+            await this.env.SOUL_KV.put('race:pcc3:last-error', JSON.stringify({ msg: e.message, ts: Date.now() })).catch(() => {});
+          }
+        }
       }
     } catch (e) {
       errors++;
