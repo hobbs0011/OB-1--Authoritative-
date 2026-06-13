@@ -1,4 +1,4 @@
-import { checkAdminKey } from './security.js';
+﻿import { checkAdminKey } from './security.js';
 
 export async function handleTranslate(request, env) {
   const authCheck = await checkAdminKey(request, env);

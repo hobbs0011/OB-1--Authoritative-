@@ -1,4 +1,4 @@
-import { checkAdminKey } from './security.js';
+﻿import { checkAdminKey } from './security.js';
 
 export async function createBBEntry(env, { title, description, source, priority = '!', metadata = '' }) {
   const bb_id = `BB-${Date.now()}`;

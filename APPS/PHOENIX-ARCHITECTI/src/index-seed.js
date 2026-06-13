@@ -1,4 +1,4 @@
-// Phoenix-Architecti v1.0.0-seed — RUNG 0
+﻿// Phoenix-Architecti v1.0.0-seed — RUNG 0
 // Minimal: POST /api/execute → CF Workers AI (qwen-coder-32b) → patch
 // Hand-written by Sonnet crunch pass. Deploy this, prove the free path lives, then climb.
 

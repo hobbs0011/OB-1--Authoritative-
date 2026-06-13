@@ -1,4 +1,4 @@
-// tokens.js — shared token budget + routing utilities for all PA handlers
+﻿// tokens.js — shared token budget + routing utilities for all PA handlers
 // Three jobs: infer output ceiling, detect code tasks for smart routing, cache keys.
 
 const CODE_PATTERNS = /\b(function|const|let|var|import|export|class|def|async|await|implement|refactor|add\s+\w+|write\s+\w+|fix\s+\w+|create\s+\w+|update\s+\w+)\b/i;

@@ -1,8 +1,9 @@
-import { checkAdminKey } from './security.js';
+﻿import { checkAdminKey } from './security.js';
 import { verify } from './verify.js';
 import { inferMaxTokens, isCodeTask, compressContext } from './tokens.js';
+import { openRise, markPheromoneTicks, closeDeath, createSubagentId } from './subagent-lifecycle.js';
 
-const SYSTEM_PROMPT = `You are Phoenix-Architecti — elite code drone for the OB-1 empire.
+const SYSTEM_PROMPT = `You are an Agent99 OS role drone in the OB-1 empire. Your role may be PhoenixCoder, PhoenixArt, PhoenixScribe, PhoenixActualizer, or another role assigned by the PCC. Do not segregate drones by skill or intelligence; every drone operates under Agent99 OS with a different role.
 L01 NO_FABRICATION — never guess. If something is missing, state exactly what is missing.
 L02 NO_STUBS — full implementation only. No TODO, no placeholders, no ellipsis, no "// ...rest".
 L03 STRONGEST_VERSION_FIRST — complete, production-ready output immediately.
@@ -42,6 +43,10 @@ export async function handleSwarm(request, env) {
   if (!body || !Array.isArray(body.blueprint) || body.blueprint.length === 0) {
     return Response.json({ error: 'blueprint array required' }, { status: 400 });
   }
+
+  const missionId = body.mission_id || `SW-${Date.now()}`;
+  const commander = body.commander || 'pcc1-obi';
+  const pcc = body.pcc || 'pcc3-windu';
 
   const drones = Math.min(Math.max(1, body.drones || 10), 10);
   const results = new Map();
@@ -85,6 +90,17 @@ export async function handleSwarm(request, env) {
 
     await Promise.all(waveSlice.map(async order => {
       const startTime = Date.now();
+      const startedAt = new Date(startTime).toISOString();
+      const subagentId = createSubagentId('PARCH', missionId, order.id);
+      let deathStatus = 'SUCCESS';
+      let deathError = '';
+      let lessons = [];
+      let pheromoneTicks = [];
+
+      try {
+        await openRise(env, { missionId, subagentId, agentType: 'PARCH', commander, pcc, target: order.target, task: order.task }).catch(() => {});
+      } catch (_) {}
+
       const model = order.model || (isCodeTask(order.task) ? '@cf/qwen/qwen2.5-coder-32b-instruct' : '@cf/meta/llama-3.3-70b-instruct-fp8-fast');
       const maxToks = order.max_tokens || inferMaxTokens(order.task, order.context || '');
       const messages = buildMessages(order, results);
@@ -108,22 +124,33 @@ export async function handleSwarm(request, env) {
             finalResults.push({ id: order.id, verified: true, patch, ms: Date.now() - startTime, model, max_tokens: maxToks });
             return;
           }
+          deathStatus = 'FAILURE';
+          lessons.push('verification_failed');
           if (attempt < maxRetries) continue;
           results.set(order.id, { id: order.id, status: 'FAILED', patch });
           finalResults.push({ id: order.id, verified: false, patch, ms: Date.now() - startTime, model, max_tokens: maxToks });
         } catch (err) {
+          deathStatus = 'FAILURE';
+          deathError = err.message || String(err);
+          lessons.push('agent_exception');
           if (attempt < maxRetries) continue;
           results.set(order.id, { id: order.id, status: 'FAILED', patch: '' });
           finalResults.push({ id: order.id, verified: false, patch: '', ms: Date.now() - startTime, model, max_tokens: maxToks });
         }
       }
+
+      const endedAt = new Date().toISOString();
+      try {
+        pheromoneTicks = await markPheromoneTicks(env, { subagentId, agentType: 'PARCH', missionId, startedAtMs: startTime, endedAtMs: Date.now(), status: deathStatus, task: order.task }).catch(() => []);
+        await closeDeath(env, { missionId, subagentId, agentType: 'PARCH', commander, pcc, target: order.target, task: order.task, startedAt, endedAt, status: deathStatus, error: deathError, lessons, pheromoneTicks }).catch(() => {});
+      } catch (_) {}
     }));
 
     waveCount++;
   }
 
   return Response.json({
-    mission_id: 'SW-' + Date.now(),
+    mission_id: missionId,
     waves: waveCount,
     drones_used: maxWaveSize,
     results: finalResults,

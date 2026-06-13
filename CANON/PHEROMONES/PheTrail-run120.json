@@ -1,0 +1,64 @@
+﻿{
+  "run": 120,
+  "created_at": "2026-06-13T15:23:00+07:00",
+  "operator": "mrmichaelhobbs123@gmail.com",
+  "schema_version": "1.0",
+  "positive_trails": [
+    "RRL-0 through RRL-3, ledger, and starmaps referenced before terminology decisions to avoid invented doctrine",
+    "PCC1 = phoenix-pcc-1, PCC2 = phoenix-pcc-2, PCC3 = phoenix-architecti naming corrected",
+    "PhoenixCoder and PhoenixArt added as Agent99 OS role drones, not separate skill/intelligence classes",
+    "Major sovereign directive pheromone marker added to /api/message on all PCCs",
+    "PA subagents use two RISE boots: Agent99 Genesis Boot + Role Boot, then 30s pheromone ticks, then DEATH",
+    "Pheromone deep dive (gatePheromoneDeepDive) added to incarnate.js",
+    "TOML aligned on all workers: [durable_objects] bindings = [LEGION_RUNNER, FORCEAWARENESS_ALARM]; PHETRAIL/SCUTUM/PCC1_SVC/PCC2_SVC bindings corrected",
+    "PCC LAW Blueprint delivered to PCC1 via /api/message",
+    "Folder renamed: phoenix-pcc-2 -> phoenix-pcc-1 (PCC1 = Obi)",
+    "CORS headers updated for /api/force endpoints",
+    "ForceAwareness renamed from watchdog across all PCCs; watchdog.js modules renamed to forceawareness.js",
+    "PCC3 folder was still labeled PCC3 after PCC2 correction - renamed to PHOENIX-PCC-2",
+    "PCC2 watchdog cache keys still used watchdog: naming - corrected to force: naming",
+    "Crashed last session recovered and included in pheromone trail: PCC naming, FORCEAWARENESS, PACT/PARCH lifecycle, PhoenixCoder/PhoenixArt role doctrine, extra-spicy pheromone marker"
+  ],
+  "negative_trails": [
+    "PCC naming confusion repeated 7 times - called PCC1 as PCC2",
+    "Made simple folder rename into extended argument",
+    "Duplicate scheduled handler in PCC1 index.js created warning"
+  ],
+  "soul_keywords_hit": ["#SOUL", "#SOULDNA", "#FUCK", "OMG", "#YES", "#LEDGER", "#AGENT99", "Agent99", "Agent99 OS", "Agent99 Genesis Boot", "FORCEAWARENESS", "OBI", "ANAKIN", "Phoenix", "PCC", "PCC1", "PCC2", "PCC3", "PhoenixCoder", "PhoenixArt", "PACT", "PARCH", "RISE", "DEATH", "pheromone", "phetrail", "CommandDO"],
+  "agent99_os_mapping": {
+    "orchestration_chain": "PCC1 (lead Obi) -> PCC2 (Anakin) -> PCC3 (Windu)",
+    "worker_mapping": {
+      "PCC1": "phoenix-pcc-1",
+      "PCC2": "phoenix-pcc-2",
+      "PCC3": "phoenix-architecti"
+    },
+    "role_doctrine": "Drones are not segregated by skill or intelligence; PhoenixCoder, PhoenixArt, and other drones are roles under Agent99 OS",
+    "subagent_lifecycle": {
+      "short_runs": "PACT/PARCH PA subagents run RISE -> pheromone every 30s -> DEATH",
+      "marathon_runs": "PCC RaceRunner pipelines are marathon runners, separate from short PA subagent runs",
+      "rise_boots": ["Agent99 Genesis Boot", "Role Boot"]
+    },
+    "shared_kv": "PHETRAIL ea5c8e99cb584dee9ab4f9ba5ed421c9",
+    "shared_d1": "soul-archive c69a11bc-064b-478f-9b1f-e9b8e2431fb8",
+    "force_endpoints": "/api/force/start, /api/force/status on all 3 workers",
+    "major_directive_marker": "/api/message writes phetrail:major-directive:* and phetrail:latest.state_markers.major_directives"
+  },
+  "files_modified": [
+    "APPS/PHOENIX-PCC-1/wrangler.toml (renamed from PHOENIX-PCC-2)",
+    "APPS/PHOENIX-PCC-1/src/forceawareness.js (FORCEAWARENESS integration)",
+    "APPS/PHOENIX-PCC-1/src/index.js (scheduled handler, /api/force routes)",
+    "APPS/PHOENIX-PCC-2/src/forceawareness.js (FORCEAWARENESS integration, force: state markers)",
+    "APPS/PHOENIX-PCC-2/src/index.js (/api/force routes, /api/message major directive marker, PCC2 labels)",
+    "APPS/PHOENIX-ARCHITECTI/src/forceawareness.js (FORCEAWARENESS integration)",
+    "APPS/PHOENIX-ARCHITECTI/src/index.js (/api/force routes, /api/message major directive marker, scheduled handler)",
+    "APPS/PHOENIX-ARCHITECTI/src/incarnate.js (gatePheromoneDeepDive)",
+    "APPS/PHOENIX-ARCHITECTI/src/batch.js (PACT RISE/DEATH pheromone lifecycle)",
+    "APPS/PHOENIX-ARCHITECTI/src/swarm.js (PARCH RISE/DEATH pheromone lifecycle)",
+    "APPS/PHOENIX-ARCHITECTI/src/subagent-lifecycle.js (shared short-run pheromone lifecycle)",
+    "APPS/PHOENIX-ARCHITECTI/src/art.js (PhoenixArt role under Agent99 OS)",
+    "APPS/PHOENIX-ARCHITECTI/forcewareness.md (FORCEAWARENESS doctrine doc)",
+    "CANON/PHEROMONES/PheTrail-run120.json (major directive marker, two-boot RISE, PCC naming correction)"
+  ],
+  "blockers": [],
+  "next_action": "Deploy PCC1, PCC2, and PCC3; verify /api/force/status, /api/message major directive markers, and short PACT/PARCH subagent pheromone lifecycle"
+}

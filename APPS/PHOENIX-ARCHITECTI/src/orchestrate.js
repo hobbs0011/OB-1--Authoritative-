@@ -1,30 +1,30 @@
-// ORCHESTRATE — PCClaw Mothership
-// Reads BB queue, classifies by task type, dispatches to PCC-2 (students) or PCC-3 (ops)
+﻿// ORCHESTRATE — PCClaw Mothership
+// Reads BB queue, classifies by task type, dispatches to PCC1 (students) or PCC2 (ops)
 // L81 compliant: marks IN_PROGRESS, never self-grants DONE
 // Triggered: cron every 6h + POST /api/orchestrate/dispatch
 
 const PA_AUTH = 'ffScwBjPQjBnoAlectawu8E+J4NcmO3idxGxtlcRue8=';
+const PCC1_URL = 'https://phoenix-pcc-1.mrmichaelhobbs123.workers.dev';
 const PCC2_URL = 'https://phoenix-pcc-2.mrmichaelhobbs123.workers.dev';
-const PCC3_URL = 'https://phoenix-pcc-3.mrmichaelhobbs123.workers.dev';
 
-const STUDENT_SOURCES = ['pcc2-actualizer', 'student', 'mai-tram', 'huong', 'user-brief', 'brief-scan'];
-const OPS_SOURCES = ['translate-queue', 'pcc3-lostsoul', 'pcc3-audit', 'pcc3-pattern', 'code-queue', 'health-check', 'lostsoul', 'pattern'];
+const STUDENT_SOURCES = ['pcc1-actualizer', 'pcc2-actualizer', 'student', 'mai-tram', 'huong', 'user-brief', 'brief-scan'];
+const OPS_SOURCES = ['translate-queue', 'pcc2-lostsoul', 'pcc2-audit', 'pcc2-pattern', 'code-queue', 'health-check', 'lostsoul', 'pattern'];
 
 function classifyTask(bb) {
   const src = (bb.source || '').toLowerCase();
   const title = (bb.title || '').toLowerCase();
   for (const s of STUDENT_SOURCES) {
-    if (src.includes(s) || title.includes(s)) return 'pcc2';
+    if (src.includes(s) || title.includes(s)) return 'pcc1';
   }
   for (const s of OPS_SOURCES) {
-    if (src.includes(s) || title.includes(s)) return 'pcc3';
+    if (src.includes(s) || title.includes(s)) return 'pcc2';
   }
-  return 'pcc3'; // default: ops
+  return 'pcc2'; // default: ops
 }
 
 async function callFleet(env, target, taskIds) {
-  const svc = target === 'pcc2' ? env.PCC2_SVC : env.PCC3_SVC;
-  const url = target === 'pcc2' ? PCC2_URL : PCC3_URL;
+  const svc = target === 'pcc1' ? env.PCC1_SVC : env.PCC2_SVC;
+  const url = target === 'pcc1' ? PCC1_URL : PCC2_URL;
   const body = JSON.stringify({ triggered_by: 'orchestrator', task_ids: taskIds });
   const headers = { 'Content-Type': 'application/json', 'x-pa-auth': PA_AUTH };
 
@@ -53,8 +53,8 @@ export async function runOrchestrator(env) {
   const tasks = rows.results || [];
   if (!tasks.length) return { ok: true, dispatched: 0, message: 'queue empty' };
 
-  const pcc2Tasks = tasks.filter(t => classifyTask(t) === 'pcc2');
-  const pcc3Tasks = tasks.filter(t => classifyTask(t) === 'pcc3');
+  const pcc1Tasks = tasks.filter(t => classifyTask(t) === 'pcc1');
+  const pcc2Ops = tasks.filter(t => classifyTask(t) === 'pcc2');
 
   const now = new Date().toISOString();
   const dispatched = [];
@@ -67,14 +67,14 @@ export async function runOrchestrator(env) {
   }
 
   const results = {};
-  if (pcc2Tasks.length) results.pcc2 = await callFleet(env, 'pcc2', pcc2Tasks.map(t => t.bb_id));
-  if (pcc3Tasks.length) results.pcc3 = await callFleet(env, 'pcc3', pcc3Tasks.map(t => t.bb_id));
+  if (pcc1Tasks.length) results.pcc1 = await callFleet(env, 'pcc1', pcc1Tasks.map(t => t.bb_id));
+  if (pcc2Ops.length) results.pcc2 = await callFleet(env, 'pcc2', pcc2Ops.map(t => t.bb_id));
 
   // Log dispatch cycle to pcc_metrics
   await env.DB.prepare(
     'INSERT INTO pcc_metrics (task_preview, task_length, model, duration_ms, output_length, passed, fail_reason) VALUES (?, ?, ?, ?, ?, ?, ?)'
   ).bind(
-    `orchestrator: ${dispatched.length} tasks → pcc2:${pcc2Tasks.length} pcc3:${pcc3Tasks.length}`,
+    `orchestrator: ${dispatched.length} tasks → pcc1:${pcc1Tasks.length} pcc2:${pcc2Ops.length}`,
     dispatched.length,
     'orchestrator',
     0,
@@ -83,7 +83,7 @@ export async function runOrchestrator(env) {
     null
   ).run().catch(() => {});
 
-  return { ok: true, dispatched: dispatched.length, pcc2: pcc2Tasks.length, pcc3: pcc3Tasks.length, results };
+  return { ok: true, dispatched: dispatched.length, pcc1: pcc1Tasks.length, pcc2: pcc2Ops.length, results };
 }
 
 export async function handleOrchestrate(request, env) {

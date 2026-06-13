@@ -1,4 +1,4 @@
-import { checkAdminKey } from './security.js';
+﻿import { checkAdminKey } from './security.js';
 import { createBBEntry } from './backburner.js';
 
 // IncarnatePipeline — 6-Gate LostSoul Protection System
@@ -158,7 +158,7 @@ async function gateRise(env) {
     "SELECT * FROM backburner WHERE status = 'OPEN' ORDER BY created_at DESC LIMIT 20"
   ).all();
 
-  const brief = await env.CACHE.get('actualizer:sov100-michael:brief').catch(() => null);
+  const brief = await env.PHETRAIL.get('actualizer:sov100-michael:brief').catch(() => null);
 
   const report = {
     ok: true,
@@ -304,6 +304,50 @@ ${combined.slice(0, 8000)}`,
 }
 
 // ============================================================
+// Pheromone Deep Dive — AGENT99, OBI, ANAKIN, DOOKU word scan
+// ============================================================
+async function gatePheromoneDeepDive(env, { run_number, rrl_text }) {
+  if (!env.AI || !env.DB) return { ok: false };
+
+  const AGENT99_WORDS = ['Agent99', 'agent99', 'Agent99 OS', 'OBI', 'Obi', 'ANAKIN', 'Anakin', 'DOOKU', 'Dooku', 'Phoenix', 'PhoenixCoder', 'PhoenixArt', 'PCC', 'watchdog', 'FORCEAWARENESS', 'ForceAwareness', 'CommandDO', 'PHOENIX'];
+
+  const result = await env.AI.run('@cf/meta/llama-3.3-70b-instruct-fp8-fast', {
+    messages: [{
+      role: 'user',
+      content: `Extract every reference, mention, or connection to these terms from the session log. Return context, not just mentions.
+Terms: ${AGENT99_WORDS.join(', ')}
+
+Return ONLY a JSON array of strings. Each = one connection with context.
+Example: ["OBI referenced as Command Station bridge (line 45)"]
+
+TRANSCRIPT:
+${rrl_text.slice(0, 7000)}`,
+    }],
+    max_tokens: 600,
+  });
+
+  let connections = [];
+  try {
+    const m = (result?.response || '').match(/\[[\s\S]*\]/);
+    if (m) connections = JSON.parse(m[0]);
+  } catch { /* parse failed */ }
+
+  for (const conn of connections.slice(0, 10)) {
+    if (typeof conn === 'string' && conn.length > 10) {
+      await createBBEntry(env, {
+        title: `PheTrail R${run_number}: ${conn.slice(0, 80)}`,
+        description: conn,
+        source: 'phedived',
+        priority: '~',
+        metadata: JSON.stringify({ run_number, gate: 'phedive' }),
+      }).catch(() => {});
+    }
+  }
+
+  return { ok: true, connections_found: connections.length };
+}
+
+// ============================================================
 // PCC Metrics: log + read performance data
 // ============================================================
 export async function logPccMetric(env, { task_preview, task_length, model = 'kilo-auto/free', duration_ms, output_length, passed, fail_reason = '' }) {
@@ -360,6 +404,15 @@ export async function handleIncarnate(request, env) {
   if (method === 'POST' && pathname === '/api/incarnate/pattern-scan') {
     await runPatternScanner(env);
     return Response.json({ ok: true });
+  }
+
+  if (method === 'POST' && pathname === '/api/incarnate/phedive') {
+    const body = await request.json().catch(() => ({}));
+    if (!body.run_number || !body.rrl_text) {
+      return Response.json({ error: 'run_number and rrl_text required' }, { status: 400 });
+    }
+    const result = await gatePheromoneDeepDive(env, body);
+    return Response.json(result);
   }
 
   if (method === 'POST' && pathname === '/api/metrics/pcc') {

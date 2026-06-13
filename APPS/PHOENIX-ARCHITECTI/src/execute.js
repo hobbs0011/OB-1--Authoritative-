@@ -1,4 +1,4 @@
-import { checkAdminKey, sanitizeInput } from './security.js';
+﻿import { checkAdminKey, sanitizeInput } from './security.js';
 import { verify } from './verify.js';
 import { logToD1 } from './logger.js';
 import { isCodeTask, inferMaxTokens, compressContext, cacheKey } from './tokens.js';
@@ -44,8 +44,8 @@ export async function handleExecute(request, env) {
 
   // KV cache check — skip for T2 paid (don't serve stale on expensive calls)
   const ck = await cacheKey(task, context);
-  if (tier !== 2 && env.CACHE) {
-    const cached = await env.CACHE.get('cache:' + ck).catch(() => null);
+  if (tier !== 2 && env.PHETRAIL) {
+    const cached = await env.PHETRAIL.get('cache:' + ck).catch(() => null);
     if (cached) {
       return Response.json({ patch: cached, verified: true, model: 'kv-cache', d1_id: null, version: '1.1.0', cached: true });
     }
@@ -144,8 +144,8 @@ export async function handleExecute(request, env) {
   const verifyResult = verify(patch);
 
   // Cache successful results
-  if (tier !== 2 && env.CACHE && patch.length > 0) {
-    env.CACHE.put('cache:' + ck, patch, { expirationTtl: 3600 }).catch(() => {});
+  if (tier !== 2 && env.PHETRAIL && patch.length > 0) {
+    env.PHETRAIL.put('cache:' + ck, patch, { expirationTtl: 3600 }).catch(() => {});
   }
 
   const d1_id = await logToD1(env, {

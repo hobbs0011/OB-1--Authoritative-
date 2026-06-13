@@ -1,4 +1,4 @@
-// Serve the gallery HTML directly from the worker.
+﻿// Serve the gallery HTML directly from the worker.
 // Avoids CF edge cache issues with --assets middleware.
 // The HTML is embedded as a template literal at build time.
 

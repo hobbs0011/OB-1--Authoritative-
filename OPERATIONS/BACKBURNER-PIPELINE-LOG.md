@@ -1,4 +1,4 @@
-# BACKBURNER PIPELINE LOG
+﻿# BACKBURNER PIPELINE LOG
 # OB-1 Canonical — Append-Only. Never delete. Mark DONE, never remove.
 # ENCODE INTO CORE: This file is read at COLD-START-BOOT. It survives reincarnations.
 # Last updated: 2026-05-18 — Session post-compaction checkpoint
@@ -463,3 +463,10 @@ WRITE_GAP does not block death but must be named. Silence = repeat offense next 
 - Route: SCRIPTS/append-bible.ps1
 
 BB-NEW [2026-06-13]: PCC 3-hour overnight pipeline designed. Winner: PCC-Student (8670). Pre-req: fix PCC-3 discovery root cause. Status: OPEN.
+
+BB-NEW [2026-06-13] !! PHETRAIL STRENGTH SCORING — Add 1-100 strength rating to every phetrail entry in IncarnatePipeline and OPERATIONS/phetrail-*.md files.
+- Status: OPEN
+- What: Michael directive Run 120: every phetrail must carry a 1-100 strength rating. High-signal trails = near 100. Routine operational trails = 20-50. Dead ends / negative trails = 10-30 but persist longer (NEG decays slower — Stage 48 law).
+- Where: incarnate.js createBBEntry + phetrail JSON schema + OPERATIONS phetrail .md files
+- First applied: phetrail-HOW-TO-SCOUT.md (100/100 SPIKE) — Run 120 scout session
+- Route: Obi (PCC1) via chain of command. Not OB-1 inline.

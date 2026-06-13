@@ -1,4 +1,4 @@
-import { checkAdminKey } from './security.js';
+﻿import { checkAdminKey } from './security.js';
 
 export async function handleBlueprint(request, env) {
   const adminResponse = await checkAdminKey(request, env);

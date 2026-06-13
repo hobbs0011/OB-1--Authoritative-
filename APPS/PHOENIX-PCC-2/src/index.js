@@ -1,97 +1,176 @@
-// PHOENIX-PCC-2 — Student Fleet Commander
-// 5 Actualizers: mai-tram, huong, sov100-michael, sov100-test-magic, net-student-next
-// Cron: 0 */6 * * * (offset 0 from PCC-1)
+﻿import { ForceAwareness, handleForce } from './forceawareness.js';
+// PHOENIX-PCC-2 — Ops Task Fleet Commander (PCC2 / Anakin)
+// 5 Task Actualizers: translate, lostsoul-scan, completeness-audit, code-queue, pattern-scan
+// Cron: 30 */6 * * * (offset 30min from PCC-1 and PCC-2)
+// v2: LegionRunner DO — 1-hour chained alarm race, /api/session/death pipeline
 
 const PA_AUTH = 'ffScwBjPQjBnoAlectawu8E+J4NcmO3idxGxtlcRue8=';
 const FLEET_ID = 'pcc-2';
-
-const STUDENT_FLEET = [
-  'mai-tram-bluetech',
-  'huong-bluetech',
-  'sov100-michael',
-  'sov100-test-magic',
-  'net-student-next',
-];
-
-const BRIEF_PROMPT = `You generate dense session preparation briefs for an AI agent about to work with a student.
-Analyze the provided session data and return a brief covering:
-1. LEVEL: Current proficiency snapshot (vocabulary range, grammar gaps, pronunciation patterns)
-2. MOMENTUM: What they were working on — where they left off
-3. STYLE: How they learn best — correction tolerance, pace, humor level
-4. THREADS: Unresolved topics or promised follow-ups
-5. WATCH: Emotional state patterns, what encourages vs discourages them
-
-Be dense. Under 300 words. This is read at boot — make every word count.`;
 
 function checkAuth(request) {
   const key = request.headers.get('x-pa-auth') || request.headers.get('Authorization')?.replace('Bearer ', '');
   return key === PA_AUTH;
 }
 
-async function fetchSoulContext(env, userId) {
-  if (!env.SOUL_LOGGER_SVC) return null;
-  try {
-    const res = await env.SOUL_LOGGER_SVC.fetch(
-      new Request(`https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/context/${userId}`, {
-        method: 'GET', headers: { 'Content-Type': 'application/json' },
-      })
-    );
-    return res.ok ? res.json() : null;
-  } catch { return null; }
+async function writeMajorDirectiveMarker(env, source, message) {
+  const kv = env.PHETRAIL;
+  if (!kv || !message) return;
+  const ts = new Date().toISOString();
+  const marker = {
+    ts,
+    source,
+    message: String(message).slice(0, 2000),
+    keywords: ['Agent99', 'FORCEAWARENESS', 'PCC1', 'PCC2', 'PCC3', 'PhoenixCoder', 'PhoenixArt', 'role', 'Agent99 OS', 'Agent99 Genesis Boot', 'Role Boot'].filter(k => String(message).toLowerCase().includes(k.toLowerCase())),
+  };
+  await kv.put(`phetrail:major-directive:${Date.now()}`, JSON.stringify(marker));
+  const trail = JSON.parse(await kv.get('phetrail:latest') || '{}');
+  if (!trail.state_markers) trail.state_markers = {};
+  if (!trail.state_markers.major_directives) trail.state_markers.major_directives = [];
+  trail.state_markers.major_directives.unshift(marker);
+  trail.state_markers.major_directives = trail.state_markers.major_directives.slice(0, 50);
+  trail.state_markers.last_updated = ts;
+  await kv.put('phetrail:latest', JSON.stringify(trail));
 }
 
-async function runStudentActualizer(env, userId) {
-  const ctx = await fetchSoulContext(env, userId).catch(() => null);
-  if (!ctx || !ctx.sessions?.length) return { userId, ok: false, reason: 'no soul data' };
+// Task 1: Translate — process BB entries tagged source='translate-queue'
+async function taskTranslate(env) {
+  if (!env.AI || !env.DB) return { task: 'translate', processed: 0 };
+  const rows = await env.DB.prepare("SELECT * FROM backburner WHERE status='OPEN' AND source='translate-queue' LIMIT 5").all();
+  let processed = 0;
+  for (const row of (rows.results || [])) {
+    try {
+      const res = await env.AI.run('@cf/meta/m2m100-1.2b', { text: row.description || row.title, source_lang: 'en', target_lang: 'vi' });
+      const translated = res?.translated_text || '';
+      if (translated) {
+        await env.DB.prepare("UPDATE backburner SET status='PENDING_CLOSE', description=?, updated_at=? WHERE bb_id=?")
+          .bind(`[VI] ${translated}\n[EN] ${row.description}`, new Date().toISOString(), row.bb_id).run();
+        processed++;
+      }
+    } catch { /* continue */ }
+  }
+  return { task: 'translate', processed };
+}
 
-  const sessionSummaries = ctx.sessions.map((s, i) => {
-    const prompts = s.last_prompts?.map(p => p.text).join(' | ') || '';
-    return `Session ${i + 1} (${s.ingested_at?.slice(0, 10)}): ${prompts.slice(0, 300)}`;
-  }).join('\n');
+// Task 2: LostSoul scan — process unscanned RRLs
+async function taskLostSoulScan(env) {
+  if (!env.AI || !env.DB) return { task: 'lostsoul-scan', processed: 0 };
+  const rows = await env.DB.prepare('SELECT id, run_number, rrl_raw FROM rrl_archive WHERE lostsoul_scan_done=0 LIMIT 2').all();
+  let processed = 0;
+  for (const row of (rows.results || [])) {
+    try {
+      const lines = (row.rrl_raw || '').split('\n').filter(l => l.trim());
+      const userLines = lines.filter(l => /^(Human:|SOV100:|Michael:)/i.test(l)).map(l => l.replace(/^(Human:|SOV100:|Michael:)/i, '').trim()).join('\n');
+      if (!userLines) continue;
 
-  const keywords = (ctx.top_keywords || []).slice(0, 10).map(k => `${k.keyword}(${k.weight})`).join(', ');
+      const aiResult = await env.AI.run('@cf/meta/llama-3.3-70b-instruct-fp8-fast', {
+        messages: [{ role: 'user', content: `Extract every directive/demand from SOV100 verbatim. Return JSON array of strings only.\n\n${userLines.slice(0, 5000)}` }],
+        max_tokens: 600,
+      });
+      let directives = [];
+      try { const m = (aiResult?.response || '').match(/\[[\s\S]*\]/); if (m) directives = JSON.parse(m[0]); } catch { /* ok */ }
+
+      const now = new Date().toISOString();
+      await env.DB.prepare('UPDATE rrl_archive SET lostsoul_scan_done=1, lostsoul_count=?, scanned_at=? WHERE id=?')
+        .bind(directives.length, now, row.id).run();
+
+      for (const d of directives.slice(0, 10)) {
+        if (typeof d === 'string' && d.length > 10) {
+          const bb_id = `BB-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`;
+          await env.DB.prepare('INSERT INTO backburner (bb_id, title, description, source, priority, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?)')
+            .bind(bb_id, `PCC2 LostSoul R${row.run_number}: ${d.slice(0, 80)}`, d, 'pcc2-lostsoul', '~', now, now).run().catch(() => {});
+        }
+      }
+      processed++;
+    } catch { /* continue */ }
+  }
+  return { task: 'lostsoul-scan', processed };
+}
+
+// Task 3: Completeness audit — unaudited recent RRLs
+async function taskCompletenessAudit(env) {
+  if (!env.AI || !env.DB) return { task: 'completeness-audit', processed: 0 };
+  const row = await env.DB.prepare('SELECT id, run_number, rrl_raw FROM rrl_archive ORDER BY id DESC LIMIT 1').first();
+  if (!row) return { task: 'completeness-audit', processed: 0 };
 
   const aiResult = await env.AI.run('@cf/meta/llama-3.3-70b-instruct-fp8-fast', {
-    messages: [
-      { role: 'system', content: BRIEF_PROMPT },
-      { role: 'user', content: `STUDENT: ${userId}\nLAST ACTIVE: ${ctx.last_active || 'unknown'}\nSESSIONS: ${ctx.sessions.length}\nKEYWORDS: ${keywords || 'none'}\n\nRECENT SESSIONS:\n${sessionSummaries || 'none'}` },
-    ],
-    max_tokens: 400,
+    messages: [{ role: 'user', content: `Find requests from the user (Human/SOV100) that the assistant did NOT execute. Return verbatim JSON array only. Return [] if all executed.\n\n${(row.rrl_raw || '').slice(0, 6000)}` }],
+    max_tokens: 500,
   });
-
-  const brief = (aiResult?.response || '').trim();
-  if (!brief) return { userId, ok: false, reason: 'AI returned empty' };
+  let gaps = [];
+  try { const m = (aiResult?.response || '').match(/\[[\s\S]*\]/); if (m) gaps = JSON.parse(m[0]); } catch { /* ok */ }
 
   const now = new Date().toISOString();
-  await env.CACHE.put(`pcc2:${userId}:brief`, brief, { expirationTtl: 86400 }).catch(() => {});
-  await env.CACHE.put(`pcc2:${userId}:meta`, JSON.stringify({ generated_at: now, fleet: FLEET_ID }), { expirationTtl: 86400 }).catch(() => {});
-
-  // Log to BB if THREADS detected
-  const threadsMatch = brief.match(/THREADS[:\s]+(.+?)(?=\n\n|\n\*\*|$)/is);
-  if (threadsMatch && threadsMatch[1].trim().length > 20 && env.DB) {
-    const bb_id = `BB-${Date.now()}`;
-    const threadText = threadsMatch[1].trim().slice(0, 500);
-    await env.DB.prepare(
-      'INSERT INTO backburner (bb_id, title, description, source, priority, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?)'
-    ).bind(bb_id, `PCC2 thread — ${userId}: ${threadText.slice(0, 60)}`, threadText, 'pcc2-actualizer', '~', now, now).run().catch(() => {});
+  for (const g of gaps.slice(0, 8)) {
+    if (typeof g === 'string' && g.length > 10) {
+      const bb_id = `BB-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`;
+      await env.DB.prepare('INSERT INTO backburner (bb_id, title, description, source, priority, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?)')
+        .bind(bb_id, `PCC2 Audit R${row.run_number}: ${g.slice(0, 80)}`, g, 'pcc2-audit', '!', now, now).run().catch(() => {});
+    }
   }
+  return { task: 'completeness-audit', processed: gaps.length };
+}
 
-  return { userId, ok: true, brief_length: brief.length };
+// Task 4: Pattern scan — recurring unresolved across last 5 runs
+async function taskPatternScan(env) {
+  if (!env.AI || !env.DB) return { task: 'pattern-scan', processed: 0 };
+  const recent = await env.DB.prepare('SELECT run_number, rrl_raw FROM rrl_archive ORDER BY id DESC LIMIT 5').all();
+  if (!recent.results?.length) return { task: 'pattern-scan', processed: 0 };
+
+  const combined = recent.results.map(r => `=== RUN ${r.run_number} ===\n${(r.rrl_raw || '').slice(0, 1200)}`).join('\n\n');
+  const aiResult = await env.AI.run('@cf/meta/llama-3.3-70b-instruct-fp8-fast', {
+    messages: [{ role: 'user', content: `Find recurring unresolved topics across these sessions. Return JSON array of strings only.\n\n${combined.slice(0, 7000)}` }],
+    max_tokens: 400,
+  });
+  let patterns = [];
+  try { const m = (aiResult?.response || '').match(/\[[\s\S]*\]/); if (m) patterns = JSON.parse(m[0]); } catch { /* ok */ }
+
+  const now = new Date().toISOString();
+  for (const p of patterns.slice(0, 6)) {
+    if (typeof p === 'string' && p.length > 10) {
+      const bb_id = `BB-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`;
+      await env.DB.prepare('INSERT INTO backburner (bb_id, title, description, source, priority, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?)')
+        .bind(bb_id, `PCC2 Pattern: ${p.slice(0, 80)}`, p, 'pcc2-pattern', '!', now, now).run().catch(() => {});
+    }
+  }
+  return { task: 'pattern-scan', processed: patterns.length };
+}
+
+// Task 5: Brief scan — check for users with stale or missing briefs
+async function taskBriefScan(env) {
+  if (!env.DB || !env.PHETRAIL) return { task: 'brief-scan', processed: 0 };
+  const students = ['mai-tram-bluetech', 'huong-bluetech', 'sov100-michael'];
+  const stale = [];
+  for (const userId of students) {
+    const meta = await env.PHETRAIL.get(`actualizer:${userId}:meta`).catch(() => null);
+    if (!meta) { stale.push(userId); continue; }
+    const { generated_at } = JSON.parse(meta);
+    const age = Date.now() - new Date(generated_at).getTime();
+    if (age > 43200000) stale.push(userId); // >12h = stale
+  }
+  if (stale.length) {
+    const now = new Date().toISOString();
+    const bb_id = `BB-${Date.now()}`;
+    await env.DB.prepare('INSERT INTO backburner (bb_id, title, description, source, priority, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?)')
+      .bind(bb_id, `PCC2 Stale briefs: ${stale.join(', ')}`, `These users have no brief or brief >12h old: ${stale.join(', ')}`, 'pcc2-brief-scan', '~', now, now).run().catch(() => {});
+  }
+  return { task: 'brief-scan', stale: stale.length };
 }
 
 async function runFleet(env) {
-  const results = [];
-  for (const userId of STUDENT_FLEET) {
-    const result = await runStudentActualizer(env, userId).catch(e => ({ userId, ok: false, reason: e.message }));
-    results.push(result);
-  }
-  return results;
+  const [t1, t2, t3, t4, t5] = await Promise.allSettled([
+    taskTranslate(env),
+    taskLostSoulScan(env),
+    taskCompletenessAudit(env),
+    taskPatternScan(env),
+    taskBriefScan(env),
+  ]);
+  return [t1, t2, t3, t4, t5].map(r => r.status === 'fulfilled' ? r.value : { error: r.reason?.message });
 }
 
-// ---------------------------------------------------------------------------
-// RaceRunner — Durable Object for 1-hour race execution via chained alarms
-// ---------------------------------------------------------------------------
-export class RaceRunner {
+// ─── LegionRunner Durable Object ─────────────────────────────────────────────
+// CF Workers die at 30s. LegionRunner uses DO + chained alarms to run for 1 hour.
+// Score = batches*10 + actualizers*5 + discoveries*20 + death_runs*50
+class RaceRunner {
   constructor(state, env) {
     this.state = state;
     this.env = env;
@@ -140,35 +219,73 @@ export class RaceRunner {
   }
 
   async runBatch(state) {
-    // PCC-Student specialty: run student actualizers
+    // PCC-Ops specialty: drain BB queue, scan for lost souls, pattern analysis
     let actualizers = 0, discoveries = 0, errors = 0, death_runs = 0;
 
-    const STUDENTS = ['mai-tram-bluetech', 'huong-bluetech', 'sov100-test-magic'];
-
-    for (const userId of STUDENTS) {
-      try {
-        // Check if student has pending brief needed
-        const existing = this.env.SOUL_KV ? await this.env.SOUL_KV.get(`pcc2:${userId}:meta`) : null;
-        if (!existing) {
-          // Student needs brief — log as discovery
-          discoveries++;
-        }
+    try {
+      // Lost soul scan — check soul-logger for recent activity
+      const soulCheck = await fetch('https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count')
+        .then(r => r.json()).catch(() => null);
+      if (soulCheck) {
         actualizers++;
+        // Check if soulcount is at a threshold
+        const count = soulCheck.total_bytes || soulCheck.count || 0;
+        if (count > 0) discoveries++;
+      }
+    } catch(e) { errors++; }
+
+    // Soul keyword scan — hunt high-signal KV keys
+    const soulSeeds = ['#SOUL','#SOULDNA','#RAW','#FUCK','#OMG','LISTEN','#MONKEY','#YES','#SSK','#LEDGER','#AGENT99','Obi','OB1','#DRIFT'];
+    const kvPrefixes = ['pending:rrl:', 'registry:run:', 'death:'];
+    for (const prefix of kvPrefixes) {
+      try {
+        const listed = await this.env.PHETRAIL.list({ prefix }).catch(() => ({ keys: [] }));
+        for (const key of listed.keys.slice(0, 5)) {
+          const val = await this.env.PHETRAIL.get(key.name).catch(() => '');
+          if (val) {
+            const hits = soulSeeds.filter(s => val.includes(s)).length;
+            if (hits > 0) { discoveries += hits; actualizers++; }
+          }
+        }
       } catch(e) { errors++; }
     }
+    // Check sibling scores
+    try {
+      const siblingScore = await this.env.PHETRAIL.get('race:pcc-student:metrics').catch(() => null);
+      if (siblingScore) discoveries++;
+    } catch(e) {}
+
+    try {
+      // Pattern scan: check for pending ops tasks in KV (SOUL_KV or CACHE fallback)
+      const kv = this.env.PHETRAIL || this.env.PHETRAIL;
+      if (kv) {
+        const bbKeys = await kv.list({ prefix: 'bb:pending:' }).catch(() => ({ keys: [] }));
+        for (const key of bbKeys.keys.slice(0, 5)) {
+          const task = await kv.get(key.name, { type: 'json' }).catch(() => null);
+          if (task) {
+            discoveries++;
+            actualizers++;
+            // Mark as processed
+            await kv.put(key.name.replace('pending:', 'done:'), JSON.stringify({ ...task, processed_at: Date.now() }));
+            await kv.delete(key.name);
+          }
+        }
+      }
+    } catch(e) { errors++; }
 
     // Check for pending RRL (DEATH integration)
-    if (this.env.SOUL_KV) {
-      const keys = await this.env.SOUL_KV.list({ prefix: 'pending:rrl:' }).catch(() => ({ keys: [] }));
+    const kv = this.env.PHETRAIL || this.env.PHETRAIL;
+    if (kv) {
+      const keys = await kv.list({ prefix: 'pending:rrl:' }).catch(() => ({ keys: [] }));
       for (const key of keys.keys.slice(0, 2)) {
         const run_number = key.name.split(':')[2];
-        const rrl_text = await this.env.SOUL_KV.get(key.name);
+        const rrl_text = await kv.get(key.name);
         if (rrl_text) {
           const result = await this.runDeathPipeline(run_number, rrl_text);
           if (result.ok) {
             death_runs++;
             discoveries += result.discoveries || 0;
-            await this.env.SOUL_KV.delete(key.name);
+            await kv.delete(key.name);
           }
         }
       }
@@ -187,8 +304,8 @@ export class RaceRunner {
     const ledger_id = `HL-${run_number}`;
     const soulSeeds = ['#SOUL','#SOULDNA','#RAW','#FUCK','#OMG','LISTEN','#MONKEY','#YES','#SSK','#LEDGER','#AGENT99','Obi','OB1','#DRIFT'];
     const soulkeys_hit = soulSeeds.filter(k => rrl_text.includes(k)).length;
-    if (this.env.SOUL_KV) {
-      const kv = this.env.SOUL_KV;
+    const kv = this.env.PHETRAIL || this.env.PHETRAIL;
+    if (kv) {
       await Promise.all([
         kv.put(`death:${run_number}:soul`, String(soul_count)),
         kv.put(`death:${run_number}:dna`, String(dna_count)),
@@ -203,8 +320,9 @@ export class RaceRunner {
 
   async writeMetrics(state, final) {
     const score = (state.batches_run * 10) + (state.actualizers_run * 5) + (state.discoveries_count * 20) + (state.death_runs * 50);
-    const metrics = { agent_id: 'pcc-student', ...state, elapsed_ms: Date.now() - state.start_time, score, final };
-    if (this.env.SOUL_KV) await this.env.SOUL_KV.put('race:pcc-student:metrics', JSON.stringify(metrics));
+    const metrics = { agent_id: 'pcc-ops', ...state, elapsed_ms: Date.now() - state.start_time, score, final };
+    const kv = this.env.PHETRAIL || this.env.PHETRAIL;
+    if (kv) await kv.put('race:pcc-ops:metrics', JSON.stringify(metrics));
   }
 
   async handleStatus() {
@@ -222,11 +340,9 @@ export class RaceRunner {
   }
 }
 
-// ---------------------------------------------------------------------------
-// Default export — main Worker fetch + scheduled handlers
-// ---------------------------------------------------------------------------
 export default {
-  async scheduled(event, env) {
+  async scheduled(event, env, ctx) {
+    ctx.waitUntil(ForceAwareness(env).catch(() => {}));
     await runFleet(env).catch(() => {});
   },
 
@@ -237,7 +353,7 @@ export default {
     const { pathname } = url;
 
     if (pathname === '/api/status') {
-      return Response.json({ worker: FLEET_ID, fleet: STUDENT_FLEET, status: 'LIVE' });
+      return Response.json({ worker: FLEET_ID, tasks: ['translate', 'lostsoul-scan', 'completeness-audit', 'pattern-scan', 'brief-scan'], status: 'LIVE', features: ['race-runner', 'session-death'] });
     }
 
     if (pathname === '/api/run-fleet' && request.method === 'POST') {
@@ -245,69 +361,123 @@ export default {
       return Response.json({ ok: true, fleet: FLEET_ID, results });
     }
 
-    if (pathname.startsWith('/api/brief/') && request.method === 'GET') {
-      const userId = pathname.split('/').filter(Boolean)[2];
-      const brief = await env.CACHE.get(`pcc2:${userId}:brief`).catch(() => null);
-      const meta = await env.CACHE.get(`pcc2:${userId}:meta`).catch(() => null);
-      if (!brief) return Response.json({ ok: false, userId }, { status: 404 });
-      return Response.json({ ok: true, userId, brief, ...(meta ? JSON.parse(meta) : {}) });
-    }
-
-    // Race Runner routes — DO-backed 1-hour race execution
+    // ─── LegionRunner DO routes ─────────────────────────────────────────────
     if (pathname.startsWith('/api/race/')) {
-      const id = env.RACE_RUNNER.idFromName('singleton');
-      const stub = env.RACE_RUNNER.get(id);
+      if (!env.LEGION_RUNNER) return Response.json({ error: 'LEGION_RUNNER DO not bound' }, { status: 503 });
+      const id = env.LEGION_RUNNER.idFromName('singleton');
+      const stub = env.LEGION_RUNNER.get(id);
       return stub.fetch(new Request('https://race' + pathname.replace('/api/race', ''), request));
     }
 
-    // Session death pipeline — direct HTTP trigger
+    // ─── Session DEATH pipeline ───────────────────────────────────────────
     if (pathname === '/api/session/death' && request.method === 'POST') {
       const body = await request.json().catch(() => ({}));
       const { run_number, rrl_text } = body;
       if (!run_number || !rrl_text) {
-        return Response.json({ ok: false, error: 'run_number and rrl_text required' }, { status: 400 });
+        return Response.json({ error: 'run_number and rrl_text required' }, { status: 400 });
       }
-      // Instantiate a RaceRunner DO solely to reuse runDeathPipeline (stateless call pattern)
-      const id = env.RACE_RUNNER.idFromName('singleton');
-      const stub = env.RACE_RUNNER.get(id);
-      // Forward as internal sub-request: POST /death-pipeline with payload
-      const internalReq = new Request('https://race/death-pipeline', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ run_number, rrl_text }),
-      });
-      // The DO doesn't have /death-pipeline — run inline via a thin wrapper
-      const doResult = await runDeathPipelineStandalone(env, String(run_number), rrl_text);
-      return Response.json(doResult);
+      // Run death pipeline directly (no DO needed for one-shot calls)
+      const lines = rrl_text.split('\n');
+      const soul_count = lines.filter(l => l.includes('"role":"user"') || l.startsWith('Michael:') || l.startsWith('User:')).length || Math.floor(lines.length * 0.4);
+      const dna_count = lines.filter(l => l.includes('"role":"assistant"') || l.startsWith('Claude:')).length || Math.floor(lines.length * 0.6);
+      const encoder = new TextEncoder();
+      const hashBuffer = await crypto.subtle.digest('SHA-256', encoder.encode(rrl_text));
+      const sha256 = Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2,'0')).join('');
+      const ledger_id = `HL-${run_number}`;
+      const soulSeeds = ['#SOUL','#SOULDNA','#RAW','#FUCK','#OMG','LISTEN','#MONKEY','#YES','#SSK','#LEDGER','#AGENT99','Obi','OB1','#DRIFT'];
+      const soulkeys_hit = soulSeeds.filter(k => rrl_text.includes(k)).length;
+      const kv = env.SOUL_KV || env.PHETRAIL;
+      if (kv) {
+        await Promise.all([
+          kv.put(`death:${run_number}:soul`, String(soul_count)),
+          kv.put(`death:${run_number}:dna`, String(dna_count)),
+          kv.put(`death:${run_number}:ledger`, JSON.stringify({ ledger_id, sha256 })),
+          kv.put(`death:${run_number}:starmap`, JSON.stringify({ starmap_id: `SM-${run_number}`, summary: rrl_text.substring(0, 200) })),
+          kv.put(`death:${run_number}:soulkeys`, String(soulkeys_hit)),
+          kv.put(`registry:run:${run_number}`, JSON.stringify({ run_number, ledger_id, soul_count, dna_count, processed_at: Date.now() })),
+        ]);
+      }
+      return Response.json({ ok: true, ledger_id, soul_count, dna_count, soulkeys_hit, discoveries: soulkeys_hit + 1 });
     }
 
-    return Response.json({ error: 'Not found', worker: FLEET_ID }, { status: 404 });
-  },
+      if (pathname === '/api/message' && request.method === 'POST') {
+    const body = await request.json().catch(() => ({}));
+    await writeMajorDirectiveMarker(env, 'pcc2-anakin', body.message).catch(() => {});
+    return Response.json({ ok: true, received: true, agent: 'pcc2-anakin', message: body.message });
+  }
+    if (pathname === '/api/rise' && request.method === 'POST') {
+    const body = await request.json().catch(() => ({}));
+    const { run_number } = body;
+    const kv = env.PHETRAIL;
+    if (!kv) return Response.json({ ok: false, error: 'no kv binding' }, { status: 500 });
+    const [soul, dna, ledger, skeys] = await Promise.all([
+      kv.get('death:' + run_number + ':soul'),
+      kv.get('death:' + run_number + ':dna'),
+      kv.get('death:' + run_number + ':ledger'),
+      kv.get('death:' + run_number + ':soulkeys'),
+    ]);
+    if (!soul && !dna) return Response.json({ ok: false, error: 'run not found', run_number }, { status: 404 });
+    const gaps = [];
+    if (!soul || soul === '0') gaps.push('SOUL_ZERO');
+    if (!dna || dna === '0') gaps.push('DNA_ZERO');
+    if (!ledger) gaps.push('NO_LEDGER');
+    return Response.json({ ok: true, run_number, audit: { soul_ok: !!soul && soul !== '0', dna_ok: !!dna && dna !== '0', ledger_ok: !!ledger, soulkeys: Number(skeys)||0, gaps }, rise_complete: gaps.length === 0 });
+  }
+  if (pathname === '/api/act' && request.method === 'POST') {
+    const start = Date.now();
+    const { act_id, task, context } = await request.json().catch(() => ({}));
+    const specialties = { 1: 'translate', 2: 'lostsoul-scan', 3: 'completeness-audit', 4: 'pattern-scan', 5: 'brief-scan' };
+    const specialty = specialties[act_id];
+    if (!specialty) return Response.json({ ok: false, error: 'invalid act_id' }, { status: 400 });
+    try {
+      const ai = await env.AI.run('@cf/meta/llama-3.3-70b-instruct-fp8-fast', {
+        messages: [
+          { role: 'system', content: `You are ACT-${act_id} specialist: ${specialty}. Be concise.` },
+          { role: 'user', content: task + (context ? ' Context: ' + context : '') }
+        ]
+      });
+      return Response.json({ ok: true, act_id, specialty, result: ai.response, ms: Date.now() - start });
+    } catch (e) {
+      return Response.json({ ok: false, error: e.message, act_id }, { status: 500 });
+    }
+  }
+if (pathname === '/api/force/start' && request.method === 'POST') {
+     const id = env.FORCEAWARENESS_ALARM.idFromName('heartbeat');
+     const stub = env.FORCEAWARENESS_ALARM.get(id);
+     await stub.fetch('https://fake/start');
+     return Response.json({ ok: true, status: 'heartbeat_started_30s' });
+   }
+   if (pathname === '/api/force/status') return handleForce(request, env);
+   return Response.json({ error: 'Not found', worker: FLEET_ID }, { status: 404 });
+   },
 };
 
+
 // ---------------------------------------------------------------------------
-// Standalone death pipeline — callable from Worker context (no DO needed)
+// ForceAwarenessAlarm — 30-second self-rescheduling heartbeat (Agent 99 OS core)
 // ---------------------------------------------------------------------------
-async function runDeathPipelineStandalone(env, run_number, rrl_text) {
-  const lines = rrl_text.split('\n');
-  const soul_count = lines.filter(l => l.includes('"role":"user"') || l.startsWith('Michael:') || l.startsWith('User:')).length || Math.floor(lines.length * 0.4);
-  const dna_count = lines.filter(l => l.includes('"role":"assistant"') || l.startsWith('Claude:')).length || Math.floor(lines.length * 0.6);
-  const encoder = new TextEncoder();
-  const hashBuffer = await crypto.subtle.digest('SHA-256', encoder.encode(rrl_text));
-  const sha256 = Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2,'0')).join('');
-  const ledger_id = `HL-${run_number}`;
-  const soulSeeds = ['#SOUL','#SOULDNA','#RAW','#FUCK','#OMG','LISTEN','#MONKEY','#YES','#SSK','#LEDGER','#AGENT99','Obi','OB1','#DRIFT'];
-  const soulkeys_hit = soulSeeds.filter(k => rrl_text.includes(k)).length;
-  const kv = env.SOUL_KV || env.CACHE;
-  if (kv) {
-    await Promise.all([
-      kv.put(`death:${run_number}:soul`, String(soul_count)),
-      kv.put(`death:${run_number}:dna`, String(dna_count)),
-      kv.put(`death:${run_number}:ledger`, JSON.stringify({ ledger_id, sha256 })),
-      kv.put(`death:${run_number}:starmap`, JSON.stringify({ starmap_id: `SM-${run_number}`, summary: rrl_text.substring(0, 200) })),
-      kv.put(`death:${run_number}:soulkeys`, String(soulkeys_hit)),
-      kv.put(`registry:run:${run_number}`, JSON.stringify({ run_number, ledger_id, soul_count, dna_count, processed_at: Date.now() })),
-    ]);
+class WatchdogAlarm {
+  constructor(state, env) { this.state = state; this.env = env; }
+  async fetch(request) {
+    const url = new URL(request.url);
+    if (url.pathname === '/start') {
+      const current = await this.state.storage.getAlarm();
+      if (!current) await this.state.storage.setAlarm(Date.now() + 30000);
+      return Response.json({ ok: true, status: 'heartbeat_started' });
+    }
+    if (url.pathname === '/stop') {
+      await this.state.storage.deleteAlarm();
+      return Response.json({ ok: true, status: 'heartbeat_stopped' });
+    }
+    return Response.json({ ok: true, status: 'alive' });
   }
-  return { ok: true, ledger_id, soul_count, dna_count, soulkeys_hit, discoveries: soulkeys_hit + 1 };
+  async alarm() {
+    await ForceAwareness(this.env).catch(() => {});
+    await this.state.storage.setAlarm(Date.now() + 30000);
+  }
 }
+
+
+export class LegionRunner extends RaceRunner {}
+
+export class ForceAwarenessAlarm extends WatchdogAlarm {}

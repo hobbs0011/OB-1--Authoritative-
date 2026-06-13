@@ -1,4 +1,4 @@
-function withTimeout(promise, ms) {
+﻿function withTimeout(promise, ms) {
   return Promise.race([
     promise,
     new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), ms)),
@@ -18,8 +18,8 @@ export async function handleStatus(env) {
     bindings: {
       AI: !!env.AI,
       DB: !!env.DB,
-      RATELIMIT: !!env.RATELIMIT,
-      CACHE: !!env.CACHE,
+      RATELIMIT: !!env.SCUTUM,
+      CACHE: !!env.PHETRAIL,
     },
     drone_capacity: 10,
   };

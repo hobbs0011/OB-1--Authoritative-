@@ -1,8 +1,8 @@
-{
+﻿{
   "doctor_ok": true,
-  "timestamp": "2026-06-13T00:08:32.4214824+07:00",
-  "git_head": "ec487394 soul: Run 117 phetrails ΓÇö Actualizers, heart of Claude, roads of Rome",
-  "git_branch": "master",
-  "soul_ok": true,
-  "verify_ok": true
+  "soul_ok": false,
+  "timestamp": "2026-06-13T16:57:15.5973931+07:00",
+  "git_head": "f63f690d soul: add BLUEPRINT section to emergency reset card",
+  "verify_ok": true,
+  "git_branch": "master"
 }

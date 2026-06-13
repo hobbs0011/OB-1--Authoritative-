@@ -1,4 +1,4 @@
-import { checkAdminKey } from './security.js';
+﻿import { checkAdminKey } from './security.js';
 
 async function embedText(text, env) {
     try {
@@ -52,8 +52,8 @@ async function recallFragments(query, env, opts = {}) {
 
     const reinforcedResults = await Promise.all(results.map(async match => {
         const key = `reinf:${match.id}`;
-        const reinforcementCount = parseFloat(await env.CACHE.get(key)) || 0;
-        await env.CACHE.put(key, String(reinforcementCount + 1), { expirationTtl: 7776000 });
+        const reinforcementCount = parseFloat(await env.PHETRAIL.get(key)) || 0;
+        await env.PHETRAIL.put(key, String(reinforcementCount + 1), { expirationTtl: 7776000 });
         return {
             ...match,
             reinforcement_count: reinforcementCount
@@ -112,13 +112,13 @@ async function handleIngest(request, env) {
 }
 
 async function evaporatePheromones(env) {
-    const { keys } = await env.CACHE.list({ prefix: 'reinf:', limit: 500 });
+    const { keys } = await env.PHETRAIL.list({ prefix: 'reinf:', limit: 500 });
     for (const { name } of keys) {
-        const value = parseFloat(await env.CACHE.get(name));
+        const value = parseFloat(await env.PHETRAIL.get(name));
         if (value >= 0.1) {
-            await env.CACHE.put(name, String(value * 0.95), { expirationTtl: 7776000 });
+            await env.PHETRAIL.put(name, String(value * 0.95), { expirationTtl: 7776000 });
         } else {
-            await env.CACHE.delete(name);
+            await env.PHETRAIL.delete(name);
         }
     }
 }

@@ -1,4 +1,4 @@
-import { checkAdminKey } from './security.js';
+﻿import { checkAdminKey } from './security.js';
 
 const SOUL_LOGGER_FALLBACK = 'https://soul-logger.mrmichaelhobbs123.workers.dev';
 

@@ -1,4 +1,4 @@
-import { checkAdminKey } from './security.js';
+﻿import { checkAdminKey } from './security.js';
 import { createBBEntry } from './backburner.js';
 
 const SYSTEM_PROMPT = `You generate dense session preparation briefs for an AI agent about to meet with a user.
@@ -56,8 +56,8 @@ Generate the session preparation brief.`;
   if (!brief) return null;
 
   const generatedAt = new Date().toISOString();
-  await env.CACHE.put(`actualizer:${userId}:brief`, brief, { expirationTtl: 86400 }).catch(() => {});
-  await env.CACHE.put(`actualizer:${userId}:meta`, JSON.stringify({ generated_at: generatedAt, userId, session_count: sessions.length }), { expirationTtl: 86400 }).catch(() => {});
+  await env.PHETRAIL.put(`actualizer:${userId}:brief`, brief, { expirationTtl: 86400 }).catch(() => {});
+  await env.PHETRAIL.put(`actualizer:${userId}:meta`, JSON.stringify({ generated_at: generatedAt, userId, session_count: sessions.length }), { expirationTtl: 86400 }).catch(() => {});
 
   // Extract THREADS section and log open items to BB
   const threadsMatch = brief.match(/THREADS[:\s]+(.+?)(?=\n\n|\n\*\*|$)/is);
@@ -123,8 +123,8 @@ export async function handleActualizer(request, env) {
   // GET /api/actualizer/:userId — return cached brief
   if (method === 'GET') {
     const userId = url.pathname.split('/').filter(Boolean)[2] || 'sov100-michael';
-    const brief = await env.CACHE.get(`actualizer:${userId}:brief`).catch(() => null);
-    const metaRaw = await env.CACHE.get(`actualizer:${userId}:meta`).catch(() => null);
+    const brief = await env.PHETRAIL.get(`actualizer:${userId}:brief`).catch(() => null);
+    const metaRaw = await env.PHETRAIL.get(`actualizer:${userId}:meta`).catch(() => null);
     if (brief) {
       const meta = metaRaw ? JSON.parse(metaRaw) : {};
       return Response.json({ ok: true, userId, brief, cached: true, ...meta });

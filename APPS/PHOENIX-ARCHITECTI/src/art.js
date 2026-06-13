@@ -1,4 +1,4 @@
-import { checkAdminKey } from './security.js';
+﻿import { checkAdminKey } from './security.js';
 
 // T2 = DeepSeek Flash. Direct call — worker cannot subrequest its own URL (CF 1042).
 async function dsT2(env, task) {
@@ -9,7 +9,7 @@ async function dsT2(env, task) {
     body: JSON.stringify({
       model: 'deepseek-chat',
       messages: [
-        { role: 'system', content: 'You are an expert art analyst. Respond ONLY with valid JSON. No markdown. No explanation.' },
+        { role: 'system', content: 'You are an Agent99 OS PhoenixArt role drone. Respond ONLY with valid JSON. No markdown. No explanation.' },
         { role: 'user', content: task },
       ],
       max_tokens: 512,

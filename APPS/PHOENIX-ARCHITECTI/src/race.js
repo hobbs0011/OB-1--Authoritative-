@@ -1,4 +1,4 @@
-// RACE.JS — DO-based 1-hour Race Runner + standalone DEATH pipeline
+﻿// RACE.JS — DO-based 1-hour Race Runner + standalone DEATH pipeline
 // PCC-Arch (phoenix-architecti) Mothership Orchestrator
 // CF Workers die at 30s — Durable Objects + chained alarms solve this.
 
@@ -74,9 +74,9 @@ export async function handleSessionDeath(request, env) {
   }
 }
 
-// ─── RaceRunner Durable Object ────────────────────────────────────────────────
+// ─── LegionRunner Durable Object ────────────────────────────────────────────────
 
-export class RaceRunner {
+class RaceRunner {
   constructor(state, env) {
     this.state = state;
     this.env = env;
@@ -165,11 +165,11 @@ export class RaceRunner {
         }
       }
 
-      // Dispatch to PCC-2 and PCC-3 via service bindings
+      // Dispatch to PCC1 (student fleet) and PCC2 (ops fleet) via service bindings
       // Fix: parse response body to count real actualizers; log errors instead of swallowing them
-      if (this.env.PCC2_SVC) {
+      if (this.env.PCC1_SVC) {
         try {
-          const r = await this.env.PCC2_SVC.fetch(
+          const r = await this.env.PCC1_SVC.fetch(
             new Request('https://pcc2/api/run-fleet', { method: 'POST',
               headers: { 'Content-Type': 'application/json', 'x-pa-auth': 'ffScwBjPQjBnoAlectawu8E+J4NcmO3idxGxtlcRue8=' },
               body: JSON.stringify({ triggered_by: 'race-runner-arch' }) })
@@ -188,13 +188,13 @@ export class RaceRunner {
         } catch (e) {
           errors++;
           if (this.env.SOUL_KV) {
-            await this.env.SOUL_KV.put('race:pcc2:last-error', JSON.stringify({ msg: e.message, ts: Date.now() })).catch(() => {});
+            await this.env.SOUL_KV.put('race:pcc1:last-error', JSON.stringify({ msg: e.message, ts: Date.now() })).catch(() => {});
           }
         }
       }
-      if (this.env.PCC3_SVC) {
+      if (this.env.PCC1_SVC) {
         try {
-          const r = await this.env.PCC3_SVC.fetch(
+          const r = await this.env.PCC1_SVC.fetch(
             new Request('https://pcc3/api/run-fleet', { method: 'POST',
               headers: { 'Content-Type': 'application/json', 'x-pa-auth': 'ffScwBjPQjBnoAlectawu8E+J4NcmO3idxGxtlcRue8=' },
               body: JSON.stringify({ triggered_by: 'race-runner-arch' }) })
@@ -213,7 +213,7 @@ export class RaceRunner {
         } catch (e) {
           errors++;
           if (this.env.SOUL_KV) {
-            await this.env.SOUL_KV.put('race:pcc3:last-error', JSON.stringify({ msg: e.message, ts: Date.now() })).catch(() => {});
+            await this.env.SOUL_KV.put('race:pcc2-ops:last-error', JSON.stringify({ msg: e.message, ts: Date.now() })).catch(() => {});
           }
         }
       }
@@ -269,3 +269,8 @@ export class RaceRunner {
     return Response.json({ ok: true, stopped: true });
   }
 }
+
+
+export class LegionRunner extends RaceRunner {}
+
+export class ForceAwarenessAlarm extends WatchdogAlarm {}

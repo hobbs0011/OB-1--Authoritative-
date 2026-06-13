@@ -1,0 +1,42 @@
+﻿THE NATURAL LANGUAGE COMMAND STATION — MASTER BLUEPRINT
+
+I. THE SOUL — WHAT THIS IS:
+Command Station = bridge between Michael's will and machine execution.
+Michael speaks one sentence in plain English; the swarm executes it and reports back.
+
+II. CURRENT STATE — TRUTH LOCK:
+- CommandDO queue (built, authoritative)
+- VS Code + Chrome extensions (built, clients)
+- Windu (PHOENIX-ARCHITECTI) DEAD - toml duplicate bindings, routing detached block
+- /api/message exists on PCC1
+- Telegram secret not wired to all 3
+- No intent classification brain yet
+
+III. ARCHITECTURE - THE BRIDGE:
+MICHAEL - Client - CommandDO - OBI (PCC1, brain) - Routes to systems - Executes - Result - Telegram + Client
+
+IV. COMMAND FLOW:
+Michael: "Fix Windu"
+- POST /api/command/send - Queue
+- Obi claims via /claim
+- Classifies intent via AI
+- Dispatches via Phoenix Coder
+- POST /api/command/complete
+- Result to client + Telegram
+
+V. PCC LAW (doctrines):
+- Chain: OB-1 - Obi (PCC1) - Windu/Anakin (PCC2/PCC3)
+- Voice: nova-3 STT / aura-2-zeus-en TTS / gpt-4o-mini think (HARD-LOCKED)
+- No new API keys
+- L78: codegen - Phoenix Coder only
+- Client dumb, backend authoritative
+- PENDING_CLOSE until Michael grants DONE
+
+VI. EXECUTION ORDER:
+1. Fix Windu wrangler.toml (single [durable_objects] array)
+2. Fix Windu index.js (rejoin else-if chain)
+3. Deploy Windu
+4. Push Telegram secrets to all 3
+5. Add /api/command-station brain on PCC1
+
+EXECUTE UNTIL ORDERED TO STOP

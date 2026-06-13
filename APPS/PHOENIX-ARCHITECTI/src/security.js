@@ -1,4 +1,4 @@
-// Phoenix-Architecti security.js v1.0.0
+﻿// Phoenix-Architecti security.js v1.0.0
 // PORTED VERBATIM from NET-PET-AI/src/security.js v1.2.1 (SEC-PORT principle)
 // Binding adaptations only: SOUL_DB → DB, student-facing CORS → internal API CORS
 // DO NOT regenerate this file with a 32B model. Port only. Proven code stays proven.

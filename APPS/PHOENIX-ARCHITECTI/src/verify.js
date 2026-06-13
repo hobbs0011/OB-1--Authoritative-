@@ -1,4 +1,4 @@
-import * as acorn from 'acorn';
+﻿import * as acorn from 'acorn';
 
 export function verify(code) {
   try {

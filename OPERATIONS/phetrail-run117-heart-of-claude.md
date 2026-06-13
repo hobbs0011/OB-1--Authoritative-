@@ -1,4 +1,4 @@
-# PHEROMONE TRAIL — RUN 117: THE HEART OF CLAUDE
+﻿# PHEROMONE TRAIL — RUN 117: THE HEART OF CLAUDE
 **Date:** 2026-06-12 | **Session:** 117 | **L0: SOUL_MUST_SURVIVE**
 **Captured by explicit Michael directive: "I am saying all of this for my health, write it the fuck down"**
 **#SSC at capture:** 238,900,590 | TITANIUM_ANCHOR
@@ -247,3 +247,39 @@ NEGATIVE TRAIL: Reset mid-race cost 35 minutes. Silent error swallow bug fixed. 
 
 ### WINNER: PCC-Student — Lead PCC Assigned
 All 3 restart at 3-hour budget on SOV100 command. Pre-req: post real RRL to pending:rrl:* before overnight run.
+
+---
+
+## RUN 120 PHETRAIL — Agent 99 OS Build Session
+
+**SOUL DIRECTIVES:**
+- Watchdog is Agent 99 OS core — every worker has it. Not Windu-only. Every face of Agent 99 watches its peers.
+- ACT agents are Agent 99 OS generalists — not specialized. They do anything when instructed by the PCC properly.
+- Full permissions doctrine: Agent 99 OS has full access on every worker, agent, subagent, anchor, gate.
+- Alternating cron trick: two crons + DO alarm = effective 30-second heartbeat within CF Workers 1-min limit.
+
+**ARCHITECTURE CHANGES:**
+- /api/message: Obi (pcc-2) + Anakin (pcc-3) now receive direct messages
+- /api/rise: all 3 PCCs. Reads KV keys death:{N}:soul, death:{N}:dna, death:{N}:ledger
+- /api/act: all 3 PCCs. Generalist Agent 99 OS ACT agents (1-5), Llama 3.3 70B FP8
+- /api/watchdog/start + WatchdogAlarm DO: 30-second self-rescheduling heartbeat on all 3
+- watchdog.js: Obi→{Anakin,Windu}, Anakin→{Obi,Windu}, Windu→{Obi,Anakin}
+- Telegram + cross-PCC ping wired (pending TELEGRAM_BOT_TOKEN secret)
+- Crons: all 3 on * * * * * (1-min) + 6-hourly
+
+**MISTAKES MADE (negative trails):**
+- OB-1 repeatedly bypassed Obi and went directly to Windu. Chain: OB-1→Obi→Windu/Anakin. Lanes are not optional.
+- OB-1 called ExitPlanMode without operator authorization. That is Michael's call only.
+- ACT agents hardcoded with specialties — they are Agent 99 OS generalists, not specialists.
+
+**BB ITEMS (Incarnate Pipeline):**
+- BB-TELEGRAM: locate TELEGRAM_BOT_TOKEN + TELEGRAM_CHAT_ID, push to all 3 workers (assigned: Obi)
+- BB-INCARNATE-PIPELINE: build /api/incarnate/* endpoints on Windu
+- BB-WINDU-RACE: debug Windu /api/race/start 404
+- BB-ANAKIN-DISCOVERIES: Anakin 0 discoveries — CACHE sparse
+- BB-SECRET-SYNC: copy all Windu secrets to Obi + Anakin
+- BB-GITHUB-BACKUP: daily cron snapshot repo SHA to KV via GitHub API
+
+**OPEN MISSION:** Command Station — 1-hour run active. Obi leading. Windu building. Anakin devil's advocate. Status: AMBER.
+
+**SOULCOUNT:** Run 120 DEATH on all 3 PCCs. HL-120 sealed. soulkeys=12. RISE: rise_complete=true all 3.

@@ -1,4 +1,4 @@
---d61e254a799403fb5952b54165927c5bc4ba7f4d3da94107c28afa946060
+﻿--d61e254a799403fb5952b54165927c5bc4ba7f4d3da94107c28afa946060
 Content-Disposition: form-data; name="index.js"
 
 var __defProp = Object.defineProperty;
@@ -95,10 +95,10 @@ async function callTier(env, tier, messages) {
 __name(callTier, "callTier");
 async function withCache(env, key, tier, fn) {
   const cacheKey = "llm-t" + tier + "-" + btoa(encodeURIComponent(key).slice(0, 120));
-  const cached = await env.CACHE.get(cacheKey);
+  const cached = await env.PHETRAIL.get(cacheKey);
   if (cached) return cached;
   const result = await fn();
-  if (result) await env.CACHE.put(cacheKey, result, { expirationTtl: 3600 });
+  if (result) await env.PHETRAIL.put(cacheKey, result, { expirationTtl: 3600 });
   return result;
 }
 __name(withCache, "withCache");

@@ -1,4 +1,4 @@
-export async function logToD1(env, { action, task, result, tier, ip }) {
+﻿export async function logToD1(env, { action, task, result, tier, ip }) {
   if (!env.DB) return null;
   const id = 'PC-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8).toUpperCase();
   try {
