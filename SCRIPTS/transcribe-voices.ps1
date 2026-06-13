@@ -1,98 +1,77 @@
-# Deepgram Transcription Script
+# Deepgram Transcription Script — BlueTech class audio goldmine
 # Run: pwsh -File SCRIPTS/transcribe-voices.ps1
-# PREREQUISITE: $env:DEEPGRAM_API_KEY must be set before running
+# PREREQUISITE: $env:DEEPGRAM_API_KEY must be set
+# Outputs: OPERATIONS/CLASS-INTEL/<label>/<label>-raw.json + <label>-transcript.txt
 
 if (-not $env:DEEPGRAM_API_KEY) {
-    Write-Error "DEEPGRAM_API_KEY environment variable not set. Set it and retry."
+    Write-Error "DEEPGRAM_API_KEY not set. Run: `$env:DEEPGRAM_API_KEY = '891891df...'"
     exit 1
 }
 
 $files = @(
-    "C:\Users\mrmic\Downloads\Voice 260416_211505.m4a",
-    "C:\Users\mrmic\Downloads\Voice 260416_203228.m4a"
+    @{ path = "C:\Users\mrmic\Downloads\Telegram Desktop\Voice 260611_181619.m4a"; label = "2026-06-11-huong" },
+    @{ path = "C:\Users\mrmic\Downloads\Telegram Desktop\Voice 260610_180150.m4a"; label = "2026-06-10-mai-tram" }
 )
 
-$outputDir = "D:\OB-1\ASSETS\TRANSCRIPTIONS"
-New-Item -ItemType Directory -Path $outputDir -Force | Out-Null
+$baseOutputDir = "D:\OB-1-CANONICAL\OPERATIONS\CLASS-INTEL"
 
-function Split-AndTranscribe {
-    param([string]$FilePath, [string]$filename)
-    
-    $tempDir = Join-Path $env:TEMP "deepgram_$([System.Guid]::NewGuid().ToString())"
-    New-Item -ItemType Directory -Path $tempDir -Force | Out-Null
-    
-    Write-Host "Converting to WAV (16kHz mono)..."
-    $wavPath = Join-Path $tempDir "input.wav"
-    & ffmpeg -i $FilePath -vn -acodec pcm_s16le -ar 16000 -ac 1 $wavPath -y 2>$null
-    
-    $fileSizeMB = [math]::Round((Get-Item $wavPath).Length / 1MB, 2)
-    Write-Host "WAV size: $fileSizeMB MB"
-    
-    $durationSec = 8
-    $chunkNum = 0
-    
-    $allTranscripts = @()
-    
-    for ($startSec = 0; $startSec -lt 600; $startSec += $durationSec) {
-        $chunkPath = Join-Path $tempDir "chunk_$chunkNum.wav"
-        
-        & ffmpeg -i $wavPath -ss $startSec -t $durationSec -vn -acodec pcm_s16le -ar 16000 -ac 1 $chunkPath -y 2>$null
-        
-        $chunkSize = (Get-Item $chunkPath).Length
-        if ($chunkSize -lt 1000) {
-            break
-        }
-        
-        $chunkSizeMB = [math]::Round($chunkSize/1MB, 2)
-        $endSec = $startSec + $durationSec
-        $chunkInfo = "Chunk $chunkNum`t$startSec-$endSec sec ($chunkSizeMB MB)"
-        Write-Host $chunkInfo
-        
-        $audioBytes = [System.IO.File]::ReadAllBytes($chunkPath)
-        $audioBase64 = [Convert]::ToBase64String($audioBytes)
-        
-        $jsonBody = "{`"audio`":`"$audioBase64`",`"model`":`"nova-2`",`"language`":`"vi`",`"smart_format`":true}"
-        
-        try {
-            $response = Invoke-RestMethod -Uri "https://api.deepgram.com/v1/listen" `
-                -Method Post `
-                -Headers @{
-                    "Authorization" = "Token $env:DEEPGRAM_API_KEY"
-                    "Content-Type" = "application/json"
-                } `
-                -Body $jsonBody
-            
-            $transcript = $response.results.channels[0].alternatives[0].transcript
-            if ($transcript) {
-                $allTranscripts += $transcript
+function Invoke-Transcription {
+    param([string]$FilePath, [string]$Label)
+
+    $outDir = Join-Path $baseOutputDir $Label
+    New-Item -ItemType Directory -Path $outDir -Force | Out-Null
+
+    $sizeMB = [math]::Round((Get-Item $FilePath).Length / 1MB, 2)
+    Write-Host "`n=== $Label ($sizeMB MB) ==="
+
+    $audioBytes = [System.IO.File]::ReadAllBytes($FilePath)
+
+    # Deepgram REST: full file, single call — preserves global word timestamps
+    $uri = "https://api.deepgram.com/v1/listen?model=nova-3&language=en&diarize=true&utterances=true&punctuate=true&smart_format=true&paragraphs=true&words=true"
+
+    Write-Host "Sending to Deepgram nova-3 (diarize + utterances + word timestamps)..."
+    try {
+        $response = Invoke-RestMethod -Uri $uri `
+            -Method Post `
+            -Headers @{
+                "Authorization" = "Token $env:DEEPGRAM_API_KEY"
+                "Content-Type"  = "audio/mp4"
+            } `
+            -Body $audioBytes `
+            -TimeoutSec 600
+
+        # Save full JSON (timestamps, speaker labels, words — everything Mission G needs)
+        $jsonPath = Join-Path $outDir "$Label-raw.json"
+        $response | ConvertTo-Json -Depth 10 | Out-File $jsonPath -Encoding utf8
+        Write-Host "Raw JSON saved: $jsonPath"
+
+        # Save human-readable diarized transcript
+        $txtPath = Join-Path $outDir "$Label-transcript.txt"
+        $lines = @()
+        if ($response.results.utterances) {
+            foreach ($u in $response.results.utterances) {
+                $mm = [int]($u.start / 60); $ss = [int]($u.start % 60)
+                $ts = "{0:D2}:{1:D2}" -f $mm, $ss
+                $lines += "[$ts speaker:$($u.speaker)] $($u.transcript)"
             }
-        } catch {
-            Write-Host "Error on chunk: $_"
+        } else {
+            $lines += $response.results.channels[0].alternatives[0].transcript
         }
-        
-        $chunkNum++
+        $lines | Out-File $txtPath -Encoding utf8
+        Write-Host "Transcript saved: $txtPath"
+        Write-Host "Utterances: $($response.results.utterances.Count)"
+
+    } catch {
+        Write-Host "ERROR: $_"
     }
-    
-    Remove-Item -Path $tempDir -Recurse -Force -ErrorAction SilentlyContinue
-    
-    return ($allTranscripts -join " ")
 }
 
-foreach ($file in $files) {
-    if (Test-Path $file) {
-        $filename = [System.IO.Path]::GetFileNameWithoutExtension($file)
-        Write-Host "Processing: $filename"
-        
-        $transcript = Split-AndTranscribe -FilePath $file -filename $filename
-        
-        $outputFile = Join-Path $outputDir "$filename.txt"
-        $transcript | Out-File -FilePath $outputFile -Encoding utf8
-        
-        Write-Host "Saved: $outputFile"
-        Write-Host "---FINAL TRANSCRIPT---"
-        Write-Host $transcript
-        Write-Host "==="
+foreach ($f in $files) {
+    if (Test-Path $f.path) {
+        Invoke-Transcription -FilePath $f.path -Label $f.label
     } else {
-        Write-Host "File not found: $file"
+        Write-Host "NOT FOUND: $($f.path)"
     }
 }
+
+Write-Host "`nDone. Outputs in: $baseOutputDir"

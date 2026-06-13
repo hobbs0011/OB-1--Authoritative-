@@ -53,6 +53,36 @@ export async function handleStatus(env) {
     result.db = { ok: false };
   }
 
+  // PCC health check — live metrics from D1
+  try {
+    const cutoff = new Date(Date.now() - 86400000).toISOString();
+    const total = await env.DB.prepare('SELECT COUNT(*) as cnt FROM pcc_metrics WHERE created_at >= ?').bind(cutoff).first();
+    const passed = await env.DB.prepare('SELECT COUNT(*) as cnt FROM pcc_metrics WHERE passed = 1 AND created_at >= ?').bind(cutoff).first();
+    const avgMs = await env.DB.prepare('SELECT AVG(duration_ms) as avg FROM pcc_metrics WHERE passed = 1 AND created_at >= ?').bind(cutoff).first();
+    const last = await env.DB.prepare('SELECT created_at, passed, duration_ms FROM pcc_metrics ORDER BY id DESC LIMIT 1').first();
+
+    const totalCalls = total?.cnt || 0;
+    const passedCalls = passed?.cnt || 0;
+    const passRate = totalCalls > 0 ? (passedCalls / totalCalls * 100) : null;
+    const avgDuration = avgMs?.avg ? Math.round(avgMs.avg) : null;
+
+    let pccStatus = 'UNKNOWN';
+    if (totalCalls === 0) pccStatus = 'SILENT';
+    else if (passRate >= 70 && (avgDuration === null || avgDuration <= 8000)) pccStatus = 'HEALTHY';
+    else pccStatus = 'DEGRADED';
+
+    result.pcc = {
+      status: pccStatus,
+      calls_24h: totalCalls,
+      pass_rate: passRate !== null ? passRate.toFixed(1) + '%' : 'N/A',
+      avg_ms: avgDuration,
+      last_call: last?.created_at || null,
+      last_passed: last ? !!last.passed : null,
+    };
+  } catch {
+    result.pcc = { status: 'UNKNOWN', error: 'metrics table unreachable' };
+  }
+
   return Response.json(result);
 }
 
@@ -116,8 +146,36 @@ export async function handleCapabilityTest(env) {
     results.whisper_tiny = { ok: false, error: err.message };
   }
 
-  // Test 4: Vectorize binding present?
-  results.vectorize = { bound: !!env.VECTORIZE, note: env.VECTORIZE ? 'index bound' : 'no index created yet — needs wrangler vectorize create' };
+  // Test 4: Vectorize (SOUL_INDEX + DNA_INDEX)
+  results.vectorize = {
+    soul_index: !!env.SOUL_INDEX,
+    dna_index: !!env.DNA_INDEX,
+    note: env.SOUL_INDEX ? 'SOUL_INDEX bound ✓' : 'SOUL_INDEX not found — check wrangler.toml',
+  };
+
+  // Test 5: M2M100 translation (EN→VI — key for NET)
+  try {
+    const start = Date.now();
+    const res = await withTimeout(
+      env.AI.run('@cf/meta/m2m100-1.2b', { text: 'Hello', source_lang: 'en', target_lang: 'vi' }),
+      10000
+    );
+    results.m2m_translation = { ok: true, ms: Date.now() - start, sample: JSON.stringify(res).slice(0, 80) };
+  } catch (err) {
+    results.m2m_translation = { ok: false, error: err.message };
+  }
+
+  // Test 6: BGE Reranker
+  try {
+    const start = Date.now();
+    const res = await withTimeout(
+      env.AI.run('@cf/baai/bge-reranker-base', { query: 'test', contexts: ['context a', 'context b'] }),
+      10000
+    );
+    results.bge_reranker = { ok: true, ms: Date.now() - start };
+  } catch (err) {
+    results.bge_reranker = { ok: false, error: err.message };
+  }
 
   return Response.json({ capability_test: results, tested_at: new Date().toISOString() });
 }

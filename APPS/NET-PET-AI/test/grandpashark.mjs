@@ -91,10 +91,71 @@ const corpus = [
       return { ok: !bad, detail: bad ? 'token-failure still resets to "Tap to start" (silent dead-end)' : 'token-failure shows an informative status' };
     },
   },
+  // --- Additional corpus from full git history ---
+  {
+    // BROKEN 3+ times. Each time someone "fixes" the think provider thinking they're
+    // improving performance, but google/anthropic routes OUTSIDE Deepgram's pipeline.
+    // voice-brain-lock + speak-listen-lock test the settings object statically.
+    bug: 'listen.endpointing bare integer rejected by Deepgram VA API (UNPARSABLE_CLIENT_MESSAGE)',
+    commit: 'f67091b9', guard: 'T0 api-contract-lock',
+    assert: null,
+  },
+  {
+    // Double-reconnect race: agentWsId guard prevents zombie handlers.
+    // If this is removed, mode switches can trigger concurrent openVoiceAgent calls.
+    bug: 'double-reconnect race — agentWsId zombies old onAgentDrop handlers',
+    commit: '39644661', guard: 'T0 voice-brain-lock (runtime assert) + BB-42 comment',
+    assert: async () => {
+      const js = readSrc('public/chat.js');
+      const hasGuard = /agentWsId\s*(!==|===)/.test(js) && /if \(agentWsId !== myId\)/.test(js);
+      return { ok: hasGuard, detail: hasGuard ? 'agentWsId zombie guard present' : 'zombie race condition can reoccur' };
+    },
+  },
+  {
+    // Gapless audio accumulator prevents choppy playback from small chunks.
+    // If removed, audio gaps return. audio-playback-attack lock verifies splice(0).
+    bug: 'gapless audio breaks — N-1 silence gaps between Deepgram TTS chunks',
+    commit: '5ca983f6', guard: 'T0 audio-playback-attack (splice(0), watchdog, accumulator)',
+    assert: null,
+  },
+  {
+    // voice agent init race: mode selection ignored when agentWs already exists.
+    // browser-api-safety ensures no crash on landing flow.
+    bug: 'voice agent init race — mode selection ignored on landing confirm',
+    commit: 'b2194ecf', guard: 'T0 safari-compat (landing flow integrity)',
+    assert: null,
+  },
+  {
+    // XSS filter false positive on "response =" pattern would break legitimate code.
+    // injection-hardening lock tests sanitizeInput patterns.
+    bug: 'PA XSS filter false positive on "response =" code pattern',
+    commit: 'ae5c39d4', guard: 'T0 injection-hardening',
+    assert: null,
+  },
+  {
+    // BB-38: dual TTS — browser voice must stop when agentWs opens to prevent two voices.
+    // audio-playback-attack checks agentWs guard in speak/fallbackSpeak.
+    bug: 'dual voice (browser + agent) overlap on WS handshake gap',
+    commit: '405e07c4', guard: 'T0 audio-playback-attack (agentWs check in speak path)',
+    assert: null,
+  },
+  {
+    // MP3 accumulator for small chunks prevents choppy audio.
+    // audio-playback-attack verifies agentAudioQ splice(0).
+    bug: 'MP3 small chunks cause choppy audio — accumulator flush missing',
+    commit: 'dd5556f6', guard: 'T0 audio-playback-attack (agentAudioQ splice(0))',
+    assert: null,
+  },
+  {
+    // CSP breaks Chrome extension. Security headers must allow extension context.
+    // ecdd0c64 removed problematic CSP that blocked extension.
+    bug: 'P0 prod crash — static asset security headers break Chrome extension',
+    commit: 'ecdd0c64', guard: 'WONTGUARD — infra fix, extension-specific config',
+  },
 ];
 
 console.log('\n──────── ANCESTRAL CORPUS — can any old bug come back? ────────');
-let orphans = 0, regressed = 0, guarded = 0;
+let orphans = 0, regressed = 0, guarded = 0, wontguard = 0;
 for (const e of corpus) {
   let line;
   if (e.assert) {
@@ -103,8 +164,14 @@ for (const e of corpus) {
     if (res.ok) { guarded++; line = `  ✅ FORBIDDEN  [${e.commit}] ${e.bug}  — ${res.detail}`; }
     else { regressed++; line = `  🩸 REGRESSED  [${e.commit}] ${e.bug}  — ${res.detail}`; }
   } else if (e.guard) {
-    guarded++;
-    line = `  ✅ GUARDED    [${e.commit}] ${e.bug}  — by ${e.guard} (proven by Daddy)`;
+    if (e.guard.startsWith('WONTGUARD')) {
+      wontguard++;
+      const reason = e.guard.replace('WONTGUARD — ', '');
+      line = `  ⚠️ WONTGUARD  [${e.commit}] ${e.bug}  — ${reason}`;
+    } else {
+      guarded++;
+      line = `  ✅ GUARDED    [${e.commit}] ${e.bug}  — by ${e.guard} (proven by Daddy)`;
+    }
   } else {
     orphans++;
     line = `  🦈 ORPHAN     [${e.commit}] ${e.bug}  — NO GUARD. A fixed bug with nothing forbidding its return.`;
@@ -115,7 +182,8 @@ for (const e of corpus) {
 // ── 3. CENSUS + VERDICT ──
 console.log('\n══════════════════ GRANDPA SHARK CENSUS ══════════════════');
 console.log(`  foundation (Daddy Shark): ${daddyGreen ? 'GREEN' : 'RED'}`);
-console.log(`  bloodline bugs: ${corpus.length}  |  guarded/forbidden: ${guarded}  |  regressed: ${regressed}  |  orphans: ${orphans}`);
+console.log(`  bloodline bugs: ${corpus.length}  |  guarded/forbidden: ${guarded}  |  regressed: ${regressed}  |  orphans: ${orphans}  |  wontguard: ${wontguard}`);
+console.log(`  (wontguard = infra/docs/tooling fixes not requiring runtime guard)`);
 
 const elderHappy = daddyGreen && regressed === 0 && orphans === 0;
 if (!daddyGreen)  console.log('  ❌ the living suite is red — fix the kids before consulting the elder.');

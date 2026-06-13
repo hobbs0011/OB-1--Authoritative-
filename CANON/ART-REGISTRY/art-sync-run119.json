@@ -36,71 +36,123 @@
     "*\\\"it",
     "layers"
   ],
-  "pieces_synced": 7,
+  "pieces_synced": 23,
   "pieces": [
+    {
+      "id": "ART-1780551578212-ATLV",
+      "title": "Broken Chain",
+      "url": "isolated/broken-chain-hd.png"
+    },
+    {
+      "id": "ART-1780551569713-11BL",
+      "title": "Tiger Cub",
+      "url": "isolated/tiger-cub-clean.png"
+    },
+    {
+      "id": "ART-1780551556529-ZVR0",
+      "title": "Phoenix Neon",
+      "url": "isolated/phoenix-neon-clean.png"
+    },
+    {
+      "id": "ART-1780551554850-GNEZ",
+      "title": "Phoenix Crest",
+      "url": "isolated/phoenix-crest-clean.png"
+    },
+    {
+      "id": "ART-1780548352010-5NMK",
+      "title": "Phoenix Pages — Benchmark 3: Drone Deep Dive",
+      "url": "codex_preview/PHOENIX_PAGES/page_07.png"
+    },
     {
       "id": "ART-1780548344848-CT6B",
       "title": "Phoenix Pages — Core Friction: Drift vs DNA",
-      "url": "codex_preview/PHOENIX_PAGES/page_02.png",
-      "keywords": [
-        "drift"
-      ],
-      "title_hit": false
+      "url": "codex_preview/PHOENIX_PAGES/page_02.png"
     },
     {
       "id": "ART-1780548343466-OGXZ",
       "title": "Phoenix Pages — Kinetic Gates: The 5 Benchmarks",
-      "url": "codex_preview/PHOENIX_PAGES/page_01.png",
-      "keywords": [
-        "ledger"
-      ],
-      "title_hit": false
+      "url": "codex_preview/PHOENIX_PAGES/page_01.png"
+    },
+    {
+      "id": "ART-1780548335345-7Y5W",
+      "title": "Codex — The Layer Strategy (0 to 1000)",
+      "url": "codex_preview/page-11.png"
     },
     {
       "id": "ART-1780548333953-MXB7",
       "title": "Codex — Drift as a Diagnostic Event",
-      "url": "codex_preview/page-10.png",
-      "keywords": [
-        "drift"
-      ],
-      "title_hit": false
+      "url": "codex_preview/page-10.png"
     },
     {
       "id": "ART-1780548321479-LKGH",
       "title": "Phoenix Rising Operational Codex — Cover",
-      "url": "codex_preview/page-01.png",
-      "keywords": [
-        "bible"
-      ],
-      "title_hit": false
+      "url": "codex_preview/page-01.png"
+    },
+    {
+      "id": "ART-1780547867513-XM1X",
+      "title": "Train 6-7: Project Dead Rails — Train Blueprint",
+      "url": "CANON/GAME-DESIGN/gameplay-upgrade-train.png"
+    },
+    {
+      "id": "ART-1780547628696-L7IE",
+      "title": "Wake Up the Tiger: Blueprint for English & AI Mastery",
+      "url": "CANON/ARTWORK/unnamed-art-06.png"
+    },
+    {
+      "id": "ART-1780547160670-TBAE",
+      "title": "WAKE UP THE TIGER",
+      "url": null
+    },
+    {
+      "id": "ART-1780546993683-AS0F",
+      "title": "The Engine",
+      "url": "THE_TIGER_ENGINE.pdf"
+    },
+    {
+      "id": "ART-1780546342705-3MMY",
+      "title": "Wake Up the Tiger",
+      "url": "CANON/PROTOCOLS/Sovereign_Tiger_Protocol.pdf"
+    },
+    {
+      "id": "ART-1780538363957-LNWV",
+      "title": "STP p03 — The Translate-in-Head Delay (Snowman Freeze)",
+      "url": "local:d:/OB-1-CANONICAL/CANON/PROTOCOLS/Sovereign_Tiger_Protocol.pdf#page=3"
     },
     {
       "id": "ART-1780530773225-4133",
       "title": "Tiger Mode p01 — We Don't Teach English We Unlock Permission",
-      "url": "local:D:/Downloads/tiger-pages/page-1.png",
-      "keywords": [
-        "truth"
-      ],
-      "title_hit": false
+      "url": "local:D:/Downloads/tiger-pages/page-1.png"
+    },
+    {
+      "id": "ART-1780530099910-XM96",
+      "title": "NET Dossier p03 — Cognitive Bottleneck / Snowman Freeze",
+      "url": "local:D:/Downloads/dossier-pages/page-03.png"
+    },
+    {
+      "id": "ART-1780528208635-17NS",
+      "title": "Train 6-7 — Project Dead Rails: Train Diagram",
+      "url": "local:D:/Downloads/Telegram Desktop/Train6-7-GAMEPLAY-Upgrade-Train.png"
     },
     {
       "id": "ART-1780527419422-NUFN",
       "title": "Michael Hobbs Headshot — Wide",
-      "url": "local:D:/Downloads/Telegram Desktop/output_9gmjtb.png",
-      "keywords": [
-        "michael"
-      ],
-      "title_hit": false
+      "url": "local:D:/Downloads/Telegram Desktop/output_9gmjtb.png"
     },
     {
       "id": "ART-1780527418015-4GUT",
       "title": "Michael Hobbs Headshot — Square",
-      "url": "local:D:/Downloads/Telegram Desktop/output_5pbeb1.png",
-      "keywords": [
-        "michael"
-      ],
-      "title_hit": false
+      "url": "local:D:/Downloads/Telegram Desktop/output_5pbeb1.png"
+    },
+    {
+      "id": "ART-1780527311341-E7DB",
+      "title": "Wake Up The Tiger - Bilingual Blueprint",
+      "url": "local:D:/Downloads/unnamed (5).png"
+    },
+    {
+      "id": "ART-1780502471217-V612",
+      "title": "The Empire Blueprint",
+      "url": null
     }
   ],
-  "executed_at": "2026-06-13T11:56:29.967604+07:00"
+  "executed_at": "2026-06-13T12:00:37.7869884+07:00"
 }

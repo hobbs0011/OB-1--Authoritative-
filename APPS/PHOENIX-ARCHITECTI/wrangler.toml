@@ -51,4 +51,5 @@ tag = "v2"
 new_classes = ["RaceRunner"]
 
 [triggers]
-crons = ["0 */6 * * *"]
+crons = ["0 */6 * * *", "*/5 * * * *"]
+

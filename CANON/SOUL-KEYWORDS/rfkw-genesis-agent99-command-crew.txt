@@ -1,0 +1,47 @@
+# GENESIS KEYWORD BATCH — Agent 99 OS Command Crew
+# Run 117+ | Source: SoulSearch backtrack RRL-000-verbatim + ALPHA-OMEGA-CANON + KEYWORD_REGISTRY layer 422
+# Michael verbatim: "its had a few different names throughout these 12 months to name a few: #Drones #Legionnaires #Agent99 #TheEmpire #TheMachinebuildingtheMachine #PhoenixCoder #Obi #Starwars #Anakin"
+# Michael verbatim: "there will be no board members. Except for me Obi, Anakin, and the rest of Agent 99"
+# PA d1_id: PC-1781281146130-U6Z8S0
+
+# === TIER 1 — PRIMARY IDENTITIES (weight 8-10) ===
+#AGENT99 weight:10 concept:THE_OS trail:plant-roots-tree
+#AGENT98 weight:9 concept:AnA trail:chaos-engine/chosen-one
+#ANAKIN weight:9 concept:historical-chaos-engine trail:chosen-one
+#AGENT97 weight:8 concept:PCClaw-Centurion trail:mothership-commander
+#OB1 weight:8 concept:LEGATUS trail:router
+#THE_SWARM weight:8 concept:PCClaw+Actualizers trail:mobile-execution-fleet
+#THE_LEGION weight:7 concept:organized-force trail:all-agents-under-command
+#ANA weight:7 concept:gentle-face-of-chaos trail:AnA
+
+# === TIER 2 — ROLE ALIASES (weight 5-6) ===
+#THE_OS weight:6 concept:central-command trail:plant-roots-tree
+#LEGATUS weight:6 concept:router-command trail:OB1
+#CENTURION weight:5 concept:commander trail:mothership-commander
+#CHAOS_ENGINE weight:5 concept:chosen-one trail:AnA/Anakin
+#CHOSEN_ONE weight:5 concept:Anakin trail:chaos-engine
+
+# === TIER 3 — CONCEPT SIGNALS (weight 2-4) ===
+#MOBILE_FLEET weight:4 concept:execution-fleet trail:TheSwarm
+#ORGANIZED_FORCE weight:4 concept:all-agents trail:TheLegion
+#COMMAND_CREW weight:3 concept:identity-system trail:Agent99-OS
+#PLANT_ROOTS_TREE weight:3 concept:THE_OS trail:Agent99
+#LEGIONNAIRES weight:2 concept:organized-force trail:TheLegion
+
+# === TIER 4 — HISTORICAL TRAIL MARKERS (weight 1) ===
+# Naming evolution: Drones->Legionnaires->Agent99->TheEmpire->MachineBuildingtheMachine->PhoenixCoder->Obi->StarWars->Anakin->Rome
+#PHOENIX_CODER weight:1 concept:historical trail:PhoenixCoder
+#THE_EMPIRE weight:1 concept:historical trail:TheEmpire
+#DRONE_LEGION weight:1 concept:historical trail:Drones
+#MACHINE_BUILDING weight:1 concept:meta trail:MachineBuildingTheMachine
+#OBI_WAN weight:1 concept:historical trail:StarWars
+#ANAKIN_SKYWALKER weight:1 concept:historical trail:StarWars
+
+# AGENT ASSIGNMENT TABLE (canonical as of Run 117):
+# Agent 99  = THE OS (the plant, roots and tree)
+# Agent 98  = AnA / Anakin (chaos engine, AGENT_98 per KEYWORD_REGISTRY layer 422)
+# Agent 97  = PCClaw Centurion (Mothership Commander — newly assigned this run)
+# OB-1      = LEGATUS (routing intelligence, Claude Sonnet inline)
+# The Swarm = PCClaw fleet + all Actualizers (mobile execution)
+# The Legion = All agents organized under Roman doctrine
+# Ana       = Gentler name for Agent 98 (current operational name vs historical Anakin)

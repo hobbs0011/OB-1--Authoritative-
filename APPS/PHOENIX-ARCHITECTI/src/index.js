@@ -16,6 +16,7 @@ import { handleArtArsenal } from './art-arsenal.js';
 import { handleIncarnate, runPatternScanner } from './incarnate.js';
 import { handleOrchestrate, runOrchestrator } from './orchestrate.js';
 import { RaceRunner, handleSessionDeath } from './race.js';
+import { runWatchdog, handleWatchdog } from './watchdog.js';
 export { RaceRunner };
 
 const VERSION = '1.0.0';
@@ -34,6 +35,7 @@ export default {
     await runPatternScanner(env).catch(() => {});
     await checkPccHealth(env).catch(() => {});
     await runOrchestrator(env).catch(() => {});
+    await runWatchdog(env).catch(() => {});
   },
 
   async fetch(request, env) {
@@ -95,6 +97,8 @@ export default {
         const stub = env.RACE_RUNNER.get(id);
         const doPath = pathname.replace('/api/race', '');
         response = await stub.fetch(new Request('https://race' + doPath, request));
+      } else if (pathname === '/api/watchdog/status') {
+        response = await handleWatchdog(request, env);
       } else if (pathname === '/art-arsenal') {
         response = await handleArtArsenal(request, env);
       } else if (pathname.startsWith('/api/art')) {
@@ -109,3 +113,4 @@ export default {
     return addCors(response, origin);
   },
 };
+

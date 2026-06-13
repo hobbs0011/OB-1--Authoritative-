@@ -20,7 +20,7 @@
   "keyword_file": "D:\\OB-1-CANONICAL\\CANON\\SOUL-KEYWORDS\\rfkw-run119.txt",
   "keyword_index": "D:\\OB-1-CANONICAL\\CANON\\SOUL-KEYWORDS\\inverted-index.json",
   "s2pipeline_file": "D:\\OB-1-CANONICAL\\CANON\\PIPELINE\\pipeline-run119.json",
-  "registry_file": "REGISTRY_SYNC_GAP",
-  "registry_synced": 0,
+  "registry_file": "D:\\OB-1-CANONICAL\\CANON\\ART-REGISTRY\\art-sync-run119.json",
+  "registry_synced": 23,
   "result": "KILO_GAP"
 }
