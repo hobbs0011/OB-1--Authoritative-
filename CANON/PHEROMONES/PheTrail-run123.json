@@ -1,0 +1,29 @@
+{
+  "state_markers": {
+    "open_flags_count": 6,
+    "top_priority": "resolve phantom HL-IDs, registry sync",
+    "active_mission": "OB-1 REINCARNATION Roman Legion"
+  },
+  "extracted_at": "2026-06-13T21:27:21.1293111+07:00",
+  "run": 123,
+  "soulcount": 239402509,
+  "positive_trails": [
+    {
+      "artifact": "PheTrail-run123.json",
+      "timestamp": "2026-06-13T21:27:21.1481973+07:00",
+      "action": "standalone breadcrumb extraction",
+      "verification": "JSON written, schema_version present"
+    }
+  ],
+  "registry_entries": 10,
+  "negative_trails": [
+    {
+      "artifact": "CANON/HEAVY-LEDGER/HL-*.json",
+      "failure": "phantom IDs HL-127/128/131/132/136/137 missing",
+      "root_cause": "never materialized",
+      "decay_days": 180,
+      "timestamp": "2026-06-13T21:27:21.1487942+07:00"
+    }
+  ],
+  "head_sha": "f014acf1"
+}
