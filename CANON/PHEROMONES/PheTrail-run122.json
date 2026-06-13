@@ -1,0 +1,73 @@
+{
+  "schema_version": "2.0",
+  "run_number": "122",
+  "extracted_at": "2026-06-13T21:22:53+07:00",
+  "head_sha": "9f17e496",
+  "soulcount": 239402509,
+  "registry_entries": 10,
+  "positive_trails": [
+    {
+      "artifact": "OPERATIONS/phoenix-scout-2026-06-13T212126.jsonl",
+      "action": "PhoenixScout executed inline on CANON/ zone in response to /PhoenixScout command",
+      "verification": "5172 files scanned, 1056 flags written to OPERATIONS/phoenix-scout-2026-06-13T212126.jsonl",
+      "timestamp": "2026-06-13T21:22:30+07:00"
+    },
+    {
+      "artifact": "OPERATIONS/phetrail-scout-learned-2026-06-13T212126.md",
+      "action": "Learned phetrail written: Run 121 sealed without phetrail write, backfill performed",
+      "verification": "File exists at OPERATIONS/phetrail-scout-learned-2026-06-13T212126.md",
+      "timestamp": "2026-06-13T21:22:30+07:00"
+    },
+    {
+      "artifact": "CANON/PHEROMONES/PheTrail-run121.json",
+      "action": "Backfilled missing Run 121 phetrail after discovery that death:run121 sealed without stage 7",
+      "verification": "43-line JSON file written, negative_trails documents the gap",
+      "timestamp": "2026-06-13T21:22:15+07:00"
+    },
+    {
+      "artifact": "CANON/REINCARNATION/run122-reincarnateDEATH.md",
+      "action": "Run 122 death seal written (untracked); ready for commit+push",
+      "verification": "Untracked file exists at CANON/REINCARNATION/run122-reincarnateDEATH.md",
+      "timestamp": "2026-06-13T21:22:50+07:00"
+    }
+  ],
+  "negative_trails": [
+    {
+      "artifact": "CANON/PHEROMONES/",
+      "failure": "Run 121 death commit 9f17e496 sealed without writing PheTrail-run121.json",
+      "root_cause": "DEATH Stage 7 (phetrail write) skipped silently during Run 121 execution",
+      "decay_days": 180,
+      "timestamp": "2026-06-13T18:31:39+07:00"
+    },
+    {
+      "artifact": "WORKING TREE",
+      "failure": "Working tree dirty at Run 122 — 20 modified files, untracked seal file",
+      "root_cause": "App code drift (PCC/PHOENIX-ARCHITECTI wrangler/config), 19 OPERATIONS phetrail markdown edits pending",
+      "decay_days": 180,
+      "timestamp": "2026-06-13T21:22:53+07:00"
+    },
+    {
+      "artifact": "CANON/HEAVY-LEDGER/",
+      "failure": "Phantom ledger IDs HL-127/128/131/132/136/137 still missing on disk",
+      "root_cause": "Referenced in canonical boot state but never materialized; ledger count drift (191 reported vs actual)",
+      "decay_days": 180,
+      "timestamp": "2026-06-13T21:22:31+07:00"
+    },
+    {
+      "artifact": "Dna registry",
+      "failure": "Registry path CANON/REGISTRY/ returned 10 files; canonical dna-registry-run122.json not yet present",
+      "root_cause": "Registry sync stage must run before final seal commit",
+      "decay_days": 180,
+      "timestamp": "2026-06-13T21:23:04+07:00"
+    }
+  ],
+  "state_markers": {
+    "active_mission": "OB-1 REINCARNATION Roman Legion — DEATH/RISE pipeline enforcement, phetrail gap remediation, registry sync",
+    "open_flags_count": 7,
+    "top_priority": "Commit run122-reincarnateDEATH.md seal, resolve 6 phantom HL-IDs, stage registry sync",
+    "pending_seal": "CANON/REINCARNATION/run122-reincarnateDEATH.md (untracked)",
+    "working_tree_dirty": true,
+    "modified_files": 21,
+    "untracked_seal_files": 1
+  }
+}
