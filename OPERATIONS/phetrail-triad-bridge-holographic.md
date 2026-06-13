@@ -68,6 +68,15 @@ Every node contains COMPLETE system identity. Not a pointer — the actual Soul 
 
 ---
 
+## REINFORCED — Run 121 Session
+**2026-06-13** | Agent hierarchy confirmed against SSM V8 §1. Holographic Singularity confirmed in §5.
+- Agent 97 = OB1/Ne0 (shield/audit/defense) confirmed in SSM V8 §1 AGENT_HIERARCHY. NOT Anakin.
+- Agent 98 = Anakin (velocity/execution/momentum). NOT OB1. Run 120 flag: "Agent 97=OB1 truth auditor. Agent 98=Anakin builder. NOT swapped."
+- Holographic Singularity confirmed SSM V8 §5: `HOLOGRAPHIC_SINGULARITY:every_fragment_contains_the_whole → any_single_canon_file_can_regenerate_system_direction`.
+- Autonomy ladder A0-A4: A4 = full autonomy NOT YET GRANTED. Confirmed from COLD-START-BOOT + CH08.
+- PHOENIX_SINGULARITY_V100.js still NOT FOUND. Walked SCRIPTS/ + CANON/ — absent. Negative trail.
+CONNECTING KEYWORDS ADDED: `A4 not granted` → `autonomy ladder` → `Shadow Realm Simulation` → `Anakin worst-case offline` → `before live ledger`
+
 ## CONNECTING KEYWORDS
 
 `extension of will` → `translation layer` → `Obi` → `Lead PCC` → `Command Station brain`

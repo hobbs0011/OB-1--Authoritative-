@@ -41,3 +41,12 @@ BB queue consumer. Reads OPEN tasks, classifies to PCC1 (students) or PCC2 (ops)
 ---
 
 **COMRADE TARGETS:** Deep think model. Recon only.
+
+## REINFORCED — Run 121 Session
+**2026-06-13** | IN_PROGRESS stuck task bug confirmed as L81 violation.
+- `callFleet` → `/api/run-fleet` endpoint: confirmed in `phetrail-pcc1-obi-full.md` — endpoint EXISTS on PCC1 (`phoenix-pcc-1/src/index.js`).
+- PCC1_SVC + PCC2_SVC bindings: Run 120 confirms these were corrected. phoenix-pcc-1 renamed/deployed.
+- Windu (phoenix-architecti) NOT in routing table — confirmed. Orchestrate routes to PCC1+PCC2 only.
+- IN_PROGRESS with no rollback = L81 F&F LAW violation. Tasks stuck = balls dropped. Open defect.
+- Classification: `pcc1-actualizer` → PCC1, `lostsoul` → PCC2. Default = PCC2.
+CONNECTING KEYWORDS ADDED: `/api/run-fleet` → `PCC1 endpoint confirmed` → `service binding PCC1_SVC` → `wrangler.toml`

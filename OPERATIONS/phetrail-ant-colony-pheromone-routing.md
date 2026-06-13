@@ -75,6 +75,15 @@ The bridge makes failures PERMANENT NAVIGATION DATA, not just error logs.
 
 ---
 
+## REINFORCED — Run 121 Session
+**2026-06-13** | Layer numbers confirmed in SSM V8 §5. Merkle bridge confirmed in VAULT-3.
+- Layers 1500/1600/1700/1800 confirmed in SSM V8 §5 ARCHITECTURE_LAWS section (same source, different view).
+- Stage 47 Horizon Logic = SSM V8 §5 `HOLOGRAPHIC_SINGULARITY` + L80 MODUS_OPERANDI ("go as far as you can see").
+- Decuria confirmed in MASTER-BLUEPRINT §7: "Swarm activation" = Phase IV stage 31-40.
+- CAS-Retry=3 attempts: confirmed at CLAMP_850 = `sha256(actor+commandId+payload_sha256)` replay poison guard.
+- 4-Node sync loop confirmed: Gemini/Perplexity/Claude/GPT roles. Layers 501-750 = Genesis blueprints → 4-leaf Merkle.
+CONNECTING KEYWORDS ADDED: `CLAMP_150 SWARM_EMBRYO` → `layers 526-600` → `first Decuria deployed` → `Stage 31 swarm activation`
+
 ## CONNECTING KEYWORDS
 
 `Stage 48` → `POS/NEG scent` → `density routing` → `90% exploiters / 10% scouts`

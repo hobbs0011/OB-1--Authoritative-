@@ -1,0 +1,365 @@
+{
+  "run": 123,
+  "ledger_id": "HL-703",
+  "merkle_short": "3aef09ad7e661e1a",
+  "starmap_file": "starmap-run123.json",
+  "keywords_file": "rfkw-run123.txt",
+  "keywords_used": [
+    "canonical",
+    "claude",
+    "u001b",
+    "sessionid",
+    "pipeline",
+    "d31e6e46",
+    "phoenix",
+    "death",
+    "timestamp",
+    "vault",
+    "master",
+    "assistant",
+    "version",
+    "canon",
+    "jsonl",
+    "sovereign",
+    "external",
+    "issidechain",
+    "parentuuid",
+    "standard",
+    "vscode",
+    "ephemeral_5m_input_tokens",
+    "output_tokens",
+    "input_tokens",
+    "ephemeral_1h_input_tokens",
+    "cache_read_input_tokens",
+    "cache_creation_input_tokens",
+    "cache_creation",
+    "usertype",
+    "gitbranch"
+  ],
+  "pieces_synced": 46,
+  "pieces": [
+    {
+      "id": "ART-1780552973434-C5NK",
+      "title": "Phoenix DNA Fusion (icon)",
+      "keywords": [
+        "phoenix"
+      ]
+    },
+    {
+      "id": "ART-1780552939880-KIN3",
+      "title": "Phoenix Low-Poly Geometric (icon)",
+      "keywords": [
+        "phoenix"
+      ]
+    },
+    {
+      "id": "ART-1780552927560-ELKC",
+      "title": "Tesseract Core Medallion (icon)",
+      "keywords": [
+        "phoenix"
+      ]
+    },
+    {
+      "id": "ART-1780552920117-7ITS",
+      "title": "Phoenix Neon (icon)",
+      "keywords": [
+        "phoenix"
+      ]
+    },
+    {
+      "id": "ART-1780552918779-O2MG",
+      "title": "Phoenix Crest (icon)",
+      "keywords": [
+        "phoenix"
+      ]
+    },
+    {
+      "id": "ART-1780551602717-CNV5",
+      "title": "Phoenix DNA Fusion",
+      "keywords": [
+        "phoenix"
+      ]
+    },
+    {
+      "id": "ART-1780551576913-78VN",
+      "title": "Phoenix Low-Poly Geometric",
+      "keywords": [
+        "phoenix"
+      ]
+    },
+    {
+      "id": "ART-1780551564461-MD51",
+      "title": "Tesseract Core Medallion",
+      "keywords": [
+        "phoenix"
+      ]
+    },
+    {
+      "id": "ART-1780551556529-ZVR0",
+      "title": "Phoenix Neon",
+      "keywords": [
+        "phoenix"
+      ]
+    },
+    {
+      "id": "ART-1780551554850-GNEZ",
+      "title": "Phoenix Crest",
+      "keywords": [
+        "phoenix"
+      ]
+    },
+    {
+      "id": "ART-1780549303316-L9EO",
+      "title": "Sovereign Tiger Protocol — Page 15",
+      "keywords": [
+        "sovereign"
+      ]
+    },
+    {
+      "id": "ART-1780549301890-1LHV",
+      "title": "Sovereign Tiger Protocol — Page 14",
+      "keywords": [
+        "sovereign"
+      ]
+    },
+    {
+      "id": "ART-1780549300524-U408",
+      "title": "Sovereign Tiger Protocol — Page 13",
+      "keywords": [
+        "sovereign"
+      ]
+    },
+    {
+      "id": "ART-1780549299146-7C97",
+      "title": "Sovereign Tiger Protocol — Page 12",
+      "keywords": [
+        "sovereign"
+      ]
+    },
+    {
+      "id": "ART-1780549297806-IYG8",
+      "title": "Sovereign Tiger Protocol — Page 11",
+      "keywords": [
+        "sovereign"
+      ]
+    },
+    {
+      "id": "ART-1780549296402-W2WM",
+      "title": "Sovereign Tiger Protocol — Page 10",
+      "keywords": [
+        "sovereign"
+      ]
+    },
+    {
+      "id": "ART-1780549294987-7C05",
+      "title": "Sovereign Tiger Protocol — Page 09",
+      "keywords": [
+        "sovereign"
+      ]
+    },
+    {
+      "id": "ART-1780549293659-MCQ0",
+      "title": "Sovereign Tiger Protocol — Page 08",
+      "keywords": [
+        "sovereign"
+      ]
+    },
+    {
+      "id": "ART-1780549292206-JZ0T",
+      "title": "Sovereign Tiger Protocol — Page 07",
+      "keywords": [
+        "sovereign"
+      ]
+    },
+    {
+      "id": "ART-1780549290849-DJOK",
+      "title": "Sovereign Tiger Protocol — Page 06",
+      "keywords": [
+        "sovereign"
+      ]
+    },
+    {
+      "id": "ART-1780549289470-J3NI",
+      "title": "Sovereign Tiger Protocol — Page 05",
+      "keywords": [
+        "sovereign"
+      ]
+    },
+    {
+      "id": "ART-1780549288082-S5S4",
+      "title": "Sovereign Tiger Protocol — Page 04",
+      "keywords": [
+        "sovereign"
+      ]
+    },
+    {
+      "id": "ART-1780549286703-LYHO",
+      "title": "Sovereign Tiger Protocol — Page 03",
+      "keywords": [
+        "sovereign"
+      ]
+    },
+    {
+      "id": "ART-1780549285319-XSQ0",
+      "title": "Sovereign Tiger Protocol — Page 02",
+      "keywords": [
+        "sovereign"
+      ]
+    },
+    {
+      "id": "ART-1780549284007-EP4T",
+      "title": "Sovereign Tiger Protocol — Page 01",
+      "keywords": [
+        "sovereign"
+      ]
+    },
+    {
+      "id": "ART-1780548336708-NKVP",
+      "title": "Codex — The Drone Swarm & PowerShell",
+      "keywords": [
+        "claude"
+      ]
+    },
+    {
+      "id": "ART-1780548333953-MXB7",
+      "title": "Codex — Drift as a Diagnostic Event",
+      "keywords": [
+        "phoenix"
+      ]
+    },
+    {
+      "id": "ART-1780548327199-Z0NB",
+      "title": "Codex — The Rome Protocol v1.0 (Governance 99+1)",
+      "keywords": [
+        "sovereign"
+      ]
+    },
+    {
+      "id": "ART-1780548321479-LKGH",
+      "title": "Phoenix Rising Operational Codex — Cover",
+      "keywords": [
+        "sovereign"
+      ]
+    },
+    {
+      "id": "ART-1780548094120-O10U",
+      "title": "Natural English Training — Wide Banner Logo",
+      "keywords": [
+        "phoenix"
+      ]
+    },
+    {
+      "id": "ART-1780547873014-NYBN",
+      "title": "Phoenix Rising Protocol — Neon Logo",
+      "keywords": [
+        "phoenix"
+      ]
+    },
+    {
+      "id": "ART-1780547632725-6R1Q",
+      "title": "Phoenix Reality-C: The Final Immutable OS",
+      "keywords": [
+        "phoenix"
+      ]
+    },
+    {
+      "id": "ART-1780547631405-UHYI",
+      "title": "Anatomy of the Prais Apex: Gospel 444 Visual Identity",
+      "keywords": [
+        "phoenix"
+      ]
+    },
+    {
+      "id": "ART-1780547607951-RT74",
+      "title": "NET Phoenix Logo",
+      "keywords": [
+        "phoenix"
+      ]
+    },
+    {
+      "id": "ART-1780547606279-NOGU",
+      "title": "NET DNA Helix",
+      "keywords": [
+        "phoenix"
+      ]
+    },
+    {
+      "id": "ART-1780547604639-95CF",
+      "title": "Phoenix Crest — Line Art",
+      "keywords": [
+        "phoenix"
+      ]
+    },
+    {
+      "id": "ART-1780546342705-3MMY",
+      "title": "Wake Up the Tiger",
+      "keywords": [
+        "sovereign"
+      ]
+    },
+    {
+      "id": "ART-1780546341377-VLBX",
+      "title": "The Phoenix Rising Operational Codex",
+      "keywords": [
+        "phoenix"
+      ]
+    },
+    {
+      "id": "ART-1780546338597-YN8N",
+      "title": "The Ultimate Edge",
+      "keywords": [
+        "phoenix"
+      ]
+    },
+    {
+      "id": "ART-1780538363957-LNWV",
+      "title": "STP p03 — The Translate-in-Head Delay (Snowman Freeze)",
+      "keywords": [
+        "pipeline"
+      ]
+    },
+    {
+      "id": "ART-1780530764090-TSQF",
+      "title": "Gospel 444 Protocol p01 — The Ultimate Edge (Cover)",
+      "keywords": [
+        "phoenix"
+      ]
+    },
+    {
+      "id": "ART-1780530099910-XM96",
+      "title": "NET Dossier p03 — Cognitive Bottleneck / Snowman Freeze",
+      "keywords": [
+        "pipeline"
+      ]
+    },
+    {
+      "id": "ART-1780527307457-Q3WY",
+      "title": "Cosmic Phoenix Glyph",
+      "keywords": [
+        "phoenix"
+      ]
+    },
+    {
+      "id": "ART-1780527304666-L3MB",
+      "title": "NET Phoenix Sigil (Grayscale)",
+      "keywords": [
+        "phoenix"
+      ]
+    },
+    {
+      "id": "ART-1780527141405-ZY9G",
+      "title": "NET Phoenix Sigil",
+      "keywords": [
+        "phoenix"
+      ]
+    },
+    {
+      "id": "ART-1780502471217-V612",
+      "title": "The Empire Blueprint",
+      "keywords": [
+        "phoenix"
+      ]
+    }
+  ],
+  "executed_at": "2026-06-13T23:09:03.9072189+07:00"
+}

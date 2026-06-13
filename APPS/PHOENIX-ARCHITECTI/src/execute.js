@@ -87,13 +87,13 @@ export async function handleExecute(request, env) {
       const dsResp = await fetch('https://api.deepseek.com/v1/chat/completions', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${env.DEEPSEEK_API_KEY}` },
-        body: JSON.stringify({ model: 'deepseek-chat', messages, max_tokens: Math.max(maxToks, 2048) }),
+        body: JSON.stringify({ model: 'deepseek/deepseek-v4-flash:free', messages, max_tokens: Math.max(maxToks, 2048) }),
       });
       if (dsResp.ok) {
         const dsJson = await dsResp.json();
         if (dsJson.choices?.[0]?.message?.content) {
           aiResult = { response: dsJson.choices[0].message.content };
-          usedModel = 'deepseek-chat';
+          usedModel = 'deepseek/deepseek-v4-flash:free';
           tierUsed = 2;
         }
       }

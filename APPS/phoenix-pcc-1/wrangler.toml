@@ -24,13 +24,14 @@ bindings = [
   { name = "FORCEAWARENESS_ALARM", class_name = "ForceAwarenessAlarm" }
 ]
 
-[[migrations]]
-tag = "v2"
-new_classes = ["LegionRunner"]
+# [[migrations]]
+# tag = "v2"
+# new_classes = ["LegionRunner"]
+# Migration already applied — DO already in production
 
 [[migrations]]
 tag = "v4"
-new_classes = ["LegionRunner", "ForceAwarenessAlarm"]
+new_classes = ["ForceAwarenessAlarm"]
 
 [triggers]
 crons = ["0 */6 * * *", "* * * * *"]

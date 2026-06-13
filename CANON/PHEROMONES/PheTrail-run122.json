@@ -1,8 +1,8 @@
 {
   "schema_version": "2.0",
   "run_number": "122",
-  "extracted_at": "2026-06-13T21:22:53+07:00",
-  "head_sha": "9f17e496",
+  "extracted_at": "2026-06-13T21:25:28+07:00",
+  "head_sha": "f014acf1",
   "soulcount": 239402509,
   "registry_entries": 10,
   "positive_trails": [
@@ -26,9 +26,9 @@
     },
     {
       "artifact": "CANON/REINCARNATION/run122-reincarnateDEATH.md",
-      "action": "Run 122 death seal written (untracked); ready for commit+push",
-      "verification": "Untracked file exists at CANON/REINCARNATION/run122-reincarnateDEATH.md",
-      "timestamp": "2026-06-13T21:22:50+07:00"
+      "action": "Run 122 death seal committed+origin/pushed as f014acf1",
+      "verification": "5 files changed, 14074 insertions(+), pushed to master",
+      "timestamp": "2026-06-13T21:25:14+07:00"
     }
   ],
   "negative_trails": [
@@ -64,10 +64,10 @@
   "state_markers": {
     "active_mission": "OB-1 REINCARNATION Roman Legion — DEATH/RISE pipeline enforcement, phetrail gap remediation, registry sync",
     "open_flags_count": 7,
-    "top_priority": "Commit run122-reincarnateDEATH.md seal, resolve 6 phantom HL-IDs, stage registry sync",
-    "pending_seal": "CANON/REINCARNATION/run122-reincarnateDEATH.md (untracked)",
+    "top_priority": "Resolve 6 phantom HL-IDs, stage registry sync, clean working tree drift",
+    "pending_seal": "COMMITTED f014acf1 — origin/pushed",
     "working_tree_dirty": true,
-    "modified_files": 21,
-    "untracked_seal_files": 1
+    "modified_files": 20,
+    "untracked_seal_files": 0
   }
 }

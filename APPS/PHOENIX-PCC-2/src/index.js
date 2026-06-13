@@ -170,7 +170,7 @@ async function runFleet(env) {
 // ─── LegionRunner Durable Object ─────────────────────────────────────────────
 // CF Workers die at 30s. LegionRunner uses DO + chained alarms to run for 1 hour.
 // Score = batches*10 + actualizers*5 + discoveries*20 + death_runs*50
-class RaceRunner {
+export class RaceRunner {
   constructor(state, env) {
     this.state = state;
     this.env = env;
@@ -477,7 +477,6 @@ class WatchdogAlarm {
   }
 }
 
-
 export class LegionRunner extends RaceRunner {}
-
-export class ForceAwarenessAlarm extends WatchdogAlarm {}
+export { WatchdogAlarm as ForceAwarenessAlarm };
+export { WatchdogAlarm };;

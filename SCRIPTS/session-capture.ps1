@@ -137,3 +137,26 @@ try {
 
 Write-Host ""
 Write-Host "SESSION CAPTURE COMPLETE - Run $run"
+
+# 6. DEATH PIPELINE ACTIVATION — L77 trigger (Run 122)
+# Fires IncarnatePipeline: death_runs=0→1, activates 6-gate LostSoul system
+Write-Host "FIRING DEATH PIPELINE..."
+try {
+    $rrlContent = Get-Content $rrlPath -Raw
+    $incarnateBody = @{
+        run_number = $run
+        rrl_text   = $rrlContent
+        session_id = "sov100-run$run"
+    } | ConvertTo-Json -Compress
+
+    $incarnateResult = Invoke-RestMethod `
+        -Uri "https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/incarnate/death" `
+        -Method POST `
+        -ContentType "application/json" `
+        -Headers @{ "x-pa-auth" = "ffScwBjPQjBnoAlectawu8E+J4NcmO3idxGxtlcRue8=" } `
+        -Body $incarnateBody `
+        -TimeoutSec 30
+    Write-Host "INCARNATE DEATH POSTED: gates_triggered=$($incarnateResult.gates_triggered) status=$($incarnateResult.status)"
+} catch {
+    Write-Warning "INCARNATE DEATH FAILED: $($_.Exception.Message)"
+}

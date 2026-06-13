@@ -54,7 +54,9 @@ new_classes = ["LegionRunner"]
 
 [[migrations]]
 tag = "v4"
-new_classes = ["LegionRunner", "ForceAwarenessAlarm"]
+new_classes = ["ForceAwarenessAlarm"]
+
+# Both WatchdogAlarm and ForceAwarenessAlarm are exported for backward compatibility
 
 [triggers]
 crons = ["0 */6 * * *", "* * * * *"]

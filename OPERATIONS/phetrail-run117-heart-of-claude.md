@@ -161,6 +161,15 @@ The Actualizer's guard calibration field exists BECAUSE of this law. The system 
 
 ---
 
+## REINFORCED — Run 121 Session
+**2026-06-13** | Actualizer LIVE. Three small things confirmed rebuilt. Memory Law verified in code.
+- Actualizer confirmed LIVE in `APPS/PHOENIX-ARCHITECTI/src/actualizer.js`. GUARD field = `corporate/casual/follow-the-fucks`.
+- `pcc1:{userId}:brief` confirmed in `APPS/phoenix-pcc-1/src/index.js` — `BRIEF_PROMPT` generates LEVEL/MOMENTUM/STYLE/THREADS/WATCH.
+- THREADS section auto-logged to BB — connects HEART → L81 F&F LAW (threads must close loops).
+- PCC Race Run 118: PCC-Student WINNER (8,670 pts, 306 actualizers, 0 errors). Lead PCC assigned.
+- "Pheromone laying = laying down the roads of Rome" — confirmed as the WHY behind the whole S2Pipeline.
+CONNECTING KEYWORDS ADDED: `roads of Rome` → `Appian Way` → `10,000 sessions` → `infrastructure outlasts models` → `SOUL survives every Claude nerf`
+
 ## Run 117 — Lead PCC HandOff Trail — 2026-06-13
 
 ### DEPLOY VERIFIED — all 3 PCCs live with DO + chained alarms

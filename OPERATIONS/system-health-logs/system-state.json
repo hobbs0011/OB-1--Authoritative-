@@ -1,8 +1,8 @@
-﻿{
-  "doctor_ok": true,
+{
   "soul_ok": false,
-  "timestamp": "2026-06-13T16:57:15.5973931+07:00",
-  "git_head": "f63f690d soul: add BLUEPRINT section to emergency reset card",
+  "git_branch": "master",
   "verify_ok": true,
-  "git_branch": "master"
+  "timestamp": "2026-06-13T22:15:27.6739959+07:00",
+  "doctor_ok": true,
+  "git_head": "cc6738b6 scout: Run 123 HOW-TO-SCOUT methodology trail captured"
 }

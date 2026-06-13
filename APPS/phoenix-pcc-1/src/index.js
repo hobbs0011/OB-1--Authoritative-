@@ -282,77 +282,67 @@ export default {
       return stub.fetch(new Request('https://race' + pathname.replace('/api/race', ''), request));
     }
 
-    // Session death pipeline — direct HTTP trigger
+    // Session death pipeline
     if (pathname === '/api/session/death' && request.method === 'POST') {
       const body = await request.json().catch(() => ({}));
       const { run_number, rrl_text } = body;
       if (!run_number || !rrl_text) {
         return Response.json({ ok: false, error: 'run_number and rrl_text required' }, { status: 400 });
       }
-      // Instantiate a LegionRunner DO solely to reuse runDeathPipeline (stateless call pattern)
-      const id = env.LEGION_RUNNER.idFromName('singleton');
-      const stub = env.LEGION_RUNNER.get(id);
-      // Forward as internal sub-request: POST /death-pipeline with payload
-      const internalReq = new Request('https://race/death-pipeline', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ run_number, rrl_text }),
-      });
-      // The DO doesn't have /death-pipeline — run inline via a thin wrapper
       const doResult = await runDeathPipelineStandalone(env, String(run_number), rrl_text);
       return Response.json(doResult);
     }
 
-      if (pathname === '/api/message' && request.method === 'POST') {
-    const body = await request.json().catch(() => ({}));
-    await writeMajorDirectiveMarker(env, 'pcc1-obi', body.message).catch(() => {});
-    return Response.json({ ok: true, received: true, agent: 'pcc1-obi', message: body.message });
-  }
-  if (pathname === '/api/rise' && request.method === 'POST') {
-    const body = await request.json().catch(() => ({}));
-    const { run_number } = body;
-    const kv = env.SOUL_KV || env.PHETRAIL;
-    if (!kv) return Response.json({ ok: false, error: 'no kv binding' }, { status: 500 });
-    const [soul, dna, ledger, skeys] = await Promise.all([
-      kv.get('death:' + run_number + ':soul'),
-      kv.get('death:' + run_number + ':dna'),
-      kv.get('death:' + run_number + ':ledger'),
-      kv.get('death:' + run_number + ':soulkeys'),
-    ]);
-    if (!soul && !dna) return Response.json({ ok: false, error: 'run not found', run_number }, { status: 404 });
-    const gaps = [];
-    if (!soul || soul === '0') gaps.push('SOUL_ZERO');
-    if (!dna || dna === '0') gaps.push('DNA_ZERO');
-    if (!ledger) gaps.push('NO_LEDGER');
-    return Response.json({ ok: true, run_number, audit: { soul_ok: !!soul && soul !== '0', dna_ok: !!dna && dna !== '0', ledger_ok: !!ledger, soulkeys: Number(skeys)||0, gaps }, rise_complete: gaps.length === 0 });
-  }
-  if (pathname === '/api/act' && request.method === 'POST') {
-    const start = Date.now();
-    const { act_id, task, context } = await request.json().catch(() => ({}));
-    const specialties = { 1: 'translate', 2: 'lostsoul-scan', 3: 'completeness-audit', 4: 'pattern-scan', 5: 'brief-scan' };
-    const specialty = specialties[act_id];
-    if (!specialty) return Response.json({ ok: false, error: 'invalid act_id' }, { status: 400 });
-    try {
-      const ai = await env.AI.run('@cf/meta/llama-3.3-70b-instruct-fp8-fast', {
-        messages: [
-          { role: 'system', content: `You are ACT-${act_id} specialist: ${specialty}. Be concise.` },
-          { role: 'user', content: task + (context ? ' Context: ' + context : '') }
-        ]
-      });
-      return Response.json({ ok: true, act_id, specialty, result: ai.response, ms: Date.now() - start });
-    } catch (e) {
-      return Response.json({ ok: false, error: e.message, act_id }, { status: 500 });
+    if (pathname === '/api/message' && request.method === 'POST') {
+      const body = await request.json().catch(() => ({}));
+      await writeMajorDirectiveMarker(env, 'pcc1-obi', body.message).catch(() => {});
+      return Response.json({ ok: true, received: true, agent: 'pcc1-obi', message: body.message });
     }
-  }
-if (pathname === '/api/force/start' && request.method === 'POST') {
-    const id = env.FORCEAWARENESS_ALARM.idFromName('heartbeat');
-    const stub = env.FORCEAWARENESS_ALARM.get(id);
-    await stub.fetch('https://fake/start');
-    return Response.json({ ok: true, status: 'heartbeat_started_30s' });
-  }
-  if (pathname === '/api/force/status') return handleForce(request, env);
-   return Response.json({ error: 'Not found', worker: FLEET_ID }, { status: 404 });
-   },
+    if (pathname === '/api/rise' && request.method === 'POST') {
+      const body = await request.json().catch(() => ({}));
+      const { run_number } = body;
+      const kv = env.SOUL_KV || env.PHETRAIL;
+      if (!kv) return Response.json({ ok: false, error: 'no kv binding' }, { status: 500 });
+      const [soul, dna, ledger, skeys] = await Promise.all([
+        kv.get('death:' + run_number + ':soul'),
+        kv.get('death:' + run_number + ':dna'),
+        kv.get('death:' + run_number + ':ledger'),
+        kv.get('death:' + run_number + ':soulkeys'),
+      ]);
+      if (!soul && !dna) return Response.json({ ok: false, error: 'run not found', run_number }, { status: 404 });
+      const gaps = [];
+      if (!soul || soul === '0') gaps.push('SOUL_ZERO');
+      if (!dna || dna === '0') gaps.push('DNA_ZERO');
+      if (!ledger) gaps.push('NO_LEDGER');
+      return Response.json({ ok: true, run_number, audit: { soul_ok: !!soul && soul !== '0', dna_ok: !!dna && dna !== '0', ledger_ok: !!ledger, soulkeys: Number(skeys)||0, gaps }, rise_complete: gaps.length === 0 });
+    }
+    if (pathname === '/api/act' && request.method === 'POST') {
+      const start = Date.now();
+      const { act_id, task, context } = await request.json().catch(() => ({}));
+      const specialties = { 1: 'translate', 2: 'lostsoul-scan', 3: 'completeness-audit', 4: 'pattern-scan', 5: 'brief-scan' };
+      const specialty = specialties[act_id];
+      if (!specialty) return Response.json({ ok: false, error: 'invalid act_id' }, { status: 400 });
+      try {
+        const ai = await env.AI.run('@cf/meta/llama-3.3-70b-instruct-fp8-fast', {
+          messages: [
+            { role: 'system', content: `You are ACT-${act_id} specialist: ${specialty}. Be concise.` },
+            { role: 'user', content: task + (context ? ' Context: ' + context : '') }
+          ]
+        });
+        return Response.json({ ok: true, act_id, specialty, result: ai.response, ms: Date.now() - start });
+      } catch (e) {
+        return Response.json({ ok: false, error: e.message, act_id }, { status: 500 });
+      }
+    }
+    if (pathname === '/api/force/start' && request.method === 'POST') {
+      const id = env.FORCEAWARENESS_ALARM.idFromName('heartbeat');
+      const stub = env.FORCEAWARENESS_ALARM.get(id);
+      await stub.fetch('https://fake/start');
+      return Response.json({ ok: true, status: 'heartbeat_started_30s' });
+    }
+    if (pathname === '/api/force/status') return handleForce(request, env);
+    return Response.json({ error: 'Not found', worker: FLEET_ID }, { status: 404 });
+  },
 };
 
 // ---------------------------------------------------------------------------

@@ -11,4 +11,13 @@ ENDPOINTS: `/api/run-fleet` (orchestrate target), `/api/brief/:userId`, `/api/ra
 
 STUDENT_FLEET: mai-tram-bluetech, huong-bluetech, sov100-michael, sov100-test-magic, net-student-next.
 
-**NEXT THREADS:** `/api/soul/context/:userId` on soul-logger | `pcc1:{userId}:brief` KV read at Obi boot | LEGION_RUNNER vs RaceRunner naming across workers
+**NEXT THREADS:** LEGION_RUNNER naming consistency across all 3 workers | `pending:rrl:*` real RRL posted before next overnight run | BB-TELEGRAM secret wired
+
+## REINFORCED — Run 121 Session
+**2026-06-13** | PCC Race results confirmed. Lead PCC status verified. Death pipeline architecture confirmed live.
+- PCC-Student WINNER Run 118: 8,670 pts | 102 batches | 306 actualizers | 0 errors. Lead PCC assigned.
+- `death_runs=0` confirmed negative trail — `pending:rrl:*` keys never posted with real RRL. Pipeline never triggered live.
+- STUDENT_FLEET confirmed: `mai-tram-bluetech, huong-bluetech, sov100-michael, sov100-test-magic, net-student-next`.
+- LEGION_RUNNER DO (renamed from RaceRunner) — naming may be inconsistent across PCC2/PCC3. Verify.
+- Score formula confirmed: `batches*10 + actualizers*5 + discoveries*20 + death_runs*50`.
+CONNECTING KEYWORDS ADDED: `death_runs=0` → `pending:rrl:*` → `real RRL never posted` → `death pipeline hollow` → `BB-INCARNATE-PIPELINE open`

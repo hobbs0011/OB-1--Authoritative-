@@ -31,6 +31,15 @@ The blueprint Part 1 said "Obi needs a `/api/command-station` brain that classif
 
 ---
 
+## REINFORCED — Run 121 Session
+**2026-06-13** | Confirmed this IS the Command Station brain. Already built. Zero AI cost.
+- `routeCommandIntent` confirmed in `APPS/NET-PET-AI/src/cognitive-router.js`. Keyword-based, deterministic.
+- Output carries `agent99/agent98/agent97` fields — connects to CH08 triad (α-Planner/β-Dispatcher/γ-Observer).
+- 15 execution lanes confirmed. `CanonKeeper` lane = `canon/bible/doctrine/soul` keywords → SOUL_INDEX.
+- `LessonForge` lane = student lesson delivery → NET-PET-AI teaching core. Directly feeds Obi persona.
+- No AI call needed for routing. SSM V8 §4 COMMAND_WORDS maps to same mode vocabulary.
+CONNECTING KEYWORDS ADDED: `CanonKeeper` → `SOUL_INDEX` → `Vectorize` → `pheromone recall` → `PA dispatch context`
+
 ## CONNECTING KEYWORDS
 
 `routeCommandIntent` → `CommandDO compatibility` → `translation payload` → `agent99/98/97 fields`

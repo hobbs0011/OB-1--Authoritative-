@@ -76,7 +76,7 @@ export async function handleSessionDeath(request, env) {
 
 // ─── LegionRunner Durable Object ────────────────────────────────────────────────
 
-class RaceRunner {
+export class RaceRunner {
   constructor(state, env) {
     this.state = state;
     this.env = env;
@@ -271,6 +271,53 @@ class RaceRunner {
 }
 
 
-export class LegionRunner extends RaceRunner {}
+// ---------------------------------------------------------------------------
+// WatchdogAlarm — 30-second self-rescheduling heartbeat (Agent 99 OS core)
+// MUST be exported for existing DO migration compatibility
+// ---------------------------------------------------------------------------
+export class WatchdogAlarm extends RaceRunner {
+  async fetch(request) {
+    const url = new URL(request.url);
+    if (url.pathname === '/start') {
+      const current = await this.state.storage.getAlarm();
+      if (!current) await this.state.storage.setAlarm(Date.now() + 30000);
+      return Response.json({ ok: true, status: 'heartbeat_started' });
+    }
+    if (url.pathname === '/stop') {
+      await this.state.storage.deleteAlarm();
+      return Response.json({ ok: true, status: 'heartbeat_stopped' });
+    }
+    return Response.json({ ok: true, status: 'alive' });
+  }
+  async alarm() {
+    // Base class - no ForceAwareness call
+  }
+}
 
-export class ForceAwarenessAlarm extends WatchdogAlarm {}
+// ---------------------------------------------------------------------------
+// ForceAwarenessAlarm — extends RaceRunner for ForceAwareness hook (Agent 99 OS core)
+// ---------------------------------------------------------------------------
+export class ForceAwarenessAlarm extends RaceRunner {
+  async fetch(request) {
+    const url = new URL(request.url);
+    if (url.pathname === '/start') {
+      const current = await this.state.storage.getAlarm();
+      if (!current) await this.state.storage.setAlarm(Date.now() + 30000);
+      return Response.json({ ok: true, status: 'heartbeat_started' });
+    }
+    if (url.pathname === '/stop') {
+      await this.state.storage.deleteAlarm();
+      return Response.json({ ok: true, status: 'heartbeat_stopped' });
+    }
+    return Response.json({ ok: true, status: 'alive' });
+  }
+  async alarm() {
+    await ForceAwareness(this.env).catch(() => {});
+    await this.state.storage.setAlarm(Date.now() + 30000);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// LegionRunner — Race runner DO
+// ---------------------------------------------------------------------------
+export class LegionRunner extends RaceRunner {}

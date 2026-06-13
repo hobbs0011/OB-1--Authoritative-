@@ -1,4 +1,4 @@
-﻿name = "phoenix-pcc-2"
+name = "phoenix-pcc-2"
 main = "src/index.js"
 compatibility_date = "2025-05-24"
 
@@ -20,17 +20,13 @@ service = "soul-logger"
 
 [durable_objects]
 bindings = [
-  { name = "LEGION_RUNNER", class_name = "LegionRunner" },
-  { name = "FORCEAWARENESS_ALARM", class_name = "ForceAwarenessAlarm" }
+  { name = "FORCEAWARENESS_ALARM", class_name = "ForceAwarenessAlarm" },
+  { name = "LEGION_RUNNER", class_name = "LegionRunner" }
 ]
 
 [[migrations]]
 tag = "v2"
 new_classes = ["LegionRunner"]
-
-[[migrations]]
-tag = "v4"
-new_classes = ["LegionRunner", "ForceAwarenessAlarm"]
 
 [triggers]
 crons = ["30 */6 * * *", "* * * * *"]

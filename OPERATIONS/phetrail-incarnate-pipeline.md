@@ -62,6 +62,15 @@
 
 ---
 
+## REINFORCED — Run 121 Session
+**2026-06-13** | Full file read. Envelope mismatch confirmed as systemic defect family.
+- `extractUserMessages` at line 25 uses `obj.role` directly. Claude Code JSONL nests at `obj.message.role`. Same defect as SOUL contamination bug (Run 108+109). Not fixed yet.
+- `gatePheromoneDeepDive` (Run 120): scans for `watchdog` but watchdog was renamed to `FORCEAWARENESS` Run 120. Stale keyword in scanner.
+- BB sink confirmed: max 48 BB entries per run from IncarnatePipeline alone. No watcher routes them back to operator. L81 violation still open.
+- `rrl_archive` D1 table: stores full raw RRL. Run 119 RRL = 1.2MB. No truncation guard. Large D1 row risk.
+- D1 tables required: `rrl_archive`, `run_state`, `backburner`, `pcc_metrics` in `soul-archive` D1 (id: c69a11bc-064b-478f-9b1f-e9b8e2431fb8).
+CONNECTING KEYWORDS ADDED: `watchdog stale keyword` → `FORCEAWARENESS rename` → `Run 120 rename` → `gatePheromoneDeepDive needs update`
+
 ## L77 TRIGGERS
 
 - ARCHITECTURE CONTEXT ESTABLISHED — full 6-gate system documented

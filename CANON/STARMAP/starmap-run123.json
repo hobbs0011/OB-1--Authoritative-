@@ -1,0 +1,11 @@
+{
+  "run": 123,
+  "rrl_path": "D:\\OB-1-CANONICAL\\RRL\\RRL-123.txt",
+  "ledger_id": "HL-703",
+  "soul_turn_ids": "turn-1,turn-2,turn-3,turn-4,turn-5,turn-7,turn-13,turn-14,turn-16,turn-19",
+  "dna_turn_ids": "seq-6,seq-8,seq-9,seq-10,seq-11,seq-12,seq-15,seq-17,seq-18,seq-21",
+  "blueprint_locations": "dna-run123.json:seq-6; dna-run123.json:seq-8; dna-run123.json:seq-9; dna-run123.json:seq-10; dna-run123.json:seq-11; dna-run123.json:seq-12; dna-run123.json:seq-15; dna-run123.json:seq-17; dna-run123.json:seq-18; dna-run123.json:seq-21",
+  "char_count": 1272788,
+  "merkle_hash": "3aef09ad7e661e1a113991595f8159dadab06e789f96670955e32a0d6d79a7a7",
+  "created_at": "2026-06-13T23:07:35.6889388+07:00"
+}

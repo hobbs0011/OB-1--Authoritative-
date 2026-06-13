@@ -22,7 +22,7 @@ function extractUserMessages(rrl_text) {
   for (const line of lines) {
     try {
       const obj = JSON.parse(line);
-      if (obj.role === 'user' || obj.type === 'human') {
+      if ((obj.message?.role || obj.role) === 'user' || obj.type === 'human') {
         out.push(obj.content || obj.text || '');
         continue;
       }
