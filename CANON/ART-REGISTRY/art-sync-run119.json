@@ -1,0 +1,106 @@
+{
+  "run": 119,
+  "ledger_id": "HL-698",
+  "merkle_short": "B7785F3A747440A3",
+  "starmap_file": "starmap-run119.json",
+  "keywords_file": "rfkw-run119.txt",
+  "keywords_used": [
+    "soul-bible-true-v1-raw",
+    "system",
+    "*\\\"the",
+    "don't",
+    "\\\"the",
+    "building",
+    "going",
+    "agent",
+    "drift",
+    "something",
+    "actually",
+    "that's",
+    "thing",
+    "months",
+    "whole",
+    "bible",
+    "fucking",
+    "soul-dna-bible-v1-2026-03-15.md,",
+    "alpha-omega-dna5.txt\",\"quote_sha256\":\"a09e35c1b58ffc5dc5a516ec6af22ff8cf0adf80895b3d5b1ed37ceada29e03f\"}",
+    "op(zen)-1000-layers-10.txt,",
+    "gemini",
+    "michael",
+    "entire",
+    "alpha-omega-cla-5(mastermind).txt\",\"quote_sha256\":\"5c7d7bd72a3128dc1570972398ee6d08bf602bed4eab0add12771cb36be8081d\"}",
+    "human",
+    "truth",
+    "you're",
+    "ledger",
+    "*\\\"it",
+    "layers"
+  ],
+  "pieces_synced": 7,
+  "pieces": [
+    {
+      "id": "ART-1780548344848-CT6B",
+      "title": "Phoenix Pages — Core Friction: Drift vs DNA",
+      "url": "codex_preview/PHOENIX_PAGES/page_02.png",
+      "keywords": [
+        "drift"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780548343466-OGXZ",
+      "title": "Phoenix Pages — Kinetic Gates: The 5 Benchmarks",
+      "url": "codex_preview/PHOENIX_PAGES/page_01.png",
+      "keywords": [
+        "ledger"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780548333953-MXB7",
+      "title": "Codex — Drift as a Diagnostic Event",
+      "url": "codex_preview/page-10.png",
+      "keywords": [
+        "drift"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780548321479-LKGH",
+      "title": "Phoenix Rising Operational Codex — Cover",
+      "url": "codex_preview/page-01.png",
+      "keywords": [
+        "bible"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780530773225-4133",
+      "title": "Tiger Mode p01 — We Don't Teach English We Unlock Permission",
+      "url": "local:D:/Downloads/tiger-pages/page-1.png",
+      "keywords": [
+        "truth"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780527419422-NUFN",
+      "title": "Michael Hobbs Headshot — Wide",
+      "url": "local:D:/Downloads/Telegram Desktop/output_9gmjtb.png",
+      "keywords": [
+        "michael"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780527418015-4GUT",
+      "title": "Michael Hobbs Headshot — Square",
+      "url": "local:D:/Downloads/Telegram Desktop/output_5pbeb1.png",
+      "keywords": [
+        "michael"
+      ],
+      "title_hit": false
+    }
+  ],
+  "executed_at": "2026-06-13T11:56:29.967604+07:00"
+}
