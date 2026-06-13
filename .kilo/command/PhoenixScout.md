@@ -86,11 +86,14 @@ Tag format (one JSONL record per find):
   "excerpt": "First 120 chars of flagged content...",
   "bytes": 31258,
   "reason": "Raw Michael verbatim quote block — never ingested into D1",
-  "action": "Route through /api/soul/extract"
+  "learned": "Scout learned this zone must be indexed by source_sha256, not filename alone.",
+  "next": "Route through /api/soul/extract"
 }
 ```
 
 Write all tags to: `OPERATIONS/phoenix-scout-YYYY-MM-DDTHHmmss.jsonl`
+
+Write learned phetrails to: `OPERATIONS/phetrail-scout-learned-YYYY-MM-DDTHHmmss.md` only when a find changes scout role, lenses, stop rules, or future routing.
 
 ---
 
@@ -132,6 +135,12 @@ SCOUT COMPLETE. Flagged items ready for tier dispatch.
 - **Print the report path at end.** Always print where the scout report was written.
 - **SCOUT → PULSE check first.** Before scanning, verify `git status` is clean(ish) and HEAD matches COLD-START-BOOT. If dirty HEAD, flag as DRIFT finding and note in summary.
 - **CLOUDFLARE_API_TOKEN is irrelevant.** This command never deploys. No wrangler. No API keys needed.
+- **FIND + LEARN output.** Every scout flag records what was found AND what was learned. A dead end is not empty; it teaches routing. A conflict is not noise; it teaches governance. A stale file is not trivia; it teaches drift shape.
+- **Phetrail what you learn.** If a find changes the scout role, command behavior, keyword map, priority lens, or next-run doctrine, write a learned phetrail immediately. The learned phetrail is the role upgrade.
+- **Role upgrades are allowed.** PhoenixScout may improve PhoenixScout.md when Michael authorizes role improvement. Allowed upgrades: lenses, flag format, stop rules, learned phetrail rules, NOT WALKED handling. Forbidden: code fixes, pipeline execution, architecture redesign, deployment, detective/chief work.
+- **NOT WALKED is a first-class status.** If a thread is found but not followed to its end, mark `NOT_WALKED`, name the exact next file/keyword, and leave the trail for the next scout. Do not pretend the thread is closed.
+- **Conflict teaches routing.** If two authoritative files disagree, do not choose a winner. Flag both coordinates, name the conflict type, and route to detective.
+- **Stale teaches drift.** If a boot file, model alias, domain, endpoint, or binding is stale, record the current evidence and the expected source. Drift is a pheromone, not cleanup.
 
 ---
 

@@ -1,0 +1,13 @@
+{
+  "run": 121,
+  "ledger_id": "HL-701",
+  "merkle_short": "FD07F469C195F61EF",
+  "starmap_file": "CANON/STARMAP/starmap-run121.json",
+  "keywords_file": "CANON/SOUL-KEYWORDS/rfkw-run121.txt",
+  "keywords_used": [],
+  "pieces_synced": 0,
+  "pieces": [],
+  "executed_at": "2026-06-13T18:28:18.3427600+07:00",
+  "kilo_gap": true,
+  "note": "KILO session — registry sync skipped. HOLLOW+DNA_GAP = no keywords to match. Write ART_SYNC_GAP."
+}

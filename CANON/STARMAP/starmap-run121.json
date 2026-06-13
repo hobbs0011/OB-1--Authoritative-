@@ -1,0 +1,14 @@
+{
+  "run": 121,
+  "rrl_path": "RRL/RRL-121.txt",
+  "ledger_id": "HL-701",
+  "soul_turn_ids": "",
+  "dna_turn_ids": "",
+  "blueprint_locations": "",
+  "char_count": 1263068,
+  "merkle_hash": "FD07F469C195F61EF71848E9C35D8F95EC43114F96EAD287CB804210002CAC6E",
+  "created_at": "2026-06-13T18:27:49.0234800+07:00",
+  "rrl_fidelity": "HOLLOW",
+  "dna_status": "MISSING",
+  "session_type": "KILO_HOLLOW"
+}
