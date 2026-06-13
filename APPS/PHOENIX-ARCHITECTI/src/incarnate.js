@@ -66,7 +66,7 @@ async function gateDeathIngest(env, { run_number, rrl_text, ledger_tail_hash = '
 
   const rrlResult = await env.DB.prepare(
     'INSERT INTO rrl_archive (run_number, rrl_raw, line_count, byte_count, ingested_at) VALUES (?, ?, ?, ?, ?)'
-  ).bind(run_number, rrl_text, lines, bytes, now).run();
+  ).bind(run_number, rrl_text.slice(0, 100000), lines, bytes, now).run();
 
   const rrl_id = rrlResult.meta.last_row_id;
 

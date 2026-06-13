@@ -135,7 +135,42 @@ async function taskPatternScan(env) {
   return { task: 'pattern-scan', processed: patterns.length };
 }
 
-// Task 5: Brief scan — check for users with stale or missing briefs
+// Task 5: Code queue — execute BB entries dispatched by OB-1 via PA /api/code
+async function taskCodeQueue(env) {
+  if (!env.DB) return { task: 'code-queue', processed: 0 };
+  const PA_BASE = 'https://phoenix-architecti.mrmichaelhobbs123.workers.dev';
+  const rows = await env.DB.prepare(
+    "SELECT * FROM backburner WHERE status IN ('OPEN','IN_PROGRESS') AND (source LIKE 'obi-%' OR source='code-queue') ORDER BY priority ASC, created_at ASC LIMIT 3"
+  ).all().catch(() => ({ results: [] }));
+
+  let processed = 0;
+  for (const row of (rows.results || [])) {
+    try {
+      const resp = await fetch(`${PA_BASE}/api/code`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'x-pa-auth': PA_AUTH },
+        body: JSON.stringify({ task: row.title, context: row.description || '', tier: 1 }),
+      });
+      if (!resp.ok) continue;
+      const { patch, model } = await resp.json();
+      if (!patch || patch.length < 5) continue;
+
+      const result = `[PCC2-executed | model=${model}]\n${patch}`;
+      const now = new Date().toISOString();
+      await env.DB.prepare(
+        "UPDATE backburner SET status='PENDING_CLOSE', description=?, close_reason=?, updated_at=? WHERE bb_id=?"
+      ).bind(`${row.description || ''}\n\nRESULT:\n${result}`.slice(0, 4000), 'PCC2 code-queue executed', now, row.bb_id).run();
+
+      if (env.PHETRAIL) {
+        await env.PHETRAIL.put(`bb-result:${row.bb_id}`, result, { expirationTtl: 604800 }).catch(() => {});
+      }
+      processed++;
+    } catch { /* continue */ }
+  }
+  return { task: 'code-queue', processed };
+}
+
+// Task 6: Brief scan — check for users with stale or missing briefs
 async function taskBriefScan(env) {
   if (!env.DB || !env.PHETRAIL) return { task: 'brief-scan', processed: 0 };
   const students = ['mai-tram-bluetech', 'huong-bluetech', 'sov100-michael'];
@@ -157,14 +192,15 @@ async function taskBriefScan(env) {
 }
 
 async function runFleet(env) {
-  const [t1, t2, t3, t4, t5] = await Promise.allSettled([
+  const [t1, t2, t3, t4, t5, t6] = await Promise.allSettled([
     taskTranslate(env),
     taskLostSoulScan(env),
     taskCompletenessAudit(env),
     taskPatternScan(env),
+    taskCodeQueue(env),
     taskBriefScan(env),
   ]);
-  return [t1, t2, t3, t4, t5].map(r => r.status === 'fulfilled' ? r.value : { error: r.reason?.message });
+  return [t1, t2, t3, t4, t5, t6].map(r => r.status === 'fulfilled' ? r.value : { error: r.reason?.message });
 }
 
 // ─── LegionRunner Durable Object ─────────────────────────────────────────────
