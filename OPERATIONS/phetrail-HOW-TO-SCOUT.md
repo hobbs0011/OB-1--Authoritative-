@@ -103,3 +103,12 @@ These trail-heads were FOUND this session but not walked:
 ---
 
 **This trail is the key. Every scout reads this first. The methodology is the multiplier.**
+
+## REINFORCED — Run 121 Session
+**2026-06-13** | Methodology validated across 15+ files. Scout Manual now exists. Trail is canonical law.
+- PHETRAIL SCOUT MANUAL ratified: `CANON/SYSTEM/PHETRAIL-SCOUT-MANUAL.md` — Run 121. 13 sections. Methodology codified from this trail.
+- Scout loop confirmed working: this session walked 6 chains (commandstation→Bridge Problem, DRONES→Nuclear Harvest, AGENT99→TRIAD, OBI→Holographic, Shadow Mapping→CH22, DRONES→4-Node Sync).
+- Keyword index at bottom of every Bible chapter confirmed — this is the connecting-words mechanism.
+- SOUL DIRECTIVE issued Run 121: "NEVER GO THROUGH WITHOUT REINFORCING PHETRAILS AS YOU GO." Now a law.
+- NOT WALKED list ≠ expensive model hit list. NOT WALKED = future EXPLORATORES scout targets only.
+CONNECTING KEYWORDS ADDED: `Scout Manual §0-§13` → `EXPLORATORES-SCOUT-DOCTRINE.md` → `phetrail-NEGATIVE-SCOUT-VIOLATIONS.md 110/100` → `reinforce as you go`
