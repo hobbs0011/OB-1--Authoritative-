@@ -827,6 +827,7 @@ class ScoutRunner {
     }));
 
     // KV phetrail search — catches system keywords not in D1 (FORCEAWARENESS, PHOENIXCODER, etc.)
+    // IMPORTANT: use marker.keywords array (not raw message) to avoid extracting garbage code words
     if (this.env.PHETRAIL) {
       const kvKeys = await this.env.PHETRAIL.list({ prefix: 'phetrail:major-directive:', limit: 20 }).catch(() => ({ keys: [] }));
       for (const key of kvKeys.keys.slice(0, 20)) {
@@ -834,13 +835,15 @@ class ScoutRunner {
         if (!val) continue;
         try {
           const marker = JSON.parse(val);
-          const text = `${marker.message || ''} ${(marker.keywords || []).join(' ')} ${marker.source || ''}`;
-          if (text.toLowerCase().includes(kwLower)) {
-            allHits.push({ title: `kv:directive:${marker.source || 'unknown'}`, description: text.slice(0, 300) });
+          const searchText = `${marker.message || ''} ${(marker.keywords || []).join(' ')} ${marker.source || ''}`;
+          if (searchText.toLowerCase().includes(kwLower)) {
+            // Use only the keywords array as description — prevents frequency analysis from picking up code words
+            const canonicalKws = (marker.keywords || []).filter(k => k && k.length > 2).join(' ');
+            allHits.push({ title: `kv:directive:${marker.source || 'unknown'}`, description: canonicalKws || marker.source || 'directive' });
           }
         } catch { /* ok */ }
       }
-      // Also check recent scout pheromones for keyword cross-links
+      // Scout pheromone cross-links
       const phKeys = await this.env.PHETRAIL.list({ prefix: 'scout:pheromone:', limit: 10 }).catch(() => ({ keys: [] }));
       for (const key of phKeys.keys.slice(0, 10)) {
         const val = await this.env.PHETRAIL.get(key.name).catch(() => null);
@@ -848,7 +851,7 @@ class ScoutRunner {
         try {
           const ph = JSON.parse(val);
           if (ph.keyword && ph.keyword.toLowerCase().includes(kwLower)) {
-            allHits.push({ title: `kv:pheromone:${ph.keyword}`, description: `area=${ph.area} hits=${ph.hitCount}` });
+            allHits.push({ title: `kv:pheromone:${ph.keyword}`, description: `${ph.keyword} area=${ph.area}` });
           }
         } catch { /* ok */ }
       }
