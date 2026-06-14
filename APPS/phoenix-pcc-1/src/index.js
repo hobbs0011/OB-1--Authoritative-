@@ -691,19 +691,21 @@ class ScoutRunner {
       }
 
       const body = await request.json().catch(() => ({}));
-      const seed_keyword = body.seed_keyword || 'FORCEAWARENESS';
-      const budget_ms = body.time_limit_seconds ? body.time_limit_seconds * 1000 : 3600000;
+      // Upgrades: random seed, 10s iteration, 100 pheromone goal, unmapped priority
+      const seed_keyword = body.seed_keyword || ['FORCEAWARENESS', 'SOUL', 'DNA', 'PHOENIX', 'SYSTEM', 'OB1'][Math.floor(Math.random() * 6)];
+      const budget_ms = body.time_limit_seconds ? body.time_limit_seconds * 1000 : 600000; // 10 min default
       const now = Date.now();
 
       await this.state.storage.put('scout_state', {
         start_time: now, budget_ms, seed_keyword,
         current_keyword: seed_keyword,
         chains_walked: 0, pos_territories: [], neg_trails: [], iterations: 0,
-        entries: [`# OB1 Scout Mission — ${new Date(now).toISOString()}\n## Seed: ${seed_keyword}\n`],
+        pheromone_count: 0, unmapped_found: 0,
+        entries: [`# OB1 Scout Mission — ${new Date(now).toISOString()}\n## Seed: ${seed_keyword}\n`, `# Mission: Scout 1 unmapped territory, drop 100 pheromones\n`],
       });
 
-      await this.state.storage.setAlarm(now + 60000);
-      return Response.json({ ok: true, status: 'scout_started', seed_keyword, budget_ms });
+      await this.state.storage.setAlarm(now + 10000); // 10s iterations
+      return Response.json({ ok: true, status: 'scout_started', seed_keyword, budget_ms, upgrades: ['fast-iteration', 'unmapped-priority', 'pheromone-goal'] });
     }
 
     if (url.pathname === '/status') {
@@ -720,6 +722,8 @@ class ScoutRunner {
         pos_count: state.pos_territories.length,
         neg_count: state.neg_trails.length,
         current_keyword: state.current_keyword,
+        pheromone_count: state.pheromone_count,
+        unmapped_found: state.unmapped_found,
       });
     }
 
@@ -736,89 +740,141 @@ class ScoutRunner {
     return Response.json({ error: 'Not found' }, { status: 404 });
   }
 
-  // Real D1 keyword density search: returns { next_kw, is_pos, area, hit_count }
+  // Enhanced D1 keyword density search: returns { next_kw, is_pos, area, hit_count, novelty }
   async walkChain(kw) {
-    if (!this.env.DB) return { next_kw: 'SOUL', is_pos: false, area: 'no-db', hit_count: 0 };
+    if (!this.env.DB) return { next_kw: 'SOUL', is_pos: false, area: 'no-db', hit_count: 0, novelty: false };
 
-    // Search backburner for keyword hits
-    const rows = await this.env.DB.prepare(
-      "SELECT title, description FROM backburner WHERE title LIKE ? OR description LIKE ? LIMIT 15"
-    ).bind(`%${kw}%`, `%${kw}%`).all().catch(() => ({ results: [] }));
+    // Upgrades: Multi-table search for richer terrain
+    const queries = [
+      this.env.DB.prepare("SELECT title, description FROM backburner WHERE title LIKE ? OR description LIKE ? LIMIT 15").bind(`%${kw}%`, `%${kw}%`).all().catch(() => ({ results: [] })),
+      this.env.DB.prepare("SELECT run_number, ledger_id FROM rrl_archive WHERE rrl_raw LIKE ? LIMIT 10").bind(`%${kw}%`).all().catch(() => ({ results: [] })),
+    ];
+    const [bbRows, archiveRows] = await Promise.all(queries);
 
-    const hits = rows.results || [];
-    if (hits.length === 0) {
-      // Dead end — pivot to a known soul seed
-      const seeds = ['SOUL', 'FORCEAWARENESS', 'DNA', 'LEDGER', 'SCOUT', 'PHETRAIL', 'DISPATCH', 'OB1'];
+    const allHits = [...(bbRows.results || []), ...(archiveRows.results || [])].map(r => ({
+      title: r.title || `run#${r.run_number || 'unknown'}`,
+      description: r.description || r.ledger_id || r.rrl_raw?.slice(0, 100) || '',
+    }));
+
+    if (allHits.length === 0) {
+      // Dead end — pivot to random soul seed
+      const seeds = ['SOUL', 'FORCEAWARENESS', 'DNA', 'LEDGER', 'SCOUT', 'PHETRAIL', 'DISPATCH', 'OB1', 'UNMAPPED', 'TERRITORY'];
       const next_kw = seeds[Math.floor(Math.random() * seeds.length)];
-      return { next_kw, is_pos: false, area: `backburner:0-hits`, hit_count: 0 };
+      return { next_kw, is_pos: false, area: `backburner:0-hits`, hit_count: 0, novelty: false };
     }
 
-    // Extract next keyword: most frequent meaningful word across matched BBs
-    const allText = hits.map(h => `${h.title} ${h.description || ''}`).join(' ');
+    // Check if this keyword/area is already mapped (upgrade: uniqueness tracking)
+    const alreadyMapped = this.env.PHETRAIL ? await this.isMapped(kw, allHits.length) : false;
+
+    // Extract next keyword with enhanced stopword list
+    const allText = allHits.map(h => `${h.title} ${h.description || ''}`).join(' ');
     const freq = {};
+    const stopWords = new Set(['with', 'from', 'have', 'that', 'this', 'will', 'they', 'were', 'been', 'also', 'more', 'into', 'over', 'some', 'just', 'than', 'very', 'when', 'what', 'which', 'where', 'then', 'here', 'only', 'like', 'make', 'take', 'would', 'could', 'should', 'then', 'each', 'such', 'these', 'those', 'them', 'from', 'into', 'onto', 'upon']);
     for (const raw of allText.split(/\s+/)) {
       const w = raw.replace(/[^a-zA-Z0-9#]/g, '');
-      if (w.length < 4 || w.toLowerCase() === kw.toLowerCase()) continue;
-      if (/^(with|from|have|that|this|will|they|were|been|also|more|into|over|some|just|than|very|when|what|which|where|then|here|only|like|make|take|would|could|should)$/i.test(w)) continue;
+      if (w.length < 3 || w.toLowerCase() === kw.toLowerCase() || stopWords.has(w.toLowerCase())) continue;
       freq[w] = (freq[w] || 0) + 1;
     }
     const sorted = Object.entries(freq).sort((a, b) => b[1] - a[1]);
-    const next_kw = sorted.length > 0 ? sorted[0][0] : 'SOUL';
 
-    return { next_kw, is_pos: true, area: `backburner:${hits.length}-hits`, hit_count: hits.length };
+    // Upgrade: Prefer unmapped keywords (lower frequency, novelty) + track novelty
+    let next_kw = 'SOUL';
+    let novelty = false;
+    for (const [word, count] of sorted) {
+      if (count < 5) { // Rare = potentially unmapped
+        next_kw = word;
+        novelty = true;
+        break;
+      }
+    }
+    if (!novelty && sorted.length > 0) next_kw = sorted[0][0]; // Fallback to densest
+
+    // Return with is_pos based on novelty (not already mapped)
+    return { next_kw, is_pos: !alreadyMapped, area: `backburner:${allHits.length}-hits`, hit_count: allHits.length * (novelty ? 2 : 1), novelty };
   }
 
-// Write phetrail to GitHub and KV
-   async finalize(state) {
-     const summary = `\n## Summary\n- Chains walked: ${state.chains_walked}\n- POS territories: ${state.pos_territories.length}\n- NEG trails: ${state.neg_trails.length}\n- Final keyword: ${state.current_keyword}\n- Ended: ${new Date().toISOString()}\n`;
-     state.entries.push(summary);
-     const phetrail = state.entries.join('\n');
+  async isMapped(keyword, hits) {
+    if (!this.env.PHETRAIL) return false;
+    try {
+      const mapped = await this.env.PHETRAIL.get(`scout:mapped:${keyword.toLowerCase()}`).catch(() => null);
+      return !!mapped;
+    } catch { return false; }
+  }
 
-     // KV backup (7-day)
-     if (this.env.PHETRAIL) {
-       await this.env.PHETRAIL.put('scout:final_phetrail', phetrail, { expirationTtl: 604800 }).catch(() => {});
-     }
-
-     // Commit to GitHub — unique filename with timestamp to preserve history
-     const date = new Date().toISOString().slice(0, 10).replace(/-/g, '');
-     const hour = String(Math.floor((state.start_time || Date.now()) / 3600000) % 24).padStart(2, '0');
-     const minute = String(Math.floor((state.start_time || Date.now()) / 60000) % 60).padStart(2, '0');
-     const result = await writeGitHubFile(this.env, {
-       file: `OPERATIONS/phetrail-ob1-scout-${date}-${hour}${minute}.md`,
-       content: phetrail,
-       description: `OB1 scout ${date} — ${state.chains_walked} chains, ${state.pos_territories.length} POS`,
-     }).catch(e => ({ ok: false, reason: e.message }));
-
-     await this.state.storage.delete('scout_state');
-     return result;
-   }
+  async markPheromone(keyword, area, hitCount) {
+    if (!this.env.PHETRAIL) return;
+    const ts = Date.now();
+    await this.env.PHETRAIL.put(`scout:pheromone:${ts}`, JSON.stringify({ keyword, area, hitCount, ts })).catch(() => {});
+    await this.env.PHETRAIL.put(`scout:mapped:${keyword.toLowerCase()}`, '1', { expirationTtl: 2592000 }).catch(() => {}); // 30d TTL
+  }
 
   async alarm() {
     const state = await this.state.storage.get('scout_state');
     if (!state) return;
 
     const elapsed = Date.now() - state.start_time;
-    if (elapsed >= state.budget_ms) {
-      await this.finalize(state);
+    if (elapsed >= state.budget_ms || (state.pheromone_count || 0) >= 100) {
+      // Mission complete: time budget OR 100 pheromones dropped
+      await this.finalize(state, (state.pheromone_count || 0) >= 100);
       return;
     }
 
-    // Real chain walk — hit D1, find actual keyword density
+    // Upgrades: 10s iterations, pheromone tracking, unmapped priority
     state.iterations++;
     const kw = state.current_keyword || state.seed_keyword;
-    const { next_kw, is_pos, area, hit_count } = await this.walkChain(kw);
+    const { next_kw, is_pos, area, hit_count, novelty } = await this.walkChain(kw);
 
-    const entry = `\n### Chain ${state.chains_walked + 1} [${new Date().toISOString()}]\n- Keyword: ${kw}\n- Area: ${area} (hits: ${hit_count})\n- Next: ${next_kw}\n- Status: ${is_pos ? 'POS — new territory' : 'NEG — dead end'}\n`;
+    // Drop pheromone marker for POS territory
+    if (is_pos) {
+      state.pheromone_count = (state.pheromone_count || 0) + hit_count; // Count hits as pheromones
+      await this.markPheromone(kw, area, hit_count);
+    }
+
+    const entry = `\n### Chain ${state.chains_walked + 1} [${new Date().toISOString()}]\n- Keyword: ${kw}\n- Area: ${area} (hits: ${hit_count})\n- Next: ${next_kw}\n- Status: ${is_pos ? 'POS — new territory' : 'NEG — dead end'}\n- Pheromones dropped: ${is_pos ? hit_count : 0}\n- Novelty: ${novelty ? 'unmapped' : 'known'}\n`;
     state.entries.push(entry);
 
-    if (is_pos) state.pos_territories.push({ keyword: kw, area, hit_count });
+    if (is_pos) {
+      state.pos_territories.push({ keyword: kw, area, hit_count });
+      if (novelty) state.unmapped_found++;
+    }
     else state.neg_trails.push({ keyword: kw, area });
 
     state.chains_walked++;
     state.current_keyword = next_kw;
 
     await this.state.storage.put('scout_state', state);
-    await this.state.storage.setAlarm(Date.now() + 60000);
+    await this.state.storage.setAlarm(Date.now() + 10000); // 10s iterations
+  }
+
+  // Write phetrail to GitHub and KV, with pheromone summary
+  async finalize(state, earlyStop = false) {
+    const summary = `\n## Summary\n- Chains walked: ${state.chains_walked}\n- POS territories: ${state.pos_territories.length}\n- NEG trails: ${state.neg_trails.length}\n- Pheromones dropped: ${state.pheromone_count || 0}\n- Unmapped found: ${state.unmapped_found || 0}\n- Final keyword: ${state.current_keyword}\n- Ended: ${new Date().toISOString()}\n- Reason: ${earlyStop ? '100 pheromones goal reached' : 'time budget exhausted'}\n`;
+    state.entries.push(summary);
+    const phetrail = state.entries.join('\n');
+
+    // KV backup (7-day) + pheromone trail file
+    if (this.env.PHETRAIL) {
+      await this.env.PHETRAIL.put('scout:final_phetrail', phetrail, { expirationTtl: 604800 }).catch(() => {});
+      await this.env.PHETRAIL.put('scout:pheromone:summary', JSON.stringify({
+        total: state.pheromone_count || 0,
+        unmapped: state.unmapped_found || 0,
+        territories: state.pos_territories.length,
+        ended: new Date().toISOString()
+      }), { expirationTtl: 604800 }).catch(() => {});
+    }
+
+    // Commit to GitHub — unique filename with timestamp to preserve history
+    const date = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+    const hour = String(Math.floor((state.start_time || Date.now()) / 3600000) % 24).padStart(2, '0');
+    const minute = String(Math.floor((state.start_time || Date.now()) / 60000) % 60).padStart(2, '0');
+    const result = await writeGitHubFile(this.env, {
+      file: `OPERATIONS/phetrail-ob1-scout-${date}-${hour}${minute}.md`,
+      content: phetrail,
+      description: `OB1 scout ${date} — ${state.chains_walked} chains, ${state.pos_territories.length} POS, ${state.pheromone_count || 0} pheromones`,
+    }).catch(e => ({ ok: false, reason: e.message }));
+
+    await this.state.storage.delete('scout_state');
+    return result;
   }
 }
 
