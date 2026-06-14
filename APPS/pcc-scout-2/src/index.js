@@ -435,12 +435,12 @@ async function fetchGitHubFile(env, filePath) {
 function extractFilePath(text) {
   const patterns = [
     /"file"\s*:\s*"([^"]+)"/,                   // {"file":"APPS/..."}
-    /[Ff]ile:\s*([^\s,\n"]+\.[a-z]{2,4})/,      // File: src/foo.js
-    /(APPS\/[^\s\n,'"]+\.[a-z]{2,4})/,          // bare APPS/ path
-    /(CANON\/[^\s\n,'"]+\.[a-z]{2,4})/,         // bare CANON/ path
-    /(OPERATIONS\/[^\s\n,'"]+\.[a-z]{2,4})/,    // bare OPERATIONS/ path
-    /(src\/[^\s\n,'"]+\.[a-z]{2,4})/,           // bare src/ path
-    /(SCRIPTS\/[^\s\n,'"]+\.[a-z]{2,4})/,       // bare SCRIPTS/ path
+    /[Ff]ile:\s*([^\s,\n"]+\.[a-zA-Z]{2,5})/,    // File: src/foo.js
+    /(APPS\/[^\s\n,'"]+\.[a-zA-Z]{2,5})/,       // bare APPS/ path
+    /(CANON\/[^\s\n,'"]+\.[a-zA-Z]{2,5})/,      // bare CANON/ path
+    /(OPERATIONS\/[^\s\n,'"]+\.[a-zA-Z]{2,5})/, // bare OPERATIONS/ path
+    /(src\/[^\s\n,'"]+\.[a-zA-Z]{2,5})/,        // bare src/ path
+    /(SCRIPTS\/[^\s\n,'"]+\.[a-zA-Z]{2,5})/,    // bare SCRIPTS/ path
   ];
   for (const p of patterns) {
     const m = text.match(p);
@@ -485,9 +485,15 @@ Return ONLY valid JSON, no other text. The "find" value MUST be copied verbatim 
         headers: { 'Content-Type': 'application/json', 'x-pa-auth': PA_AUTH },
         body: JSON.stringify({ task: taskWithInstruction, context: (row.description || '') + fileContext, tier: 1 }),
       });
-      if (!resp.ok) continue;
+      if (!resp.ok) {
+        await logPccMetric(env, { task_preview: row.title, task_length: (row.description || '').length, model: 'pa-error', duration_ms: Date.now() - t0, output_length: 0, passed: false, fail_reason: `PA_HTTP_${resp.status}` });
+        continue;
+      }
       const { patch, model } = await resp.json();
-      if (!patch || patch.length < 5) continue;
+      if (!patch || patch.length < 5) {
+        await logPccMetric(env, { task_preview: row.title, task_length: (row.description || '').length, model: model || 'pa-t1', duration_ms: Date.now() - t0, output_length: 0, passed: false, fail_reason: 'EMPTY_PATCH' });
+        continue;
+      }
 
       // Parse structured patch and apply to GitHub repo
       let applyResult = { ok: false, reason: 'no structured patch in PA response' };
