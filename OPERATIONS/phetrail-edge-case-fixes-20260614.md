@@ -25,3 +25,12 @@
 
 ### Verification:
 - All files pass `node --check` syntax validation
+
+### CRITICAL FINDING — File Overwrite Bug:
+**pcc-1:src/index.js:782-788** — `writeGitHubFile()` overwrites same file path daily
+- Risk: Scout phetrail from Run 1 (59 chains, 47 POS, 12 NEG) was **destroyed** when Run 2 (46 chains, 44 POS, 2 NEG) wrote to same filename
+- Fix needed: Include timestamp or run number in phetrail filename to preserve history
+
+### Scout Territory Discovered (combined):
+- `FORCEAWARENESS → OB1 → DNA → section → Drift → system` (stable 3-node cycle)
+- Backburner contains 16 entries with `section` (5 hits), `system` (10 hits), `Drift` (1 hit) forming core territory
