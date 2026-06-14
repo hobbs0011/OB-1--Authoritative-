@@ -1,332 +1,395 @@
-# OB1 Scout Mission — 2026-06-14T08:07:50.425Z
+# OB1 Scout Mission — 2026-06-14T07:03:21.430Z
 ## Seed: FORCEAWARENESS
 
 
-### Chain 1 [2026-06-14T08:08:50.600Z]
+### Chain 1
 - Keyword: FORCEAWARENESS
-- Area: backburner:0-hits (hits: 0)
-- Next: OB1
-- Status: NEG — dead end
+- Connecting: swarm
+- Status: POS (new territory)
 
 
-### Chain 2 [2026-06-14T08:09:50.757Z]
-- Keyword: OB1
-- Area: backburner:15-hits (hits: 15)
-- Next: maitrambluetech
-- Status: POS — new territory
+### Chain 2
+- Keyword: swarm
+- Connecting: antcolony
+- Status: POS (new territory)
 
 
-### Chain 3 [2026-06-14T08:10:50.936Z]
-- Keyword: maitrambluetech
+### Chain 3
+- Keyword: antcolony
+- Connecting: swarm
+- Status: POS (new territory)
+
+
+### Chain 4
+- Keyword: swarm
+- Connecting: antcolony
+- Status: POS (new territory)
+
+
+### Chain 5
+- Keyword: antcolony
+- Connecting: antcolony
+- Status: NEG (dead end)
+
+
+### Chain 6
+- Keyword: antcolony
+- Connecting: density
+- Status: NEG (dead end)
+
+
+### Chain 7
+- Keyword: density
+- Connecting: routing
+- Status: POS (new territory)
+
+
+### Chain 8
+- Keyword: routing
+- Connecting: antcolony
+- Status: POS (new territory)
+
+
+### Chain 9
+- Keyword: antcolony
+- Connecting: vector
+- Status: POS (new territory)
+
+
+### Chain 10
+- Keyword: vector
+- Connecting: density
+- Status: NEG (dead end)
+
+
+### Chain 11
+- Keyword: density
+- Connecting: scent
+- Status: POS (new territory)
+
+
+### Chain 12
+- Keyword: scent
+- Connecting: density
+- Status: NEG (dead end)
+
+
+### Chain 13
+- Keyword: density
+- Connecting: vector
+- Status: POS (new territory)
+
+
+### Chain 14
+- Keyword: vector
+- Connecting: density
+- Status: POS (new territory)
+
+
+### Chain 15
+- Keyword: density
+- Connecting: antcolony
+- Status: NEG (dead end)
+
+
+### Chain 16
+- Keyword: antcolony
+- Connecting: antcolony
+- Status: NEG (dead end)
+
+
+### Chain 17
+- Keyword: antcolony
+- Connecting: antcolony
+- Status: POS (new territory)
+
+
+### Chain 18
+- Keyword: antcolony
+- Connecting: pheromone
+- Status: POS (new territory)
+
+
+### Chain 19
+- Keyword: pheromone
+- Connecting: density
+- Status: NEG (dead end)
+
+
+### Chain 20
+- Keyword: density
+- Connecting: scent
+- Status: NEG (dead end)
+
+
+### Chain 21
+- Keyword: scent
+- Connecting: density
+- Status: POS (new territory)
+
+
+### Chain 22
+- Keyword: density
+- Connecting: scent
+- Status: NEG (dead end)
+
+
+### Chain 23
+- Keyword: scent
+- Connecting: trail
+- Status: POS (new territory)
+
+
+### Chain 24
+- Keyword: trail
+- Connecting: vector
+- Status: POS (new territory)
+
+
+### Chain 25
+- Keyword: vector
+- Connecting: scent
+- Status: POS (new territory)
+
+
+### Chain 26
+- Keyword: scent
+- Connecting: swarm
+- Status: POS (new territory)
+
+
+### Chain 27
+- Keyword: swarm
+- Connecting: trail
+- Status: NEG (dead end)
+
+
+### Chain 28
+- Keyword: trail
+- Connecting: vector
+- Status: NEG (dead end)
+
+
+### Chain 29 [2026-06-14T07:32:23.188Z]
+- Keyword: vector
 - Area: backburner:0-hits (hits: 0)
 - Next: DNA
 - Status: NEG — dead end
 
 
-### Chain 4 [2026-06-14T08:11:51.097Z]
+### Chain 30 [2026-06-14T07:33:23.348Z]
 - Keyword: DNA
 - Area: backburner:15-hits (hits: 15)
 - Next: section
 - Status: POS — new territory
 
 
-### Chain 5 [2026-06-14T08:12:51.249Z]
+### Chain 31 [2026-06-14T07:34:23.505Z]
 - Keyword: section
 - Area: backburner:5-hits (hits: 5)
 - Next: Drift
 - Status: POS — new territory
 
 
-### Chain 6 [2026-06-14T08:13:51.398Z]
+### Chain 32 [2026-06-14T07:35:23.748Z]
 - Keyword: Drift
 - Area: backburner:1-hits (hits: 1)
 - Next: system
 - Status: POS — new territory
 
 
-### Chain 7 [2026-06-14T08:14:51.586Z]
+### Chain 33 [2026-06-14T07:36:23.933Z]
 - Keyword: system
 - Area: backburner:10-hits (hits: 10)
 - Next: section
 - Status: POS — new territory
 
 
-### Chain 8 [2026-06-14T08:15:51.766Z]
+### Chain 34 [2026-06-14T07:37:24.096Z]
 - Keyword: section
 - Area: backburner:5-hits (hits: 5)
 - Next: Drift
 - Status: POS — new territory
 
 
-### Chain 9 [2026-06-14T08:16:51.942Z]
+### Chain 35 [2026-06-14T07:38:24.273Z]
 - Keyword: Drift
 - Area: backburner:1-hits (hits: 1)
 - Next: system
 - Status: POS — new territory
 
 
-### Chain 10 [2026-06-14T08:17:52.103Z]
+### Chain 36 [2026-06-14T07:39:24.434Z]
 - Keyword: system
 - Area: backburner:10-hits (hits: 10)
 - Next: section
 - Status: POS — new territory
 
 
-### Chain 11 [2026-06-14T08:18:52.260Z]
+### Chain 37 [2026-06-14T07:40:24.660Z]
 - Keyword: section
 - Area: backburner:5-hits (hits: 5)
 - Next: Drift
 - Status: POS — new territory
 
 
-### Chain 12 [2026-06-14T08:19:52.505Z]
+### Chain 38 [2026-06-14T07:41:24.831Z]
 - Keyword: Drift
 - Area: backburner:1-hits (hits: 1)
 - Next: system
 - Status: POS — new territory
 
 
-### Chain 13 [2026-06-14T08:20:52.665Z]
+### Chain 39 [2026-06-14T07:42:24.995Z]
 - Keyword: system
 - Area: backburner:10-hits (hits: 10)
 - Next: section
 - Status: POS — new territory
 
 
-### Chain 14 [2026-06-14T08:21:52.821Z]
+### Chain 40 [2026-06-14T07:43:25.313Z]
 - Keyword: section
 - Area: backburner:5-hits (hits: 5)
 - Next: Drift
 - Status: POS — new territory
 
 
-### Chain 15 [2026-06-14T08:22:52.973Z]
+### Chain 41 [2026-06-14T07:44:25.581Z]
 - Keyword: Drift
 - Area: backburner:1-hits (hits: 1)
 - Next: system
 - Status: POS — new territory
 
 
-### Chain 16 [2026-06-14T08:23:53.134Z]
+### Chain 42 [2026-06-14T07:45:25.847Z]
 - Keyword: system
 - Area: backburner:10-hits (hits: 10)
 - Next: section
 - Status: POS — new territory
 
 
-### Chain 17 [2026-06-14T08:24:53.325Z]
+### Chain 43 [2026-06-14T07:46:26.006Z]
 - Keyword: section
 - Area: backburner:5-hits (hits: 5)
 - Next: Drift
 - Status: POS — new territory
 
 
-### Chain 18 [2026-06-14T08:25:53.512Z]
+### Chain 44 [2026-06-14T07:47:26.189Z]
 - Keyword: Drift
 - Area: backburner:1-hits (hits: 1)
 - Next: system
 - Status: POS — new territory
 
 
-### Chain 19 [2026-06-14T08:26:53.673Z]
+### Chain 45 [2026-06-14T07:48:26.350Z]
 - Keyword: system
 - Area: backburner:10-hits (hits: 10)
 - Next: section
 - Status: POS — new territory
 
 
-### Chain 20 [2026-06-14T08:27:53.831Z]
+### Chain 46 [2026-06-14T07:49:26.543Z]
 - Keyword: section
 - Area: backburner:5-hits (hits: 5)
 - Next: Drift
 - Status: POS — new territory
 
 
-### Chain 21 [2026-06-14T08:28:54.015Z]
+### Chain 47 [2026-06-14T07:50:26.871Z]
 - Keyword: Drift
 - Area: backburner:1-hits (hits: 1)
 - Next: system
 - Status: POS — new territory
 
 
-### Chain 22 [2026-06-14T08:29:54.181Z]
+### Chain 48 [2026-06-14T07:51:27.127Z]
 - Keyword: system
 - Area: backburner:10-hits (hits: 10)
 - Next: section
 - Status: POS — new territory
 
 
-### Chain 23 [2026-06-14T08:30:54.345Z]
+### Chain 49 [2026-06-14T07:52:27.285Z]
 - Keyword: section
 - Area: backburner:5-hits (hits: 5)
 - Next: Drift
 - Status: POS — new territory
 
 
-### Chain 24 [2026-06-14T08:31:54.499Z]
+### Chain 50 [2026-06-14T07:53:27.440Z]
 - Keyword: Drift
 - Area: backburner:1-hits (hits: 1)
 - Next: system
 - Status: POS — new territory
 
 
-### Chain 25 [2026-06-14T08:32:54.665Z]
+### Chain 51 [2026-06-14T07:54:27.626Z]
 - Keyword: system
 - Area: backburner:10-hits (hits: 10)
 - Next: section
 - Status: POS — new territory
 
 
-### Chain 26 [2026-06-14T08:33:54.972Z]
+### Chain 52 [2026-06-14T07:55:27.785Z]
 - Keyword: section
 - Area: backburner:5-hits (hits: 5)
 - Next: Drift
 - Status: POS — new territory
 
 
-### Chain 27 [2026-06-14T08:34:55.146Z]
+### Chain 53 [2026-06-14T07:56:27.965Z]
 - Keyword: Drift
 - Area: backburner:1-hits (hits: 1)
 - Next: system
 - Status: POS — new territory
 
 
-### Chain 28 [2026-06-14T08:35:55.340Z]
+### Chain 54 [2026-06-14T07:57:28.225Z]
 - Keyword: system
 - Area: backburner:10-hits (hits: 10)
 - Next: section
 - Status: POS — new territory
 
 
-### Chain 29 [2026-06-14T08:36:55.527Z]
+### Chain 55 [2026-06-14T07:58:28.390Z]
 - Keyword: section
 - Area: backburner:5-hits (hits: 5)
 - Next: Drift
 - Status: POS — new territory
 
 
-### Chain 30 [2026-06-14T08:37:55.772Z]
+### Chain 56 [2026-06-14T07:59:28.544Z]
 - Keyword: Drift
 - Area: backburner:1-hits (hits: 1)
 - Next: system
 - Status: POS — new territory
 
 
-### Chain 31 [2026-06-14T08:39:36.369Z]
+### Chain 57 [2026-06-14T08:00:28.778Z]
 - Keyword: system
 - Area: backburner:10-hits (hits: 10)
 - Next: section
 - Status: POS — new territory
 
 
-### Chain 32 [2026-06-14T08:40:36.536Z]
+### Chain 58 [2026-06-14T08:01:28.935Z]
 - Keyword: section
 - Area: backburner:5-hits (hits: 5)
 - Next: Drift
 - Status: POS — new territory
 
 
-### Chain 33 [2026-06-14T08:41:36.718Z]
+### Chain 59 [2026-06-14T08:02:29.142Z]
 - Keyword: Drift
 - Area: backburner:1-hits (hits: 1)
 - Next: system
-- Status: POS — new territory
-
-
-### Chain 34 [2026-06-14T08:42:36.960Z]
-- Keyword: system
-- Area: backburner:10-hits (hits: 10)
-- Next: section
-- Status: POS — new territory
-
-
-### Chain 35 [2026-06-14T08:43:37.197Z]
-- Keyword: section
-- Area: backburner:5-hits (hits: 5)
-- Next: Drift
-- Status: POS — new territory
-
-
-### Chain 36 [2026-06-14T08:44:37.351Z]
-- Keyword: Drift
-- Area: backburner:1-hits (hits: 1)
-- Next: system
-- Status: POS — new territory
-
-
-### Chain 37 [2026-06-14T08:45:37.517Z]
-- Keyword: system
-- Area: backburner:10-hits (hits: 10)
-- Next: section
-- Status: POS — new territory
-
-
-### Chain 38 [2026-06-14T08:46:37.669Z]
-- Keyword: section
-- Area: backburner:5-hits (hits: 5)
-- Next: Drift
-- Status: POS — new territory
-
-
-### Chain 39 [2026-06-14T08:47:37.824Z]
-- Keyword: Drift
-- Area: backburner:1-hits (hits: 1)
-- Next: system
-- Status: POS — new territory
-
-
-### Chain 40 [2026-06-14T08:48:37.997Z]
-- Keyword: system
-- Area: backburner:10-hits (hits: 10)
-- Next: section
-- Status: POS — new territory
-
-
-### Chain 41 [2026-06-14T08:49:38.157Z]
-- Keyword: section
-- Area: backburner:5-hits (hits: 5)
-- Next: Drift
-- Status: POS — new territory
-
-
-### Chain 42 [2026-06-14T08:50:38.326Z]
-- Keyword: Drift
-- Area: backburner:1-hits (hits: 1)
-- Next: system
-- Status: POS — new territory
-
-
-### Chain 43 [2026-06-14T08:51:38.508Z]
-- Keyword: system
-- Area: backburner:10-hits (hits: 10)
-- Next: section
-- Status: POS — new territory
-
-
-### Chain 44 [2026-06-14T08:52:38.667Z]
-- Keyword: section
-- Area: backburner:5-hits (hits: 5)
-- Next: Drift
-- Status: POS — new territory
-
-
-### Chain 45 [2026-06-14T08:53:38.820Z]
-- Keyword: Drift
-- Area: backburner:1-hits (hits: 1)
-- Next: system
-- Status: POS — new territory
-
-
-### Chain 46 [2026-06-14T08:54:38.983Z]
-- Keyword: system
-- Area: backburner:10-hits (hits: 10)
-- Next: section
 - Status: POS — new territory
 
 
 ## Summary
-- Chains walked: 46
-- POS territories: 44
-- NEG trails: 2
-- Final keyword: section
-- Ended: 2026-06-14T08:55:32.968Z
+- Chains walked: 59
+- POS territories: 47
+- NEG trails: 12
+- Final keyword: system
+- Ended: 2026-06-14T08:03:29.233Z

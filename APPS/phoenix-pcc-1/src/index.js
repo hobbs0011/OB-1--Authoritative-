@@ -768,28 +768,30 @@ class ScoutRunner {
     return { next_kw, is_pos: true, area: `backburner:${hits.length}-hits`, hit_count: hits.length };
   }
 
-  // Write phetrail to GitHub and KV
-  async finalize(state) {
-    const summary = `\n## Summary\n- Chains walked: ${state.chains_walked}\n- POS territories: ${state.pos_territories.length}\n- NEG trails: ${state.neg_trails.length}\n- Final keyword: ${state.current_keyword}\n- Ended: ${new Date().toISOString()}\n`;
-    state.entries.push(summary);
-    const phetrail = state.entries.join('\n');
+// Write phetrail to GitHub and KV
+   async finalize(state) {
+     const summary = `\n## Summary\n- Chains walked: ${state.chains_walked}\n- POS territories: ${state.pos_territories.length}\n- NEG trails: ${state.neg_trails.length}\n- Final keyword: ${state.current_keyword}\n- Ended: ${new Date().toISOString()}\n`;
+     state.entries.push(summary);
+     const phetrail = state.entries.join('\n');
 
-    // KV backup (7-day)
-    if (this.env.PHETRAIL) {
-      await this.env.PHETRAIL.put('scout:final_phetrail', phetrail, { expirationTtl: 604800 }).catch(() => {});
-    }
+     // KV backup (7-day)
+     if (this.env.PHETRAIL) {
+       await this.env.PHETRAIL.put('scout:final_phetrail', phetrail, { expirationTtl: 604800 }).catch(() => {});
+     }
 
-    // Commit to GitHub — real file, real artifact
-    const date = new Date().toISOString().slice(0, 10).replace(/-/g, '');
-    const result = await writeGitHubFile(this.env, {
-      file: `OPERATIONS/phetrail-ob1-scout-${date}.md`,
-      content: phetrail,
-      description: `OB1 scout ${date} — ${state.chains_walked} chains, ${state.pos_territories.length} POS`,
-    }).catch(e => ({ ok: false, reason: e.message }));
+     // Commit to GitHub — unique filename with timestamp to preserve history
+     const date = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+     const hour = String(Math.floor((state.start_time || Date.now()) / 3600000) % 24).padStart(2, '0');
+     const minute = String(Math.floor((state.start_time || Date.now()) / 60000) % 60).padStart(2, '0');
+     const result = await writeGitHubFile(this.env, {
+       file: `OPERATIONS/phetrail-ob1-scout-${date}-${hour}${minute}.md`,
+       content: phetrail,
+       description: `OB1 scout ${date} — ${state.chains_walked} chains, ${state.pos_territories.length} POS`,
+     }).catch(e => ({ ok: false, reason: e.message }));
 
-    await this.state.storage.delete('scout_state');
-    return result;
-  }
+     await this.state.storage.delete('scout_state');
+     return result;
+   }
 
   async alarm() {
     const state = await this.state.storage.get('scout_state');
