@@ -149,11 +149,22 @@ async function writeGitHubFile(env, { file, content, description }) {
   try {
     const check = await fetch(fileUrl, { headers });
     if (check.ok) { const d = await check.json(); sha = d.sha; }
-  } catch { /* new file */ }
+  } catch { /* new file — sha stays undefined */ }
   const msg = `phetrail: ${description || 'OB1 phetrail commit'}\n\nWritten by phoenix-pcc-1 — no human in the loop`;
   const body = { message: msg, content: b64Encode(content) };
   if (sha) body.sha = sha;
-  const putResp = await fetch(fileUrl, { method: 'PUT', headers, body: JSON.stringify(body) });
+  let putResp = await fetch(fileUrl, { method: 'PUT', headers, body: JSON.stringify(body) });
+  // 422 = file exists but sha was missing (GET failed silently) — retry with fresh GET
+  if (putResp.status === 422) {
+    try {
+      const retry = await fetch(fileUrl, { headers });
+      if (retry.ok) { const d = await retry.json(); sha = d.sha; }
+    } catch { /* still no sha */ }
+    if (sha) {
+      const retryBody = { message: msg, content: b64Encode(content), sha };
+      putResp = await fetch(fileUrl, { method: 'PUT', headers, body: JSON.stringify(retryBody) });
+    }
+  }
   if (!putResp.ok) { const e = await putResp.text(); return { ok: false, reason: `PUT ${putResp.status}: ${e.slice(0,200)}` }; }
   const data = await putResp.json();
   return { ok: true, file, sha: data.commit?.sha };
