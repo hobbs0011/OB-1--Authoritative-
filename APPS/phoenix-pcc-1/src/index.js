@@ -62,13 +62,13 @@ async function applyGitHubPatch(env, { file, find, replace, description }) {
   // Decode → patch → re-encode
   const original = b64Decode(b64);
 
-  // Idempotency: if find not found, check if replacement is already present
-  if (!original.includes(find)) {
-    if (replace && original.includes(replace.trim().slice(0, 60))) {
-      return { ok: true, file, sha: 'already-applied', already_applied: true };
-    }
-    return { ok: false, reason: `FIND_NOT_FOUND in ${file} (find="${find.slice(0, 60)}...")` };
-  }
+// Idempotency: if find not found, check if replacement is already present
+   if (!original.includes(find)) {
+     if (replace && original.includes(replace)) {
+       return { ok: true, file, sha: 'already-applied', already_applied: true };
+     }
+     return { ok: false, reason: `FIND_NOT_FOUND in ${file} (find="${find.slice(0, 60)}...")` };
+   }
 
   // replaceAll — not just first occurrence
   const patched = original.split(find).join(replace);
@@ -686,7 +686,7 @@ class ScoutRunner {
     if (path === '/start' || url.pathname === '/start') {
       // Guard: don't overwrite a running mission
       const existing = await this.state.storage.get('scout_state');
-      if (existing && (Date.now() - existing.start_time) < existing.budget_ms) {
+      if (existing && (Date.now() - existing.start_time) <= existing.budget_ms) {
         return Response.json({ ok: false, error: 'already_running', started_at: existing.start_time, chains_walked: existing.chains_walked });
       }
 

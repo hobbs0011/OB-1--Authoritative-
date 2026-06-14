@@ -165,10 +165,10 @@ async function taskCodeQueue(env) {
         await env.PHETRAIL.put(`bb-result:${row.bb_id}`, result, { expirationTtl: 604800 }).catch(() => {});
       }
 
-      // Log to pcc_metrics so pcc_metrics.total tracks autonomous code execution
-      await env.DB.prepare(
-        'INSERT INTO pcc_metrics (task_preview, task_length, model, duration_ms, output_length, passed, fail_reason) VALUES (?, ?, ?, ?, ?, ?, ?)'
-      ).bind(row.title.slice(0, 100), (row.description || '').length, model || 'pa-t1', 0, patch.length, 1, null).run().catch(() => {});
+// Log to pcc_metrics so pcc_metrics.total tracks autonomous code execution
+       await env.DB.prepare(
+         'INSERT INTO pcc_metrics (run_id, task_preview, task_length, model, duration_ms, output_length, passed, fail_reason) VALUES (?, ?, ?, ?, ?, ?, ?, ?)'
+       ).bind('pcc2', row.title.slice(0, 100), (row.description || '').length, model || 'pa-t1', 0, patch.length, 1, null).run().catch(() => {});
 
       processed++;
     } catch { /* continue */ }
