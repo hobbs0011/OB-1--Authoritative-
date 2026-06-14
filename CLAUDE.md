@@ -254,6 +254,16 @@ If Tier 1 fails → escalate to Tier 2. Print:
   - Edit tool fails silently → commit what was written, note the gap in the death seal §4.
   - Context too short to write trail before DEATH → §7 takes priority: write compressed trail in death seal itself.
 
+- **L83 SOV100_VAULT_IMMUTABLE** — `APPS/SOV100-VAULT/` is a sealed archive. No agent, no tool, no law overrides this.
+
+  **V0 sealed:** 2026-06-14. Scout system first verified working state. CF Worker: `sov100-vault-v0` (ff273383). 3 confirmed phetrails: 9 POS/93ph, 9 POS/85ph, 7 POS/58ph.
+
+  **Rule:** Nothing inside `APPS/SOV100-VAULT/**` may be Read, Edit, Write, deleted, or deployed by any agent or Claude session.
+
+  **To override:** Michael must type the exact phrase: `SOV100-VAULT-OVERRIDE: [your password]` in the chat. Without it, any attempt to touch vault files = **VAULT_BREACH** — halt immediately, log to phetrail, wait for Michael.
+
+  **Working copies live outside the vault.** `APPS/phoenix-pcc-1/` is the active development clone. Vault holds the proof that it once worked.
+
 ## OB-1 Operating Rules (from AGENTS.md)
 
 - Canonical repo: `D:\OB-1-CANONICAL`
