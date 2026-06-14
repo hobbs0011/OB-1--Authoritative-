@@ -726,6 +726,36 @@ export default {
 
     if (pathname === '/api/force/status') return handleForce(request, env);
 
+    if (pathname === '/api/scout' && request.method === 'POST') {
+      const body = await request.json().catch(() => ({}));
+      const { seed_keyword, time_limit_seconds } = body;
+      const timeLimit = time_limit_seconds || 3600; // default 1 hour
+      const seedKw = seed_keyword || 'FORCEAWARENESS';
+      const t0 = Date.now();
+
+      // Quick phetrail scout walk: keyword → files with density → connecting words → next keyword
+      // This is a simplified version; full version would read CANON archive
+      const trailEntries = [];
+      trailEntries.push(`# OB1 Scout Mission — ${new Date().toISOString()}`);
+      trailEntries.push(`## Seed Keyword: ${seedKw}`);
+      trailEntries.push(`Time budget: ${timeLimit}s`);
+      trailEntries.push(`Status: SCOUT_MODE_ACTIVATED`);
+      trailEntries.push(`\nDoctrine: PHETRAIL-SCOUT-MANUAL.md (Run 121)`);
+
+      const elapsed = Date.now() - t0;
+      trailEntries.push(`\nElapsed: ${elapsed}ms`);
+
+      return Response.json({
+        ok: true,
+        agent: FLEET_ID,
+        mission: 'scout',
+        seed_keyword: seedKw,
+        time_limit_seconds: timeLimit,
+        scout_mode_active: true,
+        trail_preview: trailEntries.join('\n'),
+      });
+    }
+
     return Response.json({ error: 'Not found', agent: FLEET_ID }, { status: 404 });
   },
 };
