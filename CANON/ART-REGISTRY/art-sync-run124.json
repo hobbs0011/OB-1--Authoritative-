@@ -1,0 +1,116 @@
+{
+  "run": 124,
+  "ledger_id": "HL-704",
+  "merkle_short": "3A1E5DF1D7CD5A87",
+  "starmap_file": "starmap-run124.json",
+  "keywords_file": "rfkw-run124.txt",
+  "keywords_used": [
+    "status",
+    "u001b0mu001b7m",
+    "death",
+    "pipeline",
+    "session",
+    "agent",
+    "stage",
+    "source",
+    "never",
+    "soulcount",
+    "worker",
+    "check",
+    "jsonl",
+    "student",
+    "audit",
+    "where",
+    "tasks",
+    "entries",
+    "michael",
+    "files",
+    "stale",
+    "runnumber",
+    "model",
+    "backburner",
+    "priority",
+    "method",
+    "responsejson",
+    "already",
+    "current",
+    "fixed"
+  ],
+  "pieces_synced": 9,
+  "pieces": [
+    {
+      "id": "ART-1780551572418-7DU0",
+      "title": "Elephant Chain",
+      "url": "isolated/elephant-chain-hd.png",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780547160670-TBAE",
+      "title": "WAKE UP THE TIGER",
+      "url": null,
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780547001008-30ZF",
+      "title": "The Obsolete Model",
+      "url": null,
+      "keywords": [
+        "worker"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780546993683-AS0F",
+      "title": "The Engine",
+      "url": "THE_TIGER_ENGINE.pdf",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780546342705-3MMY",
+      "title": "Wake Up the Tiger",
+      "url": "CANON/PROTOCOLS/Sovereign_Tiger_Protocol.pdf",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780538363957-LNWV",
+      "title": "STP p03 — The Translate-in-Head Delay (Snowman Freeze)",
+      "url": "local:d:/OB-1-CANONICAL/CANON/PROTOCOLS/Sovereign_Tiger_Protocol.pdf#page=3",
+      "keywords": [
+        "pipeline"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780530099910-XM96",
+      "title": "NET Dossier p03 — Cognitive Bottleneck / Snowman Freeze",
+      "url": "local:D:/Downloads/dossier-pages/page-03.png",
+      "keywords": [
+        "pipeline"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780527419422-NUFN",
+      "title": "Michael Hobbs Headshot — Wide",
+      "url": "local:D:/Downloads/Telegram Desktop/output_9gmjtb.png",
+      "keywords": [
+        "michael"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780527418015-4GUT",
+      "title": "Michael Hobbs Headshot — Square",
+      "url": "local:D:/Downloads/Telegram Desktop/output_5pbeb1.png",
+      "keywords": [
+        "michael"
+      ],
+      "title_hit": false
+    }
+  ],
+  "executed_at": "2026-06-14T13:11:41.4121319+07:00"
+}
