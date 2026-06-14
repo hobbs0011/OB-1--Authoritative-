@@ -869,13 +869,21 @@ class ScoutRunner {
     // Check if this keyword/area is already mapped (upgrade: uniqueness tracking)
     const alreadyMapped = this.env.PHETRAIL ? await this.isMapped(kw, allHits.length) : false;
 
-    // Extract next keyword with enhanced stopword list
+    // Extract next keyword — split camelCase first to prevent compound words leaking through
     const allText = allHits.map(h => `${h.title} ${h.description || ''}`).join(' ');
     const freq = {};
-    const stopWords = new Set(['with', 'from', 'have', 'that', 'this', 'will', 'they', 'were', 'been', 'also', 'more', 'into', 'over', 'some', 'just', 'than', 'very', 'when', 'what', 'which', 'where', 'then', 'here', 'only', 'like', 'make', 'take', 'would', 'could', 'should', 'then', 'each', 'such', 'these', 'those', 'them', 'from', 'into', 'onto', 'upon', 'not', 'but', 'all', 'are', 'was', 'has', 'had', 'its', 'for', 'the', 'and', 'can', 'may', 'use', 'via', 'new', 'set', 'get', 'run', 'add', 'our', 'any', 'per', 'log', 'now', 'done', 'null', 'true', 'false', 'none', 'data', 'time', 'type', 'name', 'next', 'last', 'list', 'item', 'line']);
+    const stopWords = new Set(['with', 'from', 'have', 'that', 'this', 'will', 'they', 'were', 'been', 'also', 'more', 'into', 'over', 'some', 'just', 'than', 'very', 'when', 'what', 'which', 'where', 'then', 'here', 'only', 'like', 'make', 'take', 'would', 'could', 'should', 'then', 'each', 'such', 'these', 'those', 'them', 'from', 'into', 'onto', 'upon', 'not', 'but', 'all', 'are', 'was', 'has', 'had', 'its', 'for', 'the', 'and', 'can', 'may', 'use', 'via', 'new', 'set', 'get', 'run', 'add', 'our', 'any', 'per', 'log', 'now', 'done', 'null', 'true', 'false', 'none', 'data', 'time', 'type', 'name', 'next', 'last', 'list', 'item', 'line', 'write', 'read', 'file', 'code', 'func', 'call', 'path', 'test', 'open', 'load', 'save', 'send', 'recv', 'init', 'util', 'base', 'core', 'main', 'back', 'put', 'ret', 'err', 'obj', 'arr', 'str', 'num', 'val', 'key', 'env', 'res', 'req', 'ctx', 'api', 'url', 'src', 'dst', 'tmp', 'tag', 'row', 'col', 'idx', 'len', 'buf', 'raw', 'out', 'msg', 'job', 'task', 'step', 'note', 'info', 'warn', 'fail', 'pass', 'skip', 'stop', 'start', 'end', 'begin', 'close', 'found', 'missing', 'ok']);
+    // Split camelCase/PascalCase tokens into constituent words before frequency analysis
+    const tokens = [];
     for (const raw of allText.split(/\s+/)) {
-      const w = raw.replace(/[^a-zA-Z0-9#]/g, '');
-      if (w.length < 3 || w.toLowerCase() === kw.toLowerCase() || stopWords.has(w.toLowerCase())) continue;
+      const clean = raw.replace(/[^a-zA-Z0-9#]/g, '');
+      if (!clean) continue;
+      // Split PascalCase / camelCase: "ForceAwareness" → ["Force", "Awareness"]
+      const parts = clean.replace(/([A-Z][a-z]+)/g, ' $1').replace(/([A-Z]+)(?=[A-Z])/g, '$1 ').trim().split(/\s+/);
+      tokens.push(...parts.map(p => p.replace(/[^a-zA-Z0-9#]/g, '')));
+    }
+    for (const w of tokens) {
+      if (w.length < 4 || w.toLowerCase() === kw.toLowerCase() || stopWords.has(w.toLowerCase())) continue;
       freq[w] = (freq[w] || 0) + 1;
     }
     const sorted = Object.entries(freq).sort((a, b) => b[1] - a[1]);
