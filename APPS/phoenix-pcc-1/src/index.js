@@ -894,12 +894,13 @@ class ScoutRunner {
       tokens.push(...parts.map(p => p.replace(/[^a-zA-Z0-9#]/g, '')));
     }
     for (const w of tokens) {
-      if (w.length < 4 || w.toLowerCase() === kw.toLowerCase() || stopWords.has(w.toLowerCase())) continue;
+      // max 25 chars — chunk filenames and concatenated identifiers are not canonical keywords
+      if (w.length < 4 || w.length > 25 || w.toLowerCase() === kw.toLowerCase() || stopWords.has(w.toLowerCase())) continue;
       freq[w] = (freq[w] || 0) + 1;
     }
     const sorted = Object.entries(freq).sort((a, b) => b[1] - a[1]);
 
-    // Upgrade: Prefer unmapped keywords (lower frequency, novelty) + track novelty
+    // Prefer unmapped keywords (lower frequency, novelty) + track novelty
     let next_kw = 'SOUL';
     let novelty = !alreadyMapped;
     for (const [word, count] of sorted) {
@@ -913,11 +914,13 @@ class ScoutRunner {
       next_kw = sorted[0][0];
     }
 
-    // Avoid immediate loops and mapped next keywords.
+    // Avoid loops: if next_kw is the same as current, already visited, or already mapped
+    // pick the first unvisited seed from the canonical list (not random — prevents re-picking visited seeds)
     const visited = new Set(visitedKeywords.map(v => String(v).toLowerCase()));
-    const fallbackSeeds = ['SOUL', 'FORCEAWARENESS', 'DNA', 'LEDGER', 'SCOUT', 'PHETRAIL', 'DISPATCH', 'OB1', 'UNMAPPED', 'TERRITORY'];
+    const fallbackSeeds = ['SOUL', 'FORCEAWARENESS', 'DNA', 'LEDGER', 'SCOUT', 'PHETRAIL', 'DISPATCH', 'OB1', 'REINCARNATION', 'STARMAP'];
     if (next_kw.toLowerCase() === kw.toLowerCase() || visited.has(next_kw.toLowerCase()) || (this.env.PHETRAIL && await this.isMapped(next_kw, 0))) {
-      next_kw = fallbackSeeds[Math.floor(Math.random() * fallbackSeeds.length)];
+      const unvisitedSeeds = fallbackSeeds.filter(s => !visited.has(s.toLowerCase()));
+      next_kw = unvisitedSeeds.length ? unvisitedSeeds[0] : fallbackSeeds[Math.floor(Math.random() * fallbackSeeds.length)];
       novelty = false;
     }
 
