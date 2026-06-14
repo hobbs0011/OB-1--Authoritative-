@@ -597,6 +597,114 @@ async function runDeathPipelineStandalone(env, run_number, rrl_text) {
   return { ok: true, ledger_id, soul_count, dna_count, soulkeys_hit, discoveries: soulkeys_hit + 1 };
 }
 
+// ── ScoutRunner DO ────────────────────────────────────────────────────────────
+// 1-hour recon mission: walk pheromone chains, document POS/NEG trails
+class ScoutRunner {
+  constructor(state, env) { this.state = state; this.env = env; }
+
+  async fetch(request) {
+    const url = new URL(request.url);
+    if (url.pathname === '/start') {
+      const body = await request.json().catch(() => ({}));
+      const seed_keyword = body.seed_keyword || 'FORCEAWARENESS';
+      const budget_ms = 3600000; // 1 hour
+      const now = Date.now();
+
+      await this.state.storage.put('scout_state', {
+        start_time: now,
+        budget_ms,
+        seed_keyword,
+        current_keyword: seed_keyword,
+        chains_walked: 0,
+        pos_territories: [],
+        neg_trails: [],
+        iterations: 0,
+        entries: [`# OB1 Scout Mission — ${new Date(now).toISOString()}\n## Seed: ${seed_keyword}\n`],
+      });
+
+      await this.state.storage.setAlarm(now + 60000); // First iteration in 60s
+      return Response.json({ ok: true, status: 'scout_started', seed_keyword, budget_ms });
+    }
+
+    if (url.pathname === '/status') {
+      const state = await this.state.storage.get('scout_state');
+      if (!state) return Response.json({ ok: false, error: 'not started' }, { status: 404 });
+      const elapsed = Date.now() - state.start_time;
+      const percent = Math.min(100, Math.round((elapsed / state.budget_ms) * 100));
+      return Response.json({
+        ok: true,
+        elapsed_ms: elapsed,
+        budget_ms: state.budget_ms,
+        percent_complete: percent,
+        chains_walked: state.chains_walked,
+        iterations: state.iterations,
+        pos_count: state.pos_territories.length,
+        neg_count: state.neg_trails.length,
+        current_keyword: state.current_keyword,
+      });
+    }
+
+    if (url.pathname === '/stop') {
+      await this.state.storage.deleteAlarm();
+      const state = await this.state.storage.get('scout_state');
+      if (state && state.entries) {
+        // Compile phetrail and commit
+        const phetrail = state.entries.join('\n');
+        // TODO: Call PA to write and commit the phetrail file
+        await this.state.storage.delete('scout_state');
+        return Response.json({ ok: true, status: 'scout_stopped', entries_count: state.entries.length });
+      }
+      return Response.json({ ok: true, status: 'scout_not_running' });
+    }
+
+    return Response.json({ error: 'Not found' }, { status: 404 });
+  }
+
+  async alarm() {
+    const state = await this.state.storage.get('scout_state');
+    if (!state) return;
+
+    const elapsed = Date.now() - state.start_time;
+    if (elapsed >= state.budget_ms) {
+      // 1 hour complete — finalize
+      const summary = `\n## Summary\n- Chains walked: ${state.chains_walked}\n- POS territories: ${state.pos_territories.length}\n- NEG trails: ${state.neg_trails.length}\n- Final keyword: ${state.current_keyword}\n`;
+      state.entries.push(summary);
+
+      // Commit phetrail
+      if (this.env.PHETRAIL) {
+        await this.env.PHETRAIL.put('scout:final_phetrail', state.entries.join('\n'), { expirationTtl: 604800 });
+      }
+
+      await this.state.storage.delete('scout_state');
+      return;
+    }
+
+    // Walk one chain iteration
+    state.iterations++;
+    const kw = state.current_keyword || 'FORCEAWARENESS';
+
+    // Simulate chain walk: keyword → area → connecting words → next keyword
+    const connecting_words = ['pheromone', 'density', 'trail', 'scent', 'swarm', 'vector', 'antcolony', 'routing'];
+    const next_kw = connecting_words[Math.floor(Math.random() * connecting_words.length)];
+    const is_pos = Math.random() > 0.4; // 60% POS, 40% NEG
+
+    const entry = `\n### Chain ${state.chains_walked + 1}\n- Keyword: ${kw}\n- Connecting: ${next_kw}\n- Status: ${is_pos ? 'POS (new territory)' : 'NEG (dead end)'}\n`;
+    state.entries.push(entry);
+
+    if (is_pos) {
+      state.pos_territories.push(kw);
+    } else {
+      state.neg_trails.push(kw);
+    }
+
+    state.chains_walked++;
+    state.current_keyword = next_kw;
+
+    await this.state.storage.put('scout_state', state);
+    await this.state.storage.setAlarm(Date.now() + 60000); // Next iteration in 60s
+  }
+}
+
 // ── WatchdogAlarm DO ──────────────────────────────────────────────────────────
 class WatchdogAlarm {
   constructor(state, env) { this.state = state; this.env = env; }
@@ -727,33 +835,24 @@ export default {
     if (pathname === '/api/force/status') return handleForce(request, env);
 
     if (pathname === '/api/scout' && request.method === 'POST') {
-      const body = await request.json().catch(() => ({}));
-      const { seed_keyword, time_limit_seconds } = body;
-      const timeLimit = time_limit_seconds || 3600; // default 1 hour
-      const seedKw = seed_keyword || 'FORCEAWARENESS';
-      const t0 = Date.now();
+      if (!env.SCOUT_RUNNER) return Response.json({ error: 'SCOUT_RUNNER DO not bound' }, { status: 503 });
+      const id = env.SCOUT_RUNNER.idFromName('scout-mission');
+      const stub = env.SCOUT_RUNNER.get(id);
+      return stub.fetch(new Request('https://scout/start', { method: 'POST', body: request.body }));
+    }
 
-      // Quick phetrail scout walk: keyword → files with density → connecting words → next keyword
-      // This is a simplified version; full version would read CANON archive
-      const trailEntries = [];
-      trailEntries.push(`# OB1 Scout Mission — ${new Date().toISOString()}`);
-      trailEntries.push(`## Seed Keyword: ${seedKw}`);
-      trailEntries.push(`Time budget: ${timeLimit}s`);
-      trailEntries.push(`Status: SCOUT_MODE_ACTIVATED`);
-      trailEntries.push(`\nDoctrine: PHETRAIL-SCOUT-MANUAL.md (Run 121)`);
+    if (pathname === '/api/scout/status') {
+      if (!env.SCOUT_RUNNER) return Response.json({ error: 'SCOUT_RUNNER DO not bound' }, { status: 503 });
+      const id = env.SCOUT_RUNNER.idFromName('scout-mission');
+      const stub = env.SCOUT_RUNNER.get(id);
+      return stub.fetch(new Request('https://scout/status'));
+    }
 
-      const elapsed = Date.now() - t0;
-      trailEntries.push(`\nElapsed: ${elapsed}ms`);
-
-      return Response.json({
-        ok: true,
-        agent: FLEET_ID,
-        mission: 'scout',
-        seed_keyword: seedKw,
-        time_limit_seconds: timeLimit,
-        scout_mode_active: true,
-        trail_preview: trailEntries.join('\n'),
-      });
+    if (pathname === '/api/scout/stop' && request.method === 'POST') {
+      if (!env.SCOUT_RUNNER) return Response.json({ error: 'SCOUT_RUNNER DO not bound' }, { status: 503 });
+      const id = env.SCOUT_RUNNER.idFromName('scout-mission');
+      const stub = env.SCOUT_RUNNER.get(id);
+      return stub.fetch(new Request('https://scout/stop'));
     }
 
     return Response.json({ error: 'Not found', agent: FLEET_ID }, { status: 404 });
@@ -762,3 +861,4 @@ export default {
 
 export class LegionRunner extends RaceRunner {}
 export class ForceAwarenessAlarm extends WatchdogAlarm {}
+export class ScoutMissionRunner extends ScoutRunner {}
