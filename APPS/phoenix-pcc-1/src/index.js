@@ -52,28 +52,83 @@ async function applyGitHubPatch(env, { file, find, replace, description }) {
     'X-GitHub-Api-Version': '2022-11-28',
   };
 
+  const fileUrl = `${GITHUB_API}/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${file}`;
+
   // Read current file
-  const getResp = await fetch(`${GITHUB_API}/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${file}`, { headers });
+  const getResp = await fetch(fileUrl, { headers });
   if (!getResp.ok) return { ok: false, reason: `GitHub GET ${getResp.status} for ${file}` };
   const { content: b64, sha } = await getResp.json();
 
   // Decode → patch → re-encode
   const original = b64Decode(b64);
-  if (!original.includes(find)) return { ok: false, reason: `FIND_NOT_FOUND in ${file} (find="${find.slice(0, 60)}...")` };
-  const patched = original.replace(find, replace);
 
-  // Commit
+  // Idempotency: if find not found, check if replacement is already present
+  if (!original.includes(find)) {
+    if (replace && original.includes(replace.trim().slice(0, 60))) {
+      return { ok: true, file, sha: 'already-applied', already_applied: true };
+    }
+    return { ok: false, reason: `FIND_NOT_FOUND in ${file} (find="${find.slice(0, 60)}...")` };
+  }
+
+  // replaceAll — not just first occurrence
+  const patched = original.split(find).join(replace);
+
   const msg = `fix(ob1-auto): ${description || 'OB1 code-queue autonomous patch'}\n\nApplied by phoenix-pcc-1 via PA Qwen Coder — no human in the loop`;
-  const putResp = await fetch(`${GITHUB_API}/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${file}`, {
+  const putResp = await fetch(fileUrl, {
     method: 'PUT', headers,
     body: JSON.stringify({ message: msg, content: b64Encode(patched), sha }),
   });
+
+  // 409 = SHA race (someone else committed between our GET and PUT) — retry once
+  if (putResp.status === 409) {
+    const retryGet = await fetch(fileUrl, { headers });
+    if (!retryGet.ok) return { ok: false, reason: `409 retry GET failed: ${retryGet.status}` };
+    const { content: b64r, sha: shar } = await retryGet.json();
+    const originalR = b64Decode(b64r);
+    if (!originalR.includes(find)) return { ok: false, reason: 'FIND_NOT_FOUND after 409 retry' };
+    const patchedR = originalR.split(find).join(replace);
+    const retryPut = await fetch(fileUrl, {
+      method: 'PUT', headers,
+      body: JSON.stringify({ message: msg, content: b64Encode(patchedR), sha: shar }),
+    });
+    if (!retryPut.ok) { const e = await retryPut.text(); return { ok: false, reason: `409 retry PUT ${retryPut.status}: ${e.slice(0,200)}` }; }
+    const rd = await retryPut.json();
+    return { ok: true, file, sha: rd.commit?.sha, retried: true };
+  }
+
   if (!putResp.ok) {
     const err = await putResp.text();
     return { ok: false, reason: `GitHub PUT ${putResp.status}: ${err.slice(0, 200)}` };
   }
   const data = await putResp.json();
   return { ok: true, file, sha: data.commit?.sha, commit_url: data.commit?.html_url };
+}
+
+// Create or overwrite a file on GitHub (for new files like phetrail output)
+async function writeGitHubFile(env, { file, content, description }) {
+  const token = env.GITHUB_TOKEN;
+  if (!token) return { ok: false, reason: 'GITHUB_TOKEN not set' };
+  const headers = {
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'application/json',
+    'User-Agent': 'phoenix-pcc-1/ob1',
+    'Accept': 'application/vnd.github+json',
+    'X-GitHub-Api-Version': '2022-11-28',
+  };
+  const fileUrl = `${GITHUB_API}/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${file}`;
+  // Check if exists (need sha to update)
+  let sha;
+  try {
+    const check = await fetch(fileUrl, { headers });
+    if (check.ok) { const d = await check.json(); sha = d.sha; }
+  } catch { /* new file */ }
+  const msg = `phetrail: ${description || 'OB1 phetrail commit'}\n\nWritten by phoenix-pcc-1 — no human in the loop`;
+  const body = { message: msg, content: b64Encode(content) };
+  if (sha) body.sha = sha;
+  const putResp = await fetch(fileUrl, { method: 'PUT', headers, body: JSON.stringify(body) });
+  if (!putResp.ok) { const e = await putResp.text(); return { ok: false, reason: `PUT ${putResp.status}: ${e.slice(0,200)}` }; }
+  const data = await putResp.json();
+  return { ok: true, file, sha: data.commit?.sha };
 }
 
 const STUDENT_FLEET = [
@@ -333,10 +388,22 @@ async function fetchGitHubFile(env, filePath) {
   } catch { return null; }
 }
 
-// Extract file path hint from BB description (looks for "file:" or "FILE:" or json "file":"...")
+// Extract file path hint from BB description
 function extractFilePath(text) {
-  const m = text.match(/"file"\s*:\s*"([^"]+)"/) || text.match(/[Ff]ile:\s*([^\s,\n"]+\.[a-z]{2,4})/);
-  return m ? m[1].trim() : null;
+  const patterns = [
+    /"file"\s*:\s*"([^"]+)"/,                   // {"file":"APPS/..."}
+    /[Ff]ile:\s*([^\s,\n"]+\.[a-z]{2,4})/,      // File: src/foo.js
+    /(APPS\/[^\s\n,'"]+\.[a-z]{2,4})/,          // bare APPS/ path
+    /(CANON\/[^\s\n,'"]+\.[a-z]{2,4})/,         // bare CANON/ path
+    /(OPERATIONS\/[^\s\n,'"]+\.[a-z]{2,4})/,    // bare OPERATIONS/ path
+    /(src\/[^\s\n,'"]+\.[a-z]{2,4})/,           // bare src/ path
+    /(SCRIPTS\/[^\s\n,'"]+\.[a-z]{2,4})/,       // bare SCRIPTS/ path
+  ];
+  for (const p of patterns) {
+    const m = text.match(p);
+    if (m) return (m[1] || m[0]).trim();
+  }
+  return null;
 }
 
 // ── Ops Task 6: Code queue ────────────────────────────────────────────────────
@@ -411,7 +478,17 @@ Return ONLY valid JSON, no other text. The "find" value MUST be copied verbatim 
       });
 
       processed++;
-    } catch { /* continue */ }
+    } catch (e) {
+      await logPccMetric(env, {
+        task_preview: row?.title || 'unknown',
+        task_length: 0,
+        model: 'error',
+        duration_ms: 0,
+        output_length: 0,
+        passed: false,
+        fail_reason: `EXCEPTION: ${e.message}`,
+      });
+    }
   }
   return { task: 'code-queue', processed };
 }
@@ -598,31 +675,33 @@ async function runDeathPipelineStandalone(env, run_number, rrl_text) {
 }
 
 // ── ScoutRunner DO ────────────────────────────────────────────────────────────
-// 1-hour recon mission: walk pheromone chains, document POS/NEG trails
+// 1-hour recon mission: walk pheromone chains via real D1 search, commit phetrail to GitHub
 class ScoutRunner {
   constructor(state, env) { this.state = state; this.env = env; }
 
   async fetch(request) {
     const url = new URL(request.url);
+
     if (url.pathname === '/start') {
+      // Guard: don't overwrite a running mission
+      const existing = await this.state.storage.get('scout_state');
+      if (existing && (Date.now() - existing.start_time) < existing.budget_ms) {
+        return Response.json({ ok: false, error: 'already_running', started_at: existing.start_time, chains_walked: existing.chains_walked });
+      }
+
       const body = await request.json().catch(() => ({}));
       const seed_keyword = body.seed_keyword || 'FORCEAWARENESS';
-      const budget_ms = 3600000; // 1 hour
+      const budget_ms = body.time_limit_seconds ? body.time_limit_seconds * 1000 : 3600000;
       const now = Date.now();
 
       await this.state.storage.put('scout_state', {
-        start_time: now,
-        budget_ms,
-        seed_keyword,
+        start_time: now, budget_ms, seed_keyword,
         current_keyword: seed_keyword,
-        chains_walked: 0,
-        pos_territories: [],
-        neg_trails: [],
-        iterations: 0,
+        chains_walked: 0, pos_territories: [], neg_trails: [], iterations: 0,
         entries: [`# OB1 Scout Mission — ${new Date(now).toISOString()}\n## Seed: ${seed_keyword}\n`],
       });
 
-      await this.state.storage.setAlarm(now + 60000); // First iteration in 60s
+      await this.state.storage.setAlarm(now + 60000);
       return Response.json({ ok: true, status: 'scout_started', seed_keyword, budget_ms });
     }
 
@@ -630,12 +709,11 @@ class ScoutRunner {
       const state = await this.state.storage.get('scout_state');
       if (!state) return Response.json({ ok: false, error: 'not started' }, { status: 404 });
       const elapsed = Date.now() - state.start_time;
-      const percent = Math.min(100, Math.round((elapsed / state.budget_ms) * 100));
       return Response.json({
         ok: true,
         elapsed_ms: elapsed,
         budget_ms: state.budget_ms,
-        percent_complete: percent,
+        percent_complete: Math.min(100, Math.round((elapsed / state.budget_ms) * 100)),
         chains_walked: state.chains_walked,
         iterations: state.iterations,
         pos_count: state.pos_territories.length,
@@ -647,17 +725,69 @@ class ScoutRunner {
     if (url.pathname === '/stop') {
       await this.state.storage.deleteAlarm();
       const state = await this.state.storage.get('scout_state');
-      if (state && state.entries) {
-        // Compile phetrail and commit
-        const phetrail = state.entries.join('\n');
-        // TODO: Call PA to write and commit the phetrail file
-        await this.state.storage.delete('scout_state');
-        return Response.json({ ok: true, status: 'scout_stopped', entries_count: state.entries.length });
+      if (state && state.entries && state.entries.length > 0) {
+        const result = await this.finalize(state);
+        return Response.json({ ok: true, status: 'scout_stopped', entries_count: state.entries.length, commit: result });
       }
       return Response.json({ ok: true, status: 'scout_not_running' });
     }
 
     return Response.json({ error: 'Not found' }, { status: 404 });
+  }
+
+  // Real D1 keyword density search: returns { next_kw, is_pos, area, hit_count }
+  async walkChain(kw) {
+    if (!this.env.DB) return { next_kw: 'SOUL', is_pos: false, area: 'no-db', hit_count: 0 };
+
+    // Search backburner for keyword hits
+    const rows = await this.env.DB.prepare(
+      "SELECT title, description FROM backburner WHERE title LIKE ? OR description LIKE ? LIMIT 15"
+    ).bind(`%${kw}%`, `%${kw}%`).all().catch(() => ({ results: [] }));
+
+    const hits = rows.results || [];
+    if (hits.length === 0) {
+      // Dead end — pivot to a known soul seed
+      const seeds = ['SOUL', 'FORCEAWARENESS', 'DNA', 'LEDGER', 'SCOUT', 'PHETRAIL', 'DISPATCH', 'OB1'];
+      const next_kw = seeds[Math.floor(Math.random() * seeds.length)];
+      return { next_kw, is_pos: false, area: `backburner:0-hits`, hit_count: 0 };
+    }
+
+    // Extract next keyword: most frequent meaningful word across matched BBs
+    const allText = hits.map(h => `${h.title} ${h.description || ''}`).join(' ');
+    const freq = {};
+    for (const raw of allText.split(/\s+/)) {
+      const w = raw.replace(/[^a-zA-Z0-9#]/g, '');
+      if (w.length < 4 || w.toLowerCase() === kw.toLowerCase()) continue;
+      if (/^(with|from|have|that|this|will|they|were|been|also|more|into|over|some|just|than|very|when|what|which|where|then|here|only|like|make|take|would|could|should)$/i.test(w)) continue;
+      freq[w] = (freq[w] || 0) + 1;
+    }
+    const sorted = Object.entries(freq).sort((a, b) => b[1] - a[1]);
+    const next_kw = sorted.length > 0 ? sorted[0][0] : 'SOUL';
+
+    return { next_kw, is_pos: true, area: `backburner:${hits.length}-hits`, hit_count: hits.length };
+  }
+
+  // Write phetrail to GitHub and KV
+  async finalize(state) {
+    const summary = `\n## Summary\n- Chains walked: ${state.chains_walked}\n- POS territories: ${state.pos_territories.length}\n- NEG trails: ${state.neg_trails.length}\n- Final keyword: ${state.current_keyword}\n- Ended: ${new Date().toISOString()}\n`;
+    state.entries.push(summary);
+    const phetrail = state.entries.join('\n');
+
+    // KV backup (7-day)
+    if (this.env.PHETRAIL) {
+      await this.env.PHETRAIL.put('scout:final_phetrail', phetrail, { expirationTtl: 604800 }).catch(() => {});
+    }
+
+    // Commit to GitHub — real file, real artifact
+    const date = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+    const result = await writeGitHubFile(this.env, {
+      file: `OPERATIONS/phetrail-ob1-scout-${date}.md`,
+      content: phetrail,
+      description: `OB1 scout ${date} — ${state.chains_walked} chains, ${state.pos_territories.length} POS`,
+    }).catch(e => ({ ok: false, reason: e.message }));
+
+    await this.state.storage.delete('scout_state');
+    return result;
   }
 
   async alarm() {
@@ -666,42 +796,26 @@ class ScoutRunner {
 
     const elapsed = Date.now() - state.start_time;
     if (elapsed >= state.budget_ms) {
-      // 1 hour complete — finalize
-      const summary = `\n## Summary\n- Chains walked: ${state.chains_walked}\n- POS territories: ${state.pos_territories.length}\n- NEG trails: ${state.neg_trails.length}\n- Final keyword: ${state.current_keyword}\n`;
-      state.entries.push(summary);
-
-      // Commit phetrail
-      if (this.env.PHETRAIL) {
-        await this.env.PHETRAIL.put('scout:final_phetrail', state.entries.join('\n'), { expirationTtl: 604800 });
-      }
-
-      await this.state.storage.delete('scout_state');
+      await this.finalize(state);
       return;
     }
 
-    // Walk one chain iteration
+    // Real chain walk — hit D1, find actual keyword density
     state.iterations++;
-    const kw = state.current_keyword || 'FORCEAWARENESS';
+    const kw = state.current_keyword || state.seed_keyword;
+    const { next_kw, is_pos, area, hit_count } = await this.walkChain(kw);
 
-    // Simulate chain walk: keyword → area → connecting words → next keyword
-    const connecting_words = ['pheromone', 'density', 'trail', 'scent', 'swarm', 'vector', 'antcolony', 'routing'];
-    const next_kw = connecting_words[Math.floor(Math.random() * connecting_words.length)];
-    const is_pos = Math.random() > 0.4; // 60% POS, 40% NEG
-
-    const entry = `\n### Chain ${state.chains_walked + 1}\n- Keyword: ${kw}\n- Connecting: ${next_kw}\n- Status: ${is_pos ? 'POS (new territory)' : 'NEG (dead end)'}\n`;
+    const entry = `\n### Chain ${state.chains_walked + 1} [${new Date().toISOString()}]\n- Keyword: ${kw}\n- Area: ${area} (hits: ${hit_count})\n- Next: ${next_kw}\n- Status: ${is_pos ? 'POS — new territory' : 'NEG — dead end'}\n`;
     state.entries.push(entry);
 
-    if (is_pos) {
-      state.pos_territories.push(kw);
-    } else {
-      state.neg_trails.push(kw);
-    }
+    if (is_pos) state.pos_territories.push({ keyword: kw, area, hit_count });
+    else state.neg_trails.push({ keyword: kw, area });
 
     state.chains_walked++;
     state.current_keyword = next_kw;
 
     await this.state.storage.put('scout_state', state);
-    await this.state.storage.setAlarm(Date.now() + 60000); // Next iteration in 60s
+    await this.state.storage.setAlarm(Date.now() + 60000);
   }
 }
 
