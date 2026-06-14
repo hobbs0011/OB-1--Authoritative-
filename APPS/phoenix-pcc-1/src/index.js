@@ -681,8 +681,9 @@ class ScoutRunner {
 
   async fetch(request) {
     const url = new URL(request.url);
+    const path = url.pathname.replace(/^\/scout/, '') || url.pathname;
 
-    if (url.pathname === '/start') {
+    if (path === '/start' || url.pathname === '/start') {
       // Guard: don't overwrite a running mission
       const existing = await this.state.storage.get('scout_state');
       if (existing && (Date.now() - existing.start_time) < existing.budget_ms) {
@@ -952,7 +953,9 @@ export default {
       if (!env.SCOUT_RUNNER) return Response.json({ error: 'SCOUT_RUNNER DO not bound' }, { status: 503 });
       const id = env.SCOUT_RUNNER.idFromName('scout-mission');
       const stub = env.SCOUT_RUNNER.get(id);
-      return stub.fetch(new Request('https://scout/start', { method: 'POST', body: request.body }));
+      const body = await request.json().catch(() => ({}));
+      const mockReq = new Request('https://x/scout/start', { method: 'POST', body: JSON.stringify(body) });
+      return stub.fetch(mockReq);
     }
 
     if (pathname === '/api/scout/status') {
