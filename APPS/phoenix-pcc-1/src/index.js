@@ -4,9 +4,77 @@ import { ForceAwareness, handleForce } from './forceawareness.js';
 // Ops Tasks: translate, lostsoul-scan, completeness-audit, pattern-scan, brief-scan, code-queue
 // Cron: 0 */6 * * * + * * * * *
 
-const PA_AUTH = 'ffScwBjPQjBnoAlectawu8E+J4NcmO3idxGxtlcRue8=';
-const PA_BASE = 'https://phoenix-architecti.mrmichaelhobbs123.workers.dev';
-const FLEET_ID = 'ob1';
+const PA_AUTH      = 'ffScwBjPQjBnoAlectawu8E+J4NcmO3idxGxtlcRue8=';
+const PA_BASE      = 'https://phoenix-architecti.mrmichaelhobbs123.workers.dev';
+const FLEET_ID     = 'ob1';
+const GITHUB_OWNER = 'Phoenix-Rising-Ai-Solutions';
+const GITHUB_REPO  = 'OB-1--Authoritative-';
+const GITHUB_API   = 'https://api.github.com';
+
+// Decode GitHub's base64 content to UTF-8 string
+function b64Decode(b64) {
+  const binary = atob(b64.replace(/\n/g, ''));
+  const bytes = new Uint8Array(binary.length);
+  for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+  return new TextDecoder().decode(bytes);
+}
+
+// Encode UTF-8 string to base64 for GitHub API
+function b64Encode(text) {
+  const bytes = new TextEncoder().encode(text);
+  let binary = '';
+  for (let i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+  return btoa(binary);
+}
+
+// Extract structured patch JSON from PA response
+// Expected format: {"file":"...","find":"...","replace":"...","description":"..."}
+function parseStructuredPatch(patchText) {
+  const m = patchText.match(/\{[\s\S]*?"file"[\s\S]*?"find"[\s\S]*?"replace"[\s\S]*?\}/);
+  if (!m) return null;
+  try {
+    const p = JSON.parse(m[0]);
+    if (p.file && typeof p.find === 'string' && typeof p.replace === 'string') return p;
+  } catch { /* ok */ }
+  return null;
+}
+
+// Apply a structured patch to a file via GitHub Contents API, create a commit
+async function applyGitHubPatch(env, { file, find, replace, description }) {
+  const token = env.GITHUB_TOKEN;
+  if (!token) return { ok: false, reason: 'GITHUB_TOKEN not set' };
+
+  const headers = {
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'application/json',
+    'User-Agent': 'phoenix-pcc-1/ob1',
+    'Accept': 'application/vnd.github+json',
+    'X-GitHub-Api-Version': '2022-11-28',
+  };
+
+  // Read current file
+  const getResp = await fetch(`${GITHUB_API}/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${file}`, { headers });
+  if (!getResp.ok) return { ok: false, reason: `GitHub GET ${getResp.status} for ${file}` };
+  const { content: b64, sha } = await getResp.json();
+
+  // Decode → patch → re-encode
+  const original = b64Decode(b64);
+  if (!original.includes(find)) return { ok: false, reason: `FIND_NOT_FOUND in ${file} (find="${find.slice(0, 60)}...")` };
+  const patched = original.replace(find, replace);
+
+  // Commit
+  const msg = `fix(ob1-auto): ${description || 'OB1 code-queue autonomous patch'}\n\nApplied by phoenix-pcc-1 via PA Qwen Coder — no human in the loop`;
+  const putResp = await fetch(`${GITHUB_API}/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${file}`, {
+    method: 'PUT', headers,
+    body: JSON.stringify({ message: msg, content: b64Encode(patched), sha }),
+  });
+  if (!putResp.ok) {
+    const err = await putResp.text();
+    return { ok: false, reason: `GitHub PUT ${putResp.status}: ${err.slice(0, 200)}` };
+  }
+  const data = await putResp.json();
+  return { ok: true, file, sha: data.commit?.sha, commit_url: data.commit?.html_url };
+}
 
 const STUDENT_FLEET = [
   'mai-tram-bluetech',
@@ -257,20 +325,40 @@ async function taskCodeQueue(env) {
   for (const row of (rows.results || [])) {
     try {
       const t0 = Date.now();
+
+      // Instruct PA to return a structured patch JSON — not free-text
+      const taskWithInstruction = `${row.title}
+
+RUNTIME: Cloudflare Workers. Use env.DB.prepare() for D1 SQLite. No require(), no Node.js, no Express, no PostgreSQL.
+
+Return ONLY valid JSON, no other text:
+{"file":"<relative path from repo root, e.g. APPS/NET-PET-AI/public/chat.js>","find":"<exact string to find in file>","replace":"<exact replacement string>","description":"<one line summary>"}`;
+
       const resp = await fetch(`${PA_BASE}/api/code`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'x-pa-auth': PA_AUTH },
-        body: JSON.stringify({ task: row.title, context: row.description || '', tier: 1 }),
+        body: JSON.stringify({ task: taskWithInstruction, context: row.description || '', tier: 1 }),
       });
       if (!resp.ok) continue;
       const { patch, model } = await resp.json();
       if (!patch || patch.length < 5) continue;
 
-      const result = `[OB1-executed | model=${model}]\n${patch}`;
+      // Parse structured patch and apply to GitHub repo
+      let applyResult = { ok: false, reason: 'no structured patch in PA response' };
+      const structured = parseStructuredPatch(patch);
+      if (structured) {
+        applyResult = await applyGitHubPatch(env, structured).catch(e => ({ ok: false, reason: e.message }));
+      }
+
+      const applyNote = applyResult.ok
+        ? `APPLIED: ${applyResult.file} commit=${applyResult.sha?.slice(0, 8)}`
+        : `APPLY_FAILED: ${applyResult.reason}`;
+
+      const result = `[OB1-executed | model=${model} | ${applyNote}]\n${patch}`;
       const now = new Date().toISOString();
       await env.DB.prepare(
         "UPDATE backburner SET status='PENDING_CLOSE', description=?, close_reason=?, updated_at=? WHERE bb_id=?"
-      ).bind(`${row.description || ''}\n\nRESULT:\n${result}`.slice(0, 4000), 'OB1 code-queue executed', now, row.bb_id).run();
+      ).bind(`${row.description || ''}\n\nRESULT:\n${result}`.slice(0, 4000), `OB1 code-queue: ${applyNote}`, now, row.bb_id).run();
 
       if (env.PHETRAIL) {
         await env.PHETRAIL.put(`bb-result:${row.bb_id}`, result, { expirationTtl: 604800 }).catch(() => {});
@@ -282,8 +370,8 @@ async function taskCodeQueue(env) {
         model: model || 'pa-t1',
         duration_ms: Date.now() - t0,
         output_length: patch.length,
-        passed: true,
-        fail_reason: null,
+        passed: applyResult.ok,
+        fail_reason: applyResult.ok ? null : applyResult.reason,
       });
 
       processed++;

@@ -140,7 +140,22 @@ export async function handleExecute(request, env) {
     tierUsed = 10;
   }
 
-  const patch = stripFences(aiResult.response ?? '');
+  // Robust text extraction — CF Workers AI returns different shapes per model
+  let rawText = '';
+  if (typeof aiResult?.response === 'string') {
+    rawText = aiResult.response;
+  } else if (aiResult?.response?.content) {
+    rawText = String(aiResult.response.content);
+  } else if (aiResult?.response?.text) {
+    rawText = String(aiResult.response.text);
+  } else if (Array.isArray(aiResult?.response)) {
+    rawText = aiResult.response.map(r => r?.generated_text || r?.text || '').join('');
+  } else if (typeof aiResult?.generated_text === 'string') {
+    rawText = aiResult.generated_text;
+  } else if (aiResult?.response != null) {
+    rawText = JSON.stringify(aiResult.response);
+  }
+  const patch = stripFences(rawText);
   const verifyResult = verify(patch);
 
   // Cache successful results
