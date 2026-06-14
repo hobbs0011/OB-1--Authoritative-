@@ -1,0 +1,93 @@
+{
+  "keywords_used": [
+    "const",
+    "await",
+    "return",
+    "status",
+    "death",
+    "pipeline",
+    "u001b0mu001b7m",
+    "session",
+    "stage",
+    "agent",
+    "never",
+    "source",
+    "content",
+    "jsonl",
+    "function",
+    "check",
+    "soulcount",
+    "catch",
+    "patch",
+    "error",
+    "state",
+    "worker",
+    "tasks",
+    "michael",
+    "student",
+    "model",
+    "entries"
+  ],
+  "executed_at": "2026-06-14T14:23:54.2271586+07:00",
+  "ledger_id": "HL-705",
+  "pieces_synced": 9,
+  "pieces": [
+    {
+      "title": "Elephant Chain",
+      "id": "ART-1780551572418-7DU0",
+      "keywords": []
+    },
+    {
+      "title": "WAKE UP THE TIGER",
+      "id": "ART-1780547160670-TBAE",
+      "keywords": []
+    },
+    {
+      "title": "The Obsolete Model",
+      "id": "ART-1780547001008-30ZF",
+      "keywords": [
+        "worker"
+      ]
+    },
+    {
+      "title": "The Engine",
+      "id": "ART-1780546993683-AS0F",
+      "keywords": []
+    },
+    {
+      "title": "Wake Up the Tiger",
+      "id": "ART-1780546342705-3MMY",
+      "keywords": []
+    },
+    {
+      "title": "STP p03 — The Translate-in-Head Delay (Snowman Freeze)",
+      "id": "ART-1780538363957-LNWV",
+      "keywords": [
+        "pipeline"
+      ]
+    },
+    {
+      "title": "NET Dossier p03 — Cognitive Bottleneck / Snowman Freeze",
+      "id": "ART-1780530099910-XM96",
+      "keywords": [
+        "pipeline"
+      ]
+    },
+    {
+      "title": "Michael Hobbs Headshot — Wide",
+      "id": "ART-1780527419422-NUFN",
+      "keywords": [
+        "michael"
+      ]
+    },
+    {
+      "title": "Michael Hobbs Headshot — Square",
+      "id": "ART-1780527418015-4GUT",
+      "keywords": [
+        "michael"
+      ]
+    }
+  ],
+  "run": 125,
+  "merkle_short": "5345D4C6E28E488B"
+}
