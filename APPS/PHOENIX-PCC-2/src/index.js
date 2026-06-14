@@ -12,6 +12,21 @@ function checkAuth(request) {
   return key === PA_AUTH;
 }
 
+function normalizeRunNumber(run_number) {
+  const raw = String(run_number || '').trim();
+  return /^\d{1,8}$/.test(raw) ? raw : null;
+}
+
+function truncateText(text, maxChars = 250000) {
+  const raw = String(text || '');
+  return raw.length > maxChars ? raw.slice(0, maxChars) : raw;
+}
+
+function normalizeStringArray(value, limit = 100) {
+  if (!Array.isArray(value)) return [];
+  return value.map(v => String(v || '').trim()).filter(Boolean).slice(0, limit);
+}
+
 async function writeMajorDirectiveMarker(env, source, message) {
   const kv = env.PHETRAIL;
   if (!kv || !message) return;
@@ -23,7 +38,8 @@ async function writeMajorDirectiveMarker(env, source, message) {
     keywords: ['Agent99', 'FORCEAWARENESS', 'PCC1', 'PCC2', 'PCC3', 'PhoenixCoder', 'PhoenixArt', 'role', 'Agent99 OS', 'Agent99 Genesis Boot', 'Role Boot'].filter(k => String(message).toLowerCase().includes(k.toLowerCase())),
   };
   await kv.put(`phetrail:major-directive:${Date.now()}`, JSON.stringify(marker));
-  const trail = JSON.parse(await kv.get('phetrail:latest') || '{}');
+  let trail;
+  try { trail = JSON.parse(await kv.get('phetrail:latest') || '{}'); } catch { trail = {}; }
   if (!trail.state_markers) trail.state_markers = {};
   if (!trail.state_markers.major_directives) trail.state_markers.major_directives = [];
   trail.state_markers.major_directives.unshift(marker);
@@ -68,6 +84,7 @@ async function taskLostSoulScan(env) {
       });
       let directives = [];
       try { const m = (aiResult?.response || '').match(/\[[\s\S]*\]/); if (m) directives = JSON.parse(m[0]); } catch { /* ok */ }
+      directives = normalizeStringArray(directives, 10);
 
       const now = new Date().toISOString();
       await env.DB.prepare('UPDATE rrl_archive SET lostsoul_scan_done=1, lostsoul_count=?, scanned_at=? WHERE id=?')
@@ -98,6 +115,7 @@ async function taskCompletenessAudit(env) {
   });
   let gaps = [];
   try { const m = (aiResult?.response || '').match(/\[[\s\S]*\]/); if (m) gaps = JSON.parse(m[0]); } catch { /* ok */ }
+  gaps = normalizeStringArray(gaps, 8);
 
   const now = new Date().toISOString();
   for (const g of gaps.slice(0, 8)) {
@@ -123,6 +141,7 @@ async function taskPatternScan(env) {
   });
   let patterns = [];
   try { const m = (aiResult?.response || '').match(/\[[\s\S]*\]/); if (m) patterns = JSON.parse(m[0]); } catch { /* ok */ }
+  patterns = normalizeStringArray(patterns, 6);
 
   const now = new Date().toISOString();
   for (const p of patterns.slice(0, 6)) {
@@ -184,7 +203,8 @@ async function taskBriefScan(env) {
   for (const userId of students) {
     const meta = await env.PHETRAIL.get(`actualizer:${userId}:meta`).catch(() => null);
     if (!meta) { stale.push(userId); continue; }
-    const { generated_at } = JSON.parse(meta);
+    let generated_at;
+    try { ({ generated_at } = JSON.parse(meta)); } catch { stale.push(userId); continue; }
     const age = Date.now() - new Date(generated_at).getTime();
     if (age > 43200000) stale.push(userId); // >12h = stale
   }
@@ -231,7 +251,7 @@ export class RaceRunner {
 
   async handleStart(request) {
     const body = await request.json().catch(() => ({}));
-    const budget_ms = body.budget_ms || 3600000;
+    const budget_ms = Math.max(60000, Math.min(3600000, Number(body.budget_ms) || 3600000));
     const now = Date.now();
     await this.state.storage.put('run_state', {
       start_time: now, budget_ms,
@@ -247,6 +267,7 @@ export class RaceRunner {
     const elapsed = Date.now() - state.start_time;
     if (elapsed >= state.budget_ms) {
       await this.writeMetrics(state, true);
+      await this.state.storage.delete('run_state');
       return;
     }
     const batch = await this.runBatch(state);
@@ -302,7 +323,7 @@ export class RaceRunner {
 
     try {
       // Pattern scan: check for pending ops tasks in KV (SOUL_KV or CACHE fallback)
-      const kv = this.env.PHETRAIL || this.env.PHETRAIL;
+      const kv = this.env.PHETRAIL;
       if (kv) {
         const bbKeys = await kv.list({ prefix: 'bb:pending:' }).catch(() => ({ keys: [] }));
         for (const key of bbKeys.keys.slice(0, 5)) {
@@ -319,7 +340,7 @@ export class RaceRunner {
     } catch(e) { errors++; }
 
     // Check for pending RRL (DEATH integration)
-    const kv = this.env.PHETRAIL || this.env.PHETRAIL;
+    const kv = this.env.PHETRAIL;
     if (kv) {
       const keys = await kv.list({ prefix: 'pending:rrl:' }).catch(() => ({ keys: [] }));
       for (const key of keys.keys.slice(0, 2)) {
@@ -340,41 +361,50 @@ export class RaceRunner {
   }
 
   async runDeathPipeline(run_number, rrl_text) {
-    const lines = rrl_text.split('\n');
+    const normalizedRun = normalizeRunNumber(run_number);
+    if (!normalizedRun) return { ok: false, error: 'run_number must be numeric' };
+    const normalizedText = truncateText(rrl_text);
+    const lines = normalizedText.split('\n');
     const soul_count = lines.filter(l => l.includes('"role":"user"') || l.startsWith('Michael:') || l.startsWith('User:')).length || Math.floor(lines.length * 0.4);
     const dna_count = lines.filter(l => l.includes('"role":"assistant"') || l.startsWith('Claude:')).length || Math.floor(lines.length * 0.6);
     const encoder = new TextEncoder();
-    const hashBuffer = await crypto.subtle.digest('SHA-256', encoder.encode(rrl_text));
+    const hashBuffer = await crypto.subtle.digest('SHA-256', encoder.encode(normalizedText));
     const sha256 = Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2,'0')).join('');
-    const ledger_id = `HL-${run_number}`;
+    const ledger_id = `HL-${normalizedRun}`;
     const soulSeeds = ['#SOUL','#SOULDNA','#RAW','#FUCK','#OMG','LISTEN','#MONKEY','#YES','#SSK','#LEDGER','#AGENT99','Obi','OB1','#DRIFT'];
-    const soulkeys_hit = soulSeeds.filter(k => rrl_text.includes(k)).length;
-    const kv = this.env.PHETRAIL || this.env.PHETRAIL;
+    const soulkeys_hit = soulSeeds.filter(k => normalizedText.includes(k)).length;
+    const kv = this.env.PHETRAIL;
     if (kv) {
       await Promise.all([
-        kv.put(`death:${run_number}:soul`, String(soul_count)),
-        kv.put(`death:${run_number}:dna`, String(dna_count)),
-        kv.put(`death:${run_number}:ledger`, JSON.stringify({ ledger_id, sha256 })),
-        kv.put(`death:${run_number}:starmap`, JSON.stringify({ starmap_id: `SM-${run_number}`, summary: rrl_text.substring(0,200) })),
-        kv.put(`death:${run_number}:soulkeys`, String(soulkeys_hit)),
-        kv.put(`registry:run:${run_number}`, JSON.stringify({ run_number, ledger_id, soul_count, dna_count, processed_at: Date.now() })),
+        kv.put(`death:${normalizedRun}:soul`, String(soul_count)),
+        kv.put(`death:${normalizedRun}:dna`, String(dna_count)),
+        kv.put(`death:${normalizedRun}:ledger`, JSON.stringify({ ledger_id, sha256, text_bytes: normalizedText.length })),
+        kv.put(`death:${normalizedRun}:starmap`, JSON.stringify({ starmap_id: `SM-${normalizedRun}`, summary: normalizedText.substring(0,200) })),
+        kv.put(`death:${normalizedRun}:soulkeys`, String(soulkeys_hit)),
+        kv.put(`registry:run:${normalizedRun}`, JSON.stringify({ run_number: normalizedRun, ledger_id, soul_count, dna_count, processed_at: Date.now() })),
       ]);
     }
-    return { ok: true, ledger_id, soul_count, dna_count, soulkeys_hit, discoveries: soulkeys_hit + 1 };
+    return { ok: true, run_number: normalizedRun, ledger_id, soul_count, dna_count, soulkeys_hit, discoveries: soulkeys_hit + 1, truncated: normalizedText.length !== String(rrl_text || '').length };
   }
 
   async writeMetrics(state, final) {
     const score = (state.batches_run * 10) + (state.actualizers_run * 5) + (state.discoveries_count * 20) + (state.death_runs * 50);
     const metrics = { agent_id: 'pcc-ops', ...state, elapsed_ms: Date.now() - state.start_time, score, final };
-    const kv = this.env.PHETRAIL || this.env.PHETRAIL;
+    const kv = this.env.PHETRAIL;
     if (kv) await kv.put('race:pcc-ops:metrics', JSON.stringify(metrics));
   }
 
   async handleStatus() {
     const state = await this.state.storage.get('run_state');
     if (!state) return Response.json({ ok: false, error: 'not started' });
+    const elapsed = Date.now() - state.start_time;
     const score = (state.batches_run * 10) + (state.actualizers_run * 5) + (state.discoveries_count * 20) + (state.death_runs * 50);
-    return Response.json({ ...state, elapsed_ms: Date.now() - state.start_time, score });
+    if (elapsed >= state.budget_ms) {
+      await this.writeMetrics(state, true);
+      await this.state.storage.delete('run_state');
+      return Response.json({ ok: true, status: 'race_finalized', elapsed_ms: elapsed, score });
+    }
+    return Response.json({ ...state, elapsed_ms: elapsed, score });
   }
 
   async handleStop() {
@@ -421,28 +451,33 @@ export default {
       if (!run_number || !rrl_text) {
         return Response.json({ error: 'run_number and rrl_text required' }, { status: 400 });
       }
+      const normalizedRun = normalizeRunNumber(run_number);
+      if (!normalizedRun) {
+        return Response.json({ ok: false, error: 'run_number must be numeric' }, { status: 400 });
+      }
+      const normalizedText = truncateText(rrl_text);
       // Run death pipeline directly (no DO needed for one-shot calls)
-      const lines = rrl_text.split('\n');
+      const lines = normalizedText.split('\n');
       const soul_count = lines.filter(l => l.includes('"role":"user"') || l.startsWith('Michael:') || l.startsWith('User:')).length || Math.floor(lines.length * 0.4);
       const dna_count = lines.filter(l => l.includes('"role":"assistant"') || l.startsWith('Claude:')).length || Math.floor(lines.length * 0.6);
       const encoder = new TextEncoder();
-      const hashBuffer = await crypto.subtle.digest('SHA-256', encoder.encode(rrl_text));
+      const hashBuffer = await crypto.subtle.digest('SHA-256', encoder.encode(normalizedText));
       const sha256 = Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2,'0')).join('');
-      const ledger_id = `HL-${run_number}`;
+      const ledger_id = `HL-${normalizedRun}`;
       const soulSeeds = ['#SOUL','#SOULDNA','#RAW','#FUCK','#OMG','LISTEN','#MONKEY','#YES','#SSK','#LEDGER','#AGENT99','Obi','OB1','#DRIFT'];
-      const soulkeys_hit = soulSeeds.filter(k => rrl_text.includes(k)).length;
+      const soulkeys_hit = soulSeeds.filter(k => normalizedText.includes(k)).length;
       const kv = env.SOUL_KV || env.PHETRAIL;
       if (kv) {
         await Promise.all([
-          kv.put(`death:${run_number}:soul`, String(soul_count)),
-          kv.put(`death:${run_number}:dna`, String(dna_count)),
-          kv.put(`death:${run_number}:ledger`, JSON.stringify({ ledger_id, sha256 })),
-          kv.put(`death:${run_number}:starmap`, JSON.stringify({ starmap_id: `SM-${run_number}`, summary: rrl_text.substring(0, 200) })),
-          kv.put(`death:${run_number}:soulkeys`, String(soulkeys_hit)),
-          kv.put(`registry:run:${run_number}`, JSON.stringify({ run_number, ledger_id, soul_count, dna_count, processed_at: Date.now() })),
+          kv.put(`death:${normalizedRun}:soul`, String(soul_count)),
+          kv.put(`death:${normalizedRun}:dna`, String(dna_count)),
+          kv.put(`death:${normalizedRun}:ledger`, JSON.stringify({ ledger_id, sha256, text_bytes: normalizedText.length })),
+          kv.put(`death:${normalizedRun}:starmap`, JSON.stringify({ starmap_id: `SM-${normalizedRun}`, summary: normalizedText.substring(0, 200) })),
+          kv.put(`death:${normalizedRun}:soulkeys`, String(soulkeys_hit)),
+          kv.put(`registry:run:${normalizedRun}`, JSON.stringify({ run_number: normalizedRun, ledger_id, soul_count, dna_count, processed_at: Date.now() })),
         ]);
       }
-      return Response.json({ ok: true, ledger_id, soul_count, dna_count, soulkeys_hit, discoveries: soulkeys_hit + 1 });
+      return Response.json({ ok: true, run_number: normalizedRun, ledger_id, soul_count, dna_count, soulkeys_hit, discoveries: soulkeys_hit + 1, truncated: normalizedText.length !== String(rrl_text || '').length });
     }
 
       if (pathname === '/api/message' && request.method === 'POST') {
@@ -487,6 +522,7 @@ export default {
     }
   }
 if (pathname === '/api/force/start' && request.method === 'POST') {
+     if (!env.FORCEAWARENESS_ALARM) return Response.json({ error: 'FORCEAWARENESS_ALARM not bound' }, { status: 503 });
      const id = env.FORCEAWARENESS_ALARM.idFromName('heartbeat');
      const stub = env.FORCEAWARENESS_ALARM.get(id);
      await stub.fetch('https://fake/start');
