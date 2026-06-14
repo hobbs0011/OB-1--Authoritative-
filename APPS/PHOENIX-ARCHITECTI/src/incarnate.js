@@ -110,18 +110,15 @@ async function gateLostSoulScan(env, { rrl_id, run_number, rrl_text, anchorKeywo
   const result = await env.AI.run('@cf/meta/llama-3.3-70b-instruct-fp8-fast', {
     messages: [{
       role: 'user',
-      content: `Read the session log below. Find every directive, demand, edict, or request from SOV100 that has NOT already been captured in the SOUL archive.
+      content: `You are extracting action items from a session log. The speaker is SOV100, the system operator.
 
-ALREADY CAPTURED IN SOUL ARCHIVE (do NOT flag these as lost):
-Keywords: ${anchorKeywords || 'none'}
-Recent prompts: ${anchorRecentPrompts || 'none'}
+EXTRACT every line that is: a command, instruction, question, complaint about something broken, or statement about what should happen. Include short informal directives. "well fucking do it", "check X", "fix it", "read the phermones", "load the pipeline" are all directives.
 
-RULE: Return ONLY directives that appear NEW — not reflected in the archive above.
-Return the EXACT verbatim text as SOV100 wrote it. Do not paraphrase. Do not reword. Copy character for character.
+Do NOT filter for formality. Do NOT skip lines because they are short or use profanity. Every imperative = extract it.
 
-Return ONLY a JSON array of strings. Each string = one verbatim line. No other text.
+Return ONLY a JSON array of strings. Copy verbatim. No commentary. Example: ["fix the bug", "check status", "deploy it"]
 
-SESSION (SOV100 messages):
+SESSION LOG:
 ${userMessages.slice(0, 6000)}`,
     }],
     max_tokens: 800,
@@ -196,8 +193,8 @@ async function gateRise(env) {
 // Gate 4 — Velocity Monitor: urgency-pattern regex
 // ============================================================
 async function gateVelocityMonitor(env, { rrl_id, run_number, rrl_text }) {
-  // Scan extracted user messages only — raw JSONL lines produce false positives
-  const userText = extractUserMessages(rrl_text) || '';
+  // Scan extracted user messages; fall back to raw text if no JSON/prefixed lines found
+  const userText = extractUserMessages(rrl_text) || rrl_text;
   const lines = userText.split('\n').filter(l => l.trim());
   const hits = [];
 
