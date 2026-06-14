@@ -314,6 +314,31 @@ async function taskBriefScan(env) {
   return { task: 'brief-scan', stale: stale.length };
 }
 
+// Fetch file content from GitHub for pre-read context injection
+async function fetchGitHubFile(env, filePath) {
+  const token = env.GITHUB_TOKEN;
+  if (!token) return null;
+  try {
+    const resp = await fetch(`${GITHUB_API}/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${filePath}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Accept': 'application/vnd.github+json',
+        'User-Agent': 'phoenix-pcc-1/ob1',
+        'X-GitHub-Api-Version': '2022-11-28',
+      },
+    });
+    if (!resp.ok) return null;
+    const { content } = await resp.json();
+    return b64Decode(content);
+  } catch { return null; }
+}
+
+// Extract file path hint from BB description (looks for "file:" or "FILE:" or json "file":"...")
+function extractFilePath(text) {
+  const m = text.match(/"file"\s*:\s*"([^"]+)"/) || text.match(/[Ff]ile:\s*([^\s,\n"]+\.[a-z]{2,4})/);
+  return m ? m[1].trim() : null;
+}
+
 // ── Ops Task 6: Code queue ────────────────────────────────────────────────────
 async function taskCodeQueue(env) {
   if (!env.DB) return { task: 'code-queue', processed: 0 };
@@ -326,18 +351,29 @@ async function taskCodeQueue(env) {
     try {
       const t0 = Date.now();
 
-      // Instruct PA to return a structured patch JSON — not free-text
+      // Pre-read the target file from GitHub so PA sees the actual content
+      // This eliminates find-string mismatches (em-dashes, whitespace, etc.)
+      const bbText = `${row.title}\n${row.description || ''}`;
+      const filePath = extractFilePath(bbText);
+      let fileContext = '';
+      if (filePath && env.GITHUB_TOKEN) {
+        const fileContent = await fetchGitHubFile(env, filePath);
+        if (fileContent) {
+          fileContext = `\n\nACTUAL FILE CONTENT (${filePath}) — use verbatim strings from this:\n${fileContent.slice(0, 6000)}`;
+        }
+      }
+
       const taskWithInstruction = `${row.title}
 
 RUNTIME: Cloudflare Workers. Use env.DB.prepare() for D1 SQLite. No require(), no Node.js, no Express, no PostgreSQL.
 
-Return ONLY valid JSON, no other text:
-{"file":"<relative path from repo root, e.g. APPS/NET-PET-AI/public/chat.js>","find":"<exact string to find in file>","replace":"<exact replacement string>","description":"<one line summary>"}`;
+Return ONLY valid JSON, no other text. The "find" value MUST be copied verbatim from the actual file content provided below:
+{"file":"<relative path>","find":"<exact verbatim string from the file>","replace":"<replacement>","description":"<one line>"}`;
 
       const resp = await fetch(`${PA_BASE}/api/code`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'x-pa-auth': PA_AUTH },
-        body: JSON.stringify({ task: taskWithInstruction, context: row.description || '', tier: 1 }),
+        body: JSON.stringify({ task: taskWithInstruction, context: (row.description || '') + fileContext, tier: 1 }),
       });
       if (!resp.ok) continue;
       const { patch, model } = await resp.json();
