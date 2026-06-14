@@ -763,8 +763,9 @@ class ScoutRunner {
 
       const body = await request.json().catch(() => ({}));
       // Upgrades: random seed, 10s iteration, 100 pheromone goal, unmapped priority
-      const seed_keyword = body.seed_keyword || ['FORCEAWARENESS', 'SOUL', 'DNA', 'PHOENIX', 'SYSTEM', 'OB1'][Math.floor(Math.random() * 6)];
-      const budget_ms = body.time_limit_seconds ? body.time_limit_seconds * 1000 : 600000; // 10 min default
+      // Accept seed or seed_keyword; accept budget_ms or time_limit_seconds
+      const seed_keyword = body.seed_keyword || body.seed || ['FORCEAWARENESS', 'SOUL', 'DNA', 'PHOENIX', 'SYSTEM', 'OB1'][Math.floor(Math.random() * 6)];
+      const budget_ms = body.budget_ms || (body.time_limit_seconds ? body.time_limit_seconds * 1000 : 600000); // 10 min default
       const now = Date.now();
 
       await this.state.storage.put('scout_state', {
@@ -850,7 +851,8 @@ class ScoutRunner {
           if (searchText.toLowerCase().includes(kwLower)) {
             // Use only the keywords array as description — prevents frequency analysis from picking up code words
             const canonicalKws = (marker.keywords || []).filter(k => k && k.length > 2).join(' ');
-            allHits.push({ title: `kv:directive:${marker.source || 'unknown'}`, description: canonicalKws || marker.source || 'directive' });
+            // Never use marker.source as description — slugs like "pheromone-memory" strip to garbage tokens
+            allHits.push({ title: `kv:directive:${marker.source || 'unknown'}`, description: canonicalKws || 'directive' });
           }
         } catch { /* ok */ }
       }
@@ -861,8 +863,11 @@ class ScoutRunner {
         if (!val) continue;
         try {
           const ph = JSON.parse(val);
-          if (ph.keyword && ph.keyword.toLowerCase().includes(kwLower)) {
-            allHits.push({ title: `kv:pheromone:${ph.keyword}`, description: `${ph.keyword} area=${ph.area}` });
+          // Only include clean alphabetic keywords (no concatenated code identifiers like "writeread")
+          if (ph.keyword && /^[a-zA-Z#]{3,20}$/.test(ph.keyword) && ph.keyword.toLowerCase().includes(kwLower)) {
+            // Use area only if it contains spaces (human-readable) — slugs become garbage tokens
+            const areaDesc = ph.area && ph.area.includes(' ') ? ph.area : 'pheromone-link';
+            allHits.push({ title: `kv:pheromone:${ph.keyword}`, description: areaDesc });
           }
         } catch { /* ok */ }
       }
@@ -881,21 +886,40 @@ class ScoutRunner {
     const alreadyMapped = this.env.PHETRAIL ? await this.isMapped(kw, allHits.length) : false;
 
     // Extract next keyword — split camelCase first to prevent compound words leaking through
-    const allText = allHits.map(h => `${h.title} ${h.description || ''}`).join(' ');
+    // KV titles are lookup metadata (kv:directive:..., kv:pheromone:...) — exclude from frequency analysis
+    const allText = allHits.map(h => {
+      const desc = h.description || '';
+      const title = h.title && h.title.startsWith('kv:') ? '' : (h.title || '');
+      return `${title} ${desc}`.trim();
+    }).join(' ');
     const freq = {};
-    const stopWords = new Set(['with', 'from', 'have', 'that', 'this', 'will', 'they', 'were', 'been', 'also', 'more', 'into', 'over', 'some', 'just', 'than', 'very', 'when', 'what', 'which', 'where', 'then', 'here', 'only', 'like', 'make', 'take', 'would', 'could', 'should', 'then', 'each', 'such', 'these', 'those', 'them', 'from', 'into', 'onto', 'upon', 'not', 'but', 'all', 'are', 'was', 'has', 'had', 'its', 'for', 'the', 'and', 'can', 'may', 'use', 'via', 'new', 'set', 'get', 'run', 'add', 'our', 'any', 'per', 'log', 'now', 'done', 'null', 'true', 'false', 'none', 'data', 'time', 'type', 'name', 'next', 'last', 'list', 'item', 'line', 'write', 'read', 'file', 'code', 'func', 'call', 'path', 'test', 'open', 'load', 'save', 'send', 'recv', 'init', 'util', 'base', 'core', 'main', 'back', 'put', 'ret', 'err', 'obj', 'arr', 'str', 'num', 'val', 'key', 'env', 'res', 'req', 'ctx', 'api', 'url', 'src', 'dst', 'tmp', 'tag', 'row', 'col', 'idx', 'len', 'buf', 'raw', 'out', 'msg', 'job', 'task', 'step', 'note', 'info', 'warn', 'fail', 'pass', 'skip', 'stop', 'start', 'end', 'begin', 'close', 'found', 'missing', 'ok']);
-    // Split camelCase/PascalCase tokens into constituent words before frequency analysis
+    const stopWords = new Set(['with', 'from', 'have', 'that', 'this', 'will', 'they', 'were', 'been', 'also', 'more', 'into', 'over', 'some', 'just', 'than', 'very', 'when', 'what', 'which', 'where', 'then', 'here', 'only', 'like', 'make', 'take', 'would', 'could', 'should', 'then', 'each', 'such', 'these', 'those', 'them', 'from', 'into', 'onto', 'upon', 'not', 'but', 'all', 'are', 'was', 'has', 'had', 'its', 'for', 'the', 'and', 'can', 'may', 'use', 'via', 'new', 'set', 'get', 'run', 'add', 'our', 'any', 'per', 'log', 'now', 'done', 'null', 'true', 'false', 'none', 'data', 'time', 'type', 'name', 'next', 'last', 'list', 'item', 'line', 'write', 'read', 'file', 'code', 'func', 'call', 'path', 'test', 'open', 'load', 'save', 'send', 'recv', 'init', 'util', 'base', 'core', 'main', 'back', 'put', 'ret', 'err', 'obj', 'arr', 'str', 'num', 'val', 'key', 'env', 'res', 'req', 'ctx', 'api', 'url', 'src', 'dst', 'tmp', 'tag', 'row', 'col', 'idx', 'len', 'buf', 'raw', 'out', 'msg', 'job', 'task', 'step', 'note', 'info', 'warn', 'fail', 'pass', 'skip', 'stop', 'start', 'end', 'begin', 'close', 'found', 'missing', 'ok',
+      // compound code identifiers that survive camelCase split (all lowercase, no capitals)
+      'writeread', 'readfile', 'writefile', 'filepath', 'filename', 'pathname', 'dirname', 'readdir', 'writedir', 'loadfile', 'savefile', 'openfile', 'closefile', 'readline', 'writeline', 'codepath', 'callback', 'handler', 'listener', 'emitter', 'provider', 'resolver', 'iterator', 'renderer', 'selector', 'dispatch', 'payload', 'response', 'request', 'headers', 'params', 'config', 'context', 'schema', 'result', 'output', 'input', 'return', 'export', 'import', 'async', 'await', 'const', 'class', 'throw', 'catch', 'fetch', 'apply', 'proto', 'super', 'yield', 'break', 'continue', 'switch', 'while', 'match']);
+    // Tokenize: split on delimiters FIRST (hyphens, underscores, colons, slashes) so "soul-dna-bible"
+    // becomes ["soul","dna","bible"] instead of "souldnabible". Then split PascalCase/camelCase.
+    // ALL_CAPS words (LEDGER, SOUL) kept intact — second regex mangles them (RESULT→RESUL+T).
     const tokens = [];
     for (const raw of allText.split(/\s+/)) {
-      const clean = raw.replace(/[^a-zA-Z0-9#]/g, '');
-      if (!clean) continue;
-      // Split PascalCase / camelCase: "ForceAwareness" → ["Force", "Awareness"]
-      const parts = clean.replace(/([A-Z][a-z]+)/g, ' $1').replace(/([A-Z]+)(?=[A-Z])/g, '$1 ').trim().split(/\s+/);
-      tokens.push(...parts.map(p => p.replace(/[^a-zA-Z0-9#]/g, '')));
+      const segments = raw.split(/[-_:\/\.]+/);
+      for (const seg of segments) {
+        const clean = seg.replace(/[^a-zA-Z0-9#]/g, '');
+        if (!clean) continue;
+        let parts;
+        if (/^[A-Z#]+$/.test(clean)) {
+          // ALL_CAPS or #HASHTAG: keep as-is
+          parts = [clean];
+        } else {
+          // Mixed/lower case: split PascalCase only
+          parts = clean.replace(/([A-Z][a-z]+)/g, ' $1').trim().split(/\s+/);
+        }
+        tokens.push(...parts.map(p => p.replace(/[^a-zA-Z#]/g, '')));
+      }
     }
     for (const w of tokens) {
-      // max 25 chars — chunk filenames and concatenated identifiers are not canonical keywords
-      if (w.length < 4 || w.length > 25 || w.toLowerCase() === kw.toLowerCase() || stopWords.has(w.toLowerCase())) continue;
+      // alphabetic only, 4-20 chars — filters run refs, hex IDs, version strings, digits
+      if (!/^[a-zA-Z#]{4,20}$/.test(w)) continue;
+      if (w.toLowerCase() === kw.toLowerCase() || stopWords.has(w.toLowerCase())) continue;
       freq[w] = (freq[w] || 0) + 1;
     }
     const sorted = Object.entries(freq).sort((a, b) => b[1] - a[1]);
@@ -904,7 +928,8 @@ class ScoutRunner {
     let next_kw = 'SOUL';
     let novelty = !alreadyMapped;
     for (const [word, count] of sorted) {
-      if (count < 5 && !(await this.isMapped(word, 0))) {
+      // Require count >= 2: singletons are noise, not signal
+      if (count >= 2 && count < 5 && !(await this.isMapped(word, 0))) {
         next_kw = word;
         novelty = true;
         break;
