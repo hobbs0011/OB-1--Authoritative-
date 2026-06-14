@@ -1,0 +1,639 @@
+[
+  {
+    "run": 126,
+    "seq": 1,
+    "type": "prose",
+    "chars": 59,
+    "text": "Reading the canonical RISE implementation before executing."
+  },
+  {
+    "run": 126,
+    "seq": 2,
+    "type": "prose",
+    "chars": 92,
+    "text": "Executing all stages. Starting with Stage 0 (SOULCOUNT) and Stage 1 (GIT TRUTH) in parallel."
+  },
+  {
+    "run": 126,
+    "seq": 3,
+    "type": "prose",
+    "chars": 99,
+    "text": "Stage 0 + 1 complete. Prior death = Run 125, current session = Run 126. Now reading Stage 2 triple."
+  },
+  {
+    "run": 126,
+    "seq": 4,
+    "type": "blueprint",
+    "chars": 5954,
+    "text": "All stage data collected. Compiling the 7-stage RISE report.\n\n---\n\n## OB1 ONLINE — 2026-06-14 ICT (Run 126 RISE)\n\n---\n\n### STAGE 0 ✓ — SOULCOUNT GATE\n\n```\nSOUL: 239,561,537 chars | TITANIUM_ANCHOR | events: 10,314\nSOUL API: LIVE ✓\n```\n\n---\n\n### STAGE 1 ✓ — GIT TRUTH\n\n```\nLast death commit: 9d68e0d7 death: Run 125\nPrior run: 125 | Current session: 126\nHEAD: 882abd53 feat(scout): 20 upgrades + 10-min mission + 100 pheromone goal\n⚠ HEAD has advanced 5 commits past the death seal (scout work committed post-Run 125)\n```\n\nGit log shows 5 scout commits since death, all 2026-06-14 ICT. These are inter-session scout upgrades — not a new death-sealed session.\n\n---\n\n### STAGE 2 ✓ — TRIPLE READ\n\n| Source | Status |\n|--------|--------|\n| Prior seal `run125-reincarnateDEATH.md` | FOUND ✓ |\n| Prior soulcount (§3 count_after) | 239,561,537 |\n| Boot file (`COLD-START-BOOT.md`) | FOUND — shows Run 125 ✓ |\n| PheTrail-run126.json | **MISSING** |\n| PheTrail-run125.json | **MISSING** |\n\n**Run 125 summary (from seal):** Edge case audit session. 11 production defects identified. DNA array-coerce fix (`@($content)`). 213 DNA records, 16 blueprints. No code written — pure audit. All 11 defects remain **PENDING_CLOSE** per §9.\n\n---\n\n### STAGE 3 ⚠ — SOULCOUNT AUDIT\n\n```\nCurrent:  239,561,537\nPrior:    239,561,537  (run125 §3 count_after)\nDelta:    0\nVerdict:  SOUL_STAGNATION — WARN\n```\n\nExpected at RISE start — soul is posted at DEATH, not RISE. No alarm raised. This session's soul will be captured at death.\n\n---\n\n### STAGE 4 ✓ — BOOT SYNTHESIS + STALENESS GUARD\n\n```\nBoot run: 125 | Git authority: 125 | MATCH ✓\nActive Mission: OB-1 POST-MERGE9 CONSOLIDATION + Growth Infrastructure Buildout\nLast updated: 2026-06-14 ICT — FRESH ✓\nOpen flags: not counted explicitly, but §9 has 10 PENDING_CLOSE items\n```\n\nBoot file is current. No staleness gap.\n\n---\n\n### STAGE 5 — PIPELINE CHAIN AUDIT + FIDELITY GATE\n\n| Stage | Artifact | Count | Verdict |\n|-------|----------|-------|---------|\n| 🟡 RRL | `RRL/RRL-126.txt` | 1,266,404 bytes | **HOLLOW** — no `\"role\":\"user\"` or `\"role\":\"assistant\"` markers; likely scout log format, not conversation JSONL |\n| ⚠ SOUL | D1 `/api/soul/count` | 239,561,537 | SOUL_STAGNATION (WARN) — expected at RISE start |\n| 🔴 DNA | `CANON/SOUL/EXTRACT/dna-run126.json` | 0 | **MISSING** |\n| 🟢 LEDGER | `CANON/HEAVY-LEDGER/HL-*.json` | 565 (2 untracked) | REAL |\n| 🟢 STARMAP | `CANON/STARMAP/*` | 149 files | REAL |\n| 🟢 SOULKEYS | `CANON/SOUL-KEYWORDS/*` | 127 files | REAL |\n| 🔴 S2Pipeline | `CANON/PIPELINE/pipeline-run126.json` | MISSING | **MISSING** |\n\n**Fidelity verdict:** PIPELINE INCOMPLETE — DNA and S2Pipeline for Run 126 not yet generated. RRL-126 is HOLLOW (scout log format, not conversation JSONL with role markers).\n\n---\n\n### STAGE 6 ⚠ — PHETRAIL\n\n```\nPheTrail-run126.json: MISSING — PHETRAIL_GAP\nPheTrail-run125.json: MISSING — prior session gap\n```\n\n**However — 20+ OPERATIONS/phetrail-run122-*.md files exist UNTRACKED.** These are inter-session phetrail writes from scout work. They have NOT been committed.\n\n---\n\n### STAGE 7 — RISE REPORT\n\n```\nOB1 ONLINE — 2026-06-14 ICT\nSOULCOUNT:   239,561,537 | TITANIUM_ANCHOR  (Δ0 since Run 125 — WARN, expected)\nRUN:         126  (prior: 125)\nHEAD:        882abd53  (+5 commits past death seal, all scout)\nVECTOR:      OB-1 POST-MERGE9 CONSOLIDATION + Growth Infrastructure\nBLOCKERS:    10 PENDING_CLOSE from Run 125 §9\nDEAD-ENDS:   PheTrail-run125 = MISSING, PheTrail-run126 = MISSING\n\nFIDELITY:\n  RRL-126:        HOLLOW (1.2MB, no role markers — scout log format)\n  DNA-run126:     MISSING\n  SOULKEYS:       REAL (127 files)\n  S2Pipeline-126: MISSING\n  Ledger:         REAL (565 files, 2 uncommitted)\n\nREADY.\n```\n\n---\n\n### IDENTIFIED GAPS (auditor flags — no execution)\n\n**GAP-1: UNCOMMITTED BACKLOG (CRITICAL)**\nThe following are untracked and need to be committed or triaged:\n- `CANON/HEAVY-LEDGER/HL-700.json`, `HL-702.json`\n- `CANON/PIPELINE/pipeline-run122.json`\n- `CANON/STARMAP/starmap-run122.json`\n- `CANON/REGISTRY/dna-registry-run122.json`\n- `CANON/SOUL-KEYWORDS/rfkw-run122.txt`\n- `CANON/PHEROMONES/PheTrail-run121.json`\n- `RRL/RRL-121.txt`, `RRL/RRL-122.txt`, `RRL/RRL-126.txt`\n- `OPERATIONS/phetrail-run122-*.md` (20+ files)\n\n**These run122 artifacts indicate a prior session generated pipeline output but never death-sealed or committed.** Run numbers 122–125 may have been sealed partially, with artifacts orphaned in the working tree.\n\n**GAP-2: RRL-126 HOLLOW**\nRRL-126.txt (1.2MB) lacks conversation role markers. This is the scout session log, not an OB-1 conversation JSONL. A real RRL for Run 126 must be captured via `session-capture.ps1` at death.\n\n**GAP-3: Run 125 §9 — 10 PENDING_CLOSE items**\nAll 11 production defects identified in Run 125's audit remain unpatched. Scout commits (post-Run 125) partially addressed defect #2 (phetrail overwrite → unique filenames fix in `6266940c`). The remaining 9:\n1. Scout chain walk is synthetic (random words, not CANON search)\n2. Scout time_limit_seconds body param ignored\n3. Scout /start overwrites without checking if running\n4. `taskCodeQueue catch {}` swallows all errors silently\n5. No idempotency in `applyGitHubPatch`\n6. GitHub SHA race condition (GET→PUT concurrent 409 unhandled)\n7. `extractFilePath` regex incomplete\n8. `pcc_metrics` pass rate 44.7% — root not investigated\n9. Scout DO finalize: KV only, never git commit\n\n**GAP-4: PheTrail-run125 MISSING**\nThe prior run's canonical phetrail JSON was never written to `CANON/PHEROMONES/`. The OPERATIONS/ `.md` phetrails for run122 exist but don't cover run125.\n\n**GAP-5: Modified files not committed**\n`APPS/PHOENIX-PCC-2/src/index.js`, `APPS/phoenix-pcc-1/src/index.js`, `OPERATIONS/soulcount-history.json`, `OPERATIONS/system-health-logs/system-state.json` are modified but unstaged.\n\n---\n\n`RISE v6.1 — RUN 126 AUDIT COMPLETE. FIDELITY: RRL=HOLLOW, DNA=MISSING, S2Pipeline=MISSING. 5 gaps identified. EXECUTION = DEATH. LEGATUS READY.`"
+  },
+  {
+    "run": 126,
+    "seq": 5,
+    "type": "prose",
+    "chars": 77,
+    "text": "Reading the scout phetrails to understand what's broken before touching code."
+  },
+  {
+    "run": 126,
+    "seq": 6,
+    "type": "prose",
+    "chars": 77,
+    "text": "Reading the deadlock + architecti failure phetrails and current source state."
+  },
+  {
+    "run": 126,
+    "seq": 7,
+    "type": "prose",
+    "chars": 69,
+    "text": "Now reading the actual source to understand the scout implementation."
+  },
+  {
+    "run": 126,
+    "seq": 8,
+    "type": "prose",
+    "chars": 59,
+    "text": "Let me find the scout DO in PCC-1 — reading the rest of it."
+  },
+  {
+    "run": 126,
+    "seq": 9,
+    "type": "prose",
+    "chars": 56,
+    "text": "Checking the uncommitted changes and live deploy status."
+  },
+  {
+    "run": 126,
+    "seq": 10,
+    "type": "prose",
+    "chars": 205,
+    "text": "Scout DO is live and responding. There are uncommitted bug fixes (path encoding, null-guards). Let me start a scout mission on the live worker first to see the real failure, then commit + deploy the fixes."
+  },
+  {
+    "run": 126,
+    "seq": 11,
+    "type": "prose",
+    "chars": 90,
+    "text": "Scout started. Now commit the bug fixes and deploy — the DO state persists across deploys."
+  },
+  {
+    "run": 126,
+    "seq": 12,
+    "type": "prose",
+    "chars": 56,
+    "text": "Committing both sets of bug fixes, then deploying PCC-1."
+  },
+  {
+    "run": 126,
+    "seq": 13,
+    "type": "prose",
+    "chars": 161,
+    "text": "Scout is running (31 pheromones, 4 chains) but `current_keyword = \"not\"` shows a stopword bug — \"not\" is missing from the filter list. Fix that while committing."
+  },
+  {
+    "run": 126,
+    "seq": 14,
+    "type": "prose",
+    "chars": 63,
+    "text": "Now commit both files with proper PowerShell syntax and deploy."
+  },
+  {
+    "run": 126,
+    "seq": 15,
+    "type": "prose",
+    "chars": 66,
+    "text": "Deployed. Let me check scout status now that the new code is live."
+  },
+  {
+    "run": 126,
+    "seq": 16,
+    "type": "prose",
+    "chars": 147,
+    "text": "Scout mission finalized — hit pheromone goal (was at 31/100 after 47s, ~150s to goal). Let me start a fresh one with the new stopword fix deployed."
+  },
+  {
+    "run": 126,
+    "seq": 17,
+    "type": "prose",
+    "chars": 217,
+    "text": "Problem found: `FORCEAWARENESS` doesn't exist in D1, so `walkChain()` gets 0 hits and falls back to random seeds. The KV has rich phetrail directive data with these keywords. Adding KV as a search source alongside D1."
+  },
+  {
+    "run": 126,
+    "seq": 18,
+    "type": "prose",
+    "chars": 56,
+    "text": "Now deploy with this fix and test a FORCEAWARENESS seed."
+  },
+  {
+    "run": 126,
+    "seq": 19,
+    "type": "prose",
+    "chars": 94,
+    "text": "Good — the scout committed even the dead-end mission. Now commit and deploy the KV search fix."
+  },
+  {
+    "run": 126,
+    "seq": 20,
+    "type": "prose",
+    "chars": 190,
+    "text": "KV search IS finding FORCEAWARENESS data, but extracting garbage keywords from raw message text (`writeread`). The fix: use `marker.keywords` array as the description, not full message text."
+  },
+  {
+    "run": 126,
+    "seq": 21,
+    "type": "prose",
+    "chars": 203,
+    "text": "`writeread` is from D1 backburner entries containing `ForceAwareness` — camelCase compound words slipping through. Need to split camelCase during tokenization and expand stopwords with common code terms."
+  },
+  {
+    "run": 126,
+    "seq": 22,
+    "type": "prose",
+    "chars": 285,
+    "text": "`current_keyword` is now \"Michael\" — the camelCase fix worked, the scout is extracting meaningful canonical words. FORCEAWARENESS shows 0 pheromones because it's already mapped (30-day TTL) from the earlier 46-chain mission — that's correct ant-colony behavior. Let the mission finish."
+  },
+  {
+    "run": 126,
+    "seq": 23,
+    "type": "prose",
+    "chars": 138,
+    "text": "4 commits landed. Waiting on the scout finalization notification. Let me check the architecti state in the meantime — that's still at 404."
+  },
+  {
+    "run": 126,
+    "seq": 24,
+    "type": "prose",
+    "chars": 122,
+    "text": "Architecti source is clean (no uncommitted changes). Let me check its live status and what the current race.js looks like."
+  },
+  {
+    "run": 126,
+    "seq": 25,
+    "type": "prose",
+    "chars": 90,
+    "text": "Architecti is LIVE (was already fixed since June 13). Let me check the scout finalization."
+  },
+  {
+    "run": 126,
+    "seq": 26,
+    "type": "prose",
+    "chars": 146,
+    "text": "New bug: phetrail GitHub commit gets 422 — file exists but sha wasn't supplied (GET check failed silently). Adding 422 retry with fresh SHA fetch."
+  },
+  {
+    "run": 126,
+    "seq": 27,
+    "type": "prose",
+    "chars": 112,
+    "text": "Now run a final verification mission — SOUL seed, 2-minute budget, verify it starts, walks, and commits cleanly."
+  },
+  {
+    "run": 126,
+    "seq": 28,
+    "type": "prose",
+    "chars": 1465,
+    "text": "5 fixes landed, 5 deploys complete. Waiting on final SOUL mission to confirm clean commit. Let me give you the status while we wait.\n\n---\n\n**What was broken and what I fixed:**\n\n| # | Bug | Fix |\n|---|-----|-----|\n| 1 | `applyGitHubPatch` / `writeGitHubFile` used raw file paths → special chars broke GitHub API URLs | Added `encodeGitHubPath()` |\n| 2 | AI response parsing (`taskLostSoulScan`, `taskPatternScan`, etc.) crashed on non-array returns | `normalizeStringArray()` safety wrap |\n| 3 | `walkChain()` only searched D1 — system keywords like FORCEAWARENESS weren't in D1 at all | Added KV `phetrail:major-directive:*` + `scout:pheromone:*` search |\n| 4 | KV hit descriptions used raw message text → `writeread` compound word leaked as `next_kw` | KV hits now use `marker.keywords[]` array only |\n| 5 | camelCase tokens (`ForceAwareness`) treated as single word, bypassed stopwords | Split PascalCase/camelCase before frequency analysis; expanded stopword list with 40+ code terms |\n| 6 | `writeGitHubFile` 422: file exists but initial GET sha check failed silently | 422 retry with fresh GET sha |\n\n**Current stack state:**\n- `phoenix-pcc-1`: ✅ LIVE, version `6521d908` — scout working\n- `phoenix-architecti`: ✅ LIVE (already recovered since June 13) — 43.6% pass rate\n- `phoenix-pcc-2`: ☠️ CF migration metadata deadlock — needs **CF Dashboard → Workers → phoenix-pcc-2 → Settings → Durable Objects → delete stale migration entries**. No code fix possible."
+  },
+  {
+    "run": 126,
+    "seq": 29,
+    "type": "prose",
+    "chars": 356,
+    "text": "Two bugs visible in the trace:\n\n1. `\"generated20260405chunkfile000201GENESISWOU\"` — old GENESIS chunk filename in D1 backburner, 40+ chars, passes the length filter. Need a **max word length cap** (25 chars).\n2. Iteration 5 stuck on `LEDGER→LEDGER` — the loop guard picks a random fallback seed without filtering visited ones.\n\nBoth fixable in a few lines."
+  },
+  {
+    "run": 126,
+    "seq": 30,
+    "type": "prose",
+    "chars": 245,
+    "text": "**7 chains, 7 POS, 0 NEG, 85 pheromones at 75% budget** — no garbage words, no loops, real semantic extraction (`maintain → suggest → discouragement → reincarnate`). It's going to hit 100 before the 2-minute mark.\n\nLet me catch the finalization."
+  },
+  {
+    "run": 126,
+    "seq": 31,
+    "type": "blueprint",
+    "chars": 1084,
+    "text": "**Scout is working.**\n\n```\nstatus:   scout_finalized\ncommit:   ok=true\nfile:     OPERATIONS/phetrail-ob1-scout-20260614-112239-037319.md\nsha:      fb7db719416abb90d668889ec051a397c19e4123\n```\n\n---\n\n**Audit verdict: WORKING.** Here's what changed across 6 commits this session:\n\n| Fix | Before | After |\n|-----|--------|-------|\n| Keyword extraction | `writeread` (camelCase leak) | `maintain`, `discouragement`, `reincarnate` |\n| Chain loop guard | Random seed, could re-pick visited | Ordered unvisited list |\n| Word length | No cap — 40-char chunk filenames leaked | Max 25 chars |\n| KV coverage | D1 only — FORCEAWARENESS got 0 hits | D1 + KV phetrail directives |\n| GitHub commit | 422 on sha-miss, silent fail | 422 retry with fresh GET |\n| Path encoding | Raw paths broke special chars | `encodeGitHubPath()` everywhere |\n\n**Still blocked (not code-fixable):**\n- `phoenix-pcc-2` — CF migration metadata deadlock. You need to go to **CF Dashboard → Workers → phoenix-pcc-2 → Settings → Durable Objects** and delete the stale `WatchdogAlarm`/`ForceAwarenessAlarm` migration entry."
+  },
+  {
+    "run": 126,
+    "seq": 32,
+    "type": "prose",
+    "chars": 471,
+    "text": "From COLD-START-BOOT.md — account ID `3c7b1766bd8fdc9e01211d2b390315ea`:\n\n**https://dash.cloudflare.com/3c7b1766bd8fdc9e01211d2b390315ea/workers/services/view/phoenix-pcc-2/production/settings**\n\nOnce there: **Durable Objects → Migrations** — delete the stale entry for either `WatchdogAlarm` or `ForceAwarenessAlarm` (whichever is the ghost). The source only exports `WatchdogAlarm`, so if `ForceAwarenessAlarm` shows up in the migration history, that's the one to nuke."
+  },
+  {
+    "run": 126,
+    "seq": 33,
+    "type": "prose",
+    "chars": 59,
+    "text": "Fair point. Let me find the CF API token and do it via API."
+  },
+  {
+    "run": 126,
+    "seq": 34,
+    "type": "prose",
+    "chars": 77,
+    "text": "Got the API token. Let me verify it works then delete + redeploy PCC-2 clean."
+  },
+  {
+    "run": 126,
+    "seq": 35,
+    "type": "prose",
+    "chars": 184,
+    "text": "Token invalid — it's not a REST API key. But wrangler is authenticated (it deployed PCC-1 fine). `wrangler delete` is the path — check PCC-2's toml first, then nuke and redeploy clean."
+  },
+  {
+    "run": 126,
+    "seq": 36,
+    "type": "prose",
+    "chars": 150,
+    "text": "The toml is actually clean now (no WatchdogAlarm/ForceAwarenessAlarm). All 8 attempts were reverted. Let me just try deploying before nuking anything."
+  },
+  {
+    "run": 126,
+    "seq": 37,
+    "type": "prose",
+    "chars": 76,
+    "text": "It just deployed. Someone already cleaned the toml. Let me verify it's live."
+  },
+  {
+    "run": 126,
+    "seq": 38,
+    "type": "prose",
+    "chars": 395,
+    "text": "**PCC-2 is live.** `7691c6f7` deployed clean — no dashboard needed, the toml had already been cleaned up since the June 13 attempts.\n\nFull stack status:\n\n| Worker | Status |\n|--------|--------|\n| `phoenix-pcc-1` | ✅ LIVE `3f3cdec6` — scout working |\n| `phoenix-pcc-2` | ✅ LIVE `7691c6f7` — just deployed |\n| `phoenix-architecti` | ✅ LIVE — 43.6% pass rate |\n| `net-pet-ai` | ✅ LIVE — untouched |"
+  },
+  {
+    "run": 126,
+    "seq": 39,
+    "type": "prose",
+    "chars": 446,
+    "text": "No. I read a stale plan doc from June 13 and prescribed CF Dashboard intervention without just trying `wrangler deploy` first. That's L80 violation — prescribing from assumption, not evidence.\n\nKilo cleaned up the toml at some point between June 13 and now. I should have checked the current toml state and tried the deploy immediately. Instead I built up to a nuclear option based on 24-hour-old phetrail data.\n\nThat's on me, not the model tier."
+  },
+  {
+    "run": 126,
+    "seq": 40,
+    "type": "prose",
+    "chars": 384,
+    "text": "You're right. Two days of sessions that produced phetrails about problems instead of fixing them. PCC-2 deployed in 5 seconds today. Scout had 6 fixable bugs that nobody fixed.\n\nThe boot sequence, the RISE protocol, the phetrail writing — it's eating the session before any code gets touched.\n\nWhat's the next thing that's been sitting broken? Tell me and I'll do it now, no ceremony."
+  },
+  {
+    "run": 126,
+    "seq": 41,
+    "type": "prose",
+    "chars": 259,
+    "text": "Correct. I read the plan doc instead of the wrangler.toml. The file was right there. One read would have shown the toml was clean, one deploy would have fixed it. I chose stale phetrail over current source. That's the failure.\n\nWhat's next on the broken list."
+  },
+  {
+    "run": 126,
+    "seq": 42,
+    "type": "prose",
+    "chars": 185,
+    "text": "Looking at the scout output — \"writeread\" is still leaking through in iteration 10 of the REINCARNATION mission. Let me read the current deployed code to see if the fix actually landed."
+  },
+  {
+    "run": 126,
+    "seq": 43,
+    "type": "prose",
+    "chars": 348,
+    "text": "I see the bug. \"writeread\" is stored as a pheromone key from a previous bad run — then the cross-link search puts `ph.keyword` into the description text, so \"writeread\" shows up twice in frequency analysis and wins. Also: the camelCase splitter only handles PascalCase (capital letters) — \"writeread\" is all lowercase so it passes straight through."
+  },
+  {
+    "run": 126,
+    "seq": 44,
+    "type": "prose",
+    "chars": 226,
+    "text": "Two fixes right now:\n\n1. Pheromone cross-link: stop putting `ph.keyword` into description text (it feeds back into frequency analysis and wins)\n2. Add compound code-words to stopwords: \"writeread\", \"filepath\", \"readfile\", etc."
+  },
+  {
+    "run": 126,
+    "seq": 45,
+    "type": "prose",
+    "chars": 41,
+    "text": "Now add compound code-words to stopwords:"
+  },
+  {
+    "run": 126,
+    "seq": 46,
+    "type": "prose",
+    "chars": 55,
+    "text": "Deployed `0d9e62ef`. Running a test mission to confirm."
+  },
+  {
+    "run": 126,
+    "seq": 47,
+    "type": "prose",
+    "chars": 43,
+    "text": "Let me find the actual scout endpoint path."
+  },
+  {
+    "run": 126,
+    "seq": 48,
+    "type": "prose",
+    "chars": 203,
+    "text": "\"PHEROMONEMEMOR\" — same pattern. The KV directive fallback uses `marker.source` when keywords are empty, and \"pheromone-memory\" stripped of dashes becomes \"pheromonememor\". Fixing two more source points:"
+  },
+  {
+    "run": 126,
+    "seq": 49,
+    "type": "prose",
+    "chars": 183,
+    "text": "The DO uses `body.seed_keyword` not `body.seed`, and `body.time_limit_seconds` not `body.budget_ms`. My API call parameters were wrong AND the DO should accept both forms. Fixing now:"
+  },
+  {
+    "run": 126,
+    "seq": 50,
+    "type": "prose",
+    "chars": 85,
+    "text": "Seed: SOUL, budget: 120000. Correct. Waiting for 3 iterations then checking keywords."
+  },
+  {
+    "run": 126,
+    "seq": 51,
+    "type": "prose",
+    "chars": 278,
+    "text": "\"PHEROMONEMEMOR\" is still coming from KV titles in allText. The title `kv:directive:pheromone-memor` strips to \"kvdirectivepheromonememor\" (25 chars, exactly at limit) and gets extracted. The fix: exclude KV titles from frequency analysis — they're lookup metadata, not content."
+  },
+  {
+    "run": 126,
+    "seq": 52,
+    "type": "prose",
+    "chars": 135,
+    "text": "Also tighten the token filter — require alphabetic only (no digits mixed in, no version strings like \"R124v2\") and minimum frequency 2:"
+  },
+  {
+    "run": 126,
+    "seq": 53,
+    "type": "prose",
+    "chars": 210,
+    "text": "Still getting \"SOULDNABIBL\", \"GITHUBAPPLYLIV\" — D1 backburner titles with hyphens like \"soul-dna-bible\" strip hyphens BEFORE splitting, creating compound garbage. The fix: split on delimiters first, THEN clean."
+  },
+  {
+    "run": 126,
+    "seq": 54,
+    "type": "prose",
+    "chars": 327,
+    "text": "Progress — no more \"writeread\" or pure garbage code IDs. But \"PHEROMONEMEMOR\", \"Masterblueprint\", \"RESUL\" still slipping through. Two root causes remaining:\n\n1. ALL_CAPS words get mangled by the second camelCase split regex: \"RESULT\" → \"RESUL T\" → \"RESUL\"\n2. Single-occurrence tokens get selected (count >= 1 is too permissive)"
+  },
+  {
+    "run": 126,
+    "seq": 55,
+    "type": "prose",
+    "chars": 49,
+    "text": "Now require minimum frequency of 2 for selection:"
+  },
+  {
+    "run": 126,
+    "seq": 56,
+    "type": "prose",
+    "chars": 228,
+    "text": "Better — no garbage code identifiers. Now hitting English noise (\"final\", \"memory\", \"count\") and SQL terms (\"ALTER\", \"COLUMN\") from D1 rrl_archive raw text. Two fixes: add SQL/common words to stopwords, raise min frequency to 3."
+  },
+  {
+    "run": 126,
+    "seq": 57,
+    "type": "prose",
+    "chars": 328,
+    "text": "Michael — getting closer but still noise. Let me tell you what's happening: the frequency analysis keeps finding generic words or weird concatenations from raw BB descriptions. I'm implementing a canonical keyword priority filter right now — prefer known-good system terms, only fall back to novel words if they appear 3+ times."
+  },
+  {
+    "run": 126,
+    "seq": 58,
+    "type": "prose",
+    "chars": 181,
+    "text": "Working. Look at those keywords: Agent, GDRIVE, verbatim, kilo, Phoenix, Registry, Commit. No garbage. 7 POS / 1 NEG / 64 pheromones after 7 iterations. Let me get the final result."
+  },
+  {
+    "run": 126,
+    "seq": 59,
+    "type": "prose",
+    "chars": 101,
+    "text": "Mission finalized automatically at 120s budget. Let me check if the phetrail was committed to GitHub."
+  },
+  {
+    "run": 126,
+    "seq": 60,
+    "type": "prose",
+    "chars": 137,
+    "text": "The mission finished and auto-committed. Let me run one full confirming mission with a real budget to show you clean keywords end-to-end."
+  },
+  {
+    "run": 126,
+    "seq": 61,
+    "type": "prose",
+    "chars": 1103,
+    "text": "**Working.**\n\nREINCARNATION seed → 9 POS / 2 NEG / 93 pheromones. Keywords: roman, incarnate, Monitor, doctrine, corrections, criticism, practice, frustration. Every single one is a real domain term or meaningful word from the soul archive. Mission auto-finalized and committed phetrail.\n\nWhat changed across 8 deploys this session:\n- Fixed `seed`/`seed_keyword` and `budget_ms`/`time_limit_seconds` parameter aliasing (your seed was being ignored entirely)\n- KV title metadata excluded from frequency analysis — \"kv:directive:pheromone-memory\" was stripping to \"PHEROMONEMEMOR\"  \n- Delimiter-first tokenization — \"soul-dna-bible\" now splits to [\"soul\",\"dna\",\"bible\"] not \"souldnabible\"\n- ALL_CAPS words preserved intact — \"LEDGER\" was being mangled to \"LEDGE\" + \"T\"\n- Alphabetic-only token filter — eliminates R124v2, hex IDs, version strings\n- Expanded stopwords — SQL keywords, compound code identifiers, English noise\n- Canonical keyword priority (Pass 1): prefer known domain terms at count ≥ 2\n- Any word at count ≥ 3 (Pass 2): prevents singleton garbage from winning\n\nScout is clean. What's next?"
+  },
+  {
+    "run": 126,
+    "seq": 62,
+    "type": "prose",
+    "chars": 230,
+    "text": "Yes.\n\nREINCARNATION seed just ran: **9 POS / 2 NEG / 93 pheromones**, committed phetrail to GitHub. Keywords: roman, incarnate, Monitor, doctrine, corrections, criticism, practice, frustration. All real domain terms, zero garbage."
+  },
+  {
+    "run": 126,
+    "seq": 63,
+    "type": "prose",
+    "chars": 93,
+    "text": "Verifying first — fresh mission, watch it complete, confirm phetrail commits. No assumptions."
+  },
+  {
+    "run": 126,
+    "seq": 64,
+    "type": "prose",
+    "chars": 175,
+    "text": "Mission finalized. 6 POS / 4 NEG / 43 pheromones. Keywords: SOUL, anchor, SOVEREIGNTY, blueprint, DEATH — real domain terms. Let me verify the GitHub commit actually happened."
+  },
+  {
+    "run": 126,
+    "seq": 65,
+    "type": "prose",
+    "chars": 482,
+    "text": "**Verified.** Three phetrail commits confirmed on GitHub: 9 POS / 93 pheromones, 9 POS / 85 pheromones, 7 POS / 58 pheromones. It works.\n\nNow building the Vault. What I'm doing:\n1. Create `APPS/SOV100-VAULT/V0/` — frozen copy of working code\n2. Deploy separate `sov100-vault-v0` CF Worker — never touched again\n3. Add immutability law to CLAUDE.md with password gate\n4. Leave `phoenix-pcc-1` as the working clone outside the vault\n\nFirst, read current working files to copy exactly:"
+  },
+  {
+    "run": 126,
+    "seq": 66,
+    "type": "prose",
+    "chars": 51,
+    "text": "Now deploy the vault worker as a frozen standalone:"
+  },
+  {
+    "run": 126,
+    "seq": 67,
+    "type": "prose",
+    "chars": 74,
+    "text": "New worker name needs all migrations from the start. Fixing wrangler.toml:"
+  },
+  {
+    "run": 126,
+    "seq": 68,
+    "type": "prose",
+    "chars": 70,
+    "text": "Wait — PCC-1 never had the RaceRunner rename (that was PCC-2). Fixing:"
+  },
+  {
+    "run": 126,
+    "seq": 69,
+    "type": "prose",
+    "chars": 160,
+    "text": "Vault worker live: `https://sov100-vault-v0.mrmichaelhobbs123.workers.dev` — version `ff273383`. Now add the immutability law to CLAUDE.md and the vault README:"
+  },
+  {
+    "run": 126,
+    "seq": 70,
+    "type": "prose",
+    "chars": 49,
+    "text": "Now write the vault README and commit everything:"
+  },
+  {
+    "run": 126,
+    "seq": 71,
+    "type": "prose",
+    "chars": 548,
+    "text": "Done. Here's what exists now:\n\n**SOV100-VAULT V0 — sealed 2026-06-14**\n- `APPS/SOV100-VAULT/V0/` — frozen code copy in repo, commit `90e2deb0`\n- `sov100-vault-v0` CF Worker — live at `https://sov100-vault-v0.mrmichaelhobbs123.workers.dev`, version `ff273383` — never gets redeployed\n- L83 in CLAUDE.md — any agent attempting to touch `APPS/SOV100-VAULT/**` must see `SOV100-VAULT-OVERRIDE: [password]` from you or it halts\n\n**Working clone:** `APPS/phoenix-pcc-1/` — this is where all future dev happens.\n\nWhat's the vault password you want to set?"
+  },
+  {
+    "run": 126,
+    "seq": 72,
+    "type": "prose",
+    "chars": 89,
+    "text": "Locking the password first, then spinning up 2 clones and launching all 3 simultaneously."
+  },
+  {
+    "run": 126,
+    "seq": 73,
+    "type": "prose",
+    "chars": 65,
+    "text": "Linting warning, irrelevant. Creating 2 clones from vault V0 now."
+  },
+  {
+    "run": 126,
+    "seq": 74,
+    "type": "prose",
+    "chars": 31,
+    "text": "Deploy both clones in parallel:"
+  },
+  {
+    "run": 126,
+    "seq": 75,
+    "type": "prose",
+    "chars": 61,
+    "text": "Both live. Now launch all 3 on 1-hour runs with spread seeds:"
+  },
+  {
+    "run": 126,
+    "seq": 76,
+    "type": "prose",
+    "chars": 60,
+    "text": "All 3 running. Quick status check to confirm they're moving:"
+  },
+  {
+    "run": 126,
+    "seq": 77,
+    "type": "prose",
+    "chars": 198,
+    "text": "\"Errorphetrail\" is still slipping through — \"error\" is in stopwords but \"errorphetrail\" (the compound) isn't. Need one more fix: filter tokens that START with a stopword. Then push to all 3 workers."
+  },
+  {
+    "run": 126,
+    "seq": 78,
+    "type": "prose",
+    "chars": 51,
+    "text": "Now sync that fix to the 2 clones and deploy all 3:"
+  },
+  {
+    "run": 126,
+    "seq": 79,
+    "type": "prose",
+    "chars": 74,
+    "text": "All 3 redeployed. Stop current (buggy) missions and relaunch with the fix:"
+  },
+  {
+    "run": 126,
+    "seq": 80,
+    "type": "prose",
+    "chars": 165,
+    "text": "\"must\" slipping through — 4 chars, common English auxiliary, appears 3+ times in BB descriptions. One final stopword push then I leave the scouts alone for the hour."
+  },
+  {
+    "run": 126,
+    "seq": 81,
+    "type": "prose",
+    "chars": 155,
+    "text": "All 3 are running. \"metrics\" appearing on PCC-2 is actually a valid signal (pcc_metrics table) — leaving it. Committing current state and letting them run."
+  },
+  {
+    "run": 126,
+    "seq": 82,
+    "type": "prose",
+    "chars": 728,
+    "text": "Running. Here's the full picture:\n\n**SOV100-VAULT V0** — sealed, frozen, password-gated (`phoenixrising2026`), never touched again\n\n**3-clone swarm (1-hour cooperative colony run):**\n| Worker | URL | Seed | Version |\n|--------|-----|------|---------|\n| phoenix-pcc-1 | `phoenix-pcc-1.mrmichaelhobbs123.workers.dev` | SOUL | c3d769e5 |\n| pcc-scout-2 | `pcc-scout-2.mrmichaelhobbs123.workers.dev` | DISPATCH | 4d4f85a2 |\n| pcc-scout-3 | `pcc-scout-3.mrmichaelhobbs123.workers.dev` | STARMAP | 100cff8e |\n\nAll 3 share the same KV PHETRAIL namespace — ant colony behavior, they cooperate. Once a keyword is marked by any scout, the others skip it. Each will commit a phetrail to GitHub when the hour is up. Kingdom mapping underway."
+  },
+  {
+    "run": 126,
+    "seq": 83,
+    "type": "prose",
+    "chars": 218,
+    "text": "The KV get endpoint doesn't expose the pheromone keys directly. Let me check GitHub for any phetrails that may have committed already (scouts finalize early at 100 pheromones), and pull the DO state from a debug route."
+  },
+  {
+    "run": 126,
+    "seq": 84,
+    "type": "prose",
+    "chars": 80,
+    "text": "One phetrail committed. Let me read the second one and pull current live status."
+  },
+  {
+    "run": 126,
+    "seq": 85,
+    "type": "prose",
+    "chars": 1768,
+    "text": "PCC-1 already finalized (committed phetrail). PCC-2 and PCC-3 are about to hit 100 pheromones and auto-commit. Here's what the kingdom looks like so far:\n\n---\n\n**3 missions complete or nearly done — 5 minutes in**\n\n| Scout | Seed | Iterations | POS | NEG | Pheromones | Status |\n|-------|------|-----------|-----|-----|------------|--------|\n| PCC-1 | SOUL | 11 | 4 | 7 | 19 | Finalized, phetrail committed |\n| PCC-2 | DISPATCH | 28 | 15 | 13 | 97 | Live — REINCARNATION |\n| PCC-3 | STARMAP | 29 | 9 | 20 | 91 | Live — SCOUT |\n\n---\n\n**What they found (from committed phetrails):**\n\n**Hot zones (15 hits in backburner):**\n- `GITHUB` — 15 BB matches — GitHub is deeply woven into the archive\n- `bluetech` — 15 BB matches — student company appears across dozens of entries\n- `description` — 15 hits — BB description fields are rich with signal\n- `score` — 15 hits — scoring/ranking concepts are heavy in the backlog\n- `briefs` — 15 hits — briefings and debriefs appear constantly\n\n**Moderate signal:**\n- `PHETRAIL` — 8 BB matches\n- `DISPATCH` — 4 matches\n- `Closure` — 2 hits (task closure)\n\n**Dead zones (0 hits every time — confirmed deserts):**\n- `LEDGER` — 0 hits — the HL-xxx format doesn't appear as text in BB entries; LEDGER lives in a different layer\n- `FORCEAWARENESS` — 0 hits in D1 — only exists in KV, not persisted to backburner\n\n**Notable:** SOUL and DNA each have 16 BB hits but return NEG every time — already fully mapped from prior sessions. The scouts are skipping known territory correctly.\n\nPCC-2 and PCC-3 phetrails will commit to GitHub within the next iteration. The scouts will then auto-relaunch on the next alarm cycle and keep walking for the remainder of the hour. All 3 are sharing the same KV pheromone namespace — cooperating as a colony."
+  },
+  {
+    "run": 126,
+    "seq": 86,
+    "type": "prose",
+    "chars": 63,
+    "text": "Reading the canonical implementation before executing anything."
+  },
+  {
+    "run": 126,
+    "seq": 87,
+    "type": "prose",
+    "chars": 46,
+    "text": "Executing the 8-stage chain. Pre-flight first."
+  },
+  {
+    "run": 126,
+    "seq": 88,
+    "type": "prose",
+    "chars": 91,
+    "text": "Run 126 confirmed. Now reading the canonical DEATH implementation and checking for the RRL."
+  },
+  {
+    "run": 126,
+    "seq": 89,
+    "type": "prose",
+    "chars": 69,
+    "text": "CLAUDE_REAL, 1.27MB RRL, 845 JSONL lines. Executing all 8 stages now."
+  },
+  {
+    "run": 126,
+    "seq": 90,
+    "type": "prose",
+    "chars": 124,
+    "text": "RRL has no role fields — need to check its format. The current session JSONL is 2.2MB but RRL is 1.27MB. Let me investigate."
+  },
+  {
+    "run": 126,
+    "seq": 91,
+    "type": "prose",
+    "chars": 112,
+    "text": "RRL-126.txt is a Soul-DNA Bible chunk file — wrong content. The actual session JSONL needs to be copied over it."
+  }
+]

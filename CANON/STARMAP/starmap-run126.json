@@ -1,0 +1,11 @@
+{
+  "run": 126,
+  "rrl_path": "D:\\OB-1-CANONICAL\\RRL\\RRL-126.txt",
+  "ledger_id": "HL-706",
+  "soul_turn_ids": "prose-turns",
+  "dna_turn_ids": "seq-4,seq-31",
+  "blueprint_locations": "dna-run126.json:seq-4; dna-run126.json:seq-31",
+  "char_count": 2241826,
+  "merkle_hash": "37F16FDA6079553AB65766F5C4E39E7E90466818E4CE50C1597183652345C215",
+  "created_at": "2026-06-14T20:08:15.4943025+07:00"
+}

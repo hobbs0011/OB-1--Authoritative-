@@ -1,0 +1,99 @@
+{
+  "run": 126,
+  "ledger_id": "HL-706",
+  "merkle_short": "37F16FDA6079553A",
+  "starmap_file": "starmap-run126.json",
+  "keywords_file": "rfkw-run126.txt",
+  "keywords_used": [
+    "scout",
+    "phetrail",
+    "current",
+    "stage",
+    "mission",
+    "commit",
+    "never",
+    "deploy",
+    "check",
+    "frequency",
+    "committed",
+    "github",
+    "commits",
+    "audit",
+    "death",
+    "prior",
+    "vault",
+    "worker",
+    "canonical",
+    "reading",
+    "source",
+    "version",
+    "session",
+    "missing",
+    "fucking",
+    "that's",
+    "already",
+    "status",
+    "phetrails",
+    "what's",
+    "shows",
+    "deployed",
+    "pcc-2",
+    "compound",
+    "camelcase",
+    "words",
+    "fresh",
+    "files",
+    "239,561,537",
+    "pheromone",
+    "working",
+    "migration",
+    "state",
+    "pheromones",
+    "search",
+    "filter",
+    "delete",
+    "pcc-1",
+    "actually",
+    "forceawareness"
+  ],
+  "pieces_synced": 5,
+  "pieces": [
+    {
+      "id": "ART-1780547755159-EQ34",
+      "title": "Train 6-7: Mission — 99 Days to Sanctuary",
+      "keywords": [
+        "mission"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780547160670-TBAE",
+      "title": "WAKE UP THE TIGER",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780547001008-30ZF",
+      "title": "The Obsolete Model",
+      "keywords": [
+        "worker"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780546342705-3MMY",
+      "title": "Wake Up the Tiger",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780528201181-MJXQ",
+      "title": "Train 6-7 — Mission: 99 Days to Sanctuary",
+      "keywords": [
+        "mission"
+      ],
+      "title_hit": false
+    }
+  ],
+  "executed_at": "2026-06-14T20:09:19.8653707+07:00"
+}
