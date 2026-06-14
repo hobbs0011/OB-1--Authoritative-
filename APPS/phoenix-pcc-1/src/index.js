@@ -894,8 +894,14 @@ class ScoutRunner {
     }).join(' ');
     const freq = {};
     const stopWords = new Set(['with', 'from', 'have', 'that', 'this', 'will', 'they', 'were', 'been', 'also', 'more', 'into', 'over', 'some', 'just', 'than', 'very', 'when', 'what', 'which', 'where', 'then', 'here', 'only', 'like', 'make', 'take', 'would', 'could', 'should', 'then', 'each', 'such', 'these', 'those', 'them', 'from', 'into', 'onto', 'upon', 'not', 'but', 'all', 'are', 'was', 'has', 'had', 'its', 'for', 'the', 'and', 'can', 'may', 'use', 'via', 'new', 'set', 'get', 'run', 'add', 'our', 'any', 'per', 'log', 'now', 'done', 'null', 'true', 'false', 'none', 'data', 'time', 'type', 'name', 'next', 'last', 'list', 'item', 'line', 'write', 'read', 'file', 'code', 'func', 'call', 'path', 'test', 'open', 'load', 'save', 'send', 'recv', 'init', 'util', 'base', 'core', 'main', 'back', 'put', 'ret', 'err', 'obj', 'arr', 'str', 'num', 'val', 'key', 'env', 'res', 'req', 'ctx', 'api', 'url', 'src', 'dst', 'tmp', 'tag', 'row', 'col', 'idx', 'len', 'buf', 'raw', 'out', 'msg', 'job', 'task', 'step', 'note', 'info', 'warn', 'fail', 'pass', 'skip', 'stop', 'start', 'end', 'begin', 'close', 'found', 'missing', 'ok',
-      // compound code identifiers that survive camelCase split (all lowercase, no capitals)
-      'writeread', 'readfile', 'writefile', 'filepath', 'filename', 'pathname', 'dirname', 'readdir', 'writedir', 'loadfile', 'savefile', 'openfile', 'closefile', 'readline', 'writeline', 'codepath', 'callback', 'handler', 'listener', 'emitter', 'provider', 'resolver', 'iterator', 'renderer', 'selector', 'dispatch', 'payload', 'response', 'request', 'headers', 'params', 'config', 'context', 'schema', 'result', 'output', 'input', 'return', 'export', 'import', 'async', 'await', 'const', 'class', 'throw', 'catch', 'fetch', 'apply', 'proto', 'super', 'yield', 'break', 'continue', 'switch', 'while', 'match']);
+      // compound code identifiers
+      'writeread', 'readfile', 'writefile', 'filepath', 'filename', 'pathname', 'dirname', 'readdir', 'writedir', 'loadfile', 'savefile', 'openfile', 'closefile', 'readline', 'writeline', 'codepath', 'callback', 'handler', 'listener', 'emitter', 'provider', 'resolver', 'iterator', 'renderer', 'selector', 'payload', 'response', 'request', 'headers', 'params', 'config', 'context', 'schema', 'result', 'output', 'input', 'return', 'export', 'import', 'async', 'await', 'const', 'class', 'throw', 'catch', 'fetch', 'apply', 'proto', 'super', 'yield', 'break', 'continue', 'switch', 'while', 'match',
+      // SQL keywords
+      'alter', 'column', 'table', 'select', 'insert', 'update', 'delete', 'where', 'join', 'index', 'grant', 'limit', 'order', 'group', 'having', 'create', 'drop', 'integer', 'varchar', 'text', 'blob', 'pragma', 'values',
+      // common English noise in BB descriptions
+      'final', 'memory', 'count', 'error', 'value', 'place', 'point', 'level', 'state', 'track', 'check', 'build', 'issue', 'thing', 'part', 'form', 'plan', 'mark', 'look', 'show', 'know', 'move', 'push', 'pull', 'keep', 'need', 'help', 'good', 'best', 'first', 'high', 'many', 'much', 'long', 'short', 'case', 'kind', 'same', 'real', 'full', 'even', 'most', 'both', 'function', 'method', 'object', 'number', 'boolean', 'execute', 'process', 'system', 'current', 'target', 'version', 'option', 'section', 'field', 'block', 'stack', 'queue', 'cache', 'store', 'token', 'scope', 'event', 'model', 'route', 'query', 'param', 'class', 'error', 'limit', 'offset', 'total', 'count', 'index', 'entry', 'items', 'pages', 'patch', 'diff', 'mode', 'flag', 'hook', 'rule', 'gate', 'port', 'host', 'user', 'role', 'auth', 'hash', 'salt', 'cert', 'proxy', 'stream', 'chunk', 'batch', 'cycle', 'phase', 'stage', 'layer', 'scope', 'trace', 'audit', 'check', 'valid', 'guard', 'lock', 'claim', 'grant', 'token', 'limit', 'retry', 'flush', 'drain', 'reset', 'clear', 'clean', 'purge', 'wipe', 'trim', 'wrap', 'bind', 'link', 'join', 'sync', 'wait', 'poll', 'emit', 'fire', 'drop', 'kill', 'exit', 'quit', 'boot', 'seed', 'init', 'wire', 'pipe', 'fork', 'exec', 'eval', 'pack', 'unpack', 'decode', 'encode', 'parse', 'format', 'print', 'debug', 'trace', 'error', 'known', 'check', 'need', 'show', 'look', 'keep', 'make', 'also', 'when', 'then', 'than', 'with', 'from', 'into', 'over', 'some', 'just', 'very', 'have', 'does', 'been', 'were', 'will', 'would', 'could', 'should', 'their', 'there', 'here', 'that', 'this', 'what', 'which', 'where', 'while', 'about', 'after', 'before', 'because', 'between', 'through', 'without', 'around', 'against', 'during',
+      // English modals, auxiliaries, gerunds, discourse words
+      'must', 'says', 'said', 'gets', 'puts', 'lets', 'seem', 'give', 'want', 'also', 'ways', 'idea', 'goal', 'work', 'todo', 'impl', 'feat', 'prod', 'discusses', 'working', 'handling', 'getting', 'running', 'testing', 'setting', 'making', 'taking', 'finding', 'trying', 'using', 'having', 'going', 'doing', 'showing', 'calling', 'adding', 'building', 'creating', 'updating', 'fixing', 'loading', 'saving', 'sending', 'checking', 'logging', 'mapping', 'tracking', 'needs', 'makes', 'takes', 'gives', 'shows', 'calls', 'adds', 'builds', 'creates', 'updates', 'fixes', 'loads', 'sends', 'checks', 'based', 'used', 'called', 'added', 'built', 'fixed', 'sent', 'made', 'taken', 'given', 'shown', 'known', 'should', 'could', 'would', 'might', 'shall', 'them', 'they', 'then', 'that', 'this', 'with', 'from', 'into', 'onto', 'upon', 'when', 'where', 'what', 'which', 'while', 'about', 'after', 'before', 'because', 'between', 'through', 'without', 'around', 'against', 'during', 'within', 'across', 'beyond', 'below', 'above', 'under', 'over', 'behind', 'beside', 'inside', 'outside', 'along', 'among', 'since', 'until', 'unless', 'whether', 'although', 'however', 'therefore', 'otherwise', 'instead', 'except', 'including', 'according']);
     // Tokenize: split on delimiters FIRST (hyphens, underscores, colons, slashes) so "soul-dna-bible"
     // becomes ["soul","dna","bible"] instead of "souldnabible". Then split PascalCase/camelCase.
     // ALL_CAPS words (LEDGER, SOUL) kept intact — second regex mangles them (RESULT→RESUL+T).
@@ -916,23 +922,47 @@ class ScoutRunner {
         tokens.push(...parts.map(p => p.replace(/[^a-zA-Z#]/g, '')));
       }
     }
+    const stopWordArr = Array.from(stopWords);
     for (const w of tokens) {
       // alphabetic only, 4-20 chars — filters run refs, hex IDs, version strings, digits
       if (!/^[a-zA-Z#]{4,20}$/.test(w)) continue;
-      if (w.toLowerCase() === kw.toLowerCase() || stopWords.has(w.toLowerCase())) continue;
+      const wl = w.toLowerCase();
+      if (wl === kw.toLowerCase() || stopWords.has(wl)) continue;
+      // filter compound tokens that START with a stopword (Errorphetrail, Errordispatch, etc.)
+      if (stopWordArr.some(sw => sw.length >= 4 && wl.startsWith(sw))) continue;
       freq[w] = (freq[w] || 0) + 1;
     }
     const sorted = Object.entries(freq).sort((a, b) => b[1] - a[1]);
 
+    // Canonical keyword set — words we trust as domain signals
+    const CANONICAL = new Set(['SOUL','DNA','LEDGER','DISPATCH','OBI','OB1','PHETRAIL','SCOUT','REINCARNATION',
+      'STARMAP','SOULKEYS','PHOENIX','SYSTEM','FORCEAWARENESS','AGENT','DEATH','RISE','KILO','ROMAN',
+      'TITANIUM','ANCHOR','ENCRYPT','STUDENT','PORTAL','VOICE','MISSION','BLUEPRINT','DOCTRINE','PHEROMONE',
+      'TRAIL','CHAIN','COLONY','ARCHIVE','BACKBURNER','PIPELINE','MANIFEST','REGISTRY','SKELETON',
+      'SOULCOUNT','SOULSEARCH','INCARNATE','GENESIS','DEEPGRAM','NOVA','AURA','OPENAI','CLOUDFLARE',
+      'WORKERS','DURABLE','LAWBOOK','COLDSTART','MODUS','TEACHABILITY','ANTIFRAGILE','LEGION',
+      'RACE','WATCHER','MONITOR','ACTUALIZE','INCARNATION','PRINCIPAL','SOVEREIGNTY','AGENT99',
+      'SCAFFOLD','BOOTSTRAP','STARMAP','SOULBIBLE','LEDGERTRANSFER','PHETRAILFIRE']);
+
     // Prefer unmapped keywords (lower frequency, novelty) + track novelty
+    // Pass 1: canonical domain terms appearing 2+ times (trusted signal)
     let next_kw = 'SOUL';
     let novelty = !alreadyMapped;
     for (const [word, count] of sorted) {
-      // Require count >= 2: singletons are noise, not signal
-      if (count >= 2 && count < 5 && !(await this.isMapped(word, 0))) {
+      if (count >= 2 && CANONICAL.has(word.toUpperCase()) && !(await this.isMapped(word, 0))) {
         next_kw = word;
         novelty = true;
         break;
+      }
+    }
+    // Pass 2: any word appearing 3+ times (novel but high-frequency enough to be real signal)
+    if (next_kw === 'SOUL') {
+      for (const [word, count] of sorted) {
+        if (count >= 3 && count < 8 && !(await this.isMapped(word, 0))) {
+          next_kw = word;
+          novelty = true;
+          break;
+        }
       }
     }
     if (novelty === false && sorted.length > 0) {

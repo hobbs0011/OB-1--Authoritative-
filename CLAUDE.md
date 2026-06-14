@@ -260,7 +260,7 @@ If Tier 1 fails → escalate to Tier 2. Print:
 
   **Rule:** Nothing inside `APPS/SOV100-VAULT/**` may be Read, Edit, Write, deleted, or deployed by any agent or Claude session.
 
-  **To override:** Michael must type the exact phrase: `SOV100-VAULT-OVERRIDE: [your password]` in the chat. Without it, any attempt to touch vault files = **VAULT_BREACH** — halt immediately, log to phetrail, wait for Michael.
+  **To override:** Michael must type the exact phrase: `SOV100-VAULT-OVERRIDE: phoenixrising2026` in the chat. Without it, any attempt to touch vault files = **VAULT_BREACH** — halt immediately, log to phetrail, wait for Michael.
 
   **Working copies live outside the vault.** `APPS/phoenix-pcc-1/` is the active development clone. Vault holds the proof that it once worked.
 

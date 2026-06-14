@@ -1,0 +1,42 @@
+name = "pcc-scout-3"
+main = "src/index.js"
+compatibility_date = "2025-05-24"
+
+[ai]
+binding = "AI"
+
+[[kv_namespaces]]
+binding = "PHETRAIL"
+id = "ea5c8e99cb584dee9ab4f9ba5ed421c9"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "soul-archive"
+database_id = "c69a11bc-064b-478f-9b1f-e9b8e2431fb8"
+
+[[services]]
+binding = "SOUL_LOGGER_SVC"
+service = "soul-logger"
+
+[durable_objects]
+bindings = [
+  { name = "LEGION_RUNNER",   class_name = "LegionRunner" },
+  { name = "FORCEAWARENESS_ALARM", class_name = "ForceAwarenessAlarm" },
+  { name = "SCOUT_RUNNER", class_name = "ScoutMissionRunner" }
+]
+
+[[migrations]]
+tag = "v2"
+new_classes = ["LegionRunner"]
+
+[[migrations]]
+tag = "v4"
+new_classes = ["ForceAwarenessAlarm"]
+
+[[migrations]]
+tag = "v5"
+new_classes = ["ScoutMissionRunner"]
+
+# SOV100-VAULT V0 — FROZEN 2026-06-14
+# This worker is a sealed copy of the scout system at first verified working state.
+# DO NOT DEPLOY UPDATES. DO NOT MODIFY. Requires Michael's vault password to touch.
