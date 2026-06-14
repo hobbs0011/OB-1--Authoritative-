@@ -807,17 +807,18 @@ class ScoutRunner {
     return Response.json({ error: 'Not found' }, { status: 404 });
   }
 
-  // Enhanced D1 keyword density search: returns { next_kw, is_pos, area, hit_count, novelty }
+  // D1 + KV keyword density search: returns { next_kw, is_pos, area, hit_count, novelty }
   async walkChain(kw, visitedKeywords = []) {
-    if (!this.env.DB) return { next_kw: 'SOUL', is_pos: false, area: 'no-db', hit_count: 0, novelty: false };
+    if (!this.env.DB && !this.env.PHETRAIL) return { next_kw: 'SOUL', is_pos: false, area: 'no-db', hit_count: 0, novelty: false };
 
     const likeKeyword = escapeLike(kw);
+    const kwLower = kw.toLowerCase();
 
-    // Upgrades: Multi-table search for richer terrain
-    const queries = [
+    // D1 search
+    const queries = this.env.DB ? [
       this.env.DB.prepare("SELECT title, description FROM backburner WHERE title LIKE ? ESCAPE '\\' OR description LIKE ? ESCAPE '\\' LIMIT 15").bind(`%${likeKeyword}%`, `%${likeKeyword}%`).all().catch(() => ({ results: [] })),
       this.env.DB.prepare("SELECT run_number, ledger_id FROM rrl_archive WHERE rrl_raw LIKE ? ESCAPE '\\' LIMIT 10").bind(`%${likeKeyword}%`).all().catch(() => ({ results: [] })),
-    ];
+    ] : [Promise.resolve({ results: [] }), Promise.resolve({ results: [] })];
     const [bbRows, archiveRows] = await Promise.all(queries);
 
     const allHits = [...(bbRows.results || []), ...(archiveRows.results || [])].map(r => ({
@@ -825,11 +826,41 @@ class ScoutRunner {
       description: r.description || r.ledger_id || r.rrl_raw?.slice(0, 100) || '',
     }));
 
+    // KV phetrail search — catches system keywords not in D1 (FORCEAWARENESS, PHOENIXCODER, etc.)
+    if (this.env.PHETRAIL) {
+      const kvKeys = await this.env.PHETRAIL.list({ prefix: 'phetrail:major-directive:', limit: 20 }).catch(() => ({ keys: [] }));
+      for (const key of kvKeys.keys.slice(0, 20)) {
+        const val = await this.env.PHETRAIL.get(key.name).catch(() => null);
+        if (!val) continue;
+        try {
+          const marker = JSON.parse(val);
+          const text = `${marker.message || ''} ${(marker.keywords || []).join(' ')} ${marker.source || ''}`;
+          if (text.toLowerCase().includes(kwLower)) {
+            allHits.push({ title: `kv:directive:${marker.source || 'unknown'}`, description: text.slice(0, 300) });
+          }
+        } catch { /* ok */ }
+      }
+      // Also check recent scout pheromones for keyword cross-links
+      const phKeys = await this.env.PHETRAIL.list({ prefix: 'scout:pheromone:', limit: 10 }).catch(() => ({ keys: [] }));
+      for (const key of phKeys.keys.slice(0, 10)) {
+        const val = await this.env.PHETRAIL.get(key.name).catch(() => null);
+        if (!val) continue;
+        try {
+          const ph = JSON.parse(val);
+          if (ph.keyword && ph.keyword.toLowerCase().includes(kwLower)) {
+            allHits.push({ title: `kv:pheromone:${ph.keyword}`, description: `area=${ph.area} hits=${ph.hitCount}` });
+          }
+        } catch { /* ok */ }
+      }
+    }
+
     if (allHits.length === 0) {
-      // Dead end — pivot to random soul seed
-      const seeds = ['SOUL', 'FORCEAWARENESS', 'DNA', 'LEDGER', 'SCOUT', 'PHETRAIL', 'DISPATCH', 'OB1', 'UNMAPPED', 'TERRITORY'];
-      const next_kw = seeds[Math.floor(Math.random() * seeds.length)];
-      return { next_kw, is_pos: false, area: `backburner:0-hits`, hit_count: 0, novelty: false };
+      // True dead end — pivot to least-recently-visited soul seed
+      const seeds = ['SOUL', 'DNA', 'LEDGER', 'DISPATCH', 'OB1', 'PHETRAIL', 'SCOUT', 'REINCARNATION', 'STARMAP', 'SOULKEYS'];
+      const visited = new Set((visitedKeywords || []).map(v => String(v).toUpperCase()));
+      const unvisited = seeds.filter(s => !visited.has(s));
+      const next_kw = unvisited.length ? unvisited[0] : seeds[Math.floor(Math.random() * seeds.length)];
+      return { next_kw, is_pos: false, area: `dead-end:0-hits`, hit_count: 0, novelty: false };
     }
 
     // Check if this keyword/area is already mapped (upgrade: uniqueness tracking)
