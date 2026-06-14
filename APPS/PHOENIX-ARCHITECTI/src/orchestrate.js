@@ -66,8 +66,9 @@ export async function runOrchestrator(env) {
 
   // Log dispatch cycle
   await env.DB.prepare(
-    'INSERT INTO pcc_metrics (task_preview, task_length, model, duration_ms, output_length, passed, fail_reason) VALUES (?, ?, ?, ?, ?, ?, ?)'
+    'INSERT INTO pcc_metrics (run_id, task_preview, task_length, model, duration_ms, output_length, passed, fail_reason) VALUES (?, ?, ?, ?, ?, ?, ?, ?)'
   ).bind(
+    'orchestrator',
     `orchestrator → ob1: ${tasks.length} tasks`,
     tasks.length, 'orchestrator', 0,
     JSON.stringify(result).length, 1, null

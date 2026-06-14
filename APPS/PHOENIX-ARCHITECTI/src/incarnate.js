@@ -78,12 +78,20 @@ async function gateDeathIngest(env, { run_number, rrl_text, ledger_tail_hash = '
   ).bind(run_number, soul_count, ledger_tail_hash, bb_open_count, phetrail_digest, now,
     typeof metadata === 'string' ? metadata : JSON.stringify(metadata)).run();
 
-  // Fire Gate 2 + Gate 4 + Gate 5 immediately, non-blocking — pass anchor soul context to Gate 2
-  gateLostSoulScan(env, { rrl_id, run_number, rrl_text, anchorKeywords, anchorRecentPrompts }).catch(() => {});
-  gateVelocityMonitor(env, { rrl_id, run_number, rrl_text }).catch(() => {});
-  gateCompletenessAudit(env, { run_number, rrl_text }).catch(() => {});
+  // Fire Gates 2+4+5 in parallel — blocking so they complete before response (non-blocking = CF kills them)
+  const [g2, g4, g5] = await Promise.allSettled([
+    gateLostSoulScan(env, { rrl_id, run_number, rrl_text, anchorKeywords, anchorRecentPrompts }),
+    gateVelocityMonitor(env, { rrl_id, run_number, rrl_text }),
+    gateCompletenessAudit(env, { run_number, rrl_text }),
+  ]);
 
-  return { ok: true, rrl_id, run_number, lines, bytes, soul_count, bb_open_count, death_sealed_at: now };
+  const gates = {
+    lostsoul: g2.status === 'fulfilled' ? g2.value : { error: g2.reason?.message },
+    velocity: g4.status === 'fulfilled' ? g4.value : { error: g4.reason?.message },
+    completeness: g5.status === 'fulfilled' ? g5.value : { error: g5.reason?.message },
+  };
+
+  return { ok: true, rrl_id, run_number, lines, bytes, soul_count, bb_open_count, death_sealed_at: now, gates };
 }
 
 // ============================================================
@@ -188,7 +196,9 @@ async function gateRise(env) {
 // Gate 4 — Velocity Monitor: urgency-pattern regex
 // ============================================================
 async function gateVelocityMonitor(env, { rrl_id, run_number, rrl_text }) {
-  const lines = rrl_text.split('\n');
+  // Scan extracted user messages only — raw JSONL lines produce false positives
+  const userText = extractUserMessages(rrl_text) || '';
+  const lines = userText.split('\n').filter(l => l.trim());
   const hits = [];
 
   for (const line of lines) {

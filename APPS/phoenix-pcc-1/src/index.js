@@ -107,8 +107,9 @@ async function runStudentActualizer(env, userId) {
 async function logPccMetric(env, { task_preview, task_length, model, duration_ms, output_length, passed, fail_reason }) {
   if (!env.DB) return;
   await env.DB.prepare(
-    'INSERT INTO pcc_metrics (task_preview, task_length, model, duration_ms, output_length, passed, fail_reason) VALUES (?, ?, ?, ?, ?, ?, ?)'
+    'INSERT INTO pcc_metrics (run_id, task_preview, task_length, model, duration_ms, output_length, passed, fail_reason) VALUES (?, ?, ?, ?, ?, ?, ?, ?)'
   ).bind(
+    FLEET_ID,
     String(task_preview).slice(0, 100),
     task_length || 0,
     model || 'unknown',
@@ -249,7 +250,7 @@ async function taskBriefScan(env) {
 async function taskCodeQueue(env) {
   if (!env.DB) return { task: 'code-queue', processed: 0 };
   const rows = await env.DB.prepare(
-    "SELECT * FROM backburner WHERE status IN ('OPEN','IN_PROGRESS') AND (source LIKE 'obi-%' OR source='code-queue') ORDER BY priority ASC, created_at ASC LIMIT 3"
+    "SELECT * FROM backburner WHERE status IN ('OPEN','IN_PROGRESS') AND (source LIKE 'obi-%' OR source='code-queue' OR source='lostsoul' OR source='ob1-lostsoul' OR source='velocity-monitor' OR source='completeness-audit') ORDER BY priority ASC, created_at ASC LIMIT 5"
   ).all().catch(() => ({ results: [] }));
 
   let processed = 0;
