@@ -7,8 +7,15 @@ const PA_AUTH = 'ffScwBjPQjBnoAlectawu8E+J4NcmO3idxGxtlcRue8=';
 const PCC1_URL = 'https://phoenix-pcc-1.mrmichaelhobbs123.workers.dev';
 const PCC2_URL = 'https://phoenix-pcc-2.mrmichaelhobbs123.workers.dev';
 
-const STUDENT_SOURCES = ['pcc1-actualizer', 'pcc2-actualizer', 'student', 'mai-tram', 'huong', 'user-brief', 'brief-scan'];
-const OPS_SOURCES = ['translate-queue', 'pcc2-lostsoul', 'pcc2-audit', 'pcc2-pattern', 'code-queue', 'health-check', 'lostsoul', 'pattern'];
+const STUDENT_SOURCES = ['pcc1-actualizer', 'pcc2-actualizer', 'student', 'mai-tram', 'huong', 'user-brief'];
+const OPS_SOURCES = ['translate-queue', 'pcc2-lostsoul', 'pcc2-audit', 'pcc2-pattern', 'code-queue', 'lostsoul', 'pattern', 'obi-'];
+// Informational sources — never dispatch, auto-close immediately
+const SKIP_SOURCES = ['pcc2-brief-scan', 'pcc3-brief-scan', 'pcc1-actualizer', 'health-check', 'phedived'];
+
+function isInformational(bb) {
+  const src = (bb.source || '').toLowerCase();
+  return SKIP_SOURCES.some(s => src.includes(s));
+}
 
 function classifyTask(bb) {
   const src = (bb.source || '').toLowerCase();
@@ -46,17 +53,33 @@ async function callFleet(env, target, taskIds) {
 export async function runOrchestrator(env) {
   if (!env.DB) return { ok: false, reason: 'no DB' };
 
+  const now = new Date().toISOString();
+
+  // Auto-close stale IN_PROGRESS entries (>10 min old = abandoned, never completed)
+  const staleAt = new Date(Date.now() - 600000).toISOString();
+  await env.DB.prepare(
+    "UPDATE backburner SET status='PENDING_CLOSE', close_reason='stale-in-progress', updated_at=? WHERE status='IN_PROGRESS' AND updated_at < ?"
+  ).bind(now, staleAt).run().catch(() => {});
+
   const rows = await env.DB.prepare(
     "SELECT bb_id, title, source, priority FROM backburner WHERE status='OPEN' ORDER BY created_at ASC LIMIT 20"
   ).all();
 
-  const tasks = rows.results || [];
-  if (!tasks.length) return { ok: true, dispatched: 0, message: 'queue empty' };
+  const allTasks = rows.results || [];
+
+  // Auto-close informational entries without dispatching
+  const informational = allTasks.filter(t => isInformational(t));
+  for (const t of informational) {
+    await env.DB.prepare("UPDATE backburner SET status='PENDING_CLOSE', close_reason='informational-auto-close', updated_at=? WHERE bb_id=?")
+      .bind(now, t.bb_id).run().catch(() => {});
+  }
+
+  const tasks = allTasks.filter(t => !isInformational(t));
+  if (!tasks.length) return { ok: true, dispatched: 0, informational_closed: informational.length, message: 'no executable tasks' };
 
   const pcc1Tasks = tasks.filter(t => classifyTask(t) === 'pcc1');
   const pcc2Ops = tasks.filter(t => classifyTask(t) === 'pcc2');
 
-  const now = new Date().toISOString();
   const dispatched = [];
 
   // Mark IN_PROGRESS before dispatch (L81 — agent cannot self-close, but CAN mark in-progress)
@@ -83,7 +106,7 @@ export async function runOrchestrator(env) {
     null
   ).run().catch(() => {});
 
-  return { ok: true, dispatched: dispatched.length, pcc1: pcc1Tasks.length, pcc2: pcc2Ops.length, results };
+  return { ok: true, dispatched: dispatched.length, informational_closed: informational.length, pcc1: pcc1Tasks.length, pcc2: pcc2Ops.length, results };
 }
 
 export async function handleOrchestrate(request, env) {

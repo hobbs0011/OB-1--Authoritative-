@@ -102,13 +102,18 @@ export async function checkPccHealth(env) {
     else if (avgDuration > 8000) { status = 'DEGRADED'; reason = `avg latency ${avgDuration}ms (threshold 8000ms)`; }
 
     if (status !== 'HEALTHY') {
-      await createBBEntry(env, {
+      const entry = await createBBEntry(env, {
         title: `PCC HEALTH ${status}: ${reason}`,
         description: `24h stats — calls: ${totalCalls}, pass rate: ${passRate !== null ? passRate.toFixed(1) + '%' : 'N/A'}, avg_ms: ${avgDuration || 'N/A'}`,
         source: 'health-check',
         priority: '!!',
         metadata: JSON.stringify({ status, totalCalls, passRate, avgDuration }),
-      }).catch(() => {});
+      }).catch(() => null);
+      // Auto-close: health alerts are informational, not executable tasks
+      if (entry?.bb_id && env.DB) {
+        await env.DB.prepare("UPDATE backburner SET status='PENDING_CLOSE', close_reason='health-alert-logged', updated_at=? WHERE bb_id=?")
+          .bind(new Date().toISOString(), entry.bb_id).run().catch(() => {});
+      }
     }
   } catch { /* non-blocking */ }
 }

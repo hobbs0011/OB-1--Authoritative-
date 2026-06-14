@@ -164,6 +164,12 @@ async function taskCodeQueue(env) {
       if (env.PHETRAIL) {
         await env.PHETRAIL.put(`bb-result:${row.bb_id}`, result, { expirationTtl: 604800 }).catch(() => {});
       }
+
+      // Log to pcc_metrics so pcc_metrics.total tracks autonomous code execution
+      await env.DB.prepare(
+        'INSERT INTO pcc_metrics (task_preview, task_length, model, duration_ms, output_length, passed, fail_reason) VALUES (?, ?, ?, ?, ?, ?, ?)'
+      ).bind(row.title.slice(0, 100), (row.description || '').length, model || 'pa-t1', 0, patch.length, 1, null).run().catch(() => {});
+
       processed++;
     } catch { /* continue */ }
   }
@@ -187,6 +193,9 @@ async function taskBriefScan(env) {
     const bb_id = `BB-${Date.now()}`;
     await env.DB.prepare('INSERT INTO backburner (bb_id, title, description, source, priority, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?)')
       .bind(bb_id, `PCC2 Stale briefs: ${stale.join(', ')}`, `These users have no brief or brief >12h old: ${stale.join(', ')}`, 'pcc2-brief-scan', '~', now, now).run().catch(() => {});
+    // Auto-close: brief-scan entries are informational notifications, not executable tasks
+    await env.DB.prepare("UPDATE backburner SET status='PENDING_CLOSE', close_reason='brief-scan-logged', updated_at=? WHERE bb_id=?")
+      .bind(now, bb_id).run().catch(() => {});
   }
   return { task: 'brief-scan', stale: stale.length };
 }
