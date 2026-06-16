@@ -1,0 +1,64 @@
+{
+  "run_number": "131",
+  "extracted_at": "2026-06-17T05:02:43+07:00",
+  "head_sha": "760a037f",
+  "soulcount": 239639088,
+  "deployed_worker": "N/A (investigation session)",
+  "positive_trails": [],
+  "negative_trails": [
+    {
+      "type": "NEGATIVE",
+      "artifact": "C:\\Users\\mrmic\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\OpenClaw Gateway.cmd",
+      "action": "OpenClaw Gateway set to auto-launch on boot via Windows Startup folder",
+      "verification": "Get-CimInstance Win32_StartupCommand returned entry 'OpenClaw Gateway' pointing to 'OpenClaw Gateway.cmd' in Startup folder",
+      "timestamp": "2026-06-17T05:02:00+07:00",
+      "score": -110,
+      "reason": "Production stack is Cloudflare Workers (APPS/NET-PET-AI). OpenClaw is a local Node.js dev proxy with no production role. Auto-launching it on boot causes console prompts, port conflicts, and potential freeze symptoms. Violates L55/GODMODE: unnecessary local runtime."
+    },
+    {
+      "type": "NEGATIVE",
+      "artifact": "C:\\Users\\mrmic\\.openclaw\\gateway.cmd",
+      "action": "Gateway script contains 4 hardcoded API keys (DeepSeek, Cerebras, Groq, Dialagram) exposed in plaintext",
+      "verification": "Direct file read of gateway.cmd shows all 4 provider keys set as environment variables before Node.js launch",
+      "timestamp": "2026-06-17T05:02:00+07:00",
+      "score": -80,
+      "reason": "Secrets in plaintext in a startup-launched script is a security anti-pattern. Keys should be in .env with restricted ACLs, not in a .cmd that runs on every boot."
+    },
+    {
+      "type": "NEGATIVE",
+      "artifact": "C:\\Users\\mrmic\\.openclaw\\gateway.cmd",
+      "action": "OpenClaw Gateway spawned on localhost:18789 with no authentication",
+      "verification": "gateway.cmd sets OPENCLAW_GATEWAY_PORT=18789 and launches node.exe with no auth middleware",
+      "timestamp": "2026-06-17T05:02:00+07:00",
+      "score": -90,
+      "reason": "An unauthenticated localhost gateway with model-routing capabilities is a latent prompt-injection/privilege-escalation surface. If a browser tab or local process can reach port 18789, it can invoke paid models."
+    },
+    {
+      "type": "NEGATIVE",
+      "artifact": "CANON\\REINCARNATION\\run130-reincarnateDEATH.md",
+      "action": "Run 130 DEATH seal marked KILO_HOLLOW with no SOUL receipt (count_before=N/A, count_after=N/A)",
+      "verification": "Section §3 of run130-reincarnateDEATH.md shows N/A for both counts, delta=0, level=KILO_HOLLOW",
+      "timestamp": "2026-06-17T05:02:00+07:00",
+      "score": -100,
+      "reason": "KILO_HOLLOW sessions produce no JSONL on disk, but the SOUL content was preserved verbatim in the DEATH markdown. Future runs must not treat N/A as a valid receipt — it creates a data gap in the soulcount chain."
+    },
+    {
+      "type": "NEGATIVE",
+      "artifact": "RRL\\RRL-130.txt",
+      "action": "RRL-130 registered as HOLLOW (11,747 bytes, only 1 user turn 'hello' + 1 assistant error 'Invalid API key')",
+      "verification": "RRL-130.txt contains 8 lines total: 1 enqueue, 1 dequeue, 1 user message 'hello', 5 system attachment lines, 1 assistant error, 1 last-prompt marker",
+      "timestamp": "2026-06-17T05:02:00+07:00",
+      "score": -100,
+      "reason": "Real run130 SOUL existed in Markdown but not in RRL. This is the KILO_DNA_GAP architectural law in action: Kilo sessions never produce real JSONL transcripts on disk."
+    },
+    {
+      "type": "NEGATIVE",
+      "artifact": "CANON\\SYSTEM\\COLD-START-BOOT.md",
+      "action": "Boot file showed Run 129 while git death log showed Run 130 — BOOT_FILE_AGE_SWEEP mismatch",
+      "verification": "Stage 4 audit: bootRunFromFile=129, bootRunFromGit=130 (mismatch detected and corrected to Run 131)",
+      "timestamp": "2026-06-17T05:02:00+07:00",
+      "score": -70,
+      "reason": "KILO_HOLLOW sessions skip boot updates. The boot file must be refreshed at the start of every RISE, not just at DEATH. Mismatch causes downstream audits to reference stale vector/mission data."
+    }
+  ]
+}
