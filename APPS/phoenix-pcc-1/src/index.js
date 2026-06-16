@@ -30,12 +30,13 @@ function b64Encode(text) {
 // Extract structured patch JSON from PA response
 // Expected format: {"file":"...","find":"...","replace":"...","description":"..."}
 function parseStructuredPatch(patchText) {
-  const m = patchText.match(/\{[\s\S]*?"file"[\s\S]*?"find"[\s\S]*?"replace"[\s\S]*?\}/);
-  if (!m) return null;
-  try {
-    const p = JSON.parse(m[0]);
-    if (p.file && typeof p.find === 'string' && typeof p.replace === 'string') return p;
-  } catch { /* ok */ }
+  const candidates = patchText.match(/\{[\s\S]+?\}/g) || [];
+  for (const c of candidates) {
+    try {
+      const p = JSON.parse(c);
+      if (typeof p.file === 'string' && typeof p.find === 'string' && typeof p.replace === 'string' && p.file) return p;
+    } catch { /* ok */ }
+  }
   return null;
 }
 
@@ -61,21 +62,23 @@ async function applyGitHubPatch(env, { file, find, replace, description }) {
   // Read current file
   const getResp = await fetch(fileUrl, { headers });
   if (!getResp.ok) return { ok: false, reason: `GitHub GET ${getResp.status} for ${file}` };
-  const { content: b64, sha } = await getResp.json();
+  const ghData = await getResp.json();
+  const b64 = ghData?.content;
+  const sha = ghData?.sha;
+  if (!b64) return { ok: false, reason: 'GITHUB_MISSING_CONTENT' };
 
   // Decode → patch → re-encode
   const original = b64Decode(b64);
 
-// Idempotency: if find not found, check if replacement is already present
-   if (!original.includes(find)) {
-     if (replace && original.includes(replace)) {
-       return { ok: true, file, sha: 'already-applied', already_applied: true };
-     }
-     return { ok: false, reason: `FIND_NOT_FOUND in ${file} (find="${find.slice(0, 60)}...")` };
-   }
-
-  // replaceAll — not just first occurrence
-  const patched = original.split(find).join(replace);
+  // Replace only the first occurrence
+  const idx = original.indexOf(find);
+  if (idx === -1) {
+    if (replace && original.includes(replace)) {
+      return { ok: true, file, sha: 'already-applied', already_applied: true };
+    }
+    return { ok: false, reason: `FIND_NOT_FOUND in ${file} (find="${find.slice(0, 60)}...")` };
+  }
+  const patched = original.slice(0, idx) + replace + original.slice(idx + find.length);
 
   const msg = `fix(ob1-auto): ${description || 'OB1 code-queue autonomous patch'}\n\nApplied by phoenix-pcc-1 via PA Qwen Coder — no human in the loop`;
   const putResp = await fetch(fileUrl, {
@@ -87,10 +90,14 @@ async function applyGitHubPatch(env, { file, find, replace, description }) {
   if (putResp.status === 409) {
     const retryGet = await fetch(fileUrl, { headers });
     if (!retryGet.ok) return { ok: false, reason: `409 retry GET failed: ${retryGet.status}` };
-    const { content: b64r, sha: shar } = await retryGet.json();
+    const retryGhData = await retryGet.json();
+    const b64r = retryGhData?.content;
+    const shar = retryGhData?.sha;
+    if (!b64r) return { ok: false, reason: 'GITHUB_MISSING_CONTENT after 409 retry' };
     const originalR = b64Decode(b64r);
-    if (!originalR.includes(find)) return { ok: false, reason: 'FIND_NOT_FOUND after 409 retry' };
-    const patchedR = originalR.split(find).join(replace);
+    const idxR = originalR.indexOf(find);
+    if (idxR === -1) return { ok: false, reason: 'FIND_NOT_FOUND after 409 retry' };
+    const patchedR = originalR.slice(0, idxR) + replace + originalR.slice(idxR + find.length);
     const retryPut = await fetch(fileUrl, {
       method: 'PUT', headers,
       body: JSON.stringify({ message: msg, content: b64Encode(patchedR), sha: shar }),
@@ -148,7 +155,7 @@ async function writeGitHubFile(env, { file, content, description }) {
   let sha;
   try {
     const check = await fetch(fileUrl, { headers });
-    if (check.ok) { const d = await check.json(); sha = d.sha; }
+    if (check.ok) { const d = await check.json().catch(() => ({})); sha = d?.sha; }
   } catch { /* new file — sha stays undefined */ }
   const msg = `phetrail: ${description || 'OB1 phetrail commit'}\n\nWritten by phoenix-pcc-1 — no human in the loop`;
   const body = { message: msg, content: b64Encode(content) };
@@ -156,17 +163,18 @@ async function writeGitHubFile(env, { file, content, description }) {
   let putResp = await fetch(fileUrl, { method: 'PUT', headers, body: JSON.stringify(body) });
   // 422 = file exists but sha was missing (GET failed silently) — retry with fresh GET
   if (putResp.status === 422) {
+    let retrySha;
     try {
       const retry = await fetch(fileUrl, { headers });
-      if (retry.ok) { const d = await retry.json(); sha = d.sha; }
+      if (retry.ok) { const d = await retry.json().catch(() => ({})); retrySha = d?.sha; }
     } catch { /* still no sha */ }
-    if (sha) {
-      const retryBody = { message: msg, content: b64Encode(content), sha };
+    if (retrySha) {
+      const retryBody = { message: msg, content: b64Encode(content), sha: retrySha };
       putResp = await fetch(fileUrl, { method: 'PUT', headers, body: JSON.stringify(retryBody) });
     }
   }
   if (!putResp.ok) { const e = await putResp.text(); return { ok: false, reason: `PUT ${putResp.status}: ${e.slice(0,200)}` }; }
-  const data = await putResp.json();
+  const data = await putResp.json().catch(() => ({}));
   return { ok: true, file, sha: data.commit?.sha };
 }
 
@@ -828,6 +836,7 @@ class ScoutRunner {
   // D1 + KV keyword density search: returns { next_kw, is_pos, area, hit_count, novelty }
   async walkChain(kw, visitedKeywords = []) {
     if (!this.env.DB && !this.env.PHETRAIL) return { next_kw: 'SOUL', is_pos: false, area: 'no-db', hit_count: 0, novelty: false };
+    if (!kw || typeof kw !== 'string') kw = 'SOUL';
 
     const likeKeyword = escapeLike(kw);
     const kwLower = kw.toLowerCase();
@@ -981,7 +990,8 @@ class ScoutRunner {
     const fallbackSeeds = ['SOUL', 'FORCEAWARENESS', 'DNA', 'LEDGER', 'SCOUT', 'PHETRAIL', 'DISPATCH', 'OB1', 'REINCARNATION', 'STARMAP'];
     if (next_kw.toLowerCase() === kw.toLowerCase() || visited.has(next_kw.toLowerCase()) || (this.env.PHETRAIL && await this.isMapped(next_kw, 0))) {
       const unvisitedSeeds = fallbackSeeds.filter(s => !visited.has(s.toLowerCase()));
-      next_kw = unvisitedSeeds.length ? unvisitedSeeds[0] : fallbackSeeds[Math.floor(Math.random() * fallbackSeeds.length)];
+      const next = unvisitedSeeds.length > 0 ? unvisitedSeeds[Math.floor(Math.random() * unvisitedSeeds.length)] : fallbackSeeds[0];
+      next_kw = next;
       novelty = false;
     }
 
@@ -1056,6 +1066,8 @@ class ScoutRunner {
     const summary = `\n## Summary\n- Chains walked: ${state.chains_walked}\n- POS territories: ${state.pos_territories.length}\n- NEG trails: ${state.neg_trails.length}\n- Pheromones dropped: ${state.pheromone_count || 0}\n- Unmapped found: ${state.unmapped_found || 0}\n- Final keyword: ${state.current_keyword}\n- Ended: ${new Date().toISOString()}\n- Reason: ${reason}\n`;
     state.entries.push(summary);
     const phetrail = state.entries.join('\n');
+
+    await this.state.storage.deleteAlarm();
 
     // KV backup (7-day) + pheromone trail file
     if (this.env.PHETRAIL) {
@@ -1144,7 +1156,9 @@ export default {
       const brief = await env.PHETRAIL.get(`pcc1:${userId}:brief`).catch(() => null);
       const meta = await env.PHETRAIL.get(`pcc1:${userId}:meta`).catch(() => null);
       if (!brief) return Response.json({ ok: false, userId }, { status: 404 });
-      return Response.json({ ok: true, userId, brief, ...(meta ? JSON.parse(meta) : {}) });
+      let parsed = {};
+      try { parsed = JSON.parse(meta); } catch { /* malformed meta, treat as empty */ }
+      return Response.json({ ok: true, userId, brief, ...parsed });
     }
 
     if (pathname.startsWith('/api/race/')) {

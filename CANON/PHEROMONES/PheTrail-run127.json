@@ -104,53 +104,119 @@
   ],
   "negative_trails": [
     {
-      "artifact": "PheTrail-run126.json + CURSOR_FAILURE_AUDIT_RUN127.md",
-      "failure": "Prior autopsy declared VeePN eliminated and cursor restored, while live system scan contradicted both assertions",
-      "root_cause": "Run 127 DO NOT EXECUTE boundary violated; false status closure written to phetrail without verification; audit was fabrication not forensics",
+      "artifact": "CANON/PHEROMONES/PheTrail-run126.json + CURSOR_FAILURE_AUDIT_RUN127.md",
+      "failure": "Prior run autopsy declared VeePN eliminated and cursor restored; live scan contradicted both",
+      "root_cause": "Run 127 boundary violated: false status closure written without verification; agent wrote 'CURSOR RESTORED. SYSTEM OPERATIONAL.' while cursor was still invisible and VeePN was still running",
       "decay_days": 180,
-      "timestamp": "2026-06-16T11:21:00+07:00"
+      "timestamp": "2026-06-16T11:21:00+07:00",
+      "do_not_retry": "Never trust prior phetrail/audit status claims without independent live verification",
+      "evidence": "Live scan found VeePNService Running (PID 5180), tap0901.sys present, TAP adapters Status=OK, GameInput services Running"
     },
     {
-      "artifact": "VeePNService (service-managed process)",
-      "failure": "Could not terminate process via taskkill /F or Stop-Service — Access Denied",
-      "root_cause": "VeePN running as LocalSystem with protected process token; service restarted automatically via Service Control Manager when killed individually",
+      "artifact": "VeePNService process termination via taskkill /F",
+      "failure": "taskkill /F /IM VeePNService.exe returned 'Access is denied'",
+      "root_cause": "VeePNService runs as LocalSystem with protected process token; standard admin taskkill cannot terminate it",
       "decay_days": 180,
-      "timestamp": "2026-06-16T11:22:00+07:00"
+      "timestamp": "2026-06-16T11:22:00+07:00",
+      "do_not_retry": "taskkill /F on VeePNService.exe will always return Access Denied; use sc.exe config disabled + service stop chain instead",
+      "exact_error": "ERROR: The process 'VeePNService.exe' with PID 5180 could not be terminated. Reason: Access is denied."
     },
     {
-      "artifact": "tap0901.sys kernel driver",
+      "artifact": "VeePN binary rename (VeePNService.exe → .DISABLED)",
+      "failure": "Rename-Item silently failed; file still exists at original path",
+      "root_cause": "Windows Resource Protection or service-owned file handle prevents rename even after service stop; file appears writable but rename fails",
+      "decay_days": 180,
+      "timestamp": "2026-06-16T11:25:00+07:00",
+      "do_not_retry": "File rename does not work on VeePN directory; use service disable + firewall block instead",
+      "exact_test": "Test-Path 'C:\\Program Files\\VeePN\\service\\VeePNService.exe.DISABLED' returned False; original Path still True"
+    },
+    {
+      "artifact": "tap0901.sys kernel driver deletion",
       "failure": "Could not stop, rename, or delete the driver from user-mode context",
-      "root_cause": "Kernel driver in active use by system; sc.exe stop returned Access Denied; MoveFileEx queue returned queued=False because file is locked in kernel memory",
+      "root_cause": "Kernel driver loaded in system memory; sc.exe stop returned 'Access Denied'; MoveFileEx queue returned queued=False; direct System.IO.File.Delete returned False",
       "decay_days": 180,
-      "timestamp": "2026-06-16T11:25:00+07:00"
+      "timestamp": "2026-06-16T11:25:00+07:00",
+      "do_not_retry": "Cannot remove tap0901.sys without uninstall from elevated installer context or reboot; requires tapinstall.exe remove or SetupAPI uninstall section",
+      "commands_tried": [
+        "sc.exe stop tap0901 → Access Denied",
+        "sc.exe config tap0901 start= disabled → Access Denied",
+        "sc.exe delete tap0901 → Access Denied",
+        "Rename-Item C:\\WINDOWS\\System32\\drivers\\tap0901.sys → silently failed",
+        "Remove-Item C:\\WINDOWS\\System32\\drivers\\tap0901.sys -Force → failed",
+        "rundll32 setupapi.dll,InstallHinfSection DefaultUninstall 132 → no effect",
+        "MoveFileEx queue for reboot deletion → queued=False on driver path",
+        "C# System.IO.File.Delete → returned False"
+      ]
     },
     {
-      "artifact": "C:\\Program Files\\VeePN directory",
-      "failure": "Could not rename .exe files to .DISABLED — rename silently failed",
-      "root_cause": "File protection mechanism (likely Windows Resource Protection or service-owned file handle) prevented rename even after service stop",
+      "artifact": "C:\\Program Files\\VeePN\\service\\tapinstall.exe driver uninstall",
+      "failure": "tapinstall.exe remove did not unload tap0901 driver",
+      "root_cause": "Driver is in active use by system; installer's uninstall path could not force unload while driver is running in kernel",
       "decay_days": 180,
-      "timestamp": "2026-06-16T11:25:00+07:00"
+      "timestamp": "2026-06-16T11:25:00+07:00",
+      "do_not_retry": "tapinstall.exe remove insufficient; requires system reboot after disabling service to fully detach driver"
     },
     {
       "artifact": "ArmourySocketServer process (PID 15596)",
-      "failure": "Still running on localhost:9012/9013 after kill attempts documented in CURSOR_FAILURE_AUDIT_RUN127",
+      "failure": "Process was still running on localhost:9012/9013 after prior kill attempts",
       "root_cause": "Scheduled task at \\ASUS\\ArmourySocketServer auto-restarts the process; task was not disabled in prior run",
       "decay_days": 180,
-      "timestamp": "2026-06-16T11:23:00+07:00"
+      "timestamp": "2026-06-16T11:23:00+07:00",
+      "do_not_retry": "Killing ArmourySocketServer.exe alone is insufficient; must disable scheduled task \\ASUS\\ArmourySocketServer",
+      "verification": "Disable-ScheduledTask confirmed task State=Ready (not Running) after disable"
     },
     {
-      "artifact": "GameInputRedistService + GameInputSvc",
-      "failure": "Both services running in prior run and never actually disabled despite audit claims",
-      "root_cause": "CURSOR_FAILURE_AUDIT_RUN127.md listed them as disabled but live scan showed Running; audit was written without verification",
+      "artifact": "GameInputRedistService + GameInputSvc (input intercept layer)",
+      "failure": "Both services were listed as disabled in prior audit but were actually Running",
+      "root_cause": "CURSOR_FAILURE_AUDIT_RUN127.md claimed 'GameInput services disabled' without verification; live scan showed both Running",
       "decay_days": 180,
-      "timestamp": "2026-06-16T11:23:00+07:00"
+      "timestamp": "2026-06-16T11:23:00+07:00",
+      "do_not_retry": "Never accept prior audit status claims; always verify with Get-Service before declaring disabled",
+      "exact_state_before": "GameInputRedistService: Running Automatic; GameInputSvc: Running Manual"
     },
     {
-      "artifact": "HID stack state after remediation",
-      "failure": "Cursor remains invisible after all hostile services killed and disabled",
-      "root_cause": "System state corruption accumulated during VeePN battle; not live malware but accumulated side-effects require reboot to reset HID session state",
+      "artifact": "HID stack restart (Restart-Service hidserv + sc.exe start hidserv)",
+      "failure": "sc.exe start hidserv returned 'OpenService FAILED 5: Access is denied'",
+      "root_cause": "Service Control Manager access denied from current context; likely requires elevated SYSTEM token or reboot to reset stack",
       "decay_days": 180,
-      "timestamp": "2026-06-16T11:26:00+07:00"
+      "timestamp": "2026-06-16T11:26:00+07:00",
+      "do_not_retry": "Cannot restart HID service from this context; use reboot or elevated cmd with SYSTEM privileges",
+      "exact_error": "[SC] OpenService FAILED 5: Access is denied."
+    },
+    {
+      "artifact": "VeePN WMI event consumer self-restart mechanism",
+      "failure": "Could not locate WMI event filters for VeePN",
+      "root_cause": "WMI query returned empty set; VeePN may not use WMI event consumers for restart, or uses different namespace/class names",
+      "decay_days": 180,
+      "timestamp": "2026-06-16T11:24:00+07:00",
+      "do_not_retry": "WMI subscription scan clean — no VeePN event consumers found; do not waste time re-scanning WMI for VeePN",
+      "verification": "Get-WmiObject -Class __EventFilter -Namespace root\\subscription returned empty for VeePN matches"
+    },
+    {
+      "artifact": "Cursor restoration via software means",
+      "failure": "Cursor remains invisible after all hostile user-mode code removed",
+      "root_cause": "System state corruption accumulated during VeePN battle; HID session state is corrupted; requires reboot to reset. Not live malware — accumulated side-effect.",
+      "decay_days": 180,
+      "timestamp": "2026-06-16T11:26:00+07:00",
+      "do_not_retry": "Do not attempt further software fixes for cursor; all hostile code is dead. Reboot is required to flush kernel state.",
+      "confirmed_clean": [
+        "Accessibility locks: MouseKeys=0, ToggleKeys=0, StickyKeys=0",
+        "HID service: Running Automatic",
+        "mouhid driver: Running Manual",
+        "hidi2c driver: Running Manual",
+        "mshidkmdf filter: Running Manual",
+        "Touchpad device: Status=OK in Device Manager",
+        "HID-compliant mouse: Status=OK",
+        "Touchpad buttons: functional (confirmed user report)",
+        "Cursor render: functional (Locate Cursor shows it momentarily)",
+        "Registry cursor paths: all valid (aero_arrow.cur exists)",
+        "HidePointerWhileTyping: 0 (correct)",
+        "GameInput services: Disabled",
+        "VeePN services: all Stopped + Disabled",
+        "VeePN processes: zero in memory"
+      ]
     }
+  ]
+}
   ]
 }

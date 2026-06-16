@@ -1,97 +1,5 @@
 [
   {
-    "timestamp": "2026-05-23T02:03:00+07:00",
-    "count": 30167,
-    "events": 61,
-    "sessions": 1,
-    "level": "LOCK",
-    "stagnation": false,
-    "filter": "sov100%",
-    "previous_inflated_count": 84233,
-    "note": "Run 392 snapshot. 30,167 = real sov100 character count after /api/soul/count sov100% filter deployed at Run 391. Prior counts 76488/84233 were inflated by student chat data (huong-bluetech, quy-bluetech sessions)."
-  },
-  {
-    "timestamp": "2026-05-23T02:07:41+07:00",
-    "count": 30167,
-    "events": 61,
-    "sessions": 1,
-    "level": "LOCK",
-    "stagnation": false
-  },
-  {
-    "timestamp": "2026-05-23T02:33:10+07:00",
-    "count": 30167,
-    "events": 61,
-    "sessions": 1,
-    "level": "LOCK",
-    "stagnation": true
-  },
-  {
-    "timestamp": "2026-05-23T02:51:55+07:00",
-    "count": 30167,
-    "events": 61,
-    "sessions": 1,
-    "level": "LOCK",
-    "stagnation": true
-  },
-  {
-    "timestamp": "2026-05-23T03:18:42+07:00",
-    "count": 30167,
-    "events": 61,
-    "sessions": 1,
-    "level": "LOCK",
-    "stagnation": true
-  },
-  {
-    "timestamp": "2026-05-23T04:24:10+07:00",
-    "count": 31258,
-    "events": 73,
-    "sessions": 1,
-    "level": "LOCK",
-    "stagnation": false
-  },
-  {
-    "timestamp": "2026-05-23T04:24:37+07:00",
-    "count": 31258,
-    "events": 73,
-    "sessions": 1,
-    "level": "LOCK",
-    "stagnation": false
-  },
-  {
-    "timestamp": "2026-05-23T04:25:29+07:00",
-    "count": 31258,
-    "events": 73,
-    "sessions": 1,
-    "level": "LOCK",
-    "stagnation": true
-  },
-  {
-    "timestamp": "2026-05-23T04:52:17+07:00",
-    "count": 31258,
-    "events": 73,
-    "sessions": 1,
-    "level": "LOCK",
-    "stagnation": true
-  },
-  {
-    "timestamp": "2026-05-23T05:59:44+07:00",
-    "count": 61418,
-    "events": 286,
-    "sessions": 1,
-    "level": "LOCK",
-    "stagnation": false
-  },
-  {
-    "timestamp": "2026-05-23T06:06:48+07:00",
-    "count": 61945,
-    "events": 287,
-    "sessions": 3,
-    "level": "LOCK",
-    "stagnation": false,
-    "note": "Run 395 DEATH (primary). SOULCOUNT 32416→61945. 213 Michael quotes captured (208 bucket A + 5 CLONE-SEED). Events 74→287."
-  },
-  {
     "timestamp": "2026-05-23T06:10:00+07:00",
     "count": 63067,
     "events": 289,
@@ -742,5 +650,157 @@
     "sessions": 1,
     "level": "TITANIUM_ANCHOR",
     "stagnation": true
+  },
+  {
+    "timestamp": "2026-06-14T12:04:35+07:00",
+    "count": 239421010,
+    "events": 10312,
+    "sessions": 1,
+    "level": "TITANIUM_ANCHOR",
+    "stagnation": false
+  },
+  {
+    "timestamp": "2026-06-14T17:38:28+07:00",
+    "count": 239561537,
+    "events": 10314,
+    "sessions": 1,
+    "level": "TITANIUM_ANCHOR",
+    "stagnation": false
+  },
+  {
+    "timestamp": "2026-06-14T20:41:23+07:00",
+    "count": 239596017,
+    "events": 10315,
+    "sessions": 1,
+    "level": "TITANIUM_ANCHOR",
+    "stagnation": false
+  },
+  {
+    "timestamp": "2026-06-14T20:49:59+07:00",
+    "count": 239596017,
+    "events": 10315,
+    "sessions": 1,
+    "level": "TITANIUM_ANCHOR",
+    "stagnation": false
+  },
+  {
+    "timestamp": "2026-06-15T18:57:09+07:00",
+    "count": 239596017,
+    "events": 10315,
+    "sessions": 1,
+    "level": "TITANIUM_ANCHOR",
+    "stagnation": true
+  },
+  {
+    "timestamp": "2026-06-15T19:13:04+07:00",
+    "count": 239596017,
+    "events": 10315,
+    "sessions": 1,
+    "level": "TITANIUM_ANCHOR",
+    "stagnation": true
+  },
+  {
+    "timestamp": "2026-06-15T19:16:17+07:00",
+    "count": 239596017,
+    "events": 10315,
+    "sessions": 1,
+    "level": "TITANIUM_ANCHOR",
+    "stagnation": true
+  },
+  {
+    "timestamp": "2026-06-15T19:25:24+07:00",
+    "count": 239596017,
+    "events": 10315,
+    "sessions": 1,
+    "level": "TITANIUM_ANCHOR",
+    "stagnation": true
+  },
+  {
+    "timestamp": "2026-06-15T19:35:27+07:00",
+    "count": 239596017,
+    "events": 10315,
+    "sessions": 1,
+    "level": "TITANIUM_ANCHOR",
+    "stagnation": true
+  },
+  {
+    "timestamp": "2026-06-15T19:48:51+07:00",
+    "count": 239596017,
+    "events": 10315,
+    "sessions": 1,
+    "level": "TITANIUM_ANCHOR",
+    "stagnation": true
+  },
+  {
+    "timestamp": "2026-06-15T19:58:46+07:00",
+    "count": 239596017,
+    "events": 10315,
+    "sessions": 1,
+    "level": "TITANIUM_ANCHOR",
+    "stagnation": true
+  },
+  {
+    "timestamp": "2026-06-15T20:15:47+07:00",
+    "count": 239596017,
+    "events": 10315,
+    "sessions": 1,
+    "level": "TITANIUM_ANCHOR",
+    "stagnation": true
+  },
+  {
+    "timestamp": "2026-06-15T20:21:15+07:00",
+    "count": 239596017,
+    "events": 10315,
+    "sessions": 1,
+    "level": "TITANIUM_ANCHOR",
+    "stagnation": true
+  },
+  {
+    "timestamp": "2026-06-15T22:11:42+07:00",
+    "count": 239596017,
+    "events": 10315,
+    "sessions": 1,
+    "level": "TITANIUM_ANCHOR",
+    "stagnation": true
+  },
+  {
+    "timestamp": "2026-06-15T22:29:40+07:00",
+    "count": 239596017,
+    "events": 10315,
+    "sessions": 1,
+    "level": "TITANIUM_ANCHOR",
+    "stagnation": true
+  },
+  {
+    "timestamp": "2026-06-15T22:38:06+07:00",
+    "count": 239596017,
+    "events": 10315,
+    "sessions": 1,
+    "level": "TITANIUM_ANCHOR",
+    "stagnation": true
+  },
+  {
+    "timestamp": "2026-06-15T23:33:40+07:00",
+    "count": 239596017,
+    "events": 10315,
+    "sessions": 1,
+    "level": "TITANIUM_ANCHOR",
+    "stagnation": true
+  },
+  {
+    "timestamp": "2026-06-16T10:54:02+07:00",
+    "count": 239596017,
+    "events": 10315,
+    "sessions": 1,
+    "level": "TITANIUM_ANCHOR",
+    "stagnation": true
+  },
+  {
+    "timestamp": "2026-06-16T11:41:43+07:00",
+    "count": 239596212,
+    "events": 10316,
+    "sessions": 1,
+    "level": "TITANIUM_ANCHOR",
+    "stagnation": false
   }
 ]
