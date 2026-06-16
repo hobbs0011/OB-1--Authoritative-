@@ -20,9 +20,10 @@ service = "soul-logger"
 
 [durable_objects]
 bindings = [
-  { name = "LEGION_RUNNER",   class_name = "LegionRunner" },
+  { name = "LEGION_RUNNER",      class_name = "LegionRunner" },
   { name = "FORCEAWARENESS_ALARM", class_name = "ForceAwarenessAlarm" },
-  { name = "SCOUT_RUNNER", class_name = "ScoutMissionRunner" }
+  { name = "SCOUT_RUNNER",       class_name = "ScoutMissionRunner" },
+  { name = "STUDENT_ACTUALIZER", class_name = "StudentActualizerDO" }
 ]
 
 # [[migrations]]
@@ -37,6 +38,10 @@ new_classes = ["ForceAwarenessAlarm"]
 [[migrations]]
 tag = "v5"
 new_classes = ["ScoutMissionRunner"]
+
+[[migrations]]
+tag = "v6"
+new_classes = ["StudentActualizerDO"]
 
 [triggers]
 crons = ["0 */6 * * *", "* * * * *"]

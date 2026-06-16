@@ -1179,6 +1179,25 @@ async function autoRefireScouts(env) {
   } catch { /* non-fatal */ }
 }
 
+// ── Auto-start Phoenix Actualizers ───────────────────────────────────────────
+async function autoStartActualizers(env) {
+  if (!env.STUDENT_ACTUALIZER) return;
+  for (const userId of STUDENT_FLEET) {
+    try {
+      const id = env.STUDENT_ACTUALIZER.idFromName(`actualizer:${userId}`);
+      const stub = env.STUDENT_ACTUALIZER.get(id);
+      const statusRes = await stub.fetch(new Request('https://actualizer/status'));
+      const { status } = await statusRes.json().catch(() => ({}));
+      if (status !== 'active') {
+        await stub.fetch(new Request('https://actualizer/start', {
+          method: 'POST',
+          body: JSON.stringify({ userId }),
+        }));
+      }
+    } catch { /* non-fatal */ }
+  }
+}
+
 // ── Default export ────────────────────────────────────────────────────────────
 export default {
   async scheduled(event, env, ctx) {
@@ -1186,6 +1205,7 @@ export default {
     // Scout-only workers skip student fleet (WORKER_ROLE=scout set in wrangler.toml)
     if (env.WORKER_ROLE !== 'scout') {
       await runFleet(env).catch(() => {});
+      ctx.waitUntil(autoStartActualizers(env).catch(() => {}));
     }
     ctx.waitUntil(autoRefireScouts(env).catch(() => {}));
   },
@@ -1315,6 +1335,37 @@ export default {
       return stub.fetch(new Request('https://scout/stop'));
     }
 
+    // ── Phoenix Actualizer endpoints ─────────────────────────────────────────
+    if (pathname === '/api/actualizer/start' && request.method === 'POST') {
+      if (!env.STUDENT_ACTUALIZER) return Response.json({ error: 'STUDENT_ACTUALIZER DO not bound' }, { status: 503 });
+      const { userId } = await request.json().catch(() => ({}));
+      if (!userId) return Response.json({ error: 'userId required' }, { status: 400 });
+      const id = env.STUDENT_ACTUALIZER.idFromName(`actualizer:${userId}`);
+      const stub = env.STUDENT_ACTUALIZER.get(id);
+      const res = await stub.fetch(new Request('https://actualizer/start', { method: 'POST', body: JSON.stringify({ userId }) }));
+      return res;
+    }
+
+    if (pathname.startsWith('/api/actualizer/status') && request.method === 'GET') {
+      if (!env.STUDENT_ACTUALIZER) return Response.json({ error: 'STUDENT_ACTUALIZER DO not bound' }, { status: 503 });
+      const userId = url.searchParams.get('userId') || pathname.split('/').pop();
+      const id = env.STUDENT_ACTUALIZER.idFromName(`actualizer:${userId}`);
+      const stub = env.STUDENT_ACTUALIZER.get(id);
+      const res = await stub.fetch(new Request('https://actualizer/status'));
+      return res;
+    }
+
+    if (pathname.startsWith('/api/actualizer/brief/') && request.method === 'GET') {
+      const userId = pathname.split('/').filter(Boolean)[3];
+      const [digest, goals, patterns, brief] = await Promise.all([
+        env.PHETRAIL.get(`student:${userId}:actualizer:digest`).catch(() => null),
+        env.PHETRAIL.get(`student:${userId}:actualizer:goals`).catch(() => null),
+        env.PHETRAIL.get(`student:${userId}:actualizer:patterns`).catch(() => null),
+        env.PHETRAIL.get(`student:${userId}:actualizer:brief`).catch(() => null),
+      ]);
+      return Response.json({ ok: true, userId, digest, goals, patterns, brief });
+    }
+
     if (pathname === '/api/scout/refire' && request.method === 'POST') {
       // Debug: manually trigger auto-refire logic, bypass cooldown
       const body = await request.json().catch(() => ({}));
@@ -1381,3 +1432,77 @@ export default {
 export class LegionRunner extends RaceRunner {}
 export class ForceAwarenessAlarm extends WatchdogAlarm {}
 export class ScoutMissionRunner extends ScoutRunner {}
+
+// ── StudentActualizerDO — per-student background AI (Phoenix Actualizers) ────
+export class StudentActualizerDO {
+  constructor(state, env) {
+    this.state = state;
+    this.env = env;
+  }
+
+  async fetch(req) {
+    const url = new URL(req.url);
+    const path = url.pathname;
+
+    switch (req.method) {
+      case 'POST':
+        if (path === '/start') {
+          const { userId } = await req.json();
+          await this.state.storage.put('userId', userId);
+          await this.state.storage.put('status', 'active');
+          await this.state.storage.setAlarm(Date.now() + 5000);
+          return new Response(JSON.stringify({ ok: true, userId }), { status: 200 });
+        } else if (path === '/stop') {
+          await this.state.storage.put('status', 'idle');
+          await this.state.storage.deleteAlarm().catch(() => {});
+          return new Response(JSON.stringify({ ok: true }), { status: 200 });
+        }
+        break;
+      case 'GET':
+        if (path === '/status') {
+          const status = await this.state.storage.get('status') || 'idle';
+          const userId = await this.state.storage.get('userId') || null;
+          const last_run = await this.state.storage.get('last_run') || null;
+          const pass_count = await this.state.storage.get('pass_count') || 0;
+          return new Response(JSON.stringify({ status, userId, last_run, pass_count }), { status: 200 });
+        }
+        break;
+      default:
+        break;
+    }
+    return new Response('Not Found', { status: 404 });
+  }
+
+  async alarm() {
+    const userId = await this.state.storage.get('userId');
+    if (!userId) return;
+
+    const status = await this.state.storage.get('status');
+    if (status !== 'active') return;
+
+    try {
+      await this.runActualizerPasses(userId);
+    } catch (e) {
+      console.error('[StudentActualizerDO] passes error:', e.message);
+    }
+
+    const now = Date.now();
+    const passCount = (await this.state.storage.get('pass_count') || 0) + 1;
+    await this.state.storage.put('last_run', now);
+    await this.state.storage.put('pass_count', passCount);
+
+    const lastActiveRaw = await this.env.PHETRAIL.get(`student:${userId}:last_active`).catch(() => null);
+    const lastActiveMs = lastActiveRaw ? new Date(lastActiveRaw).getTime() : 0;
+    const isActive = (now - lastActiveMs) < 30 * 60 * 1000;
+    await this.state.storage.setAlarm(now + (isActive ? 5 * 60 * 1000 : 30 * 60 * 1000));
+  }
+
+  async runActualizerPasses(userId) {
+    // Stub — Kilo TASK-001 will fill this with 4-pass inference logic
+    // Pass 1: session digest → student:{userId}:actualizer:digest
+    // Pass 2: goal model   → student:{userId}:actualizer:goals
+    // Pass 3: vocab patterns → student:{userId}:actualizer:patterns
+    // Pass 4: next-session prep → student:{userId}:actualizer:brief
+    return { ok: true, userId, note: 'stub — awaiting Kilo TASK-001' };
+  }
+}
