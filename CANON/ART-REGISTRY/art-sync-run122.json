@@ -1,0 +1,89 @@
+{
+  "run": 122,
+  "ledger_id": "HL-702",
+  "merkle_short": "f18dcefa0ccf4c46",
+  "starmap_file": "starmap-run122.json",
+  "keywords_file": "rfkw-run122.txt",
+  "keywords_used": [
+    "soul-bible-true-v1-raw",
+    "soul",
+    "system",
+    "it's",
+    "*\\\"i",
+    "*\\\"the",
+    "every",
+    "don't",
+    "because",
+    "\\\"the",
+    "build",
+    "then",
+    "building",
+    "going",
+    "agent",
+    "time",
+    "your",
+    "know",
+    "something",
+    "drift",
+    "actually",
+    "that's",
+    "most",
+    "thing",
+    "first",
+    "months",
+    "whole",
+    "line",
+    "bible",
+    "fucking"
+  ],
+  "pieces_synced": 5,
+  "pieces": [
+    {
+      "id": "ART-1780548344848-CT6B",
+      "title": "Phoenix Pages — Core Friction: Drift vs DNA",
+      "url": "codex_preview/PHOENIX_PAGES/page_02.png",
+      "keywords": [
+        "drift"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780548333953-MXB7",
+      "title": "Codex — Drift as a Diagnostic Event",
+      "url": "codex_preview/page-10.png",
+      "keywords": [
+        "drift"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780548321479-LKGH",
+      "title": "Phoenix Rising Operational Codex — Cover",
+      "url": "codex_preview/page-01.png",
+      "keywords": [
+        "bible"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780547606279-NOGU",
+      "title": "NET DNA Helix",
+      "url": "CANON/ARTWORK/gemini-concept-art-02.png",
+      "keywords": [
+        "soul"
+      ],
+      "title_hit": false
+    },
+    {
+      "id": "ART-1780538369174-YDKC",
+      "title": "STP p10 — The 45/15 Protocol: Optimize The Time You Already Have",
+      "url": "local:d:/OB-1-CANONICAL/CANON/PROTOCOLS/Sovereign_Tiger_Protocol.pdf#page=10",
+      "keywords": [
+        "time"
+      ],
+      "title_hit": false
+    }
+  ],
+  "executed_at": "2026-06-13T21:02:07.7950217+07:00",
+  "registry_sync_gap": false
+}

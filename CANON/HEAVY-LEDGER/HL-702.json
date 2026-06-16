@@ -1,0 +1,12 @@
+{
+  "hl_id": "HL-702",
+  "session_id": "sov100-roman-run122",
+  "rrl_source": "D:\\OB-1-CANONICAL\\RRL\\RRL-122.txt",
+  "char_count": 1263068,
+  "byte_count": 1266404,
+  "merkle_parent": "FD07F469C195F61EF71848E9C35D8F95EC43114F96EAD287CB804210002CAC6E",
+  "merkle_hash": "f18dcefa0ccf4c4687df039266ccdeae47234bb2c8082e83130a88961812eb88",
+  "sealed_at": "2026-06-13T18:37:16.6270950+07:00",
+  "sov100": true,
+  "run": "122"
+}

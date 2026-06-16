@@ -1,0 +1,11 @@
+{
+  "run": 122,
+  "session_id": "sov100-roman-run122",
+  "session_type": "KILO_HOLLOW",
+  "dna_status": "MISSING",
+  "dna_records": [],
+  "dna_blueprint_count": 0,
+  "stale": false,
+  "note": "Run 122 had no real Claude Code JSONL. RRL-122.txt is byte-identical to RRL-121.txt and contains recycled Bible chunks, so Stage 3 DNA extraction was skipped. Registry records the gap rather than fabricating DNA.",
+  "created_at": "2026-06-13T21:05:00+07:00"
+}
