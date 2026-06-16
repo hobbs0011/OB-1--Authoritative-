@@ -1,0 +1,11 @@
+{
+  "run": 129,
+  "rrl_path": "D:\\OB-1-CANONICAL\\RRL\\RRL-129.txt",
+  "ledger_id": "HL-709",
+  "soul_turn_ids": "turn-1,turn-2,turn-3,turn-4,turn-5,turn-8,turn-9,turn-11,turn-12,turn-13",
+  "dna_turn_ids": "seq-6,seq-7,seq-10,seq-40,seq-94,seq-131",
+  "blueprint_locations": "dna-run129.json:seq-6; dna-run129.json:seq-7; dna-run129.json:seq-10; dna-run129.json:seq-40; dna-run129.json:seq-94; dna-run129.json:seq-131",
+  "char_count": 4211536,
+  "merkle_hash": "8E6DE326A50EB8F2D3C8EAD9317E46699945EDFC2E3160F6137A10DD7CB9D9E6",
+  "created_at": "2026-06-16T17:50:27.9680259+07:00"
+}
