@@ -1162,25 +1162,19 @@ const SCOUT_SEED_ROTATION = [
   'BLUEPRINT','ARCHIVE','ROMAN','CHAIN','RISE','DEATH','PRINCIPAL','ANTIFRAGILE',
 ];
 
-// Each worker calls this for itself only — no inter-worker fetch needed.
-// All three share the same PHETRAIL KV, so the 15-min cooldown is global.
+// Each worker calls this via its own cron. No shared cooldown — DO status is sufficient.
 async function autoRefireScouts(env) {
-  if (!env.PHETRAIL || !env.SCOUT_RUNNER) return;
-  const lastFire = await env.PHETRAIL.get('scout:auto_last_fire').catch(() => null);
-  if (lastFire && Date.now() - Number(lastFire) < 15 * 60 * 1000) return;
-
+  if (!env.SCOUT_RUNNER) return;
   try {
     const id = env.SCOUT_RUNNER.idFromName('scout-mission');
     const stub = env.SCOUT_RUNNER.get(id);
     const statusRes = await stub.fetch(new Request('https://scout/status'));
     if (statusRes.status === 404) {
-      // Pick random seed for natural diversity across workers
       const seed = SCOUT_SEED_ROTATION[Math.floor(Math.random() * SCOUT_SEED_ROTATION.length)];
       await stub.fetch(new Request('https://x/scout/start', {
         method: 'POST',
         body: JSON.stringify({ seed_keyword: seed, budget_ms: 600000 }),
       }));
-      await env.PHETRAIL.put('scout:auto_last_fire', String(Date.now()), { expirationTtl: 3600 }).catch(() => {});
     }
   } catch { /* non-fatal */ }
 }
