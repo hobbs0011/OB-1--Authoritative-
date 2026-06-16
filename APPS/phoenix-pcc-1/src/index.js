@@ -1,4 +1,4 @@
-import { ForceAwareness, handleForce } from './forceawareness.js';
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      import { ForceAwareness, handleForce } from './forceawareness.js';
 // PHOENIX-PCC-1 — OB1: Single unified PCC (Student Fleet + Ops Tasks)
 // Student Actualizers: mai-tram, huong, sov100-michael, sov100-test-magic, net-student-next
 // Ops Tasks: translate, lostsoul-scan, completeness-audit, pattern-scan, brief-scan, code-queue
@@ -782,6 +782,12 @@ class ScoutRunner {
       const budget_ms = body.budget_ms || (body.time_limit_seconds ? body.time_limit_seconds * 1000 : 600000); // 10 min default
       const now = Date.now();
 
+      // Clear all mapped state so every new mission starts with fresh territory
+      if (this.env.PHETRAIL) {
+        const mappedKeys = await this.env.PHETRAIL.list({ prefix: 'scout:mapped:' }).catch(() => ({ keys: [] }));
+        await Promise.all(mappedKeys.keys.map(k => this.env.PHETRAIL.delete(k.name).catch(() => {})));
+      }
+
       await this.state.storage.put('scout_state', {
         start_time: now, budget_ms, seed_keyword,
         current_keyword: seed_keyword,
@@ -791,7 +797,7 @@ class ScoutRunner {
       });
 
       await this.state.storage.setAlarm(now + 10000); // 10s iterations
-      return Response.json({ ok: true, status: 'scout_started', seed_keyword, budget_ms, upgrades: ['fast-iteration', 'unmapped-priority', 'pheromone-goal'] });
+      return Response.json({ ok: true, status: 'scout_started', seed_keyword, budget_ms, upgrades: ['fast-iteration', 'unmapped-priority', 'pheromone-goal', 'mapped-reset'] });
     }
 
     if (url.pathname === '/status') {
@@ -889,11 +895,11 @@ class ScoutRunner {
     }
 
     if (allHits.length === 0) {
-      // True dead end — pivot to least-recently-visited soul seed
-      const seeds = ['SOUL', 'DNA', 'LEDGER', 'DISPATCH', 'OB1', 'PHETRAIL', 'SCOUT', 'REINCARNATION', 'STARMAP', 'SOULKEYS'];
+      // True dead end — pivot to a seed that actually has backburner hits (no dead-end seeds)
+      const seeds = ['SOULCOUNT', 'SOUL', 'DNA', 'OB1', 'SCOUT', 'PHETRAIL', 'DISPATCH', 'REINCARNATION', 'TITANIUM', 'PHEROMONE', 'INCARNATE', 'STUDENT', 'VOICE', 'MISSION', 'BLUEPRINT'];
       const visited = new Set((visitedKeywords || []).map(v => String(v).toUpperCase()));
       const unvisited = seeds.filter(s => !visited.has(s));
-      const next_kw = unvisited.length ? unvisited[0] : seeds[Math.floor(Math.random() * seeds.length)];
+      const next_kw = unvisited.length ? unvisited[Math.floor(Math.random() * unvisited.length)] : seeds[Math.floor(Math.random() * seeds.length)];
       return { next_kw, is_pos: false, area: `dead-end:0-hits`, hit_count: 0, novelty: false };
     }
 
@@ -945,6 +951,8 @@ class ScoutRunner {
       if (wl === kw.toLowerCase() || stopWords.has(wl)) continue;
       // filter compound tokens that START with a stopword (Errorphetrail, Errordispatch, etc.)
       if (stopWordArr.some(sw => sw.length >= 4 && wl.startsWith(sw))) continue;
+      // filter PascalCase compound artifacts: short prefix (1-3 lower chars) followed by upper (Intphetrail, etc.)
+      if (/^[A-Z][a-z]{1,3}[A-Z]/.test(w)) continue;
       freq[w] = (freq[w] || 0) + 1;
     }
     const sorted = Object.entries(freq).sort((a, b) => b[1] - a[1]);
@@ -987,10 +995,11 @@ class ScoutRunner {
     // Avoid loops: if next_kw is the same as current, already visited, or already mapped
     // pick the first unvisited seed from the canonical list (not random — prevents re-picking visited seeds)
     const visited = new Set(visitedKeywords.map(v => String(v).toLowerCase()));
-    const fallbackSeeds = ['SOUL', 'FORCEAWARENESS', 'DNA', 'LEDGER', 'SCOUT', 'PHETRAIL', 'DISPATCH', 'OB1', 'REINCARNATION', 'STARMAP'];
+    const fallbackSeeds = ['SOULCOUNT', 'SOUL', 'DNA', 'OB1', 'SCOUT', 'PHETRAIL', 'DISPATCH', 'REINCARNATION', 'TITANIUM', 'PHEROMONE', 'INCARNATE', 'STUDENT', 'VOICE', 'MISSION', 'BLUEPRINT', 'AGENT', 'PHOENIX', 'ROMAN', 'KILO', 'CHAIN'];
     if (next_kw.toLowerCase() === kw.toLowerCase() || visited.has(next_kw.toLowerCase()) || (this.env.PHETRAIL && await this.isMapped(next_kw, 0))) {
       const unvisitedSeeds = fallbackSeeds.filter(s => !visited.has(s.toLowerCase()));
-      const next = unvisitedSeeds.length > 0 ? unvisitedSeeds[Math.floor(Math.random() * unvisitedSeeds.length)] : fallbackSeeds[0];
+      // When all seeds visited, pick random from full list (avoid permanent SOUL lock)
+      const next = unvisitedSeeds.length > 0 ? unvisitedSeeds[Math.floor(Math.random() * unvisitedSeeds.length)] : fallbackSeeds[Math.floor(Math.random() * fallbackSeeds.length)];
       next_kw = next;
       novelty = false;
     }
@@ -1049,7 +1058,8 @@ class ScoutRunner {
 
     state.chains_walked++;
     state.current_keyword = next_kw;
-    state.visited_keywords = [...visited, kw].slice(-200);
+    // Keep only last 8 — smaller than fallback list (20) so there are always unvisited seeds
+    state.visited_keywords = [...visited, kw].slice(-8);
 
     await this.state.storage.put('scout_state', state);
     if (state.pheromone_count >= 100) {
