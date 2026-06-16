@@ -967,27 +967,38 @@ class ScoutRunner {
       'RACE','WATCHER','MONITOR','ACTUALIZE','INCARNATION','PRINCIPAL','SOVEREIGNTY','AGENT99',
       'SCAFFOLD','BOOTSTRAP','STARMAP','SOULBIBLE','LEDGERTRANSFER','PHETRAILFIRE']);
 
-    // Prefer unmapped keywords (lower frequency, novelty) + track novelty
-    // Pass 1: canonical domain terms appearing 2+ times (trusted signal)
+    // Stochastic exploration: collect top-3 unmapped canonical candidates, pick weighted-randomly.
+    // Prevents all scouts converging on the same greedy path (GENESIS→KILO→PHEROMONE lock-in).
     let next_kw = 'SOUL';
     let novelty = !alreadyMapped;
+
+    // Pass 1: up to 3 unmapped canonical terms with 2+ hits
+    const candidates = [];
     for (const [word, count] of sorted) {
+      if (candidates.length >= 3) break;
       if (count >= 2 && CANONICAL.has(word.toUpperCase()) && !(await this.isMapped(word, 0))) {
-        next_kw = word;
-        novelty = true;
-        break;
+        candidates.push([word, count]);
       }
     }
-    // Pass 2: any word appearing 3+ times (novel but high-frequency enough to be real signal)
+    if (candidates.length > 0) {
+      const totalW = candidates.reduce((s, [, c]) => s + c, 0);
+      let r = Math.random() * totalW;
+      for (const [word, count] of candidates) {
+        r -= count;
+        if (r <= 0) { next_kw = word; break; }
+      }
+      if (next_kw === 'SOUL') next_kw = candidates[0][0]; // fallback if float drift
+      novelty = true;
+    }
+
+    // Pass 2: any word 3-7 hits if no canonical found
     if (next_kw === 'SOUL') {
-      for (const [word, count] of sorted) {
-        if (count >= 3 && count < 8 && !(await this.isMapped(word, 0))) {
-          next_kw = word;
-          novelty = true;
-          break;
-        }
+      const p2 = sorted.filter(([w, c]) => c >= 3 && c < 8 && !candidates.find(([cw]) => cw === w));
+      for (const [word] of p2.slice(0, 3)) {
+        if (!(await this.isMapped(word, 0))) { next_kw = word; novelty = true; break; }
       }
     }
+
     if (novelty === false && sorted.length > 0) {
       next_kw = sorted[0][0];
     }
@@ -1043,7 +1054,13 @@ class ScoutRunner {
 
     // Drop pheromone marker for POS territory only; revisits become NEG trails.
     if (is_pos && hit_count > 0) {
-      state.pheromone_count = Math.min(100, (state.pheromone_count || 0) + hit_count);
+      // Weighted: novelty (unmapped) = 2x, canonical soul keyword = 1.5x, capped at 20/chain
+      const SOUL_CANON = new Set(['SOUL','DNA','SOULCOUNT','TITANIUM','PHEROMONE','SOVEREIGNTY','INCARNATE',
+        'GENESIS','KILO','PHOENIX','AGENT','OB1','STUDENT','VOICE','DEEPGRAM','ROMAN','RISE','DEATH']);
+      const noveltyMult = novelty ? 2 : 1;
+      const canonMult = SOUL_CANON.has(kw.toUpperCase()) ? 1.5 : 1;
+      const weighted = Math.min(20, Math.round(hit_count * noveltyMult * canonMult));
+      state.pheromone_count = Math.min(100, (state.pheromone_count || 0) + weighted);
       await this.markPheromone(kw, area, hit_count);
     }
 
@@ -1133,11 +1150,59 @@ class WatchdogAlarm {
   }
 }
 
+// ── Scout auto-refire ─────────────────────────────────────────────────────────
+const SCOUT_FLEET_URLS = [
+  'https://phoenix-pcc-1.mrmichaelhobbs123.workers.dev',
+  'https://pcc-scout-2.mrmichaelhobbs123.workers.dev',
+  'https://pcc-scout-3.mrmichaelhobbs123.workers.dev',
+];
+const SCOUT_SEED_ROTATION = [
+  'SOULCOUNT','SOUL','DNA','OB1','INCARNATE','SOVEREIGNTY','GENESIS','STUDENT',
+  'VOICE','DEEPGRAM','TITANIUM','PHEROMONE','KILO','PHOENIX','AGENT','MISSION',
+  'BLUEPRINT','ARCHIVE','ROMAN','CHAIN','RISE','DEATH','PRINCIPAL','ANTIFRAGILE',
+];
+
+async function autoRefireScouts(env) {
+  if (!env.PHETRAIL) return;
+  // 15-min cooldown between auto-fire bursts
+  const lastFire = await env.PHETRAIL.get('scout:auto_last_fire').catch(() => null);
+  if (lastFire && Date.now() - Number(lastFire) < 15 * 60 * 1000) return;
+
+  const seedIdx = Number(await env.PHETRAIL.get('scout:seed_index').catch(() => '0')) || 0;
+  let fired = 0;
+
+  for (let i = 0; i < SCOUT_FLEET_URLS.length; i++) {
+    const base = SCOUT_FLEET_URLS[i];
+    const seed = SCOUT_SEED_ROTATION[(seedIdx + i) % SCOUT_SEED_ROTATION.length];
+    try {
+      const statusRes = await fetch(`${base}/api/scout/status`, {
+        headers: { 'x-pa-auth': PA_AUTH },
+      });
+      if (statusRes.status === 404) {
+        // Scout is idle — refire
+        await fetch(`${base}/api/scout`, {
+          method: 'POST',
+          headers: { 'x-pa-auth': PA_AUTH, 'content-type': 'application/json' },
+          body: JSON.stringify({ seed_keyword: seed, budget_ms: 600000 }),
+        });
+        fired++;
+      }
+    } catch { /* individual scout failure is non-fatal */ }
+  }
+
+  if (fired > 0) {
+    const next = (seedIdx + SCOUT_FLEET_URLS.length) % SCOUT_SEED_ROTATION.length;
+    await env.PHETRAIL.put('scout:auto_last_fire', String(Date.now()), { expirationTtl: 3600 }).catch(() => {});
+    await env.PHETRAIL.put('scout:seed_index', String(next), { expirationTtl: 86400 * 30 }).catch(() => {});
+  }
+}
+
 // ── Default export ────────────────────────────────────────────────────────────
 export default {
   async scheduled(event, env, ctx) {
     ctx.waitUntil(ForceAwareness(env).catch(() => {}));
     await runFleet(env).catch(() => {});
+    ctx.waitUntil(autoRefireScouts(env).catch(() => {}));
   },
 
   async fetch(request, env) {
