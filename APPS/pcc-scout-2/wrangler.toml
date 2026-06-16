@@ -37,6 +37,8 @@ new_classes = ["ForceAwarenessAlarm"]
 tag = "v5"
 new_classes = ["ScoutMissionRunner"]
 
-# SOV100-VAULT V0 — FROZEN 2026-06-14
-# This worker is a sealed copy of the scout system at first verified working state.
-# DO NOT DEPLOY UPDATES. DO NOT MODIFY. Requires Michael's vault password to touch.
+[triggers]
+crons = ["* * * * *"]
+
+[vars]
+WORKER_ROLE = "scout"

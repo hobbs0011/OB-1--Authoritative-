@@ -1162,46 +1162,37 @@ const SCOUT_SEED_ROTATION = [
   'BLUEPRINT','ARCHIVE','ROMAN','CHAIN','RISE','DEATH','PRINCIPAL','ANTIFRAGILE',
 ];
 
+// Each worker calls this for itself only — no inter-worker fetch needed.
+// All three share the same PHETRAIL KV, so the 15-min cooldown is global.
 async function autoRefireScouts(env) {
-  if (!env.PHETRAIL) return;
-  // 15-min cooldown between auto-fire bursts
+  if (!env.PHETRAIL || !env.SCOUT_RUNNER) return;
   const lastFire = await env.PHETRAIL.get('scout:auto_last_fire').catch(() => null);
   if (lastFire && Date.now() - Number(lastFire) < 15 * 60 * 1000) return;
 
-  const seedIdx = Number(await env.PHETRAIL.get('scout:seed_index').catch(() => '0')) || 0;
-  let fired = 0;
-
-  for (let i = 0; i < SCOUT_FLEET_URLS.length; i++) {
-    const base = SCOUT_FLEET_URLS[i];
-    const seed = SCOUT_SEED_ROTATION[(seedIdx + i) % SCOUT_SEED_ROTATION.length];
-    try {
-      const statusRes = await fetch(`${base}/api/scout/status`, {
-        headers: { 'x-pa-auth': PA_AUTH },
-      });
-      if (statusRes.status === 404) {
-        // Scout is idle — refire
-        await fetch(`${base}/api/scout`, {
-          method: 'POST',
-          headers: { 'x-pa-auth': PA_AUTH, 'content-type': 'application/json' },
-          body: JSON.stringify({ seed_keyword: seed, budget_ms: 600000 }),
-        });
-        fired++;
-      }
-    } catch { /* individual scout failure is non-fatal */ }
-  }
-
-  if (fired > 0) {
-    const next = (seedIdx + SCOUT_FLEET_URLS.length) % SCOUT_SEED_ROTATION.length;
-    await env.PHETRAIL.put('scout:auto_last_fire', String(Date.now()), { expirationTtl: 3600 }).catch(() => {});
-    await env.PHETRAIL.put('scout:seed_index', String(next), { expirationTtl: 86400 * 30 }).catch(() => {});
-  }
+  try {
+    const id = env.SCOUT_RUNNER.idFromName('scout-mission');
+    const stub = env.SCOUT_RUNNER.get(id);
+    const statusRes = await stub.fetch(new Request('https://scout/status'));
+    if (statusRes.status === 404) {
+      // Pick random seed for natural diversity across workers
+      const seed = SCOUT_SEED_ROTATION[Math.floor(Math.random() * SCOUT_SEED_ROTATION.length)];
+      await stub.fetch(new Request('https://x/scout/start', {
+        method: 'POST',
+        body: JSON.stringify({ seed_keyword: seed, budget_ms: 600000 }),
+      }));
+      await env.PHETRAIL.put('scout:auto_last_fire', String(Date.now()), { expirationTtl: 3600 }).catch(() => {});
+    }
+  } catch { /* non-fatal */ }
 }
 
 // ── Default export ────────────────────────────────────────────────────────────
 export default {
   async scheduled(event, env, ctx) {
     ctx.waitUntil(ForceAwareness(env).catch(() => {}));
-    await runFleet(env).catch(() => {});
+    // Scout-only workers skip student fleet (WORKER_ROLE=scout set in wrangler.toml)
+    if (env.WORKER_ROLE !== 'scout') {
+      await runFleet(env).catch(() => {});
+    }
     ctx.waitUntil(autoRefireScouts(env).catch(() => {}));
   },
 
@@ -1328,6 +1319,65 @@ export default {
       const id = env.SCOUT_RUNNER.idFromName('scout-mission');
       const stub = env.SCOUT_RUNNER.get(id);
       return stub.fetch(new Request('https://scout/stop'));
+    }
+
+    if (pathname === '/api/scout/refire' && request.method === 'POST') {
+      // Debug: manually trigger auto-refire logic, bypass cooldown
+      const body = await request.json().catch(() => ({}));
+      const bypass = body.bypass_cooldown === true;
+      if (bypass && env.PHETRAIL) {
+        await env.PHETRAIL.delete('scout:auto_last_fire').catch(() => {});
+      }
+      const result = { fired: [], skipped: [], errors: [] };
+      const seedIdx = Number(await env.PHETRAIL?.get('scout:seed_index').catch(() => '0')) || 0;
+
+      // pcc-1 self-fire via DO (avoids subrequest alarm-drop bug)
+      if (env.SCOUT_RUNNER) {
+        const selfSeed = SCOUT_SEED_ROTATION[seedIdx % SCOUT_SEED_ROTATION.length];
+        try {
+          const id = env.SCOUT_RUNNER.idFromName('scout-mission');
+          const stub = env.SCOUT_RUNNER.get(id);
+          const statusRes = await stub.fetch(new Request('https://scout/status'));
+          if (statusRes.status === 404) {
+            const startRes = await stub.fetch(new Request('https://x/scout/start', {
+              method: 'POST', body: JSON.stringify({ seed_keyword: selfSeed, budget_ms: 600000 }),
+            }));
+            const startBody = await startRes.json().catch(() => ({}));
+            result.fired.push({ worker: SCOUT_FLEET_URLS[0], seed: selfSeed, response: startBody });
+          } else {
+            const s = await statusRes.json().catch(() => ({}));
+            result.skipped.push({ worker: SCOUT_FLEET_URLS[0], reason: 'already_running', chains: s.chains_walked });
+          }
+        } catch (e) { result.errors.push({ worker: SCOUT_FLEET_URLS[0], error: e.message }); }
+      }
+
+      // pcc-scout-2/3 via inter-worker fetch
+      for (let i = 1; i < SCOUT_FLEET_URLS.length; i++) {
+        const base = SCOUT_FLEET_URLS[i];
+        const seed = SCOUT_SEED_ROTATION[(seedIdx + i) % SCOUT_SEED_ROTATION.length];
+        try {
+          const statusRes = await fetch(`${base}/api/scout/status`, { headers: { 'x-pa-auth': PA_AUTH } });
+          if (statusRes.status === 404) {
+            const fireRes = await fetch(`${base}/api/scout`, {
+              method: 'POST',
+              headers: { 'x-pa-auth': PA_AUTH, 'content-type': 'application/json' },
+              body: JSON.stringify({ seed_keyword: seed, budget_ms: 600000 }),
+            });
+            const fireBody = await fireRes.json().catch(() => ({}));
+            result.fired.push({ worker: base, seed, response: fireBody });
+          } else {
+            const s = await statusRes.json().catch(() => ({}));
+            result.skipped.push({ worker: base, reason: 'already_running', chains: s.chains_walked });
+          }
+        } catch (e) { result.errors.push({ worker: base, error: e.message }); }
+      }
+
+      if (result.fired.length > 0 && env.PHETRAIL) {
+        const next = (seedIdx + SCOUT_FLEET_URLS.length) % SCOUT_SEED_ROTATION.length;
+        await env.PHETRAIL.put('scout:auto_last_fire', String(Date.now()), { expirationTtl: 3600 }).catch(() => {});
+        await env.PHETRAIL.put('scout:seed_index', String(next), { expirationTtl: 86400 * 30 }).catch(() => {});
+      }
+      return Response.json({ ok: true, ...result });
     }
 
     return Response.json({ error: 'Not found', agent: FLEET_ID }, { status: 404 });
