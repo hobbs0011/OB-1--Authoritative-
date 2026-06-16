@@ -1454,6 +1454,11 @@
       "term": "write-host",
       "runs": [],
       "count": 2
+    },
+    {
+      "weight": 152,
+      "run": 128,
+      "category": "soul+key"
     }
   ],
   "open": [
@@ -2174,6 +2179,11 @@
       "category": "soul+key",
       "run": 127,
       "weight": 83
+    },
+    {
+      "weight": 155,
+      "run": 128,
+      "category": "soul+key"
     }
   ],
   "130105464": [
@@ -5694,6 +5704,11 @@
       "category": "soul+key",
       "run": 127,
       "weight": 172
+    },
+    {
+      "weight": 174,
+      "run": 128,
+      "category": "soul+key"
     }
   ],
   "ground": [
@@ -6197,6 +6212,11 @@
       "category": "soul+key",
       "run": 127,
       "weight": 162
+    },
+    {
+      "weight": 180,
+      "run": 128,
+      "category": "soul+key"
     }
   ],
   "goddamn": [
@@ -6570,6 +6590,11 @@
       "weight": 11,
       "category": "soul+key",
       "run": 126
+    },
+    {
+      "weight": 117,
+      "run": 128,
+      "category": "soul+key"
     }
   ],
   "execution": [
@@ -6748,6 +6773,11 @@
       ],
       "count": 1,
       "weight": 91,
+      "category": "soul+key"
+    },
+    {
+      "weight": 479,
+      "run": 128,
       "category": "soul+key"
     }
   ],
@@ -7533,6 +7563,11 @@
       "category": "soul+key",
       "run": 127,
       "weight": 62
+    },
+    {
+      "weight": 125,
+      "run": 128,
+      "category": "soul+key"
     }
   ],
   "deployments": [
@@ -8463,6 +8498,11 @@
       "run": 114,
       "category": "soul+key",
       "weight": 943
+    },
+    {
+      "weight": 801,
+      "run": 128,
+      "category": "soul+key"
     }
   ],
   "human": [
@@ -8705,6 +8745,11 @@
       "category": "soul+key",
       "run": 79,
       "weight": 2464
+    },
+    {
+      "weight": 104,
+      "run": 128,
+      "category": "soul+key"
     }
   ],
   "app": [
@@ -10689,6 +10734,11 @@
       "category": "soul+key",
       "run": 127,
       "weight": 54
+    },
+    {
+      "weight": 124,
+      "run": 128,
+      "category": "soul+key"
     }
   ],
   "mission": [
@@ -10841,6 +10891,146 @@
       "category": "soul+key",
       "run": 127,
       "weight": 57
+    }
+  ],
+  "truncate": [
+    {
+      "weight": 1022,
+      "run": 128,
+      "category": "soul+key"
+    }
+  ],
+  "file:": [
+    {
+      "weight": 768,
+      "run": 128,
+      "category": "soul+key"
+    }
+  ],
+  "2026/06/16": [
+    {
+      "weight": 543,
+      "run": 128,
+      "category": "soul+key"
+    }
+  ],
+  "cannot": [
+    {
+      "weight": 500,
+      "run": 128,
+      "category": "soul+key"
+    }
+  ],
+  "performed": [
+    {
+      "weight": 483,
+      "run": 128,
+      "category": "soul+key"
+    }
+  ],
+  "requested": [
+    {
+      "weight": 482,
+      "run": 128,
+      "category": "soul+key"
+    }
+  ],
+  "operation": [
+    {
+      "weight": 481,
+      "run": 128,
+      "category": "soul+key"
+    }
+  ],
+  "user-mapped": [
+    {
+      "weight": 479,
+      "run": 128,
+      "category": "soul+key"
+    }
+  ],
+  "open.\\nbadger": [
+    {
+      "weight": 447,
+      "run": 128,
+      "category": "soul+key"
+    }
+  ],
+  "truncation": [
+    {
+      "weight": 287,
+      "run": 128,
+      "category": "soul+key"
+    }
+  ],
+  "skipping": [
+    {
+      "weight": 256,
+      "run": 128,
+      "category": "soul+key"
+    }
+  ],
+  "warning:": [
+    {
+      "weight": 255,
+      "run": 128,
+      "category": "soul+key"
+    }
+  ],
+  "deleting": [
+    {
+      "weight": 224,
+      "run": 128,
+      "category": "soul+key"
+    }
+  ],
+  "veepn": [
+    {
+      "weight": 178,
+      "run": 128,
+      "category": "soul+key"
+    }
+  ],
+  "0,\\r\\n": [
+    {
+      "weight": 154,
+      "run": 128,
+      "category": "soul+key"
+    }
+  ],
+  "\\\"timestamp\\\":": [
+    {
+      "weight": 150,
+      "run": 128,
+      "category": "soul+key"
+    }
+  ],
+  "\\\"artifact\\\":": [
+    {
+      "weight": 150,
+      "run": 128,
+      "category": "soul+key"
+    }
+  ],
+  "opening": [
+    {
+      "weight": 132,
+      "run": 128,
+      "category": "soul+key"
+    }
+  ],
+  "\\\"task_length\\\":": [
+    {
+      "weight": 100,
+      "run": 128,
+      "category": "soul+key"
+    }
+  ],
+  "\\\"task_preview\\\":": [
+    {
+      "weight": 100,
+      "run": 128,
+      "category": "soul+key"
     }
   ]
 }

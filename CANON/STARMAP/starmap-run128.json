@@ -1,0 +1,11 @@
+{
+  "run": 128,
+  "rrl_path": "D:\\OB-1-CANONICAL\\RRL\\RRL-128.txt",
+  "ledger_id": "HL-708",
+  "soul_turn_ids": "",
+  "dna_turn_ids": "",
+  "blueprint_locations": "",
+  "char_count": 1443893,
+  "merkle_hash": "42A21DA8C52DFACC17A569A55DC62095AA688ABBCEBED89A21ACE5B972F19781",
+  "created_at": "2026-06-16T13:17:45.1910462+07:00"
+}

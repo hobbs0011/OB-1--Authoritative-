@@ -1,0 +1,15 @@
+{
+  "hl_id": "HL-708",
+  "session_id": "sov100-roman-run128",
+  "rrl_source": "D:\\OB-1-CANONICAL\\RRL\\RRL-128.txt",
+  "char_count": 1443893,
+  "byte_count": 1457425,
+  "soul_hash": "62243DB745E3619EE68DAC2F61F78C5B49B86A43C9DEA6894D33D19A2D4AAC8F",
+  "dna_hash": "DNA_GAP",
+  "dna_blueprint_count": 0,
+  "merkle_parent": "9EE1E1243495852E24541CAE26A6CA90239C5F6446851FB78DD6859E1FDA27AF",
+  "merkle_hash": "42A21DA8C52DFACC17A569A55DC62095AA688ABBCEBED89A21ACE5B972F19781",
+  "sealed_at": "2026-06-16T13:17:45.1910462+07:00",
+  "sov100": true,
+  "run": 128
+}

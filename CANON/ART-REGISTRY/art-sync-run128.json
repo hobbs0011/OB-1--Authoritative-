@@ -1,0 +1,55 @@
+{
+  "run": 128,
+  "ledger_id": "HL-708",
+  "merkle_short": "42A21DA8C52DFACC",
+  "starmap_file": "starmap-run128.json",
+  "keywords_file": "rfkw-run128.txt",
+  "keywords_used": [
+    "truncate",
+    "error:",
+    "file:",
+    "2026/06/16",
+    "cannot",
+    "performed",
+    "requested",
+    "operation",
+    "user-mapped",
+    "section",
+    "open.\\nbadger",
+    "truncation",
+    "skipping",
+    "warning:",
+    "deleting",
+    "stage",
+    "veepn",
+    "death",
+    "files",
+    "0,\\r\\n",
+    "write-host",
+    "\\\"timestamp\\\":",
+    "\\\"artifact\\\":",
+    "opening",
+    "jsonl",
+    "scout",
+    "check",
+    "{\\r\\n",
+    "\\\"task_length\\\":",
+    "\\\"task_preview\\\":"
+  ],
+  "pieces_synced": 2,
+  "pieces": [
+    {
+      "id": "ART-1780547160670-TBAE",
+      "title": "WAKE UP THE TIGER",
+      "keywords": [],
+      "title_hit": true
+    },
+    {
+      "id": "ART-1780546342705-3MMY",
+      "title": "Wake Up the Tiger",
+      "keywords": [],
+      "title_hit": true
+    }
+  ],
+  "executed_at": null
+}
