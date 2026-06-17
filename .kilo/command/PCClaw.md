@@ -14,6 +14,7 @@ Flow:
    - max_tokens: 4096
 4. Apply the result — write to file if code, display if analysis
 5. Verify syntax if JS/TS (node --check) or equivalent
+   - Code fence extraction for .js/.ts files (extracts content between ```javascript/```js/```typescript/```ts)
 
 Output:
 - PCCLAW_RESULT (the generated code or answer)

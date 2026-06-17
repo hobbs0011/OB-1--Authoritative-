@@ -1,8 +1,12 @@
 param(
-    [ValidateSet("doctor","verify","dev","mcp-audit","soul-check","cf-audit","phoenix-queue","phoenix-status","phoenix-alpha","phoenix-beta","phoenix-gamma","phoenix-delta","phoenix-omega")]
+    [ValidateSet("doctor","verify","dev","mcp-audit","soul-check","cf-audit","phoenix-queue","phoenix-status","phoenix-alpha","phoenix-beta","phoenix-gamma","phoenix-delta","phoenix-omega","pcc-law","phoenix-scout")]
     [string]$Command = "doctor",
     [string]$Task,
-    [string]$TargetFile
+    [string]$TargetFile,
+    [string]$Zone,
+    [ValidateSet("SOUL","LEDGER","DRIFT","CONFIG","GAP","VAULT","all")]
+    [string]$Lens = "all",
+    [switch]$FullSweep
 )
 
 Set-StrictMode -Version Latest
@@ -670,5 +674,181 @@ switch ($Command) {
             broken_paths    = $brokenLinks | Select-Object file,stalePath
             ok              = $brokenLinks.Count -eq 0
         } | ConvertTo-Json -Depth 4
+    }
+    "pcc-law" {
+        if (-not $Task) {
+            if ([Environment]::GetCommandLineArgs().Length -eq 0) {
+                $Task = Read-Host "Task description"
+            } else {
+                throw "Task parameter required for pcc-law command"
+            }
+        }
+        $invokePCClaw = Join-Path $PSScriptRoot "Invoke-PCClaw.ps1"
+        $context = ""
+        if ($TargetFile -and (Test-Path $TargetFile)) {
+            $context = Get-Content $TargetFile -Raw
+        }
+        $result = & $invokePCClaw -Task $Task -Context $context -MaxTokens 4096
+        if ($result) {
+            if ($TargetFile) {
+                $targetExt = ($TargetFile -split '\.')[-1]
+                if ($targetExt -in @('js','ts')) {
+                    $codeMatch = [regex]::Match($result, '(?s)```(?:javascript|js|typescript|ts)\s*\r?\n(.*)\r?\n```')
+                    if ($codeMatch.Success) {
+                        $code = $codeMatch.Groups[1].Value
+                        Set-Content -Path $TargetFile -Value $code -Encoding UTF8
+                    } else {
+                        Set-Content -Path $TargetFile -Value $result -Encoding UTF8
+                    }
+                } else {
+                    Set-Content -Path $TargetFile -Value $result -Encoding UTF8
+                }
+                Write-Host "PCCLAW_RESULT APPLIED to: $TargetFile"
+                if ($TargetFile -match '\.(js|ts)$') {
+                    Push-Location $repoRoot
+                    try {
+                        if ($TargetFile -match '\.ts$') {
+                            & npx tsc --noEmit $TargetFile 2>&1 | Out-Null
+                        } elseif ($TargetFile -match '\.js$') {
+                            & node --check $TargetFile 2>&1 | Out-Null
+                        }
+                        Write-Host "PCCLAW SYNTAX OK"
+                    } catch {
+                        Write-Warning "PCCLAW SYNTAX CHECK FAILED: $($_.Exception.Message)"
+                    } finally {
+                        Pop-Location
+                    }
+                }
+            } else {
+                Write-Host "PCCLAW_RESULT DISPLAYED:"
+                Write-Output $result
+            }
+        }
+    }
+    "phetails" {
+        # PHETRAILS v2.1 — BREADCRUMB EXTRACTION
+        $D1 = "https://soul-logger.mrmichaelhobbs123.workers.dev"
+        $canonDir = Join-Path $repoRoot "CANON"
+        $phetailsDir = Join-Path $canonDir "PHEROMONES"
+
+        # Run authority: git (L29 NO_ASSUME_HEAD)
+        $lastDeathLine = git log --oneline --grep "^death:" -1 $repoRoot 2>&1
+        $priorRun = 0
+        if ($lastDeathLine -match 'run\s*(\d+)') { $priorRun = [int]$matches[1] }
+        $run = $priorRun + 1
+        $runPad = "{0:D3}" -f $run
+
+        # Paths
+        $phetrailPath = Join-Path $phetailsDir "PheTrail-run$runPad.json"
+        $headSha = (git rev-parse --short HEAD)
+        $soulResp = Invoke-RestMethod "$D1/api/soul/count" -ErrorAction SilentlyContinue
+        $soulcount = $soulResp.soulcount
+
+        # Extract positive/negative trails from session (placeholder for now)
+        $positiveTrails = @()
+        $negativeTrails = @()
+
+        # Output
+        $phetrail = [pscustomobject]@{
+            schema_version = "2.0"
+            run_number = $runPad
+            extracted_at = (Get-Date -Format "yyyy-MM-ddTHH:mm:sszzz")
+            head_sha = $headSha
+            soulcount = $soulcount
+            registry_entries = 0
+            positive_trails = $positiveTrails
+            negative_trails = $negativeTrails
+            state_markers = @{
+                active_mission = "PHETRAILS standalone extraction"
+                open_flags_count = 0
+            }
+        }
+
+        # Ensure directory exists
+        if (-not (Test-Path $phetailsDir)) {
+            New-Item -ItemType Directory -Path $phetailsDir -Force | Out-Null
+        }
+
+        try {
+            $jsonTest = $phetrail | ConvertTo-Json -Depth 5 | ConvertFrom-Json
+            $phetrail | ConvertTo-Json -Depth 5 | Set-Content $phetrailPath -Encoding UTF8
+            Write-Host "PHETRAIL WRITTEN: $phetrailPath"
+        } catch {
+            Write-Error "PHETRAIL_WRITE_FAILED — $($_.Exception.Message)"
+        }
+    }
+    "phoenix-scout" {
+        # PHOENIX SCOUT — LIGHTWEIGHT RECONNAISSANCE. FLAG AND TAG ONLY.
+        if (-not $Zone) {
+            throw "Zone parameter required. Use: --Zone 'CANON/' or 'CANON/ --Lens SOUL'"
+        }
+        
+        Write-Host "SCOUT → $Zone — scanning" -ForegroundColor Cyan
+        
+        $scoutTimestamp = Get-Date -Format "yyyy-MM-ddTHHmmss"
+        $scoutReportPath = Join-Path $repoRoot "OPERATIONS\phoenix-scout-$scoutTimestamp.jsonl"
+        $scoutLearnedPath = Join-Path $repoRoot "OPERATIONS\phetrail-scout-learned-$scoutTimestamp.md"
+        
+        $flags = @()
+        $zonePath = if ($Zone -match '^CANON/|HEAVY-LEDGER/|REINCARNATION/|SOUL-SEGMENTS/|OPERATIONS/|APPS/|^\.kilo/') { Join-Path $repoRoot $Zone } else { $Zone }
+        
+        # Phase 1 — Scan
+        $allFiles = Get-ChildItem -Path $zonePath -Recurse -File -ErrorAction SilentlyContinue
+        $totalFiles = $allFiles.Count
+        
+        $seq = 0
+        foreach ($f in $allFiles) {
+            if ($seq -ge 500) { break }
+            $relPath = $f.FullName.Replace($repoRoot, '').TrimStart('\')
+            $firstLines = Get-Content -Path $f.FullName -TotalCount 20 -ErrorAction SilentlyContinue
+            $headerText = ($firstLines -join "`n")
+            
+            # SOUL lens — blockquotes in .md, untagged verbatim
+            if ($Lens -in @('all','SOUL') -and $f.Extension -eq '.md') {
+                if ($headerText -match '^> "' -or $f.Name -match 'UNTOUCHED|UNMINED') {
+                    $seq++
+                    $flags += [pscustomobject]@{
+                        scout_id = "SC-$scoutTimestamp-$seq"
+                        priority = "P2"
+                        type = "SOUL"
+                        status = if ($f.Name -match 'UNTOUCHED|UNMINED') { "UNTOUCHED" } else { "UNMINED" }
+                        file = $relPath
+                        line = 1
+                        excerpt = ($headerText.Substring(0, [Math]::Min(120, $headerText.Length)))
+                        bytes = $f.Length
+                        reason = "Raw Michael verbatim quote block or unmined marker"
+                        learned = ""
+                        next = ""
+                    }
+                }
+            }
+        }
+        
+        # Phase 2 — Summary
+        $p1Count = ($flags | Where-Object { $_.priority -eq 'P1' }).Count
+        $p2Count = ($flags | Where-Object { $_.priority -eq 'P2' }).Count
+        $p3Count = ($flags | Where-Object { $_.priority -eq 'P3' }).Count
+        
+        # Write JSONL report
+        if ($flags.Count -gt 0) {
+            $opsDir = Join-Path $repoRoot "OPERATIONS"
+            if (-not (Test-Path $opsDir)) { New-Item -ItemType Directory -Path $opsDir -Force | Out-Null }
+            $flags | ConvertTo-Json -Depth 3 | Set-Content $scoutReportPath -Encoding UTF8
+        }
+        
+        # Output summary
+        Write-Host ""
+        Write-Host "═══════════════════════════════════════════"
+        Write-Host "PHOENIX SCOUT — $Zone"
+        Write-Host "═══════════════════════════════════════════"
+        Write-Host "ZONE:          $zonePath"
+        Write-Host "FILES:         $totalFiles"
+        Write-Host "FINDS:         $($flags.Count)"
+        Write-Host "  P1 CRITICAL: $p1Count"
+        Write-Host "  P2 HIGH:     $p2Count"
+        Write-Host "  P3 MEDIUM:   $p3Count"
+        Write-Host "REPORT:        $scoutReportPath"
+        Write-Host "═══════════════════════════════════════════"
+        Write-Host "SCOUT COMPLETE. Flagged items ready for tier dispatch."
     }
 }
