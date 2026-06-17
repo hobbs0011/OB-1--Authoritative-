@@ -1,0 +1,13 @@
+{
+  "run": 133,
+  "rrl_path": "RRL/RRL-133.txt",
+  "ledger_id": "HL-711",
+  "soul_turn_ids": "",
+  "dna_turn_ids": "",
+  "blueprint_locations": "",
+  "char_count": 7009,
+  "merkle_hash": "7D451A317F9727D56EE16649040C70B9DCD0271485FD6247F43F0ED9D214E307",
+  "created_at": "2026-06-17T20:39:33.5039734+07:00",
+  "fidelity": "HOLLOW",
+  "reason": "partial pasted Kilo chat; no full raw transcript"
+}

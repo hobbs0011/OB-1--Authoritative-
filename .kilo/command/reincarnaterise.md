@@ -14,6 +14,16 @@ agent: AGENT99
 
 ```powershell
 $D1 = "https://soul-logger.mrmichaelhobbs123.workers.dev"
+# Detect KILO_HOLLOW early (no Claude session JSONL)
+$claudeDir = "$env:USERPROFILE\.claude\projects\d--OB-1-CANONICAL"
+$historyPath = "$env:USERPROFILE\.claude\history.jsonl"
+$kiloSession = $false
+$activeUUID = $null
+if (Test-Path $historyPath) {
+    $lastLine = Get-Content $historyPath -Tail 1
+    if ($lastLine -match '"sessionId"\s*:\s*"([^"]+)"') { $activeUUID = $matches[1] }
+}
+if ($activeUUID -and -not (Test-Path "$claudeDir\$activeUUID.jsonl")) { $kiloSession = $true }
 $live = Invoke-RestMethod "$D1/api/soul/count"
 $currentSoul = $live.soulcount
 $currentLevel = $live.level
@@ -21,7 +31,7 @@ if (-not $currentSoul) {
     Write-Error "SOUL API UNREACHABLE — HALT"
     exit 1
 }
-Write-Host "STAGE 0 | SOUL: $currentSoul chars | $currentLevel"
+Write-Host "STAGE 0 | SOUL: $currentSoul chars | $currentLevel | kiloSession=$kiloSession"
 ```
 
 Unreachable = SHUTDOWN. Do not proceed.
@@ -154,6 +164,8 @@ $s2Path = "CANON/PIPELINE/pipeline-run$run.json"
 if (Test-Path $s2Path) {
     $pipelineFidelity = "REAL"
 }
+
+$rrlFidelity = if ($kiloSession) { "MISSING" } else { $rrlFidelity }
 
 $stages = @(
     @{ Name="RRL"; Artifact=$rrlPath; Count=(if(Test-Path $rrlPath){(Get-Content $rrlPath -Raw).Length}else{0}); Verdict=$rrlFidelity }

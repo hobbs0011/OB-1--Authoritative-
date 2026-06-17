@@ -1,0 +1,21 @@
+{
+  "generated_at": "2026-06-17T20:53:07.6820669+07:00",
+  "run": "133",
+  "total_entries": 1,
+  "by_category": "REINCARNATION=1",
+  "entry_count_by_category": [
+    {
+      "category": "REINCARNATION",
+      "count": 1
+    }
+  ],
+  "all_entries": [
+    {
+      "linked_stages": "RRL|SOUL|DNA|LEDGER|STARMAP|SOULKEYS|S2Pipeline|REGISTRY_SYNC",
+      "first_tokens": "Partial inline Kilo chat recovery. RRL/RRL-133.txt is a pasted partial source; SOUL DRYRUN; DNA_GAP; KILO_GAP; no fabrication.",
+      "category": "REINCARNATION",
+      "reg_id": "REG-R133",
+      "path": "CANON/REINCARNATION/run133-reincarnateDEATH.md"
+    }
+  ]
+}

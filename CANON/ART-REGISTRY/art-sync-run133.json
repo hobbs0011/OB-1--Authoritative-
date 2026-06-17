@@ -1,0 +1,18 @@
+{
+  "run": 133,
+  "ledger_id": "HL-711",
+  "merkle_short": "7D451A317F9727D5",
+  "starmap_file": "starmap-run133.json",
+  "keywords_file": "rfkw-run133.txt",
+  "keywords_used": [
+    "partial",
+    "rrl",
+    "death",
+    "audit",
+    "kilo_hollow"
+  ],
+  "pieces_synced": 0,
+  "pieces": [],
+  "executed_at": "2026-06-17T20:41:59.5936050+07:00",
+  "gap_reason": "REGISTRY_SYNC_SKIPPED_FOR_PARTIAL_RRL"
+}

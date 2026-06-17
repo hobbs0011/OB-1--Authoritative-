@@ -1,0 +1,17 @@
+{
+  "hl_id": "HL-711",
+  "session_id": "sov100-roman-run133",
+  "rrl_source": "RRL/RRL-133.txt",
+  "char_count": 7009,
+  "byte_count": 7613,
+  "soul_hash": "2C643864FEE6B9CF3D824EEB317A25F2BE53BB9FE6B842D2977934D55B5CB9D3",
+  "dna_hash": "DNA_GAP",
+  "dna_blueprint_count": 0,
+  "merkle_parent": "2809df6b78515053dbef756cb54579984e3360578bef999ff56925c554667e59",
+  "merkle_hash": "7D451A317F9727D56EE16649040C70B9DCD0271485FD6247F43F0ED9D214E307",
+  "sealed_at": "2026-06-17T20:38:59.8183424+07:00",
+  "sov100": true,
+  "run": 133,
+  "rrl_fidelity": "HOLLOW",
+  "rrl_reason": "partial pasted Kilo chat; not complete raw JSONL transcript"
+}
