@@ -2,7 +2,8 @@
 
 **COMMAND:** `/forcemarch`  
 **TIER:** T1 (Workhorse Implementation)  
-**COST:** FREE - unlimited via Dialagram Qwen 3.7 Max  
+**COST:** Uses kilo-auto/free model  
+**SURVIVAL:** PheTrails, PhoenixScout, SupplyLines MANDATORY - no gaps without trails  
 
 ---
 
