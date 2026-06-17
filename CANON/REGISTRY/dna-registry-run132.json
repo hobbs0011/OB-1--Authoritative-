@@ -1,0 +1,23 @@
+{
+  "generated_at": "2026-06-17T14:38:00.000Z",
+  "run": "132",
+  "total_entries": 1,
+  "by_category": "OPERATIONS=1",
+  "entry_count_by_category": [
+    { "category": "OPERATIONS", "count": 1 }
+  ],
+  "all_entries": [
+    {
+      "reg_id": "REG-OC132",
+      "path": "ASUS-CURSOR-FIX-ATTEMPT",
+      "category": "OPERATIONS",
+      "first_tokens": "Safe Mode boot failed at SrtTrail.txt. USB-C audio adapter warning appearing. Cursor still dead after ASUS package removal. Touchpad filter driver (oem190.inf, oem205.inf) requires Safe Mode SYSTEM access. Startup repair log error indicates boot sequence corrupted.",
+      "linked_stages": "SAFE-MODE"
+    }
+  ],
+  "safemode_status": {
+    "boot_result": "FAILED - SrtTrail.txt error",
+    "srt_trail": "C:\\Windows\\System32\\logfiles\\Srt\\SrtTrail.txtUSB",
+    "next_step": "Try Windows Recovery Environment (WinRE) or manual driver removal via Device Manager"
+  }
+}
