@@ -31,12 +31,12 @@ binding = "SOUL_LOGGER_SVC"
 service = "soul-logger"
 
 [[services]]
-binding = "PCC1_SVC"
-service = "phoenix-pcc-1"
-
-[[services]]
 binding = "PCC2_SVC"
 service = "phoenix-pcc-2"
+
+[[services]]
+binding = "PCC3_SVC"
+service = "phoenix-pcc-3"
 
 [[kv_namespaces]]
 binding = "SOUL_KV"
