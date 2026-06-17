@@ -1,0 +1,11 @@
+{
+  "run": 131,
+  "rrl_path": "RRL\\RRL-131.txt",
+  "ledger_id": "HL-710",
+  "soul_turn_ids": "",
+  "dna_turn_ids": "",
+  "blueprint_locations": "",
+  "char_count": 11747,
+  "merkle_hash": "LEDGER_GAP",
+  "created_at": "2026-06-17T07:33:42.2357481+07:00"
+}
