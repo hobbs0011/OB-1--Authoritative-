@@ -1,10 +1,8 @@
 {
-  "git_branch": "master",
-  "soul_ok": false,
-  "timestamp": "2026-06-17T15:15:00.000Z",
+  "timestamp": "2026-06-18T02:52:17.4188444+07:00",
+  "git_head": "e13164c5 death:run132 KILO_HOLLOW | OCR tool attempt + Safe Mode blocked at SrtTrail.txt + cursor fix pending Windows reinstall + REPO_SAFE",
   "verify_ok": true,
-  "doctor_ok": false,
-  "git_head": "f9614d58 + uncommitted: CANON/REGISTRY/dna-registry-run132.json",
-  "cursor_status": "BROKEN - ASUS driver removal blocked, Safe Mode fails at SrtTrail.txt",
-  "next_step": "Windows reinstall or external boot media for driver removal"
+  "soul_ok": false,
+  "git_branch": "master",
+  "doctor_ok": true
 }
