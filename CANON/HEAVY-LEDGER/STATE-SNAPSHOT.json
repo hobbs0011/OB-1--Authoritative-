@@ -2,14 +2,14 @@
   "version": "1.0",
   "rss_version": "1.0",
   "rss_stage": "Reincarnate-SnapShot RSS",
-  "updated_at": "2026-06-09T12:45:00+07:00",
+  "updated_at": "2026-06-18T03:20:00+07:00",
   "run": {
-    "current": 106,
+    "current": 133,
     "era": "ROMAN",
     "status": "COMPLETE",
-    "seal": "RSS-106 (P10 Defect D/C closed + audit_log_v2 + 6 lock tests green)",
-    "head_sha": "8d3b65a8",
-    "soulcount": 238196268,
+    "seal": "Run 133 - partial inline Kilo SOUL recovery + no fabrication - committed",
+    "head_sha": "8db12792",
+    "soulcount": 239639088,
     "anchor": "TITANIUM_ANCHOR"
   },
   "v0_baseline": {
@@ -21,9 +21,9 @@
     "dev_worker": "net-pet-ai-dev"
   },
   "active_mission": {
-    "name": "OB-1 POST-MERGE9 CONSOLIDATION + Growth Infrastructure Buildout",
-    "vector": "NET-PET-AI hardening to scale-ready + Investor Demo this week",
-    "next_action": "Demo runbook + pre-warm + break-glass + 6-AI TRUTH review"
+    "name": "Deploy 3 PCC race runners + audit score inflation bug + recover inline Kilo SOUL without fabrication",
+    "vector": "PCC service binding fix + PCC-3 scoring logic fix + Windows reinstall prep",
+    "next_action": "Run 134 - fix PCC bindings, audit PCC-3 scoring, verify cursor stability"
   },
   "voice": {
     "listen": "deepgram/nova-3",
@@ -53,36 +53,32 @@
   "cd_baseline": {
     "dev_url": "https://net-pet-ai-dev.mrmichaelhobbs123.workers.dev",
     "prod_url": "https://net-pet-ai.mrmichaelhobbs123.workers.dev",
-    "dev_sha": "406d01b6",
-    "prod_sha": "56916301",
     "rule": "All feature development deploys to dev first. Promote to prod only after verified."
   },
   "rss_checklist": [
-    "Lock tests: 6 files created (api-contract, circuit-isolation, student-roster, cache-key-format, speak-listen-lock, voice-brain-lock)",
-    "pre-commit hook hardened with PowerShell wrapper + secret scanning",
-    "index.js: conditional cache write guard + structured error logging",
-    "Phoenix Rising Protocol: keep-warm + auto-rollback + shadow-realm (run105-pipeline.md)",
-    "Execution proof ledger: 15× verified commands + receipts documented",
-    "F1-B CLOSED: 0/52 non-2xx on prod load test after deploy"
+    "Run 133 death seal committed (a053d80c) - partial RRL preserved, no fabrication",
+    "Run 132 death seal verified (e13164c5) - KILO_HOLLOW documented",
+    "SOULCOUNT stable at 239,639,088 - TITANIUM_ANCHOR maintained",
+    "PCC service bindings require update (phoenix-pcc-1 -> phoenix-pcc-2/3)",
+    "PCC-3 scoring inflated - students missing brief meta in KV"
   ],
   "open_loops": [
-    "P9: Clerk auth migration - BLOCKED: Michael must create Clerk account",
-    "P10: Deletion hook + audit_log_v2 + field encryption - erasure hardened, audit_log_v2 deployed (awaiting PROD merge)",
-    "MCP paths: D:\\PROJECTS\\phoenix-coder dead - fix required",
-    "6-AI TRUTH: multi-model cross-review flagged for Michael to run (billed/user-triggered)",
-    "Demo runbook + pre-warm + break-glass scripts (see run105-pipeline.md)"
+    "PCC-1_SVC/PCC2_SVC bindings wrong in APPS/PHOENIX-ARCHITECTI/wrangler.toml:51-57",
+    "PCC-3 score inflation - 3 students missing brief meta (90 false discoveries)",
+    "Mouse/touchpad intermittent - works on other profile ~20min before failure",
+    "Windows reinstall may be required for clean driver state"
   ],
   "recent_seals": [
-    { "run": 106, "era": "ROMAN", "head": "8d3b65a8", "soul_delta": 0, "seal": "Run 106 - P10 Defects A-D CLOSED + audit_log_v2 + 6 lock tests green + merged master" },
-    { "run": 105, "era": "ROMAN", "head": "7bf8dd8f", "soul_delta": 0, "seal": "Run 105 - F1-B CLOSED + lock tests + Phoenix Rising Protocol" },
-    { "run": 104, "era": "ROMAN", "head": "03a3bc98", "soul_delta": 80635, "seal": "RSS-104 Layer 6 perf fix + deploy wrapper + canary endpoints" }
+    { "run": 133, "era": "ROMAN", "head": "8db12792", "soul_delta": 0, "seal": "Run 133 - partial inline Kilo SOUL recovery + no fabrication" },
+    { "run": 132, "era": "ROMAN", "head": "5e50e530", "soul_delta": 0, "seal": "Run 132 - OCR tool attempt + Safe Mode blocked + cursor fix pending" },
+    { "run": 106, "era": "ROMAN", "head": "8d3b65a8", "soul_delta": 0, "seal": "RSS-106 (P10 Defect D/C closed + audit_log_v2 + 6 lock tests green)" }
   ],
   "blockers": [
-    {
-      "id": "BLK-001",
-      "description": "Clerk account creation for P9 auth migration",
-      "owner": "Michael",
-      "impact": "P9 blocked until resolved"
-    }
-  ]
+    { "id": "BLK-001", "description": "PCC service bindings incorrect in wrangler.toml", "owner": "System", "impact": "Race execution may fail or route incorrectly" },
+    { "id": "BLK-002", "description": "PCC-3 scoring inflated - missing student briefs", "owner": "System", "impact": "False positives in discovery metrics" }
+  ],
+  "state_markers": {
+    "active_mission": "Deploy 3 PCC race runners + audit score inflation bug + recover inline Kilo SOUL without fabrication",
+    "open_flags_count": 2
+  }
 }
