@@ -1,8 +1,10 @@
 {
-  "verify_ok": true,
-  "timestamp": "2026-06-16T11:41:43.5871484+07:00",
-  "git_head": "1d24c21f phetrail: run127 ΓÇö VeePN hostile remediation audit, 4 services disabled, GameInput/Armoury struck, cursor still invisible pending reboot",
   "git_branch": "master",
-  "doctor_ok": true,
-  "soul_ok": true
+  "soul_ok": false,
+  "timestamp": "2026-06-17T15:15:00.000Z",
+  "verify_ok": true,
+  "doctor_ok": false,
+  "git_head": "f9614d58 + uncommitted: CANON/REGISTRY/dna-registry-run132.json",
+  "cursor_status": "BROKEN - ASUS driver removal blocked, Safe Mode fails at SrtTrail.txt",
+  "next_step": "Windows reinstall or external boot media for driver removal"
 }
