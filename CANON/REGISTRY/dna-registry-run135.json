@@ -1,0 +1,46 @@
+{
+  "generated_at": "2026-06-18T04:38:00.000+07:00",
+  "run": "135",
+  "total_entries": 3,
+  "by_category": "PCC_FIX=PCC-3 SCORING_INFLATION FIXED; SERVICE_BINDING=CORRECTED; SCHOLAR_EXTRACTION=COMPLETE",
+  "entry_count_by_category": [
+    {
+      "category": "PCC-OPS",
+      "count": 1
+    },
+    {
+      "category": "SCHOLAR",
+      "count": 1
+    },
+    {
+      "category": "PHEITRAL",
+      "count": 1
+    }
+  ],
+  "all_entries": [
+    {
+      "reg_id": "REG-R135-001",
+      "path": "APPS/PHOENIX-PCC-3/src/index.js",
+      "category": "PCC-OPS",
+      "linked_stages": "PIPELINE|HARDENING|DECISION",
+      "first_tokens": "PCC-3 scoring inflation fixed - removed discoveries++ increment for missing briefs. Students now only increment actualizers, not discoveries (L73 PCC_SCORING_INTEGRITY).",
+      "timestamp": "2026-06-18T04:37:00+07:00"
+    },
+    {
+      "reg_id": "REG-R135-002",
+      "path": "OPERATIONS/scholar-extraction-2026-06-18T034500.jsonl",
+      "category": "SCHOLAR",
+      "linked_stages": "RRL|SOUL|DNA",
+      "first_tokens": "4 Michael verbatim segments extracted from SOULDNA-ADDITIONAL-SEGMENTS-2026-04-05.md - topics include netpet-ai, students, truth-principle, mapping.",
+      "timestamp": "2026-06-18T04:37:00+07:00"
+    },
+    {
+      "reg_id": "REG-R135-003",
+      "path": "CANON/PHEROMONES/PheTrail-run135.json",
+      "category": "PHEITRAL",
+      "linked_stages": "SUPPLY_LINES|FORCED_MARCH|GAAP_AUDIT",
+      "first_tokens": "6 positive trails, 6 negative trails documented. RRL missing (KILO_HOLLOW). PCC systems verified HEALTHY. Boot drift identified.",
+      "timestamp": "2026-06-18T04:38:00+07:00"
+    }
+  ]
+}
