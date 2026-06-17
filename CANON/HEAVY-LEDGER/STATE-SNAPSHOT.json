@@ -4,11 +4,11 @@
   "rss_stage": "Reincarnate-SnapShot RSS",
   "updated_at": "2026-06-18T03:20:00+07:00",
   "run": {
-    "current": 133,
+    "current": 134,
     "era": "ROMAN",
     "status": "COMPLETE",
-    "seal": "Run 133 - partial inline Kilo SOUL recovery + no fabrication - committed",
-    "head_sha": "8db12792",
+    "seal": "Run 134 - PCC fixes + Scholar extraction + supply chain verification",
+    "head_sha": "c8762dc4",
     "soulcount": 239639088,
     "anchor": "TITANIUM_ANCHOR"
   },
@@ -68,10 +68,10 @@
     "Mouse/touchpad intermittent - works on other profile ~20min before failure",
     "Windows reinstall may be required for clean driver state"
   ],
-  "recent_seals": [
-    { "run": 133, "era": "ROMAN", "head": "8db12792", "soul_delta": 0, "seal": "Run 133 - partial inline Kilo SOUL recovery + no fabrication" },
-    { "run": 132, "era": "ROMAN", "head": "5e50e530", "soul_delta": 0, "seal": "Run 132 - OCR tool attempt + Safe Mode blocked + cursor fix pending" },
-    { "run": 106, "era": "ROMAN", "head": "8d3b65a8", "soul_delta": 0, "seal": "RSS-106 (P10 Defect D/C closed + audit_log_v2 + 6 lock tests green)" }
+"recent_seals": [
+    { "run": 134, "era": "ROMAN", "head": "c8762dc4", "soul_delta": 0, "seal": "Run 134 - PCC fixes + Scholar extraction + supply chain verification" },
+    { "run": 133, "era": "ROMAN", "head": "a053d80c", "soul_delta": 0, "seal": "Run 133 - partial inline Kilo SOUL recovery + no fabrication" },
+    { "run": 132, "era": "ROMAN", "head": "5e50e530", "soul_delta": 0, "seal": "Run 132 - OCR tool attempt + Safe Mode blocked + cursor fix pending" }
   ],
   "blockers": [
     { "id": "BLK-001", "description": "PCC service bindings incorrect in wrangler.toml", "owner": "System", "impact": "Race execution may fail or route incorrectly" },
