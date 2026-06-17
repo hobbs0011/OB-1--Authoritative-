@@ -86,14 +86,19 @@ if (-not (Test-Path $RRLFile)) {
 $rrlText   = Get-Content $RRLFile -Raw -Encoding UTF8
 $rrlChars  = $rrlText.Length
 $rrlBytes  = (Get-Item $RRLFile).Length
-Write-Step 0 "PASS" "RRL loaded: $rrlChars chars, $rrlBytes bytes"
+$kiloHollow = [bool]($rrlText -match '^\s*#\s*KILO_HOLLOW\b')
+$dnaCount = 0
+$dnaBlueprintCount = 0
+Write-Step 0 "PASS" "RRL loaded: $rrlChars chars, $rrlBytes bytes | KILO_HOLLOW=$kiloHollow"
 
 # ═══════════════════════════════════════════
 # GATE 0.5: FIDELITY CHECK (v6.0 — RRL = full transcript, both sides)
 # ═══════════════════════════════════════════
 $FIDELITY_MIN_BYTES = 5000
 $FIDELITY_MIN_TURNS = 10
-if ($rrlBytes -lt $FIDELITY_MIN_BYTES) {
+if ($kiloHollow) {
+    Write-Step "0.5" "WARN" "KILO_HOLLOW marker detected: $rrlBytes bytes — no transcript available; sealing KILO_GAP"
+} elseif ($rrlBytes -lt $FIDELITY_MIN_BYTES) {
     Write-Step "0.5" "WARN" "RRL SMALL: $rrlBytes bytes (< $FIDELITY_MIN_BYTES) — may be hollow. Checking structure..."
     $hasRole = $rrlText -match '"role"\s*:\s*"(user|assistant)"'
     if (-not $hasRole) {
@@ -149,7 +154,9 @@ Write-Host "  PARSED: $($userTurns.Count) user turns, $($agentTurns.Count) assis
 $soulPost = $null
 $delta = 0
 $soulAfter = $null
-if ($DryRun) {
+if ($kiloHollow) {
+    Write-Step 1 "WARN" "KILO_HOLLOW: SOUL POST skipped"
+} elseif ($DryRun) {
     Write-Step 1 "PASS" "DRYRUN: Would POST $($userTurns.Count) user turns to D1"
 } else {
     try {
@@ -195,7 +202,25 @@ if ($DryRun) {
 # STEP 2: DNA  -  LOCAL EXTRACTION FROM RRL (no D1 query)
 # Extract assistant turns from RRL → tag blueprints → write CANON/SOUL/EXTRACT/dna-run{N}.json
 # ═══════════════════════════════════════════
-if ($DryRun) {
+if ($kiloHollow) {
+    $dnaDir = "$repo\CANON\SOUL\EXTRACT"
+    if (-not (Test-Path $dnaDir)) { New-Item -ItemType Directory -Path $dnaDir -Force | Out-Null }
+
+    $dnaRecords = @(
+        [ordered]@{
+            run    = $RunNumber
+            seq    = 0
+            type   = "missing"
+            chars  = 0
+            text   = "# KILO_HOLLOW - No session transcript"
+        }
+    )
+    $dnaCount = $dnaRecords.Count
+    $dnaBlueprintCount = 0
+    $dnaPath = "$dnaDir\dna-run$RunNumber.json"
+    $dnaRecords | ConvertTo-Json -Depth 5 | Set-Content $dnaPath -Encoding UTF8
+    Write-Step 2 "WARN" "DNA_GAP: KILO_HOLLOW marker; 0 blueprints"
+} elseif ($DryRun) {
     Write-Step 2 "PASS" "DRYRUN: Would extract DNA from $($agentTurns.Count) assistant turns"
 } else {
     $dnaDir = "$repo\CANON\SOUL\EXTRACT"
@@ -315,10 +340,17 @@ Write-Step 5 "PASS" "KEYWORD WRITTEN: $rfkwPath ($($wordFreq.Count) terms)"
 $pipelineDir = "$repo\CANON\PIPELINE"
 if (-not (Test-Path $pipelineDir)) { New-Item -ItemType Directory -Path $pipelineDir -Force | Out-Null }
 
-$rrlFidelity  = if ($hasUser -and $hasAssistant) { "REAL" } else { "HOLLOW" }
-$soulIsReal   = ($soulPost -and $soulPost.event_id -and $soulPost.event_id -ne "DRYRUN" -and [int]$delta -gt 0)
-$dnaIsReal    = ($dnaCount -gt 0)
-$pipelineResult = if ($rrlFidelity -eq "REAL" -and $soulIsReal -and $dnaIsReal) { "COMPLETE" } else { "GAP" }
+if ($kiloHollow) {
+    $rrlFidelity = "MISSING"
+    $soulIsReal = $false
+    $dnaIsReal = $false
+    $pipelineResult = "KILO_GAP"
+} else {
+    $rrlFidelity  = if ($hasUser -and $hasAssistant) { "REAL" } else { "HOLLOW" }
+    $soulIsReal   = ($soulPost -and $soulPost.event_id -and $soulPost.event_id -ne "DRYRUN" -and [int]$delta -gt 0)
+    $dnaIsReal    = ($dnaCount -gt 0)
+    $pipelineResult = if ($rrlFidelity -eq "REAL" -and $soulIsReal -and $dnaBlueprintCount -gt 0) { "COMPLETE" } else { "GAP" }
+}
 
 $pipelineRecord = [ordered]@{
     run_number        = $RunNumber
@@ -327,10 +359,12 @@ $pipelineRecord = [ordered]@{
     rrl_chars         = $rrlChars
     rrl_bytes         = $rrlBytes
     rrl_fidelity      = $rrlFidelity
+    rrl_reason        = if ($kiloHollow) { "KILO_HOLLOW marker - no session transcript" } else { "" }
+    kilo_hollow       = $kiloHollow
     session_id        = $runId
-    soul_event_id     = if ($soulPost) { $soulPost.event_id } else { "SOUL_GAP" }
+    soul_event_id     = if ($kiloHollow) { "KILO_HOLLOW" } elseif ($soulPost) { $soulPost.event_id } else { "SOUL_GAP" }
     soulcount         = if ($soulAfter) { $soulAfter.soulcount } else { 0 }
-    soul_level        = if ($soulAfter) { $soulAfter.level } else { "UNKNOWN" }
+    soul_level        = if ($kiloHollow) { "KILO_HOLLOW" } elseif ($soulAfter) { $soulAfter.level } else { "UNKNOWN" }
     soul_delta        = $delta
     dna_count         = if ($dnaCount) { $dnaCount } else { 0 }
     dna_blueprint_count = if ($dnaBlueprintCount) { $dnaBlueprintCount } else { 0 }
@@ -378,11 +412,12 @@ Write-Host "══════════════════════�
 Write-Host "RRL PIPELINE COMPLETE  -  RUN $RunNumber"
 Write-Host "═══════════════════════════════════════════"
 Write-Host "RRL:      $RRLFile  -  $rrlChars chars"
-Write-Host "SOUL:     $runId  -  D1 posted"
-Write-Host "DNA:      $(if ($results['step2']) { $results['step2'].detail } else { 'SKIPPED' })"
+Write-Host "SOUL:     $runId  - $(if ($kiloHollow) { 'KILO_HOLLOW skipped' } elseif ($DryRun) { 'DRYRUN' } else { 'D1 posted' })"
+Write-Host "DNA:      $(if ($kiloHollow) { 'DNA_GAP - 0 blueprints' } elseif ($results['step2']) { $results['step2'].detail } else { 'SKIPPED' })"
 Write-Host "LEDGER:   HL-$nextHL  -  $ledgerPath"
 Write-Host "STARMAP:  $starmapPath"
 Write-Host "KEYWORD:  $rfkwPath"
 Write-Host "PIPELINE: $pipelinePath"
+Write-Host "RESULT:   $pipelineResult"
 Write-Host "═══════════════════════════════════════════"
 Write-Host "NEXT: Update COLD-START-BOOT → Write death seal → Commit"

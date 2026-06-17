@@ -18,6 +18,7 @@ Set-Location $repo
 
 # 1. Read ACTIVE session UUID from history.jsonl (last line = current session)
 $activeSessionId = $null
+$kiloSession = $false
 if (Test-Path $historyPath) {
     try {
         $historyLines = [System.IO.File]::ReadAllLines($historyPath, [System.Text.Encoding]::UTF8)
@@ -31,19 +32,26 @@ if (Test-Path $historyPath) {
 }
 
 if (-not $activeSessionId) {
-    Write-Error "FATAL: Could not determine active session UUID from history.jsonl"
-    exit 1
+    Write-Warning "Could not determine active session UUID; treating as KILO_HOLLOW"
+    $kiloSession = $true
+} else {
+    Write-Host "ACTIVE SESSION: $activeSessionId"
 }
 
-Write-Host "ACTIVE SESSION: $activeSessionId"
-
 # 2. Find JSONL matching ACTIVE session UUID (exact match, no timestamp guesswork)
-$jsonlFile = Get-ChildItem $jsonlBase -Filter "*.jsonl" -ErrorAction SilentlyContinue |
-             Where-Object { $_.BaseName -eq $activeSessionId } |
-             Select-Object -First 1
+$jsonlFile = $null
+if ($activeSessionId) {
+    $expectedJsonlPath = Join-Path $jsonlBase "$activeSessionId.jsonl"
+    if (Test-Path $expectedJsonlPath) {
+        $jsonlFile = Get-Item $expectedJsonlPath
+    } else {
+        Write-Warning "Expected JSONL not found for active session: $expectedJsonlPath"
+        $kiloSession = $true
+    }
+}
 
 # Fallback: search broader paths if not in projects dir
-if (-not $jsonlFile) {
+if (-not $jsonlFile -and $activeSessionId) {
     $jsonlFile = Get-ChildItem "$env:USERPROFILE\.claude" -Filter "$activeSessionId.jsonl" -ErrorAction SilentlyContinue |
                  Select-Object -First 1
 }
