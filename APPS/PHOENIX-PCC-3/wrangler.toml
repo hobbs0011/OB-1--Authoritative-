@@ -1,0 +1,26 @@
+name = "phoenix-pcc-3"
+main = "src/index.js"
+compatibility_date = "2025-05-24"
+
+[ai]
+binding = "AI"
+
+[[kv_namespaces]]
+binding = "CACHE"
+id = "ea5c8e99cb584dee9ab4f9ba5ed421c9"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "soul-archive"
+database_id = "c69a11bc-064b-478f-9b1f-e9b8e2431fb8"
+
+[[services]]
+binding = "SOUL_LOGGER_SVC"
+service = "soul-logger"
+
+[[durable_objects.bindings]]
+name = "RACE_RUNNER"
+class_name = "RaceRunner"
+
+[triggers]
+crons = ["30 */6 * * *"]
