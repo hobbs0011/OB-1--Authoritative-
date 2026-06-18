@@ -1,0 +1,16 @@
+{
+  "hl_id": "HL-715",
+  "session_id": "sov100-roman-run136",
+  "rrl_source": "RRL\\RRL-136.txt",
+  "char_count": 0,
+  "byte_count": 0,
+  "soul_hash": "DNA_GAP_NO_RRL",
+  "dna_hash": "DNA_GAP_NO_RRL",
+  "dna_blueprint_count": 0,
+  "merkle_parent": "LEDGER_GAP",
+  "merkle_hash": "GAP_LEDGER_715",
+  "sealed_at": "2026-06-18T07:27:00+07:00",
+  "sov100": true,
+  "run": 136,
+  "status": "RRL_GAP_KILO_HOLLOW"
+}

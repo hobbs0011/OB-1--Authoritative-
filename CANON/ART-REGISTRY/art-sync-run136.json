@@ -1,0 +1,12 @@
+{
+  "run": 136,
+  "ledger_id": "HL-715",
+  "merkle_short": "GAP_LEDGER_715",
+  "starmap_file": "starmap-run136.json",
+  "keywords_file": "rfkw-run136.txt",
+  "keywords_used": ["forcemarch", "empire", "territory", "scout", "pheromone", "trail"],
+  "pieces_synced": 0,
+  "pieces": [],
+  "executed_at": "2026-06-18T07:27:00+07:00",
+  "notes": "KILO_HOLLOW session - no matching registry pieces"
+}

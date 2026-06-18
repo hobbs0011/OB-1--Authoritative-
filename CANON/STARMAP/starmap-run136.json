@@ -1,0 +1,12 @@
+{
+  "run": 136,
+  "rrl_path": "RRL\\RRL-136.txt",
+  "ledger_id": "HL-715",
+  "soul_turn_ids": "RRL_GAP",
+  "dna_turn_ids": "DNA_GAP",
+  "blueprint_locations": "NONE",
+  "char_count": 0,
+  "merkle_hash": "GAP_LEDGER_715",
+  "created_at": "2026-06-18T07:27:00+07:00",
+  "notes": "KILO_HOLLOW session - no real transcript. Territory inventory in OPERATIONS/*.jsonl"
+}
