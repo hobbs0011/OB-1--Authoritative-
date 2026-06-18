@@ -1,0 +1,61 @@
+CANONICAL SKILL FILES CATALOG - FORCΞ MARCH COMPLETE
+Run: 137 | Timestamp: 2026-06-18T14:19:00+07:00
+============================================================
+
+TOTAL SKILL FILES FOUND: 168
+EXCLUDING node_modules: 131
+CORE SKILL.md DEFINITIONS: 127
+
+============================================================
+SECTION 1: PRIMARY CANONICAL SKILLS (.kilo/skills/)
+============================================================
+D:\OB-1-CANONICAL\.kilo\skills\forcemarch\SKILL.md
+D:\OB-1-CANONICAL\.kilo\skills\PheTrails\SKILL.md
+D:\OB-1-CANONICAL\.kilo\skills\PhoenixScout\SKILL.md
+D:\OB-1-CANONICAL\.kilo\skills\reincarnateDEATH\SKILL.md
+D:\OB-1-CANONICAL\.kilo\skills\reincarnateRISE\SKILL.md
+D:\OB-1-CANONICAL\.kilo\skills\soularchive\SKILL.md
+D:\OB-1-CANONICAL\.kilo\skills\SupplyLines\SKILL.md
+
+============================================================
+SECTION 2: GITHUB SKILLS (.github/skills/)
+============================================================
+D:\OB-1-CANONICAL\.github\skills\git-finish-workflow\SKILL.md
+D:\OB-1-CANONICAL\.github\skills\legionnaire-field-guide\SKILL.md
+D:\OB-1-CANONICAL\.github\skills\merkle-marketing-voice\SKILL.md
+D:\OB-1-CANONICAL\.github\skills\phetrails\SKILL.md
+D:\OB-1-CANONICAL\.github\skills\phoenix-reincarnation\SKILL.md
+D:\OB-1-CANONICAL\.github\skills\soul-search\SKILL.md
+D:\OB-1-CANONICAL\.github\skills\unstoppable-agent-orchestration\SKILL.md
+
+============================================================
+SECTION 3: SPECIAL VARIANT SKILLS
+============================================================
+D:\OB-1-CANONICAL\CANON\SKILL-SOUL-ABSORPTION-PROTOCOL.md
+D:\OB-1-CANONICAL\OPERATIONS\phetrail-kiloclaw-browser-automation-skill.md
+D:\OB-1-CANONICAL\OPERATIONS\phetrail-openclaw-plugin-skills.md
+
+============================================================
+SECTION 4: WORKTREE SKILLS (14 worktrees, 11-12 files each)
+============================================================
+Worktrees: boiled-gopher, catnip-snowboard, debonair-fuel, free-dentist, 
+           groovy-baritone, hypnotic-form, iron-bugle, nosy-ethernet,
+           raspy-mustard, sparkling-clementine, towering-planet, zealous-grasshopper
+           
+Note: Worktree skills contain SKILL-SOUL-ABSORPTION-PROTOCOL.md variants in:
+- Root worktree folder
+- .github/skills/ (7 files)
+- CANON/ (1 file)
+- rs\mrmic\OneDrive\Documents\GitHub\OB-1--Authoritative-\CANON\ (1 file, external backup)
+
+============================================================
+SECTION 5: EXTERNAL REFERENCES (NOT COUNTED IN CANON)
+============================================================
+APPS\NET-PET-AI\node_modules\playwright-core\lib\tools\cli-client\skill\SKILL.md
+APPS\NET-PET-AI\node_modules\playwright-core\lib\tools\trace\SKILL.md
+CANON\ARCHIVE\GDRIVE-PROJECT-CORE\SCRIPTS\skill-lazy-loader.ts
+APPS\NET-PET-AI\public\lessons\archive\life_skills_academy_combined.html (x4 locations)
+
+============================================================
+PHETRAIL WRITTEN: CANON\PHEROMONES\PheTrail-run137.json
+============================================================
