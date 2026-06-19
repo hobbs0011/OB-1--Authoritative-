@@ -1,0 +1,28 @@
+# WINDOWS REINSTALL SETUP - RUN 132 PREP
+
+## REPO STATUS
+- Location: D:\OB-1-CANONICAL (safe during Windows reinstall)
+- CANON files: 6,459
+- Current HEAD: f9614d58
+
+## IMPORTANT FILES TO BACKUP MANUALLY (before reinstall)
+1. `C:\Users\mrmic\.wrangler\config\default.toml` - Cloudflare auth tokens
+2. `C:\Users\mrmic\AppData\Roaming\.claude\.credentials.json` - Claude OAuth
+3. D1 database credentials - check `APPS/NET-PET-AI/wrangler.toml`
+
+## POST-REINSTALL SETUP
+1. Install Node.js, npm, wrangler
+2. `cd D:\OB-1-CANONICAL`
+3. `npm install -g wrangler`
+4. `wrangler login` (requires browser)
+5. Restore API keys from `.wrangler/config`
+
+## SAFE MODE FAILURE DOCUMENTATION
+- SrtTrail.txt error blocks Safe Mode boot
+- ASUS Precision Touchpad driver (oem190, oem205) cannot be removed
+- Driver removal requires external boot media
+
+## NEXT ACTIONS AFTER REINSTALL
+- Rebuild Windows environment
+- Test NET-PET-AI deploy
+- Resume ASUS driver cleanup in clean environment

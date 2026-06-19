@@ -30,11 +30,15 @@ $excludedDirs = @(
 $target  = if ($Zone.StartsWith("D:")) { $Zone } else { Join-Path $repo $Zone }
 $files   = Get-ChildItem $target -Recurse -File -ErrorAction SilentlyContinue
 $exCount = 0
-$files   = $files | Where-Object {
-    $full = $_.FullName
-    if ($Exclude | Where-Object { $full -match $_ }) { $exCount++; $false }
-    elseif ($excludedDirs | Where-Object { $full -match [regex]::Escape($_) }) { $exCount++; $false }
-    else { $true }
+if ($files) {
+    $files   = @($files | Where-Object {
+        $full = $_.FullName
+        if ($Exclude | Where-Object { $full -match $_ }) { $exCount++; $false }
+        elseif ($excludedDirs | Where-Object { $full -match [regex]::Escape($_) }) { $exCount++; $false }
+        else { $true }
+    })
+} else {
+    $files = @()
 }
 Write-Host "SCOUT -> $target  (files=$($files.Count)  excluded=$exCount)"
 
@@ -124,7 +128,7 @@ foreach ($f in $files) {
     # LEDGER LENS
     # ══════════════════════════════════════════════════════════════════════════
     if ($Lens -in "all","LEDGER") {
-        $days = [math]::Round((Get-Date - $f.LastWriteTime).TotalDays)
+        $days = [math]::Round(((Get-Date) - $f.LastWriteTime).TotalDays)
         if ($f.Name -eq "PIPELINE-CURSOR.md") {
             if ($days -gt 365) {
                 [void]$finds.Add([pscustomobject]@{ scout_id="SC-$ts-" + $finds.Count; priority="P1"; type="LEDGER"; status="FROZEN"; file=$rel; line=1; bytes=$bytes; excerpt="FROZEN $days days — pipeline abandoned"; reason="PIPELINE-CURSOR.md frozen > 1 year — pipeline abandoned"; action="Rewrite cursor from scratch" })
@@ -271,9 +275,6 @@ if ($Lens -in "all","PIPELINE") {
     }
 }
 
-
-}
-
 # ══════════════════════════════════════════════════════════════════════════════
 # Write JSONL
 # ══════════════════════════════════════════════════════════════════════════════
@@ -284,15 +285,15 @@ if ($finds.Count -gt 0) {
 # ══════════════════════════════════════════════════════════════════════════════
 # Summary
 # ══════════════════════════════════════════════════════════════════════════════
-$p1     = ($finds | Where-Object { $_.priority -eq "P1" }).Count
-$p2     = ($finds | Where-Object { $_.priority -eq "P2" }).Count
-$soul   = ($finds | Where-Object { $_.type    -eq "SOUL"   }).Count
-$led    = ($finds | Where-Object { $_.type    -eq "LEDGER" }).Count
-$drft   = ($finds | Where-Object { $_.type    -eq "DRIFT"  }).Count
-$cfg    = ($finds | Where-Object { $_.type    -eq "CONFIG" }).Count
-$gap    = ($finds | Where-Object { $_.type    -eq "GAP"    }).Count
-$kw     = ($finds | Where-Object { $_.type    -eq "KEYWORD"}).Count
-$pipe   = ($finds | Where-Object { $_.type    -eq "PIPELINE"}).Count
+$p1     = if ($finds) { (@($finds | Where-Object { $_.priority -eq "P1" }).Count) } else { 0 }
+$p2     = if ($finds) { (@($finds | Where-Object { $_.priority -eq "P2" }).Count) } else { 0 }
+$soul   = if ($finds) { (@($finds | Where-Object { $_.type    -eq "SOUL"   }).Count) } else { 0 }
+$led    = if ($finds) { (@($finds | Where-Object { $_.type    -eq "LEDGER" }).Count) } else { 0 }
+$drft   = if ($finds) { (@($finds | Where-Object { $_.type    -eq "DRIFT"  }).Count) } else { 0 }
+$cfg    = if ($finds) { (@($finds | Where-Object { $_.type    -eq "CONFIG" }).Count) } else { 0 }
+$gap    = if ($finds) { (@($finds | Where-Object { $_.type    -eq "GAP"    }).Count) } else { 0 }
+$kw     = if ($finds) { (@($finds | Where-Object { $_.type    -eq "KEYWORD"}).Count) } else { 0 }
+$pipe   = if ($finds) { (@($finds | Where-Object { $_.type    -eq "PIPELINE"}).Count) } else { 0 }
 
 Write-Host ""
 Write-Host "============================================"

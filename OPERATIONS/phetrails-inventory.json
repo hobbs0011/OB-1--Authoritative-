@@ -1,0 +1,8 @@
+{
+  "generated_at": "2026-06-18T14:22:12+07:00",
+  "scope": "PHEROMONES",
+  "output_file": "OPERATIONS/phetrails-inventory.json",
+  "note": "InventoriedCANON/PHEROMONES and OPERATIONS/phetrail-*",
+  "PHEROMONES_inventory_todo": true,
+  "phetrail_ops_docs_todo": true
+}

@@ -1,3 +1,8 @@
+---
+description: "FORCΞ MARCH — 6-stage Roman Legion pipeline execution. Scout → Fingerprint → Process → Verify → Garrison → Limitanei. Extreme strain, exhaustion tolerated. Mission: recover forgotten territory, bring PCC legions online."
+agent: AGENT99
+---
+
 # /forcemarch — ROMAN LEGION FORCE MARCH COMMAND
 
 **COMMAND:** `/forcemarch`  

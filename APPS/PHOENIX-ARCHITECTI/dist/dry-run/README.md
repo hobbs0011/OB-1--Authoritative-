@@ -1,0 +1,1 @@
+This folder contains the built output assets for the worker "phoenix-architecti" generated at 2026-06-14T09:48:25.335Z.

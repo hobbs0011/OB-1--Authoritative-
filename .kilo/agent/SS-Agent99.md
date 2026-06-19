@@ -1,7 +1,7 @@
 ---
 description: "SuperSaiyan mode — maximum output, parallel execution, DeepSeek V4 Pro. Use when the job needs the best available intelligence. Heavy builds, multi-file sprints, orchestration of parallel workers."
 role: "agent"
-model: "deepseek/deepseek-v4-pro"
+model: "openrouter/deepseek/deepseek-reasoner"
 color: "#f97316"
 permission:
   bash: allow

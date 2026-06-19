@@ -107,6 +107,42 @@ async function kvDecryptGet(kv, key, hexKey) {
   }
   try { return JSON.parse(raw); } catch { return null; }
 }
+
+function normalizeStudentProfile(raw) {
+  if (!raw || typeof raw !== 'object') return {};
+  const p = { ...(raw || {}) };
+
+  if (!p.name && p.fullName) p.name = p.fullName.split(/\s+/)[0] || p.fullName;
+  if (!p.fullName && p.name) p.fullName = p.name;
+
+  if (!p.level && p.englishLevel) p.level = p.englishLevel;
+  if (!p.englishLevel && p.level) p.englishLevel = p.level;
+
+  if (!p.goals && p.goal) p.goals = p.goal;
+  if (!p.goals && p.track && p.milestone) p.goals = `${p.track} track: ${p.milestone}.`;
+
+  if (!p.lang && p.language) p.lang = p.language;
+  if (!p.language && p.lang) p.language = p.lang;
+
+  if (!p.currentCity && p.city) p.currentCity = p.city;
+  if (!p.progressPct && p.progress) p.progressPct = p.progress;
+  if (!p.milestone && p.track) p.milestone = p.track;
+
+  if (!p.confidence_areas && p.confidenceAreas) p.confidence_areas = p.confidenceAreas;
+  if (!p.confidenceAreas && p.confidence_areas) p.confidenceAreas = p.confidence_areas;
+  if (!p.fear_trigger && p.fearTrigger) p.fear_trigger = p.fearTrigger;
+  if (!p.fearTrigger && p.fear_trigger) p.fearTrigger = p.fear_trigger;
+
+  if (!p.teachingFocus && p.coachNote) p.teachingFocus = p.coachNote;
+  if (!p.sessionNotes && p.coachNote) p.sessionNotes = p.coachNote;
+  if (!p.primaryBlock) {
+    if (p.coachNote) p.primaryBlock = p.coachNote;
+    else if (p.track === 'Speaking') p.primaryBlock = 'Speaking delivery under speed.';
+  }
+
+  return p;
+}
+
 function detectMarkers(text) {
   const words = text.match(/\b[A-Z]{2,}\b/g) || [];
   const caps_words = words.length;
@@ -744,7 +780,7 @@ async function handleAPI(path, request, env, url) {
       const body = await request.json();
       // Read existing profile
       const key = `student_profile_${studentId}`;
-      let profile = await env.NET_PET_KV.get(key, "json") || {};
+      let profile = normalizeStudentProfile(await env.NET_PET_KV.get(key, "json") || {});
       // Whitelist of allowed coach fields
       const allowed = ['level','englishLevel','teachingFocus','sessionNotes','milestone','breakthrough','primaryBlock','lang','goals','confidenceAreas','dailyPractice','fear_trigger'];
       const updated = [];
@@ -752,7 +788,8 @@ async function handleAPI(path, request, env, url) {
         if (body[f] !== undefined) { profile[f] = body[f]; updated.push(f); }
       }
       if (updated.length === 0) return addCors(json({ error: "No valid fields to update — allowed: " + allowed.join(', ') }, 400), request);
-      await env.NET_PET_KV.put(key, JSON.stringify(profile));
+      const normalized = normalizeStudentProfile(profile);
+      await env.NET_PET_KV.put(key, JSON.stringify(normalized));
       await logAudit(env, { action: 'UPDATE_STUDENT', actor: 'admin', target: studentId, meta: { fields: updated } });
       return addCors(json({ ok: true, updatedFields: updated, studentId }), request);
     } catch (err) {
@@ -773,7 +810,7 @@ async function handleAPI(path, request, env, url) {
         env.NET_PET_KV.get("student_profile_" + sid),
         env.NET_PET_KV.get("session_history_" + sid),
       ]);
-      const profile = raw ? JSON.parse(raw) : {};
+      const profile = normalizeStudentProfile(raw ? JSON.parse(raw) : {});
       let histDecrypted = histRaw;
       if (env.ENCRYPTION_KEY && histRaw?.startsWith('v1:')) {
         try { histDecrypted = await decryptField(histRaw.slice(3), env.ENCRYPTION_KEY); } catch { histDecrypted = null; }
@@ -1201,7 +1238,7 @@ const [rawProfile, rawLang, rawVocab, rawArc, rawMemory, rawPhonics, rawSessionH
       const access_token = apiKey;
 
       let agentProfile = null, agentLang = "en", recentVocab = [], arcData = null, memoryData = null, phonicsData = null;
-      try { if (rawProfile) agentProfile = JSON.parse(rawProfile); } catch (_) {}
+      try { if (rawProfile) agentProfile = normalizeStudentProfile(JSON.parse(rawProfile)); } catch (_) {}
       if (!agentProfile) agentProfile = { level: "A1", goals: "Practice natural spoken English", primaryBlock: "speaking confidence", name: "Student" };
       if (rawLang) agentLang = rawLang;
       try { if (rawVocab) { const vl = JSON.parse(rawVocab); recentVocab = vl.slice(-5).map(w => w.word); } } catch (_) {}
@@ -1893,7 +1930,7 @@ if (lastSessionNotes) settings.agent.think.prompt += "\n\n" + lastSessionNotes;
     let profile = null;
     try {
       const raw = await env.NET_PET_KV.get(`student_profile_${studentId}`);
-      if (raw) profile = JSON.parse(raw);
+      if (raw) profile = normalizeStudentProfile(JSON.parse(raw));
     } catch (_) {}
 
     // Read streak data
@@ -1949,16 +1986,17 @@ if (lastSessionNotes) settings.agent.think.prompt += "\n\n" + lastSessionNotes;
         if (body.homework_notes === undefined) return addCors(json({ error: "patch or homework_notes required" }, 400), request);
         return addCors(json({ ok: true, studentId }), request);
       }
-      // Read existing profile, merge patch, write back
+      // Read existing profile, normalize legacy fields, merge patch, normalize again, write back
       let profile = {};
       try {
         const raw = await env.NET_PET_KV.get(`student_profile_${studentId}`);
-        if (raw) profile = JSON.parse(raw);
+        if (raw) profile = normalizeStudentProfile(JSON.parse(raw));
       } catch (_) {}
       // Shallow merge — patch fields overwrite top-level keys only
       for (const [key, val] of Object.entries(patch)) {
         profile[key] = val;
       }
+      profile = normalizeStudentProfile(profile);
       await env.NET_PET_KV.put(`student_profile_${studentId}`, JSON.stringify(profile));
       return addCors(json({ ok: true, studentId }), request);
     } catch (err) {
@@ -2306,7 +2344,7 @@ async function handleAdminRoster(env) {
     const students = await Promise.all(list.keys.map(async k => {
       const studentId = k.name.replace("student_profile_", "");
       const raw = await env.NET_PET_KV.get(k.name).catch(() => null);
-      const profile = raw ? JSON.parse(raw) : { studentId };
+      const profile = normalizeStudentProfile(raw ? JSON.parse(raw) : { studentId });
       // Fetch streak + phonics data
       let streak = { currentStreak: 0, longestStreak: 0 };
       const streakRaw = await env.NET_PET_KV.get(`streak:${studentId}`).catch(() => null);
@@ -3094,7 +3132,7 @@ async function handleMagicChat(body, request, env) {
     try {
       const profileRaw = await env.NET_PET_KV.get(`student_profile_${studentId}`);
       if (profileRaw) {
-        const p = JSON.parse(profileRaw);
+        const p = normalizeStudentProfile(JSON.parse(profileRaw));
         const profileLines = [];
         if (p.name) profileLines.push(`Name: ${p.name}`);
         if (p.level) profileLines.push(`Level: ${p.level}`);

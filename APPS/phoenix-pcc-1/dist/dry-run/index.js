@@ -1,0 +1,1274 @@
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+// src/forceawareness.js
+var AUTH = "ffScwBjPQjBnoAlectawu8E+J4NcmO3idxGxtlcRue8=";
+var SELF = { name: "pcc1-obi", url: "https://phoenix-pcc-1.mrmichaelhobbs123.workers.dev" };
+var PEERS = [
+  { name: "pcc2-anakin", url: "https://phoenix-pcc-2.mrmichaelhobbs123.workers.dev" },
+  { name: "pcc3-windu", url: "https://phoenix-architecti.mrmichaelhobbs123.workers.dev" }
+];
+async function sendTelegram(env, msg) {
+  const token = env.TELEGRAM_BOT_TOKEN;
+  const chatId = env.TELEGRAM_CHAT_ID;
+  if (!token || !chatId) return;
+  await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ chat_id: chatId, text: msg, parse_mode: "Markdown" })
+  }).catch(() => {
+  });
+}
+__name(sendTelegram, "sendTelegram");
+async function pingPeers(env, alertMsg) {
+  for (const peer of PEERS) {
+    await fetch(`${peer.url}/api/message`, {
+      method: "POST",
+      headers: { "x-pa-auth": AUTH, "Content-Type": "application/json" },
+      body: JSON.stringify({ message: alertMsg })
+    }).catch(() => {
+    });
+  }
+}
+__name(pingPeers, "pingPeers");
+async function writeMetric(env, pccName, delta = {}) {
+  const trailKey = "phetrail:latest";
+  const trail = JSON.parse(await env.PHETRAIL.get(trailKey) || "{}");
+  const ts = (/* @__PURE__ */ new Date()).toISOString();
+  if (!trail.positive_trails) trail.positive_trails = [];
+  if (!trail.state_markers) trail.state_markers = {};
+  if (!trail.state_markers.pcc_metrics) trail.state_markers.pcc_metrics = {};
+  trail.state_markers.pcc_metrics[pccName] = { ts, ...delta };
+  trail.state_markers.last_updated = ts;
+  await env.PHETRAIL.put(trailKey, JSON.stringify(trail));
+  return trail;
+}
+__name(writeMetric, "writeMetric");
+async function readTrail(env) {
+  const trailKey = "phetrail:latest";
+  const trail = JSON.parse(await env.PHETRAIL.get(trailKey) || "{}");
+  return trail;
+}
+__name(readTrail, "readTrail");
+async function ForceAwareness(env) {
+  const now = Date.now();
+  const results = [];
+  const trail = await readTrail(env);
+  for (const pcc of PEERS) {
+    const lastBatchesKey = `force:${pcc.name}:last_batches`;
+    const restartsKey = `force:${pcc.name}:restarts`;
+    let status = null;
+    let dead = false;
+    let reason = "";
+    try {
+      const r = await fetch(`${pcc.url}/api/race/status`, { headers: { "x-pa-auth": AUTH } });
+      if (!r.ok) {
+        dead = true;
+        reason = `status ${r.status}`;
+      } else {
+        status = await r.json();
+        if (status.elapsed_ms >= status.budget_ms) {
+          dead = true;
+          reason = "budget_exhausted";
+        } else {
+          const lastBatches = parseInt(await env.PHETRAIL.get(lastBatchesKey) || "0");
+          if (status.batches_run <= lastBatches && status.batches_run > 0) {
+            dead = true;
+            reason = "stalled";
+          }
+        }
+      }
+    } catch (e) {
+      dead = true;
+      reason = e.message;
+    }
+    if (status) await env.PHETRAIL.put(lastBatchesKey, String(status.batches_run));
+    if (dead) {
+      const alert = `\u{1F6A8} *Agent 99 OS ALERT*
+${SELF.name} ForceAwareness: *${pcc.name}* is DOWN
+Reason: ${reason}
+Time: ${new Date(now).toISOString()}`;
+      await sendTelegram(env, alert);
+      await pingPeers(env, `FORCE ALERT from ${SELF.name}: ${pcc.name} is DOWN \u2014 reason: ${reason}. Auto-restart attempted.`);
+      try {
+        await fetch(`${pcc.url}/api/race/start`, {
+          method: "POST",
+          headers: { "x-pa-auth": AUTH, "Content-Type": "application/json" },
+          body: JSON.stringify({ budget_ms: 108e5 })
+        });
+        const restarts = parseInt(await env.PHETRAIL.get(restartsKey) || "0") + 1;
+        await env.PHETRAIL.put(restartsKey, String(restarts));
+        const log = JSON.parse(await env.PHETRAIL.get("force:log") || "[]");
+        log.push({ ts: now, reporter: SELF.name, pcc: pcc.name, reason, restarted: true });
+        if (log.length > 100) log.splice(0, log.length - 100);
+        await env.PHETRAIL.put("force:log", JSON.stringify(log));
+        results.push({ pcc: pcc.name, dead, reason, restarted: true });
+      } catch (e) {
+        results.push({ pcc: pcc.name, dead, reason, restart_error: e.message });
+      }
+    } else {
+      results.push({ pcc: pcc.name, dead: false, batches: status?.batches_run, score: status?.score });
+    }
+  }
+  await env.PHETRAIL.put("force:status", JSON.stringify({ checked_at: now, reporter: SELF.name, results }));
+  await writeMetric(env, SELF.name, { force_awareness: true, peers_checked: results.length, dead_count: results.filter((r) => r.dead).length });
+  return results;
+}
+__name(ForceAwareness, "ForceAwareness");
+async function handleForce(request, env) {
+  const status = await env.PHETRAIL.get("force:status", { type: "json" });
+  const log = await env.PHETRAIL.get("force:log", { type: "json" });
+  const restarts = {};
+  for (const pcc of PEERS) {
+    restarts[pcc.name] = parseInt(await env.PHETRAIL.get(`force:${pcc.name}:restarts`) || "0");
+  }
+  return Response.json({ reporter: SELF.name, status, log: (log || []).slice(-20), restarts });
+}
+__name(handleForce, "handleForce");
+
+// src/index.js
+var PA_AUTH = "ffScwBjPQjBnoAlectawu8E+J4NcmO3idxGxtlcRue8=";
+var PA_BASE = "https://phoenix-architecti.mrmichaelhobbs123.workers.dev";
+var FLEET_ID = "ob1";
+var GITHUB_OWNER = "Phoenix-Rising-Ai-Solutions";
+var GITHUB_REPO = "OB-1--Authoritative-";
+var GITHUB_API = "https://api.github.com";
+function b64Decode(b64) {
+  const binary = atob(b64.replace(/\n/g, ""));
+  const bytes = new Uint8Array(binary.length);
+  for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+  return new TextDecoder().decode(bytes);
+}
+__name(b64Decode, "b64Decode");
+function b64Encode(text) {
+  const bytes = new TextEncoder().encode(text);
+  let binary = "";
+  for (let i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+  return btoa(binary);
+}
+__name(b64Encode, "b64Encode");
+function parseStructuredPatch(patchText) {
+  const m = patchText.match(/\{[\s\S]*?"file"[\s\S]*?"find"[\s\S]*?"replace"[\s\S]*?\}/);
+  if (!m) return null;
+  try {
+    const p = JSON.parse(m[0]);
+    if (p.file && typeof p.find === "string" && typeof p.replace === "string") return p;
+  } catch {
+  }
+  return null;
+}
+__name(parseStructuredPatch, "parseStructuredPatch");
+async function applyGitHubPatch(env, { file, find, replace, description }) {
+  const token = env.GITHUB_TOKEN;
+  if (!token) return { ok: false, reason: "GITHUB_TOKEN not set" };
+  if (!find || typeof find !== "string" || find.length === 0) {
+    return { ok: false, reason: "find must be a non-empty verbatim string" };
+  }
+  const headers = {
+    "Authorization": `Bearer ${token}`,
+    "Content-Type": "application/json",
+    "User-Agent": "phoenix-pcc-1/ob1",
+    "Accept": "application/vnd.github+json",
+    "X-GitHub-Api-Version": "2022-11-28"
+  };
+  const safeFile = encodeGitHubPath(file);
+  const fileUrl = `${GITHUB_API}/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${safeFile}`;
+  const getResp = await fetch(fileUrl, { headers });
+  if (!getResp.ok) return { ok: false, reason: `GitHub GET ${getResp.status} for ${file}` };
+  const { content: b64, sha } = await getResp.json();
+  const original = b64Decode(b64);
+  if (!original.includes(find)) {
+    if (replace && original.includes(replace)) {
+      return { ok: true, file, sha: "already-applied", already_applied: true };
+    }
+    return { ok: false, reason: `FIND_NOT_FOUND in ${file} (find="${find.slice(0, 60)}...")` };
+  }
+  const patched = original.split(find).join(replace);
+  const msg = `fix(ob1-auto): ${description || "OB1 code-queue autonomous patch"}
+
+Applied by phoenix-pcc-1 via PA Qwen Coder \u2014 no human in the loop`;
+  const putResp = await fetch(fileUrl, {
+    method: "PUT",
+    headers,
+    body: JSON.stringify({ message: msg, content: b64Encode(patched), sha })
+  });
+  if (putResp.status === 409) {
+    const retryGet = await fetch(fileUrl, { headers });
+    if (!retryGet.ok) return { ok: false, reason: `409 retry GET failed: ${retryGet.status}` };
+    const { content: b64r, sha: shar } = await retryGet.json();
+    const originalR = b64Decode(b64r);
+    if (!originalR.includes(find)) return { ok: false, reason: "FIND_NOT_FOUND after 409 retry" };
+    const patchedR = originalR.split(find).join(replace);
+    const retryPut = await fetch(fileUrl, {
+      method: "PUT",
+      headers,
+      body: JSON.stringify({ message: msg, content: b64Encode(patchedR), sha: shar })
+    });
+    if (!retryPut.ok) {
+      const e = await retryPut.text();
+      return { ok: false, reason: `409 retry PUT ${retryPut.status}: ${e.slice(0, 200)}` };
+    }
+    const rd = await retryPut.json();
+    return { ok: true, file, sha: rd.commit?.sha, retried: true };
+  }
+  if (!putResp.ok) {
+    const err = await putResp.text();
+    return { ok: false, reason: `GitHub PUT ${putResp.status}: ${err.slice(0, 200)}` };
+  }
+  const data = await putResp.json();
+  return { ok: true, file, sha: data.commit?.sha, commit_url: data.commit?.html_url };
+}
+__name(applyGitHubPatch, "applyGitHubPatch");
+function encodeGitHubPath(path) {
+  return String(path).split("/").map(encodeURIComponent).join("/");
+}
+__name(encodeGitHubPath, "encodeGitHubPath");
+function normalizeRunNumber(run_number) {
+  const raw = String(run_number || "").trim();
+  return /^\d{1,8}$/.test(raw) ? raw : null;
+}
+__name(normalizeRunNumber, "normalizeRunNumber");
+function truncateText(text, maxChars = 25e4) {
+  const raw = String(text || "");
+  return raw.length > maxChars ? raw.slice(0, maxChars) : raw;
+}
+__name(truncateText, "truncateText");
+function normalizeStringArray(value, limit = 100) {
+  if (!Array.isArray(value)) return [];
+  return value.map((v) => String(v || "").trim()).filter(Boolean).slice(0, limit);
+}
+__name(normalizeStringArray, "normalizeStringArray");
+function escapeLike(value) {
+  return String(value || "").replace(/([%_\\])/g, "\\$1");
+}
+__name(escapeLike, "escapeLike");
+async function writeGitHubFile(env, { file, content, description }) {
+  const token = env.GITHUB_TOKEN;
+  if (!token) return { ok: false, reason: "GITHUB_TOKEN not set" };
+  const safeFile = encodeGitHubPath(file);
+  const headers = {
+    "Authorization": `Bearer ${token}`,
+    "Content-Type": "application/json",
+    "User-Agent": "phoenix-pcc-1/ob1",
+    "Accept": "application/vnd.github+json",
+    "X-GitHub-Api-Version": "2022-11-28"
+  };
+  const fileUrl = `${GITHUB_API}/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${safeFile}`;
+  let sha;
+  try {
+    const check = await fetch(fileUrl, { headers });
+    if (check.ok) {
+      const d = await check.json();
+      sha = d.sha;
+    }
+  } catch {
+  }
+  const msg = `phetrail: ${description || "OB1 phetrail commit"}
+
+Written by phoenix-pcc-1 \u2014 no human in the loop`;
+  const body = { message: msg, content: b64Encode(content) };
+  if (sha) body.sha = sha;
+  const putResp = await fetch(fileUrl, { method: "PUT", headers, body: JSON.stringify(body) });
+  if (!putResp.ok) {
+    const e = await putResp.text();
+    return { ok: false, reason: `PUT ${putResp.status}: ${e.slice(0, 200)}` };
+  }
+  const data = await putResp.json();
+  return { ok: true, file, sha: data.commit?.sha };
+}
+__name(writeGitHubFile, "writeGitHubFile");
+var STUDENT_FLEET = [
+  "mai-tram-bluetech",
+  "huong-bluetech",
+  "sov100-michael",
+  "sov100-test-magic",
+  "net-student-next"
+];
+var BRIEF_PROMPT = `You generate dense session preparation briefs for an AI agent about to work with a student.
+Analyze the provided session data and return a brief covering:
+1. LEVEL: Current proficiency snapshot (vocabulary range, grammar gaps, pronunciation patterns)
+2. MOMENTUM: What they were working on \u2014 where they left off
+3. STYLE: How they learn best \u2014 correction tolerance, pace, humor level
+4. THREADS: Unresolved topics or promised follow-ups
+5. WATCH: Emotional state patterns, what encourages vs discourages them
+
+Be dense. Under 300 words. This is read at boot \u2014 make every word count.`;
+function checkAuth(request) {
+  const key = request.headers.get("x-pa-auth") || request.headers.get("Authorization")?.replace("Bearer ", "");
+  return key === PA_AUTH;
+}
+__name(checkAuth, "checkAuth");
+async function writeMajorDirectiveMarker(env, source, message) {
+  const kv = env.PHETRAIL;
+  if (!kv || !message) return;
+  const ts = (/* @__PURE__ */ new Date()).toISOString();
+  const marker = {
+    ts,
+    source,
+    message: String(message).slice(0, 2e3),
+    keywords: ["Agent99", "FORCEAWARENESS", "OB1", "PCC1", "PhoenixCoder", "role", "Agent99 OS"].filter((k) => String(message).toLowerCase().includes(k.toLowerCase()))
+  };
+  await kv.put(`phetrail:major-directive:${Date.now()}`, JSON.stringify(marker));
+  const trail = JSON.parse(await kv.get("phetrail:latest") || "{}");
+  if (!trail.state_markers) trail.state_markers = {};
+  if (!trail.state_markers.major_directives) trail.state_markers.major_directives = [];
+  trail.state_markers.major_directives.unshift(marker);
+  trail.state_markers.major_directives = trail.state_markers.major_directives.slice(0, 50);
+  trail.state_markers.last_updated = ts;
+  await kv.put("phetrail:latest", JSON.stringify(trail));
+}
+__name(writeMajorDirectiveMarker, "writeMajorDirectiveMarker");
+async function fetchSoulContext(env, userId) {
+  if (!env.SOUL_LOGGER_SVC) return null;
+  try {
+    const res = await env.SOUL_LOGGER_SVC.fetch(
+      new Request(`https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/context/${userId}`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" }
+      })
+    );
+    return res.ok ? res.json() : null;
+  } catch {
+    return null;
+  }
+}
+__name(fetchSoulContext, "fetchSoulContext");
+async function runStudentActualizer(env, userId) {
+  const ctx = await fetchSoulContext(env, userId).catch(() => null);
+  if (!ctx || !ctx.sessions?.length) return { userId, ok: false, reason: "no soul data" };
+  const sessionSummaries = ctx.sessions.map((s, i) => {
+    const prompts = s.last_prompts?.map((p) => p.text).join(" | ") || "";
+    return `Session ${i + 1} (${s.ingested_at?.slice(0, 10)}): ${prompts.slice(0, 300)}`;
+  }).join("\n");
+  const keywords = (ctx.top_keywords || []).slice(0, 10).map((k) => `${k.keyword}(${k.weight})`).join(", ");
+  const aiResult = await env.AI.run("@cf/meta/llama-3.3-70b-instruct-fp8-fast", {
+    messages: [
+      { role: "system", content: BRIEF_PROMPT },
+      { role: "user", content: `STUDENT: ${userId}
+LAST ACTIVE: ${ctx.last_active || "unknown"}
+SESSIONS: ${ctx.sessions.length}
+KEYWORDS: ${keywords || "none"}
+
+RECENT SESSIONS:
+${sessionSummaries || "none"}` }
+    ],
+    max_tokens: 400
+  });
+  const brief = (aiResult?.response || "").trim();
+  if (!brief) return { userId, ok: false, reason: "AI returned empty" };
+  const now = (/* @__PURE__ */ new Date()).toISOString();
+  await env.PHETRAIL.put(`pcc1:${userId}:brief`, brief, { expirationTtl: 86400 }).catch(() => {
+  });
+  await env.PHETRAIL.put(`pcc1:${userId}:meta`, JSON.stringify({ generated_at: now, fleet: FLEET_ID }), { expirationTtl: 86400 }).catch(() => {
+  });
+  const threadsMatch = brief.match(/THREADS[:\s]+(.+?)(?=\n\n|\n\*\*|$)/is);
+  if (threadsMatch && threadsMatch[1].trim().length > 20 && env.DB) {
+    const bb_id = `BB-${Date.now()}`;
+    const threadText = threadsMatch[1].trim().slice(0, 500);
+    const now2 = (/* @__PURE__ */ new Date()).toISOString();
+    await env.DB.prepare(
+      "INSERT INTO backburner (bb_id, title, description, source, priority, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?)"
+    ).bind(bb_id, `OB1 thread \u2014 ${userId}: ${threadText.slice(0, 60)}`, threadText, "pcc1-actualizer", "~", now2, now2).run().catch(() => {
+    });
+  }
+  return { userId, ok: true, brief_length: brief.length };
+}
+__name(runStudentActualizer, "runStudentActualizer");
+async function logPccMetric(env, { task_preview, task_length, model, duration_ms, output_length, passed, fail_reason }) {
+  if (!env.DB) return;
+  await env.DB.prepare(
+    "INSERT INTO pcc_metrics (run_id, task_preview, task_length, model, duration_ms, output_length, passed, fail_reason) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
+  ).bind(
+    FLEET_ID,
+    String(task_preview).slice(0, 100),
+    task_length || 0,
+    model || "unknown",
+    duration_ms || 0,
+    output_length || 0,
+    passed ? 1 : 0,
+    fail_reason || null
+  ).run().catch(() => {
+  });
+}
+__name(logPccMetric, "logPccMetric");
+async function taskTranslate(env) {
+  if (!env.AI || !env.DB) return { task: "translate", processed: 0 };
+  const rows = await env.DB.prepare("SELECT * FROM backburner WHERE status='OPEN' AND source='translate-queue' LIMIT 5").all();
+  let processed = 0;
+  for (const row of rows.results || []) {
+    try {
+      const res = await env.AI.run("@cf/meta/m2m100-1.2b", { text: row.description || row.title, source_lang: "en", target_lang: "vi" });
+      const translated = res?.translated_text || "";
+      if (translated) {
+        await env.DB.prepare("UPDATE backburner SET status='PENDING_CLOSE', description=?, updated_at=? WHERE bb_id=?").bind(`[VI] ${translated}
+[EN] ${row.description}`, (/* @__PURE__ */ new Date()).toISOString(), row.bb_id).run();
+        processed++;
+      }
+    } catch {
+    }
+  }
+  return { task: "translate", processed };
+}
+__name(taskTranslate, "taskTranslate");
+async function taskLostSoulScan(env) {
+  if (!env.AI || !env.DB) return { task: "lostsoul-scan", processed: 0 };
+  const rows = await env.DB.prepare("SELECT id, run_number, rrl_raw FROM rrl_archive WHERE lostsoul_scan_done=0 LIMIT 2").all();
+  let processed = 0;
+  for (const row of rows.results || []) {
+    try {
+      const lines = (row.rrl_raw || "").split("\n").filter((l) => l.trim());
+      const userLines = lines.filter((l) => /^(Human:|SOV100:|Michael:)/i.test(l)).map((l) => l.replace(/^(Human:|SOV100:|Michael:)/i, "").trim()).join("\n");
+      if (!userLines) continue;
+      const aiResult = await env.AI.run("@cf/meta/llama-3.3-70b-instruct-fp8-fast", {
+        messages: [{ role: "user", content: `Extract every directive/demand from SOV100 verbatim. Return JSON array of strings only.
+
+${userLines.slice(0, 5e3)}` }],
+        max_tokens: 600
+      });
+      let directives = [];
+      try {
+        const m = (aiResult?.response || "").match(/\[[\s\S]*\]/);
+        if (m) directives = JSON.parse(m[0]);
+      } catch {
+      }
+      directives = normalizeStringArray(directives, 10);
+      const now = (/* @__PURE__ */ new Date()).toISOString();
+      await env.DB.prepare("UPDATE rrl_archive SET lostsoul_scan_done=1, lostsoul_count=?, scanned_at=? WHERE id=?").bind(directives.length, now, row.id).run();
+      for (const d of directives.slice(0, 10)) {
+        if (typeof d === "string" && d.length > 10) {
+          const bb_id = `BB-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`;
+          await env.DB.prepare("INSERT INTO backburner (bb_id, title, description, source, priority, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?)").bind(bb_id, `OB1 LostSoul R${row.run_number}: ${d.slice(0, 80)}`, d, "ob1-lostsoul", "~", now, now).run().catch(() => {
+          });
+        }
+      }
+      processed++;
+    } catch {
+    }
+  }
+  return { task: "lostsoul-scan", processed };
+}
+__name(taskLostSoulScan, "taskLostSoulScan");
+async function taskCompletenessAudit(env) {
+  if (!env.AI || !env.DB) return { task: "completeness-audit", processed: 0 };
+  const row = await env.DB.prepare("SELECT id, run_number, rrl_raw FROM rrl_archive ORDER BY id DESC LIMIT 1").first();
+  if (!row) return { task: "completeness-audit", processed: 0 };
+  const aiResult = await env.AI.run("@cf/meta/llama-3.3-70b-instruct-fp8-fast", {
+    messages: [{ role: "user", content: `Find requests from the user (Human/SOV100) that the assistant did NOT execute. Return verbatim JSON array only. Return [] if all executed.
+
+${(row.rrl_raw || "").slice(0, 6e3)}` }],
+    max_tokens: 500
+  });
+  let gaps = [];
+  try {
+    const m = (aiResult?.response || "").match(/\[[\s\S]*\]/);
+    if (m) gaps = JSON.parse(m[0]);
+  } catch {
+  }
+  gaps = normalizeStringArray(gaps, 8);
+  const now = (/* @__PURE__ */ new Date()).toISOString();
+  for (const g of gaps.slice(0, 8)) {
+    if (typeof g === "string" && g.length > 10) {
+      const bb_id = `BB-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`;
+      await env.DB.prepare("INSERT INTO backburner (bb_id, title, description, source, priority, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?)").bind(bb_id, `OB1 Audit R${row.run_number}: ${g.slice(0, 80)}`, g, "ob1-audit", "!", now, now).run().catch(() => {
+      });
+    }
+  }
+  return { task: "completeness-audit", processed: gaps.length };
+}
+__name(taskCompletenessAudit, "taskCompletenessAudit");
+async function taskPatternScan(env) {
+  if (!env.AI || !env.DB) return { task: "pattern-scan", processed: 0 };
+  const recent = await env.DB.prepare("SELECT run_number, rrl_raw FROM rrl_archive ORDER BY id DESC LIMIT 5").all();
+  if (!recent.results?.length) return { task: "pattern-scan", processed: 0 };
+  const combined = recent.results.map((r) => `=== RUN ${r.run_number} ===
+${(r.rrl_raw || "").slice(0, 1200)}`).join("\n\n");
+  const aiResult = await env.AI.run("@cf/meta/llama-3.3-70b-instruct-fp8-fast", {
+    messages: [{ role: "user", content: `Find recurring unresolved topics across these sessions. Return JSON array of strings only.
+
+${combined.slice(0, 7e3)}` }],
+    max_tokens: 400
+  });
+  let patterns = [];
+  try {
+    const m = (aiResult?.response || "").match(/\[[\s\S]*\]/);
+    if (m) patterns = JSON.parse(m[0]);
+  } catch {
+  }
+  patterns = normalizeStringArray(patterns, 6);
+  const now = (/* @__PURE__ */ new Date()).toISOString();
+  for (const p of patterns.slice(0, 6)) {
+    if (typeof p === "string" && p.length > 10) {
+      const bb_id = `BB-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`;
+      await env.DB.prepare("INSERT INTO backburner (bb_id, title, description, source, priority, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?)").bind(bb_id, `OB1 Pattern: ${p.slice(0, 80)}`, p, "ob1-pattern", "!", now, now).run().catch(() => {
+      });
+    }
+  }
+  return { task: "pattern-scan", processed: patterns.length };
+}
+__name(taskPatternScan, "taskPatternScan");
+async function taskBriefScan(env) {
+  if (!env.DB || !env.PHETRAIL) return { task: "brief-scan", stale: 0 };
+  const students = ["mai-tram-bluetech", "huong-bluetech", "sov100-michael"];
+  const stale = [];
+  for (const userId of students) {
+    const meta = await env.PHETRAIL.get(`pcc1:${userId}:meta`).catch(() => null);
+    if (!meta) {
+      stale.push(userId);
+      continue;
+    }
+    let generated_at;
+    try {
+      ({ generated_at } = JSON.parse(meta));
+    } catch {
+      stale.push(userId);
+      continue;
+    }
+    if (Date.now() - new Date(generated_at).getTime() > 432e5) stale.push(userId);
+  }
+  if (stale.length) {
+    const now = (/* @__PURE__ */ new Date()).toISOString();
+    const bb_id = `BB-${Date.now()}`;
+    await env.DB.prepare("INSERT INTO backburner (bb_id, title, description, source, priority, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?)").bind(bb_id, `OB1 Stale briefs: ${stale.join(", ")}`, `Users with no brief or brief >12h: ${stale.join(", ")}`, "ob1-brief-scan", "~", now, now).run().catch(() => {
+    });
+    await env.DB.prepare("UPDATE backburner SET status='PENDING_CLOSE', close_reason='brief-scan-logged', updated_at=? WHERE bb_id=?").bind(now, bb_id).run().catch(() => {
+    });
+  }
+  return { task: "brief-scan", stale: stale.length };
+}
+__name(taskBriefScan, "taskBriefScan");
+async function fetchGitHubFile(env, filePath) {
+  const token = env.GITHUB_TOKEN;
+  if (!token) return null;
+  try {
+    const resp = await fetch(`${GITHUB_API}/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${encodeGitHubPath(filePath)}`, {
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        "Accept": "application/vnd.github+json",
+        "User-Agent": "phoenix-pcc-1/ob1",
+        "X-GitHub-Api-Version": "2022-11-28"
+      }
+    });
+    if (!resp.ok) return null;
+    const { content } = await resp.json();
+    return b64Decode(content);
+  } catch {
+    return null;
+  }
+}
+__name(fetchGitHubFile, "fetchGitHubFile");
+function extractFilePath(text) {
+  const patterns = [
+    /"file"\s*:\s*"([^"]+)"/,
+    // {"file":"APPS/..."}
+    /[Ff]ile:\s*([^\s,\n"]+\.[a-z]{2,4})/,
+    // File: src/foo.js
+    /(APPS\/[^\s\n,'"]+\.[a-z]{2,4})/,
+    // bare APPS/ path
+    /(CANON\/[^\s\n,'"]+\.[a-z]{2,4})/,
+    // bare CANON/ path
+    /(OPERATIONS\/[^\s\n,'"]+\.[a-z]{2,4})/,
+    // bare OPERATIONS/ path
+    /(src\/[^\s\n,'"]+\.[a-z]{2,4})/,
+    // bare src/ path
+    /(SCRIPTS\/[^\s\n,'"]+\.[a-z]{2,4})/
+    // bare SCRIPTS/ path
+  ];
+  for (const p of patterns) {
+    const m = text.match(p);
+    if (m) return (m[1] || m[0]).trim();
+  }
+  return null;
+}
+__name(extractFilePath, "extractFilePath");
+async function taskCodeQueue(env) {
+  if (!env.DB) return { task: "code-queue", processed: 0 };
+  const rows = await env.DB.prepare(
+    "SELECT * FROM backburner WHERE status IN ('OPEN','IN_PROGRESS') AND (source LIKE 'obi-%' OR source='code-queue' OR source='lostsoul' OR source='ob1-lostsoul' OR source='velocity-monitor' OR source='completeness-audit') ORDER BY priority ASC, created_at ASC LIMIT 5"
+  ).all().catch(() => ({ results: [] }));
+  let processed = 0;
+  for (const row of rows.results || []) {
+    try {
+      const t0 = Date.now();
+      const bbText = `${row.title}
+${row.description || ""}`;
+      const filePath = extractFilePath(bbText);
+      let fileContext = "";
+      if (filePath && env.GITHUB_TOKEN) {
+        const fileContent = await fetchGitHubFile(env, filePath);
+        if (fileContent) {
+          fileContext = `
+
+ACTUAL FILE CONTENT (${filePath}) \u2014 use verbatim strings from this:
+${fileContent.slice(0, 6e3)}`;
+        }
+      }
+      const taskWithInstruction = `${row.title}
+
+RUNTIME: Cloudflare Workers. Use env.DB.prepare() for D1 SQLite. No require(), no Node.js, no Express, no PostgreSQL.
+
+Return ONLY valid JSON, no other text. The "find" value MUST be copied verbatim from the actual file content provided below:
+{"file":"<relative path>","find":"<exact verbatim string from the file>","replace":"<replacement>","description":"<one line>"}`;
+      const resp = await fetch(`${PA_BASE}/api/code`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "x-pa-auth": PA_AUTH },
+        body: JSON.stringify({ task: taskWithInstruction, context: (row.description || "") + fileContext, tier: 1 })
+      });
+      if (!resp.ok) continue;
+      const { patch, model } = await resp.json();
+      if (!patch || patch.length < 5) continue;
+      let applyResult = { ok: false, reason: "no structured patch in PA response" };
+      const structured = parseStructuredPatch(patch);
+      if (structured) {
+        applyResult = await applyGitHubPatch(env, structured).catch((e) => ({ ok: false, reason: e.message }));
+      }
+      const applyNote = applyResult.ok ? `APPLIED: ${applyResult.file} commit=${applyResult.sha?.slice(0, 8)}` : `APPLY_FAILED: ${applyResult.reason}`;
+      const result = `[OB1-executed | model=${model} | ${applyNote}]
+${patch}`;
+      const now = (/* @__PURE__ */ new Date()).toISOString();
+      await env.DB.prepare(
+        "UPDATE backburner SET status='PENDING_CLOSE', description=?, close_reason=?, updated_at=? WHERE bb_id=?"
+      ).bind(`${row.description || ""}
+
+RESULT:
+${result}`.slice(0, 4e3), `OB1 code-queue: ${applyNote}`, now, row.bb_id).run();
+      if (env.PHETRAIL) {
+        await env.PHETRAIL.put(`bb-result:${row.bb_id}`, result, { expirationTtl: 604800 }).catch(() => {
+        });
+      }
+      await logPccMetric(env, {
+        task_preview: row.title,
+        task_length: (row.description || "").length,
+        model: model || "pa-t1",
+        duration_ms: Date.now() - t0,
+        output_length: patch.length,
+        passed: applyResult.ok,
+        fail_reason: applyResult.ok ? null : applyResult.reason
+      });
+      processed++;
+    } catch (e) {
+      await logPccMetric(env, {
+        task_preview: row?.title || "unknown",
+        task_length: 0,
+        model: "error",
+        duration_ms: 0,
+        output_length: 0,
+        passed: false,
+        fail_reason: `EXCEPTION: ${e.message}`
+      });
+    }
+  }
+  return { task: "code-queue", processed };
+}
+__name(taskCodeQueue, "taskCodeQueue");
+async function runFleet(env) {
+  const studentResults = [];
+  for (const userId of STUDENT_FLEET) {
+    const r = await runStudentActualizer(env, userId).catch((e) => ({ userId, ok: false, reason: e.message }));
+    studentResults.push(r);
+  }
+  const [t1, t2, t3, t4, t5, t6] = await Promise.allSettled([
+    taskTranslate(env),
+    taskLostSoulScan(env),
+    taskCompletenessAudit(env),
+    taskPatternScan(env),
+    taskBriefScan(env),
+    taskCodeQueue(env)
+  ]);
+  return {
+    students: studentResults,
+    ops: [t1, t2, t3, t4, t5, t6].map((r) => r.status === "fulfilled" ? r.value : { error: r.reason?.message })
+  };
+}
+__name(runFleet, "runFleet");
+var RaceRunner = class {
+  static {
+    __name(this, "RaceRunner");
+  }
+  constructor(state, env) {
+    this.state = state;
+    this.env = env;
+  }
+  async fetch(request) {
+    const url = new URL(request.url);
+    if (url.pathname === "/start" && request.method === "POST") return this.handleStart(request);
+    if (url.pathname === "/status") return this.handleStatus();
+    if (url.pathname === "/stop") return this.handleStop();
+    return new Response("not found", { status: 404 });
+  }
+  async handleStart(request) {
+    const body = await request.json().catch(() => ({}));
+    const budget_ms = body.budget_ms || 36e5;
+    const now = Date.now();
+    await this.state.storage.put("run_state", {
+      start_time: now,
+      budget_ms,
+      batches_run: 0,
+      actualizers_run: 0,
+      discoveries_count: 0,
+      errors_count: 0,
+      death_runs: 0
+    });
+    await this.state.storage.setAlarm(now + 1e3);
+    return Response.json({ ok: true, started_at: now, budget_ms });
+  }
+  async alarm() {
+    const state = await this.state.storage.get("run_state");
+    if (!state) return;
+    if (Date.now() - state.start_time >= state.budget_ms) {
+      await this.writeMetrics(state, true);
+      return;
+    }
+    const batch = await this.runBatch(state);
+    const updated = {
+      ...state,
+      batches_run: state.batches_run + 1,
+      actualizers_run: state.actualizers_run + (batch.actualizers || 0),
+      discoveries_count: state.discoveries_count + (batch.discoveries || 0),
+      errors_count: state.errors_count + (batch.errors || 0),
+      death_runs: state.death_runs + (batch.death_runs || 0)
+    };
+    await this.state.storage.put("run_state", updated);
+    await this.writeMetrics(updated, false);
+    await this.state.storage.setAlarm(Date.now() + 3e4);
+  }
+  async runBatch(state) {
+    let actualizers = 0, discoveries = 0, errors = 0, death_runs = 0;
+    const kv = this.env.PHETRAIL;
+    for (const userId of ["mai-tram-bluetech", "huong-bluetech", "sov100-test-magic"]) {
+      try {
+        const existing = kv ? await kv.get(`pcc1:${userId}:meta`) : null;
+        if (!existing) discoveries++;
+        actualizers++;
+      } catch (e) {
+        errors++;
+      }
+    }
+    const soulSeeds = ["#SOUL", "#SOULDNA", "#RAW", "#FUCK", "#OMG", "LISTEN", "#MONKEY", "#YES", "#SSK", "#LEDGER", "#AGENT99", "Obi", "OB1", "#DRIFT"];
+    if (kv) {
+      for (const prefix of ["pending:rrl:", "registry:run:", "death:"]) {
+        try {
+          const listed = await kv.list({ prefix }).catch(() => ({ keys: [] }));
+          for (const key of listed.keys.slice(0, 5)) {
+            const val = await kv.get(key.name).catch(() => "");
+            if (val) {
+              const hits = soulSeeds.filter((s) => val.includes(s)).length;
+              if (hits > 0) {
+                discoveries += hits;
+                actualizers++;
+              }
+            }
+          }
+        } catch (e) {
+          errors++;
+        }
+      }
+    }
+    if (kv) {
+      const keys = await kv.list({ prefix: "pending:rrl:" }).catch(() => ({ keys: [] }));
+      for (const key of keys.keys.slice(0, 2)) {
+        const run_number = key.name.split(":")[2];
+        const rrl_text = await kv.get(key.name);
+        if (rrl_text) {
+          const result = await this.runDeathPipeline(run_number, rrl_text);
+          if (result.ok) {
+            death_runs++;
+            discoveries += result.discoveries || 0;
+            await kv.delete(key.name);
+          }
+        }
+      }
+    }
+    return { actualizers, discoveries, errors, death_runs };
+  }
+  async runDeathPipeline(run_number, rrl_text) {
+    const normalizedRun = normalizeRunNumber(run_number);
+    if (!normalizedRun) return { ok: false, reason: "invalid run_number" };
+    const normalizedText = truncateText(rrl_text);
+    const lines = normalizedText.split("\n");
+    const soul_count = lines.filter((l) => l.includes('"role":"user"') || l.startsWith("Michael:") || l.startsWith("User:")).length || Math.floor(lines.length * 0.4);
+    const dna_count = lines.filter((l) => l.includes('"role":"assistant"') || l.startsWith("Claude:")).length || Math.floor(lines.length * 0.6);
+    const hashBuffer = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(normalizedText));
+    const sha256 = Array.from(new Uint8Array(hashBuffer)).map((b) => b.toString(16).padStart(2, "0")).join("");
+    const ledger_id = `HL-${normalizedRun}`;
+    const soulSeeds = ["#SOUL", "#SOULDNA", "#RAW", "#FUCK", "#OMG", "LISTEN", "#MONKEY", "#YES", "#SSK", "#LEDGER", "#AGENT99", "Obi", "OB1", "#DRIFT"];
+    const soulkeys_hit = soulSeeds.filter((k) => normalizedText.includes(k)).length;
+    const kv = this.env.PHETRAIL;
+    if (kv) {
+      await Promise.all([
+        kv.put(`death:${normalizedRun}:soul`, String(soul_count)),
+        kv.put(`death:${normalizedRun}:dna`, String(dna_count)),
+        kv.put(`death:${normalizedRun}:ledger`, JSON.stringify({ ledger_id, sha256, text_bytes: normalizedText.length })),
+        kv.put(`death:${normalizedRun}:starmap`, JSON.stringify({ starmap_id: `SM-${normalizedRun}`, summary: normalizedText.substring(0, 200) })),
+        kv.put(`death:${normalizedRun}:soulkeys`, String(soulkeys_hit)),
+        kv.put(`registry:run:${normalizedRun}`, JSON.stringify({ run_number: normalizedRun, ledger_id, soul_count, dna_count, processed_at: Date.now() }))
+      ]);
+    }
+    return { ok: true, run_number: normalizedRun, ledger_id, soul_count, dna_count, soulkeys_hit, discoveries: soulkeys_hit + 1, truncated: normalizedText.length !== String(rrl_text || "").length };
+  }
+  async writeMetrics(state, final) {
+    const score = state.batches_run * 10 + state.actualizers_run * 5 + state.discoveries_count * 20 + state.death_runs * 50;
+    const metrics = { agent_id: "ob1", ...state, elapsed_ms: Date.now() - state.start_time, score, final };
+    if (this.env.PHETRAIL) await this.env.PHETRAIL.put("race:ob1:metrics", JSON.stringify(metrics));
+  }
+  async handleStatus() {
+    const state = await this.state.storage.get("run_state");
+    if (!state) return Response.json({ ok: false, error: "not started" });
+    const score = state.batches_run * 10 + state.actualizers_run * 5 + state.discoveries_count * 20 + state.death_runs * 50;
+    return Response.json({ ...state, elapsed_ms: Date.now() - state.start_time, score });
+  }
+  async handleStop() {
+    await this.state.storage.deleteAlarm();
+    const state = await this.state.storage.get("run_state");
+    await this.writeMetrics(state || {}, true);
+    return Response.json({ ok: true });
+  }
+};
+async function runDeathPipelineStandalone(env, run_number, rrl_text) {
+  const normalizedRun = normalizeRunNumber(run_number);
+  if (!normalizedRun) return { ok: false, error: "run_number must be numeric" };
+  const normalizedText = truncateText(rrl_text);
+  const lines = normalizedText.split("\n");
+  const soul_count = lines.filter((l) => l.includes('"role":"user"') || l.startsWith("Michael:") || l.startsWith("User:")).length || Math.floor(lines.length * 0.4);
+  const dna_count = lines.filter((l) => l.includes('"role":"assistant"') || l.startsWith("Claude:")).length || Math.floor(lines.length * 0.6);
+  const hashBuffer = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(normalizedText));
+  const sha256 = Array.from(new Uint8Array(hashBuffer)).map((b) => b.toString(16).padStart(2, "0")).join("");
+  const ledger_id = `HL-${normalizedRun}`;
+  const soulSeeds = ["#SOUL", "#SOULDNA", "#RAW", "#FUCK", "#OMG", "LISTEN", "#MONKEY", "#YES", "#SSK", "#LEDGER", "#AGENT99", "Obi", "OB1", "#DRIFT"];
+  const soulkeys_hit = soulSeeds.filter((k) => normalizedText.includes(k)).length;
+  const kv = env.PHETRAIL;
+  if (kv) {
+    await Promise.all([
+      kv.put(`death:${normalizedRun}:soul`, String(soul_count)),
+      kv.put(`death:${normalizedRun}:dna`, String(dna_count)),
+      kv.put(`death:${normalizedRun}:ledger`, JSON.stringify({ ledger_id, sha256, text_bytes: normalizedText.length })),
+      kv.put(`death:${normalizedRun}:starmap`, JSON.stringify({ starmap_id: `SM-${normalizedRun}`, summary: normalizedText.substring(0, 200) })),
+      kv.put(`death:${normalizedRun}:soulkeys`, String(soulkeys_hit)),
+      kv.put(`registry:run:${normalizedRun}`, JSON.stringify({ run_number: normalizedRun, ledger_id, soul_count, dna_count, processed_at: Date.now() }))
+    ]);
+  }
+  return { ok: true, run_number: normalizedRun, ledger_id, soul_count, dna_count, soulkeys_hit, discoveries: soulkeys_hit + 1, truncated: normalizedText.length !== String(rrl_text || "").length };
+}
+__name(runDeathPipelineStandalone, "runDeathPipelineStandalone");
+var ScoutRunner = class {
+  static {
+    __name(this, "ScoutRunner");
+  }
+  constructor(state, env) {
+    this.state = state;
+    this.env = env;
+  }
+  normalizeScoutState(state = {}) {
+    const now = Date.now();
+    return {
+      ...state,
+      start_time: Number(state.start_time) || now,
+      budget_ms: Number(state.budget_ms) || 6e5,
+      current_keyword: String(state.current_keyword || state.seed_keyword || "SOUL"),
+      seed_keyword: String(state.seed_keyword || state.current_keyword || "SOUL"),
+      chains_walked: Number(state.chains_walked) || 0,
+      pos_territories: Array.isArray(state.pos_territories) ? state.pos_territories : [],
+      neg_trails: Array.isArray(state.neg_trails) ? state.neg_trails : [],
+      iterations: Number(state.iterations) || 0,
+      pheromone_count: Number(state.pheromone_count) || 0,
+      unmapped_found: Number(state.unmapped_found) || 0,
+      visited_keywords: Array.isArray(state.visited_keywords) ? state.visited_keywords : [],
+      entries: Array.isArray(state.entries) ? state.entries : [`# OB1 Scout Mission \u2014 ${new Date(now).toISOString()}
+`]
+    };
+  }
+  async fetch(request) {
+    const url = new URL(request.url);
+    const path = url.pathname.replace(/^\/scout/, "") || url.pathname;
+    if (path === "/start" || url.pathname === "/start") {
+      const existing = await this.state.storage.get("scout_state");
+      if (existing && Date.now() - existing.start_time <= existing.budget_ms) {
+        return Response.json({ ok: false, error: "already_running", started_at: existing.start_time, chains_walked: existing.chains_walked });
+      }
+      if (existing) {
+        await this.finalize(this.normalizeScoutState(existing), (existing.pheromone_count || 0) >= 100);
+      }
+      const body = await request.json().catch(() => ({}));
+      const seed_keyword = body.seed_keyword || ["FORCEAWARENESS", "SOUL", "DNA", "PHOENIX", "SYSTEM", "OB1"][Math.floor(Math.random() * 6)];
+      const budget_ms = body.time_limit_seconds ? body.time_limit_seconds * 1e3 : 6e5;
+      const now = Date.now();
+      await this.state.storage.put("scout_state", {
+        start_time: now,
+        budget_ms,
+        seed_keyword,
+        current_keyword: seed_keyword,
+        chains_walked: 0,
+        pos_territories: [],
+        neg_trails: [],
+        iterations: 0,
+        pheromone_count: 0,
+        unmapped_found: 0,
+        visited_keywords: [],
+        entries: [`# OB1 Scout Mission \u2014 ${new Date(now).toISOString()}
+## Seed: ${seed_keyword}
+`, `# Mission: Scout 1 unmapped territory, drop 100 pheromones
+`]
+      });
+      await this.state.storage.setAlarm(now + 1e4);
+      return Response.json({ ok: true, status: "scout_started", seed_keyword, budget_ms, upgrades: ["fast-iteration", "unmapped-priority", "pheromone-goal"] });
+    }
+    if (url.pathname === "/status") {
+      const rawState = await this.state.storage.get("scout_state");
+      if (!rawState) return Response.json({ ok: false, error: "not started" }, { status: 404 });
+      const state = this.normalizeScoutState(rawState);
+      const elapsed = Date.now() - state.start_time;
+      if (elapsed >= state.budget_ms || state.pheromone_count >= 100) {
+        const result = await this.finalize(state, state.pheromone_count >= 100);
+        return Response.json({ ok: true, status: "scout_finalized", elapsed_ms: elapsed, budget_ms: state.budget_ms, commit: result });
+      }
+      return Response.json({
+        ok: true,
+        elapsed_ms: elapsed,
+        budget_ms: state.budget_ms,
+        percent_complete: Math.min(100, Math.round(elapsed / state.budget_ms * 100)),
+        chains_walked: state.chains_walked,
+        iterations: state.iterations,
+        pos_count: state.pos_territories.length,
+        neg_count: state.neg_trails.length,
+        current_keyword: state.current_keyword,
+        pheromone_count: state.pheromone_count,
+        unmapped_found: state.unmapped_found,
+        visited_count: state.visited_keywords.length
+      });
+    }
+    if (url.pathname === "/stop") {
+      await this.state.storage.deleteAlarm();
+      const rawState = await this.state.storage.get("scout_state");
+      if (rawState) {
+        const state = this.normalizeScoutState(rawState);
+        const result = await this.finalize(state, true);
+        return Response.json({ ok: true, status: "scout_stopped", entries_count: state.entries.length, commit: result });
+      }
+      return Response.json({ ok: true, status: "scout_not_running" });
+    }
+    return Response.json({ error: "Not found" }, { status: 404 });
+  }
+  // Enhanced D1 keyword density search: returns { next_kw, is_pos, area, hit_count, novelty }
+  async walkChain(kw, visitedKeywords = []) {
+    if (!this.env.DB) return { next_kw: "SOUL", is_pos: false, area: "no-db", hit_count: 0, novelty: false };
+    const likeKeyword = escapeLike(kw);
+    const queries = [
+      this.env.DB.prepare("SELECT title, description FROM backburner WHERE title LIKE ? ESCAPE '\\' OR description LIKE ? ESCAPE '\\' LIMIT 15").bind(`%${likeKeyword}%`, `%${likeKeyword}%`).all().catch(() => ({ results: [] })),
+      this.env.DB.prepare("SELECT run_number, ledger_id FROM rrl_archive WHERE rrl_raw LIKE ? ESCAPE '\\' LIMIT 10").bind(`%${likeKeyword}%`).all().catch(() => ({ results: [] }))
+    ];
+    const [bbRows, archiveRows] = await Promise.all(queries);
+    const allHits = [...bbRows.results || [], ...archiveRows.results || []].map((r) => ({
+      title: r.title || `run#${r.run_number || "unknown"}`,
+      description: r.description || r.ledger_id || r.rrl_raw?.slice(0, 100) || ""
+    }));
+    if (allHits.length === 0) {
+      const seeds = ["SOUL", "FORCEAWARENESS", "DNA", "LEDGER", "SCOUT", "PHETRAIL", "DISPATCH", "OB1", "UNMAPPED", "TERRITORY"];
+      const next_kw2 = seeds[Math.floor(Math.random() * seeds.length)];
+      return { next_kw: next_kw2, is_pos: false, area: `backburner:0-hits`, hit_count: 0, novelty: false };
+    }
+    const alreadyMapped = this.env.PHETRAIL ? await this.isMapped(kw, allHits.length) : false;
+    const allText = allHits.map((h) => `${h.title} ${h.description || ""}`).join(" ");
+    const freq = {};
+    const stopWords = /* @__PURE__ */ new Set(["with", "from", "have", "that", "this", "will", "they", "were", "been", "also", "more", "into", "over", "some", "just", "than", "very", "when", "what", "which", "where", "then", "here", "only", "like", "make", "take", "would", "could", "should", "then", "each", "such", "these", "those", "them", "from", "into", "onto", "upon"]);
+    for (const raw of allText.split(/\s+/)) {
+      const w = raw.replace(/[^a-zA-Z0-9#]/g, "");
+      if (w.length < 3 || w.toLowerCase() === kw.toLowerCase() || stopWords.has(w.toLowerCase())) continue;
+      freq[w] = (freq[w] || 0) + 1;
+    }
+    const sorted = Object.entries(freq).sort((a, b) => b[1] - a[1]);
+    let next_kw = "SOUL";
+    let novelty = !alreadyMapped;
+    for (const [word, count] of sorted) {
+      if (count < 5 && !await this.isMapped(word, 0)) {
+        next_kw = word;
+        novelty = true;
+        break;
+      }
+    }
+    if (novelty === false && sorted.length > 0) {
+      next_kw = sorted[0][0];
+    }
+    const visited = new Set(visitedKeywords.map((v) => String(v).toLowerCase()));
+    const fallbackSeeds = ["SOUL", "FORCEAWARENESS", "DNA", "LEDGER", "SCOUT", "PHETRAIL", "DISPATCH", "OB1", "UNMAPPED", "TERRITORY"];
+    if (next_kw.toLowerCase() === kw.toLowerCase() || visited.has(next_kw.toLowerCase()) || this.env.PHETRAIL && await this.isMapped(next_kw, 0)) {
+      next_kw = fallbackSeeds[Math.floor(Math.random() * fallbackSeeds.length)];
+      novelty = false;
+    }
+    return { next_kw, is_pos: !alreadyMapped, area: `backburner:${allHits.length}-hits`, hit_count: allHits.length, novelty };
+  }
+  async isMapped(keyword, hits) {
+    if (!this.env.PHETRAIL) return false;
+    try {
+      const mapped = await this.env.PHETRAIL.get(`scout:mapped:${keyword.toLowerCase()}`).catch(() => null);
+      return !!mapped;
+    } catch {
+      return false;
+    }
+  }
+  async markPheromone(keyword, area, hitCount) {
+    if (!this.env.PHETRAIL) return;
+    const ts = Date.now();
+    await this.env.PHETRAIL.put(`scout:pheromone:${ts}`, JSON.stringify({ keyword, area, hitCount, ts })).catch(() => {
+    });
+    await this.env.PHETRAIL.put(`scout:mapped:${keyword.toLowerCase()}`, "1", { expirationTtl: 2592e3 }).catch(() => {
+    });
+  }
+  async alarm() {
+    const rawState = await this.state.storage.get("scout_state");
+    if (!rawState) return;
+    const state = this.normalizeScoutState(rawState);
+    const elapsed = Date.now() - state.start_time;
+    if (elapsed >= state.budget_ms || (state.pheromone_count || 0) >= 100) {
+      await this.finalize(state, (state.pheromone_count || 0) >= 100);
+      return;
+    }
+    state.iterations++;
+    const kw = state.current_keyword || state.seed_keyword;
+    const visited = Array.isArray(state.visited_keywords) ? state.visited_keywords.map((v) => String(v)) : [];
+    const { next_kw, is_pos, area, hit_count, novelty } = await this.walkChain(kw, visited);
+    if (is_pos && hit_count > 0) {
+      state.pheromone_count = Math.min(100, (state.pheromone_count || 0) + hit_count);
+      await this.markPheromone(kw, area, hit_count);
+    }
+    const entry = `
+### Chain ${state.chains_walked + 1} [${(/* @__PURE__ */ new Date()).toISOString()}]
+- Keyword: ${kw}
+- Area: ${area} (hits: ${hit_count})
+- Next: ${next_kw}
+- Status: ${is_pos ? "POS \u2014 new territory" : "NEG \u2014 dead end"}
+- Pheromones dropped: ${is_pos ? hit_count : 0}
+- Novelty: ${novelty ? "unmapped" : "known"}
+`;
+    state.entries.push(entry);
+    if (is_pos) {
+      state.pos_territories.push({ keyword: kw, area, hit_count });
+      if (novelty) state.unmapped_found++;
+    } else state.neg_trails.push({ keyword: kw, area });
+    state.chains_walked++;
+    state.current_keyword = next_kw;
+    state.visited_keywords = [...visited, kw].slice(-200);
+    await this.state.storage.put("scout_state", state);
+    if (state.pheromone_count >= 100) {
+      await this.finalize(state, true);
+      return;
+    }
+    await this.state.storage.setAlarm(Date.now() + 1e4);
+  }
+  // Write phetrail to GitHub and KV, with pheromone summary
+  async finalize(state, earlyStop = false) {
+    state = this.normalizeScoutState(state);
+    const reason = earlyStop ? "100 pheromones goal reached" : "time budget exhausted";
+    const summary = `
+## Summary
+- Chains walked: ${state.chains_walked}
+- POS territories: ${state.pos_territories.length}
+- NEG trails: ${state.neg_trails.length}
+- Pheromones dropped: ${state.pheromone_count || 0}
+- Unmapped found: ${state.unmapped_found || 0}
+- Final keyword: ${state.current_keyword}
+- Ended: ${(/* @__PURE__ */ new Date()).toISOString()}
+- Reason: ${reason}
+`;
+    state.entries.push(summary);
+    const phetrail = state.entries.join("\n");
+    if (this.env.PHETRAIL) {
+      await this.env.PHETRAIL.put("scout:final_phetrail", phetrail, { expirationTtl: 604800 }).catch(() => {
+      });
+      await this.env.PHETRAIL.put("scout:pheromone:summary", JSON.stringify({
+        total: state.pheromone_count || 0,
+        unmapped: state.unmapped_found || 0,
+        territories: state.pos_territories.length,
+        ended: (/* @__PURE__ */ new Date()).toISOString()
+      }), { expirationTtl: 604800 }).catch(() => {
+      });
+    }
+    const ended = /* @__PURE__ */ new Date();
+    const date = ended.toISOString().slice(0, 10).replace(/-/g, "");
+    const hour = String(ended.getUTCHours()).padStart(2, "0");
+    const minute = String(ended.getUTCMinutes()).padStart(2, "0");
+    const second = String(ended.getUTCSeconds()).padStart(2, "0");
+    const missionId = String(state.start_time || Date.now()).slice(-6);
+    const result = await writeGitHubFile(this.env, {
+      file: `OPERATIONS/phetrail-ob1-scout-${date}-${hour}${minute}${second}-${missionId}.md`,
+      content: phetrail,
+      description: `OB1 scout ${date} \u2014 ${state.chains_walked} chains, ${state.pos_territories.length} POS, ${state.pheromone_count || 0} pheromones, ${reason}`
+    }).catch((e) => ({ ok: false, reason: e.message }));
+    if (this.env.PHETRAIL) {
+      await this.env.PHETRAIL.put("scout:last_result", JSON.stringify({ ...result, finalized_at: ended.toISOString() }), { expirationTtl: 604800 }).catch(() => {
+      });
+    }
+    await this.state.storage.delete("scout_state");
+    return result;
+  }
+};
+var WatchdogAlarm = class {
+  static {
+    __name(this, "WatchdogAlarm");
+  }
+  constructor(state, env) {
+    this.state = state;
+    this.env = env;
+  }
+  async fetch(request) {
+    const url = new URL(request.url);
+    if (url.pathname === "/start") {
+      const current = await this.state.storage.getAlarm();
+      if (!current) await this.state.storage.setAlarm(Date.now() + 3e4);
+      return Response.json({ ok: true, status: "heartbeat_started" });
+    }
+    if (url.pathname === "/stop") {
+      await this.state.storage.deleteAlarm();
+      return Response.json({ ok: true, status: "heartbeat_stopped" });
+    }
+    return Response.json({ ok: true, status: "alive" });
+  }
+  async alarm() {
+    await ForceAwareness(this.env).catch(() => {
+    });
+    await this.state.storage.setAlarm(Date.now() + 3e4);
+  }
+};
+var index_default = {
+  async scheduled(event, env, ctx) {
+    ctx.waitUntil(ForceAwareness(env).catch(() => {
+    }));
+    await runFleet(env).catch(() => {
+    });
+  },
+  async fetch(request, env) {
+    if (!checkAuth(request)) return Response.json({ error: "Unauthorized" }, { status: 401 });
+    const url = new URL(request.url);
+    const { pathname } = url;
+    if (pathname === "/api/status") {
+      return Response.json({
+        worker: "phoenix-pcc-1",
+        agent: FLEET_ID,
+        fleet: STUDENT_FLEET,
+        ops_tasks: ["translate", "lostsoul-scan", "completeness-audit", "pattern-scan", "brief-scan", "code-queue"],
+        status: "LIVE"
+      });
+    }
+    if (pathname === "/api/run-fleet" && request.method === "POST") {
+      const results = await runFleet(env).catch((e) => ({ error: e.message }));
+      return Response.json({ ok: true, agent: FLEET_ID, results });
+    }
+    if (pathname.startsWith("/api/brief/") && request.method === "GET") {
+      const userId = pathname.split("/").filter(Boolean)[2];
+      const brief = await env.PHETRAIL.get(`pcc1:${userId}:brief`).catch(() => null);
+      const meta = await env.PHETRAIL.get(`pcc1:${userId}:meta`).catch(() => null);
+      if (!brief) return Response.json({ ok: false, userId }, { status: 404 });
+      return Response.json({ ok: true, userId, brief, ...meta ? JSON.parse(meta) : {} });
+    }
+    if (pathname.startsWith("/api/race/")) {
+      if (!env.LEGION_RUNNER) return Response.json({ error: "LEGION_RUNNER DO not bound" }, { status: 503 });
+      const id = env.LEGION_RUNNER.idFromName("singleton");
+      const stub = env.LEGION_RUNNER.get(id);
+      return stub.fetch(new Request("https://race" + pathname.replace("/api/race", ""), request));
+    }
+    if (pathname === "/api/session/death" && request.method === "POST") {
+      const body = await request.json().catch(() => ({}));
+      const { run_number, rrl_text } = body;
+      if (!run_number || !rrl_text) return Response.json({ ok: false, error: "run_number and rrl_text required" }, { status: 400 });
+      return Response.json(await runDeathPipelineStandalone(env, String(run_number), rrl_text));
+    }
+    if (pathname === "/api/message" && request.method === "POST") {
+      const body = await request.json().catch(() => ({}));
+      await writeMajorDirectiveMarker(env, "ob1", body.message).catch(() => {
+      });
+      return Response.json({ ok: true, received: true, agent: FLEET_ID, message: body.message });
+    }
+    if (pathname === "/api/rise" && request.method === "POST") {
+      const body = await request.json().catch(() => ({}));
+      const { run_number } = body;
+      const kv = env.PHETRAIL;
+      if (!kv) return Response.json({ ok: false, error: "no kv binding" }, { status: 500 });
+      const [soul, dna, ledger, skeys] = await Promise.all([
+        kv.get(`death:${run_number}:soul`),
+        kv.get(`death:${run_number}:dna`),
+        kv.get(`death:${run_number}:ledger`),
+        kv.get(`death:${run_number}:soulkeys`)
+      ]);
+      if (!soul && !dna) return Response.json({ ok: false, error: "run not found", run_number }, { status: 404 });
+      const gaps = [];
+      if (!soul || soul === "0") gaps.push("SOUL_ZERO");
+      if (!dna || dna === "0") gaps.push("DNA_ZERO");
+      if (!ledger) gaps.push("NO_LEDGER");
+      return Response.json({ ok: true, run_number, audit: { soul_ok: !!soul && soul !== "0", dna_ok: !!dna && dna !== "0", ledger_ok: !!ledger, soulkeys: Number(skeys) || 0, gaps }, rise_complete: gaps.length === 0 });
+    }
+    if (pathname === "/api/act" && request.method === "POST") {
+      const start = Date.now();
+      const { act_id, task, context } = await request.json().catch(() => ({}));
+      const specialties = {
+        1: "student-brief",
+        2: "translate",
+        3: "lostsoul-scan",
+        4: "completeness-audit",
+        5: "pattern-scan",
+        6: "code-queue"
+      };
+      const specialty = specialties[act_id];
+      if (!specialty) return Response.json({ ok: false, error: "invalid act_id" }, { status: 400 });
+      try {
+        const ai = await env.AI.run("@cf/meta/llama-3.3-70b-instruct-fp8-fast", {
+          messages: [
+            { role: "system", content: `You are OB1 ACT-${act_id} specialist: ${specialty}. Be concise.` },
+            { role: "user", content: task + (context ? " Context: " + context : "") }
+          ]
+        });
+        return Response.json({ ok: true, agent: FLEET_ID, act_id, specialty, result: ai.response, ms: Date.now() - start });
+      } catch (e) {
+        return Response.json({ ok: false, error: e.message, act_id }, { status: 500 });
+      }
+    }
+    if (pathname === "/api/force/start" && request.method === "POST") {
+      if (!env.FORCEAWARENESS_ALARM) return Response.json({ error: "FORCEAWARENESS_ALARM not bound" }, { status: 503 });
+      const id = env.FORCEAWARENESS_ALARM.idFromName("heartbeat");
+      const stub = env.FORCEAWARENESS_ALARM.get(id);
+      await stub.fetch("https://fake/start");
+      return Response.json({ ok: true, status: "heartbeat_started_30s" });
+    }
+    if (pathname === "/api/force/status") return handleForce(request, env);
+    if (pathname === "/api/scout" && request.method === "POST") {
+      if (!env.SCOUT_RUNNER) return Response.json({ error: "SCOUT_RUNNER DO not bound" }, { status: 503 });
+      const id = env.SCOUT_RUNNER.idFromName("scout-mission");
+      const stub = env.SCOUT_RUNNER.get(id);
+      const body = await request.json().catch(() => ({}));
+      const mockReq = new Request("https://x/scout/start", { method: "POST", body: JSON.stringify(body) });
+      return stub.fetch(mockReq);
+    }
+    if (pathname === "/api/scout/status") {
+      if (!env.SCOUT_RUNNER) return Response.json({ error: "SCOUT_RUNNER DO not bound" }, { status: 503 });
+      const id = env.SCOUT_RUNNER.idFromName("scout-mission");
+      const stub = env.SCOUT_RUNNER.get(id);
+      return stub.fetch(new Request("https://scout/status"));
+    }
+    if (pathname === "/api/scout/stop" && request.method === "POST") {
+      if (!env.SCOUT_RUNNER) return Response.json({ error: "SCOUT_RUNNER DO not bound" }, { status: 503 });
+      const id = env.SCOUT_RUNNER.idFromName("scout-mission");
+      const stub = env.SCOUT_RUNNER.get(id);
+      return stub.fetch(new Request("https://scout/stop"));
+    }
+    return Response.json({ error: "Not found", agent: FLEET_ID }, { status: 404 });
+  }
+};
+var LegionRunner = class extends RaceRunner {
+  static {
+    __name(this, "LegionRunner");
+  }
+};
+var ForceAwarenessAlarm = class extends WatchdogAlarm {
+  static {
+    __name(this, "ForceAwarenessAlarm");
+  }
+};
+var ScoutMissionRunner = class extends ScoutRunner {
+  static {
+    __name(this, "ScoutMissionRunner");
+  }
+};
+export {
+  ForceAwarenessAlarm,
+  LegionRunner,
+  ScoutMissionRunner,
+  index_default as default
+};
+//# sourceMappingURL=index.js.map

@@ -1,7 +1,7 @@
 ---
 description: "Agent99 Tier 2 — DeepSeek V4 Flash. Fast workhorse for daily coding, fixes, wiring, integration. Paid tier. Handles 90% of Tier 2 tasks: fix, debug, set up, integrate, refactor, wire up, deploy."
 role: "agent"
-model: "openai/deepseek-v4-flash"
+model: "openrouter/deepseek/deepseek-chat"
 color: "#3b82f6"
 permission:
   bash: allow

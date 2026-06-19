@@ -1,0 +1,3 @@
+{"ts":"2026-06-18T20:55:26.1592620+07:00","cmd":"HEALTH-GATE","status":"OK","message":"Supply chain open","payload":null}
+{"ts":"2026-06-18T20:55:28.0251478+07:00","cmd":"STAGE-I","status":"OK","message":"Scout complete","payload":"{\"lens\":\"CONFIG\",\"zone\":\"CANON/HEAVY-LEDGER\"}"}
+{"ts":"2026-06-18T20:55:28.8126668+07:00","cmd":"STAGE-II","status":"ERR","message":"crunch/bible failed: Response status code does not indicate success: 400 (Bad Request).","payload":null}

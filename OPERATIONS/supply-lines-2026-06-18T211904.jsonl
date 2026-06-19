@@ -1,0 +1,4 @@
+{"ts":"2026-06-18T21:19:06.4148334+07:00","cmd":"HEALTH-GATE","status":"OK","message":"Supply chain open","payload":null}
+{"ts":"2026-06-18T21:19:08.2095367+07:00","cmd":"STAGE-I","status":"OK","message":"Scout complete","payload":"{\"zone\":\"CANON/HEAVY-LEDGER\",\"lens\":\"CONFIG\",\"scoutLens\":\"CONFIG\"}"}
+{"ts":"2026-06-18T21:19:09.5459025+07:00","cmd":"SESSION","status":"OK","message":"Resolved test-338-rise for sov100","payload":"{\"session_id\":\"test-338-rise\",\"student_id\":\"sov100\"}"}
+{"ts":"2026-06-18T21:19:39.6321275+07:00","cmd":"STAGE-II","status":"ERR","message":"crunch/bible failed: The request was canceled due to the configured HttpClient.Timeout of 30 seconds elapsing.","payload":null}

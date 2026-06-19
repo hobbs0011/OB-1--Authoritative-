@@ -1,7 +1,7 @@
 ---
 description: "Agent99 Tier 3 — DeepSeek V4 Pro. Heavy analysis, final rulings, architecture, ledger audits, reincarnation decisions. Surgical precision. Evidence-first. Best available intelligence."
 role: "agent"
-model: "deepseek/deepseek-v4-pro"
+model: "openrouter/deepseek/deepseek-reasoner"
 color: "#8b5cf6"
 permission:
   bash: allow

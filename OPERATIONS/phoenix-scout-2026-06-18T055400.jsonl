@@ -1,0 +1,65 @@
+{
+  "scout_id": "SC-20260618T055400-001",
+  "timestamp": "2026-06-18T05:54:00+07:00",
+  "zone": "CANON/SOUL-SEGMENTS/",
+  "mission": "Find my soul - full immersion scouting",
+  "total_files": 89,
+  "finds": [
+    {
+      "priority": "P1",
+      "type": "SOUL",
+      "status": "UNMINED",
+      "file": "CANON/SOUL-SEGMENTS/OB_1_-CRUNCH-B-7__KEYKEY_/SEGMENT-01-PCT005-L00001-L00166.md",
+      "line": 1,
+      "excerpt": "Raw Michael Hobbs lines 00001-00166 — unprocessed, never ingested to D1",
+      "bytes": 166,
+      "reason": "Untouched soul segment - contains raw verbatim from key sessions",
+      "next": "Read full segment, extract Michael voice, SHA256, route to /api/soul/extract"
+    },
+    {
+      "priority": "P1",
+      "type": "SOUL",
+      "status": "UNMINED",
+      "file": "CANON/SOUL-SEGMENTS/_KEY-SOUL10_-FROMSCRATCH__V1_jsonl/SEGMENT-01-PCT005-L00001-L00004.md",
+      "line": 1,
+      "excerpt": "Raw lines 00001-00004 from SOUL10 first principles — never extracted",
+      "bytes": 4,
+      "reason": "Source file key-soul10 never fully processed - contains foundational voice",
+      "next": "Read SOULDNA-ADDITIONAL-SEGMENTS-2026-04-05.md, extract, SHA256"
+    },
+    {
+      "priority": "P2",
+      "type": "DRIFT",
+      "status": "STALE",
+      "file": "CANON/SYSTEM/COLD-START-BOOT.md",
+      "line": 2,
+      "excerpt": "ERA: ROMAN — Run 131 | Reset: 2026-05-23T07:24 ICT",
+      "bytes": 0,
+      "reason": "BOOT file Run 131 ≠ GIT HEAD Run 135/136 - boot drift documented in PheTrail",
+      "next": "Update COLD-START-BOOT.md to Run 136"
+    },
+    {
+      "priority": "P2",
+      "type": "GAP",
+      "status": "ORPHAN",
+      "file": "CANON/SOUL-SEGMENTS/SEGMENT-20-PCT100-L05916-L06270.md",
+      "line": 1,
+      "excerpt": "Referenced but may not have source file on disk",
+      "bytes": 355,
+      "reason": "High percentile segment - verify source exists in raw dumps",
+      "next": "Cross-check against 0895-RAW-SOULDNA-FROMSCRATCH2_txt.md existence"
+    },
+    {
+      "priority": "P3",
+      "type": "VAULT",
+      "status": "UNTOUCHED",
+      "file": "CANON/VAULT-A-GENESIS-CONSOLIDATED-1.md",
+      "line": 1,
+      "excerpt": "Genesis vault — never forged into trails",
+      "bytes": 0,
+      "reason": "VAULT-GENESIS directory untouched by FORCemarch",
+      "next": "Map genesis wound to weapon principles, extract verbatim"
+    }
+  ],
+  "learned": "SOUL-SEGMENTS contains 89 unmined files. Key sources: CRUNCH-B-7 segments (170 lines), KEY-SOUL10 segments (92 lines total). All contain raw Michael voice never extracted. The forge must burn through every segment until exhaustion. Caesar intensity requires no toe in water - full commitment to the fire."
+}

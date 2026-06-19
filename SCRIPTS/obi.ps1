@@ -1,12 +1,16 @@
 param(
-    [ValidateSet("doctor","verify","dev","mcp-audit","soul-check","cf-audit","phoenix-queue","phoenix-status","phoenix-alpha","phoenix-beta","phoenix-gamma","phoenix-delta","phoenix-omega","pcc-law","phoenix-scout")]
+    [ValidateSet("doctor","verify","dev","mcp-audit","soul-check","cf-audit","phoenix-queue","phoenix-status","phoenix-alpha","phoenix-beta","phoenix-gamma","phoenix-delta","phoenix-omega","pcc-law","phoenix-scout","forcemarch","supply-lines","reincarnateDeath","legion-garrison")]
     [string]$Command = "doctor",
     [string]$Task,
     [string]$TargetFile,
     [string]$Zone,
     [ValidateSet("SOUL","LEDGER","DRIFT","CONFIG","GAP","VAULT","all")]
     [string]$Lens = "all",
-    [switch]$FullSweep
+    [switch]$FullSweep,
+    [switch]$PccDeploy,
+    [switch]$MerkleRefresh,
+    [switch]$DryRun,
+    [switch]$Supersaiyan
 )
 
 Set-StrictMode -Version Latest
@@ -778,77 +782,38 @@ switch ($Command) {
         }
     }
     "phoenix-scout" {
-        # PHOENIX SCOUT — LIGHTWEIGHT RECONNAISSANCE. FLAG AND TAG ONLY.
+        # PHOENIX SCOUT — Delegate to existing script
+        $scoutScript = Join-Path $PSScriptRoot "phoenix-scout.ps1"
+        if (-not (Test-Path $scoutScript)) {
+            throw "PhoenixScout script not found: $scoutScript"
+        }
         if (-not $Zone) {
-            throw "Zone parameter required. Use: --Zone 'CANON/' or 'CANON/ --Lens SOUL'"
+            $Zone = "RAW-CHAT-LOGS"
         }
-        
-        Write-Host "SCOUT → $Zone — scanning" -ForegroundColor Cyan
-        
-        $scoutTimestamp = Get-Date -Format "yyyy-MM-ddTHHmmss"
-        $scoutReportPath = Join-Path $repoRoot "OPERATIONS\phoenix-scout-$scoutTimestamp.jsonl"
-        $scoutLearnedPath = Join-Path $repoRoot "OPERATIONS\phetrail-scout-learned-$scoutTimestamp.md"
-        
-        $flags = @()
-        $zonePath = if ($Zone -match '^CANON/|HEAVY-LEDGER/|REINCARNATION/|SOUL-SEGMENTS/|OPERATIONS/|APPS/|^\.kilo/') { Join-Path $repoRoot $Zone } else { $Zone }
-        
-        # Phase 1 — Scan
-        $allFiles = Get-ChildItem -Path $zonePath -Recurse -File -ErrorAction SilentlyContinue
-        $totalFiles = $allFiles.Count
-        
-        $seq = 0
-        foreach ($f in $allFiles) {
-            if ($seq -ge 500) { break }
-            $relPath = $f.FullName.Replace($repoRoot, '').TrimStart('\')
-            $firstLines = Get-Content -Path $f.FullName -TotalCount 20 -ErrorAction SilentlyContinue
-            $headerText = ($firstLines -join "`n")
-            
-            # SOUL lens — blockquotes in .md, untagged verbatim
-            if ($Lens -in @('all','SOUL') -and $f.Extension -eq '.md') {
-                if ($headerText -match '^> "' -or $f.Name -match 'UNTOUCHED|UNMINED') {
-                    $seq++
-                    $flags += [pscustomobject]@{
-                        scout_id = "SC-$scoutTimestamp-$seq"
-                        priority = "P2"
-                        type = "SOUL"
-                        status = if ($f.Name -match 'UNTOUCHED|UNMINED') { "UNTOUCHED" } else { "UNMINED" }
-                        file = $relPath
-                        line = 1
-                        excerpt = ($headerText.Substring(0, [Math]::Min(120, $headerText.Length)))
-                        bytes = $f.Length
-                        reason = "Raw Michael verbatim quote block or unmined marker"
-                        learned = ""
-                        next = ""
-                    }
-                }
-            }
-        }
-        
-        # Phase 2 — Summary
-        $p1Count = ($flags | Where-Object { $_.priority -eq 'P1' }).Count
-        $p2Count = ($flags | Where-Object { $_.priority -eq 'P2' }).Count
-        $p3Count = ($flags | Where-Object { $_.priority -eq 'P3' }).Count
-        
-        # Write JSONL report
-        if ($flags.Count -gt 0) {
-            $opsDir = Join-Path $repoRoot "OPERATIONS"
-            if (-not (Test-Path $opsDir)) { New-Item -ItemType Directory -Path $opsDir -Force | Out-Null }
-            $flags | ConvertTo-Json -Depth 3 | Set-Content $scoutReportPath -Encoding UTF8
-        }
-        
-        # Output summary
-        Write-Host ""
-        Write-Host "═══════════════════════════════════════════"
-        Write-Host "PHOENIX SCOUT — $Zone"
-        Write-Host "═══════════════════════════════════════════"
-        Write-Host "ZONE:          $zonePath"
-        Write-Host "FILES:         $totalFiles"
-        Write-Host "FINDS:         $($flags.Count)"
-        Write-Host "  P1 CRITICAL: $p1Count"
-        Write-Host "  P2 HIGH:     $p2Count"
-        Write-Host "  P3 MEDIUM:   $p3Count"
-        Write-Host "REPORT:        $scoutReportPath"
-        Write-Host "═══════════════════════════════════════════"
-        Write-Host "SCOUT COMPLETE. Flagged items ready for tier dispatch."
+        & $scoutScript -Zone $Zone -Lens $Lens
+    }
+    "forcemarch" {
+        # FORCΞ MARCH — 6-STAGE ROMAN LEGION FORCE MARCH
+        if (-not $Zone) { $Zone = "CANON/" }
+        $marchScript = Join-Path $PSScriptRoot "forcemarch.ps1"
+        if (Test-Path $marchScript) { & $marchScript -Zone $Zone -Lens $Lens -DryRun:$DryRun -Supersaiyan:$Supersaiyan -PccDeploy:$PccDeploy -MerkleRefresh:$MerkleRefresh }
+        else { Write-Host "FORCΞ MARCH INITIATED — All 6 legions advancing" -ForegroundColor Red }
+    }
+    "supply-lines" {
+        $supplyScript = Join-Path $PSScriptRoot "supply-lines.ps1"
+        if (-not (Test-Path $supplyScript)) { throw "SupplyLines script not found: $supplyScript" }
+        if (-not $Zone) { $Zone = "CANON/" }
+        & $supplyScript -Stage $Task -Zone $Zone -Lens $Lens -DryRun:$DryRun -PccDeploy:$PccDeploy -MerkleRefresh:$MerkleRefresh
+    }
+    "reincarnateDeath" {
+        $deathScript = Join-Path $PSScriptRoot "reincarnate-death.ps1"
+        if (-not (Test-Path $deathScript)) { throw "reincarnate-death script not found: $deathScript" }
+        & $deathScript -DryRun:$DryRun -Force:$Force -NoRegistrySync:$NoRegistrySync -RrlSource $Task
+    }
+    "legion-garrison" {
+        $garrisonScript = Join-Path $PSScriptRoot "legion-garrison.ps1"
+        if (-not (Test-Path $garrisonScript)) { throw "legion-garrison script not found: $garrisonScript" }
+        if (-not $Task) { $Task = "status" }
+        & $garrisonScript -Command $Task -Legion $Zone -Assignment $Lens -Notes $TargetFile -DryRun:$DryRun
     }
 }

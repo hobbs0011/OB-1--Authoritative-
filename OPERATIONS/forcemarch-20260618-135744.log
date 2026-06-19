@@ -1,0 +1,5 @@
+{"stage":"INIT","severity":"INFO","ts":"2026-06-18T13:57:44.3220000+07:00","message":"Run authority start"}
+{"stage":"STAGE-I","severity":"INFO","ts":"2026-06-18T13:57:44.5618680+07:00","message":"Exploratores deploying"}
+{"stage":"HEALTH","severity":"ERR","ts":"2026-06-18T13:57:45.6379360+07:00","message":"soul-logger=ERR"}
+{"stage":"HEALTH","severity":"ERR","ts":"2026-06-18T13:57:46.6649336+07:00","message":"phoenix-architecti=ERR"}
+{"stage":"STAGE-I","severity":"WARN","ts":"2026-06-18T13:57:46.6708485+07:00","message":"Legion health degraded; continuing under exhaustion"}

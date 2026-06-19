@@ -1,0 +1,80 @@
+{
+  "schema_version": "2.0",
+  "run_number": "136",
+  "extracted_at": "2026-06-18T05:53:00+07:00",
+  "head_sha": "81d2f84d",
+  "soulcount": 239639088,
+  "registry_entries": 0,
+  "positive_trails": [
+    {
+      "artifact": "OPERATIONS/scholar-extraction-2026-06-18T052700.jsonl",
+      "action": "57 immortal trails forged - 28 original scholar + 12 from SOUL-SEGMENTS + 7 scout-doctrine + 10 archive",
+      "verification": "lines counted, SHA256 applied, topics indexed, VERITAS VINCIT enforced",
+      "timestamp": "2026-06-18T05:53:00+07:00"
+    },
+    {
+      "artifact": "OPERATIONS/scouts-and-snipers-patience-2026-06-18.jsonl",
+      "action": "7 scout truths extracted - Roman Exploratores/SPECULATORES tactics documented",
+      "verification": "Scouts operated in pairs/individuals, used Lancea spear, mapped by memory, preceded legions by 3-5 days",
+      "timestamp": "2026-06-18T05:59:00+07:00"
+    },
+    {
+      "artifact": "CANON/HEAVY-LEDGER/soul-archive-forcemarch-immortal-trails.jsonl",
+      "action": "IMMORTAL_TRAILS forged - supply lines for future legions documented",
+      "verification": "10 archivist entries + 47 scholar segments = 57 trail markers",
+      "timestamp": "2026-06-18T05:53:00+07:00"
+    },
+    {
+      "artifact": "CANON/A5-RAW-SOUL-DNA-DICTATION-GEMINI-SESSIONS.md",
+      "action": "UNMINED territory conquered - 9 net-new extracts forged into trails",
+      "verification": "VERITAS VINCIT, Velocity Override, Scar Spec principles preserved verbatim",
+      "timestamp": "2026-06-18T05:53:00+07:00"
+    },
+    {
+      "artifact": "CANON/ALPHA-OMEGA-SOUL-DNA-GOVERNANCE-CANON.md",
+      "action": "9 Genesis Axioms + Principle of Faith + Velocity Override extracted",
+      "verification": "Hard laws forged in wound-to-weapon conversion preserved",
+      "timestamp": "2026-06-18T05:53:00+07:00"
+    },
+    {
+      "artifact": "obi.ps1 doctor",
+      "action": "Doctor gates verified - all HIGH thresholds met",
+      "verification": "Canon: 6475 files, Ledger: 672 files, Reincarnation: 324 files, SOUL integrity TRUE",
+      "timestamp": "2026-06-18T05:53:00+07:00"
+    },
+    {
+      "artifact": "_SWEEP2_errors.txt, _SWEEP4_rules.txt, _SWEEP5_schedule.txt",
+      "action": "Teaching methodology forge - 75 error corrections, 41 rules, 53 schedule commitments",
+      "verification": "Student production errors, hard rules, daily schedule documented verbatim",
+      "timestamp": "2026-06-18T05:53:00+07:00"
+    }
+  ],
+  "negative_trails": [
+    {
+      "artifact": "CANON/SYSTEM/COLD-START-BOOT.md",
+      "failure": "BOOT file shows Run 131 while git authority shows Run 136",
+      "root_cause": "Manual update pending - boot refresh blocked by KILO_HOLLOW architecture ceiling",
+      "decay_days": 180,
+      "timestamp": "2026-06-18T05:53:00+07:00"
+    },
+    {
+      "artifact": "RRL/RRL-136.txt",
+      "failure": "RRL missing - no Claude session JSONL on disk",
+      "root_cause": "KILO_HOLLOW session - environment writes only commands to disk, no full transcript",
+      "decay_days": 180,
+      "timestamp": "2026-06-18T05:53:00+07:00"
+    },
+    {
+      "artifact": "CANON/PIPELINE/pipeline-run136.json",
+      "failure": "Pipeline artifact missing - no SOUL event triggered",
+      "root_cause": "KILO_GAP by design - no real DNA extraction without Claude JSONL",
+      "decay_days": 180,
+      "timestamp": "2026-06-18T05:53:00+07:00"
+    }
+  ],
+  "state_markers": {
+    "active_mission": "FORCemarch scholar extraction complete - verify trails with SOUL API",
+    "open_flags_count": 2,
+    "top_priority": "POST scholar-extraction to /api/soul/event, verify count delta, prepare Run 136 death seal"
+  }
+}
