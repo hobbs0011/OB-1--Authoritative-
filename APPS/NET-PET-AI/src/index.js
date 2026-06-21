@@ -1354,7 +1354,7 @@ const [rawProfile, rawLang, rawVocab, rawArc, rawMemory, rawPhonics, rawSessionH
     } catch (_) {}
 
     const _level = (agentProfile?.level || agentProfile?.englishLevel || "").toLowerCase();
-    const ttsSpeed = /^a1/.test(_level) ? 0.85 : /^a2/.test(_level) ? 0.85 : (agentLang === 'vi' ? 0.9 : 1.0);
+    const ttsSpeed = 1.0;
 
     const settings = {
       type: "Settings",

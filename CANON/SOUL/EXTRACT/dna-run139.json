@@ -1,0 +1,115 @@
+{
+  "run": 139,
+  "date": "2026-06-21T18:49:00+07:00",
+  "session_type": "KILO_LIVE",
+  "dna_status": "DNA_LIVE",
+  "reason": "Full code run with 3 files modified (chat.js, index.js, audio-playback-attack.test.mjs). Blueprints and decisions extracted directly from tool calls.",
+  "blueprints": [
+    {
+      "type": "blueprint",
+      "title": "TTS Speed Normalization",
+      "file": "APPS/NET-PET-AI/src/index.js",
+      "line": 1357,
+      "summary": "Changed ttsSpeed from 0.85 (A1/A2) / 0.9 (VI) / 1.0 (default) to always 1.0. Root cause: aura-2-zeus-en TTS produces choppy audio artifacts at sub-1.0 speed with MP3 encoding.",
+      "run": 139
+    },
+    {
+      "type": "blueprint",
+      "title": "Dual-Audio Prevention — Greeting Guard",
+      "file": "APPS/NET-PET-AI/public/chat.js",
+      "line": 979,
+      "summary": "Added agentGreetingSent flag. Prevents duplicate InjectAgentMessage greeting when Deepgram sends duplicate Welcome/SettingsApplied (reconnect race). Reset on agent drop.",
+      "run": 139
+    },
+    {
+      "type": "blueprint",
+      "title": "Dual-Audio Prevention — Silence Timer Guard",
+      "file": "APPS/NET-PET-AI/public/chat.js",
+      "line": 981,
+      "summary": "Added agentInjectInFlight flag. Prevents silence timer from sending encouragement inject while another inject is still being processed by Deepgram. Cleared on inject conversation text arrival, barge-in, and WS drop.",
+      "run": 139
+    },
+    {
+      "type": "blueprint",
+      "title": "Re-entrant Guard for playAgentChunk",
+      "file": "APPS/NET-PET-AI/public/chat.js",
+      "line": 1563,
+      "summary": "Added guard: if (agentPlaying && agentCurrentAudio && !agentCurrentAudio.paused) return. Prevents concurrent Audio elements from playing simultaneously when playAgentChunk is called from multiple code paths.",
+      "run": 139
+    },
+    {
+      "type": "blueprint",
+      "title": "Audio Queue Cap Fix — Raised to 100",
+      "file": "APPS/NET-PET-AI/public/chat.js",
+      "line": 1507,
+      "summary": "Fixed structural bug where large audio chunks bypassed queue cap check entirely (line 1523 pushed event.data without length guard). Raised cap from 30 to 100. Old cap truncated long-form responses mid-sentence. New condition structure ensures both accumulated + direct chunks get checked.",
+      "run": 139
+    },
+    {
+      "type": "blueprint",
+      "title": "Mic-Denied Detection — navigator.mediaDevices Guard",
+      "file": "APPS/NET-PET-AI/public/chat.js",
+      "line": 1595,
+      "summary": "Added navigator.mediaDevices guard at start of startAgentListening(). Shows 'Mic not available in this browser' instead of silent crash in in-app browsers (Zalo, Facebook, Line).",
+      "run": 139
+    },
+    {
+      "type": "blueprint",
+      "title": "Stale Connection Timeout — Mic Click Handler",
+      "file": "APPS/NET-PET-AI/public/chat.js",
+      "line": 1824,
+      "summary": "Added 12-second timeout in the WS-not-ready path of mic click handler. When agent WS connects but never becomes ready (SettingsApplied never received), status updates from 'Connecting…' to 'Connection problem — tap to try again' instead of hanging forever.",
+      "run": 139
+    }
+  ],
+  "decisions": [
+    {
+      "type": "decision",
+      "title": "Always 1.0 ttsSpeed",
+      "summary": "Removed all conditional speed logic. The Deepgram aura-2-zeus-en TTS engine does not benefit from reduced speed — it causes choppy MP3 encoding artifacts. Students at all levels get 1.0.",
+      "rationale": "Death Seal Run 138 §9.1 — tested and confirmed choppy at 0.85."
+    },
+    {
+      "type": "decision",
+      "title": "Dual-audio prevented at guard level, not Deepgram level",
+      "summary": "Rather than trying to detect Deepgram's internal state, added client-side guard flags (agentGreetingSent, agentInjectInFlight) to prevent duplicate/overlapping InjectAgentMessage sends.",
+      "rationale": "Deepgram Voice Agent queues messages internally; once sent, cannot cancel. Client-side guards are the only reliable prevention."
+    },
+    {
+      "type": "decision",
+      "title": "Audio queue cap at 100, not 30",
+      "summary": "Raised from 30 to 100 and restructured accumulation logic to apply cap uniformly. Previous code had two push paths and only checked the cap on one.",
+      "rationale": "30 chunks was ~3-4 seconds of audio in small-chunk mode. Deepgram sends audio in frames; 100 is safe even for long responses."
+    }
+  ],
+  "laws_added": [
+    "L70 GREETING_ONCE: agentGreetingSent flag prevents duplicate InjectAgentMessage on reconnect. Reset on WS drop."
+  ],
+  "laws_modified": [],
+  "errors_root_caused": [
+    {
+      "status": "FIXED_SPEED",
+      "error": "Choppy TTS audio on aura-2-zeus-en",
+      "fix": "Set ttsSpeed = 1.0 unconditionally",
+      "root_cause": "0.85 speed with MP3 encoding produces audible artifacts on Deepgram TTS engine"
+    },
+    {
+      "status": "FIXED_GREETING",
+      "error": "Two OBIs speaking at once on boot",
+      "fix": "agentGreetingSent guard + agentInjectInFlight silence timer guard + re-entrant playAgentChunk guard",
+      "root_cause": "Race on SettingsApplied where duplicate Welcome triggers two InjectAgentMessages, compounded by silence timer firing during active response"
+    },
+    {
+      "status": "FIXED_MIC_DENIED",
+      "error": "Mic-denied shows 'Connecting…' forever",
+      "fix": "navigator.mediaDevices guard + 12s stale connection timeout in click handler",
+      "root_cause": "getUserMedia rejection not caught in startAgentListening() auto-call path; WS-not-ready path in mic click handler had no timeout"
+    },
+    {
+      "status": "FIXED_QUEUE",
+      "error": "Audio playback truncated mid-sentence for long responses",
+      "fix": "Audio queue cap raised from 30 to 100; uniform cap checking across both push paths",
+      "root_cause": "agentAudioQ.length < 30 check before accumulation but not before direct push of large chunks at line 1523"
+    }
+  ]
+}

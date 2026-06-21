@@ -135,6 +135,58 @@ test('EC-bloburlleak: agentCurrentBlobUrl is revoked on cleanup', () => {
     'blobUrl never revoked — iOS Safari memory will leak on long sessions');
 });
 
+// ── Dual-audio prevention ──────────────────────────────────────────────────────
+test('EC-dualaudio: agentGreetingSent flag guards duplicate InjectAgentMessage', () => {
+  assert(chatJs.includes('agentGreetingSent'),
+    'agentGreetingSent flag not found — duplicate greeting inject will cause dual audio on reconnect');
+});
+
+test('EC-dualaudio: agentGreetingSent checked before InjectAgentMessage send', () => {
+  const guardIdx = chatJs.indexOf('if (agentGreetingSent) return;');
+  const settingsIdx = chatJs.indexOf("msg.type === \"SettingsApplied\"");
+  assert(guardIdx > settingsIdx && guardIdx < settingsIdx + 5000,
+    'agentGreetingSent guard absent from SettingsApplied handler — greeting can fire twice');
+});
+
+test('EC-dualaudio: agentInjectInFlight flag guards silence timer inject', () => {
+  assert(chatJs.includes('agentInjectInFlight'),
+    'agentInjectInFlight flag not found — silence timer can fire while inject still in-flight');
+});
+
+test('EC-dualaudio: agentGreetingSent reset on agent drop prevents stale guard', () => {
+  // agentGreetingSent and agentInjectInFlight must reset in the onAgentDrop handler
+  const dropFnIdx = chatJs.indexOf('onAgentDrop');
+  const dropFn = chatJs.slice(dropFnIdx, dropFnIdx + 800);
+  assert(dropFn.includes('agentGreetingSent = false') || dropFn.includes('agentInjectInFlight = false'),
+    'agentGreetingSent/agentInjectInFlight not reset on drop — stale guards will prevent greeting on reconnect');
+});
+
+test('EC-dualaudio: playAgentChunk has re-entrant guard', () => {
+  const playFn = chatJs.slice(
+    chatJs.indexOf('async function playAgentChunk'),
+    chatJs.indexOf('async function playAgentChunk') + 2000
+  );
+  assert(playFn.includes('agentCurrentAudio') && playFn.includes('.paused'),
+    'playAgentChunk re-entrant guard missing — parallel calls create concurrent Audio elements');
+});
+
+test('EC-dualaudio: audio queue cap raised to 100 for long-form responses', () => {
+  const handlerFn = chatJs.slice(
+    chatJs.indexOf('// Binary: MP3 audio chunk'),
+    chatJs.indexOf('// Binary: MP3 audio chunk') + 600
+  );
+  // Must check for 100, not 30 (the old stale cap)
+  assert(handlerFn.includes('100') && !handlerFn.includes('30'),
+    'queue cap still 30 (or not found) — short cap truncates long audio responses mid-sentence');
+});
+
+test('EC-dualaudio: agentInjectInFlight cleared on UserStartedSpeaking (barge-in)', () => {
+  const bargeIdx = chatJs.indexOf("msg.type === \"UserStartedSpeaking\"");
+  const afterBarge = chatJs.slice(bargeIdx, bargeIdx + 2000);
+  assert(afterBarge.includes('agentInjectInFlight'),
+    'agentInjectInFlight not cleared in UserStartedSpeaking handler — stale flag silences future nudges');
+});
+
 // ── Summary ───────────────────────────────────────────────────────────────────
 console.log(`\n  ${passed} passed, ${failed} failed\n`);
 if (failed > 0) process.exit(1);

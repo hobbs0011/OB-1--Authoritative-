@@ -976,6 +976,8 @@ let userHasInteracted = false; // set on first gesture
 let pendingMicStream  = null;  // mic stream grabbed during gesture, before agent ready
 let micAcquiring      = false; // mutex: prevents double getUserMedia on rapid taps
 let agentFirstAudioReceived = false; // FIX1: true after first agent audio chunk plays — gates legacy TTS suppression
+let agentGreetingSent = false;       // prevents dual InjectAgentMessage on duplicate SettingsApplied
+let agentInjectInFlight = false;     // prevents silence timer firing while another inject is in-flight
 let agentPreSettingsBuffer = []; // EC-15: PCM chunks buffered before SettingsApplied
 let agentPreSettingsBytes = 0;   // byte count — cap at 50 chunks (~1s at 16kHz)
 let lastSessionVocabGlobal = []; // last session vocab words from token response
@@ -1091,7 +1093,7 @@ async function openVoiceAgent() {
         if (msg) msg.style.display = '';
         if (sendBtn) sendBtn.style.display = '';
       }
-      agentWs = null; agentReady = false; agentSettings = null; agentFirstAudioReceived = false;
+      agentWs = null; agentReady = false; agentSettings = null; agentFirstAudioReceived = false; agentGreetingSent = false; agentInjectInFlight = false;
       // I-3: Clear stale agentTextResolve on drop to prevent memory leak (EC-1 fix)
       if (agentTextResolve) { const r = agentTextResolve; agentTextResolve = null; try { r(""); } catch {} }
       if (agentKeepAlive) { clearInterval(agentKeepAlive); agentKeepAlive = null; }
@@ -1249,7 +1251,11 @@ function handleAgentMsg(event) {
         } else {
           _openingMsg = `${_viGreet}${_greetName || "there"}! I'm OBI, your English coach. No pressure — just speak naturally, I'll guide you. What do you want to talk about today?`;
         }
-        setTimeout(() => { agentWs.send(JSON.stringify({ type: "InjectAgentMessage", message: _openingMsg })); }, 400);
+        setTimeout(() => {
+          if (agentGreetingSent) return;
+          agentGreetingSent = true;
+          agentWs.send(JSON.stringify({ type: "InjectAgentMessage", message: _openingMsg }));
+        }, 400);
         // Start mic if stream already acquired
         if (!agentMicStream) {
           if (pendingMicStream) {
@@ -1269,6 +1275,7 @@ function handleAgentMsg(event) {
         if (agentCurrentBlobUrl) { URL.revokeObjectURL(agentCurrentBlobUrl); agentCurrentBlobUrl = null; }
         if (agentCurrentAudio) { try { agentCurrentAudio.pause(); } catch {} agentCurrentAudio = null; }
         agentPlaying = false;
+        agentInjectInFlight = false;
         if (agentThinkBubble) { agentThinkBubble.remove(); agentThinkBubble = null; }
         if (state === "busy") state = "chat";
 
@@ -1310,6 +1317,7 @@ function handleAgentMsg(event) {
         }
         // Use source field to distinguish injected vs voice — fixes race condition
         const isInjected = msg.source === "inject" || msg.source === "injected";
+        if (isInjected) agentInjectInFlight = false;
         if (agentTextResolve && isInjected) {
           const resolve = agentTextResolve;
           agentTextResolve = null;
@@ -1497,23 +1505,22 @@ function handleAgentMsg(event) {
   }
   // Binary: MP3 audio chunk — accumulate small frames, then queue merged chunks
   const CHUNK_FLUSH_BYTES = 1024;
-  if (agentAudioQ.length < 30) {
-    if (event.data.byteLength < CHUNK_FLUSH_BYTES) {
-      agentChunkAccum.push(event.data); agentChunkAccumSize += event.data.byteLength;
-      if (agentChunkAccumSize >= CHUNK_FLUSH_BYTES) {
-        const _m = new Uint8Array(agentChunkAccumSize);
-        let _o = 0; for (const _c of agentChunkAccum) { _m.set(new Uint8Array(_c), _o); _o += _c.byteLength; }
-        agentAudioQ.push(_m.buffer); agentChunkAccum = []; agentChunkAccumSize = 0;
-      }
-    } else {
-      if (agentChunkAccum.length > 0) {
-        const _m = new Uint8Array(agentChunkAccumSize);
-        let _o = 0; for (const _c of agentChunkAccum) { _m.set(new Uint8Array(_c), _o); _o += _c.byteLength; }
-        if (agentAudioQ.length < 30) agentAudioQ.push(_m.buffer);
-        agentChunkAccum = []; agentChunkAccumSize = 0;
-      }
-      agentAudioQ.push(event.data);
+  if (event.data.byteLength < CHUNK_FLUSH_BYTES) {
+    agentChunkAccum.push(event.data); agentChunkAccumSize += event.data.byteLength;
+    if (agentChunkAccumSize >= CHUNK_FLUSH_BYTES) {
+      const _m = new Uint8Array(agentChunkAccumSize);
+      let _o = 0; for (const _c of agentChunkAccum) { _m.set(new Uint8Array(_c), _o); _o += _c.byteLength; }
+      if (agentAudioQ.length < 100) agentAudioQ.push(_m.buffer);
+      agentChunkAccum = []; agentChunkAccumSize = 0;
     }
+  } else {
+    if (agentChunkAccum.length > 0) {
+      const _m = new Uint8Array(agentChunkAccumSize);
+      let _o = 0; for (const _c of agentChunkAccum) { _m.set(new Uint8Array(_c), _o); _o += _c.byteLength; }
+      if (agentAudioQ.length < 100) agentAudioQ.push(_m.buffer);
+      agentChunkAccum = []; agentChunkAccumSize = 0;
+    }
+    if (agentAudioQ.length < 100) agentAudioQ.push(event.data);
   }
   // v3 queue-aware guard: if playing state is stuck (audio ended but flag not reset), force restart
   if (!agentPlaying) { playAgentChunk(); }
@@ -1533,8 +1540,9 @@ function resetSilenceTimer() {
   if (agentSilenceTimer) clearTimeout(agentSilenceTimer);
   agentSilenceTimer = setTimeout(() => {
     agentSilenceTimer = null;
-    if (agentWs && agentWs.readyState === WebSocket.OPEN && agentReady && !agentPlaying && agentAudioQ.length === 0 && !agentCurrentAudio && !agentSilenceFired) {
+    if (agentWs && agentWs.readyState === WebSocket.OPEN && agentReady && !agentPlaying && agentAudioQ.length === 0 && !agentCurrentAudio && !agentSilenceFired && !agentInjectInFlight) {
       agentSilenceFired = true;
+      agentInjectInFlight = true;
       const _name = (profile.fullName || "").split(/\s+/)[0] || "";
       const _viEncourage = profile.lang === "vi" ? " (Đừng lo, cứ nói thoải mái!)" : "";
       const _nudgeMsg = `Take your time${_name ? ", " + _name : ""}! Try saying one sentence — anything you like.${_viEncourage}`;
@@ -1557,6 +1565,7 @@ function clearSilenceFired() {
 
 async function playAgentChunk() {
   if (!agentAudioQ.length) { agentPlaying = false; agentCurrentAudio = null; resetSilenceTimer(); return; }
+  if (agentPlaying && agentCurrentAudio && !agentCurrentAudio.paused) return;
   agentFirstAudioReceived = true;
   agentPlaying = true;
   if (state !== "busy") state = "busy";
@@ -1590,6 +1599,10 @@ async function playAgentChunk() {
 
 async function startAgentListening(preAcquiredStream) {
   if (micAcquiring || agentMicStream || agentAudioCtx) return;
+  if (!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)) {
+    setMicStatus("Mic not available in this browser", false);
+    return;
+  }
   micAcquiring = true;
   try {
     const stream = preAcquiredStream || await navigator.mediaDevices.getUserMedia({
@@ -1807,7 +1820,15 @@ micBtn.addEventListener("click", () => {
     return;
   }
   if (agentWs && agentReady) { startAgentListening(); return; }
-  if (agentWs && !agentReady) { setMicStatus("Connecting…", false); return; }
+  if (agentWs && !agentReady) {
+    setMicStatus("Connecting…", false);
+    setTimeout(() => {
+      if (!agentReady && !agentMicStream) {
+        setMicStatus("Connection problem — tap to try again", false);
+      }
+    }, 12000);
+    return;
+  }
   if (urlStudentId) { openVoiceAgent(); return; }
   startListening();
 });

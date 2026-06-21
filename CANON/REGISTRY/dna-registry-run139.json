@@ -1,0 +1,82 @@
+{
+  "generated_at": "2026-06-21T18:49:00.000+07:00",
+  "run": "139",
+  "total_entries": 7,
+  "by_category": "TTS_SPEED=FIXED; DUAL_AUDIO=PREVENTED; MIC_DENIED=DETECTED; AUDIO_QUEUE=CORRECTED; TEST_SUITE=EXPANDED",
+  "entry_count_by_category": [
+    {
+      "category": "DEEPGRAM-TTS",
+      "count": 1
+    },
+    {
+      "category": "CLIENT-AUDIO",
+      "count": 4
+    },
+    {
+      "category": "UI-FAILURE-MODES",
+      "count": 1
+    },
+    {
+      "category": "TEST-SUITE",
+      "count": 1
+    }
+  ],
+  "all_entries": [
+    {
+      "reg_id": "REG-R139-001",
+      "path": "APPS/NET-PET-AI/src/index.js",
+      "category": "DEEPGRAM-TTS",
+      "linked_stages": "HARDENING|TTS|PIPELINE",
+      "first_tokens": "ttsSpeed set to always 1.0 — removed sub-1.0 speeds for A1/A2/VI levels. Root cause: aura-2-zeus-en with MP3 encoding produces choppy artifacts at speed 0.85.",
+      "timestamp": "2026-06-21T18:49:00+07:00"
+    },
+    {
+      "reg_id": "REG-R139-002",
+      "path": "APPS/NET-PET-AI/public/chat.js",
+      "category": "CLIENT-AUDIO",
+      "linked_stages": "WS|AUDIO|DUAL_OBIS",
+      "first_tokens": "agentGreetingSent flag added — guards against duplicate InjectAgentMessage on SettingsApplied. Prevents two OBIs speaking at once from reconnect race.",
+      "timestamp": "2026-06-21T18:49:00+07:00"
+    },
+    {
+      "reg_id": "REG-R139-003",
+      "path": "APPS/NET-PET-AI/public/chat.js",
+      "category": "CLIENT-AUDIO",
+      "linked_stages": "AUDIO|SILENCE_TIMER|INJECT",
+      "first_tokens": "agentInjectInFlight flag added — prevents silence timer firing InjectAgentMessage while another inject is still in-flight. Cleared on inject completion, barge-in, and WS drop.",
+      "timestamp": "2026-06-21T18:49:00+07:00"
+    },
+    {
+      "reg_id": "REG-R139-004",
+      "path": "APPS/NET-PET-AI/public/chat.js",
+      "category": "CLIENT-AUDIO",
+      "linked_stages": "AUDIO|PLAYBACK",
+      "first_tokens": "Re-entrant guard in playAgentChunk — prevents concurrent Audio elements from playing simultaneously when multiple code paths call playAgentChunk.",
+      "timestamp": "2026-06-21T18:49:00+07:00"
+    },
+    {
+      "reg_id": "REG-R139-005",
+      "path": "APPS/NET-PET-AI/public/chat.js",
+      "category": "CLIENT-AUDIO",
+      "linked_stages": "AUDIO|QUEUE|TRUNCATION",
+      "first_tokens": "Audio queue cap raised from 30 to 100 with uniform cap enforcement across both accumulation and direct push paths. Fixed truncation of long audio responses mid-sentence.",
+      "timestamp": "2026-06-21T18:49:00+07:00"
+    },
+    {
+      "reg_id": "REG-R139-006",
+      "path": "APPS/NET-PET-AI/public/chat.js",
+      "category": "UI-FAILURE-MODES",
+      "linked_stages": "UX|MIC|DENIED",
+      "first_tokens": "navigator.mediaDevices guard in startAgentListening() — shows 'Mic not available in this browser' instead of silent crash in in-app browsers. 12s stale connection timeout updates 'Connecting...' to actionable error.",
+      "timestamp": "2026-06-21T18:49:00+07:00"
+    },
+    {
+      "reg_id": "REG-R139-007",
+      "path": "APPS/NET-PET-AI/test/audio-playback-attack.test.mjs",
+      "category": "TEST-SUITE",
+      "linked_stages": "LOCK|AUDIO|HARDENING",
+      "first_tokens": "7 new EC-dualaudio lock tests added: agentGreetingSent presence, guard in handler, agentInjectInFlight silence timer guard, flag reset on drop, re-entrant guard, queue cap, barge-in clear. 20/20 PASS.",
+      "timestamp": "2026-06-21T18:49:00+07:00"
+    }
+  ]
+}
