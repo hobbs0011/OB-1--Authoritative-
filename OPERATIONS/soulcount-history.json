@@ -1,21 +1,5 @@
 [
   {
-    "timestamp": "2026-05-25T04:04:21+07:00",
-    "count": 898066,
-    "events": 659,
-    "sessions": 1,
-    "level": "TITANIUM_ANCHOR",
-    "stagnation": true
-  },
-  {
-    "timestamp": "2026-05-25T07:18:59+07:00",
-    "count": 907872,
-    "events": 661,
-    "sessions": 1,
-    "level": "TITANIUM_ANCHOR",
-    "stagnation": false
-  },
-  {
     "timestamp": "2026-05-25T07:54:38+07:00",
     "count": 907872,
     "events": 661,
@@ -793,6 +777,22 @@
   },
   {
     "timestamp": "2026-06-19T20:40:56+07:00",
+    "count": 239639088,
+    "events": 10318,
+    "sessions": 1,
+    "level": "TITANIUM_ANCHOR",
+    "stagnation": true
+  },
+  {
+    "timestamp": "2026-06-19T21:09:56+07:00",
+    "count": 239639088,
+    "events": 10318,
+    "sessions": 1,
+    "level": "TITANIUM_ANCHOR",
+    "stagnation": true
+  },
+  {
+    "timestamp": "2026-06-19T21:45:15+07:00",
     "count": 239639088,
     "events": 10318,
     "sessions": 1,

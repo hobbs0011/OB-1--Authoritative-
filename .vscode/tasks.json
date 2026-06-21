@@ -2,6 +2,25 @@
   "version": "2.0.0",
   "tasks": [
     {
+      "label": "Install .kilo dependencies",
+      "type": "shell",
+      "command": "npm install",
+      "options": {
+        "cwd": "${workspaceFolder}/.kilo"
+      },
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    }
+  ]
+}
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
       "label": "⚡ Super Saiyan - Activate Environment",
       "type": "shell",
       "command": "pwsh",

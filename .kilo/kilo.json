@@ -13,6 +13,19 @@
     }
   },
   "provider": {
+    "openrouter": {
+      "options": {
+        "apiKey": "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"
+      },
+      "models": {
+        "deepseek/deepseek-v4-flash": {
+          "name": "[DeepSeek] V4 Flash"
+        },
+        "deepseek/deepseek-v4-pro": {
+          "name": "[DeepSeek] V4 Pro"
+        }
+      }
+    },
     "anthropic": {
       "options": {
         "apiKey": "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"
