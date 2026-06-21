@@ -1,0 +1,15 @@
+﻿{
+    "hl_id":  "HL-716",
+    "session_id":  "sov100-roman-run140",
+    "rrl_source":  "D:\\OB-1-CANONICAL\\RRL\\RRL-140.txt",
+    "char_count":  210,
+    "byte_count":  212,
+    "soul_hash":  "FC1BF864CE5629170530AA04ADB0958A04BFC092BBD5BAADA4FF01E14FB96404",
+    "dna_hash":  "DNA_GAP",
+    "dna_blueprint_count":  0,
+    "merkle_parent":  "GAP_LEDGER_715",
+    "merkle_hash":  "AD9B209C6F9358EAA44B3CC75DD466482163EB209E4F8C700A3A5ABB0E4EAB14",
+    "sealed_at":  "2026-06-21T19:48:35.5398629+07:00",
+    "sov100":  true,
+    "run":  140
+}

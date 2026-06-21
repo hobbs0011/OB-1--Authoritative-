@@ -1,0 +1,4 @@
+# KILO_HOLLOW — Run 140
+# Session type: KILO (no Claude Code JSONL on disk)
+# This is a chain-integrity placeholder. No real transcript exists.
+# All downstream stages will report GAP/KILO_GAP as per contract.
