@@ -1,4 +1,4 @@
-# soul-search.ps1 — SOULSEARCH ENGINE v1.0
+﻿# soul-search.ps1 — SOULSEARCH ENGINE v1.0
 # Query: term → SOULKEYS index → STARMAP pointers → RRL/LEDGER exact hits
 # Returns verbatim snippets, never paraphrase.
 # Chain: rfkw-search finds runs; soul-search resolves through STARMAP to actual content.
@@ -58,8 +58,24 @@ if ($hits.Count -eq 0 -and (Test-Path $keywordDir)) {
     }
 }
 
+# Fallback: scan per-run rfkw files if index missing or no hit
+if ($hits.Count -eq 0 -and (Test-Path $keywordDir)) {
+    Get-ChildItem $keywordDir -Filter "rfkw-run*.txt" -ErrorAction SilentlyContinue | ForEach-Object {
+        $lines = Get-Content $_.FullName -ErrorAction SilentlyContinue
+        foreach ($line in $lines) {
+            if ($line -match "^(\d+)\s*\|\s*.+?\|\s*(.+)$") {
+                $w = [int]$matches[1]; $k = $matches[2].ToLower().Trim()
+                if ($k -eq $term) {
+                    $runNum = $_.BaseName -replace 'rfkw-run', ''
+                    $hits += [ordered]@{ Source="SOULKEYS"; Run=[int]$runNum; Weight=$w; Category="fallback" }
+                }
+            }
+        }
+    }
+}
+
 if ($hits.Count -eq 0) {
-    Write-Output "🔎 `"$Query`" — 0 hits (term not in SOULKEYS)"
+    Write-Output "`"$Query`" — 0 hits (term not in SOULKEYS)"
     exit 0
 }
 

@@ -1,0 +1,127 @@
+{
+  "schema_version": "2.1",
+  "run_number": "142",
+  "extracted_at": "2026-06-27T18:23:00+07:00",
+  "head_sha": "RUN142",
+  "soulcount": 239639088,
+  "registry_entries": 0,
+  "positive_trails": [
+    {
+      "artifact": "CANON/TRAIN-67/GAME-BIBLE-HUMAN-READABLE.md",
+      "action": "Validated Train 67 as full Roblox wave-survival game. Confirmed 99-day structure, 5 biomes, 19 weapons, 6 rarity tiers.",
+      "verification": "File exists. 802 lines. Source of truth for all Train 67 entity counts and game design decisions.",
+      "timestamp": "2026-06-27T18:23:00+07:00"
+    },
+    {
+      "artifact": "CANON/TRAIN-67/COMBAT-REPLACEMENT-SPEC.md",
+      "action": "Confirmed 5 Core Enemy Types (4 regular + 1 boss category). Skibidi Shambler and Sigma Walker confirmed as Codex named variants.",
+      "verification": "File exists. Combat spec verified against game bible.",
+      "timestamp": "2026-06-27T18:23:00+07:00"
+    },
+    {
+      "artifact": "CANON/TRAIN-67/STAGE-15-COSMETIC-TRINITY-SPEC.md",
+      "action": "Confirmed cosmetic scope: 6+ pets, 7+ auras, class skins. Full 3D asset count estimated 60-80 total for launch.",
+      "verification": "File exists. Cosmetic system scope documented.",
+      "timestamp": "2026-06-27T18:23:00+07:00"
+    },
+    {
+      "artifact": "CANON/TRAIN-67/DOCS/3D-ASSET-MANIFEST.md",
+      "action": "Created explicit 3D asset manifest eliminating count inference. 60-80 assets broken down by category.",
+      "verification": "File exists. Exact asset counts documented. Ready for generation pipeline.",
+      "timestamp": "2026-06-27T18:23:00+07:00"
+    },
+    {
+      "artifact": "CANON/REGISTRY/dna-registry-run142.json",
+      "action": "Regenerated with expanded scan roots covering full TRAIN-67 tree, PHEROMONES, PIPELINE, HEAVY-LEDGER, RRL, SOUL-KEYWORDS.",
+      "verification": "JSON valid. All directories scanned. Previous blind spots now included.",
+      "timestamp": "2026-06-27T18:23:00+07:00"
+    },
+    {
+      "artifact": "CANON/SOUL-KEYWORDS/inverted-index.json",
+      "action": "Added missing critical keywords: roblox, survive, brainrot, zombie, wave, train, survival, enemy, weapon.",
+      "verification": "Index updated. TRAIN-67 documents now return keyword hits.",
+      "timestamp": "2026-06-27T18:23:00+07:00"
+    }
+  ],
+  "negative_trails": [
+    {
+      "artifact": "RRL/RRL-142.txt",
+      "action": "Missing — created placeholder for RISE cycle transition",
+      "verification": "File was absent, now created with run142 header stub",
+      "timestamp": "2026-06-27T18:23:00+07:00"
+    },
+    {
+      "artifact": "CANON/PHEROMONES/PheTrail-run142.json",
+      "action": "Missing — created with run142 positive/negative trail data",
+      "verification": "File exists now. Schema v2.1 compliant.",
+      "timestamp": "2026-06-27T18:23:00+07:00"
+    },
+    {
+      "artifact": "CANON/SYSTEM/COLD-START-BOOT.md",
+      "action": "Stale by 10 runs. Needs update to align with current run number per L30 BOOT_FILE_AGE_SWEEP.",
+      "verification": "File exists but stale. Flagged for next session update.",
+      "timestamp": "2026-06-27T18:23:00+07:00"
+    }
+  ],
+  "market_research": {
+    "tier_1_semi_success": [
+      {
+        "game": "Survive Zombie Arena",
+        "visits": "526M",
+        "concurrent": "39K",
+        "rating": "95.7%",
+        "weapons": 23,
+        "classes": 9,
+        "monetization": "Credits + Battle Pass + Crates + Classes"
+      },
+      {
+        "game": "Build a Bunker to Survive Zombies Tycoon",
+        "visits": "88M",
+        "concurrent": 122,
+        "rating": "81.3%"
+      },
+      {
+        "game": "The Apocalypse (Per Games)",
+        "visits": "77.8M",
+        "rating": "89%"
+      },
+      {
+        "game": "Aftermath (C:Games)",
+        "visits": "54.5M",
+        "rating": "82.8%",
+        "weapons": "50+",
+        "monetization": "200 R$ entry (paid alpha)"
+      },
+      {
+        "game": "Zombie Wave Survival",
+        "visits": "10.5M",
+        "concurrent": 57,
+        "rating": "92%"
+      }
+    ],
+    "tier_2_legacy": [
+      {
+        "game": "Zombie Attack",
+        "visits": "1.69B",
+        "concurrent": 703,
+        "weapons": "15 core + variants",
+        "gamepass_range": "75-1000 R$"
+      },
+      {
+        "game": "Zombie Uprising",
+        "visits": "1.24B",
+        "weapons": "150+ (11 tiers)",
+        "gamepass_range": "75-1337 R$",
+        "battle_pass": "750 R$ (75 levels)"
+      }
+    ],
+    "train_67_target": {
+      "recommended_weapons": "20-30",
+      "recommended_enemy_types": "15-20",
+      "recommended_gamepass_min": "100 R$",
+      "recommended_gamepass_max": "500 R$",
+      "recommended_battle_pass": "750 R$",
+      "rationale": "Aligns with bottom of semi-successful range. Survive Zombie Arena hit 526M visits with 23 weapons and 9 classes."
+    }
+  }
+}

@@ -1,0 +1,15 @@
+﻿{
+    "run":  142,
+    "ledger_id":  "HL-718",
+    "merkle_short":  "D209AF71E265C4D9",
+    "starmap_file":  "starmap-run142.json",
+    "keywords_file":  "rfkw-run142.txt",
+    "keywords_used":  [
+
+                      ],
+    "pieces_synced":  0,
+    "pieces":  [
+
+               ],
+    "executed_at":  "2026-06-27T18:49:06.1670503+07:00"
+}

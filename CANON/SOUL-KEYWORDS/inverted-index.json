@@ -1,4 +1,172 @@
 {
+  "100644": [
+    {
+      "term": "100644",
+      "weight": 5,
+      "runs": [
+        6
+      ],
+      "count": 1,
+      "category": "core"
+    }
+  ],
+  "119428": [
+    {
+      "term": "119428",
+      "weight": 5,
+      "runs": [
+        6
+      ],
+      "count": 1,
+      "category": "core"
+    }
+  ],
+  "120000": [
+    {
+      "term": "120000",
+      "weight": 5,
+      "runs": [
+        25
+      ],
+      "count": 1,
+      "category": "core"
+    }
+  ],
+  "122291": [
+    {
+      "term": "122291",
+      "weight": 5,
+      "runs": [
+        6
+      ],
+      "count": 1,
+      "category": "core"
+    }
+  ],
+  "171327": [
+    {
+      "term": "171327",
+      "weight": 5,
+      "runs": [
+        25
+      ],
+      "count": 1,
+      "category": "core"
+    }
+  ],
+  "1266404": [
+    {
+      "run": 98,
+      "category": "soul+key",
+      "weight": 1250
+    }
+  ],
+  "20260616": [
+    {
+      "weight": 3891,
+      "run": 129,
+      "category": "soul+key"
+    }
+  ],
+  "20260627": [
+    {
+      "term": "20260627",
+      "weight": 1,
+      "runs": [
+        142
+      ],
+      "count": 1,
+      "category": "soul+key"
+    }
+  ],
+  "128717787": [
+    {
+      "term": "128717787",
+      "weight": 5,
+      "runs": [
+        68
+      ],
+      "count": 1,
+      "category": "core"
+    }
+  ],
+  "130105464": [
+    {
+      "term": "130105464",
+      "weight": 5,
+      "runs": [
+        68
+      ],
+      "count": 1,
+      "category": "core"
+    }
+  ],
+  "133259314": [
+    {
+      "term": "133259314",
+      "weight": 5,
+      "runs": [
+        68
+      ],
+      "count": 1,
+      "category": "core"
+    }
+  ],
+  "134701559": [
+    {
+      "term": "134701559",
+      "weight": 5,
+      "runs": [
+        68
+      ],
+      "count": 1,
+      "category": "core"
+    }
+  ],
+  "137320087": [
+    {
+      "term": "137320087",
+      "weight": 5,
+      "runs": [
+        68
+      ],
+      "count": 1,
+      "category": "core"
+    }
+  ],
+  "142356330": [
+    {
+      "term": "142356330",
+      "weight": 5,
+      "runs": [
+        68
+      ],
+      "count": 1,
+      "category": "core"
+    }
+  ],
+  "146847142": [
+    {
+      "term": "146847142",
+      "weight": 5,
+      "runs": [
+        68
+      ],
+      "count": 1,
+      "category": "core"
+    }
+  ],
+  "173702244": [
+    {
+      "term": "173702244",
+      "runs": [
+        66
+      ],
+      "count": 1,
+      "weight": 48,
+      "category": "soul+key"
+    }
+  ],
   "title": [
     {
       "term": "title",
@@ -697,6 +865,15 @@
     {
       "weight": 712,
       "run": 129,
+      "category": "soul+key"
+    },
+    {
+      "term": "status",
+      "weight": 1,
+      "runs": [
+        142
+      ],
+      "count": 11,
       "category": "soul+key"
     }
   ],
@@ -2048,6 +2225,15 @@
       "count": 1,
       "weight": 277,
       "category": "soul+key"
+    },
+    {
+      "term": "assets",
+      "weight": 1,
+      "runs": [
+        142
+      ],
+      "count": 2,
+      "category": "soul+key"
     }
   ],
   "headwater": [
@@ -2191,17 +2377,6 @@
       "category": "soul+key"
     }
   ],
-  "130105464": [
-    {
-      "term": "130105464",
-      "weight": 5,
-      "runs": [
-        68
-      ],
-      "count": 1,
-      "category": "core"
-    }
-  ],
   "ssm": [
     {
       "term": "ssm",
@@ -2272,13 +2447,6 @@
       "term": "past",
       "runs": [],
       "count": 1
-    }
-  ],
-  "1266404": [
-    {
-      "run": 98,
-      "category": "soul+key",
-      "weight": 1250
     }
   ],
   "funnel": [
@@ -2396,6 +2564,15 @@
       "term": "partial",
       "runs": [],
       "count": 1
+    },
+    {
+      "term": "partial",
+      "weight": 1,
+      "runs": [
+        142
+      ],
+      "count": 2,
+      "category": "soul+key"
     }
   ],
   "null;": [
@@ -2673,6 +2850,15 @@
       ],
       "count": 1,
       "category": "core"
+    },
+    {
+      "term": "artifacts",
+      "weight": 2,
+      "runs": [
+        142
+      ],
+      "count": 2,
+      "category": "soul+key"
     }
   ],
   "ephemeral_5m_input_tokens": [
@@ -2755,6 +2941,15 @@
       "term": "research",
       "runs": [],
       "count": 3
+    },
+    {
+      "term": "research",
+      "weight": 1,
+      "runs": [
+        142
+      ],
+      "count": 2,
+      "category": "soul+key"
     }
   ],
   "seal": [
@@ -3414,17 +3609,6 @@
       "count": 1
     }
   ],
-  "122291": [
-    {
-      "term": "122291",
-      "weight": 5,
-      "runs": [
-        6
-      ],
-      "count": 1,
-      "category": "core"
-    }
-  ],
   "era": [
     {
       "term": "era",
@@ -3985,6 +4169,15 @@
       ],
       "count": 1,
       "category": "core"
+    },
+    {
+      "term": "classes",
+      "weight": 1,
+      "runs": [
+        142
+      ],
+      "count": 2,
+      "category": "soul+key"
     }
   ],
   "free": [
@@ -4359,17 +4552,6 @@
       "count": 3
     }
   ],
-  "128717787": [
-    {
-      "term": "128717787",
-      "weight": 5,
-      "runs": [
-        68
-      ],
-      "count": 1,
-      "category": "core"
-    }
-  ],
   "260529_172127": [
     {
       "term": "260529_172127",
@@ -4659,17 +4841,6 @@
       "term": "kilo-auto",
       "runs": [],
       "count": 1
-    }
-  ],
-  "134701559": [
-    {
-      "term": "134701559",
-      "weight": 5,
-      "runs": [
-        68
-      ],
-      "count": 1,
-      "category": "core"
     }
   ],
   "4f9d75b8": [
@@ -5177,17 +5348,6 @@
       "count": 1,
       "weight": 8,
       "category": "pipeline"
-    }
-  ],
-  "119428": [
-    {
-      "term": "119428",
-      "weight": 5,
-      "runs": [
-        6
-      ],
-      "count": 1,
-      "category": "core"
     }
   ],
   "phase0": [
@@ -6063,17 +6223,6 @@
       "count": 1
     }
   ],
-  "171327": [
-    {
-      "term": "171327",
-      "weight": 5,
-      "runs": [
-        25
-      ],
-      "count": 1,
-      "category": "core"
-    }
-  ],
   "proceed": [
     {
       "term": "proceed",
@@ -6152,6 +6301,15 @@
       "count": 2,
       "weight": 375,
       "category": "soul+key"
+    },
+    {
+      "term": "train",
+      "weight": 1,
+      "runs": [
+        142
+      ],
+      "count": 2,
+      "category": "soul+key"
     }
   ],
   "exposed": [
@@ -6163,17 +6321,6 @@
       ],
       "count": 1,
       "category": "core"
-    }
-  ],
-  "173702244": [
-    {
-      "term": "173702244",
-      "runs": [
-        66
-      ],
-      "count": 1,
-      "weight": 48,
-      "category": "soul+key"
     }
   ],
   "getchilditem": [
@@ -7132,17 +7279,6 @@
       "category": "soul+key"
     }
   ],
-  "120000": [
-    {
-      "term": "120000",
-      "weight": 5,
-      "runs": [
-        25
-      ],
-      "count": 1,
-      "category": "core"
-    }
-  ],
   "dispatch": [
     {
       "category": "soul+key",
@@ -7238,17 +7374,6 @@
       "category": "soul+key"
     }
   ],
-  "142356330": [
-    {
-      "term": "142356330",
-      "weight": 5,
-      "runs": [
-        68
-      ],
-      "count": 1,
-      "category": "core"
-    }
-  ],
   "e52cbfb96b6fd9cbcdd2d6a60c1c46ab8049cdd9": [
     {
       "term": "e52cbfb96b6fd9cbcdd2d6a60c1c46ab8049cdd9",
@@ -7275,17 +7400,6 @@
       "term": "made",
       "runs": [],
       "count": 1
-    }
-  ],
-  "137320087": [
-    {
-      "term": "137320087",
-      "weight": 5,
-      "runs": [
-        68
-      ],
-      "count": 1,
-      "category": "core"
     }
   ],
   "1dfdfcdb": [
@@ -7541,17 +7655,6 @@
       "weight": 5,
       "runs": [
         33
-      ],
-      "count": 1,
-      "category": "core"
-    }
-  ],
-  "100644": [
-    {
-      "term": "100644",
-      "weight": 5,
-      "runs": [
-        6
       ],
       "count": 1,
       "category": "core"
@@ -8214,17 +8317,6 @@
       "run": 126
     }
   ],
-  "133259314": [
-    {
-      "term": "133259314",
-      "weight": 5,
-      "runs": [
-        68
-      ],
-      "count": 1,
-      "category": "core"
-    }
-  ],
   "nominal": [
     {
       "term": "nominal",
@@ -8835,17 +8927,6 @@
       "count": 2,
       "weight": 129,
       "category": "soul+key"
-    }
-  ],
-  "146847142": [
-    {
-      "term": "146847142",
-      "weight": 5,
-      "runs": [
-        68
-      ],
-      "count": 1,
-      "category": "core"
     }
   ],
   "auditlog": [
@@ -9866,6 +9947,15 @@
       "category": "soul+key",
       "run": 127,
       "weight": 119
+    },
+    {
+      "term": "pipeline",
+      "weight": 1,
+      "runs": [
+        142
+      ],
+      "count": 13,
+      "category": "soul+key"
     }
   ],
   "pending": [
@@ -11138,13 +11228,6 @@
       "category": "soul+key"
     }
   ],
-  "20260616": [
-    {
-      "weight": 3891,
-      "run": 129,
-      "category": "soul+key"
-    }
-  ],
   "usermapped": [
     {
       "weight": 3275,
@@ -11215,5 +11298,236 @@
   "exist": [],
   "burning": [],
   "doesn't": [],
-  "printing": []
+  "printing": [],
+  "cycle": [
+    {
+      "term": "cycle",
+      "weight": 2,
+      "runs": [
+        142
+      ],
+      "count": 1,
+      "category": "soul+key"
+    }
+  ],
+  "placeholder": [
+    {
+      "term": "placeholder",
+      "weight": 2,
+      "runs": [
+        142
+      ],
+      "count": 1,
+      "category": "soul+key"
+    }
+  ],
+  "roblox": [
+    {
+      "term": "roblox",
+      "weight": 2,
+      "runs": [
+        142
+      ],
+      "count": 1,
+      "category": "soul+key"
+    }
+  ],
+  "survive": [
+    {
+      "term": "survive",
+      "weight": 2,
+      "runs": [
+        142
+      ],
+      "count": 1,
+      "category": "soul+key"
+    }
+  ],
+  "rrl142": [
+    {
+      "term": "rrl142",
+      "weight": 1,
+      "runs": [
+        142
+      ],
+      "count": 1,
+      "category": "soul+key"
+    }
+  ],
+  "scope": [
+    {
+      "term": "scope",
+      "weight": 1,
+      "runs": [
+        142
+      ],
+      "count": 1,
+      "category": "soul+key"
+    }
+  ],
+  "transition": [
+    {
+      "term": "transition",
+      "weight": 1,
+      "runs": [
+        142
+      ],
+      "count": 1,
+      "category": "soul+key"
+    }
+  ],
+  "market": [
+    {
+      "term": "market",
+      "weight": 1,
+      "runs": [
+        142
+      ],
+      "count": 1,
+      "category": "soul+key"
+    }
+  ],
+  "delivered": [
+    {
+      "term": "delivered",
+      "weight": 1,
+      "runs": [
+        142
+      ],
+      "count": 1,
+      "category": "soul+key"
+    }
+  ],
+  "findings": [
+    {
+      "term": "findings",
+      "weight": 1,
+      "runs": [
+        142
+      ],
+      "count": 1,
+      "category": "soul+key"
+    }
+  ],
+  "validated": [
+    {
+      "term": "validated",
+      "weight": 1,
+      "runs": [
+        142
+      ],
+      "count": 1,
+      "category": "soul+key"
+    }
+  ],
+  "wavesurvival": [
+    {
+      "term": "wavesurvival",
+      "weight": 1,
+      "runs": [
+        142
+      ],
+      "count": 1,
+      "category": "soul+key"
+    }
+  ],
+  "526mvisit": [
+    {
+      "term": "526mvisit",
+      "weight": 1,
+      "runs": [
+        142
+      ],
+      "count": 1,
+      "category": "soul+key"
+    }
+  ],
+  "benchmark": [
+    {
+      "term": "benchmark",
+      "weight": 1,
+      "runs": [
+        142
+      ],
+      "count": 1,
+      "category": "soul+key"
+    }
+  ],
+  "zombie": [
+    {
+      "term": "zombie",
+      "weight": 1,
+      "runs": [
+        142
+      ],
+      "count": 1,
+      "category": "soul+key"
+    }
+  ],
+  "arena": [
+    {
+      "term": "arena",
+      "weight": 1,
+      "runs": [
+        142
+      ],
+      "count": 1,
+      "category": "soul+key"
+    }
+  ],
+  "weapons": [
+    {
+      "term": "weapons",
+      "weight": 1,
+      "runs": [
+        142
+      ],
+      "count": 1,
+      "category": "soul+key"
+    }
+  ],
+  "rating": [
+    {
+      "term": "rating",
+      "weight": 1,
+      "runs": [
+        142
+      ],
+      "count": 1,
+      "category": "soul+key"
+    }
+  ],
+  "asset": [
+    {
+      "term": "asset",
+      "weight": 1,
+      "runs": [
+        142
+      ],
+      "count": 1,
+      "category": "soul+key"
+    }
+  ],
+  "manifest": [
+    {
+      "term": "manifest",
+      "weight": 1,
+      "runs": [
+        142
+      ],
+      "count": 1,
+      "category": "soul+key"
+    }
+  ],
+  "created": [
+    {
+      "term": "created",
+      "weight": 1,
+      "runs": [
+        142
+      ],
+      "count": 1,
+      "category": "soul+key"
+    }
+  ]
 }
