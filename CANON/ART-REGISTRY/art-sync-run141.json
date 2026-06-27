@@ -1,0 +1,15 @@
+﻿{
+    "executed_at":  "2026-06-27T14:20:02.6502118+07:00",
+    "ledger_id":  "HL-717",
+    "keywords_used":  [
+
+                      ],
+    "run":  141,
+    "keywords_file":  "rfkw-run141.txt",
+    "pieces_synced":  0,
+    "pieces":  [
+
+               ],
+    "starmap_file":  "starmap-run141.json",
+    "merkle_short":  "GAP_LEDGER_716"
+}

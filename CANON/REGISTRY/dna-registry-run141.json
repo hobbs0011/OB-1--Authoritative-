@@ -1,0 +1,639 @@
+{
+  "meta": {
+    "generated_at": "2026-06-27T12:06:00+07:00",
+    "run": "141",
+    "title": "ROBLOX FULL INVENTORY — CONSOLIDATED (3-SCOUT PASS)",
+    "scout_passes": 3,
+    "categories": [
+      "ROBLOX-CODE",
+      "ROBLOX-HEAVY-LEDGER",
+      "ROBLOX-REINCARNATION",
+      "ROBLOX-TRAIN-67",
+      "ROBLOX-GAME-DATA",
+      "ROBLOX-CI",
+      "ROBLOX-ENV",
+      "ROBLOX-ARCHIVE",
+      "ROBLOX-SHADOW",
+      "ROBLOX-CROSS-DOMAIN",
+      "ROBLOX-MONITORING"
+    ],
+    "total_true_entries": 82,
+    "mirror_note": "Identical canons are catalogued once as TRUE under their canonical path, with mirror_paths listing byte-for-byte duplicates.",
+    "platform_ids": {
+      "universe_id": "9945984154",
+      "place_id": "83007032761005",
+      "account": "PhoenixRisingGames",
+      "game": "Survive a Brainrot / Skibidi Zombie: Survive the Brainrots"
+    }
+  },
+  "true_entries": [
+    {
+      "reg_id": "REG-R141-TRUE-001",
+      "path": "APPS/TRAIN-67/CODE/AnalyticsService.lua",
+      "category": "ROBLOX-CODE",
+      "size": 16291,
+      "mirror_paths": ["CANON/TRAIN-67/CODE/AnalyticsService.lua"],
+      "description": "Telemetry and analytics reporting service. Routes events to Roblox AnalyticsService and DataStore."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-002",
+      "path": "APPS/TRAIN-67/CODE/AnomalyDetector.lua",
+      "category": "ROBLOX-CODE",
+      "size": 17267,
+      "mirror_paths": ["CANON/TRAIN-67/CODE/AnomalyDetector.lua"],
+      "description": "Anomaly detection for game events."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-003",
+      "path": "APPS/TRAIN-67/CODE/BattlePass.lua",
+      "category": "ROBLOX-CODE",
+      "size": 13241,
+      "mirror_paths": ["CANON/TRAIN-67/CODE/BattlePass.lua"],
+      "description": "Battle pass progression system."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-004",
+      "path": "APPS/TRAIN-67/CODE/ChallengeManager.lua",
+      "category": "ROBLOX-CODE",
+      "size": 16172,
+      "mirror_paths": ["CANON/TRAIN-67/CODE/ChallengeManager.lua"],
+      "description": "Challenge and quest manager."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-005",
+      "path": "APPS/TRAIN-67/CODE/ClientBridge.lua",
+      "category": "ROBLOX-CODE",
+      "size": 6853,
+      "mirror_paths": ["CANON/TRAIN-67/CODE/ClientBridge.lua"],
+      "description": "Client-side network bridge."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-006",
+      "path": "APPS/TRAIN-67/CODE/CodexClient.lua",
+      "category": "ROBLOX-CODE",
+      "size": 7386,
+      "mirror_paths": ["CANON/TRAIN-67/CODE/CodexClient.lua"],
+      "description": "Client-side codex/encyclopedia UI."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-007",
+      "path": "APPS/TRAIN-67/CODE/CodexData.lua",
+      "category": "ROBLOX-CODE",
+      "size": 5402,
+      "mirror_paths": ["CANON/TRAIN-67/CODE/CodexData.lua"],
+      "description": "Codex data definitions and schema."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-008",
+      "path": "APPS/TRAIN-67/CODE/CombatRewardsManager.lua",
+      "category": "ROBLOX-CODE",
+      "size": 53258,
+      "mirror_paths": ["CANON/TRAIN-67/CODE/CombatRewardsManager.lua"],
+      "description": "Post-combat reward distribution."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-009",
+      "path": "APPS/TRAIN-67/CODE/CombatSystem.lua",
+      "category": "ROBLOX-CODE",
+      "size": 45391,
+      "mirror_paths": ["CANON/TRAIN-67/CODE/CombatSystem.lua"],
+      "description": "Core combat mechanics (hitboxes, weapons, targeting)."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-010",
+      "path": "APPS/TRAIN-67/CODE/CosmeticController.lua",
+      "category": "ROBLOX-CODE",
+      "size": 47337,
+      "mirror_paths": ["CANON/TRAIN-67/CODE/CosmeticController.lua"],
+      "description": "Cosmetic unlocks and equip logic."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-011",
+      "path": "APPS/TRAIN-67/CODE/DailyRewards.lua",
+      "category": "ROBLOX-CODE",
+      "size": 13319,
+      "mirror_paths": ["CANON/TRAIN-67/CODE/DailyRewards.lua"],
+      "description": "Daily login reward scheduler."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-012",
+      "path": "APPS/TRAIN-67/CODE/DataStoreV2.lua",
+      "category": "ROBLOX-CODE",
+      "size": 9739,
+      "mirror_paths": ["CANON/TRAIN-67/CODE/DataStoreV2.lua"],
+      "description": "DataStore v2 persistence wrapper."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-013",
+      "path": "APPS/TRAIN-67/CODE/DayScaling.lua",
+      "category": "ROBLOX-CODE",
+      "size": 12233,
+      "mirror_paths": ["CANON/TRAIN-67/CODE/DayScaling.lua"],
+      "description": "Day/night and difficulty scaling curves."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-014",
+      "path": "APPS/TRAIN-67/CODE/DevProductsConfig.lua",
+      "category": "ROBLOX-CODE",
+      "size": 10566,
+      "mirror_paths": ["CANON/TRAIN-67/CODE/DevProductsConfig.lua"],
+      "description": "Developer product catalog (16 items). NOTE: all ProductId values are placeholder 0 — must be replaced from Roblox Creator Dashboard to enable real revenue."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-015",
+      "path": "APPS/TRAIN-67/CODE/EconomyManager.lua",
+      "category": "ROBLOX-CODE",
+      "size": 17669,
+      "mirror_paths": ["CANON/TRAIN-67/CODE/EconomyManager.lua"],
+      "description": "Economy and currency flow management."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-016",
+      "path": "APPS/TRAIN-67/CODE/EloManager.lua",
+      "category": "ROBLOX-CODE",
+      "size": 32977,
+      "mirror_paths": ["CANON/TRAIN-67/CODE/EloManager.lua"],
+      "description": "ELO-based matchmaking and leaderboard mathematics."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-017",
+      "path": "APPS/TRAIN-67/CODE/EnemyData.lua",
+      "category": "ROBLOX-CODE",
+      "size": 14505,
+      "mirror_paths": ["CANON/TRAIN-67/CODE/EnemyData.lua"],
+      "description": "Enemy stats, drops, and AI behavior tables."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-018",
+      "path": "APPS/TRAIN-67/CODE/EnemyFactory.lua",
+      "category": "ROBLOX-CODE",
+      "size": 10673,
+      "mirror_paths": ["CANON/TRAIN-67/CODE/EnemyFactory.lua"],
+      "description": "Enemy spawning and wave composition logic."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-019",
+      "path": "APPS/TRAIN-67/CODE/EnglishRewardsManager.lua",
+      "category": "ROBLOX-CODE",
+      "size": 42508,
+      "mirror_paths": ["CANON/TRAIN-67/CODE/EnglishRewardsManager.lua"],
+      "description": "English-learning reward hookups."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-020",
+      "path": "APPS/TRAIN-67/CODE/FTUEController.lua",
+      "category": "ROBLOX-CODE",
+      "size": 33931,
+      "mirror_paths": ["CANON/TRAIN-67/CODE/FTUEController.lua"],
+      "description": "First-time user experience orchestration controller."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-021",
+      "path": "APPS/TRAIN-67/CODE/FTUEManager.lua",
+      "category": "ROBLOX-CODE",
+      "size": 19668,
+      "mirror_paths": ["CANON/TRAIN-67/CODE/FTUEManager.lua"],
+      "description": "FTUE state machine and flow control."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-022",
+      "path": "APPS/TRAIN-67/CODE/FTUEWiring.lua",
+      "category": "ROBLOX-CODE",
+      "size": 5918,
+      "mirror_paths": ["CANON/TRAIN-67/CODE/FTUEWiring.lua"],
+      "description": "FTUE module dependency wiring."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-023",
+      "path": "APPS/TRAIN-67/CODE/GachaManager.lua",
+      "category": "ROBLOX-CODE",
+      "size": 14047,
+      "mirror_paths": ["CANON/TRAIN-67/CODE/GachaManager.lua"],
+      "description": "Gacha and loot box probability engine."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-024",
+      "path": "APPS/TRAIN-67/CODE/GameMain_PHASE1_REVISED.lua",
+      "category": "ROBLOX-CODE",
+      "size": 27757,
+      "mirror_paths": ["CANON/TRAIN-67/CODE/GameMain_PHASE1_REVISED.lua"],
+      "description": "Main game controller (entry point)."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-025",
+      "path": "APPS/TRAIN-67/CODE/GamePassConfig.lua",
+      "category": "ROBLOX-CODE",
+      "size": 15068,
+      "mirror_paths": ["CANON/TRAIN-67/CODE/GamePassConfig.lua"],
+      "description": "Game pass catalog (5 tiers). NOTE: all GamePassId values are placeholder 0 — revenue blocker."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-026",
+      "path": "APPS/TRAIN-67/CODE/GuildManager.lua",
+      "category": "ROBLOX-CODE",
+      "size": 15705,
+      "mirror_paths": ["CANON/TRAIN-67/CODE/GuildManager.lua"],
+      "description": "Guild/clan membership and perks."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-027",
+      "path": "APPS/TRAIN-67/CODE/HUDController_PHASE1_REVISED.lua",
+      "category": "ROBLOX-CODE",
+      "size": 15884,
+      "mirror_paths": ["CANON/TRAIN-67/CODE/HUDController_PHASE1_REVISED.lua"],
+      "description": "HUD layout and updates (revised variant)."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-028",
+      "path": "APPS/TRAIN-67/CODE/HUDController_v2.lua",
+      "category": "ROBLOX-CODE",
+      "size": 17679,
+      "mirror_paths": ["CANON/TRAIN-67/CODE/HUDController_v2.lua"],
+      "description": "HUD layout and updates v2."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-029",
+      "path": "APPS/TRAIN-67/CODE/LeaderboardManager.lua",
+      "category": "ROBLOX-CODE",
+      "size": 15016,
+      "mirror_paths": ["CANON/TRAIN-67/CODE/LeaderboardManager.lua"],
+      "description": "Leaderboard read/write and caching."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-030",
+      "path": "APPS/TRAIN-67/CODE/LedgerSchema.lua",
+      "category": "ROBLOX-CODE",
+      "size": 3985,
+      "mirror_paths": ["CANON/TRAIN-67/CODE/LedgerSchema.lua"],
+      "description": "Internal ledger/state schema."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-031",
+      "path": "APPS/TRAIN-67/CODE/MainServer_v2.lua",
+      "category": "ROBLOX-CODE",
+      "size": 17696,
+      "mirror_paths": ["CANON/TRAIN-67/CODE/MainServer_v2.lua"],
+      "description": "Main server entry point v2."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-032",
+      "path": "APPS/TRAIN-67/CODE/MobileInputController.lua",
+      "category": "ROBLOX-CODE",
+      "size": 40678,
+      "mirror_paths": ["CANON/TRAIN-67/CODE/MobileInputController.lua"],
+      "description": "Mobile touch input handling."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-033",
+      "path": "APPS/TRAIN-67/CODE/MonetizationOrchestrator.lua",
+      "category": "ROBLOX-CODE",
+      "size": 35049,
+      "mirror_paths": ["CANON/TRAIN-67/CODE/MonetizationOrchestrator.lua"],
+      "description": "Monetization flow orchestrator."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-034",
+      "path": "APPS/TRAIN-67/CODE/MonetizationServer.lua",
+      "category": "ROBLOX-CODE",
+      "size": 9626,
+      "mirror_paths": ["CANON/TRAIN-67/CODE/MonetizationServer.lua"],
+      "description": "Monetization backend (gacha + trading + rarity)."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-035",
+      "path": "APPS/TRAIN-67/CODE/PrestigeManager.lua",
+      "category": "ROBLOX-CODE",
+      "size": 14327,
+      "mirror_paths": ["CANON/TRAIN-67/CODE/PrestigeManager.lua"],
+      "description": "Prestige/reset progression system."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-036",
+      "path": "APPS/TRAIN-67/CODE/QuestionBank.lua",
+      "category": "ROBLOX-CODE",
+      "size": 36366,
+      "mirror_paths": ["CANON/TRAIN-67/CODE/QuestionBank.lua"],
+      "description": "English question bank (original)."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-037",
+      "path": "APPS/TRAIN-67/CODE/QuestionBankV2.lua",
+      "category": "ROBLOX-CODE",
+      "size": 23486,
+      "mirror_paths": ["CANON/TRAIN-67/CODE/QuestionBankV2.lua"],
+      "description": "English question bank V2 (chunked, scalable)."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-037b",
+      "path": "APPS/TRAIN-67/CODE/QuestionChunks/Mouse_A.lua",
+      "category": "ROBLOX-CODE",
+      "size": null,
+      "mirror_paths": ["CANON/TRAIN-67/CODE/QuestionChunks/Mouse_A.lua"],
+      "description": "Question chunk sub-module (Mouse_A)."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-038",
+      "path": "APPS/TRAIN-67/CODE/ReceiptRouter.lua",
+      "category": "ROBLOX-CODE",
+      "size": 26533,
+      "mirror_paths": ["CANON/TRAIN-67/CODE/ReceiptRouter.lua"],
+      "description": "Purchase receipt routing."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-039",
+      "path": "APPS/TRAIN-67/CODE/ReferralSystem.lua",
+      "category": "ROBLOX-CODE",
+      "size": 12881,
+      "mirror_paths": ["CANON/TRAIN-67/CODE/ReferralSystem.lua"],
+      "description": "Referral and invite reward system."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-040",
+      "path": "APPS/TRAIN-67/CODE/RewardBridge.lua",
+      "category": "ROBLOX-CODE",
+      "size": 9431,
+      "mirror_paths": ["CANON/TRAIN-67/CODE/RewardBridge.lua"],
+      "description": "Cross-module reward bridge."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-041",
+      "path": "APPS/TRAIN-67/CODE/SecurityLayer.lua",
+      "category": "ROBLOX-CODE",
+      "size": 7124,
+      "mirror_paths": ["CANON/TRAIN-67/CODE/SecurityLayer.lua"],
+      "description": "Anti-cheat and remote event validation."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-042",
+      "path": "APPS/TRAIN-67/CODE/ServerGateway.lua",
+      "category": "ROBLOX-CODE",
+      "size": 12613,
+      "mirror_paths": ["CANON/TRAIN-67/CODE/ServerGateway.lua"],
+      "description": "Server-to-server gateway."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-043",
+      "path": "APPS/TRAIN-67/CODE/TradeManager.lua",
+      "category": "ROBLOX-CODE",
+      "size": 16978,
+      "mirror_paths": ["CANON/TRAIN-67/CODE/TradeManager.lua"],
+      "description": "Player-to-player trading engine."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-044",
+      "path": "APPS/TRAIN-67/CODE/UnifiedClient.client.lua",
+      "category": "ROBLOX-CODE",
+      "size": 12675,
+      "mirror_paths": ["CANON/TRAIN-67/CODE/UnifiedClient.client.lua"],
+      "description": "Unified client entry (client context)."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-045",
+      "path": "APPS/TRAIN-67/CODE/UnifiedServer.server.lua",
+      "category": "ROBLOX-CODE",
+      "size": 17343,
+      "mirror_paths": ["CANON/TRAIN-67/CODE/UnifiedServer.server.lua"],
+      "description": "Unified server entry (server context)."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-046",
+      "path": "APPS/TRAIN-67/CODE/WaveManager.lua",
+      "category": "ROBLOX-CODE",
+      "size": 8519,
+      "mirror_paths": ["CANON/TRAIN-67/CODE/WaveManager.lua"],
+      "description": "Wave-based enemy spawn manager."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-047",
+      "path": "APPS/TRAIN-67/CODE/WeaponData.lua",
+      "category": "ROBLOX-CODE",
+      "size": 18293,
+      "mirror_paths": ["CANON/TRAIN-67/CODE/WeaponData.lua"],
+      "description": "Weapon stats and progression data."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-048",
+      "path": "APPS/TRAIN-67/CODE/WorldBoss.lua",
+      "category": "ROBLOX-CODE",
+      "size": 13154,
+      "mirror_paths": ["CANON/TRAIN-67/CODE/WorldBoss.lua"],
+      "description": "World boss encounter logic."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-001",
+      "path": "CANON/HEAVY-LEDGER/HL-119-roblox-studio-guide-48hr-launch.json",
+      "category": "ROBLOX-HEAVY-LEDGER",
+      "size": 5836,
+      "mirror_paths": ["HEAVY-LEDGER/HL-119-roblox-studio-guide-48hr-launch.json"],
+      "description": "HL-119 | source_file: 2026-03-30-roblox-studio-guide-48hr-launch.md | MEDIUM | EXECUTION | run_converted: 258"
+    },
+    {
+      "reg_id": "REG-R141-TRUE-002",
+      "path": "CANON/HEAVY-LEDGER/HL-124-roblox-deep-intel.json",
+      "category": "ROBLOX-HEAVY-LEDGER",
+      "size": 7486,
+      "mirror_paths": ["HEAVY-LEDGER/HL-124-roblox-deep-intel.json"],
+      "description": "HL-124 | source_file: 2026-03-26-roblox-deep-intel.md | HIGH signal | EXECUTION | run_converted: 265"
+    },
+    {
+      "reg_id": "REG-R141-TRUE-003",
+      "path": "CANON/HEAVY-LEDGER/HL-125-roblox-deploy-github-first-boot.json",
+      "category": "ROBLOX-HEAVY-LEDGER",
+      "size": 8511,
+      "mirror_paths": ["HEAVY-LEDGER/HL-125-roblox-deploy-github-first-boot.json"],
+      "description": "HL-125 | source_file: 2026-03-28-roblox-deploy-github-first-boot.md | HIGH | STRATEGIC | run_converted: 255"
+    },
+    {
+      "reg_id": "REG-R141-TRUE-004",
+      "path": "CANON/REINCARNATION/2026-03-26-roblox-deep-intel.md",
+      "category": "ROBLOX-REINCARNATION",
+      "size": 4401,
+      "mirror_paths": ["REINCARNATION/2026-03-26-roblox-deep-intel.md"],
+      "description": "Reincarnation Entry — 2026-03-26 | Session Tag: roblox-deep-intel | HIGH — mission pivot, trigger audit, overnight directive | Extractor: OB1 / Ne0"
+    },
+    {
+      "reg_id": "REG-R141-TRUE-005",
+      "path": "CANON/REINCARNATION/2026-03-28-roblox-combat-recode-launch.md",
+      "category": "ROBLOX-REINCARNATION",
+      "size": 10296,
+      "mirror_paths": ["REINCARNATION/2026-03-28-roblox-combat-recode-launch.md"],
+      "description": "Reincarnation Entry — 2026-03-28 — Roblox Combat Recode & Launch Sprint | EXTREME — 5 critical corrections, 10 decisions, full codebase recode | Extractor: Ne0 (CHAT 000)"
+    },
+    {
+      "reg_id": "REG-R141-TRUE-006",
+      "path": "CANON/REINCARNATION/2026-03-28-roblox-deploy-github-first-boot.md",
+      "category": "ROBLOX-REINCARNATION",
+      "size": 8125,
+      "mirror_paths": ["REINCARNATION/2026-03-28-roblox-deploy-github-first-boot.md"],
+      "description": "Reincarnation Entry — 2026-03-28 | Session tag: roblox-deploy-github-first-boot | HIGH | GitHub cold-start truth source decision"
+    },
+    {
+      "reg_id": "REG-R141-TRUE-007",
+      "path": "CANON/REINCARNATION/2026-03-30-roblox-studio-guide-48hr-launch.md",
+      "category": "ROBLOX-REINCARNATION",
+      "size": 5174,
+      "mirror_paths": ["REINCARNATION/2026-03-30-roblox-studio-guide-48hr-launch.md"],
+      "description": "Reincarnation Entry — 2026-03-30 Roblox Studio Guide + 48hr Launch Window | MEDIUM | HARD DEADLINE: Game 1 ships by April 2, 2026"
+    },
+    {
+      "reg_id": "REG-R141-TRUE-008",
+      "path": "CANON/TRAIN-67/ROBLOX-STRATEGY-CONSOLIDATED.md",
+      "category": "ROBLOX-TRAIN-67",
+      "size": null,
+      "mirror_paths": [],
+      "description": "ROBLOX STRATEGY — CONSOLIDATED MASTER DOCUMENT | Game: Survive a Brainrot | 41-module server-authoritative system. Framework: 20x20x20x20. Psalm 444 Gospel."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-009",
+      "path": "CANON/TRAIN-67/DOCS/RobloxLaunchIntelligence-March2026.md",
+      "category": "ROBLOX-TRAIN-67",
+      "size": 8275,
+      "mirror_paths": ["APPS/TRAIN-67/DOCS/RobloxLaunchIntelligence-March2026.md"],
+      "description": "Roblox Launch Intelligence — March 2026 | Algorithm changes, 'Standout Games' sort (March 9, 2026), zero-budget launch strategy, 10 open gaps."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-010",
+      "path": "CANON/TRAIN-67/DOCS/RobloxLaunchIntelligence-DeepDive-GapClosure.md",
+      "category": "ROBLOX-TRAIN-67",
+      "size": 19956,
+      "mirror_paths": ["APPS/TRAIN-67/DOCS/RobloxLaunchIntelligence-DeepDive-GapClosure.md"],
+      "description": "Roblox Launch Intelligence — Deep Dive Gap Closure | Closing the 10 Open Intelligence Gaps from March 2026 report."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-011",
+      "path": "CANON/TRAIN-67/DOCS/RobloxIncubatorApplicationDraft.md",
+      "category": "ROBLOX-TRAIN-67",
+      "size": 15804,
+      "mirror_paths": ["APPS/TRAIN-67/DOCS/RobloxIncubatorApplicationDraft.md"],
+      "description": "Roblox Incubator Application Draft — V1 | Copy-paste-ready application for Roblox Incubator 2026 Cohort 1. Deadline: April 6, 2026."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-012",
+      "path": "CANON/TRAIN-67/DOCS/RobloxIncubatorApplicationDraft-V2.md",
+      "category": "ROBLOX-TRAIN-67",
+      "size": 19305,
+      "mirror_paths": ["APPS/TRAIN-67/DOCS/RobloxIncubatorApplicationDraft-V2.md"],
+      "description": "Roblox Incubator Application — V2 Pitch-Corrected | English is differentiator, not headline. Deadline: April 6, 2026."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-013",
+      "path": "CANON/GAME-DESIGN/train67-brainrot-survival.rbxl",
+      "category": "ROBLOX-GAME-DATA",
+      "size": 249348,
+      "mirror_paths": ["APPS/NET-PET-AI/public/train67-brainrot-survival.rbxl"],
+      "description": "Roblox place file for 'Survive a Brainrot'. Built 2026-04-20 22:07:59 UTC. Deploy target for roblox-place-deploy.yml."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-014",
+      "path": "default.project.json",
+      "category": "ROBLOX-CI",
+      "size": 6117,
+      "mirror_paths": ["CANON/ARCHIVE/GDRIVE-SOURCE-CODE/default.project.json"],
+      "description": "Rojo project config (canonical build manifest). Maps 38 Lua modules to Roblox services. Defines 22 RemoteEvents, 5 RemoteFunctions. Consumed by `rojo build` and `.github/workflows/roblox-place-deploy.yml`."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-015",
+      "path": ".github/workflows/roblox-place-deploy.yml",
+      "category": "ROBLOX-CI",
+      "size": 2993,
+      "mirror_paths": [],
+      "description": "GitHub Actions CI workflow for Roblox Open Cloud place deploy. Installs Rojo v7.6.1, builds place file, publishes to Universe 9945984154 Place 83007032761005."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-016",
+      "path": "DEPLOY-GUIDE.md",
+      "category": "ROBLOX-ENV",
+      "size": 5495,
+      "mirror_paths": ["APPS/discord-bot/DEPLOY-GUIDE.md"],
+      "description": "Root Discord Bot deployment guide. Contains ROBLOX_GAME_URL env var template, Railway deploy steps, and repo mapping to hobbs0011/Phoenix-Rising-Protocol-Ultimate."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-017",
+      "path": "CANON/ARCHIVE/GDRIVE-PROJECT-CORE/OPERATIONS/TRAIN67-ROBLOX-DEPLOYMENT-STATUS.md",
+      "category": "ROBLOX-ARCHIVE",
+      "size": 3282,
+      "mirror_paths": [],
+      "description": "Archive deployment status RUN366. Universe 9945984154, Place 83007032761005. Provides `gh workflow run roblox-place-deploy.yml` template. Source place file: APPS/NET-PET-AI/public/train67-brainrot-survival.rbxl (244 KB, 2026-04-20)."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-018",
+      "path": "OPERATIONS/GITHUB-OWNERSHIP-RECOVERY-PLAYBOOK.md",
+      "category": "ROBLOX-CI",
+      "size": 6458,
+      "mirror_paths": [],
+      "description": "GitHub ownership stabilization playbook (Run 310). Lists roblox-place-deploy.yml under External/Roblox API. ROBLOX_API_KEY not confirmed in secrets."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-019",
+      "path": "OPERATIONS/PIPELINE-SNAPSHOTS/run310-phase4-workflow-hardening.md",
+      "category": "ROBLOX-CI",
+      "size": 3075,
+      "mirror_paths": [],
+      "description": "Pipeline hardening audit (Run 310). roblox-place-deploy.yml trigger reviewed. Gap: ROBLOX_API_KEY not confirmed in secrets (non-critical)."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-020",
+      "path": "CANON/SYSTEM/PHEROMONE-TRAIL-LEDGER.md",
+      "category": "ROBLOX-MONITORING",
+      "size": 41478,
+      "mirror_paths": [],
+      "description": "PHEROMONE trail index for 388 Heavy Ledger files. Indexes Roblox hl_ids: HL-119, HL-124, HL-125 with run numbers and sealed dates. Cross-references unconverted Reincarnation source .md files and OPERATIONS scout JSONL."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-021",
+      "path": "APPS/NET-PET-AI/public/lessons/archive/Train_67_DEMO_Presentation.html",
+      "category": "ROBLOX-CROSS-DOMAIN",
+      "size": 38822,
+      "mirror_paths": ["APPS/NET-PET-AI/public/lessons/archive/Train_67_DEMO_Presentation-1.html"],
+      "description": "HTML lesson archive with brainrot/Train67 game lore references. Peripheral tangential touch inside NET-PET-AI public assets."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-022",
+      "path": "CANON/ARCHIVE/GDRIVE-DOCUMENTATION/ROBLOX-SPRINT-EXECUTION-RUN330.md",
+      "category": "ROBLOX-ARCHIVE",
+      "size": 4184,
+      "mirror_paths": [],
+      "description": "Archive documentation: Roblox sprint execution run 330."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-023",
+      "path": "CANON/TRAIN-67/DOCS/PreLaunchGoLivePlaybook.md",
+      "category": "ROBLOX-TRAIN-67",
+      "size": null,
+      "mirror_paths": [],
+      "description": "Pre-Launch Go-Live Playbook — stage-by-stage Studio → Publish workflow."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-024",
+      "path": "CANON/TRAIN-67/DOCS/MonetizationArchitectureDeepDive.md",
+      "category": "ROBLOX-TRAIN-67",
+      "size": null,
+      "mirror_paths": [],
+      "description": "Monetization architecture deep dive — 5 revenue modules, GamePass/DevProduct gap (all IDs = 0), revenue projections."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-025",
+      "path": "CANON/TRAIN-67/DOCS/FTUEImplementationSpec.md",
+      "category": "ROBLOX-TRAIN-67",
+      "size": null,
+      "mirror_paths": [],
+      "description": "FTUE implementation spec. ~17 hours of Roblox Studio work mapped across 3 build modules."
+    },
+    {
+      "reg_id": "REG-R141-TRUE-026",
+      "path": "CANON/TRAIN-67/DOCS/FTUECompressionAnalysis.md",
+      "category": "ROBLOX-TRAIN-67",
+      "size": null,
+      "mirror_paths": [],
+      "description": "FTUE compression analysis — 90s to 60s hook optimization for mobile players."
+    }
+  ],
+  "integration_notes": {
+    "mirror_policy": "APPS/TRAIN-67/CODE/*.lua mirrors CANON/TRAIN-67/CODE/*.lua byte-for-byte. Only canonical CANON/ paths need registry unless APPS mirror is referenced by a distinct pipeline or CI config.",
+    "worktree_shadows": "APPS/TRAIN-67/CODE/ and CANON/TRAIN-67/CODE/ are also duplicated in .kilo/worktrees/*/CANON/TRAIN-67/CODE/ and .kilo/worktrees/*/APPS/TRAIN-67/CODE/. Do not register worktree copies as distinct true entries.",
+    "revenue_blockers": "DevProductsConfig.lua and GamePassConfig.lua contain placeholder ProductId=0 and GamePassId=0. These MUST be replaced via Roblox Creator Dashboard before any real monetization works.",
+    "deploy_target_ids": "Universe: 9945984154 | Place: 83007032761005. Hardcoded in .github/workflows/roblox-place-deploy.yml and CANON/ARCHIVE/GDRIVE-PROJECT-CORE/OPERATIONS/TRAIN67-ROBLOX-DEPLOYMENT-STATUS.md.",
+    "rojo_build_chain": "default.project.json -> rojo build -> train67-brainrot-survival.rbxl -> .github/workflows/roblox-place-deploy.yml -> Roblox Open Cloud API.",
+    "navigate": "Use reg_id to jump. Code entries are REG-R141-TRUE-001 through 048. Ledger is 049-051. Reincarnation is 052-055. TRAIN-67 docs 056-061. Game data/CI/env/monitoring 062-072. Archive and cross-domain 073-077."
+  }
+}

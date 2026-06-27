@@ -1,0 +1,15 @@
+﻿{
+    "dna_hash":  "DNA_GAP",
+    "soul_hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "merkle_hash":  "A4A4D738D09CD3416551FF0B05D55F17A06A58A782608853BF161A2054ACF14B",
+    "rrl_source":  "D:\\OB-1-CANONICAL\\RRL\\RRL-141.txt",
+    "sealed_at":  "2026-06-27T14:19:25.4799092+07:00",
+    "char_count":  0,
+    "run":  141,
+    "dna_blueprint_count":  0,
+    "session_id":  "sov100-roman-run141",
+    "byte_count":  0,
+    "sov100":  true,
+    "hl_id":  "HL-717",
+    "merkle_parent":  "AD9B209C6F9358EAA44B3CC75DD466482163EB209E4F8C700A3A5ABB0E4EAB14"
+}
