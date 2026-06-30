@@ -116,3 +116,19 @@
 
 ## §15 REGISTRY
 - dna-registry-run143.json: not generated (KILO_HOLLOW, DNA_GAP)
+
+---
+
+## ADDENDUM — 2026-07-01T06:57+07:00
+
+### G999 / GOSPEL 999 — BACKBURNER PIPELINE
+- File: MARKETING/MASTER/gospel-999.md
+- Status: ACTIVE — added to backburner pipeline, never allowed to gather dust
+- Focus: Aesthetics and system guardrails will receive major focus in the next session immediately on RISE
+- Previous state: Outdated Windows 97 computer manual — NOT ACCEPTABLE
+- Commitment: G999 will be maintained, evolved, and enforced as a living document
+
+### NEXT SESSION PRIORITY
+- Resume aesthetics work from G999 framework
+- Apply guardrails to Oktava portal and all products
+- No document shall become archaeological evidence again
