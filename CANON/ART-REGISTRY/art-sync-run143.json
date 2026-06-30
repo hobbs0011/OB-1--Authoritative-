@@ -1,0 +1,27 @@
+﻿{
+    "run":  143,
+    "ledger_id":  "HL-719",
+    "merkle_short":  "B1367A601A238D6F",
+    "starmap_file":  "starmap-run143.json",
+    "keywords_file":  "rfkw-run143.txt",
+    "keywords_used":  [
+                          "minimal",
+                          "{\"role\":\"assistant\",\"content\":\"[kilo_hollow",
+                          "placeholder]\",\"timestamp\":\"2026-07-01t02:10:08.8877543+07:00\"}",
+                          "assistant",
+                          "143]\",\"timestamp\":\"2026-07-01t02:10:08.8887808+07:00\"}",
+                          "integrity",
+                          "chain",
+                          "jsonl",
+                          "claude",
+                          "{\"role\":\"user\",\"content\":\"[kilo_hollow",
+                          "chain-integrity",
+                          "available",
+                          "source"
+                      ],
+    "pieces_synced":  0,
+    "pieces":  [
+
+               ],
+    "executed_at":  null
+}
