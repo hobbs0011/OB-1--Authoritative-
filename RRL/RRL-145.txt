@@ -1,0 +1,8 @@
+RISE STAGE 1 ARTIFACT — run 145
+Generated: 2026-07-01T11:14:14+07:00
+Agent: Kilo (stepfun/step-3.7-flash:free)
+Session type inferred: KILO_HOLLOW (no Claude session JSONL on disk)
+
+This file marks run 145 pipeline launch.
+RRL source: absent for this run.
+Next: SOUL/DNA/LEDGER/STARMAP/SOULKEYS/PIPELINE artifacts to be written below or in subsequent stage files.

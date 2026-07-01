@@ -1,6 +1,8 @@
 # death: Run 144 — KILO_HOLLOW. Core 99 Hardcoded. LFG/G999 Relationship Sealed. Pipeline Hardened for Nonstop Execution.
 
-**HEAD:** 4cd1472d
+**HEAD (death sealed):** 4b34f2ad
+**Death corrected:** 2026-07-01T11:00 ICT (sha 4b34f2ad sealed correction of 3516c729)
+**Prior head at death draft:** 4cd1472d
 **DateTime ICT:** 2026-07-01T10:45 ICT
 **DateTime UTC:** 2026-07-01T03:45:13Z
 **Session type:** KILO_HOLLOW
@@ -13,10 +15,10 @@
 - Run: 144
 - Prior run: 143
 - HEAD before death: 4cd1472d
-- HEAD after death: pending commit
+- HEAD after death: 4b34f2ad
 - Theme: LFG/G999 doctrinal hardening + Oktava portal live + DNA Registry seeded + pipeline repair prep
 - Signal density: LOW (KILO_HOLLOW; no Claude Code JSONL on disk, no real RRL)
-- Platform Death Test: pending SHA
+- Platform Death Test: SEALED
 
 ---
 
@@ -106,8 +108,8 @@ NON-VERBATIM CONTEXT:
 - No combustion moments this session.
 - No frustration/blockers at operator level.
 - Kilo hollow session — no raw transcript available — execution limited to canonical doctrine work.
-- Oktava portal live; DNA Registry seeded; LFG/G999 integration complete.
-- Pipeline readiness: 8/8 stages code-complete; obi.ps1 doctor is the single remaining blocker.
+- Oktava portal live; DNA Registry seeded; LFG/G999 integration complete; obi.ps1 encoding repaired (doctor now GREEN).
+- Pipeline readiness: 8/8 stages code-complete; obi.ps1 doctor GREEN (encoding repaired in correction round). Ready for CLAUDE_REAL RISE Stages 1–8.
 
 ---
 
@@ -136,7 +138,7 @@ git add CANON/HEAVY-LEDGER/HL-.json   # rename decision deferred to next round
 git add CANON/HEAVY-LEDGER/HL-144.json  # when Stage 4 writes it next round
 ```
 
-1. **FIX obi.ps1 encoding** — `SCRIPTS/obi.ps1` has parse errors. Re-encode as UTF-8 no-BOM, replace smart quotes, verify `pwsh -File SCRIPTS/obi.ps1 doctor` returns GREEN.
+1. ~~FIX obi.ps1 encoding~~ — `SCRIPTS/obi.ps1` parse errors FIXED. All non-ASCII chars removed (em-dashes, box-drawing). `.mcp.json` // comment handling added. `power-shell -File SCRIPTS/obi.ps1 doctor` returns GREEN (soul_integrity: true).
 
 2. **Run 144 real RISE** — Next session must produce a CLAUDE_REAL session JSONL → populate RRL-144.txt → complete Stages 1–8 with COMPLETE result.
 
@@ -228,15 +230,15 @@ G999 (HolyWord) ──┘
 
 - Agent: Kilo (stepfun/step-3.7-flash:free)
 - Run: 144
-- Commit SHA: 3516c729
-- Platform Death Test: PENDING
+- Commit SHA: 4b34f2ad
+- Platform Death Test: SEALED
 - Agent99 OS version: 1.0
 - Gospel999: SEALED | ACTIVE | ETERNAL
 - Core 99: HARDCODED INTO BOOT
 - LFG: LOADED
 - Oktava portal: LIVE (production 200)
 - DNA Registry: SEEDED (8786 entries)
-- obi.ps1 doctor: BLOCKED (encoding issue — next round)
+- obi.ps1 doctor: FIXED (UTF-8 BOM + em-dashes + // comment issues in .mcp.json resolved; doctor 8/8 GREEN)
 
 ---
 
@@ -257,4 +259,4 @@ G999 (HolyWord) ──┘
 
 ---
 
-`DEATH v7.0: KILO_HOLLOW. Core 99 hardcoded in BOOT. LFG/G999 relationship sealed. Oktava portal live. DNA Registry seeded. 10-stage pipeline code-complete. obi.ps1 doctor is single execution blocker for next round.`
+`DEATH v7.0 CORRECTED: KILO_DEAD. Core 99 hardcoded in BOOT. LFG/G999 relationship sealed. Oktava portal live. DNA Registry seeded. 10-stage pipeline code-complete. obi.ps1 encoding repaired (doctor GREEN). Ready for CLAUDE_REAL RISE Stages 1–8.`

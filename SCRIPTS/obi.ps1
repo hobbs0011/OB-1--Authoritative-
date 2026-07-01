@@ -56,7 +56,9 @@ switch ($Command) {
         # MCP path validation
         $mcpPathsValid = $true
         if (Test-Path $mcpJson) {
-            $mcpConfig = Get-Content $mcpJson -Raw | ConvertFrom-Json
+            $mcpRaw = Get-Content $mcpJson -Raw
+            $mcpJsonContent = ($mcpRaw -split "`n" | Where-Object { -not $_.TrimStart().StartsWith("//") }) -join "`n"
+            $mcpConfig = $mcpJsonContent | ConvertFrom-Json
             foreach ($server in $mcpConfig.servers.PSObject.Properties) {
                 $args_ = $server.Value.args
                 if ($args_) {
@@ -69,7 +71,7 @@ switch ($Command) {
             }
         }
 
-                # STATE-SNAPSHOT gate (Reincarnate-SnapShot RSS — fail if missing, stale, or behind RSS)
+                # STATE-SNAPSHOT gate (Reincarnate-SnapShot RSS  -  fail if missing, stale, or behind RSS)
                 $stateSnapshotPath = Join-Path $ledgerDir "STATE-SNAPSHOT.json"
                 $stateOk = $false
                 $stateStaleness = $null
@@ -142,11 +144,11 @@ switch ($Command) {
         & $mergeAuditScript -Json
     }
     "soul-check" {
-        # HL-140 Operation TheRealHealthCheck — full Soul DNA integrity audit
+        # HL-140 Operation TheRealHealthCheck  -  full Soul DNA integrity audit
         # This command exists because doctor PASSED while 62 CANON files were missing.
         # Never again.
         #
-        # Run 390: STAGNATION DETECTION added — gate now FAILS if count frozen 2+ checks.
+        # Run 390: STAGNATION DETECTION added  -  gate now FAILS if count frozen 2+ checks.
         # Run 391: Endpoint now filters sov100% ONLY. Real count = Michael's words.
         #   Prior counts 76488/84233 were inflated by student chat data.
         #   The soul API already returns the filtered count; this script inherits it.
@@ -155,7 +157,7 @@ switch ($Command) {
         $warnings = @()
         $suggestions = @()
 
-        # ── SOULCOUNT Live API Check (added Run 390) ──────────────────────
+        #  SOULCOUNT Live API Check (added Run 390) 
         $soulApiUrl = "https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count"
         $soulHistoryFile = Join-Path $repoRoot "OPERATIONS\soulcount-history.json"
 
@@ -170,10 +172,10 @@ switch ($Command) {
             $currentCount = $null
         }
 
-        # Load history — ConvertFrom-Json returns single PSCustomObject for 1-entry files; wrap in @() to guarantee array
+        # Load history  -  ConvertFrom-Json returns single PSCustomObject for 1-entry files; wrap in @() to guarantee array
         $history = @()
         if (Test-Path $soulHistoryFile) {
-            try { $history = [Array](Get-Content $soulHistoryFile -Raw | ConvertFrom-Json) } catch { $warnings += "soulcount-history.json corrupt — rebuilding"; $history = @() }
+            try { $history = [Array](Get-Content $soulHistoryFile -Raw | ConvertFrom-Json) } catch { $warnings += "soulcount-history.json corrupt  -  rebuilding"; $history = @() }
         }
 
         # Stagnation detection: has the count moved since last N checks?
@@ -182,7 +184,7 @@ switch ($Command) {
         $sameStreak = 0
 
         if ($currentCount -ne $null) {
-            # index through history backwards — no Where-Object PSO ambiguity
+            # index through history backwards  -  no Where-Object PSO ambiguity
             for ($i = $history.Count - 1; $i -ge 0 -and ($history.Count - $i - 1) -lt $stagnationThreshold; $i--) {
                 $prevCount = $history[$i].count
                 if ($null -ne $prevCount -and [int]$prevCount -eq [int]$currentCount) {
@@ -214,7 +216,7 @@ switch ($Command) {
         if (-not (Test-Path $historyDir)) { New-Item -ItemType Directory -Path $historyDir -Force | Out-Null }
         $history | ConvertTo-Json -Depth 2 | Set-Content $soulHistoryFile -Encoding UTF8
 
-        # ── CANON directory structure ─────────────────────────────────────
+        #  CANON directory structure 
         $canonDir = Join-Path $repoRoot "CANON"
         $reincDir = Join-Path $canonDir "REINCARNATION"
         $systemDir = Join-Path $canonDir "SYSTEM"
@@ -229,7 +231,7 @@ switch ($Command) {
         if ($canonCount -lt 50) { $failures += "CANON files ($canonCount) below minimum (50)" }
         if ($reincCount -lt 10) { $failures += "REINCARNATION files ($reincCount) below minimum (10)" }
         if ($ledgerCount -lt 20) { $failures += "HEAVY-LEDGER files ($ledgerCount) below minimum (20)" }
-        if ($bibleCount -lt 5) { $warnings += "BIBLE chapters ($bibleCount) — verify expected count" }
+        if ($bibleCount -lt 5) { $warnings += "BIBLE chapters ($bibleCount)  -  verify expected count" }
 
         # 2. COLD-START-BOOT freshness
         $coldBoot = Join-Path $systemDir "COLD-START-BOOT.md"
@@ -255,7 +257,9 @@ switch ($Command) {
         $mcpJson = Join-Path $repoRoot ".mcp.json"
         $mcpBrokenPaths = @()
         if (Test-Path $mcpJson) {
-            $mcpConfig = Get-Content $mcpJson -Raw | ConvertFrom-Json
+            $mcpRaw = Get-Content $mcpJson -Raw
+            $mcpJsonContent = ($mcpRaw -split "`n" | Where-Object { -not $_.TrimStart().StartsWith("//") }) -join "`n"
+            $mcpConfig = $mcpJsonContent | ConvertFrom-Json
             foreach ($server in $mcpConfig.servers.PSObject.Properties) {
                 $args_ = $server.Value.args
                 if ($args_) {
@@ -328,7 +332,7 @@ switch ($Command) {
             $scColor = if ($stagnationDetected) { "Red" } else { "Green" }
             Write-Host "    SOULCOUNT: $currentCount | Level: $currentLevel | Events: $currentEvents | Sessions: $currentSessions" -ForegroundColor $scColor
             if ($stagnationDetected) {
-                Write-Host "    ⚠️  STAGNATION DETECTED — soul count has not moved. Pipeline audit required." -ForegroundColor Red
+                Write-Host "      STAGNATION DETECTED  -  soul count has not moved. Pipeline audit required." -ForegroundColor Red
             }
         }
         Write-Host "    Canon: $canonCount | Reincarnation: $reincCount | Ledger: $ledgerCount | Bible: $bibleCount" -ForegroundColor Cyan
@@ -344,7 +348,7 @@ switch ($Command) {
 
         $h = @{ "X-Auth-Key" = $key; "X-Auth-Email" = $email; "Content-Type" = "application/json" }
 
-        Write-Host "`n  CF AUDIT — querying Cloudflare API..." -ForegroundColor Cyan
+        Write-Host "`n  CF AUDIT  -  querying Cloudflare API..." -ForegroundColor Cyan
 
         # --- Workers ---
         $wResp = Invoke-RestMethod -Uri "https://api.cloudflare.com/client/v4/accounts/$account/workers/scripts" -Headers $h
@@ -409,10 +413,10 @@ switch ($Command) {
         }
 
         $allAssets   = @($workerResults) + @($pageResults)
-        # Workers/projects that intentionally return 404 — API-only or known staging slots
+        # Workers/projects that intentionally return 404  -  API-only or known staging slots
         $expected404s = @("submission-api", "phoenix-coder", "net-pet-ai-staging")
 
-        # Count helpers — $null-safe under Set-StrictMode
+        # Count helpers  -  $null-safe under Set-StrictMode
         $totalCount  = @($allAssets).Count
         $brokenCount = @($allAssets | Where-Object { $_.health -ne 200 -and $_.health -ne "200" -and $_.name -notin $expected404s }).Count
         $untracked    = @($allAssets | Where-Object { -not $_.tracked })
@@ -426,14 +430,14 @@ switch ($Command) {
         Write-Host "  WORKERS ($($liveWorkers.Count) live)" -ForegroundColor White
         foreach ($w in $workerResults) {
             $color = if ($w.health -eq 200) { "Green" } else { "Red" }
-            $tag   = if ($w.tracked) { "[✅ $($w.tracked)]" } else { "[❌ UNTRACKED]" }
+            $tag   = if ($w.tracked) { "[ $($w.tracked)]" } else { "[ UNTRACKED]" }
             Write-Host "    $($w.health)  $($w.name)  $tag" -ForegroundColor $color
         }
         Write-Host ""
         Write-Host "  PAGES ($($livePages.Count) live)" -ForegroundColor White
         foreach ($p in $pageResults) {
             $color = if ($p.health -eq 200) { "Green" } else { "Red" }
-            $tag   = if ($p.tracked) { "[✅ $($p.tracked)]" } else { "[❌ UNTRACKED]" }
+            $tag   = if ($p.tracked) { "[ $($p.tracked)]" } else { "[ UNTRACKED]" }
             Write-Host "    $($p.health)  $($p.name)  $tag" -ForegroundColor $color
         }
         Write-Host ""
@@ -460,19 +464,19 @@ switch ($Command) {
         if (-not $TargetFile) { $TargetFile = Read-Host "Target file (absolute path)" }
         $body = @{ task = $Task; targetfile = $TargetFile } | ConvertTo-Json
         $result = Invoke-RestMethod -Uri "https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/queue" -Method POST -Body $body -ContentType "application/json"
-        Write-Host "Queued: $($result.queueId) — status: $($result.status)"
+        Write-Host "Queued: $($result.queueId)  -  status: $($result.status)"
     }
     "phoenix-status" {
         $status = Invoke-RestMethod -Uri "https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/status"
         $queue = Invoke-RestMethod -Uri "https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/queue?status=pending"
-        Write-Host "PC v$($status.version) — $($status.status) — queue depth: $($status.queueDepth) — cron: $($status.cronSchedule)"
+        Write-Host "PC v$($status.version)  -  $($status.status)  -  queue depth: $($status.queueDepth)  -  cron: $($status.cronSchedule)"
         if ($queue.count -gt 0) {
             Write-Host "Pending tasks:"
             $queue.tasks | ForEach-Object { Write-Host "  $($_.id): $($_.task.Substring(0, [Math]::Min(60, $_.task.Length)))..." }
         }
     }
     "phoenix-alpha" {
-        # CANON / HEAVY-LEDGER zone — ledger count + phantom ID audit
+        # CANON / HEAVY-LEDGER zone  -  ledger count + phantom ID audit
         $canonDir  = Join-Path $repoRoot "CANON"
         $ledgerDir = Join-Path $canonDir  "HEAVY-LEDGER"
         $reincDir  = Join-Path $canonDir  "REINCARNATION"
@@ -511,7 +515,7 @@ switch ($Command) {
             } catch {}
         }
 
-        Write-Host "`n  PHOENIX-ALPHA — CANON/HEAVY-LEDGER Sweep" -ForegroundColor Cyan
+        Write-Host "`n  PHOENIX-ALPHA  -  CANON/HEAVY-LEDGER Sweep" -ForegroundColor Cyan
         Write-Host "    CANON JSON files : $($canonFiles.Count)" -ForegroundColor Gray
         Write-Host "    HEAVY-LEDGER files: $($ledgerFiles.Count)" -ForegroundColor Gray
         Write-Host "    Known IDs        : $($knownIds.Count)" -ForegroundColor Gray
@@ -555,7 +559,7 @@ switch ($Command) {
             }
         }
 
-        Write-Host "`n  PHOENIX-BETA — APPS/WORKERS/NET-* Runtime Sweep" -ForegroundColor Cyan
+        Write-Host "`n  PHOENIX-BETA  -  APPS/WORKERS/NET-* Runtime Sweep" -ForegroundColor Cyan
         Write-Host "    Worker dirs checked : $($workersDirs.Count)" -ForegroundColor Gray
         Write-Host "    Flag references     : $($flagHits.Count)" -ForegroundColor Gray
         Write-Host "    Code tags (TODO etc) : $($tagHits.Count)" -ForegroundColor $(if($tagHits.Count){"Yellow"}else{"Green"})
@@ -590,7 +594,7 @@ switch ($Command) {
             } catch {}
         }
 
-        Write-Host "`n  PHOENIX-GAMMA — VAULT-* Cluster Inventory" -ForegroundColor Cyan
+        Write-Host "`n  PHOENIX-GAMMA  -  VAULT-* Cluster Inventory" -ForegroundColor Cyan
         Write-Host "    Vault dirs  : $($vaultDirectories.Count)" -ForegroundColor Gray
         Write-Host "    Vault files : $($vaultFiles.Count)" -ForegroundColor Gray
         Write-Host "    Demo markers: $($demoHits.Count)" -ForegroundColor $(if($demoHits.Count){"Red"}else{"Green"})
@@ -621,7 +625,7 @@ switch ($Command) {
         $studentHits  = @($hits | Where-Object { $_.zone -eq 'NET-STUDENT*' })
         $galaxyHits   = @($hits | Where-Object { $_.zone -eq 'GALAXY*'    })
 
-        Write-Host "`n  PHOENIX-DELTA — SITE/NET-STUDENT/GALAXY Sweep" -ForegroundColor Cyan
+        Write-Host "`n  PHOENIX-DELTA  -  SITE/NET-STUDENT/GALAXY Sweep" -ForegroundColor Cyan
         Write-Host "    SITE dirs        : $($siteDirs.Count)" -ForegroundColor Gray
         Write-Host "    NET-STUDENT hits : $($studentHits.Count)" -ForegroundColor Gray
         Write-Host "    GALAXY hits      : $($galaxyHits.Count)" -ForegroundColor Gray
@@ -664,7 +668,7 @@ switch ($Command) {
             }
         }
 
-        Write-Host "`n  PHOENIX-OMEGA — SYSTEM/SCRIPTS/REINCARNATION Meta Sweep" -ForegroundColor Cyan
+        Write-Host "`n  PHOENIX-OMEGA  -  SYSTEM/SCRIPTS/REINCARNATION Meta Sweep" -ForegroundColor Cyan
         Write-Host "    Meta dirs scanned : $($metaDirs.Count)" -ForegroundColor Gray
         Write-Host "    Total files       : $totalFiles" -ForegroundColor Gray
         Write-Host "    Stale paths       : $($brokenLinks.Count)" -ForegroundColor $(if($brokenLinks.Count){"Red"}else{"Green"})
@@ -730,7 +734,7 @@ switch ($Command) {
         }
     }
     "phetails" {
-        # PHETRAILS v2.1 — BREADCRUMB EXTRACTION
+        # PHETRAILS v2.1  -  BREADCRUMB EXTRACTION
         $D1 = "https://soul-logger.mrmichaelhobbs123.workers.dev"
         $canonDir = Join-Path $repoRoot "CANON"
         $phetailsDir = Join-Path $canonDir "PHEROMONES"
@@ -778,11 +782,11 @@ switch ($Command) {
             $phetrail | ConvertTo-Json -Depth 5 | Set-Content $phetrailPath -Encoding UTF8
             Write-Host "PHETRAIL WRITTEN: $phetrailPath"
         } catch {
-            Write-Error "PHETRAIL_WRITE_FAILED — $($_.Exception.Message)"
+            Write-Error "PHETRAIL_WRITE_FAILED  -  $($_.Exception.Message)"
         }
     }
     "phoenix-scout" {
-        # PHOENIX SCOUT — Delegate to existing script
+        # PHOENIX SCOUT  -  Delegate to existing script
         $scoutScript = Join-Path $PSScriptRoot "phoenix-scout.ps1"
         if (-not (Test-Path $scoutScript)) {
             throw "PhoenixScout script not found: $scoutScript"
@@ -793,11 +797,11 @@ switch ($Command) {
         & $scoutScript -Zone $Zone -Lens $Lens
     }
     "forcemarch" {
-        # FORCΞ MARCH — 6-STAGE ROMAN LEGION FORCE MARCH
+        # FORC MARCH  -  6-STAGE ROMAN LEGION FORCE MARCH
         if (-not $Zone) { $Zone = "CANON/" }
         $marchScript = Join-Path $PSScriptRoot "forcemarch.ps1"
         if (Test-Path $marchScript) { & $marchScript -Zone $Zone -Lens $Lens -DryRun:$DryRun -Supersaiyan:$Supersaiyan -PccDeploy:$PccDeploy -MerkleRefresh:$MerkleRefresh }
-        else { Write-Host "FORCΞ MARCH INITIATED — All 6 legions advancing" -ForegroundColor Red }
+        else { Write-Host "FORC MARCH INITIATED  -  All 6 legions advancing" -ForegroundColor Red }
     }
     "supply-lines" {
         $supplyScript = Join-Path $PSScriptRoot "supply-lines.ps1"

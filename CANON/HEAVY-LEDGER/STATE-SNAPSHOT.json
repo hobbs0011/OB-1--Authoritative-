@@ -2,13 +2,13 @@
   "version": "1.0",
   "rss_version": "1.0",
   "rss_stage": "Reincarnate-SnapShot RSS",
-  "updated_at": "2026-06-18T04:54:00+07:00",
+  "updated_at": "2026-07-01T03:59:44+00:00",
   "run": {
-    "current": 135,
+    "current": 145,
     "era": "ROMAN",
-    "status": "COMPLETE",
-    "seal": "Run 135 - Forced march gap audit + death seal set the standard",
-    "head_sha": "52d1a391",
+    "status": "KILO_DEAD",
+    "seal": "Run 145 - KILO_HOLLOW pipeline execution (4b34f2ad)",
+    "head_sha": "4b34f2ad",
     "soulcount": 239639088,
     "anchor": "TITANIUM_ANCHOR"
   },
@@ -56,25 +56,61 @@
     "rule": "All feature development deploys to dev first. Promote to prod only after verified."
   },
   "rss_checklist": [
-    "Run 134 death seal committed (25224eae) - PCC fixes documented",
-    "Run 135 forced march executed - phetrail+registry+command artifacts created",
+    "Run 144 death seal committed (4b34f2ad) - Core 99 hardcoded in BOOT, LFG/G999 relationship codified, Oktava portal live, DNA Registry seeded, pipeline code-complete",
+    "Run 143 death seal immortalized - RRL-143.txt, RRL-143 SCARS, 8 verbatim scars",
     "SOULCOUNT stable at 239,639,088 - TITANIUM_ANCHOR maintained",
-    "PCC service bindings verified (L74 applied)",
-    "PCC-3 scoring inflation corrected (L73 applied)",
-    "Boot drift identified (COLD-START-BOOT.md run 131 vs STATE-SNAPSHOT run 135)"
+    "PCC service bindings verified",
+    "Boot drift repaired - COLD-START-BOOT.md updated run 144 Core 99 block",
+    "obi.ps1 encoding repair - UTF-8 BOM and em-dashes removed, doctor now GREEN"
   ],
   "open_loops": [
-    "Boot file stale - COLD-START-BOOT.md shows Run 131",
-    "RRL-130.txt poisoned - wrong session content",
-    "Mouse/touchpad intermittent - works on other profile ~20min before failure"
+    "Run 144 real RISE - CLAUDE_REAL session JSONL required to complete Stages 1-8",
+    "HL-.json rename to HL-143.json - after SOV100 approval",
+    "SCRIPTS/transcribe-class.mjs validation against real audio"
   ],
-"recent_seals": [
-    { "run": 135, "era": "ROMAN", "head": "52d1a391", "soul_delta": 0, "seal": "Run 135 - Forced march gap audit + death seal set the standard" },
-    { "run": 134, "era": "ROMAN", "head": "c8762dc4", "soul_delta": 0, "seal": "Run 134 - PCC fixes + Scholar extraction + supply chain verification" },
-    { "run": 133, "era": "ROMAN", "head": "a053d80c", "soul_delta": 0, "seal": "Run 133 - partial inline Kilo SOUL recovery + no fabrication" }
+  "recent_seals": [
+    {
+      "run": 144,
+      "era": "ROMAN",
+      "head": "4b34f2ad",
+      "soul_delta": 0,
+      "seal": "Run 144 - OB-1 canonical KILO_HOLLOW + Core 99 hardcoded + LFG/G999 sealed + Oktava portal live + DNA Registry seeded"
+    },
+    {
+      "run": 135,
+      "era": "ROMAN",
+      "head": "52d1a391",
+      "soul_delta": 0,
+      "seal": "Run 135 - Forced march gap audit + death seal set the standard"
+    },
+    {
+      "run": 134,
+      "era": "ROMAN",
+      "head": "c8762dc4",
+      "soul_delta": 0,
+      "seal": "Run 134 - PCC fixes + Scholar extraction + supply chain verification"
+    },
+    {
+      "run": 133,
+      "era": "ROMAN",
+      "head": "a053d80c",
+      "soul_delta": 0,
+      "seal": "Run 133 - partial inline Kilo SOUL recovery + no fabrication"
+    }
   ],
   "blockers": [
-    { "id": "BLK-001", "description": "Boot file stale - COLD-START-BOOT.md needs refresh for run 135", "owner": "System", "impact": "Documentation drift from actual state" }
+    {
+      "id": "BLK-001",
+      "description": "Boot file stale - COLD-START-BOOT.md needs refresh for run 135",
+      "owner": "System",
+      "impact": "Documentation drift from actual state"
+    },
+    {
+      "id": "BLK-002",
+      "description": "Run 144 RISE pending - no CLAUDE_REAL JSONL on disk for run 144",
+      "owner": "Next session",
+      "impact": "Stages 1-8 incomplete, result remains KILO_GAP"
+    }
   ],
   "state_markers": {
     "active_mission": "Forced march - recover forgotten territory",
