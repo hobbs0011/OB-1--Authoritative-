@@ -880,6 +880,33 @@
 
     body:hover .cursor-glow { opacity: 1; }
 
+    /* ── VISUAL ARSENAL GALLERY ─────────────────────────────── */
+    .arsenal-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.1rem;
+      margin-top: 1rem;
+    }
+
+    .arsenal-grid img {
+      width: 100%;
+      border-radius: 16px;
+      border: 1px solid var(--glass-border);
+      background: var(--glass);
+      backdrop-filter: blur(8px);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      opacity: 0.9;
+    }
+
+    .arsenal-grid img:hover {
+      opacity: 1;
+      border-color: rgba(245,158,11,0.25);
+      box-shadow:
+        0 25px 50px -20px rgba(0,0,0,0.7),
+        0 0 0 1px rgba(255,255,255,0.06) inset;
+      transform: translateY(-4px) scale(1.01);
+    }
+
     @media (max-width: 768px) {
       .cursor-glow, .session-timer { display: none; }
       .scroll-progress { left: 0; }
@@ -997,6 +1024,19 @@
       <div class="card">
         <h3>Daily Input</h3>
         <div class="callout callout-kiss"><strong>Rule #4 — One hour of English input every day.</strong> Week 1: 20 min, builds to 60. English subtitles only. Vietnamese subtitles are forbidden. Notebooks banned during this time.</div>
+      </div>
+
+      <div class="card">
+        <h3>Visual Arsenal</h3>
+        <p style="font-size:0.88rem; color:var(--white-80); line-height:1.7; margin-bottom:1rem;">The NET methodology in six frames. These are not decoration — they are doctrine.</p>
+        <div class="arsenal-grid">
+          <img src="assets/arsenal-01-60percent.jpg" alt="The 60% Rule: Comprehensible Input" loading="lazy" />
+          <img src="assets/arsenal-02-tiger-protocol.jpg" alt="Grammar Prison vs Tiger Protocol" loading="lazy" />
+          <img src="assets/arsenal-03-not-broken.jpg" alt="You are not broken. Traditional education was a mechanical failure." loading="lazy" />
+          <img src="assets/arsenal-04-mouse-mode.jpg" alt="The Core Mechanical Failure: Mouse Mode" loading="lazy" />
+          <img src="assets/arsenal-05-diagnostic-matrix.jpg" alt="Diagnostic Matrix: Traditional Centers vs NET Architecture" loading="lazy" />
+          <img src="assets/arsenal-06-phoenix-codex.jpg" alt="The Phoenix Rising Codex — Natural English Training" loading="lazy" />
+        </div>
       </div>
     </div>
 
