@@ -11,7 +11,7 @@ agent: AGENT99
 1. Take the user's task from the command arguments
 2. If a target file is mentioned, read it first and include content as context
 3. Call PA T1 → Kilo Free Auto:
-   - URL: https://phoenix-architecti.mrmichaelhobbs123.workers.dev/v1/chat/completions
+   - URL: http://localhost:3000/v1/chat/completions
    - Model: kilo-auto/free
    - Auth: Bearer ffScwBjPQjBnoAlectawu8E+J4NcmO3idxGxtlcRue8=
    - max_tokens: 4096
@@ -24,7 +24,7 @@ agent: AGENT99
 - STATUS: APPLIED | DISPLAYED | FAILED
 
 **Rules:**
-- This is Kilo Free Auto — routes to best available free frontier model
+- This is Kilo Free Auto — routes to best available local/free frontier model
 - If task needs repo context, read files before dispatching
 - On failure: escalate to /PAA with tier:10 for PA cascade
 

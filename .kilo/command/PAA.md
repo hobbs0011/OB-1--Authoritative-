@@ -12,7 +12,7 @@ Flow:
 1. Parse tier from argument prefix [T1]-[T2] — default T1 if none specified
 2. Read target file if the task involves one — pass real content as context
 3. POST to Phoenix-Architecti:
-   - URL: https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/code
+   - URL: http://localhost:3000/api/code
    - Header: x-pa-auth: ffScwBjPQjBnoAlectawu8E+J4NcmO3idxGxtlcRue8=
    - Body: { task, context, targetfile, tier }
 4. Apply code_patch to targetfile

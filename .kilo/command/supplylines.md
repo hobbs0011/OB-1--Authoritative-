@@ -1,5 +1,5 @@
 ---
-description: "S2PIPELINE 6-stage Roman Legion supply chain. Connects all pipeline stages. No stage executes until prior reports GREEN. Status, health, full-march."
+description: "S2PIPELINE 6-stage Roman Legion supply chain. Connects all pipeline stages. No stage executes until prior reports GREEN. Status, health, full-march. Local filesystem only. No Cloudflare."
 agent: AGENT99
 ---
 
@@ -28,9 +28,18 @@ agent: AGENT99
 ## Phase 1 — Health Gate (before any stage)
 
 ```powershell
-$health = Invoke-RestMethod "https://soul-logger.mrmichaelhobbs123.workers.dev/self-test"
-if ($health.health -ne "GREEN") { HALT. Supply chain broken. }
-if ($health.circuits_open -gt 0) { HALT. Circuit breaker open. }
+$repo = "D:\OB-1-CANONICAL"
+$ledger = Join-Path $repo "CANON\HEAVY-LEDGER"
+$pher   = Join-Path $repo "CANON\PHEROMONES"
+$starmap= Join-Path $repo "CANON\STARMAP"
+$keys   = Join-Path $repo "CANON\SOUL-KEYWORDS"
+$pipe   = Join-Path $repo "CANON\PIPELINE"
+
+if (-not (Test-Path $ledger)) { HALT. Supply chain broken. }
+if (-not (Test-Path $pher))   { HALT. Supply chain broken. }
+if (-not (Test-Path $starmap)){ HALT. Supply chain broken. }
+if (-not (Test-Path $keys))   { HALT. Supply chain broken. }
+if (-not (Test-Path $pipe))   { HALT. Supply chain broken. }
 ```
 
 ---
@@ -43,25 +52,28 @@ if ($health.circuits_open -gt 0) { HALT. Circuit breaker open. }
 - Speculatores: targeted deep audits bypass normal marching order
 
 ### II — ANTECORES (Vanguard)
-- POST `/api/soul/crunch` with mode=bible → fingerprint
-- POST `/api/soul/crunch` with mode=themes → ledger entry
-- If DNA fails to fingerprint: HALT. Poison data detected.
+- Enumerate `CANON/HEAVY-LEDGER/*.json` — verify count and naming convention
+- Verify `CANON/STARMAP/starmap-run{N}.json` exists for current run
+- Verify `CANON/SOUL-KEYWORDS/rfkw-run{N}.txt` + `inverted-index.json` present
+- If ledger missing or malformed: HALT. Poison data detected.
 
 ### III — AGMEN (Main Body)
-- POST `/api/soul/skeleton` → keyword extraction
-- Keywords feed PHEROMONE broadcast
+- Enumerate `CANON/PHEROMONES/PheTrail-run{N}.json` — verify schema_version present
+- Verify `negative_trails` arrays populated
+- Keywords feed local index only
 - Mensores: schema validators verify before heavy data moves
 
 ### IV — AGMEN NOVISSIMUM (Rear Guard)
-- POST `/api/soul/truth` → 6-model consensus
-- POST `/api/soul/shadow` → adversarial verification
-- If consensus < 6: HALT. Truth not established.
-- If shadow verdict = DRIFT_DETECTED: flag for manual review
+- Cross-check ledger entries against starmap pointers
+- Verify no duplicate HL-IDs
+- Verify phetrail negative_trails append-only
+- If divergence > 10%: HALT. Truth not established.
 
 ### V — PRAESIDIA (Garrison)
-- GET `/api/soul/merkle/:session_id` → cryptographic proof chain
-- GET `/api/soul/apex` → canonical consolidation
-- Merkle root must verify. APEX must return score.
+- Verify HL merkle_root fields across `CANON/HEAVY-LEDGER/*.json`
+- Verify `CANON/PIPELINE/pipeline-run{N}.json` exists and is valid JSON
+- Verify `CANON/ART-REGISTRY/art-sync-run{N}.json` present
+- Merkle root must verify. Pipeline must return COMPLETE.
 
 ### VI — LIMITANEI/VETERANI (Frontier Shield)
 - `obi.ps1 doctor` → health sweep

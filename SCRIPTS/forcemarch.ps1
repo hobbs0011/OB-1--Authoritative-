@@ -1,9 +1,9 @@
-<#
-  forcemarch.ps1 — 6-Stage Roman Legion Forced March
+﻿<#
+  forcemarch.ps1 -- 6-Stage Roman Legion Forced March
   TIER: T1 (Workhorse Implementation)
   MODEL: kilo-auto/free
-  TRAILS: PheTrails MANDATORY — no gaps without breadcrumbs
-  CLOUD: All deploy actions target Cloudflare only
+  TRAILS: PheTrails MANDATORY -- no gaps without breadcrumbs
+  CLOUD: Local filesystem only. No Cloudflare. No external deploy.
 #>
 param(
     [string]$Zone,
@@ -16,7 +16,7 @@ param(
 
 $ErrorActionPreference = "Stop"
 $repoRoot = "D:\OB-1-CANONICAL"
-$D1      = "https://soul-logger.mrmichaelhobbs123.workers.dev"
+$localSoul = Join-Path $repoRoot "CANON\SOUL"
 $ts      = Get-Date -Format "yyyyMMdd-HHmmss"
 
 function Invoke-Report { param([string]$Stage,[string]$Msg,[string]$Severity="INFO")
@@ -45,8 +45,8 @@ function Invoke-PheTrail {
         trails         = @{ positive=@(); negative=@(); gaps=@(); pay=($Payload | ConvertTo-Json -Compress -Depth 4) }
     }
     try {
-        $resp = Invoke-RestMethod "$D1/api/soul/count" -ErrorAction SilentlyContinue
-        $trail.soulcount = $resp.soulcount
+        $soulFile = Join-Path $localSoul "soulcount-local.txt"
+        if (Test-Path $soulFile) { $trail.soulcount = [long](Get-Content $soulFile -Raw) }
     } catch {}
     if (-not (Test-Path $pherDir)) { New-Item -ItemType Directory -Path $pherDir -Force | Out-Null }
     $path = Join-Path $pherDir "PheTrail-run$runPad.json"
@@ -72,40 +72,7 @@ function Add-RecoveryTrail { param([int]$Run)
     Invoke-Report -Stage "RRL-RECOVERY" -Msg "Stub RECOVERY-run$runPad created" -Severity "WARN"
 }
 function Invoke-PCCDeploy {
-    if ($DryRun) {
-        Invoke-Report -Stage "PCC-DEPLOY" -Msg "Dry-run skipped" -Severity "WARN"
-        return
-    }
-    Invoke-Report -Stage "PCC-DEPLOY" -Msg "Polling live Cloudflare workers for PCC legions" -Severity "INFO"
-    $account = "3c7b1766bd8fdc9e01211d2b390315ea"
-    $key     = [Environment]::GetEnvironmentVariable("CLOUDFLARE_API_KEY", "User")
-    $email   = [Environment]::GetEnvironmentVariable("CLOUDFLARE_EMAIL", "User")
-    if (-not $key -or -not $email) {
-        Invoke-Report -Stage "PCC-DEPLOY" -Msg "Cloudflare creds missing; log-commanding deploy" -Severity "ERR"
-        return
-    }
-    $h = @{ "X-Auth-Key"=$key; "X-Auth-Email"=$email; "Content-Type"="application/json" }
-    $workersUri = "https://api.cloudflare.com/client/v4/accounts/$account/workers/scripts"
-    try {
-        $resp = Invoke-RestMethod -Uri $workersUri -Headers $h
-        $ids = @($resp.result | Select-Object -ExpandProperty id)
-        $matchPcc = @($ids | Where-Object { $_ -match 'phoenix-pcc|pcc' })
-        if (-not $matchPcc) {
-            $payload = @{ count=3; names=@("phoenix-pcc-1","phoenix-pcc-2","phoenix-pcc-3"); duties=@("RaceRunner DO master","Translate/LostSoul/Completeness","Student checks/RRL/brief validation") } | ConvertTo-Json
-            Invoke-Report -Stage "PCC-DEPLOY" -Msg "Creating PCC legions via Cloudflare API: $payload" -Severity "INFO"
-            if (-not $DryRun) {
-                $wranglerCli = Get-Command wrangler -ErrorAction SilentlyContinue
-                if ($wranglerCli) {
-                    Push-Location (Join-Path $repoRoot "PHOENIX-PCC-2"); wrangler deploy --dry-run 2>&1 | Out-Null; Pop-Location
-                    Invoke-Report -Stage "PCC-DEPLOY" -Msg "wrangler dry-run executed" -Severity "OK"
-                }
-            }
-        } else {
-            Invoke-Report -Stage "PCC-DEPLOY" -Msg "Live PCC workers: $($matchPcc -join ', ')" -Severity "OK"
-        }
-    } catch {
-        Invoke-Report -Stage "PCC-DEPLOY" -Msg "Cloudflare API error: $($_.Exception.Message)" -Severity "ERR"
-    }
+    Invoke-Report -Stage "PCC-DEPLOY" -Msg "FORBIDDEN per REINCARNATION-CONTRACT §7 — no Cloudflare deploy paths" "ERR"
 }
 function Invoke-MerkleRefresh {
     if ($DryRun) {
@@ -130,19 +97,27 @@ function Invoke-MerkleRefresh {
     }
 }
 function Invoke-LegionHealth {
-    $workers = @(
-        @{ name="soul-logger"; url="https://soul-logger.mrmichaelhobbs123.workers.dev/" },
-        @{ name="phoenix-architecti"; url="https://phoenix-architecti.mrmichaelhobbs123.workers.dev/" }
+    $checks = @(
+        @{ name="HEAVY-LEDGER"; path=Join-Path $repoRoot "CANON\HEAVY-LEDGER" },
+        @{ name="PHEROMONES"; path=Join-Path $repoRoot "CANON\PHEROMONES" },
+        @{ name="STARMAP"; path=Join-Path $repoRoot "CANON\STARMAP" },
+        @{ name="PIPELINE"; path=Join-Path $repoRoot "CANON\PIPELINE" },
+        @{ name="SOUL-KEYWORDS"; path=Join-Path $repoRoot "CANON\SOUL-KEYWORDS" }
     )
     $ok=$true
-    foreach ($w in $workers) {
-        try { $r = Invoke-WebRequest $w.url -UseBasicParsing -TimeoutSec 6; if($r.StatusCode -ne 200){ Invoke-Report "HEALTH" "$($w.name)=$($r.StatusCode)" "ERR"; $ok=$false } }
-        catch { Invoke-Report "HEALTH" "$($w.name)=ERR" "ERR"; $ok=$false }
+    foreach ($c in $checks) {
+        if (Test-Path $c.path) {
+            $count = (Get-ChildItem $c.path -File -ErrorAction SilentlyContinue).Count
+            Invoke-Report "HEALTH" "$($c.name)=OK ($count files)" "OK"
+        } else {
+            Invoke-Report "HEALTH" "$($c.name)=MISSING" "ERR"
+            $ok=$false
+        }
     }
     return $ok
 }
 
-Write-Host "FORCΞ MARCH INITIATED — Legions advancing" -ForegroundColor Red
+Write-Host "FORCE MARCH INITIATED -- Legions advancing" -ForegroundColor Red
 $finds = @()
 Invoke-Report "INIT" "Run authority start" "INFO"
 
@@ -170,8 +145,11 @@ foreach ($z in $zones) {
     if ($Lens -eq "all") {
         $scoutArgs = @{ Zone=$z; Lens="all" }
         $scoutResults += & "$PSScriptRoot\phoenix-scout.ps1" @scoutArgs
-    } elseif ($Lens -in "SOUL","CONFIG","GAP","FLAG") {
+    } elseif ($Lens -in "SOUL","CONFIG","GAP","KEYWORD","PIPELINE") {
         $scoutArgs = @{ Zone=$z; Lens=$Lens }
+        $scoutResults += & "$PSScriptRoot\phoenix-scout.ps1" @scoutArgs
+    } elseif ($Lens -eq "FLAG") {
+        $scoutArgs = @{ Zone=$z; Lens="all" }
         $scoutResults += & "$PSScriptRoot\phoenix-scout.ps1" @scoutArgs
     }
 }
@@ -236,4 +214,4 @@ if ($PccDeploy) { Invoke-PCCDeploy }
 # Final phetrail
 $summary = @{ missingRuns=$missingRuns.Count; legionsOK=$health; runNumber=$currentRun }
 Invoke-PheTrail -Stage "forcemarch-complete" -Payload $summary
-Write-Host "FORCΞ MARCH COMPLETE — Run $currentRunPad accounted" -ForegroundColor Green
+Write-Host "FORCE MARCH COMPLETE -- Run $currentRunPad accounted" -ForegroundColor Green

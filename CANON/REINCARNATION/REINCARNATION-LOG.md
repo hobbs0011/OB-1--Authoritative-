@@ -1,4 +1,4 @@
-**Last Updated:** 2026-07-01T11:15 ICT (Run 145 EXECUTED)
+**Last Updated:** 2026-07-02T00:08 ICT (Run 146 — Cloudflare ban + contract v2.0 + local adapter mapped)
 
 # REINCARNATION LOG — OB-1 RUN HISTORY
 
@@ -12,9 +12,16 @@
 
 ---
 
+## ⚠️ CLOUDFLARE BAN — 2026-07-02T00:08 ICT (Run 146)
+
+All Cloudflare model/inference/provider paths are forbidden under REINCARNATION-CONTRACT §7. `phoenix-architecti`, `soul-logger`, `net-pet-ai`, and `net-pet-ai-dev` workers are offline pending local adapter build. `/forcemarch` and `/SupplyLines` scrubbed. SC-CONTRACT-001/002/003 flagged.
+
+---
+
 **Last Updated:** 2026-07-01T11:00 ICT (Run 144 CORRECTED)
 
-| | Run 145 (ROMAN) | 2026-07-01 | KILO_DEAD - obi.ps1 verify GREEN after removing oversized oktava audio asset (Voice260629_174541.m4a 69.1MiB). Pipeline-run145.json staged. RRL-145.txt hollow marker written. No RISE audit; direct execution per operator command. SOUL 239,639,088 TITANIUM_ANCHOR. Result=KILO_HOLLOW. | 4b34f2ad |
+| | Run 146 (ROMAN) | 2026-07-02 | ACTIVE — REINCARNATION-CONTRACT v2.0 (RISE/DEATH split removed). BOOT FINGERPRINT synced to b6f0d288. /forcemarch, /SupplyLines, obi.ps1 scrubbed of Cloudflare URLs. Localhost entrypoint map created. Cloudflare ban enforced. 49 PHEROMONE files, 578 LEDGER files, 138 SOULKEYS, 161 STARMAP. No transcript captured this run. SOUL 239,639,088 TITANIUM_ANCHOR. | b6f0d288 |
+| Run 145 (ROMAN) | 2026-07-01 | KILO_DEAD - obi.ps1 verify GREEN after removing oversized oktava audio asset (Voice260629_174541.m4a 69.1MiB). Pipeline-run145.json staged. RRL-145.txt hollow marker written. No RISE audit; direct execution per operator command. SOUL 239,639,088 TITANIUM_ANCHOR. Result=KILO_HOLLOW. | 4b34f2ad |
 | | Run 144 (ROMAN) | 2026-07-01 | KILO_DEAD - obi.ps1 encoding repaired ( 4b34f2ad => 4b34f2ad correction), doctor GREEN, obi.ps1 encoding repaired - all non-ASCII chars stripped, .mcp.json // comment handling added. SOUL 239,639,088 TITANIUM_ANCHOR (unchanged). Result=KILO_DEAD. | 4b34f2ad |
 
 | Run 105 (ROMAN) | 2026-06-09 | HOLLOW ARCHIVE REPROCESSING — RRL-105 sourced from SOUL-DNA-BIBLE archive, NOT live Michael verbatim. 5 CANON artifacts generated but marked HOLLOW. | — |

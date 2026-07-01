@@ -1,5 +1,5 @@
 ---
-description: "FORCΞ MARCH — 6-stage Roman Legion pipeline execution. Scout → Fingerprint → Process → Verify → Garrison → Limitanei. Extreme strain, exhaustion tolerated. Mission: recover forgotten territory, bring PCC legions online."
+description: "FORCΞ MARCH — 6-stage Roman Legion pipeline execution. Scout → Fingerprint → Process → Verify → Garrison → Limitanei. Extreme strain, exhaustion tolerated. Mission: recover forgotten territory, scan all canonical zones, generate mandatory phetrails."
 agent: AGENT99
 ---
 
@@ -14,7 +14,7 @@ agent: AGENT99
 
 ## Purpose
 
-Execute a true Roman forced march across all 6 pipeline stages without stopping. No picnic by the river. No skipping stages. Extreme strain. Exhaustion and injury tolerated. Mission: recover forgotten territory, bring all PCC Cloudflare legions online, generate mandatory phetrails.
+Execute a true Roman forced march across all 6 pipeline stages without stopping. No picnic by the river. No skipping stages. Extreme strain. Exhaustion and injury tolerated. Mission: recover forgotten territory, scan all canonical zones, generate mandatory phetrails.
 
 ## Syntax
 
@@ -58,7 +58,7 @@ param(
 )
 
 $repo = "D:\OB-1-CANONICAL"
-$D1 = "https://soul-logger.mrmichaelhobbs123.workers.dev"
+$localSoul = Join-Path $repo "CANON\SOUL"
 
 # PHASE 1 — EXPLORATORES DEPLOYMENT
 Write-Host "FORCΞ MARCH INITIATED — All 6 legions advancing" -ForegroundColor Red
@@ -114,12 +114,7 @@ if (-not $DryRun) {
     }
 }
 
-# PHASE 4 — PCC LEGION DEPLOY
-if ($PccDeploy -and -not $DryRun) {
-    Deploy-PCCLegions
-}
-
-# PHASE 5 — MERKLE REBUILD
+# PHASE 4 — MERKLE REBUILD
 if ($MerkleRefresh -and -not $DryRun) {
     Invoke-MerkleRefresh
 }
@@ -130,15 +125,9 @@ Invoke-HealthSweep
 Write-Host "FORCΞ MARCH COMPLETE — All legions accounted" -ForegroundColor Green
 ```
 
-## PCC Legions Deployment
+## Local-Only Execution
 
-The `/forcemarch --pcc-deploy` option deploys:
-
-| Legion | Worker | Duties |
-|--------|--------|--------|
-| PCC-1 (Phoenix) | phoenix-architecti | RaceRunner DO master, session/death pipeline |
-| PCC-2 (Ops) | phoenix-pcc-2 | Translate, LostSoul, Completeness, Patterns, CodeQueue, BriefScan |
-| PCC-3 (Students) | phoenix-pcc-3 | Student checks, RRL processing, brief validation |
+All marching is local filesystem + PowerShell. No Cloudflare workers. No external PCC deploy path.
 
 ## Recovery Profile
 

@@ -7,15 +7,13 @@
 
 ## 1. Boundary
 
-| Role | Scope |
+| Mode | Scope |
 |-------|-------|
-| **RISE** | Audit-only. Read artifacts, report gaps, verify fidelity. Never execute production code. |
-| **DEATH** | Full pipeline execution. Write artifacts, commit, push. No audit — execute and seal. |
+| **ACTIVE** | Read, write, execute, audit, fix, deploy — in service of the mission. No artificial split between reading and doing. |
 
-## 2. Version Policy
+## 2. Mode Policy
 
-- RISE: v6.1
-- DEATH: v7.0
+- Single active mode. No audit-vs-execute gate.
 
 ## 3. Fidelity Gate
 
@@ -39,10 +37,15 @@ SUM(byte_count) WHERE session_id LIKE 'sov100%'
 
 The soul-logger D1 database is the single source of truth for soul count. No local counter may override it.
 
-## 6. Contract Supremacy
+## 7. Forbidden Providers
+
+Cloudflare model use is forbidden full stop. No agent, run, pipeline, or script may call Cloudflare-hosted models or inference endpoints. This ban is absolute and non-negotiable.
+
+## 8. Contract Supremacy
 
 This contract is minimal and supreme. All implementation files derive from it. Divergence is a defect.
 
 ---
 
-**Fingerprint:** REINCARNATION-CONTRACT.md v1.0 | 2026-06-06 | OB1-SOV100
+**Fingerprint:** REINCARNATION-CONTRACT.md v2.0 | 2026-07-02 | OB1-SOV100
+**Amendment:** §1 Boundary rewritten — RISE/DEATH split removed. Single active mode. §2 Mode Policy added. §7 Forbidden Providers preserved.

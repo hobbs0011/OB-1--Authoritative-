@@ -13,7 +13,7 @@ Flow:
 4. Report step results — retry any timeout with smaller scope
 
 Dispatch:
-- URL: https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/mission
+- URL: http://localhost:3000/api/mission
 - Header: x-pa-auth: ffScwBjPQjBnoAlectawu8E+J4NcmO3idxGxtlcRue8=
 - Body: { steps: [{ read, task, write }], commit_message }
 

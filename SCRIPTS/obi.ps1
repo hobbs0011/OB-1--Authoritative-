@@ -1,5 +1,5 @@
 param(
-    [ValidateSet("doctor","verify","dev","mcp-audit","soul-check","cf-audit","phoenix-queue","phoenix-status","phoenix-alpha","phoenix-beta","phoenix-gamma","phoenix-delta","phoenix-omega","pcc-law","phoenix-scout","forcemarch","supply-lines","reincarnateDeath","legion-garrison")]
+    [ValidateSet("doctor","verify","dev","mcp-audit","soul-check","cf-audit","phoenix-queue","phoenix-status","phoenix-alpha","phoenix-beta","phoenix-gamma","phoenix-delta","phoenix-omega","pcc-law","phoenix-scout","forcemarch","supply-lines","reincarnateDeath","legion-garrison","phetrails","soulscholars")]
     [string]$Command = "doctor",
     [string]$Task,
     [string]$TargetFile,
@@ -157,20 +157,24 @@ switch ($Command) {
         $warnings = @()
         $suggestions = @()
 
-        #  SOULCOUNT Live API Check (added Run 390) 
-        $soulApiUrl = "https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count"
-        $soulHistoryFile = Join-Path $repoRoot "OPERATIONS\soulcount-history.json"
+#  SOULCOUNT Local Check (post-Cloudflare ban) 
+$soulApiUrl = "FORBIDDEN"
+$soulLocalFile = Join-Path $repoRoot "CANON\SOUL\soulcount-local.txt"
+$soulHistoryFile = Join-Path $repoRoot "OPERATIONS\soulcount-history.json"
 
-        try {
-            $liveSoul = Invoke-RestMethod -Uri $soulApiUrl -TimeoutSec 10
-            $currentCount = $liveSoul.soulcount
-            $currentEvents = $liveSoul.events
-            $currentSessions = $liveSoul.sessions
-            $currentLevel = $liveSoul.level
-        } catch {
-            $failures += "SOULCOUNT API unreachable: $($_.Exception.Message)"
-            $currentCount = $null
-        }
+try {
+    if (Test-Path $soulLocalFile) {
+        $currentCount = [long](Get-Content $soulLocalFile -Raw)
+    } else {
+        $currentCount = 0
+    }
+    $currentEvents = 0
+    $currentSessions = 0
+    $currentLevel = "UNKNOWN"
+} catch {
+    $failures += "SOULCOUNT local read failed: $($_.Exception.Message)"
+    $currentCount = $null
+}
 
         # Load history  -  ConvertFrom-Json returns single PSCustomObject for 1-entry files; wrap in @() to guarantee array
         $history = @()
@@ -463,17 +467,10 @@ switch ($Command) {
         if (-not $Task) { $Task = Read-Host "Task description" }
         if (-not $TargetFile) { $TargetFile = Read-Host "Target file (absolute path)" }
         $body = @{ task = $Task; targetfile = $TargetFile } | ConvertTo-Json
-        $result = Invoke-RestMethod -Uri "https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/queue" -Method POST -Body $body -ContentType "application/json"
-        Write-Host "Queued: $($result.queueId)  -  status: $($result.status)"
+        Write-Output "FORBIDDEN: phoenix-queue requires Cloudflare phoenix-architecti worker. Build local PA instance first."
     }
     "phoenix-status" {
-        $status = Invoke-RestMethod -Uri "https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/status"
-        $queue = Invoke-RestMethod -Uri "https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/queue?status=pending"
-        Write-Host "PC v$($status.version)  -  $($status.status)  -  queue depth: $($status.queueDepth)  -  cron: $($status.cronSchedule)"
-        if ($queue.count -gt 0) {
-            Write-Host "Pending tasks:"
-            $queue.tasks | ForEach-Object { Write-Host "  $($_.id): $($_.task.Substring(0, [Math]::Min(60, $_.task.Length)))..." }
-        }
+        Write-Output "FORBIDDEN: phoenix-status requires Cloudflare phoenix-architecti worker. Build local PA instance first."
     }
     "phoenix-alpha" {
         # CANON / HEAVY-LEDGER zone  -  ledger count + phantom ID audit
@@ -733,57 +730,11 @@ switch ($Command) {
             }
         }
     }
-    "phetails" {
+    "phetrails" {
         # PHETRAILS v2.1  -  BREADCRUMB EXTRACTION
-        $D1 = "https://soul-logger.mrmichaelhobbs123.workers.dev"
-        $canonDir = Join-Path $repoRoot "CANON"
-        $phetailsDir = Join-Path $canonDir "PHEROMONES"
-
-        # Run authority: git (L29 NO_ASSUME_HEAD)
-        $lastDeathLine = git log --oneline --grep "^death:" -1 $repoRoot 2>&1
-        $priorRun = 0
-        if ($lastDeathLine -match 'run\s*(\d+)') { $priorRun = [int]$matches[1] }
-        $run = $priorRun + 1
-        $runPad = "{0:D3}" -f $run
-
-        # Paths
-        $phetrailPath = Join-Path $phetailsDir "PheTrail-run$runPad.json"
-        $headSha = (git rev-parse --short HEAD)
-        $soulResp = Invoke-RestMethod "$D1/api/soul/count" -ErrorAction SilentlyContinue
-        $soulcount = $soulResp.soulcount
-
-        # Extract positive/negative trails from session (placeholder for now)
-        $positiveTrails = @()
-        $negativeTrails = @()
-
-        # Output
-        $phetrail = [pscustomobject]@{
-            schema_version = "2.0"
-            run_number = $runPad
-            extracted_at = (Get-Date -Format "yyyy-MM-ddTHH:mm:sszzz")
-            head_sha = $headSha
-            soulcount = $soulcount
-            registry_entries = 0
-            positive_trails = $positiveTrails
-            negative_trails = $negativeTrails
-            state_markers = @{
-                active_mission = "PHETRAILS standalone extraction"
-                open_flags_count = 0
-            }
-        }
-
-        # Ensure directory exists
-        if (-not (Test-Path $phetailsDir)) {
-            New-Item -ItemType Directory -Path $phetailsDir -Force | Out-Null
-        }
-
-        try {
-            $jsonTest = $phetrail | ConvertTo-Json -Depth 5 | ConvertFrom-Json
-            $phetrail | ConvertTo-Json -Depth 5 | Set-Content $phetrailPath -Encoding UTF8
-            Write-Host "PHETRAIL WRITTEN: $phetrailPath"
-        } catch {
-            Write-Error "PHETRAIL_WRITE_FAILED  -  $($_.Exception.Message)"
-        }
+        $phetrailScript = Join-Path $PSScriptRoot "phetrails.ps1"
+        if (-not (Test-Path $phetrailScript)) { throw "phetrails script not found: $phetrailScript" }
+        & $phetrailScript -DryRun:$DryRun
     }
     "phoenix-scout" {
         # PHOENIX SCOUT  -  Delegate to existing script
@@ -819,5 +770,12 @@ switch ($Command) {
         if (-not (Test-Path $garrisonScript)) { throw "legion-garrison script not found: $garrisonScript" }
         if (-not $Task) { $Task = "status" }
         & $garrisonScript -Command $Task -Legion $Zone -Assignment $Lens -Notes $TargetFile -DryRun:$DryRun
+    }
+    "soulscholars" {
+        # SOUL SCHOLARS — SAPIENTES. Read-only extraction + catalog.
+        $extractScript = Join-Path $PSScriptRoot "soul-extract.ps1"
+        if (-not (Test-Path $extractScript)) { throw "soul-extract script not found: $extractScript" }
+        if (-not $TargetFile) { throw "TargetFile required for /soulscholars" }
+        & $extractScript -Source $TargetFile -SessionId "sov100-scholar-$(Get-Date -Format 'yyyyMMddHHmmss')" -DryRun:$DryRun -MinConfidence 0.55
     }
 }

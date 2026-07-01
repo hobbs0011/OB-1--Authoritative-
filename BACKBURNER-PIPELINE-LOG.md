@@ -1,6 +1,6 @@
 # Backburner Pipeline Log
 
-Last updated: 2026-04-16
+Last updated: 2026-07-02T00:24 ICT
 
 ## Active Backburner Items
 
@@ -10,6 +10,16 @@ Last updated: 2026-04-16
 - Why deferred: User requested to park this work.
 - Resume trigger: user says "resume backburner" or asks to continue enterprise integration.
 - Next execution steps: generate PAT with required scopes, wire host/token in integration UI, verify connection by listing repos/PR signals.
+
+## Completed Items (recent)
+
+- Cloudflare ban enforcement — all worker-dependent commands scrubbed, replaced with local filesystem equivalents
+- REINCARNATION-CONTRACT v2.0 — RISE/DEATH split removed, single active mode restored
+- BOOT FINGERPRINT sync — a8671036 → b6f0d288
+- Localhost entrypoint map — CANON/SYSTEM/LOCALHOST-ENTRYPOINT-MAP.md written
+- Command scrubbing — /forcemarch, /SupplyLines, /gateway, obi.ps1, PCCloud, PCClaw, PAA, pcc-law all cleared of Cloudflare URLs
+- RECOVERY-run146.md — no longer empty stub, marked COMPLETE
+- REINCARNATION-LOG — run146 entry added, Cloudflare ban notice prepended
 
 ## Handoff Note For Future Chats
 
