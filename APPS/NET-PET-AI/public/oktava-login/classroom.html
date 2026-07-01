@@ -1117,6 +1117,42 @@
       </div>
     </div>
 
+    <!-- FEEDBACK -->
+    <div class="room" id="room-feedback">
+      <div class="room-header">
+        <h2>Feedback</h2>
+        <p>Session 1 · June 29, 2026 · Raw, no sugarcoat</p>
+      </div>
+
+      <div class="card">
+        <h3>The Main Weakness</h3>
+        <p class="lead">You ran out of questions after 8 minutes. Michael had to pull new topics from you. The problem: you came with a script. Scripts die. Active listening opens infinite questions.</p>
+        <div class="callout callout-voice"><strong>The fix:</strong> Every answer contains 3 more questions. Mine them.</div>
+      </div>
+
+      <div class="card">
+        <h3>6 Rules — Next Class</h3>
+        <ol class="actions">
+          <li><strong>No Vietnamese.</strong> Even one word means your Vietnamese brain took over. 90 minutes. English only. If you don't know a word, describe it in English. Three different ways. Translation is last resort.</li>
+          <li><strong>No notebooks, no scripts.</strong> If you wrote questions before class, you won't hear the answers during class. Throw it away. You are leaning on a crutch and not learning to think on your feet.</li>
+          <li><strong>No phones.</strong> Phones are banned. Translation apps = brain rot. TikTok = attention death. The only person allowed to use translate is the teacher. And he will rarely use it.</li>
+          <li><strong>Answer + add one detail + ask back.</strong> "Yes" is not an answer. "Yes, I like street food because it's cheap and you can eat anywhere" is an answer. Then ask: "What about you?"</li>
+          <li><strong>Listen to what you know, not what you don't.</strong> Vietnamese students focus on the one word they don't know and miss the whole meaning. Context carries meaning. If you understand 60%, keep going. Don't freeze.</li>
+          <li><strong>1 hour listening every day.</strong> 20 minutes first week. 25 next week. Build to 60 minutes. While you cook. While you drive. While you do makeup. English subtitles only. Vietnamese subtitles never — your brain won't learn.</li>
+        </ol>
+      </div>
+
+      <div class="card">
+        <h3>Your Teacher's Exact Words</h3>
+        <blockquote>"If you miss one day, it's okay. If you miss two days, not good. Never miss three days."</blockquote>
+        <blockquote>"Learn like a baby. Listen for two years before you speak. Listen, listen, listen — then everything comes naturally."</blockquote>
+        <blockquote>"English subtitles okay. Vietnamese subtitles never. Because your brain don't learn."</blockquote>
+        <blockquote>"One hour a day. 60% comprehension minimum. If you understand less, change to easier content."</blockquote>
+        <blockquote>"Bruce Lee philosophy: one move 10,000 times &gt; 10,000 moves once. 500–1,000 words, each used 10 ways."</blockquote>
+        <blockquote>"Everybody's favorite topic is themselves. Find out why someone does something, and you can talk for hours."</blockquote>
+      </div>
+    </div>
+
     <!-- PROGRESS -->
     <div class="room" id="room-progress">
       <div class="room-header">
@@ -1196,7 +1232,7 @@
           <div class="audio-waveform" id="waveform"></div>
         </div>
         <audio id="classAudio" preload="none" style="display:none;">
-          <source src="Voice260629_174541.m4a" type="audio/mp4">
+          <source src="Testing123.m4a" type="audio/mp4">
         </audio>
       </div>
 
@@ -1244,7 +1280,7 @@
     });
 
     // ── KEYBOARD NAVIGATION ─────────────────────────────────
-    const roomOrder = ['dashboard', 'principles', 'vocab', 'listening', 'speaking', 'progress', 'tasks', 'notes'];
+      const roomOrder = ['dashboard', 'feedback', 'principles', 'vocab', 'listening', 'speaking', 'progress', 'tasks', 'notes'];
     document.addEventListener('keydown', (e) => {
       if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
 
