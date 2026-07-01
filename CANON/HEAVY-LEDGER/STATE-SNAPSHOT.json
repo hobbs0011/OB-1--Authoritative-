@@ -56,6 +56,7 @@
     "rule": "All feature development deploys to dev first. Promote to prod only after verified."
   },
   "rss_checklist": [
+    "Run 145 pipeline executed (a346c594) - obi.psio verify GREEN, audio asset removed, pipeline-run145.json staged",
     "Run 144 death seal committed (4b34f2ad) - Core 99 hardcoded in BOOT, LFG/G999 relationship codified, Oktava portal live, DNA Registry seeded, pipeline code-complete",
     "Run 143 death seal immortalized - RRL-143.txt, RRL-143 SCARS, 8 verbatim scars",
     "SOULCOUNT stable at 239,639,088 - TITANIUM_ANCHOR maintained",
@@ -64,17 +65,17 @@
     "obi.ps1 encoding repair - UTF-8 BOM and em-dashes removed, doctor now GREEN"
   ],
   "open_loops": [
-    "Run 144 real RISE - CLAUDE_REAL session JSONL required to complete Stages 1-8",
+    "Run 145 real RISE - CLAUDE_REAL session JSONL required to complete Stages 1-8 with REAL artifacts",
     "HL-.json rename to HL-143.json - after SOV100 approval",
     "SCRIPTS/transcribe-class.mjs validation against real audio"
   ],
   "recent_seals": [
     {
-      "run": 144,
+      "run": 145,
       "era": "ROMAN",
-      "head": "4b34f2ad",
+      "head": "a346c594",
       "soul_delta": 0,
-      "seal": "Run 144 - OB-1 canonical KILO_HOLLOW + Core 99 hardcoded + LFG/G999 sealed + Oktava portal live + DNA Registry seeded"
+      "seal": "Run 145 - KILO_HOLLOW pipeline execution (audio asset removed, pipeline-run145.json staged, RRL-145.txt hollow)"
     },
     {
       "run": 135,
