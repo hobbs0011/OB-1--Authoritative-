@@ -1,0 +1,15 @@
+﻿{
+    "run":  145,
+    "ledger_id":  "HL-720",
+    "merkle_short":  "EEC67E9F3C77E658",
+    "starmap_file":  "starmap-run145.json",
+    "keywords_file":  "rfkw-run145.txt",
+    "keywords_used":  [
+
+                      ],
+    "pieces_synced":  0,
+    "pieces":  [
+
+               ],
+    "executed_at":  "2026-07-01T12:54:14.4017158+07:00"
+}
