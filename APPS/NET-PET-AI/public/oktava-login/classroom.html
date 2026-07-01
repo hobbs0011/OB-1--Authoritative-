@@ -1,0 +1,1437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Oktava English Class · Classroom</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Orbitron:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --void: #0f0f1a;
+      --soul: #a855f7;
+      --gold: #f59e0b;
+      --white: #ffffff;
+      --white-80: rgba(255,255,255,0.8);
+      --white-60: rgba(255,255,255,0.6);
+      --white-40: rgba(255,255,255,0.4);
+      --white-12: rgba(255,255,255,0.12);
+      --white-06: rgba(255,255,255,0.06);
+      --glass: rgba(255,255,255,0.03);
+      --glass-border: rgba(255,255,255,0.07);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--void);
+      color: var(--white);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── G999 MARKERS ───────────────────────────────────────── */
+    .g999-top {
+      position: fixed;
+      top: 1.5rem;
+      right: 1.5rem;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      text-transform: uppercase;
+      opacity: 0.9;
+      z-index: 9999;
+      pointer-events: none;
+      text-shadow: 0 0 10px rgba(245,158,11,0.3);
+    }
+
+    .g999-corner {
+      position: fixed;
+      bottom: 1.5rem;
+      left: 1.5rem;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.55rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      color: rgba(168,85,247,0.5);
+      text-transform: uppercase;
+      z-index: 9999;
+      pointer-events: none;
+    }
+
+    /* ── SIDEBAR NAV ────────────────────────────────────────── */
+    .sidebar {
+      width: 240px;
+      background: rgba(255,255,255,0.02);
+      border-right: 1px solid var(--glass-border);
+      padding: 2rem 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar-brand {
+      padding: 0 1.5rem 2rem;
+      border-bottom: 1px solid var(--glass-border);
+      margin-bottom: 1.5rem;
+    }
+
+    .sidebar-brand h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+    }
+
+    .sidebar-brand p {
+      font-size: 0.7rem;
+      color: var(--white-40);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .nav {
+      list-style: none;
+      flex: 1;
+      padding: 0 0.75rem;
+    }
+
+    .nav li {
+      margin-bottom: 0.25rem;
+    }
+
+    .nav button {
+      width: 100%;
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--white-60);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 500;
+      padding: 0.7rem 1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      text-align: left;
+      letter-spacing: 0.02em;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .nav button:hover {
+      background: var(--white-06);
+      color: var(--white);
+      transform: translateX(3px);
+    }
+
+    .nav button.active {
+      background: rgba(245,158,11,0.08);
+      color: var(--gold);
+      border-color: rgba(245,158,11,0.15);
+      box-shadow: 0 0 20px rgba(245,158,11,0.05);
+    }
+
+    .nav-icon {
+      width: 18px;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    .sidebar-footer {
+      padding: 1rem 1.5rem;
+      border-top: 1px solid var(--glass-border);
+      margin-top: auto;
+    }
+
+    .logout-btn {
+      width: 100%;
+      background: transparent;
+      border: 1px solid var(--white-06);
+      color: var(--white-40);
+      font-size: 0.7rem;
+      padding: 0.5rem;
+      border-radius: 8px;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      transition: all 0.2s;
+    }
+
+    .logout-btn:hover {
+      color: var(--gold);
+      border-color: rgba(245,158,11,0.3);
+      background: rgba(245,158,11,0.05);
+    }
+
+    /* ── MAIN CONTENT ────────────────────────────────────────── */
+    .main {
+      flex: 1;
+      margin-left: 240px;
+      padding: 2rem 2.5rem;
+      padding-bottom: 4rem;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(168,85,247,0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(245,158,11,0.03) 0%, transparent 50%);
+    }
+
+    .room {
+      display: none;
+      animation: roomFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .room.active {
+      display: block;
+    }
+
+    @keyframes roomFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(16px) scale(0.99);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .room-header {
+      margin-bottom: 2rem;
+      padding-bottom: 1.2rem;
+      border-bottom: 1px solid var(--glass-border);
+      position: relative;
+    }
+
+    .room-header::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 50px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+      opacity: 0.6;
+    }
+
+    .room-header h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 0.4rem;
+    }
+
+    .room-header p {
+      font-size: 0.8rem;
+      color: var(--white-40);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* ── CARDS ─────────────────────────────────────────────── */
+    .card {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 1.5rem;
+      margin-bottom: 1.25rem;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .card:hover {
+      border-color: rgba(255,255,255,0.12);
+      box-shadow:
+        0 25px 50px -20px rgba(0,0,0,0.6),
+        0 0 0 1px rgba(255,255,255,0.05) inset;
+      transform: translateY(-3px);
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      color: var(--white-60);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .lead {
+      font-size: 1rem;
+      color: var(--white);
+      margin-bottom: 1rem;
+      line-height: 1.8;
+      font-weight: 400;
+    }
+
+    /* ── KISS / VOICE CALLOUTS ──────────────────────────────── */
+    .callout {
+      padding: 1rem 1.2rem;
+      border-radius: 0 12px 12px 0;
+      margin-bottom: 1rem;
+      border-left: 2px solid;
+      transition: all 0.2s;
+    }
+
+    .callout-kiss {
+      background: rgba(245,158,11,0.05);
+      border-left-color: var(--gold);
+    }
+
+    .callout-voice {
+      background: rgba(168,85,247,0.05);
+      border-left-color: var(--soul);
+    }
+
+    .callout strong { color: var(--white); font-weight: 600; }
+    .callout-kiss strong { color: var(--gold); }
+    .callout-voice strong { color: var(--soul); }
+
+    /* ── RULES LIST ─────────────────────────────────────────── */
+    .rules {
+      list-style: none;
+    }
+
+    .rules li {
+      padding: 0.85rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      font-size: 0.88rem;
+      color: var(--white-80);
+      line-height: 1.65;
+    }
+
+    .rules li:last-child { border-bottom: none; }
+    .rules li strong { color: var(--white); }
+
+    /* ── VOCAB GRID ─────────────────────────────────────────── */
+    .vocab-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 0.75rem;
+    }
+
+    .vocab {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 12px;
+      padding: 1rem 1.1rem;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .vocab:hover {
+      border-color: rgba(245,158,11,0.3);
+      background: rgba(255,255,255,0.04);
+      transform: translateY(-2px) scale(1.01);
+      box-shadow: 0 10px 30px -15px rgba(245,158,11,0.2);
+    }
+
+    .vocab .word {
+      font-weight: 600;
+      font-size: 0.88rem;
+      color: var(--white);
+      margin-bottom: 0.3rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .badge {
+      font-size: 0.55rem;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 600;
+      border: 1px solid rgba(245,158,11,0.3);
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    .badge-practice {
+      color: var(--white-40);
+      border-color: rgba(255,255,255,0.1);
+    }
+
+    .vocab .meaning {
+      font-size: 0.82rem;
+      color: var(--white-60);
+      margin-bottom: 0.5rem;
+    }
+
+    .vocab .context {
+      font-size: 0.78rem;
+      color: var(--white-40);
+      font-style: italic;
+      line-height: 1.5;
+      margin-bottom: 0.4rem;
+    }
+
+    .vocab .ts {
+      font-size: 0.65rem;
+      color: rgba(255,255,255,0.3);
+      font-family: 'Orbitron', sans-serif;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── ACTION LIST ────────────────────────────────────────── */
+    .actions {
+      list-style: none;
+      counter-reset: a;
+    }
+
+    .actions li {
+      counter-increment: a;
+      padding: 0.9rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      display: flex;
+      gap: 1rem;
+      font-size: 0.88rem;
+      color: var(--white-80);
+      line-height: 1.6;
+    }
+
+    .actions li:last-child { border-bottom: none; }
+
+    .actions li::before {
+      content: counter(a);
+      color: var(--gold);
+      font-weight: 700;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.7rem;
+      min-width: 1.6rem;
+      margin-top: 0.1rem;
+    }
+
+    .actions li strong { color: var(--white); }
+
+    /* ── PROGRESS BARS ──────────────────────────────────────── */
+    .progress-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.7rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .progress-row:last-child { border-bottom: none; }
+
+    .progress-label {
+      font-size: 0.85rem;
+      color: var(--white-80);
+      min-width: 120px;
+    }
+
+    .progress-bar {
+      flex: 1;
+      height: 6px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 3px;
+      margin: 0 1rem;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--gold), var(--soul));
+      border-radius: 3px;
+      transition: width 1s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+
+    .progress-fill::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      animation: shimmer 2s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    .progress-pct {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.75rem;
+      color: var(--white-60);
+      min-width: 40px;
+      text-align: right;
+    }
+
+    /* ── AUDIO PLAYER (Class Notes) ─────────────────────────── */
+    .audio-player {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      backdrop-filter: blur(12px);
+    }
+
+    .play-btn {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--soul));
+      border: none;
+      color: var(--void);
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+
+    .play-btn:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 30px rgba(245,158,11,0.4);
+    }
+
+    .play-btn:active {
+      transform: scale(0.95);
+    }
+
+    .audio-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .audio-title {
+      font-size: 0.85rem;
+      color: var(--white);
+      font-weight: 500;
+      margin-bottom: 0.3rem;
+    }
+
+    .audio-meta {
+      font-size: 0.7rem;
+      color: var(--white-40);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .audio-waveform {
+      flex: 2;
+      height: 40px;
+      background: rgba(255,255,255,0.03);
+      border-radius: 8px;
+      position: relative;
+      overflow: hidden;
+      min-width: 100px;
+    }
+
+    .waveform-bar {
+      position: absolute;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(to top, var(--soul), var(--gold));
+      border-radius: 2px;
+      opacity: 0.7;
+      animation: wave 1.2s ease-in-out infinite;
+    }
+
+    @keyframes wave {
+      0%, 100% { height: 20%; }
+      50% { height: 90%; }
+    }
+
+    /* ── TRANSCRIPT BOX ─────────────────────────────────────── */
+    .transcript {
+      background: rgba(0,0,0,0.3);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      max-height: 500px;
+      overflow-y: auto;
+      font-family: 'SF Mono', 'Monaco', 'Inconsolata', monospace;
+      font-size: 0.82rem;
+      line-height: 1.65;
+      color: var(--white-60);
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .transcript::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .transcript::-webkit-scrollbar-track {
+      background: rgba(255,255,255,0.02);
+      border-radius: 4px;
+    }
+
+    .transcript::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,0.08);
+      border-radius: 4px;
+    }
+
+    .transcript::-webkit-scrollbar-thumb:hover {
+      background: rgba(255,255,255,0.15);
+    }
+
+    /* ── TOAST NOTIFICATIONS ────────────────────────────────── */
+    .toast-container {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 10000;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .toast {
+      background: rgba(15,15,26,0.95);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      padding: 1rem 1.25rem;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 20px 40px -20px rgba(0,0,0,0.8);
+      animation: toastIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      min-width: 280px;
+    }
+
+    .toast.removing {
+      animation: toastOut 0.25s ease-in forwards;
+    }
+
+    @keyframes toastIn {
+      from { opacity: 0; transform: translateY(20px) scale(0.95); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes toastOut {
+      from { opacity: 1; transform: translateX(0); }
+      to { opacity: 0; transform: translateX(100%); }
+    }
+
+    .toast-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      flex-shrink: 0;
+    }
+
+    .toast-success { background: rgba(245,158,11,0.15); }
+    .toast-info { background: rgba(168,85,247,0.15); }
+
+    .toast-message {
+      font-size: 0.82rem;
+      color: var(--white);
+      line-height: 1.4;
+    }
+
+    /* ── KEYBOARD SHORTCUT HINT ─────────────────────────────── */
+    .kbd {
+      display: inline-block;
+      padding: 0.2rem 0.5rem;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.65rem;
+      color: var(--white-40);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 4px;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── RESPONSIVE ─────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        flex-direction: row;
+        align-items: center;
+        padding: 0.75rem 1rem;
+        gap: 1rem;
+      }
+
+      .sidebar-brand { border-bottom: none; padding: 0; margin: 0; }
+      .sidebar-brand h1 { font-size: 0.7rem; }
+      .sidebar-brand p { display: none; }
+      .sidebar-footer { display: none; }
+
+      .nav {
+        display: flex;
+        gap: 0.5rem;
+        padding: 0;
+        overflow-x: auto;
+        flex: 1;
+      }
+
+      .nav li { margin: 0; flex-shrink: 0; }
+
+      .nav button {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.72rem;
+        white-space: nowrap;
+      }
+
+      .main { margin-left: 0; padding: 1.25rem; }
+      .vocab-grid { grid-template-columns: 1fr; }
+      .audio-player { flex-wrap: wrap; }
+      .audio-waveform { display: none; }
+    }
+    /* ── FIREWORK 1: SESSION TIMER ────────────────────────── */
+    .session-timer {
+      position: fixed;
+      top: 1.5rem;
+      left: calc(240px + 1.5rem);
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      color: var(--soul);
+      text-transform: uppercase;
+      z-index: 9998;
+      opacity: 0.8;
+      transition: opacity 0.3s;
+    }
+
+    /* ── FIREWORK 2: PULSE RING ON ACTIVE ROOM ────────────── */
+    .nav button.active::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 3px;
+      height: 60%;
+      background: linear-gradient(180deg, var(--gold), var(--soul));
+      border-radius: 0 3px 3px 0;
+      animation: pulseRing 2s ease-in-out infinite;
+    }
+
+    .nav button { position: relative; }
+
+    @keyframes pulseRing {
+      0%, 100% { opacity: 0.7; }
+      50% { opacity: 1; }
+    }
+
+    /* ── FIREWORK 3: SCROLL PROGRESS INDICATOR ────────────── */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 240px;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold), var(--soul));
+      z-index: 9997;
+      transform-origin: left;
+      transform: scaleX(0);
+      transition: transform 0.1s linear;
+    }
+
+    /* ── FIREWORK 4: MAGNETIC HOVER GLOW ──────────────────── */
+    .card::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at center, rgba(245,158,11,0.03), transparent 60%);
+      opacity: 0;
+      transition: opacity 0.4s;
+      pointer-events: none;
+    }
+
+    .card:hover::after { opacity: 1; }
+
+    /* ── FIREWORK 5: KEYBOARD HINT BADGE ─────────────────── */
+    .kbd-hint {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.65rem;
+      color: var(--white-40);
+      margin-top: 0.5rem;
+      font-family: 'Orbitron', sans-serif;
+      letter-spacing: 0.08em;
+    }
+
+    /* ── FIREWORK 6: LETTER SPACING ANIMATION ─────────────── */
+    .brand-animate {
+      display: inline-block;
+      animation: letterSpread 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      opacity: 0;
+    }
+
+    @keyframes letterSpread {
+      from {
+        opacity: 0;
+        transform: scale(0.8);
+        filter: blur(4px);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+        filter: blur(0);
+      }
+    }
+
+    /* ── FIREWORK 7: GLASS HOVER SHEEN ────────────────────── */
+    .card:hover {
+      background: rgba(255,255,255,0.04);
+    }
+
+    /* ── FIREWORK 8: VOICE LOADING SKELETON ────────────────── */
+    .skeleton {
+      background: linear-gradient(90deg, rgba(255,255,255,0.03) 25%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.03) 75%);
+      background-size: 200% 100%;
+      animation: skeletonWave 1.5s ease-in-out infinite;
+      border-radius: 6px;
+    }
+
+    @keyframes skeletonWave {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    /* ── FIREWORK 9: CUSTOM SCROLLBAR ──────────────────────── */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.06); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.12); }
+
+    /* ── FIREWORK 10: SELECTION STYLE ──────────────────────── */
+    ::selection {
+      background: rgba(245,158,11,0.3);
+      color: var(--white);
+    }
+
+    /* ── FIREWORK 11: ROOM TRANSITION CURVE ───────────────── */
+    .room {
+      animation: roomFadeIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    /* ── FIREWORK 12: CURSOR TRAIL ON DESKTOP ──────────────── */
+    .cursor-glow {
+      position: fixed;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(168,85,247,0.04), transparent 70%);
+      pointer-events: none;
+      z-index: 1;
+      transform: translate(-50%, -50%);
+      transition: transform 0.15s ease-out;
+      opacity: 0;
+    }
+
+    body:hover .cursor-glow { opacity: 1; }
+
+    @media (max-width: 768px) {
+      .cursor-glow, .session-timer { display: none; }
+      .scroll-progress { left: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="g999-top">GOSPEL 999</div>
+  <div class="g999-corner">SEALED · ACTIVE · ETERNAL</div>
+  <div class="scroll-progress" id="scrollProgress"></div>
+  <div class="session-timer" id="sessionTimer">00:00:00</div>
+  <div class="cursor-glow" id="cursorGlow"></div>
+
+  <!-- SIDEBAR -->
+  <nav class="sidebar">
+    <div class="sidebar-brand">
+      <h1>OKTAVA</h1>
+      <p>English Class</p>
+    </div>
+    <ul class="nav" id="nav">
+      <li><button data-room="dashboard" class="active"><span class="nav-icon">◉</span>Dashboard</button></li>
+      <li><button data-room="feedback"><span class="nav-icon">◆</span>Feedback</button></li>
+      <li><button data-room="principles"><span class="nav-icon">◆</span>Principles</button></li>
+      <li><button data-room="vocab"><span class="nav-icon">◈</span>Vocabulary</button></li>
+      <li><button data-room="listening"><span class="nav-icon">◎</span>Listening</button></li>
+      <li><button data-room="speaking"><span class="nav-icon">◉</span>Speaking</button></li>
+      <li><button data-room="progress"><span class="nav-icon">◆</span>Progress</button></li>
+      <li><button data-room="tasks"><span class="nav-icon">◈</span>Tasks</button></li>
+      <li><button data-room="notes"><span class="nav-icon">◎</span>Class Notes</button></li>
+    </ul>
+    <div class="sidebar-footer">
+      <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
+  </nav>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- DASHBOARD -->
+    <div class="room active" id="room-dashboard">
+      <div class="room-header">
+        <h2>Dashboard</h2>
+        <p>Session 1 · June 29, 2026 · 90 minutes</p>
+      </div>
+
+      <div class="card">
+        <h3>Today's Focus</h3>
+        <p class="lead">KISS — Keep It Simple, Stupid. Native speakers use as few words as possible to communicate. So do you in Vietnamese. Same rule in English.</p>
+        <div class="callout callout-kiss"><strong>KISS.</strong> Simple sentences beat complex ones every time. Not broken English — efficient English.</div>
+      </div>
+
+      <div class="card">
+        <h3>Session Score</h3>
+        <div class="progress-row">
+          <span class="progress-label">Participation</span>
+          <div class="progress-bar"><div class="progress-fill" style="width: 82%"></div></div>
+          <span class="progress-pct">82%</span>
+        </div>
+        <div class="progress-row">
+          <span class="progress-label">Vocabulary Used</span>
+          <div class="progress-bar"><div class="progress-fill" style="width: 44%"></div></div>
+          <span class="progress-pct">7/16</span>
+        </div>
+        <div class="progress-row">
+          <span class="progress-label">Questions Asked</span>
+          <div class="progress-bar"><div class="progress-fill" style="width: 60%"></div></div>
+          <span class="progress-pct">12</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Next Class Prep</h3>
+        <p style="font-size:0.88rem; color:var(--white-80); line-height:1.7;">
+          You will be paired for the next session. <strong>Extroverts: you are responsible for your introverted partner.</strong> Every time you speak, you must bring them in.
+        </p>
+      </div>
+    </div>
+
+    <!-- PRINCIPLES -->
+    <div class="room" id="room-principles">
+      <div class="room-header">
+        <h2>Forever Foundations</h2>
+        <p>Core principles — not memorization, acquisition</p>
+      </div>
+
+      <div class="card">
+        <h3>The Foundation</h3>
+        <div class="callout callout-voice"><strong>This is not feedback for Session 1.</strong> These are foundational pillars of how to acquire a language naturally — not superficial methods that dominate Vietnamese ESL.</div>
+        <p style="font-size:0.9rem; color:var(--white-80); line-height:1.7; margin-top:1rem;">
+          Do not rush. These are fundamentals. If you dig your foundations deep, <strong>English will be acquired as part of you.</strong>
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Two Brains, No Mixing</h3>
+        <p style="font-size:0.88rem; color:var(--white-80); line-height:1.7; margin-bottom:1rem;">
+          You have a Vietnamese brain and an English brain. They do not mix. If your right arm is weaker than your left and you always use your strong arm to "help" the weak one, the weak arm never improves. Same rule here.
+        </p>
+        <div class="callout callout-kiss"><strong>Rule #1 — Two brains, no mixing.</strong> No Vietnamese — speaking, thinking, reading, or writing — during class or home study. No exceptions.</div>
+      </div>
+
+      <div class="card">
+        <h3>The Answer Formula</h3>
+        <div class="callout callout-kiss"><strong>Rule #2 — Answer + one detail + ask back.</strong> "Yes" is not an answer. "Yes, I like street food because it's cheap" is an answer. Then ask: "What about you?"</div>
+      </div>
+
+      <div class="card">
+        <h3>Active Listening</h3>
+        <p style="font-size:0.88rem; color:var(--white-80); line-height:1.7; margin-bottom:1rem;">
+          Active listening is not just words. It is tone of voice, what is not being said, facial expressions, hand gestures, all non-verbal communication, and situational context.
+        </p>
+        <div class="callout callout-voice"><strong>Rule #3 — Listen to what you know.</strong> You focus on the one word you missed and miss the whole point. If you understand 60%, keep going.</div>
+      </div>
+
+      <div class="card">
+        <h3>Daily Input</h3>
+        <div class="callout callout-kiss"><strong>Rule #4 — One hour of English input every day.</strong> Week 1: 20 min, builds to 60. English subtitles only. Vietnamese subtitles are forbidden. Notebooks banned during this time.</div>
+      </div>
+    </div>
+
+    <!-- VOCABULARY -->
+    <div class="room" id="room-vocab">
+      <div class="room-header">
+        <h2>Vocabulary Lab</h2>
+        <p>16 words from this session</p>
+      </div>
+
+      <div class="card">
+        <h3>Words from Session 1</h3>
+        <p style="font-size:0.8rem; color:var(--white-40); margin-bottom:1.2rem;">7 used live · 9 to practice before next class</p>
+        <div class="vocab-grid" id="vocab-grid"></div>
+      </div>
+    </div>
+
+    <!-- LISTENING -->
+    <div class="room" id="room-listening">
+      <div class="room-header">
+        <h2>Listening Lab</h2>
+        <p>Train your ear to catch what matters</p>
+      </div>
+
+      <div class="card">
+        <h3>The "How the heck are you" Test</h3>
+        <p class="lead">Canadian speed: "How the heck are you?" Your brain should focus on what you <em>do</em> know — "how... are you" — and treat "heck" as slang noise.</p>
+        <div class="callout callout-voice"><strong>The mistake:</strong> 80–90% of Vietnamese learners hear only "THE HECK" and panic. They miss the one thing they actually understood.</div>
+      </div>
+
+      <div class="card">
+        <h3>20% Comprehension is Enough</h3>
+        <p style="font-size:0.88rem; color:var(--white-80); line-height:1.7; margin-bottom:1rem;">
+          When you master this skill, you can completely miss individual words and still grasp the overall meaning. You can piece together sentences from the parts you know, body language, and context.
+        </p>
+        <div class="callout callout-kiss"><strong>The power:</strong> With as little as 20–30% comprehension, you can understand the full picture.</div>
+      </div>
+
+      <div class="card">
+        <h3>Daily Listening Rules</h3>
+        <ul class="rules">
+          <li><strong>English subtitles only.</strong> Vietnamese subtitles activate your Vietnamese brain. That is the opposite of what you are here to do.</li>
+          <li><strong>60% comprehension minimum.</strong> Below 60%? Switch to easier content. Above 80%? Level up.</li>
+          <li><strong>No notebooks.</strong> You are building comprehension, not a vocabulary list. Let context carry meaning.</li>
+          <li><strong>Keep moving.</strong> If you hear a word 4–5 times across different situations, that is a useful word. Once? Let it go.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- SPEAKING -->
+    <div class="room" id="room-speaking">
+      <div class="room-header">
+        <h2>Speaking Practice</h2>
+        <p>Open questions → listen → follow up → repeat</p>
+      </div>
+
+      <div class="card">
+        <h3>The Loop That Works</h3>
+        <div class="callout callout-kiss"><strong>Open question → listen → follow up → listen → follow up.</strong> This is the cycle. Every answer contains at least three more questions. The most powerful word in English is <strong>Why.</strong></div>
+      </div>
+
+      <div class="card">
+        <h3>WWWWH — Your Follow-Up Weapon</h3>
+        <p style="font-size:0.88rem; color:var(--white-80); line-height:1.7; margin-bottom:1rem;">
+          Who, What, Where, When, How, Why. Every answer contains at least three more questions. When you find the <strong>why</strong>, you have found their passion. And when you have found their passion, you can talk for hours.
+        </p>
+        <ul class="rules">
+          <li><strong>Closed:</strong> "Do you like food?" → "Yes." End of conversation.</li>
+          <li><strong>Open:</strong> "What is your favorite food and why?" → A world of follow-ups.</li>
+          <li><strong>Scripts = stagnant.</strong> You are waiting for your turn to deliver what you wrote earlier, instead of following the conversation where it goes.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>The Fear</h3>
+        <p class="lead">The most common fear: "I will run out of questions." The solution is not a longer list. The solution is to stop being afraid of running out of questions.</p>
+        <div class="callout callout-voice"><strong>Everybody's favorite topic is themselves.</strong> Even people who seem selfless — they are selfless because it makes <em>them</em> feel good. This is not selfishness. This is life.</div>
+      </div>
+    </div>
+
+    <!-- PROGRESS -->
+    <div class="room" id="room-progress">
+      <div class="room-header">
+        <h2>Progress Tracker</h2>
+        <p>Your English journey, step by step</p>
+      </div>
+
+      <div class="card">
+        <h3>Session 1 Metrics</h3>
+        <div class="progress-row">
+          <span class="progress-label">Vocabulary Used Live</span>
+          <div class="progress-bar"><div class="progress-fill" style="width: 44%"></div></div>
+          <span class="progress-pct">7/16</span>
+        </div>
+        <div class="progress-row">
+          <span class="progress-label">Open Questions</span>
+          <div class="progress-bar"><div class="progress-fill" style="width: 60%"></div></div>
+          <span class="progress-pct">12</span>
+        </div>
+        <div class="progress-row">
+          <span class="progress-label">Follow-Up Quality</span>
+          <div class="progress-bar"><div class="progress-fill" style="width: 35%"></div></div>
+          <span class="progress-pct">35%</span>
+        </div>
+        <div class="progress-row">
+          <span class="progress-label">Vietnamese Brain Intrusion</span>
+          <div class="progress-bar"><div class="progress-fill" style="width: 25%; background: rgba(239,68,68,0.6)"></div></div>
+          <span class="progress-pct">25%</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Streak</h3>
+        <p style="font-size:0.88rem; color:var(--white-80); line-height:1.7; margin-bottom:1rem;">Never miss 3 days in a row. <strong>One day off: fine. Two days: bad. Three days: starting over.</strong></p>
+        <div class="progress-row">
+          <span class="progress-label">Daily Input Streak</span>
+          <div class="progress-bar"><div class="progress-fill" style="width: 85%; background: var(--gold)"></div></div>
+          <span class="progress-pct">12 days</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- TASKS -->
+    <div class="room" id="room-tasks">
+      <div class="room-header">
+        <h2>Before Next Class</h2>
+        <p>Your only prep — keep it tight</p>
+      </div>
+
+      <div class="card">
+        <h3>5 Tasks, Zero Excuses</h3>
+        <ol class="actions">
+          <li><strong>One topic.</strong> Choose something you care about. Know 3 things about it. That is your only prep.</li>
+          <li><strong>20 minutes of English input daily.</strong> Cooking, driving, makeup. English subtitles only. This is the most important thing you can do.</li>
+          <li><strong>WWWWH on 2 news stories.</strong> Write WHO, WHAT, WHERE, WHEN, WHY. Trains real questions — not memorized answers.</li>
+          <li><strong>Never miss 3 days in a row.</strong> One day off: fine. Two days: bad. Three days: starting over.</li>
+          <li><strong>60% comprehension minimum.</strong> Below 60%? Switch to easier content. Above 80%? Level up.</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- CLASS NOTES — NEW ROOM -->
+    <div class="room" id="room-notes">
+      <div class="room-header">
+        <h2>Class Notes</h2>
+        <p>Session 1 · June 29, 2026 · Raw recording + transcript</p>
+      </div>
+
+      <div class="card">
+        <h3>Class Recording</h3>
+        <div class="audio-player">
+          <button class="play-btn" id="playBtn" aria-label="Play recording">▶</button>
+          <div class="audio-info">
+            <div class="audio-title">Session 1 — June 29, 2026</div>
+            <div class="audio-meta">90 min · 16 words · 7 used live</div>
+          </div>
+          <div class="audio-waveform" id="waveform"></div>
+        </div>
+        <audio id="classAudio" preload="none" style="display:none;">
+          <source src="Voice260629_174541.m4a" type="audio/mp4">
+        </audio>
+      </div>
+
+      <div class="card">
+        <h3>Raw Transcript</h3>
+        <p style="font-size:0.8rem; color:var(--white-40); margin-bottom:1rem;">Verbatim, no edits, no filters</p>
+        <div class="transcript" id="transcript">Loading transcript...</div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- TOAST CONTAINER -->
+  <div class="toast-container" id="toasts"></div>
+
+  <script>
+    // ── AUTH GUARD ──────────────────────────────────────────
+    if (sessionStorage.getItem('oktava_auth') !== '1') {
+      window.location.replace('index.html');
+    }
+
+    function logout() {
+      sessionStorage.removeItem('oktava_auth');
+      window.location.replace('index.html');
+    }
+
+    // ── ROOM NAVIGATION ─────────────────────────────────────
+    const navButtons = document.querySelectorAll('.nav button[data-room]');
+    const rooms = document.querySelectorAll('.room');
+
+    navButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.dataset.room;
+
+        navButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        rooms.forEach(r => r.classList.remove('active'));
+        const room = document.getElementById('room-' + target);
+        if (room) room.classList.add('active');
+
+        // Scroll to top on room change
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+
+    // ── KEYBOARD NAVIGATION ─────────────────────────────────
+    const roomOrder = ['dashboard', 'principles', 'vocab', 'listening', 'speaking', 'progress', 'tasks', 'notes'];
+    document.addEventListener('keydown', (e) => {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+      const current = document.querySelector('.nav button.active');
+      const currentIdx = roomOrder.indexOf(current?.dataset.room);
+
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+        e.preventDefault();
+        const next = roomOrder[(currentIdx + 1) % roomOrder.length];
+        const btn = document.querySelector(`[data-room="${next}"]`);
+        if (btn) btn.click();
+      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+        e.preventDefault();
+        const prev = roomOrder[(currentIdx - 1 + roomOrder.length) % roomOrder.length];
+        const btn = document.querySelector(`[data-room="${prev}"]`);
+        if (btn) btn.click();
+      }
+    });
+
+    // FIREWORK 5: keyboard hints on nav
+    document.querySelectorAll('.nav button[data-room]').forEach((btn, idx) => {
+      const hint = document.createElement('span');
+      hint.className = 'kbd-hint';
+      hint.textContent = `◂ ▸`;
+      hint.style.opacity = '0.4';
+      btn.appendChild(hint);
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+      const current = document.querySelector('.nav button.active');
+      const currentIdx = roomOrder.indexOf(current?.dataset.room);
+
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+        e.preventDefault();
+        const next = roomOrder[(currentIdx + 1) % roomOrder.length];
+        const btn = document.querySelector(`[data-room="${next}"]`);
+        if (btn) btn.click();
+      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+        e.preventDefault();
+        const prev = roomOrder[(currentIdx - 1 + roomOrder.length) % roomOrder.length];
+        const btn = document.querySelector(`[data-room="${prev}"]`);
+        if (btn) btn.click();
+      }
+    });
+
+    // ── VOCAB DATA ──────────────────────────────────────────
+    const vocabData = [
+      { word: "border", meaning_vi: "biên giới", used: true, context: "Western countries open their borders, Vietnam takes care of theirs", ts: "01:24" },
+      { word: "visa", meaning_vi: "visa", used: true, context: "Thailand easier, Canada harder", ts: "30:35" },
+      { word: "street food", meaning_vi: "đồ ăn đường phố", used: true, context: "Canada has zero, Vietnam has it everywhere", ts: "10:16" },
+      { word: "motorbike", meaning_vi: "xe máy", used: true, context: "Crashed in Hai Phong, no signal in Vietnam", ts: "13:38" },
+      { word: "signal", meaning_vi: "bật xi-nhan", used: true, context: "Canada: signal + shoulder check. Vietnam: just go", ts: "13:53" },
+      { word: "pickleball", meaning_vi: "pickleball", used: false, context: "Tennis for people who are not super athletic", ts: "48:10" },
+      { word: "rock climbing", meaning_vi: "leo tường", used: false, context: "Indoor wall climbing, want membership", ts: "49:00" },
+      { word: "hiking", meaning_vi: "đi bộ đường dài", used: false, context: "2000m mountain, 3 hours", ts: "51:01" },
+      { word: "bear spray", meaning_vi: "xịt chống gấu", used: false, context: "Japanese family shot their own family by mistake", ts: "47:31" },
+      { word: "Tet holiday", meaning_vi: "Tết Nguyên Đán", used: true, context: "Exhausting, sleep on table beside grandma", ts: "55:11" },
+      { word: "snow", meaning_vi: "tuyết", used: true, context: "Minus 40 in Canada, evil not romantic", ts: "57:09" },
+      { word: "community", meaning_vi: "cộng đồng", used: false, context: "Vietnam has community, Canada is lonely", ts: "18:36" },
+      { word: "food poisoning", meaning_vi: "ngộ độc thực phẩm", used: false, context: "Bangmee in Saigon", ts: "22:38" },
+      { word: "bun cha", meaning_vi: "bún chả", used: false, context: "Second favorite food", ts: "23:14" },
+      { word: "durian", meaning_vi: "sầu riêng", used: false, context: "First time in ice cream, tasted like gas", ts: "24:27" },
+      { word: "knee", meaning_vi: "đầu gối", used: false, context: "Pickleball bad for knee", ts: "67:16" }
+    ];
+
+    function escapeHtml(t) { return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+    const grid = document.getElementById('vocab-grid');
+    if (grid) {
+      vocabData.forEach(function(v) {
+        const div = document.createElement('div');
+        div.className = 'vocab';
+        const badge = v.used
+          ? '<span class="badge">USED</span>'
+          : '<span class="badge badge-practice">PRACTICE</span>';
+        div.innerHTML =
+          '<div class="word">' + v.word + badge + '</div>' +
+          '<div class="meaning">' + v.meaning_vi + '</div>' +
+          '<div class="context">"' + escapeHtml(v.context) + '"</div>' +
+          '<div class="ts">' + v.ts + '</div>';
+        grid.appendChild(div);
+      });
+    }
+
+    // ── AUDIO PLAYER ────────────────────────────────────────
+    const audio = document.getElementById('classAudio');
+    const playBtn = document.getElementById('playBtn');
+    let isPlaying = false;
+
+    if (playBtn && audio) {
+      playBtn.addEventListener('click', () => {
+        if (isPlaying) {
+          audio.pause();
+          playBtn.textContent = '▶';
+          isPlaying = false;
+        } else {
+          audio.play().catch(() => {
+            showToast('Audio file not found — upload to CANON/EVIDENCE/AUDIO/', 'info');
+          });
+          playBtn.textContent = '❚❚';
+          isPlaying = true;
+        }
+      });
+
+      audio.addEventListener('ended', () => {
+        playBtn.textContent = '▶';
+        isPlaying = false;
+      });
+    }
+
+    // Fake waveform bars (visual only, reliable)
+    const waveform = document.getElementById('waveform');
+    if (waveform) {
+      for (let i = 0; i < 40; i++) {
+        const bar = document.createElement('div');
+        bar.className = 'waveform-bar';
+        bar.style.left = (i * 8 + 4) + 'px';
+        bar.style.animationDelay = (i * 0.05) + 's';
+        bar.style.height = (20 + Math.random() * 60) + '%';
+        waveform.appendChild(bar);
+      }
+    }
+
+    // ── TRANSCRIPT LOADER ───────────────────────────────────
+    const transcriptEl = document.getElementById('transcript');
+    if (transcriptEl) {
+      fetch('2026-06-29-transcript.txt')
+        .then(r => r.text())
+        .then(t => { transcriptEl.textContent = t; })
+        .catch(() => {
+          transcriptEl.textContent = 'Transcript not available. Raw file expected at:\n2026-06-29-transcript.txt';
+        });
+    }
+
+    // ── TOAST SYSTEM ────────────────────────────────────────
+    function showToast(message, type = 'info') {
+      const container = document.getElementById('toasts');
+      const toast = document.createElement('div');
+      toast.className = `toast toast-${type}`;
+      toast.innerHTML = `
+        <div class="toast-icon">${type === 'success' ? '✓' : 'ℹ'}</div>
+        <div class="toast-message">${message}</div>
+      `;
+      container.appendChild(toast);
+
+      setTimeout(() => {
+        toast.classList.add('removing');
+        setTimeout(() => toast.remove(), 300);
+      }, 4000);
+    }
+
+    // Welcome toast on load
+    setTimeout(() => showToast('Welcome back. 7 of 16 vocab words used live last session.', 'success'), 800);
+
+    // ── LIVE CLOCK ──────────────────────────────────────────
+    setInterval(() => {
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false });
+      const meta = document.querySelector('.room-header p');
+      if (meta && document.getElementById('room-dashboard').classList.contains('active')) {
+        meta.textContent = `Session 1 · June 29, 2026 · ${timeStr}`;
+      }
+    }, 1000);
+
+    // ── PROGRESS BAR ANIMATION ──────────────────────────────
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const fills = entry.target.querySelectorAll('.progress-fill');
+          fills.forEach(fill => {
+            const width = fill.style.width;
+            fill.style.width = '0%';
+            requestAnimationFrame(() => {
+              fill.style.width = width;
+            });
+          });
+        }
+      });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll('.card').forEach(card => observer.observe(card));
+
+    // FIREWORK 3: Scroll progress indicator
+    const scrollProgress = document.getElementById('scrollProgress');
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = docHeight > 0 ? scrollTop / docHeight : 0;
+      if (scrollProgress) {
+        scrollProgress.style.transform = `scaleX(${pct})`;
+      }
+    }, { passive: true });
+
+    // FIREWORK 1: Session timer
+    const sessionTimer = document.getElementById('sessionTimer');
+    let sessionStart = Date.now();
+    setInterval(() => {
+      const elapsed = Date.now() - sessionStart;
+      const h = Math.floor(elapsed / 3600000).toString().padStart(2, '0');
+      const m = Math.floor((elapsed % 3600000) / 60000).toString().padStart(2, '0');
+      const s = Math.floor((elapsed % 60000) / 1000).toString().padStart(2, '0');
+      if (sessionTimer) sessionTimer.textContent = `${h}:${m}:${s}`;
+    }, 1000);
+
+    // FIREWORK 12: Cursor glow (desktop only)
+    const cursorGlow = document.getElementById('cursorGlow');
+    if (cursorGlow && window.matchMedia('(min-width: 769px)').matches) {
+      document.addEventListener('mousemove', (e) => {
+        cursorGlow.style.left = e.clientX + 'px';
+        cursorGlow.style.top = e.clientY + 'px';
+      }, { passive: true });
+    }
+
+    // FIREWORK 6: Letter spread on brand
+    const brandH1 = document.querySelector('.sidebar-brand h1');
+    if (brandH1) {
+      const text = brandH1.textContent;
+      brandH1.textContent = '';
+      text.split('').forEach((char, i) => {
+        const span = document.createElement('span');
+        span.className = 'brand-animate';
+        span.textContent = char;
+        span.style.animationDelay = (i * 0.08) + 's';
+        brandH1.appendChild(span);
+      });
+    }
+  </script>
+</body>
+</html>

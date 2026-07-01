@@ -1,0 +1,18 @@
+[
+  { "word": "border", "meaning_vi": "biên giới", "used_by_student": true, "student_attempted": true, "context": "Western countries open their borders, Vietnam takes care of theirs", "first_ts": "01:24", "priority": "P0" },
+  { "word": "visa", "meaning_vi": "visa", "used_by_student": true, "student_attempted": true, "context": "Visa more difficult for some countries, Thailand easier", "first_ts": "30:35", "priority": "P0" },
+  { "word": "street food", "meaning_vi": "đồ ăn đường phố", "used_by_student": true, "student_attempted": true, "context": "Canada has no street food, Vietnam has it everywhere, very cheap", "first_ts": "10:16", "priority": "P0" },
+  { "word": "motorbike", "meaning_vi": "xe máy", "used_by_student": true, "student_attempted": true, "context": "Crashed motorbike in Hai Phong, no signal/check in Vietnam", "first_ts": "13:38", "priority": "P0" },
+  { "word": "signal", "meaning_vi": "bật xi-nhan / ra hiệu", "used_by_student": true, "student_attempted": true, "context": "In Vietnam they never signal, in Canada you signal and shoulder check", "first_ts": "13:53", "priority": "P0" },
+  { "word": "pickleball", "meaning_vi": "pickleball (môn thể thao)", "used_by_student": false, "student_attempted": false, "context": "Like tennis but for people who are not super athletic", "first_ts": "48:10", "priority": "P0" },
+  { "word": "rock climbing", "meaning_vi": "leo núi / leo tường", "used_by_student": false, "student_attempted": false, "context": "Indoor wall climbing, want to get a membership next place", "first_ts": "49:00", "priority": "P0" },
+  { "word": "hiking", "meaning_vi": "đi bộ đường dài", "used_by_student": false, "student_attempted": false, "context": "Student's hobby, 2000m mountain, 3 hours", "first_ts": "51:01", "priority": "P0" },
+  { "word": "bear spray", "meaning_vi": "chống gấu (xịt)", "used_by_student": false, "student_attempted": false, "context": "Japanese family shot their own family with it by mistake", "first_ts": "47:31", "priority": "P1" },
+  { "word": "Tet holiday", "meaning_vi": "Tết Nguyên Đán", "used_by_student": true, "student_attempted": true, "context": "Exhausting, have to visit grandma's house, sleep on table", "first_ts": "55:11", "priority": "P1" },
+  { "word": "snow", "meaning_vi": "tuyết", "used_by_student": true, "student_attempted": true, "context": "Minus 40 in Canada, water in nose turns to ice, evil not romantic", "first_ts": "57:09", "priority": "P1" },
+  { "word": "community", "meaning_vi": "cộng đồng", "used_by_student": false, "student_attempted": false, "context": "Vietnam has community, Canada is lonely, you don't talk to neighbors", "first_ts": "18:36", "priority": "P1" },
+  { "word": "food poisoning", "meaning_vi": "ngộ độc thực phẩm", "used_by_student": false, "student_attempted": false, "context": "Got food poisoning from Bangmee in Saigon, even Vietnam stomach not strong enough", "first_ts": "22:38", "priority": "P1" },
+  { "word": "bun cha", "meaning_vi": "bún chả", "used_by_student": false, "student_attempted": false, "context": "Second favorite food, bun cha with spring roll, quite yummy", "first_ts": "23:14", "priority": "P1" },
+  { "word": "durian", "meaning_vi": "sầu riêng", "used_by_student": false, "student_attempted": false, "context": "First time in ice cream, tasted like gas/gasoline, can eat if dying", "first_ts": "24:27", "priority": "P1" },
+  { "word": "knee", "meaning_vi": "đầu gối", "used_by_student": false, "student_attempted": false, "context": "Pickleball bad for knee, Vietnamese people have knee problems from sitting like that", "first_ts": "67:16", "priority": "P1" }
+]

@@ -1,0 +1,31 @@
+{
+  "version": "1.0.0",
+  "created": "2026-07-01T07:12:00+07:00",
+  "authority": "SOV100_MICHAEL_HOBBS",
+  "total_entries": 2,
+  "categories": ["marketing", "methodology", "teaching", "app-architecture"],
+  "entries": [
+    {
+      "id": "dna-001",
+      "title": "Oktava Teaching Methodology & Market Position",
+      "category": "teaching",
+      "tags": ["oktava", "vietnamese-students", "class-rules", "kiss", "two-brains", "scam-centers", "graduation-timeline"],
+      "source_run": 143,
+      "source_file": "RRL/RRL-143.txt",
+      "created_at": "2026-07-01T07:12:00+07:00",
+      "merkle_short": "run143-methodology",
+      "file": "oktava-teaching-methodology.json"
+    },
+    {
+      "id": "dna-002",
+      "title": "OB App Architecture & Accountability Engine",
+      "category": "app-architecture",
+      "tags": ["ob-app", "streaks", "buddy-system", "spaced-repetition", "employer-dashboard", "multi-role-accountability"],
+      "source_run": 143,
+      "source_file": "RRL/RRL-143.txt",
+      "created_at": "2026-07-01T07:12:00+07:00",
+      "merkle_short": "run143-app-arch",
+      "file": "ob-app-architecture.json"
+    }
+  ]
+}

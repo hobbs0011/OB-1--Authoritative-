@@ -1,0 +1,45 @@
+{
+  "stage": "00",
+  "run": 144,
+  "timestamp": "2026-07-01T10:13:01+07:00",
+  "check_type": "audio_transcript_integrity",
+  "status": "VERIFIED",
+  "audio": {
+    "original_path": "C:/Users/mrmic/Downloads/38833FF26BA1D.UnigramPreview_g9c9v27vpyspw!App/Voice 260629_174541.m4a",
+    "deployed_path": "public/oktava-login/Voice260629_174541.m4a",
+    "exists": true,
+    "type": "audio/mp4",
+    "note": "Real class audio from Monday June 29 2026 Session 1"
+  },
+  "transcript": {
+    "primary": {
+      "file": "OPERATIONS/CLASS-INTEL/2026-06-29-class10/2026-06-29-transcript.txt",
+      "format": "timestamped_speaker_labeled",
+      "speaker_labels": ["0", "1", "2"],
+      "line_count": 1289,
+      "status": "ready_to_copy_to_public"
+    },
+    "raw_json": {
+      "file": "OPERATIONS/CLASS-INTEL/2026-06-29-class10/2026-06-29-raw.json",
+      "format": "deepgram_nova3",
+      "model": "general-nova-3",
+      "duration_seconds": 4436.928,
+      "size_chars": 161004,
+      "status": "available_for_alignment"
+    },
+    "run_log": {
+      "file": "OPERATIONS/CLASS-INTEL/2026-06-29-class10/run143-raw-transcript.txt",
+      "format": "mixed_session_log",
+      "note": "Contains system chatter, not pure class transcript. Not student-facing."
+    }
+  },
+  "path_fixes_applied": {
+    "audio_src": "CANON/EVIDENCE/AUDIO/Testing123.m4a → Voice260629_174541.m4a",
+    "transcript_fetch": "OPERATIONS/CLASS-INTEL/2026-06-29-class10/run143-raw-transcript.txt → 2026-06-29-transcript.txt"
+  },
+  "remaining_actions": [
+    "Copy 2026-06-29-transcript.txt to public/oktava-login/",
+    "Verify audio playback in all 8 browsers",
+    "Verify transcript loads in Class Notes tab"
+  ]
+}

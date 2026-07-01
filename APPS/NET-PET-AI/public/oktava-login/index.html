@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Oktava English Class</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Orbitron:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --void: #0f0f1a;
+      --soul: #a855f7;
+      --gold: #f59e0b;
+      --white: #ffffff;
+      --white-80: rgba(255,255,255,0.8);
+      --white-60: rgba(255,255,255,0.6);
+      --white-40: rgba(255,255,255,0.4);
+      --white-12: rgba(255,255,255,0.12);
+      --white-06: rgba(255,255,255,0.06);
+      --glass: rgba(255,255,255,0.04);
+      --glass-border: rgba(255,255,255,0.08);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--void);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* G999 MARKER — unmissable, elegant, eternal */
+    .g999-marker {
+      position: fixed;
+      top: 1.5rem;
+      right: 1.5rem;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      text-transform: uppercase;
+      opacity: 0.9;
+      z-index: 9999;
+      pointer-events: none;
+      text-shadow: 0 0 10px rgba(245,158,11,0.3);
+    }
+
+    .login-container {
+      background: var(--glass);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      padding: 3.5rem 3rem;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 30px 60px -15px rgba(0,0,0,0.6);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .login-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--white-12), transparent);
+    }
+
+    .login-container::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(168,85,247,0.2), transparent);
+    }
+
+    .logo {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .logo h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--white);
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+
+    .logo .subtitle {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      color: var(--white-40);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    .g999-badge {
+      display: inline-block;
+      margin-top: 1.2rem;
+      padding: 0.35rem 0.8rem;
+      border: 1px solid rgba(245,158,11,0.3);
+      border-radius: 100px;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      text-transform: uppercase;
+      background: rgba(245,158,11,0.05);
+    }
+
+    .error {
+      background: rgba(245,158,11,0.08);
+      border: 1px solid rgba(245,158,11,0.2);
+      border-radius: 12px;
+      padding: 0.875rem 1rem;
+      font-size: 0.8rem;
+      margin-bottom: 1.25rem;
+      display: none;
+      color: var(--gold);
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+    .error.visible { display: block; }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      display: block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--white-60);
+      margin-bottom: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    input {
+      width: 100%;
+      padding: 1rem 1.1rem;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--white-06);
+      border-radius: 12px;
+      color: var(--white);
+      font-size: 0.95rem;
+      font-family: 'Inter', sans-serif;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    input:focus {
+      outline: none;
+      border-color: var(--gold);
+      background: rgba(255,255,255,0.05);
+      box-shadow: 0 0 0 3px rgba(245,158,11,0.1);
+    }
+
+    input::placeholder { color: var(--white-40); }
+
+    button {
+      width: 100%;
+      padding: 1rem;
+      background: linear-gradient(135deg, rgba(245,158,11,0.9), rgba(168,85,247,0.9));
+      border: none;
+      border-radius: 12px;
+      color: var(--void);
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      margin-top: 0.75rem;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    button:hover::before {
+      left: 100%;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 30px -10px rgba(168,85,247,0.4);
+    }
+
+    button:active { transform: translateY(0); }
+
+    .footer {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 0.65rem;
+      color: var(--white-40);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    /* G999 fixed corner marker for operator */
+    .g999-corner {
+      position: fixed;
+      bottom: 1.5rem;
+      left: 1.5rem;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.55rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      color: rgba(168,85,247,0.5);
+      text-transform: uppercase;
+      z-index: 9999;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="g999-marker">GOSPEL 999</div>
+  <div class="g999-corner">SEALED · ACTIVE · ETERNAL</div>
+
+  <div class="login-container">
+    <div class="logo">
+      <h1>OKTAVA</h1>
+      <div class="subtitle">English Class</div>
+      <div class="g999-badge">G999 ACTIVE</div>
+    </div>
+    <div class="error" id="error">Invalid credentials. Please try again.</div>
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" placeholder="Enter username" autocomplete="username">
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Enter password" autocomplete="current-password">
+      </div>
+      <button type="submit">Sign In</button>
+    </form>
+    <div class="footer">Oktava English · Session Access</div>
+  </div>
+
+  <script>
+    (function() {
+      const FORM_KEY = 'oktava_auth';
+      const USERNAME = 'Oktava English Class';
+      const PASSWORD = 'KISS2026';
+
+      if (sessionStorage.getItem(FORM_KEY) === '1') {
+        window.location.replace('classroom.html');
+        return;
+      }
+
+      const form = document.getElementById('loginForm');
+      const error = document.getElementById('error');
+      const userField = document.getElementById('username');
+      const passField = document.getElementById('password');
+
+      userField.value = 'Oktava English Class';
+
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        error.classList.remove('visible');
+        const u = userField.value.trim();
+        const p = passField.value;
+        if (u === USERNAME && p === PASSWORD) {
+          sessionStorage.setItem(FORM_KEY, '1');
+          window.location.replace('classroom.html');
+        } else {
+          error.classList.add('visible');
+          passField.value = '';
+          passField.focus();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

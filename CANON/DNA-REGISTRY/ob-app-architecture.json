@@ -1,0 +1,63 @@
+{
+  "id": "dna-002",
+  "title": "OB App Architecture & Accountability Engine",
+  "category": "app-architecture",
+  "tags": ["ob-app", "streaks", "buddy-system", "spaced-repetition", "employer-dashboard", "multi-role-accountability"],
+  "source_run": 143,
+  "source_rrl": "RRL/RRL-143.txt",
+  "created_at": "2026-07-01T07:12:00+07:00",
+  "authority": "SOV100_MICHAEL_HOBBS",
+  "content": {
+    "core_features": [
+      {
+        "name": "AI Memory (not chatbot)",
+        "description": "Not just a chatbot that talks to you. It has a memory. It knows exactly what vocabulary you're working on and when to bring it up again. AI allows teacher to duplicate efforts and track spaced repetition of thousands of students simultaneously.",
+        "quote": "It's not just a chatbot that talks to you. It is meant to have a memory. And to know exactly what vocabulary you're working on and when to bring it up again."
+      },
+      {
+        "name": "Streak System",
+        "description": "Uninterrupted days of 1 hour practice: 45 min listening + 15 min speaking. Streaks drive consistency.",
+        "quote": "Streaks — uninterrupted days where you did your one hour of practice."
+      },
+      {
+        "name": "Buddy System",
+        "description": "Peer practice pairing at same level, 1x/week free practice (1 hour listening + speaking).",
+        "quote": "I have a buddy system where you speak with a fellow student at your level once a week, which is an hour right there of practice, listening and speaking. And it's free."
+      },
+      {
+        "name": "Multi-Role Accountability Dashboard",
+        "description": "Teacher, employer, parent, accountability partner can all track learner progress. Employer pays → employer gets login to see daily engagement.",
+        "quote": "Accountability not just to your teacher. But accountability to your boss. Your employer pays a bunch of money for you to do our program. They're going to get actual login for the boss or employer where they can log in and see the daily work of their employee."
+      },
+      {
+        "name": "Spaced Repetition (SRS)",
+        "description": "Backed by university studies and brain science. True key to acquiring language and vocabulary in a deep meaningful way. AI tracks individual student progression.",
+        "quote": "Spaced repetition is the true key to truly acquiring a language and acquiring vocabulary in a very deep meaningful way."
+      }
+    ],
+    "daily_practice_structure": {
+      "listening": "45 minutes active listening (podcast/YouTube, 60% comprehension minimum)",
+      "speaking": "15 minutes speaking with buddy or AI (Obi)",
+      "teacher_session": "Counts as full hour (already includes listening + speaking)",
+      "buddy_session": "1x/week counts as full hour",
+      "total_requirement": "1 hour per day, 5 days/week minimum"
+    },
+    "beta_plan": {
+      "approach": "Free beta users → collect data → testimonials after 6-12 months → investor pitch",
+      "current_burn": "~$100/month",
+      "scale_target": "~$1,000/month",
+      "quote": "I don't need huge investment. I only need enough. Like I've been building this whole app and this whole system for $100 a month. So if we scale that up to $1,000 a month, that would be probably more than enough."
+    },
+    "cultural_lever_vietnam": {
+      "mechanism": "Vietnamese fear of losing face drives compliance when accountability is public",
+      "quote": "Again, they really care about how they're perceived in public... they can avoid that foreign person and speaking with them, to avoid the embarrassment... When you take that and apply it to the app, and make the person accountable to their teacher, to their teaching assistant, to their peer, through the app, then it's a whole different ball game.",
+      "streak_psychology": "Never miss 3 days in a row. One day off: fine. Two days: bad. Three days: starting over."
+    },
+    "teaching_philosophy": {
+      "quote": "I'm a personal trainer first and your friend second. You're not going to like me at the end of it. But that's the point.",
+      "quote2": "My system is literally designed to not take any extra time out of your schedule. You can listen to a podcast for 15 minutes while you put on your makeup... while you cook a meal... while you're stuck in traffic.",
+      "quote3": "I want my students to graduate. I want my students to not need me anymore.",
+      "anti_scam_position": "Cheaper than your run of the mill average English center. 10 times even 100 times. Infinitely more effective than the alternative. And I want to get rich while doing it."
+    }
+  }
+}

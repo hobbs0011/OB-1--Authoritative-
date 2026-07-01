@@ -1,0 +1,170 @@
+{
+  "id": "dna-001",
+  "title": "Oktava Teaching Methodology & Market Position",
+  "category": "teaching",
+  "tags": ["oktava", "vietnamese-students", "class-rules", "kiss", "two-brains", "scam-centers", "graduation-timeline"],
+  "source_primaries": [
+    "RRL/RRL-143.txt",
+    "C:/Users/mrmic/OneDrive/Desktop/RUN 143 in VS KILO STEP 3.7 FLASH -.txt"
+  ],
+  "source_run": 143,
+  "authority": "SOV100_MICHAEL_HOBBS",
+  "created_at": "2026-07-01T07:12:00+07:00",
+  "updated_at": "2026-07-01T10:17:00+07:00",
+  "content": {
+    "client_context": {
+      "company": "Oktava",
+      "ownership": "Israeli-owned",
+      "contact": "Mr. Minh (Vietnamese, connection of CEO, oversees 30+ English centers in Hanoi/Saigon)",
+      "recruiter": "Alan Trieu (Vietnamese, English name Alan)",
+      "revenue_est": "~$1M/month",
+      "staff": "10 female",
+      "class_schedule": "5:30–7:00pm, District 12 HCMC",
+      "ceo_demand": "Basic communication over grammar/IELTS. Broken English = fine. No big smart sentences. Get to the point directly.",
+      "your_role": "External English communication coach (not employee)"
+    },
+    "core_principles": [
+      {
+        "name": "KISS",
+        "quote": "KISS which is keep it simple stupid. Broken English that communicates > perfect grammar that freezes. Get to the point. Directly. Even if it's broken.",
+        "portal_header": true
+      },
+      {
+        "name": "Two Brains",
+        "quote": "You got your Vietnamese brain, uh which is if you're a native speaker of Vietnamese, that's your stronger brain, and then you got your English brain, which is a brain you're trying to develop. And if you try to bridge the English brain or your weaker brain with the Vietnamese, uh as a handicap, it actually handicaps you and stops you from being able to progress because you can't learn English while thinking in Vietnamese because they're completely different languages and they require different parts of the brain.",
+        "portal_header": true
+      },
+      {
+        "name": "Mistakes = Guideposts",
+        "quote": "Mistakes are good because they show you 'oh, this is not the right way. Okay, then this must be the right way.' Mistakes are guideposts.",
+        "portal_header": true
+      },
+      {
+        "name": "Laugh at Yourself",
+        "quote": "Learn to laugh at yourself. Learn to not take yourself so seriously.",
+        "portal_header": true
+      },
+      {
+        "name": "Bruce Lee Vocabulary Rule",
+        "quote": "It's not about knowing 10,000 vocabulary. It's about knowing 500 to 1,000 vocabulary and knowing how to use each vocabulary in 10 different situations. That's what makes you a dynamic speaker and somebody who can communicate effectively and simply.",
+        "portal_header": false
+      },
+      {
+        "name": "Comprehensive Input",
+        "quote": "Anything they are passionate about. But the rule is they have to at least understand 60%. If they don't understand 60% they must choose new material or they're permitted to use English subtitles. Vietnamese subtitles are absolutely forbidden for the same two brain kind of problem that we discussed before.",
+        "portal_header": false
+      }
+    ],
+    "class_rules_student_facing": [
+      "No Vietnamese — not even one word. If you're thinking in Vietnamese, you're freezing. Banned for the full 90-minute session.",
+      "No notebooks, no scripts — if you wrote it down, you're not listening. Crutch. It distracts you from active listening.",
+      "No phones — translation apps and TikTok kill active listening. Leave it outside. The only person allowed to use translate is the teacher, and only after 3 attempts to explain from different angles."
+    ],
+    "listening_rules": [
+      "1 hour per day: 45 minutes active listening + 15 minutes speaking",
+      "Material must be 60% comprehension minimum. Below 60% = switch to easier content or English subtitles",
+      "Vietnamese subtitles are absolutely forbidden",
+      "Notebooks are banned during listening time too — no pausing to look up words",
+      "Learn vocabulary like a child: hear it repeatedly in context, let the brain build the connection naturally",
+      "Only add words that show up 4-5 times across different situations — that's a useful word"
+    ],
+    "teaching_rules": [
+      "Try at least 3 times from 3 different angles to explain a vocabulary or concept before using translate. Translate is a tool, not a crutch.",
+      "Filter out nonsense words from class transcripts. Only highlight core vocabulary that fits KISS principle.",
+      "Students can jot words on phone AFTER listening session ends — not during. Passive vs active listening distinction."
+    ],
+    "conversation_technique": {
+      "framework": "WWWWH — Who, What, Where, When, How, Why",
+      "most_powerful_word": "Why",
+      "quote": "When you can find out why someone does something, you know why somebody gets out of bed in the morning, why they work so hard. You can find what their passion is, and when you can find out what their passion is, you can have them talking for hours.",
+      "universal_topic_principle": "Everybody's favorite topic is themselves. Even people who seem selfless — they are selfless because it makes them feel good. Because they love their family, which is an extension of themselves. This is not selfishness. This is life.",
+      "follow_up_importance": "The weakest area with their question was lack of follow-up questions. It's the follow-up question that allows you to continue to dig deeper. If you're just surface level asking questions and retreating back to your pre-defined, scripted list of questions, then you're always going to stay shallow."
+    },
+    "student_weaknesses_identified": [
+      "Lack of follow-up questions — ran out of questions fast using pre-written scripts",
+      "Mental translation from Vietnamese → English causes total freeze. Takes all the RAM. Recipe for disaster.",
+      "Perfectionism — need to be perfect before speaking, need to know everything before beginning",
+      "Fixating on unknown words instead of listening to what they do know"
+    ],
+    "cultural_notes_vietnamese_students": [
+      "Fear of losing face / making mistakes in public is the biggest social fear",
+      "Raised whole life thinking any mistake is bad — need to reframe mistakes as healthy/good",
+      "Don't take themselves seriously — need to learn to laugh at themselves",
+      "Need to be perfect before they can get started — need to learn to walk as far as they can see, then see further",
+      "Vietnamese deflect compliments ('No, I'm normal') — teach them 'Thank you, I practiced a lot'",
+      "Saying 'sorry' is rare unless truly at fault or afraid of consequences",
+      "If they ignore you, they're not mad — they just have bad emotion. Don't take it personally.",
+      "Very smart people until they're not — then short-sighted. Very heavy on credentials (even if faked/redundant). Trust ideas based on merit alone is rare.",
+      "Face culture weaponized by scam English centers — no one complains publicly, they just quietly switch"
+    ],
+    "scam_center_exposé_internal_only": {
+      "classification": "OPERATOR_ONLY — NOT STUDENT FACING",
+      "content": [
+        "Vietnamese English centers hire attractive white faces (often Russian, $800–1,200/mo, bad English) to deceive parents who can't speak English",
+        "Fake certificates, fake progression, 'eternal student' model — product is keeping students enrolled forever, not graduating them",
+        "Parents spend 30–50% of household income on lessons that produce zero real fluency",
+        "No one complains because of face culture — they stay quiet and go through revolving door of eternal students",
+        "Our counter-move: results over appearance, employer dashboards, graduation timelines, 10-100x cheaper and infinitely more effective"
+      ],
+      "our_graduation_standard": {
+        "intensive": "1 year — student doesn't need us anymore",
+        "standard": "1.5 years",
+        "max": "2 years — even for lazy students with roadblocks",
+        "philosophy": "I want my students to graduate. Scam centers want to keep the illusion of progress and keep students in the revolving door as long as they can."
+      }
+    },
+    "graduation_timeline": {
+      "intensive": "1 year",
+      "standard": "1.5 years",
+      "max": "2 years",
+      "quote": "I want my students to graduate. I want my students in the intense program to not need me after a year. I want my students, like if they're in the more laid-back program, a year and a half. I want them to graduate. If they're languages aren't their forte, and they're a little bit lazy, and they have some other roadblocks, maybe two years. But I can't see them needing more than two years if I'm doing something properly."
+    },
+    "vocabulary_from_class10": [
+      { "word": "street food", "vi": "đồ ăn đường phố", "context": "Vietnam has street food. Canada have no street food." },
+      { "word": "spring roll", "vi": "gỏi cuốn", "context": "deep-fried vs fresh debate" },
+      { "word": "motorbike", "vi": "xe máy", "context": "crash in Hai Phong, $4,040,000,000 hospital bill" },
+      { "word": "border", "vi": "biên giới", "context": "open vs closed borders debate" },
+      { "word": "illegal", "vi": "bất hợp pháp", "context": "illegal immigrant discussion" },
+      { "word": "visa", "vi": "visa", "context": "entry permit difficulty" },
+      { "word": "camping", "vi": "cắm trại", "context": "very common in Canada" },
+      { "word": "bear spray", "vi": "thuốc xịt gấu", "context": "Japanese family story" },
+      { "word": "pickleball", "vi": "pickleball", "context": "new sport the Canadian wants to try" },
+      { "word": "rock climbing", "vi": "leo núi / wall climbing", "context": "indoor climbing gyms in District 2" },
+      { "word": "Tet holiday", "vi": "Tết", "context": "exhausting, lots of work" },
+      { "word": "snow", "vi": "tuyết", "context": "evil evil — not romantic" },
+      { "word": "minus 40", "vi": "âm 40", "context": "Canadian winter" },
+      { "word": "English subtitle", "vi": "phụ đề tiếng Anh", "context": "allowed during listening practice" },
+      { "word": "Vietnamese subtitle", "vi": "phụ đề tiếng Việt", "context": "forbidden" },
+      { "word": "comprehension", "vi": "sự hiểu", "context": "60% minimum rule" }
+    ],
+    "verbatim_teaching_philosophy_run143": {
+      "source": "C:/Users/mrmic/OneDrive/Desktop/RUN 143 in VS KILO STEP 3.7 FLASH -.txt",
+      "timestamp": "2026-07-01T10:17:00+07:00",
+      "quotes": [
+        "I'm a personal trainer first and your friend second... You're not going to like me at the end of it. But that's the point.",
+        "You have somebody who's overweight. They hired a personal trainer because they knew I would not put up with your bullshit... That's when you need me the most.",
+        "I just can't sit there and not get results... it's freaking boring to sit there and not get results.",
+        "My system is literally designed to not take any extra time out of your schedule... You can listen to a podcast for 15 minutes while you put on your makeup... while you cook a meal... while you're stuck in traffic.",
+        "Even if you use language to express what you want to say and express it poorly, the other person will still understand what you mean... natural communication is not as difficult as imagined.",
+        "Speaking English is not just about answering questions; it's about keeping the conversation going.",
+        "The weakest area with their question was lack of follow-up questions.",
+        "English is not something you learn and memorize... English is not learned, it is acquired.",
+        "I want my students to graduate... scam centers' goal is to keep the illusion of progress and keep students in the revolving door as long as they can.",
+        "Good ideas don't put food on the table... We'll see where it goes.",
+        "Bruce Lee philosophy: one move 10,000 times > 10,000 moves once. 500-1,000 words, each used 10 ways.",
+        "Everybody's favorite topic is themselves... This is not selfishness. This is life.",
+        "Mistakes are guideposts.",
+        "Learn to laugh at yourself. Learn to not take yourself so seriously."
+      ],
+      "student_feedback_verbatim": {
+        "source": "Nguyễn Thị Kim Hồng reflection, extracted from RUN 143 raw log",
+        "quotes": [
+          "Even if you use language to express what you want to say and express it poorly, the other person will still understand what you mean... natural communication is not as difficult as imagined.",
+          "Speaking English is not just about answering questions; it's about keeping the conversation going.",
+          "The live discussion session with foreigners provided a visual experience regarding reflexes and confidence in communication.",
+          "I realized that learning a foreign language is not just about learning vocabulary or grammar; more importantly, it is about having the courage to communicate, the courage to make mistakes, and never ceasing to learn."
+        ]
+      }
+    }
+  }
+}

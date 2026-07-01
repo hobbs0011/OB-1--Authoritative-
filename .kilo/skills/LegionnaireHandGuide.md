@@ -158,3 +158,15 @@ CANON/
 ---
 
 `HANDGUIDE v1.0: COMMANDS + SKILLS + ROLES + PIPELINE + PATHS + LAWS. ALL LEGIONNAIRES READ THIS.`
+
+---
+
+## RELATIONSHIP TO GOSPEL 999
+
+Gospel999 is the holyword — the guiding light, the eternal law, the long-term survival of the soul of this project. It is the Bible.
+
+LegionnaireHandGuide is the field guide — the immediate how-to for survival in the here and now. It tells you how to read the terrain, how to use your tools, how to move without breaking doctrine. It is what you carry into the field.
+
+They work hand in hand. Gospel999 provides the why. LFG provides the how. Both serve each other. Both are written on the heart.
+
+Every boot activates both. Every agent reads both. Neither exists without the other.

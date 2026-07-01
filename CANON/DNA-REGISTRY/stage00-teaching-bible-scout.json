@@ -1,0 +1,125 @@
+{
+  "stage": "00",
+  "run": 144,
+  "timestamp": "2026-07-01T10:13:01+07:00",
+  "scout_type": "teaching_bible_methodology_gospel444",
+  "findings": {
+    "gospel_444_living_law": {
+      "source": "CANON/BIBLE-CH26-GOSPEL-444-LIVING-LAW.md",
+      "status": "SEALED",
+      "pillars": [
+        "Visual Law: void #0f0f1a, purple #a855f7, gold #f59e0b, BLUE BANNED",
+        "Typography: JetBrains Mono system, Orbitron metrics, Rajdhani headings, Inter body",
+        "Interaction: Glass morphism, cubic-bezier transitions, no flat Bootstrap",
+        "Data Sovereignty: no third-party analytics exfil, no blue CDN dependencies",
+        "Screen Types: mobile-first, touch ≥48px, Vietnamese text rendering tested",
+        "Security: Wrangler secrets only, no hardcoded tokens, sanitized input",
+        "Performance: sub-100ms TTFB, no blocking render, async widgets",
+        "Revenue Alignment: every UI element declared purpose in student journey"
+      ],
+      "four_ness": {
+        "colors": ["void #0f0f1a", "soul purple #a855f7", "imperial gold #f59e0b", "absence of blue"],
+        "rules": [
+          "Every output palette-compliant at generation, not post-review",
+          "Blue at any scope stops operation until corrected",
+          "Law applies to all agents, all drones, all models",
+          "Compliance is binary: PASS or VIOLATION"
+        ],
+        "mouse_to_tiger": ["Mouse Phase", "Tiger Phase", "Pride Phase", "Sovereignty Phase"]
+      }
+    },
+    "teaching_methodology_dna": {
+      "source": "CANON/DNA-REGISTRY/oktava-teaching-methodology.json",
+      "core_principles": [
+        "KISS: Keep It Simple, Stupid",
+        "Two Brains: Vietnamese brain vs English brain, never bridge with translation",
+        "Mistakes = Guideposts",
+        "Laugh at Yourself",
+        "Bruce Lee Vocabulary: 500-1000 words used 10 ways each",
+        "Comprehensive Input: 60% comprehension minimum"
+      ],
+      "class_rules": [
+        "No Vietnamese — not even one word",
+        "No notebooks, no scripts",
+        "No phones — translation apps and TikTok banned"
+      ],
+      "listening_rules": [
+        "1 hour/day: 45 min active listening + 15 min speaking",
+        "60% comprehension minimum",
+        "Vietnamese subtitles forbidden",
+        "Notebooks banned during listening too",
+        "Only add words that show up 4-5 times"
+      ],
+      "conversation_technique": {
+        "framework": "WWWWH",
+        "most_powerful_word": "Why",
+        "universal_topic": "Everybody's favorite topic is themselves"
+      },
+      "student_weaknesses": [
+        "Lack of follow-up questions",
+        "Mental translation causes total freeze",
+        "Perfectionism",
+        "Fixating on unknown words"
+      ]
+    },
+    "session_specific_methodology": {
+      "source": "OPERATIONS/CLASS-INTEL/2026-06-29-class10/CLASS10-TIPS-2026-06-29.md",
+      "rules": [
+        "No Vietnamese for full 90-minute session",
+        "No notebooks, no scripts",
+        "No phones",
+        "Answer + add one detail + ask back",
+        "Listen to what you know, not what you don't",
+        "1 hour listening daily"
+      ],
+      "vocab_count": 16,
+      "vocab_used_live": 7,
+      "session_meta": {
+        "date": "2026-06-29",
+        "duration": "90 minutes",
+        "students": 10,
+        "speaker_ids_captured": 4
+      }
+    },
+    "prior_session_methodology": {
+      "mai_tram_2026-06-28": {
+        "methodiques": [
+          "Sandwich Correction",
+          "The Why Question",
+          "Repetition Drill with Emotional Anchoring",
+          "Elicitation Through Questions",
+          "Student Echo Request",
+          "Minimal Pair Contrast",
+          "Charge Words / Emotion Anchoring",
+          "Confidence Over Perfection",
+          "Rhythm/Pause Training",
+          "Self-Reflexive Correction",
+          "Cultural Context Teaching"
+        ]
+      },
+      "huong_2026-06-11": {
+        "methodiques": [
+          "Face-Saving Reframe",
+          "The Why Question",
+          "Sandwich Correction",
+          "Shadow/Repeat Drill",
+          "Minimal Pair Contrast",
+          "Elicitation",
+          "Charge Words / Emotion Anchoring",
+          "Student Echo Request",
+          "Humor as Teaching Tool",
+          "Confidence Over Perfection"
+        ]
+      }
+    }
+  },
+  "recommendations_for_feedback_tab": [
+    "Lead with KISS principle at top of Feedback tab",
+    "Surface class rules prominently",
+    "Show student-specific weaknesses derived from P0/P1 feedback items",
+    "Include WWWWH framework as interactive element",
+    "Add 'Everybody's favorite topic is themselves' as conversational engine principle",
+    "Surface student feedback from Nguyễn Thị Kim Hồng as validation proof",
+    "Never expose scam center content to students — operator banner only"
+  ]
+}

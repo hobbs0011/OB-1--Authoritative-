@@ -213,6 +213,8 @@ VECTOR: {activeMission}
 BLOCKERS: {openFlagsCount} open
 DEAD-ENDS LOADED: {negativeCount}
 FIDELITY: RRL={rrl_fidelity} DNA={dna_fidelity} SOULKEYS={soykeyFidelity} S2Pipeline={pipelineFidelity}
+GOSPEL: loaded (Core 99 hardcoded in BOOT + full 999 at CANON/SYSTEM/GOSPEL-999.md)
+LFG: loaded (.kilo/skills/LegionnaireHandGuide.md)
 NEXT: {highest-priority zero-stage or gap}
 READY.
 ```

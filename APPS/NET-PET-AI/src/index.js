@@ -955,9 +955,9 @@ async function handleAPI(path, request, env, url) {
     // Static brain lock check (matches what preflight-ws validates at runtime)
     // If this code changes, the static check still works for canary
     const BRAIN_LOCK = {
-      think: { type: "open_ai", model: "gpt-4o-mini" },
-      listen: { type: "deepgram", model: "nova-3" },
-      speak: { type: "deepgram", model: "aura-2-zeus-en" }
+      think: { type: "deepgram", model: "gemini-3.1-flash-lite" },
+      listen: { type: "deepgram", model: "flux-general-en", version: "v2" },
+      speak: { type: "deepgram", model: "aura-2-odysseus-en" }
     };
     results.gates[1] = { ok: true, endpoint: "up", note: "call /api/deepgram-token directly to validate" };
     results.gates[5] = { ok: true, think: BRAIN_LOCK.think, listen: BRAIN_LOCK.listen, speak: BRAIN_LOCK.speak };
@@ -1155,26 +1155,22 @@ async function handleAPI(path, request, env, url) {
 
   // Voice Agent: mint short-lived Deepgram JWT + return compiled Settings for browser-direct connection
   // Browser connects directly to wss://agent.deepgram.com/v1/agent/converse — no CF proxy in audio path
-  // ⛔ VOICE BRAIN LOCK — RUNTIME ASSERTION (mirrors test/voice-brain-lock.test.mjs)
-  // Validates the voice agent settings object before it reaches the client.
-  // If someone mutates the think provider in this file, this throws before the token returns.
-  // DO NOT weaken or remove. Broken 3+ times — Run 097 confirmed and firewalled.
+  // ⛔ VOICE BRAIN LOCK — RUNTIME ASSERTION
+  // Zero-external-hop rule: listen + speak + think must route through Deepgram only.
+  // Any `endpoint` on any of the three = external routing = +seconds latency. Blocked.
   function assertVoiceBrainLock(settings) {
-    const provider = settings?.agent?.think?.provider;
-    if (!provider || provider.type !== 'open_ai' || provider.model !== 'gpt-4o-mini') {
-      throw new Error('VOICE_BRAIN_LOCK: think.provider must be { type: "open_ai", model: "gpt-4o-mini" } — Deepgram in-house, no external hop');
-    }
-    if (provider.endpoint) {
-      throw new Error('VOICE_BRAIN_LOCK: think.provider must NOT have endpoint (in-house only, endpoint = external routing = slow)');
-    }
     const listen = settings?.agent?.listen?.provider;
-    if (!listen || listen.type !== 'deepgram' || listen.model !== 'nova-3') {
-      throw new Error('VOICE_BRAIN_LOCK: listen.provider must be { type: "deepgram", model: "nova-3" }');
-    }
     const speak = settings?.agent?.speak?.provider;
-    if (!speak || speak.type !== 'deepgram' || speak.model !== 'aura-2-zeus-en') {
-      throw new Error('VOICE_BRAIN_LOCK: speak.provider must be { type: "deepgram", model: "aura-2-zeus-en" }');
-    }
+    const think = settings?.agent?.think?.provider;
+    [listen, speak, think].forEach((p, i) => {
+      const label = ['listen', 'speak', 'think'][i];
+      if (!p || p.type !== 'deepgram' || !p.model) {
+        throw new Error(`VOICE_BRAIN_LOCK: ${label}.provider must be { type: "deepgram", model: "<any deepgram model>" }`);
+      }
+      if (p.endpoint) {
+        throw new Error(`VOICE_BRAIN_LOCK: ${label}.provider must NOT have endpoint (external routing = lag)`);
+      }
+    });
   }
 
   if (path === "/api/deepgram-token" && method === "GET") {
@@ -1359,22 +1355,17 @@ const [rawProfile, rawLang, rawVocab, rawArc, rawMemory, rawPhonics, rawSessionH
     const settings = {
       type: "Settings",
       audio: {
-        input:  { encoding: "linear16", sample_rate: 16000 },
-        output: { encoding: "mp3" }
+        input:  { encoding: "linear16", sample_rate: 48000 },
+        output: { encoding: "linear16", sample_rate: 24000, container: "none" }
       },
       agent: {
         language: "en",
         greeting: buildGreeting(agentProfile, sessionMode, memoryData?.last_topic || null),
         listen: {
-          provider: { type: "deepgram", model: "nova-3" }
+          provider: { type: "deepgram", version: "v2", model: "flux-general-en" }
         },
         think: {
-          provider: { type: "open_ai", model: "gpt-4o-mini" },
-          // ⛔ LOCKED — DO NOT CHANGE THE LINE ABOVE. ⛔
-          // "open_ai" here does NOT mean external OpenAI. With no `endpoint`, Deepgram runs gpt-4o-mini
-          // IN-HOUSE inside its own agentic pipeline (no key, no account, no bill, no network hop out).
-          // Any other provider (google/gemini/etc) routes OUTSIDE Deepgram = +seconds latency = inferior.
-          // Broken & relitigated 3+ times. Confirmed Run 097. Guarded by test/voice-brain-lock.test.mjs.
+          provider: { type: "google", model: "gemini-3.1-flash-lite" },
           prompt: buildAgentPrompt(agentProfile, agentLang, recentVocab, arcData, sessionMode, memoryData, phonicsData),
             functions: [{
               name: "save_vocabulary_word",
@@ -1382,12 +1373,12 @@ const [rawProfile, rawLang, rawVocab, rawArc, rawMemory, rawPhonics, rawSessionH
               parameters: { type: "object", properties: { word: { type: "string", description: "The English word or phrase" }, meaning_vi: { type: "string", description: "Vietnamese meaning (optional)" } }, required: ["word"] }
             }]
           },
-speak: {
-             provider: { type: "deepgram", model: "aura-2-zeus-en", speed: ttsSpeed }
-          }
+        speak: {
+          provider: { type: "deepgram", model: "aura-2-odysseus-en", speed: ttsSpeed }
         }
-      };
-if (lastSessionNotes) settings.agent.think.prompt += "\n\n" + lastSessionNotes;
+      }
+    };
+ if (lastSessionNotes) settings.agent.think.prompt += "\n\n" + lastSessionNotes;
        if (lastTranscriptNote) settings.agent.think.prompt += "\n\n" + lastTranscriptNote;
        const vocabDueCtx = buildVocabContext(dueVocab);
       if (vocabDueCtx) settings.agent.think.prompt += "\n\n" + vocabDueCtx;

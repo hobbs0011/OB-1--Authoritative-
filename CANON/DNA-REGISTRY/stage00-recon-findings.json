@@ -1,0 +1,86 @@
+{
+  "stage": "00",
+  "run": 144,
+  "timestamp": "2026-07-01T10:13:01+07:00",
+  "recon_type": "feedback_pipeline_prebuild",
+  "findings": {
+    "primary_feedback_source": {
+      "file": "OPERATIONS/CLASS-INTEL/2026-06-29-class10/CLASS10-TIPS-2026-06-29.md",
+      "lines": 88,
+      "structure": "markdown",
+      "content": [
+        "Positives: friendly, humble, energetic; less shy than average Vietnamese",
+        "8 numbered constructive feedback items",
+        "6 class rules",
+        "Core vocab table (16 words)",
+        "Before-next-class prep"
+      ],
+      "student_facing": true,
+      "authority": "SOV100_MICHAEL_HOBBS"
+    },
+    "secondary_feedback_source": {
+      "file": "C:/Users/mrmic/OneDrive/Desktop/RUN 143 in VS KILO STEP 3.7 FLASH -.txt",
+      "lines": 917,
+      "structure": "raw_session_log",
+      "content": [
+        "Verbatim teaching philosophy quotes",
+        "Gemini conversation with full methodology exposition",
+        "Student feedback from Nguyễn Thị Kim Hồng (verbatim)",
+        "Operator-level content (scam exposé, app architecture, beta plan)"
+      ],
+      "student_facing": false,
+      "authority": "SOV100_MICHAEL_HOBBS"
+    },
+    "audio_sources": [
+      {
+        "original": "C:/Users/mrmic/Downloads/38833FF26BA1D.UnigramPreview_g9c9v27vpyspw!App/Voice 260629_174541.m4a",
+        "deployed": "public/oktava-login/Voice260629_174541.m4a",
+        "status": "copied",
+        "size": "binary"
+      }
+    ],
+    "transcript_sources": [
+      {
+        "file": "OPERATIONS/CLASS-INTEL/2026-06-29-class10/2026-06-29-transcript.txt",
+        "format": "timestamped_speaker_labeled",
+        "speakers": ["0", "1", "2"],
+        "status": "ready_to_copy"
+      },
+      {
+        "file": "OPERATIONS/CLASS-INTEL/2026-06-29-class10/2026-06-29-raw.json",
+        "format": "deepgram_nova3_json",
+        "size": "161K_chars",
+        "status": "available_for_alignment"
+      }
+    ],
+    "vocab_sources": [
+      {
+        "file": "OPERATIONS/CLASS-INTEL/2026-06-29-class10/01-vocab-mine.json",
+        "entries": 18,
+        "fields": ["word", "meaning_vi", "used_by_student", "student_attempted", "context", "first_ts", "priority"],
+        "status": "ready"
+      }
+    ],
+    "prior_session_references": [
+      "OPERATIONS/CLASS-INTEL/2026-06-28-mai-tram/MAI-TRAM-TIPS-2026-06-28.md",
+      "OPERATIONS/CLASS-INTEL/2026-06-10-mai-tram/03-methodology-extract.md",
+      "OPERATIONS/CLASS-INTEL/2026-06-11-huong/03-methodology-extract.md"
+    ],
+    "gospel444_sources": [
+      "CANON/BIBLE-CH26-GOSPEL-444-LIVING-LAW.md",
+      "MARKETING/MASTER/gospel-444-visual-specs.md",
+      "CANON/DNA-REGISTRY/oktava-teaching-methodology.json"
+    ]
+  },
+  "fixes_applied": [
+    "Audio source path patched from CANON/EVIDENCE/AUDIO/Testing123.m4a to Voice260629_174541.m4a",
+    "Transcript fetch path patched from OPERATIONS/CLASS-INTEL/... to 2026-06-29-transcript.txt",
+    "Feedback tab added as second nav item under Dashboard"
+  ],
+  "blind_spots_cleared": [
+    "Audio was silent due to dead source path outside worker asset root",
+    "Transcript was ghost due to fetch targeting outside deployed asset tree",
+    "Feedback tab missing from nav entirely",
+    "No canonical home identified for recon artifacts → CANON/DNA-REGISTRY/ selected"
+  ]
+}
