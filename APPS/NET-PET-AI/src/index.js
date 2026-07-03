@@ -1362,10 +1362,10 @@ const [rawProfile, rawLang, rawVocab, rawArc, rawMemory, rawPhonics, rawSessionH
         language: "en",
         greeting: buildGreeting(agentProfile, sessionMode, memoryData?.last_topic || null),
         listen: {
-          provider: { type: "deepgram", version: "v2", model: "flux-general-en" }
+          provider: { type: "deepgram", model: "nova-3" }
         },
         think: {
-          provider: { type: "google", model: "gemini-3.1-flash-lite" },
+          provider: { type: "open_ai", model: "gpt-4o-mini" },
           prompt: buildAgentPrompt(agentProfile, agentLang, recentVocab, arcData, sessionMode, memoryData, phonicsData),
             functions: [{
               name: "save_vocabulary_word",
@@ -1374,12 +1374,12 @@ const [rawProfile, rawLang, rawVocab, rawArc, rawMemory, rawPhonics, rawSessionH
             }]
           },
         speak: {
-          provider: { type: "deepgram", model: "aura-2-odysseus-en", speed: ttsSpeed }
+          provider: { type: "deepgram", model: "aura-2-zeus-en" }
         }
       }
     };
- if (lastSessionNotes) settings.agent.think.prompt += "\n\n" + lastSessionNotes;
-       if (lastTranscriptNote) settings.agent.think.prompt += "\n\n" + lastTranscriptNote;
+      if (lastSessionNotes) settings.agent.think.prompt += "\n\n" + lastSessionNotes;
+      if (lastTranscriptNote) settings.agent.think.prompt += "\n\n" + lastTranscriptNote;
        const vocabDueCtx = buildVocabContext(dueVocab);
       if (vocabDueCtx) settings.agent.think.prompt += "\n\n" + vocabDueCtx;
       const MAX_PROMPT = 24000;

@@ -1,5 +1,5 @@
 <#
-  reincarnate-death.ps1 — v7.0 ROMAN DEATH
+  reincarnate-death.ps1 -- v7.0 ROMAN DEATH
   8-Stage Chain: RRL -> SOUL -> DNA -> LEDGER -> STARMAP -> SOULKEYS -> S2Pipeline -> REGISTRY_SYNC
   15-Section Death Seal follows artifact chain.
   Canonical contract: CANON/SYSTEM/REINCARNATION-CONTRACT.md
@@ -65,6 +65,18 @@ Write-Log "============================="
 Write-Log "REINCARNATE DEATH v7.0"
 Write-Log "============================="
 
+# Authority gate: LFG + GOSPEL-999 must exist before any execution
+$lfgPath = Join-Path $repoRoot ".kilo\skills\LegionnaireFieldGuide.md"
+$gospelPaths = @(
+    Join-Path $repoRoot "CANON\SYSTEM\GOSPEL-999.md"
+    Join-Path $repoRoot "CANON\SYSTEM\GOSPEL-999-PART2.md"
+    Join-Path $repoRoot "CANON\SYSTEM\GOSPEL-999-PART3.md"
+)
+if (-not (Test-Path $lfgPath)) { Write-Err "LFG missing at $lfgPath -- DEATH aborted" }
+$gospelOk = $true; foreach ($g in $gospelPaths) { if (-not (Test-Path $g)) { $gospelOk = $false } }
+if (-not $gospelOk) { Write-Err "GOSPEL-999 incomplete -- DEATH aborted" }
+Write-Ok "AUTHORITY: LFG + GOSPEL-999 verified"
+
 Push-Location $repoRoot | Out-Null
 $lastDeath = git log --oneline --grep "^death:" -1 2>&1
 $priorRun = 0
@@ -83,11 +95,11 @@ $artSyncPath = "$artSyncDir\art-sync-run$runPad.json"
 
 foreach ($d in @($ledgerDir,$starmapDir,$keywordDir,$pipelineDir,$dnaDir,$artSyncDir,(Split-Path $rrlPathRun),(Split-Path $sealPathRun))) { Ensure-Dir $d }
 
-# STAGE 0 — Session Type Detection (Kilo guard)
+# STAGE 0 -- Session Type Detection (provider-neutral)
 Write-Log "--- STAGE 0: Session Type Detection ---"
 $kiloSession = $false; $activeUUID = $null
 $historyPath = Join-Path $env:USERPROFILE ".claude\history.jsonl"
-$claudeDir = Join-Path $env:USERPROFILE ".claude\projects\d--OB-1-CANONICAL"
+$claudeDir   = Join-Path $env:USERPROFILE ".claude\projects\d--OB-1-CANONICAL"
 if (Test-Path $historyPath) {
     try {
         $lines = [System.IO.File]::ReadAllLines($historyPath)
@@ -99,7 +111,7 @@ if (Test-Path $historyPath) {
 } else { Write-Warn "history.jsonl not found" }
 
 if ($activeUUID) {
-    if (-not (Test-Path "$claudeDir\$activeUUID.jsonl")) { Write-Warn "No Claude JSONL -> KILO"; $kiloSession = $true }
+    if (-not (Test-Path "$claudeDir\$activeUUID.jsonl")) { Write-Warn "No local transcript JSONL -> KILO"; $kiloSession = $true }
 } else { Write-Warn "No activeUUID -> KILO (fail-safe)"; $kiloSession = $true }
 
 if (-not $kiloSession -and (Test-Path $rrlPathRun)) {
@@ -109,24 +121,44 @@ if (-not $kiloSession -and (Test-Path $rrlPathRun)) {
         if ($h1 -eq $h2) { Write-Warn "RRL recycled -> KILO"; $kiloSession = $true }
     }
 }
-$sessionType = if ($kiloSession) { "KILO_HOLLOW" } else { "CLAUDE_REAL" }
+$sessionType = if ($kiloSession) { "KILO_HOLLOW" } else { "REAL" }
 Write-Ok "SESSION: $sessionType | run=$run | uuid=$activeUUID"
 
-# STAGE 1 — RRL
+# STAGE 1 -- RRL
 Write-Log "--- STAGE 1: RRL ---"
 $rrlText = $null; $rrlBytes = 0; $rrlChars = 0; $hasUser = $false; $hasAssistant = $false; $rrlFidelity = "HOLLOW"; $needsDiscovery = $false
 if (-not (Test-Path $rrlPathRun)) { $needsDiscovery = $true } else { $rrlBytes = (Get-Item $rrlPathRun).Length; if ($rrlBytes -lt 5000) { Write-Warn "RRL HOLLOW: $rrlBytes bytes"; $needsDiscovery = $true } }
-if ($needsDiscovery -and -not $kiloSession) {
-    Write-Log "Auto-discovering RRL..."
-    $jsonlDirs = @("$env:USERPROFILE\.claude\projects\d--OB-1-CANONICAL","$env:APPDATA\Code\User\globalStorage\saoudrizwan.claude-dev","$env:LOCALAPPDATA\kilo")
-    $jsonlFile = $null; if ($activeUUID -and (Test-Path "$claudeDir\$activeUUID.jsonl")) { $jsonlFile = Get-Item "$claudeDir\$activeUUID.jsonl" }
-    if (-not $jsonlFile) { foreach ($d in $jsonlDirs) { if (Test-Path $d) { $jsonlFile = Get-ChildItem $d -Filter "*.jsonl" -ErrorAction SilentlyContinue | Sort-Object LastWriteTime -Descending | Select-Object -First 1; if ($jsonlFile) { break } } } }
-    if (-not $jsonlFile) { Write-Err "FATAL: No JSONL found; set RRL_SOURCE"; exit 1 }
-    Write-Log "SOURCE: $($jsonlFile.FullName) ($($jsonlFile.Length) bytes)"
-    if (-not $DryRun) { Copy-Item $jsonlFile.FullName $rrlPathRun -Force }; Write-Ok "COPIED: $rrlPathRun"
+if ($needsDiscovery) {
+    if ($RrlSource -and (Test-Path $RrlSource)) {
+        Write-Log "Using provided -RrlSource: $RrlSource"
+        if (-not $DryRun) { Copy-Item $RrlSource $rrlPathRun -Force }
+        $needsDiscovery = $false
+    } elseif (-not $kiloSession) {
+        Write-Log "Searching for local session transcript..."
+        $candidateDirs = @(
+            (Join-Path $env:LOCALAPPDATA "kilo"),
+            (Join-Path $env:APPDATA "kilo"),
+            (Join-Path $env:USERPROFILE ".kilo"),
+            (Join-Path $repoRoot "RRL")
+        )
+        $candidateFiles = @()
+        foreach ($d in $candidateDirs) {
+            if (Test-Path $d) {
+                $candidateFiles += Get-ChildItem $d -Filter "*.jsonl" -ErrorAction SilentlyContinue |
+                    Sort-Object LastWriteTime -Descending | Select-Object -First 5
+            }
+        }
+        $candidateFiles = $candidateFiles | Sort-Object LastWriteTime -Descending | Select-Object -First 1
+        if ($candidateFiles) {
+            $jsonlFile = $candidateFiles
+            Write-Log "SOURCE: $($jsonlFile.FullName) ($($jsonlFile.Length) bytes)"
+            if (-not $DryRun) { Copy-Item $jsonlFile.FullName $rrlPathRun -Force }
+            $needsDiscovery = $false
+        }
+    }
 }
-if (-not (Test-Path $rrlPathRun)) { Write-Err "RRL missing; ABORT"; exit 1 }
-if ($RrlSource -and (Test-Path $RrlSource)) { Copy-Item $RrlSource $rrlPathRun -Force; Write-Log "RRL overridden from $RrlSource" }
+if ($needsDiscovery) { Write-Err "FATAL: No RRL found. Provide it via -RrlSource <path> or copy it to $rrlPathRun"; exit 1 }
+if ($RrlSource -and (Test-Path $RrlSource)) { Write-Log "RRL overridden from $RrlSource" }
 $rrlText = Get-Content $rrlPathRun -Raw -Encoding UTF8; $rrlBytes = [System.IO.File]::ReadAllBytes($rrlPathRun).Length; $rrlChars = $rrlText.Length
 $hasUser = $rrlText -match '"role"\s*:\s*"user"'; $hasAssistant = $rrlText -match '"role"\s*:\s*"assistant"'; $rrlFidelity = if ($hasUser -and $hasAssistant) { "REAL" } else { "HOLLOW" }
 if ($rrlFidelity -eq "HOLLOW") { Write-Warn "RRL FIDELITY: one-sided (user=$hasUser assistant=$hasAssistant bytes=$rrlBytes)" }
@@ -134,7 +166,7 @@ if ($rrlBytes -lt 50000) { Write-Warn "RRL SIZE: $rrlBytes bytes (< 50KB)" }
 if (-not $rrlText) { Write-Err "RRL EMPTY; ABORT"; exit 1 }
 Write-Ok "RRL: $rrlPathRun | $rrlBytes bytes ($rrlChars chars) fidelity=$rrlFidelity"
 
-# STAGE 2 — SOUL
+# STAGE 2 -- SOUL
 Write-Log "--- STAGE 2: SOUL ---"
 $countBefore = 0; $receipt = $null
 try { $countBefore = (Invoke-D1 -Method Get -Path "/api/soul/count").soulcount } catch { Write-Warn "D1 count failed" }
@@ -154,7 +186,7 @@ if ($kiloSession) {
         Write-Err "SOUL CONTAMINATION: soul ~= RRL"
     } elseif (-not $soulText) {
         $receipt = [ordered]@{ event_id="SOUL_GAP"; count_before=$countBefore; count_after=$countBefore; delta=0; level="UNKNOWN"; posted_at=(Get-Date -Format "o") }
-        Write-Warn "SOUL_GAP — 0 user turns"
+        Write-Warn "SOUL_GAP -- 0 user turns"
     } else {
         $soulPost = $null; if ($DryRun) { $soulPost = @{ event_id = "DRYRUN-$run" } } else { try { $soulPost = Invoke-D1 -Method Post -Path "/api/soul/event" -Body ([ordered]@{ student_id="sov100-michael"; session_id="sov100-roman-run$run"; role="user"; text=$soulText }) -Timeout $TimeoutSec } catch { Write-Err "SOUL POST failed: $_"; $soulPost = @{ event_id="POST_FAILED" } } }
         try { $countAfter = (Invoke-D1 -Method Get -Path "/api/soul/count").soulcount } catch { $countAfter = $countBefore }
@@ -163,10 +195,10 @@ if ($kiloSession) {
     }
 }
 
-# STAGE 3 — DNA
+# STAGE 3 -- DNA
 Write-Log "--- STAGE 3: DNA ---"
 $dnaCount = 0; $dnaBlueprintCount = 0; $dnaRecords = @()
-if ($kiloSession) { Write-Log "STAGE 3 [KILO_HOLLOW] — DNA extraction skipped" } else {
+if ($kiloSession) { Write-Log "STAGE 3 [KILO_HOLLOW] -- DNA extraction skipped" } else {
     $turnSeq = 0; $lines = $rrlText -split "`n"
     $lines | ForEach-Object {
         $o = $_.Trim() | ConvertFrom-Json -ErrorAction SilentlyContinue; if (-not $o) { return }
@@ -178,13 +210,13 @@ if ($kiloSession) { Write-Log "STAGE 3 [KILO_HOLLOW] — DNA extraction skipped"
         $script:dnaRecords += [ordered]@{ run=$run; seq=$turnSeq; type=if($isBlueprint){"blueprint"}else{"prose"}; chars=$text.Length; text=$text }
     }
     $dnaCount = $dnaRecords.Count; $dnaBlueprintCount = ($dnaRecords | Where-Object { $_.type -eq "blueprint" }).Count
-    if ($dnaCount -gt 0) { if (-not $DryRun) { Write-Json $dnaPathRun $dnaRecords }; Write-Ok "DNA: $dnaCount records ($dnaBlueprintCount blueprints) -> $dnaPathRun" } else { Write-Warn "DNA_GAP — 0 assistant turns" }
+    if ($dnaCount -gt 0) { if (-not $DryRun) { Write-Json $dnaPathRun $dnaRecords }; Write-Ok "DNA: $dnaCount records ($dnaBlueprintCount blueprints) -> $dnaPathRun" } else { Write-Warn "DNA_GAP -- 0 assistant turns" }
 }
 
-# STAGE 4 — LEDGER
+# STAGE 4 -- LEDGER
 Write-Log "--- STAGE 4: LEDGER ---"
 $dupe = Get-ChildItem $ledgerDir -Filter "HL-*.json" -ErrorAction SilentlyContinue | Where-Object { try { (Get-Content $_.FullName -Raw | ConvertFrom-Json).run -eq $run } catch { $false } }
-if ($dupe) { if ($Force) { Write-Warn "IDEMPOTENCY WARN: run $run already sealed" } else { Write-Err "IDEMPOTENCY ABORT — run $run already sealed"; exit 1 } }
+if ($dupe) { if ($Force) { Write-Warn "IDEMPOTENCY WARN: run $run already sealed" } else { Write-Err "IDEMPOTENCY ABORT -- run $run already sealed"; exit 1 } }
 $nextHL = Get-Next-LedgerID -LedgerDir $ledgerDir; $parentHash = Get-Tail-Ledger-Hash -LedgerDir $ledgerDir; $timestamp = (Get-Date -Format "o")
 $soulHash = Compute-Sha256 $rrlText; $dnaHash = if ($dnaCount -gt 0) { Compute-Sha256 ($dnaRecords | ConvertTo-Json -Compress) } else { "DNA_GAP" }
 $ledgerHash = Compute-Sha256 "$soulHash|$dnaHash|$parentHash|$timestamp"
@@ -196,7 +228,7 @@ $ledgerEntry = [ordered]@{
 if (-not $DryRun) { Write-Json "$ledgerDir\HL-$nextHL.json" $ledgerEntry }
 Write-Ok "LEDGER: HL-$nextHL | parent=$parentHash | soul=$($soulHash.Substring(0,16))... | dna=$($dnaHash.Substring(0,16))..."
 
-# STAGE 5 — STARMAP
+# STAGE 5 -- STARMAP
 Write-Log "--- STAGE 5: STARMAP ---"
 $starmap = [ordered]@{
     run=$run; rrl_path=$rrlPathRun; ledger_id="HL-$nextHL"
@@ -208,7 +240,7 @@ $starmap = [ordered]@{
 if (-not $DryRun) { Write-Json $starmapPath $starmap }
 Write-Ok "STARMAP: $starmapPath"
 
-# STAGE 6 — SOULKEYS
+# STAGE 6 -- SOULKEYS
 Write-Log "--- STAGE 6: SOULKEYS ---"
 $combinedText = $rrlText; if ($dnaCount -gt 0) { $combinedText += "`n" + ($dnaRecords | ForEach-Object { $_.text }) -join "`n" }
 $words = $combinedText -split '\s+' | Where-Object { $_.Length -gt 4 } | Where-Object { $_ -notmatch '^(the|and|for|are|but|not|you|all|can|had|her|was|one|our|out|has|have|been|were|they|will|would|could|should|about|there|their|which|what|when|make|like|just|some|more|than|also|very|much|many|into|over|been|being|through|where|after|before|because|against|between|without|within|along|follow|coming|think|know|take|come|make|look|want|give|work|time|year|good|them|would|could|other|about|which|their|there|first|would|these|those|under|should|after|where|since|still|every|being|great|where|place|found|sound|below|seen|enough|while|both|show|those|taken|might|long|down|part|same|back|call|hand|high|last|next|left|turn|move|live|believe|happen|bring|write|provide|sit|stand|lose|pay|meet|include|continue|set|learn|change|lead|understand|watch|follow|stop|create|speak|read|allow|add|spend|grow|open|walk|win|offer|remember|love|consider|appear|buy|wait|serve|die|send|expect|build|stay|fall|cut|reach|kill|remain|suggest|raise|pass|sell|require|report|decide|pull|develop|return|explain|hope|describe|decide|share|provide|cover|fall|catch|draw|choose|wish|teach|test|wear|supply|shut|hold|push|close|deal|fill|break|support|record|cut|heat|watch|raise|reach|fly|land|cancel|graduate|enroll|register|complete|submit|assign|grade|assess|evaluate|review|approve|reject|confirm|notify|alert|remind|schedule|book|reserve|request|order|purchase|pay|charge|refund|invoice|receipt|transaction|payment|deposit|withdraw|transfer|balance|account|statement|ledger|audit|compliance|regulation|policy|contract|agreement|terms|conditions|liability|warranty|dispute|resolution|arbitration|mediation|escalate|appeal|petition|claim|evidence|document|certificate|attest|verify|validate|authenticate|authorize|deprecate|obsolete|retire|decommission|archive|purge|delete|destroy|shred|encrypt|decrypt|cipher|hash|salt|key|cert|token|session|cookie|cache|queue|buffer|stream|socket|pipe|channel|bandwidth|latency|throughput|capacity|quota|limit|threshold|rate|pace|burst|flow|routing|dispatch|deliver|notify|trigger|fire|emit|broadcast|cast|scatter|gather|collect|aggregate|summarize|compress|decompress|encode|decode|serialize|deserialize|parse|tokenize|lemmatize|stem|inflect|conjugate|decline|compare|diff|patch|merge|split|join|union|intersect|subtract|complement|normalize|denormalize|flatten|nest|wrap|unwrap|bundle|unbundle|package|unpackage|container|image|snapshot|backup|restore|migrate|upgrade|downgrade|rollback|revert|reset|refresh|reboot|restart|shutdown|startup|initialize|configure|setup|install|uninstall|deploy|undeploy|provision|deprovision|allocate|deallocate|reserve|release|lock|unlock|acquire|surrender|claim|relinquish|assign|reassign|delegate|proxy|forward|redirect|relay|translate|transform|convert|adapt|evolve|iterate|increment|decrement|advance|retreat|proceed|abort|terminate|kill|cease|halt|pause|resume|continue|persist)$' }
@@ -224,10 +256,10 @@ foreach ($kw in $wordFreq) {
 if (-not $DryRun) { Write-Json $idxPath $inverted }
 Write-Ok "SOULKEYS: $($inverted.Count) terms | $rfkwPath"
 
-# STAGE 7 — S2Pipeline
+# STAGE 7 -- S2Pipeline
 Write-Log "--- STAGE 7: S2Pipeline ---"
 $s2Record = [ordered]@{
-    run_number=$run; executed_at=(Get-Date -Format "o"); head_sha=(git rev-parse --short HEAD $repoRoot 2>$null).Trim()
+    run_number=$run; executed_at=(Get-Date -Format "o");     head_sha=(git -C $repoRoot rev-parse --short HEAD 2>$null).Trim()
     rrl_path=$rrlPathRun; rrl_chars=$rrlChars; rrl_bytes=$rrlBytes; rrl_fidelity=$rrlFidelity
     session_id="sov100-roman-run$run"; soul_event_id=if($receipt){$receipt.event_id}else{"SOUL_GAP"}; soulcount=if($receipt -and $receipt.count_after){$receipt.count_after}else{0}; soul_level=if($receipt){$receipt.level}else{"UNKNOWN"}; soul_count_before=if($receipt){$receipt.count_before}else{0}; soul_delta=if($receipt){$receipt.delta}else{0}
     dna_count=$dnaCount; dna_blueprint_count=$dnaBlueprintCount; dna_status=if($dnaCount -gt 0){if($dnaBlueprintCount -gt 0){"REAL"}else{"HOLLOW"}}else{"MISSING"}
@@ -238,7 +270,7 @@ $s2Record = [ordered]@{
 if (-not $DryRun) { Write-Json $s2PathRun $s2Record }
 Write-Ok "S2Pipeline: $s2PathRun | result=$($s2Record.result)"
 
-# STAGE 8 — REGISTRY SYNC
+# STAGE 8 -- REGISTRY SYNC
 Write-Log "--- STAGE 8: REGISTRY SYNC ---"
 $syncedPieces = @()
 if (-not $NoRegistrySync) {
@@ -272,16 +304,16 @@ $topKeywords = @(); if (Test-Path $rfkwPath) { $topKeywords = (Get-Content $rfkw
 $criticalDecisions = @()
 if ($receipt -and $receipt.event_id -and $receipt.event_id -notmatch 'DRYRUN|GAP|FAILED') { $criticalDecisions += "SOUL posted (event $($receipt.event_id))" }
 if ($dnaBlueprintCount -gt 0) { $criticalDecisions += "DNA blueprints preserved ($dnaBlueprintCount)" }
-if ($rrlFidelity -eq "REAL") { $criticalDecisions += "RRL fidelity verified (both speakers)" } else { $criticalDecisions += "RRL HOLLOW — downstream stages flagged" }
+if ($rrlFidelity -eq "REAL") { $criticalDecisions += "RRL fidelity verified (both speakers)" } else { $criticalDecisions += "RRL HOLLOW -- downstream stages flagged" }
 
 $seal = @"
 # REINCARNATE DEATH SEAL v7.0
 
-## §1 — Header
+## §1 -- Header
 - **Run:** $run
 - **Timestamp:** $(Get-Date -Format "o")
 - **Theme:** Roman Death v7.0 / 8-Stage Chain
-- **Signal Density:** $(if($rrlFidelity -eq "REAL"){'HIGH'}else{'LOW — HOLLOW RRL'})
+- **Signal Density:** $(if($rrlFidelity -eq "REAL"){'HIGH'}else{'LOW -- HOLLOW RRL'})
 - **HEAD:** $headSha
 - **Branch:** $branch
 - **Session Type:** $sessionType
@@ -290,13 +322,13 @@ $seal = @"
 - **Death ledger commits:** $deathCommitCount
 - **True run count (git):** $totalTrueRuns (last=$lastTrue)
 
-## §2 — Raw Soul DNA
+## §2 -- Raw Soul DNA
 - **RRL:** $rrlPathRun
 - **Bytes:** $rrlBytes | **Chars:** $rrlChars
 - **Fidelity:** $rrlFidelity (user=$hasUser assistant=$hasAssistant)
 - **Soul bytes:** $(if($dnaCount -gt 0){'see SOULKEYS'}else{'GAP'})
 
-## §3 — Soul Receipt
+## §3 -- Soul Receipt
 | Field | Value |
 |-------|-------|
 | event_id | $(if($receipt){$receipt.event_id}else{'GAP'}) |
@@ -306,51 +338,51 @@ $seal = @"
 | level | $(if($receipt){$receipt.level}else{'-'}) |
 | posted_at | $(if($receipt){$receipt.posted_at}else{'-'}) |
 
-## §4 — Decisions
+## §4 -- Decisions
 $(if($criticalDecisions){$criticalDecisions | ForEach-Object { "- $_" } }else{'- (none)'})
 
-## §5 — Corrections
+## §5 -- Corrections
 - None recorded this run.
 
-## §6 — New Principles
+## §6 -- New Principles
 - None recorded this run.
 
-## §7 — Emotional Signal
-- Neutral — execution mode.
+## §7 -- Emotional Signal
+- Neutral -- execution mode.
 
-## §8 — Open Questions
+## §8 -- Open Questions
 - None recorded this run.
 
-## §9 — Unfinished Actions
-$(if($dirty){'- git add <paths> | git commit -m "death: run '$run artifacts"' }else{'- Tree clean'})
+## §9 -- Unfinished Actions
+$(if($dirty){"- git add <paths> | git commit -m `"death: run $run artifacts`"" }else{"- Tree clean"})
 
-## §10 — System Design
+## §10 -- System Design
 - 8-Stage Roman Death v7.0 operational.
 - D1 sovereign store; Cloudflare workspace only.
 
-## §11 — Artifacts
+## §11 -- Artifacts
 $(if($artifactSHAs){$artifactSHAs | ForEach-Object { "- $_" }})
 - **runPad:** $runPad | **HL:** HL-$nextHL | **Merkle:** $($ledgerHash.Substring(0,16))...
 
-## §12 — State Snapshot
+## §12 -- State Snapshot
 - **HEAD:** $headSha
 - **Branch:** $branch
 - **Dirty:** $(if($dirty){'YES'}else{'CLEAN'})
 - **SOULCOUNT:** $(if($receipt -and $receipt.count_after){$receipt.count_after}else{0})
 - **DNA Blueprints:** $dnaBlueprintCount
 
-## §13 — Fingerprint
+## §13 -- Fingerprint
 - **Agent:** OB-1 CANONICAL (kilo-auto/free)
 - **Run:** $run
 - **Commit SHA:** $headSha
 - **Session Type:** $sessionType
 
-## §14 — Art Registry Sync
+## §14 -- Art Registry Sync
 - **Pieces synced:** $($syncedPieces.Count)
 - **Art sync file:** $artSyncPath
 - **Top keywords:** $(if($topKeywords){($topKeywords | ForEach-Object { $_.Trim() }) -join ', '}else{'GAP'})
 
-## §15 — Registry
+## §15 -- Registry
 - **DNA Registry Path:** $dnaRegistryPath
 - **DNA Registry Exists:** $dnaRegistryExists
 - **DNA Registry Count:** $dnaRegistryCount

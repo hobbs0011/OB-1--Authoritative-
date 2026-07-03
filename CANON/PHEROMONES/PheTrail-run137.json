@@ -13,7 +13,7 @@
       "timestamp": "2026-06-18T14:19:00+07:00"
     },
     {
-      "artifact": ".kilo/skills/LegionnaireHandGuide.md",
+      "artifact": ".kilo/skills/LegionnaireFieldGuide.md",
       "action": "Created single source of truth for commands, skills, roles, pipeline",
       "verification": "20 canonical files documented, 40 commands mapped, 6-stage pipeline defined",
       "timestamp": "2026-06-18T15:02:00+07:00"

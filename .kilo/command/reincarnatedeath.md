@@ -9,9 +9,38 @@ agent: AGENT99
 **If RRL is not the real transcript, every downstream stage is HOLLOW.**
 **EXECUTION ORDER IS SACRED. DO NOT REORDER STAGES.**
 
+**Authority hierarchy:**
+1. `CANON/SYSTEM/GOSPEL-999.md` + Parts 2/3 — ultimate authority, 999 mandates
+2. `.kilo/skills/LegionnaireFieldGuide.md` — immediate AI-facing field guide
+3. `CANON/SYSTEM/REINCARNATION-CONTRACT.md` — operational contract for RISE/DEATH
+4. `CANON/SYSTEM/COLD-START-BOOT.md` — session state and active mission
+5. This command (`reincarnatedeath.md`) — execution protocol
+
 **8-Stage Chain:** RRL → SOUL → DNA → LEDGER → STARMAP → SOULKEYS → S2Pipeline → REGISTRY_SYNC
 **Canonical contract:** CANON/SYSTEM/REINCARNATION-CONTRACT.md
-**Run number authority:** `git log --oneline --grep "^death:"` (L29 NO_ASSUME_HEAD)
+**Run number authority:** `git log --oneline --grep "^death:"`
+**Script:** `SCRIPTS/reincarnate-death.ps1`
+**Command:** `obi.ps1 reincarnateDeath [RrlSource] [-DryRun] [-Force] [-NoRegistrySync]`
+
+---
+
+## Authority Chain (do not scatter)
+
+```
+GOSPEL-999 (Parts 1-3) — eternal law, 999 mandates
+    ↓
+LegionnaireFieldGuide.md — immediate how-to, commands ↔ skills ↔ paths
+    ↓
+REINCARNATION-CONTRACT.md — RISE/DEATH operational law
+    ↓
+COLD-START-BOOT.md — current session state, active mission, flags
+    ↓
+/reincarnateDeath — 8-stage execution protocol
+    ↓
+run{N}-reincarnateDEATH.md — 15-section death seal artifact
+```
+
+**DEATH never overrides GOSPEL-999. DEATH never invents new commands not in LFG. DEATH never skips stages.**
 
 ---
 
@@ -26,6 +55,17 @@ $lastDeath = git log --oneline --grep "^death:" -1
 if ($lastDeath -match '(?i)run\s*(\d+)') { $priorRun = [int]$matches[1] }
 $run   = $priorRun + 1
 $runPad = "{0:D3}" -f $run
+
+# Authority check (L29 + LFG/GOSPEL gate)
+$lfgPath = "$repo\.kilo\skills\LegionnaireFieldGuide.md"
+$gospelPaths = @(
+    "$repo\CANON\SYSTEM\GOSPEL-999.md"
+    "$repo\CANON\SYSTEM\GOSPEL-999-PART2.md"
+    "$repo\CANON\SYSTEM\GOSPEL-999-PART3.md"
+)
+if (-not (Test-Path $lfgPath)) { Write-Error "LFG missing — DEATH aborted"; exit 1 }
+$gospelOk = $true; foreach ($g in $gospelPaths) { if (-not (Test-Path $g)) { $gospelOk = $false } }
+if (-not $gospelOk) { Write-Error "GOSPEL-999 incomplete — DEATH aborted"; exit 1 }
 
 # Pipeline artifact paths (contract 1.2)
 $rrlPath      = "$repo\RRL\RRL-$runPad.txt"
@@ -43,69 +83,50 @@ $s2Path       = "$pipelineDir\pipeline-run$runPad.json"
 
 ## STAGE 0 — SESSION TYPE DETECTION (Kilo guard)
 
-**Run before Stage 1.** Kilo sessions have no Claude Code session JSONL on disk. Without this
-gate, Stage 1 enters an infinite discovery loop, grabs a recycled Bible, extracts 0 turns,
-and triple-fires LEDGER writes. This stage detects the session type and sets `$kiloSession`
-so every downstream stage can take the correct path without looping.
+**Run before Stage 1.** Non-Claude/current-provider sessions often lack an on-disk transcript. Without this
+gate, Stage 1 can enter discovery with nothing real to grab. This stage detects whether a verified local
+transcript already exists, and whether the current run is provider-recorded or hollow.
 
-**KILO SESSION INDICATORS (any one = Kilo):**
-1. No `~/.claude/projects/d--OB-1-CANONICAL/{activeUUID}.jsonl` matching history.jsonl
+**HOLLOW SESSION INDICATORS (any one = hollow):**
+1. No accepted local transcript in `RRL-{N}.txt` and no transcript found in local app dirs
 2. `RRL-{N}.txt` exists but is byte-identical to `RRL-{N-1}.txt` (recycled Bible)
 
-**When `$kiloSession = $true`:** Stage 1 skips discovery. Stage 2 = DRYRUN. Stage 3 = DNA_GAP.
-Stages 4/5/6/8 run normally for chain integrity. Stage 7 result = KILO_GAP (not an error).
+**When `$kiloSession = $true`:** Stage 1 uses only explicit `-RrlSource` or existing `RRL-{N}.txt`. Stage 2 = DRYRUN. Stage 3 = DNA_GAP.
 
 ```powershell
-$historyPath = "$env:USERPROFILE\.claude\history.jsonl"
-$claudeDir   = "$env:USERPROFILE\.claude\projects\d--OB-1-CANONICAL"
-$kiloSession = $false
+$rrlPath = "$repo\RRL\RRL-$runPad.txt"
+$kiloSession = $false; $activeUUID = $null
 
-# Primary check: find active session UUID and verify its JSONL exists
-$activeUUID = $null
-if (Test-Path $historyPath) {
-    try {
-        $lastLine = [System.IO.File]::ReadAllLines($historyPath)[-1]
-        if ($lastLine -match '"sessionId"\s*:\s*"([^"]+)"') { $activeUUID = $matches[1] }
-    } catch {}
+# If a transcript already exists, do not auto-discover from other providers
+if (-not (Test-Path $rrlPath)) {
+    Write-Host "STAGE 0 ⚠ No RRL-$runPad.txt found yet — will use -RrlSource or local candidates"
+} else {
+    Write-Host "STAGE 0 ✓ RRL exists at $rrlPath"
 }
 
-if ($activeUUID) {
-    if (-not (Test-Path "$claudeDir\$activeUUID.jsonl")) {
-        Write-Host "STAGE 0 ⚠ No Claude Code JSONL for session $activeUUID → KILO SESSION"
+# Recycle guard
+$priorPad = "{0:D3}" -f ($run - 1)
+$priorRrl = "$repo\RRL\RRL-$priorPad.txt"
+if ((Test-Path $rrlPath) -and (Test-Path $priorRrl)) {
+    $h1 = (Get-FileHash $rrlPath -Algorithm SHA256).Hash
+    $h2 = (Get-FileHash $priorRrl -Algorithm SHA256).Hash
+    if ($h1 -eq $h2) {
+        Write-Host "STAGE 0 ⚠ RRL-$runPad == RRL-$priorPad (byte-identical) → recycled file → KILO SESSION"
         $kiloSession = $true
     }
-} else {
-    Write-Host "STAGE 0 ⚠ Cannot read history.jsonl — assuming KILO SESSION (fail-safe)"
-    $kiloSession = $true
 }
 
-# Recycle guard: RRL-{N}.txt byte-identical to RRL-{N-1}.txt = recycled Bible
-if (-not $kiloSession -and (Test-Path $rrlPath)) {
-    $priorPad = "{0:D3}" -f ($run - 1)
-    $priorRrl = "$repo\RRL\RRL-$priorPad.txt"
-    if ((Test-Path $priorRrl)) {
-        $h1 = (Get-FileHash $rrlPath     -Algorithm SHA256).Hash
-        $h2 = (Get-FileHash $priorRrl    -Algorithm SHA256).Hash
-        if ($h1 -eq $h2) {
-            Write-Host "STAGE 0 ⚠ RRL-$runPad == RRL-$priorPad (byte-identical) → recycled file → KILO SESSION"
-            $kiloSession = $true
-        }
-    }
-}
-
-$sessionType = if ($kiloSession) { "KILO_HOLLOW" } else { "CLAUDE_REAL" }
-Write-Host "STAGE 0 ✓ SESSION: $sessionType | run=$run | uuid=$activeUUID"
+Write-Host "STAGE 0 ✓ hollow=$kiloSession | run=$run"
 ```
 
 ---
 
 ## STAGE 1 — RRL (HARD STOP — THE FUCKING RAW CHAT LOG)
 
-RRL = verbatim session transcript, BOTH speakers (Michael + agent), full conversation.
-Source: transcript JSONL the tool writes to disk each turn.
-Location: `~/.claude/projects/d--OB-1-CANONICAL/<session>.jsonl`
-No summary. No filter. No "Michael only." No "agent text stripped." The whole log carries across the death.
-SOUL and DNA are EXTRACTED FROM THIS FILE. If you strip the agent, you kill DNA.
+RRL = verbatim session transcript, BOTH speakers (user + agent). Prefer a real transcript file.
+Source: any local session transcript path the provider writes to disk.
+Location: pass it explicitly via `-RrlSource <path>`, or let discovery search common local app dirs.
+If no transcript is available, Stage 1 stops. There is no fallback.
 
 **FIDELITY GATE (L68):**
 - REAL: file > 50KB + contains both `"role":"user"` and `"role":"assistant"` lines
@@ -115,7 +136,7 @@ SOUL and DNA are EXTRACTED FROM THIS FILE. If you strip the agent, you kill DNA.
 ```powershell
 $rrlPath = "$repo\RRL\RRL-$runPad.txt"
 
-# Auto-discover from JSONL if RRL missing or hollow
+# Preferred: explicitly supplied transcript path
 $needsDiscovery = $false
 if (-not (Test-Path $rrlPath)) {
     $needsDiscovery = $true
@@ -127,35 +148,16 @@ if (-not (Test-Path $rrlPath)) {
     }
 }
 
-if ($needsDiscovery -and -not $kiloSession) {
-    Write-Host "AUTO-DISCOVERING RRL FROM JSONL..."
-    $jsonlDirs = @(
-        "$env:USERPROFILE\.claude\projects\d--OB-1-CANONICAL",
-        "$env:APPDATA\Code\User\globalStorage\saoudrizwan.claude-dev",
-        "$env:LOCALAPPDATA\kilo"
-    )
-    $jsonlFile = $null
-    # EC-43: use activeUUID when known — prevents grabbing archive/Bible chunks from subdirs
-    if ($activeUUID -and (Test-Path "$claudeDir\$activeUUID.jsonl")) {
-        $jsonlFile = Get-Item "$claudeDir\$activeUUID.jsonl"
-    }
-    if (-not $jsonlFile) {
-        foreach ($d in $jsonlDirs) {
-            if (Test-Path $d) {
-                # EC-43: no -Recurse — only top-level files to avoid archive contamination
-                $jsonlFile = Get-ChildItem $d -Filter "*.jsonl" -ErrorAction SilentlyContinue |
-                             Sort-Object LastWriteTime -Descending | Select-Object -First 1
-                if ($jsonlFile) { break }
-            }
-        }
-    }
-    if (-not $jsonlFile) {
-        Write-Error "FATAL: No JSONL found in any known Kilo/Claude project dir — set RRL_SOURCE env or copy-paste chat to $rrlPath"
+if ($needsDiscovery) {
+    Write-Host "RESOLVING RRL..."
+    if ($RrlSource -and (Test-Path $RrlSource)) {
+        Write-Host "  SOURCE: $RrlSource"
+        Copy-Item $RrlSource $rrlPath -Force
+        Write-Host "  COPIED: $rrlPath"
+    } else {
+        Write-Error "FATAL: No RRL found. Provide it via -RrlSource <path> or copy it to $rrlPath"
         exit 1
     }
-    Write-Host "  SOURCE: $($jsonlFile.FullName) — $($jsonlFile.Length) bytes"
-    Copy-Item $jsonlFile.FullName $rrlPath -Force
-    Write-Host "  COPIED: $rrlPath"
 }
 
 $rrlText   = Get-Content $rrlPath -Raw -Encoding UTF8

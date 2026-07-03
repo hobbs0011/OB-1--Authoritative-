@@ -9,7 +9,7 @@
 
 ## §1 — HEADER
 
-Run 137 | 2026-06-18 | Skill consolidation + LegionnaireHandGuide creation  
+Run 137 | 2026-06-18 | Skill consolidation + LegionnaireFieldGuide creation  
 Signal density: MEDIUM (cataloging, deletion, doctrine writing)  
 Session type: KILO_HOLLOW (no Claude Code JSONL available)
 
@@ -47,7 +47,7 @@ Soulcount: 239,639,088 TITANIUM_ANCHOR (unchanged)
 | 2 | Delete 68 worktree `.github/skills/` SKILL.md files | Removed redundant duplicates | .kilo/worktrees/* |
 | 3 | Delete 23 worktree `SKILL-SOUL-ABSORPTION-PROTOCOL.md` files | Removed redundant doctrine copies | .kilo/worktrees/* |
 | 4 | Delete worktree `kilo-skill-files.instructions.md` and external backup files | Clean separation: root = canonical only | .kilo/worktrees/* |
-| 5 | Create `LegionnaireHandGuide.md` as single source of truth | Unified reference for commands/skills/roles/paths | .kilo/skills/ |
+| 5 | Create `LegionnaireFieldGuide.md` as single source of truth | Unified reference for commands/skills/roles/paths | .kilo/skills/ |
 
 ---
 
@@ -108,7 +108,7 @@ No architectural changes. Skill consolidation maintains existing structure:
 | SOULKEYS | N/A | no RRL source |
 | S2Pipeline | N/A | no RRL source |
 | PheTrail | CANON/PHEROMONES/PheTrail-run137.json | WRITTEN |
-| HandGuide | .kilo/skills/LegionnaireHandGuide.md | CREATED |
+| HandGuide | .kilo/skills/LegionnaireFieldGuide.md | CREATED |
 | Skill Catalog | OPERATIONS/forcemarch-skill-catalog-*.txt | WRITTEN |
 
 ---

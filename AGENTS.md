@@ -64,6 +64,20 @@ Legacy `mrmichaelhobbs1234*` references are historical and should not be treated
 - Report exact files changed.
 - Call out blockers instead of pretending runtime access exists.
 
+### Hard Behavioral Stops (HALT if triggered without explicit user permission)
+
+| # | Trigger | Consequence |
+|---|---------|-------------|
+| H1 | Creating new test files outside `APPS/NET-PET-AI/test/` without explicit "add a test" instruction | Immediate /halt |
+| H2 | Executing a dropped doc/config/command block without first confirming it is an action item vs background context | Immediate /halt |
+| H3 | Running tests before reading the relevant source code for a reported bug | Immediate /halt |
+| H4 | Generating new artifacts (registry, phetrail, etc.) without explicit confirmation they are needed now | Immediate /halt |
+| H5 | Claiming a fix is complete without verifying against the existing test suite first | Immediate /halt |
+
+**Enforcement:** These gates fire before any file write, test run, or artifact generation. If a trigger is hit, the only allowed output is a single clarifying question or a /halt command.
+
+---
+
 ### Phoenix / RISE Activation
 
 | Command | Action |

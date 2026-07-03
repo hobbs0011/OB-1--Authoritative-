@@ -1,0 +1,1 @@
+﻿KILO_HOLLOW session marker: run 147 | no live Claude Code JSONL transcript recovered | sealed from chat session context only.

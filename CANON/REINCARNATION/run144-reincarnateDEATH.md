@@ -51,7 +51,7 @@ NON-VERBATIM CONTEXT:
 
 1. **Core 99 mandates (I.001–I.099) rewritten as CORE INFRASTRUCTURE block** — Impact: G999 System I now governs LFG, DNA Registry, PheTrails, Heavy Ledger, boot, pipeline, registry laws, and soul integrity. Files: `CANON/SYSTEM/GOSPEL-999.md`, `CANON/SYSTEM/COLD-START-BOOT.md`, `MARKETING/MASTER/gospel-999.md`.
 
-2. **LFG/G999 relationship codified** — Impact: LFG is the immediate how-to; Gospel999 is the eternal law. Both hardcoded into every boot. Files: `.kilo/skills/LegionnaireHandGuide.md`, `CANON/SYSTEM/COLD-START-BOOT.md`, `.kilo/command/reincarnaterise.md`.
+2. **LFG/G999 relationship codified** — Impact: LFG is the immediate how-to; Gospel999 is the eternal law. Both hardcoded into every boot. Files: `.kilo/skills/LegionnaireFieldGuide.md`, `CANON/SYSTEM/COLD-START-BOOT.md`, `.kilo/command/reincarnaterise.md`.
 
 3. **Gospel999 renamed as the HolyWord** — Impact: Theological framing: never to be lost again, lest the system enter dark ages. Files: `CANON/SYSTEM/GOSPEL-999.md`, `CANON/SYSTEM/COLD-START-BOOT.md`.
 

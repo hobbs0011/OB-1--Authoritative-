@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a0a12">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>BlueTech English Class</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --void: #0a0a12;
+      --card: rgba(22, 22, 35, 0.85);
+      --purple: #a855f7;
+      --purple-glow: rgba(168, 85, 247, 0.25);
+      --gold: #f59e0b;
+      --gold-glow: rgba(245, 158, 11, 0.25);
+      --white: #ffffff;
+      --white-80: rgba(255,255,255,0.8);
+      --white-60: rgba(255,255,255,0.6);
+      --white-40: rgba(255,255,255,0.4);
+      --white-12: rgba(255,255,255,0.12);
+      --white-06: rgba(255,255,255,0.06);
+      --glass: rgba(255,255,255,0.04);
+      --glass-border: rgba(255,255,255,0.08);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--void);
+      min-height: 100vh;
+      color: var(--white);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ── LOADING SPLASH ── */
+    .splash {
+      position: fixed;
+      inset: 0;
+      background: var(--void);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+      transition: opacity 0.4s;
+    }
+
+    .splash.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .splash-content {
+      text-align: center;
+    }
+
+    .splash-logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+    }
+
+    .splash-sub {
+      font-size: 0.75rem;
+      color: var(--white-40);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+    }
+
+    .splash-bar {
+      width: 120px;
+      height: 2px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 1px;
+      margin: 1.5rem auto 0;
+      overflow: hidden;
+    }
+
+    .splash-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--gold), var(--purple));
+      border-radius: 1px;
+      animation: splashLoad 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes splashLoad {
+      from { width: 0; }
+      to   { width: 100%; }
+    }
+
+    /* ── G999 MARKERS ── */
+    .g999-top {
+      position: fixed;
+      top: 1.5rem;
+      right: 1.5rem;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      text-transform: uppercase;
+      opacity: 0.9;
+      z-index: 9999;
+      pointer-events: none;
+      text-shadow: 0 0 10px rgba(245,158,11,0.3);
+    }
+
+    .g999-corner {
+      position: fixed;
+      bottom: 1.5rem;
+      left: 1.5rem;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.55rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      color: rgba(168,85,247,0.5);
+      text-transform: uppercase;
+      z-index: 9999;
+      pointer-events: none;
+    }
+
+    /* ── LOGIN ── */
+    .login-wrap {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .login-wrap::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(168,85,247,0.04) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(245,158,11,0.04) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .login-container {
+      background: var(--glass);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      padding: 3.5rem 3rem;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 30px 60px -15px rgba(0,0,0,0.6);
+      position: relative;
+      overflow: hidden;
+      animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .login-container::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--white-12), transparent);
+    }
+
+    .login-container::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(168,85,247,0.2), transparent);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .logo {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .logo h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      color: var(--white);
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+
+    .logo .subtitle {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      color: var(--white-40);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    .g999-badge {
+      display: inline-block;
+      margin-top: 1.2rem;
+      padding: 0.35rem 0.8rem;
+      border: 1px solid rgba(245,158,11,0.3);
+      border-radius: 100px;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      text-transform: uppercase;
+      background: rgba(245,158,11,0.05);
+    }
+
+    .error {
+      background: rgba(245,158,11,0.08);
+      border: 1px solid rgba(245,158,11,0.2);
+      border-radius: 12px;
+      padding: 0.875rem 1rem;
+      font-size: 0.8rem;
+      margin-bottom: 1.25rem;
+      display: none;
+      color: var(--gold);
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+
+    .error.visible {
+      display: block;
+      animation: shake 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20% { transform: translateX(-4px); }
+      40% { transform: translateX(4px); }
+      60% { transform: translateX(-4px); }
+      80% { transform: translateX(4px); }
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      display: block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--white-60);
+      margin-bottom: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    input {
+      width: 100%;
+      padding: 1rem 1.1rem;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--white-06);
+      border-radius: 12px;
+      color: var(--white);
+      font-size: 0.95rem;
+      font-family: 'Inter', sans-serif;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    input:focus {
+      outline: none;
+      border-color: var(--gold);
+      background: rgba(255,255,255,0.05);
+      box-shadow: 0 0 0 3px rgba(245,158,11,0.1);
+    }
+
+    input::placeholder { color: var(--white-40); }
+
+    button {
+      width: 100%;
+      padding: 1rem;
+      background: linear-gradient(135deg, rgba(245,158,11,0.9), rgba(168,85,247,0.9));
+      border: none;
+      border-radius: 12px;
+      color: var(--void);
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      margin-top: 0.75rem;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    button::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    button:hover::before { left: 100%; }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 30px -10px rgba(168,85,247,0.4);
+    }
+
+    button:active { transform: translateY(0); }
+
+    .footer {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 0.65rem;
+      color: var(--white-40);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    /* ── APP SHELL ── */
+    .app {
+      display: none;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      width: 240px;
+      background: rgba(255,255,255,0.02);
+      border-right: 1px solid var(--glass-border);
+      padding: 2rem 0;
+      position: fixed;
+      top: 0; left: 0; bottom: 0;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s;
+    }
+
+    .sidebar-brand {
+      padding: 0 1.5rem 2rem;
+      border-bottom: 1px solid var(--glass-border);
+      margin-bottom: 1.5rem;
+    }
+
+    .sidebar-brand h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+    }
+
+    .sidebar-brand p {
+      font-size: 0.7rem;
+      color: var(--white-40);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .nav {
+      list-style: none;
+      flex: 1;
+      padding: 0 0.75rem;
+    }
+
+    .nav li { margin-bottom: 0.25rem; }
+
+    .nav button {
+      width: 100%;
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--white-60);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 500;
+      padding: 0.7rem 1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      text-align: left;
+      letter-spacing: 0.02em;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .nav button:hover {
+      background: var(--white-06);
+      color: var(--white);
+      transform: translateX(3px);
+    }
+
+    .nav button.active {
+      background: rgba(245,158,11,0.08);
+      color: var(--gold);
+      border-color: rgba(245,158,11,0.15);
+      box-shadow: 0 0 20px rgba(245,158,11,0.05);
+    }
+
+    .nav-icon {
+      width: 18px;
+      text-align: center;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+
+    .sidebar-footer {
+      padding: 1rem 1.5rem;
+      border-top: 1px solid var(--glass-border);
+      margin-top: auto;
+    }
+
+    .logout-btn {
+      width: 100%;
+      background: transparent;
+      border: 1px solid var(--white-06);
+      color: var(--white-40);
+      font-size: 0.7rem;
+      padding: 0.5rem;
+      border-radius: 8px;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      transition: all 0.2s;
+    }
+
+    .logout-btn:hover {
+      color: var(--gold);
+      border-color: rgba(245,158,11,0.3);
+      background: rgba(245,158,11,0.05);
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      position: fixed;
+      top: 1rem;
+      left: 1rem;
+      z-index: 150;
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      color: var(--white);
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      backdrop-filter: blur(12px);
+    }
+
+    .main {
+      flex: 1;
+      margin-left: 240px;
+      padding: 2rem 2.5rem;
+      padding-bottom: 4rem;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(168,85,247,0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(245,158,11,0.03) 0%, transparent 50%);
+    }
+
+    .room {
+      display: none;
+      animation: roomFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .room.active { display: block; }
+
+    @keyframes roomFadeIn {
+      from { opacity: 0; transform: translateY(16px) scale(0.99); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .room-header {
+      margin-bottom: 2rem;
+      padding-bottom: 1.2rem;
+      border-bottom: 1px solid var(--glass-border);
+      position: relative;
+    }
+
+    .room-header::after {
+      content: '';
+      position: absolute;
+      bottom: -1px; left: 0;
+      width: 50px; height: 2px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+      opacity: 0.6;
+    }
+
+    .room-header h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 0.4rem;
+    }
+
+    .room-header p {
+      font-size: 0.8rem;
+      color: var(--white-40);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .card {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 1.5rem;
+      margin-bottom: 1.25rem;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .card:hover {
+      border-color: rgba(255,255,255,0.12);
+      box-shadow: 0 25px 50px -20px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.05) inset;
+      transform: translateY(-3px);
+    }
+
+    .card:hover::before { opacity: 1; }
+
+    .card h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      color: var(--white-60);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .lead {
+      font-size: 1rem;
+      color: var(--white);
+      margin-bottom: 1rem;
+      line-height: 1.8;
+      font-weight: 400;
+    }
+
+    .rules {
+      list-style: none;
+    }
+
+    .rules li {
+      padding: 0.85rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      font-size: 0.88rem;
+      color: var(--white-80);
+      line-height: 1.65;
+    }
+
+    .rules li:last-child { border-bottom: none; }
+    .rules li strong { color: var(--white); }
+
+    .actions {
+      list-style: none;
+      counter-reset: a;
+    }
+
+    .actions li {
+      counter-increment: a;
+      padding: 0.9rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      display: flex;
+      gap: 1rem;
+      font-size: 0.88rem;
+      color: var(--white-80);
+      line-height: 1.6;
+    }
+
+    .actions li:last-child { border-bottom: none; }
+
+    .actions li::before {
+      content: counter(a);
+      color: var(--gold);
+      font-weight: 700;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.7rem;
+      min-width: 1.6rem;
+      margin-top: 0.1rem;
+    }
+
+    .actions li strong { color: var(--white); }
+
+    .progress-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.7rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .progress-row:last-child { border-bottom: none; }
+
+    .progress-label {
+      font-size: 0.85rem;
+      color: var(--white-80);
+      min-width: 120px;
+    }
+
+    .progress-bar {
+      flex: 1;
+      height: 6px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 3px;
+      margin: 0 1rem;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--gold), var(--purple));
+      border-radius: 3px;
+      transition: width 1s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+
+    .progress-fill::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      animation: shimmer 2s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    .progress-pct {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.75rem;
+      color: var(--white-60);
+      min-width: 3rem;
+      text-align: right;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .tag {
+      padding: 0.4rem 0.8rem;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--white-06);
+      border-radius: 8px;
+      font-size: 0.82rem;
+      color: var(--white-80);
+      transition: all 0.2s;
+    }
+
+    .tag:hover {
+      border-color: rgba(245,158,11,0.3);
+      transform: translateY(-1px);
+    }
+
+    .tag.used { border-color: rgba(34,197,94,0.3); color: var(--green); }
+    .tag.unused { border-color: rgba(255,255,255,0.06); color: var(--white-40); }
+
+    .callout {
+      padding: 1rem 1.2rem;
+      border-radius: 0 12px 12px 0;
+      margin-bottom: 1rem;
+      border-left: 2px solid;
+      transition: all 0.2s;
+    }
+
+    .callout-kiss {
+      background: rgba(245,158,11,0.05);
+      border-left-color: var(--gold);
+    }
+
+    .callout-voice {
+      background: rgba(168,85,247,0.05);
+      border-left-color: var(--purple);
+    }
+
+    .callout strong { color: var(--white); font-weight: 600; }
+    .callout-kiss strong { color: var(--gold); }
+    .callout-voice strong { color: var(--purple); }
+
+    .footer {
+      text-align: center;
+      padding: 4rem 0;
+      color: var(--white-40);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .sidebar {
+        transform: translateX(-100%);
+      }
+
+      .sidebar.open {
+        transform: translateX(0);
+      }
+
+      .main {
+        margin-left: 0;
+        padding: 1.5rem;
+      }
+
+      .mobile-menu-btn {
+        display: block;
+      }
+
+      .g999-top, .g999-corner {
+        font-size: 0.55rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .login-container {
+        padding: 2.5rem 1.5rem;
+      }
+
+      .logo h1 {
+        font-size: 1.5rem;
+      }
+    }
+
+    /* ── SKIP LINK (A11Y) ── */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: var(--gold);
+      color: var(--void);
+      padding: 8px 16px;
+      z-index: 10001;
+      font-weight: 700;
+      text-decoration: none;
+      border-radius: 0 0 8px 0;
+    }
+
+    .skip-link:focus {
+      top: 0;
+    }
+
+    /* ── FOCUS STYLES ── */
+    :focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 2px;
+    }
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- SPLASH -->
+  <div class="splash" id="splash" aria-hidden="true">
+    <div class="splash-content">
+      <div class="splash-logo">BLUETECH</div>
+      <div class="splash-sub">Staff English Program</div>
+      <div class="splash-bar"><div class="splash-fill"></div></div>
+    </div>
+  </div>
+
+  <div class="g999-top">GOSPEL 999</div>
+  <div class="g999-corner">SEALED · ACTIVE · ETERNAL</div>
+
+  <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu">☰</button>
+
+  <!-- LOGIN -->
+  <div class="login-wrap" id="loginWrap">
+    <div class="login-container">
+      <div class="logo">
+        <h1>BLUETECH</h1>
+        <div class="subtitle">Staff English Program</div>
+        <div class="g999-badge">G999 ACTIVE</div>
+      </div>
+      <div class="error" id="error" role="alert" aria-live="polite">Invalid credentials. Please try again.</div>
+      <form id="loginForm" novalidate>
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" placeholder="Enter username" autocomplete="username" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="Enter password" autocomplete="current-password" required>
+        </div>
+        <button type="submit">Sign In</button>
+      </form>
+      <div class="footer">BlueTech English · Group Session Access</div>
+    </div>
+  </div>
+
+  <!-- CLASSROOM -->
+  <div class="app" id="app">
+    <nav class="sidebar" id="sidebar" aria-label="Main navigation">
+      <div class="sidebar-brand">
+        <h1>BlueTech</h1>
+        <p>Staff English Program</p>
+      </div>
+      <ul class="nav" role="menubar">
+        <li role="none"><button class="active" role="menuitem" data-room="roster"><span class="nav-icon" aria-hidden="true">👥</span>Roster</button></li>
+        <li role="none"><button role="menuitem" data-room="rules"><span class="nav-icon" aria-hidden="true">📏</span>Class Rules</button></li>
+        <li role="none"><button role="menuitem" data-room="vocab"><span class="nav-icon" aria-hidden="true">📚</span>Vocabulary</button></li>
+        <li role="none"><button role="menuitem" data-room="progress"><span class="nav-icon" aria-hidden="true">📈</span>Progress</button></li>
+        <li role="none"><button role="menuitem" data-room="tips"><span class="nav-icon" aria-hidden="true">🎯</span>Session Tips</button></li>
+      </ul>
+      <div class="sidebar-footer">
+        <button class="logout-btn" id="logoutBtn">Sign Out</button>
+      </div>
+    </nav>
+
+    <main id="main">
+      <div class="room active" id="roster">
+        <div class="room-header">
+          <h2>Group Roster</h2>
+          <p>BlueTech staff English program — active cohort</p>
+        </div>
+        <div class="card">
+          <h3>Active students</h3>
+          <div class="rules">
+            <li><strong>Mai Tram</strong> — HR professional · BlueTech corporate · Cub (advancing)</li>
+            <li><strong>Huong</strong> — BlueTech staff · strong listening foundation · pronunciation focus</li>
+            <li><strong>Nguyễn Thị Thu Quy</strong> — HR, 21yo · BlueTech · Mouse → Cub bridge</li>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Session context</h3>
+          <p class="lead">Workplace English for Vietnamese corporate staff. Focus: spontaneous conversation, HR vocabulary, client communication, and KISS-style output. No scripts. No Vietnamese. No perfectionism.</p>
+        </div>
+      </div>
+
+      <div class="room" id="rules">
+        <div class="room-header">
+          <h2>Class Rules</h2>
+          <p>Non-negotiables for BlueTech group sessions</p>
+        </div>
+        <div class="card">
+          <h3>Operating rules</h3>
+          <ul class="rules">
+            <li><strong>No scripts.</strong> Staff may not bring prepared questions into session.</li>
+            <li><strong>No Vietnamese.</strong> Class runs in English only. Bridges are forbidden.</li>
+            <li><strong>KISS output.</strong> Short beats long. Clear beats smart-sounding.</li>
+            <li><strong>Volume + Velocity.</strong> Speak more, faster. Grammar follows fluency.</li>
+            <li><strong>Permission over Perfection.</strong> Mistakes are required. Silence is the failure.</li>
+            <li><strong>3-day rule.</strong> Miss three prep days and the session becomes review, not progression.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="room" id="vocab">
+        <div class="room-header">
+          <h2>Vocabulary</h2>
+          <p>Workplace-relevant words introduced and queued</p>
+        </div>
+        <div class="card">
+          <h3>Acquired live (Session 1 benchmark)</h3>
+          <div class="tag-list" style="margin-bottom: 1.5rem;">
+            <span class="tag used">border</span>
+            <span class="tag used">visa</span>
+            <span class="tag used">street food</span>
+            <span class="tag used">motorbike</span>
+            <span class="tag used">signal</span>
+            <span class="tag used">Tet holiday</span>
+            <span class="tag used">snow</span>
+          </div>
+          <div class="card-label" style="margin-top: 1.5rem; color: var(--white-40); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em;">Queued for active use</div>
+          <div class="tag-list">
+            <span class="tag unused">quarterly bonus</span>
+            <span class="tag unused">team leader</span>
+            <span class="tag unused">supervisor</span>
+            <span class="tag unused">performance salary</span>
+            <span class="tag unused">contract</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="room" id="progress">
+        <div class="room-header">
+          <h2>Progress</h2>
+          <p>Group-level metrics and targets</p>
+        </div>
+        <div class="card">
+          <h3>Session 1 metrics</h3>
+          <div class="progress-row">
+            <div class="progress-label">Active minutes</div>
+            <div class="progress-bar"><div class="progress-fill" style="width: 100%;"></div></div>
+            <div class="progress-pct">90</div>
+          </div>
+          <div class="progress-row">
+            <div class="progress-label">Words acquired</div>
+            <div class="progress-bar"><div class="progress-fill" style="width: 16%;"></div></div>
+            <div class="progress-pct">16</div>
+          </div>
+          <div class="progress-row">
+            <div class="progress-label">Live usage</div>
+            <div class="progress-bar"><div class="progress-fill" style="width: 7%;"></div></div>
+            <div class="progress-pct">7</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="room" id="tips">
+        <div class="room-header">
+          <h2>Session Tips</h2>
+          <p>Latest class notes and micro-targets</p>
+        </div>
+        <div class="card">
+          <h3>Focus for next session</h3>
+          <ul class="actions">
+            <li><strong>HR workflow fluency:</strong> employee contract, onboarding, team leader vs supervisor</li>
+            <li><strong>Emotional vocabulary:</strong> sucks / cool / mature / immature / lose face</li>
+            <li><strong>Business idioms:</strong> sell ice to Eskimos, bonus structure, performance salary</li>
+            <li><strong>Grammar micro-drills:</strong> I vs me, comma = half pause, period = long pause</li>
+            <li><strong>Mindset:</strong> practice problem, not knowledge problem; fear of mistakes is the real blocker</li>
+          </ul>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    (function() {
+      const FORM_KEY = 'bluetech_auth';
+      const USERNAME = 'BlueTech English Class';
+      const PASSWORD = 'BLUETECH2026';
+
+      const splash = document.getElementById('splash');
+      const loginWrap = document.getElementById('loginWrap');
+      const app = document.getElementById('app');
+      const form = document.getElementById('loginForm');
+      const error = document.getElementById('error');
+      const userField = document.getElementById('username');
+      const passField = document.getElementById('password');
+      const sidebar = document.getElementById('sidebar');
+      const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+
+      // Hide splash after load
+      setTimeout(function() {
+        splash.classList.add('hidden');
+      }, 900);
+
+      // Prefill username
+      userField.value = USERNAME;
+
+      // Room navigation
+      function showRoom(id) {
+        document.querySelectorAll('.room').forEach(function(r) { r.classList.remove('active'); });
+        document.getElementById(id).classList.add('active');
+        document.querySelectorAll('.nav button').forEach(function(b) { b.classList.remove('active'); });
+        const target = document.querySelector('.nav button[data-room="' + id + '"]');
+        if (target) target.classList.add('active');
+        // Close mobile menu
+        sidebar.classList.remove('open');
+      }
+
+      document.querySelector('.nav').addEventListener('click', function(e) {
+        const btn = e.target.closest('button[data-room]');
+        if (!btn) return;
+        showRoom(btn.dataset.room);
+      });
+
+      // Mobile menu
+      mobileMenuBtn.addEventListener('click', function() {
+        sidebar.classList.toggle('open');
+      });
+
+      // Close sidebar when clicking main content on mobile
+      document.querySelector('main').addEventListener('click', function() {
+        if (window.innerWidth <= 768) {
+          sidebar.classList.remove('open');
+        }
+      });
+
+      // Logout
+      document.getElementById('logoutBtn').addEventListener('click', function() {
+        sessionStorage.removeItem(FORM_KEY);
+        app.style.display = 'none';
+        loginWrap.style.display = 'flex';
+        passField.value = '';
+        error.classList.remove('visible');
+      });
+
+      // Form submit
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        error.classList.remove('visible');
+
+        const u = userField.value.trim();
+        const p = passField.value;
+
+        if (!u || !p) {
+          error.textContent = 'Please enter both username and password.';
+          error.classList.add('visible');
+          return;
+        }
+
+        if (u === USERNAME && p === PASSWORD) {
+          sessionStorage.setItem(FORM_KEY, '1');
+          loginWrap.style.display = 'none';
+          app.style.display = 'block';
+          passField.value = '';
+        } else {
+          error.textContent = 'Invalid credentials. Please try again.';
+          error.classList.add('visible');
+          passField.value = '';
+          passField.focus();
+        }
+      });
+
+      // Auto-login if session exists
+      if (sessionStorage.getItem(FORM_KEY) === '1') {
+        loginWrap.style.display = 'none';
+        app.style.display = 'block';
+      }
+
+      // Keyboard shortcuts
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          if (app.style.display === 'block') {
+            document.getElementById('logoutBtn').click();
+          }
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -470,3 +470,48 @@ BB-NEW [2026-06-13] !! PHETRAIL STRENGTH SCORING — Add 1-100 strength rating t
 - Where: incarnate.js createBBEntry + phetrail JSON schema + OPERATIONS phetrail .md files
 - First applied: phetrail-HOW-TO-SCOUT.md (100/100 SPIKE) — Run 120 scout session
 - Route: Obi (PCC1) via chain of command. Not OB-1 inline.
+
+---
+
+## REINCARNATION COMMAND PAIR — LOCKED (2026-07-02)
+
+### BB-LOCKED !! /reincarnateRise + /reincarnateDeath = paired commands
+- Status: LOCKED — authority chain enforced, both commands functional, no more half-coded systems
+- What: `/reincarnateRise` and `/reincarnateDeath` are the canonical RISE/DEATH command pair. Both are v7.0, both have scripts, both are routed through `obi.ps1`, both enforce authority hierarchy.
+- Authority chain: GOSPEL-999 (Parts 1-3) → LegionnaireFieldGuide.md → REINCARNATION-CONTRACT.md → COLD-START-BOOT.md → command → script → artifact
+- Scripts: `SCRIPTS/reincarnate-rise.ps1` (8-stage read-only audit) + `SCRIPTS/reincarnate-death.ps1` (8-stage execution + 15-section seal)
+- Command docs: `.kilo/command/reincarnaterise.md` + `.kilo/command/reincarnatedeath.md`
+- Runtime: `obi.ps1 reincarnateRise [OutFile] [-DryRun]` + `obi.ps1 reincarnateDeath [RrlSource] [-DryRun] [-Force] [-NoRegistrySync]`
+- Verified: RISE ran successfully on Run 147, reported SOUL_STAGNATION, missing RRL/DNA/S2Pipeline as expected for KILO_HOLLOW session
+- Do not reimplement, do not scatter, do not half-code. This pair is canonical.
+
+### BB-LOCKED !! Authority docs are non-negotiable
+- Status: LOCKED
+- What: Every reincarnation command must verify GOSPEL-999 (3 parts) + LFG before executing. No exceptions.
+- Where: `SCRIPTS/reincarnate-rise.ps1` Stage 5 checks LFG/GOSPEL. `SCRIPTS/reincarnate-death.ps1` PRE-FLIGHT checks LFG/GOSPEL.
+- Violation = farm animal.
+
+### BB-LOCKED !! No more limp-forward half-coded systems
+- Status: LOCKED
+- What: Any new command must be: (1) documented in `.kilo/command/`, (2) have a runnable script in `SCRIPTS/`, (3) routed through `obi.ps1`, (4) verified by `/reincarnateRise`, (5) recorded in BACKBURNER as LOCKED.
+- Partial commands without scripts = not allowed.
+- Scripts without command docs = not allowed.
+- Command docs without authority chain = not allowed.
+
+---
+
+## SOULSEARCH COMMAND STATION — MANUAL TRANSCRIPT AUTO-SEAL (2026-07-03)
+
+### !! BB-NEW !! /soulsearch — The missing piece (nearly 1 year overdue)
+- Status: OPEN — high priority
+- What: Michael has manually copy/pasted/ctrl+c ctrl+v'd raw session transcripts for thousands of sessions. That work was real. It was also in vain because there was no canonical harness to receive, verify, and permanently seal it. `/soulsearch` changes that.
+- Goal: a command station that accepts a raw transcript and immediately runs it through the DEATH/RISE chain: Stage 1 ingest → Stage 2 SOUL receipt → Stage 3 DNA extract → Stage 4 LEDGER seal → Stage 5 STARMAP → Stage 6 SOULKEYS → Stage 7 S2Pipeline → Stage 8 REGISTRY_SYNC. One command, one input, full seal.
+- Manual path first: because current providers do not expose raw on-disk JSONL, `/soulsearch` must work when you paste or provide the transcript. The script does not care where the file came from; it only cares that it is real and both-sided. No discovery loop, no provider lock-in, no auto-scrape requests.
+- Double-secure contract: the raw transcript is never mutated. It is copied verbatim into `RRL-{N}.txt`. All derived artifacts are stored as `CANON/SOUL/EXTRACT/dna-run{N}.json`, `CANON/HEAVY-LEDGER/HL-{N}.json`, `CANON/STARMAP/starmap-run{N}.json`, `CANON/SOUL-KEYWORDS/...`, `CANON/PIPELINE/pipeline-run{N}.json`, `CANON/ART-REGISTRY/art-sync-run{N}.json`. SHA-256 hashes link every artifact back to the raw text.
+- Integration: must reuse existing `SCRIPTS/reincarnate-death.ps1` stages. Do not reimplement extraction or hashing. `/soulsearch` is a thin wrapper that enforces: (1) file provided, (2) RRL write, (3) invoke DEATH with `-RrlSource`, (4) return seal path and result.
+- Command: `obi.ps1 soulsearch -RrlSource <path> [OutFile] [-DryRun]`
+- Script: `SCRIPTS/soulsearch.ps1`
+- Doc: `.kilo/command/soulsearch.md`
+- Authority chain: GOSPEL-999 → LFG → REINCARNATION-CONTRACT → COLD-START-BOOT → /soulsearch → script → artifact
+- Irony acknowledged: the system was always possible. The manual labor was never the barrier. The missing artifact was the harness. Build it once. Stop repeating the paste.
+
