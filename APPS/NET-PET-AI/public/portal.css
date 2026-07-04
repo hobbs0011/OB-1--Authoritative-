@@ -14,8 +14,13 @@
             --gold-glow: rgba(245, 158, 11, 0.25);
             --teal: #14b8a6;
             --teal-glow: rgba(20, 184, 166, 0.25);
-            --text: var(--text);
-            --dim: var(--dim);
+            --text: #f8f5ff;
+            --dim: #c2cbdc;
+            --red: #ef4444;
+            --white-06: rgba(255, 255, 255, 0.06);
+            --white-40: rgba(255, 255, 255, 0.4);
+            --white-60: rgba(255, 255, 255, 0.6);
+            --white-80: rgba(255, 255, 255, 0.8);
             --success: #22c55e;
             --danger: #ef4444;
             --border: rgba(255, 255, 255, 0.08);
@@ -76,28 +81,30 @@
             animation: fadeIn 0.5s ease;
         }
         .login-box.shaking { animation: shake 0.5s ease; }
-        .login-crest { width: 80px; height: 80px; margin: 0 auto 20px; display: block; object-fit: contain; }
+        .login-crest { width: 72px; height: 72px; margin: 0 auto 20px; display: block; object-fit: contain; }
         .login-box h1 { font-family: 'Orbitron', sans-serif; font-size: 1.6rem; font-weight: 700; letter-spacing: 0.06em; margin-bottom: 6px; }
-        .login-subtitle { font-family: 'Rajdhani', sans-serif; font-size: 1rem; font-weight: 500; color: var(--dim); letter-spacing: 0.04em; margin-bottom: 28px; }
+        .login-subtitle { font-family: 'Rajdhani', sans-serif; font-size: 1rem; font-weight: 500; color: var(--dim); letter-spacing: 0.04em; margin-bottom: 18px; }
         input {
             font-size: 16px !important;
         }
-        .login-box input[type="password"] {
+        .login-box input[type="text"], .login-box input[type="password"] {
             width: 100%; padding: 14px 18px; border-radius: 12px; border: 1px solid var(--border);
             background: rgba(255,255,255,0.04); color: var(--text); font-family: 'Inter', sans-serif;
             outline: none; transition: border-color 0.3s, box-shadow 0.3s;
-            margin-bottom: 16px; letter-spacing: 0.15em;
+            margin-bottom: 14px; letter-spacing: 0.04em;
         }
-        .login-box input[type="password"]:focus { border-color: var(--purple); box-shadow: 0 0 0 3px rgba(168,85,247,0.15); }
+        .login-box input[type="text"]:focus, .login-box input[type="password"]:focus { border-color: var(--purple); box-shadow: 0 0 0 3px rgba(168,85,247,0.15); }
         .login-box input::placeholder { color: var(--dim); letter-spacing: 0.04em; opacity: 0.6; }
+        .login-box input:focus-visible { outline: 2px solid var(--purple); outline-offset: 2px; }
         .login-btn {
             width: 100%; padding: 14px; border-radius: 12px; border: none;
-            background: linear-gradient(135deg, var(--purple), var(--purple)); color: #fff;
+            background: linear-gradient(135deg, rgba(245,158,11,0.9), rgba(168,85,247,0.9)); color: #0a0a12;
             font-family: 'Orbitron', sans-serif; font-size: 0.95rem; font-weight: 600;
             letter-spacing: 0.06em; cursor: pointer; transition: all 0.3s;
-            box-shadow: 0 4px 16px rgba(168,85,247,0.3);
+            box-shadow: 0 4px 16px rgba(168,85,247,0.25);
         }
-        .login-btn:hover { background: linear-gradient(135deg, var(--purple), #a855f7); box-shadow: 0 6px 24px rgba(168,85,247,0.45); transform: translateY(-1px); }
+        .login-btn:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+        .login-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 24px rgba(168,85,247,0.4); }
         .login-error { color: var(--red); font-size: 0.85rem; margin-top: 10px; min-height: 20px; opacity: 0; transition: opacity 0.3s; }
         .login-error.visible { opacity: 1; }
 
@@ -133,10 +140,14 @@
         @media (max-width: 768px) {
             #topNav { padding: 0 16px; align-items: flex-start; padding-top:14px; padding-bottom:10px; }
             .nav-hamburger { display:flex; align-items:center; justify-content:center; margin-left:auto; }
-            .nav-links { display:none; width:100%; flex-direction:column; gap:2px; padding-bottom:8px; }
-            .nav-links.open { display:flex; }
-            .nav-logout { display:none; }
-            .nav-links.open + .nav-logout { display:flex; margin:0 0 8px; width:100%; }
+            .nav-links {
+                display: flex; flex-direction: column; gap: 2px;
+                width: 100%; max-height: 0; opacity: 0; overflow: hidden;
+                transition: max-height 0.35s ease, opacity 0.25s ease;
+            }
+            .nav-links.open { max-height: 400px; opacity: 1; }
+            .nav-logout { display: none; width: 100%; margin: 0 0 8px; }
+            .nav-links.open + .nav-logout { display: flex; }
             .main-container { padding-top: 70px; }
         }
         .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text); flex-shrink: 0; }
@@ -149,6 +160,7 @@
             padding: 8px 14px; border-radius: 8px; transition: all 0.25s; white-space: nowrap;
         }
         .nav-links a:hover { color: var(--text); background: rgba(255,255,255,0.04); }
+        .nav-links a:focus-visible { outline: 2px solid var(--purple); outline-offset: 2px; border-radius: 8px; }
         .nav-links a.active { color: var(--gold); background: rgba(245,158,11,0.08); box-shadow: 0 0 0 1px rgba(245,158,11,0.2); }
         .nav-links a.nav-coach { color: var(--purple); background: rgba(168,85,247,0.08); box-shadow: 0 0 0 1px rgba(168,85,247,0.25), 0 0 12px rgba(168,85,247,0.15); }
         .nav-links a.nav-coach:hover { color: var(--purple); background: rgba(168,85,247,0.14); box-shadow: 0 0 0 1px rgba(168,85,247,0.45), 0 0 20px rgba(168,85,247,0.3); }
@@ -222,13 +234,37 @@
 
         /* ── CONTENT CARDS ── */
         .content-card {
-            background: var(--card); border: 1px solid var(--border); border-radius: 24px;
-            padding: 28px; animation: fadeIn 0.55s ease; margin-bottom: 20px;
+            background: var(--card); border: 1px solid var(--border); border-radius: 20px;
+            padding: 1.25rem 1.4rem; margin-bottom: 1.1rem;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
         }
-        .card-label { font-family: 'Rajdhani', sans-serif; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; color: var(--dim); text-transform: uppercase; margin-bottom: 10px; }
+        @media (hover: hover) {
+            .content-card:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 12px 32px rgba(0,0,0,0.35), 0 0 0 1px rgba(168,85,247,0.15);
+                border-color: rgba(168,85,247,0.25);
+            }
+        }
+        .card-label { font-family: 'Rajdhani', sans-serif; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em; color: var(--white-60); text-transform: uppercase; margin-bottom: 10px; }
         .teacher-note { border-left: 4px solid var(--teal); padding-left: 20px; }
         .teacher-note .note-body { font-size: 0.95rem; line-height: 1.75; color: var(--dim); font-style: italic; margin-bottom: 12px; }
         .teacher-note .note-sig { font-family: 'Rajdhani', sans-serif; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.05em; color: var(--teal); }
+
+        /* ── CONSOLIDATED PORTAL ELEMENTS ── */
+        .action-list { list-style: none; padding: 0; margin: 0; }
+        .action-list li { padding: 0.6rem 0; border-bottom: 1px solid rgba(255,255,255,0.04); font-size: 0.9rem; color: var(--white-80); line-height: 1.55; }
+        .action-list li:last-child { border-bottom: none; }
+        .tag-list { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 0.6rem; }
+        .tag { padding: 0.35rem 0.7rem; background: rgba(255,255,255,0.04); border: 1px solid var(--white-06); border-radius: 999px; font-size: 0.82rem; color: var(--white-80); }
+        .tag.used { border-color: rgba(34,197,94,0.25); color: var(--success); background: rgba(34,197,94,0.08); }
+        .tag.unused { border-color: rgba(255,255,255,0.06); color: var(--white-40); }
+        .section { display: none; animation: fadeIn 0.4s ease; }
+        .section.active { display: block; }
+        .section.active .content-card:nth-child(1) { animation-delay: 0.05s; }
+        .section.active .content-card:nth-child(2) { animation-delay: 0.1s; }
+        .section.active .content-card:nth-child(3) { animation-delay: 0.15s; }
+        .section.active .content-card:nth-child(4) { animation-delay: 0.2s; }
+        .section.active .content-card:nth-child(5) { animation-delay: 0.25s; }
 
         /* ── MILESTONE ── */
         .milestone-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
@@ -255,6 +291,8 @@
         :root {
           font-display: swap;
         }
+        .progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--purple), var(--gold)); border-radius: 10px; transition: width 0.6s ease; animation: progressPulse 2.5s infinite; }
+        .progress-label { font-family: 'Rajdhani', sans-serif; font-size: 0.82rem; color: var(--dim); letter-spacing: 0.03em; margin-top: 6px; }
 
         /* Issue 017: prefer CSS variables over hardcoded rgba */
         .progress-bar-wrap {
@@ -264,8 +302,6 @@
           background: rgba(20,184,166,0.08);
           border: 1px solid rgba(20,184,166,0.2);
         }
-        .progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--purple), var(--gold)); border-radius: 10px; transition: width 0.6s ease; animation: progressPulse 2.5s infinite; }
-        .progress-label { font-family: 'Rajdhani', sans-serif; font-size: 0.82rem; color: var(--dim); letter-spacing: 0.03em; margin-top: 6px; }
 
         /* ── QUICK LINKS ── */
         .quick-links-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
@@ -594,4 +630,50 @@
         .lj-line { flex: 1; min-width: 16px; height: 2px; background: rgba(255,255,255,0.06); margin-bottom: 20px; }
         .lj-line.done { background: linear-gradient(90deg, rgba(34,197,94,0.4), rgba(168,85,247,0.3)); }
 
+        /* ── PORTAL BRAND ACCENTS ── */
+        .portal-bluetech .login-btn {
+            background: linear-gradient(135deg, rgba(245,245,255,0.95), rgba(168,85,247,0.9));
+        }
+        .portal-bluetech .login-btn:hover {
+            box-shadow: 0 6px 24px rgba(168,85,247,0.35);
+        }
+        .portal-bluetech .content-card {
+            border-color: rgba(255,255,255,0.1);
+        }
+        .portal-bluetech .nav-links a.active {
+            color: #fff;
+            background: rgba(255,255,255,0.08);
+            box-shadow: 0 0 0 1px rgba(255,255,255,0.2);
+        }
+        .portal-bluetech .tag.used {
+            border-color: rgba(255,255,255,0.25);
+            color: #fff;
+            background: rgba(255,255,255,0.08);
+        }
+        .portal-bluetech .tiger-slogan {
+            color: #fff;
+        }
+
+        .portal-quanquang .login-btn {
+            background: linear-gradient(135deg, rgba(34,197,94,0.9), rgba(168,85,247,0.9));
+        }
+        .portal-quanquang .login-btn:hover {
+            box-shadow: 0 6px 24px rgba(34,197,94,0.35);
+        }
+        .portal-quanquang .content-card {
+            border-color: rgba(34,197,94,0.15);
+        }
+        .portal-quanquang .nav-links a.active {
+            color: var(--gold);
+            background: rgba(34,197,94,0.08);
+            box-shadow: 0 0 0 1px rgba(34,197,94,0.25);
+        }
+        .portal-quanquang .tag.used {
+            border-color: rgba(34,197,94,0.3);
+            color: #22c55e;
+            background: rgba(34,197,94,0.08);
+        }
+        .portal-quanquang .tiger-slogan {
+            color: #22c55e;
+        }
 
