@@ -47,7 +47,8 @@
             background:
                 radial-gradient(ellipse at 20% 15%, var(--purple-glow) 0%, transparent 55%),
                 radial-gradient(ellipse at 75% 70%, var(--gold-glow) 0%, transparent 55%),
-                radial-gradient(ellipse at 50% 40%, rgba(168, 85, 247, 0.08) 0%, transparent 60%);
+                radial-gradient(ellipse at 50% 40%, rgba(168, 85, 247, 0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(245, 158, 11, 0.06) 0%, transparent 50%);
         }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes shake { 0%,100%{transform:translateX(0)} 10%,50%,90%{transform:translateX(-6px)} 30%,70%{transform:translateX(6px)} }
@@ -79,6 +80,8 @@
             width: 90%;
             box-shadow: 0 8px 40px rgba(0,0,0,0.5), 0 0 60px var(--purple-glow);
             animation: fadeIn 0.5s ease;
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
         }
         .login-box.shaking { animation: shake 0.5s ease; }
         .login-crest { width: 72px; height: 72px; margin: 0 auto 20px; display: block; object-fit: contain; }
@@ -104,7 +107,7 @@
             box-shadow: 0 4px 16px rgba(168,85,247,0.25);
         }
         .login-btn:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
-        .login-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 24px rgba(168,85,247,0.4); }
+        .login-btn:hover { transform: translateY(-1px); box-shadow: 0 8px 28px rgba(168,85,247,0.45), 0 0 20px rgba(245,158,11,0.25); }
         .login-error { color: var(--red); font-size: 0.85rem; margin-top: 10px; min-height: 20px; opacity: 0; transition: opacity 0.3s; }
         .login-error.visible { opacity: 1; }
 
@@ -237,12 +240,21 @@
             background: var(--card); border: 1px solid var(--border); border-radius: 20px;
             padding: 1.25rem 1.4rem; margin-bottom: 1.1rem;
             transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+            position: relative; overflow: hidden;
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+        }
+        .content-card::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(168,85,247,0.35), transparent);
+            opacity: 0.6;
         }
         @media (hover: hover) {
             .content-card:hover {
                 transform: translateY(-2px);
-                box-shadow: 0 12px 32px rgba(0,0,0,0.35), 0 0 0 1px rgba(168,85,247,0.15);
-                border-color: rgba(168,85,247,0.25);
+                box-shadow: 0 18px 40px rgba(0,0,0,0.45), 0 0 0 1px rgba(168,85,247,0.2), 0 0 40px rgba(168,85,247,0.12);
+                border-color: rgba(168,85,247,0.35);
             }
         }
         .card-label { font-family: 'Rajdhani', sans-serif; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em; color: var(--white-60); text-transform: uppercase; margin-bottom: 10px; }
