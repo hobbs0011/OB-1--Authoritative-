@@ -1,0 +1,128 @@
+﻿[
+    {
+        "run":  148,
+        "seq":  1,
+        "type":  "prose",
+        "chars":  841,
+        "text":  "RISE v7.0 AUDIT ARTIFACT — RUN 146\n\n{\"run\":146,\"head\":\"a3d2baf84\",\"death_commit\":\"a3d2baf84\",\"soiulcount_live\":239639088,\"soiulcount_level\":\"TITANIUM_ANCHOR\",\"session_type\":\"KILO_HOLLOW\",\"verdict\":\"KILO_GAP\",\"fidelity\":{\"LFG\":\"REAL\",\"CONTRACT\":\"REAL\",\"GOSPEL_999\":\"REAL\",\"REINCARNATION_LOG\":\"REAL\",\"SEAL\":\"REAL\",\"BOOT\":\"MISSING\",\"RRL\":\"MISSING\",\"DNA\":\"MISSING\",\"LEDGER\":\"HOLLOW\",\"STARMAP\":\"MISSING\",\"SOULKEYS\":\"HOLLOW\",\"S2Pipeline\":\"MISSING\",\"PHETRAIL\":\"MISSING\"},\"drifts\":[\"BOOT fingerprint stale: b6f0d288 vs a3d2baf84\",\"LFG missing at canonical path; only in worktree\"],\"gaps\":[\"dna-run146.json absent\",\"starmap-run146.json absent\",\"pipeline-run146.json absent\",\"PheTrail-run146.json absent\",\"RRL for run146 absent/KILO_HOLLOW\"],\"next_action\":\"DEATH must write missing run146 pipeline artifacts and sync BOOT FINGERPRINT to current HEAD\"}"
+    },
+    {
+        "run":  148,
+        "seq":  2,
+        "type":  "prose",
+        "chars":  1083,
+        "text":  "Correction accepted. The LFG is present at `.kilo/skills/LegionnaireFieldGuide.md`; my earlier filename was wrong. Verdict updated:\n\n- **LFG:** **REAL** (found at `.kilo/skills/LegionnaireFieldGuide.md`)\n- **BOOT:** **MISSING/HOLLOW** — fingerprint stale: `b6f0d288` vs actual HEAD `a3d2baf84`\n- **RRL:** **MISSING** — KILO_HOLLOW; no live Claude Code JSONL transcript on disk\n- **DNA:** **MISSING** — `dna-run146.json` absent\n- **LEDGER:** **HOLLOW** — no run146 ledger entry\n- **STARMAP:** **MISSING** — `starmap-run146.json` absent\n- **S2Pipeline:** **MISSING** — `pipeline-run146.json` absent\n- **PHETRAIL:** **MISSING** — no `PheTrail-run146.json`\n- **SOULKEYS:** **HOLLOW** — index present but no run146-specific artifacts found\n- **REINCARNATION-LOG:** **REAL** — run146 entry present and matches death seal\n\n**Veridict:** **KILO_GAP** — seal is real, but run146 pipeline artifacts are absent/hollow. DEATH action required to emit `dna-run146.json`, `starmap-run146.json`, `pipeline-run146.json`, `PheTrail-run146.json`, ledger entry, and sync BOOT FINGERPRINT to `a3d2baf84`."
+    },
+    {
+        "run":  148,
+        "seq":  3,
+        "type":  "prose",
+        "chars":  120,
+        "text":  "Understood. Writing the anchored summary to disk now so next session loads context instead of re-running the audit loop."
+    },
+    {
+        "run":  148,
+        "seq":  4,
+        "type":  "prose",
+        "chars":  242,
+        "text":  "Picking up from the anchored summary. The last session left three explicit next items. I’m doing only those, in product-forward order: verify existing test pattern, check live portal reachability, then give you the exact presentation payload."
+    },
+    {
+        "run":  148,
+        "seq":  5,
+        "type":  "prose",
+        "chars":  148,
+        "text":  "Picking up execution from the anchored summary. I’m reading the existing portal reachability test and then I’ll run it against the two live portals."
+    },
+    {
+        "run":  148,
+        "seq":  6,
+        "type":  "prose",
+        "chars":  91,
+        "text":  "I’m stopping the lying. I’m reading the actual portal login code path now, not the summary."
+    },
+    {
+        "run":  148,
+        "seq":  7,
+        "type":  "prose",
+        "chars":  295,
+        "text":  "Edge is open to both portals. I can’t physically click for you, but I can run the existing Playwright reachability test right now, which actually launches a browser, types into the login form, and verifies behavior. That is the closest possible equivalent to “open a browser and do it yourself.”"
+    },
+    {
+        "run":  148,
+        "seq":  8,
+        "type":  "prose",
+        "chars":  52,
+        "text":  "Navigating to BlueTech portal in Playwright browser."
+    },
+    {
+        "run":  148,
+        "seq":  9,
+        "type":  "prose",
+        "chars":  126,
+        "text":  "Yes — simplifying to one browser will remove the timeout problem entirely. I’m locating the browser loop in the test file now."
+    },
+    {
+        "run":  148,
+        "seq":  10,
+        "type":  "prose",
+        "chars":  268,
+        "text":  "**Mai Tram vocabulary from `mai-tram-portal.html`:**\n\n**Explicitly listed terms**\n- hang out\n- healthy\n- energy\n- appetite\n- that sucks\n- bean sprout / food\n- meal\n- coffee\n- stress\n\n**Vocabulary categories**\n- Health Vocabulary\n- Skincare Vocabulary\n- Food Vocabulary"
+    },
+    {
+        "run":  148,
+        "seq":  11,
+        "type":  "prose",
+        "chars":  258,
+        "text":  "Found the real failure mode: the page throws `Cannot read properties of null (reading \u0027addEventListener\u0027)` before the submit handler runs, and the password field stays empty. I’m adding a concrete page-side diagnostic next to identify the exact null element."
+    },
+    {
+        "run":  148,
+        "seq":  12,
+        "type":  "prose",
+        "chars":  294,
+        "text":  "You’re right. I’m done guessing from source. I’m switching to actual browser automation with Edge, since that’s what’s installed. First I’m creating a small Playwright runner that uses your system Edge executable directly, then I’ll watch it fail on the real login flow and trace the exact bug."
+    },
+    {
+        "run":  148,
+        "seq":  13,
+        "type":  "prose",
+        "chars":  353,
+        "text":  "The screenshot shows the exact CSS issue: after login, the sidebar is rendered as a thin vertical strip on the left while the main content is pushed far to the right, leaving a huge empty area. That points to a desktop layout break in the new portals, not an auth issue. I’m reading the sidebar/main CSS in both portalfiles now to identify the mismatch."
+    },
+    {
+        "run":  148,
+        "seq":  14,
+        "type":  "prose",
+        "chars":  338,
+        "text":  "I see the exact break: the sidebar is fixed-positioned but the `.app` shell lacks desktop layout rules, so the main content is pushed far right by an ineffective `margin-left: 240px` while the sidebar itself collapses into a thin strip. I’m checking the working portal CSS for the correct pattern, then patching both new portals to match."
+    },
+    {
+        "run":  148,
+        "seq":  15,
+        "type":  "prose",
+        "chars":  211,
+        "text":  "I’m fixing both issues at once: layout to match the Oktava standard, and the EPERM shell boundary by switching to `cmd /c`. First I’m reading the old portal layout pattern so I can align the new portals exactly."
+    },
+    {
+        "run":  148,
+        "seq":  16,
+        "type":  "prose",
+        "chars":  217,
+        "text":  "Removing the G999 frontend markers and fixing the nav clash. The hamburger was also not binding because the old sidebar-specific nav code was still in the new pages. I’m replacing it with the exact Oktava nav pattern."
+    },
+    {
+        "run":  148,
+        "seq":  17,
+        "type":  "prose",
+        "chars":  91,
+        "text":  "That’s because the Oktava rewrite removed the autofill. Adding it back to both portals now."
+    },
+    {
+        "run":  148,
+        "seq":  18,
+        "type":  "prose",
+        "chars":  71,
+        "text":  "Creating synthetic RRL-148 from this session and running DEATH in full."
+    }
+]

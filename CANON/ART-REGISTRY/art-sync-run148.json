@@ -1,0 +1,79 @@
+﻿{
+    "run":  148,
+    "ledger_id":  "HL-721",
+    "merkle_short":  "79B55455B2438FF4",
+    "starmap_file":  "starmap-run148.json",
+    "keywords_file":  "rfkw-run148.txt",
+    "keywords_used":  [
+                          "portal",
+                          "exact",
+                          "browser",
+                          "run146",
+                          "**missing**",
+                          "actual",
+                          "fingerprint",
+                          "reading",
+                          "layout",
+                          "death",
+                          "oktava",
+                          "artifacts",
+                          "login",
+                          "sidebar",
+                          "present",
+                          "anchored",
+                          "fucking",
+                          "playwright",
+                          "vocabulary",
+                          "existing",
+                          "portals",
+                          "summary.",
+                          "right",
+                          "**hollow**",
+                          "fixing",
+                          "pushed",
+                          "missing",
+                          "pipeline",
+                          "desktop",
+                          "stale:"
+                      ],
+    "pieces_synced":  4,
+    "pieces":  [
+                   {
+                       "id":  "ART-1780538367695-4ZGA",
+                       "title":  "STP p08 â The Mathematically Locked Lesson Anatomy (10-5-5-3)",
+                       "url":  "local:d:/OB-1-CANONICAL/CANON/PROTOCOLS/Sovereign_Tiger_Protocol.pdf#page=8",
+                       "keywords":  [
+                                        "vocabulary"
+                                    ],
+                       "title_hit":  null
+                   },
+                   {
+                       "id":  "ART-1780538363957-LNWV",
+                       "title":  "STP p03 â The Translate-in-Head Delay (Snowman Freeze)",
+                       "url":  "local:d:/OB-1-CANONICAL/CANON/PROTOCOLS/Sovereign_Tiger_Protocol.pdf#page=3",
+                       "keywords":  [
+                                        "pipeline"
+                                    ],
+                       "title_hit":  null
+                   },
+                   {
+                       "id":  "ART-1780530772003-22KF",
+                       "title":  "Gospel 444 Protocol p07 â Retention Code 10-5-5-3",
+                       "url":  "local:D:/Downloads/gospel-pages/page-07.png",
+                       "keywords":  [
+                                        "vocabulary"
+                                    ],
+                       "title_hit":  null
+                   },
+                   {
+                       "id":  "ART-1780530099910-XM96",
+                       "title":  "NET Dossier p03 â Cognitive Bottleneck / Snowman Freeze",
+                       "url":  "local:D:/Downloads/dossier-pages/page-03.png",
+                       "keywords":  [
+                                        "pipeline"
+                                    ],
+                       "title_hit":  null
+                   }
+               ],
+    "executed_at":  "2026-07-04T20:16:19.7450023+07:00"
+}

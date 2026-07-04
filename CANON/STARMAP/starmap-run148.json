@@ -1,0 +1,11 @@
+﻿{
+    "run":  148,
+    "rrl_path":  "D:\\OB-1-CANONICAL\\RRL\\RRL-148.txt",
+    "ledger_id":  "HL-721",
+    "soul_turn_ids":  "turn-1,turn-2,turn-3,turn-4,turn-5,turn-6,turn-7,turn-8,turn-9,turn-10",
+    "dna_turn_ids":  "",
+    "blueprint_locations":  "",
+    "char_count":  8969,
+    "merkle_hash":  "79B55455B2438FF48E077E7B28715C5437E27BBF234E693F29076B24F0767812",
+    "created_at":  "2026-07-04T20:16:19.7450023+07:00"
+}
