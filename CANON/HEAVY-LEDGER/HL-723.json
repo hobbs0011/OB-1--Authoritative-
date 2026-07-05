@@ -1,0 +1,15 @@
+﻿{
+    "hl_id":  "HL-723",
+    "session_id":  "sov100-roman-run150",
+    "rrl_source":  "D:\\OB-1-CANONICAL\\RRL\\RRL-150.txt",
+    "char_count":  0,
+    "byte_count":  0,
+    "soul_hash":  "DNA_GAP",
+    "dna_hash":  "DNA_GAP",
+    "dna_blueprint_count":  0,
+    "merkle_parent":  "66DF1E71207E1F0EDF699B0168DE2CDC12C222E93EDC88E8EB955B24FAD6C76D",
+    "merkle_hash":  "B2345947F43ADE2C67ECC139C95301556CA36AA18455E282FFBBE50BECCB7B1D",
+    "sealed_at":  "2026-07-05T07:38:38.9481970+07:00",
+    "sov100":  true,
+    "run":  150
+}

@@ -1,0 +1,11 @@
+﻿{
+    "run":  150,
+    "rrl_path":  "D:\\OB-1-CANONICAL\\RRL\\RRL-150.txt",
+    "ledger_id":  "HL-723",
+    "soul_turn_ids":  "",
+    "dna_turn_ids":  "",
+    "blueprint_locations":  "",
+    "char_count":  0,
+    "merkle_hash":  "B2345947F43ADE2C67ECC139C95301556CA36AA18455E282FFBBE50BECCB7B1D",
+    "created_at":  "2026-07-05T07:38:38.9481970+07:00"
+}
