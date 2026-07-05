@@ -1,0 +1,15 @@
+﻿{
+    "hl_id":  "HL-722",
+    "session_id":  "sov100-roman-run149",
+    "rrl_source":  "RRL_GAP",
+    "char_count":  0,
+    "byte_count":  0,
+    "soul_hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "dna_hash":  "DNA_GAP",
+    "dna_blueprint_count":  0,
+    "merkle_parent":  "79B55455B2438FF48E077E7B28715C5437E27BBF234E693F29076B24F0767812",
+    "merkle_hash":  "66DF1E71207E1F0EDF699B0168DE2CDC12C222E93EDC88E8EB955B24FAD6C76D",
+    "sealed_at":  "2026-07-05T07:26:56.0898493+07:00",
+    "sov100":  true,
+    "run":  149
+}
