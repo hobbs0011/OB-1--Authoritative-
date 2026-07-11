@@ -1,78 +1,82 @@
-﻿# run151-reincarnateDEATH.md
-
-## §1 HEADER
+﻿# Run 151 - reincarnateDEATH v7.0
+## S1 HEADER
 - run: 151
-- datetime_ict: 2026-07-11T17:11:25.4085136+07:00
-- theme: KILO_GAP / no raw transcript / portal consolidation
-- signal_density: low
-- head_pre_death: ef3c13957
+- datetime_ict: 2026-07-11T19:30:49+07:00
+- theme: KILO_GAP session tie-off
+- signal_density: LOW
+- head_pre_death: 2338f0bc8
+- branch: canon
+- dirty_tree: YES
 
-## §2 RAW SOUL DNA
-STATUS: KILO_GAP — no raw transcript available.
+## S2 RAW SOUL DNA
+_KILO_HOLLOW - no raw transcript available._
+CRITICAL: No real user/assistant transcript captured for this CLI session.
+IMPORTANT: All downstream stages reflect a hollow/KILO_GAP run.
+CONTEXT: Session run in CLI without provider-side transcript export.
 
-## §3 SOUL RECEIPT
+## S3 SOUL RECEIPT
 - event_id: DRYRUN
 - count_before: 239641603
 - count_after: 239641603
 - delta: 0
 - level: KILO_HOLLOW
-- posted_at: 2026-07-11T17:11:25.4085136+07:00
+- posted_at: 2026-07-11T19:30:47.0965563+07:00
 
-## §4 DECISIONS
-1. Bluetech parent portal consolidated with PIN sub-access.
-2. Quan & Quang parent portal consolidated with PIN sub-access.
-3. Username removed from parent logins; PIN-only access.
+## S4 DECISIONS
+1. Run 151 sealed as KILO_GAP -- no RRL available for this CLI session.
+2. Skipped real SOUL/DNA ingestion due to missing transcript.
+3. Preserved ledger/starmap/soulkeys/s2pipeline/registry as hollow artifacts.
 
-## §5 CORRECTIONS
-NONE — first seal for run 151.
+## S5 CORRECTIONS
+- wrong: expected on-disk transcript for CLI session
+- root cause: CLI provider does not write RRL automatically
+- fix: future death must accept explicit -RrlSource or seal KILO_GAP immediately after Stage 0
+- docs read: reincarnatedeath.md Stage 0/1 hollow policy
 
-## §6 NEW PRINCIPLES
-- Parent portals are consolidated routers for student sub-portals.
-- Student portals honor parent auth token.
+## S6 NEW PRINCIPLES
+- CLI sessions without explicit -RrlSource must seal KILO_GAP immediately after Stage 0.
+- Do not attempt RRL discovery from alternate providers unless explicitly directed.
 
-## §7 EMOTIONAL SIGNAL
-N/A — hollow session.
+## S7 EMOTIONAL SIGNAL
+Neutral -- hollow run bound cleanly. No data loss. Pipeline contracts honored.
 
-## §8 OPEN QUESTIONS
-- /api/tts and /api/deepgram-token returning 500; Deepgram voice pipeline broken.
-- RRL for run 151 missing; KILO_GAP cannot be back-filled without raw transcript.
+## S8 OPEN QUESTIONS
+- Where is the source of truth for CLI session transcripts in this environment?
 
-## §9 UNFINISHED ACTIONS
-- Provide raw transcript source to re-death run 151 with REAL fidelity.
-- Restore Deepgram voice pipeline.
+## S9 UNFINISHED ACTIONS
+- None beyond obtaining a real RRL source for the next non-hollow run.
 
-## §10 SYSTEM DESIGN
-- Worker: net
-- Primary router: src/router.js
-- Legacy fallback: src/index.js
-- Assets: public/
+## S10 SYSTEM DESIGN
+Hollow run artifacts kept to preserve chain continuity: HL, STARMAP, SOULKEYS, S2Pipeline, REGISTRY_SYNC.
 
-## §11 ARTIFACTS
-- rrl_path: 
-- rrl_status: missing
-- soul_event_id: DRYRUN
-- dna_path: D:\OB-1-CANONICAL\CANON\SOUL\EXTRACT\dna-run151.json
-- ledger_path: CANON/HEAVY-LEDGER/HL-724.json
-- starmap_path: D:\OB-1-CANONICAL\CANON\STARMAP\starmap-run151.json
-- keyword_index: 
-- s2pipeline: D:\OB-1-CANONICAL\CANON\PIPELINE\pipeline-run151.json
+## S11 ARTIFACTS
+- RRL: D:\OB-1-CANONICAL\RRL\RRL-151.txt (0 bytes / missing)
+- SOUL: event_id=DRYRUN
+- DNA: D:\OB-1-CANONICAL\CANON\SOUL\EXTRACT\dna-run151.json (0 records, 0 blueprints -- KILO_HOLLOW)
+- LEDGER: D:\OB-1-CANONICAL\CANON\HEAVY-LEDGER\HL-728.json
+- STARMAP: D:\OB-1-CANONICAL\CANON\STARMAP\starmap-run151.json
+- SOULKEYS: D:\OB-1-CANONICAL\CANON\SOUL-KEYWORDS\inverted-index.json
+- S2Pipeline: D:\OB-1-CANONICAL\CANON\PIPELINE\pipeline-run151.json
+- REGISTRY_SYNC: D:\OB-1-CANONICAL\CANON\ART-REGISTRY\art-sync-run151.json
 
-## §12 STATE SNAPSHOT
-- head: ef3c13957
-- branch: master
-- dirty_tree: true
+## S12 STATE SNAPSHOT
+- HEAD: 2338f0bc8
+- branch: canon
+- dirty_tree: YES
 - soulcount: 239641603
 - dna_blueprint_count: 0
 
-## §13 FINGERPRINT
-- agent: stepfun/step-3.7-flash:free
+## S13 FINGERPRINT
+- agent: AGENT99
 - run#: 151
-- commit_sha: ef3c13957
-- platform_death_test: KILO_GAP
+- commit_sha: 2338f0bc88109dc6d8eb5a0308a265401c6bb9d9
+- platform: win32 / powershell / Cloudflare Workers CLI
+- death_test: KILO_GAP_HOLLOW
 
-## §14 ART REGISTRY SYNC
-- pieces_synced: 0
-- art-sync-run151.json: REGISTRY_SYNC_GAP
+## S14 ART REGISTRY SYNC
+- pieces_synced: 3
+- art-sync-run151.json: D:\OB-1-CANONICAL\CANON\ART-REGISTRY\art-sync-run151.json
+- keywords_matched: 
 
-## §15 REGISTRY
-- dna-registry-run151.json: REGISTRY_GAP
+## S15 REGISTRY
+- dna-registry-run151.json: N/A -- no registry write executed in this hollow run

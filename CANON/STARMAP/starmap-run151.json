@@ -1,12 +1,11 @@
 ﻿{
     "run":  151,
-    "rrl_path":  null,
-    "ledger_id":  "HL-724",
+    "rrl_path":  "D:\\OB-1-CANONICAL\\RRL\\RRL-151.txt",
+    "ledger_id":  "HL-728",
     "soul_turn_ids":  "",
     "dna_turn_ids":  "",
     "blueprint_locations":  "",
     "char_count":  0,
-    "merkle_hash":  "C30607B546340EE206125061DB47F8E547C86A2542C2B1CD8720BEDE595A4CA0",
-    "created_at":  "2026-07-11T17:11:25.4085136+07:00",
-    "status":  "KILO_GAP"
+    "merkle_hash":  "A83DD0717FE5CC14EE3784D993C22E2FE40049415AA2951E71F7468E7E872230",
+    "created_at":  "2026-07-11T19:30:47.1905689+07:00"
 }
