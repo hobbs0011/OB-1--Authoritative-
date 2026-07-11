@@ -1,5 +1,5 @@
 ---
-description: "CENTURION-CODE — Roman Legion engineer corps (FABRI/ARCHITECTI). Dispatches coding tasks to Qwen 3.7 Max via Phoenix-Architecti CF worker. Reads real file context, calls HTTP API, applies patch, verifies syntax. Supports full-file and diffMode for large files. Escalates to T2 Opus on failure."
+description: "CENTURION-CODE — Roman Legion engineer corps (FABRI/ARCHITECTI). Dispatches coding tasks to Phoenix-Architecti CF worker. Reads real file context, calls HTTP API, applies patch, verifies syntax. Supports full-file and diffMode for large files. Escalates on failure."
 agent: AGENT99
 ---
 
@@ -17,8 +17,8 @@ Centurion-Code is an HTTP API. Call it with PowerShell, apply the patch, verify 
 
 ## Phase 0 — Complexity Gate
 
-- Task requires final ruling / irreversible decision → `DISPATCH → TIER 2 PA-OPUS — arbitration`
-- Otherwise → proceed. Print: `DISPATCH → TIER 1 CENTURION-CODE (FABRI) — <one-line reason>`
+- Task requires final ruling / irreversible decision → escalate to upper tier
+- Otherwise → proceed. Print: `DISPATCH → CENTURION-CODE (FABRI) — <one-line reason>`
 
 ---
 
@@ -40,7 +40,6 @@ $body = @{
   task       = "$ARGUMENTS"
   context    = "FILE_CONTENT_OR_EXCERPT"
   targetfile = "D:\OB-1-CANONICAL\PATH\TO\FILE"
-  tier       = 1
   maxTokens  = 8192
 } | ConvertTo-Json -Compress
 
@@ -51,7 +50,7 @@ $result = Invoke-RestMethod `
   -Body $body
 
 $result.code_patch | Set-Content -Path "D:\OB-1-CANONICAL\PATH\TO\FILE" -Encoding UTF8
-Write-Host "D1: $($result.d1_row_id) | Tier: $($result.tier)"
+Write-Host "D1: $($result.d1_row_id)"
 ```
 
 ### Diff mode (existing files > 200 lines)
@@ -62,7 +61,6 @@ $body = @{
   task       = "DESCRIBE THE CHANGE"
   context    = $fileContent
   targetfile = "APPS/NET-PET-AI/src/index.js"
-  tier       = 1
   diffMode   = $true
   maxTokens  = 4096
 } | ConvertTo-Json -Compress -Depth 5
@@ -104,18 +102,17 @@ Print result:
 CENTURION-CODE PATCH APPLIED
 File: <path>
 d1_row_id: <id>
-Tier: 1 (Qwen 3.7 Max)
 Syntax: PASS | FAIL
 ```
 
 ---
 
-## Escalation — Tier 2 Handoff
+## Escalation — Upper Tier Handoff
 
 Trigger when: API unreachable, `code_patch` empty/stub, patch conflicts, syntax fail.
 
 ```
-DISPATCH → TIER 2 PA-OPUS — Centurion-Code failed (<reason>). Escalating.
+DISPATCH → UPPER TIER — Centurion-Code failed (<reason>). Escalating.
 ```
 
 ---
