@@ -1,7 +1,6 @@
 <#
-  supply-lines.ps1 — 6-Stage Supply Chain / Roman Legion Pipeline
-  TIER: T1 (Workhorse Implementation)
-  DEPLOY: Cloudflare-only; D1 is the sovereign store.
+   supply-lines.ps1 — 6-Stage Supply Chain / Roman Legion Pipeline
+   DEPLOY: Cloudflare-only; D1 is the sovereign store.
 #>
 param(
     [ValidateSet("status","full-march","scout","fingerprint","process","verify","garrison")]
@@ -12,7 +11,6 @@ param(
     [string]$StudentId = "sov100",
     [switch]$DryRun,
     [switch]$Supersaiyan,
-    [switch]$PccDeploy,
     [switch]$MerkleRefresh,
     [int]$TimeoutSec = 120,
     [string]$OutFile
@@ -165,7 +163,7 @@ function Invoke-Stage-V {
     }
     $merkle = try { Invoke-RestMethod "$D1/api/soul/merkle/$([uri]::EscapeDataString($sessionId))" -TimeoutSec $TimeoutSec } catch { $null }
     if (-not $merkle) { Out-Event -Stage "STAGE-V" -Status "ERR" -Msg "Merkle chain missing"; throw "MERKLE_MISSING" }
-    $apex = try { Invoke-RestMethod "$D1/api/soul/apex?student_id=$([uri]::EscapeDataString($StudentId))&limit=5&days=30" -TimeoutSec $TimeoutSec } catch { $null }
+    $apex = try { Invoke-RestMethod "$D1/api/soul/apex?student_id=$([uri]::EscapeDataString($StudentId))`&limit=5`&days=30" -TimeoutSec $TimeoutSec } catch { $null }
     if (-not $apex) { Out-Event -Stage "STAGE-V" -Status "ERR" -Msg "Apex missing"; throw "APEX_MISSING" }
     Out-Event -Stage "STAGE-V" -Status "OK" -Msg "merkle+apex verified" -Payload @{ session=$sessionId; apex=$apex }
 }
@@ -222,29 +220,6 @@ function Invoke-MerkleRefresh {
         $idx++
     }
 }
-function Invoke-PCCDeploy {
-    if ($DryRun) { Out-Event -Stage "PCC-DEPLOY" -Status "WARN" -Msg "Dry-run skipped"; return }
-    Out-Event -Stage "PCC-DEPLOY" -Status "INFO" -Msg "Polling Cloudflare workers"
-    $account = "3c7b1766bd8fdc9e01211d2b390315ea"
-    $key = [Environment]::GetEnvironmentVariable("CLOUDFLARE_API_KEY", "User")
-    $email = [Environment]::GetEnvironmentVariable("CLOUDFLARE_EMAIL", "User")
-    if (-not $key -or -not $email) { Out-Event -Stage "PCC-DEPLOY" -Status "ERR" -Msg "Cloudflare creds missing"; return }
-    $h = @{ "X-Auth-Key"=$key; "X-Auth-Email"=$email; "Content-Type"="application/json" }
-    $uri = "https://api.cloudflare.com/client/v4/accounts/$account/workers/scripts"
-    try {
-        $resp = Invoke-RestMethod -Uri $uri -Headers $h
-        $ids = @($resp.result | Select-Object -ExpandProperty id)
-        $pcc = @($ids | Where-Object { $_ -match 'phoenix-pcc|pcc' })
-        if (-not $pcc) {
-            Out-Event -Stage "PCC-DEPLOY" -Status "INFO" -Msg "No PCC workers; coverage scan only"
-        } else {
-            Out-Event -Stage "PCC-DEPLOY" -Status "OK" -Msg "Live PCC workers: $($pcc -join ', ')"
-        }
-    } catch {
-        Out-Event -Stage "PCC-DEPLOY" -Status "ERR" -Msg "Cloudflare API error: $($_.Exception.Message)"
-    }
-}
-
 # ── ROUTER ─────────────────────────────────────────────────────────────────────
 Write-Host "`nSUPPLY LINES — Stage: $Stage" -ForegroundColor Cyan
 if (-not (Invoke-HealthGate -Strict)) { Write-Host "Supply chain ABORTED"; exit 1 }
@@ -261,7 +236,6 @@ elseif ($Stage -eq "full-march") {
     if (-not $Zone) { $Zone = "CANON/" }
     Invoke-Stage-I -Zone $Zone -Lens $Lens
     Invoke-Stage-II; Invoke-Stage-III; Invoke-Stage-IV; Invoke-Stage-V; Invoke-Stage-VI
-    if ($PccDeploy -and -not $DryRun) { Invoke-PCCDeploy }
     if ($MerkleRefresh -and -not $DryRun) { Invoke-MerkleRefresh }
     $null = Invoke-PheTrail -Stage "supply-lines-full-march" -Payload @{ ok=$true }
     Write-Host "Full march COMPLETE." -ForegroundColor Green
