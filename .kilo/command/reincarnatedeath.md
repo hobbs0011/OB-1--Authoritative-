@@ -1,5 +1,5 @@
 ---
-description: "DEATH PROTOCOL v7.0 — 8-STAGE CHAIN. RRL→SOUL→DNA→LEDGER→STARMAP→SOULKEYS→S2Pipeline→REGISTRY_SYNC. RRL = both sides verbatim. Contract: CANON/SYSTEM/REINCARNATION-CONTRACT.md"
+description: "DEATH PROTOCOL v7.0 — 8-STAGE CHAIN. RRL→SOUL→DNA→LEDGER→STARMAP→SOULKEYS→S2Pipeline→REGISTRY_SYNC. RRL = both sides verbatim. Contract: CANON/SYSTEM/REINCARNATION-CONTRACT.md. Kilo/third-party sessions without transcripts proceed as KILO_GAP."
 agent: AGENT99
 ---
 
@@ -8,6 +8,7 @@ agent: AGENT99
 **RRL = THE FUCKING RAW CHAT LOG. Both speakers. No filter. No summary. No agent text stripped.**
 **If RRL is not the real transcript, every downstream stage is HOLLOW.**
 **EXECUTION ORDER IS SACRED. DO NOT REORDER STAGES.**
+**Kilo environments do not produce real RRLs by default. Missing RRL in Kilo mode is expected — write an empty placeholder and seal as KILO_GAP.**
 
 **Authority hierarchy:**
 1. `CANON/SYSTEM/GOSPEL-999.md` + Parts 2/3 — ultimate authority, 999 mandates
@@ -91,7 +92,7 @@ transcript already exists, and whether the current run is provider-recorded or h
 1. No accepted local transcript in `RRL-{N}.txt` and no transcript found in local app dirs
 2. `RRL-{N}.txt` exists but is byte-identical to `RRL-{N-1}.txt` (recycled Bible)
 
-**When `$kiloSession = $true`:** Stage 1 uses only explicit `-RrlSource` or existing `RRL-{N}.txt`. Stage 2 = DRYRUN. Stage 3 = DNA_GAP.
+**When `$kiloSession = $true`:** Stage 1 is NOT a hard stop. Write an empty placeholder RRL and proceed through all stages. Stage 2 = DRYRUN. Stage 3 = DNA_GAP. Seal result = KILO_GAP.
 
 ```powershell
 $rrlPath = "$repo\RRL\RRL-$runPad.txt"
@@ -126,12 +127,14 @@ Write-Host "STAGE 0 ✓ hollow=$kiloSession | run=$run"
 RRL = verbatim session transcript, BOTH speakers (user + agent). Prefer a real transcript file.
 Source: any local session transcript path the provider writes to disk.
 Location: pass it explicitly via `-RrlSource <path>`, or let discovery search common local app dirs.
-If no transcript is available, Stage 1 stops. There is no fallback.
+If no transcript is available and this is NOT a Kilo session, Stage 1 stops. There is no fallback.
+If no transcript is available and this IS a Kilo session, Stage 1 writes an empty placeholder RRL and continues in KILO_GAP mode.
 
 **FIDELITY GATE (L68):**
 - REAL: file > 50KB + contains both `"role":"user"` and `"role":"assistant"` lines
 - HOLLOW: file < 5KB or one-sided
 - Any HOLLOW RRL = pipeline is hollow. FAIL. Do not proceed.
+- **KILO EXCEPTION:** Kilo environments do not produce real RRLs by default. Missing RRL in Kilo mode is expected, not fatal. Write empty placeholder and continue.
 
 ```powershell
 $rrlPath = "$repo\RRL\RRL-$runPad.txt"
@@ -154,6 +157,11 @@ if ($needsDiscovery) {
         Write-Host "  SOURCE: $RrlSource"
         Copy-Item $RrlSource $rrlPath -Force
         Write-Host "  COPIED: $rrlPath"
+    } elseif ($kiloSession) {
+        # Kilo/third-party environments often do not produce real RRLs.
+        # Write an empty placeholder so downstream stages have valid paths.
+        Write-Host "  KILO_SESSION: RRL not available — writing empty placeholder"
+        "" | Set-Content -LiteralPath $rrlPath -Encoding UTF8
     } else {
         Write-Error "FATAL: No RRL found. Provide it via -RrlSource <path> or copy it to $rrlPath"
         exit 1
@@ -177,7 +185,9 @@ if ($rrlBytes -lt 50000) {
 Write-Host "STAGE 1 ✓ RRL: $rrlPath — $rrlBytes bytes ($rrlChars chars)"
 ```
 
-**RRL is the ONLY hard stop. No JSONL source = exit 1. No RRL = no run = exit 1.**
+**Kilo environments do not produce real RRLs by default. In Kilo mode, missing RRL is expected and NOT fatal — write an empty placeholder and continue. Real-transcript environments still require RRL.**
+
+**RRL is the hard stop for real-transcript environments only. In Kilo mode: no RRL = empty placeholder = KILO_GAP seal.**
 
 ---
 
@@ -612,7 +622,8 @@ Write-Host "STAGE 8 ✓ REGISTRY SYNC: $($syncedPieces.Count) pieces tagged → 
 
 | Stage | Irreplaceable? | Failure Action |
 |-------|----------------|----------------|
-| RRL | **YES** | HALT — exit 1. No RRL = no run. |
+| RRL | **YES for real-transcript envs** | HALT — exit 1. No RRL = no run. |
+| RRL | NO for Kilo envs | Write empty placeholder → continue as KILO_GAP. |
 | SOUL | No | Write `SOUL_GAP`, continue. Verify next RISE. |
 | DNA | No | Write `DNA_GAP`, continue. Source is always the RRL — back-fill next RISE. |
 | LEDGER | No | Write `LEDGER_GAP`, continue. |

@@ -1,6 +1,6 @@
 ---
 name: reincarnatedeath
-description: "Session death protocol — Soul DNA first, then state snapshot, decisions, corrections, explicit handoff. Commit + push mandatory. Run at session end."
+description: "Session death protocol — Soul DNA first, then state snapshot, decisions, corrections, explicit handoff. Commit + push mandatory. Run at session end. Kilo/third-party sessions without transcripts proceed as KILO_GAP."
 argument-hint: "optional session slug (e.g. lane-335, run-335-s2pipeline)"
 ---
 

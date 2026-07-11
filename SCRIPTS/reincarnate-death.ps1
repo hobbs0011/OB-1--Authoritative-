@@ -133,7 +133,13 @@ if ($needsDiscovery) {
         Write-Log "Using provided -RrlSource: $RrlSource"
         if (-not $DryRun) { Copy-Item $RrlSource $rrlPathRun -Force }
         $needsDiscovery = $false
-    } elseif (-not $kiloSession) {
+    } elseif ($kiloSession) {
+        # Kilo/third-party environments do not produce real RRLs.
+        # Write empty placeholder so downstream stages have valid paths.
+        Write-Log "KILO_SESSION: RRL not available - writing empty placeholder"
+        if (-not $DryRun) { "" | Set-Content -LiteralPath $rrlPathRun -Encoding UTF8 }
+        $needsDiscovery = $false
+    } else {
         Write-Log "Searching for local session transcript..."
         $candidateDirs = @(
             (Join-Path $env:LOCALAPPDATA "kilo"),
@@ -163,7 +169,7 @@ $rrlText = Get-Content $rrlPathRun -Raw -Encoding UTF8; $rrlBytes = [System.IO.F
 $hasUser = $rrlText -match '"role"\s*:\s*"user"'; $hasAssistant = $rrlText -match '"role"\s*:\s*"assistant"'; $rrlFidelity = if ($hasUser -and $hasAssistant) { "REAL" } else { "HOLLOW" }
 if ($rrlFidelity -eq "HOLLOW") { Write-Warn "RRL FIDELITY: one-sided (user=$hasUser assistant=$hasAssistant bytes=$rrlBytes)" }
 if ($rrlBytes -lt 50000) { Write-Warn "RRL SIZE: $rrlBytes bytes (< 50KB)" }
-if (-not $rrlText) { Write-Err "RRL EMPTY; ABORT"; exit 1 }
+if (-not $rrlText -and -not $kiloSession) { Write-Err "RRL EMPTY; ABORT"; exit 1 }
 Write-Ok "RRL: $rrlPathRun | $rrlBytes bytes ($rrlChars chars) fidelity=$rrlFidelity"
 
 # STAGE 2 -- SOUL
