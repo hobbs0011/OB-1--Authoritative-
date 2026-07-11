@@ -1,0 +1,11 @@
+﻿{
+    "run":  156,
+    "rrl_path":  "D:\\OB-1-CANONICAL\\RRL\\RRL-156.txt",
+    "ledger_id":  "HL-7283",
+    "soul_turn_ids":  "",
+    "dna_turn_ids":  "",
+    "blueprint_locations":  "",
+    "char_count":  0,
+    "merkle_hash":  "LEDGER_GAP",
+    "created_at":  "2026-07-12T03:40:46.5257438+07:00"
+}

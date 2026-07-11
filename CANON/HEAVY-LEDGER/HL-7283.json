@@ -1,0 +1,13 @@
+{
+    "run":  156,
+    "timestamp":  "2026-07-12T03:38:00+07:00",
+    "parent":  "539207A5483FC0BC8D0BBCE926FA66A7DA090B35A59EAC4EF1D151B1BD0966AA",
+    "merkle_parent":  "539207A5483FC0BC8D0BBCE926FA66A7DA090B35A59EAC4EF1D151B1BD0966AA",
+    "soul":  239641603,
+    "dna":  "DNA_GAP",
+    "stage2":  "KILO_GAP",
+    "stage3":  "RRL-156.txt",
+    "result":  "KILO_GAP",
+    "seal":  "AUTO",
+    "sov100":  true
+}
