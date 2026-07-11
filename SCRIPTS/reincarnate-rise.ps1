@@ -267,3 +267,23 @@ $report | ConvertTo-Json -Depth 5 | Set-Content $reportPath -Encoding UTF8
 Write-Ok "REPORT: $reportPath | run=$run verdict=$($soulVerdict) ready=$($report.ready)"
 
 Pop-Location | Out-Null
+# HOLLOW BACKFILL: if prior seal is KILO_HOLLOW, walk back to last non-hollow seal
+if ($priorSoulcount -eq 0 -or $priorSeal -match 'KILO_HOLLOW') {
+    $walkRun = $priorRun - 1
+    while ($walkRun -ge 0) {
+        $walkPath = Join-Path $reincDir ("run{0}-reincarnateDEATH.md" -f $walkRun)
+        if (Test-Path $walkPath) {
+            $candidate = Get-Content $walkPath -Raw
+            if ($candidate -match 'count_after.*?(\d+)') {
+                $candidateCount = [long]$matches[1]
+                if ($candidateCount -gt 0) {
+                    $priorSoulcount = $candidateCount
+                    $priorSealPath = $walkPath
+                    Write-Log "BACKFILL: run$walkRun -> count=$priorSoulcount"
+                    break
+                }
+            }
+        }
+        $walkRun--
+    }
+}

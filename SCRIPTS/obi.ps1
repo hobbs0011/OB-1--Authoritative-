@@ -245,9 +245,15 @@ try {
 
         # 3. Protocol files
         $protocolFiles = @(
-            ".github/prompts/ReincarnateRISE.prompt.md",
-            ".github/copilot-instructions.md",
-            "REINCARNATION-BOOT-CHECKLIST.md",
+            ".kilo/command/reincarnaterise.md",
+            ".kilo/command/reincarnatedeath.md",
+            ".kilo/skills/LegionnaireFieldGuide.md",
+            "CANON/SYSTEM/GOSPEL-999.md",
+            "CANON/SYSTEM/GOSPEL-999-PART2.md",
+            "CANON/SYSTEM/GOSPEL-999-PART3.md",
+            "CANON/SYSTEM/REINCARNATION-CONTRACT.md",
+            "CANON/SYSTEM/COLD-START-BOOT.md",
+            "CANON/HEAVY-LEDGER/STATE-SNAPSHOT.json",
             "REINCARNATION-LOG.md"
         )
         foreach ($pf in $protocolFiles) {
