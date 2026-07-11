@@ -26,7 +26,7 @@ function Invoke-PheTrail {
     param([string]$Stage,[object]$Payload)
     $canonDir    = Join-Path $repoRoot "CANON"
     $pherDir     = Join-Path $canonDir "PHEROMONES"
-    $deathLine   = git log --oneline --grep "^death:" -1 $repoRoot 2>$null
+    $deathLine   = git -C $repoRoot log --oneline --grep "^death:" 2>$null | Out-String
     $priorRun    = 0
     if ($deathLine -match 'run\s*(\d+)') { $priorRun = [int]$matches[1] }
     $run = $priorRun + 1
@@ -38,7 +38,7 @@ function Invoke-PheTrail {
         stage          = $Stage
         extracted_at   = $t
         forcemarch_ts  = $ts
-        head_sha       = (git rev-parse --short HEAD $repoRoot 2>$null).Trim()
+        head_sha       = (git -C $repoRoot log -1 --format=%H 2>$null | Out-String).Trim()
         soulcount      = $null
         trails         = @{ positive=@(); negative=@(); gaps=@(); pay=($Payload | ConvertTo-Json -Compress -Depth 4) }
     }
@@ -115,7 +115,7 @@ Write-Host "FORCE MARCH INITIATED -- Legions advancing" -ForegroundColor Red
 $finds = @()
 Invoke-Report "INIT" "Run authority start" "INFO"
 
-$deathLine = git log --oneline --grep "^death:" -1 $repoRoot 2>&1
+$deathLine = git -C $repoRoot log --oneline --grep "^death:" 2>&1 | Out-String
 $runNum = 0
 if ($deathLine -match 'run\s*(\d+)') { $runNum = [int]$matches[1] }
 $currentRun    = $runNum + 1
@@ -156,18 +156,19 @@ if (-not $hasFinds) { Invoke-Report "STAGE-I" "No scout finds" "OK" }
 
 # Stage II — FINGERPRINT + PheTrail
 Invoke-Report "STAGE-II" "Fingerprinting + phetrail generation"
-$lastDeath = git log --oneline --grep "^death:" -1 $repoRoot 2>$null
-$runNum = 0
-if ($lastDeath -match 'run\s*(\d+)') { $runNum = [int]$matches[1] }
-$currentRun = $runNum + 1
-$currentRunPad = "{0:D3}" -f $currentRun
 if (-not $DryRun) {
     $summary = [ordered]@{
         run = $currentRunPad
-        head = (git rev-parse --short HEAD $repoRoot 2>$null).Trim()
+        head = (git -C $repoRoot log -1 --format=%H 2>$null | Out-String).Trim()
         missingRuns = @($missingRuns | ForEach-Object { "{0:D3}" -f $_ })
         timestamp = (Get-Date -Format "o")
     }
+    $pherDir = Join-Path $repoRoot "CANON\PHEROMONES"
+    if (-not (Test-Path $pherDir)) { New-Item -ItemType Directory -Path $pherDir -Force | Out-Null }
+    $trailPath = Join-Path $pherDir "PheTrail-run$currentRunPad.json"
+    $summary | ConvertTo-Json -Depth 4 | Set-Content $trailPath -Encoding UTF8
+    Invoke-Report "STAGE-II" "PheTrail written: $trailPath" "OK"
+}
     $pherDir = Join-Path $repoRoot "CANON\PHEROMONES"
     if (-not (Test-Path $pherDir)) { New-Item -ItemType Directory -Path $pherDir -Force | Out-Null }
     $trailPath = Join-Path $pherDir "PheTrail-run$currentRunPad.json"
