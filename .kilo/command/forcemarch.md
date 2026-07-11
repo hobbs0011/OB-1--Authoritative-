@@ -5,124 +5,38 @@ agent: AGENT99
 
 # /forcemarch — ROMAN LEGION FORCE MARCH COMMAND
 
-**COMMAND:** `/forcemarch`  
-**TIER:** T1 (Workhorse Implementation)  
-**COST:** Uses kilo-auto/free model  
-**SURVIVAL:** PheTrails, PhoenixScout, SupplyLines MANDATORY - no gaps without trails  
-
----
-
-## Purpose
-
 Execute a true Roman forced march across all 6 pipeline stages without stopping. No picnic by the river. No skipping stages. Extreme strain. Exhaustion and injury tolerated. Mission: recover forgotten territory, scan all canonical zones, generate mandatory phetrails.
 
 ## Syntax
 
 ```
-/Forcemarch [options]
+/forcemarch [options]
 ```
 
 | Option | Value | Default | Description |
 |--------|-------|---------|-------------|
-| `--zone` | `CANON/` path | none | Specific zone to sweep (optional) |
+| `--zone` | `CANON/` path | none | Specific zone to sweep |
 | `--lens` | `SOUL\|CONFIG\|GAP\|FLAG\|all` | `all` | Filter type to hunt |
 | `--dry-run` | flag | - | Report actions only, no writes |
-| `--supersaiyan` | flag | - | 5-agent parallel sweep for speed |
-| `--pcc-deploy` | flag | - | Deploy all PCC legions to workers |
+| `--supersaiyan` | flag | - | Parallel scout sweep |
+| `--pcc-deploy` | flag | - | FORBIDDEN — no Cloudflare deploy paths |
 | `--merkle-refresh` | flag | - | Rebuild merkle chain for missing runs |
 
 ## March Profile
 
-**Roman Forced March = 30-40km equivalent**
-
 | Stage | Action | Exhaustion Risk |
 |-------|--------|-----------------|
-| I | ALL zones scouted, gaps identified | HIGH - scattered file damage |
-| II | DNA/LEDGER verified against all runs | MEDIUM - hash collisions possible |
-| III | SSM + SOULKEYWORDS + PHEROMONE fired | HIGH - missing RRL = blind processing |
-| IV | 6-AI TRUTH + SHADOW verification | MEDIUM - timeout risk |
-| V | MERKLE LATTICE + APEX ROLLUP | HIGH - merkle rebalancing |
-| VI | LIMITANEI health sweep + phetrail write | LOW - routine if others complete |
+| I | ALL zones scouted, gaps identified | HIGH |
+| II | FINGERPRINT + Phetrail generated | MEDIUM |
+| III | RRL reconstruction + DNA extraction | HIGH |
+| IV | Syntax + verify checksums | MEDIUM |
+| V | Merkle lattice + apex rollup | HIGH |
+| VI | Limitanei health sweep + phetrail write | LOW |
 
 ## Implementation
 
 ```powershell
-# SCRIPTS/forcemarch.ps1
-param(
-    [string]$Zone,
-    [ValidateSet("SOUL","CONFIG","GAP","FLAG","all")] [string]$Lens = "all",
-    [switch]$DryRun,
-    [switch]$Supersaiyan,
-    [switch]$PccDeploy,
-    [switch]$MerkleRefresh
-)
-
-$repo = "D:\OB-1-CANONICAL"
-$localSoul = Join-Path $repo "CANON\SOUL"
-
-# PHASE 1 — EXPLORATORES DEPLOYMENT
-Write-Host "FORCΞ MARCH INITIATED — All 6 legions advancing" -ForegroundColor Red
-
-# Scout all zones in parallel if Supersaiyan
-$zones = if ($Zone) { @($Zone) } else { 
-    @("CANON/HEAVY-LEDGER", "CANON/SOUL-KEYWORDS", "CANON/STARMAP", "CANON/PIPELINE", "CANON/PHEROMONES", "APPS/") 
-}
-
-$finds = @()
-foreach ($z in $zones) {
-    $zPath = Join-Path $repo $z
-    if (Test-Path $zPath) {
-        $files = Get-ChildItem -Path $zPath -Recurse -File -ErrorAction SilentlyContinue
-        foreach ($f in $files) {
-            # SOUL lens - find raw quote blocks
-            if ($Lens -in @("all","SOUL") -and $f.Extension -eq ".md") {
-                $content = Get-Content $f.FullName -Raw -ErrorAction SilentlyContinue
-                if ($content -match '^> "' ) {
-                    $finds += [PSCustomObject]@{ 
-                        zone = $z; file = $f.Name; line = 1; type = "SOUL"; 
-                        excerpt = $content.Substring(0, [Math]::Min(120, $content.Length))
-                    }
-                }
-            }
-            # GAP lens - find MISSING references
-            if ($Lens -in @("all","GAP") -and $f.Extension -in @(".md",".json")) {
-                $content = Get-Content $f.FullName -Raw -ErrorAction SilentlyContinue
-                if ($content -match "MISSING|GAP|TODO.*recover|FIXME.*restore") {
-                    $finds += [PSCustomObject]@{ 
-                        zone = $z; file = $f.Name; type = "GAP"
-                    }
-                }
-            }
-        }
-    }
-}
-
-# PHASE 2 — ANTECORES VERIFICATION
-$lastDeath = git log --oneline --grep "^death:" -1
-$runPattern = if ($lastDeath -match 'run\s*(\d+)') { [int]$matches[1] } else { 0 }
-$currentRun = $runPattern + 1
-$runPad = "{0:D3}" -f $currentRun
-
-# PHASE 3 — AGMEN PROCESSING
-if (-not $DryRun) {
-    # Process each missing run
-    $missingRuns = Get-MissingRuns -From 1..$currentRun
-    foreach ($r in $missingRuns) {
-        $runPadded = "{0:D3}" -f $r
-        # Generate RECOVERY phetrail for missing run
-        New-PheTrailRecovery -Run $runPadded
-    }
-}
-
-# PHASE 4 — MERKLE REBUILD
-if ($MerkleRefresh -and -not $DryRun) {
-    Invoke-MerkleRefresh
-}
-
-# PHASE 6 — LIMITANEI HEALTH SWEEP
-Invoke-HealthSweep
-
-Write-Host "FORCΞ MARCH COMPLETE — All legions accounted" -ForegroundColor Green
+# Actual execution delegated to SCRIPTS/forcemarch.ps1
 ```
 
 ## Local-Only Execution

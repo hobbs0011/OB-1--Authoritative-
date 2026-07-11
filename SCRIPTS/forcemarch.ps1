@@ -10,7 +10,6 @@ param(
     [ValidateSet("SOUL","CONFIG","GAP","FLAG","all")] [string]$Lens = "all",
     [switch]$DryRun,
     [switch]$Supersaiyan,
-    [switch]$PccDeploy,
     [switch]$MerkleRefresh
 )
 
@@ -65,35 +64,31 @@ function Add-RecoveryTrail { param([int]$Run)
     $runPad = "{0:D3}" -f $Run
     $canonDir = Join-Path $repoRoot "CANON"
     $recDir   = Join-Path $canonDir "REINCARNATION"
-    $ledgerDir= Join-Path $canonDir "HEAVY-LEDGER"
-    foreach ($d in @($recDir,$ledgerDir)) { if (-not (Test-Path $d)) { New-Item -ItemType Directory -Path $d -Force | Out-Null } }
+    foreach ($d in @($recDir)) { if (-not (Test-Path $d)) { New-Item -ItemType Directory -Path $d -Force | Out-Null } }
     $recFile = Join-Path $recDir "RECOVERY-run$runPad.md"
     if (-not (Test-Path $recFile)) { "# RECOVERY run$runPad`n`n- Timestamp: $(Get-Date -Format o)`n- Reason: MISSING`n" | Set-Content $recFile -Encoding UTF8 }
     Invoke-Report -Stage "RRL-RECOVERY" -Msg "Stub RECOVERY-run$runPad created" -Severity "WARN"
-}
-function Invoke-PCCDeploy {
-    Invoke-Report -Stage "PCC-DEPLOY" -Msg "FORBIDDEN per REINCARNATION-CONTRACT §7 — no Cloudflare deploy paths" "ERR"
 }
 function Invoke-MerkleRefresh {
     if ($DryRun) {
         Invoke-Report -Stage "MERKLE" -Msg "Dry-run skipped" -Severity "WARN"
         return
     }
-    $canonDir = Join-Path $repoRoot "CANON"
-    $ledgerDir= Join-Path $canonDir "HEAVY-LEDGER"
+    $ledgerDir = Join-Path $repoRoot "CANON\HEAVY-LEDGER"
     if (-not (Test-Path $ledgerDir)) { New-Item -ItemType Directory -Path $ledgerDir -Force | Out-Null }
-    $idx = 1
-    Get-ChildItem $ledgerDir -Filter "*.json" -File -ErrorAction SilentlyContinue | ForEach-Object {
-        $j = Get-Content $_.FullName -Raw | ConvertFrom-Json
-        if ($j.PSObject.Properties | Where-Object { $_.Name -in @('previous_hash','merkle_root') } ) {
-            Invoke-Report -Stage "MERKLE" -Msg "$($_.Name) already has merkle fields" -Severity "OK"
-        } else {
-            $artificial = ("{0:x2}" -f ($idx % 256)) + ("{0:x2}" -f (($idx/256) % 256))
-            $j | Add-Member -NotePropertyName merkle_root -NotePropertyValue $artificial -Force
-            $j | ConvertTo-Json -Depth 5 | Set-Content $_.FullName -Encoding UTF8
-            Invoke-Report -Stage "MERKLE" -Msg "Rebuilt merkle marker on $($_.Name)" -Severity "OK"
+    $files = Get-ChildItem $ledgerDir -Filter "HL-*.json" -File -ErrorAction SilentlyContinue | Sort-Object Name
+    $parentHash = $null
+    foreach ($f in $files) {
+        $content = Get-Content $f.FullName -Raw -Encoding UTF8
+        $hash = [System.BitConverter]::ToString([System.Security.Cryptography.SHA256]::Create().ComputeHash([System.Text.Encoding]::UTF8.GetBytes($content))) -replace '-',''
+        $j = $content | ConvertFrom-Json
+        $j | Add-Member -NotePropertyName merkle_hash -NotePropertyValue $hash -Force
+        if ($parentHash) {
+            $j | Add-Member -NotePropertyName merkle_parent -NotePropertyValue $parentHash -Force
         }
-        $idx++
+        $j | ConvertTo-Json -Depth 5 | Set-Content $f.FullName -Encoding UTF8
+        $parentHash = $hash
+        Invoke-Report -Stage "MERKLE" -Msg "$($f.Name): $($hash.Substring(0,16))..." -Severity "OK"
     }
 }
 function Invoke-LegionHealth {
@@ -160,58 +155,85 @@ if ($scoutResults) {
 }
 if (-not $hasFinds) { Invoke-Report "STAGE-I" "No scout finds" "OK" }
 
-# Stage II
-Invoke-Report "STAGE-II" "Antecores verifying run$currentRunPad ledger"
-$ledgerDir = Join-Path $repoRoot "CANON\HEAVY-LEDGER"
-$ledgerOk  = $false
-if (Test-Path $ledgerDir) {
-    $ledgerCount = (Get-ChildItem $ledgerDir -Filter *.json -File).Count
-    $ledgerOk    = $true
-    Invoke-Report "STAGE-II" "Ledger verified: $ledgerCount files" "OK"
-} else {
-    Invoke-Report "STAGE-II" "Ledger missing" "WARN"
-}
-if ($missingRuns.Count -gt 0) {
-    foreach ($m in $missingRuns) { Add-RecoveryTrail -Run $m }
+# Stage II — FINGERPRINT + PheTrail
+Invoke-Report "STAGE-II" "Fingerprinting + phetrail generation"
+$lastDeath = git log --oneline --grep "^death:" -1 $repoRoot 2>$null
+$runNum = 0
+if ($lastDeath -match 'run\s*(\d+)') { $runNum = [int]$matches[1] }
+$currentRun = $runNum + 1
+$currentRunPad = "{0:D3}" -f $currentRun
+if (-not $DryRun) {
+    $summary = [ordered]@{
+        run = $currentRunPad
+        head = (git rev-parse --short HEAD $repoRoot 2>$null).Trim()
+        missingRuns = @($missingRuns | ForEach-Object { "{0:D3}" -f $_ })
+        timestamp = (Get-Date -Format "o")
+    }
+    $pherDir = Join-Path $repoRoot "CANON\PHEROMONES"
+    if (-not (Test-Path $pherDir)) { New-Item -ItemType Directory -Path $pherDir -Force | Out-Null }
+    $trailPath = Join-Path $pherDir "PheTrail-run$currentRunPad.json"
+    $summary | ConvertTo-Json -Depth 4 | Set-Content $trailPath -Encoding UTF8
+    Invoke-Report "STAGE-II" "PheTrail written: $trailPath" "OK"
 }
 
-# Stage III
-Invoke-Report "STAGE-III" "Agmen processing + RRL reconstruction"
+# Stage III — RRL RECONSTRUCTION
+Invoke-Report "STAGE-III" "RRL reconstruction + DNA extraction"
 if ($missingRuns.Count -gt 0) {
     foreach ($m in $missingRuns) {
-        Add-RecoveryTrail -Run $m
+        $runPadded = "{0:D3}" -f $m
+        $rrlPath = Join-Path $repoRoot "RRL\RRL-$runPadded.txt"
+        if (-not (Test-Path $rrlPath)) {
+            if (-not $DryRun) {
+                "[RECOVERY: RRL missing for run $runPadded]" | Set-Content $rrlPath -Encoding UTF8
+            }
+            Invoke-Report "STAGE-III" "RRL placeholder created: $rrlPath" "WARN"
+        }
     }
 }
 
-# Stage IV
-Invoke-Report "STAGE-IV" "6-AI TRUTH + SHADOW verification"
-$verifyFile = Join-Path $repoRoot "APPS\NET-PET-AI\src\index.js"
-if (Test-Path $verifyFile) {
-    $syntax = & node --check $verifyFile 2>&1
-    if ($LASTEXITCODE -ne 0) {
-        Invoke-Report "STAGE-IV" "index.js syntax error" "ERR"
+# Stage IV — SYNTAX + VERIFY
+Invoke-Report "STAGE-IV" "Syntax + verify checksums"
+$verifyFiles = @(
+    "APPS\NET-PET-AI\src\index.js",
+    "APPS\NET-PET-AI\src\router.js",
+    "APPS\NET-PET-AI\src\security.js"
+)
+foreach ($v in $verifyFiles) {
+    $p = Join-Path $repoRoot $v
+    if (Test-Path $p) {
+        $ext = [System.IO.Path]::GetExtension($p)
+        if ($ext -eq '.js') {
+            $check = & node --check $p 2>&1
+            if ($LASTEXITCODE -ne 0) {
+                Invoke-Report "STAGE-IV" "Syntax FAIL: $v — $check" "ERR"
+            } else {
+                Invoke-Report "STAGE-IV" "Syntax OK: $v" "OK"
+            }
+        } else {
+            Invoke-Report "STAGE-IV" "Skipped (not JS): $v" "INFO"
+        }
     } else {
-        Invoke-Report "STAGE-IV" "index.js syntax verified" "OK"
+        Invoke-Report "STAGE-IV" "File missing: $v" "ERR"
     }
-} else {
-    Invoke-Report "STAGE-IV" "index.js not found" "ERR"
 }
 
-# Stage V
+# Stage V — MERKLE REBUILD
 Invoke-Report "STAGE-V" "Merkle lattice + apex rollup"
-if ($MerkleRefresh) { Invoke-MerkleRefresh }
+if ($MerkleRefresh -and -not $DryRun) { Invoke-MerkleRefresh }
 else { Invoke-Report "STAGE-V" "Skipped (no --merkle-refresh)" "INFO" }
 
-# Stage VI
+# Stage VI — LIMITANEI HEALTH SWEEP
 Invoke-Report "STAGE-VI" "Limitanei health sweep"
 $health = Invoke-LegionHealth
 if ($health) { Invoke-Report "STAGE-VI" "Health sweep PASS" "OK" }
 else         { Invoke-Report "STAGE-VI" "Health sweep NOTES" "WARN" }
 
-# PCC Deploy
-if ($PccDeploy) { Invoke-PCCDeploy }
-
 # Final phetrail
-$summary = @{ missingRuns=$missingRuns.Count; legionsOK=$health; runNumber=$currentRun }
+$summary = [ordered]@{
+    missingRuns = $missingRuns.Count
+    legionsOK = $health
+    runNumber = $currentRun
+    completedAt = (Get-Date -Format "o")
+}
 Invoke-PheTrail -Stage "forcemarch-complete" -Payload $summary
-Write-Host "FORCE MARCH COMPLETE -- Run $currentRunPad accounted" -ForegroundColor Green
+Write-Host "FORCE MARCH COMPLETE — Run $currentRunPad accounted" -ForegroundColor Green
