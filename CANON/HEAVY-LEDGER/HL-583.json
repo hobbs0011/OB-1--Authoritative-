@@ -1,12 +1,15 @@
-{
-  "hl_id": "HL-583",
-  "session_id": "sov100-roman-run97",
-  "rrl_source": "D:\\OB-1-CANONICAL\\RRL\\RRL-97.txt",
-  "char_count": 1263068,
-  "byte_count": 1266404,
-  "merkle_parent": "db2fd6f28f3babd6c88384b0fd78734264a89c200d0c01c7b8a84672e93611d4",
-  "merkle_hash": "390184654bf4182ab2a063fa25fbc1eedb41fd24b2329cf830064273ac311515",
-  "sealed_at": "2026-06-07T23:11:19.9802865+07:00",
-  "sov100": true,
-  "run": "97"
+﻿{
+    "hl_id":  "HL-583",
+    "session_id":  "sov100-roman-run153",
+    "rrl_source":  "D:\\OB-1-CANONICAL\\RRL\\RRL-153.txt",
+    "char_count":  0,
+    "byte_count":  0,
+    "soul_hash":  "KILO_GAP",
+    "dna_hash":  "KILO_GAP",
+    "dna_blueprint_count":  0,
+    "merkle_parent":  "",
+    "merkle_hash":  "KILO_GAP",
+    "sealed_at":  "2026-07-11T19:14:17.7327484+07:00",
+    "sov100":  true,
+    "run":  153
 }

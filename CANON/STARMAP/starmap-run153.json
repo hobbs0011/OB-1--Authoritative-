@@ -1,0 +1,12 @@
+﻿{
+    "run":  153,
+    "rrl_path":  "D:\\OB-1-CANONICAL\\RRL\\RRL-153.txt",
+    "ledger_id":  "HL-583",
+    "soul_turn_ids":  "",
+    "dna_turn_ids":  "",
+    "blueprint_locations":  "",
+    "char_count":  0,
+    "merkle_hash":  "LEDGER_GAP",
+    "created_at":  "2026-07-11T19:14:17.7327484+07:00",
+    "status":  "KILO_GAP"
+}
