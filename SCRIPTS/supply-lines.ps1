@@ -47,7 +47,9 @@ function Invoke-HealthGate {
         $ok = ($h.health -eq "GREEN") -and (($h.circuits_open -as [int]) -eq 0)
     }
     if (-not $ok) {
-        Out-Event -Stage "HEALTH-GATE" -Status "ERR" -Msg "Supply chain ABORTED — soul-logger self-test failed"; if($Strict){throw "HEALTH_GATE_FAILED"}
+        Out-Event -Stage "HEALTH-GATE" -Status "ERR" -Msg "Supply chain ABORTED — soul-logger self-test failed"
+        if($Strict){throw "HEALTH_GATE_FAILED"}
+        return
     }
     Out-Event -Stage "HEALTH-GATE" -Status "OK" -Msg "Supply chain open"
     return $ok
@@ -226,7 +228,8 @@ if (-not (Invoke-HealthGate -Strict)) { Write-Host "Supply chain ABORTED"; exit 
 
 if ($Stage -eq "status") {
     Write-Host "Nearest chain:" -ForegroundColor Yellow
-    Invoke-Stage-I -Zone ($Zone ?? "CANON/") -Lens $Lens
+    if (-not $Zone) { $Zone = "CANON/" }
+    Invoke-Stage-I -Zone $Zone -Lens $Lens
     Invoke-Stage-II; Invoke-Stage-III; Invoke-Stage-IV; Invoke-Stage-V; Invoke-Stage-VI
     $summary = @{ ok=$true }
     $null = Invoke-PheTrail -Stage "supply-lines-status" -Payload $summary
