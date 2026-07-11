@@ -1,0 +1,72 @@
+﻿{"stage":"INIT","severity":"INFO","ts":"2026-07-11T15:57:25.1292220+07:00","message":"Run authority start"}
+{"stage":"STAGE-I","severity":"INFO","ts":"2026-07-11T15:57:30.0289471+07:00","message":"Exploratores deploying"}
+{"stage":"HEALTH","severity":"OK","ts":"2026-07-11T15:57:30.0693157+07:00","message":"HEAVY-LEDGER=OK (683 files)"}
+{"stage":"HEALTH","severity":"OK","ts":"2026-07-11T15:57:30.0742990+07:00","message":"PHEROMONES=OK (64 files)"}
+{"stage":"HEALTH","severity":"OK","ts":"2026-07-11T15:57:30.0792828+07:00","message":"STARMAP=OK (179 files)"}
+{"stage":"HEALTH","severity":"OK","ts":"2026-07-11T15:57:30.0882796+07:00","message":"PIPELINE=OK (121 files)"}
+{"stage":"HEALTH","severity":"OK","ts":"2026-07-11T15:57:30.0977360+07:00","message":"SOUL-KEYWORDS=OK (153 files)"}
+{"stage":"HEALTH","severity":"OK","ts":"2026-07-11T15:57:30.1317211+07:00","message":"RRL=OK (997 files)"}
+{"stage":"HEALTH","severity":"OK","ts":"2026-07-11T15:57:30.1458563+07:00","message":"REINCARNATION=OK (357 files)"}
+{"stage":"STAGE-I","severity":"OK","ts":"2026-07-11T16:00:29.8776029+07:00","message":"No scout finds"}
+{"stage":"STAGE-II","severity":"INFO","ts":"2026-07-11T16:00:29.8786112+07:00","message":"Antecores verifying run151 ledger"}
+{"stage":"STAGE-II","severity":"OK","ts":"2026-07-11T16:00:29.8900901+07:00","message":"Ledger verified: 680 total, 0 for current run"}
+{"stage":"STAGE-II","severity":"WARN","ts":"2026-07-11T16:00:29.8921148+07:00","message":"No ledger entry for current run"}
+{"stage":"RRL-RECOVERY","severity":"WARN","ts":"2026-07-11T16:00:29.8996547+07:00","message":"Stub RECOVERY-run002 created"}
+{"stage":"RRL-RECOVERY","severity":"WARN","ts":"2026-07-11T16:00:29.9016399+07:00","message":"Stub RECOVERY-run003 created"}
+{"stage":"RRL-RECOVERY","severity":"WARN","ts":"2026-07-11T16:00:29.9026365+07:00","message":"Stub RECOVERY-run006 created"}
+{"stage":"RRL-RECOVERY","severity":"WARN","ts":"2026-07-11T16:00:29.9036330+07:00","message":"Stub RECOVERY-run013 created"}
+{"stage":"RRL-RECOVERY","severity":"WARN","ts":"2026-07-11T16:00:29.9046299+07:00","message":"Stub RECOVERY-run023 created"}
+{"stage":"RRL-RECOVERY","severity":"WARN","ts":"2026-07-11T16:00:29.9056269+07:00","message":"Stub RECOVERY-run069 created"}
+{"stage":"RRL-RECOVERY","severity":"WARN","ts":"2026-07-11T16:00:29.9067490+07:00","message":"Stub RECOVERY-run074 created"}
+{"stage":"RRL-RECOVERY","severity":"WARN","ts":"2026-07-11T16:00:29.9077713+07:00","message":"Stub RECOVERY-run075 created"}
+{"stage":"RRL-RECOVERY","severity":"WARN","ts":"2026-07-11T16:00:29.9087841+07:00","message":"Stub RECOVERY-run088 created"}
+{"stage":"RRL-RECOVERY","severity":"WARN","ts":"2026-07-11T16:00:29.9087841+07:00","message":"Stub RECOVERY-run093 created"}
+{"stage":"RRL-RECOVERY","severity":"WARN","ts":"2026-07-11T16:00:29.9101227+07:00","message":"Stub RECOVERY-run094 created"}
+{"stage":"RRL-RECOVERY","severity":"WARN","ts":"2026-07-11T16:00:29.9113232+07:00","message":"Stub RECOVERY-run113 created"}
+{"stage":"RRL-RECOVERY","severity":"WARN","ts":"2026-07-11T16:00:29.9123411+07:00","message":"Stub RECOVERY-run117 created"}
+{"stage":"RRL-RECOVERY","severity":"WARN","ts":"2026-07-11T16:00:29.9133574+07:00","message":"Stub RECOVERY-run151 created"}
+{"stage":"STAGE-III","severity":"INFO","ts":"2026-07-11T16:00:29.9143801+07:00","message":"Agmen processing + RRL reconstruction"}
+{"stage":"RRL-RECOVERY","severity":"WARN","ts":"2026-07-11T16:00:29.9153885+07:00","message":"Stub RECOVERY-run002 created"}
+{"stage":"RRL-RECOVERY","severity":"WARN","ts":"2026-07-11T16:00:29.9164178+07:00","message":"Stub RECOVERY-run003 created"}
+{"stage":"RRL-RECOVERY","severity":"WARN","ts":"2026-07-11T16:00:29.9176558+07:00","message":"Stub RECOVERY-run006 created"}
+{"stage":"RRL-RECOVERY","severity":"WARN","ts":"2026-07-11T16:00:29.9186731+07:00","message":"Stub RECOVERY-run013 created"}
+{"stage":"RRL-RECOVERY","severity":"WARN","ts":"2026-07-11T16:00:29.9186731+07:00","message":"Stub RECOVERY-run023 created"}
+{"stage":"RRL-RECOVERY","severity":"WARN","ts":"2026-07-11T16:00:29.9199939+07:00","message":"Stub RECOVERY-run069 created"}
+{"stage":"RRL-RECOVERY","severity":"WARN","ts":"2026-07-11T16:00:29.9209903+07:00","message":"Stub RECOVERY-run074 created"}
+{"stage":"RRL-RECOVERY","severity":"WARN","ts":"2026-07-11T16:00:29.9219870+07:00","message":"Stub RECOVERY-run075 created"}
+{"stage":"RRL-RECOVERY","severity":"WARN","ts":"2026-07-11T16:00:29.9239821+07:00","message":"Stub RECOVERY-run088 created"}
+{"stage":"RRL-RECOVERY","severity":"WARN","ts":"2026-07-11T16:00:29.9249973+07:00","message":"Stub RECOVERY-run093 created"}
+{"stage":"RRL-RECOVERY","severity":"WARN","ts":"2026-07-11T16:00:29.9260157+07:00","message":"Stub RECOVERY-run094 created"}
+{"stage":"RRL-RECOVERY","severity":"WARN","ts":"2026-07-11T16:00:29.9303870+07:00","message":"Stub RECOVERY-run113 created"}
+{"stage":"RRL-RECOVERY","severity":"WARN","ts":"2026-07-11T16:00:29.9313936+07:00","message":"Stub RECOVERY-run117 created"}
+{"stage":"RRL-RECOVERY","severity":"WARN","ts":"2026-07-11T16:00:29.9326643+07:00","message":"Stub RECOVERY-run151 created"}
+{"stage":"STAGE-III","severity":"WARN","ts":"2026-07-11T16:00:29.9375508+07:00","message":"Fired SSM/SOULKEYS/PHEROMONE stubs for run002"}
+{"stage":"STAGE-III","severity":"WARN","ts":"2026-07-11T16:00:29.9395663+07:00","message":"Fired SSM/SOULKEYS/PHEROMONE stubs for run003"}
+{"stage":"STAGE-III","severity":"WARN","ts":"2026-07-11T16:00:29.9405858+07:00","message":"Fired SSM/SOULKEYS/PHEROMONE stubs for run006"}
+{"stage":"STAGE-III","severity":"WARN","ts":"2026-07-11T16:00:29.9416030+07:00","message":"Fired SSM/SOULKEYS/PHEROMONE stubs for run013"}
+{"stage":"STAGE-III","severity":"WARN","ts":"2026-07-11T16:00:29.9426274+07:00","message":"Fired SSM/SOULKEYS/PHEROMONE stubs for run023"}
+{"stage":"STAGE-III","severity":"WARN","ts":"2026-07-11T16:00:29.9436360+07:00","message":"Fired SSM/SOULKEYS/PHEROMONE stubs for run069"}
+{"stage":"STAGE-III","severity":"WARN","ts":"2026-07-11T16:00:29.9447154+07:00","message":"Fired SSM/SOULKEYS/PHEROMONE stubs for run074"}
+{"stage":"STAGE-III","severity":"WARN","ts":"2026-07-11T16:00:29.9447154+07:00","message":"Fired SSM/SOULKEYS/PHEROMONE stubs for run075"}
+{"stage":"STAGE-III","severity":"WARN","ts":"2026-07-11T16:00:29.9461746+07:00","message":"Fired SSM/SOULKEYS/PHEROMONE stubs for run088"}
+{"stage":"STAGE-III","severity":"WARN","ts":"2026-07-11T16:00:29.9471852+07:00","message":"Fired SSM/SOULKEYS/PHEROMONE stubs for run093"}
+{"stage":"STAGE-III","severity":"WARN","ts":"2026-07-11T16:00:29.9483181+07:00","message":"Fired SSM/SOULKEYS/PHEROMONE stubs for run094"}
+{"stage":"STAGE-III","severity":"WARN","ts":"2026-07-11T16:00:29.9495796+07:00","message":"Fired SSM/SOULKEYS/PHEROMONE stubs for run113"}
+{"stage":"STAGE-III","severity":"WARN","ts":"2026-07-11T16:00:29.9506040+07:00","message":"Fired SSM/SOULKEYS/PHEROMONE stubs for run117"}
+{"stage":"STAGE-III","severity":"WARN","ts":"2026-07-11T16:00:29.9516083+07:00","message":"Fired SSM/SOULKEYS/PHEROMONE stubs for run151"}
+{"stage":"STAGE-IV","severity":"INFO","ts":"2026-07-11T16:00:29.9527471+07:00","message":"6-AI TRUTH + SHADOW verification"}
+{"stage":"STAGE-IV","severity":"ERR","ts":"2026-07-11T16:00:30.2256091+07:00","message":"index.js syntax CHECK FAILED: The term \u0027node --check\u0027 is not recognized as the name of a cmdlet, function, script file, or operable program. Check the spelling of the name, or if a path was included, verify that the path is correct and try again."}
+{"stage":"STAGE-IV","severity":"OK","ts":"2026-07-11T16:00:30.2266263+07:00","message":"PHASE0 spec EXISTS"}
+{"stage":"STAGE-IV","severity":"OK","ts":"2026-07-11T16:00:30.2278671+07:00","message":"reincarnation contract EXISTS"}
+{"stage":"STAGE-IV","severity":"WARN","ts":"2026-07-11T16:00:30.2309584+07:00","message":"SHADOW registry parse failed: Invalid JSON primitive: ."}
+{"stage":"STAGE-V","severity":"INFO","ts":"2026-07-11T16:00:30.2319550+07:00","message":"Merkle lattice + apex rollup"}
+{"stage":"STAGE-V","severity":"INFO","ts":"2026-07-11T16:00:30.2329518+07:00","message":"Skipped (no --merkle-refresh)"}
+{"stage":"STAGE-VI","severity":"INFO","ts":"2026-07-11T16:00:30.2339483+07:00","message":"Limitanei health sweep"}
+{"stage":"HEALTH","severity":"OK","ts":"2026-07-11T16:00:30.2435362+07:00","message":"HEAVY-LEDGER=OK (683 files)"}
+{"stage":"HEALTH","severity":"OK","ts":"2026-07-11T16:00:30.2467898+07:00","message":"PHEROMONES=OK (64 files)"}
+{"stage":"HEALTH","severity":"OK","ts":"2026-07-11T16:00:30.2509270+07:00","message":"STARMAP=OK (179 files)"}
+{"stage":"HEALTH","severity":"OK","ts":"2026-07-11T16:00:30.2539731+07:00","message":"PIPELINE=OK (121 files)"}
+{"stage":"HEALTH","severity":"OK","ts":"2026-07-11T16:00:30.2572138+07:00","message":"SOUL-KEYWORDS=OK (153 files)"}
+{"stage":"HEALTH","severity":"OK","ts":"2026-07-11T16:00:30.2767693+07:00","message":"RRL=OK (997 files)"}
+{"stage":"HEALTH","severity":"OK","ts":"2026-07-11T16:00:30.2879817+07:00","message":"REINCARNATION=OK (357 files)"}
+{"stage":"STAGE-VI","severity":"OK","ts":"2026-07-11T16:00:30.2890236+07:00","message":"Health sweep PASS"}

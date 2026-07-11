@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0a0a12">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title data-bt-title>BLUETECH PORTAL</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Orbitron:wght@400;500;600;700;800&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/portal.css">
+    <style>#navBackdrop{pointer-events:none!important;}</style>
+    <script src="/assets/net-emoji.js" defer></script>
+</head>
+<body>
+
+    <!-- LOGIN OVERLAY -->
+    <div id="loginScreen">
+        <div class="login-box" id="loginBox">
+            <img src="/isolated/phoenix-crest-clean.png" alt="Phoenix" class="login-crest" onerror="this.style.display='none'">
+            <h1 data-bt-login-title>BLUETECH PORTAL</h1>
+            <p class="login-subtitle">Natural English Training</p>
+            <input type="password" id="portalPw" placeholder="Enter portal password" autocomplete="off">
+            <button class="login-btn" id="loginBtn">UNLOCK PORTAL</button>
+            <p class="login-error" id="loginErr"></p>
+        </div>
+    </div>
+
+    <!-- SET PASSWORD MODAL -->
+    <div id="setPwModal" class="hidden">
+        <div class="setpw-box">
+            <h2>SET YOUR PASSWORD</h2>
+            <p>You're using the default password.<br>Set a personal password to secure your portal.</p>
+            <input type="password" id="newPw1" placeholder="New password (min 6 characters)" autocomplete="new-password">
+            <input type="password" id="newPw2" placeholder="Confirm new password" autocomplete="new-password">
+            <button class="setpw-btn" id="setPwBtn">SAVE PASSWORD</button>
+            <p class="setpw-msg" id="setPwMsg"></p>
+            <button class="setpw-skip" id="setPwSkip">Skip for now</button>
+        </div>
+    </div>
+
+    <div id="navBackdrop"></div>
+    <!-- TOP NAV -->
+    <nav id="topNav" class="hidden">
+        <a class="nav-brand" data-bt-nav-brand href="#">
+            <img src="/isolated/phoenix-crest-clean.png" alt="Phoenix" onerror="this.style.display='none'">
+            <span data-bt-nav-title>BLUETECH PORTAL</span>
+        </a>
+        <button class="nav-hamburger" id="navToggle" aria-label="Menu">☰</button>
+        <div class="nav-links" id="navLinks">
+            <a href="#" data-bt-nav-dashboard class="active">Dashboard</a>
+            <a href="#" data-bt-nav-profile>Profile</a>
+            <a href="#" data-bt-nav-methodology>Methodology</a>
+            <a href="#" data-bt-nav-career>Career</a>
+            <a href="#" data-bt-nav-transcripts>Transcripts</a>
+            <a href="#" data-bt-nav-action-plan>Action Plan</a>
+            <a href="/magic-chat?studentId=" data-bt-nav-chat class="nav-coach">🗣️ Chat with OBI</a>
+        </div>
+        <button class="nav-logout" id="logoutBtn">Logout</button>
+    </nav>
+
+    <img src="/isolated/phoenix-crest-clean.png" class="portal-watermark" alt="">
+
+    <!-- MAIN CONTENT -->
+    <main class="main-container">
+        <div class="dashboard-header">
+            <div class="dh-row"><h1 data-bt-name>STUDENT</h1><span class="dh-level-badge" data-bt-level>A1</span></div>
+            <p class="subtitle" data-bt-subtitle>BlueTech</p>
+            <div class="tiger-slogan">Wake Up The Tiger<span class="vi-sub">Đánh Thức Con Hổ</span></div>
+        </div>
+
+        <div class="stats-grid" id="statsGrid" style="display:none;">
+            <div class="stat-card purple"><div class="stat-accent"></div><div class="stat-label">Tiger Score</div><div class="score-ring-wrap"><svg width="72" height="72" viewBox="0 0 72 72"><circle class="score-ring-bg" cx="36" cy="36" r="30"/><circle class="score-ring-fill" id="scoreRingFill" cx="36" cy="36" r="30"/></svg><div class="score-ring-text" id="tigerScore">—</div></div></div>
+            <div class="stat-card gold"><div class="stat-accent"></div><div class="stat-label">Streak</div><div class="stat-value loading" id="streakVal"><div class="skeleton"></div></div><div class="streak-dots" id="streakDots"></div></div>
+            <div class="stat-card teal"><div class="stat-accent"></div><div class="stat-label">Sessions</div><div class="stat-value loading" id="sessionsVal"><div class="skeleton"></div></div></div>
+            <div class="stat-card success"><div class="stat-accent"></div><div class="stat-label">Next Session</div><div class="stat-value loading" id="nextSessionVal"><div class="skeleton"></div></div></div>
+        </div>
+
+        <div class="day1-card" id="day1Card">
+            <div class="day1-badge">DAY 1 — BLUETECH ENGLISH</div>
+            <h2>Your journey starts today.</h2>
+            <p>Two things, every day. 45 minutes listening. 15 minutes talking to OBI. That's the whole system.</p>
+            <div class="day1-steps">
+                <div class="day1-step"><div class="step-num">45 min</div><div class="step-label">Listen</div><div class="step-sub">YouTube · Podcasts · Netflix</div></div>
+                <div class="day1-step"><div class="step-num">15 min</div><div class="step-label">Talk to OBI</div><div class="step-sub">Tell OBI what you watched</div></div>
+            </div>
+        </div>
+
+        <div class="content-card" id="vocabHero" style="margin-bottom:16px;">
+            <div class="card-label">📚 MY VOCABULARY</div>
+            <div id="vocabWidget" style="min-height:48px;"></div>
+        </div>
+
+        <div id="weekly-widget" style="display:none;">
+            <div class="ww-stat"><div class="ww-label">Mastered Words</div><div class="ww-value" id="ww-mastered">—</div><div class="ww-sub" id="ww-mastered-sub"></div></div>
+            <div class="ww-stat"><div class="ww-label">Current Streak</div><div class="ww-value gold" id="ww-streak">—</div><div class="ww-sub" id="ww-streak-sub"></div></div>
+            <div class="ww-stat"><div class="ww-label">Level Progress</div><div class="ww-value teal" id="ww-level">—</div><div class="ww-bar-wrap"><div class="ww-bar-fill" id="ww-bar" style="width:0%"></div></div><div class="ww-sub" id="ww-level-sub"></div></div>
+        </div>
+
+        <div id="forecast-widget" style="display:none;"></div>
+
+        <div id="goals-widget" class="content-card" style="margin-bottom:16px;display:none"><div class="card-label">MY GOAL</div><div id="goals-content"></div></div>
+
+        <div class="content-card">
+            <div class="card-label">Homework Notes</div>
+            <textarea id="homeworkNotes" placeholder="Write your homework or notes here..." style="width:100%;min-height:100px;background:rgba(22,22,35,0.6);border:1px solid rgba(255,255,255,0.08);border-radius:8px;color:#f8fafc;padding:12px;font-family:inherit;resize:vertical;"></textarea>
+            <button id="saveNotesBtn" style="margin-top:8px;padding:8px 16px;background:#a855f7;color:white;border:none;border-radius:6px;cursor:pointer;">Save Notes</button>
+            <p id="notesStatus" style="margin-top:6px;font-size:0.85rem;color:#94a3b8;"></p>
+        </div>
+
+        <div class="content-card" id="coachCard">
+            <div class="card-label">Coach Note</div>
+            <div class="teacher-note">
+                <p class="note-body" data-bt-coach-note></p>
+                <p class="note-sig">— OBI / NET Coach</p>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <div class="card-label">Level Journey</div>
+            <div class="level-journey" data-bt-level-journey></div>
+            <div class="progress-bar-wrap" id="levelProgressBar"><div class="progress-bar-fill" id="levelProgressFill" style="width:5%;"></div></div>
+            <div class="progress-label" id="levelProgressLabel"></div>
+        </div>
+
+        <div class="content-card" id="phonicsCard" style="display:none">
+            <div class="card-label">🔊 PHONICS TRACK</div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+                <span id="phonicsGroupBadge" style="font-family:'Orbitron',sans-serif;font-size:0.75rem;font-weight:700;letter-spacing:0.08em;padding:5px 14px;border-radius:20px;background:rgba(168,85,247,0.15);border:1px solid rgba(168,85,247,0.4);color:#a855f7;"></span>
+                <span id="phonicsGroupNum" style="font-family:'Rajdhani',sans-serif;font-size:0.8rem;color:var(--dim);"></span>
+            </div>
+            <div class="progress-bar-wrap"><div class="progress-bar-fill" id="phonicsPBar" style="width:0%;"></div></div>
+            <div class="progress-label" id="phonicsPLabel" style="margin-bottom:12px;"></div>
+            <div style="background:rgba(168,85,247,0.06);border:1px solid rgba(168,85,247,0.15);border-radius:14px;padding:14px;margin-bottom:12px;">
+                <div style="font-family:'Rajdhani',sans-serif;font-size:0.72rem;font-weight:700;color:var(--purple);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:6px;">Next Drill</div>
+                <div id="phonicsDrillSentence" style="font-size:0.95rem;font-style:italic;color:var(--text);margin-bottom:6px;"></div>
+                <div id="phonicsDrillTip" style="font-size:0.82rem;color:var(--dim);"></div>
+            </div>
+            <div id="phonicsFocusErr" style="font-size:0.82rem;color:var(--teal);margin-bottom:12px;display:none;"></div>
+            <button id="phonicsAdvBtn" style="display:none;border:1px solid var(--purple);color:var(--purple);background:rgba(168,85,247,0.1);padding:8px 18px;border-radius:14px;cursor:pointer;font-family:'Rajdhani',sans-serif;font-size:0.88rem;font-weight:600;letter-spacing:0.04em;">Group complete! Advance →</button>
+        </div>
+
+        <div class="content-card" id="nextSessionCard" style="display:none">
+            <div class="card-label" data-bt-next-session-label>Next Session</div>
+            <div data-bt-next-session-body></div>
+        </div>
+
+        <div class="content-card">
+            <div class="card-label">Quick Access</div>
+            <div class="quick-links-grid">
+                <a href="#" data-bt-nav-chat class="quick-link-card primary-link"><span class="ql-icon">🗣️</span><div class="ql-label">Chat with OBI</div><div class="ql-sub">Start speaking now</div></a>
+                <a href="#" data-bt-nav-transcripts class="quick-link-card"><span class="ql-icon">📋</span><div class="ql-label">Transcripts</div><div class="ql-sub">Review past sessions</div></a>
+                <a href="#" data-bt-nav-action-plan class="quick-link-card"><span class="ql-icon">🎯</span><div class="ql-label">Action Plan</div><div class="ql-sub">Your weekly goals</div></a>
+            </div>
+        </div>
+
+        <div class="content-card" id="classReviewCard" style="display:none">
+            <div class="card-label">🎧 CLASS REVIEW</div>
+            <div id="classReviewContainer"></div>
+        </div>
+
+    </main>
+
+    <div id="streak-badge" style="display:none;"></div>
+
+    <script src="/portal-shared.js" defer></script>
+    <script>
+    /* Student config registry. One source of truth for BlueTech portals. */
+    const BT_STUDENTS = {
+        "quy-bluetech": {
+            name: "QUY",
+            level: "A1",
+            subtitle: "BlueTech · Foundation Track",
+            defaultPw: "bluetech2026",
+            coachNote: "Quy is building from zero — every word she learns is a brick. Vietnamese to English is a long road but she is walking it. Consistency beats intensity. Show up every day.",
+            levelJourney: '<div class="lj-node"><div class="lj-badge current">A1</div><div class="lj-sub">Foundation</div></div><div class="lj-line"></div><div class="lj-node"><div class="lj-badge target">A2</div><div class="lj-sub">Elementary</div></div><div class="lj-line"></div><div class="lj-node"><div class="lj-badge">B1</div><div class="lj-sub">Intermediate</div></div><div class="lj-line"></div><div class="lj-node"><div class="lj-badge">B2</div><div class="lj-sub">Upper Int.</div></div><div class="lj-line"></div><div class="lj-node"><div class="lj-badge">C1</div><div class="lj-sub">Advanced</div></div>',
+            levelProgress: "A1 → A2: Master 50 core words and hold a 2-minute conversation",
+            levelPct: "5%"
+        },
+        "huong-bluetech": {
+            name: "HUONG",
+            level: "B1",
+            subtitle: "BlueTech · Speaking Track",
+            defaultPw: "bluetech2026",
+            coachNote: "Huong has strong motivation and shows up consistently. The job now is turning passive understanding into active output — pushing her to speak even when it feels uncomfortable.",
+            levelJourney: '<div class="lj-node"><div class="lj-badge done">A1</div><div class="lj-sub">Foundation</div></div><div class="lj-line done"></div><div class="lj-node"><div class="lj-badge done">A2</div><div class="lj-sub">Elementary</div></div><div class="lj-line done"></div><div class="lj-node"><div class="lj-badge current">B1</div><div class="lj-sub">Intermediate</div></div><div class="lj-line"></div><div class="lj-node"><div class="lj-badge target">B2</div><div class="lj-sub">Upper Int.</div></div><div class="lj-line"></div><div class="lj-node"><div class="lj-badge">C1</div><div class="lj-sub">Advanced</div></div>',
+            levelProgress: "B1 → B2: Speak for 5 minutes on any topic without stopping",
+            levelPct: "35%"
+        },
+        "mai-tram-bluetech": {
+            name: "MAI TRAM",
+            level: "A2/B1",
+            subtitle: "BlueTech · Fluency Track",
+            defaultPw: "bluetech2026",
+            coachNote: "Mai Tram shows B1-level topic fluency with emerging economic vocabulary. Keep pushing multi-sentence responses and natural idiom practice.",
+            levelJourney: '<div class="lj-node"><div class="lj-badge done">A1</div><div class="lj-sub">Foundation</div></div><div class="lj-line done"></div><div class="lj-node"><div class="lj-badge done">A2</div><div class="lj-sub">Elementary</div></div><div class="lj-line done"></div><div class="lj-node"><div class="lj-badge current">B1</div><div class="lj-sub">Intermediate</div></div><div class="lj-line"></div><div class="lj-node"><div class="lj-badge target">B2</div><div class="lj-sub">Upper Int.</div></div><div class="lj-line"></div><div class="lj-node"><div class="lj-badge">C1</div><div class="lj-sub">Advanced</div></div>',
+            levelProgress: "A2/B1 → B2: Build fluency with workplace and social topics",
+            levelPct: "25%"
+        }
+    };
+
+    function btNavHref(suffix) {
+        const sid = btStudentId();
+        return sid ? (suffix + '?studentId=' + sid) : '#';
+    }
+
+    function btInitStudent() {
+        const studentId = btStudentId() || 'quy-bluetech';
+        const cfg = BT_STUDENTS[studentId];
+        if (!cfg) return;
+
+        document.querySelector('[data-bt-title]').textContent = cfg.name + ' PORTAL';
+        document.querySelector('[data-bt-login-title]').textContent = cfg.name + ' PORTAL';
+        document.querySelector('[data-bt-name]').textContent = cfg.name;
+        document.querySelector('[data-bt-level]').textContent = cfg.level;
+        document.querySelector('[data-bt-subtitle]').textContent = cfg.subtitle;
+        document.querySelector('[data-bt-coach-note]').textContent = cfg.coachNote;
+        document.querySelector('[data-bt-level-journey]').innerHTML = cfg.levelJourney;
+        document.querySelector('[data-bt-level-progress]').textContent = cfg.levelProgress;
+        document.querySelector('[data-bt-level-pct]').textContent = cfg.levelPct;
+        document.querySelector('[id="levelProgressFill"]').style.width = cfg.levelPct;
+        document.querySelector('[data-bt-nav-chat]').href = '/magic-chat?studentId=' + studentId;
+        document.querySelector('[data-bt-nav-dashboard]').href = 'bluetech-portal.html?studentId=' + studentId;
+        document.querySelector('[data-bt-nav-profile]').href = btNavHref(studentId + '-profile');
+        document.querySelector('[data-bt-nav-methodology]').href = btNavHref(studentId + '-methodology');
+        document.querySelector('[data-bt-nav-career]').href = btNavHref(studentId + '-career');
+        document.querySelector('[data-bt-nav-transcripts]').href = btNavHref(studentId + '-transcripts');
+        document.querySelector('[data-bt-nav-action-plan]').href = btNavHref(studentId + '-action-plan');
+
+        btInitPortal(studentId, cfg.defaultPw);
+        btInitStreakBadge(studentId);
+        btInitHomeworkNotes(studentId);
+
+        document.addEventListener('portalUnlocked', function() {
+            btLoadVocabWidget(studentId);
+            btLoadWeeklyWidget(studentId);
+            btLoadGoals(studentId);
+            btLoadForecast(studentId);
+            btLoadPhonics(studentId);
+            btLoadClassReview(studentId);
+        });
+        if (btIsAuthed(studentId)) {
+            btLoadVocabWidget(studentId);
+            btLoadWeeklyWidget(studentId);
+            btLoadGoals(studentId);
+            btLoadForecast(studentId);
+            btLoadPhonics(studentId);
+            btLoadClassReview(studentId);
+        }
+    }
+    document.addEventListener('DOMContentLoaded', btInitStudent);
+
+    /* ── Mobile nav ── */
+    document.addEventListener('DOMContentLoaded', function() {
+        const toggle = bt$('navToggle');
+        const links = bt$('navLinks');
+        const backdrop = bt$('navBackdrop');
+        function closeNav() {
+            if (links) links.classList.remove('open');
+            if (toggle) toggle.textContent = '☰';
+            if (backdrop) backdrop.classList.remove('open');
+        }
+        if (toggle && links) {
+            toggle.addEventListener('click', function() {
+                const isOpen = links.classList.toggle('open');
+                toggle.textContent = isOpen ? '✕' : '☰';
+                if (backdrop) backdrop.classList.toggle('open', isOpen);
+            });
+            links.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', closeNav); });
+        }
+        if (backdrop) backdrop.addEventListener('click', closeNav);
+    });
+    </script>
+    <script src="./global-brand-shelf.js" defer onerror="void 0"></script>
+    <script src="/problem-report.js"></script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+﻿{
+  "schema_version": "2.1",
+  "run_number": "151",
+  "extracted_at": "2026-07-06T23:44:45+07:00",
+  "head_sha": "e58d9baec",
+  "soulcount": 239641603,
+  "registry_entries": 8824,
+  "positive_trails": [
+    {
+      "artifact": "APPS/NET-PET-AI/wrangler.toml",
+      "action": "renamed worker from net-pet-ai to net",
+      "verification": "npx wrangler deploy succeeded; net.mrmichaelhobbs123.workers.dev returns HTTP 200",
+      "timestamp": "2026-07-06T23:44:45+07:00"
+    },
+    {
+      "artifact": "APPS/NET-PET-AI/src/index.js",
+      "action": "updated hardcoded net-pet-ai URLs to net",
+      "verification": "3 replacements: health check, worker field, PROD_URL constant",
+      "timestamp": "2026-07-06T23:44:45+07:00"
+    },
+    {
+      "artifact": "APPS/NET-PET-AI/src/router.js",
+      "action": "updated hardcoded net-pet-ai URLs to net; added /api/transcribe-upload endpoint",
+      "verification": "trusted origins, health response, and new transcribe route all updated",
+      "timestamp": "2026-07-06T23:44:45+07:00"
+    },
+    {
+      "artifact": "APPS/NET-PET-AI/public/mai-tram-portal.html",
+      "action": "completed portal with 5 session sections and vocab widget",
+      "verification": "deployed to net worker; /mai-tram-portal returns 200 with JULY 20, JULY 24, APRIL 16 sections",
+      "timestamp": "2026-07-06T23:44:45+07:00"
+    },
+    {
+      "artifact": "OPERATIONS/mai-tram-transcripts.json",
+      "action": "transcribed 5 audio files via Deepgram",
+      "verification": "2,490 utterances, 89,724 chars total, saved to disk",
+      "timestamp": "2026-07-06T23:44:45+07:00"
+    },
+    {
+      "artifact": "OPERATIONS/mai-tram-vocab-list.json",
+      "action": "extracted vocabulary from transcripts",
+      "verification": "120+ unique words per session, key moments identified",
+      "timestamp": "2026-07-06T23:44:45+07:00"
+    },
+    {
+      "artifact": "CANON/PHEROMONES/PheTrail-run150.json",
+      "action": "verified prior phetrail integrity",
+      "verification": "JSON valid, 3 positive trails, 3 negative trails, schema_version 2.1",
+      "timestamp": "2026-07-06T23:44:45+07:00"
+    },
+    {
+      "artifact": "public/bluetech-login/index.html, public/quan-quang-login/index.html",
+      "action": "verified portal files use relative API paths",
+      "verification": "zero net-pet-ai references found; portals already domain-agnostic",
+      "timestamp": "2026-07-06T23:44:45+07:00"
+    }
+  ],
+  "negative_trails": [
+    {
+      "artifact": "APPS/NET-PET-AI/public/audio/mai-tram-july20.m4a",
+      "failure": "asset upload failed with TypeError: fetch failed",
+      "root_cause": "Cloudflare Workers asset upload limit ~25MB per file; july20/july24 exceeded limit",
+      "decay_days": 180,
+      "timestamp": "2026-07-06T23:44:45+07:00"
+    },
+    {
+      "artifact": "APPS/NET-PET-AI/public/audio/mai-tram-july24.m4a",
+      "failure": "asset upload failed with TypeError: fetch failed",
+      "root_cause": "Cloudflare Workers asset upload limit ~25MB per file; july20/july24 exceeded limit",
+      "decay_days": 180,
+      "timestamp": "2026-07-06T23:44:45+07:00"
+    },
+    {
+      "artifact": "wrangler deploy to net worker",
+      "failure": "certificate verification error during auth token refresh",
+      "root_cause": "dash.cloudflare.com DNS resolution failure (ENOTFOUND); not a code issue",
+      "decay_days": 180,
+      "timestamp": "2026-07-06T23:44:45+07:00"
+    },
+    {
+      "artifact": "OPERATIONS/mai-tram-transcribe.mjs",
+      "failure": "initial transcription script failed with ENOENT",
+      "root_cause": "__dirname resolution broken in ESM on Windows; path.join(__dirname, '..') produced /D:/OB-1-CANONICAL/OPERATIONS/..",
+      "decay_days": 180,
+      "timestamp": "2026-07-06T23:44:45+07:00"
+    }
+  ],
+  "state_markers": {
+    "active_mission": "OB-1 POST-MERGE9 CONSOLIDATION + Growth Infrastructure Buildout â€” NET-PET-AI Hardening to Scale-Ready",
+    "open_flags_count": 1,
+    "top_priority": "Resolve wrangler cert/DNS issue for reliable deploys; move large audio to R2 or external hosting",
+    "worker_name": "net",
+    "worker_url": "https://net.mrmichaelhobbs123.workers.dev",
+    "legacy_worker": "net-pet-ai (preserved as legacy)",
+    "mai_tram_portal": "https://net.mrmichaelhobbs123.workers.dev/mai-tram-portal",
+    "bluetech_portal": "https://net.mrmichaelhobbs123.workers.dev/bluetech-login",
+    "quan_quang_portal": "https://net.mrmichaelhobbs123.workers.dev/quan-quang-login"
+  }
+}
+

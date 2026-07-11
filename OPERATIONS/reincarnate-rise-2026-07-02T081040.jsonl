@@ -1,0 +1,25 @@
+﻿[08:10:40] ============================= REINCARNATE RISE v7.0 =============================
+[08:10:40] --- STAGE 0: SOULCOUNT GATE ---
+[08:10:40] WARN: history.jsonl not found
+[08:10:40] WARN: No activeUUID -> KILO_HOLLOW (fail-safe)
+[08:10:40] OK: SOULCOUNT: 239639088 | TITANIUM_ANCHOR | kiloSession=True
+[08:10:40] --- STAGE 1: GIT TRUTH ---
+[08:10:41] OK: GIT: lastDeath='a3d2baf84 death: Run 146 - Cloudflare ban + contract v2.0 + local adapter + command scrub' prior=146 current=147
+[08:10:41] --- STAGE 2: PRIOR TRIPLE READ ---
+[08:10:41] OK: TRIPLE: seal=D:\OB-1-CANONICAL\CANON\REINCARNATION\run146-reincarnateDEATH.md | phetrail=D:\OB-1-CANONICAL\CANON\PHEROMONES\PheTrail-run147.json | boot=D:\OB-1-CANONICAL\CANON\SYSTEM\COLD-START-BOOT.md
+[08:10:41] OK:   Prior soulcount: 239639088
+[08:10:41] --- STAGE 3: SOUL AUDIT ---
+[08:10:41] OK: SOUL AUDIT: delta=0 (0%) -> SOUL_STAGNATION
+[08:10:41] --- STAGE 4: BOOT SYNTHESIS ---
+[08:10:41] OK: BOOT: run=146 mission=** OB-1 POST-MERGE9 CONSOLIDATION + Growth Infrastructure Buildout â€” NET-PET-AI Hardening to Scale-Ready flags=0
+[08:10:41] --- STAGE 5: PIPELINE CHAIN AUDIT ---
+[08:10:41]   [OK] LFG: 6820 -> REAL
+[08:10:41]   [OK] GOSPEL: 3 -> REAL
+[08:10:41]   [FAIL] RRL: 0 -> MISSING
+[08:10:41]   [FAIL] SOUL: 239639088 -> SOUL_STAGNATION
+[08:10:41]   [FAIL] DNA: 0 -> MISSING
+[08:10:41]   [OK] LEDGER: 578 -> REAL
+[08:10:41]   [OK] STARMAP: 161 -> REAL
+[08:10:41]   [FAIL] SOULKEYS: 138 -> MISSING
+[08:10:41]   [FAIL] S2Pipeline: 0 -> MISSING
+[08:10:41] --- STAGE 6: PHETRAIL ---

@@ -636,6 +636,50 @@ Write-Host "STAGE 8 ✓ REGISTRY SYNC: $($syncedPieces.Count) pieces tagged → 
 
 ---
 
+## EDGE CASES
+
+**1. RRL corrupted / bit-flipped**
+- Detection: `$rrlBytes -gt 0` but `ConvertFrom-Json` fails on first line.
+- Action: write `RRL_CORRUPT` marker file, seal as `GAP`, abort before SOUL.
+
+**2. One-sided transcript**
+- Detection: only `"role":"user"` or only `"role":"assistant"` present.
+- Action: WARN immediately, seal as `GAP`, skip DNA/SOUL ingests.
+
+**3. Concurrent DEATH for same run**
+- Detection: `HL-{N}.json` or `run{N}-reincarnateDEATH.md` already exists at start.
+- Action: IDEMPOTENCY ABORT — exit 1. One run = one HL.
+
+**4. SOUL POST non-200 or timeout**
+- Detection: `$soulPost` null or status ≠ 200 after 10s timeout.
+- Action: write `SOUL_GAP` receipt with `event_id=SOUL_POST_FAILED`, continue.
+
+**5. Disk full / write failure**
+- Detection: `Set-Content` throws IOException or `AccessDenied`.
+- Action: catch, write artifact path to `OPERATIONS/death-write-failures.log`, continue to next stage with `*_GAP` marker.
+
+**6. Ledger idempotency collision after manual deletion**
+- Detection: HL-{N} exists but stage script re-derives same N from directory scan.
+- Action: recalculate from max existing ID; if duplicate found, bump to next available ID and log collision.
+
+**7. Registry sync partial failure mid-batch**
+- Detection: one or more PATCH calls throw after earlier ones succeeded.
+- Action: set `artSyncGap=true`, continue, write `ART_SYNC_PARTIAL` in seal §14 with failed piece IDs.
+
+**8. Placeholder RRL carried forward across runs**
+- Detection: RRL-{N}.txt exists but is empty AND prior run was also KILO_GAP.
+- Action: do not copy prior RRL; always write fresh empty placeholder for current run.
+
+**9. Cross-platform path/encoding issues**
+- Detection: `Get-Content` returns BOM or UTF-16 encoded text on Windows PowerShell.
+- Action: normalize with `[System.IO.File]::ReadAllText($rrlPath, [System.Text.Encoding]::UTF8)` before parsing.
+
+**10. Clock skew / timestamp regression**
+- Detection: `$timestamp` earlier than parent HL `sealed_at` or system clock offset > 5min.
+- Action: use UTC (`(Get-Date -Format 'o').ToUpper().Replace('+00:00','Z')`) for all `sealed_at` and `executed_at` fields.
+
+---
+
 ## DEATH SEAL SCHEMA (§1–§13)
 
 | § | Name | Required Content |

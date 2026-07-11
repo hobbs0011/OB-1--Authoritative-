@@ -1,0 +1,74 @@
+[
+  {
+    "id": "may26",
+    "date": "2026-05-26",
+    "title": "Self-Help & Skincare",
+    "icon": "🧴",
+    "description": "Mai Tram discussed self-help podcasts, explained her skincare routine in English, described her weekend church and hangout schedule, and practiced food vocabulary.",
+    "audioParts": [
+      { "title": "Part 1 — Bean Sprout & Food Vocabulary", "src": "/audio/quy-may26-part0.mp3" },
+      { "title": "Part 2 — Weekend Routine & Church", "src": "/audio/quy-may26-part1.mp3" },
+      { "title": "Part 3 — Self-Help Podcast Discussion", "src": "/audio/quy-may26-part2.mp3" },
+      { "title": "Part 4 — Skincare Routine in English", "src": "/audio/quy-may26-part3.mp3" },
+      { "title": "Part 5 — Conversation Practice", "src": "/audio/quy-may26-part4.mp3" }
+    ],
+    "keyMoments": [
+      { "quote": "\"On Friday, I listened to the communication in YouTube about self-help.\"", "note": "Full sentence with past tense, topic, and platform." },
+      { "quote": "\"When you go out and come home, you must clean the skin and take care of the skin.\"", "note": "Explaining a multi-step routine in English. Cause-and-effect reasoning in a second language." },
+      { "quote": "\"It will make you fresh and happy.\"", "note": "Describing benefits using adjectives naturally. Not translating from Vietnamese — thinking in English about wellness." }
+    ],
+    "topics": ["Health Vocabulary", "Past Tense Narration", "Multi-Step Explanation", "Skincare Vocabulary"]
+  },
+  {
+    "id": "may28",
+    "date": "2026-05-28",
+    "title": "Coffee, Idioms & Vocab Review",
+    "icon": "☕",
+    "description": "Mai Tram reviewed vocabulary from Monday, explained coffee health benefits using comparatives, learned the idiom \"that sucks\", and practiced meal vocabulary.",
+    "audioParts": [
+      { "title": "Part 1 — Vocab Review: Hang Out, Healthy, Energy", "src": "/audio/mai-tram-may28-part0.mp3" },
+      { "title": "Part 2 — Coffee Benefits & Appetite", "src": "/audio/mai-tram-may28-part1.mp3" },
+      { "title": "Part 3 — Meals & More/Less Comparatives", "src": "/audio/mai-tram-may28-part2.mp3" },
+      { "title": "Part 4 — \"That Sucks\" & Natural Idioms", "src": "/audio/mai-tram-may28-part3.mp3" },
+      { "title": "Part 5 — OBI Voice Agent & Vocab System", "src": "/audio/mai-tram-may28-part4.mp3" }
+    ],
+    "keyMoments": [
+      { "quote": "\"Drinking coffee makes you have more energy and less stress.\"", "note": "Comparatives used correctly in a health explanation. Two concepts linked in one sentence." },
+      { "quote": "\"That sucks.\"", "note": "First natural English idiom. The laugh that followed locked it in memory." },
+      { "quote": "\"Each lesson will update the vocab, and you can review by talking to Obi.\"", "note": "Explaining the learning system back to the teacher. Metacognitive awareness in English." }
+    ],
+    "topics": ["Comparatives", "Natural Idioms", "Vocab Retention", "Metacognition", "Health Topics"]
+  },
+  {
+    "id": "jul20",
+    "date": "2026-07-20",
+    "title": "BlueTech — Work & Food",
+    "icon": "🏢",
+    "description": "Mai Tram discussed Saturday work routines, overtime pay, bonus structures, and practiced food vocabulary. She produced multi-sentence responses about workplace finance.",
+    "audioParts": [
+      { "title": "Part 1 — Saturday Work & Bonus", "src": "/audio/mai-tram-july20.m4a" }
+    ],
+    "keyMoments": [
+      { "quote": "\"We should do the work vending in the Saturday throughout the PM.\"", "note": "Describing weekend work schedule with prepositions." },
+      { "quote": "\"I need to scan on the contract and boost it into the my company's drive.\"", "note": "Multi-step work task with technology vocabulary." },
+      { "quote": "\"Strawberry and Cherry is the actors. Their enemy? And the strawberry killed the Cherry.\"", "note": "Creative storytelling practice with food vocabulary." }
+    ],
+    "topics": ["Work Vocabulary", "Food Vocabulary", "Narrative Practice", "Future Plans"]
+  },
+  {
+    "id": "jul24",
+    "date": "2026-07-24",
+    "title": "BlueTech — Contracts & Culture",
+    "icon": "📝",
+    "description": "Mai Tram explained a Saturday overtime shift ending at 04:30 PM, practiced contract/signing vocabulary, described bonus payment schedules, and discussed Vietnamese culture around compliments and politeness.",
+    "audioParts": [
+      { "title": "Part 1 — Overtime & Contracts", "src": "/audio/mai-tram-july24.m4a" }
+    ],
+    "keyMoments": [
+      { "quote": "\"Finish at 04:30 o'clock. I'm 04:30. AM or PM? PM.\"", "note": "Time vocabulary with AM/PM distinction." },
+      { "quote": "\"Because they're shining, so I can Oh, sign? Shine. Shine.\"", "note": "Phonetic confusion resolution; sound vs. meaning distinction." },
+      { "quote": "\"Mature means old. If you're mature for your age, you act older.\"", "note": "Abstract adjective explanation with cultural context." }
+    ],
+    "topics": ["Contract Vocabulary", "Comparatives", "Cultural Fluency", "Polite Speech"]
+  }
+]

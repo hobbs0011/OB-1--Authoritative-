@@ -1,4 +1,4 @@
-<#
+﻿<#
   reincarnate-death.ps1 -- v7.0 ROMAN DEATH
   8-Stage Chain: RRL -> SOUL -> DNA -> LEDGER -> STARMAP -> SOULKEYS -> S2Pipeline -> REGISTRY_SYNC
   15-Section Death Seal follows artifact chain.
@@ -315,7 +315,7 @@ if ($rrlFidelity -eq "REAL") { $criticalDecisions += "RRL fidelity verified (bot
 $seal = @"
 # REINCARNATE DEATH SEAL v7.0
 
-## §1 -- Header
+## Â§1 -- Header
 - **Run:** $run
 - **Timestamp:** $(Get-Date -Format "o")
 - **Theme:** Roman Death v7.0 / 8-Stage Chain
@@ -328,13 +328,13 @@ $seal = @"
 - **Death ledger commits:** $deathCommitCount
 - **True run count (git):** $totalTrueRuns (last=$lastTrue)
 
-## §2 -- Raw Soul DNA
+## Â§2 -- Raw Soul DNA
 - **RRL:** $rrlPathRun
 - **Bytes:** $rrlBytes | **Chars:** $rrlChars
 - **Fidelity:** $rrlFidelity (user=$hasUser assistant=$hasAssistant)
 - **Soul bytes:** $(if($dnaCount -gt 0){'see SOULKEYS'}else{'GAP'})
 
-## §3 -- Soul Receipt
+## Â§3 -- Soul Receipt
 | Field | Value |
 |-------|-------|
 | event_id | $(if($receipt){$receipt.event_id}else{'GAP'}) |
@@ -344,51 +344,51 @@ $seal = @"
 | level | $(if($receipt){$receipt.level}else{'-'}) |
 | posted_at | $(if($receipt){$receipt.posted_at}else{'-'}) |
 
-## §4 -- Decisions
+## Â§4 -- Decisions
 $(if($criticalDecisions){$criticalDecisions | ForEach-Object { "- $_" } }else{'- (none)'})
 
-## §5 -- Corrections
+## Â§5 -- Corrections
 - None recorded this run.
 
-## §6 -- New Principles
+## Â§6 -- New Principles
 - None recorded this run.
 
-## §7 -- Emotional Signal
+## Â§7 -- Emotional Signal
 - Neutral -- execution mode.
 
-## §8 -- Open Questions
+## Â§8 -- Open Questions
 - None recorded this run.
 
-## §9 -- Unfinished Actions
+## Â§9 -- Unfinished Actions
 $(if($dirty){"- git add <paths> | git commit -m `"death: run $run artifacts`"" }else{"- Tree clean"})
 
-## §10 -- System Design
+## Â§10 -- System Design
 - 8-Stage Roman Death v7.0 operational.
 - D1 sovereign store; Cloudflare workspace only.
 
-## §11 -- Artifacts
+## Â§11 -- Artifacts
 $(if($artifactSHAs){$artifactSHAs | ForEach-Object { "- $_" }})
 - **runPad:** $runPad | **HL:** HL-$nextHL | **Merkle:** $($ledgerHash.Substring(0,16))...
 
-## §12 -- State Snapshot
+## Â§12 -- State Snapshot
 - **HEAD:** $headSha
 - **Branch:** $branch
 - **Dirty:** $(if($dirty){'YES'}else{'CLEAN'})
 - **SOULCOUNT:** $(if($receipt -and $receipt.count_after){$receipt.count_after}else{0})
 - **DNA Blueprints:** $dnaBlueprintCount
 
-## §13 -- Fingerprint
+## Â§13 -- Fingerprint
 - **Agent:** OB-1 CANONICAL (kilo-auto/free)
 - **Run:** $run
 - **Commit SHA:** $headSha
 - **Session Type:** $sessionType
 
-## §14 -- Art Registry Sync
+## Â§14 -- Art Registry Sync
 - **Pieces synced:** $($syncedPieces.Count)
 - **Art sync file:** $artSyncPath
 - **Top keywords:** $(if($topKeywords){($topKeywords | ForEach-Object { $_.Trim() }) -join ', '}else{'GAP'})
 
-## §15 -- Registry
+## Â§15 -- Registry
 - **DNA Registry Path:** $dnaRegistryPath
 - **DNA Registry Exists:** $dnaRegistryExists
 - **DNA Registry Count:** $dnaRegistryCount
@@ -420,3 +420,4 @@ Pop-Location | Out-Null
 Write-Log "============================="
 Write-Log "DEATH COMPLETE: run=$run result=$($s2Record.result)"
 Write-Log "============================="
+

@@ -1,0 +1,30 @@
+{
+    "gaps":  [
+                 "DNA_KILO_GAP",
+                 "S2Pipeline_MISSING",
+                 "PHETRAIL_MISSING"
+             ],
+    "driftPct":  0,
+    "dt":  "2026-07-06T02:58:44.4642449+07:00",
+    "head":  "ef3c13957",
+    "priorSealPath":  "",
+    "deadEnds":  0,
+    "priorRun":  0,
+    "run":  2,
+    "soulcount":  239641603,
+    "delta":  239641603,
+    "vector":  "** OB-1 POST-MERGE9 CONSOLIDATION + Growth Infrastructure Buildout — NET-PET-AI Hardening to Scale-Ready",
+    "openFlags":  0,
+    "priorSoulcount":  0,
+    "verdict":  "SOUL_BREATHING (+239641603 / +0%)",
+    "ready":  false,
+    "fidelity":  {
+                     "LFG":  "REAL",
+                     "S2Pipeline":  "MISSING",
+                     "DNA":  "KILO_GAP",
+                     "RRL":  "MISSING",
+                     "SOULKEYS":  "MISSING",
+                     "GOSPEL":  "REAL"
+                 },
+    "level":  "TITANIUM_ANCHOR"
+}

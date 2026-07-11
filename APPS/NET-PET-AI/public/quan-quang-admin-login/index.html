@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a0a12">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>Quan & Quang Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/portal.css">
+  <style>
+    .login-crest-wrap { margin-bottom: 18px; }
+    .login-crest {
+      width: 72px; height: 72px; object-fit: contain; filter: drop-shadow(0 0 18px rgba(168,85,247,0.35));
+    }
+  </style>
+</head>
+<body class="portal-quanquang">
+  <div id="loginScreen">
+    <div class="login-box" id="loginBox">
+      <div class="login-crest-wrap">
+        <img src="/isolated/phoenix-crest-clean.png" alt="Phoenix" class="login-crest" onerror="this.style.display='none'">
+      </div>
+      <h1>QUAN & QUANG ADMIN</h1>
+      <p class="login-subtitle">Family Program Portal</p>
+      <input type="text" id="username" placeholder="Parent PIN" autocomplete="username">
+      <input type="password" id="password" placeholder="Confirm PIN" autocomplete="current-password">
+      <button class="login-btn" id="loginBtn">Sign In</button>
+      <p class="login-error" id="loginErr"></p>
+    </div>
+  </div>
+
+  <div id="navBackdrop"></div>
+  <nav id="topNav" class="hidden">
+    <a class="nav-brand" href="/quan-quang-admin-login/">
+      <img src="/isolated/phoenix-crest-clean.png" alt="Phoenix" onerror="this.style.display='none'" style="width:32px;height:32px;object-fit:contain;">
+      <span>QUAN & QUANG ADMIN</span>
+    </a>
+    <button class="nav-hamburger" id="navToggle" aria-label="Menu">☰</button>
+    <div class="nav-links" id="navLinks">
+      <a href="#overview" class="active">Overview</a>
+      <a href="#children">Children</a>
+      <a href="#progress">Progress</a>
+      <a href="#reports">Reports</a>
+    </div>
+    <button class="nav-logout" id="logoutBtn">Sign Out</button>
+  </nav>
+
+  <img src="/isolated/phoenix-crest-clean.png" class="portal-watermark" alt="" style="display:none;">
+
+  <main class="main-container">
+    <div class="dashboard-header">
+      <h1>Quan & Quang Admin</h1>
+      <p class="subtitle">Family Program Portal</p>
+      <div class="tiger-slogan">Parent Dashboard</div>
+    </div>
+
+    <section id="overview" class="section active">
+      <div class="content-card">
+        <div class="card-label">Program summary</div>
+        <ul class="action-list" id="overviewList">
+          <li>Loading...</li>
+        </ul>
+      </div>
+      <div class="content-card">
+        <div class="card-label">Parent actions</div>
+        <ul class="action-list">
+          <li>View progress reports</li>
+          <li>Check session notes</li>
+          <li>Update priorities</li>
+          <li>Schedule parent check-in</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="children" class="section">
+      <div class="content-card">
+        <div class="card-label">Children</div>
+        <ul class="action-list" id="childrenList">
+          <li>Loading...</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="progress" class="section">
+      <div class="content-card">
+        <div class="card-label">Current status</div>
+        <ul class="action-list" id="progressList">
+          <li>Loading...</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="reports" class="section">
+      <div class="content-card">
+        <div class="card-label">Recent reports</div>
+        <ul class="action-list" id="reportsList">
+          <li>Loading...</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (function() {
+      const AUTH_KEY = 'quanquang_admin_auth';
+      const API = '/api/parent/dashboard';
+
+      function isAuthed() { return localStorage.getItem(AUTH_KEY) === 'true'; }
+
+      function showPortal() {
+        document.getElementById('loginScreen').classList.add('hidden');
+        document.getElementById('topNav').classList.remove('hidden');
+        bindNav();
+        loadDashboard();
+      }
+
+      function showLoginError(msg) {
+        const err = document.getElementById('loginErr');
+        const box = document.getElementById('loginBox');
+        err.textContent = msg || 'Invalid credentials. Please try again.';
+        err.classList.add('visible');
+        box.classList.remove('shaking');
+        void box.offsetWidth;
+        box.classList.add('shaking');
+        setTimeout(() => box.classList.remove('shaking'), 600);
+      }
+
+      function navigateToPortalRoot() {
+        const path = window.location.pathname;
+        const base = path.slice(0, path.lastIndexOf('/', path.length - 1) + 1) || '/';
+        window.location.replace(base);
+      }
+
+      function logout() {
+        localStorage.removeItem(AUTH_KEY);
+        navigateToPortalRoot();
+      }
+
+      function bindNav() {
+        const toggle = document.getElementById('navToggle');
+        const links = document.getElementById('navLinks');
+        const backdrop = document.getElementById('navBackdrop');
+        function closeNav() {
+          if (!links || !toggle) return;
+          links.classList.remove('open');
+          toggle.textContent = '☰';
+          if (backdrop) backdrop.classList.remove('open');
+        }
+        if (toggle && links) {
+          toggle.addEventListener('click', function() {
+            const isOpen = links.classList.toggle('open');
+            toggle.textContent = isOpen ? '✕' : '☰';
+            if (backdrop) backdrop.classList.toggle('open', isOpen);
+          });
+          links.querySelectorAll('a').forEach(function(a) {
+            a.addEventListener('click', function() {
+              closeNav();
+              const targetId = this.getAttribute('href');
+              if (targetId && targetId.startsWith('#')) {
+                document.querySelectorAll('.section').forEach(function(s) { s.classList.remove('active'); });
+                const target = document.querySelector(targetId);
+                if (target) target.classList.add('active');
+                document.querySelectorAll('.nav-links a').forEach(function(x) { x.classList.remove('active'); });
+                this.classList.add('active');
+              }
+            });
+          });
+        }
+        if (backdrop) backdrop.addEventListener('click', closeNav);
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape') closeNav();
+        });
+      }
+
+      async function loadDashboard() {
+        const pin = document.getElementById('username').value.trim();
+        const confirmPin = document.getElementById('password').value.trim();
+        if (!pin || !confirmPin) return;
+        if (pin !== confirmPin) {
+          showLoginError('PIN entries do not match.');
+          return;
+        }
+
+        try {
+          const res = await fetch(API, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ pin })
+          });
+          const data = await res.json();
+          if (!res.ok || !data.ok) {
+            showLoginError(data.error || 'Login failed');
+            return;
+          }
+
+          localStorage.setItem(AUTH_KEY, 'true');
+          renderDashboard(data);
+        } catch (err) {
+          showLoginError('Network error. Please try again.');
+        }
+      }
+
+      function renderDashboard(data) {
+        const students = data.students || [];
+        const totalSessions = students.reduce((sum, s) => sum + (s.totalSessions || 0), 0);
+
+        document.getElementById('overviewList').innerHTML = `
+          <li>Active learners: <strong>${students.length}</strong></li>
+          <li>Sessions completed: <strong>${totalSessions}</strong></li>
+          <li>Generated: <strong>${data.generatedAt ? new Date(data.generatedAt).toLocaleString() : '—'}</strong></li>
+        `;
+
+        document.getElementById('childrenList').innerHTML = students.map(s => `
+          <li><strong>${escapeHtml(s.name)}</strong> — ${escapeHtml(s.level)} · streak ${s.streak || 0} · ${s.totalSessions || 0} sessions</li>
+        `).join('') || '<li>No child data available.</li>';
+
+        document.getElementById('progressList').innerHTML = students.map(s => `
+          <li>${escapeHtml(s.name)} — <strong>${escapeHtml(s.level)}</strong></li>
+        `).join('') || '<li>No progress data available.</li>';
+
+        document.getElementById('reportsList').innerHTML = students.map(s => {
+          const last = s.lastSession ? new Date(s.lastSession.ts || s.lastSession).toLocaleString() : 'No session yet';
+          return `<li>${escapeHtml(s.name)} — last session: ${last}</li>`;
+        }).join('') || '<li>No reports available.</li>';
+      }
+
+      function escapeHtml(str) {
+        return String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      }
+
+      document.getElementById('loginBtn').addEventListener('click', function() {
+        const pin = document.getElementById('username').value.trim();
+        const confirmPin = document.getElementById('password').value.trim();
+        const err = document.getElementById('loginErr');
+        const btn = document.getElementById('loginBtn');
+        err.classList.remove('visible');
+        if (!pin || !confirmPin) {
+          err.textContent = 'Please enter your PIN in both fields.';
+          err.classList.add('visible');
+          return;
+        }
+        if (pin !== confirmPin) {
+          err.textContent = 'PIN entries do not match.';
+          err.classList.add('visible');
+          return;
+        }
+        btn.disabled = true;
+        btn.textContent = 'CHECKING…';
+        loadDashboard();
+        btn.disabled = false;
+        btn.textContent = 'Sign In';
+      });
+
+      document.getElementById('password').addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') document.getElementById('loginBtn').click();
+      });
+      document.getElementById('username').addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') document.getElementById('password').focus();
+      });
+
+      document.getElementById('logoutBtn').addEventListener('click', logout);
+
+      if (isAuthed()) {
+        showPortal();
+      }
+    })();
+  </script>
+</body>
+</html>

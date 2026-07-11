@@ -7,6 +7,8 @@ import { handleStudentErase } from './deletion.js';
 import { checkAdminKey } from './security.js';
 import { decryptField } from './encryption.js';
 import { verifyClerkSession } from './auth.js';
+import { getEmployer, createEmployer, updateEmployer, assignSeat, removeSeat, listEmployerSeats, getEmployerStats } from './seats.js';
+import { createInvoice, getInvoice, listInvoices, updateInvoiceStatus } from './invoices.js';
 
 const app = new Hono();
 

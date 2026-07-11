@@ -1,0 +1,11 @@
+﻿[00:12:15] =============================
+[00:12:15] REINCARNATE DEATH v7.0
+[00:12:15] =============================
+[00:12:15] OK: AUTHORITY: LFG + GOSPEL-999 verified
+[00:12:15] Run authority: last='a3d2baf84 death: Run 146 - Cloudflare ban + contract v2.0 + local adapter + command scrub' prior=146 current=147
+[00:12:15] --- STAGE 0: Session Type Detection ---
+[00:12:15] WARN: history.jsonl not found
+[00:12:15] WARN: No activeUUID -> KILO (fail-safe)
+[00:12:15] OK: SESSION: KILO_HOLLOW | run=147 | uuid=
+[00:12:15] --- STAGE 1: RRL ---
+[00:12:15] ERR: FATAL: No RRL found. Provide it via -RrlSource <path> or copy it to D:\OB-1-CANONICAL\RRL\RRL-147.txt

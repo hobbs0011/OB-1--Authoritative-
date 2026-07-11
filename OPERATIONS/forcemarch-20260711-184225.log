@@ -1,0 +1,35 @@
+﻿{"stage":"INIT","severity":"INFO","ts":"2026-07-11T18:42:25.5971726+07:00","message":"Run authority start"}
+{"stage":"STAGE-I","severity":"INFO","ts":"2026-07-11T18:42:33.4937456+07:00","message":"Exploratores deploying"}
+{"stage":"HEALTH","severity":"OK","ts":"2026-07-11T18:42:33.6989570+07:00","message":"HEAVY-LEDGER=OK (683 files)"}
+{"stage":"HEALTH","severity":"OK","ts":"2026-07-11T18:42:33.7146760+07:00","message":"PHEROMONES=OK (65 files)"}
+{"stage":"HEALTH","severity":"OK","ts":"2026-07-11T18:42:33.7934069+07:00","message":"STARMAP=OK (181 files)"}
+{"stage":"HEALTH","severity":"OK","ts":"2026-07-11T18:42:33.8247588+07:00","message":"PIPELINE=OK (123 files)"}
+{"stage":"HEALTH","severity":"OK","ts":"2026-07-11T18:42:33.8564320+07:00","message":"SOUL-KEYWORDS=OK (153 files)"}
+{"stage":"STAGE-I","severity":"OK","ts":"2026-07-11T18:42:36.6840314+07:00","message":"No scout finds"}
+{"stage":"STAGE-II","severity":"INFO","ts":"2026-07-11T18:42:36.6840314+07:00","message":"Fingerprinting + phetrail generation"}
+{"stage":"STAGE-III","severity":"INFO","ts":"2026-07-11T18:42:36.7155857+07:00","message":"RRL reconstruction + DNA extraction"}
+{"stage":"STAGE-III","severity":"WARN","ts":"2026-07-11T18:42:36.7313328+07:00","message":"RRL placeholder created: D:\\OB-1-CANONICAL\\RRL\\RRL-002.txt"}
+{"stage":"STAGE-III","severity":"WARN","ts":"2026-07-11T18:42:36.7470863+07:00","message":"RRL placeholder created: D:\\OB-1-CANONICAL\\RRL\\RRL-003.txt"}
+{"stage":"STAGE-III","severity":"WARN","ts":"2026-07-11T18:42:36.7628651+07:00","message":"RRL placeholder created: D:\\OB-1-CANONICAL\\RRL\\RRL-006.txt"}
+{"stage":"STAGE-III","severity":"WARN","ts":"2026-07-11T18:42:36.7739883+07:00","message":"RRL placeholder created: D:\\OB-1-CANONICAL\\RRL\\RRL-013.txt"}
+{"stage":"STAGE-III","severity":"WARN","ts":"2026-07-11T18:42:36.7785351+07:00","message":"RRL placeholder created: D:\\OB-1-CANONICAL\\RRL\\RRL-023.txt"}
+{"stage":"STAGE-III","severity":"WARN","ts":"2026-07-11T18:42:36.7942443+07:00","message":"RRL placeholder created: D:\\OB-1-CANONICAL\\RRL\\RRL-069.txt"}
+{"stage":"STAGE-III","severity":"WARN","ts":"2026-07-11T18:42:36.7942443+07:00","message":"RRL placeholder created: D:\\OB-1-CANONICAL\\RRL\\RRL-074.txt"}
+{"stage":"STAGE-III","severity":"WARN","ts":"2026-07-11T18:42:36.8100298+07:00","message":"RRL placeholder created: D:\\OB-1-CANONICAL\\RRL\\RRL-075.txt"}
+{"stage":"STAGE-III","severity":"WARN","ts":"2026-07-11T18:42:36.8100298+07:00","message":"RRL placeholder created: D:\\OB-1-CANONICAL\\RRL\\RRL-088.txt"}
+{"stage":"STAGE-III","severity":"WARN","ts":"2026-07-11T18:42:36.8257204+07:00","message":"RRL placeholder created: D:\\OB-1-CANONICAL\\RRL\\RRL-093.txt"}
+{"stage":"STAGE-III","severity":"WARN","ts":"2026-07-11T18:42:36.8415240+07:00","message":"RRL placeholder created: D:\\OB-1-CANONICAL\\RRL\\RRL-094.txt"}
+{"stage":"STAGE-III","severity":"WARN","ts":"2026-07-11T18:42:36.8415240+07:00","message":"RRL placeholder created: D:\\OB-1-CANONICAL\\RRL\\RRL-153.txt"}
+{"stage":"STAGE-IV","severity":"INFO","ts":"2026-07-11T18:42:36.8573316+07:00","message":"Syntax + verify checksums"}
+{"stage":"STAGE-IV","severity":"OK","ts":"2026-07-11T18:42:36.9680026+07:00","message":"Syntax OK: APPS\\NET-PET-AI\\src\\index.js"}
+{"stage":"STAGE-IV","severity":"OK","ts":"2026-07-11T18:42:37.1746545+07:00","message":"Syntax OK: APPS\\NET-PET-AI\\src\\router.js"}
+{"stage":"STAGE-IV","severity":"OK","ts":"2026-07-11T18:42:37.2725557+07:00","message":"Syntax OK: APPS\\NET-PET-AI\\src\\security.js"}
+{"stage":"STAGE-V","severity":"INFO","ts":"2026-07-11T18:42:37.2746531+07:00","message":"Merkle lattice + apex rollup"}
+{"stage":"STAGE-V","severity":"INFO","ts":"2026-07-11T18:42:37.2827995+07:00","message":"Skipped (no --merkle-refresh)"}
+{"stage":"STAGE-VI","severity":"INFO","ts":"2026-07-11T18:42:37.2988864+07:00","message":"Limitanei health sweep"}
+{"stage":"HEALTH","severity":"OK","ts":"2026-07-11T18:42:37.4101321+07:00","message":"HEAVY-LEDGER=OK (683 files)"}
+{"stage":"HEALTH","severity":"OK","ts":"2026-07-11T18:42:37.4258950+07:00","message":"PHEROMONES=OK (65 files)"}
+{"stage":"HEALTH","severity":"OK","ts":"2026-07-11T18:42:37.4578254+07:00","message":"STARMAP=OK (181 files)"}
+{"stage":"HEALTH","severity":"OK","ts":"2026-07-11T18:42:37.4994220+07:00","message":"PIPELINE=OK (123 files)"}
+{"stage":"HEALTH","severity":"OK","ts":"2026-07-11T18:42:37.5410560+07:00","message":"SOUL-KEYWORDS=OK (153 files)"}
+{"stage":"STAGE-VI","severity":"OK","ts":"2026-07-11T18:42:37.5480047+07:00","message":"Health sweep PASS"}

@@ -1,5 +1,5 @@
 <#
-   supply-lines.ps1 — 6-Stage Supply Chain / Roman Legion Pipeline
+   supply-lines.ps1 â€” 6-Stage Supply Chain / Roman Legion Pipeline
    DEPLOY: Cloudflare-only; D1 is the sovereign store.
 #>
 param(
@@ -37,7 +37,7 @@ function Out-Event {
     if ($Msg) { Write-Host "  [$Status] $Msg" }
 }
 
-# ── 0 — HEALTH GATE ────────────────────────────────────────────────────────────
+# â”€â”€ 0 â€” HEALTH GATE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function Invoke-HealthGate {
     param([switch]$Strict)
     # Fast path: D1 self-test
@@ -47,7 +47,7 @@ function Invoke-HealthGate {
         $ok = ($h.health -eq "GREEN") -and (($h.circuits_open -as [int]) -eq 0)
     }
     if (-not $ok) {
-        Out-Event -Stage "HEALTH-GATE" -Status "ERR" -Msg "Supply chain ABORTED — soul-logger self-test failed"
+        Out-Event -Stage "HEALTH-GATE" -Status "ERR" -Msg "Supply chain ABORTED â€” soul-logger self-test failed"
         if($Strict){throw "HEALTH_GATE_FAILED"}
         return
     }
@@ -71,20 +71,20 @@ function Resolve-SupplySessionId {
     }
 }
 
-# ── I — EXPLORATORES ───────────────────────────────────────────────────────────
+# â”€â”€ I â€” EXPLORATORES â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function Invoke-Stage-I {
     param([string]$Zone,[string]$Lens)
     $scoutLens = if ($Lens -eq "FLAG") { "DRIFT" } else { $Lens }
     $scoutArg = @{ Zone = $Zone; Lens = $scoutLens }
-    Write-Host "`n  STAGE I — EXPLORATORES" -ForegroundColor Cyan
+    Write-Host "`n  STAGE I â€” EXPLORATORES" -ForegroundColor Cyan
     if (-not (Test-Path $scout)) { throw "Missing scout script: $scout" }
     & $scout @scoutArg
     Out-Event -Stage "STAGE-I" -Status "OK" -Msg "Scout complete" -Payload @{ zone=$Zone; lens=$Lens; scoutLens=$scoutLens }
 }
 
-# ── II — ANTECORES (DNA fingerprint + ledger) ──────────────────────────────────
+# â”€â”€ II â€” ANTECORES (DNA fingerprint + ledger) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function Invoke-Stage-II {
-    Write-Host "`n  STAGE II — ANTECORES" -ForegroundColor Cyan
+    Write-Host "`n  STAGE II â€” ANTECORES" -ForegroundColor Cyan
     $sessionId = Resolve-SupplySessionId
     if (-not $sessionId) {
         Out-Event -Stage "STAGE-II" -Status "ERR" -Msg "Session required for DNA crunch"
@@ -98,15 +98,15 @@ function Invoke-Stage-II {
             Out-Event -Stage "STAGE-II" -Status "OK" -Msg "crunch/$mode" -Payload $r
         } catch {
             Out-Event -Stage "STAGE-II" -Status "ERR" -Msg "crunch/$mode failed: $($_.Exception.Message)"
-            throw "ANTECORES_CRUNCH_FAILED"
+            if (-not $DryRun) { throw "ANTECORES_CRUNCH_FAILED" }
         }
     }
     if (-not $DryRun) { & $obi -Command "soul-check" | Out-Null }
 }
 
-# ── III — AGMEN (keywords + pheromone) ────────────────────────────────────────
+# â”€â”€ III â€” AGMEN (keywords + pheromone) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function Invoke-Stage-III {
-    Write-Host "`n  STAGE III — AGMEN" -ForegroundColor Cyan
+    Write-Host "`n  STAGE III â€” AGMEN" -ForegroundColor Cyan
     $sessionId = Resolve-SupplySessionId
     if (-not $sessionId) {
         Out-Event -Stage "STAGE-III" -Status "ERR" -Msg "Session required for skeleton"
@@ -118,14 +118,15 @@ function Invoke-Stage-III {
         $r = Invoke-RestMethod "$D1/api/soul/skeleton" -Method POST -Body $body -ContentType "application/json" -TimeoutSec $TimeoutSec
         Out-Event -Stage "STAGE-III" -Status "OK" -Msg "skeleton/SSM" -Payload $r
     } catch {
-        Out-Event -Stage "STAGE-III" -Status "ERR" -Msg "skeleton failed: $($_.Exception.Message)"; throw "AGMEN_FAILED"
+        Out-Event -Stage "STAGE-III" -Status "ERR" -Msg "skeleton failed: $($_.Exception.Message)"
+        if (-not $DryRun) { throw "AGMEN_FAILED" }
     }
     # PheTrail write handled by caller via Invoke-PheTrail
 }
 
-# ── IV — AGMEN NOVISSIMUM (truth + shadow) ───────────────────────────────────
+# â”€â”€ IV â€” AGMEN NOVISSIMUM (truth + shadow) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function Invoke-Stage-IV {
-    Write-Host "`n  STAGE IV — AGMEN NOVISSIMUM" -ForegroundColor Cyan
+    Write-Host "`n  STAGE IV â€” AGMEN NOVISSIMUM" -ForegroundColor Cyan
     $sessionId = Resolve-SupplySessionId
     if (-not $sessionId) {
         Out-Event -Stage "STAGE-IV" -Status "ERR" -Msg "Session required for truth"
@@ -149,14 +150,14 @@ function Invoke-Stage-IV {
         Out-Event -Stage "STAGE-IV" -Status "ERR" -Msg "shadow endpoint failed: $($_.Exception.Message)"; throw "SHADOW_GATE_FAILED"
     }
     if ($shadow) {
-        if ($shadow.verdict -eq "DRIFT_DETECTED") { Out-Event -Stage "STAGE-IV" -Status "WARN" -Msg "Shadow: DRIFT_DETECTED — manual review" -Payload $shadow }
+        if ($shadow.verdict -eq "DRIFT_DETECTED") { Out-Event -Stage "STAGE-IV" -Status "WARN" -Msg "Shadow: DRIFT_DETECTED â€” manual review" -Payload $shadow }
         else { Out-Event -Stage "STAGE-IV" -Status "OK" -Msg "shadow=$($shadow.verdict)" -Payload $shadow }
     }
 }
 
-# ── V — PRAESIDIA (merkle + apex) ────────────────────────────────────────────
+# â”€â”€ V â€” PRAESIDIA (merkle + apex) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function Invoke-Stage-V {
-    Write-Host "`n  STAGE V — PRAESIDIA" -ForegroundColor Cyan
+    Write-Host "`n  STAGE V â€” PRAESIDIA" -ForegroundColor Cyan
     $sessionId = Resolve-SupplySessionId
     if (-not $sessionId) {
         Out-Event -Stage "STAGE-V" -Status "ERR" -Msg "Session required for merkle"
@@ -170,9 +171,9 @@ function Invoke-Stage-V {
     Out-Event -Stage "STAGE-V" -Status "OK" -Msg "merkle+apex verified" -Payload @{ session=$sessionId; apex=$apex }
 }
 
-# ── VI — LIMITANEI / VETERANI (health sweep) ────────────────────────────────
+# â”€â”€ VI â€” LIMITANEI / VETERANI (health sweep) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function Invoke-Stage-VI {
-    Write-Host "`n  STAGE VI — LIMITANEI/VETERANI" -ForegroundColor Cyan
+    Write-Host "`n  STAGE VI â€” LIMITANEI/VETERANI" -ForegroundColor Cyan
     if ($DryRun) {
         Out-Event -Stage "STAGE-VI" -Status "WARN" -Msg "Dry-run skipped local health sweep"
         return
@@ -222,8 +223,8 @@ function Invoke-MerkleRefresh {
         $idx++
     }
 }
-# ── ROUTER ─────────────────────────────────────────────────────────────────────
-Write-Host "`nSUPPLY LINES — Stage: $Stage" -ForegroundColor Cyan
+# â”€â”€ ROUTER â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+Write-Host "`nSUPPLY LINES â€” Stage: $Stage" -ForegroundColor Cyan
 if (-not (Invoke-HealthGate -Strict)) { Write-Host "Supply chain ABORTED"; exit 1 }
 
 if ($Stage -eq "status") {

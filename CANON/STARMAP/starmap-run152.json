@@ -1,12 +1,6 @@
 ﻿{
-    "run":  152,
-    "rrl_path":  "D:\\OB-1-CANONICAL\\RRL\\RRL-152.txt",
-    "ledger_id":  "HL-724",
-    "soul_turn_ids":  "",
-    "dna_turn_ids":  "",
-    "blueprint_locations":  "",
-    "char_count":  0,
-    "merkle_hash":  "C30607B546340EE206125061DB47F8E547C86A2542C2B1CD8720BEDE595A4CA0",
-    "created_at":  "2026-07-11T17:18:08.4261353+07:00",
-    "status":  "KILO_GAP"
+    "pointers":  {
+
+                 },
+    "run":  152
 }

@@ -1,0 +1,26 @@
+{
+  "stage1": "DATA MINING — COMPLETE",
+  "studentId": "mai-tram-bluetech",
+  "transcribedFiles": 5,
+  "totalUtterances": 2490,
+  "totalTranscriptChars": 89724,
+  "artifacts": {
+    "transcripts": "OPERATIONS/mai-tram-transcripts.json",
+    "vocab": "OPERATIONS/mai-tram-vocab.json"
+  },
+  "files": [
+    { "id": "apr16", "file": "mai-tram-apr16.m4a", "utterances": 443, "words": 3694, "topic": "Home vocab, furnishings, commute, cat" },
+    { "id": "apr16-2", "file": "mai-tram-apr16-2.m4a", "utterances": 252, "words": 1915, "topic": "Phonics c/k/e/h/r/m/d, letter sounds" },
+    { "id": "apr16-3", "file": "mai-tram-apr16-3.m4a", "utterances": 110, "words": 1054, "topic": "AI models (Gemini, Claude, Grok, GPT), agents vs chatbots" },
+    { "id": "july20", "file": "mai-tram-july20.m4a", "utterances": 588, "words": 2758, "topic": "Saturday work, contracts, bonus, church, food vocab" },
+    { "id": "july24", "file": "mai-tram-july24.m4a", "utterances": 1097, "words": 9266, "topic": "Overtime, contracts, salary, mature/polite/compliment, Vietnamese culture" }
+  ],
+  "stage2": "PORTAL UPDATES — APPLIED",
+  "portalFile": "APPS/NET-PET-AI/public/mai-tram-portal.html",
+  "updatedSections": ["JULY 20", "JULY 24", "APRIL 16 (3 PARTS)"],
+  "pending": [
+    "Move mai-tram-july20.m4a and mai-tram-july24.m4a out of pending-audio into permanent storage",
+    "Update worker's /api/class/ingest to handle public URLs for large audio",
+    "Add vocab widget dynamic content based on transcripts"
+  ]
+}

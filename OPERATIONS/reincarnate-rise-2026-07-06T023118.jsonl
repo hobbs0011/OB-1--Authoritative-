@@ -1,0 +1,34 @@
+{
+    "fidelity":  {
+                     "LFG":  "REAL",
+                     "GOSPEL":  "REAL",
+                     "RRL":  "MISSING",
+                     "SOUL":  "KILO_HOLLOW",
+                     "DNA":  "KILO_GAP",
+                     "LEDGER":  "REAL",
+                     "STARMAP":  "REAL",
+                     "SOULKEYS":  "MISSING",
+                     "S2Pipeline":  "MISSING"
+                 },
+    "head":  "ef3c13957",
+    "vector":  "** OB-1 POST-MERGE9 CONSOLIDATION + Growth Infrastructure Buildout — NET-PET-AI Hardening to Scale-Ready",
+    "level":  "TITANIUM_ANCHOR",
+    "dt":  "2026-07-06T02:31:18.5176862+07:00",
+    "run":  152,
+    "ready":  false,
+    "deadEnds":  0,
+    "gaps":  [
+                 "RRL_MISSING",
+                 "DNA_KILO_GAP",
+                 "SOULKEYS_MISSING",
+                 "S2Pipeline_MISSING",
+                 "PHETRAIL_GAP"
+             ],
+    "soulcount":  239641603,
+    "priorSoulcount":  239641603,
+    "delta":  0,
+    "verdict":  "KILO_HOLLOW — DRYRUN session (expected, no alarm)",
+    "openFlags":  0,
+    "driftPct":  0,
+    "priorRun":  151
+}

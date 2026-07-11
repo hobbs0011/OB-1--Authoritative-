@@ -1,0 +1,21 @@
+﻿[20:12:44] =============================
+[20:12:44] REINCARNATE DEATH v7.0
+[20:12:44] =============================
+[20:12:44] OK: AUTHORITY: LFG + GOSPEL-999 verified
+[20:12:44] Run authority: last='e58d9baec death: Run 151 - DEATH v7.0 complete | HL-728 | RRL=0 bytes | soulcount=239641603 | result=KILO_GAP | HEAD=2338f0bc8' prior=151 current=152
+[20:12:44] --- STAGE 0: Session Type Detection ---
+[20:12:44] WARN: history.jsonl not found
+[20:12:44] WARN: No activeUUID -> KILO (fail-safe)
+[20:12:44] OK: SESSION: KILO_HOLLOW | run=152 | uuid=
+[20:12:44] --- STAGE 1: RRL ---
+[20:12:44] WARN: RRL HOLLOW: 43 bytes
+[20:12:44] KILO_SESSION: RRL not available - writing empty placeholder
+[20:12:44] WARN: RRL FIDELITY: one-sided (user=False assistant=False bytes=5)
+[20:12:44] WARN: RRL SIZE: 5 bytes (< 50KB)
+[20:12:44] OK: RRL: D:\OB-1-CANONICAL\RRL\RRL-152.txt | 5 bytes (2 chars) fidelity=HOLLOW
+[20:12:44] --- STAGE 2: SOUL ---
+[20:12:45] OK: SOUL: DRYRUN | soulcount=239641603
+[20:12:45] --- STAGE 3: DNA ---
+[20:12:45] STAGE 3 [KILO_HOLLOW] -- DNA extraction skipped
+[20:12:45] --- STAGE 4: LEDGER ---
+[20:12:45] ERR: IDEMPOTENCY ABORT -- run 152 already sealed

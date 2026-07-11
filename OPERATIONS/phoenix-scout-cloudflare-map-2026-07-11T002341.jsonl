@@ -1,0 +1,15 @@
+{"type":"zone","zone":"APPS/NET-PET-AI","file":"wrangler.toml","name":"net","main":"src/router.js","compatibility_date":"2026-03-16","nodejs_compat":true}
+{"type":"service","class":"kv","name":"RATELIMIT","binding":"RATELIMIT","id":"b27d144f71c44b00a4c87360841e525f","purpose":"distributed rate limiting"}
+{"type":"service","class":"kv","name":"NET_PET_KV","binding":"NET_PET_KV","id":"0583d1a59bb24e598c4645396647eb94","purpose":"session hints / chrome extension state"}
+{"type":"service","class":"kv","name":"STUDENT_MEMORY","binding":"STUDENT_MEMORY","id":"807ea30d96844c0dbf561d0ae3a3c1f3","purpose":"world_model / breakthroughs / struggles"}
+{"type":"service","class":"d1","name":"SOUL_DB","binding":"SOUL_DB","database_name":"soul-archive","database_id":"c69a11bc-064b-478f-9b1f-e9b8e2431fb8","purpose":"soul-logger events"}
+{"type":"service","class":"durable_object","name":"PETS","class_name":"PetDO"}
+{"type":"service","class":"durable_object","name":"LEDGER","class_name":"LedgerDO"}
+{"type":"service","class":"durable_object","name":"MEMORY","class_name":"MemoryDO"}
+{"type":"service","class":"durable_object","name":"COMMANDS","class_name":"CommandDO"}
+{"type":"service","class":"queue","name":"net-pet-notifications","binding":"net_pet_notifications"}
+{"type":"service","class":"assets","name":"ASSETS","directory":"./public"}
+{"type":"config","key":"crons","value":null,"status":"HALTED","location":"wrangler.toml:96"}
+{"type":"config","key":"routes","value":null,"status":"DNS not configured","location":"wrangler.toml:12-15"}
+{"type":"environment","env":"prod","main":"src/router.js","migrations":[]}
+{"type":"environment","env":"dev","main":"src/router.js","migrations":["v1-net-pet-core","v2-ledger","v4-ship-memory","v5-commands"]}

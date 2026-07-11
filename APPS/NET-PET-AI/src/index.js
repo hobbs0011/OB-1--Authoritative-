@@ -18,6 +18,15 @@ import { LedgerDO, PetDO, CommandDO, MemoryDO } from './durable_objects.js';
 import { PHONICS_DRILLS, NET_PHONICS_GROUPS } from './phonics-drills.js';
 import { queueEmail } from './email-service.js';
 import { encryptField, decryptField } from './encryption.js';
+import { getPlans, getAddons, getPlanById, getAddonById, replacePlans, replaceAddons } from './catalog.js';
+import { getCart, saveCart, clearCart, applyCart, validateCartForCheckout, normalizeCartInput } from './cart.js';
+import { createOrder, getOrder, updateOrderStatus, listOrders, grantAccess, getAccess, revokeAccess, listActiveAccess } from './orders.js';
+import { ensureFeature, planFromAccess, currentEntitlement } from './access.js';
+import { normalizePaymentEvent, verifyWebhookSignature } from './payments.js';
+import { computeSubscriptionStatus, transitionSubscription, GRACE_DAYS, MAX_PAST_DUE_DAYS } from './subscriptions.js';
+import { getEmployer, createEmployer, updateEmployer, assignSeat, removeSeat, listEmployerSeats, getEmployerStats, enforceSeatLimit } from './seats.js';
+import { createInvoice, getInvoice, listInvoices, updateInvoiceStatus } from './invoices.js';
+import { getPromos, getPromoByCode, createPromo, updatePromo, deletePromo, validatePromo, calculateDiscount, redeemPromo } from './promos.js';
 
 const VERSION = "1.6.0";
 
@@ -2103,6 +2112,28 @@ const [rawProfile, rawLang, rawVocab, rawArc, rawMemory, rawPhonics, rawSessionH
   else if (path === "/api/admin/subscription" && method === "GET") { return handleAdminSubscriptionGet(url.searchParams.get("studentId") || "", env); }
   else if (path === "/api/admin/subscription/upsert" && method === "POST") { const authFail = await checkAdminKey(request, env); if (authFail) return authFail; const body = await request.json(); return handleAdminSubscriptionUpsert(body, env); }
 
+  // ── Promo Admin Routes ──────────────────────────────────────────────────────────
+  else if (path === "/api/admin/promos" && method === "GET") { const adminBlock = await checkAdminKey(request, env); if (adminBlock) return adminBlock; const promos = await getPromos(env); return json({ promos, count: promos.length }); }
+  else if (path === "/api/admin/promos" && method === "POST") { const adminBlock = await checkAdminKey(request, env); if (adminBlock) return adminBlock; const body = await request.json().catch(() => ({})); if (!body?.code) return json({ error: 'code required' }, 400); const promo = await createPromo(env, body); if (!promo) return json({ error: 'Failed to create promo' }, 400); return json({ ok: true, promo }); }
+  else if (path.startsWith("/api/admin/promos/") && method === "PUT") { const adminBlock = await checkAdminKey(request, env); if (adminBlock) return adminBlock; const code = path.split("/api/admin/promos/")[1]; const body = await request.json().catch(() => ({})); const promo = await updatePromo(env, code, body); if (!promo) return json({ error: 'Promo not found' }, 404); return json({ ok: true, promo }); }
+  else if (path.startsWith("/api/admin/promos/") && method === "DELETE") { const adminBlock = await checkAdminKey(request, env); if (adminBlock) return adminBlock; const code = path.split("/api/admin/promos/")[1]; await deletePromo(env, code); return json({ ok: true, code }); }
+
+  // ── Employer/Seat Admin Routes ─────────────────────────────────────────────────
+  else if (path === "/api/admin/employers" && method === "GET") { const adminBlock = await checkAdminKey(request, env); if (adminBlock) return adminBlock; const listed = await env.NET_PET_KV.list({ prefix: 'employer:' }).catch(() => ({ keys: [] })); const employers = []; for (const k of listed.keys) { const raw = await env.NET_PET_KV.get(k.name).catch(() => null); if (!raw) continue; try { employers.push(JSON.parse(raw)); } catch { /* skip */ } } return json({ employers, count: employers.length }); }
+  else if (path.startsWith("/api/admin/employers/") && method === "GET" && !path.includes("/seats")) { const adminBlock = await checkAdminKey(request, env); if (adminBlock) return adminBlock; const code = path.split("/api/admin/employers/")[1]; const employer = await getEmployer(env, code); if (!employer) return json({ error: 'Employer not found' }, 404); const seats = await listEmployerSeats(env, code); const stats = await getEmployerStats(env, code); return json({ employer, seats, stats }); }
+  else if (path === "/api/admin/employers" && method === "POST") { const adminBlock = await checkAdminKey(request, env); if (adminBlock) return adminBlock; const body = await request.json().catch(() => ({})); const employer = await createEmployer(env, body); if (!employer) return json({ error: 'Failed to create employer' }, 400); return json({ ok: true, employer }); }
+  else if (path.startsWith("/api/admin/employers/") && method === "PUT") { const adminBlock = await checkAdminKey(request, env); if (adminBlock) return adminBlock; const code = path.split("/api/admin/employers/")[1]; const body = await request.json().catch(() => ({})); const employer = await updateEmployer(env, code, body); if (!employer) return json({ error: 'Employer not found' }, 404); return json({ ok: true, employer }); }
+  else if (path.startsWith("/api/admin/employers/") && method === "POST" && path.includes("/seats")) { const adminBlock = await checkAdminKey(request, env); if (adminBlock) return adminBlock; const parts = path.split("/"); const code = parts[3]; const body = await request.json().catch(() => ({})); if (!body?.studentId) return json({ error: 'studentId required' }, 400); const result = await assignSeat(env, code, body.studentId, { plan: body.plan, expiresAt: body.expiresAt }); if (!result.success) return json({ error: result.error }, 400); return json({ ok: true, seat: result.seat, employer: result.employer }); }
+  else if (path.startsWith("/api/admin/employers/") && method === "DELETE" && path.includes("/seats/")) { const adminBlock = await checkAdminKey(request, env); if (adminBlock) return adminBlock; const parts = path.split("/"); const code = parts[3]; const studentId = parts[5]; const result = await removeSeat(env, code, studentId); if (!result.success) return json({ error: result.error }, 400); return json({ ok: true, employer: result.employer }); }
+
+  // ── Invoice Admin Routes ────────────────────────────────────────────────────────
+  else if (path === "/api/admin/invoices" && method === "GET") { const adminBlock = await checkAdminKey(request, env); if (adminBlock) return adminBlock; const invoices = await listInvoices(env, 200); return json({ invoices, count: invoices.length }); }
+  else if (path.startsWith("/api/admin/invoices/") && method === "GET" && !path.includes("/send")) { const adminBlock = await checkAdminKey(request, env); if (adminBlock) return adminBlock; const id = path.split("/api/admin/invoices/")[1]; const invoice = await getInvoice(env, id); if (!invoice) return json({ error: 'Invoice not found' }, 404); return json({ invoice }); }
+  else if (path.startsWith("/api/admin/invoices/") && method === "POST" && path.includes("/send")) { const adminBlock = await checkAdminKey(request, env); if (adminBlock) return adminBlock; const id = path.split("/api/admin/invoices/")[1].split("/send")[0]; const invoice = await getInvoice(env, id); if (!invoice) return json({ error: 'Invoice not found' }, 404); const updated = await updateInvoiceStatus(env, invoice.invoiceId, "sent", { sentAt: new Date().toISOString() }); return json({ ok: true, invoice: updated }); }
+
+  // ── Commerce Stats ──────────────────────────────────────────────────────────────
+  else if (path === "/api/admin/commerce/stats" && method === "GET") { const adminBlock = await checkAdminKey(request, env); if (adminBlock) return adminBlock; return handleAdminCommerceStats(env); }
+
   // ── DELETE /api/vocab/delete ──────────────────────────────────────────────
   else if (method === "DELETE" && path.includes("/api/vocab/delete")) {
     try {
@@ -2236,6 +2267,14 @@ const [rawProfile, rawLang, rawVocab, rawArc, rawMemory, rawPhonics, rawSessionH
 async function handlePaymentConfirm(body, env) {
   const { studentId, companyCode, plan, amountVND, txnId, confirmedBy } = body || {};
   if (!plan || !txnId || !amountVND) return json({ error: "plan, txnId, amountVND required" }, 400);
+  
+  // Check for duplicate payment
+  const existingPayment = await env.NET_PET_KV.get(`payment:${txnId}`).catch(() => null);
+  if (existingPayment) {
+    const parsed = JSON.parse(existingPayment);
+    return json({ success: true, txnId, activatedUntil: parsed.paidUntil?.slice(0,10), existing: true });
+  }
+  
   const record = {
     studentId: studentId || null, companyCode: companyCode || null, plan,
     amountVND: Number(amountVND),
@@ -2246,14 +2285,28 @@ async function handlePaymentConfirm(body, env) {
   await env.NET_PET_KV.put(`payment:${txnId}`, JSON.stringify(record), { expirationTtl: 86400*365 });
   const idxRaw = await env.NET_PET_KV.get("payment:index").catch(()=>null);
   const idx = idxRaw ? JSON.parse(idxRaw) : [];
-  idx.push(txnId);
-  await env.NET_PET_KV.put("payment:index", JSON.stringify(idx.slice(-1000)));
+  if (!idx.includes(txnId)) { idx.push(txnId); await env.NET_PET_KV.put("payment:index", JSON.stringify(idx.slice(-1000))); }
   const subKey = studentId ? `subscription:${studentId}` : `subscription:employer:${companyCode}`;
   await env.NET_PET_KV.put(subKey, JSON.stringify({
     plan, paidUntil: new Date(Date.now()+30*86400000).toISOString(), txnId,
     activatedAt: record.confirmedAt
   }));
   const until = new Date(Date.now()+30*86400000).toISOString().slice(0,10);
+  // Update invoice status to paid
+  try {
+    const { updateInvoiceStatus } = await import('./invoices.js');
+    const invoices = await (await import('./orders.js')).listOrders(env, 100);
+    const matchingOrder = invoices.find(o => o.txnId === txnId || o.orderId === txnId);
+    if (matchingOrder) {
+      const invoiceList = await (await import('./invoices.js')).listInvoices(env, 100);
+      const matchingInvoice = invoiceList.find(inv => inv.orderId === matchingOrder.orderId);
+      if (matchingInvoice) {
+        await updateInvoiceStatus(env, matchingInvoice.invoiceId, "paid", { paidAt: new Date().toISOString(), txnId });
+      }
+    }
+  } catch (e) {
+    console.warn(`[PAYMENT] Failed to update invoice for ${txnId}:`, e.message);
+  }
   return json({ success: true, txnId, activatedUntil: until });
 }
 
@@ -2382,10 +2435,12 @@ async function handleAdminStats(env) {
   // Employer count
   const empIdx = await env.NET_PET_KV.get("employer:index").then(r => r ? JSON.parse(r) : []).catch(() => []);
 
-  // Active students (streak > 0, lastCheckin within 7 days)
-  const students = ["huong-bluetech","mai-tram-bluetech","quy-bluetech"];
+  // Active students (streak > 0, lastCheckin within 7 days) — dynamic, not hardcoded
   let activeStudents = 0;
-  const streakChecks = await Promise.all(students.map(s => env.NET_PET_KV.get(`streak:${s}`).catch(() => null)));
+  const rosterRaw = await env.NET_PET_KV.get("roster:index").catch(() => null);
+  const roster = rosterRaw ? JSON.parse(rosterRaw) : [];
+  const studentIds = Array.isArray(roster) ? roster.slice(0, 200) : [];
+  const streakChecks = await Promise.all(studentIds.map(s => env.NET_PET_KV.get(`streak:${s}`).catch(() => null)));
   streakChecks.forEach((raw, i) => {
     if (raw) {
       const d = JSON.parse(raw);
@@ -2406,6 +2461,97 @@ async function handleAdminStats(env) {
     employerCount: empIdx.length,
     activeStudents,
     challengeAttemptsToday,
+    generatedAt: now
+  });
+}
+
+async function handleAdminCommerceStats(env) {
+  const now = new Date(Date.now() + 7*3600000).toISOString();
+  
+  // Orders
+  const orders = await listOrders(env, 500);
+  const totalOrders = orders.length;
+  const pendingOrders = orders.filter(o => o.status === "pending").length;
+  const paidOrders = orders.filter(o => o.status === "paid").length;
+  
+  // Revenue
+  const totalRevenueVND = orders.reduce((sum, o) => sum + (o.totalVND || 0), 0);
+  const avgOrderValue = totalOrders > 0 ? Math.round(totalRevenueVND / totalOrders) : 0;
+  
+  // Plans breakdown
+  const byPlan = {};
+  orders.forEach(o => {
+    const plan = o.lineItems?.find(i => i.type === "plan")?.id || "unknown";
+    byPlan[plan] = (byPlan[plan] || 0) + 1;
+  });
+  
+  // Access
+  const activeAccess = await listActiveAccess(env, 500);
+  const accessCount = activeAccess.length;
+  
+  // Subscriptions
+  const subKeys = []; let cursor;
+  do {
+    const listed = await env.NET_PET_KV.list({ prefix: 'subscription:', cursor }).catch(() => ({ keys: [], list_complete: true }));
+    listed.keys.forEach(k => subKeys.push(k.name.replace('subscription:', '')));
+    cursor = listed.list_complete ? undefined : listed.cursor;
+  } while (cursor);
+  const studentSubKeys = subKeys.filter(sid => !sid.startsWith('sov100-') && sid !== 'keep-warm-ping');
+  const subs = await Promise.all(studentSubKeys.map(async sid => {
+    const raw = await env.NET_PET_KV.get(`subscription:${sid}`).catch(() => null);
+    return raw ? { studentId: sid, ...JSON.parse(raw) } : null;
+  }));
+  const activeSubs = subs.filter(s => s && computeSubscriptionStatus(s) === 'active').length;
+  const graceSubs = subs.filter(s => s && computeSubscriptionStatus(s) === 'grace').length;
+  const expiredSubs = subs.filter(s => s && computeSubscriptionStatus(s) === 'expired').length;
+  const trialSubs = subs.filter(s => s && computeSubscriptionStatus(s) === 'trial').length;
+  
+  // Promos
+  const promos = await getPromos(env);
+  const totalPromoRedemptions = promos.reduce((sum, p) => sum + (p.usedCount || 0), 0);
+  
+  // Employers
+  const empListRaw = await env.NET_PET_KV.list({ prefix: 'employer:' }).catch(() => ({ keys: [] }));
+  const employers = [];
+  for (const k of empListRaw.keys) {
+    const raw = await env.NET_PET_KV.get(k.name).catch(() => null);
+    if (!raw) continue;
+    try { employers.push(JSON.parse(raw)); } catch { /* skip */ }
+  }
+  const employerRevenue = orders
+    .filter(o => o.ownerType === "employer")
+    .reduce((sum, o) => sum + (o.totalVND || 0), 0);
+  
+  // Invoices
+  const invoices = await listInvoices(env, 200);
+  const sentInvoices = invoices.filter(i => i.status === "sent").length;
+  const paidInvoices = invoices.filter(i => i.status === "paid").length;
+  
+  return json({
+    ordersCount: totalOrders,
+    pendingOrders,
+    paidOrders,
+    revenueVND: totalRevenueVND,
+    avgOrderValue,
+    byPlan,
+    accessCount,
+    subscriptionBreakdown: {
+      active: activeSubs,
+      grace: graceSubs,
+      expired: expiredSubs,
+      trial: trialSubs,
+      total: subs.filter(Boolean).length,
+    },
+    promoRedemptions: totalPromoRedemptions,
+    employers: {
+      count: employers.length,
+      revenueVND: employerRevenue,
+    },
+    invoices: {
+      total: invoices.length,
+      sent: sentInvoices,
+      paid: paidInvoices,
+    },
     generatedAt: now
   });
 }

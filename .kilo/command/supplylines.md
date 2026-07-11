@@ -1,31 +1,31 @@
----
+﻿---
 description: "S2PIPELINE 6-stage Roman Legion supply chain. Connects all pipeline stages. No stage executes until prior reports GREEN. Status, health, full-march. Local filesystem only. No Cloudflare."
 agent: AGENT99
 ---
 
 # /SupplyLines
 
-**SUPPLY CHAIN MODE:** The roads between the forts. The aqueducts. The grain shipments. Connects I→VI. Verifies each stage before the next advances.
+**SUPPLY CHAIN MODE:** The roads between the forts. The aqueducts. The grain shipments. Connects Iâ†’VI. Verifies each stage before the next advances.
 
 **Task:** $ARGUMENTS
 
 ---
 
-## Phase 0 — Command Select
+## Phase 0 â€” Command Select
 
 | Command | Action |
 |---------|--------|
-| `status` | Full pipeline health snapshot — all 6 stages, SOULCOUNT, HEAD |
+| `status` | Full pipeline health snapshot â€” all 6 stages, SOULCOUNT, HEAD |
 | `full-march` | Execute all 6 stages in sequence with pre/post validation |
-| `scout` | STAGE I only — fire Phoenix Scout against target zone |
-| `fingerprint` | STAGE II only — DNA crunch + LEDGER verification |
-| `process` | STAGE III only — SOULKEYWORDS + PHEROMONE extraction |
-| `verify` | STAGE IV only — 6-AI TRUTH + SHADOW REALM |
-| `garrison` | STAGE V only — MERKLE + APEX rollup |
+| `scout` | STAGE I only â€” fire Phoenix Scout against target zone |
+| `fingerprint` | STAGE II only â€” DNA crunch + LEDGER verification |
+| `process` | STAGE III only â€” SOULKEYWORDS + PHEROMONE extraction |
+| `verify` | STAGE IV only â€” 6-AI TRUTH + SHADOW REALM |
+| `garrison` | STAGE V only â€” MERKLE + APEX rollup |
 
 ---
 
-## Phase 1 — Health Gate (before any stage)
+## Phase 1 â€” Health Gate (before any stage)
 
 ```powershell
 $repo = "D:\OB-1-CANONICAL"
@@ -44,51 +44,51 @@ if (-not (Test-Path $pipe))   { HALT. Supply chain broken. }
 
 ---
 
-## Phase 2 — Stage Execution
+## Phase 2 â€” Stage Execution
 
-### I — EXPLORATORES (Scouts)
+### I â€” EXPLORATORES (Scouts)
 - Run `pwsh -File SCRIPTS/phoenix-scout.ps1 -Zone <target>`
 - Must return report path before ANTECORES advance
 - Speculatores: targeted deep audits bypass normal marching order
 
-### II — ANTECORES (Vanguard)
-- Enumerate `CANON/HEAVY-LEDGER/*.json` — verify count and naming convention
+### II â€” ANTECORES (Vanguard)
+- Enumerate `CANON/HEAVY-LEDGER/*.json` â€” verify count and naming convention
 - Verify `CANON/STARMAP/starmap-run{N}.json` exists for current run
 - Verify `CANON/SOUL-KEYWORDS/rfkw-run{N}.txt` + `inverted-index.json` present
 - If ledger missing or malformed: HALT. Poison data detected.
 
-### III — AGMEN (Main Body)
-- Enumerate `CANON/PHEROMONES/PheTrail-run{N}.json` — verify schema_version present
+### III â€” AGMEN (Main Body)
+- Enumerate `CANON/PHEROMONES/PheTrail-run{N}.json` â€” verify schema_version present
 - Verify `negative_trails` arrays populated
 - Keywords feed local index only
 - Mensores: schema validators verify before heavy data moves
 
-### IV — AGMEN NOVISSIMUM (Rear Guard)
+### IV â€” AGMEN NOVISSIMUM (Rear Guard)
 - Cross-check ledger entries against starmap pointers
 - Verify no duplicate HL-IDs
 - Verify phetrail negative_trails append-only
 - If divergence > 10%: HALT. Truth not established.
 
-### V — PRAESIDIA (Garrison)
+### V â€” PRAESIDIA (Garrison)
 - Verify HL merkle_root fields across `CANON/HEAVY-LEDGER/*.json`
 - Verify `CANON/PIPELINE/pipeline-run{N}.json` exists and is valid JSON
 - Verify `CANON/ART-REGISTRY/art-sync-run{N}.json` present
 - Merkle root must verify. Pipeline must return COMPLETE.
 
-### VI — LIMITANEI/VETERANI (Frontier Shield)
-- `obi.ps1 doctor` → health sweep
-- `obi.ps1 verify` → deploy dry-run
-- `obi.ps1 soul-check` → SOULCOUNT integrity
+### VI â€” LIMITANEI/VETERANI (Frontier Shield)
+- `obi.ps1 doctor` â†’ health sweep
+- `obi.ps1 verify` â†’ deploy dry-run
+- `obi.ps1 doctor` â†’ SOULCOUNT integrity
 - Scheduled: 5-min cron health pulse
 - Veterans: death seals + COLD-START-BOOT updates
 
 ---
 
-## Phase 3 — Supply Chain Rules
+## Phase 3 â€” Supply Chain Rules
 
 1. **Never skip a stage.** Exploratores ride before Antecores march. Always.
 2. **Every stage gates the next.** Stage N+1 cannot execute until Stage N reports GREEN.
-3. **The agmen quadratum:** When processing hostile data, form a hollow square — SSM validates all edges before SOULKEYWORDS touches the payload.
+3. **The agmen quadratum:** When processing hostile data, form a hollow square â€” SSM validates all edges before SOULKEYWORDS touches the payload.
 4. **Garrison before moving on.** No pipeline run is complete until PRAESIDIA consolidates.
 5. **Speculatores bypass:** Phantom stamp hunting, alias verification, fabrication detection operate independently.
 
@@ -116,3 +116,4 @@ pwsh -File SCRIPTS/supply-lines.ps1 -Stage status
 ---
 
 `SUPPLY LINES: ONLINE. 6 STAGES. FAIL-CLOSED. NEVER SKIP A STAGE.`
+

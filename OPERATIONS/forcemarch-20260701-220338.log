@@ -1,0 +1,45 @@
+﻿{"stage":"INIT","severity":"INFO","ts":"2026-07-01T22:03:38.4703747+07:00","message":"Run authority start"}
+{"stage":"STAGE-I","severity":"INFO","ts":"2026-07-01T22:03:44.8936989+07:00","message":"Exploratores deploying"}
+{"stage":"HEALTH","severity":"ERR","ts":"2026-07-01T22:03:45.1739430+07:00","message":"soul-logger=ERR"}
+{"stage":"HEALTH","severity":"ERR","ts":"2026-07-01T22:03:45.5089441+07:00","message":"phoenix-architecti=ERR"}
+{"stage":"STAGE-I","severity":"WARN","ts":"2026-07-01T22:03:45.5194686+07:00","message":"Legion health degraded; continuing under exhaustion"}
+{"stage":"STAGE-I","severity":"OK","ts":"2026-07-01T22:03:46.5969933+07:00","message":"No scout finds"}
+{"stage":"STAGE-II","severity":"INFO","ts":"2026-07-01T22:03:46.5990128+07:00","message":"Antecores verifying run146 ledger"}
+{"stage":"STAGE-II","severity":"OK","ts":"2026-07-01T22:03:46.6117389+07:00","message":"Ledger verified: 676 files"}
+{"stage":"RRL-RECOVERY","severity":"WARN","ts":"2026-07-01T22:03:46.6478619+07:00","message":"Stub RECOVERY-run002 created"}
+{"stage":"RRL-RECOVERY","severity":"WARN","ts":"2026-07-01T22:03:46.6597376+07:00","message":"Stub RECOVERY-run003 created"}
+{"stage":"RRL-RECOVERY","severity":"WARN","ts":"2026-07-01T22:03:46.6803187+07:00","message":"Stub RECOVERY-run006 created"}
+{"stage":"RRL-RECOVERY","severity":"WARN","ts":"2026-07-01T22:03:46.6913943+07:00","message":"Stub RECOVERY-run013 created"}
+{"stage":"RRL-RECOVERY","severity":"WARN","ts":"2026-07-01T22:03:46.7046134+07:00","message":"Stub RECOVERY-run023 created"}
+{"stage":"RRL-RECOVERY","severity":"WARN","ts":"2026-07-01T22:03:46.7170332+07:00","message":"Stub RECOVERY-run069 created"}
+{"stage":"RRL-RECOVERY","severity":"WARN","ts":"2026-07-01T22:03:46.7371218+07:00","message":"Stub RECOVERY-run074 created"}
+{"stage":"RRL-RECOVERY","severity":"WARN","ts":"2026-07-01T22:03:46.7553120+07:00","message":"Stub RECOVERY-run075 created"}
+{"stage":"RRL-RECOVERY","severity":"WARN","ts":"2026-07-01T22:03:46.7677437+07:00","message":"Stub RECOVERY-run088 created"}
+{"stage":"RRL-RECOVERY","severity":"WARN","ts":"2026-07-01T22:03:46.7798653+07:00","message":"Stub RECOVERY-run093 created"}
+{"stage":"RRL-RECOVERY","severity":"WARN","ts":"2026-07-01T22:03:46.7925516+07:00","message":"Stub RECOVERY-run094 created"}
+{"stage":"RRL-RECOVERY","severity":"WARN","ts":"2026-07-01T22:03:46.8055070+07:00","message":"Stub RECOVERY-run113 created"}
+{"stage":"RRL-RECOVERY","severity":"WARN","ts":"2026-07-01T22:03:46.8206785+07:00","message":"Stub RECOVERY-run117 created"}
+{"stage":"RRL-RECOVERY","severity":"WARN","ts":"2026-07-01T22:03:46.8341296+07:00","message":"Stub RECOVERY-run146 created"}
+{"stage":"STAGE-III","severity":"INFO","ts":"2026-07-01T22:03:46.8451091+07:00","message":"Agmen processing + RRL reconstruction"}
+{"stage":"RRL-RECOVERY","severity":"WARN","ts":"2026-07-01T22:03:46.8635596+07:00","message":"Stub RECOVERY-run002 created"}
+{"stage":"RRL-RECOVERY","severity":"WARN","ts":"2026-07-01T22:03:46.8699965+07:00","message":"Stub RECOVERY-run003 created"}
+{"stage":"RRL-RECOVERY","severity":"WARN","ts":"2026-07-01T22:03:46.8754652+07:00","message":"Stub RECOVERY-run006 created"}
+{"stage":"RRL-RECOVERY","severity":"WARN","ts":"2026-07-01T22:03:46.8789488+07:00","message":"Stub RECOVERY-run013 created"}
+{"stage":"RRL-RECOVERY","severity":"WARN","ts":"2026-07-01T22:03:46.8850063+07:00","message":"Stub RECOVERY-run023 created"}
+{"stage":"RRL-RECOVERY","severity":"WARN","ts":"2026-07-01T22:03:46.8883301+07:00","message":"Stub RECOVERY-run069 created"}
+{"stage":"RRL-RECOVERY","severity":"WARN","ts":"2026-07-01T22:03:46.8903224+07:00","message":"Stub RECOVERY-run074 created"}
+{"stage":"RRL-RECOVERY","severity":"WARN","ts":"2026-07-01T22:03:46.8923152+07:00","message":"Stub RECOVERY-run075 created"}
+{"stage":"RRL-RECOVERY","severity":"WARN","ts":"2026-07-01T22:03:46.8974874+07:00","message":"Stub RECOVERY-run088 created"}
+{"stage":"RRL-RECOVERY","severity":"WARN","ts":"2026-07-01T22:03:46.8996501+07:00","message":"Stub RECOVERY-run093 created"}
+{"stage":"RRL-RECOVERY","severity":"WARN","ts":"2026-07-01T22:03:46.9101907+07:00","message":"Stub RECOVERY-run094 created"}
+{"stage":"RRL-RECOVERY","severity":"WARN","ts":"2026-07-01T22:03:46.9134542+07:00","message":"Stub RECOVERY-run113 created"}
+{"stage":"RRL-RECOVERY","severity":"WARN","ts":"2026-07-01T22:03:46.9174417+07:00","message":"Stub RECOVERY-run117 created"}
+{"stage":"RRL-RECOVERY","severity":"WARN","ts":"2026-07-01T22:03:46.9204302+07:00","message":"Stub RECOVERY-run146 created"}
+{"stage":"STAGE-IV","severity":"INFO","ts":"2026-07-01T22:03:46.9224243+07:00","message":"6-AI TRUTH + SHADOW verification"}
+{"stage":"STAGE-IV","severity":"OK","ts":"2026-07-01T22:03:47.1128239+07:00","message":"index.js syntax verified"}
+{"stage":"STAGE-V","severity":"INFO","ts":"2026-07-01T22:03:47.1188060+07:00","message":"Merkle lattice + apex rollup"}
+{"stage":"STAGE-V","severity":"INFO","ts":"2026-07-01T22:03:47.1306652+07:00","message":"Skipped (no --merkle-refresh)"}
+{"stage":"STAGE-VI","severity":"INFO","ts":"2026-07-01T22:03:47.1406318+07:00","message":"Limitanei health sweep"}
+{"stage":"HEALTH","severity":"ERR","ts":"2026-07-01T22:03:47.2193418+07:00","message":"soul-logger=ERR"}
+{"stage":"HEALTH","severity":"ERR","ts":"2026-07-01T22:03:47.3706846+07:00","message":"phoenix-architecti=ERR"}
+{"stage":"STAGE-VI","severity":"WARN","ts":"2026-07-01T22:03:47.3716813+07:00","message":"Health sweep NOTES"}

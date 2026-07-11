@@ -1,0 +1,894 @@
+[
+  {
+    "id": "july20",
+    "date": "2026-07-20",
+    "title": "BlueTech Mai July 20",
+    "utterances": 588,
+    "studentUtterances": 167,
+    "vocab": [
+      [
+        "yeah",
+        29
+      ],
+      [
+        "yes",
+        29
+      ],
+      [
+        "it's",
+        26
+      ],
+      [
+        "don't",
+        23
+      ],
+      [
+        "work",
+        21
+      ],
+      [
+        "cherry",
+        21
+      ],
+      [
+        "get",
+        19
+      ],
+      [
+        "drink",
+        16
+      ],
+      [
+        "saturday",
+        12
+      ],
+      [
+        "two",
+        12
+      ],
+      [
+        "eat",
+        12
+      ],
+      [
+        "mhmm",
+        12
+      ],
+      [
+        "israel",
+        12
+      ],
+      [
+        "bad",
+        11
+      ],
+      [
+        "strawberry",
+        11
+      ],
+      [
+        "today",
+        10
+      ],
+      [
+        "vitamin",
+        10
+      ],
+      [
+        "think",
+        9
+      ],
+      [
+        "jealous",
+        9
+      ],
+      [
+        "drunk",
+        9
+      ],
+      [
+        "peace",
+        9
+      ],
+      [
+        "people",
+        8
+      ],
+      [
+        "world",
+        8
+      ],
+      [
+        "war",
+        8
+      ],
+      [
+        "once",
+        7
+      ],
+      [
+        "uh-huh",
+        7
+      ],
+      [
+        "you're",
+        7
+      ],
+      [
+        "gonna",
+        7
+      ],
+      [
+        "they're",
+        7
+      ],
+      [
+        "grow",
+        7
+      ],
+      [
+        "lettuce",
+        7
+      ],
+      [
+        "fruit",
+        7
+      ],
+      [
+        "cherries",
+        7
+      ],
+      [
+        "guy",
+        7
+      ],
+      [
+        "expensive",
+        7
+      ],
+      [
+        "iran",
+        7
+      ],
+      [
+        "often",
+        6
+      ],
+      [
+        "annoying",
+        6
+      ],
+      [
+        "around",
+        6
+      ],
+      [
+        "other",
+        6
+      ]
+    ],
+    "studentVocab": [
+      [
+        "don't",
+        12
+      ],
+      [
+        "yeah",
+        11
+      ],
+      [
+        "it's",
+        10
+      ],
+      [
+        "work",
+        6
+      ],
+      [
+        "cherry",
+        6
+      ],
+      [
+        "drink",
+        6
+      ],
+      [
+        "think",
+        5
+      ],
+      [
+        "same",
+        5
+      ],
+      [
+        "strawberry",
+        5
+      ],
+      [
+        "saturday",
+        4
+      ],
+      [
+        "will",
+        4
+      ],
+      [
+        "uh-huh",
+        4
+      ],
+      [
+        "yes",
+        4
+      ],
+      [
+        "lettuce",
+        4
+      ],
+      [
+        "maybe",
+        3
+      ],
+      [
+        "come",
+        3
+      ],
+      [
+        "people",
+        3
+      ],
+      [
+        "fruit",
+        3
+      ],
+      [
+        "cherries",
+        3
+      ],
+      [
+        "kill",
+        3
+      ],
+      [
+        "expensive",
+        3
+      ],
+      [
+        "two",
+        3
+      ],
+      [
+        "need",
+        2
+      ],
+      [
+        "contract",
+        2
+      ],
+      [
+        "home",
+        2
+      ],
+      [
+        "company",
+        2
+      ],
+      [
+        "alone",
+        2
+      ],
+      [
+        "talk",
+        2
+      ],
+      [
+        "i'm",
+        2
+      ],
+      [
+        "hometown",
+        2
+      ]
+    ],
+    "bigrams": [
+      [
+        "you know",
+        18
+      ],
+      [
+        "the the",
+        11
+      ],
+      [
+        "you get",
+        9
+      ],
+      [
+        "you work",
+        8
+      ],
+      [
+        "and then",
+        8
+      ],
+      [
+        "you have",
+        7
+      ],
+      [
+        "the bad",
+        7
+      ],
+      [
+        "vitamin vitamin",
+        7
+      ],
+      [
+        "don't know",
+        6
+      ],
+      [
+        "when you",
+        6
+      ],
+      [
+        "the cherry",
+        6
+      ],
+      [
+        "you ever",
+        6
+      ],
+      [
+        "how often",
+        5
+      ],
+      [
+        "you don't",
+        5
+      ],
+      [
+        "and you",
+        5
+      ],
+      [
+        "where the",
+        5
+      ],
+      [
+        "lettuce lettuce",
+        5
+      ],
+      [
+        "bad guy",
+        5
+      ],
+      [
+        "the world",
+        5
+      ],
+      [
+        "sign peace",
+        5
+      ]
+    ],
+    "trigrams": [
+      [
+        "when you grow",
+        4
+      ],
+      [
+        "you grow garden",
+        4
+      ],
+      [
+        "lettuce lettuce lettuce",
+        4
+      ],
+      [
+        "vitamin vitamin vitamin",
+        4
+      ],
+      [
+        "gonna sign peace",
+        4
+      ],
+      [
+        "sign peace deal",
+        4
+      ],
+      [
+        "you work saturday",
+        3
+      ],
+      [
+        "what are you",
+        3
+      ],
+      [
+        "i'll show you",
+        3
+      ],
+      [
+        "the the the",
+        3
+      ]
+    ],
+    "keyMoments": [
+      "Not always.",
+      "Not always. How often?",
+      "No. Not once in a blue moon? More often?",
+      "Not getting hit this.",
+      "The Sure it's not mint?",
+      "Lettuce. Lettuce. Lettuce. It's called lettuce. Mhmm. So",
+      "I think it's not because it's a",
+      "not big festival.",
+      "How do you say they",
+      "You know, like if somebody have more money than you Mhmm. And you hate them because they have more money. Mhmm. You know? Mhmm. That that means you're jealous of Uh-huh. Mhmm.",
+      "You know what the middle of the cherry called?",
+      "cannot drink.",
+      "Not at all. I don't know.",
+      "if you're gonna be itchy for two days But I I cannot to sleep.",
+      "Not once?"
+    ],
+    "transcriptPreview": "[S0] How\n[S0] often do you work on Saturday?\n[S1] Saturday,\n[S1] we have worked half\n[S0] half day. Yeah. How often?\n[S1] Not always.\n[S0] Not always. How often?\n[S1] When\n[S1] I have the\n[S1] bending work.\n[S0] Whenever you have extra work.\n[S0] How often is that?\n[S1] I think\n[S0] Once in a blue moon?\n[S0] No. Not once in a blue moon? More often?\n[S0] No.\n[S0] How often? Once\n[S0] once a month.\n[S0] Once\n[S0] once every two months.\n[S0] Twice a month. I think. Twice a month? Do\n[S0] you get paid extra?\n[S1] No. Because we\n[S1] we should do the work vending in the\n[S1] Saturday\n[S1] in the at the\n[S1] throughout\n[S1] PM.\n[S0] So you don't get paid any extra?\n[S1] We we pay to the\n[S1] b three in the salary.\n[S1] This is the\n[S1] bonus.\n[S0] You get bonus? Do you work on Saturday?\n[S1] No.\n[S1] CEO will\n[S1] see it and then they will be back in the\n[S1] the end of the year. Uh-huh.\n[S0] So you do get paid,\n[S0] but later.\n[S0] That's\n[S0] good.\n[S0] What is your work to date?\n[S1] I ne"
+  },
+  {
+    "id": "july24",
+    "date": "2026-07-24",
+    "title": "BlueTech Mai July 24",
+    "utterances": 1094,
+    "studentUtterances": 116,
+    "vocab": [
+      [
+        "yeah",
+        93
+      ],
+      [
+        "i'm",
+        89
+      ],
+      [
+        "right",
+        83
+      ],
+      [
+        "it's",
+        71
+      ],
+      [
+        "yes",
+        62
+      ],
+      [
+        "don't",
+        60
+      ],
+      [
+        "you're",
+        57
+      ],
+      [
+        "sorry",
+        47
+      ],
+      [
+        "vietnamese",
+        46
+      ],
+      [
+        "people",
+        45
+      ],
+      [
+        "that's",
+        42
+      ],
+      [
+        "good",
+        40
+      ],
+      [
+        "bad",
+        39
+      ],
+      [
+        "get",
+        35
+      ],
+      [
+        "they're",
+        33
+      ],
+      [
+        "think",
+        33
+      ],
+      [
+        "canada",
+        33
+      ],
+      [
+        "she's",
+        28
+      ],
+      [
+        "mature",
+        28
+      ],
+      [
+        "mhmm",
+        27
+      ],
+      [
+        "compliment",
+        27
+      ],
+      [
+        "okay",
+        26
+      ],
+      [
+        "come",
+        26
+      ],
+      [
+        "maybe",
+        26
+      ],
+      [
+        "give",
+        26
+      ],
+      [
+        "vietnam",
+        22
+      ],
+      [
+        "really",
+        21
+      ],
+      [
+        "now",
+        20
+      ],
+      [
+        "person",
+        19
+      ],
+      [
+        "line",
+        18
+      ],
+      [
+        "still",
+        17
+      ],
+      [
+        "three",
+        17
+      ],
+      [
+        "bonus",
+        17
+      ],
+      [
+        "year",
+        17
+      ],
+      [
+        "something",
+        17
+      ],
+      [
+        "age",
+        16
+      ],
+      [
+        "major",
+        16
+      ],
+      [
+        "even",
+        16
+      ],
+      [
+        "rude",
+        16
+      ],
+      [
+        "polite",
+        16
+      ]
+    ],
+    "studentVocab": [
+      [
+        "three",
+        8
+      ],
+      [
+        "will",
+        7
+      ],
+      [
+        "yes",
+        7
+      ],
+      [
+        "it's",
+        6
+      ],
+      [
+        "maybe",
+        6
+      ],
+      [
+        "mature",
+        6
+      ],
+      [
+        "people",
+        4
+      ],
+      [
+        "bonus",
+        4
+      ],
+      [
+        "same",
+        4
+      ],
+      [
+        "yeah",
+        4
+      ],
+      [
+        "china",
+        4
+      ],
+      [
+        "shy",
+        3
+      ],
+      [
+        "shine",
+        3
+      ],
+      [
+        "contract",
+        3
+      ],
+      [
+        "year",
+        3
+      ],
+      [
+        "mhmm",
+        3
+      ],
+      [
+        "months",
+        3
+      ],
+      [
+        "quinn",
+        3
+      ],
+      [
+        "major",
+        3
+      ],
+      [
+        "compliment",
+        3
+      ],
+      [
+        "india",
+        3
+      ],
+      [
+        "i'm",
+        2
+      ],
+      [
+        "increase",
+        2
+      ],
+      [
+        "salary",
+        2
+      ],
+      [
+        "miss",
+        2
+      ],
+      [
+        "manager",
+        2
+      ],
+      [
+        "she's",
+        2
+      ],
+      [
+        "team",
+        2
+      ],
+      [
+        "leader",
+        2
+      ],
+      [
+        "english",
+        2
+      ]
+    ],
+    "bigrams": [
+      [
+        "you know",
+        78
+      ],
+      [
+        "like you",
+        23
+      ],
+      [
+        "and then",
+        22
+      ],
+      [
+        "i'm like",
+        22
+      ],
+      [
+        "you have",
+        20
+      ],
+      [
+        "it's like",
+        18
+      ],
+      [
+        "say sorry",
+        18
+      ],
+      [
+        "you don't",
+        17
+      ],
+      [
+        "just like",
+        17
+      ],
+      [
+        "and you",
+        15
+      ],
+      [
+        "sorry sorry",
+        15
+      ],
+      [
+        "you you",
+        14
+      ],
+      [
+        "right and",
+        14
+      ],
+      [
+        "when you",
+        13
+      ],
+      [
+        "like that",
+        13
+      ],
+      [
+        "and i'm",
+        13
+      ],
+      [
+        "i'm not",
+        12
+      ],
+      [
+        "you're like",
+        12
+      ],
+      [
+        "like i'm",
+        12
+      ],
+      [
+        "don't know",
+        11
+      ]
+    ],
+    "trigrams": [
+      [
+        "sorry sorry sorry",
+        10
+      ],
+      [
+        "you know you",
+        7
+      ],
+      [
+        "like you know",
+        7
+      ],
+      [
+        "you don't know",
+        6
+      ],
+      [
+        "mature mature mature",
+        6
+      ],
+      [
+        "and i'm like",
+        6
+      ],
+      [
+        "you know like",
+        6
+      ],
+      [
+        "you know and",
+        6
+      ],
+      [
+        "for your age",
+        5
+      ],
+      [
+        "you know because",
+        5
+      ]
+    ],
+    "keyMoments": [
+      "04:30 is still pretty late, though. It's not done because",
+      "not shy.",
+      "But three people, not 10.",
+      "That's not too many.",
+      "Three is not that many.",
+      "I'm not how many is it about.",
+      "Yes. Did I say thank you for signing our bonuses?",
+      "You you say bonus end of year. Right?",
+      "Not three months.",
+      "Yes. Not manager?",
+      "she's not shy. What about when she gives a presentation?",
+      "Mature. When you say M. M. When you say someone's mature for their age,",
+      "it means, like, let's say, like, somebody's, like, 10,",
+      "could be what your study is focused on. So major means like big,",
+      "means old. Old. Like old So if say you're like mature for your age, it means you act"
+    ],
+    "transcriptPreview": "[S0] You work all weekend. Right?\n[S0] What time did you finish on Saturday?\n[S1] Saturday.\n[S1] Finish at 04:30\n[S1] o'clock.\n[S0] 04:30 o'clock? I'm 04:30.\n[S0] 04:30AM\n[S0] or PM?\n[S0] PM. Okay.\n[S0] AM.\n[S0] That would be very bad. Mhmm. Just\n[S0] 04:30 is still pretty late, though. It's not done because\n[S1] I set for\n[S1] three people,\n[S1] not shy.\n[S0] Oh, you had to share it?\n[S0] You had to share?\n[S0] I thought you were alone.\n[S0] There was three people in the office on Saturday?\n[S1] No. Because they're shining,\n[S1] so I can Oh, sign?\n[S1] Shine.\n[S0] Why are you shining shoes?\n[S1] Shine.\n[S1] Shine.\n[S0] Shine? Shine what?\n[S0] Shine a contract. Why are you shining contracts?\n[S0] Aren't why do they need to be shiny?\n[S0] Why do they need to be shiny?\n[S0] Your boss care if the contract is shiny.\n[S0] You're trying to shine like shine?\n[S0] No.\n[S0] Sign. Oh, sign.\n[S0] How\n[S0] many contracts did you have to sign?\n[S1] More.\n[S1] But three people, not 10.\n[S0] Three pe"
+  },
+  {
+    "id": "july20",
+    "date": "2026-07-20",
+    "title": "BlueTech Mai July 20",
+    "utterances": 0,
+    "studentUtterances": 0,
+    "vocab": [],
+    "studentVocab": [],
+    "bigrams": [],
+    "trigrams": [],
+    "keyMoments": [],
+    "transcriptPreview": ""
+  },
+  {
+    "id": "july24",
+    "date": "2026-07-24",
+    "title": "BlueTech Mai July 24",
+    "utterances": 0,
+    "studentUtterances": 0,
+    "vocab": [],
+    "studentVocab": [],
+    "bigrams": [],
+    "trigrams": [],
+    "keyMoments": [],
+    "transcriptPreview": ""
+  }
+]

@@ -1,5 +1,5 @@
----
-description: "Lightweight T1 reconnaissance scout. Flag and tag unmined SOUL, phantom ledger entries, stale files, drift indicators across any target zone. Zero compute beyond identification — covers long distances fast. Outputs scout report to OPERATIONS/."
+﻿---
+description: "Lightweight T1 reconnaissance scout. Flag and tag unmined SOUL, phantom ledger entries, stale files, drift indicators across any target zone. Zero compute beyond identification â€” covers long distances fast. Outputs scout report to OPERATIONS/."
 agent: AGENT99
 ---
 
@@ -11,15 +11,15 @@ agent: AGENT99
 
 ---
 
-## Phase 0 — Zone Select
+## Phase 0 â€” Zone Select
 
 $ARGUMENTS defines the target zone. If empty, scout asks: "Which zone? CANON/ | HEAVY-LEDGER/ | REINCARNATION/ | SOUL-SEGMENTS/ | OPERATIONS/ | APPS/ | .kilo/"
 
-One-line zone confirm: `SCOUT → <zone> — scanning`
+One-line zone confirm: `SCOUT â†’ <zone> â€” scanning`
 
 ---
 
-## Phase 1 — Scan
+## Phase 1 â€” Scan
 
 Scan the target zone with these lenses:
 
@@ -32,46 +32,46 @@ Scan the target zone with these lenses:
 | **GAP** | Dead links, missing files | Referenced files that don't exist on disk, broken cross-repo paths, missing portal files |
 
 Scan method:
-1. Glob the zone for all files — count total
+1. Glob the zone for all files â€” count total
 2. Read file headers (first 20 lines) for "UNMINED", "UNTOUCHED", "STALE", "FROZEN" markers
-3. Grep for `/^> "/` blockquotes — flag any file with raw quotes
+3. Grep for `/^> "/` blockquotes â€” flag any file with raw quotes
 4. Check HEAD references against `git log -1`
 5. Check phantom IDs against actual disk
 6. Check `no_fabrication` attestation in all `.json` files
 
 ---
 
-## Phase 2 — Flag
+## Phase 2 â€” Flag
 
 For each find, assign:
 
 ```
 PRIORITY:
-  P1 (CRITICAL) — Foundational SOUL DNA, security breaches, broken HEAD, phantom files in active pipelines
-  P2 (HIGH)     — Stale cursors, unmined verbatim, missing attestations, legacy domains
-  P3 (MEDIUM)   — Cosmetic staleness, duplicate entries, missing docs, dead links
+  P1 (CRITICAL) â€” Foundational SOUL DNA, security breaches, broken HEAD, phantom files in active pipelines
+  P2 (HIGH)     â€” Stale cursors, unmined verbatim, missing attestations, legacy domains
+  P3 (MEDIUM)   â€” Cosmetic staleness, duplicate entries, missing docs, dead links
 
 TYPE:
-  SOUL    — Raw unprocessed Michael verbatim / quotes / chat logs
-  LEDGER  — Heavy Ledger phantom, gap, stale cursor, missing attestation
-  DRIFT   — HEAD mismatch, stale FINGERPRINT, legacy alias, domain mismatch
-  CONFIG  — Missing/inconsistent tier definitions, agent files
-  GAP     — Dead link, missing referenced file, broken path
-  VAULT   — Unmined vault directory from Phoenix-Rise-Immortalize- (9 vaults)
+  SOUL    â€” Raw unprocessed Michael verbatim / quotes / chat logs
+  LEDGER  â€” Heavy Ledger phantom, gap, stale cursor, missing attestation
+  DRIFT   â€” HEAD mismatch, stale FINGERPRINT, legacy alias, domain mismatch
+  CONFIG  â€” Missing/inconsistent tier definitions, agent files
+  GAP     â€” Dead link, missing referenced file, broken path
+  VAULT   â€” Unmined vault directory from Phoenix-Rise-Immortalize- (9 vaults)
 
 STATUS:
-  UNMINED   — Raw soul never extracted
-  UNTOUCHED — File marked as DO NOT EDIT, never processed
-  STALE     — Out of date (HEAD, cursor, count mismatch)
-  ORPHAN    — Referenced but missing from disk
-  FROZEN    — Pipeline cursor frozen > 30 days
-  PHANTOM   — Referenced ID exists on paper but not on disk
-  CLEAN     — No issues found
+  UNMINED   â€” Raw soul never extracted
+  UNTOUCHED â€” File marked as DO NOT EDIT, never processed
+  STALE     â€” Out of date (HEAD, cursor, count mismatch)
+  ORPHAN    â€” Referenced but missing from disk
+  FROZEN    â€” Pipeline cursor frozen > 30 days
+  PHANTOM   â€” Referenced ID exists on paper but not on disk
+  CLEAN     â€” No issues found
 ```
 
 ---
 
-## Phase 3 — Tag
+## Phase 3 â€” Tag
 
 Tag format (one JSONL record per find):
 
@@ -85,7 +85,7 @@ Tag format (one JSONL record per find):
   "line": 14,
   "excerpt": "First 120 chars of flagged content...",
   "bytes": 31258,
-  "reason": "Raw Michael verbatim quote block — never ingested into D1",
+  "reason": "Raw Michael verbatim quote block â€” never ingested into D1",
   "learned": "Scout learned this zone must be indexed by source_sha256, not filename alone.",
   "next": "Route through /api/soul/extract"
 }
@@ -97,14 +97,14 @@ Write learned phetrails to: `OPERATIONS/phetrail-scout-learned-YYYY-MM-DDTHHmmss
 
 ---
 
-## Phase 4 — Summary
+## Phase 4 â€” Summary
 
 After scan, output:
 
 ```
-═══════════════════════════════════════════
-PHOENIX SCOUT — <zone>
-═══════════════════════════════════════════
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+PHOENIX SCOUT â€” <zone>
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 ZONE:          <path>
 FILES:         <total scanned>
 FINDS:         <total flagged>
@@ -119,7 +119,7 @@ BREAKDOWN:
   GAP:     <n>
   VAULT:   <n>
 REPORT:        OPERATIONS/phoenix-scout-<timestamp>.jsonl
-═══════════════════════════════════════════
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 SCOUT COMPLETE. Flagged items ready for tier dispatch.
 ```
 
@@ -133,7 +133,7 @@ SCOUT COMPLETE. Flagged items ready for tier dispatch.
 - **Output is JSONL.** Machine-readable. Each flag is one line. Ready for pipeline ingestion.
 - **Max 500 flags per scout.** If zone is too large, narrow the target path.
 - **Print the report path at end.** Always print where the scout report was written.
-- **SCOUT → PULSE check first.** Before scanning, verify `git status` is clean(ish) and HEAD matches COLD-START-BOOT. If dirty HEAD, flag as DRIFT finding and note in summary.
+- **SCOUT â†’ PULSE check first.** Before scanning, verify `git status` is clean(ish) and HEAD matches COLD-START-BOOT. If dirty HEAD, flag as DRIFT finding and note in summary.
 - **CLOUDFLARE_API_TOKEN is irrelevant.** This command never deploys. No wrangler. No API keys needed.
 - **FIND + LEARN output.** Every scout flag records what was found AND what was learned. A dead end is not empty; it teaches routing. A conflict is not noise; it teaches governance. A stale file is not trivia; it teaches drift shape.
 - **Phetrail what you learn.** If a find changes the scout role, command behavior, keyword map, priority lens, or next-run doctrine, write a learned phetrail immediately. The learned phetrail is the role upgrade.
@@ -156,10 +156,12 @@ SCOUT COMPLETE. Flagged items ready for tier dispatch.
 # Scout Heavy Ledger for phantom gaps
 /PhoenixScout CANON/HEAVY-LEDGER/ --lens LEDGER
 
-# Scout everything — full sweep
+# Scout everything â€” full sweep
 /PhoenixScout CANON/ --full-sweep
 ```
 
 ---
 
 `PHOENIX SCOUT: ONLINE. LIGHTWEIGHT. FLAG AND TAG ONLY. LONG DISTANCE.`
+
+

@@ -1,0 +1,4 @@
+﻿{"ts":"2026-07-02T07:32:13.3423635+07:00","cmd":"HEALTH-GATE","status":"OK","message":"Supply chain open","payload":null}
+{"ts":"2026-07-02T07:32:13.9889417+07:00","cmd":"SESSION","status":"OK","message":"Resolved test-338-rise for sov100","payload":"{\"student_id\":\"sov100\",\"session_id\":\"test-338-rise\"}"}
+{"ts":"2026-07-02T07:32:14.3703362+07:00","cmd":"STAGE-IV","status":"OK","message":"truth score=0 achieved=True","payload":"{\"truth_id\":\"f3752b1c-bf44-4514-97b3-d084792017ec\",\"session_id\":\"test-338-rise\",\"consensus_score\":0,\"consensus_achieved\":true,\"model_a_score\":0,\"model_b_score\":0,\"agreed_directives\":[],\"key_phrases\":[],\"generated_at\":\"2026-07-02T00:32:14.302Z\",\"stage\":\"AGMEN-NOVISSIMUM-TRUTH\"}"}
+{"ts":"2026-07-02T07:32:14.3928704+07:00","cmd":"STAGE-IV","status":"ERR","message":"Truth consensus too low","payload":null}

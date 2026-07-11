@@ -1,42 +1,44 @@
----
+﻿---
 description: Show help menu for all available commands
 agent: AGENT99
 ---
 Show the help menu with all available commands:
 - audit
-- backup
+# backup
 - checker
-- claude
-- console
-- dashboard
+# claude
+# console
+# dashboard
 - debug
 - doctor
 - gateway
 - halt
 - help
 - ledger
-- marketing-intake
-- mode
-- onboard
-- pair
+# marketing-intake
+# mode
+# onboard
+# pair
 - reincarnate
 - reincarnatedeath
 - reincarnaterise
 - report
-- restart
-- reverseengineer
+# restart
+# reverseengineer
 - romeprotocol
-- run
-- setup
+# run
+# setup
 - souldna
 - ssm
 - stabilize
-- start
+# start
 - status
-- stop
+# stop
 - summarize
 - supersaiyan
 - sync
-- terminal
+# terminal
 
 Displays all command options and descriptions.
+
+

@@ -1,0 +1,36 @@
+{
+  "stage1": "DATA MINING — COMPLETE",
+  "studentId": "mai-tram-bluetech",
+  "transcribedFiles": 5,
+  "totalUtterances": 2490,
+  "totalTranscriptChars": 89724,
+  "artifacts": {
+    "transcripts": "OPERATIONS/mai-tram-transcripts.json",
+    "vocab": "OPERATIONS/mai-tram-vocab.json",
+    "manifest": "OPERATIONS/mai-tram-stage1-manifest.json"
+  },
+  "files": [
+    { "id": "apr16", "date": "2026-04-16", "utterances": 443, "topic": "Bird nest marketing story, home vocab, furnishings, commute, cat" },
+    { "id": "apr16-2", "date": "2026-04-16", "utterances": 252, "topic": "Phonics review c/k/e/h/r/m/d, letter sounds vs names" },
+    { "id": "apr16-3", "date": "2026-04-16", "utterances": 110, "topic": "AI models (Gemini, Claude, Grok, GPT, Anthropic), agents vs chatbots" },
+    { "id": "july20", "date": "2026-07-20", "utterances": 588, "topic": "Saturday work, overtime, bonus, contract, drive, company" },
+    { "id": "july24", "date": "2026-07-24", "utterances": 1097, "topic": "Overtime 04:30 finish, contracts, salary, mature/compliment/polite, Vietnam culture" }
+  ],
+  "stage2": "PORTAL UPDATES — DEPLOYED",
+  "deployedVersion": "8d2f1bf1-8d13-4bc0-8c40-3bf9824669ee",
+  "portalUrl": "https://net-pet-ai.mrmichaelhobbs123.workers.dev/mai-tram-portal",
+  "updatedSections": ["SESSION 3 JULY 20", "SESSION 4 JULY 24", "SESSION 5 APRIL 16 (3 parts)"],
+  "keyVocabFound": [
+    "Saturday", "bonus", "contract", "salary", "performance", "drive",
+    "lettuce", "strawberry", "cherry", "vitamin",
+    "mature", "compliment", "polite", "impolite",
+    "Gemini", "Claude", "Anthropic", "Grok", "GPT", "model", "agent", "chatbot",
+    "furnishings", "hardwood", "floor", "commute",
+    "phonics", "sounds", "letters", "alphabet"
+  ],
+  "nextSteps": [
+    "Review portal at /mai-tram-portal with Mai Tram before class",
+    "Use the vocab list in workbook: https://net-pet-ai.mrmichaelhobbs123.workers.dev/magic-chat?studentId=mai-tram-bluetech",
+    "Post-class: add new audio to public/audio (must be <25MB) or pending-audio/ for re-upload"
+  ]
+}

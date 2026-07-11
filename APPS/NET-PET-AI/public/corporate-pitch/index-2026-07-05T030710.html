@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a0a12">
+  <title>BlueTech English | Corporate English Programs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/portal.css">
+  <style>
+    /* PITCH-SPECIFIC */
+    .pitch-wrap { position: relative; z-index: 1; }
+    .section { padding: 96px 40px; max-width: 1120px; margin: 0 auto; }
+    .section-header { text-align: center; margin-bottom: 56px; animation: fadeIn 0.5s ease; }
+    .section-header h2 { font-family: 'Orbitron', sans-serif; font-size: 1.6rem; font-weight: 700; letter-spacing: 0.06em; margin-bottom: 10px; }
+    .section-header p { font-family: 'Rajdhani', sans-serif; font-size: 1.05rem; color: var(--dim); max-width: 640px; margin: 0 auto; letter-spacing: 0.03em; }
+
+    /* HERO */
+    .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 120px 24px 80px; position: relative; z-index: 1; }
+    .hero-inner { max-width: 860px; animation: fadeIn 0.6s ease; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 10px; background: rgba(168,85,247,0.12); border: 1px solid rgba(168,85,247,0.3); color: var(--purple); font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.08em; padding: 8px 14px; border-radius: 999px; margin-bottom: 22px; text-transform: uppercase; font-size: 0.9rem; }
+    .hero h1 { font-family: 'Orbitron', sans-serif; font-size: 3.2rem; font-weight: 800; letter-spacing: 0.04em; line-height: 1.1; margin-bottom: 16px; }
+    .hero h1 span { background: linear-gradient(90deg, var(--gold), var(--purple)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .hero p.sub { font-family: 'Rajdhani', sans-serif; font-size: 1.25rem; color: var(--white-80); max-width: 680px; margin: 0 auto 28px; letter-spacing: 0.03em; line-height: 1.5; }
+    .cta-row { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+    .btn { padding: 14px 18px; border-radius: 12px; border: none; font-family: 'Orbitron', sans-serif; font-weight: 600; letter-spacing: 0.06em; cursor: pointer; transition: all 0.25s; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
+    .btn-primary { background: linear-gradient(135deg, rgba(245,158,11,0.9), rgba(168,85,247,0.9)); color: #0a0a12; box-shadow: 0 4px 16px rgba(168,85,247,0.25); }
+    .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 28px rgba(168,85,247,0.45), 0 0 20px rgba(245,158,11,0.25); }
+    .btn-secondary { background: rgba(255,255,255,0.06); color: var(--text); border: 1px solid rgba(255,255,255,0.12); }
+    .btn-secondary:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.22); }
+
+    /* STATS ROW */
+    .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; max-width: 960px; margin: 0 auto; }
+    .stat-pill { background: var(--card); border: 1px solid var(--border); border-radius: 18px; padding: 22px 16px; text-align: center; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+    .stat-pill .value { font-family: 'Orbitron', sans-serif; font-size: 1.6rem; font-weight: 700; letter-spacing: 0.04em; }
+    .stat-pill .label { font-family: 'Rajdhani', sans-serif; color: var(--dim); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; margin-top: 6px; font-size: 0.82rem; }
+
+    /* CARDS */
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    @media (max-width: 860px) { .grid-3, .grid-2, .stats-row { grid-template-columns: 1fr; } }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 22px; padding: 28px; position: relative; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; }
+    .card:hover { transform: translateY(-3px); box-shadow: 0 14px 34px rgba(0,0,0,0.35); }
+    .card-accent { position: absolute; top: 0; left: 0; right: 0; height: 3px; border-radius: 3px 3px 0 0; }
+    .card.purple .card-accent { background: var(--purple); box-shadow: 0 0 16px var(--purple-glow); }
+    .card.gold .card-accent { background: var(--gold); box-shadow: 0 0 16px var(--gold-glow); }
+    .card.teal .card-accent { background: var(--teal); box-shadow: 0 0 16px var(--teal-glow); }
+    .card.success .card-accent { background: var(--success); box-shadow: 0 0 16px rgba(34,197,94,0.25); }
+    .card h3 { font-family: 'Orbitron', sans-serif; font-size: 1rem; font-weight: 700; letter-spacing: 0.05em; margin: 14px 0 8px; }
+    .card p, .card li { color: var(--white-80); font-size: 0.95rem; line-height: 1.55; }
+    .card ul { padding-left: 18px; margin: 0; }
+    .card li + li { margin-top: 6px; }
+    .card .icon { width: 38px; height: 38px; border-radius: 10px; display: inline-flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+
+    /* ROI */
+    .roi-block { background: linear-gradient(135deg, rgba(168,85,247,0.08), rgba(245,158,11,0.08)); border: 1px solid rgba(168,85,247,0.25); border-radius: 24px; padding: 36px; }
+    .roi-block h3 { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 10px; }
+
+    /* TESTIMONIAL */
+    .quote { font-family: 'Rajdhani', sans-serif; font-size: 1.15rem; color: var(--white-80); line-height: 1.55; }
+    .quote-author { margin-top: 10px; font-weight: 700; color: var(--gold); letter-spacing: 0.04em; }
+
+    /* FORM */
+    .form { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 30px; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+    .form input, .form select, .form textarea { width: 100%; padding: 14px 16px; border-radius: 12px; border: 1px solid var(--border); background: rgba(255,255,255,0.04); color: var(--text); font-family: 'Inter', sans-serif; outline: none; transition: border-color 0.25s, box-shadow 0.25s; margin-bottom: 14px; }
+    .form input:focus, .form select:focus, .form textarea:focus { border-color: var(--purple); box-shadow: 0 0 0 3px rgba(168,85,247,0.15); }
+    .form label { font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.05em; color: var(--dim); display: block; margin-bottom: 6px; text-transform: uppercase; font-size: 0.8rem; }
+    .form .row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media (max-width: 700px) { .form .row { grid-template-columns: 1fr; } }
+
+    /* FOOTER */
+    .pitch-footer { text-align: center; padding: 40px 24px 64px; color: var(--dim); font-family: 'Rajdhani', sans-serif; letter-spacing: 0.04em; position: relative; z-index: 1; }
+    .g999-mark { position: fixed; top: 1.5rem; right: 1.5rem; font-family: 'Orbitron', sans-serif; font-size: 0.65rem; font-weight: 600; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; opacity: 0.9; z-index: 9999; pointer-events: none; text-shadow: 0 0 10px rgba(245,158,11,0.3); }
+    .g999-corner { position: fixed; bottom: 1.5rem; left: 1.5rem; font-family: 'Orbitron', sans-serif; font-size: 0.55rem; font-weight: 500; letter-spacing: 0.18em; color: rgba(168,85,247,0.5); text-transform: uppercase; z-index: 9999; pointer-events: none; }
+
+    @media (max-width: 720px) {
+      .hero h1 { font-size: 2.1rem; }
+      .section { padding: 72px 20px; }
+    }
+  </style>
+</head>
+<body class="portal-bluetech">
+  <div class="g999-mark">G999</div>
+  <div class="g999-corner">BlueTech English</div>
+
+  <div class="pitch-wrap">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="hero-badge">Corporate English Programs</div>
+        <h1>English that moves <span>business forward</span></h1>
+        <p class="sub">Corporate training built for real workflows — meetings, negotiations, presentations, and cross-team communication. Measurable outcomes, not generic lessons.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#contact">Book a demo</a>
+          <a class="btn btn-secondary" href="#programs">View programs</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOCIAL PROOF -->
+    <section class="section">
+      <div class="stats-row">
+        <div class="stat-pill"><div class="value">98%</div><div class="label">Completion rate</div></div>
+        <div class="stat-pill"><div class="value">3.2x</div><div class="label">ROI average</div></div>
+        <div class="stat-pill"><div class="value">42 days</div><div class="label">Time to fluency lift</div></div>
+        <div class="stat-pill"><div class="value">24/7</div><div class="label">Live coaching coverage</div></div>
+      </div>
+    </section>
+
+    <!-- VALUE PROPS -->
+    <section class="section" id="programs">
+      <div class="section-header">
+        <h2>Built for operating teams</h2>
+        <p>Not a language course — a communication-performance program. Role scenarios, live speaking practice, and feedback inside your workflow.</p>
+      </div>
+      <div class="grid-3">
+        <div class="card purple">
+          <div class="card-accent"></div>
+          <div class="icon" style="background:rgba(168,85,247,0.15);">🗣️</div>
+          <h3>Live speaking practice</h3>
+          <p>Real-time voice coaching for meetings, calls, and pitches — not recorded drills.</p>
+        </div>
+        <div class="card gold">
+          <div class="card-accent"></div>
+          <div class="icon" style="background:rgba(245,158,11,0.15);">📊</div>
+          <h3>Performance tracking</h3>
+          <p>Fluency, vocabulary, and clarity metrics that managers can review by team or business unit.</p>
+        </div>
+        <div class="card teal">
+          <div class="card-accent"></div>
+          <div class="icon" style="background:rgba(20,184,166,0.15);">🧩</div>
+          <h3>Role-based curriculum</h3>
+          <p>Sales, support, engineering, and leadership tracks — content matched to actual job tasks.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROGRAM TIERS -->
+    <section class="section">
+      <div class="section-header">
+        <h2>Program tiers</h2>
+        <p>Start with a focused pilot, then expand. Each tier includes onboarding, live sessions, and monthly reporting.</p>
+      </div>
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-accent"></div>
+          <h3>Essentials</h3>
+          <p>Core communication skills for frontline teams: emails, meetings, and client calls.</p>
+          <ul>
+            <li>Speaking + writing fundamentals</li>
+            <li>Weekly live sessions</li>
+            <li>Team progress dashboard</li>
+          </ul>
+        </div>
+        <div class="card purple">
+          <div class="card-accent"></div>
+          <h3>Professional</h3>
+          <p>Advanced business English with negotiation, presentation, and leadership communication.</p>
+          <ul>
+            <li>Role-play + real tasks</li>
+            <li>Twice-weekly coaching</li>
+            <li>Manager review pack</li>
+          </ul>
+        </div>
+        <div class="card gold">
+          <div class="card-accent"></div>
+          <h3>Enterprise</h3>
+          <p>Custom curriculum, dedicated coaches, and enterprise integration with HR/LMS systems.</p>
+          <ul>
+            <li>Custom content + assessments</li>
+            <li>Dedicated success manager</li>
+            <li>API and reporting integrations</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ROI / BENEFITS -->
+    <section class="section">
+      <div class="section-header">
+        <h2>Why teams improve faster</h2>
+        <p>Most corporate English fails because it ignores workflow. This program trains language inside the work itself.</p>
+      </div>
+      <div class="roi-block">
+        <div class="grid-2">
+          <div>
+            <h3>Measurable outcomes</h3>
+            <p>Clarity, response time, and meeting effectiveness tracked over time. No vanity-skill scores.</p>
+          </div>
+          <div>
+            <h3>Low-friction adoption</h3>
+            <p>Employees join without extra software headaches: browser-based, secure, and aligned with corporate access policies.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="section">
+      <div class="section-header">
+        <h2>What partners say</h2>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-accent"></div>
+          <p class="quote">“The fastest fluency lift we have seen in a corporate program — speaking confidence in client meetings improved within weeks.”</p>
+          <p class="quote-author">Head of People Operations — Vietnam</p>
+        </div>
+        <div class="card">
+          <div class="card-accent"></div>
+          <p class="quote">“Role-based content means engineers and managers get different inputs without custom admin work.”</p>
+          <p class="quote-author">Engineering Manager — APAC</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section" id="contact">
+      <div class="section-header">
+        <h2>Request a demo</h2>
+        <p>Tell us your team size, goals, and timeline. We will reply within one business day.</p>
+      </div>
+      <div class="form">
+        <form onsubmit="event.preventDefault(); alert('Demo request received. We will contact you shortly.');">
+          <div class="row">
+            <div>
+              <label>Name</label>
+              <input type="text" placeholder="Your full name" required>
+            </div>
+            <div>
+              <label>Work email</label>
+              <input type="email" placeholder="name@company.com" required>
+            </div>
+          </div>
+          <div class="row">
+            <div>
+              <label>Company</label>
+              <input type="text" placeholder="Company name">
+            </div>
+            <div>
+              <label>Team size</label>
+              <select>
+                <option>10–50</option>
+                <option>50–200</option>
+                <option>200–1000</option>
+                <option>1000+</option>
+              </select>
+            </div>
+          </div>
+          <label>What do you want to improve?</label>
+          <textarea rows="4" placeholder="Meetings, presentations, client calls, onboarding..."></textarea>
+          <button class="btn btn-primary" type="submit">Request demo</button>
+        </form>
+      </div>
+    </section>
+  </div>
+
+  <footer class="pitch-footer">
+    © <span id="yr"></span> BlueTech English — Corporate English Programs. All rights reserved.
+  </footer>
+
+  <script>
+    document.getElementById('yr').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a0a12">
+  <meta name="description" content="Corporate English programs for teams in Vietnam. Practical business English for meetings, presentations, and cross-team communication. Small groups, real outcomes, no grammar drills.">
+  <meta property="og:title" content="BlueTech English | Corporate English Programs">
+  <meta property="og:description" content="Corporate English built for real workflows — meetings, negotiations, presentations, and cross-team communication. Small groups, real outcomes.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://net.mrmichaelhobbs123.workers.dev/corporate-pitch/">
+  <meta property="og:image" content="https://net.mrmichaelhobbs123.workers.dev/isolated/phoenix-crest-clean.png">
+  <link rel="canonical" href="https://net.mrmichaelhobbs123.workers.dev/corporate-pitch/">
+  <title>BlueTech English | Corporate English Programs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/portal.css">
+  <style>
+    .pitch-wrap { position: relative; z-index: 1; }
+    .section { padding: 96px 40px; max-width: 1120px; margin: 0 auto; }
+    .section-header { text-align: center; margin-bottom: 56px; animation: fadeIn 0.5s ease; }
+    .section-header h2 { font-family: 'Orbitron', sans-serif; font-size: 1.6rem; font-weight: 700; letter-spacing: 0.06em; margin-bottom: 10px; }
+    .section-header p { font-family: 'Rajdhani', sans-serif; font-size: 1.05rem; color: var(--dim); max-width: 640px; margin: 0 auto; letter-spacing: 0.03em; }
+
+    .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 120px 24px 80px; position: relative; z-index: 1; }
+    .hero-inner { max-width: 860px; animation: fadeIn 0.6s ease; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 10px; background: rgba(168,85,247,0.12); border: 1px solid rgba(168,85,247,0.3); color: var(--purple); font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.08em; padding: 8px 14px; border-radius: 999px; margin-bottom: 22px; text-transform: uppercase; font-size: 0.9rem; }
+    .hero h1 { font-family: 'Orbitron', sans-serif; font-size: 3.2rem; font-weight: 800; letter-spacing: 0.04em; line-height: 1.1; margin-bottom: 16px; }
+    .hero h1 span { background: linear-gradient(90deg, var(--gold), var(--purple)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .hero p.sub { font-family: 'Rajdhani', sans-serif; font-size: 1.25rem; color: var(--white-80); max-width: 680px; margin: 0 auto 28px; letter-spacing: 0.03em; line-height: 1.5; }
+    .cta-row { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+    .btn { padding: 14px 18px; border-radius: 12px; border: none; font-family: 'Orbitron', sans-serif; font-weight: 600; letter-spacing: 0.06em; cursor: pointer; transition: all 0.25s; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
+    .btn-primary { background: linear-gradient(135deg, rgba(245,158,11,0.9), rgba(168,85,247,0.9)); color: #0a0a12; box-shadow: 0 4px 16px rgba(168,85,247,0.25); }
+    .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 28px rgba(168,85,247,0.45), 0 0 20px rgba(245,158,11,0.25); }
+    .btn-secondary { background: rgba(255,255,255,0.06); color: var(--text); border: 1px solid rgba(255,255,255,0.12); }
+    .btn-secondary:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.22); }
+
+    .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; max-width: 960px; margin: 0 auto; }
+    .stat-pill { background: var(--card); border: 1px solid var(--border); border-radius: 18px; padding: 22px 16px; text-align: center; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+    .stat-pill .value { font-family: 'Orbitron', sans-serif; font-size: 1.6rem; font-weight: 700; letter-spacing: 0.04em; }
+    .stat-pill .label { font-family: 'Rajdhani', sans-serif; color: var(--dim); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; margin-top: 6px; font-size: 0.82rem; }
+
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    @media (max-width: 860px) { .grid-3, .grid-2, .stats-row { grid-template-columns: 1fr; } }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 22px; padding: 28px; position: relative; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; }
+    .card:hover { transform: translateY(-3px); box-shadow: 0 14px 34px rgba(0,0,0,0.35); }
+    .card-accent { position: absolute; top: 0; left: 0; right: 0; height: 3px; border-radius: 3px 3px 0 0; }
+    .card.purple .card-accent { background: var(--purple); box-shadow: 0 0 16px var(--purple-glow); }
+    .card.gold .card-accent { background: var(--gold); box-shadow: 0 0 16px var(--gold-glow); }
+    .card.teal .card-accent { background: var(--teal); box-shadow: 0 0 16px var(--teal-glow); }
+    .card.success .card-accent { background: var(--success); box-shadow: 0 0 16px rgba(34,197,94,0.25); }
+    .card h3 { font-family: 'Orbitron', sans-serif; font-size: 1rem; font-weight: 700; letter-spacing: 0.05em; margin: 14px 0 8px; }
+    .card p, .card li { color: var(--white-80); font-size: 0.95rem; line-height: 1.55; }
+    .card ul { padding-left: 18px; margin: 0; }
+    .card li + li { margin-top: 6px; }
+    .card .icon { width: 38px; height: 38px; border-radius: 10px; display: inline-flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+
+    .roi-block { background: linear-gradient(135deg, rgba(168,85,247,0.08), rgba(245,158,11,0.08)); border: 1px solid rgba(168,85,247,0.25); border-radius: 24px; padding: 36px; }
+    .roi-block h3 { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 10px; }
+
+    .quote { font-family: 'Rajdhani', sans-serif; font-size: 1.15rem; color: var(--white-80); line-height: 1.55; }
+    .quote-author { margin-top: 10px; font-weight: 700; color: var(--gold); letter-spacing: 0.04em; }
+
+    .form { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 30px; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+    .form input, .form select, .form textarea { width: 100%; padding: 14px 16px; border-radius: 12px; border: 1px solid var(--border); background: rgba(255,255,255,0.04); color: var(--text); font-family: 'Inter', sans-serif; outline: none; transition: border-color 0.25s, box-shadow 0.25s; margin-bottom: 14px; }
+    .form input:focus, .form select:focus, .form textarea:focus { border-color: var(--purple); box-shadow: 0 0 0 3px rgba(168,85,247,0.15); }
+    .form label { font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.05em; color: var(--dim); display: block; margin-bottom: 6px; text-transform: uppercase; font-size: 0.8rem; }
+    .form .row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media (max-width: 700px) { .form .row { grid-template-columns: 1fr; } }
+
+    .pitch-footer { text-align: center; padding: 40px 24px 64px; color: var(--dim); font-family: 'Rajdhani', sans-serif; letter-spacing: 0.04em; position: relative; z-index: 1; }
+    .g999-mark { position: fixed; top: 1.5rem; right: 1.5rem; font-family: 'Orbitron', sans-serif; font-size: 0.65rem; font-weight: 600; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; opacity: 0.9; z-index: 9999; pointer-events: none; text-shadow: 0 0 10px rgba(245,158,11,0.3); }
+    .g999-corner { position: fixed; bottom: 1.5rem; left: 1.5rem; font-family: 'Orbitron', sans-serif; font-size: 0.55rem; font-weight: 500; letter-spacing: 0.18em; color: rgba(168,85,247,0.5); text-transform: uppercase; z-index: 9999; pointer-events: none; }
+
+    .art-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .art-cell { background: var(--card); border: 1px solid var(--border); border-radius: 18px; padding: 18px; text-align: center; }
+    .art-cell img { width: 100%; height: 120px; object-fit: contain; border-radius: 10px; }
+    .art-cell .art-label { font-family: 'Rajdhani', sans-serif; color: var(--dim); font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; margin-top: 8px; font-size: 0.75rem; }
+    @media (max-width: 720px) { .art-grid { grid-template-columns: repeat(2, 1fr); } .hero h1 { font-size: 2.1rem; } .section { padding: 72px 20px; } }
+  </style>
+</head>
+<body class="portal-bluetech">
+  <div class="g999-mark">G999</div>
+  <div class="g999-corner">BlueTech English</div>
+
+  <div class="pitch-wrap">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="hero-badge">Programs for teams</div>
+        <h1>Your English is already <span>inside you</span></h1>
+        <p class="sub">The real block is not grammar. It's speaking under pressure — meetings, calls, presentations — without freezing. This method removes the fear first, then builds the skill.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="/corporate-pitch/programs/">See programs</a>
+          <a class="btn btn-secondary" href="/corporate-pitch/method/">See the method</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRUST STRIP -->
+    <section class="section">
+      <div class="stats-row">
+        <div class="stat-pill"><div class="value">15+</div><div class="label">Years teaching</div></div>
+        <div class="stat-pill"><div class="value">4-6</div><div class="label">Max class size</div></div>
+        <div class="stat-pill"><div class="value">1-2</div><div class="label">Years to graduation</div></div>
+        <div class="stat-pill"><div class="value">Lakeview</div><div class="label">Saigon-based</div></div>
+      </div>
+    </section>
+
+    <!-- PROBLEM -->
+    <section class="section" id="problem">
+      <div class="section-header">
+        <h2>The real problem</h2>
+        <p>It is not vocabulary. It is not grammar. It is what happened to you before you ever walked into a classroom.</p>
+      </div>
+      <div class="roi-block">
+        <p style="font-family:'Rajdhani',sans-serif; font-size:1.15rem; color:var(--white-80); line-height:1.6; margin-bottom:14px;">
+          “The real problem is something crammed into your head and heart ever since you were taught how to write and speak Vietnamese: mistakes are bad, and the person who made the mistake is bad. The fear of making mistakes, losing face — that is your biggest enemy.”
+        </p>
+        <p style="font-family:'Rajdhani',sans-serif; font-size:1.05rem; color:var(--white-80); line-height:1.6;">
+          Most programs teach grammar. You already know grammar. You freeze because you have never had a safe place to speak every day. The method below is built to fix that — not to add more rules, but to remove the barrier before you even open your mouth.
+        </p>
+      </div>
+    </section>
+
+    <!-- METHODOLOGY -->
+    <section class="section" id="method">
+      <div class="section-header">
+        <h2>The method</h2>
+        <p>Six principles, a daily habit, and three non-negotiable class rules. No textbook drills. No shame.</p>
+      </div>
+      <div class="grid-3">
+        <div class="card teal">
+          <div class="card-accent"></div>
+          <div class="icon" style="background:rgba(20,184,166,0.15);">🧠</div>
+          <h3>KISS</h3>
+          <p>Keep it simple, stupid. Broken English that communicates beats perfect grammar that freezes. Get to the point. Directly. Even if it is broken.</p>
+        </div>
+        <div class="card purple">
+          <div class="card-accent"></div>
+          <div class="icon" style="background:rgba(168,85,247,0.15);">🧩</div>
+          <h3>Two brains</h3>
+          <p>Your Vietnamese brain is strong. Your English brain is the one you are trying to build. If you bridge them, you handicap yourself. You cannot learn English while thinking in Vietnamese.</p>
+        </div>
+        <div class="card gold">
+          <div class="card-accent"></div>
+          <div class="icon" style="background:rgba(245,158,11,0.15);">🎯</div>
+          <h3>Mistakes are guideposts</h3>
+          <p>Mistakes are good because they show you: this is not the right way. Then this must be. Laugh at yourself. Do not take yourself so seriously.</p>
+        </div>
+      </div>
+      <div class="grid-3" style="margin-top:18px;">
+        <div class="card success">
+          <div class="card-accent"></div>
+          <div class="icon" style="background:rgba(34,197,94,0.15);">📖</div>
+          <h3>Bruce Lee vocabulary</h3>
+          <p>It is not about knowing 10,000 words. It is about knowing 500–1,000 words and using each in 10 situations. That makes you a dynamic speaker.</p>
+        </div>
+        <div class="card purple">
+          <div class="card-accent"></div>
+          <div class="icon" style="background:rgba(168,85,247,0.15);">📺</div>
+          <h3>60% comprehensible input</h3>
+          <p>Listen to material you understand at least 60% of. Below that, switch to easier content or English subtitles. Vietnamese subtitles are forbidden — same two-brain problem.</p>
+        </div>
+        <div class="card gold">
+          <div class="card-accent"></div>
+          <div class="icon" style="background:rgba(245,158,11,0.15);">🗣️</div>
+          <h3>WWWWH: keep it going</h3>
+          <p>Ask Who, What, Where, When, How, Why — especially Why. When you find why someone does something, you can talk for hours. The weakest skill is not answering; it is not following up.</p>
+        </div>
+      </div>
+      <div class="roi-block" style="margin-top:28px;">
+        <div class="grid-2">
+          <div>
+            <h3>The three class rules</h3>
+            <p><strong>1.</strong> No Vietnamese — not even one word. If you are thinking in Vietnamese, you are freezing. 90 minutes. English only.</p>
+            <p style="margin-top:8px;"><strong>2.</strong> No notebooks, no scripts. If you wrote it down, you are not listening. It is a crutch.</p>
+            <p style="margin-top:8px;"><strong>3.</strong> No phones. Translation apps and TikTok kill active listening. Leave it outside. The only person allowed to translate is the teacher, and only after 3 attempts from different angles.</p>
+          </div>
+          <div>
+            <h3>Daily habit: 45/15</h3>
+            <p>45 minutes of listening to content you enjoy — YouTube, podcasts, TV — plus 15 minutes speaking. No extra commute. No textbook. Just habit.</p>
+            <p style="margin-top:8px;">You can do it while you cook, while you drive, while you put on makeup. The system is designed to take zero extra time from your schedule.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROGRAM TIERS -->
+    <section class="section" id="programs">
+      <div class="section-header">
+        <h2>Programs</h2>
+        <p>Small groups, real work scenarios, and a graduation date. Not a center. A coach.</p>
+      </div>
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-accent"></div>
+          <h3>Kids 4–12</h3>
+          <p>Max 4 kids. 60 minutes. Jolly Phonics + conversation — not memorisation.</p>
+          <ul>
+            <li>Option A: 2x per week</li>
+            <li>Option B: 3x per week — recommended for catch-up</li>
+            <li>Graduation: 1.5 years standard</li>
+          </ul>
+        </div>
+        <div class="card purple">
+          <div class="card-accent"></div>
+          <h3>Adults</h3>
+          <p>Max 4 people. 90 minutes. Meetings, presentations, calls — not textbook grammar.</p>
+          <ul>
+            <li>Option A: 2x per week</li>
+            <li>Option B: 3x per week — recommended if you need English for work</li>
+            <li>Graduation: 1 year intensive / 1.5 years standard</li>
+          </ul>
+        </div>
+        <div class="card gold">
+          <div class="card-accent"></div>
+          <h3>Corporate</h3>
+          <p>BlueTech model. Live sessions + monthly reporting + team dashboards.</p>
+          <ul>
+            <li>Custom curriculum for your workflows</li>
+            <li>Manager review packs</li>
+            <li>Graduation timeline per cohort</li>
+          </ul>
+        </div>
+      </div>
+      <div class="roi-block" style="margin-top:28px;">
+        <div class="grid-2">
+          <div>
+            <h3>Why not a center?</h3>
+            <p>Most people leave the average English center after 2 years in the same place. Centers charge 3–4 million VND/month for a fraction of what this program includes.</p>
+          </div>
+          <div>
+            <h3>Value anchor</h3>
+            <p>500,000 VND per week. Everything included: live classes, buddy system, monthly networking, AI-powered progress tracking, spaced repetition, accountability notifications.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROOF -->
+    <section class="section" id="proof">
+      <div class="section-header">
+        <h2>Proof</h2>
+        <p>Real outcomes from real classes. Not testimonials from a marketing team.</p>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-accent"></div>
+          <h3>Oktava corporate cohort</h3>
+          <p>First session: 90 minutes, English only, no notebooks, no phones. By the end, students were debating border policy and cultural differences with a native Canadian speaker — not because the English was perfect, but because the method removed the freeze.</p>
+          <ul>
+            <li>Live discussion with foreign guest</li>
+            <li>Follow-up questions trained, not scripted</li>
+            <li>Class rules enforced: no Vietnamese, no scripts, no phones</li>
+          </ul>
+        </div>
+        <div class="card purple">
+          <div class="card-accent"></div>
+          <h3>Class 10 — the follow-up breakthrough</h3>
+          <p>The main weakness was not vocabulary. It was running out of questions after 8 minutes. The fix: every answer contains 3 more questions. Mine them. That is how conversation stays alive.</p>
+          <ul>
+            <li>No Vietnamese — 90 minutes, full immersion</li>
+            <li>No notebooks — scripts die; active listening lives</li>
+            <li>No phones — translation apps = brain rot</li>
+          </ul>
+        </div>
+      </div>
+      <div class="grid-2" style="margin-top:18px;">
+        <div class="card gold">
+          <div class="card-accent"></div>
+          <p class="quote">“Even if you use language to express what you want to say and express it poorly, the other person will still understand what you mean. Natural communication is not as difficult as imagined.”</p>
+          <p class="quote-author">Student reflection — Oktava cohort</p>
+        </div>
+        <div class="card teal">
+          <div class="card-accent"></div>
+          <p class="quote">“The live discussion session with a foreigner provided a visual experience regarding reflexes and confidence in communication. I realized that learning a language is not just about vocabulary or grammar; it is about having the courage to communicate, the courage to make mistakes, and never ceasing to learn.”</p>
+          <p class="quote-author">Student reflection — Class 10, June 29, 2026</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ARTWORK / BRAND -->
+    <section class="section" id="artwork">
+      <div class="section-header">
+        <h2>Brand &amp; visuals</h2>
+        <p>The method has a face: phoenix rising, tiger voice, neighbour honesty.</p>
+      </div>
+      <div class="art-grid">
+        <div class="art-cell">
+          <img src="/isolated/phoenix-crest-clean.png" alt="Phoenix crest" loading="lazy">
+          <div class="art-label">Phoenix crest</div>
+        </div>
+        <div class="art-cell">
+          <img src="/isolated/tiger-portrait-clean.png" alt="Tiger portrait" loading="lazy">
+          <div class="art-label">Tiger Voice</div>
+        </div>
+        <div class="art-cell">
+          <img src="/assets/brand/phoenix-logo-main.png" alt="Phoenix logo" loading="lazy">
+          <div class="art-label">Phoenix logo</div>
+        </div>
+        <div class="art-cell">
+          <img src="/assets/brand/tigers-banner.png" alt="Tigers banner" loading="lazy">
+          <div class="art-label">Tigers banner</div>
+        </div>
+        <div class="art-cell">
+          <img src="/icons/badge-phoenix.svg" alt="Phoenix badge" loading="lazy">
+          <div class="art-label">Phoenix badge</div>
+        </div>
+        <div class="art-cell">
+          <img src="/icons/badge-tiger.svg" alt="Tiger badge" loading="lazy">
+          <div class="art-label">Tiger badge</div>
+        </div>
+        <div class="art-cell">
+          <img src="/icons/mode-voice.svg" alt="Voice mode" loading="lazy">
+          <div class="art-label">Voice mode</div>
+        </div>
+        <div class="art-cell">
+          <img src="/icons/mode-study.svg" alt="Study mode" loading="lazy">
+          <div class="art-label">Study mode</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section" id="contact">
+      <div class="section-header">
+        <h2>Request a demo</h2>
+        <p>Tell me about your team. I will reply within one business day.</p>
+      </div>
+      <div class="form">
+        <form onsubmit="event.preventDefault(); alert('Demo request received. We will contact you shortly.');">
+          <div class="row">
+            <div>
+              <label>Name</label>
+              <input type="text" placeholder="Your full name" required>
+            </div>
+            <div>
+              <label>Work email</label>
+              <input type="email" placeholder="name@company.com" required>
+            </div>
+          </div>
+          <div class="row">
+            <div>
+              <label>Company</label>
+              <input type="text" placeholder="Company name">
+            </div>
+            <div>
+              <label>Team size</label>
+              <select>
+                <option>10–50</option>
+                <option>50–200</option>
+                <option>200–1000</option>
+                <option>1000+</option>
+              </select>
+            </div>
+          </div>
+          <label>What do you want to improve?</label>
+          <textarea rows="4" placeholder="Meetings, presentations, client calls, onboarding..."></textarea>
+          <button class="btn btn-primary" type="submit">Request demo</button>
+        </form>
+      </div>
+    </section>
+  </div>
+
+  <footer class="pitch-footer">
+    © <span id="yr"></span> BlueTech English — Corporate English Programs. All rights reserved.
+  </footer>
+
+  <script>
+    document.getElementById('yr').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

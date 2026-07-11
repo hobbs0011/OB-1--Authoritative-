@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#0a0a12">
+  <meta name="description" content="BlueTech English — corporate English programs for teams in Vietnam. Practical business English for meetings, presentations, and cross-team communication.">
+  <meta property="og:title" content="BlueTech English | Corporate English Programs">
+  <meta property="og:description" content="Corporate English built for real workflows — meetings, negotiations, presentations, and cross-team communication. Small groups, real outcomes.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://net-pet-ai.mrmichaelhobbs123.workers.dev/corporate-pitch/">
+  <meta property="og:image" content="https://net-pet-ai.mrmichaelhobbs123.workers.dev/isolated/phoenix-crest-clean.png">
+  <link rel="canonical" href="https://net-pet-ai.mrmichaelhobbs123.workers.dev/corporate-pitch/">
+  <title>BlueTech English | Corporate English Programs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/portal.css">
+  <style>
+    :root {
+      --void: #0a0a12;
+      --card: rgba(22,22,35,0.85);
+      --purple: #a855f7;
+      --purple-glow: rgba(168,85,247,0.25);
+      --gold: #f59e0b;
+      --gold-glow: rgba(245,158,11,0.25);
+      --teal: #14b8a6;
+      --teal-glow: rgba(20,184,166,0.25);
+      --text: #f8fafc;
+      --white-80: rgba(248,250,252,0.8);
+      --dim: #94a3b8;
+      --border: rgba(255,255,255,0.08);
+    }
+    *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html {
+      background: var(--void);
+      scroll-snap-type: y mandatory;
+      overflow-y: scroll;
+      height: 100%;
+    }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--void);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── BACK BAR ─────────────────────────────────────────────────── */
+    #backBar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 9999;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      background: rgba(10,10,18,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    #backBar a {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: var(--dim);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    #backBar a:hover { color: var(--text); }
+    #backBar a.cta-nav {
+      color: var(--purple);
+      background: rgba(168,85,247,0.1);
+      border: 1px solid rgba(168,85,247,0.3);
+      padding: 5px 14px;
+      border-radius: 20px;
+    }
+    #slideCounter {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.7rem;
+      color: var(--dim);
+      letter-spacing: 0.1em;
+    }
+
+    /* ── SLIDE BASE ────────────────────────────────────────────────── */
+    .slide {
+      scroll-snap-align: start;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 64px 28px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+    .slide::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .slide-hero::before    { background: radial-gradient(ellipse at 60% 30%, rgba(168,85,247,0.2) 0%, transparent 60%), radial-gradient(ellipse at 20% 80%, rgba(245,158,11,0.12) 0%, transparent 55%); }
+    .slide-problem::before { background: radial-gradient(ellipse at 30% 50%, rgba(20,184,166,0.15) 0%, transparent 60%); }
+    .slide-method::before  { background: radial-gradient(ellipse at 70% 40%, rgba(245,158,11,0.18) 0%, transparent 55%); }
+    .slide-how::before     { background: radial-gradient(ellipse at 50% 60%, rgba(168,85,247,0.18) 0%, transparent 60%); }
+    .slide-proof::before   { background: radial-gradient(ellipse at 60% 50%, rgba(168,85,247,0.2) 0%, transparent 60%); }
+    .slide-programs::before{ background: radial-gradient(ellipse at 40% 60%, rgba(245,158,11,0.15) 0%, transparent 55%); }
+    .slide-contact::before { background: radial-gradient(ellipse at 50% 50%, rgba(20,184,166,0.15) 0%, transparent 60%); }
+
+    .slide > * { position: relative; z-index: 1; }
+
+    /* ── TYPOGRAPHY ────────────────────────────────────────────────── */
+    .label {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--dim);
+      margin-bottom: 12px;
+    }
+    .headline {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(1.6rem, 5vw, 2.6rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: 0.03em;
+      margin-bottom: 16px;
+    }
+    .headline.purple { background: linear-gradient(135deg, var(--purple), #d8b4fe); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .headline.gold   { background: linear-gradient(135deg, var(--gold), #fde68a); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .headline.teal   { background: linear-gradient(135deg, var(--teal), #5eead4); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .headline.mixed  { background: linear-gradient(135deg, var(--purple), var(--gold)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .body-text {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1.05rem;
+      line-height: 1.65;
+      color: var(--dim);
+      max-width: 600px;
+    }
+    .vi-note {
+      font-size: 0.88rem;
+      color: var(--gold);
+      margin-top: 10px;
+      opacity: 0.85;
+    }
+
+    /* ── ART ───────────────────────────────────────────────────────── */
+    .art {
+      width: 160px;
+      height: 160px;
+      object-fit: contain;
+      margin-bottom: 24px;
+      filter: drop-shadow(0 0 24px var(--purple-glow));
+    }
+    .art.tiger  { filter: drop-shadow(0 0 28px rgba(245,158,11,0.35)); width: 180px; height: 180px; }
+    .art.phoenix{ filter: drop-shadow(0 0 28px rgba(168,85,247,0.4)); }
+
+    /* ── GLASS CARD ────────────────────────────────────────────────── */
+    .glass {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 24px 28px;
+      width: 100%;
+      max-width: 600px;
+      margin-top: 16px;
+      text-align: left;
+    }
+    .glass.purple-border { border-color: rgba(168,85,247,0.3); box-shadow: 0 0 30px rgba(168,85,247,0.06); }
+    .glass.gold-border   { border-color: rgba(245,158,11,0.3); box-shadow: 0 0 30px rgba(245,158,11,0.06); }
+    .glass.teal-border   { border-color: rgba(20,184,166,0.3); box-shadow: 0 0 30px rgba(20,184,166,0.06); }
+
+    /* ── METHOD NUMBERS ────────────────────────────────────────────── */
+    .method-row {
+      display: flex;
+      gap: 20px;
+      margin-top: 24px;
+      width: 100%;
+      max-width: 500px;
+      justify-content: center;
+    }
+    .method-block {
+      flex: 1;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px 12px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .method-block.purple-b { border-color: rgba(168,85,247,0.35); }
+    .method-block.gold-b   { border-color: rgba(245,158,11,0.35); }
+    .method-num {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--gold);
+    }
+    .method-unit {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--dim);
+    }
+    .method-desc {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.9rem;
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    /* ── HOW IT WORKS ──────────────────────────────────────────────── */
+    .flow-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 24px 0;
+      width: 100%;
+      max-width: 420px;
+      justify-content: center;
+    }
+    .flow-node {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    .flow-icon {
+      width: 52px; height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      border: 1px solid var(--border);
+    }
+    .flow-icon.purple { background: rgba(168,85,247,0.15); border-color: rgba(168,85,247,0.35); }
+    .flow-icon.gold   { background: rgba(245,158,11,0.15); border-color: rgba(245,158,11,0.35); }
+    .flow-icon.teal   { background: rgba(20,184,166,0.15); border-color: rgba(20,184,166,0.35); }
+    .flow-label {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--dim);
+      text-transform: uppercase;
+    }
+    .flow-arrow { font-size: 1rem; color: var(--dim); opacity: 0.5; }
+
+    /* ── CTA BUTTON ────────────────────────────────────────────────── */
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 28px;
+      padding: 16px 32px;
+      background: linear-gradient(135deg, var(--purple), #9333ea);
+      color: #fff;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      border-radius: 12px;
+      text-decoration: none;
+      box-shadow: 0 4px 24px rgba(168,85,247,0.4);
+      transition: box-shadow 0.3s, transform 0.2s;
+    }
+    .cta-btn:hover { box-shadow: 0 6px 36px rgba(168,85,247,0.6); transform: translateY(-2px); }
+    .back-link {
+      display: block;
+      margin-top: 16px;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--dim);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--text); }
+
+    /* ── SCROLL INDICATOR ──────────────────────────────────────────── */
+    .scroll-hint {
+      position: absolute;
+      bottom: max(28px, env(safe-area-inset-bottom, 20px));
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      animation: bounce 2s infinite;
+      opacity: 0.4;
+      pointer-events: none;
+    }
+    .scroll-hint span {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--dim);
+    }
+    @keyframes bounce {
+      0%,100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* ── SECTIONS ──────────────────────────────────────────────────── */
+    .section {
+      padding: 96px 40px;
+      max-width: 1120px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .section-header h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      margin-bottom: 10px;
+    }
+    .section-header p {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1.05rem;
+      color: var(--dim);
+      max-width: 640px;
+      margin: 0 auto;
+      letter-spacing: 0.03em;
+    }
+
+    /* ── CARDS / GRIDS ─────────────────────────────────────────────── */
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    @media (max-width: 860px) { .grid-3, .grid-2 { grid-template-columns: 1fr; } }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 28px;
+      text-align: left;
+    }
+    .card h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      margin: 14px 0 8px;
+    }
+    .card p, .card li {
+      color: var(--white-80);
+      font-size: 0.95rem;
+      line-height: 1.55;
+    }
+    .card ul { padding-left: 18px; margin: 0; }
+    .card li + li { margin-top: 6px; }
+
+    /* ── PROOF BLOCK ───────────────────────────────────────────────── */
+    .roi-block {
+      background: linear-gradient(135deg, rgba(168,85,247,0.08), rgba(245,158,11,0.08));
+      border: 1px solid rgba(168,85,247,0.25);
+      border-radius: 24px;
+      padding: 36px;
+      text-align: left;
+    }
+    .roi-block h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      margin-bottom: 10px;
+    }
+
+    /* ── FORM ───────────────────────────────────────────────────────── */
+    .form {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 30px;
+      text-align: left;
+    }
+    .form input, .form select, .form textarea {
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      outline: none;
+      transition: border-color 0.25s, box-shadow 0.25s;
+      margin-bottom: 14px;
+    }
+    .form input:focus, .form select:focus, .form textarea:focus {
+      border-color: var(--purple);
+      box-shadow: 0 0 0 3px rgba(168,85,247,0.15);
+    }
+    .form label {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: var(--dim);
+      display: block;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+    }
+    .form .row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media (max-width: 700px) { .form .row { grid-template-columns: 1fr; } }
+
+    /* ── QUOTE ─────────────────────────────────────────────────────── */
+    .quote {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1.15rem;
+      color: var(--white-80);
+      line-height: 1.55;
+    }
+    .quote-author {
+      margin-top: 10px;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.04em;
+    }
+
+    /* ── FOOTER ────────────────────────────────────────────────────── */
+    .pitch-footer {
+      text-align: center;
+      padding: 40px 24px 64px;
+      color: var(--dim);
+      font-family: 'Rajdhani', sans-serif;
+      letter-spacing: 0.04em;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── COUNTER ───────────────────────────────────────────────────── */
+    #slideCounter {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.7rem;
+      color: var(--dim);
+      letter-spacing: 0.1em;
+    }
+
+    @media (max-width: 720px) {
+      .section { padding: 72px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- FIXED TOP BAR -->
+  <div id="backBar">
+    <a href="/mai-tram-portal.html">← Portal</a>
+    <span id="slideCounter">1 / 9</span>
+    <a href="/magic-chat?studentId=mai-tram-bluetech" class="cta-nav">🗣️ Talk to OBI</a>
+  </div>
+
+  <!-- ── SLIDE 1: HERO ─────────────────────────────────────────── -->
+  <section class="slide slide-hero" id="s1">
+    <div class="label">BLUETECH ENGLISH — CORPORATE PROGRAMS</div>
+    <img src="/isolated/phoenix-neon-clean.png" alt="NET Phoenix" class="art phoenix"
+         onerror="this.src='/isolated/phoenix-crest-clean.png'">
+    <h1 class="headline mixed">Your English is already<br>inside you.</h1>
+    <p class="body-text">The real block is not grammar. It's speaking under pressure — meetings, calls, presentations — without freezing. This method removes the fear first, then builds the skill.</p>
+    <div class="scroll-hint">
+      <span>scroll</span>
+      <svg width="16" height="10" viewBox="0 0 16 10"><path d="M1 1l7 7 7-7" stroke="#94a3b8" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+    </div>
+  </section>
+
+  <!-- ── SLIDE 2: THE PROBLEM ──────────────────────────────────── -->
+  <section class="slide slide-problem" id="s2">
+    <div class="label">The real problem</div>
+    <h2 class="headline teal">It is not vocabulary.<br>It is not grammar.</h2>
+    <div class="glass teal-border" style="max-width:600px;width:100%;">
+      <p style="font-family:'Rajdhani',sans-serif;font-size:1rem;color:var(--white-80);line-height:1.6;">
+        “The real problem is something crammed into your head and heart ever since you were taught how to write and speak Vietnamese: mistakes are bad, and the person who made the mistake is bad. The fear of making mistakes, losing face — that is your biggest enemy.”
+      </p>
+      <p style="font-family:'Rajdhani',sans-serif;font-size:0.95rem;color:var(--dim);line-height:1.6;margin-top:10px;">
+        Most programs teach grammar. You already know grammar. You freeze because you have never had a safe place to speak every day. The method below is built to fix that — not to add more rules, but to remove the barrier before you even open your mouth.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── SLIDE 3: THE METHOD ───────────────────────────────────── -->
+  <section class="slide slide-method" id="s3">
+    <div class="label">The method</div>
+    <h2 class="headline gold">Six principles.<br>One daily habit.</h2>
+    <div class="grid-3" style="width:100%;max-width:900px;">
+      <div class="card teal">
+        <div class="card-accent" style="height:3px;border-radius:3px 3px 0 0;background:var(--teal);"></div>
+        <h3>KISS</h3>
+        <p>Keep it simple, stupid. Broken English that communicates beats perfect grammar that freezes. Get to the point. Directly. Even if it is broken.</p>
+      </div>
+      <div class="card purple">
+        <div class="card-accent" style="height:3px;border-radius:3px 3px 0 0;background:var(--purple);"></div>
+        <h3>Two brains</h3>
+        <p>Your Vietnamese brain is strong. Your English brain is the one you are trying to build. If you bridge them, you handicap yourself. You cannot learn English while thinking in Vietnamese.</p>
+      </div>
+      <div class="card gold">
+        <div class="card-accent" style="height:3px;border-radius:3px 3px 0 0;background:var(--gold);"></div>
+        <h3>Mistakes are guideposts</h3>
+        <p>Mistakes are good because they show you: this is not the right way. Then this must be. Laugh at yourself. Do not take yourself so seriously.</p>
+      </div>
+    </div>
+    <div class="grid-3" style="width:100%;max-width:900px;margin-top:18px;">
+      <div class="card" style="border-color:rgba(34,197,94,0.35);">
+        <div class="card-accent" style="height:3px;border-radius:3px 3px 0 0;background:var(--success,#22c55e);"></div>
+        <h3>Bruce Lee vocabulary</h3>
+        <p>It is not about knowing 10,000 words. It is about knowing 500–1,000 words and using each in 10 situations. That makes you a dynamic speaker.</p>
+      </div>
+      <div class="card purple">
+        <div class="card-accent" style="height:3px;border-radius:3px 3px 0 0;background:var(--purple);"></div>
+        <h3>60% comprehensible input</h3>
+        <p>Listen to material you understand at least 60% of. Below that, switch to easier content or English subtitles. Vietnamese subtitles are forbidden — same two-brain problem.</p>
+      </div>
+      <div class="card gold">
+        <div class="card-accent" style="height:3px;border-radius:3px 3px 0 0;background:var(--gold);"></div>
+        <h3>WWWWH: keep it going</h3>
+        <p>Ask Who, What, Where, When, How, Why — especially Why. When you find why someone does something, you can talk for hours. The weakest skill is not answering; it is not following up.</p>
+      </div>
+    </div>
+    <div class="roi-block" style="max-width:900px;margin-top:28px;">
+      <div class="grid-2">
+        <div>
+          <h3>The three class rules</h3>
+          <p><strong>1.</strong> No Vietnamese — not even one word. If you are thinking in Vietnamese, you are freezing. 90 minutes. English only.</p>
+          <p style="margin-top:8px;"><strong>2.</strong> No notebooks, no scripts. If you wrote it down, you are not listening. It is a crutch.</p>
+          <p style="margin-top:8px;"><strong>3.</strong> No phones. Translation apps and TikTok kill active listening. Leave it outside. The only person allowed to translate is the teacher, and only after 3 attempts from different angles.</p>
+        </div>
+        <div>
+          <h3>Daily habit: 45/15</h3>
+          <p>45 minutes of listening to content you enjoy — YouTube, podcasts, TV — plus 15 minutes speaking. No extra commute. No textbook. Just habit.</p>
+          <p style="margin-top:8px;">You can do it while you cook, while you drive, while you put on makeup. The system is designed to take zero extra time from your schedule.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SLIDE 4: PROOF ────────────────────────────────────────── -->
+  <section class="slide slide-proof" id="s4">
+    <div class="label">Proof</div>
+    <h2 class="headline purple">Real outcomes.<br>Not marketing copy.</h2>
+    <div class="grid-2" style="width:100%;max-width:900px;">
+      <div class="card">
+        <div class="card-accent" style="height:3px;border-radius:3px 3px 0 0;background:var(--purple);"></div>
+        <h3>Oktava corporate cohort</h3>
+        <p>First session: 90 minutes, English only, no notebooks, no phones. By the end, students were debating border policy and cultural differences with a native Canadian speaker — not because the English was perfect, but because the method removed the freeze.</p>
+        <ul>
+          <li>Live discussion with foreign guest</li>
+          <li>Follow-up questions trained, not scripted</li>
+          <li>Class rules enforced: no Vietnamese, no scripts, no phones</li>
+        </ul>
+      </div>
+      <div class="card purple">
+        <div class="card-accent" style="height:3px;border-radius:3px 3px 0 0;background:var(--purple);"></div>
+        <h3>Class 10 — the follow-up breakthrough</h3>
+        <p>The main weakness was not vocabulary. It was running out of questions after 8 minutes. The fix: every answer contains 3 more questions. Mine them. That is how conversation stays alive.</p>
+        <ul>
+          <li>No Vietnamese — 90 minutes, full immersion</li>
+          <li>No notebooks — scripts die; active listening lives</li>
+          <li>No phones — translation apps = brain rot</li>
+        </ul>
+      </div>
+    </div>
+    <div class="grid-2" style="width:100%;max-width:900px;margin-top:18px;">
+      <div class="card gold">
+        <div class="card-accent" style="height:3px;border-radius:3px 3px 0 0;background:var(--gold);"></div>
+        <p class="quote">“Even if you use language to express what you want to say and express it poorly, the other person will still understand what you mean. Natural communication is not as difficult as imagined.”</p>
+        <p class="quote-author">Student reflection — Oktava cohort</p>
+      </div>
+      <div class="card teal">
+        <div class="card-accent" style="height:3px;border-radius:3px 3px 0 0;background:var(--teal);"></div>
+        <p class="quote">“The live discussion session with a foreigner provided a visual experience regarding reflexes and confidence in communication. I realized that learning a language is not just about vocabulary or grammar; it is about having the courage to communicate, the courage to make mistakes, and never ceasing to learn.”</p>
+        <p class="quote-author">Student reflection — Class 10, June 29, 2026</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SLIDE 5: ARTWORK / BRAND ──────────────────────────────── -->
+  <section class="slide" id="s5">
+    <div class="label">Brand &amp; visuals</div>
+    <h2 class="headline teal">The method has a face.</h2>
+    <div class="grid-4" style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;width:100%;max-width:960px;margin-top:24px;">
+      <div class="card" style="text-align:center;">
+        <img src="/isolated/phoenix-crest-clean.png" alt="Phoenix crest" style="width:100%;height:120px;object-fit:contain;border-radius:10px;" onerror="this.style.display='none'">
+        <div style="font-family:'Rajdhani',sans-serif;color:var(--dim);font-weight:600;letter-spacing:0.05em;text-transform:uppercase;margin-top:8px;font-size:0.75rem;">Phoenix crest</div>
+      </div>
+      <div class="card" style="text-align:center;">
+        <img src="/isolated/tiger-portrait-clean.png" alt="Tiger portrait" style="width:100%;height:120px;object-fit:contain;border-radius:10px;" onerror="this.style.display='none'">
+        <div style="font-family:'Rajdhani',sans-serif;color:var(--dim);font-weight:600;letter-spacing:0.05em;text-transform:uppercase;margin-top:8px;font-size:0.75rem;">Tiger Voice</div>
+      </div>
+      <div class="card" style="text-align:center;">
+        <img src="/assets/brand/phoenix-logo-main.png" alt="Phoenix logo" style="width:100%;height:120px;object-fit:contain;border-radius:10px;" onerror="this.style.display='none'">
+        <div style="font-family:'Rajdhani',sans-serif;color:var(--dim);font-weight:600;letter-spacing:0.05em;text-transform:uppercase;margin-top:8px;font-size:0.75rem;">Phoenix logo</div>
+      </div>
+      <div class="card" style="text-align:center;">
+        <img src="/assets/brand/tigers-banner.png" alt="Tigers banner" style="width:100%;height:120px;object-fit:contain;border-radius:10px;" onerror="this.style.display='none'">
+        <div style="font-family:'Rajdhani',sans-serif;color:var(--dim);font-weight:600;letter-spacing:0.05em;text-transform:uppercase;margin-top:8px;font-size:0.75rem;">Tigers banner</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SLIDE 6: PROGRAM TIERS ────────────────────────────────── -->
+  <section class="slide slide-programs" id="s6">
+    <div class="label">Programs</div>
+    <h2 class="headline gold">Small groups.<br>Real work. Real outcomes.</h2>
+    <div class="grid-3" style="width:100%;max-width:900px;">
+      <div class="card">
+        <div class="card-accent" style="height:3px;border-radius:3px 3px 0 0;background:var(--gold);"></div>
+        <h3>Kids 4–12</h3>
+        <p>Max 4 kids. 60 minutes. Jolly Phonics + conversation — not memorisation.</p>
+        <ul>
+          <li>Option A: 2x per week</li>
+          <li>Option B: 3x per week — recommended for catch-up</li>
+          <li>Graduation: 1.5 years standard</li>
+        </ul>
+      </div>
+      <div class="card purple">
+        <div class="card-accent" style="height:3px;border-radius:3px 3px 0 0;background:var(--purple);"></div>
+        <h3>Adults</h3>
+        <p>Max 4 people. 90 minutes. Meetings, presentations, calls — not textbook grammar.</p>
+        <ul>
+          <li>Option A: 2x per week</li>
+          <li>Option B: 3x per week — recommended if you need English for work</li>
+          <li>Graduation: 1 year intensive / 1.5 years standard</li>
+        </ul>
+      </div>
+      <div class="card teal">
+        <div class="card-accent" style="height:3px;border-radius:3px 3px 0 0;background:var(--teal);"></div>
+        <h3>Corporate</h3>
+        <p>BlueTech model. Live sessions + monthly reporting + team dashboards.</p>
+        <ul>
+          <li>Custom curriculum for your workflows</li>
+          <li>Manager review packs</li>
+          <li>Graduation timeline per cohort</li>
+        </ul>
+      </div>
+    </div>
+    <div class="roi-block" style="max-width:900px;margin-top:28px;">
+      <div class="grid-2">
+        <div>
+          <h3>Why not a center?</h3>
+          <p>Most people leave the average English center after 2 years in the same place. Centers charge 3–4 million VND/month for a fraction of what this program includes.</p>
+        </div>
+        <div>
+          <h3>Value anchor</h3>
+          <p>500,000 VND per week. Everything included: live classes, buddy system, monthly networking, AI-powered progress tracking, spaced repetition, accountability notifications.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SLIDE 7: TRUST / STATS ────────────────────────────────── -->
+  <section class="slide" id="s7">
+    <div class="label">Trust &amp; reach</div>
+    <h2 class="headline purple">Built for teams that ship.</h2>
+    <div class="stats-row" style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;max-width:960px;margin:0 auto;width:100%;">
+      <div class="card" style="text-align:center;">
+        <div style="font-family:'Orbitron',sans-serif;font-size:1.6rem;font-weight:700;letter-spacing:0.04em;">15+</div>
+        <div style="font-family:'Rajdhani',sans-serif;color:var(--dim);font-weight:600;letter-spacing:0.06em;text-transform:uppercase;margin-top:6px;font-size:0.82rem;">Years teaching</div>
+      </div>
+      <div class="card" style="text-align:center;">
+        <div style="font-family:'Orbitron',sans-serif;font-size:1.6rem;font-weight:700;letter-spacing:0.04em;">4–6</div>
+        <div style="font-family:'Rajdhani',sans-serif;color:var(--dim);font-weight:600;letter-spacing:0.06em;text-transform:uppercase;margin-top:6px;font-size:0.82rem;">Max class size</div>
+      </div>
+      <div class="card" style="text-align:center;">
+        <div style="font-family:'Orbitron',sans-serif;font-size:1.6rem;font-weight:700;letter-spacing:0.04em;">1–2</div>
+        <div style="font-family:'Rajdhani',sans-serif;color:var(--dim);font-weight:600;letter-spacing:0.06em;text-transform:uppercase;margin-top:6px;font-size:0.82rem;">Years to graduation</div>
+      </div>
+      <div class="card" style="text-align:center;">
+        <div style="font-family:'Orbitron',sans-serif;font-size:1.6rem;font-weight:700;letter-spacing:0.04em;">Lakeview</div>
+        <div style="font-family:'Rajdhani',sans-serif;color:var(--dim);font-weight:600;letter-spacing:0.06em;text-transform:uppercase;margin-top:6px;font-size:0.82rem;">Saigon-based</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SLIDE 8: CONTACT / CTA ─────────────────────────────────── -->
+  <section class="slide slide-contact" id="s8">
+    <div class="label">Day 1 starts now</div>
+    <h2 class="headline mixed">Request a demo</h2>
+    <p class="body-text">Tell me about your team. I will reply within one business day.</p>
+    <div class="form" style="max-width:600px;width:100%;">
+      <form onsubmit="event.preventDefault(); alert('Demo request received. We will contact you shortly.');">
+        <div class="row">
+          <div>
+            <label>Name</label>
+            <input type="text" placeholder="Your full name" required>
+          </div>
+          <div>
+            <label>Work email</label>
+            <input type="email" placeholder="name@company.com" required>
+          </div>
+        </div>
+        <div class="row">
+          <div>
+            <label>Company</label>
+            <input type="text" placeholder="Company name">
+          </div>
+          <div>
+            <label>Team size</label>
+            <select>
+              <option>10–50</option>
+              <option>50–200</option>
+              <option>200–1000</option>
+              <option>1000+</option>
+            </select>
+          </div>
+        </div>
+        <label>What do you want to improve?</label>
+        <textarea rows="4" placeholder="Meetings, presentations, client calls, onboarding..."></textarea>
+        <button class="cta-btn" type="submit">Request demo</button>
+      </form>
+    </div>
+  </section>
+
+  <footer class="pitch-footer">
+    © <span id="yr"></span> BlueTech English — Corporate English Programs. All rights reserved.
+  </footer>
+
+  <script>
+    document.getElementById('yr').textContent = new Date().getFullYear();
+    const slides = document.querySelectorAll('.slide');
+    const counter = document.getElementById('slideCounter');
+    const total = slides.length;
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const idx = Array.from(slides).indexOf(e.target) + 1;
+          counter.textContent = idx + ' / ' + total;
+        }
+      });
+    }, { threshold: 0.5 });
+    slides.forEach(s => obs.observe(s));
+  </script>
+</body>
+</html>

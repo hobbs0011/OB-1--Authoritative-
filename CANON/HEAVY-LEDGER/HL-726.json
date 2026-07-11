@@ -1,0 +1,15 @@
+﻿{
+    "hl_id":  "HL-726",
+    "session_id":  "sov100-roman-run151",
+    "rrl_source":  "D:\\OB-1-CANONICAL\\RRL\\RRL-151.txt",
+    "char_count":  0,
+    "byte_count":  0,
+    "soul_hash":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "dna_hash":  "DNA_GAP",
+    "dna_blueprint_count":  0,
+    "merkle_parent":  "E02A80BFE504D52334790277A6CC0D1D71658A8F2A34F9E43FB48AD01B012902",
+    "merkle_hash":  "F0443DBBC75209C8C23B4EDE8105479417844127E8D6C224174FF01EDFCA8963",
+    "sealed_at":  "2026-07-11T19:29:46.4194667+07:00",
+    "sov100":  true,
+    "run":  151
+}
