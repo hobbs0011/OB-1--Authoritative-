@@ -19,7 +19,6 @@ Execute a true Roman forced march across all 6 pipeline stages without stopping.
 | `--lens` | `SOUL\|CONFIG\|GAP\|FLAG\|all` | `all` | Filter type to hunt |
 | `--dry-run` | flag | - | Report actions only, no writes |
 | `--supersaiyan` | flag | - | Parallel scout sweep |
-| `--pcc-deploy` | flag | - | FORBIDDEN — no Cloudflare deploy paths |
 | `--merkle-refresh` | flag | - | Rebuild merkle chain for missing runs |
 
 ## March Profile

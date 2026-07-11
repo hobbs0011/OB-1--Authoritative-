@@ -1,9 +1,8 @@
 ﻿<#
-  forcemarch.ps1 -- 6-Stage Roman Legion Forced March
-  TIER: T1 (Workhorse Implementation)
-  MODEL: kilo-auto/free
-  TRAILS: PheTrails MANDATORY -- no gaps without breadcrumbs
-  CLOUD: Local filesystem only. No Cloudflare. No external deploy.
+   forcemarch.ps1 -- 6-Stage Roman Legion Forced March
+   MODEL: kilo-auto/free
+   TRAILS: PheTrails MANDATORY -- no gaps without breadcrumbs
+   CLOUD: Local filesystem only. No Cloudflare. No external deploy.
 #>
 param(
     [string]$Zone,
