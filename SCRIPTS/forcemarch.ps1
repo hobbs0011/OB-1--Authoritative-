@@ -169,12 +169,6 @@ if (-not $DryRun) {
     $summary | ConvertTo-Json -Depth 4 | Set-Content $trailPath -Encoding UTF8
     Invoke-Report "STAGE-II" "PheTrail written: $trailPath" "OK"
 }
-    $pherDir = Join-Path $repoRoot "CANON\PHEROMONES"
-    if (-not (Test-Path $pherDir)) { New-Item -ItemType Directory -Path $pherDir -Force | Out-Null }
-    $trailPath = Join-Path $pherDir "PheTrail-run$currentRunPad.json"
-    $summary | ConvertTo-Json -Depth 4 | Set-Content $trailPath -Encoding UTF8
-    Invoke-Report "STAGE-II" "PheTrail written: $trailPath" "OK"
-}
 
 # Stage III — RRL RECONSTRUCTION
 Invoke-Report "STAGE-III" "RRL reconstruction + DNA extraction"
@@ -229,11 +223,13 @@ if ($health) { Invoke-Report "STAGE-VI" "Health sweep PASS" "OK" }
 else         { Invoke-Report "STAGE-VI" "Health sweep NOTES" "WARN" }
 
 # Final phetrail
-$summary = [ordered]@{
-    missingRuns = $missingRuns.Count
-    legionsOK = $health
-    runNumber = $currentRun
-    completedAt = (Get-Date -Format "o")
+if (-not $DryRun) {
+    $summary = [ordered]@{
+        missingRuns = $missingRuns.Count
+        legionsOK = $health
+        runNumber = $currentRun
+        completedAt = (Get-Date -Format "o")
+    }
+    Invoke-PheTrail -Stage "forcemarch-complete" -Payload $summary
 }
-Invoke-PheTrail -Stage "forcemarch-complete" -Payload $summary
 Write-Host "FORCE MARCH COMPLETE — Run $currentRunPad accounted" -ForegroundColor Green
