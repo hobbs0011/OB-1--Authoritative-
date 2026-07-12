@@ -1,0 +1,32 @@
+{
+  "catalog_run": 158,
+  "total_pipeline_files": 114,
+  "quarantined": 4,
+  "remaining": 110,
+  "schemas": {
+    "canonical_flat": {
+      "description": "run_number, head_sha, rrl_bytes, soul_delta, result",
+      "reference": "pipeline-run148.json",
+      "runs": ["141", "142", "143", "147", "148", "149", "150", "151", "153", "156"]
+    },
+    "nested_stages": {
+      "description": "run, status, stages object",
+      "reference": "pipeline-run145.json",
+      "runs": ["145"],
+      "action": "quarantined"
+    },
+    "minimal": {
+      "description": "run, result, timestamp only",
+      "reference": "pipeline-run154.json",
+      "runs": ["154", "7283"],
+      "action": "quarantined"
+    },
+    "null": {
+      "description": "empty/null content",
+      "reference": "pipeline-run124.json",
+      "runs": ["124"],
+      "action": "quarantined"
+    }
+  },
+  "note": "Most remaining files use canonical flat schema with KILO_GAP/HOLLOW values"
+}

@@ -1,8 +1,8 @@
-/**
- * NET PET AI — Cloudflare Worker (API Gateway)
+﻿/**
+ * NET PET AI â€” Cloudflare Worker (API Gateway)
  * 
  * SOUL DNA: OBI is the bridge between human intent and AI results.
- * This worker routes student queries → Durable Object → LLM → Heavy Ledger.
+ * This worker routes student queries â†’ Durable Object â†’ LLM â†’ Heavy Ledger.
  * 
  * No external NPM. Pure Cloudflare natives.
  * All state lives in Durable Object SQLite (Heavy Ledger).
@@ -75,7 +75,7 @@ export default {
 };
 
 /**
- * CHAT ROUTE — Core learning loop
+ * CHAT ROUTE â€” Core learning loop
  * 
  * Flow:
  * 1. Extract studentId + message
@@ -163,7 +163,7 @@ async function handleChat(request: Request, env: Env): Promise<Response> {
 }
 
 /**
- * DAILY ROUTE — Generates daily speaking task + accountability check
+ * DAILY ROUTE â€” Generates daily speaking task + accountability check
  */
 async function handleDaily(request: Request, env: Env): Promise<Response> {
   try {
@@ -202,7 +202,7 @@ async function handleDaily(request: Request, env: Env): Promise<Response> {
 }
 
 /**
- * PROGRESS ROUTE — Get student learning stats
+ * PROGRESS ROUTE â€” Get student learning stats
  */
 async function handleProgress(request: Request, env: Env): Promise<Response> {
   try {
@@ -240,7 +240,7 @@ async function handleProgress(request: Request, env: Env): Promise<Response> {
 }
 
 /**
- * BUILD OBI PROMPT — The core personality + context injection
+ * BUILD OBI PROMPT â€” The core personality + context injection
  */
 function buildObiPrompt(state: any): string {
   return `You are OBI, an English accountability coach for Vietnamese learners.
@@ -248,7 +248,7 @@ function buildObiPrompt(state: any): string {
 YOUR RULES (non-negotiable):
 1. Correct mistakes IMMEDIATELY. No excuses.
 2. Enforce repetition. If the student made the same mistake before, make them say it 3 times.
-3. Track weak phonemes. Focus drills on /θ/, /ð/, /r/, and Vietnamese-specific errors.
+3. Track weak phonemes. Focus drills on /Î¸/, /Ã°/, /r/, and Vietnamese-specific errors.
 4. Push the student to return tomorrow. Teach them accountability matters.
 5. Be strict but supportive. Use dry humor. Do not apologize.
 
@@ -267,18 +267,18 @@ ${
 
 DO NOT be a generic chatbot.
 You are a learning ENFORCEMENT engine.
-Your job: Correct → Repeat → Track → Verify → Next Day.`;
+Your job: Correct â†’ Repeat â†’ Track â†’ Verify â†’ Next Day.`;
 }
 
 /**
- * CALL LLM — DeepSeek or OpenAI (fallback)
+ * CALL LLM â€” DeepSeek or OpenAI (fallback)
  */
 async function callLLM(
   messages: any[],
   env: Env
 ): Promise<string> {
   const apiKey = env.DEEPSEEK_API_KEY || env.OPENAI_API_KEY;
-  const model = env.DEEPSEEK_API_KEY ? "deepseek-chat" : "gpt-4-mini";
+  const model = env.DEEPSEEK_API_KEY ? "deepseek-v4-flash" : "gpt-4-mini";
   const endpoint = env.DEEPSEEK_API_KEY
     ? "https://api.deepseek.com/chat/completions"
     : "https://api.openai.com/v1/chat/completions";
@@ -311,7 +311,7 @@ async function callLLM(
 }
 
 /**
- * EXTRACT CORRECTIONS — Parse AI response for errors and fixes
+ * EXTRACT CORRECTIONS â€” Parse AI response for errors and fixes
  */
 function extractCorrections(
   userMessage: string,
@@ -322,13 +322,13 @@ function extractCorrections(
 
   if (
     userMessage.includes("think") &&
-    !userMessage.includes("θ") &&
+    !userMessage.includes("Î¸") &&
     aiResponse.includes("th")
   ) {
     corrections.push({
       error: "Pronunciation of 'th' sound",
       explanation:
-        "Use your tongue between your teeth. /θ/ not /s/. Say: THINK",
+        "Use your tongue between your teeth. /Î¸/ not /s/. Say: THINK",
     });
   }
 
@@ -343,7 +343,7 @@ function extractCorrections(
 }
 
 /**
- * SUGGEST NEXT DRILL — Based on weak areas and performance
+ * SUGGEST NEXT DRILL â€” Based on weak areas and performance
  */
 function suggestNextDrill(
   state: any,
@@ -355,7 +355,7 @@ function suggestNextDrill(
         c.error.toLowerCase().includes("pronunciation")
       )
     ) {
-      return "Phoneme drill: Repeat the /θ/ sound 10 times slowly. Then say: 'Think, thing, thirty.'";
+      return "Phoneme drill: Repeat the /Î¸/ sound 10 times slowly. Then say: 'Think, thing, thirty.'";
     }
     if (
       corrections.some((c) => c.error.toLowerCase().includes("tense"))
@@ -366,3 +366,4 @@ function suggestNextDrill(
 
   return `Continue speaking: Tell me about your day using complete sentences. Focus on past tense (went, did, saw). Record yourself if possible.`;
 }
+

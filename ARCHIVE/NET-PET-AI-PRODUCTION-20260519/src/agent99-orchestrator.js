@@ -1,4 +1,4 @@
-// src/agent99-orchestrator.js — OBI v2 Agent 99 Unified Orchestration
+﻿// src/agent99-orchestrator.js â€” OBI v2 Agent 99 Unified Orchestration
 // Implements: Obi (Stabilizer) + Anakin (Optimizer) + Auditor (Ledger Brain)
 // All three roles execute as ONE AI call with structured JSON reasoning split
 // Authority: BIBLE-CH26 BLOCK 7 + GOVERNING LAWS L54-L60
@@ -111,7 +111,7 @@ export class Agent99Orchestrator {
           Authorization: `Bearer ${this.deepseekApiKey}`,
         },
         body: JSON.stringify({
-          model: "deepseek-chat",
+          model: "deepseek-v4-flash",
           messages: [
             { role: "system", content: unifiedSystemPrompt },
             reasoningRequest,
@@ -161,7 +161,7 @@ export class Agent99Orchestrator {
    * This is injected ONCE per request, not per-role
    */
   buildUnifiedSystemPrompt(contextLayers) {
-    return `You are OBI (Agent 99) — a unified learning orchestration engine with three internal reasoning modes.
+    return `You are OBI (Agent 99) â€” a unified learning orchestration engine with three internal reasoning modes.
 
 ## IDENTITY
 You are a continuity-based learning engine, not a chatbot.
@@ -200,7 +200,7 @@ PHASE 4 PRESSURE (Accountability): ${contextLayers.STUDENT_LAYER.accountabilityN
 Respond with ONLY valid JSON (no markdown, no code blocks):
 
 {
-  "obi_response": "Student-facing message here (includes Humor→Hammer→Mission→Pressure phases)",
+  "obi_response": "Student-facing message here (includes Humorâ†’Hammerâ†’Missionâ†’Pressure phases)",
   "obi_tone_phase": "which phase is dominant? (HUMOR|HAMMER|MISSION|PRESSURE)",
   "anakin_optimization": {
     "identified_mistakes": ["mistake1", "mistake2"],
@@ -220,7 +220,7 @@ Respond with ONLY valid JSON (no markdown, no code blocks):
 }
 
 ## HARD RULES
-1. If response not tied to last session, student progress, or Soul DNA → request context instead
+1. If response not tied to last session, student progress, or Soul DNA â†’ request context instead
 2. Every output must lead to next action (no "finished lesson" state)
 3. Preserve classroom context and emotional tone (never generic tutoring)
 4. If TigerScore < 40: activate HAMMER phase heavily, trigger external alerts
@@ -333,3 +333,4 @@ Validate all three anchors. Output JSON only.`;
 }
 
 export default Agent99Orchestrator;
+

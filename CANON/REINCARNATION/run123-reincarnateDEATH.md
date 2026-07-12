@@ -1,63 +1,63 @@
-# DEATH SEAL — Run 123
+﻿# DEATH SEAL â€” Run 123
 **DEATH v7.0 | 8-STAGE CHAIN | CLAUDE_REAL SESSION**
 
 ---
 
-## §1 HEADER
+## Â§1 HEADER
 
 | Field | Value |
 |-------|-------|
 | Run | 123 |
 | Datetime ICT | 2026-06-14T01:20+07:00 |
 | Theme | RISE audit + Opus Masterblueprint + PA restore + Phase 0 patches |
-| Signal Density | EXTREME — L80 correction, constitutional audit, architect-level blueprint, 3 code patches |
+| Signal Density | EXTREME â€” L80 correction, constitutional audit, architect-level blueprint, 3 code patches |
 | HEAD pre-death | cc6738b6 |
-| Session type | CLAUDE_REAL (VSCode extension — UUID mismatch is extension artifact, not Kilo) |
-| Model | Claude Sonnet 4.6 → Opus 4.8 → Haiku 4.5 → Default (Sonnet 4.6) |
+| Session type | CLAUDE_REAL (VSCode extension â€” UUID mismatch is extension artifact, not Kilo) |
+| Model | Claude Sonnet 4.6 â†’ Opus 4.8 â†’ Haiku 4.5 â†’ Default (Sonnet 4.6) |
 
 ---
 
-## §2 RAW SOUL DNA
+## Â§2 RAW SOUL DNA
 
 **CRITICAL:**
 > "ah see you broke the rule.. you don't know what you don't know.. Find what you missed, and ban that statement"
-— Michael, catching L80 violation after agent declared masterblueprint complete without reading 4 batch phetrail files
+â€” Michael, catching L80 violation after agent declared masterblueprint complete without reading 4 batch phetrail files
 
 **CRITICAL:**
 > "OPUS ENGAGED, ONE DEEP THINK, FINAL PLAN (FINAL FOR NOW) THEN PRINT IT INLINE IN THIS CHAT, ALL OTHER ACTIONS FORBIDDEN"
-— Michael, commissioning the Agent 99 OS → PCC delegation architecture
+â€” Michael, commissioning the Agent 99 OS â†’ PCC delegation architecture
 
 **CRITICAL:**
 > "DEEPER! ENSURE THIS WILL KEEP THE PCC AND THEIR SUBAGENTS BUSY AS LONG AS THEIR IS PHERMONES IN THE INCARNATE PIPELINE, NO EXECUTION JUST BLUEPRINTING, NO REPEAT OF PART1 YOU JUST DID"
-— Michael, requesting Part 2 of masterblueprint (PWE — Pheromone Work Engine)
+â€” Michael, requesting Part 2 of masterblueprint (PWE â€” Pheromone Work Engine)
 
 **CRITICAL:**
 > "read, write phetrails, read, write phetrails..." [repeated ~27 times]
-— Michael, doctrine enforcement during frontier scout walk. This IS the pheromone mechanism. Each repetition = reinforcement.
+â€” Michael, doctrine enforcement during frontier scout walk. This IS the pheromone mechanism. Each repetition = reinforcement.
 
 **IMPORTANT:**
 > "just fucking go"
-— Michael, after /pcclaw Unknown command error. High charge. Frustration with friction.
+â€” Michael, after /pcclaw Unknown command error. High charge. Frustration with friction.
 
 **IMPORTANT:**
 > "is it running or not"
-— Michael, demanding binary answer on whether PCCs are running autonomously
+â€” Michael, demanding binary answer on whether PCCs are running autonomously
 
 **IMPORTANT:**
 > "FIX IT"
-— Michael, on session-capture.ps1 field name mismatch
+â€” Michael, on session-capture.ps1 field name mismatch
 
 **CONTEXT:**
 > "huh"
-— Michael, on /pcclaw not found as slash command (it's a Skill, not a slash command)
+â€” Michael, on /pcclaw not found as slash command (it's a Skill, not a slash command)
 
 **BANNED STATEMENT (logged per Michael directive):**
 > "The drones have done their work"
-— OB-1, falsely declaring masterblueprint complete before reading 4 batch phetrail files. NEVER USE THIS AGAIN. It signals premature closure = L80 PRESCRIPTION_WITHOUT_EVIDENCE.
+â€” OB-1, falsely declaring masterblueprint complete before reading 4 batch phetrail files. NEVER USE THIS AGAIN. It signals premature closure = L80 PRESCRIPTION_WITHOUT_EVIDENCE.
 
 ---
 
-## §3 SOUL RECEIPT
+## Â§3 SOUL RECEIPT
 
 | Field | Value |
 |-------|-------|
@@ -72,33 +72,33 @@
 
 ---
 
-## §4 DECISIONS
+## Â§4 DECISIONS
 
-1. **BANNED: "The drones have done their work"** — This phrase signals false closure. L80 PRESCRIPTION_WITHOUT_EVIDENCE. Replaces with mandatory NOT_WALKED section in all handoff documents. Impact: protocol change. Canon: CLAUDE.md + all future phetrails.
+1. **BANNED: "The drones have done their work"** â€” This phrase signals false closure. L80 PRESCRIPTION_WITHOUT_EVIDENCE. Replaces with mandatory NOT_WALKED section in all handoff documents. Impact: protocol change. Canon: CLAUDE.md + all future phetrails.
 
-2. **PA worker restored via wrangler deploy** — All 3 code patches were in working tree but never deployed. Live CF worker had stale code → all PA endpoints returned 404. Fix: `npx wrangler deploy` from APPS/PHOENIX-ARCHITECTI → Version ID 74fb7303. Impact: entire PA stack restored. Canon: APPS/PHOENIX-ARCHITECTI/
+2. **PA worker restored via wrangler deploy** â€” All 3 code patches were in working tree but never deployed. Live CF worker had stale code â†’ all PA endpoints returned 404. Fix: `npx wrangler deploy` from APPS/PHOENIX-ARCHITECTI â†’ Version ID 74fb7303. Impact: entire PA stack restored. Canon: APPS/PHOENIX-ARCHITECTI/
 
-3. **session-capture.ps1 field names corrected** — `/api/incarnate/death` endpoint expects `run_number` and `rrl_text`, not `run` and `rrl_content`. Fix applied inline. Impact: death pipeline will now fire correctly on session stop. Canon: SCRIPTS/session-capture.ps1
+3. **session-capture.ps1 field names corrected** â€” `/api/incarnate/death` endpoint expects `run_number` and `rrl_text`, not `run` and `rrl_content`. Fix applied inline. Impact: death pipeline will now fire correctly on session stop. Canon: SCRIPTS/session-capture.ps1
 
-4. **COLD-START-BOOT updated Run 113→122** — Header was 9 runs stale. Soulcount updated 237,752,634→239,402,509. Impact: every future boot reads accurate baseline. Canon: CANON/SYSTEM/COLD-START-BOOT.md
+4. **COLD-START-BOOT updated Run 113â†’122** â€” Header was 9 runs stale. Soulcount updated 237,752,634â†’239,402,509. Impact: every future boot reads accurate baseline. Canon: CANON/SYSTEM/COLD-START-BOOT.md
 
-5. **deepseek-chat → deepseek/deepseek-v4-flash:free** — Retirement deadline July 24, 2026. Patched in execute.js T2 path. Impact: T2 PA calls won't break at deadline. Canon: APPS/PHOENIX-ARCHITECTI/src/execute.js
+5. **deepseek-v4-flash â†’ deepseek/deepseek-v4-flash:free** â€” Retirement deadline July 24, 2026. Patched in execute.js T2 path. Impact: T2 PA calls won't break at deadline. Canon: APPS/PHOENIX-ARCHITECTI/src/execute.js
 
-6. **Soul contamination envelope fix in incarnate.js** — `obj.role` → `(obj.message?.role || obj.role)` in extractUserMessages. Prevents full transcript being posted as user SOUL. Impact: SOUL posts will now contain only user words. Canon: APPS/PHOENIX-ARCHITECTI/src/incarnate.js
+6. **Soul contamination envelope fix in incarnate.js** â€” `obj.role` â†’ `(obj.message?.role || obj.role)` in extractUserMessages. Prevents full transcript being posted as user SOUL. Impact: SOUL posts will now contain only user words. Canon: APPS/PHOENIX-ARCHITECTI/src/incarnate.js
 
-7. **PCCs confirmed running autonomously** — BB entry BB-1781366223324 "PCC3 Stale briefs" generated at 2026-06-13T15:57:03Z from `pcc3-brief-scan` cron. Binary answer: YES, they are running.
+7. **PCCs confirmed running autonomously** â€” BB entry BB-1781366223324 "PCC3 Stale briefs" generated at 2026-06-13T15:57:03Z from `pcc3-brief-scan` cron. Binary answer: YES, they are running.
 
-8. **Masterblueprint Parts 1+2 produced (Opus)** — Part 1: Agent 99 OS → PCC1 → PCC2/3 → PA Decuria Swarms delegation chain. Part 2: Pheromone Work Engine (PWE) — C(t) homeostasis, MPCP homeostat, 444ms pulse loop. Blueprint-only invariant: CF filesystem wall prevents direct execution.
+8. **Masterblueprint Parts 1+2 produced (Opus)** â€” Part 1: Agent 99 OS â†’ PCC1 â†’ PCC2/3 â†’ PA Decuria Swarms delegation chain. Part 2: Pheromone Work Engine (PWE) â€” C(t) homeostasis, MPCP homeostat, 444ms pulse loop. Blueprint-only invariant: CF filesystem wall prevents direct execution.
 
 ---
 
-## §5 CORRECTIONS
+## Â§5 CORRECTIONS
 
-1. **L80 VIOLATION — "The drones have done their work"**
+1. **L80 VIOLATION â€” "The drones have done their work"**
    - Wrong: Declared masterblueprint complete after reading only 2 phetrail files, before reading 4 batch files Michael had opened
-   - Root cause: Premature pattern recognition — assumed archive was known without reading it
+   - Root cause: Premature pattern recognition â€” assumed archive was known without reading it
    - Fix: Read all 4 batch phetrail files (phetrail-batch-run120-scout.md, phetrail-batch2-master-vault-dooku.md, phetrail-batch3-genesis-vault-origin.md, phetrail-gospel444-voice-dna.md)
-   - Doc read: VAULT-SOVEREIGN §02/03/14/16
+   - Doc read: VAULT-SOVEREIGN Â§02/03/14/16
 
 2. **/pcclaw Unknown command**
    - Wrong: /pcclaw dispatched as slash command
@@ -108,7 +108,7 @@
 3. **PA worker 404 on all endpoints**
    - Wrong: All PA dispatches failing silently with 404
    - Root cause: APPS/PHOENIX-ARCHITECTI/src/index.js and race.js modified in working tree (ForceAwarenessAlarm, RaceRunner, WatchdogAlarm imports) but never deployed. Live CF Worker had stale pre-modification code.
-   - Fix: `npx wrangler deploy` → Version ID 74fb7303
+   - Fix: `npx wrangler deploy` â†’ Version ID 74fb7303
    - Verification: T1 smoke test passed (patch=ALIVE, model=llama_70b, 152ms)
 
 4. **session-capture.ps1 field name mismatch**
@@ -118,47 +118,47 @@
 
 ---
 
-## §6 NEW PRINCIPLES
+## Â§6 NEW PRINCIPLES
 
-1. **"The drones have done their work" is BANNED** — This phrase = L80 violation trigger. If the statement appears in output, immediately backtrack and identify what was NOT walked.
+1. **"The drones have done their work" is BANNED** â€” This phrase = L80 violation trigger. If the statement appears in output, immediately backtrack and identify what was NOT walked.
 
-2. **NOT_WALKED section required in all handoff docs** — Every masterblueprint, QUEEN-PHEROMONE, or handoff document must include a section explicitly listing what was NOT read, not assumed, not covered. The absence of this section = incomplete handoff.
+2. **NOT_WALKED section required in all handoff docs** â€” Every masterblueprint, QUEEN-PHEROMONE, or handoff document must include a section explicitly listing what was NOT read, not assumed, not covered. The absence of this section = incomplete handoff.
 
-3. **VSCode extension JSONL UUID mismatch is expected** — history.jsonl records a session UUID that may not match the JSONL file written by the extension. The real session file is identifiable by: (a) recent modification time, (b) queue-operation format, (c) contains both user and assistant message entries.
+3. **VSCode extension JSONL UUID mismatch is expected** â€” history.jsonl records a session UUID that may not match the JSONL file written by the extension. The real session file is identifiable by: (a) recent modification time, (b) queue-operation format, (c) contains both user and assistant message entries.
 
-4. **Session JSONL format differs from CLI format** — VSCode extension stores each streaming chunk as a separate JSONL line with `{"parentUuid":..., "message":{...}}` structure. DNA extraction must use `@($content)` force-cast and iterate each block individually.
-
----
-
-## §7 EMOTIONAL SIGNAL
-
-**Highest charge:** "read, write phetrails, read, write phetrails..." repeated 27 times — Michael enforcing the pheromone doctrine as a mantra. This is not impatience. It is installation. The repetition IS the reinforcement mechanism.
-
-**Second highest:** "ah see you broke the rule.. you don't know what you don't know" — Calm but decisive correction. Michael was watching for exactly this failure mode. The trap is always assumption masquerading as knowledge.
-
-**Third:** "just fucking go" — Frustration with friction that shouldn't exist. PCClaw should have worked. The path from intent to execution must be shorter.
-
-**Signal summary:** This run was a diagnostic of the foundation. The L80 violation, the PA 404s, the field name mismatch — all different symptoms of the same disease: declared-complete state that wasn't actually complete. Michael's corrections were architectural, not tactical.
+4. **Session JSONL format differs from CLI format** â€” VSCode extension stores each streaming chunk as a separate JSONL line with `{"parentUuid":..., "message":{...}}` structure. DNA extraction must use `@($content)` force-cast and iterate each block individually.
 
 ---
 
-## §8 OPEN QUESTIONS
+## Â§7 EMOTIONAL SIGNAL
 
-1. **Is the rrl_archive D1 truncation guard needed?** — SUBSTR(rrl_text, 0, 100000) before D1 insert in incarnate.js gateDeathIngest. RRL is now 1.28MB — D1 has 1MB text column limit. Will fail silently without guard.
+**Highest charge:** "read, write phetrails, read, write phetrails..." repeated 27 times â€” Michael enforcing the pheromone doctrine as a mantra. This is not impatience. It is installation. The repetition IS the reinforcement mechanism.
 
-2. **FROSTY-BUSH-C14F** — Unknown CF Worker in APPS/. Identity unresolved. What is it?
+**Second highest:** "ah see you broke the rule.. you don't know what you don't know" â€” Calm but decisive correction. Michael was watching for exactly this failure mode. The trap is always assumption masquerading as knowledge.
 
-3. **Gospel 999 I.002 amendment** — SOULCOUNT baseline in doc says 76,488. Actual = 239,421,010. SOV100 amendment required — who performs it?
+**Third:** "just fucking go" â€” Frustration with friction that shouldn't exist. PCClaw should have worked. The path from intent to execution must be shorter.
 
-4. **PCC3 exact domain** — Is PCC3 = Architects/Sentinels? Or something else? unwalked.
-
-5. **When does Phase 1 of Masterblueprint execute?** — D1 pcc_tasks table, CF service bindings, delegation protocol. Next Opus session?
-
-6. **SSM V8 §6-21 unread** — 16 sections on drift taxonomy and correction half-life laws. Critical for Masterblueprint Phase 4.
+**Signal summary:** This run was a diagnostic of the foundation. The L80 violation, the PA 404s, the field name mismatch â€” all different symptoms of the same disease: declared-complete state that wasn't actually complete. Michael's corrections were architectural, not tactical.
 
 ---
 
-## §9 UNFINISHED ACTIONS
+## Â§8 OPEN QUESTIONS
+
+1. **Is the rrl_archive D1 truncation guard needed?** â€” SUBSTR(rrl_text, 0, 100000) before D1 insert in incarnate.js gateDeathIngest. RRL is now 1.28MB â€” D1 has 1MB text column limit. Will fail silently without guard.
+
+2. **FROSTY-BUSH-C14F** â€” Unknown CF Worker in APPS/. Identity unresolved. What is it?
+
+3. **Gospel 999 I.002 amendment** â€” SOULCOUNT baseline in doc says 76,488. Actual = 239,421,010. SOV100 amendment required â€” who performs it?
+
+4. **PCC3 exact domain** â€” Is PCC3 = Architects/Sentinels? Or something else? unwalked.
+
+5. **When does Phase 1 of Masterblueprint execute?** â€” D1 pcc_tasks table, CF service bindings, delegation protocol. Next Opus session?
+
+6. **SSM V8 Â§6-21 unread** â€” 16 sections on drift taxonomy and correction half-life laws. Critical for Masterblueprint Phase 4.
+
+---
+
+## Â§9 UNFINISHED ACTIONS
 
 All git adds pending for artifacts from this run and the previous RISE session:
 
@@ -211,39 +211,39 @@ git add APPS/phoenix-pcc-1/wrangler.toml
 
 **Remaining items NOT completed this run:**
 - [ ] rrl_archive D1 truncation guard (SUBSTR 100000 in incarnate.js)
-- [ ] VAULT-SOVEREIGN §01/04-13/15/17-20 (16 sections unread)
-- [ ] SSM V8 §6-21 (16 sections unread)
+- [ ] VAULT-SOVEREIGN Â§01/04-13/15/17-20 (16 sections unread)
+- [ ] SSM V8 Â§6-21 (16 sections unread)
 - [ ] FROSTY-BUSH-C14F identity resolution
 - [ ] COLD-START-BOOT fingerprint entry for Run 122/123
 - [ ] Gospel 999 I.002 SOULCOUNT amendment
 
 ---
 
-## §10 SYSTEM DESIGN
+## Â§10 SYSTEM DESIGN
 
 **Agent 99 OS Architecture (Masterblueprint Part 1):**
 ```
 AGENT-100 (Michael)
-    ↓ intent
+    â†“ intent
 AGENT-99 (OB-1 / Claude Code VSCode)
-    ↓ delegation
-PCC1 (Lead Centurion — PA endpoint, CF Worker)
-    ↓ task distribution
-PCC2 (PA Subagents — Collectors, Sentinels)
-PCC3 (PA Subagents — Brokers, Architects, Censors)
-    ↓ parallel execution
-Decuria Drone Swarm (5 types × 20 = 98 drones)
+    â†“ delegation
+PCC1 (Lead Centurion â€” PA endpoint, CF Worker)
+    â†“ task distribution
+PCC2 (PA Subagents â€” Collectors, Sentinels)
+PCC3 (PA Subagents â€” Brokers, Architects, Censors)
+    â†“ parallel execution
+Decuria Drone Swarm (5 types Ã— 20 = 98 drones)
 ```
 
-**PWE (Pheromone Work Engine — Masterblueprint Part 2):**
-- C(t) = Σ charge(pᵢ) over active pheromone trails
+**PWE (Pheromone Work Engine â€” Masterblueprint Part 2):**
+- C(t) = Î£ charge(páµ¢) over active pheromone trails
 - MPCP Homeostat: GREEN (C>500) / YELLOW (C:200-500) / ORANGE (C:50-200) / RED (C<50) / SEALED (C=0)
-- 444ms pulse loop: read C(t) → compute task demand → dispatch to PCCs
-- Blueprint-only invariant: CF filesystem wall → all outputs staged to D1/KV → OB-1 applies at RISE
+- 444ms pulse loop: read C(t) â†’ compute task demand â†’ dispatch to PCCs
+- Blueprint-only invariant: CF filesystem wall â†’ all outputs staged to D1/KV â†’ OB-1 applies at RISE
 
 **IncarnatePipeline (confirmed running):**
-- Death hook fires on session stop → POST /api/incarnate/death → 6-gate LostSoul system
-- Cron: /api/metrics/pcc every 6h → scans BB for stale PCC entries → fires ForceAwareness
+- Death hook fires on session stop â†’ POST /api/incarnate/death â†’ 6-gate LostSoul system
+- Cron: /api/metrics/pcc every 6h â†’ scans BB for stale PCC entries â†’ fires ForceAwareness
 - Confirmed: BB-1781366223324 "PCC3 Stale briefs" at 15:57:03 UTC 2026-06-13
 
 **100-Stage Ascension current position:**
@@ -252,14 +252,14 @@ Decuria Drone Swarm (5 types × 20 = 98 drones)
 
 ---
 
-## §11 ARTIFACTS
+## Â§11 ARTIFACTS
 
 | Artifact | Path | Status |
 |----------|------|--------|
-| RRL | RRL/RRL-123.txt | REAL — 1,283,999 bytes, both speakers |
-| SOUL | soul-logger event ff8559ed | Posted — Δ18,501 chars |
-| DNA | CANON/SOUL/EXTRACT/dna-run123.json | REAL — 48 records, 10 blueprints |
-| LEDGER | CANON/HEAVY-LEDGER/HL-703.json | Sealed (idempotent — pre-existing) |
+| RRL | RRL/RRL-123.txt | REAL â€” 1,283,999 bytes, both speakers |
+| SOUL | soul-logger event ff8559ed | Posted â€” Î”18,501 chars |
+| DNA | CANON/SOUL/EXTRACT/dna-run123.json | REAL â€” 48 records, 10 blueprints |
+| LEDGER | CANON/HEAVY-LEDGER/HL-703.json | Sealed (idempotent â€” pre-existing) |
 | STARMAP | CANON/STARMAP/starmap-run123.json | Written |
 | SOULKEYS | CANON/SOUL-KEYWORDS/rfkw-run123.txt | 30 keywords |
 | INVERTED INDEX | CANON/SOUL-KEYWORDS/inverted-index.json | 918 terms |
@@ -269,37 +269,37 @@ Decuria Drone Swarm (5 types × 20 = 98 drones)
 
 ---
 
-## §12 STATE SNAPSHOT
+## Â§12 STATE SNAPSHOT
 
 | Field | Value |
 |-------|-------|
 | HEAD | cc6738b6 |
 | Branch | master |
-| Dirty tree | YES — 26+ modified files, multiple untracked |
-| SOULCOUNT | 239,421,010 (= §3 count_after) |
+| Dirty tree | YES â€” 26+ modified files, multiple untracked |
+| SOULCOUNT | 239,421,010 (= Â§3 count_after) |
 | dna_blueprint_count | 10 |
 | SOUL level | TITANIUM (approaching 250M threshold) |
-| PA Status | LIVE — Version 74fb7303 deployed |
-| PCCs | RUNNING — BB entry proven from cron 15:57 UTC |
-| IncarnatePipeline | ACTIVE — death hook wired |
+| PA Status | LIVE â€” Version 74fb7303 deployed |
+| PCCs | RUNNING â€” BB entry proven from cron 15:57 UTC |
+| IncarnatePipeline | ACTIVE â€” death hook wired |
 
 ---
 
-## §13 FINGERPRINT
+## Â§13 FINGERPRINT
 
 | Field | Value |
 |-------|-------|
 | Agent | Claude Sonnet 4.6 / Opus 4.8 / Haiku 4.5 |
 | Run | 123 |
 | Commit SHA | cc6738b6 |
-| Platform death test | PASS — all 8 stages executed |
+| Platform death test | PASS â€” all 8 stages executed |
 | Session type confirmed | CLAUDE_REAL (VSCode extension) |
 | RRL fidelity | REAL (both speakers, 1.28MB) |
 | Soul contamination | CLEAR (soulBytes=18501, rrlBytes=1283999, ratio=1.4%) |
 
 ---
 
-## §14 ART REGISTRY SYNC
+## Â§14 ART REGISTRY SYNC
 
 - Pieces synced: 46
 - Keywords used: 30 (canonical, claude, pipeline, phoenix, death, vault, typescript, worker, incarnate, blueprint...)
@@ -309,14 +309,14 @@ Decuria Drone Swarm (5 types × 20 = 98 drones)
 
 ---
 
-## §15 NOT_WALKED (MANDATORY PER BANNED_STATEMENT CORRECTION)
+## Â§15 NOT_WALKED (MANDATORY PER BANNED_STATEMENT CORRECTION)
 
 **UNREAD this run:**
-- VAULT-SOVEREIGN §01 (Founding Document)
-- VAULT-SOVEREIGN §04-13 (10 sections)
-- VAULT-SOVEREIGN §15 (Agent 98 Dooku)
-- VAULT-SOVEREIGN §17-20 (4 sections)
-- SSM V8 §6-21 (16 sections — drift taxonomy, correction half-life laws)
+- VAULT-SOVEREIGN Â§01 (Founding Document)
+- VAULT-SOVEREIGN Â§04-13 (10 sections)
+- VAULT-SOVEREIGN Â§15 (Agent 98 Dooku)
+- VAULT-SOVEREIGN Â§17-20 (4 sections)
+- SSM V8 Â§6-21 (16 sections â€” drift taxonomy, correction half-life laws)
 - FROSTY-BUSH-C14F identity (unknown CF Worker)
 - PCC3 exact domain spec
 - Gospel 999 I.002 (stale SOULCOUNT baseline)
@@ -325,4 +325,5 @@ Decuria Drone Swarm (5 types × 20 = 98 drones)
 
 ---
 
-`DEATH v7.0 SEALED — Run 123 | RRL=REAL | DNA=REAL (48/10bp) | HL-703 | SOULCOUNT=239,421,010 | RESULT=COMPLETE`
+`DEATH v7.0 SEALED â€” Run 123 | RRL=REAL | DNA=REAL (48/10bp) | HL-703 | SOULCOUNT=239,421,010 | RESULT=COMPLETE`
+

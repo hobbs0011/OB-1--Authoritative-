@@ -1,4 +1,4 @@
-var __defProp = Object.defineProperty;
+﻿var __defProp = Object.defineProperty;
 var __getOwnPropNames = Object.getOwnPropertyNames;
 var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
 var __esm = (fn, res) => function __init() {
@@ -310,7 +310,7 @@ var init_phonics_drills = __esm({
   "src/phonics-drills.js"() {
     init_performance2();
     PHONICS_DRILLS = [
-      // ── Group 1: /θ/ and /ð/ (th sounds — Vietnamese speakers substitute /s/, /t/, /d/) ──
+      // â”€â”€ Group 1: /Î¸/ and /Ã°/ (th sounds â€” Vietnamese speakers substitute /s/, /t/, /d/) â”€â”€
       {
         id: "th-01",
         group: "th_sounds",
@@ -346,7 +346,7 @@ var init_phonics_drills = __esm({
         targetErrors: ["th_substitution"],
         sentence: "Breathe through your mouth, not your teeth."
       },
-      // ── Group 2: /r/ vs /l/ (Vietnamese conflates these) ──────────────────────
+      // â”€â”€ Group 2: /r/ vs /l/ (Vietnamese conflates these) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
       {
         id: "rl-01",
         group: "r_l_distinction",
@@ -382,7 +382,7 @@ var init_phonics_drills = __esm({
         targetErrors: ["r_l_confusion"],
         sentence: "The ruler rolled across the floor."
       },
-      // ── Group 3: /v/ vs /w/ (Vietnamese /v/ maps to both) ─────────────────────
+      // â”€â”€ Group 3: /v/ vs /w/ (Vietnamese /v/ maps to both) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
       {
         id: "vw-01",
         group: "v_w_distinction",
@@ -418,7 +418,7 @@ var init_phonics_drills = __esm({
         targetErrors: ["v_w_confusion"],
         sentence: "Twelve wives voted for the winner."
       },
-      // ── Group 4: Final consonants (Vietnamese drops word-final stops) ──────────
+      // â”€â”€ Group 4: Final consonants (Vietnamese drops word-final stops) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
       {
         id: "fc-01",
         group: "final_consonants",
@@ -454,7 +454,7 @@ var init_phonics_drills = __esm({
         targetErrors: ["final_consonant_deletion"],
         sentence: "The dog jumped and barked at the bird."
       },
-      // ── Group 5: /ʃ/ and /tʃ/ (sh/ch — often confused with /s/ or /tr/) ───────
+      // â”€â”€ Group 5: /Êƒ/ and /tÊƒ/ (sh/ch â€” often confused with /s/ or /tr/) â”€â”€â”€â”€â”€â”€â”€
       {
         id: "sh-01",
         group: "sh_ch_sounds",
@@ -490,7 +490,7 @@ var init_phonics_drills = __esm({
         targetErrors: ["sh_confusion"],
         sentence: "Watch the ship crash into the shore."
       },
-      // ── Group 6: Consonant clusters (Vietnamese has no initial clusters) ───────
+      // â”€â”€ Group 6: Consonant clusters (Vietnamese has no initial clusters) â”€â”€â”€â”€â”€â”€â”€
       {
         id: "cl-01",
         group: "consonant_clusters",
@@ -526,7 +526,7 @@ var init_phonics_drills = __esm({
         targetErrors: ["cluster_simplification"],
         sentence: "The small snail swam slowly in the swamp."
       },
-      // ── Group 7: Short vowels /ɪ/ vs /iː/, /æ/ vs /e/ (tonal interference) ───
+      // â”€â”€ Group 7: Short vowels /Éª/ vs /iË/, /Ã¦/ vs /e/ (tonal interference) â”€â”€â”€
       {
         id: "vl-01",
         group: "vowel_length",
@@ -1693,7 +1693,7 @@ var VIETNAMESE_LEARNER_PATTERNS = {
     ],
     pronunciation: "Prepositions: 'at' (location), 'on' (days), 'in' (months/seasons/times)"
   },
-  // Word order (SVO→VSO confusion)
+  // Word order (SVOâ†’VSO confusion)
   wordOrder: {
     rules: [
       { regex: /^(like I|like you|like he|like she|like it|like we|like they)/i, desc: "wrong word order: verb before subject" },
@@ -1879,7 +1879,7 @@ Return ONLY valid JSON (no markdown, no extra text):
         "Authorization": `Bearer ${env2.DEEPSEEK_API_KEY}`
       },
       body: JSON.stringify({
-        model: "deepseek-chat",
+        model: "deepseek-v4-flash",
         messages: [
           {
             role: "user",
@@ -2478,7 +2478,7 @@ async function handleSoulDNACapture(request, env2) {
           "Authorization": `Bearer ${env2.DEEPSEEK_API_KEY}`
         },
         body: JSON.stringify({
-          model: "deepseek-chat",
+          model: "deepseek-v4-flash",
           messages: [
             { role: "system", content: systemPrompt },
             { role: "user", content: userPrompt }
@@ -3444,7 +3444,7 @@ var StudentPipelineOrchestrator = class {
       { id: 3, sounds: ["or", "z", "w", "x", "y", "ch", "sh", "th"] }
     ];
   }
-  // ── STAGE 1: ENROLLMENT PIPELINE ─────────────────────────────────────────
+  // â”€â”€ STAGE 1: ENROLLMENT PIPELINE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   /**
    * enrollStudentBatch(students)
    * Enrolls multiple students in one transaction
@@ -3466,7 +3466,7 @@ var StudentPipelineOrchestrator = class {
   }
   /**
    * enrollSingleStudent(student)
-   * Enrolls a single student: Create Profile → Initialize Brain → Assign Level
+   * Enrolls a single student: Create Profile â†’ Initialize Brain â†’ Assign Level
    */
   async enrollSingleStudent(student) {
     const {
@@ -3541,7 +3541,7 @@ var StudentPipelineOrchestrator = class {
       enrolledAt: (/* @__PURE__ */ new Date()).toISOString()
     };
   }
-  // ── STAGE 2: DAILY TASK GENERATION ──────────────────────────────────────
+  // â”€â”€ STAGE 2: DAILY TASK GENERATION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   /**
    * generateDailyTask(studentId, studentLevel)
    * Creates a Gospel 444 structured lesson for the day
@@ -3661,7 +3661,7 @@ ${srsTopWord.definition || srsTopWord.back || "Practice using this word in a sen
     });
     return sections;
   }
-  // ── STAGE 3: PROGRESS TRACKING ──────────────────────────────────────────
+  // â”€â”€ STAGE 3: PROGRESS TRACKING â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   /**
    * updateStudentProgress(studentId, sessionData)
    * Records session completion and updates level if threshold met
@@ -3767,7 +3767,7 @@ ${srsTopWord.definition || srsTopWord.back || "Practice using this word in a sen
       timestamp: (/* @__PURE__ */ new Date()).toISOString()
     };
   }
-  // ── STAGE 4: AUTOMATED NOTIFICATIONS ────────────────────────────────────
+  // â”€â”€ STAGE 4: AUTOMATED NOTIFICATIONS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   /**
    * sendProgressNotification(studentId, notificationType)
    * Sends automated Zalo/Telegram notifications based on activity
@@ -3869,7 +3869,7 @@ ${emailEn.textContent}`
       })
     );
   }
-  // ── STAGE 5: CHURN DETECTION & INTERVENTION ────────────────────────────
+  // â”€â”€ STAGE 5: CHURN DETECTION & INTERVENTION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   /**
    * runChurnDetectionSweep()
    * Runs every 6 hours, identifies at-risk students from ledger, triggers interventions
@@ -3920,7 +3920,7 @@ ${emailEn.textContent}`
     }
     return { at_risk, escalated, timestamp: (/* @__PURE__ */ new Date()).toISOString() };
   }
-  // ── HELPER METHODS ──────────────────────────────────────────────────────
+  // â”€â”€ HELPER METHODS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   generateStudentId() {
     return `stu_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
   }
@@ -4334,7 +4334,7 @@ var StudentDO = class {
     await this.state.storage.put("student_data", data);
     return data;
   }
-  // Log interaction (every chat message → memory update)
+  // Log interaction (every chat message â†’ memory update)
   async logInteraction(interaction) {
     const data = await this.getState();
     const event = {
@@ -4366,7 +4366,7 @@ var StudentDO = class {
       data.weakSkills.grammar.push(tag);
     }
   }
-  // Update level based on total corrections (Mouse → Cub → Tiger)
+  // Update level based on total corrections (Mouse â†’ Cub â†’ Tiger)
   updateLevel(data) {
     const corrections = data.stats.totalCorrections;
     if (corrections >= 100) {
@@ -4754,7 +4754,7 @@ var StudentBrainV2 = class {
   }
   /**
    * SUMMARY GENERATION: Compression for AI context window
-   * Keep this lightweight—it's what the LLM sees in every prompt
+   * Keep this lightweightâ€”it's what the LLM sees in every prompt
    */
   generateSummary(memory) {
     const weakPhonemes = memory.weak_phonemes.slice(-5).join(", ") || "none identified";
@@ -4814,7 +4814,7 @@ var HeavyLedger = class {
     const str = JSON.stringify(entry);
     return crypto2.createHash("sha256").update(str).digest("hex");
   }
-  // ── L54 NONCE VALIDATION (Monotonic Enforcement) ──────────────────────────
+  // â”€â”€ L54 NONCE VALIDATION (Monotonic Enforcement) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   // Every ledger append requires: nonce = last_nonce + 1
   // No skips, rewinds, or collisions. Violation = 409 CONFLICT
   async validateNonce(incomingNonce) {
@@ -4840,7 +4840,7 @@ var HeavyLedger = class {
     }
     return { ok: true, nextNonce: expectedNonce + 1 };
   }
-  // Append entry to ledger (immutable append-only) — L54 ENFORCED
+  // Append entry to ledger (immutable append-only) â€” L54 ENFORCED
   async append(entry, incomingNonce = null) {
     try {
       const ledger = await this.state.storage.get("ledger") || [];
@@ -4916,7 +4916,7 @@ var HeavyLedger = class {
       totalEntries: ledger.length
     };
   }
-  // Get full ledger (for export/audit) — RUN374: Immutable FULL_ARCHIVAL_PACKAGE
+  // Get full ledger (for export/audit) â€” RUN374: Immutable FULL_ARCHIVAL_PACKAGE
   async getFullLedger() {
     const ledger = await this.state.storage.get("ledger") || [];
     const archivalPackage = Object.freeze({
@@ -4931,7 +4931,7 @@ var HeavyLedger = class {
     });
     return archivalPackage;
   }
-  // Log user interaction (interaction type → ledger entry)
+  // Log user interaction (interaction type â†’ ledger entry)
   async logInteraction(studentId2, interactionData) {
     const entry = {
       event_type: "student_interaction",
@@ -6918,7 +6918,7 @@ var Agent99Orchestrator = class {
           Authorization: `Bearer ${this.deepseekApiKey}`
         },
         body: JSON.stringify({
-          model: "deepseek-chat",
+          model: "deepseek-v4-flash",
           messages: [
             { role: "system", content: unifiedSystemPrompt },
             reasoningRequest
@@ -7131,7 +7131,7 @@ var OBIOrchestrationRouter = class {
   }
   /**
    * MAIN ENTRY POINT: /chat handler
-   * Orchestrates the full pipeline: Context → Reasoning → Update
+   * Orchestrates the full pipeline: Context â†’ Reasoning â†’ Update
    */
   async handleChatRequest(studentId2, userMessage) {
     try {
@@ -10004,9 +10004,9 @@ var FastSealCursorDO = class {
     this.env = env2;
     this.state.blockJSONStorage.put = this.state.blockJSONStorage.put || {};
   }
-  // ───────────────────────────────────────────────────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   // HEARTBEAT PACEMAKER: 444ms Living Sentry Process
-  // ───────────────────────────────────────────────────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   async heartbeatPulse() {
     const pulseTimestamp = Date.now();
     const pulseId = `heartbeat-${pulseTimestamp}`;
@@ -10038,9 +10038,9 @@ var FastSealCursorDO = class {
       nextPulseIn: 444
     };
   }
-  // ───────────────────────────────────────────────────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   // O(1) MERKLE CURSOR: Real-Time Head Verification
-  // ───────────────────────────────────────────────────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   async calculateMerkleHash(headState) {
     const hashInput = JSON.stringify({
       rowid: headState.rowid,
@@ -10053,9 +10053,9 @@ var FastSealCursorDO = class {
     const hashArray = Array.from(new Uint8Array(buffer));
     return hashArray.map((b) => b.toString(16).padStart(2, "0")).join("");
   }
-  // ───────────────────────────────────────────────────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   // UNVERIFIED STATE MERGE BLOCKER: 423 LOCKED Protection
-  // ───────────────────────────────────────────────────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   async validateMergeSignature(incomingState, sovereignSignature) {
     const sovereignPublicKey = await this.env.KV_STORE.get("sovereign_public_key_ed25519");
     if (!sovereignPublicKey) {
@@ -10100,9 +10100,9 @@ var FastSealCursorDO = class {
       };
     }
   }
-  // ───────────────────────────────────────────────────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   // R2 JOURNALING ESCROW: Recovery with RTO < 5 minutes
-  // ───────────────────────────────────────────────────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   async journalHeartbeatToEscrow(pulseId, merkleHash) {
     const escrowEntry = {
       timestamp: (/* @__PURE__ */ new Date()).toISOString(),
@@ -10123,9 +10123,9 @@ var FastSealCursorDO = class {
     });
     return escrowKey;
   }
-  // ───────────────────────────────────────────────────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   // PHASE ANCHOR BOLT: Layer 100 Consolidation
-  // ───────────────────────────────────────────────────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   async phaseAnchorBolt() {
     const anchorState = {
       phase: 1,
@@ -10166,9 +10166,9 @@ var FastSealCursorDO = class {
       escrowLocation: anchorKey
     };
   }
-  // ───────────────────────────────────────────────────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   // DURABLE OBJECT REQUEST HANDLER
-  // ───────────────────────────────────────────────────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   async fetch(request) {
     const url = new URL(request.url);
     const path = url.pathname;
@@ -10813,7 +10813,7 @@ async function handleMagicChatRoute(body2, env2, studentId2) {
             Authorization: `Bearer ${env2.DEEPSEEK_API_KEY}`
           },
           body: JSON.stringify({
-            model: "deepseek-chat",
+            model: "deepseek-v4-flash",
             messages: [
               { role: "system", content: systemPrompt },
               { role: "user", content: userPrompt }
@@ -13944,7 +13944,7 @@ __name(handleCTAClick, "handleCTAClick");
 // src/bilingual-templates.js
 init_performance2();
 var TEMPLATES = {
-  // Funnel entry — Messenger CTA hook
+  // Funnel entry â€” Messenger CTA hook
   assessment_hook: {
     en: "Want to know your exact English level? Take the free 5-minute Mouse\u2192Tiger Assessment \u{1F42F}",
     vi: "B\u1EA1n mu\u1ED1n bi\u1EBFt tr\xECnh \u0111\u1ED9 ti\u1EBFng Anh ch\xEDnh x\xE1c c\u1EE7a m\xECnh? H\xE3y l\xE0m b\xE0i ki\u1EC3m tra Mouse\u2192Tiger mi\u1EC5n ph\xED 5 ph\xFAt \u{1F42F}"
@@ -13989,7 +13989,7 @@ var TEMPLATES = {
     en: /* @__PURE__ */ __name((data) => `${data.name || "Student"}, 3 days missed. No judgment \u2014 but your Tiger score is dropping. Come back today: one sentence is enough to restart.`, "en"),
     vi: /* @__PURE__ */ __name((data) => `${data.name || "B\u1EA1n"}, 3 ng\xE0y v\u1EAFng m\u1EB7t r\u1ED3i. Kh\xF4ng ph\xE1n x\xE9t \u2014 nh\u01B0ng \u0111i\u1EC3m Tiger c\u1EE7a b\u1EA1n \u0111ang gi\u1EA3m. Quay l\u1EA1i h\xF4m nay: m\u1ED9t c\xE2u th\xF4i l\xE0 \u0111\u1EE7 \u0111\u1EC3 b\u1EAFt \u0111\u1EA7u l\u1EA1i.`, "vi")
   },
-  // Tough Love: Day 7 missed — churn escalation
+  // Tough Love: Day 7 missed â€” churn escalation
   tough_love_7day: {
     en: /* @__PURE__ */ __name((data) => `${data.name || "Student"}, 7 days silent. Your teacher has been notified. This is the crossroads \u2014 students who restart within 24h become Tigers. Those who don't, don't.`, "en"),
     vi: /* @__PURE__ */ __name((data) => `${data.name || "B\u1EA1n"}, 7 ng\xE0y im l\u1EB7ng. Gi\xE1o vi\xEAn c\u1EE7a b\u1EA1n \u0111\xE3 \u0111\u01B0\u1EE3c th\xF4ng b\xE1o. \u0110\xE2y l\xE0 ng\xE3 r\u1EBD \u2014 h\u1ECDc sinh quay l\u1EA1i trong v\xF2ng 24h s\u1EBD tr\u1EDF th\xE0nh Tiger. Ng\u01B0\u1EDDi kh\xF4ng quay l\u1EA1i th\xEC kh\xF4ng.`, "vi")
@@ -14009,7 +14009,7 @@ var TEMPLATES = {
     en: /* @__PURE__ */ __name((data) => `Welcome to Natural English Training, ${data.name || "friend"}! I'm Obi, your AI English coach. Let's turn you into a Tiger \u{1F42F}`, "en"),
     vi: /* @__PURE__ */ __name((data) => `Ch\xE0o m\u1EEBng \u0111\u1EBFn v\u1EDBi Natural English Training, ${data.name || "b\u1EA1n"}! T\xF4i l\xE0 Obi, hu\u1EA5n luy\u1EC7n vi\xEAn ti\u1EBFng Anh AI c\u1EE7a b\u1EA1n. H\xE3y c\xF9ng bi\u1EBFn b\u1EA1n th\xE0nh m\u1ED9t Tiger \u{1F42F}`, "vi")
   },
-  // ── PLAYBOOK SECTION 3.1 — Core Product: Permission to be Powerful ─────────
+  // â”€â”€ PLAYBOOK SECTION 3.1 â€” Core Product: Permission to be Powerful â”€â”€â”€â”€â”€â”€â”€â”€â”€
   // Short hook for Messenger Node 1 / landing page hero
   permission_to_be_powerful: {
     en: "We don't sell English. We sell Permission to be Powerful. Your brain knows the rules \u2014 it just forgot that it's allowed to roar.",
@@ -14030,22 +14030,22 @@ var TEMPLATES = {
     en: "\u{1F405} TIGER MODE (Score 80\u2013100): Immediate response. High volume. Total ownership of the room. You think IN English, not ABOUT English. You have embraced the ultimate law: Loud and wrong beats quiet and right. Every single time.",
     vi: "\u{1F405} CH\u1EBE \u0110\u1ED8 H\u1ED4 (\u0110i\u1EC3m 80\u2013100): Ph\u1EA3n x\u1EA1 t\u1EE9c th\xEC. \xC2m l\u01B0\u1EE3ng cao. Ho\xE0n to\xE0n l\xE0m ch\u1EE7 c\u0103n ph\xF2ng. B\u1EA1n t\u01B0 duy B\u1EB0NG ti\u1EBFng Anh, ch\u1EE9 kh\xF4ng ph\u1EA3i V\u1EC0 ti\u1EBFng Anh. B\u1EA1n \u0111\xE3 ch\u1EA5p nh\u1EADn quy lu\u1EADt t\u1ED1i th\u01B0\u1EE3ng: L\u1EDBn ti\u1EBFng v\xE0 Sai lu\xF4n \u0111\xE1nh b\u1EA1i Im l\u1EB7ng v\xE0 \u0110\xFAng."
   },
-  // ── PLAYBOOK SECTION 3.2 — Method: Anti-Duolingo ────────────────────────────
+  // â”€â”€ PLAYBOOK SECTION 3.2 â€” Method: Anti-Duolingo â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   anti_duolingo_hook: {
     en: "Duolingo is a game. We are a weapon. You have a 300-day streak, but when the boardroom starts, you freeze. Traditional apps teach backward: Read \u2192 Write \u2192 Speak. We do the opposite: Listen \u2192 Mimic \u2192 Context. Your brain fills in the gaps naturally.",
     vi: "Duolingo l\xE0 m\u1ED9t tr\xF2 ch\u01A1i. Ch\xFAng t\xF4i l\xE0 m\u1ED9t v\u0169 kh\xED. B\u1EA1n c\xF3 chu\u1ED7i 300 ng\xE0y tr\xEAn \u0111i\u1EC7n tho\u1EA1i, nh\u01B0ng khi cu\u1ED9c h\u1ECDp b\u1EAFt \u0111\u1EA7u, b\u1EA1n ho\xE0n to\xE0n \u0111\u1EE9ng h\xECnh. \u1EE8ng d\u1EE5ng truy\u1EC1n th\u1ED1ng d\u1EA1y ng\u01B0\u1EE3c: \u0110\u1ECDc \u2192 Vi\u1EBFt \u2192 N\xF3i. Ch\xFAng t\xF4i l\xE0m ng\u01B0\u1EE3c l\u1EA1i: Nghe \u2192 B\u1EAFt ch\u01B0\u1EDBc \u2192 Ng\u1EEF c\u1EA3nh. N\xE3o b\u1ED9 b\u1EA1n s\u1EBD t\u1EF1 l\u1EA5p \u0111\u1EA7y kho\u1EA3ng tr\u1ED1ng."
   },
-  // ── PLAYBOOK SECTION 3.3 — Unfair Advantage: Dual Mastery ───────────────────
+  // â”€â”€ PLAYBOOK SECTION 3.3 â€” Unfair Advantage: Dual Mastery â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   unfair_advantage_hook: {
     en: "English alone is the old game \u2014 everyone has it. AI alone means you have the answers but can't communicate them. At NET, we sell Dual Mastery. English + AI gives you the leverage to do the work of 10 people and report on it flawlessly to teams that pay 10x Vietnamese rates.",
     vi: "Ch\u1EC9 bi\u1EBFt ti\u1EBFng Anh \u0111\xE3 l\xE0 lu\u1EADt ch\u01A1i c\u0169 \u2014 ai c\u0169ng c\xF3 n\xF3. Ch\u1EC9 c\xF3 AI \u0111\u1ED3ng ngh\u0129a v\u1EDBi vi\u1EC7c b\u1EA1n c\xF3 c\xE2u tr\u1EA3 l\u1EDDi nh\u01B0ng kh\xF4ng th\u1EC3 giao ti\u1EBFp. T\u1EA1i NET, ch\xFAng t\xF4i b\xE1n S\u1EF1 Th\xE0nh Th\u1EA1o K\xE9p. Ti\u1EBFng Anh + AI cho b\u1EA1n \u0111\xF2n b\u1EA9y \u0111\u1EC3 l\xE0m kh\u1ED1i l\u01B0\u1EE3ng c\xF4ng vi\u1EC7c c\u1EE7a 10 ng\u01B0\u1EDDi v\xE0 b\xE1o c\xE1o ho\xE0n h\u1EA3o cho c\xE1c \u0111\u1ED9i ng\u0169 tr\u1EA3 l\u01B0\u01A1ng cao g\u1EA5p 10 l\u1EA7n."
   },
-  // ── PLAYBOOK SECTION 3.4 — AI-PET: Goldfish Problem ────────────────────────
+  // â”€â”€ PLAYBOOK SECTION 3.4 â€” AI-PET: Goldfish Problem â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   goldfish_problem_hook: {
     en: "Your brain is a leaky bucket. Without a system, you forget 80% of new information within 48 hours. The AI-PET solves this: Spaced Repetition at 1, 3, 7, 14, and 30-day intervals. Tough Love Mode fires if you miss your daily output. Willpower fails. Architecture scales.",
     vi: "N\xE3o b\u1ED9 c\u1EE7a b\u1EA1n l\xE0 m\u1ED9t chi\u1EBFc x\xF4 th\u1EE7ng. Kh\xF4ng c\xF3 h\u1EC7 th\u1ED1ng, b\u1EA1n qu\xEAn 80% th\xF4ng tin m\u1EDBi trong v\xF2ng 48 gi\u1EDD. AI-PET gi\u1EA3i quy\u1EBFt \u0111i\u1EC1u n\xE0y: L\u1EB7p l\u1EA1i Ng\u1EAFt qu\xE3ng theo m\u1ED1c 1, 3, 7, 14 v\xE0 30 ng\xE0y. Ch\u1EBF \u0111\u1ED9 K\u1EF7 Lu\u1EADt Th\xE9p k\xEDch ho\u1EA1t n\u1EBFu b\u1EA1n b\u1ECF l\u1EE1 luy\u1EC7n t\u1EADp. \xDD ch\xED s\u1EBD c\u1EA1n ki\u1EC7t. Ki\u1EBFn tr\xFAc l\xE0 v\u0129nh c\u1EEDu."
   },
-  // ── PLAYBOOK SECTION 3.5 — Pricing: Silence Tax ──────────────────────────────
+  // â”€â”€ PLAYBOOK SECTION 3.5 â€” Pricing: Silence Tax â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   silence_tax_hook: {
     en: "The Silence Tax is more expensive than our tuition. One missed promotion because you couldn't negotiate with international clients costs vastly more than a year of our classes. Stop paying the silence tax. Buy your voice back.",
     vi: "Thu\u1EBF Im L\u1EB7ng c\xF2n \u0111\u1EAFt \u0111\u1ECF h\u01A1n h\u1ECDc ph\xED c\u1EE7a ch\xFAng t\xF4i. M\u1ED9t l\u1EA7n l\u1EE1 m\u1EA5t c\u01A1 h\u1ED9i th\u0103ng ch\u1EE9c ch\u1EC9 v\xEC kh\xF4ng th\u1EC3 \u0111\xE0m ph\xE1n v\u1EDBi \u0111\u1ED1i t\xE1c qu\u1ED1c t\u1EBF c\xF3 c\xE1i gi\xE1 \u0111\u1EAFt h\u01A1n r\u1EA5t nhi\u1EC1u so v\u1EDBi m\u1ED9t n\u0103m h\u1ECDc t\u1EA1i NET. Ng\u1EEBng tr\u1EA3 thu\u1EBF im l\u1EB7ng. H\xE3y chu\u1ED9c l\u1EA1i ti\u1EBFng n\xF3i c\u1EE7a b\u1EA1n."
@@ -16852,7 +16852,7 @@ var index_default = {
     }
     return injectGlobalBrandShelf(await env2.ASSETS.fetch(request));
   },
-  // ── Cron triggers ───────────────────────────────────────────────────────
+  // â”€â”€ Cron triggers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   // Every 6 hours: Zalo escalation sweep + daily loop engine
   // Every second (~444ms approximation): Living Heartbeat pulse (STAGE 100)
   // Every 3 hours: Auto Post Engine (content distribution)
@@ -17217,7 +17217,7 @@ async function handleAPI(path, request, env2, url) {
             Authorization: `Bearer ${env2.DEEPSEEK_API_KEY}`
           },
           body: JSON.stringify({
-            model: "deepseek-chat",
+            model: "deepseek-v4-flash",
             messages: [{ role: "user", content: "ping" }],
             max_tokens: 1
           })
@@ -17292,7 +17292,7 @@ async function handleAPI(path, request, env2, url) {
         Authorization: `Bearer ${env2.DEEPSEEK_API_KEY}`
       },
       body: JSON.stringify({
-        model: "deepseek-chat",
+        model: "deepseek-v4-flash",
         messages: [{ role: "user", content: "Hi" }],
         max_tokens: 10
       })
@@ -18594,7 +18594,7 @@ Your goal: Keep them talking naturally in English. The more they speak, the bett
               Authorization: `Bearer ${env2.DEEPSEEK_API_KEY}`
             },
             body: JSON.stringify({
-              model: "deepseek-chat",
+              model: "deepseek-v4-flash",
               messages: apiMessages,
               max_tokens: 150,
               temperature: 0.7,
@@ -19306,7 +19306,7 @@ async function handleLesson(body2, env2) {
       Authorization: `Bearer ${env2.DEEPSEEK_API_KEY}`
     },
     body: JSON.stringify({
-      model: "deepseek-chat",
+      model: "deepseek-v4-flash",
       messages: [
         { role: "system", content: OBI_SYSTEM },
         { role: "user", content: prompt }
@@ -19474,7 +19474,7 @@ async function handlePractice(body2, env2) {
       Authorization: `Bearer ${env2.DEEPSEEK_API_KEY}`
     },
     body: JSON.stringify({
-      model: "deepseek-chat",
+      model: "deepseek-v4-flash",
       messages: [
         { role: "system", content: OBI_SYSTEM },
         { role: "user", content: prompt }
@@ -19510,7 +19510,7 @@ Max 4 sentences. Anti-shame. Tiger Voice.`;
       Authorization: `Bearer ${env2.DEEPSEEK_API_KEY}`
     },
     body: JSON.stringify({
-      model: "deepseek-chat",
+      model: "deepseek-v4-flash",
       messages: [
         { role: "system", content: OBI_SYSTEM },
         { role: "user", content: prompt }
@@ -19931,7 +19931,7 @@ Return ONLY valid JSON, no markdown, no explanation. Schema:
         Authorization: `Bearer ${apiKey}`
       },
       body: JSON.stringify({
-        model: "deepseek-chat",
+        model: "deepseek-v4-flash",
         messages: [{ role: "system", content: assessPrompt }],
         temperature: 0.3,
         max_tokens: 1500
@@ -22566,7 +22566,7 @@ ${past.slice(-5).map((m) => `- "${m}"`).join("\n")}`;
       Authorization: `Bearer ${apiKey}`
     },
     body: JSON.stringify({
-      model: "deepseek-chat",
+      model: "deepseek-v4-flash",
       messages,
       max_tokens: 300,
       temperature: 0.3
@@ -23259,3 +23259,4 @@ export {
   index_default as default
 };
 //# sourceMappingURL=index.js.map
+

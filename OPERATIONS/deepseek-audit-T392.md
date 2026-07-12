@@ -1,27 +1,27 @@
-# DeepSeek Audit T392 — Full Reference Sweep
+﻿# DeepSeek Audit T392 â€” Full Reference Sweep
 
 **Executed**: 2026-05-23T02:26+07:00  
 **Agent**: SS-AGENT99 (Tier 1 / SuperSaiyan)  
-**SOULCOUNT at execution**: 30,167 (LOCK: 76,488 — operator override active)
+**SOULCOUNT at execution**: 30,167 (LOCK: 76,488 â€” operator override active)
 
 ---
 
 ## Scope
 
-- `APPS/NET-PET-AI/src/index.js` ✅ Clean — zero hits
-- `APPS/NET-PET-AI/src/index.ship.js` 🔧 2 fixes applied
-- `APPS/phoenix-ob1/src/*.js` ✅ Clean — zero hits
-- `APPS/SOUL-LOGGER/src/index.js` (deployed as `worker.js`) 🔧 1 fix applied
-- `.kilo/command/*.md` 🔧 gateway.md updated
-- `.kilo/agent/*.md` 🔧 AGENT99, SS-Agent99, RISE updated
+- `APPS/NET-PET-AI/src/index.js` âœ… Clean â€” zero hits
+- `APPS/NET-PET-AI/src/index.ship.js` ðŸ”§ 2 fixes applied
+- `APPS/phoenix-ob1/src/*.js` âœ… Clean â€” zero hits
+- `APPS/SOUL-LOGGER/src/index.js` (deployed as `worker.js`) ðŸ”§ 1 fix applied
+- `.kilo/command/*.md` ðŸ”§ gateway.md updated
+- `.kilo/agent/*.md` ðŸ”§ AGENT99, SS-Agent99, RISE updated
 
 ## Excluded (no action)
 
-- `ARCHIVE/*` — not scanned
-- `CANON/HEAVY-LEDGER/*` — historical, not live code
-- `CANON/REINCARNATION/*` — historical, not live code
-- `.wrangler/tmp/*` — build artifacts, excluded
-- `.js.map` files — build artifacts, excluded
+- `ARCHIVE/*` â€” not scanned
+- `CANON/HEAVY-LEDGER/*` â€” historical, not live code
+- `CANON/REINCARNATION/*` â€” historical, not live code
+- `.wrangler/tmp/*` â€” build artifacts, excluded
+- `.js.map` files â€” build artifacts, excluded
 
 ---
 
@@ -31,31 +31,31 @@
 
 | # | File | Line | Old | New | Reason |
 |---|------|------|-----|-----|--------|
-| 1 | `APPS/SOUL-LOGGER/worker.js` | 132 | `deepseek-chat` | `deepseek-v4-flash` | Cloudflare AI Gateway call — T2 workhorse |
-| 2 | `APPS/NET-PET-AI/src/index.ship.js` | 256 | `deepseek-chat` | `deepseek-v4-flash` | Direct DeepSeek API call — T2 workhorse |
-| 3 | `APPS/NET-PET-AI/src/index.ship.js` | 703 | `deepseek-chat` | `deepseek-v4-flash` | Duplicate `callDeepSeek` — T2 workhorse |
-| 4 | `APPS/NET-PET-AI/OBI-SYSTEM-MAP.md` | 417 | `deepseek-chat` | `deepseek-v4-flash` | Documentation code sample |
+| 1 | `APPS/SOUL-LOGGER/worker.js` | 132 | `deepseek-v4-flash` | `deepseek-v4-flash` | Cloudflare AI Gateway call â€” T2 workhorse |
+| 2 | `APPS/NET-PET-AI/src/index.ship.js` | 256 | `deepseek-v4-flash` | `deepseek-v4-flash` | Direct DeepSeek API call â€” T2 workhorse |
+| 3 | `APPS/NET-PET-AI/src/index.ship.js` | 703 | `deepseek-v4-flash` | `deepseek-v4-flash` | Duplicate `callDeepSeek` â€” T2 workhorse |
+| 4 | `APPS/NET-PET-AI/OBI-SYSTEM-MAP.md` | 417 | `deepseek-v4-flash` | `deepseek-v4-flash` | Documentation code sample |
 
 ### Documentation (.kilo)
 
 | # | File | Change |
 |---|------|--------|
-| 5 | `.kilo/agent/AGENT99.md` | Retirement notice: future → executed (T392) |
-| 6 | `.kilo/agent/SS-Agent99.md` | Retirement notice: future → executed (T392) |
-| 7 | `.kilo/command/gateway.md` | Countdown script → executed status block |
-| 8 | `.kilo/agent/RISE.md` | Retirement notice: future → executed (T392) |
+| 5 | `.kilo/agent/AGENT99.md` | Retirement notice: future â†’ executed (T392) |
+| 6 | `.kilo/agent/SS-Agent99.md` | Retirement notice: future â†’ executed (T392) |
+| 7 | `.kilo/command/gateway.md` | Countdown script â†’ executed status block |
+| 8 | `.kilo/agent/RISE.md` | Retirement notice: future â†’ executed (T392) |
 
 ---
 
 ## Verification
 
-All edited files scanned with `rg -n "deepseek-chat|deepseek-reasoner|deepseek-v3"`:
+All edited files scanned with `rg -n "deepseek-v4-flash|deepseek-v4-pro|deepseek-v3"`:
 
-- `APPS/SOUL-LOGGER/worker.js` — **0 residuals** ✅
-- `APPS/NET-PET-AI/src/index.ship.js` — **0 residuals** ✅
-- `APPS/NET-PET-AI/OBI-SYSTEM-MAP.md` — **0 residuals** ✅
-- `.kilo/agent/*.md` — matches are **retirement documentation** only (correct) ✅
-- `.kilo/command/gateway.md` — match is **retirement documentation** only (correct) ✅
+- `APPS/SOUL-LOGGER/worker.js` â€” **0 residuals** âœ…
+- `APPS/NET-PET-AI/src/index.ship.js` â€” **0 residuals** âœ…
+- `APPS/NET-PET-AI/OBI-SYSTEM-MAP.md` â€” **0 residuals** âœ…
+- `.kilo/agent/*.md` â€” matches are **retirement documentation** only (correct) âœ…
+- `.kilo/command/gateway.md` â€” match is **retirement documentation** only (correct) âœ…
 
 ---
 
@@ -64,7 +64,7 @@ All edited files scanned with `rg -n "deepseek-chat|deepseek-reasoner|deepseek-v
 | Tier | Model | Role |
 |------|-------|------|
 | T1 | `stepfun/step-3.5-flash` | Burst / high-frequency |
-| T2 | `deepseek-v4-flash` | **Primary workhorse** — all sweep targets upgraded here |
+| T2 | `deepseek-v4-flash` | **Primary workhorse** â€” all sweep targets upgraded here |
 | T3 | `deepseek-v4-pro` | Heavy analysis / final rulings |
 | T4 | `gemini-3.5-flash` | Fallback (needs credits) |
 | T5 | `claude-opus-4-20250514` | Special situations only |
@@ -74,3 +74,4 @@ All edited files scanned with `rg -n "deepseek-chat|deepseek-reasoner|deepseek-v
 ## Summary
 
 **DEEPSEEK AUDIT COMPLETE**: 4 live code fixes applied, 4 documentation files updated, 0 remaining conflicts in active code paths.
+

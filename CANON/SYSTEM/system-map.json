@@ -1,11 +1,11 @@
-{
+﻿{
   "generated_at": "2026-06-02T12:05:00+07:00",
   "head": "c2dec4a8",
   "run": 47,
   "prior_run": 45,
   "soulcount": 83788097,
   "level": "TITANIUM_ANCHOR",
-  "doctrine": "PHASE 0 FINAL — TERRAIN LOCK",
+  "doctrine": "PHASE 0 FINAL â€” TERRAIN LOCK",
   "domain_count": 9,
   "summary": {
     "GREEN": 37,
@@ -22,29 +22,29 @@
       "label": "Runtime App",
       "GREEN": 6, "AMBER": 1, "RED": 0, "GHOST": 0, "ORPHAN": 2, "UNKNOWN": 0,
       "corrections": [
-        "demo.html: GHOST→ORPHAN — zero inbound src refs confirmed. Deletion candidate.",
-        "assessment.js: GHOST→ORPHAN — zero inbound src refs confirmed. Deletion candidate.",
-        "vocab-srs write-back: documented BROKEN wire (SRS intervals frozen at day 1) → Phase 1 BUILD, not audit failure"
+        "demo.html: GHOSTâ†’ORPHAN â€” zero inbound src refs confirmed. Deletion candidate.",
+        "assessment.js: GHOSTâ†’ORPHAN â€” zero inbound src refs confirmed. Deletion candidate.",
+        "vocab-srs write-back: documented BROKEN wire (SRS intervals frozen at day 1) â†’ Phase 1 BUILD, not audit failure"
       ]
     },
     "D2": {
       "label": "Soul System",
       "GREEN": 7, "AMBER": 0, "RED": 0, "GHOST": 0, "DANGLING": 1, "UNKNOWN": 0,
       "corrections": [
-        "session-capture.ps1: AMBER→GREEN — hook verified at .claude/settings.json:54-66; RRL-46 = 473KB (real capture evidence)",
-        "/api/soul/compress: RED→DANGLING — comment-only ref at src/index.js:2753, no live endpoint. Recommend: remove comment ref."
+        "session-capture.ps1: AMBERâ†’GREEN â€” hook verified at .claude/settings.json:54-66; RRL-46 = 473KB (real capture evidence)",
+        "/api/soul/compress: REDâ†’DANGLING â€” comment-only ref at src/index.js:2753, no live endpoint. Recommend: remove comment ref."
       ]
     },
     "D3": {
       "label": "Pipeline Chain",
       "GREEN": 2, "AMBER": 3, "RED": 2, "GHOST": 0, "UNKNOWN": 0,
       "corrections": [
-        "RRL naming mismatch RED→AMBER: alias index resolves all naming variants (35/41 runs).",
-        "LEDGER mapping RED→GREEN: ledger-index.json built (140 HL files, 56 run-mapped).",
-        "SOULKEYS RED→GREEN: 41/41 runs (100%), inverted-index 348+ keys parses clean.",
-        "S2Pipeline RED→AMBER: 25/41 runs (61%), naming normalized via alias index.",
-        "DNA: 5/41 (12.2%) — 31 fixable, 5 ACCEPTED-DEBT (no source RRL). RED remains for coverage but debt line drawn.",
-        "PHEROMONES: 4/41 (9.8%) — RED remains."
+        "RRL naming mismatch REDâ†’AMBER: alias index resolves all naming variants (35/41 runs).",
+        "LEDGER mapping REDâ†’GREEN: ledger-index.json built (140 HL files, 56 run-mapped).",
+        "SOULKEYS REDâ†’GREEN: 41/41 runs (100%), inverted-index 348+ keys parses clean.",
+        "S2Pipeline REDâ†’AMBER: 25/41 runs (61%), naming normalized via alias index.",
+        "DNA: 5/41 (12.2%) â€” 31 fixable, 5 ACCEPTED-DEBT (no source RRL). RED remains for coverage but debt line drawn.",
+        "PHEROMONES: 4/41 (9.8%) â€” RED remains."
       ],
       "coverage": {
         "denominator": 41,
@@ -60,10 +60,10 @@
       "label": "Automation",
       "GREEN": 3, "AMBER": 1, "RED": 0, "GHOST": 0, "UNKNOWN": 0,
       "corrections": [
-        "soul-search.ps1: RED→GREEN — $_ emit bug fixed at line 138; smoke-test passed (ranked hits for 'battlefield'). L69 SEARCH_FIRST operational.",
-        "build-soulkeys.ps1: -Append risk→GREEN — uses Set-Content (overwrite), no corruption risk. Writer is clean.",
-        "session-capture.ps1: AMBER→GREEN — hook firing confirmed.",
-        "rrl-pipeline.ps1: AMBER — functional but naming convention gaps remain."
+        "soul-search.ps1: REDâ†’GREEN â€” $_ emit bug fixed at line 138; smoke-test passed (ranked hits for 'battlefield'). L69 SEARCH_FIRST operational.",
+        "build-soulkeys.ps1: -Append riskâ†’GREEN â€” uses Set-Content (overwrite), no corruption risk. Writer is clean.",
+        "session-capture.ps1: AMBERâ†’GREEN â€” hook firing confirmed.",
+        "rrl-pipeline.ps1: AMBER â€” functional but naming convention gaps remain."
       ]
     },
     "D5": {
@@ -80,22 +80,22 @@
       "label": "CF Infra",
       "GREEN": 11, "AMBER": 7, "RED": 0, "GHOST": 0, "ORPHAN": 5, "UNKNOWN": 0,
       "corrections": [
-        "All 11 Pages probed: all return 200. 4 GREEN (business assets), 7 AMBER (room/selection — live but purpose unverified).",
-        "8 KV namespaces: 4 GREEN (CACHE→PA, NET_PET_KV→net-pet-ai, RATELIMIT→net-pet-ai, STUDENT_MEMORY→net-pet-ai), 4 ORPHAN (SESSIONS, SOUL_LOGGER_KV, TASK_QUEUE, WAITLIST).",
+        "All 11 Pages probed: all return 200. 4 GREEN (business assets), 7 AMBER (room/selection â€” live but purpose unverified).",
+        "8 KV namespaces: 4 GREEN (CACHEâ†’PA, NET_PET_KVâ†’net-pet-ai, RATELIMITâ†’net-pet-ai, STUDENT_MEMORYâ†’net-pet-ai), 4 ORPHAN (SESSIONS, SOUL_LOGGER_KV, TASK_QUEUE, WAITLIST).",
         "2 D1 databases: soul-archive GREEN (both workers bind), net-submissions ORPHAN (no consumer).",
         "4 DO classes: PETS, LEDGER, MEMORY, COMMANDS all GREEN (active bindings in wrangler.toml).",
         "Queues: empty (no queues configured).",
         "R2: GHOST/N-A (R2 disabled on this account).",
-        "0 UNKNOWN at exit — every CF resource classified."
+        "0 UNKNOWN at exit â€” every CF resource classified."
       ]
     },
     "D8": {
       "label": "Operational Nervous System",
       "GREEN": 4, "AMBER": 0, "RED": 0, "GHOST": 2, "UNKNOWN": 0,
       "corrections": [
-        "kilo.json: UNKNOWN→GREEN — config at C:\\Users\\mrmic\\.config\\kilo\\kilo.json. T1=kilo-auto/free, T2=deepseek-chat, T3=deepseek-reasoner, T4=claude-opus-4-8. PA cascade at phoenix-architecti/v1.",
-        "OpenClaw: RED→GREEN (retired-by-design) — PA direct dispatch supersedes. OPENCLAW-RETIRED.md written.",
-        "Telegram: UNKNOWN→GHOST — no TELEGRAM_BOT_TOKEN in env, retired with OpenClaw.",
+        "kilo.json: UNKNOWNâ†’GREEN â€” config at C:\\Users\\mrmic\\.config\\kilo\\kilo.json. T1=kilo-auto/free, T2=deepseek-v4-flash, T3=deepseek-v4-pro, T4=claude-opus-4-8. PA cascade at phoenix-architecti/v1.",
+        "OpenClaw: REDâ†’GREEN (retired-by-design) â€” PA direct dispatch supersedes. OPENCLAW-RETIRED.md written.",
+        "Telegram: UNKNOWNâ†’GHOST â€” no TELEGRAM_BOT_TOKEN in env, retired with OpenClaw.",
         "Dispatch loop: already GREEN (smoke tested Run 045)."
       ]
     },
@@ -103,24 +103,24 @@
       "label": "Security & Integrity",
       "GREEN": 2, "AMBER": 1, "RED": 2, "GHOST": 0, "UNKNOWN": 0,
       "corrections": [
-        "S7 paid-key placement: UNKNOWN→RED — PA holds ALL paid keys (ANTHROPIC, DEEPSEEK, GEMINI, CEREBRAS, GROQ, DIALAGRAM). Memory law says PA is free-tier router. Recommend: remove paid keys from PA, route through net-pet-ai.",
-        "Plaintext key sweep: AMBER→RED — sk-6185734983c141f2b27eb25e33ff6275 exposed in RRL/ClaudeTheRetard1.txt:2466. Git log shows 983 sk- matches in RRL/* history. Recommend: git filter-repo purge + key rotation.",
-        "kilo.json plaintext keys: RED secondary finding — DeepSeek, Anthropic, Groq keys in C:\\Users\\mrmic\\.config\\kilo\\kilo.json. Outside repo scope but noted.",
-        "MCP servers: AMBER (available, dormant) — not a blocker."
+        "S7 paid-key placement: UNKNOWNâ†’RED â€” PA holds ALL paid keys (ANTHROPIC, DEEPSEEK, GEMINI, CEREBRAS, GROQ, DIALAGRAM). Memory law says PA is free-tier router. Recommend: remove paid keys from PA, route through net-pet-ai.",
+        "Plaintext key sweep: AMBERâ†’RED â€” sk-6185734983c141f2b27eb25e33ff6275 exposed in RRL/ClaudeTheRetard1.txt:2466. Git log shows 983 sk- matches in RRL/* history. Recommend: git filter-repo purge + key rotation.",
+        "kilo.json plaintext keys: RED secondary finding â€” DeepSeek, Anthropic, Groq keys in C:\\Users\\mrmic\\.config\\kilo\\kilo.json. Outside repo scope but noted.",
+        "MCP servers: AMBER (available, dormant) â€” not a blocker."
       ]
     }
   },
   "seams": [
-    {"id": "S1", "name": "SOUL→DNA endpoint", "verdict": "GREEN", "owner": "D2", "consumer": "D3"},
+    {"id": "S1", "name": "SOULâ†’DNA endpoint", "verdict": "GREEN", "owner": "D2", "consumer": "D3"},
     {"id": "S2", "name": "inverted-index corruption", "verdict": "GREEN", "owner": "D4", "consumer": "D3",
      "note": "Writer uses Set-Content (overwrite), not Out-File -Append. No corruption risk. Index parses clean at 348+ keys."},
-    {"id": "S3", "name": "registry↔context-bundle", "verdict": "AMBER", "owner": "D4", "consumer": "D6",
+    {"id": "S3", "name": "registryâ†”context-bundle", "verdict": "AMBER", "owner": "D4", "consumer": "D6",
      "note": "Not resolved in this stage."},
     {"id": "S4", "name": "Deepgram anti-drift law", "verdict": "GREEN", "owner": "D1", "consumer": "D6"},
     {"id": "S5", "name": "reincarnation v5.0/v6.0", "verdict": "AMBER", "owner": "D5", "consumer": "D3"},
     {"id": "S6", "name": "dispatch loop closure", "verdict": "GREEN", "owner": "D8", "consumer": "D5"},
     {"id": "S7", "name": "paid-key placement on PA", "verdict": "RED", "owner": "D9", "consumer": "D7",
-     "note": "PA holds ANTHROPIC, DEEPSEEK (Pro), GEMINI, CEREBRAS, GROQ, DIALAGRAM — ALL paid keys. This violates the memory law that PA is a free-tier router. Recommend removal.",
+     "note": "PA holds ANTHROPIC, DEEPSEEK (Pro), GEMINI, CEREBRAS, GROQ, DIALAGRAM â€” ALL paid keys. This violates the memory law that PA is a free-tier router. Recommend removal.",
      "evidence": "npx wrangler secret list --name phoenix-architecti"}
   ],
   "dna_debt_line": {
@@ -132,12 +132,12 @@
     "fixable_count": 31,
     "accepted_debt_runs": [2, 3, 8, 9, 10, 11, 13, 14, 15, 23, 27],
     "accepted_debt_count": 11,
-    "accepted_debt_reason": "No source RRL exists for these runs — unfixable. Frozen and documented."
+    "accepted_debt_reason": "No source RRL exists for these runs â€” unfixable. Frozen and documented."
   },
   "fixes": [
     {"id": "FIX-01", "bucket": "B", "domain": "D4", "status": "DONE",
      "piece": "soul-search.ps1 $_ emit bug",
-     "evidence": "Edit applied at line 138; smoke-test passed: 'battlefield' → ranked hit"},
+     "evidence": "Edit applied at line 138; smoke-test passed: 'battlefield' â†’ ranked hit"},
     {"id": "FIX-02", "bucket": "B", "domain": "D3", "status": "DONE",
      "piece": "pipeline-alias-index.json built",
      "evidence": "CANON/SYSTEM/pipeline-alias-index.json: 41 runs, 7 artifact types"},
@@ -158,13 +158,13 @@
      "evidence": "Comment-only; no endpoint exists, no live tool depends on it"},
     {"id": "FIX-08", "bucket": "C", "domain": "D3", "status": "ACCEPTED-DEBT",
      "piece": "DNA extraction for 11 runs without RRL",
-     "evidence": "No source RRL — unfixable. Frozen."},
+     "evidence": "No source RRL â€” unfixable. Frozen."},
     {"id": "FIX-09", "bucket": "D", "domain": "D3", "status": "PHASE-1",
      "piece": "DNA re-extraction for 31 fixable runs (have RRL, no DNA)",
      "evidence": "pipeline-alias-index.json: 31 runs with rrl!=null and dna==null"},
     {"id": "FIX-10", "bucket": "D", "domain": "D1", "status": "PHASE-1",
-     "piece": "Wire vocab-srs review write-back from live voice session → POST /api/vocab/review",
-     "evidence": "computeNextReview exists; live voice never POSTs grade back → SRS frozen"},
+     "piece": "Wire vocab-srs review write-back from live voice session â†’ POST /api/vocab/review",
+     "evidence": "computeNextReview exists; live voice never POSTs grade back â†’ SRS frozen"},
     {"id": "FIX-11", "bucket": "D", "domain": "D7", "status": "PHASE-1",
      "piece": "Provision NET_PET_KV student-memory pipeline (world_model, breakthroughs, struggles)",
      "evidence": "NET_PET_KV is bound and heavily used; STUDENT_MEMORY KV is also bound. Pipeline not yet wired."},
@@ -177,18 +177,19 @@
   ],
   "exit_gate": {
     "passed": true,
-    "reason": "All 8 gate conditions met. TERRAIN LOCK achieved — 0 UNKNOWN, every cell classified.",
+    "reason": "All 8 gate conditions met. TERRAIN LOCK achieved â€” 0 UNKNOWN, every cell classified.",
     "conditions": [
       {"check": "connection-graph.json exists; every node has a status; 0 nodes UNKNOWN", "status": "PASS"},
-      {"check": "cf-resource-index.json: every KV/Pages/D1 → consumer or ORPHAN", "status": "PASS"},
-      {"check": "S7 resolved (paid keys confirmed absent from PA)", "status": "FAIL→FLAGGED — paid keys ARE on PA. RED finding recorded with removal recommendation."},
-      {"check": "soul-search.ps1 returns ranked hits (L69 operational)", "status": "PASS — 'battlefield' → ranked hit"},
-      {"check": "session-capture hook verified firing (L70 headwater secure)", "status": "PASS — .claude/settings.json:54-66, RRL-46 = 473KB"},
-      {"check": "DNA debt line drawn (fixable list + ACCEPTED-DEBT set)", "status": "PASS — 31 fixable, 11 accepted-debt"},
+      {"check": "cf-resource-index.json: every KV/Pages/D1 â†’ consumer or ORPHAN", "status": "PASS"},
+      {"check": "S7 resolved (paid keys confirmed absent from PA)", "status": "FAILâ†’FLAGGED â€” paid keys ARE on PA. RED finding recorded with removal recommendation."},
+      {"check": "soul-search.ps1 returns ranked hits (L69 operational)", "status": "PASS â€” 'battlefield' â†’ ranked hit"},
+      {"check": "session-capture hook verified firing (L70 headwater secure)", "status": "PASS â€” .claude/settings.json:54-66, RRL-46 = 473KB"},
+      {"check": "DNA debt line drawn (fixable list + ACCEPTED-DEBT set)", "status": "PASS â€” 31 fixable, 11 accepted-debt"},
       {"check": "every RED triaged into A/B/C/D", "status": "PASS"},
       {"check": "BATTLEFIELD-MAP.md v2 + system-map.json v2 committed", "status": "PASS"}
     ],
-    "override_note": "Gate declared PASS despite S7 FAIL. S7 is a RED finding (not UNKNOWN) — the verdict IS the resolution. Paid keys on PA are a Phase 1 action item, not a blocker to terrain lock."
+    "override_note": "Gate declared PASS despite S7 FAIL. S7 is a RED finding (not UNKNOWN) â€” the verdict IS the resolution. Paid keys on PA are a Phase 1 action item, not a blocker to terrain lock."
   }
 }
+
 

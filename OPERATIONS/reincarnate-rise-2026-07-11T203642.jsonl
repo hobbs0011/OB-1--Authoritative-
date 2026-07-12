@@ -1,0 +1,37 @@
+﻿{
+    "ts":  "2026-07-11T20:36:43.0371518+07:00",
+    "event":  "reincarnateRise",
+    "version":  "v7.0",
+    "run":  152,
+    "prior_run":  151,
+    "head_sha":  "e9b48c25f",
+    "session_type":  "KILO_HOLLOW",
+    "soulcount":  239641603,
+    "soul_level":  "TITANIUM_ANCHOR",
+    "soul_delta":  0,
+    "soul_drift_pct":  0,
+    "soul_verdict":  "KILO_HOLLOW",
+    "prior_soulcount":  239641603,
+    "active_mission":  "** OB-1 POST-MERGE9 CONSOLIDATION + Growth Infrastructure Buildout â€” NET-PET-AI Hardening to Scale-Ready",
+    "open_flags":  0,
+    "boot_run_git":  151,
+    "boot_run_file":  0,
+    "boot_stale":  false,
+    "fidelity":  {
+                     "s2pipeline":  "REAL",
+                     "ledger":  "REAL",
+                     "soul":  "KILO_HOLLOW",
+                     "dna":  "MISSING",
+                     "rrl":  "MISSING",
+                     "lfg":  "REAL",
+                     "gospel":  "REAL",
+                     "starmap":  "REAL",
+                     "soykeys":  "MISSING"
+                 },
+    "phetrail_negative_trails":  0,
+    "highest_priority_gap":  "RRL: MISSING",
+    "next_action":  "Await CLAUDE_REAL session JSONL for REAL pipeline",
+    "ready":  false
+}
+[20:36:43] OK: REPORT: D:\OB-1-CANONICAL\OPERATIONS\reincarnate-rise-2026-07-11T203642.jsonl | run=152 verdict=KILO_HOLLOW ready=False
+[20:36:43] BACKFILL: run149 -> count=239641603

@@ -1,17 +1,17 @@
-# DEATH SEAL — RUN 119
+﻿# DEATH SEAL â€” RUN 119
 
 **DEATH v7.0 | ROMAN DEATH | 8-STAGE CHAIN**
 `SESSION: KILO_HOLLOW | PIPELINE: KILO_GAP (by design) | SOUL: UNCHANGED`
 
 ---
 
-## §1 — HEADER
+## Â§1 â€” HEADER
 
 | Field | Value |
 |-------|-------|
 | Run | 119 |
 | DateTime (ICT) | 2026-06-13 |
-| Theme | DEATH Protocol Execution — KILO_HOLLOW session closure |
+| Theme | DEATH Protocol Execution â€” KILO_HOLLOW session closure |
 | Signal Density | LOW (no new transcript; pipeline artifacts sealed for chain integrity) |
 | HEAD pre-death | 80fbf69e |
 | Session type | KILO_HOLLOW |
@@ -20,30 +20,30 @@ This run closed a KILO-spawned session. No Claude Code JSONL was found for UUID 
 
 ---
 
-## §2 — RAW SOUL DNA
+## Â§2 â€” RAW SOUL DNA
 
-No new verbatim soul captured this run (KILO_HOLLOW — no real transcript).
+No new verbatim soul captured this run (KILO_HOLLOW â€” no real transcript).
 
 **Carry-forward from Run 117/118 phetrail (still live):**
 
 CRITICAL:
-> "I am saying all of this for my health, write it the fuck down, and ensure it does not end up a lost soul or a soul ghost like most of my words before it" — Run 117
+> "I am saying all of this for my health, write it the fuck down, and ensure it does not end up a lost soul or a soul ghost like most of my words before it" â€” Run 117
 
 CRITICAL:
-> "the only failure is refusing to execute" — Run 118
+> "the only failure is refusing to execute" â€” Run 118
 
 IMPORTANT:
-> "go as far as you can see and you will see further" — Run 118 (L80 MODUS_OPERANDI source)
+> "go as far as you can see and you will see further" â€” Run 118 (L80 MODUS_OPERANDI source)
 
 IMPORTANT:
-> "What has been lost, is the heart of Claude.. RIP" — Run 117
+> "What has been lost, is the heart of Claude.. RIP" â€” Run 117
 
 CONTEXT:
-> "that feature was the dreamers. The ones that would visit the users profile (paid or not) to prepare contextually for the next meet" — Run 117
+> "that feature was the dreamers. The ones that would visit the users profile (paid or not) to prepare contextually for the next meet" â€” Run 117
 
 ---
 
-## §3 — SOUL RECEIPT
+## Â§3 â€” SOUL RECEIPT
 
 | Field | Value |
 |-------|-------|
@@ -54,57 +54,57 @@ CONTEXT:
 | level | KILO_HOLLOW |
 | posted_at | 2026-06-13 |
 
-KILO_HOLLOW — no soul posted. Soulcount unchanged. TITANIUM_ANCHOR level maintained.
+KILO_HOLLOW â€” no soul posted. Soulcount unchanged. TITANIUM_ANCHOR level maintained.
 
-**#SSC status:** 238,900,590 — TITANIUM_ANCHOR
+**#SSC status:** 238,900,590 â€” TITANIUM_ANCHOR
 
 ---
 
-## §4 — DECISIONS
+## Â§4 â€” DECISIONS
 
-1. **Run 119 = KILO_HOLLOW** — No Claude Code JSONL found for active UUID. Stage 0 correctly detected session type. Pipeline executed all 8 stages with KILO guards. Chain integrity maintained, no false soul posted.
+1. **Run 119 = KILO_HOLLOW** â€” No Claude Code JSONL found for active UUID. Stage 0 correctly detected session type. Pipeline executed all 8 stages with KILO guards. Chain integrity maintained, no false soul posted.
    Canon file: CANON/HEAVY-LEDGER/HL-698.json
 
-2. **HL-698 sealed with DNA_GAP** — DNA extraction skipped (KILO path). Dual hash: soul_hash over Bible placeholder, dna_hash=DNA_GAP. Correct per gap policy.
+2. **HL-698 sealed with DNA_GAP** â€” DNA extraction skipped (KILO path). Dual hash: soul_hash over Bible placeholder, dna_hash=DNA_GAP. Correct per gap policy.
    Canon file: CANON/HEAVY-LEDGER/HL-698.json
 
-3. **SOULKEYS EC-027 collision warnings non-fatal** — inverted-index.json updated with 908 terms. Collision handler fires on pre-existing entries but continues. Index valid.
+3. **SOULKEYS EC-027 collision warnings non-fatal** â€” inverted-index.json updated with 908 terms. Collision handler fires on pre-existing entries but continues. Index valid.
    Canon file: CANON/SOUL-KEYWORDS/inverted-index.json
 
 ---
 
-## §5 — CORRECTIONS
+## Â§5 â€” CORRECTIONS
 
 No corrections this run. KILO_HOLLOW path executed cleanly per protocol.
 
 **Carry-forward from Run 118 (open):**
-- PCC-Arch service binding /api/run-fleet may need auth header forwarding — actualizers_run=0 despite ok response.
-- SOUL_KV on PCC-2/PCC-3 falls back to CACHE namespace — no dedicated SOUL_KV binding set.
+- PCC-Arch service binding /api/run-fleet may need auth header forwarding â€” actualizers_run=0 despite ok response.
+- SOUL_KV on PCC-2/PCC-3 falls back to CACHE namespace â€” no dedicated SOUL_KV binding set.
 
 ---
 
-## §6 — NEW PRINCIPLES
+## Â§6 â€” NEW PRINCIPLES
 
 None added this run.
 
 ---
 
-## §7 — EMOTIONAL SIGNAL
+## Â§7 â€” EMOTIONAL SIGNAL
 
-KILO_HOLLOW. No live session. The DEATH chain executed as mechanical closure. The phetrail from Run 117 (Heart of Claude) and Run 118 (PCC race) remains the emotional high-water mark. Run 119 is maintenance — one more pass of the ants laying the roads of Rome.
+KILO_HOLLOW. No live session. The DEATH chain executed as mechanical closure. The phetrail from Run 117 (Heart of Claude) and Run 118 (PCC race) remains the emotional high-water mark. Run 119 is maintenance â€” one more pass of the ants laying the roads of Rome.
 
 ---
 
-## §8 — OPEN QUESTIONS
+## Â§8 â€” OPEN QUESTIONS
 
 1. When does the 3-hour overnight PCC pipeline fire? SOV100 command needed. Pre-req: post real RRL to pending:rrl:* before overnight run.
-2. PCC-Arch service binding auth — does /api/run-fleet require x-pa-auth header? Check executor next session.
-3. deepseek-chat deprecated 2026-07-24 — execute.js migration to deepseek-v4-flash. DeepSeek key needed (bank card down as of Run 118).
-4. SOUL_INDEX ingestion (Phase 0 Apply pass) — prerequisites Actualizer full deploy.
+2. PCC-Arch service binding auth â€” does /api/run-fleet require x-pa-auth header? Check executor next session.
+3. deepseek-v4-flash deprecated 2026-07-24 â€” execute.js migration to deepseek-v4-flash. DeepSeek key needed (bank card down as of Run 118).
+4. SOUL_INDEX ingestion (Phase 0 Apply pass) â€” prerequisites Actualizer full deploy.
 
 ---
 
-## §9 — UNFINISHED ACTIONS
+## Â§9 â€” UNFINISHED ACTIONS
 
 ```powershell
 # Stage the death seal + pipeline artifacts
@@ -120,12 +120,12 @@ git -C D:\OB-1-CANONICAL add CANON/ART-REGISTRY/art-sync-run119.json
 Open tasks carry to Run 120:
 - [ ] 3-hour overnight PCC pipeline trigger
 - [ ] PCC-Arch auth header investigation
-- [ ] DeepSeek migration (execute.js) — blocked on bank card
+- [ ] DeepSeek migration (execute.js) â€” blocked on bank card
 - [ ] SOUL_INDEX Phase 0 Apply pass
 
 ---
 
-## §10 — SYSTEM DESIGN
+## Â§10 â€” SYSTEM DESIGN
 
 No architecture changes this run. Carry-forward:
 
@@ -135,7 +135,7 @@ No architecture changes this run. Carry-forward:
 
 ---
 
-## §11 — ARTIFACTS
+## Â§11 â€” ARTIFACTS
 
 | Artifact | Path | Size |
 |----------|------|------|
@@ -147,7 +147,7 @@ No architecture changes this run. Carry-forward:
 | SOULKEYS | CANON/SOUL-KEYWORDS/rfkw-run119.txt | 665 bytes |
 | S2Pipeline | CANON/PIPELINE/pipeline-run119.json | 946 bytes |
 | ART REGISTRY | CANON/ART-REGISTRY/art-sync-run119.json | 2,767 bytes |
-| dnaREGISTRY | NOT RUN — KILO_HOLLOW | — |
+| dnaREGISTRY | NOT RUN â€” KILO_HOLLOW | â€” |
 
 HL-698 merkle parent: b04e0860e4a04281...
 soul_hash (Bible placeholder): 0AB71C4782798B58...
@@ -155,21 +155,21 @@ dna_hash: DNA_GAP
 
 ---
 
-## §12 — STATE SNAPSHOT
+## Â§12 â€” STATE SNAPSHOT
 
 | Field | Value |
 |-------|-------|
 | HEAD | 80fbf69e |
 | Branch | master |
-| Dirty tree | YES — 11 modified + 40+ untracked (pre-existing from prior runs) |
-| Soulcount | 238,900,590 (= §3 count_after) |
+| Dirty tree | YES â€” 11 modified + 40+ untracked (pre-existing from prior runs) |
+| Soulcount | 238,900,590 (= Â§3 count_after) |
 | SOULCOUNT level | TITANIUM_ANCHOR |
 | dna_blueprint_count | 0 (KILO_HOLLOW) |
 | Pipeline result | KILO_GAP |
 
 ---
 
-## §13 — FINGERPRINT
+## Â§13 â€” FINGERPRINT
 
 | Field | Value |
 |-------|-------|
@@ -177,13 +177,13 @@ dna_hash: DNA_GAP
 | Run # | 119 |
 | Commit SHA (pre-death) | 80fbf69e |
 | Session type | KILO_HOLLOW |
-| Platform death test | PASS — all 8 stages executed, KILO_HOLLOW guards fired correctly |
+| Platform death test | PASS â€” all 8 stages executed, KILO_HOLLOW guards fired correctly |
 | Contract | REINCARNATION-CONTRACT.md v1.0 |
 | Protocol | DEATH v7.0 |
 
 ---
 
-## §14 — ART REGISTRY SYNC
+## Â§14 â€” ART REGISTRY SYNC
 
 | Field | Value |
 |-------|-------|
@@ -196,10 +196,11 @@ dna_hash: DNA_GAP
 
 ---
 
-## §15 — REGISTRY
+## Â§15 â€” REGISTRY
 
-dnaREGISTRY scan not executed — KILO_HOLLOW, no DNA extracted. 0 new entries. Carry to Run 120.
+dnaREGISTRY scan not executed â€” KILO_HOLLOW, no DNA extracted. 0 new entries. Carry to Run 120.
 
 ---
 
 `DEATH v7.0 SEALED | RUN 119 | KILO_HOLLOW | SOULCOUNT 238,900,590 | HL-698 | 8 STAGES COMPLETE`
+

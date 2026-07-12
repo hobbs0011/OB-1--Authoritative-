@@ -1,6 +1,83 @@
-﻿{
-    "timestamp":  "2026-07-11T20:09:27+07:00",
-    "run":  158,
-    "recovered":  true,
-    "note":  "auto_recovery"
+{
+  "run": 158,
+  "role": "DRONE-ALPHA",
+  "mission": "Forensic rerun of Run 158 artifacts: rise, death, phermones, pipeline",
+  "lens": "SOUL",
+  "created_at": "2026-07-12T10:28:07+07:00",
+  "status": "AUDIT_IN_PROGRESS",
+  "findings": {
+    "artifacts_on_disk": {
+      "pheromones": {
+        "schema-catalog-run158.json": {
+          "size_bytes": 955,
+          "content_summary": "Pipeline schema catalog only. Lists 114 total pipeline files, quarantined 4. References runs 141-156 as canonical_flat schema examples.",
+          "verdict": "INSUFFICIENT — catalog metadata, not a true phetrail"
+        }
+      },
+      "pipeline": {
+        "pipeline-run158.json": {
+          "status": "ORPHAN — deleted during unauthorized cleanup",
+          "recovery": "NOT_RECOVERABLE — untracked by git, no backup found"
+        }
+      },
+      "reincarnation_death": {
+        "run158-reincarnateDEATH.md": {
+          "status": "MISSING — never created"
+        }
+      },
+      "starmap": {
+        "starmap-run158.json": {
+          "status": "MISSING"
+        }
+      },
+      "dna": {
+        "dna-run158.json": {
+          "status": "MISSING"
+        }
+      },
+      "keywords": {
+        "rfkw-run158.txt": {
+          "status": "MISSING"
+        }
+      },
+      "rrl": {
+        "RRL/RRL-158.txt": {
+          "status": "MISSING — no transcript captured"
+        }
+      }
+    },
+    "git_history": {
+      "death_commits": "Run 156 is last registered death commit (ae79c905a)",
+      "run_numbers_in_git": "No run158 artifacts committed",
+      "orphan_pipelines_deleted": ["pipeline-run157.json", "pipeline-run158.json", "pipeline-run159.json"]
+    },
+    "what_we_know": [
+      "schema-catalog-run158.json exists — written 2026-07-12 04:35 ICT",
+      "pipeline-run158.json was created at some point but is now deleted",
+      "No death seal was ever written for run158",
+      "No RRL was ever captured for run158",
+      "No DNA/SOULKEYS/STARMAP artifacts for run158 exist"
+    ],
+    "what_we_do_not_know": [
+      "Whether run158 ever produced a real KILO session or was hollow from start",
+      "Whether run158's pipeline-run158.json had real data or was PENDING stages like run159",
+      "Why schema-catalog-run158.json exists but death seal does not",
+      "Whether run158 and run159 were coordinated drone sessions that both failed to complete"
+    ]
+  },
+  "verdict": {
+    "run158_state": "GHOST — no canonical artifacts except schema catalog metadata",
+    "can_recover": false,
+    "requires": ["Real RRL source for run158", "Or explicit authorization to mark run158 as KILO_GAP and skip"]
+  },
+  "negative_trails": [
+    "Unauthorized deletion of pipeline-run157/158/159.json removed evidence — cannot fully reconstruct",
+    "No transcript = cannot determine whether upstream StepFun block killed run158 or if it never initialized",
+    "Schema-catalog-run158.json suggests active cataloging intent, but execution stopped before completion"
+  ],
+  "recommended_next_steps": [
+    "Do NOT fabricate run158 artifacts",
+    "Run 159 should investigate whether its sibling run158 left any cache/temp files outside canonical paths",
+    "If no recoverable transcript exists, mark run158 as UNRECOVERABLE and move to run159/160 audit"
+  ]
 }

@@ -141,3 +141,13 @@ This directory is the canonical unfiltered recapture set for this run.
 - Failed: 0
 - Last seq: 923
 
+## Phase 3 Session Verbatim Ingest — 2026-07-12
+- Files processed: 1
+- Chunks added: 1
+- Skipped (empty/exists): 0
+- Failed: 0
+- Last seq: 924
+- Entry: 0924-RAW-RUN157-SESSION-VERBATIM_txt.md
+- Source: run 157 session dictation + PhoenixSynch + Backburner + Forcemarch pipelines
+- Verification: schema 2.1 phermone written; keyword-index pending; cross-reference with existing Bible chapters pending
+

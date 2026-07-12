@@ -30,11 +30,11 @@ async function runTier(env, messages, tier, maxToks, codeTask) {
       const r = await fetch('https://api.deepseek.com/v1/chat/completions', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${env.DEEPSEEK_API_KEY}` },
-        body: JSON.stringify({ model: 'deepseek-chat', messages, max_tokens: Math.max(maxToks, 2048) }),
+        body: JSON.stringify({ model: 'deepseek-v4-flash', messages, max_tokens: Math.max(maxToks, 2048) }),
       });
       if (r.ok) {
         const j = await r.json();
-        if (j.choices?.[0]?.message?.content) return { text: j.choices[0].message.content, model: 'deepseek-chat' };
+        if (j.choices?.[0]?.message?.content) return { text: j.choices[0].message.content, model: 'deepseek-v4-flash' };
       }
     } catch (_) {}
   }
@@ -157,3 +157,4 @@ export async function handleBatch(request, env) {
     count: results.length,
   });
 }
+

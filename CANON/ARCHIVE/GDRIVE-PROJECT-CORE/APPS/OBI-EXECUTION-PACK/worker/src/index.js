@@ -1,4 +1,4 @@
-// OBI Cloudflare Worker — Production MVP Core
+﻿// OBI Cloudflare Worker â€” Production MVP Core
 // Deploy: wrangler deploy
 // Environment: Set DEEPSEEK_KEY, SUPABASE_URL, SUPABASE_KEY in wrangler.toml secrets
 
@@ -38,7 +38,7 @@ User weak points: {WEAK_POINTS}
 Current streak: {STREAK}`;
 
 // ============================================================
-// L4 — MEMORY SYSTEM (Durable Objects via KV for MVP)
+// L4 â€” MEMORY SYSTEM (Durable Objects via KV for MVP)
 // ============================================================
 
 class UserMemory {
@@ -114,7 +114,7 @@ class UserMemory {
 }
 
 // ============================================================
-// L3 — INTELLIGENCE LAYER (LLM Router)
+// L3 â€” INTELLIGENCE LAYER (LLM Router)
 // ============================================================
 
 async function callDeepSeek(env, prompt) {
@@ -125,7 +125,7 @@ async function callDeepSeek(env, prompt) {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      model: 'deepseek-chat',
+      model: 'deepseek-v4-flash',
       messages: [{ role: 'user', content: prompt }],
       temperature: 0.7,
       max_tokens: 300
@@ -137,7 +137,7 @@ async function callDeepSeek(env, prompt) {
 }
 
 // ============================================================
-// L2 — EDGE ORCHESTRATION (Core Router Logic)
+// L2 â€” EDGE ORCHESTRATION (Core Router Logic)
 // ============================================================
 
 async function handleChat(req, env) {
@@ -218,9 +218,9 @@ async function handleChat(req, env) {
 // ============================================================
 
 function extractErrors(response) {
-  // Simple extraction — look for phoneme and grammar mentions
+  // Simple extraction â€” look for phoneme and grammar mentions
   const errors = [];
-  const phonemes = ['θ', 'ʃ', 'ʒ', 'ŋ', 'ɹ'];
+  const phonemes = ['Î¸', 'Êƒ', 'Ê’', 'Å‹', 'É¹'];
   const grammar = ['past tense', 'article', 'subject-verb', 'preposition', 'plural'];
 
   grammar.forEach(g => {
@@ -239,7 +239,7 @@ function mergeWeakPoints(current, newErrors) {
 }
 
 // ============================================================
-// L1 — ROUTING (Entry Points)
+// L1 â€” ROUTING (Entry Points)
 // ============================================================
 
 router.post('/api/chat', handleChat);
@@ -283,3 +283,4 @@ export default {
     return router.handle(request, env);
   }
 };
+

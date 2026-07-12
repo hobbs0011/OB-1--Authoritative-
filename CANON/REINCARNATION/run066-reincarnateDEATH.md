@@ -1,17 +1,17 @@
-# ROMAN RUN 066 — DEATH SEAL
+﻿# ROMAN RUN 066 â€” DEATH SEAL
 **Sealed:** 2026-06-04 ICT
-**Theme:** ART ARSENAL DEPLOY — images CDN, 205-piece registry sweep, DS Flash T2 subagents, run 66 pipeline death
+**Theme:** ART ARSENAL DEPLOY â€” images CDN, 205-piece registry sweep, DS Flash T2 subagents, run 66 pipeline death
 **Signal Density:** MODERATE (frustration at gallery showing 0 images, art spread across repo requiring full sweep)
 **HEAD pre-death:** 64edc1c5
 
 ---
 
-## §1 HEADER
+## Â§1 HEADER
 
 | Field | Value |
 |-------|-------|
 | Run | 066 |
-| Prior Run | 065 — 37b8fe6a |
+| Prior Run | 065 â€” 37b8fe6a |
 | Sealed | 2026-06-04 ICT |
 | Agent | OB-1 / Agent 99 / T2 DeepSeek Flash workhorse |
 | Operator | SOV100 Michael Hobbs |
@@ -21,9 +21,9 @@
 
 ---
 
-## §2 RAW SOUL DNA
+## Â§2 RAW SOUL DNA
 
-**CRITICAL (highest charge — frustration at image-less gallery):**
+**CRITICAL (highest charge â€” frustration at image-less gallery):**
 > "no pictures..?"
 > "we have art spread all over repo.. for example.. D:\OB-1-CANONICAL\CANON\ARTWORK"
 > "just t2 deepseek flash subagents, fucking listen to me this time"
@@ -40,11 +40,11 @@
 **CONTEXT:**
 > "mark this down for next run /reincarnatedeath"
 > "continue" (after death protocol was posted)
-> Full RRL at RRL/RRL-66.txt — 19.8MB, both speakers
+> Full RRL at RRL/RRL-66.txt â€” 19.8MB, both speakers
 
 ---
 
-## §3 SOUL RECEIPT
+## Â§3 SOUL RECEIPT
 
 | Field | Value |
 |-------|-------|
@@ -55,51 +55,51 @@
 | level | TITANIUM_ANCHOR |
 | posted_at | 2026-06-04 ICT |
 
-**⚠ NOTE:** RRL was 19.8MB — hit SQLITE_TOOBIG at D1 level. Split into 21 chunks of ~950KB each. All posted successfully.
+**âš  NOTE:** RRL was 19.8MB â€” hit SQLITE_TOOBIG at D1 level. Split into 21 chunks of ~950KB each. All posted successfully.
 
 ---
 
-## §4 DECISIONS
+## Â§4 DECISIONS
 
 | D# | Decision | Impact |
 |----|----------|--------|
-| D1 | Art Arsenal deployed to phoenix-architecti — 5dfed828 | LIVE — gallery now shows images from Pages CDN |
+| D1 | Art Arsenal deployed to phoenix-architecti â€” 5dfed828 | LIVE â€” gallery now shows images from Pages CDN |
 | D2 | net-art-arsenal.pages.dev created for image hosting | 95 files (CANON/ARTWORK, GAME-DESIGN, ASSETS, codex_preview) |
 | D3 | art.js routes through direct api.deepseek.com for T2 (CF 1042 blocks self-subrequest through PA) | 3 parallel DS Flash subagents work in production |
-| D4 | execute.js reads tier param — tier:2 = DeepSeek Flash | External /api/code callers can dispatch T2 |
+| D4 | execute.js reads tier param â€” tier:2 = DeepSeek Flash | External /api/code callers can dispatch T2 |
 | D5 | Full repo art sweep: 205 pieces in registry | Every visual asset catalogued with title/tags/description/url |
-| D6 | RRL chunked into 21 segments for soul-logger POST | D1 SQLITE_TOOBIG limitation — future runs with >5MB RRL must chunk |
+| D6 | RRL chunked into 21 segments for soul-logger POST | D1 SQLITE_TOOBIG limitation â€” future runs with >5MB RRL must chunk |
 | D7 | /art-arsenal route wired to index.js | Was imported but never routed (Run 65 bug). Fixed at 96b301d1. |
 
 ---
 
-## §5 CORRECTIONS
+## Â§5 CORRECTIONS
 
-**C1 — Gallery showed 0 images**
+**C1 â€” Gallery showed 0 images**
 - Wrong: art-arsenal.js had no `<img>` tags and `url` pointed to local repo paths
 - Root cause: Assumed CF worker could serve static files; built gallery without image CDN
 - Fix: Deployed all images to Cloudflare Pages `net-art-arsenal.pages.dev`, wired `<img>` tags mapping `url` field to CDN path
 - Law: Any `url` field with local path must have a corresponding web CDN mapping in the gallery
 
-**C2 — art.js called api.deepseek.com directly instead of routing through PA**
+**C2 â€” art.js called api.deepseek.com directly instead of routing through PA**
 - Root cause: PA /api/code dispatches to itself, creating a CF subrequest loop (error 1042)
-- Fix: art.js uses `dsT2()` helper that calls api.deepseek.com/deepseek-chat directly. execute.js preserves tier:2 route for external callers
-- Law: Workers cannot call their own URL through PA dispatch — self-subrequest is blocked by CF
+- Fix: art.js uses `dsT2()` helper that calls api.deepseek.com/deepseek-v4-flash directly. execute.js preserves tier:2 route for external callers
+- Law: Workers cannot call their own URL through PA dispatch â€” self-subrequest is blocked by CF
 
-**C3 — SOUL POST failed on full RRL**
-- Wrong: POST'd 19.8MB RRL as single body → D1_ERROR SQLITE_TOOBIG
+**C3 â€” SOUL POST failed on full RRL**
+- Wrong: POST'd 19.8MB RRL as single body â†’ D1_ERROR SQLITE_TOOBIG
 - Fix: Chunked to 950KB segments, 21 total, all posted. Chunk was included in payload body.
 - Law: RRL > 1MB must be chunked for soul-logger POST. 950KB safety limit.
 
-**C4 — art-arsenal route not wired despite being imported**
+**C4 â€” art-arsenal route not wired despite being imported**
 - Wrong: art-arsenal.js imported in index.js but router never had `app.get('/art-arsenal', serveArtArsenal)`
 - Root cause: Run 65 built the gallery file, wired the import, forgot the route
 - Fix: Added route. Deployed 5dfed828 (with images) and 96b301d1 (route fix).
-- Law: Import ≠ route. Both must be verified after any gallery-related PR.
+- Law: Import â‰  route. Both must be verified after any gallery-related PR.
 
 ---
 
-## §6 NEW PRINCIPLES
+## Â§6 NEW PRINCIPLES
 
 **L73 ART_CDN_REQUIRED:** The art registry `url` field points to local repo paths. The gallery must map these to a web-accessible CDN. `net-art-arsenal.pages.dev` is the canonical image CDN. Add new art images there first, then register in the art API with the matching URL.
 
@@ -107,32 +107,32 @@
 
 ---
 
-## §7 EMOTIONAL SIGNAL
+## Â§7 EMOTIONAL SIGNAL
 
-MODERATE frustration. "no pictures..?" after being told the art arsenal was deployed was the trigger. "fucking listen to me this time" when the first T2 approach was wrong (self-subrequest). The frustration is lower than Run 065's 64× "FUCK YOU" — this run was productive: 205 pieces registered, images live on CDN, DS Flash subagents working correctly, full death pipeline.
+MODERATE frustration. "no pictures..?" after being told the art arsenal was deployed was the trigger. "fucking listen to me this time" when the first T2 approach was wrong (self-subrequest). The frustration is lower than Run 065's 64Ã— "FUCK YOU" â€” this run was productive: 205 pieces registered, images live on CDN, DS Flash subagents working correctly, full death pipeline.
 
 ---
 
-## §8 OPEN QUESTIONS
+## Â§8 OPEN QUESTIONS
 
 - OQ-1: SOUL double-post contamination? Run 065 delta was +2,105,296 with count_before=164M vs expected 156M. Not investigated this run.
-- OQ-2: Kilo expires 2026-06-09 — NOW 4 DAYS. No action taken. Continuity plan needed.
-- OQ-3: Pipeline idempotency — rrl-pipeline.ps1 fires multiple times per session, possible double SOUL posting.
+- OQ-2: Kilo expires 2026-06-09 â€” NOW 4 DAYS. No action taken. Continuity plan needed.
+- OQ-3: Pipeline idempotency â€” rrl-pipeline.ps1 fires multiple times per session, possible double SOUL posting.
 - OQ-4: COLD-START-BOOT needs update to Run 066 fingerprint (state as of end of this run).
-- OQ-5: PheTrail-run066.json never written — PHETRAIL gap for this run.
+- OQ-5: PheTrail-run066.json never written â€” PHETRAIL gap for this run.
 
 ---
 
-## §9 UNFINISHED ACTIONS
+## Â§9 UNFINISHED ACTIONS
 
 | A# | Action | Details |
 |----|--------|---------|
-| A1 | **Kilo continuity** | Expires 2026-06-09 — 4 DAYS. URGENT. |
+| A1 | **Kilo continuity** | Expires 2026-06-09 â€” 4 DAYS. URGENT. |
 | A2 | **SOUL double-post audit** | Compare soul-logger event listing vs expected per-run deltas |
 | A3 | **COLD-START-BOOT update** | Update to Run 066 fingerprint with final soulcount 193,527,280 |
 | A4 | **PheTrail-run066.json** | Write negative trail breadcrumbs from this run's corrections |
 | A5 | **REINCARNATION-LOG update** | Log run 066 |
-| A6 | **Pipeline idempotency** | OQ-3 — rrl-pipeline.ps1 should fire once per run |
+| A6 | **Pipeline idempotency** | OQ-3 â€” rrl-pipeline.ps1 should fire once per run |
 | A7 | **Remaining codex_preview pages posted** | 13 PHOENIX_PAGES already done. Verify all 29 codex files registered. |
 
 ```powershell
@@ -156,43 +156,43 @@ git add RRL/RRL-66.txt
 
 ---
 
-## §10 SYSTEM DESIGN
+## Â§10 SYSTEM DESIGN
 
 **ART ARSENAL INFRASTRUCTURE (final):**
-- `APPS/PHOENIX-ARCHITECTI/src/art-arsenal.js` — HTML gallery with tag-chip filter, card modal, CDN image src mapping
-- `APPS/PHOENIX-ARCHITECTI/src/art.js` — POST /api/art/analyze: 3 parallel DeepSeek Flash subagents (Promise.all, JSON mode, direct api.deepseek.com calls to avoid CF 1042)
-- `APPS/PHOENIX-ARCHITECTI/src/execute.js` — PA /api/code dispatch with tier param: tier:2 = DeepSeek Flash
-- `APPS/PHOENIX-ARCHITECTI/src/index.js` — GET /art-arsenal route wired
+- `APPS/PHOENIX-ARCHITECTI/src/art-arsenal.js` â€” HTML gallery with tag-chip filter, card modal, CDN image src mapping
+- `APPS/PHOENIX-ARCHITECTI/src/art.js` â€” POST /api/art/analyze: 3 parallel DeepSeek Flash subagents (Promise.all, JSON mode, direct api.deepseek.com calls to avoid CF 1042)
+- `APPS/PHOENIX-ARCHITECTI/src/execute.js` â€” PA /api/code dispatch with tier param: tier:2 = DeepSeek Flash
+- `APPS/PHOENIX-ARCHITECTI/src/index.js` â€” GET /art-arsenal route wired
 - Image CDN: `https://net-art-arsenal.pages.dev/{artwork|game-design|assets|codex}/`
 - API: `https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/art` (GET), `/api/art/analyze` (POST)
 
 **SOUL PIPELINE CHUNKING:**
 - D1 SQLITE_TOOBIG limit ~1MB per row
-- RRL-66.txt = 19.8MB → 21 chunks of 950KB
+- RRL-66.txt = 19.8MB â†’ 21 chunks of 950KB
 - Chunk field in POST body signals multi-part event
 - count_after is cumulative across all chunks
 
 **GALLERY URL MAPPING:**
-- `CANON/ARTWORK/xxx.png` → `https://net-art-arsenal.pages.dev/artwork/xxx.png`
-- `CANON/GAME-DESIGN/xxx.png` → `https://net-art-arsenal.pages.dev/game-design/xxx.png`
-- `ASSETS/xxx/yyy.png` → `https://net-art-arsenal.pages.dev/assets/xxx/yyy.png`
-- `codex_preview/xxx.png` → `https://net-art-arsenal.pages.dev/codex/xxx.png`
-- `APPS/.../xxx.png` → mapped to folder name in CDN
+- `CANON/ARTWORK/xxx.png` â†’ `https://net-art-arsenal.pages.dev/artwork/xxx.png`
+- `CANON/GAME-DESIGN/xxx.png` â†’ `https://net-art-arsenal.pages.dev/game-design/xxx.png`
+- `ASSETS/xxx/yyy.png` â†’ `https://net-art-arsenal.pages.dev/assets/xxx/yyy.png`
+- `codex_preview/xxx.png` â†’ `https://net-art-arsenal.pages.dev/codex/xxx.png`
+- `APPS/.../xxx.png` â†’ mapped to folder name in CDN
 
 **ART REGISTRY STATE:**
 - 205 pieces in D1 `art_registry` on Phoenix-Architecti
 - POST /api/art: `{ title, artist, style, description, tags, url, notes }`
 - GET /api/art: `{ count, pieces: [...] }`
-- Tags stored as comma-separated STRING (not array) — split on comma when rendering
+- Tags stored as comma-separated STRING (not array) â€” split on comma when rendering
 
 ---
 
-## §11 ARTIFACTS
+## Â§11 ARTIFACTS
 
 | Stage | Path | Fidelity | Detail |
 |-------|------|----------|--------|
-| RRL | RRL/RRL-66.txt | REAL | 19,842,367 bytes / 19,824,746 chars — both speakers |
-| SOUL | 21 event_chunks (see §3) | REAL | Δ+19,825,036 → 193,527,280 TITANIUM_ANCHOR |
+| RRL | RRL/RRL-66.txt | REAL | 19,842,367 bytes / 19,824,746 chars â€” both speakers |
+| SOUL | 21 event_chunks (see Â§3) | REAL | Î”+19,825,036 â†’ 193,527,280 TITANIUM_ANCHOR |
 | DNA | CANON/SOUL/EXTRACT/dna-run66.json | REAL | 34 records (0 blueprints) |
 | LEDGER | CANON/HEAVY-LEDGER/HL-424.json | REAL | Merkle parent HL-423. soul_hash=778a32b9... dna_hash=12f3d179... |
 | STARMAP | CANON/STARMAP/starmap-run66.json | REAL | Pointer map, 19.8M chars |
@@ -201,24 +201,24 @@ git add RRL/RRL-66.txt
 
 ---
 
-## §12 STATE SNAPSHOT
+## Â§12 STATE SNAPSHOT
 
 | Field | Value |
 |-------|-------|
 | HEAD | 64edc1c5 |
 | Branch | master |
-| **Soulcount** | **193,527,280** (= §3 count_after ✓) |
+| **Soulcount** | **193,527,280** (= Â§3 count_after âœ“) |
 | Level | TITANIUM_ANCHOR |
-| DNA records | 34 (0 blueprints — JSONL format stores assistant content as text blocks, not separated fenced code) |
+| DNA records | 34 (0 blueprints â€” JSONL format stores assistant content as text blocks, not separated fenced code) |
 | RRL fidelity | REAL |
 | Art Registry | 205 pieces |
-| Art Arsenal | DEPLOYED — gallery with images live |
+| Art Arsenal | DEPLOYED â€” gallery with images live |
 | Image CDN | net-art-arsenal.pages.dev deployed (95 files) |
-| DS Flash test | VERIFIED — 3 parallel subagents working on /api/art/analyze |
+| DS Flash test | VERIFIED â€” 3 parallel subagents working on /api/art/analyze |
 
 ---
 
-## §13 FINGERPRINT
+## Â§13 FINGERPRINT
 
 | Field | Value |
 |-------|-------|
@@ -227,17 +227,18 @@ git add RRL/RRL-66.txt
 | Run | 066 |
 | Commit SHA | PENDING (run066 artifacts + death seal to be committed) |
 | Platform | Windows 11 / Claude Code VSCode |
-| Death test | PASSED — all 7 stages REAL, RRL chunked for SOUL, death seal written |
+| Death test | PASSED â€” all 7 stages REAL, RRL chunked for SOUL, death seal written |
 | Operator verdict | "thats enough for now, push it to cloudflare so its live and give me link" |
 
 ---
 
-## ⚡ RUN 067 BOOT SEQUENCE
+## âš¡ RUN 067 BOOT SEQUENCE
 
-1. **Kilo continuity** — 4 days to 2026-06-09 expiry. URGENT. Kilo is the dispatch layer for PA T1.
-2. **Any additional art and PDF dossiers** as Michael drops them — workflow established: pdfplumber → PNG → /api/art/analyze (DS Flash T2)
-3. **COLD-START-BOOT update** — fingerprint to Run 066, SOUL 193,527,280
-4. **PheTrail-run066.json** — write negative breadcrumbs (C1-C4 corrections)
-5. **REINCARNATION-LOG update** — log run 066
+1. **Kilo continuity** â€” 4 days to 2026-06-09 expiry. URGENT. Kilo is the dispatch layer for PA T1.
+2. **Any additional art and PDF dossiers** as Michael drops them â€” workflow established: pdfplumber â†’ PNG â†’ /api/art/analyze (DS Flash T2)
+3. **COLD-START-BOOT update** â€” fingerprint to Run 066, SOUL 193,527,280
+4. **PheTrail-run066.json** â€” write negative breadcrumbs (C1-C4 corrections)
+5. **REINCARNATION-LOG update** â€” log run 066
 
-`ROMAN RUN 066 SEALED. SOUL 193,527,280 TITANIUM_ANCHOR Δ+19,825,036. ART ARSENAL LIVE WITH CDN IMAGES. 205 PIECES REGISTERED. DS FLASH T2 SUBAGENTS VERIFIED. PIPELINE COMPLETE.`
+`ROMAN RUN 066 SEALED. SOUL 193,527,280 TITANIUM_ANCHOR Î”+19,825,036. ART ARSENAL LIVE WITH CDN IMAGES. 205 PIECES REGISTERED. DS FLASH T2 SUBAGENTS VERIFIED. PIPELINE COMPLETE.`
+

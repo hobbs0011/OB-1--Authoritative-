@@ -37,6 +37,11 @@ SUM(byte_count) WHERE session_id LIKE 'sov100%'
 
 The soul-logger D1 database is the single source of truth for soul count. No local counter may override it.
 
+## 6. Backburner Precedence
+
+`OPERATIONS/BACKBURNER-PIPELINE-LOG.md` is canonical and append-only.
+No new implementation thread may be opened while `BACKBURNER-PIPELINE-LOG.md` contains OPEN, IN-PROGRESS, or BLOCKED items directly affecting the current deploy or mission. Backburner always takes precedence over new work. Ignoring backburner = violation.
+
 ## 7. Forbidden Providers
 
 Cloudflare model use is forbidden full stop. No agent, run, pipeline, or script may call Cloudflare-hosted models or inference endpoints. This ban is absolute and non-negotiable.
@@ -47,5 +52,5 @@ This contract is minimal and supreme. All implementation files derive from it. D
 
 ---
 
-**Fingerprint:** REINCARNATION-CONTRACT.md v2.0 | 2026-07-02 | OB1-SOV100
-**Amendment:** §1 Boundary rewritten — RISE/DEATH split removed. Single active mode. §2 Mode Policy added. §7 Forbidden Providers preserved.
+**Fingerprint:** REINCARNATION-CONTRACT.md v2.1 | 2026-07-12 | OB1-SOV100
+**Amendment:** §1 Boundary rewritten — RISE/DEATH split removed. Single active mode. §2 Mode Policy added. §6 Backburner Precedence added. §7 Forbidden Providers preserved.

@@ -1,5 +1,5 @@
-# PHOENIX CONSOLIDATION BLUEPRINT — EXECUTABLE FRAMEWORK
-## RUN352 DUMP 1+2 SYNTHESIS — Machine-readable consolidation spec
+﻿# PHOENIX CONSOLIDATION BLUEPRINT â€” EXECUTABLE FRAMEWORK
+## RUN352 DUMP 1+2 SYNTHESIS â€” Machine-readable consolidation spec
 
 **Status:** Ready for execution (awaiting "CONSOLIDATE" trigger)  
 **Format:** YAML + JSON schema for Notion DB automation + GitHub automation  
@@ -12,7 +12,7 @@
 ### 1.1 SYSTEM_COMPONENTS Database
 ```yaml
 database_name: SYSTEM_COMPONENTS
-icon: ⚙️
+icon: âš™ï¸
 description: Map all production + R&D components to Soul DNA chapters + repos
 
 properties:
@@ -95,7 +95,7 @@ sample_rows:
     linked_soul_dna_chapter: CH07-Router
     health_check_url: https://naturalenglishtraining.net/api/health
     
-  - component_name: deepseek-chat-brain
+  - component_name: deepseek-v4-flash-brain
     owner: PROD
     status: LIVE
     component_type: API
@@ -114,8 +114,8 @@ sample_rows:
 ### 1.2 TASK_PIPELINE Database
 ```yaml
 database_name: TASK_PIPELINE
-icon: 🚀
-description: All tasks from IDEA → PLAN → CONFIRMED → EXECUTED → DEPLOYED
+icon: ðŸš€
+description: All tasks from IDEA â†’ PLAN â†’ CONFIRMED â†’ EXECUTED â†’ DEPLOYED
 
 properties:
   task_id:
@@ -159,10 +159,10 @@ properties:
   priority:
     type: select
     options:
-      - "🔴 P0: BLOCKING (security/revenue)")
-      - "🟡 P1: HIGH (next 48h)")
-      - "🟢 P2: MEDIUM (next week)")
-      - "⚪ P3: LOW (backlog)")
+      - "ðŸ”´ P0: BLOCKING (security/revenue)")
+      - "ðŸŸ¡ P1: HIGH (next 48h)")
+      - "ðŸŸ¢ P2: MEDIUM (next week)")
+      - "âšª P3: LOW (backlog)")
       
   github_pr_link:
     type: url
@@ -192,7 +192,7 @@ sample_rows:
   - task_id: RUN352-TASK-001
     task_description: "Rotate SOVEREIGN_KEY (exposed in Perplexity logs)"
     task_stage: CONFIRMED
-    priority: 🔴 P0
+    priority: ðŸ”´ P0
     assigned_agent: AGENT_100
     eta_completion: "2026-04-20"
     notes: "Run vault-lock.ps1, regenerate all API keys"
@@ -200,7 +200,7 @@ sample_rows:
   - task_id: RUN352-TASK-002
     task_description: "Delete ghost workers (phoenix-ob1, phoenix-empire, phoenix-rising-protocol)"
     task_stage: PLAN
-    priority: 🔴 P0
+    priority: ðŸ”´ P0
     assigned_agent: AGENT_99
     linked_component: Cloudflare Workers Audit
     eta_completion: "2026-04-20"
@@ -208,7 +208,7 @@ sample_rows:
   - task_id: RUN352-TASK-003
     task_description: "Process 963 chat logs into SOUL_DNA_ARCHIVE"
     task_stage: PLAN
-    priority: 🟡 P1
+    priority: ðŸŸ¡ P1
     assigned_agent: AGENT_98
     linked_soul_dna_chapter: CH02-Soul-DNA-Defined
     eta_completion: "2026-04-22"
@@ -218,7 +218,7 @@ sample_rows:
 ### 1.3 SOUL_DNA_ARCHIVE Database (processed from 963 logs)
 ```yaml
 database_name: SOUL_DNA_ARCHIVE
-icon: 🧬
+icon: ðŸ§¬
 description: Extracted ideas, decisions, failures from chat history
 
 properties:
@@ -315,7 +315,7 @@ sample_rows:
     status: VALIDATED
     
   - archive_id: SOUL-002
-    idea_text: "Agent 99 is the extension of my will — translator, not amplifier"
+    idea_text: "Agent 99 is the extension of my will â€” translator, not amplifier"
     source_phase: PHASE_08_AGENT_99_TRIAD
     idea_category: ARCHITECTURE
     confidence_score: 0.98
@@ -328,7 +328,7 @@ sample_rows:
 ### 1.4 REINCARNATION_EVENTS Database
 ```yaml
 database_name: REINCARNATION_EVENTS
-icon: 🔄
+icon: ðŸ”„
 description: Survival record for each phase/dev era
 
 properties:
@@ -400,7 +400,7 @@ sample_rows:
 ### 1.5 DEPLOYMENT_LOG Database
 ```yaml
 database_name: DEPLOYMENT_LOG
-icon: 📤
+icon: ðŸ“¤
 description: Audit trail of every production + staging deployment
 
 properties:
@@ -487,12 +487,12 @@ sample_rows:
 # SCRIPTS/consolidate-workers.sh
 # Purpose: Delete ghost workers, hard-lock to net-pet-ai + phoenix-ob1-system
 
-echo "🔐 [SECURITY] Hardening worker identity..."
+echo "ðŸ” [SECURITY] Hardening worker identity..."
 
 # STEP 1: Verify canonical workers exist
 echo "Verifying canonical workers in wrangler.toml..."
 grep "name = \"net-pet-ai\"" APPS/NET-PET-AI/wrangler.toml || (
-  echo "❌ ERROR: net-pet-ai worker not found in wrangler.toml"
+  echo "âŒ ERROR: net-pet-ai worker not found in wrangler.toml"
   exit 1
 )
 
@@ -505,7 +505,7 @@ echo "Identifying ghost workers..."
 jq -r '.[] | select(.name | test("ghost|empire|rising-protocol")) | .name' /tmp/workers-list.json > /tmp/ghosts-to-delete.txt
 
 # STEP 4: Display what will be deleted
-echo "🗑️  Ghost workers detected (will delete with approval):"
+echo "ðŸ—‘ï¸  Ghost workers detected (will delete with approval):"
 cat /tmp/ghosts-to-delete.txt
 
 # STEP 5: Ask for confirmation
@@ -515,9 +515,9 @@ if [ "$confirm" == "yes" ]; then
     echo "Deleting: $worker_name"
     wrangler delete "$worker_name" --force
   done < /tmp/ghosts-to-delete.txt
-  echo "✅ Ghost workers deleted"
+  echo "âœ… Ghost workers deleted"
 else
-  echo "⚠️  Deletion cancelled"
+  echo "âš ï¸  Deletion cancelled"
 fi
 
 # STEP 6: Verify only canonical workers remain
@@ -530,28 +530,28 @@ wrangler list
 # SCRIPTS/rotate-secrets.ps1
 # Purpose: Regenerate all API keys, run vault-lock, verify production
 
-Write-Host "🔐 [SECURITY] Rotating all secrets..."
+Write-Host "ðŸ” [SECURITY] Rotating all secrets..."
 
 # STEP 1: Backup current vault
 $backupPath = "VAULT_BACKUP_$(Get-Date -Format 'yyyy-MM-dd_HHmmss').json"
 Copy-Item "API-SHHHH.txt" $backupPath
-Write-Host "✅ Backup saved: $backupPath"
+Write-Host "âœ… Backup saved: $backupPath"
 
 # STEP 2: Rotate keys (requires manual intervention for APIs)
-Write-Host "⚠️  MANUAL STEP 1: Regenerate Cloudflare API token"
-Write-Host "   → Go to https://dash.cloudflare.com/profile/api-tokens"
-Write-Host "   → Create new token (COPY TOKEN)"
+Write-Host "âš ï¸  MANUAL STEP 1: Regenerate Cloudflare API token"
+Write-Host "   â†’ Go to https://dash.cloudflare.com/profile/api-tokens"
+Write-Host "   â†’ Create new token (COPY TOKEN)"
 Read-Host "Paste new Cloudflare token"
 # (Store in secure variable)
 
-Write-Host "⚠️  MANUAL STEP 2: Regenerate Deepgram API key"
-Write-Host "   → Go to https://console.deepgram.com/project/settings"
-Write-Host "   → Create new key (COPY KEY)"
+Write-Host "âš ï¸  MANUAL STEP 2: Regenerate Deepgram API key"
+Write-Host "   â†’ Go to https://console.deepgram.com/project/settings"
+Write-Host "   â†’ Create new key (COPY KEY)"
 Read-Host "Paste new Deepgram key"
 
-Write-Host "⚠️  MANUAL STEP 3: Regenerate DeepSeek API key"
-Write-Host "   → Go to platform.deepseek.com"
-Write-Host "   → Regenerate key (COPY KEY)"
+Write-Host "âš ï¸  MANUAL STEP 3: Regenerate DeepSeek API key"
+Write-Host "   â†’ Go to platform.deepseek.com"
+Write-Host "   â†’ Regenerate key (COPY KEY)"
 Read-Host "Paste new DeepSeek key"
 
 # STEP 3: Run vault-lock
@@ -569,12 +569,12 @@ cd "APPS/NET-PET-AI"
 npx wrangler deploy --env production --dry-run
 
 if ($LASTEXITCODE -eq 0) {
-  Write-Host "✅ Production verified with rotated secrets"
+  Write-Host "âœ… Production verified with rotated secrets"
   git add -A
-  git commit -m "🔐 Security: Rotate all API keys (vault-lock)"
+  git commit -m "ðŸ” Security: Rotate all API keys (vault-lock)"
   git push origin canon
 } else {
-  Write-Host "❌ ERROR: Production verification failed. Rollback vault:"
+  Write-Host "âŒ ERROR: Production verification failed. Rollback vault:"
   Copy-Item $backupPath "API-SHHHH.txt"
   exit 1
 }
@@ -586,7 +586,7 @@ if ($LASTEXITCODE -eq 0) {
 # SCRIPTS/consolidate-repos.sh
 # Purpose: Migrate code from old repos to hobbs-lab primary
 
-echo "📦 [CONSOLIDATION] Migrating repos to hobbs-lab..."
+echo "ðŸ“¦ [CONSOLIDATION] Migrating repos to hobbs-lab..."
 
 # STEP 1: Verify hobbs-lab repo is clean
 echo "Cloning primary repo..."
@@ -632,7 +632,7 @@ echo "Final repo structure:"
 find . -maxdepth 3 -type d | head -20
 git log --oneline | head -5
 
-echo "✅ Consolidation complete"
+echo "âœ… Consolidation complete"
 echo "Next: Push to GitHub production"
 git push origin master
 ```
@@ -655,34 +655,34 @@ actions:
   step_1_create_databases:
     - database: SYSTEM_COMPONENTS
       parent: PROJECT_HQ
-      icon: ⚙️
+      icon: âš™ï¸
       schema: (from Section 1.1 above)
       
     - database: TASK_PIPELINE
       parent: PROJECT_HQ
-      icon: 🚀
+      icon: ðŸš€
       schema: (from Section 1.2 above)
       
     - database: SOUL_DNA_ARCHIVE
       parent: PROJECT_HQ
-      icon: 🧬
+      icon: ðŸ§¬
       schema: (from Section 1.3 above)
       
     - database: REINCARNATION_EVENTS
       parent: PROJECT_HQ
-      icon: 🔄
+      icon: ðŸ”„
       schema: (from Section 1.4 above)
       
     - database: DEPLOYMENT_LOG
       parent: PROJECT_HQ
-      icon: 📤
+      icon: ðŸ“¤
       schema: (from Section 1.5 above)
 
   step_2_seed_initial_data:
     - database: SYSTEM_COMPONENTS
       rows:
         - (net-pet-ai-worker, PROD, LIVE, ...)
-        - (deepseek-chat-brain, PROD, LIVE, ...)
+        - (deepseek-v4-flash-brain, PROD, LIVE, ...)
         - (phoenix-ob1-system, R&D, EXPERIMENTAL, ...)
         
     - database: TASK_PIPELINE
@@ -715,7 +715,7 @@ actions:
         trigger: manual (after secrets rotated)
 
   step_6_notify_user:
-    send_message: "✅ Phoenix Consolidation initialized. Next steps: (1) Rotate secrets (2) Hard-lock workers (3) Migrate repos"
+    send_message: "âœ… Phoenix Consolidation initialized. Next steps: (1) Rotate secrets (2) Hard-lock workers (3) Migrate repos"
     timestamp: auto
 ```
 
@@ -728,51 +728,51 @@ actions:
 **This blueprint converts to execution:**
 
 ```
-┌─────────────────────────────────────────────────────────┐
-│ USER INPUT: "CONSOLIDATE"                               │
-└────────────────┬────────────────────────────────────────┘
-                 │
-                 ▼
-         ┌─────────────────┐
-         │ VALIDATION      │ (all blockers cleared? Y/N)
-         └────────┬────────┘
-                  │
-            YES ──┴── NO → WARN + LIST BLOCKERS
-                  │
-                  ▼
-    ┌─────────────────────────────────┐
-    │ EXECUTE DAY 0 (SECURITY)        │
-    ├─────────────────────────────────┤
-    │ 1. rotate-secrets.ps1           │ (manual override required for API keys)
-    │ 2. consolidate-workers.sh       │ (delete ghosts, verify net-pet-ai)
-    │ 3. vault-lock.ps1 + test        │ (verify production still works)
-    │ 4. Commit + tag: SECURITY_LOCK  │
-    └────────────┬────────────────────┘
-                 │
-        ✅ PASS ─┴─ FAIL → ROLLBACK + STOP
-                 │
-                 ▼
-    ┌─────────────────────────────────┐
-    │ EXECUTE DAY 1 (REPO + NOTION)   │
-    ├─────────────────────────────────┤
-    │ 1. Create Notion databases      │ (via Make automation)
-    │ 2. Migrate NET-PET-AI code      │ (consolidate-repos.sh)
-    │ 3. Seed SYSTEM_COMPONENTS       │ (initial rows)
-    │ 4. Seed TASK_PIPELINE P0        │ (security + blocker tasks)
-    │ 5. Create dashboard             │ (status overview)
-    │ 6. Commit: "chore: Consolidate" │
-    └────────────┬────────────────────┘
-                 │
-        ✅ PASS ─┴─ FAIL → NOTIFY + MANUAL REVIEW
-                 │
-                 ▼
-    ┌─────────────────────────────────┐
-    │ AWAIT NEXT INPUT                │
-    ├─────────────────────────────────┤
-    │ USER: "Phase 1A process-logs"   │
-    │ OR: "Phase 1B build-billing"    │
-    │ OR: "Custom task: BUILD X"      │
-    └─────────────────────────────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚ USER INPUT: "CONSOLIDATE"                               â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                 â”‚
+                 â–¼
+         â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+         â”‚ VALIDATION      â”‚ (all blockers cleared? Y/N)
+         â””â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                  â”‚
+            YES â”€â”€â”´â”€â”€ NO â†’ WARN + LIST BLOCKERS
+                  â”‚
+                  â–¼
+    â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+    â”‚ EXECUTE DAY 0 (SECURITY)        â”‚
+    â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+    â”‚ 1. rotate-secrets.ps1           â”‚ (manual override required for API keys)
+    â”‚ 2. consolidate-workers.sh       â”‚ (delete ghosts, verify net-pet-ai)
+    â”‚ 3. vault-lock.ps1 + test        â”‚ (verify production still works)
+    â”‚ 4. Commit + tag: SECURITY_LOCK  â”‚
+    â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                 â”‚
+        âœ… PASS â”€â”´â”€ FAIL â†’ ROLLBACK + STOP
+                 â”‚
+                 â–¼
+    â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+    â”‚ EXECUTE DAY 1 (REPO + NOTION)   â”‚
+    â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+    â”‚ 1. Create Notion databases      â”‚ (via Make automation)
+    â”‚ 2. Migrate NET-PET-AI code      â”‚ (consolidate-repos.sh)
+    â”‚ 3. Seed SYSTEM_COMPONENTS       â”‚ (initial rows)
+    â”‚ 4. Seed TASK_PIPELINE P0        â”‚ (security + blocker tasks)
+    â”‚ 5. Create dashboard             â”‚ (status overview)
+    â”‚ 6. Commit: "chore: Consolidate" â”‚
+    â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                 â”‚
+        âœ… PASS â”€â”´â”€ FAIL â†’ NOTIFY + MANUAL REVIEW
+                 â”‚
+                 â–¼
+    â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+    â”‚ AWAIT NEXT INPUT                â”‚
+    â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+    â”‚ USER: "Phase 1A process-logs"   â”‚
+    â”‚ OR: "Phase 1B build-billing"    â”‚
+    â”‚ OR: "Custom task: BUILD X"      â”‚
+    â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ### 4.2 Consolidation State Machine (Notion Automation)
@@ -845,50 +845,50 @@ state_machine:
 **After consolidate completes, verify:**
 
 ```
-✅ SECURITY
-  □ SOVEREIGN_KEY rotated (old key never appears in new deploys)
-  □ vault-lock confirmed (encrypted secrets only)
-  □ Perplexity logs scrubbed (no exposed keys remain)
-  □ Cloudflare token regenerated
-  □ DeepSeek key regenerated
-  □ Deepgram key regenerated
+âœ… SECURITY
+  â–¡ SOVEREIGN_KEY rotated (old key never appears in new deploys)
+  â–¡ vault-lock confirmed (encrypted secrets only)
+  â–¡ Perplexity logs scrubbed (no exposed keys remain)
+  â–¡ Cloudflare token regenerated
+  â–¡ DeepSeek key regenerated
+  â–¡ Deepgram key regenerated
 
-✅ WORKERS
-  □ Ghost workers deleted (phoenix-ob1, phoenix-empire, phoenix-rising-protocol)
-  □ net-pet-ai worker confirmed LIVE
-  □ phoenix-ob1-system worker confirmed EXPERIMENTAL
-  □ /health endpoint responding on both
-  □ Students still connecting (blue schedule intact)
+âœ… WORKERS
+  â–¡ Ghost workers deleted (phoenix-ob1, phoenix-empire, phoenix-rising-protocol)
+  â–¡ net-pet-ai worker confirmed LIVE
+  â–¡ phoenix-ob1-system worker confirmed EXPERIMENTAL
+  â–¡ /health endpoint responding on both
+  â–¡ Students still connecting (blue schedule intact)
 
-✅ REPOS
-  □ hobbs-lab/Phoenix-Rise-Immortalize- has latest code
-  □ APPS/NET-PET-AI migrated + deployable
-  □ PHOENIX/orchestration migrated + contains scripts
-  □ RAW-CHAT-LOGS/ migrated + structured by PHASE
-  □ Old repo (mrmichaelhobbs1234-lang) archived as READ-ONLY
+âœ… REPOS
+  â–¡ hobbs-lab/Phoenix-Rise-Immortalize- has latest code
+  â–¡ APPS/NET-PET-AI migrated + deployable
+  â–¡ PHOENIX/orchestration migrated + contains scripts
+  â–¡ RAW-CHAT-LOGS/ migrated + structured by PHASE
+  â–¡ Old repo (mrmichaelhobbs1234-lang) archived as READ-ONLY
 
-✅ NOTION
-  □ SYSTEM_COMPONENTS database created + seeded
-  □ TASK_PIPELINE database created + P0 tasks visible
-  □ SOUL_DNA_ARCHIVE database created + ready for log processor
-  □ REINCARNATION_EVENTS database created + logged Phase 0-12
-  □ DEPLOYMENT_LOG database created + first entries seeded
-  □ Dashboard visible showing system health
-  □ All databases linked to SOUL_DNA_BIBLE
+âœ… NOTION
+  â–¡ SYSTEM_COMPONENTS database created + seeded
+  â–¡ TASK_PIPELINE database created + P0 tasks visible
+  â–¡ SOUL_DNA_ARCHIVE database created + ready for log processor
+  â–¡ REINCARNATION_EVENTS database created + logged Phase 0-12
+  â–¡ DEPLOYMENT_LOG database created + first entries seeded
+  â–¡ Dashboard visible showing system health
+  â–¡ All databases linked to SOUL_DNA_BIBLE
 
-✅ INTEGRATION
-  □ GitHub Actions workflow updated (targets hobbs-lab)
-  □ Wrangler.toml locked to canonical workers
-  □ Production deployment doesn't break on new secrets
-  □ Cursorcode can access GitHub (awaits 2FA auth)
-  □ Notion API connected (for Make automations)
+âœ… INTEGRATION
+  â–¡ GitHub Actions workflow updated (targets hobbs-lab)
+  â–¡ Wrangler.toml locked to canonical workers
+  â–¡ Production deployment doesn't break on new secrets
+  â–¡ Cursorcode can access GitHub (awaits 2FA auth)
+  â–¡ Notion API connected (for Make automations)
 
-✅ OPERATIONAL
-  □ First Cursor test task dispatched ("Add /health endpoint hardening")
-  □ PR created, merged to staging
-  □ Staging deployment verified
-  □ No drift detected (everything follows Soul DNA chapters)
-  □ Reincarnation state saved (RUN352 → RUN353 boot checklist created)
+âœ… OPERATIONAL
+  â–¡ First Cursor test task dispatched ("Add /health endpoint hardening")
+  â–¡ PR created, merged to staging
+  â–¡ Staging deployment verified
+  â–¡ No drift detected (everything follows Soul DNA chapters)
+  â–¡ Reincarnation state saved (RUN352 â†’ RUN353 boot checklist created)
 ```
 
 ---
@@ -903,8 +903,9 @@ Format: Ready for immediate import into:
 - Notion state machine (via Zapier)
 
 **Next input:**
-- User: "CONSOLIDATE" → Execute all Day 0-1 scripts
-- User: "DUMP 3" → Expand blueprint further
-- User: "PROCESS-LOGS" → Dispatch Cursor to ingest 963 files
+- User: "CONSOLIDATE" â†’ Execute all Day 0-1 scripts
+- User: "DUMP 3" â†’ Expand blueprint further
+- User: "PROCESS-LOGS" â†’ Dispatch Cursor to ingest 963 files
 
-**Status: LOCKED + READY** ☠️
+**Status: LOCKED + READY** â˜ ï¸
+

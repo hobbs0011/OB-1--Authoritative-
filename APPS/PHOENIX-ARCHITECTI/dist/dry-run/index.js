@@ -1,4 +1,4 @@
-var __defProp = Object.defineProperty;
+﻿var __defProp = Object.defineProperty;
 var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
 
 // src/security.js
@@ -16,7 +16,7 @@ var SECURITY = {
     blockXss: true
   },
   CORS: {
-    // Internal API — called from Claude Code (PowerShell), Haiku operator, CF workers.
+    // Internal API â€” called from Claude Code (PowerShell), Haiku operator, CF workers.
     // Not browser-facing. Auth gate (WORKER_ADMIN_KEY / PA_AUTH_SECRET) is the real control.
     // Wildcard is intentional for programmatic callers; tighten if exposed publicly.
     allowedOrigins: ["*"],
@@ -488,7 +488,7 @@ var defaultOptions = {
   // cause Acorn to call that function with object in the same
   // format as tokens returned from `tokenizer().getToken()`. Note
   // that you are not allowed to call the parser from the
-  // callback—that will corrupt its internal state.
+  // callbackâ€”that will corrupt its internal state.
   onToken: null,
   // A function can be passed as `onComment` option, which will
   // cause Acorn to call that function with `(block, text, start,
@@ -499,7 +499,7 @@ var defaultOptions = {
   // When the `locations` option is on, two more parameters are
   // passed, the full `{line, column}` locations of the start and
   // end of the comments. Note that you are not allowed to call the
-  // parser from the callback—that will corrupt its internal state.
+  // parser from the callbackâ€”that will corrupt its internal state.
   // When this option has an array as value, objects representing the
   // comments are pushed to it.
   onComment: null,
@@ -6343,11 +6343,11 @@ async function runTier(env, messages, tier, maxToks, codeTask) {
       const r2 = await fetch("https://api.deepseek.com/v1/chat/completions", {
         method: "POST",
         headers: { "Content-Type": "application/json", "Authorization": `Bearer ${env.DEEPSEEK_API_KEY}` },
-        body: JSON.stringify({ model: "deepseek-chat", messages, max_tokens: Math.max(maxToks, 2048) })
+        body: JSON.stringify({ model: "deepseek-v4-flash", messages, max_tokens: Math.max(maxToks, 2048) })
       });
       if (r2.ok) {
         const j = await r2.json();
-        if (j.choices?.[0]?.message?.content) return { text: j.choices[0].message.content, model: "deepseek-chat" };
+        if (j.choices?.[0]?.message?.content) return { text: j.choices[0].message.content, model: "deepseek-v4-flash" };
       }
     } catch (_) {
     }
@@ -7254,7 +7254,7 @@ async function dsT2(env, task) {
     method: "POST",
     headers: { "Content-Type": "application/json", "Authorization": `Bearer ${env.DEEPSEEK_API_KEY}` },
     body: JSON.stringify({
-      model: "deepseek-chat",
+      model: "deepseek-v4-flash",
       messages: [
         { role: "system", content: "You are an Agent99 OS PhoenixArt role drone. Respond ONLY with valid JSON. No markdown. No explanation." },
         { role: "user", content: task }
@@ -8564,3 +8564,4 @@ export {
   index_default as default
 };
 //# sourceMappingURL=index.js.map
+

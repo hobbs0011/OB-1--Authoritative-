@@ -1,7 +1,7 @@
-# OBI SECRETS MANIFEST
+﻿# OBI SECRETS MANIFEST
 > This file documents WHAT keys are needed, not their values
 > Actual values are stored in Cloudflare Secrets or environment-specific .env files
-> ZERO sensitive data — reads clean on any scanner
+> ZERO sensitive data â€” reads clean on any scanner
 
 ---
 
@@ -9,8 +9,8 @@
 
 | Key Name | Service | Purpose | Required By | Status |
 |---------|---------|--------|-------------|--------|
-| `DEEPSEEK_API_KEY` | DeepSeek | AI Chat/Lesson/Practice/Feedback | NET-PET-AI | ⚠️ ROTATE ME |
-| `DEEPGRAM_API_KEY` | DeepGram | Text-to-Speech | NET-PET-AI | ⚠️ ROTATE ME |
+| `DEEPSEEK_API_KEY` | DeepSeek | AI Chat/Lesson/Practice/Feedback | NET-PET-AI | âš ï¸ ROTATE ME |
+| `DEEPGRAM_API_KEY` | DeepGram | Text-to-Speech | NET-PET-AI | âš ï¸ ROTATE ME |
 
 ---
 
@@ -30,7 +30,7 @@
 ## SECRET LAYERS (OBI Key System)
 
 ### Layer Access Model
-- **L1 (Basic)**: No paid keys needed — uses free tier quotas
+- **L1 (Basic)**: No paid keys needed â€” uses free tier quotas
 - **L2 (Premium)**: Requires `DEEPSEEK_API_KEY` (can use free tier or paid)
 - **L3 (Developer)**: All current keys + `GITHUB_TOKEN`
 - **L4 (Admin)**: All keys + Cloudflare full access
@@ -85,7 +85,7 @@ wrangler secret put DEEPSEEK_API_KEY --name net-pet-ai
 ```bash
 npm run verify:token
 # Or test manually:
-curl https://net-obi-api.mrmichaelhobbs1234.workers.dev/api/health
+curl https://net-obi-api.mrmichaelhobbs123.workers.dev/api/health
 ```
 
 ### Step 4: Revoke Old Key
@@ -97,11 +97,11 @@ curl https://net-obi-api.mrmichaelhobbs1234.workers.dev/api/health
 
 ## SECURITY RULES
 
-1. **NEVER** store actual keys in git — `.gitignore` blocks `.dev.vars`, `.env`, `secrets.json`
+1. **NEVER** store actual keys in git â€” `.gitignore` blocks `.dev.vars`, `.env`, `secrets.json`
 2. **ROTATE** keys every 90 days minimum
 3. **AUDIT** key usage monthly in service dashboards
 4. **ALERT** on unusual usage patterns
-5. **COMPARTMENT** — use separate keys per environment if possible
+5. **COMPARTMENT** â€” use separate keys per environment if possible
 
 ---
 
@@ -119,4 +119,4 @@ curl https://net-obi-api.mrmichaelhobbs1234.workers.dev/api/health
 ---
 
 *Last updated: 2026-04-02*
-*ZERO SUMMARIZATION — This manifest contains zero sensitive data*
+*ZERO SUMMARIZATION â€” This manifest contains zero sensitive data*

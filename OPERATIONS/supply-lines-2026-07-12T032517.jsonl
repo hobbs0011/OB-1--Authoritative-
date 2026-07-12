@@ -1,0 +1,4 @@
+﻿{"ts":"2026-07-12T03:25:18.6670774+07:00","cmd":"HEALTH-GATE","status":"OK","message":"Supply chain open","payload":null}
+{"ts":"2026-07-12T03:28:34.5876398+07:00","cmd":"STAGE-I","status":"OK","message":"Scout complete","payload":"{\"lens\":\"all\",\"scoutLens\":\"all\",\"zone\":\"CANON/\"}"}
+{"ts":"2026-07-12T03:28:35.2757368+07:00","cmd":"SESSION","status":"OK","message":"Resolved test-338-rise for sov100","payload":"{\"student_id\":\"sov100\",\"session_id\":\"test-338-rise\"}"}
+{"ts":"2026-07-12T03:28:35.6824064+07:00","cmd":"STAGE-II","status":"ERR","message":"crunch/bible failed: The remote server returned an error: (500) Internal Server Error.","payload":null}

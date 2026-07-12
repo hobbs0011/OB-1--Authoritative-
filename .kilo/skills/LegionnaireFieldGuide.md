@@ -79,6 +79,7 @@ All commands are defined in `.kilo/command/`:
 └── instructions/    # kilo-skill-files.instructions.md
 
 CANON/
+├── OPERATIONS/BACKBURNER-PIPELINE-LOG.md # Canonical backburner (append-only, never delete)
 ├── PHEROMONES/    # PheTrail-run{N}.json
 ├── HEAVY-LEDGER/  # HL-{NNN}.json
 ├── SOUL/EXTRACT/  # dna-run{N}.json
@@ -138,16 +139,18 @@ CANON/
 2. Read `CANON/HEAVY-LEDGER/STATE-SNAPSHOT.json`
 3. Read `REINCARNATION-BOOT-CHECKLIST.md`
 4. Read `.kilo/command/*.md` for active commands
-5. Read `.kilo/skills/SKILL.md` for core skills
-6. Read `.github/skills/SKILL.md` for extended skills
-7. Read `CANON/SYSTEM/COLD-START-BOOT.md`
-8. Read `.kilo/agent-manager.json` for worktree state
+5. Read `OPERATIONS/BACKBURNER-PIPELINE-LOG.md` for open deferred items / backburner
+6. Read `.kilo/skills/SKILL.md` for core skills
+7. Read `.github/skills/SKILL.md` for extended skills
+8. Read `CANON/SYSTEM/COLD-START-BOOT.md`
+9. Read `.kilo/agent-manager.json` for worktree state
 
 ---
 
 ## OPERATIONAL RULES
 
-1. **Skill deletions:** Only worktree duplicates deleted. No canonical skills removed.
+1. **Backburner-first:** Before any new implementation thread, scan `OPERATIONS/BACKBURNER-PIPELINE-LOG.md` for open/blocked/deferred items. Existing backburner items always take precedence over new work.
+2. **Skill deletions:** Only worktree duplicates deleted. No canonical skills removed.
 2. **No breaking changes:** `.kilo/skills/PheTrails/` deleted, `.github/skills/phetails/` remains. Command unchanged.
 3. **Authority chains:** 
    - Commands → Skills (for execution)

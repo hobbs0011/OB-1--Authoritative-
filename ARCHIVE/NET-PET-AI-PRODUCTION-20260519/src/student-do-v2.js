@@ -1,6 +1,6 @@
-/**
- * StudentDO v2 — Durable Object with OBI Integration
- * Implements full 5-layer continuity system + Mouse→Tiger scoring
+﻿/**
+ * StudentDO v2 â€” Durable Object with OBI Integration
+ * Implements full 5-layer continuity system + Mouseâ†’Tiger scoring
  */
 
 import { SessionLogger } from './session-logger.js';
@@ -34,7 +34,7 @@ export class StudentDO {
   }
 
   /**
-   * ═══ OBI v2 INTEGRATED CHAT (All 5 Layers) + MOUSE→TIGER ═══
+   * â•â•â• OBI v2 INTEGRATED CHAT (All 5 Layers) + MOUSEâ†’TIGER â•â•â•
    */
   async handleChat(request) {
     const { message } = await request.json();
@@ -45,7 +45,7 @@ export class StudentDO {
       // LAYER 2: Load Student State
       const memory = await this.getMemory();
 
-      // NEW: SCORE MOUSE→TIGER (Behavioral layer)
+      // NEW: SCORE MOUSEâ†’TIGER (Behavioral layer)
       const lastSession = await this.logger.getHistory(1);
       const mt_score = await this.scorer.computeMouseTigerScore(message, {
         responseTime: performance.now() - startTime,
@@ -80,7 +80,7 @@ STUDENT CONTEXT:
 - Streak: ${memory.streak} days
 - Recent focus: ${context.weakPatterns.slice(0, 2).join(", ") || "general"}
 
-BEHAVIORAL PROFILE (MOUSE→TIGER):
+BEHAVIORAL PROFILE (MOUSEâ†’TIGER):
 - Mode: ${mt_score.mode.mode} ${mt_score.mode.emoji}
 - Confidence: ${mt_score.breakdown.confidence}/100
 - Volume: ${mt_score.breakdown.volume}/100
@@ -106,7 +106,7 @@ ${memory.sessionsCompleted > 0 ? "Reference previous work patterns." : "First se
             "Content-Type": "application/json"
           },
           body: JSON.stringify({
-            model: "deepseek-chat",
+            model: "deepseek-v4-flash",
             messages: [
               { role: "system", content: systemPrompt },
               { role: "user", content: message }
@@ -133,7 +133,7 @@ ${memory.sessionsCompleted > 0 ? "Reference previous work patterns." : "First se
       // Generate next action (deterministic)
       const nextAction = generateNextAction(context, mistakes.length);
 
-      // LAYER 1: Event Sourcing — log session
+      // LAYER 1: Event Sourcing â€” log session
       const sessionEntry = await this.logger.logSession({
         studentId,
         input: message,
@@ -245,7 +245,7 @@ ${memory.sessionsCompleted > 0 ? "Reference previous work patterns." : "First se
     });
   }
 
-  // ──────────────── MEMORY MANAGEMENT ────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ MEMORY MANAGEMENT â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
   async getMemory() {
     return (
@@ -371,4 +371,5 @@ ${memory.sessionsCompleted > 0 ? "Reference previous work patterns." : "First se
     });
   }
 }
+
 

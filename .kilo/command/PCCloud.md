@@ -1,10 +1,10 @@
 ---
-description: PCCloud — serverless mission runner via phoenix-architecti /api/mission. CF-Qwen on Cloudflare. No laptop needed. ALWAYS chunk tasks into max 300-line steps to avoid 30s CF timeout.
+description: PCCloud — serverless mission runner via phoenix-architecti /api/mission. No laptop needed. ALWAYS chunk tasks into max 300-line steps to avoid 30s CF timeout.
 agent: AGENT99
 ---
 Purpose: Fire chunked missions to phoenix-architecti that run on CF servers without laptop.
 
-CHUNKING RULE: CF-Qwen times out on large outputs. Max 300 lines per step. Split portals into tab groups. Split large files into function groups.
+CHUNKING RULE: Large outputs time out. Max 300 lines per step. Split portals into tab groups. Split large files into function groups.
 
 Flow:
 1. Parse task from arguments

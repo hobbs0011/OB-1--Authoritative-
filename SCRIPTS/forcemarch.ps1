@@ -45,9 +45,11 @@ if (-not $DryRun) {
 }
 
 # Identify missing runs between 1 and latest HL
-$hlFiles = Get-ChildItem (Join-Path $repo "CANON/HEAVY-LEDGER/HL-*.json") -ErrorAction SilentlyContinue | Sort-Object Name
-$lastNum = 0; foreach($f in $hlFiles){ if($f.BaseName -match 'HL-(\d+)'){ $lastNum=[int]$Matches[1] } }
-$currentRun = $lastNum + 1
+# Run authority: git death commit per L29 NO_ASSUME_HEAD, NOT HL max+1
+$lastDeath = git log --oneline --grep "^death:" -1 2>&1
+$gitRun = 0
+if ($lastDeath -match '(?i)run\s*(\d+)') { $gitRun = [int]$matches[1] }
+$currentRun = $gitRun + 1
 $runPad = "{0:D3}" -f $currentRun
 
 $log = Join-Path $ops ("forcemarch-run" + $runPad + ".log")

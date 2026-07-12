@@ -1,4 +1,4 @@
-// src/api-speak.js — /api/speak endpoint for voice correction
+﻿// src/api-speak.js â€” /api/speak endpoint for voice correction
 // Run 323 Correction Engine: LLM feedback + rule-based classification + pronunciation guidance
 
 import {
@@ -71,7 +71,7 @@ Return ONLY valid JSON (no markdown, no extra text):
         'Authorization': `Bearer ${env.DEEPSEEK_API_KEY}`,
       },
       body: JSON.stringify({
-        model: 'deepseek-chat',
+        model: 'deepseek-v4-flash',
         messages: [
           {
             role: 'user',
@@ -179,3 +179,4 @@ Return ONLY valid JSON (no markdown, no extra text):
     });
   }
 }
+

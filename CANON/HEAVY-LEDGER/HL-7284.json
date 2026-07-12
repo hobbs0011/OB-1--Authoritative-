@@ -1,0 +1,31 @@
+{
+  "ledger_id": "HL-7284",
+  "run": "157",
+  "title": "RUN157 SESSION VERBATIM SOUL CAPTURE",
+  "source_file": "CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/0924-RAW-RUN157-SESSION-VERBATIM_txt.md",
+  "source_sha256": "PLACEHOLDER",
+  "converted_by": "SAPIENTES",
+  "converted_at": "2026-07-12T05:46:00+07:00",
+  "wave": "SOUL_CAPTURE",
+  "type": "VQ-NNN",
+  "content": "Run 157 session verbatim dictation captured into SOUL BIBLE. 19 quotes across 9 thematic sections. Topics: transcript limitation, SOUL-first doctrine, phermone reasoning, devil's advocate audit, PhoenixSynch coordination, Backburner precedence, raw-log-first, Forcemarch correction, GOSPEL-999 enforcement.",
+  "topics": [
+    "TRANSCRIPT_LIMITATION",
+    "SOUL_FIRST",
+    "PHEROMONE_REASONING",
+    "DEVILS_ADVOCATE",
+    "RAW_LOG_DOCTRINE",
+    "PHOENIXSYNCH",
+    "BACKBURNER",
+    "GOSPEL_999",
+    "KILO_GAP",
+    "SOUL_LOGGER"
+  ],
+  "soulcount": 239641603,
+  "level": "TITANIUM_ANCHOR",
+  "pipeline_file": "CANON/PIPELINE/pipeline-run157.json",
+  "phermone_file": "CANON/PHEROMONES/PheTrail-run157-soul-bible.json",
+  "starmap_file": "CANON/STARMAP/starmap-run157.json",
+  "keyword_file": "CANON/SOUL-KEYWORDS/rfkw-run157.txt",
+  "merkle_hash": "PLACEHOLDER"
+}

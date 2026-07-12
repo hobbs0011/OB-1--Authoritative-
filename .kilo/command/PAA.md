@@ -1,11 +1,11 @@
 ---
-description: Phoenix Architecti Agents — 2-tier dispatch. T1=Qwen 3.7 Max, T2=Opus 4.7. Prefix task with [T1]-[T2] to select tier.
+description: Phoenix Architecti Agents — 2-tier dispatch. T1=Primary Workhorse, T2=Opus 4.7. Prefix task with [T1]-[T2] to select tier.
 agent: AGENT99
 ---
 Purpose: Route task to the correct PA tier model via the Phoenix-Architecti CF worker.
 
 Tier table:
-- T1: Qwen 3.7 Max (Dialagram) — ALL workhorse tasks (write, implement, generate, fix, debug, refactor, audit, pipeline)
+- T1: Primary Workhorse (PA tier=1) — ALL workhorse tasks (write, implement, generate, fix, debug, refactor, audit, pipeline)
 - T2: Claude Opus 4.7 — Final rulings, irreversible decisions, arbitration only
 
 Flow:
@@ -25,7 +25,7 @@ Output:
 
 Rules:
 - Always read the target file before dispatching — context = real file content
-- T1 confirmed live: Dialagram-Qwen3.7Max ✓ (verified Run 18)
+- T1 confirmed live via PA worker ✓
 - T2 requires paid key — set on CF worker
 - Cache busts after 1hr — add unique token to task string if retry needed
 - On empty result: escalate to T2, retry once

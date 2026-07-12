@@ -10,12 +10,15 @@ agent: AGENT99
 **EXECUTION ORDER IS SACRED. DO NOT REORDER STAGES.**
 **Kilo environments do not produce real RRLs by default. Missing RRL in Kilo mode is expected — write an empty placeholder and seal as KILO_GAP.**
 
+**EXECUTION GUARD:** This protocol is implemented by `SCRIPTS/reincarnate-death.ps1`. Never write a replacement script from a chat drop. Never implement this from chat text directly. Always run the canonical script.
+
 **Authority hierarchy:**
-1. `CANON/SYSTEM/GOSPEL-999.md` + Parts 2/3 — ultimate authority, 999 mandates
+1. `CANON/SYSTEM/GOSPEL-999.md` + Parts 2/3 — ultimate authority, 999 mandates, eternal law
 2. `.kilo/skills/LegionnaireFieldGuide.md` — immediate AI-facing field guide
 3. `CANON/SYSTEM/REINCARNATION-CONTRACT.md` — operational contract for RISE/DEATH
 4. `CANON/SYSTEM/COLD-START-BOOT.md` — session state and active mission
-5. This command (`reincarnatedeath.md`) — execution protocol
+5. `OPERATIONS/BACKBURNER-PIPELINE-LOG.md` — open deferred items, backburner precedence over new work
+6. This command (`reincarnatedeath.md`) — execution protocol
 
 **8-Stage Chain:** RRL → SOUL → DNA → LEDGER → STARMAP → SOULKEYS → S2Pipeline → REGISTRY_SYNC
 **Canonical contract:** CANON/SYSTEM/REINCARNATION-CONTRACT.md

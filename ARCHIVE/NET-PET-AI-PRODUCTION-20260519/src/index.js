@@ -1,10 +1,10 @@
-// src/index.js — NET-PET-AI Cloudflare Worker v1.6.1
-// Phoenix Rising Protocol — OBI Command Station
-// Architecture: Agent100 → Magic Chat → Agent99 (Obi) → Cryptographic Immutable Ledger
+﻿// src/index.js â€” NET-PET-AI Cloudflare Worker v1.6.1
+// Phoenix Rising Protocol â€” OBI Command Station
+// Architecture: Agent100 â†’ Magic Chat â†’ Agent99 (Obi) â†’ Cryptographic Immutable Ledger
 // Bindings: SESSIONS (SessionDO), PROFILES (ProfileDO), PETS (PetDO), LEDGER (LedgerDO), ASSETS
 // Secrets: DEEPSEEK_API_KEY, DEEPGRAM_API_KEY
 //
-// ── Phase 4C COMPLETE (RUN367) ────────────────────────────────────────────
+// â”€â”€ Phase 4C COMPLETE (RUN367) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Fail-Closed Doctrine enforcement gates (L51-L100) codified and active:
 // - HTTP 423 Stasis Gate (L100: ambiguity > 5% lock)
 // - Nonce Sequencing Validator (L54: monotonic enforcement)
@@ -32,7 +32,7 @@ import { OBI_SYSTEM_PROMPT_V3, OBI_PROMPT_V3_METADATA } from './obi-system-promp
 import { OBIOrchestrationRouter } from './obi-orchestration-router.js';
 import { createStasisGate, createNonceValidator, createDevilsAdvocate, createGospel444Guard } from './fail-closed-gates.js';
 
-// ── Phase 4C: Fail-Closed Doctrine Enforcement (L51-L100) ────────────────
+// â”€â”€ Phase 4C: Fail-Closed Doctrine Enforcement (L51-L100) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Three gates implement Gospel 444 + systemic integrity
 const stasisGate = createStasisGate();
 const nonceValidator = createNonceValidator();
@@ -41,8 +41,8 @@ const gospel444Guard = createGospel444Guard();
 
 const VERSION = "1.6.0";
 
-// ── SECURITY: Validate no hardcoded secrets ──────────────────────────────
-// §Phase6 Defense-in-Depth: Check at startup for common secret anti-patterns
+// â”€â”€ SECURITY: Validate no hardcoded secrets â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// Â§Phase6 Defense-in-Depth: Check at startup for common secret anti-patterns
 // This catches developer mistakes and prevents accidental commits
 function validateNoHardcodedSecrets() {
   const antiPatterns = [
@@ -57,7 +57,7 @@ function validateNoHardcodedSecrets() {
   const sourceCode = toString(); // Minimal leak surface
   for (const ap of antiPatterns) {
     if (ap.pattern.test(sourceCode)) {
-      console.error(`🔥 CRITICAL SECURITY: Detected ${ap.name} in source code!`);
+      console.error(`ðŸ”¥ CRITICAL SECURITY: Detected ${ap.name} in source code!`);
       console.error('   This is likely a hardcoded secret. Use: wrangler secret put');
       console.error('   Read: APPS/NET-PET-AI/SECRET-MANAGEMENT.md');
       throw new Error(`HARDCODED_SECRET_DETECTED: ${ap.name}`);
@@ -76,7 +76,7 @@ if (globalThis.constructor.name === 'Object' || process.env.NODE_ENV !== 'produc
 }
 
 
-// ── CORS helpers (must be defined before use in fetch handler) ──
+// â”€â”€ CORS helpers (must be defined before use in fetch handler) â”€â”€
 const ALLOWED_ORIGINS = [
   "https://naturalenglishtraining.pages.dev",
   "https://naturalenglishtraining.com",
@@ -84,14 +84,14 @@ const ALLOWED_ORIGINS = [
   "https://net-pet-ai-production.mrmichaelhobbs123.workers.dev",
 ];
 
-// ── Production environment detection (for hardened rules) ──────
+// â”€â”€ Production environment detection (for hardened rules) â”€â”€â”€â”€â”€â”€
 const PRODUCTION_HOSTS = [
   "naturalenglishtraining.com",
   "www.naturalenglishtraining.com",
   "net-pet-ai-production.mrmichaelhobbs123.workers.dev",
 ];
 
-// ── Request size limit (DoS prevention, 1MB cap) ─────────────
+// â”€â”€ Request size limit (DoS prevention, 1MB cap) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const MAX_REQUEST_SIZE_BYTES = 1 * 1024 * 1024; // 1MB
 
 function corsHeaders(requestOrOrigin, isProduction = false) {
@@ -102,7 +102,7 @@ function corsHeaders(requestOrOrigin, isProduction = false) {
     origin = requestOrOrigin.headers.get('Origin') || '';
   }
 
-  // ── Hardened CORS validation (§Phase6 security) ──────────────
+  // â”€â”€ Hardened CORS validation (Â§Phase6 security) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   // Production: Only allow production origins. Dev localhost only if NOT production.
   // Contains: Site detection, chrome-extension check, localhost restriction
   const isAllowed = ALLOWED_ORIGINS.some(a => origin === a) ||
@@ -124,8 +124,8 @@ function addCors(response, request, isProduction = false) {
   return new Response(response.body, { status: response.status, headers });
 }
 
-// ── Error scrubbing helper (generic messages, no stack traces) ──────────────
-// §Phase6: Prevents information disclosure via error messages
+// â”€â”€ Error scrubbing helper (generic messages, no stack traces) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// Â§Phase6: Prevents information disclosure via error messages
 function scrubbedErrorResponse(code = 500, devInternalMessage = '') {
   const messages = {
     400: "Invalid request",
@@ -145,7 +145,7 @@ function scrubbedErrorResponse(code = 500, devInternalMessage = '') {
   return json({ error: msg }, code);
 }
 
-// ── Phase 4C: Stasis & Conflict Response Helpers ────────────────────────────
+// â”€â”€ Phase 4C: Stasis & Conflict Response Helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // L100 (Fail-Closed): Return 423 for ambiguity > 5%
 // L54 (Nonce): Return 409 for sequence violation
 function stasisResponse(reason, details = {}) {
@@ -183,13 +183,13 @@ function conflictResponse(reason, details = {}) {
   });
 }
 
-// ── Obi System Prompt v3 (Soul DNA Continuity Engine — immutable production code) ────
+// â”€â”€ Obi System Prompt v3 (Soul DNA Continuity Engine â€” immutable production code) â”€â”€â”€â”€
 // Imported from obi-system-prompt-v3-production.js
 // DO NOT inline this constant. Use buildSystemPrompt() which embeds OBI_SYSTEM_PROMPT_V3
 // See prompt-builder-complete.js for integration
 const OBI_SYSTEM = OBI_SYSTEM_PROMPT_V3;
 
-// ── Cryptographic hash (SHA-256 via SubtleCrypto — Cloudflare Workers native) ─
+// â”€â”€ Cryptographic hash (SHA-256 via SubtleCrypto â€” Cloudflare Workers native) â”€
 async function computeHash(data) {
   const encoded = new TextEncoder().encode(String(data));
   const hashBuffer = await crypto.subtle.digest("SHA-256", encoded);
@@ -202,15 +202,15 @@ export default {
     const path = url.pathname;
     const isProduction = PRODUCTION_HOSTS.some(h => url.hostname === h || url.hostname.includes(h));
 
-    // ── OPTIONS preflight optimization (Cache-Control headers) ────────────────
-    // §Phase6: Reduced preflight cache misses, improved performance
+    // â”€â”€ OPTIONS preflight optimization (Cache-Control headers) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // Â§Phase6: Reduced preflight cache misses, improved performance
     if (request.method === "OPTIONS") {
       const preflightHeaders = new Headers(corsHeaders(request, isProduction));
       preflightHeaders.set("Cache-Control", "public, max-age=3600"); // 1h preflight cache
       return new Response(null, { headers: preflightHeaders });
     }
 
-    // ── Request size limit (DoS prevention, §Phase6 security) ────────────────
+    // â”€â”€ Request size limit (DoS prevention, Â§Phase6 security) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     // Issue: No limit on request body size (DoS vulnerability)
     // Fix: Add 1MB limit check before processing
     const contentLength = request.headers.get('content-length');
@@ -220,18 +220,18 @@ export default {
         request, isProduction);
     }
 
-    // ── Security middleware (rate limiting, origin validation) ─────────────
+    // â”€â”€ Security middleware (rate limiting, origin validation) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     const secBlock = await securityMiddleware(request, env);
     if (secBlock) return secBlock;
 
-    // ── Canon §4 non-API routes ───────────────────────────────────────────────
+    // â”€â”€ Canon Â§4 non-API routes â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
-    // /imagegen — serve the turnkey imagegen UI
+    // /imagegen â€” serve the turnkey imagegen UI
     if (path === "/imagegen" && request.method === "GET") {
       return env.ASSETS.fetch(new Request(new URL("/public/imagegen.html", url), request));
     }
 
-    // /health — REAL dependency validation (not cosmetic)
+    // /health â€” REAL dependency validation (not cosmetic)
     if (path === "/health" && request.method === "GET") {
       const secrets = {
         DEEPSEEK_API_KEY:  !!env.DEEPSEEK_API_KEY,
@@ -254,7 +254,7 @@ export default {
       const notionOk = secrets.NOTION_API_KEY && secrets.NOTION_LESSONS_DB && secrets.NOTION_PROGRESS_DB && secrets.NOTION_SOUL_DNA_DB;
       const isHealthProduction = secretsOk && bindingsOk && notionOk; // PATCH: Require all 3 readiness factors
       
-      // §Phase6 secret scrubbing: Don't expose raw secret/binding names in health response
+      // Â§Phase6 secret scrubbing: Don't expose raw secret/binding names in health response
       // Only expose aggregated status indicators
       const healthResponse = {
         ok: secretsOk && bindingsOk,
@@ -278,7 +278,7 @@ export default {
       return addCors(json(healthResponse), request, isProduction);
     }
 
-    // /evidence — Worker identity + deploy proof
+    // /evidence â€” Worker identity + deploy proof
     if (path === "/evidence" && request.method === "GET") {
       return addCors(json({
         worker: "net-pet-ai",
@@ -290,7 +290,7 @@ export default {
       }), request);
     }
 
-    // /obi/metadata — Soul DNA continuity engine metadata (new in v3)
+    // /obi/metadata â€” Soul DNA continuity engine metadata (new in v3)
     if (path === "/obi/metadata" && request.method === "GET") {
       return addCors(json({
         system: "OBI Soul DNA Continuity Engine",
@@ -304,7 +304,7 @@ export default {
         pillars: [
           "Soul DNA principle (intent preservation)",
           "Continuity across sessions (no amnesia)",
-          "Michael's teaching method (Mouse→Tiger progression)",
+          "Michael's teaching method (Mouseâ†’Tiger progression)",
           "Correction loop format (strict structure)",
           "Streak & accountability mechanics",
           "Drift prevention rules",
@@ -319,7 +319,7 @@ export default {
       }), request);
     }
 
-    // /verify — Ledger chain verification shortcut (requires ?studentId=)
+    // /verify â€” Ledger chain verification shortcut (requires ?studentId=)
     if (path === "/verify" && request.method === "GET") {
       const studentId = url.searchParams.get("studentId");
       if (!studentId) return addCors(json({ error: "studentId query param required" }, 400), request);
@@ -334,7 +334,7 @@ export default {
       }
     }
 
-    // /student/resolve — Cookie-based student ID resolution
+    // /student/resolve â€” Cookie-based student ID resolution
     if (path === "/student/resolve" && request.method === "POST") {
       try {
         const body = await request.json();
@@ -351,8 +351,8 @@ export default {
       }
     }
 
-    // /student/create — Create + seal student profile
-    // ── Phase 4C: Fail-Closed Doctrine Enforcement (L100 + L54) ────────────────
+    // /student/create â€” Create + seal student profile
+    // â”€â”€ Phase 4C: Fail-Closed Doctrine Enforcement (L100 + L54) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     if (path === "/student/create" && request.method === "POST") {
       try {
         const body = await request.json();
@@ -390,41 +390,41 @@ export default {
       }
     }
 
-    // /magic-chat, /voice-chat — Canon §4: Magic Chat UI aliases → serve index.html
+    // /magic-chat, /voice-chat â€” Canon Â§4: Magic Chat UI aliases â†’ serve index.html
     if (path === "/magic-chat" || path === "/voice-chat") {
       return env.ASSETS.fetch(new Request(new URL("/", url), request));
     }
 
-    // /speak — Speech-to-Learning MVP UI
+    // /speak â€” Speech-to-Learning MVP UI
     if (path === "/speak") {
       return env.ASSETS.fetch(new Request(new URL("/speak.html", url), request));
     }
 
-    // ── Soul DNA Capture Pipeline (root-level routes) ────────────────────────
+    // â”€â”€ Soul DNA Capture Pipeline (root-level routes) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
-    // POST /souldna — Submit raw soul DNA for legionnaire processing
+    // POST /souldna â€” Submit raw soul DNA for legionnaire processing
     if (path === "/souldna" && request.method === "POST") {
       const body = await request.json();
       const res = await handleSoulDNASubmit(body, env);
       return addCors(res, request);
     }
 
-    // GET /souldna/{id} — Check submission status
+    // GET /souldna/{id} â€” Check submission status
     if (path.startsWith("/souldna/") && request.method === "GET" && !path.includes("pipeline")) {
       const id = path.split("/")[2];
       const res = await handleSoulDNAStatus(id, env);
       return addCors(res, request);
     }
 
-    // GET /souldna/pipeline — Actionable pipeline steps grouped by tier
+    // GET /souldna/pipeline â€” Actionable pipeline steps grouped by tier
     if (path === "/souldna/pipeline" && request.method === "GET") {
       const tier = url.searchParams.get("tier") || "OPERATIONAL";
       const res = await handleSoulDNAPipeline(tier, env);
       return addCors(res, request);
     }
 
-    // ── TELEGRAM BOOTSTRAP (Gate 2: Accountability Dashboard Activation) ────────
-    // POST /bootstrap/telegram — Send dashboard credentials to BlueTech boss + Minh's mother
+    // â”€â”€ TELEGRAM BOOTSTRAP (Gate 2: Accountability Dashboard Activation) â”€â”€â”€â”€â”€â”€â”€â”€
+    // POST /bootstrap/telegram â€” Send dashboard credentials to BlueTech boss + Minh's mother
     if (path === "/bootstrap/telegram" && request.method === "POST") {
       try {
         const body = await request.json();
@@ -441,9 +441,9 @@ export default {
         // Send to BlueTech boss
         if (bluetechBossChatId) {
           const studentData = [
-            { name: "Mai Trâm", level: "B1-Cub", streak: 0, completed45m: false, completed15m: false },
-            { name: "Nguyễn Thị Thu Quy", level: "A2-Mouse", streak: 0, completed45m: false, completed15m: false },
-            { name: "Hương Ho", level: "B1-Cub", streak: 0, completed45m: false, completed15m: false },
+            { name: "Mai TrÃ¢m", level: "B1-Cub", streak: 0, completed45m: false, completed15m: false },
+            { name: "Nguyá»…n Thá»‹ Thu Quy", level: "A2-Mouse", streak: 0, completed45m: false, completed15m: false },
+            { name: "HÆ°Æ¡ng Ho", level: "B1-Cub", streak: 0, completed45m: false, completed15m: false },
           ];
           const bossMessage = buildBossNodeDashboard(studentData);
           const bossRes = await sendTelegramMessage(env, bluetechBossChatId, bossMessage);
@@ -467,7 +467,7 @@ export default {
       }
     }
 
-    // ── API routes ────────────────────────────────────────────────────────────
+    // â”€â”€ API routes â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
     if (path.startsWith("/api/")) {
       try {
@@ -481,7 +481,7 @@ export default {
     return env.ASSETS.fetch(request);
   },
 
-  // ── Cron triggers ───────────────────────────────────────────────────────
+  // â”€â”€ Cron triggers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   // Every 6 hours: Zalo escalation sweep + daily loop engine
   // Every 3 hours: Auto Post Engine (content distribution)
   async scheduled(event, env, ctx) {
@@ -511,7 +511,7 @@ export default {
         console.log(`[CRON] Daily loop error: ${err.message}`);
       }
 
-      // Run 325 — Daily Retention Sweep (Run 9am + 9pm UTC)
+      // Run 325 â€” Daily Retention Sweep (Run 9am + 9pm UTC)
       try {
         const retentionReport = await handleRetentionCheck(env);
         if (retentionReport.ok && retentionReport.targets_identified > 0) {
@@ -545,7 +545,7 @@ export default {
       console.log(`[CRON] Auto Post error: ${err.message}`);
     }
 
-    // Virality Learning Loop — score posts, extract patterns, evolve strategy
+    // Virality Learning Loop â€” score posts, extract patterns, evolve strategy
     try {
       const viralReport = await runLearningLoop(env);
       console.log(`[CRON] Virality Learning Loop: ${JSON.stringify(viralReport)}`);
@@ -555,12 +555,12 @@ export default {
   },
 };
 
-// ── API Router ────────────────────────────────────────────────────────────────
+// â”€â”€ API Router â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 async function handleAPI(path, request, env, url) {
   const method = request.method;
   
-  // Image Generation Proxy — forwards to configured Image Gen URL (Vast.ai, RunPod, or local)
+  // Image Generation Proxy â€” forwards to configured Image Gen URL (Vast.ai, RunPod, or local)
     if (path === "/api/image" && method === "POST") {
       try {
         const body = await request.json();
@@ -585,12 +585,12 @@ async function handleAPI(path, request, env, url) {
 }
     }
 
-    // Run 322 MVP: Voice Input → Correction
+    // Run 322 MVP: Voice Input â†’ Correction
     if (path === "/api/speak" && method === "POST") {
       return await handleSpeak(request, env);
     }
 
-    // ——— RUN 325 + 326: OBI AGENT 99 ORCHESTRATION (Full Unified System) ———
+    // â€”â€”â€” RUN 325 + 326: OBI AGENT 99 ORCHESTRATION (Full Unified System) â€”â€”â€”
     // Path: /api/obi-agent99
     // Body: { "studentId": "...", "message": "..." }
     // Returns: Agent99 orchestration result with Soul + SessionLog anchoring
@@ -638,7 +638,7 @@ async function handleAPI(path, request, env, url) {
       return addCors(json(report), request);
     }
 
-    // Run 323-325: Student Memory System — Soul DNA Capture + Status
+    // Run 323-325: Student Memory System â€” Soul DNA Capture + Status
     if (path === "/api/souldna" && method === "POST") {
       const res = await handleSoulDNACapture(request, env);
       return addCors(res, request);
@@ -650,7 +650,7 @@ async function handleAPI(path, request, env, url) {
       return addCors(res, request);
     }
 
-    // Run 325: Retention Engine — Daily Behavioral Loop
+    // Run 325: Retention Engine â€” Daily Behavioral Loop
     if (path === "/api/retention/check" && method === "GET") {
       const result = await handleRetentionCheck(env);
       return json(result);
@@ -684,12 +684,12 @@ async function handleAPI(path, request, env, url) {
       return json(result);
     }
 
-    // Health — lightweight
+    // Health â€” lightweight
   if (path === "/api/health" && method === "GET") {
     return json({ ok: !!env.DEEPSEEK_API_KEY, version: VERSION, app: env.APP_NAME || "Natural English Training", coach: env.APP_COACH_NAME || "Obi", ts: Date.now(), routes: 40, ai: env.DEEPSEEK_API_KEY ? "LIVE" : "DEAD", voice: env.DEEPGRAM_API_KEY ? "LIVE" : "DEAD", notion: env.NOTION_API_KEY ? "LIVE" : "DEAD", imagegen: env.IMAGE_GEN_URL ? "CONFIGURED" : "NOT_SET", readiness: (env.DEEPSEEK_API_KEY && env.DEEPGRAM_API_KEY) ? "PRODUCTION" : "NEEDS_SECRETS" });
   }
 
-  // Deep health — full dependency probe (hit each external service)
+  // Deep health â€” full dependency probe (hit each external service)
   if (path === "/api/health/deep" && method === "GET") {
     const checks = {};
     // DeepSeek probe
@@ -698,7 +698,7 @@ async function handleAPI(path, request, env, url) {
         const dsRes = await fetch("https://api.deepseek.com/chat/completions", {
           method: "POST",
           headers: { "Content-Type": "application/json", "Authorization": `Bearer ${env.DEEPSEEK_API_KEY}` },
-          body: JSON.stringify({ model: "deepseek-chat", messages: [{ role: "user", content: "ping" }], max_tokens: 1 }),
+          body: JSON.stringify({ model: "deepseek-v4-flash", messages: [{ role: "user", content: "ping" }], max_tokens: 1 }),
         });
         checks.deepseek = { ok: dsRes.ok, status: dsRes.status };
       } catch (e) { checks.deepseek = { ok: false, error: e.message }; }
@@ -729,13 +729,13 @@ async function handleAPI(path, request, env, url) {
     return json({ ok: allOk, version: VERSION, checks, readiness: allOk ? "ALL_SYSTEMS_GO" : "DEGRADED", ts: Date.now() });
   }
 
-  // Chat — Obi + Ledger context injection
+  // Chat â€” Obi + Ledger context injection
   if (path === "/api/chat" && method === "POST") { const body = await request.json(); return handleChat(body, env); }
 
   // Test Setup (Gate 7: Production validation fixtures)
   if (path === "/api/test-setup" && (method === "GET" || method === "POST")) { return await handleTestSetup(request, env); }
 
-  // Speech-to-Learning MVP — core loop
+  // Speech-to-Learning MVP â€” core loop
   if (path === "/api/correct" && method === "POST") { const body = await request.json(); return handleCorrect(body, env); }
   if (path === "/api/repeat" && method === "POST") { const body = await request.json(); return handleRepeat(body, env); }
   if (path === "/api/mistakes" && method === "GET") { return handleMistakes(url.searchParams.get("studentId") || "", env); }
@@ -770,12 +770,12 @@ async function handleAPI(path, request, env, url) {
   if (path === "/api/netpet/state" && method === "GET") { return handlePetState(url.searchParams.get("studentId") || "", env); }
   if (path === "/api/netpet/score" && method === "GET") { return handlePetScore(url.searchParams.get("studentId") || "", env); }
 
-  // Phonics Drills — targeted practice based on weaknesses
+  // Phonics Drills â€” targeted practice based on weaknesses
   if (path === "/api/drills/next" && method === "GET") { return handleDrillNext(url.searchParams.get("studentId") || "", env); }
   if (path === "/api/drills/result" && method === "POST") { const body = await request.json(); return handleDrillResult(body, env); }
   if (path === "/api/drills/list" && method === "GET") { return handleDrillList(); }
 
-  // Metrics — the 4 that matter (DAU, completion, retention, error reduction)
+  // Metrics â€” the 4 that matter (DAU, completion, retention, error reduction)
   if (path === "/api/metrics/summary" && method === "GET") { return handleMetricsSummary(env); }
   if (path === "/api/metrics/dau" && method === "GET") { return handleMetricsDAU(env); }
   if (path === "/api/metrics/retention" && method === "GET") { return handleMetricsRetention(env); }
@@ -794,7 +794,7 @@ async function handleAPI(path, request, env, url) {
   if (path === "/api/ledger/state" && method === "GET") { return handleLedgerState(url.searchParams.get("studentId") || "", env); }
   if (path === "/api/ledger/stats" && method === "GET") { return handleLedgerStats(env); }
 
-  // Session Log (off-day pipeline core — Michael logs class, Obi inherits it)
+  // Session Log (off-day pipeline core â€” Michael logs class, Obi inherits it)
   if (path === "/api/session/log" && method === "POST") { const body = await request.json(); return handleSessionLog(body, env); }
   if (path === "/api/session/latest" && method === "GET") { return handleSessionLatest(url.searchParams.get("studentId") || "", env); }
 
@@ -803,7 +803,7 @@ async function handleAPI(path, request, env, url) {
   if (path === "/api/schedule/confirm" && method === "POST") { const body = await request.json(); return handleScheduleConfirm(body, env); }
   if (path === "/api/schedule/flags" && method === "GET") { return handleScheduleFlags(env); }
 
-  // Zalo Pressure API — accountability alerts + relation graph
+  // Zalo Pressure API â€” accountability alerts + relation graph
   if (path === "/api/zalo/sweep" && method === "POST") { return handleZaloSweep(env); }
   if (path === "/api/zalo/check" && method === "POST") { const body = await request.json(); return handleZaloCheck(body, env); }
   if (path === "/api/zalo/send" && method === "POST") { const body = await request.json(); return handleZaloSend(body, env); }
@@ -815,14 +815,14 @@ async function handleAPI(path, request, env, url) {
   if (path === "/api/relations/all" && method === "GET") { return handleRelationAll(env); }
   if (path === "/api/roster/zalo" && method === "POST") { const body = await request.json(); return handleRosterZalo(body, env); }
 
-  // Daily Digest — Michael's one-URL morning report
+  // Daily Digest â€” Michael's one-URL morning report
   if (path === "/api/digest" && method === "GET") { return handleDailyDigest(env); }
 
-  // Soul DNA — verbatim raw capture (no sanitization, no truncation, hash-chained)
+  // Soul DNA â€” verbatim raw capture (no sanitization, no truncation, hash-chained)
   if (path === "/api/soulDNA" && method === "POST") { const body = await request.json(); return handleSoulDNACapture(body, env); }
   if (path === "/api/soulDNA" && method === "GET") { return handleSoulDNAGet(url, env); }
 
-  // Command Station (SOV100 → Agent99 → Drones)
+  // Command Station (SOV100 â†’ Agent99 â†’ Drones)
   if (path === "/api/command/send" && method === "POST") { const body = await request.json(); return handleCommandSend(body, env); }
   if (path === "/api/command/queue" && method === "GET") { return handleCommandQueue(url.searchParams.get("status") || "pending", parseInt(url.searchParams.get("limit") || "20"), env); }
   if (path === "/api/command/claim" && method === "POST") { const body = await request.json(); return handleCommandClaim(body, env); }
@@ -836,16 +836,16 @@ async function handleAPI(path, request, env, url) {
   if (path === "/api/notion/progress" && method === "POST") { const body = await request.json(); return handleNotionProgressWrite(body, env); }
   if (path === "/api/notion/sync" && method === "POST") { const body = await request.json(); return handleNotionSync(body, env); }
 
-  // ── Behavioral Loop Engine ────────────────────────────────────────────────
-  // /api/loop — Enforced speak→correct→repeat→score cycle (single call)
+  // â”€â”€ Behavioral Loop Engine â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // /api/loop â€” Enforced speakâ†’correctâ†’repeatâ†’score cycle (single call)
   if (path === "/api/loop" && method === "POST") { const body = await request.json(); return handleLoop(body, env); }
-  // /api/tiger-score — On-demand Tiger Score with full breakdown
+  // /api/tiger-score â€” On-demand Tiger Score with full breakdown
   if (path === "/api/tiger-score" && method === "GET") { return handleTigerScore(url.searchParams.get("studentId") || "", env); }
-  // /api/analytics — The only 4 metrics that matter
+  // /api/analytics â€” The only 4 metrics that matter
   if (path === "/api/analytics" && method === "GET") { return handleAnalytics(env); }
 
-  // ── v2 Pipeline: Student State + Session Events ───────────────────────────
-  // /api/student/state — Full behavioral state (Mouse/Cub/Tiger + scores)
+  // â”€â”€ v2 Pipeline: Student State + Session Events â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // /api/student/state â€” Full behavioral state (Mouse/Cub/Tiger + scores)
   if (path === "/api/student/state" && method === "GET") {
     const studentId = url.searchParams.get("studentId") || "";
     if (!studentId) return json({ error: "studentId required" }, 400);
@@ -855,7 +855,7 @@ async function handleAPI(path, request, env, url) {
     const res = await stub.fetch(new Request("https://do/state/full"));
     return res;
   }
-  // /api/session/events — Structured learning event chain
+  // /api/session/events â€” Structured learning event chain
   if (path === "/api/session/events" && method === "GET") {
     const studentId = url.searchParams.get("studentId") || "";
     if (!studentId) return json({ error: "studentId required" }, 400);
@@ -867,60 +867,60 @@ async function handleAPI(path, request, env, url) {
     return res;
   }
 
-  // ── Skeleton Star Map ─────────────────────────────────────────────────────
-  // /api/route — Get routing decision for a student (which module, which mode)
+  // â”€â”€ Skeleton Star Map â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // /api/route â€” Get routing decision for a student (which module, which mode)
   if (path === "/api/route" && method === "POST") { const body = await request.json(); return handleRoute(body, env); }
 
-  // ── Phoenix Reset ─────────────────────────────────────────────────────────
-  // /api/phoenix/snapshot — Capture full student state
+  // â”€â”€ Phoenix Reset â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // /api/phoenix/snapshot â€” Capture full student state
   if (path === "/api/phoenix/snapshot" && method === "POST") { const body = await request.json(); return handlePhoenixSnapshot(body, env); }
-  // /api/phoenix/reset — Reset + rehydrate from latest snapshot
+  // /api/phoenix/reset â€” Reset + rehydrate from latest snapshot
   if (path === "/api/phoenix/reset" && method === "POST") { const body = await request.json(); return handlePhoenixReset(body, env); }
 
-  // ── Assessment + Report Engine (Week 4 — Productization) ────────────────
-  // POST /api/assess — Run AI speaking diagnostic (submit transcript, get scored)
+  // â”€â”€ Assessment + Report Engine (Week 4 â€” Productization) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // POST /api/assess â€” Run AI speaking diagnostic (submit transcript, get scored)
   if (path === "/api/assess" && method === "POST") { const body = await request.json(); return handleAssessment(body, env); }
-  // GET /api/report — Generate styled HTML report for a student
+  // GET /api/report â€” Generate styled HTML report for a student
   if (path === "/api/report" && method === "GET") { return handleReport(url.searchParams.get("studentId") || "", env); }
-  // POST /api/lead — Lead capture from assessment landing page
+  // POST /api/lead â€” Lead capture from assessment landing page
   if (path === "/api/lead" && method === "POST") { const body = await request.json(); return handleLeadCapture(body, env); }
 
-  // ── Auto Post Engine ──────────────────────────────────────────────────────
-  // /api/growth/posts — Generate posts from real student data
+  // â”€â”€ Auto Post Engine â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // /api/growth/posts â€” Generate posts from real student data
   if (path === "/api/growth/posts" && method === "GET") { return handleGrowthPosts(parseInt(url.searchParams.get("limit") || "5"), env); }
-  // /api/growth/distribute — Manually trigger post distribution
+  // /api/growth/distribute â€” Manually trigger post distribution
   if (path === "/api/growth/distribute" && method === "POST") { return handleGrowthDistribute(env); }
-  // /api/growth/log — View post history
+  // /api/growth/log â€” View post history
   if (path === "/api/growth/log" && method === "GET") { return handleGrowthLog(parseInt(url.searchParams.get("limit") || "20"), env); }
 
-  // ── Virality Engine ────────────────────────────────────────────────────
-  // POST /api/virality/metrics — Submit post engagement metrics
+  // â”€â”€ Virality Engine â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // POST /api/virality/metrics â€” Submit post engagement metrics
   if (path === "/api/virality/metrics" && method === "POST") { return handleViralityProxy("/virality/metrics", "POST", body, env); }
-  // GET /api/virality/metrics — Get recent post metrics
+  // GET /api/virality/metrics â€” Get recent post metrics
   if (path === "/api/virality/metrics" && method === "GET") { return handleViralityProxy("/virality/metrics", "GET", null, env, url.searchParams); }
-  // GET /api/virality/top — Top performing posts
+  // GET /api/virality/top â€” Top performing posts
   if (path === "/api/virality/top" && method === "GET") { return handleViralityProxy("/virality/top", "GET", null, env, url.searchParams); }
-  // POST /api/virality/experiment — Create experiment variant group
+  // POST /api/virality/experiment â€” Create experiment variant group
   if (path === "/api/virality/experiment" && method === "POST") { return handleViralityProxy("/virality/experiment", "POST", body, env); }
-  // GET /api/virality/experiments — List experiments by status
+  // GET /api/virality/experiments â€” List experiments by status
   if (path === "/api/virality/experiments" && method === "GET") { return handleViralityProxy("/virality/experiments", "GET", null, env, url.searchParams); }
-  // GET /api/virality/patterns — Get winning content patterns
+  // GET /api/virality/patterns â€” Get winning content patterns
   if (path === "/api/virality/patterns" && method === "GET") { return handleViralityProxy("/virality/patterns", "GET", null, env, url.searchParams); }
-  // POST /api/virality/learn — Trigger learning loop manually
+  // POST /api/virality/learn â€” Trigger learning loop manually
   if (path === "/api/virality/learn" && method === "POST") { return handleViralityLearn(env); }
-  // POST /api/virality/score — Calculate virality score for given metrics
+  // POST /api/virality/score â€” Calculate virality score for given metrics
   if (path === "/api/virality/score" && method === "POST") { return handleViralityScore(body); }
-  // POST /api/virality/variants — Generate hook variants from insight
+  // POST /api/virality/variants â€” Generate hook variants from insight
   if (path === "/api/virality/variants" && method === "POST") { return handleViralityVariants(body, env); }
 
   return json({ error: "Not found" }, 404);
 }
 
-// ── Soul DNA Capture ─────────────────────────────────────────────────────────
+// â”€â”€ Soul DNA Capture â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // VERBATIM FIRST. Zero transformation. Every word Michael speaks is sacred.
-// No sanitizeInput. No truncation. No paraphrase. Raw → hash → chain → ledger.
+// No sanitizeInput. No truncation. No paraphrase. Raw â†’ hash â†’ chain â†’ ledger.
 
-// ── Notion: Soul DNA mirror (non-blocking, fire-and-forget) ─────────────────
+// â”€â”€ Notion: Soul DNA mirror (non-blocking, fire-and-forget) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Mirrors verbatim Soul DNA blocks to Notion database for searchable archive.
 async function notionSyncSoulDNA(payloadObj, entryHash, env) {
   if (!env.NOTION_API_KEY || !env.NOTION_SOUL_DNA_DB) return;
@@ -935,7 +935,7 @@ async function notionSyncSoulDNA(payloadObj, entryHash, env) {
 async function handleSoulDNAGet(url, env) {
   const run     = url.searchParams.get("run")    || "";
   const limit   = Math.min(parseInt(url.searchParams.get("limit") || "50"), 500);
-  const raw     = url.searchParams.get("raw")    === "true"; // raw=true → include full text in response
+  const raw     = url.searchParams.get("raw")    === "true"; // raw=true â†’ include full text in response
 
   if (!env.LEDGER) return json({ error: "LEDGER binding not configured" }, 500);
   const stub = env.LEDGER.get(env.LEDGER.idFromName("sov100"));
@@ -971,13 +971,13 @@ async function handleSoulDNAGet(url, env) {
   return json({ ok: true, blocks, totalBlocks: blocks.length, totalWords, totalChars, total });
 }
 
-// ── OBI v2 Pipeline: Context Builder + Drift + Scoring + Signals ─────────────
+// â”€â”€ OBI v2 Pipeline: Context Builder + Drift + Scoring + Signals â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
-// Structured Context Builder — merges Soul + Sessions + State + Weaknesses
+// Structured Context Builder â€” merges Soul + Sessions + State + Weaknesses
 async function buildStructuredContext(env, studentId) {
   const ctx = { soul: null, sessionEvents: [], studentState: null, profile: null, weakPoints: [], petState: null };
 
-  // Load Soul DNA (last 3 intent anchors — grounding reference only)
+  // Load Soul DNA (last 3 intent anchors â€” grounding reference only)
   if (env.LEDGER) {
     try {
       const stub = env.LEDGER.get(env.LEDGER.idFromName("sov100"));
@@ -1024,7 +1024,7 @@ async function buildStructuredContext(env, studentId) {
   return ctx;
 }
 
-// Drift Detection — scores how disconnected current input is from session context
+// Drift Detection â€” scores how disconnected current input is from session context
 function computeDriftScore(input, context) {
   let score = 0;
   if (!context.sessionEvents?.length) score += 3;  // no history = high drift
@@ -1039,7 +1039,7 @@ function computeDriftScore(input, context) {
   return Math.min(score, 10);
 }
 
-// Mouse → Tiger Score Calculator — behavioral state machine
+// Mouse â†’ Tiger Score Calculator â€” behavioral state machine
 function computeMouseTigerScore(metrics) {
   const score =
     (metrics.executionScore || 0) * 0.3 +
@@ -1051,11 +1051,11 @@ function computeMouseTigerScore(metrics) {
   return { score: Math.round(score), state };
 }
 
-// Learning Signal Extraction — derives structured signals from chat exchange
+// Learning Signal Extraction â€” derives structured signals from chat exchange
 function extractLearningSignals(input, response) {
   const signals = { mistakes: [], vocabulary: [], phonics: [], topic: "" };
   // Corrections from OBI response
-  const corrPatterns = [/(?:should be|correct(?:ion)?|instead of|say|use)\s+[""]([^""]+)[""]/gi, /→\s*(.+?)(?:\.|$)/gm];
+  const corrPatterns = [/(?:should be|correct(?:ion)?|instead of|say|use)\s+[""]([^""]+)[""]/gi, /â†’\s*(.+?)(?:\.|$)/gm];
   for (const pat of corrPatterns) {
     let m; while ((m = pat.exec(response)) !== null) {
       if (m[1]?.length > 2 && m[1].length < 100) signals.mistakes.push(m[1].trim());
@@ -1068,7 +1068,7 @@ function extractLearningSignals(input, response) {
   }
   signals.vocabulary = [...new Set(signals.vocabulary)].slice(0, 10);
   // Phonics detection
-  const phonicsKw = ["pronunciation", "sound", "phonics", "th ", "ch ", "sh ", "/r/", "/l/", "/θ/", "/ð/"];
+  const phonicsKw = ["pronunciation", "sound", "phonics", "th ", "ch ", "sh ", "/r/", "/l/", "/Î¸/", "/Ã°/"];
   if (phonicsKw.some(k => response.toLowerCase().includes(k))) {
     signals.phonics = (response.match(/\/[^/]+\//g) || []).slice(0, 5);
   }
@@ -1077,7 +1077,7 @@ function extractLearningSignals(input, response) {
   return signals;
 }
 
-// Next Action Generator — deterministic "what comes next" based on state + signals
+// Next Action Generator â€” deterministic "what comes next" based on state + signals
 function generateNextAction(studentState, signals) {
   const state = studentState?.state || "MOUSE";
   if (signals.mistakes.length > 0) {
@@ -1098,7 +1098,7 @@ function formatContextForPrompt(ctx) {
       const parts = [`Topic: ${e.topic || "?"}`, e.mistakes ? `Mistakes: ${e.mistakes}` : null, e.next_action ? `Next: ${e.next_action}` : null];
       return parts.filter(Boolean).join(" | ");
     });
-    injection += `\n\nSESSION HISTORY (${ctx.sessionEvents.length} events — this is your continuous memory chain):\n${lines.join("\n")}`;
+    injection += `\n\nSESSION HISTORY (${ctx.sessionEvents.length} events â€” this is your continuous memory chain):\n${lines.join("\n")}`;
   }
   // Student state
   if (ctx.studentState) {
@@ -1107,7 +1107,7 @@ function formatContextForPrompt(ctx) {
   }
   // Weakness patterns
   if (ctx.weakPoints?.length > 0) {
-    const top = ctx.weakPoints.slice(0, 5).map(w => `${w.specific} (${w.category}, ×${w.error_count})`);
+    const top = ctx.weakPoints.slice(0, 5).map(w => `${w.specific} (${w.category}, Ã—${w.error_count})`);
     injection += `\n\nKNOWN WEAKNESSES: ${top.join(", ")}. Target these in corrections.`;
   }
   // Pet state (streak/mood)
@@ -1117,7 +1117,7 @@ function formatContextForPrompt(ctx) {
   return injection;
 }
 
-// ── Chat (DeepSeek + Obi + Ledger memory injection) ──────────────────────────
+// â”€â”€ Chat (DeepSeek + Obi + Ledger memory injection) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 async function handleChat(body, env) {
   const apiKey = env.DEEPSEEK_API_KEY;
@@ -1137,7 +1137,7 @@ async function handleChat(body, env) {
     return m;
   }).filter(m => m.role === "system" || m.role === "user" || m.role === "assistant");
 
-  // ── Pull Ledger context (Obi's unparalleled student memory) ──────────────
+  // â”€â”€ Pull Ledger context (Obi's unparalleled student memory) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   let ledgerContext = "";
   if (studentId !== "anonymous" && env.LEDGER) {
     try {
@@ -1156,7 +1156,7 @@ async function handleChat(body, env) {
           })
           .filter(Boolean);
         if (lines.length > 0) {
-          ledgerContext = `\n\nSTUDENT LEDGER (${histData.entries.length} total exchanges — this is your unalterable memory of this student):\n${lines.join("\n---\n")}`;
+          ledgerContext = `\n\nSTUDENT LEDGER (${histData.entries.length} total exchanges â€” this is your unalterable memory of this student):\n${lines.join("\n---\n")}`;
         }
       }
     } catch (_) {}
@@ -1175,12 +1175,12 @@ async function handleChat(body, env) {
         const s = JSON.parse(lastEntry.payload);
         const dateStr = new Date(lastEntry.ts).toLocaleDateString("en-US", { month: "short", day: "numeric" });
         const vocabList = Array.isArray(s.vocabList) ? s.vocabList.join(", ") : (s.vocabList || "");
-        sessionContext = `\n\nLAST REAL CLASS (${dateStr}): Topic: "${s.topic || ""}". Vocab covered: ${vocabList}. Level: ${s.studentLevel || ""}. Teacher notes: "${s.teacherNotes || ""}". Continue from exactly here — your first response should reference this content naturally without announcing it.`;
+        sessionContext = `\n\nLAST REAL CLASS (${dateStr}): Topic: "${s.topic || ""}". Vocab covered: ${vocabList}. Level: ${s.studentLevel || ""}. Teacher notes: "${s.teacherNotes || ""}". Continue from exactly here â€” your first response should reference this content naturally without announcing it.`;
       }
     } catch (_) {}
   }
 
-  // ── Memory Brain: Weakness injection + Re-entry detection ─────────────
+  // â”€â”€ Memory Brain: Weakness injection + Re-entry detection â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   let weaknessContext = "";
   let reEntryContext = "";
   let rewardContext = "";
@@ -1212,7 +1212,7 @@ async function handleChat(body, env) {
     } catch (_) {}
   }
 
-  // ── v2 Pipeline: Load structured context for continuity engine ────────
+  // â”€â”€ v2 Pipeline: Load structured context for continuity engine â”€â”€â”€â”€â”€â”€â”€â”€
   if (studentId !== "anonymous") {
     try { structuredCtx = await buildStructuredContext(env, studentId); } catch (_) {}
   }
@@ -1226,21 +1226,21 @@ async function handleChat(body, env) {
   const res = await fetch("https://api.deepseek.com/chat/completions", {
     method: "POST",
     headers: { "Content-Type": "application/json", "Authorization": `Bearer ${apiKey}` },
-    body: JSON.stringify({ model: "deepseek-chat", messages, max_tokens: 300, temperature: 0.85 }),
+    body: JSON.stringify({ model: "deepseek-v4-flash", messages, max_tokens: 300, temperature: 0.85 }),
   });
 
   if (!res.ok) { const errText = await res.text(); return json({ error: `DeepSeek ${res.status}`, detail: errText }, 502); }
   const data = await res.json();
   const reply = data.choices?.[0]?.message?.content || "Say that again?";
 
-  // ── Auto-write every exchange to the Cryptographic Immutable Ledger ───────
+  // â”€â”€ Auto-write every exchange to the Cryptographic Immutable Ledger â”€â”€â”€â”€â”€â”€â”€
   const userMsg = messages.filter(m => m.role === "user").pop()?.content || "";
   if (studentId !== "anonymous" && env.LEDGER && userMsg) {
     const payload = JSON.stringify({ user: userMsg, obi: reply });
     appendToLedger(studentId, "chat_exchange", payload, env).catch(() => {});
   }
 
-  // ── Notion sync: mirror chat exchange to Notion progress DB ─────────────
+  // â”€â”€ Notion sync: mirror chat exchange to Notion progress DB â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   // Disabled by default (free-tier protection). Set NOTION_CHAT_MIRROR=1 to enable.
   if (studentId !== "anonymous" && env.NOTION_API_KEY && env.NOTION_PROGRESS_DB && env.NOTION_CHAT_MIRROR === "1" && userMsg) {
     writeChatExchange(env.NOTION_API_KEY, env.NOTION_PROGRESS_DB, {
@@ -1251,7 +1251,7 @@ async function handleChat(body, env) {
     }).catch(() => {});
   }
 
-  // ── Memory Brain: Extract weaknesses from OBI's correction and store ─────
+  // â”€â”€ Memory Brain: Extract weaknesses from OBI's correction and store â”€â”€â”€â”€â”€
   if (studentId !== "anonymous" && env.PROFILES) {
     const detected = extractWeaknesses(reply);
     if (detected.length > 0) {
@@ -1274,12 +1274,12 @@ async function handleChat(body, env) {
     })).catch(() => {});
   }
 
-  // ── Memory Compression: update Soul DNA v1 summary after each interaction ─
+  // â”€â”€ Memory Compression: update Soul DNA v1 summary after each interaction â”€
   if (studentId !== "anonymous") {
     updateStudentMemory(studentId, env).catch(() => {});
   }
 
-  // ── v2 Pipeline: Extract signals → Write session event → Update state ───
+  // â”€â”€ v2 Pipeline: Extract signals â†’ Write session event â†’ Update state â”€â”€â”€
   let driftScore = 0;
   let nextAction = null;
   let learningSignals = null;
@@ -1343,7 +1343,7 @@ async function handleChat(body, env) {
   });
 }
 
-// ── TTS (Deepgram Aura) ───────────────────────────────────────────────────────
+// â”€â”€ TTS (Deepgram Aura) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 async function handleTTS(body, env) {
   const apiKey = env.DEEPGRAM_API_KEY;
@@ -1359,7 +1359,7 @@ async function handleTTS(body, env) {
   return new Response(res.body, { headers: { "Content-Type": "audio/mpeg", "Cache-Control": "public, max-age=3600", ...corsHeaders() } });
 }
 
-// ── Speech-to-Learning MVP — Core Loop ────────────────────────────────────────
+// â”€â”€ Speech-to-Learning MVP â€” Core Loop â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 const CORRECT_PROMPT = `You are OBI, a strict but warm English coach for Vietnamese students.
 
@@ -1370,7 +1370,7 @@ TASK: The student spoke a sentence. You must:
 
 RULES:
 - If the sentence is already correct, say so and give a slightly more advanced version to try
-- Keep explanations SHORT — max 1-2 sentences
+- Keep explanations SHORT â€” max 1-2 sentences
 - Be encouraging, never shaming
 - Focus on the MOST IMPORTANT error first, not every tiny detail
 
@@ -1399,7 +1399,7 @@ async function handleCorrect(body, env) {
         try { const p = JSON.parse(e.payload); return p.original; } catch { return ""; }
       }).filter(Boolean);
       if (past.length > 0) {
-        mistakeContext = `\n\nSTUDENT'S PAST MISTAKES (they keep getting these wrong — watch for patterns):\n${past.slice(-5).map(m => `- "${m}"`).join("\n")}`;
+        mistakeContext = `\n\nSTUDENT'S PAST MISTAKES (they keep getting these wrong â€” watch for patterns):\n${past.slice(-5).map(m => `- "${m}"`).join("\n")}`;
       }
     } catch (_) {}
   }
@@ -1423,7 +1423,7 @@ async function handleCorrect(body, env) {
   const res = await fetch("https://api.deepseek.com/chat/completions", {
     method: "POST",
     headers: { "Content-Type": "application/json", "Authorization": `Bearer ${apiKey}` },
-    body: JSON.stringify({ model: "deepseek-chat", messages, max_tokens: 200, temperature: 0.3 }),
+    body: JSON.stringify({ model: "deepseek-v4-flash", messages, max_tokens: 200, temperature: 0.3 }),
   });
 
   if (!res.ok) { const errText = await res.text(); return json({ error: `DeepSeek ${res.status}`, detail: errText }, 502); }
@@ -1500,9 +1500,9 @@ async function handleRepeat(body, env) {
   }
 
   let feedback;
-  if (score === 100) feedback = "Perfect! You nailed it. 🔥";
+  if (score === 100) feedback = "Perfect! You nailed it. ðŸ”¥";
   else if (score >= 80) feedback = "Close enough! Good job. Keep that sentence in your brain.";
-  else if (score >= 50) feedback = "Almost — try again. Listen carefully to the corrected version.";
+  else if (score >= 50) feedback = "Almost â€” try again. Listen carefully to the corrected version.";
   else feedback = "Not quite. Listen to the sentence again, then repeat slowly.";
 
   return json({ passed, score, feedback, attempt, expected, studentId });
@@ -1602,7 +1602,7 @@ async function handleTeacherDashboard(env) {
   });
 }
 
-// ── Onboarding ────────────────────────────────────────────────────────────────
+// â”€â”€ Onboarding â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 async function handleOnboarding(body, env) {
   if (!body.studentId) return json({ error: "studentId required" }, 400);
@@ -1614,12 +1614,12 @@ async function handleOnboarding(body, env) {
     const payload = JSON.stringify({ fullName: body.fullName, englishLevel: body.englishLevel, city: body.currentCity });
     appendToLedger(body.studentId, "onboarding", payload, env).catch(() => {});
   }
-  // Register in roster so digest + flags work (must await — CF Workers kills fire-and-forget without waitUntil)
+  // Register in roster so digest + flags work (must await â€” CF Workers kills fire-and-forget without waitUntil)
   await upsertRoster(body.studentId, { fullName: body.fullName, englishLevel: body.englishLevel }, env).catch(() => {});
   return res;
 }
 
-// ── Memory (mutable scratch — Ledger is the permanent record) ────────────────
+// â”€â”€ Memory (mutable scratch â€” Ledger is the permanent record) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 async function handleMemorySave(body, env) {
   const studentId = body.studentId || "unknown";
@@ -1633,7 +1633,7 @@ async function handleMemoryGet(studentId, env) {
   return stub.fetch(new Request("https://do/memory/get"));
 }
 
-// ── Progress ─────────────────────────────────────────────────────────────────
+// â”€â”€ Progress â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 async function handleProgress(studentId, env) {
   if (!studentId) return json({ error: "studentId required" }, 400);
@@ -1651,7 +1651,7 @@ async function handleProgress(studentId, env) {
   return json({ weakPoints: progressData.weakPoints, profile: progressData.profile, pet: petState, rewardSignals: signals });
 }
 
-// ── Lesson / Practice / Feedback ─────────────────────────────────────────────
+// â”€â”€ Lesson / Practice / Feedback â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 async function handleLesson(body, env) {
   const apiKey = env.DEEPSEEK_API_KEY;
@@ -1660,7 +1660,7 @@ async function handleLesson(body, env) {
   const res = await fetch("https://api.deepseek.com/chat/completions", {
     method: "POST",
     headers: { "Content-Type": "application/json", "Authorization": `Bearer ${env.DEEPSEEK_API_KEY}` },
-    body: JSON.stringify({ model: "deepseek-chat", messages: [{ role: "system", content: OBI_SYSTEM }, { role: "user", content: prompt }], max_tokens: 500, temperature: 0.7 }),
+    body: JSON.stringify({ model: "deepseek-v4-flash", messages: [{ role: "system", content: OBI_SYSTEM }, { role: "user", content: prompt }], max_tokens: 500, temperature: 0.7 }),
   });
   if (!res.ok) return json({ error: `DeepSeek ${res.status}` }, 502);
   const data = await res.json();
@@ -1676,7 +1676,7 @@ async function handlePractice(body, env) {
   const res = await fetch("https://api.deepseek.com/chat/completions", {
     method: "POST",
     headers: { "Content-Type": "application/json", "Authorization": `Bearer ${env.DEEPSEEK_API_KEY}` },
-    body: JSON.stringify({ model: "deepseek-chat", messages: [{ role: "system", content: OBI_SYSTEM }, { role: "user", content: prompt }], max_tokens: 400, temperature: 0.7 }),
+    body: JSON.stringify({ model: "deepseek-v4-flash", messages: [{ role: "system", content: OBI_SYSTEM }, { role: "user", content: prompt }], max_tokens: 400, temperature: 0.7 }),
   });
   if (!res.ok) return json({ error: `DeepSeek ${res.status}` }, 502);
   const data = await res.json();
@@ -1692,7 +1692,7 @@ async function handleFeedback(body, env) {
   const res = await fetch("https://api.deepseek.com/chat/completions", {
     method: "POST",
     headers: { "Content-Type": "application/json", "Authorization": `Bearer ${env.DEEPSEEK_API_KEY}` },
-    body: JSON.stringify({ model: "deepseek-chat", messages: [{ role: "system", content: OBI_SYSTEM }, { role: "user", content: prompt }], max_tokens: 300, temperature: 0.75 }),
+    body: JSON.stringify({ model: "deepseek-v4-flash", messages: [{ role: "system", content: OBI_SYSTEM }, { role: "user", content: prompt }], max_tokens: 300, temperature: 0.75 }),
   });
   if (!res.ok) return json({ error: `DeepSeek ${res.status}` }, 502);
   const data = await res.json();
@@ -1701,7 +1701,7 @@ async function handleFeedback(body, env) {
   return json({ feedback });
 }
 
-// ── NET Pet ───────────────────────────────────────────────────────────────────
+// â”€â”€ NET Pet â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 async function handlePetCheckin(body, env) {
   if (!body.studentId) return json({ error: "studentId required" }, 400);
@@ -1727,7 +1727,7 @@ async function handlePetScore(studentId, env) {
   return stub.fetch(new Request("https://do/score"));
 }
 
-// ── Phonics Drills ────────────────────────────────────────────────────────────
+// â”€â”€ Phonics Drills â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 async function handleDrillNext(studentId, env) {
   if (!studentId) return json({ error: "studentId required" }, 400);
@@ -1789,8 +1789,8 @@ async function handleDrillResult(body, env) {
   }
 
   let feedback;
-  if (score === 100) feedback = "Perfect drill! 🔥 That sound is locked in.";
-  else if (score >= 80) feedback = "Good enough — moving on. Keep drilling daily.";
+  if (score === 100) feedback = "Perfect drill! ðŸ”¥ That sound is locked in.";
+  else if (score >= 80) feedback = "Good enough â€” moving on. Keep drilling daily.";
   else if (score >= 50) feedback = "Almost. Listen again, repeat slower.";
   else feedback = "Try again. Focus on the highlighted sound.";
 
@@ -1807,7 +1807,7 @@ async function handleDrillList() {
   return json({ groups: Object.values(groups), total: PHONICS_DRILLS.length });
 }
 
-// ── Metrics — The 4 That Matter ───────────────────────────────────────────────
+// â”€â”€ Metrics â€” The 4 That Matter â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 async function handleMetricsSummary(env) {
   if (!env.SESSIONS) return json({ error: "SESSIONS not configured" }, 500);
@@ -1955,7 +1955,7 @@ async function handleMetricsErrors(studentId, env) {
   return json({ studentId, trend, errorReduction: reduction, improving: reduction > 0, ts: Date.now() });
 }
 
-// ── Assessment + Report Engine ────────────────────────────────────────────────
+// â”€â”€ Assessment + Report Engine â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 async function handleAssessment(body, env) {
   const apiKey = env.DEEPSEEK_API_KEY;
@@ -2011,7 +2011,7 @@ Return ONLY valid JSON, no markdown, no explanation. Schema:
       method: "POST",
       headers: { "Content-Type": "application/json", "Authorization": `Bearer ${apiKey}` },
       body: JSON.stringify({
-        model: "deepseek-chat",
+        model: "deepseek-v4-flash",
         messages: [{ role: "system", content: assessPrompt }],
         temperature: 0.3,
         max_tokens: 1500,
@@ -2052,7 +2052,7 @@ Return ONLY valid JSON, no markdown, no explanation. Schema:
 }
 
 async function handleReport(studentId, env) {
-  if (!studentId) return json({ error: "studentId required — pass ?studentId=xxx" }, 400);
+  if (!studentId) return json({ error: "studentId required â€” pass ?studentId=xxx" }, 400);
 
   // Gather all data for the report
   let profile = null, petState = null, mistakes = [], drillResults = [], corrections = [];
@@ -2168,10 +2168,10 @@ function buildReportHTML(d) {
     const color = score >= 80 ? "#22c55e" : score >= 50 ? "#f59e0b" : "#ef4444";
     return `<div style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;font-size:14px;margin-bottom:4px"><span>${label}</span><span style="font-weight:700;color:${color}">${score}/100</span></div><div style="height:8px;background:#1e1b4b;border-radius:4px;overflow:hidden"><div style="height:100%;width:${score}%;background:${color};border-radius:4px;transition:width 0.6s"></div></div></div>`;
   };
-  const modeEmoji = d.tigerMode === "TIGER" ? "🐅" : d.tigerMode === "CUB" ? "🐱" : "🐭";
+  const modeEmoji = d.tigerMode === "TIGER" ? "ðŸ…" : d.tigerMode === "CUB" ? "ðŸ±" : "ðŸ­";
   const modeColor = d.tigerMode === "TIGER" ? "#22c55e" : d.tigerMode === "CUB" ? "#f59e0b" : "#ef4444";
 
-  return `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>English Assessment Report — ${d.name}</title>
+  return `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>English Assessment Report â€” ${d.name}</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Inter',-apple-system,sans-serif;background:#0f0f1a;color:#e2e8f0;min-height:100vh;padding:24px}
@@ -2200,18 +2200,18 @@ body{font-family:'Inter',-apple-system,sans-serif;background:#0f0f1a;color:#e2e8
 .stat .val{color:#7c3aed}.cta{display:none}}
 </style></head><body><div class="report">
 <div class="header">
-<h1>🎓 English Assessment Report</h1>
+<h1>ðŸŽ“ English Assessment Report</h1>
 <p style="font-size:22px;font-weight:700;color:#e2e8f0;margin:8px 0">${d.name}</p>
-<p class="subtitle">Generated ${new Date(d.generatedAt).toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"})} · Natural English Training</p>
+<p class="subtitle">Generated ${new Date(d.generatedAt).toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"})} Â· Natural English Training</p>
 <div style="margin-top:16px"><span class="badge" style="background:${modeColor}20;color:${modeColor};border:1px solid ${modeColor}">${modeEmoji} ${d.tigerMode} MODE</span>
 <span class="badge" style="background:rgba(168,85,247,0.15);color:#a855f7;border:1px solid rgba(168,85,247,0.3);margin-left:8px">CEFR ${d.level}</span></div>
 </div>
 
-<div class="section"><h2>📊 Overall Score</h2>
+<div class="section"><h2>ðŸ“Š Overall Score</h2>
 <div style="text-align:center;margin:16px 0"><div style="font-size:64px;font-weight:800;color:${modeColor}">${d.tigerScore}</div><div style="color:#94a3b8;font-size:14px">out of 100</div></div>
 <p style="text-align:center;color:#cbd5e1;max-width:500px;margin:0 auto">${d.summary}</p></div>
 
-<div class="section"><h2>🎯 Skill Breakdown</h2>
+<div class="section"><h2>ðŸŽ¯ Skill Breakdown</h2>
 ${bar("Grammar", d.scores.grammar)}
 ${bar("Vocabulary", d.scores.vocabulary)}
 ${bar("Fluency", d.scores.fluency)}
@@ -2220,7 +2220,7 @@ ${bar("Confidence", d.scores.confidence)}
 ${bar("Accuracy", d.scores.accuracy)}
 </div>
 
-<div class="section"><h2>⚡ Key Stats</h2>
+<div class="section"><h2>âš¡ Key Stats</h2>
 <div class="stat-row">
 <div class="stat"><div class="val">${d.streak}</div><div class="label">Day Streak</div></div>
 <div class="stat"><div class="val">${d.totalSessions}</div><div class="label">Sessions</div></div>
@@ -2228,21 +2228,21 @@ ${bar("Accuracy", d.scores.accuracy)}
 <div class="stat"><div class="val">${d.drillsTotal}</div><div class="label">Drills Done</div></div>
 </div></div>
 
-${d.topErrors.length > 0 ? `<div class="section"><h2>🔴 Top Errors</h2>${d.topErrors.map(e => `<div class="error-item"><strong>${e.error}</strong><div style="color:#94a3b8;font-size:13px;margin-top:2px">"${e.example}"</div><div class="fix">✓ ${e.correction}</div></div>`).join("")}</div>` : ""}
+${d.topErrors.length > 0 ? `<div class="section"><h2>ðŸ”´ Top Errors</h2>${d.topErrors.map(e => `<div class="error-item"><strong>${e.error}</strong><div style="color:#94a3b8;font-size:13px;margin-top:2px">"${e.example}"</div><div class="fix">âœ“ ${e.correction}</div></div>`).join("")}</div>` : ""}
 
-${d.phonicsRisks.length > 0 ? `<div class="section"><h2>🗣️ Phonics Risk Areas</h2><div style="display:flex;flex-wrap:wrap;gap:4px">${d.phonicsRisks.map(p => `<span class="phonics-tag">${p.replace(/_/g, " ")}</span>`).join("")}</div></div>` : ""}
+${d.phonicsRisks.length > 0 ? `<div class="section"><h2>ðŸ—£ï¸ Phonics Risk Areas</h2><div style="display:flex;flex-wrap:wrap;gap:4px">${d.phonicsRisks.map(p => `<span class="phonics-tag">${p.replace(/_/g, " ")}</span>`).join("")}</div></div>` : ""}
 
-${d.strengths.length > 0 ? `<div class="section"><h2>💪 Strengths</h2><div style="display:flex;flex-wrap:wrap;gap:4px">${d.strengths.map(s => `<span class="strength-tag">${s}</span>`).join("")}</div></div>` : ""}
+${d.strengths.length > 0 ? `<div class="section"><h2>ðŸ’ª Strengths</h2><div style="display:flex;flex-wrap:wrap;gap:4px">${d.strengths.map(s => `<span class="strength-tag">${s}</span>`).join("")}</div></div>` : ""}
 
-${d.improvementPlan.length > 0 ? `<div class="section"><h2>📈 Improvement Plan</h2>${d.improvementPlan.map(p => `<div class="plan-item"><strong>Week ${p.week}:</strong> ${p.goal}<div style="color:#94a3b8;font-size:13px;margin-top:4px">→ ${p.action}</div></div>`).join("")}</div>` : ""}
+${d.improvementPlan.length > 0 ? `<div class="section"><h2>ðŸ“ˆ Improvement Plan</h2>${d.improvementPlan.map(p => `<div class="plan-item"><strong>Week ${p.week}:</strong> ${p.goal}<div style="color:#94a3b8;font-size:13px;margin-top:4px">â†’ ${p.action}</div></div>`).join("")}</div>` : ""}
 
-${d.errorTrend.length > 1 ? `<div class="section"><h2>📉 Error Trend (Last 7 Days)</h2><div class="card"><table style="width:100%;border-collapse:collapse;font-size:13px"><tr style="color:#94a3b8;border-bottom:1px solid rgba(168,85,247,0.2)"><th style="text-align:left;padding:6px">Date</th><th style="text-align:center;padding:6px">Corrections</th><th style="text-align:center;padding:6px">Errors</th><th style="text-align:right;padding:6px">Error Rate</th></tr>${d.errorTrend.map(e => `<tr><td style="padding:6px">${e.day}</td><td style="text-align:center;padding:6px">${e.total}</td><td style="text-align:center;padding:6px;color:#ef4444">${e.errors}</td><td style="text-align:right;padding:6px">${e.rate}%</td></tr>`).join("")}</table></div></div>` : ""}
+${d.errorTrend.length > 1 ? `<div class="section"><h2>ðŸ“‰ Error Trend (Last 7 Days)</h2><div class="card"><table style="width:100%;border-collapse:collapse;font-size:13px"><tr style="color:#94a3b8;border-bottom:1px solid rgba(168,85,247,0.2)"><th style="text-align:left;padding:6px">Date</th><th style="text-align:center;padding:6px">Corrections</th><th style="text-align:center;padding:6px">Errors</th><th style="text-align:right;padding:6px">Error Rate</th></tr>${d.errorTrend.map(e => `<tr><td style="padding:6px">${e.day}</td><td style="text-align:center;padding:6px">${e.total}</td><td style="text-align:center;padding:6px;color:#ef4444">${e.errors}</td><td style="text-align:right;padding:6px">${e.rate}%</td></tr>`).join("")}</table></div></div>` : ""}
 
-<a class="cta" href="/">Start Daily Training with Obi →</a>
+<a class="cta" href="/">Start Daily Training with Obi â†’</a>
 
 <div class="footer">
-<p>Natural English Training · Powered by OBI AI Engine</p>
-<p style="margin-top:4px">Mouse → Cub → Tiger · Your journey continues</p>
+<p>Natural English Training Â· Powered by OBI AI Engine</p>
+<p style="margin-top:4px">Mouse â†’ Cub â†’ Tiger Â· Your journey continues</p>
 </div>
 </div></body></html>`;
 }
@@ -2264,7 +2264,7 @@ async function handleLeadCapture(body, env) {
   return json({ ok: true, leadId, name, message: "We'll be in touch! Try the free assessment now." });
 }
 
-// ── Classroom ─────────────────────────────────────────────────────────────────
+// â”€â”€ Classroom â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 async function handleClassStart(body, env) {
   if (!body.classId) return json({ error: "classId required" }, 400);
@@ -2290,7 +2290,7 @@ async function handleClassReport(classId, totalStudents, env) {
   return stub.fetch(new Request(`https://do/class/report?totalStudents=${totalStudents}`));
 }
 
-// ── Roster helper ─────────────────────────────────────────────────────────────
+// â”€â”€ Roster helper â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 async function upsertRoster(studentId, data, env) {
   if (!env.SESSIONS) return;
@@ -2302,9 +2302,9 @@ async function upsertRoster(studentId, data, env) {
   }));
 }
 
-// ── Session Log (off-day pipeline core) ──────────────────────────────────────
+// â”€â”€ Session Log (off-day pipeline core) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Michael calls POST /api/session/log after every real class.
-// OBI inherits his teaching → continues exactly where he left off on off-days.
+// OBI inherits his teaching â†’ continues exactly where he left off on off-days.
 
 async function handleSessionLog(body, env) {
   if (!body.studentId) return json({ error: "studentId required" }, 400);
@@ -2354,7 +2354,7 @@ async function handleSessionLatest(studentId, env) {
   }
 }
 
-// ── Schedule + Accountability ────────────────────────────────────────────────
+// â”€â”€ Schedule + Accountability â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 async function handleScheduleSet(body, env) {
   if (!body.studentId) return json({ error: "studentId required" }, 400);
@@ -2414,8 +2414,8 @@ async function handleScheduleFlags(env) {
   return res;
 }
 
-// ── Notion API Handlers ───────────────────────────────────────────────────────
-// All Notion routes degrade gracefully — return { notionConfigured: false } if secrets unset.
+// â”€â”€ Notion API Handlers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// All Notion routes degrade gracefully â€” return { notionConfigured: false } if secrets unset.
 
 async function handleNotionLessons(url, env) {
   if (!env.NOTION_API_KEY || !env.NOTION_LESSONS_DB) {
@@ -2486,7 +2486,7 @@ async function handleNotionSync(body, env) {
   }
 }
 
-// ── Daily Digest ──────────────────────────────────────────────────────────────
+// â”€â”€ Daily Digest â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Michael hits GET /api/digest once a day for a full picture of off-day activity.
 
 async function handleDailyDigest(env) {
@@ -2547,9 +2547,9 @@ async function handleDailyDigest(env) {
   });
 }
 
-// ── Cryptographic Immutable Ledger API ────────────────────────────────────────
+// â”€â”€ Cryptographic Immutable Ledger API â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
-// Shared helper — Agent99 auto-calls this for every significant event
+// Shared helper â€” Agent99 auto-calls this for every significant event
 async function appendToLedger(studentId, eventType, payload, env) {
   if (!env.LEDGER) return;
   const stub = env.LEDGER.get(env.LEDGER.idFromName(studentId));
@@ -2592,7 +2592,7 @@ async function handleLedgerVerify(studentId, env) {
   return stub.fetch(new Request("https://do/verify"));
 }
 
-// Event-sourced state derivation — rebuild student state from ledger events
+// Event-sourced state derivation â€” rebuild student state from ledger events
 async function handleLedgerState(studentId, env) {
   if (!studentId) return json({ error: "studentId required" }, 400);
   const idCheck = validateStudentId(studentId);
@@ -2608,8 +2608,8 @@ async function handleLedgerStats(env) {
   return stub.fetch(new Request("https://do/stats"));
 }
 
-// ── SOUL DNA CAPTURE PIPELINE ────────────────────────────────────────────────────
-// POST /souldna — Submit raw soul DNA for legionnaire processing
+// â”€â”€ SOUL DNA CAPTURE PIPELINE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// POST /souldna â€” Submit raw soul DNA for legionnaire processing
 async function handleSoulDNASubmit(body, env) {
   // Validate required fields
   if (!body.source || !body.content) {
@@ -2621,7 +2621,7 @@ async function handleSoulDNASubmit(body, env) {
   const tier = body.tier || "OPERATIONAL"; // GOVERNANCE|OPERATIONAL|PRODUCT|ARCHIVE
   const signalDensity = body.signalDensity || "MEDIUM"; // LOW|MEDIUM|HIGH|MAXIMUM
   
-  // Validate content size (max 50KB) — preserve fidelity
+  // Validate content size (max 50KB) â€” preserve fidelity
   const contentSize = new Blob([body.content]).size;
   if (contentSize > 51200) {
     return json({ error: `Content too large: ${contentSize} bytes (max 50KB)` }, 413);
@@ -2708,7 +2708,7 @@ async function handleSoulDNASubmit(body, env) {
   }, 201);
 }
 
-// GET /souldna/pipeline — Actionable pipeline steps grouped by tier
+// GET /souldna/pipeline â€” Actionable pipeline steps grouped by tier
 async function handleSoulDNAPipeline(tier, env) {
   const VALID_TIERS = ["GOVERNANCE", "OPERATIONAL", "PRODUCT", "ARCHIVE"];
   if (!VALID_TIERS.includes(tier)) {
@@ -2761,7 +2761,7 @@ async function handleSoulDNAPipeline(tier, env) {
           "Law numbers are sequential",
           "MUST have ROOT (sovereign quote), PHYSICS (why), PREVENTION (enforcement), CANON_REF",
           "Derive laws from session, don't invent",
-          "Format: L{NN}:{LAW_NAME}→{one_line_summary}"
+          "Format: L{NN}:{LAW_NAME}â†’{one_line_summary}"
         ],
         rulesUrl: ".github/skills/legionnaire-field-guide/SKILL.md (Step 2)"
       },
@@ -2803,9 +2803,9 @@ function generateSessionTag() {
   return `${date}-${time}-${rand}`;
 }
 
-// ── Agent 99 Translation Layer ────────────────────────────────────────────────
-// SOV100 (Michael) → Agent99 (Obi/Translation) → Agent98 (Anakin/Chaos) →
-// Agent97 (OB1/Audit) → Drones(1-96)
+// â”€â”€ Agent 99 Translation Layer â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// SOV100 (Michael) â†’ Agent99 (Obi/Translation) â†’ Agent98 (Anakin/Chaos) â†’
+// Agent97 (OB1/Audit) â†’ Drones(1-96)
 
 const DRONE_REGISTRY = {
   1: { name: "CodeRunner", skills: ["execute", "eval", "script", "run"] },
@@ -2843,7 +2843,7 @@ const DRONE_REGISTRY = {
 function translateThroughAgent99(rawIntent) {
   const intentLower = (rawIntent || "").toLowerCase();
 
-  // Agent 99 (Obi) — Intent classification + drone routing
+  // Agent 99 (Obi) â€” Intent classification + drone routing
   const matchedDrones = [];
   for (const [id, drone] of Object.entries(DRONE_REGISTRY)) {
     const score = drone.skills.filter(s => intentLower.includes(s)).length;
@@ -2867,7 +2867,7 @@ function translateThroughAgent99(rawIntent) {
     },
     agent98: {
       role: "Stress Test",
-      notes: `Anakin says: "${matchedDrones.length === 0 ? "No drone match — defaulting to CodeRunner. Risky." : `${matchedDrones.length} drones matched. Top pick looks solid.`}"`,
+      notes: `Anakin says: "${matchedDrones.length === 0 ? "No drone match â€” defaulting to CodeRunner. Risky." : `${matchedDrones.length} drones matched. Top pick looks solid.`}"`,
     },
     agent97: {
       role: "Audit",
@@ -2885,7 +2885,7 @@ function translateThroughAgent99(rawIntent) {
   };
 }
 
-// ── Command Station Handlers ──────────────────────────────────────────────────
+// â”€â”€ Command Station Handlers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 async function handleCommandSend(body, env) {
   const rawIntent = sanitizeInput((body.command || body.intent || "").slice(0, 2000));
@@ -2968,11 +2968,11 @@ async function handleCommandHistory(limit, env) {
   return stub.fetch(new Request(`https://do/history?limit=${Math.min(limit, 200)}`));
 }
 
-// ── Durable Objects ───────────────────────────────────────────────────────────
+// â”€â”€ Durable Objects â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // LedgerDO and HeavyLedger imported from heavy-ledger.js
 // StudentDO imported from student-do-complete.js
 
-// CommandDO — Command Station (moved here after removing old LedgerDO)
+// CommandDO â€” Command Station (moved here after removing old LedgerDO)
 // [OLD LEDGER DO CLASS REMOVED - NOW USING IMPORTS FROM heavy-ledger.js]
 // See: src/heavy-ledger.js for new LedgerDO and HeavyLedger implementations
 class LedgerDO_Deprecated {
@@ -2996,7 +2996,7 @@ class LedgerDO_Deprecated {
   async fetch(request) {
     const url = new URL(request.url);
 
-    // APPEND — the only write operation. No update. No delete.
+    // APPEND â€” the only write operation. No update. No delete.
     if (url.pathname === "/append" && request.method === "POST") {
       const body = await request.json();
       const studentId = body.studentId || "unknown";
@@ -3023,7 +3023,7 @@ class LedgerDO_Deprecated {
       return json({ ok: true, entryHash, prevHash, ts, eventType });
     }
 
-    // HISTORY — read last N entries for a student (supports ?eventType= filter)
+    // HISTORY â€” read last N entries for a student (supports ?eventType= filter)
     if (url.pathname === "/history") {
       const limit = Math.min(parseInt(url.searchParams.get("limit") || "50"), 200);
       const eventType = url.searchParams.get("eventType") || "";
@@ -3043,7 +3043,7 @@ class LedgerDO_Deprecated {
       return json({ entries: rows, total, limit });
     }
 
-    // VERIFY — cryptographic chain integrity check for a student
+    // VERIFY â€” cryptographic chain integrity check for a student
     if (url.pathname === "/verify") {
       const rows = this.sql.exec(
         `SELECT id, student_id, event_type, payload, prev_hash, entry_hash, ts FROM ledger ORDER BY id ASC`
@@ -3074,12 +3074,12 @@ class LedgerDO_Deprecated {
         totalEntries: rows.length,
         brokenAt: brokenAt || null,
         message: valid
-          ? `Chain intact — ${rows.length} entries verified`
-          : `Chain broken at entry #${brokenAt} — tamper detected`,
+          ? `Chain intact â€” ${rows.length} entries verified`
+          : `Chain broken at entry #${brokenAt} â€” tamper detected`,
       });
     }
 
-    // STATE — Event-sourced state derivation: rebuild student state from events
+    // STATE â€” Event-sourced state derivation: rebuild student state from events
     // This is the Unified Cognitive Event Bus: state = f(events), never stored separately
     if (url.pathname === "/state") {
       const studentId = url.searchParams.get("studentId") || "";
@@ -3093,7 +3093,7 @@ class LedgerDO_Deprecated {
         rows = this.sql.exec(`SELECT event_type, payload, ts FROM ledger ORDER BY id ASC`).toArray();
       }
 
-      // Derive state from event stream — single timeline of truth
+      // Derive state from event stream â€” single timeline of truth
       const state = {
         totalEvents: rows.length,
         firstEvent: rows[0]?.ts || null,
@@ -3142,7 +3142,7 @@ class LedgerDO_Deprecated {
       return json({ ok: true, studentId: studentId || "all", state, derivedAt: Date.now() });
     }
 
-    // STATS — aggregate event statistics across entire ledger
+    // STATS â€” aggregate event statistics across entire ledger
     if (url.pathname === "/stats") {
       const typeCounts = this.sql.exec(
         `SELECT event_type, COUNT(*) as cnt FROM ledger GROUP BY event_type ORDER BY cnt DESC`
@@ -3167,7 +3167,7 @@ class LedgerDO_Deprecated {
   }
 }
 
-// ── Zalo Pressure API handler functions ───────────────────────────────────────
+// â”€â”€ Zalo Pressure API handler functions â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 async function handleZaloSweep(env) {
   const report = await runEscalationSweep(env);
@@ -3287,7 +3287,7 @@ async function handleRosterZalo(body, env) {
   return res;
 }
 
-// SessionDO — mutable scratch memory + classroom events (rate limited)
+// SessionDO â€” mutable scratch memory + classroom events (rate limited)
 export class SessionDO {
   constructor(state, env) {
     this.state = state;
@@ -3296,7 +3296,7 @@ export class SessionDO {
     this.sql.exec(`CREATE TABLE IF NOT EXISTS memory (id INTEGER PRIMARY KEY AUTOINCREMENT, student_id TEXT, user_msg TEXT, obi_msg TEXT, ts INTEGER)`);
     this.sql.exec(`CREATE TABLE IF NOT EXISTS class_sessions (id INTEGER PRIMARY KEY AUTOINCREMENT, class_id TEXT, teacher_id TEXT, total_students INTEGER, started_at INTEGER)`);
     this.sql.exec(`CREATE TABLE IF NOT EXISTS class_events (id INTEGER PRIMARY KEY AUTOINCREMENT, class_id TEXT, student_id TEXT, type TEXT, rule_status TEXT, notes TEXT, ts INTEGER)`);
-    // Roster table — system-roster instance tracks all enrolled students for digest + flags
+    // Roster table â€” system-roster instance tracks all enrolled students for digest + flags
     this.sql.exec(`CREATE TABLE IF NOT EXISTS roster (
       student_id TEXT PRIMARY KEY,
       full_name TEXT DEFAULT '',
@@ -3313,7 +3313,7 @@ export class SessionDO {
       zalo_id TEXT DEFAULT '',
       created_at INTEGER NOT NULL DEFAULT 0
     )`);
-    // Session events — structured learning event chain (v2 pipeline)
+    // Session events â€” structured learning event chain (v2 pipeline)
     this.sql.exec(`CREATE TABLE IF NOT EXISTS session_events (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       student_id TEXT NOT NULL,
@@ -3330,7 +3330,7 @@ export class SessionDO {
     this.sql.exec(`CREATE INDEX IF NOT EXISTS idx_session_events_student ON session_events(student_id, ts)`);
     // Safe migration for zalo_id
     try { this.sql.exec(`ALTER TABLE roster ADD COLUMN zalo_id TEXT DEFAULT ''`); } catch(_) {}
-    // Accountability relations graph — who monitors whom
+    // Accountability relations graph â€” who monitors whom
     this.sql.exec(`CREATE TABLE IF NOT EXISTS relations (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       student_id TEXT NOT NULL,
@@ -3342,7 +3342,7 @@ export class SessionDO {
       created_at INTEGER NOT NULL DEFAULT 0,
       UNIQUE(student_id, partner_id)
     )`);
-    // Alert log — tracks every escalation sent for cooldown + audit
+    // Alert log â€” tracks every escalation sent for cooldown + audit
     this.sql.exec(`CREATE TABLE IF NOT EXISTS alert_log (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       student_id TEXT NOT NULL,
@@ -3413,11 +3413,11 @@ export class SessionDO {
       const events = this.sql.exec(`SELECT * FROM class_events ORDER BY id`).toArray();
       const summary = events.reduce((acc, e) => { acc[e.type] = (acc[e.type] || 0) + 1; return acc; }, {});
       const flagged = events.filter(e => e.rule_status === "broken").map(e => e.student_id).filter((v, i, a) => a.indexOf(v) === i);
-      const reportText = [`Class Report — ${events.length} events across ${totalStudents} students.`, Object.entries(summary).map(([k, v]) => `  ${k}: ${v}`).join("\n"), flagged.length > 0 ? `Flagged students: ${flagged.join(", ")}` : "No flagged students."].join("\n");
+      const reportText = [`Class Report â€” ${events.length} events across ${totalStudents} students.`, Object.entries(summary).map(([k, v]) => `  ${k}: ${v}`).join("\n"), flagged.length > 0 ? `Flagged students: ${flagged.join(", ")}` : "No flagged students."].join("\n");
       return json({ reportText, events: events.length, summary, flagged });
     }
 
-    // ── Roster endpoints (used by system-roster instance) ────────────────────
+    // â”€â”€ Roster endpoints (used by system-roster instance) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     if (path === "/roster/upsert" && request.method === "POST") {
       const body = await request.json();
       const now = Date.now();
@@ -3469,7 +3469,7 @@ export class SessionDO {
       return json({ flags: rows, count: rows.length });
     }
 
-    // ── Relation graph endpoints (accountability links) ─────────────────
+    // â”€â”€ Relation graph endpoints (accountability links) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     if (path === "/relations/add" && request.method === "POST") {
       const body = await request.json();
       if (!body.studentId || !body.partnerId) return json({ error: "studentId and partnerId required" }, 400);
@@ -3509,7 +3509,7 @@ export class SessionDO {
       return json({ ok: true });
     }
 
-    // ── Alert log endpoints (cooldown check + audit trail) ──────────────
+    // â”€â”€ Alert log endpoints (cooldown check + audit trail) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     if (path === "/alerts/log" && request.method === "POST") {
       const body = await request.json();
       if (!body.studentId || !body.alertType) return json({ error: "studentId and alertType required" }, 400);
@@ -3545,7 +3545,7 @@ export class SessionDO {
       return json({ alerts: rows, count: rows.length });
     }
 
-    // ── Session Events (v2 structured learning event chain) ─────────────
+    // â”€â”€ Session Events (v2 structured learning event chain) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     if (path === "/events/write" && request.method === "POST") {
       const body = await request.json();
       const now = Date.now();
@@ -3573,7 +3573,7 @@ export class SessionDO {
   }
 }
 
-// ProfileDO — student onboarding + profile
+// ProfileDO â€” student onboarding + profile
 export class ProfileDO {
   constructor(state, env) {
     this.state = state;
@@ -3589,11 +3589,11 @@ export class ProfileDO {
       `ALTER TABLE profiles ADD COLUMN parent_id TEXT DEFAULT ''`,
     ];
     for (const m of _migrations) { try { this.sql.exec(m); } catch(_) {} }
-    // Safe migrations — summary column
+    // Safe migrations â€” summary column
     try { this.sql.exec(`ALTER TABLE profiles ADD COLUMN summary TEXT DEFAULT ''`); } catch(_) {}
     // Weakness tracking table
     this.sql.exec(`CREATE TABLE IF NOT EXISTS weak_points (id INTEGER PRIMARY KEY AUTOINCREMENT, specific TEXT NOT NULL, category TEXT NOT NULL, error_count INTEGER DEFAULT 1, last_seen INTEGER NOT NULL, first_seen INTEGER NOT NULL, improvement_pct REAL DEFAULT 0.0, UNIQUE(specific))`);
-    // Student behavioral state (Mouse → Tiger state machine)
+    // Student behavioral state (Mouse â†’ Tiger state machine)
     this.sql.exec(`CREATE TABLE IF NOT EXISTS student_state (
       student_id TEXT PRIMARY KEY,
       continuity_score REAL DEFAULT 0,
@@ -3658,7 +3658,7 @@ export class ProfileDO {
       const profile = this.sql.exec(`SELECT * FROM profiles LIMIT 1`).toArray();
       return json({ weakPoints, profile: profile[0] || null });
     }
-    // Summary — compressed memory (Soul DNA v1)
+    // Summary â€” compressed memory (Soul DNA v1)
     if (url.pathname === "/summary/get" && request.method === "GET") {
       const profile = this.sql.exec(`SELECT summary, english_level FROM profiles LIMIT 1`).toArray();
       return json({ summary: profile[0]?.summary || "", level: profile[0]?.english_level || "A1" });
@@ -3669,7 +3669,7 @@ export class ProfileDO {
       return json({ ok: true });
     }
 
-    // ── Student Behavioral State (Mouse → Tiger state machine) ──────────
+    // â”€â”€ Student Behavioral State (Mouse â†’ Tiger state machine) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     if (url.pathname === "/state/get") {
       const rows = this.sql.exec(`SELECT * FROM student_state LIMIT 1`).toArray();
       return json({ studentState: rows[0] || null });
@@ -3688,7 +3688,7 @@ export class ProfileDO {
       const current = this.sql.exec(`SELECT * FROM student_state WHERE student_id = ?`, sid).toArray()[0] || {};
       const totalEvents = (current.total_events || 0) + 1;
 
-      // Update engagement (based on input length — longer = more engaged)
+      // Update engagement (based on input length â€” longer = more engaged)
       const inputLen = b.inputLength || 0;
       const engagementDelta = inputLen > 20 ? 2 : inputLen > 5 ? 1 : -1;
       const engagementScore = Math.max(0, Math.min(100, (current.engagement_score || 50) + engagementDelta));
@@ -3707,7 +3707,7 @@ export class ProfileDO {
       // Accountability stays at current (updated externally by relations system)
       const accountabilityScore = current.accountability_score || 20;
 
-      // Compute composite Mouse → Tiger score
+      // Compute composite Mouse â†’ Tiger score
       const composite = computeMouseTigerScore({
         executionScore, continuityScore, engagementScore, accountabilityScore, accuracyScore,
       });
@@ -3731,7 +3731,7 @@ export class ProfileDO {
   }
 }
 
-// PetDO — NET Pet gamification (streak, XP, mood, spaced repetition 1-3-7-30, Tiger Score)
+// PetDO â€” NET Pet gamification (streak, XP, mood, spaced repetition 1-3-7-30, Tiger Score)
 export class PetDO {
   constructor(state, env) {
     this.state = state;
@@ -3796,7 +3796,7 @@ export class PetDO {
 
       let milestone = null;
       if ([1, 3, 7, 30].includes(streak)) {
-        const msgs = { 1: "Day 1. The journey starts. Every Tiger was once a Mouse.", 3: "Day 3. Three in a row. You are not a mouse anymore.", 7: "Day 7. One full week. Your brain is rewiring. Keep going.", 30: "Day 30. Thirty days straight. That is not a student — that is a Tiger." };
+        const msgs = { 1: "Day 1. The journey starts. Every Tiger was once a Mouse.", 3: "Day 3. Three in a row. You are not a mouse anymore.", 7: "Day 7. One full week. Your brain is rewiring. Keep going.", 30: "Day 30. Thirty days straight. That is not a student â€” that is a Tiger." };
         milestone = { day: streak, bonus: "1.5x XP", message: msgs[streak] };
       }
 
@@ -3809,7 +3809,7 @@ export class PetDO {
       return json({ state: { streak: s.streak, xp: s.xp, mood: s.mood, totalSessions: s.total_sessions, longestStreak: s.longest_streak, tigerScore: s.tiger_score, dayPhase: s.day_phase } });
     }
 
-    // Tiger Score endpoint — returns score + breakdown
+    // Tiger Score endpoint â€” returns score + breakdown
     if (url.pathname === "/score") {
       const s = this.sql.exec(`SELECT * FROM pet_state WHERE id = 1`).toArray()[0] || {};
       const now = Date.now();
@@ -3830,7 +3830,7 @@ export class PetDO {
       });
     }
 
-    // Daily check endpoint — called by cron for accountability
+    // Daily check endpoint â€” called by cron for accountability
     if (url.pathname === "/daily-check") {
       const s = this.sql.exec(`SELECT * FROM pet_state WHERE id = 1`).toArray()[0] || {};
       const now = Date.now();
@@ -3858,9 +3858,9 @@ export class PetDO {
   }
 }
 
-// CommandDO — Command Station Queue (SOV100 → Agent99 → Drones)
+// CommandDO â€” Command Station Queue (SOV100 â†’ Agent99 â†’ Drones)
 // Priority-ordered queue with claim/complete lifecycle.
-// Every command flows: Magic Chat → CommandDO → VS Code Extension
+// Every command flows: Magic Chat â†’ CommandDO â†’ VS Code Extension
 export class CommandDO {
   constructor(state, env) {
     this.state = state;
@@ -3882,7 +3882,7 @@ export class CommandDO {
     )`);
     this.sql.exec(`CREATE INDEX IF NOT EXISTS idx_commands_status ON commands(status, priority, created_at)`);
 
-    // ── Virality Engine tables ───────────────────────────────
+    // â”€â”€ Virality Engine tables â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     this.sql.exec(`CREATE TABLE IF NOT EXISTS post_metrics (
       post_id TEXT PRIMARY KEY,
       platform TEXT NOT NULL DEFAULT 'unknown',
@@ -3936,7 +3936,7 @@ export class CommandDO {
   async fetch(request) {
     const url = new URL(request.url);
 
-    // SEND — Queue a new command
+    // SEND â€” Queue a new command
     if (url.pathname === "/send" && request.method === "POST") {
       const body = await request.json();
       const now = Date.now();
@@ -3972,7 +3972,7 @@ export class CommandDO {
       });
     }
 
-    // QUEUE — Get commands by status (VS Code polls this)
+    // QUEUE â€” Get commands by status (VS Code polls this)
     if (url.pathname === "/queue") {
       const status = url.searchParams.get("status") || "pending";
       const limit = Math.min(parseInt(url.searchParams.get("limit") || "20"), 100);
@@ -3992,7 +3992,7 @@ export class CommandDO {
       });
     }
 
-    // CLAIM — VS Code extension claims a pending command
+    // CLAIM â€” VS Code extension claims a pending command
     if (url.pathname === "/claim" && request.method === "POST") {
       const body = await request.json();
       const commandId = body.commandId;
@@ -4015,7 +4015,7 @@ export class CommandDO {
       return json({ ok: true, commandId, status: "claimed", claimedBy });
     }
 
-    // COMPLETE — VS Code reports execution result
+    // COMPLETE â€” VS Code reports execution result
     if (url.pathname === "/complete" && request.method === "POST") {
       const body = await request.json();
       const commandId = body.commandId;
@@ -4038,7 +4038,7 @@ export class CommandDO {
       return json({ ok: true, commandId, status: body.success !== false ? "completed" : "failed" });
     }
 
-    // STATUS — Get a specific command
+    // STATUS â€” Get a specific command
     if (url.pathname === "/status") {
       const id = url.searchParams.get("id");
       if (!id) return json({ error: "Missing id" }, 400);
@@ -4047,16 +4047,16 @@ export class CommandDO {
       return json({ command: { ...row, translation: JSON.parse(row.translation || "{}") } });
     }
 
-    // HISTORY — Recent commands
+    // HISTORY â€” Recent commands
     if (url.pathname === "/history") {
       const limit = Math.min(parseInt(url.searchParams.get("limit") || "50"), 200);
       const rows = this.sql.exec(`SELECT * FROM commands ORDER BY created_at DESC LIMIT ?`, limit).toArray();
       return json({ commands: rows.map(r => ({ ...r, translation: JSON.parse(r.translation || "{}") })), count: rows.length });
     }
 
-    // ── Virality Engine endpoints ─────────────────────────────
+    // â”€â”€ Virality Engine endpoints â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
-    // ADD METRICS — Store post engagement data
+    // ADD METRICS â€” Store post engagement data
     if (url.pathname === "/virality/metrics" && request.method === "POST") {
       const body = await request.json();
       const postId = body.postId || body.post_id || `post_${Date.now()}`;
@@ -4078,13 +4078,13 @@ export class CommandDO {
       return json({ posts: rows, count: rows.length });
     }
 
-    // UNSCORED — Posts without virality scores (for learning loop)
+    // UNSCORED â€” Posts without virality scores (for learning loop)
     if (url.pathname === "/virality/unscored") {
       const rows = this.sql.exec(`SELECT * FROM post_metrics WHERE virality_score IS NULL ORDER BY created_at ASC LIMIT 100`).toArray();
       return json({ posts: rows, count: rows.length });
     }
 
-    // SCORE — Save virality + conversion scores for a post
+    // SCORE â€” Save virality + conversion scores for a post
     if (url.pathname === "/virality/score" && request.method === "POST") {
       const body = await request.json();
       if (!body.postId) return json({ error: "postId required" }, 400);
@@ -4095,14 +4095,14 @@ export class CommandDO {
       return json({ ok: true, postId: body.postId });
     }
 
-    // TOP — Leaderboard of best-performing posts
+    // TOP â€” Leaderboard of best-performing posts
     if (url.pathname === "/virality/top") {
       const limit = Math.min(parseInt(url.searchParams.get("limit") || "20"), 100);
       const rows = this.sql.exec(`SELECT * FROM post_metrics WHERE virality_score IS NOT NULL ORDER BY virality_score DESC LIMIT ?`, limit).toArray();
       return json({ posts: rows, count: rows.length });
     }
 
-    // CREATE EXPERIMENT — Register a variant group
+    // CREATE EXPERIMENT â€” Register a variant group
 
     // Memory compression
     updateStudentMemory(studentId, env).catch(() => {});
@@ -4138,7 +4138,7 @@ export class CommandDO {
       return json({ ok: true, experimentId: body.experimentId, status: body.status });
     }
 
-    // SAVE PATTERN — Store a winning content pattern
+    // SAVE PATTERN â€” Store a winning content pattern
     if (url.pathname === "/virality/pattern" && request.method === "POST") {
       const body = await request.json();
       const now = Date.now();
@@ -4150,7 +4150,7 @@ export class CommandDO {
       return json({ ok: true });
     }
 
-    // GET PATTERNS — Retrieve winning patterns
+    // GET PATTERNS â€” Retrieve winning patterns
     if (url.pathname === "/virality/patterns") {
       const limit = Math.min(parseInt(url.searchParams.get("limit") || "20"), 100);
       const rows = this.sql.exec(`SELECT * FROM content_patterns ORDER BY score DESC LIMIT ?`, limit).toArray();
@@ -4161,9 +4161,9 @@ export class CommandDO {
   }
 }
 
-// ── Behavioral Loop Engine Handlers ───────────────────────────────────────────
+// â”€â”€ Behavioral Loop Engine Handlers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
-// /api/loop — Single endpoint enforcing the full speak→correct→repeat→score cycle
+// /api/loop â€” Single endpoint enforcing the full speakâ†’correctâ†’repeatâ†’score cycle
 async function handleLoop(body, env) {
   const apiKey = env.DEEPSEEK_API_KEY;
   if (!apiKey) return json({ error: "DEEPSEEK_API_KEY not configured" }, 500);
@@ -4210,11 +4210,11 @@ async function handleLoop(body, env) {
     }
   }
 
-  // Step 1.5: Star Map routing — determine module + mode (Stabilizer vs Explorer)
+  // Step 1.5: Star Map routing â€” determine module + mode (Stabilizer vs Explorer)
   const route = getStudentRoute(studentId, transcript, weakAreas, petState);
   const modulePrompt = getModulePrompt(route);
 
-  // Step 2: AI correction (DeepSeek) — enhanced with Star Map module + mode prompts
+  // Step 2: AI correction (DeepSeek) â€” enhanced with Star Map module + mode prompts
   const messages = [
     { role: "system", content: LOOP_PROMPT + modulePrompt + mistakeContext + weakContext },
     { role: "user", content: transcript },
@@ -4223,7 +4223,7 @@ async function handleLoop(body, env) {
   const res = await fetch("https://api.deepseek.com/chat/completions", {
     method: "POST",
     headers: { "Content-Type": "application/json", "Authorization": `Bearer ${apiKey}` },
-    body: JSON.stringify({ model: "deepseek-chat", messages, max_tokens: 300, temperature: 0.3 }),
+    body: JSON.stringify({ model: "deepseek-v4-flash", messages, max_tokens: 300, temperature: 0.3 }),
   });
 
   if (!res.ok) { const errText = await res.text(); return json({ error: `DeepSeek ${res.status}`, detail: errText }, 502); }
@@ -4304,18 +4304,18 @@ The student spoke a sentence. Execute this EXACT cycle:
 
 RULES:
 - If correct, praise briefly and give a harder sentence to try
-- Keep explanations SHORT — max 2 sentences
-- Be encouraging, never shaming — "Mouse to Tiger" philosophy
+- Keep explanations SHORT â€” max 2 sentences
+- Be encouraging, never shaming â€” "Mouse to Tiger" philosophy
 - Focus on the MOST IMPORTANT error first
 - Vietnamese explanations help them understand faster
 
 RESPOND IN EXACTLY THIS JSON FORMAT (no markdown, no extra text):
-{"corrected":"the corrected sentence","explanation":"why in English","explanation_vi":"tại sao bằng tiếng Việt","repeat":"say this sentence out loud","wasCorrect":false,"score":65}
+{"corrected":"the corrected sentence","explanation":"why in English","explanation_vi":"táº¡i sao báº±ng tiáº¿ng Viá»‡t","repeat":"say this sentence out loud","wasCorrect":false,"score":65}
 
 If correct:
-{"corrected":"their original sentence","explanation":"Perfect! Try this harder version:","explanation_vi":"Tuyệt vời! Thử câu khó hơn:","repeat":"a harder sentence","wasCorrect":true,"score":95}`;
+{"corrected":"their original sentence","explanation":"Perfect! Try this harder version:","explanation_vi":"Tuyá»‡t vá»i! Thá»­ cÃ¢u khÃ³ hÆ¡n:","repeat":"a harder sentence","wasCorrect":true,"score":95}`;
 
-// /api/tiger-score — On-demand Tiger Score with full breakdown
+// /api/tiger-score â€” On-demand Tiger Score with full breakdown
 async function handleTigerScore(studentId, env) {
   if (!studentId) return json({ error: "studentId required" }, 400);
   const idCheck = validateStudentId(studentId);
@@ -4364,7 +4364,7 @@ async function handleTigerScore(studentId, env) {
   });
 }
 
-// /api/analytics — The only 4 metrics that matter: DAU, speaking mins, 7-day retention, error reduction
+// /api/analytics â€” The only 4 metrics that matter: DAU, speaking mins, 7-day retention, error reduction
 async function handleAnalytics(env) {
   const now = Date.now();
   const oneDayAgo = now - 86400000;
@@ -4434,9 +4434,9 @@ async function handleAnalytics(env) {
   });
 }
 
-// ── Skeleton Star Map Handler ─────────────────────────────────────────────────
+// â”€â”€ Skeleton Star Map Handler â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
-// POST /api/route — Get routing decision for a student
+// POST /api/route â€” Get routing decision for a student
 async function handleRoute(body, env) {
   const studentId = body.studentId || "anonymous";
   const transcript = sanitizeInput((body.transcript || body.message || "").slice(0, 500));
@@ -4467,9 +4467,9 @@ async function handleRoute(body, env) {
   return json({ ok: true, ...route });
 }
 
-// ── Phoenix Reset Handlers ────────────────────────────────────────────────────
+// â”€â”€ Phoenix Reset Handlers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
-// POST /api/phoenix/snapshot — Capture + store full student state
+// POST /api/phoenix/snapshot â€” Capture + store full student state
 async function handlePhoenixSnapshot(body, env) {
   const studentId = body.studentId;
   if (!studentId) return json({ error: "studentId required" }, 400);
@@ -4480,7 +4480,7 @@ async function handlePhoenixSnapshot(body, env) {
   return json({ ok: true, snapshot, stored });
 }
 
-// POST /api/phoenix/reset — Reset student from their latest snapshot
+// POST /api/phoenix/reset â€” Reset student from their latest snapshot
 async function handlePhoenixReset(body, env) {
   const studentId = body.studentId;
   if (!studentId) return json({ error: "studentId required" }, 400);
@@ -4515,9 +4515,9 @@ async function handlePhoenixReset(body, env) {
   });
 }
 
-// ── Auto Post Engine Handlers ─────────────────────────────────────────────────
+// â”€â”€ Auto Post Engine Handlers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
-// Run the full auto-post pipeline: generate posts from real data → distribute to platforms
+// Run the full auto-post pipeline: generate posts from real data â†’ distribute to platforms
 async function runAutoPostEngine(env) {
   const report = { generated: 0, distributed: 0, platforms: {}, errors: [] };
   try {
@@ -4541,9 +4541,9 @@ async function runAutoPostEngine(env) {
   return report;
 }
 
-// ── Virality Engine Handlers ──────────────────────────────────────────────────
+// â”€â”€ Virality Engine Handlers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
-// Proxy handler — forwards requests to CommandDO virality endpoints
+// Proxy handler â€” forwards requests to CommandDO virality endpoints
 async function handleViralityProxy(doPath, method, body, env, searchParams) {
   if (!env.COMMANDS) return json({ error: "COMMANDS DO not configured" }, 500);
   const stub = env.COMMANDS.get(env.COMMANDS.idFromName("virality-engine"));
@@ -4555,7 +4555,7 @@ async function handleViralityProxy(doPath, method, body, env, searchParams) {
   return json(data, res.status);
 }
 
-// POST /api/virality/learn — Trigger learning loop
+// POST /api/virality/learn â€” Trigger learning loop
 async function handleViralityLearn(env) {
   try {
     const report = await runLearningLoop(env);
@@ -4565,14 +4565,14 @@ async function handleViralityLearn(env) {
   }
 }
 
-// POST /api/virality/score — Calculate virality score from raw metrics
+// POST /api/virality/score â€” Calculate virality score from raw metrics
 async function handleViralityScore(body) {
   const viralityScore = calculateVirality(body);
   const conversionScore = calculateConversion(body);
   return json({ ok: true, viralityScore, conversionScore });
 }
 
-// POST /api/virality/variants — Generate hook variants from an insight
+// POST /api/virality/variants â€” Generate hook variants from an insight
 async function handleViralityVariants(body, env) {
   const insight = body.insight || body.base_insight || "";
   if (!insight) return json({ error: "insight required" }, 400);
@@ -4592,7 +4592,7 @@ async function handleViralityVariants(body, env) {
   return json({ ok: true, variants, patternCount: patterns.length });
 }
 
-// GET /api/growth/posts — Preview generated posts without distributing
+// GET /api/growth/posts â€” Preview generated posts without distributing
 async function handleGrowthPosts(limit, env) {
   try {
     const posts = await generatePosts(env, limit);
@@ -4602,13 +4602,13 @@ async function handleGrowthPosts(limit, env) {
   }
 }
 
-// POST /api/growth/distribute — Manually trigger post distribution
+// POST /api/growth/distribute â€” Manually trigger post distribution
 async function handleGrowthDistribute(env) {
   const report = await runAutoPostEngine(env);
   return json({ ok: true, ...report });
 }
 
-// GET /api/growth/log — View post history from LedgerDO
+// GET /api/growth/log â€” View post history from LedgerDO
 async function handleGrowthLog(limit, env) {
   if (!env.LEDGER) return json({ error: "LEDGER not configured" }, 500);
   try {
@@ -4621,9 +4621,9 @@ async function handleGrowthLog(limit, env) {
   }
 }
 
-// ── Unified Memory System ─────────────────────────────────────────────────────
+// â”€â”€ Unified Memory System â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
-// getStudentMemory — Aggregates state from ProfileDO, PetDO, and LedgerDO into one snapshot
+// getStudentMemory â€” Aggregates state from ProfileDO, PetDO, and LedgerDO into one snapshot
 async function getStudentMemory(studentId, env) {
   const memory = {
     studentId,
@@ -4687,7 +4687,7 @@ async function getStudentMemory(studentId, env) {
   return memory;
 }
 
-// compressMemory — Soul DNA v1: compress student state into a summary string
+// compressMemory â€” Soul DNA v1: compress student state into a summary string
 function compressMemory(memory) {
   const weakStr = memory.weakAreas.length > 0 ? memory.weakAreas.slice(0, 5).join(", ") : "none identified yet";
   const recentMistakes = memory.corrections.slice(-3).map(c => `"${(c.input || "").slice(0, 40)}"`).join(", ");
@@ -4701,7 +4701,7 @@ function compressMemory(memory) {
   ].join("\n");
 }
 
-// updateStudentMemory — After each interaction, compress and persist summary
+// updateStudentMemory â€” After each interaction, compress and persist summary
 async function updateStudentMemory(studentId, env) {
   const memory = await getStudentMemory(studentId, env);
   const summary = compressMemory(memory);
@@ -4718,14 +4718,14 @@ async function updateStudentMemory(studentId, env) {
   return summary;
 }
 
-// GET /api/daily — Personalized daily task based on weaknesses
+// GET /api/daily â€” Personalized daily task based on weaknesses
 async function handleDailyTask(studentId, env) {
   if (!studentId) return json({ error: "studentId required" }, 400);
 
   const memory = await getStudentMemory(studentId, env);
   const topWeak = memory.weakAreas[0] || "general fluency";
 
-  // Day-based task rotation: correction-heavy → repetition → recall → mixed → fluency push
+  // Day-based task rotation: correction-heavy â†’ repetition â†’ recall â†’ mixed â†’ fluency push
   const dayInCycle = (memory.sessions % 5) + 1;
   const taskTypes = {
     1: { type: "correction", prompt: `Speak 3 sentences about your morning. Focus on using correct ${topWeak}.`, duration: 5 },
@@ -4751,7 +4751,7 @@ async function handleDailyTask(studentId, env) {
   });
 }
 
-// GET /api/memory/summary — View compressed student memory
+// GET /api/memory/summary â€” View compressed student memory
 async function handleMemorySummary(studentId, env) {
   if (!studentId) return json({ error: "studentId required" }, 400);
   const memory = await getStudentMemory(studentId, env);
@@ -4759,7 +4759,7 @@ async function handleMemorySummary(studentId, env) {
   return json({ studentId, summary, memory });
 }
 
-// ── Utilities ─────────────────────────────────────────────────────────────────
+// â”€â”€ Utilities â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 function json(data, status = 200) {
   return new Response(JSON.stringify(data), { status, headers: { "Content-Type": "application/json" } });
@@ -4767,9 +4767,9 @@ function json(data, status = 200) {
 
 
 
-// ── MemoryDO — Per-Student Long-Term Memory + Session Log ─────────────────────
+// â”€â”€ MemoryDO â€” Per-Student Long-Term Memory + Session Log â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // SQLite-backed Durable Object for session_log and memory_state.
-// Binding: env.MEMORY — declared in wrangler.toml, wired when router connects.
+// Binding: env.MEMORY â€” declared in wrangler.toml, wired when router connects.
 export class MemoryDO {
   constructor(state, env) {
     this.state = state;
@@ -4852,3 +4852,4 @@ export class MemoryDO {
 }
 
 export { StudentDO, HeavyLedger, LedgerDO, StudentBrainV2 };
+

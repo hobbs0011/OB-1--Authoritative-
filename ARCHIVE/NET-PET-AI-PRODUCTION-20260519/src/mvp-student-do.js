@@ -1,5 +1,5 @@
-/**
- * StudentDO — Durable Object (1 per student)
+﻿/**
+ * StudentDO â€” Durable Object (1 per student)
  * Stores: session state, memory, progress, mistake tracking
  * 
  * Manages:
@@ -48,7 +48,7 @@ export class StudentDO {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          model: "deepseek-chat",
+          model: "deepseek-v4-flash",
           messages: messages,
           temperature: 0.3,
           max_tokens: 500
@@ -122,7 +122,7 @@ export class StudentDO {
     });
   }
 
-  // ────────────────────────── MEMORY MANAGEMENT ──────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ MEMORY MANAGEMENT â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
   /**
    * Load or initialize student memory
@@ -228,7 +228,7 @@ Summary: Student responds well to correction + repetition loops
     `.trim();
   }
 
-  // ────────────────────────── OBI PROMPT ENGINE ──────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ OBI PROMPT ENGINE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
   /**
    * Build AI prompt with OBI personality + student memory
@@ -274,7 +274,7 @@ Be direct. Don't waste words.
     ];
   }
 
-  // ────────────────────────── EVENT LOGGING (Light Ledger v1) ──────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ EVENT LOGGING (Light Ledger v1) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
   /**
    * Log events for later analysis (Daily, Weekly, Monthly)
@@ -297,7 +297,7 @@ Be direct. Don't waste words.
     await this.state.storage.put("logs", logs);
   }
 
-  // ────────────────────────── HELPER FUNCTIONS ──────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ HELPER FUNCTIONS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
   getNextLevel(currentLevel) {
     const levels = ["A1", "A2", "B1", "B2", "C1"];
@@ -305,3 +305,4 @@ Be direct. Don't waste words.
     return idx < levels.length - 1 ? levels[idx + 1] : currentLevel;
   }
 }
+

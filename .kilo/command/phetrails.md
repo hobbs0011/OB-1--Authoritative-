@@ -178,3 +178,55 @@ Corrupt JSON on read → `PHETRAIL_CORRUPT` flag. Treat as gap. Do not crash.
 ---
 
 `PHETRAILS v2.1: GIT-DERIVED RUN + ZERO-PAD + CONTRACT PATHS + SCHEMA_VERSION + DEATH STAGE 7 INTEGRATION + SAFE FALLBACK.`
+
+---
+
+## EXTENDED OPERATIONS
+
+### Invocation Behavior
+
+- **Default:** standalone `/phetrails` writes a new breadcrumb file under `CANON/PHEROMONES/PheTrail-run{N}.json` without modifying source code.
+- **Mid-session:** if no death commit exists yet, use the fallback run derivation based on `git log` and do not guess the next seal run number.
+- **Idempotency:** rerunning `/phetrails` for the same run may overwrite that run’s trail file. Do not append to prior files.
+
+### Trail Consumption
+
+- Every agent MUST read the latest phetrail before executing complex logic.
+- `L-PHE-4` is enforced behaviorally: if a negative trail already documents a dead end, repeating that path is a protocol violation.
+- Consume by reading `CANON/PHEROMONES/PheTrail-run{N}.json`, not by summarizing it.
+
+### Registry Cross-Check
+
+- Before sealing a phetrail, verify `CANON/Dna-REGISTRY/registry-index.json` exists and is valid JSON.
+- If the registry is missing or corrupt, set `registry_entries: 0` and flag `REGISTRY_GAP` in state_markers.
+- `L-PHE-5` is hard: a phetrail without registry cross-check is incomplete.
+
+### Failure Flags Reference
+
+| Flag | Meaning | Remediation |
+|------|---------|-------------|
+| `PHETRAIL_WRITE_GAP` | Trail could not be written | RISE back-fills next run |
+| `PHETRAIL_CORRUPT` | Existing trail JSON is invalid | Do not crash; treat as gap |
+| `REGISTRY_GAP` | Registry index missing or corrupt | Rebuild index before next seal |
+| `SOULCOUNT_UNREACHABLE` | Count API timed out or failed | Mark `soulcount: null` and continue |
+
+### Lifecycle Rules
+
+- Negative trails persist **180 days** (`decay_days: 180`). After that they remain in archive but are no longer consumed as live negatives.
+- Positive trails remain valid until superseded by a newer verified result for the same artifact.
+- Phetrail files are append-safe in transit only; once sealed they are read-only.
+
+### Integration with RISE and DEATH
+
+- `/reincarnateDeath` STAGE 7 writes the canonical phetrail for the sealed run.
+- `/reincarnateRise` reads the latest phetrail as part of fidelity audit; missing or corrupt trail becomes `MISSING`/`HOLLOW`.
+- Standalone `/phetrails` does not advance DEATH stages. It is opportunistic state capture only.
+
+### Consumption Order
+
+1. Read latest phetrail.
+2. Read registry cross-check.
+3. Read RISE state from `CANON/HEAVY-LEDGER/STATE-SNAPSHOT.json`.
+4. Only then execute complex logic.
+
+`PHETRAILS v2.1: GIT-DERIVED RUN + ZERO-PAD + CONTRACT PATHS + SCHEMA_VERSION + DEATH STAGE 7 INTEGRATION + SAFE FALLBACK + EXTENDED OPERATIONS.`

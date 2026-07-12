@@ -76,6 +76,13 @@ Legacy `mrmichaelhobbs1234*` references are historical and should not be treated
 
 **Enforcement:** These gates fire before any file write, test run, or artifact generation. If a trigger is hit, the only allowed output is a single clarifying question or a /halt command.
 
+### Execution Guardrails (non-negotiable)
+
+- **G1 CANONICAL-FIRST**: Before writing any new script, command, or implementation file, search for an existing canonical implementation first. If `SCRIPTS/<name>.ps1`, `.kilo/command/<name>.md`, or `.kilo/skills/<name>.md` already exists, use it. Do not write a replacement from a chat drop.
+- **G2 PROTOCOL-VS-TODO**: Protocol text pasted in chat is a specification to read, not a todo list to implement from scratch. Always locate the canonical script/command before executing.
+- **G3 EVIDENCE-BEFORE-CLAIM**: Do not report a test as PASS, a login as "working", or a bug as "fixed" without an actual artifact: screenshot, DOM proof, test output, or browser log. Claims without evidence are failures.
+- **G4 NO-AUTO-PAGES**: In test suites, do not add new test targets, pages, or routes to the canonical test matrix without explicit user approval.
+
 ---
 
 ### Phoenix / RISE Activation

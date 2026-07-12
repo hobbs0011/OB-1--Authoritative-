@@ -12,7 +12,8 @@ agent: AGENT99
 2. `.kilo/skills/LegionnaireFieldGuide.md` — immediate AI-facing field guide, single source of truth for commands/skills/paths
 3. `CANON/SYSTEM/REINCARNATION-CONTRACT.md` — operational contract for RISE/DEATH
 4. `CANON/SYSTEM/COLD-START-BOOT.md` — session state and active mission
-5. This command (`reincarnaterise.md`) — read-only audit protocol
+5. `OPERATIONS/BACKBURNER-PIPELINE-LOG.md` — open deferred items, never open new threads while backburner is ignored
+6. This command (`reincarnaterise.md`) — read-only audit protocol
 
 **Canonical contract:** `CANON/SYSTEM/REINCARNATION-CONTRACT.md`
 **Run authority:** `git log --oneline --grep "^death:"`

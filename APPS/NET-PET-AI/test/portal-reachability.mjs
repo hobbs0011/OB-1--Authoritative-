@@ -16,9 +16,36 @@ const DEVICES = [
 const PAGES = [
   { key: 'huong-portal', file: 'huong-portal.html', authKey: 'huong_auth' },
   { key: 'mai-tram-portal', file: 'mai-tram-portal.html', authKey: 'mai_tram_auth' },
+  { key: 'bluetech-login', file: 'bluetech-login/index.html', authKey: 'bluetech_auth' },
+  { key: 'quan-quang-login', file: 'quan-quang-login/index.html', authKey: 'quanquang_auth' },
   { key: 'pitch-deck', file: 'pitch-deck.html' },
   { key: 'magic-chat', file: 'magic-chat.html', query: '?studentId=mai-tram-bluetech' },
 ];
+
+// GUARDRAIL: DO NOT add new entries to PAGES without explicit user approval.
+// New test targets must be requested by name, not invented by the agent.
+
+// EVIDENCE BEFORE CLAIM: All PASS/FAIL reports must include an actual artifact.
+// This function captures a screenshot before any result is reported.
+const EVIDENCE_DIR = path.join(appRoot, 'test', 'evidence');
+if (!fs.existsSync(EVIDENCE_DIR)) fs.mkdirSync(EVIDENCE_DIR, { recursive: true });
+
+async function captureEvidence(page, key, phase, deviceName) {
+  const ts = new Date().toISOString().replace(/[:.]/g, '-');
+  const file = path.join(EVIDENCE_DIR, `${key}-${phase}-${deviceName.replace(/\s+/g, '_')}-${ts}.png`);
+  try {
+    await page.screenshot({ path: file, fullPage: true });
+    return file;
+  } catch {
+    return null;
+  }
+}
+
+// GUARDRAIL: If evidence capture fails, the result is INCONCLUSIVE, not PASS.
+// Never report a test as PASS without an actual screenshot artifact.
+function inconclusiveReport(pageSpec, phase, reason) {
+  console.log(`  [INCONCLUSIBLE] ${pageSpec.key}/${phase}: ${reason}`);
+}
 
 const failures = [];
 const warnings = [];
@@ -493,19 +520,20 @@ async function assessControls(page, pageSpec, device, phase, scope = null) {
   }, scope);
 
   const bad = result.assessments.filter((a) => !a.ok);
+  const evidencePath = await captureEvidence(page, pageSpec.key, phase, device.name);
   if (bad.length) {
     console.log(`  [FAIL] ${pageSpec.key}/${phase}: ${result.controls.length} controls, ${bad.length} unreachable`);
+    if (evidencePath) console.log(`    EVIDENCE: ${evidencePath}`);
     for (const item of bad) {
-      failures.push({ page: pageSpec.key, device: device.name, phase, item });
+      failures.push({ page: pageSpec.key, device: device.name, phase, item, evidence: evidencePath });
       console.log(`    UNREACHABLE ${item.label} center=(${item.center.x},${item.center.y}) rect=${JSON.stringify(item.rect)} ${item.reasons.join('; ')}`);
     }
   } else {
     console.log(`  [PASS] ${pageSpec.key}/${phase}: ${result.controls.length} controls reachable`);
+    if (evidencePath) console.log(`    EVIDENCE: ${evidencePath}`);
   }
   return result;
 }
-
-async function auditTextAndOverflow(page, pageSpec, device) {
   const audit = await page.evaluate(() => {
     function isVisibleLikeControl(el) {
       if (!(el instanceof HTMLElement) || typeof el.getBoundingClientRect !== 'function') return false;

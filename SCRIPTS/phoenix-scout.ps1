@@ -229,8 +229,12 @@ foreach ($f in $files) {
             if ($c -match '[\*?]') { continue }
             if ($c -match '\.(md|json|ps1|txt|yml|toml|js|csv|yaml)$') {
                 $fullRef = if ($c.StartsWith("D:\") -or $c.StartsWith("/")) { $c } else { Join-Path $repo $c }
-                if (-not (Test-Path $fullRef -PathType Leaf)) {
-                    Add-Flag -Priority P2 -Type GAP -Status ORPHAN -File $rel -Line 1 -Bytes $bytes -Excerpt $c -Reason "Referenced file not on disk" -Learned "Cross-reference broken — path may have moved or been renamed." -Next "Create file or remove reference"
+                try {
+                    if (-not (Test-Path $fullRef -PathType Leaf)) {
+                        Add-Flag -Priority P2 -Type GAP -Status ORPHAN -File $rel -Line 1 -Bytes $bytes -Excerpt $c -Reason "Referenced file not on disk" -Learned "Cross-reference broken — path may have moved or been renamed." -Next "Create file or remove reference"
+                    }
+                } catch {
+                    # Skip references outside repo base; they are not actionable GAPs
                 }
             }
         }

@@ -7,7 +7,7 @@ async function dsT2(env, task) {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${env.DEEPSEEK_API_KEY}` },
     body: JSON.stringify({
-      model: 'deepseek-chat',
+      model: 'deepseek-v4-flash',
       messages: [
         { role: 'system', content: 'You are an Agent99 OS PhoenixArt role drone. Respond ONLY with valid JSON. No markdown. No explanation.' },
         { role: 'user', content: task },
@@ -158,3 +158,4 @@ export async function handleArt(request, env) {
 
   return Response.json({ error: 'not found' }, { status: 404 });
 }
+

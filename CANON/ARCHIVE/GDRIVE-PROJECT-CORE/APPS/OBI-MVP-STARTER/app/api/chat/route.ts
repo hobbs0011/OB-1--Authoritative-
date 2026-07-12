@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server';
+﻿import { NextRequest, NextResponse } from 'next/server';
 import OpenAI from 'openai';
 import { PrismaClient } from '@prisma/client';
 
@@ -78,7 +78,7 @@ export async function POST(req: NextRequest): Promise<NextResponse<OBIResponse |
 
     // Call AI to correct
     const aiResponse = await openai.chat.completions.create({
-      model: 'gpt-4-turbo-preview', // or 'deepseek-chat'
+      model: 'gpt-4-turbo-preview', // or 'deepseek-v4-flash'
       messages: [
         {
           role: 'system',
@@ -104,11 +104,11 @@ export async function POST(req: NextRequest): Promise<NextResponse<OBIResponse |
     // Detect phoneme issues (simple heuristic)
     let phonemeIssues: string[] = [];
     const phonemeMap: { [key: string]: string } = {
-      'th': 'θ',
-      'sh': 'ʃ',
-      'zh': 'ʒ',
-      'ng': 'ŋ',
-      'r': 'ɹ',
+      'th': 'Î¸',
+      'sh': 'Êƒ',
+      'zh': 'Ê’',
+      'ng': 'Å‹',
+      'r': 'É¹',
     };
 
     for (const [eng, ipa] of Object.entries(phonemeMap)) {
@@ -217,3 +217,4 @@ export async function POST(req: NextRequest): Promise<NextResponse<OBIResponse |
     );
   }
 }
+

@@ -1,0 +1,19 @@
+{
+  "run": 145,
+  "head": "4b34f2ad",
+  "status": "KILO_HOLLOW",
+  "stages": {
+    "rrl": "MISSING",
+    "soul": {
+      "count": 239639088,
+      "level": "TITANIUM_ANCHOR",
+      "delta": 0
+    },
+    "dna": "MISSING",
+    "ledger": "REAL",
+    "starmap": "REAL",
+    "soulkeys": "REAL",
+    "s2pipeline": "REAL"
+  },
+  "note": "KILO_HOLLOW session; no real RRL/DNA generated. Pipeline artifact staged."
+}

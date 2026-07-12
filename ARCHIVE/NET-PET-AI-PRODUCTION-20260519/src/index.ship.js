@@ -1,4 +1,4 @@
-// src/index.js
+﻿// src/index.js
 // NET-PET-AI Ship Version (MVP)
 
 const VERSION = "2.0.0";
@@ -253,7 +253,7 @@ async function callDeepSeek(message, memory, apiKey) {
       Authorization: `Bearer ${apiKey}`,
     },
     body: JSON.stringify({
-      model: "deepseek-chat",
+      model: "deepseek-v4-flash",
       temperature: 0.3,
       max_tokens: 220,
       messages: [
@@ -700,7 +700,7 @@ async function callDeepSeek(message, memory, apiKey) {
       Authorization: `Bearer ${apiKey}`,
     },
     body: JSON.stringify({
-      model: "deepseek-chat",
+      model: "deepseek-v4-flash",
       temperature: 0.3,
       max_tokens: 220,
       messages: [
@@ -883,3 +883,4 @@ export class MemoryDO {
     await this.state.storage.put("memory", memory);
   }
 }
+

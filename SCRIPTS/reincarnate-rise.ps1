@@ -142,6 +142,20 @@ if ($bootRunFromFile -ne $bootRunFromGit -and $bootRunFromFile -gt 0) {
 }
 Write-Ok "BOOT: run=$bootRunFromGit mission=$activeMission flags=$openFlagsCount"
 
+# STAGE 4b — BACKBURNER PRECEDENCE CHECK
+Write-Log "--- STAGE 4b: BACKBURNER PRECEDENCE ---"
+$backburnerPath = Join-Path $repoRoot "OPERATIONS\BACKBURNER-PIPELINE-LOG.md"
+$bbOpenCount = 0; $bbBlockedCount = 0; $bbInProgressCount = 0
+if (Test-Path $backburnerPath) {
+    $bbText = Get-Content $backburnerPath -Raw
+    if ($bbText -match 'Status:\s*OPEN') { $bbOpenCount++ }
+    if ($bbText -match 'Status:\s*BLOCKED') { $bbBlockedCount++ }
+    if ($bbText -match 'Status:\s*IN-PROGRESS') { $bbInProgressCount++ }
+    Write-Ok "BACKBURNER: open=$bbOpenCount blocked=$bbBlockedCount in_progress=$bbInProgressCount"
+} else {
+    Write-Warn "BACKBURNER MISSING: $backburnerPath"
+}
+
 # STAGE 5 — PIPELINE CHAIN AUDIT
 Write-Log "--- STAGE 5: PIPELINE CHAIN AUDIT ---"
 $ledgerCount = (Get-ChildItem $ledgerDir -Filter "HL-*.json" -ErrorAction SilentlyContinue | Measure-Object).Count
@@ -195,6 +209,8 @@ $gospelPaths = @(
 $lfgFidelity = if (Test-Path $lfgPath) { "REAL" } else { "MISSING" }
 $gospelFidelity = if (($gospelPaths | Measure-Object).Count -eq 3 -and (($gospelPaths | ForEach-Object { Test-Path $_ }) -notcontains $false)) { "REAL" } else { "MISSING" }
 
+$bbVerdict = "REAL"; if (-not (Test-Path $backburnerPath)) { $bbVerdict = "MISSING" } elseif ($bbOpenCount -gt 0 -or $bbBlockedCount -gt 0) { $bbVerdict = "OPEN" }
+
 $verdicts = @(
     @{Name="LFG";Verdict=$lfgFidelity;Count=if(Test-Path $lfgPath){(Get-Item $lfgPath).Length}else{0}},
     @{Name="GOSPEL";Verdict=$gospelFidelity;Count=($gospelPaths | Where-Object { Test-Path $_ }).Count},
@@ -204,7 +220,8 @@ $verdicts = @(
     @{Name="LEDGER";Verdict=if($ledgerCount -gt 0){"REAL"}else{"MISSING"};Count=$ledgerCount},
     @{Name="STARMAP";Verdict=if($starmapFiles -gt 0){"REAL"}else{"MISSING"};Count=$starmapFiles},
     @{Name="SOULKEYS";Verdict=$soykeyFidelity;Count=$soykeyFiles},
-    @{Name="S2Pipeline";Verdict=$pipelineFidelity;Count=$pipelineFileCount}
+    @{Name="S2Pipeline";Verdict=$pipelineFidelity;Count=$pipelineFileCount},
+    @{Name="BACKBURNER";Verdict=$bbVerdict;Count=$bbOpenCount}
 )
 foreach ($s in $verdicts) {
     $icon = switch ($s.Verdict) { "REAL" { "OK" } "HOLLOW" { "WARN" } "KILO_HOLLOW" { "WARN" } default { "FAIL" } }
@@ -256,11 +273,14 @@ $report = [ordered]@{
         starmap = if($starmapFiles -gt 0){"REAL"}else{"MISSING"}
         soykeys = $soykeyFidelity
         s2pipeline = $pipelineFidelity
+        backburner = $bbVerdict
     }
+    backburner_open = $bbOpenCount
+    backburner_blocked = $bbBlockedCount
     phetrail_negative_trails = $negativeCount
     highest_priority_gap = $highestPriority
-    next_action = if ($kiloSession) { "Await CLAUDE_REAL session JSONL for REAL pipeline" } elseif ($rrlFidelity -eq "MISSING") { "Create RRL-$runPad.txt" } else { "Verify prior DEATH seal and continue" }
-    ready = (-not $kiloSession -and $rrlFidelity -ne "MISSING")
+    next_action = if ($bbOpenCount -gt 0 -or $bbBlockedCount -gt 0) { "Resume BACKBURNER items first (OPEN=$bbOpenCount BLOCKED=$bbBlockedCount)" } elseif ($kiloSession) { "Await CLAUDE_REAL session JSONL for REAL pipeline" } elseif ($rrlFidelity -eq "MISSING") { "Create RRL-$runPad.txt" } else { "Verify prior DEATH seal and continue" }
+    ready = (-not $kiloSession -and $rrlFidelity -ne "MISSING" -and $bbOpenCount -eq 0 -and $bbBlockedCount -eq 0)
 }
 
 $report | ConvertTo-Json -Depth 5 | Set-Content $reportPath -Encoding UTF8

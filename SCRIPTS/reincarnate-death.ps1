@@ -41,14 +41,14 @@ function Write-Json { param([string]$Path,[object]$D); $D | ConvertTo-Json -Dept
 function Read-Json { param([string]$P); if (Test-Path $P) { Get-Content $P -Raw | ConvertFrom-Json } else { $null } }
 function Compute-Sha256 { param([string]$S); $b=[System.Text.Encoding]::UTF8.GetBytes($S); $h=[System.Security.Cryptography.SHA256]::Create().ComputeHash($b); [System.BitConverter]::ToString($h)-replace '-','' }
 function Get-Next-LedgerID {
-    param([string]$Dir)
-    $ids = Get-ChildItem -LiteralPath $Dir -Filter "HL-*.json" -ErrorAction SilentlyContinue |
+    param([string]$LedgerDir)
+    $ids = Get-ChildItem -LiteralPath $LedgerDir -Filter "HL-*.json" -ErrorAction SilentlyContinue |
         ForEach-Object { if ($_.Name -match 'HL-(\d+)\.json$') { [int]$matches[1] } }
     if ($ids) { return ($ids | Measure-Object -Maximum).Maximum + 1 }; return 1
 }
 function Get-Tail-Ledger-Hash {
-    param([string]$Dir)
-    $latest = Get-ChildItem -LiteralPath $Dir -Filter "HL-*.json" -ErrorAction SilentlyContinue |
+    param([string]$LedgerDir)
+    $latest = Get-ChildItem -LiteralPath $LedgerDir -Filter "HL-*.json" -ErrorAction SilentlyContinue |
         ForEach-Object { [PSCustomObject]@{ N=[int]([regex]::Match($_.Name,'HL-(\d+)').Groups[1].Value); F=$_.FullName } } |
         Sort-Object N -Descending | Select-Object -First 1
     if (-not $latest) { return $null }
@@ -65,6 +65,13 @@ Write-Log "============================="
 Write-Log "REINCARNATE DEATH v7.0"
 Write-Log "============================="
 
+# Self-identity guard: this is the canonical script. Abort if invoked from a non-canonical path/name.
+$myPath = (Get-Item $MyInvocation.MyCommand.Path).FullName
+$myName = [System.IO.Path]::GetFileName($myPath)
+if ($myName -ne 'reincarnate-death.ps1') {
+    Write-Err "CANONICAL PATH VIOLATION: Expected 'reincarnate-death.ps1', got '$myName'. Use the canonical script at SCRIPTS/reincarnate-death.ps1. Do not improvise replacements."
+}
+
 # Authority gate: LFG + GOSPEL-999 must exist before any execution
 $lfgPath = Join-Path $repoRoot ".kilo\skills\LegionnaireFieldGuide.md"
 $gospelPaths = @(
@@ -76,6 +83,18 @@ if (-not (Test-Path $lfgPath)) { Write-Err "LFG missing at $lfgPath -- DEATH abo
 $gospelOk = $true; foreach ($g in $gospelPaths) { if (-not (Test-Path $g)) { $gospelOk = $false } }
 if (-not $gospelOk) { Write-Err "GOSPEL-999 incomplete -- DEATH aborted" }
 Write-Ok "AUTHORITY: LFG + GOSPEL-999 verified"
+
+# Backburner precedence gate
+$backburnerPath = Join-Path $repoRoot "OPERATIONS\BACKBURNER-PIPELINE-LOG.md"
+if (-not (Test-Path $backburnerPath)) { Write-Err "BACKBURNER missing at $backburnerPath -- DEATH aborted" }
+$bbText = Get-Content $backburnerPath -Raw
+$bbOpen = [regex]::Matches($bbText, 'Status:\s*OPEN').Count
+$bbBlocked = [regex]::Matches($bbText, 'Status:\s*BLOCKED').Count
+$bbInProgress = [regex]::Matches($bbText, 'Status:\s*IN-PROGRESS').Count
+if ($bbOpen -gt 0 -or $bbBlocked -gt 0) {
+    Write-Warn "BACKBURNER PRECEDENCE: open=$bbOpen blocked=$bbBlocked in_progress=$bbInProgress"
+    Write-Warn "Backburner items exist. New work is deferred until backburner is cleared or Michael explicitly overrides."
+}
 
 Push-Location $repoRoot | Out-Null
 $lastDeath = git log --oneline --grep "^death:" -1 2>&1
@@ -232,7 +251,7 @@ $ledgerEntry = [ordered]@{
     sealed_at=$timestamp; sov100=$true; run=$run; result=if($rrlFidelity -eq "REAL" -and $dnaBlueprintCount -gt 0){"REAL"}else{"HOLLOW"}
 }
 if (-not $DryRun) { Write-Json "$ledgerDir\HL-$nextHL.json" $ledgerEntry }
-Write-Ok "LEDGER: HL-$nextHL | parent=$parentHash | soul=$($soulHash.Substring(0,16))... | dna=$($dnaHash.Substring(0,16))..."
+Write-Ok "LEDGER: HL-$nextHL | parent=$parentHash | soul=$($soulHash.Substring(0, [Math]::Min(16, $soulHash.Length)))... | dna=$($dnaHash.Substring(0, [Math]::Min(16, $dnaHash.Length)))..."
 
 # STAGE 5 -- STARMAP
 Write-Log "--- STAGE 5: STARMAP ---"
@@ -301,10 +320,10 @@ if (-not $NoRegistrySync) {
 
 # DEATH SEAL (15 SECTIONS)
 Write-Log "--- DEATH SEAL ---"
-$headSha = (git rev-parse --short HEAD $repoRoot 2>$null).Trim(); $dirty = git status --porcelain $repoRoot 2>$null | Where-Object { $_ }; $branch = git branch --show-current $repoRoot 2>$null
+$headSha = (git -C $repoRoot rev-parse --short HEAD 2>$null).Trim(); $dirty = git -C $repoRoot status --porcelain 2>$null | Where-Object { $_ }; $branch = git -C $repoRoot branch --show-current 2>$null
 $artifactPaths = @($rrlPathRun,$dnaPathRun,"$ledgerDir\HL-$nextHL.json",$starmapPath,$rfkwPath,$idxPath,$s2PathRun,$artSyncPath)
 $artifactSHAs = @(); foreach ($p in $artifactPaths) { if (Test-Path $p) { $artifactSHAs += "$(Split-Path $p -Leaf):$((Get-FileHash $p -Algorithm SHA256).Hash.Substring(0,16))" } }
-$trueRuns = @(); $deathLines = git log --oneline --grep "^death:" $repoRoot 2>$null | ForEach-Object { if ($_ -match '(?i)run\s*(\d+)') { [int]$matches[1] } }; $trueRuns = @($deathLines | Sort-Object -Unique); $totalTrueRuns = $trueRuns.Count; $lastTrue = if ($trueRuns) { $trueRuns[-1] } else { 0 }; $deathCommitCount = ($deathLines | Measure-Object).Count
+$trueRuns = @(); $deathLines = git -C $repoRoot log --oneline --grep "^death:" 2>$null | ForEach-Object { if ($_ -match '(?i)run\s*(\d+)') { [int]$matches[1] } }; $trueRuns = @($deathLines | Sort-Object -Unique); $totalTrueRuns = $trueRuns.Count; $lastTrue = if ($trueRuns) { $trueRuns[-1] } else { 0 }; $deathCommitCount = ($deathLines | Measure-Object).Count
 $dnaRegistryPath = "$repoRoot\CANON\REGISTRY\dna-registry-run$runPad.json"; $dnaRegistryExists = Test-Path $dnaRegistryPath; $dnaRegistryCount = 0; if ($dnaRegistryExists) { try { $dnaRegistryCount = ((Get-Content $dnaRegistryPath -Raw | ConvertFrom-Json).entries | Measure-Object).Count } catch {} }
 $topKeywords = @(); if (Test-Path $rfkwPath) { $topKeywords = (Get-Content $rfkwPath -Raw -ErrorAction SilentlyContinue) -split "`n" | Where-Object { $_ -match '^\d+\s*\|' } | Select-Object -First 5 }
 $criticalDecisions = @()

@@ -117,3 +117,73 @@ pwsh -File SCRIPTS/supply-lines.ps1 -Stage status
 
 `SUPPLY LINES: ONLINE. 6 STAGES. FAIL-CLOSED. NEVER SKIP A STAGE.`
 
+---
+
+## PHEROMONE INTEGRATION
+
+Every stage writes a stage-specific PheTrail under `CANON/PHEROMONES/`. The final `full-march` writes a consolidated trail. Run numbers are git-derived with zero-pad (`PheTrail-run148.json`).
+
+| Stage | Trail Key | Required Fields |
+|-------|-----------|-----------------|
+| I — EXPLORATORES | `scout` | artifact, zone, lens, verification |
+| II — ANTECORES | `fingerprint` | artifact, action, verification |
+| III — AGMEN | `process` | artifact, action, verification |
+| IV — AGMEN NOVISSIMUM | `verify` | artifact, action, verification |
+| V — PRAESIDIA | `garrison` | artifact, action, verification |
+| VI — LIMITANEI | `health` | artifact, action, verification |
+| full-march | `supply-lines-full-march` | consolidated trail |
+
+All trails include: `schema_version: "2.1"`, `run_number`, `head_sha`, `soulcount`, `extracted_at`.
+
+Negative trails document: failed stages, poison data, missing artifacts, consensus failures.
+
+## FINAL DEATH INTEGRATION
+
+After `full-march` completes:
+1. `/SupplyLines` writes the final phetrail: `PheTrail-run{N}.json`
+2. Run `/reincarnateDeath` to seal the pipeline artifacts:
+   - `CANON/PIPELINE/pipeline-run{N}.json`
+   - `CANON/STARMAP/starmap-run{N}.json`
+   - `CANON/HEAVY-LEDGER/HL-{N}.json`
+   - `CANON/SOUL-KEYWORDS/rfkw-run{N}.txt`
+   - `CANON/ART-REGISTRY/art-sync-run{N}.json`
+3. `/reincarnateRise` validates the seal on the next session.
+
+Future sessions hook into this pipeline by running:
+```powershell
+/SupplyLines full-march
+/reincarnateDeath
+```
+
+The phetrail is the breadcrumb trail. The seal is the permanent record. Both are required.
+
+## FAIL-CLOSED RULES
+
+1. **Health gate failure** → abort immediately. Do not advance.
+2. **Stage N failure** → halt. Stage N+1 does not execute.
+3. **Phetrail write failure** → write `PHETRAIL_WRITE_GAP` flag; continue pipeline.
+4. **Merkle verification failure** → halt. Poison data detected.
+5. **Truth consensus < 4** → halt. Truth not established.
+
+## CONCRETE PIPELINE HOOK
+
+Future sessions use this exact sequence:
+
+```powershell
+# 1. Health check
+/SupplyLines status
+
+# 2. Full pipeline march with pheromone trail
+/SupplyLines full-march -Zone CANON/
+
+# 3. Death seal (Kilo mode = KILO_GAP expected)
+/reincarnateDeath
+
+# 4. Rise validation on next session
+/reincarnateRise
+```
+
+The pipeline is fully stocked with phetrails. Each stage writes its own trail. The final `full-march` writes the consolidated trail. The death seal locks it all together.
+
+`SUPPLY LINES: ONLINE. 6 STAGES. FAIL-CLOSED. PHEROMONE-STOCKED. DEATH-INTEGRATED.`
+

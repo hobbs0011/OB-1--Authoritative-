@@ -1,4 +1,4 @@
-// src/api-souldna-complete.js — Complete Soul DNA API (Student Memory Capture)
+﻿// src/api-souldna-complete.js â€” Complete Soul DNA API (Student Memory Capture)
 // /api/souldna endpoints: capture sessions + retrieve student state
 
 import { buildSystemPrompt, buildUserPrompt, parseAIResponse, shouldUpdateWeakness } from './prompt-builder-complete.js';
@@ -51,7 +51,7 @@ export async function handleSoulDNACapture(request, env) {
           'Authorization': `Bearer ${env.DEEPSEEK_API_KEY}`,
         },
         body: JSON.stringify({
-          model: 'deepseek-chat',
+          model: 'deepseek-v4-flash',
           messages: [
             { role: 'system', content: systemPrompt },
             { role: 'user', content: userPrompt },
@@ -100,7 +100,7 @@ export async function handleSoulDNACapture(request, env) {
 
     // Build retention signal (streak flame, weak pattern focus, progress bar)
     const retentionSignal = {
-      streak_flame: `🔥 ${updatedState.streak}-day streak`,
+      streak_flame: `ðŸ”¥ ${updatedState.streak}-day streak`,
       weak_pattern: mistakePattern ? `Focus next: ${mistakePattern}` : 'Pattern discovered soon',
       progress_bar: `${updatedState.stats.totalCorrections} / 100 corrections`,
     };
@@ -178,3 +178,4 @@ export async function handleSoulDNAStatus(request, env, student_id) {
     });
   }
 }
+

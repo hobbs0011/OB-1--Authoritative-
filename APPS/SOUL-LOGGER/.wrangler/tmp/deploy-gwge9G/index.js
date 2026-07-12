@@ -1,4 +1,4 @@
-var __defProp = Object.defineProperty;
+﻿var __defProp = Object.defineProperty;
 var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
 
 // C:/Users/mrmic/AppData/Roaming/npm/node_modules/wrangler/node_modules/unenv/dist/runtime/_internal/utils.mjs
@@ -1079,7 +1079,7 @@ async function handleRequest(request, env2, ctx) {
         const r = await fetch("https://api.deepseek.com/v1/chat/completions", {
           method: "POST",
           headers: { "Content-Type": "application/json", "Authorization": `Bearer ${env2.DEEPSEEK_API_KEY}` },
-          body: JSON.stringify({ model: "deepseek-chat", messages: [{ role: "system", content: systemPrompt }, { role: "user", content: fullText }], stream: false })
+          body: JSON.stringify({ model: "deepseek-v4-flash", messages: [{ role: "system", content: systemPrompt }, { role: "user", content: fullText }], stream: false })
         });
         const json = await r.json();
         artifact = json.choices?.[0]?.message?.content || "";
@@ -1242,3 +1242,4 @@ export {
   index_default as default
 };
 //# sourceMappingURL=index.js.map
+

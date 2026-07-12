@@ -17,7 +17,7 @@ Apply `code_patch` directly to the target file. No markdown fences in output.
 
 | Tier | Model | When |
 |------|-------|------|
-| T1 | Qwen 3.7 Max (Dialagram) | ALL workhorse: write / implement / generate / fix / debug / refactor / audit / pipeline |
+| T1 | Primary Workhorse (PA tier=1) | ALL workhorse: write / implement / generate / fix / debug / refactor / audit / pipeline |
 | T2 | Claude Opus 4.7 | Final rulings / irreversible decisions / arbitration only |
 
 Auth header required on all PA calls: `x-pa-auth: ffScwBjPQjBnoAlectawu8E+J4NcmO3idxGxtlcRue8=`

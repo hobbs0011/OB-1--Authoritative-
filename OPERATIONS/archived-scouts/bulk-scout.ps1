@@ -1,4 +1,4 @@
-# BULK PHOENIX SCOUT — grep-only, no file reads. Maximum throughput.
+﻿# BULK PHOENIX SCOUT â€” grep-only, no file reads. Maximum throughput.
 param([string[]]$Zones)
 
 $repo = "D:\OB-1-CANONICAL"
@@ -15,18 +15,18 @@ foreach ($zone in $Zones) {
   $relPath = $path.Replace("$repo\", "")
   Write-Host "$relPath`: $total files"
   
-  # DRIFT scan — grep for legacy aliases
-  $driftFiles = $files | ForEach-Object { if ((Get-Content $_.FullName -Raw -EA SilentlyContinue) -match 'deepseek-chat|deepseek-reasoner|mrmichaelhobbs1234') { $_ } }
+  # DRIFT scan â€” grep for legacy aliases
+  $driftFiles = $files | ForEach-Object { if ((Get-Content $_.FullName -Raw -EA SilentlyContinue) -match 'deepseek-v4-flash|deepseek-v4-pro|mrmichaelhobbs1234') { $_ } }
   foreach ($df in $driftFiles) {
     $rel = $df.FullName.Replace("$repo\", "")
-    $kind = if ((Get-Content $df.FullName -Raw -EA 0) -match 'deepseek-chat') { "model alias deepseek-chat" } else { "legacy domain mrmichaelhobbs1234" }
+    $kind = if ((Get-Content $df.FullName -Raw -EA 0) -match 'deepseek-v4-flash') { "model alias deepseek-v4-flash" } else { "legacy domain mrmichaelhobbs1234" }
     Write-Host "  DRIFT $kind`: $rel"
     $seq++
     $rec = @{scout_id="SC-BULK-$ts-$seq";priority="P2";type="DRIFT";status="STALE";file=$rel;reason=$kind;action="Replace reference"} | ConvertTo-Json -Compress
     Add-Content $report $rec
   }
   
-  # SOUL scan — count blockquote files
+  # SOUL scan â€” count blockquote files
   $soulCount = 0
   $files | ForEach-Object { 
     $raw = Get-Content $_.FullName -Raw -EA SilentlyContinue
@@ -35,4 +35,5 @@ foreach ($zone in $Zones) {
   if ($soulCount -gt 0) { Write-Host "  SOUL: $soulCount files with quotes/markers" }
 }
 
-Write-Host "BULK SCOUT COMPLETE — $report"
+Write-Host "BULK SCOUT COMPLETE â€” $report"
+

@@ -27,7 +27,7 @@ Scan the target zone with these lenses:
 |------|-------------|----------|
 | **SOUL** | Raw unprocessed Michael words | `> "` blockquotes in `.md`, JSONL with `"text":`, untagged verbatim files, files with "UNTOUCHED" or "UNMINED" in headers |
 | **LEDGER** | Phantom gaps, stale cursors | Missing HL-IDs (HL-127, HL-128, HL-131, HL-132, HL-136, HL-137), PIPELINE-CURSOR.md frozen > 30 days, JSON files without `"no_fabrication"` attestation |
-| **DRIFT** | Stale state, contradictions | `HEAD` references not matching `git log -1`, COLD-START-BOOT.md with FINGERPRINT > 2 runs behind, model alias references (`deepseek-chat`, `deepseek-reasoner`), legacy domain references (`mrmichaelhobbs1234`) |
+| **DRIFT** | Stale state, contradictions | `HEAD` references not matching `git log -1`, COLD-START-BOOT.md with FINGERPRINT > 2 runs behind, model alias references (`deepseek-v4-flash`, `deepseek-v4-pro`), legacy domain references (`mrmichaelhobbs1234`) |
 | **CONFIG** | Missing definitions | Tier files without 5-tier canon, missing agent files, incomplete command specs |
 | **GAP** | Dead links, missing files | Referenced files that don't exist on disk, broken cross-repo paths, missing portal files |
 
@@ -163,5 +163,6 @@ SCOUT COMPLETE. Flagged items ready for tier dispatch.
 ---
 
 `PHOENIX SCOUT: ONLINE. LIGHTWEIGHT. FLAG AND TAG ONLY. LONG DISTANCE.`
+
 
 

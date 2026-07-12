@@ -1,0 +1,24 @@
+[
+  {
+    "id": "PHOENIX-SCOUT-001",
+    "type": "FAKE_ARTIFACT_SWEEP",
+    "timestamp": "2026-07-11T20:32:24+07:00",
+    "zone": "CANON/PHEROMONES",
+    "pattern": "PheTrail-run800-999.json",
+    "count": 200,
+    "run_range": "800-999",
+    "expected_run_range": "1-151",
+    "files_exact": true,
+    "missing_runs_in_range": 0,
+    "status": "FLAGGED",
+    "action_required": "PURGE",
+    "notes": "All 200 artifacts are identical-size stubs (130 bytes each). No corresponding STARMAP, SOUL-KEYWORDS, LEDGER, DNA, or RRL entries exist for runs 800-999. These are misnumbered sweep artifacts from forcemarch cleanup. Recommend targeted purge script to remove ONLY these exact files and re-push canonical state.",
+    "purge_criteria": {
+      "path_prefix": "CANON/PHEROMONES/PheTrail-run",
+      "run_min": 800,
+      "run_max": 999,
+      "extension": ".json",
+      "exact_size_bytes": 130
+    }
+  }
+]
