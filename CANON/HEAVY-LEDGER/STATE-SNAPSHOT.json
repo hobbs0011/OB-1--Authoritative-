@@ -2,7 +2,7 @@
   "version": "1.0",
   "rss_version": "1.0",
   "rss_stage": "Reincarnate-SnapShot RSS",
-  "updated_at": "2026-07-13T01:20:00+07:00",
+  "updated_at": "2026-07-13T10:32:03+07:00",
 "run": {
     "current": 163,
     "era": "ROMAN",
@@ -71,6 +71,13 @@
     "STATE-SNAPSHOT staleness - 163 not yet recorded"
   ],
   "recent_seals": [
+    {
+      "run": 163,
+      "era": "ROMAN",
+      "head": "a77ad0acd",
+      "soul_delta": 0,
+      "seal": "Run 163 - Scout 20 P1 DRIFT + HOLLOW RRL + death seal committed"
+    },
     {
       "run": 162,
       "era": "ROMAN",
