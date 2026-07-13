@@ -2,13 +2,13 @@
   "version": "1.0",
   "rss_version": "1.0",
   "rss_stage": "Reincarnate-SnapShot RSS",
-  "updated_at": "2026-07-13T11:05:00+07:00",
+  "updated_at": "2026-07-13T11:08:00+07:00",
 "run": {
-    "current": 165,
+    "current": 166,
     "era": "ROMAN",
     "status": "KILO_HOLLOW",
-    "seal": "Run 165 - Full march completed + run164 artifacts committed",
-    "head_sha": "13ab4b7a3"
+    "seal": "Run 166 - Full march completed + artifacts sealed",
+    "head_sha": "af89e9954"
   },
   "v0_baseline": {
     "git_tag": "v0",

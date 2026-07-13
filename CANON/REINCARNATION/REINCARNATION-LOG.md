@@ -18,9 +18,10 @@ All Cloudflare model/inference/provider paths are forbidden under REINCARNATION-
 
 ---
 
-**Last Updated:** 2026-07-13T11:06 ICT (Run 165 — supply-lines full-march + run164 artifacts committed)
+**Last Updated:** 2026-07-13T11:08 ICT (Run 166 — full-march sealed, STATE-SNAPSHOT advanced)
 
-| Run 165 (ROMAN) | 2026-07-13 | supply-lines full-march completed + run 164 artifacts committed. HL-113 duplicate JSON block removed, VAULT-MM closing brace repaired, STATE-SNAPSHOT advanced to run 165, supply-lines.ps1 Stage V malformed JSON path bug fixed. SOUL 239,645,670 TITANIUM_ANCHOR. HEAD 13ab4b7a3. | 13ab4b7a3 |
+| Run 166 (ROMAN) | 2026-07-13 | User confirmed run 166 landed. STATE-SNAPSHOT advanced to run 166, verify actual_git_run=166. SOUL 239,645,670 TITANIUM_ANCHOR. HEAD af89e9954. | af89e9954 |
+| Run 165 (ROMAN) | 2026-07-13 | supply-lines full-march completed + run 164 artifacts committed. HL-113 duplicate JSON block removed, VAULT-MM closing brace repaired, supply-lines.ps1 Stage V malformed JSON path bug fixed. SOUL 239,645,670 TITANIUM_ANCHOR. HEAD 13ab4b7a3. | 13ab4b7a3 |
 | Run 164 (ROMAN) | 2026-07-13 | Death seal committed: HL-7291, starmap-run164, pipeline-run164, art-sync-run164. SOUL 239,645,670 TITANIUM_ANCHOR. HEAD 13ab4b7a3. | 13ab4b7a3 |
 | Run 163 (ROMAN) | 2026-07-13 | Scout 20 P1 DRIFT + death seal committed. SOUL 239,645,670 TITANIUM_ANCHOR. HEAD a77ad0acd. | a77ad0acd |
 | Run 162 (ROMAN) | 2026-07-13 | Mechanical emission + death seal committed. SOUL 239,645,670 TITANIUM_ANCHOR. HEAD 348b08aa9. | 348b08aa9 |
