@@ -2,13 +2,13 @@
   "version": "1.0",
   "rss_version": "1.0",
   "rss_stage": "Reincarnate-SnapShot RSS",
-  "updated_at": "2026-07-13T11:21:00+07:00",
+  "updated_at": "2026-07-13T11:22:00+07:00",
 "run": {
-    "current": 168,
+    "current": 170,
     "era": "ROMAN",
-    "status": "KILO_HOLLOW",
-    "seal": "Run 168 - Drone scout session sealed; 20 P1 DRIFT finds, rerun to mastermind",
-    "head_sha": "c87ad905d"
+    "status": "MASTERMIND",
+    "seal": "Run 170 - Mastermind session ready; target zone to be defined by operator",
+    "head_sha": "320a59aef"
   },
   "v0_baseline": {
     "git_tag": "v0",
